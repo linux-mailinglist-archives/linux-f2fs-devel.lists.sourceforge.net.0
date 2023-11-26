@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4AA87F9158
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 26 Nov 2023 05:52:54 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A97D7F94E8
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 26 Nov 2023 19:42:16 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r778O-0004FX-Di;
-	Sun, 26 Nov 2023 04:52:44 +0000
+	id 1r7K50-0004Wi-GJ;
+	Sun, 26 Nov 2023 18:42:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <viro@ftp.linux.org.uk>) id 1r778N-0004FR-3W
+ (envelope-from <viro@ftp.linux.org.uk>) id 1r7K4s-0004WN-Vz
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 26 Nov 2023 04:52:43 +0000
+ Sun, 26 Nov 2023 18:41:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0vkgmaq6RmcZqYJwqKvepDQztGNPwS4niJIinKsWt9o=; b=kh0EEQ9161IUM7G1Trs9fbJwXC
- i8cOWHC9AUxngwKZE7LAksjDYObaMFbcMMQbpFXeXMigpCO8hSogXSyODSkV+Y/1kC9IwjM6qukQE
- jILcAZPk4c4LJvAwJwdTOjnhmj3gFBgl6kj6RaKpPHiGrz40mEOr0OL9A0aQBaBo3QfQ=;
+ bh=SjbDkmPx2n6JHS7S/0Pm5UBLkdkT/hge08q6RFQNKe0=; b=YQxWY5QZMlELRNyyWwWlMmPIs7
+ jdBljMwsRYPAgpaL3MNNblA0UbxuVJKUxtN3qRHkCxsXDRzR/wBeV8p0kbo3Mo4VTFOW3xpug4E8O
+ 6gFbM8+laC1j9LtP/U5hVfwSA+4oAZ6ox5lhWbjAmbsb+Zhn2PvOamuXZepXQX6mDXII=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
@@ -31,50 +31,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0vkgmaq6RmcZqYJwqKvepDQztGNPwS4niJIinKsWt9o=; b=nS6od2kGB9In/Gz8wpIFhIc6cx
- 2fp0KsxcDyWp6CYgz0zrW87oIzz32qXbifr6lBhDF9zA6I6EgecSoj7DzbIVJFt29daOxXXIfi5wQ
- Ekuf+Wdn//PrYShRgmI1NQ7rMxJ6jcHC9XB/xi2r586+8xtIuppLlfYaS6v46k9tuzdM=;
+ bh=SjbDkmPx2n6JHS7S/0Pm5UBLkdkT/hge08q6RFQNKe0=; b=QXVCw0pQ7EV0iipta+KbRTlHiy
+ QvAtea3ubSeDqtdywHCJofK7vYW08+zJBbKjohX5YwB/Du8cykoKCmhqvgRBfAD0PBedEqMfBflBq
+ X7Ij72brz77IG04XRnCbuFeaKCXDa54ME8I3Q8TUV0OdrM2fRjqW+9sy//KSRNQr69us=;
 Received: from zeniv.linux.org.uk ([62.89.141.173])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r778L-00FeFT-1r for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 26 Nov 2023 04:52:43 +0000
+ id 1r7K4s-0004Xb-H6 for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 26 Nov 2023 18:41:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
  MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=0vkgmaq6RmcZqYJwqKvepDQztGNPwS4niJIinKsWt9o=; b=S54ui+DOGekM61RUXRboSVJ4Bb
- OpdDLrZu66DsjpksmmfB3bxsDHDvWBNolmFA1AjSfeBy/Dt5aFxcSlQfJ0T0B0uVXM9tgsIkoCc7l
- Ylrkpw8tqQYnLs3f131BcxweTc7YMwQ+OviFmejF6pNzIENK0EnDEFQlBk4kQ6zi9qEHsQ+akZumQ
- mJvy1/wm8Z+U4fToImpscGsR2mRBLId99V9RIbc1S6VYtwe3z6/dIZ9S0LfIcB8/QkBf+1k6KQtHK
- yHjzX+BUNfu6TKoMLnbs1scMXqDFj9iIbxEVGbhnS50V/GTya8hPDBlr9fvAZdlkvQ0mG5HbHj07x
- tu0PVNBw==;
+ bh=SjbDkmPx2n6JHS7S/0Pm5UBLkdkT/hge08q6RFQNKe0=; b=HV//Ul+xzPA90R8NEL2txf0vbw
+ Ni13I5DWfId03j1Sl/JmzbeMYNUxASAFoF3NsW5W1sRH0JfoUQO6Q5b2BQtdwb+T3gEmObsysMx5M
+ rY6RX30yucyMrcvTjahz7MZewrgjTQz76FFAoi/4wOUV2DgI0dXevZ4UQwXZL2PBSmVQzfPLyMzgK
+ RNXtAhvrT2WKFx4PHwzEPdAJteFz+XlbifTqWOaVfuhaCRhhEXeKR32C8ZN0t3+5804hk3xKeF0Y/
+ ndYe/ymX9Lc0ebybI5KDmHi63hLm+hrhjzE2F0viydpx3/DezVGqtsT1jMsbfY8pJbzZ7zMUPfl6K
+ lWKPq4FQ==;
 Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1r777z-003L4j-37; Sun, 26 Nov 2023 04:52:20 +0000
-Date: Sun, 26 Nov 2023 04:52:19 +0000
+ Linux)) id 1r7K4b-003cjp-3A; Sun, 26 Nov 2023 18:41:42 +0000
+Date: Sun, 26 Nov 2023 18:41:41 +0000
 From: Al Viro <viro@zeniv.linux.org.uk>
 To: Gabriel Krisman Bertazi <gabriel@krisman.be>
-Message-ID: <20231126045219.GD38156@ZenIV>
-References: <20231120-nihilismus-verehren-f2b932b799e0@brauner>
- <CAHk-=whTCWwfmSzv3uVLN286_WZ6coN-GNw=4DWja7NZzp5ytg@mail.gmail.com>
+Message-ID: <20231126184141.GF38156@ZenIV>
+References: <CAHk-=whTCWwfmSzv3uVLN286_WZ6coN-GNw=4DWja7NZzp5ytg@mail.gmail.com>
  <20231121022734.GC38156@ZenIV> <20231122211901.GJ38156@ZenIV>
  <CAHk-=wh5WYPN7BLSUjUr_VBsPTxHOcMHo1gOH2P4+5NuXAsCKA@mail.gmail.com>
  <20231123171255.GN38156@ZenIV> <20231123182426.GO38156@ZenIV>
  <20231123215234.GQ38156@ZenIV> <87leangoqe.fsf@>
- <20231125220136.GB38156@ZenIV>
+ <20231125220136.GB38156@ZenIV> <20231126045219.GD38156@ZenIV>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20231125220136.GB38156@ZenIV>
+In-Reply-To: <20231126045219.GD38156@ZenIV>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sat, Nov 25, 2023 at 10:01:36PM +0000, Al Viro wrote: >
- On Fri, Nov 24, 2023 at 10:22:49AM -0500, Gabriel Krisman Bertazi wrote:
- > > > ack. I'll base the other changes we discussed on top of your b [...]
+ Content preview: [folks involved into d_invalidate()/submount eviction stuff
+ Cc'd] On Sun, Nov 26, 2023 at 04:52:19AM +0000, Al Viro wrote: > PS: as the
+ matter of fact, it might be a good idea to pass the parent > as [...] 
  Content analysis details:   (-0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -86,9 +85,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1r778L-00FeFT-1r
-Subject: Re: [f2fs-dev] [PATCH v6 0/9] Support negative dentries on
- case-insensitive ext4 and f2fs
+X-Headers-End: 1r7K4s-0004Xb-H6
+Subject: [f2fs-dev] fun with d_invalidate() vs. d_splice_alias() was Re:
+ [PATCH v6 0/9] Support negative dentries on case-insensitive ext4 and f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,129 +100,121 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Christian Brauner <brauner@kernel.org>, tytso@mit.edu,
- linux-f2fs-devel@lists.sourceforge.net, ebiggers@kernel.org,
+ Miklos Szeredi <miklos@szeredi.hu>, linux-f2fs-devel@lists.sourceforge.net,
+ ebiggers@kernel.org, "Eric W. Biederman" <ebiederm@xmission.com>,
  linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org,
  Linus Torvalds <torvalds@linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sat, Nov 25, 2023 at 10:01:36PM +0000, Al Viro wrote:
-> On Fri, Nov 24, 2023 at 10:22:49AM -0500, Gabriel Krisman Bertazi wrote:
+[folks involved into d_invalidate()/submount eviction stuff Cc'd]
+On Sun, Nov 26, 2023 at 04:52:19AM +0000, Al Viro wrote:
+> PS: as the matter of fact, it might be a good idea to pass the parent
+> as explicit argument to ->d_revalidate(), now that we are passing the
+> name as well.  Look at the boilerplate in the instances; all that
+>         parent = READ_ONCE(dentry->d_parent);
+> 	dir = d_inode_rcu(parent);
+> 	if (!dir)
+> 		return -ECHILD;
+> 	...
+> on the RCU side combined with
+> 	parent = dget_parent(dentry);
+> 	dir = d_inode(parent);
+> 	...
+> 	dput(dir);
+> stuff.
 > 
-> > ack. I'll base the other changes we discussed on top of your branch.
+> It's needed only because the caller had not told us which directory
+> is that thing supposed to be in; in non-RCU mode the parent is
+> explicitly pinned down, no need to play those games.  All we need
+> is
+> 	dir = d_inode_rcu(parent);
+> 	if (!dir) // could happen only in RCU mode
+> 		return -ECHILD;
+> assuming we need the parent inode, that is.
 > 
-> Rebased to v6.7-rc1, fixed up (ceph calls fscrypt_d_revalidate() directly,
-> and D/f/porting entry had been missing), pushed out as #no-rebase-d_revalidate
+> So... how about
+> 	int (*d_revalidate)(struct dentry *dentry, struct dentry *parent,
+> 			  const struct qstr *name, unsigned int flags);
+> since we are touching all instances anyway?
 
-FWIW, ->d_revalidate() has an old unpleasant problem we might try to solve
-now.
+OK, it's definitely a good idea for simplifying ->d_revalidate() instances
+and I think we should go for it on thes grounds alone.  I'll do that.
 
-In non-RCU mode We treat 0 as "invalidate that sucker and do a fresh lookup".
-Fine, except that there's a possibility of race here - we'd hit ->d_revalidate()
-while another thread was renaming object in question.  Or has just found it
-by doing lookup in a place where it had been moved on server.
+d_invalidate() situation is more subtle - we need to sort out its interplay
+with d_splice_alias().
 
-->d_revalidate() decides that it needs to be looked up on server and forms
-a request before rename succeeds.  So NFS (e.g.) request goes out with the
-old parent and name.  By the time server sees it, RENAME has been processed
-and succeeded.  There's no such file in the old place anymore.
+More concise variant of the scenario in question:
+* we have /mnt/foo/bar and a lot of its descendents in dcache on client
+* server does a rename, after which what used to be /mnt/foo/bar is /mnt/foo/baz
+* somebody on the client does a lookup of /mnt/foo/bar and gets told by
+the server that there's no directory with that name anymore.
+* that somebody hits d_invalidate(), unhashes /mnt/foo/bar and starts
+evicting its descendents
+* We try to mount something on /mnt/foo/baz/blah.  We look up baz, get
+an fhandle and notice that there's a directory inode for it (/mnt/foo/bar).
+d_splice_alias() picks the bugger and moves it to /mnt/foo/baz, rehashing
+it in process, as it ought to.  Then we find /mnt/foo/baz/blah in dcache and 
+mount on top of it.
+* d_invalidate() finishes shrink_dcache_parent() and starts hunting for
+submounts to dissolve.  And finds the mount we'd done.  Which mount quietly
+disappears.
 
-So ->d_revalidate() returns 0... and we proceed to invalidate the dentry.
-Which had been moved to *new* place by now.  In that place it's perfectly
-valid and does not deserve invalidation.
+Note that from the server POV the thing had been moved quite a while ago.
+No server-side races involved - all it seeem is a couple of LOOKUP in the
+same directory, one for the old name, one for the new.
 
-Scenario when rename had been done not from this client is even worse:
+On the client on the mounter side we have an uneventful mount on /mnt/foo/baz,
+which had been there on server at the time we started and which remains in
+place after mount we'd created suddenly disappears.
 
-server:/srv/nfs/foo is mounted on /mnt/foo
-we state /mnt/foo/bar
-/mnt/foo/bar is in dcache
-somebody on server renames /srv/nfs/foo/bar to /srv/nfs/foo/barf
-process A: stat /mnt/foo/bar/baz.
-process B: mount something on /mnt/foo/barf/
-process B: no /mnt/foo/barf in dcache, let's look it up
-	   found fhandle of /mnt/foo
-	   sent LOOKUP "barf" in it
-	   got an fhandle and found it matching the inode of /mnt/foo/bar
-process A: has reached /mnt/foo/bar and decided to revalidate it.
-	   found fhandle of /mnt/foo
-	   sent a LOOKUP "bar" in that
-	   got "nothing with that name there"
-	   ->d_revalidate() returns 0
-	   loses CPU
-process B: splice the dentry of /mnt/foo/bar to /mnt/foo/barf
-	   proceed to mount on top of it
-process A: gets CPU back
-	   calls d_invalidate() on the dentry that now is /mnt/foo/barf
-	   dissolves the mount created by process B
+For the thread that ended up calling d_invalidate(), they'd been doing e.g.
+stat on a pathname that used to be there a while ago, but currently isn't.
+They get -ENOENT and no indication that something odd might have happened.
 
-Note that server:/srv/nfs/foo/barf has been there and perfectly valid
-since before B has started doing anything.  It has no idea that the
-damn thing used to be in a different place and something on the same
-client had seen it at the old place once upon a time.  As far as it is
-concerned, mount has succeeded and then quietly disappeared.  The mountpoint
-is still there - with freshly looked up dentry, since the old one had been
-invalidated, but userland doesn't see that, so... WTF?
+From ->d_revalidate() point of view there's also nothing odd happening -
+dentry is not a mountpoint, it stays in place until we return and there's
+no directory entry with that name on in its parent.  It's as clear-cut
+as it gets - dentry is stale.
 
-It's not easy to hit, but I'd expect it to be feasible on SMP KVM, where instead
-of A losing CPU we might've had the virtual CPU losing the timeslice on host.
+The only overlap happening there is d_splice_alias() hitting in the middle
+of already started d_invalidate().
 
-IMO we should only do d_invalidate() if
-	* ->d_revalidate() has returned 0
-	* dentry is still hashed, still has the same parent and still matches
-the name from ->d_compare() POV.
-If it doesn't, we should just leave it whereever it has been moved to and
-act as if we hadn't seen it in the first place.
+For a while I thought that ff17fa561a04 "d_invalidate(): unhash immediately"
+and 3a8e3611e0ba "d_walk(): kill 'finish' callback" might have something
+to do with it, but the same problem existed prior to that.
 
-In other words, have
-d_revalidate(dentry, parent, name, flags) doing the following:
-	if no ->d_revalidate
-		return 1
-	ret = ->d_revalidate(...)
-	if (unlikely(ret == 0) && !(flags & LOOKUP_RCU)) {
-		spin_lock(&dentry->d_lock);
-		if (!d_same_name(dentry, parent, name))
-			spin_lock(&dentry->d_lock);
-		else
-			d_invalidate_locked(dentry);
-	}
-	return ret
+FWIW, I suspect that the right answer would be along the lines of
+	* if d_splice_alias() does move an exsiting (attached) alias in
+place, it ought to dissolve all mountpoints in subtree being moved.
+There might be subtleties, but in case when that __d_unalias() happens
+due to rename on server this is definitely the right thing to do.
+	* d_invalidate() should *NOT* do anything with dentry that
+got moved (including moved by d_splice_alias()) from the place we'd
+found it in dcache.  At least d_invalidate() done due to having
+->d_revalidate() return 0.
+	* d_invalidate() should dissolve all mountpoints in the
+subtree that existed when it got started (and found the victim
+still unmoved, that is).  It should (as it does) prevent any
+new mountpoints added in that subtree, unless the mountpoint
+to be had been moved (spliced) out.  What it really shouldn't
+do is touch the mountpoints that are currently outside of it
+due to moves.
 
-where d_invalidate_locked() would be d_invalidate() sans the initial
-spin_lock(&dentry->d_lock);
+I'm going to look around and see if we have any weird cases where
+d_splice_alias() is used for things like "correct the case of
+dentry name on a case-mangled filesystem" - that would presumably
+not want to dissolve any submounts.  I seem to recall seeing
+some shite of that sort, but that was a long time ago.
 
-That would solve that problem, AFAICS.  Objections, anyone?  I'm too
-sleepy to put together a patch at the moment, will post after I get
-some sleep...
-
-PS: as the matter of fact, it might be a good idea to pass the parent
-as explicit argument to ->d_revalidate(), now that we are passing the
-name as well.  Look at the boilerplate in the instances; all that
-        parent = READ_ONCE(dentry->d_parent);
-	dir = d_inode_rcu(parent);
-	if (!dir)
-		return -ECHILD;
-	...
-on the RCU side combined with
-	parent = dget_parent(dentry);
-	dir = d_inode(parent);
-	...
-	dput(dir);
-stuff.
-
-It's needed only because the caller had not told us which directory
-is that thing supposed to be in; in non-RCU mode the parent is
-explicitly pinned down, no need to play those games.  All we need
-is
-	dir = d_inode_rcu(parent);
-	if (!dir) // could happen only in RCU mode
-		return -ECHILD;
-assuming we need the parent inode, that is.
-
-So... how about
-	int (*d_revalidate)(struct dentry *dentry, struct dentry *parent,
-			  const struct qstr *name, unsigned int flags);
-since we are touching all instances anyway?
+Eric, Miklos - it might be a good idea if you at least took a
+look at whatever comes out of that (sub)thread; I'm trying to
+reconstruct the picture, but the last round of serious reworking
+of that area had been almost 10 years ago and your recollections
+of the considerations back then might help.  I realize that they
+are probably rather fragmentary (mine definitely are) and any
+analysis will need to be redone on the current tree, but...
 
 
 _______________________________________________
