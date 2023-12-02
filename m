@@ -2,96 +2,120 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B959380173F
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  2 Dec 2023 00:03:36 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CE08801930
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  2 Dec 2023 01:57:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r9CXf-0003Ph-R8;
-	Fri, 01 Dec 2023 23:03:26 +0000
+	id 1r9EK4-0001km-T7;
+	Sat, 02 Dec 2023 00:57:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1r9CXb-0003Pa-Dm
- for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 01 Dec 2023 23:03:22 +0000
+ (envelope-from <38IBqZQYKAM0wA7Bx6z77z4x.v75@flex--drosen.bounces.google.com>)
+ id 1r9EK3-0001kg-5V for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 02 Dec 2023 00:57:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
+ Mime-Version:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1nOqAWj20No7G8mrJyYk9Mxl2k+nJ8MA37MHTSjZwxk=; b=CC4BB58gw0OLSQlrNhonRkxG5G
- 4/CijeY6YH36uYTAY/sGlYw8EkDaGdyOV+VmhDvSVqBkY4xZfqiMXRvi9H6j7PMrHZgGGmhsfXgjF
- Fdu6CmgNr5cimCkp1KqlsjAb2Vpo/rnhsPUO660q56dKlzhSD2qqhg2Qzwf1N0oG2Ucg=;
+ bh=MQVX8KES95HvH2qkfqcCG8qMIeL1L/y7yTEOd92EKkg=; b=PE7tGcfqYSP8nbCLW4B/L7j6Bz
+ ZHLLov8crAwB0A6MDjwEJzq727PPTZuuFU5KaBPVHyQZnybHPxqhwjeFTD3uNwHG21Mo1iX0nrFgv
+ tlki5pgOiHj5BHH74Ugo4h2SrSzeYteZBFjsForj1y1eAo24IZ7uWcDOg6VPoAx9yWn0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=1nOqAWj20No7G8mrJyYk9Mxl2k+nJ8MA37MHTSjZwxk=; b=h
- beiHYal4VQoXIDSKyRR7CV8hCbwOJb2ac04j0jY8ECBvvBt2LUkH9a1qudqdAE895s1ph/qvPfJPw
- ZE+eNOd7KFxXs/1WG3yyJe1DOYbhArgmgCkM/X2qmv8bU4U/gL/XnXlKk++e6L0wFNPKVkawl7UxB
- ot+LtLxgofapQFwI=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ List-Owner:List-Archive; bh=MQVX8KES95HvH2qkfqcCG8qMIeL1L/y7yTEOd92EKkg=; b=K
+ IG8rVD2gkKHJpRTfDmH1n3likHeo4uyv1bW5I8Wgx5kl+5puzEDYHoYaVivfVsN41XnjyUke41JcR
+ ACF8ilCIpC7gvn7EvtFkA7haCKrhgEkpSaOVtZrFh1LiJxgmoRxG78hGkANKOFG8I2Jj8w/WwfuXZ
+ OEF24G9k8owFWZBE=;
+Received: from mail-yw1-f201.google.com ([209.85.128.201])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r9CXY-0005B8-Rk for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 01 Dec 2023 23:03:22 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 62989CE22C9
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1r9EJy-000755-Mp for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 02 Dec 2023 00:57:31 +0000
+Received: by mail-yw1-f201.google.com with SMTP id
+ 00721157ae682-5ce16bc121aso49420047b3.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  1 Dec 2023 23:02:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93566C433C8;
- Fri,  1 Dec 2023 23:02:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1701471778;
- bh=62w1oB1pHopShKh9tMtaRg6KHPHhkdny8MubdbV91fQ=;
- h=From:To:Cc:Subject:Date:From;
- b=c2HCOXrnwzG/PgSp+pZZQxjdPmCpwKk49Hqhbo/Ro12tzYvu/nAGK4SXLEUorI70u
- EiN9jVDo+4/2wJ7rrCB1fCsletjR+fW18IqsR+Sq+JlEF82jXTj+jCSiLQ1NcgoC25
- HhXUARvjWEglu0kJZIsOY4ZVJGAa/k+6xp8Xwo1QB3aRagRBuy14GgtD8nkhbd/SHn
- 3QHNk/2AnuZAWzlnocjletodpcc3MpV+GcQKLwh/lkU4nZGKXfnzAXBc+b0oM0w+Sl
- 8HDJHqePbA88m+S6IYBuGXoGTxbd2G7XAZ9v4y7XX07kbTinTdOqB487uU0DwbbOnZ
- BjE8UUeYynNlg==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Fri,  1 Dec 2023 15:02:56 -0800
-Message-ID: <20231201230257.238513-1-jaegeuk@kernel.org>
+ Fri, 01 Dec 2023 16:57:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1701478641; x=1702083441;
+ darn=lists.sourceforge.net; 
+ h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=MQVX8KES95HvH2qkfqcCG8qMIeL1L/y7yTEOd92EKkg=;
+ b=ryDYhnBnyP/P1ykHRmgKvNB7idHK7DQoBprOOfg30udCFMJzkWchBw3k2lVteGD7RB
+ vv1XsMZBxC9CzI/Ta2l7W/R2pxH4XrprkRhVbuyk+AVbTVF3ekwX51T4BbtlZrZXbBpU
+ +hEhykjnOM/VfatEu6TAELc6VbtoH9xFwY+6+5eb9DJrLVMcy0CJJS/zBrywnqA4TDAq
+ x7ZGpbvTi3SacG2PRj0u2Xt/VOVmeql/XnuLvzGOeBKNVn+u7ZH5rEt1gqSwBzL63f+M
+ aCaddqjVhPeeAHIe3mLhUhHEwwSr0W/ssrk5y4R7YwdN+TKTngRZZbckkN895sRTPK16
+ QKqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701478641; x=1702083441;
+ h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=MQVX8KES95HvH2qkfqcCG8qMIeL1L/y7yTEOd92EKkg=;
+ b=ewOyA3wegze+xdMR9I/AtURV/D5kGZMjZ3Aqsh879Cane26rikUsTQ9DRuNVQeV7Ji
+ T5yvDTklHUlOmcrX2O/9zL/zPoqN39NBkZpZe4FJn6OgBttbpgp274FxeUVsFWl9DGXP
+ 0mjVlVKGRoyARvCfk1N2xr/RicJvp4wEjrK/DhzwDZnwjmUVs9G0KH3HWkMLj14iWllV
+ nxqL7mlocJWayMeDTckp3MAzdVO9N9+qH5arGG5eN7lTxIEXUgj9VkQZIAdJxTuaMozJ
+ YJvPrYXi9m6KzrwMjJu4yLa+neMYf/BC367kp2rDZ6iQy9WRcloKyoE0SjQiQ9yS/rlJ
+ j1sA==
+X-Gm-Message-State: AOJu0Yz5yb9KkJWCBN7DdIRMsjBrbvr/+rUPc7BiI5D1Z5xwtKgZzOvP
+ 9BwwuFCmtLncm+15kAryDO9cT0cScIoOohekVu/9aKNw8H8kjETIq6uLyhoS06V7CQv+YAn68nj
+ o8+Ulze/98INt/tKkj5bAsAWsOJ1uYBKvLuD/hw/RG1jsw4DN5dXJoA5HCbX0bOQjH6vVRLbALS
+ 19CkAgzAA=
+X-Google-Smtp-Source: AGHT+IFEdAbIxgC2nl8OT3ez8xtE6+SscGgwKACdBGA6KUMg2u8RQR2Zh3OHK7ir/9ygduRd9JrGJLGbGOc=
+X-Received: from drosen.mtv.corp.google.com
+ ([2620:15c:211:201:e3a2:452f:f377:df27])
+ (user=drosen job=sendgmr) by 2002:a25:d883:0:b0:db5:4766:e366 with SMTP id
+ p125-20020a25d883000000b00db54766e366mr186611ybg.3.1701478640887; Fri, 01 Dec
+ 2023 16:57:20 -0800 (PST)
+Date: Fri,  1 Dec 2023 16:57:14 -0800
+Mime-Version: 1.0
 X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
-MIME-Version: 1.0
-X-Spam-Score: -2.5 (--)
+Message-ID: <20231202005714.3722264-1-drosen@google.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: -7.7 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Let's allow checkpoint=disable back for zoned block device.
- It's very risky as the feature relies on fsck or runtime recovery which
- matches
- the write pointers again if the device rebooted while disabl [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview: Describes the block size option -b. This sets the block size,
+ which is restricted to powers of 2. The linux kernel currently requires that
+ the block size be equal to the page size to mount. Change-Id:
+ I27ec4f909f8d27327b48373f0a4a4e8593626804
+ Signed-off-by: Daniel Rosenberg <drosen@google.com> --- man/mkfs.f2fs.8 |
+ 6 ++++++ 1 file changed, 6 insertions(+) 
+ Content analysis details:   (-7.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.201 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.128.201 listed in list.dnswl.org]
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
+ welcome-list
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1r9CXY-0005B8-Rk
-Subject: [f2fs-dev] [PATCH] f2fs: allow checkpoint=disable for zoned block
- device
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1r9EJy-000755-Mp
+Subject: [f2fs-dev] [PATCH] man: Add description for mkfs -b option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,36 +127,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+From: Daniel Rosenberg via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Daniel Rosenberg <drosen@google.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, kernel-team@android.com,
+ Daniel Rosenberg <drosen@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Let's allow checkpoint=disable back for zoned block device. It's very risky
-as the feature relies on fsck or runtime recovery which matches the write
-pointers again if the device rebooted while disabling the checkpoint.
+Describes the block size option -b. This sets the block size, which is
+restricted to powers of 2. The linux kernel currently requires that the
+block size be equal to the page size to mount.
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Change-Id: I27ec4f909f8d27327b48373f0a4a4e8593626804
+Signed-off-by: Daniel Rosenberg <drosen@google.com>
 ---
- fs/f2fs/super.c | 5 -----
- 1 file changed, 5 deletions(-)
+ man/mkfs.f2fs.8 | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 033af907c3b1..617340e9ea7f 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1422,11 +1422,6 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 		}
- 	}
- 
--	if (test_opt(sbi, DISABLE_CHECKPOINT) && f2fs_lfs_mode(sbi)) {
--		f2fs_err(sbi, "LFS is not compatible with checkpoint=disable");
--		return -EINVAL;
--	}
--
- 	if (test_opt(sbi, ATGC) && f2fs_lfs_mode(sbi)) {
- 		f2fs_err(sbi, "LFS is not compatible with ATGC");
- 		return -EINVAL;
+diff --git a/man/mkfs.f2fs.8 b/man/mkfs.f2fs.8
+index 474c401..6670003 100644
+--- a/man/mkfs.f2fs.8
++++ b/man/mkfs.f2fs.8
+@@ -116,6 +116,12 @@ If the value is equal to 1, each of active log areas are initially
+ assigned separately according to the whole volume size.
+ The default value is 1.
+ .TP
++.BI \-b " block size"
++Specify the block size in bytes. Valid blocksizes are powers of 2.
++Currently, the kernel is only able to mount f2fs filesystems where the
++block size matches the page size.
++The default value is 4096.
++.TP
+ .BI \-c " device-list"
+ Build f2fs with these additional comma separated devices, so that the user can
+ see all the devices as one big volume.
 -- 
 2.43.0.rc2.451.g8631bc7472-goog
 
