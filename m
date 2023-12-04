@@ -2,124 +2,125 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CFD15804131
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Dec 2023 22:55:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D869380413D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Dec 2023 22:59:51 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rAGub-0000dv-SC;
-	Mon, 04 Dec 2023 21:55:32 +0000
+	id 1rAGyg-0000lC-8u;
+	Mon, 04 Dec 2023 21:59:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1rAGuY-0000dj-Ss
+ (envelope-from <daeho43@gmail.com>) id 1rAGyc-0000l5-LN
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Dec 2023 21:55:29 +0000
+ Mon, 04 Dec 2023 21:59:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RFIOo+aY5DbYFQEHnkq3VuNDJzyjrDzXbzi8Vu3S/WM=; b=gjPR5JeBgxRSKhK1R+Zz5cPxW+
- qxpz6mZPMBFDeXWAYZxRxfn1ycuRaRCuWXkK9wU34SFcJzrcEYEON2vOjIPzhYJb2BHtIumxxHrEO
- fBgEw5XLLWpUUpYdx7+b79KD6JysJ4zLZi/TT65hXQaUHdynnewo0PhthH2IFmc1w5Wg=;
+ bh=2NsrjOGbg4NmIjD8PWqjBsvJk5exDijeITeH9cgLNWk=; b=mMboq4JgbvfNJ6znREgAfIsLl4
+ 7KQ+C2Of0x8jkGpXJOHpdx4XL5Ivc9nq5DZwq5MZDNBl2EiJrK+arbFpRluMFuKsXXHICXsOEA8j5
+ lDZt5Gu0pfkPowbZ3A+g4fovwN7SLguCmbImNFW0XlfA2ckm6rLHD2CFGbPdgMnyL6eI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=RFIOo+aY5DbYFQEHnkq3VuNDJzyjrDzXbzi8Vu3S/WM=; b=Ev0UP9VjsCDLd7kDRcV12xjURN
- Bh7wi2H6TTAkt0SzS+yeifFJMRbrnkfGX0naGdwVuIuOdxcY32iWAPP5TPmOYYMokIknEnDJNDs2A
- FD1bE/byCwHqILnHrH5xU6DCMCmqwr99b7RNQHKNyxGZy31u0VWGL6JVPopbFWLjyUxw=;
-Received: from mail-oa1-f50.google.com ([209.85.160.50])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=2NsrjOGbg4NmIjD8PWqjBsvJk5exDijeITeH9cgLNWk=; b=R
+ 1lZt0GFQmw+6zus2Wy0Bta588+QmoT+WI/L7l4Z3eFW25lNQA84LwcxfgAY4CIsnA/gcLu8Dfe3Jz
+ gIhA7FpefAdcH3bK3mTcPInYToFYq91m6ZFzgb+a+Aic3Fr5vcP+AZC3vk4dn9fsX4e/UudsMnphv
+ pzoouuxUE6T62Jkc=;
+Received: from mail-pj1-f43.google.com ([209.85.216.43])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rAGuT-0006iI-AI for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Dec 2023 21:55:27 +0000
-Received: by mail-oa1-f50.google.com with SMTP id
- 586e51a60fabf-1fa37df6da8so2662867fac.2
+ id 1rAGyZ-0006rx-2Y for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 04 Dec 2023 21:59:41 +0000
+Received: by mail-pj1-f43.google.com with SMTP id
+ 98e67ed59e1d1-28654179ec0so3682653a91.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 04 Dec 2023 13:55:23 -0800 (PST)
+ Mon, 04 Dec 2023 13:59:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701726918; x=1702331718; darn=lists.sourceforge.net;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RFIOo+aY5DbYFQEHnkq3VuNDJzyjrDzXbzi8Vu3S/WM=;
- b=Npoq+JkaJO516KvED79BqVoICsNKp+VoPUndkpamMDsrfh8Lb3ti3fWWJxNsFOBj5U
- BPvNN+qTih/OfYIPpwF2V0pzV/F0SvQIph6FyqqyON5zlUGPMxcI6IXKNJgN2Fgn1UJ2
- mSnVLZ4z62FdlxXMi/vapXy4JteVe9x3c/NnTELFj0Sa9Qo7XHsYtQ4KBGNICr2A+PVU
- utwtOF51wKI/mE6spv7RzjnKMeJtvlVSYW9ZcuXEHYdmQILyWbxeBB+D6jbmFM0JyqBE
- lEY6AoLFC1qhl2BdRMf31kAJ8Pi9xlItbsc4Bp+2Ol3MtGHi0ZZaXUqAZEMjMpI4nc8U
- Jn2w==
+ d=gmail.com; s=20230601; t=1701727168; x=1702331968; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2NsrjOGbg4NmIjD8PWqjBsvJk5exDijeITeH9cgLNWk=;
+ b=Av6vZyJ7GMD5yQPvTeNLFO/HscR1UTnEF4gy580cfyDVGkjW9w9c0x/Gyc4aelqo7X
+ 7WwsUEk6gVSsxFE000/i7ay2Fc1s1Q3PcTEbAh6Fgz/FA15MT8/zFxjNMStKZhKexiGJ
+ Wv0CVY7svUgbkXfzWLJPnjcpo7qb6ZZUHgyfD1LnZfF1wlk1I70qATxOVSUqkJETr4Q0
+ s7O30Tb11N4CjVzy6gRy3eq5bGv7FQ6shY94y5s0R5UcQbRN1ka8kufqjpn1jEXaM5B3
+ 0ms0Ru+D2bP2LmmmejCveGItot3bAgZmXBjY9+0fjXhh5QEaP0j/eU9nantKmzU+4PWZ
+ eVGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701726918; x=1702331718;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RFIOo+aY5DbYFQEHnkq3VuNDJzyjrDzXbzi8Vu3S/WM=;
- b=iHCa06U6GWhe+KAK8EOVowrcYNLQ40tc0QVHGHORr2uZlBTulGQDt/TZMGwwYIg4JN
- jm4I4AxaWlHJ13f/9hR5gRTpA95utFl1UuP0DhhMnhanMwQq+/IgJrhUKP7murZOohGT
- 7xk+Yj0sbf6VPOFvJUyb3O2OyGMa5P+dTCBTZPkC+QLG6+NewMbcIXrxSTNtFl1jrfvj
- teZmOJMO6jiDIsTb1MHzUGQbSEn3A9jiOsx49hfZ21oy3sCwdTObewWNGuTYJ4IY+Y5z
- ieRPUVgA+sLWCyWgr9GhfVaUX3v2I2T7v0yZ2XbZf93V8lnVGNe8dMNlO0UMMy2W7hsz
- k8wg==
-X-Gm-Message-State: AOJu0Yz/jsoeZvc2WsxI/r9AeaLqikUyD1sggAYyCqPyvIRR0/xWkpii
- fYtvq8Jf1lrhmInMiOGRMpxQyZZ4Kmw1YNGzJpaSYBGj8eo=
-X-Google-Smtp-Source: AGHT+IFIZXjWfGtn+LmoYR48ydbAkR0UgoGsXQItozaz7vtYj2vIL+YiiDURVxHmMEimu9WCydwX+7RXorvfEqv2D80=
-X-Received: by 2002:a9d:7b4e:0:b0:6d8:8021:5539 with SMTP id
- f14-20020a9d7b4e000000b006d880215539mr3096113oto.46.1701717145523; Mon, 04
- Dec 2023 11:12:25 -0800 (PST)
-MIME-Version: 1.0
-References: <20231204180551.927014-1-jaegeuk@kernel.org>
-In-Reply-To: <20231204180551.927014-1-jaegeuk@kernel.org>
+ d=1e100.net; s=20230601; t=1701727168; x=1702331968;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2NsrjOGbg4NmIjD8PWqjBsvJk5exDijeITeH9cgLNWk=;
+ b=Ncg+Ef2YgYJ9xBfnRS9OTSixPZxpGPQReZUHsfxMY1ev+vW85tMyFpSpxNlJEGZLU3
+ 2+9BOvvORimrJ/czZVVnXyur1SMOII9hjIM6tCxTfM4Jar+tDXioD59iXfH6n21BfKXL
+ gWXzi8WL0P+taViWnF32f0h/yHnrAfze3lU2MXd9NRrAuN6QKEWfGDK0Uqh+vtm5jPZc
+ H/obCOkJWWoklRR5lmvMUuMS6YIZla0EdWqkihincJeE2W9AYqJJQyGF8Hwn1l0iE8tQ
+ +yGAKEnYoOtnQxFTZxCffQeeW5xP02Um8kuTZ1ikgQRqHGHhY23vBJ8b8spD6xGR6PbN
+ +vOQ==
+X-Gm-Message-State: AOJu0YwoqnPxgZ+V74wqgP6wBrvrAEvdwod9dPMsjGkmdqeBMnhUvAbh
+ IV1vTFI6+IQ9VJJNm/NJDzYoKCI5NIo=
+X-Google-Smtp-Source: AGHT+IEd8ztf0T46rO8eqjfh+HBBSeiqKtVN5wRE53nvIDe3epX1CVDUgVsHKD8Vx1RM5sUOMcJY/g==
+X-Received: by 2002:a17:902:7842:b0:1d0:649b:89d0 with SMTP id
+ e2-20020a170902784200b001d0649b89d0mr3912917pln.52.1701717778840; 
+ Mon, 04 Dec 2023 11:22:58 -0800 (PST)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:0:1000:8411:727a:d07a:2bd2:a437])
+ by smtp.gmail.com with ESMTPSA id
+ q4-20020a170902dac400b001cfe19e2508sm8687675plx.274.2023.12.04.11.22.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Dec 2023 11:22:58 -0800 (PST)
 From: Daeho Jeong <daeho43@gmail.com>
-Date: Mon, 4 Dec 2023 11:12:13 -0800
-Message-ID: <CACOAw_zQ8X=HWbX+oiQUeQ0dM7zYJgwTfqWJ6rMBa8rykctJaw@mail.gmail.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Mon,  4 Dec 2023 11:22:51 -0800
+Message-ID: <20231204192251.2518865-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
+MIME-Version: 1.0
 X-Spam-Score: 0.0 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  LGTM On Mon, Dec 4, 2023 at 10:07 AM Jaegeuk Kim wrote:
-   > > Let's fix any inconsistency until checkpint being enabled back. > > Signed-off-by:
-    Jaegeuk Kim > --- > fsck/mount.c | 1 + > 1 file changed, [...] 
- 
+ Content preview: From: Daeho Jeong Do not finishing zones for current zones.
+ Signed-off-by: Daeho Jeong Fixes: 06a25b021d15 ("f2fs-tools: make six open
+ zone check resilient") --- fsck/fsck.c | 12 +++++++++++- 1 file changed,
+ 11 insertions(+), 1 deletion(-) 
  Content analysis details:   (0.0 points, 6.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.160.50 listed in list.dnswl.org]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ no trust [209.85.216.43 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-                             in digit
-                             [daeho43[at]gmail.com]
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [daeho43[at]gmail.com]
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
-                             [209.85.160.50 listed in wl.mailspike.net]
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.43 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rAGuT-0006iI-AI
-Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: run full scan if checkpoint is
- disabled
+X-Headers-End: 1rAGyZ-0006rx-2Y
+Subject: [f2fs-dev] [PATCH] f2fs-tools: skip finishing zones for current
+ zones
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,30 +132,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Daeho Jeong <daehojeong@google.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-TEdUTQoKT24gTW9uLCBEZWMgNCwgMjAyMyBhdCAxMDowN+KAr0FNIEphZWdldWsgS2ltIDxqYWVn
-ZXVrQGtlcm5lbC5vcmc+IHdyb3RlOgo+Cj4gTGV0J3MgZml4IGFueSBpbmNvbnNpc3RlbmN5IHVu
-dGlsIGNoZWNrcGludCBiZWluZyBlbmFibGVkIGJhY2suCj4KPiBTaWduZWQtb2ZmLWJ5OiBKYWVn
-ZXVrIEtpbSA8amFlZ2V1a0BrZXJuZWwub3JnPgo+IC0tLQo+ICBmc2NrL21vdW50LmMgfCAxICsK
-PiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspCj4KPiBkaWZmIC0tZ2l0IGEvZnNjay9t
-b3VudC5jIGIvZnNjay9tb3VudC5jCj4gaW5kZXggZTk1NzkwNDQ5NGVmLi4zMGM2MjI4MGIyODEg
-MTAwNjQ0Cj4gLS0tIGEvZnNjay9tb3VudC5jCj4gKysrIGIvZnNjay9tb3VudC5jCj4gQEAgLTE0
-MzUsNiArMTQzNSw3IEBAIHN0YXRpYyBpbnQgZjJmc19zaG91bGRfcHJvY2VlZChzdHJ1Y3QgZjJm
-c19zdXBlcl9ibG9jayAqc2IsIHUzMiBmbGFnKQo+ICB7Cj4gICAgICAgICBpZiAoIWMuZml4X29u
-ICYmIChjLmF1dG9fZml4IHx8IGMucHJlZW5fbW9kZSkpIHsKPiAgICAgICAgICAgICAgICAgaWYg
-KGZsYWcgJiBDUF9GU0NLX0ZMQUcgfHwKPiArICAgICAgICAgICAgICAgICAgICAgICBmbGFnICYg
-Q1BfRElTQUJMRURfRkxBRyB8fAo+ICAgICAgICAgICAgICAgICAgICAgICAgIGZsYWcgJiBDUF9R
-VU9UQV9ORUVEX0ZTQ0tfRkxBRyB8fAo+ICAgICAgICAgICAgICAgICAgICAgICAgIGMuYWJub3Jt
-YWxfc3RvcCB8fCBjLmZzX2Vycm9ycyB8fAo+ICAgICAgICAgICAgICAgICAgICAgICAgIChleGlz
-dF9xZl9pbm8oc2IpICYmIChmbGFnICYgQ1BfRVJST1JfRkxBRykpKSB7Cj4gLS0KPiAyLjQzLjAu
-cmMyLjQ1MS5nODYzMWJjNzQ3Mi1nb29nCj4KPgo+Cj4gX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KPiBMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdAo+
-IExpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cj4gaHR0cHM6Ly9saXN0cy5z
-b3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAoKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwg
-bWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBz
-Oi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+From: Daeho Jeong <daehojeong@google.com>
+
+Do not finishing zones for current zones.
+
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+Fixes: 06a25b021d15 ("f2fs-tools: make six open zone check resilient")
+---
+ fsck/fsck.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index 8acb822..5121a56 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -3265,8 +3265,9 @@ static int chk_and_fix_wp_with_sit(int UNUSED(i), void *blkzone, void *opaque)
+ 	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
+ 	block_t zone_block, wp_block, wp_blkoff;
+ 	unsigned int zone_segno, wp_segno;
+-	int ret, last_valid_blkoff;
++	int i, ret, last_valid_blkoff;
+ 	int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
++	unsigned int segs_per_zone = sbi->segs_per_sec * sbi->secs_per_zone;
+ 
+ 	if (blk_zone_conv(blkz))
+ 		return 0;
+@@ -3309,6 +3310,15 @@ static int chk_and_fix_wp_with_sit(int UNUSED(i), void *blkzone, void *opaque)
+ 		return 0;
+ 	}
+ 
++	/* if a curseg points to the zone, do not finishing zone */
++	for (i = 0; i < NO_CHECK_TYPE; i++) {
++		struct curseg_info *cs = CURSEG_I(sbi, i);
++
++		if (zone_segno <= cs->segno &&
++				cs->segno < zone_segno + segs_per_zone)
++			return 0;
++	}
++
+ 	/*
+ 	 * If valid blocks exist in the zone beyond the write pointer, it
+ 	 * is a bug. No need to fix because the zone is not selected for the
+-- 
+2.43.0.rc2.451.g8631bc7472-goog
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
