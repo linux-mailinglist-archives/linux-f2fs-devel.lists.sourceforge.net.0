@@ -2,100 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 556B48043D7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Dec 2023 02:16:42 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FCE8804412
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Dec 2023 02:28:58 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rAK39-0003Ix-4F;
-	Tue, 05 Dec 2023 01:16:34 +0000
+	id 1rAKF0-0004Yl-LW;
+	Tue, 05 Dec 2023 01:28:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1rAK31-0003Iq-4w
+ (envelope-from <ebiggers@kernel.org>) id 1rAKEz-0004Yf-HK
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 05 Dec 2023 01:16:26 +0000
+ Tue, 05 Dec 2023 01:28:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aGVzx7FQeC+1KSLlkAkUMMGowUPXOEE15DYhdZgi98k=; b=Smi+KIgPgHrnz1MQbBEgI8qd5e
- QXinPparpIZvrIfZsbAAkgauHgA34bItkSxrjjxI9TNspGtGiYcGLDxrdVU8VcWWvkb1NRJZxoPi1
- sl8r8pDuY7z3A890MDoMx/+XybiU97Ef43hW98rK3FnqXDpSljXtJVA16pvFyZBWW49M=;
+ bh=glksAfyIwPI7jwj4ucNcHi59RIxG7EDhQ+sEJVeUTCI=; b=N2LEx24Em6Qha+yq9q1/2WuvGU
+ oNE1OGoa9ZU5BfdtwQMsUCpu7G90mzrTh91oz4yry8NWOWId5+2i1HLiadqjIkCHnMIj0ltFP1vPr
+ Wm6cA+6qtePArQdpqGGBTd99uexpqgOIqFEZHr/JmMgzTTC18RgpdXAt9AD93j8vWpX8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=aGVzx7FQeC+1KSLlkAkUMMGowUPXOEE15DYhdZgi98k=; b=GT/wG4mudiYV9/kELReOaWYMzp
- widpCskA+ehTXAsVcPk9hd3/Q5WlgO0Bcnh83a2pggARZbgU510KBYF/x8/p2SCkLAtUwNjE5Xfw5
- v9rRDwuVUUI96emVgIolBxkdrcnt/piJXHBB9NtHz6TI0JGWafEYpLC2RY2kBfwsnYHk=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=glksAfyIwPI7jwj4ucNcHi59RIxG7EDhQ+sEJVeUTCI=; b=lXbDccTVVfpS3hjwlkjvwifOAD
+ WFPM1zkZ7o9hk1VfNHaxlzbaT6ff367ZdlA5mCubhXXfND0En9Hrpc5nA2uql7thoCuppKKzpk4fN
+ OQzFrPJV3Pmaj4WRPFn01EM0HHCTCIyGiGmnQ8QWcknluhzJ3gKx1QGsR6opfaRdJETw=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rAK2z-0007dq-AM for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 05 Dec 2023 01:16:26 +0000
+ id 1rAKEz-00084Y-72 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 05 Dec 2023 01:28:49 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 1D99ACE069D;
- Tue,  5 Dec 2023 01:16:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C345C433C7;
- Tue,  5 Dec 2023 01:16:08 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id C9E67614A1;
+ Tue,  5 Dec 2023 01:28:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F5F7C433C7;
+ Tue,  5 Dec 2023 01:28:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1701738968;
- bh=PbxIc7G8brLLvlnNz5g5QO7nT7rXf2EgJUvgPLPt0+I=;
+ s=k20201202; t=1701739713;
+ bh=L369r6QG+1soJZ/sl7HyL9wmEkarV3L7SQPXkpSpAD8=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=YlkupZ7zjF6CjHvGvUSmil2kuX81FNp6Sxx7qOz7TlU30sHic3G7j2ZUUt9SZqd8D
- uw8ynekTSjYzKVb0ONlHGZLTowY1XVWXsjQGxN11OX8QVHufPe61RgFYnJ2QceGXOQ
- T4rWV8YpqL9KnIbdrVV4u1KENcQxRcZgOXP2hBTWxjuC5R+fTMqixT7nPavQKioYuG
- HNnxJo4JWM48huNbgxt+pWJmR960bNnKze61pWCCNilUgORGvVRcakPCSM6t7CnKUg
- z895BVQyAHzOzwT4R9QrLm58J85ok0MBkWBJaLP/RXKnuhcq1cA7yDy78EFpVC6eM8
- rlhNz1n6tqbDg==
-Date: Mon, 4 Dec 2023 17:16:06 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <ZW551kua2GX0GcIY@google.com>
-References: <20231204180551.927014-1-jaegeuk@kernel.org>
- <CACOAw_zQ8X=HWbX+oiQUeQ0dM7zYJgwTfqWJ6rMBa8rykctJaw@mail.gmail.com>
+ b=Z4+avRTqadCix0I52N1G9GAJ1/JvqMmqAyXFykcz2aOLy7BDAttc2R6jB7ENY9l8l
+ lZzHtJZGQFAsG4RclyT+uGsYYCoz+o4EkvjxRfp3eDhpmLvC6/QQEliLW4RRUT1yQ9
+ xxpyaqoH/nxQlgxP2xdmwgpZK/b/M/BB0QU9LhIJhOtYPliFXRzVTPRGQAI8ExXT0D
+ Orlvgq0u8JWPkJLAOt7P/11SgMED8HRp15G7vsEXAWyK2h8PFSPSHKy/1snNbzoYtp
+ 0wJTIZqdGgx787/sDySjSpG97+PmgPsqBcy6vNduWBGDcJ3QRkRt8K/9faTb62lFdL
+ cOUZLkx0emk6Q==
+Date: Mon, 4 Dec 2023 17:28:31 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: Daniel Rosenberg <drosen@google.com>
+Message-ID: <20231205012831.GA1168@sol.localdomain>
+References: <20231204234615.3592624-1-drosen@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CACOAw_zQ8X=HWbX+oiQUeQ0dM7zYJgwTfqWJ6rMBa8rykctJaw@mail.gmail.com>
-X-Spam-Score: -2.5 (--)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+In-Reply-To: <20231204234615.3592624-1-drosen@google.com>
+X-Spam-Score: -5.2 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Thanks. Let me add reviewed-by. :) On 12/04, Daeho Jeong wrote:
-    > LGTM > > On Mon, Dec 4, 2023 at 10:07 AM Jaegeuk Kim <jaegeuk@kernel.org>
-    wrote: > > > > Let's fix any inconsistency until checkpint being enabled
-   back. > > > > Signed [...] 
- 
- Content analysis details:   (-2.5 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On Mon, Dec 04, 2023 at 03:46:15PM -0800, Daniel Rosenberg
+ via Linux-f2fs-devel wrote: > Blocks are tracked by u32, so the max permitted
+ filesize is > U32_MAX * BLOCK_SIZE. Additionally, in order to s [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
-                             medium trust
-                             [145.40.73.55 listed in list.dnswl.org]
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rAK2z-0007dq-AM
-Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: run full scan if checkpoint is
- disabled
+X-Headers-End: 1rAKEz-00084Y-72
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Restrict max filesize for 16K f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,33 +101,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-VGhhbmtzLiBMZXQgbWUgYWRkIHJldmlld2VkLWJ5LiA6KQoKT24gMTIvMDQsIERhZWhvIEplb25n
-IHdyb3RlOgo+IExHVE0KPiAKPiBPbiBNb24sIERlYyA0LCAyMDIzIGF0IDEwOjA34oCvQU0gSmFl
-Z2V1ayBLaW0gPGphZWdldWtAa2VybmVsLm9yZz4gd3JvdGU6Cj4gPgo+ID4gTGV0J3MgZml4IGFu
-eSBpbmNvbnNpc3RlbmN5IHVudGlsIGNoZWNrcGludCBiZWluZyBlbmFibGVkIGJhY2suCj4gPgo+
-ID4gU2lnbmVkLW9mZi1ieTogSmFlZ2V1ayBLaW0gPGphZWdldWtAa2VybmVsLm9yZz4KPiA+IC0t
-LQo+ID4gIGZzY2svbW91bnQuYyB8IDEgKwo+ID4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlv
-bigrKQo+ID4KPiA+IGRpZmYgLS1naXQgYS9mc2NrL21vdW50LmMgYi9mc2NrL21vdW50LmMKPiA+
-IGluZGV4IGU5NTc5MDQ0OTRlZi4uMzBjNjIyODBiMjgxIDEwMDY0NAo+ID4gLS0tIGEvZnNjay9t
-b3VudC5jCj4gPiArKysgYi9mc2NrL21vdW50LmMKPiA+IEBAIC0xNDM1LDYgKzE0MzUsNyBAQCBz
-dGF0aWMgaW50IGYyZnNfc2hvdWxkX3Byb2NlZWQoc3RydWN0IGYyZnNfc3VwZXJfYmxvY2sgKnNi
-LCB1MzIgZmxhZykKPiA+ICB7Cj4gPiAgICAgICAgIGlmICghYy5maXhfb24gJiYgKGMuYXV0b19m
-aXggfHwgYy5wcmVlbl9tb2RlKSkgewo+ID4gICAgICAgICAgICAgICAgIGlmIChmbGFnICYgQ1Bf
-RlNDS19GTEFHIHx8Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICBmbGFnICYgQ1BfRElTQUJM
-RURfRkxBRyB8fAo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgZmxhZyAmIENQX1FVT1RBX05F
-RURfRlNDS19GTEFHIHx8Cj4gPiAgICAgICAgICAgICAgICAgICAgICAgICBjLmFibm9ybWFsX3N0
-b3AgfHwgYy5mc19lcnJvcnMgfHwKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgIChleGlzdF9x
-Zl9pbm8oc2IpICYmIChmbGFnICYgQ1BfRVJST1JfRkxBRykpKSB7Cj4gPiAtLQo+ID4gMi40My4w
-LnJjMi40NTEuZzg2MzFiYzc0NzItZ29vZwo+ID4KPiA+Cj4gPgo+ID4gX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiA+IExpbnV4LWYyZnMtZGV2ZWwgbWFp
-bGluZyBsaXN0Cj4gPiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+ID4g
-aHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1k
-ZXZlbAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxp
-bnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNl
-Zm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xp
-bnV4LWYyZnMtZGV2ZWwK
+On Mon, Dec 04, 2023 at 03:46:15PM -0800, Daniel Rosenberg via Linux-f2fs-devel wrote:
+> Blocks are tracked by u32, so the max permitted filesize is
+> U32_MAX * BLOCK_SIZE. Additionally, in order to support crypto data unit
+> sizes of 4K with a 16K block size with IV_INO_LBLK_{32,63}, we must
+
+{32,63} should be {32,64}
+
+> +	/*
+> +	 * For compatibility with FSCRYPT_POLICY_IV_INO_LBLK_{64,32} with a
+> +	 * 4K crypto data unit, we must restrict the max filesize to what can
+> +	 * fit within U32_MAX data units.
+
+FSCRYPT_POLICY_IV_INO_LBLK_{64,32} should be
+FSCRYPT_POLICY_FLAG_IV_INO_LBLK_{64,32}
+
+> +	 *
+> +	 * Since the blocksize must currently be equal to the page size,
+> +	 * we can use a constant for that. Note if this is not the case
+> +	 * in the future that inode is NULL while setting up the superblock.
+
+I'm not sure what the last sentence is trying to say.
+
+> +	 */
+> +
+> +	result = min(result, ((loff_t) U32_MAX * 4096) >> F2FS_BLKSIZE_BITS);
+
+Is it intentional that this is off by 1?  If indices can be up to U32_MAX, then
+the maximum size is U32_MAX + 1.  It's not a bad idea to go with the lower size,
+so that max_index + 1 does not overflow.  But that's not what the explanation
+says, so this seems to be accidental.
+
+- Eric
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
