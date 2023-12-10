@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30B6680BA00
+	by mail.lfdr.de (Postfix) with ESMTPS id 22F8680B9FD
 	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 10 Dec 2023 10:21:24 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rCFzy-0007VZ-0u;
-	Sun, 10 Dec 2023 09:21:18 +0000
+	id 1rCFzu-0000yB-Km;
+	Sun, 10 Dec 2023 09:21:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rCFzu-0007Uf-5X
+ (envelope-from <chao@kernel.org>) id 1rCFzt-0000xw-64
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 10 Dec 2023 09:21:14 +0000
+ Sun, 10 Dec 2023 09:21:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nzuKnedrEWC6imVBrtc3Ahv7ofZ1i17PF18F+M1hMpI=; b=A0LHmmpTmb/7tgrybK46fpuRbO
- suF5yZxMIIZ6GJDonqqrXh0Rmq4+Joc7rHQmpa8gXAP/YeUK60K8pzMuEjA1CB/lMBFqtj+Q5jVAk
- xsVEcpFEuainbqDt+9VNWPkWnhlQChyPbRcn40zrdMuH9yGoakV7alkWBLmjilkrLM5A=;
+ bh=GyDb89B1pBnoGazvPcFqJJ0tUhQM56Cu+onPhqysOEw=; b=K8gQrrMN7XkqBMs20xU9Tw8WTZ
+ HAzXxYreiBEJDWixDzJg547OBlOXqN24QaHneo+xxRXJ4i/fNt+Q16pIoNCPOlTHBsS4jsPoZiolR
+ gKQGtwrOGDcY6mlYv3I7ti/vaQoXxiZ6SieUVOXUDdDFmHM5MZP2JCBUzUBiv/7g1rB8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,34 +31,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nzuKnedrEWC6imVBrtc3Ahv7ofZ1i17PF18F+M1hMpI=; b=D4oDkCh0BG0lInN/nBfhjW1YIc
- feuX30ZUZxW5DICsRxGTpDen8j1f8zYxUQWN085VjvMEDlhGjYrWWYdFJEoj3DTIR9I727usQ6Mdm
- GkWrPwvze1BDnllCZnVok+7WaeHBqQ157w0b1YdD+IphuTNuZYKgGxfSb2n9jY0/yoTc=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=GyDb89B1pBnoGazvPcFqJJ0tUhQM56Cu+onPhqysOEw=; b=Rq4terXh2PCfJgrV0OvhJLkmFW
+ f8yzfupf5sk3U75u/kxBDG99vVZgjARuuKeS/asqtbyHS3MxFYHTtLiZLjp4TJBxtRBZclJpYDOs9
+ 6YsCpVO9RDXYVRCm1kbOWdfXPL4YhZk0puQR0WYRfK5ACPZF631ZxDC//GtuwMn8ncIE=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rCFzq-0002n7-98 for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 10 Dec 2023 09:21:14 +0000
+ id 1rCFzo-0002np-Vd for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 10 Dec 2023 09:21:13 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id B0E06CE0AC4
+ by ams.source.kernel.org (Postfix) with ESMTP id 62292B80A37
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 10 Dec 2023 09:20:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79378C433C9;
  Sun, 10 Dec 2023 09:20:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B40CFC433C7;
- Sun, 10 Dec 2023 09:20:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1702200055;
- bh=eUCNfxU2ZBnjWJhSbW0ed8WQRjl0G3WQDgSCqx5F8l4=;
+ s=k20201202; t=1702200056;
+ bh=BjltPLVDTqSnWr9yrzT9LGYq3m8ffUZKi+SKLGr20ZY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=CsAAwj/MMr5jSOHLX75QKHpCQxJtZVXufXnZ6XxIMswho/8WFi8muJOhFEAk0mBNc
- 82vlvK36Hj45Wn+lAU52WNuPlO7MFhdvSjTgjBBwFUAh22Mjr1BnZ71MHQA/NSZiVO
- NQp+nEztmeLMTbKh9DaYeM6ztfhmTRbAgmQq6nbZoH6+BWj2/L5LX6hM/FyV+gUVeM
- 3B5BxJ4kJ/+MsnVvRR+sNYzJfzdJv6pgxe0kxvwqbU1LvLMXxE/kxscHdcKZOtMWVg
- CMT6YQWKIS+EPzY5xwXZyEY97SJucA/U9M40cxsnrmCIqk53e5WtASetoCsJ+B5xd4
- pLncCxPkj9n2Q==
+ b=Ym7Re/0FEavQLP5slXvCbzQnjUi0GthG8VNGQYE+0JCOAMo6vdFGa4yWxtFKBBzo3
+ b1s0tJK5bocfJeWdBsmpfuyemVDJJWqf6BaiM9QDqjAHBAXweky3SETt+rHTBNGVMD
+ 7Amm0TM0/D8srUZdU6RgfWOMdmOwVKjEftXL+v77Luu2sxU2iTW+5Y7R2+2KEbmE1S
+ QDzfhjJtM0OxeYJqF5SUZSRpiUp6oHlG7O8KAEDt3y3a0eCrlzhb3nc54QEtPEWt4R
+ xtWISNMIzEDZAbAL/4SZEEIZlWnbaFCHkMj0nWfjql0rGhlWYkHysZ1F0YrkF0EKAm
+ UwBaF0MGJNWvQ==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Sun, 10 Dec 2023 17:20:39 +0800
-Message-Id: <20231210092040.3374741-5-chao@kernel.org>
+Date: Sun, 10 Dec 2023 17:20:40 +0800
+Message-Id: <20231210092040.3374741-6-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231210092040.3374741-1-chao@kernel.org>
 References: <20231210092040.3374741-1-chao@kernel.org>
@@ -70,15 +70,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Just cleanup,
- no logic changes. Signed-off-by: Chao Yu <chao@kernel.org>
- --- fs/f2fs/data.c | 8 +++----- fs/f2fs/f2fs.h | 7 +++++++ fs/f2fs/gc.c |
- 5 ++--- fs/f2fs/segment.c | 14 ++++ 4 files changed, 16 insertions(+), 18
- d [...] Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview: This patch adds to support tracepoint for
+ f2fs_vm_page_mkwrite(), 
+ meanwhile it prints more details for trace_f2fs_filemap_fault().
+ Signed-off-by:
+ Chao Yu <chao@kernel.org> --- fs/f2fs/file.c | 25 ++++++++++++++
+ include/trace/events/f2fs.h
+ | 39 ++++++++++++++++++++++++ 2 files changed, 41 insertions(+), 23 d [...]
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
+ medium trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -89,10 +92,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rCFzq-0002n7-98
-Subject: [f2fs-dev] [PATCH 5/6] f2fs: introduce
- f2fs_invalidate_internal_cache() for cleanup
+X-Headers-End: 1rCFzo-0002np-Vd
+Subject: [f2fs-dev] [PATCH 6/6] f2fs: add tracepoint for
+ f2fs_vm_page_mkwrite()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,108 +111,166 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Just cleanup, no logic changes.
+This patch adds to support tracepoint for f2fs_vm_page_mkwrite(),
+meanwhile it prints more details for trace_f2fs_filemap_fault().
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/data.c    |  8 +++-----
- fs/f2fs/f2fs.h    |  7 +++++++
- fs/f2fs/gc.c      |  5 ++---
- fs/f2fs/segment.c | 14 ++++----------
- 4 files changed, 16 insertions(+), 18 deletions(-)
+ fs/f2fs/file.c              | 25 ++++++++++++++----------
+ include/trace/events/f2fs.h | 39 ++++++++++++++++++++++++-------------
+ 2 files changed, 41 insertions(+), 23 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index d86419b01310..27015b7875ae 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -1484,11 +1484,9 @@ static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
- 	old_blkaddr = dn->data_blkaddr;
- 	f2fs_allocate_data_block(sbi, NULL, old_blkaddr, &dn->data_blkaddr,
- 				&sum, seg_type, NULL);
--	if (GET_SEGNO(sbi, old_blkaddr) != NULL_SEGNO) {
--		invalidate_mapping_pages(META_MAPPING(sbi),
--					old_blkaddr, old_blkaddr);
--		f2fs_invalidate_compress_page(sbi, old_blkaddr);
--	}
-+	if (GET_SEGNO(sbi, old_blkaddr) != NULL_SEGNO)
-+		f2fs_invalidate_internal_cache(sbi, old_blkaddr);
-+
- 	f2fs_update_data_blkaddr(dn, dn->data_blkaddr);
- 	return 0;
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 3c7e6bfc1265..60290940018d 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -46,7 +46,7 @@ static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
+ 		f2fs_update_iostat(F2FS_I_SB(inode), inode,
+ 					APP_MAPPED_READ_IO, F2FS_BLKSIZE);
+ 
+-	trace_f2fs_filemap_fault(inode, vmf->pgoff, (unsigned long)ret);
++	trace_f2fs_filemap_fault(inode, vmf->pgoff, vmf->vma->vm_flags, ret);
+ 
+ 	return ret;
  }
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 50e666ebd987..65294e3b0bef 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4613,6 +4613,13 @@ static inline bool f2fs_is_readonly(struct f2fs_sb_info *sbi)
- 	return f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb);
- }
+@@ -59,26 +59,29 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+ 	struct dnode_of_data dn;
+ 	bool need_alloc = true;
+ 	int err = 0;
++	vm_fault_t ret;
  
-+static inline void f2fs_invalidate_internal_cache(struct f2fs_sb_info *sbi,
-+								block_t blkaddr)
-+{
-+	invalidate_mapping_pages(META_MAPPING(sbi), blkaddr, blkaddr);
-+	f2fs_invalidate_compress_page(sbi, blkaddr);
-+}
-+
- #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
- #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
+ 	if (unlikely(IS_IMMUTABLE(inode)))
+ 		return VM_FAULT_SIGBUS;
  
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 2fbe16ad726f..405a6077bd83 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1380,9 +1380,8 @@ static int move_data_block(struct inode *inode, block_t bidx,
- 	memcpy(page_address(fio.encrypted_page),
- 				page_address(mpage), PAGE_SIZE);
- 	f2fs_put_page(mpage, 1);
--	invalidate_mapping_pages(META_MAPPING(fio.sbi),
--				fio.old_blkaddr, fio.old_blkaddr);
--	f2fs_invalidate_compress_page(fio.sbi, fio.old_blkaddr);
-+
-+	f2fs_invalidate_internal_cache(fio.sbi, fio.old_blkaddr);
+-	if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED))
+-		return VM_FAULT_SIGBUS;
++	if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED)) {
++		err = -EIO;
++		goto out;
++	}
  
- 	set_page_dirty(fio.encrypted_page);
- 	if (clear_page_dirty_for_io(fio.encrypted_page))
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 007ebb107236..61da26eb61cc 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -2500,8 +2500,7 @@ void f2fs_invalidate_blocks(struct f2fs_sb_info *sbi, block_t addr)
- 	if (addr == NEW_ADDR || addr == COMPRESS_ADDR)
- 		return;
- 
--	invalidate_mapping_pages(META_MAPPING(sbi), addr, addr);
--	f2fs_invalidate_compress_page(sbi, addr);
-+	f2fs_invalidate_internal_cache(sbi, addr);
- 
- 	/* add it into sit main buffer */
- 	down_write(&sit_i->sentry_lock);
-@@ -3562,11 +3561,8 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
- reallocate:
- 	f2fs_allocate_data_block(fio->sbi, fio->page, fio->old_blkaddr,
- 			&fio->new_blkaddr, sum, type, fio);
--	if (GET_SEGNO(fio->sbi, fio->old_blkaddr) != NULL_SEGNO) {
--		invalidate_mapping_pages(META_MAPPING(fio->sbi),
--					fio->old_blkaddr, fio->old_blkaddr);
--		f2fs_invalidate_compress_page(fio->sbi, fio->old_blkaddr);
--	}
-+	if (GET_SEGNO(fio->sbi, fio->old_blkaddr) != NULL_SEGNO)
-+		f2fs_invalidate_internal_cache(fio->sbi, fio->old_blkaddr);
- 
- 	/* writeout dirty page into bdev */
- 	f2fs_submit_page_write(fio);
-@@ -3762,9 +3758,7 @@ void f2fs_do_replace_block(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
- 		update_sit_entry(sbi, new_blkaddr, 1);
+ 	if (unlikely(f2fs_cp_error(sbi))) {
+ 		err = -EIO;
+-		goto err;
++		goto out;
  	}
- 	if (GET_SEGNO(sbi, old_blkaddr) != NULL_SEGNO) {
--		invalidate_mapping_pages(META_MAPPING(sbi),
--					old_blkaddr, old_blkaddr);
--		f2fs_invalidate_compress_page(sbi, old_blkaddr);
-+		f2fs_invalidate_internal_cache(sbi, old_blkaddr);
- 		if (!from_gc)
- 			update_segment_mtime(sbi, old_blkaddr, 0);
- 		update_sit_entry(sbi, old_blkaddr, -1);
+ 
+ 	if (!f2fs_is_checkpoint_ready(sbi)) {
+ 		err = -ENOSPC;
+-		goto err;
++		goto out;
+ 	}
+ 
+ 	err = f2fs_convert_inline_inode(inode);
+ 	if (err)
+-		goto err;
++		goto out;
+ 
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ 	if (f2fs_compressed_file(inode)) {
+@@ -86,7 +89,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+ 
+ 		if (ret < 0) {
+ 			err = ret;
+-			goto err;
++			goto out;
+ 		} else if (ret) {
+ 			need_alloc = false;
+ 		}
+@@ -153,13 +156,15 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+ 	f2fs_update_iostat(sbi, inode, APP_MAPPED_IO, F2FS_BLKSIZE);
+ 	f2fs_update_time(sbi, REQ_TIME);
+ 
+-	trace_f2fs_vm_page_mkwrite(page, DATA);
+ out_sem:
+ 	filemap_invalidate_unlock_shared(inode->i_mapping);
+ 
+ 	sb_end_pagefault(inode->i_sb);
+-err:
+-	return vmf_fs_error(err);
++out:
++	ret = vmf_fs_error(err);
++
++	trace_f2fs_vm_page_mkwrite(inode, page->index, vmf->vma->vm_flags, ret);
++	return ret;
+ }
+ 
+ static const struct vm_operations_struct f2fs_file_vm_ops = {
+diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+index 479d26eae22f..7ed0fc430dc6 100644
+--- a/include/trace/events/f2fs.h
++++ b/include/trace/events/f2fs.h
+@@ -1369,13 +1369,6 @@ DEFINE_EVENT(f2fs__page, f2fs_set_page_dirty,
+ 	TP_ARGS(page, type)
+ );
+ 
+-DEFINE_EVENT(f2fs__page, f2fs_vm_page_mkwrite,
+-
+-	TP_PROTO(struct page *page, int type),
+-
+-	TP_ARGS(page, type)
+-);
+-
+ TRACE_EVENT(f2fs_replace_atomic_write_block,
+ 
+ 	TP_PROTO(struct inode *inode, struct inode *cow_inode, pgoff_t index,
+@@ -1413,30 +1406,50 @@ TRACE_EVENT(f2fs_replace_atomic_write_block,
+ 		__entry->recovery)
+ );
+ 
+-TRACE_EVENT(f2fs_filemap_fault,
++DECLARE_EVENT_CLASS(f2fs_mmap,
+ 
+-	TP_PROTO(struct inode *inode, pgoff_t index, unsigned long ret),
++	TP_PROTO(struct inode *inode, pgoff_t index,
++			vm_flags_t flags, vm_fault_t ret),
+ 
+-	TP_ARGS(inode, index, ret),
++	TP_ARGS(inode, index, flags, ret),
+ 
+ 	TP_STRUCT__entry(
+ 		__field(dev_t,	dev)
+ 		__field(ino_t,	ino)
+ 		__field(pgoff_t, index)
+-		__field(unsigned long, ret)
++		__field(vm_flags_t, flags)
++		__field(vm_fault_t, ret)
+ 	),
+ 
+ 	TP_fast_assign(
+ 		__entry->dev	= inode->i_sb->s_dev;
+ 		__entry->ino	= inode->i_ino;
+ 		__entry->index	= index;
++		__entry->flags	= flags;
+ 		__entry->ret	= ret;
+ 	),
+ 
+-	TP_printk("dev = (%d,%d), ino = %lu, index = %lu, ret = %lx",
++	TP_printk("dev = (%d,%d), ino = %lu, index = %lu, flags: %s, ret: %s",
+ 		show_dev_ino(__entry),
+ 		(unsigned long)__entry->index,
+-		__entry->ret)
++		__print_flags(__entry->flags, "|", FAULT_FLAG_TRACE),
++		__print_flags(__entry->ret, "|", VM_FAULT_RESULT_TRACE))
++);
++
++DEFINE_EVENT(f2fs_mmap, f2fs_filemap_fault,
++
++	TP_PROTO(struct inode *inode, pgoff_t index,
++			vm_flags_t flags, vm_fault_t ret),
++
++	TP_ARGS(inode, index, flags, ret)
++);
++
++DEFINE_EVENT(f2fs_mmap, f2fs_vm_page_mkwrite,
++
++	TP_PROTO(struct inode *inode, pgoff_t index,
++			vm_flags_t flags, vm_fault_t ret),
++
++	TP_ARGS(inode, index, flags, ret)
+ );
+ 
+ TRACE_EVENT(f2fs_writepages,
 -- 
 2.40.1
 
