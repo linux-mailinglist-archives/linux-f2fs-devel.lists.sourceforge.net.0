@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09FF880DDFF
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Dec 2023 23:09:12 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6C1F80DE0A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Dec 2023 23:12:20 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rCoST-0000Zf-LV;
-	Mon, 11 Dec 2023 22:09:02 +0000
+	id 1rCoVW-00082J-Gs;
+	Mon, 11 Dec 2023 22:12:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1rCoSS-0000ZT-Ca
+ (envelope-from <jaegeuk@kernel.org>) id 1rCoVV-00082D-Rz
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 11 Dec 2023 22:09:00 +0000
+ Mon, 11 Dec 2023 22:12:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lR/kHrVxxwerJc4qdtqz651mTxbMyDNBs9XegadSoD4=; b=ZQQCIB++g4kCrK+lLNYUtlhpme
- lF4r//OpOmXMHth/Hx/EQQGlOUi8GQMmy+HbIB6z2RCtxXPddehtKVpnAsUv1gxBwZd1BYWhKKCSf
- nf8q2qtRU3KEOBez/EGshGebXR5Ti5ImafX154nAf07jRCqpHAD//3yxFVP3hjFr48wQ=;
+ bh=oBSrVCQCpObZ3nSBRCX1NH4Upvr7ybS8muKBALBJZKQ=; b=Ij7j+KG7I9xRX6WYA1EYq+z1uZ
+ khbdgCyPVpt8CXxcE3g2qfCcM58fBX9Tqwe1O+rowB/yvyAC4+NL86dFD2aJGzVK9FRHXqjP5LANe
+ KpnLy1OuRBQI2PyYge0bNHCTgABTA/iY1Rf7TlRNm+qsdvWeM/ZpoNjr927vJeYWy/rM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,38 +31,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lR/kHrVxxwerJc4qdtqz651mTxbMyDNBs9XegadSoD4=; b=gCBH1ndF/I4ObWj5WPibCuSPPB
- PVyjGT9EmhPUQoA9/ODJmtc36yI9ryKk/mqC6G9ZE5BBRPwiYaoVbdmad5pLDYr1AVY2nLxv3bbXW
- wG4dsFSDuEELVYoY/jwRQ9qTcLvkj5ubS3axyn/c7CEQ16+zwqSBwYCdUsC72nsyVOnk=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=oBSrVCQCpObZ3nSBRCX1NH4Upvr7ybS8muKBALBJZKQ=; b=iKpbDizXtYiOkoo1w+2lFKcqC0
+ 4c0bu8djNJS3aOv4rIBV4g2ZDPsBZSa5iQ7CR1580T5LkSC0shGARtoMl1AE3FzwbOC5MR0XkmJs0
+ KqT8o8YbCDVZ0sFKrltBVCejDqKPU/NG3HcbTJiGTEO36zjvb3QHb/erl1ffodSmtr6M=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rCoSO-0005mB-C1 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 11 Dec 2023 22:09:00 +0000
+ id 1rCoVV-0005vo-CK for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 11 Dec 2023 22:12:10 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 47486B810B5;
- Mon, 11 Dec 2023 22:08:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F5B2C433C9;
- Mon, 11 Dec 2023 22:08:43 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 8659FCE16B6
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 11 Dec 2023 22:11:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AA37DC433C8;
+ Mon, 11 Dec 2023 22:11:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1702332523;
- bh=iDewZAyJOxIOJgkget2tmiP/MAlk2VhzGLtGrH05aaw=;
+ s=k20201202; t=1702332713;
+ bh=p4mTC7IdUW3BAEiY7Fj43iN3lLzUWPhxoUHrJSl7/3k=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=e3Z4OEv/bQCRGBikvcKo6n6zysKC22iBZJFAOV4Q5sUkus013tBJ2R7dpS9Ujl4uO
- DvNriuKSqj1YuhXUgGY6Jtt4HeNFcgNHmQwwpgVZIsj5Fq3bd2zHsv70PMaXpD18SW
- wbKRGGr4gxZwGDqGGevLKqD7qrWRAY8b1k5RAu9DemcVqULnc4P886MT9SIZJmICuf
- dqFPoIo0vzPFnXk5nyP7RYEZERK7yfNacfklZVIv0sj26HA8Fc11Or9XmCxWvlZCTk
- 6VEytIPHy3NkTea2rTsJlLy6R16JcyNBu8QYzplFVlo5aXqJLNKtVLvrO1a1WQk51R
- KkNf8E+5eMVag==
-Date: Mon, 11 Dec 2023 14:08:41 -0800
+ b=E6FpIddV6KkFrsbZYmwd5978cZd8hXi0DUBNnP1fFB8t5jhRk2LSA6uAbSqbqWtDn
+ hf3WEIxG8CtDMne3DwwDefG0cT1ge8VCDv+zUm9vcZ98ParJH8Ve67PiDDQd4y/Znb
+ DbUOQ8Gj4XqkF/5PbwqKs4oufTkbEK2MdqY2MWwXwVKl7B2HDSUCNMDQVcq4/Pn0w5
+ mOddCznAR+Y4UMbGAU52Q+TPFGAGaveohOhAHP+OmFlksfQRWFk8SaCtSEE6wweAFI
+ OYvzFD3VvCY6KvGu2nPB0SsMKVHAgN6FWJbS487buXrS7azRGQ+rxzR/0l+btJzY2l
+ DO+RXJPyeKHyg==
+Date: Mon, 11 Dec 2023 14:11:52 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <ZXeIabjxfk8tN10r@google.com>
+Message-ID: <ZXeJKCNrxcit0eTC@google.com>
 References: <20231210113547.3412782-1-chao@kernel.org>
- <20231210113547.3412782-4-chao@kernel.org>
+ <20231210113547.3412782-5-chao@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20231210113547.3412782-4-chao@kernel.org>
+In-Reply-To: <20231210113547.3412782-5-chao@kernel.org>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -70,16 +71,21 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/10, Chao Yu wrote: > In f2fs_preallocate_blocks(), if
- it is partial write in 4KB, it's not > necessary to call f2fs_map_blocks()
- and set FI_PREALLOCATED_ALL flag. > > Cc: Eric Biggers <ebiggers@ [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On 12/10,
+ Chao Yu wrote: > This patch adds i_size check during
+ compress inode conversion in order > to avoid .page_mkwrite races w/
+ conversion.
+ Which race condition do you see? > > Fixes: 4c8ff7095bef ("f2fs: support
+ data compression") > Signed-off-by: Chao Yu <chao@kernel.org> > --- >
+ fs/f2fs/f2fs.h
+ | 8 +++++++- > fs/f2fs/file.c | 5 ++--- > 2 files changed, 9 insertions(+),
+ [...] Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -89,9 +95,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rCoSO-0005mB-C1
-Subject: Re: [f2fs-dev] [PATCH 4/6] f2fs: don't set FI_PREALLOCATED_ALL for
- partial write
+X-Headers-End: 1rCoVV-0005vo-CK
+Subject: Re: [f2fs-dev] [PATCH 5/6] f2fs: fix to restrict condition of
+ compress inode conversion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,51 +109,73 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Eric Biggers <ebiggers@google.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 12/10, Chao Yu wrote:
-> In f2fs_preallocate_blocks(), if it is partial write in 4KB, it's not
-> necessary to call f2fs_map_blocks() and set FI_PREALLOCATED_ALL flag.
+> This patch adds i_size check during compress inode conversion in order
+> to avoid .page_mkwrite races w/ conversion.
+
+Which race condition do you see?
+
 > 
-> Cc: Eric Biggers <ebiggers@google.com>
+> Fixes: 4c8ff7095bef ("f2fs: support data compression")
 > Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
->  fs/f2fs/file.c | 11 ++++++-----
->  1 file changed, 6 insertions(+), 5 deletions(-)
+>  fs/f2fs/f2fs.h | 8 +++++++-
+>  fs/f2fs/file.c | 5 ++---
+>  2 files changed, 9 insertions(+), 4 deletions(-)
 > 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 65294e3b0bef..c9b8a1953913 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -4397,13 +4397,19 @@ static inline int set_compress_context(struct inode *inode)
+>  #endif
+>  }
+>  
+> +static inline bool inode_has_data(struct inode *inode)
+> +{
+> +	return (S_ISREG(inode->i_mode) &&
+> +		(F2FS_HAS_BLOCKS(inode) || i_size_read(inode)));
+> +}
+> +
+>  static inline bool f2fs_disable_compressed_file(struct inode *inode)
+>  {
+>  	struct f2fs_inode_info *fi = F2FS_I(inode);
+>  
+>  	if (!f2fs_compressed_file(inode))
+>  		return true;
+> -	if (S_ISREG(inode->i_mode) && F2FS_HAS_BLOCKS(inode))
+> +	if (inode_has_data(inode))
+>  		return false;
+>  
+>  	fi->i_flags &= ~F2FS_COMPR_FL;
 > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 5c2f99ada6be..1a3c29a9a6a0 100644
+> index 1a3c29a9a6a0..8af4b29c3e1a 100644
 > --- a/fs/f2fs/file.c
 > +++ b/fs/f2fs/file.c
-> @@ -4561,13 +4561,14 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
->  			return ret;
+> @@ -1922,8 +1922,7 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+>  
+>  			f2fs_down_write(&F2FS_I(inode)->i_sem);
+>  			if (!f2fs_may_compress(inode) ||
+> -					(S_ISREG(inode->i_mode) &&
+> -					F2FS_HAS_BLOCKS(inode))) {
+> +					inode_has_data(inode)) {
+>  				f2fs_up_write(&F2FS_I(inode)->i_sem);
+>  				return -EINVAL;
+>  			}
+> @@ -3996,7 +3995,7 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
+>  		goto out;
 >  	}
 >  
-> -	/* Do not preallocate blocks that will be written partially in 4KB. */
->  	map.m_lblk = F2FS_BLK_ALIGN(pos);
->  	map.m_len = F2FS_BYTES_TO_BLK(pos + count);
-> -	if (map.m_len > map.m_lblk)
-> -		map.m_len -= map.m_lblk;
-> -	else
-
-		return 0;
-
-We just need the above?
-
-> -		map.m_len = 0;
-> +
-> +	/* Do not preallocate blocks that will be written partially in 4KB. */
-> +	if (map.m_len <= map.m_lblk)
-> +		return 0;
-> +
-> +	map.m_len -= map.m_lblk;
->  	map.m_may_create = true;
->  	if (dio) {
->  		map.m_seg_type = f2fs_rw_hint_to_seg_type(inode->i_write_hint);
+> -	if (F2FS_HAS_BLOCKS(inode)) {
+> +	if (inode_has_data(inode)) {
+>  		ret = -EFBIG;
+>  		goto out;
+>  	}
 > -- 
 > 2.40.1
 
