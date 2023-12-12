@@ -2,80 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 662DD80E0A3
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Dec 2023 02:02:00 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E8DA80E0AB
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Dec 2023 02:05:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rCr9l-0001mP-Ae;
-	Tue, 12 Dec 2023 01:01:52 +0000
+	id 1rCrDM-0003yD-1w;
+	Tue, 12 Dec 2023 01:05:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rCr9j-0001mJ-QT
+ (envelope-from <chao@kernel.org>) id 1rCrDL-0003y7-72
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 Dec 2023 01:01:50 +0000
+ Tue, 12 Dec 2023 01:05:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JXe05Sl3O+ZzIJzfqXuONfQXSZHZdpaMsibZgb1CRvY=; b=AMGMw0HncDHM/brtUZ5CXIkEvZ
- 1a/ZX82ysOIGvcnAP/ouJNRTkNoG+4RqDKsRR80lQadp+kZgKhkZAFZXR0h2AH9ji2d8Px5l3+X3c
- kcbPVjtqPdmsgyJu6WTsnROe68Zg/LwDTXcs1kZw2noog7iXGenqROJ+yrHPuhuxkyrU=;
+ bh=mrXmipuWF8nzBE+uBUCPkjoBYxpVRmH2Fk3+w/+rlLA=; b=DVpFoMlb3McKvE793Nl2gKpIC9
+ uISaxMQerIfVmTbX6F6rdMtGezDS0sHhcN8szNjreKPGheV0ZkKu9ojTHH7XTyif6vcx2UGVad5Ts
+ UA2j3BK7f0gqIOyzhTJBXrCLMZqw1Q3uHSyhRJHWnrsSKOvhOCRq5mMJj0AwWxYQ0l48=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=JXe05Sl3O+ZzIJzfqXuONfQXSZHZdpaMsibZgb1CRvY=; b=b
- MYIcS9naECvBeqoqHMOQZ7Xn8bmMqoh3svz/BaOewfLjdXEKhFYM7oxA7SefYU5Mpu8BXmXrsPaEk
- MfKCX69Keuyec/ehBH7/pn7bGTd6lBJkRQLEZLGRAikBcg8McCUh+vha8HcZB7OkmYUvnqSba2Xac
- gr3BSTtBciY5Zgbo=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=mrXmipuWF8nzBE+uBUCPkjoBYxpVRmH2Fk3+w/+rlLA=; b=PLZfNQw3a6wI/5uWP2IQ31TpvQ
+ lr4xUnDbkptHiZ83kud2KF/vlwZjNrpQzErrWdRPRGkRO0DABZLB7WMd+tmxfoNVN2X0Q0yRvhIhZ
+ TYYBoj2Pg14JIazXK1TbJVhgR9JQU4LLQ+THcfOeea/ZT82bTvytqPm61osIpnG7aMrw=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rCr9i-00063j-69 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 Dec 2023 01:01:50 +0000
+ id 1rCrDG-0006dS-Kj for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 Dec 2023 01:05:35 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E480E615A0;
- Tue, 12 Dec 2023 01:01:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA6BFC433D9;
- Tue, 12 Dec 2023 01:01:32 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTP id 89CBEB810E8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 12 Dec 2023 01:05:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 148FEC433C8;
+ Tue, 12 Dec 2023 01:05:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1702342894;
- bh=DrRCtSU9Med/4mNPeKjZBCg4NO0v5bfD2LI1x2498Ro=;
- h=From:To:Cc:Subject:Date:From;
- b=I2q6tOdUhiF2BJ+rjT9VpBsT14FW6c23EoiwvIA2L1t1MLNRdzr6H0s9UBVj4T7rB
- pY612ksKEzLFn+MUp5S0qyGRPpZGgonHLD53GTvgMXkg1z/3CsySAnxdp7fcO694fQ
- nRhWpUBP5x8xwn9kzCDpLlykJ2SIuub7ReJE+ts9wkcUzLuLIt4N5SV+FgsIjgHYGl
- /PRViobbNd6NMXEEBbp/BM27dzDUUvRL15qVetouptMuiZfL+pwubEPQ2zCqOiftg7
- A0Ro1AXWSgz28JivX75bUnaBndUAWKCFmpLn4X0OuaOJbwOYhNNTpxwvbI1UsTP2Zx
- 8BdRdxWNGPxDA==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Tue, 12 Dec 2023 09:01:20 +0800
-Message-Id: <20231212010120.252763-1-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
+ s=k20201202; t=1702343117;
+ bh=gdeYmzLGW6q5hnej08l9tQkVl0oulGvc8W5Uv0V0XJ8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=S8nkUR+eJnFc4803EYqwm1jnlA4pKdl+goIF7OpuC/PzMZpNlElrOu6B5a8nSHAuU
+ g96ltQKNBehLQlDsesGAaTn+vxLfhhRrQcmXBi67Ggd+D4BrNnM4tdMr0ejRskWPyb
+ VeI/LsDc4hwOS3QGi32Ul1F8kjbb4/EhrnlNLkT3rhot5/3ovNLPgj5/PM+MBIHSSx
+ xrF+yE6qqZNLUVxX3yublQapAxkv9aztESZmnOtsNCOFuRyEWVXsJOGEEByiA/snF5
+ kZ72AETixuOiR9pOmZ1Z5iZfeeR7VgxYu4QUGiXTlYWnW0iHh+YPDRqgoxU8cJbbde
+ +3L1bv95hg13g==
+Message-ID: <5884e300-5384-4a49-9f8d-8cced50f4e6d@kernel.org>
+Date: Tue, 12 Dec 2023 09:05:13 +0800
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20231210113547.3412782-1-chao@kernel.org>
+ <20231210113547.3412782-5-chao@kernel.org> <ZXeJKCNrxcit0eTC@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <ZXeJKCNrxcit0eTC@google.com>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In f2fs_preallocate_blocks(), if it is partial write in 4KB, 
- it's not necessary to call f2fs_map_blocks() and set FI_PREALLOCATED_ALL
- flag. Cc: Eric Biggers <ebiggers@google.com> Signed-off-by: Chao Yu
- <chao@kernel.org>
- --- v2: - clean up codes fs/f2fs/file.c | 3 ++- 1 file changed, 2 insertions(+),
- 1 deletion(-) 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 2023/12/12 6:11, Jaegeuk Kim wrote: > On 12/10, Chao Yu
+ wrote: >> This patch adds i_size check during compress inode conversion in
+ order >> to avoid .page_mkwrite races w/ conversion. > > Which rac [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -85,13 +89,11 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rCr9i-00063j-69
-Subject: [f2fs-dev] [PATCH v2 4/6] f2fs: don't set FI_PREALLOCATED_ALL for
- partial write
+X-Headers-End: 1rCrDG-0006dS-Kj
+Subject: Re: [f2fs-dev] [PATCH 5/6] f2fs: fix to restrict condition of
+ compress inode conversion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,40 +105,88 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Eric Biggers <ebiggers@google.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In f2fs_preallocate_blocks(), if it is partial write in 4KB, it's not
-necessary to call f2fs_map_blocks() and set FI_PREALLOCATED_ALL flag.
+On 2023/12/12 6:11, Jaegeuk Kim wrote:
+> On 12/10, Chao Yu wrote:
+>> This patch adds i_size check during compress inode conversion in order
+>> to avoid .page_mkwrite races w/ conversion.
+> 
+> Which race condition do you see?
 
-Cc: Eric Biggers <ebiggers@google.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-v2:
-- clean up codes
- fs/f2fs/file.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Something like:
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 79d5b64c109c..026d05a7edd8 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4567,7 +4567,8 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
- 	if (map.m_len > map.m_lblk)
- 		map.m_len -= map.m_lblk;
- 	else
--		map.m_len = 0;
-+		return 0;
-+
- 	map.m_may_create = true;
- 	if (dio) {
- 		map.m_seg_type = f2fs_rw_hint_to_seg_type(inode->i_write_hint);
--- 
-2.40.1
+- f2fs_setflags_common
+  - check S_ISREG && F2FS_HAS_BLOCKS
+					- mkwrite
+					 - f2fs_get_block_locked
+					  : update metadata in old inode's disk layout
+  - set_compress_context
 
+Thanks,
+
+> 
+>>
+>> Fixes: 4c8ff7095bef ("f2fs: support data compression")
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>>   fs/f2fs/f2fs.h | 8 +++++++-
+>>   fs/f2fs/file.c | 5 ++---
+>>   2 files changed, 9 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>> index 65294e3b0bef..c9b8a1953913 100644
+>> --- a/fs/f2fs/f2fs.h
+>> +++ b/fs/f2fs/f2fs.h
+>> @@ -4397,13 +4397,19 @@ static inline int set_compress_context(struct inode *inode)
+>>   #endif
+>>   }
+>>   
+>> +static inline bool inode_has_data(struct inode *inode)
+>> +{
+>> +	return (S_ISREG(inode->i_mode) &&
+>> +		(F2FS_HAS_BLOCKS(inode) || i_size_read(inode)));
+>> +}
+>> +
+>>   static inline bool f2fs_disable_compressed_file(struct inode *inode)
+>>   {
+>>   	struct f2fs_inode_info *fi = F2FS_I(inode);
+>>   
+>>   	if (!f2fs_compressed_file(inode))
+>>   		return true;
+>> -	if (S_ISREG(inode->i_mode) && F2FS_HAS_BLOCKS(inode))
+>> +	if (inode_has_data(inode))
+>>   		return false;
+>>   
+>>   	fi->i_flags &= ~F2FS_COMPR_FL;
+>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>> index 1a3c29a9a6a0..8af4b29c3e1a 100644
+>> --- a/fs/f2fs/file.c
+>> +++ b/fs/f2fs/file.c
+>> @@ -1922,8 +1922,7 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+>>   
+>>   			f2fs_down_write(&F2FS_I(inode)->i_sem);
+>>   			if (!f2fs_may_compress(inode) ||
+>> -					(S_ISREG(inode->i_mode) &&
+>> -					F2FS_HAS_BLOCKS(inode))) {
+>> +					inode_has_data(inode)) {
+>>   				f2fs_up_write(&F2FS_I(inode)->i_sem);
+>>   				return -EINVAL;
+>>   			}
+>> @@ -3996,7 +3995,7 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
+>>   		goto out;
+>>   	}
+>>   
+>> -	if (F2FS_HAS_BLOCKS(inode)) {
+>> +	if (inode_has_data(inode)) {
+>>   		ret = -EFBIG;
+>>   		goto out;
+>>   	}
+>> -- 
+>> 2.40.1
 
 
 _______________________________________________
