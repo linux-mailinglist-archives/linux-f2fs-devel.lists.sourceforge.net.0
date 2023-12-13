@@ -2,124 +2,140 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1ED49812047
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Dec 2023 21:55:09 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6B7F8123A4
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Dec 2023 00:59:25 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rDWFw-0003Zk-FF;
-	Wed, 13 Dec 2023 20:55:01 +0000
+	id 1rDZ8J-0004re-2b;
+	Wed, 13 Dec 2023 23:59:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ngompa13@gmail.com>) id 1rDWFv-0003Za-9G
+ (envelope-from <krisman@suse.de>) id 1rDZ8G-0004rT-B3
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 13 Dec 2023 20:54:59 +0000
+ Wed, 13 Dec 2023 23:59:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uERSlmWABCloqqWZmq7G8mc4+2oSuJMPRYaQZcqODM8=; b=Sio0QQdUxlWQ5+Ki/ZsXEPneUi
- S9jRkzytN0rNI/K/ZDrXYNlSzAS4FpbPuq5hOxA6J7D3CuegOZYiwqwgSejvHI40ga82MonVlq7F6
- c9kkabWGv1nqlfV+XrOiAv4qOK0FR1QzLp3pmHqc03GSry4T7znYzhf15EYHhgejQDs8=;
+ bh=Ob8CvgVrk1WZbkIoZ6UBNnmSgu3zulSWfLiJK83jOqA=; b=Jv3/2dJrApYSFCnyYXCxcGA0ah
+ TWTeL3Rt/I/rZSSvHxr9stW34Vd36ZwyicrteG6T0cYD8HYUEBOQV0w/2pO2hSOwQcekjyOUSHpIE
+ pRj3iy9sXkDL5vcOpowPhTBgUyG5Jh853B2mf0msWYQ/YQ358orecoAolYyHbGKhM5QQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=uERSlmWABCloqqWZmq7G8mc4+2oSuJMPRYaQZcqODM8=; b=XeDOP266wpMTEy+kYMCUrwyo6m
- bQGs85ywwtXQ++9FTvtcO3nxd6mqrkmHvqE5ryYJXozaFd/hQW7XbZ7IifwTXF/9jGP5Wdeg/CNln
- YbBGRIqnbghCgRHNCtpRPbq3R0jOKB+3CYBHSCVTLcFGbP1xuNFIwjW9buEWdHB8bC80=;
-Received: from mail-lf1-f43.google.com ([209.85.167.43])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Ob8CvgVrk1WZbkIoZ6UBNnmSgu3zulSWfLiJK83jOqA=; b=f
+ waonQZPZAw6gvv/ADQJyW0r+gpmTUNnypFyPhcSj65O8MO0Ts/+6Brkjw9YBwkUsGTx2mkjesjItw
+ e+fqR8vO1iF5i0HGJgoC67EwVAYLGOd8D1Aa3EkPHcll7py1P8AvrDfDVOSn2N6WYRM5gTfdh9Oms
+ mj9LPE7X49vK3CVY=;
+Received: from smtp-out1.suse.de ([195.135.223.130])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rDWFr-0004zZ-Is for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 13 Dec 2023 20:54:59 +0000
-Received: by mail-lf1-f43.google.com with SMTP id
- 2adb3069b0e04-50c0f6b1015so8687090e87.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 13 Dec 2023 12:54:55 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702500883; x=1703105683;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uERSlmWABCloqqWZmq7G8mc4+2oSuJMPRYaQZcqODM8=;
- b=lTodw2+e00PXKStXnStf6fFUqy3b6rZj0EyEwMYhGlvc8hTs3dOINqGxAZEaThcSnj
- 6cdBWqaXcDEw/vtM/ZhRWU6F3OC4P8mPMjhBMJpn2J3SKbyFAnX0jPMk9D1gNx6D5OGx
- CqCEmiVvLXTo8NZ4f8Cw1EvwLaPzFtEQs1nVQXxW5Aw4FiUg4CKJpKPfwoVdkhHt0GIO
- oRKgt6/wCL3xcYy06YtV4qfSa7Ht+vJ850bS9V0J3BvQLvcssKprCYMToELXHaIs9fnX
- tHkvDsw8HbiEJKveccflhn9R3OAA4IazL8wt04eRkR/wzfEPCYiErzfZWbiQBCvCi+iC
- c8gA==
-X-Gm-Message-State: AOJu0Yy9pBqzVtmTj9/IWB0bbbAZfOjb6LmlO/EuGY33popS/ybyv9hg
- V4Zw38CHf3/d4EbMP+dIgnil6BNpOju0WQ==
-X-Google-Smtp-Source: AGHT+IHIQL3Wg5GQsxwSCRzHKrYNF9NWVy9+KejswNVGudQHgG+S99sZnuGuijvjfAosue+LdRjaRg==
-X-Received: by 2002:a05:6512:b0d:b0:50c:bd0:870f with SMTP id
- w13-20020a0565120b0d00b0050c0bd0870fmr5104441lfu.73.1702500882996; 
- Wed, 13 Dec 2023 12:54:42 -0800 (PST)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com.
- [209.85.208.51]) by smtp.gmail.com with ESMTPSA id
- ty8-20020a170907c70800b00a1e026ac542sm8482856ejc.10.2023.12.13.12.54.42
- for <linux-f2fs-devel@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Dec 2023 12:54:42 -0800 (PST)
-Received: by mail-ed1-f51.google.com with SMTP id
- 4fb4d7f45d1cf-551437d5344so4818137a12.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 13 Dec 2023 12:54:42 -0800 (PST)
-X-Received: by 2002:a50:d657:0:b0:54c:f9e6:e40f with SMTP id
- c23-20020a50d657000000b0054cf9e6e40fmr4717255edj.7.1702500882554; Wed, 13 Dec
- 2023 12:54:42 -0800 (PST)
+ id 1rDZ8E-0007hU-RR for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 13 Dec 2023 23:59:16 +0000
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 923242230E;
+ Wed, 13 Dec 2023 23:40:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1702510839; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=Ob8CvgVrk1WZbkIoZ6UBNnmSgu3zulSWfLiJK83jOqA=;
+ b=lBwXMd1EPmnGnA8+k3bo5cw3oNB545PNRt2oXQ2MSwXJTDndMTZOmOd2ttgQ80s1sQibOS
+ oepcveTHzebyEc5MYn1U/Igq0lEr+9McqN2v6vd99wQwZ7aA2YeGDeUIim24X+MCmU/s/a
+ 8trlKpAsdITnHkLCYBYFTQJic6UD1QA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1702510839;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=Ob8CvgVrk1WZbkIoZ6UBNnmSgu3zulSWfLiJK83jOqA=;
+ b=/jFoUx2kLod1hZkAlOySsxr7piDjHRpp764THDP20gBnCz7XvevHBSZDXL7Mcd8+FM+2MX
+ 6ZliT/DI8Q4qmXAA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1702510839; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=Ob8CvgVrk1WZbkIoZ6UBNnmSgu3zulSWfLiJK83jOqA=;
+ b=lBwXMd1EPmnGnA8+k3bo5cw3oNB545PNRt2oXQ2MSwXJTDndMTZOmOd2ttgQ80s1sQibOS
+ oepcveTHzebyEc5MYn1U/Igq0lEr+9McqN2v6vd99wQwZ7aA2YeGDeUIim24X+MCmU/s/a
+ 8trlKpAsdITnHkLCYBYFTQJic6UD1QA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1702510839;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=Ob8CvgVrk1WZbkIoZ6UBNnmSgu3zulSWfLiJK83jOqA=;
+ b=/jFoUx2kLod1hZkAlOySsxr7piDjHRpp764THDP20gBnCz7XvevHBSZDXL7Mcd8+FM+2MX
+ 6ZliT/DI8Q4qmXAA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 4AAA11377F;
+ Wed, 13 Dec 2023 23:40:39 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id fLf5C/dAemVXPgAAD6G6ig
+ (envelope-from <krisman@suse.de>); Wed, 13 Dec 2023 23:40:39 +0000
+From: Gabriel Krisman Bertazi <krisman@suse.de>
+To: viro@zeniv.linux.org.uk, ebiggers@kernel.org, jaegeuk@kernel.org,
+ tytso@mit.edu
+Date: Wed, 13 Dec 2023 18:40:23 -0500
+Message-ID: <20231213234031.1081-1-krisman@suse.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20231213040018.73803-1-ebiggers@kernel.org>
- <20231213040018.73803-4-ebiggers@kernel.org>
-In-Reply-To: <20231213040018.73803-4-ebiggers@kernel.org>
-From: Neal Gompa <neal@gompa.dev>
-Date: Wed, 13 Dec 2023 15:54:05 -0500
-X-Gmail-Original-Message-ID: <CAEg-Je9K=i80N7-UpJG=XUMVtA_c5bv6DscXw+326wANLvXV2w@mail.gmail.com>
-Message-ID: <CAEg-Je9K=i80N7-UpJG=XUMVtA_c5bv6DscXw+326wANLvXV2w@mail.gmail.com>
-To: Eric Biggers <ebiggers@kernel.org>
-X-Spam-Score: 0.7 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-Spam-Flag: NO
+X-Spam-Score: 3.44
+Authentication-Results: smtp-out1.suse.de;
+	none
+X-Spam-Level: ***
+X-Spam-Score: 3.44
+X-Spamd-Result: default: False [3.44 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[]; R_MISSING_CHARSET(2.50)[];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+ BROKEN_CONTENT_TYPE(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; RCPT_COUNT_SEVEN(0.00)[8];
+ MID_CONTAINS_FROM(1.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
+ FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
+ RCVD_TLS_ALL(0.00)[]; BAYES_HAM(-0.26)[73.73%]
+X-Spam-Flag: NO
+X-Spam-Score: -2.5 (--)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Tue, Dec 12, 2023 at 11:01 PM Eric Biggers <ebiggers@kernel.org>
-    wrote: > > From: Josef Bacik <josef@toxicpanda.com> > > btrfs has a variety
-    of asynchronous things we do with inodes that can > po [...] 
- 
- Content analysis details:   (0.7 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview: When case-insensitive and fscrypt were adapted to work
+ together, 
+ we moved the code that sets the dentry operations for case-insensitive
+ dentries(d_hash
+ and d_compare) to happen from a helper inside -> [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.167.43 listed in list.dnswl.org]
-  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-                             in digit
-                             [ngompa13[at]gmail.com]
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [ngompa13[at]gmail.com]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
-                             mail domains are different
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.223.130 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.167.43 listed in wl.mailspike.net]
-  0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
-                             EnvelopeFrom freemail headers are
-                             different
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rDWFr-0004zZ-Is
-Subject: Re: [f2fs-dev] [PATCH 3/3] fs: move fscrypt keyring destruction to
- after ->put_super
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1rDZ8E-0007hU-RR
+Subject: [f2fs-dev] [PATCH 0/8] Revert setting casefolding dentry operations
+ through s_d_op
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,60 +147,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Josef Bacik <josef@toxicpanda.com>, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Christoph Hellwig <hch@lst.de>, linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-fsdevel@vger.kernel.org, Gabriel Krisman Bertazi <krisman@suse.de>,
+ linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gVHVlLCBEZWMgMTIsIDIwMjMgYXQgMTE6MDHigK9QTSBFcmljIEJpZ2dlcnMgPGViaWdnZXJz
-QGtlcm5lbC5vcmc+IHdyb3RlOgo+Cj4gRnJvbTogSm9zZWYgQmFjaWsgPGpvc2VmQHRveGljcGFu
-ZGEuY29tPgo+Cj4gYnRyZnMgaGFzIGEgdmFyaWV0eSBvZiBhc3luY2hyb25vdXMgdGhpbmdzIHdl
-IGRvIHdpdGggaW5vZGVzIHRoYXQgY2FuCj4gcG90ZW50aWFsbHkgbGFzdCB1bnRpbCAtPnB1dF9z
-dXBlciwgd2hlbiB3ZSBzaHV0IGV2ZXJ5dGhpbmcgZG93biBhbmQKPiBjbGVhbiB1cCBhbGwgb2Yg
-b3VyIGFzeW5jIHdvcmsuICBEdWUgdG8gdGhpcyB3ZSBuZWVkIHRvIG1vdmUKPiBmc2NyeXB0X2Rl
-c3Ryb3lfa2V5cmluZygpIHRvIGFmdGVyIC0+cHV0X3N1cGVyLCBvdGhlcndpc2Ugd2UgZ2V0Cj4g
-d2FybmluZ3MgYWJvdXQgc3RpbGwgaGF2aW5nIGFjdGl2ZSByZWZlcmVuY2VzIG9uIHRoZSBtYXN0
-ZXIga2V5Lgo+Cj4gU2lnbmVkLW9mZi1ieTogSm9zZWYgQmFjaWsgPGpvc2VmQHRveGljcGFuZGEu
-Y29tPgo+IFNpZ25lZC1vZmYtYnk6IEVyaWMgQmlnZ2VycyA8ZWJpZ2dlcnNAZ29vZ2xlLmNvbT4K
-PiAtLS0KPiAgZnMvc3VwZXIuYyB8IDEyICsrKysrKy0tLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwg
-NiBpbnNlcnRpb25zKCspLCA2IGRlbGV0aW9ucygtKQo+Cj4gZGlmZiAtLWdpdCBhL2ZzL3N1cGVy
-LmMgYi9mcy9zdXBlci5jCj4gaW5kZXggMDc2MzkyMzk2ZTcyNC4uZmFmN2QyNDgxNDVkMiAxMDA2
-NDQKPiAtLS0gYS9mcy9zdXBlci5jCj4gKysrIGIvZnMvc3VwZXIuYwo+IEBAIC02NzQsMzQgKzY3
-NCwzNCBAQCB2b2lkIGdlbmVyaWNfc2h1dGRvd25fc3VwZXIoc3RydWN0IHN1cGVyX2Jsb2NrICpz
-YikKPiAgICAgICAgICAgICAgICAgLyogRXZpY3QgYWxsIGlub2RlcyB3aXRoIHplcm8gcmVmY291
-bnQuICovCj4gICAgICAgICAgICAgICAgIGV2aWN0X2lub2RlcyhzYik7Cj4KPiAgICAgICAgICAg
-ICAgICAgLyoKPiAgICAgICAgICAgICAgICAgICogQ2xlYW4gdXAgYW5kIGV2aWN0IGFueSBpbm9k
-ZXMgdGhhdCBzdGlsbCBoYXZlIHJlZmVyZW5jZXMgZHVlCj4gICAgICAgICAgICAgICAgICAqIHRv
-IGZzbm90aWZ5IG9yIHRoZSBzZWN1cml0eSBwb2xpY3kuCj4gICAgICAgICAgICAgICAgICAqLwo+
-ICAgICAgICAgICAgICAgICBmc25vdGlmeV9zYl9kZWxldGUoc2IpOwo+ICAgICAgICAgICAgICAg
-ICBzZWN1cml0eV9zYl9kZWxldGUoc2IpOwo+Cj4gLSAgICAgICAgICAgICAgIC8qCj4gLSAgICAg
-ICAgICAgICAgICAqIE5vdyB0aGF0IGFsbCBwb3RlbnRpYWxseS1lbmNyeXB0ZWQgaW5vZGVzIGhh
-dmUgYmVlbiBldmljdGVkLAo+IC0gICAgICAgICAgICAgICAgKiB0aGUgZnNjcnlwdCBrZXlyaW5n
-IGNhbiBiZSBkZXN0cm95ZWQuCj4gLSAgICAgICAgICAgICAgICAqLwo+IC0gICAgICAgICAgICAg
-ICBmc2NyeXB0X2Rlc3Ryb3lfa2V5cmluZyhzYik7Cj4gLQo+ICAgICAgICAgICAgICAgICBpZiAo
-c2ItPnNfZGlvX2RvbmVfd3EpIHsKPiAgICAgICAgICAgICAgICAgICAgICAgICBkZXN0cm95X3dv
-cmtxdWV1ZShzYi0+c19kaW9fZG9uZV93cSk7Cj4gICAgICAgICAgICAgICAgICAgICAgICAgc2It
-PnNfZGlvX2RvbmVfd3EgPSBOVUxMOwo+ICAgICAgICAgICAgICAgICB9Cj4KPiAgICAgICAgICAg
-ICAgICAgaWYgKHNvcC0+cHV0X3N1cGVyKQo+ICAgICAgICAgICAgICAgICAgICAgICAgIHNvcC0+
-cHV0X3N1cGVyKHNiKTsKPgo+ICsgICAgICAgICAgICAgICAvKgo+ICsgICAgICAgICAgICAgICAg
-KiBOb3cgdGhhdCBhbGwgcG90ZW50aWFsbHktZW5jcnlwdGVkIGlub2RlcyBoYXZlIGJlZW4gZXZp
-Y3RlZCwKPiArICAgICAgICAgICAgICAgICogdGhlIGZzY3J5cHQga2V5cmluZyBjYW4gYmUgZGVz
-dHJveWVkLgo+ICsgICAgICAgICAgICAgICAgKi8KPiArICAgICAgICAgICAgICAgZnNjcnlwdF9k
-ZXN0cm95X2tleXJpbmcoc2IpOwo+ICsKPiAgICAgICAgICAgICAgICAgaWYgKENIRUNLX0RBVEFf
-Q09SUlVQVElPTighbGlzdF9lbXB0eSgmc2ItPnNfaW5vZGVzKSwKPiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICJWRlM6IEJ1c3kgaW5vZGVzIGFmdGVyIHVubW91bnQgb2YgJXMgKCVz
-KSIsCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzYi0+c19pZCwgc2ItPnNfdHlw
-ZS0+bmFtZSkpIHsKPiAgICAgICAgICAgICAgICAgICAgICAgICAvKgo+ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAqIEFkZGluZyBhIHByb3BlciBiYWlsb3V0IHBhdGggaGVyZSB3b3VsZCBiZSBo
-YXJkLCBidXQKPiAgICAgICAgICAgICAgICAgICAgICAgICAgKiB3ZSBjYW4gYXQgbGVhc3QgbWFr
-ZSBpdCBtb3JlIGxpa2VseSB0aGF0IGEgbGF0ZXIKPiAgICAgICAgICAgICAgICAgICAgICAgICAg
-KiBpcHV0X2ZpbmFsKCkgb3Igc3VjaCBjcmFzaGVzIGNsZWFubHkuCj4gICAgICAgICAgICAgICAg
-ICAgICAgICAgICovCj4gICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IGlub2RlICppbm9k
-ZTsKPgo+IC0tCj4gMi40My4wCj4KPgoKVGhpcyBtYWtlcyBzZW5zZSB0byBtZS4KClJldmlld2Vk
-LWJ5OiBOZWFsIEdvbXBhIDxuZWFsQGdvbXBhLmRldj4KCgoKLS0K55yf5a6f44Gv44GE44Gk44KC
-5LiA44Gk77yBLyBBbHdheXMsIHRoZXJlJ3Mgb25seSBvbmUgdHJ1dGghCgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWls
-aW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9s
-aXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+When case-insensitive and fscrypt were adapted to work together, we moved the
+code that sets the dentry operations for case-insensitive dentries(d_hash and
+d_compare) to happen from a helper inside ->lookup.  This is because fscrypt
+wants to set d_revalidate only on some dentries, so it does it only for them in
+d_revalidate.
+
+But, case-insensitive hooks are actually set on all dentries in the filesystem,
+so the natural place to do it is through s_d_op and let d_alloc handle it [1].
+In addition, doing it inside the ->lookup is a problem for case-insensitive
+dentries that are not created through ->lookup, like those coming
+open-by-fhandle[2], which will not see the required d_ops.
+
+This patchset therefore reverts to using sb->s_d_op to set the dentry operations
+for case-insensitive filesystems.  In order to set case-insensitive hooks early
+and not require every dentry to have d_revalidate in case-insensitive
+filesystems, it introduces a patch suggested by Al Viro to disable d_revalidate
+on some dentries on the fly.
+
+It survives fstests encrypt and quick groups without regressions.  Based on v6.7-rc1.
+
+[1] https://lore.kernel.org/linux-fsdevel/20231123195327.GP38156@ZenIV/
+[2] https://lore.kernel.org/linux-fsdevel/20231123171255.GN38156@ZenIV/
+
+Gabriel Krisman Bertazi (8):
+  dcache: Add helper to disable d_revalidate for a specific dentry
+  fscrypt: Drop d_revalidate if key is available
+  libfs: Merge encrypted_ci_dentry_ops and ci_dentry_ops
+  libfs: Expose generic_ci_dentry_ops outside of libfs
+  ext4: Set the case-insensitive dentry operations through ->s_d_op
+  f2fs: Set the case-insensitive dentry operations through ->s_d_op
+  libfs: Don't support setting casefold operations during lookup
+  fscrypt: Move d_revalidate configuration back into fscrypt
+
+ fs/crypto/fname.c       |  9 +++++-
+ fs/crypto/hooks.c       |  8 ++++++
+ fs/dcache.c             | 10 +++++++
+ fs/ext4/namei.c         |  1 -
+ fs/ext4/super.c         |  3 ++
+ fs/f2fs/namei.c         |  1 -
+ fs/f2fs/super.c         |  3 ++
+ fs/libfs.c              | 64 +++--------------------------------------
+ fs/ubifs/dir.c          |  1 -
+ include/linux/dcache.h  |  1 +
+ include/linux/fs.h      |  2 +-
+ include/linux/fscrypt.h | 10 +++----
+ 12 files changed, 43 insertions(+), 70 deletions(-)
+
+-- 
+2.43.0
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
