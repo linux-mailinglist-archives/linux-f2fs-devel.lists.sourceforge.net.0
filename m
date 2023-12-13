@@ -2,85 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FF2980FA36
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Dec 2023 23:22:14 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3580A8107A6
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Dec 2023 02:29:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rDB8d-0007Dq-Q9;
-	Tue, 12 Dec 2023 22:22:04 +0000
+	id 1rDE3l-0005Ft-KP;
+	Wed, 13 Dec 2023 01:29:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1rDB8b-0007Db-R3
+ (envelope-from <chao@kernel.org>) id 1rDE3j-0005Ff-7S
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 Dec 2023 22:22:02 +0000
+ Wed, 13 Dec 2023 01:29:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pVrSr6bNJeVpfrr5ICOyKAq0iljDemzyh1mRptPccMw=; b=V8igrmryxIiiQAK2ygdLBeQXbm
- fflZpNnqmh2wWvxAOAsBEXpcxv4GeSPBZGIFTPjnh8yHnMm/jIXZFQoEwMlu/1biiq+QXIyAe32DL
- 34iPBu5JMPcp1+MN0Cif8k+Eo4F2B6IDnZCiiG8d2D40wAd1IYMliIbmYqlRjBD7TPgI=;
+ bh=tbLF/xRBGFXTbCeNMbw4obwrMHh3RCnWbBeVvi5hy6U=; b=UYr44qkCEVi+8PxP8CneYUDRwX
+ LHdEZFpEWpgMFgXa+rddwqMMyhuNrYL0lrBG0uv1YwArTJ9H1qJ6Kw/KrMdLnRlA7LsC2N0sbH999
+ RR9oOykQVsVoRMWqeGEBjlyq4y7wms3lyfwesLRcsa5kBIb+gf/G/B0ARL1nq22iLuT0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pVrSr6bNJeVpfrr5ICOyKAq0iljDemzyh1mRptPccMw=; b=IpV+HgWoLhN+TinHi8Z+n2auB6
- 10WjoOeWLXWfRlcMvGMOFpbbXUy/zmRTHwDlIrbBQ7/W49fNgiH1BE0yZMs5O02wNzJgP3dVvL4EA
- qWLeOHhSLXln1MgN1VE79K8XWBQqhwDouOgBQrhYPT8hrhL/cs+0KTIEgstmQ61ign0c=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=tbLF/xRBGFXTbCeNMbw4obwrMHh3RCnWbBeVvi5hy6U=; b=l3L6ByZdvgECT8GOgVnmgHQUlv
+ f8MkAhhpvdZNcWNq/g+KC4kESObmO23lXeEbkN334VS0OFlroTZyEzqQ8JsbLUyeLmCPO1xHXKSO2
+ obP0rm5v0MymqhP5u2OcvJwzJug+r4k+GWfTkiykKJXWwZX0kUL8p1FPoFg5Aslp8KmQ=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rDB8Y-0001WZ-Pe for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 Dec 2023 22:22:02 +0000
+ id 1rDE3i-00033H-Th for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 13 Dec 2023 01:29:11 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id F1A15617D6
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 12 Dec 2023 22:21:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AC89C433C8;
- Tue, 12 Dec 2023 22:21:50 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTP id 24977B81ABD;
+ Wed, 13 Dec 2023 01:28:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3AAF7C433C7;
+ Wed, 13 Dec 2023 01:28:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1702419710;
- bh=7cFmARrm89ttXaBnHHYYiLAUlMe92Q5W0oinMKe/Nkw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=dcVIj+O5K6fJib72hHCkhW8pY6ilbGEl1+BDS7PkuYLwv8FPD136erGw3w/y1gvJe
- Lu1p1PPwCsnYxvsBkSOmMoKkt6NAa4mrFPwg5rGPr1KyDTTVVE6y+Dli0Y+YeFMT6J
- e8/mO/DEm0mmiKKVLb4seY7iYuhO0Ey9S5YxfGNFt2tN/NC8F9fMgm67DSEpt8nnyz
- WNaZNHaUSk7dJieU7LoPmqg8ca0aiAO/JlvkIckHVT07l6nWBowIWUS/uSrNvCQtgU
- ASkxWyE5FRrQFmZQhBCPD/IZf2ujOnjGThHfTuXHxiugSS2ZConsrC+A/RU/WS0myL
- CsqwKnEcu9u7A==
-Date: Tue, 12 Dec 2023 14:21:48 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZXjc_I6__dijbwvN@google.com>
-References: <20231210113547.3412782-1-chao@kernel.org>
- <20231210113547.3412782-5-chao@kernel.org>
- <ZXeJKCNrxcit0eTC@google.com>
- <5884e300-5384-4a49-9f8d-8cced50f4e6d@kernel.org>
+ s=k20201202; t=1702430934;
+ bh=WHT7yhKML4b47HIYKO+zlfH79QBE5JY7QcP0BwiA0S8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=uAlEUEW5DH1jtd23uEK97RhH1sMDjeaXr/+8cvWEY7H8DWnBRu9WYK4z+LquCqduC
+ d5yOoh2A5t8B8EMIWYb/+gZFCeW5rcboH2p7gSXO7k25GkeuobI4SUO/xfBnDhwaT8
+ fUZiN3mFTu1WTUG2y7Qcl9x7bDatbIycB9nt/X2REgZt3O28IeY5TyBq656pRLqcKe
+ icG6X4V1+maL9YYYzcb/kUaOEQmH86ymexTx4y3DT7GOKfxEHKID7v/k+vrJNQWZxC
+ cPxMaWP0rOWZdesc5wteOUYZpT0C/rtvPIDjL/xrl/6+iqFuJ+l4wQ6VzP4crWZvvv
+ ywikPVplcPtzg==
+Message-ID: <9dc77c35-bcb3-4a87-9926-36a0fa205d17@kernel.org>
+Date: Wed, 13 Dec 2023 09:28:50 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <5884e300-5384-4a49-9f8d-8cced50f4e6d@kernel.org>
-X-Spam-Score: -5.2 (-----)
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
+References: <1702347327-24181-1-git-send-email-zhiguo.niu@unisoc.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <1702347327-24181-1-git-send-email-zhiguo.niu@unisoc.com>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/12, Chao Yu wrote: > On 2023/12/12 6:11, Jaegeuk Kim
- wrote: > > On 12/10, Chao Yu wrote: > > > This patch adds i_size check during
- compress inode conversion in order > > > to avoid .page_mkwrite [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 2023/12/12 10:15, Zhiguo Niu wrote: > Should check return
+ value of f2fs_recover_xattr_data in > __f2fs_setxattr rather than doing
+ invalid
+ retry if error happen. > > Also just do set_page_dirty in f [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -92,9 +90,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rDB8Y-0001WZ-Pe
-Subject: Re: [f2fs-dev] [PATCH 5/6] f2fs: fix to restrict condition of
- compress inode conversion
+X-Headers-End: 1rDE3i-00033H-Th
+Subject: Re: [f2fs-dev] [PATCH V2] f2fs: fix to check return value of
+ f2fs_recover_xattr_data
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,87 +104,25 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: ke.wang@unisoc.com, niuzhiguo84@gmail.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 12/12, Chao Yu wrote:
-> On 2023/12/12 6:11, Jaegeuk Kim wrote:
-> > On 12/10, Chao Yu wrote:
-> > > This patch adds i_size check during compress inode conversion in order
-> > > to avoid .page_mkwrite races w/ conversion.
-> > 
-> > Which race condition do you see?
+On 2023/12/12 10:15, Zhiguo Niu wrote:
+> Should check return value of f2fs_recover_xattr_data in
+> __f2fs_setxattr rather than doing invalid retry if error happen.
 > 
-> Something like:
+> Also just do set_page_dirty in f2fs_recover_xattr_data when
+> page is changed really.
 > 
-> - f2fs_setflags_common
->  - check S_ISREG && F2FS_HAS_BLOCKS
-> 					- mkwrite
-> 					 - f2fs_get_block_locked
-> 					  : update metadata in old inode's disk layout
+> Fixes: 50a472bbc79f ("f2fs: do not return EFSCORRUPTED, but try to run online repair")
+> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
 
-Don't we need to prevent setting this for mmapped file?
+Reviewed-by: Chao Yu <chao@kernel.org>
 
->  - set_compress_context
-> 
-> Thanks,
-> 
-> > 
-> > > 
-> > > Fixes: 4c8ff7095bef ("f2fs: support data compression")
-> > > Signed-off-by: Chao Yu <chao@kernel.org>
-> > > ---
-> > >   fs/f2fs/f2fs.h | 8 +++++++-
-> > >   fs/f2fs/file.c | 5 ++---
-> > >   2 files changed, 9 insertions(+), 4 deletions(-)
-> > > 
-> > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > > index 65294e3b0bef..c9b8a1953913 100644
-> > > --- a/fs/f2fs/f2fs.h
-> > > +++ b/fs/f2fs/f2fs.h
-> > > @@ -4397,13 +4397,19 @@ static inline int set_compress_context(struct inode *inode)
-> > >   #endif
-> > >   }
-> > > +static inline bool inode_has_data(struct inode *inode)
-> > > +{
-> > > +	return (S_ISREG(inode->i_mode) &&
-> > > +		(F2FS_HAS_BLOCKS(inode) || i_size_read(inode)));
-> > > +}
-> > > +
-> > >   static inline bool f2fs_disable_compressed_file(struct inode *inode)
-> > >   {
-> > >   	struct f2fs_inode_info *fi = F2FS_I(inode);
-> > >   	if (!f2fs_compressed_file(inode))
-> > >   		return true;
-> > > -	if (S_ISREG(inode->i_mode) && F2FS_HAS_BLOCKS(inode))
-> > > +	if (inode_has_data(inode))
-> > >   		return false;
-> > >   	fi->i_flags &= ~F2FS_COMPR_FL;
-> > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> > > index 1a3c29a9a6a0..8af4b29c3e1a 100644
-> > > --- a/fs/f2fs/file.c
-> > > +++ b/fs/f2fs/file.c
-> > > @@ -1922,8 +1922,7 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
-> > >   			f2fs_down_write(&F2FS_I(inode)->i_sem);
-> > >   			if (!f2fs_may_compress(inode) ||
-> > > -					(S_ISREG(inode->i_mode) &&
-> > > -					F2FS_HAS_BLOCKS(inode))) {
-> > > +					inode_has_data(inode)) {
-> > >   				f2fs_up_write(&F2FS_I(inode)->i_sem);
-> > >   				return -EINVAL;
-> > >   			}
-> > > @@ -3996,7 +3995,7 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
-> > >   		goto out;
-> > >   	}
-> > > -	if (F2FS_HAS_BLOCKS(inode)) {
-> > > +	if (inode_has_data(inode)) {
-> > >   		ret = -EFBIG;
-> > >   		goto out;
-> > >   	}
-> > > -- 
-> > > 2.40.1
+Thanks,
 
 
 _______________________________________________
