@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2515813C00
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Dec 2023 21:50:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 480D7813C04
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Dec 2023 21:50:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rDsfS-0001BI-Sa;
+	id 1rDsfS-00055F-0j;
 	Thu, 14 Dec 2023 20:50:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rDsfQ-0001B9-K0
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rDsfQ-000556-8V
  for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 14 Dec 2023 20:50:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,49 +21,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jHSdetz3KwFu4juyQ4ywCIX/LfNjOceMdact3lr9Tr0=; b=Hvfp38tJtAuJ0kCFdON8ilGImT
- 8WxpI3G5EI938SLgl5fJd4FJXb3dOyloU9G6POj+ELNE4Kb1wese+m9M5+immhWlZ3ueyJNXrRuKQ
- 5+8R5F+4jfeiPkyWLFdVh52WlJ9EJD/eBHWrGCKFv8fBHbNtt/WhCvh08VDPZtk4thRI=;
+ bh=/bnSx2J+vyas0di0BtcF3IXIqWWYcifpL2XUKfEky/g=; b=D6oMfsrdVYB4vQrhS3O0HnpKr4
+ pIKebRXTSRtail/PR8JXzShAFsOPXPY2dCVVfoSj9Q1x6O3NJ7oEHY+zv2k/rjMVVgaogGH9BOI+E
+ cIu7RyBPkwtuisUvaZlEVgxPqNKil4uODJ/8Zsfc6/HWq0hc0kztABC4lj/Vpv7nBu8M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jHSdetz3KwFu4juyQ4ywCIX/LfNjOceMdact3lr9Tr0=; b=asSPwXBTumI/U4BISE0GKTJcj/
- AkqbyhP+bQgriQMFYQebQ4EJyJ2cr+po7py8TU1gPRdbzdneAsK1Lu9RqIDsf45CIhbxE3JkC8zcs
- EO8edILoBJ0Rfi53E1RTsz1gs15EvaGIIl7sK+j6GO+23iFcTEBypZ74w+lKtgJQlyyQ=;
+ bh=/bnSx2J+vyas0di0BtcF3IXIqWWYcifpL2XUKfEky/g=; b=TKeJpuNCdcVAur3VaGTPssbyMK
+ ez6iCpD7cVaxGduC8zIOOME6uMXU4ujvIbdDsf2W+EyokyQJrH+PP+QD62XTKJGsC5EJk1FNDuYYG
+ RYK2F+jTKRAG09SDNW/iOdG3QF46NrOuxstdVK4GGZMTtci4J13DeFTHCiqha+kvfP5I=;
 Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rDsfN-0000kL-88 for linux-f2fs-devel@lists.sourceforge.net;
+ id 1rDsfN-0000kK-8z for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 14 Dec 2023 20:50:48 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id E31E8CE2585
+ by sin.source.kernel.org (Postfix) with ESMTP id D2C55CE248E
  for <linux-f2fs-devel@lists.sourceforge.net>;
  Thu, 14 Dec 2023 20:50:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 2717FC433CA;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 19FA0C433C8;
  Thu, 14 Dec 2023 20:50:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1702587032;
- bh=kpVZaBnbBVpU9K7kulvZHkmJ7TFYh37EGAdPJUXKfUA=;
+ bh=exGfzJaHVz5AxP1KE0el+gwRexf5RDQkGq9tiG97kEk=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=kwHntRQY97j/6XZiGfcDYn9fvWBA7Sp7zR8jFozYv9cLbq9R8y4ktt17M948Y08Wv
- XJNSTImWvL1rIpFOGFEtTIqul6AJuNECLQ9YSxUuu0hEYucw15X/m4GSz8n8h6wWKz
- YXg5OqQmE7AcWO7Hz0WCrBx6RigzAvmajP8DS+qKNSZu2bu5RYhzSkqBdx92+k7eGm
- knbWXJMGgjLAIM1ykLGq5IuJ3ZaZ1VszsJUpAsGJiw7HgFX6TJiaJ3jYOZc40mtHB9
- 7Q9z0KHayydFUI0Q9BIfwpV0gv87RnJt+PN30ThFRrxDjIzCxt5BzWd1GieRxKrz97
- cAM7B5Ycdh9ng==
+ b=kcV9ytAKzZeSCYwzRVXCRbTdVnoWKm3JdfZKpe+U4L5mni8X+5gr/CBFLvJ5l0h4N
+ O+EUjWCGU2eCUAOdaV5hEqg3NfdYk6Vj/4SatHRbVnDSKu0eXKJ7vV1OtEghtv8I8a
+ OYoYHfoLjaZUGbWOtKVkHvwrIx034wZV+ed/XJZe/sSB5w8qATavpgMZOeiP6qpQyP
+ zVZwUYtWQTK+3ZDFEIayGLErHxRFGsU+GuQgtBxyBIwmiWVP0fMwO0BaqSPvHAffhv
+ 4eUDLMpMmi01gki00AKqOy6ar5+JHPeURp/IW6FZb3NjCapDtdh8EnIdsGUUBcnshL
+ 2o0kOl8O18fvw==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- F20EDDD4EF9; Thu, 14 Dec 2023 20:50:31 +0000 (UTC)
+ E90E0DD4EFD; Thu, 14 Dec 2023 20:50:31 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <170258703198.30587.14823724778977847015.git-patchwork-notify@kernel.org>
+Message-Id: <170258703195.30587.3513758411413071845.git-patchwork-notify@kernel.org>
 Date: Thu, 14 Dec 2023 20:50:31 +0000
-References: <20231210092040.3374741-1-chao@kernel.org>
-In-Reply-To: <20231210092040.3374741-1-chao@kernel.org>
+References: <20231210113547.3412782-1-chao@kernel.org>
+In-Reply-To: <20231210113547.3412782-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
@@ -73,10 +73,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Sun, 10 Dec 2023 17:20:35 +0800 you
- wrote: > Commit 3c6c2bebef79 ("f2fs: avoid punch_hole overhead when releasing
- > volatile data") introduced FI_FIRST_BLOCK_WRITTEN as below reason: > >
- This patch [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Sun, 10 Dec 2023 19:35:42 +0800 you
+ wrote: > It needs to add missing gcing flag on page during block migration,
+ > in order to garantee migrated data be persisted during checkpoint,
+ > otherwise out- [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,9 +92,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rDsfN-0000kL-88
-Subject: Re: [f2fs-dev] [PATCH 1/6] f2fs: delete obsolete
- FI_FIRST_BLOCK_WRITTEN
+X-Headers-End: 1rDsfN-0000kK-8z
+Subject: Re: [f2fs-dev] [PATCH 1/6] f2fs: fix to tag gcing flag on page
+ during block migration
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,29 +117,30 @@ Hello:
 This series was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Sun, 10 Dec 2023 17:20:35 +0800 you wrote:
-> Commit 3c6c2bebef79 ("f2fs: avoid punch_hole overhead when releasing
-> volatile data") introduced FI_FIRST_BLOCK_WRITTEN as below reason:
+On Sun, 10 Dec 2023 19:35:42 +0800 you wrote:
+> It needs to add missing gcing flag on page during block migration,
+> in order to garantee migrated data be persisted during checkpoint,
+> otherwise out-of-order persistency between data and node may cause
+> data corruption after SPOR.
 > 
-> This patch is to avoid some punch_hole overhead when releasing volatile
-> data. If volatile data was not written yet, we just can make the first
-> page as zero.
+> Similar issue was fixed by commit 2d1fe8a86bf5 ("f2fs: fix to tag
+> gcing flag on page during file defragment").
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,1/6] f2fs: delete obsolete FI_FIRST_BLOCK_WRITTEN
-    https://git.kernel.org/jaegeuk/f2fs/c/a53936361330
-  - [f2fs-dev,2/6] f2fs: delete obsolete FI_DROP_CACHE
-    https://git.kernel.org/jaegeuk/f2fs/c/bb6e1c8fa5b9
-  - [f2fs-dev,3/6] f2fs: introduce get_dnode_addr() to clean up codes
-    https://git.kernel.org/jaegeuk/f2fs/c/2020cd48e41c
-  - [f2fs-dev,4/6] f2fs: update blkaddr in __set_data_blkaddr() for cleanup
-    https://git.kernel.org/jaegeuk/f2fs/c/59d0d4c3eae0
-  - [f2fs-dev,5/6] f2fs: introduce f2fs_invalidate_internal_cache() for cleanup
-    https://git.kernel.org/jaegeuk/f2fs/c/4e4f1eb9949b
-  - [f2fs-dev,6/6] f2fs: add tracepoint for f2fs_vm_page_mkwrite()
-    https://git.kernel.org/jaegeuk/f2fs/c/87f3afd366f7
+  - [f2fs-dev,1/6] f2fs: fix to tag gcing flag on page during block migration
+    https://git.kernel.org/jaegeuk/f2fs/c/4961acdd65c9
+  - [f2fs-dev,2/6] f2fs: fix to wait on block writeback for post_read case
+    https://git.kernel.org/jaegeuk/f2fs/c/55fdc1c24a1d
+  - [f2fs-dev,3/6] f2fs: fix to check compress file in f2fs_move_file_range()
+    https://git.kernel.org/jaegeuk/f2fs/c/fb9b65340c81
+  - [f2fs-dev,4/6] f2fs: don't set FI_PREALLOCATED_ALL for partial write
+    (no matching commit)
+  - [f2fs-dev,5/6] f2fs: fix to restrict condition of compress inode conversion
+    (no matching commit)
+  - [f2fs-dev,6/6] f2fs: fix to update iostat correctly in f2fs_filemap_fault()
+    https://git.kernel.org/jaegeuk/f2fs/c/bb34cc6ca87f
 
 You are awesome, thank you!
 -- 
