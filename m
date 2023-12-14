@@ -2,127 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFA71812C33
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Dec 2023 10:52:25 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 53BE4813022
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Dec 2023 13:30:30 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rDiO7-0001ot-V9;
-	Thu, 14 Dec 2023 09:52:16 +0000
+	id 1rDkr7-0002jB-A7;
+	Thu, 14 Dec 2023 12:30:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bo.wu@vivo.com>) id 1rDiO5-0001ok-41
+ (envelope-from <lkp@intel.com>) id 1rDkr5-0002j5-Te
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 14 Dec 2023 09:52:13 +0000
+ Thu, 14 Dec 2023 12:30:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hXXEq0b0hHGm8ETBkCEq0IGtrx5DccBno4BOfZDaOoI=; b=ivyJPVCnDc6op3sKG1f+L/7f4U
- MvhinOdiUYfCcNPmDQ0uY0RWrMBHmHR7lyGiuok+8FSBh0EmAkbbx0qxVw3i58a77jEWogE2jO91a
- Uxjuvt+Q/PRg66TRM7jlh0643+i5v6OEl9vNBQcVttbPu8b3EbfMi54bBk7kHjViihuo=;
+ bh=mFt/S/Ogfuk3XIsWnq+JYFSxYtNtRqlz2mGuPEtTl0A=; b=h6Q21YbB9F81Io98uMHHniTl/R
+ mp1dTO8HrgFv78XIpnBhroR15JBmAaZNrmFnplmGx2gCO1vT0SWqR/LrFOoePoFXb8TnsK1mW6WA1
+ nE6lsVYhNiSJG15YnrdtSjfzqc9FUSlrdayuInmAbCExSkmriYOxX/0TN5Qz9H/odd/U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=hXXEq0b0hHGm8ETBkCEq0IGtrx5DccBno4BOfZDaOoI=; b=K
- xcS6NM5OiH2Ej8wCH88co4QMNXAHkhYfMvFvXcmLUNUG5jwCOP/jHQdr0R+NHzAHBHNu0NA/roPEf
- I/sOsuJJqwpvbXKIE12TYJ0cZEoCwteLgSP3CmiJEcskfpPc2fBkk8hzU3nlLADhz/gYMsVfx8qGh
- 06SF+QMNTU4m55C4=;
-Received: from mail-psaapc01on2133.outbound.protection.outlook.com
- ([40.107.255.133] helo=APC01-PSA-obe.outbound.protection.outlook.com)
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=mFt/S/Ogfuk3XIsWnq+JYFSxYtNtRqlz2mGuPEtTl0A=; b=aMotJ5aqX3srDG0Hs2I4pRS8iw
+ JOtiG4jA6LHhhF4aTMrkzia2u4AtYzCtMUF7sMCt2WUw8M8t/x8L+3uZVc/VVK/GCFyllMaX6X1Tt
+ Xy8YxHXFyl70MyS1JwbL8fM4JW0GfsFHo+ciMVHhKnjwu/uLp6UMzfvbhebET2Y1xPtg=;
+Received: from mgamail.intel.com ([192.198.163.7])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rDiO2-0001ln-98 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 14 Dec 2023 09:52:13 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XktykoVseuQZRCEQp4XfuQb390YYKzTD+vJadbiX9it9McfYH/YG87m1Sn/tj8mSdZIxEEvcYEUXZT8JUPlA32Z4K8q0AXfmfsPLkTlqd02hlhgAJPdeeUv6MoSMrkntz5hah37TJMBsqmXaRtQnaqc235HKzIIMtei7/nJQR2bZq12xbo+f7oXERCTlCOqb3aN3tU1d12OMTeh/RBpED20UGDigHmQ3xG+Dn7ceeTpV9BUX3zyMmCOFX+Wq2K1ZCG+F8Folw7t/nS+trWA6U8wxk1jbTXKpKECBwv9QPnOCkm3gtg+PhkDi0NMHKZfo1CPJU6okYT4k3DfbCDVsBQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hXXEq0b0hHGm8ETBkCEq0IGtrx5DccBno4BOfZDaOoI=;
- b=B2V0HZ/J1VOc6HVl33pCWqzUt0fdbdv24T6byM+fWRBjIDRx/sa5kIhnSKtC29fE3FtSUA9DnLL9DBHi0O8tG2VYuGqevp2bhIkdiVqbgY0GKTjxYbdk5G9uOset/8XQHowXYSPF380wUcXkdPrOoXBe9bAXmcufgRhF3GigBMs1It/STan4hx7lSlLiIIcrYwIgKbQHrE0i2l2xqyc5Am6LqITmux6wpbtNz/zdkE2VURHo2IBoJH/1hcSbVAF3WXY0UuuN0yt5Bh0ms9ocOBJNM/O0lj5hMAcL321K95Q3BFJynrt2Q9oisWiuY0x+X/7cqa387T/qdyRBuHPx6w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hXXEq0b0hHGm8ETBkCEq0IGtrx5DccBno4BOfZDaOoI=;
- b=k5JRmgAr89uXNL3Vo5QgpBaENCNJykjnP/D5PW5OLp0VEIZrwkmQ5ys8WatM87NMhBkZijoWv9i/mmlTYssHLnx0DK/LKA8IINYzadRu6wTM7yJ1OegyTDAVrVrATU/OKw/xCqvSVx70QGV4QzLhBciXi9L22CUyHu7fPMaqJ5CdhpqsXDh2bLqt2paQFQ2rY9VhyuEF8XVdD4R8EJdq6UvIAzs1pty+2anTT1pE9I1+kAh9UjGaYNb0ZfD4KaF+qHwK1dFHwe4BtU4XkMrBiifz8b395nuV4BymrvkMp9uWfpmGFr6IjNWkWMriw7VFYS8A68Y/1dyTPZQmn0f/kw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from TY2PR06MB3520.apcprd06.prod.outlook.com (2603:1096:404:100::22)
- by TYZPR06MB4381.apcprd06.prod.outlook.com (2603:1096:400:66::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.28; Thu, 14 Dec
- 2023 09:51:58 +0000
-Received: from TY2PR06MB3520.apcprd06.prod.outlook.com
- ([fe80::e5e:d180:d199:47af]) by TY2PR06MB3520.apcprd06.prod.outlook.com
- ([fe80::e5e:d180:d199:47af%6]) with mapi id 15.20.7091.028; Thu, 14 Dec 2023
- 09:51:58 +0000
-To: Jaegeuk Kim <jaegeuk@kernel.org>,
-	Chao Yu <chao@kernel.org>
-Date: Thu, 14 Dec 2023 03:01:48 -0700
-Message-Id: <20231214100148.3422585-1-bo.wu@vivo.com>
-X-Mailer: git-send-email 2.25.1
-X-ClientProxiedBy: SG2PR01CA0192.apcprd01.prod.exchangelabs.com
- (2603:1096:4:189::21) To TY2PR06MB3520.apcprd06.prod.outlook.com
- (2603:1096:404:100::22)
+ id 1rDkr0-0006eA-50 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 14 Dec 2023 12:30:18 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1702557014; x=1734093014;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=mvVBbq/R1WpuDErjSUPhnSoW7RqoKzGO7l8wwj8Lx1E=;
+ b=Kt6Y1tyJVmMTAVjAhPcnbiWl/jYNWDMf4KhONA4UuI6k76QXxIWFbQEj
+ +MQH8FMxtK3/XlZNpjWu1O5q0eDmS20CtwvyObo4D/w3ECqVnK7aha9yx
+ 4/O83r3rUyr045WiElY6vu03wP+BTUvwBxYKVv77tXMvqkCg90V8nYLgS
+ oS0VgggWV6tmvrazYOmU1AHlTCcAqsZPWEkuCqNARthiieOmOwDvOKq3s
+ CSKYjoXevdt64ivi53jIIdeW+SUHzvfvH6XecQCijejAy9K4WJuXRQAL/
+ BXWBE2sApvJLdIO5pYCogTkLLoWGamPyrEW8QSF6cYTOdTT1SZeEjNs+B Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10923"; a="16662864"
+X-IronPort-AV: E=Sophos;i="6.04,275,1695711600"; d="scan'208";a="16662864"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Dec 2023 04:30:03 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10923"; a="840268415"
+X-IronPort-AV: E=Sophos;i="6.04,275,1695711600"; d="scan'208";a="840268415"
+Received: from lkp-server02.sh.intel.com (HELO b07ab15da5fe) ([10.239.97.151])
+ by fmsmga008.fm.intel.com with ESMTP; 14 Dec 2023 04:30:01 -0800
+Received: from kbuild by b07ab15da5fe with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1rDkqk-000M3S-2A;
+ Thu, 14 Dec 2023 12:29:58 +0000
+Date: Thu, 14 Dec 2023 20:29:46 +0800
+From: kernel test robot <lkp@intel.com>
+To: Gabriel Krisman Bertazi <krisman@suse.de>, viro@zeniv.linux.org.uk,
+ ebiggers@kernel.org, jaegeuk@kernel.org, tytso@mit.edu
+Message-ID: <202312142039.u2475qPS-lkp@intel.com>
+References: <20231213234031.1081-6-krisman@suse.de>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TY2PR06MB3520:EE_|TYZPR06MB4381:EE_
-X-MS-Office365-Filtering-Correlation-Id: df8a96e1-307d-4ac4-83bb-08dbfc8a4fd3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: eAVAr+cFsxlAfJt5hybX5XurAHZg3RhpFglIGQp1wfx8tHmg/P3a5LEyZqeWv79mBfZRIo9hBdV+fGfcc8PF1vzfFdTqXSRbtS12cyvQ/2UDHbktVa52813UNrwAt7HjyEDJBit088attzdTeIDf0cPk4CuCO6knYhS1tYm/mjFr8PwQ7bHfqO14eaz6QjHe2K6QThqD5kl38bhcyBlFHVAubbI8iPAgbNTm0qu7Y0r1w4kTD/gx2BLpiDFSv77WdmmVPN5EwbTis5eI4NOqqcgmFOx2gjGjEh2uLLTt1mQuNDFTJOXBKNtlxkZAyRiviyFfyJ649LrM2dny+72zXGM+tBiS2zMFts3u4KaYbGhD+UoRA0pJqRl4nE6ayf/8k2/augjt+FDIj/mGwF5XlY3krcFGnwnKIjHk7qgGOZCkSIfZOs5BxDs4/dUBb7TXn4RfOOoo/izxphYIGkENIZ0rc+jDs2X9PA2eKvuQAfNnDFrfIxl58bGY56FFZYFnys6hsmXWRciElcL0TV61bM0Waw7VgO/db3wgsDiBDyVPTNYz1S8mpdwJdMpvYWUIp5ygtwhgNJAruPzNBcQ3R53jcBU//Mp7e0KBzpJVlQKc7MEZKJ0Nz8UaOFYX6R4h
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TY2PR06MB3520.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39850400004)(346002)(136003)(376002)(396003)(366004)(230922051799003)(1800799012)(451199024)(64100799003)(186009)(8676002)(4326008)(8936002)(4744005)(2906002)(5660300002)(6506007)(6486002)(6666004)(6512007)(478600001)(52116002)(66556008)(54906003)(66946007)(66476007)(316002)(110136005)(41300700001)(38100700002)(86362001)(36756003)(38350700005)(83380400001)(2616005)(1076003)(26005)(107886003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Lk0L0dBeKJB/t/VAbZlptk8PQfnyzUaiav+ZU6HDGEmnFTXiPzvTaq/Wvnhi?=
- =?us-ascii?Q?1t/fsvBWAKQjwEfMxoVdUywx3mfUO5ZqFQ/axquMuPdRdWEYLF71DtRj8n6m?=
- =?us-ascii?Q?HNFQepW2gFEy3JA8+Pi5kGWQsHfIoetEvPsBLgQ6W0MNj85MntF+GOSnI6XI?=
- =?us-ascii?Q?YBjzcwvHmHpQ8hWNywdTALkHpHcKkNqDS0pGElnC9YO45nwt20mQEnqMJZQx?=
- =?us-ascii?Q?JltP51kP2jb/iGpBZ/JGcr6Nn3lST5KBU3M1M6OHdGEOBhBBuLJOiiJznkD8?=
- =?us-ascii?Q?pf+Ax2Z21zGuwCnfDBJDQiVatReqlbP9bwl+BBEgbVOm1+XCX0hq6dAmC08P?=
- =?us-ascii?Q?ROTQXIaNP9spwFBXgK4cgdAVh5i5eshlK675WH9OuLe6ye8gMv5HaGLaymQO?=
- =?us-ascii?Q?oLNFZdJ7bXVVZbJYsA2y91qrxi8X/aXW3epyHeNfjCoUG3hi9fzkQRm0xzg1?=
- =?us-ascii?Q?cdWnhgZoZZ/ZR16mseLHak5yZw1L78v/1k+eyKV4JZzn3zMNYxLXiMLLPvxe?=
- =?us-ascii?Q?x7Dt+QyKcCaNjpRPiWUku4vS979yLAmWxn1gDgaV9YtM/9EbnNWf+IeF+Amd?=
- =?us-ascii?Q?KbWCbGMJ+aFN2uFl4dir4CajrnYdNX2GrjcQ+bTS5ZZd8oVBGUpDsJskzPUk?=
- =?us-ascii?Q?SwxJo5+wlREp1qGZLzWcJ4cuBpfF5q/xr7S90ezF+7NxVKUhz4TDm1tkgsSR?=
- =?us-ascii?Q?Hd05QOuM5taxd38Pbmk3t0icflDte2tHDhDm6kDVLyrw2iGzyuju9xRhsVNM?=
- =?us-ascii?Q?E5zx2z3F8wR4/SRCqJUzcoUrX4GoH/XMWa/TWHcIJVyaQt+NpytH7Z1u16MN?=
- =?us-ascii?Q?aY8NxecLd+1xQbI8J44fJeG3YvLCa7ckpQQYJI1xQ4kGyTuTikTWHQZwGzJ1?=
- =?us-ascii?Q?IciI4FVr3im5+xQ1G9YrhSyWcpFiMUKCzB5t5QyU60FpRqQ/zBL5KCmBPBnG?=
- =?us-ascii?Q?GFxShXX4riAo2r4bHENRem280B37VmmFaGImt2GY1c1LzAPiUDCumRzofpWs?=
- =?us-ascii?Q?t/oIkyc7KTceFTNlB2AtpBPkUXIO3ZBz9JAjbJtM1tuKZ3yMhIp05q8eoPgp?=
- =?us-ascii?Q?/ZfOnheCgVkegmy3Zz1QrFLiNxFjQDSByibVxc0B6uDCrytpUKC7nlEU4n4O?=
- =?us-ascii?Q?4+O2ivIaBM1oIxSAnIOjTRh0DMAhVSifWd8pKnpcx0WtnEO+lp8xJ8BXhSZL?=
- =?us-ascii?Q?wc/LlhTWynzT0EdXRajY7FyK15yLwcPLuQ9L+lYKZEwBdFfx1A4R6XNKwjxX?=
- =?us-ascii?Q?V+FBUA/a8XdxpKH4JyJKut8Lx+sQg80A1o4L00p3Cs9rnXaFq29TmHoruqnH?=
- =?us-ascii?Q?rAY4CZnpj7yzPKhcBO7F+kvYa7UYQvhnVjZAUgA8N4gsxNmPZa8QtMEfYJa8?=
- =?us-ascii?Q?eQ7nINziivuT+f0nX2h+a+Df5pa5LO3t/Y+NXENYCodDXb0sLQKkzNxLTdt1?=
- =?us-ascii?Q?6GWI6eTBD3obM21joGOjmXh/+flcb/+r/oca1stypIuYbivd6+VU2Gt1vf0o?=
- =?us-ascii?Q?8u3vrbLSY0fxeNhBZOc4Rf8GIJpLiOD3f/HnsJgUoSn05isnk41tfWVjLvAl?=
- =?us-ascii?Q?Vh2p/PyyNObmPJHpOuP+r0jPXBB7+EqHpd5uFj8O?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: df8a96e1-307d-4ac4-83bb-08dbfc8a4fd3
-X-MS-Exchange-CrossTenant-AuthSource: TY2PR06MB3520.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Dec 2023 09:51:58.4928 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Vu7DnOaXZIn16W49Rb3ZbNQLjlZ/ybzApa54FvtNP5RMN8+b25SiXUdGqVsmgT6qfTumJdiVGYIKgtdmAplXdg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB4381
+Content-Disposition: inline
+In-Reply-To: <20231213234031.1081-6-krisman@suse.de>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -130,21 +80,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Call path: fsck_chk_orphan_node fsck_chk_node_blk
- fsck_chk_inode_blk
- 'F2FS_FT_ORPHAN' will pass to fsck_chk_inode_blk(). If the orphan inode is
- a DIR, it will be wrongly fixed. Fixes: 8fd836f ("fsck: clear unexpected
- casefold flags") Signed-off-by: Wu Bo <bo.wu@vivo.com> --- fsck/fsck.c | 2
- +- 1 file changed, 1 insertion(+), 1 deletion(-) 
+ Content preview:  Hi Gabriel, kernel test robot noticed the following build
+ errors: [auto build test ERROR on jaegeuk-f2fs/dev-test] [also build test
+ ERROR on jaegeuk-f2fs/dev tytso-ext4/dev linus/master v6.7-rc5 next-20231214]
+ [If your patch is applied to the wrong git tree, kindly [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.255.133 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.255.133 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -153,8 +97,10 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rDiO2-0001ln-98
-Subject: [f2fs-dev] [PATCH] fsck.f2fs: fix orphan inode check fail
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rDkr0-0006eA-50
+Subject: Re: [f2fs-dev] [PATCH 5/8] ext4: Set the case-insensitive dentry
+ operations through ->s_d_op
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -166,44 +112,510 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Wu Bo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Wu Bo <bo.wu@vivo.com>
-Cc: Wu Bo <wubo.oduw@gmail.com>, linux-kernel@vger.kernel.org,
- Wu Bo <bo.wu@vivo.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net,
+ Gabriel Krisman Bertazi <krisman@suse.de>, oe-kbuild-all@lists.linux.dev
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Call path:
-fsck_chk_orphan_node
-  fsck_chk_node_blk
-    fsck_chk_inode_blk
+Hi Gabriel,
 
-'F2FS_FT_ORPHAN' will pass to fsck_chk_inode_blk(). If the orphan inode
-is a DIR, it will be wrongly fixed.
+kernel test robot noticed the following build errors:
 
-Fixes: 8fd836f ("fsck: clear unexpected casefold flags")
-Signed-off-by: Wu Bo <bo.wu@vivo.com>
----
- fsck/fsck.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+[auto build test ERROR on jaegeuk-f2fs/dev-test]
+[also build test ERROR on jaegeuk-f2fs/dev tytso-ext4/dev linus/master v6.7-rc5 next-20231214]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index e93db82..3461a52 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -1052,7 +1052,7 @@ check_next:
- 	ofs = get_extra_isize(node_blk);
- 
- 	if ((node_blk->i.i_flags & cpu_to_le32(F2FS_CASEFOLD_FL)) &&
--	    (ftype != F2FS_FT_DIR ||
-+	    (!S_ISDIR(le16_to_cpu(node_blk->i.i_mode)) ||
- 	     !(c.feature & F2FS_FEATURE_CASEFOLD))) {
- 		ASSERT_MSG("[0x%x] unexpected casefold flag", nid);
- 		if (c.fix_on) {
+url:    https://github.com/intel-lab-lkp/linux/commits/Gabriel-Krisman-Bertazi/dcache-Add-helper-to-disable-d_revalidate-for-a-specific-dentry/20231214-074322
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
+patch link:    https://lore.kernel.org/r/20231213234031.1081-6-krisman%40suse.de
+patch subject: [PATCH 5/8] ext4: Set the case-insensitive dentry operations through ->s_d_op
+config: arc-vdk_hs38_defconfig (https://download.01.org/0day-ci/archive/20231214/202312142039.u2475qPS-lkp@intel.com/config)
+compiler: arc-elf-gcc (GCC) 13.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231214/202312142039.u2475qPS-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202312142039.u2475qPS-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   fs/ext4/super.c: In function '__ext4_fill_super':
+>> fs/ext4/super.c:5496:15: error: 'struct super_block' has no member named 's_encoding'
+    5496 |         if (sb->s_encoding)
+         |               ^~
+
+
+vim +5496 fs/ext4/super.c
+
+  5215	
+  5216	static int __ext4_fill_super(struct fs_context *fc, struct super_block *sb)
+  5217	{
+  5218		struct ext4_super_block *es = NULL;
+  5219		struct ext4_sb_info *sbi = EXT4_SB(sb);
+  5220		ext4_fsblk_t logical_sb_block;
+  5221		struct inode *root;
+  5222		int needs_recovery;
+  5223		int err;
+  5224		ext4_group_t first_not_zeroed;
+  5225		struct ext4_fs_context *ctx = fc->fs_private;
+  5226		int silent = fc->sb_flags & SB_SILENT;
+  5227	
+  5228		/* Set defaults for the variables that will be set during parsing */
+  5229		if (!(ctx->spec & EXT4_SPEC_JOURNAL_IOPRIO))
+  5230			ctx->journal_ioprio = DEFAULT_JOURNAL_IOPRIO;
+  5231	
+  5232		sbi->s_inode_readahead_blks = EXT4_DEF_INODE_READAHEAD_BLKS;
+  5233		sbi->s_sectors_written_start =
+  5234			part_stat_read(sb->s_bdev, sectors[STAT_WRITE]);
+  5235	
+  5236		err = ext4_load_super(sb, &logical_sb_block, silent);
+  5237		if (err)
+  5238			goto out_fail;
+  5239	
+  5240		es = sbi->s_es;
+  5241		sbi->s_kbytes_written = le64_to_cpu(es->s_kbytes_written);
+  5242	
+  5243		err = ext4_init_metadata_csum(sb, es);
+  5244		if (err)
+  5245			goto failed_mount;
+  5246	
+  5247		ext4_set_def_opts(sb, es);
+  5248	
+  5249		sbi->s_resuid = make_kuid(&init_user_ns, le16_to_cpu(es->s_def_resuid));
+  5250		sbi->s_resgid = make_kgid(&init_user_ns, le16_to_cpu(es->s_def_resgid));
+  5251		sbi->s_commit_interval = JBD2_DEFAULT_MAX_COMMIT_AGE * HZ;
+  5252		sbi->s_min_batch_time = EXT4_DEF_MIN_BATCH_TIME;
+  5253		sbi->s_max_batch_time = EXT4_DEF_MAX_BATCH_TIME;
+  5254	
+  5255		/*
+  5256		 * set default s_li_wait_mult for lazyinit, for the case there is
+  5257		 * no mount option specified.
+  5258		 */
+  5259		sbi->s_li_wait_mult = EXT4_DEF_LI_WAIT_MULT;
+  5260	
+  5261		err = ext4_inode_info_init(sb, es);
+  5262		if (err)
+  5263			goto failed_mount;
+  5264	
+  5265		err = parse_apply_sb_mount_options(sb, ctx);
+  5266		if (err < 0)
+  5267			goto failed_mount;
+  5268	
+  5269		sbi->s_def_mount_opt = sbi->s_mount_opt;
+  5270		sbi->s_def_mount_opt2 = sbi->s_mount_opt2;
+  5271	
+  5272		err = ext4_check_opt_consistency(fc, sb);
+  5273		if (err < 0)
+  5274			goto failed_mount;
+  5275	
+  5276		ext4_apply_options(fc, sb);
+  5277	
+  5278		err = ext4_encoding_init(sb, es);
+  5279		if (err)
+  5280			goto failed_mount;
+  5281	
+  5282		err = ext4_check_journal_data_mode(sb);
+  5283		if (err)
+  5284			goto failed_mount;
+  5285	
+  5286		sb->s_flags = (sb->s_flags & ~SB_POSIXACL) |
+  5287			(test_opt(sb, POSIX_ACL) ? SB_POSIXACL : 0);
+  5288	
+  5289		/* i_version is always enabled now */
+  5290		sb->s_flags |= SB_I_VERSION;
+  5291	
+  5292		err = ext4_check_feature_compatibility(sb, es, silent);
+  5293		if (err)
+  5294			goto failed_mount;
+  5295	
+  5296		err = ext4_block_group_meta_init(sb, silent);
+  5297		if (err)
+  5298			goto failed_mount;
+  5299	
+  5300		ext4_hash_info_init(sb);
+  5301	
+  5302		err = ext4_handle_clustersize(sb);
+  5303		if (err)
+  5304			goto failed_mount;
+  5305	
+  5306		err = ext4_check_geometry(sb, es);
+  5307		if (err)
+  5308			goto failed_mount;
+  5309	
+  5310		timer_setup(&sbi->s_err_report, print_daily_error_info, 0);
+  5311		spin_lock_init(&sbi->s_error_lock);
+  5312		INIT_WORK(&sbi->s_sb_upd_work, update_super_work);
+  5313	
+  5314		err = ext4_group_desc_init(sb, es, logical_sb_block, &first_not_zeroed);
+  5315		if (err)
+  5316			goto failed_mount3;
+  5317	
+  5318		err = ext4_es_register_shrinker(sbi);
+  5319		if (err)
+  5320			goto failed_mount3;
+  5321	
+  5322		sbi->s_stripe = ext4_get_stripe_size(sbi);
+  5323		/*
+  5324		 * It's hard to get stripe aligned blocks if stripe is not aligned with
+  5325		 * cluster, just disable stripe and alert user to simpfy code and avoid
+  5326		 * stripe aligned allocation which will rarely successes.
+  5327		 */
+  5328		if (sbi->s_stripe > 0 && sbi->s_cluster_ratio > 1 &&
+  5329		    sbi->s_stripe % sbi->s_cluster_ratio != 0) {
+  5330			ext4_msg(sb, KERN_WARNING,
+  5331				 "stripe (%lu) is not aligned with cluster size (%u), "
+  5332				 "stripe is disabled",
+  5333				 sbi->s_stripe, sbi->s_cluster_ratio);
+  5334			sbi->s_stripe = 0;
+  5335		}
+  5336		sbi->s_extent_max_zeroout_kb = 32;
+  5337	
+  5338		/*
+  5339		 * set up enough so that it can read an inode
+  5340		 */
+  5341		sb->s_op = &ext4_sops;
+  5342		sb->s_export_op = &ext4_export_ops;
+  5343		sb->s_xattr = ext4_xattr_handlers;
+  5344	#ifdef CONFIG_FS_ENCRYPTION
+  5345		sb->s_cop = &ext4_cryptops;
+  5346	#endif
+  5347	#ifdef CONFIG_FS_VERITY
+  5348		sb->s_vop = &ext4_verityops;
+  5349	#endif
+  5350	#ifdef CONFIG_QUOTA
+  5351		sb->dq_op = &ext4_quota_operations;
+  5352		if (ext4_has_feature_quota(sb))
+  5353			sb->s_qcop = &dquot_quotactl_sysfile_ops;
+  5354		else
+  5355			sb->s_qcop = &ext4_qctl_operations;
+  5356		sb->s_quota_types = QTYPE_MASK_USR | QTYPE_MASK_GRP | QTYPE_MASK_PRJ;
+  5357	#endif
+  5358		memcpy(&sb->s_uuid, es->s_uuid, sizeof(es->s_uuid));
+  5359	
+  5360		INIT_LIST_HEAD(&sbi->s_orphan); /* unlinked but open files */
+  5361		mutex_init(&sbi->s_orphan_lock);
+  5362	
+  5363		ext4_fast_commit_init(sb);
+  5364	
+  5365		sb->s_root = NULL;
+  5366	
+  5367		needs_recovery = (es->s_last_orphan != 0 ||
+  5368				  ext4_has_feature_orphan_present(sb) ||
+  5369				  ext4_has_feature_journal_needs_recovery(sb));
+  5370	
+  5371		if (ext4_has_feature_mmp(sb) && !sb_rdonly(sb)) {
+  5372			err = ext4_multi_mount_protect(sb, le64_to_cpu(es->s_mmp_block));
+  5373			if (err)
+  5374				goto failed_mount3a;
+  5375		}
+  5376	
+  5377		err = -EINVAL;
+  5378		/*
+  5379		 * The first inode we look at is the journal inode.  Don't try
+  5380		 * root first: it may be modified in the journal!
+  5381		 */
+  5382		if (!test_opt(sb, NOLOAD) && ext4_has_feature_journal(sb)) {
+  5383			err = ext4_load_and_init_journal(sb, es, ctx);
+  5384			if (err)
+  5385				goto failed_mount3a;
+  5386		} else if (test_opt(sb, NOLOAD) && !sb_rdonly(sb) &&
+  5387			   ext4_has_feature_journal_needs_recovery(sb)) {
+  5388			ext4_msg(sb, KERN_ERR, "required journal recovery "
+  5389			       "suppressed and not mounted read-only");
+  5390			goto failed_mount3a;
+  5391		} else {
+  5392			/* Nojournal mode, all journal mount options are illegal */
+  5393			if (test_opt(sb, JOURNAL_ASYNC_COMMIT)) {
+  5394				ext4_msg(sb, KERN_ERR, "can't mount with "
+  5395					 "journal_async_commit, fs mounted w/o journal");
+  5396				goto failed_mount3a;
+  5397			}
+  5398	
+  5399			if (test_opt2(sb, EXPLICIT_JOURNAL_CHECKSUM)) {
+  5400				ext4_msg(sb, KERN_ERR, "can't mount with "
+  5401					 "journal_checksum, fs mounted w/o journal");
+  5402				goto failed_mount3a;
+  5403			}
+  5404			if (sbi->s_commit_interval != JBD2_DEFAULT_MAX_COMMIT_AGE*HZ) {
+  5405				ext4_msg(sb, KERN_ERR, "can't mount with "
+  5406					 "commit=%lu, fs mounted w/o journal",
+  5407					 sbi->s_commit_interval / HZ);
+  5408				goto failed_mount3a;
+  5409			}
+  5410			if (EXT4_MOUNT_DATA_FLAGS &
+  5411			    (sbi->s_mount_opt ^ sbi->s_def_mount_opt)) {
+  5412				ext4_msg(sb, KERN_ERR, "can't mount with "
+  5413					 "data=, fs mounted w/o journal");
+  5414				goto failed_mount3a;
+  5415			}
+  5416			sbi->s_def_mount_opt &= ~EXT4_MOUNT_JOURNAL_CHECKSUM;
+  5417			clear_opt(sb, JOURNAL_CHECKSUM);
+  5418			clear_opt(sb, DATA_FLAGS);
+  5419			clear_opt2(sb, JOURNAL_FAST_COMMIT);
+  5420			sbi->s_journal = NULL;
+  5421			needs_recovery = 0;
+  5422		}
+  5423	
+  5424		if (!test_opt(sb, NO_MBCACHE)) {
+  5425			sbi->s_ea_block_cache = ext4_xattr_create_cache();
+  5426			if (!sbi->s_ea_block_cache) {
+  5427				ext4_msg(sb, KERN_ERR,
+  5428					 "Failed to create ea_block_cache");
+  5429				err = -EINVAL;
+  5430				goto failed_mount_wq;
+  5431			}
+  5432	
+  5433			if (ext4_has_feature_ea_inode(sb)) {
+  5434				sbi->s_ea_inode_cache = ext4_xattr_create_cache();
+  5435				if (!sbi->s_ea_inode_cache) {
+  5436					ext4_msg(sb, KERN_ERR,
+  5437						 "Failed to create ea_inode_cache");
+  5438					err = -EINVAL;
+  5439					goto failed_mount_wq;
+  5440				}
+  5441			}
+  5442		}
+  5443	
+  5444		/*
+  5445		 * Get the # of file system overhead blocks from the
+  5446		 * superblock if present.
+  5447		 */
+  5448		sbi->s_overhead = le32_to_cpu(es->s_overhead_clusters);
+  5449		/* ignore the precalculated value if it is ridiculous */
+  5450		if (sbi->s_overhead > ext4_blocks_count(es))
+  5451			sbi->s_overhead = 0;
+  5452		/*
+  5453		 * If the bigalloc feature is not enabled recalculating the
+  5454		 * overhead doesn't take long, so we might as well just redo
+  5455		 * it to make sure we are using the correct value.
+  5456		 */
+  5457		if (!ext4_has_feature_bigalloc(sb))
+  5458			sbi->s_overhead = 0;
+  5459		if (sbi->s_overhead == 0) {
+  5460			err = ext4_calculate_overhead(sb);
+  5461			if (err)
+  5462				goto failed_mount_wq;
+  5463		}
+  5464	
+  5465		/*
+  5466		 * The maximum number of concurrent works can be high and
+  5467		 * concurrency isn't really necessary.  Limit it to 1.
+  5468		 */
+  5469		EXT4_SB(sb)->rsv_conversion_wq =
+  5470			alloc_workqueue("ext4-rsv-conversion", WQ_MEM_RECLAIM | WQ_UNBOUND, 1);
+  5471		if (!EXT4_SB(sb)->rsv_conversion_wq) {
+  5472			printk(KERN_ERR "EXT4-fs: failed to create workqueue\n");
+  5473			err = -ENOMEM;
+  5474			goto failed_mount4;
+  5475		}
+  5476	
+  5477		/*
+  5478		 * The jbd2_journal_load will have done any necessary log recovery,
+  5479		 * so we can safely mount the rest of the filesystem now.
+  5480		 */
+  5481	
+  5482		root = ext4_iget(sb, EXT4_ROOT_INO, EXT4_IGET_SPECIAL);
+  5483		if (IS_ERR(root)) {
+  5484			ext4_msg(sb, KERN_ERR, "get root inode failed");
+  5485			err = PTR_ERR(root);
+  5486			root = NULL;
+  5487			goto failed_mount4;
+  5488		}
+  5489		if (!S_ISDIR(root->i_mode) || !root->i_blocks || !root->i_size) {
+  5490			ext4_msg(sb, KERN_ERR, "corrupt root inode, run e2fsck");
+  5491			iput(root);
+  5492			err = -EFSCORRUPTED;
+  5493			goto failed_mount4;
+  5494		}
+  5495	
+> 5496		if (sb->s_encoding)
+  5497			sb->s_d_op = &generic_ci_dentry_ops;
+  5498	
+  5499		sb->s_root = d_make_root(root);
+  5500		if (!sb->s_root) {
+  5501			ext4_msg(sb, KERN_ERR, "get root dentry failed");
+  5502			err = -ENOMEM;
+  5503			goto failed_mount4;
+  5504		}
+  5505	
+  5506		err = ext4_setup_super(sb, es, sb_rdonly(sb));
+  5507		if (err == -EROFS) {
+  5508			sb->s_flags |= SB_RDONLY;
+  5509		} else if (err)
+  5510			goto failed_mount4a;
+  5511	
+  5512		ext4_set_resv_clusters(sb);
+  5513	
+  5514		if (test_opt(sb, BLOCK_VALIDITY)) {
+  5515			err = ext4_setup_system_zone(sb);
+  5516			if (err) {
+  5517				ext4_msg(sb, KERN_ERR, "failed to initialize system "
+  5518					 "zone (%d)", err);
+  5519				goto failed_mount4a;
+  5520			}
+  5521		}
+  5522		ext4_fc_replay_cleanup(sb);
+  5523	
+  5524		ext4_ext_init(sb);
+  5525	
+  5526		/*
+  5527		 * Enable optimize_scan if number of groups is > threshold. This can be
+  5528		 * turned off by passing "mb_optimize_scan=0". This can also be
+  5529		 * turned on forcefully by passing "mb_optimize_scan=1".
+  5530		 */
+  5531		if (!(ctx->spec & EXT4_SPEC_mb_optimize_scan)) {
+  5532			if (sbi->s_groups_count >= MB_DEFAULT_LINEAR_SCAN_THRESHOLD)
+  5533				set_opt2(sb, MB_OPTIMIZE_SCAN);
+  5534			else
+  5535				clear_opt2(sb, MB_OPTIMIZE_SCAN);
+  5536		}
+  5537	
+  5538		err = ext4_mb_init(sb);
+  5539		if (err) {
+  5540			ext4_msg(sb, KERN_ERR, "failed to initialize mballoc (%d)",
+  5541				 err);
+  5542			goto failed_mount5;
+  5543		}
+  5544	
+  5545		/*
+  5546		 * We can only set up the journal commit callback once
+  5547		 * mballoc is initialized
+  5548		 */
+  5549		if (sbi->s_journal)
+  5550			sbi->s_journal->j_commit_callback =
+  5551				ext4_journal_commit_callback;
+  5552	
+  5553		err = ext4_percpu_param_init(sbi);
+  5554		if (err)
+  5555			goto failed_mount6;
+  5556	
+  5557		if (ext4_has_feature_flex_bg(sb))
+  5558			if (!ext4_fill_flex_info(sb)) {
+  5559				ext4_msg(sb, KERN_ERR,
+  5560				       "unable to initialize "
+  5561				       "flex_bg meta info!");
+  5562				err = -ENOMEM;
+  5563				goto failed_mount6;
+  5564			}
+  5565	
+  5566		err = ext4_register_li_request(sb, first_not_zeroed);
+  5567		if (err)
+  5568			goto failed_mount6;
+  5569	
+  5570		err = ext4_register_sysfs(sb);
+  5571		if (err)
+  5572			goto failed_mount7;
+  5573	
+  5574		err = ext4_init_orphan_info(sb);
+  5575		if (err)
+  5576			goto failed_mount8;
+  5577	#ifdef CONFIG_QUOTA
+  5578		/* Enable quota usage during mount. */
+  5579		if (ext4_has_feature_quota(sb) && !sb_rdonly(sb)) {
+  5580			err = ext4_enable_quotas(sb);
+  5581			if (err)
+  5582				goto failed_mount9;
+  5583		}
+  5584	#endif  /* CONFIG_QUOTA */
+  5585	
+  5586		/*
+  5587		 * Save the original bdev mapping's wb_err value which could be
+  5588		 * used to detect the metadata async write error.
+  5589		 */
+  5590		spin_lock_init(&sbi->s_bdev_wb_lock);
+  5591		errseq_check_and_advance(&sb->s_bdev->bd_inode->i_mapping->wb_err,
+  5592					 &sbi->s_bdev_wb_err);
+  5593		EXT4_SB(sb)->s_mount_state |= EXT4_ORPHAN_FS;
+  5594		ext4_orphan_cleanup(sb, es);
+  5595		EXT4_SB(sb)->s_mount_state &= ~EXT4_ORPHAN_FS;
+  5596		/*
+  5597		 * Update the checksum after updating free space/inode counters and
+  5598		 * ext4_orphan_cleanup. Otherwise the superblock can have an incorrect
+  5599		 * checksum in the buffer cache until it is written out and
+  5600		 * e2fsprogs programs trying to open a file system immediately
+  5601		 * after it is mounted can fail.
+  5602		 */
+  5603		ext4_superblock_csum_set(sb);
+  5604		if (needs_recovery) {
+  5605			ext4_msg(sb, KERN_INFO, "recovery complete");
+  5606			err = ext4_mark_recovery_complete(sb, es);
+  5607			if (err)
+  5608				goto failed_mount10;
+  5609		}
+  5610	
+  5611		if (test_opt(sb, DISCARD) && !bdev_max_discard_sectors(sb->s_bdev))
+  5612			ext4_msg(sb, KERN_WARNING,
+  5613				 "mounting with \"discard\" option, but the device does not support discard");
+  5614	
+  5615		if (es->s_error_count)
+  5616			mod_timer(&sbi->s_err_report, jiffies + 300*HZ); /* 5 minutes */
+  5617	
+  5618		/* Enable message ratelimiting. Default is 10 messages per 5 secs. */
+  5619		ratelimit_state_init(&sbi->s_err_ratelimit_state, 5 * HZ, 10);
+  5620		ratelimit_state_init(&sbi->s_warning_ratelimit_state, 5 * HZ, 10);
+  5621		ratelimit_state_init(&sbi->s_msg_ratelimit_state, 5 * HZ, 10);
+  5622		atomic_set(&sbi->s_warning_count, 0);
+  5623		atomic_set(&sbi->s_msg_count, 0);
+  5624	
+  5625		return 0;
+  5626	
+  5627	failed_mount10:
+  5628		ext4_quotas_off(sb, EXT4_MAXQUOTAS);
+  5629	failed_mount9: __maybe_unused
+  5630		ext4_release_orphan_info(sb);
+  5631	failed_mount8:
+  5632		ext4_unregister_sysfs(sb);
+  5633		kobject_put(&sbi->s_kobj);
+  5634	failed_mount7:
+  5635		ext4_unregister_li_request(sb);
+  5636	failed_mount6:
+  5637		ext4_mb_release(sb);
+  5638		ext4_flex_groups_free(sbi);
+  5639		ext4_percpu_param_destroy(sbi);
+  5640	failed_mount5:
+  5641		ext4_ext_release(sb);
+  5642		ext4_release_system_zone(sb);
+  5643	failed_mount4a:
+  5644		dput(sb->s_root);
+  5645		sb->s_root = NULL;
+  5646	failed_mount4:
+  5647		ext4_msg(sb, KERN_ERR, "mount failed");
+  5648		if (EXT4_SB(sb)->rsv_conversion_wq)
+  5649			destroy_workqueue(EXT4_SB(sb)->rsv_conversion_wq);
+  5650	failed_mount_wq:
+  5651		ext4_xattr_destroy_cache(sbi->s_ea_inode_cache);
+  5652		sbi->s_ea_inode_cache = NULL;
+  5653	
+  5654		ext4_xattr_destroy_cache(sbi->s_ea_block_cache);
+  5655		sbi->s_ea_block_cache = NULL;
+  5656	
+  5657		if (sbi->s_journal) {
+  5658			/* flush s_sb_upd_work before journal destroy. */
+  5659			flush_work(&sbi->s_sb_upd_work);
+  5660			jbd2_journal_destroy(sbi->s_journal);
+  5661			sbi->s_journal = NULL;
+  5662		}
+  5663	failed_mount3a:
+  5664		ext4_es_unregister_shrinker(sbi);
+  5665	failed_mount3:
+  5666		/* flush s_sb_upd_work before sbi destroy */
+  5667		flush_work(&sbi->s_sb_upd_work);
+  5668		del_timer_sync(&sbi->s_err_report);
+  5669		ext4_stop_mmpd(sbi);
+  5670		ext4_group_desc_free(sbi);
+  5671	failed_mount:
+  5672		if (sbi->s_chksum_driver)
+  5673			crypto_free_shash(sbi->s_chksum_driver);
+  5674	
+
 -- 
-2.25.1
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
 
 _______________________________________________
