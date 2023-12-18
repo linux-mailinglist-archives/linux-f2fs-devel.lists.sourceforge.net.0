@@ -2,95 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BFDD816DDA
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Dec 2023 13:22:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A807C8173A2
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Dec 2023 15:33:38 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rFCdb-0007CQ-FQ;
-	Mon, 18 Dec 2023 12:22:23 +0000
+	id 1rFEgT-0000ZA-B1;
+	Mon, 18 Dec 2023 14:33:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rFCdX-0007CK-7H
+ (envelope-from <hch@lst.de>) id 1rFEgQ-0000Z3-OV
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 18 Dec 2023 12:22:19 +0000
+ Mon, 18 Dec 2023 14:33:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TrtGHWM7El+r/la5tKI3bFB607iy5g+ENeW6/T3zybY=; b=c/aPodGCkqUPfV3km7lb9sVf+7
- bmqScFVfwXhOiHBMH8YnIiPRcL5DSIcI6aTM7MF/1CZfUl8RAfbbDaBofo2MS4jDjdafiYn+BLRT+
- 790GutFVSgL+MwAFbOsF21fbQOBjELWDJ2Q317tg43vTnQoxUn2gWBmjdbVkC2Dy6FrU=;
+ bh=/jjBsrYRAddTbQkFQfTX1XQ2G9N0xboaukV6pMBgTX0=; b=TIaBI8xjJEHWTmoi1wBfDbQNcK
+ GkaOKqlOrNkKoUoVpLtvNy4T8b/KSbbkOt4vv2fq6N8aNHrn++eL9t5yUd8NuOiypSmJ5cF78LJLu
+ qnokSsXT7nuED7RLuHXEaqPwdp8IMfkdsf6aAsdV8CuSAtBTsOBeYvrfmrWYsOnxxA8k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TrtGHWM7El+r/la5tKI3bFB607iy5g+ENeW6/T3zybY=; b=W9OG34GDbsZZFJnbnYTSVcrIVN
- ghN1zEnHk9zA2/aWxGhAGRJkw9g8xCFT4xi4ucBryxQOOgZC0q6pQzeIHL8Wn45T6cJAOA07YCs0S
- a0H7wF9GwCg6EohrPPxHLFmqSnZPkMEciWNlWnXzab92mWRXxTDmh+/clLnWn2Ssa+p0=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=/jjBsrYRAddTbQkFQfTX1XQ2G9N0xboaukV6pMBgTX0=; b=UjQSEwiSzSy3sDE+NON73e3Sas
+ kQeEZ6TENNOgwxH6nDBX/XUwaPdwrl3tqNDG6Gt2WJm/lRzgxMyAPjeP/eFohgrhPuN57d5KIpGWZ
+ R1S2etjjIyV8XbyfkOd7eSy6uNh2ecu3NvtQ2Mt6VMWDMRu0GSurT2pB//ozxcs9KkLY=;
+Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rFCdR-0006hU-7h for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 18 Dec 2023 12:22:15 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C88D060BC9;
- Mon, 18 Dec 2023 12:22:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C7AECC433C8;
- Mon, 18 Dec 2023 12:22:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1702902122;
- bh=3mazpgyORGhF3jEjGhny3Nxv5ONTjfktTe319AXAMV4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=uxto+SCHCEvQ4kQpuRaIQeQkRGn/Lw1oA1OO/T0Ioi9OgyVHpwzlrz7aD263PgRJI
- EsoywLyVqgWXo2qCKxq998DNlHi7OjIUZzHg45/SMii204Zwj/7ADBSxWEW76Qge4O
- 4PgHqeB/hxhZ9m1oZj6UCct2mM5OaTWbtn557w0hGGQiQ4iI1PmPkiD9VOmavCKDC0
- 08pKD+qPq4fnN5Kg7ij1ObbNredrL3ocXwTgYI2XW64KBR/cM6k4NpiX/8krFW61eY
- 6S1lsUTkWDKRTkknuH4HbBPaeGbAlwIYM79r3hKBha4mAwnuJhq6IWHnQBiYjc7PR0
- 7vkWcieSrqYoQ==
-Message-ID: <15ed1a61-a707-4ec6-8783-205388d8345f@kernel.org>
-Date: Mon, 18 Dec 2023 20:21:57 +0800
+ id 1rFEgM-0005wv-3c for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 18 Dec 2023 14:33:26 +0000
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id DE8E168AFE; Mon, 18 Dec 2023 15:33:09 +0100 (CET)
+Date: Mon, 18 Dec 2023 15:33:09 +0100
+From: Christoph Hellwig <hch@lst.de>
+To: Damien Le Moal <dlemoal@kernel.org>
+Message-ID: <20231218143309.GA16810@lst.de>
+References: <20231217165359.604246-1-hch@lst.de>
+ <20231217165359.604246-4-hch@lst.de>
+ <09f1adfe-90b5-445c-b7f6-ae4fc7a9666a@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
-References: <1702897676-12851-1-git-send-email-zhiguo.niu@unisoc.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <1702897676-12851-1-git-send-email-zhiguo.niu@unisoc.com>
-X-Spam-Score: -5.3 (-----)
+Content-Disposition: inline
+In-Reply-To: <09f1adfe-90b5-445c-b7f6-ae4fc7a9666a@kernel.org>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/12/18 19:07,
- Zhiguo Niu wrote: > The current pending_discard
- attr just only shows the discard_cmd_cnt > information. More discard status
- can be shown so that we can check > them through sysfs [...] 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  On Mon, Dec 18, 2023 at 06:48:43PM +0900,
+ Damien Le Moal wrote:
+ > > - if (devip->zmodel == BLK_ZONED_HA) > > - arr[4] = 1 << 4; /* zoned
+ field = 01b */ > > I think we should keep everything related to [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rFCdR-0006hU-7h
-Subject: Re: [f2fs-dev] [PATCH V3] f2fs: show more discard status by sysfs
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1rFEgM-0005wv-3c
+Subject: Re: [f2fs-dev] [PATCH 3/5] block: remove support for the host aware
+ zone model
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,22 +83,24 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ke.wang@unisoc.com, niuzhiguo84@gmail.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Jens Axboe <axboe@kernel.dk>, dm-devel@lists.linux.dev,
+ linux-scsi@vger.kernel.org, "Martin K. Petersen" <martin.petersen@oracle.com>,
+ linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org,
+ virtualization@lists.linux.dev, Stefan Hajnoczi <stefanha@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, linux-f2fs-devel@lists.sourceforge.net,
+ Christoph Hellwig <hch@lst.de>, linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/12/18 19:07, Zhiguo Niu wrote:
-> The current pending_discard attr just only shows the discard_cmd_cnt
-> information. More discard status can be shown so that we can check
-> them through sysfs when needed.
+On Mon, Dec 18, 2023 at 06:48:43PM +0900, Damien Le Moal wrote:
+> > -	if (devip->zmodel == BLK_ZONED_HA)
+> > -		arr[4] = 1 << 4;	/* zoned field = 01b */
 > 
-> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+> I think we should keep everything related to HA in scsi debug as that is an easy
+> way to test the block layer and scsi. no ?
 
-Reviewed-by: Chao Yu <chao@kernel.org>
-
-Thanks,
+Yes.
 
 
 _______________________________________________
