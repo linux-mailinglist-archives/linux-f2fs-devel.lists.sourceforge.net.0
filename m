@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15F888193EE
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 19 Dec 2023 23:56:32 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3681C819441
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Dec 2023 00:01:07 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rFj0k-00070x-Ia;
-	Tue, 19 Dec 2023 22:56:25 +0000
+	id 1rFj5A-0005Jj-9b;
+	Tue, 19 Dec 2023 23:01:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1rFj0j-00070r-Ih
+ (envelope-from <ebiggers@kernel.org>) id 1rFj56-0005Ja-6G
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 19 Dec 2023 22:56:24 +0000
+ Tue, 19 Dec 2023 23:00:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hsJw39T9kLzgQ5bIf9Hg2WdIRhpd1/AAdToIOqp6/tY=; b=isFMqvBA3EQltpAY9kym6rpBK2
- WxVrHG0Qc3E536w053NbyjVLdB+AN/ZNiIwWZ/By8qzjLMSvj68jALp/M5heyGV2g6/2yTAshfKRR
- kNocSoyxNK0BDiiW1CY7gjyjfSKjiBpBrr2agJIpi6hQOM2tVgIpvjrE/eQnLrarYrPo=;
+ bh=cPZjcFe2UtpHKwNCjX+zMVytkrN625ypejHKQAKt4LE=; b=IZNyg7nWeYKGdN67Xj55MYsicu
+ pDrgdSxhetZ6lGBcI60kUn85l0mQQ3VsDKSJ1Zgx6mdUjtdz414x+2v65uLO10/jSRngCUgWXjMOm
+ Qxlhh8a7FM85u4LsyRwePNAiSmjLr+wm7rviTCIL29gSAj2QDPYnj1G6PnBQSWJyY6d4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,68 +31,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hsJw39T9kLzgQ5bIf9Hg2WdIRhpd1/AAdToIOqp6/tY=; b=Xi4HTNvSyvhrucLW/Ebt36cwQA
- OBWhcO2GPKdx6770Yef/gR3Jcip8xsbfjPgKHzBLE6qutDke7v2rsvc7wQ5YcO1xRPx7UJvUrvj7y
- cRkg11M9CZg3o8WvCeKIq/LGUBTfjzAZHV51gVUHuuCdETVPPaT3abxQDc1C9+9xxfnk=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=cPZjcFe2UtpHKwNCjX+zMVytkrN625ypejHKQAKt4LE=; b=V05bgwvlNW8OylDOiKQU5jTEfq
+ V7payXOd/MMedpRctxe6CR442Xzkw+WFno+X49sJik2DTz141FmnojX/qbNSeOdsicEezlq68Spig
+ xbt8+qGvu6k9vQzuAkZL+icRvVrRAV1qoOlbqP5JyEF/MQ3vlW7hEmxR8ar11NxKc4hc=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rFj0h-0001Ip-PC for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 19 Dec 2023 22:56:24 +0000
+ id 1rFj54-0001ng-OI for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 19 Dec 2023 23:00:55 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 29645CE1AB3;
- Tue, 19 Dec 2023 22:56:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0D4BFC433C7;
- Tue, 19 Dec 2023 22:56:11 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id E34E261486;
+ Tue, 19 Dec 2023 23:00:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22131C433C8;
+ Tue, 19 Dec 2023 23:00:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1703026571;
- bh=1KsVpI26Wy0emSPFohmEhY9TLu8feCCZJtIibblPW04=;
+ s=k20201202; t=1703026841;
+ bh=hHJulODtDt71xBDQ4Kigub7raLKaCHtkE0PAl5iwWM4=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=RaB2a4GW2tUetf4bOxFILnQyWYM33jV3DBMa354fhOl6Z3uVP5FGxm2oMt0P669Rx
- KhlHLCVk2012BYjCdKhL12/gdt/fFQDdNb4dUtKAlU1zTFYkfoeMen9/J7mLn/e4uy
- FSBd03r1T+IEST4c6dmc+ptQFP+bqhjRl3I3zHOnFzJIoKuXZoR2rNL2p4niND4jn9
- 8A/wpofnnPdEx6z50q8pG+HQGPxmf2jevYxgkGMB15dcPQ27JUExUqiZPOfH3+jTm1
- mwPD3Yq80OQiodZMbXzAHQwfwuAq7wD6rUfIvt+l5wVw3HjrHiABX4zqUYRTRRUl20
- Nd6BtGxeO7Wtw==
-Date: Tue, 19 Dec 2023 15:56:09 -0700
+ b=N1paRRI5Tq0qTgXygPdUnER2lIsTcDSHZucDxNTTgprXGzrFxtuZXwheJoqsQE/ck
+ JlmlAsbU6ShcUl0ot2RHvMyU7yNp8ESSUj+HWGTbnHmWeY/BB/SIjBY5voUXjdpGJZ
+ Ya0JA5TWQfsVxYVuTGts0QiTbQMxEyjMvvDV5hVslNiGUuS1awPU0Edr9n+FT8wiTY
+ GQamGF11orinqxEa72HXGmSHFecdznNX2svTHt+1umgfV57K+mj3SmECLUz3p4Lk2+
+ ExIfEvAWEOFNT3wdivWuiQ4eh9SvmEhMt5arWLAYhbUIC+TmZv5Hd1dIZVy+lhJP3q
+ oNOj4RoX3BeNg==
+Date: Tue, 19 Dec 2023 16:00:29 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Gabriel Krisman Bertazi <krisman@suse.de>
-Message-ID: <20231219225609.GF38652@quark.localdomain>
+Message-ID: <20231219230029.GG38652@quark.localdomain>
 References: <20231215211608.6449-1-krisman@suse.de>
- <20231215211608.6449-5-krisman@suse.de>
+ <20231215211608.6449-3-krisman@suse.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20231215211608.6449-5-krisman@suse.de>
-X-Spam-Score: -2.6 (--)
+In-Reply-To: <20231215211608.6449-3-krisman@suse.de>
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Dec 15, 2023 at 04:16:04PM -0500, Gabriel Krisman
- Bertazi wrote: > In preparation to allow filesystems to set this through
- sb->s_d_op, 
- > expose the symbol directly to the filesystems. > > Sign [...] 
- Content analysis details:   (-2.6 points, 6.0 required)
+ Content preview:  On Fri, Dec 15, 2023 at 04:16:02PM -0500, Gabriel Krisman
+ Bertazi wrote: > fscrypt dentries are always valid once the key is available.
+ Since the > key cannot be removed without evicting the dentry, w [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rFj0h-0001Ip-PC
-Subject: Re: [f2fs-dev] [PATCH v2 4/8] libfs: Expose generic_ci_dentry_ops
- outside of libfs
+X-Headers-End: 1rFj54-0001ng-OI
+Subject: Re: [f2fs-dev] [PATCH v2 2/8] fscrypt: Drop d_revalidate if key is
+ available
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,31 +109,39 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Dec 15, 2023 at 04:16:04PM -0500, Gabriel Krisman Bertazi wrote:
-> In preparation to allow filesystems to set this through sb->s_d_op,
-> expose the symbol directly to the filesystems.
+On Fri, Dec 15, 2023 at 04:16:02PM -0500, Gabriel Krisman Bertazi wrote:
+> fscrypt dentries are always valid once the key is available.  Since the
+> key cannot be removed without evicting the dentry, we don't need to keep
+> retrying to revalidate it.
 > 
 > Signed-off-by: Gabriel Krisman Bertazi <krisman@suse.de>
-> ---
->  fs/libfs.c         | 2 +-
->  include/linux/fs.h | 1 +
->  2 files changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/libfs.c b/fs/libfs.c
-> index 52c944173e57..b8ecada3a5b2 100644
-> --- a/fs/libfs.c
-> +++ b/fs/libfs.c
-> @@ -1765,7 +1765,7 @@ static int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str)
->  	return 0;
->  }
->  
-> -static const struct dentry_operations generic_ci_dentry_ops = {
-> +const struct dentry_operations generic_ci_dentry_ops = {
->  	.d_hash = generic_ci_d_hash,
->  	.d_compare = generic_ci_d_compare,
 
-This needs an EXPORT_SYMBOL_GPL(), since the filesystems that will use this can
-be loadable modules.
+IIUC, this patch minimizes the overhead of fscrypt_d_revalidate() both for
+encrypted and unencrypted dentries.  That's what's needed (seeing as this series
+makes fscrypt_d_revalidate be installed on unencrypted dentries), but the commit
+message only mentions the encrypted case.  It would be helpful to mention both.
+
+> ---
+>  fs/crypto/fname.c | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/crypto/fname.c b/fs/crypto/fname.c
+> index 7b3fc189593a..0457ba2d7d76 100644
+> --- a/fs/crypto/fname.c
+> +++ b/fs/crypto/fname.c
+> @@ -591,8 +591,15 @@ int fscrypt_d_revalidate(struct dentry *dentry, unsigned int flags)
+>  	 * reverting to no-key names without evicting the directory's inode
+>  	 * -- which implies eviction of the dentries in the directory.
+>  	 */
+> -	if (!(dentry->d_flags & DCACHE_NOKEY_NAME))
+> +	if (!(dentry->d_flags & DCACHE_NOKEY_NAME)) {
+> +		/*
+> +		 * If fscrypt is the only feature requiring
+> +		 * revalidation for this dentry, we can just disable it.
+> +		 */
+> +		if (dentry->d_op->d_revalidate == &fscrypt_d_revalidate)
+
+No need for the & in &fscrypt_d_revalidate.
 
 - Eric
 
