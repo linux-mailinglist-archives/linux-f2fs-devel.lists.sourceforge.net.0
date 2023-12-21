@@ -2,144 +2,120 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F41981AE8A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Dec 2023 06:57:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E553B81AEE6
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Dec 2023 07:49:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rGC37-0000Lz-6f;
-	Thu, 21 Dec 2023 05:56:49 +0000
+	id 1rGCsD-0002cs-0g;
+	Thu, 21 Dec 2023 06:49:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yonggil.song@samsung.com>) id 1rGC35-0000Lt-Fm
+ (envelope-from <haokexin@gmail.com>) id 1rGCsB-0002cm-4g
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 21 Dec 2023 05:56:47 +0000
+ Thu, 21 Dec 2023 06:49:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- Date:Message-ID:To:From:Sender:Reply-To:Subject:Mime-Version:Cc:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PfgH9IEjjrpOGSzq5Vmy1Ag86e6ztIeWWXYEJNjG/qE=; b=BEMB3G5dTBcebM2kjfbVJAinJG
- uAG2HgOfYFMRjz+H1I+FlMekA1F4XJmSMlOOckWq4A5Jm3VFzXW1PgvoMzETgDOIRfMuU0ooPq+fQ
- kE75C4FBev4IP3WdHFuXKdDmY0pece8XsCM+xRt0Cd2pi9+qJXxZGepqPEGMWRMHbmRQ=;
+ bh=8+mMi4N9KQ1zevhr1u/oJ5yorKjkYCEKBRjsAuTkitA=; b=BeMAwpxrjLQth8bfTNNQemsOAH
+ Ggsei1CPCtFrRKc4M8P6zgyLSSLBaevQB8CHjoA074sQdSEXtwDgi/m1xSzL1TvxPkafXTjUIjq3i
+ N2Pgm9j8Bw3eMJrSfMSF1uPA6qtwwlXnKIVIErDWfaXNtQhQ2RGgbts+Tv1LA66M7Xqc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:To:From
- :Sender:Reply-To:Subject:Mime-Version:Cc:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=PfgH9IEjjrpOGSzq5Vmy1Ag86e6ztIeWWXYEJNjG/qE=; b=F
- kNXlPrwDq2uQ1r1NkBNCyDUaUZhDxfUfqrN2Ab4pCQIJ8Y+s1dXVvn8VIxy1MGW0lSJsXyrSlC5x2
- vEzFkFcaFLdKUspdC6cusFjeGmH3VbPrIGo4vOQZ4NLPT5VhhyhgVz+jp+g/cczyHtSNA/ulh3RQ+
- N6cfOnxJThURLjfI=;
-Received: from mailout2.samsung.com ([203.254.224.25])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=8+mMi4N9KQ1zevhr1u/oJ5yorKjkYCEKBRjsAuTkitA=; b=A
+ IkEoD75DumSSLO1mCHOoMCK/t60K9g76Az+2Tg5ksUe7iz3xhFRwkhrBK1955vBZgHr03Pg4FM38x
+ 8Mg0OeLvT8irXgaSxV7nZfRN64Oi7zqHGmUsxQJldy8fSbRQ0RDp2CTyP8gv/JcqQBr3Hx771Yj4g
+ yeYxqKi9+qCYha3w=;
+Received: from mail-qv1-f52.google.com ([209.85.219.52])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rGC31-0001Y4-PJ for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 21 Dec 2023 05:56:47 +0000
-Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20231221055631epoutp0272ba45ee0c020890544b89a7204adca6~iwyl1aDrR0908909089epoutp02b
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rGCsA-0003Pf-VG for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 21 Dec 2023 06:49:35 +0000
+Received: by mail-qv1-f52.google.com with SMTP id
+ 6a1803df08f44-67f6729a57fso11929016d6.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 21 Dec 2023 05:56:31 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20231221055631epoutp0272ba45ee0c020890544b89a7204adca6~iwyl1aDrR0908909089epoutp02b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1703138191;
- bh=PfgH9IEjjrpOGSzq5Vmy1Ag86e6ztIeWWXYEJNjG/qE=;
- h=Subject:Reply-To:From:To:Date:References:From;
- b=puWWaEl1EtVkmQ6HsrvozLo8tvF/f6d1ezD+lycEJ/S3k4wkwfcyxFnLQiBn+GgBO
- XYA0zfqyfLNlOxe0hUw0giGFV8zwon0tOfBWizG58AZpFKy4kWrNKRVeWybCQ5CZdM
- YTRjlgssO49WD0611Y0S5xk2sjzohetvnsPh/Suc=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas2p4.samsung.com (KnoxPortal) with ESMTP id
- 20231221055631epcas2p46732e2dbd5148bfa9d0e8f80e943252b~iwylN-CtQ1320913209epcas2p4n;
- Thu, 21 Dec 2023 05:56:31 +0000 (GMT)
-Received: from epsmgec2p1.samsung.com (unknown [182.195.36.97]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4SwfnV4mJrz4x9Q6; Thu, 21 Dec
- 2023 05:56:30 +0000 (GMT)
-X-AuditID: b6c32a43-4b3ff700000021c8-2f-6583d38e89e9
-Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
- epsmgec2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 5F.A5.08648.E83D3856; Thu, 21 Dec 2023 14:56:30 +0900 (KST)
-Mime-Version: 1.0
-From: Yonggil Song <yonggil.song@samsung.com>
-To: "jaegeuk@kernel.org" <jaegeuk@kernel.org>, "chao@kernel.org"
- <chao@kernel.org>, "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>, Seokhwan Kim <sukka.kim@samsung.com>, Daejun
- Park <daejun7.park@samsung.com>, Siwoo Jung <siu.jung@samsung.com>
-X-Priority: 3
-X-Content-Kind-Code: NORMAL
-X-CPGS-Detection: blocking_info_exchange
-X-Drm-Type: N,general
-X-Msg-Generator: Mail
-X-Msg-Type: PERSONAL
-X-Reply-Demand: N
-Message-ID: <20231221055630epcms2p25ae1ac5e4509d5c8ba7f338b51592e53@epcms2p2>
-Date: Thu, 21 Dec 2023 14:56:30 +0900
-X-CMS-MailID: 20231221055630epcms2p25ae1ac5e4509d5c8ba7f338b51592e53
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-X-CPGSPASS: Y
-X-CPGSPASS: Y
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpjk+LIzCtJLcpLzFFi42LZdljTVLfvcnOqwafZyhanp55lsnh5SNNi
- 1YNwiyfrZzFbXFrkbnF51xw2i/MTXzNZrOqYy2gx9fwRJgdOj02rOtk8di/4zOTRt2UVo8fn
- TXIBLFHZNhmpiSmpRQqpecn5KZl56bZK3sHxzvGmZgaGuoaWFuZKCnmJuam2Si4+AbpumTlA
- hygplCXmlAKFAhKLi5X07WyK8ktLUhUy8otLbJVSC1JyCswL9IoTc4tL89L18lJLrAwNDIxM
- gQoTsjOW3pct+O9UsfHHHJYGxh0mXYycHBICJhK3f31j62Lk4hAS2MEo0f/uN3sXIwcHr4Cg
- xN8dwiA1wgKmEnMabzOC2EICShLXDvSyQMT1JTYvXsYOYrMJ6Er83bAczBYRuMsk0dftDjGf
- V2JG+1MWCFtaYvvyrYwQtobEj2W9zBC2qMTN1W/ZYez3x+ZD1YhItN47C1UjKPHg526ouKTE
- okPnmSDsfIm/K66zQdg1Elsb2qDi+hLXOjaC7eUV8JWYM6MVzGYRUJX4PWcNK0SNi8SDFRDz
- mQXkJba/ncMM8jqzgKbE+l36IKaEgLLEkVssEBV8Eh2H/7LDfNWw8TdW9o55T6AuUJPYvGkz
- 1CYZiQuP26Cu95DYs/Qv0wRGxVmIcJ6F5IZZCDcsYGRexSiWWlCcm56abFRgCI/Z5PzcTYzg
- BKnlvIPxyvx/eocYmTgYDzFKcDArifDu7WxKFeJNSaysSi3Kjy8qzUktPsRoCvT9RGYp0eR8
- YIrOK4k3NLE0MDEzMzQ3MjUwVxLnvdc6N0VIID2xJDU7NbUgtQimj4mDU6qBqW/jRe/P31IO
- xv2Qexz815GHQ/zb6rX/na5LsQRW7Jz6LSLbL1fyg4OXhKpJt0j2k60nmW8Xueb7/hVea3Xj
- 7PKOREafOW/Weew5Hs1Xoi8QkLOM4+1xNoH/xcHCT3cwa3LYKDLvO/vnoeultTlrlbX3HAmQ
- /XC3aN99w/4E152/V/G/qPsT1trZc3XHjlLv8uXPHn9NNRPaJ7YvbIviW2unK7VsxibZLZsn
- x5ibTv6k2fr4UsleZoPax/FmW7+tSj139ULJPmnbpXe5U1sLjjsHRQutLFr4+Nc+55rM443V
- uyxmT18rMbtj0yIXXoNw8bsKSqff/XU2mTsvmK012qLttcHMs4uOfWXc23BDTYmlOCPRUIu5
- qDgRAHf4dDoZBAAA
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231221055630epcms2p25ae1ac5e4509d5c8ba7f338b51592e53
-References: <CGME20231221055630epcms2p25ae1ac5e4509d5c8ba7f338b51592e53@epcms2p2>
-X-Spam-Score: -2.6 (--)
+ Wed, 20 Dec 2023 22:49:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1703141369; x=1703746169; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8+mMi4N9KQ1zevhr1u/oJ5yorKjkYCEKBRjsAuTkitA=;
+ b=Q/E6FBVqJnC9NPx3Ozxr55YowLPLBEtIbfLxlxwmjfGy16X0xR0oxo3Gi3a7njgNRZ
+ gcSCOzJNQns5OHfDwLn2TlUu9zwRb29ygsgEs5uZl+HosJB3VRn+ZqXuVckCH/sq8jTs
+ GK79qjfBs7Loe/nC9TQW8LrMWDNtRL8tH2lNSEHZ3aYcZsD8/3DVW8wdOMFiePQ5LGMQ
+ 7LJ9la9IJku4alOSwuR8tzGXdsWI0oS8sWXeUilSV3Sknkqt7DjL/TXN46wTVG9AjCiZ
+ +TX80HzmSOR5nok+YgYvBleR0unDAW/eVUH+BdliIoEYY5Kx8cyJjvphWzwXMJgmPWwn
+ Qk8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703141369; x=1703746169;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8+mMi4N9KQ1zevhr1u/oJ5yorKjkYCEKBRjsAuTkitA=;
+ b=AIkzLzyGuPNhVuD41u1hDw7dTLGpf/NKqm4ShHrGqKFWa3kEVh2LDftPOs0roluwfI
+ cmNTolciBeCDH9jVFu5DuiaJ0nPysyC2Hvcnxu2V6SqZzisUA2+ADVg2QZzrp1O3wNHS
+ ydVe/cB+1Az2s64RRqmuv+PkEpeFOWJaD03DVmOxyfK2plDFFkvOJRFZnqU+uga7mYtD
+ GZDRbbkUZW0MGIql4w1/VqEPDW9Qm18irbjKOllaw1S6pQA06jZ3e6BZz5XHCW314r/v
+ VCr4D9m1eXNF/BAL5L1EcyQq99RR/9cx7k6qBaEII52FbNO69TAcLTnqtMVHg//2ebpX
+ YpgA==
+X-Gm-Message-State: AOJu0Yx8kcPtiNJ3pD1CZWgPU6GvhoOeV0ohPRXzRqXp3wTMVLNJBK2Y
+ Dt2pP6K6BrnvTtpwq4GOH2BE4Yj+4qIxbg==
+X-Google-Smtp-Source: AGHT+IHOwV5URiC+YaaI2HMR/ywtmkUmzQU5yzHFvzd9S00MgGxvGfGEd6JgPoMNOj8R1HL8K5+nLA==
+X-Received: by 2002:a05:6214:194c:b0:67f:7c81:a5d3 with SMTP id
+ q12-20020a056214194c00b0067f7c81a5d3mr353406qvk.36.1703141368990; 
+ Wed, 20 Dec 2023 22:49:28 -0800 (PST)
+Received: from pek-lpggp6.wrs.com (unknown-105-121.windriver.com.
+ [147.11.105.121]) by smtp.gmail.com with ESMTPSA id
+ b2-20020ad45182000000b0067f48f2143csm436563qvp.53.2023.12.20.22.49.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Dec 2023 22:49:28 -0800 (PST)
+From: Kevin Hao <haokexin@gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Date: Thu, 21 Dec 2023 14:49:16 +0800
+Message-Id: <20231221064916.1930095-1-haokexin@gmail.com>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Overview ======== This patch introduces a new way to
- preference
- data sections when selecting GC victims. Migration of data blocks causes
- invalidation of node blocks. Therefore, in situations where GC is frequent,
- selec [...] 
- Content analysis details:   (-2.6 points, 6.0 required)
+ Content preview: A freezable kernel thread can enter frozen state during
+ freezing
+ by either calling try_to_freeze() or using wait_event_freezable() and its
+ variants. So for the following snippet of code in a kernel th [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [203.254.224.25 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [203.254.224.25 listed in wl.mailspike.net]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [haokexin[at]gmail.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.219.52 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.52 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rGC31-0001Y4-PJ
-Subject: [f2fs-dev] [PATCH v3] f2fs: New victim selection for GC
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1rGCsA-0003Pf-VG
+Subject: [f2fs-dev] [PATCH v2] f2fs: Use wait_event_freezable_timeout() for
+ freezable kthread
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -151,261 +127,80 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: yonggil.song@samsung.com
+Cc: "Rafael J. Wysocki" <rafael@kernel.org>, Pavel Machek <pavel@ucw.cz>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Overview
-========
+A freezable kernel thread can enter frozen state during freezing by
+either calling try_to_freeze() or using wait_event_freezable() and its
+variants. So for the following snippet of code in a kernel thread loop:
+  wait_event_interruptible_timeout();
+  try_to_freeze();
 
-This patch introduces a new way to preference data sections when selecting
-GC victims. Migration of data blocks causes invalidation of node blocks.
-Therefore, in situations where GC is frequent, selecting data blocks as
-victims can reduce unnecessary block migration by invalidating node blocks.
-For exceptional situations where free sections are insufficient, node blocks
-are selected as victims instead of data blocks to get extra free sections.
+We can change it to a simple wait_event_freezable_timeout() and then
+eliminate the function calls to try_to_freeze() and freezing().
 
-Problem
-=======
-
-If the total amount of nodes is larger than the size of one section, nodes
-occupy multiple sections, and node victims are often selected because the
-gc cost is lowered by data block migration in GC. Since moving the data
-section causes frequent node victim selection, victim threshing occurs in
-the node section. This results in an increase in WAF.
-
-Experiment
-==========
-
-Test environment is as follows.
-
-        System info
-          - 3.6GHz, 16 core CPU
-          - 36GiB Memory
-        Device info
-          - a conventional null_blk with 228MiB
-          - a sequential null_blk with 4068 zones of 8MiB
-        Format
-          - mkfs.f2fs <conv null_blk> -c <seq null_blk> -m -Z 8 -o 3.89
-        Mount
-          - mount <conv null_blk> <mount point>
-        Fio script
-	  - fio --rw=randwrite --bs=4k --ba=4k --filesize=31187m --norandommap --overwrite=1 --name=job1 --filename=./mnt/sustain --io_size=128g
-	WAF calculation
-	  - (IOs on conv. null_blk + IOs on seq. null_blk) / random write IOs
-
-Conclusion
-==========
-
-This experiment showed that the WAF was reduced by 29% (18.75 -> 13.3) when
-the data section was selected first when selecting GC victims. This was
-achieved by reducing the migration of the node blocks by 69.4%
-(253,131,743 blks -> 77,463,278 blks). It is possible to achieve low WAF
-performance with the GC victim selection method in environments where the
-section size is relatively small.
-
-Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
+Signed-off-by: Kevin Hao <haokexin@gmail.com>
 ---
- fs/f2fs/f2fs.h |   1 +
- fs/f2fs/gc.c   | 102 +++++++++++++++++++++++++++++++++++++++----------
- fs/f2fs/gc.h   |   6 +++
- 3 files changed, 88 insertions(+), 21 deletions(-)
+v2: Drop the invocation of freezing().
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 9043cedfa12b..578d57f6022f 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1649,6 +1649,7 @@ struct f2fs_sb_info {
- 	struct f2fs_mount_info mount_opt;	/* mount options */
- 
- 	/* for cleaning operations */
-+	bool need_node_clean;			/* need to clean dirty nodes */
- 	struct f2fs_rwsem gc_lock;		/*
- 						 * semaphore for GC, avoid
- 						 * race between GC and GC or CP
+ fs/f2fs/gc.c      | 6 +++---
+ fs/f2fs/segment.c | 7 ++-----
+ 2 files changed, 5 insertions(+), 8 deletions(-)
+
 diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index f550cdeaa663..da963765e087 100644
+index 405a6077bd83..e99f58b5f15c 100644
 --- a/fs/f2fs/gc.c
 +++ b/fs/f2fs/gc.c
-@@ -341,6 +341,14 @@ static unsigned int get_cb_cost(struct f2fs_sb_info *sbi, unsigned int segno)
- 	unsigned int i;
- 	unsigned int usable_segs_per_sec = f2fs_usable_segs_in_sec(sbi, segno);
+@@ -46,8 +46,8 @@ static int gc_thread_func(void *data)
+ 	do {
+ 		bool sync_mode, foreground = false;
  
-+	/*
-+	 * When BG_GC selects victims based on age, it prevents node victims
-+	 * from being selected. This is because node blocks can be invalidated
-+	 * by moving data blocks.
-+	 */
-+	if (is_skip(sbi, segno))
-+		return UINT_MAX;
-+
- 	for (i = 0; i < usable_segs_per_sec; i++)
- 		mtime += get_seg_entry(sbi, start + i)->mtime;
- 	vblocks = get_valid_blocks(sbi, segno, true);
-@@ -369,10 +377,27 @@ static inline unsigned int get_gc_cost(struct f2fs_sb_info *sbi,
- 		return get_seg_entry(sbi, segno)->ckpt_valid_blocks;
+-		wait_event_interruptible_timeout(*wq,
+-				kthread_should_stop() || freezing(current) ||
++		wait_event_freezable_timeout(*wq,
++				kthread_should_stop() ||
+ 				waitqueue_active(fggc_wq) ||
+ 				gc_th->gc_wake,
+ 				msecs_to_jiffies(wait_ms));
+@@ -59,7 +59,7 @@ static int gc_thread_func(void *data)
+ 		if (gc_th->gc_wake)
+ 			gc_th->gc_wake = false;
  
- 	/* alloc_mode == LFS */
--	if (p->gc_mode == GC_GREEDY)
--		return get_valid_blocks(sbi, segno, true);
--	else if (p->gc_mode == GC_CB)
-+	if (p->gc_mode == GC_GREEDY) {
-+		unsigned int weight = 0;
-+		unsigned int no_need = sbi->need_node_clean ? 0 : 1;
-+		bool is_node =
-+			IS_NODESEG(get_seg_entry(sbi, segno)->type);
-+
-+		/*
-+		 * If the data block that the node block pointed to is GCed,
-+		 * the node block is invalidated. For this reason, we add a
-+		 * weight to cost of node victims to give priority to data
-+		 * victims during the gc process. However, in a situation
-+		 * where we run out of free sections, we remove the weight
-+		 * because we need to clean up node blocks.
-+		 */
-+		weight = is_node ?
-+			no_need * (sbi->blocks_per_seg * sbi->segs_per_sec) : 0;
-+
-+		return (get_valid_blocks(sbi, segno, true) + weight);
-+	} else if (p->gc_mode == GC_CB) {
- 		return get_cb_cost(sbi, segno);
-+	}
- 
- 	f2fs_bug_on(sbi, 1);
- 	return 0;
-@@ -557,6 +582,14 @@ static void atgc_lookup_victim(struct f2fs_sb_info *sbi,
- 	if (ve->mtime >= max_mtime || ve->mtime < min_mtime)
- 		goto skip;
- 
-+	/*
-+	 * When BG_GC selects victims based on age, it prevents node victims
-+	 * from being selected. This is because node blocks can be invalidated
-+	 * by moving data blocks.
-+	 */
-+	if (is_skip(sbi, ve->segno))
-+		goto skip;
-+
- 	/* age = 10000 * x% * 60 */
- 	age = div64_u64(accu * (max_mtime - ve->mtime), total_time) *
- 								age_weight;
-@@ -913,7 +946,22 @@ int f2fs_get_victim(struct f2fs_sb_info *sbi, unsigned int *result,
- 		goto retry;
- 	}
- 
-+
- 	if (p.min_segno != NULL_SEGNO) {
-+		if (sbi->need_node_clean &&
-+		    IS_DATASEG(get_seg_entry(sbi, p.min_segno)->type)) {
-+			 /*
-+			  * We need to clean node sections. but, data victim
-+			  * cost is the lowest. If free sections are enough,
-+			  * stop cleaning node victim. If not, it goes on
-+			  * by GCing data victims.
-+			  */
-+			if (has_enough_free_secs(sbi, prefree_segments(sbi), 0)) {
-+				sbi->need_node_clean = false;
-+				p.min_segno = NULL_SEGNO;
-+				goto out;
-+			}
-+		}
- got_it:
- 		*result = (p.min_segno / p.ofs_unit) * p.ofs_unit;
- got_result:
-@@ -1830,8 +1878,27 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
- 		goto stop;
- 	}
- 
-+	__get_secs_required(sbi, NULL, &upper_secs, NULL);
-+
-+	/*
-+	 * Write checkpoint to reclaim prefree segments.
-+	 * We need more three extra sections for writer's data/node/dentry.
-+	 */
-+	if (free_sections(sbi) <= upper_secs + NR_GC_CHECKPOINT_SECS) {
-+		sbi->need_node_clean = true;
-+
-+		if (prefree_segments(sbi)) {
-+			stat_inc_cp_call_count(sbi, TOTAL_CALL);
-+			ret = f2fs_write_checkpoint(sbi, &cpc);
-+			if (ret)
-+				goto stop;
-+			/* Reset due to checkpoint */
-+			sec_freed = 0;
-+		}
-+	}
-+
- 	/* Let's run FG_GC, if we don't have enough space. */
--	if (has_not_enough_free_secs(sbi, 0, 0)) {
-+	if (gc_type == BG_GC && has_not_enough_free_secs(sbi, 0, 0)) {
- 		gc_type = FG_GC;
- 
- 		/*
-@@ -1882,7 +1949,13 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
- 			if (!gc_control->no_bg_gc &&
- 			    total_sec_freed < gc_control->nr_free_secs)
- 				goto go_gc_more;
--			goto stop;
-+			/*
-+			 * If need_node_clean flag is set even though there
-+			 * are enough free sections, node cleaning will
-+			 * continue.
-+			 */
-+			if (!sbi->need_node_clean)
-+				goto stop;
+-		if (try_to_freeze() || f2fs_readonly(sbi->sb)) {
++		if (f2fs_readonly(sbi->sb)) {
+ 			stat_other_skip_bggc_count(sbi);
+ 			continue;
  		}
- 		if (sbi->skipped_gc_rwsem)
- 			skipped_round++;
-@@ -1897,21 +1970,6 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
- 		goto stop;
- 	}
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 61da26eb61cc..4c8836ded90f 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1887,9 +1887,8 @@ static int issue_discard_thread(void *data)
+ 	set_freezable();
  
--	__get_secs_required(sbi, NULL, &upper_secs, NULL);
--
--	/*
--	 * Write checkpoint to reclaim prefree segments.
--	 * We need more three extra sections for writer's data/node/dentry.
--	 */
--	if (free_sections(sbi) <= upper_secs + NR_GC_CHECKPOINT_SECS &&
--				prefree_segments(sbi)) {
--		stat_inc_cp_call_count(sbi, TOTAL_CALL);
--		ret = f2fs_write_checkpoint(sbi, &cpc);
--		if (ret)
--			goto stop;
--		/* Reset due to checkpoint */
--		sec_freed = 0;
--	}
- go_gc_more:
- 	segno = NULL_SEGNO;
- 	goto gc_more;
-@@ -1920,8 +1978,10 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
- 	SIT_I(sbi)->last_victim[ALLOC_NEXT] = 0;
- 	SIT_I(sbi)->last_victim[FLUSH_DEVICE] = gc_control->victim_segno;
+ 	do {
+-		wait_event_interruptible_timeout(*q,
+-				kthread_should_stop() || freezing(current) ||
+-				dcc->discard_wake,
++		wait_event_freezable_timeout(*q,
++				kthread_should_stop() || dcc->discard_wake,
+ 				msecs_to_jiffies(wait_ms));
  
--	if (gc_type == FG_GC)
-+	if (gc_type == FG_GC) {
- 		f2fs_unpin_all_sections(sbi, true);
-+		sbi->need_node_clean = false;
-+	}
+ 		if (sbi->gc_mode == GC_URGENT_HIGH ||
+@@ -1907,8 +1906,6 @@ static int issue_discard_thread(void *data)
+ 		if (atomic_read(&dcc->queued_discard))
+ 			__wait_all_discard_cmd(sbi, NULL);
  
- 	trace_f2fs_gc_end(sbi->sb, ret, total_freed, total_sec_freed,
- 				get_pages(sbi, F2FS_DIRTY_NODES),
-diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
-index 28a00942802c..b0af7c086b66 100644
---- a/fs/f2fs/gc.h
-+++ b/fs/f2fs/gc.h
-@@ -166,3 +166,9 @@ static inline bool has_enough_invalid_blocks(struct f2fs_sb_info *sbi)
- 		free_user_blocks(sbi) <
- 			limit_free_user_blocks(invalid_user_blocks));
- }
-+
-+static inline bool is_skip(struct f2fs_sb_info *sbi, unsigned int segno)
-+{
-+	return (IS_NODESEG(get_seg_entry(sbi, segno)->type) &&
-+		!sbi->need_node_clean);
-+}
+-		if (try_to_freeze())
+-			continue;
+ 		if (f2fs_readonly(sbi->sb))
+ 			continue;
+ 		if (kthread_should_stop())
 -- 
-2.34.1
+2.39.2
 
 
 
