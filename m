@@ -2,96 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E46A81C4D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Dec 2023 06:59:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EA0681C775
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Dec 2023 10:42:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rGYYi-0000Ww-Fe;
-	Fri, 22 Dec 2023 05:58:55 +0000
+	id 1rGc35-0001ao-KI;
+	Fri, 22 Dec 2023 09:42:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1rGYYh-0000Wq-9W
+ (envelope-from <chao@kernel.org>) id 1rGc32-0001ad-JG
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 Dec 2023 05:58:54 +0000
+ Fri, 22 Dec 2023 09:42:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pnG3YrkQCHQRlNg80p6QuZ0g78Rwjn2t5vCFn6fsSiA=; b=mxxewB11MBWcenVuou526EClPD
- JH6hhFDIzovIao7PXDPC06YZAR2oSDz89dOox49Syl1CUEENWQZRAjMmVUofukIJwPAFjZiiajBix
- ZAbN3Q8R9uq3a8ECdyy/HXvaVM8rniTK98VZ9xCssJKUQCs16Kx9QQ5upvi8DTJyj3ck=;
+ bh=m11rtCAvzD3/ReS6+tolJ9NAqLRMITVkqgOY7AFOcLQ=; b=Q4kpc0qmnfgZqYiLS78Z/bVGcG
+ YaTL1lpl2zzbEXZbU8949/iE6sgVf85mJwBqSuX+HXb8PAVGItQnXX9irDSt/FdPoBdgAzeURSJ3F
+ od/YUYcVF8C/FlkpB9FV4Ob913eokFIVqSQ/a94mVe/pP5Z/y8ytbIPMhPBYvjeoGyy8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pnG3YrkQCHQRlNg80p6QuZ0g78Rwjn2t5vCFn6fsSiA=; b=az4LxqUR21Iv6gwh1nJqdveEHO
- pUg1e7rAiO+PaHSIw4K7U9IRnmaeXk9q6BZbK1wQJXUzHNluuGAkLic7qITcWfooIMRv0Z2gUnb5g
- +fFwPZMwHewhu8a4NWAC0BjE/goPuGWmhvx76Q+4mcriVoaQ8CdhpRgfaLnabhJ23w7c=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=m11rtCAvzD3/ReS6+tolJ9NAqLRMITVkqgOY7AFOcLQ=; b=cuNAmol4kquicdslIRxF+Nnx7J
+ vMdNfGtH8fbWd2ojZzmkpxl+c87+pm3E4wczdselpSS+UXHE9fXQl1Cv0N5833/zNiaZTwErqktbA
+ N5BEq0SMaFIaWbzWvLEB8yxFw3ybLQL7bO0nCvqxOB6vowrSUyeTqZUCHNe52Vdwh6sc=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rGYYb-00086T-Me for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 Dec 2023 05:58:54 +0000
+ id 1rGc30-0005TK-7W for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 22 Dec 2023 09:42:26 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 2FE18CE1F83;
- Fri, 22 Dec 2023 05:58:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99CFFC433C8;
- Fri, 22 Dec 2023 05:58:33 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 0569361B6F;
+ Fri, 22 Dec 2023 09:42:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6976AC433C9;
+ Fri, 22 Dec 2023 09:42:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1703224715;
- bh=koP/w5X1JGxFG62V66WQtMlBBjy2n7pRoumVVE4mK80=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=GQy7cwG1M88/K4d1kfWky7jNIGI7tpT0spjp/jAvD4QZp16fVYGC9b1SZ2QKclslh
- Ku2WJTeg+6Fsa9rWOY0g7+z84e3sazJAIZxbMKPas3Omckh3RVzp337rdShFREn+xy
- 2BYpycRrCGrXOnEJUFK4ddmQ7W6rlm+E8vdh5AxqnGhVJmPKTPeRUCTbclKMvatjlb
- ePwzcXji3riCebA0kDYWjA7mk+DO9O44vDAd+GZr480nTlD4J503jBEpA8jnkBYRVe
- 9SqQzm+J9gU3vQ/VPwLpwE8Rsc7Cgg19XytcVkXbSlgKb9JXT/prBp/3BiRkepZOVv
- ZQS3xWLM2ciKg==
-Date: Thu, 21 Dec 2023 23:58:30 -0600
-From: Eric Biggers <ebiggers@kernel.org>
-To: Al Viro <viro@zeniv.linux.org.uk>
-Message-ID: <20231222055830.GA97172@quark.localdomain>
-References: <20231215211608.6449-1-krisman@suse.de>
- <20231215211608.6449-9-krisman@suse.de>
- <20231221073940.GC1674809@ZenIV>
+ s=k20201202; t=1703238134;
+ bh=p+9roaFx+Oo4gZM40YyRYFkahWCjHc9Sy1wNuH0y9WM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=iZhci2aWpuaGAaOrTNKMieA4iw4G+bU6RH4UA2qo4oDdTfD/j+jKG6p4AsJ51A75v
+ hEJPNrB90XPZ6s+vgV8PTBHBN8aLfgRUdJ1Mlb5GcMyBZQVCW7V4pTuOnWsMsSDr7c
+ 2ohYD5EROTkO5KgoeovDgtNHdTrqyrPODDSG3W3sxZlxwG6nx2h6g32czwbrT5ZpGd
+ goSfbv4BqXDhMnDfwhHvy+I2P0Dm/dHIeyjDMiLk2D4DkH/ch+/otn1TfhDZ2b3BEc
+ MGo0ZtyKKVJfNaVT0LFVhJQPuvrym+Q8PAUf6B0eBenqE1SQYc3ATj9lRIjjOsBdn7
+ Aqg6EOBVlvD/Q==
+Message-ID: <4d173489-a950-4af2-8ec0-fd9ace4f3370@kernel.org>
+Date: Fri, 22 Dec 2023 17:42:12 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20231221073940.GC1674809@ZenIV>
-X-Spam-Score: -2.6 (--)
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Yongpeng Yang <yangyongpeng1@oppo.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20231222032901.3861649-1-yangyongpeng1@oppo.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20231222032901.3861649-1-yangyongpeng1@oppo.com>
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Dec 21, 2023 at 07:39:40AM +0000, Al Viro wrote: >
- Hmm... Could we simply set ->s_d_op to &fscrypt_dentry_ops in non-ci case
- > *AND* have __fscrypt_prepare_lookup() clear DCACHE_OP_REVALIDATE [...] 
- Content analysis details:   (-2.6 points, 6.0 required)
+ Content preview:  On 2023/12/22 11:29,
+ Yongpeng Yang wrote: > The {struct f2fs_sb_info}->dir_level
+ can be modified through the sysfs > interface, but its value range is not
+ limited. If the value exceeds > MAX_DIR_HASH_ [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rGYYb-00086T-Me
-Subject: Re: [f2fs-dev] [PATCH v2 8/8] fscrypt: Move d_revalidate
- configuration back into fscrypt
+X-Headers-End: 1rGc30-0005TK-7W
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: Constrain the modification range
+ of dir_level in the sysfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,48 +104,29 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Gabriel Krisman Bertazi <krisman@suse.de>, tytso@mit.edu,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- jaegeuk@kernel.org, linux-ext4@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Dec 21, 2023 at 07:39:40AM +0000, Al Viro wrote:
-> Hmm...  Could we simply set ->s_d_op to &fscrypt_dentry_ops in non-ci case
-> *AND* have __fscrypt_prepare_lookup() clear DCACHE_OP_REVALIDATE in case
-> when it's not setting DCACHE_NOKEY_NAME and ->d_op->d_revalidate is
-> equal to fscrypt_d_revalidate?  I mean,
+On 2023/12/22 11:29, Yongpeng Yang wrote:
+> The {struct f2fs_sb_info}->dir_level can be modified through the sysfs
+> interface, but its value range is not limited. If the value exceeds
+> MAX_DIR_HASH_DEPTH and the mount options include "noinline_dentry",
+> the following error will occur:
+> [root@fedora ~]# mount -o noinline_dentry /dev/sdb  /mnt/sdb/
+> [root@fedora ~]# echo 128 > /sys/fs/f2fs/sdb/dir_level
+> [root@fedora ~]# cd /mnt/sdb/
+> [root@fedora sdb]# mkdir test
+> [root@fedora sdb]# cd test/
+> [root@fedora test]# mkdir test
+> mkdir: cannot create directory 'test': Argument list too long
 > 
-> 	spin_lock(&dentry->d_lock);
->         if (fname->is_nokey_name)
->                 dentry->d_flags |= DCACHE_NOKEY_NAME;
->         else if (dentry->d_flags & DCACHE_OP_REVALIDATE &&
-> 		 dentry->d_op->d_revalidate == fscrypt_d_revalidate)
-> 		dentry->d_flags &= ~DCACHE_OP_REVALIDATE;
-> 	spin_unlock(&dentry->d_lock);
-> 
-> here + always set ->s_d_op for ext4 and friends (conditional upon
-> the CONFIG_UNICODE).
-> 
-> No encryption - fine, you get ->is_nokey_name false from the very
-> beginning, DCACHE_OP_REVALIDATE is cleared and VFS won't ever call
-> ->d_revalidate(); not even the first time.  
-> 
-> Yes, you pay minimal price in dentry_unlink_inode() when we hit
->         if (dentry->d_op && dentry->d_op->d_iput)
-> and bugger off after the second fetch instead of the first one.
-> I would be quite surprised if it turns out to be measurable,
-> but if it is, we can always add DCACHE_OP_IPUT to flags.
-> Similar for ->d_op->d_release (called in the end of
-> __dentry_kill()).  Again, that only makes sense if we get
-> a measurable overhead from that.
+> Signed-off-by: Yongpeng Yang <yangyongpeng1@oppo.com>
 
-fscrypt_prepare_lookup() handles unencrypted directories inline, without calling
-__fscrypt_prepare_lookup() which is only for encrypted directories.  So the
-logic to clear DCACHE_OP_REVALIDATE would need to be there too.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-- Eric
+Thanks,
 
 
 _______________________________________________
