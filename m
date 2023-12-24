@@ -2,157 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F18B81D40C
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 23 Dec 2023 13:47:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E12F81DAC7
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 24 Dec 2023 14:24:33 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rH1PH-0007Rg-M7;
-	Sat, 23 Dec 2023 12:47:08 +0000
+	id 1rHOSo-0002cd-Fw;
+	Sun, 24 Dec 2023 13:24:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <krisman@suse.de>) id 1rH1PG-0007Ra-C0
+ (envelope-from <chao@kernel.org>) id 1rHOSm-0002cP-NS
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 23 Dec 2023 12:47:06 +0000
+ Sun, 24 Dec 2023 13:24:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Eq6uZ1zPaOibUmv5NcqUrkQEVjzEQzNYsVkUK9LIluQ=; b=Aj3gJ9dqfC8qMLBGgII/eygXog
- s1y5DIbB3P+UShkCe70u5lCbjPEaQzhGEk09wS7IaVUHhCMQD2ohn1H8KfqzoeFwIOwjl29GCgnK2
- pzVcAAns+UHptEr/fxihSseE1p+wccf7SFjoPClBU8mc+kv4u1i7DJqt/czQbtyvsFQM=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=/SKssNXCulHt5C69w+ybEazSR0hE6eqFV72+17hAifk=; b=O5oVYWJp4nnlYxmFKb51tbJ/Bz
+ 1WPG0MK61mQJ+8CwCbCvy0KAVqFjATp5+29N1g3KIz5fqSNOPu0VySAIJSu+1xmrAZgUIwX7FyK5t
+ Rs65ysym+0h5wB7RueRYyOAXtgPPvE2mqnc2nBcFv5rw2mD6adZ4NLojhSM3Nw+nhgvw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Eq6uZ1zPaOibUmv5NcqUrkQEVjzEQzNYsVkUK9LIluQ=; b=QZ+UL7Oz6yZ5/Z1ygzDB9HjcKC
- cVpwLx+2UGSTXbulZCO1YjSTUbt8IUoqPt7iOTRmCJjmHQ0HV6/D18i7JH1LhoS9LzsmmXVvZd0X/
- fy3AI8XFcmlegwu4JHwiCwitJv5v6sG/LO5C1OpJyZuPoKAvieIG4rW6+hZqNNPd8ZlI=;
-Received: from smtp-out2.suse.de ([195.135.223.131])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=/SKssNXCulHt5C69w+ybEazSR0hE6eqFV72+17hAifk=; b=L
+ YBO44enfytk2h5lOSOO3fsi4DdLNdbcvgUACntOr17vKJluNXYYQZntwre2tPu4ZWaYx6T7tB/5sE
+ RmBO7nuAbeeA/u6f9nUZmkLk7eQ1htg6FmgNbqIxdiRzR/NWo8o5vhVypm+2P0NA6NH1MQkE/kSvI
+ mMHO+bfUezPVrEAU=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rH1PC-0007Q6-91 for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 23 Dec 2023 12:47:06 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 9B7051FD4A;
- Sat, 23 Dec 2023 12:46:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1703335611; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Eq6uZ1zPaOibUmv5NcqUrkQEVjzEQzNYsVkUK9LIluQ=;
- b=jgvwLcqjqQgdx+xT7fpuuhh6LblZT9Xd3e0TcUP6lT1gtOmDvZRudxq5W75OxI2p0eEXmu
- ckS8CKuNraMBOUETzbPi3fgesOVg342pJ+gwIkqXldXxp+4hLwgJ7XA2XubEGArJgdfdEv
- 9vKlPuWUkZJiGa1mDfTJMiNWm2K9kKg=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1703335611;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Eq6uZ1zPaOibUmv5NcqUrkQEVjzEQzNYsVkUK9LIluQ=;
- b=sLXgQir0HjnmfUFa/BWbX0OLW9umv9djDIr3Dl+NtRzXSbqCslPqHbsBe75Z/MPz6Yyyg7
- 8ZJXpqMr1K1RTtBg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1703335611; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Eq6uZ1zPaOibUmv5NcqUrkQEVjzEQzNYsVkUK9LIluQ=;
- b=jgvwLcqjqQgdx+xT7fpuuhh6LblZT9Xd3e0TcUP6lT1gtOmDvZRudxq5W75OxI2p0eEXmu
- ckS8CKuNraMBOUETzbPi3fgesOVg342pJ+gwIkqXldXxp+4hLwgJ7XA2XubEGArJgdfdEv
- 9vKlPuWUkZJiGa1mDfTJMiNWm2K9kKg=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1703335611;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Eq6uZ1zPaOibUmv5NcqUrkQEVjzEQzNYsVkUK9LIluQ=;
- b=sLXgQir0HjnmfUFa/BWbX0OLW9umv9djDIr3Dl+NtRzXSbqCslPqHbsBe75Z/MPz6Yyyg7
- 8ZJXpqMr1K1RTtBg==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 634D8136F5;
- Sat, 23 Dec 2023 12:46:51 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id n6lDErvWhmUmDQAAD6G6ig
- (envelope-from <krisman@suse.de>); Sat, 23 Dec 2023 12:46:51 +0000
-From: Gabriel Krisman Bertazi <krisman@suse.de>
-To: Amir Goldstein <amir73il@gmail.com>
-In-Reply-To: <CAOQ4uxjhWPB6W+EFyuE-eYbLHehOGRLSfs6K62+h8-f9izJG-A@mail.gmail.com>
- (Amir Goldstein's message of "Sat, 23 Dec 2023 08:20:09 +0200")
-Organization: SUSE
-References: <20231215211608.6449-1-krisman@suse.de>
- <20231219231222.GI38652@quark.localdomain>
- <87a5q1eecy.fsf_-_@mailhost.krisman.be>
- <CAOQ4uxjhWPB6W+EFyuE-eYbLHehOGRLSfs6K62+h8-f9izJG-A@mail.gmail.com>
-Date: Sat, 23 Dec 2023 07:46:46 -0500
-Message-ID: <875y0pdr2h.fsf@mailhost.krisman.be>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rHOSi-0008VX-Ao for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 24 Dec 2023 13:24:16 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 80C17601FF
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 24 Dec 2023 13:23:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 27464C433C7;
+ Sun, 24 Dec 2023 13:23:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1703424239;
+ bh=16qtMbQ31XIsOuybyPjYeZRVVYAm2rk42uzOoCijo4o=;
+ h=From:To:Cc:Subject:Date:From;
+ b=gwrTjy1tkGWO4ydoT1QV3U/Vdzbg5Qw83NMf07Im3qdyjP1YZiDRXo3StkFbjQml9
+ pSZd/ZIC7AQIgQuoc19HYtDRl/uHeJWUBhgqHMdCcCYWfNt4IM95AH1rycznhXsE9U
+ V31sHyBQxVAusKgylbZkDNUmPndy4Ad4cmLcl0KaNK59fzc5tb9OIL+rj4Wl3/fheG
+ f3mhXqmyrkSqlL8ZsEGgr2UebpP6BsGzD1mr3VcK4RWRtkX6qQa3NMLpUafmSKHez0
+ m8ToPG5/BkMbE0qP/j4AsLwZNW3ulwPCC6KYVkDS9hj+jvVftp85WB8ilpk+YV3yRM
+ 7xeAmbwsfm+AA==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Sun, 24 Dec 2023 21:23:49 +0800
+Message-Id: <20231224132349.12109-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-X-Spam-Level: ****
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spam-Level: 
-X-Spam-Flag: NO
-X-Spamd-Result: default: False [-3.90 / 50.00]; ARC_NA(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
- DWL_DNSWL_MED(-2.00)[suse.de:dkim]; HAS_ORG_HEADER(0.00)[];
- RCVD_COUNT_THREE(0.00)[3];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- DKIM_TRACE(0.00)[suse.de:+]; MX_GOOD(-0.01)[];
- RCPT_COUNT_SEVEN(0.00)[8];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim];
- FREEMAIL_TO(0.00)[gmail.com]; FUZZY_BLOCKED(0.00)[rspamd.com];
- FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
- RCVD_TLS_ALL(0.00)[]; BAYES_HAM(-1.59)[92.33%]
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=jgvwLcqj;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=sLXgQir0
-X-Spam-Score: -3.90
-X-Rspamd-Queue-Id: 9B7051FD4A
-X-Spam-Score: -2.5 (--)
+X-Spam-Score: -7.8 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Amir Goldstein <amir73il@gmail.com> writes: >> Amir, would
- you consider this for -rc8? > > IIUC, this fixes a regression from v5.10
- with a very low likelihood of > impact on anyone in the real world, so what's
- the rush? > I would rather that yo [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  In reserve_compress_blocks(), we update blkaddrs of dnode
+ in prior to inc_valid_block_count(), it may cause inconsistent status bewteen
+ i_blocks and blkaddrs once inc_valid_block_count() fails. To fix this issue,
+ it needs to reverse their invoking order. 
+ Content analysis details:   (-7.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.223.131 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rH1PC-0007Q6-91
-Subject: Re: [f2fs-dev] [PATCH] ovl: Reject mounting case-insensitive
- filesystems
+ -2.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rHOSi-0008VX-Ao
+Subject: [f2fs-dev] [PATCH v2 4/6] f2fs: compress: fix to avoid inconsistent
+ bewteen i_blocks and dnode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -164,37 +102,146 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
- Eric Biggers <ebiggers@kernel.org>, viro@zeniv.linux.org.uk,
- linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Amir Goldstein <amir73il@gmail.com> writes:
+In reserve_compress_blocks(), we update blkaddrs of dnode in prior to
+inc_valid_block_count(), it may cause inconsistent status bewteen
+i_blocks and blkaddrs once inc_valid_block_count() fails.
 
->> Amir, would you consider this for -rc8?
->
-> IIUC, this fixes a regression from v5.10 with a very low likelihood of
-> impact on anyone in the real world, so what's the rush?
-> I would rather that you send this fix along with your patch set.
->
-> Feel free to add:
->
-> Acked-by: Amir Goldstein <amir73il@gmail.com>
->
-> after fixing nits below
+To fix this issue, it needs to reverse their invoking order.
 
-Thanks for your review.
+Fixes: c75488fb4d82 ("f2fs: introduce F2FS_IOC_RESERVE_COMPRESS_BLOCKS")
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v2:
+- rebase code to last dev-test branch
+ fs/f2fs/data.c    |  5 +++--
+ fs/f2fs/f2fs.h    |  7 ++++++-
+ fs/f2fs/file.c    | 26 ++++++++++++++------------
+ fs/f2fs/segment.c |  2 +-
+ 4 files changed, 24 insertions(+), 16 deletions(-)
 
-It is fine to wait, and I'll turn it into part of this series, with
-your ack, after fixing the details you pointed out.
-
-Thanks,
-
-
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 263053219b28..b6e35e601e24 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1224,7 +1224,8 @@ int f2fs_reserve_new_blocks(struct dnode_of_data *dn, blkcnt_t count)
+ 
+ 	if (unlikely(is_inode_flag_set(dn->inode, FI_NO_ALLOC)))
+ 		return -EPERM;
+-	if (unlikely((err = inc_valid_block_count(sbi, dn->inode, &count))))
++	err = inc_valid_block_count(sbi, dn->inode, &count, true);
++	if (unlikely(err))
+ 		return err;
+ 
+ 	trace_f2fs_reserve_new_blocks(dn->inode, dn->nid,
+@@ -1481,7 +1482,7 @@ static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
+ 
+ 	dn->data_blkaddr = f2fs_data_blkaddr(dn);
+ 	if (dn->data_blkaddr == NULL_ADDR) {
+-		err = inc_valid_block_count(sbi, dn->inode, &count);
++		err = inc_valid_block_count(sbi, dn->inode, &count, true);
+ 		if (unlikely(err))
+ 			return err;
+ 	}
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 7d0c2b05c5a8..dc1feafb4973 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -2251,7 +2251,7 @@ static inline bool __allow_reserved_blocks(struct f2fs_sb_info *sbi,
+ 
+ static inline void f2fs_i_blocks_write(struct inode *, block_t, bool, bool);
+ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
+-				 struct inode *inode, blkcnt_t *count)
++				 struct inode *inode, blkcnt_t *count, bool partial)
+ {
+ 	blkcnt_t diff = 0, release = 0;
+ 	block_t avail_user_block_count;
+@@ -2291,6 +2291,11 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
+ 			avail_user_block_count = 0;
+ 	}
+ 	if (unlikely(sbi->total_valid_block_count > avail_user_block_count)) {
++		if (!partial) {
++			spin_unlock(&sbi->stat_lock);
++			goto enospc;
++		}
++
+ 		diff = sbi->total_valid_block_count - avail_user_block_count;
+ 		if (diff > *count)
+ 			diff = *count;
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 782ae3be48f6..9f4e21b5916c 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -3614,14 +3614,16 @@ static int reserve_compress_blocks(struct dnode_of_data *dn, pgoff_t count)
+ 		blkcnt_t reserved;
+ 		int ret;
+ 
+-		for (i = 0; i < cluster_size; i++, dn->ofs_in_node++) {
+-			blkaddr = f2fs_data_blkaddr(dn);
++		for (i = 0; i < cluster_size; i++) {
++			blkaddr = data_blkaddr(dn->inode, dn->node_page,
++						dn->ofs_in_node + i);
+ 
+ 			if (i == 0) {
+-				if (blkaddr == COMPRESS_ADDR)
+-					continue;
+-				dn->ofs_in_node += cluster_size;
+-				goto next;
++				if (blkaddr != COMPRESS_ADDR) {
++					dn->ofs_in_node += cluster_size;
++					goto next;
++				}
++				continue;
+ 			}
+ 
+ 			/*
+@@ -3637,20 +3639,20 @@ static int reserve_compress_blocks(struct dnode_of_data *dn, pgoff_t count)
+ 				compr_blocks++;
+ 				continue;
+ 			}
+-
+-			f2fs_set_data_blkaddr(dn, NEW_ADDR);
+ 		}
+ 
+ 		reserved = cluster_size - compr_blocks;
+ 		if (!reserved)
+ 			goto next;
+ 
+-		ret = inc_valid_block_count(sbi, dn->inode, &reserved);
+-		if (ret)
++		ret = inc_valid_block_count(sbi, dn->inode, &reserved, false);
++		if (unlikely(ret))
+ 			return ret;
+ 
+-		if (reserved != cluster_size - compr_blocks)
+-			return -ENOSPC;
++		for (i = 0; i < cluster_size; i++, dn->ofs_in_node++) {
++			if (f2fs_data_blkaddr(dn) == NULL_ADDR)
++				f2fs_set_data_blkaddr(dn, NEW_ADDR);
++		}
+ 
+ 		f2fs_i_compr_blocks_update(dn->inode, compr_blocks, true);
+ 
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 61da26eb61cc..9632e9977c90 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -248,7 +248,7 @@ static int __replace_atomic_write_block(struct inode *inode, pgoff_t index,
+ 	} else {
+ 		blkcnt_t count = 1;
+ 
+-		err = inc_valid_block_count(sbi, inode, &count);
++		err = inc_valid_block_count(sbi, inode, &count, true);
+ 		if (err) {
+ 			f2fs_put_dnode(&dn);
+ 			return err;
 -- 
-Gabriel Krisman Bertazi
+2.40.1
+
 
 
 _______________________________________________
