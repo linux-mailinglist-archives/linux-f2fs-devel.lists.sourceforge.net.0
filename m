@@ -2,104 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F6BB81E29D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 25 Dec 2023 23:43:28 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A21981EA14
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Dec 2023 22:02:36 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rHtfI-0002q3-Qs;
-	Mon, 25 Dec 2023 22:43:17 +0000
+	id 1rIEZG-00023u-CY;
+	Tue, 26 Dec 2023 21:02:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3eAWKZQkbAN0RXYJ9KKDQ9OOHC.FNNFKDTRDQBNMSDMS.BNL@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1rHtfH-0002px-3J for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 25 Dec 2023 22:43:15 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <jaegeuk@kernel.org>) id 1rIEZE-00023o-LT
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 26 Dec 2023 21:02:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=s8rzGGM2S/OWnwe++5O+Ch05F0TdIpzpVypo88YRjSE=; b=OpFWJevqvP/TQN1WKzHQJ/Cwe+
- yljZVgPOzFYax0Q9Fb+icr878hOOvL83VyiZ1pso8yIWA5dNVQ6Sx2kflYhrbpg1gEx4+RQWSQyDS
- KMB4+UN0rrh5vI19+OkBVnDuzbgqLBtCAJjs/Lj5JjZweX3kCHjnTWsS3I9oy0LPxyuU=;
+ bh=2JzkyrRmp3sr+Bl4cLivs62KX67DMAl7HsI091oGMJs=; b=K+3jGH7LrYSU/JeeCMxiwMYLEK
+ w0eLAAiSa+Pg6LsuM9F2YrI3Cb3sMDKT89B1bSUTTveJJ2Idgcw8qBy4Qt5rsJQ/KdEDF7i9aI2Yd
+ WWnxqm7zA9DaRNeqx7DpfJ/ipVZCdiUbdZs9jKF8b5UigdNEXxhiABZc3b/GQABgxtBo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=s8rzGGM2S/OWnwe++5O+Ch05F0TdIpzpVypo88YRjSE=; b=m
- DQWnJTgSPvemIXAfznnGwz/sNXWwObPHf3zGOhC263YduRa4XpvBagHZhMS2nyDR28+i0wUDmGG1o
- FN1vntM183QwivXuG6a1AbjLuhUGuw1bjo8RTHn8osXT6fgaHG0T738/VxfHxuIb5ZbWPeWLAzaKP
- JNZULkzCtnQSNKUk=;
-Received: from mail-il1-f199.google.com ([209.85.166.199])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=2JzkyrRmp3sr+Bl4cLivs62KX67DMAl7HsI091oGMJs=; b=ksxNfYcDUE86EpyXc1UnpsADbe
+ 17q9bXqACS/ucoE2eX6NXV7RQ3TYOJS6Ca3M49a2FcCARLdS2XVSP/O0jhcAt7I/CMSl17IqwbGRx
+ u/3mXVQmI9UXSwob7ASHSlpVz/88GgwZF95QLBtiqyO5mCYFljHtrrn8ctyFfN0i/m5E=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rHtfG-0006IJ-RN for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 25 Dec 2023 22:43:15 +0000
-Received: by mail-il1-f199.google.com with SMTP id
- e9e14a558f8ab-36000bb7f6fso9581665ab.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rIEZC-0006ig-LO for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 26 Dec 2023 21:02:23 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 776B4CE0A19
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 25 Dec 2023 14:43:14 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703544184; x=1704148984;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=s8rzGGM2S/OWnwe++5O+Ch05F0TdIpzpVypo88YRjSE=;
- b=p9IwXxEdB4PZU/24UhcqE8m1ZnNgmHZ2ewutOft4AAuMpN6lkCxuVoI2r6D+zpCx3t
- m7dPvHbYbv1xb6BHhISVh/eAaban/dT7jHNMJnXoXZOjQJnqPGdJc0Hb2QKQCbb9o2HW
- JtRxKBdvLmMGqKFgybn2GfkfJVor4B6eBix+/r6Y2Xo/bAUYXcll6uoWEWfjulNLLQ94
- lNccw+qVSrKa1br+pAJRc9HBRohuGKGWET91414KL12WZTop0e8hbQ0bN1K7f1J3Pt2F
- c28LxW7KFOG8g2F8ESLRs+Kj71Rpqe5HMclNwWMh3Izp488evqdqJW2JsVSrDHLLlsfv
- +w3g==
-X-Gm-Message-State: AOJu0Yy8XgSeTVoXASlu3m96vIQbq4FRgbCoI5LZrQQrLNMrdvnwC0Un
- I8HBQKZ78KuQMdpDuO5/nMcNn9pfi2f9y9/75Mr1kPb1cY8W
-X-Google-Smtp-Source: AGHT+IFhBkqwTv7B+BcCEtyN9Hf+fnEdykai0psDJjz+v5pzAYyo+VjG75vi9WIN/ZNrgS6SmU76yh0W7Fy4KWjDGSULIJd0jACh
+ Tue, 26 Dec 2023 21:02:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FA36C433C7;
+ Tue, 26 Dec 2023 21:02:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1703624524;
+ bh=K0bo8nLzMp9puoOTzcakLFzOMnpwS+Kk1wV1MTjYTZY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=HpqBw1eZLSLnPCK7wTiVCaR+Of43NUVzd53hfhc4vgi477XgWpYMe1EFRNTug3ilx
+ c/kf4fFjhhgquE7lztqo2TfdE9paBXnmWMguJRISHys/TeyBNFR2RptTB4pPN8LFbH
+ /67aVhtG4mWWz4YvLqIp+CJYvSW7pJ/zMGu29WJk5KdGm57wnsh6hP/aYE4VwOcLFL
+ A7hBdHIUcGViC8S/GuoE4gRWQHMIZzjZiedEo/4THULWAJnxAGLUIaP1kfX2iHz25K
+ Cgcw3hphoh+kQirXlnXC9tvZMHZiaaz6co2meOFajqRWccLOEni0Kvu1Ug81ceR++L
+ CvNX/DM5y8Jcw==
+Date: Tue, 26 Dec 2023 13:02:03 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZYs_S0VLFFnV1g-3@google.com>
+References: <20231220135934.3471407-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:1bad:b0:360:e6b:bc4a with SMTP id
- n13-20020a056e021bad00b003600e6bbc4amr5652ili.2.1703544184228; Mon, 25 Dec
- 2023 14:43:04 -0800 (PST)
-Date: Mon, 25 Dec 2023 14:43:04 -0800
-In-Reply-To: <00000000000052dcf505f6fc93af@google.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000f5d50e060d5d493b@google.com>
-From: syzbot <syzbot+b9c67110e04430822b08@syzkaller.appspotmail.com>
-To: daeho43@gmail.com, daehojeong@google.com, jaegeuk@kernel.org, 
- joneslee@google.com, kernel-team@android.com, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- nogikh@google.com, syzkaller-android-bugs@googlegroups.com, 
- tudor.ambarus@linaro.org
-X-Spam-Score: 3.0 (+++)
+Content-Disposition: inline
+In-Reply-To: <20231220135934.3471407-1-chao@kernel.org>
+X-Spam-Score: -5.4 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: syzbot suspects this issue was fixed by commit: commit
- 76ca4a07659a31cc62977664bcf638d6a24af068
- Author: Daeho Jeong <daehojeong@google.com> Date: Thu Apr 28 18:18:09 2022
- +0000 BACKPORT: f2fs: change the current atomic write way 
- Content analysis details:   (3.0 points, 6.0 required)
+ Content preview:  On 12/20,
+ Chao Yu wrote: > If data block in compressed cluster
+ is not persisted with metadata > during checkpoint, after SPOR, the data
+ may be corrupted, let's > guarantee to write compressed page by [...] 
+ Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 2.5 SORTED_RECIPS          Recipient list is sorted by address
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.199 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.199 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rHtfG-0006IJ-RN
-Subject: Re: [f2fs-dev] [Android 5.15] BUG: scheduling while atomic in
- f2fs_register_inmem_page
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -2.9 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rIEZC-0006ig-LO
+Subject: Re: [f2fs-dev] [PATCH 1/6] f2fs: compress: fix to guarantee
+ persisting compressed blocks by CP
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,31 +103,115 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-syzbot suspects this issue was fixed by commit:
+On 12/20, Chao Yu wrote:
+> If data block in compressed cluster is not persisted with metadata
+> during checkpoint, after SPOR, the data may be corrupted, let's
+> guarantee to write compressed page by checkpoint.
+> 
+> Fixes: 4c8ff7095bef ("f2fs: support data compression")
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>  fs/f2fs/compress.c |  3 ++-
+>  fs/f2fs/data.c     | 12 +++++++++---
+>  fs/f2fs/f2fs.h     |  3 ++-
+>  3 files changed, 13 insertions(+), 5 deletions(-)
+> 
+> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> index 5b076329e9bf..1122db8cc0b0 100644
+> --- a/fs/f2fs/compress.c
+> +++ b/fs/f2fs/compress.c
+> @@ -1442,6 +1442,7 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page)
+>  	struct f2fs_sb_info *sbi = bio->bi_private;
+>  	struct compress_io_ctx *cic =
+>  			(struct compress_io_ctx *)page_private(page);
+> +	enum count_type type = WB_DATA_TYPE(page);
+>  	int i;
+>  
+>  	if (unlikely(bio->bi_status))
+> @@ -1449,7 +1450,7 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page)
+>  
+>  	f2fs_compress_free_page(page);
+>  
+> -	dec_page_count(sbi, F2FS_WB_DATA);
+> +	dec_page_count(sbi, type);
+>  
+>  	if (atomic_dec_return(&cic->pending_pages))
+>  		return;
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index d28c97282e68..6c72a6e86ba8 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -48,7 +48,7 @@ void f2fs_destroy_bioset(void)
+>  	bioset_exit(&f2fs_bioset);
+>  }
+>  
+> -static bool __is_cp_guaranteed(struct page *page)
+> +bool f2fs_is_cp_guaranteed(struct page *page)
+>  {
+>  	struct address_space *mapping = page->mapping;
+>  	struct inode *inode;
+> @@ -66,7 +66,7 @@ static bool __is_cp_guaranteed(struct page *page)
+>  		return true;
+>  
+>  	if (f2fs_is_compressed_page(page))
+> -		return false;
+> +		return true;
+>  	if ((S_ISREG(inode->i_mode) && IS_NOQUOTA(inode)) ||
+>  			page_private_gcing(page))
+>  		return true;
+> @@ -1007,6 +1007,7 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
+>  	enum page_type btype = PAGE_TYPE_OF_BIO(fio->type);
+>  	struct f2fs_bio_info *io = sbi->write_io[btype] + fio->temp;
+>  	struct page *bio_page;
+> +	enum count_type type;
+>  
+>  	f2fs_bug_on(sbi, is_read_io(fio->op));
+>  
+> @@ -1046,7 +1047,12 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
+>  	/* set submitted = true as a return value */
+>  	fio->submitted = 1;
+>  
+> -	inc_page_count(sbi, WB_DATA_TYPE(bio_page));
+> +	type = WB_DATA_TYPE(bio_page);
+> +	/* override count type if page is compressed one */
+> +	if (fio->compressed_page)
+> +		type = WB_DATA_TYPE(fio->compressed_page);
 
-commit 76ca4a07659a31cc62977664bcf638d6a24af068
-Author: Daeho Jeong <daehojeong@google.com>
-Date:   Thu Apr 28 18:18:09 2022 +0000
+Doesn't bio_page already point fio->compressed_page?
 
-    BACKPORT: f2fs: change the current atomic write way
-
-bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=11287ba5e80000
-start commit:   61cfd264993d Revert "ipv4/fib: send notify when delete sou..
-git tree:       android13-5.15-lts
-kernel config:  https://syzkaller.appspot.com/x/.config?x=86febd5cba631f80
-dashboard link: https://syzkaller.appspot.com/bug?extid=b9c67110e04430822b08
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=135fe388e80000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=171ba588e80000
-
-If the result looks correct, please mark the issue as fixed by replying with:
-
-#syz fix: BACKPORT: f2fs: change the current atomic write way
-
-For information about bisection process see: https://goo.gl/tpsmEJ#bisection
+> +
+> +	inc_page_count(sbi, type);
+>  
+>  	if (io->bio &&
+>  	    (!io_is_mergeable(sbi, io->bio, io, fio, io->last_block_in_bio,
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 76e9a8682e38..bcb3940ab5ba 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -1092,7 +1092,7 @@ struct f2fs_sm_info {
+>   * f2fs monitors the number of several block types such as on-writeback,
+>   * dirty dentry blocks, dirty node blocks, and dirty meta blocks.
+>   */
+> -#define WB_DATA_TYPE(p)	(__is_cp_guaranteed(p) ? F2FS_WB_CP_DATA : F2FS_WB_DATA)
+> +#define WB_DATA_TYPE(p)	(f2fs_is_cp_guaranteed(p) ? F2FS_WB_CP_DATA : F2FS_WB_DATA)
+>  enum count_type {
+>  	F2FS_DIRTY_DENTS,
+>  	F2FS_DIRTY_DATA,
+> @@ -3824,6 +3824,7 @@ void f2fs_init_ckpt_req_control(struct f2fs_sb_info *sbi);
+>   */
+>  int __init f2fs_init_bioset(void);
+>  void f2fs_destroy_bioset(void);
+> +bool f2fs_is_cp_guaranteed(struct page *page);
+>  int f2fs_init_bio_entry_cache(void);
+>  void f2fs_destroy_bio_entry_cache(void);
+>  void f2fs_submit_read_bio(struct f2fs_sb_info *sbi, struct bio *bio,
+> -- 
+> 2.40.1
 
 
 _______________________________________________
