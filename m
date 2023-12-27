@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D1FE81F0D1
+	by mail.lfdr.de (Postfix) with ESMTPS id 3372B81F0D2
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Dec 2023 18:17:42 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rIXXB-0007EA-E4;
-	Wed, 27 Dec 2023 17:17:33 +0000
+	id 1rIXXH-0006Gc-Nj;
+	Wed, 27 Dec 2023 17:17:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1rIXX8-0007E3-3q
+ (envelope-from <ebiggers@kernel.org>) id 1rIXXE-0006GL-89
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 27 Dec 2023 17:17:30 +0000
+ Wed, 27 Dec 2023 17:17:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EYHlpKE6S+zR6/nCF7g+4uplzls0l4LkrJsYkcm2H1g=; b=LmJ6qLyyfY7OwGsvKNVnaKXtTU
- wFX0FW8xfpxq5B8fXpMQl5xSBCW8/Y2xr7dFFxbBOoKwkoP+gSIVZ3xMeMLkQOeVg/IU3sXNmeh38
- eak8PcjBqtO2V1ERVdxv0sGVMDlVlGZhfMyroaJJH8EwAo5oqMamFJRI6jrKfGKDeHnw=;
+ bh=rT0UQHqIOE2IGmgRzBCUSjAfiG5EgDUZFc8MtiojQ/4=; b=j4FStJGK9X8w9VuRrsyNhqydBI
+ 2MzhMFCWP6vPMvpT4KDSFvsoe5mYrGghVpBAjlV6KhZ3bnbQaQgt8BKA+d4a9NwR+f+cTtx3u8Z8k
+ GKEl3Y8NK02YTyLBmB/YsqAofNKTnPB8Yopi9XozFQbYyb72ozTNoGhBaUpS4hkrX1d0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -31,69 +31,67 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=EYHlpKE6S+zR6/nCF7g+4uplzls0l4LkrJsYkcm2H1g=; b=guyS3TyTjyg32y4fkg30lhW79I
- HL8lvrhdl9tTkjQ8Mg7BuU79HngCTiCCJT5TklrJX2SzHzaSCvh9nDKHAvhUcE6nnGvuHonCeuwSr
- EbRVeBPD1abVz7gV0C110p6gEiOMCIdkePPbBA9IzQWCBgdUCwmn2HmZwWoDn+jHVL1g=;
+ bh=rT0UQHqIOE2IGmgRzBCUSjAfiG5EgDUZFc8MtiojQ/4=; b=YBSwEPQ3QtLH56NWk3cNOiV/9E
+ Edg4vPW7rT5m8o6RwjU/Cyz9xhNZgydoWy+x0Nj3nGSS4u9eAZ2jzo8Oo9uGqDV1zBWBexYFrCOst
+ jnuOf3Ic7dePgl+2GIATbYVVnFqil7aqP/1bn3mT37O73UW7fjtZ3WB3Z/nda1Lrcskw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rIXX7-0003Ms-54 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 27 Dec 2023 17:17:29 +0000
+ id 1rIXXE-0003NG-44 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 27 Dec 2023 17:17:36 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A08DC60F6E;
+ by dfw.source.kernel.org (Postfix) with ESMTP id ABFF460F72;
+ Wed, 27 Dec 2023 17:17:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1888C433C8;
  Wed, 27 Dec 2023 17:17:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E073BC433C9;
- Wed, 27 Dec 2023 17:17:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1703697443;
- bh=UyjBwW0wkBL1qZTGRKDJoSDef6ohi3jee7V8AMdA4uw=;
+ s=k20201202; t=1703697445;
+ bh=oMd6cyuWC44jmJeHw6DO++liI/GMxog3sPxf3VWV6yo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=OQu7/lTIHfd75ne/sZPgjpyc/3bfqgWFPzfyQMdqUvuXrwoDPgwM7phinskqLWQMi
- uLoQhRNHLb17IcTT0Do1M8fDVSXZZDpJxB2bsRC24STR4FXpvg1IcYPLK9s7D/UECM
- flRtpxML1xFv3R9sNj9pLlLFdVlmSXi0EoegJXzbLTBTKhdV1Rro9IAA7tkR4Me9jd
- kgIP+CBKu/OPte/qRzzufoAgAuQxfm6+E0gOFbWaKn90IwtFmc5CecF/5RlOyDTUyy
- vD6U7MAuytD2CcVqoCh9iNMVJKntlOzPgvdJZxN4x0+qgUBjcEqBFSjE0+OzTdigVu
- XBU2xoE3fARTg==
+ b=umWhZju6J+3h2OeKVr6EpIyoI+lVYboEc5FBxoXG4nRMbDK2you3mgrHLbSLEGqEx
+ v5TJbAoOB5GsKdKsAs40VXE5LeOGcMqaY4qKOCUUQQXPYU53vBXrmAbHxJVCG0adZN
+ DL9T3H0YrsbhOTJlEH56Ew8WYkw2bRJ75TVcAE3g3Ljsl78Qw5Fw2cytlDEG8ycd/3
+ 1TnhDrSuooc04NdQ1UDs3PcJplG97mdxu2/g13mI7dmJDf3wnUMK1ajm192QvtSYeb
+ LeQ2eCmipmcpzmW268aLMreocA1PWHKf2x0I8TvjMuEs9tL1jusH1flupng/oa8eer
+ nHSPVZLe7Y2Hg==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Wed, 27 Dec 2023 11:14:28 -0600
-Message-ID: <20231227171429.9223-2-ebiggers@kernel.org>
+Date: Wed, 27 Dec 2023 11:14:29 -0600
+Message-ID: <20231227171429.9223-3-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231227171429.9223-1-ebiggers@kernel.org>
 References: <20231227171429.9223-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -8.0 (--------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> Call
- destroy_device_list()
- and free the f2fs_sb_info from kill_f2fs_super(),
- after the call to kill_block_super().
- This is necessary to order it after the call to fscrypt_destroy_keyring()
- once generi [...] 
+ Content preview: From: Josef Bacik <josef@toxicpanda.com> btrfs has a variety
+ of asynchronous things we do with inodes that can potentially last until
+ ->put_super, when we shut everything down and clean up all of our async work.
+ Due to this we need to move f [...] 
  Content analysis details:   (-8.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -2.8 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rIXX7-0003Ms-54
-Subject: [f2fs-dev] [PATCH v2 1/2] f2fs: move release of block devices to
- after kill_block_super()
+X-Headers-End: 1rIXXE-0003NG-44
+Subject: [f2fs-dev] [PATCH v2 2/2] fs: move fscrypt keyring destruction to
+ after ->put_super
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,126 +103,74 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, Christoph Hellwig <hch@lst.de>,
- Josef Bacik <josef@toxicpanda.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fsdevel@vger.kernel.org, Neal Gompa <neal@gompa.dev>,
+ Christoph Hellwig <hch@lst.de>, Josef Bacik <josef@toxicpanda.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+From: Josef Bacik <josef@toxicpanda.com>
 
-Call destroy_device_list() and free the f2fs_sb_info from
-kill_f2fs_super(), after the call to kill_block_super().  This is
-necessary to order it after the call to fscrypt_destroy_keyring() once
-generic_shutdown_super() starts calling fscrypt_destroy_keyring() just
-after calling ->put_super.  This is because fscrypt_destroy_keyring()
-may call into f2fs_get_devices() via the fscrypt_operations.
+btrfs has a variety of asynchronous things we do with inodes that can
+potentially last until ->put_super, when we shut everything down and
+clean up all of our async work.  Due to this we need to move
+fscrypt_destroy_keyring() to after ->put_super, otherwise we get
+warnings about still having active references on the master key.
 
+Signed-off-by: Josef Bacik <josef@toxicpanda.com>
+Reviewed-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Neal Gompa <neal@gompa.dev>
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/f2fs/super.c | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+ fs/super.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 033af907c3b1d..d66e0692ac02e 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1710,42 +1710,39 @@ static void f2fs_put_super(struct super_block *sb)
- 	f2fs_destroy_node_manager(sbi);
- 	f2fs_destroy_segment_manager(sbi);
+diff --git a/fs/super.c b/fs/super.c
+index 076392396e724..faf7d248145d2 100644
+--- a/fs/super.c
++++ b/fs/super.c
+@@ -674,34 +674,34 @@ void generic_shutdown_super(struct super_block *sb)
+ 		/* Evict all inodes with zero refcount. */
+ 		evict_inodes(sb);
  
- 	/* flush s_error_work before sbi destroy */
- 	flush_work(&sbi->s_error_work);
- 
- 	f2fs_destroy_post_read_wq(sbi);
- 
- 	kvfree(sbi->ckpt);
- 
--	sb->s_fs_info = NULL;
- 	if (sbi->s_chksum_driver)
- 		crypto_free_shash(sbi->s_chksum_driver);
- 	kfree(sbi->raw_super);
- 
--	destroy_device_list(sbi);
- 	f2fs_destroy_page_array_cache(sbi);
- 	f2fs_destroy_xattr_caches(sbi);
- 	mempool_destroy(sbi->write_io_dummy);
- #ifdef CONFIG_QUOTA
- 	for (i = 0; i < MAXQUOTAS; i++)
- 		kfree(F2FS_OPTION(sbi).s_qf_names[i]);
- #endif
- 	fscrypt_free_dummy_policy(&F2FS_OPTION(sbi).dummy_enc_policy);
- 	destroy_percpu_info(sbi);
- 	f2fs_destroy_iostat(sbi);
- 	for (i = 0; i < NR_PAGE_TYPE; i++)
- 		kvfree(sbi->write_io[i]);
- #if IS_ENABLED(CONFIG_UNICODE)
- 	utf8_unload(sb->s_encoding);
- #endif
--	kfree(sbi);
- }
- 
- int f2fs_sync_fs(struct super_block *sb, int sync)
- {
- 	struct f2fs_sb_info *sbi = F2FS_SB(sb);
- 	int err = 0;
- 
- 	if (unlikely(f2fs_cp_error(sbi)))
- 		return 0;
- 	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
-@@ -4895,23 +4892,23 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- }
- 
- static struct dentry *f2fs_mount(struct file_system_type *fs_type, int flags,
- 			const char *dev_name, void *data)
- {
- 	return mount_bdev(fs_type, flags, dev_name, data, f2fs_fill_super);
- }
- 
- static void kill_f2fs_super(struct super_block *sb)
- {
--	if (sb->s_root) {
--		struct f2fs_sb_info *sbi = F2FS_SB(sb);
-+	struct f2fs_sb_info *sbi = F2FS_SB(sb);
- 
-+	if (sb->s_root) {
- 		set_sbi_flag(sbi, SBI_IS_CLOSE);
- 		f2fs_stop_gc_thread(sbi);
- 		f2fs_stop_discard_thread(sbi);
- 
- #ifdef CONFIG_F2FS_FS_COMPRESSION
  		/*
- 		 * latter evict_inode() can bypass checking and invalidating
- 		 * compress inode cache.
+ 		 * Clean up and evict any inodes that still have references due
+ 		 * to fsnotify or the security policy.
  		 */
- 		if (test_opt(sbi, COMPRESS_CACHE))
-@@ -4924,20 +4921,26 @@ static void kill_f2fs_super(struct super_block *sb)
- 				.reason = CP_UMOUNT,
- 			};
- 			stat_inc_cp_call_count(sbi, TOTAL_CALL);
- 			f2fs_write_checkpoint(sbi, &cpc);
+ 		fsnotify_sb_delete(sb);
+ 		security_sb_delete(sb);
+ 
+-		/*
+-		 * Now that all potentially-encrypted inodes have been evicted,
+-		 * the fscrypt keyring can be destroyed.
+-		 */
+-		fscrypt_destroy_keyring(sb);
+-
+ 		if (sb->s_dio_done_wq) {
+ 			destroy_workqueue(sb->s_dio_done_wq);
+ 			sb->s_dio_done_wq = NULL;
  		}
  
- 		if (is_sbi_flag_set(sbi, SBI_IS_RECOVERED) && f2fs_readonly(sb))
- 			sb->s_flags &= ~SB_RDONLY;
- 	}
- 	kill_block_super(sb);
-+	/* Release block devices last, after fscrypt_destroy_keyring(). */
-+	if (sbi) {
-+		destroy_device_list(sbi);
-+		kfree(sbi);
-+		sb->s_fs_info = NULL;
-+	}
- }
+ 		if (sop->put_super)
+ 			sop->put_super(sb);
  
- static struct file_system_type f2fs_fs_type = {
- 	.owner		= THIS_MODULE,
- 	.name		= "f2fs",
- 	.mount		= f2fs_mount,
- 	.kill_sb	= kill_f2fs_super,
- 	.fs_flags	= FS_REQUIRES_DEV | FS_ALLOW_IDMAP,
- };
- MODULE_ALIAS_FS("f2fs");
++		/*
++		 * Now that all potentially-encrypted inodes have been evicted,
++		 * the fscrypt keyring can be destroyed.
++		 */
++		fscrypt_destroy_keyring(sb);
++
+ 		if (CHECK_DATA_CORRUPTION(!list_empty(&sb->s_inodes),
+ 				"VFS: Busy inodes after unmount of %s (%s)",
+ 				sb->s_id, sb->s_type->name)) {
+ 			/*
+ 			 * Adding a proper bailout path here would be hard, but
+ 			 * we can at least make it more likely that a later
+ 			 * iput_final() or such crashes cleanly.
+ 			 */
+ 			struct inode *inode;
+ 
 -- 
 2.43.0
 
