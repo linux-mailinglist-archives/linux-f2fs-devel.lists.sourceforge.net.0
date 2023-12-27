@@ -2,84 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3372B81F0D2
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Dec 2023 18:17:42 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B651B81F29C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Dec 2023 23:56:25 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rIXXH-0006Gc-Nj;
-	Wed, 27 Dec 2023 17:17:40 +0000
+	id 1rIcow-0001zn-Rq;
+	Wed, 27 Dec 2023 22:56:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1rIXXE-0006GL-89
+ (envelope-from <jaegeuk@kernel.org>) id 1rIcov-0001zh-B4
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 27 Dec 2023 17:17:36 +0000
+ Wed, 27 Dec 2023 22:56:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rT0UQHqIOE2IGmgRzBCUSjAfiG5EgDUZFc8MtiojQ/4=; b=j4FStJGK9X8w9VuRrsyNhqydBI
- 2MzhMFCWP6vPMvpT4KDSFvsoe5mYrGghVpBAjlV6KhZ3bnbQaQgt8BKA+d4a9NwR+f+cTtx3u8Z8k
- GKEl3Y8NK02YTyLBmB/YsqAofNKTnPB8Yopi9XozFQbYyb72ozTNoGhBaUpS4hkrX1d0=;
+ bh=EGZUZU6W0tm5wD2g6qoPA1EOcPwLGhQ8XrKJRuaZvmc=; b=XX3tV6jq7L9rGgMB25bopfQdpw
+ /j4WfrXMBpwyjqJzoaplV9o2q8C27cNZV8NlSFG3UrCHXqq7WIrl7VXwYiyWzv9Uq7znaAu/avPxg
+ S3bsaXyhBVd6REijCJc4oQc5k+uAn5+y/hX20GLNZhKiCfdqGIRdbqb0WIR2xPjh10g0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=rT0UQHqIOE2IGmgRzBCUSjAfiG5EgDUZFc8MtiojQ/4=; b=YBSwEPQ3QtLH56NWk3cNOiV/9E
- Edg4vPW7rT5m8o6RwjU/Cyz9xhNZgydoWy+x0Nj3nGSS4u9eAZ2jzo8Oo9uGqDV1zBWBexYFrCOst
- jnuOf3Ic7dePgl+2GIATbYVVnFqil7aqP/1bn3mT37O73UW7fjtZ3WB3Z/nda1Lrcskw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=EGZUZU6W0tm5wD2g6qoPA1EOcPwLGhQ8XrKJRuaZvmc=; b=IR8JeKlr4YgHjADJsoQJm5ttI5
+ Xr4Ke2/A1SlMiulQpNk6nbWlP/mVBkBO6VL9ap6U7+JPGUdvUbOnQuyIQHoj9Bhpz9msn33OzTAzS
+ Uk8o5pJT0JCqVJwpSg80OCE3pKSTLzEjPZItysWQIAyI144crYCyKHdpb1GmJ5f+ZEuI=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rIXXE-0003NG-44 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 27 Dec 2023 17:17:36 +0000
+ id 1rIcoq-00042g-J4 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 27 Dec 2023 22:56:12 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id ABFF460F72;
- Wed, 27 Dec 2023 17:17:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1888C433C8;
- Wed, 27 Dec 2023 17:17:23 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id A181DCE1349
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 27 Dec 2023 22:55:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62C9AC433C8;
+ Wed, 27 Dec 2023 22:55:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1703697445;
- bh=oMd6cyuWC44jmJeHw6DO++liI/GMxog3sPxf3VWV6yo=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=umWhZju6J+3h2OeKVr6EpIyoI+lVYboEc5FBxoXG4nRMbDK2you3mgrHLbSLEGqEx
- v5TJbAoOB5GsKdKsAs40VXE5LeOGcMqaY4qKOCUUQQXPYU53vBXrmAbHxJVCG0adZN
- DL9T3H0YrsbhOTJlEH56Ew8WYkw2bRJ75TVcAE3g3Ljsl78Qw5Fw2cytlDEG8ycd/3
- 1TnhDrSuooc04NdQ1UDs3PcJplG97mdxu2/g13mI7dmJDf3wnUMK1ajm192QvtSYeb
- LeQ2eCmipmcpzmW268aLMreocA1PWHKf2x0I8TvjMuEs9tL1jusH1flupng/oa8eer
- nHSPVZLe7Y2Hg==
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Date: Wed, 27 Dec 2023 11:14:29 -0600
-Message-ID: <20231227171429.9223-3-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20231227171429.9223-1-ebiggers@kernel.org>
-References: <20231227171429.9223-1-ebiggers@kernel.org>
+ s=k20201202; t=1703717751;
+ bh=mnJTPqwPwB6EUXseshRLDDmYsgw6t1CTmgR1m3VU4aE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=UvYFtBGOGjeB/oJjzdQ+yNOCqtdNo1MVtCoD76Vuc3kd6R/yFi4vedt17wWthXZcO
+ NCAsVS6W/9f7Ix3KsGe5Mh7kHI2pyFx3XJmwHNeiziEWsBZv7thg+rrP2vVNsafYcG
+ bcKvpe6R7lxP8+v53OEN9aFDA/bqG1l5ymcjdFO7rDi/dKpaHViru/Ih20Apt5wG9F
+ 9XZrrmVj8dThT7UHphU0OaBON+HJObdPSUH/pyx7+Z9i80r9nC1g4vrWE5qhMBW9yI
+ Fqcn4QjkYIMlkEepBELkqZeqNxXRBCSOAjMxsd8NvCFkadtQYiIyaUO1VxkOB+sDj2
+ N64wPqHvJpFmQ==
+Date: Wed, 27 Dec 2023 14:55:49 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZYyrddJK8KJNpKXz@google.com>
+References: <20231220135934.3471407-1-chao@kernel.org>
+ <ZYs_S0VLFFnV1g-3@google.com>
+ <35f160e2-a9e4-4f76-af32-de00dce05fa1@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -8.0 (--------)
+Content-Disposition: inline
+In-Reply-To: <35f160e2-a9e4-4f76-af32-de00dce05fa1@kernel.org>
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Josef Bacik <josef@toxicpanda.com> btrfs has a variety
- of asynchronous things we do with inodes that can potentially last until
- ->put_super, when we shut everything down and clean up all of our async work.
- Due to this we need to move f [...] 
- Content analysis details:   (-8.0 points, 6.0 required)
+ Content preview:  On 12/27, Chao Yu wrote: > On 2023/12/27 5:02, Jaegeuk Kim
+ wrote: > > On 12/20, Chao Yu wrote: > > > If data block in compressed cluster
+ is not persisted with metadata > > > during checkpoint, after S [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
@@ -89,9 +91,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -2.8 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rIXXE-0003NG-44
-Subject: [f2fs-dev] [PATCH v2 2/2] fs: move fscrypt keyring destruction to
- after ->put_super
+X-Headers-End: 1rIcoq-00042g-J4
+Subject: Re: [f2fs-dev] [PATCH 1/6] f2fs: compress: fix to guarantee
+ persisting compressed blocks by CP
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,77 +105,131 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, Neal Gompa <neal@gompa.dev>,
- Christoph Hellwig <hch@lst.de>, Josef Bacik <josef@toxicpanda.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Josef Bacik <josef@toxicpanda.com>
+On 12/27, Chao Yu wrote:
+> On 2023/12/27 5:02, Jaegeuk Kim wrote:
+> > On 12/20, Chao Yu wrote:
+> > > If data block in compressed cluster is not persisted with metadata
+> > > during checkpoint, after SPOR, the data may be corrupted, let's
+> > > guarantee to write compressed page by checkpoint.
+> > > 
+> > > Fixes: 4c8ff7095bef ("f2fs: support data compression")
+> > > Signed-off-by: Chao Yu <chao@kernel.org>
+> > > ---
+> > >   fs/f2fs/compress.c |  3 ++-
+> > >   fs/f2fs/data.c     | 12 +++++++++---
+> > >   fs/f2fs/f2fs.h     |  3 ++-
+> > >   3 files changed, 13 insertions(+), 5 deletions(-)
+> > > 
+> > > diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> > > index 5b076329e9bf..1122db8cc0b0 100644
+> > > --- a/fs/f2fs/compress.c
+> > > +++ b/fs/f2fs/compress.c
+> > > @@ -1442,6 +1442,7 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page)
+> > >   	struct f2fs_sb_info *sbi = bio->bi_private;
+> > >   	struct compress_io_ctx *cic =
+> > >   			(struct compress_io_ctx *)page_private(page);
+> > > +	enum count_type type = WB_DATA_TYPE(page);
+> > >   	int i;
+> > >   	if (unlikely(bio->bi_status))
+> > > @@ -1449,7 +1450,7 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page)
+> > >   	f2fs_compress_free_page(page);
+> > > -	dec_page_count(sbi, F2FS_WB_DATA);
+> > > +	dec_page_count(sbi, type);
+> > >   	if (atomic_dec_return(&cic->pending_pages))
+> > >   		return;
+> > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > > index d28c97282e68..6c72a6e86ba8 100644
+> > > --- a/fs/f2fs/data.c
+> > > +++ b/fs/f2fs/data.c
+> > > @@ -48,7 +48,7 @@ void f2fs_destroy_bioset(void)
+> > >   	bioset_exit(&f2fs_bioset);
+> > >   }
+> > > -static bool __is_cp_guaranteed(struct page *page)
+> > > +bool f2fs_is_cp_guaranteed(struct page *page)
+> > >   {
+> > >   	struct address_space *mapping = page->mapping;
+> > >   	struct inode *inode;
+> > > @@ -66,7 +66,7 @@ static bool __is_cp_guaranteed(struct page *page)
+> > >   		return true;
+> > >   	if (f2fs_is_compressed_page(page))
+> > > -		return false;
+> > > +		return true;
+> > >   	if ((S_ISREG(inode->i_mode) && IS_NOQUOTA(inode)) ||
+> > >   			page_private_gcing(page))
+> > >   		return true;
+> > > @@ -1007,6 +1007,7 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
+> > >   	enum page_type btype = PAGE_TYPE_OF_BIO(fio->type);
+> > >   	struct f2fs_bio_info *io = sbi->write_io[btype] + fio->temp;
+> > >   	struct page *bio_page;
+> > > +	enum count_type type;
+> > >   	f2fs_bug_on(sbi, is_read_io(fio->op));
+> > > @@ -1046,7 +1047,12 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
+> > >   	/* set submitted = true as a return value */
+> > >   	fio->submitted = 1;
+> > > -	inc_page_count(sbi, WB_DATA_TYPE(bio_page));
+> > > +	type = WB_DATA_TYPE(bio_page);
+> > > +	/* override count type if page is compressed one */
+> > > +	if (fio->compressed_page)
+> > > +		type = WB_DATA_TYPE(fio->compressed_page);
+> > 
+> > Doesn't bio_page already point fio->compressed_page?
+> 
+> Please check below codes, bio_page will point to fio->encrypted_page if
+> both software encryption feature and compression feature are on, for this
+> case, we still need to account F2FS_WB_CP_DATA.
 
-btrfs has a variety of asynchronous things we do with inodes that can
-potentially last until ->put_super, when we shut everything down and
-clean up all of our async work.  Due to this we need to move
-fscrypt_destroy_keyring() to after ->put_super, otherwise we get
-warnings about still having active references on the master key.
+So, it seems you want to make F2FS_WB_CP_DATA regardless of conditions. Then,
+how about making this explictly instead of implicit condition check of the page?
 
-Signed-off-by: Josef Bacik <josef@toxicpanda.com>
-Reviewed-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Neal Gompa <neal@gompa.dev>
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/super.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+#define WB_DATA_TYPE(p, f) (f || __is_cp_guaranteed(p) ? F2FS_WB_CP_DATA : F2FS_WB_DATA)
 
-diff --git a/fs/super.c b/fs/super.c
-index 076392396e724..faf7d248145d2 100644
---- a/fs/super.c
-+++ b/fs/super.c
-@@ -674,34 +674,34 @@ void generic_shutdown_super(struct super_block *sb)
- 		/* Evict all inodes with zero refcount. */
- 		evict_inodes(sb);
- 
- 		/*
- 		 * Clean up and evict any inodes that still have references due
- 		 * to fsnotify or the security policy.
- 		 */
- 		fsnotify_sb_delete(sb);
- 		security_sb_delete(sb);
- 
--		/*
--		 * Now that all potentially-encrypted inodes have been evicted,
--		 * the fscrypt keyring can be destroyed.
--		 */
--		fscrypt_destroy_keyring(sb);
--
- 		if (sb->s_dio_done_wq) {
- 			destroy_workqueue(sb->s_dio_done_wq);
- 			sb->s_dio_done_wq = NULL;
- 		}
- 
- 		if (sop->put_super)
- 			sop->put_super(sb);
- 
-+		/*
-+		 * Now that all potentially-encrypted inodes have been evicted,
-+		 * the fscrypt keyring can be destroyed.
-+		 */
-+		fscrypt_destroy_keyring(sb);
-+
- 		if (CHECK_DATA_CORRUPTION(!list_empty(&sb->s_inodes),
- 				"VFS: Busy inodes after unmount of %s (%s)",
- 				sb->s_id, sb->s_type->name)) {
- 			/*
- 			 * Adding a proper bailout path here would be hard, but
- 			 * we can at least make it more likely that a later
- 			 * iput_final() or such crashes cleanly.
- 			 */
- 			struct inode *inode;
- 
--- 
-2.43.0
+	inc_page_count(sbi, WB_DATA_TYPE(bio_page, bio_page == fio->compressed_page));
 
+	dec_page_count(sbi, WB_DATA_TYPE(page, f2fs_is_compressed_page(page)));
+
+> 
+> 	if (fio->encrypted_page)
+> 		bio_page = fio->encrypted_page;
+> 	else if (fio->compressed_page)
+> 		bio_page = fio->compressed_page;
+> 	else
+> 		bio_page = fio->page;
+> 
+> Thanks,
+> 
+> > 
+> > > +
+> > > +	inc_page_count(sbi, type);
+> > >   	if (io->bio &&
+> > >   	    (!io_is_mergeable(sbi, io->bio, io, fio, io->last_block_in_bio,
+> > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> > > index 76e9a8682e38..bcb3940ab5ba 100644
+> > > --- a/fs/f2fs/f2fs.h
+> > > +++ b/fs/f2fs/f2fs.h
+> > > @@ -1092,7 +1092,7 @@ struct f2fs_sm_info {
+> > >    * f2fs monitors the number of several block types such as on-writeback,
+> > >    * dirty dentry blocks, dirty node blocks, and dirty meta blocks.
+> > >    */
+> > > -#define WB_DATA_TYPE(p)	(__is_cp_guaranteed(p) ? F2FS_WB_CP_DATA : F2FS_WB_DATA)
+> > > +#define WB_DATA_TYPE(p)	(f2fs_is_cp_guaranteed(p) ? F2FS_WB_CP_DATA : F2FS_WB_DATA)
+> > >   enum count_type {
+> > >   	F2FS_DIRTY_DENTS,
+> > >   	F2FS_DIRTY_DATA,
+> > > @@ -3824,6 +3824,7 @@ void f2fs_init_ckpt_req_control(struct f2fs_sb_info *sbi);
+> > >    */
+> > >   int __init f2fs_init_bioset(void);
+> > >   void f2fs_destroy_bioset(void);
+> > > +bool f2fs_is_cp_guaranteed(struct page *page);
+> > >   int f2fs_init_bio_entry_cache(void);
+> > >   void f2fs_destroy_bio_entry_cache(void);
+> > >   void f2fs_submit_read_bio(struct f2fs_sb_info *sbi, struct bio *bio,
+> > > -- 
+> > > 2.40.1
 
 
 _______________________________________________
