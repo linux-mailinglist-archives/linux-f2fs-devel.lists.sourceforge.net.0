@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 978A681F42E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Dec 2023 03:44:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB71081F430
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Dec 2023 03:47:41 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rIgNz-0008V1-Bn;
-	Thu, 28 Dec 2023 02:44:39 +0000
+	id 1rIgQs-00007k-2Y;
+	Thu, 28 Dec 2023 02:47:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rIgNy-0008Uv-57
+ (envelope-from <chao@kernel.org>) id 1rIgQo-00007d-23
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 28 Dec 2023 02:44:38 +0000
+ Thu, 28 Dec 2023 02:47:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/OhM2f2nWz46BtI+4QfZllDe5j5LNB7lykjbbC1kZ3s=; b=UYTPiF7A5AIcpcC6t/UZWtqGUu
- 3JzNik50LI4B2S9uDfWDUE4l/A/R3szMLy/bY/9KvdQXLhPWm5gFGpkwZqNHK7A0b4Tpkz3uwA4bV
- BpbMNh7UTFWH47hqx2nS0eaFkQ+1rmrA2Lih291HwnIMEPMlLRV77aILIP5U6F0Cy5Rg=;
+ bh=qkpQtE12c5+g2Ir2EeoxkuMhAVgX4WQ7u+QPxQWe/fw=; b=M/cUeU5DlkDb1TAjQWGf7UCloT
+ 4G5wT5A9JUbPEXbc1D7Q8UlQKEM+pq3S358XwqwNyLATeFXV2vUQl095RQpPThgb5V3DmOvjFweJ4
+ tQwncHUWVTS3npojbkJKYgmgNv4LJ/4RPk3OQV06eKCTKxnMBqQN709I1f5lJyKTDt9s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,71 +31,68 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/OhM2f2nWz46BtI+4QfZllDe5j5LNB7lykjbbC1kZ3s=; b=AZpdsCLs/DOlur26O5HFPK7m6O
- JIr6yp1z1OEUTePOehfEbnNkxdUO+a/KTjftoWzfBJzgYgJx+b1+HInWnc20JdrLPEvMVVx/Ija6C
- bZSYsVxekaUYm/45Y70MjW8SQl4xRqfBYonVd+waZZ6JNvsSIQhofe5+fC7GsAi4G1o8=;
+ bh=qkpQtE12c5+g2Ir2EeoxkuMhAVgX4WQ7u+QPxQWe/fw=; b=lB/pK0bbQJ83dGAeIK8RSam0pX
+ d8jK9RY+08nEZpplHlGmYbCnN0xIc0ROCKk4l23O4GngzqYcQ/8xXdHflKVvtk9OlKVJy1I2hUM1N
+ zhhl2OAbOShlGDsxGAjjY6toD1kjKBV/v66EuqFvfXx7x9wO/ZoGoa6GcH8iPCfF/yu0=;
 Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rIgNt-00061K-B0 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 28 Dec 2023 02:44:38 +0000
+ id 1rIgQm-000691-Ud for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 28 Dec 2023 02:47:33 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 7DBB1CE12B0
+ by sin.source.kernel.org (Postfix) with ESMTP id 4DBF2CE12B0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 28 Dec 2023 02:44:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66E6AC433C7;
- Thu, 28 Dec 2023 02:44:13 +0000 (UTC)
+ Thu, 28 Dec 2023 02:47:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 901E8C433C7;
+ Thu, 28 Dec 2023 02:47:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1703731456;
- bh=5Sry3MZK5nXPzSBh0f8DSWrW1gKYAHch4PSI9KBt3g8=;
+ s=k20201202; t=1703731639;
+ bh=2AjIOZxyvSsnOs5RvR4gm8XqtCrUbOnC19jU5B+aS1M=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=C1u06OLxhWQVdwt+XdvP32ieP6YmSAzwoIzs1zdhTe3nAEy7El8CVx5xHUW2Skxz1
- 4aXLMk0i0g5y3j4V4YNJHZBygBlPeFGMskkbDOZviro39Ja/cs8QdxuSprpWUeZQtt
- e8mGK51Bnog4dicRGLBNee5KqYZOiD0bGzlF05Ig1jyLJcP3ovDY6goqMa3XjKqRND
- 6eBjzvfG+R4V4QhDDeD7JU+Gs1q9fZsezKKxfVLNIjGurRfN+jOQLpJ0vrWrgoGnC5
- MrXN5gvQdiINFPaMLxj843vnUYNrk/MWIRtVsEbr9745rA/oVfiukakwdiENQx7x6i
- QTZBnteaQyCuA==
-Message-ID: <aae654e7-8a7e-478d-9f5a-65807a0e0343@kernel.org>
-Date: Thu, 28 Dec 2023 10:44:09 +0800
+ b=f2MUYIXWxRuy8oqd0WDfNtx+tGlwmeRADgTRQn8dzT9IilUKJdP8x7LlaxWl5DUND
+ yVdjZFw8nTmI/pTAvBeWsgsp91dz/UkWUVdd7jkN4VTpWju2rTbyJp5BEu9TvVMx1n
+ JP2GUI+Kc+h4MlJppB7U1Kc4TtlQHIypIYgiQU/IdH9/fRywlWMzMR6chUMA8FISqj
+ kC0t4Cst+Z8fZrpeeoUaq2ScDUXUyQQzZuKJ97qwF7pf1nSVLsHaT5dKC17NMQ6MGs
+ yxrcWiBOCu7hwb+tY9uzIleF0Q+CeJKPIv7U4sQbz5ADL7NmGIefMKMi3QE3iDosXo
+ UaljN8u42/MgQ==
+Message-ID: <b4b08863-4cd5-471f-9f88-ca3559201446@kernel.org>
+Date: Thu, 28 Dec 2023 10:47:15 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20231220135934.3471407-1-chao@kernel.org>
- <ZYs_S0VLFFnV1g-3@google.com>
- <35f160e2-a9e4-4f76-af32-de00dce05fa1@kernel.org>
- <ZYyrddJK8KJNpKXz@google.com>
+References: <20231225144335.2548-1-chao@kernel.org>
+ <ZYyt7dNmPw0aMa5l@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZYyrddJK8KJNpKXz@google.com>
+In-Reply-To: <ZYyt7dNmPw0aMa5l@google.com>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/12/28 6:55, Jaegeuk Kim wrote: > On 12/27, Chao Yu
- wrote: >> On 2023/12/27 5:02, Jaegeuk Kim wrote: >>> On 12/20, Chao Yu wrote:
- >>>> If data block in compressed cluster is not persisted with [...] 
+ Content preview:  On 2023/12/28 7:06, Jaegeuk Kim wrote: > On 12/25, Chao Yu
+ wrote: >> We will encounter below inconsistent status when FAULT_BLKADDR
+ type >> fault injection is on. >> >> Info: checkpoint state = d6 : n [...]
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
  medium trust [145.40.73.55 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -2.8 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rIgNt-00061K-B0
-Subject: Re: [f2fs-dev] [PATCH 1/6] f2fs: compress: fix to guarantee
- persisting compressed blocks by CP
+X-Headers-End: 1rIgQm-000691-Ud
+Subject: Re: [f2fs-dev] [PATCH v2 6/6] f2fs: introduce FAULT_INCONSISTENCE
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,138 +109,173 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/12/28 6:55, Jaegeuk Kim wrote:
-> On 12/27, Chao Yu wrote:
->> On 2023/12/27 5:02, Jaegeuk Kim wrote:
->>> On 12/20, Chao Yu wrote:
->>>> If data block in compressed cluster is not persisted with metadata
->>>> during checkpoint, after SPOR, the data may be corrupted, let's
->>>> guarantee to write compressed page by checkpoint.
->>>>
->>>> Fixes: 4c8ff7095bef ("f2fs: support data compression")
->>>> Signed-off-by: Chao Yu <chao@kernel.org>
->>>> ---
->>>>    fs/f2fs/compress.c |  3 ++-
->>>>    fs/f2fs/data.c     | 12 +++++++++---
->>>>    fs/f2fs/f2fs.h     |  3 ++-
->>>>    3 files changed, 13 insertions(+), 5 deletions(-)
->>>>
->>>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
->>>> index 5b076329e9bf..1122db8cc0b0 100644
->>>> --- a/fs/f2fs/compress.c
->>>> +++ b/fs/f2fs/compress.c
->>>> @@ -1442,6 +1442,7 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page)
->>>>    	struct f2fs_sb_info *sbi = bio->bi_private;
->>>>    	struct compress_io_ctx *cic =
->>>>    			(struct compress_io_ctx *)page_private(page);
->>>> +	enum count_type type = WB_DATA_TYPE(page);
->>>>    	int i;
->>>>    	if (unlikely(bio->bi_status))
->>>> @@ -1449,7 +1450,7 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page)
->>>>    	f2fs_compress_free_page(page);
->>>> -	dec_page_count(sbi, F2FS_WB_DATA);
->>>> +	dec_page_count(sbi, type);
->>>>    	if (atomic_dec_return(&cic->pending_pages))
->>>>    		return;
->>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>>> index d28c97282e68..6c72a6e86ba8 100644
->>>> --- a/fs/f2fs/data.c
->>>> +++ b/fs/f2fs/data.c
->>>> @@ -48,7 +48,7 @@ void f2fs_destroy_bioset(void)
->>>>    	bioset_exit(&f2fs_bioset);
->>>>    }
->>>> -static bool __is_cp_guaranteed(struct page *page)
->>>> +bool f2fs_is_cp_guaranteed(struct page *page)
->>>>    {
->>>>    	struct address_space *mapping = page->mapping;
->>>>    	struct inode *inode;
->>>> @@ -66,7 +66,7 @@ static bool __is_cp_guaranteed(struct page *page)
->>>>    		return true;
->>>>    	if (f2fs_is_compressed_page(page))
->>>> -		return false;
->>>> +		return true;
->>>>    	if ((S_ISREG(inode->i_mode) && IS_NOQUOTA(inode)) ||
->>>>    			page_private_gcing(page))
->>>>    		return true;
->>>> @@ -1007,6 +1007,7 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
->>>>    	enum page_type btype = PAGE_TYPE_OF_BIO(fio->type);
->>>>    	struct f2fs_bio_info *io = sbi->write_io[btype] + fio->temp;
->>>>    	struct page *bio_page;
->>>> +	enum count_type type;
->>>>    	f2fs_bug_on(sbi, is_read_io(fio->op));
->>>> @@ -1046,7 +1047,12 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
->>>>    	/* set submitted = true as a return value */
->>>>    	fio->submitted = 1;
->>>> -	inc_page_count(sbi, WB_DATA_TYPE(bio_page));
->>>> +	type = WB_DATA_TYPE(bio_page);
->>>> +	/* override count type if page is compressed one */
->>>> +	if (fio->compressed_page)
->>>> +		type = WB_DATA_TYPE(fio->compressed_page);
->>>
->>> Doesn't bio_page already point fio->compressed_page?
+On 2023/12/28 7:06, Jaegeuk Kim wrote:
+> On 12/25, Chao Yu wrote:
+>> We will encounter below inconsistent status when FAULT_BLKADDR type
+>> fault injection is on.
 >>
->> Please check below codes, bio_page will point to fio->encrypted_page if
->> both software encryption feature and compression feature are on, for this
->> case, we still need to account F2FS_WB_CP_DATA.
+>> Info: checkpoint state = d6 :  nat_bits crc fsck compacted_summary orphan_inodes sudden-power-off
+>> [ASSERT] (fsck_chk_inode_blk:1254)  --> ino: 0x1c100 has i_blocks: 000000c0, but has 191 blocks
+>> [FIX] (fsck_chk_inode_blk:1260)  --> [0x1c100] i_blocks=0x000000c0 -> 0xbf
+>> [FIX] (fsck_chk_inode_blk:1269)  --> [0x1c100] i_compr_blocks=0x00000026 -> 0x27
+>> [ASSERT] (fsck_chk_inode_blk:1254)  --> ino: 0x1cadb has i_blocks: 0000002f, but has 46 blocks
+>> [FIX] (fsck_chk_inode_blk:1260)  --> [0x1cadb] i_blocks=0x0000002f -> 0x2e
+>> [FIX] (fsck_chk_inode_blk:1269)  --> [0x1cadb] i_compr_blocks=0x00000011 -> 0x12
+>> [ASSERT] (fsck_chk_inode_blk:1254)  --> ino: 0x1c62c has i_blocks: 00000002, but has 1 blocks
+>> [FIX] (fsck_chk_inode_blk:1260)  --> [0x1c62c] i_blocks=0x00000002 -> 0x1
+>>
+>> After we inject fault into f2fs_is_valid_blkaddr() during truncation,
+>> a) it missed to increase @nr_free or @valid_blocks
+>> b) it can cause in blkaddr leak in truncated dnode
+>> Which may cause inconsistent status.
+>>
+>> This patch separates FAULT_INCONSISTENCE from FAULT_BLKADDR, so that
 > 
-> So, it seems you want to make F2FS_WB_CP_DATA regardless of conditions. Then,
-> how about making this explictly instead of implicit condition check of the page?
-> 
-> #define WB_DATA_TYPE(p, f) (f || __is_cp_guaranteed(p) ? F2FS_WB_CP_DATA : F2FS_WB_DATA)
-> 
-> 	inc_page_count(sbi, WB_DATA_TYPE(bio_page, bio_page == fio->compressed_page));
+> Could you please rename FAULT_INCONSISTENCE to give exactly what it tries
+> to break?
 
-Do you mean inc_page_count(sbi, WB_DATA_TYPE(bio_page, fio->compressed_page));?
-
-If we use inc_page_count(sbi, WB_DATA_TYPE(bio_page, bio_page == fio->compressed_page));
-if bio_page points to fio->encrypted_page, but fio->compressed_page is valid, then
-WB_DATA_TYPE() will return F2FS_WB_DATA, it doesn't as expect.
-
-Or am I missing something?
+Sure, maybe FAULT_BLKADDR_INCONSISTENCE... let me know if you want/have a
+better one. :)
 
 Thanks,
 
 > 
-> 	dec_page_count(sbi, WB_DATA_TYPE(page, f2fs_is_compressed_page(page)));
-> 
+>> we can:
+>> a) use FAULT_INCONSISTENCE in f2fs_truncate_data_blocks_range() to
+>> simulate inconsistent issue independently,
+>> b) FAULT_BLKADDR fault will not cause any inconsistent status, we can
+>> just use it to check error path handling in kernel side.
 >>
->> 	if (fio->encrypted_page)
->> 		bio_page = fio->encrypted_page;
->> 	else if (fio->compressed_page)
->> 		bio_page = fio->compressed_page;
->> 	else
->> 		bio_page = fio->page;
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>> v2:
+>> - make __f2fs_is_valid_blkaddr() void.
+>>   Documentation/ABI/testing/sysfs-fs-f2fs |  1 +
+>>   Documentation/filesystems/f2fs.rst      |  1 +
+>>   fs/f2fs/checkpoint.c                    | 19 +++++++++++++++----
+>>   fs/f2fs/f2fs.h                          |  3 +++
+>>   fs/f2fs/file.c                          |  8 ++++++--
+>>   fs/f2fs/super.c                         |  1 +
+>>   6 files changed, 27 insertions(+), 6 deletions(-)
 >>
->> Thanks,
->>
->>>
->>>> +
->>>> +	inc_page_count(sbi, type);
->>>>    	if (io->bio &&
->>>>    	    (!io_is_mergeable(sbi, io->bio, io, fio, io->last_block_in_bio,
->>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>> index 76e9a8682e38..bcb3940ab5ba 100644
->>>> --- a/fs/f2fs/f2fs.h
->>>> +++ b/fs/f2fs/f2fs.h
->>>> @@ -1092,7 +1092,7 @@ struct f2fs_sm_info {
->>>>     * f2fs monitors the number of several block types such as on-writeback,
->>>>     * dirty dentry blocks, dirty node blocks, and dirty meta blocks.
->>>>     */
->>>> -#define WB_DATA_TYPE(p)	(__is_cp_guaranteed(p) ? F2FS_WB_CP_DATA : F2FS_WB_DATA)
->>>> +#define WB_DATA_TYPE(p)	(f2fs_is_cp_guaranteed(p) ? F2FS_WB_CP_DATA : F2FS_WB_DATA)
->>>>    enum count_type {
->>>>    	F2FS_DIRTY_DENTS,
->>>>    	F2FS_DIRTY_DATA,
->>>> @@ -3824,6 +3824,7 @@ void f2fs_init_ckpt_req_control(struct f2fs_sb_info *sbi);
->>>>     */
->>>>    int __init f2fs_init_bioset(void);
->>>>    void f2fs_destroy_bioset(void);
->>>> +bool f2fs_is_cp_guaranteed(struct page *page);
->>>>    int f2fs_init_bio_entry_cache(void);
->>>>    void f2fs_destroy_bio_entry_cache(void);
->>>>    void f2fs_submit_read_bio(struct f2fs_sb_info *sbi, struct bio *bio,
->>>> -- 
->>>> 2.40.1
+>> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+>> index 4f1d4e636d67..649aabac16c2 100644
+>> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+>> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+>> @@ -708,6 +708,7 @@ Description:	Support configuring fault injection type, should be
+>>   		FAULT_DQUOT_INIT         0x000010000
+>>   		FAULT_LOCK_OP            0x000020000
+>>   		FAULT_BLKADDR            0x000040000
+>> +		FAULT_INCONSISTENCE      0x000080000
+>>   		===================      ===========
+>>   
+>>   What:		/sys/fs/f2fs/<disk>/discard_io_aware_gran
+>> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+>> index d32c6209685d..5616fb8ae207 100644
+>> --- a/Documentation/filesystems/f2fs.rst
+>> +++ b/Documentation/filesystems/f2fs.rst
+>> @@ -206,6 +206,7 @@ fault_type=%d		 Support configuring fault injection type, should be
+>>   			 FAULT_DQUOT_INIT	  0x000010000
+>>   			 FAULT_LOCK_OP		  0x000020000
+>>   			 FAULT_BLKADDR		  0x000040000
+>> +			 FAULT_INCONSISTENCE	  0x000080000
+>>   			 ===================	  ===========
+>>   mode=%s			 Control block allocation mode which supports "adaptive"
+>>   			 and "lfs". In "lfs" mode, there should be no random
+>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+>> index b0597a539fc5..84546f529cf0 100644
+>> --- a/fs/f2fs/checkpoint.c
+>> +++ b/fs/f2fs/checkpoint.c
+>> @@ -170,12 +170,9 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
+>>   	return exist;
+>>   }
+>>   
+>> -bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+>> +static bool __f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+>>   					block_t blkaddr, int type)
+>>   {
+>> -	if (time_to_inject(sbi, FAULT_BLKADDR))
+>> -		return false;
+>> -
+>>   	switch (type) {
+>>   	case META_NAT:
+>>   		break;
+>> @@ -230,6 +227,20 @@ bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+>>   	return true;
+>>   }
+>>   
+>> +bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+>> +					block_t blkaddr, int type)
+>> +{
+>> +	if (time_to_inject(sbi, FAULT_BLKADDR))
+>> +		return false;
+>> +	return __f2fs_is_valid_blkaddr(sbi, blkaddr, type);
+>> +}
+>> +
+>> +bool f2fs_is_valid_blkaddr_raw(struct f2fs_sb_info *sbi,
+>> +					block_t blkaddr, int type)
+>> +{
+>> +	return __f2fs_is_valid_blkaddr(sbi, blkaddr, type);
+>> +}
+>> +
+>>   /*
+>>    * Readahead CP/NAT/SIT/SSA/POR pages
+>>    */
+>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>> index 34b20700b5ec..3985296e64cb 100644
+>> --- a/fs/f2fs/f2fs.h
+>> +++ b/fs/f2fs/f2fs.h
+>> @@ -61,6 +61,7 @@ enum {
+>>   	FAULT_DQUOT_INIT,
+>>   	FAULT_LOCK_OP,
+>>   	FAULT_BLKADDR,
+>> +	FAULT_INCONSISTENCE,
+>>   	FAULT_MAX,
+>>   };
+>>   
+>> @@ -3767,6 +3768,8 @@ struct page *f2fs_get_meta_page_retry(struct f2fs_sb_info *sbi, pgoff_t index);
+>>   struct page *f2fs_get_tmp_page(struct f2fs_sb_info *sbi, pgoff_t index);
+>>   bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+>>   					block_t blkaddr, int type);
+>> +bool f2fs_is_valid_blkaddr_raw(struct f2fs_sb_info *sbi,
+>> +					block_t blkaddr, int type);
+>>   int f2fs_ra_meta_pages(struct f2fs_sb_info *sbi, block_t start, int nrpages,
+>>   			int type, bool sync);
+>>   void f2fs_ra_meta_pages_cond(struct f2fs_sb_info *sbi, pgoff_t index,
+>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>> index 9f4e21b5916c..b5149f1f2a20 100644
+>> --- a/fs/f2fs/file.c
+>> +++ b/fs/f2fs/file.c
+>> @@ -590,9 +590,13 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
+>>   		f2fs_set_data_blkaddr(dn, NULL_ADDR);
+>>   
+>>   		if (__is_valid_data_blkaddr(blkaddr)) {
+>> -			if (!f2fs_is_valid_blkaddr(sbi, blkaddr,
+>> -					DATA_GENERIC_ENHANCE))
+>> +			if (time_to_inject(sbi, FAULT_INCONSISTENCE))
+>> +				continue;
+>> +			if (!f2fs_is_valid_blkaddr_raw(sbi, blkaddr,
+>> +						DATA_GENERIC_ENHANCE)) {
+>> +				f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
+>>   				continue;
+>> +			}
+>>   			if (compressed_cluster)
+>>   				valid_blocks++;
+>>   		}
+>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>> index 206d03c82d96..9a5c5e06f766 100644
+>> --- a/fs/f2fs/super.c
+>> +++ b/fs/f2fs/super.c
+>> @@ -62,6 +62,7 @@ const char *f2fs_fault_name[FAULT_MAX] = {
+>>   	[FAULT_DQUOT_INIT]	= "dquot initialize",
+>>   	[FAULT_LOCK_OP]		= "lock_op",
+>>   	[FAULT_BLKADDR]		= "invalid blkaddr",
+>> +	[FAULT_INCONSISTENCE]	= "inconsistence",
+>>   };
+>>   
+>>   void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
+>> -- 
+>> 2.40.1
 
 
 _______________________________________________
