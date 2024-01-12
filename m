@@ -2,84 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7597A82C94A
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 13 Jan 2024 04:57:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9B8B82C945
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 13 Jan 2024 04:57:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rOV9N-0005uN-O9;
-	Sat, 13 Jan 2024 03:57:37 +0000
+	id 1rOV9R-0005jN-JR;
+	Sat, 13 Jan 2024 03:57:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rOV9M-0005uH-7C
+ (envelope-from <chao@kernel.org>) id 1rOV9Q-0005jH-0d
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 13 Jan 2024 03:57:36 +0000
+ Sat, 13 Jan 2024 03:57:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YsigP+VaIBvZj36zwwwMZKpyH/Hp+LVscKGUsBZbaog=; b=kpi/+odX8yrHtIB7wQ3f+gqahT
- LKp+7NAW/xmJQpZiq5EngXOJCawBLOY+vYX3ZfDkMj9tXQCy205/OX+HdgOc7y6TrTSpzV6vAgpsz
- zjVgn0KFTkAa3VNKk6HzJ7IizR9BGO3AT6PsKlxHXM6aedeXHGKCmrxoh6Yxt2cSSIRo=;
+ bh=tXDPzO3x6Ra8rDoL3Gfg65VuJUTHEsBIlGE/ivAOe2w=; b=Mm5kstEWK+XgqmKwFqObbJwsZ3
+ 7lbXllnHI+GcN6TQMdmjHkKvNA3iqAQcKt9u2wHqxwpJpFAY7CNutPF6GLucwpzNhBNYfSMyzEr/e
+ 1lgRzUrSuAzgaxy7XaDvTH9anjE/0oSVLFiKYaAGxO3eS6ZuE1p66PQnDwMs+eMVITck=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=YsigP+VaIBvZj36zwwwMZKpyH/Hp+LVscKGUsBZbaog=; b=a
- 9VmwpTmA/tNSQSf1pr4dl8SJM0UQMJlu2sh3QWrwwGimegKGgfb+YLZ18FwcIrdqaq9OI6ayAflYL
- 3T6bSX2FCt9qJs/EldKpqz/kiXSN0Px+EOiRyZM19zNxeJ2UGkQPJhhnApuzVddkwU5R3CTDhdFs3
- /lIb0jpB6DAz/jAA=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=tXDPzO3x6Ra8rDoL3Gfg65VuJUTHEsBIlGE/ivAOe2w=; b=fB/QBv09uE20kjCzTicbWkPyKk
+ Xadb3VPtyfrH7AvcTDEgt5ULOGjlf58tyGYloc4TAqLy1E888rU8FOlrnwhqtWC4OX4c6WOAp/rPa
+ YpcMqIAOyZQKjQ6YyaAT5r24+9+DizIk02+FnNPpGWTInxEhV/c2QaeHuienP9r7G25k=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rOV9J-0003oU-RW for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 13 Jan 2024 03:57:36 +0000
+ id 1rOV9L-0003oN-0Z for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 13 Jan 2024 03:57:40 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 22B8E61E75;
- Sat, 13 Jan 2024 03:57:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 773A7C433C7;
- Sat, 13 Jan 2024 03:57:21 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 9F9C1CE2529;
+ Sat, 13 Jan 2024 03:57:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3F6FC43394;
+ Sat, 13 Jan 2024 03:57:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705118242;
- bh=ywpF7M7D95zhHcwElxt0DfykbkE6hwAR+GppJ/4fpB0=;
- h=From:To:Cc:Subject:Date:From;
- b=hQBXkuzYfllzx+qIwwaNwncmmkXi0y4ESLWwb4bR55nooqz/eokfESkvYvMk5WtHi
- YNPLHBGN6oapFSvu3fTmqpKPtjHyZCdEL70q1BUnm+zS4OVbj9S5vAFVH/7c0QvP0G
- UtOlsosWRZkRebr243HNptLlyR7TA4DoUXw6nn8/01KfOVniJ7FcXcbHxF1fsFprBg
- zmK/EV9k2Wu00MQwLJFto9ifNqkb6acsRCI/23fCZtpfyg8lfoAGud73Tkef22dHFV
- 6LYW2F90Xfg7uIwKVFjW/m23MPi3iWSZo8RlcqaJ2FScv+GkiojS2nnfGGyhOzAJdz
- Q5uCx9yCF1o/w==
+ s=k20201202; t=1705118244;
+ bh=Pwhw+AdbpURbuvJ0cNdufR/wI31fMV9RuSonpJNRroI=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=bfXKXQsnstXhnuV4PDJMUJHi0xIPewcw4erISXX2HAQufwAPJTJDW1Y0vLuOvf0/N
+ JP20c7kp/k15omF0sHDfvQ60PN6dzcvppHC5nl49wCxZFE7+u0eblZ6iosHp82TdqA
+ JkkkpdmZ6EE958fSIEIMZNEs9k9Pv4EuMjVCGoXqiX3XOQMVnPedbu8IpsSvilrR3h
+ iNxOhoZV+c8Hclv7eYjHtklp/1uCialVyxrUUU3rcYjRFlia1aq8ZJdZ97t2HP5CVn
+ O91OFdD2v/1yko7dpSg+OzICDaRhdwwcb/OjrnT0qgpzTlPgnoInvi0oRuT3RVrgEr
+ 9RXJiwcjkll+w==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Sat, 13 Jan 2024 03:41:27 +0800
-Message-Id: <20240112194132.25637-1-chao@kernel.org>
+Date: Sat, 13 Jan 2024 03:41:28 +0800
+Message-Id: <20240112194132.25637-2-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240112194132.25637-1-chao@kernel.org>
+References: <20240112194132.25637-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -6.2 (------)
+X-Spam-Score: -3.5 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  If data block in compressed cluster is not persisted with
- metadata during checkpoint, after SPOR, the data may be corrupted,
- let's guarantee
- to write compressed page by checkpoint. Fixes: 4c8ff7095bef ("f2fs: support
- data compression") Reviewed-by: Daeho Jeong <daehojeong@google.com>
- Signed-off-by:
- Chao Yu <chao@kernel.org> --- fs/f2fs/compress.c | 4 +++- fs/f2fs/data.c
- | 17 +++ [...] 
- Content analysis details:   (-6.2 points, 6.0 required)
+ Content preview:  When we overwrite compressed cluster w/ normal cluster, we
+ should not unlock cp_rwsem during f2fs_write_raw_pages(), otherwise data
+ will be corrupted if partial blocks were persisted before CP & SPOR, [...]
+ Content analysis details:   (-3.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  1.1 DATE_IN_PAST_06_12     Date: is 6 to 12 hours before Received: date
@@ -92,9 +89,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -2.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rOV9J-0003oU-RW
-Subject: [f2fs-dev] [PATCH v5 1/6] f2fs: compress: fix to guarantee
- persisting compressed blocks by CP
+X-Headers-End: 1rOV9L-0003oN-0Z
+Subject: [f2fs-dev] [PATCH v5 2/6] f2fs: compress: fix to cover normal
+ cluster write with cp_rwsem
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,140 +109,119 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If data block in compressed cluster is not persisted with metadata
-during checkpoint, after SPOR, the data may be corrupted, let's
-guarantee to write compressed page by checkpoint.
+When we overwrite compressed cluster w/ normal cluster, we should
+not unlock cp_rwsem during f2fs_write_raw_pages(), otherwise data
+will be corrupted if partial blocks were persisted before CP & SPOR,
+due to cluster metadata wasn't updated atomically.
 
 Fixes: 4c8ff7095bef ("f2fs: support data compression")
 Reviewed-by: Daeho Jeong <daehojeong@google.com>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/compress.c |  4 +++-
- fs/f2fs/data.c     | 17 +++++++++--------
- fs/f2fs/f2fs.h     |  4 +++-
- 3 files changed, 15 insertions(+), 10 deletions(-)
+v5:
+- include cleanup from Jaegeuk.
+ fs/f2fs/compress.c | 27 ++++++++++++++++++---------
+ fs/f2fs/data.c     |  3 ++-
+ 2 files changed, 20 insertions(+), 10 deletions(-)
 
 diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index c5a4364c4482..9940b7886e5d 100644
+index 9940b7886e5d..06e9bbfba1f1 100644
 --- a/fs/f2fs/compress.c
 +++ b/fs/f2fs/compress.c
-@@ -1418,6 +1418,8 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page)
- 	struct f2fs_sb_info *sbi = bio->bi_private;
- 	struct compress_io_ctx *cic =
- 			(struct compress_io_ctx *)page_private(page);
-+	enum count_type type = WB_DATA_TYPE(page,
-+				f2fs_is_compressed_page(page));
- 	int i;
- 
- 	if (unlikely(bio->bi_status))
-@@ -1425,7 +1427,7 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page)
- 
- 	f2fs_compress_free_page(page);
- 
--	dec_page_count(sbi, F2FS_WB_DATA);
-+	dec_page_count(sbi, type);
- 
- 	if (atomic_dec_return(&cic->pending_pages))
- 		return;
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index dce8defdf4c7..81f9e2cc49e2 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -48,7 +48,7 @@ void f2fs_destroy_bioset(void)
- 	bioset_exit(&f2fs_bioset);
+@@ -1443,12 +1443,14 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page)
  }
  
--static bool __is_cp_guaranteed(struct page *page)
-+bool f2fs_is_cp_guaranteed(struct page *page)
+ static int f2fs_write_raw_pages(struct compress_ctx *cc,
+-					int *submitted,
++					int *submitted_p,
+ 					struct writeback_control *wbc,
+ 					enum iostat_type io_type)
  {
- 	struct address_space *mapping = page->mapping;
- 	struct inode *inode;
-@@ -65,8 +65,6 @@ static bool __is_cp_guaranteed(struct page *page)
- 			S_ISDIR(inode->i_mode))
- 		return true;
+ 	struct address_space *mapping = cc->inode->i_mapping;
+-	int _submitted, compr_blocks, ret, i;
++	struct f2fs_sb_info *sbi = F2FS_M_SB(mapping);
++	int submitted, compr_blocks, i;
++	int ret = 0;
  
--	if (f2fs_is_compressed_page(page))
--		return false;
- 	if ((S_ISREG(inode->i_mode) && IS_NOQUOTA(inode)) ||
- 			page_private_gcing(page))
- 		return true;
-@@ -338,7 +336,7 @@ static void f2fs_write_end_io(struct bio *bio)
+ 	compr_blocks = f2fs_compressed_blocks(cc);
  
- 	bio_for_each_segment_all(bvec, bio, iter_all) {
- 		struct page *page = bvec->bv_page;
--		enum count_type type = WB_DATA_TYPE(page);
-+		enum count_type type = WB_DATA_TYPE(page, false);
+@@ -1463,6 +1465,10 @@ static int f2fs_write_raw_pages(struct compress_ctx *cc,
+ 	if (compr_blocks < 0)
+ 		return compr_blocks;
  
- 		if (page_private_dummy(page)) {
- 			clear_page_private_dummy(page);
-@@ -762,7 +760,7 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
- 		wbc_account_cgroup_owner(fio->io_wbc, fio->page, PAGE_SIZE);
++	/* overwrite compressed cluster w/ normal cluster */
++	if (compr_blocks > 0)
++		f2fs_lock_op(sbi);
++
+ 	for (i = 0; i < cc->cluster_size; i++) {
+ 		if (!cc->rpages[i])
+ 			continue;
+@@ -1487,7 +1493,7 @@ static int f2fs_write_raw_pages(struct compress_ctx *cc,
+ 		if (!clear_page_dirty_for_io(cc->rpages[i]))
+ 			goto continue_unlock;
  
- 	inc_page_count(fio->sbi, is_read_io(fio->op) ?
--			__read_io_type(page) : WB_DATA_TYPE(fio->page));
-+			__read_io_type(page) : WB_DATA_TYPE(fio->page, false));
- 
- 	if (is_read_io(bio_op(bio)))
- 		f2fs_submit_read_bio(fio->sbi, bio, fio->type);
-@@ -973,7 +971,7 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
- 	if (fio->io_wbc)
- 		wbc_account_cgroup_owner(fio->io_wbc, fio->page, PAGE_SIZE);
- 
--	inc_page_count(fio->sbi, WB_DATA_TYPE(page));
-+	inc_page_count(fio->sbi, WB_DATA_TYPE(page, false));
- 
- 	*fio->last_block = fio->new_blkaddr;
- 	*fio->bio = bio;
-@@ -1007,6 +1005,7 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 	enum page_type btype = PAGE_TYPE_OF_BIO(fio->type);
- 	struct f2fs_bio_info *io = sbi->write_io[btype] + fio->temp;
- 	struct page *bio_page;
-+	enum count_type type;
- 
- 	f2fs_bug_on(sbi, is_read_io(fio->op));
- 
-@@ -1046,7 +1045,8 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 	/* set submitted = true as a return value */
- 	fio->submitted = 1;
- 
--	inc_page_count(sbi, WB_DATA_TYPE(bio_page));
-+	type = WB_DATA_TYPE(bio_page, fio->compressed_page);
-+	inc_page_count(sbi, type);
- 
- 	if (io->bio &&
- 	    (!io_is_mergeable(sbi, io->bio, io, fio, io->last_block_in_bio,
-@@ -1059,7 +1059,8 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 		if (F2FS_IO_ALIGNED(sbi) &&
- 				(fio->type == DATA || fio->type == NODE) &&
- 				fio->new_blkaddr & F2FS_IO_SIZE_MASK(sbi)) {
--			dec_page_count(sbi, WB_DATA_TYPE(bio_page));
-+			dec_page_count(sbi, WB_DATA_TYPE(bio_page,
-+						fio->compressed_page));
- 			fio->retry = 1;
- 			goto skip;
+-		ret = f2fs_write_single_data_page(cc->rpages[i], &_submitted,
++		ret = f2fs_write_single_data_page(cc->rpages[i], &submitted,
+ 						NULL, NULL, wbc, io_type,
+ 						compr_blocks, false);
+ 		if (ret) {
+@@ -1495,26 +1501,29 @@ static int f2fs_write_raw_pages(struct compress_ctx *cc,
+ 				unlock_page(cc->rpages[i]);
+ 				ret = 0;
+ 			} else if (ret == -EAGAIN) {
++				ret = 0;
+ 				/*
+ 				 * for quota file, just redirty left pages to
+ 				 * avoid deadlock caused by cluster update race
+ 				 * from foreground operation.
+ 				 */
+ 				if (IS_NOQUOTA(cc->inode))
+-					return 0;
+-				ret = 0;
++					goto out;
+ 				f2fs_io_schedule_timeout(DEFAULT_IO_TIMEOUT);
+ 				goto retry_write;
+ 			}
+-			return ret;
++			goto out;
  		}
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 65294e3b0bef..50f3d546ded8 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1080,7 +1080,8 @@ struct f2fs_sm_info {
-  * f2fs monitors the number of several block types such as on-writeback,
-  * dirty dentry blocks, dirty node blocks, and dirty meta blocks.
-  */
--#define WB_DATA_TYPE(p)	(__is_cp_guaranteed(p) ? F2FS_WB_CP_DATA : F2FS_WB_DATA)
-+#define WB_DATA_TYPE(p, f)			\
-+	(f || f2fs_is_cp_guaranteed(p) ? F2FS_WB_CP_DATA : F2FS_WB_DATA)
- enum count_type {
- 	F2FS_DIRTY_DENTS,
- 	F2FS_DIRTY_DATA,
-@@ -3804,6 +3805,7 @@ void f2fs_init_ckpt_req_control(struct f2fs_sb_info *sbi);
-  */
- int __init f2fs_init_bioset(void);
- void f2fs_destroy_bioset(void);
-+bool f2fs_is_cp_guaranteed(struct page *page);
- int f2fs_init_bio_entry_cache(void);
- void f2fs_destroy_bio_entry_cache(void);
- void f2fs_submit_read_bio(struct f2fs_sb_info *sbi, struct bio *bio,
+ 
+-		*submitted += _submitted;
++		*submitted_p += submitted;
+ 	}
+ 
+-	f2fs_balance_fs(F2FS_M_SB(mapping), true);
++out:
++	if (compr_blocks > 0)
++		f2fs_unlock_op(sbi);
+ 
+-	return 0;
++	f2fs_balance_fs(sbi, true);
++	return ret;
+ }
+ 
+ int f2fs_write_multi_pages(struct compress_ctx *cc,
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 81f9e2cc49e2..b171a9980f6a 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2839,7 +2839,7 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
+ 		.encrypted_page = NULL,
+ 		.submitted = 0,
+ 		.compr_blocks = compr_blocks,
+-		.need_lock = LOCK_RETRY,
++		.need_lock = compr_blocks ? LOCK_DONE : LOCK_RETRY,
+ 		.post_read = f2fs_post_read_required(inode) ? 1 : 0,
+ 		.io_type = io_type,
+ 		.io_wbc = wbc,
+@@ -2920,6 +2920,7 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
+ 	if (err == -EAGAIN) {
+ 		err = f2fs_do_write_data_page(&fio);
+ 		if (err == -EAGAIN) {
++			f2fs_bug_on(sbi, compr_blocks);
+ 			fio.need_lock = LOCK_REQ;
+ 			err = f2fs_do_write_data_page(&fio);
+ 		}
 -- 
 2.40.1
 
