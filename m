@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8898882F4D7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jan 2024 20:02:38 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A68B482F4DA
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jan 2024 20:02:39 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rPohk-0005EM-Eu;
-	Tue, 16 Jan 2024 19:02:32 +0000
+	id 1rPohl-0000dS-PE;
+	Tue, 16 Jan 2024 19:02:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rPohi-0005E5-8x
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rPohi-0000dM-Tg
  for linux-f2fs-devel@lists.sourceforge.net;
  Tue, 16 Jan 2024 19:02:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,49 +21,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Hgro4ShO6AfoEjGIuDUNzyp4EhHJ34Yz7VtiZQtV2d4=; b=eCO+vbkMhES9QLg2U2SEuqHteJ
- KqMlWF5I8ZV+08+8rdSvHwgrjVHpywSctlJwNI5KMx5wCAcTUBRAYY0YrdqJAJVH+f4D+UfrWIQKu
- 2GESsrq85P3CVR5U5XL9AaN/pGPXo+JOg4XM/HUq6JO98Iy2ByXaLsBxMxcKdxHwYYaU=;
+ bh=pnJZvaGgxOYpvd+XF2v69bimJfecOxIiRACW2jwHVbI=; b=X1WPFFhQvYFhO5PpHvYCM4Vlux
+ uE/erRi5pbSeQ0pLKeOpSXHW7acak3Vh+HeHHKf1pOttqSEMD7ipmLU5uXGEfbmgqMmAus8aXpUGO
+ 8x17WzrZOqUEWwQqGVoEQLFMao3XQ8ZRztgYaEoJ6+9r/srwNLjx9BM8ZzzaalumXAZ4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Hgro4ShO6AfoEjGIuDUNzyp4EhHJ34Yz7VtiZQtV2d4=; b=XqNs6w2bdhvsz6ZdQCaZtSaFCU
- XHfdxg9N4NRetjszqWfhYhUuRaCvyDdZcmtcMTUtFogokiPTD+pXoeYkAYun38Yv4IshfTuM9eTx/
- +mroeheey5F73zM9MWy2p2rOFVwBIJAHla6gokxqUlq2cwgqPxUXIdjMdCLN+kNva6WU=;
+ bh=pnJZvaGgxOYpvd+XF2v69bimJfecOxIiRACW2jwHVbI=; b=RBdsvCtCAXlqTPcCKWCUaFy7cy
+ Y8ZMCF5jG1eH21VEOmZ7p3NpMDowU73WcwCeMbB+xAI4HkaLVF/ZQRh3iKsHRcnkx9N0/REEJuTaH
+ 6aeFQYSTRBayJGwE9LL/QLrR7zDMDSMPUfUtK15JvT1Rq8Ea+Pcci2YhjVw20jBjvnLY=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rPohg-0000an-Jc for linux-f2fs-devel@lists.sourceforge.net;
+ id 1rPohg-0000aq-Uu for linux-f2fs-devel@lists.sourceforge.net;
  Tue, 16 Jan 2024 19:02:30 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 3FC1961354;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8F8AC61357;
  Tue, 16 Jan 2024 19:02:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id DCB27C433F1;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 0742FC43399;
  Tue, 16 Jan 2024 19:02:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705431738;
- bh=oxwRyeIL7M3hBA9vL9BEAgyW9LT9u2t413CGMrrBAAY=;
+ s=k20201202; t=1705431739;
+ bh=nALsHW0nNNJnXAJRWWBsEyVYTDQ9rQY/BR0V0vrFWNI=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=BQlmYwfLboHO4veFxacQLWA1eyijOjOtpvGdOcLB0sJS7z9eyKYF2Kv6ylK8KAJzX
- udynA+l1fx/Jxo9NUVI+CNFE1qI3OrGTniJeYVSiJ4reRLREBBQL3xHMvrqwwiw/Gu
- IKzO4vBoMYNROkk2z4d2RP8CjLajJTU237dQ/uqq0sx/B6CYDpjTbzThBUiNq0wnpX
- X8gNWgdAyEN8wYTXEhaE3JMmp6ZzcwihS2XBvNccMc8QH4mfkSIhbeDlc+owz8aiyj
- pGCvOM0Ta4kMlmWsLhLO9yha6U0JHDHRCENEuJlyVpAG6ox/Y412LVgVi4G1swMuoJ
- UFwOnulWFyR1w==
+ b=t6PpYbQlUEiZuShVumRV8qr5Hb38KRxKM8Nz8OxFvaM5KGLNuU0BEDAgpzyaUO09+
+ ukOszsK1sRpK1XM//w3GC5kfKuGl0UQ3ybI/WU7OVHrjyMw6S79dudEJL/7lwMoxVE
+ MaW45AeZKZyvvN+a1+8NTrqL/nWxSFVsQr0jnz1BpSk7UjKbevsp71N3O9LCWG7m3t
+ pzUOAgSBsK4JA99uA+7vUMG1u7LtjRjhnTnRiHGYPAtWkD76xOOdOJ2NgeQ6Dqr/lc
+ I8eXqQA5ywl228EKmPt3WXpxPESlEG+uLbK4m+w1Fgg/vRujuSDI0H4hmVJ4m75Wiq
+ cWkLE+n2N/KxA==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- C2AD0D8C987; Tue, 16 Jan 2024 19:02:18 +0000 (UTC)
+ DEBD7D8C98B; Tue, 16 Jan 2024 19:02:18 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <170543173879.30188.5344312872944674652.git-patchwork-notify@kernel.org>
+Message-Id: <170543173890.30188.4422376381888328277.git-patchwork-notify@kernel.org>
 Date: Tue, 16 Jan 2024 19:02:18 +0000
-References: <20231217165359.604246-2-hch@lst.de>
-In-Reply-To: <20231217165359.604246-2-hch@lst.de>
-To: Christoph Hellwig <hch@lst.de>
+References: <ZaAzOgd3iWL0feTU@google.com>
+In-Reply-To: <ZaAzOgd3iWL0feTU@google.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
 X-Spam-Score: -7.0 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -71,11 +71,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jens Axboe <axboe@kernel.dk>: On Sun, 17 Dec 2023 17:53:55 +0100 you wrote:
- > Move reading and checking the zoned model from virtblk_probe_zoned_device
- > into the caller, leaving only the code to perform the actual setup for
- > hos [...] 
+ Content preview: Hello: This pull request was applied to jaegeuk/f2fs.git
+ (dev)
+ by Linus Torvalds <torvalds@linux-foundation.org>: On Thu, 11 Jan 2024 10:28:10
+ -0800 you wrote: > Hi Linus, > > Happy new year! > > Could you please consider
+ this pull request? > > Thank you. > > [...] 
  Content analysis details:   (-7.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,8 +91,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -1.8 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rPohg-0000an-Jc
-Subject: Re: [f2fs-dev] [PATCH 1/5] virtio_blk: cleanup zoned device probing
+X-Headers-End: 1rPohg-0000aq-Uu
+Subject: Re: [f2fs-dev] [GIT PULL] f2fs update for 6.8-rc1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,42 +104,31 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: axboe@kernel.dk, dm-devel@lists.linux.dev, linux-scsi@vger.kernel.org,
- martin.petersen@oracle.com, linux-kernel@vger.kernel.org,
- linux-nvme@lists.infradead.org, virtualization@lists.linux.dev,
- dlemoal@kernel.org, stefanha@redhat.com, pbonzini@redhat.com,
- linux-f2fs-devel@lists.sourceforge.net, linux-btrfs@vger.kernel.org
+Cc: torvalds@linux-foundation.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This series was applied to jaegeuk/f2fs.git (dev)
-by Jens Axboe <axboe@kernel.dk>:
+This pull request was applied to jaegeuk/f2fs.git (dev)
+by Linus Torvalds <torvalds@linux-foundation.org>:
 
-On Sun, 17 Dec 2023 17:53:55 +0100 you wrote:
-> Move reading and checking the zoned model from virtblk_probe_zoned_device
-> into the caller, leaving only the code to perform the actual setup for
-> host managed zoned devices in virtblk_probe_zoned_device.
+On Thu, 11 Jan 2024 10:28:10 -0800 you wrote:
+> Hi Linus,
 > 
-> This allows to share the model reading and sharing between builds with
-> and without CONFIG_BLK_DEV_ZONED, and improve it for the
-> !CONFIG_BLK_DEV_ZONED case.
+> Happy new year!
+> 
+> Could you please consider this pull request?
+> 
+> Thank you.
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,1/5] virtio_blk: cleanup zoned device probing
-    https://git.kernel.org/jaegeuk/f2fs/c/77360cadaae5
-  - [f2fs-dev,2/5] virtio_blk: remove the broken zone revalidation support
-    https://git.kernel.org/jaegeuk/f2fs/c/a971ed800211
-  - [f2fs-dev,3/5] block: remove support for the host aware zone model
-    https://git.kernel.org/jaegeuk/f2fs/c/7437bb73f087
-  - [f2fs-dev,4/5] block: simplify disk_set_zoned
-    https://git.kernel.org/jaegeuk/f2fs/c/d73e93b4dfab
-  - [f2fs-dev,5/5] sd: only call disk_clear_zoned when needed
-    https://git.kernel.org/jaegeuk/f2fs/c/5cc99b89785c
+  - [f2fs-dev,GIT,PULL] f2fs update for 6.8-rc1
+    https://git.kernel.org/jaegeuk/f2fs/c/70d201a40823
 
 You are awesome, thank you!
 -- 
