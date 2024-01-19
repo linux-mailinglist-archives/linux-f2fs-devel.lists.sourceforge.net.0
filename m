@@ -2,143 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03E7D832F19
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jan 2024 19:48:27 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06CF7832F15
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jan 2024 19:48:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rQtuZ-0005JC-Ln;
-	Fri, 19 Jan 2024 18:48:16 +0000
+	id 1rQtuX-0000Kk-Dt;
+	Fri, 19 Jan 2024 18:48:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <krisman@suse.de>) id 1rQtuT-0005J1-WF
+ (envelope-from <krisman@suse.de>) id 1rQtuU-0000Kb-Ie
  for linux-f2fs-devel@lists.sourceforge.net;
  Fri, 19 Jan 2024 18:48:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/AK4CUoyCCpgUyKqlaAXUyQMoWBb4a+kMZT5jkRKYRo=; b=aBBvQ7eR9YCHB1Q2FDKf6gwnMR
- 6Nm+WpBMkEjkmYD9hIVfJQ/YAjhcwayUxCSfrxPOokztbGruOrj1cp3+TXDf7fhOa+gL+5d+RuqAr
- a2hP9R3P8kDQ9pKDt8sm0kZq3nPxP+vsWpTaqbSCBgj4Y8csnnpe0wriW/t2F+GrCtUA=;
+ bh=noWIkV7tDOxT+ahoicDZr82jxDDniPzXUm/ClBuwL34=; b=JnmX+K4T0sygB934ISj8vdczHr
+ FUlXBFXYQBcQvcjYEzE1WA5DHg/cp0EtzHR5bEm0d4NyWJlrkiupUOh1e6OEGNoCScqxJOKQYnEkp
+ Mn2nsjObK9aInt0xZDuo0s+uhrxyIFoIb8m5xhXYFdXk00qRzgKJ8UgiETgzof0utk7c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=/AK4CUoyCCpgUyKqlaAXUyQMoWBb4a+kMZT5jkRKYRo=; b=m
- Spzc1yAhv4hI8JNLCZQoYJWqnBMRGshG1GqgM9zCNkOOmC1rrmTXTVisyJvi0rLhe3LOEumiXe2TP
- uZRbHyyNUISlodpgrKQM5b9nTo1TdXBIPgP2fb5SS2XgveVOCPV/mxHLrx9VGbWajpe8gBm6MtveL
- rY8XKXOZdCgTsTNI=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=noWIkV7tDOxT+ahoicDZr82jxDDniPzXUm/ClBuwL34=; b=AhT5asZT5wD4zAFIZSgCfcnmYq
+ srdA6IPivfzFxMyhKcsiOFHsrum22jPzm/IXmAN7aXgeuZ3HFK8qvFROs9eUJlwlMNEvk9efGxtH+
+ RyZfWAZFujLL/6ALNqLOE6BRE7WRZSJrLnm6+B6+JEyRJIH3DggKmHS+lU/3uacMk8Ag=;
 Received: from smtp-out2.suse.de ([195.135.223.131])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rQtuQ-0001a8-2T for linux-f2fs-devel@lists.sourceforge.net;
+ id 1rQtuQ-0001aE-2h for linux-f2fs-devel@lists.sourceforge.net;
  Fri, 19 Jan 2024 18:48:10 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 8B8C11FD18;
- Fri, 19 Jan 2024 18:47:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1705690071; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=/AK4CUoyCCpgUyKqlaAXUyQMoWBb4a+kMZT5jkRKYRo=;
- b=XEQR/UljNCtTIKGyLwNp8MFJkyg+gMuAAh8+TvUodHRwMlAqahmmS6PwSnSaYsnzXPxv6/
- J5e5CNcqVWw4wEVoKVYfT5m7B1qnfLGzoK6qISCPwC30zQpZRTXB7iF2/Co8Oy+Aufa1ht
- p8Z+Il8r3NYPfR9eQBEhAEuf1EfBeLo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1705690071;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=/AK4CUoyCCpgUyKqlaAXUyQMoWBb4a+kMZT5jkRKYRo=;
- b=IGk2ZWfI96mVCVYzaNXn1k8QnsLP8hfw4O+Y9ZPRdbDh5jrjtDzohYUNSNNqdF8m7s80Yw
- +jeAdXMa/g5LPiDQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1705690071; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=/AK4CUoyCCpgUyKqlaAXUyQMoWBb4a+kMZT5jkRKYRo=;
- b=XEQR/UljNCtTIKGyLwNp8MFJkyg+gMuAAh8+TvUodHRwMlAqahmmS6PwSnSaYsnzXPxv6/
- J5e5CNcqVWw4wEVoKVYfT5m7B1qnfLGzoK6qISCPwC30zQpZRTXB7iF2/Co8Oy+Aufa1ht
- p8Z+Il8r3NYPfR9eQBEhAEuf1EfBeLo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1705690071;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=/AK4CUoyCCpgUyKqlaAXUyQMoWBb4a+kMZT5jkRKYRo=;
- b=IGk2ZWfI96mVCVYzaNXn1k8QnsLP8hfw4O+Y9ZPRdbDh5jrjtDzohYUNSNNqdF8m7s80Yw
- +jeAdXMa/g5LPiDQ==
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 11E241F809;
+ Fri, 19 Jan 2024 18:47:55 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id E2782136F5;
- Fri, 19 Jan 2024 18:47:50 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 92474136F5;
+ Fri, 19 Jan 2024 18:47:54 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id rrVVJNbDqmUoDAAAD6G6ig
- (envelope-from <krisman@suse.de>); Fri, 19 Jan 2024 18:47:50 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id YGWeEdrDqmU8DAAAD6G6ig
+ (envelope-from <krisman@suse.de>); Fri, 19 Jan 2024 18:47:54 +0000
 From: Gabriel Krisman Bertazi <krisman@suse.de>
 To: viro@zeniv.linux.org.uk, ebiggers@kernel.org, jaegeuk@kernel.org,
  tytso@mit.edu
-Date: Fri, 19 Jan 2024 15:47:32 -0300
-Message-ID: <20240119184742.31088-1-krisman@suse.de>
+Date: Fri, 19 Jan 2024 15:47:33 -0300
+Message-ID: <20240119184742.31088-2-krisman@suse.de>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240119184742.31088-1-krisman@suse.de>
+References: <20240119184742.31088-1-krisman@suse.de>
 MIME-Version: 1.0
+X-Spam-Level: 
 Authentication-Results: smtp-out2.suse.de;
 	none
-X-Spam-Level: 
-X-Spam-Score: 0.70
-X-Spamd-Result: default: False [0.70 / 50.00]; ARC_NA(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_HAS_DN(0.00)[];
- TO_DN_SOME(0.00)[]; R_MISSING_CHARSET(2.50)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com];
- MIME_GOOD(-0.10)[text/plain]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- BROKEN_CONTENT_TYPE(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- RCVD_COUNT_THREE(0.00)[3];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; RCPT_COUNT_SEVEN(0.00)[9];
- MID_CONTAINS_FROM(1.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
- FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
- FREEMAIL_CC(0.00)[vger.kernel.org,lists.sourceforge.net,gmail.com,suse.de];
- RCVD_TLS_ALL(0.00)[]; BAYES_HAM(-3.00)[100.00%]
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-4.00 / 50.00];
+	 REPLY(-4.00)[]
+X-Spam-Score: -4.00
+X-Rspamd-Queue-Id: 11E241F809
 X-Spam-Flag: NO
-X-Spam-Score: -2.5 (--)
+X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi, The only difference of v3 from v2 is a fix from an issue
- reported by kernel test robot in patch 4. Please consider this version
- instead.
- The v2 has some big changes: instead of only configuring on the
- case-insensitive
- case, we do it for case-sensitive fscrypt as well, and disable d_revalidate
- as needed. This pretty much reverses the wa [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  overlayfs relies on the filesystem setting DCACHE_OP_HASH
+ or DCACHE_OP_COMPARE to reject mounting over case-insensitive directories.
+ Since commit bb9cd9106b22 ("fscrypt: Have filesystems handle their d_ops"),
+ we set ->d_op through a hook in ->d_lookup, which means the root dentry won't
+ have them, causing the mount to accidentally s [...] 
+ Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
  medium trust [195.135.223.131 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rQtuQ-0001a8-2T
-Subject: [f2fs-dev] [PATCH v3 00/10] Set casefold/fscrypt dentry operations
- through sb->s_d_op
+X-Headers-End: 1rQtuQ-0001aE-2h
+Subject: [f2fs-dev] [PATCH v3 01/10] ovl: Reject mounting case-insensitive
+ filesystems
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -157,87 +114,92 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
+overlayfs relies on the filesystem setting DCACHE_OP_HASH or
+DCACHE_OP_COMPARE to reject mounting over case-insensitive directories.
 
-The only difference of v3 from v2 is a fix from an issue reported by
-kernel test robot in patch 4.  Please consider this version instead.
+Since commit bb9cd9106b22 ("fscrypt: Have filesystems handle their
+d_ops"), we set ->d_op through a hook in ->d_lookup, which
+means the root dentry won't have them, causing the mount to accidentally
+succeed.
 
-The v2 has some big changes: instead of only configuring on the
-case-insensitive case, we do it for case-sensitive fscrypt as well, and
-disable d_revalidate as needed.  This pretty much reverses the way
-fscrypt operated (only enable d_revalidate for dentries that require
-it), but has the advantage we can be consistent among variations of
-case-insensitive/sensitive, encrypted/unencrypted configurations.
+In v6.7-rc7, the following sequence will succeed to mount, but any
+dentry other than the root dentry will be a "weird" dentry to ovl and
+fail with EREMOTE.
 
-You'll find the code is simpler than v1 and v2.  I dropped the dcache
-patch because now we always try to disable DCACHE_OP_REVALIDATE while
-holding the d_lock already, so I do it inline; I also changed the way we
-drop d_revalidate when the key is made available, because we couldn't
-really do it the way I originally proposed on the RCU case, which would
-require falling back to non-RCU lookup just to disable d_revalidate; I
-also included a patch fixing the overlayfs issue that I mentioned on the
-previous thread.  While unrelated to the rest of the patchset, it is a
-quick fix that I might merge earlier if you are happy with it.
+  mkfs.ext4 -O casefold lower.img
+  mount -O loop lower.img lower
+  mount -t overlay -o lowerdir=lower,upperdir=upper,workdir=work ovl /mnt
 
-More details can be found in the per-patch changelog.
+Mounting on a subdirectory fails, as expected, because DCACHE_OP_HASH
+and DCACHE_OP_COMPARE are properly set by ->lookup.
 
-This survived fstests on ext4 and f2fs.  I also verified that fscrypt
-continues to work when combined to overlayfs as Eric requested.
+Fix by explicitly rejecting superblocks that allow case-insensitive
+dentries.
 
-..
-original cover letter:
+While there, re-sort the entries to have more descriptive error messages
+first.
 
-When case-insensitive and fscrypt were adapted to work together, we moved the
-code that sets the dentry operations for case-insensitive dentries(d_hash and
-d_compare) to happen from a helper inside ->lookup.  This is because fscrypt
-wants to set d_revalidate only on some dentries, so it does it only for them in
-d_revalidate.
+Fixes: bb9cd9106b22 ("fscrypt: Have filesystems handle their d_ops")
+Signed-off-by: Gabriel Krisman Bertazi <krisman@suse.de>
+Acked-by: Amir Goldstein <amir73il@gmail.com>
 
-But, case-insensitive hooks are actually set on all dentries in the filesystem,
-so the natural place to do it is through s_d_op and let d_alloc handle it [1].
-In addition, doing it inside the ->lookup is a problem for case-insensitive
-dentries that are not created through ->lookup, like those coming
-open-by-fhandle[2], which will not see the required d_ops.
+---
+changes since v2:
+  - Re-sort checks to trigger more descriptive error messages
+  first (Amir)
+  - Add code comment (Amir)
+---
+ fs/overlayfs/params.c | 13 ++++++++++---
+ include/linux/fs.h    |  9 +++++++++
+ 2 files changed, 19 insertions(+), 3 deletions(-)
 
-This patchset therefore reverts to using sb->s_d_op to set the dentry operations
-for case-insensitive filesystems.  In order to set case-insensitive hooks early
-and not require every dentry to have d_revalidate in case-insensitive
-filesystems, it introduces a patch suggested by Al Viro to disable d_revalidate
-on some dentries on the fly.
-
-It survives fstests encrypt and quick groups without regressions.  Based on
-v6.7-rc1.
-
-[1] https://lore.kernel.org/linux-fsdevel/20231123195327.GP38156@ZenIV/
-[2] https://lore.kernel.org/linux-fsdevel/20231123171255.GN38156@ZenIV/
-
-Gabriel Krisman Bertazi (10):
-  ovl: Reject mounting case-insensitive filesystems
-  fscrypt: Share code between functions that prepare lookup
-  fscrypt: Drop d_revalidate for valid dentries during lookup
-  fscrypt: Drop d_revalidate once the key is added
-  libfs: Merge encrypted_ci_dentry_ops and ci_dentry_ops
-  libfs: Add helper to choose dentry operations at mount
-  ext4: Configure dentry operations at dentry-creation time
-  f2fs: Configure dentry operations at dentry-creation time
-  ubifs: Configure dentry operations at dentry-creation time
-  libfs: Drop generic_set_encrypted_ci_d_ops
-
- fs/ceph/dir.c           |  2 +-
- fs/ceph/file.c          |  2 +-
- fs/crypto/hooks.c       | 62 +++++++++++++++++++++--------------------
- fs/ext4/namei.c         |  1 -
- fs/ext4/super.c         |  1 +
- fs/f2fs/namei.c         |  1 -
- fs/f2fs/super.c         |  1 +
- fs/libfs.c              | 61 +++++++++++-----------------------------
- fs/overlayfs/params.c   | 13 +++++++--
- fs/ubifs/dir.c          |  1 -
- fs/ubifs/super.c        |  1 +
- include/linux/fs.h      | 11 +++++++-
- include/linux/fscrypt.h | 51 ++++++++++++++++++++-------------
- 13 files changed, 106 insertions(+), 102 deletions(-)
-
+diff --git a/fs/overlayfs/params.c b/fs/overlayfs/params.c
+index 3fe2dde1598f..09a4973f26f9 100644
+--- a/fs/overlayfs/params.c
++++ b/fs/overlayfs/params.c
+@@ -280,12 +280,19 @@ static int ovl_mount_dir_check(struct fs_context *fc, const struct path *path,
+ {
+ 	struct ovl_fs_context *ctx = fc->fs_private;
+ 
+-	if (ovl_dentry_weird(path->dentry))
+-		return invalfc(fc, "filesystem on %s not supported", name);
+-
+ 	if (!d_is_dir(path->dentry))
+ 		return invalfc(fc, "%s is not a directory", name);
+ 
++	/*
++	 * Root dentries of case-insensitive filesystems might not have
++	 * the dentry operations set, but still be incompatible with
++	 * overlayfs.  Check explicitly to prevent post-mount failures.
++	 */
++	if (sb_has_encoding(path->mnt->mnt_sb))
++		return invalfc(fc, "case-insensitive filesystem on %s not supported", name);
++
++	if (ovl_dentry_weird(path->dentry))
++		return invalfc(fc, "filesystem on %s not supported", name);
+ 
+ 	/*
+ 	 * Check whether upper path is read-only here to report failures
+diff --git a/include/linux/fs.h b/include/linux/fs.h
+index 98b7a7a8c42e..e6667ece5e64 100644
+--- a/include/linux/fs.h
++++ b/include/linux/fs.h
+@@ -3203,6 +3203,15 @@ extern int generic_check_addressable(unsigned, u64);
+ 
+ extern void generic_set_encrypted_ci_d_ops(struct dentry *dentry);
+ 
++static inline bool sb_has_encoding(const struct super_block *sb)
++{
++#if IS_ENABLED(CONFIG_UNICODE)
++	return !!sb->s_encoding;
++#else
++	return false;
++#endif
++}
++
+ int may_setattr(struct mnt_idmap *idmap, struct inode *inode,
+ 		unsigned int ia_valid);
+ int setattr_prepare(struct mnt_idmap *, struct dentry *, struct iattr *);
 -- 
 2.43.0
 
