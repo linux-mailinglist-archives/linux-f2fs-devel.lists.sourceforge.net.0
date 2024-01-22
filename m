@@ -2,85 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F994836749
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jan 2024 16:13:24 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8E98836757
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jan 2024 16:13:46 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rRvzE-0004HG-18;
-	Mon, 22 Jan 2024 15:13:20 +0000
+	id 1rRvzZ-0002Mk-Jy;
+	Mon, 22 Jan 2024 15:13:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1rRvzC-0004HA-PX
+ (envelope-from <sashal@kernel.org>) id 1rRvzX-0002Me-PC
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 Jan 2024 15:13:18 +0000
+ Mon, 22 Jan 2024 15:13:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G1+U3t5iDD51QOmBbTxHPXZaNiVxN28sgkp99dY/FAw=; b=PCjOg/hVgtuT0qKsiRo79Ay/7r
- rrvT01QaIkZqHzSR2goXj8yPTo2fBBXU81CHsg9NVzR/Ix+1iG9IiQCC0vWv6mUjadPmRqKMOc+TL
- yVx+VNm1Jff1zFnY2xQHCrU2qjgJW4e1lHTrn79AAdfgLhLZCJ7r1BltbXY3xI3B3ps8=;
+ bh=UjDk2/Hp3CwE09RtgftPpJV4JbVxNthsQGUNFex9UVU=; b=T3o2h7MQUNaIVcHvXlqyoCpx6d
+ WaiSpEMjkfyqQIR34O8v4V/nTYzdT3pagmfWzRlLLJ/RsWHqDn/piQkig6PL4FjfX1RRy/gs6ZXE8
+ 2C2h8Gf63668WyyMAW1G2voguO6gnb7ZmMTXIdxeQQ0+0RTeLyrzk3y6NvdsObrkaAvo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=G1+U3t5iDD51QOmBbTxHPXZaNiVxN28sgkp99dY/FAw=; b=b
- FouYGb9DU2AF1fxnKIqndN/ra3Ciwx3lLfaq63N1vlVlKX58iTUqy6iALSpK3Khf3AEBZ9lnRKLh9
- +cDt4YfCjMu7nInNQLXB/TmdRpY5uMNAzvrV9c01mRFEAKBJJoVEiWVLEaF131kuHtoG/nDYdLsNs
- KqZ0nrp5Y/NTJAEw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=UjDk2/Hp3CwE09RtgftPpJV4JbVxNthsQGUNFex9UVU=; b=AVwkKOEmqQrFqDVgJgJaTDUUW7
+ zPowDaGJUROkk3rg6SsT2TT5/PR2AK4pdWZiM1oDer68boaSGdBjp7dvEvxItUzpilpmjz8UiDp6f
+ OmxwKVo2PTzS8u3jlDcM1x9mZDgGl0kBAKw8n6ia7vG+cn29KZAn4tZyaACjN1IYvW98=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rRvzB-00040l-EW for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 Jan 2024 15:13:18 +0000
+ id 1rRvzT-000425-GW for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 22 Jan 2024 15:13:40 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id B598A61143
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 22 Jan 2024 15:13:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8422BC43394;
- Mon, 22 Jan 2024 15:13:06 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTP id E151AB80E89;
+ Mon, 22 Jan 2024 15:13:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70F01C433C7;
+ Mon, 22 Jan 2024 15:13:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705936387;
- bh=Uye9Z16T4F7rnw5uWqM/ojOYrT953nGpjEqyI3AjPzY=;
- h=From:To:Cc:Subject:Date:From;
- b=s4aM9zD01Gyb+L/C/wj4XPSBnd6FmXXpz2gBDVi+AX/XieEjKtk0AOKOkIB1Kb1k6
- TQMC6A6xTk8JBA22WLtF+WyKt+ZPrUOUcgvCl5fr9YzJUv/q+x1xiAfnXdE6pXp6nb
- XRp91kmA0KpbqV0k9Iz/jsXoK4d0SYy4EecBKSFQ0vVxNg7YUh3GnbJAgoLpQWzY0o
- E3TBh+qFD4ucxVFgd8ebcFjOfGsNwSLpRYAG1v+l04BaMp+CM/JEpoaSI6kRLPJ5LT
- 9ErnsxiWpG8lg+auhlyoFCP7y5zG3P4V5KOXrBGXhTxl7Rf0deOcuG/qY+mhrz3vKp
- JiLV6VVHeAktA==
+ s=k20201202; t=1705936404;
+ bh=Hrod67hh4LkwO/pTdv/A52E6Qb1RnNmgHSwfUZ/J2JQ=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=qj/oHkqfGMRTQaNTqUj74hc3ml7xSgyR8qSfF3HAsgWqMoX325lOdazj8j26xFR4K
+ X3x5tD6VYUBGc/MAH/vBQ4N5pWzFC51Tsa2/PlfHZfzyVITEoN+ZIIReP63AAs8qFd
+ SzZF2PiBYxdsuQML7NWzAWQg3c64YPuRIKtAsRbnO/gBBvFs/6KEvLHmDen+1draPB
+ FrElM8NjaZck0igOLIQ8Cz9jMoEvsGnHhq3x1ITTd6Ed3Tb71WMbI8f68UONIT75du
+ e9RQEyTsB320x4ZYC9ZXheCINl7fjTyzJ+vLr1p7vSEBn6mNAaj45zjsIj7L14Aqsj
+ c33+PiO+GH2+Q==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 22 Jan 2024 10:11:58 -0500
-Message-ID: <20240122151302.995456-1-sashal@kernel.org>
+Date: Mon, 22 Jan 2024 10:12:05 -0500
+Message-ID: <20240122151302.995456-8-sashal@kernel.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240122151302.995456-1-sashal@kernel.org>
+References: <20240122151302.995456-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 X-stable-base: Linux 5.15.147
-X-Spam-Score: -6.5 (------)
+X-Spam-Score: -3.8 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
- 956fa1ddc132e028f3b7d4cf17e6bfc8cb36c7fd
- ] Let's check return value of f2fs_reserve_new_block() in do_recover_data()
- rather than letting it fails silently. 
- Content analysis details:   (-6.5 points, 6.0 required)
+ Content preview: From: Jaegeuk Kim <jaegeuk@kernel.org> [ Upstream commit
+ 9dad4d964291295ef48243d4e03972b85138bc9f
+ ] 1. do roll forward recovery 2. update current segments pointers 3. fix
+ the entire zones' write pointers 4. do checkpoint 
+ Content analysis details:   (-3.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -92,9 +93,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -1.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rRvzB-00040l-EW
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.15 01/35] f2fs: fix to check return
- value of f2fs_reserve_new_block()
+X-Headers-End: 1rRvzT-000425-GW
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.15 08/35] f2fs: fix write pointers on
+ zoned device after roll forward
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,72 +108,40 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+ Daeho Jeong <daehojeong@google.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <chao@kernel.org>
+From: Jaegeuk Kim <jaegeuk@kernel.org>
 
-[ Upstream commit 956fa1ddc132e028f3b7d4cf17e6bfc8cb36c7fd ]
+[ Upstream commit 9dad4d964291295ef48243d4e03972b85138bc9f ]
 
-Let's check return value of f2fs_reserve_new_block() in do_recover_data()
-rather than letting it fails silently.
+1. do roll forward recovery
+2. update current segments pointers
+3. fix the entire zones' write pointers
+4. do checkpoint
 
-Also refactoring check condition on return value of f2fs_reserve_new_block()
-as below:
-- trigger f2fs_bug_on() only for ENOSPC case;
-- use do-while statement to avoid redundant codes;
-
-Signed-off-by: Chao Yu <chao@kernel.org>
+Reviewed-by: Daeho Jeong <daehojeong@google.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/recovery.c | 23 +++++++++++++++++------
- 1 file changed, 17 insertions(+), 6 deletions(-)
+ fs/f2fs/recovery.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index ba7eeb3c2738..da0801aa4118 100644
+index da0801aa4118..f07ae58d266d 100644
 --- a/fs/f2fs/recovery.c
 +++ b/fs/f2fs/recovery.c
-@@ -657,7 +657,16 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
- 		 */
- 		if (dest == NEW_ADDR) {
- 			f2fs_truncate_data_blocks_range(&dn, 1);
--			f2fs_reserve_new_block(&dn);
-+			do {
-+				err = f2fs_reserve_new_block(&dn);
-+				if (err == -ENOSPC) {
-+					f2fs_bug_on(sbi, 1);
-+					break;
-+				}
-+			} while (err &&
-+				IS_ENABLED(CONFIG_F2FS_FAULT_INJECTION));
-+			if (err)
-+				goto err;
- 			continue;
- 		}
+@@ -871,6 +871,8 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+ 	if (!err && fix_curseg_write_pointer && !f2fs_readonly(sbi->sb) &&
+ 			f2fs_sb_has_blkzoned(sbi)) {
+ 		err = f2fs_fix_curseg_write_pointer(sbi);
++		if (!err)
++			err = f2fs_check_write_pointer(sbi);
+ 		ret = err;
+ 	}
  
-@@ -665,12 +674,14 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
- 		if (f2fs_is_valid_blkaddr(sbi, dest, META_POR)) {
- 
- 			if (src == NULL_ADDR) {
--				err = f2fs_reserve_new_block(&dn);
--				while (err &&
--				       IS_ENABLED(CONFIG_F2FS_FAULT_INJECTION))
-+				do {
- 					err = f2fs_reserve_new_block(&dn);
--				/* We should not get -ENOSPC */
--				f2fs_bug_on(sbi, err);
-+					if (err == -ENOSPC) {
-+						f2fs_bug_on(sbi, 1);
-+						break;
-+					}
-+				} while (err &&
-+					IS_ENABLED(CONFIG_F2FS_FAULT_INJECTION));
- 				if (err)
- 					goto err;
- 			}
 -- 
 2.43.0
 
