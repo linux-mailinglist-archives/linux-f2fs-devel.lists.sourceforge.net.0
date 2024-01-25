@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C12D883B7A5
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jan 2024 04:13:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1AB283B7AA
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jan 2024 04:14:14 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rSqAu-0006Sp-44;
-	Thu, 25 Jan 2024 03:13:08 +0000
+	id 1rSqBt-0006ZP-Sr;
+	Thu, 25 Jan 2024 03:14:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1rSqAt-0006Se-9G
+ (envelope-from <ebiggers@kernel.org>) id 1rSqBp-0006Z7-P2
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 Jan 2024 03:13:07 +0000
+ Thu, 25 Jan 2024 03:14:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ltawi/q+QwKIc79Ljr+y1UlrS+n25loM4V01eAT2Vyo=; b=nMcIdieyHOL2RyRgL8XyuO041i
- AbeI0dafj0u3Y1VUZTT2XJrkit9YwQN7Su0o7MVAbmeMeK2Hm+eSLDW1KYo77qTAPMP+d+znz5qPT
- Qn93nphVlQhcHp84KrkDBnQcowTVhsFoG7R+ZM0AhGpN7CMjN7pwcXcgfynQz/baNPPQ=;
+ bh=paUTc/9FphzBCnZcrDM9ZvQCJpksDKQ6ilRoRSSSBGs=; b=gMWZ8IzdtYQK3QswGGjRCm6lvL
+ +J/FJUjdzhHITsp0lohgaCPzuIOIEpgmLqfKANcKzWXZqmOepPV/86OCkuSGBqjz9g2TJF8GntPG/
+ wLYaqNvHDhNZf4V0sKhlsHKXlEvGcvmmUvW2AjkPalrmpNE81uAqVD5mksyY7+RhgP/I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,38 +31,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ltawi/q+QwKIc79Ljr+y1UlrS+n25loM4V01eAT2Vyo=; b=RRhO/+cCB+Z6q5xP05BhIJ03jI
- NL9ewMzi/8wvozdHN0+OJoAy7W0Hf56S9a9sh46vsaVXJTye8jvuGHV2SHPDNofcfi/PThDBQ2ZuB
- QCECHpnHQ01cUawQWmkpuGnn1xxhIZuxaB0dS5SMEuOc/p9/RCToGpwZOkPuEO0SvFXE=;
+ bh=paUTc/9FphzBCnZcrDM9ZvQCJpksDKQ6ilRoRSSSBGs=; b=R4C9xaJ7JqmC5TstY69HguuAts
+ vHAeKwajMrWBMQcLffmiFAhzYSTP8vqMQQuAsx2b4itxqQaHCFLnF9cLdvVsJjHJYV2MokEqtS9ML
+ 0+LVKUkM7pPjo1aWE5I9MzSRzs9u0PZq2qcsjGSxxqvmVyyzolzHSScd3HEFeE3Q7M4k=;
 Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rSqAr-0005tY-Mg for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 Jan 2024 03:13:07 +0000
+ id 1rSqBn-0005v6-Mi for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 25 Jan 2024 03:14:05 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 8BB92CE32B7;
- Thu, 25 Jan 2024 03:12:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 763FBC433C7;
- Thu, 25 Jan 2024 03:12:53 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id AA765CE32B9;
+ Thu, 25 Jan 2024 03:13:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DF53C433F1;
+ Thu, 25 Jan 2024 03:13:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706152373;
- bh=fRk1oYOWwebE3Gwdrh/Tnqsxt6v+AVSd7r7lMjh5y1Q=;
+ s=k20201202; t=1706152430;
+ bh=paUTc/9FphzBCnZcrDM9ZvQCJpksDKQ6ilRoRSSSBGs=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=A00aORVzedzHs30RWLFcTiWlC03VdaDvQqDuKIAniFdAVLKuMFWQwxb59IXtBz2js
- biOOHxBJXNbV378sLsEZGXvS6lPyMptuibzGnJvQkqseD6lrRtyTeMKtB8mXtpbXSx
- 4Pv1Ln6RLbqUw4p/jGh/OIqpEAo8vZua8MzySaGj2g6Rn+HM8ilr3C649ktYm+KQxq
- WhkYcxMLZRZcUiTXCT0TRYg30Qym+0RffALXDgmH3PKCar90DVOLimPGCPIgo7pfcf
- YTEAglBkTetGeXVcp+JEsx32RwjkZVRMtm6LCS7LJyGymi76fkcv/tS/ve/NGo1uxA
- +/ugfqmnbe8Cw==
-Date: Wed, 24 Jan 2024 19:12:51 -0800
+ b=jqJ93DjMTJySl66BliexsxEn/cZmYh2Sq/3oICmTkLpcuXAwNpUL8rx47nSZpqWZz
+ nMH32OKwLGL9JMNLOIbefpSxDitfEGGAGEP5KiiYGSXkoKJiqv1uubsLTXSdclSXVk
+ 08PswQwrmp+VCmafQ4uqKd0t/9un/Zc/8unK1G5vsmqAV8UoVfNJc87KbXgOer/Vun
+ tiHLE4BMUn87epXKgtFO0UczuOWSku2paqYn2nYfhkF5wfNyawWbaxRxrTBOx6gSE2
+ UR2llNSua5G19KaITc4yNZxQh02F99Ny1flJtjf4fxqMgDPiSRphNziHQ073LX4WTj
+ /pIBoxyct6MtQ==
+Date: Wed, 24 Jan 2024 19:13:48 -0800
 From: Eric Biggers <ebiggers@kernel.org>
 To: Gabriel Krisman Bertazi <krisman@suse.de>
-Message-ID: <20240125031251.GC52073@sol.localdomain>
+Message-ID: <20240125031348.GD52073@sol.localdomain>
 References: <20240119184742.31088-1-krisman@suse.de>
- <20240119184742.31088-5-krisman@suse.de>
+ <20240119184742.31088-7-krisman@suse.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240119184742.31088-5-krisman@suse.de>
+In-Reply-To: <20240119184742.31088-7-krisman@suse.de>
 X-Spam-Score: -4.0 (----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -70,9 +70,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jan 19, 2024 at 03:47:36PM -0300, Gabriel Krisman
- Bertazi wrote: > /* > * When d_splice_alias() moves a directory's no-key alias
- to its plaintext alias > * as a result of the encryption key be [...] 
+ Content preview:  On Fri, Jan 19, 2024 at 03:47:38PM -0300, Gabriel Krisman
+ Bertazi wrote: > +/** > + * generic_set_sb_d_ops - helper for choosing the
+ set of > + * filesystem-wide dentry operations for the enabled feat [...]
  Content analysis details:   (-4.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +88,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rSqAr-0005tY-Mg
-Subject: Re: [f2fs-dev] [PATCH v3 04/10] fscrypt: Drop d_revalidate once the
- key is added
+X-Headers-End: 1rSqBn-0005v6-Mi
+Subject: Re: [f2fs-dev] [PATCH v3 06/10] libfs: Add helper to choose dentry
+ operations at mount
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,35 +109,16 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jan 19, 2024 at 03:47:36PM -0300, Gabriel Krisman Bertazi wrote:
-> /*
->  * When d_splice_alias() moves a directory's no-key alias to its plaintext alias
->  * as a result of the encryption key being added, DCACHE_NOKEY_NAME must be
->  * cleared.  Note that we don't have to support arbitrary moves of this flag
->  * because fscrypt doesn't allow no-key names to be the source or target of a
->  * rename().
->  */
->  static inline void fscrypt_handle_d_move(struct dentry *dentry)
->  {
->  	dentry->d_flags &= ~DCACHE_NOKEY_NAME;
-> +
-> +	/*
-> +	 * Save the d_revalidate call cost during VFS operations.  We
-> +	 * can do it because, when the key is available, the dentry
-> +	 * can't go stale and the key won't go away without eviction.
-> +	 */
-> +	if (dentry->d_op && dentry->d_op->d_revalidate == fscrypt_d_revalidate)
-> +		dentry->d_flags &= ~DCACHE_OP_REVALIDATE;
->  }
+On Fri, Jan 19, 2024 at 03:47:38PM -0300, Gabriel Krisman Bertazi wrote:
+> +/**
+> + * generic_set_sb_d_ops - helper for choosing the set of
+> + * filesystem-wide dentry operations for the enabled features
+> + * @sb: superblock to be configured
+> + *
+> + * Filesystems supporting casefolding and/or fscrypt can call this
+> + * helper at mount-time to configure sb->s_d_root to best set of dentry
 
-Is there any way to optimize this further for the case where fscrypt is not
-being used?  This is called unconditionally from d_move().  I've generally been
-trying to avoid things like this where the fscrypt support slows things down for
-everyone even when they're not using the feature.
-
-In any case, as always please don't let function comments get outdated.  Since
-it now seems to just describe the DCACHE_NOKEY_NAME clearing and not the whole
-function, maybe it should be moved to above that line.
+s_d_op, not s_d_root.
 
 - Eric
 
