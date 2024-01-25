@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C197783C96D
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jan 2024 18:09:42 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24F0083C968
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jan 2024 18:09:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rT3ER-00023L-Rf;
-	Thu, 25 Jan 2024 17:09:40 +0000
+	id 1rT3EP-0002Ig-Je;
+	Thu, 25 Jan 2024 17:09:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
  (envelope-from <prvs=747d02328=johannes.thumshirn@wdc.com>)
- id 1rT3EO-000232-NH for linux-f2fs-devel@lists.sourceforge.net;
+ id 1rT3EO-0002IN-Up for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 25 Jan 2024 17:09:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2i0P4UtDfM2GvJlRWNENr44DBD4bzBaFXfbBxw+clIM=; b=g2u3i0ax+k7Z/dq45xgGkV17RC
- BaRxd+6Kz7f0ik6BLz0oCF4ultVTNCJFUbpdpMUI4WwDAQmpI3UxnTCkjNiIx2BBp9rDvl3/Upt5b
- LENukTW50JuDC7DXeGI7g53txy6AQS3Ymy1BzW7X9ofykTX1GOsMKU3mFHzRdpuJzJtE=;
+ bh=Fru1l8dAq84Xfh5gnq+lN/Z+UvKQa5FRHDYekqiQyQc=; b=at4p9iwMEvSXzl2M5mraN8gP9l
+ AigzkafEJKZEbRI7C4cWHDPbQrLIy2PUxt032XvfJMoowlnKmldWcJL54j18DCVQSIG3oAIifyoQK
+ 3lcZJT3tHfrHCokvtQmNYRUcmHfeFXSVJPckbrfNnu05aT0bgBguIXcQKCAX97U8ROks=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -31,46 +31,46 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2i0P4UtDfM2GvJlRWNENr44DBD4bzBaFXfbBxw+clIM=; b=E5AzLs63ttB1Ye8YTyoJARun8H
- lWw+IBCD/LQQXRdulsVPYlHEbnpA76+pKnlwx8qJ5ijvUeKxiUEcMkDP527gq1wXdxEalzEuouvAf
- owJaBvv7QeXzx2Gk32xOpTMxm3O/d9Cb3G/DS6PVs37BrIa96BsIekXccBNmkapS25/0=;
+ bh=Fru1l8dAq84Xfh5gnq+lN/Z+UvKQa5FRHDYekqiQyQc=; b=eMU9gUZVcrLgQo98kc4CUgnNA4
+ ApSCzLO1bm5axSl8LbeCWgJzPyOV/vDjTf7Lfe4PbTH+EzESMmpp1FeTJwjyx/DX7sfqwx7gJ+Qaf
+ sIVXstEN9DFmEJjtwvIdSOVKFv2FSwcJNS07zoAPDhC3D1KfnuTbcI20acISasnicQns=;
 Received: from esa1.hgst.iphmx.com ([68.232.141.245])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rT3EN-0006th-RL for linux-f2fs-devel@lists.sourceforge.net;
+ id 1rT3EO-0006th-KW for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 25 Jan 2024 17:09:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1706202576; x=1737738576;
+ t=1706202577; x=1737738577;
  h=from:date:subject:mime-version:content-transfer-encoding:
  message-id:references:in-reply-to:to:cc;
- bh=MadywNv3PPpA8atuGcDj3Vd17mnoG/ezGAm6iZoKSro=;
- b=SVNV2wc10GTLntt4hH/yB1SVh0uZS1D1Zd+7s6wcxVUryg6j7rdHpWI3
- A8S2YM8xAWJ8WeHFKQ78W+5pj+6ImAU41+PNhWKHtfw4PMAhuLd2gPNId
- cV3pjCVB8mt/meFbjpg3lxieplxPyGBco27HW79c+HdBLC3ySQFeazttJ
- 1LqkMNYIOLrSYRiuISy/Go3MjxS6T1cOBma5vhpqTnXp6sdV6UJhH8So5
- eLVox7UmnO4yUnPLqEfBeJ14HxzdsMM1b9KCIgUmFHPG3klp/FZLYRyaC
- txOmaf76zUkwGk49/KPLW3XxCNPy3DxBmaRvFMQladPDbHIHUILYcszzL A==;
-X-CSE-ConnectionGUID: GW1GCGGxRP65caKXT8zRRw==
-X-CSE-MsgGUID: 8NvXJGmVR8+R6wWFnO/6kQ==
+ bh=jxy1iW5YBQpx2L/2XzM+MqzG0Ug1dnhtomAoOd2ZnbI=;
+ b=LgQWzpQRuFDjiqVLcooFdfBAn4HZGVNzukm5SaVIsT70w9+ojBq5AP9S
+ AMrzzmUPvfIh5US2gWynSHDgOrvczT3ERw+GNCz9sJOwQwpty6i0pdsbW
+ fRWb0WlCDzfZSnW0BPYUTwIpa36JCVlfbEAzfbYFunSsqNyU456I7prTg
+ DAR0HeE4uKem1j7McjwWJyvpRk6xazTxIUShiGweQg0Yuv536qYb++Ai8
+ 0HdCDe6xnLIaA4xN5USUpxqegfUWGcgphE63QOe+cOhaX8g/6R6Bmgmuf
+ 0rh3RL9/sNgXCeMiYyRwuLW2vQyJlszZYDXUu/tfz3D0OvjlAA/xhmGk2 w==;
+X-CSE-ConnectionGUID: dxgBAPzcThKs3Jyqopj9hg==
+X-CSE-MsgGUID: G/xJqNseTlGRrQUEBBAA2Q==
 X-IronPort-AV: E=Sophos;i="6.05,216,1701100800"; 
-   d="scan'208";a="7967092"
+   d="scan'208";a="7967101"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 26 Jan 2024 00:53:44 +0800
-IronPort-SDR: ssmk45hnkMR36xSw1tavbIuSuEbiYzKt+7uj5nnvR/vMWDSWoVnbReFUsBYhsGM589e5kMs4iE
- GWcR/DaWpctQ==
+ by ob1.hgst.iphmx.com with ESMTP; 26 Jan 2024 00:53:48 +0800
+IronPort-SDR: 4GzkS1uonOFJTMqFqjCHBXOb9N2BneS0smOPHpAbIHRLnrCHvoBIs6J8UyfToxJfrF6TRcGBXF
+ 4UiL1OAIOQUQ==
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 25 Jan 2024 08:03:44 -0800
-IronPort-SDR: iGbJfwTm9aux0HAHn2Hu4+5MaKexoPy7oBPg1gDFb4sShWjqtqNmtHUakx83XvcY7OzLhKfXSU
- svTD8SbpHGFQ==
+ 25 Jan 2024 08:03:48 -0800
+IronPort-SDR: vvINqP4GdCHHBUjrb+eTmiCcQWnfbMc+2pMGcRzFL6dLXp7d61N849rxXvVPTSMHLUafyk3OEY
+ WA9UeNNLFunA==
 WDCIronportException: Internal
 Received: from unknown (HELO redsun91.ssa.fujisawa.hgst.com) ([10.149.66.6])
- by uls-op-cesaip01.wdc.com with ESMTP; 25 Jan 2024 08:53:41 -0800
-Date: Thu, 25 Jan 2024 08:53:26 -0800
+ by uls-op-cesaip01.wdc.com with ESMTP; 25 Jan 2024 08:53:45 -0800
+Date: Thu, 25 Jan 2024 08:53:27 -0800
 MIME-Version: 1.0
-Message-Id: <20240125-zonefs_nofs-v2-3-2d975c8c1690@wdc.com>
+Message-Id: <20240125-zonefs_nofs-v2-4-2d975c8c1690@wdc.com>
 References: <20240125-zonefs_nofs-v2-0-2d975c8c1690@wdc.com>
 In-Reply-To: <20240125-zonefs_nofs-v2-0-2d975c8c1690@wdc.com>
 To: Damien Le Moal <dlemoal@kernel.org>, 
@@ -83,11 +83,11 @@ To: Damien Le Moal <dlemoal@kernel.org>,
  Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, 
  Chaitanya Kulkarni <kch@nvidia.com>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1706201608; l=3714;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1706201608; l=1916;
  i=johannes.thumshirn@wdc.com; s=20230613; h=from:subject:message-id;
- bh=MadywNv3PPpA8atuGcDj3Vd17mnoG/ezGAm6iZoKSro=;
- b=OeiWcP8kl57wFLapxrMUtXeqJjNXTQJbNM0ivK0560YCzP4hJ0iOZeaEiCTU0BJrEPblLrrlV
- hEAm7xgua+VD3na0CHCBXETqitu+y+6zukGX52zzUrvhHVDMFcgECJ1
+ bh=jxy1iW5YBQpx2L/2XzM+MqzG0Ug1dnhtomAoOd2ZnbI=;
+ b=6us0f0y8sZaGXrk0YEnbz9rCMC7kxZhDixZl391EGOrX5/lIDzriXPbrRnxwUUYl4Zr6sOeSq
+ 7toptEmDVs6Bj71yz4Kq8CNaR0lPsnmNTeTOXYxfHWc5XpmvrxgA/Op
 X-Developer-Key: i=johannes.thumshirn@wdc.com; a=ed25519;
  pk=TGmHKs78FdPi+QhrViEvjKIGwReUGCfa+3LEnGoR2KM=
 X-Spam-Score: -2.5 (--)
@@ -97,14 +97,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add a memalloc_nofs scope around all calls to
- blkdev_zone_mgmt().
- This allows us to further get rid of the GFP_NOFS argument for
- blkdev_zone_mgmt().
+ Content preview:  Guard the calls to blkdev_zone_mgmt() with a memalloc_nofs
+ scope. This helps us getting rid of the GFP_NOFS argument to
+ blkdev_zone_mgmt(); 
  Signed-off-by: Johannes Thumshirn <johannes.thumshirn@wdc.com> ---
- fs/btrfs/zoned.c
- | 33 ++++++++++++++++++++++++++------- 1 file changed, 26 insertions(+),
- 7 deletions(-) 
+ fs/f2fs/segment.c
+ | 15 ++++++++++++--- 1 file changed, 12 insertions(+), 3 deletions(-) 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -120,9 +118,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rT3EN-0006th-RL
-Subject: [f2fs-dev] [PATCH v2 3/5] btrfs: zoned: call blkdev_zone_mgmt in
- nofs scope
+X-Headers-End: 1rT3EO-0006th-KW
+Subject: [f2fs-dev] [PATCH v2 4/5] f2fs: guard blkdev_zone_mgmt with nofs
+ scope
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -145,119 +143,56 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add a memalloc_nofs scope around all calls to blkdev_zone_mgmt(). This
-allows us to further get rid of the GFP_NOFS argument for
-blkdev_zone_mgmt().
+Guard the calls to blkdev_zone_mgmt() with a memalloc_nofs scope.
+This helps us getting rid of the GFP_NOFS argument to blkdev_zone_mgmt();
 
 Signed-off-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- fs/btrfs/zoned.c | 33 ++++++++++++++++++++++++++-------
- 1 file changed, 26 insertions(+), 7 deletions(-)
+ fs/f2fs/segment.c | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
 
-diff --git a/fs/btrfs/zoned.c b/fs/btrfs/zoned.c
-index 168af9d000d1..05640d61e435 100644
---- a/fs/btrfs/zoned.c
-+++ b/fs/btrfs/zoned.c
-@@ -824,11 +824,15 @@ static int sb_log_location(struct block_device *bdev, struct blk_zone *zones,
- 			reset = &zones[1];
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 4c8836ded90f..0094fe491364 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1971,9 +1971,15 @@ static int __f2fs_issue_discard_zone(struct f2fs_sb_info *sbi,
+ 		}
  
- 		if (reset && reset->cond != BLK_ZONE_COND_EMPTY) {
+ 		if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING))) {
 +			unsigned int nofs_flags;
++			int ret;
 +
- 			ASSERT(sb_zone_is_full(reset));
- 
+ 			trace_f2fs_issue_reset_zone(bdev, blkstart);
+-			return blkdev_zone_mgmt(bdev, REQ_OP_ZONE_RESET,
+-						sector, nr_sects, GFP_NOFS);
 +			nofs_flags = memalloc_nofs_save();
- 			ret = blkdev_zone_mgmt(bdev, REQ_OP_ZONE_RESET,
- 					       reset->start, reset->len,
--					       GFP_NOFS);
-+					       GFP_KERNEL);
++			ret = blkdev_zone_mgmt(bdev, REQ_OP_ZONE_RESET,
++						sector, nr_sects, GFP_KERNEL);
 +			memalloc_nofs_restore(nofs_flags);
- 			if (ret)
- 				return ret;
++			return ret;
+ 		}
  
-@@ -974,11 +978,14 @@ int btrfs_advance_sb_log(struct btrfs_device *device, int mirror)
- 			 * explicit ZONE_FINISH is not necessary.
- 			 */
- 			if (zone->wp != zone->start + zone->capacity) {
-+				unsigned int nofs_flags;
- 				int ret;
- 
-+				nofs_flags = memalloc_nofs_save();
- 				ret = blkdev_zone_mgmt(device->bdev,
- 						REQ_OP_ZONE_FINISH, zone->start,
--						zone->len, GFP_NOFS);
-+						zone->len, GFP_KERNEL);
-+				memalloc_nofs_restore(nofs_flags);
- 				if (ret)
- 					return ret;
- 			}
-@@ -996,11 +1003,13 @@ int btrfs_advance_sb_log(struct btrfs_device *device, int mirror)
- 
- int btrfs_reset_sb_log_zones(struct block_device *bdev, int mirror)
- {
-+	unsigned int nofs_flags;
- 	sector_t zone_sectors;
- 	sector_t nr_sectors;
- 	u8 zone_sectors_shift;
- 	u32 sb_zone;
- 	u32 nr_zones;
-+	int ret;
- 
- 	zone_sectors = bdev_zone_sectors(bdev);
- 	zone_sectors_shift = ilog2(zone_sectors);
-@@ -1011,9 +1020,13 @@ int btrfs_reset_sb_log_zones(struct block_device *bdev, int mirror)
- 	if (sb_zone + 1 >= nr_zones)
- 		return -ENOENT;
- 
--	return blkdev_zone_mgmt(bdev, REQ_OP_ZONE_RESET,
--				zone_start_sector(sb_zone, bdev),
--				zone_sectors * BTRFS_NR_SB_LOG_ZONES, GFP_NOFS);
-+	nofs_flags = memalloc_nofs_save();
-+	ret = blkdev_zone_mgmt(bdev, REQ_OP_ZONE_RESET,
-+			       zone_start_sector(sb_zone, bdev),
-+			       zone_sectors * BTRFS_NR_SB_LOG_ZONES,
-+			       GFP_KERNEL);
-+	memalloc_nofs_restore(nofs_flags);
-+	return ret;
- }
- 
- /*
-@@ -1124,12 +1137,15 @@ static void btrfs_dev_clear_active_zone(struct btrfs_device *device, u64 pos)
- int btrfs_reset_device_zone(struct btrfs_device *device, u64 physical,
- 			    u64 length, u64 *bytes)
- {
-+	unsigned int nofs_flags;
+ 		__queue_zone_reset_cmd(sbi, bdev, blkstart, lblkstart, blklen);
+@@ -4865,6 +4871,7 @@ static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
+ 	block_t zone_block, valid_block_cnt;
+ 	unsigned int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
  	int ret;
++	unsigned int nofs_flags;
  
- 	*bytes = 0;
+ 	if (zone->type != BLK_ZONE_TYPE_SEQWRITE_REQ)
+ 		return 0;
+@@ -4912,8 +4919,10 @@ static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
+ 		    "pointer: valid block[0x%x,0x%x] cond[0x%x]",
+ 		    zone_segno, valid_block_cnt, zone->cond);
+ 
 +	nofs_flags = memalloc_nofs_save();
- 	ret = blkdev_zone_mgmt(device->bdev, REQ_OP_ZONE_RESET,
- 			       physical >> SECTOR_SHIFT, length >> SECTOR_SHIFT,
--			       GFP_NOFS);
-+			       GFP_KERNEL);
+ 	ret = blkdev_zone_mgmt(fdev->bdev, REQ_OP_ZONE_FINISH,
+-				zone->start, zone->len, GFP_NOFS);
++				zone->start, zone->len, GFP_KERNEL);
 +	memalloc_nofs_restore(nofs_flags);
- 	if (ret)
- 		return ret;
- 
-@@ -2234,14 +2250,17 @@ static int do_zone_finish(struct btrfs_block_group *block_group, bool fully_writ
- 		struct btrfs_device *device = map->stripes[i].dev;
- 		const u64 physical = map->stripes[i].physical;
- 		struct btrfs_zoned_device_info *zinfo = device->zone_info;
-+		unsigned int nofs_flags;
- 
- 		if (zinfo->max_active_zones == 0)
- 			continue;
- 
-+		nofs_flags = memalloc_nofs_save();
- 		ret = blkdev_zone_mgmt(device->bdev, REQ_OP_ZONE_FINISH,
- 				       physical >> SECTOR_SHIFT,
- 				       zinfo->zone_size >> SECTOR_SHIFT,
--				       GFP_NOFS);
-+				       GFP_KERNEL);
-+		memalloc_nofs_restore(nofs_flags);
- 
- 		if (ret)
- 			return ret;
+ 	if (ret == -EOPNOTSUPP) {
+ 		ret = blkdev_issue_zeroout(fdev->bdev, zone->wp,
+ 					zone->len - (zone->wp - zone->start),
 
 -- 
 2.43.0
