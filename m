@@ -2,101 +2,159 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADE7483D20E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jan 2024 02:27:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB6A183D451
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jan 2024 07:42:09 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rTB0A-00081y-Fz;
-	Fri, 26 Jan 2024 01:27:26 +0000
+	id 1rTFuY-0003AE-GB;
+	Fri, 26 Jan 2024 06:41:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rTB06-00081r-Ha
+ (envelope-from <xirui.zhang@vivo.com>) id 1rTFuV-0003A4-W6
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Jan 2024 01:27:22 +0000
+ Fri, 26 Jan 2024 06:41:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kvKi2SDqNdftuDsNKIb4FrCgkp+h3pXsxcM4SdmcGME=; b=MBB1fzXM1KfVEn9H3+pPfQx0nr
- UhgJ0Q8n36+gBweiXLjRBKMWadQ15ODxonrCrhkh3l6XHmklO4Skso+UCqm2XsXGsl/NO/od963PX
- jzJ1r6SIe1NXrlephjxYLKuvvSfh53TPtpidkQQh46MiDJUJgbp8EtAUzDgaPKxBdIjQ=;
+ bh=klYo/5e+mzk3nE8dRXmvmN8vjjZ/ZJXVlBfXoRT/AtM=; b=eQqdLKAZ7xxdwGH2wtshgD7r76
+ MmA+znxCwJ9elMJSjGL+TLUp2/vynK1KnpxLR3dEAUu04HrAvBoItXQEvcNIygV2ru8Z/6Yg1sRAK
+ X6/yqJt2RJ1p/by1WJT4K8c/CF2k1vquU/EvKyRDmeLXZn6SLj4IDdaM+Tc6bG/ktJQs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=kvKi2SDqNdftuDsNKIb4FrCgkp+h3pXsxcM4SdmcGME=; b=BQUwXCNeR969cAvGHWp3qcOabW
- 9zUig9Dz6Th1WOw/wdfT1V2JfbJsV3FIKCnlOK/gbDCTMLPdzQGbg9PvjdCDyuwVYF/lykfCZU0lt
- goiFUtVPqav8NkQpO7Yyjes07rDFjAMhzwlXivFUEg/l+OuJmypDuRW5OYTYiB32csOU=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=klYo/5e+mzk3nE8dRXmvmN8vjjZ/ZJXVlBfXoRT/AtM=; b=j
+ 1liZBrVBumtN0M2pP3a1DIHQ6ClPkw1xehgvOqyE+B124LXnVju+5PkpfeGSSUooDdm3LnB77vt1Q
+ tokA961g329q6WDnYSCQCDAHTw2KMxY261FTdjWp5QAqGQZeTX5C+HRBZF3/qKi2uX02FaRbA45Jq
+ JK1aZU+o2WtHUSWc=;
+Received: from mail-sgaapc01on2098.outbound.protection.outlook.com
+ ([40.107.215.98] helo=APC01-SG2-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rTB05-0000Q1-4L for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Jan 2024 01:27:22 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 65E8962367;
- Fri, 26 Jan 2024 01:27:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC20EC433C7;
- Fri, 26 Jan 2024 01:27:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706232436;
- bh=GTtKobOQ217q5L9Z4HLE5gx1zWcNYGYQZI5Zm9HQ1u4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=aHxRaxA9Vt8sN1cQQGlptLuXjn7khkCw8t1qI/IuGcR1xQ7mfh+DDYfVYSgKfLmRb
- +zyVSmk+bUVPGC8GG/QQuvDvEbAmGRkBryAXT0mCbOAEUa1t71SNeXPzctfU76Ic+V
- LQDltZQMLt99HC6C8s9cUFQ7w+Ff2KzGVLfjROFAhcuSGjzNbVwsZxKqhhjEean/SC
- LIV23rW0Lt+ipDrjv9E3r/l/yaud6hluKKJSCHPSUAxrsreFwDy5fBqD8VoI1MvV3h
- W3q7FopFr6zpDQGOs0vxtQp0khbpjXxyKFELf5xvflwEFBiP50TJoJj1F9V/Ub3s4Y
- 8shvo7dlg076Q==
-Message-ID: <b18c286a-cc72-439c-b373-98e0d6504618@kernel.org>
-Date: Fri, 26 Jan 2024 09:27:10 +0800
+ id 1rTFuP-0003bY-Fr for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Jan 2024 06:41:55 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IeWlPNyQGZrLP4DbqHPj3BRi2xLsLJFyvBM0SBrKGO7xE2sY4tDdveeSSNDb4V3PnC2B1634o3JkFeiWo2feSsQ7JXzitxhpeFVHfmYDs3w8Ujok93ZNwrL+Rwaik7tB4Rj0zogxgiZhMQhmuzA3KUbbO5jRMJBAJqjAa8/LNHLwZRWkBfFvwh4shpLurPLg+HvCXlYSiKG25uFXn4ep/UHRRslrWvuv9ZUkSn6YAE3cE3EJ1a+MKet5lPubSp4qXARMiY6n707B39VwXRy4ci+59mzVFsOFyJRcribVeFXT5WS4/u9Uz64EJCK+rmVs16do7HjbZ/ojNITVvtZD2g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=klYo/5e+mzk3nE8dRXmvmN8vjjZ/ZJXVlBfXoRT/AtM=;
+ b=G694IYxsqcysDNTHUlhDQ7jyvJjQYEgOdjtZaKnMk2AKo3c1p/PNZdnDP7HTzyanOAMnqnOT2izormBEcyI0btCspAArtyoeGh2V01skK3C3tge1Gh6jOGfK4FOZ9ahBFvOPsLnV5M6RT3XzSqNgaQ26su0Z2w9zTCI160cEmJukS9VSVlx2kG7t5lY2z+DBxBZgi8cbEakxqrHJschXu0ijJrMed4JccW9isocC5J1Xxoe1+9l/JA2v1f4AMER+kHxYLC+Gukki1q7Kr5XtP2K2ZTkgUr/NOSutWzp8wLHmJkpSPN4mESAW/YmHB4QTzi7KdYaDIAmzKpj0vVCmoQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=klYo/5e+mzk3nE8dRXmvmN8vjjZ/ZJXVlBfXoRT/AtM=;
+ b=EPMgW8MgoP4aNwbVbVBa+EJ5mkzJxI+arvXOB9qw4NX4lvvQq/E1Mspj2CDxVIq89moyxFsP/lvwLvODfZmLFEKr7PoJFta0jbuub7dm+knK8LebDM/TtIngwqP20AUVtMncAadZj6TOGuEPAFrw0oUGZ83PurvEE3aKqiFFsw464xluHbYLc2ea1Fb4dvJEU1b2GXDNIjY28P36T8rUrNJWK8Zi5jamSC6a1PUHqN1ALllwhU0lAaCE2PRKBfYPlYuqfviFetpYKUJl7us2Rhne+YLQWW1iKBiDktkqCAnXh6Roz8hX/lIKtHk2lxgqjcysWdJrUB6ZeAMy22P4BA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from TYZPR06MB5178.apcprd06.prod.outlook.com (2603:1096:400:1f7::12)
+ by PUZPR06MB5572.apcprd06.prod.outlook.com (2603:1096:301:e9::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.24; Fri, 26 Jan
+ 2024 06:26:31 +0000
+Received: from TYZPR06MB5178.apcprd06.prod.outlook.com
+ ([fe80::c24e:98ad:6b31:b435]) by TYZPR06MB5178.apcprd06.prod.outlook.com
+ ([fe80::c24e:98ad:6b31:b435%4]) with mapi id 15.20.7228.027; Fri, 26 Jan 2024
+ 06:26:31 +0000
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Thu, 25 Jan 2024 23:37:23 -0700
+Message-Id: <20240126063723.2926123-1-xirui.zhang@vivo.com>
+X-Mailer: git-send-email 2.25.1
+X-ClientProxiedBy: SG2P153CA0028.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c7::15)
+ To TYZPR06MB5178.apcprd06.prod.outlook.com
+ (2603:1096:400:1f7::12)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Daeho Jeong <daeho43@gmail.com>
-References: <20240117230032.2312067-1-daeho43@gmail.com>
- <df9645d9-1e9a-4bd2-88bb-26425cf45811@kernel.org>
- <CACOAw_yjEuGSvo_qyoA13U0HwOr3gOzGtNf2Twhes01SNSGQeg@mail.gmail.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <CACOAw_yjEuGSvo_qyoA13U0HwOr3gOzGtNf2Twhes01SNSGQeg@mail.gmail.com>
-X-Spam-Score: -6.7 (------)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYZPR06MB5178:EE_|PUZPR06MB5572:EE_
+X-MS-Office365-Filtering-Correlation-Id: 362b7845-3cae-4a16-8a61-08dc1e37bc41
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: FRE5CkVA6ZxxS+25SRf5dXE/Gy/KPvoBfrRu87ZlTrHTU+cGayrK0xX7FfZsXc6RLt+ENlM1wRv1hmb8ELFdglswQ0mK0Nqy6+sxQQz3swiuBB4aAovOQ+nY3juL4cpxTii3ig0ChWqpE1ZmnCQToiV6Ksi3L0BrSUEySlg5kONFjiJevEZnc6p0AFk8Fe1MKUVZXD8TyfYkwK7OkGC6Ik11jX4lphfWmhkPnRXRghppg+CBst7qlMyrTXwdPbe9slCTHVXiissY4BPkY9O0XgHSHoAJcS2xXrmZ8WpsfdpaAuXBdqqm1WU5+ui+sAIU7oqNAcLZIDjzvsFgAocuHWDiheZjMGRbRLlm7iAi81qTnKhDL+sm5CGkd3ihUEL+FB8XlQxHNi9eyDegl4TPqiy13Xoy2AYoSL26ctsx+CIms94nFafyUDb+mRPdn9s3hIDW+T81yB6aiQyJ5BljVOWoqdYXuTGPjuUhhaDJsRxCx8+tobBt9PkovDxHf4/NhAPoolf6/8tsRU876S10+LI/n/171sPKcbFSf4FcZ52pwPh2ugu7I17ZOnSsNelFmD/BiY0oCJctcNm1BL6nxv9acHt26LyM+CberonU8jgTTqBhA5+DDeu1dc5A5kd5TsKOpcd/0ytLgGLmWPT9wQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYZPR06MB5178.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(346002)(396003)(376002)(39860400002)(136003)(230922051799003)(451199024)(64100799003)(1800799012)(186009)(38350700005)(5660300002)(83380400001)(8676002)(6512007)(66946007)(52116002)(66476007)(6506007)(6486002)(66556008)(107886003)(6666004)(1076003)(2616005)(316002)(8936002)(478600001)(26005)(4326008)(38100700002)(4744005)(86362001)(41300700001)(2906002)(36756003)(43062008);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?yCHYo47z3mGpteUWIMYlpkHi9GCxJRCKnosW9MaZJm99XOvn/TXHJcG4liMl?=
+ =?us-ascii?Q?32iF1/8D4GrMs8fOkL024uDYMD64aJEst7x7B5r1JIGot9GQ0Y6vXa+NnBOy?=
+ =?us-ascii?Q?CgVZ0YTXaXk5b61+K4dBWd9GZI9P2ijIBi2HnEMOWJPW/344x+O25JwnVZQn?=
+ =?us-ascii?Q?urFb6vUn3T2oGqlnesQSr83uaSxrbe4Yasu78/3lRE6wUIkbK+w9d9k7uhQp?=
+ =?us-ascii?Q?CbCcCAwvoSm/ONTcwkoSZhwJV1kZJI7bmMd++0Dyph/4s7d7o3Rgbuw4M0tP?=
+ =?us-ascii?Q?gLczzYRzhiMd3pLyVMemoLmcES30Q7x9bPdjvMtwvEcrIWFUuYx6WVL3MhWb?=
+ =?us-ascii?Q?7aKXzUCc0c0yAH28fx9dQxoMHaCGZXsmY7Ec/rvct39c70L3Hf6C7H4JnRL5?=
+ =?us-ascii?Q?nWJcbf8O9aOoLVMPyEQycSAHv1kGGASn226iSwNCOi0xMZXG6dLMFxDHj6Wb?=
+ =?us-ascii?Q?/tXm9OEcDeWDJt30gZn/ebf1YqROqXQx7JoEdg7O64pkgxhR3VkZKIQOqq0+?=
+ =?us-ascii?Q?erpg9W9t9fE2xNM6DgIusRyFngKMudjR4GKjwaMuiWL9LY4SFIjA3v0+Fqip?=
+ =?us-ascii?Q?2lq2Ndfh7+rq3ZnwKPh8KfUgeYBT8pL8RskBoREJl68tKvfi4u6mF5Hg70MV?=
+ =?us-ascii?Q?PCjiumqmvShn5VvPRoFUUGT3y9JgEX0UsF4z/DoXSDLV8AJHY1BqUKne4GKn?=
+ =?us-ascii?Q?zy3tqyfe4cb6ltQZePF110Cq5SVmQvKTDDgpJ6uop+67rcwpcj9fngOGQ23G?=
+ =?us-ascii?Q?1RJ73++wNAyP8WTeSBj7Hvw0OG01zInbq2XjXVUF8qnWUhOIj1vf3gz7Md3i?=
+ =?us-ascii?Q?jfJ3FmmSm5hYl2hyS1+StsKA3jWrfjEqre1iU7AkeJOf90C+p3MbWl3bw4oa?=
+ =?us-ascii?Q?DouZfQ4LbBrFwVBUWo+jJ3U7eC0WJIStSJCVTfIifDokxYX6JuFsWBehKQCl?=
+ =?us-ascii?Q?M4qGiBiUACXa6FAW8m3HSrTD2qiMzHwkeGsIiO5tcUgzwwAjresZUQNpwRZT?=
+ =?us-ascii?Q?qhpDmiuj98G+TUpSWTISUZWM4NtY6IFr97LI8OYxpQgH3BlHHqib6lrq8v6/?=
+ =?us-ascii?Q?vuI87yXOji5THIDcQEYpZ14TYnw015/0siLv8WTQJPtRkXltjMngok5LqhUB?=
+ =?us-ascii?Q?nZKYcVzmT9Xf0HpmWEVUZqMxEjFs4/NX2mU5XGc5dGHXnKb1u2WDyJ8pVIoi?=
+ =?us-ascii?Q?vZmb8VRyb1tZvyfzfEDaDFzqzztjR8z4lhyejxnUmXUIO7b3AdG5m7CjMZeF?=
+ =?us-ascii?Q?C8gzCpsFUUlZMrtaR/L6EPTdaUl5jdYoGgGudqODmlI9xHd3+OTqxd0na155?=
+ =?us-ascii?Q?gtaEmLrtovCETNVgHhDJWXrWHDPyZ9QhXJjz7w8aZjePA1nulKrSKHE0hWX6?=
+ =?us-ascii?Q?PyR9vNz1Y3Ao4DD41Hb5VX6mxaD7DHMMxpwfzlm4mXFGerKrtkf4RYV9J4kY?=
+ =?us-ascii?Q?rGPnYmlxyIuH60DyyB5uN5rmQ/YrymBP6564tr26hMaqncf0q/6et+icr1gd?=
+ =?us-ascii?Q?uCPuNn/YZATGf/aOcb3dMAGVuItZbGRMJLEcOSZKwj9zlmPJyNmO6s8QVbsM?=
+ =?us-ascii?Q?5U9BQ+LzDaQFcJnAvBdst1em+C7vbahyV34CUjk3?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 362b7845-3cae-4a16-8a61-08dc1e37bc41
+X-MS-Exchange-CrossTenant-AuthSource: TYZPR06MB5178.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2024 06:26:31.2554 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Ld/AFD6I3Wb3wEnpD6vekkCSbx28M1gmMjp8XiREY9PnRx3tQBMFcfJZeu63kkGWPEd09BZ3h+9xapTI+D5hnw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PUZPR06MB5572
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 2024/1/26 0:25, Daeho Jeong wrote: > On Wed, Jan 24, 2024
-    at 7:34 PM Chao Yu <chao@kernel.org> wrote: >> >> +Cc Yongpeng Yang >>
-   >> Daeho, >> >> Yongpeng reports a potential issue: if c.devices[0 [...] 
- 
- Content analysis details:   (-6.7 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  In sparse mode we just read or write to a sparse file not
+ a block device so no need to check device mount state in sparse mode.
+ Signed-off-by:
+ zhangxirui <xirui.zhang@vivo.com> --- lib/libf2fs.c | 4 ++++ 1 file changed,
+ 4 insertions(+) 
+ Content analysis details:   (-0.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.215.98 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.215.98 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [139.178.84.217 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rTB05-0000Q1-4L
-Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: allocate logs after conventional
- area for HM zoned devices
+X-Headers-End: 1rTFuP-0003bY-Fr
+Subject: [f2fs-dev] [PATCH] f2fs-tools: skip check device mount state in
+ sparse mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,52 +166,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+From: zhangxirui via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: zhangxirui <xirui.zhang@vivo.com>
+Cc: zhangxirui <xirui.zhang@vivo.com>, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyNC8xLzI2IDA6MjUsIERhZWhvIEplb25nIHdyb3RlOgo+IE9uIFdlZCwgSmFuIDI0LCAy
-MDI0IGF0IDc6MzTigK9QTSBDaGFvIFl1IDxjaGFvQGtlcm5lbC5vcmc+IHdyb3RlOgo+Pgo+PiAr
-Q2MgWW9uZ3BlbmcgWWFuZwo+Pgo+PiBEYWVobywKPj4KPj4gWW9uZ3BlbmcgcmVwb3J0cyBhIHBv
-dGVudGlhbCBpc3N1ZTogaWYgYy5kZXZpY2VzWzBdLnRvdGFsX3NlZ21lbnRzIGlzCj4+IGxhcmdl
-ciB0aGFuIHNlZ21lbnRzIG9mIG1haW5hcmVhLCBjLmN1cl9zZWdbQ1VSU0VHX0hPVF9OT0RFXSB3
-aWxsIGV4Y2VlZAo+PiBlbmQgYm91bmRhcnkgb2YgbWFpbmFyZWEuIENvdWxkIHlvdSBwbGVhc2Ug
-Y2hlY2sgdGhhdD8gdGhvdWdoIGl0J3MgYSBjb3JuZXIKPj4gY2FzZS4KPiAKPiBDYW4geW91IGVs
-YWJvcmF0ZSBtb3JlPwoKU2luY2UgYy5jdXJfc2VnW0NVUlNFR19IT1RfTk9ERV0gaXMgYW4gb2Zm
-c2V0IHN0YXJ0ZWQgZnJvbSBtYWluX2Jsa2FkZHIuCklmIGMuY3VyX3NlZ1tDVVJTRUdfSE9UX05P
-REVdIHdhcyBhc3NpZ25lZCB3LyBjLmRldmljZXNbMF0udG90YWxfc2VnbWVudHMsCmFuZCBjLmRl
-dmljZXNbMF0udG90YWxfc2VnbWVudHMgaXMgbGFyZ2VyIHRoYW4gc2VnbWVudHMgb2YgbWFpbmFy
-ZSwKYy5jdXJfc2VnW0NVUlNFR19IT1RfTk9ERV0gd2lsbCBleGNlZWQgdGhlIGVuZCBib3VuZGFy
-eSBvZiBtYWluYXJlYS4KCgljLmN1cl9zZWdbQ1VSU0VHX0hPVF9OT0RFXSA9IGMuem9uZWRfbW9k
-ZWwgPT0gRjJGU19aT05FRF9ITSA/CgkJCWMuZGV2aWNlc1swXS50b3RhbF9zZWdtZW50cyA6IDA7
-Cgo+IEluIHRoZSBjYXNlIG9mIEYyRlNfWk9ORURfSE0sIHdlIGhhdmUgdGhlIGRldmljZXNbMV0u
-Cj4gRG8geW91IG1lYW4gdGhlIGNhc2Ugd2UgZm9ybWF0IHRoZSBmaWxlc3lzdGVtIGludGVudGlv
-bmFsbHkgc21hbGxlcgo+IHRoYW4gd2hhdCBkZXZpY2VzIGhhdmU/CgpJIG1lYW4gYmxldyBjYXNl
-OgpkZXZpY2VbMF06IGNvbnZlbnRpb25hbCBkZXZpY2Ugc2l6ZSA9IDEwMjQwIE1CCmRldmljZVsx
-XTogem9uZSBkZXZpY2Ugc2l6ZSA9IDIgTUIKClRoYW5rcywKCj4gCj4+Cj4+IE9uIDIwMjQvMS8x
-OCA3OjAwLCBEYWVobyBKZW9uZyB3cm90ZToKPj4+IEZyb206IERhZWhvIEplb25nIDxkYWVob2pl
-b25nQGdvb2dsZS5jb20+Cj4+Pgo+Pj4gTWFrZSB0byBhbGxvY2F0ZSBsb2dzIGFmdGVyIGNvbnZl
-bnRpb25hbCBhcmVhIGZvciBITSB6b25lZCBkZXZpY2VzIHRvCj4+PiBzcGFyZSB0aGVtIGZvciBm
-aWxlIHBpbm5pbmcgc3VwcG9ydC4KPj4+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBEYWVobyBKZW9uZyA8
-ZGFlaG9qZW9uZ0Bnb29nbGUuY29tPgo+Pj4gLS0tCj4+PiAgICBta2ZzL2YyZnNfZm9ybWF0LmMg
-fCAzICsrLQo+Pj4gICAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlv
-bigtKQo+Pj4KPj4+IGRpZmYgLS1naXQgYS9ta2ZzL2YyZnNfZm9ybWF0LmMgYi9ta2ZzL2YyZnNf
-Zm9ybWF0LmMKPj4+IGluZGV4IGYyODQwYzguLjkxYTdmNGIgMTAwNjQ0Cj4+PiAtLS0gYS9ta2Zz
-L2YyZnNfZm9ybWF0LmMKPj4+ICsrKyBiL21rZnMvZjJmc19mb3JtYXQuYwo+Pj4gQEAgLTU1Nyw3
-ICs1NTcsOCBAQCBzdGF0aWMgaW50IGYyZnNfcHJlcGFyZV9zdXBlcl9ibG9jayh2b2lkKQo+Pj4g
-ICAgICAgICAgICAgICAgYy5jdXJfc2VnW0NVUlNFR19DT0xEX0RBVEFdID0gMDsKPj4+ICAgICAg
-ICAgICAgICAgIGMuY3VyX3NlZ1tDVVJTRUdfV0FSTV9EQVRBXSA9IG5leHRfem9uZShDVVJTRUdf
-Q09MRF9EQVRBKTsKPj4+ICAgICAgICB9IGVsc2UgaWYgKGMuem9uZWRfbW9kZSkgewo+Pj4gLSAg
-ICAgICAgICAgICBjLmN1cl9zZWdbQ1VSU0VHX0hPVF9OT0RFXSA9IDA7Cj4+PiArICAgICAgICAg
-ICAgIGMuY3VyX3NlZ1tDVVJTRUdfSE9UX05PREVdID0gYy56b25lZF9tb2RlbCA9PSBGMkZTX1pP
-TkVEX0hNID8KPj4+ICsgICAgICAgICAgICAgICAgICAgICBjLmRldmljZXNbMF0udG90YWxfc2Vn
-bWVudHMgOiAwOwo+Pj4gICAgICAgICAgICAgICAgYy5jdXJfc2VnW0NVUlNFR19XQVJNX05PREVd
-ID0gbmV4dF96b25lKENVUlNFR19IT1RfTk9ERSk7Cj4+PiAgICAgICAgICAgICAgICBjLmN1cl9z
-ZWdbQ1VSU0VHX0NPTERfTk9ERV0gPSBuZXh0X3pvbmUoQ1VSU0VHX1dBUk1fTk9ERSk7Cj4+PiAg
-ICAgICAgICAgICAgICBjLmN1cl9zZWdbQ1VSU0VHX0hPVF9EQVRBXSA9IG5leHRfem9uZShDVVJT
-RUdfQ09MRF9OT0RFKTsKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxp
-c3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9s
-aXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+In sparse mode we just read or write to a sparse file not a block device
+so no need to check device mount state in sparse mode.
+
+Signed-off-by: zhangxirui <xirui.zhang@vivo.com>
+---
+ lib/libf2fs.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+index 2451201..5315de2 100644
+--- a/lib/libf2fs.c
++++ b/lib/libf2fs.c
+@@ -830,6 +830,10 @@ int f2fs_devs_are_umounted(void)
+ {
+ 	int i;
+ 
++	/*no need to check device mount state in sparse mode*/
++	if (c.sparse_mode)
++		return 0;
++
+ 	for (i = 0; i < c.ndevs; i++)
+ 		if (f2fs_dev_is_umounted((char *)c.devices[i].path))
+ 			return -1;
+-- 
+2.25.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
