@@ -2,141 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B56B83DA68
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jan 2024 13:58:51 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87DE583DD4C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jan 2024 16:20:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rTLn6-00082Y-VI;
-	Fri, 26 Jan 2024 12:58:40 +0000
+	id 1rTO08-000222-DL;
+	Fri, 26 Jan 2024 15:20:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rTLn5-00082R-Bu
+ (envelope-from <chao@kernel.org>) id 1rTO07-00021v-B6
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Jan 2024 12:58:39 +0000
+ Fri, 26 Jan 2024 15:20:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hfwc7cDxKqFJqkiqpsGGFBX8Qxe2xgkzIwRnHQPxEjY=; b=PCEE18nq2U1l+4V/XxfzM/i7DN
- UBn21xPu9Xzx62HNp5fB0kBL6cBKYfKXg7Dymf/7Q1c7uA1k3clIwfg5UYLA3XHmlbcuTQRnPayPl
- eG9tE9SA9uo0QPs1y9Z/c25JxkSywSdRb0l3urUdGi4tXmxKWvCWntVzjEPsfr2LNZBw=;
+ bh=gZNnaYeb2QBQHDo58Z+6GPLT5wKjZWT2SM1mW3zsIN8=; b=m2p+Z4x0QVCNbyvt6kHM0i8AI7
+ BXsOI4c644TtF+fAzfnqzMz6O2qPdfbss/zIE5eEvpNwqivy54TM8Cw/8Zyo71+zar+VsideDBQRP
+ 6olGpotZbL/TAy8RbtWOqgRQuwbWI9BkrkB8UShPAL/V7oirz8Xy7xQwp7/CBq7lnRrQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=hfwc7cDxKqFJqkiqpsGGFBX8Qxe2xgkzIwRnHQPxEjY=; b=bjYsS12EpOuorsULzYXD+2lQOd
- 3/BCjqocWuNJpUDORvF7yAI7eO6qvZE4mb9Lsxq5SXft/HCqFsZEKGAJJwaYKE7dRBwcgIevl3rVA
- WWjkJ0bitZVy30VygsrDKyZQjEcfQEjmk2wkZa3D8dcAaS1g6nKcIsexFxmoQ4SzmmLM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=gZNnaYeb2QBQHDo58Z+6GPLT5wKjZWT2SM1mW3zsIN8=; b=g
+ cvjN1Yy0v58I5+e4uuc+/qT/2fCDgmE2XJats+8btwoCOWU6vPaIEfG4Pn3BqAYXKvRzZWrBQ2BIN
+ Z402Kd8a7O+9Kn7QFR9zd9sdSPem4skvjy7F8vmXee7oaohAdmxN5C0f5IEpVmCA5HsPiudUEwofl
+ o3FUbddt2YSnDrtw=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rTLn2-0002AS-M2 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Jan 2024 12:58:39 +0000
+ id 1rTO01-0000pu-AB for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Jan 2024 15:20:14 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 65BCE624D0
+ by sin.source.kernel.org (Postfix) with ESMTP id B8FACCE350E
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 26 Jan 2024 12:58:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7BA73C433C7;
- Fri, 26 Jan 2024 12:58:30 +0000 (UTC)
+ Fri, 26 Jan 2024 15:19:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5FEF1C433F1;
+ Fri, 26 Jan 2024 15:19:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706273911;
- bh=ohUyVtWPvkgUykuwF7KLzyNhfQ8FsPPkW2hfwG05FrA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=MZWogIHd7VNCJlmLvnXd5FTx3xPvSoVF7a/fuy2y3wz8NkuNdvvP7vph5FvRAGpPL
- K6kABLU2G15sxQX/LLaUT+kLrFfmdfz9MhTIAricesCVT/q/UaRevJD3vUEE0X+cHP
- pQW0VAvhbybpM7JLUcX7Pg1/eKkK75W5485EhdyzblgW0W0bRrb02elY1bl2BSVWJA
- pkEigcd0MYFQYUXIhs3oW+uk864m0Nj4gY4qWsxM7+RJIpu7QcFiKq5lZF+XXXkysq
- VZmUcsfwt/Bt377l+FXJm1k7p1CHZs2VvVHZ0y/16Q2N0X7M8wclFEVFYNysKgQheD
- AlcKqmWl8DgRA==
-Message-ID: <537604f3-cf30-45c2-8947-4c0adf9e37b1@kernel.org>
-Date: Fri, 26 Jan 2024 20:58:31 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20240124144506.15052-1-chao@kernel.org>
- <ZbNwjbXyue2-HIr_@google.com>
-Content-Language: en-US
+ s=k20201202; t=1706282391;
+ bh=v0r271/Aca9Iq1+M0kEV3V6R+A1O5TG7PLpWMF87qP4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=OwxCyu1zXtBHeh+Zx/nQmVm+DeEqXQlRCUFIuFxWE9JStsF8nXy1w5feEVw7HEgFk
+ u2wJSLDUAz4qEtTZukcTSRbSg26My6xMExKZXNlq4MnI6+MWW8HOmT33q0PGY4iVXE
+ AbMRRHf11AFxSCHYBw/1KMbstvLWsnnFJRYHqY1y9nUI1Yqqti3i7IFGNKyl/+9JPi
+ By7RWDTDCCuWGAY5xOlSUKbx8beWHYIJ/Lw/n+bZibqG6jFy3FaZBth25N3HzsOx9u
+ 0X1X+H01ERW7EREdVBrIuVwMyU8H8W7EbF2xo6FOKZcWnpXrGp4adms9DndokVwANM
+ kN8nYDdJ5PzmQ==
 From: Chao Yu <chao@kernel.org>
-Autocrypt: addr=chao@kernel.org; keydata=
- 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
-In-Reply-To: <ZbNwjbXyue2-HIr_@google.com>
-X-Spam-Score: -6.5 (------)
+To: jaegeuk@kernel.org
+Date: Fri, 26 Jan 2024 23:19:16 +0800
+Message-Id: <20240126151917.837565-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+X-Spam-Score: -3.8 (---)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/1/26 16:42, Jaegeuk Kim wrote: > On 01/24, Chao Yu
- wrote: >> Use printk_ratelimited() instead of f2fs_err() in
- f2fs_record_stop_reason(), 
- >> and f2fs_record_errors() to avoid redundant logs. > [...] 
- Content analysis details:   (-6.5 points, 6.0 required)
+ Content preview: This patch supports using printk_ratelimited() in
+ f2fs_printk(), 
+ and wrap ratelimited f2fs_printk() into f2fs_{err,warn,info}_ratelimited(),
+ then,
+ use these new helps to clean up codes. Signed-off-by: Chao Yu
+ <chao@kernel.org>
+ --- fs/f2fs/compress.c | 10 +++++----- fs/f2fs/dir.c | 5 ++--- fs/f2fs/f2fs.h
+ | 40 +++++++++++++++++++++++ fs/f2fs/super.c | 11 ++++++++--- 4 [...] 
+ Content analysis details:   (-3.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -1.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rTLn2-0002AS-M2
-Subject: Re: [f2fs-dev] [PATCH] f2fs: use printk_ratelimited to avoid
- redundant logs
+X-Headers-End: 1rTO01-0000pu-AB
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: support printk_ratelimited() in
+ f2fs_printk()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -149,57 +107,163 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/1/26 16:42, Jaegeuk Kim wrote:
-> On 01/24, Chao Yu wrote:
->> Use printk_ratelimited() instead of f2fs_err() in f2fs_record_stop_reason(),
->> and f2fs_record_errors() to avoid redundant logs.
->>
->> Signed-off-by: Chao Yu <chao@kernel.org>
->> ---
->>   fs/f2fs/super.c | 9 ++++++---
->>   1 file changed, 6 insertions(+), 3 deletions(-)
->>
->> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
->> index e2c066fbc0fa..7e437aea268e 100644
->> --- a/fs/f2fs/super.c
->> +++ b/fs/f2fs/super.c
->> @@ -4091,7 +4091,9 @@ static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
->>   
->>   	f2fs_up_write(&sbi->sb_lock);
->>   	if (err)
->> -		f2fs_err(sbi, "f2fs_commit_super fails to record err:%d", err);
-> 
-> Needing f2fs_err_ratelimited()?
+This patch supports using printk_ratelimited() in f2fs_printk(), and
+wrap ratelimited f2fs_printk() into f2fs_{err,warn,info}_ratelimited(),
+then, use these new helps to clean up codes.
 
-Yes, more clean, let me update in v2.
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/compress.c | 10 +++++-----
+ fs/f2fs/dir.c      |  5 ++---
+ fs/f2fs/f2fs.h     | 40 +++++++++++++++++++++++-----------------
+ fs/f2fs/super.c    | 11 ++++++++---
+ 4 files changed, 38 insertions(+), 28 deletions(-)
 
-Thanks,
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index ff26b49c0d71..0fd839358c15 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -512,8 +512,8 @@ static int lzorle_compress_pages(struct compress_ctx *cc)
+ 	ret = lzorle1x_1_compress(cc->rbuf, cc->rlen, cc->cbuf->cdata,
+ 					&cc->clen, cc->private);
+ 	if (ret != LZO_E_OK) {
+-		printk_ratelimited("%sF2FS-fs (%s): lzo-rle compress failed, ret:%d\n",
+-				KERN_ERR, F2FS_I_SB(cc->inode)->sb->s_id, ret);
++		f2fs_err_ratelimited(F2FS_I_SB(cc->inode),
++				"lzo-rle compress failed, ret:%d", ret);
+ 		return -EIO;
+ 	}
+ 	return 0;
+@@ -780,9 +780,9 @@ void f2fs_decompress_cluster(struct decompress_io_ctx *dic, bool in_task)
+ 		if (provided != calculated) {
+ 			if (!is_inode_flag_set(dic->inode, FI_COMPRESS_CORRUPT)) {
+ 				set_inode_flag(dic->inode, FI_COMPRESS_CORRUPT);
+-				printk_ratelimited(
+-					"%sF2FS-fs (%s): checksum invalid, nid = %lu, %x vs %x",
+-					KERN_INFO, sbi->sb->s_id, dic->inode->i_ino,
++				f2fs_info_ratelimited(sbi,
++					"checksum invalid, nid = %lu, %x vs %x",
++					dic->inode->i_ino,
+ 					provided, calculated);
+ 			}
+ 			set_sbi_flag(sbi, SBI_NEED_FSCK);
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index 042593aed1ec..3f20d94e12f9 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -995,9 +995,8 @@ int f2fs_fill_dentries(struct dir_context *ctx, struct f2fs_dentry_ptr *d,
+ 		de = &d->dentry[bit_pos];
+ 		if (de->name_len == 0) {
+ 			if (found_valid_dirent || !bit_pos) {
+-				printk_ratelimited(
+-					"%sF2FS-fs (%s): invalid namelen(0), ino:%u, run fsck to fix.",
+-					KERN_WARNING, sbi->sb->s_id,
++				f2fs_warn_ratelimited(sbi,
++					"invalid namelen(0), ino:%u, run fsck to fix.",
+ 					le32_to_cpu(de->ino));
+ 				set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			}
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 2c2916421d52..c5e7460d1a0a 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1819,6 +1819,27 @@ struct f2fs_sb_info {
+ #endif
+ };
+ 
++__printf(3, 4)
++void f2fs_printk(struct f2fs_sb_info *sbi, bool limit_rate, const char *fmt, ...);
++
++#define f2fs_err(sbi, fmt, ...)						\
++	f2fs_printk(sbi, false, KERN_ERR fmt, ##__VA_ARGS__)
++#define f2fs_warn(sbi, fmt, ...)					\
++	f2fs_printk(sbi, false, KERN_WARNING fmt, ##__VA_ARGS__)
++#define f2fs_notice(sbi, fmt, ...)					\
++	f2fs_printk(sbi, false, KERN_NOTICE fmt, ##__VA_ARGS__)
++#define f2fs_info(sbi, fmt, ...)					\
++	f2fs_printk(sbi, false, KERN_INFO fmt, ##__VA_ARGS__)
++#define f2fs_debug(sbi, fmt, ...)					\
++	f2fs_printk(sbi, false, KERN_DEBUG fmt, ##__VA_ARGS__)
++
++#define f2fs_err_ratelimited(sbi, fmt, ...)				\
++	f2fs_printk(sbi, true, KERN_ERR fmt, ##__VA_ARGS__)
++#define f2fs_warn_ratelimited(sbi, fmt, ...)				\
++	f2fs_printk(sbi, true, KERN_WARNING fmt, ##__VA_ARGS__)
++#define f2fs_info_ratelimited(sbi, fmt, ...)				\
++	f2fs_printk(sbi, true, KERN_INFO fmt, ##__VA_ARGS__)
++
+ #ifdef CONFIG_F2FS_FAULT_INJECTION
+ #define time_to_inject(sbi, type) __time_to_inject(sbi, type, __func__,	\
+ 									__builtin_return_address(0))
+@@ -1836,9 +1857,8 @@ static inline bool __time_to_inject(struct f2fs_sb_info *sbi, int type,
+ 	atomic_inc(&ffi->inject_ops);
+ 	if (atomic_read(&ffi->inject_ops) >= ffi->inject_rate) {
+ 		atomic_set(&ffi->inject_ops, 0);
+-		printk_ratelimited("%sF2FS-fs (%s) : inject %s in %s of %pS\n",
+-			KERN_INFO, sbi->sb->s_id, f2fs_fault_name[type],
+-			func, parent_func);
++		f2fs_info_ratelimited(sbi, "inject %s in %s of %pS",
++				f2fs_fault_name[type], func, parent_func);
+ 		return true;
+ 	}
+ 	return false;
+@@ -2343,20 +2363,6 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
+ 	return -ENOSPC;
+ }
+ 
+-__printf(2, 3)
+-void f2fs_printk(struct f2fs_sb_info *sbi, const char *fmt, ...);
+-
+-#define f2fs_err(sbi, fmt, ...)						\
+-	f2fs_printk(sbi, KERN_ERR fmt, ##__VA_ARGS__)
+-#define f2fs_warn(sbi, fmt, ...)					\
+-	f2fs_printk(sbi, KERN_WARNING fmt, ##__VA_ARGS__)
+-#define f2fs_notice(sbi, fmt, ...)					\
+-	f2fs_printk(sbi, KERN_NOTICE fmt, ##__VA_ARGS__)
+-#define f2fs_info(sbi, fmt, ...)					\
+-	f2fs_printk(sbi, KERN_INFO fmt, ##__VA_ARGS__)
+-#define f2fs_debug(sbi, fmt, ...)					\
+-	f2fs_printk(sbi, KERN_DEBUG fmt, ##__VA_ARGS__)
+-
+ #define PAGE_PRIVATE_GET_FUNC(name, flagname) \
+ static inline bool page_private_##name(struct page *page) \
+ { \
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 5c672a11ca6e..4ca390363131 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -264,7 +264,8 @@ static match_table_t f2fs_tokens = {
+ 	{Opt_err, NULL},
+ };
+ 
+-void f2fs_printk(struct f2fs_sb_info *sbi, const char *fmt, ...)
++void f2fs_printk(struct f2fs_sb_info *sbi, bool limit_rate,
++						const char *fmt, ...)
+ {
+ 	struct va_format vaf;
+ 	va_list args;
+@@ -275,8 +276,12 @@ void f2fs_printk(struct f2fs_sb_info *sbi, const char *fmt, ...)
+ 	level = printk_get_level(fmt);
+ 	vaf.fmt = printk_skip_level(fmt);
+ 	vaf.va = &args;
+-	printk("%c%cF2FS-fs (%s): %pV\n",
+-	       KERN_SOH_ASCII, level, sbi->sb->s_id, &vaf);
++	if (limit_rate)
++		printk_ratelimited("%c%cF2FS-fs (%s): %pV\n",
++			KERN_SOH_ASCII, level, sbi->sb->s_id, &vaf);
++	else
++		printk("%c%cF2FS-fs (%s): %pV\n",
++			KERN_SOH_ASCII, level, sbi->sb->s_id, &vaf);
+ 
+ 	va_end(args);
+ }
+-- 
+2.40.1
 
-> 
->> +		printk_ratelimited(
->> +			"%sF2FS-fs (%s): f2fs_commit_super fails to record stop_reason, err:%d\n",
->> +			KERN_ERR, sbi->sb->s_id, err);
->>   }
->>   
->>   void f2fs_save_errors(struct f2fs_sb_info *sbi, unsigned char flag)
->> @@ -4134,8 +4136,9 @@ static void f2fs_record_errors(struct f2fs_sb_info *sbi, unsigned char error)
->>   
->>   	err = f2fs_commit_super(sbi, false);
->>   	if (err)
->> -		f2fs_err(sbi, "f2fs_commit_super fails to record errors:%u, err:%d",
->> -								error, err);
->> +		printk_ratelimited(
->> +			"%sF2FS-fs (%s): f2fs_commit_super fails to record errors:%u, err:%d\n",
->> +			KERN_ERR, sbi->sb->s_id, error, err);
->>   out_unlock:
->>   	f2fs_up_write(&sbi->sb_lock);
->>   }
->> -- 
->> 2.40.1
 
 
 _______________________________________________
