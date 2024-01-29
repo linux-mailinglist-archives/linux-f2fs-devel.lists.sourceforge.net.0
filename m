@@ -2,63 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D57258402B2
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jan 2024 11:22:50 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6262D8402B7
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jan 2024 11:23:23 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rUOmn-0001F4-CC;
-	Mon, 29 Jan 2024 10:22:41 +0000
+	id 1rUOnR-0002jH-6P;
+	Mon, 29 Jan 2024 10:23:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1rUOml-0001Ey-Gp
+ (envelope-from <Zhiguo.Niu@unisoc.com>) id 1rUOnP-0002j7-8k
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Jan 2024 10:22:40 +0000
+ Mon, 29 Jan 2024 10:23:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
  CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hTuUer4yaG6DVAm2a9jKK2HUeFUSVWlzPOvFgdzGE5Y=; b=QKYA/Jf3ipYTT2B99GKnwe22bN
- DmKxukoBxYnLWg6kIsP+QkWkzcidM7HAVRTEpp9W+yGpLTlwkQmyq59zoSHobSGNGB5ztvAyb/Wls
- 8g9uyYeWSnQiLgDfsBWxu2Bae4OHcy9DH3CC74x+EllEkN5Uyj2ckfdj5YtzPOIJ/c2A=;
+ bh=LaJn8xlKsjzx/iIIxNAPS5wLhotT9xnLZevse49RQwg=; b=d5rr2brOeMk/D2OXdELO/pTGLL
+ v1PeE99+uFASFv+1J0ZhsepEnSVl6L7VD+HP/omllS0wkoGuVB4fiC1LJ/pUTMK2YpIGkiQvRAGLv
+ lOx/qaY0BuSVKKvmojrDs/C0j+dA/lozV4EjBEvYQMkuWmDgM2RGzh5eftn3rdzAANvw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
  Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=hTuUer4yaG6DVAm2a9jKK2HUeFUSVWlzPOvFgdzGE5Y=; b=d
- ZSPhWyEa0LPcUi+oZV4DIRxtlaHaMFpzxZweIdwLz1FwQH2RwfyIpXTWgNsZ9yI/NgK41R3cCY6ES
- JYtKqAUGhM0J4etyXv/Gq6RxRx2fxwbaRrG1apJgdrB3qOFFaf68O3rZLN3GQgiFhF+WBlgrHXCN2
- jmaVRTVKDq3KJ7Gs=;
+ List-Owner:List-Archive; bh=LaJn8xlKsjzx/iIIxNAPS5wLhotT9xnLZevse49RQwg=; b=L
+ gT1Fl41CZVQXh68qxZPWOzUoaBMk5F01s+BCaO8T/Gh/e2Okw8Zocnx9bLTNUXYvpkSREb2eLeatr
+ zlrXODlonWv0OnhphIhHz7XXNwG6w97u004PBWI6ypfbKD9SsjQRsL+WEHsoZK11iMReO3ylvDGTH
+ p1VLJG5R7FYqdlvI=;
 Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rUOmg-0005CX-GK for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Jan 2024 10:22:40 +0000
+ id 1rUOnO-0005F6-Iu for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 29 Jan 2024 10:23:20 +0000
 Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 40TALmxZ021624;
- Mon, 29 Jan 2024 18:21:48 +0800 (+08)
+ by SHSQR01.spreadtrum.com with ESMTP id 40TAM7Tk022034;
+ Mon, 29 Jan 2024 18:22:07 +0800 (+08)
  (envelope-from Zhiguo.Niu@unisoc.com)
 Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4TNkfv3tnnz2R5Td1;
- Mon, 29 Jan 2024 18:14:15 +0800 (CST)
+ by dlp.unisoc.com (SkyGuard) with ESMTPS id 4TNkgG1rC5z2R5Td1;
+ Mon, 29 Jan 2024 18:14:34 +0800 (CST)
 Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
  BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Mon, 29 Jan 2024 18:21:46 +0800
+ 15.0.1497.23; Mon, 29 Jan 2024 18:22:05 +0800
 From: Zhiguo Niu <zhiguo.niu@unisoc.com>
 To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Mon, 29 Jan 2024 18:21:24 +0800
-Message-ID: <1706523684-24540-1-git-send-email-zhiguo.niu@unisoc.com>
+Date: Mon, 29 Jan 2024 18:21:49 +0800
+Message-ID: <1706523709-24605-1-git-send-email-zhiguo.niu@unisoc.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-Originating-IP: [10.0.73.87]
 X-ClientProxiedBy: SHCAS01.spreadtrum.com (10.0.1.201) To
  BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 40TALmxZ021624
+X-MAIL: SHSQR01.spreadtrum.com 40TAM7Tk022034
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -66,18 +66,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  A panic issue happened in a reboot test in small capacity
- device as following: 1.The device size is 64MB, and main area has 24 segments, 
- and CONFIG_F2FS_CHECK_FS is not enabled. 2.There is no any free [...] 
+ Content preview: There is a corner scenario on a small-capacity partition with
+ 64MB size: 1. The main area has a total of 24 segments, and there are no
+ free segments left shown from the free_segmap bitmap and free_sec [...] 
  Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rUOmg-0005CX-GK
-Subject: [f2fs-dev] [PATCH 0/3] f2fs: fix panic issue in small capacity
- device
+X-Headers-End: 1rUOnO-0005F6-Iu
+Subject: [f2fs-dev] [PATCH 1/3] f2fs: correct counting methods of
+ free_segments in __set_inuse
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,30 +96,58 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-A panic issue happened in a reboot test in small capacity device
-as following:
-1.The device size is 64MB, and main area has 24 segments, and
-CONFIG_F2FS_CHECK_FS is not enabled.
-2.There is no any free segments left shown in free_segmap_info,
-then another write request cause get_new_segment get a out-of-bound
-segment with segno 24.
-3.panic happen in update_sit_entry because access invalid bitmap
-pointer.
+There is a corner scenario on a small-capacity partition with 64MB size:
+1. The main area has a total of 24 segments, and there are no free
+segments left shown from the free_segmap bitmap and free_secmap in
+free_segmap_info.
+---------------------------------------------------------------------
+bitmap value: ffffffffffffffff
+---------------------------------------------------------------------
+2. When doing gc, an out-of-bounds segment with segno=24 is allocated.
+Because CONFIG_F2FS_CHECK_FS is not enabled, f2fs_bug_on in get_new_segment
+just print warning log but the subsequent process continues to run.
+---------------------------------------------------------------------
+got_it:
+    /* set it as dirty segment in free segmap */
+    f2fs_bug_on(sbi, test_bit(segno, free_i->free_segmap));
+    __set_inuse(sbi, segno);
+----------------------------------------------------------------------
+3. __set_inuse directly sets free_i->free_segments--,
+As a result, free_i->free_segments=-1, as shown in the following
+coredump information:
+----------------------------------------------------------------------
+  crash_arm64> struct free_segmap_info 0xffffff8084d9a000 -x
+  struct free_segmap_info {
+  start_segno = 0x7,
+  free_segments = 0xffffffff,
+  free_sections = 0x0,
+----------------------------------------------------------------------
+This is unreasonable and will cause free_segments and free_sections
+counts mismatch if there are segments released as free.
 
-More detail shown in following three patches.
-The three patches are splited here because the modifications are
-relatively independent and more readable.
+So same counting methods like free_sections should be used to
+free_segments.
 
-Zhiguo Niu (3):
-  f2fs: correct counting methods of free_segments in __set_inuse
-  f2fs: fix panic issue in update_sit_entry
-  f2fs: enhance judgment conditions of GET_SEGNO
+Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+---
+ fs/f2fs/segment.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- fs/f2fs/file.c    | 7 ++++++-
- fs/f2fs/segment.c | 9 ++++++---
- fs/f2fs/segment.h | 7 ++++---
- 3 files changed, 16 insertions(+), 7 deletions(-)
-
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index 8129be7..f2847f1 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -463,8 +463,8 @@ static inline void __set_inuse(struct f2fs_sb_info *sbi,
+ 	struct free_segmap_info *free_i = FREE_I(sbi);
+ 	unsigned int secno = GET_SEC_FROM_SEG(sbi, segno);
+ 
+-	set_bit(segno, free_i->free_segmap);
+-	free_i->free_segments--;
++	if (!test_and_set_bit(segno, free_i->free_segmap))
++		free_i->free_segments--;
+ 	if (!test_and_set_bit(secno, free_i->free_secmap))
+ 		free_i->free_sections--;
+ }
 -- 
 1.9.1
 
