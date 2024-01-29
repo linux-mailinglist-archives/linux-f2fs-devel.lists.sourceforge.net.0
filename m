@@ -2,85 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A0D38402B4
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jan 2024 11:23:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 955228402C5
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jan 2024 11:28:04 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rUOn8-0002hx-Ri;
-	Mon, 29 Jan 2024 10:23:03 +0000
+	id 1rUOrv-00032S-VZ;
+	Mon, 29 Jan 2024 10:28:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1rUOn6-0002hb-Ph
+ (envelope-from <chao@kernel.org>) id 1rUOru-00032M-FW
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Jan 2024 10:23:01 +0000
+ Mon, 29 Jan 2024 10:27:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NWtkAVeJ9KZLPFoWOjJPFsaKFQ05kqDAUgrmDVzZhFI=; b=Tmfn4spb0H8IRoh5b3zPhlP6pN
- kFRl7Lp4kqZfqPMdDINjLTCX6mPfLhiu8mP7xoMex9yrAVYnayIejN828aqLHoZJUr/VjSDv9uyQx
- KipYOSBtXEma/1paZt9MLkVTYl+gcPQ7u66/lJI6AM/upwZ3YP8ifRZ64NFs+fzxuYl8=;
+ bh=NoBtbWBG+b1qUxuU3QxEjVwcHZileZtHD/xiFangzVk=; b=Ivq0P7vaAHx4RWhzU1ylUT4iD6
+ VxwNU84PRZDtsMkO4zoJC2Xb9/JIezyRCgxgsgQuib1G6ZWim4Sznqqs1cwfjhksv2aKQPKp0rD9R
+ 8tPR2kp2Y0iMK3G38N52uLjUBoTMNxzT36Nyc9AULi+mheuhw6cnQiZC+JEIkscugcbs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=NWtkAVeJ9KZLPFoWOjJPFsaKFQ05kqDAUgrmDVzZhFI=; b=A
- iiRez0/H8DkabNZrDdurhDpVnJYh4yt6XIgCMa/Dm4o8LiRIyvuQvzq5SMKavsZxEe1AuJf63MBBA
- 3PDcERPVTf3NbL8d0KonXCZpgTtqijB/2ee59yIIw2+NQUUkIcz+s/qveB5+a4GJVq8t6Irwi0qRN
- 3noVtqTRaU97PCV4=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=NoBtbWBG+b1qUxuU3QxEjVwcHZileZtHD/xiFangzVk=; b=GyQG/hXifI/vPdf6l/aMeQGd5a
+ c+VwD2kr0oSMtDeF6+cc9k9QDm2B9FCwkS+ilCVMlthqtIFUtWYVuxtqHXYdpYFA1S5MqGGykTcy6
+ AcNLj2hVlgQGr9b822c9wwgALIPVgeHl7YysF0kMPwkMj8DBimpo7env5otPKjubWCpA=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rUOn6-0005EG-2p for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Jan 2024 10:23:01 +0000
-Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 40TAMSs2022744;
- Mon, 29 Jan 2024 18:22:28 +0800 (+08)
- (envelope-from Zhiguo.Niu@unisoc.com)
-Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4TNkgg4ff5z2R5Td1;
- Mon, 29 Jan 2024 18:14:55 +0800 (CST)
-Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Mon, 29 Jan 2024 18:22:26 +0800
-From: Zhiguo Niu <zhiguo.niu@unisoc.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Mon, 29 Jan 2024 18:22:11 +0800
-Message-ID: <1706523731-24706-1-git-send-email-zhiguo.niu@unisoc.com>
-X-Mailer: git-send-email 1.9.1
+ id 1rUOrr-0005Vh-Ho for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 29 Jan 2024 10:27:59 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id CA6C362046;
+ Mon, 29 Jan 2024 10:27:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 01ABAC43390;
+ Mon, 29 Jan 2024 10:27:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1706524065;
+ bh=dJ3bS5oGG9PHms+736cFAZX/JO0z5fQy3JzWxPCMyqc=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=qJ6H4eTWCM1WSFpRsizOIHNUQefYGhckq73mSh80dT/GCCrPohIBd/BZx+8MvPhsX
+ Ue74dpfnWa2meEEYCbKyugyVLUwDszjvrJfgtp4xHfD+aJKlnLvJfoniYMMgtADO73
+ xk/810eY/grQ3XUkPY2G9WwTiUUj88VXkgV7eIPIv8jh6xGy7yQ1+M3HutW8fLndsw
+ 9YymWyTvOywHyNpTmJg8Q4rDBojS0F5cf+Vbci4SgNQ8cX28DwvIMrhTl73M+wjY0C
+ u5nU48uBa/pfIs405Q7rL+akEn86Tv3WUQybJ0IGJqff2yPfevc/Ms2eKbzT2Tjslo
+ qHoxhRyLbmBkA==
+Message-ID: <d379bc01-ca31-41e6-9d85-7fca846af491@kernel.org>
+Date: Mon, 29 Jan 2024 18:27:39 +0800
 MIME-Version: 1.0
-X-Originating-IP: [10.0.73.87]
-X-ClientProxiedBy: SHCAS01.spreadtrum.com (10.0.1.201) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 40TAMSs2022744
-X-Spam-Score: -0.0 (/)
+User-Agent: Mozilla Thunderbird
+To: Wenjie Qi <qwjhust@gmail.com>, jaegeuk@kernel.org
+References: <20240116141138.1245-1-qwjhust@gmail.com>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20240116141138.1245-1-qwjhust@gmail.com>
+X-Spam-Score: -6.5 (------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  NULL_SEGNO should also be returned when the blk_addr value
- is out-of-bound main area even __is_valid_data_blkaddr return true. For
- example, 
- a 64MB partition with total 24 main segments has no any free segments left,
- then a new wrtie request use get_new_segment may get a out-of-bound segno
- 24 if CONFIG_F2FS_CHECK_FS is not ena [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  On 2024/1/16 22:11,
+ Wenjie Qi wrote: > BUG: kernel NULL pointer dereference,
+ address: 0000000000000014 > RIP: 0010:f2fs_submit_page_write+0x6cf/0x780
+ [f2fs] > Call Trace: > <TASK> > ? show_regs+0x6e/0 [...] 
+ Content analysis details:   (-6.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rUOn6-0005EG-2p
-Subject: [f2fs-dev] [PATCH 3/3] f2fs: enhance judgment conditions of
- GET_SEGNO
+ -1.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rUOrr-0005Vh-Ho
+Subject: Re: [f2fs-dev] [PATCH v1] f2fs: fix NULL pointer dereference in
+ f2fs_submit_page_write()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,92 +104,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, hongyu.jin@unisoc.com,
- zhiguo.niu@unisoc.com, niuzhiguo84@gmail.com
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, hustqwj@hust.edu.cn,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-NULL_SEGNO should also be returned when the blk_addr value is
-out-of-bound main area even __is_valid_data_blkaddr return true.
+On 2024/1/16 22:11, Wenjie Qi wrote:
+> BUG: kernel NULL pointer dereference, address: 0000000000000014
+> RIP: 0010:f2fs_submit_page_write+0x6cf/0x780 [f2fs]
+> Call Trace:
+> <TASK>
+> ? show_regs+0x6e/0x80
+> ? __die+0x29/0x70
+> ? page_fault_oops+0x154/0x4a0
+> ? prb_read_valid+0x20/0x30
+> ? __irq_work_queue_local+0x39/0xd0
+> ? irq_work_queue+0x36/0x70
+> ? do_user_addr_fault+0x314/0x6c0
+> ? exc_page_fault+0x7d/0x190
+> ? asm_exc_page_fault+0x2b/0x30
+> ? f2fs_submit_page_write+0x6cf/0x780 [f2fs]
+> ? f2fs_submit_page_write+0x736/0x780 [f2fs]
+> do_write_page+0x50/0x170 [f2fs]
+> f2fs_outplace_write_data+0x61/0xb0 [f2fs]
+> f2fs_do_write_data_page+0x3f8/0x660 [f2fs]
+> f2fs_write_single_data_page+0x5bb/0x7a0 [f2fs]
+> f2fs_write_cache_pages+0x3da/0xbe0 [f2fs]
+> ...
+> It is possible that other threads have added this fio to io->bio
+> and submitted the io->bio before entering f2fs_submit_page_write().
+> At this point io->bio = NULL.
+> If is_end_zone_blkaddr(sbi, fio->new_blkaddr) of this fio is true,
+> then an NULL pointer dereference error occurs at bio_get(io->bio).
+> The original code for determining zone end was after "out:",
+> which would have missed some fio who is zone end. I've moved
+>   this code before "skip:" to make sure it's done for each fio.
+> 
+> Signed-off-by: Wenjie Qi <qwjhust@gmail.com>
 
-For example, a 64MB partition with total 24 main segments has no
-any free segments left, then a new wrtie request use get_new_segment
-may get a out-of-bound segno 24 if CONFIG_F2FS_CHECK_FS is not enabled.
-GET_SEGNO should also return NULL_SEGNO in this case rather than treating
-is as valid segment.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-Besides, if the caller of GET_SEGNO does not ensure blk_addr pass to
-GET_SEGNO is valid, it should do sanity check about return value of
-GET_SEGNO, avoid causing some unexpected problems later.
-
-Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
----
- fs/f2fs/file.c    | 7 ++++++-
- fs/f2fs/segment.c | 4 +++-
- fs/f2fs/segment.h | 3 ++-
- 3 files changed, 11 insertions(+), 3 deletions(-)
-
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 23cd6a1..2cd3cd9 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2985,9 +2985,14 @@ static int f2fs_ioc_flush_device(struct file *filp, unsigned long arg)
- 	if (ret)
- 		return ret;
- 
--	if (range.dev_num != 0)
-+	if (range.dev_num != 0) {
- 		dev_start_segno = GET_SEGNO(sbi, FDEV(range.dev_num).start_blk);
-+		if (dev_start_segno == NULL_SEGNO)
-+			return -EINVAL;
-+	}
- 	dev_end_segno = GET_SEGNO(sbi, FDEV(range.dev_num).end_blk);
-+	if (dev_end_segno == NULL_SEGNO)
-+		return -EINVAL;
- 
- 	start_segno = sm->last_victim[FLUSH_DEVICE];
- 	if (start_segno < dev_start_segno || start_segno >= dev_end_segno)
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index f373ff7..6772ad4 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -2496,7 +2496,7 @@ void f2fs_invalidate_blocks(struct f2fs_sb_info *sbi, block_t addr)
- 	struct sit_info *sit_i = SIT_I(sbi);
- 
- 	f2fs_bug_on(sbi, addr == NULL_ADDR);
--	if (addr == NEW_ADDR || addr == COMPRESS_ADDR)
-+	if (segno == NULL_SEGNO)
- 		return;
- 
- 	f2fs_invalidate_internal_cache(sbi, addr);
-@@ -3708,6 +3708,8 @@ void f2fs_do_replace_block(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
- 	unsigned char old_alloc_type;
- 
- 	segno = GET_SEGNO(sbi, new_blkaddr);
-+	if (segno == NULL_SEGNO)
-+		return;
- 	se = get_seg_entry(sbi, segno);
- 	type = se->type;
- 
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index f2847f1..b0ea315 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -96,7 +96,8 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
- 	(GET_SEGOFF_FROM_SEG0(sbi, blk_addr) & ((sbi)->blocks_per_seg - 1))
- 
- #define GET_SEGNO(sbi, blk_addr)					\
--	((!__is_valid_data_blkaddr(blk_addr)) ?			\
-+	((!__is_valid_data_blkaddr(blk_addr) ||			\
-+	!f2fs_is_valid_blkaddr(sbi, blk_addr, DATA_GENERIC)) ?	\
- 	NULL_SEGNO : GET_L2R_SEGNO(FREE_I(sbi),			\
- 		GET_SEGNO_FROM_SEG0(sbi, blk_addr)))
- #define BLKS_PER_SEC(sbi)					\
--- 
-1.9.1
-
+Thanks,
 
 
 _______________________________________________
