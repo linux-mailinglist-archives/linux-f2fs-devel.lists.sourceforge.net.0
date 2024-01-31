@@ -2,86 +2,111 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81F8584380A
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Jan 2024 08:40:03 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A84D8844733
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Jan 2024 19:33:42 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rV5CQ-0003WS-F3;
-	Wed, 31 Jan 2024 07:39:58 +0000
+	id 1rVFOu-0004Hz-8G;
+	Wed, 31 Jan 2024 18:33:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rV5CI-0003WI-Ub
+ (envelope-from <daeho43@gmail.com>) id 1rVFOs-0004Hj-Ji
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 31 Jan 2024 07:39:50 +0000
+ Wed, 31 Jan 2024 18:33:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Z0MSpeNJHy0X57W6dlxQzgrRvSFDvNOpxWAMhTRKNXI=; b=kXqD3GGFaQ0Fhy7iv6ufm7dYbJ
- 9M//jiYFTkRDyGd551/DP4BFfU3AhPW5p+ftBzJRPJKbBxTkwqobY3hMyVi4Db5pr8tCALVTbmMzZ
- mtowZD0YzReY3rjrmsjWaQWlAUGe5uE/2yy/zKWEnhGiH2trBYkmkepFI2SV19umaAs0=;
+ bh=i3HqJfEyYAV9x9E8qNujfqhtfVC27wsVyRT1JllQJy4=; b=VRypYEQe/8wc6XpirNsbyvUKrx
+ AndDxQfUTgFyWg1zLM0fLNbi28KXKhsG28ntB1dZwMQUBPweP4V7dc52mitl6EW5YEy6TjYxCAPo4
+ /3DnEZ2nbrh7SD5yRj2rXOn4vHl0LKv7qd0ECp7OWik8x7UkhiVixDfm0B3wPSZ8vluQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Z0MSpeNJHy0X57W6dlxQzgrRvSFDvNOpxWAMhTRKNXI=; b=IPMb4P8Ext1XNJRvB5Tu5b7TAT
- X6saYDW3Y1uPalwvLlGUOvwtRl4d/LcLy0J3NYxJbjQ18AKQDhGU+J8N3MMY/fzSygQIQxg12FZOf
- 56yIj+oKhoCOkE4CYa0NgQp6oRSXY//kZMFjxDJWDRVDKLAi6MYYBmTySNGPY78ZrRqk=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=i3HqJfEyYAV9x9E8qNujfqhtfVC27wsVyRT1JllQJy4=; b=d
+ 5GraN4elAE+mW5+8IKQw9m3l8v/amhnfCTmTarL6/peVZnhDtkuHSPKXx9nX9U6Pb6pVlUFE1ecO9
+ oauQ2TAnQyOo/1CjCsCkkIrjHW+ybEGBkfDyJo8Wu+l3fewxnYc0P1QW5nHTyZTG5N71OX06VXs9L
+ m46YL2JsaJUfQgS4=;
+Received: from mail-pf1-f169.google.com ([209.85.210.169])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rV5CH-0003ua-HM for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 31 Jan 2024 07:39:50 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 75F4DCE1184;
- Wed, 31 Jan 2024 07:39:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1CF20C433C7;
- Wed, 31 Jan 2024 07:39:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706686778;
- bh=A7giZ2Ti9Ecl4x04u9G+VVMe8IvOUokvvBy0EenptqU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Qjmq1TtnOCD0FxLl4IA2CKw7ObbAVqdsjelzCCnzlxyvSjgQXPl4LEcfz7KZrXgAq
- u/kb5dihV3JCpkhNpfqPTNYIOYQiZqrGz1TcYDPEZhzXcPjsND6AyAwWMtJ2YpmJT1
- JHEwdm2CLj7Nu3i4GgSEs9bQjwEw1Z1Za1S0jmJtgKImJop680K/zEhgHXCJYvcy6e
- QY3lUwhyt+NFlmgboa6HRPUrKSzfmq4ZWnFZ66bHXE7H9uw/1u2Nd9pjPs/KB34M7e
- 0iFjvMuO7PCtmdTaJauGBXoaFr2REfL6pM0VziA2AEBQvOu8+yrTfDjqFcwcpkSNEf
- XUzgk9qWBNRqA==
-Message-ID: <dec7e126-9fbe-45b7-b661-6464ac5261fb@kernel.org>
-Date: Wed, 31 Jan 2024 15:39:33 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rVFOl-00031w-Mj for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 31 Jan 2024 18:33:30 +0000
+Received: by mail-pf1-f169.google.com with SMTP id
+ d2e1a72fcca58-6ddd1fc67d2so20625b3a.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 31 Jan 2024 10:33:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706725994; x=1707330794; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=i3HqJfEyYAV9x9E8qNujfqhtfVC27wsVyRT1JllQJy4=;
+ b=B2dq1WgqfLtyVAaCxe5ulxIGy/+6XP9ZEg2k37s4Tlz9uYmUMlIMcWGjJ3UPvOldJW
+ rUXqe8vZQUgHgIFi3lHpqKn1ZvSt8kRpdiM8uSopfMxRNgYl4eltOiZED7uKONsYSFsc
+ 5QDSFnCoey6No0ChR7bQpZ8j4BiO+mNBatoAyb6KfzZDCdtG5qoR+hr0/2gYXfpeheFM
+ xJtMQN74v7ZCJezw71v9K9q5pMGbXZbxJfz8t1YpWgULlIYs/Y/Ek9tynqQhvkOrOZ9Q
+ GmOp6oKWoISBRY8hopNnQRuEbJqe6ZPBIx8M89b0JZcXotbmXJAtREnjU07ubTfPfTHk
+ VyvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706725994; x=1707330794;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=i3HqJfEyYAV9x9E8qNujfqhtfVC27wsVyRT1JllQJy4=;
+ b=Tcse0XNQj55ECqMg6TX97zfcDqki8iI1os8w8k4Ilc+7myKCzejiL+wuwsL+1QHBhA
+ areZjPZPgvlYplQhcgHOReXRmZ1LYjhsUAKh9F/+JOVCZqwB+FMnZ/kgVxDY+dZ0asVJ
+ nX53PuFb1f2KhTGYOzhGY0A9BU21cesvfWIdk9aMokhsKVIYXgbAmM5JfyW75+EQWYsa
+ eqQ7R+UNyaYt3NQKdEvOrqwuNNKF5X3WfUwwU911WcYi4S9HhEfAEUk7MEvuXP3YCSeG
+ 8DxQFYwC3cZQuwp4jvnSbDwZf8KE7OMkgPlxbCJoxL4JW8Dac/Fd+2p67Gsx1kHXDW/6
+ R9Cw==
+X-Gm-Message-State: AOJu0YzsaqINlkhOUZMcfcpsTn4gvCCvx0Ka8kC484zO8282XabIy5l9
+ dajIp7qaFzooegzI3nNS6Mj3/aG1dqWZhSYPiSaO1hZy07mpMqo8fLrpLUgH
+X-Google-Smtp-Source: AGHT+IEXSr/QD1yLRkKwnlLJyr71HUl3kKXqwgQJE+B4DcZMVSYiefw7oL/qDvzE75jC1NHxL0JKHw==
+X-Received: by 2002:a05:6a00:99e:b0:6dd:a0a7:ad9a with SMTP id
+ u30-20020a056a00099e00b006dda0a7ad9amr3271685pfg.25.1706725993619; 
+ Wed, 31 Jan 2024 10:33:13 -0800 (PST)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:0:1000:8411:436b:ab62:1d08:45ea])
+ by smtp.gmail.com with ESMTPSA id
+ i21-20020aa787d5000000b006d9c216a9e6sm10300369pfo.56.2024.01.31.10.33.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 31 Jan 2024 10:33:13 -0800 (PST)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Wed, 31 Jan 2024 10:33:06 -0800
+Message-ID: <20240131183306.536372-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.43.0.429.g432eaa2c6b-goog
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: zhangxirui <xirui.zhang@vivo.com>, jaegeuk@kernel.org
-References: <20240126063723.2926123-1-xirui.zhang@vivo.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20240126063723.2926123-1-xirui.zhang@vivo.com>
-X-Spam-Score: -3.8 (---)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/1/26 14:37, zhangxirui wrote: > In sparse mode we
- just read or write to a sparse file not a block device > so no need to check
- device mount state in sparse mode. I guess it needs to check whether regular
- file was a backfile of mounted loop device, so we can only skip block device
- related check? 
- Content analysis details:   (-3.8 points, 6.0 required)
+ Content preview:  From: Daeho Jeong Make to allocate logs after conventional
+ area for HM zoned devices to spare them for file pinning support.
+ Signed-off-by:
+ Daeho Jeong --- v2: make current segment numbers relative to main start block.
+ check zoned block availability before the allocation. --- mkfs/f2fs_format.c
+ | 10 ++++++++++ 1 file chan [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -89,11 +114,15 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.169 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.169 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -1.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rV5CH-0003ua-HM
-Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: skip check device mount state in
- sparse mode
+X-Headers-End: 1rVFOl-00031w-Mj
+Subject: [f2fs-dev] [PATCH v2] f2fs-tools: allocate logs after conventional
+ area for HM zoned devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,43 +134,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/1/26 14:37, zhangxirui wrote:
-> In sparse mode we just read or write to a sparse file not a block device
-> so no need to check device mount state in sparse mode.
+From: Daeho Jeong <daehojeong@google.com>
 
-I guess it needs to check whether regular file was a backfile of mounted
-loop device, so we can only skip block device related check?
+Make to allocate logs after conventional area for HM zoned devices to
+spare them for file pinning support.
 
-https://lore.kernel.org/linux-f2fs-devel/20240131073425.4043962-1-chao@kernel.org
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+v2: make current segment numbers relative to main start block. check
+    zoned block availability before the allocation.
+---
+ mkfs/f2fs_format.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-Thanks,
+diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+index f2840c8..57ea9ea 100644
+--- a/mkfs/f2fs_format.c
++++ b/mkfs/f2fs_format.c
+@@ -558,6 +558,16 @@ static int f2fs_prepare_super_block(void)
+ 		c.cur_seg[CURSEG_WARM_DATA] = next_zone(CURSEG_COLD_DATA);
+ 	} else if (c.zoned_mode) {
+ 		c.cur_seg[CURSEG_HOT_NODE] = 0;
++		if (c.zoned_model == F2FS_ZONED_HM) {
++			uint32_t conv_zones =
++				c.devices[0].total_segments / c.segs_per_zone
++				- total_meta_zones;
++
++			if (total_zones - conv_zones >= avail_zones)
++				c.cur_seg[CURSEG_HOT_NODE] =
++					(c.devices[1].start_blkaddr -
++					 get_sb(main_blkaddr)) / c.blks_per_seg;
++		}
+ 		c.cur_seg[CURSEG_WARM_NODE] = next_zone(CURSEG_HOT_NODE);
+ 		c.cur_seg[CURSEG_COLD_NODE] = next_zone(CURSEG_WARM_NODE);
+ 		c.cur_seg[CURSEG_HOT_DATA] = next_zone(CURSEG_COLD_NODE);
+-- 
+2.43.0.429.g432eaa2c6b-goog
 
-> 
-> Signed-off-by: zhangxirui <xirui.zhang@vivo.com>
-> ---
->   lib/libf2fs.c | 4 ++++
->   1 file changed, 4 insertions(+)
-> 
-> diff --git a/lib/libf2fs.c b/lib/libf2fs.c
-> index 2451201..5315de2 100644
-> --- a/lib/libf2fs.c
-> +++ b/lib/libf2fs.c
-> @@ -830,6 +830,10 @@ int f2fs_devs_are_umounted(void)
->   {
->   	int i;
->   
-> +	/*no need to check device mount state in sparse mode*/
-> +	if (c.sparse_mode)
-> +		return 0;
-> +
->   	for (i = 0; i < c.ndevs; i++)
->   		if (f2fs_dev_is_umounted((char *)c.devices[i].path))
->   			return -1;
 
 
 _______________________________________________
