@@ -2,79 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF71B844FA4
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Feb 2024 04:24:54 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DAA1D84515D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Feb 2024 07:29:45 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rVNgw-000385-V0;
-	Thu, 01 Feb 2024 03:24:43 +0000
+	id 1rVQZs-0006Qy-PR;
+	Thu, 01 Feb 2024 06:29:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1rVNgw-00037z-9F
+ (envelope-from <chao@kernel.org>) id 1rVQZr-0006Qn-SE
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Feb 2024 03:24:43 +0000
+ Thu, 01 Feb 2024 06:29:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LCmRERkZF1ZezYHJErNmgTRl8CZAg0PDTuNt5bZWcLc=; b=WN/IVPhSIhuZ0s00IDlmxDBkw6
- dbOzitRbmoX56d6gWHD7yYONt3gZH1T5V2T3pOZ3LOykOxTxrPtgzBhn3W7dD6XiwYN6m8GlYkfnk
- FhrQ/LdV5xU6GywJcN1U3zSBqM+h6/Coq3s4twTBuZqm8aT6G85PK4KR+3BIzKMCMOlA=;
+ bh=6bFGsnGqzlsZVLgpl7C9EFBUGdQyOWNMmpvao2gVrag=; b=lQbH4xkl2mW+oeTFXu2altDX4f
+ fdyE/uI/DqK207aFEgdoPIss9RtKGR29K3EylRQ0f6d50zxmsdfK+6mvwkyJMiuhlcOs5r5F/pJkb
+ P906ujz8YQqAFQB+CU8vUr0s0k/LYyPDiloty365lQn9vRBLyTfeqfBJunUwIBzm3U6A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LCmRERkZF1ZezYHJErNmgTRl8CZAg0PDTuNt5bZWcLc=; b=Za8O/53tOaK+xMczmqx3ijtKFZ
- 3t/WkYysbG+8Q6HDWtKBG8ApkY715zOvOXT0JxxAxfef1yqy3t/4q34ozuDmEInT36dijQjUmw+uE
- OzXPMsMaWoSFluXdkE9xzR+y1JbNEA9/F+g7vJyqiXHOXcTc00/s9EpyGI3ggHUEO2Eo=;
+ bh=6bFGsnGqzlsZVLgpl7C9EFBUGdQyOWNMmpvao2gVrag=; b=Liq0wyy2Fz70RpN81a1kCuPZCa
+ RHeFGe6s2G6IgtZnxG4NMTJ03BFTjNNb/nO54eVhrsIwTi08sP0Rnbux8BbL12b0zIuKeDmN41Orm
+ YsUuxvevhPMV9Wac14GRT5isKbPnFbugVhsAc/MWdMIYOoek9Qe5JsFPS35y8ANW4HZg=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rVNgu-0008VY-MS for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Feb 2024 03:24:43 +0000
+ id 1rVQZq-0005hc-Td for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 01 Feb 2024 06:29:36 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id ED29D6130D;
- Thu,  1 Feb 2024 03:24:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 59B2DC433C7;
- Thu,  1 Feb 2024 03:24:35 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 1ECB961B2F;
+ Thu,  1 Feb 2024 06:29:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 56E97C433F1;
+ Thu,  1 Feb 2024 06:29:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706757875;
- bh=gc4v17wSZ6Qjqbp/jjpPvy6HAXY8q3i8CoEzcQx+p5M=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=g9HIfgrjQN4UNK2O52IcyksmHgjKicwwypq6hTILIRCeBTVo7SGVmoVgOQMPmzZkL
- Vqi/r9+whLWGODUxnvUCkEnpq3Q6a5RG5LRgFd+xpXosOJk1TC+3r3u+sBAq7gmN0G
- 8zOOYrgD2uypAEsiGN4DBstHrpzMXul2JLcMIY2swDh4zdE2SQUW4kIHcv2MR21U8d
- HvgerTiSlDB1DNZorlBKtkOFUwfuKZ1utk5FzYoMeWDl8TdAnmAZILJYVNOxn3fwJv
- GfXv1vIfQc0feHnLFvYA2nDWxczw6BO30AknTWTP3XK1cJPHf2v4mW2E1Jv4zbN45a
- QuXYf6lmq0Fiw==
-Date: Wed, 31 Jan 2024 19:24:33 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Gabriel Krisman Bertazi <krisman@suse.de>
-Message-ID: <20240201032433.GB1526@sol.localdomain>
-References: <20240129204330.32346-1-krisman@suse.de>
- <20240129204330.32346-5-krisman@suse.de>
- <20240131004724.GC2020@sol.localdomain>
- <871q9x2vwj.fsf@mailhost.krisman.be>
+ s=k20201202; t=1706768964;
+ bh=1BN6jfhT/gk45R5CPCVJSrOjxfYN0aiySJzxnvTLL9I=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=JskVz43SXLur011T8ECNrlujln8yf0cbj2eLQ/8L+LzS/RKAXRgtfcHTotBopzob3
+ Wlf6HNLdn2ERNJfUAEbpVsMg/4X+psQruWFS8EylML+D8qf0VZFSd7AzkSiY1of0ET
+ d4fh85DrXTL1nTgPyN5cPHwUABlE6GyZyW0jDTRnsg489WY/7xZ1wVc348nrZy0/sD
+ uvfinO86U48GprfFn99SqrAEhUh3fzXZ0FYkYuJoSKBGMM0PMCyT8izcQqSkr/5cpa
+ VMjOwhbQsCwgBRJbowJPOV9yKuvAQ2DQQwMjyOtItyS5CoTpGBMy7J2d/EIgBotWbr
+ thl2W3EjiHqAQ==
+Message-ID: <0477240f-9f52-4418-9a2d-7a5a598cd0a9@kernel.org>
+Date: Thu, 1 Feb 2024 14:29:19 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <871q9x2vwj.fsf@mailhost.krisman.be>
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: liujinbao1 <jinbaoliu365@gmail.com>, jaegeuk@kernel.org
+References: <20240130125113.14081-1-jinbaoliu365@gmail.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20240130125113.14081-1-jinbaoliu365@gmail.com>
 X-Spam-Score: -6.5 (------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jan 31, 2024 at 03:35:40PM -0300, Gabriel Krisman
- Bertazi wrote: > Eric Biggers <ebiggers@kernel.org> writes: > > > On Mon,
- Jan 29, 2024 at 05:43:22PM -0300, Gabriel Krisman Bertazi wrote: > > [...]
+ Content preview:  On 2024/1/30 20:51,
+ liujinbao1 wrote: > From: liujinbao1
+ <liujinbao1@xiaomi.corp-partner.google.com>
+ > > Currently, IO can only be ignored when GC_URGENT_HIGH is set, > and the
+ default algorithm used [...] 
  Content analysis details:   (-6.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -82,18 +82,17 @@ X-Spam-Report: Spam detection software,
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -1.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rVNgu-0008VY-MS
-Subject: Re: [f2fs-dev] [PATCH v5 04/12] fscrypt: Drop d_revalidate for
- valid dentries during lookup
+X-Headers-End: 1rVQZq-0005hc-Td
+Subject: Re: [f2fs-dev] [PATCH] UPSTREAM: f2fs: sysfs: support gc_io_aware
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,104 +104,150 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: tytso@mit.edu, amir73il@gmail.com, linux-f2fs-devel@lists.sourceforge.net,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: liujinbao1 <liujinbao1@xiaomi.corp-partner.google.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jan 31, 2024 at 03:35:40PM -0300, Gabriel Krisman Bertazi wrote:
-> Eric Biggers <ebiggers@kernel.org> writes:
+On 2024/1/30 20:51, liujinbao1 wrote:
+> From: liujinbao1 <liujinbao1@xiaomi.corp-partner.google.com>
 > 
-> > On Mon, Jan 29, 2024 at 05:43:22PM -0300, Gabriel Krisman Bertazi wrote:
-> >> Unencrypted and encrypted-dentries where the key is available don't need
-> >> to be revalidated with regards to fscrypt, since they don't go stale
-> >> from under VFS and the key cannot be removed for the encrypted case
-> >> without evicting the dentry.  Mark them with d_set_always_valid, to
-> >
-> > "d_set_always_valid" doesn't appear in the diff itself.
-> >
-> >> diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-> >> index 4aaf847955c0..a22997b9f35c 100644
-> >> --- a/include/linux/fscrypt.h
-> >> +++ b/include/linux/fscrypt.h
-> >> @@ -942,11 +942,22 @@ static inline int fscrypt_prepare_rename(struct inode *old_dir,
-> >>  static inline void fscrypt_prepare_lookup_dentry(struct dentry *dentry,
-> >>  						 bool is_nokey_name)
-> >>  {
-> >> -	if (is_nokey_name) {
-> >> -		spin_lock(&dentry->d_lock);
-> >> +	spin_lock(&dentry->d_lock);
-> >> +
-> >> +	if (is_nokey_name)
-> >>  		dentry->d_flags |= DCACHE_NOKEY_NAME;
-> >> -		spin_unlock(&dentry->d_lock);
-> >> +	else if (dentry->d_flags & DCACHE_OP_REVALIDATE &&
-> >> +		 dentry->d_op->d_revalidate == fscrypt_d_revalidate) {
-> >> +		/*
-> >> +		 * Unencrypted dentries and encrypted dentries where the
-> >> +		 * key is available are always valid from fscrypt
-> >> +		 * perspective. Avoid the cost of calling
-> >> +		 * fscrypt_d_revalidate unnecessarily.
-> >> +		 */
-> >> +		dentry->d_flags &= ~DCACHE_OP_REVALIDATE;
-> >>  	}
-> >> +
-> >> +	spin_unlock(&dentry->d_lock);
-> >
-> > This makes lookups in unencrypted directories start doing the
-> > spin_lock/spin_unlock pair.  Is that really necessary?
-> >
-> > These changes also make the inline function fscrypt_prepare_lookup() very long
-> > (when including the fscrypt_prepare_lookup_dentry() that's inlined into it).
-> > The rule that I'm trying to follow is that to the extent that the fscrypt helper
-> > functions are inlined, the inline part should be a fast path for unencrypted
-> > directories.  Encrypted directories should be handled out-of-line.
-> >
-> > So looking at the original fscrypt_prepare_lookup():
-> >
-> > 	static inline int fscrypt_prepare_lookup(struct inode *dir,
-> > 						 struct dentry *dentry,
-> > 						 struct fscrypt_name *fname)
-> > 	{
-> > 		if (IS_ENCRYPTED(dir))
-> > 			return __fscrypt_prepare_lookup(dir, dentry, fname);
-> >
-> > 		memset(fname, 0, sizeof(*fname));
-> > 		fname->usr_fname = &dentry->d_name;
-> > 		fname->disk_name.name = (unsigned char *)dentry->d_name.name;
-> > 		fname->disk_name.len = dentry->d_name.len;
-> > 		return 0;
-> > 	}
-> >
-> > If you could just add the DCACHE_OP_REVALIDATE clearing for dentries in
-> > unencrypted directories just before the "return 0;", hopefully without the
-> > spinlock, that would be good.  Yes, that does mean that
-> > __fscrypt_prepare_lookup() will have to handle it too, for the case of dentries
-> > in encrypted directories, but that seems okay.
+> Currently, IO can only be ignored when GC_URGENT_HIGH is set,
+>   and the default algorithm used for GC_URGENT_HIGH is greedy.
+> It gives a way to enable/disable IO aware feature for background
+> gc, so that we can tune background gc more precisely. e.g.
+> force to disable IO aware and choose more suitable algorithm
+> if there are large number of dirty segments.
 > 
-> ok, will do.  IIUC, we might be able to do without the d_lock
-> provided there is no store tearing.
+> Change-Id: Ic0ea1bf8fb6602f0dd88b924088f1c1b33fcd809
+
+Should remove Change-Id line.
+
+> Signed-off-by: liujinbao1 <liujinbao1@xiaomi.corp-partner.google.com>
+> ---
+>   Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++
+>   fs/f2fs/f2fs.h                          | 6 ++++++
+>   fs/f2fs/gc.c                            | 3 ++-
+>   fs/f2fs/gc.h                            | 1 +
+>   fs/f2fs/sysfs.c                         | 9 +++++++++
+>   5 files changed, 24 insertions(+), 1 deletion(-)
 > 
-> But what was the reason you need the d_lock to set DCACHE_NOKEY_NAME
-> during lookup?  Is there a race with parallel lookup setting d_flag that
-> I couldn't find? Or is it another reason?
+> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+> index 36c3cb547901..47f02fa471fe 100644
+> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+> @@ -16,6 +16,12 @@ Contact:	"Namjae Jeon" <namjae.jeon@samsung.com>
+>   Description:	Controls the default sleep time for gc_thread. Time
+>   		is in milliseconds.
+>   
+> +What:		/sys/fs/f2fs/<disk>/gc_io_aware
+> +Date:		January 2024
+> +Contact:	"Jinbao Liu" <liujinbao1@xiaomi.com>
+> +Description:	It controls to enable/disable IO aware feature for background gc.
+> ++		By default, the value is 1 which indicates IO aware is on.
+> +
+>   What:		/sys/fs/f2fs/<disk>/gc_idle
+>   Date:		July 2013
+>   Contact:	"Namjae Jeon" <namjae.jeon@samsung.com>
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 214fdd590fdf..ebe953e7459e 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -374,6 +374,12 @@ enum {
+>   	MAX_DPOLICY,
+>   };
+>   
+> +enum {
+> +	GC_IO_AWARE_DISABLE,	/* force to not be aware of IO */
+> +	GC_IO_AWARE_ENABLE,	/* force to be aware of IO */
+> +	GC_IO_AWARE_MAX,
+> +};
 
-d_flags is documented to be protected by d_lock.  So for setting
-DCACHE_NOKEY_NAME, fs/crypto/ just does the safe thing of taking d_lock.  I
-never really looked into whether the lock can be skipped there (i.e., whether
-anything else can change d_flags while ->lookup is running), since this code
-only ran for no-key names, for which performance isn't really important.
+Not needed.
 
-This patch would extend that locking to a new context in which it would be
-executed several orders of magnitude more often.  So, making sure it's properly
-optimized becomes more important.  It looks like it *might* be the case that
-->lookup has exclusive access to d_flags, by virtue of having allocated the
-dentry, so I'm just wondering if we can take advantage of that (or whether in
-classic VFS fashion there's some edge case where that assumption is wrong).
+> +
+>   struct discard_policy {
+>   	int type;			/* type of discard */
+>   	unsigned int min_interval;	/* used for candidates exist */
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 309da3d0faff..34a1e6b35af6 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -109,7 +109,7 @@ static int gc_thread_func(void *data)
+>   			goto next;
+>   		}
+>   
+> -		if (!is_idle(sbi, GC_TIME)) {
+> +		if (gc_th->io_aware && !is_idle(sbi, GC_TIME)) {
+>   			increase_sleep_time(gc_th, &wait_ms);
+>   			f2fs_up_write(&sbi->gc_lock);
+>   			stat_io_skip_bggc_count(sbi);
+> @@ -182,6 +182,7 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
+>   	gc_th->min_sleep_time = DEF_GC_THREAD_MIN_SLEEP_TIME;
+>   	gc_th->max_sleep_time = DEF_GC_THREAD_MAX_SLEEP_TIME;
+>   	gc_th->no_gc_sleep_time = DEF_GC_THREAD_NOGC_SLEEP_TIME;
+> +	gc_th->io_aware = GC_IO_AWARE_ENABLE;
 
-- Eric
+gc_th->io_aware = true;
+
+>   
+>   	gc_th->gc_wake = false;
+>   
+> diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
+> index 28a00942802c..51d6ad26b76a 100644
+> --- a/fs/f2fs/gc.h
+> +++ b/fs/f2fs/gc.h
+> @@ -41,6 +41,7 @@ struct f2fs_gc_kthread {
+>   	unsigned int min_sleep_time;
+>   	unsigned int max_sleep_time;
+>   	unsigned int no_gc_sleep_time;
+> +	bool io_aware;
+>   
+>   	/* for changing gc mode */
+>   	bool gc_wake;
+> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> index 417fae96890f..95409cfc48f4 100644
+> --- a/fs/f2fs/sysfs.c
+> +++ b/fs/f2fs/sysfs.c
+> @@ -516,6 +516,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+>   		return count;
+>   	}
+>   
+> +	if (!strcmp(a->attr.name, "gc_io_aware")) {
+> +		if (t >= GC_IO_AWARE_MAX)
+
+	if (t > 1)
+
+> +			return -EINVAL;
+> +		*ui = t;
+
+	*ui = t ? true : false;
+
+Thanks,
+
+> +		return count;
+> +	}
+> +
+>   	if (!strcmp(a->attr.name, "migration_granularity")) {
+>   		if (t == 0 || t > sbi->segs_per_sec)
+>   			return -EINVAL;
+> @@ -906,6 +913,7 @@ GC_THREAD_RW_ATTR(gc_urgent_sleep_time, urgent_sleep_time);
+>   GC_THREAD_RW_ATTR(gc_min_sleep_time, min_sleep_time);
+>   GC_THREAD_RW_ATTR(gc_max_sleep_time, max_sleep_time);
+>   GC_THREAD_RW_ATTR(gc_no_gc_sleep_time, no_gc_sleep_time);
+> +GC_THREAD_RW_ATTR(gc_io_aware, io_aware);
+>   
+>   /* SM_INFO ATTR */
+>   SM_INFO_RW_ATTR(reclaim_segments, rec_prefree_segments);
+> @@ -1061,6 +1069,7 @@ static struct attribute *f2fs_attrs[] = {
+>   	ATTR_LIST(gc_min_sleep_time),
+>   	ATTR_LIST(gc_max_sleep_time),
+>   	ATTR_LIST(gc_no_gc_sleep_time),
+> +	ATTR_LIST(gc_io_aware),
+>   	ATTR_LIST(gc_idle),
+>   	ATTR_LIST(gc_urgent),
+>   	ATTR_LIST(reclaim_segments),
 
 
 _______________________________________________
