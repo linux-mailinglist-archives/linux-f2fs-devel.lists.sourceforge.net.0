@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2402D84515E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Feb 2024 07:30:03 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 488868451DB
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Feb 2024 08:21:36 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rVQaG-0002gw-Or;
-	Thu, 01 Feb 2024 06:30:01 +0000
+	id 1rVRO5-0005pf-6P;
+	Thu, 01 Feb 2024 07:21:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <xirui.zhang@vivo.com>) id 1rVQaE-0002gp-QL
+ (envelope-from <xirui.zhang@vivo.com>) id 1rVRO3-0005pY-8p
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Feb 2024 06:30:00 +0000
+ Thu, 01 Feb 2024 07:21:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
  :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DoAGZFzhv61zQADfoo/pMiJbYX/ETTLdv+d66iNh3cE=; b=bHJU0in+4xWD5Yi2vGTJNrB226
- OJjltIuOLZJfKUXZltS/YeFJHTx3j46aHpdWUahQpGl/aU0646vbz6eSI9X5E77FbfktcLE8IY3rD
- RBLA9XeXe9KOO/nhR77iDHDjbYqgujeRPQ6q1MNlrj63S94m6fN9JdUMi5PftLjBdsQg=;
+ bh=atIO3a/DeYXDFW7RPJS47d65tmEd7fDaeKAwPgM56vw=; b=RopuXZCgotDsasPe/85Lz4f18L
+ 3U7xOz5FHR5Rt+3yXZYNMzxSL2xCR2W60R56lHjy7mznbfRUsCexQ8HXl49Ct/6c9uLKU0WbLncpl
+ scXGFK04/QzMFV04vt8P+oidKPwpKSLRv1+9zr68dKazMVFLhfdV+hQdvfnmVnz5fiJk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
@@ -31,99 +31,99 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DoAGZFzhv61zQADfoo/pMiJbYX/ETTLdv+d66iNh3cE=; b=CcFDm6bWjwFtQHjNw/yKwoZksC
- BlWJxsFSffeB8GYadsIHsv94aELVpoRxGxbDFWfkKrj1zqN5nPM+RRe5HmVAVxqYiP56BwHh/9Zlf
- 5u8b1DY8xjgpDE3Ru6VHIJajh4GpkqcPox1tLa2DuNM61lN+QN06ZRlxB9V3OC7Y6yPE=;
-Received: from mail-tyzapc01on2058.outbound.protection.outlook.com
- ([40.107.117.58] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
+ bh=atIO3a/DeYXDFW7RPJS47d65tmEd7fDaeKAwPgM56vw=; b=UA5jE8Cc4Bg+mUaKPeI5ACokGl
+ 9b1Fgs5SaVY0bMnMNxi2Q0VUgNRuzgFF5YMiiOQCur0BFhn+4FerkKfx6FxjISfBQppR9xOFVgrtr
+ G5v1aAqphx0GpoUU3ZwHSvdqhjcjXgH/BkITX1Kr2Y9jKZbKGvtGNJqvt9DsfFVaERh8=;
+Received: from mail-tyzapc01on2086.outbound.protection.outlook.com
+ ([40.107.117.86] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rVQaD-0005iu-Cn for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Feb 2024 06:29:59 +0000
+ id 1rVRNz-0003Pk-03 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 01 Feb 2024 07:21:27 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DZMCstjK5Wk+9DLARt18SamqYTL1ikx5tPiPOzE5RP8hN127xN3MWHvlub45IjRdha/ay+QaDsRlT6ZhCl858gTNBW9dV3OiLlYWCwhDgeqYJiFn62bRWlUhpLs4oGrz3ZnG66vuw8VYSk5es12ISMXr0bDrRNxsI/mo+XKJ7ecwyT0cZ1VR5wI+2rFdIEjgcip2SpAv4bP7/HpwXD11skcpkM9msJsS1dKhTt3BSg5LQHK+JAuwaXNQ6EkLTE45ewSyOriMjmUqoa3WgEwxHLs9m5tZYtFo51xkB+S461v5sUpk1W/NhGuod5ppghPr6Qx60Y9lsl0M3MSf6SDekw==
+ b=LrZV6mFW8MP8Y8GZQCx0l28lCb8JYYlfsjLLIK8G1Gy3+DfVbghgluJbw/wO4zWRX8ckdTbxuVyiLK+znkS2TTKr5g0yyySQNqVNgLtyjbmLpeJmR4gVvnDDagcqrD3GPdFAQqSpdtuVw4k1/ljBeg++bfCrv7/Q54YG8cKTbMijJKe+yaqLrQns3KEw8b5Nuue2k63Z3RtQ0Y54vm2y5SEpN/PeO8gzH3mEsaAt7M58kjkC6ND8pYLq3IQ5pUWjHjTxSK7B0ikP6TnVpaP3YrLlcFSrpq/u2BMWynNBpT4+azjsXMh27WOznbtxf+2sVBCGzad6PPKgCKfQVsCwaA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DoAGZFzhv61zQADfoo/pMiJbYX/ETTLdv+d66iNh3cE=;
- b=cGVzhBfd34CG5ms7Z+XnpZRvxZ43ACJWkYjOti/O3syqKcaHTUCGP54WSv0Mf6XHGRc87b3DRT9HIigKeyek/WRqn5cCX53STEyutiNkg/AEVkjEmh3SFxaWMIlOIe27CiRWn3XXzjLuQIxOFxnw7J7sbGdODXlH8wpsbmRk7eIegj3HeyYM0h0OdiM2+8tigpHEsWLlV46CnfW82EkRisjG70gQryk9lSN0zWSJJKFI+ODE3YsTC7133pzyVdRihfn7/0GR5NzUKBukT59xJfn1EfbOCSRTTXXJlpQO9zBbcL6+c6ltdR0edDmTVKN8rzy0GkWrCD1B6VOjSvjT/A==
+ bh=atIO3a/DeYXDFW7RPJS47d65tmEd7fDaeKAwPgM56vw=;
+ b=MvJXxqpxcktBFOrZsES+M2n6xzISO66Z8AfVruMjvIMNe7h4xvvTw05LSJcUCnngSB+MSvHUYSS0nILOW0ECNWIiQx9KIw9vv5OSdZ1um4l8Vssz5BMrDwyJSfS2oFIpfweSXSXfU12GZPUkW/dXyYllK1bp4/GVqq3f0FN8GuFTjEqNiQ1vcDKihHhK9E5xNVh4TOGFnLWpZBC3rPO7r4aP7xSJ0UsOHXCJCNq7SY/luBOsAX8xb5KsX1JBOxsmLO9RlkFEZ2lTenL82gbQH/TJ8nHihilEsipRXxc4CmziNUE0ADtkOrJGuwrUYD8A2B4RNf6sqzNxu/TTON9Dog==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DoAGZFzhv61zQADfoo/pMiJbYX/ETTLdv+d66iNh3cE=;
- b=K81wSVxjQvxnY6KFMgyZ4Bfd/CTTvpTJwJh824c7oSocVuVEVCXubLAokGYqokJyVz/6gMhxcdtdEOb0KwnLLzv5S/LB0J+l+DjIUJycN21ftyOSVo2Bngrd1LVnsnYXMiQp4XYp/Uv+ZDFrvYt2oFheswtvt59XA+/9z1omUeSq+9e6w06YPYVpnZLIvYHFIMs8MR+npMUzYPK/RbfF7qWVOopAkQimPVhwIo5/NuqTBpjWWzWw9hHEAXT/f9jzrrRq1eLOk8AwqD3yRtB5li/fpq4ZF0NQFsTJ4Y72j51h+oFOZ3uYLONTGFdkuXEUxtpBrNEBJID9SsL8CCsFSA==
+ bh=atIO3a/DeYXDFW7RPJS47d65tmEd7fDaeKAwPgM56vw=;
+ b=B6ACE7MJSyrEbiEMq7YIJCMufoAvE1qdYfQ8fJTFcSnVmNs43oOt0pnErfbo33J0/UKGAq4I0w3G6gQNJvY0aGrVyv2NC4+ewyJXlLbw9NgeY//qzipV4KxGgAUXJI6FpJNvvjKSkvCQVAvr1LcPPZvwU3zltnmlMb/Nv8apWVMxQqJ4Vl2+PMMQyNHg84KbN37hRdDkfcm3fA+dRy6Z+LbItSjL2DrhbIcfofJZo5qsK13Bn/0wNYQo/lpddfjAZtp7bU4CDgLX1w4PQcvYq2ZgYLR3eDgIQ2mt8HiWUlUSICkLTxxsRKQ8A4gFhHJ3VFa7hO6jfr0ixx2RIQkrmQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from TYZPR06MB5178.apcprd06.prod.outlook.com (2603:1096:400:1f7::12)
- by SEZPR06MB6488.apcprd06.prod.outlook.com (2603:1096:101:18a::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.23; Thu, 1 Feb
- 2024 06:29:41 +0000
+ by JH0PR06MB7509.apcprd06.prod.outlook.com (2603:1096:990:87::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.34; Thu, 1 Feb
+ 2024 07:06:40 +0000
 Received: from TYZPR06MB5178.apcprd06.prod.outlook.com
  ([fe80::6b44:2bf:dafe:c2f6]) by TYZPR06MB5178.apcprd06.prod.outlook.com
  ([fe80::6b44:2bf:dafe:c2f6%3]) with mapi id 15.20.7249.023; Thu, 1 Feb 2024
- 06:29:41 +0000
+ 07:06:40 +0000
 To: chao@kernel.org
-Date: Wed, 31 Jan 2024 23:40:43 -0700
-Message-Id: <20240201064043.4082115-1-xirui.zhang@vivo.com>
+Date: Thu,  1 Feb 2024 00:17:44 -0700
+Message-Id: <20240201071744.4086682-1-xirui.zhang@vivo.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <dec7e126-9fbe-45b7-b661-6464ac5261fb@kernel.org>
 References: <dec7e126-9fbe-45b7-b661-6464ac5261fb@kernel.org>
-X-ClientProxiedBy: SI2PR01CA0009.apcprd01.prod.exchangelabs.com
- (2603:1096:4:191::18) To TYZPR06MB5178.apcprd06.prod.outlook.com
+X-ClientProxiedBy: SI1PR02CA0001.apcprd02.prod.outlook.com
+ (2603:1096:4:1f7::15) To TYZPR06MB5178.apcprd06.prod.outlook.com
  (2603:1096:400:1f7::12)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYZPR06MB5178:EE_|SEZPR06MB6488:EE_
-X-MS-Office365-Filtering-Correlation-Id: b50cb1bb-184e-4ddf-06bc-08dc22ef2c08
+X-MS-TrafficTypeDiagnostic: TYZPR06MB5178:EE_|JH0PR06MB7509:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9c0dd9c2-794b-4d6f-edc9-08dc22f456dd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 0SWU5Xnw2s33kFIZvdw+u7QkdW2fxs/SmKUKIy45HyUrgmwe0ET77XmrJieRm3TnApoMWu73vK2rpYJstHeRxjSbO0SYLRloKdot4PL7jo9MvYKjKBJGxApmVor29fy2+luHZJkF/rBANkaineTH04O7NMDaD6TZiScFTZxQNgS/IYZzX9c2rBnnvoCtUeRiYZRPum3EI0ZkssTFcbK06IDmkVCCMDwzkLpyxzApgoFrFYYOBwF19TWvv8MNXdBQwGiV87cxRsVZQ6j+KlxRRNIYyQKNCFo003JRl8YRvt+onhYud0Udenw+mq40H8lI77QGME4Kx+oBiLz58ugZVNb5GmlbQGdlcXwU85F5NsO3FISjZcDIEfLJefAWSiF8Z359IhoxOVQzcoFF/VEgwxrey1VfxhoRlWhk5y3n2+tryqt4Fs9MTu6claEBaVZg64MseKtwA/za3ofAIYDm9/IlbAiSG/HPFdc1gQ21ug79ZBU9erTgZVWveUh9xi6nZeK65qc0A5XDnxUetcfuuLe21dOHjfFjETl70WBIrn37qB1ZVLINjuAkBehaA7Q5+swfh+LhvRxkg2WcBtgTJAzrSxReTE+pzlCcO7eZtjk1Htok32lrBZSuYb7hXoDJ
+X-Microsoft-Antispam-Message-Info: cbiB3n0ClwVRY1hKs7F7JYAqI74wZkvpEbAxq+1ZBNgGh2VibIh7rAGgaQcODbuiOYYEeXlMeS9Jv7xj3Ua0xUaW05Hczu7syII9FA51X9LY3TtrmtGfy+1qDMvT/7mOMykxd4fca7e4BZ3QdoUN0tRKRGhA48zsI1zCmmdgtiYtDMqvKLX62Ro+TQ0hKx1KRpsDn0ubggwuPV6T/fDFdKZpLTUKUp1bw9i0zKHUYYFCxyw/Ru3Ng5eqSnvMkM91wAMaA9FaXAzUr5yUvc7WaHArwcqmCKLcejHpb+COFS0thPh90Fx1iQtD+BzzWBxkNi6JpgmUOIQoYba0jn73EZS7A4541gbjd/ZAKsdeeIKSSnroCwVddtqYssYuqXcGOw/e2SQJa+YRLeOnQPc9QPChem6sNN69/xBa84sTgpDZLobSWFfDJLdJQv0U6oGmRXRyYxHeIWjy/bHz02Gf04x/UMUC/RwUTmQSEn7Gze86swDM0+Cadxx5w/bWBJSCPjIVO4fp+5P6SVlVziL3GTVt3QR9nF5+NaiCksoCYKOnidGP9AuzaJv5WmbNtQ7wKWEgdzswB9sGnsSQGMBmwCntm0wVqGRl5BN+g1G0hTmIiyAdTjopndhiDp4beYWd
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:TYZPR06MB5178.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(136003)(376002)(346002)(39860400002)(396003)(230922051799003)(451199024)(64100799003)(186009)(1800799012)(4326008)(8936002)(8676002)(478600001)(66946007)(6486002)(66476007)(66556008)(316002)(6916009)(86362001)(2906002)(36756003)(38350700005)(5660300002)(83380400001)(6512007)(38100700002)(41300700001)(1076003)(26005)(107886003)(2616005)(53546011)(52116002)(6506007)(43062008);
+ SFS:(13230031)(366004)(346002)(39860400002)(136003)(396003)(376002)(230922051799003)(64100799003)(186009)(1800799012)(451199024)(41300700001)(107886003)(1076003)(2616005)(966005)(6486002)(83380400001)(36756003)(478600001)(26005)(6512007)(6506007)(38350700005)(38100700002)(52116002)(53546011)(66946007)(4326008)(66476007)(2906002)(5660300002)(316002)(6916009)(8936002)(66556008)(8676002)(86362001)(43062008);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?IGa0eBCsxkN+mJpIwY3FkFGXjTmCL2AXVRjv56DdZVGtzuJO7/1ZPpttEYxK?=
- =?us-ascii?Q?ezeDwPvVQe+8xTHOjPQlzNGO0Xt6Te8UaaJz0+jh9JdK6T0LfBPf0JzdF1kQ?=
- =?us-ascii?Q?YYi5vQlgFp/GbvRvRKVR6FIDDV2KSct6+87ePmCYPfHx3crFO6oXIQHqq6+K?=
- =?us-ascii?Q?j4FpwvCxRtOrMdpGsXZyvdzcf6MI9svG/Fq4uS5oDA0E6MpJJS3i248Tah7c?=
- =?us-ascii?Q?C/OsOlQWBMJMnmFnxCwkjKHKExJnD/ljkMSA0anRh8MLcmCkQAkQusjAObFR?=
- =?us-ascii?Q?4rn0hEwOaoda0VCjcupPIOVl+IADl56XcJ6ISkENfwl/IoaU9mSMHHPgUM0/?=
- =?us-ascii?Q?hPovJhDmcP1YJY/CfMDiir/23T+l3IHJ2eoBKsIbdpRj4mLtqcvsgFDavjvf?=
- =?us-ascii?Q?2U8eXXPuZ5Lfu5nmLGTyNUf3j80Yqw47KACGpmpQmjlTPg4FtWkKwgrGwMbi?=
- =?us-ascii?Q?nlgS6DfswoDCOpbfKXiCiSQ36SJM9bjiXfoBqOLtzfshAoxbCniR87bCoWc5?=
- =?us-ascii?Q?Nlf3btuZZhHWIf0YIB6cNzbJ8Dh2jd3QBC/P8iRHksFwSrhyy+AWr7XOKBIv?=
- =?us-ascii?Q?cjPi7A7WqS/RtAaWHFIhLTshTXhdGmgpGxbr5jfKN53ltTHQaAc0J0LXYihZ?=
- =?us-ascii?Q?TytDohIEhxk9jTch0p9AmyeiP6o+cPTQZknTCMrfRo8W8ExZOwYDdWUvKHqy?=
- =?us-ascii?Q?keBwj+jfM1oo8pUlcPs+yl1IZC3QjA9mICkKvbcgY7IFDTK3nI3vd4oXvYpS?=
- =?us-ascii?Q?Ufs5ldXc+9dxbTqld62ai4p4P/aSfHzGrenZQ+Y13qGYM5GU/jMtgAtLSmHE?=
- =?us-ascii?Q?Q0qZMgNklrUQAL+OmOq18RKBBb6FjCxQRtXmCte7ofrvs3thJcTA8LYnR/Uq?=
- =?us-ascii?Q?96JfHQ3kkzKZseiumDcAYNMo7tV5F+pn5wOjs5ULMTEsZPkC55Nc0s+tZ2US?=
- =?us-ascii?Q?ZvBdt90ZpvbzStFLBq874eMFcVdKf3TobXsCIe2LGzTeE6vDE++oI82J5QPZ?=
- =?us-ascii?Q?4Sc51kQmABfvYGeLKEQGkr4Eu+eXTNi2T8TwMR6buZxj+EiNPD2HhAZGsdsT?=
- =?us-ascii?Q?s7JoYz6SjyhDSfyUlJ0zrri05DksflqWTYfv3DQQnZq5xSH4xWawIAc3waN4?=
- =?us-ascii?Q?xpa3DWUKUGwPosteqvC9DIpQI8I8MprbbeU2A5vYT/cvRTOCaG2TbzxaxDWJ?=
- =?us-ascii?Q?BBsFqd1yiT+iosEbTApWkoDMpXRnuf/RQBYKUUsw1zNYwoJZyiaWhjV5Ife8?=
- =?us-ascii?Q?Y3mV2IEH0/4y6DHpgloT+qGh9k1UpSGt8t8ZeQGfCYcKBpZR3mzJOXMAw3J0?=
- =?us-ascii?Q?BQw4KQT977rF9LJThwZ9X+1OJorZ03ElQtqx5Dgo78fZ6vqtz9TBc2fGwMyu?=
- =?us-ascii?Q?xXHwuO2Y3kmq5t2GhIeNc3TSmcVL3rxVYG31e+29HfqY6HJDCdzNAx+3d6k4?=
- =?us-ascii?Q?dptjXcu2SN9xpJyvsT1QBNEiD8kqWb8hQdF59cdua9tKVs1bK2OytlXLEr6/?=
- =?us-ascii?Q?LqaMypCT5Gdqo4QfJlBH4SmgBP7QyWNWceVj3qLsAyAc/ALeEB0FlUwbmL9O?=
- =?us-ascii?Q?MaqurGQYpnWcSwVZv4zzYIeqJ1PzCopPVKvciWYU?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8ORlscRXI/tg5tVdG2qxHqYqVR9z7VB2G7XlwEkBgsY0K7rJ1PSgUBUfGLyM?=
+ =?us-ascii?Q?v45+6CoTcrjRVIl91LnVpTKSbYIIsrzIJxz69rU4GbVqOy1lBRP3AmUzzC/P?=
+ =?us-ascii?Q?jMISLJV899+xzeIV/ovYUxHFl6Lgtf0t4KMA3OSPS2292pa/ul4dUqyHU+aA?=
+ =?us-ascii?Q?LuX9OCuIqRzUPjqIHeMeG3goYAKmZEAJBATTYeUedvKDnNWphQpdVTM1VqZ3?=
+ =?us-ascii?Q?i9MfL+fCDbO2q5mMbMeWaNVcAVHnVXrtg9wJD44A6chDGn7iIIw20JA31m+C?=
+ =?us-ascii?Q?FJp12EGGeMlLKxslaF1asIMuMxfLWxHa7YncMtJL5celpXyf0xQis2e3MBwg?=
+ =?us-ascii?Q?oaKIxi4BsmpXyAvmO19Fs5nD23viJ2U4W5RI4XbA8ngsC9b3HxlIMY+4Y8oY?=
+ =?us-ascii?Q?ScXvbIc0lGKVxl4D5KtgxNDDgjpCwSw5dFP49lBeCES2PQjtlLku9vaDAQl3?=
+ =?us-ascii?Q?HxKxWEtdVokngnX7xLUZp0E4LaDfP+svBFfwAIbxDin6ZCWg/9l8OjvxXCKs?=
+ =?us-ascii?Q?RKE/peC1w/9U32jDTWVCeJwctfXOLT1GGPV2iMlAgDHXRROwtmIj0Q9PB1WB?=
+ =?us-ascii?Q?Xk1t9v41wz9AGHk/hn51tKQknu4KY3x6JjZOwPdJ3Jn5RkSxmozL8o/Wg9Ri?=
+ =?us-ascii?Q?w6T6PmKsT+xyStfJGCee2fcm1KbQolFcCGwI0VdYqxc98ASmpfIvG6HQV5fF?=
+ =?us-ascii?Q?4o8fsWSn8e8K9pfXVhd5Wcpn80f2apIQqOks0q3OoVfc6XI/yPXgO6TpuGC5?=
+ =?us-ascii?Q?ScCZ/HD7QdD/VSn5M8ZysrtyGqJva2lUcE6srGH1iFWtS5MRbpTSwMOgWPTH?=
+ =?us-ascii?Q?Zf2ALZhKJBJGW3+AvLTSVjxur4f7+EokaAuMlT12XrS1awH8B0YCZzv8s/pP?=
+ =?us-ascii?Q?8CLY/fgNTzH5k6VlRWokf88KMu1k3QaSkB6iPxFw5IF5v/O9/iMKyjUdOCxh?=
+ =?us-ascii?Q?hqxfSBNFwFpDuRl5jVJqNuMHFwbcqlYlWKswDj6ziAAucdlNtnsSZrzmv1wW?=
+ =?us-ascii?Q?zqAFrdJpPC2Eug9BE0juSS0jrxXBtulcqOT/HGLQD3SxMD93Z3bTW/7FZZ8h?=
+ =?us-ascii?Q?NbE/0p6dWMUiJnK7THmW+6FRWwNApQplkMuqhPoVDE/uo8i2j1BgJtQERh4g?=
+ =?us-ascii?Q?ik2PCMP08DA66+x5hC/Gd2c41+Ude/dBLvy4MG+BJUDnLOkD4/nPtlMPC3L7?=
+ =?us-ascii?Q?j2RzJjb5wfGNV1Jo6KzL+zv7ygb0XpgrBRGMAOhi2uE2X7XmxkUDMg/nIyFV?=
+ =?us-ascii?Q?BIrKw/GoL96qwIQSf8xgkUyEln/HcMSzo9/itXJHFItBEx8jy4IB7NGbpAsa?=
+ =?us-ascii?Q?6C6t/8EXxIPpFtR5V8IFS77MW0tC7xLnsFpBqOQ/fiDFL12btbojf6xj/axa?=
+ =?us-ascii?Q?K04yogPuJrnpZ5Gr8uwMfHT398nMZoFHlKtvTDd/mMFcLkxgBVtde0JrxyJO?=
+ =?us-ascii?Q?38wWkyRZFQWGja59r76ORahdEQFTA5pLKS5iUhG/i+eyNUWw/LdH0z1F1Omy?=
+ =?us-ascii?Q?1eBWnVfP9yEcbBYUhwUnAd0gVWWcxbNea/tDt3B8PRSWKvrZQabeWhtCvHxn?=
+ =?us-ascii?Q?qGPRZKfqgLgbPtrjzTQITSybejwUxKh2OysBYb86?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b50cb1bb-184e-4ddf-06bc-08dc22ef2c08
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9c0dd9c2-794b-4d6f-edc9-08dc22f456dd
 X-MS-Exchange-CrossTenant-AuthSource: TYZPR06MB5178.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2024 06:29:41.3648 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2024 07:06:40.6009 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ptVhtn1jibJtusHfa3wQ+4T3hrFPW2Od3zYJbRKonc7rBuBFpqC7zhw9P2ibcAsWhoFP9qISBcNEfl7NB4GwCw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR06MB6488
+X-MS-Exchange-CrossTenant-UserPrincipalName: y/f49uCDpUozW687QQAH+Vr/JqVO6bUBKGtu3KFERSuWbtZ/eUPw+H059a8KSje4TAV02zZprLm46T4An+VLxA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: JH0PR06MB7509
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -131,27 +131,27 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/1/26 14:37, zhangxirui wrote: >> In sparse mode we
- just read or write to a sparse file not a block device >> so no need to check
- device mount state in sparse mode. > >I guess it needs to check [...] 
+ Content preview:  >On 2024/2/1 14:40, zhangxirui wrote: >> On 2024/1/26 14:37, 
+ zhangxirui wrote: >>>> In sparse mode we just read or write to a sparse file
+ not a block device >>>> so no need to check device mount state [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.117.58 listed in list.dnswl.org]
+ no trust [40.107.117.86 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.117.58 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [40.107.117.86 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rVQaD-0005iu-Cn
+X-Headers-End: 1rVRNz-0003Pk-03
 Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: skip check device mount state in
  sparse mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -173,45 +173,56 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/1/26 14:37, zhangxirui wrote:
->> In sparse mode we just read or write to a sparse file not a block device
->> so no need to check device mount state in sparse mode.
+>On 2024/2/1 14:40, zhangxirui wrote:
+>> On 2024/1/26 14:37, zhangxirui wrote:
+>>>> In sparse mode we just read or write to a sparse file not a block device
+>>>> so no need to check device mount state in sparse mode.
+>>>
+>>> I guess it needs to check whether regular file was a backfile of mounted
+>>> loop device, so we can only skip block device related check?
+>>>
+>>> https://lore.kernel.org/linux-f2fs-devel/20240131073425.4043962-1-chao@kernel.org
+>>>
+>>> Thanks,
+>>
+>> Ah, yes, it needs to check whether regular file was a backfile of mounted loop devce,
+>> but it does not conflict with skip check device mount state in sparse mode.
+>>
+>> Sparse file is Android only for making userdata.img or other rw partion image, in this case
+>> i guess we will not mkfs to a backfile of mounted loop device, right? skip check mount state is more efficient.
 >
->I guess it needs to check whether regular file was a backfile of mounted
->loop device, so we can only skip block device related check?
->
->https://lore.kernel.org/linux-f2fs-devel/20240131073425.4043962-1-chao@kernel.org
+>But this patch leaves a hole to mkfs backfile of loop device w/ -S option
+>in non-Android system, right?
 >
 >Thanks,
-
-Ah, yes, it needs to check whether regular file was a backfile of mounted loop devce,
-but it does not conflict with skip check device mount state in sparse mode.
-
-Sparse file is Android only for making userdata.img or other rw partion image, in this case
-i guess we will not mkfs to a backfile of mounted loop device, right? skip check mount state is more efficient.
-
 >
+Ok, get it.
+
+Thanks
+
 >>
->> Signed-off-by: zhangxirui <xirui.zhang@vivo.com>
->> ---
->>   lib/libf2fs.c | 4 ++++
->>   1 file changed, 4 insertions(+)
->>
->> diff --git a/lib/libf2fs.c b/lib/libf2fs.c
->> index 2451201..5315de2 100644
->> --- a/lib/libf2fs.c
->> +++ b/lib/libf2fs.c
->> @@ -830,6 +830,10 @@ int f2fs_devs_are_umounted(void)
->>   {
->>   	int i;
->>
->> +	/*no need to check device mount state in sparse mode*/
->> +	if (c.sparse_mode)
->> +		return 0;
->> +
->>   	for (i = 0; i < c.ndevs; i++)
->>   		if (f2fs_dev_is_umounted((char *)c.devices[i].path))
->>   			return -1;
+>>>
+>>>>
+>>>> Signed-off-by: zhangxirui <xirui.zhang@vivo.com>
+>>>> ---
+>>>>    lib/libf2fs.c | 4 ++++
+>>>>    1 file changed, 4 insertions(+)
+>>>>
+>>>> diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+>>>> index 2451201..5315de2 100644
+>>>> --- a/lib/libf2fs.c
+>>>> +++ b/lib/libf2fs.c
+>>>> @@ -830,6 +830,10 @@ int f2fs_devs_are_umounted(void)
+>>>>    {
+>>>>    	int i;
+>>>>
+>>>> +	/*no need to check device mount state in sparse mode*/
+>>>> +	if (c.sparse_mode)
+>>>> +		return 0;
+>>>> +
+>>>>    	for (i = 0; i < c.ndevs; i++)
+>>>>    		if (f2fs_dev_is_umounted((char *)c.devices[i].path))
+>>>>    			return -1;
 
 
 
