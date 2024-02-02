@@ -2,85 +2,125 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A81BF846800
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Feb 2024 07:26:40 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33D9A846EDD
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Feb 2024 12:23:14 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rVn0R-0006r1-2y;
-	Fri, 02 Feb 2024 06:26:31 +0000
+	id 1rVrdM-0002l8-GT;
+	Fri, 02 Feb 2024 11:23:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1rVn0P-0006qv-Vd
+ (envelope-from <jinbaoliu365@gmail.com>) id 1rVrdK-0002l2-JP
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 02 Feb 2024 06:26:29 +0000
+ Fri, 02 Feb 2024 11:22:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=14bLfDU79LgjLSxxqyVhuADgExTixXwMgtoA00BIdz0=; b=Li7pyjp9Nm6tNpXwH65oRkmo8g
- TaU8YWerqcZnNIrU0HFTZ0HhRMJhZhHE1Juds4L1ujZkSd7/9uIYRQfXxUHpXGusOIyTwV+70YXoY
- v37E92lwJn645liRpZ/E943fFsuX8rL3LJfG91V3raQ9BuVYmP61fBcWuWqo3BfXXBIA=;
+ bh=iDv0UM+c6esZvNRhK5IQOpzsJDuTm6Hopa5EKVjce1o=; b=QDMrMY381NbZWWzsir8jFAf3Z1
+ sJYGBtCNT5IiRLrQu/nS0zklAgZpOvbbb3d6dXdj0blf5asCX7wRABEJtWVSOWbHotvNL8XctVPyC
+ /nfmN0hgSMOBV8IgL0wMhNWQWDcqwjrtoiaK2yflSz1bMyN+35z0OZljHi8g34IynNwo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=14bLfDU79LgjLSxxqyVhuADgExTixXwMgtoA00BIdz0=; b=O
- s8sUs14wXqZVeEQ3Mua13gKfn3lUDN4gKGgm3sUIyCy506u1tXX8OhNlcIJmdumxn8TnsjuAYs0n8
- EMPyTwoRbzBryhDHCAsqz3SAwuW9l4GtWlST3lG6DCIPmuCY/rAb+WWm0YEtFhkHocOHW23YQ0vZg
- AVJCsXefH+6rXSJg=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
+ List-Owner:List-Archive; bh=iDv0UM+c6esZvNRhK5IQOpzsJDuTm6Hopa5EKVjce1o=; b=F
+ 8JD7hcYw3H0QRDBsncuhIGdbtrDmZI93WOqabbmGMBnFb+lw6thmftCrjqxvajQpVY0JE9yfy/VJD
+ 4UtBOHGIw4FhQLACBIMEZuGp391qIiUV75B1Wp08HlpQ85qNVT3eGPQxm2O6AcyzlonW9T/RhC0/1
+ hUyZhuYMBn8DYOqI=;
+Received: from mail-pl1-f179.google.com ([209.85.214.179])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rVn0M-0004fX-Vq for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 02 Feb 2024 06:26:29 +0000
-Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 4126Pkx6089719;
- Fri, 2 Feb 2024 14:25:46 +0800 (+08)
- (envelope-from Zhiguo.Niu@unisoc.com)
-Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4TR5DY2myZz2SJY3M;
- Fri,  2 Feb 2024 14:18:05 +0800 (CST)
-Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Fri, 2 Feb 2024 14:25:43 +0800
-From: Zhiguo Niu <zhiguo.niu@unisoc.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Fri, 2 Feb 2024 14:25:21 +0800
-Message-ID: <1706855121-25640-1-git-send-email-zhiguo.niu@unisoc.com>
-X-Mailer: git-send-email 1.9.1
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rVrdJ-0007Az-RV for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 02 Feb 2024 11:22:59 +0000
+Received: by mail-pl1-f179.google.com with SMTP id
+ d9443c01a7336-1d932f6ccfaso15673045ad.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 02 Feb 2024 03:22:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706872973; x=1707477773; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iDv0UM+c6esZvNRhK5IQOpzsJDuTm6Hopa5EKVjce1o=;
+ b=m8MePVU8O8akZ0RcOBHobGGSdEBtX41qxzFgPUaSHYheDNjuJfJmU8yt3ySKfpbr9/
+ VKye7jEkOIdn0zCxxxZGTzsaar5KzMnHX7s/1sA5OFRWA7goySNDFfQRSWtMJAWt+xbP
+ ZAzX0q9DzhQst/nlALn+UIuDMANSD47hjT26d++MtDDlJ3MeTLJTM2KBrGBRHaJubj8z
+ Jju2/yX4CVIuSoUfE0hAq38B62QIBoGfsiDcQjaYfLBq5P6pfp5ot+bYEPLaJHUHdJKj
+ u1ALwKEkd93DctxT1mCc49R7YwulGf4zCx8khu4BRj7fNJSlcJgxBSJg096AP8/Ltcpy
+ Egzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706872973; x=1707477773;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iDv0UM+c6esZvNRhK5IQOpzsJDuTm6Hopa5EKVjce1o=;
+ b=HBMZY/yvu74n4GhnwsWGzwOAU1fGYx6dDy0UDJLGwGxJCyWmdx7hAmBZuH0P9628C3
+ EtFcPMgAx71O/8d6Sc/bezOmjXg4PjBcjppYE57AJ5OlmF2nXFI8SsZQRjvNN3ILdQJ5
+ Fm8o36jxkEPsoVUofBcb8cquotikfO36mz4gdVEOEpvGABb0qG0M6n8FvcDUeJ5eCT62
+ lXnurTFYx4mN8QI3+8S0HtsNn/XzMWv7kzLex5J4NBtUdz7NQIy01M7hI68XoMTsmb1b
+ JGkPbIUfYMsWkJ4oe5bKDJhlF0uE0m+wyHqLIA80uSN78skH3Ffgp8V9ySmzknr1+RIw
+ zc2g==
+X-Gm-Message-State: AOJu0Ywl9P7XchmWU0Y9cYRz2hgG46stznL4/zSiE+jaSRmWomLyJAik
+ /dVnlO2IqO5qFoxJJr8cQHCFJWAx2ioROgLsnSSfeTYFAsnrYrtY
+X-Google-Smtp-Source: AGHT+IHbSvjkPvFNB/sCdH351XrytCdZsUAhhG/thXz9suC2cMVStXnKcOz3VvBRsI7ABfK5fyRCuA==
+X-Received: by 2002:a17:903:32cc:b0:1d9:591b:227a with SMTP id
+ i12-20020a17090332cc00b001d9591b227amr4449112plr.48.1706872972776; 
+ Fri, 02 Feb 2024 03:22:52 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCWNdpf8NT3hm40JJqjKjyQEeRk0cVjnL04EPKtojBBO7tl9XT5x6cN7HvTduuYb9yEBppZQAaJ+yTSDRbXcwm21A4Av1I4JHCH5FrBFygQHtbEtlJAtIId2q2UopOeLNH6xYniOpo26dJQJjGSVGZJsfcRuZo3O16mCXiLFLWzqST3tnYaSyoAU
+Received: from mi.mioffice.cn ([2408:8607:1b00:8:8eec:4bff:fe94:a95d])
+ by smtp.gmail.com with ESMTPSA id
+ v11-20020a170902d08b00b001d7134d149dsm1374865plv.256.2024.02.02.03.22.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Feb 2024 03:22:52 -0800 (PST)
+From: liujinbao1 <jinbaoliu365@gmail.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Fri,  2 Feb 2024 19:22:25 +0800
+Message-ID: <5a4cdc020f19e136e79f9d0b6ca2adf2879db888.1706859367.git.liujinbao1@xiaomi.corp-partner.google.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Originating-IP: [10.0.73.87]
-X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 4126Pkx6089719
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  There are some cases of f2fs_is_valid_blkaddr not handled
- as ERROR_INVALID_BLKADDR,
- so unify the error handling about all of f2fs_is_valid_blkaddr.
- Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com> --- changes of v6: improve
- patch according to Chao's suggestions -restore dump_stack to original position
- -adjuest code sequence of __is_bitmap_check_ [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  From: liujinbao1 Currently,
+ IO can only be ignored when GC_URGENT_HIGH
+ is set, and the default algorithm used for GC_URGENT_HIGH is greedy. It gives
+ a way to enable/disable IO aware feature for background gc, so that [...]
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [jinbaoliu365[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [jinbaoliu365[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.179 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.179 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rVn0M-0004fX-Vq
-Subject: [f2fs-dev] [PATCH v6] f2fs: unify the error handling of
- f2fs_is_valid_blkaddr
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1rVrdJ-0007Az-RV
+Subject: [f2fs-dev] [PATCH v2] f2fs: sysfs: support gc_io_aware
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,418 +132,118 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, hongyu.jin@unisoc.com,
- zhiguo.niu@unisoc.com, niuzhiguo84@gmail.com
+Cc: liujinbao1 <liujinbao1@xiaomi.corp-partner.google.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-There are some cases of f2fs_is_valid_blkaddr not handled as
-ERROR_INVALID_BLKADDR,so unify the error handling about all of
-f2fs_is_valid_blkaddr.
+From: liujinbao1 <liujinbao1@xiaomi.corp-partner.google.com>
 
-Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
----
-changes of v6: improve patch according to Chao's suggestions
-  -restore dump_stack to original position
-  -adjuest code sequence of __is_bitmap_check_valid
-changes of v5: improve patch according to Jaegeuk's suggestiongs
-  -restore return value of some f2fs_is_valid_blkaddr error case to original
-  -move cp_err checking to outermost for unified processing
-  -return true directly for case (type=DATA_GENERIC_ENHANCE_READ) in
-   __is_bitmap_valid to avoid meaningless flow
-  -rename __is_bitmap_valid to __is_bitmap_check_valid for avoiding ambiguity
-   and handling its return value in the caller uniformly, also cooperate
-   switch checking true to false for error case of
-   f2fs_is_valid_blkaddr(type=DATA_GENERIC_ENHANCE_UPDATE) in do_recover_data
-   for more readable
-changes of v4: update according to the latest code
-changes of v3:
-  -rebase patch to dev-test
-  -correct return value for some f2fs_is_valid_blkaddr error case
-changes of v2: improve patch according Chao's suggestions.
----
----
- fs/f2fs/checkpoint.c   | 50 +++++++++++++++++++++-----------------------------
- fs/f2fs/data.c         | 22 +++-------------------
- fs/f2fs/extent_cache.c |  5 +----
- fs/f2fs/file.c         | 16 +++-------------
- fs/f2fs/gc.c           |  2 --
- fs/f2fs/recovery.c     |  6 +-----
- fs/f2fs/segment.c      |  2 --
- 7 files changed, 29 insertions(+), 74 deletions(-)
+Currently, IO can only be ignored when GC_URGENT_HIGH is set,
+and the default algorithm used for GC_URGENT_HIGH is greedy.
+It gives a way to enable/disable IO aware feature for background
+gc, so that we can tune background gc more precisely. e.g.
+force to disable IO aware and choose more suitable algorithm
+if there are large number of dirty segments.
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index b85820e..3e79e84 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -134,14 +134,15 @@ struct page *f2fs_get_tmp_page(struct f2fs_sb_info *sbi, pgoff_t index)
- 	return __get_meta_page(sbi, index, false);
- }
+Signed-off-by: liujinbao1 <liujinbao1@xiaomi.corp-partner.google.com>
+
+changes of v2: Improve the patch according to Chao's suggestions
+
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++
+ fs/f2fs/gc.c                            | 3 ++-
+ fs/f2fs/gc.h                            | 1 +
+ fs/f2fs/sysfs.c                         | 9 +++++++++
+ 4 files changed, 18 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 36c3cb547901..47f02fa471fe 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -16,6 +16,12 @@ Contact:	"Namjae Jeon" <namjae.jeon@samsung.com>
+ Description:	Controls the default sleep time for gc_thread. Time
+ 		is in milliseconds.
  
--static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
-+static bool __is_bitmap_check_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
- 							int type)
- {
- 	struct seg_entry *se;
- 	unsigned int segno, offset;
- 	bool exist;
- 
--	if (type == DATA_GENERIC)
-+	if (type == DATA_GENERIC ||
-+		type == DATA_GENERIC_ENHANCE_READ)
- 		return true;
- 
- 	segno = GET_SEGNO(sbi, blkaddr);
-@@ -149,25 +150,15 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
- 	se = get_seg_entry(sbi, segno);
- 
- 	exist = f2fs_test_bit(offset, se->cur_valid_map);
--
--	/* skip data, if we already have an error in checkpoint. */
--	if (unlikely(f2fs_cp_error(sbi)))
--		return exist;
--
--	if (exist && type == DATA_GENERIC_ENHANCE_UPDATE) {
--		f2fs_err(sbi, "Inconsistent error blkaddr:%u, sit bitmap:%d",
--			 blkaddr, exist);
--		set_sbi_flag(sbi, SBI_NEED_FSCK);
--		return exist;
--	}
--
--	if (!exist && type == DATA_GENERIC_ENHANCE) {
-+	if ((exist && type == DATA_GENERIC_ENHANCE_UPDATE) ||
-+			(!exist && type == DATA_GENERIC_ENHANCE)) {
- 		f2fs_err(sbi, "Inconsistent error blkaddr:%u, sit bitmap:%d",
- 			 blkaddr, exist);
- 		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		dump_stack();
-+		return false;
- 	}
--	return exist;
-+	return true;
- }
- 
- static bool __f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
-@@ -178,53 +169,54 @@ static bool __f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
- 		break;
- 	case META_SIT:
- 		if (unlikely(blkaddr >= SIT_BLK_CNT(sbi)))
--			return false;
-+			goto err;
- 		break;
- 	case META_SSA:
- 		if (unlikely(blkaddr >= MAIN_BLKADDR(sbi) ||
- 			blkaddr < SM_I(sbi)->ssa_blkaddr))
--			return false;
-+			goto err;
- 		break;
- 	case META_CP:
- 		if (unlikely(blkaddr >= SIT_I(sbi)->sit_base_addr ||
- 			blkaddr < __start_cp_addr(sbi)))
--			return false;
-+			goto err;
- 		break;
- 	case META_POR:
- 		if (unlikely(blkaddr >= MAX_BLKADDR(sbi) ||
- 			blkaddr < MAIN_BLKADDR(sbi)))
--			return false;
-+			goto err;
- 		break;
- 	case DATA_GENERIC:
- 	case DATA_GENERIC_ENHANCE:
- 	case DATA_GENERIC_ENHANCE_READ:
- 	case DATA_GENERIC_ENHANCE_UPDATE:
-+		/* Skip to emit an error message. */
-+		if (unlikely(f2fs_cp_error(sbi)))
-+			return false;
- 		if (unlikely(blkaddr >= MAX_BLKADDR(sbi) ||
- 				blkaddr < MAIN_BLKADDR(sbi))) {
--
--			/* Skip to emit an error message. */
--			if (unlikely(f2fs_cp_error(sbi)))
--				return false;
--
- 			f2fs_warn(sbi, "access invalid blkaddr:%u",
- 				  blkaddr);
- 			set_sbi_flag(sbi, SBI_NEED_FSCK);
- 			dump_stack();
--			return false;
--		} else {
--			return __is_bitmap_valid(sbi, blkaddr, type);
-+			goto err;
-+		} else if (!__is_bitmap_check_valid(sbi, blkaddr, type)) {
-+			goto err;
- 		}
- 		break;
- 	case META_GENERIC:
- 		if (unlikely(blkaddr < SEG0_BLKADDR(sbi) ||
- 			blkaddr >= MAIN_BLKADDR(sbi)))
--			return false;
-+			goto err;
- 		break;
- 	default:
- 		BUG();
- 	}
- 
- 	return true;
-+err:
-+	f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
-+	return false;
- }
- 
- bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 05158f8..300f9ae 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -738,10 +738,8 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
- 
- 	if (!f2fs_is_valid_blkaddr(fio->sbi, fio->new_blkaddr,
- 			fio->is_por ? META_POR : (__is_meta_io(fio) ?
--			META_GENERIC : DATA_GENERIC_ENHANCE))) {
--		f2fs_handle_error(fio->sbi, ERROR_INVALID_BLKADDR);
-+			META_GENERIC : DATA_GENERIC_ENHANCE)))
- 		return -EFSCORRUPTED;
--	}
- 
- 	trace_f2fs_submit_page_bio(page, fio);
- 
-@@ -946,10 +944,8 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
- 			fio->encrypted_page : fio->page;
- 
- 	if (!f2fs_is_valid_blkaddr(fio->sbi, fio->new_blkaddr,
--			__is_meta_io(fio) ? META_GENERIC : DATA_GENERIC)) {
--		f2fs_handle_error(fio->sbi, ERROR_INVALID_BLKADDR);
-+			__is_meta_io(fio) ? META_GENERIC : DATA_GENERIC))
- 		return -EFSCORRUPTED;
--	}
- 
- 	trace_f2fs_submit_page_bio(page, fio);
- 
-@@ -1286,8 +1282,6 @@ struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
- 		if (!f2fs_is_valid_blkaddr(F2FS_I_SB(inode), dn.data_blkaddr,
- 						DATA_GENERIC_ENHANCE_READ)) {
- 			err = -EFSCORRUPTED;
--			f2fs_handle_error(F2FS_I_SB(inode),
--						ERROR_INVALID_BLKADDR);
- 			goto put_err;
- 		}
- 		goto got_it;
-@@ -1313,8 +1307,6 @@ struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
- 						dn.data_blkaddr,
- 						DATA_GENERIC_ENHANCE)) {
- 		err = -EFSCORRUPTED;
--		f2fs_handle_error(F2FS_I_SB(inode),
--					ERROR_INVALID_BLKADDR);
- 		goto put_err;
- 	}
- got_it:
-@@ -1642,7 +1634,6 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
- 	if (!is_hole &&
- 	    !f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE)) {
- 		err = -EFSCORRUPTED;
--		f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
- 		goto sync_out;
- 	}
- 
-@@ -2166,8 +2157,6 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
- 		if (!f2fs_is_valid_blkaddr(F2FS_I_SB(inode), block_nr,
- 						DATA_GENERIC_ENHANCE_READ)) {
- 			ret = -EFSCORRUPTED;
--			f2fs_handle_error(F2FS_I_SB(inode),
--						ERROR_INVALID_BLKADDR);
- 			goto out;
- 		}
- 	} else {
-@@ -2707,11 +2696,8 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
- 	    f2fs_lookup_read_extent_cache_block(inode, page->index,
- 						&fio->old_blkaddr)) {
- 		if (!f2fs_is_valid_blkaddr(fio->sbi, fio->old_blkaddr,
--						DATA_GENERIC_ENHANCE)) {
--			f2fs_handle_error(fio->sbi,
--						ERROR_INVALID_BLKADDR);
-+						DATA_GENERIC_ENHANCE))
- 			return -EFSCORRUPTED;
--		}
- 
- 		ipu_force = true;
- 		fio->need_lock = LOCK_DONE;
-@@ -2739,7 +2725,6 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
- 		!f2fs_is_valid_blkaddr(fio->sbi, fio->old_blkaddr,
- 						DATA_GENERIC_ENHANCE)) {
- 		err = -EFSCORRUPTED;
--		f2fs_handle_error(fio->sbi, ERROR_INVALID_BLKADDR);
- 		goto out_writepage;
- 	}
- 
-@@ -3706,7 +3691,6 @@ static int f2fs_write_begin(struct file *file, struct address_space *mapping,
- 		if (!f2fs_is_valid_blkaddr(sbi, blkaddr,
- 				DATA_GENERIC_ENHANCE_READ)) {
- 			err = -EFSCORRUPTED;
--			f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
- 			goto fail;
- 		}
- 		err = f2fs_submit_page_read(use_cow ?
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index ad8dfac7..48048fa 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -43,7 +43,6 @@ bool sanity_check_extent_cache(struct inode *inode)
- 	if (!f2fs_is_valid_blkaddr(sbi, ei->blk, DATA_GENERIC_ENHANCE) ||
- 	    !f2fs_is_valid_blkaddr(sbi, ei->blk + ei->len - 1,
- 					DATA_GENERIC_ENHANCE)) {
--		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "%s: inode (ino=%lx) extent info [%u, %u, %u] is incorrect, run fsck to fix",
- 			  __func__, inode->i_ino,
- 			  ei->blk, ei->fofs, ei->len);
-@@ -856,10 +855,8 @@ static int __get_new_block_age(struct inode *inode, struct extent_info *ei,
- 		goto out;
- 
- 	if (__is_valid_data_blkaddr(blkaddr) &&
--	    !f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE)) {
--		f2fs_bug_on(sbi, 1);
-+	    !f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE))
- 		return -EINVAL;
--	}
- out:
- 	/*
- 	 * init block age with zero, this can happen when the block age extent
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 25b119cf..23cd6a1 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -593,10 +593,8 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
- 			if (time_to_inject(sbi, FAULT_BLKADDR_CONSISTENCE))
- 				continue;
- 			if (!f2fs_is_valid_blkaddr_raw(sbi, blkaddr,
--						DATA_GENERIC_ENHANCE)) {
--				f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
-+						DATA_GENERIC_ENHANCE))
- 				continue;
--			}
- 			if (compressed_cluster)
- 				valid_blocks++;
- 		}
-@@ -1196,7 +1194,6 @@ static int __read_out_blkaddrs(struct inode *inode, block_t *blkaddr,
- 			!f2fs_is_valid_blkaddr(sbi, *blkaddr,
- 					DATA_GENERIC_ENHANCE)) {
- 			f2fs_put_dnode(&dn);
--			f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
- 			return -EFSCORRUPTED;
- 		}
- 
-@@ -1482,7 +1479,6 @@ static int f2fs_do_zero_range(struct dnode_of_data *dn, pgoff_t start,
- 		if (!f2fs_is_valid_blkaddr(sbi, dn->data_blkaddr,
- 					DATA_GENERIC_ENHANCE)) {
- 			ret = -EFSCORRUPTED;
--			f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
- 			break;
- 		}
- 
-@@ -3442,10 +3438,8 @@ static int release_compress_blocks(struct dnode_of_data *dn, pgoff_t count)
- 		if (!__is_valid_data_blkaddr(blkaddr))
- 			continue;
- 		if (unlikely(!f2fs_is_valid_blkaddr(sbi, blkaddr,
--					DATA_GENERIC_ENHANCE))) {
--			f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
-+					DATA_GENERIC_ENHANCE)))
- 			return -EFSCORRUPTED;
--		}
- 	}
- 
- 	while (count) {
-@@ -3607,10 +3601,8 @@ static int reserve_compress_blocks(struct dnode_of_data *dn, pgoff_t count)
- 		if (!__is_valid_data_blkaddr(blkaddr))
- 			continue;
- 		if (unlikely(!f2fs_is_valid_blkaddr(sbi, blkaddr,
--					DATA_GENERIC_ENHANCE))) {
--			f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
-+					DATA_GENERIC_ENHANCE)))
- 			return -EFSCORRUPTED;
--		}
- 	}
- 
- 	while (count) {
-@@ -3894,8 +3886,6 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
- 						DATA_GENERIC_ENHANCE)) {
- 				ret = -EFSCORRUPTED;
- 				f2fs_put_dnode(&dn);
--				f2fs_handle_error(sbi,
--						ERROR_INVALID_BLKADDR);
- 				goto out;
- 			}
- 
++What:		/sys/fs/f2fs/<disk>/gc_io_aware
++Date:		January 2024
++Contact:	"Jinbao Liu" <liujinbao1@xiaomi.com>
++Description:	It controls to enable/disable IO aware feature for background gc.
+++		By default, the value is 1 which indicates IO aware is on.
++
+ What:		/sys/fs/f2fs/<disk>/gc_idle
+ Date:		July 2013
+ Contact:	"Namjae Jeon" <namjae.jeon@samsung.com>
 diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index a079eeb..30e93d8 100644
+index 309da3d0faff..0b75d37acc63 100644
 --- a/fs/f2fs/gc.c
 +++ b/fs/f2fs/gc.c
-@@ -1197,7 +1197,6 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
- 		if (unlikely(!f2fs_is_valid_blkaddr(sbi, dn.data_blkaddr,
- 						DATA_GENERIC_ENHANCE_READ))) {
- 			err = -EFSCORRUPTED;
--			f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
- 			goto put_page;
+@@ -109,7 +109,7 @@ static int gc_thread_func(void *data)
+ 			goto next;
  		}
- 		goto got_it;
-@@ -1216,7 +1215,6 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
- 	if (unlikely(!f2fs_is_valid_blkaddr(sbi, dn.data_blkaddr,
- 						DATA_GENERIC_ENHANCE))) {
- 		err = -EFSCORRUPTED;
--		f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
- 		goto put_page;
+ 
+-		if (!is_idle(sbi, GC_TIME)) {
++		if (gc_th->io_aware && !is_idle(sbi, GC_TIME)) {
+ 			increase_sleep_time(gc_th, &wait_ms);
+ 			f2fs_up_write(&sbi->gc_lock);
+ 			stat_io_skip_bggc_count(sbi);
+@@ -182,6 +182,7 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
+ 	gc_th->min_sleep_time = DEF_GC_THREAD_MIN_SLEEP_TIME;
+ 	gc_th->max_sleep_time = DEF_GC_THREAD_MAX_SLEEP_TIME;
+ 	gc_th->no_gc_sleep_time = DEF_GC_THREAD_NOGC_SLEEP_TIME;
++	gc_th->io_aware = true;
+ 
+ 	gc_th->gc_wake = false;
+ 
+diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
+index 28a00942802c..51d6ad26b76a 100644
+--- a/fs/f2fs/gc.h
++++ b/fs/f2fs/gc.h
+@@ -41,6 +41,7 @@ struct f2fs_gc_kthread {
+ 	unsigned int min_sleep_time;
+ 	unsigned int max_sleep_time;
+ 	unsigned int no_gc_sleep_time;
++	bool io_aware;
+ 
+ 	/* for changing gc mode */
+ 	bool gc_wake;
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 417fae96890f..e8d5667cfddd 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -516,6 +516,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 		return count;
  	}
- got_it:
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index aad1d1a..73d81e0 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -693,14 +693,12 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
- 		if (__is_valid_data_blkaddr(src) &&
- 			!f2fs_is_valid_blkaddr(sbi, src, META_POR)) {
- 			err = -EFSCORRUPTED;
--			f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
- 			goto err;
- 		}
  
- 		if (__is_valid_data_blkaddr(dest) &&
- 			!f2fs_is_valid_blkaddr(sbi, dest, META_POR)) {
- 			err = -EFSCORRUPTED;
--			f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
- 			goto err;
- 		}
++	if (!strcmp(a->attr.name, "gc_io_aware")) {
++		if (t > 1)
++			return -EINVAL;
++		*ui = t ? true : false;
++		return count;
++	}
++
+ 	if (!strcmp(a->attr.name, "migration_granularity")) {
+ 		if (t == 0 || t > sbi->segs_per_sec)
+ 			return -EINVAL;
+@@ -906,6 +913,7 @@ GC_THREAD_RW_ATTR(gc_urgent_sleep_time, urgent_sleep_time);
+ GC_THREAD_RW_ATTR(gc_min_sleep_time, min_sleep_time);
+ GC_THREAD_RW_ATTR(gc_max_sleep_time, max_sleep_time);
+ GC_THREAD_RW_ATTR(gc_no_gc_sleep_time, no_gc_sleep_time);
++GC_THREAD_RW_ATTR(gc_io_aware, io_aware);
  
-@@ -750,13 +748,11 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
- 				goto err;
- 			}
- 
--			if (f2fs_is_valid_blkaddr(sbi, dest,
-+			if (!f2fs_is_valid_blkaddr(sbi, dest,
- 					DATA_GENERIC_ENHANCE_UPDATE)) {
- 				f2fs_err(sbi, "Inconsistent dest blkaddr:%u, ino:%lu, ofs:%u",
- 					dest, inode->i_ino, dn.ofs_in_node);
- 				err = -EFSCORRUPTED;
--				f2fs_handle_error(sbi,
--						ERROR_INVALID_BLKADDR);
- 				goto err;
- 			}
- 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 7901ede..ad6511f 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -334,8 +334,6 @@ static int __f2fs_commit_atomic_write(struct inode *inode)
- 					DATA_GENERIC_ENHANCE)) {
- 				f2fs_put_dnode(&dn);
- 				ret = -EFSCORRUPTED;
--				f2fs_handle_error(sbi,
--						ERROR_INVALID_BLKADDR);
- 				goto out;
- 			}
- 
+ /* SM_INFO ATTR */
+ SM_INFO_RW_ATTR(reclaim_segments, rec_prefree_segments);
+@@ -1061,6 +1069,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(gc_min_sleep_time),
+ 	ATTR_LIST(gc_max_sleep_time),
+ 	ATTR_LIST(gc_no_gc_sleep_time),
++	ATTR_LIST(gc_io_aware),
+ 	ATTR_LIST(gc_idle),
+ 	ATTR_LIST(gc_urgent),
+ 	ATTR_LIST(reclaim_segments),
 -- 
-1.9.1
+2.43.0
 
 
 
