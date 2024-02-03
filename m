@@ -2,94 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53901847602
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Feb 2024 18:23:03 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1DCE848719
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  3 Feb 2024 16:25:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rVxFe-0004xS-0f;
-	Fri, 02 Feb 2024 17:22:54 +0000
+	id 1rWHtR-0008TW-8E;
+	Sat, 03 Feb 2024 15:25:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <quic_jhugo@quicinc.com>) id 1rVxFb-0004xM-Mf
+ (envelope-from <qwjhust@gmail.com>) id 1rWHtQ-0008TM-CL
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 02 Feb 2024 17:22:52 +0000
+ Sat, 03 Feb 2024 15:25:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mfoB8ipfy0L6OloPCbkGz5gD4ZpAk/e1jBDItP4Z7sE=; b=Va+3M8XAKxkmd94ZUO5PTwUq6B
- kzUNrpvbtVgmdGxasHHLNI1lRaSU/0PhzibTdDHu+yo9AZjM3JghEpy0Zrs94wVmKJFQ55SxLiX/y
- WtDg4h2VPMacjU542kQSz9oEhQS92LyH/kZXFZNrUnyeU8h/7piS8MseoDn1HKGSZ2ms=;
+ bh=c88lqSxqRhgcdBuXBMm8xLbio2cc1M+G+N4XYcCvLJA=; b=U2uA0wQzKDthYWdUXItmAVzYSX
+ R7tiD4IuJfOd1VV9bN8gRlHDIOX9KwdQG8yYYryojqXlPUziB99ukyDeDf6j6NBWr9uUU68efnDpQ
+ cYqMbpxYC8ANSGAa+Hj8y5ZqOgpJLkf1l+YLUWBBbhkN4SLnOeKTJuIdlrFFVAkeDOJo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=mfoB8ipfy0L6OloPCbkGz5gD4ZpAk/e1jBDItP4Z7sE=; b=T
- 4NP0M3pCGMHUs+kbvwRrweBFe8UwzoqnWVoxJ423KgAJkkdoRzkDZSGsYWApM6Myprmp5oUJwTn5a
- PyOyOYNqcQoVs5pbT2qo76mQ1Ek/V0VhD7kqhz6nzW79AUt/i5im901nK+dt+KsmzBZ8e8aoLy2o+
- m6CSVGI//RoroMMw=;
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ List-Owner:List-Archive; bh=c88lqSxqRhgcdBuXBMm8xLbio2cc1M+G+N4XYcCvLJA=; b=K
+ Xh//3SwLPqfRMpvkha09rjDVb2E25TSK871eOAUuJhAjPUcn7OWlEyJO9Y+mAMXOxg4La4qtwvWrG
+ SJdtwVlW7oEkfJF7G2cDeYqB/nP1T495qZmpYcP6n0FJD7ph/CtXLWiL8GFLS+aY1vOiDJYD41XfE
+ ZrBD+VqebpUiEoY0=;
+Received: from mail-pl1-f175.google.com ([209.85.214.175])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rVxFZ-00011u-QC for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 02 Feb 2024 17:22:52 +0000
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 412DjtRg015707; Fri, 2 Feb 2024 16:52:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding:content-type; s=qcppdkim1; bh=mfoB8ip
- fy0L6OloPCbkGz5gD4ZpAk/e1jBDItP4Z7sE=; b=MUTu1QGJqk3zZdN8AIVKUtE
- mFcQWxkLVJFTvhDfzpIzuV0U/Z7WaRwJ4HLOwDIto12izImUD/X9LEYrcblH2mhA
- STql53jX9YK9R3VJ6s+KGrBTlxL373f/LFCzCTwP5DzLkk3xf8m+TQHzjr9Sal6s
- Kye2eU8cdsPZvBhbk3IQpc3M5/OhjHapoKBDmtl+X8Mm5jHf4msWO0Ui1FXivxGS
- qKCiGY0s+y/EfEWYZv5Kr/vhZ+1/DHzZvbdU++32+AGqCy0shsXRK6Zp6wjla2Rz
- fpsQFp39SRqjffq7oaiN6W5DM3qEsshMVFZ36ybL3PcPYmOuuo+jdjwOhtRxShg=
- =
-Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com
- [129.46.96.20])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3w0pwjhws5-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 02 Feb 2024 16:52:24 +0000 (GMT)
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
- [10.47.209.196])
- by NALASPPMTA01.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 412GqNLP014387
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 2 Feb 2024 16:52:23 GMT
-Received: from jhugo-lnx.qualcomm.com (10.80.80.8) by
- nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Fri, 2 Feb 2024 08:52:22 -0800
-From: Jeffrey Hugo <quic_jhugo@quicinc.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>, <quic_stummala@quicinc.com>,
- <quic_bjorande@quicinc.com>
-Date: Fri, 2 Feb 2024 09:52:08 -0700
-Message-ID: <20240202165208.4091800-1-quic_jhugo@quicinc.com>
-X-Mailer: git-send-email 2.34.1
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rWHtP-0002kk-FP for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 03 Feb 2024 15:25:20 +0000
+Received: by mail-pl1-f175.google.com with SMTP id
+ d9443c01a7336-1d944e8f367so26151425ad.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sat, 03 Feb 2024 07:25:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706973914; x=1707578714; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=c88lqSxqRhgcdBuXBMm8xLbio2cc1M+G+N4XYcCvLJA=;
+ b=eNGgWv37kzrpt3BPzTDZ56y0Zz4XNvXtV3kxvuL08aNRbnj0zzT9BO+V6UHTbGiRoE
+ ndugSYuQkby+CmHCkxAzCP7B29qjUyI1CNmZxoynjJ+Lnlj2iUnTkGBzFOMTBDzBJ3R+
+ zZ/EI0beZwYg/6TVlRjc4crFvSJ0EkAsCrb630iaLhNHKqWvttGl+nUf6qI3/bTteJDD
+ 7Jof2wJHTTiR3XoU4bFpWBuOlEfij8XM3ZQFfqNJ01XqN+PWY8W1iPwwWvpqxMV8/Aoj
+ QAdl5NrVZ4qbn+k5sa2DSoRLpLc7a7A6CIkGYtP/MSjGD3BElCL9kfDvQOxL+Ovo7Rit
+ jNlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706973914; x=1707578714;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=c88lqSxqRhgcdBuXBMm8xLbio2cc1M+G+N4XYcCvLJA=;
+ b=G/evMJR2gKoMKRq7kfIB4b+Nrkotwot/YTgpCnoJfe2QwC6T8zG/KrFdFIBZyQQ29+
+ z0pHWoWTKrGPiTFd3Srvl0tka69FRIIQjXe7w85RfCf/uc07w/G9XVC9x+JbYCC/u1ei
+ sj17rxDsNOqNdEBBsAyEQyxiXbJRSaiIr3SMbe0B1m4Fm2TFz0n714HMus+tQ82yHLdk
+ ZJiIfOLDFI5ntYuGmJIld6GVjtAYrcQP/kbqAQNELsKrtT0LhQ8qP2ibo/6qDkPPr7kN
+ fCIXdJ2/Z7PnrS2RbsY/DnL12kNFJkIx09KBJpd4jCSZUwBuCakh+EOC1Cn+qg82y/cB
+ EpBA==
+X-Gm-Message-State: AOJu0YwpFthQFR9yvBo0gGPCGs7y5FHtDoQXZcXa+wxqU8K4jT77uZhK
+ ZQA30jcBx+ipVq82WsVzAkSZ7r8glDIJcLyY7OwrmteTDQuxFzJA
+X-Google-Smtp-Source: AGHT+IG+kFYkVfFa0+0Ujxvkv+4qhG9681TjiX9T+aWgsnpdHjM1XP2I2bR9X6WyjKDoVmH6dQgTfQ==
+X-Received: by 2002:a17:902:f545:b0:1d9:5d65:c1b with SMTP id
+ h5-20020a170902f54500b001d95d650c1bmr7436906plf.41.1706973914367; 
+ Sat, 03 Feb 2024 07:25:14 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCUnaJiN3/oUVmOaXrf8A7R+Oc/J9rdZuq2hqa3OkuWuLiIUbcBwBO2NnGovu7VXgDk8iR2QXDi+ypeB0NGiZSA3yIp4tXmywVL5r/ZL7AeQPPOF9AAP5sZ3daQly/5/NcFpotuBCFavYnKgvhVGHiZxt96+cjL75gHi0HVp3fH+jb9RNNEBWut2/bo7ZxjWxr9QW2kqKsCCiiTSEZ8IHtZO9XnAb8VoAa6rZrEMfcF3Qg==
+Received: from localhost.localdomain ([112.38.163.83])
+ by smtp.gmail.com with ESMTPSA id
+ ku12-20020a170903288c00b001d7284b9461sm3370081plb.128.2024.02.03.07.25.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 03 Feb 2024 07:25:14 -0800 (PST)
+From: Wenjie Qi <qwjhust@gmail.com>
+To: jaegeuk@kernel.org, chao@kernel.org, yangyongpeng1@oppo.com,
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
+Date: Sat,  3 Feb 2024 23:24:36 +0800
+Message-ID: <20240203152436.1352-1-qwjhust@gmail.com>
+X-Mailer: git-send-email 2.43.0.windows.1
 MIME-Version: 1.0
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-GUID: 6-HTTPrKvZyBZbc5_9FVnicmaTolsfVZ
-X-Proofpoint-ORIG-GUID: 6-HTTPrKvZyBZbc5_9FVnicmaTolsfVZ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-02-02_10,2024-01-31_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0
- lowpriorityscore=0 clxscore=1011 mlxscore=0 phishscore=0 mlxlogscore=452
- malwarescore=0 suspectscore=0 adultscore=0 priorityscore=1501 spamscore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2401310000 definitions=main-2402020121
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -97,25 +93,32 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: The servers for the @codeaurora domain are long retired and
- any messages addressed there will bounce. Sahitya Tummala has a .mailmap
- entry to an updated address, but the documentation files still list [...] 
+ Content preview: If the max open zones of zoned devices are less than the
+ active
+ logs of F2FS, the device may error due to insufficient zone resources when
+ multiple active logs are being written at the same time. If t [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [qwjhust[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.214.175 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.175 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rVxFZ-00011u-QC
-Subject: [f2fs-dev] [PATCH] f2fs: doc: Fix bouncing email address for
- Sahitya Tummala
+X-Headers-End: 1rWHtP-0002kk-FP
+Subject: [f2fs-dev] [PATCH v4] f2fs: fix zoned block device information
+ initialization
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,45 +130,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-arm-msm@vger.kernel.org, Jeffrey Hugo <quic_jhugo@quicinc.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Wenjie Qi <qwjhust@gmail.com>, hustqwj@hust.edu.cn
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The servers for the @codeaurora domain are long retired and any messages
-addressed there will bounce.  Sahitya Tummala has a .mailmap entry to an
-updated address, but the documentation files still list @codeaurora
-which might be a problem for anyone reading the documentation directly.
-Update the documentation files to match the .mailmap update.
+If the max open zones of zoned devices are less than
+the active logs of F2FS, the device may error due to
+insufficient zone resources when multiple active logs are
+being written at the same time. If this value is 0,
+there is no limit.
 
-Signed-off-by: Jeffrey Hugo <quic_jhugo@quicinc.com>
+Signed-off-by: Wenjie Qi <qwjhust@gmail.com>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ fs/f2fs/f2fs.h  |  1 +
+ fs/f2fs/super.c | 21 +++++++++++++++++++++
+ 2 files changed, 22 insertions(+)
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 48c135e24eb5..22d070c0de40 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -205,7 +205,7 @@ Description:	Controls the idle timing of system, if there is no FS operation
- What:		/sys/fs/f2fs/<disk>/discard_idle_interval
- Date:		September 2018
- Contact:	"Chao Yu" <yuchao0@huawei.com>
--Contact:	"Sahitya Tummala" <stummala@codeaurora.org>
-+Contact:	"Sahitya Tummala" <quic_stummala@quicinc.com>
- Description:	Controls the idle timing of discard thread given
- 		this time interval.
- 		Default is 5 secs.
-@@ -213,7 +213,7 @@ Description:	Controls the idle timing of discard thread given
- What:		/sys/fs/f2fs/<disk>/gc_idle_interval
- Date:		September 2018
- Contact:	"Chao Yu" <yuchao0@huawei.com>
--Contact:	"Sahitya Tummala" <stummala@codeaurora.org>
-+Contact:	"Sahitya Tummala" <quic_stummala@quicinc.com>
- Description:    Controls the idle timing for gc path. Set to 5 seconds by default.
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 543898482f8b..161107f2d3bd 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1558,6 +1558,7 @@ struct f2fs_sb_info {
  
- What:		/sys/fs/f2fs/<disk>/iostat_enable
+ #ifdef CONFIG_BLK_DEV_ZONED
+ 	unsigned int blocks_per_blkz;		/* F2FS blocks per zone */
++	unsigned int max_open_zones;		/* max open zone resources of the zoned device */
+ #endif
+ 
+ 	/* for node-related operations */
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 1b718bebfaa1..45e82d6016fc 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2388,6 +2388,16 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+ 	if (err)
+ 		goto restore_opts;
+ 
++#ifdef CONFIG_BLK_DEV_ZONED
++	if (sbi->max_open_zones && sbi->max_open_zones < F2FS_OPTION(sbi).active_logs) {
++		f2fs_err(sbi,
++			"zoned: max open zones %u is too small, need at least %u open zones",
++				 sbi->max_open_zones, F2FS_OPTION(sbi).active_logs);
++		err = -EINVAL;
++		goto restore_opts;
++	}
++#endif
++
+ 	/* flush outstanding errors before changing fs state */
+ 	flush_work(&sbi->s_error_work);
+ 
+@@ -3930,11 +3940,22 @@ static int init_blkz_info(struct f2fs_sb_info *sbi, int devi)
+ 	sector_t nr_sectors = bdev_nr_sectors(bdev);
+ 	struct f2fs_report_zones_args rep_zone_arg;
+ 	u64 zone_sectors;
++	unsigned int max_open_zones;
+ 	int ret;
+ 
+ 	if (!f2fs_sb_has_blkzoned(sbi))
+ 		return 0;
+ 
++	max_open_zones = bdev_max_open_zones(bdev);
++	if (max_open_zones && (max_open_zones < sbi->max_open_zones || !sbi->max_open_zones))
++		sbi->max_open_zones = max_open_zones;
++	if (sbi->max_open_zones && sbi->max_open_zones < F2FS_OPTION(sbi).active_logs) {
++		f2fs_err(sbi,
++			"zoned: max open zones %u is too small, need at least %u open zones",
++				 sbi->max_open_zones, F2FS_OPTION(sbi).active_logs);
++		return -EINVAL;
++	}
++
+ 	zone_sectors = bdev_zone_sectors(bdev);
+ 	if (!is_power_of_2(zone_sectors)) {
+ 		f2fs_err(sbi, "F2FS does not support non power of 2 zone sizes\n");
 -- 
 2.34.1
 
