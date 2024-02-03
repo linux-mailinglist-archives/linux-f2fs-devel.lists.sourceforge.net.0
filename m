@@ -2,125 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4188384AE3E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Feb 2024 06:58:42 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 463DD84BB67
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Feb 2024 17:51:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rXETV-0000FN-32;
-	Tue, 06 Feb 2024 05:58:29 +0000
+	id 1rXOfU-00009V-OQ;
+	Tue, 06 Feb 2024 16:51:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <niuzhiguo84@gmail.com>) id 1rXETT-0000FG-Qg
+ (envelope-from <ap@sieca.int>) id 1rXOfT-00009C-L0
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Feb 2024 05:58:27 +0000
+ Tue, 06 Feb 2024 16:51:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=37SRj3V5WCLVhgLQFuxLAmj/CKN5zZ9vlMu2l5q/YAA=; b=QtVG2Wl9FdHZ9RYvO7C68qWDdc
- Vo13Lym0UdbZ53U7LAtlp//DAIMrEuVOocNMcuzPe7wCe4Eaj30FIVf3qd5BIb8ozh+cQXnEbvDKI
- 6uG1ZHBNwsqyMjyTtkQDJRV2z5uZw0cfiG6n759e+o0UzoQy/vaDS8sLRi+vZEPIZpGg=;
+ d=sourceforge.net; s=x; h=Message-ID:Reply-To:Date:From:To:Subject:
+ Content-Description:Content-Transfer-Encoding:MIME-Version:Content-Type:
+ Sender:Cc:Content-ID:Resent-Date:Resent-From:Resent-Sender:Resent-To:
+ Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=ITmAOvy9c9TwyyqoVbD3iOvhZtY5+uG9xcw/PaZGbhE=; b=LKD3Q7zVHm1T78twvFNaWyuZ6o
+ 7P9dDsmw/3aXFzV0xE0Lsq/7AZ4+pT7cVl6+dGzJAAWVfaDk/kTJRkZdN+zd1+CeILAmwRZ1K/Ri6
+ 1rfe6xpr2SILtCnjw+9lIDFKg4SeK37A1aR1UZN92o0JIbWAhg0E2otriRgGQmqsTMZc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Message-ID:Reply-To:Date:From:To:Subject:Content-Description:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Cc:Content-ID:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=37SRj3V5WCLVhgLQFuxLAmj/CKN5zZ9vlMu2l5q/YAA=; b=j7pYIG8Qzk/gVFopEtK4a5KNtE
- RwSdjsD8CUt1rdhyMEAFgBAf41bWnl6Rp9uwH5XbEyjqJ8aTZpRngoyEbUu6GI+Qoca5X15gEFgSs
- wXLGPx+yJnDj18D8ns05t9Dh/WDYekQ4DvavzUVcZeAXGjDYEvIZgQ1lj7VL1ngqIdGI=;
-Received: from mail-ed1-f49.google.com ([209.85.208.49])
+ bh=ITmAOvy9c9TwyyqoVbD3iOvhZtY5+uG9xcw/PaZGbhE=; b=HnXYwdPWrc8abdJxY0vvtywDFQ
+ EzKENEqMFLtBHyVptwlh7QW4vo5SGDMdFdMAo5v/x8ZQkKohl/zOjkp2M5t4Zslb9DW4qpdd+BeAl
+ m/v0gr7Fq+7WC7Bx/6FBrDdwGqidVhTPAG+m+3a8ACvbCPj/jltE6jFp2qkOx3mt8P38=;
+Received: from mail.sieca.int ([168.194.73.35] helo=antispam.sieca.int)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rXETS-0003Hu-HV for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Feb 2024 05:58:27 +0000
-Received: by mail-ed1-f49.google.com with SMTP id
- 4fb4d7f45d1cf-5601eb97b29so399137a12.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 05 Feb 2024 21:58:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707199096; x=1707803896; darn=lists.sourceforge.net;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=37SRj3V5WCLVhgLQFuxLAmj/CKN5zZ9vlMu2l5q/YAA=;
- b=henIw+R+7yM2sKrDPL625aX/Zo5RNtXwRvLxg34dHG/zopEiKq62EsQu0rAIBK+afC
- uVR2uNn8CYdl2SOQejMl34dEGwq8XOmzy5y+uYQW46MXEW8asKfA3z9aSfbWfTeiYl0F
- UJN6lMEUNY1jyJUCPfqby/0Jx0D/2G6RoBubFbfgJRUMA1aa4jGzFZyMA6XnHmnQRbGu
- OwZTlwXx4lDD8E/U6h99fl3JNksgSpMwa81xrjCuEVPetXwva4Cwrl7D67TIH1lngri8
- MT6hYRAoiPYVvdnSnY59ZqK9+fsPJZDxuUd8XjOnC6kwBjY55QyxKaFIYjU1N5FCHeCX
- /4qQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707199096; x=1707803896;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=37SRj3V5WCLVhgLQFuxLAmj/CKN5zZ9vlMu2l5q/YAA=;
- b=X4VvCzk623zxpJQL6CmmwZaiJr9Uf03DlU31FzQz6N4XyuGoKhf50nL/LRvqFuZ4gN
- 42A8kwyLk1Xg65yHNnvbRVAVOcXm5Ok1uNsEX82855spT5KwYvUX6UuXQEALrQjVrJ7T
- Vr+byUxa6iuQ4F680HnEFguYIdmRRKiEbB6kQ0qvJ6UkTZgV0craEy3aUMIZ/VJjXUxZ
- OyE6Bl4IoWRe4K4oGj0wogox/ysBQF58aviSXp/LAev3ttPXRowpQO8afDDGpGerbhCx
- YDYkd2lYk6zCQqOpyX6hr/pEaxoh/6QTGPW2GXP5RFz4N9ymaEX1MgaFtgqtv09mYI9t
- 2hkg==
-X-Gm-Message-State: AOJu0YwX6xfmULtc2I01yCtkPsvJpUtfxh5YiH0bG9A9MBQ4stXyAThk
- NaVLk/CeF0+J4jMTW2NO6yeu8UVmkakIAAssIrvoEZRtvfu7X/UuebgEdmTuXJmKcG6DV6E4l2c
- msUPZZkoYBTgz89qV743+z7BSw1M=
-X-Google-Smtp-Source: AGHT+IGDo18AFJzHyBqAN82N1ANueKAASCsDKhpE72pjl7nhu5Q+7HX+a1/HlotJGde4S/sbGdFvgvLqzYWzDU6ufak=
-X-Received: by 2002:a50:d59d:0:b0:55f:c4e9:60df with SMTP id
- v29-20020a50d59d000000b0055fc4e960dfmr7804341edi.20.1707199095565; Mon, 05
- Feb 2024 21:58:15 -0800 (PST)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rXOfT-00031A-6g for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Feb 2024 16:51:32 +0000
+Received: from mail.sieca.int ([192.168.32.102])
+ by antispam.sieca.int  with ESMTP id 413BWE7F006579-413BWE7S006579
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NO)
+ for <linux-f2fs-devel@lists.sourceforge.net>; Sat, 3 Feb 2024 05:32:16 -0600
+Received: from SRVEXG02.sieca.local (172.16.100.151) by SRVEXG02.sieca.local
+ (172.16.100.151) with Microsoft SMTP Server (TLS) id 15.1.466.34; Sat, 3 Feb
+ 2024 04:38:49 -0600
+Received: from [156.96.112.132] (192.168.32.1) by SRVEXG02.sieca.local
+ (192.168.32.102) with Microsoft SMTP Server id 15.1.466.34 via Frontend
+ Transport; Sat, 3 Feb 2024 04:38:49 -0600
 MIME-Version: 1.0
-References: <1706523684-24540-1-git-send-email-zhiguo.niu@unisoc.com>
- <ZcGkZslfFLP8wqUr@google.com>
-In-Reply-To: <ZcGkZslfFLP8wqUr@google.com>
-From: Zhiguo Niu <niuzhiguo84@gmail.com>
-Date: Tue, 6 Feb 2024 13:58:04 +0800
-Message-ID: <CAHJ8P3KVJvNfPhUa07j87irmbjgV8nsuCby2oASTM=QHboWc2A@mail.gmail.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: 0.0 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+Content-Description: Mail message body
+To: <linux-f2fs-devel@lists.sourceforge.net>
+Date: Sat, 3 Feb 2024 02:39:02 -0800
+Message-ID: <99184f6d-32ba-4208-a2b2-0015147fbb4c@SRVEXG02.sieca.local>
+X-Spam-Score: 5.1 (+++++)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Tue, Feb 6, 2024 at 11:15 AM Jaegeuk Kim wrote: > > On
-    01/29, Zhiguo Niu wrote: > > A panic issue happened in a reboot test in small
-    capacity device > > as following: > > 1.The device size is 6 [...] 
- 
- Content analysis details:   (0.0 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview: Hello I hope you are well and high in spirit? Before I
+ continue, 
+ let me humbly apologize for coming into your space unsolicited. Nonetheless,
+ I take solace in the fact that it is with the best intention and [...] 
+ Content analysis details:   (5.1 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.208.49 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-                             in digit
-                             [niuzhiguo84[at]gmail.com]
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [niuzhiguo84[at]gmail.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.208.49 listed in wl.mailspike.net]
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rXETS-0003Hu-HV
-Subject: Re: [f2fs-dev] [PATCH 0/3] f2fs: fix panic issue in small capacity
- device
+ 2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
+ 2.6 ADVANCE_FEE_3_NEW      Appears to be advance fee fraud (Nigerian 419)
+X-Headers-End: 1rXOfT-00031A-6g
+Subject: [f2fs-dev] I AWAIT
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -132,37 +86,33 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, hongyu.jin@unisoc.com,
- Zhiguo Niu <zhiguo.niu@unisoc.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Anna Pechorin via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: anna.pechorin@yahoo.com
+Cc: Anna Pechorin <ap@sieca.int>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gVHVlLCBGZWIgNiwgMjAyNCBhdCAxMToxNeKAr0FNIEphZWdldWsgS2ltIDxqYWVnZXVrQGtl
-cm5lbC5vcmc+IHdyb3RlOgo+Cj4gT24gMDEvMjksIFpoaWd1byBOaXUgd3JvdGU6Cj4gPiBBIHBh
-bmljIGlzc3VlIGhhcHBlbmVkIGluIGEgcmVib290IHRlc3QgaW4gc21hbGwgY2FwYWNpdHkgZGV2
-aWNlCj4gPiBhcyBmb2xsb3dpbmc6Cj4gPiAxLlRoZSBkZXZpY2Ugc2l6ZSBpcyA2NE1CLCBhbmQg
-bWFpbiBhcmVhIGhhcyAyNCBzZWdtZW50cywgYW5kCj4gPiBDT05GSUdfRjJGU19DSEVDS19GUyBp
-cyBub3QgZW5hYmxlZC4KPiA+IDIuVGhlcmUgaXMgbm8gYW55IGZyZWUgc2VnbWVudHMgbGVmdCBz
-aG93biBpbiBmcmVlX3NlZ21hcF9pbmZvLAo+ID4gdGhlbiBhbm90aGVyIHdyaXRlIHJlcXVlc3Qg
-Y2F1c2UgZ2V0X25ld19zZWdtZW50IGdldCBhIG91dC1vZi1ib3VuZAo+ID4gc2VnbWVudCB3aXRo
-IHNlZ25vIDI0Lgo+ID4gMy5wYW5pYyBoYXBwZW4gaW4gdXBkYXRlX3NpdF9lbnRyeSBiZWNhdXNl
-IGFjY2VzcyBpbnZhbGlkIGJpdG1hcAo+ID4gcG9pbnRlci4KPgo+IFRoZSBnb2FsIGhlcmUgaXMg
-dG8gc3RvcCBmMmZzIHdoZW4gaXQgaGl0cyBubyBzcGFjZSB0byB3cml0ZSBhbnltb3JlPwpEbyBu
-b3QgbGV0IHRoZSBzeXN0ZW0gY3Jhc2ggbm93ICwgYW5kIGFkZCBzb21lIHNhbml0eSBjaGVjayB0
-byBhdm9pZAphY2Nlc3NpbmcgIGlsbGVnYWwgbWVtb3J5Cj4gQW5kLCB3ZSBuZWVkIGYyZnNfc3Rv
-cF9jaGVja3BvaW50KCkgYXQgdGhlIGVuZD8KSSB0aGluayBpdCBuZWVkIGluZGVlZC4KdGhhbmtz
-IQo+Cj4gPgo+ID4gTW9yZSBkZXRhaWwgc2hvd24gaW4gZm9sbG93aW5nIHRocmVlIHBhdGNoZXMu
-Cj4gPiBUaGUgdGhyZWUgcGF0Y2hlcyBhcmUgc3BsaXRlZCBoZXJlIGJlY2F1c2UgdGhlIG1vZGlm
-aWNhdGlvbnMgYXJlCj4gPiByZWxhdGl2ZWx5IGluZGVwZW5kZW50IGFuZCBtb3JlIHJlYWRhYmxl
-Lgo+ID4KPiA+IFpoaWd1byBOaXUgKDMpOgo+ID4gICBmMmZzOiBjb3JyZWN0IGNvdW50aW5nIG1l
-dGhvZHMgb2YgZnJlZV9zZWdtZW50cyBpbiBfX3NldF9pbnVzZQo+ID4gICBmMmZzOiBmaXggcGFu
-aWMgaXNzdWUgaW4gdXBkYXRlX3NpdF9lbnRyeQo+ID4gICBmMmZzOiBlbmhhbmNlIGp1ZGdtZW50
-IGNvbmRpdGlvbnMgb2YgR0VUX1NFR05PCj4gPgo+ID4gIGZzL2YyZnMvZmlsZS5jICAgIHwgNyAr
-KysrKystCj4gPiAgZnMvZjJmcy9zZWdtZW50LmMgfCA5ICsrKysrKy0tLQo+ID4gIGZzL2YyZnMv
-c2VnbWVudC5oIHwgNyArKysrLS0tCj4gPiAgMyBmaWxlcyBjaGFuZ2VkLCAxNiBpbnNlcnRpb25z
-KCspLCA3IGRlbGV0aW9ucygtKQo+ID4KPiA+IC0tCj4gPiAxLjkuMQoKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGlu
-ZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlz
-dHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+Hello
+
+I hope you are well and high in spirit? Before I continue, let me humbly apologize for coming into your space unsolicited. Nonetheless, I take solace in the fact that it is with the best intention and for our mutual benefit.
+
+I chose you among other contacts that I came across in my search for someone who can partner with me in investment venture. It took a great deal of brain storming for me to arrive at this decision owing to my present predicament, which I will explain to you in my follow up email. I hope that my contact with you will be private, confidential and fruitful.
+
+Presently I am totally indisposed to carry out financial transactions due to restrictions relating to the suspicious death of my husband, Ivan Pechorin who was totally against the Ukraine war. Before long it would be discovered that President Vladimir Putin murdered my husband. My strongest desire is to partner with you in investing my family money domiciled outside the shores of Russia with you as my fund manager. I have no problem investing this money in your country if it offers investment friendly conditions. 
+
+It will be an absolute pleasure, if you would have the wherewithal to handle this project to my satisfaction. Every detail concerning this project would be laid bare to you upon indication of your interest.
+
+Please strictly respond to anna.pechorin@yahoo.com
+
+
+Best regards
+
+Anna Pechorin.
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
