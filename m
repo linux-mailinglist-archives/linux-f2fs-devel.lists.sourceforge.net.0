@@ -2,160 +2,114 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03B70848B18
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  4 Feb 2024 05:53:36 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CAA3848B1F
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  4 Feb 2024 05:59:09 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rWUVS-0006lX-Rk;
-	Sun, 04 Feb 2024 04:53:27 +0000
+	id 1rWUar-00053S-3S;
+	Sun, 04 Feb 2024 04:59:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yangyongpeng1@oppo.com>) id 1rWUVQ-0006lR-BF
+ (envelope-from <jinbaoliu365@gmail.com>) id 1rWUaq-00053K-8p
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 04 Feb 2024 04:53:25 +0000
+ Sun, 04 Feb 2024 04:59:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :In-Reply-To:References:Cc:To:Subject:From:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pN720aajgdFrIykoJ+Qi4JE3rjsj5ePFnTN9TJyPK4Q=; b=b5Hn0WnTzcvkaGW2oDJ0UpB5vb
- BnXtpYYb6+yXEK2MbyJ6iDbhN/F98nebIT4pJNfl7EnOvwB/sS/htyeR92XU7PlDTWWqHk1BkARaS
- EFzLwYxNiArqt2eX/DHmc97Npy5A8kGdrjFs+A/FAd++Ig2d6zBWHkes90C5sSzGAuAM=;
+ bh=mo/Nvkvck63sS/B8DyIx8YcYLkXno8x34rYe0N1lpLU=; b=XNIDLz54KOxDs86CMdCzje0Te6
+ fowsiZY5UH4rbPhq4g7bH4EnRAcu6dTJYE8TJAdHJyek4f/qmou5IYgyUl7FkZi24C7zfenWKqDSo
+ GsBOaBgWMzoDF5FCuOIeC8zrck0FMzwOzq7BFVESNg4al8UAIGyZRBR3L2nED589YGS0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:
- References:Cc:To:Subject:From:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=pN720aajgdFrIykoJ+Qi4JE3rjsj5ePFnTN9TJyPK4Q=; b=hqSaBwN/Hn9O07YpVleY1mTedv
- U3XVdhFMFQu1K5EOpF6dd7iAnPuTtBD9m/hOKQQDpwvJvSNR4Ffypq5JH2LJESWgycoySf8pcDoOf
- Rfe/iex0UNqjxR84AJHuH6Jxk2rL97ahT8nY2cYGbVzPpRq72U79gA0SkdDsRjgrLEmY=;
-Received: from mail-eastasiaazon11022011.outbound.protection.outlook.com
- ([52.101.128.11] helo=HK2PR02CU002.outbound.protection.outlook.com)
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=mo/Nvkvck63sS/B8DyIx8YcYLkXno8x34rYe0N1lpLU=; b=F
+ 6gia2QsWDhdIH3c17Q7pLLttld7+L/dPcw3ZAid8FOGSjeixOSXjudMFJ0oZ65UY33jaOfTRIufwn
+ pwWaH0E2DK3uIw+41jvb1x2dCQe+GGCN0NqWXb/fEeQukS66ouKst8uG/ozPf+HGmZ7+26Ki/WICK
+ JVy2aAwctniFD4AQ=;
+Received: from mail-yw1-f178.google.com ([209.85.128.178])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rWUVN-0002du-Cq for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 04 Feb 2024 04:53:25 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ad07c3fF/tQJOlG7my/vDKZDs+FrAgocJynBNHtXbuprilmtPlMclHvne7q+KBMI9csmd0UlOnbEEkxgY7bqGMnfyX0p58mdDLLf8E1NkO9xP/+id7mJm0D75vtOcCaAVuje2Su+DmCPGkJQLTEJTfAuaH9sGT68pnS6h0OCIAbbxN3P8YaBtJa+uI4Bxdn2M4RUZfylkuLMK0ax5QpokvG8A9fpt7MjHJ4/J/qjg/gHC8CVvTyAkeV9B1K6BUNrDYo+3sSU/Lz7hyGVXRgVr1gyS7JvSNm2eXMBjnuGWzU2AN6JF3f7bTtslQYwJ1oSF2wGP3TQPE3cjIPGyxCz6Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pN720aajgdFrIykoJ+Qi4JE3rjsj5ePFnTN9TJyPK4Q=;
- b=fGxx62V6VlD8zxfukT/CH83bKzETs67VB7n1r83UzzGXG/vwM5xSHTxt4Nl3nE/t11HojXBAC4d59/+iqbF4fUViAGZNS/DFz0wKSnjv1rgjlhkY71T4Sl6rc/pd2V+Smi+95EaFnwJE+vXuvqp8aGUgTb7rP3IHT0tBsdXwHiYWWt6UBMkBdyOQswzzdmsTmEE+nIPZgtxAFtn4ALpDMD6cSzS2nFNov8N6T73E4magRz7FBQyUZyt+HMd3BWRGd4eHBI3S7DX51/HJRe9tAlpbJp5vWqOlyRiDz8szYJu8tZN5D1brT7ti0h+mkE+kretnT8I8OwdOGw3N7yZ9uw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oppo.com; dmarc=pass action=none header.from=oppo.com;
- dkim=pass header.d=oppo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pN720aajgdFrIykoJ+Qi4JE3rjsj5ePFnTN9TJyPK4Q=;
- b=t1ZECBAY5uluRjbR7O1rZAerZoLPn0lxBOIUF3PHSOgFMW1xA3JUvn9rbI6WHKyccIaw/46rCXPC3satd1eSCsaCDDaJ6zJEYGoKDYm6koFCZVjmxxC0gFhhjykCRiAlIzlaaBi74WJCa+KVduhMzI37Fixy+LyA9FTQi4NUt74=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oppo.com;
-Received: from PSAPR02MB4727.apcprd02.prod.outlook.com (2603:1096:301:90::7)
- by TYZPR02MB4655.apcprd02.prod.outlook.com (2603:1096:405:5::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.31; Sun, 4 Feb
- 2024 04:53:07 +0000
-Received: from PSAPR02MB4727.apcprd02.prod.outlook.com
- ([fe80::a815:49db:df99:5461]) by PSAPR02MB4727.apcprd02.prod.outlook.com
- ([fe80::a815:49db:df99:5461%5]) with mapi id 15.20.7249.032; Sun, 4 Feb 2024
- 04:53:07 +0000
-Message-ID: <e6cffb6e-3228-415d-890c-76fe0a9ac08b@oppo.com>
-Date: Sun, 4 Feb 2024 12:53:02 +0800
-User-Agent: Mozilla Thunderbird
-To: Wenjie Qi <qwjhust@gmail.com>, jaegeuk@kernel.org, chao@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
-References: <20240204031022.1189-1-qwjhust@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20240204031022.1189-1-qwjhust@gmail.com>
-X-ClientProxiedBy: SG2PR01CA0177.apcprd01.prod.exchangelabs.com
- (2603:1096:4:28::33) To PSAPR02MB4727.apcprd02.prod.outlook.com
- (2603:1096:301:90::7)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rWUao-0002tq-3p for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 04 Feb 2024 04:59:00 +0000
+Received: by mail-yw1-f178.google.com with SMTP id
+ 00721157ae682-60442a4132fso3785297b3.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sat, 03 Feb 2024 20:58:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707022733; x=1707627533; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mo/Nvkvck63sS/B8DyIx8YcYLkXno8x34rYe0N1lpLU=;
+ b=MMIlFKNZxEMUiu5/gRgskQg0aRBPdRqKCFzyw/X3sBgzS6OLrmPxQJGqKZDso36HIS
+ kLkhIqzPPiVTtKQ41zPpXTZ1PkDnnJBibeaDTedjbYxXy9UkoKkvM6tRoQ5cePWQSZde
+ avZTtdRhVyBKmCGR1WcuZF5P7clf/IDnF9tifKck8b4zqN2mQbIMleQIsmA5v8ymL0wc
+ k9Cb0iLqNKyhzo0DLaj46avGbtX1WViw6C+xkGEJMPMIiPq5IcF0jJ7AOInuH3Us+67m
+ 7whUJrLePk1Kzc951Fofl5fcoswCR5DZkv36D2bcrxwl106njVECwGc2GVDuqie3y/EF
+ Uuuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707022733; x=1707627533;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mo/Nvkvck63sS/B8DyIx8YcYLkXno8x34rYe0N1lpLU=;
+ b=djdDt/cFrdhg0eLFME5hq/nnHAL57CihJEU/6LznRwiUryzt9inQHAXcranBcyGLKr
+ 5APuwam5WSzJKA1erls4Bq3GCui+MlXU6VSGhyEROFHq1N/3wxisqRwo8SzrxkNIzFhT
+ UOyB0oegpdD2yQNVEM5ZT8PnH0IAZGQU2givN1CAWdY+E8u8zluy1eBLNtMK8an+WVnt
+ uBlqdHQ1SelcHCWv9NM6EDtQLfU+Lh9MNtX8wuysbVpkERnV4dxxeoW7KF7O49y5VAfS
+ +EaH30ogcN1Bbz9LEtPwn8rC87KY/qbhh0Lys61PjP45GAoxdaNd1MqyspFtRe//B9rk
+ zplQ==
+X-Gm-Message-State: AOJu0YwSlr4jiVjOzL1Iywvid5UoH5khOY3zwKfcCuTAxWRzMHIANV2+
+ q8f3JF14kaPJEeQyXeb0dQyaSTp8V/FXG++ofQ+q/sfEOnuzFPb6
+X-Google-Smtp-Source: AGHT+IFuetYBGJyMd3YNFLcBo+suzwrrIJOPdNk/k9KEhWeAmX0KXY9j7kSgb93k/x7toWrQBQdLuQ==
+X-Received: by 2002:a81:91c6:0:b0:604:559:7a12 with SMTP id
+ i189-20020a8191c6000000b0060405597a12mr1746184ywg.26.1707022732701; 
+ Sat, 03 Feb 2024 20:58:52 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCXGgjuZhVgsbToD4KtT9zQh+84oUNmAIpNXk04oHKKPDuMG+uwkyc/GgXKXrLqJ35QbH+Xw1Egj1Fm39v7YjWfBk6E7Sq2yvPq9FuRoiGoay6P8xR6AYDljvdVrnRQ4j8cigA1R3pISB6YRCTI4DMODNrBAQw==
+Received: from mi.mioffice.cn ([2408:8607:1b00:8:8eec:4bff:fe94:a95d])
+ by smtp.gmail.com with ESMTPSA id
+ d4-20020a0ddb04000000b006041ca620f4sm1296112ywe.81.2024.02.03.20.58.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 03 Feb 2024 20:58:52 -0800 (PST)
+From: liujinbao1 <jinbaoliu365@gmail.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Sun,  4 Feb 2024 12:58:43 +0800
+Message-ID: <3b2852b3d404ecbb53d9affa781d12d0e9ea3951.1707022643.git.liujinbao1@xiaomi.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PSAPR02MB4727:EE_|TYZPR02MB4655:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3d385430-0fec-4eb0-3889-08dc253d2d96
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: nEgkRVdoBIoP9ztUq7gE230QzwENlE5ldV61B+Tm2CsdoM298UNAhjxJqcSVfMF0IPEmWLOy0g8nm84qp8Ka1GNo1RRDDSdn+42ufgfhh3mhetMKTM2ExtH2qFEVIYHA9IVPtofoHhZfSB6nw7Hm3T4GYvkRCrBywNsjRCGr/19DDUTfXlEoDcdOn9FJtVu2WdKOMbjvVxdkz8ngnZ9C9AwEy3rC5/ZiVq1/dtzCKDpENiivIaLImx5A6JTYXslZBnkMv4mEXR2qB10jLlHV159Qg7C8diB6T8sTl5CavPrC7sVqE0sFoISsjj+vUC/JNudnBo9k8EskRcstNzJSItcsKln4/FndQwgsqaMoMtjHm4l76o2JH8pkd5S0uIfp4dnHhGo38XcpRxx15OvLWbbcIE5cq/CJYvVJbSRKrCbrCQGQsgDt16Ralnfmxl5416BfITIJ3JjlT6AiOlOMd0L+NhYsnjubmseINkq3waWh3VRbTudFhjc2zODWSv+3TxsNSBSv0VeiL3cejW8GKqztXyD3SL7RLZZZ/cT/+V6zy+HgsMul3BsBEDQaoi4vVL5tJ5baDgWCfPDPMRX5e8gNCDk2E3YGMxMlP+GoRvGU76xWfOuPKyTKfxsExIaQy6bIlCPM3iPvQOGgNJ8mdg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PSAPR02MB4727.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(396003)(346002)(39860400002)(376002)(136003)(366004)(230922051799003)(451199024)(1800799012)(186009)(64100799003)(8936002)(4326008)(8676002)(2906002)(5660300002)(36756003)(41300700001)(31696002)(86362001)(6486002)(478600001)(2616005)(83380400001)(26005)(6512007)(6506007)(38100700002)(66946007)(53546011)(316002)(66556008)(6666004)(66476007)(31686004)(45980500001)(43740500002);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K0pCaWZ3V01CVjFRNm54RnNJZlN0WFpuTDhPd3grbGF0VGNxcEkrc010ZGlt?=
- =?utf-8?B?dHcxZjRGb0ZRWHVqNkQrN1VmL293NXR3S0xNUTRtNTlMODdxTDJZTlNibGRz?=
- =?utf-8?B?dTB4aXJPSitpWHp2OTVXYXlGWWVkUWwzdXZuQndpc1Fod0sxdDlHWW9Yc3U4?=
- =?utf-8?B?cERQZjJoWGpIVFFZdWhFbkVVT0xrRlhhaEF2U1FuSHRvckR1MjZ0V2d3TWFi?=
- =?utf-8?B?eUZ2YytMd1FIVUU3dHFlWndEekRIVlFIMHFyMnNoK29sbkJtYW9NYlh1YnpJ?=
- =?utf-8?B?VFdXU1RBa3NKb0o2QUdVMHVOWHY4UmxUaU9hQkNyTVdKcUdTWW05eE1VWUIr?=
- =?utf-8?B?c0dnMnBFcGNOcnQ5ZHJ0U1AvaUVjNG42bEdJeVZGZXp3WEpiME1zdU1HUElq?=
- =?utf-8?B?SlRIY2pFM2dsR1FFQ2tmWFUvL3dCQXEzUUJBelpFSi9NSzMxTXR1VkRrVzE2?=
- =?utf-8?B?VlRDUjZTNVh3d003TTZPeDg5WUpPTEFzbFd5c2pwNUlZUjZwbFkwWVVPVFl2?=
- =?utf-8?B?KzZVRjlTK0p6YkFjeXF4MUFQdEFtaExiVFJqaFM4aWJFVFJjb1ppaFE1KzQ0?=
- =?utf-8?B?RkQxVVJKTnkwc0h4cWx5VUhTbFNadVBwbEVaL3hUSGFsRS9GaTNWN0tQM3gw?=
- =?utf-8?B?Uy9mTk5RWkpBV01lV0RJNVFZcWorV3RRWXlQZ0ZtRmhFTmw3MTVIc0dselJl?=
- =?utf-8?B?NVZmWVNMQ1ZwZUR6bWFhWVlnWmN1TkVGRnMrTi9WaEFaQWNIb2RZblRrQWow?=
- =?utf-8?B?TGhYWFR6WFdXS3dCb2lBVmJaTTIvMXlZVk44bk14aTdvRnNDNDJIaytQUWNl?=
- =?utf-8?B?aVNWNVI4L3VybHJoUHVXai8xeHdHQi8rQm1MYUtDMzJzTWZVbEROa2JLVEww?=
- =?utf-8?B?VzBKTDhtQ2NscUxRSVB6OHo0bVU3c1JGRDZGUzExTm52MW1pMWxmbFNpbE9a?=
- =?utf-8?B?ME10NFJDODA4ay9Wb1lLMUNDcUsxT1B0RFkyU1RaTmZyUEdkTy9jRVhjVDcz?=
- =?utf-8?B?L0dUOERHc0JlV2w2aHdENFU5dmdDSDdjS1hCcytTZzdiTXRwMU9XczltdWZS?=
- =?utf-8?B?U003QlVzdGsyS0Fubzkrd1VFbmliKzBPbUdBN3Q4Y0JJc0VvUWV1bmUyYXA5?=
- =?utf-8?B?cE52Yml4RXMyaW41SFNPZmNsVUZjT01aVVgzam4waWpONXhoZFA0bG11Wi8y?=
- =?utf-8?B?dDJkdjEyWmZXLzU5V2NrTUpUbFpFZW1laHFYSS9jWWg5b1ViRU0yNGxkYUl4?=
- =?utf-8?B?SExaTjR2S1ZuNnhURTlhQmVIVmVYcFVZTjVJV3NJQmtDcXhqNXlIalI0ejMz?=
- =?utf-8?B?MmZTTEhMcmxaM2ZZWUVHdHdwNng5K1hsc0lLdGJNR3VpZWRzS3FMamE0bDZk?=
- =?utf-8?B?STU5WGVWYnp1QUxpZnJVU1RrdHdoWmxtMGJDZW5vZnl3VmYwc21GOXZ3QWhx?=
- =?utf-8?B?NW1EcE9telcvamxQVW5nbDZwR29XNXFiL29WNHhUZGJRVytLY2NML3NPRFlo?=
- =?utf-8?B?VFdra0JhQmVpMjdUOTNOWDllNklRYS9vaWFqVngrV3JHRzB6R3l3Q29IS01O?=
- =?utf-8?B?VzV6Rnk5Rk9zQ3VmRmRFNkZJYTh1cG1Pa1pXOWJHMjAxTzdTRDQ2NG81Uysx?=
- =?utf-8?B?UVpDREd6dVkwUFNuQUw3ZXNVWmI3YXRKSk9MRFB1UGpiRm9EWENtS1Y2MTZC?=
- =?utf-8?B?RHVvdDh5VlpLTkc2MUd0SjVRL0hTUERJQldYdkFncUE0TVlBeWZYa2JQOCtK?=
- =?utf-8?B?MHVzSnNiMnFyZWFoZlJJcUE1bHVpa1V3V1UwakNaZmEzejN5VHhnTncyaTlR?=
- =?utf-8?B?R3JvSUZ3clh6aUduemJjOVM3WWlIRStVS0NJcVJ4bkFaWVAwcWRobjUrUkRq?=
- =?utf-8?B?UFZxWThsR2Y1eTUyS21rMGRtTU14NmdHNUVCSWY1NmJhUFY0RWZ5Y0tCdmFm?=
- =?utf-8?B?WGliZ1JzQ2hBdGovTmNoZ3JLSGJCeVQxZHRzbXNRa2lNUG1MZDdZQzBtRkxZ?=
- =?utf-8?B?THZBUElHYmFpdnNPQWNCYStyZEg0ZnRBQ1RaMGdHZnNvVDFMUWxwVWJQSWZv?=
- =?utf-8?B?WkFCZDQvVUs3OUZEQm5Da0sxWGxaSjIyU29EemtDb0dzcVkrbjc5T2dYbjRV?=
- =?utf-8?B?TUI5d2dLZVV1QnhNN0xzV29RZzVnVk9LaFM5SjNiWFJqYmVkMU5CZkV5VFho?=
- =?utf-8?B?ekE9PQ==?=
-X-OriginatorOrg: oppo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d385430-0fec-4eb0-3889-08dc253d2d96
-X-MS-Exchange-CrossTenant-AuthSource: PSAPR02MB4727.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2024 04:53:06.9803 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pxpKjjowoLjxrQkwEqZUcytB0BLK5mvsQ8lh1Fwv2Paa3SJ5prX8Hvpb5md76l2S+ZZoNxow3GaXWLfc3kV9eA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR02MB4655
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: 1. f2fs_scan_devices call init_blkz_info for each zoned
- device, 
- is it reasonable that every device need to have 6 open zones at least? 2.
- we should add all open_zones of every zoned device to sbi->max [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  From: liujinbao1 Currently,
+ IO can only be ignored when GC_URGENT_HIGH
+ is set, and the default algorithm used for GC_URGENT_HIGH is greedy. It gives
+ a way to enable/disable IO aware feature for background gc, so that [...]
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [52.101.128.11 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [52.101.128.11 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [jinbaoliu365[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [jinbaoliu365[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.178 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.128.178 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -164,9 +118,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rWUVN-0002du-Cq
-Subject: Re: [f2fs-dev] [PATCH v5] f2fs: fix zoned block device information
- initialization
+X-Headers-End: 1rWUao-0002tq-3p
+Subject: [f2fs-dev] [PATCH v3] f2fs: sysfs: support gc_io_aware
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -178,92 +131,116 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yongpeng Yang via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yongpeng Yang <yangyongpeng1@oppo.com>
-Cc: hustqwj@hust.edu.cn
+Cc: liujinbao1 <liujinbao1@xiaomi.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-1. f2fs_scan_devices call init_blkz_info for each zoned device, is it 
-reasonable that every device need to have 6 open zones at least?
-2. we should add all open_zones of every zoned device to 
-sbi->max_open_zones, sbi->max_open_zones will be UINT_MAX or accumulated 
-open_zones. Is it more reasonable?
+From: liujinbao1 <liujinbao1@xiaomi.com>
 
+Currently, IO can only be ignored when GC_URGENT_HIGH is set,
+and the default algorithm used for GC_URGENT_HIGH is greedy.
+It gives a way to enable/disable IO aware feature for background
+gc, so that we can tune background gc more precisely. e.g.
+force to disable IO aware and choose more suitable algorithm
+if there are large number of dirty segments.
 
-On 2/4/2024 11:10 AM, Wenjie Qi wrote:
-> If the max open zones of zoned devices are less than
-> the active logs of F2FS, the device may error due to
-> insufficient zone resources when multiple active logs
-> are being written at the same time.
-> 
-> Signed-off-by: Wenjie Qi <qwjhust@gmail.com>
-> ---
->   fs/f2fs/f2fs.h  |  1 +
->   fs/f2fs/super.c | 24 ++++++++++++++++++++++++
->   2 files changed, 25 insertions(+)
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 543898482f8b..161107f2d3bd 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1558,6 +1558,7 @@ struct f2fs_sb_info {
->   
->   #ifdef CONFIG_BLK_DEV_ZONED
->   	unsigned int blocks_per_blkz;		/* F2FS blocks per zone */
-> +	unsigned int max_open_zones;		/* max open zone resources of the zoned device */
->   #endif
->   
->   	/* for node-related operations */
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 1b718bebfaa1..c6709efbc294 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -2388,6 +2388,16 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
->   	if (err)
->   		goto restore_opts;
->   
-> +#ifdef CONFIG_BLK_DEV_ZONED
-> +	if (sbi->max_open_zones < F2FS_OPTION(sbi).active_logs) {
-> +		f2fs_err(sbi,
-> +			"zoned: max open zones %u is too small, need at least %u open zones",
-> +				 sbi->max_open_zones, F2FS_OPTION(sbi).active_logs);
-> +		err = -EINVAL;
-> +		goto restore_opts;
-> +	}
-> +#endif
-> +
->   	/* flush outstanding errors before changing fs state */
->   	flush_work(&sbi->s_error_work);
->   
-> @@ -3930,11 +3940,22 @@ static int init_blkz_info(struct f2fs_sb_info *sbi, int devi)
->   	sector_t nr_sectors = bdev_nr_sectors(bdev);
->   	struct f2fs_report_zones_args rep_zone_arg;
->   	u64 zone_sectors;
-> +	unsigned int max_open_zones;
->   	int ret;
->   
->   	if (!f2fs_sb_has_blkzoned(sbi))
->   		return 0;
->   
-> +	max_open_zones = bdev_max_open_zones(bdev);
-> +	if (max_open_zones && (max_open_zones < sbi->max_open_zones))
-> +		sbi->max_open_zones = max_open_zones;
-> +	if (sbi->max_open_zones < F2FS_OPTION(sbi).active_logs) {
-> +		f2fs_err(sbi,
-> +			"zoned: max open zones %u is too small, need at least %u open zones",
-> +				 sbi->max_open_zones, F2FS_OPTION(sbi).active_logs);
-> +		return -EINVAL;
-> +	}
-> +
->   	zone_sectors = bdev_zone_sectors(bdev);
->   	if (!is_power_of_2(zone_sectors)) {
->   		f2fs_err(sbi, "F2FS does not support non power of 2 zone sizes\n");
-> @@ -4253,6 +4274,9 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
->   
->   	logical_blksize = bdev_logical_block_size(sbi->sb->s_
+Signed-off-by: liujinbao1 <liujinbao1@xiaomi.com>
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++
+ fs/f2fs/gc.c                            | 3 ++-
+ fs/f2fs/gc.h                            | 1 +
+ fs/f2fs/sysfs.c                         | 9 +++++++++
+ 4 files changed, 18 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 36c3cb547901..47f02fa471fe 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -16,6 +16,12 @@ Contact:	"Namjae Jeon" <namjae.jeon@samsung.com>
+ Description:	Controls the default sleep time for gc_thread. Time
+ 		is in milliseconds.
+ 
++What:		/sys/fs/f2fs/<disk>/gc_io_aware
++Date:		January 2024
++Contact:	"Jinbao Liu" <liujinbao1@xiaomi.com>
++Description:	It controls to enable/disable IO aware feature for background gc.
+++		By default, the value is 1 which indicates IO aware is on.
++
+ What:		/sys/fs/f2fs/<disk>/gc_idle
+ Date:		July 2013
+ Contact:	"Namjae Jeon" <namjae.jeon@samsung.com>
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 309da3d0faff..0b75d37acc63 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -109,7 +109,7 @@ static int gc_thread_func(void *data)
+ 			goto next;
+ 		}
+ 
+-		if (!is_idle(sbi, GC_TIME)) {
++		if (gc_th->io_aware && !is_idle(sbi, GC_TIME)) {
+ 			increase_sleep_time(gc_th, &wait_ms);
+ 			f2fs_up_write(&sbi->gc_lock);
+ 			stat_io_skip_bggc_count(sbi);
+@@ -182,6 +182,7 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
+ 	gc_th->min_sleep_time = DEF_GC_THREAD_MIN_SLEEP_TIME;
+ 	gc_th->max_sleep_time = DEF_GC_THREAD_MAX_SLEEP_TIME;
+ 	gc_th->no_gc_sleep_time = DEF_GC_THREAD_NOGC_SLEEP_TIME;
++	gc_th->io_aware = true;
+ 
+ 	gc_th->gc_wake = false;
+ 
+diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
+index 28a00942802c..51d6ad26b76a 100644
+--- a/fs/f2fs/gc.h
++++ b/fs/f2fs/gc.h
+@@ -41,6 +41,7 @@ struct f2fs_gc_kthread {
+ 	unsigned int min_sleep_time;
+ 	unsigned int max_sleep_time;
+ 	unsigned int no_gc_sleep_time;
++	bool io_aware;
+ 
+ 	/* for changing gc mode */
+ 	bool gc_wake;
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 417fae96890f..e8d5667cfddd 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -516,6 +516,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 		return count;
+ 	}
+ 
++	if (!strcmp(a->attr.name, "gc_io_aware")) {
++		if (t > 1)
++			return -EINVAL;
++		*ui = t ? true : false;
++		return count;
++	}
++
+ 	if (!strcmp(a->attr.name, "migration_granularity")) {
+ 		if (t == 0 || t > sbi->segs_per_sec)
+ 			return -EINVAL;
+@@ -906,6 +913,7 @@ GC_THREAD_RW_ATTR(gc_urgent_sleep_time, urgent_sleep_time);
+ GC_THREAD_RW_ATTR(gc_min_sleep_time, min_sleep_time);
+ GC_THREAD_RW_ATTR(gc_max_sleep_time, max_sleep_time);
+ GC_THREAD_RW_ATTR(gc_no_gc_sleep_time, no_gc_sleep_time);
++GC_THREAD_RW_ATTR(gc_io_aware, io_aware);
+ 
+ /* SM_INFO ATTR */
+ SM_INFO_RW_ATTR(reclaim_segments, rec_prefree_segments);
+@@ -1061,6 +1069,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(gc_min_sleep_time),
+ 	ATTR_LIST(gc_max_sleep_time),
+ 	ATTR_LIST(gc_no_gc_sleep_time),
++	ATTR_LIST(gc_io_aware),
+ 	ATTR_LIST(gc_idle),
+ 	ATTR_LIST(gc_urgent),
+ 	ATTR_LIST(reclaim_segments),
+-- 
+2.43.0
+
 
 
 _______________________________________________
