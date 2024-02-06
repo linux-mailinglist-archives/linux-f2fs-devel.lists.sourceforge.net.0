@@ -2,79 +2,130 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 463DD84BB67
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Feb 2024 17:51:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECBA784C018
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Feb 2024 23:33:26 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rXOfU-00009V-OQ;
-	Tue, 06 Feb 2024 16:51:33 +0000
+	id 1rXU0C-0000hM-26;
+	Tue, 06 Feb 2024 22:33:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ap@sieca.int>) id 1rXOfT-00009C-L0
+ (envelope-from <daeho43@gmail.com>) id 1rXU0A-0000hG-9i
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Feb 2024 16:51:32 +0000
+ Tue, 06 Feb 2024 22:33:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-ID:Reply-To:Date:From:To:Subject:
- Content-Description:Content-Transfer-Encoding:MIME-Version:Content-Type:
- Sender:Cc:Content-ID:Resent-Date:Resent-From:Resent-Sender:Resent-To:
- Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ITmAOvy9c9TwyyqoVbD3iOvhZtY5+uG9xcw/PaZGbhE=; b=LKD3Q7zVHm1T78twvFNaWyuZ6o
- 7P9dDsmw/3aXFzV0xE0Lsq/7AZ4+pT7cVl6+dGzJAAWVfaDk/kTJRkZdN+zd1+CeILAmwRZ1K/Ri6
- 1rfe6xpr2SILtCnjw+9lIDFKg4SeK37A1aR1UZN92o0JIbWAhg0E2otriRgGQmqsTMZc=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=00pmZ6kibv+G4s9omY1rvgDUEdmKCy0BpQNbUzvHf2k=; b=aWtT/Kd8AMwaoZ1eq0sWpgZ4nj
+ FV6fE/c0wJIGDOt0BC/Rc0CwyCf2Ce/ztXP9T1mz6T+HGlByh4U4vBhuj+xbMZ4Q9KmxxWtbq1UdD
+ TbE2FW+v0U02+fG96HbebDwZzsBxW92ASCc3/neIG3c0tH9J9O2zw694oKZXFJQj6Ucg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-ID:Reply-To:Date:From:To:Subject:Content-Description:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Cc:Content-ID:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ITmAOvy9c9TwyyqoVbD3iOvhZtY5+uG9xcw/PaZGbhE=; b=HnXYwdPWrc8abdJxY0vvtywDFQ
- EzKENEqMFLtBHyVptwlh7QW4vo5SGDMdFdMAo5v/x8ZQkKohl/zOjkp2M5t4Zslb9DW4qpdd+BeAl
- m/v0gr7Fq+7WC7Bx/6FBrDdwGqidVhTPAG+m+3a8ACvbCPj/jltE6jFp2qkOx3mt8P38=;
-Received: from mail.sieca.int ([168.194.73.35] helo=antispam.sieca.int)
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=00pmZ6kibv+G4s9omY1rvgDUEdmKCy0BpQNbUzvHf2k=; b=d
+ jrAm5T/cGKfMbcQuxAr4nugLs5D1T2YlWrcihn501HDZAMDipSnjY2vOqCDUTpfxP5IUZxybLuajk
+ 2q2og5XNCN9DyMWa5BQw4x4ddhxFx0zGjyEdaMmWVz23i7xzo9AMN8X44IA4pJgpoysgmpwCLSj93
+ wD4p0buQaiUv4euI=;
+Received: from mail-pl1-f182.google.com ([209.85.214.182])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rXOfT-00031A-6g for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Feb 2024 16:51:32 +0000
-Received: from mail.sieca.int ([192.168.32.102])
- by antispam.sieca.int  with ESMTP id 413BWE7F006579-413BWE7S006579
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NO)
- for <linux-f2fs-devel@lists.sourceforge.net>; Sat, 3 Feb 2024 05:32:16 -0600
-Received: from SRVEXG02.sieca.local (172.16.100.151) by SRVEXG02.sieca.local
- (172.16.100.151) with Microsoft SMTP Server (TLS) id 15.1.466.34; Sat, 3 Feb
- 2024 04:38:49 -0600
-Received: from [156.96.112.132] (192.168.32.1) by SRVEXG02.sieca.local
- (192.168.32.102) with Microsoft SMTP Server id 15.1.466.34 via Frontend
- Transport; Sat, 3 Feb 2024 04:38:49 -0600
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rXU05-00041A-Bk for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Feb 2024 22:33:15 +0000
+Received: by mail-pl1-f182.google.com with SMTP id
+ d9443c01a7336-1d93ddd76adso228645ad.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 06 Feb 2024 14:33:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707258784; x=1707863584; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=00pmZ6kibv+G4s9omY1rvgDUEdmKCy0BpQNbUzvHf2k=;
+ b=IKXWyQDT7WBqiTxYPffQ2sRfA3rYn3bhThudniUwEOIVzLaig45Y+skuqji+U+vU6T
+ HASA5J6DG/M/sJYYuMiIByzNK/sGePQZodz51BRLlIjdpgaTeBtIJLRq3BOHqwVUe8v7
+ IZzTpLNoatitAbfkY3rR0+cuexI5HtqO3aVVDEjn4FXB8Hd5Q+J5DLf5WICwUgnusc55
+ wL27xDLxv50rl/x90OZ5s8Sg7chsBBK5wNl72bQML8xa2XllNwCHrfKcm/gsGkiRAJok
+ DWLlxlIAuH9ojTQZQnYJ02EVusf25wMyKKAtHpCrMpY7/ptzmkqVuGEjzpjxHyGztOaF
+ s6Jw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707258784; x=1707863584;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=00pmZ6kibv+G4s9omY1rvgDUEdmKCy0BpQNbUzvHf2k=;
+ b=PSgtLDU6Vn7nrb/9H2m5RiUuqLc1WxRkn9k2sye4zqVlwMP6AQ31U6oIgR2r+It8Iu
+ F5qD8ur53xRNUfv0PTlzMeqN7q/oDlmz/RykzW6yE9OJOGD5EMuHh4FWicqdyYINPS5n
+ r2NZeMYNuGYkMBjv3nJyZX+b0Vf9LwSca5ZecmfGQ6CvtdItRsEeDz69kqNVapgXFBnl
+ za1MjilKpcYZEFkEFtanDdHoz8I3JCgygqo8/u3FEzz9y0HDhEpotXkL8CQRHxHsmLXJ
+ qYN7lN2wOQP3BdSeLAFclbXFGcIBxr94WiGUtCnWmrVUbQTAnx3rozKM9lwwBGTzBTh7
+ y8Lg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUV8V64PZ12KFz16h58QwOVkVrhV2xfVuuXhqh2ecQZ4YAHSwsOaBpOaXCB+BbPyKhOwFvZKSSyMSnpoEoaZyDcfs8i0A382K/fn9NOZr6GcrKPF41aEA==
+X-Gm-Message-State: AOJu0YyBxLjXAcXpD71xbzlVi1eFyHQ/O2yboUA46g+UEJI5w9cCp/6F
+ 7R9IfLgq3qVnnnOPP2KoHpyBpOTkemIiMpxctBj5OaO8gmdTf2x+
+X-Google-Smtp-Source: AGHT+IGgc/izjSH8pQnpq08ELcEm7vCo3Fyc8MzvjLN09UD4s8l+Wk5PMEV/tTi7YFLNc5uHpVBzTA==
+X-Received: by 2002:a17:90a:3189:b0:296:9bc8:c16d with SMTP id
+ j9-20020a17090a318900b002969bc8c16dmr984401pjb.26.1707258784206; 
+ Tue, 06 Feb 2024 14:33:04 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXc6fivOnbrdtPy6PSV7U7G5sDFUskyySDlpl9XItR4RSmzcx7WMPVFXScv6FmQATmvQ9oKEViDUfNAso87u1Z0mEqh74yLewWSU9k55Kdg4ukOvCfb2h7wDftWZXIUJ2u2PHzIwashMdbsNPBlEmCqnlDUUc4acxza8JQoQVtzXxOfsw==
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:0:1000:8411:6e38:9e6f:4818:7d04])
+ by smtp.gmail.com with ESMTPSA id
+ n3-20020a170902dc8300b001d6f091ca04sm32371pld.13.2024.02.06.14.33.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Feb 2024 14:33:03 -0800 (PST)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Tue,  6 Feb 2024 14:32:55 -0800
+Message-ID: <20240206223257.3461359-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.43.0.594.gd9cf4e227d-goog
 MIME-Version: 1.0
-Content-Description: Mail message body
-To: <linux-f2fs-devel@lists.sourceforge.net>
-Date: Sat, 3 Feb 2024 02:39:02 -0800
-Message-ID: <99184f6d-32ba-4208-a2b2-0015147fbb4c@SRVEXG02.sieca.local>
-X-Spam-Score: 5.1 (+++++)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello I hope you are well and high in spirit? Before I
- continue, 
- let me humbly apologize for coming into your space unsolicited. Nonetheless,
- I take solace in the fact that it is with the best intention and [...] 
- Content analysis details:   (5.1 points, 6.0 required)
+ Content preview:  From: Daeho Jeong Make f2fs_gc_range() an extenal function
+ to use it for GC for a range. Signed-off-by: Daeho Jeong Signed-off-by:
+ Jaegeuk
+ Kim --- fs/f2fs/gc.c | 49 ++++++++++++++++++++++++++++ 1 file changed, 28
+ insertions(+), 21 deletions(-) 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.182 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.182 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
- 2.6 ADVANCE_FEE_3_NEW      Appears to be advance fee fraud (Nigerian 419)
-X-Headers-End: 1rXOfT-00031A-6g
-Subject: [f2fs-dev] I AWAIT
+X-Headers-End: 1rXU05-00041A-Bk
+Subject: [f2fs-dev] [PATCH 1/3] f2fs: separate f2fs_gc_range() to use GC for
+ a range
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,30 +137,93 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Anna Pechorin via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: anna.pechorin@yahoo.com
-Cc: Anna Pechorin <ap@sieca.int>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello
+From: Daeho Jeong <daehojeong@google.com>
 
-I hope you are well and high in spirit? Before I continue, let me humbly apologize for coming into your space unsolicited. Nonetheless, I take solace in the fact that it is with the best intention and for our mutual benefit.
+Make f2fs_gc_range() an extenal function to use it for GC for a range.
 
-I chose you among other contacts that I came across in my search for someone who can partner with me in investment venture. It took a great deal of brain storming for me to arrive at this decision owing to my present predicament, which I will explain to you in my follow up email. I hope that my contact with you will be private, confidential and fruitful.
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/gc.c | 49 ++++++++++++++++++++++++++++---------------------
+ 1 file changed, 28 insertions(+), 21 deletions(-)
 
-Presently I am totally indisposed to carry out financial transactions due to restrictions relating to the suspicious death of my husband, Ivan Pechorin who was totally against the Ukraine war. Before long it would be discovered that President Vladimir Putin murdered my husband. My strongest desire is to partner with you in investing my family money domiciled outside the shores of Russia with you as my fund manager. I have no problem investing this money in your country if it offers investment friendly conditions. 
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index a079eebfb080..a46d5053f965 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -1983,10 +1983,34 @@ void f2fs_build_gc_manager(struct f2fs_sb_info *sbi)
+ 	init_atgc_management(sbi);
+ }
+ 
++static int f2fs_gc_range(struct f2fs_sb_info *sbi,
++		unsigned int start_seg, unsigned int end_seg, bool dry_run)
++{
++	unsigned int segno;
++
++	for (segno = start_seg; segno <= end_seg; segno += sbi->segs_per_sec) {
++		struct gc_inode_list gc_list = {
++			.ilist = LIST_HEAD_INIT(gc_list.ilist),
++			.iroot = RADIX_TREE_INIT(gc_list.iroot, GFP_NOFS),
++		};
++
++		do_garbage_collect(sbi, segno, &gc_list, FG_GC, true);
++		put_gc_inode(&gc_list);
++
++		if (!dry_run && get_valid_blocks(sbi, segno, true))
++			return -EAGAIN;
++
++		if (fatal_signal_pending(current))
++			return -ERESTARTSYS;
++	}
++
++	return 0;
++}
++
+ static int free_segment_range(struct f2fs_sb_info *sbi,
+-				unsigned int secs, bool gc_only)
++				unsigned int secs, bool dry_run)
+ {
+-	unsigned int segno, next_inuse, start, end;
++	unsigned int next_inuse, start, end;
+ 	struct cp_control cpc = { CP_RESIZE, 0, 0, 0 };
+ 	int gc_mode, gc_type;
+ 	int err = 0;
+@@ -2012,25 +2036,8 @@ static int free_segment_range(struct f2fs_sb_info *sbi,
+ 		f2fs_allocate_segment_for_resize(sbi, type, start, end);
+ 
+ 	/* do GC to move out valid blocks in the range */
+-	for (segno = start; segno <= end; segno += sbi->segs_per_sec) {
+-		struct gc_inode_list gc_list = {
+-			.ilist = LIST_HEAD_INIT(gc_list.ilist),
+-			.iroot = RADIX_TREE_INIT(gc_list.iroot, GFP_NOFS),
+-		};
+-
+-		do_garbage_collect(sbi, segno, &gc_list, FG_GC, true);
+-		put_gc_inode(&gc_list);
+-
+-		if (!gc_only && get_valid_blocks(sbi, segno, true)) {
+-			err = -EAGAIN;
+-			goto out;
+-		}
+-		if (fatal_signal_pending(current)) {
+-			err = -ERESTARTSYS;
+-			goto out;
+-		}
+-	}
+-	if (gc_only)
++	err = f2fs_gc_range(sbi, start, end, dry_run);
++	if (err || dry_run)
+ 		goto out;
+ 
+ 	stat_inc_cp_call_count(sbi, TOTAL_CALL);
+-- 
+2.43.0.594.gd9cf4e227d-goog
 
-It will be an absolute pleasure, if you would have the wherewithal to handle this project to my satisfaction. Every detail concerning this project would be laid bare to you upon indication of your interest.
-
-Please strictly respond to anna.pechorin@yahoo.com
-
-
-Best regards
-
-Anna Pechorin.
 
 
 _______________________________________________
