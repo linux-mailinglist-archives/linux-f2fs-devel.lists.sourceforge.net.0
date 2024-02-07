@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1273584C22B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Feb 2024 03:02:09 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E20B84C22E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Feb 2024 03:02:13 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rXXGI-000861-JN;
-	Wed, 07 Feb 2024 02:02:06 +0000
+	id 1rXXGN-0008MC-L4;
+	Wed, 07 Feb 2024 02:02:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1rXXGG-00085v-AM
+ (envelope-from <Zhiguo.Niu@unisoc.com>) id 1rXXGL-0008M5-Mf
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Feb 2024 02:02:04 +0000
+ Wed, 07 Feb 2024 02:02:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
  Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FOokTu0s+bVReKHVSYa0qE6gIQjcvqYd+nCqBdDRciw=; b=FFAVreU9+Pt5Btr59f3FFcCKRE
- hSguh2gBDmLpiVtxEnR0WZh2IYoYtI/ty+gMzFdDTHVTbf6WGFIQFdF7qAFaQZp+Py0Dg63948YwT
- rB57mVsLjXM5/6lkwf2JnUvsvSuISIsfIK3mXc4s8P5vqGDicXwt7nDemlfvIqeCFoPw=;
+ bh=NWtkAVeJ9KZLPFoWOjJPFsaKFQ05kqDAUgrmDVzZhFI=; b=RNgPX2QBhTLnXIBrbb8vxrww75
+ Et3mpXROdF+V8unih/EOEJz5a3vj5XYA8+se2HiJihFuVThieV9W4ehAqzxqX/2OQiIcg6WCoE64u
+ aJ/nSj3K+ZwtdjamuVbDXCD3fBovwiAQXHWg+1FejaMYgxl90aGma9d9KvV1SQzyhbwY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
@@ -31,28 +31,28 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FOokTu0s+bVReKHVSYa0qE6gIQjcvqYd+nCqBdDRciw=; b=frMDnNbcodQabiRg2pcplZd943
- m2R1Xb9y4k23+zFSmDSIVLxFbeSjsgaIEKE5cpp3NNVU9MHwWv51SOasqmCFsO7IGnqKCFn/e7o27
- sN/wCGFyPGWOi00sYYlBKUFQii1WiMHxIVzY/uTCKuQNJ9ajGEb1g7GwDkp+qTbgnKs0=;
+ bh=NWtkAVeJ9KZLPFoWOjJPFsaKFQ05kqDAUgrmDVzZhFI=; b=iJ7niZvPSjdk/+kZAaHCocRoZq
+ b9Et5u2bdvcnM2raaZ9fCtuazw2THYkmkMDEVcS71lxuTkRQkzSBZjelTBcJlEdpyIRvxiuZyMAWv
+ KQMpKKkmVeKPQT7VB3PEjTDE5IlaaDGNUbPElFoeY0EdAkLsxbYIYYdVleOrlGmSSybs=;
 Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rXXGE-00072B-Kg for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Feb 2024 02:02:04 +0000
+ id 1rXXGK-00072Y-MP for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Feb 2024 02:02:10 +0000
 Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 41721Vt7075716;
- Wed, 7 Feb 2024 10:01:31 +0800 (+08)
+ by SHSQR01.spreadtrum.com with ESMTP id 41721YXP075835;
+ Wed, 7 Feb 2024 10:01:34 +0800 (+08)
  (envelope-from Zhiguo.Niu@unisoc.com)
 Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4TV3J40K0Dz2K4cHw;
- Wed,  7 Feb 2024 10:01:24 +0800 (CST)
+ by dlp.unisoc.com (SkyGuard) with ESMTPS id 4TV3J65frxz2K4cHw;
+ Wed,  7 Feb 2024 10:01:26 +0800 (CST)
 Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
  BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Wed, 7 Feb 2024 10:01:29 +0800
+ 15.0.1497.23; Wed, 7 Feb 2024 10:01:31 +0800
 From: Zhiguo Niu <zhiguo.niu@unisoc.com>
 To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Wed, 7 Feb 2024 10:01:02 +0800
-Message-ID: <1707271264-5551-3-git-send-email-zhiguo.niu@unisoc.com>
+Date: Wed, 7 Feb 2024 10:01:03 +0800
+Message-ID: <1707271264-5551-4-git-send-email-zhiguo.niu@unisoc.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1707271264-5551-1-git-send-email-zhiguo.niu@unisoc.com>
 References: <1707271264-5551-1-git-send-email-zhiguo.niu@unisoc.com>
@@ -60,25 +60,29 @@ MIME-Version: 1.0
 X-Originating-IP: [10.0.73.87]
 X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
  BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 41721Vt7075716
+X-MAIL: SHSQR01.spreadtrum.com 41721YXP075835
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  When CONFIG_F2FS_CHECK_FS is not enabled, f2fs_bug_on just
- printing warning, get_new_segment may get an out-of-bounds segment when there
- is no free segments. Then a block is allocated from this invali [...] 
+ Content preview:  NULL_SEGNO should also be returned when the blk_addr value
+ is out-of-bound main area even __is_valid_data_blkaddr return true. For
+ example, 
+ a 64MB partition with total 24 main segments has no any free segments left,
+ then a new wrtie request use get_new_segment may get a out-of-bound segno
+ 24 if CONFIG_F2FS_CHECK_FS is not ena [...] 
  Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rXXGE-00072B-Kg
-Subject: [f2fs-dev] [PATCH v2 2/4] f2fs: fix panic issue in update_sit_entry
+X-Headers-End: 1rXXGK-00072Y-MP
+Subject: [f2fs-dev] [PATCH v2 3/4] f2fs: enhance judgment conditions of
+ GET_SEGNO
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,78 +101,82 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When CONFIG_F2FS_CHECK_FS is not enabled, f2fs_bug_on just printing
-warning, get_new_segment may get an out-of-bounds segment when there
-is no free segments. Then a block is allocated from this invalid
-segment, update_sit_entry will access the invalid bitmap address,
-cause system panic. Just as below call stack:
+NULL_SEGNO should also be returned when the blk_addr value is
+out-of-bound main area even __is_valid_data_blkaddr return true.
 
-f2fs_allocate_data_block get a block address with 0x4000 and
-partition size is 64MB
+For example, a 64MB partition with total 24 main segments has no
+any free segments left, then a new wrtie request use get_new_segment
+may get a out-of-bound segno 24 if CONFIG_F2FS_CHECK_FS is not enabled.
+GET_SEGNO should also return NULL_SEGNO in this case rather than treating
+is as valid segment.
 
-[   13.401997] Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
-[   13.402003] Mem abort info:
-[   13.402006]   ESR = 0x96000005
-[   13.402009]   EC = 0x25: DABT (current EL), IL = 32 bits
-[   13.402015]   SET = 0, FnV = 0
-[   13.402018]   EA = 0, S1PTW = 0
-[   13.402021]   FSC = 0x05: level 1 translation fault
-[   13.402025] Data abort info:
-[   13.402027]   ISV = 0, ISS = 0x00000005
-[   13.402030]   CM = 0, WnR = 0
-[   13.402034] user pgtable: 4k pages, 39-bit VAs, pgdp=00000001066ab000
-[   13.402038] [0000000000000000] pgd=0000000000000000, p4d=0000000000000000, pud=0000000000000000
-[   13.402052] Internal error: Oops: 96000005 [#1] PREEMPT SMP
-[   13.489854] pc : update_sit_entry+0x128/0x420
-[   13.490497] lr : f2fs_allocate_data_block+0x6b0/0xc2c
-[   13.491218] sp : ffffffc00e023440
-[   13.501530] Call trace:
-[   13.501930]  update_sit_entry+0x128/0x420
-[   13.502523]  f2fs_allocate_data_block+0x6b0/0xc2c
-[   13.503203]  do_write_page+0xf0/0x1d4
-[   13.503752]  f2fs_outplace_write_data+0x68/0xfc
-[   13.504408]  f2fs_do_write_data_page+0x3a8/0x65c
-[   13.505076]  move_data_page+0x294/0x7a8
-[   13.505647]  gc_data_segment+0x4b8/0x800
-[   13.506229]  do_garbage_collect+0x354/0x674
-[   13.506843]  f2fs_gc+0x280/0x68c
-[   13.507340]  f2fs_balance_fs+0x104/0x144
-[   13.507921]  f2fs_create+0x310/0x3d8
-[   13.508458]  path_openat+0x53c/0xc28
-[   13.508997]  do_filp_open+0xbc/0x16c
-[   13.509535]  do_sys_openat2+0xa0/0x2a0
-
-So sanity check should be add in update_sit_entry.
-Also remove some redundant judgment code.
+Besides, if the caller of GET_SEGNO does not ensure blk_addr pass to
+GET_SEGNO is valid, it should do sanity check about return value of
+GET_SEGNO, avoid causing some unexpected problems later.
 
 Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
 ---
- fs/f2fs/segment.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ fs/f2fs/file.c    | 7 ++++++-
+ fs/f2fs/segment.c | 4 +++-
+ fs/f2fs/segment.h | 3 ++-
+ 3 files changed, 11 insertions(+), 3 deletions(-)
 
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 23cd6a1..2cd3cd9 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2985,9 +2985,14 @@ static int f2fs_ioc_flush_device(struct file *filp, unsigned long arg)
+ 	if (ret)
+ 		return ret;
+ 
+-	if (range.dev_num != 0)
++	if (range.dev_num != 0) {
+ 		dev_start_segno = GET_SEGNO(sbi, FDEV(range.dev_num).start_blk);
++		if (dev_start_segno == NULL_SEGNO)
++			return -EINVAL;
++	}
+ 	dev_end_segno = GET_SEGNO(sbi, FDEV(range.dev_num).end_blk);
++	if (dev_end_segno == NULL_SEGNO)
++		return -EINVAL;
+ 
+ 	start_segno = sm->last_victim[FLUSH_DEVICE];
+ 	if (start_segno < dev_start_segno || start_segno >= dev_end_segno)
 diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index ad6511f..f373ff7 100644
+index f373ff7..6772ad4 100644
 --- a/fs/f2fs/segment.c
 +++ b/fs/f2fs/segment.c
-@@ -2399,6 +2399,8 @@ static void update_sit_entry(struct f2fs_sb_info *sbi, block_t blkaddr, int del)
- #endif
+@@ -2496,7 +2496,7 @@ void f2fs_invalidate_blocks(struct f2fs_sb_info *sbi, block_t addr)
+ 	struct sit_info *sit_i = SIT_I(sbi);
  
- 	segno = GET_SEGNO(sbi, blkaddr);
+ 	f2fs_bug_on(sbi, addr == NULL_ADDR);
+-	if (addr == NEW_ADDR || addr == COMPRESS_ADDR)
++	if (segno == NULL_SEGNO)
+ 		return;
+ 
+ 	f2fs_invalidate_internal_cache(sbi, addr);
+@@ -3708,6 +3708,8 @@ void f2fs_do_replace_block(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 	unsigned char old_alloc_type;
+ 
+ 	segno = GET_SEGNO(sbi, new_blkaddr);
 +	if (segno == NULL_SEGNO)
 +		return;
- 
  	se = get_seg_entry(sbi, segno);
- 	new_vblocks = se->valid_blocks + del;
-@@ -3464,8 +3466,7 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
- 	 * since SSR needs latest valid block information.
- 	 */
- 	update_sit_entry(sbi, *new_blkaddr, 1);
--	if (GET_SEGNO(sbi, old_blkaddr) != NULL_SEGNO)
--		update_sit_entry(sbi, old_blkaddr, -1);
-+	update_sit_entry(sbi, old_blkaddr, -1);
+ 	type = se->type;
  
- 	/*
- 	 * If the current segment is full, flush it out and replace it with a
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index f2847f1..b0ea315 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -96,7 +96,8 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
+ 	(GET_SEGOFF_FROM_SEG0(sbi, blk_addr) & ((sbi)->blocks_per_seg - 1))
+ 
+ #define GET_SEGNO(sbi, blk_addr)					\
+-	((!__is_valid_data_blkaddr(blk_addr)) ?			\
++	((!__is_valid_data_blkaddr(blk_addr) ||			\
++	!f2fs_is_valid_blkaddr(sbi, blk_addr, DATA_GENERIC)) ?	\
+ 	NULL_SEGNO : GET_L2R_SEGNO(FREE_I(sbi),			\
+ 		GET_SEGNO_FROM_SEG0(sbi, blk_addr)))
+ #define BLKS_PER_SEC(sbi)					\
 -- 
 1.9.1
 
