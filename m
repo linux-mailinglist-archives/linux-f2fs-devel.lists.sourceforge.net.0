@@ -2,98 +2,132 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 120D584DA48
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Feb 2024 07:45:36 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DB6184DB1F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Feb 2024 09:12:21 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rXyAA-0005oq-8y;
-	Thu, 08 Feb 2024 06:45:34 +0000
+	id 1rXzW1-0005dN-J8;
+	Thu, 08 Feb 2024 08:12:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <eugen.hristev@collabora.com>) id 1rXyA8-0005ok-67
+ (envelope-from <wubo.oduw@gmail.com>) id 1rXzW0-0005dH-C3
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Feb 2024 06:45:32 +0000
+ Thu, 08 Feb 2024 08:12:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mUH8Ldjjxi8it9eaRNAUP8jiOKNg7HpR2OKWq4ySMwo=; b=T0bDAhI9osD4ohGLRkY4HwXrFM
- iE79VRBjqQN1HXjf1Kzwsmb25esp36G9qnHjXSwEPtVKsUI4Y7bg/poGqeO/I9Y4sJtkdtT1UV7RX
- lTm5PxG9Z5sG3bIRi+soHu8TqgzwmgqJWIzTYiBDqZ0mymzhbyRTgI/TaEuk4shvCSOA=;
+ bh=+EzGcEGSGki041mX/q4WVvvLib1LrKkmNOXMbNSMe9k=; b=A4Xrr9bPwly83l9Ion9o3clGaM
+ 3UYZDjAQ30QqzFJCwK86jaRsAXdMEbFVGJpYoXk5PltL2MkTC5LpeIK0xBY9mk8cbiXRcsFF89nV7
+ 4PTGNV8xW/aLEmeum5m+XXos0R/Fdte+Qm0oGPFilcOD/CgR/1/85A7YondmqCBYw3Wk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mUH8Ldjjxi8it9eaRNAUP8jiOKNg7HpR2OKWq4ySMwo=; b=X4FveVxk6kxJioiaTNfH3QZ6D7
- gpVSncIkNF8fB8rNNcsz7cviZR5th+MjyKcMnTtpJerNrMC/sh+44saS1hLk5qYr9/LYb4VaA8Evx
- dv1oLcsK2ZTDc3QRy/93nqP+buwsFBr7wlVAQaHxzj0vIg7vjT2Y39kOWkuGIdXjPTQs=;
-Received: from madrid.collaboradmins.com ([46.235.227.194])
+ bh=+EzGcEGSGki041mX/q4WVvvLib1LrKkmNOXMbNSMe9k=; b=MQDdHhLM2sLDOSffsgDxG/+d84
+ Xz7KBu9uxp6ZNX1oySodbRYEF6YSsWhxQ8TvyDTF2Q9jMvzRk3HAukoMqTYWHA1ucnkdWle1rSPx9
+ 57cKKq7lZ96D2pNZ9VyJ0LBpRY3mByJxNeViibXH1e00TmEtSunkuTNyh10rvhezPMc0=;
+Received: from mail-pl1-f169.google.com ([209.85.214.169])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rXyA7-0000u8-6l for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Feb 2024 06:45:32 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1707374720;
- bh=dzKZXblpWESFyKaff5lcUS9bN5Ok7BHsB49SOtV2pf4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=YLefnevkX12McBubm6n8iAgtkkqHcuSUHXRwwCg4xv5p+x3/OA76gR/Sy9izDrlwA
- eQCfcsm/M2L1fey/OZ4V3jbXIFyyHuRd5a5rkxfClZ2HKILxe8Ms5j7bblCr/R00BR
- lNnsG4ywbanfvoCLURrmjz+TRTnXvJ9OSOGlo/b5pDVftSrhYxeK4txDnikr5viC7f
- O7vgvvJ5UP1DV+wP+pTtr3LWGZZarcAB6MCUbyS4hiTWA6xHEW6BNGhB/lTdXhJZ+Y
- YtOkANP22Fnv/0fwTvwP+Vuhej0K8oTTuJYjiQvuid6iXi2vdQ+3M6o8LbSJKxAJk6
- lqYeaoM7gfrWQ==
-Received: from eugen-station.. (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id B8564378045F;
- Thu,  8 Feb 2024 06:45:15 +0000 (UTC)
-To: tytso@mit.edu, adilger.kernel@dilger.ca, jaegeuk@kernel.org,
- chao@kernel.org, viro@zeniv.linux.org.uk, brauner@kernel.org,
- linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Date: Thu,  8 Feb 2024 08:43:34 +0200
-Message-Id: <20240208064334.268216-4-eugen.hristev@collabora.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240208064334.268216-1-eugen.hristev@collabora.com>
-References: <20240208064334.268216-1-eugen.hristev@collabora.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rXzVu-0004OQ-Hs for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Feb 2024 08:12:12 +0000
+Received: by mail-pl1-f169.google.com with SMTP id
+ d9443c01a7336-1d746856d85so12138665ad.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 08 Feb 2024 00:12:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707379916; x=1707984716; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+EzGcEGSGki041mX/q4WVvvLib1LrKkmNOXMbNSMe9k=;
+ b=gqWpOX3rXdNBpI0VM35E1lgchLPFtU2wTA8Ek0qL5RPYicQY6D4pE473LBy3eczfgU
+ bCm6iENJUKjqhEtEnfp/dhnmwpb66p14i6mp1gMV3ER1EKGvonmtj9yUuAD+nzxseCMK
+ Y2ObPR+63CZXRoti54HGOAL82LsZWAAUqtzfnJYgdp76oW6AQ/QtG2jMgoAMM4B3gmZj
+ 5wBSD9FlOZUxmPV5tiYvOnOf+kBPAFZ/zuHdvSSN02ZX91YsNTsjxvatMuBlIQ77t/Nj
+ ZQ8F29oh18M3KJ5HmM4FhNSqdNckqpZitE/zCd1TC503diQfamX7AUFufcR2FhDwU5rW
+ E/Lw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707379916; x=1707984716;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+EzGcEGSGki041mX/q4WVvvLib1LrKkmNOXMbNSMe9k=;
+ b=aweCqWiNN++N5OYcefQ+1P2ZJ0IPF6sqwy0bMyhz5lIxKUNHZvE37lVzlpSPyCbdVW
+ 0P4N9pRZVnN36ZQ3GxNCBJ8crX/xlLPEcmE/Q7SFfrKSmisUGE8m7x5Wt9MLx+7Yehqh
+ RJ+FJsKYF//bkbphNj+M25ig74Z5EgQ/0AOOryqv9ElPv4AcVaiC8f34ahJ13p0JEYK8
+ LESf67jFHPEs6UKT+WvgWJbrfV6JsWxvV4G4kPdPpHtfOc9RLvL4kVRdWOZrMHuPFrnG
+ uF7ns9Gs+sLyjjKS5ltSH85/aSK5G7eAlDKAzw1w+YCFrvN1vIp6vhB5sQFY/P8BWAyO
+ weqQ==
+X-Gm-Message-State: AOJu0YwEK83uDZWROkhoHXbCJwDBZjCsd2wXHUBo7jiiFiz2fMpj8RBC
+ f6h/r7mKlnwk0s1x8Iac+TIYPVTm4St6kTDtO1Hjr8oAG1GPJ0ohjKSAdJGND4I=
+X-Google-Smtp-Source: AGHT+IG5rt3u2UGwyrRiwP0jDNepsx1EaHecgtVzojFLKjbioIlru7dTmEcioRvKo7tRDyS8TaYb7A==
+X-Received: by 2002:a17:902:ead1:b0:1d9:6381:a4b3 with SMTP id
+ p17-20020a170902ead100b001d96381a4b3mr6541505pld.36.1707379916398; 
+ Thu, 08 Feb 2024 00:11:56 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVM0Eei7B+s2xu7LIQ5YQ3htmsre/Zi1BiMcqbTuBhg1gCskj5rTO6VTnGufF83HLSNCtEAExblGgFcT8yp/ZF3LR5ZEDEeAYrVsobqzAxjQGDoYqbhVmCV4nyw38q4NiyLY56twVdxK0e2AFytP+cpdv3aFE6RFHGg23dfp3TvQKGM5XgDRhwP
+Received: from [192.168.50.127] (42-98-185-035.static.netvigator.com.
+ [42.98.185.35]) by smtp.gmail.com with ESMTPSA id
+ h4-20020a170902748400b001d8e5a3be8asm2764386pll.259.2024.02.08.00.11.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 08 Feb 2024 00:11:55 -0800 (PST)
+Message-ID: <bab0d763-2907-4412-8075-a7ebb25081c0@gmail.com>
+Date: Thu, 8 Feb 2024 16:11:50 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Chao Yu <chao@kernel.org>, Wu Bo <bo.wu@vivo.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20240205031415.557879-1-bo.wu@vivo.com>
+ <793fd834-fe28-4647-b2cf-0012acb95b43@kernel.org>
+Content-Language: en-US
+From: Wu Bo <wubo.oduw@gmail.com>
+In-Reply-To: <793fd834-fe28-4647-b2cf-0012acb95b43@kernel.org>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Gabriel Krisman Bertazi <krisman@collabora.com> Now
- that ci_match is part of libfs,
- make f2fs reuse it instead of having a different
- implementation. Reviewed-by: Chao Yu <chao@kernel.org> Reviewed-by: Eric
- Biggers <ebiggers@google.com> Signed-off-by: Gabriel Krisman Bertazi
- <krisman@collabora.com>
- Signed-off-by: Eugen Hristev <eugen.hristev@collab [...] 
+ 
+ Content preview:  On 2024/2/5 11:54, Chao Yu wrote: > How about calling f2fs_balance_fs()
+    to double check and make sure > there is > enough free space for following
+    allocation. > >         if (has_not_enough_fre [...] 
+ 
  Content analysis details:   (-0.2 points, 6.0 required)
- pts rule name              description
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.214.169 listed in list.dnswl.org]
+  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+                             [209.85.214.169 listed in wl.mailspike.net]
+  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+                             provider
+                             [wubo.oduw[at]gmail.com]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+                             envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+                             author's domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rXyA7-0000u8-6l
-Subject: [f2fs-dev] [RESEND PATCH v9 3/3] f2fs: Reuse generic_ci_match for
- ci comparisons
+X-Headers-End: 1rXzVu-0004OQ-Hs
+Subject: Re: [f2fs-dev] [PATCH] Revert "f2fs: stop allocating pinned
+ sections if EAGAIN happens"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,112 +139,27 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Eugen Hristev via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: jack@suse.cz, Eric Biggers <ebiggers@google.com>,
- linux-kernel@vger.kernel.org, eugen.hristev@collabora.com,
- linux-fsdevel@vger.kernel.org, kernel@collabora.com,
- Gabriel Krisman Bertazi <krisman@collabora.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Gabriel Krisman Bertazi <krisman@collabora.com>
-
-Now that ci_match is part of libfs, make f2fs reuse it instead of having
-a different implementation.
-
-Reviewed-by: Chao Yu <chao@kernel.org>
-Reviewed-by: Eric Biggers <ebiggers@google.com>
-Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
-Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
----
- fs/f2fs/dir.c | 58 ++++-----------------------------------------------
- 1 file changed, 4 insertions(+), 54 deletions(-)
-
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index f5b65cf36393..7953322b9b9e 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -185,58 +185,6 @@ static struct f2fs_dir_entry *find_in_block(struct inode *dir,
- 	return f2fs_find_target_dentry(&d, fname, max_slots);
- }
- 
--#if IS_ENABLED(CONFIG_UNICODE)
--/*
-- * Test whether a case-insensitive directory entry matches the filename
-- * being searched for.
-- *
-- * Returns 1 for a match, 0 for no match, and -errno on an error.
-- */
--static int f2fs_match_ci_name(const struct inode *dir, const struct qstr *name,
--			       const u8 *de_name, u32 de_name_len)
--{
--	const struct super_block *sb = dir->i_sb;
--	const struct unicode_map *um = sb->s_encoding;
--	struct fscrypt_str decrypted_name = FSTR_INIT(NULL, de_name_len);
--	struct qstr entry = QSTR_INIT(de_name, de_name_len);
--	int res;
--
--	if (IS_ENCRYPTED(dir)) {
--		const struct fscrypt_str encrypted_name =
--			FSTR_INIT((u8 *)de_name, de_name_len);
--
--		if (WARN_ON_ONCE(!fscrypt_has_encryption_key(dir)))
--			return -EINVAL;
--
--		decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
--		if (!decrypted_name.name)
--			return -ENOMEM;
--		res = fscrypt_fname_disk_to_usr(dir, 0, 0, &encrypted_name,
--						&decrypted_name);
--		if (res < 0)
--			goto out;
--		entry.name = decrypted_name.name;
--		entry.len = decrypted_name.len;
--	}
--
--	res = utf8_strncasecmp_folded(um, name, &entry);
--	/*
--	 * In strict mode, ignore invalid names.  In non-strict mode,
--	 * fall back to treating them as opaque byte sequences.
--	 */
--	if (res < 0 && !sb_has_strict_encoding(sb)) {
--		res = name->len == entry.len &&
--				memcmp(name->name, entry.name, name->len) == 0;
--	} else {
--		/* utf8_strncasecmp_folded returns 0 on match */
--		res = (res == 0);
--	}
--out:
--	kfree(decrypted_name.name);
--	return res;
--}
--#endif /* CONFIG_UNICODE */
--
- static inline int f2fs_match_name(const struct inode *dir,
- 				   const struct f2fs_filename *fname,
- 				   const u8 *de_name, u32 de_name_len)
-@@ -245,8 +193,10 @@ static inline int f2fs_match_name(const struct inode *dir,
- 
- #if IS_ENABLED(CONFIG_UNICODE)
- 	if (fname->cf_name.name)
--		return f2fs_match_ci_name(dir, &fname->cf_name,
--					  de_name, de_name_len);
-+		return generic_ci_match(dir, fname->usr_fname,
-+					&fname->cf_name,
-+					de_name, de_name_len);
-+
- #endif
- 	f.usr_fname = fname->usr_fname;
- 	f.disk_name = fname->disk_name;
--- 
-2.34.1
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMjAyNC8yLzUgMTE6NTQsIENoYW8gWXUgd3JvdGU6Cj4gSG93IGFib3V0IGNhbGxpbmcgZjJm
+c19iYWxhbmNlX2ZzKCkgdG8gZG91YmxlIGNoZWNrIGFuZCBtYWtlIHN1cmUgCj4gdGhlcmUgaXMK
+PiBlbm91Z2ggZnJlZSBzcGFjZSBmb3IgZm9sbG93aW5nIGFsbG9jYXRpb24uCj4KPiDCoMKgwqDC
+oMKgwqDCoCBpZiAoaGFzX25vdF9lbm91Z2hfZnJlZV9zZWNzKHNiaSwgMCwKPiDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIEdFVF9TRUNfRlJPTV9TRUcoc2JpLCBvdmVycHJvdmlzaW9uX3NlZ21lbnRz
+KHNiaSkpKSkgewo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZjJmc19kb3duX3dyaXRlKCZzYmkt
+PmdjX2xvY2spOwo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RhdF9pbmNfZ2NfY2FsbF9jb3Vu
+dChzYmksIEZPUkVHUk9VTkQpOwo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZXJyID0gZjJmc19n
+YyhzYmksICZnY19jb250cm9sKTsKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChlcnIgPT0g
+LUVBR0FJTikKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZjJmc19iYWxhbmNlX2Zz
+KHNiaSwgdHJ1ZSk7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoZXJyICYmIGVyciAhPSAt
+RU5PREFUQSkKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBvdXRfZXJyOwo+
+IMKgwqDCoMKgwqDCoMKgIH0KPgo+IFRoYW5rcywKCmYyZnNfYmFsYW5jZV9mcygpIGhlcmUgd2ls
+bCBub3QgY2hhbmdlIHByb2NlZHVyZSBicmFuY2ggYW5kIG1heSBqdXN0IAp0cmlnZ2VyIGFub3Ro
+ZXIgR0MuCgpJJ20gYWZyYWlkIHRoaXMgaXMgYSBiaXQgcmVkdW5kYW50LgoKPgoKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwg
+bWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBz
+Oi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
