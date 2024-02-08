@@ -2,132 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DB6184DB1F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Feb 2024 09:12:21 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88D9784DC6D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Feb 2024 10:09:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rXzW1-0005dN-J8;
-	Thu, 08 Feb 2024 08:12:13 +0000
+	id 1rY0PX-0007L7-Vo;
+	Thu, 08 Feb 2024 09:09:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wubo.oduw@gmail.com>) id 1rXzW0-0005dH-C3
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1rY0PW-0007Ku-OJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Feb 2024 08:12:12 +0000
+ Thu, 08 Feb 2024 09:09:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+EzGcEGSGki041mX/q4WVvvLib1LrKkmNOXMbNSMe9k=; b=A4Xrr9bPwly83l9Ion9o3clGaM
- 3UYZDjAQ30QqzFJCwK86jaRsAXdMEbFVGJpYoXk5PltL2MkTC5LpeIK0xBY9mk8cbiXRcsFF89nV7
- 4PTGNV8xW/aLEmeum5m+XXos0R/Fdte+Qm0oGPFilcOD/CgR/1/85A7YondmqCBYw3Wk=;
+ bh=Q4iiopoLX9Ki+YI0Nyv9r9imiFgWvxHIH6w1gsKa0Dg=; b=Es8XLr/L4PEr8KCGMXRd55PUzQ
+ XJ/VSnNiSL5HIjc6atooUeHkg/uh34N+48w3KResIBn1ja4U+IC2hFwGk+wItMkABj3aDR0YW1P3w
+ al6ImNY4E1ilNPRnSK7heO+DkX8Io+Kol0ydzwtZ2lES8nVIRFsgXLzcEIse5jll7WKg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=+EzGcEGSGki041mX/q4WVvvLib1LrKkmNOXMbNSMe9k=; b=MQDdHhLM2sLDOSffsgDxG/+d84
- Xz7KBu9uxp6ZNX1oySodbRYEF6YSsWhxQ8TvyDTF2Q9jMvzRk3HAukoMqTYWHA1ucnkdWle1rSPx9
- 57cKKq7lZ96D2pNZ9VyJ0LBpRY3mByJxNeViibXH1e00TmEtSunkuTNyh10rvhezPMc0=;
-Received: from mail-pl1-f169.google.com ([209.85.214.169])
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
+ Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Q4iiopoLX9Ki+YI0Nyv9r9imiFgWvxHIH6w1gsKa0Dg=; b=j
+ iBLyHRed21y3qAyfZaiY1pO0yZeY13GgX0JWX5Ih2V617Ss9EgHdWET5xaZUcpxUv6RR9EVY/gZy3
+ Ex+ATYwlWGadzUwkXhDTIVsDzzF8yj06ReidSHtb5T++XUe8ZTUzUOtPV7qDhC61QfHWar8TZS8VI
+ clJ9fcA/zEhNIdk0=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rXzVu-0004OQ-Hs for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Feb 2024 08:12:12 +0000
-Received: by mail-pl1-f169.google.com with SMTP id
- d9443c01a7336-1d746856d85so12138665ad.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rY0PS-0001h5-DI for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Feb 2024 09:09:35 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 3E549CE1B9F
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 08 Feb 2024 00:12:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707379916; x=1707984716; darn=lists.sourceforge.net;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+EzGcEGSGki041mX/q4WVvvLib1LrKkmNOXMbNSMe9k=;
- b=gqWpOX3rXdNBpI0VM35E1lgchLPFtU2wTA8Ek0qL5RPYicQY6D4pE473LBy3eczfgU
- bCm6iENJUKjqhEtEnfp/dhnmwpb66p14i6mp1gMV3ER1EKGvonmtj9yUuAD+nzxseCMK
- Y2ObPR+63CZXRoti54HGOAL82LsZWAAUqtzfnJYgdp76oW6AQ/QtG2jMgoAMM4B3gmZj
- 5wBSD9FlOZUxmPV5tiYvOnOf+kBPAFZ/zuHdvSSN02ZX91YsNTsjxvatMuBlIQ77t/Nj
- ZQ8F29oh18M3KJ5HmM4FhNSqdNckqpZitE/zCd1TC503diQfamX7AUFufcR2FhDwU5rW
- E/Lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707379916; x=1707984716;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+EzGcEGSGki041mX/q4WVvvLib1LrKkmNOXMbNSMe9k=;
- b=aweCqWiNN++N5OYcefQ+1P2ZJ0IPF6sqwy0bMyhz5lIxKUNHZvE37lVzlpSPyCbdVW
- 0P4N9pRZVnN36ZQ3GxNCBJ8crX/xlLPEcmE/Q7SFfrKSmisUGE8m7x5Wt9MLx+7Yehqh
- RJ+FJsKYF//bkbphNj+M25ig74Z5EgQ/0AOOryqv9ElPv4AcVaiC8f34ahJ13p0JEYK8
- LESf67jFHPEs6UKT+WvgWJbrfV6JsWxvV4G4kPdPpHtfOc9RLvL4kVRdWOZrMHuPFrnG
- uF7ns9Gs+sLyjjKS5ltSH85/aSK5G7eAlDKAzw1w+YCFrvN1vIp6vhB5sQFY/P8BWAyO
- weqQ==
-X-Gm-Message-State: AOJu0YwEK83uDZWROkhoHXbCJwDBZjCsd2wXHUBo7jiiFiz2fMpj8RBC
- f6h/r7mKlnwk0s1x8Iac+TIYPVTm4St6kTDtO1Hjr8oAG1GPJ0ohjKSAdJGND4I=
-X-Google-Smtp-Source: AGHT+IG5rt3u2UGwyrRiwP0jDNepsx1EaHecgtVzojFLKjbioIlru7dTmEcioRvKo7tRDyS8TaYb7A==
-X-Received: by 2002:a17:902:ead1:b0:1d9:6381:a4b3 with SMTP id
- p17-20020a170902ead100b001d96381a4b3mr6541505pld.36.1707379916398; 
- Thu, 08 Feb 2024 00:11:56 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVM0Eei7B+s2xu7LIQ5YQ3htmsre/Zi1BiMcqbTuBhg1gCskj5rTO6VTnGufF83HLSNCtEAExblGgFcT8yp/ZF3LR5ZEDEeAYrVsobqzAxjQGDoYqbhVmCV4nyw38q4NiyLY56twVdxK0e2AFytP+cpdv3aFE6RFHGg23dfp3TvQKGM5XgDRhwP
-Received: from [192.168.50.127] (42-98-185-035.static.netvigator.com.
- [42.98.185.35]) by smtp.gmail.com with ESMTPSA id
- h4-20020a170902748400b001d8e5a3be8asm2764386pll.259.2024.02.08.00.11.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Feb 2024 00:11:55 -0800 (PST)
-Message-ID: <bab0d763-2907-4412-8075-a7ebb25081c0@gmail.com>
-Date: Thu, 8 Feb 2024 16:11:50 +0800
+ Thu,  8 Feb 2024 09:09:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 79F09C433F1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  8 Feb 2024 09:09:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1707383358;
+ bh=I+Fjse8lI3pSnqeweUdmGY+nLl1ramc5xUpVCWULdI4=;
+ h=From:To:Subject:Date:From;
+ b=adv+FpC9bHdSdE2S1qllIWgHU2uV6ZKPz74+xdHy9wsrXoi6asxolIstWWkINIjYa
+ TxjRHHSIv8Q6DXHcViCHO6phbSYO5My1T1aqcAgTT0JuApt2nnQgAQbxZtV+9IG9K5
+ wjybwbgl3l6pRd0NxUlAGx86wcKnV3HODLmFStGFzS0qttTbINY5yNUKHiCuXliBuL
+ g4RY2Ek7QPYED2SKgtfb9xfSuIkNxdDxUwfqCsNM9uS7E53IeNQUD/LoEsYJWcZsTT
+ VVzPziU20MdIAMrQU+puEd+DfnW6MVm/ukm333q+TGxzPTlxg9IxbRtLVjH1sCZ0pJ
+ USrePjoS94ZbA==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 5ED9FC4332E; Thu,  8 Feb 2024 09:09:18 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 08 Feb 2024 09:09:18 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: high
+X-Bugzilla-Who: dhya@picorealm.net
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P3
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ cf_regression
+Message-ID: <bug-218471-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Chao Yu <chao@kernel.org>, Wu Bo <bo.wu@vivo.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20240205031415.557879-1-bo.wu@vivo.com>
- <793fd834-fe28-4647-b2cf-0012acb95b43@kernel.org>
-Content-Language: en-US
-From: Wu Bo <wubo.oduw@gmail.com>
-In-Reply-To: <793fd834-fe28-4647-b2cf-0012acb95b43@kernel.org>
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-Spam-Score: -2.7 (--)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 2024/2/5 11:54, Chao Yu wrote: > How about calling f2fs_balance_fs()
-    to double check and make sure > there is > enough free space for following
-    allocation. > >         if (has_not_enough_fre [...] 
- 
- Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=218471 Bug ID:
+ 218471 Summary: F2FS fails to mount rw at boot with "invalid zstd compress
+ level: 6" Product: File System Version: 2.5 Hardware: All OS: Linux Status:
+ NEW Severity: high Priority: P3 Componen [...] 
+ Content analysis details:   (-2.7 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.214.169 listed in list.dnswl.org]
-  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
-                             [209.85.214.169 listed in wl.mailspike.net]
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [wubo.oduw[at]gmail.com]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rXzVu-0004OQ-Hs
-Subject: Re: [f2fs-dev] [PATCH] Revert "f2fs: stop allocating pinned
- sections if EAGAIN happens"
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rY0PS-0001h5-DI
+Subject: [f2fs-dev] [Bug 218471] New: F2FS fails to mount rw at boot with
+ "invalid zstd compress level: 6"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -139,27 +123,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyNC8yLzUgMTE6NTQsIENoYW8gWXUgd3JvdGU6Cj4gSG93IGFib3V0IGNhbGxpbmcgZjJm
-c19iYWxhbmNlX2ZzKCkgdG8gZG91YmxlIGNoZWNrIGFuZCBtYWtlIHN1cmUgCj4gdGhlcmUgaXMK
-PiBlbm91Z2ggZnJlZSBzcGFjZSBmb3IgZm9sbG93aW5nIGFsbG9jYXRpb24uCj4KPiDCoMKgwqDC
-oMKgwqDCoCBpZiAoaGFzX25vdF9lbm91Z2hfZnJlZV9zZWNzKHNiaSwgMCwKPiDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIEdFVF9TRUNfRlJPTV9TRUcoc2JpLCBvdmVycHJvdmlzaW9uX3NlZ21lbnRz
-KHNiaSkpKSkgewo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZjJmc19kb3duX3dyaXRlKCZzYmkt
-PmdjX2xvY2spOwo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RhdF9pbmNfZ2NfY2FsbF9jb3Vu
-dChzYmksIEZPUkVHUk9VTkQpOwo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZXJyID0gZjJmc19n
-YyhzYmksICZnY19jb250cm9sKTsKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChlcnIgPT0g
-LUVBR0FJTikKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZjJmc19iYWxhbmNlX2Zz
-KHNiaSwgdHJ1ZSk7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoZXJyICYmIGVyciAhPSAt
-RU5PREFUQSkKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBvdXRfZXJyOwo+
-IMKgwqDCoMKgwqDCoMKgIH0KPgo+IFRoYW5rcywKCmYyZnNfYmFsYW5jZV9mcygpIGhlcmUgd2ls
-bCBub3QgY2hhbmdlIHByb2NlZHVyZSBicmFuY2ggYW5kIG1heSBqdXN0IAp0cmlnZ2VyIGFub3Ro
-ZXIgR0MuCgpJJ20gYWZyYWlkIHRoaXMgaXMgYSBiaXQgcmVkdW5kYW50LgoKPgoKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwg
-bWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBz
-Oi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+https://bugzilla.kernel.org/show_bug.cgi?id=218471
+
+            Bug ID: 218471
+           Summary: F2FS fails to mount rw at boot with "invalid zstd
+                    compress level: 6"
+           Product: File System
+           Version: 2.5
+          Hardware: All
+                OS: Linux
+            Status: NEW
+          Severity: high
+          Priority: P3
+         Component: f2fs
+          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
+          Reporter: dhya@picorealm.net
+        Regression: No
+
+Using Debian 12.5 "Bookworm" and updated to most-recent stable release kernel
+"linux-image-6.1.0-18-amd64" which changelog says:
+  linux-signed-amd64 (6.1.76+1) bookworm; urgency=medium
+  * Sign kernel from linux 6.1.76-1
+
+When it boots the f2fs filesystem fails to mount read-write and the boot
+journal shows:
+  kernel: F2FS-fs (nvme0n1p6): invalid zstd compress level: 6
+
+This is the fstab entry for the corresponding partition:
+  UUID=XXXXXXXXXXX   /   f2fs   
+compress_algorithm=zstd:6,compress_chksum,atgc,gc_merge,lazytime   0       1
+
+Under the previous kernel the partition correctly mounts and the 'mount'
+command shows:
+  /dev/nvme0n1p6 on / type f2fs
+(rw,relatime,lazytime,background_gc=on,gc_merge,discard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,flush_merge,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,checkpoint_merge,fsync_mode=posix,compress_algorithm=zstd:6,compress_log_size=2,compress_chksum,compress_mode=fs,atgc,discard_unit=block,memory=normal)
+
+I was able to remount the filesystem read-write with:
+  sudo mount -o
+remount,rw,relatime,lazytime,background_gc=on,discard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,checkpoint_merge,fsync_mode=posix,compress_algorithm=lz4,compress_log_size=2,compress_mode=fs,atgc,discard_unit=block,memory=normal
+/dev/nvme0n1p6 /
+
+and from there was able to update /etc/default/grub to boot the previous
+kernel:
+  GRUB_DEFAULT="Advanced options for Debian GNU/Linux>Debian GNU/Linux, with
+Linux 6.1.0-17-amd64"
+
+I believe this bug may have been introduced with this patch: 
+  https://www.spinics.net/lists/stable-commits/msg329957.html
+
+-- 
+You may reply to this email to add a comment.
+
+You are receiving this mail because:
+You are watching the assignee of the bug.
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
