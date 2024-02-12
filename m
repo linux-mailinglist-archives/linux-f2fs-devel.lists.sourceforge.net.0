@@ -2,127 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6BEE85184E
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Feb 2024 16:41:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F69B8518A3
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Feb 2024 17:06:04 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rZYRI-0005do-9z;
-	Mon, 12 Feb 2024 15:41:48 +0000
+	id 1rZYof-00056p-3p;
+	Mon, 12 Feb 2024 16:05:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <axboe@kernel.dk>) id 1rZYRG-0005di-FZ
+ (envelope-from <chao@kernel.org>) id 1rZYoe-00056j-Db
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Feb 2024 15:41:46 +0000
+ Mon, 12 Feb 2024 16:05:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Date:Message-Id:Subject:References:In-Reply-To:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G0mXhrpRS+p0F3dgHMjFx7EMsz8T+uz8plxGpEvyFag=; b=g6+bpYAwq6Oql8BY5bfyJjrqbj
- aaE+jAMgBHYz9aYoEdLZHBItHKMn3jlqWhdc8r/l8WcPBC0Lex39JUISdw79a8M5+uNnmmhOvlEjE
- +4aBbYqoocTiTHuRzEe8L5rpNcjIdhTGWT52Eaj0pulijEseXVKtVR8GHJSQJoX2LIB8=;
+ bh=lLbvBaXmuH8y0UYA8/VHnRL4urXFmONIYwOibg26fGA=; b=b/iJXqQ5NGqTZNIn6Y4qo8rYdo
+ ya4uqplgs683XJ+XnvN6qln37iwIjs4BMkahQI2qdb0HSWfEhHkVbjobEYA+GGatiVX3K/4Z8z1MO
+ IHOgk/ZPnVTs5lW0iCV45R/CCg534PSjySscDmNUf4DcckeVX9uqFE+yr9116lnbIo6Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-Id:
- Subject:References:In-Reply-To:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=G0mXhrpRS+p0F3dgHMjFx7EMsz8T+uz8plxGpEvyFag=; b=SLLi2N8GH+ROFIbI+tISrMFRTA
- jkD0vFocn6944L2C/6bYjHCZhk4aDx1Jn0j1xHWKwIVv4SSnvEQIrf1wW57w9I06Y73aOLMO0Vy9m
- jbc5AdDh1bo1FGcqztOgwNBFtlSxSMICCbLfQ+0nKNzLGjpSXU1Q9cwLekNkNPSTn8Ng=;
-Received: from mail-il1-f182.google.com ([209.85.166.182])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=lLbvBaXmuH8y0UYA8/VHnRL4urXFmONIYwOibg26fGA=; b=Q
+ PtW6BtkUOpB3ZT3YUwxX9FViuZSBo9LiTpQI+HwusANwtLR42Wsxp/IgZUmGp3hj/srgqxc23sDEe
+ Jse3n29t62Z1IaTI5CPbguNvhY74SqH72OofeNJQcf/21MViR6FktKHUmypTNTY/9TChGg35f42ao
+ nvjI6IvID8CqNe/M=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rZYRD-0003VT-3x for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Feb 2024 15:41:46 +0000
-Received: by mail-il1-f182.google.com with SMTP id
- e9e14a558f8ab-363f0a9cf87so5403165ab.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 12 Feb 2024 07:41:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel-dk.20230601.gappssmtp.com; s=20230601; t=1707752498; x=1708357298;
- darn=lists.sourceforge.net; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G0mXhrpRS+p0F3dgHMjFx7EMsz8T+uz8plxGpEvyFag=;
- b=d3eh+87Id10A66WDmMyHHBk5mBoWnhhZsSwlCu3J4nlG7glaGeczmFakxC0lm3gc+I
- JKq5ZxDL5W9Mu6R+IbB6nFRFvyX9xaWcH2RZ8lyh2oN1GktmN8UJrJY0pTPPDKZRA1Gm
- TSGJQ1GkEhRi3D/bTCU8uTfhonoh9s2W+MleIc2VZZwpaB5DzgVQBpAvurVfpcPYezl1
- BQY1ZuxtYJ55vRBT7T9rndoMjspkBqoQb8RTK76HnrfCpRQ3DRybKMLcbgBrntcdFWlA
- gT1xnJgTHnUnZNh6d/rNlJ8siSp9eWPW6KBGDMpEnAjiEc9Q8yXR02UdHBXt4Dc1Leuj
- FwMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707752498; x=1708357298;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=G0mXhrpRS+p0F3dgHMjFx7EMsz8T+uz8plxGpEvyFag=;
- b=cFzPOUkxPJg+n36butruBaLHAI4EDibwGrBfll5xlgA2WgO1VVA3Z7JmuVTRNI3Zsy
- NnXS0PAxYEPhd2fRGobjqcE6T+C5L9Ny9W6PvnIEdalvA9+T4UV2qd3MrLiBbVHZ3GHl
- 602ZMq6SsvNVziuvd6WSyZLdP0j1ezAqL2toj3qhlDeoFiwsJv7EYOQV82lCJBPqJv5N
- y2/aEahVsLHzcikBooLzyBZi1m+9eG10zhTKr9g1zyktcpe8d1V37bk8Y+jIe9jA2hFU
- r9D/OIWztJTdhcYtlTQwPsxs67enpUUHcJChnWN7pRnnO0IS0gFswH5QiErsKFjUHoOb
- 7fdg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUs7h1JMc5yFnzpnyiaZTr1A1BiNDe8ulPMfN1CdlQB7gcvH5q/ae4vHe+CmRxHtbBqhXuj2qJ7PE2n41I0pSSc219hqvWuDshxV1kCtaD2RFWX0VQZdA==
-X-Gm-Message-State: AOJu0YwwuwJ64XMkFsT1Lle8GO1H5Oa4FygRKuPL5FZTAF8doKPRdiMw
- 4gUxgd6cqGkI10tNlFixL2xNpDK1bVAKP5aISDgzVhgTx5uAVEWNLHxLzYzjUKA=
-X-Google-Smtp-Source: AGHT+IEnm3ePbL8fRCn1bW7XxydRwFQeu0nYxrSBLL9n45bkvISdrumwN+YpZk9VT+q4F3sMK0GEkg==
-X-Received: by 2002:a05:6602:1235:b0:7c4:4e3d:36ce with SMTP id
- z21-20020a056602123500b007c44e3d36cemr6321073iot.0.1707752498059; 
- Mon, 12 Feb 2024 07:41:38 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCWnVzGOtmdX7AszrJhRBwMaathZlE7sOIhhmBCZ172Waj/mNt1jVoILjXxsGEIpU2TQcVluLp7cNz/UtFbkni0EEdCOEBsy/xjyiNN/ght5OTEHQGRjxcAlTGlfhtrYbg3hw+98adb+8nL6IVMAAdlU5lTU5EMAAbXgYb1397xO6lrjdnnTP69LWHcEoBVSq9uifg1lQQ9Ljz/8jHJ3IKlWa5Mx1nZXHyLPSF1uiYtAt13KF5itfaSyN9/vDJFXPojaV54onxtzBNZLDWpmBUHVv6moas9okmEo0rIUPz456FSRkUNBLBCQlDnRzZMpsaO/RZkw+TBhPRGJA1oLMS5He4v/Ih2pvl6T9uB988xPxT+TKw7HrN6VyXeP2HkOu+x92KwNyb1cX7tCV7BZ8axVukDGWSvzLjHyfNghSq6t5+2VF2GvOLv8pcXWDwCiqCxajdZ8jKz0iLniEYWXEpLOzgVKGnWA5Kl1UiZvYR8PslSJ7A6DIv7vFdsrJOdn/B9UWWWz2VH4LT+taUOVnIfIddOSfNHB78L9qrXbAmYHMPq7wmT7+C8mZQVNJDyqZwF0UBwGVxnx11Jn9i4gYo/B389dXczXZ8oahlKZYLTMuN0na4Xb4SUUEogYLcOT+oFjiYIu7JWMeiTv
-Received: from [127.0.0.1] ([96.43.243.2]) by smtp.gmail.com with ESMTPSA id
- d62-20020a0285c4000000b0047148f44e27sm1464516jai.2.2024.02.12.07.41.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Feb 2024 07:41:37 -0800 (PST)
-From: Jens Axboe <axboe@kernel.dk>
-To: Damien Le Moal <dlemoal@kernel.org>, 
- Naohiro Aota <naohiro.aota@wdc.com>, Johannes Thumshirn <jth@kernel.org>, 
- Alasdair Kergon <agk@redhat.com>, Mike Snitzer <snitzer@kernel.org>, 
- Mikulas Patocka <mpatocka@redhat.com>, dm-devel@lists.linux.dev, 
- Chris Mason <clm@fb.com>, Josef Bacik <josef@toxicpanda.com>, 
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>, 
- Chao Yu <chao@kernel.org>, Christoph Hellwig <hch@lst.de>, 
- Sagi Grimberg <sagi@grimberg.me>, Chaitanya Kulkarni <kch@nvidia.com>, 
- Johannes Thumshirn <johannes.thumshirn@wdc.com>
-In-Reply-To: <20240128-zonefs_nofs-v3-0-ae3b7c8def61@wdc.com>
-References: <20240128-zonefs_nofs-v3-0-ae3b7c8def61@wdc.com>
-Message-Id: <170775249673.1914864.6863373275533824749.b4-ty@kernel.dk>
-Date: Mon, 12 Feb 2024 08:41:36 -0700
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rZYoc-0004sb-KT for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 12 Feb 2024 16:05:57 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id EE434CE1322;
+ Mon, 12 Feb 2024 16:05:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BBDAC433F1;
+ Mon, 12 Feb 2024 16:05:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1707753947;
+ bh=PVnetzBOH34x39uT5RM+QQRj/93uXMs1sWHwvNANQ6o=;
+ h=From:To:Cc:Subject:Date:From;
+ b=H5xdMN8SecoFM2W/G3J7KfIOpJOnULuNUcgoL/oKLg+ZvqYE8eBBWyT7L0b4BgeEA
+ r6Mg4hTrtKolVsF88U6R0kRFAYAFOIp8pZTkobZGOnTBdxWy/yVkCDJC3AoJ9g/Q+E
+ e4hyC3eaXDryq0JjXntd5Tc4YZjfAUQSP6foWOBRcK/8vj96RXPdlaomFK7fimemr8
+ emUcBjiaJeJgLwJs8dteLhJUMMfqO4QHR02erWvns5fg99wVhGblS77HQGgKCG6Z4+
+ 5KIeItZ6PxyG5kjQUbwpx7kJx3SDjb3tPCATr93wm7q+0j05rJSnibgGlbnsTZtyT9
+ VvRpHhLWmYG+g==
+From: Chao Yu <chao@kernel.org>
+To: stable@vger.kernel.org
+Date: Tue, 13 Feb 2024 00:05:30 +0800
+Message-Id: <20240212160530.1017205-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-X-Mailer: b4 0.12.5-dev-2aabd
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -3.3 (---)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sun, 28 Jan 2024 23:52:15 -0800, Johannes Thumshirn wrote:
- > Fueled by the LSFMM discussion on removing GFP_NOFS initiated by Willy,
- > I've looked into the sole GFP_NOFS allocation in zonefs. As it [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview: From: Sheng Yong <shengyong@oppo.com> commit
+ c571fbb5b59a3741e48014faa92c2f14bc59fe50
+ upstream. This patch adds a helper function to check if compression level
+ is valid. 
+ Content analysis details:   (-3.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.182 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.182 listed in wl.mailspike.net]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rZYRD-0003VT-3x
-Subject: Re: [f2fs-dev] [PATCH v3 0/5] block: remove gfp_mask for
- blkdev_zone_mgmt()
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.8 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rZYoc-0004sb-KT
+Subject: [f2fs-dev] [PATCH 6.1] f2fs: add helper to check compression level
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -134,42 +100,174 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-btrfs@vger.kernel.org
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+From: Sheng Yong <shengyong@oppo.com>
 
-On Sun, 28 Jan 2024 23:52:15 -0800, Johannes Thumshirn wrote:
-> Fueled by the LSFMM discussion on removing GFP_NOFS initiated by Willy,
-> I've looked into the sole GFP_NOFS allocation in zonefs. As it turned out,
-> it is only done for zone management commands and can be removed.
-> 
-> After digging into more callers of blkdev_zone_mgmt() I came to the
-> conclusion that the gfp_mask parameter can be removed alltogether.
-> 
-> [...]
+commit c571fbb5b59a3741e48014faa92c2f14bc59fe50 upstream.
 
-Applied, thanks!
+This patch adds a helper function to check if compression level is
+valid.
 
-[1/5] zonefs: pass GFP_KERNEL to blkdev_zone_mgmt() call
-      commit: 9105ce591b424771b1502ef9836ca7953c3e0af4
-[2/5] dm: dm-zoned: guard blkdev_zone_mgmt with noio scope
-      commit: 218082010aceb40b5495ebc30028ede6e30ee755
-[3/5] btrfs: zoned: call blkdev_zone_mgmt in nofs scope
-      commit: d9d556755f16f6af8d1d8ebac38b83a9263394c5
-[4/5] f2fs: guard blkdev_zone_mgmt with nofs scope
-      commit: 147ec1c60e3273d21ea1f212c6636f231d6d2771
-[5/5] block: remove gfp_flags from blkdev_zone_mgmt
-      commit: 71f4ecdbb42addf82b01b734b122a02707fed521
+Meanwhile, this patch fixes a reported issue [1]:
 
-Best regards,
+The issue is easily reproducible by:
+
+1. dd if=/dev/zero of=test.img count=100 bs=1M
+2. mkfs.f2fs -f -O compression,extra_attr ./test.img
+3. mount -t f2fs -o compress_algorithm=zstd:6,compress_chksum,atgc,gc_merge,lazytime ./test.img /mnt
+
+resulting in
+
+[   60.789982] F2FS-fs (loop0): invalid zstd compress level: 6
+
+A bugzilla report has been submitted in
+https://bugzilla.kernel.org/show_bug.cgi?id=218471
+
+[1] https://lore.kernel.org/lkml/ZcWDOjKEnPDxZ0Or@google.com/T/
+
+The root cause is commit 00e120b5e4b5 ("f2fs: assign default compression
+level") tries to check low boundary of compress level w/ zstd_min_clevel(),
+however, since commit e0c1b49f5b67 ("lib: zstd: Upgrade to latest upstream
+zstd version 1.4.10"), zstd supports negative compress level, it cast type
+for negative value returned from zstd_min_clevel() to unsigned int in below
+check condition, result in repored issue.
+
+	if (level < zstd_min_clevel() || ...
+
+This patch fixes this issue by casting type for level to int before
+comparison.
+
+Fixes: 00e120b5e4b5 ("f2fs: assign default compression level")
+Signed-off-by: Sheng Yong <shengyong@oppo.com>
+Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/compress.c | 27 +++++++++++++++++++++++++++
+ fs/f2fs/f2fs.h     |  2 ++
+ fs/f2fs/super.c    |  4 ++--
+ 3 files changed, 31 insertions(+), 2 deletions(-)
+
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 4cb58e8d699e..4e83cfa1b073 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -55,6 +55,7 @@ struct f2fs_compress_ops {
+ 	int (*init_decompress_ctx)(struct decompress_io_ctx *dic);
+ 	void (*destroy_decompress_ctx)(struct decompress_io_ctx *dic);
+ 	int (*decompress_pages)(struct decompress_io_ctx *dic);
++	bool (*is_level_valid)(int level);
+ };
+ 
+ static unsigned int offset_in_cluster(struct compress_ctx *cc, pgoff_t index)
+@@ -322,11 +323,21 @@ static int lz4_decompress_pages(struct decompress_io_ctx *dic)
+ 	return 0;
+ }
+ 
++static bool lz4_is_level_valid(int lvl)
++{
++#ifdef CONFIG_F2FS_FS_LZ4HC
++	return !lvl || (lvl >= LZ4HC_MIN_CLEVEL && lvl <= LZ4HC_MAX_CLEVEL);
++#else
++	return lvl == 0;
++#endif
++}
++
+ static const struct f2fs_compress_ops f2fs_lz4_ops = {
+ 	.init_compress_ctx	= lz4_init_compress_ctx,
+ 	.destroy_compress_ctx	= lz4_destroy_compress_ctx,
+ 	.compress_pages		= lz4_compress_pages,
+ 	.decompress_pages	= lz4_decompress_pages,
++	.is_level_valid		= lz4_is_level_valid,
+ };
+ #endif
+ 
+@@ -490,6 +501,11 @@ static int zstd_decompress_pages(struct decompress_io_ctx *dic)
+ 	return 0;
+ }
+ 
++static bool zstd_is_level_valid(int lvl)
++{
++	return lvl >= zstd_min_clevel() && lvl <= zstd_max_clevel();
++}
++
+ static const struct f2fs_compress_ops f2fs_zstd_ops = {
+ 	.init_compress_ctx	= zstd_init_compress_ctx,
+ 	.destroy_compress_ctx	= zstd_destroy_compress_ctx,
+@@ -497,6 +513,7 @@ static const struct f2fs_compress_ops f2fs_zstd_ops = {
+ 	.init_decompress_ctx	= zstd_init_decompress_ctx,
+ 	.destroy_decompress_ctx	= zstd_destroy_decompress_ctx,
+ 	.decompress_pages	= zstd_decompress_pages,
++	.is_level_valid		= zstd_is_level_valid,
+ };
+ #endif
+ 
+@@ -555,6 +572,16 @@ bool f2fs_is_compress_backend_ready(struct inode *inode)
+ 	return f2fs_cops[F2FS_I(inode)->i_compress_algorithm];
+ }
+ 
++bool f2fs_is_compress_level_valid(int alg, int lvl)
++{
++	const struct f2fs_compress_ops *cops = f2fs_cops[alg];
++
++	if (cops->is_level_valid)
++		return cops->is_level_valid(lvl);
++
++	return lvl == 0;
++}
++
+ static mempool_t *compress_page_pool;
+ static int num_compress_pages = 512;
+ module_param(num_compress_pages, uint, 0444);
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 5c76ba764b71..e5a9498b89c0 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -4219,6 +4219,7 @@ bool f2fs_compress_write_end(struct inode *inode, void *fsdata,
+ int f2fs_truncate_partial_cluster(struct inode *inode, u64 from, bool lock);
+ void f2fs_compress_write_end_io(struct bio *bio, struct page *page);
+ bool f2fs_is_compress_backend_ready(struct inode *inode);
++bool f2fs_is_compress_level_valid(int alg, int lvl);
+ int f2fs_init_compress_mempool(void);
+ void f2fs_destroy_compress_mempool(void);
+ void f2fs_decompress_cluster(struct decompress_io_ctx *dic, bool in_task);
+@@ -4283,6 +4284,7 @@ static inline bool f2fs_is_compress_backend_ready(struct inode *inode)
+ 	/* not support compression */
+ 	return false;
+ }
++static inline bool f2fs_is_compress_level_valid(int alg, int lvl) { return false; }
+ static inline struct page *f2fs_compress_control_page(struct page *page)
+ {
+ 	WARN_ON_ONCE(1);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 3805162dcef2..0c0d0671febe 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -628,7 +628,7 @@ static int f2fs_set_lz4hc_level(struct f2fs_sb_info *sbi, const char *str)
+ 	if (kstrtouint(str + 1, 10, &level))
+ 		return -EINVAL;
+ 
+-	if (level < LZ4HC_MIN_CLEVEL || level > LZ4HC_MAX_CLEVEL) {
++	if (!f2fs_is_compress_level_valid(COMPRESS_LZ4, level)) {
+ 		f2fs_info(sbi, "invalid lz4hc compress level: %d", level);
+ 		return -EINVAL;
+ 	}
+@@ -666,7 +666,7 @@ static int f2fs_set_zstd_level(struct f2fs_sb_info *sbi, const char *str)
+ 	if (kstrtouint(str + 1, 10, &level))
+ 		return -EINVAL;
+ 
+-	if (level < zstd_min_clevel() || level > zstd_max_clevel()) {
++	if (!f2fs_is_compress_level_valid(COMPRESS_ZSTD, level)) {
+ 		f2fs_info(sbi, "invalid zstd compress level: %d", level);
+ 		return -EINVAL;
+ 	}
 -- 
-Jens Axboe
-
-
+2.40.1
 
 
 
