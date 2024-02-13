@@ -2,97 +2,113 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFF5F85280C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Feb 2024 05:44:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CCB8853256
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Feb 2024 14:53:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rZkex-000715-FG;
-	Tue, 13 Feb 2024 04:44:43 +0000
+	id 1rZtDi-0001sa-TS;
+	Tue, 13 Feb 2024 13:53:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <eugen.hristev@collabora.com>) id 1rZkev-00070y-Ai
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1rZtDh-0001sT-9X
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Feb 2024 04:44:41 +0000
+ Tue, 13 Feb 2024 13:53:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=58R04AHcQRmeOu/wlEbknZFydjDjKXBAo0c+7rh9Gp0=; b=UGzI1R5SnuZSsU0sDQEZBwQL8g
- Tw3qGK8EKQOdR0xupSe9Eu3LM92h9QdTG+XkD/VjbgCWXNy4H81PokYZeZPYINIHlyhEtr6a97dqC
- r1lZHK3/KaHVhOKgDJtwsF/8y49K5CN+dn99sH8p05D/KcQqrLxV2CYznF52kCegNupM=;
+ bh=RbsjpZws52TdwGTvHYKP7fonq6gxj2yVIg8pDnAGRBI=; b=aFyujDOMsKiIvRALByU0iubWgN
+ t7/Ck0CN/zHA+2KXlBpVe98k+11KXHPAYapLN/Z/lbSBmBBbby6UrK1/V+AD6sqyKYYqFUCvShnh6
+ ZlssLLhKHuO59TsDhcao2UrBnnmgHfu2udGyzZ+7/VJkgV/W/+fDliE1pEN6P+nPz4Aw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=58R04AHcQRmeOu/wlEbknZFydjDjKXBAo0c+7rh9Gp0=; b=IEcnfQgMuEtGhx9XHAD02Opss0
- +VjmQdObT7wl6nPgN0jgipPKTRhRZkvpkMcq7etmB5kKM1c0RgNCUijE6XsH4Cl0ARDRreizo0a0t
- MgqRGh9tCB1SLUoYSkz3OehGDnks7UqvknZ+bFEFtzpCukS9oYEllXFGNiNQebfOPFbo=;
-Received: from madrid.collaboradmins.com ([46.235.227.194])
+ bh=RbsjpZws52TdwGTvHYKP7fonq6gxj2yVIg8pDnAGRBI=; b=bZB/ldkzHrzG6iPXcM68rJ4BcO
+ +7V177j9X7V/OZfhgHxa3dScY0Cr0x07CJGwMz5k2LviU3vHb8Lz6LcQhq/P3kEOKypOWJrYiPvz/
+ fU/JI3toi7pgMSS9fy0EanVO0U8nAJY6bqKHryFhyNpLkLOAnSOsy5ZgMRryumB4sdf8=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rZkeq-0007yG-2N for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Feb 2024 04:44:41 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1707799465;
- bh=gnalbakfUEoOVuduLGkajwEg9F3QSmxtaFgbnbfzLCg=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=FO3zXqG/u0XUNzD7u/XRn6hsYQgbLHIKn7VBtzv1ogBR6c1s7hpxxn8ePE0/FcXzy
- svO99ZISnkx8X5b2W7WUDPDd/lrLIm+wMAouCKv2rf2dZIhHrJxqRcS3jlRxUIU/Tq
- L5XEKFCNde8m/eP4QyRKASXFVjF2PdTWXBCkqws4lpLUOff1GFaGHQfYZNXg0j85i8
- cYIgYlM6BEbDBZZWo+CD/pfsj7yeAvWI/DlBJYmwJ+Y7uvLCwDcCgzzSzIPr6RfigF
- S2o12acOiDEHMtfdtnAzZgyHR+lAB/0UutA1i+4CmUKFIXiwjNvspFJUFgJgQLrTQG
- 0ofxPSOZUnOjA==
-Received: from [100.90.194.27] (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id B67EF378203B;
- Tue, 13 Feb 2024 04:44:20 +0000 (UTC)
-Message-ID: <1b7d51df-4995-4a4a-8ec4-f1ea4975e44c@collabora.com>
-Date: Tue, 13 Feb 2024 06:44:16 +0200
+ id 1rZtDf-0006XF-3D for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Feb 2024 13:53:09 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6094A61467
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 13 Feb 2024 13:52:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 0E335C433F1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 13 Feb 2024 13:52:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1707832377;
+ bh=+alED/L09t8c9ylRCLRpogCPrZpqW9r+6ipXLUZJKBE=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=Cwzymak2U8ZuUrAvwNPBosDYHzXAuw/8W76G5uU+IkwmLmKA74rSNUXG6DEVlbll9
+ FfAyS1+VpeeY6QFbP97XNlu63fVvIJHFnFykRnfJKDs5HU/EoleHku4RuoJK5wZjrR
+ UPQnXU9UXcI+k4rb/T6Z/mnaTm/kX82Ou9HdQYPXoZ4DZ4sH+SGYlMsSuBrXbekNTL
+ Kxg/GdbVsXDsBpuO4KXoitapLRJgDrKctP3PiooEP/64Bk0n2y59dML2SADjSqGTqN
+ UOsi0cYpP4+SILilJ3AsbsKw4+gWUhjlelMd/OfuJeYLzo7oPsBt1FXXsdBA2Bzk6k
+ qEiwkzJac+ydg==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id E7C1CC4332E; Tue, 13 Feb 2024 13:52:56 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 13 Feb 2024 13:52:56 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: high
+X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P3
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: cc
+Message-ID: <bug-218471-202145-5G1dVugPci@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-218471-202145@https.bugzilla.kernel.org/>
+References: <bug-218471-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Gabriel Krisman Bertazi <krisman@suse.de>
-References: <20240208064334.268216-1-eugen.hristev@collabora.com>
- <20240208064334.268216-2-eugen.hristev@collabora.com>
- <87ttmivm1i.fsf@mailhost.krisman.be>
- <ff492e0f-3760-430e-968a-8b2adab13f3f@collabora.com>
- <87plx5u2do.fsf@mailhost.krisman.be>
-Content-Language: en-US
-In-Reply-To: <87plx5u2do.fsf@mailhost.krisman.be>
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -5.7 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2/9/24 16:40,
- Gabriel Krisman Bertazi wrote: > Eugen Hristev
- <eugen.hristev@collabora.com> writes: > >> On 2/8/24 20:38, Gabriel Krisman
- Bertazi wrote: > >>> (untested) >> >> I implemented your sug [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=218471 Chao Yu
+ (chao@kernel.org) changed: What |Removed |Added CC| |chao@kernel.org 
+ Content analysis details:   (-5.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rZkeq-0007yG-2N
-Subject: Re: [f2fs-dev] [RESEND PATCH v9 1/3] libfs: Introduce
- case-insensitive string comparison helper
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rZtDf-0006XF-3D
+Subject: [f2fs-dev] [Bug 218471] F2FS fails to mount rw at boot with
+ "invalid zstd compress level: 6"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,57 +120,72 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Eugen Hristev via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: brauner@kernel.org, kernel@collabora.com, tytso@mit.edu,
- Eric Biggers <ebiggers@google.com>, jack@suse.cz, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, adilger.kernel@dilger.ca,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2/9/24 16:40, Gabriel Krisman Bertazi wrote:
-> Eugen Hristev <eugen.hristev@collabora.com> writes:
+https://bugzilla.kernel.org/show_bug.cgi?id=218471
+
+Chao Yu (chao@kernel.org) changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+                 CC|                            |chao@kernel.org
+
+--- Comment #4 from Chao Yu (chao@kernel.org) ---
+(In reply to Dhya Pacifica from comment #0)
+> Using Debian 12.5 "Bookworm" and updated to most-recent stable release
+> kernel "linux-image-6.1.0-18-amd64" which changelog says:
+>   linux-signed-amd64 (6.1.76+1) bookworm; urgency=medium
+>   * Sign kernel from linux 6.1.76-1
 > 
->> On 2/8/24 20:38, Gabriel Krisman Bertazi wrote:
+> When it boots the f2fs filesystem fails to mount read-write and the boot
+> journal shows:
+>   kernel: F2FS-fs (nvme0n1p6): invalid zstd compress level: 6
 > 
->>> (untested)
->>
->> I implemented your suggestion, but any idea about testing ? I ran smoke on xfstests
->> and it appears to be fine, but maybe some specific test case might try the
->> different paths here ?
+> This is the fstab entry for the corresponding partition:
+>   UUID=XXXXXXXXXXX   /   f2fs   
+> compress_algorithm=zstd:6,compress_chksum,atgc,gc_merge,lazytime   0       1
 > 
-> Other than running the fstests quick group for each affected filesystems
-> looking for regressions, the way I'd do it is create a few files and
-> look them up with exact and inexact name matches.  While doing that,
-> observe through bpftrace which functions got called and what they
-> returned.
+> Under the previous kernel the partition correctly mounts and the 'mount'
+> command shows:
+>   /dev/nvme0n1p6 on / type f2fs
+> (rw,relatime,lazytime,background_gc=on,gc_merge,discard,no_heap,user_xattr,
+> inline_xattr,acl,inline_data,inline_dentry,flush_merge,extent_cache,
+> mode=adaptive,active_logs=6,alloc_mode=default,checkpoint_merge,
+> fsync_mode=posix,compress_algorithm=zstd:6,compress_log_size=2,
+> compress_chksum,compress_mode=fs,atgc,discard_unit=block,memory=normal)
 > 
-> Here, since you are testing the uncached lookup, you want to make sure
-> to drop the cached version prior to each lookup.
+> I was able to remount the filesystem read-write with:
+>   sudo mount -o
+> remount,rw,relatime,lazytime,background_gc=on,discard,no_heap,user_xattr,
+> inline_xattr,acl,inline_data,inline_dentry,extent_cache,mode=adaptive,
+> active_logs=6,alloc_mode=default,checkpoint_merge,fsync_mode=posix,
+> compress_algorithm=lz4,compress_log_size=2,compress_mode=fs,atgc,
+> discard_unit=block,memory=normal /dev/nvme0n1p6 /
 > 
+> and from there was able to update /etc/default/grub to boot the previous
+> kernel:
+>   GRUB_DEFAULT="Advanced options for Debian GNU/Linux>Debian GNU/Linux, with
+> Linux 6.1.0-17-amd64"
+> 
+> I believe this bug may have been introduced with this patch: 
+>   https://www.spinics.net/lists/stable-commits/msg329957.html
 
+Can you please try below fixes:
 
-Hello Gabriel,
+[PATCH 6.1] f2fs: add helper to check compression level
+https://lore.kernel.org/linux-f2fs-devel/20240212160530.1017205-1-chao@kernel.org/T/#u
 
-With the changes you suggested, I get these errors now :
+[PATCH] f2fs: compress: fix to check zstd compress level correctly in mount
+option
+https://lore.kernel.org/linux-f2fs-devel/20240212160818.1020903-1-chao@kernel.org/T/#u
 
-[  107.409410] EXT4-fs error (device sda1): ext4_lookup:1816: inode #521217: comm
-ls: 'CUC' linked to parent dir
-ls: cannot access '/media/CI_dir/CUC': Structure needs cleaning
-total 8
-drwxr-xr-x 2 root root 4096 Feb 12 11:51 .
-drwxr-xr-x 4 root root 4096 Feb 12 11:47 ..
--????????? ? ?    ?       ?            ? CUC
+-- 
+You may reply to this email to add a comment.
 
-Do you have any idea about what is wrong ?
-
-Thanks,
-Eugen
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
