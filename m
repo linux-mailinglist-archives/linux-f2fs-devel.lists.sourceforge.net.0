@@ -2,103 +2,126 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74AD1856457
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Feb 2024 14:28:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E033D856E5A
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Feb 2024 21:11:24 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rabn6-0006iM-JS;
-	Thu, 15 Feb 2024 13:28:40 +0000
+	id 1rai4h-0004Zd-EC;
+	Thu, 15 Feb 2024 20:11:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3dxHOZQkbAAg067sittmzixxql.owwotm20mzkwv1mv1.kwu@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1rabn4-0006iF-9W for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 15 Feb 2024 13:28:38 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <daeho43@gmail.com>) id 1rai4e-0004ZW-KM
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 15 Feb 2024 20:11:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YOyAVj8iZnfLPO2Tj57CukZdvRkebiNy5RkDdicIJsY=; b=gBdKwWVWDexjGURupI9IQc4cX/
- 8MtWu/wB1Oyt45bE86ZEz3HDf5S/onOvP3AoV6mYrGKEUZHuVNLc5ztO5Wf/ziQRbgM7yMTs5x6pD
- 8D3h2X5UjFoIryi6tqnu77ZNhqRWfYAWh5JAwbL70WjBtAsOk+iqhJWAivPHUyxX84io=;
+ bh=RYLTFvOYvCyE+kba2OweNWpInmcv7a9h94/NURW8+cU=; b=bAIQJdfiBKqHxf1ZJywr49qrFt
+ TYHCWtqCpPMT6h8vcAPxrkqdDY0UoavnuBFjtqfL6bTmnJRceH7q9+FoPAyqPlW47AzK6dk8UzNVX
+ npeCFbAgZ04FEzjaLjnpvEk9nlpyffQ5n/p+7JT3kxqMEoQCRB25r26pw4T3NRt/+RRU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=YOyAVj8iZnfLPO2Tj57CukZdvRkebiNy5RkDdicIJsY=; b=P
- 1izMpbgxqq6c12jjjeG2DaTE4lQox4ybaU1aRqup10ZWdfd3qgIsfCEvx5myPmQUmyiyNlzGwxdy8
- C0kkGOLNi6aJo3flgNwwzZEmGtZJX6R4mhINtzylpefrL6y5V72RXU6KkYPOtR4YiJOOwn4eL+Hk7
- uxTZVrP5QDmqlAPw=;
-Received: from mail-il1-f200.google.com ([209.85.166.200])
+ List-Owner:List-Archive; bh=RYLTFvOYvCyE+kba2OweNWpInmcv7a9h94/NURW8+cU=; b=m
+ ygDMLkAiilCEjTovAWPn1EyfUYQQHL8/WTY2kQDOAZ821nKrEVsTDFW78wZnYivZ4TL4zjTxymLlt
+ 1ZlyeCdYs7XAI8pBUesq+aq/WyBNP9K5F0CYXLgxtk+6eLJaxD1TnbIHCJQOA5oJ7J3OwJc8VzWWO
+ rak3mSqTAz50u4GY=;
+Received: from mail-pj1-f41.google.com ([209.85.216.41])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rabmz-0003BG-PV for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 15 Feb 2024 13:28:36 +0000
-Received: by mail-il1-f200.google.com with SMTP id
- e9e14a558f8ab-363bedeec4fso7370985ab.1
+ id 1rai4Z-0002Mj-W8 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 15 Feb 2024 20:11:12 +0000
+Received: by mail-pj1-f41.google.com with SMTP id
+ 98e67ed59e1d1-290fb65531eso927906a91.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 15 Feb 2024 05:28:34 -0800 (PST)
+ Thu, 15 Feb 2024 12:11:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708027858; x=1708632658; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RYLTFvOYvCyE+kba2OweNWpInmcv7a9h94/NURW8+cU=;
+ b=Hc+d0bTygVdXeZ8JPmYIts1canlN2Jyqg4gqiazUJ4Hz3wkovKYHm/zfU+7FjdO5D6
+ 0LXA2rf0BymI1U88lBZRV10HG39HN1XV49zGDvdL8jSp56F+MmVPLA4Bu9FKd/C4HO1l
+ vBXVseBzyxgwE+VgLEtvkJP/HEn1JAiQv39HEpWwcW2L52z/oFDVaI5NRGpEPhhNQW3F
+ zp0GoELBTPxtezsgLO/4337Cx9QiqaI6Czt8pUO89LHxR/hppJUqmqQsENAv0EiMgsjx
+ Exf+rv9LWyd4qXC+CvrGQaArQuW7CcNfYN9NM07m1xVI6BPiUg5IjwXaV9I4hlgUXMQO
+ hC0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708003703; x=1708608503;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=YOyAVj8iZnfLPO2Tj57CukZdvRkebiNy5RkDdicIJsY=;
- b=FG6R94B9WCnIPDJnglhXFt3wnSJCW+z3/N7tQS5/DI6Qs/JrStG6eA3EgONeqkGAKW
- 1OishQ7HsxuGA1jz+mbvowqPsghEXw/3HJQEH+0sU6ezNiQ9iZHUEkbJMIE+SA3u2oEA
- LC+HPe7O6vJ91AgcN36vttsxQRlhDkXJDHuIiBl0IV3J9F+GYzihCyOUAEWvnXmC4hU9
- ePa0FkPE5E8d7spuQcf0J4hRi/Mc7x+N0RiXdTdeHOHJf+jlxgFpUYT4z0HgJwyTC8J3
- /QC5SB8gTx4yHQD1R48mxuC6i5HFYV6IaQxXLo7MRumstHetH7WNoUhKJo8ZEirI4BgT
- ip1Q==
+ d=1e100.net; s=20230601; t=1708027858; x=1708632658;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RYLTFvOYvCyE+kba2OweNWpInmcv7a9h94/NURW8+cU=;
+ b=g5nzPoQsV7cjhi7W+jnUvweAO4KibOJ/SSX6V/n/mqEct8/YOedG753a6+Ko7tX7Fb
+ AxtXMv3TVn5j5keDMMc3wcG7ZnHX5finUD/vBbou3kMWcNR5o0EjSP7lYYucAwcT4FIW
+ zA0couInOAwytQIUOkaVvUC0YOdKcjRyl9PJDRVFBj59iFsdPLZkyJumNKbS4vj4sQ0W
+ 82XBaDFMoJorDHAyYvIW5Ik/QQjF3Ot0lKm5Nj6NE9WJr2hmf7Cso1B6v8Ylt4n2jQYt
+ 49fCeqLE7iyPhQvzr9HM99834vdRCFSsEeAvE22xmw3p9CbgWnkXS5cteEsmPc6ryCKx
+ s9nQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUi2NVrNf++ucL6mNXFsy5/Q+SQ/DY3GiNwSb6iXlPkiPI7JsBIgFzstZBidMOQ07CuXhjbW5SxRVDWM1gDwcv5XZ16lmXZRGtEp4f/G547hvc4RDeVDw==
-X-Gm-Message-State: AOJu0YwrsjPcz7YqaT6qrq987gecY307SNx+/MdIhSwsl6bapFluyX/B
- HjAm18kXHQruC2plX+ANk/MWp5syvDCMOWDoaxkkp7Ohrkbcqvi8OJ+pZ4mfAsy3tnVebyP8kjb
- s4TWlVmsFi5Nt1LbfpQRSTmx8h1Yri06R+9IMBcry882Zn6TTEFzr4Ic=
-X-Google-Smtp-Source: AGHT+IEREh9yEaNckCxDoksWb7wYynsZ3OGb1J//mCCzUvWZ9+ATJgsqnYvz2H3RflTF2wLmuskGIv7izrXcerbLZ2tV4ESMUnDv
+ AJvYcCWTzm3MlWDrgkRPGQuL2vyU16+0Bg4EkctCrtKR/+M/nWGSfKs9+IsWUfSejf+EWq3SFJ06EWsi0xEZPYmPqfbfHxw+YK7atenFh638cUSkQTguv9aUAQ==
+X-Gm-Message-State: AOJu0YxhsRxVXLJK7lLvcOavZbge4zI3J3OACQ128PV39DlWD0d46WMn
+ Y5RI8HUSuQgXIHIv7LxQn9tbeUnnaGIsOx8KL5GLad68B1Gh3m5/
+X-Google-Smtp-Source: AGHT+IF/f1VEogR6Uy8rp0FVSURwgFmslmsw9/F+c36lGr0fuaLy2YqoQeWhc9ydqLeBf6xnhL/51Q==
+X-Received: by 2002:a17:90b:2398:b0:299:3174:74df with SMTP id
+ mr24-20020a17090b239800b00299317474dfmr203778pjb.20.1708027857570; 
+ Thu, 15 Feb 2024 12:10:57 -0800 (PST)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:0:1000:8411:3772:8174:2d71:3b60])
+ by smtp.gmail.com with ESMTPSA id
+ st13-20020a17090b1fcd00b00298ca3a93f1sm3842499pjb.4.2024.02.15.12.10.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Feb 2024 12:10:57 -0800 (PST)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Thu, 15 Feb 2024 12:10:53 -0800
+Message-ID: <20240215201053.2364270-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.43.0.687.g38aa6559b0-goog
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:1d1e:b0:363:c25b:75e4 with SMTP id
- i30-20020a056e021d1e00b00363c25b75e4mr143497ila.5.1708003703797; Thu, 15 Feb
- 2024 05:28:23 -0800 (PST)
-Date: Thu, 15 Feb 2024 05:28:23 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <0000000000000a40fa06116b9aeb@google.com>
-From: syzbot <syzbot+list794268f47f12e7406f24@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
- linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello f2fs maintainers/developers, This is a 31-day syzbot
- report for the f2fs subsystem. All related reports/information can be found
- at: https://syzkaller.appspot.com/upstream/s/f2fs During the period, 0 new
- issues were detected and 0 were fixed. In total, 3 issues are still open
- and 35 have been fixed so far. 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview: From: Daeho Jeong Added lseek command to support lseek() for
+ SEEK_DATA and SEEK_HOLE. Signed-off-by: Daeho Jeong ---
+ tools/f2fs_io/f2fs_io.c
+ | 38 ++++++++++++++++++++++++++++++++++++++ 1 file changed, 38 insertions(+)
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.200 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.41 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.200 listed in wl.mailspike.net]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.41 listed in wl.mailspike.net]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rabmz-0003BG-PV
-Subject: [f2fs-dev] [syzbot] Monthly f2fs report (Feb 2024)
+X-Headers-End: 1rai4Z-0002Mj-W8
+Subject: [f2fs-dev] [PATCH] f2fs_io: add lseek command to execute lseek()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,41 +133,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello f2fs maintainers/developers,
+From: Daeho Jeong <daehojeong@google.com>
 
-This is a 31-day syzbot report for the f2fs subsystem.
-All related reports/information can be found at:
-https://syzkaller.appspot.com/upstream/s/f2fs
+Added lseek command to support lseek() for SEEK_DATA and SEEK_HOLE.
 
-During the period, 0 new issues were detected and 0 were fixed.
-In total, 3 issues are still open and 35 have been fixed so far.
-
-Some of the still happening issues:
-
-Ref Crashes Repro Title
-<1> 314     Yes   INFO: task hung in f2fs_balance_fs
-                  https://syzkaller.appspot.com/bug?extid=8b85865808c8908a0d8c
-<2> 17      Yes   kernel BUG in f2fs_evict_inode (2)
-                  https://syzkaller.appspot.com/bug?extid=31e4659a3fe953aec2f4
-<3> 13      Yes   KASAN: slab-use-after-free Read in f2fs_filemap_fault
-                  https://syzkaller.appspot.com/bug?extid=763afad57075d3f862f2
-
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ tools/f2fs_io/f2fs_io.c | 38 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
 
-To disable reminders for individual bugs, reply with the following command:
-#syz set <Ref> no-reminders
+diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+index e7d286a..b5c5b97 100644
+--- a/tools/f2fs_io/f2fs_io.c
++++ b/tools/f2fs_io/f2fs_io.c
+@@ -1630,6 +1630,43 @@ static void do_removexattr(int argc, char **argv, const struct cmd_desc *cmd)
+ 	exit(0);
+ }
+ 
++#define lseek_desc "do lseek for SEEK_DATA or SEEK_HOLE for a file"
++#define lseek_help					\
++"f2fs_io lseek [whence] [offset] [file_path]\n\n"	\
++"Do lseek file data in file_path\n"			\
++"whence can be\n"					\
++"  data     : SEEK_DATA, return the file offset to the next data location from offset\n"\
++"  hole     : SEEK_HOLE, return the file offset to the next hole from offset\n"
++
++static void do_lseek(int argc, char **argv, const struct cmd_desc *cmd)
++{
++	int fd, whence;
++	off_t offset, ret;
++
++	if (argc != 4) {
++		fputs("Excess arguments\n\n", stderr);
++		fputs(cmd->cmd_help, stderr);
++		exit(1);
++	}
++
++	offset = atoi(argv[2]);
++
++	if (!strcmp(argv[1], "data"))
++		whence = SEEK_DATA;
++	else if (!strcmp(argv[1], "hole"))
++		whence = SEEK_HOLE;
++	else
++		die("Wrong whence type");
++
++	fd = xopen(argv[3], O_RDONLY, 0);
++
++	ret = lseek(fd, offset, whence);
++	if (ret < 0)
++		die_errno("lseek failed");
++	printf("returned offset=%ld\n", ret);
++	exit(0);
++}
++
+ #define CMD_HIDDEN 	0x0001
+ #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
+ #define _CMD(name) { #name, do_##name, NULL, NULL, CMD_HIDDEN }
+@@ -1671,6 +1708,7 @@ const struct cmd_desc cmd_list[] = {
+ 	CMD(listxattr),
+ 	CMD(setxattr),
+ 	CMD(removexattr),
++	CMD(lseek),
+ 	{ NULL, NULL, NULL, NULL, 0 }
+ };
+ 
+-- 
+2.43.0.687.g38aa6559b0-goog
 
-To change bug's subsystems, reply with:
-#syz set <Ref> subsystems: new-subsystem
-
-You may send multiple commands in a single email message.
 
 
 _______________________________________________
