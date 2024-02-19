@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 389A7859BF0
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Feb 2024 07:14:56 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C7C9859CA7
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Feb 2024 08:15:13 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rbwvT-0000MX-Cc;
-	Mon, 19 Feb 2024 06:14:52 +0000
+	id 1rbxrg-0005CL-Jl;
+	Mon, 19 Feb 2024 07:15:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rbwvS-0000MR-7u
+ (envelope-from <chao@kernel.org>) id 1rbxre-0005C6-4y
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Feb 2024 06:14:51 +0000
+ Mon, 19 Feb 2024 07:14:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qvRB5p38OQEH2LoF5L6TMcBLBbgBuB0q85Oec+k7R6Q=; b=ijaljWQGMRw8j2tV1V5BHM2mF7
- JSsMxomcYnd+fIvj3PH5RIqdMDQVRTkfSwSJ/0jXuvYaJxpll8z61zM1QJ1o6j/UflDEQFiJWVFnd
- q1Q+qkj+/ojOyBSFHNXP+vZWro8Neo6V3izT7GaX5VKs7pHpd5L/DTXDpawk9zdLC9OE=;
+ bh=4SZZb9e9fycDbqPw/6kvATzFOOh1pEdMdFtaFErQ1s4=; b=dMbKOqW1qxgHu5ZKQq51UK9b0w
+ EJUcrIlM04nslLA9Jhz9iPV0pLHM9ftSUs+HaX2oGRwV3Uby7NXANyLsflp9wg3yW2KVWc9HeRaa4
+ v/4yT4I+mNyyOmqYwModCWsCJlO7xMt5vExajzMYcG2madXo+l8ChzFUJgcvLLJNtcRg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,70 +31,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qvRB5p38OQEH2LoF5L6TMcBLBbgBuB0q85Oec+k7R6Q=; b=B9FpSHJYBeizK6yVnX037Nu4eA
- yh5aHrN5ErB+cbLFFdYZX626lQaOIPequiKKl47SZf8pX/ca+0iuRlGoLgNF+CvcpSoAu4uOoaC9D
- ySft1ffn8/NW8XHG2VzaxFcGenHqGnV5/Behwp8if16z8KgugWzHh0ZJtcAMLJWknovg=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=4SZZb9e9fycDbqPw/6kvATzFOOh1pEdMdFtaFErQ1s4=; b=UrLf4iuTc0uWHt15Y56F9NL5tN
+ 9hwvmEfP5yLCjRukQodVrwf140pZMRP6I/gXIrRrVkQezLzPdU26SmSAeJUoxFHmzxghevgT2zHLu
+ cx4BFc+9vz4Lu0+HNRZNkEswHS0Z/lWuTspxWK6Vb6Lj/THOJxBUbQsRcLHd5ya6/oxo=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rbwvQ-0004qX-QJ for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Feb 2024 06:14:51 +0000
+ id 1rbxrY-00072k-Nt for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Feb 2024 07:14:58 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id B3B8060B71;
- Mon, 19 Feb 2024 06:14:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 462C7C433C7;
- Mon, 19 Feb 2024 06:14:43 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 63C86CE0EE8;
+ Mon, 19 Feb 2024 07:14:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1FF6C433F1;
+ Mon, 19 Feb 2024 07:14:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1708323284;
- bh=PpHx2/pQWPEbWNxb5SrbhLdxytS0axjN+q7c792Cei4=;
+ s=k20201202; t=1708326886;
+ bh=M3JjNo/uMWn6Nt2P8NOEOOPiTVBzyf4oipKYVYsFXnU=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=tqUF+jlObLt4labMX3pUAXVEmblQnpbAuis7TxGfke9RvsbavKbEASHyaHTRr58/w
- kr1pALQlrN2AkLDtFI5SUwfQuCxuUH1kAqvZLZb+ZX+DSqYte9HYBKix2qYsOgeWKC
- 5iOl1CxRGar/dTZo/YgyWrrS3tzFD0FBF2kBR2QvNvGGAzWFEUMM3uTl7iQ41pN5nL
- mYasgPMlzgb5GJgo2kTm0MnZEKqQ/76EvuJl7DDgOCgGH4ANfttVogZj0yKBviV9gF
- yX7EEBpoCRHlaVOU72s0tHAXVrhvcVCFt++Zt5cO+SCwXJmX0ZH06CEeH3danlFOXq
- tjlfM3pC+REqA==
-Message-ID: <74933d5b-449e-4061-9571-799acbc42b43@kernel.org>
-Date: Mon, 19 Feb 2024 14:14:39 +0800
+ b=tt0hTkjPoLnsVkzH+V49hmlsgqXaVg6qqwJ94VXDq/CZVrjII+Ki3UpoVKoq0FRWI
+ klu4NbIdBZS5wXq3IbT4tWxyPOSiyZlwP9MEJCIQDRGLpsjsnjp+dE9+Dcdl8myj40
+ NB85xPJH9lMzldzTE8r5zcWSwPSQg6SnofkX4rmgx6UDpXAulv+kCmMjMPBmb9sCBw
+ k35HovDEtTS2jIRMjfu6JQa2DbmJTQA2k/DSuX37Jn6Ymgd2Jod9K0bZa1pR4sGfud
+ ZCDlAwbE9+CvZNLzWo1koza53KwnmdgiIXPpuPM9HHv/hj6xB9dNwZLcbPs/8QUZHI
+ nvHjlfPp801Jw==
+Message-ID: <e7d269c8-c3f2-4d86-8ac2-653912880119@kernel.org>
+Date: Mon, 19 Feb 2024 15:14:41 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20240207062546.3083870-1-chao@kernel.org>
- <ZcQbRzyvb8MNeOMB@google.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Zhiguo Niu <zhiguo.niu@unisoc.com>
+References: <1707271264-5551-1-git-send-email-zhiguo.niu@unisoc.com>
+ <1707271264-5551-5-git-send-email-zhiguo.niu@unisoc.com>
+ <ZcQdeC4e7rnr9pCr@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZcQbRzyvb8MNeOMB@google.com>
-X-Spam-Score: -5.3 (-----)
+In-Reply-To: <ZcQdeC4e7rnr9pCr@google.com>
+X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/2/8 8:07, Jaegeuk Kim wrote: > On 02/07,
- Chao Yu wrote:
- >> Introduce /sys/fs/f2fs/<disk>/compress_extension to support >>
- adding/deleting
- compress extension via sysfs interface, in >> comparis [...] 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  On 2024/2/8 8:16, Jaegeuk Kim wrote: > On 02/07, Zhiguo Niu
+ wrote: >> There is low probability that an out-of-bounds segment will be
+ got >> on a small-capacity device. In order to prevent subsequent w [...] 
+ Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rbwvQ-0004qX-QJ
-Subject: Re: [f2fs-dev] [PATCH] f2fs: support compress extension update via
- sysfs interface
+X-Headers-End: 1rbxrY-00072k-Nt
+Subject: Re: [f2fs-dev] [PATCH v2 4/4] f2fs: stop checkpoint when get a
+ out-of-bounds segment
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,333 +105,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: hongyu.jin@unisoc.com, ke.wang@unisoc.com, niuzhiguo84@gmail.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/2/8 8:07, Jaegeuk Kim wrote:
-> On 02/07, Chao Yu wrote:
->> Introduce /sys/fs/f2fs/<disk>/compress_extension to support
->> adding/deleting compress extension via sysfs interface, in
->> comparison to mount option, it's more easy to use and less
->> authority issue for applications.
+On 2024/2/8 8:16, Jaegeuk Kim wrote:
+> On 02/07, Zhiguo Niu wrote:
+>> There is low probability that an out-of-bounds segment will be got
+>> on a small-capacity device. In order to prevent subsequent write requests
+>> allocating block address from this invalid segment, which may cause
+>> unexpected issue, stop checkpoint should be performed.
 >>
->> Usage:
->> - Query: cat /sys/fs/f2fs/<disk>/compress_extension
->> - Add: echo '[c|n]extension' > /sys/fs/f2fs/<disk>/compress_extension
->> - Del: echo '[c|n]!extension' > /sys/fs/f2fs/<disk>/compress_extension
->> - [c] means add/del compress extension
->> - [n] means add/del nocompress extension
->>
->> Signed-off-by: Sheng Yong <shengyong@oppo.com>
->> Signed-off-by: Chao Yu <chao@kernel.org>
->> ---
->>   Documentation/ABI/testing/sysfs-fs-f2fs | 10 ++++
->>   Documentation/filesystems/f2fs.rst      |  6 ++-
->>   fs/f2fs/compress.c                      | 61 +++++++++++++++++++++++
->>   fs/f2fs/f2fs.h                          |  4 +-
->>   fs/f2fs/sysfs.c                         | 65 +++++++++++++++++++++++--
->>   5 files changed, 139 insertions(+), 7 deletions(-)
->>
->> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
->> index 48c135e24eb5..1f2cc0913e45 100644
->> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
->> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
->> @@ -762,3 +762,13 @@ Date:		November 2023
->>   Contact:	"Chao Yu" <chao@kernel.org>
->>   Description:	It controls to enable/disable IO aware feature for background discard.
->>   		By default, the value is 1 which indicates IO aware is on.
->> +
->> +What:		/sys/fs/f2fs/<disk>/compress_extension
->> +Date:		October 2023
->> +Contact:	"Chao Yu" <chao@kernel.org>
->> +Description:	Used to control configure [|no]compress_extension list:
->> +		- Query: cat /sys/fs/f2fs/<disk>/compress_extension
->> +		- Add: echo '[c|n]extension' > /sys/fs/f2fs/<disk>/compress_extension
->> +		- Del: echo '[c|n]!extension' > /sys/fs/f2fs/<disk>/compress_extension
->> +		- [c] means add/del compress extension
->> +		- [n] means add/del nocompress extension
->> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
->> index 32cbfa864f38..c82a8fd7316b 100644
->> --- a/Documentation/filesystems/f2fs.rst
->> +++ b/Documentation/filesystems/f2fs.rst
->> @@ -821,17 +821,19 @@ Compression implementation
->>     all logical blocks in cluster contain valid data and compress ratio of
->>     cluster data is lower than specified threshold.
->>   
->> -- To enable compression on regular inode, there are four ways:
->> +- To enable compression on regular inode, there are five ways:
->>   
->>     * chattr +c file
->>     * chattr +c dir; touch dir/file
->>     * mount w/ -o compress_extension=ext; touch file.ext
->>     * mount w/ -o compress_extension=*; touch any_file
->> +  * echo '[c]ext' > /sys/fs/f2fs/<disk>/compress_extension; touch file.ext
->>   
->> -- To disable compression on regular inode, there are two ways:
->> +- To disable compression on regular inode, there are three ways:
->>   
->>     * chattr -c file
->>     * mount w/ -o nocompress_extension=ext; touch file.ext
->> +  * echo '[n]ext' > /sys/fs/f2fs/<disk>/compress_extension; touch file.ext
->>   
->>   - Priority in between FS_COMPR_FL, FS_NOCOMP_FS, extensions:
->>   
->> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
->> index 3dc488ce882b..a5257882c772 100644
->> --- a/fs/f2fs/compress.c
->> +++ b/fs/f2fs/compress.c
->> @@ -20,6 +20,67 @@
->>   #include "segment.h"
->>   #include <trace/events/f2fs.h>
->>   
->> +static int is_compress_extension_exist(struct f2fs_sb_info *sbi,
->> +				unsigned char (*ext)[F2FS_EXTENSION_LEN],
->> +				int ext_cnt, unsigned char *new_ext)
->> +{
->> +	int i;
->> +
->> +	for (i = 0; i < ext_cnt; i++) {
->> +		if (!strcasecmp(new_ext, ext[i]))
->> +			return i;
->> +	}
->> +	return -1;
->> +}
->> +
->> +int f2fs_update_compress_extension(struct f2fs_sb_info *sbi,
->> +				unsigned char *new_ext, bool is_ext, bool set)
->> +{
->> +	unsigned char (*ext)[F2FS_EXTENSION_LEN];
->> +	unsigned char *ext_cnt;
->> +
->> +	if (is_ext) {
->> +		ext = F2FS_OPTION(sbi).extensions;
->> +		ext_cnt = &F2FS_OPTION(sbi).compress_ext_cnt;
->> +	} else {
->> +		ext = F2FS_OPTION(sbi).noextensions;
->> +		ext_cnt = &F2FS_OPTION(sbi).nocompress_ext_cnt;
->> +	}
->> +
->> +	if (set) {
->> +		if (*ext_cnt >= COMPRESS_EXT_NUM)
->> +			return -EINVAL;
->> +
->> +		if (is_compress_extension_exist(sbi,
->> +					F2FS_OPTION(sbi).extensions,
->> +					F2FS_OPTION(sbi).compress_ext_cnt,
->> +					new_ext) >= 0)
->> +			return -EEXIST;
->> +
->> +		if (is_compress_extension_exist(sbi,
->> +					F2FS_OPTION(sbi).noextensions,
->> +					F2FS_OPTION(sbi).nocompress_ext_cnt,
->> +					new_ext) >= 0)
->> +			return -EEXIST;
->> +
->> +		strcpy(ext[*ext_cnt], new_ext);
->> +		(*ext_cnt)++;
->> +	} else {
->> +		int pos = is_compress_extension_exist(sbi, ext,
->> +						*ext_cnt, new_ext);
->> +		if (pos < 0)
->> +			return -ENOENT;
->> +
->> +		if (pos < *ext_cnt - 1)
->> +			memmove(ext + pos, ext + pos + 1,
->> +				F2FS_EXTENSION_LEN * (*ext_cnt - pos - 1));
->> +		memset(ext + *ext_cnt - 1, 0, F2FS_EXTENSION_LEN);
->> +		(*ext_cnt)--;
->> +	}
->> +
->> +	return 0;
->> +}
->> +
->>   static struct kmem_cache *cic_entry_slab;
->>   static struct kmem_cache *dic_entry_slab;
->>   
->> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->> index c5e7460d1a0a..d44e2c43d8ab 100644
->> --- a/fs/f2fs/f2fs.h
->> +++ b/fs/f2fs/f2fs.h
->> @@ -186,7 +186,7 @@ struct f2fs_mount_info {
->>   	unsigned char compress_level;		/* compress level */
->>   	bool compress_chksum;			/* compressed data chksum */
->>   	unsigned char compress_ext_cnt;		/* extension count */
->> -	unsigned char nocompress_ext_cnt;		/* nocompress extension count */
->> +	unsigned char nocompress_ext_cnt;	/* nocompress extension count */
->>   	int compress_mode;			/* compression mode */
->>   	unsigned char extensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN];	/* extensions */
->>   	unsigned char noextensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN]; /* extensions */
->> @@ -4273,6 +4273,8 @@ static inline bool f2fs_post_read_required(struct inode *inode)
->>    * compress.c
->>    */
->>   #ifdef CONFIG_F2FS_FS_COMPRESSION
->> +int f2fs_update_compress_extension(struct f2fs_sb_info *sbi,
->> +				unsigned char *new_ext, bool is_ext, bool set);
->>   bool f2fs_is_compressed_page(struct page *page);
->>   struct page *f2fs_compress_control_page(struct page *page);
->>   int f2fs_prepare_compress_overwrite(struct inode *inode,
->> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
->> index a7ec55c7bb20..a8f05a02e202 100644
->> --- a/fs/f2fs/sysfs.c
->> +++ b/fs/f2fs/sysfs.c
->> @@ -39,6 +39,7 @@ enum {
->>   	RESERVED_BLOCKS,	/* struct f2fs_sb_info */
->>   	CPRC_INFO,	/* struct ckpt_req_control */
->>   	ATGC_INFO,	/* struct atgc_management */
->> +	MOUNT_INFO,	/* struct f2fs_mount_info */
->>   };
->>   
->>   static const char *gc_mode_names[MAX_GC_MODE] = {
->> @@ -89,6 +90,8 @@ static unsigned char *__struct_ptr(struct f2fs_sb_info *sbi, int struct_type)
->>   		return (unsigned char *)&sbi->cprc_info;
->>   	else if (struct_type == ATGC_INFO)
->>   		return (unsigned char *)&sbi->am;
->> +	else if (struct_type == MOUNT_INFO)
->> +		return (unsigned char *)&F2FS_OPTION(sbi);
->>   	return NULL;
->>   }
->>   
->> @@ -358,6 +361,25 @@ static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
->>   
->>   	if (!strcmp(a->attr.name, "compr_new_inode"))
->>   		return sysfs_emit(buf, "%u\n", sbi->compr_new_inode);
->> +
->> +	if (!strcmp(a->attr.name, "compress_extension")) {
->> +		int len = 0, i;
->> +
->> +		f2fs_down_read(&sbi->sb_lock);
->> +		len += scnprintf(buf + len, PAGE_SIZE - len,
->> +						"compress extension:\n");
->> +		for (i = 0; i < F2FS_OPTION(sbi).compress_ext_cnt; i++)
->> +			len += scnprintf(buf + len, PAGE_SIZE - len, "%s\n",
->> +					F2FS_OPTION(sbi).extensions[i]);
->> +
->> +		len += scnprintf(buf + len, PAGE_SIZE - len,
->> +						"nocompress extension:\n");
->> +		for (i = 0; i < F2FS_OPTION(sbi).nocompress_ext_cnt; i++)
->> +			len += scnprintf(buf + len, PAGE_SIZE - len, "%s\n",
->> +					F2FS_OPTION(sbi).noextensions[i]);
+>> Also introduce a new stop cp reason:  STOP_CP_REASON_OUTOF_RAGNE.
 > 
-> I don't think this is acceptable in sysfs.
+> OUT_OF_RANGE?
 
-It looks block layer output similar string:
-
-cat /sys/block/<dev>/queue/scheduler
-mq-deadline kyber [bfq] none
-
-Or, can we add extension entries into /sys/fs/f2fs/<dev>/compress_extensions/
-directory? like feature entries in /sys/fs/f2fs/<dev>/feature_list/.
-
-e.g.
-
-ls /sys/fs/f2fs/<dev>/compress_extensions/
-so dex
-
-Show enable/disable to indicate current extension is in
-compress_extension/nocompress_extension array.
-
-cat /sys/fs/f2fs/<dev>/compress_extensions/so
-enable
-
-cat /sys/fs/f2fs/<dev>/compress_extensions/dex
-disable
+Maybe STOP_CP_REASON_NO_SEGMENT will be more explicit?
 
 Thanks,
 
 > 
->> +		f2fs_up_read(&sbi->sb_lock);
->> +		return len;
->> +	}
->>   #endif
->>   
->>   	if (!strcmp(a->attr.name, "gc_segment_mode"))
->> @@ -446,6 +468,35 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
->>   		return ret ? ret : count;
->>   	}
->>   
->> +#ifdef CONFIG_F2FS_FS_COMPRESSION
->> +	if (!strcmp(a->attr.name, "compress_extension")) {
->> +		char *name = strim((char *)buf);
->> +		bool set = true, cmpr;
->> +
->> +		if (!strncmp(name, "[c]", 3))
->> +			cmpr = true;
->> +		else if (!strncmp(name, "[n]", 3))
->> +			cmpr = false;
->> +		else
->> +			return -EINVAL;
->> +
->> +		name += 3;
->> +
->> +		if (*name == '!') {
->> +			name++;
->> +			set = false;
+>>
+>> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+>> ---
+>>   fs/f2fs/segment.c       | 12 ++++++++++--
+>>   include/linux/f2fs_fs.h |  1 +
+>>   2 files changed, 11 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+>> index 6772ad4..6fe2baf 100644
+>> --- a/fs/f2fs/segment.c
+>> +++ b/fs/f2fs/segment.c
+>> @@ -2666,7 +2666,11 @@ static void get_new_segment(struct f2fs_sb_info *sbi,
+>>   		if (dir == ALLOC_RIGHT) {
+>>   			secno = find_first_zero_bit(free_i->free_secmap,
+>>   							MAIN_SECS(sbi));
+>> -			f2fs_bug_on(sbi, secno >= MAIN_SECS(sbi));
+>> +			if (secno >= MAIN_SECS(sbi)) {
+>> +				f2fs_stop_checkpoint(sbi, false,
+>> +						STOP_CP_REASON_OUTOF_RAGNE);
+>> +				f2fs_bug_on(sbi, 1);
+>> +			}
+>>   		} else {
+>>   			go_left = 1;
+>>   			left_start = hint - 1;
+>> @@ -2682,7 +2686,11 @@ static void get_new_segment(struct f2fs_sb_info *sbi,
+>>   		}
+>>   		left_start = find_first_zero_bit(free_i->free_secmap,
+>>   							MAIN_SECS(sbi));
+>> -		f2fs_bug_on(sbi, left_start >= MAIN_SECS(sbi));
+>> +		if (left_start >= MAIN_SECS(sbi)) {
+>> +			f2fs_stop_checkpoint(sbi, false,
+>> +					STOP_CP_REASON_OUTOF_RAGNE);
+>> +			f2fs_bug_on(sbi, 1);
 >> +		}
->> +
->> +		if (!strlen(name) || strlen(name) >= F2FS_EXTENSION_LEN)
->> +			return -EINVAL;
->> +
->> +		f2fs_down_write(&sbi->sb_lock);
->> +		ret = f2fs_update_compress_extension(sbi, name, cmpr, set);
->> +		f2fs_up_write(&sbi->sb_lock);
->> +		return ret ? ret : count;
->> +	}
->> +#endif
->> +
->>   	if (!strcmp(a->attr.name, "ckpt_thread_ioprio")) {
->>   		const char *name = strim((char *)buf);
->>   		struct ckpt_req_control *cprc = &sbi->cprc_info;
->> @@ -785,15 +836,16 @@ static ssize_t f2fs_sbi_store(struct f2fs_attr *a,
->>   			const char *buf, size_t count)
->>   {
->>   	ssize_t ret;
->> -	bool gc_entry = (!strcmp(a->attr.name, "gc_urgent") ||
->> -					a->struct_type == GC_THREAD);
->> +	bool need_lock = (!strcmp(a->attr.name, "gc_urgent") ||
->> +					a->struct_type == GC_THREAD ||
->> +					a->struct_type == MOUNT_INFO);
->>   
->> -	if (gc_entry) {
->> +	if (need_lock) {
->>   		if (!down_read_trylock(&sbi->sb->s_umount))
->>   			return -EAGAIN;
+>>   		break;
 >>   	}
->>   	ret = __sbi_store(a, sbi, buf, count);
->> -	if (gc_entry)
->> +	if (need_lock)
->>   		up_read(&sbi->sb->s_umount);
+>>   	secno = left_start;
+>> diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
+>> index 053137a0..72c6782 100644
+>> --- a/include/linux/f2fs_fs.h
+>> +++ b/include/linux/f2fs_fs.h
+>> @@ -81,6 +81,7 @@ enum stop_cp_reason {
+>>   	STOP_CP_REASON_CORRUPTED_SUMMARY,
+>>   	STOP_CP_REASON_UPDATE_INODE,
+>>   	STOP_CP_REASON_FLUSH_FAIL,
+>> +	STOP_CP_REASON_OUTOF_RAGNE,
+>>   	STOP_CP_REASON_MAX,
+>>   };
 >>   
->>   	return ret;
->> @@ -942,6 +994,9 @@ static struct f2fs_attr f2fs_attr_##name = __ATTR(name, 0444, name##_show, NULL)
->>   #define ATGC_INFO_RW_ATTR(name, elname)				\
->>   	F2FS_RW_ATTR(ATGC_INFO, atgc_management, name, elname)
->>   
->> +#define MOUNT_INFO_RW_ATTR(name, elname)			\
->> +	F2FS_RW_ATTR(MOUNT_INFO, f2fs_mount_info, name, elname)
->> +
->>   /* GC_THREAD ATTR */
->>   GC_THREAD_RW_ATTR(gc_urgent_sleep_time, urgent_sleep_time);
->>   GC_THREAD_RW_ATTR(gc_min_sleep_time, min_sleep_time);
->> @@ -1008,6 +1063,7 @@ F2FS_SBI_GENERAL_RW_ATTR(compr_saved_block);
->>   F2FS_SBI_GENERAL_RW_ATTR(compr_new_inode);
->>   F2FS_SBI_GENERAL_RW_ATTR(compress_percent);
->>   F2FS_SBI_GENERAL_RW_ATTR(compress_watermark);
->> +MOUNT_INFO_RW_ATTR(compress_extension, extensions);
->>   #endif
->>   /* atomic write */
->>   F2FS_SBI_GENERAL_RO_ATTR(current_atomic_write);
->> @@ -1181,6 +1237,7 @@ static struct attribute *f2fs_attrs[] = {
->>   	ATTR_LIST(compr_new_inode),
->>   	ATTR_LIST(compress_percent),
->>   	ATTR_LIST(compress_watermark),
->> +	ATTR_LIST(compress_extension),
->>   #endif
->>   	/* For ATGC */
->>   	ATTR_LIST(atgc_candidate_ratio),
 >> -- 
->> 2.40.1
+>> 1.9.1
 
 
 _______________________________________________
