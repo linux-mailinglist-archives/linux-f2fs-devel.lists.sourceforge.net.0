@@ -2,64 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B79085BC82
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Feb 2024 13:46:06 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48BFE85BC83
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Feb 2024 13:46:07 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rcPVU-0000ox-SH;
-	Tue, 20 Feb 2024 12:45:57 +0000
+	id 1rcPVW-0007My-Tf;
+	Tue, 20 Feb 2024 12:45:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rcPVT-0000ol-Lw
+ (envelope-from <chao@kernel.org>) id 1rcPVV-0007Mr-Cx
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Feb 2024 12:45:56 +0000
+ Tue, 20 Feb 2024 12:45:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gz43b9HwF34kiL9Mz8e28kFJo/xsbHXMBXEu0vR3zt8=; b=SBI6NAF5g64r5nqRqYQk9noTHF
- 0qdhhvcdF0Ak/1Kjv45l6oK+zn9pUMK8eNGKGWceLcosEi58TZHdPH5zV0GwyxsqEPvtgnaRgz0pV
- 1tBq7m/UEacJBiZVCt7uxwopxuc6MYUdseF/MgA5C44R/bR5Vr+RxwfwcedzG9zNpHmM=;
+ bh=kloJxlT96gDbvxqb5PWNpTfvPyghWuN42yvYOBf1aKs=; b=UqH9HZETOPAYyvvyzsCVOf8hDs
+ vCVU3z4LvBldQz7wvVkKLsPeqJ60/7WH18VQg3t3SxmNWJOWMMeD+DOGZIJvoAelKtvIl1I9lWXJn
+ Qy4CNghn/Uj7wjA/34QIFNuiiSmQUrRmP5K5AeubKX0ZTm2pHa4VLhgzABm6L92JJDRU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=gz43b9HwF34kiL9Mz8e28kFJo/xsbHXMBXEu0vR3zt8=; b=P
- bIoYyOTfeBzKi/vPZ4nTSVRttBdvdedFkFyOoNR3FlTGKu/ktuBg9ST/0n6YAP8TTzeHHIXEqYbUf
- NVdIMNaAGlzZQ0oggPua411/YW57o52rpPwWmWoNpBIcDPgNTUuaTqyyfAUlQiS31Uis3vRyd0Awa
- emNgnUl+Oqx15+K0=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=kloJxlT96gDbvxqb5PWNpTfvPyghWuN42yvYOBf1aKs=; b=Kv6URXu4b31Q/UA7KflAJZmOef
+ XxojIIxmFxG6z8dKcNdhnjgN675jtzR1z9V3Q4fawkGR923acn0c7Y4yrGROEwLLVfmyY6cIjKGgy
+ IfleTQTplPmdzBBUmBqc+uIKKIANqcQnQtRPrGVtlYd/nl8xCiBofnTdFKNxyfh470SA=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rcPVS-0007az-7W for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Feb 2024 12:45:56 +0000
+ id 1rcPVU-0007b3-02 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Feb 2024 12:45:57 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 2CA5B60F7F
+ by dfw.source.kernel.org (Postfix) with ESMTP id DE17060F84
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 20 Feb 2024 12:45:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5BEB6C433F1;
  Tue, 20 Feb 2024 12:45:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 92D44C433F1;
- Tue, 20 Feb 2024 12:45:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1708433149;
- bh=NxeI5/+sydQ6FjSDx3lh9o9wcPPGiaQ/jn1SDP80AE8=;
- h=From:To:Cc:Subject:Date:From;
- b=DD8PLyeKhJGRzR7pUGnb7JX3cH4WqAYlSVAOCy8ptv5a9xxQlxkd9ahvqn5hGvArG
- ZnQeqStquieOsnYCzdt3dSVurMZOhzIGYF2NsUennXf/gccPorimStvXiyULq8RmfA
- +Pd/q7sR2pxZ/zRAGZ8c2Pqs4i+2dNRrEHQTPyFaCY9uPxkOGg7yf6vAmn6pn1x3zT
- 7CCO59t/xoIzT2Lcx3C9X6RKgEiaZpkf5epql4yCmms8RlOtZOYkXpQ1ttyOJMKsaY
- 3qpEYwGVRWZC6ZaooMkZI7uYYfN/sYDBlJJdNuMW/SxzoR3Lj24tJk5cOvE785VCTf
- B0Klv7kKB1Iug==
+ s=k20201202; t=1708433151;
+ bh=djwOOba0xhmuKwtaju9RvzKtfa29S99ymYRH2WrDa9s=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=MdI0zF02GeEJ4WoUpmBC08brGAsqKT2jkSye5APLl85SK4AtP2EK1INVPeBK6kQJ0
+ 5/ywhVXN0eolMW8ByRmgLLt0ncHcBD0BfDdhmtH4Y7FRGbF7lsHV6vFKfg5uDX/kMP
+ GfmSFLO8yXYS/yl5dfm21IF3su9d04aJvKb2IVgU5QdgUJsrQwAf743Atc6noG+DGc
+ 88Bi1jV+dK5lqjcC6JVDYAfagYkVrawP9/mYfbiPwTrrKqbjvZIRBw7/WKGd8RE5PQ
+ iELel8JNtiijBqJxH2bEpYLxufgxTkFjt/UT5pmuyLetJrW4qLSpuzDjTeUmaAg853
+ 4u0cmyo/foeIw==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Tue, 20 Feb 2024 20:45:35 +0800
-Message-Id: <20240220124537.11531-1-chao@kernel.org>
+Date: Tue, 20 Feb 2024 20:45:36 +0800
+Message-Id: <20240220124537.11531-2-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240220124537.11531-1-chao@kernel.org>
+References: <20240220124537.11531-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
@@ -68,12 +70,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  No logic change. Signed-off-by: Chao Yu <chao@kernel.org>
- --- fsck/f2fs.h | 3 --- 1 file changed, 3 deletions(-) diff --git a/fsck/f2fs.h
- b/fsck/f2fs.h index e31be22..187e73c 100644 --- a/fsck/f2fs.h +++
- b/fsck/f2fs.h
- @@ -257,9 +257,6 @@ struct f2fs_sb_info { struct f2fs_checkpoint *ckpt; int
- cur_cp; Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview: Use NULL_ADDR macro to instead magic number for cleanup.
+ Signed-off-by:
+ Chao Yu <chao@kernel.org> --- fsck/fsck.c | 14 +++++++------- 1 file changed, 
+ 7 insertions(+), 7 deletions(-) diff --git a/fsck/fsck.c b/fsck/fsck.c index
+ 3461a52..14a9628 100644 --- a/fsck/fsck.c +++ b/fsck/fsck.c @@ -1071, 13 +1071,
+ 13
+ @@ check_next: qf_szchk_type[cur_qtype] = QF_SZCHK_INLINE; block_t blkaddr
+ [...] Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -89,9 +93,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rcPVS-0007az-7W
-Subject: [f2fs-dev] [PATCH 1/3] f2fs-tools: remove obsolete fields in struct
- f2fs_sb_info
+X-Headers-End: 1rcPVU-0007b3-02
+Subject: [f2fs-dev] [PATCH 2/3] f2fs-tools: use NULL_ADDR macro to instead
+ magic number for cleanup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,27 +112,65 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-No logic change.
+Use NULL_ADDR macro to instead magic number for cleanup.
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fsck/f2fs.h | 3 ---
- 1 file changed, 3 deletions(-)
+ fsck/fsck.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/fsck/f2fs.h b/fsck/f2fs.h
-index e31be22..187e73c 100644
---- a/fsck/f2fs.h
-+++ b/fsck/f2fs.h
-@@ -257,9 +257,6 @@ struct f2fs_sb_info {
- 	struct f2fs_checkpoint *ckpt;
- 	int cur_cp;
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index 3461a52..14a9628 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -1071,13 +1071,13 @@ check_next:
+ 			qf_szchk_type[cur_qtype] = QF_SZCHK_INLINE;
+ 		block_t blkaddr = le32_to_cpu(node_blk->i.i_addr[ofs]);
  
--	struct list_head orphan_inode_list;
--	unsigned int n_orphans;
--
- 	/* basic file system units */
- 	unsigned int log_sectors_per_block;     /* log2 sectors per block */
- 	unsigned int log_blocksize;             /* log2 block size */
+-		if (blkaddr != 0) {
++		if (blkaddr != NULL_ADDR) {
+ 			ASSERT_MSG("[0x%x] wrong inline reserve blkaddr:%u",
+ 					nid, blkaddr);
+ 			if (c.fix_on) {
+ 				FIX_MSG("inline_data has wrong 0'th block = %x",
+ 								blkaddr);
+-				node_blk->i.i_addr[ofs] = 0;
++				node_blk->i.i_addr[ofs] = NULL_ADDR;
+ 				node_blk->i.i_blocks = cpu_to_le64(*blk_cnt);
+ 				need_fix = 1;
+ 			}
+@@ -1121,7 +1121,7 @@ check_next:
+ 			if (c.fix_on) {
+ 				FIX_MSG("inline_dentry has wrong 0'th block = %x",
+ 								blkaddr);
+-				node_blk->i.i_addr[ofs] = 0;
++				node_blk->i.i_addr[ofs] = NULL_ADDR;
+ 				node_blk->i.i_blocks = cpu_to_le64(*blk_cnt);
+ 				need_fix = 1;
+ 			}
+@@ -1161,8 +1161,8 @@ check_next:
+ 					node_blk->i.i_addr[ofs + idx] =
+ 							NULL_ADDR;
+ 					need_fix = 1;
+-					FIX_MSG("[0x%x] i_addr[%d] = 0", nid,
+-							ofs + idx);
++					FIX_MSG("[0x%x] i_addr[%d] = NULL_ADDR",
++							nid, ofs + idx);
+ 				}
+ 				continue;
+ 			}
+@@ -1190,9 +1190,9 @@ check_next:
+ 			if (cur_qtype != -1 && blkaddr != NEW_ADDR)
+ 				qf_last_blkofs[cur_qtype] = child.pgofs;
+ 		} else if (c.fix_on) {
+-			node_blk->i.i_addr[ofs + idx] = 0;
++			node_blk->i.i_addr[ofs + idx] = NULL_ADDR;
+ 			need_fix = 1;
+-			FIX_MSG("[0x%x] i_addr[%d] = 0", nid, ofs + idx);
++			FIX_MSG("[0x%x] i_addr[%d] = NULL_ADDR", nid, ofs + idx);
+ 		}
+ 	}
+ 
 -- 
 2.40.1
 
