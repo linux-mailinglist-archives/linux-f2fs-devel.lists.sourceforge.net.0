@@ -2,129 +2,150 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB53E85AC83
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Feb 2024 20:54:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C735485B024
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Feb 2024 01:48:56 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rc9ip-0000e5-Tt;
-	Mon, 19 Feb 2024 19:54:40 +0000
+	id 1rcEJS-0004zK-8i;
+	Tue, 20 Feb 2024 00:48:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <salvatore.bonaccorso@gmail.com>) id 1rc9io-0000dz-Eo
+ (envelope-from <krisman@suse.de>) id 1rcEJQ-0004zE-W1
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Feb 2024 19:54:39 +0000
+ Tue, 20 Feb 2024 00:48:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YPYlqKudaClcKbNFamdeE7+QrC6+8XojTMUekGJ9pw4=; b=FgTHqZJne5++pLiVwLTnnqFIg9
- 4KWyTWo91xsbfwV7t26bPbiSKfi3lyRNEMZP9UOukhJja7QNC4/SnllXRMI7SCJQul2CM1XDNbE2u
- ViSmXi69aHQMgNCGkurMuxE2Teedf0BHlP1CVXNJB/wY5IS2+4t+9EtmhGO++YLcuYqg=;
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
+ References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=zGEecwVaYaJpSbMfZXIT26jnfC5dHGGtAOwZ6dBUMhw=; b=cUEWuieXvfwT2xu42tTN4w9ZMG
+ 0LXwRIWBjfvN3kYnmBkDvB8IO6VU17jpoXZfT/R8CxUQn4ED4M09i2SvYvtRdJtLqzHGwzoPSK7RE
+ ADp//QS5JPnHLVFxozHzg0We2sbzv8kCsQmkI/c0qB/0EKLc6fkStIH3i7PLmMumi3WY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YPYlqKudaClcKbNFamdeE7+QrC6+8XojTMUekGJ9pw4=; b=kU8/CVDoDOEk4s0h/cmPw3lrY+
- /EfCeG39j1ODXgjBvo5wS1ZH713kjUfzvwLtqNU2VKP3cl71YI1iio7bk+U+N+gTlPgjQwrnt1Jwv
- 7LGOC3dmwkf4hKlfkJfYlFHO+bkLj4sq5UeRiBHSxX7yxb2hQiKTBpdzb66Sy3KtTNJQ=;
-Received: from mail-ed1-f45.google.com ([209.85.208.45])
+ bh=zGEecwVaYaJpSbMfZXIT26jnfC5dHGGtAOwZ6dBUMhw=; b=IsaVt28uu+5H+fTvfz3PUpvV3m
+ dDKzwT0ByhYmrqU7Cirl8LOhtQ0rfzidSeRlOQiIQPuLqQia8mZpKlLz5vfpW8Ubo96ZvJpvvtUbi
+ WhmCI6hxzCry44Fmzn9Q7Sam4O5qcQbj6irDX0KWUhlWLxLZ5G2qNcFZQLir3y8VyEPI=;
+Received: from smtp-out1.suse.de ([195.135.223.130])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rc9il-0005uM-Ry for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Feb 2024 19:54:38 +0000
-Received: by mail-ed1-f45.google.com with SMTP id
- 4fb4d7f45d1cf-561587ce966so9570507a12.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 19 Feb 2024 11:54:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708372466; x=1708977266; darn=lists.sourceforge.net;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
- :reply-to; bh=YPYlqKudaClcKbNFamdeE7+QrC6+8XojTMUekGJ9pw4=;
- b=Cv4VAXppgHazob8GHnNNPqScul1ZDq3uEXLAVS8/WtkP+qKipdooIQEera5ZvzW0mt
- +CqF0xxootuoHD+DTM1N6mMEsd5qSxJypn7a3V7J9Kzpc3kGhw34Kh+c209X4w5+7j9C
- ZrILiSF7rQnAVRdsJQtx+Os8VMkWaVJsBp7Hm8cb8vkqMmoBjIIHDLI6z2q5sfg37qwm
- zL8uWF44kj7EUeAtUWktoroskdb0vhIqmWK0WNVRELnhUZIAqvQHqVwRopnkxIy1moLK
- FSpNlVXRdAxVU1xssJw6YfDG6Di9cnSL+fwTe5ogpbYZomQdSWPbj20Q93ojzq4CkDfl
- O5xg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708372466; x=1708977266;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YPYlqKudaClcKbNFamdeE7+QrC6+8XojTMUekGJ9pw4=;
- b=knLR6lcuNC7mXEtvJusbGUie9taxe5rL037uTeeM2L5A831vAhYtzDQeuPidyLU9nY
- fQytL9owSvOMKu23nOm2kdXD+LGzojQZllYhXO/N88App9A23G9AWrTSNHsgKSrqehEo
- gZmISbRYGQMe8LATnnt6If4ZDRlHLXJDwgdnnrcnRr/M7IvZ/l6K1/Fvs7Kv98HYR0ni
- U5dJcKdRstjyB8lZ9xG72rSQgsvVYRIRI9r4RPp92OPVF19Cz3pb02nK9X4ASCVYmPf0
- /I0kH4T7ZdAERgE22UcKQQt0X8Lq97v1IsTluKRhGi6sFmmNyo1Kw+SXDxtRAaGEbpGp
- YTVg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWzIxv2tIflYTS4HOSFdciVR6GrqrcxnI4R+h+nqC+9PsHo4xt2E9vkZCLMHbFrYc0xIdHMyR34Vl5ZVJ//9D4yFH4Ierga+XRG7tC/cLWSKyFa2nhVbA==
-X-Gm-Message-State: AOJu0Ywg+pDAkqPo0sTMDtsFlB/U4+EVj4t230TqHq/e0Ax7r1LDaRHe
- 3+jXU+J/8aEXer1mPGVSxJ8DBSmP8zthcbUK8tAFM8yhxvM0+fKN
-X-Google-Smtp-Source: AGHT+IGy17EHv3w5kRGCvBk4IxezGA5nNXlG3sjHaPpclSP5gUQDDuET4mul61ghYdEBQQf2Q15JQQ==
-X-Received: by 2002:a05:6402:5207:b0:564:4211:faa3 with SMTP id
- s7-20020a056402520700b005644211faa3mr5547391edd.1.1708372465382; 
- Mon, 19 Feb 2024 11:54:25 -0800 (PST)
-Received: from eldamar.lan (c-82-192-242-114.customer.ggaweb.ch.
- [82.192.242.114]) by smtp.gmail.com with ESMTPSA id
- fi17-20020a056402551100b005612025465asm2964948edb.74.2024.02.19.11.54.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Feb 2024 11:54:24 -0800 (PST)
-Received: by eldamar.lan (Postfix, from userid 1000)
- id EF00EBE2EE8; Mon, 19 Feb 2024 20:54:23 +0100 (CET)
-Date: Mon, 19 Feb 2024 20:54:23 +0100
-From: Salvatore Bonaccorso <carnil@debian.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZdOx73kckFXADcol@eldamar.lan>
-References: <170736382774.1975.1861975122613668970.reportbug@tsuga.picorealm.net>
- <ZcU3VCrt9VOpuFUq@eldamar.lan>
- <6d14ea70-ac1c-46f2-af1d-ba34ea0165aa@kernel.org>
+ id 1rcEJL-000087-Kv for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Feb 2024 00:48:45 +0000
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 2EB202202B;
+ Tue, 20 Feb 2024 00:48:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1708390113; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=zGEecwVaYaJpSbMfZXIT26jnfC5dHGGtAOwZ6dBUMhw=;
+ b=XUO2PzsnpxrtzQAcjiKAcYfns23lBtjvFRuxq7/8WfCbqamevQAhwVK325bBA4m0f8Okmq
+ YF5y4k8Xb2+L1cyxgPKlGuspAl6/H9hNqxDR/N9jQbfVajiCoS7BsmOtwJEHzjCICbPUnx
+ k3uc2+uVfRP1LiyIEWC4aV+yNUJbM/A=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1708390113;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=zGEecwVaYaJpSbMfZXIT26jnfC5dHGGtAOwZ6dBUMhw=;
+ b=Z5Jal858y9Bllawtyexcx+fB1cZ6YqQEkoIdcV0a5RiG059dmkjKuvDi5IlIblvTTaCq6m
+ FaBo2ZRFrt962aBg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1708390112; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=zGEecwVaYaJpSbMfZXIT26jnfC5dHGGtAOwZ6dBUMhw=;
+ b=q1oHSXBWXZX86VZPXZew6IHWtc017Pe+W0H38TZVA90eO9I80wB+zZYgzvrQ5gNCJSuMsv
+ mzTbowJ/PLoog4JDlM4suRS0K3C1oQnTckFs77llXVz932h+7NrCSitenR4Sk51Pi36tDi
+ oeyTEbrMvxT6LCcfIXp3UWMm3+vsUmU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1708390112;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=zGEecwVaYaJpSbMfZXIT26jnfC5dHGGtAOwZ6dBUMhw=;
+ b=z9aDjGaz3EhGU0YUKTERwzdmglwyXYyACGM+uIQ/17k2YInQaftYOs1QmoM/V3Dlvw1+Si
+ uHLg5EiLFb7XV5BQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id EA7DC139D0;
+ Tue, 20 Feb 2024 00:48:31 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id SNs9M9/202WucAAAD6G6ig
+ (envelope-from <krisman@suse.de>); Tue, 20 Feb 2024 00:48:31 +0000
+From: Gabriel Krisman Bertazi <krisman@suse.de>
+To: Eric Biggers <ebiggers@kernel.org>
+In-Reply-To: <20240215003145.GK1638@sol.localdomain> (Eric Biggers's message
+ of "Wed, 14 Feb 2024 16:31:45 -0800")
+Organization: SUSE
+References: <20240213021321.1804-1-krisman@suse.de>
+ <20240213021321.1804-5-krisman@suse.de>
+ <20240215001631.GI1638@sol.localdomain>
+ <20240215003145.GK1638@sol.localdomain>
+Date: Mon, 19 Feb 2024 19:48:30 -0500
+Message-ID: <875xykarkx.fsf@mailhost.krisman.be>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <6d14ea70-ac1c-46f2-af1d-ba34ea0165aa@kernel.org>
-X-Spam-Score: 0.4 (/)
+Authentication-Results: smtp-out1.suse.de;
+	none
+X-Spam-Level: 
+X-Spam-Score: -4.30
+X-Spamd-Result: default: False [-4.30 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+ NEURAL_HAM_LONG(-1.00)[-1.000]; HAS_ORG_HEADER(0.00)[];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; RCPT_COUNT_SEVEN(0.00)[9];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ MIME_TRACE(0.00)[0:+];
+ FREEMAIL_CC(0.00)[zeniv.linux.org.uk,kernel.org,mit.edu,gmail.com,vger.kernel.org,lists.sourceforge.net];
+ RCVD_TLS_ALL(0.00)[]; BAYES_HAM(-3.00)[100.00%]
+X-Spam-Flag: NO
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi, On Mon, Feb 19, 2024 at 10:35:13AM +0800, Chao Yu wrote:
- > On 2024/2/9 4:19, Salvatore Bonaccorso wrote: > > Hi Jaegeuk Kim, Chao
- Yu, > > > > In Debian the following regression was reported after a Dh [...]
- Content analysis details:   (0.4 points, 6.0 required)
+ Content preview:  Eric Biggers <ebiggers@kernel.org> writes: > On Wed, Feb 14, 
+ 2024 at 04:16:31PM -0800, Eric Biggers wrote: >> On Mon, Feb 12, 2024 at
+ 09:13:15PM -0500, Gabriel Krisman Bertazi wrote: >> > From fscrypt perspective,
+ once the key is available, th [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.208.45 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.45 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [salvatore.bonaccorso[at]gmail.com]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.223.130 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
- EnvelopeFrom freemail headers are different
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rc9il-0005uM-Ry
-Subject: Re: [f2fs-dev] [regression 6.1.y] f2fs: invalid zstd compress
- level: 6
+X-Headers-End: 1rcEJL-000087-Kv
+Subject: Re: [f2fs-dev] [PATCH v6 04/10] fscrypt: Drop d_revalidate once the
+ key is added
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -136,77 +157,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: regressions@lists.linux.dev, 1063422@bugs.debian.org,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Dhya <dhya@picorealm.net>,
- Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: brauner@kernel.org, tytso@mit.edu, amir73il@gmail.com,
+ linux-f2fs-devel@lists.sourceforge.net, viro@zeniv.linux.org.uk,
+ linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
+Eric Biggers <ebiggers@kernel.org> writes:
 
-On Mon, Feb 19, 2024 at 10:35:13AM +0800, Chao Yu wrote:
-> On 2024/2/9 4:19, Salvatore Bonaccorso wrote:
-> > Hi Jaegeuk Kim, Chao Yu,
-> > 
-> > In Debian the following regression was reported after a Dhya updated
-> > to 6.1.76:
-> > 
-> > On Wed, Feb 07, 2024 at 10:43:47PM -0500, Dhya wrote:
-> > > Package: src:linux
-> > > Version: 6.1.76-1
-> > > Severity: critical
-> > > Justification: breaks the whole system
-> > > 
-> > > Dear Maintainer,
-> > > 
-> > > After upgrade to linux-image-6.1.0-18-amd64 6.1.76-1 F2FS filesystem
-> > > fails to mount rw.  Message in the boot journal:
-> > > 
-> > >    kernel: F2FS-fs (nvme0n1p6): invalid zstd compress level: 6
-> > > 
-> > > There was recently an f2fs patch to the 6.1 kernel tree which might be
-> > > related: https://www.spinics.net/lists/stable-commits/msg329957.html
-> > > 
-> > > Was able to recover the system by doing:
-> > > 
-> > > sudo mount -o remount,rw,relatime,lazytime,background_gc=on,discard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,checkpoint_merge,fsync_mode=posix,compress_algorithm=lz4,compress_log_size=2,compress_mode=fs,atgc,discard_unit=block,memory=normal /dev/nvme0n1p6 /
-> > > 
-> > > under the running bad 6.1.0-18-amd64 kernel, then editing
-> > > /etc/default/grub:
-> > > 
-> > >    GRUB_DEFAULT="Advanced options for Debian GNU/Linux>Debian GNU/Linux, with Linux 6.1.0-17-amd64"
-> > > 
-> > > and running 'update-grub' and rebooting to boot the 6.1.0-17-amd64
-> > > kernel.
-> > 
-> > The issue is easily reproducible by:
-> > 
-> > # dd if=/dev/zero of=test.img count=100 bs=1M
-> > # mkfs.f2fs -f -O compression,extra_attr ./test.img
-> > # mount -t f2fs -o compress_algorithm=zstd:6,compress_chksum,atgc,gc_merge,lazytime ./test.img /mnt
-> > 
-> > resulting in
-> > 
-> > [   60.789982] F2FS-fs (loop0): invalid zstd compress level: 6
-> 
-> Hi Salvatore,
-> 
-> Can you please try below fixes:
-> 
-> [PATCH 6.1] f2fs: add helper to check compression level
-> https://lore.kernel.org/linux-f2fs-devel/20240212160530.1017205-1-chao@kernel.org
+> On Wed, Feb 14, 2024 at 04:16:31PM -0800, Eric Biggers wrote:
+>> On Mon, Feb 12, 2024 at 09:13:15PM -0500, Gabriel Krisman Bertazi wrote:
+>> > From fscrypt perspective, once the key is available, the dentry will
+>> > remain valid until evicted for other reasons, since keyed dentries don't
+>> > require revalidation and, if the key is removed, the dentry is
+>> > forcefully evicted.  Therefore, we don't need to keep revalidating them
+>> > repeatedly.
+>> > 
+>> > Obviously, we can only do this if fscrypt is the only thing requiring
+>> > revalidation for a dentry.  For this reason, we only disable
+>> > d_revalidate if the .d_revalidate hook is fscrypt_d_revalidate itself.
+>> > 
+>> > It is safe to do it here because when moving the dentry to the
+>> > plain-text version, we are holding the d_lock.  We might race with a
+>> > concurrent RCU lookup but this is harmless because, at worst, we will
+>> > get an extra d_revalidate on the keyed dentry, which is will find the
+>> > dentry is valid.
+>> > 
+>> > Finally, now that we do more than just clear the DCACHE_NOKEY_NAME in
+>> > fscrypt_handle_d_move, skip it entirely for plaintext dentries, to avoid
+>> > extra costs.
+>> > 
+>> > Signed-off-by: Gabriel Krisman Bertazi <krisman@suse.de>
+>> 
+>> I think this explanation misses an important point, which is that it's only
+>> *directories* where a no-key dentry can become the regular dentry.  The VFS does
+>> the move because it only allows one dentry to exist per directory.
+>> 
+>> For nondirectories, the dentries don't get reused and this patch is irrelevant.
+>> 
+>> (Of course, there's no point in making fscrypt_handle_d_move() check whether the
+>> dentry is a directory, since checking DCACHE_NOKEY_NAME is sufficient.)
+>> 
+>> The diff itself looks good -- thanks.
+>> 
+>
+> Also, do I understand correctly that this patch is a performance optimization,
+> not preventing a performance regression?  The similar patch that precedes this
+> one, "fscrypt: Drop d_revalidate for valid dentries during lookup", is about
+> preventing a performance regression on dentries that aren't no-key.  This patch
+> looks deceptively similar, but it only affects no-key directory dentries, which
+> we were already doing the fscrypt_d_revalidate for, even after the move to the
+> plaintext name.  It's probably still a worthwhile optimization to stop doing the
+> fscrypt_d_revalidate when a directory dentry gets moved like that.  But I want
+> to make sure I'm correctly understanding each patch.
 
-Confirmed that this fixes the reported issue as it was reported to us
-in Debian in https://bugs.debian.org/1063422 . Thanks a lot!
-(note just tested with the first commit as it landed in 6.1.78 to
-confirm the immediate regression).
+Hi Eric,
 
-#regzbot fixed-by: cf3d57ad6ff8b566deba3544b9ad3384781fb604
+Yes, your understanding is correct. The previous patch prevents the
+regression, given that we will install d_revalidate "by default" on all
+dentries when fscrypt is enabled. Once that was done, it seemed obvious
+to add the optimization to also drop it when the key is added later,
+which is what this patch is about.
 
-Regards,
-Salvatore
+I'll follow up with a v7 shortly. Just need to find some cycles to work
+on it.
+
+thanks,
+
+
+-- 
+Gabriel Krisman Bertazi
 
 
 _______________________________________________
