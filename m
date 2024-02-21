@@ -2,99 +2,124 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB5D285CDD9
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Feb 2024 03:18:36 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E4CE85D178
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Feb 2024 08:34:01 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rccBv-0008G8-Gv;
-	Wed, 21 Feb 2024 02:18:35 +0000
+	id 1rch72-0003Xy-41;
+	Wed, 21 Feb 2024 07:33:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rccBt-0008G2-Nx
+ (envelope-from <jinbaoliu365@gmail.com>) id 1rch6z-0003Xe-Ie
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 21 Feb 2024 02:18:33 +0000
+ Wed, 21 Feb 2024 07:33:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wdyuiV8RPdblH/ZmrErH7JvFwph3/UI2SH3Ns/wUMrI=; b=WHk1/RUERuGWFLG260HZ0TngGg
- gafp7ECibofAMf8wGIaiMDtuMVDJMlBTNzUOXhIb5nsFU6p7mjTBgVyHWCjZV7Ke8cw6mEdqvmzHC
- ArI0WDRGgQKQ2jqsVmJZtfraPaJRwYc8PN/2KDP077z3mIogS3VXFBOhsDmlyoqk/GrA=;
+ bh=qU2iF33SDnjbxbTA1bjsBvV0qZKEE2L9dMkO6OS+Cdg=; b=mi82PaysFZME4v7XYv+7kxoYR6
+ IgxtA+aiI40kop9fpeAhmUUNUnvR4CDpHjP84eltcu/dJbDd1X9FeC3vJHkTfz4tH0VyY04ieQebP
+ VqVWjaL4B5aK7O9Uk+pVwpEW7PGEJgy9CdQeYwsPpxYMpYRvwziXlHf1Qw7GMWGk8hzs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=wdyuiV8RPdblH/ZmrErH7JvFwph3/UI2SH3Ns/wUMrI=; b=IHvCMj+3zmfTg/C6PfnroIAfaT
- 2exfXBVQw5x9n3vL3H0lFyJtzfIusu9pTuN35M0kZLge85qKawxq4ZfDM1XLCayTcmfQfIRVbzdc+
- vkKdIDh/e91URj4JVPLAk/q2P0/9U3MnY9xxeuwJRxY+Kg6aRewnWw785GSP7M9/MN2A=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=qU2iF33SDnjbxbTA1bjsBvV0qZKEE2L9dMkO6OS+Cdg=; b=a
+ V8HPxVCzaq05pKlaCgymPnoghsvqQQLQpibIgOc5jzu+uM9xaXtOSFnQpAug0hqb7brO7Ult36cWz
+ ZNuB7YxosTN/6lZ2lScYtWgwgsWamaFw5qhLtvHxnf/OfE066fYGSxLBTPECToXTEGZtGJkhhYG/A
+ lLR7VRc2ZYk6s64I=;
+Received: from mail-pj1-f45.google.com ([209.85.216.45])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rccBn-0007Y0-SI for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 21 Feb 2024 02:18:33 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C4620611DE
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rch6t-0002cK-Ow for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 21 Feb 2024 07:33:48 +0000
+Received: by mail-pj1-f45.google.com with SMTP id
+ 98e67ed59e1d1-295c8b795e2so3690064a91.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 21 Feb 2024 02:18:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 920A9C433F1;
- Wed, 21 Feb 2024 02:18:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1708481898;
- bh=1D9dtTOcqZTXQYey7nziqcMCVlOXbQ4clzR2SqIHDZQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=JyBhsuTCpQyD63oYSBZlf6qgWj3Oxk1IIW3p9D5wSRID1Oe6dxm6/walh0UxnE4yB
- gpzCCz2wqKYtgxDPJUzMKcU7MfsuilJQWOln5xJfSL45miy8VdMc8jXybBRYLi3uKn
- iuJvyqmgzyst+F2tnR53aKBZV17qR7Yde/CXSbezsYoDuvE3ipSspkYdi7//onr/ww
- My2oLEV27vJPP1McqCkY9EcMyaQhV0SMLDrLb1XTiln43Y3uFbrvI9tjXdHg8Br4df
- o8RGbrCiVuYVKJgFi3n17Yht6pOzyYCXvnxpgVv3VJr5QzpLANz3CQh80lu31Ioj3b
- 9FzdC5INqHKvg==
-Message-ID: <36ebed2d-36e9-4e0b-ba2c-f85ad35f4a7b@kernel.org>
-Date: Wed, 21 Feb 2024 10:18:17 +0800
+ Tue, 20 Feb 2024 23:33:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708500814; x=1709105614; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qU2iF33SDnjbxbTA1bjsBvV0qZKEE2L9dMkO6OS+Cdg=;
+ b=JWmPy3iMrt/0t7qFxAXWGrVqEUfajy7DB8zz4wdV4FPNgNEbC7smpzZz2ylTDu+5OM
+ ONvg8WaU+B50u3XcsuJnFeoDWtjlZ46I5pql6np52qYcFSBctTI6tLRIcm/lZVfsGk8o
+ l3x0aZKjLnDAicNHrptzGbJndwpqPIwFpg3BE99wdOLs5mEGV8TGEOnbmCfLRwpV1dT/
+ fyCpAC3QqKmUDlBuKp8EidJkBj6mBwg2PvSV5TrM6Nc2oZaK4NpeCGYnieUCZtKcVC4V
+ bP+3MsBFzQM5o9aysmfbP/R7t4B0HIyGVg6Gy5PWcoJcdbsr/L1NahFifwvfn30MbZ6T
+ g+rQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708500814; x=1709105614;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qU2iF33SDnjbxbTA1bjsBvV0qZKEE2L9dMkO6OS+Cdg=;
+ b=PM0k6neTB3Mxy+ssV4Qg4g/R+K6rZ+24FBMlDCpNhNYOaPHXb3bgkHI0i8ikGH1eZ3
+ StRLFmH84OWiRJxmjgFTI7kVWBlcCNeLhix2eipcs383udWJiHiquq1hTelfcNoG4HL0
+ bif99uJ9KZsjlAgAU98hpcWi+TTpdzgPDllLyqvpSqLeXbDJZ6I7BvmaF3B9XZvNUtPE
+ TBJ5v+9EyR67ZZg7lLpeNfmHazwFQ2vEioXsG9RqLbd/hE+zOwSWVZU4dN9+d/Cek8/a
+ f2zfj4N2kqgdcC+zHKyJDKK+WX2pUJJFHZbPY4X5jxA02OvVQBO8FVHl/W9XqRwYh4hw
+ MdCA==
+X-Gm-Message-State: AOJu0YyGXMoesG/CO/udZvJXtflWZUv3zXl5J2LlnT5BwvFwYHzXZP+J
+ eiJcRn1mnWiDlE8XjhFAOLg3NMxq1FGZF3UX4DvKvUU7O+QC9Aea
+X-Google-Smtp-Source: AGHT+IF29KSLDWX3+z0Vc2R2dUX9ihmYYnDX1o5SvRgDxdShnQR6eB/QSWn1DjxjHx8KCGu2HV22og==
+X-Received: by 2002:a17:90a:7788:b0:297:f09:fe08 with SMTP id
+ v8-20020a17090a778800b002970f09fe08mr15845793pjk.0.1708500814365; 
+ Tue, 20 Feb 2024 23:33:34 -0800 (PST)
+Received: from mi.mioffice.cn ([43.224.245.229])
+ by smtp.gmail.com with ESMTPSA id
+ a1-20020a17090ad80100b002993c27f76asm8867459pjv.50.2024.02.20.23.33.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Feb 2024 23:33:34 -0800 (PST)
+From: liujinbao1 <jinbaoliu365@gmail.com>
+To: chao@kernel.org,
+	jaegeuk@kernel.org
+Date: Wed, 21 Feb 2024 15:32:49 +0800
+Message-Id: <20240221073249.1710026-1-jinbaoliu365@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20240207164620.1536038-1-jaegeuk@kernel.org>
- <ZdUQ6uKYyfzn5Fhv@google.com>
- <1a9d9c59-dbba-4d9e-8804-2fb92c56b5b3@kernel.org>
- <ZdVYfHg2R8B1Uj2r@google.com>
-Content-Language: en-US
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZdVYfHg2R8B1Uj2r@google.com>
-X-Spam-Score: -5.3 (-----)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/2/21 9:57, Jaegeuk Kim wrote: > On 02/21, Chao Yu
- wrote: >> On 2024/2/21 4:51, Jaegeuk Kim wrote: >>> No one uses this feature.
- Let's kill it. >>> >>> Reviewed-by: Daeho Jeong <daehojeong@goog [...] 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  From: liujinbao1 When we add "atgc" to the fstab table, ATGC
+ is not immediately enabled. There is a 7-day time threshold, and we can use
+ "atgc_enabled" to show whether ATGC is enabled. Signed-off-by: liujinbao1
+ --- Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++ fs/f2fs/sysfs.c |
+ 8 ++++++++ 2 files changed, 14 insertions(+) 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.45 listed in list.dnswl.org]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [jinbaoliu365[at]gmail.com]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [jinbaoliu365[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.45 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rccBn-0007Y0-SI
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: kill heap-based allocation
+X-Headers-End: 1rch6t-0002cK-Ow
+Subject: [f2fs-dev] [PATCH] f2fs: sysfs: support atgc_enabled
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,243 +131,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: liujinbao1 <liujinbao1@xiaomi.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/2/21 9:57, Jaegeuk Kim wrote:
-> On 02/21, Chao Yu wrote:
->> On 2024/2/21 4:51, Jaegeuk Kim wrote:
->>> No one uses this feature. Let's kill it.
->>>
->>> Reviewed-by: Daeho Jeong <daehojeong@google.com>
->>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>> ---
->>>
->>>    Change log from v1:
->>>     - keep mount options but give warnings instead
->>>
->>>    Documentation/filesystems/f2fs.rst |  4 +--
->>>    fs/f2fs/gc.c                       |  5 ++-
->>>    fs/f2fs/segment.c                  | 54 ++++--------------------------
->>>    fs/f2fs/segment.h                  | 10 ------
->>>    fs/f2fs/super.c                    |  9 +----
->>>    5 files changed, 11 insertions(+), 71 deletions(-)
->>>
->>> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
->>> index 9ac5083dae8e..c30a800604fd 100644
->>> --- a/Documentation/filesystems/f2fs.rst
->>> +++ b/Documentation/filesystems/f2fs.rst
->>> @@ -126,9 +126,7 @@ norecovery		 Disable the roll-forward recovery routine, mounted read-
->>>    discard/nodiscard	 Enable/disable real-time discard in f2fs, if discard is
->>>    			 enabled, f2fs will issue discard/TRIM commands when a
->>>    			 segment is cleaned.
->>> -no_heap			 Disable heap-style segment allocation which finds free
->>> -			 segments for data from the beginning of main area, while
->>> -			 for node from the end of main area.
->>> +no_heap			 Deprecated.
->>
->> heap/no_heap			Deprecated
->>
->> Otherwise, it looks good to me.
->>
->> Reviewed-by: Chao Yu <chao@kernel.org>
->>
->> BTW, do we need to kill heap-based allocation in mkfs.f2fs as well?
-> 
-> I was about to work on it after kernel change tho. Can you write one? :)
+From: liujinbao1 <liujinbao1@xiaomi.com>
 
-No problem.
+When we add "atgc" to the fstab table, ATGC is not immediately enabled.
+There is a 7-day time threshold, and we can use "atgc_enabled" to
+show whether ATGC is enabled.
 
-Thanks,
+Signed-off-by: liujinbao1 <liujinbao1@xiaomi.com>
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++
+ fs/f2fs/sysfs.c                         | 8 ++++++++
+ 2 files changed, 14 insertions(+)
 
-> 
->>
->> Thanks,
->>
->>>    nouser_xattr		 Disable Extended User Attributes. Note: xattr is enabled
->>>    			 by default if CONFIG_F2FS_FS_XATTR is selected.
->>>    noacl			 Disable POSIX Access Control List. Note: acl is enabled
->>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
->>> index 501b93b45b6c..a089a938355b 100644
->>> --- a/fs/f2fs/gc.c
->>> +++ b/fs/f2fs/gc.c
->>> @@ -280,12 +280,11 @@ static void select_policy(struct f2fs_sb_info *sbi, int gc_type,
->>>    			p->max_search > sbi->max_victim_search)
->>>    		p->max_search = sbi->max_victim_search;
->>> -	/* let's select beginning hot/small space first in no_heap mode*/
->>> +	/* let's select beginning hot/small space first. */
->>>    	if (f2fs_need_rand_seg(sbi))
->>>    		p->offset = get_random_u32_below(MAIN_SECS(sbi) *
->>>    						SEGS_PER_SEC(sbi));
->>> -	else if (test_opt(sbi, NOHEAP) &&
->>> -		(type == CURSEG_HOT_DATA || IS_NODESEG(type)))
->>> +	else if (type == CURSEG_HOT_DATA || IS_NODESEG(type))
->>>    		p->offset = 0;
->>>    	else
->>>    		p->offset = SIT_I(sbi)->last_victim[p->gc_mode];
->>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->>> index 94c4f7b16c19..09af17af4e7a 100644
->>> --- a/fs/f2fs/segment.c
->>> +++ b/fs/f2fs/segment.c
->>> @@ -2634,16 +2634,14 @@ static int is_next_segment_free(struct f2fs_sb_info *sbi,
->>>     * This function should be returned with success, otherwise BUG
->>>     */
->>>    static void get_new_segment(struct f2fs_sb_info *sbi,
->>> -			unsigned int *newseg, bool new_sec, int dir)
->>> +			unsigned int *newseg, bool new_sec)
->>>    {
->>>    	struct free_segmap_info *free_i = FREE_I(sbi);
->>>    	unsigned int segno, secno, zoneno;
->>>    	unsigned int total_zones = MAIN_SECS(sbi) / sbi->secs_per_zone;
->>>    	unsigned int hint = GET_SEC_FROM_SEG(sbi, *newseg);
->>>    	unsigned int old_zoneno = GET_ZONE_FROM_SEG(sbi, *newseg);
->>> -	unsigned int left_start = hint;
->>>    	bool init = true;
->>> -	int go_left = 0;
->>>    	int i;
->>>    	spin_lock(&free_i->segmap_lock);
->>> @@ -2657,30 +2655,10 @@ static void get_new_segment(struct f2fs_sb_info *sbi,
->>>    find_other_zone:
->>>    	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
->>>    	if (secno >= MAIN_SECS(sbi)) {
->>> -		if (dir == ALLOC_RIGHT) {
->>> -			secno = find_first_zero_bit(free_i->free_secmap,
->>> +		secno = find_first_zero_bit(free_i->free_secmap,
->>>    							MAIN_SECS(sbi));
->>> -			f2fs_bug_on(sbi, secno >= MAIN_SECS(sbi));
->>> -		} else {
->>> -			go_left = 1;
->>> -			left_start = hint - 1;
->>> -		}
->>> -	}
->>> -	if (go_left == 0)
->>> -		goto skip_left;
->>> -
->>> -	while (test_bit(left_start, free_i->free_secmap)) {
->>> -		if (left_start > 0) {
->>> -			left_start--;
->>> -			continue;
->>> -		}
->>> -		left_start = find_first_zero_bit(free_i->free_secmap,
->>> -							MAIN_SECS(sbi));
->>> -		f2fs_bug_on(sbi, left_start >= MAIN_SECS(sbi));
->>> -		break;
->>> +		f2fs_bug_on(sbi, secno >= MAIN_SECS(sbi));
->>>    	}
->>> -	secno = left_start;
->>> -skip_left:
->>>    	segno = GET_SEG_FROM_SEC(sbi, secno);
->>>    	zoneno = GET_ZONE_FROM_SEC(sbi, secno);
->>> @@ -2691,21 +2669,13 @@ static void get_new_segment(struct f2fs_sb_info *sbi,
->>>    		goto got_it;
->>>    	if (zoneno == old_zoneno)
->>>    		goto got_it;
->>> -	if (dir == ALLOC_LEFT) {
->>> -		if (!go_left && zoneno + 1 >= total_zones)
->>> -			goto got_it;
->>> -		if (go_left && zoneno == 0)
->>> -			goto got_it;
->>> -	}
->>>    	for (i = 0; i < NR_CURSEG_TYPE; i++)
->>>    		if (CURSEG_I(sbi, i)->zone == zoneno)
->>>    			break;
->>>    	if (i < NR_CURSEG_TYPE) {
->>>    		/* zone is in user, try another */
->>> -		if (go_left)
->>> -			hint = zoneno * sbi->secs_per_zone - 1;
->>> -		else if (zoneno + 1 >= total_zones)
->>> +		if (zoneno + 1 >= total_zones)
->>>    			hint = 0;
->>>    		else
->>>    			hint = (zoneno + 1) * sbi->secs_per_zone;
->>> @@ -2763,8 +2733,7 @@ static unsigned int __get_next_segno(struct f2fs_sb_info *sbi, int type)
->>>    	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
->>>    		return 0;
->>> -	if (test_opt(sbi, NOHEAP) &&
->>> -		(seg_type == CURSEG_HOT_DATA || IS_NODESEG(seg_type)))
->>> +	if (seg_type == CURSEG_HOT_DATA || IS_NODESEG(seg_type))
->>>    		return 0;
->>>    	if (SIT_I(sbi)->last_victim[ALLOC_NEXT])
->>> @@ -2784,21 +2753,12 @@ static unsigned int __get_next_segno(struct f2fs_sb_info *sbi, int type)
->>>    static void new_curseg(struct f2fs_sb_info *sbi, int type, bool new_sec)
->>>    {
->>>    	struct curseg_info *curseg = CURSEG_I(sbi, type);
->>> -	unsigned short seg_type = curseg->seg_type;
->>>    	unsigned int segno = curseg->segno;
->>> -	int dir = ALLOC_LEFT;
->>>    	if (curseg->inited)
->>> -		write_sum_page(sbi, curseg->sum_blk,
->>> -				GET_SUM_BLOCK(sbi, segno));
->>> -	if (seg_type == CURSEG_WARM_DATA || seg_type == CURSEG_COLD_DATA)
->>> -		dir = ALLOC_RIGHT;
->>> -
->>> -	if (test_opt(sbi, NOHEAP))
->>> -		dir = ALLOC_RIGHT;
->>> -
->>> +		write_sum_page(sbi, curseg->sum_blk, GET_SUM_BLOCK(sbi, segno));
->>>    	segno = __get_next_segno(sbi, type);
->>> -	get_new_segment(sbi, &segno, new_sec, dir);
->>> +	get_new_segment(sbi, &segno, new_sec);
->>>    	curseg->next_segno = segno;
->>>    	reset_curseg(sbi, type, 1);
->>>    	curseg->alloc_type = LFS;
->>> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
->>> index 6fadfb634aac..0f1a5210c163 100644
->>> --- a/fs/f2fs/segment.h
->>> +++ b/fs/f2fs/segment.h
->>> @@ -131,16 +131,6 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
->>>    #define SECTOR_TO_BLOCK(sectors)					\
->>>    	((sectors) >> F2FS_LOG_SECTORS_PER_BLOCK)
->>> -/*
->>> - * indicate a block allocation direction: RIGHT and LEFT.
->>> - * RIGHT means allocating new sections towards the end of volume.
->>> - * LEFT means the opposite direction.
->>> - */
->>> -enum {
->>> -	ALLOC_RIGHT = 0,
->>> -	ALLOC_LEFT
->>> -};
->>> -
->>>    /*
->>>     * In the victim_sel_policy->alloc_mode, there are three block allocation modes.
->>>     * LFS writes data sequentially with cleaning operations.
->>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
->>> index 5aaf44c4698b..916e82e9c307 100644
->>> --- a/fs/f2fs/super.c
->>> +++ b/fs/f2fs/super.c
->>> @@ -733,10 +733,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->>>    			clear_opt(sbi, DISCARD);
->>>    			break;
->>>    		case Opt_noheap:
->>> -			set_opt(sbi, NOHEAP);
->>> -			break;
->>>    		case Opt_heap:
->>> -			clear_opt(sbi, NOHEAP);
->>> +			f2fs_warn(sbi, "heap/no_heap options were deprecated");
->>>    			break;
->>>    #ifdef CONFIG_F2FS_FS_XATTR
->>>    		case Opt_user_xattr:
->>> @@ -1962,10 +1960,6 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
->>>    	} else {
->>>    		seq_puts(seq, ",nodiscard");
->>>    	}
->>> -	if (test_opt(sbi, NOHEAP))
->>> -		seq_puts(seq, ",no_heap");
->>> -	else
->>> -		seq_puts(seq, ",heap");
->>>    #ifdef CONFIG_F2FS_FS_XATTR
->>>    	if (test_opt(sbi, XATTR_USER))
->>>    		seq_puts(seq, ",user_xattr");
->>> @@ -2142,7 +2136,6 @@ static void default_options(struct f2fs_sb_info *sbi, bool remount)
->>>    	set_opt(sbi, INLINE_XATTR);
->>>    	set_opt(sbi, INLINE_DATA);
->>>    	set_opt(sbi, INLINE_DENTRY);
->>> -	set_opt(sbi, NOHEAP);
->>>    	set_opt(sbi, MERGE_CHECKPOINT);
->>>    	F2FS_OPTION(sbi).unusable_cap = 0;
->>>    	sbi->sb->s_flags |= SB_LAZYTIME;
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 36c3cb547901..8597dfaef700 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -564,6 +564,12 @@ Description:	When ATGC is on, it controls age threshold to bypass GCing young
+ 		candidates whose age is not beyond the threshold, by default it was
+ 		initialized as 604800 seconds (equals to 7 days).
+ 
++What:		/sys/fs/f2fs/<disk>/atgc_enabled
++Date:		Feb 2024
++Contact:	"Jinbao Liu" <liujinbao1@xiaomi.com>
++Description:	It represents whether ATGC is on or off. The value is 1 which
++               indicates that ATGC is on, and 0 indicates that it is off.
++
+ What:		/sys/fs/f2fs/<disk>/gc_reclaimed_segments
+ Date:		July 2021
+ Contact:	"Daeho Jeong" <daehojeong@google.com>
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 417fae96890f..0915872abd97 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -143,6 +143,12 @@ static ssize_t pending_discard_show(struct f2fs_attr *a,
+ 				&SM_I(sbi)->dcc_info->discard_cmd_cnt));
+ }
+ 
++static ssize_t atgc_enabled_show(struct f2fs_attr *a,
++		struct f2fs_sb_info *sbi, char *buf)
++{
++	return sysfs_emit(buf, "%d\n", sbi->am.atgc_enabled ? 1 : 0);
++}
++
+ static ssize_t gc_mode_show(struct f2fs_attr *a,
+ 		struct f2fs_sb_info *sbi, char *buf)
+ {
+@@ -1017,6 +1023,7 @@ F2FS_GENERAL_RO_ATTR(encoding);
+ F2FS_GENERAL_RO_ATTR(mounted_time_sec);
+ F2FS_GENERAL_RO_ATTR(main_blkaddr);
+ F2FS_GENERAL_RO_ATTR(pending_discard);
++F2FS_GENERAL_RO_ATTR(atgc_enabled);
+ F2FS_GENERAL_RO_ATTR(gc_mode);
+ #ifdef CONFIG_F2FS_STAT_FS
+ F2FS_GENERAL_RO_ATTR(moved_blocks_background);
+@@ -1144,6 +1151,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(atgc_candidate_count),
+ 	ATTR_LIST(atgc_age_weight),
+ 	ATTR_LIST(atgc_age_threshold),
++	ATTR_LIST(atgc_enabled),
+ 	ATTR_LIST(seq_file_ra_mul),
+ 	ATTR_LIST(gc_segment_mode),
+ 	ATTR_LIST(gc_reclaimed_segments),
+-- 
+2.25.1
+
 
 
 _______________________________________________
