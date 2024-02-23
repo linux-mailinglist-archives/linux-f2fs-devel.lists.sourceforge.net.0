@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 121E2860979
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Feb 2024 04:44:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A17E88609A6
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Feb 2024 04:53:16 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rdMTf-0004Pl-Af;
-	Fri, 23 Feb 2024 03:44:00 +0000
+	id 1rdMca-0004dk-32;
+	Fri, 23 Feb 2024 03:53:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rdMTd-0004Pe-UM
+ (envelope-from <chao@kernel.org>) id 1rdMcY-0004db-As
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Feb 2024 03:43:58 +0000
+ Fri, 23 Feb 2024 03:53:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4ZKfrxOPlWiP2PoAe6ADrglo6s+SEc50FbdDsm7qZy0=; b=MJSGPoQ2W5C08HjlJ2ofGcO1Ts
- MfpaxRSSJDDbaOs15u8MaESSTJem/R44JGerYeMAvOTEooqOWLehR2F3ap+EbTc8mg6Ud3u3QYTpU
- HV6LkiqXIkr8sLELaO/IQBpt+/UybZwNzPxVmKIobBie/EC+wFmM/RANkI/RgKGidGdk=;
+ bh=SxpAquD9vNjgwaLQH3hOotvskYT8jWGkkkXsQmBdLcY=; b=A10KzNFrn1SFKIHgENmlP4kekj
+ gFf0j6TvJ6uVi43KYw/xvok/aP3yHknE8Cn2J/B0+KvVFfXwxcmi63PgsihSaQ9aamK1Cv40MnkWU
+ 67RpJYhg6218yqWmHzBkfrZF/N4XSsX4V4DuR35A0JeBNEmojsLql7yWNShzeFQDToqE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,31 +31,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4ZKfrxOPlWiP2PoAe6ADrglo6s+SEc50FbdDsm7qZy0=; b=hKLxW5ujGP5MqkrlTk0EVr4/th
- NnvmYk/xzZOePdLQAUxIV0BRoLALSmlw72PZVAZQs6ZzYeIP8O283xj/XCajAGApWjkMrN9qZAn3E
- sHIp89FNGQdNkaPUtOv48ry7zaBGoJgTjzVYS5Mwe7mJG4B5Pjjn1X2bXRB/+6RiiRzg=;
+ bh=SxpAquD9vNjgwaLQH3hOotvskYT8jWGkkkXsQmBdLcY=; b=VKP3uK/MAPZI4ba0NOoGpwLhYM
+ 1/Rk5BNsbbBT8krE0mH1ATVeswoYc00ESDEQ8rqYfJZ5LR2rKkzENoVaB8yYY2nQvSYgo1MomI8rN
+ 8EZIjYleTRd+1KrVVZUtdqDM8NMpILt6d89Ca4qzj3bV2dR+hVJujM1fwCIL2fs2DYEw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rdMTb-0005bj-DQ for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Feb 2024 03:43:58 +0000
+ id 1rdMcW-0005oH-Nt for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 23 Feb 2024 03:53:11 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 3E028633AC;
- Fri, 23 Feb 2024 03:43:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F6A7C433F1;
- Fri, 23 Feb 2024 03:43:43 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8DC1E633BA;
+ Fri, 23 Feb 2024 03:52:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CEE6C433C7;
+ Fri, 23 Feb 2024 03:52:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1708659825;
- bh=TRd/BANzvLVqQrUFMdKyHxBiSVmEvU8CPsHLgwppJmw=;
+ s=k20201202; t=1708660379;
+ bh=BjpKxR2k21bgbGwIgR3wU99y19kd0NW3z9dbHvZQyIs=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=IRkTxVp+XmHAkcwhEve10Jt7hR89sLLmDl6YM/8OqJBWKFnEl43DD8xXfu8vZhGM4
- XvuAUt+uxy84hqG0eDj+LI9guGgPKqyPYc8UTqC9tAAeDS+W9LQPpSekc2rnesRkSZ
- ksSy9StbNxQyT3TsFrihNHyMDeZE1dMxb2Oghxwa6JFz54Kxqaw6oRDI2XQ+SGosEk
- M/yXwdOK/shISDFCO0Ld3hgTkQXGoalhKGyTUuKgankv3p3HgIrn3kjntPMP5PmVVX
- HWRsB5pbkSkzRonQqHM8k2U31G+n0gWIO/pwGFOyjDVyW0B0cKOLxIftTII7BBGVnW
- J4UWh7FVTWCpw==
-Message-ID: <baccf741-eeaa-476d-8478-098dc5d6e9d3@kernel.org>
-Date: Fri, 23 Feb 2024 11:43:41 +0800
+ b=CCOSiS151SH2qfeHhw7Nn1Fs+LWuxXTnlx7NJvhqpvvsdURE1ZupSGXxeyvlRjcJp
+ H0YUmteJROkgHEhBZq1cwgEIThRrZcD0IoSoA86Kz+6VldfbAmxvroFzB2ssbMPj87
+ Yp2iWNREU7Hdg/3Or+PUfrnwEWpNR/FwY3085IlEh5Ouu18MmJp+gfYEGVMQ3oXPGD
+ GGAfDrEtT51HP8VSR3Z5VM4c1oGO69exxH3GZ7vuFaS9CUVc800R5JsmrbRtv+GrBT
+ sj/6W66HGlSy42TDj4Mr3pmlSBlfa+BWeUI4Lv3iqtToMtIIyR0Ty/byvC8H6hu3M+
+ whEqokUPK8BgA==
+Message-ID: <a17c2c2d-6bfb-4c5a-8b6d-1e2dd5f80f54@kernel.org>
+Date: Fri, 23 Feb 2024 11:52:54 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
@@ -91,7 +91,7 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rdMTb-0005bj-DQ
+X-Headers-End: 1rdMcW-0005oH-Nt
 Subject: Re: [f2fs-dev] [PATCH v3 2/2] f2fs: support file pinning for zoned
  devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -458,12 +458,6 @@ On 2024/2/14 1:38, Daeho Jeong wrote:
 >   		write_sum_page(sbi, curseg->sum_blk, GET_SUM_BLOCK(sbi, segno));
 > +
 >   	segno = __get_next_segno(sbi, type);
-
-If type is CURSEG_COLD_DATA_PINNED, can we let __get_next_segno() return 0?
-then we can allocate free segment from conventional zone in priority.
-
-Thanks,
-
 > -	get_new_segment(sbi, &segno, new_sec);
 > +	get_new_segment(sbi, &segno, new_sec, pinning);
 > +	if (new_sec && pinning &&
@@ -552,6 +546,15 @@ Thanks,
 > +		if (type == CURSEG_COLD_DATA_PINNED &&
 > +		    !((curseg->segno + 1) % sbi->segs_per_sec))
 > +			goto skip_new_segment;
+
+Before we skip allocate new segment for pinned log, how about
+tagging curseg as uninitialized one via curseg->inited = false, and
+curseg->segno = NULL_SEGNO? so that we can avoid
+__f2fs_save_inmem_curseg() to touch this log, and not show incorrect
+segno of pinned log in /sys/kernel/debug/f2fs/status.
+
+Thanks,
+
 > +
 >   		if (from_gc) {
 >   			get_atssr_segment(sbi, type, se->type,
