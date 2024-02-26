@@ -2,99 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C75838683FC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Feb 2024 23:48:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51A09868405
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Feb 2024 23:52:51 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rejlH-00048p-Vb;
-	Mon, 26 Feb 2024 22:47:52 +0000
+	id 1rejpy-0004GM-KP;
+	Mon, 26 Feb 2024 22:52:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1rejlG-00048g-99
+ (envelope-from <jaegeuk@kernel.org>) id 1rejpw-0004GG-Tm
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 26 Feb 2024 22:47:51 +0000
+ Mon, 26 Feb 2024 22:52:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8lbptSU57JD2hlE6MWgKbuhahaE/sQ4zzkDcWOQfFpA=; b=fT00DyfdUAUcK5bDWbBIBqlFtK
- +brALYAK28MTd8nNJ/yhtspLlSPtjko/IS9HxjgjhH8Ba4rLJw3irwmQ7nBkpC5fVaI/+hyVwYBQT
- lUFryrf09+gGTj9ePlLtdmkebPd9Hb9xPKbPa5pQKraK/algUtJ2i0pHOnYWxONQOIQM=;
+ bh=vOpMOvXuTswAG66D7mx7NWfrWiKj6FmFsxI+r/6I2iU=; b=bXHlUQrGmwvSIjf8H+PKukPNf1
+ r0tZnYmOh2UpBVa/T+caCRUVALgshkyF0Nabd9KvNmmDmtGQBoPCm5ACFLmh3WNpDPimn2XaRNP1v
+ pFmsqdi4azL6KXXbz9CcSAviamkJoNe8clYRruy2FZB7uOWyRJHAR7LNx+413hzeWU3A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8lbptSU57JD2hlE6MWgKbuhahaE/sQ4zzkDcWOQfFpA=; b=PFAhPQ1A4A36kXbTr8SXFEtAlH
- M6jAAGKXx2En+CbetOd5UQOgMqLPMlsyK9B76/z6pmp67eF9uTs+SXtCWA/8FLwV+ipMbOgquYjzJ
- 03Obs2US46It8PNzzGt4qP8a7Jgz4iPkoaMBbHWm+1llouZ9J9HBJ5jfFod5fJlKrg/4=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=vOpMOvXuTswAG66D7mx7NWfrWiKj6FmFsxI+r/6I2iU=; b=Wl/TWdVpvhH5n19STZm8aZqbGA
+ FV2JxkuCbRbLQir34/WMoLw2JDSM6lfDk0ctZ/VHfXseSwKVnZoH1cmB9IiHAs2y8zNqgHog64euc
+ hBojMvc4MVpSudEaWZF8JSCPc+kU+NYggC3tUmsS/s5hWRcegFukRguDikCBF31ZGXw8=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rejlF-0002IJ-1t for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 26 Feb 2024 22:47:51 +0000
+ id 1rejpx-0002Sj-60 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 26 Feb 2024 22:52:41 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 5465ACE062B;
- Mon, 26 Feb 2024 22:47:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C472C433C7;
- Mon, 26 Feb 2024 22:47:36 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id BF3DF61211
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 26 Feb 2024 22:52:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D6B9C433C7;
+ Mon, 26 Feb 2024 22:52:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1708987656;
- bh=SIF6l2OHEXEE3BAbQV6qsonqNnLgzP8DvqtGYEaQfO4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=p00DO6ydaneDwhDZD87n2MMe5t7m6vJWietj9ki3VDSivg0mFNftdWa+kwiBfnfZY
- uUTWl2aw3awaqTWx6rU1iWJXAP0Urgz0r2xkvwbXAbfTPqcEHRDDjT4qpc5RrQt1O1
- pl7KzGBS0BGdDvNQcx7U961icohJeNW3AzOE0NbaUE63ZF/gM/eeulShaEZmPzVxcr
- 8xd1UKweq57OMo57Sm4Vj6SDhXOMrtVUr2clqZgtK34L7cgZSWBn+yTfBG8EGO9Ku1
- fntyYzlhzyi1YIo9QPm1xGaSdV/tst2hNuclApwV4HFpjqKKXhcdMvgGeNN0xlfL9b
- WEoqzCPEXU0vw==
-Date: Mon, 26 Feb 2024 14:47:34 -0800
+ s=k20201202; t=1708987950;
+ bh=eARabO0/cgBRc/UGX8Aec460i0lvUced5HQ7ISeVL7M=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=TyGRqihJlxSZxTTQOuDtehdRX8prJI0IhnlMRM9L4OSfv/eAnOTpr247UMlKX0fZw
+ TfTs6BtkMhZn0Hg5NfBnw8x/BiRoQbftZcrfif9gFbDygojg4b3gOQT6u0klEJizNB
+ zasRDGdmRGOgep0i80t8apeQJBPmEbAaf1Tl/pZK2bqE90F+4VoAYUP+uBC/+QG/Ji
+ cNtVup4kF06tzgbQitj4wQRREOfaiLmSjS+d31GeCcm+9VrGAVsMoLtYQt9NyYFd0Q
+ iiUWl1vhoVT80FQj1ICVh57Sum7SNY6O6mkFg88SMGAdB1VAtTw3iaXiX3uXdtRTYZ
+ /2tyQdZOgxRtA==
+Date: Mon, 26 Feb 2024 14:52:28 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <Zd0VBo3ilwRq4BJy@google.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <Zd0WLOe89pByO7yX@google.com>
 References: <20240223205535.307307-1-jaegeuk@kernel.org>
- <20240223205535.307307-5-jaegeuk@kernel.org>
- <CACOAw_xdBY5Rg1J4jUTaH0UxVrdZ+CCVQj72q_cMxyCHuCTy_Q@mail.gmail.com>
+ <20240223205535.307307-3-jaegeuk@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CACOAw_xdBY5Rg1J4jUTaH0UxVrdZ+CCVQj72q_cMxyCHuCTy_Q@mail.gmail.com>
-X-Spam-Score: -2.5 (--)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+In-Reply-To: <20240223205535.307307-3-jaegeuk@kernel.org>
+X-Spam-Score: -5.2 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 02/26, Daeho Jeong wrote: > On Fri, Feb 23, 2024 at 12:56 PM
-    Jaegeuk Kim <jaegeuk@kernel.org> wrote: > > > > Don't block mounting the
-   partition, if cap is 100%. > > > > Signed-off-by: Jaegeuk Kim [...] 
- 
- Content analysis details:   (-2.5 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  No functional change, but add some more logs. Reviewed-by:
+ Chao Yu <chao@kernel.org> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+ --- from v1: - avoid unnecessary log per Daeho's comment 
+ Content analysis details:   (-5.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
-                             medium trust
-                             [145.40.73.55 listed in list.dnswl.org]
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rejlF-0002IJ-1t
-Subject: Re: [f2fs-dev] [PATCH 5/5] f2fs: allow to mount if cap is 100
+X-Headers-End: 1rejpx-0002Sj-60
+Subject: Re: [f2fs-dev] [PATCH 3/5 v2] f2fs: print zone status in string and
+ some log
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,38 +104,106 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMDIvMjYsIERhZWhvIEplb25nIHdyb3RlOgo+IE9uIEZyaSwgRmViIDIzLCAyMDI0IGF0IDEy
-OjU24oCvUE0gSmFlZ2V1ayBLaW0gPGphZWdldWtAa2VybmVsLm9yZz4gd3JvdGU6Cj4gPgo+ID4g
-RG9uJ3QgYmxvY2sgbW91bnRpbmcgdGhlIHBhcnRpdGlvbiwgaWYgY2FwIGlzIDEwMCUuCj4gPgo+
-ID4gU2lnbmVkLW9mZi1ieTogSmFlZ2V1ayBLaW0gPGphZWdldWtAa2VybmVsLm9yZz4KPiA+IC0t
-LQo+ID4gIGZzL2YyZnMvc2VnbWVudC5jIHwgMyArKysKPiA+ICAxIGZpbGUgY2hhbmdlZCwgMyBp
-bnNlcnRpb25zKCspCj4gPgo+ID4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvc2VnbWVudC5jIGIvZnMv
-ZjJmcy9zZWdtZW50LmMKPiA+IGluZGV4IDZkNTg2YWU4YjU1Zi4uZjExMzYxMTUyZDJhIDEwMDY0
-NAo+ID4gLS0tIGEvZnMvZjJmcy9zZWdtZW50LmMKPiA+ICsrKyBiL2ZzL2YyZnMvc2VnbWVudC5j
-Cj4gPiBAQCAtOTA0LDYgKzkwNCw5IEBAIGludCBmMmZzX2Rpc2FibGVfY3BfYWdhaW4oc3RydWN0
-IGYyZnNfc2JfaW5mbyAqc2JpLCBibG9ja190IHVudXNhYmxlKQo+ID4gIHsKPiA+ICAgICAgICAg
-aW50IG92cF9ob2xlX3NlZ3MgPQo+ID4gICAgICAgICAgICAgICAgIChvdmVycHJvdmlzaW9uX3Nl
-Z21lbnRzKHNiaSkgLSByZXNlcnZlZF9zZWdtZW50cyhzYmkpKTsKPiA+ICsKPiA+ICsgICAgICAg
-aWYgKEYyRlNfT1BUSU9OKHNiaSkudW51c2FibGVfY2FwX3BlcmMgPT0gMTAwKQo+ID4gKyAgICAg
-ICAgICAgICAgIHJldHVybiAwOwo+IAo+IFdpdGggdGhpcywgZjJmcyB3aWxsIG5vdCBleGVjdXRl
-IEdDLiBXaGF0IGlzIHRoaXMgMTAwCj4gdW51c2FibGVfY2FwX3BlcmMgdXNlZCBmb3I/CgpUaGVv
-cml0aWNhbGx5LCBpdCB3b24ndCwgYnV0IEkgd2FzIGhpdHRpbmcgYSBHQyBsb29wLCBhbmQgSSBz
-dXNwZWN0ZWQgYSB3cm9uZwpzZWN0aW9uL3NlZ21lbnQgbGF5b3V0LiBTbywgSSBwb3N0ZWQgdGhl
-IGJlbG93LCBhbmQgZ3Vlc3Mgd2UgbmVlZCB0aGlzIHBhdGNoCmFzIHdvcmthcm91bmQuCgpodHRw
-czovL3BhdGNod29yay5rZXJuZWwub3JnL3Byb2plY3QvZjJmcy9wYXRjaC8yMDI0MDIyNDAxMTQx
-MS4zODIwNzE5LTEtamFlZ2V1a0BrZXJuZWwub3JnLwoKPiAKPiA+ICAgICAgICAgaWYgKHVudXNh
-YmxlID4gRjJGU19PUFRJT04oc2JpKS51bnVzYWJsZV9jYXApCj4gPiAgICAgICAgICAgICAgICAg
-cmV0dXJuIC1FQUdBSU47Cj4gPiAgICAgICAgIGlmIChpc19zYmlfZmxhZ19zZXQoc2JpLCBTQklf
-Q1BfRElTQUJMRURfUVVJQ0spICYmCj4gPiAtLQo+ID4gMi40NC4wLnJjMC4yNTguZzczMjBlOTU4
-ODYtZ29vZwo+ID4KPiA+Cj4gPgo+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KPiA+IExpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0Cj4gPiBMaW51
-eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+ID4gaHR0cHM6Ly9saXN0cy5zb3Vy
-Y2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAoKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFp
-bGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8v
-bGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+No functional change, but add some more logs.
+
+Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+
+ from v1:
+  - avoid unnecessary log per Daeho's comment
+
+ fs/f2fs/segment.c | 27 +++++++++++++++++++++------
+ fs/f2fs/super.c   |  1 +
+ 2 files changed, 22 insertions(+), 6 deletions(-)
+
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index d4f228e6f771..31a9e7db19e3 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -4912,6 +4912,16 @@ static int sanity_check_curseg(struct f2fs_sb_info *sbi)
+ }
+ 
+ #ifdef CONFIG_BLK_DEV_ZONED
++const char *f2fs_zone_status[BLK_ZONE_COND_OFFLINE + 1] = {
++	[BLK_ZONE_COND_NOT_WP]		= "NOT_WP",
++	[BLK_ZONE_COND_EMPTY]		= "EMPTY",
++	[BLK_ZONE_COND_IMP_OPEN]	= "IMPLICITE_OPEN",
++	[BLK_ZONE_COND_EXP_OPEN]	= "EXPLICITE_OPEN",
++	[BLK_ZONE_COND_CLOSED]		= "CLOSED",
++	[BLK_ZONE_COND_READONLY]	= "READONLY",
++	[BLK_ZONE_COND_FULL]		= "FULL",
++	[BLK_ZONE_COND_OFFLINE]		= "OFFLINE",
++};
+ 
+ static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
+ 				    struct f2fs_dev_info *fdev,
+@@ -4932,14 +4942,19 @@ static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
+ 	 * Skip check of zones cursegs point to, since
+ 	 * fix_curseg_write_pointer() checks them.
+ 	 */
+-	if (zone_segno >= MAIN_SEGS(sbi) ||
+-	    IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi, zone_segno)))
++	if (zone_segno >= MAIN_SEGS(sbi))
+ 		return 0;
+ 
+ 	/*
+ 	 * Get # of valid block of the zone.
+ 	 */
+ 	valid_block_cnt = get_valid_blocks(sbi, zone_segno, true);
++	if (IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi, zone_segno))) {
++		f2fs_notice(sbi, "Open zones: valid block[0x%x,0x%x] cond[%s]",
++				zone_segno, valid_block_cnt,
++				f2fs_zone_status[zone->cond]);
++		return 0;
++	}
+ 
+ 	if ((!valid_block_cnt && zone->cond == BLK_ZONE_COND_EMPTY) ||
+ 	    (valid_block_cnt && zone->cond == BLK_ZONE_COND_FULL))
+@@ -4947,8 +4962,8 @@ static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
+ 
+ 	if (!valid_block_cnt) {
+ 		f2fs_notice(sbi, "Zone without valid block has non-zero write "
+-			    "pointer. Reset the write pointer: cond[0x%x]",
+-			    zone->cond);
++			    "pointer. Reset the write pointer: cond[%s]",
++			    f2fs_zone_status[zone->cond]);
+ 		ret = __f2fs_issue_discard_zone(sbi, fdev->bdev, zone_block,
+ 					zone->len >> log_sectors_per_block);
+ 		if (ret)
+@@ -4965,8 +4980,8 @@ static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
+ 	 * selected for write operation until it get discarded.
+ 	 */
+ 	f2fs_notice(sbi, "Valid blocks are not aligned with write "
+-		    "pointer: valid block[0x%x,0x%x] cond[0x%x]",
+-		    zone_segno, valid_block_cnt, zone->cond);
++		    "pointer: valid block[0x%x,0x%x] cond[%s]",
++		    zone_segno, valid_block_cnt, f2fs_zone_status[zone->cond]);
+ 
+ 	ret = blkdev_zone_mgmt(fdev->bdev, REQ_OP_ZONE_FINISH,
+ 				zone->start, zone->len, GFP_NOFS);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 4d03ce1109ad..fc7f1a9fbbda 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4674,6 +4674,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 	 * check zoned block devices' write pointer consistency.
+ 	 */
+ 	if (!f2fs_readonly(sb) && f2fs_sb_has_blkzoned(sbi)) {
++		f2fs_notice(sbi, "Checking entire write pointers");
+ 		err = f2fs_check_write_pointer(sbi);
+ 		if (err)
+ 			goto free_meta;
+-- 
+2.44.0.rc1.240.g4c46232300-goog
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
