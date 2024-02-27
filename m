@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EAA9869DE0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Feb 2024 18:38:35 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2E55869E0F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Feb 2024 18:42:33 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rf1PQ-0005J0-SJ;
-	Tue, 27 Feb 2024 17:38:28 +0000
+	id 1rf1TK-0007Do-9A;
+	Tue, 27 Feb 2024 17:42:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1rf1PN-0005Ir-L2
+ (envelope-from <jaegeuk@kernel.org>) id 1rf1TI-0007Di-VA
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 27 Feb 2024 17:38:25 +0000
+ Tue, 27 Feb 2024 17:42:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=t1QgWJQHAhRCHMdN/CPoekkaPk+OHaNc0WOHk/AWhqs=; b=Dcu9Ql/xPGdtnkzhkIrGkMuXz+
- z8Sg9OC2cjqgbpIGemNvGRQOGwcUI03omZd+lwD5xwJLgcjz9HFS9fL2mU33GwEPo48ISzAkjoy6g
- pcWObAhLc32MSM8ultlxbZAsC8M21HGB/Jri/U4K50Ed3TEWOheiB/D50q6gJtg+hqGo=;
+ bh=YITWdPyEypuI6/fNIZlf0KLI4rAwjITUCKsQXfLLAnQ=; b=dFaub3LWKGzLrtc8atxhkzLjod
+ fhNdYYjUpuxdK1UDE57hbzgiKlfVDxlUXINd72AS+5BLXp2AjiAfDmLEQCdVASthTJzlaj1GJmono
+ bUP9lcZfcnCI34SWqtqsrEZKaeWy8gqSw13X8j3BWaS1QrvYJDvjA2XIBfGebR3Etrwg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,66 +31,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=t1QgWJQHAhRCHMdN/CPoekkaPk+OHaNc0WOHk/AWhqs=; b=UnRX/4/D5axkf+KrYPKhxw9CNq
- DdL+9ruAXMZ3p5UpEJi7XIdCuL/mgHa53byHSNu+HeYmLUAjObFVNjIBsqxdzF5nDTT5RoQUGQFeu
- GR97XtQyYBTauvjI7ZuJsgo5QoYAlWK6rI2R0nhXt5qxLjjfXux5kFvnFN/6AAjB4OgE=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=YITWdPyEypuI6/fNIZlf0KLI4rAwjITUCKsQXfLLAnQ=; b=eLEPPxriupfcv4VN/9DoqUw/d7
+ hgVkRnO7nt8T3d9V4eQPDOLqU9y9SumojhNwpE/eGLdC4anf7PL4GOHlwkcP4x4v87mgteeHWsy8y
+ tW6DEudHOFla8hV7c2zjGh+m/LCpW6lSdhzOItHuArT6R9K6BCSIYqTzl4bs4ChTHXQU=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rf1PI-0006lG-6v for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 27 Feb 2024 17:38:25 +0000
+ id 1rf1TF-0006xl-AJ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 27 Feb 2024 17:42:29 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5E3506135B;
- Tue, 27 Feb 2024 17:38:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E3196C433C7;
- Tue, 27 Feb 2024 17:38:07 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 9D854CE18D7;
+ Tue, 27 Feb 2024 17:42:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE62FC433C7;
+ Tue, 27 Feb 2024 17:42:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709055488;
- bh=OUkQH6kfTzC+xEdUPZlVMTxWJ2toj17/yLTfx3I9lws=;
+ s=k20201202; t=1709055732;
+ bh=NlR8SVDrbbdna3Bt2gl2bPF72XhNMosFSQzI+VbYz+g=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=UNOlCtvo8H56c687FO1GErcA+BvxbXPtHAuGIIIZXgxGd8Vf1EIMyXDKg5jWWgLKL
- qp0X/uhaBebx4nJwl5/tKaYGRW+8tu6UfEq9H3sBaWTUkYXJOKtNQkN5+FD+LSYhnq
- UGU1Hrqk3dzXEw9iD0J492SEmvXgR/oYhbaSCMRiovDUzN4+BN6d9IZw5u2WIiIcZm
- EvoQvP5YZarOv5lR4Jfsr5DO0Nd1xYHzGhcXXM0tJcrNhiDI/80snNkph2aCRlsSyM
- j/EGSDp7rwU9X8Cz08e0S2egyXzzMw6xAUWDIfUnjObWtllVRVcHL3Qjya7iH3WbdH
- aV1fveHuS4i3w==
-Date: Tue, 27 Feb 2024 09:38:06 -0800
+ b=HGtb9rusW+K5vUyPl4B0LG//mYO7wTj5662tDGqEbuZ5X/VGtP5d2wxmDwlRv0oK8
+ eDQn77v19RIlvIumY+EkGy5/Hrmuow/9U/AMhVBiQRFaUJYakBssmpAmmO1HjsjKYv
+ 1L3JQzCbN00JD/Usfhm27etUXYaIRnUoiQmpMmAKGkl6DilesJKa9MbHTgF/nR08ua
+ Ziyi2RW39QCk5yHSIvywxYehxaffjEVPNceLtpTqGGWAYoeZN526pgG2emO5Hddn2k
+ HwnKm7S/aFSZ9f82MmPoAIdGFC+LjVBvts0WXfhRhbriWwlS26pRfCcBPXX2hdIZKu
+ OCcKTFkc+QO0g==
+Date: Tue, 27 Feb 2024 09:42:11 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Dan Carpenter <dan.carpenter@linaro.org>
-Message-ID: <Zd4d_qPiG-8-l1J2@google.com>
-References: <bb8814a4-09e1-49b7-ab13-391624a0658c@moroto.mountain>
+Message-ID: <Zd4e8286KuPqLRaU@google.com>
+References: <0dbca927-9037-4ccd-ac1e-98ade64a2a0b@moroto.mountain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <bb8814a4-09e1-49b7-ab13-391624a0658c@moroto.mountain>
-X-Spam-Score: -5.3 (-----)
+In-Reply-To: <0dbca927-9037-4ccd-ac1e-98ade64a2a0b@moroto.mountain>
+X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi, I merged two patches, which addresses this. f2fs: stop
- checkpoint when get a out-of-bounds segment f2fs: fix to don't call
- f2fs_stop_checkpoint in spinlock coverage 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  On 02/27, Dan Carpenter wrote: > Hello Jaegeuk Kim, > > The
+ patch 9c1d3cd4ff8c: "f2fs: use BLKS_PER_SEG, BLKS_PER_SEC, and > SEGS_PER_SEC"
+ from Feb 6, 2024 (linux-next), leads to the following > Smatc [...] 
+ Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rf1PI-0006lG-6v
-Subject: Re: [f2fs-dev] [bug report] f2fs: stop checkpoint when get a
- out-of-bounds segment
+X-Headers-End: 1rf1TF-0006xl-AJ
+Subject: Re: [f2fs-dev] [bug report] f2fs: use BLKS_PER_SEG, BLKS_PER_SEC,
+ and SEGS_PER_SEC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,96 +102,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: zhiguo.niu@unisoc.com, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
-
-I merged two patches, which addresses this.
-
-f2fs: stop checkpoint when get a out-of-bounds segment
-f2fs: fix to don't call f2fs_stop_checkpoint in spinlock coverage
-
 On 02/27, Dan Carpenter wrote:
-> Hello Zhiguo Niu,
+> Hello Jaegeuk Kim,
 > 
-> The patch 7a0392932f97: "f2fs: stop checkpoint when get a
-> out-of-bounds segment" from Feb 20, 2024 (linux-next), leads to the
-> following Smatch static checker warning:
+> The patch 9c1d3cd4ff8c: "f2fs: use BLKS_PER_SEG, BLKS_PER_SEC, and
+> SEGS_PER_SEC" from Feb 6, 2024 (linux-next), leads to the following
+> Smatch static checker warning:
 > 
-> 	fs/f2fs/checkpoint.c:34 f2fs_stop_checkpoint()
-> 	warn: sleeping in atomic context
+> 	fs/f2fs/gc.c:2092 update_fs_metadata()
+> 	warn: cast after binop
 > 
-> fs/f2fs/segment.c
->   2650  static void get_new_segment(struct f2fs_sb_info *sbi,
->   2651                          unsigned int *newseg, bool new_sec, bool pinning)
->   2652  {
->   2653          struct free_segmap_info *free_i = FREE_I(sbi);
->   2654          unsigned int segno, secno, zoneno;
->   2655          unsigned int total_zones = MAIN_SECS(sbi) / sbi->secs_per_zone;
->   2656          unsigned int hint = GET_SEC_FROM_SEG(sbi, *newseg);
->   2657          unsigned int old_zoneno = GET_ZONE_FROM_SEG(sbi, *newseg);
->   2658          bool init = true;
->   2659          int i;
->   2660  
->   2661          spin_lock(&free_i->segmap_lock);
->                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> preempt disabled here
+> fs/f2fs/gc.c
+>     2089 static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
+>     2090 {
+>     2091         int segs = secs * SEGS_PER_SEC(sbi);
+> --> 2092         long long blks = (long long)(segs << sbi->log_blocks_per_seg);
+>                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> Originally this was something like:
 > 
->   2662  
->   2663          if (!new_sec && ((*newseg + 1) % SEGS_PER_SEC(sbi))) {
->   2664                  segno = find_next_zero_bit(free_i->free_segmap,
->   2665                          GET_SEG_FROM_SEC(sbi, hint + 1), *newseg + 1);
->   2666                  if (segno < GET_SEG_FROM_SEC(sbi, hint + 1))
->   2667                          goto got_it;
->   2668          }
->   2669  
->   2670          /*
->   2671           * If we format f2fs on zoned storage, let's try to get pinned sections
->   2672           * from beginning of the storage, which should be a conventional one.
->   2673           */
->   2674          if (f2fs_sb_has_blkzoned(sbi)) {
->   2675                  segno = pinning ? 0 : max(first_zoned_segno(sbi), *newseg);
->   2676                  hint = GET_SEC_FROM_SEG(sbi, segno);
->   2677          }
->   2678  
->   2679  find_other_zone:
->   2680          secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
->   2681          if (secno >= MAIN_SECS(sbi)) {
->   2682                  secno = find_first_zero_bit(free_i->free_secmap,
->   2683                                                          MAIN_SECS(sbi));
->   2684                  if (secno >= MAIN_SECS(sbi)) {
->   2685                          f2fs_stop_checkpoint(sbi, false,
->                                                           ^^^^^
-> This false means we sleep while holding a spin lock.
+> 	long long blks = (long long)segs << sbi->log_blocks_per_seg;
+
+Thanks. I just reverted this line back to the original cast one.
+
 > 
->   2686                                  STOP_CP_REASON_NO_SEGMENT);
->   2687                          f2fs_bug_on(sbi, 1);
->   2688                  }
->   2689          }
->   2690          segno = GET_SEG_FROM_SEC(sbi, secno);
->   2691          zoneno = GET_ZONE_FROM_SEC(sbi, secno);
+> So the cast seemed necessary to avoid an integer overflow.
 > 
-> fs/f2fs/checkpoint.c
->     29 void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io,
->     30                                                 unsigned char reason)
->     31 {
->     32         f2fs_build_fault_attr(sbi, 0, 0);
->     33         if (!end_io)
-> --> 34                 f2fs_flush_merged_writes(sbi);
->     35         f2fs_handle_critical_error(sbi, reason, end_io);
->     36 }
+>     2093         long long user_block_count =
+>     2094                                 le64_to_cpu(F2FS_CKPT(sbi)->user_block_count);
+>     2095 
+>     2096         SM_I(sbi)->segment_count = (int)SM_I(sbi)->segment_count + segs;
+>     2097         MAIN_SEGS(sbi) = (int)MAIN_SEGS(sbi) + segs;
 > 
 > regards,
 > dan carpenter
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
