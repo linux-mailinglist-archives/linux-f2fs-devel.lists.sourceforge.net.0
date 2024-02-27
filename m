@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DA4A868485
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Feb 2024 00:14:50 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6BA7868560
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Feb 2024 02:00:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rekBH-0006X2-NU;
-	Mon, 26 Feb 2024 23:14:43 +0000
+	id 1relpN-0004lQ-Qp;
+	Tue, 27 Feb 2024 01:00:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1rekBF-0006Ww-Rj
+ (envelope-from <jaegeuk@kernel.org>) id 1relpM-0004lK-LZ
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 26 Feb 2024 23:14:41 +0000
+ Tue, 27 Feb 2024 01:00:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aamj8ctSz1OFnKSnlFsCtXZ1B9hJrIyHzwm8GGhvKHg=; b=ORbMDKWrvHY4NmCFkds3VxLSpd
- o2GFqB1Tx4o1B8y5ukj+L9FFlqYnV7ypYMinhzyx/Hmplcq1SyVeYrNkjT2ME89JhR/+lqMgmIyMc
- 4xzpa7HY7XHZ1JFHmHNkl1nAeZq/sqmhVLsTPOibA3gpotE33TVBI5GN5EC5byiDAOqQ=;
+ bh=UKxmywUNfsLZD40OSctqIXSWsaKyd6MY7VQPBYa8mmI=; b=Rx6XeGrjhXhDIzJW8JNygmUAd/
+ e+G3fMu6EH3k+zOkcST21aut4XT9TQvVcx8ispUHuj88+cKzfJEGzuTKykC1BCyQFHGp3iFG8ghcH
+ LK27uZZUl3jfPanIYwe9N8ADmAp82vEC4YYdSR4+/Z5SgW+fDnzk0ZaEpZo4IuHqCEHg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
@@ -31,56 +31,56 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=aamj8ctSz1OFnKSnlFsCtXZ1B9hJrIyHzwm8GGhvKHg=; b=clJVgXi75dMzcgWEPQFg+VGsSX
- pksCE2p7IzcivQArYYT6zMYHe2UPAPz1EvKdvChY4smf86/g/IA2lt7X3uuAC1pdZNiBgcgKfculc
- BXkRAD5orYm1g4UgqyFqdzbcCdFtHevZJ4bHdU9nyzSE9CA5NLmdp2O+uUt6/mrK6kwY=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=UKxmywUNfsLZD40OSctqIXSWsaKyd6MY7VQPBYa8mmI=; b=izfsLa7Vt+zKxUht8MXLjk7hdq
+ e94NSLx+c4gwJ59FSq9Fk/m1LSrzV2S4iaL5u08XNgm607qKquwtF4sxc1fi1lQAaaZhFHVsr6cdP
+ QeLiiPR3liA9P9NT7dtSGAu3CEgCDVCm6hMAemFtGZ5yEwsktLtt9ewzE2fsON4vSOf8=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rekBF-0003CI-1F for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 26 Feb 2024 23:14:41 +0000
+ id 1relpI-0008JD-Nv for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 27 Feb 2024 01:00:13 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 47848CE0176
+ by dfw.source.kernel.org (Postfix) with ESMTP id 5633A61311
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 26 Feb 2024 23:14:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74CFEC433C7;
- Mon, 26 Feb 2024 23:14:28 +0000 (UTC)
+ Tue, 27 Feb 2024 00:59:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E82D9C433C7;
+ Tue, 27 Feb 2024 00:59:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1708989268;
- bh=O2m22R0yZCGVUk6cDrklmfyRKcLTlO8eSyTHoowZsEA=;
+ s=k20201202; t=1708995598;
+ bh=PWnCDVadzwnCzOJQlQa+l48fd4sQecfuYbwfY7CEwaU=;
  h=Date:From:To:Subject:References:In-Reply-To:From;
- b=FDaQrFRrmymL+JYoAdRI13bV7T8F3WAJ2guVlW5g1VaWiWm34V7JVBM2RkJIUoRlb
- D2DqI89d/OcyH04NS0dbUQsfQ/Yu8e5e0gi5SmVH48vQNItQtDQ4UDprXuW7oiMr9R
- WdG6HCdA7CgIdOy8GMkEB0an5bBFAX+AIJij5pjmwCgenVeLmaSZ4x87686VCLvyzB
- 30xoADnGNJZKRdQXQrWn5Zg2tknISMO2IqhcvZS2iNO8HrAoZ4CSRtycFKwV8pp/tu
- emD7F5qixKWTCBp2U3W8uE2F+WXn4B5m+Yyp52DS8L/LwbinKgIVAxHbLpxhuqHvfo
- fTzv21yohbATg==
-Date: Mon, 26 Feb 2024 15:14:26 -0800
+ b=kuCWLFkBYrC5qwm8KigVMjHB13jWyY1zqGAAZKA0HxmFMFZmydp1RcPLppjU8TQGw
+ YMJxCMLoUVvpufpXx8ANbyax3TH1UXo4qWeNdaZvQP2Mb4NKsZXRcW1GA2j9bFZIoI
+ fvC3/5wW1lx5xB8NplQCwRyqkHYXRyurbr3VE+bJGNyDQbekMDUodCxnYshV3pqzfP
+ l0/yZ7rthdNyTfw2cJD7WBay1bte7RMVw0NuPMim4+lGZcVdCeaWv70TUw2XqXGj5R
+ OrgeB5EXCV1ZaGVqewaxmzS1t6cF/H7PsbM+GMeSzFLxRgG5hS/qGWrrmJuPrJFAKX
+ dJm8YtMhYYsUg==
+Date: Mon, 26 Feb 2024 16:59:56 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <Zd0bUnFCWmPtwK2u@google.com>
+Message-ID: <Zd00DE6mXbt509sX@google.com>
 References: <20240223205535.307307-1-jaegeuk@kernel.org>
+ <20240223205535.307307-2-jaegeuk@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240223205535.307307-1-jaegeuk@kernel.org>
-X-Spam-Score: -2.5 (--)
+In-Reply-To: <20240223205535.307307-2-jaegeuk@kernel.org>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In cfd66bb715fd ("f2fs: fix deadloop in foreground GC"), we
- needed to check the number of blocks in a section instead of the segment.
- Fixes: cfd66bb715fd ("f2fs: fix deadloop in foreground GC") Signed-off-by:
- Jaegeuk Kim <jaegeuk@kernel.org> --- 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  Even if the roll forward recovery stopped due to any error, 
+ we have to fix the write pointers in order to mount the disk from the previous
+ checkpoint. Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> --- 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -90,9 +90,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rekBF-0003CI-1F
-Subject: Re: [f2fs-dev] [PATCH 1/5 v2] f2fs: check number of blocks in a
- current section
+X-Headers-End: 1relpI-0008JD-Nv
+Subject: Re: [f2fs-dev] [PATCH 2/5 v2] f2fs: fix write pointers all the time
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,64 +107,82 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In cfd66bb715fd ("f2fs: fix deadloop in foreground GC"), we needed to check
-the number of blocks in a section instead of the segment.
+Even if the roll forward recovery stopped due to any error, we have to fix
+the write pointers in order to mount the disk from the previous checkpoint.
 
-Fixes: cfd66bb715fd ("f2fs: fix deadloop in foreground GC")
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
 
  from v1:
-  - check current node block space to deal with the worst case
-  - TODO: need to fine tuning on node temperature
+  - preserve error
 
- fs/f2fs/segment.h | 17 ++++++++---------
- 1 file changed, 8 insertions(+), 9 deletions(-)
+ fs/f2fs/recovery.c | 15 +++++++--------
+ fs/f2fs/super.c    | 11 +++++++----
+ 2 files changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 3edd3809b6b5..335fc6285fa5 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -561,23 +561,22 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
- 			unsigned int node_blocks, unsigned int dent_blocks)
- {
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index b3baec666afe..3078d5613748 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -863,7 +863,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+ 	int ret = 0;
+ 	unsigned long s_flags = sbi->sb->s_flags;
+ 	bool need_writecp = false;
+-	bool fix_curseg_write_pointer = false;
  
--	unsigned int segno, left_blocks;
-+	unsigned segno, left_blocks;
- 	int i;
- 
--	/* check current node segment */
-+	/* check current node sections in the worst case. */
- 	for (i = CURSEG_HOT_NODE; i <= CURSEG_COLD_NODE; i++) {
- 		segno = CURSEG_I(sbi, i)->segno;
--		left_blocks = f2fs_usable_blks_in_seg(sbi, segno) -
--				get_seg_entry(sbi, segno)->ckpt_valid_blocks;
+ 	if (is_sbi_flag_set(sbi, SBI_IS_WRITABLE))
+ 		f2fs_info(sbi, "recover fsync data on readonly fs");
+@@ -894,8 +893,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+ 	else
+ 		f2fs_bug_on(sbi, sbi->sb->s_flags & SB_ACTIVE);
+ skip:
+-	fix_curseg_write_pointer = !check_only || list_empty(&inode_list);
 -
-+		left_blocks = CAP_BLKS_PER_SEC(sbi) -
-+				get_ckpt_valid_blocks(sbi, segno, true);
- 		if (node_blocks > left_blocks)
- 			return false;
+ 	destroy_fsync_dnodes(&inode_list, err);
+ 	destroy_fsync_dnodes(&tmp_inode_list, err);
+ 
+@@ -913,11 +910,13 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+ 	 * and the f2fs is not read only, check and fix zoned block devices'
+ 	 * write pointer consistency.
+ 	 */
+-	if (!err && fix_curseg_write_pointer && !f2fs_readonly(sbi->sb) &&
+-			f2fs_sb_has_blkzoned(sbi)) {
+-		err = f2fs_fix_curseg_write_pointer(sbi);
+-		if (!err)
+-			err = f2fs_check_write_pointer(sbi);
++	if (f2fs_sb_has_blkzoned(sbi) && !f2fs_readonly(sbi->sb)) {
++		int err2 = f2fs_fix_curseg_write_pointer(sbi);
++
++		if (!err2)
++			err2 = f2fs_check_write_pointer(sbi);
++		if (err2)
++			err = err2;
+ 		ret = err;
  	}
  
--	/* check current data segment */
-+	/* check current data section for dentry blocks. */
- 	segno = CURSEG_I(sbi, CURSEG_HOT_DATA)->segno;
--	left_blocks = f2fs_usable_blks_in_seg(sbi, segno) -
--			get_seg_entry(sbi, segno)->ckpt_valid_blocks;
-+	left_blocks = CAP_BLKS_PER_SEC(sbi) -
-+			get_ckpt_valid_blocks(sbi, segno, true);
- 	if (dent_blocks > left_blocks)
- 		return false;
- 	return true;
-@@ -626,7 +625,7 @@ static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index d91e57ca6110..77348fd0a42b 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4674,11 +4674,14 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 	 * If the f2fs is not readonly and fsync data recovery succeeds,
+ 	 * check zoned block devices' write pointer consistency.
+ 	 */
+-	if (!err && !f2fs_readonly(sb) && f2fs_sb_has_blkzoned(sbi)) {
+-		err = f2fs_check_write_pointer(sbi);
+-		if (err)
+-			goto free_meta;
++	if (f2fs_sb_has_blkzoned(sbi) && !f2fs_readonly(sb)) {
++		int err2 = f2fs_check_write_pointer(sbi);
++
++		if (err2)
++			err = err2;
+ 	}
++	if (err)
++		goto free_meta;
  
- 	if (free_secs > upper_secs)
- 		return false;
--	else if (free_secs <= lower_secs)
-+	if (free_secs <= lower_secs)
- 		return true;
- 	return !curseg_space;
- }
+ 	f2fs_init_inmem_curseg(sbi);
+ 
 -- 
 2.44.0.rc1.240.g4c46232300-goog
 
