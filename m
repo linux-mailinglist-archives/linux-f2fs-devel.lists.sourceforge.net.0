@@ -2,128 +2,182 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5414E86A756
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 28 Feb 2024 04:48:06 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1210E86ACEC
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 28 Feb 2024 12:24:39 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rfAvE-0006CM-KR;
-	Wed, 28 Feb 2024 03:47:57 +0000
+	id 1rfI31-0003Ag-Kc;
+	Wed, 28 Feb 2024 11:24:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1rfAv9-0006Br-P5
- for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 28 Feb 2024 03:47:52 +0000
+ (envelope-from <prvs=7815a58e9=shinichiro.kawasaki@wdc.com>)
+ id 1rfI30-0003AZ-J0 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 28 Feb 2024 11:24:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
+ Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
+ :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
+ :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+QnH1oJZ3yFoqGeTtQaz7Mg98UaDYu9X6FwsvJH2uCg=; b=nIXVhC4Rba6Piwdy9N2PZmbteR
- oWgaoW2r+Bf4cOGXS98Zotw6LHZFA+RTvK5dgnpRFSPAqjvNuaBX6U06P+2uHkOs5h2VJxHFXm32j
- Cd7ExRQIWF4vbPJAvgYGS7Sa5jJasSAzRlWcr4IGCkD5eJUxSV/Eud4TjdpzyQGxFwRk=;
+ bh=bqTQ66yq8Y3hxAJV66uLUDNxYGAbm7ulnkoPQuhb1FU=; b=VD1KY8I9pneuBtBbNXTRHzRfvV
+ /3CpWvhOWBdlI6aN/PI0OfMJ03hY+XYl6qU+8j0TrC3JsZOnzhrVR4zZUpHL8Hdf0URJvGjh1egUP
+ EqsUFf62VbaR0ujxcjoz0VVwLqXrn607lD2SiAsd5X3qrz6l+AnKwIDwZHzb9JE58bDM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
+ In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+QnH1oJZ3yFoqGeTtQaz7Mg98UaDYu9X6FwsvJH2uCg=; b=SKgqVLWFKUCuky+BdjN83PQDvb
- /Uvxg4qagMPZoxsxzbaMfT390Vgaq5Zbf4pGyebIMem1qYuMTTPW/NlmntobVKg2drvO0wvqiDGda
- TozYJz+ijJ15r/mfTnrwbc//WqQitKG9htf6xcsQ+OMk4fa8AQMfkP8/5XTOi8xbAT24=;
-Received: from mail-vk1-f170.google.com ([209.85.221.170])
+ bh=bqTQ66yq8Y3hxAJV66uLUDNxYGAbm7ulnkoPQuhb1FU=; b=kNVuvBa8XfqwEMerSFaJFm18OC
+ U7re56W6wVcT4o2NRWdLvsyJM7fElnzh0hLUGJyT89uSr3n1HmHRp2wyWU59yLct5hwBbdzeatEjW
+ +Ue6SR3LnUlPASoILMF8Jla/60giUZCygUJoplizXmt2/3DHceLYvL+BwRE6giVmb//k=;
+Received: from esa2.hgst.iphmx.com ([68.232.143.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rfAv6-0004XY-JZ for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 28 Feb 2024 03:47:52 +0000
-Received: by mail-vk1-f170.google.com with SMTP id
- 71dfb90a1353d-4cbc49dacc2so230092e0c.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 27 Feb 2024 19:47:48 -0800 (PST)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rfI2w-0004Bk-9L for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 28 Feb 2024 11:24:26 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1709119462; x=1740655462;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=4x4WP9X4XPCPDsLvsBf9ax8ny4y2mMJQ4Fwi8nhZINU=;
+ b=b8XZVa5i+vs+PWq9zB3o1rYyZFa+89Bd9Ibf4XEVH7qU2GNrKXDd5Ni+
+ QL255mOq/L7ArMLq66GxXUublxX7aTIJYPHl9cImyFCnpz/9I1OW9OksE
+ wJfuCxJEQi/injCtEbrr5D6xxx83Tthm1TycT7FF+fEyp87jSUggPLxVv
+ kY1rA6UKCM/RQjRrxtrOJBWIbj9RUH452xjsr8jQHqvo3jq6tE1sEE04X
+ aJTFZ1dytf42RYG10RWDYZasu851o5VhF9KLoPfpbRoIfC6LYMhFe1sa+
+ QHiYc1SpNVu+eVh91PzdEJD42B9RhshjASqTGbPLM6zshX59MFgh4UZ2J g==;
+X-CSE-ConnectionGUID: KtVY7lKeSiKUqyGP9Xs3kQ==
+X-CSE-MsgGUID: +i7inA86Sbm5Z5ACrfUAkA==
+X-IronPort-AV: E=Sophos;i="6.06,190,1705334400"; d="scan'208";a="10357348"
+Received: from mail-bn8nam11lp2168.outbound.protection.outlook.com (HELO
+ NAM11-BN8-obe.outbound.protection.outlook.com) ([104.47.58.168])
+ by ob1.hgst.iphmx.com with ESMTP; 28 Feb 2024 19:08:27 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UsoaC64E04pc1Zyi0GPR0S97y5mIyYzVl0P9EpRHqi3Gubu15f1gIYzuyx3TPSS7GTIXyCVg8VSB2fYMnbzPH5WbhNOIQWiL4eJqaaINhKDfZbgzMWRsGqNBaxy9J4VKggUSMS8VRnjHMwcAErwktV9ixKwPhaYc0y4qQQRGoHRkLBi+Q9740wjMdeZsJBwnPDJ9D2DeX5K7fGHJGwlGOgeQV8yZcu6RbhVDsKA9IE5IhpuzYcVfb7jS9Z0LzDtKgT1WbkDB8vXoAwZ7Vwi1J17oJ4lyyPtqUtNWQcp9zKfVzyPLLWPfYXxAwwKJ4f/KoD7DiUVzBxP5OLyf8gY13w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bqTQ66yq8Y3hxAJV66uLUDNxYGAbm7ulnkoPQuhb1FU=;
+ b=DPeTUmsEZqCY2E+VnX+OhFoJPOOf1wdjNQ7yKJpfvuKW84vjwjPkWU7QDlxMn/1yaq53pv+X36g/P3Tj+0zYBsQsHNS1xYbtQg090BaLnYlUi69lUhhFrQ8yL2/xs/7ZZZagyyiLOq6SYgXb8c7bHUtw1hFjhmOmLGnQtPDL/nCvvlVC96tRGKOC+RsDShYIrX7X0MzZ6MhA71xTOHVDDqR41eRsXOkXnJh6faAeiXsdPesyX01DdxgoMU+bpNAysPNgv2SH2AWsN1BxXG7hiaoiAN2PkU0bP4bnqderm4+GDUoDR+7PBDqQPdP0QoIljjApJVHNrXTqf/pE8NiQjw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709092057; x=1709696857; darn=lists.sourceforge.net;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+QnH1oJZ3yFoqGeTtQaz7Mg98UaDYu9X6FwsvJH2uCg=;
- b=c7RFbhbDZHER+TfK/ydsiBOvTZjymun0JOpMoXclgSlDwpGHpRMK3n2S5VgfIj3CZz
- SLzj32TsVBcBMToCcnfVJtgpQHZtB6P07+J1MZODYSJs1tWcmX0AfLibVfn8c8eEYafJ
- JqKvI9BJRzF6sLgWb5S8+BTA5E8r6LFqjEECeL4BcxiB52WgCL14gipfrUmcHM7j8Kxi
- BuH9jKtT/nlS7OzPclrp78hcDKGe/ZRDmWtxUc6qWNRGzBimIh3m52qxXDoFvREezQdi
- 7Da2QvLcnU+CbqYFZ73TTh/AyDriv2jsD06sYxRbXRewqjAXsBUB/ghjOL8PFbYmzOmy
- idRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709092057; x=1709696857;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+QnH1oJZ3yFoqGeTtQaz7Mg98UaDYu9X6FwsvJH2uCg=;
- b=CmMHGe+9/LHUt77HoqFdWUl+SRFQlhXH7W2BMcMuLISSMOQEgQRsvD+NU4q1Z4o7lm
- XnSq5noGwDbCFQLoVusMNboD9ZSTTOYlmY6zn1/E0FcjRjqjtdMed6GHcjMGVphpr3T0
- Wh8QiLgrt6WFBVaoPf5AcsZsaY7wgHmc5bGL7rIP4lNbQggR4Dg5bKiogVx6N0ITsgDG
- ghvwV6oPWprQOSZooyziMm7ZrcNksnDwkDWWrL+a2yScW58GnLWBwiWOpUIfCrdrnTyt
- suGzt9sxOGV22Wa3lELrhLP0POgVHaXPH3g7FGYXfOn7hExI1B9B7zXZ2bZVeOVgRyh0
- yBRg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUeX0waudQ5v8ixPrn9iUSYyJ+DYdiPlws6Mb7AbwDKpKyaIYdQYlFZEDGychyQs/5/ODm9jLK6hOBLIIhy/C3DQfa6Ac0eChc3AH4l/+Va/SmbfZFr7Q==
-X-Gm-Message-State: AOJu0YzYyTQaiob+cl0OH005NA8xYKJSCoHuEYfuQXk4XXl1pOOsND7T
- JaQm6hIYfdAuVtA05SmyDpm6+q3G0bM8BRTcFrrnK4YRtzIZX0udtt94uEzpo1FwIAytTnXx40G
- MFx06Onrtd0BEeSiz9/A1Nbd8mA4=
-X-Google-Smtp-Source: AGHT+IGfLX2EZzehjczg/V4rHJkkVz/cAZAB4YX34jxqN/1Owyl+Nblq+rWJobsxdyU2j0JF2yBfefhXMBTXuIQSrkQ=
-X-Received: by 2002:a1f:6201:0:b0:4c8:a2c6:c2be with SMTP id
- w1-20020a1f6201000000b004c8a2c6c2bemr1046000vkb.8.1709092057664; Tue, 27 Feb
- 2024 19:47:37 -0800 (PST)
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bqTQ66yq8Y3hxAJV66uLUDNxYGAbm7ulnkoPQuhb1FU=;
+ b=gnqRyvdW95tFy7+3Whc8fZc7+wZ4AeVbOpC3ECzO6aWnN8/krGjM2O3a4MH9q2886L7mqMomfCIc1ZPogMqHFBDszqG6+O5mjcPO8i8cEFKjAUoaleV2CGLaLvEtIIKzNdB7vfiGFoWVSvaPMknhesaYcwHAuSIgInPnsx3NaYI=
+Received: from DM8PR04MB8037.namprd04.prod.outlook.com (2603:10b6:8:f::6) by
+ CH0PR04MB8001.namprd04.prod.outlook.com (2603:10b6:610:fe::17) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7316.39; Wed, 28 Feb 2024 11:08:26 +0000
+Received: from DM8PR04MB8037.namprd04.prod.outlook.com
+ ([fe80::c9e3:b196:e5ea:909b]) by DM8PR04MB8037.namprd04.prod.outlook.com
+ ([fe80::c9e3:b196:e5ea:909b%4]) with mapi id 15.20.7316.037; Wed, 28 Feb 2024
+ 11:08:26 +0000
+To: Yi Zhang <yi.zhang@redhat.com>
+Thread-Topic: [bug report]WARNING: CPU: 22 PID: 44011 at fs/iomap/iter.c:51
+ iomap_iter+0x32b observed with blktests zbd/010
+Thread-Index: AQHaYovQw4Cp4i7GhUK8xyPo7C3fjLEfp86A
+Date: Wed, 28 Feb 2024 11:08:26 +0000
+Message-ID: <esesb6dg5omj7e5sdnltnapuuzgmbdfmezcz6owsx2waqayc5q@36yhz4dmrxh6>
+References: <CAHj4cs-kfojYC9i0G73PRkYzcxCTex=-vugRFeP40g_URGvnfQ@mail.gmail.com>
+In-Reply-To: <CAHj4cs-kfojYC9i0G73PRkYzcxCTex=-vugRFeP40g_URGvnfQ@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM8PR04MB8037:EE_|CH0PR04MB8001:EE_
+x-ms-office365-filtering-correlation-id: 6a1e1670-b593-4a13-b2a6-08dc384d9623
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: e4Ng9z8CyAjEAbwVSkuNw3wb+ObbkYWyGhkwY+NGKm098CusMo+9GlHqp1mtSw11yMsvfq3eKGwzl9eySY00J2D7l8RHVDOy1Ej3Yitsi2dobyoUNLBWapTeQP5RhkOe+4N3Ax4GtUpv0uiSuuGvph/66RgitX26oGXUTIRhLw95asgGPAm+semVDEvA+LI/b/xBsFGqhlNv6PujiZs+HzxqJ6zcEdZWl2fg8v3J1aLFrpMvUKnOkgCjZ41QZw8k8G60sgw77fgJpvDP44qmvMjRNWfDB2FQ2RNHU0D1+hmY7/oI0zN5F/WCTYU2ATrBqOJxd8Tf/V6d+BqeE/fy2EWCXXtFJOc2Mv8te1iom7MpTZV6DsHhwVHwR6WToU5et440dd//iBulPWPOuYQ5gcG2BtsgZNDzjMOi/lhCCmwT5oNWOP7Pn/I+t/l04sZoxQIAIaYYYhdqW1CUN0ro3fhfl2We4e9ynXgYAgqc4PjACwYju2uoIE20rsvBF8OH1VVexMj3o+OPkb8AOhDRI5qDXcBWwgogDQEnwtLTHdMPz3QT5dxX7EDtV6lHY/bF6n5aXobTUWxkT64WamIwTZIOyaNHD4A1Nxoa6HGtxVSF7t3hZF+5PQrGdTNdeuXg1ES0ybzUNhhCuGwy/H0YxNDNz74A3OUTSMKZjDWy23B4RZoVqPm0WgDvHI4H9SIrXaJkUNHuRJQ+449qHaYhTQ==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM8PR04MB8037.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(230273577357003)(38070700009); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?yGidABvWHRCX3HUPyTjp7P+90b/zRKlsWCZOCSDuQqcDujU2cLVwPc7m89bl?=
+ =?us-ascii?Q?EedqioFXra9WSTJ8PsaDFIUcXwbhwQvDMUqIsPoRVyahY82O0vtpqr5WmeCj?=
+ =?us-ascii?Q?S+NiP8xk9G4tO6ghu7l2lOvJfKLSKrFCZ4CSKCkOA4hpWYcBCvQdfRf9ZVbu?=
+ =?us-ascii?Q?k6ZqjzuFSyO9MwJ7CHEf206H6mMlvssNQ9ga0j+n5USF1dPx74Bz6pyV/XPD?=
+ =?us-ascii?Q?kuKcIW4i/BNYEz1lvPeVq8ed/J417fzkRei4cfg5+x0i4azLix17LKkz5V/o?=
+ =?us-ascii?Q?A/GJuME+bDbV9X+5kZceMNWydyMW5W6wma/Y6qWQ3AfZIPjDCBx38djuBOq6?=
+ =?us-ascii?Q?5/ypX3dVuou2wbwGpd0eGBScQ6A/b2EH131g8oKx1a47Zy1/Onlf3ypPi4Vy?=
+ =?us-ascii?Q?d4lNa9XS2rQUc6REDlrM9BCCScqmSteEpNhJAD1rx5v/z0VloyqYPhNE2Yer?=
+ =?us-ascii?Q?gjRiH6cHOXg5Ax92mn8z8gnLVzgDNHMuIO50vAflECB8+tX1Z7U9q1DJaj5l?=
+ =?us-ascii?Q?vEqlctctI0/adxK+O7CVBwhrylboXpzY4xb89+cUcP3no/OZBeMaCnAVTB+0?=
+ =?us-ascii?Q?VwtANjiYPPvNkZfEk6IL9QOoowedxHRwTJUSMDB6rfc21FpgJ8jFAkdQOgCg?=
+ =?us-ascii?Q?GsHwC86bcdv1d/JPZDRQlWmowiqDsHsU32xtZGALSkEmPuyDZ9X7TGqX9yiE?=
+ =?us-ascii?Q?zirgTSfXD4LerIaFrTwSK1A84nR8xkfPKM9ilwa/iWXLkF3kW1IbnjPb1IZC?=
+ =?us-ascii?Q?mqs0+MHhtk4h4kSs7vlUrADyEkwC1aVjrrRGxZ7pBqcaaoRGs1PdRzqrP0vq?=
+ =?us-ascii?Q?JiT1xxwk1FDJvEMW5f66ms4rME5tO+j04IMzARXJYu1DS32/PLgX3KNkXR+J?=
+ =?us-ascii?Q?a8w4y13KO+ufWvAQbMyAb2pOdJ4gZb2ge0zla7ArgN8VcTwIQskWcXxRPOhc?=
+ =?us-ascii?Q?mafLj3MijYFiOAoywd9k7TIuk0eQUdzawDE+teNFHjnMr8OIgCxvwmKCpY8X?=
+ =?us-ascii?Q?wYWDp3cOjOx5/cctvEktJpCEudkBWniI5ODeOeb6lk2VBhSJZwWP1a79U8X8?=
+ =?us-ascii?Q?AHW7r5ICdDvzfQtWXJB0v8wmpSXznlJdc0o1mHXgKpkNwv8V4w7ynkCJDONk?=
+ =?us-ascii?Q?DteuShoGNPGFA/WZxk9i8mjTAiTwrj1PFLVxyYrgI9HaNMSHtRcf67wm0MR5?=
+ =?us-ascii?Q?IA/s7z2pEbOwDoUBM1L2qvyQLCXiedyD7fLPcjzy1T+mtCdjHhbBmMc7mpOA?=
+ =?us-ascii?Q?e2Td0WmnW2UwsoKO2J+jGui9xUrj4tN8TG47VMTnu7Xp1uSS+8NWcUI0yWsa?=
+ =?us-ascii?Q?NmzzrLIatoURhk2IjEeSuXrDgqSBINkSuMyT1gFiHPHHGPNUjIZxnH0aPBVP?=
+ =?us-ascii?Q?pR6ePpU6gV7BzTTqy9tCfDtQzZN5tPiFw+IZZ+Tk+ovaXQ6TbnUkXHiKtVjs?=
+ =?us-ascii?Q?B/YXey3NbX4HfMZDw8oIhNloziwwhm9Nk49PIl2u//fh+lzVjujkqqEbmCtt?=
+ =?us-ascii?Q?MltUD1rjtTcdIBfz38dw/5e63HRtiA6VI/D71rkrMP2vwVBjY8CQx9dycCZZ?=
+ =?us-ascii?Q?7QtQnr9hM8InGuDPct7zmCN9qTPV55ll/cqSoQ9iAOMQwbAsyoR/Sqe32EFO?=
+ =?us-ascii?Q?THvkJssRCgr/4uXAe9TqEgs=3D?=
+Content-ID: <19FBFA86EDEFBB4CA461BFC624DA84F8@namprd04.prod.outlook.com>
 MIME-Version: 1.0
-References: <20240223205535.307307-1-jaegeuk@kernel.org>
- <20240223205535.307307-5-jaegeuk@kernel.org>
- <CACOAw_xdBY5Rg1J4jUTaH0UxVrdZ+CCVQj72q_cMxyCHuCTy_Q@mail.gmail.com>
- <Zd0VBo3ilwRq4BJy@google.com>
-In-Reply-To: <Zd0VBo3ilwRq4BJy@google.com>
-From: Daeho Jeong <daeho43@gmail.com>
-Date: Tue, 27 Feb 2024 19:47:26 -0800
-Message-ID: <CACOAw_z+ouZ1Pv0P=LPiwbOKFaBYO-8OKNsU7b62MLwi=Qp4wA@mail.gmail.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: 0.0 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: wrWHEk0Ks7WyVYpoIDWxAB8osa6CFfq2CxoEhOZW+ZMeGYwOGFWI5ZAgaa37HasEOYPRuJam0QI1jLQebwkuKyBAMQjeli9UTnx10nE9QOWENztRaqXyZ+BamiBK5Ys/do6EOwPiugoWB4tW5oCXsIyA9pxGlZ1kEjn4ObvcxvoslEdcAdsQXLRkP2h+3HYfcsR7x8PlDSG9pBw75ouHYwWIPLzSX7+ynz6wIXEWHIQzXo3N5+YVtsl8G2P8lpcsvCuHBLg1Sg1/hTUlxo2GqRodnN3MXTlFMg+J5IXDcltYxEslmp8U5T/zV3NywS7jS1zxRYVfcg355t0vv3QloYyrDms9uqMb2GepHRG2iXRv3Uo8UZjYBHXwgVv6JkS7WyEg+hKYtbzx7ofjHW10tnjztUc0DHLjoTfSYCab1SJYI1YlA9kEF74qrLV2+lkIfoxmOQaOSkLS4vQuDi4OJbk82wOy8y0Auyc0srJpvnSK1I0AC7ah3lJwl8O4oha46GcX4i2sqgVaKtZfkxuUmyjYMmn35+kY7sqNig3VpNWy2RO0Fw6hUPQw0+cW3U9ffBpUdI7vw9F/MhlVzE8XBrNmefqoo97yoqnTNN0RHyP/SpSMMOSbyEmdvkITp05+
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM8PR04MB8037.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a1e1670-b593-4a13-b2a6-08dc384d9623
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Feb 2024 11:08:26.1951 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 7DCB+zNu2XeZmhmlnwn23Ko+5kQNCvgu3cHZvpL3SCK6vk7ZX2vo3HJJ5hlOuIcWm4azAe4O3cqKRQcwE9K7tWtGJOmTt++8MWTEOAVqvIw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR04MB8001
+X-Spam-Score: -0.9 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Mon, Feb 26, 2024 at 2:47 PM Jaegeuk Kim wrote: > > On
-    02/26, Daeho Jeong wrote: > > On Fri, Feb 23, 2024 at 12:56 PM Jaegeuk
-   Kim wrote: > > > > > > Don't block mounting the partition, if c [...] 
- 
- Content analysis details:   (0.0 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On Feb 19, 2024 / 00:58,
+ Yi Zhang wrote: > Hello > I reproduced
+ this issue on the latest linux-block/for-next, please > help check it and
+ let me know if you need more info/test, thanks. [...] > [ 4381.278858] [
+ cut here ] > [ 4381.283484] WARNING: CPU: 22 PID: 44011 at fs/iomap/iter.c:51
+ > iomap_iter+0x32b/0x350 
+ Content analysis details:   (-0.9 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.221.170 listed in wl.mailspike.net]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [daeho43[at]gmail.com]
-  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-                             in digit
-                             [daeho43[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.221.170 listed in list.dnswl.org]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
+ -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
+ low trust [68.232.143.124 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rfAv6-0004XY-JZ
-Subject: Re: [f2fs-dev] [PATCH 5/5] f2fs: allow to mount if cap is 100
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1rfI2w-0004Bk-9L
+Subject: Re: [f2fs-dev] [bug report]WARNING: CPU: 22 PID: 44011 at
+ fs/iomap/iter.c:51 iomap_iter+0x32b observed with blktests zbd/010
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -135,42 +189,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Shinichiro Kawasaki via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+Cc: linux-block <linux-block@vger.kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gTW9uLCBGZWIgMjYsIDIwMjQgYXQgMjo0N+KAr1BNIEphZWdldWsgS2ltIDxqYWVnZXVrQGtl
-cm5lbC5vcmc+IHdyb3RlOgo+Cj4gT24gMDIvMjYsIERhZWhvIEplb25nIHdyb3RlOgo+ID4gT24g
-RnJpLCBGZWIgMjMsIDIwMjQgYXQgMTI6NTbigK9QTSBKYWVnZXVrIEtpbSA8amFlZ2V1a0BrZXJu
-ZWwub3JnPiB3cm90ZToKPiA+ID4KPiA+ID4gRG9uJ3QgYmxvY2sgbW91bnRpbmcgdGhlIHBhcnRp
-dGlvbiwgaWYgY2FwIGlzIDEwMCUuCj4gPiA+Cj4gPiA+IFNpZ25lZC1vZmYtYnk6IEphZWdldWsg
-S2ltIDxqYWVnZXVrQGtlcm5lbC5vcmc+Cj4gPiA+IC0tLQo+ID4gPiAgZnMvZjJmcy9zZWdtZW50
-LmMgfCAzICsrKwo+ID4gPiAgMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKQo+ID4gPgo+
-ID4gPiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9zZWdtZW50LmMgYi9mcy9mMmZzL3NlZ21lbnQuYwo+
-ID4gPiBpbmRleCA2ZDU4NmFlOGI1NWYuLmYxMTM2MTE1MmQyYSAxMDA2NDQKPiA+ID4gLS0tIGEv
-ZnMvZjJmcy9zZWdtZW50LmMKPiA+ID4gKysrIGIvZnMvZjJmcy9zZWdtZW50LmMKPiA+ID4gQEAg
-LTkwNCw2ICs5MDQsOSBAQCBpbnQgZjJmc19kaXNhYmxlX2NwX2FnYWluKHN0cnVjdCBmMmZzX3Ni
-X2luZm8gKnNiaSwgYmxvY2tfdCB1bnVzYWJsZSkKPiA+ID4gIHsKPiA+ID4gICAgICAgICBpbnQg
-b3ZwX2hvbGVfc2VncyA9Cj4gPiA+ICAgICAgICAgICAgICAgICAob3ZlcnByb3Zpc2lvbl9zZWdt
-ZW50cyhzYmkpIC0gcmVzZXJ2ZWRfc2VnbWVudHMoc2JpKSk7Cj4gPiA+ICsKPiA+ID4gKyAgICAg
-ICBpZiAoRjJGU19PUFRJT04oc2JpKS51bnVzYWJsZV9jYXBfcGVyYyA9PSAxMDApCj4gPiA+ICsg
-ICAgICAgICAgICAgICByZXR1cm4gMDsKPiA+Cj4gPiBXaXRoIHRoaXMsIGYyZnMgd2lsbCBub3Qg
-ZXhlY3V0ZSBHQy4gV2hhdCBpcyB0aGlzIDEwMAo+ID4gdW51c2FibGVfY2FwX3BlcmMgdXNlZCBm
-b3I/Cj4KPiBUaGVvcml0aWNhbGx5LCBpdCB3b24ndCwgYnV0IEkgd2FzIGhpdHRpbmcgYSBHQyBs
-b29wLCBhbmQgSSBzdXNwZWN0ZWQgYSB3cm9uZwo+IHNlY3Rpb24vc2VnbWVudCBsYXlvdXQuIFNv
-LCBJIHBvc3RlZCB0aGUgYmVsb3csIGFuZCBndWVzcyB3ZSBuZWVkIHRoaXMgcGF0Y2gKPiBhcyB3
-b3JrYXJvdW5kLgo+Cj4gaHR0cHM6Ly9wYXRjaHdvcmsua2VybmVsLm9yZy9wcm9qZWN0L2YyZnMv
-cGF0Y2gvMjAyNDAyMjQwMTE0MTEuMzgyMDcxOS0xLWphZWdldWtAa2VybmVsLm9yZy8KClJldmll
-d2VkLWJ5OiBEYWVobyBKZW9uZyA8ZGFlaG9qZW9uZ0Bnb29nbGUuY29tPgoKPgo+ID4KPiA+ID4g
-ICAgICAgICBpZiAodW51c2FibGUgPiBGMkZTX09QVElPTihzYmkpLnVudXNhYmxlX2NhcCkKPiA+
-ID4gICAgICAgICAgICAgICAgIHJldHVybiAtRUFHQUlOOwo+ID4gPiAgICAgICAgIGlmIChpc19z
-YmlfZmxhZ19zZXQoc2JpLCBTQklfQ1BfRElTQUJMRURfUVVJQ0spICYmCj4gPiA+IC0tCj4gPiA+
-IDIuNDQuMC5yYzAuMjU4Lmc3MzIwZTk1ODg2LWdvb2cKPiA+ID4KPiA+ID4KPiA+ID4KPiA+ID4g
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiA+ID4gTGlu
-dXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPiA+ID4gTGludXgtZjJmcy1kZXZlbEBsaXN0cy5z
-b3VyY2Vmb3JnZS5uZXQKPiA+ID4gaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMv
-bGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYy
-ZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2Uu
-bmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On Feb 19, 2024 / 00:58, Yi Zhang wrote:
+> Hello
+> I reproduced this issue on the latest linux-block/for-next, please
+> help check it and let me know if you need more info/test, thanks.
+
+[...]
+
+> [ 4381.278858] ------------[ cut here ]------------
+> [ 4381.283484] WARNING: CPU: 22 PID: 44011 at fs/iomap/iter.c:51
+> iomap_iter+0x32b/0x350
+
+I can not recreate the WARN and the failure on my test machines. On the other
+hand, it is repeatedly recreated on CKI test machines since Feb/19/2024 [1].
+
+  [1] https://datawarehouse.cki-project.org/issue/2508
+
+I assume that a kernel change triggered the failure.
+
+Yi, is it possible to bisect and identify the trigger commit using CKI test
+machines? The failure is observed with v6.6.17 and v6.6.18 kernel. I guess the
+failure was not observed with v6.6.16 kernel, so I suggest to bisect between
+v6.6.16 and v6.6.17.
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
