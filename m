@@ -2,128 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2771486D076
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 Feb 2024 18:23:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 547BC86D0AF
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 Feb 2024 18:31:51 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rfk7k-0006pz-GB;
-	Thu, 29 Feb 2024 17:23:12 +0000
+	id 1rfkG3-00070n-Gn;
+	Thu, 29 Feb 2024 17:31:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <colin.i.king@gmail.com>) id 1rfk7j-0006pt-J0
+ (envelope-from <jaegeuk@kernel.org>) id 1rfkG2-00070g-BB
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 29 Feb 2024 17:23:11 +0000
+ Thu, 29 Feb 2024 17:31:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OklTFrhYXGCqleMpBHtH1y+bu7HTN31ZIOzM6nBjKdg=; b=T7LHxotg0Hq3oVbMVI5EOclnq1
- rlb93OU+/w9H5YXb1zyxCvu0hn9AFq4knGtyq5h3eO6KmE7lleD4B/9pSYWx8rRX9dRpf/CwLjNE1
- cdpblGAkeO/hybiOZuYknKH3tTBIVtxOhh3vqjUAEm52VcP4xV3oERacfiSUt2JPN358=;
+ bh=cEBsRTjeYZL7lft2lbbGHaJbX/THXtZeXgDz2aLPhDE=; b=Vse7276K3IWX/3bBNt6vHEBFrA
+ VPApnYbj44THVigy0qHEZiIJy/QxghXrkLZLILXGgbTMr4gVxSHlU2dXXS4qwxA3C84Q3Oz2HdjcA
+ tZcRyAmjSRFT8XUPv0gdXUc5jtYC8Ma/U2RONmqGXFkmtk+ZV+nbAolKZtqGVVaBLpEk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OklTFrhYXGCqleMpBHtH1y+bu7HTN31ZIOzM6nBjKdg=; b=YvSgu0Bi6MVDrkv0SNnK2vYP3U
- vIUW7iXteg2HLTONwMoW47cDUsgackOXifGC0oBVuQZAoqcWN6ldlmCcuzKKP9sSpRFcEmG+ZS5fp
- oRue81gD6b8BlfP6KE95hlmWN8qkpla48DvMQUhYEzZxMRQtcP8Wzd55ySIYiCwyd+3g=;
-Received: from mail-wr1-f45.google.com ([209.85.221.45])
+ bh=cEBsRTjeYZL7lft2lbbGHaJbX/THXtZeXgDz2aLPhDE=; b=NFJNvclILJhvY6S5Y/aa5imOJn
+ DSvdDInR8wKm5AEaUPK7I5Ziv5J0RMA5Gco7XhvRHHBKGUwz91bPDbfTjqxPN+9E7Gc5rhoObwRk0
+ 3KQJa5ImuK5mvzmBMQwNQkYXC+bMM9AwyGiJ8K+bZYfG79dylDka4CHDIyWKEB7GWk0U=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rfk7f-000194-W3 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 29 Feb 2024 17:23:11 +0000
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-33d118a181fso712857f8f.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 29 Feb 2024 09:23:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709227375; x=1709832175; darn=lists.sourceforge.net;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OklTFrhYXGCqleMpBHtH1y+bu7HTN31ZIOzM6nBjKdg=;
- b=cg64EgB+k9r/2djgjWu+OaHnh/+5EjPoFz5PKix1vy+SczvBkscHjwRlh8thphs2Y8
- k8ZzFbc5SRTuT8t7s8edf0QzzKyBZ8jRmTlERWD3ZBd8DLcfrLt1+gRxt8O7RitoL+tO
- Zn2mZenekx76yFq29FeKMM+Wu1G7j12gsBQ1BronleQ3OhG2d8PQb5e+fPFZLpxQZZg/
- LmKz3C1QRONAwsZPaynsSiaSQ7oRWMmNE+XpD4JvGCnYnFheu6ROs7F+KrAkM5THM4kM
- Wm0nhA5nSv8SdoKCua+g+3YEpqRJIayc3GuCCqsgY37a40hc82w5yYrpiqLq3dLWpQuu
- NqFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709227375; x=1709832175;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OklTFrhYXGCqleMpBHtH1y+bu7HTN31ZIOzM6nBjKdg=;
- b=IqvL9zMWaVXrwEctnO5TaEcsymw6enadp2bk5wr+DL/v1snQBr1vUD2DyOtHgYjX3x
- cddG51rCO5hZdowCY9GSHaJqU5Ya5+2/qTAcnjdLUjLefAC3yKvvt37ZQYGNTB8qhqAt
- 7EYjQwJ/aNlbNKUkkfj5JJPiM4909wMVSCtWh6htRfB+HQjGzbG44On0af15R4m6CRpM
- 0ctoXaI5/upceHaDoK0DIs092Oknxf/KgWFL7uh9iRXaQHkKfw2BzlScLZpIjPBL4YcM
- 5mQ5B3srddkUNmslAulZ/ZAMO3Utwkqabl4BW7RZ9ZJmg3f0E1KklvMIAyll7nKF/vJI
- IQ2w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVflMA450FW9DE6+hIsCTI8M/55JXP9r5QERbMa6eHsYpnmqCqdenXcTX24dSii6Tv9V8mFCMPcc7FPhatpPYkPYOSXIeTjRdV+ZwMuZ+ZtVgtXoK6XxA==
-X-Gm-Message-State: AOJu0Yx9iZEj9WqRndc2mSJL+SLizZEA51nmLeqL+vKQo9JbWJDBapb8
- wjV2bBa86Usxowf7tiudEqMALddmE9JGJeoyQUjrCanbrF6iCHJyLH6Hsr2w56A=
-X-Google-Smtp-Source: AGHT+IHWTt6rjRxOqBV5Im6+I/dsQJ6kYbTSypm3wfepuXBXRGFF9dZ2SpnW45gfNfDja78qG5JKHQ==
-X-Received: by 2002:a05:6000:1e81:b0:33d:284a:401 with SMTP id
- dd1-20020a0560001e8100b0033d284a0401mr1674096wrb.68.1709227375232; 
- Thu, 29 Feb 2024 09:22:55 -0800 (PST)
-Received: from [192.168.0.101]
- (cpc154979-craw9-2-0-cust193.16-3.cable.virginm.net. [80.193.200.194])
- by smtp.googlemail.com with ESMTPSA id
- bw1-20020a0560001f8100b0033db0c866f7sm2318693wrb.11.2024.02.29.09.22.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Feb 2024 09:22:54 -0800 (PST)
-Message-ID: <5e705d83-871e-4403-a77f-ec197eefb7c4@gmail.com>
-Date: Thu, 29 Feb 2024 17:22:54 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rfkFx-0001Pi-Mq for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 29 Feb 2024 17:31:46 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 07162CE1282;
+ Thu, 29 Feb 2024 17:31:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D5D1C433F1;
+ Thu, 29 Feb 2024 17:31:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1709227889;
+ bh=9DzNczRfLQHZQ7xM/5Rsf1G4ssLJqqDQeagj+2HQ7og=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=diJHgxM014XnHKWcaxVwTBkW3gX57RmZxYWS+sJS+A7HG35g3mzRWzGi6YrIHriPn
+ QgUZzvQlv4DAI1wWyZ+KYWohVL6+qvRqKOBAKh1Eg5afeYkADvoypyDL7wSSngpC9e
+ gptRCTe8jpqiSosxVs/SQ/fTdvQu0bKclizFrICODQB/No3OTJkAMW8KxPl8K2qofN
+ m3Sr8deGN0pYmVf2ay7keF8TOqQmkl3/tOgN+rS6S939MLrazA2ETU7a+bTmTSuvaX
+ 4tS8lqpbf3gxEcBRMFT2oG9c0M0T0FcQqIE7YxH2I2hK2idblOSQSfCKdGnWtET+pJ
+ QvuC8j/TNBaQg==
+Date: Thu, 29 Feb 2024 09:31:27 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: "Colin King (gmail)" <colin.i.king@gmail.com>
+Message-ID: <ZeC_b8JipJyjycW3@google.com>
 References: <20240229091449.105032-1-colin.i.king@gmail.com>
  <ZeC64dDr-nBGlsli@google.com>
-From: "Colin King (gmail)" <colin.i.king@gmail.com>
-In-Reply-To: <ZeC64dDr-nBGlsli@google.com>
-X-Spam-Score: -0.2 (/)
+ <5e705d83-871e-4403-a77f-ec197eefb7c4@gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <5e705d83-871e-4403-a77f-ec197eefb7c4@gmail.com>
+X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 29/02/2024 17:12, Jaegeuk Kim wrote: > Hi Colin, > > Thank
- you for the fix. If you don't mind,
- can I integrate this fix > into the original
- patch? Sure. No problem. Colin > > Thanks, > > On 02/29, Colin Ian King wrote:
- >> The array f2fs_zone_status contains two spelling mistakes in >> literal
- strings. Fix them. >> >> Signed-off-by: Colin Ian King >> --- >> fs/f [...]
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 02/29, Colin King (gmail) wrote: > On 29/02/2024 17:12,
+ Jaegeuk Kim wrote: > > Hi Colin, > > > > Thank you for the fix. If you don't
+ mind, can I integrate this fix > > into the original patch? > > [...] 
+ Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [colin.i.king[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.221.45 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.45 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rfk7f-000194-W3
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rfkFx-0001Pi-Mq
 Subject: Re: [f2fs-dev] [PATCH][next] f2fs: Fix two spelling mistakes in
  f2fs_zone_status array
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -139,49 +106,52 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 29/02/2024 17:12, Jaegeuk Kim wrote:
-> Hi Colin,
+On 02/29, Colin King (gmail) wrote:
+> On 29/02/2024 17:12, Jaegeuk Kim wrote:
+> > Hi Colin,
+> > 
+> > Thank you for the fix. If you don't mind, can I integrate this fix
+> > into the original patch?
 > 
-> Thank you for the fix. If you don't mind, can I integrate this fix
-> into the original patch?
+> Sure. No problem.
 
-Sure. No problem.
+Thank you so much!
 
-Colin
 > 
-> Thanks,
-> 
-> On 02/29, Colin Ian King wrote:
->> The array f2fs_zone_status contains two spelling mistakes in
->> literal strings. Fix them.
->>
->> Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
->> ---
->>   fs/f2fs/segment.c | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->> index bdb27e4a604b..072c4355d3d3 100644
->> --- a/fs/f2fs/segment.c
->> +++ b/fs/f2fs/segment.c
->> @@ -4921,8 +4921,8 @@ static int sanity_check_curseg(struct f2fs_sb_info *sbi)
->>   const char *f2fs_zone_status[BLK_ZONE_COND_OFFLINE + 1] = {
->>   	[BLK_ZONE_COND_NOT_WP]		= "NOT_WP",
->>   	[BLK_ZONE_COND_EMPTY]		= "EMPTY",
->> -	[BLK_ZONE_COND_IMP_OPEN]	= "IMPLICITE_OPEN",
->> -	[BLK_ZONE_COND_EXP_OPEN]	= "EXPLICITE_OPEN",
->> +	[BLK_ZONE_COND_IMP_OPEN]	= "IMPLICIT_OPEN",
->> +	[BLK_ZONE_COND_EXP_OPEN]	= "EXPLICIT_OPEN",
->>   	[BLK_ZONE_COND_CLOSED]		= "CLOSED",
->>   	[BLK_ZONE_COND_READONLY]	= "READONLY",
->>   	[BLK_ZONE_COND_FULL]		= "FULL",
->> -- 
->> 2.39.2
-
+> Colin
+> > 
+> > Thanks,
+> > 
+> > On 02/29, Colin Ian King wrote:
+> > > The array f2fs_zone_status contains two spelling mistakes in
+> > > literal strings. Fix them.
+> > > 
+> > > Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
+> > > ---
+> > >   fs/f2fs/segment.c | 4 ++--
+> > >   1 file changed, 2 insertions(+), 2 deletions(-)
+> > > 
+> > > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> > > index bdb27e4a604b..072c4355d3d3 100644
+> > > --- a/fs/f2fs/segment.c
+> > > +++ b/fs/f2fs/segment.c
+> > > @@ -4921,8 +4921,8 @@ static int sanity_check_curseg(struct f2fs_sb_info *sbi)
+> > >   const char *f2fs_zone_status[BLK_ZONE_COND_OFFLINE + 1] = {
+> > >   	[BLK_ZONE_COND_NOT_WP]		= "NOT_WP",
+> > >   	[BLK_ZONE_COND_EMPTY]		= "EMPTY",
+> > > -	[BLK_ZONE_COND_IMP_OPEN]	= "IMPLICITE_OPEN",
+> > > -	[BLK_ZONE_COND_EXP_OPEN]	= "EXPLICITE_OPEN",
+> > > +	[BLK_ZONE_COND_IMP_OPEN]	= "IMPLICIT_OPEN",
+> > > +	[BLK_ZONE_COND_EXP_OPEN]	= "EXPLICIT_OPEN",
+> > >   	[BLK_ZONE_COND_CLOSED]		= "CLOSED",
+> > >   	[BLK_ZONE_COND_READONLY]	= "READONLY",
+> > >   	[BLK_ZONE_COND_FULL]		= "FULL",
+> > > -- 
+> > > 2.39.2
 
 
 _______________________________________________
