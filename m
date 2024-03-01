@@ -2,85 +2,114 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E9B086E07F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  1 Mar 2024 12:37:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2217D86E5AF
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  1 Mar 2024 17:34:25 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rg1CA-0001S2-0k;
-	Fri, 01 Mar 2024 11:36:54 +0000
+	id 1rg5pu-0005UN-66;
+	Fri, 01 Mar 2024 16:34:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1rg1C8-0001Rq-GK
+ (envelope-from <bart.vanassche@gmail.com>) id 1rg5pn-0005U4-Dh
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 01 Mar 2024 11:36:53 +0000
+ Fri, 01 Mar 2024 16:34:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DfxOKDksgm9ZQ62GXl9t0jLCRqsGCn25+BykDw29rmc=; b=azgPuE+96TrApxV3NK4BsEq/FJ
- qKQlO44szKsNA5+CH2cXQs6JTIYObjS0N7jKFtSO+ohr/IBdxFfdroug72CtxR//5XdxiRt0JBHLR
- 5gxSSg5QUgRUo790cdPzh2LxembxQNAfNuP/YliT/iFO8W+qFCJ9Tqv8et2HoqlhAyVE=;
+ bh=+4tAl8o/EZq5bn0YeTj7EYMSrlJ3Bl+m9X12avWxbvE=; b=U3yhJe7UGAAKNaLXRbFj2IDI6L
+ odZlUsJ64PAxMVXYPHiJRDrxiRrEMnRuVzvg8gi+HTME8vYgt/g2RyUjuTyrv/DOHt4nDSZuV461u
+ Mq4S8hF9NRB0FWIVV33Rk1DoNYlhicM7Y0/S6dJaLXjUs8UnMUL+pOsEoApadM8OSYNI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DfxOKDksgm9ZQ62GXl9t0jLCRqsGCn25+BykDw29rmc=; b=P
- r/lXVdGr0+0F/4toEIY8S7eA0G/iz8CYjobBIwTY9IA5DA1gYs5z6RyC+AOyNhhiFggXsaH12uNqp
- 20x7LhfxhzHLtjA/FxkNOFa0gDeoLgx2fNU25LJ8QStQL5Oan2SjJctgSKozjjJQTGvwbDnbhtSGY
- DjvK2uqeqFr59rqE=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+4tAl8o/EZq5bn0YeTj7EYMSrlJ3Bl+m9X12avWxbvE=; b=KPzhGiKWaKPbC2Uv+yUe6jOKPR
+ wGY+K2QV+d5QFuTymHh3yArh9mVYpwtoMwMiVBc/uhtSN6FvjVv1jNZlxRZ3/estFSRYdYeHZyGtM
+ Hfdy2qkqRZu2qtJtyc8VS3EgfPKJNiKT1xOYSLszrD3FS+5+TIKDOAGenXXmUU4HoGu4=;
+Received: from mail-pl1-f177.google.com ([209.85.214.177])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rg1C7-00078K-AG for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 01 Mar 2024 11:36:52 +0000
-Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 421BaPmN084487;
- Fri, 1 Mar 2024 19:36:25 +0800 (+08)
- (envelope-from Zhiguo.Niu@unisoc.com)
-Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4TmQxw6S0bz2KkZ9v;
- Fri,  1 Mar 2024 19:35:32 +0800 (CST)
-Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Fri, 1 Mar 2024 19:36:23 +0800
-From: Zhiguo Niu <zhiguo.niu@unisoc.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Fri, 1 Mar 2024 19:36:16 +0800
-Message-ID: <1709292976-13118-1-git-send-email-zhiguo.niu@unisoc.com>
-X-Mailer: git-send-email 1.9.1
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rg5pm-0003LD-Q2 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 01 Mar 2024 16:34:07 +0000
+Received: by mail-pl1-f177.google.com with SMTP id
+ d9443c01a7336-1dc0d11d1b7so20926365ad.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 01 Mar 2024 08:34:07 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709310837; x=1709915637;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+4tAl8o/EZq5bn0YeTj7EYMSrlJ3Bl+m9X12avWxbvE=;
+ b=OSvm0OPcSAa728tO8/ToLYNCohDbqRq1cL7cxIemZycnIWxOXvqBlcTBEx5uOkJ4eS
+ 6q0rcVv3ugSB25ZPd6eeY631nHrVJDgjSpmEZ2Hnqp+OtXGD5Hrfh2dklDiCw1GPiXUZ
+ 1zB3CpGWpefAPyd36KJc/aoT5wb6KB4tpOiLegjzpxA6elWee/bK7LOFADbW/DT4zjop
+ lJdnL0O9URgoYRGC2RSJNFDBaQA5WI6Fgi+O3Lb8+gNpjJIspLabJb68H9LFw+BW9N29
+ SMDzmkyILMiOHKoAyv1WOOj6Z1HtfgWcDpeFk8gZFytE8snFYz92ASbZ57tu6t47K24x
+ G+1g==
+X-Gm-Message-State: AOJu0Yy/8xqBDyyAMaKZgXmMwXcX2NT7R87AV7nHbL7T7AnFrg1/tO74
+ KgNnMJSUvhEbTh9ewBBwJ1+mq8T5RpciaWIGYURY4vvFGh2HoVdZ
+X-Google-Smtp-Source: AGHT+IHdceNVpyQZsGCQCn1QEhLzR/NvShnqMky+vyWW6kRZoXif944dAjyAXytLg96tKLlrUOz+Bg==
+X-Received: by 2002:a17:90b:11c4:b0:299:61eb:c75e with SMTP id
+ gv4-20020a17090b11c400b0029961ebc75emr2153875pjb.23.1709310836533; 
+ Fri, 01 Mar 2024 08:33:56 -0800 (PST)
+Received: from [192.168.51.14] (c-73-231-117-72.hsd1.ca.comcast.net.
+ [73.231.117.72]) by smtp.gmail.com with ESMTPSA id
+ sn7-20020a17090b2e8700b00298ca131c75sm5582786pjb.24.2024.03.01.08.33.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 01 Mar 2024 08:33:56 -0800 (PST)
+Message-ID: <399ee6af-c1da-40ab-a679-065aa82f41ab@acm.org>
+Date: Fri, 1 Mar 2024 08:33:54 -0800
 MIME-Version: 1.0
-X-Originating-IP: [10.0.73.87]
-X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 421BaPmN084487
-X-Spam-Score: -0.0 (/)
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: eunhee83.rho@samsung.com, Yi Zhang <yi.zhang@redhat.com>,
+ Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+References: <CAHj4cs-kfojYC9i0G73PRkYzcxCTex=-vugRFeP40g_URGvnfQ@mail.gmail.com>
+ <esesb6dg5omj7e5sdnltnapuuzgmbdfmezcz6owsx2waqayc5q@36yhz4dmrxh6>
+ <CAHj4cs874FivTdmw=VMJwTzzLFZWb4OKqvNGRN0R0O+Oiv4aYA@mail.gmail.com>
+ <CAHj4cs_eOSafp0=cbwjNPR6X2342GF_cnUTcXf6RjrMnoOHSmQ@mail.gmail.com>
+From: Bart Van Assche <bvanassche@acm.org>
+In-Reply-To: <CAHj4cs_eOSafp0=cbwjNPR6X2342GF_cnUTcXf6RjrMnoOHSmQ@mail.gmail.com>
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  new_curseg may return error if get_new_segment fail, so its
- result should be check in its caller f2fs_allocate_segment_for_resize, alos
- pass this results to free_segment_range. Signed-off-by: Zhiguo Niu
- <zhiguo.niu@unisoc.com>
- --- fs/f2fs/f2fs.h | 2 +- fs/f2fs/gc.c | 7 +++++-- fs/f2fs/segment.c | 9
- +++++++-- 3 files changed, 13 insertions(+), 5 deletions(-) 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  On 2/29/24 23:49,
+ Yi Zhang wrote: > Bisect shows it was introduced
+ with the below commit: > > commit dbf8e63f48af48f3f0a069fc971c9826312dbfc1
+ > Author: Eunhee Rho <eunhee83.rho@samsung.com> > Date: Mo [...] 
+ Content analysis details:   (0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [bart.vanassche[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.177 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.177 listed in wl.mailspike.net]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rg1C7-00078K-AG
-Subject: [f2fs-dev] [PATCH] f2fs: fix to check result of new_curseg in
- f2fs_allocate_segment_for_resize
+ 0.0 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
+ EnvelopeFrom freemail headers are different
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1rg5pm-0003LD-Q2
+Subject: Re: [f2fs-dev] [bug report]WARNING: CPU: 22 PID: 44011 at
+ fs/iomap/iter.c:51 iomap_iter+0x32b observed with blktests zbd/010
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,96 +121,33 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, hongyu.jin@unisoc.com,
- zhiguo.niu@unisoc.com
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-block <linux-block@vger.kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-new_curseg may return error if get_new_segment fail, so its result
-should be check in its caller f2fs_allocate_segment_for_resize,
-alos pass this results to free_segment_range.
+On 2/29/24 23:49, Yi Zhang wrote:
+> Bisect shows it was introduced with the below commit:
+> 
+> commit dbf8e63f48af48f3f0a069fc971c9826312dbfc1
+> Author: Eunhee Rho <eunhee83.rho@samsung.com>
+> Date:   Mon Aug 1 13:40:02 2022 +0900
+> 
+>      f2fs: remove device type check for direct IO
 
-Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
----
- fs/f2fs/f2fs.h    | 2 +-
- fs/f2fs/gc.c      | 7 +++++--
- fs/f2fs/segment.c | 9 +++++++--
- 3 files changed, 13 insertions(+), 5 deletions(-)
+(+Eunhee)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 4331012..39dda7d 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3701,7 +3701,7 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
- void f2fs_init_inmem_curseg(struct f2fs_sb_info *sbi);
- void f2fs_save_inmem_curseg(struct f2fs_sb_info *sbi);
- void f2fs_restore_inmem_curseg(struct f2fs_sb_info *sbi);
--void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
-+int f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
- 					unsigned int start, unsigned int end);
- int f2fs_allocate_new_section(struct f2fs_sb_info *sbi, int type, bool force);
- int f2fs_allocate_pinning_section(struct f2fs_sb_info *sbi);
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index c60b747..7a458fa 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -2037,8 +2037,11 @@ static int free_segment_range(struct f2fs_sb_info *sbi,
- 	mutex_unlock(&DIRTY_I(sbi)->seglist_lock);
- 
- 	/* Move out cursegs from the target range */
--	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_PERSIST_TYPE; type++)
--		f2fs_allocate_segment_for_resize(sbi, type, start, end);
-+	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_PERSIST_TYPE; type++) {
-+		err = f2fs_allocate_segment_for_resize(sbi, type, start, end);
-+		if (err)
-+			goto out;
-+	}
- 
- 	/* do GC to move out valid blocks in the range */
- 	err = f2fs_gc_range(sbi, start, end, dry_run, 0);
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 1bb3019..2a07b9d 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -3071,11 +3071,12 @@ static bool need_new_seg(struct f2fs_sb_info *sbi, int type)
- 	return false;
- }
- 
--void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
-+int f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
- 					unsigned int start, unsigned int end)
- {
- 	struct curseg_info *curseg = CURSEG_I(sbi, type);
- 	unsigned int segno;
-+	int err = 0;
- 
- 	f2fs_down_read(&SM_I(sbi)->curseg_lock);
- 	mutex_lock(&curseg->curseg_mutex);
-@@ -3089,7 +3090,10 @@ void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
- 		change_curseg(sbi, type);
- 	else
- 		new_curseg(sbi, type, true);
--
-+	if (curseg->segno == NULL_SEGNO) {
-+		err = -ENOSPC;
-+		goto unlock;
-+	}
- 	stat_inc_seg_type(sbi, curseg);
- 
- 	locate_dirty_segment(sbi, segno);
-@@ -3102,6 +3106,7 @@ void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
- 
- 	mutex_unlock(&curseg->curseg_mutex);
- 	f2fs_up_read(&SM_I(sbi)->curseg_lock);
-+	return err;
- }
- 
- static int __allocate_new_segment(struct f2fs_sb_info *sbi, int type,
--- 
-1.9.1
+Thank you Yi for having bisected this issue. I know this takes
+considerable effort.
 
+Eunhee, please take a look at this bug report:
+https://lore.kernel.org/all/CAHj4cs-kfojYC9i0G73PRkYzcxCTex=-vugRFeP40g_URGvnfQ@mail.gmail.com/
+
+Thanks,
+
+Bart.
 
 
 _______________________________________________
