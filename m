@@ -2,69 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD2F0870966
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Mar 2024 19:20:46 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58BA2870962
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Mar 2024 19:20:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rhCvW-0002TP-CC;
-	Mon, 04 Mar 2024 18:20:39 +0000
+	id 1rhCvZ-0008TK-IY;
+	Mon, 04 Mar 2024 18:20:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rhCvT-0002TG-2H
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rhCvY-0008TB-3N
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Mar 2024 18:20:36 +0000
+ Mon, 04 Mar 2024 18:20:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gaef5BaaM1j0lTjSKD5TKPYlspQaNhVe2LhNiV4YyhU=; b=SrB0094msAdmG/gsj8EelA+CDz
- 1+o4PkeM13BvUQQGXvkCzUUe2AD0bpWTYdiWOT3AnV2jNEQW+O11fxcTNhUu110+3WXtfB2ACtvTB
- L9B3HvOBmpshqmSfa+fydcaV5ymjHGHXmsTQzTrrAgw3XBGkXXReYLpE9sKHzvCJTMkE=;
+ bh=b+bOU/y3FBi9I9SOoYRBhM7L7vuQijX/a9C724TTQh4=; b=eLwtHFwIzWHkTAqbWHbTDsrt+j
+ OJu69lE5kA2FvU0oQDAHsALM++nX364xOIMKfyZxdhENqjet7wMw0XEbItS44w5VHwI+M0f69W29b
+ tbGoZXJOTLxcm7iOyMy/muO6zk/GPViZWxcTL9VGUG4riF3FZBNkUFc6fbkR8eE2c39Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gaef5BaaM1j0lTjSKD5TKPYlspQaNhVe2LhNiV4YyhU=; b=EjDj1G+ozbiAleY5MNtP+3WM1d
- NCdNqHmtzbkyQr7imE3QDgEXTZzEpa/7hfzsqf9mhzEfmsi9u8cxiz8BLpuHS6gCDUZewg5UdDugZ
- 70XIm6TZVNMZyOgHc+9K7X7w7ijD7V+zRaJNM6XBeFn1TVFv+aFP/hEOSMeP7e3GKpNs=;
+ bh=b+bOU/y3FBi9I9SOoYRBhM7L7vuQijX/a9C724TTQh4=; b=LV/PXkX9TL4wEgs+iqGA/5HU4m
+ xb43M2vhXrWVrjeyDPMCPGvA3riC1E5sAKKudyGQlV0YJvFLU1S0zZ2rreEwxchZXLopIyOcLjLaK
+ 6GMAl35/OwbwYBrUGcPkONEfrgCMtAR0fqh/PUY4HLlQWIfi+VXJRJvsxCIx7aXhkaMY=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rhCvN-0002fa-C5 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Mar 2024 18:20:35 +0000
+ id 1rhCvR-0002fr-WF for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 04 Mar 2024 18:20:40 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 024E161049
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  4 Mar 2024 18:20:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 113D1C43330;
+ by dfw.source.kernel.org (Postfix) with ESMTP id A4988611A3;
  Mon,  4 Mar 2024 18:20:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 0306FC433B2;
+ Mon,  4 Mar 2024 18:20:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1709576429;
- bh=lTbK2fW4sd5g7yN9587jwyOUJdCj3ya2dZC91nk0tOM=;
+ bh=3+YKLBXSvm2KnOYfZ9A26/aG3sIoBMt8bfvbid9PFaU=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=Cpm8IWRmhRN6aGArbKrbu6AynKWoRY3VFI74Yhsj6b1GKa0eJAyAafpc+KdMcMrju
- oEkbgyffn5N4+IHT5Jzylw38cxhzk7jA00GSPLZoYHuVQqom3j4zrPxKh20ZayAnjH
- DlI5aWOd+3twcQd4Sovd21Y618Sjd3zDPC7xk9+wbvAANeVQg+I3yiCaOJIrXUVkZZ
- U5Z9LpLWcm8wH169HGsqlKukpj8i4qav4B9cTqwyLj5sG0ymnAGiwBPtluujy09wXm
- NV/s653c4ozrKDFMqEXFoiBNu4nBJtYmpSKASaiFvFHXKixpAwKAmR6W/9AXpvn2w7
- NEBGPDBXCNA8Q==
+ b=PXmSdw/TWbB+0ho1n3G9PcRqUsDVD70CSwL3mYRByVbYI3523/ChvtgAVYCxjCB7a
+ Sg10ID4XhnErJOH1ZiBAQJXOa7HgpaX+jdY1xtQRugUGx/M/c5hAiN4G+uUvOLPr/5
+ 2CeHeJ/0PS6J4B60sAgmRBwjS0CF7+2fX1ZoyZa3kiMzkxfyksEtrDf5A6/uyGb4L+
+ 1+5Kq0FPdh54bNnaKvxCC0IMM77uze3gy/+jNWv8L2X8Vcu1CjwWT23+/iJ7vKUxAp
+ LFi+OMBs88SBPk9uUAYFjz9K7980hM7XArQx9sg3yzNGosK0KGBTB4NB4GKrM6EkzH
+ 39KEfAeevHEtw==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- F109DD9A4BB; Mon,  4 Mar 2024 18:20:28 +0000 (UTC)
+ D15E3D88F89; Mon,  4 Mar 2024 18:20:28 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <170957642898.16816.15329403645520818007.git-patchwork-notify@kernel.org>
+Message-Id: <170957642885.16816.17706378772269565327.git-patchwork-notify@kernel.org>
 Date: Mon, 04 Mar 2024 18:20:28 +0000
-References: <20240226031916.2420870-1-chao@kernel.org>
-In-Reply-To: <20240226031916.2420870-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+References: <1709281555-11373-1-git-send-email-zhiguo.niu@unisoc.com>
+In-Reply-To: <1709281555-11373-1-git-send-email-zhiguo.niu@unisoc.com>
+To: Zhiguo Niu <zhiguo.niu@unisoc.com>
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,11 +71,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 26 Feb 2024 11:19:16 +0800 you
- wrote: > In f2fs_insert_range(),
- it missed to check return value of > filemap_write_and_wait_range(), 
- fix it. > > Meanwhile, just return error number once __exch [...] 
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 1 Mar 2024 16:25:54 +0800 you wrote:
+ > __allocate_new_segment may return error when get_new_segment > fails, so
+ its caller should check its return value. > > Signed-off-by: Zhiguo Niu
+ <zhiguo. [...] 
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rhCvN-0002fa-C5
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to check return value in
- f2fs_insert_range()
+X-Headers-End: 1rhCvR-0002fr-WF
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: fix to check return value
+ __allocate_new_segment
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,31 +106,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, hongyu.jin@unisoc.com,
+ jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This patch was applied to jaegeuk/f2fs.git (dev)
+This series was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon, 26 Feb 2024 11:19:16 +0800 you wrote:
-> In f2fs_insert_range(), it missed to check return value of
-> filemap_write_and_wait_range(), fix it.
+On Fri, 1 Mar 2024 16:25:54 +0800 you wrote:
+> __allocate_new_segment may return error when get_new_segment
+> fails, so its caller should check its return value.
 > 
-> Meanwhile, just return error number once __exchange_data_block()
-> fails.
-> 
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> 
-> [...]
+> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+> ---
+>  fs/f2fs/f2fs.h     | 2 +-
+>  fs/f2fs/recovery.c | 2 +-
+>  fs/f2fs/segment.c  | 7 +++++--
+>  3 files changed, 7 insertions(+), 4 deletions(-)
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to check return value in f2fs_insert_range()
-    https://git.kernel.org/jaegeuk/f2fs/c/2fc2bcc8d399
+  - [f2fs-dev,1/2] f2fs: fix to check return value __allocate_new_segment
+    https://git.kernel.org/jaegeuk/f2fs/c/28f66cc65403
+  - [f2fs-dev,2/2] f2fs: fix to check return value of f2fs_gc_range
+    https://git.kernel.org/jaegeuk/f2fs/c/22af1b8c31cb
 
 You are awesome, thank you!
 -- 
