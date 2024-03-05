@@ -2,85 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1E5A871A7B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Mar 2024 11:17:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 023DD8728EA
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Mar 2024 21:48:58 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rhRrA-0004Lh-Py;
-	Tue, 05 Mar 2024 10:17:09 +0000
+	id 1rhbiS-0005iN-3b;
+	Tue, 05 Mar 2024 20:48:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <eugen.hristev@collabora.com>) id 1rhRr9-0004La-Qm
+ (envelope-from <jaegeuk@kernel.org>) id 1rhbiQ-0005iG-Rf
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 05 Mar 2024 10:17:08 +0000
+ Tue, 05 Mar 2024 20:48:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hIA1FrSOg9rkkCxr51pHsWw60766xuJYkqrstFQYRHw=; b=lKVbgiyNgmGsqscmv1tKLPEJ+g
- tRmig6KfkSc4BNq3SK5vy7MaitoJy8SF7S/JiZBtofTOUSJHEeydDGWFW1+yQTJ5tr124YU0GBt8E
- XAMQPrL/5OE5CerOKp6Gx2gRClhQwCJCvWc35YKAL25ifuA2Koay/ecaZvEfJEK1ZCVQ=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=hIA1FrSOg9rkkCxr51pHsWw60766xuJYkqrstFQYRHw=; b=BgH7G2I8z9BJZYHmTTsl5xHNRV
- jZ+/az8/7+AEOtwqpDoF1lz/68lLa2ojcoUZ3K7t1sjtRYXox53F2Tw117N+i96ggJkfM2UgzdcDd
- K8hP4klM5Dra9+7OtwnISnwG6qocbcy6qdilWhkl/mvsWNYNR790O3rkLLQlOetucPJA=;
-Received: from madrid.collaboradmins.com ([46.235.227.194])
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=pG2M6thpR2fxv/cCgdOBLkXzlO1KJ8VJ0xaAc50m5DM=; b=CqK+Q4hnUjboJEjREADyYDBgdj
+ akuZsIUbH03PlAzXnbpbNpCNT/6LjNb8I3h3F92bFkOsPgdfGRuwbSvUyDRGCR4DeUdBnzRXtKtjf
+ Ev0ysHysr7v2DDgalZbpUR3e/zTxNRyn0pcK2pi7t0Qob3RwPywB2rqFQ6NLi+u5DS4Q=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=pG2M6thpR2fxv/cCgdOBLkXzlO1KJ8VJ0xaAc50m5DM=; b=a
+ IHXI+smMu6RSq9e5EEA794rTQv2VqRGEkmgFvSifPdUG2hx5Ut+DJZbte/vJCqrWHpSaP4bk8ObGg
+ fiIvEyaoa2FnO5EnlqD8sagqQZlMAeSngVpNNJkhrAgyNKLnX99zuL8stcPtYLvgkomqIdbcJ5ZZW
+ ddBpY/pRKrVpKwHE=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rhRr3-0001yX-Rh for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 05 Mar 2024 10:17:08 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1709633816;
- bh=NYwDnN28mEZsfcXBv2JU5FVxAioxdPfAjfdUmE66h5Q=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Bt/FREMAL0HqwPUkQMtRGZU0ZlRcmCJTc9ece5rQ6Rl8+/loCBt8sZp+qEG9FNjVS
- Yw7A7tsUfqbTY/TiSo25eS46LbkDSKvfYpfEEfjkctbogHmgAX/fetOPPEyx51mAuC
- I3rwBvBnHJsF3Sm4kbZQO9KAukPZ7vTPv8m1TSRfXqSkcRiWP1fulzpk9ZGIJ+h1dB
- W4qa6LhnhW+tuiItlGyyXqGVVl+j3MxYBObYgfQtExSti3bgTmEuF3n2h7Zp0mRB5p
- rsmgSVOS/oyxwl/2S/DRhRD3lWDWV2xoT+vWxTJ/T3sRU9Qg7pWkM/x46RbN8tm5Ke
- qg7kz3pmyF5OQ==
-Received: from eugen-station.domain.com (cola.collaboradmins.com
- [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 78E7A37820F1;
- Tue,  5 Mar 2024 10:16:53 +0000 (UTC)
-To: tytso@mit.edu, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org,
- jaegeuk@kernel.org, chao@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org
-Date: Tue,  5 Mar 2024 12:16:08 +0200
-Message-Id: <20240305101608.67943-10-eugen.hristev@collabora.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240305101608.67943-1-eugen.hristev@collabora.com>
-References: <20240305101608.67943-1-eugen.hristev@collabora.com>
+ id 1rhbiL-00034e-2z for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 05 Mar 2024 20:48:47 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id C70A461881
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  5 Mar 2024 20:48:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64531C433C7;
+ Tue,  5 Mar 2024 20:48:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1709671716;
+ bh=c725NZ+JXAH0HO2pzrmB9FWlT0zD3VuNnZ/S7Dr1ZGs=;
+ h=From:To:Cc:Subject:Date:From;
+ b=OacZULvyg98zFsHZ4YRp4FNuU+Tx++LqtlssKy+ZQCMSjlYrdHFbbt8mnjR/UgLYT
+ g5pEZHLQHJRuF1mL+v5/T2usaZkEEp6N+s3htxFAlm/a4UaKR0JQQ9mH6FdgvsW1M4
+ 5vNEuITslYZbnrMKMUko3EKsgArIbnojj9JjWaANjw/fPUzWaniN0C+PDbkhKsQp5t
+ DDGXUedmapWBpWm4ztKMHlIIm1ipcUxtZsz4aDtm8/m9asdBgYwi2GhWOsmvDDJEio
+ Fjzf+pNbqrWRI6sLpHoUsA+GH83SbRA85nkzfxsWc0w3KVzCglqmkOhmU+aPfEevJV
+ m29p8Nf44FUEA==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue,  5 Mar 2024 12:48:34 -0800
+Message-ID: <20240305204834.101697-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.44.0.278.ge034bb2e1d-goog
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Gabriel Krisman Bertazi <krisman@collabora.com> Instead
- of a bunch of ifdefs, make the unicode built checks part of the code flow
- where possible, as requested by Torvalds. Signed-off-by: Gabriel Krisman
- Bertazi <krisman@collabora.com> [eugen.hristev@collabora.com: port to 6.8-rc3]
- Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com> --- fs/f2fs/namei.c
- | 10 ++++-- [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  This fixes some android build failures due to the missing
+ permission when checking the loop device. Until we get a better solution,
+ let's ignore the error with warnings. Signed-off-by: Jaegeuk Kim
+ <jaegeuk@kernel.org>
+ --- lib/libf2fs.c | 12 +++++++++--- 1 file changed, 9 insertions(+),
+ 3 deletions(-)
+ Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -91,9 +89,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rhRr3-0001yX-Rh
-Subject: [f2fs-dev] [PATCH v13 9/9] f2fs: Move CONFIG_UNICODE defguards into
- the code flow
+ -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rhbiL-00034e-2z
+Subject: [f2fs-dev] [PATCH] f2fs-tools: deal with permission denial on
+ non-root user
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,104 +104,53 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Eugen Hristev via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: krisman@suse.de, brauner@kernel.org, jack@suse.cz,
- linux-kernel@vger.kernel.org, eugen.hristev@collabora.com,
- viro@zeniv.linux.org.uk, kernel@collabora.com,
- Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Gabriel Krisman Bertazi <krisman@collabora.com>
+This fixes some android build failures due to the missing permission when
+checking the loop device. Until we get a better solution, let's ignore
+the error with warnings.
 
-Instead of a bunch of ifdefs, make the unicode built checks part of the
-code flow where possible, as requested by Torvalds.
-
-Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
-[eugen.hristev@collabora.com: port to 6.8-rc3]
-Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/namei.c | 10 ++++------
- fs/f2fs/super.c |  8 ++++----
- 2 files changed, 8 insertions(+), 10 deletions(-)
+ lib/libf2fs.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index f7f63a567d86..5da1aae7d23a 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -576,8 +576,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
- 		goto out_iput;
- 	}
- out_splice:
--#if IS_ENABLED(CONFIG_UNICODE)
--	if (!inode && IS_CASEFOLDED(dir)) {
-+	if (IS_ENABLED(CONFIG_UNICODE) && !inode && IS_CASEFOLDED(dir)) {
- 		/* Eventually we want to call d_add_ci(dentry, NULL)
- 		 * for negative dentries in the encoding case as
- 		 * well.  For now, prevent the negative dentry
-@@ -586,7 +585,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
- 		trace_f2fs_lookup_end(dir, dentry, ino, err);
- 		return NULL;
- 	}
--#endif
-+
- 	new = d_splice_alias(inode, dentry);
- 	trace_f2fs_lookup_end(dir, !IS_ERR_OR_NULL(new) ? new : dentry,
- 				ino, IS_ERR(new) ? PTR_ERR(new) : err);
-@@ -639,16 +638,15 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
- 	f2fs_delete_entry(de, page, dir, inode);
- 	f2fs_unlock_op(sbi);
+diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+index d51e485361ee..1cfbf31a9c85 100644
+--- a/lib/libf2fs.c
++++ b/lib/libf2fs.c
+@@ -854,9 +854,15 @@ int f2fs_dev_is_umounted(char *path)
  
--#if IS_ENABLED(CONFIG_UNICODE)
- 	/* VFS negative dentries are incompatible with Encoding and
- 	 * Case-insensitiveness. Eventually we'll want avoid
- 	 * invalidating the dentries here, alongside with returning the
- 	 * negative dentries at f2fs_lookup(), when it is better
- 	 * supported by the VFS for the CI case.
- 	 */
--	if (IS_CASEFOLDED(dir))
-+	if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
- 		d_invalidate(dentry);
--#endif
-+
- 	if (IS_DIRSYNC(dir))
- 		f2fs_sync_fs(sbi->sb, 1);
- fail:
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 313024f5c90c..c4325cc066c6 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -306,7 +306,7 @@ struct kmem_cache *f2fs_cf_name_slab;
- static int __init f2fs_create_casefold_cache(void)
- {
- 	f2fs_cf_name_slab = f2fs_kmem_cache_create("f2fs_casefolded_name",
--							F2FS_NAME_LEN);
-+						   F2FS_NAME_LEN);
- 	return f2fs_cf_name_slab ? 0 : -ENOMEM;
- }
+ 			loop_fd = open(mnt->mnt_fsname, O_RDONLY);
+ 			if (loop_fd < 0) {
++				/* non-root users have no permission */
++				if (errno == EPERM || errno == EACCES) {
++					MSG(0, "Info: open %s failed errno:%d - be careful to overwrite a mounted loopback file.\n",
++							mnt->mnt_fsname, errno);
++					return 0;
++				}
+ 				MSG(0, "Info: open %s failed errno:%d\n",
+-					mnt->mnt_fsname, errno);
+-				return -1;
++							mnt->mnt_fsname, errno);
++				return -errno;
+ 			}
  
-@@ -1354,13 +1354,13 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 		return -EINVAL;
- 	}
- #endif
--#if !IS_ENABLED(CONFIG_UNICODE)
--	if (f2fs_sb_has_casefold(sbi)) {
-+
-+	if (!IS_ENABLED(CONFIG_UNICODE) && f2fs_sb_has_casefold(sbi)) {
- 		f2fs_err(sbi,
- 			"Filesystem with casefold feature cannot be mounted without CONFIG_UNICODE");
- 		return -EINVAL;
- 	}
--#endif
-+
- 	/*
- 	 * The BLKZONED feature indicates that the drive was formatted with
- 	 * zone alignment optimization. This is optional for host-aware
+ 			err = ioctl(loop_fd, LOOP_GET_STATUS64, &loopinfo);
+@@ -864,7 +870,7 @@ int f2fs_dev_is_umounted(char *path)
+ 			if (err < 0) {
+ 				MSG(0, "\tError: ioctl LOOP_GET_STATUS64 failed errno:%d!\n",
+ 					errno);
+-				return -1;
++				return -errno;
+ 			}
+ 
+ 			if (st_buf.st_dev == loopinfo.lo_device &&
 -- 
-2.34.1
+2.44.0.278.ge034bb2e1d-goog
 
 
 
