@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 387E2872C84
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 Mar 2024 03:03:02 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B0D89872CB5
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 Mar 2024 03:23:59 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rhgcU-0007fK-19;
-	Wed, 06 Mar 2024 02:02:59 +0000
+	id 1rhgwj-0001lP-NG;
+	Wed, 06 Mar 2024 02:23:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rhgcS-0007fD-8G
+ (envelope-from <chao@kernel.org>) id 1rhgwi-0001lG-Oh
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 06 Mar 2024 02:02:57 +0000
+ Wed, 06 Mar 2024 02:23:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2l4GQoBXuMY3m6xncUjZG2bfjOR1AQDRcBHenZ0nP6k=; b=bWDgtcWiNru8rVBpx1oal2LtT0
- M/KY+jQWsYgFhLI/pZeiK4iTkMiAVkC0M69ZixdWdZp87UWPsOvQ+RozufK6bi7RircJugb0isMEG
- cFVRjoPAVdThnu5nei5/yyDM7cPRy2Uz1ibwHCEuTRsuWdxCTqr0XVQJFSqduxCaz/lo=;
+ bh=7XM/Llgj8lwiCV2cACXxyMAq73xPB1otmD5lKBKLUY8=; b=HFU3YLbyPHcxjeDwrTwEMRQ+sD
+ o0mroVw2AwpX/aQGMpq8rFB+yQSLE4ExM1ZxPVHJ6WJtVtdjKJJZhIg+4aZ/CJJar69ML04nXLja0
+ NN/wRQEYqPv7GZ3S7QnaCrSx81i66diHukKDhawHwCUGchWH01B+HYrEAohUst/JPtJ0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,39 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2l4GQoBXuMY3m6xncUjZG2bfjOR1AQDRcBHenZ0nP6k=; b=VSk2Lh9w1zxSjID5Yr1GXBPrk7
- qjpS5HmO549bD2W3yVEWw+CQrhnoVm5scPthADpvfP9ajwI40FjqnSMQEf7XpqFFb0iGUTwOhjaJt
- iMEoW3GFdrnl2bfzxpzutA5LyyrVYnR3vN5yACSkqORoGjzHPeZYupfRREUlgYaPPW98=;
+ bh=7XM/Llgj8lwiCV2cACXxyMAq73xPB1otmD5lKBKLUY8=; b=G9C1zkzvhZNxizzyv6e9g7TYdv
+ Ujh3sqJAS3vQnWR814tOo3upvlXMEK2Uti7Ev3aIAnIbxsMXljDvidnYHvRq7kOVIFc4arDxKBCSU
+ gdkprfllTom1xMn4hBf0ABPgJDQ16HntoSz+CTRCc0oCggUESEVlSClZYvkTfpN7KjD8=;
 Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rhgcM-0006Nm-AY for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 06 Mar 2024 02:02:57 +0000
+ id 1rhgwb-0007TD-UC for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 06 Mar 2024 02:23:52 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id BC209CE20B4
+ by sin.source.kernel.org (Postfix) with ESMTP id 59674CE1E88
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  6 Mar 2024 02:02:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43FD1C433C7;
- Wed,  6 Mar 2024 02:02:43 +0000 (UTC)
+ Wed,  6 Mar 2024 02:23:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A9B4FC433F1;
+ Wed,  6 Mar 2024 02:23:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709690564;
- bh=zLmRQZT2psM4oP63UO8fehCjhuvQc+CNBeJgKOl1FOc=;
+ s=k20201202; t=1709691819;
+ bh=thzyX0QVW7HCmD/AS2IUCEdrgCJD2FDngBW5T7A+LDg=;
  h=Date:Subject:To:References:From:In-Reply-To:From;
- b=fFr+hdJ9tRBa//cNIjLXzoDKrOmsp2/IF+1J7sdZikk0Ev+Lw33A8Rwq3kzUsf8Ek
- cZ9NOh0SI6tEIxRFxuslQ19O66m6QgfrVzo6iHtjQJ3M1vEBBu2r8aIxgwxs75fkj/
- 8hVGnYUkU99+9W+xX5xlAfGejiBLh2EWZsJRT6Ijd9munfbiftOCEd+Nk+p7smCUkb
- q5Kt67nYkpcCCYVIs4fc8K4lL+HR0Na99bFLIxJkM9UYnpWSDLw2xN9b1+3XezH5LI
- H0C06/q62xNacDxQTTpQ4RrKj2vG5BLo4kAz5VteFmDPfPr5AG5J4mUlTaHABWFF5Z
- fUKd6LAUprNZA==
-Message-ID: <f0c2b89e-20a6-497e-946a-eabe1101d778@kernel.org>
-Date: Wed, 6 Mar 2024 10:02:42 +0800
+ b=rbxhxhWoauShrqAED6RbMQJ/l4S7v/CLzCOob8mtA5OwApBBzYLh3TF2BdWizUoJg
+ tSkgVlYC4X6YghhSZBVizxopWus6pN0+HrQPtiARiVa8hK9lrzS6SqMib6LgXiCVbx
+ zgHaedhVFaMCAbBNEgYw2eIwo5pLL1tbIl4SUXuNwqUT8Z/Kke6sxlOLNyVkSQcf8J
+ f6dewf2Xo8ZJToUJRT0O/XSbCzJaOMaguo7qe5aORGHxH09hMrgA7SA5G4D3jMMExZ
+ IsZCtATLpHb9zFGGIxko175wyrfOkUWVsGzbHZEGaVGos1fKQzIeCvVVdjISMzqGUQ
+ 34zu+U5KfbMJQ==
+Message-ID: <85cd3edf-8256-44d6-8dac-eebffb90fb52@kernel.org>
+Date: Wed, 6 Mar 2024 10:23:33 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
-References: <20240305204834.101697-1-jaegeuk@kernel.org>
 Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20240305001709.637722-1-jaegeuk@kernel.org>
+ <ZeeqmMT8sdPyPKi0@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20240305204834.101697-1-jaegeuk@kernel.org>
+In-Reply-To: <ZeeqmMT8sdPyPKi0@google.com>
 X-Spam-Score: -3.1 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -71,10 +73,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/3/6 4:48,
- Jaegeuk Kim wrote: > This fixes some android
- build failures due to the missing permission when > checking the loop device.
- Until we get a better solution, let's ignore > the error wi [...] 
+ Content preview:  On 2024/3/6 7:28, Jaegeuk Kim wrote: > This patch adds the
+ disk map of block address ranges configured by multiple > partitions. > >
+ Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> Reviewed-by: Chao Yu
+ <chao@kernel.org>
  Content analysis details:   (-3.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,9 +93,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rhgcM-0006Nm-AY
-Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: deal with permission denial on
- non-root user
+X-Headers-End: 1rhgwb-0007TD-UC
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: add a proc entry show disk map
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,10 +110,9 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/3/6 4:48, Jaegeuk Kim wrote:
-> This fixes some android build failures due to the missing permission when
-> checking the loop device. Until we get a better solution, let's ignore
-> the error with warnings.
+On 2024/3/6 7:28, Jaegeuk Kim wrote:
+> This patch adds the disk map of block address ranges configured by multiple
+> partitions.
 > 
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
