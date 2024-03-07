@@ -2,97 +2,109 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A0C0875631
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Mar 2024 19:37:51 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABC3E8757A3
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Mar 2024 20:54:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1riIce-0006Oo-C6;
-	Thu, 07 Mar 2024 18:37:41 +0000
+	id 1riJog-00068c-Q8;
+	Thu, 07 Mar 2024 19:54:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1riIcc-0006OZ-RO
+ (envelope-from <patrick.p@mail.smcegy.com>) id 1riJof-00068W-6z
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 07 Mar 2024 18:37:39 +0000
+ Thu, 07 Mar 2024 19:54:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:To:From:Reply-To:Sender:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=u5Gb02I60RoyE0ljdapDO2F1NqLwMav1DzZk0xjqRgo=; b=DsPTuIP3z0lldxsj/339a1Yh4X
- ExL3snDmg9sd5iLD7KgPy2r6hX5X3ejbzla3aFVxRcbUXNu1x4L5ad2gFK35gsM15uqz681eFAoMU
- /iYVEBgbZkdZyBcvFhgQkzYD1ZPjdDAKwB2ClvUjTyN80nDy9ILk6HWYy7nBwz0C/T5Y=;
+ bh=FAsDsfGhRgHLhiPEp5G/wiEHNNbE0kr6ZZQI+0qFbSs=; b=nWSUZp8U247gCdMTJYv1SQIwo5
+ ZM/mZl9opHuRG6hVeet+T08HuRhTbSF8YI3cFQHv3VASy292mZSRzicV2FldY0YQcsmakwZiOx5I+
+ OSUK1x4RWDz7IG6smqW6Eac0tiXCfMVE5I76uZFVRkBuSm9cSfZCqD+nRds6+wO67pL4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=u5Gb02I60RoyE0ljdapDO2F1NqLwMav1DzZk0xjqRgo=; b=jVk5iI4q6IbCmN3kdtat+pxKOW
- 3TSvwmsBWyXx0KnZUTVV+nVDeJqM6spnz1b9ITOQrWXtPgvK6p10T163Yo6op6uUUXa6ddy//2TJX
- TLwCKfZfhVUG6oViwcp/q+iq8eXmTN6H4AfncayxAPCEiafAaN6rxiVlArI9D5C7XUKg=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:To:From:Reply-To:Sender:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=FAsDsfGhRgHLhiPEp5G/wiEHNNbE0kr6ZZQI+0qFbSs=; b=F
+ ZaUsn1+b4/17c0z2iYfsFb5+uKpxQX75K192z/OTpXhqgxUM2Cvr6Jex9pI9bnwshjbrRic+WYwKL
+ FMU0gIL0DbewkX5/8xjf6kRHaMZoWF9TQK+OhBtz8Ds8eOA+we/2Q8t/d9soDOtYvdz3QWleQUA/L
+ SF/ZyaG+yU0G97PQ=;
+Received: from [41.33.78.12] (helo=mail.smcegy.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1riIcW-0007ls-Ok for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 07 Mar 2024 18:37:39 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7976E614ED
+ id 1riJoY-0005DG-Fa for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 07 Mar 2024 19:54:09 +0000
+Received: from localhost (localhost [127.0.0.1])
+ by mail.smcegy.com (Postfix) with ESMTP id 1D96724DFDE
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  7 Mar 2024 18:37:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00116C433C7;
- Thu,  7 Mar 2024 18:37:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709836653;
- bh=Xc4eMaeP9TxUHMhYQ28rw5FYDBXjNUTmMl4vW5n4qjQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ri7vNUT6uTbG/zFJOvAI2CaaWyIyglBRNdUZm0SRmIvRJ2UMLKCPuqjZqAF9t/3zT
- TQLFYQKhJaDx2cb90MsUTdtf9yHlzXvM1cNfYuHR9rEiGUBwMOhXpxn9HMZOTJAfab
- dl0pB32g8DEF0xcYa0Qj2R7tkIUnPgOacTP4DMo8IQD8RCgt0WpQyFYZHeUqUloat1
- vH4md5RKqkPEvc0NmxHO0nMgdiBPWp0QoScGINSJwbWpQ8e6VhQlJhwwUGrO2uYQJt
- 0sfVvkpJmzipJpxyBYgfJsVmyK4HLP9kvlgcZOtGBhNoxyWf6PXcWKH+NymeTOyYW4
- xpMZAvTYOFshw==
-Date: Thu, 7 Mar 2024 10:37:31 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZeoJa705xDrPRNQY@google.com>
-References: <20240307151235.3864725-1-chao@kernel.org>
+ Thu,  7 Mar 2024 19:50:34 +0000 (UTC)
+Received: from mail.smcegy.com ([127.0.0.1])
+ by localhost (mail.smcegy.com [127.0.0.1]) (amavis, port 10032) with ESMTP
+ id Rk9PnQaeI454 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  7 Mar 2024 19:50:34 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.smcegy.com (Postfix) with ESMTP id D4C092CF969
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  7 Mar 2024 19:42:03 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.smcegy.com D4C092CF969
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mail.smcegy.com;
+ s=7119B320-7438-11EE-B128-5F92ED995318; t=1709840523;
+ bh=FAsDsfGhRgHLhiPEp5G/wiEHNNbE0kr6ZZQI+0qFbSs=;
+ h=From:To:Date:Message-ID:MIME-Version;
+ b=Exq4l0c2Gv+wmQkW5h4I9Yoihkmjo50HeLavvUbmqPA1DK/FKnB6jasQ9ArghaTCx
+ zszkjhI851g6Z/ELRI0jRoGHYXOTk5hYq6TmPwo8gLefMgRfvKoxv1g57hxMBJvpmj
+ pfg0sGBS8WLvYhUfPaLUvbMfkEdcJ/QU2hG48FeziJuLQpH2ayzBMOQfLSu17CHrKh
+ e/r5mR4wKGtnZ1tcg8Pg4hQv6kl0TrQ0vJ11X6c7+UYTJY4Ez3NoaL5t1uHE2llF4u
+ 29mxjb96qYJ4A5Ao4EKfESIm9Yg/7DlrzvfLR80nJTquWU09zUBfbPHbof3p8EU3Rr
+ 3r3Iz3w1oBrWg==
+X-Virus-Scanned: amavis at mail.smcegy.com
+Received: from mail.smcegy.com ([127.0.0.1])
+ by localhost (mail.smcegy.com [127.0.0.1]) (amavis, port 10026) with ESMTP
+ id 5X19hp7te8rL for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  7 Mar 2024 19:42:03 +0000 (UTC)
+Received: from mail.smcegy.com (unknown [192.168.41.254])
+ by mail.smcegy.com (Postfix) with ESMTP id 864132ACC7C
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  7 Mar 2024 19:28:11 +0000 (UTC)
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: 07 Mar 2024 20:28:09 +0100
+Message-ID: <20240307202809.C666DE11BBD7F36E@mail.smcegy.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240307151235.3864725-1-chao@kernel.org>
-X-Spam-Score: -5.8 (-----)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+X-Spam-Score: 4.7 (++++)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 03/07, Chao Yu wrote: > Below race case can cause data
- corruption: > > Thread A GC thread > - f2fs_inplace_write_data > -
- gc_data_segment
- > - ra_data_block > - locked meta_inode page > - invalidate [...] 
- Content analysis details:   (-5.8 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  Bonjour, Je me présente Monsieur Philippe MARTINEZ, je vous
+    contacte suite à un don de 1 525 000 € que je veux vous offrir, car mes
+    jours sont comptés. Pour plus de renseignements, je vous prie d [...] 
+ 
+ Content analysis details:   (4.7 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+                             author's domain
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [41.33.78.12 listed in wl.mailspike.net]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1riIcW-0007ls-Ok
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to truncate meta inode pages
- forcely
+  1.3 RDNS_NONE              Delivered to internal network by a host with no rDNS
+  1.0 HK_NAME_MR_MRS         No description available.
+  2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
+X-Headers-End: 1riJoY-0005DG-Fa
+Subject: Re: [f2fs-dev] Bonjour
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,146 +116,20 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+From: Mr Philippe via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: phillippemartinez@outlook.com
+Cc: Mr Philippe <patrick.p@mail.smcegy.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/07, Chao Yu wrote:
-> Below race case can cause data corruption:
-> 
-> Thread A				GC thread
-> - f2fs_inplace_write_data
-> 					- gc_data_segment
-> 					 - ra_data_block
-> 					  - locked meta_inode page
->  - invalidate_mapping_pages
->  : fail to invalidate meta_inode page
->    due to lock failure or dirty|writeback
->    status
-
-Wasn't the original data page locked in both cases?
-
->  - f2fs_submit_page_bio
->  : write last dirty data to old blkaddr
-> 					 - move_data_block
-> 					  - load old data from meta_inode page
-> 					  - f2fs_submit_page_write
-> 					  : write old data to new blkaddr
-> 
-> Because invalidate_mapping_pages() will skip invalidating page when the
-> page has unclear status including locked, dirty, writeback and so on, so
-> we need to use truncate_inode_pages_range() instead of
-> invalidate_mapping_pages() to make sure meta_inode page will be dropped.
-> 
-> Fixes: 6aa58d8ad20a ("f2fs: readahead encrypted block during GC")
-> Fixes: e3b49ea36802 ("f2fs: invalidate META_MAPPING before IPU/DIO write")
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  fs/f2fs/checkpoint.c    |  5 +++--
->  fs/f2fs/f2fs.h          | 28 +++++++++++++++++++++++++++-
->  fs/f2fs/segment.c       |  5 ++---
->  include/linux/f2fs_fs.h |  1 +
->  4 files changed, 33 insertions(+), 6 deletions(-)
-> 
-> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> index a09a9609e228..55b7d2cf030f 100644
-> --- a/fs/f2fs/checkpoint.c
-> +++ b/fs/f2fs/checkpoint.c
-> @@ -1598,8 +1598,9 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->  	 */
->  	if (f2fs_sb_has_encrypt(sbi) || f2fs_sb_has_verity(sbi) ||
->  		f2fs_sb_has_compression(sbi))
-> -		invalidate_mapping_pages(META_MAPPING(sbi),
-> -				MAIN_BLKADDR(sbi), MAX_BLKADDR(sbi) - 1);
-> +		f2fs_bug_on(sbi,
-> +			invalidate_inode_pages2_range(META_MAPPING(sbi),
-> +				MAIN_BLKADDR(sbi), MAX_BLKADDR(sbi) - 1));
->  
->  	f2fs_release_ino_entry(sbi, false);
->  
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 4836e7cb0efe..9814e5981a6a 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -4655,10 +4655,36 @@ static inline bool f2fs_is_readonly(struct f2fs_sb_info *sbi)
->  	return f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb);
->  }
->  
-> +static inline void f2fs_truncate_meta_inode_pages(struct f2fs_sb_info *sbi,
-> +					block_t blkaddr, unsigned int cnt)
-> +{
-> +	bool need_submit = false;
-> +	int i = 0;
-> +
-> +	do {
-> +		struct page *page;
-> +
-> +		page = find_get_page(META_MAPPING(sbi), blkaddr + i);
-> +		if (page) {
-> +			if (PageWriteback(page))
-> +				need_submit = true;
-> +			f2fs_put_page(page, 0);
-> +		}
-> +	} while (++i < cnt && !need_submit);
-> +
-> +	if (need_submit)
-> +		f2fs_submit_merged_write_cond(sbi, sbi->meta_inode,
-> +							NULL, 0, DATA);
-> +
-> +	truncate_inode_pages_range(META_MAPPING(sbi),
-> +			F2FS_BLK_TO_BYTES((loff_t)blkaddr),
-> +			F2FS_BLK_END_BYTES((loff_t)(blkaddr + cnt - 1)));
-> +}
-> +
->  static inline void f2fs_invalidate_internal_cache(struct f2fs_sb_info *sbi,
->  								block_t blkaddr)
->  {
-> -	invalidate_mapping_pages(META_MAPPING(sbi), blkaddr, blkaddr);
-> +	f2fs_truncate_meta_inode_pages(sbi, blkaddr, 1);
->  	f2fs_invalidate_compress_page(sbi, blkaddr);
->  }
->  
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 4ff3b2d14ddf..20af48d7f784 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -3741,8 +3741,7 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
->  	}
->  
->  	if (fio->post_read)
-> -		invalidate_mapping_pages(META_MAPPING(sbi),
-> -				fio->new_blkaddr, fio->new_blkaddr);
-> +		f2fs_truncate_meta_inode_pages(sbi, fio->new_blkaddr, 1);
->  
->  	stat_inc_inplace_blocks(fio->sbi);
->  
-> @@ -3932,7 +3931,7 @@ void f2fs_wait_on_block_writeback_range(struct inode *inode, block_t blkaddr,
->  	for (i = 0; i < len; i++)
->  		f2fs_wait_on_block_writeback(inode, blkaddr + i);
->  
-> -	invalidate_mapping_pages(META_MAPPING(sbi), blkaddr, blkaddr + len - 1);
-> +	f2fs_truncate_meta_inode_pages(sbi, blkaddr, len);
->  }
->  
->  static int read_compacted_summaries(struct f2fs_sb_info *sbi)
-> diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
-> index 755e9a41b196..a357287eac1e 100644
-> --- a/include/linux/f2fs_fs.h
-> +++ b/include/linux/f2fs_fs.h
-> @@ -27,6 +27,7 @@
->  
->  #define F2FS_BYTES_TO_BLK(bytes)	((bytes) >> F2FS_BLKSIZE_BITS)
->  #define F2FS_BLK_TO_BYTES(blk)		((blk) << F2FS_BLKSIZE_BITS)
-> +#define F2FS_BLK_END_BYTES(blk)		(F2FS_BLK_TO_BYTES(blk + 1) - 1)
->  
->  /* 0, 1(node nid), 2(meta nid) are reserved node id */
->  #define F2FS_RESERVED_NODE_NUM		3
-> -- 
-> 2.40.1
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+Qm9uam91ciwKSmUgbWUgcHLDqXNlbnRlIE1vbnNpZXVyIFBoaWxpcHBlIE1BUlRJTkVaLCBqZSB2
+b3VzIGNvbnRhY3RlIHN1aXRlIArDoCB1biBkb24gZGUgMSA1MjUgMDAwIOKCrCBxdWUgamUgdmV1
+eCB2b3VzIG9mZnJpciwgY2FyIG1lcyBqb3VycyAKc29udCBjb21wdMOpcy4gUG91ciBwbHVzIGRl
+IHJlbnNlaWduZW1lbnRzLCBqZSB2b3VzIHByaWUgZGUgYmllbiAKdm91bG9pciBtZSBjb250YWN0
+ZXIgw6AgbW9uIGFkcmVzc2UgY291cnJpZWwgcGVyc29ubmVsOiAKcGhpbGxpcHBlbWFydGluZXpA
+b3V0bG9vay5jb20KUXVlIGxlIFNlaWduZXVyIERpZXUgY3LDqWF0ZXVyIGR1IGNpZWwgZXQgZGUg
+bGEgdGVycmUgZXhhdWNlIHZvcyAKcHJpw6hyZXMsIEFtZW4uCgoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxp
+c3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5z
+b3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
