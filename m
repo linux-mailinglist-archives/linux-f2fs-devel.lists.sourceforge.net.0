@@ -2,87 +2,126 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EE5A8761AB
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Mar 2024 11:13:21 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BECBD8768B9
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Mar 2024 17:45:26 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1riXDz-0004Qc-1A;
-	Fri, 08 Mar 2024 10:13:11 +0000
+	id 1ridLN-0006Yj-0b;
+	Fri, 08 Mar 2024 16:45:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1riXDx-0004QW-2B
+ (envelope-from <daeho43@gmail.com>) id 1ridLL-0006Yd-2z
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 Mar 2024 10:13:09 +0000
+ Fri, 08 Mar 2024 16:45:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
- Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=S/5H/gFmwgiNll3giK0GIzKXB6y0LazgCbL2P4AbrHE=; b=hgwb7Em1tio3B1ZjXCapyyGfZr
- KZD4vwsVYlxgb1thISPGv+NNCgsCrw28phxp7dlMR+22myyrwDYYsZiMHzo3Z+kOvrfTCuUk+TVPJ
- 0jvMU1wDbFnxje7dpbsJ9RL0zVWekf2l5ABOUE5nGrtN7RpS2qqtf3EE/Y0RjMLmMdMY=;
+ bh=5wSPkqNQKuirNVQysLHjiteBxJpX+2d65nTJ9uim6LA=; b=ltcfAAY9Nv6U3dRsa07UJuv6rm
+ cOggmyF4y1LXiJeAykdGIirPGar6JkSMtME0Yj7eX7lzHdcLM10eKRvu1cFKdiVS687ZsZUi2YHJt
+ MVYsdsIiXz3nzCvrFFyRuK9VvIjFIj81KnN1XgGqNFCmwK3bBTCrwTqatfjZm2B7Yd9w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=S/5H/gFmwgiNll3giK0GIzKXB6y0LazgCbL2P4AbrHE=; b=RsUNIwcP0JJNYmYtWoMfmmTh8b
- yppv7dnphJ9F2v5F6JHOXRlbeyorRwfI168wyU95MNYkK716bz4lOKPFyMtkoDtTD+kA+qS0B5Tts
- Yjby3MAmI9UVwOFkVNTC/6TCwgV87QD+HUZobuivIIzJ+Eownc/SGFuudZqH0KyQOePM=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
+ bh=5wSPkqNQKuirNVQysLHjiteBxJpX+2d65nTJ9uim6LA=; b=CyafN1n9/hExdhOMV6072SydVM
+ xE++c+hoOjERNXYrK2NbW9ZFWgf6L3Qu75d9rCGYy4pqm2HS+Shs0hZabG/Dlt3bAUBx1CK15J74i
+ d86biNzSF4LpLefLZ4RFxMb/z7jVHufnIonDkF+MYY/qUoCVqD6+15J7dE/A4cytmbBw=;
+Received: from mail-vk1-f177.google.com ([209.85.221.177])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1riXDl-0000uy-QH for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 Mar 2024 10:13:08 +0000
-Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 428ACf4w067951;
- Fri, 8 Mar 2024 18:12:41 +0800 (+08)
- (envelope-from Zhiguo.Niu@unisoc.com)
-Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4Trhlq5Ttjz2L3SH2;
- Fri,  8 Mar 2024 18:11:35 +0800 (CST)
-Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Fri, 8 Mar 2024 18:12:39 +0800
-From: Zhiguo Niu <zhiguo.niu@unisoc.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Fri, 8 Mar 2024 18:12:33 +0800
-Message-ID: <1709892753-27461-2-git-send-email-zhiguo.niu@unisoc.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1709892753-27461-1-git-send-email-zhiguo.niu@unisoc.com>
-References: <1709892753-27461-1-git-send-email-zhiguo.niu@unisoc.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1ridLA-0003CL-8Q for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 08 Mar 2024 16:45:11 +0000
+Received: by mail-vk1-f177.google.com with SMTP id
+ 71dfb90a1353d-4d33e0c1b3eso342080e0c.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 08 Mar 2024 08:45:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1709916300; x=1710521100; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5wSPkqNQKuirNVQysLHjiteBxJpX+2d65nTJ9uim6LA=;
+ b=LG5ywKx/Om7mhQeBniyj+YVLHMWUmI7/DBkG3s5zQKUYUSnT+iAL8Q6FDc0HC9OLN8
+ MsaCHBlQ4vID0u59BvLnJppaaWtYEKSzMCcWBHLWPJBxbG2Y9u8lQ8SI53Z9ASJgMYlo
+ crKO3luaHLamQJl0XIJu5GKpPTVmD+1g3+G3EMOUYh+D5ur6XVQ0AwBBjVw3+21T5zKd
+ bCZIE7QBlwJtMr+DyUH9abm2E3E9qno91f85Pm0XIkXFmON7beNrM82CT+mnahh2/bzv
+ pc6Bp5z/QISGcKj8ZMr3ItoE/bB0ug+H8Q0zWKn61cvUkmagweRhXxkAhUcSdfxhbBaD
+ dBuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709916300; x=1710521100;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5wSPkqNQKuirNVQysLHjiteBxJpX+2d65nTJ9uim6LA=;
+ b=EPmwU97VKNg4N7BYRUyQDZAZfz3JymvwD+2ef+ttfqygqI7rALhwZoMZBjEanQ5ScY
+ nHCXqo1DylDMCoChf+ofm4r7mw/J1OaIdWSIO1Dh9KJ0jQcmek7CeOQB7knfV9E23X7V
+ +Ty2SbKscB0/lDjwgEsGWUfkCJZl82YiO+dHEB5Z+omr+d6WPYSVbhMzHuAIcvhIDPEL
+ yXw+/AVCTr38n5ljXNluoR1u503hOj0qCRbiZlJJHDREtJef4N/rSF7ylTITUyBlUXQ+
+ BfO5Y8pwTkGkTBxf/68JcXul9o/kTn0/+dWZEqZc+OYb3b9M3XIzdK44QO1elb3T9urR
+ gPHQ==
+X-Gm-Message-State: AOJu0Yy1BIRj8CwqmQejssAp3Q2+chDqGWfJHZ3Qf3Aenjq+1fdSbXi6
+ 03rO2Me76BkKYysWZa3r0c+6BPseE3ob+LZasHrfeMEvu1jap4iHQeEIW5J21EpMsZW1+QUmRPK
+ /r9Nfjz+cp1vr9p1g9ToFPhbQcCb1vZACIr4=
+X-Google-Smtp-Source: AGHT+IH3fn1Arav1LCNeWZCdoVuzsKeGCmBuFPAbAV2y+CK8RXQId0X+jUe9jI88j6EiaOXIrcuf51P8/P/FIaR5zyQ=
+X-Received: by 2002:a1f:7308:0:b0:4d3:b9c0:c735 with SMTP id
+ o8-20020a1f7308000000b004d3b9c0c735mr5794919vkc.2.1709916298638; Fri, 08 Mar
+ 2024 08:44:58 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.0.73.87]
-X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 428ACf4w067951
-X-Spam-Score: -0.0 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+References: <20240224011411.3820719-1-jaegeuk@kernel.org>
+ <ZdlNtvzBXOXmUBg8@google.com>
+In-Reply-To: <ZdlNtvzBXOXmUBg8@google.com>
+From: Daeho Jeong <daeho43@gmail.com>
+Date: Fri, 8 Mar 2024 08:44:47 -0800
+Message-ID: <CACOAw_xyPNCMPbEQTBO-zNE63nChc2kmx+mHE+AE26m2LDcP7A@mail.gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+X-Spam-Score: 0.0 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  {new, change}_curseg() may return error in some special cases,
- error handling should be did in their callers, and this will also facilitate
- subsequent error path expansion in {new,change}_curseg(). Signed-off-by:
- Zhiguo Niu <zhiguo.niu@unisoc.com> Signed-off-by: Chao Yu <chao@kernel.org>
- --- fs/f2fs/extent_cache.c | 2 +- fs/f2fs/f2fs.h | 4 ++-- fs/f2fs/gc.c |
- 7 +++++-- fs/f2fs/segment.c | 57 +++ [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  Reviewed-by: Daeho Jeong On Fri, Feb 23, 2024 at 6:02 PM
+    Jaegeuk Kim wrote: > > The reserved segments should be aligned to the section
+    boundary. > > Signed-off-by: Jaegeuk Kim > --- > > v2: > - fix bug > > include/f2fs_
+    [...] 
+ 
+ Content analysis details:   (0.0 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+                             in digit
+                             [daeho43[at]gmail.com]
+  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+                             provider
+                             [daeho43[at]gmail.com]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.221.177 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+                             envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+                             author's domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.221.177 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1riXDl-0000uy-QH
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix to handle error paths of {new,
- change}_curseg()
+X-Headers-End: 1ridLA-0003CL-8Q
+Subject: Re: [f2fs-dev] [PATCH v2] mkfs.f2fs: should give section-aligned
+ reserved segments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,295 +133,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, hongyu.jin@unisoc.com,
- zhiguo.niu@unisoc.com
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-{new,change}_curseg() may return error in some special cases,
-error handling should be did in their callers, and this will also
-facilitate subsequent error path expansion in {new,change}_curseg().
-
-Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/extent_cache.c |  2 +-
- fs/f2fs/f2fs.h         |  4 ++--
- fs/f2fs/gc.c           |  7 +++++--
- fs/f2fs/segment.c      | 57 +++++++++++++++++++++++++++++++-------------------
- fs/f2fs/super.c        |  4 +++-
- 5 files changed, 46 insertions(+), 28 deletions(-)
-
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index 48048fa..dce00cf 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -988,7 +988,7 @@ bool f2fs_lookup_read_extent_cache_block(struct inode *inode, pgoff_t index,
- 
- void f2fs_update_read_extent_cache(struct dnode_of_data *dn)
- {
--	return __update_extent_cache(dn, EX_READ);
-+	__update_extent_cache(dn, EX_READ);
- }
- 
- void f2fs_update_read_extent_cache_range(struct dnode_of_data *dn,
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 4836e7c..7beb074 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3700,10 +3700,10 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
- void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
- int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra);
- bool f2fs_segment_has_free_slot(struct f2fs_sb_info *sbi, int segno);
--void f2fs_init_inmem_curseg(struct f2fs_sb_info *sbi);
-+int f2fs_init_inmem_curseg(struct f2fs_sb_info *sbi);
- void f2fs_save_inmem_curseg(struct f2fs_sb_info *sbi);
- void f2fs_restore_inmem_curseg(struct f2fs_sb_info *sbi);
--void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
-+int f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
- 					unsigned int start, unsigned int end);
- int f2fs_allocate_new_section(struct f2fs_sb_info *sbi, int type, bool force);
- int f2fs_allocate_pinning_section(struct f2fs_sb_info *sbi);
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index ca1bf41..8852814 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -2035,8 +2035,11 @@ static int free_segment_range(struct f2fs_sb_info *sbi,
- 	mutex_unlock(&DIRTY_I(sbi)->seglist_lock);
- 
- 	/* Move out cursegs from the target range */
--	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_PERSIST_TYPE; type++)
--		f2fs_allocate_segment_for_resize(sbi, type, start, end);
-+	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_PERSIST_TYPE; type++) {
-+		err = f2fs_allocate_segment_for_resize(sbi, type, start, end);
-+		if (err)
-+			goto out;
-+	}
- 
- 	/* do GC to move out valid blocks in the range */
- 	err = f2fs_gc_range(sbi, start, end, dry_run, 0);
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 4e4a51a..c1c1308 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -2863,7 +2863,7 @@ bool f2fs_segment_has_free_slot(struct f2fs_sb_info *sbi, int segno)
-  * This function always allocates a used segment(from dirty seglist) by SSR
-  * manner, so it should recover the existing segment information of valid blocks
-  */
--static void change_curseg(struct f2fs_sb_info *sbi, int type)
-+static int change_curseg(struct f2fs_sb_info *sbi, int type)
- {
- 	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
- 	struct curseg_info *curseg = CURSEG_I(sbi, type);
-@@ -2888,21 +2888,23 @@ static void change_curseg(struct f2fs_sb_info *sbi, int type)
- 	if (IS_ERR(sum_page)) {
- 		/* GC won't be able to use stale summary pages by cp_error */
- 		memset(curseg->sum_blk, 0, SUM_ENTRY_SIZE);
--		return;
-+		return PTR_ERR(sum_page);
- 	}
- 	sum_node = (struct f2fs_summary_block *)page_address(sum_page);
- 	memcpy(curseg->sum_blk, sum_node, SUM_ENTRY_SIZE);
- 	f2fs_put_page(sum_page, 1);
-+	return 0;
- }
- 
- static int get_ssr_segment(struct f2fs_sb_info *sbi, int type,
- 				int alloc_mode, unsigned long long age);
- 
--static void get_atssr_segment(struct f2fs_sb_info *sbi, int type,
-+static int get_atssr_segment(struct f2fs_sb_info *sbi, int type,
- 					int target_type, int alloc_mode,
- 					unsigned long long age)
- {
- 	struct curseg_info *curseg = CURSEG_I(sbi, type);
-+	int ret = 0;
- 
- 	curseg->seg_type = target_type;
- 
-@@ -2910,38 +2912,41 @@ static void get_atssr_segment(struct f2fs_sb_info *sbi, int type,
- 		struct seg_entry *se = get_seg_entry(sbi, curseg->next_segno);
- 
- 		curseg->seg_type = se->type;
--		change_curseg(sbi, type);
-+		ret = change_curseg(sbi, type);
- 	} else {
- 		/* allocate cold segment by default */
- 		curseg->seg_type = CURSEG_COLD_DATA;
--		new_curseg(sbi, type, true);
-+		ret = new_curseg(sbi, type, true);
- 	}
- 	stat_inc_seg_type(sbi, curseg);
-+	return ret;
- }
- 
--static void __f2fs_init_atgc_curseg(struct f2fs_sb_info *sbi)
-+static int __f2fs_init_atgc_curseg(struct f2fs_sb_info *sbi)
- {
- 	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_ALL_DATA_ATGC);
-+	int ret = 0;
- 
- 	if (!sbi->am.atgc_enabled)
--		return;
-+		return 0;
- 
- 	f2fs_down_read(&SM_I(sbi)->curseg_lock);
- 
- 	mutex_lock(&curseg->curseg_mutex);
- 	down_write(&SIT_I(sbi)->sentry_lock);
- 
--	get_atssr_segment(sbi, CURSEG_ALL_DATA_ATGC, CURSEG_COLD_DATA, SSR, 0);
-+	ret = get_atssr_segment(sbi, CURSEG_ALL_DATA_ATGC,
-+					CURSEG_COLD_DATA, SSR, 0);
- 
- 	up_write(&SIT_I(sbi)->sentry_lock);
- 	mutex_unlock(&curseg->curseg_mutex);
- 
- 	f2fs_up_read(&SM_I(sbi)->curseg_lock);
--
-+	return ret;
- }
--void f2fs_init_inmem_curseg(struct f2fs_sb_info *sbi)
-+int f2fs_init_inmem_curseg(struct f2fs_sb_info *sbi)
- {
--	__f2fs_init_atgc_curseg(sbi);
-+	return __f2fs_init_atgc_curseg(sbi);
- }
- 
- static void __f2fs_save_inmem_curseg(struct f2fs_sb_info *sbi, int type)
-@@ -3069,11 +3074,12 @@ static bool need_new_seg(struct f2fs_sb_info *sbi, int type)
- 	return false;
- }
- 
--void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
-+int f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
- 					unsigned int start, unsigned int end)
- {
- 	struct curseg_info *curseg = CURSEG_I(sbi, type);
- 	unsigned int segno;
-+	int ret = 0;
- 
- 	f2fs_down_read(&SM_I(sbi)->curseg_lock);
- 	mutex_lock(&curseg->curseg_mutex);
-@@ -3084,9 +3090,9 @@ void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
- 		goto unlock;
- 
- 	if (f2fs_need_SSR(sbi) && get_ssr_segment(sbi, type, SSR, 0))
--		change_curseg(sbi, type);
-+		ret = change_curseg(sbi, type);
- 	else
--		new_curseg(sbi, type, true);
-+		ret = new_curseg(sbi, type, true);
- 
- 	stat_inc_seg_type(sbi, curseg);
- 
-@@ -3100,6 +3106,7 @@ void f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
- 
- 	mutex_unlock(&curseg->curseg_mutex);
- 	f2fs_up_read(&SM_I(sbi)->curseg_lock);
-+	return ret;
- }
- 
- static int __allocate_new_segment(struct f2fs_sb_info *sbi, int type,
-@@ -3486,14 +3493,17 @@ int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
- 	bool from_gc = (type == CURSEG_ALL_DATA_ATGC);
- 	struct seg_entry *se = NULL;
- 	bool segment_full = false;
-+	int ret = 0;
- 
- 	f2fs_down_read(&SM_I(sbi)->curseg_lock);
- 
- 	mutex_lock(&curseg->curseg_mutex);
- 	down_write(&sit_i->sentry_lock);
- 
--	if (curseg->segno == NULL_SEGNO)
-+	if (curseg->segno == NULL_SEGNO) {
-+		ret = -ENOSPC;
- 		goto out_err;
-+	}
- 
- 	if (from_gc) {
- 		f2fs_bug_on(sbi, GET_SEGNO(sbi, old_blkaddr) == NULL_SEGNO);
-@@ -3546,17 +3556,17 @@ int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
- 		}
- 
- 		if (from_gc) {
--			get_atssr_segment(sbi, type, se->type,
-+			ret = get_atssr_segment(sbi, type, se->type,
- 						AT_SSR, se->mtime);
- 		} else {
- 			if (need_new_seg(sbi, type))
--				new_curseg(sbi, type, false);
-+				ret = new_curseg(sbi, type, false);
- 			else
--				change_curseg(sbi, type);
-+				ret = change_curseg(sbi, type);
- 			stat_inc_seg_type(sbi, curseg);
- 		}
- 
--		if (curseg->segno == NULL_SEGNO)
-+		if (ret)
- 			goto out_err;
- 	}
- 
-@@ -3599,7 +3609,7 @@ int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
- 	up_write(&sit_i->sentry_lock);
- 	mutex_unlock(&curseg->curseg_mutex);
- 	f2fs_up_read(&SM_I(sbi)->curseg_lock);
--	return -ENOSPC;
-+	return ret;
- 
- }
- 
-@@ -3829,7 +3839,8 @@ void f2fs_do_replace_block(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
- 	/* change the current segment */
- 	if (segno != curseg->segno) {
- 		curseg->next_segno = segno;
--		change_curseg(sbi, type);
-+		if (change_curseg(sbi, type))
-+			goto out_unlock;
- 	}
- 
- 	curseg->next_blkoff = GET_BLKOFF_FROM_SEG0(sbi, new_blkaddr);
-@@ -3855,12 +3866,14 @@ void f2fs_do_replace_block(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
- 	if (recover_curseg) {
- 		if (old_cursegno != curseg->segno) {
- 			curseg->next_segno = old_cursegno;
--			change_curseg(sbi, type);
-+			if (change_curseg(sbi, type))
-+				goto out_unlock;
- 		}
- 		curseg->next_blkoff = old_blkoff;
- 		curseg->alloc_type = old_alloc_type;
- 	}
- 
-+out_unlock:
- 	up_write(&sit_i->sentry_lock);
- 	mutex_unlock(&curseg->curseg_mutex);
- 	f2fs_up_write(&SM_I(sbi)->curseg_lock);
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 78a7658..f2b6d3f 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -4685,7 +4685,9 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 	if (err)
- 		goto free_meta;
- 
--	f2fs_init_inmem_curseg(sbi);
-+	err = f2fs_init_inmem_curseg(sbi);
-+	if (err)
-+		goto sync_free_meta;
- 
- 	/* f2fs_recover_fsync_data() cleared this already */
- 	clear_sbi_flag(sbi, SBI_POR_DOING);
--- 
-1.9.1
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+UmV2aWV3ZWQtYnk6IERhZWhvIEplb25nIDxkYWVob2plb25nQGdvb2dsZS5jb20+CgpPbiBGcmks
+IEZlYiAyMywgMjAyNCBhdCA2OjAy4oCvUE0gSmFlZ2V1ayBLaW0gPGphZWdldWtAa2VybmVsLm9y
+Zz4gd3JvdGU6Cj4KPiBUaGUgcmVzZXJ2ZWQgc2VnbWVudHMgc2hvdWxkIGJlIGFsaWduZWQgdG8g
+dGhlIHNlY3Rpb24gYm91bmRhcnkuCj4KPiBTaWduZWQtb2ZmLWJ5OiBKYWVnZXVrIEtpbSA8amFl
+Z2V1a0BrZXJuZWwub3JnPgo+IC0tLQo+Cj4gICB2MjoKPiAgIC0gZml4IGJ1Zwo+Cj4gIGluY2x1
+ZGUvZjJmc19mcy5oIHwgMTIgKysrKysrKy0tLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCA3IGluc2Vy
+dGlvbnMoKyksIDUgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9mMmZzX2Zz
+LmggYi9pbmNsdWRlL2YyZnNfZnMuaAo+IGluZGV4IDkwNTZlMDJhY2QyOS4uZmM1NjM5NmZhMzU4
+IDEwMDY0NAo+IC0tLSBhL2luY2x1ZGUvZjJmc19mcy5oCj4gKysrIGIvaW5jbHVkZS9mMmZzX2Zz
+LmgKPiBAQCAtMTc2MCwyNSArMTc2MCwyNyBAQCBleHRlcm4gdWludDMyX3QgZjJmc19nZXRfdXNh
+YmxlX3NlZ21lbnRzKHN0cnVjdCBmMmZzX3N1cGVyX2Jsb2NrICpzYik7Cj4gICNkZWZpbmUgWk9O
+RV9BTElHTihibGtzKSAgICAgICBTSVpFX0FMSUdOKGJsa3MsIGMuYmxrc19wZXJfc2VnICogXAo+
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjLnNlZ3NfcGVyX3pvbmUp
+Cj4KPiAtc3RhdGljIGlubGluZSBkb3VibGUgZ2V0X3Jlc2VydmVkKHN0cnVjdCBmMmZzX3N1cGVy
+X2Jsb2NrICpzYiwgZG91YmxlIG92cCkKPiArc3RhdGljIGlubGluZSB1aW50MzJfdCBnZXRfcmVz
+ZXJ2ZWQoc3RydWN0IGYyZnNfc3VwZXJfYmxvY2sgKnNiLCBkb3VibGUgb3ZwKQo+ICB7Cj4gLSAg
+ICAgICBkb3VibGUgcmVzZXJ2ZWQ7Cj4gICAgICAgICB1aW50MzJfdCB1c2FibGVfbWFpbl9zZWdz
+ID0gZjJmc19nZXRfdXNhYmxlX3NlZ21lbnRzKHNiKTsKPiAgICAgICAgIHVpbnQzMl90IHNlZ3Nf
+cGVyX3NlYyA9IHJvdW5kX3VwKHVzYWJsZV9tYWluX3NlZ3MsIGdldF9zYihzZWN0aW9uX2NvdW50
+KSk7Cj4gKyAgICAgICB1aW50MzJfdCByZXNlcnZlZDsKPgo+ICAgICAgICAgaWYgKGMuY29uZl9y
+ZXNlcnZlZF9zZWN0aW9ucykKPiAgICAgICAgICAgICAgICAgcmVzZXJ2ZWQgPSBjLmNvbmZfcmVz
+ZXJ2ZWRfc2VjdGlvbnMgKiBzZWdzX3Blcl9zZWM7Cj4gICAgICAgICBlbHNlCj4gICAgICAgICAg
+ICAgICAgIHJlc2VydmVkID0gKDEwMCAvIG92cCArIDEgKyBOUl9DVVJTRUdfVFlQRSkgKiBzZWdz
+X3Blcl9zZWM7Cj4KPiAtICAgICAgIHJldHVybiByZXNlcnZlZDsKPiArICAgICAgIC8qIExldCdz
+IGtlZXAgdGhlIHNlY3Rpb24gYWxpZ25tZW50ICovCj4gKyAgICAgICByZXR1cm4gcm91bmRfdXAo
+cmVzZXJ2ZWQsIHNlZ3NfcGVyX3NlYykgKiBzZWdzX3Blcl9zZWM7Cj4gIH0KPgo+ICBzdGF0aWMg
+aW5saW5lIGRvdWJsZSBnZXRfYmVzdF9vdmVycHJvdmlzaW9uKHN0cnVjdCBmMmZzX3N1cGVyX2Js
+b2NrICpzYikKPiAgewo+IC0gICAgICAgZG91YmxlIHJlc2VydmVkLCBvdnAsIGNhbmRpZGF0ZSwg
+ZW5kLCBkaWZmLCBzcGFjZTsKPiArICAgICAgIGRvdWJsZSBvdnAsIGNhbmRpZGF0ZSwgZW5kLCBk
+aWZmLCBzcGFjZTsKPiAgICAgICAgIGRvdWJsZSBtYXhfb3ZwID0gMCwgbWF4X3NwYWNlID0gMDsK
+PiAgICAgICAgIHVpbnQzMl90IHVzYWJsZV9tYWluX3NlZ3MgPSBmMmZzX2dldF91c2FibGVfc2Vn
+bWVudHMoc2IpOwo+ICsgICAgICAgdWludDMyX3QgcmVzZXJ2ZWQ7Cj4KPiAgICAgICAgIGlmIChn
+ZXRfc2Ioc2VnbWVudF9jb3VudF9tYWluKSA8IDI1Nikgewo+ICAgICAgICAgICAgICAgICBjYW5k
+aWRhdGUgPSAxMDsKPiBAQCAtMTc5NSw3ICsxNzk3LDcgQEAgc3RhdGljIGlubGluZSBkb3VibGUg
+Z2V0X2Jlc3Rfb3ZlcnByb3Zpc2lvbihzdHJ1Y3QgZjJmc19zdXBlcl9ibG9jayAqc2IpCj4gICAg
+ICAgICAgICAgICAgIG92cCA9ICh1c2FibGVfbWFpbl9zZWdzIC0gcmVzZXJ2ZWQpICogY2FuZGlk
+YXRlIC8gMTAwOwo+ICAgICAgICAgICAgICAgICBpZiAob3ZwIDwgMCkKPiAgICAgICAgICAgICAg
+ICAgICAgICAgICBjb250aW51ZTsKPiAtICAgICAgICAgICAgICAgc3BhY2UgPSB1c2FibGVfbWFp
+bl9zZWdzIC0gbWF4KHJlc2VydmVkLCBvdnApIC0KPiArICAgICAgICAgICAgICAgc3BhY2UgPSB1
+c2FibGVfbWFpbl9zZWdzIC0gbWF4KChkb3VibGUpcmVzZXJ2ZWQsIG92cCkgLQo+ICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAyICogZ2V0X3NiKHNlZ3NfcGVyX3NlYyk7
+Cj4gICAgICAgICAgICAgICAgIGlmIChtYXhfc3BhY2UgPCBzcGFjZSkgewo+ICAgICAgICAgICAg
+ICAgICAgICAgICAgIG1heF9zcGFjZSA9IHNwYWNlOwo+IC0tCj4gMi40NC4wLnJjMC4yNTguZzcz
+MjBlOTU4ODYtZ29vZwo+Cj4KPgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fCj4gTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPiBMaW51eC1mMmZz
+LWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+IGh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2Uu
+bmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwKCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlz
+dApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNv
+dXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
