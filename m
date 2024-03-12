@@ -2,79 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D3CF878C68
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Mar 2024 02:42:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB666878C69
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Mar 2024 02:43:01 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rjrA5-0004HD-EL;
-	Tue, 12 Mar 2024 01:42:37 +0000
+	id 1rjrAR-0001fi-4K;
+	Tue, 12 Mar 2024 01:42:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rjrA3-0004H4-8u
+ (envelope-from <chao@kernel.org>) id 1rjrAP-0001fS-Hh
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 Mar 2024 01:42:35 +0000
+ Tue, 12 Mar 2024 01:42:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- References:Cc:To:From:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7EZA0ro8+0LAyK5QvRTjRjyLCaCNn+XiawKtuat+3jk=; b=Mt/DA+n9811AjIIsXDWlthynrl
- LSSHmin/kyiHJ3n8Vz9tpMHGz7f01zKcPIsgPdAXS8s/KaedeZ4Ap3wL3lYAujE/sEaXJy5aZw2Gw
- KBqGuDrJrNOvBGRQo0OtHTIk/h+58EH2Pro00LkrkEuSxLO0vrUEwI/EzWu/jQE0GhTg=;
+ bh=BNtHHVS7sll8Zy59j1GCzNsoL5RYzJjgtdOuP0zhT2s=; b=WhcV76mH8GS1hVpJm0oyCQnWRO
+ d1CoiiT/2JmPODh20FYEg4i+3teegCQpwAU/EICab5ev0wcADZJ8wavULy4BFiv0/G/J/BJjXdI6+
+ 4wFcntpXccY+fupsunn/3del5pinx3Rz5j9IdWsR+5gQY1mELuHrwHDXzlhFvEYvNjU4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:References:Cc:To:From:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
  Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7EZA0ro8+0LAyK5QvRTjRjyLCaCNn+XiawKtuat+3jk=; b=A5aQ6CgpS4kyZsemxTwZY8RnnJ
- MHlE7Xm1/ZSs81+aN8rVHMPy0p8w0TeYa5ra124Z9yY49gOPEsq7T2mG0LyJEn9bRsoRLMumpWhjq
- Ja941NtK7ePBA5Bmqsc64bBYJ4lmtVSRpgb1w5QD1vnBBxyOKfUTw1awc1xo3SPXOz5s=;
+ bh=BNtHHVS7sll8Zy59j1GCzNsoL5RYzJjgtdOuP0zhT2s=; b=B9/qoT78wHWm0kmgteQrWMxhxV
+ 0tFy1Nqeu/Posob5q+iKdUgwX8/xTZw2OIKeLkYfOF01A8DCk4Xe1QS6R+S4TchrzIFoK5ovG7q45
+ 73kVKdis2xkIg1wOMwLn3T9JrVhXgA+arL1H1ay2hbrIlVd0zjvPj8QcR4yTwMOod47U=;
 Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rjr9r-0002V4-Am for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 Mar 2024 01:42:35 +0000
+ id 1rjrAF-0002W7-96 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 Mar 2024 01:42:58 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 9C004CE124A
+ by sin.source.kernel.org (Postfix) with ESMTP id 91B7ECE124A
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 12 Mar 2024 01:42:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D7FBC433C7;
- Tue, 12 Mar 2024 01:42:20 +0000 (UTC)
+ Tue, 12 Mar 2024 01:42:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2961C433F1;
+ Tue, 12 Mar 2024 01:42:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1710207741;
- bh=SvN91sVbn4Vcb6UyAAUWB0V+z3nlk1QHgidCJdScNrk=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=J6TsgF5ftbA35AqVO1Q2CglrqxDO3Q5WHOa/iQrhqXWFwJvjZwkLqKWv0sJLnsf+O
- wUoAY5lW+/1b50HuWVX5n3CWtAE++4SOS1ZiCoWgphuytr+FK6lntn7BX8md6EkgWP
- QXLtdMghvxs9ar269OXVUz9EPPFEtBNyA+StNYFMg0vvXTo9gXedjn1teNrleGnU+S
- wfQ5ao5XVjkeZLG/SgnOTMlsJEI6ss0vvpfkLfccnG9AJUDBQnwpqFUvE48jErhtzE
- V0enq+VMRrCqsCUot13bKYch70Tj4xomHD0gIGtx+lw195+zXsE/Lxw4IqIGXInNZU
- XJMZQOUupaPCg==
-Message-ID: <5f335b3b-7edc-458f-819d-40012b61672a@kernel.org>
-Date: Tue, 12 Mar 2024 09:42:17 +0800
+ s=k20201202; t=1710207760;
+ bh=ioCglCiuFytXfIPfWrP5a+ai20J7qUrjXL07BC91CnE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=IqyLkDuT4UQHkI1VNrl7vmcMiMTwQPqZ7GdYQ2vFZotLCiDImiI1EMvCPgIu50F6u
+ vcvrVnNTeVoD1z+lXm1+ywBLGU5W4bDxzaKhyho2yIuKbGIGxcIjo7mC40WWCDszWr
+ WkuqQ/NfVB5kuKv2EhMXHgSvkQpxhsUJYDqWS66PgX28s7ZXV9771/uUd9FL4g8zlq
+ /nLe6I50ZVLBdHKrbSYFWja5AzLw52kOPpvzRmhIvJcSIndBRx8OG8TBy106hevy07
+ 3pFcmjhO6z5LFqu+logi37OQ2A3RU5gKEHk+eSLCkOeUXGNDAeyuJUkbJbZPcMI9QG
+ hoCF8HR55TZkw==
+Message-ID: <63ece9a0-ccd1-43f7-ab51-cf5adc49be71@kernel.org>
+Date: Tue, 12 Mar 2024 09:42:39 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
+To: jaegeuk@kernel.org
+References: <20240229143838.45149-1-chao@kernel.org>
 From: Chao Yu <chao@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20240206032513.2495025-1-chao@kernel.org>
- <ZcQd3DtIpiA5P9DQ@google.com>
- <8e69aa15-9779-4696-98ab-f173666a87a7@kernel.org>
- <23aa8351-e002-4185-89c7-ccde6b5b0549@kernel.org>
-In-Reply-To: <23aa8351-e002-4185-89c7-ccde6b5b0549@kernel.org>
+In-Reply-To: <20240229143838.45149-1-chao@kernel.org>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Ping, Jaegeuk, do you have any comments on this patch? Thanks,
+ Content preview:  Ping, On 2024/2/29 22:38, Chao Yu wrote: > Support .shutdown
+ callback in f2fs_sops, then, it can be called to > shut down the file system
+ when underlying block device is marked dead. > > Signed-off-by: Chao [...]
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -82,16 +81,16 @@ X-Spam-Report: Spam detection software,
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
  medium trust [145.40.73.55 listed in list.dnswl.org]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rjr9r-0002V4-Am
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to return EIO when reading after
- device removal
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1rjrAF-0002W7-96
+Subject: Re: [f2fs-dev] [PATCH] f2fs: support .shutdown in f2fs_sops
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,52 +103,163 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-UGluZywKCkphZWdldWssIGRvIHlvdSBoYXZlIGFueSBjb21tZW50cyBvbiB0aGlzIHBhdGNoPwoK
-VGhhbmtzLAoKT24gMjAyNC8yLzI2IDE2OjAwLCBDaGFvIFl1IHdyb3RlOgo+IEFueSBjb21tZW50
-cz8KPiAKPiBUaGFua3MsCj4gCj4gT24gMjAyNC8yLzE5IDExOjEzLCBDaGFvIFl1IHdyb3RlOgo+
-PiBPbiAyMDI0LzIvOCA4OjE4LCBKYWVnZXVrIEtpbSB3cm90ZToKPj4+IE9uIDAyLzA2LCBDaGFv
-IFl1IHdyb3RlOgo+Pj4+IGdlbmVyaWMvNzMwIDJzIC4uLiAtIG91dHB1dCBtaXNtYXRjaCAoc2Vl
-IC9tZWRpYS9mc3Rlc3RzL3Jlc3VsdHMvL2dlbmVyaWMvNzMwLm91dC5iYWQpCj4+Pj4gwqDCoMKg
-wqAgLS0tIHRlc3RzL2dlbmVyaWMvNzMwLm91dMKgwqDCoCAyMDIzLTA4LTA3IDAxOjM5OjUxLjA1
-NTU2ODQ5OSArMDAwMAo+Pj4+IMKgwqDCoMKgICsrKyAvbWVkaWEvZnN0ZXN0cy9yZXN1bHRzLy9n
-ZW5lcmljLzczMC5vdXQuYmFkwqDCoMKgIDIwMjQtMDItMDYgMDI6MjY6NDMuMDAwMDAwMDAwICsw
-MDAwCj4+Pj4gwqDCoMKgwqAgQEAgLTEsMiArMSBAQAo+Pj4+IMKgwqDCoMKgwqAgUUEgb3V0cHV0
-IGNyZWF0ZWQgYnkgNzMwCj4+Pj4gwqDCoMKgwqAgLWNhdDogLTogSW5wdXQvb3V0cHV0IGVycm9y
-Cj4+Pj4gwqDCoMKgwqAgLi4uCj4+Pj4gwqDCoMKgwqAgKFJ1biAnZGlmZiAtdSAvbWVkaWEvZnN0
-ZXN0cy90ZXN0cy9nZW5lcmljLzczMC5vdXQgL21lZGlhL2ZzdGVzdHMvcmVzdWx0cy8vZ2VuZXJp
-Yy83MzAub3V0LmJhZCfCoCB0byBzZWUgdGhlIGVudGlyZSBkaWZmKQo+Pj4+IFJhbjogZ2VuZXJp
-Yy83MzAKPj4+PiBGYWlsdXJlczogZ2VuZXJpYy83MzAKPj4+PiBGYWlsZWQgMSBvZiAxIHRlc3Rz
-Cj4+Pj4KPj4+PiBUaGlzIHBhdGNoIGFkZHMgYSBjaGVjayBjb25kaXRpb24gaW4gZjJmc19maWxl
-X3JlYWRfaXRlcigpIHRvCj4+Pj4gZGV0ZWN0IGNwX2Vycm9yIHN0YXR1cyBhZnRlciBkZXZpY2Ug
-cmVtb3ZhbCwgYW5kIHJldHJ1cm4gLUVJTwo+Pj4+IGZvciBzdWNoIGNhc2UuCj4+Pgo+Pj4gQ2Fu
-IHdlIGNoZWNrIGRldmljZSByZW1vdmFsPwo+Pgo+PiBXZSBjYW4gdXNlIGJsa19xdWV1ZV9keWlu
-ZygpIHRvIGRldGVjdCBkZXZpY2UgcmVtb3ZhbCwgYnV0LCBJTU8sIGRldmljZQo+PiByZW1vdmFs
-IGNhbiBhbG1vc3Qgbm90IGhhcHBlbiBpbiBBbmRyb2lkLCBub3Qgc3VyZSBmb3IgZGlzdHJvcyBv
-ciBzZXJ2ZXIsCj4+IGRvIHlvdSB3YW50IHRvIGFkZCB0aGlzIGNoZWNrIGNvbmRpdGlvbiBpbnRv
-IGYyZnNfY3BfZXJyb3IoKT8KPj4KPj4gVGhhbmtzLAo+Pgo+Pj4KPj4+Pgo+Pj4+IFNpZ25lZC1v
-ZmYtYnk6IENoYW8gWXUgPGNoYW9Aa2VybmVsLm9yZz4KPj4+PiAtLS0KPj4+PiDCoCBmcy9mMmZz
-L2ZpbGUuYyB8IDMgKysrCj4+Pj4gwqAgMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKQo+
-Pj4+Cj4+Pj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZmlsZS5jIGIvZnMvZjJmcy9maWxlLmMKPj4+
-PiBpbmRleCA0NWI3ZTM2MTBiMGYuLjllNDM4NmQ0MTQ0YyAxMDA2NDQKPj4+PiAtLS0gYS9mcy9m
-MmZzL2ZpbGUuYwo+Pj4+ICsrKyBiL2ZzL2YyZnMvZmlsZS5jCj4+Pj4gQEAgLTQ0NjIsNiArNDQ2
-Miw5IEBAIHN0YXRpYyBzc2l6ZV90IGYyZnNfZmlsZV9yZWFkX2l0ZXIoc3RydWN0IGtpb2NiICpp
-b2NiLCBzdHJ1Y3QgaW92X2l0ZXIgKnRvKQo+Pj4+IMKgwqDCoMKgwqAgY29uc3QgbG9mZl90IHBv
-cyA9IGlvY2ItPmtpX3BvczsKPj4+PiDCoMKgwqDCoMKgIHNzaXplX3QgcmV0Owo+Pj4+ICvCoMKg
-wqAgaWYgKHVubGlrZWx5KGYyZnNfY3BfZXJyb3IoRjJGU19JX1NCKGlub2RlKSkpKQo+Pj4+ICvC
-oMKgwqDCoMKgwqDCoCByZXR1cm4gLUVJTzsKPj4+PiArCj4+Pj4gwqDCoMKgwqDCoCBpZiAoIWYy
-ZnNfaXNfY29tcHJlc3NfYmFja2VuZF9yZWFkeShpbm9kZSkpCj4+Pj4gwqDCoMKgwqDCoMKgwqDC
-oMKgIHJldHVybiAtRU9QTk9UU1VQUDsKPj4+PiAtLSAKPj4+PiAyLjQwLjEKPj4KPj4KPj4gX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPj4gTGludXgtZjJm
-cy1kZXZlbCBtYWlsaW5nIGxpc3QKPj4gTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3Jn
-ZS5uZXQKPj4gaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGlu
-dXgtZjJmcy1kZXZlbAo+IAo+IAo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fCj4gTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPiBMaW51eC1mMmZz
-LWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+IGh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2Uu
-bmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwKCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlz
-dApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNv
-dXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+Ping,
+
+On 2024/2/29 22:38, Chao Yu wrote:
+> Support .shutdown callback in f2fs_sops, then, it can be called to
+> shut down the file system when underlying block device is marked dead.
+> 
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>   fs/f2fs/f2fs.h  |  2 ++
+>   fs/f2fs/file.c  | 70 ++++++++++++++++++++++++++++++-------------------
+>   fs/f2fs/super.c |  6 +++++
+>   3 files changed, 51 insertions(+), 27 deletions(-)
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 85eb9a8a5ed3..80789255bf68 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -3506,6 +3506,8 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+>   		 struct iattr *attr);
+>   int f2fs_truncate_hole(struct inode *inode, pgoff_t pg_start, pgoff_t pg_end);
+>   void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count);
+> +int f2fs_do_shutdown(struct f2fs_sb_info *sbi, unsigned int flag,
+> +							bool readonly);
+>   int f2fs_precache_extents(struct inode *inode);
+>   int f2fs_fileattr_get(struct dentry *dentry, struct fileattr *fa);
+>   int f2fs_fileattr_set(struct mnt_idmap *idmap,
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 4ca6c693b33a..d223175b3d5c 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -2226,34 +2226,13 @@ static int f2fs_ioc_abort_atomic_write(struct file *filp)
+>   	return ret;
+>   }
+>   
+> -static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
+> +int f2fs_do_shutdown(struct f2fs_sb_info *sbi, unsigned int flag,
+> +							bool readonly)
+>   {
+> -	struct inode *inode = file_inode(filp);
+> -	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>   	struct super_block *sb = sbi->sb;
+> -	__u32 in;
+>   	int ret = 0;
+>   
+> -	if (!capable(CAP_SYS_ADMIN))
+> -		return -EPERM;
+> -
+> -	if (get_user(in, (__u32 __user *)arg))
+> -		return -EFAULT;
+> -
+> -	if (in != F2FS_GOING_DOWN_FULLSYNC) {
+> -		ret = mnt_want_write_file(filp);
+> -		if (ret) {
+> -			if (ret == -EROFS) {
+> -				ret = 0;
+> -				f2fs_stop_checkpoint(sbi, false,
+> -						STOP_CP_REASON_SHUTDOWN);
+> -				trace_f2fs_shutdown(sbi, in, ret);
+> -			}
+> -			return ret;
+> -		}
+> -	}
+> -
+> -	switch (in) {
+> +	switch (flag) {
+>   	case F2FS_GOING_DOWN_FULLSYNC:
+>   		ret = bdev_freeze(sb->s_bdev);
+>   		if (ret)
+> @@ -2292,6 +2271,9 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
+>   		goto out;
+>   	}
+>   
+> +	if (readonly)
+> +		goto out;
+> +
+>   	f2fs_stop_gc_thread(sbi);
+>   	f2fs_stop_discard_thread(sbi);
+>   
+> @@ -2300,10 +2282,44 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
+>   
+>   	f2fs_update_time(sbi, REQ_TIME);
+>   out:
+> -	if (in != F2FS_GOING_DOWN_FULLSYNC)
+> -		mnt_drop_write_file(filp);
+>   
+> -	trace_f2fs_shutdown(sbi, in, ret);
+> +	trace_f2fs_shutdown(sbi, flag, ret);
+> +
+> +	return ret;
+> +}
+> +
+> +static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
+> +{
+> +	struct inode *inode = file_inode(filp);
+> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> +	__u32 in;
+> +	int ret;
+> +	bool need_drop = false, readonly = false;
+> +
+> +	if (!capable(CAP_SYS_ADMIN))
+> +		return -EPERM;
+> +
+> +	if (get_user(in, (__u32 __user *)arg))
+> +		return -EFAULT;
+> +
+> +	if (in != F2FS_GOING_DOWN_FULLSYNC) {
+> +		ret = mnt_want_write_file(filp);
+> +		if (ret) {
+> +			if (ret != -EROFS)
+> +				return ret;
+> +
+> +			/* fallback to nosync shutdown for readonly fs */
+> +			in = F2FS_GOING_DOWN_NOSYNC;
+> +			readonly = true;
+> +		} else {
+> +			need_drop = true;
+> +		}
+> +	}
+> +
+> +	ret = f2fs_do_shutdown(sbi, in, readonly);
+> +
+> +	if (need_drop)
+> +		mnt_drop_write_file(filp);
+>   
+>   	return ret;
+>   }
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 78a76583a4aa..0676c2dcbbf7 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -2547,6 +2547,11 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+>   	return err;
+>   }
+>   
+> +static void f2fs_shutdown(struct super_block *sb)
+> +{
+> +	f2fs_do_shutdown(F2FS_SB(sb), F2FS_GOING_DOWN_NOSYNC, false);
+> +}
+> +
+>   #ifdef CONFIG_QUOTA
+>   static bool f2fs_need_recovery(struct f2fs_sb_info *sbi)
+>   {
+> @@ -3146,6 +3151,7 @@ static const struct super_operations f2fs_sops = {
+>   	.unfreeze_fs	= f2fs_unfreeze,
+>   	.statfs		= f2fs_statfs,
+>   	.remount_fs	= f2fs_remount,
+> +	.shutdown	= f2fs_shutdown,
+>   };
+>   
+>   #ifdef CONFIG_FS_ENCRYPTION
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
