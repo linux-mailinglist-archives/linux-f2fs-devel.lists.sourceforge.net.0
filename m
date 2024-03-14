@@ -2,155 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A409787BF24
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Mar 2024 15:41:35 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF6AA87C117
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Mar 2024 17:16:47 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rkmGp-0004de-KA;
-	Thu, 14 Mar 2024 14:41:24 +0000
+	id 1rknkw-0004qq-35;
+	Thu, 14 Mar 2024 16:16:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <krisman@suse.de>) id 1rkmGo-0004dT-IC
+ (envelope-from <jaegeuk@kernel.org>) id 1rknku-0004qj-9l
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 14 Mar 2024 14:41:23 +0000
+ Thu, 14 Mar 2024 16:16:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wG9JWTLr5OXP9cpOv1POjmlWyamPW2vvqR6gpOJQVKc=; b=k9IdgbDZ4QluxwlzxtOzCKUmwO
- escQSwlDUIoiFI+NL9ISlMwEtL6jZiL3drHt3B7/guyL9HJVeZ4JhwTRKm8b+z3hr5aaMxI6MrQaZ
- Wc2tmhVDTyPEmtVNWvD0Vvivn3ZZ0pD9oPyHVaHqsnY0cMsBIVQcFK5ZSyCyiN5gXiXs=;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=a0lDV0lr73qQLDXk1bcrHAQawHG1fHO5QWfmZrZw2Tw=; b=el37ZDpm7gwRuDK9GahESDUjse
+ iM6+8Ry0nMGjPv56xwBztWhstkxvEniwXnACChr3Nub7GiueGbl2DnS7z9waXjHPTOM43PqPUTNMd
+ NBkj8+KBKmR4hKRuTLeK2D/cKFfwZqaRX33PBtXS9m9f0QfLndQC188Ck2iRYdsHNyss=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wG9JWTLr5OXP9cpOv1POjmlWyamPW2vvqR6gpOJQVKc=; b=Kt9YuG7uO6gTKIRU923xOH/Ma+
- 37LrCcLkLzvH5fQFdg7csc4bbdyYu0J7D+cTYm17TjU36zDhAqhNAI/PVgvQNDvFAs/V9atpXmt1Q
- 3xEhWhzz3AgCmmtPVTr37Qn9FEOtA15uugOY+bvJA86UenxJEgC/NLediTaoIcadUD6o=;
-Received: from smtp-out1.suse.de ([195.135.223.130])
+ bh=a0lDV0lr73qQLDXk1bcrHAQawHG1fHO5QWfmZrZw2Tw=; b=RkxjJ3Skriq/XZ2WS1stigSPnW
+ ar7Y6ZdhyMxq+Qg82Ufbf7k/O5W7h7vyp80UYWjqQeHcvfc/4qHTqGJb2qubbKRBkeGiIKhP8uZ4A
+ qX+jr0k7lcJMNNsWtDbVBbdIOZtJsDbSXoCi1j3a8N2QAAaEyMnE2m3/3dBKV4fFJKdw=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rkmGe-0001kd-L8 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 14 Mar 2024 14:41:23 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 25C1621C9E;
- Thu, 14 Mar 2024 14:41:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1710427272; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=wG9JWTLr5OXP9cpOv1POjmlWyamPW2vvqR6gpOJQVKc=;
- b=h76XgWmUuxD9NXfXtIABjc5MVcushaKkbp0RLa2pms+DJzgvB31t8KJVU0rWB/x5cxLsgL
- KABCxIEL4knvNdzp/A6HzmKl/D80cWe5XlqlyuoPvf4sWj2K74Yq7M6HSXDdrt7KmS2iCQ
- StrF15jx+2qnyO91mhz4PR2lY4kvC+o=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1710427272;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=wG9JWTLr5OXP9cpOv1POjmlWyamPW2vvqR6gpOJQVKc=;
- b=VJUlb3WVZyBIo1LiKEClrxGqh+X6nWYh7RohFOX/imEfxp0zFRsZb6b43gJ0aph1QknH/0
- bSEU6/FVoLybigDA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1710427272; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=wG9JWTLr5OXP9cpOv1POjmlWyamPW2vvqR6gpOJQVKc=;
- b=h76XgWmUuxD9NXfXtIABjc5MVcushaKkbp0RLa2pms+DJzgvB31t8KJVU0rWB/x5cxLsgL
- KABCxIEL4knvNdzp/A6HzmKl/D80cWe5XlqlyuoPvf4sWj2K74Yq7M6HSXDdrt7KmS2iCQ
- StrF15jx+2qnyO91mhz4PR2lY4kvC+o=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1710427272;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=wG9JWTLr5OXP9cpOv1POjmlWyamPW2vvqR6gpOJQVKc=;
- b=VJUlb3WVZyBIo1LiKEClrxGqh+X6nWYh7RohFOX/imEfxp0zFRsZb6b43gJ0aph1QknH/0
- bSEU6/FVoLybigDA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D67551368B;
- Thu, 14 Mar 2024 14:41:11 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id vqwTLocM82W+GgAAD6G6ig
- (envelope-from <krisman@suse.de>); Thu, 14 Mar 2024 14:41:11 +0000
-From: Gabriel Krisman Bertazi <krisman@suse.de>
-To: Eugen Hristev <eugen.hristev@collabora.com>
-In-Reply-To: <aaa4561e-fd23-4b21-8963-7ba4cc99eed3@collabora.com> (Eugen
- Hristev's message of "Thu, 14 Mar 2024 10:44:09 +0200")
-Organization: SUSE
-References: <20240305101608.67943-1-eugen.hristev@collabora.com>
- <20240305101608.67943-3-eugen.hristev@collabora.com>
- <87edcdk8li.fsf@mailhost.krisman.be>
- <aaa4561e-fd23-4b21-8963-7ba4cc99eed3@collabora.com>
-Date: Thu, 14 Mar 2024 10:41:10 -0400
-Message-ID: <8734sskha1.fsf@mailhost.krisman.be>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rknkj-0001Ud-P3 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 14 Mar 2024 16:16:32 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 74E29614E6;
+ Thu, 14 Mar 2024 16:16:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E72B1C433F1;
+ Thu, 14 Mar 2024 16:16:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1710432977;
+ bh=U8AyetdLrhnWBQCfPFpv6tTgew9AS0AAM56e79RtgeM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=PIHwkShnXphYqFArdN0hG3XJx0vwoeoLih4Bo5c9IFPa6h3zvCl9niRZeulLJKt71
+ HrlmHYATceiLkvKZss3yUOaCmesxi4c0ry8fGaSRowDsATKyQI+sR+LeaIDlT2u+HC
+ oigBQf5i3j4Qd0O/mhg3ZXAXBVjVixMRig2oXOPhoYwP9iemI0HyhJUbMbi8Nz+rUk
+ gNWoB1ikRk2G7KKeJt+mhjqi1MrqR53m85A8E4GqnH89UgvUy8G+67U2pKScRTCwf4
+ qNdJyKuvI79ST5R1khU7BNANNPIvGM2Vhv+fxYg1BVfzBpdc5A4jgJC9PxmqNI2z8j
+ AJw9e3/zQ2bug==
+Date: Thu, 14 Mar 2024 09:16:15 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZfMiz67zynbEFBl9@google.com>
+References: <20240314020528.3051533-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Spam-Level: 
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=h76XgWmU;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=VJUlb3WV
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-2.63 / 50.00]; ARC_NA(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- MIME_GOOD(-0.10)[text/plain]; HAS_ORG_HEADER(0.00)[];
- RCVD_COUNT_THREE(0.00)[3];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- DKIM_TRACE(0.00)[suse.de:+]; MX_GOOD(-0.01)[];
- RCPT_COUNT_TWELVE(0.00)[14];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim];
- FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
- MIME_TRACE(0.00)[0:+]; NEURAL_HAM_SHORT(-0.20)[-0.995];
- RCVD_TLS_ALL(0.00)[]; BAYES_HAM(-1.12)[88.41%]
-X-Spam-Score: -2.63
-X-Rspamd-Queue-Id: 25C1621C9E
-X-Spam-Flag: NO
-X-Spam-Score: -2.5 (--)
+Content-Disposition: inline
+In-Reply-To: <20240314020528.3051533-1-chao@kernel.org>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Eugen Hristev <eugen.hristev@collabora.com> writes: >> Please,
- make sure you actually stress test this patchset with fstests >> against
- both f2fs and ext4 before sending each new version. > > I did run the xfstests,
- however, maybe I did not run the ful [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On 03/14,
+ Chao Yu wrote: > syzbot reports a f2fs bug as below:
+ > > BUG: KASAN: slab-use-after-free in f2fs_filemap_fault+0xd1/0x2c0
+ fs/f2fs/file.c:49
+ > Read of size 8 at addr ffff88807bb22680 by task [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.223.130 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rkmGe-0001kd-L8
-Subject: Re: [f2fs-dev] [PATCH v13 2/9] f2fs: Simplify the handling of
- cached insensitive names
+X-Headers-End: 1rknkj-0001Ud-P3
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid use-after-free issue in
+ f2fs_filemap_fault
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -162,44 +102,84 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: brauner@kernel.org, kernel@collabora.com, tytso@mit.edu, jack@suse.cz,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- adilger.kernel@dilger.ca, viro@zeniv.linux.org.uk,
- linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: Hillf Danton <hdanton@sina.com>, Ed Tsai <Ed.Tsai@mediatek.com>,
+ syzbot+763afad57075d3f862f2@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Eugen Hristev <eugen.hristev@collabora.com> writes:
+On 03/14, Chao Yu wrote:
+> syzbot reports a f2fs bug as below:
+> 
+> BUG: KASAN: slab-use-after-free in f2fs_filemap_fault+0xd1/0x2c0 fs/f2fs/file.c:49
+> Read of size 8 at addr ffff88807bb22680 by task syz-executor184/5058
+> 
+> CPU: 0 PID: 5058 Comm: syz-executor184 Not tainted 6.7.0-syzkaller-09928-g052d534373b7 #0
+> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 11/17/2023
+> Call Trace:
+>  <TASK>
+>  __dump_stack lib/dump_stack.c:88 [inline]
+>  dump_stack_lvl+0x1e7/0x2d0 lib/dump_stack.c:106
+>  print_address_description mm/kasan/report.c:377 [inline]
+>  print_report+0x163/0x540 mm/kasan/report.c:488
+>  kasan_report+0x142/0x170 mm/kasan/report.c:601
+>  f2fs_filemap_fault+0xd1/0x2c0 fs/f2fs/file.c:49
+>  __do_fault+0x131/0x450 mm/memory.c:4376
+>  do_shared_fault mm/memory.c:4798 [inline]
+>  do_fault mm/memory.c:4872 [inline]
+>  do_pte_missing mm/memory.c:3745 [inline]
+>  handle_pte_fault mm/memory.c:5144 [inline]
+>  __handle_mm_fault+0x23b7/0x72b0 mm/memory.c:5285
+>  handle_mm_fault+0x27e/0x770 mm/memory.c:5450
+>  do_user_addr_fault arch/x86/mm/fault.c:1364 [inline]
+>  handle_page_fault arch/x86/mm/fault.c:1507 [inline]
+>  exc_page_fault+0x456/0x870 arch/x86/mm/fault.c:1563
+>  asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+> 
+> The root cause is: in f2fs_filemap_fault(), vmf->vma may be not alive after
+> filemap_fault(), so it may cause use-after-free issue when accessing
+> vmf->vma->vm_flags in trace_f2fs_filemap_fault(). So it needs to keep vm_flags
+> in separated temporary variable for tracepoint use.
+> 
+> Fixes: 87f3afd366f7 ("f2fs: add tracepoint for f2fs_vm_page_mkwrite()")
+> Reported-and-tested-by: syzbot+763afad57075d3f862f2@syzkaller.appspotmail.com
+> Closes: https://lore.kernel.org/lkml/000000000000e8222b060f00db3b@google.com
+> Cc: Ed Tsai <Ed.Tsai@mediatek.com>
+> Cc: Hillf Danton <hdanton@sina.com>
 
->> Please, make sure you actually stress test this patchset with fstests
->> against both f2fs and ext4 before sending each new version.
->
-> I did run the xfstests, however, maybe I did not run the full suite, or maybe I am
-> running it in a wrong way ?
+Suggested-by: Hillf Danton <hdanton@sina.com>
 
-No worries.  Did you manage to reproduce it?
+I modified to "Suggested-by". Please let me know if this doesn't work.
 
-> How are you running the kvm-xfstests with qemu ? Can you share your command
-> arguments please ?
-
-I don't use kvm-xfstests.  I run ./check directly:
-
-export SCRATCH_DEV=/dev/loop1
-export SCRATCH_MNT=$BASEMNT/scratch
-export TEST_DEV=/dev/loop0
-export TEST_DIR=$BASEMNT/test
-export RESULT_BASE=${BASEMNT}/results
-export REPORT_DIR=${BASEMNT}/report
-export FSTYP=f2fs
-
-mkfs.f2fs -f -C utf8 -O casefold ${TEST_DEV}
-
-./check -g encrypt,quick
-
--- 
-Gabriel Krisman Bertazi
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>  fs/f2fs/file.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index a47c57e813bb..c19e55a3e50e 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -39,6 +39,7 @@
+>  static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
+>  {
+>  	struct inode *inode = file_inode(vmf->vma->vm_file);
+> +	vm_flags_t flags = vmf->vma->vm_flags;
+>  	vm_fault_t ret;
+>  
+>  	ret = filemap_fault(vmf);
+> @@ -46,7 +47,7 @@ static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
+>  		f2fs_update_iostat(F2FS_I_SB(inode), inode,
+>  					APP_MAPPED_READ_IO, F2FS_BLKSIZE);
+>  
+> -	trace_f2fs_filemap_fault(inode, vmf->pgoff, vmf->vma->vm_flags, ret);
+> +	trace_f2fs_filemap_fault(inode, vmf->pgoff, flags, ret);
+>  
+>  	return ret;
+>  }
+> -- 
+> 2.40.1
 
 
 _______________________________________________
