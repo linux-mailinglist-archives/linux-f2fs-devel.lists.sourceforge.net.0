@@ -2,99 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6596B87C123
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Mar 2024 17:20:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D720C87C1A9
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Mar 2024 17:58:33 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rknoy-0005bN-GG;
-	Thu, 14 Mar 2024 16:20:44 +0000
+	id 1rkoPN-0004ma-Kw;
+	Thu, 14 Mar 2024 16:58:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rknox-0005bG-5q
- for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 14 Mar 2024 16:20:43 +0000
+ (envelope-from <alison.schofield@intel.com>) id 1rkoPM-0004mR-Tl;
+ Thu, 14 Mar 2024 16:58:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Dc8z26VGfJ8t4WQk51GNledaY/JmcbRU55dIcMZhiuA=; b=m9dNUYlZYsGGqcWNZGlE4nQMfU
- kmmY7C5haxvw1MIqzCE6O259bJmMiYQU9D9AN/Ry8+mTk1Uae2diZLikpb3S/v01oytPTtOz5GcuP
- 10SPWG0/ALtCzLz7OkxTHoyF2J14KJKHrG5QA1jtKvezdo3gBvJNjZXjGi7cc1WopkP4=;
+ bh=+Xthtgc6epJ48b8mPPUX33mNuxBQopUdr8M3EQRllsI=; b=BCQIOV001/KSy/+a91K5O7KHfe
+ lQWXVO+Lhl3Fdmfm4DXkrP5RGKpRWt+fpxsQBkdV6p9aTpLatCvFcIc49QNk6PIaCWb6xcSvgf3an
+ 2rOQTBjO7o+80kfYKrpefx2o0f2i66RkJ3mX9k4R1e6ZxeQIWg9OE7bs/hODSE49hOyI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Dc8z26VGfJ8t4WQk51GNledaY/JmcbRU55dIcMZhiuA=; b=ZdSUPSojo4jUA+G8gwMYzoSFE+
- sK6UcNCbLGy7Ptt1sV+T1cjzc2RcibGB4ptflXqbNXlWJWK4bY1KLJbryX7zOX0aZ81Knpk2FECrT
- pe35o+YLkATQuyp3OTVURZZRzPTERPPyNGdrMRBlY+3W7IJZ01OJ/4FI1cEggc72PWMk=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ ;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+Xthtgc6epJ48b8mPPUX33mNuxBQopUdr8M3EQRllsI=; b=ilZZWupxJqGgkYVrHYPre2Rz5n
+ taBUSpmEc5ktPCQzCc+gdbtIF4Idcglf7o46SJ8KTvGEA1IME3CyTRBjKwwu+OLRbt9NrDVv6yPDz
+ n11nIdFNSJdjB9ji7d+6cNCacmR4k/axH0/ixnAa3Gtj1BykbSgXnL6BihAp4JhZCH1E=;
+Received: from mgamail.intel.com ([198.175.65.10])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rknom-0001s3-Qn for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 14 Mar 2024 16:20:43 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 45327CE1DD2;
- Thu, 14 Mar 2024 16:20:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 82B05C43390;
- Thu, 14 Mar 2024 16:20:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1710433231;
- bh=DiMMcNdh086cZ1dy2/SsqCOSR/rQG4XxC4tlfBQ3NIs=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=hF9pB5rwtQNKNi8cLb0VPwWDhJRtsUNAoHE5f7QVDsYRkJcE6GbiAalYTxtsxCK4t
- a2iCRcQV/nw/5PD8jhzND6x1NdqSNRm++a5mIWON6CAWt/oG0fb8kp3RDmqoRa0hf8
- 5M15xbK3HaZkwSReUVEtfVLp9LnBXCTvjfbuVV0oCP9OA2yyCJ6fmWc8bjSvE51RhT
- S7Usmy2qDtd/ofd0YxIbJzehl/Dw98De1F2/79aKYY81H0VdkKXfcwMuBNph1NdIg+
- z0vhZp+fPlcITayDCK4gAo4Ot+kpj+UwaWLuV1uABpJjAc/2sA8yryinATt3sanklf
- JjVzGaxdcHmdw==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 6DCD3D95061; Thu, 14 Mar 2024 16:20:31 +0000 (UTC)
+ id 1rkoP8-0004eO-Se; Thu, 14 Mar 2024 16:58:20 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1710435493; x=1741971493;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=fcf8GvnNI2NlxwWa/BLBUBs674hhRLyrkoAa66D2RKo=;
+ b=I4FDjxvu8SufGZfpUNtH2100ioCAEo9NCnMxjfUrC+xSX7zQTuRzKFn8
+ pVSs1Qm+rexEK8wGwZ1sDrNky27ScoVCfPU4ssOJxj4Iwg404zuHe441h
+ NozCDhUhgQBlwKI102VgV2vzk6H6dz+W5Kn4Vlhd/qQMkZG7avnwYNh4K
+ EeNeeCC9p+rfSqFSEmO9nEhOMS3X3jRlknor9wHpM0BK/lV/xM4Zp/mv8
+ LZwKHCCXbminJk4tEG3Ssb2A7/Y7x8NHahzQbitMKmCw40nTeycStNZQq
+ +ulMtpEBC/sj3BcMYoCcxFRYhHEoCK3/dgDvqJnvadiMdn9/AzMCSVWGV g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11013"; a="22731666"
+X-IronPort-AV: E=Sophos;i="6.07,126,1708416000"; d="scan'208";a="22731666"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+ by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Mar 2024 09:58:02 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.07,126,1708416000"; d="scan'208";a="16952403"
+Received: from aschofie-mobl2.amr.corp.intel.com (HELO aschofie-mobl2)
+ ([10.209.72.214])
+ by fmviesa003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Mar 2024 09:57:59 -0700
+Date: Thu, 14 Mar 2024 09:57:57 -0700
+From: Alison Schofield <alison.schofield@intel.com>
+To: Steven Rostedt <rostedt@goodmis.org>
+Message-ID: <ZfMslbCmCtyEaEWN@aschofie-mobl2>
+References: <20240223125634.2888c973@gandalf.local.home>
 MIME-Version: 1.0
-From: patchwork-bot+f2fs@kernel.org
-Message-Id: <171043323144.13516.1787617599417094605.git-patchwork-notify@kernel.org>
-Date: Thu, 14 Mar 2024 16:20:31 +0000
-References: <20240314020528.3051533-1-chao@kernel.org>
-In-Reply-To: <20240314020528.3051533-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
-X-Spam-Score: -2.5 (--)
+Content-Disposition: inline
+In-Reply-To: <20240223125634.2888c973@gandalf.local.home>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 14 Mar 2024 10:05:28 +0800 you
- wrote: > syzbot reports a f2fs bug as below: > > BUG: KASAN:
- slab-use-after-free
- in f2fs_filemap_fault+0xd1/0x2c0 fs/f2fs/file.c:49 > Read of size 8 at addr
- ffff [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On Fri, Feb 23, 2024 at 12:56:34PM -0500,
+ Steven Rostedt wrote:
+ > From: "Steven Rostedt (Google)" <rostedt@goodmis.org> > > [ > This is a
+ treewide change. I will likely re-create this patch again in > [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [198.175.65.10 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rknom-0001s3-Qn
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid use-after-free issue in
- f2fs_filemap_fault
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1rkoP8-0004eO-Se
+Subject: Re: [f2fs-dev] [FYI][PATCH] tracing/treewide: Remove second
+ parameter of __assign_str()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,56 +107,149 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: hdanton@sina.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org,
- Ed.Tsai@mediatek.com, syzbot+763afad57075d3f862f2@syzkaller.appspotmail.com
+Cc: linux-hyperv@vger.kernel.org, linux-usb@vger.kernel.org,
+ kvm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ brcm80211@lists.linux.dev, ath10k@lists.infradead.org,
+ Julia Lawall <Julia.Lawall@inria.fr>, linux-s390@vger.kernel.org,
+ dev@openvswitch.org, linux-cifs@vger.kernel.org, linux-rdma@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, io-uring@vger.kernel.org,
+ linux-bcachefs@vger.kernel.org, iommu@lists.linux.dev,
+ ath11k@lists.infradead.org, linux-media@vger.kernel.org,
+ linux-wpan@vger.kernel.org, linux-pm@vger.kernel.org, selinux@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ linux-erofs@lists.ozlabs.org, virtualization@lists.linux.dev,
+ linux-sound@vger.kernel.org, linux-block@vger.kernel.org,
+ ocfs2-devel@lists.linux.dev,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, linux-cxl@vger.kernel.org,
+ linux-tegra@vger.kernel.org, intel-xe@lists.freedesktop.org,
+ linux-edac@vger.kernel.org, linux-hwmon@vger.kernel.org,
+ brcm80211-dev-list.pdl@broadcom.com,
+ Linus Torvalds <torvalds@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
+ linux-wireless@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ ath12k@lists.infradead.org, tipc-discussion@lists.sourceforge.net,
+ Masami Hiramatsu <mhiramat@kernel.org>, netdev@vger.kernel.org,
+ bpf@vger.kernel.org, Linux Trace Kernel <linux-trace-kernel@vger.kernel.org>,
+ freedreno@lists.freedesktop.org, linux-nfs@vger.kernel.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello:
-
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
-
-On Thu, 14 Mar 2024 10:05:28 +0800 you wrote:
-> syzbot reports a f2fs bug as below:
+On Fri, Feb 23, 2024 at 12:56:34PM -0500, Steven Rostedt wrote:
+> From: "Steven Rostedt (Google)" <rostedt@goodmis.org>
 > 
-> BUG: KASAN: slab-use-after-free in f2fs_filemap_fault+0xd1/0x2c0 fs/f2fs/file.c:49
-> Read of size 8 at addr ffff88807bb22680 by task syz-executor184/5058
+> [
+>    This is a treewide change. I will likely re-create this patch again in
+>    the second week of the merge window of v6.9 and submit it then. Hoping
+>    to keep the conflicts that it will cause to a minimum.
+> ]
 > 
-> CPU: 0 PID: 5058 Comm: syz-executor184 Not tainted 6.7.0-syzkaller-09928-g052d534373b7 #0
-> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 11/17/2023
-> Call Trace:
->  <TASK>
->  __dump_stack lib/dump_stack.c:88 [inline]
->  dump_stack_lvl+0x1e7/0x2d0 lib/dump_stack.c:106
->  print_address_description mm/kasan/report.c:377 [inline]
->  print_report+0x163/0x540 mm/kasan/report.c:488
->  kasan_report+0x142/0x170 mm/kasan/report.c:601
->  f2fs_filemap_fault+0xd1/0x2c0 fs/f2fs/file.c:49
->  __do_fault+0x131/0x450 mm/memory.c:4376
->  do_shared_fault mm/memory.c:4798 [inline]
->  do_fault mm/memory.c:4872 [inline]
->  do_pte_missing mm/memory.c:3745 [inline]
->  handle_pte_fault mm/memory.c:5144 [inline]
->  __handle_mm_fault+0x23b7/0x72b0 mm/memory.c:5285
->  handle_mm_fault+0x27e/0x770 mm/memory.c:5450
->  do_user_addr_fault arch/x86/mm/fault.c:1364 [inline]
->  handle_page_fault arch/x86/mm/fault.c:1507 [inline]
->  exc_page_fault+0x456/0x870 arch/x86/mm/fault.c:1563
->  asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+> With the rework of how the __string() handles dynamic strings where it
+> saves off the source string in field in the helper structure[1], the
+> assignment of that value to the trace event field is stored in the helper
+> value and does not need to be passed in again.
 > 
-> [...]
+> This means that with:
+> 
+>   __string(field, mystring)
+> 
+> Which use to be assigned with __assign_str(field, mystring), no longer
+> needs the second parameter and it is unused. With this, __assign_str()
+> will now only get a single parameter.
+> 
+> There's over 700 users of __assign_str() and because coccinelle does not
+> handle the TRACE_EVENT() macro I ended up using the following sed script:
+> 
+>   git grep -l __assign_str | while read a ; do
+>       sed -e 's/\(__assign_str([^,]*[^ ,]\) *,[^;]*/\1)/' $a > /tmp/test-file;
+>       mv /tmp/test-file $a;
+>   done
+> 
+> I then searched for __assign_str() that did not end with ';' as those
+> were multi line assignments that the sed script above would fail to catch.
+> 
+> Note, the same updates will need to be done for:
+> 
+>   __assign_str_len()
+>   __assign_rel_str()
+>   __assign_rel_str_len()
+>   __assign_bitmask()
+>   __assign_rel_bitmask()
+>   __assign_cpumask()
+>   __assign_rel_cpumask()
+> 
+> [1] https://lore.kernel.org/linux-trace-kernel/20240222211442.634192653@goodmis.org/
+> 
+> Signed-off-by: Steven Rostedt (Google) <rostedt@goodmis.org>
+> ---
+>  arch/arm64/kernel/trace-events-emulation.h    |   2 +-
+>  arch/powerpc/include/asm/trace.h              |   4 +-
+>  arch/x86/kvm/trace.h                          |   2 +-
+>  drivers/base/regmap/trace.h                   |  18 +--
+>  drivers/base/trace.h                          |   2 +-
+>  drivers/block/rnbd/rnbd-srv-trace.h           |  12 +-
+>  drivers/cxl/core/trace.h                      |  24 ++--
 
-Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to avoid use-after-free issue in f2fs_filemap_fault
-    https://git.kernel.org/jaegeuk/f2fs/c/eb70d5a6c932
+snip to CXL
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+
+> diff --git a/drivers/cxl/core/trace.h b/drivers/cxl/core/trace.h
+> index bdf117a33744..07ba4e033347 100644
+> --- a/drivers/cxl/core/trace.h
+> +++ b/drivers/cxl/core/trace.h
+
+snip to poison
+
+> @@ -668,8 +668,8 @@ TRACE_EVENT(cxl_poison,
+>  	    ),
+>  
+>  	TP_fast_assign(
+> -		__assign_str(memdev, dev_name(&cxlmd->dev));
+> -		__assign_str(host, dev_name(cxlmd->dev.parent));
+> +		__assign_str(memdev);
+> +		__assign_str(host);
+
+I think I get that the above changes work because the TP_STRUCT__entry for
+these did:
+	__string(memdev, dev_name(&cxlmd->dev))
+	__string(host, dev_name(cxlmd->dev.parent))
+
+>  		__entry->serial = cxlmd->cxlds->serial;
+>  		__entry->overflow_ts = cxl_poison_overflow(flags, overflow_ts);
+>  		__entry->dpa = cxl_poison_record_dpa(record);
+> @@ -678,12 +678,12 @@ TRACE_EVENT(cxl_poison,
+>  		__entry->trace_type = trace_type;
+>  		__entry->flags = flags;
+>  		if (region) {
+> -			__assign_str(region, dev_name(&region->dev));
+> +			__assign_str(region);
+>  			memcpy(__entry->uuid, &region->params.uuid, 16);
+>  			__entry->hpa = cxl_trace_hpa(region, cxlmd,
+>  						     __entry->dpa);
+>  		} else {
+> -			__assign_str(region, "");
+> +			__assign_str(region);
+>  			memset(__entry->uuid, 0, 16);
+>  			__entry->hpa = ULLONG_MAX;
+
+For the above 2, there was no helper in TP_STRUCT__entry. A recently
+posted patch is fixing that up to be __string(region, NULL) See [1],
+with the actual assignment still happening in TP_fast_assign.
+
+Does that assign logic need to move to the TP_STRUCT__entry definition
+when you merge these changes? I'm not clear how much logic is able to be
+included, ie like 'C' style code in the TP_STRUCT__entry.
+
+[1]
+https://lore.kernel.org/linux-cxl/20240314044301.2108650-1-alison.schofield@intel.com/
+
+Thanks for helping,
+Alison
+
+
+>  		}
+
 
 
 
