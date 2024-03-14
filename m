@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE9B087B662
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Mar 2024 03:19:47 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 52AC687B974
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Mar 2024 09:44:50 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rkah1-0001nI-1y;
-	Thu, 14 Mar 2024 02:19:39 +0000
+	id 1rkghW-0004qj-7f;
+	Thu, 14 Mar 2024 08:44:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rkagz-0001nB-Ew
+ (envelope-from <eugen.hristev@collabora.com>) id 1rkghU-0004qc-KN
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 14 Mar 2024 02:19:37 +0000
+ Thu, 14 Mar 2024 08:44:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1DSUivHtCRADbUYg1Ishz66XVhvYFKehucD/KKQU0Zo=; b=kHjuyOphSOGD9VMrFnBchyHQ1Z
- uSHS/tqIapWHHv+8xsze020NQL0VezlOT8AidL/hcrTO+r8fL5MCADmypFQdcyjEEAGOlMqDIwjM+
- Gnh/mZWd40+VYRlRtrd4JejEGbOUs0DRnE9Izl1VboTtyrlae55CcyOJ1sL7hlXpcjxM=;
+ bh=uZbhS4pq098lKbG3Tw3K+LwqPkd/glIFPiErQkH5Gpc=; b=mazEuwiL6vvG6ce825VT17sRVX
+ QDHn/k9VJAvvt4MDsuuGupAeKXGQxf63aNBweaq6GgIY4dpjDw/ODYlV3wKueRKAQRp5YJQOMa70L
+ 3lH3LTVYIkztUmdqXmxTarVq5an70JpMEsvOQVHEfOBy95FOCPWP4tbJajghA+1LSn6g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,73 +31,67 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1DSUivHtCRADbUYg1Ishz66XVhvYFKehucD/KKQU0Zo=; b=nIgjqCZivAfdj7z6qkshm68Pbc
- 2w9B/m4W8mzOC0zTQ23CnX2Ccaoq2IyhEB7zu4ErZFt5Qxo/zZrMEXpZWMR9s6njcMr18FYtwL92o
- /fPoaQb/mO8gbF494eNwwE+JIzs8E/K6L5usonN5CyQ+OSkrKK+kmGvr9aLQBP4qQQYo=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=uZbhS4pq098lKbG3Tw3K+LwqPkd/glIFPiErQkH5Gpc=; b=N1a0gdkuh2JxM3ndP+vp/Qps07
+ VwLUobg7iPIeocraJJq7lX4FJLedc1OzVI83FdIeugYuOk6smaSOFrn+GU7AbRA3mkBPLZRElP+lk
+ wPlwXlKhp9NujPBMg7UgMnDjoTwN8a8cweuF6QRhF7PxNBHHpoD/m40sQj3QXfEbiYOg=;
+Received: from madrid.collaboradmins.com ([46.235.227.194])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rkago-0007xB-Sf for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 14 Mar 2024 02:19:37 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 97425615B6;
- Thu, 14 Mar 2024 02:19:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 96671C433F1;
- Thu, 14 Mar 2024 02:19:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1710382762;
- bh=oWUuvZfUPQK6oEv2SNRdLnr1fSGZ2Navf8pKF44wuBQ=;
+ id 1rkghK-0000uv-97 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 14 Mar 2024 08:44:33 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1710405857;
+ bh=+BX7gnL09c5lxHYhdPdiCZcTTqc7o9DwYCU15DVX9kY=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=bt53jStAim4HB6IcDu03MYHYMJ46PzUngLFBLd1oskRUuhq+UPXNBEQXlwlqcATb2
- pO/Rh27gNTPP3m/nQVRsUCmmJaXBqxKtOUgWOI2QnhDhoIBAtiNaebSdi1x+tRn11P
- UrDBYggUeiLL5JIxzttTUsQg2OVGcbqX3PhOrs54o3LbIQ0wRmvn0VX2c7A36ckn9x
- Qv+pPLcUjP355J4txuWdYKSk5eb0axbSHmNhT/bkD11ZjuZDhLGORWNJeeqWwp302c
- +HfaZ5mIfSQozoWmsOq0mhGhDrjhh3WpQYLMUCvCSsKgmj5PrnqDNAVxb/GsDUuTst
- Mb7RLvQpRhBHA==
-Message-ID: <cd89a151-76f6-4f73-a109-72e0a7b758d3@kernel.org>
-Date: Thu, 14 Mar 2024 10:19:14 +0800
+ b=Q6SN+s3y4Cu4ar2ldP89W3O7Lw7mEHkWAUdl6vWphpO0XissCZeODmz+8Ogsa6BAb
+ WRl+OqGyNI/Ug+SuR2XvowOAOS3rIDmgVlopvj+FQ96O62xOfBKhVT79dDQ6pgtzLR
+ NEAM/Q8cMDgd9XjxqRqGgitDSIug8Ryz7wWLcu/ciapk2Edx8C6ZCsCDut6lx5EIob
+ lCXsb7D5kbrrGXkFk1CNzfUUF522ujk7Bb75Q1LVPpYzo3pdgWHbIIhaHfEsyyzWjx
+ aZu1gsLeJGAR0EKDZORhJUfkIzWAamSDFFMBbS9TrDq0NjGfD1QOOio+kHu6f5JVuN
+ rrXOmYLpNBlhA==
+Received: from [100.90.194.27] (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: ehristev)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 7DD54378105A;
+ Thu, 14 Mar 2024 08:44:12 +0000 (UTC)
+Message-ID: <aaa4561e-fd23-4b21-8963-7ba4cc99eed3@collabora.com>
+Date: Thu, 14 Mar 2024 10:44:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>, "hdanton@sina.com" <hdanton@sina.com>,
- =?UTF-8?B?RWQgVHNhaSAo6JSh5a6X6LuSKQ==?= <Ed.Tsai@mediatek.com>
-References: <0000000000000b4e27060ef8694c@google.com>
- <20240115120535.850-1-hdanton@sina.com>
- <4bbab168407600a07e1a0921a1569c96e4a1df31.camel@mediatek.com>
- <ZfEB3rPLQUjePNRz@google.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZfEB3rPLQUjePNRz@google.com>
-X-Spam-Score: -5.2 (-----)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+To: Gabriel Krisman Bertazi <krisman@suse.de>
+References: <20240305101608.67943-1-eugen.hristev@collabora.com>
+ <20240305101608.67943-3-eugen.hristev@collabora.com>
+ <87edcdk8li.fsf@mailhost.krisman.be>
+In-Reply-To: <87edcdk8li.fsf@mailhost.krisman.be>
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 2024/3/13 9:31, Jaegeuk Kim wrote: > On 03/12, Ed Tsai
-   (蔡宗軒) wrote: >> On Mon, 2024-01-15 at 20:05 +0800, Hillf Danton wrote:
-    >>> >>> ... >>> >>> --- x/fs/f2fs/file.c >>> +++ y/fs/f2fs/file.c [...] 
- 
- Content analysis details:   (-5.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On 3/14/24 01:36,
+ Gabriel Krisman Bertazi wrote: > Eugen Hristev
+ <eugen.hristev@collabora.com> writes: > >> +void
+ f2fs_free_casefolded_name(struct
+ f2fs_filename *fname) >> +{ >> + unsigned char *buf = [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rkago-0007xB-Sf
-Subject: Re: [f2fs-dev] [syzbot] [f2fs?] KASAN: slab-use-after-free Read in
- f2fs_filemap_fault
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1rkghK-0000uv-97
+Subject: Re: [f2fs-dev] [PATCH v13 2/9] f2fs: Simplify the handling of
+ cached insensitive names
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,122 +103,148 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: =?UTF-8?B?Q2h1bi1IdW5nIFd1ICjlt6vpp7/lro8p?= <Chun-hung.Wu@mediatek.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- =?UTF-8?B?TGlnaHQgSHNpZWggKOisneaYjueHiCk=?= <Light.Hsieh@mediatek.com>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
- =?UTF-8?B?RnJlZGR5IEhzaW4gKOi+m+aBkuixkCk=?= <Freddy.Hsin@mediatek.com>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+From: Eugen Hristev via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Eugen Hristev <eugen.hristev@collabora.com>
+Cc: brauner@kernel.org, kernel@collabora.com, tytso@mit.edu, jack@suse.cz,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ adilger.kernel@dilger.ca, viro@zeniv.linux.org.uk,
+ linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyNC8zLzEzIDk6MzEsIEphZWdldWsgS2ltIHdyb3RlOgo+IE9uIDAzLzEyLCBFZCBUc2Fp
-ICjolKHlrpfou5IpIHdyb3RlOgo+PiBPbiBNb24sIDIwMjQtMDEtMTUgYXQgMjA6MDUgKzA4MDAs
-IEhpbGxmIERhbnRvbiB3cm90ZToKPj4+Cj4+PiAuLi4KPj4+Cj4+PiAtLS0geC9mcy9mMmZzL2Zp
-bGUuYwo+Pj4gKysrIHkvZnMvZjJmcy9maWxlLmMKPj4+IEBAIC0zOSw2ICszOSw3IEBACj4+PiAg
-IHN0YXRpYyB2bV9mYXVsdF90IGYyZnNfZmlsZW1hcF9mYXVsdChzdHJ1Y3Qgdm1fZmF1bHQgKnZt
-ZikKPj4+ICAgewo+Pj4gICAgICAgICAgc3RydWN0IGlub2RlICppbm9kZSA9IGZpbGVfaW5vZGUo
-dm1mLT52bWEtPnZtX2ZpbGUpOwo+Pj4gKyAgICAgICB2bV9mbGFnc190IGZsYWdzID0gdm1mLT52
-bWEtPnZtX2ZsYWdzOwo+Pj4gICAgICAgICAgdm1fZmF1bHRfdCByZXQ7Cj4+PiAgIAo+Pj4gICAg
-ICAgICAgcmV0ID0gZmlsZW1hcF9mYXVsdCh2bWYpOwo+Pj4gQEAgLTQ2LDcgKzQ3LDcgQEAgc3Rh
-dGljIHZtX2ZhdWx0X3QgZjJmc19maWxlbWFwX2ZhdWx0KHN0cgo+Pj4gICAgICAgICAgICAgICAg
-ICBmMmZzX3VwZGF0ZV9pb3N0YXQoRjJGU19JX1NCKGlub2RlKSwgaW5vZGUsCj4+PiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEFQUF9NQVBQRURfUkVBRF9JTywKPj4+
-IEYyRlNfQkxLU0laRSk7Cj4+PiAgIAo+Pj4gLSAgICAgICB0cmFjZV9mMmZzX2ZpbGVtYXBfZmF1
-bHQoaW5vZGUsIHZtZi0+cGdvZmYsIHZtZi0+dm1hLQo+Pj4+IHZtX2ZsYWdzLCByZXQpOwo+Pj4g
-KyAgICAgICB0cmFjZV9mMmZzX2ZpbGVtYXBfZmF1bHQoaW5vZGUsIHZtZi0+cGdvZmYsIGZsYWdz
-LCByZXQpOwo+Pj4gICAKPj4+ICAgICAgICAgIHJldHVybiByZXQ7Cj4+PiAgIH0KPj4+IC0tCj4+
-Cj4+IEhpIEphZWdldWssCj4+Cj4+IFdlIHJlY2VudGx5IGVuY291bnRlcmVkIHRoaXMgc2xhYmUt
-dXNlLWFmdGVyLWZyZWUgaXNzdWUgaW4gS0FTQU4gYXMKPj4gd2VsbC4gQ291bGQgeW91IHBsZWFz
-ZSByZXZpZXcgdGhlIHBhdGNoIGFib3ZlIGFuZCBtZXJnZSBpdCBpbnRvIGYyZnM/Cj4gCj4gV2hl
-cmUgaXMgdGhlIHBhdGNoPwoKSGksIGFsbCwKCkknZCBsaWtlIHRvIGZpeCB0aGlzIGlzc3VlIGlu
-IDYuOS1yYzEsIHNvIEkgc3VibWl0dGVkIGEgZm9ybWFsIHBhdGNoIGJhc2VkIG9uCmFib3ZlIGNv
-ZGUsIGFuZCB0aGUgcGF0Y2ggaGFzIGJlZW4gdGVzdGVkIGJ5IHN5emJvdC4KCmh0dHBzOi8vbG9y
-ZS5rZXJuZWwub3JnL2xpbnV4LWYyZnMtZGV2ZWwvMjAyNDAzMTQwMjA1MjguMzA1MTUzMy0xLWNo
-YW9Aa2VybmVsLm9yZwoKSGlsbGYsIG1heSBJIGNoYW5nZSBhdXRob3Igb2YgdGhlIHBhdGNoIHRv
-IHlvdT8gOikKClRoYW5rcywKCj4gCj4+Cj4+IEJlc3QsCj4+IEVkCj4+Cj4+ID09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQo+
-PiBbMjkxOTUuMzY5OTY0XVtUMzE3MjBdIEJVRzogS0FTQU46IHNsYWItdXNlLWFmdGVyLWZyZWUg
-aW4KPj4gZjJmc19maWxlbWFwX2ZhdWx0KzB4NTAvMHhlMAo+PiBbMjkxOTUuMzcwOTcxXVtUMzE3
-MjBdIFJlYWQgYXQgYWRkciBmN2ZmZmY4MDQ1NGViZGUwIGJ5IHRhc2sgQXN5bmNUYXNrCj4+ICMx
-MS8zMTcyMAo+PiBbMjkxOTUuMzcxODgxXVtUMzE3MjBdIFBvaW50ZXIgdGFnOiBbZjddLCBtZW1v
-cnkgdGFnOiBbZjFdCj4+IFsyOTE5NS4zNzI1NDldW1QzMTcyMF0KPj4gWzI5MTk1LjM3MjgzOF1b
-VDMxNzIwXSBDUFU6IDIgUElEOiAzMTcyMCBDb21tOiBBc3luY1Rhc2sgIzExIFRhaW50ZWQ6Cj4+
-IEcgICAgICAgIFcgIE9FICAgICAgNi42LjE3LWFuZHJvaWQxNS0wLWdjYjViYTcxOGE1MjUgIzEK
-Pj4gWzI5MTk1LjM3NDg2Ml1bVDMxNzIwXSBDYWxsIHRyYWNlOgo+PiBbMjkxOTUuMzc1MjY4XVtU
-MzE3MjBdICBkdW1wX2JhY2t0cmFjZSsweGVjLzB4MTM4Cj4+IFsyOTE5NS4zNzU4NDhdW1QzMTcy
-MF0gIHNob3dfc3RhY2srMHgxOC8weDI0Cj4+IFsyOTE5NS4zNzYzNjVdW1QzMTcyMF0gIGR1bXBf
-c3RhY2tfbHZsKzB4NTAvMHg2Ywo+PiBbMjkxOTUuMzc2OTQzXVtUMzE3MjBdICBwcmludF9yZXBv
-cnQrMHgxYjAvMHg3MTQKPj4gWzI5MTk1LjM3NzUyMF1bVDMxNzIwXSAga2FzYW5fcmVwb3J0KzB4
-YzQvMHgxMjQKPj4gWzI5MTk1LjM3ODA3Nl1bVDMxNzIwXSAgX19kb19rZXJuZWxfZmF1bHQrMHhi
-OC8weDI2Ywo+PiBbMjkxOTUuMzc4Njk0XVtUMzE3MjBdICBkb19iYWRfYXJlYSsweDMwLzB4ZGMK
-Pj4gWzI5MTk1LjM3OTIyNl1bVDMxNzIwXSAgZG9fdGFnX2NoZWNrX2ZhdWx0KzB4MjAvMHgzNAo+
-PiBbMjkxOTUuMzc5ODM0XVtUMzE3MjBdICBkb19tZW1fYWJvcnQrMHg1OC8weDEwNAo+PiBbMjkx
-OTUuMzgwMzg4XVtUMzE3MjBdICBlbDFfYWJvcnQrMHgzYy8weDVjCj4+IFsyOTE5NS4zODA4OTld
-W1QzMTcyMF0gIGVsMWhfNjRfc3luY19oYW5kbGVyKzB4NTQvMHg5MAo+PiBbMjkxOTUuMzgxNTI5
-XVtUMzE3MjBdICBlbDFoXzY0X3N5bmMrMHg2OC8weDZjCj4+IFsyOTE5NS4zODIwNjldW1QzMTcy
-MF0gIGYyZnNfZmlsZW1hcF9mYXVsdCsweDUwLzB4ZTAKPj4gWzI5MTk1LjM4MjY3OF1bVDMxNzIw
-XSAgX19kb19mYXVsdCsweGM4LzB4ZmMKPj4gWzI5MTk1LjM4MzIwOV1bVDMxNzIwXSAgaGFuZGxl
-X21tX2ZhdWx0KzB4YjQ0LzB4MTBjNAo+PiBbMjkxOTUuMzgzODE2XVtUMzE3MjBdICBkb19wYWdl
-X2ZhdWx0KzB4Mjk0LzB4NDhjCj4+IFsyOTE5NS4zODQzOTVdW1QzMTcyMF0gIGRvX3RyYW5zbGF0
-aW9uX2ZhdWx0KzB4MzgvMHg1NAo+PiBbMjkxOTUuMzg1MDIzXVtUMzE3MjBdICBkb19tZW1fYWJv
-cnQrMHg1OC8weDEwNAo+PiBbMjkxOTUuMzg1NTc3XVtUMzE3MjBdICBlbDBfZGErMHg0NC8weDc4
-Cj4+IFsyOTE5NS4zODYwNTddW1QzMTcyMF0gIGVsMHRfNjRfc3luY19oYW5kbGVyKzB4OTgvMHhi
-Ywo+PiBbMjkxOTUuMzg2Njg4XVtUMzE3MjBdICBlbDB0XzY0X3N5bmMrMHgxYTgvMHgxYWMKPj4g
-WzI5MTk1LjM4NzI0OV1bVDMxNzIwXQo+PiBbMjkxOTUuMzg3NTM0XVtUMzE3MjBdIEFsbG9jYXRl
-ZCBieSB0YXNrIDE0Nzg0Ogo+PiBbMjkxOTUuMzg4MDg1XVtUMzE3MjBdICBrYXNhbl9zYXZlX3N0
-YWNrKzB4NDAvMHg3MAo+PiBbMjkxOTUuMzg4NjcyXVtUMzE3MjBdICBzYXZlX3N0YWNrX2luZm8r
-MHgzNC8weDEyOAo+PiBbMjkxOTUuMzg5MjU5XVtUMzE3MjBdICBrYXNhbl9zYXZlX2FsbG9jX2lu
-Zm8rMHgxNC8weDIwCj4+IFsyOTE5NS4zODk5MDFdW1QzMTcyMF0gIF9fa2FzYW5fc2xhYl9hbGxv
-YysweDE2OC8weDE3NAo+PiBbMjkxOTUuMzkwNTMwXVtUMzE3MjBdICBzbGFiX3Bvc3RfYWxsb2Nf
-aG9vaysweDg4LzB4M2E0Cj4+IFsyOTE5NS4zOTExNjhdW1QzMTcyMF0gIGttZW1fY2FjaGVfYWxs
-b2MrMHgxOGMvMHgyYzgKPj4gWzI5MTk1LjM5MTc3MV1bVDMxNzIwXSAgdm1fYXJlYV9hbGxvYysw
-eDJjLzB4ZTgKPj4gWzI5MTk1LjM5MjMyN11bVDMxNzIwXSAgbW1hcF9yZWdpb24rMHg0NDAvMHhh
-OTQKPj4gWzI5MTk1LjM5Mjg4OF1bVDMxNzIwXSAgZG9fbW1hcCsweDNkMC8weDUyNAo+PiBbMjkx
-OTUuMzkzMzk5XVtUMzE3MjBdICB2bV9tbWFwX3Bnb2ZmKzB4MWEwLzB4MWY4Cj4+IFsyOTE5NS4z
-OTM5ODBdW1QzMTcyMF0gIGtzeXNfbW1hcF9wZ29mZisweDc4LzB4ZjQKPj4gWzI5MTk1LjM5NDU1
-N11bVDMxNzIwXSAgX19hcm02NF9zeXNfbW1hcCsweDM0LzB4NDQKPj4gWzI5MTk1LjM5NTEzOF1b
-VDMxNzIwXSAgaW52b2tlX3N5c2NhbGwrMHg1OC8weDExNAo+PiBbMjkxOTUuMzk1NzI3XVtUMzE3
-MjBdICBlbDBfc3ZjX2NvbW1vbisweDgwLzB4ZTAKPj4gWzI5MTk1LjM5NjI5Ml1bVDMxNzIwXSAg
-ZG9fZWwwX3N2YysweDFjLzB4MjgKPj4gWzI5MTk1LjM5NjgxMl1bVDMxNzIwXSAgZWwwX3N2Yysw
-eDM4LzB4NjgKPj4gWzI5MTk1LjM5NzMwMl1bVDMxNzIwXSAgZWwwdF82NF9zeW5jX2hhbmRsZXIr
-MHg2OC8weGJjCj4+IFsyOTE5NS4zOTc5MzJdW1QzMTcyMF0gIGVsMHRfNjRfc3luYysweDFhOC8w
-eDFhYwo+PiBbMjkxOTUuMzk4NDkyXVtUMzE3MjBdCj4+IFsyOTE5NS4zOTg3NzhdW1QzMTcyMF0g
-RnJlZWQgYnkgdGFzayAwOgo+PiBbMjkxOTUuMzk5MjQwXVtUMzE3MjBdICBrYXNhbl9zYXZlX3N0
-YWNrKzB4NDAvMHg3MAo+PiBbMjkxOTUuMzk5ODI1XVtUMzE3MjBdICBzYXZlX3N0YWNrX2luZm8r
-MHgzNC8weDEyOAo+PiBbMjkxOTUuNDAwNDEyXVtUMzE3MjBdICBrYXNhbl9zYXZlX2ZyZWVfaW5m
-bysweDE4LzB4MjgKPj4gWzI5MTk1LjQwMTA0M11bVDMxNzIwXSAgX19fX2thc2FuX3NsYWJfZnJl
-ZSsweDI1NC8weDI1Ywo+PiBbMjkxOTUuNDAxNjgyXVtUMzE3MjBdICBfX2thc2FuX3NsYWJfZnJl
-ZSsweDEwLzB4MjAKPj4gWzI5MTk1LjQwMjI3OF1bVDMxNzIwXSAgc2xhYl9mcmVlX2ZyZWVsaXN0
-X2hvb2srMHgxNzQvMHgxZTAKPj4gWzI5MTk1LjQwMjk2MV1bVDMxNzIwXSAga21lbV9jYWNoZV9m
-cmVlKzB4YzQvMHgzNDgKPj4gWzI5MTk1LjQwMzU0NF1bVDMxNzIwXSAgX192bV9hcmVhX2ZyZWUr
-MHg4NC8weGE0Cj4+IFsyOTE5NS40MDQxMDNdW1QzMTcyMF0gIHZtX2FyZWFfZnJlZV9yY3VfY2Ir
-MHgxMC8weDIwCj4+IFsyOTE5NS40MDQ3MTldW1QzMTcyMF0gIHJjdV9kb19iYXRjaCsweDIxNC8w
-eDcyMAo+PiBbMjkxOTUuNDA1Mjg0XVtUMzE3MjBdICByY3VfY29yZSsweDFiMC8weDQwOAo+PiBb
-MjkxOTUuNDA1ODAwXVtUMzE3MjBdICByY3VfY29yZV9zaSsweDEwLzB4MjAKPj4gWzI5MTk1LjQw
-NjM0OF1bVDMxNzIwXSAgX19kb19zb2Z0aXJxKzB4MTIwLzB4M2Y0Cj4+IFsyOTE5NS40MDY5MDdd
-W1QzMTcyMF0KPj4gWzI5MTk1LjQwNzE5MV1bVDMxNzIwXSBUaGUgYnVnZ3kgYWRkcmVzcyBiZWxv
-bmdzIHRvIHRoZSBvYmplY3QgYXQKPj4gZmZmZmZmODA0NTRlYmRjMAo+PiBbMjkxOTUuNDA3MTkx
-XVtUMzE3MjBdICB3aGljaCBiZWxvbmdzIHRvIHRoZSBjYWNoZSB2bV9hcmVhX3N0cnVjdCBvZgo+
-PiBzaXplIDE3Ngo+PiBbMjkxOTUuNDA4OTc4XVtUMzE3MjBdIFRoZSBidWdneSBhZGRyZXNzIGlz
-IGxvY2F0ZWQgMzIgYnl0ZXMgaW5zaWRlIG9mCj4+IFsyOTE5NS40MDg5NzhdW1QzMTcyMF0gIDE3
-Ni1ieXRlIHJlZ2lvbiBbZmZmZmZmODA0NTRlYmRjMCwKPj4gZmZmZmZmODA0NTRlYmU3MCkKPj4g
-WzI5MTk1LjQxMDYyNV1bVDMxNzIwXQo+PiBbMjkxOTUuNDEwOTExXVtUMzE3MjBdIFRoZSBidWdn
-eSBhZGRyZXNzIGJlbG9uZ3MgdG8gdGhlIHBoeXNpY2FsIHBhZ2U6Cj4+IFsyOTE5NS40MTE3MDld
-W1QzMTcyMF0gcGFnZTowMDAwMDAwMDU4ZjBmMmYxIHJlZmNvdW50OjEgbWFwY291bnQ6MAo+PiBt
-YXBwaW5nOjAwMDAwMDAwMDAwMDAwMDAgaW5kZXg6MHgwIHBmbjoweGM1NGViCj4+IFsyOTE5NS40
-MTI5ODBdW1QzMTcyMF0gYW5vbiBmbGFnczoKPj4gMHg0MDAwMDAwMDAwMDAwODAwKHNsYWJ8em9u
-ZT0xfGthc2FudGFnPTB4MCkKPj4gWzI5MTk1LjQxMzg4MF1bVDMxNzIwXSBwYWdlX3R5cGU6IDB4
-ZmZmZmZmZmYoKQo+PiBbMjkxOTUuNDE0NDE4XVtUMzE3MjBdIHJhdzogNDAwMDAwMDAwMDAwMDgw
-MCBmNmZmZmY4MDAyOTA0NTAwCj4+IGZmZmZmZmZlMDc2ZmM4YzAgZGVhZDAwMDAwMDAwMDAwNwo+
-PiBbMjkxOTUuNDE1NDg4XVtUMzE3MjBdIHJhdzogMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAw
-MTcwMDE3Cj4+IDAwMDAwMDAxZmZmZmZmZmYgMDAwMDAwMDAwMDAwMDAwMAo+IAo+IAo+IF9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTGludXgtZjJmcy1k
-ZXZlbCBtYWlsaW5nIGxpc3QKPiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5l
-dAo+IGh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYy
-ZnMtZGV2ZWwKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNv
-dXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5m
-by9saW51eC1mMmZzLWRldmVsCg==
+On 3/14/24 01:36, Gabriel Krisman Bertazi wrote:
+> Eugen Hristev <eugen.hristev@collabora.com> writes:
+> 
+>> +void f2fs_free_casefolded_name(struct f2fs_filename *fname)
+>> +{
+>> +	unsigned char *buf = (unsigned char *)fname->cf_name.name;
+>> +
+>> +	kmem_cache_free(f2fs_cf_name_slab, buf);
+>> +	fname->cf_name.name = NULL;
+> 
+> In my previous review, I mentioned you could drop the "if (buf)" check
+> here *if and only if* you used kfree. By doing an unchecked kmem_cache_free
+> like this, you will immediately hit an Oops in the first lookup (see below).
+> 
+> Please, make sure you actually stress test this patchset with fstests
+> against both f2fs and ext4 before sending each new version.
+
+I did run the xfstests, however, maybe I did not run the full suite, or maybe I am
+running it in a wrong way ?
+How are you running the kvm-xfstests with qemu ? Can you share your command
+arguments please ?
+
+Thanks
+
+> 
+> Thanks,
+> 
+> 
+> [   74.202044] F2FS-fs (loop0): Using encoding defined by superblock: utf8-12.1.0 with flags 0x0
+> [   74.206592] F2FS-fs (loop0): Found nat_bits in checkpoint
+> [   74.221467] F2FS-fs (loop0): Mounted with checkpoint version = 3e684111
+> FSTYP         -- f2fs
+> PLATFORM      -- Linux/x86_64 sle15sp5 6.7.0-gf27274eae416 #8 SMP PREEMPT_DYNAMIC Thu Mar 14 00:22:47 CET 2024
+> MKFS_OPTIONS  -- -O encrypt /dev/loop1
+> MOUNT_OPTIONS -- -o acl,user_xattr /dev/loop1 /root/work/scratch
+> 
+> [   75.038385] F2FS-fs (loop1): Found nat_bits in checkpoint
+> [   75.054311] F2FS-fs (loop1): Mounted with checkpoint version = 6b9fbccb
+> [   75.176328] F2FS-fs (loop0): Using encoding defined by superblock: utf8-12.1.0 with flags 0x0
+> [   75.179261] F2FS-fs (loop0): Found nat_bits in checkpoint
+> [   75.194264] F2FS-fs (loop0): Mounted with checkpoint version = 3e684114
+> f2fs/001 1s ... [   75.570867] run fstests f2fs/001 at 2024-03-14 00:24:33
+> [   75.753604] BUG: unable to handle page fault for address: fffff14ad2000008
+> [   75.754209] #PF: supervisor read access in kernel mode
+> [   75.754647] #PF: error_code(0x0000) - not-present page
+> [   75.755077] PGD 0 P4D 0 
+> [   75.755300] Oops: 0000 [#1] PREEMPT SMP NOPTI
+> [   75.755683] CPU: 0 PID: 2740 Comm: xfs_io Not tainted 6.7.0-gf27274eae416 #8
+> [   75.756266] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS unknown 2/2/2022
+> [   75.756911] RIP: 0010:kmem_cache_free+0x6a/0x320
+> [   75.757309] Code: 80 48 01 d8 0f 82 b4 02 00 00 48 c7 c2 00 00 00 80 48 2b 15 f8 c2 18 01 48 01 d0 48 c1 e8 0c 48 c1 e0 06 48 03 05 d6 c2 18 01 <48> 8b 50 08 49 89 c6 f6 c2 01 0f 85 ea 01 00 00 0f 1f 44 00 00 49
+> [   75.758834] RSP: 0018:ffffa59bc231bb10 EFLAGS: 00010286
+> [   75.759270] RAX: fffff14ad2000000 RBX: 0000000000000000 RCX: 0000000000000000
+> [   75.759860] RDX: 0000620400000000 RSI: 0000000000000000 RDI: ffff9dfc80043600
+> [   75.760450] RBP: ffffa59bc231bb30 R08: ffffa59bc231b9a0 R09: 00000000000003fa
+> [   75.761037] R10: 00000000000fd024 R11: 0000000000000107 R12: ffff9dfc80043600
+> [   75.761626] R13: ffffffff8404dc7a R14: 0000000000000000 R15: ffff9dfc8f1aa000
+> [   75.762221] FS:  00007f9601efb780(0000) GS:ffff9dfcfbc00000(0000) knlGS:0000000000000000
+> [   75.762888] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [   75.763372] CR2: fffff14ad2000008 CR3: 0000000111750000 CR4: 0000000000750ef0
+> [   75.763962] PKRU: 55555554
+> [   75.764194] Call Trace:
+> [   75.764435]  <TASK>
+> [   75.764677]  ? __die_body+0x1a/0x60
+> [   75.764982]  ? page_fault_oops+0x154/0x440
+> [   75.765335]  ? srso_alias_return_thunk+0x5/0xfbef5
+> [   75.765760]  ? search_module_extables+0x46/0x70
+> [   75.766149]  ? srso_alias_return_thunk+0x5/0xfbef5
+> [   75.766548]  ? fixup_exception+0x22/0x300
+> [   75.766892]  ? srso_alias_return_thunk+0x5/0xfbef5
+> [   75.767292]  ? exc_page_fault+0xa6/0x140
+> [   75.767633]  ? asm_exc_page_fault+0x22/0x30
+> [   75.767995]  ? f2fs_free_filename+0x2a/0x40
+> [   75.768362]  ? kmem_cache_free+0x6a/0x320
+> [   75.768703]  ? f2fs_free_filename+0x2a/0x40
+> [   75.769061]  f2fs_free_filename+0x2a/0x40
+> [   75.769403]  f2fs_lookup+0x19f/0x380
+> [   75.769712]  __lookup_slow+0x8b/0x130
+> [   75.770034]  walk_component+0xfc/0x170
+> [   75.770353]  path_lookupat+0x69/0x140
+> [   75.770664]  filename_lookup+0xe1/0x1c0
+> [   75.770991]  ? srso_alias_return_thunk+0x5/0xfbef5
+> [   75.771393]  ? srso_alias_return_thunk+0x5/0xfbef5
+> [   75.771792]  ? do_wp_page+0x3f6/0xbf0
+> [   75.772109]  ? srso_alias_return_thunk+0x5/0xfbef5
+> [   75.772523]  ? preempt_count_add+0x70/0xa0
+> [   75.772902]  ? vfs_statx+0x89/0x180
+> [   75.773224]  vfs_statx+0x89/0x180
+> [   75.773530]  ? srso_alias_return_thunk+0x5/0xfbef5
+> [   75.773939]  vfs_fstatat+0x80/0xa0
+> [   75.774237]  __do_sys_newfstatat+0x26/0x60
+> [   75.774595]  ? srso_alias_return_thunk+0x5/0xfbef5
+> [   75.775021]  ? srso_alias_return_thunk+0x5/0xfbef5
+> [   75.775448]  ? srso_alias_return_thunk+0x5/0xfbef5
+> [   75.775878]  ? do_user_addr_fault+0x563/0x7c0
+> [   75.776273]  ? srso_alias_return_thunk+0x5/0xfbef5
+> [   75.776699]  do_syscall_64+0x50/0x110
+> [   75.777028]  entry_SYSCALL_64_after_hwframe+0x6e/0x76
+> [   75.777479] RIP: 0033:0x7f9601b07aea
+> [   75.777793] Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 41 89 ca b8 06 01 00 00 0f 05 <3d> 00 f0 ff ff 77 07 31 c0 c3 0f 1f 40 00 48 8b 15 01 23 0e 00 f7
+> [   75.779391] RSP: 002b:00007ffc160eaae8 EFLAGS: 00000246 ORIG_RAX: 0000000000000106
+> [   75.780050] RAX: ffffffffffffffda RBX: 0000000000000042 RCX: 00007f9601b07aea
+> [   75.780663] RDX: 00007ffc160eab80 RSI: 00007ffc160ecb88 RDI: 00000000ffffff9c
+> [   75.781278] RBP: 00007ffc160ead20 R08: 00007ffc160ead20 R09: 0000000000000000
+> [   75.781902] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffc160eae70
+> [   75.782532] R13: 00007ffc160ecb88 R14: 00007ffc160eae70 R15: 0000000000000020
+> [   75.783150]  </TASK>
+> [   75.783349] Modules linked in:
+> [   75.783628] CR2: fffff14ad2000008
+> [   75.783918] ---[ end trace 0000000000000000 ]---
+> [   75.784315] RIP: 0010:kmem_cache_free+0x6a/0x320
+> [   75.784718] Code: 80 48 01 d8 0f 82 b4 02 00 00 48 c7 c2 00 00 00 80 48 2b 15 f8 c2 18 01 48 01 d0 48 c1 e8 0c 48 c1 e0 06 48 03 05 d6 c2 18 01 <48> 8b 50 08 49 89 c6 f6 c2 01 0f 85 ea 01 00 00 0f 1f 44 00 00 49
+> [   75.786294] RSP: 0018:ffffa59bc231bb10 EFLAGS: 00010286
+> [   75.786747] RAX: fffff14ad2000000 RBX: 0000000000000000 RCX: 0000000000000000
+> [   75.787369] RDX: 0000620400000000 RSI: 0000000000000000 RDI: ffff9dfc80043600
+> [   75.788016] RBP: ffffa59bc231bb30 R08: ffffa59bc231b9a0 R09: 00000000000003fa
+> [   75.788672] R10: 00000000000fd024 R11: 0000000000000107 R12: ffff9dfc80043600
+> [   75.789296] R13: ffffffff8404dc7a R14: 0000000000000000 R15: ffff9dfc8f1aa000
+> [   75.789938] FS:  00007f9601efb780(0000) GS:ffff9dfcfbc00000(0000) knlGS:0000000000000000
+> [   75.790677] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [   75.791212] CR2: fffff14ad2000008 CR3: 0000000111750000 CR4: 0000000000750ef0
+> [   75.791862] PKRU: 55555554
+> [   75.792112] Kernel panic - not syncing: Fatal exception
+> [   75.792797] Kernel Offset: 0x2a00000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
+> 
+> 
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
