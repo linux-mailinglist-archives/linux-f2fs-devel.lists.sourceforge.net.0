@@ -2,80 +2,127 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36E3987C2BC
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Mar 2024 19:32:26 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6A6F87C751
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Mar 2024 02:47:09 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rkpsD-0007zr-0q;
-	Thu, 14 Mar 2024 18:32:13 +0000
+	id 1rkwex-0002Nc-CI;
+	Fri, 15 Mar 2024 01:46:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <SRS0=S9uX=KU=goodmis.org=rostedt@kernel.org>)
- id 1rkpsB-0007zf-GO; Thu, 14 Mar 2024 18:32:11 +0000
+ (envelope-from <niuzhiguo84@gmail.com>) id 1rkwev-0002NW-Cs
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 15 Mar 2024 01:46:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZI7IlN9dL2SCg7IRLTZDFQQpUE0qPe64yvdIHej8xpI=; b=h4OBFViCtotG9rvI82eP2qF3bv
- RThQBYewouH16HBGBv6KAp9W6EAZZT02BeivkYrpfvPxNbB64QVS960d2H39cSP16VFjBXwtTtCu+
- RSUc+qafEwwyKJDzj9jgIghhx9To4bTD6KdHHoj9PcVApc7+0Ysj2PEBJi5h40fWRvBU=;
+ bh=RK3WS8YU/TIO9C5L+2WMErB8Z6UUjxPHl/ZVfvjJt24=; b=ZHI27H5s0bTvc7SfdZsd8NqqKR
+ /XBWwx+qFnKjEeIf/WrKZnZV3nFtyKc3A7ebsiaqka/dHW6VCWlfse+zrs3zG3pdelqWJkb7aPMUv
+ YKmQIABxoREs+I1YF+uzoKivJESvqTubF4YvgGFvgCe+Gy7z/ykZHyb/IrMNCHgzv3hI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZI7IlN9dL2SCg7IRLTZDFQQpUE0qPe64yvdIHej8xpI=; b=QndMjyugPNYtHBBTgkR8aSm7e0
- 4t97pOSPz1ddT6cIpem2wd3RBCQyJIWMzeEYTEuIZkhrpopCg7SfiVsmSuRLKaOON2ZUlw9tFNehV
- 2vyppHR6+r1hrvy/JMteA2Th94imsYq5daEgD98GJ6PUmjOSmE8p1s1R05f/e++VuRIE=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=RK3WS8YU/TIO9C5L+2WMErB8Z6UUjxPHl/ZVfvjJt24=; b=Ad9bddvmz8rF+1802XtIEmkZ2O
+ aTZPBXWSuyBnUok86VAbsD8WwNOR5PRcnls3oVbcw9uB7erL0F8HOCpXh3KUN14Y56AnA/Ll1ct/4
+ jpx0SdB2ZRVvuz1qsmOjagNLeCzCU5sDm2jkPW4vh3tXQ1YWXckmtjp7yG0qzxXAadhY=;
+Received: from mail-lj1-f169.google.com ([209.85.208.169])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rkps0-0002gW-Do; Thu, 14 Mar 2024 18:32:11 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E3C8C6150D;
- Thu, 14 Mar 2024 18:32:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A243FC43390;
- Thu, 14 Mar 2024 18:31:55 +0000 (UTC)
-Date: Thu, 14 Mar 2024 14:34:06 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Alison Schofield <alison.schofield@intel.com>
-Message-ID: <20240314143406.6289a060@gandalf.local.home>
-In-Reply-To: <ZfMslbCmCtyEaEWN@aschofie-mobl2>
-References: <20240223125634.2888c973@gandalf.local.home>
- <ZfMslbCmCtyEaEWN@aschofie-mobl2>
-X-Mailer: Claws Mail 3.19.1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rkwek-0001ik-3J for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 15 Mar 2024 01:46:57 +0000
+Received: by mail-lj1-f169.google.com with SMTP id
+ 38308e7fff4ca-2d4541bf57eso20323371fa.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 14 Mar 2024 18:46:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710467200; x=1711072000; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RK3WS8YU/TIO9C5L+2WMErB8Z6UUjxPHl/ZVfvjJt24=;
+ b=b4dR7WHgV9OVW/3tMraookfWxU9nOgGGjrgyyf27FYkMDujmen5DLpnTcigf6hnvL3
+ VkS2m5OD+HzJPCwwkFPj5LcuyxVIi9/GdaUca3laSPORjL088ZTI2xM0Yfc2HYcRELWk
+ kGhAVC9lkcEZaiFuRCMjS3MbGrbdS2oq7qqrj9Uj6KOSI7lMYuMHpjdnvkbDIlRQTXIU
+ AdXmUGOPzYSwY2z4XH/3U1S0s/ZR64VoVvh43Siy8veveSQbX+4vepOp3pghwxwXgeqb
+ +MvNg9cFhlerFD+qEHzAPjVMExO7BmZJJFLt90/tQSFsRoe3ZYfeO0+31JSkIf54ZK1Q
+ DVzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710467200; x=1711072000;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RK3WS8YU/TIO9C5L+2WMErB8Z6UUjxPHl/ZVfvjJt24=;
+ b=YjDBJzux+KggCmDc+Pvl+oSnLgpRHvmKO5RPOgeAvMO6fbtZtD5ybzlxocCURnp6VX
+ u1lN4LNKDAk8ouLLFGjsFeSdlcenl6cx8EsxTKKPQgO1lMRp0cvGMix3ZUXb0kNGEDDB
+ mkm151bg/MYq9a3WCG3pWK50HhYPMmt8BwVHDBiHxSh9JVgBkNANMAYXUeps/6FOpQ0P
+ XdHvx/Iu67hYaGqDtYd+AXJT/ao4hgU5zLkSsL9tPT9PohAFpM1c1xAQYwaxK40rnzyO
+ 1AFB0Voa/JyIo4MXYtyfPEzMcBmjNbMg0jIWA3R8RGkFUrwZL04tyKEFmrt11zFl7dpK
+ CL4A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVobZTZf9zpaGvOX94+VTgZDIdFZKHgtUnkXyoGtg9AP0aO6QR12U4O/Xw+Bt60YDN1tCE7t8DXr4JX/oYfrF7bsklePa43zKddXu5NDz2RsVyxQyXnyQ==
+X-Gm-Message-State: AOJu0YwCX/LHL6VFReRQX101uOxTXxH/+DG7g+lo9wuWwJ0t33pfbkZG
+ XjXCB4DI7Eig5FuX7jRomnPYoZFgS+Ju4NT+F+FjqAt8TMctXzEXZO3KYWkFBqExHzSjzRl03Lb
+ wzG6fgCXHjHkXMy8xVtOAaFFkc0rlYF43WOazQA==
+X-Google-Smtp-Source: AGHT+IErr3X67ESANY5oZyQc3OQLFn3z4WEmx0f2jrHn04v+Ur73VCVeriymLwGz/734BKBZHnJAHIsYO4kZAqD4yqs=
+X-Received: by 2002:a05:651c:32a:b0:2d4:3c64:53f5 with SMTP id
+ b10-20020a05651c032a00b002d43c6453f5mr1972795ljp.19.1710467200055; Thu, 14
+ Mar 2024 18:46:40 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Score: -4.8 (----)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+References: <1710303061-16822-1-git-send-email-zhiguo.niu@unisoc.com>
+ <eeefebcb-54db-4087-9319-dd5f9b63a1da@kernel.org>
+In-Reply-To: <eeefebcb-54db-4087-9319-dd5f9b63a1da@kernel.org>
+From: Zhiguo Niu <niuzhiguo84@gmail.com>
+Date: Fri, 15 Mar 2024 09:46:28 +0800
+Message-ID: <CAHJ8P3+mo+yT8wfv2Xd3Rb7sFtXufmOgh_6CLzZxM5CjtYWC2Q@mail.gmail.com>
+To: Chao Yu <chao@kernel.org>
+X-Spam-Score: 0.0 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu,
- 14 Mar 2024 09:57:57 -0700 Alison Schofield <alison.schofield@intel.com>
- wrote: > On Fri, Feb 23, 2024 at 12:56:34PM -0500, Steven Rostedt wrote:
- > > From: "Steven Rostedt (Google)" <rostedt@goodmis.org> > > > > [ > > This
- is a treewide change. I will likely re-create this patch [...] 
- Content analysis details:   (-4.8 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  On Thu, Mar 14, 2024 at 9:06 PM Chao Yu wrote: > > On 2024/3/13
+    12:11, Zhiguo Niu wrote: > > some user behaviors requested filesystem operations,
+    which > > will cause filesystem not idle. > > Mean [...] 
+ 
+ Content analysis details:   (0.0 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+                             provider
+                             [niuzhiguo84[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+                             in digit
+                             [niuzhiguo84[at]gmail.com]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.208.169 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.208.169 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+                             envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+                             author's domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1rkps0-0002gW-Do
-Subject: Re: [f2fs-dev] [FYI][PATCH] tracing/treewide: Remove second
- parameter of __assign_str()
+X-Headers-End: 1rkwek-0001ik-3J
+Subject: Re: [f2fs-dev] [PATCH] f2fs: add REQ_TIME time update for some user
+ behaviors
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,145 +134,92 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-hyperv@vger.kernel.org, linux-usb@vger.kernel.org,
- kvm@vger.kernel.org, dri-devel@lists.freedesktop.org,
- brcm80211@lists.linux.dev, ath10k@lists.infradead.org,
- Julia Lawall <Julia.Lawall@inria.fr>, linux-s390@vger.kernel.org,
- dev@openvswitch.org, linux-cifs@vger.kernel.org, linux-rdma@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, io-uring@vger.kernel.org,
- linux-bcachefs@vger.kernel.org, iommu@lists.linux.dev,
- ath11k@lists.infradead.org, linux-media@vger.kernel.org,
- linux-wpan@vger.kernel.org, linux-pm@vger.kernel.org, selinux@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- linux-erofs@lists.ozlabs.org, virtualization@lists.linux.dev,
- linux-sound@vger.kernel.org, linux-block@vger.kernel.org,
- ocfs2-devel@lists.linux.dev,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, linux-cxl@vger.kernel.org,
- linux-tegra@vger.kernel.org, intel-xe@lists.freedesktop.org,
- linux-edac@vger.kernel.org, linux-hwmon@vger.kernel.org,
- brcm80211-dev-list.pdl@broadcom.com,
- Linus Torvalds <torvalds@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
- linux-wireless@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- ath12k@lists.infradead.org, tipc-discussion@lists.sourceforge.net,
- Masami Hiramatsu <mhiramat@kernel.org>, netdev@vger.kernel.org,
- bpf@vger.kernel.org, Linux Trace Kernel <linux-trace-kernel@vger.kernel.org>,
- freedreno@lists.freedesktop.org, linux-nfs@vger.kernel.org,
- linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, hongyu.jin@unisoc.com,
+ Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, 14 Mar 2024 09:57:57 -0700
-Alison Schofield <alison.schofield@intel.com> wrote:
-
-> On Fri, Feb 23, 2024 at 12:56:34PM -0500, Steven Rostedt wrote:
-> > From: "Steven Rostedt (Google)" <rostedt@goodmis.org>
-> > 
-> > [
-> >    This is a treewide change. I will likely re-create this patch again in
-> >    the second week of the merge window of v6.9 and submit it then. Hoping
-> >    to keep the conflicts that it will cause to a minimum.
-> > ]
-
-Note, change of plans. I plan on sending this in the next merge window, as
-this merge window I have this patch:
-
-  https://lore.kernel.org/linux-trace-kernel/20240312113002.00031668@gandalf.local.home/
-
-That will warn if the source string of __string() is different than the
-source string of __assign_str(). I want to make sure they are identical
-before just dropping one of them.
-
-
-> 
-> > diff --git a/drivers/cxl/core/trace.h b/drivers/cxl/core/trace.h
-> > index bdf117a33744..07ba4e033347 100644
-> > --- a/drivers/cxl/core/trace.h
-> > +++ b/drivers/cxl/core/trace.h  
-> 
-> snip to poison
-> 
-> > @@ -668,8 +668,8 @@ TRACE_EVENT(cxl_poison,
-> >  	    ),
-> >  
-> >  	TP_fast_assign(
-> > -		__assign_str(memdev, dev_name(&cxlmd->dev));
-> > -		__assign_str(host, dev_name(cxlmd->dev.parent));
-> > +		__assign_str(memdev);
-> > +		__assign_str(host);  
-> 
-> I think I get that the above changes work because the TP_STRUCT__entry for
-> these did:
-> 	__string(memdev, dev_name(&cxlmd->dev))
-> 	__string(host, dev_name(cxlmd->dev.parent))
-
-That's the point. They have to be identical or you will likely bug.
-
-The __string(name, src) is used to find the string length of src which
-allocates the necessary length on the ring buffer. The __assign_str(name, src)
-will copy src into the ring buffer.
-
-Similar to:
-
-	len = strlen(src);
-	buf = malloc(len);
-	strcpy(buf, str);
-
-Where __string() is strlen() and __assign_str() is strcpy(). It doesn't
-make sense to use two different strings, and if you did, it would likely be
-a bug.
-
-But the magic behind __string() does much more than just get the length of
-the string, and it could easily save the pointer to the string (along with
-its length) and have it copy that in the __assign_str() call, making the
-src parameter of __assign_str() useless.
-
-> 
-> >  		__entry->serial = cxlmd->cxlds->serial;
-> >  		__entry->overflow_ts = cxl_poison_overflow(flags, overflow_ts);
-> >  		__entry->dpa = cxl_poison_record_dpa(record);
-> > @@ -678,12 +678,12 @@ TRACE_EVENT(cxl_poison,
-> >  		__entry->trace_type = trace_type;
-> >  		__entry->flags = flags;
-> >  		if (region) {
-> > -			__assign_str(region, dev_name(&region->dev));
-> > +			__assign_str(region);
-> >  			memcpy(__entry->uuid, &region->params.uuid, 16);
-> >  			__entry->hpa = cxl_trace_hpa(region, cxlmd,
-> >  						     __entry->dpa);
-> >  		} else {
-> > -			__assign_str(region, "");
-> > +			__assign_str(region);
-> >  			memset(__entry->uuid, 0, 16);
-> >  			__entry->hpa = ULLONG_MAX;  
-> 
-> For the above 2, there was no helper in TP_STRUCT__entry. A recently
-> posted patch is fixing that up to be __string(region, NULL) See [1],
-> with the actual assignment still happening in TP_fast_assign.
-
-__string(region, NULL) doesn't make sense. It's like:
-
-	len = strlen(NULL);
-	buf = malloc(len);
-	strcpy(buf, NULL);
-
-??
-
-I'll reply to that email.
-
--- Steve
-
-> 
-> Does that assign logic need to move to the TP_STRUCT__entry definition
-> when you merge these changes? I'm not clear how much logic is able to be
-> included, ie like 'C' style code in the TP_STRUCT__entry.
-> 
-> [1]
-> https://lore.kernel.org/linux-cxl/20240314044301.2108650-1-alison.schofield@intel.com/
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gVGh1LCBNYXIgMTQsIDIwMjQgYXQgOTowNuKAr1BNIENoYW8gWXUgPGNoYW9Aa2VybmVsLm9y
+Zz4gd3JvdGU6Cj4KPiBPbiAyMDI0LzMvMTMgMTI6MTEsIFpoaWd1byBOaXUgd3JvdGU6Cj4gPiBz
+b21lIHVzZXIgYmVoYXZpb3JzIHJlcXVlc3RlZCBmaWxlc3lzdGVtIG9wZXJhdGlvbnMsIHdoaWNo
+Cj4gPiB3aWxsIGNhdXNlIGZpbGVzeXN0ZW0gbm90IGlkbGUuCj4gPiBNZWFud2hpbGUgYWRqdXN0
+IGYyZnNfdXBkYXRlX3RpbWUoUkVRX1RJTUUpIG9mCj4gPiBmMmZzX2lvY19kZWZyYWdtZW50IHRv
+IHN1Y2Nlc3NmdWwgY2FzZS4KPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBaaGlndW8gTml1IDx6aGln
+dW8ubml1QHVuaXNvYy5jb20+Cj4gPiAtLS0KPiA+ICAgZnMvZjJmcy9maWxlLmMgfCA5ICsrKysr
+KysrLQo+ID4gICAxIGZpbGUgY2hhbmdlZCwgOCBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0p
+Cj4gPgo+ID4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZmlsZS5jIGIvZnMvZjJmcy9maWxlLmMKPiA+
+IGluZGV4IDRkZmUzOGUuLmRhYzM4MzYgMTAwNjQ0Cj4gPiAtLS0gYS9mcy9mMmZzL2ZpbGUuYwo+
+ID4gKysrIGIvZnMvZjJmcy9maWxlLmMKPiA+IEBAIC0yNzg0LDcgKzI3ODQsNiBAQCBzdGF0aWMg
+aW50IGYyZnNfaW9jX2RlZnJhZ21lbnQoc3RydWN0IGZpbGUgKmZpbHAsIHVuc2lnbmVkIGxvbmcg
+YXJnKQo+ID4gICAgICAgZXJyID0gZjJmc19kZWZyYWdtZW50X3JhbmdlKHNiaSwgZmlscCwgJnJh
+bmdlKTsKPiA+ICAgICAgIG1udF9kcm9wX3dyaXRlX2ZpbGUoZmlscCk7Cj4gPgo+ID4gLSAgICAg
+ZjJmc191cGRhdGVfdGltZShzYmksIFJFUV9USU1FKTsKPgo+IEkgZ3Vlc3Mgd2UgbmVlZCB0byBj
+YWxsIGYyZnNfdXBkYXRlX3RpbWUoKSBoZXJlIGlmIGFueSBkYXRhIHdhcwo+IG1pZ3JhdGVkLgpP
+SyEKPgo+IGlmIChyYW5nZS0+bGVuKQo+ICAgICAgICAgZjJmc191cGRhdGVfdGltZShzYmksIFJF
+UV9USU1FKTsKPgo+ID4gICAgICAgaWYgKGVyciA8IDApCj4gPiAgICAgICAgICAgICAgIHJldHVy
+biBlcnI7Cj4gPgo+ID4gQEAgLTI3OTIsNiArMjc5MSw3IEBAIHN0YXRpYyBpbnQgZjJmc19pb2Nf
+ZGVmcmFnbWVudChzdHJ1Y3QgZmlsZSAqZmlscCwgdW5zaWduZWQgbG9uZyBhcmcpCj4gPiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaXplb2Yo
+cmFuZ2UpKSkKPiA+ICAgICAgICAgICAgICAgcmV0dXJuIC1FRkFVTFQ7Cj4gPgo+ID4gKyAgICAg
+ZjJmc191cGRhdGVfdGltZShzYmksIFJFUV9USU1FKTsKPiA+ICAgICAgIHJldHVybiAwOwo+ID4g
+ICB9Cj4gPgo+ID4gQEAgLTMzMzEsNiArMzMzMSw3IEBAIHN0YXRpYyBpbnQgZjJmc19pb2NfcmVz
+aXplX2ZzKHN0cnVjdCBmaWxlICpmaWxwLCB1bnNpZ25lZCBsb25nIGFyZykKPiA+ICAgICAgIGlm
+IChjb3B5X2Zyb21fdXNlcigmYmxvY2tfY291bnQsICh2b2lkIF9fdXNlciAqKWFyZywKPiA+ICAg
+ICAgICAgICAgICAgICAgICAgICAgICBzaXplb2YoYmxvY2tfY291bnQpKSkKPiA+ICAgICAgICAg
+ICAgICAgcmV0dXJuIC1FRkFVTFQ7Cj4gPiArICAgICBmMmZzX3VwZGF0ZV90aW1lKHNiaSwgUkVR
+X1RJTUUpOwo+Cj4gVGhlcmUgd2lsbCBiZSBubyBmdXJ0aGVyIElPIGluIHRoZSBlbmQgb2YgZjJm
+c19pb2NfcmVzaXplX2ZzKCksIHNvIHdlIGRvbid0Cj4gbmVlZCB0byB1cGRhdGUgdGltZSB0byBk
+ZWxheSBnYy9kaXNjYXJkIHRocmVhZD8KPgo+ID4KPiA+ICAgICAgIHJldHVybiBmMmZzX3Jlc2l6
+ZV9mcyhmaWxwLCBibG9ja19jb3VudCk7Cj4gPiAgIH0KPiA+IEBAIC0zNDI0LDYgKzM0MjUsNyBA
+QCBzdGF0aWMgaW50IGYyZnNfaW9jX3NldGZzbGFiZWwoc3RydWN0IGZpbGUgKmZpbHAsIHVuc2ln
+bmVkIGxvbmcgYXJnKQo+ID4gICAgICAgZjJmc191cF93cml0ZSgmc2JpLT5zYl9sb2NrKTsKPiA+
+Cj4gPiAgICAgICBtbnRfZHJvcF93cml0ZV9maWxlKGZpbHApOwo+ID4gKyAgICAgZjJmc191cGRh
+dGVfdGltZShzYmksIFJFUV9USU1FKTsKPgo+IERpdHRvLApEZWFyIENoYW8sCgpUaGUgdHdvIHBh
+cnRzIHlvdSBwcm9wb3NlZCBzaG91bGQgYmUgc2ltaWxhciB0byB0aGUgYmVsb3cgc2NlbmFyaW8/
+Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LQpzdGF0aWMgaW50IGYyZnNfaW9jX3NldF9lbmNyeXB0aW9uX3BvbGljeShzdHJ1Y3QgZmlsZSAq
+ZmlscCwgdW5zaWduZWQgbG9uZyBhcmcpCnsKc3RydWN0IGlub2RlICppbm9kZSA9IGZpbGVfaW5v
+ZGUoZmlscCk7CgppZiAoIWYyZnNfc2JfaGFzX2VuY3J5cHQoRjJGU19JX1NCKGlub2RlKSkpCnJl
+dHVybiAtRU9QTk9UU1VQUDsKCmYyZnNfdXBkYXRlX3RpbWUoRjJGU19JX1NCKGlub2RlKSwgUkVR
+X1RJTUUpOwoKcmV0dXJuIGZzY3J5cHRfaW9jdGxfc2V0X3BvbGljeShmaWxwLCAoY29uc3Qgdm9p
+ZCBfX3VzZXIgKilhcmcpOwp9Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tCnRoYW5rcyEKCgo+Cj4gVGhhbmtzLAo+Cj4gPiAgIG91dDoK
+PiA+ICAgICAgIGtmcmVlKHZidWYpOwo+ID4gICAgICAgcmV0dXJuIGVycjsKPiA+IEBAIC0zNTk3
+LDYgKzM1OTksNyBAQCBzdGF0aWMgaW50IGYyZnNfcmVsZWFzZV9jb21wcmVzc19ibG9ja3Moc3Ry
+dWN0IGZpbGUgKmZpbHAsIHVuc2lnbmVkIGxvbmcgYXJnKQo+ID4KPiA+ICAgICAgIGZpbGVtYXBf
+aW52YWxpZGF0ZV91bmxvY2soaW5vZGUtPmlfbWFwcGluZyk7Cj4gPiAgICAgICBmMmZzX3VwX3dy
+aXRlKCZGMkZTX0koaW5vZGUpLT5pX2djX3J3c2VtW1dSSVRFXSk7Cj4gPiArICAgICBmMmZzX3Vw
+ZGF0ZV90aW1lKHNiaSwgUkVRX1RJTUUpOwo+ID4gICBvdXQ6Cj4gPiAgICAgICBpbm9kZV91bmxv
+Y2soaW5vZGUpOwo+ID4KPiA+IEBAIC0zNzY2LDYgKzM3NjksNyBAQCBzdGF0aWMgaW50IGYyZnNf
+cmVzZXJ2ZV9jb21wcmVzc19ibG9ja3Moc3RydWN0IGZpbGUgKmZpbHAsIHVuc2lnbmVkIGxvbmcg
+YXJnKQo+ID4gICAgICAgICAgICAgICBjbGVhcl9pbm9kZV9mbGFnKGlub2RlLCBGSV9DT01QUkVT
+U19SRUxFQVNFRCk7Cj4gPiAgICAgICAgICAgICAgIGlub2RlX3NldF9jdGltZV9jdXJyZW50KGlu
+b2RlKTsKPiA+ICAgICAgICAgICAgICAgZjJmc19tYXJrX2lub2RlX2RpcnR5X3N5bmMoaW5vZGUs
+IHRydWUpOwo+ID4gKyAgICAgICAgICAgICBmMmZzX3VwZGF0ZV90aW1lKHNiaSwgUkVRX1RJTUUp
+Owo+ID4gICAgICAgfQo+ID4gICB1bmxvY2tfaW5vZGU6Cj4gPiAgICAgICBpbm9kZV91bmxvY2so
+aW5vZGUpOwo+ID4gQEAgLTM5NjQsNiArMzk2OCw3IEBAIHN0YXRpYyBpbnQgZjJmc19zZWNfdHJp
+bV9maWxlKHN0cnVjdCBmaWxlICpmaWxwLCB1bnNpZ25lZCBsb25nIGFyZykKPiA+ICAgICAgIGlm
+IChsZW4pCj4gPiAgICAgICAgICAgICAgIHJldCA9IGYyZnNfc2VjdXJlX2VyYXNlKHByZXZfYmRl
+diwgaW5vZGUsIHByZXZfaW5kZXgsCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
+cmV2X2Jsb2NrLCBsZW4sIHJhbmdlLmZsYWdzKTsKPiA+ICsgICAgIGYyZnNfdXBkYXRlX3RpbWUo
+c2JpLCBSRVFfVElNRSk7Cj4gPiAgIG91dDoKPiA+ICAgICAgIGZpbGVtYXBfaW52YWxpZGF0ZV91
+bmxvY2sobWFwcGluZyk7Cj4gPiAgICAgICBmMmZzX3VwX3dyaXRlKCZGMkZTX0koaW5vZGUpLT5p
+X2djX3J3c2VtW1dSSVRFXSk7Cj4gPiBAQCAtNDE3Myw2ICs0MTc4LDcgQEAgc3RhdGljIGludCBm
+MmZzX2lvY19kZWNvbXByZXNzX2ZpbGUoc3RydWN0IGZpbGUgKmZpbHApCj4gPiAgICAgICBpZiAo
+cmV0KQo+ID4gICAgICAgICAgICAgICBmMmZzX3dhcm4oc2JpLCAiJXM6IFRoZSBmaWxlIG1pZ2h0
+IGJlIHBhcnRpYWxseSBkZWNvbXByZXNzZWQgKGVycm5vPSVkKS4gUGxlYXNlIGRlbGV0ZSB0aGUg
+ZmlsZS4iLAo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgX19mdW5jX18sIHJldCk7Cj4gPiAr
+ICAgICBmMmZzX3VwZGF0ZV90aW1lKHNiaSwgUkVRX1RJTUUpOwo+ID4gICBvdXQ6Cj4gPiAgICAg
+ICBpbm9kZV91bmxvY2soaW5vZGUpOwo+ID4gICAgICAgZmlsZV9lbmRfd3JpdGUoZmlscCk7Cj4g
+PiBAQCAtNDI1Miw2ICs0MjU4LDcgQEAgc3RhdGljIGludCBmMmZzX2lvY19jb21wcmVzc19maWxl
+KHN0cnVjdCBmaWxlICpmaWxwKQo+ID4gICAgICAgaWYgKHJldCkKPiA+ICAgICAgICAgICAgICAg
+ZjJmc193YXJuKHNiaSwgIiVzOiBUaGUgZmlsZSBtaWdodCBiZSBwYXJ0aWFsbHkgY29tcHJlc3Nl
+ZCAoZXJybm89JWQpLiBQbGVhc2UgZGVsZXRlIHRoZSBmaWxlLiIsCj4gPiAgICAgICAgICAgICAg
+ICAgICAgICAgICBfX2Z1bmNfXywgcmV0KTsKPiA+ICsgICAgIGYyZnNfdXBkYXRlX3RpbWUoc2Jp
+LCBSRVFfVElNRSk7Cj4gPiAgIG91dDoKPiA+ICAgICAgIGlub2RlX3VubG9jayhpbm9kZSk7Cj4g
+PiAgICAgICBmaWxlX2VuZF93cml0ZShmaWxwKTsKCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51
+eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZv
+cmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
