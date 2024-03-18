@@ -2,76 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A60E87F059
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Mar 2024 20:21:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F7BE87F16D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Mar 2024 21:45:55 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rmIYC-0007yN-Ml;
-	Mon, 18 Mar 2024 19:21:37 +0000
+	id 1rmJrk-0004Y1-87;
+	Mon, 18 Mar 2024 20:45:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pr-tracker-bot@kernel.org>) id 1rmIYA-0007yD-LD
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rmJri-0004Xp-G7
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 18 Mar 2024 19:21:34 +0000
+ Mon, 18 Mar 2024 20:45:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
- Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
+ Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=E8xY9rekMIL0a4yCuCxcKRLFoJgwX8QrsHmZZZSMP/g=; b=DAmcavIRf+UNO4JKrBYQhT97oJ
- 8Cw/qUOlg9umnqDopNyfYsHiXxhRrJ0da560jjZQIIsYhHZzNbhZ/tnoKv0pXplZU9n01+u4repwH
- 5ICJoBGwGvdYNEp0Xe8x38KWdizCKMrq7QG+d+BqqjdUkn5gG/IRZnbeplQtsFAzwhVA=;
+ bh=PHHwxOvGzjN8Db7TMoDPg/CYGskfnbTT4ie0xz5+DbQ=; b=Rzt5VxvS4+eLoeNOti+QnvLlW5
+ vqkBhHYlVjFLOnBqvbwVFOO/kkJzsWNFsYJbw851wyquVtnFa0+hZJKQ4yVwwbTIYO54drFqFycW9
+ IH1obTVuPJZg7kGWgQVSHXojeaLGq/Nor4ZEMaWcHV5fP4XTOQd/FaeBwQqdunfY2AYU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=E8xY9rekMIL0a4yCuCxcKRLFoJgwX8QrsHmZZZSMP/g=; b=eU1R2SgU8QOYskFsGm5F5XIfjs
- CpdH1zmF3OnOfwke3vc875DhWgJE8wrRmCBDZqGXeREzOwuzydXkUmJ0DyhEfoj4TdWDCsijs/hOD
- 2y/J7wFOxIy7r8gon/oyE65l7zIzhh2MdNgzBiGHI7tfI4rYURIBjfKmHT3wbYPkVmN4=;
+ ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=PHHwxOvGzjN8Db7TMoDPg/CYGskfnbTT4ie0xz5+DbQ=; b=aMBaOChX6zm6zewOeR4Vi3yuG8
+ sGef3rE+IXcs3h+0eQ0m/HKkuCIMpHWv515pPloxt+HnHTGYhr1tiVsMjSr1L1qToxArYduPZVFCT
+ WKkNTUcHbMVdZgg74Q+bvwCN3Pmho5wrH+C3krGQFXv8B2nq12QloDGq+Tqm7C8YOZ7s=;
 Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rmIY0-0003oy-61 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 18 Mar 2024 19:21:34 +0000
+ id 1rmJrW-0002Jj-S8 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 18 Mar 2024 20:45:50 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 4A21DCE0B31;
- Mon, 18 Mar 2024 19:21:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 89199C433C7;
- Mon, 18 Mar 2024 19:21:18 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 73B00CE0B62;
+ Mon, 18 Mar 2024 20:45:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 44582C433B1;
+ Mon, 18 Mar 2024 20:45:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1710789678;
- bh=jjtbHMlq2RBk4POjZ3Q4hQPW2sWuY9zYox2ybK6TpHc=;
- h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
- b=KIp1g4XNa4FGTYTZ9hqNOIgm09JuhMZytSPjWV+f4lG+WyCj078M83b3szs3zkzC1
- 434PVqd87eXhFaTv4JcmYN43NSvt2JJyj22vU7lzHTN+entRUOI9CHGEkfQ818fDiT
- DcttANSiGGmBGNw/usKSIbej/yTqDBcauqvxSqji5EbQWzhEgMiL815mBkCMmpEHCT
- WFGot4TzgDDwx/88vw/Qlre8rjBcQQLqLNwhGtaGGt0U/cO0rKVFjFBZA6UwyK3nv3
- 95ZChntokLl8kcJSAd3k7SbQ8Y4WJEf3YSFuxQXFbKsb6L6MakfsBTO9q0rEQdBiId
- HfilIplAqzJzQ==
+ s=k20201202; t=1710794733;
+ bh=bXj+2bey1JiPSRUaDSpuXTcSqhoJrwse8pezMzX/3gg=;
+ h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+ b=Cfu+kooNHzOc1lNH+Rcnj80CoPHosepEM3gStSIAr2M9EhZ7EX/ecdSQNpE7b8WkC
+ 7mC/VlFf1yKgsuYcZdTeVIBGYs3Gv4LIl5G9QntKQNmWnxGqa18oyQX21dgPcd2q1u
+ Or0qOMRIehhparWC8j4jKCUu0z14KHeXlcAYGquu7Lm2LshxtFaJBdpZ4igdPP/3AB
+ 8cffZy583pdgl9Z6nSIbVQP9vYJEBJGai9CtNtT0Gfj/X3jcLqiore3WFGhV6vUQlt
+ qo2MA+DxlUM5FQYXUHS3huMbYcleP4vPuIWxRiavwRe4XKplI5n4SfpcI4zki6ilxe
+ hQ71cuo3OC20w==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 7A2FE17B6474; Mon, 18 Mar 2024 19:21:18 +0000 (UTC)
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <ZfiBt0gRe_Elp7hE@google.com>
-References: <ZfiBt0gRe_Elp7hE@google.com>
-X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
-X-PR-Tracked-Message-Id: <ZfiBt0gRe_Elp7hE@google.com>
-X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- tags/f2fs-for-6.9-rc1
-X-PR-Tracked-Commit-Id: eb70d5a6c932d9d23f4bb3e7b83782c21ac4b064
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: c5d9ab85ebf3a42d5127ffdedf9094325465e852
-Message-Id: <171078967849.17817.6127983227768532199.pr-tracker-bot@kernel.org>
-Date: Mon, 18 Mar 2024 19:21:18 +0000
-To: Jaegeuk Kim <jaegeuk@kernel.org>
+ 3293517B6479; Mon, 18 Mar 2024 20:45:33 +0000 (UTC)
+MIME-Version: 1.0
+From: patchwork-bot+f2fs@kernel.org
+Message-Id: <171079473320.25373.14169884985890692398.git-patchwork-notify@kernel.org>
+Date: Mon, 18 Mar 2024 20:45:33 +0000
+References: <20240221171412.10710-1-krisman@suse.de>
+In-Reply-To: <20240221171412.10710-1-krisman@suse.de>
+To: Gabriel Krisman Bertazi <krisman@suse.de>
 X-Spam-Score: -2.9 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -79,13 +71,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The pull request you sent on Mon, 18 Mar 2024 11:02:31 -0700:
- > git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- tags/f2fs-for-6.9-rc1 has been merged into torvalds/linux.git:
- https://git.kernel.org/torvalds/c/c5d9ab85ebf3a42d5127ffdedf9094325465e852
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Gabriel Krisman Bertazi <krisman@suse.de>: On Wed, 21 Feb 2024 12:14:02 -0500
+ you wrote: > Hi, > > v7 of this patchset applying the comments from Eric.
+ Thank you for your > feedback. Details in changelog of individual patches.
+ > > As usual, th [...] 
  Content analysis details:   (-2.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -95,12 +90,11 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rmIY0-0003oy-61
-Subject: Re: [f2fs-dev] [GIT PULL] f2fs update for 6.9-rc1
+X-Headers-End: 1rmJrW-0002Jj-S8
+Subject: Re: [f2fs-dev] [PATCH v7 00/10] Set casefold/fscrypt dentry
+ operations through sb->s_d_op
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,26 +106,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
-MIME-Version: 1.0
+Cc: brauner@kernel.org, tytso@mit.edu, amir73il@gmail.com,
+ linux-f2fs-devel@lists.sourceforge.net, ebiggers@kernel.org,
+ viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The pull request you sent on Mon, 18 Mar 2024 11:02:31 -0700:
+Hello:
 
-> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-6.9-rc1
+This series was applied to jaegeuk/f2fs.git (dev)
+by Gabriel Krisman Bertazi <krisman@suse.de>:
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/c5d9ab85ebf3a42d5127ffdedf9094325465e852
+On Wed, 21 Feb 2024 12:14:02 -0500 you wrote:
+> Hi,
+> 
+> v7 of this patchset applying the comments from Eric. Thank you for your
+> feedback.  Details in changelog of individual patches.
+> 
+> As usual, this survived fstests on ext4 and f2fs.
+> 
+> [...]
 
-Thank you!
+Here is the summary with links:
+  - [f2fs-dev,v7,01/10] ovl: Always reject mounting over case-insensitive directories
+    https://git.kernel.org/jaegeuk/f2fs/c/2824083db76c
+  - [f2fs-dev,v7,02/10] fscrypt: Factor out a helper to configure the lookup dentry
+    https://git.kernel.org/jaegeuk/f2fs/c/8b6bb995d381
+  - [f2fs-dev,v7,03/10] fscrypt: Drop d_revalidate for valid dentries during lookup
+    https://git.kernel.org/jaegeuk/f2fs/c/e86e6638d117
+  - [f2fs-dev,v7,04/10] fscrypt: Drop d_revalidate once the key is added
+    https://git.kernel.org/jaegeuk/f2fs/c/e9b10713e82c
+  - [f2fs-dev,v7,05/10] libfs: Merge encrypted_ci_dentry_ops and ci_dentry_ops
+    https://git.kernel.org/jaegeuk/f2fs/c/e6ca2883d987
+  - [f2fs-dev,v7,06/10] libfs: Add helper to choose dentry operations at mount-time
+    https://git.kernel.org/jaegeuk/f2fs/c/70dfe3f0d239
+  - [f2fs-dev,v7,07/10] ext4: Configure dentry operations at dentry-creation time
+    https://git.kernel.org/jaegeuk/f2fs/c/04aa5f4eba49
+  - [f2fs-dev,v7,08/10] f2fs: Configure dentry operations at dentry-creation time
+    https://git.kernel.org/jaegeuk/f2fs/c/be2760a703e6
+  - [f2fs-dev,v7,09/10] ubifs: Configure dentry operations at dentry-creation time
+    https://git.kernel.org/jaegeuk/f2fs/c/bc401c2900c1
+  - [f2fs-dev,v7,10/10] libfs: Drop generic_set_encrypted_ci_d_ops
+    https://git.kernel.org/jaegeuk/f2fs/c/101c3fad29d7
 
+You are awesome, thank you!
 -- 
 Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/prtracker.html
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
 
 
 _______________________________________________
