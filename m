@@ -2,97 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D076088086F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Mar 2024 01:15:03 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 710AF880B27
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Mar 2024 07:22:57 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rmjbb-0000hs-38;
-	Wed, 20 Mar 2024 00:14:55 +0000
+	id 1rmpLb-0005nZ-Hq;
+	Wed, 20 Mar 2024 06:22:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1rmjba-0000hi-K4
+ (envelope-from <Zhiguo.Niu@unisoc.com>) id 1rmpLZ-0005nS-6t
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Mar 2024 00:14:55 +0000
+ Wed, 20 Mar 2024 06:22:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jJXe+rJ5hKNx9Gli3p1gXY0cl2hDdqP/dgBEF4E7t5k=; b=eL83cfycjUDrT57VeR3ayK8wOj
- HqjF6ap+K1jDFQlVZN4P3p0hNsEXg8wOKQ70wQFGX0zHyyaAtTLhvwJOKcvgNTPFfL3wH/Wc/p3aE
- D1EG537zyUpnv1zL3UKFDi7n3p1uJbHE3ZOPDEo4IoQkKJtycelwHc6VVeL+FQUr5KaY=;
+ bh=YrQSeWaQAFlDqQGunZX+D+EYyiBwLV30CTYdj6V+3Ig=; b=KA2r4lYUaBdInX8nOjvuDnhra9
+ u4X+dKkvd3MX/XKKnlpAUDkm0gQX7R6lU6s0ekd0RMZpsZuDxRFVRBpxLdfz61wR9QV21BVps31YT
+ lI7OYuUUHoIzleAqz0zjK9br2Fz1no0P+av+DPUznLjETXytjon/KZX/GQvv++XqbaVA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=jJXe+rJ5hKNx9Gli3p1gXY0cl2hDdqP/dgBEF4E7t5k=; b=F
- Rv0JVk7WEssM+ZE5DcQCd7fOQkkZVjcy1I/TIRLZ0R1g5KEduuFH/hac3JwHiJI9qPcI8+EeJR9IK
- MWohytQL0laVC/k0IxPWqEkgmrw8qguEAZn+tJWSo6bfvVc3cRZ88s09iJZa7WzhADbw0lVKSQGI3
- +ooLdAXqcVS6z0VA=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ List-Owner:List-Archive; bh=YrQSeWaQAFlDqQGunZX+D+EYyiBwLV30CTYdj6V+3Ig=; b=R
+ +Nbw4H1cpKYfkAmdOG2Uv8V4sfHu7x/h3b/1/u+5SCluBbIszb102k2GBTek8698Ftt0P+f7QW67O
+ NOZR1LfLBQ3pk8Q1AEOsLmygZVaT5wQcTn0QmUx7pnF5XAFz3Wt+duzMxeh4dvJ+GlM3XJZXr0bpG
+ mYJXUUN/e2iqmPTA=;
+Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rmjbT-0000dD-16 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Mar 2024 00:14:55 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 8AEC7CE0B6A
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 20 Mar 2024 00:14:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E2A0C433C7;
- Wed, 20 Mar 2024 00:14:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1710893686;
- bh=RgQ+4D5jOVCbEgkz3y6+dLvAKuKFyxUUXvKEfz/0awU=;
- h=From:To:Cc:Subject:Date:From;
- b=bsU3hV32fVAcAl6rtVKfChcygYOsmBVQkod/kzYF9frS2qxQKvIFVfFxAzg5sZtM6
- /p7D1RUOT27w+IutQ6WYIMKCYNjK9UTdLM8ZkGBCjQVgqThw1hCe3bfXDzbGfo/Nuy
- Hi2IMUO8O+wcyTbOrcKxxiXHjVkQ15br4c4CHX64nMdWAJ4q13X9pw9o53gpxyYjX0
- DCaoG7XuHSboL+6E7/EwGmxLMLhGJaTw7qgUUDjcb8vWGk1sZqaWqLrOkHiE/eWeDy
- TuCfGV/aUo8rVeA4fwwhuIwZLIZUpehTONVaUMqauDmAbT3DiBeNnQrBPFAIZnCJmv
- Dtioqj9D6J3Xg==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 19 Mar 2024 17:14:42 -0700
-Message-ID: <20240320001442.497813-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.44.0.291.gc1ea87d7ee-goog
+ id 1rmpLQ-0007u4-7d for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 20 Mar 2024 06:22:45 +0000
+Received: from dlp.unisoc.com ([10.29.3.86])
+ by SHSQR01.spreadtrum.com with ESMTP id 42K6MKnq064146;
+ Wed, 20 Mar 2024 14:22:20 +0800 (+08)
+ (envelope-from Zhiguo.Niu@unisoc.com)
+Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
+ by dlp.unisoc.com (SkyGuard) with ESMTPS id 4Tzz426PS0z2LRfxd;
+ Wed, 20 Mar 2024 14:20:50 +0800 (CST)
+Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
+ BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.23; Wed, 20 Mar 2024 14:22:17 +0800
+From: Zhiguo Niu <zhiguo.niu@unisoc.com>
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Wed, 20 Mar 2024 14:22:16 +0800
+Message-ID: <1710915736-31823-1-git-send-email-zhiguo.niu@unisoc.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Spam-Score: -2.9 (--)
+X-Originating-IP: [10.0.73.87]
+X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
+ BJMBX02.spreadtrum.com (10.0.64.8)
+X-MAIL: SHSQR01.spreadtrum.com 42K6MKnq064146
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: f2fs_ioc_shutdown(F2FS_GOING_DOWN_NOSYNC)
- issue_discard_thread
- - mnt_want_write_file() - sb_start_write(SB_FREEZE_WRITE) -
- sb_start_intwrite(SB_FREEZE_FS); 
- - f2fs_stop_checkpoint(sbi, false, : waiting [...] 
- Content analysis details:   (-2.9 points, 6.0 required)
+ Content preview:  some user behaviors requested filesystem operations, which
+ will cause filesystem not idle. Meanwhile adjust some
+ f2fs_update_time(REQ_TIME)
+ positions. Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com> --- v3: modify
+ some update conditions according to Chao's suggeestions v2: update patch
+ according to Chao's suggestions --- --- fs/f2fs/file.c | 15 ++ [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rmjbT-0000dD-16
-Subject: [f2fs-dev] [PATCH] f2fs: avoid the deadlock case when stopping
- discard thread
+X-Headers-End: 1rmpLQ-0007u4-7d
+Subject: [f2fs-dev] [PATCH V3] f2fs: add REQ_TIME time update for some user
+ behaviors
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,45 +92,101 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, hongyu.jin@unisoc.com,
+ zhiguo.niu@unisoc.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-f2fs_ioc_shutdown(F2FS_GOING_DOWN_NOSYNC)  issue_discard_thread
- - mnt_want_write_file()
-   - sb_start_write(SB_FREEZE_WRITE)
-                                             - sb_start_intwrite(SB_FREEZE_FS);
- - f2fs_stop_checkpoint(sbi, false,            : waiting
-    STOP_CP_REASON_SHUTDOWN);
- - f2fs_stop_discard_thread(sbi);
-   - kthread_stop()
-     : waiting
+some user behaviors requested filesystem operations, which
+will cause filesystem not idle.
+Meanwhile adjust some f2fs_update_time(REQ_TIME) positions.
 
- - mnt_drop_write_file(filp);
-
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
 ---
- fs/f2fs/segment.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+v3: modify some update conditions according to Chao's suggeestions
+v2: update patch according to Chao's suggestions
+---
+---
+ fs/f2fs/file.c | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 4fd76e867e0a..088b8c48cffa 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -1923,7 +1923,9 @@ static int issue_discard_thread(void *data)
- 			continue;
- 		}
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 1761ad1..128e53d 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2354,13 +2354,14 @@ static bool uuid_is_nonzero(__u8 u[16])
+ static int f2fs_ioc_set_encryption_policy(struct file *filp, unsigned long arg)
+ {
+ 	struct inode *inode = file_inode(filp);
++	int ret;
  
--		sb_start_intwrite(sbi->sb);
-+		/* Avoid the deadlock from F2FS_GOING_DOWN_NOSYNC. */
-+		if (!sb_start_intwrite_trylock(sbi->sb))
-+			continue;
+ 	if (!f2fs_sb_has_encrypt(F2FS_I_SB(inode)))
+ 		return -EOPNOTSUPP;
  
- 		issued = __issue_discard_cmd(sbi, &dpolicy);
- 		if (issued > 0) {
++	ret = fscrypt_ioctl_set_policy(filp, (const void __user *)arg);
+ 	f2fs_update_time(F2FS_I_SB(inode), REQ_TIME);
+-
+-	return fscrypt_ioctl_set_policy(filp, (const void __user *)arg);
++	return ret;
+ }
+ 
+ static int f2fs_ioc_get_encryption_policy(struct file *filp, unsigned long arg)
+@@ -2786,7 +2787,8 @@ static int f2fs_ioc_defragment(struct file *filp, unsigned long arg)
+ 	err = f2fs_defragment_range(sbi, filp, &range);
+ 	mnt_drop_write_file(filp);
+ 
+-	f2fs_update_time(sbi, REQ_TIME);
++	if (range.len)
++		f2fs_update_time(sbi, REQ_TIME);
+ 	if (err < 0)
+ 		return err;
+ 
+@@ -3600,6 +3602,8 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
+ 	filemap_invalidate_unlock(inode->i_mapping);
+ 	f2fs_up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+ out:
++	if (released_blocks)
++		f2fs_update_time(sbi, REQ_TIME);
+ 	inode_unlock(inode);
+ 
+ 	mnt_drop_write_file(filp);
+@@ -3770,6 +3774,8 @@ static int f2fs_reserve_compress_blocks(struct file *filp, unsigned long arg)
+ 		f2fs_mark_inode_dirty_sync(inode, true);
+ 	}
+ unlock_inode:
++	if (reserved_blocks)
++		f2fs_update_time(sbi, REQ_TIME);
+ 	inode_unlock(inode);
+ 	mnt_drop_write_file(filp);
+ 
+@@ -3966,6 +3972,7 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
+ 	if (len)
+ 		ret = f2fs_secure_erase(prev_bdev, inode, prev_index,
+ 				prev_block, len, range.flags);
++	f2fs_update_time(sbi, REQ_TIME);
+ out:
+ 	filemap_invalidate_unlock(mapping);
+ 	f2fs_up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+@@ -4175,6 +4182,7 @@ static int f2fs_ioc_decompress_file(struct file *filp)
+ 	if (ret)
+ 		f2fs_warn(sbi, "%s: The file might be partially decompressed (errno=%d). Please delete the file.",
+ 			  __func__, ret);
++	f2fs_update_time(sbi, REQ_TIME);
+ out:
+ 	inode_unlock(inode);
+ 	file_end_write(filp);
+@@ -4254,6 +4262,7 @@ static int f2fs_ioc_compress_file(struct file *filp)
+ 	if (ret)
+ 		f2fs_warn(sbi, "%s: The file might be partially compressed (errno=%d). Please delete the file.",
+ 			  __func__, ret);
++	f2fs_update_time(sbi, REQ_TIME);
+ out:
+ 	inode_unlock(inode);
+ 	file_end_write(filp);
 -- 
-2.44.0.291.gc1ea87d7ee-goog
+1.9.1
 
 
 
