@@ -2,81 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5514A886F50
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Mar 2024 16:00:30 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0794D887223
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Mar 2024 18:50:14 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rngNW-0003kU-5g;
-	Fri, 22 Mar 2024 15:00:18 +0000
+	id 1rnj1n-0007pi-NP;
+	Fri, 22 Mar 2024 17:50:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rngNU-0003jh-H5
+ (envelope-from <daeho43@gmail.com>) id 1rnj1m-0007pa-OF
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 Mar 2024 15:00:16 +0000
+ Fri, 22 Mar 2024 17:50:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Dy7L95vF0YOm58TqxRr/46fQTBlb6GNuRD3PFCS0580=; b=Xj7g+mcJHM37xfycBuo13OnIka
- +f6FZqPCIKE3ZRAqPlwHcmizv5kTsEIKZl07ZNvoTwDew9t1aV7XITYQpbfk7GBXfeF+WLf3Zzn7Q
- AEMIYMfCafQAZWjxQaUPBu4tooMbmzcHE7gW+ZghBf+9HunuKmBOSjRSoUSzoBtSpUwA=;
+ bh=yfoeq+6cUg1dwSHsoYFFrThY/ANh42EGrvYWQB15MVo=; b=W2XdWFfRsk3H3LhRBvo+UB1Al6
+ i9tyyAfnRPgDMPKiZcO8Kl4PLQotXIqgsrrhocHER1h+zfQqfZYXMGUQdiu5/uybHPHSKrJ0pHopo
+ yFV9fZmDOaWmtTY6T9B6ptVZmr2FzwhZXS7PqQPYfIRN4Uew8EURMbQ7Q/UVR1JIuanw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Dy7L95vF0YOm58TqxRr/46fQTBlb6GNuRD3PFCS0580=; b=d
- pTmI6kJZ/cZWIIVPQwu3FbF0EB1ll2V0BsbUhQ00Xp92H4JXkAeT6jlB1uLBljO9yl6rQaYhyvYK0
- 5lZDKNJsohlxUzf65GfJr3CFh6yWkpl9521gph2R1JA9zrq/hIYrJIi/7qx/XdLzBUy25n0oVch1a
- fNwXz6Wi+6L7KE5k=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ List-Owner:List-Archive; bh=yfoeq+6cUg1dwSHsoYFFrThY/ANh42EGrvYWQB15MVo=; b=L
+ xeQ7Iiok9dusubVTyqjpO68NdMdGGAbXu/1Yas6Oq3z584j3vr+RfLAjKgQJ/TPCpB7tagCf9NsnA
+ s1rP5gaNwFie4GrCxNbfZstpHcCac5PnV2QfWVCC5i1/zQEom1mKVWAaGx2QtGOa7xE+mz1N5Ueqw
+ x8cpxLQPDzBd1n5U=;
+Received: from mail-pf1-f182.google.com ([209.85.210.182])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rngNS-0000Au-O9 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 Mar 2024 15:00:16 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id CA3BFCE1718;
- Fri, 22 Mar 2024 15:00:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75ED1C433F1;
- Fri, 22 Mar 2024 15:00:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711119602;
- bh=n0MJ4YjaOKX2Bd1ABkqsW07WnDRYW7ulWQqb4AqpGVc=;
- h=From:To:Cc:Subject:Date:From;
- b=cyou0njs8x7Vs9rk8sEBi7YG32eFPaf4JbVqDon8/i8hPEwTr+tI7PX1NjNRI6FGV
- qKcHs9Oa+MvockmwtqL7C4bNeiI/TTt5BS0p4zIAJYTou+MuQ7bj1mrOfJSCcXFCzZ
- HSJMHxqDXd2vO8I953ErmC3IGPHvr30u0S3LnBCBtTYkTrPHNZGvBD9/iAQLj2gDfp
- E+EmuzrmCG60FpTljylD3mFQra33ZOu4xqlrdCT7TeaPaFPh+n82CJaKa47azNE0H3
- wpLNM0wA64oiRcRtbpssPCWZouRATPEngnQsm1jypdWmsgN5IgsFisq3F8IjXxGDp6
- +LZ/MkMzy1a2w==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Fri, 22 Mar 2024 22:59:55 +0800
-Message-Id: <20240322145955.2959257-1-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1rnj1i-00022d-LJ for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 22 Mar 2024 17:50:02 +0000
+Received: by mail-pf1-f182.google.com with SMTP id
+ d2e1a72fcca58-6ea838bf357so598310b3a.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 22 Mar 2024 10:49:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711129788; x=1711734588; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=yfoeq+6cUg1dwSHsoYFFrThY/ANh42EGrvYWQB15MVo=;
+ b=lPvV4v9B6KITR+vWGJiWuTMa9IWDePU/n1nHif4JN8O+7MYdvGRLxztafcpfxfaASs
+ 12l/MNcdV4gIVyc8xP1OutTSHGhcTQDVq/cAovEIuendODjBOwF51wqukinqM1A7Qn+Y
+ fZcSWx5lcC0NTIzrsPrudbdyD5CfyBi6wS32OkPp5nbyTW6Q+GUqAZobbh80KdMidEk2
+ PrLPbVtFCRAjuarCNtVzWyITMDbVOZbZ/g36hv1YiaXnkFdpGAZ/0QwfMKGEo92mYi9e
+ 5hmRfgZDmwzTmaZmVpMLiIwOF9caSK6DE8f4WjVLKMgManY1E1VWGxXyyFGgDKExnG/t
+ A/qw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711129788; x=1711734588;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yfoeq+6cUg1dwSHsoYFFrThY/ANh42EGrvYWQB15MVo=;
+ b=B5WdyFa08IgDyuX/CjUWYUT3lu8isq40zzZ3FXJgM1zfH4MJoMhGV4JMMUzzknWFDK
+ bJyXEpFD1j3tI5qYGY99dwg95mKWN093eCIWLzRZ1RDcCRw/rcFxUC8s9jY+l0z/WWg1
+ CgP5xJWWZFx+CxnLxQbjfHpU61H47LMuyDoJDOSPEYc7J5IjasJNNBe8rfPICSG0/lj9
+ VIoOtCJzfIuVRUPchPSyzHOB2xD6YQHQ4ciNeHuuY1sOgIyC38drANdf3TNfxbmIMYN8
+ 4CiojSi4v7Y1MtCW8xPz5DYGJUTl9wyzMYEW4XXTzvjlck0f6Pxe7GtPjOg6e1yrDor4
+ cAQA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXZpohpqO1ouFOhyJ8sjoHwjwSJnvxD0yDqYl3nff4T8ZORAHZCQ7WE6NjNg93yhkoJO8KHzI5qmXqwSQRn1+ZLJ+8uJcXnY7+QGOeCyH2C4OQyXlwT+A==
+X-Gm-Message-State: AOJu0YzZ49r1oNpBAbCECWQMEX+yvsMynW90ovrwcDdC4Jere1cqFat7
+ 6nIZHBIsXtv31+kndFJ7P3en5zV046dIRoVcrLw0+a+6Fnu0/uL3
+X-Google-Smtp-Source: AGHT+IHBSlzdL28oxOsi0qLLtLmepKBeRoliIAW4D4Xdq2dsDZAjxf8EhlE4bkXQ1af/N3YqWA+R2g==
+X-Received: by 2002:a17:903:40c2:b0:1e0:1174:6360 with SMTP id
+ t2-20020a17090340c200b001e011746360mr529213pld.14.1711129787822; 
+ Fri, 22 Mar 2024 10:49:47 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:0:1000:8411:cd6c:4747:ed85:6091])
+ by smtp.gmail.com with ESMTPSA id
+ t9-20020a170902e84900b001dbcfa0f1acsm2061plg.83.2024.03.22.10.49.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Mar 2024 10:49:47 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Fri, 22 Mar 2024 10:49:43 -0700
+Message-ID: <20240322174944.1460441-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.44.0.396.g6e790dbe36-goog
 MIME-Version: 1.0
-X-Spam-Score: -2.7 (--)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  As Roman Smirnov reported as below: " There is a possible
- bug in f2fs_truncate_inode_blocks(): if (err < 0 && err != -ENOENT) goto fail; 
- ... offset[1] = 0; offset[0]++; nofs += err; 
- Content analysis details:   (-2.7 points, 6.0 required)
+ Content preview:  From: Daeho Jeong In a case writing without fallocate(), we
+ can't guarantee it's allocated in the conventional area for zoned stroage.
+ Signed-off-by: Daeho Jeong --- v2: covered the direct io case v3: covered
+ the mkwrite case v4: moved pin file check position in prepare_write_begin()
+ --- fs/f2fs/data.c | 20 ++++++++++++++++---- fs/ [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.182 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.182 listed in wl.mailspike.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
@@ -84,10 +119,10 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rngNS-0000Au-O9
-Subject: [f2fs-dev] [PATCH] f2fs: fix to detect inconsistent nat entry
- during truncation
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1rnj1i-00022d-LJ
+Subject: [f2fs-dev] [PATCH v4] f2fs: prevent writing without fallocate() for
+ pinned files
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,71 +134,120 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Roman Smirnov <r.smirnov@omp.ru>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-As Roman Smirnov reported as below:
+From: Daeho Jeong <daehojeong@google.com>
 
-"
-There is a possible bug in f2fs_truncate_inode_blocks():
+In a case writing without fallocate(), we can't guarantee it's allocated
+in the conventional area for zoned stroage.
 
-    if (err < 0 && err != -ENOENT)
-    			goto fail;
-        ...
-        offset[1] = 0;
-        offset[0]++;
-        nofs += err;
-
-If err = -ENOENT then nofs will sum with an error code,
-which is strange behaviour. Also if nofs < ENOENT this will
-cause an overflow. err will be equal to -ENOENT with the
-following call stack:
-
-truncate_nodes()
-  f2fs_get_node_page()
-     __get_node_page()
-        read_node_page()
-"
-
-If nat is corrupted, truncate_nodes() may return -ENOENT, and
-f2fs_truncate_inode_blocks() doesn't handle such error correctly,
-fix it.
-
-Reported-by: Roman Smirnov <r.smirnov@omp.ru>
-Closes: https://lore.kernel.org/linux-f2fs-devel/085b27fd2b364a3c8c3a9ca77363e246@omp.ru
-Signed-off-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
 ---
- fs/f2fs/node.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+v2: covered the direct io case
+v3: covered the mkwrite case
+v4: moved pin file check position in prepare_write_begin()
+---
+ fs/f2fs/data.c | 20 ++++++++++++++++----
+ fs/f2fs/file.c | 16 ++++++++--------
+ 2 files changed, 24 insertions(+), 12 deletions(-)
 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index b3de6d6cdb02..bb57bbaff7b4 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -1187,7 +1187,17 @@ int f2fs_truncate_inode_blocks(struct inode *inode, pgoff_t from)
- 		default:
- 			BUG();
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index c21b92f18463..88896989bb28 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1584,8 +1584,11 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
+ 
+ 	/* use out-place-update for direct IO under LFS mode */
+ 	if (map->m_may_create &&
+-	    (is_hole || (f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_DIO))) {
+-		if (unlikely(f2fs_cp_error(sbi))) {
++	    (is_hole || (f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_DIO &&
++			 !f2fs_is_pinned_file(inode)))) {
++		if (unlikely(f2fs_cp_error(sbi)) ||
++		    (f2fs_is_pinned_file(inode) && is_hole &&
++		     flag != F2FS_GET_BLOCK_PRE_DIO)) {
+ 			err = -EIO;
+ 			goto sync_out;
  		}
--		if (err < 0 && err != -ENOENT)
-+		if (err == -ENOENT) {
-+			set_sbi_flag(F2FS_P_SB(page), SBI_NEED_FSCK);
-+			f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
-+			f2fs_err_ratelimited(sbi,
-+				"truncate node fail, ino:%lu, nid:%u, "
-+				"offset[0]:%d, offset[1]:%d, nofs:%d",
-+				inode->i_ino, dn.nid, offset[0],
-+				offset[1], nofs);
-+			err = 0;
+@@ -3378,6 +3381,8 @@ static int prepare_write_begin(struct f2fs_sb_info *sbi,
+ 		f2fs_map_lock(sbi, flag);
+ 		locked = true;
+ 	} else if ((pos & PAGE_MASK) >= i_size_read(inode)) {
++		if (f2fs_is_pinned_file(inode))
++			return -EIO;
+ 		f2fs_map_lock(sbi, flag);
+ 		locked = true;
+ 	}
+@@ -3414,8 +3419,15 @@ static int prepare_write_begin(struct f2fs_sb_info *sbi,
+ 
+ 		/* hole case */
+ 		err = f2fs_get_dnode_of_data(&dn, index, LOOKUP_NODE);
+-		if (!err && dn.data_blkaddr != NULL_ADDR)
+-			goto out;
++		if (!err) {
++			if (dn.data_blkaddr != NULL_ADDR) {
++				goto out;
++			} else if (f2fs_is_pinned_file(inode)) {
++				err = -EIO;
++				goto out;
++			}
 +		}
-+		if (err < 0)
- 			goto fail;
- 		if (offset[1] == 0 &&
- 				ri->i_nid[offset[0] - NODE_DIR1_BLOCK]) {
++
+ 		f2fs_put_dnode(&dn);
+ 		f2fs_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO);
+ 		WARN_ON(flag != F2FS_GET_BLOCK_PRE_AIO);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 82277e95c88f..4db3b21c804b 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -57,7 +57,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+ 	struct inode *inode = file_inode(vmf->vma->vm_file);
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	struct dnode_of_data dn;
+-	bool need_alloc = true;
++	bool need_alloc = !f2fs_is_pinned_file(inode);
+ 	int err = 0;
+ 	vm_fault_t ret;
+ 
+@@ -114,19 +114,15 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+ 		goto out_sem;
+ 	}
+ 
++	set_new_dnode(&dn, inode, NULL, NULL, 0);
+ 	if (need_alloc) {
+ 		/* block allocation */
+-		set_new_dnode(&dn, inode, NULL, NULL, 0);
+ 		err = f2fs_get_block_locked(&dn, page->index);
+-	}
+-
+-#ifdef CONFIG_F2FS_FS_COMPRESSION
+-	if (!need_alloc) {
+-		set_new_dnode(&dn, inode, NULL, NULL, 0);
++	} else {
+ 		err = f2fs_get_dnode_of_data(&dn, page->index, LOOKUP_NODE);
+ 		f2fs_put_dnode(&dn);
+ 	}
+-#endif
++
+ 	if (err) {
+ 		unlock_page(page);
+ 		goto out_sem;
+@@ -4611,6 +4607,10 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
+ 			return ret;
+ 	}
+ 
++	/* For pinned files, it should be fallocate()-ed in advance. */
++	if (f2fs_is_pinned_file(inode))
++		return 0;
++
+ 	/* Do not preallocate blocks that will be written partially in 4KB. */
+ 	map.m_lblk = F2FS_BLK_ALIGN(pos);
+ 	map.m_len = F2FS_BYTES_TO_BLK(pos + count);
 -- 
-2.40.1
+2.44.0.396.g6e790dbe36-goog
 
 
 
