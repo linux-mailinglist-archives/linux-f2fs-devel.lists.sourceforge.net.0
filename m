@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E82788769B
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 23 Mar 2024 03:11:44 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B0FB8876D5
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 23 Mar 2024 04:02:33 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rnqr8-0003Ih-MC;
-	Sat, 23 Mar 2024 02:11:35 +0000
+	id 1rnreK-0008DR-Pe;
+	Sat, 23 Mar 2024 03:02:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rnqr7-0003IX-TQ
+ (envelope-from <chao@kernel.org>) id 1rnreJ-0008DL-U2
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 23 Mar 2024 02:11:34 +0000
+ Sat, 23 Mar 2024 03:02:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KAfLrzuTcBA/cgTB1QzmsE3F7asDmea2BZTVVcOLx44=; b=W1oZ+1vBrU68kXJxfv15WbwO98
- U+C0Kb6+xdIn//2Q5serjWydM9rjdUuxSy+XjbhFCRlESDqWRjpc7+GZRNqSrZAWgm8H8w1Da4sQe
- 6NUZYQjvac9AUb4teTcMKexFwzJe6L3oyE+elA3wmg3K9U66vOOU/08vi6NbU5/93Qo4=;
+ bh=1Tm7qLFJpMIaoF/y2FtCT5jDdjOozfLC0kR1KO8xRms=; b=kc6dXZbUuQRUidM+By8ayZueMc
+ v4DJy2cVh39JCYKG7Z/f0qKsdKdMAVxAxWAmJHnwwteMENKEgswlgzAKYmrlHVOwNs/7+dkenIbNO
+ Pjgd0X5v4xbBM7MlV15ljm8dKY7Vm7fdw/r597A1eeyBqf4RcwMDjNPDVRIZpYpFlPAQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,37 +31,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KAfLrzuTcBA/cgTB1QzmsE3F7asDmea2BZTVVcOLx44=; b=VQqrqqnIFnQrj5nrJiIrfjUCpZ
- A6lpnpWbpVp+CQQdVGuTNn1lXvhFQm3bOXzUXHl9gP+fNnfyiCUPU73PqN7W+ndIxfUel+0Y8Geaq
- QiOuzCVTHcR3egtJonKRWvDnKI8Rx2PrF3g3osGieQ5FUDJtnc9lSm011DMnC8IrSPZ8=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=1Tm7qLFJpMIaoF/y2FtCT5jDdjOozfLC0kR1KO8xRms=; b=ImR2+2BVEX6hh5LjjKwNCSibZK
+ xdagYL6Jvbuml73YdtrU6IyM7OIFJ9sv7FkBhC6iH7ML588vdlIyRLZcdyqPSRXFNG9/e0iRv2bwU
+ rEnNBUUxRpYQ4kYMlNLUtmH1pbfcVg4eur3g0Cmxd+rYD9ZPNxG8JKLzX6EzySOoSolU=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rnqr6-0007Ve-Mf for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 23 Mar 2024 02:11:34 +0000
+ id 1rnreF-0004fR-Co for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 23 Mar 2024 03:02:24 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4A391614D0;
- Sat, 23 Mar 2024 02:11:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF7D1C433C7;
- Sat, 23 Mar 2024 02:11:25 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id A4D55CE18E6;
+ Sat, 23 Mar 2024 03:02:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5955C433F1;
+ Sat, 23 Mar 2024 03:02:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711159887;
- bh=AZBuJoYGPORqk3ClXZRSdCW5KtfizlTcBSYe7IFEB1I=;
+ s=k20201202; t=1711162926;
+ bh=5GIJqxzxojFxdQ6uIIWjC1JDm5Dr90WPqPXlxSOPtyM=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=WfaNECkTCDZL3Jf6XPGJLufCwt8BdrBIMGjIGmAxMVEZY0no25EfwG++MMM6XCMcJ
- fecGmXOc+pLwIwD492yWTjFZDSVVrX9uHYDW4PPgEz9uhMGySeDy9wHP3zWSb0+0u0
- /L/zcnOS4hEnsXKwlrcksXaGIJrq7cAUEhnfeum+Nt5duowwqg7USk/5NDzZAIwJ4N
- ipGaU5S+0ZIpANgK9jsy2PFka60xEx4vIaCh3FV0nohUzwjzfE67AOONqbnPwjih2B
- 11SAuSnuOh9L5kJPaRREKjrM0VPlwBYUzIMo8cJdklw3dwRsNbKZvlc/cfjCdnGW56
- tQ0LwxqgU6X4g==
-Message-ID: <89414a3a-5d1a-45d3-a00b-199fa3d3ca78@kernel.org>
-Date: Sat, 23 Mar 2024 10:11:26 +0800
+ b=uWLDtJig6t44CSErmiQQkXOyHKs95ufce5/43FubolkHCsdkBYcST5Qcs6T7TtJez
+ xtdtaLI4R/16MI1KQcvxZ4XF7gXKLO2b4VqPNFuPBjrOwEIcnfJOyErcjz+ypXApdz
+ X+jlvqY/V4b4jh73X7vJPLc/AcnoWZldZygvSJMO7ckF5pTWg7qiObA1DsFMMlOkli
+ YbaDlIvwK16FJ5TYZwHaf6rMi+6SUJa8GUirD8eklv8qYE2kdcE02Y54JQE9iLMPlw
+ 7g1jKBVEeIYOLNADr5eaBh52FBj1OqVShYF9YfRCxKZIXVdNXUSLdR2RNDXSa2Ucru
+ UOzDh/Z6IE8qw==
+Message-ID: <fa4686b5-5197-4130-bfa7-215f15bafe35@kernel.org>
+Date: Sat, 23 Mar 2024 11:02:04 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+To: Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
+References: <1711087390-23645-1-git-send-email-zhiguo.niu@unisoc.com>
 Content-Language: en-US
-To: Yeongjin Gil <youngjin.gil@samsung.com>, jaegeuk@kernel.org
-References: <CGME20240322041642epcas1p45a26c5b2bde5f8b006c900c235b14e01@epcas1p4.samsung.com>
- <20240322041639.23144-1-youngjin.gil@samsung.com>
 From: Chao Yu <chao@kernel.org>
 Autocrypt: addr=chao@kernel.org; keydata=
  xsFNBFYs6bUBEADJuxYGZRMvAEySns+DKVtVQRKDYcHlmj+s9is35mtlhrLyjm35FWJY099R
@@ -105,35 +104,36 @@ Autocrypt: addr=chao@kernel.org; keydata=
  92Qh98hAj3cMFKtEVbLKJvrc2AO+mQlS7zl1qWblEhpZnXi05S1AoT0gDW2lwe54VfT3ySon
  8Klpbp5W4eEoY21tLwuNzgUMxmycfM4GaJWNCncKuMT4qGVQO9SPFs0vgUrdBUC5Pn5ZJ46X
  mZA0DUz0S8BJtYGI0DUC/jAKhIgy1vAx39y7sAshwu2VILa71tXJ
-In-Reply-To: <20240322041639.23144-1-youngjin.gil@samsung.com>
-X-Spam-Score: -5.4 (-----)
+In-Reply-To: <1711087390-23645-1-git-send-email-zhiguo.niu@unisoc.com>
+X-Spam-Score: -2.7 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/3/22 12:16, Yeongjin Gil wrote: > If f2fs_evict_inode
- is called between freeze_super and thaw_super, the > s_writer rwsem count
- may become negative, resulting in hang. > > CPU1 CPU2 > > f2fs_r [...] 
- Content analysis details:   (-5.4 points, 6.0 required)
+ Content preview:  On 2024/3/22 14:03, Zhiguo Niu wrote: > A length that exceeds
+ the real size of the inode may be > specified from user,
+ although these out-of-range
+ areas > are not mapped, but they still need to be che [...] 
+ Content analysis details:   (-2.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rnqr6-0007Ve-Mf
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Prevent s_writer rw_sem count mismatch
- in f2fs_evict_inode
+X-Headers-End: 1rnreF-0004fR-Co
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to adjust appropirate defragment
+ pg_end
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -145,36 +145,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sungjong Seo <sj1557.seo@samsung.com>, linux-kernel@vger.kernel.org,
+Cc: hongyu.jin@unisoc.com, ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/3/22 12:16, Yeongjin Gil wrote:
-> If f2fs_evict_inode is called between freeze_super and thaw_super, the
-> s_writer rwsem count may become negative, resulting in hang.
+On 2024/3/22 14:03, Zhiguo Niu wrote:
+> A length that exceeds the real size of the inode may be
+> specified from user, although these out-of-range areas
+> are not mapped, but they still need to be check in
+> while loop, which is unnecessary.
 > 
-> CPU1 CPU2
+> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+> ---
+>   fs/f2fs/file.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
 > 
-> f2fs_resize_fs()           f2fs_evict_inode()
->    f2fs_freeze
->      set SBI_IS_FREEZING
->                               skip sb_start_intwrite
->    f2fs_unfreeze
->      clear SBI_IS_FREEZING
->                               sb_end_intwrite
-> 
-> To solve this problem, the call to sb_end_write is determined by whether
-> sb_start_intwrite is called, rather than the current freezing status.
-> 
-> Reviewed-by: Sungjong Seo <sj1557.seo@samsung.com>
-> Reviewed-by: Sunmin Jeong <s_min.jeong@samsung.com>
-> Signed-off-by: Yeongjin Gil <youngjin.gil@samsung.com>
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 128e53d..0e7eac6 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -2609,7 +2609,9 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+>   	int err;
+>   
+>   	pg_start = range->start >> PAGE_SHIFT;
+> -	pg_end = (range->start + range->len) >> PAGE_SHIFT;
+> +	pg_end = min_t(pgoff_t,
+> +			(range->start + range->len) >> PAGE_SHIFT,
+> +			DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE));
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+I guess we may check i_size w/ inode lock, it can avoid racing w/ append write
+or truncate.
 
 Thanks,
+
+>   
+>   	f2fs_balance_fs(sbi, true);
+>   
 
 
 _______________________________________________
