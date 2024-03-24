@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9901F887711
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 23 Mar 2024 05:27:12 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8CDF887CA3
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 24 Mar 2024 13:14:16 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rnsyG-00061A-71;
-	Sat, 23 Mar 2024 04:27:04 +0000
+	id 1roMjk-0000vs-Ko;
+	Sun, 24 Mar 2024 12:14:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rnsyE-000611-UA
+ (envelope-from <chao@kernel.org>) id 1roMji-0000vk-C7
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 23 Mar 2024 04:27:03 +0000
+ Sun, 24 Mar 2024 12:14:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fDobeJ1Q8yo+RbPEMeiHtYxH1H8ClCKf9HbBmOgnCkQ=; b=dm7/2JOyMJbogdxSGDZAYbslFl
- YnAAUvGv0u49gaLn63Nbr4m/Xp69Xt+zKXSNsIn3Bqeazq4h9DctJRYP+QKs3/uaxiuPLpgUdsZCM
- R6inXIZGAqAiXAyHWg9zrDgdLpMX5+2IZwPJj0RMCURbE0JuiO8uiVLM/wQWI5HJcVbc=;
+ bh=Er6MHTeKtHj233TmFGxvoBJZmj/noUnN9XZp1i2xBII=; b=ILa0wsf+bcQI6mg/MWzs0HwYuJ
+ 80N9yJdtYGY8kPGfYCQkzUV83Z0HvYuBshSizh6Ovi6vWKa6nUYDdwpRSyGtIrQDJBkA4M2zIzyOm
+ p9VecfAxsA5AE7LeLrtsBWpP1z4hFkcdpNXrT2FZ2zcvBwjtuQ+oRFfrHrtajL33Gsug=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,37 +31,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=fDobeJ1Q8yo+RbPEMeiHtYxH1H8ClCKf9HbBmOgnCkQ=; b=cqP5WHghAbRZsuVWYENh1wYpKW
- vCNNODD5FvC436MFrjCQ8AOWkkVnMDkgNE3q4x5P98mz94BJv50iu2FHTk+B/oq+0lJjctreBrhBr
- BxhLv8dWnPI49nqEVD5ISpjsT5NJ6fYPs09V5bvVC25mLHJtBE7FEtL1UYsqrGw82fq8=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=Er6MHTeKtHj233TmFGxvoBJZmj/noUnN9XZp1i2xBII=; b=ic9+PNIG93s+4KYkRzQ6BBtpjw
+ tVxl2EK+hI/0onZxnB9uvKDn0weNHSS4gpEBFVZC8L9pBHYdrIwy4URpViQunoNdkgh83pXPFfYDK
+ ri8F1TKYfga8hCE4e4ZPrVfpc6uA1kqxt7Y0UTVOhgkS7yyL8aovJipKYWVUPLJRjrEM=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rnsyA-0008D2-QP for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 23 Mar 2024 04:27:03 +0000
+ id 1roMjg-0002zy-Tw for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 24 Mar 2024 12:14:02 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6D3EE60277;
- Sat, 23 Mar 2024 04:26:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E3DB7C433F1;
- Sat, 23 Mar 2024 04:26:46 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id D5F05CE0A54;
+ Sun, 24 Mar 2024 12:13:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C0C82C433F1;
+ Sun, 24 Mar 2024 12:13:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711168007;
- bh=yK8dDTZSWtZlDKKXpzS7heTkO7u+N3dxFz037MPPjsU=;
+ s=k20201202; t=1711282433;
+ bh=j0tdVAvKCmjLmpL5K4bMh/Z7e2Vn9xGCnyoFaVM+/tk=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=SLle9KSsmR+UuzL9V1wpIGnLAEh6nUthenpr4LTm++VcCDQ3VPOL/8KE97NgOEaxp
- k/BF1+XW4zUT4nt+M3vneuwQjuAMGdQPxUanXr+jYRPTrdE9iSgcnn6rHb3ug5MvUv
- nPuOpBVlMzOgfcCpThNznSTTfKiTozyX5AgF664SRCPs3Qz/pTbHwUtZsQnMJQXorn
- 1nwovNsFO4RPZkcv8ImDu6ALT4+VN/fndWa7JyfF7ogns+q27NVLMSgxRJqb2/R+kC
- jjQUB2mxBUKQtuxVlcAaMNGZ1nVNP5GZCskD1ftXaaZyFV/MKBEuUvH8x1ewioaSkk
- oCc5CCilLFTxw==
-Message-ID: <c1fd6c09-0083-439b-a81d-0d2f39cb10d4@kernel.org>
-Date: Sat, 23 Mar 2024 12:26:47 +0800
+ b=WlazkfrDr3ZR417qjKbKMg7dtYS6LU/jgKc2e3Vd3eOv5NKe47/PSE+Plnerg8CzC
+ 7SSBJYAFJOoaxSaOibaKsQo4Zyn/oLqN1kUc5WIpghu1EMxfRUhHID+uO1Uy+zP0k0
+ VAGz1V+mODn5iLjYFRksBe5PuJRwJ7DwaOzus4DTlW7uUzfNn/urf2t1ez17sI8ZyQ
+ NXkZzu9puqjPUJZXPOgghrHw3P4wR9gmfkr0J5DQ18/vsbT8yH+h7gpy7o+CIe6vfB
+ grKYehpregRQVYPu3LxhSWyOZv13CxGiqMyP/ECAIkvUx/UWOm4RxVSzk/PFyGhB4I
+ Ji75gqaVcOCTA==
+Message-ID: <cd11bff9-46cc-4148-9dcf-4087e1621985@kernel.org>
+Date: Sun, 24 Mar 2024 20:13:50 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Daeho Jeong <daeho43@gmail.com>
-References: <20240319212316.4193790-1-daeho43@gmail.com>
- <712f380c-68ef-4743-bd9b-7342e838ced7@kernel.org>
- <CACOAw_yAWGbx2Bx2or1OyVUUw6HSgTd=fo3e151d1JHU+Op5qQ@mail.gmail.com>
+To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+References: <CAHj4cs-kfojYC9i0G73PRkYzcxCTex=-vugRFeP40g_URGvnfQ@mail.gmail.com>
+ <esesb6dg5omj7e5sdnltnapuuzgmbdfmezcz6owsx2waqayc5q@36yhz4dmrxh6>
+ <CAHj4cs874FivTdmw=VMJwTzzLFZWb4OKqvNGRN0R0O+Oiv4aYA@mail.gmail.com>
+ <CAHj4cs_eOSafp0=cbwjNPR6X2342GF_cnUTcXf6RjrMnoOHSmQ@mail.gmail.com>
+ <msec3wnqtvlsnfsw34uyrircyco3j3y7yb4gj75ofz5gnn57mg@qzcq5eumjwy5>
+ <CAHj4cs-DC7QQH1W3KSzXS8ERMPW-6XQ9-w_Mzr1zEGF7ZZ=K3w@mail.gmail.com>
+ <d6vi6aq44c4a7ekhck6zxxy4woa5q7v5bnvn5qmad7nqk7egms@ptc72tum4bks>
+ <gngdj77k4picagsfdtiaa7gpgnup6fsgwzsltx6milmhegmjff@iax2n4wvrqye>
+ <f4f1cfac-8520-47a1-ad18-b9922aa0545d@kernel.org>
+ <jpgro32y5r3mpyh24hoqnwkbcg67twbmcxeicoa5qt723u7ehk@4imddarhtt74>
 Content-Language: en-US
 From: Chao Yu <chao@kernel.org>
 Autocrypt: addr=chao@kernel.org; keydata=
@@ -106,38 +113,35 @@ Autocrypt: addr=chao@kernel.org; keydata=
  92Qh98hAj3cMFKtEVbLKJvrc2AO+mQlS7zl1qWblEhpZnXi05S1AoT0gDW2lwe54VfT3ySon
  8Klpbp5W4eEoY21tLwuNzgUMxmycfM4GaJWNCncKuMT4qGVQO9SPFs0vgUrdBUC5Pn5ZJ46X
  mZA0DUz0S8BJtYGI0DUC/jAKhIgy1vAx39y7sAshwu2VILa71tXJ
-In-Reply-To: <CACOAw_yAWGbx2Bx2or1OyVUUw6HSgTd=fo3e151d1JHU+Op5qQ@mail.gmail.com>
-X-Spam-Score: -5.4 (-----)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+In-Reply-To: <jpgro32y5r3mpyh24hoqnwkbcg67twbmcxeicoa5qt723u7ehk@4imddarhtt74>
+X-Spam-Score: -2.6 (--)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 2024/3/21 1:42, Daeho Jeong wrote: > On Wed, Mar 20, 2024
-    at 2:38 AM Chao Yu <chao@kernel.org> wrote: >> >> On 2024/3/20 5:23, Daeho
-    Jeong wrote: >>> From: Daeho Jeong <daehojeong@google.com> >>> [...] 
- 
- Content analysis details:   (-5.4 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On 2024/3/19 19:13, Shinichiro Kawasaki wrote: > On Mar 19, 
+ 2024 / 10:22, Chao Yu wrote: >> On 2024/3/18 13:47, Shinichiro Kawasaki via
+ Linux-f2fs-devel wrote: >>> I confirmed that the trigger commit [...] 
+ Content analysis details:   (-2.6 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rnsyA-0008D2-QP
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: prevent writing without fallocate()
- for pinned files
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1roMjg-0002zy-Tw
+Subject: Re: [f2fs-dev] [bug report]WARNING: CPU: 22 PID: 44011 at
+ fs/iomap/iter.c:51 iomap_iter+0x32b observed with blktests zbd/010
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -149,99 +153,223 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: linux-block <linux-block@vger.kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Yi Zhang <yi.zhang@redhat.com>, Bart Van Assche <bvanassche@acm.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyNC8zLzIxIDE6NDIsIERhZWhvIEplb25nIHdyb3RlOgo+IE9uIFdlZCwgTWFyIDIwLCAy
-MDI0IGF0IDI6MzjigK9BTSBDaGFvIFl1IDxjaGFvQGtlcm5lbC5vcmc+IHdyb3RlOgo+Pgo+PiBP
-biAyMDI0LzMvMjAgNToyMywgRGFlaG8gSmVvbmcgd3JvdGU6Cj4+PiBGcm9tOiBEYWVobyBKZW9u
-ZyA8ZGFlaG9qZW9uZ0Bnb29nbGUuY29tPgo+Pj4KPj4+IEluIGEgY2FzZSB3cml0aW5nIHdpdGhv
-dXQgZmFsbG9jYXRlKCksIHdlIGNhbid0IGd1YXJhbnRlZSBpdCdzIGFsbG9jYXRlZAo+Pj4gaW4g
-dGhlIGNvbnZlbnRpb25hbCBhcmVhIGZvciB6b25lZCBzdHJvYWdlLgo+Pj4KPj4+IFNpZ25lZC1v
-ZmYtYnk6IERhZWhvIEplb25nIDxkYWVob2plb25nQGdvb2dsZS5jb20+Cj4+PiAtLS0KPj4+IHYy
-OiBjb3ZlcmVkIHRoZSBkaXJlY3QgaW8gY2FzZQo+Pj4gdjM6IGNvdmVyZWQgdGhlIG1rd3JpdGUg
-Y2FzZQo+Pj4gLS0tCj4+PiAgICBmcy9mMmZzL2RhdGEuYyB8IDE0ICsrKysrKysrKysrKy0tCj4+
-PiAgICBmcy9mMmZzL2ZpbGUuYyB8IDE2ICsrKysrKysrLS0tLS0tLS0KPj4+ICAgIDIgZmlsZXMg
-Y2hhbmdlZCwgMjAgaW5zZXJ0aW9ucygrKSwgMTAgZGVsZXRpb25zKC0pCj4+Pgo+Pj4gZGlmZiAt
-LWdpdCBhL2ZzL2YyZnMvZGF0YS5jIGIvZnMvZjJmcy9kYXRhLmMKPj4+IGluZGV4IGMyMWI5MmYx
-ODQ2My4uZDNlNWFiMjczNmE2IDEwMDY0NAo+Pj4gLS0tIGEvZnMvZjJmcy9kYXRhLmMKPj4+ICsr
-KyBiL2ZzL2YyZnMvZGF0YS5jCj4+PiBAQCAtMTU4NCw4ICsxNTg0LDExIEBAIGludCBmMmZzX21h
-cF9ibG9ja3Moc3RydWN0IGlub2RlICppbm9kZSwgc3RydWN0IGYyZnNfbWFwX2Jsb2NrcyAqbWFw
-LCBpbnQgZmxhZykKPj4+Cj4+PiAgICAgICAgLyogdXNlIG91dC1wbGFjZS11cGRhdGUgZm9yIGRp
-cmVjdCBJTyB1bmRlciBMRlMgbW9kZSAqLwo+Pj4gICAgICAgIGlmIChtYXAtPm1fbWF5X2NyZWF0
-ZSAmJgo+Pj4gLSAgICAgICAgIChpc19ob2xlIHx8IChmMmZzX2xmc19tb2RlKHNiaSkgJiYgZmxh
-ZyA9PSBGMkZTX0dFVF9CTE9DS19ESU8pKSkgewo+Pj4gLSAgICAgICAgICAgICBpZiAodW5saWtl
-bHkoZjJmc19jcF9lcnJvcihzYmkpKSkgewo+Pj4gKyAgICAgICAgIChpc19ob2xlIHx8IChmMmZz
-X2xmc19tb2RlKHNiaSkgJiYgZmxhZyA9PSBGMkZTX0dFVF9CTE9DS19ESU8gJiYKPj4+ICsgICAg
-ICAgICAgICAgICAgICAgICAgIWYyZnNfaXNfcGlubmVkX2ZpbGUoaW5vZGUpKSkpIHsKPj4+ICsg
-ICAgICAgICAgICAgaWYgKHVubGlrZWx5KGYyZnNfY3BfZXJyb3Ioc2JpKSkgfHwKPj4+ICsgICAg
-ICAgICAgICAgICAgIChmMmZzX2lzX3Bpbm5lZF9maWxlKGlub2RlKSAmJiBpc19ob2xlICYmCj4+
-PiArICAgICAgICAgICAgICAgICAgZmxhZyAhPSBGMkZTX0dFVF9CTE9DS19QUkVfRElPKSkgewo+
-Pj4gICAgICAgICAgICAgICAgICAgICAgICBlcnIgPSAtRUlPOwo+Pj4gICAgICAgICAgICAgICAg
-ICAgICAgICBnb3RvIHN5bmNfb3V0Owo+Pj4gICAgICAgICAgICAgICAgfQo+Pj4gQEAgLTMzNzgs
-NiArMzM4MSw4IEBAIHN0YXRpYyBpbnQgcHJlcGFyZV93cml0ZV9iZWdpbihzdHJ1Y3QgZjJmc19z
-Yl9pbmZvICpzYmksCj4+PiAgICAgICAgICAgICAgICBmMmZzX21hcF9sb2NrKHNiaSwgZmxhZyk7
-Cj4+PiAgICAgICAgICAgICAgICBsb2NrZWQgPSB0cnVlOwo+Pj4gICAgICAgIH0gZWxzZSBpZiAo
-KHBvcyAmIFBBR0VfTUFTSykgPj0gaV9zaXplX3JlYWQoaW5vZGUpKSB7Cj4+PiArICAgICAgICAg
-ICAgIGlmIChmMmZzX2lzX3Bpbm5lZF9maWxlKGlub2RlKSkKPj4+ICsgICAgICAgICAgICAgICAg
-ICAgICByZXR1cm4gLUVJTzsKPj4+ICAgICAgICAgICAgICAgIGYyZnNfbWFwX2xvY2soc2JpLCBm
-bGFnKTsKPj4+ICAgICAgICAgICAgICAgIGxvY2tlZCA9IHRydWU7Cj4+PiAgICAgICAgfQo+Pj4g
-QEAgLTM0MDcsNiArMzQxMiwxMSBAQCBzdGF0aWMgaW50IHByZXBhcmVfd3JpdGVfYmVnaW4oc3Ry
-dWN0IGYyZnNfc2JfaW5mbyAqc2JpLAo+Pj4KPj4+ICAgICAgICBpZiAoIWYyZnNfbG9va3VwX3Jl
-YWRfZXh0ZW50X2NhY2hlX2Jsb2NrKGlub2RlLCBpbmRleCwKPj4+ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZkbi5kYXRhX2Jsa2FkZHIpKSB7Cj4+PiAr
-ICAgICAgICAgICAgIGlmIChmMmZzX2lzX3Bpbm5lZF9maWxlKGlub2RlKSkgewo+Pj4gKyAgICAg
-ICAgICAgICAgICAgICAgIGVyciA9IC1FSU87Cj4+PiArICAgICAgICAgICAgICAgICAgICAgZ290
-byBvdXQ7Cj4+PiArICAgICAgICAgICAgIH0KPj4+ICsKPj4+ICAgICAgICAgICAgICAgIGlmIChs
-b2NrZWQpIHsKPj4+ICAgICAgICAgICAgICAgICAgICAgICAgZXJyID0gZjJmc19yZXNlcnZlX2Js
-b2NrKCZkbiwgaW5kZXgpOwo+Pj4gICAgICAgICAgICAgICAgICAgICAgICBnb3RvIG91dDsKPj4+
-IGRpZmYgLS1naXQgYS9mcy9mMmZzL2ZpbGUuYyBiL2ZzL2YyZnMvZmlsZS5jCj4+PiBpbmRleCA4
-MjI3N2U5NWM4OGYuLjRkYjNiMjFjODA0YiAxMDA2NDQKPj4+IC0tLSBhL2ZzL2YyZnMvZmlsZS5j
-Cj4+PiArKysgYi9mcy9mMmZzL2ZpbGUuYwo+Pj4gQEAgLTU3LDcgKzU3LDcgQEAgc3RhdGljIHZt
-X2ZhdWx0X3QgZjJmc192bV9wYWdlX21rd3JpdGUoc3RydWN0IHZtX2ZhdWx0ICp2bWYpCj4+PiAg
-ICAgICAgc3RydWN0IGlub2RlICppbm9kZSA9IGZpbGVfaW5vZGUodm1mLT52bWEtPnZtX2ZpbGUp
-Owo+Pj4gICAgICAgIHN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaSA9IEYyRlNfSV9TQihpbm9kZSk7
-Cj4+PiAgICAgICAgc3RydWN0IGRub2RlX29mX2RhdGEgZG47Cj4+PiAtICAgICBib29sIG5lZWRf
-YWxsb2MgPSB0cnVlOwo+Pj4gKyAgICAgYm9vbCBuZWVkX2FsbG9jID0gIWYyZnNfaXNfcGlubmVk
-X2ZpbGUoaW5vZGUpOwo+Pgo+PiBXaWxsIHRoaXMgY2hlY2sgcmFjZXMgdy8gcGluZmlsZSBnZXR8
-c2V0Pwo+IAo+IERvIHlvdSBtZWFuICJzZXQvY2xlYXIiIGNhc2U/IEkgYmVsaWV2ZSAic2V0IiBj
-YXNlIGlzIG9rYXksIHNpbmNlIHdlCgpZdXAsCgo+IGNhbid0IHNldCBpZiB0aGUgaW5vZGUgYWxy
-ZWFkeSBoYXMgYSBkYXRhIGJsb2NrLiBGb3IgImNsZWFyIiBjYXNlLCBJCgpIb3dldmVyLCB3ZSBj
-YW4gc2V0IHBpbmZpbGUgb24gd3JpdHRlbiBpbm9kZSBpbiByZWd1bGFyIGJsb2NrIGRldmljZToK
-CglpZiAoZjJmc19zYl9oYXNfYmxrem9uZWQoc2JpKSAmJiBGMkZTX0hBU19CTE9DS1MoaW5vZGUp
-KSB7CgkJcmV0ID0gLUVGQklHOwoJCWdvdG8gb3V0OwoJfQoKU2hvdWxkIHdlIGFkZCB0aGUgbG9n
-aWMgb25seSBpZiBibGt6b25lZCBmZXR1cmUgaXMgZW5hYmxlZD8KCj4gYmVsaWV2ZSBta3dyaXRl
-IGZhaWx1cmUgaXMgb2theSBpbiByYWN5IGNvbmRpdGlvbnMgY2F1c2VkIGJ5IGNsZWFyaW5nCj4g
-dGhlIHBpbiBmbGFnLiBXaGF0IGRvIHlvdSB0aGluaz8KCk9yIHdlIGNhbiB1c2UgZmlsZW1hcF9p
-bnZhbGlkYXRlX2xvY2soKSBpbiBmMmZzX2lvY19zZXRfcGluX2ZpbGUoKSB0bwphdm9pZCB0aGUg
-cmFjZSBjb25kaXRpb24/CgpUaGFua3MsCgo+IAo+Pgo+PiBUaGFua3MsCj4+Cj4+PiAgICAgICAg
-aW50IGVyciA9IDA7Cj4+PiAgICAgICAgdm1fZmF1bHRfdCByZXQ7Cj4+Pgo+Pj4gQEAgLTExNCwx
-OSArMTE0LDE1IEBAIHN0YXRpYyB2bV9mYXVsdF90IGYyZnNfdm1fcGFnZV9ta3dyaXRlKHN0cnVj
-dCB2bV9mYXVsdCAqdm1mKQo+Pj4gICAgICAgICAgICAgICAgZ290byBvdXRfc2VtOwo+Pj4gICAg
-ICAgIH0KPj4+Cj4+PiArICAgICBzZXRfbmV3X2Rub2RlKCZkbiwgaW5vZGUsIE5VTEwsIE5VTEws
-IDApOwo+Pj4gICAgICAgIGlmIChuZWVkX2FsbG9jKSB7Cj4+PiAgICAgICAgICAgICAgICAvKiBi
-bG9jayBhbGxvY2F0aW9uICovCj4+PiAtICAgICAgICAgICAgIHNldF9uZXdfZG5vZGUoJmRuLCBp
-bm9kZSwgTlVMTCwgTlVMTCwgMCk7Cj4+PiAgICAgICAgICAgICAgICBlcnIgPSBmMmZzX2dldF9i
-bG9ja19sb2NrZWQoJmRuLCBwYWdlLT5pbmRleCk7Cj4+PiAtICAgICB9Cj4+PiAtCj4+PiAtI2lm
-ZGVmIENPTkZJR19GMkZTX0ZTX0NPTVBSRVNTSU9OCj4+PiAtICAgICBpZiAoIW5lZWRfYWxsb2Mp
-IHsKPj4+IC0gICAgICAgICAgICAgc2V0X25ld19kbm9kZSgmZG4sIGlub2RlLCBOVUxMLCBOVUxM
-LCAwKTsKPj4+ICsgICAgIH0gZWxzZSB7Cj4+PiAgICAgICAgICAgICAgICBlcnIgPSBmMmZzX2dl
-dF9kbm9kZV9vZl9kYXRhKCZkbiwgcGFnZS0+aW5kZXgsIExPT0tVUF9OT0RFKTsKPj4+ICAgICAg
-ICAgICAgICAgIGYyZnNfcHV0X2Rub2RlKCZkbik7Cj4+PiAgICAgICAgfQo+Pj4gLSNlbmRpZgo+
-Pj4gKwo+Pj4gICAgICAgIGlmIChlcnIpIHsKPj4+ICAgICAgICAgICAgICAgIHVubG9ja19wYWdl
-KHBhZ2UpOwo+Pj4gICAgICAgICAgICAgICAgZ290byBvdXRfc2VtOwo+Pj4gQEAgLTQ2MTEsNiAr
-NDYwNywxMCBAQCBzdGF0aWMgaW50IGYyZnNfcHJlYWxsb2NhdGVfYmxvY2tzKHN0cnVjdCBraW9j
-YiAqaW9jYiwgc3RydWN0IGlvdl9pdGVyICppdGVyLAo+Pj4gICAgICAgICAgICAgICAgICAgICAg
-ICByZXR1cm4gcmV0Owo+Pj4gICAgICAgIH0KPj4+Cj4+PiArICAgICAvKiBGb3IgcGlubmVkIGZp
-bGVzLCBpdCBzaG91bGQgYmUgZmFsbG9jYXRlKCktZWQgaW4gYWR2YW5jZS4gKi8KPj4+ICsgICAg
-IGlmIChmMmZzX2lzX3Bpbm5lZF9maWxlKGlub2RlKSkKPj4+ICsgICAgICAgICAgICAgcmV0dXJu
-IDA7Cj4+PiArCj4+PiAgICAgICAgLyogRG8gbm90IHByZWFsbG9jYXRlIGJsb2NrcyB0aGF0IHdp
-bGwgYmUgd3JpdHRlbiBwYXJ0aWFsbHkgaW4gNEtCLiAqLwo+Pj4gICAgICAgIG1hcC5tX2xibGsg
-PSBGMkZTX0JMS19BTElHTihwb3MpOwo+Pj4gICAgICAgIG1hcC5tX2xlbiA9IEYyRlNfQllURVNf
-VE9fQkxLKHBvcyArIGNvdW50KTsKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRl
-dmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9s
-aXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+On 2024/3/19 19:13, Shinichiro Kawasaki wrote:
+> On Mar 19, 2024 / 10:22, Chao Yu wrote:
+>> On 2024/3/18 13:47, Shinichiro Kawasaki via Linux-f2fs-devel wrote:
+>>> I confirmed that the trigger commit is dbf8e63f48af as Yi reported. I took a
+>>> look in the commit, but it looks fine to me. So I thought the cause is not
+>>> in the commit diff.
+>>>
+>>> I found the WARN is printed when the f2fs is set up with multiple devices,
+>>> and read requests are mapped to the very first block of the second device in the
+>>> direct read path. In this case, f2fs_map_blocks() and f2fs_map_blocks_cached()
+>>> modify map->m_pblk as the physical block address from each block device. It
+>>> becomes zero when it is mapped to the first block of the device. However,
+>>> f2fs_iomap_begin() assumes that map->m_pblk is the physical block address of the
+>>> whole f2fs, across the all block devices. It compares map->m_pblk against
+>>> NULL_ADDR == 0, then go into the unexpected branch and sets the invalid
+>>> iomap->length. The WARN catches the invalid iomap->length.
+>>>
+>>> This WARN is printed even for non-zoned block devices, by following steps.
+>>>
+>>>    - Create two (non-zoned) null_blk devices memory backed with 128MB size each:
+>>>      nullb0 and nullb1.
+>>>    # mkfs.f2fs /dev/nullb0 -c /dev/nullb1
+>>>    # mount -t f2fs /dev/nullb0 "${mount_dir}"
+>>>    # dd if=/dev/zero of="${mount_dir}/test.dat" bs=1M count=192
+>>>    # dd if="${mount_dir}/test.dat" of=/dev/null bs=1M count=192 iflag=direct
+>>>
+>>> I created a fix candidate patch [1]. It modifies f2fs_iomap_begin() to handle
+>>> map->m_pblk as the physical block address from each device start, not the
+>>> address of whole f2fs. I confirmed it avoids the WARN.
+>>>
+>>> But I'm not so sure if the fix is good enough. map->m_pblk has dual meanings.
+>>> Sometimes it holds the physical block address of each device, and sometimes
+>>> the address of the whole f2fs. I'm not sure what is the condition for
+>>> map->m_pblk to have which meaning. I guess F2FS_GET_BLOCK_DIO flag is the
+>>> condition, but f2fs_map_blocks_cached() does not ensure it.
+>>>
+>>> Also, I noticed that map->m_pblk is referred to in other functions below, and
+>>> not sure if they need the similar change as I did for f2fs_iomap_begin().
+>>>
+>>>     f2fs_fiemap()
+>>>     f2fs_read_single_page()
+>>>     f2fs_bmap()
+>>>     check_swap_activate()
+>>>
+>>> I would like to hear advices from f2fs experts for the fix.
+>>>
+>>>
+>>> [1]
+>>>
+>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+>>> index 26e317696b33..5232223a69e5 100644
+>>> --- a/fs/f2fs/data.c
+>>> +++ b/fs/f2fs/data.c
+>>> @@ -1569,6 +1569,7 @@ static bool f2fs_map_blocks_cached(struct inode *inode,
+>>>    		int bidx = f2fs_target_device_index(sbi, map->m_pblk);
+>>>    		struct f2fs_dev_info *dev = &sbi->devs[bidx];
+>>> +		map->m_multidev_dio = true;
+>>>    		map->m_bdev = dev->bdev;
+>>>    		map->m_pblk -= dev->start_blk;
+>>>    		map->m_len = min(map->m_len, dev->end_blk + 1 - map->m_pblk);
+>>> @@ -4211,9 +4212,11 @@ static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+>>>    			    unsigned int flags, struct iomap *iomap,
+>>>    			    struct iomap *srcmap)
+>>>    {
+>>> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>>>    	struct f2fs_map_blocks map = {};
+>>>    	pgoff_t next_pgofs = 0;
+>>> -	int err;
+>>> +	block_t pblk;
+>>> +	int err, i;
+>>>    	map.m_lblk = bytes_to_blks(inode, offset);
+>>>    	map.m_len = bytes_to_blks(inode, offset + length - 1) - map.m_lblk + 1;
+>>> @@ -4239,12 +4242,17 @@ static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+>>>    	 * We should never see delalloc or compressed extents here based on
+>>>    	 * prior flushing and checks.
+>>>    	 */
+>>> -	if (WARN_ON_ONCE(map.m_pblk == NEW_ADDR))
+>>> +	pblk = map.m_pblk;
+>>> +	if (map.m_multidev_dio && map.m_flags & F2FS_MAP_MAPPED)
+>>> +		for (i = 0; i < sbi->s_ndevs; i++)
+>>> +			if (FDEV(i).bdev == map.m_bdev)
+>>> +				pblk += FDEV(i).start_blk;
+>>> +	if (WARN_ON_ONCE(pblk == NEW_ADDR))
+>>>    		return -EINVAL;
+>>> -	if (WARN_ON_ONCE(map.m_pblk == COMPRESS_ADDR))
+>>> +	if (WARN_ON_ONCE(pblk == COMPRESS_ADDR))
+>>>    		return -EINVAL;
+>>
+>> Shoudn't we check NEW_ADDR and COMPRESS_ADDR before multiple-device
+>> block address conversion?
+> 
+> As far as I understand, NEW_ADDR and COMPRESS_ADDR in map.m_pblk can be
+> target of "map->m_pblk -= FDEV(bidx).start_blk;" in f2fs_map_blocks(),
+> so I guessed that the address conversion should come first.
+> 
+>>
+>>> -	if (map.m_pblk != NULL_ADDR) {
+>>> +	if (pblk != NULL_ADDR) {
+>>
+>> How to distinguish NULL_ADDR and valid blkaddr 0? I guess it should
+>> check F2FS_MAP_MAPPED flag first?
+> 
+> I guessed that physical block address for the whole f2fs (pblk) can not be 0, so
+> the NULL_ADDR can have zero value. As for the physical block address of each
+> device (map->m_pblk) can be 0. But this is still my *guess*, and I'm not sure.
+> 
+> 
+> The comments from you and Daeho made me rethink. It looks problematic for me
+> that map->m_pblk has two meanings as I had described: "1) physical block address
+> from each device start", and "2) physical block address of whole f2fs". So how
+> about to make it have only one meaning "2) physical block address address of
+> whole f2fs"? I created another patch below [2]. It removes the
+> 
+>     map->m_pblk -= FDEV(bidx).start_blk;
+> 
+> lines in f2fs_map_blocks_cached() and f2fs_map_blocks() so that map->m_pblk do
+> not have the meaning 1). Instead, the subtraction is done in f2fs_iomap_begin().
+> I confirmed that this patch also avoids the WARN. I can have more confidence in
+> this patch, and I hope it is easier to review.
+> 
+> P.S. If anyone has better solution idea, feel free to provide patches. I'm
+>       willing to test them :)
+> 
+> 
+> [2]
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 26e317696b33..7404b4fbcba3 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -1569,8 +1569,8 @@ static bool f2fs_map_blocks_cached(struct inode *inode,
+>   		int bidx = f2fs_target_device_index(sbi, map->m_pblk);
+>   		struct f2fs_dev_info *dev = &sbi->devs[bidx];
+>   
+> +		map->m_multidev_dio = true;
+>   		map->m_bdev = dev->bdev;
+> -		map->m_pblk -= dev->start_blk;
+>   		map->m_len = min(map->m_len, dev->end_blk + 1 - map->m_pblk);
+>   	} else {
+>   		map->m_bdev = inode->i_sb->s_bdev;
+> @@ -1793,11 +1793,8 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
+>   
+>   		if (map->m_multidev_dio) {
+>   			block_t blk_addr = map->m_pblk;
+> -
+>   			bidx = f2fs_target_device_index(sbi, map->m_pblk);
+> -
+>   			map->m_bdev = FDEV(bidx).bdev;
+> -			map->m_pblk -= FDEV(bidx).start_blk;
+>   
+>   			if (map->m_may_create)
+>   				f2fs_update_device_state(sbi, inode->i_ino,
+> @@ -4211,9 +4208,11 @@ static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+>   			    unsigned int flags, struct iomap *iomap,
+>   			    struct iomap *srcmap)
+>   {
+> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>   	struct f2fs_map_blocks map = {};
+>   	pgoff_t next_pgofs = 0;
+> -	int err;
+> +	block_t pblk;
+> +	int err, bidx;
+>   
+>   	map.m_lblk = bytes_to_blks(inode, offset);
+>   	map.m_len = bytes_to_blks(inode, offset + length - 1) - map.m_lblk + 1;
+> @@ -4249,7 +4248,12 @@ static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+>   		iomap->type = IOMAP_MAPPED;
+>   		iomap->flags |= IOMAP_F_MERGED;
+>   		iomap->bdev = map.m_bdev;
+> -		iomap->addr = blks_to_bytes(inode, map.m_pblk);
+> +		pblk = map.m_pblk;
+> +		if (map.m_multidev_dio && map.m_flags & F2FS_MAP_MAPPED) {
+> +			bidx = f2fs_target_device_index(sbi, map.m_pblk);
+> +			pblk -= FDEV(bidx).start_blk;
+> +		}
+> +		iomap->addr = blks_to_bytes(inode, pblk);
+>   	} else {
+>   		if (flags & IOMAP_WRITE)
+>   			return -ENOTBLK;
+
+Hi Shinichiro,
+
+Can you please check below diff? IIUC, for the case: f2fs_map_blocks()
+returns zero blkaddr in non-primary device, which is a verified valid
+block address, we'd better to check m_flags & F2FS_MAP_MAPPED instead
+of map.m_pblk != NULL_ADDR to decide whether tagging IOMAP_MAPPED flag
+or not.
+
+---
+  fs/f2fs/data.c | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 6f66e3e4221a..41a56d4298c8 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -4203,7 +4203,7 @@ static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+  	if (WARN_ON_ONCE(map.m_pblk == COMPRESS_ADDR))
+  		return -EINVAL;
+
+-	if (map.m_pblk != NULL_ADDR) {
++	if (map.m_flags & F2FS_MAP_MAPPED) {
+  		iomap->length = blks_to_bytes(inode, map.m_len);
+  		iomap->type = IOMAP_MAPPED;
+  		iomap->flags |= IOMAP_F_MERGED;
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
