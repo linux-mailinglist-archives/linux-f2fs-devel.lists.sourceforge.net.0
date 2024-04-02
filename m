@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 914178958A4
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Apr 2024 17:49:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6ADA8958A7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Apr 2024 17:49:20 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rrgNs-0004o7-Ku;
-	Tue, 02 Apr 2024 15:49:13 +0000
+	id 1rrgNz-0004cC-Hf;
+	Tue, 02 Apr 2024 15:49:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <eugen.hristev@collabora.com>) id 1rrgNk-0004nF-M7
+ (envelope-from <eugen.hristev@collabora.com>) id 1rrgNs-0004bi-7J
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 02 Apr 2024 15:49:05 +0000
+ Tue, 02 Apr 2024 15:49:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Vc7fqOC7SkJfepNzo44OucZ7wbHiHZxidGx82bq3P88=; b=huGAtuCIkgA7ljreZI20fWBfn3
- nSG6UgHybPEGbcO4AlZny7+n1fKTorP4+nWmdYCrq436I1o0xYOfu9ueWLIerLygXqTZI5n2KevtE
- G7uStBUeBo7i9ruc5e+Xcid6nd7z9K5PukN6RNy49LaCA82TsqYmssvib1Vz2lkBrdho=;
+ bh=v6ftTbHgM12Ej1CbNqOgSSzmFGHNiHfAt1+ZNwLLF+c=; b=NSS3Gu9LYAdYCuy1xV2ZO0Yfge
+ Pefuwm+3G3Ju5i8x5j88k6PduH9ZgCR/eQleJQ4W5lcLwgd+rVtzpMI2Stz+PKO9qPQplUx0dcBVn
+ TN/6DYSF7WTdBllLWJAxTvGRjYNReX7Ww6/H6nh9wux5KfOrQ0taIBr4mFibaJO54MbQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,64 +31,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Vc7fqOC7SkJfepNzo44OucZ7wbHiHZxidGx82bq3P88=; b=E1qysrMPKwha3krJTLI/HZJVm6
- Tfl1x0wJsAuYwStbl1p+TFakG6Wb11jFxsPWo/y7O4uJOxGvY1aBsbOTac6AFVbwRLZ0vKJqYK187
- uXLbrqODSnnjt8GorikPKP1zxiSJ3XccJVBI0BazouPWx+FnAxTlHqFWRzGnY0YgciU0=;
+ bh=v6ftTbHgM12Ej1CbNqOgSSzmFGHNiHfAt1+ZNwLLF+c=; b=L4Tpb2Cd8dBVvN2jFLKAilH7So
+ j5Or7uJ2B1oKT1vBrGk86SE7NbvbsCqtvmxUa74Nzw8JbF4UpTsZtL7gzre/3Uzu4zvYwmDil0s2Y
+ pZyxJVv+hElVMD0S8kk1rGdirrPBkSnRYk2foIuUr2Spm+tzS9U/mgXxquTJyGzu4luE=;
 Received: from madrid.collaboradmins.com ([46.235.227.194])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rrgNk-000430-7N for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 02 Apr 2024 15:49:05 +0000
+ id 1rrgNn-00043E-9F for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 02 Apr 2024 15:49:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1712072933;
- bh=swtZ6BKu+FGmiqRjglGL90hSAB3JlB+upSuAXL/TJpA=;
+ s=mail; t=1712072934;
+ bh=aRA2g6rcldGcm0eggJ+qgCaUO+InE396o0stDobGMYQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=5Wx1CPg/UKtF2sJ6plB5rzl3lNsw8/eGYXs552hXGpBg+q19pgFt63cUSOIsdpzY6
- ukKlyhJdxX6ep5uVRvEJ/+xmtHN1ThZ6e4vV+51IE6Qh/ispMKkqAIkR3itziagQaL
- TZL+SX2Wjmnq9Mi9w2gSVUq7C+2zCvFsKtWuo0S/Wfa91tYyDMdmpITs5CI9jRs8m/
- ZGHx9tJFQKu5L4ZGJUqLpE/ihZAyLuOGv6eF7cB/pdW+7QTuGNPpuAlfbAeL+qjSK1
- XdEsX+IZiQ42yelnq61El+NY4eOCzeFtwNPLoK2ljnCf/HQUo9MY7gx9sIPkklLRCN
- vRHweAwFYhq0Q==
+ b=0HtEHEh2LR1L9DM73x3tqIb7Au5sPOcfokP5b64dXKxo5yl8RrHVlc6u5I4lW7Hjb
+ 9EL1C5E5ehXcKa81hZl4JYADNGrmAwS7m/z+Xtkf0x/u6ig8fzKhjwzuKOmrf86/UM
+ zygR/A/XXsOsOkkrJHR+cxTm9Ne9XL6W6feL9MkK2tlTzqH51j55tTmMaoxYzBWMNx
+ /i1gLsJr4ZAgbwxf4m2yDHYcINZNMcH+dCJbHV5fcDXD40MMA8mpqU9QOILo6BNfZk
+ 9yzjP5vjtSOIT7MA3lfhwtmLk6XDUyGqQURzOCfQOlLBA1c9oUBk1FSVCBWkSp8RdJ
+ 7zC9Ogq+QvkbQ==
 Received: from eugen-station.. (cola.collaboradmins.com [195.201.22.229])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: ehristev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 5ED8537820E7;
- Tue,  2 Apr 2024 15:48:52 +0000 (UTC)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 86AF837820F8;
+ Tue,  2 Apr 2024 15:48:53 +0000 (UTC)
 To: tytso@mit.edu, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org,
  jaegeuk@kernel.org, chao@kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org
-Date: Tue,  2 Apr 2024 18:48:37 +0300
-Message-Id: <20240402154842.508032-5-eugen.hristev@collabora.com>
+Date: Tue,  2 Apr 2024 18:48:38 +0300
+Message-Id: <20240402154842.508032-6-eugen.hristev@collabora.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240402154842.508032-1-eugen.hristev@collabora.com>
 References: <20240402154842.508032-1-eugen.hristev@collabora.com>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Gabriel Krisman Bertazi <krisman@collabora.com> Instead
- of reimplementing ext4_match_ci, use the new libfs helper. It also adds a
- comment explaining why fname->cf_name.name must be checked prior to the
- encryption hash optimization, because that tripped me before. 
+ Content preview:  From: Gabriel Krisman Bertazi <krisman@collabora.com> Now
+ that ci_match is part of libfs,
+ make f2fs reuse it instead of having a different
+ implementation. Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+ Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com> --- fs/f2fs/dir.c
+ | 58 ++++ 1 f [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1rrgNk-000430-7N
-Subject: [f2fs-dev] [PATCH v15 4/9] ext4: Reuse generic_ci_match for ci
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+X-Headers-End: 1rrgNn-00043E-9F
+Subject: [f2fs-dev] [PATCH v15 5/9] f2fs: Reuse generic_ci_match for ci
  comparisons
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -114,129 +116,91 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Gabriel Krisman Bertazi <krisman@collabora.com>
 
-Instead of reimplementing ext4_match_ci, use the new libfs helper.
-
-It also adds a comment explaining why fname->cf_name.name must be
-checked prior to the encryption hash optimization, because that tripped
-me before.
+Now that ci_match is part of libfs, make f2fs reuse it instead of having
+a different implementation.
 
 Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
 Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
 ---
- fs/ext4/namei.c | 91 +++++++++++++++----------------------------------
- 1 file changed, 27 insertions(+), 64 deletions(-)
+ fs/f2fs/dir.c | 58 ++++-----------------------------------------------
+ 1 file changed, 4 insertions(+), 54 deletions(-)
 
-diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
-index b96983a4c185..2d0ee232fbe7 100644
---- a/fs/ext4/namei.c
-+++ b/fs/ext4/namei.c
-@@ -1390,58 +1390,6 @@ static void dx_insert_block(struct dx_frame *frame, u32 hash, ext4_lblk_t block)
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index 3b454f355f15..88b0045d0c4f 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -185,58 +185,6 @@ static struct f2fs_dir_entry *find_in_block(struct inode *dir,
+ 	return f2fs_find_target_dentry(&d, fname, max_slots);
  }
  
- #if IS_ENABLED(CONFIG_UNICODE)
+-#if IS_ENABLED(CONFIG_UNICODE)
 -/*
 - * Test whether a case-insensitive directory entry matches the filename
-- * being searched for.  If quick is set, assume the name being looked up
-- * is already in the casefolded form.
+- * being searched for.
 - *
-- * Returns: 0 if the directory entry matches, more than 0 if it
-- * doesn't match or less than zero on error.
+- * Returns 1 for a match, 0 for no match, and -errno on an error.
 - */
--static int ext4_ci_compare(const struct inode *parent, const struct qstr *name,
--			   u8 *de_name, size_t de_name_len, bool quick)
+-static int f2fs_match_ci_name(const struct inode *dir, const struct qstr *name,
+-			       const u8 *de_name, u32 de_name_len)
 -{
--	const struct super_block *sb = parent->i_sb;
+-	const struct super_block *sb = dir->i_sb;
 -	const struct unicode_map *um = sb->s_encoding;
 -	struct fscrypt_str decrypted_name = FSTR_INIT(NULL, de_name_len);
 -	struct qstr entry = QSTR_INIT(de_name, de_name_len);
--	int ret;
+-	int res;
 -
--	if (IS_ENCRYPTED(parent)) {
+-	if (IS_ENCRYPTED(dir)) {
 -		const struct fscrypt_str encrypted_name =
--				FSTR_INIT(de_name, de_name_len);
+-			FSTR_INIT((u8 *)de_name, de_name_len);
+-
+-		if (WARN_ON_ONCE(!fscrypt_has_encryption_key(dir)))
+-			return -EINVAL;
 -
 -		decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
 -		if (!decrypted_name.name)
 -			return -ENOMEM;
--		ret = fscrypt_fname_disk_to_usr(parent, 0, 0, &encrypted_name,
+-		res = fscrypt_fname_disk_to_usr(dir, 0, 0, &encrypted_name,
 -						&decrypted_name);
--		if (ret < 0)
+-		if (res < 0)
 -			goto out;
 -		entry.name = decrypted_name.name;
 -		entry.len = decrypted_name.len;
 -	}
 -
--	if (quick)
--		ret = utf8_strncasecmp_folded(um, name, &entry);
--	else
--		ret = utf8_strncasecmp(um, name, &entry);
--	if (ret < 0) {
--		/* Handle invalid character sequence as either an error
--		 * or as an opaque byte sequence.
--		 */
--		if (sb_has_strict_encoding(sb))
--			ret = -EINVAL;
--		else if (name->len != entry.len)
--			ret = 1;
--		else
--			ret = !!memcmp(name->name, entry.name, entry.len);
+-	res = utf8_strncasecmp_folded(um, name, &entry);
+-	/*
+-	 * In strict mode, ignore invalid names.  In non-strict mode,
+-	 * fall back to treating them as opaque byte sequences.
+-	 */
+-	if (res < 0 && !sb_has_strict_encoding(sb)) {
+-		res = name->len == entry.len &&
+-				memcmp(name->name, entry.name, name->len) == 0;
+-	} else {
+-		/* utf8_strncasecmp_folded returns 0 on match */
+-		res = (res == 0);
 -	}
 -out:
 -	kfree(decrypted_name.name);
--	return ret;
+-	return res;
 -}
+-#endif /* CONFIG_UNICODE */
 -
- int ext4_fname_setup_ci_filename(struct inode *dir, const struct qstr *iname,
- 				  struct ext4_filename *name)
- {
-@@ -1503,20 +1451,35 @@ static bool ext4_match(struct inode *parent,
+ static inline int f2fs_match_name(const struct inode *dir,
+ 				   const struct f2fs_filename *fname,
+ 				   const u8 *de_name, u32 de_name_len)
+@@ -245,8 +193,10 @@ static inline int f2fs_match_name(const struct inode *dir,
+ 
  #if IS_ENABLED(CONFIG_UNICODE)
- 	if (IS_CASEFOLDED(parent) &&
- 	    (!IS_ENCRYPTED(parent) || fscrypt_has_encryption_key(parent))) {
--		if (fname->cf_name.name) {
--			if (IS_ENCRYPTED(parent)) {
--				if (fname->hinfo.hash != EXT4_DIRENT_HASH(de) ||
--					fname->hinfo.minor_hash !=
--						EXT4_DIRENT_MINOR_HASH(de)) {
-+		int ret;
- 
--					return false;
--				}
--			}
--			return !ext4_ci_compare(parent, &fname->cf_name,
--						de->name, de->name_len, true);
-+		/*
-+		 * Just checking IS_ENCRYPTED(parent) below is not
-+		 * sufficient to decide whether one can use the hash for
-+		 * skipping the string comparison, because the key might
-+		 * have been added right after
-+		 * ext4_fname_setup_ci_filename().  In this case, a hash
-+		 * mismatch will be a false negative.  Therefore, make
-+		 * sure cf_name was properly initialized before
-+		 * considering the calculated hash.
-+		 */
-+		if (IS_ENCRYPTED(parent) && fname->cf_name.name &&
-+		    (fname->hinfo.hash != EXT4_DIRENT_HASH(de) ||
-+		     fname->hinfo.minor_hash != EXT4_DIRENT_MINOR_HASH(de)))
-+			return false;
+ 	if (fname->cf_name.name)
+-		return f2fs_match_ci_name(dir, &fname->cf_name,
+-					  de_name, de_name_len);
++		return generic_ci_match(dir, fname->usr_fname,
++					&fname->cf_name,
++					de_name, de_name_len);
 +
-+		ret = generic_ci_match(parent, fname->usr_fname,
-+				       &fname->cf_name, de->name,
-+				       de->name_len);
-+		if (ret < 0) {
-+			/*
-+			 * Treat comparison errors as not a match.  The
-+			 * only case where it happens is on a disk
-+			 * corruption or ENOMEM.
-+			 */
-+			return false;
- 		}
--		return !ext4_ci_compare(parent, fname->usr_fname, de->name,
--						de->name_len, false);
-+		return ret;
- 	}
  #endif
- 
+ 	f.usr_fname = fname->usr_fname;
+ 	f.disk_name = fname->disk_name;
 -- 
 2.34.1
 
