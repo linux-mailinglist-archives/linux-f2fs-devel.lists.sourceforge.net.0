@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83D41896371
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Apr 2024 06:22:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1774896379
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Apr 2024 06:25:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rrs98-0007yW-94;
-	Wed, 03 Apr 2024 04:22:46 +0000
+	id 1rrsBX-0006HN-Q1;
+	Wed, 03 Apr 2024 04:25:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1rrs97-0007yQ-1T
+ (envelope-from <ebiggers@kernel.org>) id 1rrsBW-0006HG-IJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Apr 2024 04:22:45 +0000
+ Wed, 03 Apr 2024 04:25:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VTCABte6jce163I6MLFZNqy3l3LpltEmCHh6LKa62pc=; b=jwcoTnVOHAGMhTdrraWIAnnC33
- xYKJ7Q1lSyGWg6YhnGjwaCtDuQoGnGqbu22vJtEcElT3xD5N4NwSFmTHGQfxKjTufAxgU3EH0o8vT
- CmO8wgaCAvqcJpLHsw3YgwMN7x0G+4u947OiugkFdKAAFOSRvLoP/DAgbxQ0GPWx/RL4=;
+ bh=6LS5USxJ6e48LvOdRpgYeEm14QQWloJhhKvq1gtcOnU=; b=m7BpGb8upiwLhY1fUKOurM4g7N
+ wcGenGExl1+kH1wcZfDOZXdmxGLXihsO2KqFdR9fn9Ez+tKq7SYKQOOW12+EnYRuFLHb0U8mnwLsh
+ JyLf2JaMDlB1vy8KTTgy6w8tjeJ3mMOeKU1QyTmssKVt2MdXoh9O/8p7cSCFb5NVlAtY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,54 +31,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=VTCABte6jce163I6MLFZNqy3l3LpltEmCHh6LKa62pc=; b=WKDMMYAl1a5V/xiLVgYAjYVhrq
- nIz+ST//prSDRG3h5Jb5CoIf2n2MLAhSPQEOtILqVD2Qp1nn+7K24rJ4/hjro7195iuqVT/CzPB+c
- pMKp8irtMCQF46CG2aUvgt8uBDhry3jBqzIltW0NJAaNgqmTDCel3v+z6KJmVa3P84ls=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=6LS5USxJ6e48LvOdRpgYeEm14QQWloJhhKvq1gtcOnU=; b=EMLlR2BudiL7UcE7fH3Rb8G5sI
+ o30JWkCcfBxjwolAG99bojufeCIkoohU/X2UPrQ2XvSUJ4rXGI+7ngbhm7FNN1HTube4YVw7+bC5i
+ c0mZnuR/1jaDVEc3iWqiOBS41fe8nlZoHCeG1ksFC/ZjhxhRsNcalcDF5Gks5D423Kp4=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rrs96-0000IU-Eo for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Apr 2024 04:22:45 +0000
+ id 1rrsBV-0000Pb-Kc for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 03 Apr 2024 04:25:14 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 63BC360DE4;
- Wed,  3 Apr 2024 04:22:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79F81C433F1;
- Wed,  3 Apr 2024 04:22:33 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 253BDCE1F78;
+ Wed,  3 Apr 2024 04:25:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DAF21C433F1;
+ Wed,  3 Apr 2024 04:25:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1712118154;
- bh=RziLX4KmfrHv88fw3gSwzASvgPajd59CTngrkRmOSnA=;
+ s=k20201202; t=1712118306;
+ bh=27PJXlFeNKBe1eRs9ajk0Z8dVhFuZhGUa2ciqtrxJUs=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=YhVw4H90SPZTOe+o9L+rwRKHwnOQVJGOPnyIJJpX/jDX8aq8Uboa1HJcC9afYaeEB
- VvjUDFMW5C3llc/cxvg8AWKe37x/2sDj4tc8YFTpUv0QiuWXwD98OGdj+19O3fVp14
- ZTL0OtusBj/ekHgjv3xDsMGaKjjK+vvbR4DXTB/Es5eyoIy3mKFDNiHQjtAjwrGHJM
- T/5oOF+Ve5RB7l9hR43HckD9ZBIFTYK5t/lbk1BKeItYqBWeGIlcXluTSQmVsOtfaA
- D3jaYXxBcuhm19Qnd7zaMliUfcNoGKGLV76OnKXHkqOPeK5sFH5434b2yM1CHBD46Q
- KosV6AKUOqE8A==
-Date: Tue, 2 Apr 2024 21:22:31 -0700
+ b=MGYjykf8xUP28dLNpzEOeR559qH0dVuXx3jUBB+lk0AIfsJnvkcw1Pf5A/BT202mS
+ acUS5SoH8R4mzo/QFfq6G99rBmCYCQ9F/68YTAglo5QE7bziXd5UvkseOWuVP/Zj5C
+ 91UG4Ji4RybN/93qed4vwq5MCONqUjXbS6RrNT+QcStbTU7jtG36+joMPBrXSFbSOm
+ DMZFRm3d6FcZFHLalvIbdG13Ah2Rjk78vIpJAzducPLii76qp0D81wqKKOk2/C3h4k
+ IgxdL3btyLh1ZPZ6XTKhQ2vGy1li5WS6QekZ05HViueYLXjvpRtMW9BDIDQo6Ej794
+ A0e26cckwYECA==
+Date: Tue, 2 Apr 2024 21:25:03 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Eugen Hristev <eugen.hristev@collabora.com>
-Message-ID: <20240403042231.GH2576@sol.localdomain>
+Message-ID: <20240403042503.GI2576@sol.localdomain>
 References: <20240402154842.508032-1-eugen.hristev@collabora.com>
- <20240402154842.508032-7-eugen.hristev@collabora.com>
+ <20240402154842.508032-8-eugen.hristev@collabora.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240402154842.508032-7-eugen.hristev@collabora.com>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20240402154842.508032-8-eugen.hristev@collabora.com>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Apr 02, 2024 at 06:48:39PM +0300, Eugen Hristev via
- Linux-f2fs-devel wrote: > From: Gabriel Krisman Bertazi
- <krisman@collabora.com>
- > > If the volume is in strict mode, ext4_ci_compare can rep [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Tue, Apr 02, 2024 at 06:48:40PM +0300, Eugen Hristev via
+ Linux-f2fs-devel wrote: > If the volume is in strict mode, generi c_ci_compare
+ can report a broken > encoding name. This will not trigger on [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -89,8 +88,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rrs96-0000IU-Eo
-Subject: Re: [f2fs-dev] [PATCH v15 6/9] ext4: Log error when lookup of
+X-Headers-End: 1rrsBV-0000Pb-Kc
+Subject: Re: [f2fs-dev] [PATCH v15 7/9] f2fs: Log error when lookup of
  encoded dentry fails
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -107,52 +106,47 @@ Cc: krisman@suse.de, brauner@kernel.org, kernel@collabora.com, tytso@mit.edu,
  jack@suse.cz, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, adilger.kernel@dilger.ca,
  viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Apr 02, 2024 at 06:48:39PM +0300, Eugen Hristev via Linux-f2fs-devel wrote:
-> From: Gabriel Krisman Bertazi <krisman@collabora.com>
-> 
-> If the volume is in strict mode, ext4_ci_compare can report a broken
+On Tue, Apr 02, 2024 at 06:48:40PM +0300, Eugen Hristev via Linux-f2fs-devel wrote:
+> If the volume is in strict mode, generi c_ci_compare can report a broken
 > encoding name.  This will not trigger on a bad lookup, which is caught
 > earlier, only if the actual disk name is bad.
 > 
-> Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+> Suggested-by: Gabriel Krisman Bertazi <krisman@suse.de>
 > Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
 > ---
->  fs/ext4/namei.c | 3 +++
->  1 file changed, 3 insertions(+)
+>  fs/f2fs/dir.c | 15 ++++++++++-----
+>  1 file changed, 10 insertions(+), 5 deletions(-)
 > 
-> diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
-> index 2d0ee232fbe7..3268cf45d9db 100644
-> --- a/fs/ext4/namei.c
-> +++ b/fs/ext4/namei.c
-> @@ -1477,6 +1477,9 @@ static bool ext4_match(struct inode *parent,
->  			 * only case where it happens is on a disk
->  			 * corruption or ENOMEM.
->  			 */
-> +			if (ret == -EINVAL)
-> +				EXT4_ERROR_INODE(parent,
-> +					"Directory contains filename that is invalid UTF-8");
->  			return false;
+> diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+> index 88b0045d0c4f..64286d80dd30 100644
+> --- a/fs/f2fs/dir.c
+> +++ b/fs/f2fs/dir.c
+> @@ -192,11 +192,16 @@ static inline int f2fs_match_name(const struct inode *dir,
+>  	struct fscrypt_name f;
+>  
+>  #if IS_ENABLED(CONFIG_UNICODE)
+> -	if (fname->cf_name.name)
+> -		return generic_ci_match(dir, fname->usr_fname,
+> -					&fname->cf_name,
+> -					de_name, de_name_len);
+> -
+> +	if (fname->cf_name.name) {
+> +		int ret = generic_ci_match(dir, fname->usr_fname,
+> +					   &fname->cf_name,
+> +					   de_name, de_name_len);
+> +		if (ret == -EINVAL)
+> +			f2fs_warn(F2FS_SB(dir->i_sb),
+> +				"Directory contains filename that is invalid UTF-8");
+> +
 
-I'm seeing this error when the volume is *not* in strict mode and a file has a
-name that is not valid UTF-8.  That doesn't seem to be working as intended.
+Shouldn't this use f2fs_warn_ratelimited?
 
-    mkfs.ext4 -F -O casefold /dev/vdb
-    mount /dev/vdb /mnt
-    mkdir /mnt/dir
-    chattr +F /mnt/dir
-    touch /mnt/dir/$'\xff'
-
-[ 1528.691319] EXT4-fs (vdb): Using encoding defined by superblock: utf8-12.1.0 with flags 0x0
-[ 1528.707793] EXT4-fs (vdb): mounted filesystem 0be607cc-0dae-4e7f-a40f-4fe8075e8e50 r/w with ordered data mode. Quota mode: none.
-[ 1528.728583] EXT4-fs error (device vdb): ext4_match:1481: inode #13: comm touch: Directory contains filename that is invalid UTF-8
-[ 1528.730700] EXT4-fs error (device vdb): ext4_match:1481: inode #13: comm touch: Directory contains filename that is invalid UTF-8
-[ 1528.732976] EXT4-fs error (device vdb): ext4_match:1481: inode #13: comm touch: Directory contains filename that is invalid UTF-8
-[ 1528.735536] EXT4-fs error (device vdb): ext4_match:1481: inode #13: comm touch: Directory contains filename that is invalid UTF-8
+- Eric
 
 
 _______________________________________________
