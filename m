@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2617D89673F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Apr 2024 09:52:27 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE969896747
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Apr 2024 09:52:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rrvQ1-0005d1-J6;
-	Wed, 03 Apr 2024 07:52:25 +0000
+	id 1rrvQH-0005pY-TH;
+	Wed, 03 Apr 2024 07:52:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sweettea-kernel@dorminy.me>) id 1rrvQ0-0005cs-5F
+ (envelope-from <sweettea-kernel@dorminy.me>) id 1rrvQ9-0005ng-B8
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Apr 2024 07:52:24 +0000
+ Wed, 03 Apr 2024 07:52:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7PYzXzBaXMRaTUM7K3OM9Hp08R0SqoGrNVl4KKxQ7is=; b=VGIIsteMvU3+cEG+XWqYw/n9Eg
- crGmG874tCnHmE+iS3+QqxsREFm49bi6KW1zyS56LoPgh+nZChTFe0SKit5HHCT9l2dLeL9er2xo9
- t83CZg4sdU6Mkuk/VLNge6OQk8ccV9z2ieHyBaOShFDUwkQ6KvbYqJDFWnPhwvCsMdzQ=;
+ bh=nHUERzTQriQp3SYpHVa/LAE/foJxtB3YfebKGOnOWXQ=; b=hPIQ2/K+zHUdg1OdN45jEsQ+fn
+ Jl0Ic2lPePyG4RtJUNhjq9P9m9s0VfyKEgpyFm7kIW1r+rfGCOWJHs1Yy8cIcxV2R1jxzflXbs+9y
+ bEJnbw2tG7h5s96UR0uRGIZAT17yIGvgj3c6jr89sZXAydJjfjbv+FxG5NXZ01Ad8Guo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -31,28 +31,28 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7PYzXzBaXMRaTUM7K3OM9Hp08R0SqoGrNVl4KKxQ7is=; b=QX//F6JAEOKFjxPjdSUCFyXzEL
- 2voPY0FWpALIR61buEenvExQTTRojxxHepHmjlUUP2SD4CcSDziGvTv4fVCCWZi0NvEJ6oltxdBxi
- zNES0pFWtqDzHK3uymPWe7JviQ930U1PQD6Zp4dnOLyeCxMbfnPv6MdUdoPQKATVFfdg=;
+ bh=nHUERzTQriQp3SYpHVa/LAE/foJxtB3YfebKGOnOWXQ=; b=eDazbidGhuzFVWgcWfuK6G1Vxd
+ eO+ciZ5o6GKE/ZfzQ8U49CYJlAc3DWhvizn+yK4i6fawU1e2a1oVO45NqAXUYdu0nqYzEgvJ0VOAB
+ OkFPsOVeOJ4uObiMgyv790IUf2Dt3nWXuenssDWTpxP2exOR8FYrCk5fKXO20nQ1WANA=;
 Received: from box.fidei.email ([71.19.144.250])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rrvPz-0001lD-Fw for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Apr 2024 07:52:24 +0000
+ id 1rrvQ4-0001lf-FU for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 03 Apr 2024 07:52:29 +0000
 Received: from authenticated-user (box.fidei.email [71.19.144.250])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by box.fidei.email (Postfix) with ESMTPSA id 5353F807DB;
- Wed,  3 Apr 2024 03:33:18 -0400 (EDT)
+ by box.fidei.email (Postfix) with ESMTPSA id 80DCC8083D;
+ Wed,  3 Apr 2024 03:33:20 -0400 (EDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dorminy.me; s=mail;
- t=1712129598; bh=RN4ChmgSR3ZQz489TYOpQl2oinZST+jD9bAbWRVw3kw=;
+ t=1712129601; bh=HBGmAcZ8dQDWLxuQ2gZciGzNPLnws2Iv6wSJvdOp678=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=g4korhKJcSnDsrv9N7vH1U2FU2y1IQ+1cCMgS5/5PrxSN4HMDcoGduvy3dBmz1Nc2
- yesnN+yjkh4f2vIszcOepeVVHQ3K67FvmEIxGpiTFYHKpuMe2R6HagoPaJ/l1N7h5B
- kSFM1+CNyOU88P5figMN31ZJaqkeiNoaljXN4YmqKD9V2WaqCHnY88jix5aqPn43Kf
- yGgF7UvGPp8P8KQGEm5qGPB01jtmts3h8MXOdQNZoA8tbZ857MqJXRClm9wfhrTLk2
- A4L0DcuexATY8/UevIM4mTqaPkV3v1Ac2XqU6Gr25kMylrueJwoopHZo/lPNObd6bQ
- 02UNpUd0OrtTw==
+ b=k9adrljeAgmXUEVqR9T38q7UBFhQ7lETYpMXjsStM0XMGS4eG1T8+pjHdefOZtd+9
+ b9sbXDAHqGTeEotki3koqBZ7FT1290d4WlsagN6Z1Jb5RTuog38L7ZzYucpSa1d0f4
+ HrhO5RZg8NIYkyjWEsqcLAnOgMmn4utEi4pAOKEYrQOYjdJh36IxT86WJh3JG4pp1O
+ xCkF4oXlZ89mQ1Ia6EZPk/hwSHK3lgiNW/6Wm5o0rgE/z8dTkDN+l20XOjvG16oIUL
+ bA6z8ZMduHhDyDTpqq0FP2+pz2Eq0VSIBWGUHJdJGV+Y0h8M0aDKiiMOSTHKAOpxIl
+ RTUMic1gQE7cQ==
 To: Jonathan Corbet <corbet@lwn.net>,
  Kent Overstreet <kent.overstreet@linux.dev>,
  Brian Foster <bfoster@redhat.com>, Chris Mason <clm@fb.com>,
@@ -65,8 +65,8 @@ To: Jonathan Corbet <corbet@lwn.net>,
  linux-kernel@vger.kernel.org, linux-bcachefs@vger.kernel.org,
  linux-btrfs@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  linux-fsdevel@vger.kernel.org, kernel-team@meta.com
-Date: Wed,  3 Apr 2024 03:22:47 -0400
-Message-ID: <bd06389b4c9c33ab1411f2941875f02867b18642.1712126039.git.sweettea-kernel@dorminy.me>
+Date: Wed,  3 Apr 2024 03:22:48 -0400
+Message-ID: <20935230b7513031ac497e3afe8446650d20fb1e.1712126039.git.sweettea-kernel@dorminy.me>
 In-Reply-To: <cover.1712126039.git.sweettea-kernel@dorminy.me>
 References: <cover.1712126039.git.sweettea-kernel@dorminy.me>
 MIME-Version: 1.0
@@ -78,11 +78,11 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: Signed-off-by: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
- --- fs/nilfs2/inode.c | 12 ++++++++---- 1 file changed, 8 insertions(+),
- 4 deletions(-) diff --git a/fs/nilfs2/inode.c b/fs/nilfs2/inode.c index
- 4d3c347c982b..e3108f2cead7
- 100644 --- a/fs/nilfs2/inode.c +++ b/fs/nilfs2/inode.c @@ -1160,7 +1160,7
- @@ int nilfs_fiemap(struct inode *inode, s [...] 
+ --- fs/ext4/extents.c | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-)
+ diff --git a/fs/ext4/extents.c b/fs/ext4/extents.c index
+ 2adade3c202a..4874f757e1bd
+ 100644 --- a/fs/ext4/extents.c +++ b/fs/ext4/extents.c @@ -2194,7 +2194,7
+ @@ static int ext4_fill_es_cache_info(stru [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -99,8 +99,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1rrvPz-0001lD-Fw
-Subject: [f2fs-dev] [PATCH v3 06/13] nilfs2: fiemap: return correct extent
+X-Headers-End: 1rrvQ4-0001lf-FU
+Subject: [f2fs-dev] [PATCH v3 07/13] ext4: fiemap: return correct extent
  physical length
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -122,52 +122,22 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Signed-off-by: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
 ---
- fs/nilfs2/inode.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ fs/ext4/extents.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/nilfs2/inode.c b/fs/nilfs2/inode.c
-index 4d3c347c982b..e3108f2cead7 100644
---- a/fs/nilfs2/inode.c
-+++ b/fs/nilfs2/inode.c
-@@ -1160,7 +1160,7 @@ int nilfs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
- {
- 	struct the_nilfs *nilfs = inode->i_sb->s_fs_info;
- 	__u64 logical = 0, phys = 0, size = 0;
--	__u32 flags = 0;
-+	__u32 flags = FIEMAP_EXTENT_HAS_PHYS_LEN;
- 	loff_t isize;
- 	sector_t blkoff, end_blkoff;
- 	sector_t delalloc_blkoff;
-@@ -1197,7 +1197,9 @@ int nilfs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
- 			if (blkoff > end_blkoff)
- 				break;
+diff --git a/fs/ext4/extents.c b/fs/ext4/extents.c
+index 2adade3c202a..4874f757e1bd 100644
+--- a/fs/ext4/extents.c
++++ b/fs/ext4/extents.c
+@@ -2194,7 +2194,7 @@ static int ext4_fill_es_cache_info(struct inode *inode,
  
--			flags = FIEMAP_EXTENT_MERGED | FIEMAP_EXTENT_DELALLOC;
-+			flags = FIEMAP_EXTENT_MERGED |
-+				FIEMAP_EXTENT_DELALLOC |
-+				FIEMAP_EXTENT_HAS_PHYS_LEN;
- 			logical = blkoff << blkbits;
- 			phys = 0;
- 			size = delalloc_blklen << blkbits;
-@@ -1261,14 +1263,16 @@ int nilfs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
- 						break;
- 
- 					/* Start another extent */
--					flags = FIEMAP_EXTENT_MERGED;
-+					flags = FIEMAP_EXTENT_MERGED |
-+						FIEMAP_EXTENT_HAS_PHYS_LEN;
- 					logical = blkoff << blkbits;
- 					phys = blkphy << blkbits;
- 					size = n << blkbits;
- 				}
- 			} else {
- 				/* Start a new extent */
--				flags = FIEMAP_EXTENT_MERGED;
-+				flags = FIEMAP_EXTENT_MERGED |
-+					FIEMAP_EXTENT_HAS_PHYS_LEN;
- 				logical = blkoff << blkbits;
- 				phys = blkphy << blkbits;
- 				size = n << blkbits;
+ 	while (block <= end) {
+ 		next = 0;
+-		flags = 0;
++		flags = FIEMAP_EXTENT_HAS_PHYS_LEN;
+ 		if (!ext4_es_lookup_extent(inode, block, &next, &es))
+ 			break;
+ 		if (ext4_es_is_unwritten(&es))
 -- 
 2.43.0
 
