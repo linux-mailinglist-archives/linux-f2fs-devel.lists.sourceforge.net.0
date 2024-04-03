@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AB798975AD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Apr 2024 18:56:07 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E549C8975B8
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Apr 2024 18:57:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rs3u1-0000eq-N0;
-	Wed, 03 Apr 2024 16:55:57 +0000
+	id 1rs3v9-0000et-UW;
+	Wed, 03 Apr 2024 16:57:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bfoster@redhat.com>) id 1rs3tx-0000ec-2N
+ (envelope-from <bfoster@redhat.com>) id 1rs3v9-0000en-FQ
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Apr 2024 16:55:53 +0000
+ Wed, 03 Apr 2024 16:57:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qcFGTIgsVpRcFHL+8n4bltIbe5BCiFbcUwE7alUYftc=; b=MwKSjIKlyjdxIv16XhKCTUwsXo
- pCBRgsoQ27kMIkipXV96/FXLp6DtO6hXQya4vQQ3c6L/vFUmxzRGtTRiC0dCq9D/C9LzH7qDq3tWY
- X8xAOXdWDe23qk5zjQISxc/n3D+0zT/UkKHDueoKpxhoJJxrdN7rUL78VTAs59s2gOIw=;
+ bh=u1iSn8bvEgGWCVXgdHv/OtOU9Q9NOuhKnF3ziO23kyo=; b=HKT7TN9wIkRaZCtCUepY986Iis
+ 76Y91QTyWo7JxiHodboH9fN6+N3uCIfdaVVcsUri47De3FjGYWCVf51yiSldLUn8c2EcSh2J1YDDH
+ t2/uHOhwsvL2Nlqb242n6lxAWYs0C5xryI7mVuAnND5IPpiGgXQXDiRRW72m3HWT5ZVo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,79 +31,79 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qcFGTIgsVpRcFHL+8n4bltIbe5BCiFbcUwE7alUYftc=; b=lLejmMvyJdjx1NFbHe1vbT5a+V
- xS8GnYyXL4hOEdS98PrQxL4FmTrL3Kl7sxwKtNfd1jRtMFtVoC69iW+Zc16K5OPQdQwQqtW2enh03
- DeZyighoy5mCEFnPYm+5g4vSemzOT8LAV0Q0zTDc+5uyKtzgVMshlbnKSLU6NWv5KHS4=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ bh=u1iSn8bvEgGWCVXgdHv/OtOU9Q9NOuhKnF3ziO23kyo=; b=lOFUknIpyHyw5CH7oMKzYrR7uk
+ UrQUV2hpSlPklluSc/spwj2VcNBOecRbM1LS1hC/DpmyFFqIKZhX5aJ/ToyV3xKEyDgjEap0kLbZN
+ +0qfi5yPAefhoKMdK0zliT2Bb1PhUH4Qv7P3DOrKtzTTnE4WFefAlMzZ0UpCLEeokTcw=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rs3tw-0006GQ-1A for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Apr 2024 16:55:53 +0000
+ id 1rs3v5-0006Mr-8k for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 03 Apr 2024 16:57:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1712163345;
+ s=mimecast20190719; t=1712163412;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=qcFGTIgsVpRcFHL+8n4bltIbe5BCiFbcUwE7alUYftc=;
- b=cvCVs7iV7A+JfWN53Q97HNARkewbq+uFP9e7q05+d/BRkZVgmP3NiTcKsogyHuQIAparZN
- OmdrhjsbTyziMBDa0TVtNCmXCvHtJ1MfN37/MrjtLjLWZSKzmTE7n7392jQr/E5IgwO+oj
- Wtwl+lJKq5jEGBGem6rfDHc6e72AmFA=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-434-BbaFp3e6P9SwSkyIW3LFsQ-1; Wed, 03 Apr 2024 12:55:41 -0400
-X-MC-Unique: BbaFp3e6P9SwSkyIW3LFsQ-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ bh=u1iSn8bvEgGWCVXgdHv/OtOU9Q9NOuhKnF3ziO23kyo=;
+ b=friRP2WHBh5j/C1uT8chm8tKjLUw6N1qSaE5OE1UovsPgMuaVDH3c2WN4WJ43Ij1u0V9MW
+ ksV5ecvt+hKHNfjKP00PRoyR/LRD1S/j1hekweIMHIJCr0sKw3HF1TWzFIz4E3BhBhWB/F
+ IlukMDcZQ6sNctO8vlm0KmboCH4j7Kk=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-169-iTU1m7Q5N7uP72lIIm9dzA-1; Wed,
+ 03 Apr 2024 12:56:45 -0400
+X-MC-Unique: iTU1m7Q5N7uP72lIIm9dzA-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 479DF88D4E8;
- Wed,  3 Apr 2024 16:55:40 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A93CB383CD7F;
+ Wed,  3 Apr 2024 16:56:42 +0000 (UTC)
 Received: from bfoster (unknown [10.22.16.57])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 300632024517;
- Wed,  3 Apr 2024 16:55:39 +0000 (UTC)
-Date: Wed, 3 Apr 2024 12:57:37 -0400
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id EFCA747FD;
+ Wed,  3 Apr 2024 16:56:41 +0000 (UTC)
+Date: Wed, 3 Apr 2024 12:58:40 -0400
 From: Brian Foster <bfoster@redhat.com>
 To: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
-Message-ID: <Zg2Kgdn42odZVUtE@bfoster>
+Message-ID: <Zg2KwHF9qaWMgVsy@bfoster>
 References: <cover.1712126039.git.sweettea-kernel@dorminy.me>
- <1ba5bfccccbf4ff792f178268badde056797d0c4.1712126039.git.sweettea-kernel@dorminy.me>
+ <58f9c9eef8b0e33a8d46a3ad8a8db46890e1fbe8.1712126039.git.sweettea-kernel@dorminy.me>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1ba5bfccccbf4ff792f178268badde056797d0c4.1712126039.git.sweettea-kernel@dorminy.me>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.4
+In-Reply-To: <58f9c9eef8b0e33a8d46a3ad8a8db46890e1fbe8.1712126039.git.sweettea-kernel@dorminy.me>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.1
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Apr 03, 2024 at 03:22:42AM -0400, Sweet Tea Dorminy
- wrote: > Some filesystems support compressed extents which have a larger
- logical > size than physical, and for those filesystems, it can be [...] 
+ Content preview:  On Wed, Apr 03, 2024 at 03:22:43AM -0400, Sweet Tea Dorminy
+ wrote: > Update the signature of fiemap_fill_next_extent() to allow passing
+ a > physical length. Update all callers to pass a 0 physical len [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.133.124 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [170.10.133.124 listed in wl.mailspike.net]
+ [170.10.129.124 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [170.10.129.124 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rs3tw-0006GQ-1A
-Subject: Re: [f2fs-dev] [PATCH v3 01/13] fs: fiemap: add physical_length
- field to extents
+X-Headers-End: 1rs3v5-0006Mr-8k
+Subject: Re: [f2fs-dev] [PATCH v3 02/13] fs: fiemap: update
+ fiemap_fill_next_extent() signature
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -128,100 +128,192 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Apr 03, 2024 at 03:22:42AM -0400, Sweet Tea Dorminy wrote:
-> Some filesystems support compressed extents which have a larger logical
-> size than physical, and for those filesystems, it can be useful for
-> userspace to know how much space those extents actually use. For
-> instance, the compsize [1] tool for btrfs currently uses btrfs-internal,
-> root-only ioctl to find the actual disk space used by a file; it would
-> be better and more useful for this information to require fewer
-> privileges and to be usable on more filesystems. Therefore, use one of
-> the padding u64s in the fiemap extent structure to return the actual
-> physical length; and, for now, return this as equal to the logical
-> length.
-> 
-> [1] https://github.com/kilobyte/compsize
+On Wed, Apr 03, 2024 at 03:22:43AM -0400, Sweet Tea Dorminy wrote:
+> Update the signature of fiemap_fill_next_extent() to allow passing a
+> physical length. Update all callers to pass a 0 physical length -- since
+> none set the EXTENT_HAS_PHYS_LEN flag, this value doesn't matter.
 > 
 > Signed-off-by: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
 > ---
->  Documentation/filesystems/fiemap.rst | 28 +++++++++++++++++-------
->  fs/ioctl.c                           |  3 ++-
->  include/uapi/linux/fiemap.h          | 32 ++++++++++++++++++++++------
->  3 files changed, 47 insertions(+), 16 deletions(-)
+>  Documentation/filesystems/fiemap.rst | 3 ++-
+>  fs/bcachefs/fs.c                     | 7 ++++---
+>  fs/btrfs/extent_io.c                 | 4 ++--
+>  fs/ext4/extents.c                    | 1 +
+>  fs/f2fs/data.c                       | 8 +++++---
+>  fs/f2fs/inline.c                     | 3 ++-
+>  fs/ioctl.c                           | 9 +++++----
+>  fs/iomap/fiemap.c                    | 2 +-
+>  fs/nilfs2/inode.c                    | 6 +++---
+>  fs/ntfs3/frecord.c                   | 7 ++++---
+>  fs/ocfs2/extent_map.c                | 4 ++--
+>  fs/smb/client/smb2ops.c              | 1 +
+>  include/linux/fiemap.h               | 2 +-
+>  13 files changed, 33 insertions(+), 24 deletions(-)
 > 
 ...
 > diff --git a/fs/ioctl.c b/fs/ioctl.c
-> index 661b46125669..8afd32e1a27a 100644
+> index 8afd32e1a27a..1830baca532b 100644
 > --- a/fs/ioctl.c
 > +++ b/fs/ioctl.c
-> @@ -138,7 +138,8 @@ int fiemap_fill_next_extent(struct fiemap_extent_info *fieinfo, u64 logical,
+> @@ -99,7 +99,8 @@ static int ioctl_fibmap(struct file *filp, int __user *p)
+>   * @fieinfo:	Fiemap context passed into ->fiemap
+>   * @logical:	Extent logical start offset, in bytes
+>   * @phys:	Extent physical start offset, in bytes
+> - * @len:	Extent length, in bytes
+> + * @log_len:	Extent logical length, in bytes
+> + * @phys_len:	Extent physical length, in bytes (optional)
+>   * @flags:	FIEMAP_EXTENT flags that describe this extent
+>   *
+>   * Called from file system ->fiemap callback. Will populate extent
+> @@ -110,7 +111,7 @@ static int ioctl_fibmap(struct file *filp, int __user *p)
+>   * extent that will fit in user array.
+>   */
+>  int fiemap_fill_next_extent(struct fiemap_extent_info *fieinfo, u64 logical,
+> -			    u64 phys, u64 len, u32 flags)
+> +			    u64 phys, u64 log_len, u64 phys_len, u32 flags)
+>  {
+>  	struct fiemap_extent extent;
+>  	struct fiemap_extent __user *dest = fieinfo->fi_extents_start;
+> @@ -138,8 +139,8 @@ int fiemap_fill_next_extent(struct fiemap_extent_info *fieinfo, u64 logical,
 >  	memset(&extent, 0, sizeof(extent));
 >  	extent.fe_logical = logical;
 >  	extent.fe_physical = phys;
-> -	extent.fe_length = len;
-> +	extent.fe_logical_length = len;
-> +	extent.fe_physical_length = len;
+> -	extent.fe_logical_length = len;
+> -	extent.fe_physical_length = len;
+> +	extent.fe_logical_length = log_len;
+> +	extent.fe_physical_length = phys_len;
 
-Nit: Why start this field out as len if the next patch adds the param
-and defaults to zero? Not that it matters that much due to the next
-patch (which seems logical), but wouldn't it make more sense to set this
-to 0 from the start?
+Another nit, but would it simplify things to let this helper set the
+_HAS_PHYS_LEN flag on phys_len != 0 or something rather than require
+callers to get it right?
 
 Brian
 
 >  	extent.fe_flags = flags;
 >  
 >  	dest += fieinfo->fi_extents_mapped;
-> diff --git a/include/uapi/linux/fiemap.h b/include/uapi/linux/fiemap.h
-> index 24ca0c00cae3..3079159b8e94 100644
-> --- a/include/uapi/linux/fiemap.h
-> +++ b/include/uapi/linux/fiemap.h
-> @@ -14,14 +14,30 @@
+> diff --git a/fs/iomap/fiemap.c b/fs/iomap/fiemap.c
+> index 610ca6f1ec9b..013e843c8d10 100644
+> --- a/fs/iomap/fiemap.c
+> +++ b/fs/iomap/fiemap.c
+> @@ -36,7 +36,7 @@ static int iomap_to_fiemap(struct fiemap_extent_info *fi,
 >  
->  #include <linux/types.h>
+>  	return fiemap_fill_next_extent(fi, iomap->offset,
+>  			iomap->addr != IOMAP_NULL_ADDR ? iomap->addr : 0,
+> -			iomap->length, flags);
+> +			iomap->length, 0, flags);
+>  }
 >  
-> +/*
-> + * For backward compatibility, where the member of the struct was called
-> + * fe_length instead of fe_logical_length.
-> + */
-> +#define fe_length fe_logical_length
-> +
->  struct fiemap_extent {
-> -	__u64 fe_logical;  /* logical offset in bytes for the start of
-> -			    * the extent from the beginning of the file */
-> -	__u64 fe_physical; /* physical offset in bytes for the start
-> -			    * of the extent from the beginning of the disk */
-> -	__u64 fe_length;   /* length in bytes for this extent */
-> -	__u64 fe_reserved64[2];
-> -	__u32 fe_flags;    /* FIEMAP_EXTENT_* flags for this extent */
-> +	/*
-> +	 * logical offset in bytes for the start of
-> +	 * the extent from the beginning of the file
-> +	 */
-> +	__u64 fe_logical;
-> +	/*
-> +	 * physical offset in bytes for the start
-> +	 * of the extent from the beginning of the disk
-> +	 */
-> +	__u64 fe_physical;
-> +	/* logical length in bytes for this extent */
-> +	__u64 fe_logical_length;
-> +	/* physical length in bytes for this extent */
-> +	__u64 fe_physical_length;
-> +	__u64 fe_reserved64[1];
-> +	/* FIEMAP_EXTENT_* flags for this extent */
-> +	__u32 fe_flags;
->  	__u32 fe_reserved[3];
->  };
+>  static loff_t iomap_fiemap_iter(const struct iomap_iter *iter,
+> diff --git a/fs/nilfs2/inode.c b/fs/nilfs2/inode.c
+> index 7340a01d80e1..4d3c347c982b 100644
+> --- a/fs/nilfs2/inode.c
+> +++ b/fs/nilfs2/inode.c
+> @@ -1190,7 +1190,7 @@ int nilfs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+>  			if (size) {
+>  				/* End of the current extent */
+>  				ret = fiemap_fill_next_extent(
+> -					fieinfo, logical, phys, size, flags);
+> +					fieinfo, logical, phys, size, 0, flags);
+>  				if (ret)
+>  					break;
+>  			}
+> @@ -1240,7 +1240,7 @@ int nilfs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+>  					flags |= FIEMAP_EXTENT_LAST;
 >  
-> @@ -66,5 +82,7 @@ struct fiemap {
->  						    * merged for efficiency. */
->  #define FIEMAP_EXTENT_SHARED		0x00002000 /* Space shared with other
->  						    * files. */
-> +#define FIEMAP_EXTENT_HAS_PHYS_LEN	0x00004000 /* Physical length is valid
-> +						    * and set by FS. */
+>  				ret = fiemap_fill_next_extent(
+> -					fieinfo, logical, phys, size, flags);
+> +					fieinfo, logical, phys, size, 0, flags);
+>  				if (ret)
+>  					break;
+>  				size = 0;
+> @@ -1256,7 +1256,7 @@ int nilfs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+>  					/* Terminate the current extent */
+>  					ret = fiemap_fill_next_extent(
+>  						fieinfo, logical, phys, size,
+> -						flags);
+> +						0, flags);
+>  					if (ret || blkoff > end_blkoff)
+>  						break;
 >  
->  #endif /* _UAPI_LINUX_FIEMAP_H */
+> diff --git a/fs/ntfs3/frecord.c b/fs/ntfs3/frecord.c
+> index 7f27382e0ce2..ef0ed913428b 100644
+> --- a/fs/ntfs3/frecord.c
+> +++ b/fs/ntfs3/frecord.c
+> @@ -1947,7 +1947,7 @@ int ni_fiemap(struct ntfs_inode *ni, struct fiemap_extent_info *fieinfo,
+>  	if (!attr || !attr->non_res) {
+>  		err = fiemap_fill_next_extent(
+>  			fieinfo, 0, 0,
+> -			attr ? le32_to_cpu(attr->res.data_size) : 0,
+> +			attr ? le32_to_cpu(attr->res.data_size) : 0, 0,
+>  			FIEMAP_EXTENT_DATA_INLINE | FIEMAP_EXTENT_LAST |
+>  				FIEMAP_EXTENT_MERGED);
+>  		goto out;
+> @@ -2042,7 +2042,7 @@ int ni_fiemap(struct ntfs_inode *ni, struct fiemap_extent_info *fieinfo,
+>  				flags |= FIEMAP_EXTENT_LAST;
+>  
+>  			err = fiemap_fill_next_extent(fieinfo, vbo, lbo, dlen,
+> -						      flags);
+> +						      0, flags);
+>  			if (err < 0)
+>  				break;
+>  			if (err == 1) {
+> @@ -2062,7 +2062,8 @@ int ni_fiemap(struct ntfs_inode *ni, struct fiemap_extent_info *fieinfo,
+>  		if (vbo + bytes >= end)
+>  			flags |= FIEMAP_EXTENT_LAST;
+>  
+> -		err = fiemap_fill_next_extent(fieinfo, vbo, lbo, bytes, flags);
+> +		err = fiemap_fill_next_extent(fieinfo, vbo, lbo, bytes, 0,
+> +					      flags);
+>  		if (err < 0)
+>  			break;
+>  		if (err == 1) {
+> diff --git a/fs/ocfs2/extent_map.c b/fs/ocfs2/extent_map.c
+> index 70a768b623cf..eabdf97cd685 100644
+> --- a/fs/ocfs2/extent_map.c
+> +++ b/fs/ocfs2/extent_map.c
+> @@ -723,7 +723,7 @@ static int ocfs2_fiemap_inline(struct inode *inode, struct buffer_head *di_bh,
+>  					 id2.i_data.id_data);
+>  
+>  		ret = fiemap_fill_next_extent(fieinfo, 0, phys, id_count,
+> -					      flags);
+> +					      0, flags);
+>  		if (ret < 0)
+>  			return ret;
+>  	}
+> @@ -794,7 +794,7 @@ int ocfs2_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+>  		virt_bytes = (u64)le32_to_cpu(rec.e_cpos) << osb->s_clustersize_bits;
+>  
+>  		ret = fiemap_fill_next_extent(fieinfo, virt_bytes, phys_bytes,
+> -					      len_bytes, fe_flags);
+> +					      len_bytes, 0, fe_flags);
+>  		if (ret)
+>  			break;
+>  
+> diff --git a/fs/smb/client/smb2ops.c b/fs/smb/client/smb2ops.c
+> index 87b63f6ad2e2..23a193512f96 100644
+> --- a/fs/smb/client/smb2ops.c
+> +++ b/fs/smb/client/smb2ops.c
+> @@ -3779,6 +3779,7 @@ static int smb3_fiemap(struct cifs_tcon *tcon,
+>  				le64_to_cpu(out_data[i].file_offset),
+>  				le64_to_cpu(out_data[i].file_offset),
+>  				le64_to_cpu(out_data[i].length),
+> +				0,
+>  				flags);
+>  		if (rc < 0)
+>  			goto out;
+> diff --git a/include/linux/fiemap.h b/include/linux/fiemap.h
+> index c50882f19235..17a6c32cdf3f 100644
+> --- a/include/linux/fiemap.h
+> +++ b/include/linux/fiemap.h
+> @@ -16,6 +16,6 @@ struct fiemap_extent_info {
+>  int fiemap_prep(struct inode *inode, struct fiemap_extent_info *fieinfo,
+>  		u64 start, u64 *len, u32 supported_flags);
+>  int fiemap_fill_next_extent(struct fiemap_extent_info *info, u64 logical,
+> -			    u64 phys, u64 len, u32 flags);
+> +			    u64 phys, u64 log_len, u64 phys_len, u32 flags);
+>  
+>  #endif /* _LINUX_FIEMAP_H 1 */
 > -- 
 > 2.43.0
 > 
