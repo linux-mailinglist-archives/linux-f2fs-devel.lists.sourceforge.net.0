@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8302B897854
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Apr 2024 20:35:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD49A897844
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Apr 2024 20:30:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rs5SX-00068V-Eg;
-	Wed, 03 Apr 2024 18:35:41 +0000
+	id 1rs5Nm-000312-PA;
+	Wed, 03 Apr 2024 18:30:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kent.overstreet@linux.dev>) id 1rs5SW-00068M-To
+ (envelope-from <kent.overstreet@linux.dev>) id 1rs5Nl-00030u-UI
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Apr 2024 18:35:41 +0000
+ Wed, 03 Apr 2024 18:30:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KugM06W/s0lb++bW7levKHgpFLyEAtmCAECxADz00LA=; b=YkASSwdC17YpFJfdObYomHT/1U
- m5NhHeJ0J9cL13kNnrpsi0BVLiDciD4nBXblFgWQn+MaFe1KTRYdJPjw4zMfVR1NUu5LSSDwGrgY3
- cz3Uye9c6mW3COLrsaq/hBbY4jxIqcDjAC0KgnFKDGSLHe3Loe7OK68Exm1TuXB32CSg=;
+ bh=Zxp27ZGGEkSjJwr51ZwgsY5W3CkCmszrW+4Pomr214w=; b=PBW46F7uePkQKZZuDPuLyDMUts
+ 61PIMZC8Oln5WGiavTKMQn0/TJ1gBlgzl7p5071mRVKTLO+vB7i4v8eyB6olpuOwEx0Nfi8xQJO6A
+ k/x0mMs7dpAlP1XrmZ6RhZ8Qk3h5C3k0hfcOUtdYyUxFRBep1LLcVWJi1DDgS9u88PVs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,35 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KugM06W/s0lb++bW7levKHgpFLyEAtmCAECxADz00LA=; b=Qi7lv5Xpl0NUUAAVxcVAZmkGOh
- tYARF3RH5eJWNGVQ2wd9KnFnm/n7oF+PLRWfqBemqvAiRpmwURMirm40l3wrJFbD5bhUj0SOycSfQ
- WPBf3XRCyOFskWYlMjOzIJ/KjsFxIXDF4UCfRkrf2F3OgreSR6VGsc9hC045N0tVjM5w=;
-Received: from out-177.mta0.migadu.com ([91.218.175.177])
+ bh=Zxp27ZGGEkSjJwr51ZwgsY5W3CkCmszrW+4Pomr214w=; b=KRwfpYrej80ug/OGlbqtK/wC8V
+ vUWcR/gbae2aZcLKojhs8HEAPiF3fXDDrTfnJMYUbLS7bPRnSboA5ejQ67ErdJFB9GBQ4IcG3SCfh
+ 8YtUgm25pWBGhVVaW9jl38cMs50720sbfQRnhW2XKK8Dwx799/THGpHBoflzUbpwg90Q=;
+Received: from out-172.mta0.migadu.com ([91.218.175.172])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rs5SS-0003IW-Tu for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Apr 2024 18:35:41 +0000
-Date: Wed, 3 Apr 2024 14:15:21 -0400
+ id 1rs5Nh-00037L-Or for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 03 Apr 2024 18:30:45 +0000
+Date: Wed, 3 Apr 2024 14:17:26 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1712168126;
+ t=1712168250;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=KugM06W/s0lb++bW7levKHgpFLyEAtmCAECxADz00LA=;
- b=O+mF5tSo+kQ3evl6evxwBacTiXzfRDinz7tasCBoCXvkVzg71Eg2Tj11aOOQOvAn2VtbKa
- 4xDUzXt3vcUN1q4BynOenQTSxBZUR+PUrwJNN863OgeLxrPH8kAqph+irAR/22JqAk8WiC
- UUHnl3AUbkMRomaUH0xPDBYfDm7mIPM=
+ bh=Zxp27ZGGEkSjJwr51ZwgsY5W3CkCmszrW+4Pomr214w=;
+ b=LSLrjg6F62U8rN5fLqsO7nbZDAU3JIcXeYeB4CrF8JqMW9VRrf4nyVis3m0zywfS0giGC6
+ enXhqfzZrX4UgUK7Z0Lhi26cYVInkVcP6YKMw2CUFNDWFkV6OJDXwN4InhSowAkbC/dbdA
+ LYsEXK5LLyfXOwoAEk/SvmMiqpaOo8Y=
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 From: Kent Overstreet <kent.overstreet@linux.dev>
-To: Brian Foster <bfoster@redhat.com>
-Message-ID: <qf3rldn7sha5nbwz7iidkzb6secoyebwldgq56tfx4sunmthxo@qdap46g7lfsc>
+To: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
+Message-ID: <vf4k3yagvb6vf3vfu7st7uj7asv4zbf5c3b2tef2g2xic5fkvj@olqxfakmkoew>
 References: <cover.1712126039.git.sweettea-kernel@dorminy.me>
- <b9b795987a485afa0fdb8f0decc09405691d9320.1712126039.git.sweettea-kernel@dorminy.me>
- <Zg2LG1_2-ac1GlsG@bfoster>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <Zg2LG1_2-ac1GlsG@bfoster>
+In-Reply-To: <cover.1712126039.git.sweettea-kernel@dorminy.me>
 X-Migadu-Flow: FLOW_OUT
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -68,16 +66,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Apr 03, 2024 at 01:00:11PM -0400, Brian Foster wrote:
- > On Wed, Apr 03, 2024 at 03:22:52AM -0400, Sweet Tea Dorminy wrote: > >
- Signed-off-by: Sweet Tea Dorminy <sweettea-kernel@dorminy.me> > > [...] 
+ Content preview:  On Wed, Apr 03, 2024 at 03:22:41AM -0400, Sweet Tea Dorminy
+ wrote: > For many years, various btrfs users have written programs to discover
+ > the actual disk space used by files, using root-only interf [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linux.dev]
+ for more information. [URIs: ozlabs.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -87,9 +85,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1rs5SS-0003IW-Tu
-Subject: Re: [f2fs-dev] [PATCH v3 11/13] bcachefs: fiemap: return correct
- extent physical length
+X-Headers-End: 1rs5Nh-00037L-Or
+Subject: Re: [f2fs-dev] [PATCH v3 00/13] fiemap extension for more physical
+ information
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,73 +102,95 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: linux-bcachefs@vger.kernel.org, Christian Brauner <brauner@kernel.org>,
  kernel-team@meta.com, Jan Kara <jack@suse.cz>, linux-fsdevel@vger.kernel.org,
  Jonathan Corbet <corbet@lwn.net>, linux-btrfs@vger.kernel.org,
- linux-doc@vger.kernel.org, Josef Bacik <josef@toxicpanda.com>,
- linux-kernel@vger.kernel.org, Chris Mason <clm@fb.com>,
- David Sterba <dsterba@suse.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
- Sweet Tea Dorminy <sweettea-kernel@dorminy.me>,
+ Brian Foster <bfoster@redhat.com>, linux-doc@vger.kernel.org,
+ Josef Bacik <josef@toxicpanda.com>, linux-kernel@vger.kernel.org,
+ Chris Mason <clm@fb.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ djwong@kernel.org, David Sterba <dsterba@suse.com>,
  Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
  =?utf-8?Q?Micka=C3=ABl_Sala=C3=BCn?= <mic@digikod.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Apr 03, 2024 at 01:00:11PM -0400, Brian Foster wrote:
-> On Wed, Apr 03, 2024 at 03:22:52AM -0400, Sweet Tea Dorminy wrote:
-> > Signed-off-by: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
-> > ---
-> >  fs/bcachefs/fs.c | 18 ++++++++++++------
-> >  1 file changed, 12 insertions(+), 6 deletions(-)
-> > 
-> > diff --git a/fs/bcachefs/fs.c b/fs/bcachefs/fs.c
-> > index f830578a9cd1..d2793bae842d 100644
-> > --- a/fs/bcachefs/fs.c
-> > +++ b/fs/bcachefs/fs.c
-> > @@ -913,15 +913,17 @@ static int bch2_fill_extent(struct bch_fs *c,
-> >  			flags |= FIEMAP_EXTENT_SHARED;
-> >  
-> >  		bkey_for_each_ptr_decode(k.k, ptrs, p, entry) {
-> > -			int flags2 = 0;
-> > +			int flags2 = FIEMAP_EXTENT_HAS_PHYS_LEN;
-> > +			u64 phys_len = k.k->size << 9;
-> >  			u64 offset = p.ptr.offset;
-> >  
-> >  			if (p.ptr.unwritten)
-> >  				flags2 |= FIEMAP_EXTENT_UNWRITTEN;
-> >  
-> > -			if (p.crc.compression_type)
-> > +			if (p.crc.compression_type) {
-> >  				flags2 |= FIEMAP_EXTENT_ENCODED;
-> > -			else
-> > +				phys_len = p.crc.compressed_size << 9;
-> > +			} else
-> >  				offset += p.crc.offset;
-> >  
-> >  			if ((offset & (block_sectors(c) - 1)) ||
-> > @@ -931,7 +933,7 @@ static int bch2_fill_extent(struct bch_fs *c,
-> >  			ret = fiemap_fill_next_extent(info,
-> >  						bkey_start_offset(k.k) << 9,
-> >  						offset << 9,
-> > -						k.k->size << 9, 0,
-> > +						k.k->size << 9, phys_len,
-> >  						flags|flags2);
-> >  			if (ret)
-> >  				return ret;
-> > @@ -941,14 +943,18 @@ static int bch2_fill_extent(struct bch_fs *c,
-> >  	} else if (bkey_extent_is_inline_data(k.k)) {
-> >  		return fiemap_fill_next_extent(info,
-> >  					       bkey_start_offset(k.k) << 9,
-> > -					       0, k.k->size << 9, 0,
-> > +					       0, k.k->size << 9,
-> > +					       bkey_inline_data_bytes(k.k),
+On Wed, Apr 03, 2024 at 03:22:41AM -0400, Sweet Tea Dorminy wrote:
+> For many years, various btrfs users have written programs to discover
+> the actual disk space used by files, using root-only interfaces.
+> However, this information is a great fit for fiemap: it is inherently
+> tied to extent information, all filesystems can use it, and the
+> capabilities required for FIEMAP make sense for this additional
+> information also.
 > 
-> Question for Kent perhaps, but what's the functional difference between
-> bkey_inline_data_bytes() and k->size in this particular case?
+> Hence, this patchset adds various additional information to fiemap,
+> and extends filesystems (but not iomap) to return it.  This uses some of
+> the reserved padding in the fiemap extent structure, so programs unaware
+> of the changes will be unaffected.
+> 
+> This is based on next-20240403. I've tested the btrfs part of this with
+> the standard btrfs testing matrix locally and manually, and done minimal
+> testing of the non-btrfs parts.
+> 
+> I'm unsure whether btrfs should be returning the entire physical extent
+> referenced by a particular logical range, or just the part of the
+> physical extent referenced by that range. The v2 thread has a discussion
+> of this.
 
-Not much - k->size will correspond to the size of the original write -
-that is, the writeback write from the pagecache. inline_data_bytes is
-the amount of data that wasn't zeroes.
+I believe there was some talk of using the padding for a device ID, so
+that fiemap could properly support multi device filesystems. Are we sure
+this is the best use of those bytes?
 
-So inline_data_bytes is probably the right thing to use here.
+> 
+> Changelog:
+> 
+> v3: 
+>  - Adapted all the direct users of fiemap, except iomap, to emit
+>    the new fiemap information, as far as I understand the other
+>    filesystems.
+> 
+> v2:
+>  - Adopted PHYS_LEN flag and COMPRESSED flag from the previous version,
+>    as per Andreas Dilger' comment.
+>    https://patchwork.ozlabs.org/project/linux-ext4/patch/4f8d5dc5b51a43efaf16c39398c23a6276e40a30.1386778303.git.dsterba@suse.cz/
+>  - https://lore.kernel.org/linux-fsdevel/cover.1711588701.git.sweettea-kernel@dorminy.me/T/#t
+> 
+> v1: https://lore.kernel.org/linux-fsdevel/20240315030334.GQ6184@frogsfrogsfrogs/T/#t
+> 
+> Sweet Tea Dorminy (13):
+>   fs: fiemap: add physical_length field to extents
+>   fs: fiemap: update fiemap_fill_next_extent() signature
+>   fs: fiemap: add new COMPRESSED extent state
+>   btrfs: fiemap: emit new COMPRESSED state.
+>   btrfs: fiemap: return extent physical size
+>   nilfs2: fiemap: return correct extent physical length
+>   ext4: fiemap: return correct extent physical length
+>   f2fs: fiemap: add physical length to trace_f2fs_fiemap
+>   f2fs: fiemap: return correct extent physical length
+>   ocfs2: fiemap: return correct extent physical length
+>   bcachefs: fiemap: return correct extent physical length
+>   f2fs: fiemap: emit new COMPRESSED state
+>   bcachefs: fiemap: emit new COMPRESSED state
+> 
+>  Documentation/filesystems/fiemap.rst | 35 ++++++++++----
+>  fs/bcachefs/fs.c                     | 17 +++++--
+>  fs/btrfs/extent_io.c                 | 72 ++++++++++++++++++----------
+>  fs/ext4/extents.c                    |  3 +-
+>  fs/f2fs/data.c                       | 36 +++++++++-----
+>  fs/f2fs/inline.c                     |  7 +--
+>  fs/ioctl.c                           | 11 +++--
+>  fs/iomap/fiemap.c                    |  2 +-
+>  fs/nilfs2/inode.c                    | 18 ++++---
+>  fs/ntfs3/frecord.c                   |  7 +--
+>  fs/ocfs2/extent_map.c                | 10 ++--
+>  fs/smb/client/smb2ops.c              |  1 +
+>  include/linux/fiemap.h               |  2 +-
+>  include/trace/events/f2fs.h          | 10 ++--
+>  include/uapi/linux/fiemap.h          | 34 ++++++++++---
+>  15 files changed, 178 insertions(+), 87 deletions(-)
+> 
+> 
+> base-commit: 75e31f66adc4c8d049e8aac1f079c1639294cd65
+> -- 
+> 2.43.0
+> 
 
 
 _______________________________________________
