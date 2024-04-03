@@ -2,81 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29AEA89606D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Apr 2024 01:55:07 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E8E0896209
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Apr 2024 03:34:16 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rrnxx-0006on-H9;
-	Tue, 02 Apr 2024 23:54:57 +0000
+	id 1rrpVt-00048E-Op;
+	Wed, 03 Apr 2024 01:34:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1rrnxw-0006od-CT
+ (envelope-from <chao@kernel.org>) id 1rrpVr-00047r-At
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 02 Apr 2024 23:54:56 +0000
+ Wed, 03 Apr 2024 01:34:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uALTc6uR/btcpQFUfOCMjWlhQ236O1EVFKfefteNAN4=; b=dV9vmoqRpoe64krrdlbcDsN0pX
- hIkdsg5vCKQopDdLfMMtjUuzANy4P2DXSRwp5Fyj1Li9wyQpi2mHCXvN/xapL/UuR5PfRUlTxuMI6
- y6WtbIB5G7kI/RfjVkiXOKBLfdKlQCfngF+HPvjn90STmJysdoIjjihgfAqCZUr9w8Ik=;
+ bh=HVitcheKhNfxZFYW4mioKuyp7IgV9F2J+AGr2wLAPIs=; b=ADSwVl1ijuumDvhztb2agPRnkt
+ 2n2Q9gOc2A/uH1L6NWrYrzhy2xpT2r8mfivjwBKdBh/YRtYjxdsSSWA0eblSkAyFPdHznPVdeS8s0
+ 8spfsEM55WWjn8j6QaAcw6ltlD2k2TW2dtY5DOrhelqez3UYjaE/1LRdX42dqCD1Kw0E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=uALTc6uR/btcpQFUfOCMjWlhQ236O1EVFKfefteNAN4=; b=D
- YGwiKg8VicKT2R8rRApmpb99dnHXVhoU45h0SmhfVdtiPEtoMolvGhaN9jqVguwQf1XwBpHCJCrY9
- yZu0125CxWQzMk9eAaRMVKwNkEVMjywJXNR3VSRdRhzbBWZrdG2HGp1yTRmTvarLeHBna+fopgC/l
- arPaas4tp3/RRqf0=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=HVitcheKhNfxZFYW4mioKuyp7IgV9F2J+AGr2wLAPIs=; b=MNNhoBACYhnyvDODz/bYNtw2VP
+ 1Jay0SXNjzuWfp/25F0jqusYE5IketD+gigxFjA1EdpRTRhAnZwJtuSllmrD77rSK33SJEO4ypAqZ
+ Z8KiQw5zjlBhwAx4uerE4/cGz7RKN3EBT7jR6tBbDn3pVJva/q7vzi2HaI3GpbohXCJw=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rrnxv-00016m-RG for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 02 Apr 2024 23:54:56 +0000
+ id 1rrpVr-00072L-1N for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 03 Apr 2024 01:34:04 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 871336023F
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  2 Apr 2024 23:54:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19CF2C433F1;
- Tue,  2 Apr 2024 23:54:50 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 957AECE1F2D;
+ Wed,  3 Apr 2024 01:33:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E806C433F1;
+ Wed,  3 Apr 2024 01:33:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1712102090;
- bh=BHkVjW+hDfxGGoJjM/PPGymJr/tFsXJD8vdwFNgU6aM=;
- h=From:To:Cc:Subject:Date:From;
- b=LemnwvqRC9tlDYUcsbMqsxLt/fwuv4F6ZGnNikSB4QUj/aMnoB50X+oWtJSbadRPy
- zndFpcFNgn7LbnAtA1o05vj4t4/vluoXPUyCE/Jd10yPdJZVAG43i2dqk5TSidhn3O
- abqu+isLWYT03U2aLN5OzSaRTb/5vBUOTkmsvZQ6f1ffdJdtHB4GlsO9/u8Igli6Y+
- 5o5vQ/1DU65o9j4wJqJgdxCN/qPQIMzYmWCGwH3asLuJN3vZYzGsOk5McV4AHm6174
- +Lq5Z/viSlmlYkOUUrbx3MkeuVUfZFYzXxZTEkRS9mzB7/FmoJbxNi1ZUR1t4wAA0u
- Vh3imfEg5V89Q==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue,  2 Apr 2024 23:54:47 +0000
-Message-ID: <20240402235447.132195-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.44.0.478.gd926399ef9-goog
+ s=k20201202; t=1712108035;
+ bh=C8sszQNY/WLlDhKfcbkKR7fRMCxjBLqA2FWczM45YG8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=N/gD7LKNv9xTOZE0YEWWY2DWR8yo/frfKk6sVSKI6Mdx0gJIXAtW+tWzxlzLVKdpb
+ +CflV6ZUqiFJDeGUrOMhQQ/EgirdI0P3UMnTk5IzEXWqKedMFtu/9KI5DKQSlsxUD/
+ 7SYel0gBdfJTIvFnTGc8xHyWwwoR8qgsIa44+BZlpI0sDjcdfkV/NOYFURAbHVkijR
+ XMcspL0LS8xE5cKIIFWk7RoaJ2PJdygPKgRr+yf/GgOHmTCTXGaeOsba1d0LqeSVYh
+ eXup7BmEcGaqrcE4AYhLtr8XVVjW/fWa1+QWJZtfmGof/9p1BAfKvrnOuuAxAw34P4
+ VUuvlx+ULR6zA==
+Message-ID: <dc850b72-687c-43f6-887e-7587f7593d59@kernel.org>
+Date: Wed, 3 Apr 2024 09:33:50 +0800
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+User-Agent: Mozilla Thunderbird
+To: wangzijie <wangzijie1@honor.com>, "jaegeuk@kernel.org" <jaegeuk@kernel.org>
+References: <2073e8995f5444aeaf7133b87ec07de8@honor.com>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <2073e8995f5444aeaf7133b87ec07de8@honor.com>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This addresses high GC cost at runtime. Signed-off-by:
- Jaegeuk
- Kim <jaegeuk@kernel.org> --- include/f2fs_fs.h | 8 +++++++- mkfs/f2fs_format.c
- | 5 +++-- 2 files changed, 10 insertions(+), 3 deletions(-) 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 2024/4/1 21:48,
+ wangzijie wrote: > From: Zijie Wang <wangzijie1@honor.com>
+ > Date: Mon, 1 Apr 2024 21:24:08 +0800 > Subject: [PATCH] [f2fs-dev] f2fs:
+ use f2fs_get_node_page when write inline data > [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -86,10 +86,12 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rrnxv-00016m-RG
-Subject: [f2fs-dev] [PATCH] f2fs-tools: give 6 sections for overprovision
- buffer
+X-Headers-End: 1rrpVr-00072L-1N
+Subject: Re: [f2fs-dev] [PATCH] f2fs: use f2fs_get_node_page when write
+ inline data
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,71 +103,28 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
+Cc: "wangbintian\(BintianWang\)" <bintian.wang@honor.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This addresses high GC cost at runtime.
+On 2024/4/1 21:48, wangzijie wrote:
+> From: Zijie Wang <wangzijie1@honor.com>
+> Date: Mon, 1 Apr 2024 21:24:08 +0800
+> Subject: [PATCH] [f2fs-dev] f2fs: use f2fs_get_node_page when write inline data
+> 
+> We just need inode page when write inline data, use
+> f2fs_get_node_page() to get it instead of using dnode_of_data,
+> which can eliminate unnecessary struct use.
+> 
+> Signed-off-by: Zijie Wang <wangzijie1@honor.com>
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- include/f2fs_fs.h  | 8 +++++++-
- mkfs/f2fs_format.c | 5 +++--
- 2 files changed, 10 insertions(+), 3 deletions(-)
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index fc56396fa358..870a6e4823d2 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -1775,6 +1775,12 @@ static inline uint32_t get_reserved(struct f2fs_super_block *sb, double ovp)
- 	return round_up(reserved, segs_per_sec) * segs_per_sec;
- }
- 
-+static inline uint32_t overprovision_segment_buffer(struct f2fs_super_block *sb)
-+{
-+	/* Give 6 current sections to avoid huge GC overheads. */
-+	return 6 * get_sb(segs_per_sec);
-+}
-+
- static inline double get_best_overprovision(struct f2fs_super_block *sb)
- {
- 	double ovp, candidate, end, diff, space;
-@@ -1798,7 +1804,7 @@ static inline double get_best_overprovision(struct f2fs_super_block *sb)
- 		if (ovp < 0)
- 			continue;
- 		space = usable_main_segs - max((double)reserved, ovp) -
--					2 * get_sb(segs_per_sec);
-+					overprovision_segment_buffer(sb);
- 		if (max_space < space) {
- 			max_space = space;
- 			max_ovp = candidate;
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index 8f632f8d74b4..e26a513ed80c 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -778,7 +778,8 @@ static int f2fs_write_check_point_pack(void)
- 		 * In non configurable reserved section case, overprovision
- 		 * segments are always bigger than two sections.
- 		 */
--		if (get_cp(overprov_segment_count) < 2 * get_sb(segs_per_sec)) {
-+		if (get_cp(overprov_segment_count) <
-+					overprovision_segment_buffer(sb)) {
- 			MSG(0, "\tError: Not enough overprovision segments (%u)\n",
- 			    get_cp(overprov_segment_count));
- 			goto free_cp_payload;
-@@ -787,7 +788,7 @@ static int f2fs_write_check_point_pack(void)
- 				get_cp(rsvd_segment_count));
- 	 } else {
- 		set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
--				2 * get_sb(segs_per_sec));
-+				overprovision_segment_buffer(sb));
- 	 }
- 
- 	if (f2fs_get_usable_segments(sb) <= get_cp(overprov_segment_count)) {
--- 
-2.44.0.478.gd926399ef9-goog
-
+Thanks,
 
 
 _______________________________________________
