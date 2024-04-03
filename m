@@ -2,64 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 994DF89727C
+	by mail.lfdr.de (Postfix) with ESMTPS id AA14D89727D
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Apr 2024 16:25:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rs1Xu-0005Kn-RT;
-	Wed, 03 Apr 2024 14:24:59 +0000
+	id 1rs1Xw-00051V-BJ;
+	Wed, 03 Apr 2024 14:25:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rs1Xs-0005Kh-UM
+ (envelope-from <chao@kernel.org>) id 1rs1Xt-00051K-Pn
  for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 03 Apr 2024 14:24:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=08tdGDn/YbVgivOQdbwsN8tJkVGMa960FjEswE1bqmI=; b=ZAviWKnwULDUVUhG+4B/Bz6THD
- 4HQ58eTKAt6DFQF11ygNcLj65/bmyQYBX84msmFnMMCxWsoz8gpWXdh6UkJXezhLKWDRjWgJngU6z
- ILOf7x7FbGWkrI/VLSR38uZNizlQMyPEw36xoMLS+SHIt/xka04r49M5jHjf8OF+zVQU=;
+ bh=39YpkMBQjzvgy6s8uu9uqzcUMvVLkasOJ6iIVaO2Mfg=; b=Xr1nLHx1YK+ucwzG4IVmNidfAK
+ rBdsnLuc6Aj2u95Dr6Qqdgja0rZHndn/t4F36IveHXHoufsVrrZDnaB9b2t0Qd17DFuDQD3iNc4zW
+ xNgT9iQMgi+bXNNz/MizDYg5O33yy4nwntCgO0osI4aJBlFENlScpQlGh8bP2I8X/+FQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=08tdGDn/YbVgivOQdbwsN8tJkVGMa960FjEswE1bqmI=; b=C
- wny0xSBRz3aDgNI/34bfj5cBSjz4SjefmF6Mn5L2iuGXSbeLCB+MgJirneLme8jf7Ke4otOoha8LP
- kIH4gg7gGfAM01cSR8FcKYukLpBTfh/1z/y1+9HWV7w1LIjTnfYLZXeJ/zBuLxs8HyrmVkuTXz6nT
- KCVrfOves8EAn83U=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=39YpkMBQjzvgy6s8uu9uqzcUMvVLkasOJ6iIVaO2Mfg=; b=bIRlmOQtCjvCl4QAgPNqz7s0rl
+ iHNDHs4zfAQC4wvg9RTqWcJNYPl0lySNuomGXGAyLPscBrS4boTu1rRFRSdTFHJUzYP6O0OCUC8bH
+ dNxD0a1iM2Jil/ou3HXY1IjUDF0bPp4xet7fUlSySoVN7VZjCRNTg+FoomTCuuFzWuWk=;
 Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rs1Xs-0004fM-86 for linux-f2fs-devel@lists.sourceforge.net;
+ id 1rs1Xs-0004fO-Tl for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 03 Apr 2024 14:24:57 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 26DB0CE2AFD
+ by sin.source.kernel.org (Postfix) with ESMTP id 4B373CE2B0A
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  3 Apr 2024 14:24:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A697EC433F1;
- Wed,  3 Apr 2024 14:24:26 +0000 (UTC)
+ Wed,  3 Apr 2024 14:24:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62CD0C43394;
+ Wed,  3 Apr 2024 14:24:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1712154267;
- bh=Et6k9jnpHCmh8RkVkmceF4DfrHtMEGLOP0mlzrDQVTg=;
- h=From:To:Cc:Subject:Date:From;
- b=q4FhDPtznoIvgxXYNNTmflJkwAz5zan8MN7d5DCZWR+npG9lvlELY4xhniWJF/Qr3
- 0tBjo2D4tiAqrDQ4Rho1DCjgp6l02JntfbQHocIYDsjgS0reSS1LG2L4ePy/GXXjdI
- vIRvLmR2buLiB+Pwq7dWnNA8fJtOb346RXmWYp5lTbQXMV5w5bbfhD6bwTJp8PWxLj
- xiTRi0rOYinFu9xwTQKgv3s1yzPt26/hnQRViMAYSYqMRr+ogGAkiWPm9YiL8+zwZD
- Xk0fy0Fhfp8tlRbW405XaVYRrghfX+WAUNdDWHa3sCJRGl50At2akdoDrIDPSaIXZM
- BGBNC92fMR8Sw==
+ s=k20201202; t=1712154269;
+ bh=ptc7NY5ggY3TRPp0+wwY3rbiFNHckWsv1H/R/8taUtk=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=QIJTsiIzCdJdwWYGjp/u10rqGF6STRdrYu5daHJrNF0Ilj8MwByFD1robyv8kB4Rw
+ ncGg5D8fGbH1Fg6XreO6hduB7R0vlIqXQB+ikUHsLpNNMaw5tdMZ+JBCipa4oOppvp
+ PwHRPkt5tYRTLsZRAtDOnGmpC2uhS6scXaofJOeLjo1Wrf/agWc63O+F7ttg7PnNTV
+ viU2x4znYXfmNnfUZymJM/Y0JLuzjLayo563dot94WwAMAqlwZTsUMC43TNFi1+tm0
+ n8/Y1IX2t3GaJ/7jWKl18Fn8oF/c8/XpmbkUbPALrMr3na+GjIFi+9bE2/5xWzHVVe
+ 69ayxwHis7jxA==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Wed,  3 Apr 2024 22:24:19 +0800
-Message-Id: <20240403142420.2042498-1-chao@kernel.org>
+Date: Wed,  3 Apr 2024 22:24:20 +0800
+Message-Id: <20240403142420.2042498-2-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240403142420.2042498-1-chao@kernel.org>
+References: <20240403142420.2042498-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
@@ -68,14 +70,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: compress and pinfile flag should be checked after inode lock
- held to avoid race condition, fix it. Fixes: 4c8ff7095bef ("f2fs: support
- data compression") Fixes: 5fed0be8583f ("f2fs: do not allow partial truncation
- on pinned file") Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/file.c
- | 20 +++ [...] 
+ Content preview: ioctl(F2FS_IOC_MOVE_RANGE) can truncate or punch hole on
+ pinned
+ file, fix to disallow it. Fixes: 5fed0be8583f ("f2fs: do not allow partial
+ truncation on pinned file") Signed-off-by: Chao Yu <chao@kernel.org> ---
+ fs/f2fs/file.c | 3 ++- 1 file changed, 2 insertions(+), 1 deletion(-) 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -85,12 +89,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rs1Xs-0004fM-86
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: fix to relocate check condition in
- f2fs_fallocate()
+X-Headers-End: 1rs1Xs-0004fO-Tl
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix to check pinfile flag in
+ f2fs_move_file_range()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,54 +109,29 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-compress and pinfile flag should be checked after inode lock held to
-avoid race condition, fix it.
+ioctl(F2FS_IOC_MOVE_RANGE) can truncate or punch hole on pinned file,
+fix to disallow it.
 
-Fixes: 4c8ff7095bef ("f2fs: support data compression")
 Fixes: 5fed0be8583f ("f2fs: do not allow partial truncation on pinned file")
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/file.c | 20 +++++++++++---------
- 1 file changed, 11 insertions(+), 9 deletions(-)
+ fs/f2fs/file.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 148bfe3effdf..83a807e25e31 100644
+index 83a807e25e31..0d1bcdf61a09 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -1820,15 +1820,6 @@ static long f2fs_fallocate(struct file *file, int mode,
- 		(mode & (FALLOC_FL_COLLAPSE_RANGE | FALLOC_FL_INSERT_RANGE)))
- 		return -EOPNOTSUPP;
+@@ -2858,7 +2858,8 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
+ 			goto out;
+ 	}
  
--	/*
--	 * Pinned file should not support partial truncation since the block
--	 * can be used by applications.
--	 */
--	if ((f2fs_compressed_file(inode) || f2fs_is_pinned_file(inode)) &&
--		(mode & (FALLOC_FL_PUNCH_HOLE | FALLOC_FL_COLLAPSE_RANGE |
--			FALLOC_FL_ZERO_RANGE | FALLOC_FL_INSERT_RANGE)))
--		return -EOPNOTSUPP;
--
- 	if (mode & ~(FALLOC_FL_KEEP_SIZE | FALLOC_FL_PUNCH_HOLE |
- 			FALLOC_FL_COLLAPSE_RANGE | FALLOC_FL_ZERO_RANGE |
- 			FALLOC_FL_INSERT_RANGE))
-@@ -1836,6 +1827,17 @@ static long f2fs_fallocate(struct file *file, int mode,
- 
- 	inode_lock(inode);
- 
-+	/*
-+	 * Pinned file should not support partial truncation since the block
-+	 * can be used by applications.
-+	 */
-+	if ((f2fs_compressed_file(inode) || f2fs_is_pinned_file(inode)) &&
-+		(mode & (FALLOC_FL_PUNCH_HOLE | FALLOC_FL_COLLAPSE_RANGE |
-+			FALLOC_FL_ZERO_RANGE | FALLOC_FL_INSERT_RANGE))) {
-+		ret = -EOPNOTSUPP;
-+		goto out;
-+	}
-+
- 	ret = file_modified(file);
- 	if (ret)
- 		goto out;
+-	if (f2fs_compressed_file(src) || f2fs_compressed_file(dst)) {
++	if (f2fs_compressed_file(src) || f2fs_compressed_file(dst) ||
++		f2fs_is_pinned_file(src) || f2fs_is_pinned_file(dst)) {
+ 		ret = -EOPNOTSUPP;
+ 		goto out_unlock;
+ 	}
 -- 
 2.40.1
 
