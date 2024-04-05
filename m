@@ -2,68 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55C65899C9A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 Apr 2024 14:14:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B70B899D38
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 Apr 2024 14:41:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rsiSk-00082V-AR;
-	Fri, 05 Apr 2024 12:14:31 +0000
+	id 1rsiss-0006SL-5l;
+	Fri, 05 Apr 2024 12:41:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <eugen.hristev@collabora.com>) id 1rsiSh-00081q-4w
+ (envelope-from <willy@infradead.org>) id 1rsisq-0006SC-9d
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 Apr 2024 12:14:27 +0000
+ Fri, 05 Apr 2024 12:41:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/ezJxfGYemehzFQ474FDiSGDq/uXRTtZO0VJNVCWpxw=; b=lHqFHNbo0aelbxVP8Tw1oL7GvR
- tkPGTADLXEz3ARtq+CeQTPTB/Qai3DTeCFm4dfCq70Cvpoq2ZzqiKct3/2GDkRteHiDwjFY2QuQOF
- camh44eXbzvFWKK0Bl+3o0vv3/ahNW9IlI/Z/a9PwcqwurXY7gWZAPADE/l2zPO8JZjY=;
+ bh=pM8ku/k+HG+DRvbgpdHgmsq0Y2sQAqCM3oLo4AlR/Jo=; b=XsBRARVQp4M649AUNRQJIUpM8D
+ 5Wso3aT3vYjmWhXbPv9lQKkvnN4EDp/vHLaRocpTctBsZySMTDBoWnvPOVBUimKikNX1EmABShQSs
+ pM4zDDn0T26ElYXgCLcl/g/OscR+ZmkApYxVejfOzRww7TdpV3UQPZGQeYQm5tdxsdaY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/ezJxfGYemehzFQ474FDiSGDq/uXRTtZO0VJNVCWpxw=; b=KBNqgboHPiYexaawOH5/f2Fsse
- QswJjHlt4iAMrR+OwGwnC7f49TwuvnZVoGGVAVQQzVejazR8K8Dnq0M3PiyvtJXlsyg4XTicfEKFH
- VI3qkIAqayT6bvPywAawfKPaLlopeYushYgq2PHTco4NnSD+MYyFTtqyayjs/kE7U7vU=;
-Received: from madrid.collaboradmins.com ([46.235.227.194])
+ bh=pM8ku/k+HG+DRvbgpdHgmsq0Y2sQAqCM3oLo4AlR/Jo=; b=RHmcW7DhQQljxXKjaZbDn/TCDo
+ ElUVNdkvv/Q2pydP7veFSIdLrj8ce3fuHFMj+6L33PLR7gn6D1bKjqjdY7pvcJgKAxDrpfnM3XVnz
+ Qo3QUlxLgThfADF0cXBWY3s7kCy9m4EtuV1OpeDNV7jDBX18UsKvAbmDy3G6ful6WI74=;
+Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rsiSg-0004Yr-Mu for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 Apr 2024 12:14:27 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1712319251;
- bh=HTiihURQJkrf1R4qMENE36JKmwiQmaMABNkIFCv6n/0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=RP8DMOuO94eoZIWw6RKTZw6SpuWp8MEirLCUdsT0mTFbGpDmgn29daN+lX9nf4oot
- YFDbXUsyXlOo79bYQaMpYCeZrhO03i/NQCXdiDFeKE+LImUgeGfFOdU/9jJ4by2Oe1
- umlQ6HOBrveDsnshQGBIbnWZOkIgVemKleji6S6FCulHUOKpc9hVp+CYfIniM6wtr+
- k1xcaMCJmreKZBaL3dfGZHjEbR0kdCv31yc0tFDYKupyhAkvdlsKh6QI+a/SjGRSHy
- qU3MIbfvyJzjkYofy6DuR8WFWp//EktpWO/x3XdB+ytLrk84INDSx2AppZ9wlmojiJ
- /9kk7zBZEyCOg==
-Received: from eugen-station.. (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 63B8E3782136;
- Fri,  5 Apr 2024 12:14:10 +0000 (UTC)
-To: tytso@mit.edu, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org,
- jaegeuk@kernel.org, chao@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org
-Date: Fri,  5 Apr 2024 15:13:32 +0300
-Message-Id: <20240405121332.689228-10-eugen.hristev@collabora.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240405121332.689228-1-eugen.hristev@collabora.com>
+ id 1rsisl-0006MU-S5 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 05 Apr 2024 12:41:28 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=pM8ku/k+HG+DRvbgpdHgmsq0Y2sQAqCM3oLo4AlR/Jo=; b=ruJA5GKT8MQAZXQt4R8YzVLx3q
+ BponjEjS37cz7oDZzozhnIrP+VyqxjOnY6s6TgcBd23ZzhO+rfoaoarVGyNi99n1r/jgFCNausf3U
+ ClItxZiQk1Aw+8AhE4DrCHliNC6oK3PSaCrXVXK1/C0Ps8STreiUWiRLjfEqG3J09/p569I/Sn0p4
+ N5VEswxDPIi6MPPQUZelxVFM/iDjUbwQaz0uswbahPJ0aJW6LKgYtvjwWfCZtRbgNXYBDuam2ZWhV
+ tsRDnu1PTH6l77o0/U1m10ld/koAobb/u5T6EH0DP93CJiskgX95YEjcUP2W3cv7j/42GzjyNk1Wj
+ OMNzZFTQ==;
+Received: from willy by casper.infradead.org with local (Exim 4.97.1 #2 (Red
+ Hat Linux)) id 1rsiWd-0000000ARWt-0dWU;
+ Fri, 05 Apr 2024 12:18:31 +0000
+Date: Fri, 5 Apr 2024 13:18:31 +0100
+From: Matthew Wilcox <willy@infradead.org>
+To: Eugen Hristev <eugen.hristev@collabora.com>
+Message-ID: <Zg_sF1uPG4gdnJxI@casper.infradead.org>
 References: <20240405121332.689228-1-eugen.hristev@collabora.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20240405121332.689228-1-eugen.hristev@collabora.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -71,17 +67,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Gabriel Krisman Bertazi <krisman@collabora.com> Instead
- of a bunch of ifdefs, make the unicode built checks part of the code flow
- where possible, as requested by Torvalds. Signed-off-by: Gabriel Krisman
- Bertazi <krisman@collabora.com> [eugen.hristev@collabora.com: port to 6.8-rc3]
- Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com> --- fs/f2fs/namei.c
- | 10 ++++-- [...] 
+ Content preview:  On Fri, Apr 05, 2024 at 03:13:23PM +0300,
+ Eugen Hristev wrote: > Hello,
+ > > I am trying to respin the series here : >
+ https://www.spinics.net/lists/linux-ext4/msg85081.html
+ The subject here is "Cache insensitive cleanup for ext4/f2fs". Cache
+ insensitive means something entirely different
+ https://en.wikipedia.org/wiki/Cache-oblivious_algorithm
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -89,9 +86,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1rsiSg-0004Yr-Mu
-Subject: [f2fs-dev] [PATCH v16 9/9] f2fs: Move CONFIG_UNICODE defguards into
- the code flow
+X-Headers-End: 1rsisl-0006MU-S5
+Subject: Re: [f2fs-dev] [PATCH v16 0/9] Cache insensitive cleanup for
+ ext4/f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,105 +100,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Eugen Hristev via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: krisman@suse.de, brauner@kernel.org, jack@suse.cz,
- linux-kernel@vger.kernel.org, eugen.hristev@collabora.com, ebiggers@kernel.org,
- viro@zeniv.linux.org.uk, kernel@collabora.com,
- Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: krisman@suse.de, brauner@kernel.org, kernel@collabora.com, tytso@mit.edu,
+ jack@suse.cz, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, ebiggers@kernel.org,
+ adilger.kernel@dilger.ca, viro@zeniv.linux.org.uk,
+ linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Gabriel Krisman Bertazi <krisman@collabora.com>
+On Fri, Apr 05, 2024 at 03:13:23PM +0300, Eugen Hristev wrote:
+> Hello,
+> 
+> I am trying to respin the series here :
+> https://www.spinics.net/lists/linux-ext4/msg85081.html
 
-Instead of a bunch of ifdefs, make the unicode built checks part of the
-code flow where possible, as requested by Torvalds.
+The subject here is "Cache insensitive cleanup for ext4/f2fs".
+Cache insensitive means something entirely different
+https://en.wikipedia.org/wiki/Cache-oblivious_algorithm
 
-Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
-[eugen.hristev@collabora.com: port to 6.8-rc3]
-Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
----
- fs/f2fs/namei.c | 10 ++++------
- fs/f2fs/super.c |  8 ++++----
- 2 files changed, 8 insertions(+), 10 deletions(-)
-
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index e54f8c08bda8..1ecde2b45e99 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -576,8 +576,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
- 		goto out_iput;
- 	}
- out_splice:
--#if IS_ENABLED(CONFIG_UNICODE)
--	if (!inode && IS_CASEFOLDED(dir)) {
-+	if (IS_ENABLED(CONFIG_UNICODE) && !inode && IS_CASEFOLDED(dir)) {
- 		/* Eventually we want to call d_add_ci(dentry, NULL)
- 		 * for negative dentries in the encoding case as
- 		 * well.  For now, prevent the negative dentry
-@@ -586,7 +585,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
- 		trace_f2fs_lookup_end(dir, dentry, ino, err);
- 		return NULL;
- 	}
--#endif
-+
- 	new = d_splice_alias(inode, dentry);
- 	trace_f2fs_lookup_end(dir, !IS_ERR_OR_NULL(new) ? new : dentry,
- 				ino, IS_ERR(new) ? PTR_ERR(new) : err);
-@@ -639,16 +638,15 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
- 	f2fs_delete_entry(de, page, dir, inode);
- 	f2fs_unlock_op(sbi);
- 
--#if IS_ENABLED(CONFIG_UNICODE)
- 	/* VFS negative dentries are incompatible with Encoding and
- 	 * Case-insensitiveness. Eventually we'll want avoid
- 	 * invalidating the dentries here, alongside with returning the
- 	 * negative dentries at f2fs_lookup(), when it is better
- 	 * supported by the VFS for the CI case.
- 	 */
--	if (IS_CASEFOLDED(dir))
-+	if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
- 		d_invalidate(dentry);
--#endif
-+
- 	if (IS_DIRSYNC(dir))
- 		f2fs_sync_fs(sbi->sb, 1);
- fail:
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index a4bc26dfdb1a..68f3639d9b52 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -311,7 +311,7 @@ struct kmem_cache *f2fs_cf_name_slab;
- static int __init f2fs_create_casefold_cache(void)
- {
- 	f2fs_cf_name_slab = f2fs_kmem_cache_create("f2fs_casefolded_name",
--							F2FS_NAME_LEN);
-+						   F2FS_NAME_LEN);
- 	return f2fs_cf_name_slab ? 0 : -ENOMEM;
- }
- 
-@@ -1313,13 +1313,13 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 		return -EINVAL;
- 	}
- #endif
--#if !IS_ENABLED(CONFIG_UNICODE)
--	if (f2fs_sb_has_casefold(sbi)) {
-+
-+	if (!IS_ENABLED(CONFIG_UNICODE) && f2fs_sb_has_casefold(sbi)) {
- 		f2fs_err(sbi,
- 			"Filesystem with casefold feature cannot be mounted without CONFIG_UNICODE");
- 		return -EINVAL;
- 	}
--#endif
-+
- 	/*
- 	 * The BLKZONED feature indicates that the drive was formatted with
- 	 * zone alignment optimization. This is optional for host-aware
--- 
-2.34.1
-
+I suspect you mean "Case insensitive".
 
 
 _______________________________________________
