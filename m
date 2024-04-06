@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2FF489A4A5
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 Apr 2024 21:07:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 166E089A91B
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  6 Apr 2024 07:21:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rsou2-0007ZY-6B;
-	Fri, 05 Apr 2024 19:07:06 +0000
+	id 1rsyUI-0005YI-P1;
+	Sat, 06 Apr 2024 05:21:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kent.overstreet@linux.dev>) id 1rsoty-0007ZR-7r
+ (envelope-from <kent.overstreet@linux.dev>) id 1rsyUH-0005YB-8q
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 Apr 2024 19:07:02 +0000
+ Sat, 06 Apr 2024 05:21:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xy7rrQFx/ai4jiHF7erHWLhfU4NiOdULn/JTP2Sih9s=; b=VEGSRG0lTovWmvc0/JJIkJZziG
- YiHZmBM5mc2WJ74BLkalvscCoYhaxIbnG+X4f2OKZZP7sTmteRoktJxgt+GUy682PI6myq8597Gk0
- RX4SppHokrVHWMlr3L3rwfUu45mvmh0inrt0hCgPzxwuw5CKFXglBMD3kV6BwHNXuofg=;
+ bh=bhfWeUnybAsPC5w2wnk+v+3mDew6UZBufRKxuTERnpI=; b=E1wC6If3ASsUTZRRNH9/O21dSk
+ 7AorSeEoAzy4bRsMQkLxZyRcLMlL+Z+mfuF/Qp12G+QEBukYKviD3IxLKLnbV9cjWbHN5cBoA4pPo
+ 6d+VzHajOpb1jbwBLDd5LqemwNfRmm14rUl4NsgptTnbGBvn3KMh6afhDFP653wA7R3o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,35 +31,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xy7rrQFx/ai4jiHF7erHWLhfU4NiOdULn/JTP2Sih9s=; b=j/1XNuACE0UyhzVKeYqVjXCYNU
- qcq3vYgREUvtLhqc9/KP07tp6bi0Ah4zXEfUjOJw1maAn1DMoJtKIiH/o5cRyAeKBR7nJNcFv9B2E
- uUErc4yozCwfKkdk6nnbLANXF1A360xF68/2rkVQUOckv8qDLHGk6+CYoiHQXGAlF4xs=;
-Received: from out-183.mta0.migadu.com ([91.218.175.183])
+ bh=bhfWeUnybAsPC5w2wnk+v+3mDew6UZBufRKxuTERnpI=; b=DR6N58No9m6C3409EqJYALR1N3
+ UGrsdSLSku1TXIncGW27E5zdxLVzKmkTiCDe5QUTZ2rFRz1ExiBd2Oa2O05/kvC8yKo71cinvcV7z
+ Tk0M2Z430BHZpJxEVh82v+zcsTemmOaNob+nM8GBXuiyYJPs6X9VKDpGAqFIx/+XqTPM=;
+Received: from out-188.mta0.migadu.com ([91.218.175.188])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rsotx-0008On-0h for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 Apr 2024 19:07:02 +0000
-Date: Fri, 5 Apr 2024 15:06:43 -0400
+ id 1rsyUC-0004ft-2q for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 06 Apr 2024 05:21:09 +0000
+Date: Sat, 6 Apr 2024 01:20:46 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1712344009;
+ t=1712380852;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=xy7rrQFx/ai4jiHF7erHWLhfU4NiOdULn/JTP2Sih9s=;
- b=HZ97vexPrKySNDCOlz9qANDAP2JyhZBo/XKrmr+lyOE6CHkjHxJYL3ItLuk9OGrZpDRot0
- Q2UlJMp5dDfEit2UE6bzXAAdCDy+AAHKq7O1YfadBIDO1LT0kCLSqROgs2CrC0IoQX2GA0
- sxKvTykI3035G7lRq82NPDS2a99O47w=
+ bh=bhfWeUnybAsPC5w2wnk+v+3mDew6UZBufRKxuTERnpI=;
+ b=lLPAYrt5fteZomt541z2r9imi7ugwkVNiZC5pZZu3KjNFo/chRlOU1XA+bzccxMdMbIll9
+ iA+zhVqapFEEo0NHoRaICnZZ4CQhn70DUUTzecq//OFELR8OzaQySC7v12I2ZtwQTy4tva
+ HKowOJToS6St8IaHHb2Zg43DVWkqMkE=
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 From: Kent Overstreet <kent.overstreet@linux.dev>
 To: Andreas Dilger <adilger@dilger.ca>
-Message-ID: <3bvnvw5lvlraveup3du7esp3v54wissngudpov3xzneajo2fji@hbqk52z2xp2z>
+Message-ID: <2iyoi665o6hogzzlfhs6ets6vq2joh4xi5t3fbcpdmlv2cyrxu@7umadxpnaql7>
 References: <cover.1712126039.git.sweettea-kernel@dorminy.me>
- <58f9c9eef8b0e33a8d46a3ad8a8db46890e1fbe8.1712126039.git.sweettea-kernel@dorminy.me>
- <BDD29EBF-3A5F-4241-B9F2-789605D99817@dilger.ca>
+ <943938ff75580b210eebf6c885659dd95f029486.1712126039.git.sweettea-kernel@dorminy.me>
+ <7CF0A3D0-50E7-448F-A992-90B9168D557F@dilger.ca>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <BDD29EBF-3A5F-4241-B9F2-789605D99817@dilger.ca>
+In-Reply-To: <7CF0A3D0-50E7-448F-A992-90B9168D557F@dilger.ca>
 X-Migadu-Flow: FLOW_OUT
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -68,10 +68,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Apr 05, 2024 at 01:05:01PM -0600,
+ Content preview:  On Fri, Apr 05, 2024 at 01:17:45PM -0600,
  Andreas Dilger wrote:
  > On Apr 3, 2024, at 1:22 AM, Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
- wrote: > > > > Update the signature of fiemap_fill_next_ext [...] 
+ wrote: > > > > Signed-off-by: Sweet Tea Dorminy <sweettea-k [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -84,9 +84,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1rsotx-0008On-0h
-Subject: Re: [f2fs-dev] [PATCH v3 02/13] fiemap: update
- fiemap_fill_next_extent() signature
+X-Headers-End: 1rsyUC-0004ft-2q
+Subject: Re: [f2fs-dev] [PATCH v3 13/13] bcachefs: fiemap: emit new
+ COMPRESSED state
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,36 +114,39 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Apr 05, 2024 at 01:05:01PM -0600, Andreas Dilger wrote:
+On Fri, Apr 05, 2024 at 01:17:45PM -0600, Andreas Dilger wrote:
 > On Apr 3, 2024, at 1:22 AM, Sweet Tea Dorminy <sweettea-kernel@dorminy.me> wrote:
 > > 
-> > Update the signature of fiemap_fill_next_extent() to allow passing a
-> > physical length. Update all callers to pass a 0 physical length -- since
-> > none set the EXTENT_HAS_PHYS_LEN flag, this value doesn't matter.
+> > Signed-off-by: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
+> > ---
+> > fs/bcachefs/fs.c | 2 +-
+> > 1 file changed, 1 insertion(+), 1 deletion(-)
+> > 
+> > diff --git a/fs/bcachefs/fs.c b/fs/bcachefs/fs.c
+> > index d2793bae842d..54f613f977b4 100644
+> > --- a/fs/bcachefs/fs.c
+> > +++ b/fs/bcachefs/fs.c
+> > @@ -921,7 +921,7 @@ static int bch2_fill_extent(struct bch_fs *c,
+> > 				flags2 |= FIEMAP_EXTENT_UNWRITTEN;
+> > 
+> > 			if (p.crc.compression_type) {
+> > -				flags2 |= FIEMAP_EXTENT_ENCODED;
+> > +				flags2 |= FIEMAP_EXTENT_DATA_COMPRESSED;
 > 
-> Patch-structure-wise, it doesn't make sense to me to change all of the callers
-> to pass "0" as the argument to this function, and then submit a whole series
-> of per-filesystem patches that sets only FIEMAP_EXTENT_HAS_PHYS_LEN (but also
-> passes phys_len = 0, which is wrong AFAICS).
+> (defect) This should *also* set FIEMAP_EXTENT_ENCODED in this case,
+> along with FIEMAP_EXTENT_DATA_COMPRESSED.  Both for compatibility with
+> older code that doesn't understand FIEMAP_EXTENT_DATA_COMPRESSED, and
+> because the data still cannot be read directly from the volume when it
+> is not mounted.
 > 
-> A cleaner approach would be to rename the existing fiemap_fill_next_extent()
-> to fiemap_fill_next_extent_phys() that takes phys_len as an argument, and then
-> add a simple wrapper until all of the filesystems are updated:
-> 
-> #define fiemap_fill_next_extent(info, logical, phys, log_len, flags, dev) \
->    fiemap_fill_next_extent_phys(info, logical, phys, log_len, 0, flags, dev)
-> 
-> Then the per-filesystem patches would involve changing over the callers to
-> use fiemap_fill_next_extent_phys() and setting FIEMAP_EXTENT_HAS_PHYS_LEN.
+> Probably Kent should chime in here with what needs to be done to set
+> the phys_len properly for bcachefs, or leave this patch out of your
+> series and let him submit it directly.  With proposed wrapper in the
+> first patch of the series there isn't a hard requirement to change
+> all of the filesystems in one shot.
 
-Cleaner still would be to just have the callers initiaize and pass a
-struct fiemap_extent instead of passing around a whole bunch of integer
-parameters.
-
-You get more explicit naming, better typesafety - functions with a bunch
-of integer parametrs are not great from a type safety POV - and you can
-add and pass fields to fiemap_extent without having to update callers
-that aren't using it.
+You get phys len from crc.compressed_size - that's always guaranteed,
+even if it's not compressed
 
 
 _______________________________________________
