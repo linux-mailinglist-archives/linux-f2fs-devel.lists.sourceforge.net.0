@@ -2,95 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 937CF89E03D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  9 Apr 2024 18:22:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB08C89E042
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  9 Apr 2024 18:22:48 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ruEEh-0000Dj-32;
-	Tue, 09 Apr 2024 16:22:15 +0000
+	id 1ruEFC-0000Zu-Sn;
+	Tue, 09 Apr 2024 16:22:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1ruEEg-0000Dd-2Q
+ (envelope-from <djwong@kernel.org>) id 1ruEFA-0000Zb-BX
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 09 Apr 2024 16:22:14 +0000
+ Tue, 09 Apr 2024 16:22:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xxRl0SlTWno/yLh+y785Q+lwhh+ELRLLFCZYcUARExY=; b=mk/DvUrSf9lNn95++jyLnYeJiG
- TLMj4MXhrTlF9y+NVkgAVBj4g/N9XwCzL1dJPdqfoCwvokdFepJKR/FCGtRbVzbqLYA4w/Wuq5i0a
- LswEs4qJV8RbtD6bQqe1LrFl+8ZK0MWOi5NKW//e37udBlGkJaDUkdRkYR9uySiPMvVg=;
+ bh=Qo/B8EyoS3TTtrhkf8uivEzc68xf8bK2b3hv4FqJ2GY=; b=TekJYzccjFEJK/HxUyiZPDwgdZ
+ 85OaDIpu1D0GOArfCdXRSALuyzovmyaZh+waePraw6bEXI1a39tVHJHtE3HuFVPSj0aArK8PprS6i
+ IknKoevhXDj4gaCpy9pMSqLLZvBAEOoN7/RBCgic5wkXqrPxv7cz2YlSw0guNGzAnDSc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xxRl0SlTWno/yLh+y785Q+lwhh+ELRLLFCZYcUARExY=; b=OQIg1uYaN+TFN0OIWUhfYbuPei
- ZR1aHrUETnFA2lyFwRAr3I3MfkBkizVH3rIy4ADj0Wbx8P/yyNbCZ7dLMn0oB3vJX9ReqmsFMDu+Y
- iWsS4FRLlRjroPRcv8p6wB3BC0MmTHSlplt89ZcC21Js6AQmvMG9qzmeVUJ+8If8slaU=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=Qo/B8EyoS3TTtrhkf8uivEzc68xf8bK2b3hv4FqJ2GY=; b=iHbG+mk3fCGL2ifAg4cIlqOAe6
+ FN0pGjaW7lwgjMlcY8+k+JdFuqwWzSvlqxcoXfV0s1CF7lBrkBUWl/XjklsOBeX6FRnmJgrELS0xE
+ LUwx5+38nZ378K66P0y6Pw8ejGkDi1X/JdP0MY6fchFWLh85RfW/u6nYcJSofxr1Tt4E=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ruEEf-0002k4-CG for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 09 Apr 2024 16:22:14 +0000
+ id 1ruEFA-0002lf-7k for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 09 Apr 2024 16:22:45 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 9D344CE1B3D;
- Tue,  9 Apr 2024 16:22:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 850D5C433F1;
- Tue,  9 Apr 2024 16:22:00 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id C995D618D1;
+ Tue,  9 Apr 2024 16:22:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 783B4C433F1;
+ Tue,  9 Apr 2024 16:22:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1712679720;
- bh=j25mVSV7JaOAYPymcWENzF72xWe8UKWzEPPYmINrrTY=;
+ s=k20201202; t=1712679753;
+ bh=s81ceGOY/UaeALO8XB1vF4xIKP6ybz9DnJl/IEpTMSM=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=bx/6Um3GCGFEJdmkNmAM/2vbAgjap7/1jyuTvs2ybQfzvNzcP1cbp1FYKlGohexhA
- jLypVhSW1clknwS0KoF/IoOboJEuL3xKLqvN0XLZuEJQSk8d1p4GRGE73iGBYTD555
- l82nSAcpJYVI+QVIlQzGkEE2vXbKHdyLG+LfO1kEdm+LfbQdupLWktkiJsrqzE0VFO
- sOGIcQeBbP3KaOjpyJ8IQSbBJ5peFVieuXS8FurIOfNkUV8EGm82yqfmwYyiYoz3VT
- 6WZwEIZlL6+JHqfC7ruGoHVkPA0mus8C/Wa9IQ7iOF84uz7LHmyW0e2JH2n7C/7eNd
- IiT7mahfgIgLg==
-Date: Tue, 9 Apr 2024 16:21:58 +0000
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZhVrJh3rackEiIfL@google.com>
-References: <20240404195254.556896-1-jaegeuk@kernel.org>
- <2c195fee-c71c-4e44-b24f-9880b3c1b6c4@kernel.org>
+ b=uOf15R97CfO4NRrpGlR+ut/EZaH8gJePsx76fVYZ2CwpkY6p2z9oJg8boVPOdOoce
+ WETlWuf5gfSinxoonTC04g5Kc3Sj2wZe9v17KvknHY3kunNrQaSO0L6nThQ5p/8nRJ
+ nKKPh7+OV5XuHOCgKUobpVWsMEUosqNN+Oy7MtOavp44t3NaOWktoHNU3flF3rj12P
+ bxvOmVWzXpwkP+BPmdlgreV35svfYgm5TTPVIxw45uz3NeIFb27nURTpm/B4vJffGz
+ rHBMtsPRwqA5Of0yoDXPSPXCbiEUfKL6dAA1Ko3ghM2b9lkhjl0APrqbDbXL3wc/MZ
+ nHjQ03z4Hsjsg==
+Date: Tue, 9 Apr 2024 09:22:32 -0700
+From: "Darrick J. Wong" <djwong@kernel.org>
+To: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
+Message-ID: <20240409162232.GA6367@frogsfrogsfrogs>
+References: <cover.1712126039.git.sweettea-kernel@dorminy.me>
+ <1ba5bfccccbf4ff792f178268badde056797d0c4.1712126039.git.sweettea-kernel@dorminy.me>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <2c195fee-c71c-4e44-b24f-9880b3c1b6c4@kernel.org>
-X-Spam-Score: -4.2 (----)
+In-Reply-To: <1ba5bfccccbf4ff792f178268badde056797d0c4.1712126039.git.sweettea-kernel@dorminy.me>
+X-Spam-Score: -6.9 (------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 04/09, Chao Yu wrote: > On 2024/4/5 3:52,
- Jaegeuk Kim wrote:
- > > Shutdown does not check the error of thaw_super due to readonly, which
- > > causes a deadlock like below. > > > > f2fs_ioc_shutdown(F [...] 
- Content analysis details:   (-4.2 points, 6.0 required)
+ Content preview:  On Wed, Apr 03, 2024 at 03:22:42AM -0400, Sweet Tea Dorminy
+ wrote: > Some filesystems support compressed extents which have a larger
+ logical > size than physical, and for those filesystems, it can be [...] 
+ Content analysis details:   (-6.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -1.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ruEEf-0002k4-CG
-Subject: Re: [f2fs-dev] [PATCH] f2fs: don't set RO when shutting down f2fs
+X-Headers-End: 1ruEFA-0002lf-7k
+Subject: Re: [f2fs-dev] [PATCH v3 01/13] fs: fiemap: add physical_length
+ field to extents
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,48 +102,173 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org,
- Light Hsieh =?utf-8?B?KOisneaYjueHiCk=?= <Light.Hsieh@mediatek.com>,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-bcachefs@vger.kernel.org, Christian Brauner <brauner@kernel.org>,
+ Jan Kara <jack@suse.cz>, linux-fsdevel@vger.kernel.org,
+ Jonathan Corbet <corbet@lwn.net>, linux-btrfs@vger.kernel.org,
+ Brian Foster <bfoster@redhat.com>, Kent Overstreet <kent.overstreet@linux.dev>,
+ linux-doc@vger.kernel.org, Josef Bacik <josef@toxicpanda.com>,
+ linux-kernel@vger.kernel.org, Chris Mason <clm@fb.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, David Sterba <dsterba@suse.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@meta.com, =?iso-8859-1?Q?Micka=EBl_Sala=FCn?= <mic@digikod.net>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMDQvMDksIENoYW8gWXUgd3JvdGU6Cj4gT24gMjAyNC80LzUgMzo1MiwgSmFlZ2V1ayBLaW0g
-d3JvdGU6Cj4gPiBTaHV0ZG93biBkb2VzIG5vdCBjaGVjayB0aGUgZXJyb3Igb2YgdGhhd19zdXBl
-ciBkdWUgdG8gcmVhZG9ubHksIHdoaWNoCj4gPiBjYXVzZXMgYSBkZWFkbG9jayBsaWtlIGJlbG93
-Lgo+ID4gCj4gPiBmMmZzX2lvY19zaHV0ZG93bihGMkZTX0dPSU5HX0RPV05fRlVMTFNZTkMpICAg
-ICAgICBpc3N1ZV9kaXNjYXJkX3RocmVhZAo+ID4gICAtIGJkZXZfZnJlZXplCj4gPiAgICAtIGZy
-ZWV6ZV9zdXBlcgo+ID4gICAtIGYyZnNfc3RvcF9jaGVja3BvaW50KCkKPiA+ICAgIC0gZjJmc19o
-YW5kbGVfY3JpdGljYWxfZXJyb3IgICAgICAgICAgICAgICAgICAgICAtIHNiX3N0YXJ0X3dyaXRl
-Cj4gPiAgICAgIC0gc2V0IFJPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAtIHdhaXRpbmcKPiA+ICAgLSBiZGV2X3RoYXcKPiA+ICAgIC0gdGhhd19zdXBlcl9sb2NrZWQK
-PiA+ICAgICAgLSByZXR1cm4gLUVJTlZBTCwgaWYgc2JfcmRvbmx5KCkKPiA+ICAgLSBmMmZzX3N0
-b3BfZGlzY2FyZF90aHJlYWQKPiA+ICAgIC0+IHdhaXQgZm9yIGt0aHJlYWRfc3RvcChkaXNjYXJk
-X3RocmVhZCk7Cj4gPiAKPiA+IFJlcG9ydGVkLWJ5OiAiTGlnaHQgSHNpZWggKOisneaYjueHiCki
-IDxMaWdodC5Ic2llaEBtZWRpYXRlay5jb20+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBKYWVnZXVrIEtp
-bSA8amFlZ2V1a0BrZXJuZWwub3JnPgo+ID4gLS0tCj4gPiAgIGZzL2YyZnMvc3VwZXIuYyB8IDEx
-ICsrKysrKysrKy0tCj4gPiAgIDEgZmlsZSBjaGFuZ2VkLCA5IGluc2VydGlvbnMoKyksIDIgZGVs
-ZXRpb25zKC0pCj4gPiAKPiA+IGRpZmYgLS1naXQgYS9mcy9mMmZzL3N1cGVyLmMgYi9mcy9mMmZz
-L3N1cGVyLmMKPiA+IGluZGV4IGRmOTc2NWI0MWRhYy4uYmE2Mjg4ZTg3MGM1IDEwMDY0NAo+ID4g
-LS0tIGEvZnMvZjJmcy9zdXBlci5jCj4gPiArKysgYi9mcy9mMmZzL3N1cGVyLmMKPiA+IEBAIC00
-MTM1LDkgKzQxMzUsMTYgQEAgdm9pZCBmMmZzX2hhbmRsZV9jcml0aWNhbF9lcnJvcihzdHJ1Y3Qg
-ZjJmc19zYl9pbmZvICpzYmksIHVuc2lnbmVkIGNoYXIgcmVhc29uLAo+ID4gICAJaWYgKHNodXRk
-b3duKQo+ID4gICAJCXNldF9zYmlfZmxhZyhzYmksIFNCSV9JU19TSFVURE9XTik7Cj4gPiAtCS8q
-IGNvbnRpbnVlIGZpbGVzeXN0ZW0gb3BlcmF0b3JzIGlmIGVycm9ycz1jb250aW51ZSAqLwo+ID4g
-LQlpZiAoY29udGludWVfZnMgfHwgZjJmc19yZWFkb25seShzYikpCj4gPiArCS8qCj4gPiArCSAq
-IENvbnRpbnVlIGZpbGVzeXN0ZW0gb3BlcmF0b3JzIGlmIGVycm9ycz1jb250aW51ZS4gU2hvdWxk
-IG5vdCBzZXQKPiA+ICsJICogUk8gYnkgc2h1dGRvd24sIHNpbmNlIFJPIGJ5cGFzc2VzIHRoYXdf
-c3VwZXIgd2hpY2ggY2FuIGhhbmcgdGhlCj4gPiArCSAqIHN5c3RlbS4KPiA+ICsJICovCj4gPiAr
-CWlmIChjb250aW51ZV9mcyB8fCBmMmZzX3JlYWRvbmx5KHNiKSB8fAo+ID4gKwkJCQlyZWFzb24g
-PT0gU1RPUF9DUF9SRUFTT05fU0hVVERPV04pIHsKPiA+ICsJCWYyZnNfd2FybihzYmksICJTdG9w
-cGVkIGZpbGVzeXN0ZW0gZHVlIHRvIHJlYWRvbjogJWQiLCByZWFzb24pOwo+ID4gICAJCXJldHVy
-bjsKPiAKPiBEbyB3ZSBuZWVkIHRvIHNldCBSTyBhZnRlciBiZGV2X3RoYXcoKSBpbiBmMmZzX2Rv
-X3NodXRkb3duKCk/CgpJSVJDLCBzaHV0ZG93biBkb2Vzbid0IG5lZWQgdG8gc2V0IFJPIGFzIHdl
-IHN0b3BwZWQgdGhlIGNoZWNrcG9pbnQuCkknbSBtb3JlIGNvbmNlcm5lZCBvbiBhbnkgc2lkZSBl
-ZmZlY3QgY2F1c2VkIGJ5IHRoaXMgUk8gY2hhbmdlLgoKPiAKPiBUaGFua3MsCj4gCj4gPiArCX0K
-PiA+ICAgCWYyZnNfd2FybihzYmksICJSZW1vdW50aW5nIGZpbGVzeXN0ZW0gcmVhZC1vbmx5Iik7
-Cj4gPiAgIAkvKgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMu
-c291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3Rp
-bmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On Wed, Apr 03, 2024 at 03:22:42AM -0400, Sweet Tea Dorminy wrote:
+> Some filesystems support compressed extents which have a larger logical
+> size than physical, and for those filesystems, it can be useful for
+> userspace to know how much space those extents actually use. For
+> instance, the compsize [1] tool for btrfs currently uses btrfs-internal,
+> root-only ioctl to find the actual disk space used by a file; it would
+> be better and more useful for this information to require fewer
+> privileges and to be usable on more filesystems. Therefore, use one of
+> the padding u64s in the fiemap extent structure to return the actual
+> physical length; and, for now, return this as equal to the logical
+> length.
+> 
+> [1] https://github.com/kilobyte/compsize
+> 
+> Signed-off-by: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
+> ---
+>  Documentation/filesystems/fiemap.rst | 28 +++++++++++++++++-------
+>  fs/ioctl.c                           |  3 ++-
+>  include/uapi/linux/fiemap.h          | 32 ++++++++++++++++++++++------
+>  3 files changed, 47 insertions(+), 16 deletions(-)
+> 
+> diff --git a/Documentation/filesystems/fiemap.rst b/Documentation/filesystems/fiemap.rst
+> index 93fc96f760aa..c2bfa107c8d7 100644
+> --- a/Documentation/filesystems/fiemap.rst
+> +++ b/Documentation/filesystems/fiemap.rst
+> @@ -80,14 +80,24 @@ Each extent is described by a single fiemap_extent structure as
+>  returned in fm_extents::
+>  
+>      struct fiemap_extent {
+> -	    __u64	fe_logical;  /* logical offset in bytes for the start of
+> -				* the extent */
+> -	    __u64	fe_physical; /* physical offset in bytes for the start
+> -				* of the extent */
+> -	    __u64	fe_length;   /* length in bytes for the extent */
+> -	    __u64	fe_reserved64[2];
+> -	    __u32	fe_flags;    /* FIEMAP_EXTENT_* flags for this extent */
+> -	    __u32	fe_reserved[3];
+> +            /*
+> +             * logical offset in bytes for the start of
+> +             * the extent from the beginning of the file
+> +             */
+> +            __u64 fe_logical;
+> +            /*
+> +             * physical offset in bytes for the start
+> +             * of the extent from the beginning of the disk
+> +             */
+> +            __u64 fe_physical;
+> +            /* logical length in bytes for this extent */
+> +            __u64 fe_logical_length;
+> +            /* physical length in bytes for this extent */
+> +            __u64 fe_physical_length;
+> +            __u64 fe_reserved64[1];
+> +            /* FIEMAP_EXTENT_* flags for this extent */
+> +            __u32 fe_flags;
+> +            __u32 fe_reserved[3];
+>      };
+>  
+>  All offsets and lengths are in bytes and mirror those on disk.  It is valid
+> @@ -175,6 +185,8 @@ FIEMAP_EXTENT_MERGED
+>    userspace would be highly inefficient, the kernel will try to merge most
+>    adjacent blocks into 'extents'.
+>  
+> +FIEMAP_EXTENT_HAS_PHYS_LEN
+> +  This will be set if the file system populated the physical length field.
+
+Just out of curiosity, should filesystems set this flag and
+fe_physical_length if fe_physical_length == fe_logical_length?
+Or just leave both blank?
+
+>  VFS -> File System Implementation
+>  ---------------------------------
+> diff --git a/fs/ioctl.c b/fs/ioctl.c
+> index 661b46125669..8afd32e1a27a 100644
+> --- a/fs/ioctl.c
+> +++ b/fs/ioctl.c
+> @@ -138,7 +138,8 @@ int fiemap_fill_next_extent(struct fiemap_extent_info *fieinfo, u64 logical,
+>  	memset(&extent, 0, sizeof(extent));
+>  	extent.fe_logical = logical;
+>  	extent.fe_physical = phys;
+> -	extent.fe_length = len;
+> +	extent.fe_logical_length = len;
+> +	extent.fe_physical_length = len;
+>  	extent.fe_flags = flags;
+>  
+>  	dest += fieinfo->fi_extents_mapped;
+> diff --git a/include/uapi/linux/fiemap.h b/include/uapi/linux/fiemap.h
+> index 24ca0c00cae3..3079159b8e94 100644
+> --- a/include/uapi/linux/fiemap.h
+> +++ b/include/uapi/linux/fiemap.h
+> @@ -14,14 +14,30 @@
+>  
+>  #include <linux/types.h>
+>  
+> +/*
+> + * For backward compatibility, where the member of the struct was called
+> + * fe_length instead of fe_logical_length.
+> + */
+> +#define fe_length fe_logical_length
+
+This #define has global scope; are you sure this isn't going to cause a
+weird build problem downstream with some program that declares an
+unrelated fe_length symbol?
+
+> +
+>  struct fiemap_extent {
+> -	__u64 fe_logical;  /* logical offset in bytes for the start of
+> -			    * the extent from the beginning of the file */
+> -	__u64 fe_physical; /* physical offset in bytes for the start
+> -			    * of the extent from the beginning of the disk */
+> -	__u64 fe_length;   /* length in bytes for this extent */
+> -	__u64 fe_reserved64[2];
+> -	__u32 fe_flags;    /* FIEMAP_EXTENT_* flags for this extent */
+> +	/*
+> +	 * logical offset in bytes for the start of
+> +	 * the extent from the beginning of the file
+> +	 */
+> +	__u64 fe_logical;
+> +	/*
+> +	 * physical offset in bytes for the start
+> +	 * of the extent from the beginning of the disk
+> +	 */
+> +	__u64 fe_physical;
+> +	/* logical length in bytes for this extent */
+> +	__u64 fe_logical_length;
+
+Or why not just leave the field name the same since the "logical length
+in bytes" comment is present both here in the header and again in the
+documentation?
+
+--D
+
+> +	/* physical length in bytes for this extent */
+> +	__u64 fe_physical_length;
+> +	__u64 fe_reserved64[1];
+> +	/* FIEMAP_EXTENT_* flags for this extent */
+> +	__u32 fe_flags;
+>  	__u32 fe_reserved[3];
+>  };
+>  
+> @@ -66,5 +82,7 @@ struct fiemap {
+>  						    * merged for efficiency. */
+>  #define FIEMAP_EXTENT_SHARED		0x00002000 /* Space shared with other
+>  						    * files. */
+> +#define FIEMAP_EXTENT_HAS_PHYS_LEN	0x00004000 /* Physical length is valid
+> +						    * and set by FS. */
+>  
+>  #endif /* _UAPI_LINUX_FIEMAP_H */
+> -- 
+> 2.43.0
+> 
+> 
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
