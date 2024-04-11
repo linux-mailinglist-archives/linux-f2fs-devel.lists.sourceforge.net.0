@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1E4C8A0BB6
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Apr 2024 10:57:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25F348A0BD2
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Apr 2024 11:05:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ruqF4-0003fP-Pj;
-	Thu, 11 Apr 2024 08:57:11 +0000
+	id 1ruqN2-0005Vc-5I;
+	Thu, 11 Apr 2024 09:05:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ruqEz-0003dI-H9
+ (envelope-from <chao@kernel.org>) id 1ruqMz-0005VL-Gk
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 11 Apr 2024 08:57:05 +0000
+ Thu, 11 Apr 2024 09:05:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lwxb9/tP9Rn3AGMWrCZb1HPfLLAsZL4M0SeWIosH2J0=; b=EURSyFkN+j8jOSlLj76H6LcOc9
- ABianJTK6/av4F+5GAO8Vw4PYm4/2OgDyXNdRQkA3ZviV+Yh6Gys5trxZa8DqKx3OnaqvQS0niWFH
- brLdo+mmqVJMaC3lMu2OVCpj2A+XKAbzvz2MLCsqqiF5zZj3vtXPBc3tlecXjaQJ5cho=;
+ bh=XQZmTIiStEon0CnpXiktaKE6Ut6+CU7KkMOtYyxaHgM=; b=dOE8flcV056e3MAf+DYgxZaulQ
+ KoP2AK6ciTV0PUFQmAQkCOOCqVW+7qPmYx8YA1lvjXiUf7zrDtMit9El6IWio9hBD6C8sgggCZCUQ
+ Et76Ld7IpdmPbMEhHXA2w0XQFI3NytevQS9sqifUGRjPW6AiWr4OcotYg6JXPaAS/aok=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,68 +31,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lwxb9/tP9Rn3AGMWrCZb1HPfLLAsZL4M0SeWIosH2J0=; b=UIl54Z2GErzaBJtWy3nhc1TWSw
- Fs4INPJxoKgZAbeeCeaV/R2ieksyuWZ8zioUrFTI2MS8kSHoXH/mFuIvGt6mwgOR9MacBo2MB74LB
- 6v3eJmhgE0PeXqcYDZoVnwhtfSwmhHDlslJIXbZgoBarW3RUVSax8eSYOY1HQS24y2Lw=;
+ bh=XQZmTIiStEon0CnpXiktaKE6Ut6+CU7KkMOtYyxaHgM=; b=PaQrZinwMABS0HPVYEbCEL5K8f
+ Qp4RRU6h+XX9VIBgo5wBUAsh83Z13TLfbvSzeXRpnCo3EndyDirpa5wwUNXiTXOZfMxUeZMFg+GLT
+ vsR5PfEeyZKoJoe4AS3U7ZRKz1TT2UcxyVk2IDKqtJciK0Bl1dgq1o7OL+QqZCjzc9pw=;
 Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ruqEy-0007U8-Qc for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 11 Apr 2024 08:57:05 +0000
+ id 1ruqMz-0008UT-2d for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 11 Apr 2024 09:05:22 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 4DBE4CE2F99
+ by sin.source.kernel.org (Postfix) with ESMTP id 99248CE2F9D
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 11 Apr 2024 08:56:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B2716C433C7;
- Thu, 11 Apr 2024 08:56:51 +0000 (UTC)
+ Thu, 11 Apr 2024 09:05:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 078E6C433F1;
+ Thu, 11 Apr 2024 09:05:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1712825812;
- bh=MiTIYvye3l6B9JzrY4Ir5pDljWirVEULk0X8LUFTE64=;
+ s=k20201202; t=1712826313;
+ bh=kMvhQuZC30TP4MfIzzmEHSrl3gDxXwvdJvDmpU7NQxk=;
  h=Date:Subject:To:References:From:In-Reply-To:From;
- b=Ni5naDon9oxkiHHp2T5IHrRod+YcAco5n2SMcDPM0jghA5h2oHI+JQQ3ysuBQTbuZ
- Xj+YvoAcDr1ogQCHPscSuPsW/MOnwJcsekgmyCMA8+i3rNTHt6ptI/zcp1ig7qf4h9
- W26M+qYR209yH8FdAFu3n62hxembeYtw2fhWPM4atHELh74zpSurHAFmr5YzKk82TK
- dXt9w23gEg9nDpHvxysZcIECw9YjRfX2aLB3ePJf+tt6WY0lZvQNT2RKW+TzBYKPB7
- Ga7iO1FPJu7OjbcrwhQvWSjR/X672lNQE+lGjjAZ15JVCrjL37tCQrAwtVVtiqyH+r
- KKbU4JOa6CiiQ==
-Message-ID: <27380aa8-4a80-48cc-b4ef-9fe08fe3de82@kernel.org>
-Date: Thu, 11 Apr 2024 16:56:48 +0800
+ b=PD62E+FEblbbBz7OCHJPMaWWym+ESOgLHoVMpc4GgJqQ7M2yIgiCPstpZ6hems4lm
+ Nhy3CGAiGKrSioCgdmHfFgssfuOJ2+BKog0Ihtlu4ds4Qkxfjy8wd/W7GPsWjGvlJp
+ VUhHStomiR5R8z6HyNhDCWS2smUx5zF6nqreamLWUrMMCWhS02XV1CY89RP42Co5HR
+ xsR4zw1h2F8lIeK/HFQZd4x7QybXLgCdfLbkb4HmoMj6GY0th29FWgjPMvPYjrIwvb
+ dQwQol3rQfel1e6iO/035uIaGHdRwdFZkEwisz0vqkQaqYTU023fHs7mBuziJqUTSj
+ AGCMnzL/0cIVw==
+Message-ID: <59414941-a15f-4eb0-8574-3b2a27d8ae69@kernel.org>
+Date: Thu, 11 Apr 2024 17:05:10 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 References: <20240409203411.1885121-1-jaegeuk@kernel.org>
+ <20240409203411.1885121-2-jaegeuk@kernel.org>
 Content-Language: en-US
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20240409203411.1885121-1-jaegeuk@kernel.org>
+In-Reply-To: <20240409203411.1885121-2-jaegeuk@kernel.org>
 X-Spam-Score: -7.7 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/4/10 4:34,
- Jaegeuk Kim wrote: > Let's convert PageWriteback
- to folio_test_writeback. > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
- Reviewed-by: Chao Yu <chao@kernel.org> Thanks, 
+ Content preview:  On 2024/4/10 4:34, Jaegeuk Kim wrote: > Let's stop issuing
+ compressed writes and clear their writeback flags. > > Signed-off-by: Jaegeuk
+ Kim <jaegeuk@kernel.org> > --- > fs/f2fs/compress.c | 33 ++++++ [...] 
  Content analysis details:   (-7.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [145.40.73.55 listed in list.dnswl.org]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -2.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ruqEy-0007U8-Qc
-Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs: use folio_test_writeback
+X-Headers-End: 1ruqMz-0008UT-2d
+Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs: clear writeback when compression
+ failed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,13 +110,85 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2024/4/10 4:34, Jaegeuk Kim wrote:
-> Let's convert PageWriteback to folio_test_writeback.
+> Let's stop issuing compressed writes and clear their writeback flags.
 > 
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>   fs/f2fs/compress.c | 33 +++++++++++++++++++++++++++++++--
+>   1 file changed, 31 insertions(+), 2 deletions(-)
+> 
+> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> index d67c471ab5df..3a8ecc6aee84 100644
+> --- a/fs/f2fs/compress.c
+> +++ b/fs/f2fs/compress.c
+> @@ -1031,6 +1031,25 @@ static void set_cluster_writeback(struct compress_ctx *cc)
+>   	}
+>   }
+>   
+> +static void cancel_cluster_writeback(struct compress_ctx *cc, int submitted)
+> +{
+> +	int i;
+> +
+> +	for (i = 0; i < cc->cluster_size; i++) {
+> +		if (!cc->rpages[i])
+> +			continue;
+> +		if (i < submitted) {
+> +			if (i)
+> +				f2fs_wait_on_page_writeback(cc->rpages[i],
+> +						DATA, true, true);
+> +			inode_inc_dirty_pages(cc->inode);
+> +			lock_page(cc->rpages[i]);
+> +		}
+> +		clear_page_private_gcing(cc->rpages[i]);
+> +		end_page_writeback(cc->rpages[i]);
+> +	}
+> +}
+> +
+>   static void set_cluster_dirty(struct compress_ctx *cc)
+>   {
+>   	int i;
+> @@ -1232,7 +1251,6 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+>   		.page = NULL,
+>   		.encrypted_page = NULL,
+>   		.compressed_page = NULL,
+> -		.submitted = 0,
+>   		.io_type = io_type,
+>   		.io_wbc = wbc,
+>   		.encrypted = fscrypt_inode_uses_fs_layer_crypto(cc->inode) ?
+> @@ -1358,7 +1376,15 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+>   			fio.compressed_page = cc->cpages[i - 1];
+>   
+>   		cc->cpages[i - 1] = NULL;
+> +		fio.submitted = 0;
+>   		f2fs_outplace_write_data(&dn, &fio);
+> +		if (unlikely(!fio.submitted)) {
+> +			cancel_cluster_writeback(cc, i);
+> +
+> +			/* To call fscrypt_finalize_bounce_page */
+> +			i = cc->valid_nr_cpages;
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+*submitted = 0; ?
 
 Thanks,
+
+> +			goto out_destroy_crypt;
+> +		}
+>   		(*submitted)++;
+>   unlock_continue:
+>   		inode_dec_dirty_pages(cc->inode);
+> @@ -1392,8 +1418,11 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+>   out_destroy_crypt:
+>   	page_array_free(cc->inode, cic->rpages, cc->cluster_size);
+>   
+> -	for (--i; i >= 0; i--)
+> +	for (--i; i >= 0; i--) {
+> +		if (!cc->cpages[i])
+> +			continue;
+>   		fscrypt_finalize_bounce_page(&cc->cpages[i]);
+> +	}
+>   out_put_cic:
+>   	kmem_cache_free(cic_entry_slab, cic);
+>   out_put_dnode:
 
 
 _______________________________________________
