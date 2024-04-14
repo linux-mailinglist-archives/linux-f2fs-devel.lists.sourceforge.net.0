@@ -2,97 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E13C18A435A
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 14 Apr 2024 17:33:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82A908A4363
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 14 Apr 2024 17:33:03 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rw1qf-0000zG-Cb;
-	Sun, 14 Apr 2024 15:32:54 +0000
+	id 1rw1qn-00010y-Ip;
+	Sun, 14 Apr 2024 15:33:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rw1qc-0000yv-Q1
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rw1ql-00010a-PS
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 14 Apr 2024 15:32:51 +0000
+ Sun, 14 Apr 2024 15:33:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vnNshwKadsBgKH/U06mDaGoU7TiC73md76Q0U4k+GS8=; b=L5fD21iXjqE/4xfbErbmof71/2
- R2Hd7xwKE9HXVugv5TtOSpPccyh5U8oLZ8HDH4FAeJSCMB71WVTOhK0ZLZE8/KPlLd63GLzpCem8J
- q9cXEYvcAPW8jUq6jDKPIOxtaii4Rv/yfS+k+KLsAxWMCnuB0TFk5H751AQ4NtQImDm0=;
+ bh=hbvcKxIs/KkFnbtpgzcVVCBoRUDFLduhJqlbxP2pGpo=; b=JY83cnRdJls5+CY6qEG+qnppJC
+ bthCCeC/d5fCasur37luMVGPfjt9XyLeJEND+jejw8rmgBFnhDjhlH2060N68xp/opheqAY+hkfim
+ Ngb1GktYCWQ8fMX3Yv3sB3SGCdWGsh7c8O4WV+tBKmuqsI1+E7xZRFXuwLvgRxbsqqbg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vnNshwKadsBgKH/U06mDaGoU7TiC73md76Q0U4k+GS8=; b=G7Ts7AWzPZbdnQgH6FYEypEGEa
- PnF15dnBW2aA8VbWm2bMupGOANdaNKo2cUQRJ3Wwhp08b8YhsxCf0SM34hk6d2kcTITGOrjmWndrs
- 3OVVIgBoOLq1Inriqroic1BtEbKCMu/Z1GnvKWkB773umNZ0MYS9IHfFHxh3otjAmImo=;
+ bh=hbvcKxIs/KkFnbtpgzcVVCBoRUDFLduhJqlbxP2pGpo=; b=Z6NNgSGKwiaWCRio2fVyAGCtLZ
+ 19ocT5kf+SxusDeONLv2Q88R8Kcnu8T8x8ckhmlmGi+aOC2JRJHuLrj9/lb4GN+ght4qO1dp6Scn2
+ bP5whz4oYnHDA1kU443n1NKcmLvB9fwNYTlNNi0hPp3mmvxaqKKdSfZ4abl7UjVJW2Nk=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rw1qc-0003Ve-L7 for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 14 Apr 2024 15:32:51 +0000
+ id 1rw1qi-0003WP-6a for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 14 Apr 2024 15:33:00 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 8788E60AEA
+ by dfw.source.kernel.org (Postfix) with ESMTP id 1F22660B81
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 14 Apr 2024 15:32:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 3398BC32783;
+ Sun, 14 Apr 2024 15:32:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 522ECC32786;
  Sun, 14 Apr 2024 15:32:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1713108765;
- bh=7UlnJ16rSnRhcFmtv0mafzMbnH+iolNByYGo2vrHRXw=;
+ bh=bxNO3fkRN2ASJqrntL4vOhcWHQKY0KbQtg8KAE0BNuQ=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=jUQlcjqdenEzfnEvH4B4O//d4jBvlWHG8nRNQe8B9QzGJ3YU4L0qCecmHQDXWfT7A
- 0YI9zvKDjUMsZ7duJ3NsVyp1fJYJlOjdjrFeDmoYpW4PoctA3lovvRbhXtfT/XAdoJ
- 67KZ8xxzK4QTY7iwmILezNMuIkgsmq1iFqu8q+KNF3mPpXje+g/RDUjcUXgpFeoFo7
- flWFxPuWdfMH2ZNZEom6DfYLBwYhxP9B2WlUuiepxwVxWDlPmEiqnepgH1wQbCRmRn
- TFu5Fe+2737oc/Pl6yA0koqkPfYqmDOZ+KuZO7t/3vbkbsBZGdxn8kmXO7JO/TpB8e
- Z2keFJ4jw5rcQ==
+ b=cCzv8Lnk/2BPKQQn3P2DLmjc/aDjSDHRyDxOGODvk55yta9kZOAusmHl3RJYW+jNN
+ Qj9KQ//DAH7+ehRwCObwBMT4Cyo87fqfDEAgDajEY9I14Rr84k0l3B4qNsCQcO2NzT
+ JxjO9WSqDzdKIUbrfaGahBKIDscy4wk1u0jCkUhZPzAtP7Evg9+I8QTMzMfdt3tXew
+ G2hUATt5gWcSaZDno7IAe2bb5RnMCGVi1j7Csr7z7mADH7DLRoUNR8qgi+nOuT/EPN
+ vGLgThOdmRbdzylbstJhKMOq6ZgMZ40MnjPtAEGFYsmUoS74OpFXINSuLpymt4uGJg
+ R8mCAnIPPnA/Q==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 134D5DF7858; Sun, 14 Apr 2024 15:32:45 +0000 (UTC)
+ 41C5FC43140; Sun, 14 Apr 2024 15:32:45 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <171310876507.3156.2662208686749241669.git-patchwork-notify@kernel.org>
+Message-Id: <171310876526.3156.6732886911990694550.git-patchwork-notify@kernel.org>
 Date: Sun, 14 Apr 2024 15:32:45 +0000
-References: <20240326112845.1576111-1-chao@kernel.org>
-In-Reply-To: <20240326112845.1576111-1-chao@kernel.org>
+References: <20240229143838.45149-1-chao@kernel.org>
+In-Reply-To: <20240229143838.45149-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
-X-Spam-Score: -2.3 (--)
+X-Spam-Score: -7.3 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 26 Mar 2024 19:28:45 +0800 you
- wrote: > In below race condition, dst page may become writeback status > in
- __clone_blkaddrs(), it needs to wait writeback before update, > fix it. >
- > Thread A [...] 
- Content analysis details:   (-2.3 points, 6.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 29 Feb 2024 22:38:38 +0800 you
+ wrote: > Support .shutdown callback in f2fs_sops, then, it can be called to
+ > shut down the file system when underlying block device is marked dead.
+ > > Signed-o [...] 
+ Content analysis details:   (-7.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -2.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rw1qc-0003Ve-L7
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to wait on page writeback in
- __clone_blkaddrs()
+X-Headers-End: 1rw1qi-0003WP-6a
+Subject: Re: [f2fs-dev] [PATCH] f2fs: support .shutdown in f2fs_sops
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,31 +116,20 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Tue, 26 Mar 2024 19:28:45 +0800 you wrote:
-> In below race condition, dst page may become writeback status
-> in __clone_blkaddrs(), it needs to wait writeback before update,
-> fix it.
+On Thu, 29 Feb 2024 22:38:38 +0800 you wrote:
+> Support .shutdown callback in f2fs_sops, then, it can be called to
+> shut down the file system when underlying block device is marked dead.
 > 
-> Thread A				GC Thread
-> - f2fs_move_file_range
->   - filemap_write_and_wait_range(dst)
-> 					- gc_data_segment
-> 					 - f2fs_down_write(dst)
-> 					 - move_data_page
-> 					  - set_page_writeback(dst_page)
-> 					  - f2fs_submit_page_write
-> 					 - f2fs_up_write(dst)
->   - f2fs_down_write(dst)
->   - __exchange_data_block
->    - __clone_blkaddrs
->     - f2fs_get_new_data_page
->     - memcpy_page
-> 
-> [...]
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>  fs/f2fs/f2fs.h  |  2 ++
+>  fs/f2fs/file.c  | 70 ++++++++++++++++++++++++++++++-------------------
+>  fs/f2fs/super.c |  6 +++++
+>  3 files changed, 51 insertions(+), 27 deletions(-)
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to wait on page writeback in __clone_blkaddrs()
-    https://git.kernel.org/jaegeuk/f2fs/c/d3876e34e7e7
+  - [f2fs-dev] f2fs: support .shutdown in f2fs_sops
+    https://git.kernel.org/jaegeuk/f2fs/c/ee745e4736fb
 
 You are awesome, thank you!
 -- 
