@@ -2,68 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 755D88A4365
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 14 Apr 2024 17:33:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 368888A4361
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 14 Apr 2024 17:33:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rw1qo-0004pL-Uv;
-	Sun, 14 Apr 2024 15:33:03 +0000
+	id 1rw1qj-000104-1N;
+	Sun, 14 Apr 2024 15:32:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rw1qm-0004oj-20
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rw1qh-0000zm-Mx
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 14 Apr 2024 15:33:00 +0000
+ Sun, 14 Apr 2024 15:32:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3pNgsE5u7eH9CwzdZeGaxlAUykfl16lVvc3SoGCQh+A=; b=aj7eXtSJCS8P1R/Dy4/oMPkTIh
- 0rjifr6X2PN/Z5o8BSVmR/T8PC8q3RuG8q/bswBrMfygW5h91PfjkAzVvHFEFhd+6EvOTD7JqYBA1
- UO0+7Zxss63Gkg3ZV2+kJl7flkRL6QdO9zsNTr7glmIWuwAlyuGQb6XP7KjJt+B6oRO8=;
+ bh=KX8LmRNKibWaSe20BvZfWWdlGHRAp3PPSfNXlirclQQ=; b=jkAayEzvXMSObSI7+osfdCOMIx
+ seN39jFp93VPY0gWqHtLxBqXYPeNRweZ5B1Bv6YhHVCOIoKrbolgiw60SNPJ81D4vnyItb+lnxWjX
+ QJ01cxSXpu674kPiBujpUZNt8hMX6QNtVm1YzUgvrZppBtaX5xE6lfaxIDeVjAFziaGY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3pNgsE5u7eH9CwzdZeGaxlAUykfl16lVvc3SoGCQh+A=; b=IKwGlDGcNr/vhtCfg/3P90xBXh
- dCmYLegPijv8zxk1BGytoGlh4cU4t5j6SidRBkN6t9p5W+CpBCV3brex+HkogfiipFgzVsEJSmU/r
- z3Q9Q/X/1yXlwce013LYNvqN88Fgb9D7Nvrb0PN65pS45lC1bbCsfwPMP5Q0ZvsxohLE=;
+ bh=KX8LmRNKibWaSe20BvZfWWdlGHRAp3PPSfNXlirclQQ=; b=RIK744b14VBLziDtz1PzBchw5z
+ Wh6M8Vhi38p2PIqC0gy4ocRWJkMCI5P0i65P/pwXqfkc+W5r0X1j/wiV2STVRS8wkRYeFtGzF3yH7
+ e8anbBHPcYiLUX4Wn534d6ZPwwQJxa/UBwFajLp7fo4JnAvVUbhOXGKyTHMwGJMgJBYI=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rw1qk-0003WY-W3 for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 14 Apr 2024 15:33:00 +0000
+ id 1rw1qh-0003WJ-KY for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 14 Apr 2024 15:32:56 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 53F5E60B8B;
- Sun, 14 Apr 2024 15:32:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 5EA1CC4AF12;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 878A960B78;
+ Sun, 14 Apr 2024 15:32:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2E199C32781;
  Sun, 14 Apr 2024 15:32:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1713108765;
- bh=HffsvLIWPYupnLLRGUro6qCAd4PWhu6U8ocjNHJuxnw=;
+ bh=DXSKgdJzVmHazsq2hEXi5c55HkvD/ZF2dqfR0/U9l64=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=ToyjMp5qtRzUYH2jifdqiBNs0QatLgrah3+j45X7lCpCXWN8nwwC029iGcyrWkmpA
- IzjZ/bki934NFywDG74xj3uJG4u4LppiNiObZd+/GiwlF8X9oh4Tgb28yz3BdNVNe8
- PK1jryT+J5BxIwQDiwPYAMh4z3NpWa3nq0qlFiBQtKwH5qhXrjPUudDv91eh0SsI0e
- u8wRcwN1HQeLX9MQY7YrvS0rT05Ogg2m1N4bf9ZMJpGWQC9EqeR9WLxaM9MW0La7y7
- CCgp2HUMHafp95CkDNBFptpOYP4OT68BtAQktm27ikHj09bzutd27nkppDqS1UMXhr
- MHE57pffFpD+g==
+ b=B4oGpevJo2dJXw4epeuwNrQ2HtBYNvKBgDga2ak/BbINJ0yJs54K2FlGXgdVZwxn7
+ 51ZsQ1HWQr0dRO+OAmunl9BPEmNNz2OiMF4MlHxq4zae4QMeOnbkHgBap5XzHqV6Fg
+ xPS5hjW+IFarIfM/ZMB70dwrH/QvdyFM1w6+bbEOnB8/uNopL+o2Kla8uifahYHSO4
+ B4JD2xOB34R8F54SlPHbaEat/3SQU6TAnFUnGVvDSr++qZXce4/oRdu9mnidi9A25d
+ F53+N44fCRQhlNtjL/k08Kqq9JvshiHjHb7tg6qsbBG0cM3E+GgNHLTb1Ay+D7sbux
+ taMIK0Up30Vrw==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 4F653DF7857; Sun, 14 Apr 2024 15:32:45 +0000 (UTC)
+ 1D0D9C32751; Sun, 14 Apr 2024 15:32:45 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <171310876532.3156.10776428756258877374.git-patchwork-notify@kernel.org>
+Message-Id: <171310876511.3156.10918924129747857805.git-patchwork-notify@kernel.org>
 Date: Sun, 14 Apr 2024 15:32:45 +0000
-References: <20240409233411.1197830-1-daeho43@gmail.com>
-In-Reply-To: <20240409233411.1197830-1-daeho43@gmail.com>
-To: Daeho Jeong <daeho43@gmail.com>
+References: <20240407072123.3484300-1-chao@kernel.org>
+In-Reply-To: <20240407072123.3484300-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -7.3 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,15 +72,13 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 9 Apr 2024 16:34:11 -0700 you wrote:
- > From: Daeho Jeong <daehojeong@google.com> > > While do not allocating a
- new section in advance for file pinning area, I > missed that we should write
- the [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Sun, 7 Apr 2024 15:21:23 +0800 you wrote:
+ > From: Wenjie Qi <qwjhust@gmail.com> > > If the max open zones of zoned
+ devices are less than > the active logs of F2FS, the device may error due
+ to > ins [...] 
  Content analysis details:   (-7.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -90,10 +88,12 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -2.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rw1qk-0003WY-W3
-Subject: Re: [f2fs-dev] [PATCH] f2fs: write missing last sum blk of file
- pinning section
+X-Headers-End: 1rw1qh-0003WJ-KY
+Subject: Re: [f2fs-dev] [PATCH v7] f2fs: fix zoned block device information
+ initialization
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,8 +105,8 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: daehojeong@google.com, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: qwjhust@gmail.com, jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -116,21 +116,19 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Tue,  9 Apr 2024 16:34:11 -0700 you wrote:
-> From: Daeho Jeong <daehojeong@google.com>
+On Sun,  7 Apr 2024 15:21:23 +0800 you wrote:
+> From: Wenjie Qi <qwjhust@gmail.com>
 > 
-> While do not allocating a new section in advance for file pinning area, I
-> missed that we should write the sum block for the last segment of a file
-> pinning section.
-> 
-> Fixes: 9703d69d9d15 ("f2fs: support file pinning for zoned devices")
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> If the max open zones of zoned devices are less than
+> the active logs of F2FS, the device may error due to
+> insufficient zone resources when multiple active logs
+> are being written at the same time.
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: write missing last sum blk of file pinning section
-    https://git.kernel.org/jaegeuk/f2fs/c/b084403cfc32
+  - [f2fs-dev,v7] f2fs: fix zoned block device information initialization
+    https://git.kernel.org/jaegeuk/f2fs/c/0f9b12142be1
 
 You are awesome, thank you!
 -- 
