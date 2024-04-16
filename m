@@ -2,66 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 033458A64F1
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Apr 2024 09:21:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 807308A64FD
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Apr 2024 09:23:47 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rwd8E-0003F7-2J;
-	Tue, 16 Apr 2024 07:21:30 +0000
+	id 1rwdAO-0003UG-9b;
+	Tue, 16 Apr 2024 07:23:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1rwd8B-0003Ep-Ks
+ (envelope-from <chao@kernel.org>) id 1rwdAL-0003Ty-W2
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 16 Apr 2024 07:21:28 +0000
+ Tue, 16 Apr 2024 07:23:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9oAC6I2Rz5sk9Vrro3BqfUBlXMctfnRDPUBFhedNdPc=; b=QdwFmdzbO0YHOnV3libQcXJSYK
- N67tvTW6PSdgvdm58AsC3v233FvA7tnkr5myaOvNY81P/ltDbTDOC9mhkJJa4+JAwYadYallg+Ddf
- SeNWFr0unl78pFCngn8xVKpzCnkUQxJg21ZVZCjDgFBYIiduHRDQkeiyDxFKf6b6pn04=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=9oAC6I2Rz5sk9Vrro3BqfUBlXMctfnRDPUBFhedNdPc=; b=ljy12OFhLkKWxDGOd74nsw43y1
- g5Ceq4jFdD5Bv8RyEULeWrngd6dg3nctJGsGvumC03PgB0PcD7Ea50nWUr2Ci+URvPHEtDtIFsFwG
- zg+bNphaT9UNqtNbSrRXke8hJhhtQp9sw4fSxVlcH5ghoSRAP4dLfdlQQXLs03hZKGcY=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=rtVUkBTJcjSa+L7EdHisHuloTjpcZUPXL+TsgrMn0bY=; b=IM6SsyLt6NVPDhyr+w00G9tbrN
+ 0sT6+jRiyTqV21Ia+2jrWMaUkGInBr2Db/98kmCStIQlelMtNzqD9i1XsLYnf4U0lJ20NBEbf1KaH
+ iMddwEKO6DpiACyJe76k55ryTlYdHCXLVtYRzdV4knX03bJLl8eH5EOqUv3T41Yj1yWc=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=rtVUkBTJcjSa+L7EdHisHuloTjpcZUPXL+TsgrMn0bY=; b=U
+ NiZVFwUPGs/JO506hNQ3b7Y926BJ/02wKIjNUAoPoDGzTqzCPtS/YniMbzE9PxgGWibeFo8IryvX2
+ KmOWJdftwryrbsKd7yDAiSEGgDVmyLpvqmQgZjUWhJ54Q0xEsIynnkgGgaI3PXppsQOFeNcgNeopV
+ lh6N1FpBFbAE9xRI=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rwd8B-0002nN-Nm for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 16 Apr 2024 07:21:28 +0000
+ id 1rwdAM-0002xr-3O for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 16 Apr 2024 07:23:42 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 3D2F361077
+ by dfw.source.kernel.org (Postfix) with ESMTP id 97EB360AB6
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 16 Apr 2024 07:21:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD080C2BD10;
- Tue, 16 Apr 2024 07:21:15 +0000 (UTC)
+ Tue, 16 Apr 2024 07:23:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFFBCC113CE;
+ Tue, 16 Apr 2024 07:23:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1713252077;
- bh=djpKyoxPD0DIOaQ6IMcLFl5d0YTE8pMEG0ARTsy1XVc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=L/N0NDiqd9ZL7Q8iDqkpEjnMorp+1p7z58Z6PIaYlzoOqQ3QYbXnon6GN8Pt+9Cjn
- qlEjksywYkAYutBWKmOX2isenwRUFUSr3TwLf2sC54uu9zDntM06FxjFD/Wmeg0m9w
- +qbhvuZ92E5/zRm9WGKAxzq4fwEfNx2QqhHanMDN7BBrGo6CYBcyZbTH3gOQsozS7U
- BEnRbc8zSF4zI19StzSPBicX5OvH3GA073yU2SaWltNXw6ucfoMjaHDQFqD0bcB+zo
- ZQNHn3xEVrxs8uJPwznNs2oulYma54XN/ZVvE1aZ99u0HssYQpcUi7+xbU/LxP/1Ye
- tSuKANTYjZ2eg==
+ s=k20201202; t=1713252211;
+ bh=i3fSC2Sh/bh/pxYyReh8mIapiLEcvyOrjS7DPGLwxGg=;
+ h=From:To:Cc:Subject:Date:From;
+ b=pmzRrNAn/c99ECm+p/63BcBUXJBAOvsCcC0qPDo6usf22bxfystbdB+0IXl5k6KKr
+ CMgYFlwRYQ0oyci0aN29K4ii7j6Jn80azXZapmjhevKloLQ0/SLH5+SuTnAyYwHdcj
+ MNaHVb9ak8i3ZnYWY96+CMb+yFWMSgcqn8XN+BETuOo+KdjAVRLtZaoSNGqLXYndY+
+ kjjZ3ZjfsFFgvK0QoKV1JnvILvgRQut30UcqNgc5B5XE4qVxXSSd6ggg7kvX3O6DU2
+ u+ybA9Vn3/zO64Bl8ln8HR/3A3pmNOtpysmQvEQ+SlYLJAOCU90aM3wuxReBspWLEw
+ vWS+cgEPombzw==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Tue, 16 Apr 2024 15:21:08 +0800
-Message-Id: <20240416072108.5819-2-chao@kernel.org>
+Date: Tue, 16 Apr 2024 15:23:15 +0800
+Message-Id: <20240416072318.6486-1-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240416072108.5819-1-chao@kernel.org>
-References: <20240416072108.5819-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -2.4 (--)
 X-Spam-Report: Spam detection software,
@@ -70,10 +68,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: After commit d7e9a9037de2 ("f2fs: Support Block Size == Page
- Size"), F2FS_BLKSIZE equals to PAGE_SIZE, remove unnecessary check condition.
- Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/super.c | 6 ------ 1
- file changed, 6 deletions(-) 
+ Content preview: Convert f2fs_mpage_readpages() to use folio and related
+ functionality.
+ Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/data.c | 80
+ +++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+), 40 deletions(-) 
  Content analysis details:   (-2.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -87,9 +86,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -2.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rwd8B-0002nN-Nm
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: remove unnecessary block size check in
- init_f2fs_fs()
+X-Headers-End: 1rwdAM-0002xr-3O
+Subject: [f2fs-dev] [PATCH 1/4] f2fs: convert f2fs_mpage_readpages() to use
+ folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,31 +105,146 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-After commit d7e9a9037de2 ("f2fs: Support Block Size == Page Size"),
-F2FS_BLKSIZE equals to PAGE_SIZE, remove unnecessary check condition.
+Convert f2fs_mpage_readpages() to use folio and related
+functionality.
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/super.c | 6 ------
- 1 file changed, 6 deletions(-)
+ fs/f2fs/data.c | 80 +++++++++++++++++++++++++-------------------------
+ 1 file changed, 40 insertions(+), 40 deletions(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 6d1e4fc629e2..32aa6d6fa871 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -4933,12 +4933,6 @@ static int __init init_f2fs_fs(void)
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 9c5512be1a1b..14dcd621acaa 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2374,7 +2374,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+  * Major change was from block_size == page_size in f2fs by default.
+  */
+ static int f2fs_mpage_readpages(struct inode *inode,
+-		struct readahead_control *rac, struct page *page)
++		struct readahead_control *rac, struct folio *folio)
  {
- 	int err;
+ 	struct bio *bio = NULL;
+ 	sector_t last_block_in_bio = 0;
+@@ -2394,6 +2394,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ #endif
+ 	unsigned nr_pages = rac ? readahead_count(rac) : 1;
+ 	unsigned max_nr_pages = nr_pages;
++	pgoff_t index;
+ 	int ret = 0;
  
--	if (PAGE_SIZE != F2FS_BLKSIZE) {
--		printk("F2FS not supported on PAGE_SIZE(%lu) != BLOCK_SIZE(%lu)\n",
--				PAGE_SIZE, F2FS_BLKSIZE);
--		return -EINVAL;
--	}
+ 	map.m_pblk = 0;
+@@ -2407,64 +2408,63 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ 
+ 	for (; nr_pages; nr_pages--) {
+ 		if (rac) {
+-			page = readahead_page(rac);
+-			prefetchw(&page->flags);
++			folio = readahead_folio(rac);
++			prefetchw(&folio->flags);
+ 		}
+ 
+-#ifdef CONFIG_F2FS_FS_COMPRESSION
+-		if (f2fs_compressed_file(inode)) {
+-			/* there are remained compressed pages, submit them */
+-			if (!f2fs_cluster_can_merge_page(&cc, page->index)) {
+-				ret = f2fs_read_multi_pages(&cc, &bio,
+-							max_nr_pages,
+-							&last_block_in_bio,
+-							rac != NULL, false);
+-				f2fs_destroy_compress_ctx(&cc, false);
+-				if (ret)
+-					goto set_error_page;
+-			}
+-			if (cc.cluster_idx == NULL_CLUSTER) {
+-				if (nc_cluster_idx ==
+-					page->index >> cc.log_cluster_size) {
+-					goto read_single_page;
+-				}
 -
- 	err = init_inodecache();
- 	if (err)
- 		goto fail;
+-				ret = f2fs_is_compressed_cluster(inode, page->index);
+-				if (ret < 0)
+-					goto set_error_page;
+-				else if (!ret) {
+-					nc_cluster_idx =
+-						page->index >> cc.log_cluster_size;
+-					goto read_single_page;
+-				}
++		index = folio_index(folio);
+ 
+-				nc_cluster_idx = NULL_CLUSTER;
+-			}
+-			ret = f2fs_init_compress_ctx(&cc);
++#ifdef CONFIG_F2FS_FS_COMPRESSION
++		if (!f2fs_compressed_file(inode))
++			goto read_single_page;
++
++		/* there are remained compressed pages, submit them */
++		if (!f2fs_cluster_can_merge_page(&cc, index)) {
++			ret = f2fs_read_multi_pages(&cc, &bio,
++						max_nr_pages,
++						&last_block_in_bio,
++						rac != NULL, false);
++			f2fs_destroy_compress_ctx(&cc, false);
+ 			if (ret)
+ 				goto set_error_page;
++		}
++		if (cc.cluster_idx == NULL_CLUSTER) {
++			if (nc_cluster_idx == index >> cc.log_cluster_size)
++				goto read_single_page;
+ 
+-			f2fs_compress_ctx_add_page(&cc, page);
++			ret = f2fs_is_compressed_cluster(inode, index);
++			if (ret < 0)
++				goto set_error_page;
++			else if (!ret) {
++				nc_cluster_idx =
++					index >> cc.log_cluster_size;
++				goto read_single_page;
++			}
+ 
+-			goto next_page;
++			nc_cluster_idx = NULL_CLUSTER;
+ 		}
++		ret = f2fs_init_compress_ctx(&cc);
++		if (ret)
++			goto set_error_page;
++
++		f2fs_compress_ctx_add_page(&cc, &folio->page);
++
++		goto next_page;
+ read_single_page:
+ #endif
+ 
+-		ret = f2fs_read_single_page(inode, page, max_nr_pages, &map,
++		ret = f2fs_read_single_page(inode, &folio->page, max_nr_pages, &map,
+ 					&bio, &last_block_in_bio, rac);
+ 		if (ret) {
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ set_error_page:
+ #endif
+-			zero_user_segment(page, 0, PAGE_SIZE);
+-			unlock_page(page);
++			folio_zero_segment(folio, 0, folio_size(folio));
++			folio_unlock(folio);
+ 		}
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ next_page:
+ #endif
+-		if (rac)
+-			put_page(page);
+ 
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ 		if (f2fs_compressed_file(inode)) {
+@@ -2501,7 +2501,7 @@ static int f2fs_read_data_folio(struct file *file, struct folio *folio)
+ 	if (f2fs_has_inline_data(inode))
+ 		ret = f2fs_read_inline_data(inode, page);
+ 	if (ret == -EAGAIN)
+-		ret = f2fs_mpage_readpages(inode, NULL, page);
++		ret = f2fs_mpage_readpages(inode, NULL, folio);
+ 	return ret;
+ }
+ 
 -- 
 2.40.1
 
