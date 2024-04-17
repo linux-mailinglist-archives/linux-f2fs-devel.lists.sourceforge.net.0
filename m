@@ -2,121 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D36118A887B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Apr 2024 18:10:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EE238A8D8A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Apr 2024 23:12:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rx7rE-0002VL-NR;
-	Wed, 17 Apr 2024 16:10:01 +0000
+	id 1rxCZg-0001H9-Jq;
+	Wed, 17 Apr 2024 21:12:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ryncsn@gmail.com>) id 1rx7rC-0002VE-ID
+ (envelope-from <jaegeuk@kernel.org>) id 1rxCZf-0001Gv-Al
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Apr 2024 16:09:58 +0000
+ Wed, 17 Apr 2024 21:12:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Reply-To:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Content-Type
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ccxP7TY1LZd03lAzTUSjd/WMiiw2l1TFGZjibmTvaRo=; b=KClvubOG1hdgsUiv4iQ/913570
- 7OxK5OsNSPj3VKypqhDoP59bCELRBPO6168w1VlwJr5ZO8O1lGrawNfE69hU5xbGd/C40fC1ynsT3
- WGCMClGPcYmc4rCCGEh2H9InnvEVszyeUDDonK2BOUwsMJq0ZXIDLbjmXpybk6Dko3Ck=;
+ bh=2vAcUawf/3hVTkVfj5MTIBA/4B4Ncyz3qLrCvlqc0Z8=; b=dHvSnEY/hoGe+KPkJk8YQ76U5s
+ aXnJ7JFptpvin1qqrQ9DW/4VRBA8h8EAsavcBAyIGuXsk6QrEGA2pClVnkQaycpJWYgeB36lp2nCr
+ xzn1VPRRxsJu/90vrQZ5M4gCf8WNZbhB4Qgp7tNYz9HZAYkIWRDeIwifxYW6bPBW00Do=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Reply-To:References:In-Reply-To:
- Message-ID:Date:Subject:Cc:To:From:Sender:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ccxP7TY1LZd03lAzTUSjd/WMiiw2l1TFGZjibmTvaRo=; b=ClzIEMMqG6bYtcuk1ckTX2h2jR
- brX3v92oUF3Bk1FomBI637ONzX5cYybC/cDWnleBAiUW4Jcw7T3AosGLxmDnw7r9sqro7Ovp3Y+62
- 24K07bgRf3MGhDv5/CGuQHrIlqXYDP4e461Mc+0lIzgoLH6VwWJGJ8mdTvYsNRFUHSe4=;
-Received: from mail-io1-f47.google.com ([209.85.166.47])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=2vAcUawf/3hVTkVfj5MTIBA/4B4Ncyz3qLrCvlqc0Z8=; b=C
+ I0KNyZ0aeI1eTCIatbNUfzVR/F2CGQClCxX+JJ+gyCqgnZ5efBnBbsc2/kewSz+wq+aI4enhy4WsB
+ uIgiFEqBSmlKrQpaR6LeadObrFyKAPO2p4NhUTRqRaPOG6rOsVDY0bFGV1Zua+JVMDgtcWsfxvxN4
+ hMOMuMx+fpNm+e/8=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1rx7rC-0001wy-Df for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Apr 2024 16:09:58 +0000
-Received: by mail-io1-f47.google.com with SMTP id
- ca18e2360f4ac-7d9480d96bdso204172139f.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1rxCZe-0003mM-Vy for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 17 Apr 2024 21:12:11 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 24589CE13D4
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 17 Apr 2024 09:09:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713370192; x=1713974992; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:reply-to:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to;
- bh=ccxP7TY1LZd03lAzTUSjd/WMiiw2l1TFGZjibmTvaRo=;
- b=DhyL4P8UlEAmxh6SM5WGg/tXmDFYAqSjbYd7x7lBFtJaEf/CSFSYKoqRcQI8oAriZD
- N+BJF+L9C5UAGKjJfZorvxtn+vg7H5lv9bDCQp1/As+c/yzC2YZQW0gopB74I9/E5iKB
- d1011m8msrGaXW/NtXVeXx7JG37tENhXCeEUfzPhWjP0E9Y66kesMZE9iKuZZZemk5Nb
- 690zjHJ0Ce/ceELwcxm4ltUav390gOq3QFasSHo05s875IE5hqck4awkrfsbf5bEhkDP
- mHllmcbFV5vnoksrGQ4qbWwwwXZqbJ5NSYbOpY2VuhYkQRLnQ26EY/H21VU3DzmQB1Bh
- 9MGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713370192; x=1713974992;
- h=content-transfer-encoding:mime-version:reply-to:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ccxP7TY1LZd03lAzTUSjd/WMiiw2l1TFGZjibmTvaRo=;
- b=BoFtzjOAJ8Ss+paJZcjJblIOL1Z29FtTRphUcosLsZnjIgSRrryLo78MKvF2eRbSJX
- yb1iX0QN5DQz4y4+2My9JQ4sDwvh2tL8HO7ebg7rnleW3+LbjoD8GyKDxF5hTQ90hYzs
- 5R2FrUHVjJHFy3bMId7vSzvt6uDn14MU3w1I4y5ci1uCOgHVSiB8XehH3E+qfduWpwAQ
- ZO1HCoe6v+NM50BgV8jWbtKFHHYXFkOmQRNP2p50CnVkiIk9SLBVl68nyRO8DslBSbn2
- 5V22gDQXpzlV3pckYPjdYy101C98Gw9xkdDIue0vO6FRbM2Srvh0w5k1wd74VM+hy5AO
- pAJQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX171ppw4+UYcpPVOlLag/VInKthbJqTbZOCO/7OsLXeW16UHm32TvPpIB2NXXUOVqrJxEbc+0Mr2b90wr74olYYeS9Q0LxsamfF9VCSJDa8CTxTOPlvA==
-X-Gm-Message-State: AOJu0YylJswTOhxFqyBDjpqFoo02MAPYsAgEN8hLNbp2SQkJcPrEK31B
- a37jTAAhgZQgaChZUKVx7E3tQTRe3HKFkVE7T6NY18v90K/S2MQZ
-X-Google-Smtp-Source: AGHT+IEpyaQ2B9laiL5Qz3xq+OgAsfHl508IHieRw4jQK+zsxfoW9aDncD8KQfXYdlyhnJK/CywmIw==
-X-Received: by 2002:a05:6e02:12e1:b0:36a:1e27:1708 with SMTP id
- l1-20020a056e0212e100b0036a1e271708mr18563457iln.25.1713370192373; 
- Wed, 17 Apr 2024 09:09:52 -0700 (PDT)
-Received: from KASONG-MB2.tencent.com ([115.171.40.106])
- by smtp.gmail.com with ESMTPSA id
- h189-20020a6383c6000000b005f75cf4db92sm5708366pge.82.2024.04.17.09.09.47
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 17 Apr 2024 09:09:50 -0700 (PDT)
-From: Kairui Song <ryncsn@gmail.com>
-To: linux-mm@kvack.org
-Date: Thu, 18 Apr 2024 00:08:37 +0800
-Message-ID: <20240417160842.76665-4-ryncsn@gmail.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240417160842.76665-1-ryncsn@gmail.com>
-References: <20240417160842.76665-1-ryncsn@gmail.com>
+ Wed, 17 Apr 2024 21:12:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41A0DC072AA;
+ Wed, 17 Apr 2024 21:12:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1713388323;
+ bh=QarXj+s/wPiCd324CLbe5/b03kj2VCCAjbBMQT6SOZc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=lb32onrf4lOWuPDyDlZMiePYzDKx+PU7/6WoDuB3z3gHKmZ+7Ne+rL6T5GjDDq+Bo
+ 8XbYS3ExHuGsBM1AVsf8ubHtzaznUHkJBNu+BkViUDBPsOUNMthMf89x1ozzt1dEZw
+ +oYh+61mwxbaLCA+Xmq/KDd2FScFpsvBG/vHmhfpslFPnsKU9Mp3tILMJddxQ21PVw
+ nfydajmXUaKJXAc3TJ3gEMTSXV38N7JJtKH5D8nQA//22fiIpvyZ06+LMbuRmvja2N
+ Fgr+Cdta1EXskNh2Wf3oEROGvfRwAVSa0vMQDWotXfrY6YsipVgfsLV+uBYqovMuGN
+ V5NUgBqJNoH2w==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Wed, 17 Apr 2024 21:12:01 +0000
+Message-ID: <20240417211201.3919770-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.44.0.683.g7961c838ac-goog
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -1.9 (-)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Kairui Song <kasong@tencent.com> page_index is needed
- for mixed usage of page cache and swap cache, for pure page cache usage,
- the caller can just use page->index instead. It can't be a swap cache page
- here, so just drop it. 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: This reverts commit 930e2607638d ("f2fs: remove obsolete
+ whint_mode"), 
+ as we decide to pass write hints to the disk. Signed-off-by: Jaegeuk Kim
+ <jaegeuk@kernel.org> --- Documentation/filesystems/f2fs.rst | 29
+ +++++++++++++++
+ fs/f2fs/data.c | 2 + fs/f2fs/f2fs.h | 2 + fs/f2fs/segment.c | 59
+ +++++++++++++++++++++++++++ [...] 
+ Content analysis details:   (-1.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [ryncsn[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.47 listed in wl.mailspike.net]
-X-Headers-End: 1rx7rC-0001wy-Df
-Subject: [f2fs-dev] [PATCH 3/8] f2fs: drop usage of page_index
+ -1.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rxCZe-0003mM-Vy
+Subject: [f2fs-dev] [PATCH] f2fs: assign the write hint per stream by default
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -128,59 +102,160 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: Kairui Song <kasong@tencent.com>
-Cc: Kairui Song <kasong@tencent.com>, Ryan Roberts <ryan.roberts@arm.com>,
- Chris Li <chrisl@kernel.org>, Neil Brown <neilb@suse.de>,
- David Hildenbrand <david@redhat.com>, Hugh Dickins <hughd@google.com>,
- linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, Yosry Ahmed <yosryahmed@google.com>,
- Minchan Kim <minchan@kernel.org>, Barry Song <v-songbaohua@oppo.com>, "Huang,
- Ying" <ying.huang@intel.com>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, Andrew Morton <akpm@linux-foundation.org>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Kairui Song <kasong@tencent.com>
+This reverts commit 930e2607638d ("f2fs: remove obsolete whint_mode"), as we
+decide to pass write hints to the disk.
 
-page_index is needed for mixed usage of page cache and swap cache,
-for pure page cache usage, the caller can just use page->index instead.
-
-It can't be a swap cache page here, so just drop it.
-
-Signed-off-by: Kairui Song <kasong@tencent.com>
-Cc: Chao Yu <chao@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/data.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ Documentation/filesystems/f2fs.rst | 29 +++++++++++++++
+ fs/f2fs/data.c                     |  2 +
+ fs/f2fs/f2fs.h                     |  2 +
+ fs/f2fs/segment.c                  | 59 ++++++++++++++++++++++++++++++
+ 4 files changed, 92 insertions(+)
 
+diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+index efc3493fd6f8..68a0885fb5e6 100644
+--- a/Documentation/filesystems/f2fs.rst
++++ b/Documentation/filesystems/f2fs.rst
+@@ -774,6 +774,35 @@ In order to identify whether the data in the victim segment are valid or not,
+ F2FS manages a bitmap. Each bit represents the validity of a block, and the
+ bitmap is composed of a bit stream covering whole blocks in main area.
+ 
++Write-hint Policy
++-----------------
++
++F2FS sets the whint all the time with the below policy.
++
++===================== ======================== ===================
++User                  F2FS                     Block
++===================== ======================== ===================
++N/A                   META                     WRITE_LIFE_NONE|REQ_META
++N/A                   HOT_NODE                 WRITE_LIFE_NONE
++N/A                   WARM_NODE                WRITE_LIFE_MEDIUM
++N/A                   COLD_NODE                WRITE_LIFE_LONG
++ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
++extension list        "                        "
++
++-- buffered io
++N/A                   COLD_DATA                WRITE_LIFE_EXTREME
++N/A                   HOT_DATA                 WRITE_LIFE_SHORT
++N/A                   WARM_DATA                WRITE_LIFE_NOT_SET
++
++-- direct io
++WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
++WRITE_LIFE_SHORT      HOT_DATA                 WRITE_LIFE_SHORT
++WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_NOT_SET
++WRITE_LIFE_NONE       "                        WRITE_LIFE_NONE
++WRITE_LIFE_MEDIUM     "                        WRITE_LIFE_MEDIUM
++WRITE_LIFE_LONG       "                        WRITE_LIFE_LONG
++===================== ======================== ===================
++
+ Fallocate(2) Policy
+ -------------------
+ 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index d9494b5fc7c1..12d5bbd18755 100644
+index 5d641fac02ba..ed7d08785fcf 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -2057,7 +2057,7 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
- 	sector_t block_nr;
- 	int ret = 0;
+@@ -465,6 +465,8 @@ static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
+ 	} else {
+ 		bio->bi_end_io = f2fs_write_end_io;
+ 		bio->bi_private = sbi;
++		bio->bi_write_hint = f2fs_io_type_to_rw_hint(sbi,
++						fio->type, fio->temp);
+ 	}
+ 	iostat_alloc_and_bind_ctx(sbi, bio, NULL);
  
--	block_in_file = (sector_t)page_index(page);
-+	block_in_file = (sector_t)page->index;
- 	last_block = block_in_file + nr_pages;
- 	last_block_in_file = bytes_to_blks(inode,
- 			f2fs_readpage_limit(inode) + blocksize - 1);
-@@ -4086,8 +4086,7 @@ void f2fs_clear_page_cache_dirty_tag(struct page *page)
- 	unsigned long flags;
- 
- 	xa_lock_irqsave(&mapping->i_pages, flags);
--	__xa_clear_mark(&mapping->i_pages, page_index(page),
--						PAGECACHE_TAG_DIRTY);
-+	__xa_clear_mark(&mapping->i_pages, page->index, PAGECACHE_TAG_DIRTY);
- 	xa_unlock_irqrestore(&mapping->i_pages, flags);
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index dd530dc70005..b3b878acc86b 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3745,6 +3745,8 @@ void f2fs_destroy_segment_manager(struct f2fs_sb_info *sbi);
+ int __init f2fs_create_segment_manager_caches(void);
+ void f2fs_destroy_segment_manager_caches(void);
+ int f2fs_rw_hint_to_seg_type(enum rw_hint hint);
++enum rw_hint f2fs_io_type_to_rw_hint(struct f2fs_sb_info *sbi,
++			enum page_type type, enum temp_type temp);
+ unsigned int f2fs_usable_segs_in_sec(struct f2fs_sb_info *sbi,
+ 			unsigned int segno);
+ unsigned int f2fs_usable_blks_in_seg(struct f2fs_sb_info *sbi,
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index f0da516ba8dc..daa94669f7ee 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -3364,6 +3364,65 @@ int f2fs_rw_hint_to_seg_type(enum rw_hint hint)
+ 	}
  }
  
++/*
++ * This returns write hints for each segment type. This hints will be
++ * passed down to block layer as below by default.
++ *
++ * User                  F2FS                     Block
++ * ----                  ----                     -----
++ *                       META                     WRITE_LIFE_NONE|REQ_META
++ *                       HOT_NODE                 WRITE_LIFE_NONE
++ *                       WARM_NODE                WRITE_LIFE_MEDIUM
++ *                       COLD_NODE                WRITE_LIFE_LONG
++ * ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
++ * extension list        "                        "
++ *
++ * -- buffered io
++ *                       COLD_DATA                WRITE_LIFE_EXTREME
++ *                       HOT_DATA                 WRITE_LIFE_SHORT
++ *                       WARM_DATA                WRITE_LIFE_NOT_SET
++ *
++ * -- direct io
++ * WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
++ * WRITE_LIFE_SHORT      HOT_DATA                 WRITE_LIFE_SHORT
++ * WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_NOT_SET
++ * WRITE_LIFE_NONE       "                        WRITE_LIFE_NONE
++ * WRITE_LIFE_MEDIUM     "                        WRITE_LIFE_MEDIUM
++ * WRITE_LIFE_LONG       "                        WRITE_LIFE_LONG
++ */
++enum rw_hint f2fs_io_type_to_rw_hint(struct f2fs_sb_info *sbi,
++				enum page_type type, enum temp_type temp)
++{
++	switch (type) {
++	case DATA:
++		switch (temp) {
++		case WARM:
++			return WRITE_LIFE_NOT_SET;
++		case HOT:
++			return WRITE_LIFE_SHORT;
++		case COLD:
++			return WRITE_LIFE_EXTREME;
++		default:
++			return WRITE_LIFE_NONE;
++		}
++	case NODE:
++		switch (temp) {
++		case WARM:
++			return WRITE_LIFE_MEDIUM;
++		case HOT:
++			return WRITE_LIFE_NONE;
++		case COLD:
++			return WRITE_LIFE_LONG;
++		default:
++			return WRITE_LIFE_NONE;
++		}
++	case META:
++		return WRITE_LIFE_NONE;
++	default:
++		return WRITE_LIFE_NONE;
++	}
++}
++
+ static int __get_segment_type_2(struct f2fs_io_info *fio)
+ {
+ 	if (fio->type == DATA)
 -- 
-2.44.0
+2.44.0.683.g7961c838ac-goog
 
 
 
