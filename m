@@ -2,68 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4A3C8AF5BC
+	by mail.lfdr.de (Postfix) with ESMTPS id BB0DA8AF5BA
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Apr 2024 19:40:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rzK8S-0005gI-S4;
-	Tue, 23 Apr 2024 17:40:53 +0000
+	id 1rzK8V-0001Uy-BE;
+	Tue, 23 Apr 2024 17:40:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rzK8G-0005g1-LM
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1rzK8T-0001Up-3K
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 Apr 2024 17:40:40 +0000
+ Tue, 23 Apr 2024 17:40:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TC1yl0D80I4+qfJCcxvXo3avYPhk/C4Y0EbUYEObPLg=; b=htm06mM4wJdbavqi/v4L8Op0J8
- XCfCJEXhLXLGs1F7GLvyxM6ShNMGr1PdJMJKShsxPcd9zl+2NAyk/KhXgvAkthMQscp69YqETlERN
- vIHlzamdbZTWS95Mc2aF2YPyiUaTjiwV5e0rQde26xI1T8glMlMnHFZRmYHSQHMx01DA=;
+ bh=nOeRKVnnjWzLheXaHUADw5eFUMjYCjDV5FpcJZv24/g=; b=kqGPIUCJcWUwDXbu+N15VXAQKA
+ gSYeeKYq/kMxKUUu7zjllKvSkOYk4ujEXgW0Ni3kjEfvSDuxf7P0uc8v10yczHDghaRdlNYV+TomE
+ FzWgRMRRw6VmYfbCP14WsAH9YrazWTfxvF2+MVIST94N/GdsI4NTEW/gsQwybGDTyaB4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TC1yl0D80I4+qfJCcxvXo3avYPhk/C4Y0EbUYEObPLg=; b=j2hfgj7ozS80YvjkHjZRa2jq3B
- M2bUMZeOM2v3hj3v2eKvs3bZpcxG4qaw28oDsBKfrHEm/oM8LIwSDIGlH4OtXe1iabTFga7O4itp5
- sHcpS09WYCl+RbKZ1BghJxGjxK5lRNicfp7HfrhJ+Ktg4JzV9lZLh964/z9ikwgmJZrs=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=nOeRKVnnjWzLheXaHUADw5eFUMjYCjDV5FpcJZv24/g=; b=P8C9cYzsX9LNHRz60ad+tCF+3g
+ 6NwVJdNTLLibI1jS7RNYA2Tc2zFOFuvY/1Esdxro5wB700/YYD93sSs+L5aQ3MPAf02LfriOn1mMC
+ Erwg6DGGY6NUWhrYcVXG5utZ9SMSegRnT7xFLNG9CYPYQy3K7Bg4n7O1Dx7t7mcz7zKM=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rzK8F-0004VY-K6 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 Apr 2024 17:40:40 +0000
+ id 1rzK8R-0004Vd-VT for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 23 Apr 2024 17:40:53 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4F350616BE
+ by sin.source.kernel.org (Postfix) with ESMTP id C7260CE1294
  for <linux-f2fs-devel@lists.sourceforge.net>;
  Tue, 23 Apr 2024 17:40:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id EC7A7C2BD11;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E87F4C2BD10;
  Tue, 23 Apr 2024 17:40:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1713894029;
- bh=ZGVdiXH50qmWUKxvs/Sh72iae0mXIJYxi+k9XKbTZTE=;
+ bh=csQ305yttWc8121lQaZ0ps6dzuiXF2gemEPgqD1hBI8=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=Km8eWQMmdI+N9W5/tFoMg2J/NS4lZLmsFHRpRevL0nL//3/qMUcjuFVb9D2cxUB8e
- hgzY8hNFPGgORiBG68c19AGvA06Y6+8AAjYLWD14fUbigh4JQxFI9Z3ab945JlpLYm
- 8FKX3YKavNqvLzdGzDTMmdttclR8NIynini5/KVHIZrHf+1DOTd8kLW9TuxhQy2b6k
- FQ/ETqiW4S2YrdolJeNmFSblx/bLyC2RBigojgIxFJtbC5LD74py7dVl7O6xAA6aMP
- I6oJMUr7NXV2VlbKzkaV9pjnRjw9lnRM7ioNSQbZyEafK//xFeDmxbDN3AKlyfJZ79
- MSG4QuxXfFSbw==
+ b=J3CPZkxgvYJkxkdETIbuD2lpbvjVFjTyLxO05W0GW+On+ng5WB4dlD4AxZw17EX6q
+ NBAOY2sOOltomXyGX8JTIyWX28Ng/Bn6/KSYEz+S3ooNO5+ioMcl6637ipkubmOnwp
+ OLe+KYcTqcE5Bld7OdjufgFYyWZf9AG6jqYSuMn9YMZsjaachTWwrdEnNmwHXkLJEr
+ r1mLsggqOjEwdz9KlWYvNQo6a/WgZltM3N8wANhAgpALg+9YZbTwmSzQ9oQGMgl1aI
+ e0tiqo1Xx5XiUyErT9JXT6zMT1McBcT05KMgqJt8RuatJHGp1tPD0l7PzrT7eNWKUq
+ QwReLEte4nhHg==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- CE48DDEC7E1; Tue, 23 Apr 2024 17:40:28 +0000 (UTC)
+ C2B81C4339F; Tue, 23 Apr 2024 17:40:28 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <171389402884.11756.5936531495937723538.git-patchwork-notify@kernel.org>
+Message-Id: <171389402878.11756.2734701646922544905.git-patchwork-notify@kernel.org>
 Date: Tue, 23 Apr 2024 17:40:28 +0000
-References: <20240416072108.5819-1-chao@kernel.org>
-In-Reply-To: <20240416072108.5819-1-chao@kernel.org>
+References: <20240422062417.2421616-1-chao@kernel.org>
+In-Reply-To: <20240422062417.2421616-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
@@ -73,10 +73,11 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 16 Apr 2024 15:21:07 +0800 you
- wrote: > Commit d7e9a9037de2 ("f2fs: Support Block Size == Page Size") missed
- to > adjust comment in sanity_check_raw_super(), fix it. > > Signed-off-by:
- Chao Yu [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 22 Apr 2024 14:24:14 +0800 you
+ wrote: > Convert f2fs_mpage_readpages() to use folio and related >
+ functionality.
+ > > Signed-off-by: Chao Yu <chao@kernel.org> > --- > v2: > - fix compile
+ warnin [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,9 +91,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rzK8F-0004VY-K6
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: fix comment in
- sanity_check_raw_super()
+X-Headers-End: 1rzK8R-0004Vd-VT
+Subject: Re: [f2fs-dev] [PATCH v2 1/4] f2fs: convert f2fs_mpage_readpages()
+ to use folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,20 +116,26 @@ Hello:
 This series was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Tue, 16 Apr 2024 15:21:07 +0800 you wrote:
-> Commit d7e9a9037de2 ("f2fs: Support Block Size == Page Size") missed to
-> adjust comment in sanity_check_raw_super(), fix it.
+On Mon, 22 Apr 2024 14:24:14 +0800 you wrote:
+> Convert f2fs_mpage_readpages() to use folio and related
+> functionality.
 > 
 > Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
->  fs/f2fs/super.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> v2:
+> - fix compile warning w/o CONFIG_F2FS_FS_COMPRESSION reported by lkp
+>  fs/f2fs/data.c | 81 +++++++++++++++++++++++++-------------------------
+>  1 file changed, 40 insertions(+), 41 deletions(-)
 
 Here is the summary with links:
-  - [f2fs-dev,1/2] f2fs: fix comment in sanity_check_raw_super()
-    https://git.kernel.org/jaegeuk/f2fs/c/5bf624c01229
-  - [f2fs-dev,2/2] f2fs: remove unnecessary block size check in init_f2fs_fs()
-    https://git.kernel.org/jaegeuk/f2fs/c/06b206d9e2b4
+  - [f2fs-dev,v2,1/4] f2fs: convert f2fs_mpage_readpages() to use folio
+    (no matching commit)
+  - [f2fs-dev,v2,2/4] f2fs: convert f2fs_read_single_page() to use folio
+    (no matching commit)
+  - [f2fs-dev,v2,3/4] f2fs: convert f2fs_read_inline_data() to use folio
+    https://git.kernel.org/jaegeuk/f2fs/c/96ea46f30b26
+  - [f2fs-dev,v2,4/4] f2fs: convert f2fs__page tracepoint class to use folio
+    https://git.kernel.org/jaegeuk/f2fs/c/92f750d847c9
 
 You are awesome, thank you!
 -- 
