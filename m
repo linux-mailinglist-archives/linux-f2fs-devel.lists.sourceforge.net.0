@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71B4C8B08B8
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Apr 2024 13:54:37 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AA188B08BC
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Apr 2024 13:55:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rzbCt-0001LM-Gz;
-	Wed, 24 Apr 2024 11:54:36 +0000
+	id 1rzbDM-0007zT-79;
+	Wed, 24 Apr 2024 11:55:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <david@redhat.com>) id 1rzbCm-0001K4-EF
+ (envelope-from <david@redhat.com>) id 1rzbDL-0007zG-0H
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Apr 2024 11:54:29 +0000
+ Wed, 24 Apr 2024 11:55:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oiEdD1jUhHpGlDgtp9e4uee9N7LMbprET2o2Fr27svE=; b=cJl3uZci710ywgugpXdRxIjXon
- lRasD35oazFBfAt9Nw0Bi9Gj03ph9sr+VYsynZd10UX5omrbB16N2zkihowBtyWoxa7hSy98PQ9cQ
- OQvCLN1FqcRFOPyfTV6d/Mke8owNfm7zeDxSU/hAIVQBBg0Z6OhgWljxmtVdLm1EuKBU=;
+ bh=o/g2/UC+Qje9QaJR5m8snaCNqazDqqIhBRIym+PZEk0=; b=TKn4lfK++GEEr+q6+weHcjVWvt
+ my6qf1VLnChWVwRHIei8XYEhxSX2fBIh6r6IgYi24M6oZYEooBN3+f45bYxyVToI/gkRlbzY7UkCy
+ ozvKXq/8s6n9gyaCQU4KpRjPvkgwfYwdE/mb4RLvrS3ovREXNMJwEEUXXvep0v4y/ygU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,74 +31,74 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=oiEdD1jUhHpGlDgtp9e4uee9N7LMbprET2o2Fr27svE=; b=cUBLnterYfhSnDTujSoOr7T8XK
- FAYtZQa3OCCoGs8HSO8UV1KdUe7TD+ND526bVYC/w+jjHnNJyVP51jBz+4LJPm2DB42r/Eufzxmcj
- b8N+00WS2MtVjZbaEvbEsBTedcM2V+DedENey+Mci/mK9re+GZ72QC14lDHxAFuYSjcY=;
+ bh=o/g2/UC+Qje9QaJR5m8snaCNqazDqqIhBRIym+PZEk0=; b=j2fkNU8oV+ca7e4mlvGx5G9Q24
+ hF39gaNYNP8IIU5jdBOz6S3/n5SvuguyycaK9uS1iIN+FH5HUVTUJHcPGGQsV/hbUNXh2VmW4RpOz
+ xoJYLTYi6TrbBlaIkOHUwhVM6UB94ho0fkicNalNYF++WRGcz7c0pK0TLOqRNFgLIx9Y=;
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rzbCl-0006E4-VD for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Apr 2024 11:54:29 +0000
+ id 1rzbDI-0006Ij-ME for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 24 Apr 2024 11:55:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1713959657;
+ s=mimecast20190719; t=1713959695;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=oiEdD1jUhHpGlDgtp9e4uee9N7LMbprET2o2Fr27svE=;
- b=US8fFKhei0fuHuFghoEhojtD9GMFku3IWqNoYIafxNy+orWBjMxM06nVP84TtFsBJCVcZH
- e6Q2fFN2Pw6mOKv53+zXMlVNvjU1ujj3TyCuM1CED+lHl/If3IjIcfF2dUw/g1wJcxjSB0
- x+4F3VaY90TYPt2Ar9N1QTFB2ypl4f4=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=o/g2/UC+Qje9QaJR5m8snaCNqazDqqIhBRIym+PZEk0=;
+ b=cc4K0p6gxHms5tjvu8Watjmw4BoN9BDC0mXCoHsuWInL3z/wDFRTuSNvX1ycggGQer4w3H
+ CxNMU4rAheZcQWkfjP4+8hSl/2Hsv/8G68T0bS8b2mtaqty/pC4ajqpP5Rc1GLNCFABj+h
+ tEtvom3L4bLj9/NXi6jY99P3yoQUf9c=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-332-4JvLQeZ9ODW69eMCg2jUIw-1; Wed, 24 Apr 2024 07:54:16 -0400
-X-MC-Unique: 4JvLQeZ9ODW69eMCg2jUIw-1
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-34b4bde57a8so1625561f8f.2
+ us-mta-424-tNC85bToNTysPKnvOKItoA-1; Wed, 24 Apr 2024 07:54:53 -0400
+X-MC-Unique: tNC85bToNTysPKnvOKItoA-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4147de378b9so38713145e9.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 24 Apr 2024 04:54:15 -0700 (PDT)
+ Wed, 24 Apr 2024 04:54:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713959655; x=1714564455;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oiEdD1jUhHpGlDgtp9e4uee9N7LMbprET2o2Fr27svE=;
- b=P3/4Ze5h+YXfup+t1FaPW+l22gW21QyC/0nkKYQyTUgFqPNSzsBTsQN06d9UGYtsC+
- mHRAszRWyN3bkYQbFCnAIfCcWHMmAgy7NoYWR7yR6IMkVlXsjln5yisMuwg4qaDnTzk9
- ewQ20n0VpJ/CiJUyS+WSlZyXDkhEwGE4ZgV7lBO+U3fiw7eAzL/HOuOu5pRIwze9Vg2u
- T/5UJMKsMSCCDB5TgOoBa26UA7lamhxTGi/rZWJQGYjWnHshP/LLqmedPs+KOamg9N6Q
- 6olxk6WjgHjEgzWHdsU8KkFK8rM1jPdh3Ybm0UqJud9BVfDv/8wh48dUZBwBZSLffpak
- 5coQ==
+ d=1e100.net; s=20230601; t=1713959692; x=1714564492;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=o/g2/UC+Qje9QaJR5m8snaCNqazDqqIhBRIym+PZEk0=;
+ b=NSubW7AB1KO2roSGQTqt5ZQLMFG1AA/w1V+x0EfcdlHrcyhFoSP+Hi0DQxRHerQDPR
+ vBoWBjjXOEf149k4KUVBce5SKrITOG6DCm/s/GQWtt1iYfnM5BeJXXnnXbtl2si2pALS
+ DzWmVqlUaK159M159SW6Pc+0nCWkJjd5aOMNv4i7/ZYjBv1v4FjmtpjD7q+yKo55H4/E
+ v9sftNEZwBoWg+/kN3n3Lps7lgEgHttMp2T6T95PNMT8Cv9e5zeakormcGgmNUYOAJPs
+ Vke+XbqBbUAHKdYv+3gfZ0HgPi3ONUEpb8nqwX9YZY3eKNAWNxc8lMnN+uU5/2pItOdF
+ GEFw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUr4Ah6o5vEFZqHPmfCYW3JyzapGsQMgUfPuCegEjDGu43bYkhPyg2SMe6C2bNFpWaQISjixYbWbo+iBRfzI/HGBIcI22e7P63gSwhlDtpGZIirG0msFA==
-X-Gm-Message-State: AOJu0YyN2V4p1PieG092uJ6IqeadHebnE8HEG7Kz4N4ggxRz+fZgCCu/
- AMSfelY7NJvF7ErEsuXdxe69Mm51GUlHr2RyDSIDpinnwvC/pyPVn4I2BtVlehxLOXsf3EszAKX
- 3tXvSNu9JhxtcqBxroBKsBtctRJkvdPblg5FAfkAIOK0Elh0Mlp836pO1hx5oK2o9iQ83S/yj9L
+ AJvYcCWqZPY0/pKYjaB/kQc9hLIV6IbxjLl5hCEfXjAOMcVxmQkH9nTbhZRHUU6ZAYWvbhdc3h6rrMoNkvWxS4gY27HIjBBAm2uLToNjysgBcl9ZZdlOZFbcKQ==
+X-Gm-Message-State: AOJu0Yw+lFNVhnNg34/71MdVUqxPkqhVhIKiuB0Lsze5TCHwfl3XxmC3
+ RSqDG5JZNMlkhYm5xMzMRe324GfwKR0oea0QiOyZIhCLZInvcI5usWFNSkC9PCuKh7iigSysClj
+ roF5TyJdhCocJXNYPEAoDN/8A1dKHiMj8fjGKpuMc9BrfOS54P6XgzIbLAdH8mGj+Y29ByVeUuE
  Y=
-X-Received: by 2002:a05:6000:18ad:b0:342:a8db:603f with SMTP id
- b13-20020a05600018ad00b00342a8db603fmr1916969wri.26.1713959655090; 
- Wed, 24 Apr 2024 04:54:15 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH3cxU6Cgdr2fSSlc7NQBh2SZDnkgqXrrYX0qBaSBo/hicEaOwpxmPbCH103VYTA0dC2rxbrA==
-X-Received: by 2002:a05:6000:18ad:b0:342:a8db:603f with SMTP id
- b13-20020a05600018ad00b00342a8db603fmr1916956wri.26.1713959654842; 
- Wed, 24 Apr 2024 04:54:14 -0700 (PDT)
+X-Received: by 2002:a05:600c:5107:b0:418:d077:2cbd with SMTP id
+ o7-20020a05600c510700b00418d0772cbdmr1528941wms.40.1713959692748; 
+ Wed, 24 Apr 2024 04:54:52 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGUBvlxAmoxjlaiMh//MyFbN3TugdeR/mJ1CsO1qWR48AZINKJVYj8LKvycJ6b2KKHRQbLutQ==
+X-Received: by 2002:a05:600c:5107:b0:418:d077:2cbd with SMTP id
+ o7-20020a05600c510700b00418d0772cbdmr1528920wms.40.1713959692321; 
+ Wed, 24 Apr 2024 04:54:52 -0700 (PDT)
 Received: from ?IPV6:2003:cb:c70d:1f00:7a4e:8f21:98db:baef?
  (p200300cbc70d1f007a4e8f2198dbbaef.dip0.t-ipconnect.de.
  [2003:cb:c70d:1f00:7a4e:8f21:98db:baef])
  by smtp.gmail.com with ESMTPSA id
- fm13-20020a05600c0c0d00b0041b0ade42b1sm1569357wmb.7.2024.04.24.04.54.14
+ w17-20020a05600c475100b004162d06768bsm27443188wmo.21.2024.04.24.04.54.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Apr 2024 04:54:14 -0700 (PDT)
-Message-ID: <b9685104-0f2d-4689-b4f5-2d4cea5c63d3@redhat.com>
-Date: Wed, 24 Apr 2024 13:54:13 +0200
+ Wed, 24 Apr 2024 04:54:51 -0700 (PDT)
+Message-ID: <8c6f78c8-8326-41f3-a477-395d89de445d@redhat.com>
+Date: Wed, 24 Apr 2024 13:54:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
  Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org
 References: <20240423225552.4113447-1-willy@infradead.org>
- <20240423225552.4113447-4-willy@infradead.org>
+ <20240423225552.4113447-5-willy@infradead.org>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -145,26 +145,27 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <20240423225552.4113447-4-willy@infradead.org>
+In-Reply-To: <20240423225552.4113447-5-willy@infradead.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-X-Spam-Score: -0.9 (/)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 24.04.24 00:55, Matthew Wilcox (Oracle) wrote: > This is
- mostly just inlining page_mapping() into the two callers. > > Signed-off-by:
+ Content preview:  On 24.04.24 00:55, Matthew Wilcox (Oracle) wrote: > Removes
+ a few calls to compound_head() and a call to page_mapping(). > >
+ Signed-off-by:
  Matthew Wilcox (Oracle) <willy@infradead.org> > --- Reviewed-by: David
  Hildenbrand <david@redhat.com> 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [170.10.133.124 listed in wl.mailspike.net]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [170.10.133.124 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -173,11 +174,13 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ valid 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [170.10.133.124 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rzbCl-0006E4-VD
-Subject: Re: [f2fs-dev] [PATCH 3/6] memory-failure: Remove calls to
- page_mapping()
+X-Headers-End: 1rzbDI-0006Ij-ME
+Subject: Re: [f2fs-dev] [PATCH 4/6] migrate: Expand the use of folio in
+ __migrate_device_pages()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -196,7 +199,7 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 24.04.24 00:55, Matthew Wilcox (Oracle) wrote:
-> This is mostly just inlining page_mapping() into the two callers.
+> Removes a few calls to compound_head() and a call to page_mapping().
 > 
 > Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 > ---
