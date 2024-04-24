@@ -2,112 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B22ED8B091D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Apr 2024 14:20:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8EE38B092B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Apr 2024 14:22:07 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rzbbd-0002uu-Gf;
-	Wed, 24 Apr 2024 12:20:09 +0000
+	id 1rzbdU-0003En-GF;
+	Wed, 24 Apr 2024 12:22:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1rzbba-0002uY-OW
+ (envelope-from <torvic9@mailbox.org>) id 1rzbdP-0003DK-I9
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Apr 2024 12:20:07 +0000
+ Wed, 24 Apr 2024 12:22:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:Cc:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i1cXwnafA4oAM9YgAbqLVHjgg7QHMDqaKRuPYkvykK8=; b=R/Xbs5p4+04ZWP/u3MpoH7ECbg
- c7//oH8iGPLtCtUo+06kqudRQjNtyQneKAu+yUpIutCKPBZAdhMx5BWamI0XQvc77V2s5oatxkmiN
- X6vTsu/VuN2zcASP6nkDTUYKxGtcbTZWqbT6XN105iCLZUmpD5WQEP+qtLHGX5nB/iDA=;
+ bh=GxCfelkVB4uQbpdRMozPh2wL6ZyVHHDqgS5NiqTPQRE=; b=Waikoj5h2XC1zj9NN10Pl4GQlc
+ 3rohGsXUdmIYlETmmicJlY3tEqizy6DGZ46NclT4w4WYSuf1A1rw/Mt8j1kZXX1BiWPmoGhNYgO0Q
+ D1wEvUiVBvoGJvJ72BXA9IsakWZuRq3khCtuOsYvg++euP6R+aTtKsnnK/ksuCFOa474=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Cc:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=i1cXwnafA4oAM9YgAbqLVHjgg7QHMDqaKRuPYkvykK8=; b=khAJeaX5ddnpfy2CoG71nnDlvw
- 27MHX8imi9drbwUjTtYbIxYlWsKBZWtL9SdlxDsNuqnW/TZgIBVAMeVUUwau/lrw57ZZEDfs+ODQd
- FTmQ30OZk0SeE+w/mjNKeRr4Z8DuLa5VidFHCdWU1ALSbNttkwXnbh0e5YQ8hqWCN2Do=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=GxCfelkVB4uQbpdRMozPh2wL6ZyVHHDqgS5NiqTPQRE=; b=Y6V4ljCSXFQ5Kt/g8/d+AmNWBU
+ 9IHAZVbzgYn4YfEvaQbjzzEP8ywZgBAtTC1gDtoLyGiPEmPJX6U5TYcFwv0JNMf/6HE3zc+Wx3mr8
+ C19hPojmyHiG5YY80yUpi3g1rgy8TP0HVQ9wI8AuuGae58GvSYYUZDDMtiBBnqBcVWLM=;
+Received: from mout-p-202.mailbox.org ([80.241.56.172])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rzbbZ-00010l-Sf for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Apr 2024 12:20:07 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 193CB60E26
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 24 Apr 2024 12:19:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id B60C1C32782
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 24 Apr 2024 12:19:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1713961195;
- bh=i1cXwnafA4oAM9YgAbqLVHjgg7QHMDqaKRuPYkvykK8=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=pKGIKuotX2VK0tPUaYji9lVMlHp/UuMOuQGaI/ngNQaO9HP0p1+B8Wl8Fcvgo1uDU
- 0iC53rDefGPzVvGeoe6sQBT2V1EwqvSXy3QVjKb4QJ/KoiVLepXkusvokpqMDDg7i7
- +tNSo7Qevwke5pfHFfn3QCYP91P3skM7F6jQ5lxaiJD5omYm5hM5+4KXjt91VEDbAR
- i0P9q6BiWiLwIxoHBGYnC+L9imSCWbQRRX71ZyThw/ueJTDTsqXEgtdr8I7cbYh3ol
- kf88+9xo3tl2vhJJo18nlEGGxbkG/OicnSHFKrdxebCINwrfGW2leiYW563Ol6R+XM
- HIHv4UFfwVNnw==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 9D425C433E2; Wed, 24 Apr 2024 12:19:55 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 24 Apr 2024 12:19:55 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: aros@gmx.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P3
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-218770-202145-9dVDfhdtu7@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-218770-202145@https.bugzilla.kernel.org/>
-References: <bug-218770-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1rzbdO-0001FI-Hc for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 24 Apr 2024 12:21:59 +0000
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4VPdQK48cqz9spZ;
+ Wed, 24 Apr 2024 14:21:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1713961305;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=GxCfelkVB4uQbpdRMozPh2wL6ZyVHHDqgS5NiqTPQRE=;
+ b=gY7isZD5uD5pr+V1ZH4bojC6JtBSF3PvnDOC/G+YW1DcfX5fqXxXmBUpFxM8hWUXfOVBrB
+ ZoHyzNvxmA/PgTGcJvDASvU9tUGZegPWJsYAQVfuxkf9BiKdEIQZM26S98Tw/dxYYtunQP
+ IDwOMuAahlt1E69G9EPdvokpcWs+NEQ8habdmiEpyPgsTF0kB7jgaP1ZYybeWi7EK+oRci
+ +lsRaKYKJLP5VMpxfLsn5BvcZrk4drkqhd2MmkXK1AwuBHqLq50ZuDxpitCmS8h7LOOufd
+ +85YEGAc8+xXqRQ+33R9jydJ8phyGMa/LfoceF3+Q7tPUe6QCPdmZcVFnKOhmQ==
+Message-ID: <ac903336-0d00-4cfa-b09c-6f99b709af53@mailbox.org>
+Date: Wed, 24 Apr 2024 14:21:39 +0200
 MIME-Version: 1.0
-X-Spam-Score: -0.9 (/)
+To: linux-f2fs-devel@lists.sourceforge.net
+References: <bug-218769-202145@https.bugzilla.kernel.org/>
+Content-Language: en-US
+In-Reply-To: <bug-218769-202145@https.bugzilla.kernel.org/>
+X-MBO-RS-META: 4i4o51trjz8sigds9fic3d79tbmmtep7
+X-MBO-RS-ID: 32f5c6b83ad6cdb8609
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=218770 ---
- Comment
- #2 from Artem S. Tashkinov (aros@gmx.com) --- *** Bug 218769 has been marked
- as a duplicate of this bug. *** -- You may reply to this email to add a
- comment. Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview:  On 4/24/24 13:38,
+ bugzilla-daemon@kernel.org wrote: >
+ https://bugzilla.kernel.org/show_bug.cgi?id=218769
+ > > Bug ID: 218769 > Summary: fsck seems unable to solve corruption > Product:
+ File System > Ve [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: mailbox.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1rzbbZ-00010l-Sf
-Subject: [f2fs-dev] [Bug 218770] fsck seems unable to solve corruption
+X-Headers-End: 1rzbdO-0001FI-Hc
+Subject: Re: [f2fs-dev] [Bug 218769] New: fsck seems unable to solve
+ corruption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,20 +108,50 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
+From: Tor Vic via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Tor Vic <torvic9@mailbox.org>
+Cc: guido.iodice@gmail.com, aros@gmx.com
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=218770
 
---- Comment #2 from Artem S. Tashkinov (aros@gmx.com) ---
-*** Bug 218769 has been marked as a duplicate of this bug. ***
 
--- 
-You may reply to this email to add a comment.
+On 4/24/24 13:38, bugzilla-daemon@kernel.org wrote:
+> https://bugzilla.kernel.org/show_bug.cgi?id=218769
+> 
+>              Bug ID: 218769
+>             Summary: fsck seems unable to solve corruption
+>             Product: File System
+>             Version: 2.5
+>            Hardware: All
+>                  OS: Linux
+>              Status: NEW
+>            Severity: high
+>            Priority: P3
+>           Component: f2fs
+>            Assignee: filesystem_f2fs@kernel-bugs.kernel.org
+>            Reporter: guido.iodice@gmail.com
+>          Regression: No
+> 
+> Created attachment 306204
+>    --> https://bugzilla.kernel.org/attachment.cgi?id=306204&action=edit
+> fsck
+> 
+> After installing kernel 6.9rc5 it seems that all my f2fs partitions are
+> corrupted, according to fsck. On boot the check-repair is always performed. I
+> also tried running f2fs from a live usb (with kernel 6.6) but the problem is
+> not solved. Even running fsck several times always finds problems.
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+I can confirm the constant fsck issue, and it was fixed in my case by 
+the following patch:
+
+https://lore.kernel.org/linux-f2fs-devel/20240409203411.1885121-3-jaegeuk@kernel.org/
+
+> 
+> I attach the output of fsck -f -d 1 on one of the partitions.
+> 
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
