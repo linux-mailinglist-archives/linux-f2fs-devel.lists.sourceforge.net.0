@@ -2,100 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 449F98B1798
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Apr 2024 01:59:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A07458B186B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Apr 2024 03:24:29 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1rzmWH-0002Rj-Fz;
-	Wed, 24 Apr 2024 23:59:21 +0000
+	id 1rznqR-0004pH-PD;
+	Thu, 25 Apr 2024 01:24:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1rzmWE-0002RY-TP
+ (envelope-from <chao@kernel.org>) id 1rznqP-0004p7-4m
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Apr 2024 23:59:19 +0000
+ Thu, 25 Apr 2024 01:24:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vNG9QqElHBsq1h44jED4ysNt8/35kOzYfpgTExkMc2E=; b=kVq2KOVR5lGNgaBp6v6nhH71DV
- zUfQn40XYNr4pUCrCUjEb+RUkMeOdd7yMqMiqs2QeZsygA27n0n9qqgpFh04gPV1I6V2a2/LLqaH0
- 0FDB59EQTWd6WPBBrkdEdW8tcHOofia0aYa+JbOjFMsK5nLMU4pcq4EkPGOVLVOcuVWI=;
+ bh=pcWCiGFX+8g00iup50zk9q23w47pfulFCQbbCU3hMr0=; b=GTBMfblgQdNuCzS/+WkrUi2nHX
+ ffHOAlqTM3m4CM4BLoZlU2EVWa91WI4YYyakNUsuCZ0TFHVMdPzKDR4bX+FPqYNHb4qRRWoVsE7Tw
+ xWMFqrLubkHQt/mfbF25qXnNFF/3AegN6Iz8HSQKYcek096js3tZJPPe3iBRsIIV2/40=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vNG9QqElHBsq1h44jED4ysNt8/35kOzYfpgTExkMc2E=; b=Hn5RNOV5lCxeU72OQOC2ljVcAe
- VaVcyOXhiNXdwszLa+QKKcy7ZqSuXm7r9iKeg+aGGASyUSO9UQSbTmPwDcvA213+aV1E0pVOQ9/12
- yasRhTDp9ESAIuQjXLy/DYhSUmaKx2nHGaw/lDDZVlhX59Ba3fL9islwXvx10Pnc6bCA=;
-Received: from casper.infradead.org ([90.155.50.34])
+ bh=pcWCiGFX+8g00iup50zk9q23w47pfulFCQbbCU3hMr0=; b=HWtPyfqdY0PNg/mbOFiCvWbFW7
+ BwSLWVcV1vRsih5UgJuhhghYDE73FceSUy32jHzrNXLgEeknR2dqeLzVg8e71hhW1grKGYEdWPLKy
+ h0z+RbI0VbyuiqokPoPbR7v+3NPzWvWLS9mJO0ovvLXxgGzI623bxBSqj7/mjGuB5rqc=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1rzmWE-0006Lo-7L for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Apr 2024 23:59:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=vNG9QqElHBsq1h44jED4ysNt8/35kOzYfpgTExkMc2E=; b=igcTIqHM0RfUK1MeyaDix1TNP0
- ZwowTxoD2j9tUNWIzPpqEVnl0G0D8+fvjPtAQC8fzyCq1Pv1/maLu8N4Safh1O9uOrq1zcuQBGKmX
- qYCETvKlaZI+4P5NYWghu05eTa/CAO+ol1z2xNzWYc5Yg03deYfxaLzB7xQpU+DIPecm9S5Xj/lvJ
- zsPSyLcgVJ2SdZ/S4gA69JKH/dVLPaKvuf5Dnweg3281KfEc3BbXBLDUwAIAoiQ3vXnF1WfpMmCiN
- lRJqCz8/9lC2FTBiBDf+VWYofEBq7JK2luLR8SxZh3UpR+tEDhXVYXxW7mKm4/IHYvuTM+z6JcU0F
- UAjQCT0g==;
-Received: from willy by casper.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rzmVz-00000001wNo-0OuB;
- Wed, 24 Apr 2024 23:59:04 +0000
-Date: Thu, 25 Apr 2024 00:59:02 +0100
-From: Matthew Wilcox <willy@infradead.org>
-To: Andrew Morton <akpm@linux-foundation.org>
-Message-ID: <ZimcxvN1fyYfpRVl@casper.infradead.org>
-References: <20240423225552.4113447-1-willy@infradead.org>
- <20240423225552.4113447-7-willy@infradead.org>
- <7c52ae2a-8f72-4c3c-b4b3-24b50bdb5486@redhat.com>
- <20240424163423.ad6e23a984deb731e2de497c@linux-foundation.org>
+ id 1rznqO-00058Q-Gv for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 25 Apr 2024 01:24:13 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8F3DD61CFB
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 25 Apr 2024 01:24:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2FC4EC113CD;
+ Thu, 25 Apr 2024 01:24:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1714008242;
+ bh=gwiGGq7OLeRP9rMmRvbPh6yrmriPk2uQO+iB3xYyuD0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=gf8mb0BntIbxrKEVFT+hcbIzJu0aHeHTd9zBPxbTItCaXkWD24bprdH34+f4b/qZO
+ eo22RryNgJT6H1gArqKLq8An0Nv7n3WD1Mqfa81FfJLu268B5RNkollVNIRWrMQas3
+ lwNkcI1ibi4FKnYHeYOFF27FpM7CkE95563mZd6zoYc/K1Dkz0VsamcjWHhaMjFbRk
+ I2gfaMS8kT5/673Ld/txPAWXgXKYO0KnALqM5QhkS9q7HS0T+46KcM1eo6fy5VLFgG
+ gH0tT529EUyq6PEFHCuVGv9YGWLfsINjseMh2q8iZ0IV1fGxXMBJCQVtTzovNbInCI
+ 7/ORLYW/l8XJA==
+Message-ID: <7bb95d2c-be0d-488b-9f0c-23167d84e057@kernel.org>
+Date: Thu, 25 Apr 2024 09:23:58 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240424163423.ad6e23a984deb731e2de497c@linux-foundation.org>
-X-Spam-Score: -0.2 (/)
+User-Agent: Mozilla Thunderbird
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20240424173548.1515606-1-jaegeuk@kernel.org>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20240424173548.1515606-1-jaegeuk@kernel.org>
+X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Apr 24, 2024 at 04:34:23PM -0700,
- Andrew Morton wrote: > For some reason,
- > > mm/hugetlb.c: In function 'hugetlb_page_mapping_lock_write':
- > mm/hugetlb.c:2164:41: error: implicit declaration o [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 2024/4/25 1:35, Jaegeuk Kim wrote: > f2fs_ra_meta_pages
+ can try to read ahead on invalid block address which is > not the corruption
+ case. > > Cc: <stable@kernel.org> # v6.9+ > Bugzilla: https://bu [...] 
+ Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [90.155.50.34 listed in list.dnswl.org]
-X-Headers-End: 1rzmWE-0006Lo-7L
-Subject: Re: [f2fs-dev] [PATCH 6/6] mm: Remove page_mapping()
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1rznqO-00058Q-Gv
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix false alarm on invalid block
+ address
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,32 +101,23 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
- linux-fscrypt@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- David Hildenbrand <david@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
+Cc: stable@kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Apr 24, 2024 at 04:34:23PM -0700, Andrew Morton wrote:
-> For some reason,
+On 2024/4/25 1:35, Jaegeuk Kim wrote:
+> f2fs_ra_meta_pages can try to read ahead on invalid block address which is
+> not the corruption case.
 > 
-> mm/hugetlb.c: In function 'hugetlb_page_mapping_lock_write':
-> mm/hugetlb.c:2164:41: error: implicit declaration of function 'page_mapping'; did you mean 'page_mapped'? [-Werror=implicit-function-declaration]
->  2164 |         struct address_space *mapping = page_mapping(hpage);
->       |                                         ^~~~~~~~~~~~
->       |                                         page_mapped
-> mm/hugetlb.c:2164:41: error: initialization of 'struct address_space *' from 'int' makes pointer from integer without a cast [-Werror=int-conversion]
-> 
-> 
-> I'll disable "mm: Remove page_mapping()" pending review of the below,
-> please.
+> Cc: <stable@kernel.org> # v6.9+
+> Bugzilla: https://bugzilla.kernel.org/show_bug.cgi?id=218770
+> Fixes: 31f85ccc84b8 ("f2fs: unify the error handling of f2fs_is_valid_blkaddr")
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-Looks pretty similar to
-https://lore.kernel.org/linux-mm/20240412193510.2356957-7-willy@infradead.org/
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-Sorry, I thought you'd picked up that series; I think it's fully
-reviewed by now?
+Thanks,
 
 
 _______________________________________________
