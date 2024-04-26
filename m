@@ -2,93 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4472F8B341F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Apr 2024 11:34:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A8438B3442
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Apr 2024 11:37:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s0Hy1-0008AO-Tr;
-	Fri, 26 Apr 2024 09:34:06 +0000
+	id 1s0I18-0005P0-3j;
+	Fri, 26 Apr 2024 09:37:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1s0Hy0-0008AA-C8
+ (envelope-from <chao@kernel.org>) id 1s0I17-0005Ou-Bv
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Apr 2024 09:34:04 +0000
+ Fri, 26 Apr 2024 09:37:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=a2t32aY/G09n6pbZpGkd6rEMhEmG8zQtVjcL/nWtfr4=; b=lIoLDSeiCwUEgHCPMl4KxgDb77
- Fpg0XM3tFtKSStYh6SDyypQsdn620R6MrxrO89KfkQUhTWpLgAiDtPXU0F96k0ZdL1A47xLzEe+x5
- Kap1NTaqKD8x0KAUS5jQ7qr/dHwiUMzQAgOIVREPW+lEhSHfa7l2q0Mnh0Kjqum5FTAE=;
+ bh=vDCJp1EFbT0oUoxHy5xbgqWzgY/qe/c4AqHj2Xw3lnk=; b=i0C6bgiRPUrJNiSB5N3x8mauWW
+ g2OI/aWn/MSOFXlj95ncayvsyW9s51czUanDoYkH3ghffI+sclmdjt/FbWHodg38N7KUBt/iygADv
+ bXSXqLM20fmq4dzK+wfO7yxA/CUPT56Zt21MqxIEBKiXTQUVXLxBIyGfmF33488ckGKI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=a2t32aY/G09n6pbZpGkd6rEMhEmG8zQtVjcL/nWtfr4=; b=Z
- ZXfjcUabP3cGK+23Ms2famj7Iutusl2LIWF6zX17Tc7wj8q08IKPnyeeQ7doc5kpV2PXpoU4kg4mx
- SM40pw/HQlDnPUAjZO1rWNhhn7lw7QkME63OvhvRUbMEfNQp2IdET+EM1T6rCq28rMkcxhO07xdm3
- +1u+Ue98nwd6tPIY=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=vDCJp1EFbT0oUoxHy5xbgqWzgY/qe/c4AqHj2Xw3lnk=; b=mL08TYnaA+Q1bDscAYaxs+FeCh
+ KGY/akV1bCkO28Y80ruOxy7O6Fvz28TzfqinAhZJgXfyKlKagE9kUSpODeO9wvguD53CK7byEHI7p
+ j99Z4hFlO+lupEdNUx/fTFW2yAKFDVQucKAK6m44chsFl82zP2wEcqYc8VqOscFGkAP0=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1s0Hxz-0004wk-F2 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Apr 2024 09:34:04 +0000
+ id 1s0I16-0005BD-Kg for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Apr 2024 09:37:17 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 82E5962030;
- Fri, 26 Apr 2024 09:33:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 821A3C113CD;
- Fri, 26 Apr 2024 09:33:56 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id B21ED62015;
+ Fri, 26 Apr 2024 09:37:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0886AC2BD10;
+ Fri, 26 Apr 2024 09:37:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1714124038;
- bh=HF9FygCkrUCOWv1FRx+lwLlEuJ62OvrqDXz7ynsbe8s=;
- h=From:To:Cc:Subject:Date:From;
- b=jVQjZxoL58daYHJEOErMTjYz+2gxxdXEQDbVkU1O+yBl0YDklLpTtxyKQAySLlFdX
- lZ5XS2LtUwv1aaf3xZ46QaKH0xD94sScQdmhdWxw/EIVZdwVc8WNE1z6czWGpMjMaD
- JDUlWHm3W0CAXueuuKp0XAYcQlbJ3pHO84nS/m08Eu2y4zdUB8RSef/pG2Ude5UOCH
- yMj/hYMM/gIIkwimjjO/itS/WyfvfaABPm1ptvfbp3M92Mv+J0KXlVz4QiZLrN/t48
- QUxgGinOY9QdRXima3utm8VPqpy1/XslL12yD5KU0x0O+x2hm2pGv4HaCBgHlh8a8Y
- JRyuZPb7/ZhvQ==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Fri, 26 Apr 2024 17:33:48 +0800
-Message-Id: <20240426093348.377018-1-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
+ s=k20201202; t=1714124231;
+ bh=P/GTw1XxjReEuD9Ww1RsUUzrNV6/qF1pdeMu8tj7+48=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Jr9lNuEOMS2DqrFPyu5S68MJZ5GqIrU58Lm1iTr7ajshWHlSGu4NSC7S+Wh7qgoLf
+ nBiDDBAGM7uD1/N1uurBI18fqYwsCxShr/DPNAw27+eZfaWge+whlBUZKmQvoUMUuF
+ z+/q4AwN0R1eUknJ2+T3+4oEcsQt+Nj5xHII/oA2K9O7fgo069jlMhfgvD2kPfFVDl
+ sFFOnwBuBm+CsBXL+cQkrIpEA57IadsDMXRoBF3JKF/VggDDu64O02HdINKOrYt8GY
+ +/q7rvkRZAp/WVrYm/BEAPP+1Z8Spv5lStRB+89Vl8ADJQieJ9Z6RCW1umZXCPlZn2
+ mphuzlHKnrw5Q==
+Message-ID: <235d9db4-2ca5-4d7a-bd2a-36f98d1880a9@kernel.org>
+Date: Fri, 26 Apr 2024 17:37:07 +0800
 MIME-Version: 1.0
-X-Spam-Score: -0.9 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+User-Agent: Mozilla Thunderbird
+To: Zhiguo Niu <niuzhiguo84@gmail.com>
+References: <20240416072108.5819-1-chao@kernel.org>
+ <20240416072108.5819-2-chao@kernel.org>
+ <CAHJ8P3J4Z7QJ=kpd_Nt+TGX2ZD8HH5YQWmbPsbS7+DeN2NrxyA@mail.gmail.com>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <CAHJ8P3J4Z7QJ=kpd_Nt+TGX2ZD8HH5YQWmbPsbS7+DeN2NrxyA@mail.gmail.com>
+X-Spam-Score: -5.9 (-----)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  If active_log is not 6, we never use WARM_DATA segment, let's
- avoid allocating WARM_DATA segment for direct IO. Signed-off-by: Yunlei He
- <heyunlei@oppo.com> Signed-off-by: Chao Yu <chao@kernel.org> ---
- fs/f2fs/data.c
- | 3 ++- fs/f2fs/f2fs.h | 2 +- fs/f2fs/file.c | 5 +++-- fs/f2fs/segment.c
- | 11 +++++++++-- 4 fil [...] 
- Content analysis details:   (-0.9 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  On 2024/4/16 19:12, Zhiguo Niu wrote: > On Tue, Apr 16, 2024
+    at 3:22 PM Chao Yu <chao@kernel.org> wrote: >> >> After commit d7e9a9037de2
+    ("f2fs: Support Block Size == Page Size"), >> F2FS_BLKSIZE eq [...] 
+ 
+ Content analysis details:   (-5.9 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+                             high trust
+                             [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+                             envelope-from domain
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+                             author's domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1s0Hxz-0004wk-F2
-Subject: [f2fs-dev] [PATCH] f2fs: fix to avoid allocating WARM_DATA segment
- for direct IO
+X-Headers-End: 1s0I16-0005BD-Kg
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: remove unnecessary block size
+ check in init_f2fs_fs()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,109 +107,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If active_log is not 6, we never use WARM_DATA segment, let's
-avoid allocating WARM_DATA segment for direct IO.
-
-Signed-off-by: Yunlei He <heyunlei@oppo.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/data.c    |  3 ++-
- fs/f2fs/f2fs.h    |  2 +-
- fs/f2fs/file.c    |  5 +++--
- fs/f2fs/segment.c | 11 +++++++++--
- 4 files changed, 15 insertions(+), 6 deletions(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index bee1e45f76b8..0c516c653f05 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -4179,7 +4179,8 @@ static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
- 	map.m_lblk = bytes_to_blks(inode, offset);
- 	map.m_len = bytes_to_blks(inode, offset + length - 1) - map.m_lblk + 1;
- 	map.m_next_pgofs = &next_pgofs;
--	map.m_seg_type = f2fs_rw_hint_to_seg_type(inode->i_write_hint);
-+	map.m_seg_type = f2fs_rw_hint_to_seg_type(F2FS_I_SB(inode),
-+						inode->i_write_hint);
- 	if (flags & IOMAP_WRITE)
- 		map.m_may_create = true;
- 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index e8ff301eaf32..6dd50a6075c0 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3747,7 +3747,7 @@ int f2fs_build_segment_manager(struct f2fs_sb_info *sbi);
- void f2fs_destroy_segment_manager(struct f2fs_sb_info *sbi);
- int __init f2fs_create_segment_manager_caches(void);
- void f2fs_destroy_segment_manager_caches(void);
--int f2fs_rw_hint_to_seg_type(enum rw_hint hint);
-+int f2fs_rw_hint_to_seg_type(struct f2fs_sb_info *sbi, enum rw_hint hint);
- enum rw_hint f2fs_io_type_to_rw_hint(struct f2fs_sb_info *sbi,
- 			enum page_type type, enum temp_type temp);
- unsigned int f2fs_usable_segs_in_sec(struct f2fs_sb_info *sbi,
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 856a5d3bd6bf..23601d747716 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4643,7 +4643,8 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
- 
- 	map.m_may_create = true;
- 	if (dio) {
--		map.m_seg_type = f2fs_rw_hint_to_seg_type(inode->i_write_hint);
-+		map.m_seg_type = f2fs_rw_hint_to_seg_type(sbi,
-+						inode->i_write_hint);
- 		flag = F2FS_GET_BLOCK_PRE_DIO;
- 	} else {
- 		map.m_seg_type = NO_CHECK_TYPE;
-@@ -4696,7 +4697,7 @@ static void f2fs_dio_write_submit_io(const struct iomap_iter *iter,
- {
- 	struct inode *inode = iter->inode;
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
--	int seg_type = f2fs_rw_hint_to_seg_type(inode->i_write_hint);
-+	int seg_type = f2fs_rw_hint_to_seg_type(sbi, inode->i_write_hint);
- 	enum temp_type temp = f2fs_get_segment_temp(seg_type);
- 
- 	bio->bi_write_hint = f2fs_io_type_to_rw_hint(sbi, DATA, temp);
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 8313d6aeaf41..94f3380be04c 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -3358,8 +3358,14 @@ int f2fs_trim_fs(struct f2fs_sb_info *sbi, struct fstrim_range *range)
- 	return err;
- }
- 
--int f2fs_rw_hint_to_seg_type(enum rw_hint hint)
-+int f2fs_rw_hint_to_seg_type(struct f2fs_sb_info *sbi, enum rw_hint hint)
- {
-+	if (F2FS_OPTION(sbi).active_logs == 2)
-+		return CURSEG_HOT_DATA;
-+	else if (F2FS_OPTION(sbi).active_logs == 4)
-+		return CURSEG_COLD_DATA;
-+
-+	/* active_log == 6 */
- 	switch (hint) {
- 	case WRITE_LIFE_SHORT:
- 		return CURSEG_HOT_DATA;
-@@ -3499,7 +3505,8 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
- 				is_inode_flag_set(inode, FI_HOT_DATA) ||
- 				f2fs_is_cow_file(inode))
- 			return CURSEG_HOT_DATA;
--		return f2fs_rw_hint_to_seg_type(inode->i_write_hint);
-+		return f2fs_rw_hint_to_seg_type(F2FS_I_SB(inode),
-+						inode->i_write_hint);
- 	} else {
- 		if (IS_DNODE(fio->page))
- 			return is_cold_node(fio->page) ? CURSEG_WARM_NODE :
--- 
-2.40.1
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMjAyNC80LzE2IDE5OjEyLCBaaGlndW8gTml1IHdyb3RlOgo+IE9uIFR1ZSwgQXByIDE2LCAy
+MDI0IGF0IDM6MjLigK9QTSBDaGFvIFl1IDxjaGFvQGtlcm5lbC5vcmc+IHdyb3RlOgo+Pgo+PiBB
+ZnRlciBjb21taXQgZDdlOWE5MDM3ZGUyICgiZjJmczogU3VwcG9ydCBCbG9jayBTaXplID09IFBh
+Z2UgU2l6ZSIpLAo+PiBGMkZTX0JMS1NJWkUgZXF1YWxzIHRvIFBBR0VfU0laRSwgcmVtb3ZlIHVu
+bmVjZXNzYXJ5IGNoZWNrIGNvbmRpdGlvbi4KPj4KPj4gU2lnbmVkLW9mZi1ieTogQ2hhbyBZdSA8
+Y2hhb0BrZXJuZWwub3JnPgo+PiAtLS0KPj4gICBmcy9mMmZzL3N1cGVyLmMgfCA2IC0tLS0tLQo+
+PiAgIDEgZmlsZSBjaGFuZ2VkLCA2IGRlbGV0aW9ucygtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvZnMv
+ZjJmcy9zdXBlci5jIGIvZnMvZjJmcy9zdXBlci5jCj4+IGluZGV4IDZkMWU0ZmM2MjllMi4uMzJh
+YTZkNmZhODcxIDEwMDY0NAo+PiAtLS0gYS9mcy9mMmZzL3N1cGVyLmMKPj4gKysrIGIvZnMvZjJm
+cy9zdXBlci5jCj4+IEBAIC00OTMzLDEyICs0OTMzLDYgQEAgc3RhdGljIGludCBfX2luaXQgaW5p
+dF9mMmZzX2ZzKHZvaWQpCj4+ICAgewo+PiAgICAgICAgICBpbnQgZXJyOwo+Pgo+PiAtICAgICAg
+IGlmIChQQUdFX1NJWkUgIT0gRjJGU19CTEtTSVpFKSB7Cj4+IC0gICAgICAgICAgICAgICBwcmlu
+dGsoIkYyRlMgbm90IHN1cHBvcnRlZCBvbiBQQUdFX1NJWkUoJWx1KSAhPSBCTE9DS19TSVpFKCVs
+dSlcbiIsCj4+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgUEFHRV9TSVpFLCBGMkZT
+X0JMS1NJWkUpOwo+PiAtICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4+IC0gICAgICAg
+fQo+PiAtCj4+ICAgICAgICAgIGVyciA9IGluaXRfaW5vZGVjYWNoZSgpOwo+PiAgICAgICAgICBp
+ZiAoZXJyKQo+PiAgICAgICAgICAgICAgICAgIGdvdG8gZmFpbDsKPiBEZWFyIENoYW8sCj4gCj4g
+Q2FuIHlvdSBoZWxwIG1vZGlmeSB0aGUgZm9sbG93aW5nICBjb21tZW50IG1zZyB0b2dldGhlciB3
+aXRoIHRoaXMgcGF0Y2g/Cj4gVGhleSBhcmUgYWxzbyByZWxhdGVkIHRvIGNvbW1pdCBkN2U5YTkw
+MzdkZTIgKCJmMmZzOiBTdXBwb3J0IEJsb2NrCj4gU2l6ZSA9PSBQYWdlIFNpemUiKS4KPiBJZiB5
+b3UgdGhpbmsgdGhlcmUgaXMgYSBtb3JlIHN1aXRhYmxlIGRlc2NyaXB0aW9uLCBwbGVhc2UgaGVs
+cCBtb2RpZnkKPiBpdCBkaXJlY3RseS4KClpoaWd1bywKCkkgbWlzc2VkIHRvIHJlcGx5IHRoaXMs
+IEkgZ3Vlc3MgeW91IGNhbiB1cGRhdGUKImYyZnM6IGZpeCBzb21lIGFtYmlndW91cyBjb21tZW50
+cyIuCgo+IHRoYW5rc++8gQo+IAo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L2YyZnNfZnMu
+aCBiL2luY2x1ZGUvbGludXgvZjJmc19mcy5oCj4gaW5kZXggYTM1NzI4Ny4uMjQxZTdiMTggMTAw
+NjQ0Cj4gLS0tIGEvaW5jbHVkZS9saW51eC9mMmZzX2ZzLmgKPiArKysgYi9pbmNsdWRlL2xpbnV4
+L2YyZnNfZnMuaAo+IEBAIC0zOTQsNyArMzk0LDggQEAgc3RydWN0IGYyZnNfbmF0X2Jsb2NrIHsK
+PiAKPiAgIC8qCj4gICAgKiBGMkZTIHVzZXMgNCBieXRlcyB0byByZXByZXNlbnQgYmxvY2sgYWRk
+cmVzcy4gQXMgYSByZXN1bHQsIHN1cHBvcnRlZCBzaXplIG9mCj4gLSAqIGRpc2sgaXMgMTYgVEIg
+YW5kIGl0IGVxdWFscyB0byAxNiAqIDEwMjQgKiAxMDI0IC8gMiBzZWdtZW50cy4KPiArICogZGlz
+ayBpcyAxNiBUQiBmb3IgYSA0SyBwYWdlIHNpemUgYW5kIDY0IFRCIGZvciBhIDE2SyBwYWdlIHNp
+emUgYW5kIGl0IGVxdWFscwoKZGlzayBpcyAxNiBUQiBmb3IgNEsgc2l6ZSBibG9jayBhbmQgNjQg
+VEIgZm9yIDE2SyBzaXplIGJsb2NrIGFuZCBpdCBlcXVhbHMKdG8gKDEgPDwgMzIpIC8gNTEyIHNl
+Z21lbnRzLgoKI2RlZmluZSBGMkZTX01BWF9TRUdNRU5UICAgICAgIAkJKCgxIDw8IDMyKSAvIDUx
+MikKClRoYW5rcywKCj4gKyAqIHRvIDE2ICogMTAyNCAqIDEwMjQgLyAyIHNlZ21lbnRzLgo+ICAg
+ICovCj4gICAjZGVmaW5lIEYyRlNfTUFYX1NFR01FTlQgICAgICAgKCgxNiAqIDEwMjQgKiAxMDI0
+KSAvIDIpCj4gCj4gQEAgLTQyNCw4ICs0MjUsMTAgQEAgc3RydWN0IGYyZnNfc2l0X2Jsb2NrIHsK
+PiAgIC8qCj4gICAgKiBGb3Igc2VnbWVudCBzdW1tYXJ5Cj4gICAgKgo+IC0gKiBPbmUgc3VtbWFy
+eSBibG9jayBjb250YWlucyBleGFjdGx5IDUxMiBzdW1tYXJ5IGVudHJpZXMsIHdoaWNoIHJlcHJl
+c2VudHMKPiAtICogZXhhY3RseSBvbmUgc2VnbWVudCBieSBkZWZhdWx0LiBOb3QgYWxsb3cgdG8g
+Y2hhbmdlIHRoZSBiYXNpYyB1bml0cy4KPiArICogT25lIHN1bW1hcnkgYmxvY2sgd2l0aCA0S0Ig
+c2l6ZSBjb250YWlucyBleGFjdGx5IDUxMiBzdW1tYXJ5IGVudHJpZXMsIHdoaWNoCj4gKyAqIHJl
+cHJlc2VudHMgZXhhY3RseSBvbmUgc2VnbWVudCB3aXRoIDJNQiBzaXplLgo+ICsgKiBTaW1pbGFy
+bHksIGluIHRoZSBjYXNlIG9mIDE2ayBibG9jayBzaXplLCBpdCByZXByZXNlbnRzIG9uZQo+IHNl
+Z21lbnQgd2l0aCA4TUIgc2l6ZS4KPiArICogTm90IGFsbG93IHRvIGNoYW5nZSB0aGUgYmFzaWMg
+dW5pdHMuCj4gICAgKgo+ICAgICogTk9URTogRm9yIGluaXRpYWxpemluZyBmaWVsZHMsIHlvdSBt
+dXN0IHVzZSBzZXRfc3VtbWFyeQo+ICAgICoKPiBAQCAtNTU2LDYgKzU1OSw3IEBAIHN0cnVjdCBm
+MmZzX3N1bW1hcnlfYmxvY2sgewo+IAo+ICAgLyoKPiAgICAqIHNwYWNlIHV0aWxpemF0aW9uIG9m
+IHJlZ3VsYXIgZGVudHJ5IGFuZCBpbmxpbmUgZGVudHJ5ICh3L28gZXh0cmEKPiByZXNlcnZhdGlv
+bikKPiArICogd2hlbiBibG9jayBzaXplIGlzIDRLQi4KPiAKPiAKPiAKPj4gLS0KPj4gMi40MC4x
+Cj4+Cj4+Cj4+Cj4+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fCj4+IExpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0Cj4+IExpbnV4LWYyZnMtZGV2ZWxA
+bGlzdHMuc291cmNlZm9yZ2UubmV0Cj4+IGh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xp
+c3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwKCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51
+eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZv
+cmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
