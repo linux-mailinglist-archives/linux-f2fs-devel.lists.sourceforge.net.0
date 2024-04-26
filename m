@@ -2,67 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 475EB8B3456
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Apr 2024 11:41:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23B168B355D
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Apr 2024 12:36:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s0I59-0002TK-1g;
-	Fri, 26 Apr 2024 09:41:27 +0000
+	id 1s0Ivt-00019V-19;
+	Fri, 26 Apr 2024 10:35:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1s0I57-0002T1-1C
+ (envelope-from <chao@kernel.org>) id 1s0Ivm-00019G-Sv
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Apr 2024 09:41:25 +0000
+ Fri, 26 Apr 2024 10:35:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TRSQ2Zqp7d4nF5uGhFknqAt6D/lEx5rba98JtZi3kuM=; b=fauaTwdVW5dqd0Qp4lPl72uYhw
- CBFWpDQ7MYKmxD7ptyQOfDiOwqDrgjzJgtB6MbJo8MMBhj3TGpRgIB2qlIfv0a1/MHuc5NAtrzdp6
- wOmxwQrGSaL/gdx5sp8cl2PNlMo7A6PAv3qWWiINkuOJpclGYS6miOLbzu63HcZM2Wtw=;
+ bh=u9hhjY3YKAJF7nmBSLYD68trt8R2hF2v9zotqINYWuQ=; b=Smw+6MJ55GGEJ+b64LS6vjBtpe
+ 4WOmIQrgi1kumzPBmSUUbWWW9LpA9nGEJpqZ40RQ4KHyU7zV/9in18hRELm7PooNfXpCrybYebozY
+ jgz1bwaE5pcLvt+VLHJjAXN3L7jrCg9sYC7nDB9bX++g0PFZ1WTtn8ZNop47M54K6EEQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=TRSQ2Zqp7d4nF5uGhFknqAt6D/lEx5rba98JtZi3kuM=; b=cPcWRoQ6ngVLV34pRpsCxoyuPh
- 5CLFRKW38kM55Ksk8YwrK4Y9+gVoCEDwll7JFPGxMHsG+11eqdyksJqc72m124AejnhGJqh8MMPuO
- cg1pp+wJA4KbFMRcmu1ygdfoVqKSXI9ivUV+Il2kG5VseHIt6Lr/NnP0/yFsCygBx790=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=u9hhjY3YKAJF7nmBSLYD68trt8R2hF2v9zotqINYWuQ=; b=J
+ HPh8uEYux3F7/EmW/zKVrnaVNKYvBHzQ9JaLzEstUrb3bzO0ubRhQgldMTUZkU+GbwApooWWVcjpe
+ 4qj4bKza1JSmcPrULhm9FVom6nlNDR/R+A6fkbxnqVW1GDvvnOsjQezfvZcBFnMWqc7ezGU7ae++o
+ xLqaE9xI+dgMqBEw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1s0I56-0005PX-OJ for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Apr 2024 09:41:25 +0000
+ id 1s0Ivl-0001xF-6e for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Apr 2024 10:35:50 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id CC7506202E;
- Fri, 26 Apr 2024 09:41:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EB01DC32782;
- Fri, 26 Apr 2024 09:41:17 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 36A4862002;
+ Fri, 26 Apr 2024 10:35:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13252C113CD;
+ Fri, 26 Apr 2024 10:35:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1714124479;
- bh=3XTOEocsRLJi7cHrKqhtGln2IUJoC3krYPasCKtAAgw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=QCbGdLzVs24AMjUmS/VRAKvXHl2bzuoWovU3ugxsBpTYnpDVQpxHQTABR7ZdWoJ1a
- GsFiWYP6L1eXSwJktIJrJb0HFFtKeezKPsYxA4c19EcLqNIP47MI0GKYABHG0reLXA
- KJBhNe+KsF1oNefCyOyxbCr/vBzhQQ3SbpL/jUg3/hRUNuW+CMhwhp/hhLzwKX67Jz
- NgKSGvIkfc3rRIxKVupWCNmuO/9ymEy8QySBYCJjDRdNeQdbWrPjn9ATPu575YjDvA
- SBjJKk1VZM8p7yx9BzQ48thOGEoAw342F0D2hMJ06SE6nhFqPHZxR5N4lMVJEWVUFX
- 2nopneqDDJP7w==
-Message-ID: <ff6b6c5d-d325-442e-a8a3-5bb19564e92e@kernel.org>
-Date: Fri, 26 Apr 2024 17:41:14 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Yifan Zhao <zhaoyifan@sjtu.edu.cn>, jaegeuk@kernel.org
-References: <20240425145528.2925372-1-zhaoyifan@sjtu.edu.cn>
-Content-Language: en-US
+ s=k20201202; t=1714127738;
+ bh=1M11MRI5r8LFTEUJBIZWj9DEeQPtq9UkmPXJoyrFJjU=;
+ h=From:To:Cc:Subject:Date:From;
+ b=On42Bq5KFzRD58lKilMe0u76cR7Lb3kLZv3yFI8/dRcW/gGFClfpRsUzevcZVZNBZ
+ zsbWa07OXKjttI4WUKybjCosSxNTxiz81HjVwR5jL22uF466Itlldl9ZoFA5rPvhFw
+ s535rAYULOBpDgV9LKQDSi9V0vIdHvGGcRPqWx76luyPwOOSRcg7dyQDcq6Bm1/J6Z
+ Xfq/0oPeWrixhzoWhwxR+xG+kYa3+IQODhMni99yh8KlFsdS3L1NHC0oPMjFwCX6eK
+ 5gVO4BLYPFFONM0jLI2pq90md2EXzC2lHOQAI0IgxWEQN0rK1R+MXMPtfzqQSr57Rm
+ Hvi7an9EHuBXA==
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20240425145528.2925372-1-zhaoyifan@sjtu.edu.cn>
+To: jaegeuk@kernel.org
+Date: Fri, 26 Apr 2024 18:35:28 +0800
+Message-Id: <20240426103528.406063-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -70,11 +67,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/4/25 22:55,
- Yifan Zhao wrote: > is_next_segment_free()
- takes a redundant `type` parameter. Remove it. > > Signed-off-by: Yifan Zhao
- <zhaoyifan@sjtu.edu.cn> Reviewed-by: Chao Yu <chao@kernel.org> 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  Otherwise,
+ it breaks pinfile's sematics. Cc: Daeho Jeong <daeho43@gmail.com>
+ Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/data.c | 3 ++- 1 file
+ changed, 2 insertions(+),
+ 1 deletion(-) diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+ index bee1e45f76b8..e29000d83d52 100644 --- a/fs/f2fs/data.c +++
+ b/fs/f2fs/data.c
+ @@ -1596,7 +1596,8 @@ int f2fs_map_blocks(struct inode *inode, struct f2f
+ [...] Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -89,9 +90,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1s0I56-0005PX-OJ
-Subject: Re: [f2fs-dev] [PATCH] f2fs: remove redundant parameter in
- is_next_segment_free()
+X-Headers-End: 1s0Ivl-0001xF-6e
+Subject: [f2fs-dev] [PATCH] f2fs: zone: fix to don't trigger OPU on pinfile
+ for direct IO
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,18 +105,35 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/4/25 22:55, Yifan Zhao wrote:
-> is_next_segment_free() takes a redundant `type` parameter. Remove it.
-> 
-> Signed-off-by: Yifan Zhao <zhaoyifan@sjtu.edu.cn>
+Otherwise, it breaks pinfile's sematics.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Cc: Daeho Jeong <daeho43@gmail.com>
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/data.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Thanks,
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index bee1e45f76b8..e29000d83d52 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1596,7 +1596,8 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
+ 
+ 	/* use out-place-update for direct IO under LFS mode */
+ 	if (map->m_may_create &&
+-	    (is_hole || (f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_DIO))) {
++	    (is_hole || (flag == F2FS_GET_BLOCK_DIO && (f2fs_lfs_mode(sbi) &&
++	    (!f2fs_sb_has_blkzoned(sbi) || !f2fs_is_pinned_file(inode)))))) {
+ 		if (unlikely(f2fs_cp_error(sbi))) {
+ 			err = -EIO;
+ 			goto sync_out;
+-- 
+2.40.1
+
 
 
 _______________________________________________
