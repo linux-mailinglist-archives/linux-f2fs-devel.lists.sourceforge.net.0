@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3907D8BCC31
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 May 2024 12:42:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72C318BCC30
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 May 2024 12:42:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s3vnp-0000cE-CA;
-	Mon, 06 May 2024 10:42:37 +0000
+	id 1s3vnp-0002M9-H5;
+	Mon, 06 May 2024 10:42:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1s3vnd-0000bZ-7O
+ (envelope-from <chao@kernel.org>) id 1s3vne-0002LH-GN
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 06 May 2024 10:42:25 +0000
+ Mon, 06 May 2024 10:42:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bFtObBWWpAaEThNan5FYnmr0TnSmuoc3FKrd0rPupJU=; b=RU0W7X61lMMtms2NkUWhMCnO7e
- ctwnqgvpzFKHHnE8idq5QlnhnaVbqAyFGQClaoWAL4g92fCD+u/XSr0Zae5GDnd6ZBbysZXiG6LI6
- a7DOZZ4eUwmzmRen7ccE9I8TNL323Z+ElDxtfl6GRYxR7uGM/nOQMlY8yENPM1st9Zbg=;
+ bh=61yaauQLX1xW6A03+Mrdh7LSN+wCYJc2rD+SN/uGjhs=; b=asNYk/Fz6XptEkqrW5n+JSUTdd
+ QtRNblWfqAZ3YXSUZAvxVFAuYyJ8/no8MfFIcDQQPxbTTjfCrj0pWZImu+b5YXJ/zCpIyJve9at/t
+ lr+TG33p7h9un8dh0POo6ene8ycLKGWTgK1F3/wwhooDJYKW2KwARN8Ed32nUhctnteQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,34 +31,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bFtObBWWpAaEThNan5FYnmr0TnSmuoc3FKrd0rPupJU=; b=IgIr7f+4nY9YK4wdW082/FCun4
- WJlA3HZV4QjLELj6I469pgAPYbDAoiKWwBjNFQDraQO4hxAvOyBlCoAGs+yik3SBmeOabAdlqc+ZI
- m/BBvoSqJWew2sGzIuFbHPrSfPYa7UHh3kG4ODurhUM/ZKd44MTrbZERe8SMT9jTJtOE=;
+ bh=61yaauQLX1xW6A03+Mrdh7LSN+wCYJc2rD+SN/uGjhs=; b=kUTebHJxubvOt042B9jjtTnYs8
+ IYsVV5aGUsrlRwQwdk9aZX1OSNLH3vvE8zwxAGPqnvyHW3tDYSmGMbk6bUUJqrHxZwrE5zKOnDvTA
+ EIMR8J6hGBTn7v+eOocrPeWCmWChptJ90fzeuI0DB1lRPHglC/QggF6F+TizEXFMG8Z0=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1s3vnc-0004o8-Sp for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 06 May 2024 10:42:25 +0000
+ id 1s3vne-0004oG-KL for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 06 May 2024 10:42:27 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7DD3A6109E
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4918D611A9
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  6 May 2024 10:42:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4204C4AF68;
  Mon,  6 May 2024 10:42:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 138FDC4AF66;
- Mon,  6 May 2024 10:42:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1714992134;
- bh=h2cJ8DiDTvOHVXuqiLQoZiz/U51rJ58bz1v/ndbDMNc=;
+ s=k20201202; t=1714992136;
+ bh=dv1pEoHOwA1g/+IAGWZ5yWzazulJlprTYfwb5ytZma8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=BiOxEnJ1khv7+Zae5sAhEAsn2ZDIc9Ye9P28fYz4pEatNLYbUaHZRWSQwOeayJsuO
- 3ON/Fn6RgX2LR295sTaNE53iuE8Wxdki7jx3y/GvNzpJRvcIFDtRCG6HH+e1pcB4s3
- tOech77POBhS4mtwrZ/hU617xqruqq8zLlFwYyiXbh1V6YsT//8UuFKucEjLqgEa71
- C1JGpJs4ZXt9RHyGFZErXZAHNWpBjUcvIjNTGTNSqn/CMaKWGAYSJaYurkERH5L0vX
- WT5wBhGOi8nPKmRL2MQIHb7/F7Yv7nu7edzCPcwzCM+O7aZRoDRahlbFpK533EFzP0
- 2Hj+mvEq2JVzw==
+ b=siwn/DFOz2c0A0TUxgsNXWaLaIGaw/YomjZgU9pII4NXQGaBu7ptzSDjO8ZevIJ3A
+ Lr1MALFUgBfjLt8s+WkXAJiEagLVemd+FTxA4jg0D+Frk4DlO+5f1pMiOy6jxPlXcP
+ X2hF33+AJEHfLETLOng+0Gy2+r4cQtVgf9Xu7p+kUnwNKn1ZIC88/kPuajQ4PaBRKq
+ gLuaXHNax7qElwja1IWVrvChIDMVwPw6C/4197HiMFonxZMmJ/cnEKcpqq9uaECq7U
+ 3AyXhD3c0yn51BoAuaczk6CadFECQhl+8n0feyhIVOxGgiOqN47JYKO/vuBa69M5vM
+ liVDrIv21Ys/g==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Mon,  6 May 2024 18:41:39 +0800
-Message-Id: <20240506104140.776986-4-chao@kernel.org>
+Date: Mon,  6 May 2024 18:41:40 +0800
+Message-Id: <20240506104140.776986-5-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240506104140.776986-1-chao@kernel.org>
 References: <20240506104140.776986-1-chao@kernel.org>
@@ -70,10 +70,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  It needs to cover {reserve,
- release}_compress_blocks() w/ cp_rwsem
- lock to avoid racing with checkpoint, otherwise, filesystem metadata including
- blkaddr in dnode, inode fields and .total_valid_block_c [...] 
+ Content preview: f2fs image may be corrupted after below testcase: - mkfs.f2fs
+ -O extra_attr,compression -f /dev/vdb - mount /dev/vdb /mnt/f2fs - touch
+ /mnt/f2fs/file - f2fs_io setflags compression /mnt/f2fs/file - dd [...] 
  Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -86,9 +85,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1s3vnc-0004o8-Sp
-Subject: [f2fs-dev] [PATCH 4/5] f2fs: compress: fix to cover {reserve,
- release}_compress_blocks() w/ cp_rwsem lock
+X-Headers-End: 1s3vne-0004oG-KL
+Subject: [f2fs-dev] [PATCH 5/5] f2fs: compress: don't allow unaligned
+ truncation on released compress inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,66 +104,56 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-It needs to cover {reserve,release}_compress_blocks() w/ cp_rwsem lock
-to avoid racing with checkpoint, otherwise, filesystem metadata including
-blkaddr in dnode, inode fields and .total_valid_block_count may be
-corrupted after SPO case.
+f2fs image may be corrupted after below testcase:
+- mkfs.f2fs -O extra_attr,compression -f /dev/vdb
+- mount /dev/vdb /mnt/f2fs
+- touch /mnt/f2fs/file
+- f2fs_io setflags compression /mnt/f2fs/file
+- dd if=/dev/zero of=/mnt/f2fs/file bs=4k count=4
+- f2fs_io release_cblocks /mnt/f2fs/file
+- truncate -s 8192 /mnt/f2fs/file
+- umount /mnt/f2fs
+- fsck.f2fs /dev/vdb
 
-Fixes: ef8d563f184e ("f2fs: introduce F2FS_IOC_RELEASE_COMPRESS_BLOCKS")
-Fixes: c75488fb4d82 ("f2fs: introduce F2FS_IOC_RESERVE_COMPRESS_BLOCKS")
+[ASSERT] (fsck_chk_inode_blk:1256)  --> ino: 0x5 has i_blocks: 0x00000002, but has 0x3 blocks
+[FSCK] valid_block_count matching with CP             [Fail] [0x4, 0x5]
+[FSCK] other corrupted bugs                           [Fail]
+
+The reason is: partial truncation assume compressed inode has reserved
+blocks, after partial truncation, valid block count may change w/
+.i_blocks and .total_valid_block_count update, result in corruption.
+
+This patch only allow cluster size aligned truncation on released
+compress inode for fixing.
+
+Fixes: c61404153eb6 ("f2fs: introduce FI_COMPRESS_RELEASED instead of using IMMUTABLE bit")
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/file.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ fs/f2fs/file.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index e77e958a9f92..3f0db351e976 100644
+index 3f0db351e976..ac9d6380e433 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -3570,9 +3570,12 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
- 		struct dnode_of_data dn;
- 		pgoff_t end_offset, count;
+@@ -952,9 +952,14 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+ 				  ATTR_GID | ATTR_TIMES_SET))))
+ 		return -EPERM;
  
-+		f2fs_lock_op(sbi);
-+
- 		set_new_dnode(&dn, inode, NULL, NULL, 0);
- 		ret = f2fs_get_dnode_of_data(&dn, page_idx, LOOKUP_NODE);
- 		if (ret) {
-+			f2fs_unlock_op(sbi);
- 			if (ret == -ENOENT) {
- 				page_idx = f2fs_get_next_page_offset(&dn,
- 								page_idx);
-@@ -3590,6 +3593,8 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
+-	if ((attr->ia_valid & ATTR_SIZE) &&
+-		!f2fs_is_compress_backend_ready(inode))
+-		return -EOPNOTSUPP;
++	if ((attr->ia_valid & ATTR_SIZE)) {
++		if (!f2fs_is_compress_backend_ready(inode))
++			return -EOPNOTSUPP;
++		if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED) &&
++			(attr->ia_size %
++			F2FS_BLK_TO_BYTES(F2FS_I(inode)->i_cluster_size)))
++			return -EINVAL;
++	}
  
- 		f2fs_put_dnode(&dn);
- 
-+		f2fs_unlock_op(sbi);
-+
- 		if (ret < 0)
- 			break;
- 
-@@ -3742,9 +3747,12 @@ static int f2fs_reserve_compress_blocks(struct file *filp, unsigned long arg)
- 		struct dnode_of_data dn;
- 		pgoff_t end_offset, count;
- 
-+		f2fs_lock_op(sbi);
-+
- 		set_new_dnode(&dn, inode, NULL, NULL, 0);
- 		ret = f2fs_get_dnode_of_data(&dn, page_idx, LOOKUP_NODE);
- 		if (ret) {
-+			f2fs_unlock_op(sbi);
- 			if (ret == -ENOENT) {
- 				page_idx = f2fs_get_next_page_offset(&dn,
- 								page_idx);
-@@ -3762,6 +3770,8 @@ static int f2fs_reserve_compress_blocks(struct file *filp, unsigned long arg)
- 
- 		f2fs_put_dnode(&dn);
- 
-+		f2fs_unlock_op(sbi);
-+
- 		if (ret < 0)
- 			break;
- 
+ 	err = setattr_prepare(idmap, dentry, attr);
+ 	if (err)
 -- 
 2.40.1
 
