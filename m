@@ -2,66 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C5518BCC47
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 May 2024 12:46:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 940298BCC4C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 May 2024 12:47:04 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s3vrA-0002tV-LO;
-	Mon, 06 May 2024 10:46:05 +0000
+	id 1s3vs7-0000wG-2k;
+	Mon, 06 May 2024 10:47:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1s3vr9-0002tO-BI
+ (envelope-from <chao@kernel.org>) id 1s3vs5-0000w0-G8
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 06 May 2024 10:46:03 +0000
+ Mon, 06 May 2024 10:47:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qop69MkRQ1b4f5eWPHR20uQUxF2EcEJUv7qbqg5o0oc=; b=eZx7aBjFLB792T/O+fUdUL9UDw
- FB//f6K3QH6IMBEIxKsGVRL7lR/EckvkGd4i+X16w5wzqxOiiITpcuh7THVCx4c2ETbQUIcdYhjkL
- VOv++0ztVkAFBDK6wM+k9zl5Lx06ljLbLtvLaYh9FA2xDsEK5nR4cuFHunMPZtMpTE/E=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=qop69MkRQ1b4f5eWPHR20uQUxF2EcEJUv7qbqg5o0oc=; b=fjwSBBm/cV/o6Eq1I7q1UcefYu
- mOicDwC74DhGrijZWTK+kHicM+dLffURTWsCuPb9P73jCpQbDReGP6U6GiRrvSmbDHCA0CloGmeVP
- xQ5zCfgmUaYpsXxbI4cHZCe3izewOLCY6QhlUcSVrdHkdVyXMuGnz96m8dVoAQLwD4Dc=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=V7TsJpeaZSd1kAAkTHGzZC+p11S6ODvpkdtqbNLkuXM=; b=FaWLsZyTzkPxArV0/EjPCTgaqG
+ MF2jbv6z6BxU1jtel7iSzuMk/nSy3+isbh3fC//1cph9KucQzrWQPyfaRuEgSLaM1OrNzpMGZLNdY
+ aOE/Bo6kQ1SoTmkCbqnK9oTZiTPhUPluPYglNl4KNXOU8CpCbhfEme8G/FlHahX9lg9Q=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=V7TsJpeaZSd1kAAkTHGzZC+p11S6ODvpkdtqbNLkuXM=; b=D
+ LMVpebdfeW6vlf4Gd/N+PDASFl/jPGfZ4RfoeIJpzLG1WXZ2Adfu4vfSWFzg1O/GC9TiWpXFVZE8M
+ Et4Moy19ohnNqLY7YAcJQLFcafgMX6vG3zoA/ZGmiUMrg6E2SkJL/J4me1US7PeNT+2tfHOVMlaDG
+ GglfURfnbsAvqyQo=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1s3vr8-00058f-Fp for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 06 May 2024 10:46:03 +0000
+ id 1s3vs4-0005El-VV for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 06 May 2024 10:47:01 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 27AC46117B
+ by dfw.source.kernel.org (Postfix) with ESMTP id 982FD60C02
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  6 May 2024 10:45:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5BFBC4AF18;
- Mon,  6 May 2024 10:45:50 +0000 (UTC)
+ Mon,  6 May 2024 10:46:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00129C116B1;
+ Mon,  6 May 2024 10:46:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1714992352;
- bh=ujeNWZnZlwotBG7o+WYiKDn4iCBwSQc+8Bif1ZGJ0Ns=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=YV6qHBPbcPC67A9nuHjPMpbW32y9pTdI8DVPfhUx9PovciXUiwhd3+Q0r/sqfl481
- UhgFYT9v/y36fBzQ4SecdPVaqGffrbe4TtEUf2wNWWp8F5fptrGy8yf2RYrrKIA+8o
- EBGSo4ZTDhCuFVoabmbmX6HqqL/IIVyBvptqSWiABC0nMrIVE2StSiqAi+5VYYrS4j
- yGDAHp9ZAuNXyhlhOLeH7l4c7euNhPq9/Ioxj1sRSN7feJqDB0O6cK9h5lOwkwBSxU
- K4J++WVvbcedm5EtXtCs8w40fQO2N4oC6QuyYtY6bGplMOgcRfnrBNA9ziERW0F0h5
- XcuuD+eW99OzA==
+ s=k20201202; t=1714992415;
+ bh=OZhJqt+o8seKhbAIpLU14VakbFXx8o5jipF26rcAztU=;
+ h=From:To:Cc:Subject:Date:From;
+ b=OBGl3ScGEUxgguSlQ75+eY+VpwBMeAwETZy3PrphT3PgVQx0OzEbAdBCjVG4Niou5
+ N7ro6gE4pvNbuX5T5AhOu5+EeEQ/gsZJuX6xQ+bwu47WvIjiohH49UFFk9KCq1M531
+ aYak/5xVkvJvObeiZxaiBt3NF83mQADn0Qq4qytxk1pwXEmCEjyoQrz/4BfAy4STr6
+ 0oT3Fg2MnCjbbFqTth/qgMu94AYycZ07wlWLT+BHm+yTC9/eMJMj6gKHKSLRvBAn0x
+ Yd8LYEgaBjzYSyX5AIOwhFP/XOTYGUnE/hSVV1JnzdyFu/QaUlhrUtFt/efBD1T1ja
+ jLE5NNHq6ouUQ==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Mon,  6 May 2024 18:45:38 +0800
-Message-Id: <20240506104538.778116-2-chao@kernel.org>
+Date: Mon,  6 May 2024 18:46:50 +0800
+Message-Id: <20240506104650.778504-1-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240506104538.778116-1-chao@kernel.org>
-References: <20240506104538.778116-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam detection software,
@@ -70,11 +68,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  type of f2fs_inode.i_gc_failures,
- f2fs_inode_info.i_gc_failures, 
- and f2fs_sb_info.gc_pin_file_threshold is __le16, unsigned int, and u64,
- so it will cause truncation during comparison and persistence. 
- Content analysis details:   (-0.8 points, 6.0 required)
+ Content preview: - It missed to check validation of fault attrs in
+ parse_options(), 
+ let's fix to add check condition in f2fs_build_fault_attr(). - Use
+ f2fs_build_fault_attr()
+ in __sbi_store() to clean up code. Signed-off-by: Chao Yu <chao@kernel.org>
+ --- fs/f2fs/f2fs.h | 12 ++++++++---- fs/f2fs/super.c | 27
+ ++++++++++++++++++++-------
+ fs/f2fs/sysfs.c | 14 ++++++++++---- 3 files changed, 38 insertions(+), 15
+ [...] Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
@@ -90,8 +92,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1s3vr8-00058f-Fp
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix to limit gc_pin_file_threshold
+X-Headers-End: 1s3vs4-0005El-VV
+Subject: [f2fs-dev] [PATCH] f2fs: check validation of fault attrs in
+ f2fs_build_fault_attr()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,114 +111,134 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-type of f2fs_inode.i_gc_failures, f2fs_inode_info.i_gc_failures, and
-f2fs_sb_info.gc_pin_file_threshold is __le16, unsigned int, and u64,
-so it will cause truncation during comparison and persistence.
-
-Unifying variable of these three variables to unsigned short, and
-add an upper boundary limitation for gc_pin_file_threshold.
+- It missed to check validation of fault attrs in parse_options(),
+let's fix to add check condition in f2fs_build_fault_attr().
+- Use f2fs_build_fault_attr() in __sbi_store() to clean up code.
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs |  2 +-
- fs/f2fs/f2fs.h                          |  4 ++--
- fs/f2fs/file.c                          | 11 ++++++-----
- fs/f2fs/gc.h                            |  1 +
- fs/f2fs/sysfs.c                         |  7 +++++++
- 5 files changed, 17 insertions(+), 8 deletions(-)
+ fs/f2fs/f2fs.h  | 12 ++++++++----
+ fs/f2fs/super.c | 27 ++++++++++++++++++++-------
+ fs/f2fs/sysfs.c | 14 ++++++++++----
+ 3 files changed, 38 insertions(+), 15 deletions(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 1a4d83953379..cad6c3dc1f9c 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -331,7 +331,7 @@ Date:		January 2018
- Contact:	Jaegeuk Kim <jaegeuk@kernel.org>
- Description:	This indicates how many GC can be failed for the pinned
- 		file. If it exceeds this, F2FS doesn't guarantee its pinning
--		state. 2048 trials is set by default.
-+		state. 2048 trials is set by default, and 65535 as maximum.
- 
- What:		/sys/fs/f2fs/<disk>/extension_list
- Date:		February 2018
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 400ff8e1abe0..3dff45cd6cde 100644
+index 95a40d4f778f..b03d75e4eedc 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -813,7 +813,7 @@ struct f2fs_inode_info {
- 	unsigned char i_dir_level;	/* use for dentry level for large dir */
- 	union {
- 		unsigned int i_current_depth;	/* only for directory depth */
--		unsigned int i_gc_failures;	/* for gc failure statistic */
-+		unsigned short i_gc_failures;	/* for gc failure statistic */
- 	};
- 	unsigned int i_pino;		/* parent inode number */
- 	umode_t i_acl_mode;		/* keep file acl mode temporarily */
-@@ -1672,7 +1672,7 @@ struct f2fs_sb_info {
- 	unsigned long long skipped_gc_rwsem;		/* FG_GC only */
+@@ -72,7 +72,7 @@ enum {
  
- 	/* threshold for gc trials on pinned files */
--	u64 gc_pin_file_threshold;
-+	unsigned short gc_pin_file_threshold;
- 	struct f2fs_rwsem pin_sem;
+ struct f2fs_fault_info {
+ 	atomic_t inject_ops;
+-	unsigned int inject_rate;
++	int inject_rate;
+ 	unsigned int inject_type;
+ };
  
- 	/* maximum # of trials to find a victim segment for SSR and GC */
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 200cafc75dce..1b1b08923f7d 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -3194,16 +3194,17 @@ int f2fs_pin_file_control(struct inode *inode, bool inc)
- 	struct f2fs_inode_info *fi = F2FS_I(inode);
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 
--	/* Use i_gc_failures for normal file as a risk signal. */
--	if (inc)
--		f2fs_i_gc_failures_write(inode, fi->i_gc_failures + 1);
--
--	if (fi->i_gc_failures > sbi->gc_pin_file_threshold) {
-+	if (fi->i_gc_failures >= sbi->gc_pin_file_threshold) {
- 		f2fs_warn(sbi, "%s: Enable GC = ino %lx after %x GC trials",
- 			  __func__, inode->i_ino, fi->i_gc_failures);
- 		clear_inode_flag(inode, FI_PIN_FILE);
- 		return -EAGAIN;
- 	}
-+
-+	/* Use i_gc_failures for normal file as a risk signal. */
-+	if (inc)
-+		f2fs_i_gc_failures_write(inode, fi->i_gc_failures + 1);
-+
- 	return 0;
+@@ -4597,10 +4597,14 @@ static inline bool f2fs_need_verity(const struct inode *inode, pgoff_t idx)
  }
  
-diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
-index 9c0d06c4d19a..a8ea3301b815 100644
---- a/fs/f2fs/gc.h
-+++ b/fs/f2fs/gc.h
-@@ -26,6 +26,7 @@
- #define LIMIT_FREE_BLOCK	40 /* percentage over invalid + free space */
+ #ifdef CONFIG_F2FS_FAULT_INJECTION
+-extern void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
+-							unsigned int type);
++extern int f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned long rate,
++							unsigned long type);
+ #else
+-#define f2fs_build_fault_attr(sbi, rate, type)		do { } while (0)
++int f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned long rate,
++							unsigned long type)
++{
++	return 0;
++}
+ #endif
  
- #define DEF_GC_FAILED_PINNED_FILES	2048
-+#define MAX_GC_FAILED_PINNED_FILES	USHRT_MAX
+ static inline bool is_journalled_quota(struct f2fs_sb_info *sbi)
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index a4bc26dfdb1a..94918ae7eddb 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -66,21 +66,31 @@ const char *f2fs_fault_name[FAULT_MAX] = {
+ 	[FAULT_NO_SEGMENT]		= "no free segment",
+ };
  
- /* Search max. number of dirty segments to select a victim segment */
- #define DEF_MAX_VICTIM_SEARCH 4096 /* covers 8GB */
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 7aa3844e7a80..09d3ecfaa4f1 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -681,6 +681,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 		return count;
+-void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
+-							unsigned int type)
++int f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned long rate,
++							unsigned long type)
+ {
+ 	struct f2fs_fault_info *ffi = &F2FS_OPTION(sbi).fault_info;
+ 
+ 	if (rate) {
++		if (rate > INT_MAX)
++			return -EINVAL;
+ 		atomic_set(&ffi->inject_ops, 0);
+-		ffi->inject_rate = rate;
++		ffi->inject_rate = (int)rate;
  	}
  
-+	if (!strcmp(a->attr.name, "gc_pin_file_threshold")) {
-+		if (t > MAX_GC_FAILED_PINNED_FILES)
+-	if (type)
+-		ffi->inject_type = type;
++	if (type) {
++		if (type >= BIT(FAULT_MAX))
 +			return -EINVAL;
-+		sbi->gc_pin_file_threshold = t;
++		ffi->inject_type = (unsigned int)type;
++	}
+ 
+ 	if (!rate && !type)
+ 		memset(ffi, 0, sizeof(struct f2fs_fault_info));
++	else
++		f2fs_info(sbi,
++			"build fault injection attr: rate: %lu, type: 0x%lx",
++								rate, type);
++	return 0;
+ }
+ #endif
+ 
+@@ -886,14 +896,17 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 		case Opt_fault_injection:
+ 			if (args->from && match_int(args, &arg))
+ 				return -EINVAL;
+-			f2fs_build_fault_attr(sbi, arg, F2FS_ALL_FAULT_TYPE);
++			if (f2fs_build_fault_attr(sbi, arg,
++					F2FS_ALL_FAULT_TYPE))
++				return -EINVAL;
+ 			set_opt(sbi, FAULT_INJECTION);
+ 			break;
+ 
+ 		case Opt_fault_type:
+ 			if (args->from && match_int(args, &arg))
+ 				return -EINVAL;
+-			f2fs_build_fault_attr(sbi, 0, arg);
++			if (f2fs_build_fault_attr(sbi, 0, arg))
++				return -EINVAL;
+ 			set_opt(sbi, FAULT_INJECTION);
+ 			break;
+ #else
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index a568ce96cf56..7aa3844e7a80 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -484,10 +484,16 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 	if (ret < 0)
+ 		return ret;
+ #ifdef CONFIG_F2FS_FAULT_INJECTION
+-	if (a->struct_type == FAULT_INFO_TYPE && t >= BIT(FAULT_MAX))
+-		return -EINVAL;
+-	if (a->struct_type == FAULT_INFO_RATE && t >= UINT_MAX)
+-		return -EINVAL;
++	if (a->struct_type == FAULT_INFO_TYPE) {
++		if (f2fs_build_fault_attr(sbi, 0, t))
++			return -EINVAL;
 +		return count;
 +	}
-+
- 	if (!strcmp(a->attr.name, "gc_reclaimed_segments")) {
- 		if (t != 0)
- 			return -EINVAL;
++	if (a->struct_type == FAULT_INFO_RATE) {
++		if (f2fs_build_fault_attr(sbi, t, 0))
++			return -EINVAL;
++		return count;
++	}
+ #endif
+ 	if (a->struct_type == RESERVED_BLOCKS) {
+ 		spin_lock(&sbi->stat_lock);
 -- 
 2.40.1
 
