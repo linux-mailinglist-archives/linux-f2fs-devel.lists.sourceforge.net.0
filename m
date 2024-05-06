@@ -2,123 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF30A8B96B7
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 May 2024 10:47:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF5578BCC0E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 May 2024 12:33:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s2S6C-0001dX-LA;
-	Thu, 02 May 2024 08:47:29 +0000
+	id 1s3vey-0005Ui-Pm;
+	Mon, 06 May 2024 10:33:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ryncsn@gmail.com>) id 1s2S6A-0001dI-UA
+ (envelope-from <chao@kernel.org>) id 1s3vex-0005Uc-KK
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 02 May 2024 08:47:27 +0000
+ Mon, 06 May 2024 10:33:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Reply-To:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Content-Type
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WSvD/YVvY3oR/SV9lrJcxmGa9WfASg1z+eMVQdwymCU=; b=Cr4ubh3FtfTmiuMkQCVHCRkNXG
- VNBKTkxnWqYdO7xIo3OnCQM7yyOh8GSd+5mDKL6eBR+N2ePjkVTjvaT9Ez+Bxiv70/qxXoifjExzF
- qLlyWC51+fnkyjo6nNeICA+8JEIjxu3mSpQlFIoniXGrUV/b6mPzXoqcHvV9NmMEKPqc=;
+ bh=E31uoUDJOzIfmIKHvU27ZHbfL5V9s59Wb7nHBi2/TxA=; b=GHn1NYDipcj5vAEci551am2vvc
+ u1urQf2NExF6QmgFRXfWq5guYxorsMcz6ySkkPM4Bw7EtNHp2gcFVjMjNy5QuLq7hu64DGlDKRWsw
+ dX1fPGF69Gc37F5YsgcrVTplajpxhG0eiYwrtVth+UBWM1KaEk9gqG9zMjq0zYAFApgs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Reply-To:References:In-Reply-To:
- Message-ID:Date:Subject:Cc:To:From:Sender:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=WSvD/YVvY3oR/SV9lrJcxmGa9WfASg1z+eMVQdwymCU=; b=AV5F1OKQ9Vqbz9CajGPjdbTk8L
- wZ8hfevoeMeGeLMkSHTOiywWf8BdSh4SuMig0CgzYMCF98hR25RN7r2iEH7FZxOdMdVYxVDjlqyUD
- kAMsLI+HHqLrJFc0Pv8LCUZ11j5DVtox8g4XqusgxkIWqVx2wvlVOVixQvo55uockX/o=;
-Received: from mail-pl1-f171.google.com ([209.85.214.171])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=E31uoUDJOzIfmIKHvU27ZHbfL5V9s59Wb7nHBi2/TxA=; b=W
+ hDwDbhU8qvtO5ljiEkXkvA4G9je40qwbJCpoItZbgNZG19W1AQzUjY3VgqyEkxs++FEyApRfQKTTa
+ E76avXhKH/tOfValGIAxSelUuE8SHAGDLBvxFLWoHE7y4a2CFleNR/4PfFvdoHv1SZlz7SGnfoD/j
+ bV/p7KDW0V1Hs8g8=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1s2S6B-0002zg-15 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 02 May 2024 08:47:27 +0000
-Received: by mail-pl1-f171.google.com with SMTP id
- d9443c01a7336-1e4bf0b3e06so76097735ad.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1s3vew-00042m-U5 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 06 May 2024 10:33:27 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 33677CE0B99
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 02 May 2024 01:47:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714639636; x=1715244436; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:reply-to:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to;
- bh=WSvD/YVvY3oR/SV9lrJcxmGa9WfASg1z+eMVQdwymCU=;
- b=khEFvbJSsMPNEF3b8++73GMtb3UFSMbEpJY0Sgl8ShpTIlBl4pBce+ciz2bZ0gCClg
- 6/X8p4Hf05mYwLZoUjx4/BB+qwafH9RAPgKqaKqnPINkrerMXrujGJe4AtxTr/h9BEzK
- eIAwgp4VJlKtj4AaXvsXsrSAPjBGn8/ZLhI33oAijWHrFSzqDsTf9qM/WHCgwt4Nonu0
- 2/ruO/afm1Y6OcjAK6oKMG2Vsqz9VmHwUhLGBo4PEFUi1SYHz84Z+0Yn7JUZuUgTzt8l
- ifooElB2O7paIyd1u7GZbVCPwFQmvfV5rDRBD8ZKTbNRil1mWrdTU6GE6Wk7GPHYaCK9
- QVLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714639636; x=1715244436;
- h=content-transfer-encoding:mime-version:reply-to:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WSvD/YVvY3oR/SV9lrJcxmGa9WfASg1z+eMVQdwymCU=;
- b=TwQESvlpO8Cyt981rFJzMHExksragPfu7LuSxVzntFLXCjfR+wRe1Ep+1PA6nhrQLo
- cRk7Qn82pGfdEmFemL/mjR9RhRHo4l2KIX0ctC1rbN6kZ04Gv0sn3zGjAejCNS/0PKa4
- WIq2GP/ptJSNsy/iWqFplG/BPI8TleCDBRZGYiS8ZTW8Dz2y3QDPnsqj5GAtu7Qb/A+o
- 4wknUaC93xM7zRTpcxvA0O8O6hijfi9NHxUTaYOjA4C/XkTnrMYd246aV+dvygseOiQ7
- RZi//BXoei774Fmg9aESY9sWk/wxU9NRLLwAobt/U3lwX7xp5cCvYt9I5IsV+pzhhLKP
- fzYg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVIISDBZ4tUwFwO0NbgFyKJFAAhqQCyR6ZLNobGenvnbGtJFEtR75NjYKYGoAJLdb1QiYLvQkxgsQIT/sX+mmKlZBiMzH7W6SkUcSiyHN/Vk3QuS9tFEQ==
-X-Gm-Message-State: AOJu0Yx5b+fGSVC+4HIIQoUOxWU96bW4hKYT4aAKWM6JLcldWc3MPj/l
- IymFlt/rcetJ9yLdyFdn+Ya9GOH+XIqytUZCmpKzvh4ALJsGUqhV
-X-Google-Smtp-Source: AGHT+IHHmKPYxmQ1NnctSOq7P493kmk6LeLXH7PC/dx0NjjiKoIYGnc+kgONRssyDz3JCfG5GAiMeg==
-X-Received: by 2002:a17:90b:50cc:b0:2ad:da23:da0b with SMTP id
- sb12-20020a17090b50cc00b002adda23da0bmr5630235pjb.34.1714639636249; 
- Thu, 02 May 2024 01:47:16 -0700 (PDT)
-Received: from KASONG-MB2.tencent.com ([1.203.116.31])
- by smtp.gmail.com with ESMTPSA id
- q6-20020a17090a938600b002b273cbbdf1sm686805pjo.49.2024.05.02.01.47.11
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 02 May 2024 01:47:15 -0700 (PDT)
-From: Kairui Song <ryncsn@gmail.com>
-To: linux-mm@kvack.org
-Date: Thu,  2 May 2024 16:45:58 +0800
-Message-ID: <20240502084609.28376-2-ryncsn@gmail.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240502084609.28376-1-ryncsn@gmail.com>
-References: <20240502084609.28376-1-ryncsn@gmail.com>
+ Mon,  6 May 2024 10:33:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2CA1BC116B1;
+ Mon,  6 May 2024 10:33:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1714991599;
+ bh=ArQZcPL9NskSWJ33AcpZ7fqpChWS94RCsV5KimDJTWY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=PO3HNL/NaetYrGgi4hGaAP0vK2LQfQyHtc5/VlCpgZx3gPrczk+9ZmblggC9/m3z3
+ 85Z76E4GjDW7N/t/6kY7dkRuAJ3BujwzquOE3LVHB3ZTgCNhqtIDxPjVfIlabMw2s9
+ P1TC86GbAmremkhH1O2Vr3ed1AgbwQ+d7Y4Lm0OTFfgosuABRvprrwIN1MIU4SpKjl
+ Htn29yMbng/+bMit+Ic0OEZ/gV43EjgcfojFEiiaBkHUBSaT7qt2qsjd/zZcw/hWiP
+ GK8HfY+W8UNX9nazhsaKQ6INN3BtApxRKariBmzFuNCOpcvznZ4qLkEvQqW+a+W7GP
+ mIEhU2Oxr68dA==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Mon,  6 May 2024 18:33:11 +0800
+Message-Id: <20240506103313.773503-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Kairui Song <kasong@tencent.com> page_index is needed
- for mixed usage of page cache and swap cache, for pure page cache usage,
- the caller can just use page->index instead. It can't be a swap cache page
- here, so just drop it. 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: It missed to call dec_valid_node_count() to release node
+ block
+ count in error path, fix it. Fixes: 141170b759e0 ("f2fs: fix to avoid use
+ f2fs_bug_on() in f2fs_new_node_page()") Signed-off-by: Chao Yu
+ <chao@kernel.org>
+ --- fs/f2fs/node.c | 12 ++++++------ 1 file changed, 6 insertions(+), 6 de
+ [...] Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.171 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [ryncsn[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.214.171 listed in wl.mailspike.net]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1s2S6B-0002zg-15
-Subject: [f2fs-dev] [PATCH v4 01/12] f2fs: drop usage of page_index
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1s3vew-00042m-U5
+Subject: [f2fs-dev] [PATCH 1/3] f2fs: fix to release node block count in
+ error path of f2fs_new_node_page()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -130,52 +100,56 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: Kairui Song <kasong@tencent.com>
-Cc: Kairui Song <kasong@tencent.com>, Ryan Roberts <ryan.roberts@arm.com>,
- Chris Li <chrisl@kernel.org>, Neil Brown <neilb@suse.de>,
- David Hildenbrand <david@redhat.com>, Hugh Dickins <hughd@google.com>,
- linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, Yosry Ahmed <yosryahmed@google.com>,
- Minchan Kim <minchan@kernel.org>, Barry Song <v-songbaohua@oppo.com>, "Huang,
- Ying" <ying.huang@intel.com>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, Andrew Morton <akpm@linux-foundation.org>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Kairui Song <kasong@tencent.com>
+It missed to call dec_valid_node_count() to release node block count
+in error path, fix it.
 
-page_index is needed for mixed usage of page cache and swap cache,
-for pure page cache usage, the caller can just use page->index instead.
-
-It can't be a swap cache page here, so just drop it.
-
-[ This commit will not be needed once f2fs converted
-  f2fs_mpage_readpages() to use folio]
-
-Signed-off-by: Kairui Song <kasong@tencent.com>
-Cc: Chao Yu <chao@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Fixes: 141170b759e0 ("f2fs: fix to avoid use f2fs_bug_on() in f2fs_new_node_page()")
+Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/data.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/f2fs/node.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 961e6ff77c72..c0e1459702e6 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2057,7 +2057,7 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
- 	sector_t block_nr;
- 	int ret = 0;
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index b3de6d6cdb02..ae39971825bc 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1313,15 +1313,14 @@ struct page *f2fs_new_node_page(struct dnode_of_data *dn, unsigned int ofs)
  
--	block_in_file = (sector_t)page_index(page);
-+	block_in_file = (sector_t)page->index;
- 	last_block = block_in_file + nr_pages;
- 	last_block_in_file = bytes_to_blks(inode,
- 			f2fs_readpage_limit(inode) + blocksize - 1);
+ #ifdef CONFIG_F2FS_CHECK_FS
+ 	err = f2fs_get_node_info(sbi, dn->nid, &new_ni, false);
+-	if (err) {
+-		dec_valid_node_count(sbi, dn->inode, !ofs);
+-		goto fail;
+-	}
++	if (err)
++		goto out_dec;
++
+ 	if (unlikely(new_ni.blk_addr != NULL_ADDR)) {
+ 		err = -EFSCORRUPTED;
+ 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
+-		goto fail;
++		goto out_dec;
+ 	}
+ #endif
+ 	new_ni.nid = dn->nid;
+@@ -1345,7 +1344,8 @@ struct page *f2fs_new_node_page(struct dnode_of_data *dn, unsigned int ofs)
+ 	if (ofs == 0)
+ 		inc_valid_inode_count(sbi);
+ 	return page;
+-
++out_dec:
++	dec_valid_node_count(sbi, dn->inode, !ofs);
+ fail:
+ 	clear_node_page_dirty(page);
+ 	f2fs_put_page(page, 1);
 -- 
-2.44.0
+2.40.1
 
 
 
