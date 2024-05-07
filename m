@@ -2,76 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D2F58BDB42
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 May 2024 08:20:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C8978BE527
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 May 2024 16:06:27 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s4EBq-0002Oj-4h;
-	Tue, 07 May 2024 06:20:38 +0000
+	id 1s4LSS-0004EO-6s;
+	Tue, 07 May 2024 14:06:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1s4EBo-0002OU-R9
+ (envelope-from <chao@kernel.org>) id 1s4LSN-0004ED-Dz
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 07 May 2024 06:20:37 +0000
+ Tue, 07 May 2024 14:06:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bfxxyWQhfG9FdpCKhm1qyFHK2qjaRz2A678DYw4pVMQ=; b=fNqLylJChQUQzB1IEnsVzq7yOb
- sjC2VJytO5E3r9uPH0HCe7YnayS8IB4ySF4iE8+TxpbSzhaLjVLVq7hbnczCsBNhnn4P5SDOOnRU8
- UZzlKI5i8D1izHfGObVYxHLak0JbX/dQUzr9h2C5EfWR7bcnGwTZR4IGuk0gOO/vnMbo=;
+ bh=dcUIKj4EN+/20/SDxhzv7jmW6Wb7Q+V+3wLpM4sksEI=; b=OCA76JZaZYY5YGIk2gqgoqiIz7
+ 43xPt9Luy66ScHRjYYPEDhYuHxAXSWowDwI6aP55ge6p/0OTItd0wADlUAMKRLYyMDMyGNIjDpyxh
+ sTKIufPBMl8XrwErnLZj3qAW38WaRhb3bL84x64Ru14OqVR9CyaKfjPCbq/Q5Nk0Iu6s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=bfxxyWQhfG9FdpCKhm1qyFHK2qjaRz2A678DYw4pVMQ=; b=F
- znVkF6jS/S1XGfjN2vMkAfT7KLps/7tVvGBu3+IKE2+Eoygky+/B5NF3+i+rREgNpHTjTxTZMDx8y
- ItBjiTBSj5ezthjiTS21jaDV3qRgchcoiZ8EeuYM9WHCkDdnevPtawsO1P0Of1+jvfih9jc6iD5Ar
- G0ug+vWuRwo0WIyE=;
+ List-Owner:List-Archive; bh=dcUIKj4EN+/20/SDxhzv7jmW6Wb7Q+V+3wLpM4sksEI=; b=m
+ 5FQHogMIeWnJtJJJRhFmNywA3fibbEON9FbmzE4A/qLl0lYfTPbBLoYyUCEbxlq7obODbShu3qUWm
+ R9kqX0z+PmfYtCEt7gWXH7atUiC5JPiCCdn+204v3RZsveiglTCEQ9mp8UjCI8UpBPwNXiohMTD2l
+ JTLk3gehdNXLWH6Q=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1s4EBo-0005TG-UC for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 07 May 2024 06:20:37 +0000
+ id 1s4LSM-0008DS-9N for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 07 May 2024 14:06:11 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 913F761493
+ by dfw.source.kernel.org (Postfix) with ESMTP id EADAB6175D
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  7 May 2024 06:20:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EFB70C2BBFC;
- Tue,  7 May 2024 06:20:24 +0000 (UTC)
+ Tue,  7 May 2024 14:06:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54827C2BBFC;
+ Tue,  7 May 2024 14:06:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1715062826;
- bh=xpV/nMuQfBh/yww28aaTVU+mxRQ+Qd7MQI6xXDS/QtE=;
+ s=k20201202; t=1715090764;
+ bh=t2Zobjc7MI6+ixD8KnilMidW0woMS15GwGLeKi1FmbM=;
  h=From:To:Cc:Subject:Date:From;
- b=Ny7IEwlYDjKPkuW7sQuFVUIV+twKDFaKkaFI2EnsKMZSNDGHsiOACxYZ3ZsLjPkPQ
- xsn2thhcDhBtKKqB5c3woONt7bKMxoQpZgrJ6uCO8m3rLKewTLNraO+ecg+Y2PVgat
- 14HASIEVf1zQ9AgNsDUYBsSUq4YQFKjqZKUCYqlKNQkRptsE/8gvN94g9l7OTglt8Q
- iYJ4ZkSE4MfK8FuvV5eFRZf0vn5zNYv/lnqUC0fT7jNuOHhSyee5cikPkpbmda6Ixg
- QAFO7Q0WPiOccyX0l9h8MxQQE1S0UsC57UcFJ0bmShmAEeyqW5QPgUDHaakJLywy9W
- kX4zhkpynMiKg==
+ b=YnJzb3bIQFe3kLH190BdMGPr0E/HvQ4xdxZGybOaO0N2371wx4TdQn1Qlpnc4pqMc
+ yuDw2t8/UehvZupwNXyC2fmmU5nmGiECGwUcGjy/LnJ4Q4YmAFMb+jQiLT2PjXkgqc
+ 31l/kzAmeZlDUF5hxsnytnFkn0TUkXrS6ebSKySBtDGqYWJiwFVjkUgO+UPdA/0vXn
+ DHojnbLRKJJhT8C5DfTqXFbXrjdZnTU5pvNlK87FWDc0+sr0n4RghyFC9hJ36dt2n1
+ oduTM/T+Hj82UmNM3cqeUePZ4ohusMGBu7bfrDYxXaZOXcOrhpiq+13shK1VhoW7WP
+ rE71W4TunDKBg==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Tue,  7 May 2024 14:20:19 +0800
-Message-Id: <20240507062019.1097683-1-chao@kernel.org>
+Date: Tue,  7 May 2024 22:05:56 +0800
+Message-Id: <20240507140556.1293003-1-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-X-Spam-Score: -5.8 (-----)
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: f2fs image may be corrupted after below testcase: - mkfs.f2fs
- -O extra_attr,compression -f /dev/vdb - mount /dev/vdb /mnt/f2fs - touch
- /mnt/f2fs/file - f2fs_io setflags compression /mnt/f2fs/file - dd [...] 
- Content analysis details:   (-5.8 points, 6.0 required)
+ Content preview:  If lfs mode is on, buffered read may race w/ OPU dio write
+ as below, it may cause buffered read hits unwritten data unexpectly. Thread
+ A Thread B - f2fs_file_write_iter - f2fs_dio_write_iter - __iomap_dio_rw
+ - f2fs_iomap_begin - f2fs_map_blocks - __allocate_data_block - allocated
+ blkaddr #x - iomap_dio_submit_bio - f2fs_file_r [...] 
+ Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
@@ -82,13 +84,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1s4EBo-0005TG-UC
-Subject: [f2fs-dev] [PATCH v2 5/5] f2fs: compress: don't allow unaligned
- truncation on released compress inode
+ valid -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1s4LSM-0008DS-9N
+Subject: [f2fs-dev] [PATCH] f2fs: fix to avoid racing in between buffered
+ read and OPU dio write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,58 +104,121 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-f2fs image may be corrupted after below testcase:
-- mkfs.f2fs -O extra_attr,compression -f /dev/vdb
-- mount /dev/vdb /mnt/f2fs
-- touch /mnt/f2fs/file
-- f2fs_io setflags compression /mnt/f2fs/file
-- dd if=/dev/zero of=/mnt/f2fs/file bs=4k count=4
-- f2fs_io release_cblocks /mnt/f2fs/file
-- truncate -s 8192 /mnt/f2fs/file
-- umount /mnt/f2fs
-- fsck.f2fs /dev/vdb
+If lfs mode is on, buffered read may race w/ OPU dio write as below,
+it may cause buffered read hits unwritten data unexpectly.
 
-[ASSERT] (fsck_chk_inode_blk:1256)  --> ino: 0x5 has i_blocks: 0x00000002, but has 0x3 blocks
-[FSCK] valid_block_count matching with CP             [Fail] [0x4, 0x5]
-[FSCK] other corrupted bugs                           [Fail]
+Thread A			Thread B
+- f2fs_file_write_iter
+ - f2fs_dio_write_iter
+  - __iomap_dio_rw
+   - f2fs_iomap_begin
+    - f2fs_map_blocks
+     - __allocate_data_block
+      - allocated blkaddr #x
+       - iomap_dio_submit_bio
+				- f2fs_file_read_iter
+				 - filemap_read
+				  - f2fs_read_data_folio
+				   - f2fs_mpage_readpages
+				    - f2fs_map_blocks
+				     : get blkaddr #x
+				    - f2fs_submit_read_bio
+				IRQ
+				- f2fs_read_end_io
+				 : read IO on blkaddr #x complete
+IRQ
+- iomap_dio_bio_end_io
+ : direct write IO on blkaddr #x complete
 
-The reason is: partial truncation assume compressed inode has reserved
-blocks, after partial truncation, valid block count may change w/
-.i_blocks and .total_valid_block_count update, result in corruption.
+This patch introduces a new per-inode i_opu_rwsem lock to avoid
+such race condition.
 
-This patch only allow cluster size aligned truncation on released
-compress inode for fixing.
-
-Fixes: c61404153eb6 ("f2fs: introduce FI_COMPRESS_RELEASED instead of using IMMUTABLE bit")
+Fixes: f847c699cff3 ("f2fs: allow out-place-update for direct IO in LFS mode")
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
-v2:
-- fix compile warning reported by lkp.
- fs/f2fs/file.c | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ fs/f2fs/f2fs.h  |  1 +
+ fs/f2fs/file.c  | 20 ++++++++++++++++++--
+ fs/f2fs/super.c |  1 +
+ 3 files changed, 20 insertions(+), 2 deletions(-)
 
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 145b985bf252..b69ec1109572 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -847,6 +847,7 @@ struct f2fs_inode_info {
+ 	/* avoid racing between foreground op and gc */
+ 	struct f2fs_rwsem i_gc_rwsem[2];
+ 	struct f2fs_rwsem i_xattr_sem; /* avoid racing between reading and changing EAs */
++	struct f2fs_rwsem i_opu_rwsem;	/* avoid racing between buf read and opu dio write */
+ 
+ 	int i_extra_isize;		/* size of extra space located in i_addr */
+ 	kprojid_t i_projid;		/* id for project quota */
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 3f0db351e976..0c8194dc6807 100644
+index ef4cfb4436ef..c761db952b37 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -952,9 +952,14 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- 				  ATTR_GID | ATTR_TIMES_SET))))
- 		return -EPERM;
+@@ -4545,7 +4545,13 @@ static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
+ 	if (f2fs_should_use_dio(inode, iocb, to)) {
+ 		ret = f2fs_dio_read_iter(iocb, to);
+ 	} else {
++		bool do_opu = f2fs_lfs_mode(F2FS_I_SB(inode));
++
++		if (do_opu)
++			f2fs_down_read(&F2FS_I(inode)->i_opu_rwsem);
+ 		ret = filemap_read(iocb, to, 0);
++		if (do_opu)
++			f2fs_up_read(&F2FS_I(inode)->i_opu_rwsem);
+ 		if (ret > 0)
+ 			f2fs_update_iostat(F2FS_I_SB(inode), inode,
+ 						APP_BUFFERED_READ_IO, ret);
+@@ -4770,14 +4776,22 @@ static ssize_t f2fs_dio_write_iter(struct kiocb *iocb, struct iov_iter *from,
+ 			ret = -EAGAIN;
+ 			goto out;
+ 		}
++		if (do_opu && !f2fs_down_write_trylock(&fi->i_opu_rwsem)) {
++			f2fs_up_read(&fi->i_gc_rwsem[READ]);
++			f2fs_up_read(&fi->i_gc_rwsem[WRITE]);
++			ret = -EAGAIN;
++			goto out;
++		}
+ 	} else {
+ 		ret = f2fs_convert_inline_inode(inode);
+ 		if (ret)
+ 			goto out;
  
--	if ((attr->ia_valid & ATTR_SIZE) &&
--		!f2fs_is_compress_backend_ready(inode))
--		return -EOPNOTSUPP;
-+	if ((attr->ia_valid & ATTR_SIZE)) {
-+		if (!f2fs_is_compress_backend_ready(inode))
-+			return -EOPNOTSUPP;
-+		if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED) &&
-+			!IS_ALIGNED(attr->ia_size,
-+			F2FS_BLK_TO_BYTES(F2FS_I(inode)->i_cluster_size)))
-+			return -EINVAL;
+ 		f2fs_down_read(&fi->i_gc_rwsem[WRITE]);
+-		if (do_opu)
++		if (do_opu) {
+ 			f2fs_down_read(&fi->i_gc_rwsem[READ]);
++			f2fs_down_write(&fi->i_opu_rwsem);
++		}
+ 	}
+ 
+ 	/*
+@@ -4801,8 +4815,10 @@ static ssize_t f2fs_dio_write_iter(struct kiocb *iocb, struct iov_iter *from,
+ 		ret = iomap_dio_complete(dio);
+ 	}
+ 
+-	if (do_opu)
++	if (do_opu) {
++		f2fs_up_write(&fi->i_opu_rwsem);
+ 		f2fs_up_read(&fi->i_gc_rwsem[READ]);
 +	}
+ 	f2fs_up_read(&fi->i_gc_rwsem[WRITE]);
  
- 	err = setattr_prepare(idmap, dentry, attr);
- 	if (err)
+ 	if (ret < 0)
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index daf2c4dbe150..b4ed3b094366 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1428,6 +1428,7 @@ static struct inode *f2fs_alloc_inode(struct super_block *sb)
+ 	init_f2fs_rwsem(&fi->i_gc_rwsem[READ]);
+ 	init_f2fs_rwsem(&fi->i_gc_rwsem[WRITE]);
+ 	init_f2fs_rwsem(&fi->i_xattr_sem);
++	init_f2fs_rwsem(&fi->i_opu_rwsem);
+ 
+ 	/* Will be used by directory only */
+ 	fi->i_dir_level = F2FS_SB(sb)->dir_level;
 -- 
 2.40.1
 
