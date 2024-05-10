@@ -2,111 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8EFE8C23E3
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 May 2024 13:50:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 908618C2608
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 May 2024 15:49:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s5OlG-0001Z5-EF;
-	Fri, 10 May 2024 11:50:01 +0000
+	id 1s5Qcp-000573-SS;
+	Fri, 10 May 2024 13:49:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ryncsn@gmail.com>) id 1s5OlE-0001YK-LX
+ (envelope-from <daeho43@gmail.com>) id 1s5Qco-00056t-8M
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 May 2024 11:50:00 +0000
+ Fri, 10 May 2024 13:49:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Reply-To:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Content-Type
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=R7lhdO5v0hVN0l2qTLtMelKVtmq+aBFR854K3Ld5uQo=; b=NjO57g+xj6zcgA3e+0B3zbgsH/
- cYDy1cd4zrjZEZr8QDGnSvz3OU7G2ZNPI2VBmU02m7avoIZZ8L+PMHkkYQfJCUeAO9J0khoUdZblh
- 2vet+DDn/zoVGKzewjR8H0ryNTjJZn2ogByAFoMsI3Qd9ETIiZZ2yZslMY5tSLxpEkj4=;
+ bh=cMUMJYURHY94vqRajyuSN39xJoZIvziqTdmR++yNIMs=; b=BRwV9XRAWp73xEv+/IwZD52XqB
+ VDf/O78nuXGK66c12Cq3KSK/YQ3nxNo3HP24s+Ohfpj/Yvn2VbenbuGDJsxGHlwdg0xhrjq23d64x
+ Z+HlBNSHf2e+mBxCgPtgwMY5f8x90gpF/6W3lND+wnO7V80PurH825jQ4O/AjfzIQsbk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Reply-To:References:In-Reply-To:
- Message-ID:Date:Subject:Cc:To:From:Sender:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=R7lhdO5v0hVN0l2qTLtMelKVtmq+aBFR854K3Ld5uQo=; b=DxbCX+EONNutnVHuJkHEFyq+kM
- 9i4oVwFuK+0BO2QfnMbHoxLcOnHl+0xNk5CXiHDeM2NA797nC5EkPtXKrzJhDUxI4cXtH703z8r9B
- 8nTt+uryThn2ngzhLAMu+woh9PxnWV5PJ+Caplcq5m364PIPbLFOyisg8YdOz9vI/11I=;
-Received: from mail-pl1-f175.google.com ([209.85.214.175])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=cMUMJYURHY94vqRajyuSN39xJoZIvziqTdmR++yNIMs=; b=D
+ xvgf/fc475V2HFUjGbDPrYOwDOM0sqvcP+6cSSlj1LYc6NzHFgaP46+jkcALZ84o/+1PLfMOkD+pf
+ 8VKEE8rWH//T3gpi+WqkFD8zPfAUl8OMV16/hmSgLJK4n1pYhy5W8dBYLnhr6jSb5UWBINDSNliIk
+ 7m/AvPExid6xqef8=;
+Received: from mail-yw1-f178.google.com ([209.85.128.178])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1s5OlE-0003ER-8V for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 May 2024 11:50:00 +0000
-Received: by mail-pl1-f175.google.com with SMTP id
- d9443c01a7336-1f0537e39b3so1579595ad.3
+ id 1s5Qco-0000PS-RA for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 10 May 2024 13:49:26 +0000
+Received: by mail-yw1-f178.google.com with SMTP id
+ 00721157ae682-6114c9b4d83so17882657b3.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 10 May 2024 04:49:59 -0700 (PDT)
+ Fri, 10 May 2024 06:49:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715341794; x=1715946594; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:reply-to:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to;
- bh=R7lhdO5v0hVN0l2qTLtMelKVtmq+aBFR854K3Ld5uQo=;
- b=S1cOyNRyP89QLskVuR5QgtPv65kYhSYsD8LiPJi9XIAFm8BTGQSuDBThjdBIkVR8TD
- pRjGZaJNMXGrIbHbdpz8/vUYbKN16/UXbUeqdQlbATpTkM8yo44p3muv/11/Pz30DtfD
- yPQ4uBhaX7xckxolVCVaNCstuK0W5cb4Lig1X09zz7Q50w6shISJMSxNZ03h+d7neX8R
- gzT8gyARqUekfUqp5Dv9KY5N+XVAX7etLxBUQwghljtbl6feI6DOU+ocPGeMWjMwiPUV
- tgsX5gF+cgrKBNusaLu8IEQ/WsSEJAx/rqwTdDxYIyVCYLeWTJMPUKS0TUV/jRlYjkWV
- HLbA==
+ d=gmail.com; s=20230601; t=1715348955; x=1715953755; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cMUMJYURHY94vqRajyuSN39xJoZIvziqTdmR++yNIMs=;
+ b=So/Ta23sJlNQt1xgu6lNUHJgW0tSieU7004mKDdw1UhWX/Lzf8wiotMQPs4draavWA
+ 4SdcdkTvM8QkH2km1gjWjtzPzyIMQyXbCYqibfrjI+0J4kAIZv131uqD2h9WXEVYjiuV
+ LAcAXyxiTEtAVhLI/Q0TeXG8IWRGJmdG0UHAhpxtXzEEbpcwFbY0DmeubVK+jKc/BiKH
+ Licry/nweTz4xIbrH5TYKs0WEJ/T7Q+moIxpwwu9HPSH3Gd1uqa1VrfrQv9et4yoPCVz
+ GLrTBjvVYUdZ1p1J/ChrHxK+Ndz4v7Sk3GbpxTLOYR+fiHoKYt6M+YwfKVtk0qZzCejT
+ OhfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715341794; x=1715946594;
- h=content-transfer-encoding:mime-version:reply-to:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=R7lhdO5v0hVN0l2qTLtMelKVtmq+aBFR854K3Ld5uQo=;
- b=JveZLEAnal3j57aMvofqE1ODHfyzdOKDfgnBmGeixGzUejgDtdpt6gbJEwbTfu6TaB
- rA4P+xSQp3XRiY42rzL/qr6kvWM7B9BOe9u8ZCuRQtMJX2Q0OF1Eln/mW2NpUDOPPMKf
- S/7SVmbnmHvHULZJIWQA4g/bjEEAN+aNNu4KAp9ioMDf4ugEiqY0Mbo6rXLeFwUZHyxS
- DjCbiYQpudeBpIZcYujsOdrLdUlW805u1X913N8cmGkGw5FPbA5UeLM+qt90xbayinj8
- /rY4xBQydVjlBReyN9m82xaR2z/YKWYxY/5NRZy42wJaA3q2JNJxbE3BrGo6xWA6L3Ic
- VFpg==
+ d=1e100.net; s=20230601; t=1715348955; x=1715953755;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cMUMJYURHY94vqRajyuSN39xJoZIvziqTdmR++yNIMs=;
+ b=wsX7ZJPZRRSS0a/BGP3ivgG7bFbobk9svmQd+iyp5fe7uSOwYMbx+E1vhmdJhNAtUi
+ ZdWZqB0HxRlna1rdTYjewt2DEh052nh9mrjY0/6Kp6pdqhr26VyhTCD2sN3U5jMP94JW
+ LVhWMBN7bc6tZpFowvvZl4Fctj2cZM882+g0N8Efd7UBfkrobc8HrufUoPfD/go53Dtr
+ dRxB2aWlNNF25YAN4h8DHQ0Ib2wnuMcYfg1XSzQ6rXZwCRu/WJubV4Y7TNp+zcle99Bg
+ bZAITU+Y2KE/r7X/KeThwW3vHUyr1bcdXCju9lGwsUkEDbPZj5FyO+bRBOo0QZyT5p4w
+ xmqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVHe9FJVoVkop99RFIPWBxHaM7b7PYZRnTG7xem2Tas3TA2BJNay8xjpNmCBp5bqQu6JPe4aqcCgp0MlZJPaKUVyIohWKlwSrTQBlX34lhaEprZ0fC3/g==
-X-Gm-Message-State: AOJu0YwjXrfwwuWdoGKF38LjaC3Au5LmH8STd5DoECKhdaNnHe9AOwdX
- uzqSU0GDFcerCkYinHYJXSLRz+TNs97gAu+MTyfYEwd8dBxaGjW2
-X-Google-Smtp-Source: AGHT+IFE2MX7TpHnes9SKnTNrFmEbBsmeG5v6bapWIi2SW3d+oyDfBCDoaA4IMTDGi9eLDl7rTjLlw==
-X-Received: by 2002:a17:902:d506:b0:1e4:24cc:e021 with SMTP id
- d9443c01a7336-1ef44050595mr28789215ad.50.1715341793856; 
- Fri, 10 May 2024 04:49:53 -0700 (PDT)
-Received: from KASONG-MC4.tencent.com ([43.132.141.20])
+ AJvYcCVThp7DKywyyESuWR/a4t2Br7mosRA3Eu8sv1LjgzBhdWLwflPcHNEfTy0h0yiTX0RuerosDECS9VxuyOnMzjGRN5Eejf0jkk+qi0wNz4rpAIMPfCGt7Q==
+X-Gm-Message-State: AOJu0Yx3Y4q/DGP5tJBDI6o4hh1jHJnGWb2PBVJqbPNmmvH/24eMjLd3
+ hjiNueu81Zb1Rvyq6YCapPQe3U9D+Sk/zHppTK3x4MoDuoWhK7cKxkQ7gQ==
+X-Google-Smtp-Source: AGHT+IGO7SfWGCZDz2y2v2OJN6Q5pLA4S5PJIF3I0ZYqlYd1skL7TqwiKQ4wsAASxy1Cfm6IGlAjcw==
+X-Received: by 2002:a81:4f41:0:b0:620:26f5:c97c with SMTP id
+ 00721157ae682-622b01479cfmr27053657b3.35.1715348954902; 
+ Fri, 10 May 2024 06:49:14 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:0:1000:8411:88e7:6eff:2864:482c])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ef0c134155sm30183825ad.231.2024.05.10.04.49.49
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 10 May 2024 04:49:53 -0700 (PDT)
-From: Kairui Song <ryncsn@gmail.com>
-To: linux-mm@kvack.org
-Date: Fri, 10 May 2024 19:47:36 +0800
-Message-ID: <20240510114747.21548-2-ryncsn@gmail.com>
-X-Mailer: git-send-email 2.45.0
-In-Reply-To: <20240510114747.21548-1-ryncsn@gmail.com>
-References: <20240510114747.21548-1-ryncsn@gmail.com>
+ 00721157ae682-6209e346b7asm7301617b3.103.2024.05.10.06.49.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 May 2024 06:49:14 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Fri, 10 May 2024 06:49:08 -0700
+Message-ID: <20240510134908.3271725-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.45.0.118.g7fe29c98d7-goog
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -5.0 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Kairui Song <kasong@tencent.com> page_index is needed
- for mixed usage of page cache and swap cache, for pure page cache usage,
- the caller can just use page->index instead. It can't be a swap cache page
- here, so just drop it. 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview: From: Daeho Jeong Following the semantic for dirty segments
+ in checkpoint disabled mode,
+ apply the same rule to dirty sections. Signed-off-by:
+ Daeho Jeong 
+ Content analysis details:   (-5.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [209.85.214.175 listed in list.dnswl.org]
+ high trust [209.85.128.178 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [ryncsn[at]gmail.com]
+ provider [daeho43[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
@@ -115,9 +116,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.214.175 listed in wl.mailspike.net]
-X-Headers-End: 1s5OlE-0003ER-8V
-Subject: [f2fs-dev] [PATCH v5 01/12] f2fs: drop usage of page_index
+ [209.85.128.178 listed in wl.mailspike.net]
+X-Headers-End: 1s5Qco-0000PS-RA
+Subject: [f2fs-dev] [PATCH v2] f2fs: allow dirty sections with zero valid
+ block for checkpoint disabled
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -129,52 +131,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: Kairui Song <kasong@tencent.com>
-Cc: Kairui Song <kasong@tencent.com>, Ryan Roberts <ryan.roberts@arm.com>,
- Chris Li <chrisl@kernel.org>, Neil Brown <neilb@suse.de>,
- David Hildenbrand <david@redhat.com>, Hugh Dickins <hughd@google.com>,
- linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, Yosry Ahmed <yosryahmed@google.com>,
- Minchan Kim <minchan@kernel.org>, Barry Song <v-songbaohua@oppo.com>, "Huang,
- Ying" <ying.huang@intel.com>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, Andrew Morton <akpm@linux-foundation.org>
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Kairui Song <kasong@tencent.com>
+From: Daeho Jeong <daehojeong@google.com>
 
-page_index is needed for mixed usage of page cache and swap cache,
-for pure page cache usage, the caller can just use page->index instead.
+Following the semantic for dirty segments in checkpoint disabled mode,
+apply the same rule to dirty sections.
 
-It can't be a swap cache page here, so just drop it.
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
-[ This commit will not be needed once f2fs converted
-  f2fs_mpage_readpages() to use folio]
-
-Signed-off-by: Kairui Song <kasong@tencent.com>
-Cc: Chao Yu <chao@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net
 ---
- fs/f2fs/data.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+v2: simplified codes with the same logic
+---
+ fs/f2fs/segment.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 961e6ff77c72..c0e1459702e6 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2057,7 +2057,7 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
- 	sector_t block_nr;
- 	int ret = 0;
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 6474b7338e81..cb0718cc1e47 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -771,8 +771,10 @@ static void __locate_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno,
+ 			block_t valid_blocks =
+ 				get_valid_blocks(sbi, segno, true);
  
--	block_in_file = (sector_t)page_index(page);
-+	block_in_file = (sector_t)page->index;
- 	last_block = block_in_file + nr_pages;
- 	last_block_in_file = bytes_to_blks(inode,
- 			f2fs_readpage_limit(inode) + blocksize - 1);
+-			f2fs_bug_on(sbi, unlikely(!valid_blocks ||
+-					valid_blocks == CAP_BLKS_PER_SEC(sbi)));
++			f2fs_bug_on(sbi,
++				(!is_sbi_flag_set(sbi, SBI_CP_DISABLED) &&
++				!valid_blocks) ||
++				valid_blocks == CAP_BLKS_PER_SEC(sbi));
+ 
+ 			if (!IS_CURSEC(sbi, secno))
+ 				set_bit(secno, dirty_i->dirty_secmap);
 -- 
-2.45.0
+2.45.0.118.g7fe29c98d7-goog
 
 
 
