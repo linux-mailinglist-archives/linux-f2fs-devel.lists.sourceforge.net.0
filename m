@@ -2,67 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4ED178C1C28
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 May 2024 03:33:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1413B8C1C51
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 May 2024 04:14:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s5F8s-0004D0-DJ;
-	Fri, 10 May 2024 01:33:47 +0000
+	id 1s5FmN-0004rO-Jb;
+	Fri, 10 May 2024 02:14:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1s5F8r-0004Cu-Rm
+ (envelope-from <chao@kernel.org>) id 1s5FmM-0004rF-5x
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 May 2024 01:33:47 +0000
+ Fri, 10 May 2024 02:14:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kajXW06+yRa7TIhitoKOHAvmGWaCvXAH3otjh0Ab5gY=; b=hIl8tBq2rJvFbEO/CS3iDJhI1+
- ZWhg0U+PgM2bw+Wk+9nFfl1uw/6moS6cnls8Eq1Dkud/dehIoYEZ7MnZzaJ+YE9x2TrC4se+jcEy/
- 1NwPYH60EXgs2lsQ1xD37aLc4ssmfYMqg3EKoeMxu5Vclpuqkh/YD3Ys7AvIqAuzIgHc=;
+ bh=0Hq3nEBADKjzhzKH9IpvXEfSREwh/akNDjrrBzw4/cA=; b=RS2z1CrU6/8VZ9LIUWvgWsvHrQ
+ ugcC6SAktiDLmcjRhaw4FbSi7b4oH8qWQVm9tI0ZsmyrDjtfhQ1W280LY1NXSgzRbGfD67eMka4/P
+ 8y1y0yrVhqanW9UGJaccB3bqF9jIz1FiPGxBsFCvJtlOUl11MSTzvksXTknRot1IS+xM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kajXW06+yRa7TIhitoKOHAvmGWaCvXAH3otjh0Ab5gY=; b=Eg6wPejFrHwlp/UjQV8DvdeMmw
- RfNGgUPSee+MID7kK5D7Ir5NttvOqYCZP+hd1OK3GamgVTmxulE7lzyLnuYp1TTAkyF1rqPev/8fJ
- OHj0ybnixxSA/2j23wOn+X9pDr/c6mp8eRHhTCs3HLPEv5OJDXVTW7NXIp+nUr7hoilM=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=0Hq3nEBADKjzhzKH9IpvXEfSREwh/akNDjrrBzw4/cA=; b=XaZFISDn9dC9BoZub2RTtvSAgV
+ DBBlZnQxokEpVzGhr8UI5211yWogow99vn4FL0wwoJnjh4nGAC3KuJTQLq+4CHOo4aFJkKpEY4lzO
+ z9IfoLlX8q91Rjnw40EUaNTqyIVj2a+2ypcDL/psFNWP07YjwS4xoC4uqJcdZBf/h3VU=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1s5F8s-0007th-Oa for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 May 2024 01:33:47 +0000
+ id 1s5FmM-00019h-Dr for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 10 May 2024 02:14:34 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 3367CCE1BAB;
- Fri, 10 May 2024 01:33:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EFD6C116B1;
- Fri, 10 May 2024 01:33:32 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 3F74261E10;
+ Fri, 10 May 2024 02:14:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9515DC116B1;
+ Fri, 10 May 2024 02:14:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1715304812;
- bh=jo2BzBRrRJMYVX1EgU8hOrka+kTaZZ2coGuJC5mSa9w=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=RRFtePo+YEyD+qy4sC1+JJSrwUxDTsPjzlaO3jKndejZOJKx/aJJvzEK229uFiy5r
- zjP6IgPuO5eGIO8vwen7wRlIpgsHXvcW8nQHIhGNf7JzZI+qONSq/V9C92aIHQ/lcn
- 3CsQwh48LMQTeq3SUn55svpVcdB9Vi4zPgotqsH4uiWl8oplnSOszq7OgE3F8Ot2tF
- dYLTbEe40bOu/MU0h9kKqxJQYhOM1X5KckOHHPYdAKXzOOPNmfoQWE7DbnGPyIYP0U
- hY0Vu3F+R5lzHTINSZhJp8UaM+KFOYr5IfnbST0QAOaLpBWb2DDBxrUeMkvtEKMGjB
- o0/qGQVDs1iOQ==
-Date: Fri, 10 May 2024 01:33:30 +0000
-From: Eric Biggers <ebiggers@kernel.org>
-To: Eugen Hristev <eugen.hristev@collabora.com>
-Message-ID: <20240510013330.GI1110919@google.com>
-References: <20240405121332.689228-1-eugen.hristev@collabora.com>
- <20240405121332.689228-4-eugen.hristev@collabora.com>
+ s=k20201202; t=1715307262;
+ bh=KLfHnbFD+uEkKSd4duRK5xnz1EiKtw8fTYoJ0C5CV1A=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=VzS1s3mdMDC8X+zXtHel+pe7gA8t6wKpa+vGFzi4VPz4NgwXqtue2leLfGcGH8PeJ
+ xpYoTfHsYqaV+ttnt2c8mJy0V3os/V7JBGivcg6tweKAZBF/OgfWBHY1O9vg+BUlwc
+ BtKfjCQbNelZ2THIrGw2iaVdJa02abJca/ckKgLUmXFqxKnnGRFWrbxvwOAdnZAjWa
+ U62VvqnOpdBhQ3sFS9KW4Ize7OfLojXAwNSJTy4CgSbze34CCELIGHIWlBE9nla088
+ 14EIvtm61MI7wut8g1lVmqLv1AxcmOS8i9W60xdGEz2/6chBvTv3rKDThgQA+Jde78
+ nkMMEPZ5MXsJA==
+Message-ID: <b58d0a62-9491-4b77-a3be-70331f849bb8@kernel.org>
+Date: Fri, 10 May 2024 10:14:19 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240405121332.689228-4-eugen.hristev@collabora.com>
+User-Agent: Mozilla Thunderbird
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20240506103313.773503-1-chao@kernel.org>
+ <20240506103313.773503-3-chao@kernel.org> <ZjzxWp4-wmpCzBeB@google.com>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <ZjzxWp4-wmpCzBeB@google.com>
 X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -70,10 +71,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Apr 05, 2024 at 03:13:26PM +0300,
- Eugen Hristev wrote:
- > +/** > + * generic_ci_match() - Match a name (case-insensitively) with
- a dirent. > + * This is a filesystem helper for comparison with [...] 
+ Content preview:  On 2024/5/9 23:52, Jaegeuk Kim wrote: > On 05/06, Chao Yu
+ wrote: >> syzbot reports a f2fs bug as below: >> >> [ cut here ] >> kernel
+ BUG at fs/f2fs/inline.c:258! >> CPU: 1 PID: [...] 
  Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -86,9 +86,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1s5F8s-0007th-Oa
-Subject: Re: [f2fs-dev] [PATCH v16 3/9] libfs: Introduce case-insensitive
- string comparison helper
+X-Headers-End: 1s5FmM-00019h-Dr
+Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: fix to do sanity check on i_nid
+ for inline_data inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,82 +100,150 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: krisman@suse.de, brauner@kernel.org, kernel@collabora.com, tytso@mit.edu,
- jack@suse.cz, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, adilger.kernel@dilger.ca,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org,
+ syzbot+848062ba19c8782ca5c8@syzkaller.appspotmail.com,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Apr 05, 2024 at 03:13:26PM +0300, Eugen Hristev wrote:
-> +/**
-> + * generic_ci_match() - Match a name (case-insensitively) with a dirent.
-> + * This is a filesystem helper for comparison with directory entries.
-> + * generic_ci_d_compare should be used in VFS' ->d_compare instead.
-> + *
-> + * @parent: Inode of the parent of the dirent under comparison
-> + * @name: name under lookup.
-> + * @folded_name: Optional pre-folded name under lookup
-> + * @de_name: Dirent name.
-> + * @de_name_len: dirent name length.
-> + *
-> + * Test whether a case-insensitive directory entry matches the filename
-> + * being searched.  If @folded_name is provided, it is used instead of
-> + * recalculating the casefold of @name.
-> + *
-> + * Return: > 0 if the directory entry matches, 0 if it doesn't match, or
-> + * < 0 on error.
-> + */
-> +int generic_ci_match(const struct inode *parent,
-> +		     const struct qstr *name,
-> +		     const struct qstr *folded_name,
-> +		     const u8 *de_name, u32 de_name_len)
-> +{
-> +	const struct super_block *sb = parent->i_sb;
-> +	const struct unicode_map *um = sb->s_encoding;
-> +	struct fscrypt_str decrypted_name = FSTR_INIT(NULL, de_name_len);
-> +	struct qstr dirent = QSTR_INIT(de_name, de_name_len);
-> +	int res = 0;
-> +
-> +	if (IS_ENCRYPTED(parent)) {
-> +		const struct fscrypt_str encrypted_name =
-> +			FSTR_INIT((u8 *) de_name, de_name_len);
-> +
-> +		if (WARN_ON_ONCE(!fscrypt_has_encryption_key(parent)))
-> +			return -EINVAL;
-> +
-> +		decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
-> +		if (!decrypted_name.name)
-> +			return -ENOMEM;
-> +		res = fscrypt_fname_disk_to_usr(parent, 0, 0, &encrypted_name,
-> +						&decrypted_name);
-> +		if (res < 0)
-> +			goto out;
+On 2024/5/9 23:52, Jaegeuk Kim wrote:
+> On 05/06, Chao Yu wrote:
+>> syzbot reports a f2fs bug as below:
+>>
+>> ------------[ cut here ]------------
+>> kernel BUG at fs/f2fs/inline.c:258!
+>> CPU: 1 PID: 34 Comm: kworker/u8:2 Not tainted 6.9.0-rc6-syzkaller-00012-g9e4bc4bcae01 #0
+>> RIP: 0010:f2fs_write_inline_data+0x781/0x790 fs/f2fs/inline.c:258
+>> Call Trace:
+>>   f2fs_write_single_data_page+0xb65/0x1d60 fs/f2fs/data.c:2834
+>>   f2fs_write_cache_pages fs/f2fs/data.c:3133 [inline]
+>>   __f2fs_write_data_pages fs/f2fs/data.c:3288 [inline]
+>>   f2fs_write_data_pages+0x1efe/0x3a90 fs/f2fs/data.c:3315
+>>   do_writepages+0x35b/0x870 mm/page-writeback.c:2612
+>>   __writeback_single_inode+0x165/0x10b0 fs/fs-writeback.c:1650
+>>   writeback_sb_inodes+0x905/0x1260 fs/fs-writeback.c:1941
+>>   wb_writeback+0x457/0xce0 fs/fs-writeback.c:2117
+>>   wb_do_writeback fs/fs-writeback.c:2264 [inline]
+>>   wb_workfn+0x410/0x1090 fs/fs-writeback.c:2304
+>>   process_one_work kernel/workqueue.c:3254 [inline]
+>>   process_scheduled_works+0xa12/0x17c0 kernel/workqueue.c:3335
+>>   worker_thread+0x86d/0xd70 kernel/workqueue.c:3416
+>>   kthread+0x2f2/0x390 kernel/kthread.c:388
+>>   ret_from_fork+0x4d/0x80 arch/x86/kernel/process.c:147
+>>   ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
+>>
+>> The root cause is: inline_data inode can be fuzzed, so that there may
+>> be valid blkaddr in its direct node, once f2fs triggers background GC
+>> to migrate the block, it will hit f2fs_bug_on() during dirty page
+>> writeback.
+>>
+>> Let's add sanity check on i_nid field for inline_data inode, meanwhile,
+>> forbid to migrate inline_data inode's data block to fix this issue.
+>>
+>> Reported-by: syzbot+848062ba19c8782ca5c8@syzkaller.appspotmail.com
+>> Closes: https://lore.kernel.org/linux-f2fs-devel/000000000000d103ce06174d7ec3@google.com
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>>   fs/f2fs/f2fs.h   |  2 +-
+>>   fs/f2fs/gc.c     |  6 ++++++
+>>   fs/f2fs/inline.c | 17 ++++++++++++++++-
+>>   fs/f2fs/inode.c  |  2 +-
+>>   4 files changed, 24 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>> index fced2b7652f4..c876813b5532 100644
+>> --- a/fs/f2fs/f2fs.h
+>> +++ b/fs/f2fs/f2fs.h
+>> @@ -4146,7 +4146,7 @@ extern struct kmem_cache *f2fs_inode_entry_slab;
+>>    * inline.c
+>>    */
+>>   bool f2fs_may_inline_data(struct inode *inode);
+>> -bool f2fs_sanity_check_inline_data(struct inode *inode);
+>> +bool f2fs_sanity_check_inline_data(struct inode *inode, struct page *ipage);
+>>   bool f2fs_may_inline_dentry(struct inode *inode);
+>>   void f2fs_do_read_inline_data(struct page *page, struct page *ipage);
+>>   void f2fs_truncate_inline_inode(struct inode *inode,
+>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+>> index e86c7f01539a..041957750478 100644
+>> --- a/fs/f2fs/gc.c
+>> +++ b/fs/f2fs/gc.c
+>> @@ -1563,6 +1563,12 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+>>   				continue;
+>>   			}
+>>   
+>> +			if (f2fs_has_inline_data(inode)) {
+>> +				iput(inode);
+>> +				set_sbi_flag(sbi, SBI_NEED_FSCK);
+>> +				continue;
+> 
+> Any race condtion to get this as false alarm?
 
-If fscrypt_fname_disk_to_usr() returns an error and !sb_has_strict_encoding(sb),
-then this function returns 0 (indicating no match) instead of the error code
-(indicating an error).  Is that the correct behavior?  I would think that
-strict_encoding should only have an effect on the actual name comparison.
+Since there is no reproducer for the bug, I doubt it was caused by metadata
+fuzzing, something like this:
 
-> +	/*
-> +	 * Attempt a case-sensitive match first. It is cheaper and
-> +	 * should cover most lookups, including all the sane
-> +	 * applications that expect a case-sensitive filesystem.
-> +	 */
-> +	if (folded_name->name) {
-> +		if (dirent.len == folded_name->len &&
-> +		    !memcmp(folded_name->name, dirent.name, dirent.len))
-> +			goto out;
-> +		res = utf8_strncasecmp_folded(um, folded_name, &dirent);
+- inline inode has one valid blkaddr in i_addr or in dnode reference by i_nid;
+- SIT/SSA entry of the block is valid;
+- background GC migrates the block;
+- kworker writeback it, and trigger the bug_on().
 
-Shouldn't the memcmp be done with the original user-specified name, not the
-casefolded name?  I would think that the user-specified name is the one that's
-more likely to match the on-disk name, because of case preservation.  In most
-cases users will specify the same case on both file creation and later access.
+Thoughts?
 
-- Eric
+Thanks,
+
+> 
+>> +			}
+>> +
+>>   			err = f2fs_gc_pinned_control(inode, gc_type, segno);
+>>   			if (err == -EAGAIN) {
+>>   				iput(inode);
+>> diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+>> index ac00423f117b..067600fed3d4 100644
+>> --- a/fs/f2fs/inline.c
+>> +++ b/fs/f2fs/inline.c
+>> @@ -33,11 +33,26 @@ bool f2fs_may_inline_data(struct inode *inode)
+>>   	return !f2fs_post_read_required(inode);
+>>   }
+>>   
+>> -bool f2fs_sanity_check_inline_data(struct inode *inode)
+>> +static bool has_node_blocks(struct inode *inode, struct page *ipage)
+>> +{
+>> +	struct f2fs_inode *ri = F2FS_INODE(ipage);
+>> +	int i;
+>> +
+>> +	for (i = 0; i < DEF_NIDS_PER_INODE; i++) {
+>> +		if (ri->i_nid[i])
+>> +			return true;
+>> +	}
+>> +	return false;
+>> +}
+>> +
+>> +bool f2fs_sanity_check_inline_data(struct inode *inode, struct page *ipage)
+>>   {
+>>   	if (!f2fs_has_inline_data(inode))
+>>   		return false;
+>>   
+>> +	if (has_node_blocks(inode, ipage))
+>> +		return false;
+>> +
+>>   	if (!support_inline_data(inode))
+>>   		return true;
+>>   
+>> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+>> index c26effdce9aa..1423cd27a477 100644
+>> --- a/fs/f2fs/inode.c
+>> +++ b/fs/f2fs/inode.c
+>> @@ -343,7 +343,7 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+>>   		}
+>>   	}
+>>   
+>> -	if (f2fs_sanity_check_inline_data(inode)) {
+>> +	if (f2fs_sanity_check_inline_data(inode, node_page)) {
+>>   		f2fs_warn(sbi, "%s: inode (ino=%lx, mode=%u) should not have inline_data, run fsck to fix",
+>>   			  __func__, inode->i_ino, inode->i_mode);
+>>   		return false;
+>> -- 
+>> 2.40.1
 
 
 _______________________________________________
