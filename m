@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 565F78C1C0D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 May 2024 03:24:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A6A68C1C11
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 May 2024 03:24:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s5Ezq-0008E8-Kt;
-	Fri, 10 May 2024 01:24:26 +0000
+	id 1s5F01-0003sz-7f;
+	Fri, 10 May 2024 01:24:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1s5Ezo-0008Dq-Me
+ (envelope-from <ebiggers@kernel.org>) id 1s5Ezw-0003sp-G5
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 May 2024 01:24:25 +0000
+ Fri, 10 May 2024 01:24:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dXCJeQrVdyQSuMQ53Eiz2R/x+SaFHgSyd1wUIQ7TY1A=; b=WRJN4BOfe2jYvGqy3cfcR3QsLl
- DoQBkK+rR4eNJqNRTFvjSgWZ+6Qj906lW3hsMXK9NP0gJLaF23YlD9f7X/zNRKmW8SEOCjoYA65rK
- Pd4eZWTdlYJK32BT01MMApxCLx6eeNyWl5SsnRRbMW26qKLhNA9Cj+0HEMOD0n84wos8=;
+ bh=rmeGYW2sWW6qHRS5bsOvHpwfcVcDw4XWN8xI3SGGopc=; b=dC78+pcBRZ6wMKNFXc1knuD6wq
+ SismjQT8obE+29Skgor1XEWHcZHr/C/pFMHI0wGB1iHvExvJVcteVc/Ytc0YuCRkzIFd8VSaMFirp
+ H/y3/RkWvTRieMhDn8ASv2Q0q6gCRmY9gW4kK4lkUD66Dhkh3kjoEyPlWFDUw5TxZGF4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,64 +31,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dXCJeQrVdyQSuMQ53Eiz2R/x+SaFHgSyd1wUIQ7TY1A=; b=PQSQm5N9OYnB2deFgaRld6O8I4
- IoLzY9Zv3vVqClpEUAw6yxLP9Q0++rtTT9Ag8TGIzgkVb7qLcvQcO3mPNlD+8mH1nukVv3VMi9Wfi
- uwGinBMFN0PoNC1yGbw20p9pq/4NML/4h8E6jhC2EsPKboa0myDPxhHzgv96pzjzateY=;
+ bh=rmeGYW2sWW6qHRS5bsOvHpwfcVcDw4XWN8xI3SGGopc=; b=S9bSn0QtjDoDpglqNGJeivodLA
+ 8lGE4FUxocoNTr1akbJBucG0Do4Cj3/yk0ELm1MK4/dVSQ6qJyq9mYhhnHyUT1TdW1ZVWkRDzlbSP
+ lQlipbr0lYVxC9TiTCUM+CHlt/X7Wx4scAT2eaXXTAiipZj2yV0Nz6EubMoBOZ9Ng0iA=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1s5Ezo-0007WS-Q8 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 May 2024 01:24:24 +0000
+ id 1s5Ezx-0007Wp-SC for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 10 May 2024 01:24:33 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id AE78B61D79;
- Fri, 10 May 2024 01:24:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 24DD4C116B1;
- Fri, 10 May 2024 01:24:13 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id BF54D61D79;
+ Fri, 10 May 2024 01:24:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37998C116B1;
+ Fri, 10 May 2024 01:24:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1715304253;
- bh=urrTXTTywRFtsj11Qs5I6AcHADvw2TrkRJTB0c5eGe4=;
+ s=k20201202; t=1715304267;
+ bh=dMR4rNMP4Jcx6tRoPoJo4UFOm/KXq6CVgtCEiKRmYJg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=bLz17kI4X02wMZUNr5OvfC48XIq3oJJ9HRAWlpYS3SHaIIfExDpXhTjedc+N5XzGR
- DZWdE4qnhAGvCKTxz04eYQwAniShrmvJfePAl3e5vqgxjqsXFKPZicw1Jf9eXfREpf
- ji4cFW+msOXy8wixr4JIHKAKwRigqAPVqIq9ZUgKL+RCh9QJlCuMXDhHLpLkDx3LBp
- xZBkjdJV7Lodpg2uKuPK/G/dCH9oQ79PjBb5nxN9+OYZo/S2p60x7zslYUiJF/QBpb
- Bl6MaLwjw4nM/CvuC1+17nFv2kLcndUOfPo9tzSUPO8MCjO9ZZQuiX40EztU59L/gN
- l4XBXFcKVxsZA==
-Date: Fri, 10 May 2024 01:24:11 +0000
+ b=OmWHKpvo+C5HzCNnJV05leNR1+YkwK/zxI+CPQUuAAYF/C3dyJbTDjuq5nl1QRDLV
+ A0Se/n0Msq3QPlVf0hku/NuRTmXBIx+WxiaT8yZ92WS/3M5DGwGcC/5Q8IgWnYgGxX
+ OlyHcv3EllLJ+ESeg1a7MQBZ+qazfnR3bqLZlHKhZckWrkF1angURQOg0A1eb6uiY+
+ qOozR08OiNuLumFzbLkr1PYukoeree0YVLYi7TPhLAHXc5OBO1o8iaC6kD3Gm/CNbt
+ yHCv1xe/+oGSvUuO81w/xFD9/T8f6YsfDKFHdD5NhRqyNQ4svFdEYhQoBskyMLIzp9
+ iAJ1D066u2+vw==
+Date: Fri, 10 May 2024 01:24:25 +0000
 From: Eric Biggers <ebiggers@kernel.org>
 To: Eugen Hristev <eugen.hristev@collabora.com>
-Message-ID: <20240510012411.GD1110919@google.com>
+Message-ID: <20240510012425.GE1110919@google.com>
 References: <20240405121332.689228-1-eugen.hristev@collabora.com>
- <20240405121332.689228-6-eugen.hristev@collabora.com>
+ <20240405121332.689228-7-eugen.hristev@collabora.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240405121332.689228-6-eugen.hristev@collabora.com>
+In-Reply-To: <20240405121332.689228-7-eugen.hristev@collabora.com>
 X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Apr 05, 2024 at 03:13:28PM +0300,
+ Content preview:  On Fri, Apr 05, 2024 at 03:13:29PM +0300,
  Eugen Hristev wrote:
- > From: Gabriel Krisman Bertazi <krisman@collabora.com> > > Now that ci_match
- is part of libfs, make f2fs reuse it instead of having > a [...] 
+ > From: Gabriel Krisman Bertazi <krisman@collabora.com> > > If the volume
+ is in strict mode, ext4_ci_compare can report a broken > encodi [...] 
  Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1s5Ezo-0007WS-Q8
-Subject: Re: [f2fs-dev] [PATCH v16 5/9] f2fs: Reuse generic_ci_match for ci
- comparisons
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1s5Ezx-0007Wp-SC
+Subject: Re: [f2fs-dev] [PATCH v16 6/9] ext4: Log error when lookup of
+ encoded dentry fails
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,17 +114,19 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Apr 05, 2024 at 03:13:28PM +0300, Eugen Hristev wrote:
+On Fri, Apr 05, 2024 at 03:13:29PM +0300, Eugen Hristev wrote:
 > From: Gabriel Krisman Bertazi <krisman@collabora.com>
 > 
-> Now that ci_match is part of libfs, make f2fs reuse it instead of having
-> a different implementation.
+> If the volume is in strict mode, ext4_ci_compare can report a broken
+> encoding name.  This will not trigger on a bad lookup, which is caught
+> earlier, only if the actual disk name is bad.
 > 
 > Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
 > Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
 > ---
->  fs/f2fs/dir.c | 58 ++++-----------------------------------------------
->  1 file changed, 4 insertions(+), 54 deletions(-)
+>  fs/ext4/namei.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
 
 Reviewed-by: Eric Biggers <ebiggers@google.com>
 
