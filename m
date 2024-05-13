@@ -2,126 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AC4A8C389A
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 12 May 2024 23:28:26 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27CE88C3C44
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 May 2024 09:46:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s6Gjv-0001FL-73;
-	Sun, 12 May 2024 21:28:16 +0000
+	id 1s6QO1-00008f-Pm;
+	Mon, 13 May 2024 07:46:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <krisman@suse.de>) id 1s6Gju-0001FF-Iq
+ (envelope-from <maxwell.atlee@crafticoz.com>) id 1s6QNz-00008T-P7
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 12 May 2024 21:28:15 +0000
+ Mon, 13 May 2024 07:46:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jf/nTYdtFSrpGP4pdOHHrKJq/xNpkR7aBGpW4FB068A=; b=eG5xg4agkA60s5/KeTWNq+DCmJ
- m5NUpX34scp7OXFJXsBxuOMhUp/lJbrShLAmw+GyYxePkPRnC5roIc7cIoiD8O0acixc5iCSITQ/q
- GlSopi/KrYAXjpyDfoR2fCmfKU8jsJLgW0jgEG0FVSFoXP8l7mw0FKag9YPP6QHimCic=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Subject:To:From:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=HH1R1w1vzgXkqOEvWv3e9AKNNwGePYryagHf/nDUAAA=; b=EujNbKcXa6Rzy5oVb+DqC8R5w0
+ M41WeTpsZkX+JkwTDBsxwnmyeTO2WFl5Cj6XH4doHBJyjsidrRsJNa7bXUUIJDJ/JgSlCmGBH5Bau
+ Pu9M+/hkPb9XtBAj0cKtTIsC1PnfZtpqM52/wvzDs+Ws2U6uNA/FNmLpTyfOVrxxZ+/Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=jf/nTYdtFSrpGP4pdOHHrKJq/xNpkR7aBGpW4FB068A=; b=SiEiSPX0W7qaiyPWPmfOG2JzE1
- 89SmdWDr8cDkR8/tk8889CZJTo2IhTPA03IRzCLytTgwefpKNDSGi2ZAU1xTf8OMuvwWKuonHF+s6
- JB+gBum9+nkEx325YPBm9KBTR9rzq91on2M86yeLulK/E0lcMR4bzi5cno5WbG5xsy2s=;
-Received: from smtp-out1.suse.de ([195.135.223.130])
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:To:From:Date:
+ Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=HH1R1w1vzgXkqOEvWv3e9AKNNwGePYryagHf/nDUAAA=; b=O
+ ohdlWTb+gqTuoE0sTpDd9QQnKFYbiGmvcwsJ4Yf9OVRdwt/X/LooPBnBnVDhe9idTxhQFy0fyB0GQ
+ 6tgTM8v84wmwPEfEibQvj7dZ/2WysJC/xX+waC8sp22nCG5gO/B1eXE8uFuhdOy8kWKhQ5fVuHCvG
+ Jx8C0vZAkQZW97a8=;
+Received: from mail.crafticoz.com ([217.61.16.185])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1s6Gjv-0005VB-Ee for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 12 May 2024 21:28:15 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 0538121B3F;
- Sun, 12 May 2024 21:28:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1715549283; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=jf/nTYdtFSrpGP4pdOHHrKJq/xNpkR7aBGpW4FB068A=;
- b=DbWyX943Zj70x56Nu5YgEr4FCOAh0dtpj+t4G2PgTfoy//scOf6Upl/2ALkpZviP/yX48T
- 16bWEN8/pYhA4iad797kO1XQD8K9KFz09caqlOnCa6rlJH1ovo99p4LhDeP58pK57G0gVZ
- wbhbJhV8kkX/EDOhsZ5sxMYUEUnGgF4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1715549283;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=jf/nTYdtFSrpGP4pdOHHrKJq/xNpkR7aBGpW4FB068A=;
- b=yRY4TBZ86MHjyMIrAdjz0dLJGgy2lyo0mqSjd4lOhFDT/L6JwGmx3Xwg47UTM8Q0D8ktrZ
- vij7rp5eteZocLDw==
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=DbWyX943;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=yRY4TBZ8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1715549283; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=jf/nTYdtFSrpGP4pdOHHrKJq/xNpkR7aBGpW4FB068A=;
- b=DbWyX943Zj70x56Nu5YgEr4FCOAh0dtpj+t4G2PgTfoy//scOf6Upl/2ALkpZviP/yX48T
- 16bWEN8/pYhA4iad797kO1XQD8K9KFz09caqlOnCa6rlJH1ovo99p4LhDeP58pK57G0gVZ
- wbhbJhV8kkX/EDOhsZ5sxMYUEUnGgF4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1715549283;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=jf/nTYdtFSrpGP4pdOHHrKJq/xNpkR7aBGpW4FB068A=;
- b=yRY4TBZ86MHjyMIrAdjz0dLJGgy2lyo0mqSjd4lOhFDT/L6JwGmx3Xwg47UTM8Q0D8ktrZ
- vij7rp5eteZocLDw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1BDEE13A3A;
- Sun, 12 May 2024 21:28:01 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id tzV8L2E0QWbqKAAAD6G6ig
- (envelope-from <krisman@suse.de>); Sun, 12 May 2024 21:28:01 +0000
-From: Gabriel Krisman Bertazi <krisman@suse.de>
-To: Eric Biggers <ebiggers@kernel.org>
-In-Reply-To: <20240510013330.GI1110919@google.com> (Eric Biggers's message of
- "Fri, 10 May 2024 01:33:30 +0000")
-Organization: SUSE
-References: <20240405121332.689228-1-eugen.hristev@collabora.com>
- <20240405121332.689228-4-eugen.hristev@collabora.com>
- <20240510013330.GI1110919@google.com>
-Date: Sun, 12 May 2024 17:27:48 -0400
-Message-ID: <875xviyb3f.fsf@mailhost.krisman.be>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1s6QNz-0007SI-Iy for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 13 May 2024 07:46:16 +0000
+Received: by mail.crafticoz.com (Postfix, from userid 1002)
+ id 45D96827CE; Mon, 13 May 2024 09:46:03 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=crafticoz.com;
+ s=mail; t=1715586363;
+ bh=HH1R1w1vzgXkqOEvWv3e9AKNNwGePYryagHf/nDUAAA=;
+ h=Date:From:To:Subject:From;
+ b=ApZhCJSOHr9o9NBIikwosfSffx5UC0LDp0UKa5Grq1Lji7m2BRSkWpR9Y3qiynIu8
+ oBeunXwMDvzCXPRIVbchuZShVlhXos9p2QNbo8hiPU8XMVRuRFOYpV1JUWMx7oQ68B
+ lD5+f/kVvBWkzdyWkg/z7ofNIEDAV07DDCFxq+kLtIofN599PkLWuwh+eS51Wo1ini
+ vKhgcOAYnCWP1JIqoN+koq/RsLLO05rl4C1mZ8sfV7TE17BSvM3sL4t7EVTgdPWiEM
+ q1Uabg2NBCi27Q5vNGGQycSWAS3YMB0g22pKJZFYoRZNp5IIvsFiaUgRQVy8GpDVbX
+ uEVcfApaizx4Q==
+Received: by mail.crafticoz.com for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 13 May 2024 07:45:57 GMT
+Message-ID: <20240513084500-0.1.2k.92rg.0.fah7gnt9b5@crafticoz.com>
+Date: Mon, 13 May 2024 07:45:57 GMT
+To: <linux-f2fs-devel@lists.sourceforge.net>
+X-Mailer: mail.crafticoz.com
 MIME-Version: 1.0
-X-Spam-Level: 
-X-Spamd-Result: default: False [-6.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- DWL_DNSWL_MED(-2.00)[suse.de:dkim];
- NEURAL_HAM_LONG(-1.00)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
- HAS_ORG_HEADER(0.00)[]; RCPT_COUNT_TWELVE(0.00)[15];
- MIME_TRACE(0.00)[0:+];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.de:dkim];
- RCVD_TLS_ALL(0.00)[]; TO_DN_SOME(0.00)[];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- FUZZY_BLOCKED(0.00)[rspamd.com]; RCVD_COUNT_TWO(0.00)[2];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; DKIM_TRACE(0.00)[suse.de:+]
-X-Rspamd-Action: no action
-X-Rspamd-Queue-Id: 0538121B3F
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spam-Flag: NO
-X-Spam-Score: -6.51
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -129,30 +65,34 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Eric Biggers <ebiggers@kernel.org> writes: > On Fri, Apr 05, 
- 2024 at 03:13:26PM +0300, Eugen Hristev wrote: >> + if
- (WARN_ON_ONCE(!fscrypt_has_encryption_key(parent)))
- >> + return -EINVAL; >> + >> + decrypted_name.name = kmalloc(de_name_len,
- GFP_KERNEL); >> + if (!decrypted_name.name) >> + return -ENOMEM; > [...] 
+ Content preview:  Hi, would you like to offer products of high quality,
+ long-term
+ durability, and maintaining full flavor and nutritional value? We provide
+ freeze-dried fruits and vegetables and offer professional mixing and packaging
+ services to enhance the attractiveness of offerings for companies in the
+ food industry. 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: suse.de]
+ for more information. [URIs: crafticoz.com]
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [217.61.16.185 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1s6Gjv-0005VB-Ee
-Subject: Re: [f2fs-dev] [PATCH v16 3/9] libfs: Introduce case-insensitive
- string comparison helper
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1s6QNz-0007SI-Iy
+Subject: [f2fs-dev] Development of a new product
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -164,80 +104,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: brauner@kernel.org, kernel@collabora.com, tytso@mit.edu, jack@suse.cz,
- linux-kernel@vger.kernel.org, Eugen Hristev <eugen.hristev@collabora.com>,
- linux-f2fs-devel@lists.sourceforge.net, adilger.kernel@dilger.ca,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
+From: Maxwell Atlee via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Maxwell Atlee <maxwell.atlee@crafticoz.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Eric Biggers <ebiggers@kernel.org> writes:
+Hi,
 
-> On Fri, Apr 05, 2024 at 03:13:26PM +0300, Eugen Hristev wrote:
+would you like to offer products of high quality, long-term durability, and maintaining full flavor and nutritional value?
 
->> +		if (WARN_ON_ONCE(!fscrypt_has_encryption_key(parent)))
->> +			return -EINVAL;
->> +
->> +		decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
->> +		if (!decrypted_name.name)
->> +			return -ENOMEM;
->> +		res = fscrypt_fname_disk_to_usr(parent, 0, 0, &encrypted_name,
->> +						&decrypted_name);
->> +		if (res < 0)
->> +			goto out;
->
-> If fscrypt_fname_disk_to_usr() returns an error and !sb_has_strict_encoding(sb),
-> then this function returns 0 (indicating no match) instead of the error code
-> (indicating an error).  Is that the correct behavior?  I would think that
-> strict_encoding should only have an effect on the actual name
-> comparison.
+We provide freeze-dried fruits and vegetables and offer professional mixing and packaging services to enhance the attractiveness of offerings for companies in the food industry.
 
-No. we *want* this return code to be propagated back to f2fs.  In ext4 it
-wouldn't matter since the error is not visible outside of ext4_match,
-but f2fs does the right thing and stops the lookup.
+If you want to enter new markets, we can help develop new products using freeze-drying. We support companies in this area from countries such as the United Kingdom, Canada, the USA, and South Korea.
 
-Thinking about it, there is a second problem with this series.
-Currently, if we are on strict_mode, f2fs_match_ci_name does not
-propagate unicode errors back to f2fs. So, once a utf8 invalid sequence
-is found during lookup, it will be considered not-a-match but the lookup
-will continue.  This allows some lookups to succeed even in a corrupted
-directory.  With this patch, we will abort the lookup on the first
-error, breaking existing semantics.  Note that these are different from
-memory allocation failure and fscrypt_fname_disk_to_usr. For those, it
-makes sense to abort.
+I'd be happy to provide you with details and samples for testing. Can we talk?
 
-Also, once patch 6 and 7 are added, if fscrypt fails with -EINVAL for
-any reason unrelated to unicode (like in the WARN_ON above), we will
-incorrectly print the error message saying there is a bad UTF8 string.
 
-My suggestion would be to keep the current behavior.  Make
-generic_ci_match only propagate non-unicode related errors back to the
-filesystem.  This means that we need to move the error messages in patch
-6 and 7 into this function, so they only trigger when utf8_strncasecmp*
-itself fails.
-
->> +	/*
->> +	 * Attempt a case-sensitive match first. It is cheaper and
->> +	 * should cover most lookups, including all the sane
->> +	 * applications that expect a case-sensitive filesystem.
->> +	 */
->> +	if (folded_name->name) {
->> +		if (dirent.len == folded_name->len &&
->> +		    !memcmp(folded_name->name, dirent.name, dirent.len))
->> +			goto out;
->> +		res = utf8_strncasecmp_folded(um, folded_name, &dirent);
->
-> Shouldn't the memcmp be done with the original user-specified name, not the
-> casefolded name?  I would think that the user-specified name is the one that's
-> more likely to match the on-disk name, because of case preservation.  In most
-> cases users will specify the same case on both file creation and later access.
-
-Yes.
-
--- 
-Gabriel Krisman Bertazi
+Best regards
+Maxwell Atlee
 
 
 _______________________________________________
