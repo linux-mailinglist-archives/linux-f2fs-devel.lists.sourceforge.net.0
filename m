@@ -2,105 +2,145 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 330F88C83ED
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 May 2024 11:39:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F0958C8429
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 May 2024 11:50:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s7u3F-0008Qe-Nm;
-	Fri, 17 May 2024 09:38:58 +0000
+	id 1s7uEW-0001d8-0g;
+	Fri, 17 May 2024 09:50:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <rafael@kernel.org>) id 1s7u3A-0008Py-WE;
- Fri, 17 May 2024 09:38:53 +0000
+ (envelope-from <tiwai@suse.de>) id 1s7uEU-0001cu-Jj;
+ Fri, 17 May 2024 09:50:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
+ Subject:Cc:To:From:Message-ID:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HO8Bz9GyifotSrZV7QjN+iGapa2oFgA0NCUBiN/L4cc=; b=dGC8VlpnPQviUUvhaqt4ZgdBn8
- h3f0CjbZrPE4sgyEQow39RShwDuoJAIq76qw1SSQ5XirekO58TV7+FaF6NXnhFHhunWxX/ux5Us4K
- dprE8K4SApqP7aX4eDfOR8N+/Z76r9nq/74o3D4AJcVwUD4s2r8zUjyU2RmlpWIG7MxQ=;
+ bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=; b=Ye5XECGxylQWDiqnhtec6mftLC
+ 8k57wu6i6mDOZuZLW/1Ky1E8jL4BZ1PpmmkSV7xKwfnuZdruR5uUWGQHUkTcw0BjDmyVPk5l15Luv
+ atEzyp2E9HZ4WS5xE9pyJag3P5hlo7BsJhrN6o8LY8oW7Upfs9WWyuuuvBKrrshR/Ol8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=Content-Type:MIME-Version:References:In-Reply-To:Subject:Cc:To:From:
+ Message-ID:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=HO8Bz9GyifotSrZV7QjN+iGapa2oFgA0NCUBiN/L4cc=; b=LJ/00mqhaw+sVN6mIhjhsv92Do
- z6+nlA5vKi191byTtKWBMY9MavRAEFWgwjZRm94wBsMQa/+/ARwSK4JjEgczsrieFE8P2W9j0sYAR
- yfpE7mjFmqhM5MEeyUmroa8KA0maDmz89C3WkF+tF4s1O9o3MPFuwJ6ZDAuj6HZbAENc=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=; b=erVGGH6NGygshsCW7t2wdhbdlQ
+ hzs01WmUJ4z9tiIAccWjwC//7hrrwdYiDL8sL6itMPWc4o/gJiCmlxKSadFuLTvF7jjssf4K578Qr
+ tGHXvbKeD0K7WDSnnXBADzu4qiE1Y4FFQDi7hQmQN7KS/z1tI9zUl9X+rsrT7iAk1P6g=;
+Received: from smtp-out1.suse.de ([195.135.223.130])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1s7u3B-0001ie-4T; Fri, 17 May 2024 09:38:53 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 63BD4CE0AC2;
- Fri, 17 May 2024 09:38:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 49336C32782;
- Fri, 17 May 2024 09:38:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1715938719;
- bh=vcW+W1wogmO6WY+GSQu3IAR/P96Rw6SpWddj5psVWwk=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=Q7nnnXKoCoZCRE9y8qfd0GjlbgMZcow94ZBAhyo/a3WB7eilpoBw2+BvdmX0v1BZf
- e7OVkid9omI+gvcN303kxsn1XDNSTYdJqgftO+q7xqgbBFEfRALDNx6MNApEOaSItp
- R/U+wW3wKfdgVg1pSTt+l5Ktt5O2287ep0H8zh6uS0rANv32EVrNlYH0N2LN0Wkz4S
- 7JyAvYOZKqMfev4RirENIqVjY9S2NBz5t0xMnmDlB0lD8J6a25LhI7NPYbYJS3uooO
- gi0eyy/jJtvOQvPPH73HE5rAvo90fxUfGOyoScW2xWZLVtSxLMRh/mH25kBaP3Lv2i
- C+gw9xG0H/JCg==
-Received: by mail-oo1-f53.google.com with SMTP id
- 006d021491bc7-5b2fbe85f82so267616eaf.1; 
- Fri, 17 May 2024 02:38:39 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVtE1ro71RZZa0jafcEL7v4PeTWzyefJf+EcUeuh5/McAicU8jtGPO7LmX2FxNClLuDWOKA01sT5kSx++sWhg04Js1s+JpgpQSJDAeJkDr3yS6iiD7e9uBcpPxSsLYwyBdT50+csB5YRep+0dXDm0LJucyODnKeYv22PovNFQ==
-X-Gm-Message-State: AOJu0YyVYo0WTW/jhUUw3uaDxLozqvRvg6K+/bwGRa0yGxMDh0yyAUh2
- CKmfD7F9qGnsE1GPzHSf9zHEHF3uQrABGIZzCbhPoObQbe1j/wJU1+bKnIJAwdhst0ILyy1xETQ
- otBOYkZaoeWbcdINeG9LuGMChEDo=
-X-Google-Smtp-Source: AGHT+IGDE99s+s68qJbXMtkzFnMd5s/9OBNB6sR0+sCICB0PpLHU9X3BbBFmCRlDywLZhowLPWB9T1lJ6YvckXBFFDs=
-X-Received: by 2002:a05:6820:2602:b0:5b2:8017:fb68 with SMTP id
- 006d021491bc7-5b2815cd95fmr22153827eaf.0.1715938718475; Fri, 17 May 2024
- 02:38:38 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240516133454.681ba6a0@rorschach.local.home>
-In-Reply-To: <20240516133454.681ba6a0@rorschach.local.home>
-From: "Rafael J. Wysocki" <rafael@kernel.org>
-Date: Fri, 17 May 2024 11:38:25 +0200
-X-Gmail-Original-Message-ID: <CAJZ5v0hGNNvUq-BNHynaWr-5YVC6ugki81R70SG4uu34Rk-Mew@mail.gmail.com>
-Message-ID: <CAJZ5v0hGNNvUq-BNHynaWr-5YVC6ugki81R70SG4uu34Rk-Mew@mail.gmail.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1s7uEU-0003E1-Mv; Fri, 17 May 2024 09:50:34 +0000
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 6034E37344;
+ Fri, 17 May 2024 09:50:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1715939422; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=;
+ b=aqPS27rfYVOIlQYJQqRWN1OB2KuGqplKO0xASvAy99Em1LNhKAq/Z45rrmqOfomt6ymSXF
+ OiEv1bW+ZdpI213w3TR/RlpBxADCOtSoygZG2IWVCeRjyU7fk9xYWgYywcz+IS9+rfxp20
+ iBC1DT09pzE+KgT4PXFcXk6IVt2gReU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1715939422;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=;
+ b=ybHcdzifmrWaHz4fudlW6TywmF4wPptrNP5A3fPjgJZxiNP8yysPTURMY+P9YDVx2v+UNY
+ h72YrP3bBg//bVBQ==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1715939422; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=;
+ b=aqPS27rfYVOIlQYJQqRWN1OB2KuGqplKO0xASvAy99Em1LNhKAq/Z45rrmqOfomt6ymSXF
+ OiEv1bW+ZdpI213w3TR/RlpBxADCOtSoygZG2IWVCeRjyU7fk9xYWgYywcz+IS9+rfxp20
+ iBC1DT09pzE+KgT4PXFcXk6IVt2gReU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1715939422;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=;
+ b=ybHcdzifmrWaHz4fudlW6TywmF4wPptrNP5A3fPjgJZxiNP8yysPTURMY+P9YDVx2v+UNY
+ h72YrP3bBg//bVBQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3DB2D13991;
+ Fri, 17 May 2024 09:50:21 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id rHjlDV0oR2boBwAAD6G6ig
+ (envelope-from <tiwai@suse.de>); Fri, 17 May 2024 09:50:21 +0000
+Date: Fri, 17 May 2024 11:50:38 +0200
+Message-ID: <87r0e0zs0h.wl-tiwai@suse.de>
+From: Takashi Iwai <tiwai@suse.de>
 To: Steven Rostedt <rostedt@goodmis.org>
-X-Spam-Score: -6.2 (------)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+In-Reply-To: <20240516133454.681ba6a0@rorschach.local.home>
+References: <20240516133454.681ba6a0@rorschach.local.home>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) Emacs/27.2 Mule/6.0
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+X-Spam-Level: 
+X-Spamd-Result: default: False [-1.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ MID_CONTAINS_FROM(1.00)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
+ MIME_GOOD(-0.10)[text/plain]; TO_DN_SOME(0.00)[];
+ MIME_TRACE(0.00)[0:+]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ ARC_NA(0.00)[]; RCVD_TLS_ALL(0.00)[];
+ FUZZY_BLOCKED(0.00)[rspamd.com];
+ R_RATELIMIT(0.00)[to_ip_from(RL6rcqepr6awpd9qb5xxedoiwq)];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; RCPT_COUNT_GT_50(0.00)[50];
+ RCVD_COUNT_TWO(0.00)[2];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[efficios.com:email, inria.fr:email,
+ imap1.dmz-prg2.suse.org:helo, suse.de:email, goodmis.org:email,
+ linux-foundation.org:email]
+X-Spam-Score: -1.80
+X-Spam-Flag: NO
+X-Spam-Score: -5.2 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Thu, May 16, 2024 at 7:35 PM Steven Rostedt <rostedt@goodmis.org>
-    wrote: > > From: "Steven Rostedt (Google)" <rostedt@goodmis.org> > > [ >
-   This is a treewide change. I will likely re-create this [...] 
- 
- Content analysis details:   (-6.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On Thu, 16 May 2024 19:34:54 +0200, Steven Rostedt wrote:
+ > > From: "Steven Rostedt (Google)" <rostedt@goodmis.org> > > [ > This is
+ a treewide change. I will likely re-create this patch again in > the [...]
+ Content analysis details:   (-5.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: suse.de]
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [145.40.73.55 listed in list.dnswl.org]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ high trust [195.135.223.130 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -1.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1s7u3B-0001ie-4T
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1s7uEU-0003E1-Mv
 Subject: Re: [f2fs-dev] [PATCH] tracing/treewide: Remove second parameter of
  __assign_str()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -139,45 +179,71 @@ Cc: linux-hyperv@vger.kernel.org, linux-usb@vger.kernel.org,
  bpf@vger.kernel.org, Linux trace kernel <linux-trace-kernel@vger.kernel.org>,
  freedreno@lists.freedesktop.org, linux-nfs@vger.kernel.org,
  linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gVGh1LCBNYXkgMTYsIDIwMjQgYXQgNzozNeKAr1BNIFN0ZXZlbiBSb3N0ZWR0IDxyb3N0ZWR0
-QGdvb2RtaXMub3JnPiB3cm90ZToKPgo+IEZyb206ICJTdGV2ZW4gUm9zdGVkdCAoR29vZ2xlKSIg
-PHJvc3RlZHRAZ29vZG1pcy5vcmc+Cj4KPiBbCj4gICAgVGhpcyBpcyBhIHRyZWV3aWRlIGNoYW5n
-ZS4gSSB3aWxsIGxpa2VseSByZS1jcmVhdGUgdGhpcyBwYXRjaCBhZ2FpbiBpbgo+ICAgIHRoZSBz
-ZWNvbmQgd2VlayBvZiB0aGUgbWVyZ2Ugd2luZG93IG9mIHY2LjEwIGFuZCBzdWJtaXQgaXQgdGhl
-bi4gSG9waW5nCj4gICAgdG8ga2VlcCB0aGUgY29uZmxpY3RzIHRoYXQgaXQgd2lsbCBjYXVzZSB0
-byBhIG1pbmltdW0uCj4gXQo+Cj4gV2l0aCB0aGUgcmV3b3JrIG9mIGhvdyB0aGUgX19zdHJpbmco
-KSBoYW5kbGVzIGR5bmFtaWMgc3RyaW5ncyB3aGVyZSBpdAo+IHNhdmVzIG9mZiB0aGUgc291cmNl
-IHN0cmluZyBpbiBmaWVsZCBpbiB0aGUgaGVscGVyIHN0cnVjdHVyZVsxXSwgdGhlCj4gYXNzaWdu
-bWVudCBvZiB0aGF0IHZhbHVlIHRvIHRoZSB0cmFjZSBldmVudCBmaWVsZCBpcyBzdG9yZWQgaW4g
-dGhlIGhlbHBlcgo+IHZhbHVlIGFuZCBkb2VzIG5vdCBuZWVkIHRvIGJlIHBhc3NlZCBpbiBhZ2Fp
-bi4KPgo+IFRoaXMgbWVhbnMgdGhhdCB3aXRoOgo+Cj4gICBfX3N0cmluZyhmaWVsZCwgbXlzdHJp
-bmcpCj4KPiBXaGljaCB1c2UgdG8gYmUgYXNzaWduZWQgd2l0aCBfX2Fzc2lnbl9zdHIoZmllbGQs
-IG15c3RyaW5nKSwgbm8gbG9uZ2VyCj4gbmVlZHMgdGhlIHNlY29uZCBwYXJhbWV0ZXIgYW5kIGl0
-IGlzIHVudXNlZC4gV2l0aCB0aGlzLCBfX2Fzc2lnbl9zdHIoKQo+IHdpbGwgbm93IG9ubHkgZ2V0
-IGEgc2luZ2xlIHBhcmFtZXRlci4KPgo+IFRoZXJlJ3Mgb3ZlciA3MDAgdXNlcnMgb2YgX19hc3Np
-Z25fc3RyKCkgYW5kIGJlY2F1c2UgY29jY2luZWxsZSBkb2VzIG5vdAo+IGhhbmRsZSB0aGUgVFJB
-Q0VfRVZFTlQoKSBtYWNybyBJIGVuZGVkIHVwIHVzaW5nIHRoZSBmb2xsb3dpbmcgc2VkIHNjcmlw
-dDoKPgo+ICAgZ2l0IGdyZXAgLWwgX19hc3NpZ25fc3RyIHwgd2hpbGUgcmVhZCBhIDsgZG8KPiAg
-ICAgICBzZWQgLWUgJ3MvXChfX2Fzc2lnbl9zdHIoW14sXSpbXiAsXVwpICosW147XSovXDEpLycg
-JGEgPiAvdG1wL3Rlc3QtZmlsZTsKPiAgICAgICBtdiAvdG1wL3Rlc3QtZmlsZSAkYTsKPiAgIGRv
-bmUKPgo+IEkgdGhlbiBzZWFyY2hlZCBmb3IgX19hc3NpZ25fc3RyKCkgdGhhdCBkaWQgbm90IGVu
-ZCB3aXRoICc7JyBhcyB0aG9zZQo+IHdlcmUgbXVsdGkgbGluZSBhc3NpZ25tZW50cyB0aGF0IHRo
-ZSBzZWQgc2NyaXB0IGFib3ZlIHdvdWxkIGZhaWwgdG8gY2F0Y2guCj4KPiBOb3RlLCB0aGUgc2Ft
-ZSB1cGRhdGVzIHdpbGwgbmVlZCB0byBiZSBkb25lIGZvcjoKPgo+ICAgX19hc3NpZ25fc3RyX2xl
-bigpCj4gICBfX2Fzc2lnbl9yZWxfc3RyKCkKPiAgIF9fYXNzaWduX3JlbF9zdHJfbGVuKCkKPgo+
-IEkgdGVzdGVkIHRoaXMgd2l0aCBib3RoIGFuIGFsbG1vZGNvbmZpZyBhbmQgYW4gYWxseWVzY29u
-ZmlnIChidWlsZCBvbmx5IGZvciBib3RoKS4KPgo+IFsxXSBodHRwczovL2xvcmUua2VybmVsLm9y
-Zy9saW51eC10cmFjZS1rZXJuZWwvMjAyNDAyMjIyMTE0NDIuNjM0MTkyNjUzQGdvb2RtaXMub3Jn
-Lwo+Cj4gQ2M6IE1hc2FtaSBIaXJhbWF0c3UgPG1oaXJhbWF0QGtlcm5lbC5vcmc+Cj4gQ2M6IE1h
-dGhpZXUgRGVzbm95ZXJzIDxtYXRoaWV1LmRlc25veWVyc0BlZmZpY2lvcy5jb20+Cj4gQ2M6IExp
-bnVzIFRvcnZhbGRzIDx0b3J2YWxkc0BsaW51eC1mb3VuZGF0aW9uLm9yZz4KPiBDYzogSnVsaWEg
-TGF3YWxsIDxKdWxpYS5MYXdhbGxAaW5yaWEuZnI+Cj4gU2lnbmVkLW9mZi1ieTogU3RldmVuIFJv
-c3RlZHQgKEdvb2dsZSkgPHJvc3RlZHRAZ29vZG1pcy5vcmc+CgpBY2tlZC1ieTogUmFmYWVsIEou
-IFd5c29ja2kgPHJhZmFlbEBrZXJuZWwub3JnPiAjIGZvciB0aGVybWFsCgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWls
-aW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9s
-aXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On Thu, 16 May 2024 19:34:54 +0200,
+Steven Rostedt wrote:
+> 
+> From: "Steven Rostedt (Google)" <rostedt@goodmis.org>
+> 
+> [
+>    This is a treewide change. I will likely re-create this patch again in
+>    the second week of the merge window of v6.10 and submit it then. Hoping
+>    to keep the conflicts that it will cause to a minimum.
+> ]
+> 
+> With the rework of how the __string() handles dynamic strings where it
+> saves off the source string in field in the helper structure[1], the
+> assignment of that value to the trace event field is stored in the helper
+> value and does not need to be passed in again.
+> 
+> This means that with:
+> 
+>   __string(field, mystring)
+> 
+> Which use to be assigned with __assign_str(field, mystring), no longer
+> needs the second parameter and it is unused. With this, __assign_str()
+> will now only get a single parameter.
+> 
+> There's over 700 users of __assign_str() and because coccinelle does not
+> handle the TRACE_EVENT() macro I ended up using the following sed script:
+> 
+>   git grep -l __assign_str | while read a ; do
+>       sed -e 's/\(__assign_str([^,]*[^ ,]\) *,[^;]*/\1)/' $a > /tmp/test-file;
+>       mv /tmp/test-file $a;
+>   done
+> 
+> I then searched for __assign_str() that did not end with ';' as those
+> were multi line assignments that the sed script above would fail to catch.
+> 
+> Note, the same updates will need to be done for:
+> 
+>   __assign_str_len()
+>   __assign_rel_str()
+>   __assign_rel_str_len()
+> 
+> I tested this with both an allmodconfig and an allyesconfig (build only for both).
+> 
+> [1] https://lore.kernel.org/linux-trace-kernel/20240222211442.634192653@goodmis.org/
+> 
+> Cc: Masami Hiramatsu <mhiramat@kernel.org>
+> Cc: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+> Cc: Linus Torvalds <torvalds@linux-foundation.org>
+> Cc: Julia Lawall <Julia.Lawall@inria.fr>
+> Signed-off-by: Steven Rostedt (Google) <rostedt@goodmis.org>
+
+For the sound part
+Acked-by: Takashi Iwai <tiwai@suse.de>
+
+
+thanks,
+
+Takashi
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
