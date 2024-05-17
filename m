@@ -2,147 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F0958C8429
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 May 2024 11:50:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A3FC8C85AC
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 May 2024 13:28:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s7uEW-0001d8-0g;
-	Fri, 17 May 2024 09:50:36 +0000
+	id 1s7vko-0005xS-8q;
+	Fri, 17 May 2024 11:28:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tiwai@suse.de>) id 1s7uEU-0001cu-Jj;
- Fri, 17 May 2024 09:50:34 +0000
+ (envelope-from <Zhiguo.Niu@unisoc.com>) id 1s7vkm-0005xE-Gn
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 17 May 2024 11:27:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:In-Reply-To:
- Subject:Cc:To:From:Message-ID:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=; b=Ye5XECGxylQWDiqnhtec6mftLC
- 8k57wu6i6mDOZuZLW/1Ky1E8jL4BZ1PpmmkSV7xKwfnuZdruR5uUWGQHUkTcw0BjDmyVPk5l15Luv
- atEzyp2E9HZ4WS5xE9pyJag3P5hlo7BsJhrN6o8LY8oW7Upfs9WWyuuuvBKrrshR/Ol8=;
+ bh=jv8cVr1368WUcWefUzbz/93iDXCRiDPYaAXGOZHgLZA=; b=e21Ai+m/35ac4dEMd2ydQTVsPs
+ j9zSdNl/gNaG5Dt4ASUKnv72VwnAhvPYQfUaCj5WW9tzU+u3mukW1SXcDURtf4ST+WGwl7ffjDaFZ
+ pmnV5LkxOBS7CLVAGDRwZm7KCdm0lSepuGx6qOilobWU3XABZTjsyVbpEYN213K9lB2Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:References:In-Reply-To:Subject:Cc:To:From:
- Message-ID:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=; b=erVGGH6NGygshsCW7t2wdhbdlQ
- hzs01WmUJ4z9tiIAccWjwC//7hrrwdYiDL8sL6itMPWc4o/gJiCmlxKSadFuLTvF7jjssf4K578Qr
- tGHXvbKeD0K7WDSnnXBADzu4qiE1Y4FFQDi7hQmQN7KS/z1tI9zUl9X+rsrT7iAk1P6g=;
-Received: from smtp-out1.suse.de ([195.135.223.130])
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=jv8cVr1368WUcWefUzbz/93iDXCRiDPYaAXGOZHgLZA=; b=L
+ 88eJnmkZxBjPuznrxwu1T04/4pKu/KFPgZqD0CpWImQ1MxYA8pTeDqzajR5JuK4AKqTpUWsu5QpxD
+ 6j92hVTY0BUjv9SqqCMgpaC2qVjMzpTvmERBuUP12nyOpXH52KhcLMFkHcjqmnLXhDNiC7D+ay7GS
+ uqio/QaZHWqONc9Q=;
+Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1s7uEU-0003E1-Mv; Fri, 17 May 2024 09:50:34 +0000
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 6034E37344;
- Fri, 17 May 2024 09:50:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1715939422; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=;
- b=aqPS27rfYVOIlQYJQqRWN1OB2KuGqplKO0xASvAy99Em1LNhKAq/Z45rrmqOfomt6ymSXF
- OiEv1bW+ZdpI213w3TR/RlpBxADCOtSoygZG2IWVCeRjyU7fk9xYWgYywcz+IS9+rfxp20
- iBC1DT09pzE+KgT4PXFcXk6IVt2gReU=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1715939422;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=;
- b=ybHcdzifmrWaHz4fudlW6TywmF4wPptrNP5A3fPjgJZxiNP8yysPTURMY+P9YDVx2v+UNY
- h72YrP3bBg//bVBQ==
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1715939422; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=;
- b=aqPS27rfYVOIlQYJQqRWN1OB2KuGqplKO0xASvAy99Em1LNhKAq/Z45rrmqOfomt6ymSXF
- OiEv1bW+ZdpI213w3TR/RlpBxADCOtSoygZG2IWVCeRjyU7fk9xYWgYywcz+IS9+rfxp20
- iBC1DT09pzE+KgT4PXFcXk6IVt2gReU=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1715939422;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=8jfFpRbNQ4JylrNPf/Ju6XAY6qQjrc+0U9vxW7VwdqA=;
- b=ybHcdzifmrWaHz4fudlW6TywmF4wPptrNP5A3fPjgJZxiNP8yysPTURMY+P9YDVx2v+UNY
- h72YrP3bBg//bVBQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3DB2D13991;
- Fri, 17 May 2024 09:50:21 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id rHjlDV0oR2boBwAAD6G6ig
- (envelope-from <tiwai@suse.de>); Fri, 17 May 2024 09:50:21 +0000
-Date: Fri, 17 May 2024 11:50:38 +0200
-Message-ID: <87r0e0zs0h.wl-tiwai@suse.de>
-From: Takashi Iwai <tiwai@suse.de>
-To: Steven Rostedt <rostedt@goodmis.org>
-In-Reply-To: <20240516133454.681ba6a0@rorschach.local.home>
-References: <20240516133454.681ba6a0@rorschach.local.home>
-User-Agent: Wanderlust/2.15.9 (Almost Unreal) Emacs/27.2 Mule/6.0
-MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
-X-Spam-Level: 
-X-Spamd-Result: default: False [-1.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- MID_CONTAINS_FROM(1.00)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
- MIME_GOOD(-0.10)[text/plain]; TO_DN_SOME(0.00)[];
- MIME_TRACE(0.00)[0:+]; RCVD_VIA_SMTP_AUTH(0.00)[];
- ARC_NA(0.00)[]; RCVD_TLS_ALL(0.00)[];
- FUZZY_BLOCKED(0.00)[rspamd.com];
- R_RATELIMIT(0.00)[to_ip_from(RL6rcqepr6awpd9qb5xxedoiwq)];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; RCPT_COUNT_GT_50(0.00)[50];
- RCVD_COUNT_TWO(0.00)[2];
- DBL_BLOCKED_OPENRESOLVER(0.00)[efficios.com:email, inria.fr:email,
- imap1.dmz-prg2.suse.org:helo, suse.de:email, goodmis.org:email,
- linux-foundation.org:email]
-X-Spam-Score: -1.80
-X-Spam-Flag: NO
-X-Spam-Score: -5.2 (-----)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1s7vkk-0005bn-Nf for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 17 May 2024 11:27:59 +0000
+Received: from dlp.unisoc.com ([10.29.3.86])
+ by SHSQR01.spreadtrum.com with ESMTP id 44HBRIr9071358;
+ Fri, 17 May 2024 19:27:18 +0800 (+08)
+ (envelope-from Zhiguo.Niu@unisoc.com)
+Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
+ by dlp.unisoc.com (SkyGuard) with ESMTPS id 4Vgl300WpXz2PdW2s;
+ Fri, 17 May 2024 19:23:56 +0800 (CST)
+Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
+ BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.23; Fri, 17 May 2024 19:27:10 +0800
+From: Zhiguo Niu <zhiguo.niu@unisoc.com>
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Fri, 17 May 2024 19:26:42 +0800
+Message-ID: <1715945202-30045-1-git-send-email-zhiguo.niu@unisoc.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-Originating-IP: [10.0.73.87]
+X-ClientProxiedBy: SHCAS01.spreadtrum.com (10.0.1.201) To
+ BJMBX02.spreadtrum.com (10.0.64.8)
+X-MAIL: SHSQR01.spreadtrum.com 44HBRIr9071358
+X-Spam-Score: -5.0 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, 16 May 2024 19:34:54 +0200, Steven Rostedt wrote:
- > > From: "Steven Rostedt (Google)" <rostedt@goodmis.org> > > [ > This is
- a treewide change. I will likely re-create this patch again in > the [...]
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview: commit 245930617c9b ("f2fs: fix to handle error paths of {new,
+ change}_curseg()") missed this allocated path,
+ fix it. Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+ --- fs/f2fs/segment.c | 4 +++- 1 file changed, 3 insertions(+), 1 deletion(-)
+ Content analysis details:   (-5.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: suse.de]
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [195.135.223.130 listed in list.dnswl.org]
+ high trust [222.66.158.135 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
-X-Headers-End: 1s7uEU-0003E1-Mv
-Subject: Re: [f2fs-dev] [PATCH] tracing/treewide: Remove second parameter of
- __assign_str()
+X-Headers-End: 1s7vkk-0005bn-Nf
+Subject: [f2fs-dev] [PATCH] f2fs: fix to check return value of
+ f2fs_allocate_new_section
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -154,93 +91,39 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-hyperv@vger.kernel.org, linux-usb@vger.kernel.org,
- kvm@vger.kernel.org, dri-devel@lists.freedesktop.org,
- brcm80211@lists.linux.dev, ath10k@lists.infradead.org,
- Julia Lawall <Julia.Lawall@inria.fr>, linux-s390@vger.kernel.org,
- dev@openvswitch.org, linux-cifs@vger.kernel.org, linux-rdma@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, io-uring@vger.kernel.org,
- linux-bcachefs@vger.kernel.org, iommu@lists.linux.dev,
- ath11k@lists.infradead.org, linux-media@vger.kernel.org,
- linux-wpan@vger.kernel.org, linux-pm@vger.kernel.org, selinux@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- linux-erofs@lists.ozlabs.org, virtualization@lists.linux.dev,
- linux-sound@vger.kernel.org, linux-block@vger.kernel.org,
- ocfs2-devel@lists.linux.dev,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, linux-cxl@vger.kernel.org,
- linux-tegra@vger.kernel.org, intel-xe@lists.freedesktop.org,
- linux-edac@vger.kernel.org, linux-hwmon@vger.kernel.org,
- brcm80211-dev-list.pdl@broadcom.com,
- Linus Torvalds <torvalds@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
- linux-wireless@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- ath12k@lists.infradead.org, tipc-discussion@lists.sourceforge.net,
- Masami Hiramatsu <mhiramat@kernel.org>, netdev@vger.kernel.org,
- bpf@vger.kernel.org, Linux trace kernel <linux-trace-kernel@vger.kernel.org>,
- freedreno@lists.freedesktop.org, linux-nfs@vger.kernel.org,
- linux-btrfs@vger.kernel.org
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, zhiguo.niu@unisoc.com,
+ Hao_hao.Wang@unisoc.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, 16 May 2024 19:34:54 +0200,
-Steven Rostedt wrote:
-> 
-> From: "Steven Rostedt (Google)" <rostedt@goodmis.org>
-> 
-> [
->    This is a treewide change. I will likely re-create this patch again in
->    the second week of the merge window of v6.10 and submit it then. Hoping
->    to keep the conflicts that it will cause to a minimum.
-> ]
-> 
-> With the rework of how the __string() handles dynamic strings where it
-> saves off the source string in field in the helper structure[1], the
-> assignment of that value to the trace event field is stored in the helper
-> value and does not need to be passed in again.
-> 
-> This means that with:
-> 
->   __string(field, mystring)
-> 
-> Which use to be assigned with __assign_str(field, mystring), no longer
-> needs the second parameter and it is unused. With this, __assign_str()
-> will now only get a single parameter.
-> 
-> There's over 700 users of __assign_str() and because coccinelle does not
-> handle the TRACE_EVENT() macro I ended up using the following sed script:
-> 
->   git grep -l __assign_str | while read a ; do
->       sed -e 's/\(__assign_str([^,]*[^ ,]\) *,[^;]*/\1)/' $a > /tmp/test-file;
->       mv /tmp/test-file $a;
->   done
-> 
-> I then searched for __assign_str() that did not end with ';' as those
-> were multi line assignments that the sed script above would fail to catch.
-> 
-> Note, the same updates will need to be done for:
-> 
->   __assign_str_len()
->   __assign_rel_str()
->   __assign_rel_str_len()
-> 
-> I tested this with both an allmodconfig and an allyesconfig (build only for both).
-> 
-> [1] https://lore.kernel.org/linux-trace-kernel/20240222211442.634192653@goodmis.org/
-> 
-> Cc: Masami Hiramatsu <mhiramat@kernel.org>
-> Cc: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
-> Cc: Linus Torvalds <torvalds@linux-foundation.org>
-> Cc: Julia Lawall <Julia.Lawall@inria.fr>
-> Signed-off-by: Steven Rostedt (Google) <rostedt@goodmis.org>
+commit 245930617c9b ("f2fs: fix to handle error paths of {new,change}_curseg()")
+missed this allocated path, fix it.
 
-For the sound part
-Acked-by: Takashi Iwai <tiwai@suse.de>
+Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+---
+ fs/f2fs/segment.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index a0ce3d0..71dc8042 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -5190,7 +5190,9 @@ static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
+ 	if (cs->next_blkoff) {
+ 		unsigned int old_segno = cs->segno, old_blkoff = cs->next_blkoff;
+ 
+-		f2fs_allocate_new_section(sbi, type, true);
++		err = f2fs_allocate_new_section(sbi, type, true);
++		if (err)
++			return err;
+ 		f2fs_notice(sbi, "Assign new section to curseg[%d]: "
+ 				"[0x%x,0x%x] -> [0x%x,0x%x]",
+ 				type, old_segno, old_blkoff,
+-- 
+1.9.1
 
-thanks,
-
-Takashi
 
 
 _______________________________________________
