@@ -2,85 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C9E58CA3DB
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 May 2024 23:42:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB8E98CA451
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 May 2024 00:02:36 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s9Am4-0001lt-R3;
-	Mon, 20 May 2024 21:42:29 +0000
+	id 1s9B5Q-0003lx-7X;
+	Mon, 20 May 2024 22:02:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1s9Aly-0001lQ-8N
+ (envelope-from <jaegeuk@kernel.org>) id 1s9B5O-0003le-Bw
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 May 2024 21:42:22 +0000
+ Mon, 20 May 2024 22:02:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oV+EZE6BOSm7W/204sMlEB7zawNydnr08nGsCNsQH8I=; b=PvXTk8Z38pBAo4M6Kd2L8tBXgm
- O5ZlCGoQAfVaFyZGJacuhf789j80zPF4ErHMiK2DogD3784v93zRBBatWOBWa+ybcca2kO4e1IQw+
- sA1AYSx/3VTH/oCMJDpYvBZmFLyQ7M+6MXIF1Cd3KBH3PQBBFDZkYyC+LaFBX9mfIxoE=;
+ bh=bqbadoSbaS5Arq2o03HvYKeti99z932oYNcW+kSfXhM=; b=SNFLFnmbkvBE2P7wesUtppeTmD
+ d0HF7kPf1mZlwVDq0CL959RmdIY7dY0uHxzPHqc+JFzZD8Mol4DUA1JsRGNald03VYanUiad49Qn2
+ YntSNQfXovPoT1U/sTpRBCFOsARoZNknir+rxVpGu1Qn8axCmmtVPoIXaU1v0wMJ2sbY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=oV+EZE6BOSm7W/204sMlEB7zawNydnr08nGsCNsQH8I=; b=F/Z0Yr1/N8EewvtpGKu/IoJGp4
- oOBg5UrN0y0470r3Fcm9Ev4TM/U0lqwHT47Cm+GYq1xvkZVRu+1ouh/3YZ82uLj2yr2gOOGC/BJFW
- Wqx73y1bYQLUw7xuX71LPRfOxGrIVJE/kx40HZTFJMkFc+tJcskRrOGs60CwwRz26s/g=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=bqbadoSbaS5Arq2o03HvYKeti99z932oYNcW+kSfXhM=; b=M
+ UnWvWhv8mTPsQNvHPORIe9WaD3phenv5suf75VOUqbm9MLUAcZVN6MxAi4IU9+xe8MRy62TWaSmuc
+ on6P9gcch+N5R8dyGx2qVGn873MEjmDj9cLHFnJQ27rHFDtADJ1eg5aHUIqJHoeELFWd6QoIhC0tC
+ 2nzAA3TMG2VyZx/M=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1s9Aly-0007Lj-NU for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 May 2024 21:42:22 +0000
+ id 1s9B5O-0000MK-1l for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 May 2024 22:02:26 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 990F66140D
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 20 May 2024 21:42:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4A28EC2BD10
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 20 May 2024 21:42:11 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 82DC5CE0B6C;
+ Mon, 20 May 2024 22:02:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99924C2BD10;
+ Mon, 20 May 2024 22:02:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1716241331;
- bh=oV+EZE6BOSm7W/204sMlEB7zawNydnr08nGsCNsQH8I=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=Bi1m5JaFMBM0B3O2BhkuCDaODWhuclU5ndXlBsgkv3r6GsWnEP35AXvdfM6m8vUV6
- wj1h/TZZ+MfzXCwoCWcZD1zgQeM6l4s1VOe/tevkJgO8Po51NlAkV0mF5gaJGnTcZa
- EXdOfglglJsWPY9TY13u8PPNh2pfoanCVlQjPJwrnLzt3qd/xBWZs8tM73mTShXl0q
- LR07BoMfP4HhSVIgggzLRRX7jiT1jQ4qgAI+znRG7pQDO8t+WwhWwLVWP6Ig98boLB
- w67UzK8akc7VbN1x1f3ZlYLzjg1tousgr+Q/5/ssF4/N0y7WFA6lyQxAauEPUK63jZ
- YJi/olYmN0yGQ==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 2C8B0C53B7F; Mon, 20 May 2024 21:42:11 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 20 May 2024 21:42:11 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: guido.iodice@gmail.com
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: CODE_FIX
-X-Bugzilla-Priority: P3
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-218770-202145-67zp5nkpFj@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-218770-202145@https.bugzilla.kernel.org/>
-References: <bug-218770-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1716242532;
+ bh=21RrcQOivTABjQKWwifC+gMgj6SJitH/D2oLeL+047o=;
+ h=From:To:Cc:Subject:Date:From;
+ b=E7BJwLXtBm3l3i/ysAd/mgSuOZ2KG99RwmVaAqFvZoonBAWP3/HEtHlkFltkDttWg
+ RvlUkG3RlQpdawS8mhCNKZJEpwHbYuX3kknEprUNpM3SlzEFZz0h2A9ayqcy4W+gcZ
+ mKfZO+EULrrJqHfjph1aclsle92Mkb8r1CK41kchvu1bOAQPtSAN4AxnO/eweI0MGX
+ nh7HzfI02GVlc5v/gzjP3COxLvXYSaeL25Q7nDuenOxkXRzElMvO6qUXexRESUlylt
+ iE8x2COs31XERQ7QPVDJkV8xwh9mi+W6NA6CiofmCu8bqlHwQ0s6aEy6GZ6ZRQdWm0
+ VSmJ6mDUskTYA==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Date: Mon, 20 May 2024 22:02:08 +0000
+Message-ID: <20240520220208.1596727-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.45.0.rc1.225.g2a3ae87e7f-goog
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -89,18 +68,19 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=218770 ---
- Comment
- #12 from Guido (guido.iodice@gmail.com) --- (In reply to Jaegeuk Kim from
- comment #11) > The patch is in the next pull request. >
- https://patchwork.kernel.org/project/f2fs/patch/ZkumXs7POG
- [...] Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  f2fs_ra_meta_pages can try to read ahead on invalid block
+ address which is not the corruption case. Cc: <stable@kernel.org> # v6.9+
+ Bugzilla: https://bugzilla.kernel.org/show_bug.cgi?id=218770 Fixes:
+ 31f85ccc84b8
+ ("f2fs: unify the error handling of f2fs_is_valid_blkaddr") Reviewed-by:
+ Chao Yu <chao@ [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
  DNSWL was blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [139.178.84.217 listed in list.dnswl.org]
+ for more information. [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -110,8 +90,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1s9Aly-0007Lj-NU
-Subject: [f2fs-dev] [Bug 218770] fsck seems unable to solve corruption
+X-Headers-End: 1s9B5O-0000MK-1l
+Subject: [f2fs-dev] [PATCH] f2fs: fix false alarm on invalid block address
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,26 +103,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, stable@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=218770
+f2fs_ra_meta_pages can try to read ahead on invalid block address which is
+not the corruption case.
 
---- Comment #12 from Guido (guido.iodice@gmail.com) ---
-(In reply to Jaegeuk Kim from comment #11)
-> The patch is in the next pull request.
-> https://patchwork.kernel.org/project/f2fs/patch/ZkumXs7POGImbr-k@google.com/
-> 
-> Once Linus pulled it, I can ask Greg to queue it in -stable.
+Cc: <stable@kernel.org> # v6.9+
+Bugzilla: https://bugzilla.kernel.org/show_bug.cgi?id=218770
+Fixes: 31f85ccc84b8 ("f2fs: unify the error handling of f2fs_is_valid_blkaddr")
+Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/checkpoint.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-Thank you!
-
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 5d05a413f451..55d444bec5c0 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -179,22 +179,22 @@ static bool __f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+ 		break;
+ 	case META_SIT:
+ 		if (unlikely(blkaddr >= SIT_BLK_CNT(sbi)))
+-			goto err;
++			goto check_only;
+ 		break;
+ 	case META_SSA:
+ 		if (unlikely(blkaddr >= MAIN_BLKADDR(sbi) ||
+ 			blkaddr < SM_I(sbi)->ssa_blkaddr))
+-			goto err;
++			goto check_only;
+ 		break;
+ 	case META_CP:
+ 		if (unlikely(blkaddr >= SIT_I(sbi)->sit_base_addr ||
+ 			blkaddr < __start_cp_addr(sbi)))
+-			goto err;
++			goto check_only;
+ 		break;
+ 	case META_POR:
+ 		if (unlikely(blkaddr >= MAX_BLKADDR(sbi) ||
+ 			blkaddr < MAIN_BLKADDR(sbi)))
+-			goto err;
++			goto check_only;
+ 		break;
+ 	case DATA_GENERIC:
+ 	case DATA_GENERIC_ENHANCE:
+@@ -228,6 +228,7 @@ static bool __f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+ 	return true;
+ err:
+ 	f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
++check_only:
+ 	return false;
+ }
+ 
 -- 
-You may reply to this email to add a comment.
+2.45.0.rc1.225.g2a3ae87e7f-goog
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
