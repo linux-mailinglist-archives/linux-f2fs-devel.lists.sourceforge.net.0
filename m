@@ -2,115 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C3B38CA321
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 May 2024 22:09:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07A0C8CA34B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 May 2024 22:30:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s99Jb-000118-7b;
-	Mon, 20 May 2024 20:08:58 +0000
+	id 1s99eQ-0002yS-RM;
+	Mon, 20 May 2024 20:30:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1s99JZ-000111-R6
+ (envelope-from <pr-tracker-bot@kernel.org>) id 1s99eQ-0002yI-1T
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 May 2024 20:08:57 +0000
+ Mon, 20 May 2024 20:30:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
+ Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ixToW84LOVTDZtNFkxEgZ8H/GJe0jCsOGWRjJq/5P/U=; b=nQB14v4whr4Q9r6WwSDnEEijQI
- pC5UUmrsohz4kDss0NKC02UITW8TgBlcbbpcr9eCi/dUUEVLq57o/L65uJDFTYBWWBtXHIt7d/7Db
- 218ZuAkogrTqT8ofPF2jDw6UKANd6fJuR3Itr0ZZS9FvGszkWC573gkDhfud7KhdarYc=;
+ bh=g8ILL+ZtcVtw6Zd9V81duNKSDK4CB8qSYT1cFsUFQmU=; b=nI+BdpV6ht6V4vo2EGvU6AThor
+ qtjljMiJQ8CsI1Jp++TFF0zJbd8b6j01f6mLsU7OMAymTU4Ja/B1vt8/xcAAcRX3Dq1Q5v4uWG+pU
+ H5hfxTfdEacvgcVKi/ncT7jHA17BFXCSMojm/Oli3fdz0XMreF1vxSmEC3DDgcW0rFHU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ixToW84LOVTDZtNFkxEgZ8H/GJe0jCsOGWRjJq/5P/U=; b=G443Jcr3Mc5zwnS4umjO55INZY
- NBXul8tWPc3SktgCdnNjk0kOJidX+ys66XWV9cgPSd8yGvewIhPzRuelotIKvwPAnoYDWm6TH1aXx
- NN/+0W2FMw3vAUrV7jzmyN583N+3bo69Zd7pvOQL5tGniMNGtCrXo/OKzsoBjgF1YU0E=;
+ bh=g8ILL+ZtcVtw6Zd9V81duNKSDK4CB8qSYT1cFsUFQmU=; b=H4w0ybL1DE7HFlxAdRVHvRHlmM
+ Jjb9px+s6xRwrtmNJXQl85FfB4waiEs+68Cfl50bXH6VzehieA2DOS7dTnzp+ulijVGUQ24LJCqY9
+ pHyIY7gOEwBB9Eq41lohWRuBbYEYbs4Tjz8LHV+Czr9qpY9Dx/Mt8dtFgYTrOR4MWSJM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1s99JZ-0002HU-Dh for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 May 2024 20:08:57 +0000
+ id 1s99eQ-0003Jj-Fi for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 May 2024 20:30:30 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4C45861E48
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 20 May 2024 20:08:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 013A2C2BD10
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 20 May 2024 20:08:45 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 5F23961E5B;
+ Mon, 20 May 2024 20:30:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 0B4BDC2BD10;
+ Mon, 20 May 2024 20:30:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1716235726;
- bh=ixToW84LOVTDZtNFkxEgZ8H/GJe0jCsOGWRjJq/5P/U=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=VjiVYKO5tFM5AFUNMyUGEZMr6cMEs6dzoqM21FGIBHcjTBNPGa91u+4blF6iTIvIU
- XQcq9wxzTVctuHJeP61ToWm8pPduOGWK6mdeTyeyIEyY7iIWO8TECJa5PnbWSrzEVE
- V9Px8in6jUcElOiG8GG2Itdlfq/ILrqhzQYeeqnraszxj4AeWqHWuxvua8jrzOp5FS
- SXZWYYi+brG4XOXckpswqtnR6n96LZq6OzZHASJdjNcTypZ15NLLjjOViL4kszeOif
- yQdeNltb1yFpM5FSHP87AXHXdzGyXKh+JQWjaXElzEgcz4DpSM3pb7UbjlDFZq26Al
- tkvCNgZvlS0fA==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id DD3BEC53B7F; Mon, 20 May 2024 20:08:45 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 20 May 2024 20:08:45 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: jaegeuk@kernel.org
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: CODE_FIX
-X-Bugzilla-Priority: P3
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-218770-202145-U4j5Cb4Upi@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-218770-202145@https.bugzilla.kernel.org/>
-References: <bug-218770-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
-MIME-Version: 1.0
+ s=k20201202; t=1716237019;
+ bh=LXSUUECeY4XGsL7QYyf+TXUuVGBlieNNwYUMtHidaqE=;
+ h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
+ b=OTb+EUbAbXv9bhBO4rBXIP7Cx+DlLSsv3bcc0BuFmCPtCVxlCHbwxP5iOl7qUtz9N
+ HDumJOrV7UM6ZFsUurMdEO5ZbxPSierzoDds6ShQtdOT5Of88+NZP8D8d5mN6tACbm
+ ZE/eosaEWWgfNNc5z10D3YPAPDAGxofvX4DwnLm6Lt3Wo5ssGiTyND0BuUQa1JO61q
+ QLB5bAAi8RAiHaPQECx4xEc/PIefs6itzXkaRo6ZgwPy4gw7w9/flLL2ZW2uZ/AS2u
+ RqbPNUpmYZsr7Xt9Ala9Pcx0iBzUPYZmkiNa2dMw+vDDfhIhT3QqZ8Hahur0Tai64o
+ Cb+U0Pz9Erg3Q==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ EB91CC54BDA; Mon, 20 May 2024 20:30:18 +0000 (UTC)
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <ZkumXs7POGImbr-k@google.com>
+References: <ZkumXs7POGImbr-k@google.com>
+X-PR-Tracked-List-Id: <linux-f2fs-devel.lists.sourceforge.net>
+X-PR-Tracked-Message-Id: <ZkumXs7POGImbr-k@google.com>
+X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ tags/f2fs-for-6.10.rc1
+X-PR-Tracked-Commit-Id: 16409fdbb8828d7ae829bc4ac4e09e7ff02f8878
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 72ece20127a366518d91c5ab8e9dd8bf7d7fdb2f
+Message-Id: <171623701895.8142.8608336086340569971.pr-tracker-bot@kernel.org>
+Date: Mon, 20 May 2024 20:30:18 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=218770 ---
- Comment
- #11 from Jaegeuk Kim (jaegeuk@kernel.org) --- The patch is in the next pull
- request.
- https://patchwork.kernel.org/project/f2fs/patch/ZkumXs7POGImbr-k@google.com/
+ Content preview:  The pull request you sent on Mon, 20 May 2024 19:37:02 +0000:
+ > git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ tags/f2fs-for-6.10.rc1 has been merged into torvalds/linux.git:
+ https://git.kernel.org/torvalds/c/72ece20127a366518d91c5ab8e9dd8bf7d7fdb2f
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1s99JZ-0002HU-Dh
-Subject: [f2fs-dev] [Bug 218770] fsck seems unable to solve corruption
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1s99eQ-0003Jj-Fi
+Subject: Re: [f2fs-dev] [GIT PULL] f2fs update for 6.10-rc1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,23 +110,27 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=218770
+The pull request you sent on Mon, 20 May 2024 19:37:02 +0000:
 
---- Comment #11 from Jaegeuk Kim (jaegeuk@kernel.org) ---
-The patch is in the next pull request.
-https://patchwork.kernel.org/project/f2fs/patch/ZkumXs7POGImbr-k@google.com/
+> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-6.10.rc1
 
-Once Linus pulled it, I can ask Greg to queue it in -stable.
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/72ece20127a366518d91c5ab8e9dd8bf7d7fdb2f
+
+Thank you!
 
 -- 
-You may reply to this email to add a comment.
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/prtracker.html
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
