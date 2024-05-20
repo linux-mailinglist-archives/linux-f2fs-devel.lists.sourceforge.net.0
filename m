@@ -2,76 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE72D8C9498
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 19 May 2024 14:10:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CDB08C97A2
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 May 2024 03:22:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s8fMv-0001A7-Gx;
-	Sun, 19 May 2024 12:10:25 +0000
+	id 1s8rix-00040k-FY;
+	Mon, 20 May 2024 01:21:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sales@keystrokesmt.com>) id 1s8fMt-0001A0-TX
+ (envelope-from <chao@kernel.org>) id 1s8riw-00040e-8l
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 19 May 2024 12:10:24 +0000
+ Mon, 20 May 2024 01:21:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:Reply-To:Date:From:To:Subject:
- Content-Description:Content-Transfer-Encoding:MIME-Version:Content-Type:
- Sender:Cc:Content-ID:Resent-Date:Resent-From:Resent-Sender:Resent-To:
- Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=V66w0oHAwkL+IXhRI3NlQ8JpAr2fRpTNFtScpkjgXgE=; b=YEJ/j/n7JoC115kTTFXkMwvYt3
- 3AVFJ5CAZ+bhmnV3ZJ3Y6HgP9nWr2tXPTn6yUB5mGLIMUYHR+6bwP6P8ELY6Dzz6gUP1C8yD5xyvg
- CRr8Im6175jBDVkt57dr2i0kZd1vpqURtn72w3dk2R3eCmmquyl6qfRKfJQGsPcVg4RI=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=QYyUVDxrkaMGOdRuU1hEZdYTGfQzdZT66Qu5gjn9ubM=; b=UenF62afoY69f2SOU5FAiWxR/p
+ 3rEVNjFQmogWsNjL+Nhx6gpT6lcJZw8Ebs7/yDJEhB8SfByQZfRPKJE45vYeRRgDBm5N8B49yNLUA
+ oiXhLLLjJdvBGz8omTIWfE+d+imRczuEsMGokpAaiZ4Q0XPkgEmt1IAQroBYDwu3nONc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-Id:Reply-To:Date:From:To:Subject:Content-Description:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Cc:Content-ID:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=V66w0oHAwkL+IXhRI3NlQ8JpAr2fRpTNFtScpkjgXgE=; b=QMPIvamA+HROBX/9CniYR9lBlq
- R3VdrF3/9JuwhdRcOX9/fgjweX4MRm0DWjM1vpD/3KTD0v0RMfIgKmr1NexmR5z6hrFG7AvrEp6Hj
- CIHRzIY3BgM6IRwTij9lwx9fYQ/1IlsWfa8f9shd5O4gNwQTC8v7Dv+liAS4T1B+NSzk=;
-Received: from ksimail.keystrokesmt.com ([204.248.56.69])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1s8fMu-0005TD-Bi for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 19 May 2024 12:10:24 +0000
-Received: from [74.50.82.199] [74.50.82.199] by keystrokesmt.com with ESMTP
- (SMTPD-12.5.3.99) id b4020002cef80aa1; Sun, 19 May 2024 06:28:10 -0500
+ bh=QYyUVDxrkaMGOdRuU1hEZdYTGfQzdZT66Qu5gjn9ubM=; b=HKNM09paJ13jEww26skGbG1Yny
+ ttCGHwXhFOGmdZCiGRkjCM0vd9S8+2EIqCYcoqUWjem5Bwb67R/HsdeRIcjG4PEkqZfWsVjNP1h2r
+ Mj18Xjeyi8m3md2IDEKObEaX9SRYFbhGZKS5umG/bTqc5B3gHhA5+FJIjCM/Uh9lWRuA=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1s8riv-0006vv-1d for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 May 2024 01:21:57 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 789C9CE0A3C;
+ Mon, 20 May 2024 01:21:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7043CC32781;
+ Mon, 20 May 2024 01:21:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1716168108;
+ bh=1T2Z5x0zGe9uatHo8ji3TKpgEnpy3/9ThyAAjOQIqRY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=s3EhMF77m4lsm1zrpEnIdk+10Pd2krVjCcRMmwjk6G/sYxM8KYR9J4rsy1UzB1pxL
+ EiwkgFMxsBzdX2c0FLKDGT0XyQDe6xxZtGEUZurPo5HPMged1Ka24M+6F/pC9TU2b6
+ OzgEwbFbCEHB4Q9ZbM3o/s51iZrpGwFLkLkl+yh+1uGqtR3cTLlXhq419HoTcS9ov9
+ V5AGUNzYf9JZUuEvM6EC6Oe52YLuJCE/wd9cjeekeuQXIveHAYPbvmQI2eZFUOVqwO
+ 9+ahZQ7lroAyVULGoJ11520NfajW7EDGQPNenagClmOanr8ulqfJWLZgsV2EpZjF4X
+ aHOjdGhdqQrKQ==
+Message-ID: <64a56504-a778-43d3-90a6-82f85be15b28@kernel.org>
+Date: Mon, 20 May 2024 09:21:43 +0800
 MIME-Version: 1.0
-Content-Description: Mail message body
-To: linux-f2fs-devel@lists.sourceforge.net
-From: "Agnes Jansson" <sales@keystrokesmt.com>
-Date: Sun, 19 May 2024 04:20:58 -0700
-Message-Id: <202405190628555.SM184056@[74.50.82.199]>
-X-Spam-Score: 2.8 (++)
+User-Agent: Mozilla Thunderbird
+To: Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
+References: <1715945202-30045-1-git-send-email-zhiguo.niu@unisoc.com>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <1715945202-30045-1-git-send-email-zhiguo.niu@unisoc.com>
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: I hope that you are at your best and doing well. The purpose
- of this letter is seeking for a pen pal like friendship and I'd love to and
- be honored to be friends with you if you do not mind.. If the I [...] 
- Content analysis details:   (2.8 points, 6.0 required)
+ Content preview:  On 2024/5/17 19:26, Zhiguo Niu wrote: > commit 245930617c9b
+ ("f2fs: fix to handle error paths of {new,change}_curseg()") > missed this
+ allocated path, fix it. > > Signed-off-by: Zhiguo Niu <zhiguo.niu [...] 
+ Content analysis details:   (-0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
- digit [janage2023[at]gmail.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [204.248.56.69 listed in wl.mailspike.net]
  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
  DNSWL was blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [204.248.56.69 listed in list.dnswl.org]
- 2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
-X-Headers-End: 1s8fMu-0005TD-Bi
-Subject: [f2fs-dev] HI
+ for more information. [145.40.73.55 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1s8riv-0006vv-1d
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to check return value of
+ f2fs_allocate_new_section
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,17 +104,21 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: janage2023@gmail.com
-Content-Type: text/plain; charset="us-ascii"
+Cc: Hao_hao.Wang@unisoc.com, ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-I hope that you are at your best and doing well. The purpose of this letter is seeking for a pen pal like friendship and I'd love to and be honored to be friends with you if you do not mind.. If the Idea sounds OK with you, just say yes and we can take it on from there. I look forward tohear hearing from you.. My name is Agnes Jansson From Sweden 36 years , this will mean a lot to me to hear back from you.
+On 2024/5/17 19:26, Zhiguo Niu wrote:
+> commit 245930617c9b ("f2fs: fix to handle error paths of {new,change}_curseg()")
+> missed this allocated path, fix it.
+> 
+> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
 
-Warm Regards.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-Agnes
-
+Thanks,
 
 
 _______________________________________________
