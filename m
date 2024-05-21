@@ -2,114 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B0288CB326
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 May 2024 19:59:25 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA0F18CB505
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 May 2024 23:02:15 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1s9TlZ-0007v7-6t;
-	Tue, 21 May 2024 17:59:13 +0000
+	id 1s9WcZ-0005Am-6Y;
+	Tue, 21 May 2024 21:02:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ryncsn@gmail.com>) id 1s9TlX-0007v1-JP
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1s9WcY-0005Ad-21
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 May 2024 17:59:12 +0000
+ Tue, 21 May 2024 21:02:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Reply-To:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Content-Type
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=R7lhdO5v0hVN0l2qTLtMelKVtmq+aBFR854K3Ld5uQo=; b=PopDquZH/QzwFguAuxHdeLYEjP
- 6A1XFWYIA1DKy8ZS6VKtXdh2ohP1C5rnsqGmLsqv2EQNExetNoptUpfQETihqgB4/J+hoZLo7SfPt
- XVs1LH2RAz6zpAZ5SPvhC5vfXlAtF789uSFOVlhsir343NE2KVfbcqMAJFMO40lxNMpo=;
+ bh=kRCc+7QG6/rEzQfQBJ5W1YrNnxTqwi1EncCSbiCpyck=; b=BXOieSKEKsAb+kpTBtUov6fpGc
+ j9AMa7SqXaGIM2RJvATdvqTlmB9v2EefyKm8e8wO/Pjbf4MWw/7sZjywvqPw3Vcnpey9Dl8fTCQtp
+ 3sghkFtiEEcMhn8lBzyR23swSV10uoG5ZokYhu88PNa8+JN6x0IkhfuWCaWlLAZGG/5c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Reply-To:References:In-Reply-To:
- Message-ID:Date:Subject:Cc:To:From:Sender:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=R7lhdO5v0hVN0l2qTLtMelKVtmq+aBFR854K3Ld5uQo=; b=ektiRFd8AKYwi3YAjMTc+WVE87
- cMASMxYmF2Q6uBPJ6p4n8XxW8Ajt+SUe37zV1K3plnHYwykYnupEKhSmT9lO5tHvblFm+DJXe7spt
- ZveBxDmLuJfk9itlAuKo5zkbe6PYPOPZqJFLG6jkwjHsWoEsgHc1ELkGk2cxImugJBMo=;
-Received: from mail-pf1-f171.google.com ([209.85.210.171])
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
+ Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=kRCc+7QG6/rEzQfQBJ5W1YrNnxTqwi1EncCSbiCpyck=; b=B
+ hM6IRaXK8epk1UdZKaspa9hJVVOsUhZmnB5QKV/ddAyfB/XB8cUyzAV9xjKg29uybT5BieXergV3r
+ oqc5u+ztZIHokZVrkNKiZKi8u5yDOkzI0kyJ5eAEXzTk+8Gg/q/PKAew+cvTwvysbYRIskyddi6Lh
+ seeHDzbFQNNzdqHE=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1s9TlY-0004JS-4g for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 May 2024 17:59:11 +0000
-Received: by mail-pf1-f171.google.com with SMTP id
- d2e1a72fcca58-6f4521ad6c0so594829b3a.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1s9WcW-0005vq-TD for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 21 May 2024 21:02:05 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 5F7A4CE10C5
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 21 May 2024 10:59:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716314346; x=1716919146; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:reply-to:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to;
- bh=R7lhdO5v0hVN0l2qTLtMelKVtmq+aBFR854K3Ld5uQo=;
- b=kEWTEc6fq1Xq0J6Xn+fZB9vgeiQ4V18gSLm5ciQdzdLD3NCQrrBymgJls6c6llq1+E
- 9FYmnUHr1Q1LSCAMHdpx06xF0A+VHW5DoB5YhU+GDx+Ra2QoKLOnHT/VfouYHPuXZfdO
- VM9syPlVHHJkaM0584S1sY3CXrzRMlJYUrJqLU8hXuWqDNTZyiHqx1Gffa7l1vRKB4PK
- 8MgRchNDxQ1XAEmxr/6MIaYDrU2QuPzFWQ5OeeZXQv0gv/C/HzpthL2w8vzIVTEHbUOC
- k42g1VJLhLY0q0emnTbV9GbE5JgsrTdDw1XmH166hZR5ZoQ4ogqDZLsn/tOUFtg+1MC7
- 5IWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716314346; x=1716919146;
- h=content-transfer-encoding:mime-version:reply-to:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=R7lhdO5v0hVN0l2qTLtMelKVtmq+aBFR854K3Ld5uQo=;
- b=KvnJDQ6oHUWl2s8tJzsEBSICS7Qdqvy9FQ7kVgRMGCIfTbtEsdzpBFVZviaqxBv+0X
- 90NKrinQiSikaLRNNfgbQEfDHcZ3jYWGu819RcInsgfDJSu0JQVDdRBq3kt76hCg9D2v
- qNw/etRhYx2A79ufwaJJXreUjFDDrMCJUB9l/I4rS475tuVIslDAjqu+/55cCG+3jV65
- RNPdNzPWibKSIDWl831SlNY406tc413DJ11GibhVWCJuEar0xrYTAh5350tm9ZU3E3pb
- FHqeh1OpO32gOaCOcygzUUoefZatluQ4dwO2uRFDsg86/sKmSeMvvqrqq+DTnNBU1vjM
- 0sTw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVu00vh/83FH3YvDMHp7SeNibuBuhVK4+KChbNaQg5l7X3a51+GoOIx21OwzOURbEN4Y4W+N50++Fa71WSmF+yYKiNlEevImUETXeNJGTSseXCYdBqS7w==
-X-Gm-Message-State: AOJu0Yy52jfo8VsREDjGq0KEF2QRmO5za4+Bly7dyFMNBDSYrOKML4wp
- oUCuN1L4Q9nGWfxaeIrW+fKCUJrt7iFNqBTXwInWZ0SR0K0SCVbq
-X-Google-Smtp-Source: AGHT+IEPpozMM0L+20HNGIEKpe29SmAQZrslVrxqPFNwn5ThpFi4hMV2N2JdR99RXw3BFqLPSnJwLg==
-X-Received: by 2002:a17:903:245:b0:1e4:4ade:f504 with SMTP id
- d9443c01a7336-1ef44161e45mr347769925ad.46.1716314345665; 
- Tue, 21 May 2024 10:59:05 -0700 (PDT)
-Received: from localhost.localdomain ([101.32.222.185])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f2fcdf87besm44646935ad.105.2024.05.21.10.59.01
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 21 May 2024 10:59:05 -0700 (PDT)
-From: Kairui Song <ryncsn@gmail.com>
-To: linux-mm@kvack.org
-Date: Wed, 22 May 2024 01:58:43 +0800
-Message-ID: <20240521175854.96038-2-ryncsn@gmail.com>
-X-Mailer: git-send-email 2.45.0
-In-Reply-To: <20240521175854.96038-1-ryncsn@gmail.com>
-References: <20240521175854.96038-1-ryncsn@gmail.com>
+ Tue, 21 May 2024 21:01:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A23E9C32782
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 21 May 2024 21:01:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1716325311;
+ bh=U+RuMmEUT2tzgY5giAsfugphKbe1TwOZI7f+8rNW2JI=;
+ h=From:To:Subject:Date:From;
+ b=i8Mrn3RQqLRVDzYXYPf8SWUgPo6OLPJunGy3u6eEz6So9ovsQz/4aQY2pX12D8wqZ
+ JgdH/ruu1PCg66MoM9wele8GYw5HaXq+Z6aJKsejfQ1f7RN1+e9kx2BMJ6MD8LjaMJ
+ YZU0Vg8xu3rUofeuOMMc+XmMqgxLjdelpvfJekKnv3JXp/RpgP6qL02I7sCJeybx2s
+ OrRe+a1B7/okuvo5Bj7h4Gn9O04CstmpgI+6R4/iRoXG4NLfVcWqPqBjmqFD0jSmII
+ 3ezYolOntXpo3xVLCsJRy7R5u/JusMzopfVaaFhbQmZWClhrgJfFhSPcdcN1KuRLzm
+ NY+tRuekCW7LA==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 8AC99C53B50; Tue, 21 May 2024 21:01:51 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 21 May 2024 21:01:51 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: patrik.plihal@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P3
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ cf_regression
+Message-ID: <bug-218870-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Kairui Song <kasong@tencent.com> page_index is needed
- for mixed usage of page cache and swap cache, for pure page cache usage,
- the caller can just use page->index instead. It can't be a swap cache page
- here, so just drop it. 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=218870 Bug ID:
+ 218870 Summary: F2FS mount/unmount results in invalid_blkaddr Product: File
+ System Version: 2.5 Hardware: All OS: Linux Status: NEW Severity: normal
+ Priority: P3 Component: f2fs Assignee: fil [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [209.85.210.171 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [ryncsn[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.210.171 listed in wl.mailspike.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -117,8 +105,16 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1s9TlY-0004JS-4g
-Subject: [f2fs-dev] [PATCH v6 01/11] f2fs: drop usage of page_index
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: archlinux.org]
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1s9WcW-0005vq-TD
+Subject: [f2fs-dev] [Bug 218870] New: F2FS mount/unmount results in
+ invalid_blkaddr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -130,54 +126,56 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: Kairui Song <kasong@tencent.com>
-Cc: Kairui Song <kasong@tencent.com>, Ryan Roberts <ryan.roberts@arm.com>,
- Chris Li <chrisl@kernel.org>, Neil Brown <neilb@suse.de>,
- David Hildenbrand <david@redhat.com>, Hugh Dickins <hughd@google.com>,
- linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, Yosry Ahmed <yosryahmed@google.com>,
- Minchan Kim <minchan@kernel.org>, Barry Song <v-songbaohua@oppo.com>, "Huang,
- Ying" <ying.huang@intel.com>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, Andrew Morton <akpm@linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Kairui Song <kasong@tencent.com>
+https://bugzilla.kernel.org/show_bug.cgi?id=218870
 
-page_index is needed for mixed usage of page cache and swap cache,
-for pure page cache usage, the caller can just use page->index instead.
+            Bug ID: 218870
+           Summary: F2FS mount/unmount results in invalid_blkaddr
+           Product: File System
+           Version: 2.5
+          Hardware: All
+                OS: Linux
+            Status: NEW
+          Severity: normal
+          Priority: P3
+         Component: f2fs
+          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
+          Reporter: patrik.plihal@gmail.com
+        Regression: No
 
-It can't be a swap cache page here, so just drop it.
+At least 3 people hit an issue with f2fs mount taking a long time (due to
+fsck).
 
-[ This commit will not be needed once f2fs converted
-  f2fs_mpage_readpages() to use folio]
+In 2 cases it's is the boot partition which delays boot time, in my case it
+simply delays a mount.
 
-Signed-off-by: Kairui Song <kasong@tencent.com>
-Cc: Chao Yu <chao@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net
----
- fs/f2fs/data.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 961e6ff77c72..c0e1459702e6 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2057,7 +2057,7 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
- 	sector_t block_nr;
- 	int ret = 0;
- 
--	block_in_file = (sector_t)page_index(page);
-+	block_in_file = (sector_t)page->index;
- 	last_block = block_in_file + nr_pages;
- 	last_block_in_file = bytes_to_blks(inode,
- 			f2fs_readpage_limit(inode) + blocksize - 1);
+I prepared a example to reproduce the invalid_blkaddr (and which I presume is
+the root cause for the long-mount/fsck)
+
+  1. dd if=/dev/zero of=test.img count=100 bs=1M
+  2. mkfs.f2fs -f ./test.img
+  3. fsck.f2fs test.img  | grep errors # nothing
+  4. mount -t f2fs ./test.img ./mnt
+  5. umount ./test.img
+  6. fsck.f2fs test.img  | grep errors 
+    # Info: fs errors: invalid_blkaddr 
+
+
+my initial comment / analysis started here:
+https://bbs.archlinux.org/viewtopic.php?pid=2172855#p2172855
+
+Linux blackbox 6.9.1-arch1-1 #1 SMP PREEMPT_DYNAMIC Fri, 17 May 2024 16:56:38
++0000 x86_64 GNU/Linux
+
 -- 
-2.45.0
+You may reply to this email to add a comment.
 
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
