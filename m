@@ -2,64 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDC3C8D33B9
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 May 2024 11:52:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99A3A8D33CD
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 May 2024 11:57:52 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sCFz3-00017s-28;
-	Wed, 29 May 2024 09:52:36 +0000
+	id 1sCG42-0007t2-LX;
+	Wed, 29 May 2024 09:57:46 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1sCFz0-00017l-PZ
+ (envelope-from <chao@kernel.org>) id 1sCG41-0007sq-Cx
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 29 May 2024 09:52:34 +0000
+ Wed, 29 May 2024 09:57:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XbgN8dOmjWdjKL+IjJ1eXFwm95dyxq0d7IstDIlqzNY=; b=Wx4OuC/QgtgVP5PSit2iKJSFAA
- eXTG9J3oQSn856UiMFlrHnQyuLuTKPmhA5D5sQgjx+jOTJAe+11u98N9s+n48KEu7mpbMyQmDz3bZ
- 5gyMpFDCiWk8J/PYmEaTHVfP8+tVmXklB0YQcvyBxgH75MCdcGmSESl8XcgVR98y8kls=;
+ bh=4dULGHIJA2ySiW/+NDqhJaTVkfHHpiB74jz924iY4K0=; b=kQsyzFTAm6+zaZ0fKgF/fYpsUw
+ W9fR/YItzINAzUX1BvGQrCy3c61RQDjoFTDpeiBzysYCYBOXuhChTf4AV8IaU1KSNY7ThuJQ/2qIj
+ PAA7pshJvNu/7UPSChbhKX5BezTHMChb27RJxK20Js1Zndv1E64XJUKZighADZ9ugVso=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=XbgN8dOmjWdjKL+IjJ1eXFwm95dyxq0d7IstDIlqzNY=; b=E
- qXidRWxYY4zATcqH3MI2mUjJgehbJQverpY+5Thp7kZxUSj2vJnQd43Xy8oJBe09ZhPSZ7TsBikui
- qlFWzU/MxUpSN8dmhIlG2+9fyyXPgWJyuUE59JMkD9Vhjz2LWTE50ZZ+u2rDSDLL/aQ980pyRjgAT
- YSO7b2HgI4fxhk68=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=4dULGHIJA2ySiW/+NDqhJaTVkfHHpiB74jz924iY4K0=; b=B5e8Lu1DB+murGynE7gmeH1FYt
+ lqWY5E9ftKajIsvhc12AQsPaz6s4NCbbkBSN/qY16C/veEwrwK/99o7EZxtEBlf6Uzi6/5JGMwKSU
+ tQnbhd3g1hLAbWqaQfck9GfcgmkC5Eu4MYLAmZMFRjigprc72l21QPacrGZ/UeiE74Sk=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sCFyz-0007w2-JM for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 29 May 2024 09:52:34 +0000
+ id 1sCG41-0008ED-Rf for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 29 May 2024 09:57:45 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 79601626E5;
- Wed, 29 May 2024 09:52:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 499C8C2BD10;
- Wed, 29 May 2024 09:52:19 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id B9DB0626F8;
+ Wed, 29 May 2024 09:57:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE548C32786;
+ Wed, 29 May 2024 09:57:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1716976342;
- bh=JrVzi9t9nN2k3gm4A1Sjc6C5/DP/aCCwcBk5RcZ7FEA=;
- h=From:To:Cc:Subject:Date:From;
- b=p1COFIhqjJ4asDHG21pfERVJ9zWJwfenyf40Noe+DGze98xkg5OORjd2/E+jtXf4Z
- 7GxLU6+GAn7fceD1m+HPG9HkIQCjAnaOesYB8BHYHNgdiynaNOPDxKM9ndBmo6OSUc
- w6MKxG/Ti1ZPLgf+UQGwH/QWRjEwdM1LtN9A63wwVwFEQNufp0VNnUAm/Iz2eZLedf
- YYlEMe+2ayZ4ze4aSwSbyfpj1Jsi5OGDQju0yPscYoKawH0zfrhiCk7KTEI6cTCXAh
- kQOdF8jkGGQnKVFhGRwOicWSUHG9hMOuw1WbRNsPKxnMCaYdpc+pdeMJ0b2pVfAOHb
- Vl0M7bGNBa4OA==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Wed, 29 May 2024 17:52:11 +0800
-Message-Id: <20240529095211.323808-1-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
+ s=k20201202; t=1716976654;
+ bh=6XgEyPsEN2NFoJlrtqnjT0UAsnXAycD0xgXGpmhOtc0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=SVhPXxqkJ5iR85XHhjMyba0+veN+xlnvqZa+qCAzsIptXQyKKftc9Y65yuALp0f81
+ I63nHeQrHyNb8jqIgbfNtleyQHR3S2IT12R8N2cmJ34u2bve/jKSB/F1tjOu/6lPHU
+ 5zaI5Owq88NkMMTglLDHon/Ftk/8zaIetimTAL506CD6L8US8qAEoGTuMzxtPxyH7s
+ ZCYrOlnOrOM7MVwFjBFdiP+gVZQnOsED36Mt7GmZ7kk8ibouRzfHTzoXVlJaBKl/qx
+ lGSXtZbzWGd9Ma56jSnm1eN69DZeUqefSU3NKaIQxhxLR1n0lf/9amdjkYgT2TQV8H
+ Ns3vQOWIGQZCw==
+Message-ID: <19f53d36-0415-4b34-9b6b-e28ea19a44f0@kernel.org>
+Date: Wed, 29 May 2024 17:57:30 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
+References: <1716976020-28757-1-git-send-email-zhiguo.niu@unisoc.com>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <1716976020-28757-1-git-send-email-zhiguo.niu@unisoc.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -67,13 +70,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: syzbot reports a f2fs bug as below: BUG: KASAN:
- slab-use-after-free
- in sanity_check_extent_cache+0x370/0x410 fs/f2fs/extent_cache.c:46 Read of
- size 4 at addr ffff8880739ab220 by task syz-executor200/5097 
+ Content preview:  On 2024/5/29 17:47, Zhiguo Niu wrote: > SSR allocate mode
+ will be used when doing file defragment > if ATGC is working at the same time, 
+ that is because > set_page_private_gcing may make CURSEG_ALL_DA [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -84,8 +88,6 @@ X-Spam-Report: Spam detection software,
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [139.178.84.217 listed in sa-accredit.habeas.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
@@ -95,9 +97,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sCFyz-0007w2-JM
-Subject: [f2fs-dev] [PATCH] f2fs: fix to cover read extent cache access with
- lock
+X-Headers-End: 1sCG41-0008ED-Rf
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to avoid use SSR allocate when
+ do defragment
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,204 +111,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org,
- syzbot+74ebe2104433e9dc610d@syzkaller.appspotmail.com,
+Cc: Hao_hao.Wang@unisoc.com, ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-syzbot reports a f2fs bug as below:
+On 2024/5/29 17:47, Zhiguo Niu wrote:
+> SSR allocate mode will be used when doing file defragment
+> if ATGC is working at the same time, that is because
+> set_page_private_gcing may make CURSEG_ALL_DATA_ATGC segment
+> type got in f2fs_allocate_data_block when defragment page
+> is writeback, which may cause file fragmentation is worse.
+> 
+> A file with 2 fragmentations is changed as following after defragment:
+> 
+> ----------------file info-------------------
+> sensorsdata :
+> --------------------------------------------
+> dev       [254:48]
+> ino       [0x    3029 : 12329]
+> mode      [0x    81b0 : 33200]
+> nlink     [0x       1 : 1]
+> uid       [0x    27e6 : 10214]
+> gid       [0x    27e6 : 10214]
+> size      [0x  242000 : 2367488]
+> blksize   [0x    1000 : 4096]
+> blocks    [0x    1210 : 4624]
+> --------------------------------------------
+> 
+> file_pos   start_blk     end_blk        blks
+>         0    11361121    11361207          87
+>    356352    11361215    11361216           2
+>    364544    11361218    11361218           1
+>    368640    11361220    11361221           2
+>    376832    11361224    11361225           2
+>    385024    11361227    11361238          12
+>    434176    11361240    11361252          13
+>    487424    11361254    11361254           1
+>    491520    11361271    11361279           9
+>    528384     3681794     3681795           2
+>    536576     3681797     3681797           1
+>    540672     3681799     3681799           1
+>    544768     3681803     3681803           1
+>    548864     3681805     3681805           1
+>    552960     3681807     3681807           1
+>    557056     3681809     3681809           1
+> 
+> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
 
-BUG: KASAN: slab-use-after-free in sanity_check_extent_cache+0x370/0x410 fs/f2fs/extent_cache.c:46
-Read of size 4 at addr ffff8880739ab220 by task syz-executor200/5097
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-CPU: 0 PID: 5097 Comm: syz-executor200 Not tainted 6.9.0-rc6-syzkaller #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 03/27/2024
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:88 [inline]
- dump_stack_lvl+0x241/0x360 lib/dump_stack.c:114
- print_address_description mm/kasan/report.c:377 [inline]
- print_report+0x169/0x550 mm/kasan/report.c:488
- kasan_report+0x143/0x180 mm/kasan/report.c:601
- sanity_check_extent_cache+0x370/0x410 fs/f2fs/extent_cache.c:46
- do_read_inode fs/f2fs/inode.c:509 [inline]
- f2fs_iget+0x33e1/0x46e0 fs/f2fs/inode.c:560
- f2fs_nfs_get_inode+0x74/0x100 fs/f2fs/super.c:3237
- generic_fh_to_dentry+0x9f/0xf0 fs/libfs.c:1413
- exportfs_decode_fh_raw+0x152/0x5f0 fs/exportfs/expfs.c:444
- exportfs_decode_fh+0x3c/0x80 fs/exportfs/expfs.c:584
- do_handle_to_path fs/fhandle.c:155 [inline]
- handle_to_path fs/fhandle.c:210 [inline]
- do_handle_open+0x495/0x650 fs/fhandle.c:226
- do_syscall_x64 arch/x86/entry/common.c:52 [inline]
- do_syscall_64+0xf5/0x240 arch/x86/entry/common.c:83
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-
-We missed to cover sanity_check_extent_cache() w/ extent cache lock,
-so, below race case may happen, result in use after free issue.
-
-- f2fs_iget
- - do_read_inode
-  - f2fs_init_read_extent_tree
-  : add largest extent entry in to cache
-					- shrink
-					 - f2fs_shrink_read_extent_tree
-					  - __shrink_extent_tree
-					   - __detach_extent_node
-					   : drop largest extent entry
-  - sanity_check_extent_cache
-  : access et->largest w/ lock
-
-let's refactor sanity_check_extent_cache() to avoid extent cache access
-and call it before f2fs_init_read_extent_tree() to fix this issue.
-
-Reported-by: syzbot+74ebe2104433e9dc610d@syzkaller.appspotmail.com
-Closes: https://lore.kernel.org/linux-f2fs-devel/00000000000009beea061740a531@google.com
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/extent_cache.c | 48 +++++++++++++++++-------------------------
- fs/f2fs/f2fs.h         |  2 +-
- fs/f2fs/inode.c        | 10 ++++-----
- 3 files changed, 25 insertions(+), 35 deletions(-)
-
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index 48048fa36427..fd1fc06359ee 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -19,33 +19,23 @@
- #include "node.h"
- #include <trace/events/f2fs.h>
- 
--bool sanity_check_extent_cache(struct inode *inode)
-+bool sanity_check_extent_cache(struct inode *inode, struct page *ipage)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
--	struct f2fs_inode_info *fi = F2FS_I(inode);
--	struct extent_tree *et = fi->extent_tree[EX_READ];
--	struct extent_info *ei;
--
--	if (!et)
--		return true;
-+	struct f2fs_extent *i_ext = &F2FS_INODE(ipage)->i_ext;
-+	struct extent_info ei;
- 
--	ei = &et->largest;
--	if (!ei->len)
--		return true;
-+	get_read_extent_info(&ei, i_ext);
- 
--	/* Let's drop, if checkpoint got corrupted. */
--	if (is_set_ckpt_flags(sbi, CP_ERROR_FLAG)) {
--		ei->len = 0;
--		et->largest_updated = true;
-+	if (!ei.len)
- 		return true;
--	}
- 
--	if (!f2fs_is_valid_blkaddr(sbi, ei->blk, DATA_GENERIC_ENHANCE) ||
--	    !f2fs_is_valid_blkaddr(sbi, ei->blk + ei->len - 1,
-+	if (!f2fs_is_valid_blkaddr(sbi, ei.blk, DATA_GENERIC_ENHANCE) ||
-+	    !f2fs_is_valid_blkaddr(sbi, ei.blk + ei.len - 1,
- 					DATA_GENERIC_ENHANCE)) {
- 		f2fs_warn(sbi, "%s: inode (ino=%lx) extent info [%u, %u, %u] is incorrect, run fsck to fix",
- 			  __func__, inode->i_ino,
--			  ei->blk, ei->fofs, ei->len);
-+			  ei.blk, ei.fofs, ei.len);
- 		return false;
- 	}
- 	return true;
-@@ -394,24 +384,22 @@ void f2fs_init_read_extent_tree(struct inode *inode, struct page *ipage)
- 
- 	if (!__may_extent_tree(inode, EX_READ)) {
- 		/* drop largest read extent */
--		if (i_ext && i_ext->len) {
-+		if (i_ext->len) {
- 			f2fs_wait_on_page_writeback(ipage, NODE, true, true);
- 			i_ext->len = 0;
- 			set_page_dirty(ipage);
- 		}
--		goto out;
-+		set_inode_flag(inode, FI_NO_EXTENT);
-+		return;
- 	}
- 
- 	et = __grab_extent_tree(inode, EX_READ);
- 
--	if (!i_ext || !i_ext->len)
--		goto out;
--
- 	get_read_extent_info(&ei, i_ext);
- 
- 	write_lock(&et->lock);
--	if (atomic_read(&et->node_cnt))
--		goto unlock_out;
-+	if (atomic_read(&et->node_cnt) || !ei.len)
-+		goto skip;
- 
- 	en = __attach_extent_node(sbi, et, &ei, NULL,
- 				&et->root.rb_root.rb_node, true);
-@@ -423,11 +411,13 @@ void f2fs_init_read_extent_tree(struct inode *inode, struct page *ipage)
- 		list_add_tail(&en->list, &eti->extent_list);
- 		spin_unlock(&eti->extent_lock);
- 	}
--unlock_out:
-+skip:
-+	/* Let's drop, if checkpoint got corrupted. */
-+	if (f2fs_cp_error(sbi)) {
-+		et->largest.len = 0;
-+		et->largest_updated = true;
-+	}
- 	write_unlock(&et->lock);
--out:
--	if (!F2FS_I(inode)->extent_tree[EX_READ])
--		set_inode_flag(inode, FI_NO_EXTENT);
- }
- 
- void f2fs_init_age_extent_tree(struct inode *inode)
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 9118a4e2db6d..9688df332147 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4191,7 +4191,7 @@ void f2fs_leave_shrinker(struct f2fs_sb_info *sbi);
- /*
-  * extent_cache.c
-  */
--bool sanity_check_extent_cache(struct inode *inode);
-+bool sanity_check_extent_cache(struct inode *inode, struct page *ipage);
- void f2fs_init_extent_tree(struct inode *inode);
- void f2fs_drop_extent_tree(struct inode *inode);
- void f2fs_destroy_extent_node(struct inode *inode);
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 4b39aebd3c70..3a13f32b43a2 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -508,16 +508,16 @@ static int do_read_inode(struct inode *inode)
- 
- 	init_idisk_time(inode);
- 
--	/* Need all the flag bits */
--	f2fs_init_read_extent_tree(inode, node_page);
--	f2fs_init_age_extent_tree(inode);
--
--	if (!sanity_check_extent_cache(inode)) {
-+	if (!sanity_check_extent_cache(inode, node_page)) {
- 		f2fs_put_page(node_page, 1);
- 		f2fs_handle_error(sbi, ERROR_CORRUPTED_INODE);
- 		return -EFSCORRUPTED;
- 	}
- 
-+	/* Need all the flag bits */
-+	f2fs_init_read_extent_tree(inode, node_page);
-+	f2fs_init_age_extent_tree(inode);
-+
- 	f2fs_put_page(node_page, 1);
- 
- 	stat_inc_inline_xattr(inode);
--- 
-2.40.1
-
+Thanks,
 
 
 _______________________________________________
