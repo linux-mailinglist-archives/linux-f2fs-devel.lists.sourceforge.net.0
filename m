@@ -2,69 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 711048FC95C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jun 2024 12:49:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 003BB8FCAE1
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jun 2024 13:49:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sEoCf-0005Mj-FL;
-	Wed, 05 Jun 2024 10:49:14 +0000
+	id 1sEp9C-0007YZ-Qg;
+	Wed, 05 Jun 2024 11:49:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <eugen.hristev@collabora.com>) id 1sEoCd-0005MC-9u
+ (envelope-from <sashal@kernel.org>) id 1sEp9B-0007YM-7R
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Jun 2024 10:49:12 +0000
+ Wed, 05 Jun 2024 11:49:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Uidyc1DgMqTJeJdkLXlibeqhuJs2mN3qQeH5AV4lmpY=; b=IUQCzTueDLGXgD5/btc+s2iZ+B
- FGtorP5JfWs5tVZFZRVh3E6RInKcqkZdjotPDc41HPJXtGhHrid6p0s3sU/VkNPhv+7WN+G0s1l+6
- JHCYbfa7w2F05fWnsDOSA/cKi8t+3B+fDeAdQFZUoduIENLf1FvCg4Uy8UgK7qm/YtiQ=;
+ bh=GA3slw7kWtvld+OYaJ8ay7jfXpeXoUfx0sdJ1f3uDpU=; b=CcoF7s0OQ1ISWHPb8bFMIqvcdw
+ AhyOACPqt0OF9d7AJwK0xShmSWzLm/fzr0P9XyLsHD7mnZntaWFD6YD53FJJeGvfKMwGZnRv9jYM0
+ QQCXjDfKw9/+vRxuCHbHxqLaAn3TGAQD4ystoKwxV19hAMu+f8j6i0fFhPcwU2WEwCjw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Uidyc1DgMqTJeJdkLXlibeqhuJs2mN3qQeH5AV4lmpY=; b=PjRf0Lrcpp4WDnOU9M1790tpZD
- QJveTSxYyNiC6chC6+nemVgGqVyNA0bZNvN98Yv1ddCJVAFSg9ajNznH+H2JuwOi87i6kdDaUxI3x
- KXzCeKuXCRfVAu+UMPkL/3FVbYVU1DTWVp1lmG7M+Ing8KXOifmMXJklbMY8/10ZxpIo=;
-Received: from madrid.collaboradmins.com ([46.235.227.194])
+ bh=GA3slw7kWtvld+OYaJ8ay7jfXpeXoUfx0sdJ1f3uDpU=; b=kg328u0TqkJBc9FMfKDf+4bquo
+ zbX2M6l8ne+mjPxt7jHIJuh4o03hc4U3BtQeRSB7zYCGh03y/1Q3vYy6Rh7j+KBSB+fSOthdqsN8G
+ /NeTHbArKDeDJ5CIT3MMUE93RnhyAYCu37SB3nblmu4fNjau9e0kuPImj5xBKUhgMX7Y=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sEoCe-0004Jo-6F for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Jun 2024 10:49:12 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1717584540;
- bh=eSiAi6Lhsei8wwn034IBNlVxZz98AQlYvyQcTm/aRaQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=F0mNudOFfUPF1KXvZCSn0/j69uNCHETC1I9e0ikxSJCN7QoT+O66CUDBBUdYHS3FD
- kplcyk6oJdQdjAtqWfCC36hPvNDJxV43c9iZx50eDh4tmkcveQagw2NdexZaSHcWCH
- GiZP12DhU7dAAtHe28fdjNLoEuz8jjN1ZmGIWbdHVDRGtoL48F2JlRKDZe83GWO6Zv
- Nk3kKwbhM0niJr3UwsgMjRkrpilNR/CyAowKrqnX3E/9N/s9Q7e5OE3QPTVugkgDiP
- qmCTE5YnN1GNeo+QwHzug5MdDBuqXKFZMEnhp7EIg0Veu9cMc7uMMibMoL1F5ejZrZ
- 89BKQXWc7trFg==
-Received: from [100.90.194.27] (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 0F01F37806BA;
- Wed,  5 Jun 2024 10:48:58 +0000 (UTC)
-Message-ID: <690c503e-b5eb-4f0d-a7db-b23a5899f0fd@collabora.com>
-Date: Wed, 5 Jun 2024 13:48:58 +0300
+ id 1sEp9B-00089r-Kr for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 05 Jun 2024 11:49:41 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8733E6185C;
+ Wed,  5 Jun 2024 11:49:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89EE0C4AF07;
+ Wed,  5 Jun 2024 11:49:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1717588170;
+ bh=uPCGWMeOdnY4K7O2ka/QvfwHXB9VtLOgHdRbGb7d3jE=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=rgPBKgiEN7JPQE+zsi7S2hEqHcAIexlICgl02jXyem8/9EWEDD2DzeyHhKJZ9/veI
+ 7AkBc5p5Q3hsCBQcb8iddPX81z89CSKQ9oRxl1OtwE9eG30xainPJTaa0CO6QuJqiW
+ Y7/fgd4HsxZLxHDffkhPXFC6FS5SIW2rIP3kmFJokE+0bhaBhz70xFG90Kjdg7atEu
+ ekOSREN8hZXn5Tayro583kO9TjqMpzPdrcSfUF3tNJf6Qj6+n3Nx2GE2ppdEqURHMo
+ DH4tuy5yP2xP1pL+MZHf1STS0uZZ7KcPAOyJxI9tuVUUmz7SG2K5To8khRDKFqGUf3
+ Vb9Iotk1+AB5w==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Wed,  5 Jun 2024 07:48:31 -0400
+Message-ID: <20240605114927.2961639-2-sashal@kernel.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240605114927.2961639-1-sashal@kernel.org>
+References: <20240605114927.2961639-1-sashal@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Gabriel Krisman Bertazi <krisman@suse.de>
-References: <20240529082634.141286-1-eugen.hristev@collabora.com>
- <20240529082634.141286-5-eugen.hristev@collabora.com>
- <87cyowldpm.fsf@mailhost.krisman.be>
-Content-Language: en-US
-In-Reply-To: <87cyowldpm.fsf@mailhost.krisman.be>
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-stable-base: Linux 6.9.3
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,29 +73,28 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/4/24 22:17,
- Gabriel Krisman Bertazi wrote: > Eugen Hristev
- <eugen.hristev@collabora.com> writes: > >> From: Gabriel Krisman Bertazi
- <krisman@collabora.com> >> >> Instead of reimplementing ext4_ma [...] 
+ Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
+ 92c556ed6318e13c16746495a8d4513129eb9b0f
+ ] As Roman Smirnov reported as below: 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: entry.name]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [46.235.227.194 listed in sa-trusted.bondedsender.org]
+ [139.178.84.217 listed in sa-accredit.habeas.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [46.235.227.194 listed in bl.score.senderscore.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [139.178.84.217 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
@@ -103,9 +103,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sEoCe-0004Jo-6F
-Subject: Re: [f2fs-dev] [PATCH v17 4/7] ext4: Reuse generic_ci_match for ci
- comparisons
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sEp9B-00089r-Kr
+Subject: [f2fs-dev] [PATCH AUTOSEL 6.9 02/28] f2fs: fix to detect
+ inconsistent nat entry during truncation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,167 +118,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Eugen Hristev via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: brauner@kernel.org, kernel@collabora.com, tytso@mit.edu,
- ebiggers@google.com, jack@suse.cz, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, adilger.kernel@dilger.ca,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, Roman Smirnov <r.smirnov@omp.ru>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 6/4/24 22:17, Gabriel Krisman Bertazi wrote:
-> Eugen Hristev <eugen.hristev@collabora.com> writes:
-> 
->> From: Gabriel Krisman Bertazi <krisman@collabora.com>
->>
->> Instead of reimplementing ext4_match_ci, use the new libfs helper.
->>
->> It also adds a comment explaining why fname->cf_name.name must be
->> checked prior to the encryption hash optimization, because that tripped
->> me before.
->>
->> Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
->> Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
->> Reviewed-by: Eric Biggers <ebiggers@google.com>
->> ---
->>  fs/ext4/namei.c | 91 +++++++++++++++----------------------------------
->>  1 file changed, 27 insertions(+), 64 deletions(-)
->>
->> diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
->> index ec4c9bfc1057..20668741a23c 100644
->> --- a/fs/ext4/namei.c
->> +++ b/fs/ext4/namei.c
->> @@ -1390,58 +1390,6 @@ static void dx_insert_block(struct dx_frame *frame, u32 hash, ext4_lblk_t block)
->>  }
->>  
->>  #if IS_ENABLED(CONFIG_UNICODE)
->> -/*
->> - * Test whether a case-insensitive directory entry matches the filename
->> - * being searched for.  If quick is set, assume the name being looked up
->> - * is already in the casefolded form.
->> - *
->> - * Returns: 0 if the directory entry matches, more than 0 if it
->> - * doesn't match or less than zero on error.
->> - */
->> -static int ext4_ci_compare(const struct inode *parent, const struct qstr *name,
->> -			   u8 *de_name, size_t de_name_len, bool quick)
->> -{
->> -	const struct super_block *sb = parent->i_sb;
->> -	const struct unicode_map *um = sb->s_encoding;
->> -	struct fscrypt_str decrypted_name = FSTR_INIT(NULL, de_name_len);
->> -	struct qstr entry = QSTR_INIT(de_name, de_name_len);
->> -	int ret;
->> -
->> -	if (IS_ENCRYPTED(parent)) {
->> -		const struct fscrypt_str encrypted_name =
->> -				FSTR_INIT(de_name, de_name_len);
->> -
->> -		decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
->> -		if (!decrypted_name.name)
->> -			return -ENOMEM;
->> -		ret = fscrypt_fname_disk_to_usr(parent, 0, 0, &encrypted_name,
->> -						&decrypted_name);
->> -		if (ret < 0)
->> -			goto out;
->> -		entry.name = decrypted_name.name;
->> -		entry.len = decrypted_name.len;
->> -	}
->> -
->> -	if (quick)
->> -		ret = utf8_strncasecmp_folded(um, name, &entry);
->> -	else
->> -		ret = utf8_strncasecmp(um, name, &entry);
->> -	if (ret < 0) {
->> -		/* Handle invalid character sequence as either an error
->> -		 * or as an opaque byte sequence.
->> -		 */
->> -		if (sb_has_strict_encoding(sb))
->> -			ret = -EINVAL;
->> -		else if (name->len != entry.len)
->> -			ret = 1;
->> -		else
->> -			ret = !!memcmp(name->name, entry.name, entry.len);
->> -	}
->> -out:
->> -	kfree(decrypted_name.name);
->> -	return ret;
->> -}
->> -
->>  int ext4_fname_setup_ci_filename(struct inode *dir, const struct qstr *iname,
->>  				  struct ext4_filename *name)
->>  {
->> @@ -1503,20 +1451,35 @@ static bool ext4_match(struct inode *parent,
->>  #if IS_ENABLED(CONFIG_UNICODE)
->>  	if (IS_CASEFOLDED(parent) &&
->>  	    (!IS_ENCRYPTED(parent) || fscrypt_has_encryption_key(parent))) {
->> -		if (fname->cf_name.name) {
->> -			if (IS_ENCRYPTED(parent)) {
->> -				if (fname->hinfo.hash != EXT4_DIRENT_HASH(de) ||
->> -					fname->hinfo.minor_hash !=
->> -						EXT4_DIRENT_MINOR_HASH(de)) {
->> +		int ret;
->>  
->> -					return false;
->> -				}
->> -			}
->> -			return !ext4_ci_compare(parent, &fname->cf_name,
->> -						de->name, de->name_len, true);
->> +		/*
->> +		 * Just checking IS_ENCRYPTED(parent) below is not
->> +		 * sufficient to decide whether one can use the hash for
->> +		 * skipping the string comparison, because the key might
->> +		 * have been added right after
->> +		 * ext4_fname_setup_ci_filename().  In this case, a hash
->> +		 * mismatch will be a false negative.  Therefore, make
->> +		 * sure cf_name was properly initialized before
->> +		 * considering the calculated hash.
->> +		 */
->> +		if (IS_ENCRYPTED(parent) && fname->cf_name.name &&
->> +		    (fname->hinfo.hash != EXT4_DIRENT_HASH(de) ||
->> +		     fname->hinfo.minor_hash != EXT4_DIRENT_MINOR_HASH(de)))
->> +			return false;
->> +
->> +		ret = generic_ci_match(parent, fname->usr_fname,
->> +				       &fname->cf_name, de->name,
->> +				       de->name_len);
->> +		if (ret < 0) {
->> +			/*
->> +			 * Treat comparison errors as not a match.  The
->> +			 * only case where it happens is on a disk
->> +			 * corruption or ENOMEM.
->> +			 */
->> +			return false;
->>  		}
->> -		return !ext4_ci_compare(parent, fname->usr_fname, de->name,
->> -						de->name_len, false);
-> 
-> With the changes to patch 3 in this iteration, This could become:
-> 
-> /*
->  * Treat comparison errors as not a match.  The
->  * only case where it happens is disk corruption
->  * or ENOMEM.
->  */
-> return ext4_ci_compare(parent, fname->usr_fname, de->name,
-> 		       de->name_len, false) > 0;
-> 
+From: Chao Yu <chao@kernel.org>
 
-Do you mean
+[ Upstream commit 92c556ed6318e13c16746495a8d4513129eb9b0f ]
 
-return generic_ci_match(parent, fname->usr_fname,
-		       &fname->cf_name, de->name,
-		       de->name_len) > 0;
+As Roman Smirnov reported as below:
 
-?
+"
+There is a possible bug in f2fs_truncate_inode_blocks():
 
-Because ext4_ci_compare was obsoleted with this series.
+    if (err < 0 && err != -ENOENT)
+    			goto fail;
+        ...
+        offset[1] = 0;
+        offset[0]++;
+        nofs += err;
 
-Thanks,
-Eugen
+If err = -ENOENT then nofs will sum with an error code,
+which is strange behaviour. Also if nofs < ENOENT this will
+cause an overflow. err will be equal to -ENOENT with the
+following call stack:
+
+truncate_nodes()
+  f2fs_get_node_page()
+     __get_node_page()
+        read_node_page()
+"
+
+If nat is corrupted, truncate_nodes() may return -ENOENT, and
+f2fs_truncate_inode_blocks() doesn't handle such error correctly,
+fix it.
+
+Reported-by: Roman Smirnov <r.smirnov@omp.ru>
+Closes: https://lore.kernel.org/linux-f2fs-devel/085b27fd2b364a3c8c3a9ca77363e246@omp.ru
+Signed-off-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ fs/f2fs/node.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index b3de6d6cdb021..bb57bbaff7b4f 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1187,7 +1187,17 @@ int f2fs_truncate_inode_blocks(struct inode *inode, pgoff_t from)
+ 		default:
+ 			BUG();
+ 		}
+-		if (err < 0 && err != -ENOENT)
++		if (err == -ENOENT) {
++			set_sbi_flag(F2FS_P_SB(page), SBI_NEED_FSCK);
++			f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
++			f2fs_err_ratelimited(sbi,
++				"truncate node fail, ino:%lu, nid:%u, "
++				"offset[0]:%d, offset[1]:%d, nofs:%d",
++				inode->i_ino, dn.nid, offset[0],
++				offset[1], nofs);
++			err = 0;
++		}
++		if (err < 0)
+ 			goto fail;
+ 		if (offset[1] == 0 &&
+ 				ri->i_nid[offset[0] - NODE_DIR1_BLOCK]) {
+-- 
+2.43.0
+
 
 
 _______________________________________________
