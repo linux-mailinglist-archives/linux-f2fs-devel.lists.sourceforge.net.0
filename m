@@ -2,63 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC5498FCB0E
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jun 2024 13:52:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F67F8FCB14
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jun 2024 13:53:13 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sEpCC-0004DW-C0;
-	Wed, 05 Jun 2024 11:52:49 +0000
+	id 1sEpCa-0008Hf-VI;
+	Wed, 05 Jun 2024 11:53:12 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1sEpCB-0004DO-BM
+ (envelope-from <sashal@kernel.org>) id 1sEpCX-0008HR-Oo
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Jun 2024 11:52:48 +0000
+ Wed, 05 Jun 2024 11:53:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=S3rlsrdKV4ITdG7iMD1R+1ofxMlJ7yERBSCG/FDiD/o=; b=OEQSb1l0oTftHoLJgbdR4PAOtf
- zCIK838NZ7+Wg27BDiQpJfUs6kq7spbaAPJ0HNvCzN8+dLNP9CS2m1vhKCvCFE3LEmGBE7li3AncD
- YH1zFF1mxtbXhciDiDNS6IMu/hUEndMOngaCD1K+qjQYgUzJyqDOtJI+OTqICdKKdFY0=;
+ bh=2eoJdOr4uM+Qs3H8XKVMqDJlE157WaszAU69h/40cjs=; b=D0PAMx33928/xMG6YqrDphGEnS
+ EH7oacn0tphtcEml+WqMML9iYytGh2IEqSEtXL4qrpJ7QoeQP5QxzcLPB8IOovqksOu2/vDSshIqu
+ BJp/AnfV8ZTGMj87x/VxX6ZQcTxmMQvrNIxqIebXXF1rwuids4aYOfLrqMnGXHJV0dS4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=S3rlsrdKV4ITdG7iMD1R+1ofxMlJ7yERBSCG/FDiD/o=; b=mAO+Z8z67gRsSpLX1qqL9sXc/8
- y9N3LrKYCD+zadckTg/KX4bPShFI8QRP8YG1Sh2yuUh4pTznNZOiyg+nCTY4u0pwAQNrZnHJHmyDM
- n7zUEEPDrBScaOvX525Ze7BiCcEpTqz4ZbO0eoCe1nVTUUNG+CWIHwQfkulq+ztdmdmo=;
+ bh=2eoJdOr4uM+Qs3H8XKVMqDJlE157WaszAU69h/40cjs=; b=baHhPeuRH5auV+myfyVjX8rvvf
+ IyWBGt9O53ijFrKmZVyfreQC39j2bcWgeACRZmGMRzLk2g0HZ+snAhXR05Q9cd0LJMsS7b83eF673
+ Vqyyg3cr060nSzU8j/UtgREH3hgMk+LJyt0p09oEQVLucz2hQMNSgDNigR5B+IZFhrmU=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sEpCC-0008Ui-OQ for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Jun 2024 11:52:48 +0000
+ id 1sEpCW-000058-U3 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 05 Jun 2024 11:53:08 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A1C73617FE;
- Wed,  5 Jun 2024 11:52:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F483C32781;
- Wed,  5 Jun 2024 11:52:41 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id CCDB56187D;
+ Wed,  5 Jun 2024 11:53:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1BB6C4AF07;
+ Wed,  5 Jun 2024 11:53:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1717588362;
- bh=g3iRvxT62XnaNPCsvLlGtLyXzGD5qCPrw+stjFgQ0lY=;
+ s=k20201202; t=1717588382;
+ bh=RRQkgtyusECkJBoYg3oUy7UVIQQ61c3d9foSQSMCJhU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=UZKwb6v55vs/XbVMZfgVqHO6V1D+0YFZt9lgpLTuI5/gXDdiPfjuaA9pdS8WwLjmR
- 5Gm+YifG1CivhJoiTst0C1RfzTLFDKJYm6sTm0YvIOeygciD8kYIaXtwtHNjSklHxy
- 8ZxMjUDvKHNjboczOwqreRYsm95KbSUaIVRQHzabGPRS5q/Mk1YdrpcPtrSdSQmRVI
- csjhdkM5DCBgRHMkVPqiiNAXAPS/KS6plggC4XmsFVv+m0mh2P+oStLqar7pIN70Vp
- ej6AzFFDzxMQQhcBqv7BRmVVDvGYMTacgqIwJ8d+QYeCosyg4h+0rM20ls1wqWmUbz
- l8vAm4e2KSw0w==
+ b=ohpeP1jnjr+wxg8HbxQAxD0Tn9DVX0A1sBJO1pkJqKsukoAKWRIsWCKGHEnn8Xs/L
+ GxINbgceAgU53d6KOn7KI6ke7mwc0buwjee5c2zb/23O105CtKmDKvzhRQmT3JaBK3
+ 4UhYJ3yp+nRFK0hWV+lH3w2FgeC9tghMRn/dIjNQJ/W9oF0EeYE1tCZBCQ05HYUyel
+ w/1UkZM6cuQrMKlOTFs72eMP6khaWw2jmEZISs7hGAMTr9y78y107JtKiymoE0te/H
+ Q/7oKwDuX+rQXGrjVTQWOV3MaI/fEV6MddiYB/JFTuseF69Bw+JuDSRE/E7hypNODs
+ f8oNCqWo1D8pw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed,  5 Jun 2024 07:51:52 -0400
-Message-ID: <20240605115225.2963242-9-sashal@kernel.org>
+Date: Wed,  5 Jun 2024 07:51:57 -0400
+Message-ID: <20240605115225.2963242-14-sashal@kernel.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240605115225.2963242-1-sashal@kernel.org>
 References: <20240605115225.2963242-1-sashal@kernel.org>
@@ -66,44 +66,45 @@ MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 X-stable-base: Linux 6.6.32
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Jaegeuk Kim <jaegeuk@kernel.org> [ Upstream commit
- 3bdb7f161697e2d5123b89fe1778ef17a44858e7
- ] Shutdown does not check the error of thaw_super due to readonly, which
- causes a deadlock like below. 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
+ 20faaf30e55522bba2b56d9c46689233205d7717
+ ] syzbot reports a kernel bug as below: 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [139.178.84.217 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in sa-accredit.habeas.com]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sEpCC-0008Ui-OQ
-Subject: [f2fs-dev] [PATCH AUTOSEL 6.6 09/20] f2fs: don't set RO when
- shutting down f2fs
+X-Headers-End: 1sEpCW-000058-U3
+Subject: [f2fs-dev] [PATCH AUTOSEL 6.6 14/20] f2fs: fix to do sanity check
+ on i_xattr_nid in sanity_check_inode()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,47 +116,85 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, Daeho Jeong <daehojeong@google.com>,
- =?UTF-8?q?Light=20Hsieh=20=28=E8=AC=9D=E6=98=8E=E7=87=88=29?=
- <Light.Hsieh@mediatek.com>, linux-f2fs-devel@lists.sourceforge.net,
- linux-mediatek@lists.infradead.org, matthias.bgg@gmail.com,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-arm-kernel@lists.infradead.org,
- angelogioacchino.delregno@collabora.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ syzbot+3694e283cf5c40df6d14@syzkaller.appspotmail.com,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-RnJvbTogSmFlZ2V1ayBLaW0gPGphZWdldWtAa2VybmVsLm9yZz4KClsgVXBzdHJlYW0gY29tbWl0
-IDNiZGI3ZjE2MTY5N2UyZDUxMjNiODlmZTE3NzhlZjE3YTQ0ODU4ZTcgXQoKU2h1dGRvd24gZG9l
-cyBub3QgY2hlY2sgdGhlIGVycm9yIG9mIHRoYXdfc3VwZXIgZHVlIHRvIHJlYWRvbmx5LCB3aGlj
-aApjYXVzZXMgYSBkZWFkbG9jayBsaWtlIGJlbG93LgoKZjJmc19pb2Nfc2h1dGRvd24oRjJGU19H
-T0lOR19ET1dOX0ZVTExTWU5DKSAgICAgICAgaXNzdWVfZGlzY2FyZF90aHJlYWQKIC0gYmRldl9m
-cmVlemUKICAtIGZyZWV6ZV9zdXBlcgogLSBmMmZzX3N0b3BfY2hlY2twb2ludCgpCiAgLSBmMmZz
-X2hhbmRsZV9jcml0aWNhbF9lcnJvciAgICAgICAgICAgICAgICAgICAgIC0gc2Jfc3RhcnRfd3Jp
-dGUKICAgIC0gc2V0IFJPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAt
-IHdhaXRpbmcKIC0gYmRldl90aGF3CiAgLSB0aGF3X3N1cGVyX2xvY2tlZAogICAgLSByZXR1cm4g
-LUVJTlZBTCwgaWYgc2JfcmRvbmx5KCkKIC0gZjJmc19zdG9wX2Rpc2NhcmRfdGhyZWFkCiAgLT4g
-d2FpdCBmb3Iga3RocmVhZF9zdG9wKGRpc2NhcmRfdGhyZWFkKTsKClJlcG9ydGVkLWJ5OiAiTGln
-aHQgSHNpZWggKOisneaYjueHiCkiIDxMaWdodC5Ic2llaEBtZWRpYXRlay5jb20+ClJldmlld2Vk
-LWJ5OiBEYWVobyBKZW9uZyA8ZGFlaG9qZW9uZ0Bnb29nbGUuY29tPgpSZXZpZXdlZC1ieTogQ2hh
-byBZdSA8Y2hhb0BrZXJuZWwub3JnPgpTaWduZWQtb2ZmLWJ5OiBKYWVnZXVrIEtpbSA8amFlZ2V1
-a0BrZXJuZWwub3JnPgpTaWduZWQtb2ZmLWJ5OiBTYXNoYSBMZXZpbiA8c2FzaGFsQGtlcm5lbC5v
-cmc+Ci0tLQogZnMvZjJmcy9zdXBlci5jIHwgMTAgKysrKysrKystLQogMSBmaWxlIGNoYW5nZWQs
-IDggaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9mcy9mMmZzL3N1
-cGVyLmMgYi9mcy9mMmZzL3N1cGVyLmMKaW5kZXggNWQyOTRjOGEwMjVjYS4uZWMzZjRhNWVkMjE3
-MiAxMDA2NDQKLS0tIGEvZnMvZjJmcy9zdXBlci5jCisrKyBiL2ZzL2YyZnMvc3VwZXIuYwpAQCAt
-NDE3OCw5ICs0MTc4LDE1IEBAIHZvaWQgZjJmc19oYW5kbGVfY3JpdGljYWxfZXJyb3Ioc3RydWN0
-IGYyZnNfc2JfaW5mbyAqc2JpLCB1bnNpZ25lZCBjaGFyIHJlYXNvbiwKIAlpZiAoc2h1dGRvd24p
-CiAJCXNldF9zYmlfZmxhZyhzYmksIFNCSV9JU19TSFVURE9XTik7CiAKLQkvKiBjb250aW51ZSBm
-aWxlc3lzdGVtIG9wZXJhdG9ycyBpZiBlcnJvcnM9Y29udGludWUgKi8KLQlpZiAoY29udGludWVf
-ZnMgfHwgZjJmc19yZWFkb25seShzYikpCisJLyoKKwkgKiBDb250aW51ZSBmaWxlc3lzdGVtIG9w
-ZXJhdG9ycyBpZiBlcnJvcnM9Y29udGludWUuIFNob3VsZCBub3Qgc2V0CisJICogUk8gYnkgc2h1
-dGRvd24sIHNpbmNlIFJPIGJ5cGFzc2VzIHRoYXdfc3VwZXIgd2hpY2ggY2FuIGhhbmcgdGhlCisJ
-ICogc3lzdGVtLgorCSAqLworCWlmIChjb250aW51ZV9mcyB8fCBmMmZzX3JlYWRvbmx5KHNiKSB8
-fCBzaHV0ZG93bikgeworCQlmMmZzX3dhcm4oc2JpLCAiU3RvcHBlZCBmaWxlc3lzdGVtIGR1ZSB0
-byByZWFzb246ICVkIiwgcmVhc29uKTsKIAkJcmV0dXJuOworCX0KIAogCWYyZnNfd2FybihzYmks
-ICJSZW1vdW50aW5nIGZpbGVzeXN0ZW0gcmVhZC1vbmx5Iik7CiAJLyoKLS0gCjIuNDMuMAoKCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZz
-LWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5l
-dApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZz
-LWRldmVsCg==
+From: Chao Yu <chao@kernel.org>
+
+[ Upstream commit 20faaf30e55522bba2b56d9c46689233205d7717 ]
+
+syzbot reports a kernel bug as below:
+
+F2FS-fs (loop0): Mounted with checkpoint version = 48b305e4
+==================================================================
+BUG: KASAN: slab-out-of-bounds in f2fs_test_bit fs/f2fs/f2fs.h:2933 [inline]
+BUG: KASAN: slab-out-of-bounds in current_nat_addr fs/f2fs/node.h:213 [inline]
+BUG: KASAN: slab-out-of-bounds in f2fs_get_node_info+0xece/0x1200 fs/f2fs/node.c:600
+Read of size 1 at addr ffff88807a58c76c by task syz-executor280/5076
+
+CPU: 1 PID: 5076 Comm: syz-executor280 Not tainted 6.9.0-rc5-syzkaller #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 03/27/2024
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0x241/0x360 lib/dump_stack.c:114
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0x169/0x550 mm/kasan/report.c:488
+ kasan_report+0x143/0x180 mm/kasan/report.c:601
+ f2fs_test_bit fs/f2fs/f2fs.h:2933 [inline]
+ current_nat_addr fs/f2fs/node.h:213 [inline]
+ f2fs_get_node_info+0xece/0x1200 fs/f2fs/node.c:600
+ f2fs_xattr_fiemap fs/f2fs/data.c:1848 [inline]
+ f2fs_fiemap+0x55d/0x1ee0 fs/f2fs/data.c:1925
+ ioctl_fiemap fs/ioctl.c:220 [inline]
+ do_vfs_ioctl+0x1c07/0x2e50 fs/ioctl.c:838
+ __do_sys_ioctl fs/ioctl.c:902 [inline]
+ __se_sys_ioctl+0x81/0x170 fs/ioctl.c:890
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xf5/0x240 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+
+The root cause is we missed to do sanity check on i_xattr_nid during
+f2fs_iget(), so that in fiemap() path, current_nat_addr() will access
+nat_bitmap w/ offset from invalid i_xattr_nid, result in triggering
+kasan bug report, fix it.
+
+Reported-and-tested-by: syzbot+3694e283cf5c40df6d14@syzkaller.appspotmail.com
+Closes: https://lore.kernel.org/linux-f2fs-devel/00000000000094036c0616e72a1d@google.com
+Signed-off-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ fs/f2fs/inode.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index dd61449f05b85..ab2eecd986ec5 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -361,6 +361,12 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 		return false;
+ 	}
+ 
++	if (fi->i_xattr_nid && f2fs_check_nid_range(sbi, fi->i_xattr_nid)) {
++		f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_xattr_nid: %u, run fsck to fix.",
++			  __func__, inode->i_ino, fi->i_xattr_nid);
++		return false;
++	}
++
+ 	return true;
+ }
+ 
+-- 
+2.43.0
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
