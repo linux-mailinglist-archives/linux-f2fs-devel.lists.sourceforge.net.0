@@ -2,66 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60E7A8FE373
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jun 2024 11:52:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CADCC8FE38F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jun 2024 11:55:14 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sF9nS-0000z0-Nq;
-	Thu, 06 Jun 2024 09:52:39 +0000
+	id 1sF9ps-00016E-CB;
+	Thu, 06 Jun 2024 09:55:09 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1sF9nQ-0000yq-Kd
+ (envelope-from <chao@kernel.org>) id 1sF9pq-000168-P6
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Jun 2024 09:52:37 +0000
+ Thu, 06 Jun 2024 09:55:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0Qtit0s+ubEdwb2l1dDcIyvlNhAk3ps4t2tuYcweImE=; b=Ma6/fwXhy7UvrJsQioIWJvKaCN
- NFSocfuiYQPXHlrO+fQvSVskUeHk8sARW/Iu0EcqLH7uwrT1p5gmU1F81tdgfuZ9FC53M0PaFG5gt
- DtJNhq8PHBGiqhNGPVpOSUagQ9TQwt0QJaP6KhK068wWq4avJuQCsHjgbCnuJ03DbAKE=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=0Qtit0s+ubEdwb2l1dDcIyvlNhAk3ps4t2tuYcweImE=; b=SRB534L+ieVWlHE5gnXlBnhwct
- 972bc5gdZfEc2NX1lv2/EjglbDeh1iu5bDSYfA2Ag57yc++NbO4moFYgVYhbN3GwTx/OH6/J+jeTB
- jZVlcb+AI+r8Wuxe0e/mp4R+ruTo0/rRbUft6hR/vrVR9bnvNfkJnEobDp1pZzdfhptQ=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=iQP2PeTUocUHwk3NmgD/RU+Dhz6nAgfskuFqVJeo9CY=; b=VXY2d58OMpoBbaZ/NKv69W0/ox
+ 7DIlvLVJEYdfkc8EHA5NMrKg9L1ZF7IPjR62koZtfcSmwRDbZQxopWNSSEFuPEpFMImiCzqU5V3jT
+ vx72yOcXud4Ahsx7mb7C9pcHLFZY/10+zEDhSs3+N9cmLXpqxspvKvwRMrJalqVl71lo=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=iQP2PeTUocUHwk3NmgD/RU+Dhz6nAgfskuFqVJeo9CY=; b=b
+ sYWUXKF8atsnEqMocxIwpnX4ic5VWVa7ZlqgUS7Yab9nTGzLcRsMKioXblej+kmX27SPpi/ySAnHz
+ /UJN4QHiekoW/3L/FVfH270ougqbhcEwrs2CrJyNzNnlqlVWjkGSxgBVOc80QD32hbaaA6cZql6eM
+ +o8iFs4ZkcVbFC2k=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sF9nS-0004OY-0r for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Jun 2024 09:52:37 +0000
+ id 1sF9ps-0004bv-1r for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 06 Jun 2024 09:55:07 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E340461A14
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  6 Jun 2024 09:52:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 92FD0C4AF0D;
- Thu,  6 Jun 2024 09:52:25 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id E985B61D1F;
+ Thu,  6 Jun 2024 09:54:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54FA1C4AF0B;
+ Thu,  6 Jun 2024 09:54:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1717667546;
- bh=1A4x52edkxk15o++tyYBiiibRgkm7p/CeiPX3AK72eo=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=oV1szKEXx6PIDhSbDwjHlwMXPTlD3x5MY2IXcNWWkyCBSwTAi4TTEqjoO82yl/M3V
- wexutYQvf6Us0ZnAb3IVk5F0DOHvq/HHBJc3K0nqvJ8R4Ls3xScHAUNMQEt00vBuTO
- qJ8zEjiMTFZVKYGKoFBPDM7j19NjNhiCuXhjhLhOctvqM/mVCxdHgNkgi4rV8B/dV1
- wpQ+PC1TYhkRcOFGap0X9agTgBsi7kcRlDcGw1vRCmssuziSfF06JYLnwrHny7C1aM
- 6cIF2Ta+qHN05PRw+eXQvw+ZrzNCmalA1PDUvlbwc1Qt0Wu7h5yRQSw43g21/b7rOK
- 73qjGvTanl74w==
+ s=k20201202; t=1717667696;
+ bh=GNpmoUqNJ5Xzdvywh8sIQ3KCs7bJubcVgL87Sik46R0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Sp+/mZ1DDMC7/qtA4SInsKKdOF3SmxZP1uldo8Ec63DG2w07Fxk2pFOaQCbhk0KKm
+ XWRCh+ws2PXyLc7b2rEF2PXtUGGlFVrT1WXM/dFbEWItPhOfQyduE/V/t0dafCl5kF
+ Z4jgd3jn/jxADd5y+Mva+Mv3jKBjG9Y+tID+l2skQC88THT/eUX6rpU5KSjnGgHIse
+ Od2kJXhMEOfLyfKlkaNzzpjwwJDTQR3ghPcaGO5jAhhFY4xgImxKaU4fcIemrDuXoA
+ UW8UzbgBPM/QAOer/RjAMe4jzgoHtM+yS+CZpJiFA3BydGoYv4BHpPb60y4BD+Wxxy
+ p1zMGEA7tSZbA==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Thu,  6 Jun 2024 17:52:13 +0800
-Message-Id: <20240606095213.4087668-2-chao@kernel.org>
+Date: Thu,  6 Jun 2024 17:54:51 +0800
+Message-Id: <20240606095451.4088735-1-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240606095213.4087668-1-chao@kernel.org>
-References: <20240606095213.4087668-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -70,14 +67,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Since background GC is f2fs inner operation, so, let's use
- sb_{start, end}_intwrite{_trylock, }() instead of sb_{start,
- end}_write{_trylock, }()
- in gc_thread_func(). Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/gc.c
- | 4 ++-- 1 file changed, 2 insertions(+), 2 deletions(-) 
+ Content preview: Commit 59c9081bc86e ("f2fs: allow write page cache when
+ writting
+ cp") allows write() to write data to page cache during checkpoint, so block
+ count fields like .total_valid_block_count, .alloc_valid_bl [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -87,9 +85,7 @@ X-Spam-Report: Spam detection software,
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [139.178.84.217 listed in sa-accredit.habeas.com]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -99,9 +95,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sF9nS-0004OY-0r
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix to use sb_{start,
- end}_intwrite{_trylock, }() in gc_thread_func()
+X-Headers-End: 1sF9ps-0004bv-1r
+Subject: [f2fs-dev] [PATCH] f2fs: fix to update user block counts in
+ block_operations()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,37 +114,79 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Since background GC is f2fs inner operation, so, let's use
-sb_{start,end}_intwrite{_trylock,}() instead of
-sb_{start,end}_write{_trylock,}() in gc_thread_func().
+Commit 59c9081bc86e ("f2fs: allow write page cache when writting cp")
+allows write() to write data to page cache during checkpoint, so block
+count fields like .total_valid_block_count, .alloc_valid_block_count
+and .rf_node_block_count may encounter race condition as below:
 
+CP				Thread A
+- write_checkpoint
+ - block_operations
+  - f2fs_down_write(&sbi->node_change)
+  - __prepare_cp_block
+  : ckpt->valid_block_count = .total_valid_block_count
+  - f2fs_up_write(&sbi->node_change)
+				- write
+				 - f2fs_preallocate_blocks
+				  - f2fs_map_blocks(,F2FS_GET_BLOCK_PRE_AIO)
+				   - f2fs_map_lock
+				    - f2fs_down_read(&sbi->node_change)
+				   - f2fs_reserve_new_blocks
+				    - inc_valid_block_count
+				    : percpu_counter_add(&sbi->alloc_valid_block_count, count)
+				    : sbi->total_valid_block_count += count
+				    - f2fs_up_read(&sbi->node_change)
+ - do_checkpoint
+ : sbi->last_valid_block_count = sbi->total_valid_block_count
+ : percpu_counter_set(&sbi->alloc_valid_block_count, 0)
+ : percpu_counter_set(&sbi->rf_node_block_count, 0)
+				- fsync
+				 - need_do_checkpoint
+				  - f2fs_space_for_roll_forward
+				  : alloc_valid_block_count was reset to zero,
+				    so, it may missed last data during checkpoint
+
+Let's change to update .total_valid_block_count, .alloc_valid_block_count
+and .rf_node_block_count in block_operations(), then their access can be
+protected by .node_change and .cp_rwsem lock, so that it can avoid above
+race condition.
+
+Fixes: 59c9081bc86e ("f2fs: allow write page cache when writting cp")
+Cc: Yunlei He <heyunlei@oppo.com>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/gc.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ fs/f2fs/checkpoint.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index ef667fec9a12..004587ac5530 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -76,7 +76,7 @@ static int gc_thread_func(void *data)
- 			f2fs_stop_checkpoint(sbi, false,
- 					STOP_CP_REASON_FAULT_INJECT);
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 66eaad591b60..010bbd5af211 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -1298,6 +1298,12 @@ static int block_operations(struct f2fs_sb_info *sbi)
+ 	 * dirty node blocks and some checkpoint values by block allocation.
+ 	 */
+ 	__prepare_cp_block(sbi);
++
++	/* update user_block_counts */
++	sbi->last_valid_block_count = sbi->total_valid_block_count;
++	percpu_counter_set(&sbi->alloc_valid_block_count, 0);
++	percpu_counter_set(&sbi->rf_node_block_count, 0);
++
+ 	f2fs_up_write(&sbi->node_change);
+ 	return err;
+ }
+@@ -1575,11 +1581,6 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 		start_blk += NR_CURSEG_NODE_TYPE;
+ 	}
  
--		if (!sb_start_write_trylock(sbi->sb)) {
-+		if (!sb_start_intwrite_trylock(sbi->sb)) {
- 			stat_other_skip_bggc_count(sbi);
- 			continue;
- 		}
-@@ -163,7 +163,7 @@ static int gc_thread_func(void *data)
- 			}
- 			spin_unlock(&sbi->gc_remaining_trials_lock);
- 		}
--		sb_end_write(sbi->sb);
-+		sb_end_intwrite(sbi->sb);
- 
- 	} while (!kthread_should_stop());
- 	return 0;
+-	/* update user_block_counts */
+-	sbi->last_valid_block_count = sbi->total_valid_block_count;
+-	percpu_counter_set(&sbi->alloc_valid_block_count, 0);
+-	percpu_counter_set(&sbi->rf_node_block_count, 0);
+-
+ 	/* Here, we have one bio having CP pack except cp pack 2 page */
+ 	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
+ 	/* Wait for all dirty meta pages to be submitted for IO */
 -- 
 2.40.1
 
