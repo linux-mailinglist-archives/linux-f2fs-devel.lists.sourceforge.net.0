@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A627D8FDFCE
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jun 2024 09:34:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 059498FDFD8
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jun 2024 09:35:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sF7e8-0006XD-MD;
-	Thu, 06 Jun 2024 07:34:52 +0000
+	id 1sF7eH-0003YL-Gg;
+	Thu, 06 Jun 2024 07:35:02 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <eugen.hristev@collabora.com>) id 1sF7e6-0006X4-8U
+ (envelope-from <eugen.hristev@collabora.com>) id 1sF7eF-0003XT-Er
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Jun 2024 07:34:50 +0000
+ Thu, 06 Jun 2024 07:35:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TeZmLddASyUyyqW0lGMXvlubSJASJqH4uDkBM8DY1vw=; b=UsXX2m/5LkDSxg3jChNzpeUH1K
- PoepVcJkkuyHBa1xFtlJSNEKb8YXbOCYtiANNOpK3CNnf2IZ0FOlGNXizpgNXhODtSziVUEeHEjsE
- B2/kmJ8afbMlvODG/mPaaPcACo4TUKw+QiT8uk2Wl0hqZ965SU/0HTL02RLp2H+wQ1L4=;
+ bh=Qo+/WSL6UgvgJSre0H5WLNINoXNh/UwUO4e31dq6K3o=; b=hBIEaGI4AhBp+fACVb88OzUUgK
+ fwMcm54UqRdfxLfnZZ4EZU6CzFINLD0sc8UM5boKocaqphA0GmKu6eOBdS3u0h1LxZRhQESgO35HR
+ kWuFn48aBFpjr761XLspoxUBkOjk95jeRsG7J1nWTiXV1R9yQbeYg2SZnZrHwePL3+pE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,35 +31,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TeZmLddASyUyyqW0lGMXvlubSJASJqH4uDkBM8DY1vw=; b=AUWS1Ak2WZqtlDF571F8jjJ5ZB
- 7ZU+OR7zc9OYLbnGbrz4dFo7iUFO0VWFDCpCzyog5uvthkpW9nhQQOHMVc6BtN1YwkrInGLCX7GKQ
- qk4iVRkouwzpGAt6NI7k5rtibqmGQpj0EEV8YaVw1CkZTf4XntyAEPQKiJ+IGxZs3w8A=;
+ bh=Qo+/WSL6UgvgJSre0H5WLNINoXNh/UwUO4e31dq6K3o=; b=PHUS7Hh17wqjYuOAle6Kuv4epc
+ 95TL9K9EGtboAtB1XLwqEkrtr8ahQqjbvVeKD8diMxoOs80kqoSklcbg8WINLVLDred2EZrRnjTTP
+ IAV2FC6w4ARME9cFWv9X/EJfN5Rzxp66SrKNKzFPZB5ZFNOKOxGWyKXuuRyJBW+6HSYU=;
 Received: from madrid.collaboradmins.com ([46.235.227.194])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sF7e6-0001xa-9V for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Jun 2024 07:34:50 +0000
+ id 1sF7eG-0001yK-IA for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 06 Jun 2024 07:35:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1717659282;
- bh=7MXCNIfbhOHe7WuXF+nvpbNl5SCDeGsd3fUVla5hgUU=;
+ s=mail; t=1717659283;
+ bh=2QuIxtKrX4JQURCSM13krZkPpuVxMNuAzViQSE1zWAs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gtn1sEAP3bzQJnQTgYb0KBb7QkSr+LCpLQmBzfIpQHK4kAjEaJxWQBrnBh/C4sf0y
- gVXeny5hAk9eP9hNFyVEEeQvuTOpCUMQmFIIi5uy53g/Va1Yz0QeAdlbPsO3R78exP
- +lguXn5UAFwKhZJROLWpq6uE7Ik7vMjw/l0SvFmb4y/6pQWA5H6/JOswlyr9fR1i+D
- pZwM2BfC1/Imdieb3Yc5wjPXo4O8lTaKlb2ifkJ/t3gw3LPhRROydVx7w2keV1A9nm
- 7PtZKeellt3vLuMKXDfjiQ/BgriFbPIKft9+ebmFvNK1Rii0uG/SaBV0yCc3Ql5Ww8
- 5Gw0OI/Wi0frQ==
+ b=QDorgE9PL4QNpGF8WG36TqanKGvV4rHpz6ItFIrdm6K9swNLY7hwZUcc/TBDXKwXt
+ O6RYvUUruh0+xYtof/3pm6ssXyXUiMxCnxCBXUC3lSnYj7FBKCK5AKdefLtjsGN1YO
+ JRC7BgDya5bWPAshfITWulQsTtpcaunELwn298eTU3sXk1ob9Qt9ZmyV1k/LO0bdaR
+ WcP2gSOkEd9niuiyizGwmQCLXwe8cTVxtUr6/nX+rEf4uFJJPQd6qCOnaoK+jQhb6I
+ vWYllAHNWiYgRNCUKw7T/tEZtf3s66lkCccJ6/9GqaW8mOIUnkicjUsIhu0ZpJ0MNU
+ o8bd21ZdLtfqQ==
 Received: from eugen-station.. (cola.collaboradmins.com [195.201.22.229])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: ehristev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 0690037821DD;
- Thu,  6 Jun 2024 07:34:40 +0000 (UTC)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 3A4E637821D8;
+ Thu,  6 Jun 2024 07:34:42 +0000 (UTC)
 To: linux-ext4@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
  jaegeuk@kernel.org, adilger.kernel@dilger.ca, tytso@mit.edu
-Date: Thu,  6 Jun 2024 10:33:52 +0300
-Message-Id: <20240606073353.47130-7-eugen.hristev@collabora.com>
+Date: Thu,  6 Jun 2024 10:33:53 +0300
+Message-Id: <20240606073353.47130-8-eugen.hristev@collabora.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240606073353.47130-1-eugen.hristev@collabora.com>
 References: <20240606073353.47130-1-eugen.hristev@collabora.com>
@@ -81,6 +81,16 @@ X-Spam-Report: Spam detection software,
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: collabora.com]
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [46.235.227.194 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -90,17 +100,7 @@ X-Spam-Report: Spam detection software,
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [46.235.227.194 listed in sa-trusted.bondedsender.org]
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [46.235.227.194 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: collabora.com]
+ [46.235.227.194 listed in sa-accredit.habeas.com]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -109,8 +109,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sF7e6-0001xa-9V
-Subject: [f2fs-dev] [PATCH v18 6/7] ext4: Move CONFIG_UNICODE defguards into
+X-Headers-End: 1sF7eG-0001yK-IA
+Subject: [f2fs-dev] [PATCH v18 7/7] f2fs: Move CONFIG_UNICODE defguards into
  the code flow
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -143,195 +143,82 @@ Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
 Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
 Reviewed-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ext4/crypto.c | 10 ++--------
- fs/ext4/ext4.h   | 33 +++++++++++++++++++++------------
- fs/ext4/namei.c  | 14 +++++---------
- fs/ext4/super.c  |  4 +---
- 4 files changed, 29 insertions(+), 32 deletions(-)
+ fs/f2fs/namei.c | 10 ++++------
+ fs/f2fs/super.c |  8 ++++----
+ 2 files changed, 8 insertions(+), 10 deletions(-)
 
-diff --git a/fs/ext4/crypto.c b/fs/ext4/crypto.c
-index 7ae0b61258a7..0a056d97e640 100644
---- a/fs/ext4/crypto.c
-+++ b/fs/ext4/crypto.c
-@@ -31,11 +31,10 @@ int ext4_fname_setup_filename(struct inode *dir, const struct qstr *iname,
- 
- 	ext4_fname_from_fscrypt_name(fname, &name);
- 
--#if IS_ENABLED(CONFIG_UNICODE)
- 	err = ext4_fname_setup_ci_filename(dir, iname, fname);
- 	if (err)
- 		ext4_fname_free_filename(fname);
--#endif
-+
- 	return err;
- }
- 
-@@ -51,11 +50,9 @@ int ext4_fname_prepare_lookup(struct inode *dir, struct dentry *dentry,
- 
- 	ext4_fname_from_fscrypt_name(fname, &name);
- 
--#if IS_ENABLED(CONFIG_UNICODE)
- 	err = ext4_fname_setup_ci_filename(dir, &dentry->d_name, fname);
- 	if (err)
- 		ext4_fname_free_filename(fname);
--#endif
- 	return err;
- }
- 
-@@ -70,10 +67,7 @@ void ext4_fname_free_filename(struct ext4_filename *fname)
- 	fname->usr_fname = NULL;
- 	fname->disk_name.name = NULL;
- 
--#if IS_ENABLED(CONFIG_UNICODE)
--	kfree(fname->cf_name.name);
--	fname->cf_name.name = NULL;
--#endif
-+	ext4_fname_free_ci_filename(fname);
- }
- 
- static bool uuid_is_zero(__u8 u[16])
-diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-index deffd7431c8b..8007abd4972d 100644
---- a/fs/ext4/ext4.h
-+++ b/fs/ext4/ext4.h
-@@ -2745,8 +2745,25 @@ ext4_fsblk_t ext4_inode_to_goal_block(struct inode *);
- 
- #if IS_ENABLED(CONFIG_UNICODE)
- extern int ext4_fname_setup_ci_filename(struct inode *dir,
--					 const struct qstr *iname,
--					 struct ext4_filename *fname);
-+					const struct qstr *iname,
-+					struct ext4_filename *fname);
-+
-+static inline void ext4_fname_free_ci_filename(struct ext4_filename *fname)
-+{
-+	kfree(fname->cf_name.name);
-+	fname->cf_name.name = NULL;
-+}
-+#else
-+static inline int ext4_fname_setup_ci_filename(struct inode *dir,
-+					       const struct qstr *iname,
-+					       struct ext4_filename *fname)
-+{
-+	return 0;
-+}
-+
-+static inline void ext4_fname_free_ci_filename(struct ext4_filename *fname)
-+{
-+}
- #endif
- 
- /* ext4 encryption related stuff goes here crypto.c */
-@@ -2769,16 +2786,11 @@ static inline int ext4_fname_setup_filename(struct inode *dir,
- 					    int lookup,
- 					    struct ext4_filename *fname)
- {
--	int err = 0;
- 	fname->usr_fname = iname;
- 	fname->disk_name.name = (unsigned char *) iname->name;
- 	fname->disk_name.len = iname->len;
- 
--#if IS_ENABLED(CONFIG_UNICODE)
--	err = ext4_fname_setup_ci_filename(dir, iname, fname);
--#endif
--
--	return err;
-+	return ext4_fname_setup_ci_filename(dir, iname, fname);
- }
- 
- static inline int ext4_fname_prepare_lookup(struct inode *dir,
-@@ -2790,10 +2802,7 @@ static inline int ext4_fname_prepare_lookup(struct inode *dir,
- 
- static inline void ext4_fname_free_filename(struct ext4_filename *fname)
- {
--#if IS_ENABLED(CONFIG_UNICODE)
--	kfree(fname->cf_name.name);
--	fname->cf_name.name = NULL;
--#endif
-+	ext4_fname_free_ci_filename(fname);
- }
- 
- static inline int ext4_ioctl_get_encryption_pwsalt(struct file *filp,
-diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
-index d10ea0f3f64d..e6769b97a970 100644
---- a/fs/ext4/namei.c
-+++ b/fs/ext4/namei.c
-@@ -1825,8 +1825,7 @@ static struct dentry *ext4_lookup(struct inode *dir, struct dentry *dentry, unsi
- 		}
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index e54f8c08bda8..1ecde2b45e99 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -576,8 +576,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
+ 		goto out_iput;
  	}
- 
+ out_splice:
 -#if IS_ENABLED(CONFIG_UNICODE)
 -	if (!inode && IS_CASEFOLDED(dir)) {
 +	if (IS_ENABLED(CONFIG_UNICODE) && !inode && IS_CASEFOLDED(dir)) {
  		/* Eventually we want to call d_add_ci(dentry, NULL)
  		 * for negative dentries in the encoding case as
  		 * well.  For now, prevent the negative dentry
-@@ -1834,7 +1833,7 @@ static struct dentry *ext4_lookup(struct inode *dir, struct dentry *dentry, unsi
- 		 */
+@@ -586,7 +585,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
+ 		trace_f2fs_lookup_end(dir, dentry, ino, err);
  		return NULL;
  	}
 -#endif
 +
- 	return d_splice_alias(inode, dentry);
+ 	new = d_splice_alias(inode, dentry);
+ 	trace_f2fs_lookup_end(dir, !IS_ERR_OR_NULL(new) ? new : dentry,
+ 				ino, IS_ERR(new) ? PTR_ERR(new) : err);
+@@ -639,16 +638,15 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
+ 	f2fs_delete_entry(de, page, dir, inode);
+ 	f2fs_unlock_op(sbi);
+ 
+-#if IS_ENABLED(CONFIG_UNICODE)
+ 	/* VFS negative dentries are incompatible with Encoding and
+ 	 * Case-insensitiveness. Eventually we'll want avoid
+ 	 * invalidating the dentries here, alongside with returning the
+ 	 * negative dentries at f2fs_lookup(), when it is better
+ 	 * supported by the VFS for the CI case.
+ 	 */
+-	if (IS_CASEFOLDED(dir))
++	if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
+ 		d_invalidate(dentry);
+-#endif
++
+ 	if (IS_DIRSYNC(dir))
+ 		f2fs_sync_fs(sbi->sb, 1);
+ fail:
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 1f1b3647a998..df4cf31f93df 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -321,7 +321,7 @@ struct kmem_cache *f2fs_cf_name_slab;
+ static int __init f2fs_create_casefold_cache(void)
+ {
+ 	f2fs_cf_name_slab = f2fs_kmem_cache_create("f2fs_casefolded_name",
+-							F2FS_NAME_LEN);
++						   F2FS_NAME_LEN);
+ 	return f2fs_cf_name_slab ? 0 : -ENOMEM;
  }
  
-@@ -3164,16 +3163,14 @@ static int ext4_rmdir(struct inode *dir, struct dentry *dentry)
- 	ext4_fc_track_unlink(handle, dentry);
- 	retval = ext4_mark_inode_dirty(handle, dir);
- 
--#if IS_ENABLED(CONFIG_UNICODE)
- 	/* VFS negative dentries are incompatible with Encoding and
- 	 * Case-insensitiveness. Eventually we'll want avoid
- 	 * invalidating the dentries here, alongside with returning the
- 	 * negative dentries at ext4_lookup(), when it is better
- 	 * supported by the VFS for the CI case.
- 	 */
--	if (IS_CASEFOLDED(dir))
-+	if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
- 		d_invalidate(dentry);
--#endif
- 
- end_rmdir:
- 	brelse(bh);
-@@ -3275,16 +3272,15 @@ static int ext4_unlink(struct inode *dir, struct dentry *dentry)
- 		goto out_trace;
- 
- 	retval = __ext4_unlink(dir, &dentry->d_name, d_inode(dentry), dentry);
--#if IS_ENABLED(CONFIG_UNICODE)
-+
- 	/* VFS negative dentries are incompatible with Encoding and
- 	 * Case-insensitiveness. Eventually we'll want avoid
- 	 * invalidating the dentries here, alongside with returning the
- 	 * negative dentries at ext4_lookup(), when it is  better
- 	 * supported by the VFS for the CI case.
- 	 */
--	if (IS_CASEFOLDED(dir))
-+	if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
- 		d_invalidate(dentry);
--#endif
- 
- out_trace:
- 	trace_ext4_unlink_exit(dentry, retval);
-diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-index c682fb927b64..d2d2254a9ded 100644
---- a/fs/ext4/super.c
-+++ b/fs/ext4/super.c
-@@ -3586,14 +3586,12 @@ int ext4_feature_set_ok(struct super_block *sb, int readonly)
- 		return 0;
+@@ -1326,13 +1326,13 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 		return -EINVAL;
  	}
- 
+ #endif
 -#if !IS_ENABLED(CONFIG_UNICODE)
--	if (ext4_has_feature_casefold(sb)) {
-+	if (!IS_ENABLED(CONFIG_UNICODE) && ext4_has_feature_casefold(sb)) {
- 		ext4_msg(sb, KERN_ERR,
- 			 "Filesystem with casefold feature cannot be "
- 			 "mounted without CONFIG_UNICODE");
- 		return 0;
+-	if (f2fs_sb_has_casefold(sbi)) {
++
++	if (!IS_ENABLED(CONFIG_UNICODE) && f2fs_sb_has_casefold(sbi)) {
+ 		f2fs_err(sbi,
+ 			"Filesystem with casefold feature cannot be mounted without CONFIG_UNICODE");
+ 		return -EINVAL;
  	}
 -#endif
- 
- 	if (readonly)
- 		return 1;
++
+ 	/*
+ 	 * The BLKZONED feature indicates that the drive was formatted with
+ 	 * zone alignment optimization. This is optional for host-aware
 -- 
 2.34.1
 
