@@ -2,151 +2,157 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F0168FE7A3
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jun 2024 15:22:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A29EC8FF70B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jun 2024 23:51:14 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sFD4I-0004a7-4c;
-	Thu, 06 Jun 2024 13:22:15 +0000
+	id 1sFL0i-0006Yh-9z;
+	Thu, 06 Jun 2024 21:51:05 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1sFD4G-0004Zy-Ev
+ (envelope-from <krisman@suse.de>) id 1sFL0g-0006YY-0M
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Jun 2024 13:22:13 +0000
+ Thu, 06 Jun 2024 21:51:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Qb3QzSk7hmd8VCOrQAOHEWV8WZJBpbSNa5uWGTwCDks=; b=i3urpQ1QyW6c/KJdvBfdcbBICI
- s5af0Q4VoDm+boVjHWV2Lw47BW/W976XqXQhQg9nAxNxz/tVufV4B7Iblcp3RcNOWS8DbgsoLQ9ax
- tD0gS6eMaI939fT10wX4rb2rUcwOV4TjMc1kY0kV/48oz6JRiTmmgnuVBFQB84TDlma0=;
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
+ References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=PQTf0zBkx+6dYehfEwHIIeqVqSDrnQHWK9tVjpEW7s4=; b=luOHRUJGXI/exrlpekNfsFmdNX
+ zQVSRVCroZ6E5io8JPkcNKjrKMdDIvQ7OSoxjRuSUWyCOrMUu/rQVfZOUERmhCxA16fOGZc1TdHJA
+ HVvwrsMO5QA3oDYFpbNeyNE60oxa0O5NdWG9L1Fq4QgI1n6iz7CBti4Fd/4miMdgfXow=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Qb3QzSk7hmd8VCOrQAOHEWV8WZJBpbSNa5uWGTwCDks=; b=mmXGp60gt0Rl3OvLaSxBip7mv3
- 0cSb7A/L01IjVn45h0SmfdDIvEH4DBJHEeTawAh7z/H5jPNxNRfD5qVXvpLux6NPQxw5ph+vCSNTZ
- fQcwp9JmL+cWcvNZGDwnJifUvXafH/dIUek/D2+X/qaGQ3nf12+OUQyUcL3st+2DcL8Q=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=PQTf0zBkx+6dYehfEwHIIeqVqSDrnQHWK9tVjpEW7s4=; b=jl36c0n3h4kxQ7vwRt0ShRFoeB
+ 1mrl3g6F4uzxXQAh+bsB43UTOhB3Np/e+xllgWt+wc7iwbsWoTatmQPDot/7SmjzO/p8f/oU7TRFh
+ U4ZUQCD1GWyYEE9Y4s9n7r25X87wl8el3iCkiJYCY0YA2yU/ZIlE5xOZqeArplDtbv8k=;
+Received: from smtp-out2.suse.de ([195.135.223.131])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sFD4H-0002Lq-D8 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Jun 2024 13:22:13 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id D53F2CE1B85;
- Thu,  6 Jun 2024 13:22:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3EA2AC2BD10;
- Thu,  6 Jun 2024 13:21:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1717680120;
- bh=fjqEjkWA2RusVimCoeFUf+3aEstaA7Y6jxoveNe8UhY=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=G13lutu8CuRuAAjeYkL7CNW5FbHI8z/9XaOcBPH9CjItJF3wwUYLG5gpahIvlzRt4
- 7qUkCdKFRjXUDdlr7Cv5fSAnIIKZKr1gD7d0uKtrfy0+mI4MNOBcwhKeE2L0T2Uyr1
- FPxqF7t2yC3j+mVLbkWI6zvm67DRJYJ49D9uNpuLluAV3KBy/7CLO0rIHXSX2QhrH3
- 5wF4gC39WliiSsUefgG0PD4sk8LKCueHpqvMNFH8u2NiOf4dtLxHJgazKiPlZl+oDR
- FsDpv2uAqOtBEGW4KP3HZkujvRlvIFHqqloxSRiyW9LBH54Aqt2lrIjW3iwrZOQb1+
- kKo/1W+553ZTA==
-Message-ID: <39ec8353-8f3e-45c6-b8a9-359ff96502f5@kernel.org>
-Date: Thu, 6 Jun 2024 21:22:00 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1sFL0g-0002JV-ME for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 06 Jun 2024 21:51:03 +0000
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 5B7351FB5A;
+ Thu,  6 Jun 2024 21:50:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1717710650; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=PQTf0zBkx+6dYehfEwHIIeqVqSDrnQHWK9tVjpEW7s4=;
+ b=XF0+T9vu3aR4QBcisT3dppVXlPEF6SyNqm6k9wGy24cFhwtxuQNSfqsQu4lliWc5St//hy
+ txATNenfL3qtEnEze4CdH4Whz1UU0uGdZC8JQEePOJUC3ZGiIF5ukiox5bmcCpggWtGCpu
+ RtxcJNOMth9Y2JGfkbufuqe49WVj7V8=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1717710650;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=PQTf0zBkx+6dYehfEwHIIeqVqSDrnQHWK9tVjpEW7s4=;
+ b=HO9NPha7lz19I5x9wkNaD7XGnXuuqb7e+TSrgf1sGir4rQMJ2RT+JrTf3Qiob7SGgJTY3R
+ QTLl5ogL0xScvUCA==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1717710650; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=PQTf0zBkx+6dYehfEwHIIeqVqSDrnQHWK9tVjpEW7s4=;
+ b=XF0+T9vu3aR4QBcisT3dppVXlPEF6SyNqm6k9wGy24cFhwtxuQNSfqsQu4lliWc5St//hy
+ txATNenfL3qtEnEze4CdH4Whz1UU0uGdZC8JQEePOJUC3ZGiIF5ukiox5bmcCpggWtGCpu
+ RtxcJNOMth9Y2JGfkbufuqe49WVj7V8=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1717710650;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=PQTf0zBkx+6dYehfEwHIIeqVqSDrnQHWK9tVjpEW7s4=;
+ b=HO9NPha7lz19I5x9wkNaD7XGnXuuqb7e+TSrgf1sGir4rQMJ2RT+JrTf3Qiob7SGgJTY3R
+ QTLl5ogL0xScvUCA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1394313A79;
+ Thu,  6 Jun 2024 21:50:49 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 4jzcOTkvYmaTXAAAD6G6ig
+ (envelope-from <krisman@suse.de>); Thu, 06 Jun 2024 21:50:49 +0000
+From: Gabriel Krisman Bertazi <krisman@suse.de>
+To: "Eugen Hristev" <eugen.hristev@collabora.com>, "Christian Brauner"
+ <christian@brauner.io>
+In-Reply-To: <20240606073353.47130-1-eugen.hristev@collabora.com> (Eugen
+ Hristev's message of "Thu, 6 Jun 2024 10:33:46 +0300")
+Organization: SUSE
+References: <20240606073353.47130-1-eugen.hristev@collabora.com>
+Date: Thu, 06 Jun 2024 17:50:38 -0400
+Message-ID: <87v82livv5.fsf@mailhost.krisman.be>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Matthew Wilcox <willy@infradead.org>
-References: <20240606095037.4086881-1-chao@kernel.org>
- <ZmGttup4xQM_jWky@casper.infradead.org>
-Content-Language: en-US
-From: Chao Yu <chao@kernel.org>
-Autocrypt: addr=chao@kernel.org; keydata=
- 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
-In-Reply-To: <ZmGttup4xQM_jWky@casper.infradead.org>
+X-Spam-Level: 
+X-Spamd-Result: default: False [-4.30 / 50.00]; BAYES_HAM(-3.00)[99.99%];
+ NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-0.981]; MIME_GOOD(-0.10)[text/plain];
+ ARC_NA(0.00)[]; HAS_ORG_HEADER(0.00)[]; MIME_TRACE(0.00)[0:+];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; RCVD_TLS_ALL(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_HAS_DN(0.00)[];
+ RCPT_COUNT_TWELVE(0.00)[15]; FROM_EQ_ENVFROM(0.00)[];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
+ TO_DN_SOME(0.00)[]
+X-Spam-Score: -4.30
+X-Spam-Flag: NO
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/6/6 20:38, Matthew Wilcox wrote: > On Thu, Jun 06,
- 2024 at 05:50:37PM +0800, Chao Yu wrote: >> For later folio conversion. >
- > What tree is this against? Last dev-test branch of f2fs git tree, I guess
- it's a little behind to linus' tree. 
+ Content preview:  Eugen Hristev <eugen.hristev@collabora.com> writes: > Hello, 
+ > > I am trying to respin the series here : >
+ https://www.spinics.net/lists/linux-ext4/msg85081.html
+ > > I resent some of the v9 patches and got some reviews from Gabriel, >
+ I did changes as [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [145.40.73.55 listed in list.dnswl.org]
+ for more information. [URIs: spinics.net]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [145.40.73.55 listed in bl.score.senderscore.com]
+ [195.135.223.131 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [145.40.73.55 listed in sa-accredit.habeas.com]
+ [195.135.223.131 listed in sa-accredit.habeas.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sFD4H-0002Lq-D8
-Subject: Re: [f2fs-dev] [PATCH] f2fs: get rid of buffer_head use
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1sFL0g-0002JV-ME
+Subject: Re: [f2fs-dev] [PATCH v18 0/7] Case insensitive cleanup for
+ ext4/f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -158,47 +164,39 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: brauner@kernel.org, kernel@collabora.com, tytso@mit.edu,
+ ebiggers@google.com, jack@suse.cz, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, adilger.kernel@dilger.ca,
+ viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+ linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/6/6 20:38, Matthew Wilcox wrote:
-> On Thu, Jun 06, 2024 at 05:50:37PM +0800, Chao Yu wrote:
->> For later folio conversion.
-> 
-> What tree is this against?
+Eugen Hristev <eugen.hristev@collabora.com> writes:
 
-Last dev-test branch of f2fs git tree, I guess it's a little behind
-to linus' tree.
+> Hello,
+>
+> I am trying to respin the series here :
+> https://www.spinics.net/lists/linux-ext4/msg85081.html
+>
+> I resent some of the v9 patches and got some reviews from Gabriel,
+> I did changes as requested and here is v18.
 
-> 
->> @@ -3957,32 +3976,32 @@ static int read_raw_super_block(struct f2fs_sb_info *sbi,
->>   		return -ENOMEM;
->>   
->>   	for (block = 0; block < 2; block++) {
->> -		bh = sb_bread(sb, block);
->> -		if (!bh) {
->> +		page = read_mapping_page(sb->s_bdev->bd_inode->i_mapping,
->> +								block, NULL);
-> 
-> You need to use bd_mapping, not bd_inode->i_mapping (since May 21 in
-> Linus' tree).
+The patchset looks good to me.  Feel free to add:
 
-Will update it once f2fs codebase was rebased to linus' tree.
+Reviewed-by: Gabriel Krisman Bertazi <krisman@suse.de>
 
-> 
-> And I don't think there's much point in switching to pages as an
-> intermediate step.  You may as well go straight to folios.
-> 
-> 		folio = read_mapping_folio(sb->s_bdev->bd_mapping, block, NULL);
+Bringing Christian into the loop, since this is getting ready and it
+should go through the VFS tree, as it touches libfs and a couple
+filesystems.
 
-Fine, let me work on this in v2.
+Christian, can you please take a look? Eric has also been involved in
+the review, so we should give him a few days to see if he has more
+comments.
 
-Thanks,
-
-> 
+-- 
+Gabriel Krisman Bertazi
 
 
 _______________________________________________
