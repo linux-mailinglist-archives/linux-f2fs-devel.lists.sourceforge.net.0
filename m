@@ -2,162 +2,119 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02074901986
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Jun 2024 05:17:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EBDF9021C7
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Jun 2024 14:42:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sGVWs-0006Mw-4Q;
-	Mon, 10 Jun 2024 03:17:05 +0000
+	id 1sGeM1-0006dQ-B7;
+	Mon, 10 Jun 2024 12:42:30 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daejun7.park@samsung.com>) id 1sGVWp-0006Mp-Uf
- for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Jun 2024 03:17:03 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3rvRmZgkbAG0djkVLWWPcLaaTO.RZZRWPfdPcNZYePYe.NZX@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1sGeLz-0006dJ-TR for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Jun 2024 12:42:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- Date:Message-ID:In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QicgXxIlqpC31U/1Nxw3Hsoz4A8pKQPVMlH3jzLsGNQ=; b=QdvYQuk9XDIPeDhQ1Yo+BR33Mo
- +HBRSgEGX/IRtTyG4Eok0fC1u3GfB1q9TQewyUr9XQli1lp3X3X5GxD1i/okYXyBgCWuFPVwqtzcC
- 8uoVXXGsj4XE5zgH2NF/hIAluHpL7V1AbE7cqNMzo7IfHXiG5Iv1i5rXyG92CelB9Z50=;
+ bh=GpbMG2ETbMXj0gKo4wncWYWe1zxrquQJ0AP9UvXGvVE=; b=XxQuk2lQ/nv19Ph1mfRs0gLQpH
+ zUbiRNUNZalJle0PHivIPgbwJDPayfgP75O22/Zah/SkT3NQxug3qhM5PJICntchY1+WyDbsoW9mN
+ /q/lZpQxEJtsCHtPqB1z0sptAaBkbH/ynjIJ+7vquWLvF0vXe4lu5dj4yShX3F0h8xgw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:
- In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=QicgXxIlqpC31U/1Nxw3Hsoz4A8pKQPVMlH3jzLsGNQ=; b=UV77fxVSEa7bi6piDVpMCtM+CJ
- aefIBPLPAlAvciph8poYaueG4qQa7tWZ3LgJmiASc+FcOxuK9hEWe0aqgZM18T+B40r1rljgUy5MG
- zDWI2wDyoIi7QSVSOiv3i+QNBrBl0hIVWwg0Ji1IeEfJDGt7YnG7eRaRbp8QTThTh17o=;
-Received: from mailout3.samsung.com ([203.254.224.33])
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=GpbMG2ETbMXj0gKo4wncWYWe1zxrquQJ0AP9UvXGvVE=; b=d
+ lhpiwOPnlD5yVjwsX7VJXVM3qCtWx0S83xlYdWSh81sBrubTscWSU1zisaC79tu3132nmDHcQ8bE+
+ BiMzzSGSrj+v190o0n0Rq/y1k0mx9Wsm5B9lM04UQIJa4OUTHZc+6cbMviDJDgfwLDMG/4LZejuXd
+ hFwi2/3L0Z1o0eNs=;
+Received: from mail-io1-f69.google.com ([209.85.166.69])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sGVWo-0004N9-Fq for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Jun 2024 03:17:03 +0000
-Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20240610031649epoutp034db881ffbfac47f9ed35d05b1746244a~XhkP9E5x32625626256epoutp03g
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1sGeM1-0008JE-7N for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Jun 2024 12:42:29 +0000
+Received: by mail-io1-f69.google.com with SMTP id
+ ca18e2360f4ac-7ea8fc6bd4dso558133139f.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 10 Jun 2024 03:16:49 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20240610031649epoutp034db881ffbfac47f9ed35d05b1746244a~XhkP9E5x32625626256epoutp03g
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1717989409;
- bh=QicgXxIlqpC31U/1Nxw3Hsoz4A8pKQPVMlH3jzLsGNQ=;
- h=Subject:Reply-To:From:To:CC:In-Reply-To:Date:References:From;
- b=QzY4ppZgLQe+Ud8Am3tA80rkyoJs0DUQ2HTCOTMcxXtgOPGF69urkCgLLig/Dte5v
- +mxMEaHRZPWP16afaQvVyyweS9qJUu5VQ2czGCZadaAmREoPmeVqoMEoITJKLUtifO
- QZlhcqoKiEttw+K8eaxe0AmzwvkDMRjacp/DKRvU=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas2p4.samsung.com (KnoxPortal) with ESMTP id
- 20240610031648epcas2p4a08c957de2fbac2dd1b135cf86d8c2c1~XhkPfYPTT2295422954epcas2p4_;
- Mon, 10 Jun 2024 03:16:48 +0000 (GMT)
-Received: from epsmges2p4.samsung.com (unknown [182.195.36.102]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4VyH5r452Pz4x9Pt; Mon, 10 Jun
- 2024 03:16:48 +0000 (GMT)
-X-AuditID: b6c32a48-105fa70000002507-11-666670209a4c
-Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
- epsmges2p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- 28.E0.09479.02076666; Mon, 10 Jun 2024 12:16:48 +0900 (KST)
-Mime-Version: 1.0
-From: Daejun Park <daejun7.park@samsung.com>
-To: Yongpeng Yang <yangyongpeng1@oppo.com>, "jaegeuk@kernel.org"
- <jaegeuk@kernel.org>, "chao@kernel.org" <chao@kernel.org>, "corbet@lwn.net"
- <corbet@lwn.net>, "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, "linux-doc@vger.kernel.org"
- <linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>
-X-Priority: 3
-X-Content-Kind-Code: NORMAL
-In-Reply-To: <0db07a4a-91da-402e-9601-46b196b8cf1b@oppo.com>
-X-CPGS-Detection: blocking_info_exchange
-X-Drm-Type: N,general
-X-Msg-Generator: Mail
-X-Msg-Type: PERSONAL
-X-Reply-Demand: N
-Message-ID: <20240610031547epcms2p526560bc9d2fd3a5f36615fe645640079@epcms2p5>
-Date: Mon, 10 Jun 2024 12:15:47 +0900
-X-CMS-MailID: 20240610031547epcms2p526560bc9d2fd3a5f36615fe645640079
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-X-CPGSPASS: Y
-X-CPGSPASS: Y
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrCJsWRmVeSWpSXmKPExsWy7bCmha5CQVqaQUurrMXpqWeZLJ4caGe0
- eHlI02LVg3CLHydNLJ6sn8VssbBtCYvFpUXuFpd3zWGzaPnjZHF+4msmi1UdcxktFk36zebA
- 67FpVSebx+4Fn5k8FvdNZvV4N0vJo2/LKkaPz5vkAtiism0yUhNTUosUUvOS81My89JtlbyD
- 453jTc0MDHUNLS3MlRTyEnNTbZVcfAJ03TJzgG5UUihLzCkFCgUkFhcr6dvZFOWXlqQqZOQX
- l9gqpRak5BSYF+gVJ+YWl+al6+WlllgZGhgYmQIVJmRnnGh7wF6wka1ixorHzA2M81i7GDk5
- JARMJHp3rWLpYuTiEBLYwSix+cIfpi5GDg5eAUGJvzuEQWqEBYIltr+ewAZiCwkoSay/OIsd
- Iq4ncevhGkYQm01AR2L6ifvsIHNEBD4xSZw58wFsKLPAUUaJL3ePM0Js45WY0f6UBcKWlti+
- fCtYnFPARqL/7xeoGg2JH8t6mSFsUYmbq9+yw9jvj82HqhGRaL13FqpGUOLBz91QcUmJ23M3
- QdXnS/y/shzKrpHYdmAelK0vca1jI9gNvAK+EhdPNTOB2CwCqhItJ44wQdS4SCx+sxCshllA
- XmL72znMoEBhFtCUWL9LH8SUEFCWOHILqoJPouPwX3aYDxs2/sbK3jHvCdR0NYl1P9czTWBU
- noUI6VlIds1C2LWAkXkVo1hqQXFuemqxUYEJPHKT83M3MYKTq5bHDsbZbz/oHWJk4mA8xCjB
- wawkwiuUkZwmxJuSWFmVWpQfX1Sak1p8iNEU6MuJzFKiyfnA9J5XEm9oYmlgYmZmaG5kamCu
- JM57r3VuipBAemJJanZqakFqEUwfEwenVAPTeofQPxEKE7Qyny5SfNmsl3990v/8zPdKJ66I
- mf/OT0pIO3rvwn2Jux/i/db+b6mo3GV05mzxpn8VMT27rIJFp2lO6gzcsrfSvihvStzcadkK
- lzz9A/UjX2hcPrD+2Aaf8gvdXXq/Pzsx+zdp7nafo7r6i5ta/8RV2w52L90nei3yqvz9heI7
- lvQ96jy8ZUniXc2PN48VLWS7sYTjWqJB4b62Xr8YD/WCjYYq3suPaFTezu3MO2zzuTLOd0Jw
- F9ez8JNGcr1GDs5Jn2Qm/mx9tISx8QejxALTrEMNXmfnOPKopwcyBeS/+ef3vaCP9UwKX8PJ
- yffCu1O8u9fvm3b8U7e58rnMEl65+48dGY2UWIozEg21mIuKEwFOJDN7NwQAAA==
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240531074640epcms2p46c3cf8b7cc4e707948ae200115e28e39
-References: <0db07a4a-91da-402e-9601-46b196b8cf1b@oppo.com>
- <20240531074640epcms2p46c3cf8b7cc4e707948ae200115e28e39@epcms2p4>
- <CGME20240531074640epcms2p46c3cf8b7cc4e707948ae200115e28e39@epcms2p5>
-X-Spam-Score: -2.7 (--)
+ Mon, 10 Jun 2024 05:42:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718023343; x=1718628143;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GpbMG2ETbMXj0gKo4wncWYWe1zxrquQJ0AP9UvXGvVE=;
+ b=JRekN1k56JsT21pnuart/3RnieEv7E5I2YHT2K1Vohd5SHi5Sc/ALmSAucUoU+dZCy
+ e66dZhDlFRQFlVNVBv+AIu1tHRxlkK5RW6sPQCHd7PJP33uO3jqKpTTdJZQk5bb0wj/Z
+ IDvlxrhwCXoCM2CZaWvdf7wgndsEeEmn8PhdMfyT4+JlkG8/tcd6CXhmCr/Ux6/fb2ax
+ DqKjvUJoqpHRSV9p5RI6aVD1q9HsY1GZ2VED4jRi9H0pBo67mHM/eYuDcFvjFYRNcw7S
+ C1pvfq9tHzYCyMciJPlIwrtUBRSNaxMOT92dpyT4xivhX5DG3oLyc1yaZCfqVg2N2+St
+ 6ZbQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXLHBe7EMk/Jqwe8HHXq5zplXbnuWOBzBjKJkwJq93JE9y/5tH15CwO1aEUBrfdgG4+lEEsN7Qm82UeMD/NKe2E68fnIJoel9lsDAXEG+4rOZ+KgfTnfQ==
+X-Gm-Message-State: AOJu0YyC9S7GEFPyZiuNjEgws5JwaHMxi1HIna8YnYBVW/5xREXXL+X3
+ M8RCJJOVfTnnl5LJF7qi5DXHaHLcfamsLNt1JDzjOvQo2W/2nJhcIYcIH7Ki7g0p7HpwyDsFlkc
+ Knv5x+p61vg4NoU3nAx/4y4Tp+THp+KCXifPQlkUQw7VmPx8gS9rl9z8=
+X-Google-Smtp-Source: AGHT+IE9eZkNwX3TDsRRc1uDgc5CwSX0gyxWB9reSsooOC4mXuId0I6CFMMKG2mOGqlr+pZ9+G2QcNCZskuvhBtFk3pxpcNNSNla
+MIME-Version: 1.0
+X-Received: by 2002:a05:6602:6c0e:b0:7eb:8ba1:af5 with SMTP id
+ ca18e2360f4ac-7eb8ba11289mr11869939f.1.1718023342383; Mon, 10 Jun 2024
+ 05:42:22 -0700 (PDT)
+Date: Mon, 10 Jun 2024 05:42:22 -0700
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <00000000000009f2fc061a887b35@google.com>
+From: syzbot <syzbot+listd51a233164f971537e0f@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.6 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  > Hi Daejun,
- > 1. It is not compatible with "F2FS_OPTION(sbi).active_logs
- == 2". > 2. Once has_enough_free_secs is false,
- F2FS cannot restore to multi-node
- > sections even after has_enough_free_secs b [...] 
- Content analysis details:   (-2.7 points, 6.0 required)
+ Content preview:  Hello f2fs maintainers/developers, This is a 31-day syzbot
+ report for the f2fs subsystem. All related reports/information can be found
+ at: https://syzkaller.appspot.com/upstream/s/f2fs During the period, 3 new
+ issues were detected and 0 were fixed. In total, 7 issues are still open
+ and 37 have been fixed so far. 
+ Content analysis details:   (0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [203.254.224.33 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [203.254.224.33 listed in bl.score.senderscore.com]
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: samsung.com]
+ for more information. [URIs: syzkaller.appspot.com]
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [209.85.166.69 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [203.254.224.33 listed in sa-accredit.habeas.com]
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.254.224.33 listed in wl.mailspike.net]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sGVWo-0004N9-Fq
-Subject: Re: [f2fs-dev] (2) [RFC PATCH] f2fs: add support single node
- section mode
+ [209.85.166.69 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.166.69 listed in bl.score.senderscore.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.69 listed in wl.mailspike.net]
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1sGeM1-0008JE-7N
+Subject: [f2fs-dev] [syzbot] Monthly f2fs report (Jun 2024)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -169,27 +126,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: daejun7.park@samsung.com
-Cc: Seokhwan Kim <sukka.kim@samsung.com>, Nayeon Kim <nayeoni.kim@samsung.com>,
- Dongjin Kim <dongjin_.kim@samsung.com>, Siwoo Jung <siu.jung@samsung.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-> Hi Daejun,
-> 1. It is not compatible with "F2FS_OPTION(sbi).active_logs == 2".
-> 2. Once has_enough_free_secs is false, F2FS cannot restore to multi-node
-> sections even after has_enough_free_secs becomes true and the filesystem
-> is unmounted and remounted. This seems unreasonable.
+Hello f2fs maintainers/developers,
 
-Hi Yongpeng Yang,
+This is a 31-day syzbot report for the f2fs subsystem.
+All related reports/information can be found at:
+https://syzkaller.appspot.com/upstream/s/f2fs
 
-1. Yes, I will modify it so that it only applies when active_log is 6.
-2. This technique is effective when utilization is high. Therefore, in my scenario, I assumed that only heavy users would use this option. So I assumed that the free section would not be sufficiently secured even after that.
-Futhermore, if a new section is allocated to deactivate a single node whenever there is free space, then soon again insufficient free space may occur, resulting in more unnecessary GC.
+During the period, 3 new issues were detected and 0 were fixed.
+In total, 7 issues are still open and 37 have been fixed so far.
 
-Thanks,
-Daejun
+Some of the still happening issues:
+
+Ref Crashes Repro Title
+<1> 43      No    WARNING: locking bug in f2fs_getxattr
+                  https://syzkaller.appspot.com/bug?extid=8f9e913ccc308e66c407
+<2> 11      Yes   kernel BUG in f2fs_vm_page_mkwrite
+                  https://syzkaller.appspot.com/bug?extid=f195123a45ad487ca66c
+<3> 3       No    WARNING in f2fs_getxattr
+                  https://syzkaller.appspot.com/bug?extid=3c58b51b764fa1f423b1
+
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+To disable reminders for individual bugs, reply with the following command:
+#syz set <Ref> no-reminders
+
+To change bug's subsystems, reply with:
+#syz set <Ref> subsystems: new-subsystem
+
+You may send multiple commands in a single email message.
 
 
 _______________________________________________
