@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC117905DB9
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Jun 2024 23:32:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB5F0905DF1
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Jun 2024 23:47:52 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sHVaG-0004Db-Ht;
-	Wed, 12 Jun 2024 21:32:43 +0000
+	id 1sHVok-0005gA-Ro;
+	Wed, 12 Jun 2024 21:47:44 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <djwong@kernel.org>) id 1sHVaF-0004DV-L8
+ (envelope-from <djwong@kernel.org>) id 1sHVoi-0005g1-CW
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Jun 2024 21:32:43 +0000
+ Wed, 12 Jun 2024 21:47:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wQck/DNTNyeJny0U3F50Z8+ClE62bmTF3SdhQAzqwFs=; b=Xtfu6qBJbHg+YSZuUjkvqpS52k
- tGseL49TU8SjPQ+cpLjJTYpLnKn1T3g6GvG81yRHWMgvHUdgYRwb709EXMIUEyGVExOUhrTWQq2/z
- 9BaDKpiOsv8d83L0eH6Y6RubqWiuqiUKaiVE2WxVjJLJ4viVphJDek58Ae7l11WuNmQI=;
+ bh=8XWTB9Q5UMgehRUn0ltvFsNs3q24ratroJApNOks8P0=; b=BATGOGG5FnznRLs5Sl7LYWlU5p
+ FBKrQXIGhclqqFLIeZyAWVGbxjHoyJrIhAdftuVLJSH5n8sxtTSwGE/SjcKk9I3n4PPN1D3j4gkJu
+ FN5CSt9cFl1e8tbcN2YhKtJCGhyOc6r2HjqNCLTwrAsK8IABgJ+s88Hrvc+Z1YV0R1vc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,38 +31,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wQck/DNTNyeJny0U3F50Z8+ClE62bmTF3SdhQAzqwFs=; b=SFHTZBuAkJEOs5iSRf2zPXSJ5W
- jol3HDGdl6Rz9KTOjXQiqBStUAKz0ZLKPZ33aOSkhp2a8lVpjZrk0Ojoc/+5qwPMPjVt/sjvN2Cwj
- 0z2wxJXFZ3/fXYf+PZE6nSO0Z+wO8ye87LqLb6R+jgUEzgazWGsVW4O7X5+bnHXwcYoA=;
+ bh=8XWTB9Q5UMgehRUn0ltvFsNs3q24ratroJApNOks8P0=; b=XWquzvcWWfG1hoXLXLpMDfdRZW
+ 9uHBjugI9/nanacDsRmxUuLpsiHGJTd9gFkPKtiydyStcGM9BdnB7p5uIfQ/Q/zEUD/JtjmofHFIS
+ rYoCn0La2Rlurdl5PY3fEN2c0wjWm0VwkWIFxp2M1R9F+9qgYywUoaYFL9foG1PohBqk=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sHVaE-0002hs-RA for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Jun 2024 21:32:43 +0000
+ id 1sHVoj-0003qI-G8 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 12 Jun 2024 21:47:41 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id B0F646177B;
- Wed, 12 Jun 2024 21:32:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B43AC116B1;
- Wed, 12 Jun 2024 21:32:36 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 273C560C22;
+ Wed, 12 Jun 2024 21:47:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA68EC116B1;
+ Wed, 12 Jun 2024 21:47:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1718227956;
- bh=+6K2GBiD0D6rO2F8XEEpwjw7JrvPdC0cF53qMdYVYKs=;
+ s=k20201202; t=1718228849;
+ bh=+/VTydx8DuKC+hBaP5Tnh04ofGemNXKWLfDD9tjXUwo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=thcveAPaEwsbXqDPJp4ortTgIEthCL/Ns9UeHO/MNyNH/Pp1rVKddUHOiSTxXE7Kk
- R6OpcqTcK9qyO67XMIFXeHEGwCCHivTeVPDeB70u2wq/1WlzXbQCxZtALLdF0VD7gF
- t6GDLv3Cfk3BxvJ9r+zZ+MLazjF85+dRaN3yYlaEFel4eSF0LsgW+2va3PK01MckVJ
- FQzj+cg7BUkaP8VQ2WtJVwXc7SFyezEx6rCEN6C6bVCsZqvj+dKdS5pXWqdR8nVltq
- tRo2khVZW05PrkS/X8HzP1aYmKj7+ylCkzO8TEIW3PQUQDRla9cozLSiI23pKkE3cI
- /6Qt5EU0PtLjw==
-Date: Wed, 12 Jun 2024 14:32:35 -0700
+ b=QffqexAzs3KBLfngWw5SiR/LiYM9HWTJ+9du9kZ9zv+i8sSzY98yBnmXrjNyOZabB
+ U/ck13+Vg9ga/wkTZMgvz071bhJcm6aAO+VOId0A4vJ1tpoYrK0Pxr9sZIFO1z+/55
+ jNf0LSzjZcN81fAo7//dsmA5wDLGof5rgYgtaMIPuvCUrl6fQwiMApmoVoFmgUnKAM
+ IB6Gc/ysLm/Z5qm7rDoqVGb73GLOZIqfGt2hdqleDljCHOeHg0mjybbOeSgAKoiO6a
+ mZFQ2+6LCc8Rc70AZeesAubTqd5BfCNqrO3eX17/kjNmxlfQO8rv/YjLcY5VA31NSD
+ 6fOIRtOCqzeEg==
+Date: Wed, 12 Jun 2024 14:47:29 -0700
 From: "Darrick J. Wong" <djwong@kernel.org>
 To: John Garry <john.g.garry@oracle.com>
-Message-ID: <20240612213235.GK2764752@frogsfrogsfrogs>
+Message-ID: <20240612214729.GL2764752@frogsfrogsfrogs>
 References: <20240607143919.2622319-1-john.g.garry@oracle.com>
- <20240607143919.2622319-3-john.g.garry@oracle.com>
+ <20240607143919.2622319-4-john.g.garry@oracle.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240607143919.2622319-3-john.g.garry@oracle.com>
+In-Reply-To: <20240607143919.2622319-4-john.g.garry@oracle.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -70,9 +70,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jun 07, 2024 at 02:38:59PM +0000, John Garry wrote:
- > Allow filesystems to set the io_block_size for sub-fs block size zeroing,
- > as in future we will want to extend this feature to support ze [...] 
+ Content preview:  On Fri, Jun 07, 2024 at 02:39:00PM +0000, John Garry wrote:
+ > Currently iomap->io_block_size is set to the i_blocksize() value for the
+ > inode. > > Expand the sub-fs block size zeroing to now cover RT [...] 
  Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -100,9 +100,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sHVaE-0002hs-RA
-Subject: Re: [f2fs-dev] [PATCH v4 02/22] iomap: Allow filesystems set IO
- block zeroing size
+X-Headers-End: 1sHVoj-0003qI-G8
+Subject: Re: [f2fs-dev] [PATCH v4 03/22] xfs: Use extent size granularity
+ for iomap->io_block_size
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,223 +127,200 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jun 07, 2024 at 02:38:59PM +0000, John Garry wrote:
-> Allow filesystems to set the io_block_size for sub-fs block size zeroing,
-> as in future we will want to extend this feature to support zeroing of
-> block sizes of larger than the inode block size.
+On Fri, Jun 07, 2024 at 02:39:00PM +0000, John Garry wrote:
+> Currently iomap->io_block_size is set to the i_blocksize() value for the
+> inode.
 > 
-> The value in io_block_size does not have to be a power-of-2, so fix up
-> zeroing code to handle that.
+> Expand the sub-fs block size zeroing to now cover RT extents, by calling
+> setting iomap->io_block_size as xfs_inode_alloc_unitsize().
+> 
+> In xfs_iomap_write_unwritten(), update the unwritten range fsb to cover
+> this extent granularity.
+> 
+> In xfs_file_dio_write(), handle a write which is not aligned to extent
+> size granularity as unaligned. Since the extent size granularity need not
+> be a power-of-2, handle this also.
 > 
 > Signed-off-by: John Garry <john.g.garry@oracle.com>
 > ---
->  block/fops.c          |  1 +
->  fs/btrfs/inode.c      |  1 +
->  fs/erofs/data.c       |  1 +
->  fs/erofs/zmap.c       |  1 +
->  fs/ext2/inode.c       |  1 +
->  fs/ext4/extents.c     |  1 +
->  fs/ext4/inode.c       |  1 +
->  fs/f2fs/data.c        |  1 +
->  fs/fuse/dax.c         |  1 +
->  fs/gfs2/bmap.c        |  1 +
->  fs/hpfs/file.c        |  1 +
->  fs/iomap/direct-io.c  | 23 +++++++++++++++++++----
->  fs/xfs/xfs_iomap.c    |  1 +
->  fs/zonefs/file.c      |  2 ++
->  include/linux/iomap.h |  2 ++
->  15 files changed, 35 insertions(+), 4 deletions(-)
+>  fs/xfs/xfs_file.c  | 24 +++++++++++++++++++-----
+>  fs/xfs/xfs_inode.c | 17 +++++++++++------
+>  fs/xfs/xfs_inode.h |  1 +
+>  fs/xfs/xfs_iomap.c |  8 +++++++-
+>  4 files changed, 38 insertions(+), 12 deletions(-)
 > 
-> diff --git a/block/fops.c b/block/fops.c
-> index 9d6d86ebefb9..020443078630 100644
-> --- a/block/fops.c
-> +++ b/block/fops.c
-> @@ -402,6 +402,7 @@ static int blkdev_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
->  	iomap->addr = iomap->offset;
->  	iomap->length = isize - iomap->offset;
->  	iomap->flags |= IOMAP_F_BUFFER_HEAD; /* noop for !CONFIG_BUFFER_HEAD */
-> +	iomap->io_block_size = i_blocksize(inode);
->  	return 0;
+> diff --git a/fs/xfs/xfs_file.c b/fs/xfs/xfs_file.c
+> index b240ea5241dc..24fe3c2e03da 100644
+> --- a/fs/xfs/xfs_file.c
+> +++ b/fs/xfs/xfs_file.c
+> @@ -601,7 +601,7 @@ xfs_file_dio_write_aligned(
 >  }
 >  
-
-<snip a bunch of filesystems setting io_block_size to i_blocksize>
-
-> diff --git a/fs/hpfs/file.c b/fs/hpfs/file.c
-> index 1bb8d97cd9ae..5d2718faf520 100644
-> --- a/fs/hpfs/file.c
-> +++ b/fs/hpfs/file.c
-> @@ -149,6 +149,7 @@ static int hpfs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
->  		iomap->addr = IOMAP_NULL_ADDR;
->  		iomap->length = 1 << blkbits;
->  	}
-> +	iomap->io_block_size = i_blocksize(inode);
-
-HPFS does iomap now?  Yikes.
-
+>  /*
+> - * Handle block unaligned direct I/O writes
+> + * Handle unaligned direct IO writes.
+>   *
+>   * In most cases direct I/O writes will be done holding IOLOCK_SHARED, allowing
+>   * them to be done in parallel with reads and other direct I/O writes.  However,
+> @@ -630,9 +630,9 @@ xfs_file_dio_write_unaligned(
+>  	ssize_t			ret;
 >  
->  	hpfs_unlock(sb);
->  	return 0;
-> diff --git a/fs/iomap/direct-io.c b/fs/iomap/direct-io.c
-> index f3b43d223a46..5be8d886ab4a 100644
-> --- a/fs/iomap/direct-io.c
-> +++ b/fs/iomap/direct-io.c
-> @@ -277,7 +277,7 @@ static loff_t iomap_dio_bio_iter(const struct iomap_iter *iter,
+>  	/*
+> -	 * Extending writes need exclusivity because of the sub-block zeroing
+> -	 * that the DIO code always does for partial tail blocks beyond EOF, so
+> -	 * don't even bother trying the fast path in this case.
+> +	 * Extending writes need exclusivity because of the sub-block/extent
+> +	 * zeroing that the DIO code always does for partial tail blocks
+> +	 * beyond EOF, so don't even bother trying the fast path in this case.
+
+Hummm.  So let's say the fsblock size is 4k, the rt extent size is 16k,
+and you want to write bytes 8192-12287 of a file.  Currently we'd use
+xfs_file_dio_write_aligned for that, but now we'd use
+xfs_file_dio_write_unaligned?  Even though we don't need zeroing or any
+of that stuff?
+
+>  	 */
+>  	if (iocb->ki_pos > isize || iocb->ki_pos + count >= isize) {
+>  		if (iocb->ki_flags & IOCB_NOWAIT)
+> @@ -698,11 +698,25 @@ xfs_file_dio_write(
+>  	struct xfs_inode	*ip = XFS_I(file_inode(iocb->ki_filp));
+>  	struct xfs_buftarg      *target = xfs_inode_buftarg(ip);
+>  	size_t			count = iov_iter_count(from);
+> +	bool			unaligned;
+> +	u64			unitsize;
+>  
+>  	/* direct I/O must be aligned to device logical sector size */
+>  	if ((iocb->ki_pos | count) & target->bt_logical_sectormask)
+>  		return -EINVAL;
+> -	if ((iocb->ki_pos | count) & ip->i_mount->m_blockmask)
+> +
+> +	unitsize = xfs_inode_alloc_unitsize(ip);
+> +	if (!is_power_of_2(unitsize)) {
+> +		if (isaligned_64(iocb->ki_pos, unitsize) &&
+> +		    isaligned_64(count, unitsize))
+> +			unaligned = false;
+> +		else
+> +			unaligned = true;
+> +	} else {
+> +		unaligned = (iocb->ki_pos | count) & (unitsize - 1);
+> +	}
+
+Didn't I already write this?
+
+> +	if (unaligned)
+
+	if (!xfs_is_falloc_aligned(ip, iocb->ki_pos, count))
+
+>  		return xfs_file_dio_write_unaligned(ip, iocb, from);
+>  	return xfs_file_dio_write_aligned(ip, iocb, from);
+>  }
+> diff --git a/fs/xfs/xfs_inode.c b/fs/xfs/xfs_inode.c
+> index 58fb7a5062e1..93ad442f399b 100644
+> --- a/fs/xfs/xfs_inode.c
+> +++ b/fs/xfs/xfs_inode.c
+> @@ -4264,15 +4264,20 @@ xfs_break_layouts(
+>  	return error;
+>  }
+>  
+> -/* Returns the size of fundamental allocation unit for a file, in bytes. */
+
+Don't delete the comment, it has useful return type information.
+
+/*
+ * Returns the size of fundamental allocation unit for a file, in
+ * fsblocks.
+ */
+
+>  unsigned int
+> -xfs_inode_alloc_unitsize(
+> +xfs_inode_alloc_unitsize_fsb(
+>  	struct xfs_inode	*ip)
 >  {
->  	const struct iomap *iomap = &iter->iomap;
->  	struct inode *inode = iter->inode;
-> -	unsigned int fs_block_size = i_blocksize(inode), pad;
-> +	u64 io_block_size = iomap->io_block_size;
-
-I wonder, should iomap be nice and not require filesystems to set
-io_block_size themselves unless they really need it?  Anyone working on
-an iomap port while this patchset is in progress may or may not remember
-to add this bit if they get their port merged after atomicwrites is
-merged; and you might not remember to prevent the bitrot if the reverse
-order happens.
-
-	u64 io_block_size = iomap->io_block_size ?: i_blocksize(inode);
-
->  	loff_t length = iomap_length(iter);
->  	loff_t pos = iter->pos;
->  	blk_opf_t bio_opf;
-> @@ -287,6 +287,7 @@ static loff_t iomap_dio_bio_iter(const struct iomap_iter *iter,
->  	int nr_pages, ret = 0;
->  	size_t copied = 0;
->  	size_t orig_count;
-> +	unsigned int pad;
+> -	unsigned int		blocks = 1;
+> -
+>  	if (XFS_IS_REALTIME_INODE(ip))
+> -		blocks = ip->i_mount->m_sb.sb_rextsize;
+> +		return ip->i_mount->m_sb.sb_rextsize;
+> +
+> +	return 1;
+> +}
 >  
->  	if ((pos | length) & (bdev_logical_block_size(iomap->bdev) - 1) ||
->  	    !bdev_iter_is_aligned(iomap->bdev, dio->submit.iter))
-> @@ -355,7 +356,14 @@ static loff_t iomap_dio_bio_iter(const struct iomap_iter *iter,
+> -	return XFS_FSB_TO_B(ip->i_mount, blocks);
+> +/* Returns the size of fundamental allocation unit for a file, in bytes. */
+> +unsigned int
+> +xfs_inode_alloc_unitsize(
+> +	struct xfs_inode	*ip)
+> +{
+> +	return XFS_FSB_TO_B(ip->i_mount, xfs_inode_alloc_unitsize_fsb(ip));
+>  }
+> diff --git a/fs/xfs/xfs_inode.h b/fs/xfs/xfs_inode.h
+> index 292b90b5f2ac..90d2fa837117 100644
+> --- a/fs/xfs/xfs_inode.h
+> +++ b/fs/xfs/xfs_inode.h
+> @@ -643,6 +643,7 @@ int xfs_inode_reload_unlinked(struct xfs_inode *ip);
+>  bool xfs_ifork_zapped(const struct xfs_inode *ip, int whichfork);
+>  void xfs_inode_count_blocks(struct xfs_trans *tp, struct xfs_inode *ip,
+>  		xfs_filblks_t *dblocks, xfs_filblks_t *rblocks);
+> +unsigned int xfs_inode_alloc_unitsize_fsb(struct xfs_inode *ip);
+>  unsigned int xfs_inode_alloc_unitsize(struct xfs_inode *ip);
 >  
->  	if (need_zeroout) {
->  		/* zero out from the start of the block to the write offset */
-> -		pad = pos & (fs_block_size - 1);
-> +		if (is_power_of_2(io_block_size)) {
-> +			pad = pos & (io_block_size - 1);
-> +		} else {
-> +			loff_t _pos = pos;
-> +
-> +			pad = do_div(_pos, io_block_size);
-> +		}
-
-Please don't opencode this twice.
-
-static unsigned int offset_in_block(loff_t pos, u64 blocksize)
-{
-	if (likely(is_power_of_2(blocksize)))
-		return pos & (blocksize - 1);
-	return do_div(pos, blocksize);
-}
-
-		pad = offset_in_block(pos, io_block_size);
-		if (pad)
-			...
-
-Also, what happens if pos-pad points to a byte before the mapping?
-
-> +
->  		if (pad)
->  			iomap_dio_zero(iter, dio, pos - pad, pad);
->  	}
-> @@ -429,9 +437,16 @@ static loff_t iomap_dio_bio_iter(const struct iomap_iter *iter,
->  	if (need_zeroout ||
->  	    ((dio->flags & IOMAP_DIO_WRITE) && pos >= i_size_read(inode))) {
->  		/* zero out from the end of the write to the end of the block */
-> -		pad = pos & (fs_block_size - 1);
-> +		if (is_power_of_2(io_block_size)) {
-> +			pad = pos & (io_block_size - 1);
-> +		} else {
-> +			loff_t _pos = pos;
-> +
-> +			pad = do_div(_pos, io_block_size);
-> +		}
-> +
->  		if (pad)
-> -			iomap_dio_zero(iter, dio, pos, fs_block_size - pad);
-> +			iomap_dio_zero(iter, dio, pos, io_block_size - pad);
-
-What if pos + io_block_size - pad points to a byte after the end of the
-mapping?
-
->  	}
->  out:
->  	/* Undo iter limitation to current extent */
+>  struct xfs_dir_update_params {
 > diff --git a/fs/xfs/xfs_iomap.c b/fs/xfs/xfs_iomap.c
-> index 378342673925..ecb4cae88248 100644
+> index ecb4cae88248..fbe69f747e30 100644
 > --- a/fs/xfs/xfs_iomap.c
 > +++ b/fs/xfs/xfs_iomap.c
-> @@ -127,6 +127,7 @@ xfs_bmbt_to_iomap(
+> @@ -127,7 +127,7 @@ xfs_bmbt_to_iomap(
 >  	}
 >  	iomap->offset = XFS_FSB_TO_B(mp, imap->br_startoff);
 >  	iomap->length = XFS_FSB_TO_B(mp, imap->br_blockcount);
-> +	iomap->io_block_size = i_blocksize(VFS_I(ip));
+> -	iomap->io_block_size = i_blocksize(VFS_I(ip));
+> +	iomap->io_block_size = xfs_inode_alloc_unitsize(ip);
+
+Oh, I see.  So io_block_size causes iomap to write zeroes to the storage
+backing surrounding areas of the file range.  In this case, for direct
+writes to the unwritten middle 4k of an otherwise written 16k extent,
+we'll write zeroes to 0-4k and 8k-16k even though that wasn't what the
+caller asked for?
+
+IOWs, if you start with:
+
+WWuW
+
+write to the "U", then it'll write zeroes to the "W" areas?  That
+doesn't sound good...
+
 >  	if (mapping_flags & IOMAP_DAX)
 >  		iomap->dax_dev = target->bt_daxdev;
 >  	else
-> diff --git a/fs/zonefs/file.c b/fs/zonefs/file.c
-> index 3b103715acc9..bf2cc4bee309 100644
-> --- a/fs/zonefs/file.c
-> +++ b/fs/zonefs/file.c
-> @@ -50,6 +50,7 @@ static int zonefs_read_iomap_begin(struct inode *inode, loff_t offset,
->  		iomap->addr = (z->z_sector << SECTOR_SHIFT) + iomap->offset;
->  		iomap->length = isize - iomap->offset;
->  	}
-> +	iomap->io_block_size = i_blocksize(inode);
->  	mutex_unlock(&zi->i_truncate_mutex);
+> @@ -577,11 +577,17 @@ xfs_iomap_write_unwritten(
+>  	xfs_fsize_t	i_size;
+>  	uint		resblks;
+>  	int		error;
+> +	unsigned int	rounding;
 >  
->  	trace_zonefs_iomap_begin(inode, iomap);
-> @@ -99,6 +100,7 @@ static int zonefs_write_iomap_begin(struct inode *inode, loff_t offset,
->  		iomap->type = IOMAP_MAPPED;
->  		iomap->length = isize - iomap->offset;
->  	}
-> +	iomap->io_block_size = i_blocksize(inode);
->  	mutex_unlock(&zi->i_truncate_mutex);
+>  	trace_xfs_unwritten_convert(ip, offset, count);
 >  
->  	trace_zonefs_iomap_begin(inode, iomap);
-> diff --git a/include/linux/iomap.h b/include/linux/iomap.h
-> index 6fc1c858013d..d63a35b77907 100644
-> --- a/include/linux/iomap.h
-> +++ b/include/linux/iomap.h
-> @@ -103,6 +103,8 @@ struct iomap {
->  	void			*private; /* filesystem private */
->  	const struct iomap_folio_ops *folio_ops;
->  	u64			validity_cookie; /* used with .iomap_valid() */
-> +	/* io block zeroing size, not necessarily a power-of-2  */
+>  	offset_fsb = XFS_B_TO_FSBT(mp, offset);
+>  	count_fsb = XFS_B_TO_FSB(mp, (xfs_ufsize_t)offset + count);
+> +	rounding = xfs_inode_alloc_unitsize_fsb(ip);
+> +	if (rounding > 1) {
+> +		offset_fsb = rounddown_64(offset_fsb, rounding);
+> +		count_fsb = roundup_64(count_fsb, rounding);
+> +	}
 
-size in bytes?
+...and then the ioend handler is supposed to be smart enough to know
+that iomap quietly wrote to other parts of the disk.
 
-I'm not sure what "io block zeroing" means.  What are you trying to
-accomplish here?  Let's say the fsblock size is 4k and the allocation
-unit (aka the atomic write size) is 16k.  Userspace wants a direct write
-to file offset 8192-12287, and that space is unwritten:
+Um, does this cause unwritten extent conversion for entire rtextents
+after writeback to a rtextsize > 1fsb file?
 
-uuuu
-  ^
-
-Currently we'd just write the 4k and run the io completion handler, so
-the final state is:
-
-uuWu
-
-Instead, if the fs sets io_block_size to 16384, does this direct write
-now amplify into a full 16k write?  With the end result being:
-
-ZZWZ
-
-only.... I don't see the unwritten areas being converted to written?
-I guess for an atomic write you'd require the user to write 0-16383?
-
-<still confused about why we need to do this, maybe i'll figure it out
-as I go along>
+Or am I really misunderstanding what's going on here with the io paths?
 
 --D
 
-> +	u64			io_block_size;
->  };
+>  	count_fsb = (xfs_filblks_t)(count_fsb - offset_fsb);
 >  
->  static inline sector_t iomap_sector(const struct iomap *iomap, loff_t pos)
+>  	/*
 > -- 
 > 2.31.1
 > 
