@@ -2,68 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61D8E905791
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Jun 2024 17:56:26 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36112905789
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Jun 2024 17:56:16 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sHQKn-00042n-PP;
-	Wed, 12 Jun 2024 15:56:25 +0000
+	id 1sHQKc-00006T-NL;
+	Wed, 12 Jun 2024 15:56:15 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sHQKX-00042I-Or
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sHQKW-00005s-3n
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Jun 2024 15:56:09 +0000
+ Wed, 12 Jun 2024 15:56:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XPaNDJXfWu320CAx+J96pKu6CkNUG6Qr1tyBXDufIhQ=; b=VgEBX4LvL6DoVuAs7sbER4GbjW
- cSNF23lusax+6sfOC/S14Nh8H+kpVl4m4nJtLuuoXy5PzHkg9RK6jR3htiQqOUh4RnZ6ktC/TjHAX
- uyWIuGAQpwCnpe17civUYwDiXPyyWzU7VzrVB2UFjN2xK0+slJ6lrSXvqlw7idvvOGFo=;
+ bh=gL5AiSL0vNePYAcCF3CdiqPVLVDzy0CVeM3itbFT/04=; b=eFUXWzx2u7u6Mi24gG4QCnwtOD
+ maieRAIDffjFte6wrCBfVKOu/n8CLypz9e1pGXF2rfowOE4ZwPdzUIUYXEpHJhvSsEexLcaG24WL5
+ jgaje7eNQjrKMcCS9H9oh/5OBV+JDrfBJaEeTyT9tcVbKVVIa25noVSADsM9hbIkE1rg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XPaNDJXfWu320CAx+J96pKu6CkNUG6Qr1tyBXDufIhQ=; b=UHXS/rR3t0Ypj8L2BjeF/rHQFQ
- VQWrVPM8CWCXetA0gVbQVpm59G073hiD3pGoZ49gzZQLRtid5iKOu+KPTdv6YANadl/ToLjd8HQv6
- P9e0dOkCEGA3tx/A/p/HisAcTb2g5Q0Z4iT2/shpG8PuE4nGEDA4yR8Hkh7IJUpwxLRw=;
+ bh=gL5AiSL0vNePYAcCF3CdiqPVLVDzy0CVeM3itbFT/04=; b=k8ugKjo02TP4g/3h2jLlV821u+
+ phRxewpRToqPkYuGLBVNPo9+fyD8NyRwcJJBANQox9UBD0Zik/WpNhOgWTQHhp6aiNGSX3jh2CEVx
+ cdbKdVEq8f6eAck/Fs2vMY+fTeJaDk0HXVJq3jmxnDimrT74Sa36LLCP1pXAoXLYkj3c=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sHQKX-0007SA-6u for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Jun 2024 15:56:09 +0000
+ id 1sHQKW-0007S5-GS for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 12 Jun 2024 15:56:08 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 192CB614DE;
- Wed, 12 Jun 2024 15:55:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 40F0CC4AF51;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 63214614CE;
+ Wed, 12 Jun 2024 15:55:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 1925CC4AF1A;
  Wed, 12 Jun 2024 15:55:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1718207757;
- bh=xjFhkd1pDCVuCkX4MEJUFhIi2XRBRKnNHn6Nq/p1zpI=;
+ bh=9Z9Ru3yhVGdasewixq2jt9ojL4nDmltuDJb0o1FAZYE=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=Qrybn7YOhRJp8ek1nsiVlA8Zdu3h4KRNRVbHTVynqLmRqUvAZ5muuOT4OW3EzbxU5
- a29mUTTgoY3TfJwTzK/vRYFRIGm899tsiYnj+8ZZoOR9SFFmKqxOU4zlZlfxAOYvxd
- zndh9YRaxOJ2VMsW2oLgHm/J/nXnZYJBBQgnFe+paqXWKZhiq7FPU7bgnFc3ggMN91
- oukIVY8CV6fo9sCNwZov8WPkd9UeAUsBQ/5pUHp6BQFqtZDfo3WfhOQw6bgMR0fxYN
- /SIQEjn2q1t+T9g6vpEw/Z9FnEwuY3QdB1jhyDDX6kq71PpIGuVU1klF67K5xMSMK7
- lrxLMIdtMa2dQ==
+ b=TpQi0DQTGMB7xGuzygJ/k11AzpmaBgv1mUvwdVEao1lxlhZZUaUPNyszCN7YLCnzX
+ QHvdfhNNpMPAA5r6mU3ADgVW73V+YZEXdd9BpJcaBah7IeRAH2hSoAf7cgoRBaR6r5
+ m3iFuCWUjmwSCISRTsDV6T0OCqovQw8a7z0t/Gn8gZMbOguRkZ0bVVIz4w4uXpy9w9
+ 0VaoNzQPE1h/y0RBdrTA6K1taykdXoZAz327Slmq+iZtGIbCVP15HcAOijDhK4j1HL
+ yDKH1HZPY3N4KRVY6J+DOgkgUIFGo0WbLQctL+uSTO9COLXqvEyA/wtY5sQjuw6DgX
+ whiuafk1JiyFg==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 1F12FC43618; Wed, 12 Jun 2024 15:55:57 +0000 (UTC)
+ 019D9C43616; Wed, 12 Jun 2024 15:55:57 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <171820775712.32393.17507695192982662246.git-patchwork-notify@kernel.org>
+Message-Id: <171820775700.32393.6615606891184295734.git-patchwork-notify@kernel.org>
 Date: Wed, 12 Jun 2024 15:55:57 +0000
-References: <20240604075636.3126389-1-chao@kernel.org>
-In-Reply-To: <20240604075636.3126389-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+References: <20240529112411.380453-1-shengyong@oppo.com>
+In-Reply-To: <20240529112411.380453-1-shengyong@oppo.com>
+To: Sheng Yong <shengyong@oppo.com>
 X-Spam-Score: -5.4 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,13 +72,18 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 4 Jun 2024 15:56:36 +0800 you wrote:
- > syzbot reports f2fs bug as below: > > kernel BUG at fs/f2fs/inode.c:933!
- > RIP: 0010:f2fs_evict_inode+0x1576/0x1590 fs/f2fs/inode.c:933 > Call Trace:
- > e [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 29 May 2024 19:24:11 +0800 you
+ wrote: > If curseg is not the first segment in its zone, the zone is not empty,
+ > and it should not be reset. This issue could be reproduced by: > > modprobe
+ nul [...] 
  Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -86,11 +91,6 @@ X-Spam-Report: Spam detection software,
  [139.178.84.217 listed in sa-trusted.bondedsender.org]
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -102,9 +102,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sHQKX-0007SA-6u
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to don't dirty inode for readonly
- filesystem
+X-Headers-End: 1sHQKW-0007S5-GS
+Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid resetting non empty zone
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,9 +115,8 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- syzbot+31e4659a3fe953aec2f4@syzkaller.appspotmail.com, stable@vger.kernel.org,
- linux-kernel@vger.kernel.org
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -128,36 +126,19 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Tue,  4 Jun 2024 15:56:36 +0800 you wrote:
-> syzbot reports f2fs bug as below:
+On Wed, 29 May 2024 19:24:11 +0800 you wrote:
+> If curseg is not the first segment in its zone, the zone is not empty,
+> and it should not be reset. This issue could be reproduced by:
 > 
-> kernel BUG at fs/f2fs/inode.c:933!
-> RIP: 0010:f2fs_evict_inode+0x1576/0x1590 fs/f2fs/inode.c:933
-> Call Trace:
->  evict+0x2a4/0x620 fs/inode.c:664
->  dispose_list fs/inode.c:697 [inline]
->  evict_inodes+0x5f8/0x690 fs/inode.c:747
->  generic_shutdown_super+0x9d/0x2c0 fs/super.c:675
->  kill_block_super+0x44/0x90 fs/super.c:1667
->  kill_f2fs_super+0x303/0x3b0 fs/f2fs/super.c:4894
->  deactivate_locked_super+0xc1/0x130 fs/super.c:484
->  cleanup_mnt+0x426/0x4c0 fs/namespace.c:1256
->  task_work_run+0x24a/0x300 kernel/task_work.c:180
->  ptrace_notify+0x2cd/0x380 kernel/signal.c:2399
->  ptrace_report_syscall include/linux/ptrace.h:411 [inline]
->  ptrace_report_syscall_exit include/linux/ptrace.h:473 [inline]
->  syscall_exit_work kernel/entry/common.c:251 [inline]
->  syscall_exit_to_user_mode_prepare kernel/entry/common.c:278 [inline]
->  __syscall_exit_to_user_mode_work kernel/entry/common.c:283 [inline]
->  syscall_exit_to_user_mode+0x15c/0x280 kernel/entry/common.c:296
->  do_syscall_64+0x50/0x110 arch/x86/entry/common.c:88
->  entry_SYSCALL_64_after_hwframe+0x63/0x6b
+> 	modprobe null_blk nr_devices=1 zoned=1 zone_max_open=6 zone_max_active=6 zone_size=1024 gb=30
+> 	# /dev/vda is 4G
+> 	mkfs.f2fs -m -c /dev/nullb0 /dev/vda -f
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to don't dirty inode for readonly filesystem
-    https://git.kernel.org/jaegeuk/f2fs/c/192b8fb8d1c8
+  - [f2fs-dev] f2fs: avoid resetting non empty zone
+    https://git.kernel.org/jaegeuk/f2fs/c/76da333f4b93
 
 You are awesome, thank you!
 -- 
