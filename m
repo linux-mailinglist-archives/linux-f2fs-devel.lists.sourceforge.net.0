@@ -2,118 +2,158 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9C1F909AE4
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 16 Jun 2024 03:04:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B90DE90A323
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Jun 2024 06:53:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sIeJy-0006rX-BJ;
-	Sun, 16 Jun 2024 01:04:37 +0000
+	id 1sJ4MP-00066H-2Y;
+	Mon, 17 Jun 2024 04:52:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3FzpuZgkbAH4u01mcnngtcrrkf.iqqingwugteqpvgpv.eqo@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1sIeJw-0006rQ-Hg for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 16 Jun 2024 01:04:35 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <daejun7.park@samsung.com>) id 1sJ4MN-00065z-3J
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 17 Jun 2024 04:52:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ Date:Message-ID:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nyaB5Rpu8CF5SAQPjrZeUJKclfgjkHJDmq3B0+cL4ao=; b=Hfn+Dwhx4M7CBju7nbZ01awppL
- 4lpRd526xg0p0PIu8rRC4Ilc/ac9w2Rq0vHS2/ne9hUwYcagjw2ygc6PSbKvYea3bouaLB4cDamJQ
- MXO9ZA3B49TZ3d5tqtCZeHzcNAr6nQ0DK4WSaEum6MkIyt0+r4uTWyRqC71bG94hz/CE=;
+ bh=ZpsVt1WRZRBGtoHhMRvoTD6K7/U877T/6RoBzpfvQsg=; b=BWI5dUH1RcszEnRLJ/U3HjC9GM
+ 67XJ9RejtvdJUHZG3ioZyY6dw/VvyXYuCLaFNzyHovNPXnUsHf80HZRVRRnFN1a8p/kbpVqbxyUxa
+ MPFxxBjV4mzRCasYuW1/76bmsYJ7dhW+9eyVStbIZMx96fZGSYAOcJ+dbL+4H13hfTYA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=nyaB5Rpu8CF5SAQPjrZeUJKclfgjkHJDmq3B0+cL4ao=; b=P
- nBXO2jkPT1I6EeC5bcJiACJFdvbYOPCVdGrKidEfYQp1dY+FTDzGPT2DINmelFhYjPrF3tHxSBoQ8
- nV0FhyIdFH96Nre8ytE3IYOXK4sFxn7hLbZnCOeQk0Ef5cn4sK96jp3X5c2IgaUIYLwKkpXf4fMYS
- jLE/wYWEfem0BISw=;
-Received: from mail-il1-f208.google.com ([209.85.166.208])
+ h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:CC:To:
+ From:Sender:Reply-To:Subject:Mime-Version:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ZpsVt1WRZRBGtoHhMRvoTD6K7/U877T/6RoBzpfvQsg=; b=A
+ ygB1L8Xp9NDgItLcjHzG12twv2OclpyMOcppEMLtY93nhC+SvPt6z73PiDO2LY9GXL+c5t7iN7Xv3
+ F/nUO05PL/c1H/2uS/s5ctfsu2SqVATpAAAA/FS5As7MaZ9uYrYjqLAzPRv2VIvAkL7un4GdwHgIn
+ YQv37ar+m+emeLFY=;
+Received: from mailout1.samsung.com ([203.254.224.24])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1sIeJv-0008MO-Fq for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 16 Jun 2024 01:04:35 +0000
-Received: by mail-il1-f208.google.com with SMTP id
- e9e14a558f8ab-375beb12e67so33064075ab.3
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1sJ4ML-0004JS-Tu for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 17 Jun 2024 04:52:51 +0000
+Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20240617045236epoutp010ebf8bfb7c1353e66eeefe4f05fa9ba0~ZsY4pVpvL0251002510epoutp01G
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 15 Jun 2024 18:04:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718499864; x=1719104664;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=nyaB5Rpu8CF5SAQPjrZeUJKclfgjkHJDmq3B0+cL4ao=;
- b=artfYmWPBHde3rfgUzd1Pv/SCkIhmQCI9lz5Eodb4zV/MQz+QC3r6zGZV3bU1b6NTo
- cdBB+O0T+MXPReKKSN3DiTQV+uktkO1tHCDDRxk3U0/+aBIpt/uP7JNrtn6gxd7uo4Q1
- twt0w2zGfg5mnR/1d0E2GHOnRycpNzp5lNdbrMUC6u6/9TSnIJRcKtoIZQnkTMALVSjt
- Dp4tJAHvKuQch5YSx6M07s4Xtf7d/soycF54kIYiBq5SXwp7bS2jRfdHKxFQicvt836x
- LxYcbBWL7hr/mQYHQYJ4Qgbyw7vfR1vHHpxzEqJvTdDQsYl7tV7DTmiXcGAFx/kBeSgh
- MVhQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU4FvQ7yaLaa7rgto+gyr2D6NiuhcvlYfYC2ebQ8sHJFhutY3TyuxjiVxdfmxxfzoH486R7WbE78JbkPhmWtHbGpBza0vU51ma6wITLaPoeKmK4yus3lw==
-X-Gm-Message-State: AOJu0YxdxJ0xrS8fmF27Z21p3suloBaodPrWH9CRoN2dchicr2OVzLVV
- ptse2BbUrrZz/v9KWSwmrxIDvlfw4IgOQ38prOEdic74vitlFdMZLfZ9D9IcC4qoQgkAzVeKTY5
- rE5rdju0DICwIV+6hHw8QZVtpHFxdDMtEKEsd4e5FYMPIxHJqaYPHAUI=
-X-Google-Smtp-Source: AGHT+IEmzxHHD/iPdADADltwY0yaCVbzG9L0rC4Fq78rJiJl6AxaEzxFmAyQp/JXeDdIpemDxcot/yqV5f32uS1x+M+RpmlDaAFl
-MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:19cc:b0:375:ae14:145b with SMTP id
- e9e14a558f8ab-375e1014777mr3851525ab.6.1718499863991; Sat, 15 Jun 2024
- 18:04:23 -0700 (PDT)
-Date: Sat, 15 Jun 2024 18:04:23 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000f0a808061af76dd7@google.com>
-From: syzbot <syzbot+9a18f6f681a8e79a3654@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: -4.4 (----)
+ Mon, 17 Jun 2024 04:52:36 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20240617045236epoutp010ebf8bfb7c1353e66eeefe4f05fa9ba0~ZsY4pVpvL0251002510epoutp01G
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1718599956;
+ bh=ZpsVt1WRZRBGtoHhMRvoTD6K7/U877T/6RoBzpfvQsg=;
+ h=Subject:Reply-To:From:To:CC:Date:References:From;
+ b=hQ4q5Fi/OU1yPqwegZn8lxwBuivDc0Pt7shugCqUJYphr3G9wx/gSjG1AfVWFTgjX
+ Tm11k08WlDZKcIFgqAftPahErBewnCM0ued5EnMP7TsrFOzYcPeog0gba1pKhxZk7/
+ 0ed4pZd7cvmJh/LTXtsdQRFnYbY4d+n7EhLxKCEs=
+Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
+ epcas2p4.samsung.com (KnoxPortal) with ESMTP id
+ 20240617045236epcas2p4bca257e2aec561e2a976f20ac053a00b~ZsY34KVqV2126321263epcas2p4c;
+ Mon, 17 Jun 2024 04:52:36 +0000 (GMT)
+Received: from epsmges2p3.samsung.com (unknown [182.195.36.68]) by
+ epsnrtp4.localdomain (Postfix) with ESMTP id 4W2cv73wx1z4x9Pw; Mon, 17 Jun
+ 2024 04:52:35 +0000 (GMT)
+X-AuditID: b6c32a47-c6bff7000000264e-5a-666fc113b4f3
+Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
+ epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 92.7D.09806.311CF666; Mon, 17 Jun 2024 13:52:35 +0900 (KST)
+Mime-Version: 1.0
+From: Daejun Park <daejun7.park@samsung.com>
+To: "jaegeuk@kernel.org" <jaegeuk@kernel.org>, "chao@kernel.org"
+ <chao@kernel.org>, "corbet@lwn.net" <corbet@lwn.net>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>, "linux-doc@vger.kernel.org"
+ <linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>
+X-Priority: 3
+X-Content-Kind-Code: NORMAL
+X-CPGS-Detection: blocking_info_exchange
+X-Drm-Type: N,general
+X-Msg-Generator: Mail
+X-Msg-Type: PERSONAL
+X-Reply-Demand: N
+Message-ID: <20240617045134epcms2p3f2f82336438f636b3f1ad58fd0c1cd29@epcms2p3>
+Date: Mon, 17 Jun 2024 13:51:34 +0900
+X-CMS-MailID: 20240617045134epcms2p3f2f82336438f636b3f1ad58fd0c1cd29
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+X-CPGSPASS: Y
+X-CPGSPASS: Y
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrCJsWRmVeSWpSXmKPExsWy7bCmha7wwfw0gxu7pSxOTz3LZPHkQDuj
+ xctDmharHoRb/DhpYtG/u53F4sn6WcwWC9uWsFhcWuRucXnXHDaLlj9OFucnvmayWNUxl9Fi
+ 6vkjTA58HptWdbJ57F7wmcljcd9kVo++LasYPT5vkgtgjcq2yUhNTEktUkjNS85PycxLt1Xy
+ Do53jjc1MzDUNbS0MFdSyEvMTbVVcvEJ0HXLzAE6UkmhLDGnFCgUkFhcrKRvZ1OUX1qSqpCR
+ X1xiq5RakJJTYF6gV5yYW1yal66Xl1piZWhgYGQKVJiQnfFiayNLwY7kiicHnzI2MD526GLk
+ 5JAQMJF4+mkRSxcjF4eQwA5Giet7H7N3MXJw8AoISvzdIQxSIyxgJnGlYQ8jiC0koCSx/uIs
+ doi4nsSth2vA4mwCOhLTT9xnB5kjInCKSeLQk4+sIA6zwAwmiXmne9kgtvFKzGh/ygJhS0ts
+ X76VEcLWkPixrJcZwhaVuLn6LTuM/f7YfKgaEYnWe2ehagQlHvzcDRWXlLg9dxNUfb7E/yvL
+ oewaiW0H5kHZ+hLXOjaC7eUV8JU48AmihkVAVeLMw2VQ97hInPq6CexOZgF5ie1v5zCDAoJZ
+ QFNi/S59EFNCQFniyC0WiAo+iY7Df9lhvmrY+Bsre8e8J0wQtprEup/rmSDGyEjcmsc4gVFp
+ FiKgZyFZOwth7QJG5lWMYqkFxbnpqcVGBcbwuE3Oz93ECE6uWu47GGe8/aB3iJGJg/EQowQH
+ s5IIr9O0vDQh3pTEyqrUovz4otKc1OJDjKZAD09klhJNzgem97ySeEMTSwMTMzNDcyNTA3Ml
+ cd57rXNThATSE0tSs1NTC1KLYPqYODilGphCKprCOZP2nODqqijZ/T/BUGP+BsFPqfbMW3KF
+ IiYvm5M86QFf5Td7rVO1wc9SDnCGBv/dZ7puqa7f0l9L/k1aevD02y2fxTpXiUTHFs8Pixa2
+ 2mN6tTvTz+TQkZUdjIZTV8teyMzd7NUg36hy6+CiNTsezV+i4DPJayUnw/S/cWmll6fe9Hw7
+ z1nWifWC5M45e7coHfbStNB/UfTj9nnvhf+ehbC4sDHHCcr5bghVPX63cuY7B8arfx8x6NQy
+ 3jP7l9X1KUduv7JD/78N9W0ORx2U9snonL23RX/Dnt8P53KueufLyro6mvXto5Of/nP0TD/f
+ zFB0vj/3lMzKf7+P7YjWCCr6xb3oEY9CQc9yJZbijERDLeai4kQAU3eBYjcEAAA=
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20240617045134epcms2p3f2f82336438f636b3f1ad58fd0c1cd29
+References: <CGME20240617045134epcms2p3f2f82336438f636b3f1ad58fd0c1cd29@epcms2p3>
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 2ccbdf43d5e7
- Merge tag 'for-linus' of git://git.kernel.org.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=16a5b7ee980000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (-4.4 points, 6.0 required)
+ Content preview:  The amount of node writes is small compared to the amount
+ of user data writes in most workloads. Therefore, even if there is enough
+ free space in the node section, it cannot be used by another type be [...]
+ Content analysis details:   (-0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: goo.gl]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [209.85.166.208 listed in list.dnswl.org]
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ for more information. [203.254.224.24 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.208 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
+ [203.254.224.24 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.208 listed in sa-accredit.habeas.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.208 listed in wl.mailspike.net]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sIeJv-0008MO-Fq
-Subject: [f2fs-dev] [syzbot] [f2fs?] possible deadlock in
- mempool_alloc_noprof
+ [203.254.224.24 listed in sa-accredit.habeas.com]
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: samsung.com]
+ -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.24 listed in wl.mailspike.net]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sJ4ML-0004JS-Tu
+Subject: [f2fs-dev] [PATCH v2] f2fs: add support single node mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,255 +165,290 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Reply-To: daejun7.park@samsung.com
+Cc: Nayeon Kim <nayeoni.kim@samsung.com>, Siwoo Jung <siu.jung@samsung.com>,
+ Seokhwan Kim <sukka.kim@samsung.com>, Dongjin Kim <dongjin_.kim@samsung.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+The amount of node writes is small compared to the amount of user data
+writes in most workloads. Therefore, even if there is enough free space
+in the node section, it cannot be used by another type because the type
+for its section is fixed. When using zoned storage, the free space in
+node section issue can be a problem due to the large section.
 
-syzbot found the following issue on:
+This patch can avoid the problem by using a single node section without
+considering the hotness of the node section. For particularly high file
+system usage, two sections can be used as free sections, which makes it
+more efficient.
 
-HEAD commit:    2ccbdf43d5e7 Merge tag 'for-linus' of git://git.kernel.org..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=16a5b7ee980000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=81c0d76ceef02b39
-dashboard link: https://syzkaller.appspot.com/bug?extid=9a18f6f681a8e79a3654
-compiler:       gcc (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40
-userspace arch: i386
+To use single node section, add the 'single_node_sec' in mount option.
+The single node section mode can be activated when the number of active
+logs is equal to 6.
 
-Unfortunately, I don't have any reproducer for this issue yet.
-
-Downloadable assets:
-disk image (non-bootable): https://storage.googleapis.com/syzbot-assets/7bc7510fe41f/non_bootable_disk-2ccbdf43.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/13cdb5bfbafa/vmlinux-2ccbdf43.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/7a14f5d07f81/bzImage-2ccbdf43.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+9a18f6f681a8e79a3654@syzkaller.appspotmail.com
-
-fscrypt: AES-256-CBC-CTS using implementation "cts-cbc-aes-aesni"
-======================================================
-WARNING: possible circular locking dependency detected
-6.10.0-rc3-syzkaller-00044-g2ccbdf43d5e7 #0 Not tainted
-------------------------------------------------------
-syz-executor.0/9291 is trying to acquire lock:
-ffffffff8dd3aac0 (fs_reclaim){+.+.}-{0:0}, at: might_alloc include/linux/sched/mm.h:334 [inline]
-ffffffff8dd3aac0 (fs_reclaim){+.+.}-{0:0}, at: mempool_alloc_noprof+0xd9/0x390 mm/mempool.c:392
-
-but task is already holding lock:
-ffff8880529643a8 (&sbi->cp_rwsem){++++}-{3:3}, at: f2fs_down_read fs/f2fs/f2fs.h:2154 [inline]
-ffff8880529643a8 (&sbi->cp_rwsem){++++}-{3:3}, at: f2fs_lock_op fs/f2fs/f2fs.h:2203 [inline]
-ffff8880529643a8 (&sbi->cp_rwsem){++++}-{3:3}, at: f2fs_mkdir+0x297/0x620 fs/f2fs/namei.c:778
-
-which lock already depends on the new lock.
-
-
-the existing dependency chain (in reverse order) is:
-
--> #2 (&sbi->cp_rwsem){++++}-{3:3}:
-       down_read+0x9a/0x330 kernel/locking/rwsem.c:1526
-       f2fs_down_read fs/f2fs/f2fs.h:2154 [inline]
-       f2fs_lock_op fs/f2fs/f2fs.h:2203 [inline]
-       f2fs_evict_inode+0x115a/0x1e50 fs/f2fs/inode.c:866
-       evict+0x2ed/0x6c0 fs/inode.c:667
-       iput_final fs/inode.c:1741 [inline]
-       iput.part.0+0x5a8/0x7f0 fs/inode.c:1767
-       iput+0x5c/0x80 fs/inode.c:1757
-       f2fs_evict_inode+0x125/0x1e50 fs/f2fs/inode.c:818
-       evict+0x2ed/0x6c0 fs/inode.c:667
-       dispose_list+0x117/0x1e0 fs/inode.c:700
-       evict_inodes+0x34e/0x450 fs/inode.c:750
-       generic_shutdown_super+0xb5/0x3d0 fs/super.c:627
-       kill_block_super+0x3b/0x90 fs/super.c:1676
-       kill_f2fs_super+0x2b4/0x440 fs/f2fs/super.c:4907
-       deactivate_locked_super+0xbe/0x1a0 fs/super.c:473
-       deactivate_super+0xde/0x100 fs/super.c:506
-       cleanup_mnt+0x222/0x450 fs/namespace.c:1267
-       task_work_run+0x14e/0x250 kernel/task_work.c:180
-       resume_user_mode_work include/linux/resume_user_mode.h:50 [inline]
-       exit_to_user_mode_loop kernel/entry/common.c:114 [inline]
-       exit_to_user_mode_prepare include/linux/entry-common.h:328 [inline]
-       __syscall_exit_to_user_mode_work kernel/entry/common.c:207 [inline]
-       syscall_exit_to_user_mode+0x278/0x2a0 kernel/entry/common.c:218
-       __do_fast_syscall_32+0x80/0x120 arch/x86/entry/common.c:389
-       do_fast_syscall_32+0x32/0x80 arch/x86/entry/common.c:411
-       entry_SYSENTER_compat_after_hwframe+0x84/0x8e
-
--> #1 (sb_internal#4){.+.+}-{0:0}:
-       percpu_down_read include/linux/percpu-rwsem.h:51 [inline]
-       __sb_start_write include/linux/fs.h:1655 [inline]
-       sb_start_intwrite include/linux/fs.h:1838 [inline]
-       f2fs_evict_inode+0x1844/0x1e50 fs/f2fs/inode.c:853
-       evict+0x2ed/0x6c0 fs/inode.c:667
-       iput_final fs/inode.c:1741 [inline]
-       iput.part.0+0x5a8/0x7f0 fs/inode.c:1767
-       iput+0x5c/0x80 fs/inode.c:1757
-       dentry_unlink_inode+0x295/0x480 fs/dcache.c:400
-       __dentry_kill+0x1d0/0x600 fs/dcache.c:603
-       shrink_kill fs/dcache.c:1048 [inline]
-       shrink_dentry_list+0x140/0x5d0 fs/dcache.c:1075
-       prune_dcache_sb+0xeb/0x150 fs/dcache.c:1156
-       super_cache_scan+0x32a/0x550 fs/super.c:221
-       do_shrink_slab+0x44f/0x11c0 mm/shrinker.c:435
-       shrink_slab_memcg mm/shrinker.c:548 [inline]
-       shrink_slab+0xa87/0x1310 mm/shrinker.c:626
-       shrink_one+0x493/0x7c0 mm/vmscan.c:4790
-       shrink_many mm/vmscan.c:4851 [inline]
-       lru_gen_shrink_node+0x89f/0x1750 mm/vmscan.c:4951
-       shrink_node mm/vmscan.c:5910 [inline]
-       kswapd_shrink_node mm/vmscan.c:6720 [inline]
-       balance_pgdat+0x1105/0x1970 mm/vmscan.c:6911
-       kswapd+0x5ea/0xbf0 mm/vmscan.c:7180
-       kthread+0x2c1/0x3a0 kernel/kthread.c:389
-       ret_from_fork+0x45/0x80 arch/x86/kernel/process.c:147
-       ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
-
--> #0 (fs_reclaim){+.+.}-{0:0}:
-       check_prev_add kernel/locking/lockdep.c:3134 [inline]
-       check_prevs_add kernel/locking/lockdep.c:3253 [inline]
-       validate_chain kernel/locking/lockdep.c:3869 [inline]
-       __lock_acquire+0x2478/0x3b30 kernel/locking/lockdep.c:5137
-       lock_acquire kernel/locking/lockdep.c:5754 [inline]
-       lock_acquire+0x1b1/0x560 kernel/locking/lockdep.c:5719
-       __fs_reclaim_acquire mm/page_alloc.c:3801 [inline]
-       fs_reclaim_acquire+0x102/0x160 mm/page_alloc.c:3815
-       might_alloc include/linux/sched/mm.h:334 [inline]
-       mempool_alloc_noprof+0xd9/0x390 mm/mempool.c:392
-       bio_alloc_bioset+0x480/0x8b0 block/bio.c:554
-       f2fs_grab_read_bio+0x268/0x7d0 fs/f2fs/data.c:1050
-       f2fs_submit_page_read+0xaa/0x1d0 fs/f2fs/data.c:1095
-       f2fs_get_read_data_page+0x304/0xaf0 fs/f2fs/data.c:1271
-       f2fs_find_data_page+0x13b/0x720 fs/f2fs/data.c:1293
-       find_in_level fs/f2fs/dir.c:323 [inline]
-       __f2fs_find_entry+0x3fd/0xc80 fs/f2fs/dir.c:388
-       f2fs_do_add_link+0x109/0x290 fs/f2fs/dir.c:818
-       f2fs_add_link fs/f2fs/f2fs.h:3586 [inline]
-       f2fs_mkdir+0x37b/0x620 fs/f2fs/namei.c:779
-       vfs_mkdir+0x57d/0x860 fs/namei.c:4131
-       do_mkdirat+0x301/0x3a0 fs/namei.c:4154
-       __do_sys_mkdirat fs/namei.c:4169 [inline]
-       __se_sys_mkdirat fs/namei.c:4167 [inline]
-       __ia32_sys_mkdirat+0x84/0xb0 fs/namei.c:4167
-       do_syscall_32_irqs_on arch/x86/entry/common.c:165 [inline]
-       __do_fast_syscall_32+0x73/0x120 arch/x86/entry/common.c:386
-       do_fast_syscall_32+0x32/0x80 arch/x86/entry/common.c:411
-       entry_SYSENTER_compat_after_hwframe+0x84/0x8e
-
-other info that might help us debug this:
-
-Chain exists of:
-  fs_reclaim --> sb_internal#4 --> &sbi->cp_rwsem
-
- Possible unsafe locking scenario:
-
-       CPU0                    CPU1
-       ----                    ----
-  rlock(&sbi->cp_rwsem);
-                               lock(sb_internal#4);
-                               lock(&sbi->cp_rwsem);
-  lock(fs_reclaim);
-
- *** DEADLOCK ***
-
-3 locks held by syz-executor.0/9291:
- #0: ffff8880593be420 (sb_writers#13){.+.+}-{0:0}, at: filename_create+0x10d/0x530 fs/namei.c:3893
- #1: ffff8880511650a0 (&type->i_mutex_dir_key#8/1){+.+.}-{3:3}, at: inode_lock_nested include/linux/fs.h:826 [inline]
- #1: ffff8880511650a0 (&type->i_mutex_dir_key#8/1){+.+.}-{3:3}, at: filename_create+0x1c2/0x530 fs/namei.c:3900
- #2: ffff8880529643a8 (&sbi->cp_rwsem){++++}-{3:3}, at: f2fs_down_read fs/f2fs/f2fs.h:2154 [inline]
- #2: ffff8880529643a8 (&sbi->cp_rwsem){++++}-{3:3}, at: f2fs_lock_op fs/f2fs/f2fs.h:2203 [inline]
- #2: ffff8880529643a8 (&sbi->cp_rwsem){++++}-{3:3}, at: f2fs_mkdir+0x297/0x620 fs/f2fs/namei.c:778
-
-stack backtrace:
-CPU: 0 PID: 9291 Comm: syz-executor.0 Not tainted 6.10.0-rc3-syzkaller-00044-g2ccbdf43d5e7 #0
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:88 [inline]
- dump_stack_lvl+0x116/0x1f0 lib/dump_stack.c:114
- check_noncircular+0x31a/0x400 kernel/locking/lockdep.c:2187
- check_prev_add kernel/locking/lockdep.c:3134 [inline]
- check_prevs_add kernel/locking/lockdep.c:3253 [inline]
- validate_chain kernel/locking/lockdep.c:3869 [inline]
- __lock_acquire+0x2478/0x3b30 kernel/locking/lockdep.c:5137
- lock_acquire kernel/locking/lockdep.c:5754 [inline]
- lock_acquire+0x1b1/0x560 kernel/locking/lockdep.c:5719
- __fs_reclaim_acquire mm/page_alloc.c:3801 [inline]
- fs_reclaim_acquire+0x102/0x160 mm/page_alloc.c:3815
- might_alloc include/linux/sched/mm.h:334 [inline]
- mempool_alloc_noprof+0xd9/0x390 mm/mempool.c:392
- bio_alloc_bioset+0x480/0x8b0 block/bio.c:554
- f2fs_grab_read_bio+0x268/0x7d0 fs/f2fs/data.c:1050
- f2fs_submit_page_read+0xaa/0x1d0 fs/f2fs/data.c:1095
- f2fs_get_read_data_page+0x304/0xaf0 fs/f2fs/data.c:1271
- f2fs_find_data_page+0x13b/0x720 fs/f2fs/data.c:1293
- find_in_level fs/f2fs/dir.c:323 [inline]
- __f2fs_find_entry+0x3fd/0xc80 fs/f2fs/dir.c:388
- f2fs_do_add_link+0x109/0x290 fs/f2fs/dir.c:818
- f2fs_add_link fs/f2fs/f2fs.h:3586 [inline]
- f2fs_mkdir+0x37b/0x620 fs/f2fs/namei.c:779
- vfs_mkdir+0x57d/0x860 fs/namei.c:4131
- do_mkdirat+0x301/0x3a0 fs/namei.c:4154
- __do_sys_mkdirat fs/namei.c:4169 [inline]
- __se_sys_mkdirat fs/namei.c:4167 [inline]
- __ia32_sys_mkdirat+0x84/0xb0 fs/namei.c:4167
- do_syscall_32_irqs_on arch/x86/entry/common.c:165 [inline]
- __do_fast_syscall_32+0x73/0x120 arch/x86/entry/common.c:386
- do_fast_syscall_32+0x32/0x80 arch/x86/entry/common.c:411
- entry_SYSENTER_compat_after_hwframe+0x84/0x8e
-RIP: 0023:0xf7325579
-Code: b8 01 10 06 03 74 b4 01 10 07 03 74 b0 01 10 08 03 74 d8 01 00 00 00 00 00 00 00 00 00 00 00 00 00 51 52 55 89 e5 0f 34 cd 80 <5d> 5a 59 c3 90 90 90 90 8d b4 26 00 00 00 00 8d b4 26 00 00 00 00
-RSP: 002b:00000000f5ef65ac EFLAGS: 00000292 ORIG_RAX: 0000000000000128
-RAX: ffffffffffffffda RBX: 00000000ffffff9c RCX: 0000000020000080
-RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
-RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
-R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
- </TASK>
-----------------
-Code disassembly (best guess), 2 bytes skipped:
-   0:	10 06                	adc    %al,(%rsi)
-   2:	03 74 b4 01          	add    0x1(%rsp,%rsi,4),%esi
-   6:	10 07                	adc    %al,(%rdi)
-   8:	03 74 b0 01          	add    0x1(%rax,%rsi,4),%esi
-   c:	10 08                	adc    %cl,(%rax)
-   e:	03 74 d8 01          	add    0x1(%rax,%rbx,8),%esi
-  1e:	00 51 52             	add    %dl,0x52(%rcx)
-  21:	55                   	push   %rbp
-  22:	89 e5                	mov    %esp,%ebp
-  24:	0f 34                	sysenter
-  26:	cd 80                	int    $0x80
-* 28:	5d                   	pop    %rbp <-- trapping instruction
-  29:	5a                   	pop    %rdx
-  2a:	59                   	pop    %rcx
-  2b:	c3                   	ret
-  2c:	90                   	nop
-  2d:	90                   	nop
-  2e:	90                   	nop
-  2f:	90                   	nop
-  30:	8d b4 26 00 00 00 00 	lea    0x0(%rsi,%riz,1),%esi
-  37:	8d b4 26 00 00 00 00 	lea    0x0(%rsi,%riz,1),%esi
-
-
+Signed-off-by: Daejun Park <daejun7.park@samsung.com>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ Documentation/filesystems/f2fs.rst |  2 +
+ fs/f2fs/f2fs.h                     |  3 ++
+ fs/f2fs/recovery.c                 |  3 ++
+ fs/f2fs/segment.c                  | 78 ++++++++++++++++++++++++++++++
+ fs/f2fs/segment.h                  |  2 +
+ fs/f2fs/super.c                    | 12 +++++
+ 6 files changed, 100 insertions(+)
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+index 68a0885fb5e6..ba26b2ce4fa4 100644
+--- a/Documentation/filesystems/f2fs.rst
++++ b/Documentation/filesystems/f2fs.rst
+@@ -134,6 +134,8 @@ noacl                        Disable POSIX Access Control List. Note: acl is enabled
+ active_logs=%u          Support configuring the number of active logs. In the
+                         current design, f2fs supports only 2, 4, and 6 logs.
+                         Default number is 6.
++single_node_sec         Support single node section mode, it enables single active
++                        log for hot/warm/cold nodes. This is disabled by default.
+ disable_ext_identify    Disable the extension list configured by mkfs, so f2fs
+                         is not aware of cold files such as media files.
+ inline_xattr            Enable the inline xattrs feature.
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 1974b6aff397..90f13a6b64ce 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -116,6 +116,7 @@ extern const char *f2fs_fault_name[FAULT_MAX];
+ #define        F2FS_MOUNT_GC_MERGE             0x02000000
+ #define F2FS_MOUNT_COMPRESS_CACHE      0x04000000
+ #define F2FS_MOUNT_AGE_EXTENT_CACHE    0x08000000
++#define F2FS_MOUNT_SINGLE_NODE_SEC     0x10000000
 
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
+ #define F2FS_OPTION(sbi)       ((sbi)->mount_opt)
+ #define clear_opt(sbi, option) (F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
+@@ -1655,6 +1656,8 @@ struct f2fs_sb_info {
 
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
+        struct f2fs_mount_info mount_opt;       /* mount options */
 
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
++       bool single_node_sec;                   /* single node section */
++
+        /* for cleaning operations */
+        struct f2fs_rwsem gc_lock;              /*
+                                                 * semaphore for GC, avoid
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index 496aee53c38a..b5cdb0845ac7 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -414,6 +414,9 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
 
-If you want to undo deduplication, reply with:
-#syz undup
+        /* get node pages in the current segment */
+        curseg = CURSEG_I(sbi, CURSEG_WARM_NODE);
++       /* check hot node if single node section mode is enabled */
++       if (sbi->single_node_sec && curseg->segno == NULL_SEGNO)
++               curseg = CURSEG_I(sbi, CURSEG_HOT_NODE);
+        blkaddr = NEXT_FREE_BLKADDR(sbi, curseg);
+        blkaddr_fast = blkaddr;
+
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index a0ce3d080f80..81b4d52b25c0 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -394,6 +394,9 @@ int f2fs_commit_atomic_write(struct inode *inode)
+        return err;
+ }
+
++static int new_curseg(struct f2fs_sb_info *sbi, int type, bool new_sec);
++static void locate_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno);
++
+ /*
+  * This function balances dirty node and dentry pages.
+  * In addition, it controls garbage collection.
+@@ -420,6 +423,59 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
+        if (has_enough_free_secs(sbi, 0, 0))
+                return;
+
++       if (test_opt(sbi, SINGLE_NODE_SEC) && !sbi->single_node_sec &&
++           F2FS_OPTION(sbi).active_logs == 6) {
++               int type, segno, left_blocks = 0;
++
++               for (type = CURSEG_HOT_NODE; type <= CURSEG_COLD_NODE; type++) {
++                       segno = CURSEG_I(sbi, type)->segno;
++                       left_blocks += CAP_BLKS_PER_SEC(sbi) -
++                                       get_ckpt_valid_blocks(sbi, segno, true);
++               }
++
++               /* enable single node section mode if we get 2 free sections */
++               if (left_blocks < CAP_BLKS_PER_SEC(sbi) * 2)
++                       goto do_gc;
++
++               f2fs_down_read(&SM_I(sbi)->curseg_lock);
++               down_write(&SIT_I(sbi)->sentry_lock);
++
++               /* it can be enabled by others */
++               if (sbi->single_node_sec)
++                       goto unlock;
++
++               /* leave current zone by allocating new section */
++               for (type = CURSEG_WARM_NODE; type <= CURSEG_COLD_NODE; type++) {
++                       struct curseg_info *curseg = CURSEG_I(sbi, type);
++
++                       mutex_lock(&curseg->curseg_mutex);
++                       segno = curseg->segno;
++                       if (new_curseg(sbi, type, true)) {
++                               mutex_unlock(&curseg->curseg_mutex);
++                               goto unlock;
++                       }
++                       locate_dirty_segment(sbi, segno);
++                       mutex_unlock(&curseg->curseg_mutex);
++               }
++
++               /* clear warm node, cold node information */
++               for (type = CURSEG_WARM_NODE; type <= CURSEG_COLD_NODE; type++) {
++                       struct curseg_info *curseg = CURSEG_I(sbi, type);
++
++                       mutex_lock(&curseg->curseg_mutex);
++                       segno = curseg->segno;
++                       curseg->segno = NULL_SEGNO;
++                       curseg->inited = false;
++                       __set_test_and_free(sbi, segno, false);
++                       mutex_unlock(&curseg->curseg_mutex);
++               }
++               f2fs_notice(sbi, "single node section mode enabled");
++               sbi->single_node_sec = true;
++unlock:
++               up_write(&SIT_I(sbi)->sentry_lock);
++               f2fs_up_read(&SM_I(sbi)->curseg_lock);
++       }
++do_gc:
+        if (test_opt(sbi, GC_MERGE) && sbi->gc_thread &&
+                                sbi->gc_thread->f2fs_gc_task) {
+                DEFINE_WAIT(wait);
+@@ -3502,6 +3558,9 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
+                return f2fs_rw_hint_to_seg_type(F2FS_I_SB(inode),
+                                                inode->i_write_hint);
+        } else {
++               if (fio->sbi->single_node_sec)
++                       return CURSEG_HOT_NODE;
++
+                if (IS_DNODE(fio->page))
+                        return is_cold_node(fio->page) ? CURSEG_WARM_NODE :
+                                                CURSEG_HOT_NODE;
+@@ -4116,6 +4175,15 @@ static int read_normal_summaries(struct f2fs_sb_info *sbi, int type)
+                                                        CURSEG_HOT_NODE]);
+                blk_off = le16_to_cpu(ckpt->cur_node_blkoff[type -
+                                                        CURSEG_HOT_NODE]);
++               if (segno == NULL_SEGNO && type != CURSEG_HOT_NODE) {
++                       if (!test_opt(sbi, SINGLE_NODE_SEC)) {
++                               f2fs_err(sbi, "single_node_sec option required");
++                               return -EFAULT;
++                       }
++                       sbi->single_node_sec = true;
++                       return 0;
++               }
++
+                if (__exist_node_summaries(sbi))
+                        blk_addr = sum_blk_addr(sbi, NR_CURSEG_NODE_TYPE,
+                                                        type - CURSEG_HOT_NODE);
+@@ -4884,6 +4952,8 @@ static void init_free_segmap(struct f2fs_sb_info *sbi)
+                struct curseg_info *curseg_t = CURSEG_I(sbi, type);
+
+                __set_test_and_inuse(sbi, curseg_t->segno);
++               if (sbi->single_node_sec && type == CURSEG_HOT_NODE)
++                       break;
+        }
+ }
+
+@@ -5027,6 +5097,10 @@ static int sanity_check_curseg(struct f2fs_sb_info *sbi)
+                        f2fs_handle_error(sbi, ERROR_INVALID_CURSEG);
+                        return -EFSCORRUPTED;
+                }
++
++               /* in single node section mode, WARM/COLD NODE are invalid */
++               if (sbi->single_node_sec && i == CURSEG_HOT_NODE)
++                       break;
+        }
+        return 0;
+ }
+@@ -5153,6 +5227,10 @@ static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
+        if (!zbd)
+                return 0;
+
++       /* in single node section mode, WARM/COLD node are not valid */
++       if (sbi->single_node_sec && type > CURSEG_HOT_NODE)
++               return 0;
++
+        /* report zone for the sector the curseg points to */
+        zone_sector = (sector_t)(cs_zone_block - zbd->start_blk)
+                << log_sectors_per_block;
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index e1c0f418aa11..152a07e61b5f 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -570,6 +570,8 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
+                                get_ckpt_valid_blocks(sbi, segno, true);
+                if (node_blocks > left_blocks)
+                        return false;
++               if (sbi->single_node_sec) /* check only hot node */
++                       break;
+        }
+
+        /* check current data section for dentry blocks. */
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 1f1b3647a998..7e1e80fe58dd 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -129,6 +129,7 @@ enum {
+        Opt_acl,
+        Opt_noacl,
+        Opt_active_logs,
++       Opt_single_node_sec,
+        Opt_disable_ext_identify,
+        Opt_inline_xattr,
+        Opt_noinline_xattr,
+@@ -207,6 +208,7 @@ static match_table_t f2fs_tokens = {
+        {Opt_acl, "acl"},
+        {Opt_noacl, "noacl"},
+        {Opt_active_logs, "active_logs=%u"},
++       {Opt_single_node_sec, "single_node_sec"},
+        {Opt_disable_ext_identify, "disable_ext_identify"},
+        {Opt_inline_xattr, "inline_xattr"},
+        {Opt_noinline_xattr, "noinline_xattr"},
+@@ -803,6 +805,9 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+                                return -EINVAL;
+                        F2FS_OPTION(sbi).active_logs = arg;
+                        break;
++               case Opt_single_node_sec:
++                       set_opt(sbi, SINGLE_NODE_SEC);
++                       break;
+                case Opt_disable_ext_identify:
+                        set_opt(sbi, DISABLE_EXT_IDENTIFY);
+                        break;
+@@ -2039,6 +2044,8 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+                                        F2FS_OPTION(sbi).s_resuid),
+                                from_kgid_munged(&init_user_ns,
+                                        F2FS_OPTION(sbi).s_resgid));
++       if (test_opt(sbi, SINGLE_NODE_SEC))
++               seq_puts(seq, ",single_node_sec");
+ #ifdef CONFIG_F2FS_FAULT_INJECTION
+        if (test_opt(sbi, FAULT_INJECTION)) {
+                seq_printf(seq, ",fault_injection=%u",
+@@ -3675,6 +3682,9 @@ int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi)
+        blocks_per_seg = BLKS_PER_SEG(sbi);
+
+        for (i = 0; i < NR_CURSEG_NODE_TYPE; i++) {
++               /* bypass single node section mode */
++               if (le32_to_cpu(ckpt->cur_node_segno[i]) == NULL_SEGNO)
++                       goto check_data;
+                if (le32_to_cpu(ckpt->cur_node_segno[i]) >= main_segs ||
+                        le16_to_cpu(ckpt->cur_node_blkoff[i]) >= blocks_per_seg)
+                        return 1;
+@@ -3823,6 +3833,8 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
+        init_f2fs_rwsem(&sbi->io_order_lock);
+        spin_lock_init(&sbi->cp_lock);
+
++       sbi->single_node_sec = false;
++
+        sbi->dirty_device = 0;
+        spin_lock_init(&sbi->dev_lock);
+
+--
+2.25.1
 
 
 _______________________________________________
