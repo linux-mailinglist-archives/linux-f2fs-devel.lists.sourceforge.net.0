@@ -2,97 +2,129 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58AD190A68D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Jun 2024 09:12:12 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 700CC90C099
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jun 2024 02:42:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sJ6X5-00037m-2U;
-	Mon, 17 Jun 2024 07:12:04 +0000
+	id 1sJMv7-0007Jh-QZ;
+	Tue, 18 Jun 2024 00:41:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Xiuhong.Wang@unisoc.com>) id 1sJ6X4-00037c-6a
- for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Jun 2024 07:12:03 +0000
+ (envelope-from <3yddwZgYKAHYXlimYhaiiafY.Wig@flex--drosen.bounces.google.com>)
+ id 1sJMv3-0007JA-Dj for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Jun 2024 00:41:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
+ Mime-Version:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=u7D9S33tH1AHEPA6mZuJk1j9rynryvJ8tNZwIu3IyTk=; b=k4Yjmr7cLEy176OnLXeZpF/7XN
- RyjSArim9b10DXcF/VUVFE6vr1Z3ebC6Su/JLAN7xk2zYcT4z7VLj7nfQ+IqdktO7VJDqrspIND4d
- tol2Cs5cy2C4r1nv+/zo9dJPEImmh1qNoRK/pz1QoaNJKoiNdCFAiOFXMkIyEYfz71dw=;
+ bh=eeWAwKNyi6aVQ6EN90rM7zyGSNPuFg6n/JEZRLaHcM4=; b=dwZq5u7tPlnSdsGC5U0/C50YD2
+ RPa7KcHDxfkyjl4MDyLw2IsPirHvROo4Mo1DlzM6icnF6dpSnXPNagBO8gM0OrZ1S+WDUn2Bmm+mR
+ tEgaO0Og/Sb96Vtc5KfapLr0r0qsAJrV4YDKmchIpBoYFVSckMNPxGxfpTQosZuPNKZo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ h=Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=u7D9S33tH1AHEPA6mZuJk1j9rynryvJ8tNZwIu3IyTk=; b=C
- R3b53zht+C1xI2XLgG2CWhBz6V4RjcZlbcQuvvDhLHDaBwIUtb1Sldni9FyT56lycXW0d7PuEhdCn
- 4xnBH+gHRlWBx0Q1Yf406FAsNUoWpbZUSOnfgl31SOeGU+CXSX5o9AjAsBAhRgDrkOFG58PHCGDbz
- tMHZ8a0q/Z+tEatg=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
+ List-Owner:List-Archive; bh=eeWAwKNyi6aVQ6EN90rM7zyGSNPuFg6n/JEZRLaHcM4=; b=d
+ 8x3pmXT8oN3iSttNDJkELSddwafQhWMIcU9rORhzwPt+gbUByguPOYYoZUQ2fB2m8CF3A1Dcuhjok
+ gNB488u0QaBlMNBaYhqJj6e3HYEehzWSzqOIxGFCp9A9UMDvnsif7l1aG9O4jspFLHaKCeDWjAgg+
+ YsmD3uWwvlvyBRzI=;
+Received: from mail-yb1-f201.google.com ([209.85.219.201])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sJ6X4-0000Sq-4N for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Jun 2024 07:12:03 +0000
-Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 45H7BJWB088492;
- Mon, 17 Jun 2024 15:11:19 +0800 (+08)
- (envelope-from Xiuhong.Wang@unisoc.com)
-Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4W2gt66fsrz2Rm6ZP;
- Mon, 17 Jun 2024 15:06:54 +0800 (CST)
-Received: from tj10379pcu.spreadtrum.com (10.5.32.15) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Mon, 17 Jun 2024 15:11:17 +0800
-From: Xiuhong Wang <xiuhong.wang@unisoc.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <linux-kernel@vger.kernel.org>
-Date: Mon, 17 Jun 2024 15:11:14 +0800
-Message-ID: <20240617071114.150721-1-xiuhong.wang@unisoc.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-X-Originating-IP: [10.5.32.15]
-X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 45H7BJWB088492
-X-Spam-Score: -0.0 (/)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1sJMv3-0004z5-5o for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Jun 2024 00:41:52 +0000
+Received: by mail-yb1-f201.google.com with SMTP id
+ 3f1490d57ef6-df771b5e942so8641552276.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 17 Jun 2024 17:41:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1718671306; x=1719276106;
+ darn=lists.sourceforge.net; 
+ h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=eeWAwKNyi6aVQ6EN90rM7zyGSNPuFg6n/JEZRLaHcM4=;
+ b=Qv53+kmeYjKIASfny5bcbr6lNXgtGp01stBAqRYam7Uh42z0Q7MDhaV8x3oAKAWE3X
+ fvcCDAG3Gcnfc5f6zkZNGvn/l5dGsWzx0vdizdKqrsRPtpqH4/LmH34yv4JXV1lcd4m8
+ VKL5GqVwfqx53tKcAcXOEbPEPUOE0mXcrxOxpFzfql5Q5X5wzlv6Em4zUwPMOpfImE0s
+ 9/64ftWB2clL1ndCzoHL8fr0Fs0ZudHCLx77sjd5ni9VSc/6gnp9atjwXKmNWPts4SDR
+ C0QTVOPRf2wbtF32T5SMAHuWdBv+G45oJdeshJ3L0TMv/76R4puC1+pF7NAr1T9jTFBH
+ Z3bQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718671306; x=1719276106;
+ h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=eeWAwKNyi6aVQ6EN90rM7zyGSNPuFg6n/JEZRLaHcM4=;
+ b=aomB2q2hvzR6jWAKj/3YvDplE/l+54dTRdD49ZdCY8OuNYQwmBAYjBU+VVPTSMpCfY
+ Ki3uv2r9URYly7Kz3vZrGJyo91GNwqxBVCdfhX3A2N6asTtsMVsbvTaA2N8Pe9WjhhZ8
+ rveK2XVqZ64ztOzTxAu7sa6JEpc2eUcaC+lATp3ZhHLR3oLt6J7rzAFWiqra6sZ3DpCL
+ a99vAGtDWTOTjs8tLD+iDo4xO6yHghp+ZqhiTuMImefrPXrdxoasGLEp6ElawgUe2Vdg
+ 01t5YY+TINfHurS5m+4EThaq1s5+ZQ+rtuN1JnNUMQRbTTI6JD5eZr4nCqYcuj1DP3jD
+ gw3A==
+X-Gm-Message-State: AOJu0YyAnuU227VFS1/4+fQbaeBdsdhnVVNYOY/dkiDKyaHjdzzKPick
+ TgmfUMel5z7SVzpoiQszQ/NH+15+f+oSVHL7B557T1zk11zbmaf6mu/A9Dr3dF+4K2aloT8+CZT
+ jn7FHnJbnYWm/T091wxkrggCuu/GrDPeKG+tWCiqNXKQwZF4K6OthhNhkhzo2qFN6M4imsS6Psi
+ f+Y6LPJeoP0Hc6N3P373ZM/2PObMk4RDFPHJ2OmzJDEX7EvpqGJeezcA==
+X-Google-Smtp-Source: AGHT+IGIMdi9RUsyYll/ae5cAdZr8bQjwh6IigoDtp2KK3YoCB0+JuRM1IvlUbfmuRWg0pX5dDohGH0BxHM=
+X-Received: from drosen.mtv.corp.google.com
+ ([2620:15c:211:201:eab6:28c3:5427:f5bf])
+ (user=drosen job=sendgmr) by 2002:a05:6902:114a:b0:dfe:fe5e:990a with SMTP id
+ 3f1490d57ef6-dff154c42f9mr1096722276.9.1718671305860; Mon, 17 Jun 2024
+ 17:41:45 -0700 (PDT)
+Date: Mon, 17 Jun 2024 17:41:36 -0700
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.45.2.627.g7a2c4fd464-goog
+Message-ID: <20240618004136.1336922-1-drosen@google.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: -7.7 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  When using the f2fs_io tool to set_verity, it will fail as
- follows: unisc:/data # ./f2fs_io set_verity file FS_IOC_ENABLE_VERITY:
- Inappropriate
- ioctl for device this is because commit: 95ae251fe828 (" [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  The code for dumping files was ignoring i_extra_isize,
+ leading
+ to invalid data for some inlined files after dumping. This swaps inode dumping
+ to use the common inline_data_addr function. Signed-off-by: Daniel Rosenberg
+ <drosen@google.com> --- fsck/dump.c | 2 +- 1 file changed, 1 insertion(+),
+ 1 deletion(-) 
+ Content analysis details:   (-7.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [222.66.158.135 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.219.201 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [222.66.158.135 listed in sa-accredit.habeas.com]
+ [209.85.219.201 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [222.66.158.135 listed in bl.score.senderscore.com]
+ [209.85.219.201 listed in bl.score.senderscore.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
+ welcome-list
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.201 listed in wl.mailspike.net]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sJ6X4-0000Sq-4N
-Subject: [f2fs-dev] [PATCH] f2fs-tools: fix do_set_verity ioctl fail issue
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1sJMv3-0004z5-5o
+Subject: [f2fs-dev] [PATCH] dump.f2fs: Fix dumping inlined files
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,111 +136,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ke.wang@unisoc.com, xiuhong.wang.cn@gmail.com, hao_hao.wang@unisoc.com
+From: Daniel Rosenberg via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Daniel Rosenberg <drosen@google.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, kernel-team@android.com,
+ Daniel Rosenberg <drosen@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When using the f2fs_io tool to set_verity, it will fail as follows:
-unisc:/data # ./f2fs_io set_verity file
-FS_IOC_ENABLE_VERITY: Inappropriate ioctl for device
-this is because commit: 95ae251fe828 ("f2fs: add fs-verity support"),
-the passed parameters do not match the latest kernel version.
+The code for dumping files was ignoring i_extra_isize, leading to
+invalid data for some inlined files after dumping. This swaps inode
+dumping to use the common inline_data_addr function.
 
-After patch:
-unisoc:/data # ./f2fs_io set_verity file
-Set fsverity bit to file
-unisoc:/data # ./f2fs_io getflags file
-get a flag on file ret=0, flags=verity
-
-Fixes: 95ae251fe828 ("f2fs: add fs-verity support")
-Signed-off-by: Xiuhong Wang <xiuhong.wang@unisoc.com>
-Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+Signed-off-by: Daniel Rosenberg <drosen@google.com>
 ---
- include/android_config.h |  1 +
- tools/f2fs_io/f2fs_io.c  |  9 ++++++---
- tools/f2fs_io/f2fs_io.h  | 20 ++++++++++++++++++--
- 3 files changed, 25 insertions(+), 5 deletions(-)
+ fsck/dump.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/android_config.h b/include/android_config.h
-index 05b686e..9c8b163 100644
---- a/include/android_config.h
-+++ b/include/android_config.h
-@@ -13,6 +13,7 @@
- #define HAVE_LINUX_XATTR_H 1
- #define HAVE_LINUX_FS_H 1
- #define HAVE_LINUX_FIEMAP_H 1
-+#define HAVE_LINUX_VERITY_H 1
- #define HAVE_MNTENT_H 1
- #define HAVE_STDLIB_H 1
- #define HAVE_STRING_H 1
-diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index a7b593a..2447490 100644
---- a/tools/f2fs_io/f2fs_io.c
-+++ b/tools/f2fs_io/f2fs_io.c
-@@ -182,16 +182,19 @@ static void do_fsync(int argc, char **argv, const struct cmd_desc *cmd)
- static void do_set_verity(int argc, char **argv, const struct cmd_desc *cmd)
- {
- 	int ret, fd;
-+	struct fsverity_enable_arg args = {.version = 1};
-+
-+	args.hash_algorithm = FS_VERITY_HASH_ALG_SHA256;
-+	args.block_size = 4096;
- 
- 	if (argc != 2) {
- 		fputs("Excess arguments\n\n", stderr);
- 		fputs(cmd->cmd_help, stderr);
- 		exit(1);
- 	}
-+	fd = open(argv[1], O_RDONLY);
- 
--	fd = open(argv[1], O_RDWR);
--
--	ret = ioctl(fd, FS_IOC_ENABLE_VERITY);
-+	ret = ioctl(fd, FS_IOC_ENABLE_VERITY, &args);
- 	if (ret < 0) {
- 		perror("FS_IOC_ENABLE_VERITY");
- 		exit(1);
-diff --git a/tools/f2fs_io/f2fs_io.h b/tools/f2fs_io/f2fs_io.h
-index b5c82f5..e55db5f 100644
---- a/tools/f2fs_io/f2fs_io.h
-+++ b/tools/f2fs_io/f2fs_io.h
-@@ -16,6 +16,9 @@
- #ifdef HAVE_LINUX_FS_H
- #include <linux/fs.h>
- #endif
-+#ifdef HAVE_LINUX_VERITY_H
-+#include <linux/fsverity.h>
-+#endif
- 
- #include <sys/types.h>
- 
-@@ -136,8 +139,21 @@ struct fscrypt_get_policy_ex_arg {
- #define F2FS_IOC_GET_ENCRYPTION_POLICY	FS_IOC_GET_ENCRYPTION_POLICY
- #define F2FS_IOC_GET_ENCRYPTION_PWSALT	FS_IOC_GET_ENCRYPTION_PWSALT
- 
--#define FS_IOC_ENABLE_VERITY		_IO('f', 133)
--
-+#ifndef FS_IOC_ENABLE_VERITY
-+#define FS_IOC_ENABLE_VERITY    _IOW('f', 133, struct fsverity_enable_arg)
-+#define FS_VERITY_HASH_ALG_SHA256       1
-+struct fsverity_enable_arg {
-+	__u32 version;
-+	__u32 hash_algorithm;
-+	__u32 block_size;
-+	__u32 salt_size;
-+	__u64 salt_ptr;
-+	__u32 sig_size;
-+	__u32 __reserved1;
-+	__u64 sig_ptr;
-+	__u64 __reserved2[11];
-+};
-+#endif
- /*
-  * Inode flags
-  */
+diff --git a/fsck/dump.c b/fsck/dump.c
+index 90e3e0e..8d5613e 100644
+--- a/fsck/dump.c
++++ b/fsck/dump.c
+@@ -479,7 +479,7 @@ static int dump_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
+ 	if ((node_blk->i.i_inline & F2FS_INLINE_DATA)) {
+ 		DBG(3, "ino[0x%x] has inline data!\n", nid);
+ 		/* recover from inline data */
+-		dev_write_dump(((unsigned char *)node_blk) + INLINE_DATA_OFFSET,
++		dev_write_dump(inline_data_addr(node_blk),
+ 						0, MAX_INLINE_DATA(node_blk));
+ 		ret = -1;
+ 		goto dump_xattr;
+
+base-commit: c1a97862b05d8a736ad8719939395c61bd71c982
 -- 
-2.25.1
+2.45.2.627.g7a2c4fd464-goog
 
 
 
