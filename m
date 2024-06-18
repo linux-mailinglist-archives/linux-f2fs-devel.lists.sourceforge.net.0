@@ -2,104 +2,113 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 439E990C443
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jun 2024 09:26:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1549390C4B8
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jun 2024 10:09:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sJTEp-0008D9-Tm;
-	Tue, 18 Jun 2024 07:26:44 +0000
+	id 1sJTtk-0001tS-TB;
+	Tue, 18 Jun 2024 08:09:02 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1sJTEn-0008D3-ON
+ (envelope-from <chao@kernel.org>) id 1sJTtj-0001sl-Cr
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Jun 2024 07:26:42 +0000
+ Tue, 18 Jun 2024 08:09:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vJa2e1iCjlK4yMFTDHNPxVwcdClaye4AD268smSkez0=; b=bJi3BJH043rY8IQ8UUwFQ2lI9t
- eSDZFLQC6Cev08EDg2yuWaraCVqkZGyYS9SFvG/KKQ1BrF6Xh+Dkh12WAYIFKByqyITXG5pfQ9EpJ
- XNJY1DcgDWLVHp3h8OH32uIuhl0k6LluOAd52R042T8Q355iZ/0LlYyKDFlydW3xSIOo=;
+ bh=0rEdmoMv8b9n8ay+OyQfJSCOVyYkXPy8KFB2MKDRsmQ=; b=kFWbHTIzRkBz006vVwTERd9rD3
+ mo/XnOmr3nGPxhxwu1faB5VsJLjgx70GYXonLOLnGbunR2ZLMm4k//Vj4/V9U/2EyXzgU4A+AZ4en
+ 2FZbkBUfUtenrytx0FtIJ4N+WTX94zc723RC9lS9PU77BgTLrWB4D4/ZI++bZTPAn/Z0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=vJa2e1iCjlK4yMFTDHNPxVwcdClaye4AD268smSkez0=; b=h
- bJHEBOhr11BgT8ZLDTdX2YXj85Owwd0KJwvpKfDmTDLjGRPRmkYCLmPghWOCm95U1qlS0o7DltI2Q
- bK/rf+9MYvy4SOKCBOoY5iSjIVN06FaL4LuSlxPYhtkC5Zi0rZWZa6RwjDy21qNRTgUWWZhGQ0GD9
- cX0pcdFrhbdN1jjQ=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=0rEdmoMv8b9n8ay+OyQfJSCOVyYkXPy8KFB2MKDRsmQ=; b=VzfZp9WXBvIQ68IpSRSjmKkc+Z
+ S2YG3T/Zxltma8nTkJHYtIwypFyFuaw+CqtrqEOzQJ0VYcTkq8/V3T15WT9XlwFRJQ+PlShSP+sob
+ Di9e426Mr3UFyaMCUxI6mJabj221zlubk/p+2GmZmFqcDHC+rZxNhDw9wQE/D8EaF5RM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sJTEn-0004eF-PM for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Jun 2024 07:26:41 +0000
+ id 1sJTtk-0006jh-EZ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Jun 2024 08:09:00 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A4A8061705;
- Tue, 18 Jun 2024 07:26:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF46EC4AF1D;
- Tue, 18 Jun 2024 07:26:27 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 54AA960BC0;
+ Tue, 18 Jun 2024 08:08:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC87FC3277B;
+ Tue, 18 Jun 2024 08:08:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1718695590;
- bh=KONhJvRsGKe9Je25O438ETYA1LD2QrAImWkgO4iDTkE=;
- h=From:To:Cc:Subject:Date:From;
- b=X8HBx8AaJTixloScUfXKYiN8u5tzU+rzS9gH2zqvDNRSnKD0VfCmNk09o3JMVKHUm
- UR4J8B5JP+5pnGNQxLsLuqDgtMQvBDDRa/GUScgLMvVOAZb/m3d4j3vOsBiRY23eqh
- qrqM/Y5EUdgyLpkiBe+TN6XkZMJgeBA4fBD8FN0e87b7II7yAMaSBdq78Ivl/5jKvv
- qWRUV+5BbZOBp7bAM7XZYZD4GZKnuPv7guKz5kOq8wUj8f9rPbB8galgaf/boDtaDJ
- TBIPPmRDcpmxsaVthDN3dw4BWkb3mXqxq7Xd+ZXJKx2fQdIKAY7ovGQfb/HKZ59z/J
- VFXVhxkpwhP/g==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Tue, 18 Jun 2024 15:26:20 +0800
-Message-Id: <20240618072620.720535-1-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
+ s=k20201202; t=1718698129;
+ bh=IA25PUjhhbNndj00EGYem/FCIIrIH//UWKcRPQbSt/Q=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=dOojlXcEUDCTnA/p7nYDyAoQZDwBscfDTe8WAb6kNADvHJqHkOhCBjYBRhE7C6McF
+ sZWJjpVv63jb0EO9Vanyp6aHXI769yPlWUjogOfoyXonYlGPzNg2MOeJVmdoU1Tp/R
+ 3zKg8ZBATxBrG2zm+vRjszG6FBfsfoOQdmKmXOUc0Nl+6+wXuKj5z0UGo6MDuZfvFp
+ O6m7HVfrcmIfSZrnhjOvuJ5WfhoNzg47wm87LGfS1545KpmUm2IO/NizU3jT502hnp
+ zV53WXR9rePUCnrIuc6Xgj2ZPMHvUribCW4BwsdIpsJa7KTyIU/9LmJOtL0h9WjQjf
+ I1wGyY9krV2vQ==
+Message-ID: <5516ecdc-7966-4be3-880c-836e51e2557d@kernel.org>
+Date: Tue, 18 Jun 2024 16:08:42 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Xiuhong Wang <xiuhong.wang.cn@gmail.com>
+References: <20240617071114.150721-1-xiuhong.wang@unisoc.com>
+ <04825e07-04d4-4eef-8b06-1e2329880612@kernel.org>
+ <CAOsHCa0bUg3Kam_4G=aiWzQpisn7rAS3nQWMQEPWB04==Sftbw@mail.gmail.com>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <CAOsHCa0bUg3Kam_4G=aiWzQpisn7rAS3nQWMQEPWB04==Sftbw@mail.gmail.com>
 X-Spam-Score: -0.4 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Convert to use folio and related functionality. Cc: Matthew
- Wilcox <willy@infradead.org> Signed-off-by: Chao Yu <chao@kernel.org> ---
- - support large folio - use bd_mapping instead of bd_inode->i_mapping
- fs/f2fs/data.c | 1 - fs/f2fs/f2fs.h | 11 +++ [...] 
+ 
+ Content preview:  On 2024/6/18 13:35, Xiuhong Wang wrote: > Chao Yu <chao@kernel.org>
+    于2024年6月18日周二 11:04写道： > >> >> On 2024/6/17 15:11, Xiuhong
+    Wang wrote: >>> When using the f2fs_io tool to set_veri [...] 
+ 
  Content analysis details:   (-0.4 points, 6.0 required)
- pts rule name              description
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-accredit.habeas.com]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+                             query to Validity was blocked.  See
+                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
+                              for more information.
+                            [139.178.84.217 listed in bl.score.senderscore.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [139.178.84.217 listed in list.dnswl.org]
+  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+                             query to Validity was blocked.  See
+                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
+                              for more information.
+                         [139.178.84.217 listed in sa-trusted.bondedsender.org]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+                             DNSWL was blocked.  See
+                             http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+                              for more information.
+                             [139.178.84.217 listed in list.dnswl.org]
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+                             envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+                             author's domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sJTEn-0004eF-PM
-Subject: [f2fs-dev] [PATCH v3] f2fs: get rid of buffer_head use
+X-Headers-End: 1sJTtk-0006jh-EZ
+Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: fix do_set_verity ioctl fail
+ issue
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,291 +120,92 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Xiuhong Wang <xiuhong.wang@unisoc.com>, ke.wang@unisoc.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ jaegeuk@kernel.org, hao_hao.wang@unisoc.com
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Convert to use folio and related functionality.
-
-Cc: Matthew Wilcox <willy@infradead.org>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-- support large folio
-- use bd_mapping instead of bd_inode->i_mapping
- fs/f2fs/data.c  |  1 -
- fs/f2fs/f2fs.h  | 11 +++++-
- fs/f2fs/file.c  |  1 -
- fs/f2fs/inode.c |  1 -
- fs/f2fs/super.c | 93 +++++++++++++++++++++++++++++--------------------
- 5 files changed, 66 insertions(+), 41 deletions(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index b6dcb3bcaef7..0b4f563f2361 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -7,7 +7,6 @@
-  */
- #include <linux/fs.h>
- #include <linux/f2fs_fs.h>
--#include <linux/buffer_head.h>
- #include <linux/sched/mm.h>
- #include <linux/mpage.h>
- #include <linux/writeback.h>
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index f7ee6c5e371e..777497919c62 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -11,7 +11,6 @@
- #include <linux/uio.h>
- #include <linux/types.h>
- #include <linux/page-flags.h>
--#include <linux/buffer_head.h>
- #include <linux/slab.h>
- #include <linux/crc32.h>
- #include <linux/magic.h>
-@@ -1990,6 +1989,16 @@ static inline struct f2fs_super_block *F2FS_RAW_SUPER(struct f2fs_sb_info *sbi)
- 	return (struct f2fs_super_block *)(sbi->raw_super);
- }
- 
-+static inline struct f2fs_super_block *F2FS_SUPER_BLOCK(struct folio *folio,
-+								pgoff_t index)
-+{
-+	pgoff_t idx_in_folio = index % (1 << folio_order(folio));
-+
-+	return (struct f2fs_super_block *)
-+		(page_address(folio_page(folio, idx_in_folio)) +
-+						F2FS_SUPER_OFFSET);
-+}
-+
- static inline struct f2fs_checkpoint *F2FS_CKPT(struct f2fs_sb_info *sbi)
- {
- 	return (struct f2fs_checkpoint *)(sbi->ckpt);
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index e4a7cff00796..7508c744c157 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -8,7 +8,6 @@
- #include <linux/fs.h>
- #include <linux/f2fs_fs.h>
- #include <linux/stat.h>
--#include <linux/buffer_head.h>
- #include <linux/writeback.h>
- #include <linux/blkdev.h>
- #include <linux/falloc.h>
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index dbfebbddf675..87982e06bbe7 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -7,7 +7,6 @@
-  */
- #include <linux/fs.h>
- #include <linux/f2fs_fs.h>
--#include <linux/buffer_head.h>
- #include <linux/writeback.h>
- #include <linux/sched/mm.h>
- #include <linux/lz4.h>
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 4a1bc8f40f9a..c664db2b2a5e 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -11,7 +11,6 @@
- #include <linux/fs_context.h>
- #include <linux/sched/mm.h>
- #include <linux/statfs.h>
--#include <linux/buffer_head.h>
- #include <linux/kthread.h>
- #include <linux/parser.h>
- #include <linux/mount.h>
-@@ -3333,24 +3332,42 @@ loff_t max_file_blocks(struct inode *inode)
- 	return result;
- }
- 
--static int __f2fs_commit_super(struct buffer_head *bh,
--			struct f2fs_super_block *super)
-+static int __f2fs_commit_super(struct f2fs_sb_info *sbi, struct folio *folio,
-+						pgoff_t index, bool update)
- {
--	lock_buffer(bh);
--	if (super)
--		memcpy(bh->b_data + F2FS_SUPER_OFFSET, super, sizeof(*super));
--	set_buffer_dirty(bh);
--	unlock_buffer(bh);
--
-+	struct bio *bio;
- 	/* it's rare case, we can do fua all the time */
--	return __sync_dirty_buffer(bh, REQ_SYNC | REQ_PREFLUSH | REQ_FUA);
-+	blk_opf_t opf = REQ_OP_WRITE | REQ_SYNC | REQ_PREFLUSH | REQ_FUA;
-+	int ret;
-+
-+	folio_lock(folio);
-+	folio_wait_writeback(folio);
-+	if (update)
-+		memcpy(F2FS_SUPER_BLOCK(folio, index), F2FS_RAW_SUPER(sbi),
-+					sizeof(struct f2fs_super_block));
-+	folio_mark_dirty(folio);
-+	folio_clear_dirty_for_io(folio);
-+	folio_start_writeback(folio);
-+	folio_unlock(folio);
-+
-+	bio = bio_alloc(sbi->sb->s_bdev, 1, opf, GFP_NOFS);
-+
-+	/* it doesn't need to set crypto context for superblock update */
-+	bio->bi_iter.bi_sector = SECTOR_FROM_BLOCK(folio_index(folio));
-+
-+	if (!bio_add_folio(bio, folio, folio_size(folio), 0))
-+		f2fs_bug_on(sbi, 1);
-+
-+	ret = submit_bio_wait(bio);
-+	folio_end_writeback(folio);
-+
-+	return ret;
- }
- 
- static inline bool sanity_check_area_boundary(struct f2fs_sb_info *sbi,
--					struct buffer_head *bh)
-+					struct folio *folio, pgoff_t index)
- {
--	struct f2fs_super_block *raw_super = (struct f2fs_super_block *)
--					(bh->b_data + F2FS_SUPER_OFFSET);
-+	struct f2fs_super_block *raw_super = F2FS_SUPER_BLOCK(folio, index);
- 	struct super_block *sb = sbi->sb;
- 	u32 segment0_blkaddr = le32_to_cpu(raw_super->segment0_blkaddr);
- 	u32 cp_blkaddr = le32_to_cpu(raw_super->cp_blkaddr);
-@@ -3425,7 +3442,7 @@ static inline bool sanity_check_area_boundary(struct f2fs_sb_info *sbi,
- 			set_sbi_flag(sbi, SBI_NEED_SB_WRITE);
- 			res = "internally";
- 		} else {
--			err = __f2fs_commit_super(bh, NULL);
-+			err = __f2fs_commit_super(sbi, folio, index, false);
- 			res = err ? "failed" : "done";
- 		}
- 		f2fs_info(sbi, "Fix alignment : %s, start(%u) end(%llu) block(%u)",
-@@ -3438,12 +3455,11 @@ static inline bool sanity_check_area_boundary(struct f2fs_sb_info *sbi,
- }
- 
- static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
--				struct buffer_head *bh)
-+					struct folio *folio, pgoff_t index)
- {
- 	block_t segment_count, segs_per_sec, secs_per_zone, segment_count_main;
- 	block_t total_sections, blocks_per_seg;
--	struct f2fs_super_block *raw_super = (struct f2fs_super_block *)
--					(bh->b_data + F2FS_SUPER_OFFSET);
-+	struct f2fs_super_block *raw_super = F2FS_SUPER_BLOCK(folio, index);
- 	size_t crc_offset = 0;
- 	__u32 crc = 0;
- 
-@@ -3601,7 +3617,7 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
- 	}
- 
- 	/* check CP/SIT/NAT/SSA/MAIN_AREA area boundary */
--	if (sanity_check_area_boundary(sbi, bh))
-+	if (sanity_check_area_boundary(sbi, folio, index))
- 		return -EFSCORRUPTED;
- 
- 	return 0;
-@@ -3948,7 +3964,7 @@ static int read_raw_super_block(struct f2fs_sb_info *sbi,
- {
- 	struct super_block *sb = sbi->sb;
- 	int block;
--	struct buffer_head *bh;
-+	struct folio *folio;
- 	struct f2fs_super_block *super;
- 	int err = 0;
- 
-@@ -3957,32 +3973,32 @@ static int read_raw_super_block(struct f2fs_sb_info *sbi,
- 		return -ENOMEM;
- 
- 	for (block = 0; block < 2; block++) {
--		bh = sb_bread(sb, block);
--		if (!bh) {
-+		folio = read_mapping_folio(sb->s_bdev->bd_mapping, block, NULL);
-+		if (IS_ERR(folio)) {
- 			f2fs_err(sbi, "Unable to read %dth superblock",
- 				 block + 1);
--			err = -EIO;
-+			err = PTR_ERR(folio);
- 			*recovery = 1;
- 			continue;
- 		}
- 
- 		/* sanity checking of raw super */
--		err = sanity_check_raw_super(sbi, bh);
-+		err = sanity_check_raw_super(sbi, folio, block);
- 		if (err) {
- 			f2fs_err(sbi, "Can't find valid F2FS filesystem in %dth superblock",
- 				 block + 1);
--			brelse(bh);
-+			folio_put(folio);
- 			*recovery = 1;
- 			continue;
- 		}
- 
- 		if (!*raw_super) {
--			memcpy(super, bh->b_data + F2FS_SUPER_OFFSET,
-+			memcpy(super, F2FS_SUPER_BLOCK(folio, block),
- 							sizeof(*super));
- 			*valid_super_block = block;
- 			*raw_super = super;
- 		}
--		brelse(bh);
-+		folio_put(folio);
- 	}
- 
- 	/* No valid superblock */
-@@ -3996,7 +4012,8 @@ static int read_raw_super_block(struct f2fs_sb_info *sbi,
- 
- int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover)
- {
--	struct buffer_head *bh;
-+	struct folio *folio;
-+	pgoff_t index;
- 	__u32 crc = 0;
- 	int err;
- 
-@@ -4014,22 +4031,24 @@ int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover)
- 	}
- 
- 	/* write back-up superblock first */
--	bh = sb_bread(sbi->sb, sbi->valid_super_block ? 0 : 1);
--	if (!bh)
--		return -EIO;
--	err = __f2fs_commit_super(bh, F2FS_RAW_SUPER(sbi));
--	brelse(bh);
-+	index = sbi->valid_super_block ? 0 : 1;
-+	folio = read_mapping_folio(sbi->sb->s_bdev->bd_mapping, index, NULL);
-+	if (IS_ERR(folio))
-+		return PTR_ERR(folio);
-+	err = __f2fs_commit_super(sbi, folio, index, true);
-+	folio_put(folio);
- 
- 	/* if we are in recovery path, skip writing valid superblock */
- 	if (recover || err)
- 		return err;
- 
- 	/* write current valid superblock */
--	bh = sb_bread(sbi->sb, sbi->valid_super_block);
--	if (!bh)
--		return -EIO;
--	err = __f2fs_commit_super(bh, F2FS_RAW_SUPER(sbi));
--	brelse(bh);
-+	index = sbi->valid_super_block;
-+	folio = read_mapping_folio(sbi->sb->s_bdev->bd_mapping, index, NULL);
-+	if (IS_ERR(folio))
-+		return PTR_ERR(folio);
-+	err = __f2fs_commit_super(sbi, folio, index, true);
-+	folio_put(folio);
- 	return err;
- }
- 
--- 
-2.40.1
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMjAyNC82LzE4IDEzOjM1LCBYaXVob25nIFdhbmcgd3JvdGU6Cj4gQ2hhbyBZdSA8Y2hhb0Br
+ZXJuZWwub3JnPiDkuo4yMDI05bm0NuaciDE45pel5ZGo5LqMIDExOjA05YaZ6YGT77yaCj4gCj4+
+Cj4+IE9uIDIwMjQvNi8xNyAxNToxMSwgWGl1aG9uZyBXYW5nIHdyb3RlOgo+Pj4gV2hlbiB1c2lu
+ZyB0aGUgZjJmc19pbyB0b29sIHRvIHNldF92ZXJpdHksIGl0IHdpbGwgZmFpbCBhcyBmb2xsb3dz
+Ogo+Pj4gdW5pc2M6L2RhdGEgIyAuL2YyZnNfaW8gc2V0X3Zlcml0eSBmaWxlCj4+PiBGU19JT0Nf
+RU5BQkxFX1ZFUklUWTogSW5hcHByb3ByaWF0ZSBpb2N0bCBmb3IgZGV2aWNlCj4+PiB0aGlzIGlz
+IGJlY2F1c2UgY29tbWl0OiA5NWFlMjUxZmU4MjggKCJmMmZzOiBhZGQgZnMtdmVyaXR5IHN1cHBv
+cnQiKSwKPj4+IHRoZSBwYXNzZWQgcGFyYW1ldGVycyBkbyBub3QgbWF0Y2ggdGhlIGxhdGVzdCBr
+ZXJuZWwgdmVyc2lvbi4KPj4+Cj4+PiBBZnRlciBwYXRjaDoKPj4+IHVuaXNvYzovZGF0YSAjIC4v
+ZjJmc19pbyBzZXRfdmVyaXR5IGZpbGUKPj4+IFNldCBmc3Zlcml0eSBiaXQgdG8gZmlsZQo+Pj4g
+dW5pc29jOi9kYXRhICMgLi9mMmZzX2lvIGdldGZsYWdzIGZpbGUKPj4+IGdldCBhIGZsYWcgb24g
+ZmlsZSByZXQ9MCwgZmxhZ3M9dmVyaXR5Cj4+Pgo+Pj4gRml4ZXM6IDk1YWUyNTFmZTgyOCAoImYy
+ZnM6IGFkZCBmcy12ZXJpdHkgc3VwcG9ydCIpCj4+PiBTaWduZWQtb2ZmLWJ5OiBYaXVob25nIFdh
+bmcgPHhpdWhvbmcud2FuZ0B1bmlzb2MuY29tPgo+Pj4gU2lnbmVkLW9mZi1ieTogWmhpZ3VvIE5p
+dSA8emhpZ3VvLm5pdUB1bmlzb2MuY29tPgo+Pj4gLS0tCj4+PiAgICBpbmNsdWRlL2FuZHJvaWRf
+Y29uZmlnLmggfCAgMSArCj4+PiAgICB0b29scy9mMmZzX2lvL2YyZnNfaW8uYyAgfCAgOSArKysr
+KystLS0KPj4+ICAgIHRvb2xzL2YyZnNfaW8vZjJmc19pby5oICB8IDIwICsrKysrKysrKysrKysr
+KysrKy0tCj4+PiAgICAzIGZpbGVzIGNoYW5nZWQsIDI1IGluc2VydGlvbnMoKyksIDUgZGVsZXRp
+b25zKC0pCj4+Pgo+Pj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvYW5kcm9pZF9jb25maWcuaCBiL2lu
+Y2x1ZGUvYW5kcm9pZF9jb25maWcuaAo+Pj4gaW5kZXggMDViNjg2ZS4uOWM4YjE2MyAxMDA2NDQK
+Pj4+IC0tLSBhL2luY2x1ZGUvYW5kcm9pZF9jb25maWcuaAo+Pj4gKysrIGIvaW5jbHVkZS9hbmRy
+b2lkX2NvbmZpZy5oCj4+PiBAQCAtMTMsNiArMTMsNyBAQAo+Pj4gICAgI2RlZmluZSBIQVZFX0xJ
+TlVYX1hBVFRSX0ggMQo+Pj4gICAgI2RlZmluZSBIQVZFX0xJTlVYX0ZTX0ggMQo+Pj4gICAgI2Rl
+ZmluZSBIQVZFX0xJTlVYX0ZJRU1BUF9IIDEKPj4+ICsjZGVmaW5lIEhBVkVfTElOVVhfVkVSSVRZ
+X0ggMQo+Pj4gICAgI2RlZmluZSBIQVZFX01OVEVOVF9IIDEKPj4+ICAgICNkZWZpbmUgSEFWRV9T
+VERMSUJfSCAxCj4+PiAgICAjZGVmaW5lIEhBVkVfU1RSSU5HX0ggMQo+Pj4gZGlmZiAtLWdpdCBh
+L3Rvb2xzL2YyZnNfaW8vZjJmc19pby5jIGIvdG9vbHMvZjJmc19pby9mMmZzX2lvLmMKPj4+IGlu
+ZGV4IGE3YjU5M2EuLjI0NDc0OTAgMTAwNjQ0Cj4+PiAtLS0gYS90b29scy9mMmZzX2lvL2YyZnNf
+aW8uYwo+Pj4gKysrIGIvdG9vbHMvZjJmc19pby9mMmZzX2lvLmMKPj4+IEBAIC0xODIsMTYgKzE4
+MiwxOSBAQCBzdGF0aWMgdm9pZCBkb19mc3luYyhpbnQgYXJnYywgY2hhciAqKmFyZ3YsIGNvbnN0
+IHN0cnVjdCBjbWRfZGVzYyAqY21kKQo+Pj4gICAgc3RhdGljIHZvaWQgZG9fc2V0X3Zlcml0eShp
+bnQgYXJnYywgY2hhciAqKmFyZ3YsIGNvbnN0IHN0cnVjdCBjbWRfZGVzYyAqY21kKQo+Pj4gICAg
+ewo+Pj4gICAgICAgIGludCByZXQsIGZkOwo+Pj4gKyAgICAgc3RydWN0IGZzdmVyaXR5X2VuYWJs
+ZV9hcmcgYXJncyA9IHsudmVyc2lvbiA9IDF9Owo+Pj4gKwo+Pj4gKyAgICAgYXJncy5oYXNoX2Fs
+Z29yaXRobSA9IEZTX1ZFUklUWV9IQVNIX0FMR19TSEEyNTY7Cj4+PiArICAgICBhcmdzLmJsb2Nr
+X3NpemUgPSA0MDk2Owo+Pj4KPj4+ICAgICAgICBpZiAoYXJnYyAhPSAyKSB7Cj4+PiAgICAgICAg
+ICAgICAgICBmcHV0cygiRXhjZXNzIGFyZ3VtZW50c1xuXG4iLCBzdGRlcnIpOwo+Pj4gICAgICAg
+ICAgICAgICAgZnB1dHMoY21kLT5jbWRfaGVscCwgc3RkZXJyKTsKPj4+ICAgICAgICAgICAgICAg
+IGV4aXQoMSk7Cj4+PiAgICAgICAgfQo+Pj4gKyAgICAgZmQgPSBvcGVuKGFyZ3ZbMV0sIE9fUkRP
+TkxZKTsKPj4+Cj4+PiAtICAgICBmZCA9IG9wZW4oYXJndlsxXSwgT19SRFdSKTsKPj4KPj4gSXQg
+bmVlZHMgd3JpdGUgcGVybWlzc2lvbj8KPj4KPj4gVGhhbmtzLAo+Pgo+IElmIHlvdSBvcGVuIHRo
+ZSBmaWxlIHdpdGggT19SRFdSLCB0aGUgZm9sbG93aW5nIGVycm9yIHdpbGwgYmUgcmV0dXJuZWQ6
+Cj4gdW5pc29jOi9kYXRhICMgLi9mMmZzX2lvIHNldF92ZXJpdHkgZmlsZQo+IEZTX0lPQ19FTkFC
+TEVfVkVSSVRZOiBUZXh0IGZpbGUgYnVzeQo+IAo+IC9Eb2N1bWVudGF0aW9uL2ZpbGVzeXN0ZW1z
+L2ZzdmVyaXR5LnJzdCBoYXMgdGhlIGZvbGxvd2luZyBkZXNjcmlwdGlvbjoKPiBGU19JT0NfRU5B
+QkxFX1ZFUklUWSBjaGVja3MgZm9yIHdyaXRlIGFjY2VzcyB0byB0aGUgaW5vZGUuIEhvd2V2ZXIs
+IGl0Cj4gbXVzdCBiZSBleGVjdXRlZCBvbiBhbiBPX1JET05MWSBmaWxlIGRlc2NyaXB0b3IgYW5k
+IG5vIHByb2Nlc3NlcyBjYW4KPiBoYXZlIHRoZSBmaWxlIG9wZW4gZm9yIHdyaXRpbmcuIEF0dGVt
+cHRzIHRvIG9wZW4gdGhlIGZpbGUgZm9yIHdyaXRpbmcKPiB3aGlsZSB0aGlzIGlvY3RsIGlzIGV4
+ZWN1dGluZyB3aWxsIGZhaWwgd2l0aCBFVFhUQlNZLiAoVGhpcyBpcwo+IG5lY2Vzc2FyeSB0byBn
+dWFyYW50ZWUgdGhhdCBubyB3cml0YWJsZSBmaWxlIGRlc2NyaXB0b3JzIHdpbGwgZXhpc3QKPiBh
+ZnRlciB2ZXJpdHkgaXMgZW5hYmxlZCwgYW5kIHRvIGd1YXJhbnRlZSB0aGF0IHRoZSBmaWxlJ3Mg
+Y29udGVudHMgYXJlCj4gc3RhYmxlIHdoaWxlIHRoZSBNZXJrbGUgdHJlZSBpcyBiZWluZyBidWls
+dCBvdmVyIGl0LikKCkdvdCBpdCwgdGhhbmtzIGZvciB0aGUgZXhwbGFuYXRpb24uIDopCgpUaGFu
+a3MsCgo+IAo+Pj4gLQo+Pj4gLSAgICAgcmV0ID0gaW9jdGwoZmQsIEZTX0lPQ19FTkFCTEVfVkVS
+SVRZKTsKPj4+ICsgICAgIHJldCA9IGlvY3RsKGZkLCBGU19JT0NfRU5BQkxFX1ZFUklUWSwgJmFy
+Z3MpOwo+Pj4gICAgICAgIGlmIChyZXQgPCAwKSB7Cj4+PiAgICAgICAgICAgICAgICBwZXJyb3Io
+IkZTX0lPQ19FTkFCTEVfVkVSSVRZIik7Cj4+PiAgICAgICAgICAgICAgICBleGl0KDEpOwo+Pj4g
+ZGlmZiAtLWdpdCBhL3Rvb2xzL2YyZnNfaW8vZjJmc19pby5oIGIvdG9vbHMvZjJmc19pby9mMmZz
+X2lvLmgKPj4+IGluZGV4IGI1YzgyZjUuLmU1NWRiNWYgMTAwNjQ0Cj4+PiAtLS0gYS90b29scy9m
+MmZzX2lvL2YyZnNfaW8uaAo+Pj4gKysrIGIvdG9vbHMvZjJmc19pby9mMmZzX2lvLmgKPj4+IEBA
+IC0xNiw2ICsxNiw5IEBACj4+PiAgICAjaWZkZWYgSEFWRV9MSU5VWF9GU19ICj4+PiAgICAjaW5j
+bHVkZSA8bGludXgvZnMuaD4KPj4+ICAgICNlbmRpZgo+Pj4gKyNpZmRlZiBIQVZFX0xJTlVYX1ZF
+UklUWV9ICj4+PiArI2luY2x1ZGUgPGxpbnV4L2ZzdmVyaXR5Lmg+Cj4+PiArI2VuZGlmCj4+Pgo+
+Pj4gICAgI2luY2x1ZGUgPHN5cy90eXBlcy5oPgo+Pj4KPj4+IEBAIC0xMzYsOCArMTM5LDIxIEBA
+IHN0cnVjdCBmc2NyeXB0X2dldF9wb2xpY3lfZXhfYXJnIHsKPj4+ICAgICNkZWZpbmUgRjJGU19J
+T0NfR0VUX0VOQ1JZUFRJT05fUE9MSUNZICAgICAgRlNfSU9DX0dFVF9FTkNSWVBUSU9OX1BPTElD
+WQo+Pj4gICAgI2RlZmluZSBGMkZTX0lPQ19HRVRfRU5DUllQVElPTl9QV1NBTFQgICAgICBGU19J
+T0NfR0VUX0VOQ1JZUFRJT05fUFdTQUxUCj4+Pgo+Pj4gLSNkZWZpbmUgRlNfSU9DX0VOQUJMRV9W
+RVJJVFkgICAgICAgICBfSU8oJ2YnLCAxMzMpCj4+PiAtCj4+PiArI2lmbmRlZiBGU19JT0NfRU5B
+QkxFX1ZFUklUWQo+Pj4gKyNkZWZpbmUgRlNfSU9DX0VOQUJMRV9WRVJJVFkgICAgX0lPVygnZics
+IDEzMywgc3RydWN0IGZzdmVyaXR5X2VuYWJsZV9hcmcpCj4+PiArI2RlZmluZSBGU19WRVJJVFlf
+SEFTSF9BTEdfU0hBMjU2ICAgICAgIDEKPj4+ICtzdHJ1Y3QgZnN2ZXJpdHlfZW5hYmxlX2FyZyB7
+Cj4+PiArICAgICBfX3UzMiB2ZXJzaW9uOwo+Pj4gKyAgICAgX191MzIgaGFzaF9hbGdvcml0aG07
+Cj4+PiArICAgICBfX3UzMiBibG9ja19zaXplOwo+Pj4gKyAgICAgX191MzIgc2FsdF9zaXplOwo+
+Pj4gKyAgICAgX191NjQgc2FsdF9wdHI7Cj4+PiArICAgICBfX3UzMiBzaWdfc2l6ZTsKPj4+ICsg
+ICAgIF9fdTMyIF9fcmVzZXJ2ZWQxOwo+Pj4gKyAgICAgX191NjQgc2lnX3B0cjsKPj4+ICsgICAg
+IF9fdTY0IF9fcmVzZXJ2ZWQyWzExXTsKPj4+ICt9Owo+Pj4gKyNlbmRpZgo+Pj4gICAgLyoKPj4+
+ICAgICAqIElub2RlIGZsYWdzCj4+PiAgICAgKi8KCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51
+eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZv
+cmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
