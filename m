@@ -2,129 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 700CC90C099
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jun 2024 02:42:11 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C68C590C0E1
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jun 2024 03:02:23 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sJMv7-0007Jh-QZ;
-	Tue, 18 Jun 2024 00:41:58 +0000
+	id 1sJNEl-0006q0-9T;
+	Tue, 18 Jun 2024 01:02:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <3yddwZgYKAHYXlimYhaiiafY.Wig@flex--drosen.bounces.google.com>)
- id 1sJMv3-0007JA-Dj for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Jun 2024 00:41:53 +0000
+ (envelope-from <chao@kernel.org>) id 1sJNEk-0006pu-5R
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Jun 2024 01:02:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
- Mime-Version:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eeWAwKNyi6aVQ6EN90rM7zyGSNPuFg6n/JEZRLaHcM4=; b=dwZq5u7tPlnSdsGC5U0/C50YD2
- RPa7KcHDxfkyjl4MDyLw2IsPirHvROo4Mo1DlzM6icnF6dpSnXPNagBO8gM0OrZ1S+WDUn2Bmm+mR
- tEgaO0Og/Sb96Vtc5KfapLr0r0qsAJrV4YDKmchIpBoYFVSckMNPxGxfpTQosZuPNKZo=;
+ bh=tgBnCxe3sOcZVGKOf26rTeMSqoh+k5fbCtix2ox1j0M=; b=Ax8nUuYMIv18vLvv8dg/lRv6Bi
+ S9MRmRndiLNkRYfy7mc85X0uL9m8K4wRcNRMJUFp2SXDv2BZBkn+EdpQkDkmGv0OVYt5c6802dGPE
+ UTVBroO1ywn0Kv+KFs/9pFwznWtJg1hIJpxny+qF2h++oCPx3RvNHD0rQNizDjOMtZuo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=eeWAwKNyi6aVQ6EN90rM7zyGSNPuFg6n/JEZRLaHcM4=; b=d
- 8x3pmXT8oN3iSttNDJkELSddwafQhWMIcU9rORhzwPt+gbUByguPOYYoZUQ2fB2m8CF3A1Dcuhjok
- gNB488u0QaBlMNBaYhqJj6e3HYEehzWSzqOIxGFCp9A9UMDvnsif7l1aG9O4jspFLHaKCeDWjAgg+
- YsmD3uWwvlvyBRzI=;
-Received: from mail-yb1-f201.google.com ([209.85.219.201])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=tgBnCxe3sOcZVGKOf26rTeMSqoh+k5fbCtix2ox1j0M=; b=ifRrUT18QoKaCSDqNrelHy+iVf
+ 2AcXKVCPSljhSUiZMcz5RTNyRM0ixsDODVyxlmNTj3nCicYUvnn3iGHZZGqII1Redv7DRPjjos2/p
+ HeC8ggUrSnZDWy+osQWJ8d1CQ8evKE8Ht/ZfbwEX4zHC+kn6SDzDaVvDc2LCdVCg7k8A=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1sJMv3-0004z5-5o for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Jun 2024 00:41:52 +0000
-Received: by mail-yb1-f201.google.com with SMTP id
- 3f1490d57ef6-df771b5e942so8641552276.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 17 Jun 2024 17:41:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1718671306; x=1719276106;
- darn=lists.sourceforge.net; 
- h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=eeWAwKNyi6aVQ6EN90rM7zyGSNPuFg6n/JEZRLaHcM4=;
- b=Qv53+kmeYjKIASfny5bcbr6lNXgtGp01stBAqRYam7Uh42z0Q7MDhaV8x3oAKAWE3X
- fvcCDAG3Gcnfc5f6zkZNGvn/l5dGsWzx0vdizdKqrsRPtpqH4/LmH34yv4JXV1lcd4m8
- VKL5GqVwfqx53tKcAcXOEbPEPUOE0mXcrxOxpFzfql5Q5X5wzlv6Em4zUwPMOpfImE0s
- 9/64ftWB2clL1ndCzoHL8fr0Fs0ZudHCLx77sjd5ni9VSc/6gnp9atjwXKmNWPts4SDR
- C0QTVOPRf2wbtF32T5SMAHuWdBv+G45oJdeshJ3L0TMv/76R4puC1+pF7NAr1T9jTFBH
- Z3bQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718671306; x=1719276106;
- h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=eeWAwKNyi6aVQ6EN90rM7zyGSNPuFg6n/JEZRLaHcM4=;
- b=aomB2q2hvzR6jWAKj/3YvDplE/l+54dTRdD49ZdCY8OuNYQwmBAYjBU+VVPTSMpCfY
- Ki3uv2r9URYly7Kz3vZrGJyo91GNwqxBVCdfhX3A2N6asTtsMVsbvTaA2N8Pe9WjhhZ8
- rveK2XVqZ64ztOzTxAu7sa6JEpc2eUcaC+lATp3ZhHLR3oLt6J7rzAFWiqra6sZ3DpCL
- a99vAGtDWTOTjs8tLD+iDo4xO6yHghp+ZqhiTuMImefrPXrdxoasGLEp6ElawgUe2Vdg
- 01t5YY+TINfHurS5m+4EThaq1s5+ZQ+rtuN1JnNUMQRbTTI6JD5eZr4nCqYcuj1DP3jD
- gw3A==
-X-Gm-Message-State: AOJu0YyAnuU227VFS1/4+fQbaeBdsdhnVVNYOY/dkiDKyaHjdzzKPick
- TgmfUMel5z7SVzpoiQszQ/NH+15+f+oSVHL7B557T1zk11zbmaf6mu/A9Dr3dF+4K2aloT8+CZT
- jn7FHnJbnYWm/T091wxkrggCuu/GrDPeKG+tWCiqNXKQwZF4K6OthhNhkhzo2qFN6M4imsS6Psi
- f+Y6LPJeoP0Hc6N3P373ZM/2PObMk4RDFPHJ2OmzJDEX7EvpqGJeezcA==
-X-Google-Smtp-Source: AGHT+IGIMdi9RUsyYll/ae5cAdZr8bQjwh6IigoDtp2KK3YoCB0+JuRM1IvlUbfmuRWg0pX5dDohGH0BxHM=
-X-Received: from drosen.mtv.corp.google.com
- ([2620:15c:211:201:eab6:28c3:5427:f5bf])
- (user=drosen job=sendgmr) by 2002:a05:6902:114a:b0:dfe:fe5e:990a with SMTP id
- 3f1490d57ef6-dff154c42f9mr1096722276.9.1718671305860; Mon, 17 Jun 2024
- 17:41:45 -0700 (PDT)
-Date: Mon, 17 Jun 2024 17:41:36 -0700
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.45.2.627.g7a2c4fd464-goog
-Message-ID: <20240618004136.1336922-1-drosen@google.com>
-To: linux-f2fs-devel@lists.sourceforge.net
-X-Spam-Score: -7.7 (-------)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1sJNEl-000639-Bh for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Jun 2024 01:02:15 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id DE0FACE13F9;
+ Tue, 18 Jun 2024 01:02:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0CE69C2BD10;
+ Tue, 18 Jun 2024 01:01:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1718672522;
+ bh=lydhvMk1/cTBLc9nkGWn8WKi5PQNxBQkD4/oF9bwnq4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Vn4xzXW9qBc+/0mEK8hTzSpHbMEh9OAfBqx3fgCr3bmVyJByt+qYOLEfwYhH/OoHs
+ nLABGnKfoLL8ZtvhpuAaGNAsleK30zSOKcI5ALS2QK9in2774n+5BMB1vPqNdZS1M1
+ e2FJNcpMVoqdaaa8BNM2D8cCmINFO3mWdDRd/NZAWSO+td/dVj8FFEPYeRTc0jtsa/
+ 7FW8cRW8S//slPgoHtQ+cAHV+jDl8LcGmN6gxHMoFp9lGnBYZbF/KTqHKt3G2av+Ek
+ 2y4DowGZK4CXqCWAlepQJIS3zdPqjA6G3tH2ewaDv+Xh7llr2MqI4FZKpfAS70GUaM
+ 6qznEPD0tT/5Q==
+Message-ID: <5eb12aeb-a898-4fcc-9f60-037458905929@kernel.org>
+Date: Tue, 18 Jun 2024 09:01:53 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
+References: <1718271333-32179-1-git-send-email-zhiguo.niu@unisoc.com>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <1718271333-32179-1-git-send-email-zhiguo.niu@unisoc.com>
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The code for dumping files was ignoring i_extra_isize,
- leading
- to invalid data for some inlined files after dumping. This swaps inode dumping
- to use the common inline_data_addr function. Signed-off-by: Daniel Rosenberg
- <drosen@google.com> --- fsck/dump.c | 2 +- 1 file changed, 1 insertion(+),
- 1 deletion(-) 
- Content analysis details:   (-7.7 points, 6.0 required)
+ Content preview:  On 2024/6/13 17:35, Zhiguo Niu wrote: > mnt_{want,
+ drop}_write_file
+ is more suitable than > file_{start,end}_wrtie and also is consistent with
+ > other ioctl operations. > > Signed-off-by: Zhiguo Niu <z [...] 
+ Content analysis details:   (-0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.219.201 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.219.201 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.219.201 listed in bl.score.senderscore.com]
+ [145.40.73.55 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [145.40.73.55 listed in sa-accredit.habeas.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
- welcome-list
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.219.201 listed in wl.mailspike.net]
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1sJMv3-0004z5-5o
-Subject: [f2fs-dev] [PATCH] dump.f2fs: Fix dumping inlined files
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sJNEl-000639-Bh
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to use mnt_{want,
+ drop}_write_file replace file_{start, end}_wrtie
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -136,42 +112,22 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Daniel Rosenberg via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Daniel Rosenberg <drosen@google.com>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, kernel-team@android.com,
- Daniel Rosenberg <drosen@google.com>
-Content-Type: text/plain; charset="us-ascii"
+Cc: Hao_hao.Wang@unisoc.com, ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The code for dumping files was ignoring i_extra_isize, leading to
-invalid data for some inlined files after dumping. This swaps inode
-dumping to use the common inline_data_addr function.
+On 2024/6/13 17:35, Zhiguo Niu wrote:
+> mnt_{want,drop}_write_file is more suitable than
+> file_{start,end}_wrtie and also is consistent with
+> other ioctl operations.
+> 
+> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
 
-Signed-off-by: Daniel Rosenberg <drosen@google.com>
----
- fsck/dump.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-diff --git a/fsck/dump.c b/fsck/dump.c
-index 90e3e0e..8d5613e 100644
---- a/fsck/dump.c
-+++ b/fsck/dump.c
-@@ -479,7 +479,7 @@ static int dump_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
- 	if ((node_blk->i.i_inline & F2FS_INLINE_DATA)) {
- 		DBG(3, "ino[0x%x] has inline data!\n", nid);
- 		/* recover from inline data */
--		dev_write_dump(((unsigned char *)node_blk) + INLINE_DATA_OFFSET,
-+		dev_write_dump(inline_data_addr(node_blk),
- 						0, MAX_INLINE_DATA(node_blk));
- 		ret = -1;
- 		goto dump_xattr;
-
-base-commit: c1a97862b05d8a736ad8719939395c61bd71c982
--- 
-2.45.2.627.g7a2c4fd464-goog
-
+Thanks,
 
 
 _______________________________________________
