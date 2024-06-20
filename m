@@ -2,109 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C56891075B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Jun 2024 16:03:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A041F91146C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Jun 2024 23:24:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sKIO3-0007q3-UR;
-	Thu, 20 Jun 2024 14:03:41 +0000
+	id 1sKPGL-00045o-NN;
+	Thu, 20 Jun 2024 21:24:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1sKIO1-0007pv-Uh
+ (envelope-from <djwong@kernel.org>) id 1sKPGK-00045a-Hy
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 20 Jun 2024 14:03:39 +0000
+ Thu, 20 Jun 2024 21:24:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=26TBuUoSoxNV5xDtRrN5F5GH8O0+KboclCGnDjLE3SE=; b=c8E5BGMzrRQKenx/ganMbW8TET
- 9itb87gtvGXcL9/fUF40J+QFG/WcusfaC0xgY2tycBped0DJ/MVzYgEZpOiXRiAfLn8Rd99rPWN79
- cR044+GasUfi5sN797snckEg7L5OFzPHAMqVO2Jw39ctO+vDL92erHaFQx0/UiHnpkBk=;
+ bh=NwvUyN8h/MN79bhRw4WZ2w6W1GyaV7Re0UTnoarnXHU=; b=RHxxqwI5KBwC5DHeS0K342O6By
+ n1eSrMfpWkbZVvtFD9ZUwYAIVLeF+zjh3Mh/U8L1eO8W5XOSwSN9rwmpsFWGXyNAVh/zUKwtXLkEB
+ u0/80KrCUHWNYQieS2Ka7Vtxf6MkA//efZ/gOTKeMVjiC2AY4tTjDIL5vYOynEMlwfwo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=26TBuUoSoxNV5xDtRrN5F5GH8O0+KboclCGnDjLE3SE=; b=ei9m9abZduqX8wF8TqU0V85UrL
- 3Y5TKf94t9e93pZy5jJlenEobfPpnEcuzRdcgKRTEl5KFBBhvJBlVVrfEIxwUmJeqCAxzerU2AdiE
- b9KUp/I1W0ddCMbtRzQ3jIN12R/jUxg0Ap4AfZCCKMaXURx6JPHAu5fy+dZRJ0BWGR4k=;
+ bh=NwvUyN8h/MN79bhRw4WZ2w6W1GyaV7Re0UTnoarnXHU=; b=SzdtbSywhBlzBjlukAWhLgXl8X
+ vlCD/SpVSZ/POlr+rqgcIy/lG+tJ/eNfwZFvesgL6RBp79oexricRcwG3IE8RzCpdDqO/yAyIUyE4
+ BHzwhLtcFshpMUmgRJJG/3D6Un7IzdQvdnJX7Ay5mhTBNUpD1z3Q84L3UUHpK0PN5G9I=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sKIO3-00007Q-9w for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 20 Jun 2024 14:03:39 +0000
+ id 1sKPGK-0005Fm-SD for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 20 Jun 2024 21:24:08 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 32285621B7;
- Thu, 20 Jun 2024 14:03:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F0095C32786;
- Thu, 20 Jun 2024 14:03:23 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id AF130620DD;
+ Thu, 20 Jun 2024 21:24:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 578C8C2BD10;
+ Thu, 20 Jun 2024 21:24:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1718892208;
- bh=Bm2ZjNf2b+VNKHoshVbV2rXdyFmyGGFZXFG269zvKN0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=C5oZDmcRVKiRXGV/z66rlpXEDT79Ddpy4N7glSKSArC8UTNU8pFoRHfWsC5B9w9NS
- T5kECR2Pd0qqet8v+1zBALgtxdmy7vGcXB0hr3h+ybzQa57RAbbb7jl2TixR8zmGya
- KNVrGLpf8h8wys9zex85p0mFsWByPDzJxFo/wlCi9FF2qZcO+DFqmCc+5ofCPO0qEr
- gDlYIGSqo6ZeY8wwrUqdcgOMfaCBz1T9zWZHzDf1PyCI8QRmms3m8R+xqDvjsh9Xq/
- 95/kxM22g6HOD9FeAGvZJMdqUthc9aCGNPMrB7Y5WfPtbi3+HqC8EA+IZ/68MUso3l
- pTpfMznOFFZNw==
-From: Christian Brauner <brauner@kernel.org>
-To: Youling Tang <youling.tang@linux.dev>
-Date: Thu, 20 Jun 2024 16:03:01 +0200
-Message-ID: <20240620-biografie-anlief-f8640333c226@brauner>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240620032335.147136-1-youling.tang@linux.dev>
-References: <20240620032335.147136-1-youling.tang@linux.dev>
+ s=k20201202; t=1718918642;
+ bh=J2GqEQCdBgJeMDsHOUD3ggS0L8MaxCNWl/BVWnLRCW8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=FlQZkEWXuYjG3lBPD+CbeqHswxAsU7y4iss7QjmrwwSkTw2iU3E6o6btinmhwPHrD
+ lSF/mb5wOLfVwxtjYYm93dMIUn1hfwPO7/uvnuUvaMGfIVTVH8Kn/kMXsydRkfKkKk
+ +q9uKCYgckPzfqcC2uHLzy4ZEe1BFH/G9Q8G00qfYW4ZlnjgKp1D8f5mbTBTzHet3f
+ KJRe02ZO01MDudREL9gtQdj64PgKYAVNDPPdkW0hXvesX4jdchaliSxKMN5OssSrSq
+ Ecnj4xZ09k4NozRYTQARzo3zXOkrOETiUmVHdKRiMwF75ak/8AVeIkVdoL0kbhtqfE
+ xzqtOujZzBqdw==
+Date: Thu, 20 Jun 2024 14:24:01 -0700
+From: "Darrick J. Wong" <djwong@kernel.org>
+To: John Garry <john.g.garry@oracle.com>
+Message-ID: <20240620212401.GA3058325@frogsfrogsfrogs>
+References: <20240607143919.2622319-1-john.g.garry@oracle.com>
+ <20240607143919.2622319-2-john.g.garry@oracle.com>
+ <20240612211040.GJ2764752@frogsfrogsfrogs>
+ <a123946e-1df2-48da-b120-67b50c3aa9f5@oracle.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1099; i=brauner@kernel.org;
- h=from:subject:message-id; bh=Bm2ZjNf2b+VNKHoshVbV2rXdyFmyGGFZXFG269zvKN0=;
- b=owGbwMvMwCU28Zj0gdSKO4sYT6slMaSVmC17tVI48m/oNrs10XfDN+mzHTzSq/L+0dZ5Pv92S
- AR433Wu6ShlYRDjYpAVU2RxaDcJl1vOU7HZKFMDZg4rE8gQBi5OAZhI6VNGhmVCq9btav7Av7Z1
- 3YZtD5pS5G++tNigPeuz8dWExuNXwuIZGY7czpyYG60r4W354eu/7VvMp7/b/CL3u+Hmy8JXAgw
- nreQHAA==
-X-Developer-Key: i=brauner@kernel.org; a=openpgp;
- fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
+Content-Disposition: inline
+In-Reply-To: <a123946e-1df2-48da-b120-67b50c3aa9f5@oracle.com>
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, 20 Jun 2024 11:23:33 +0800, Youling Tang wrote: >
- Export in_group_or_capable() as a VFS helper function. > > This makes sense
- to me. --- 
+ Content preview:  On Thu, Jun 13, 2024 at 08:35:53AM +0100, John Garry wrote:
+ > On 12/06/2024 22:10, Darrick J. Wong wrote: > > On Fri, Jun 07, 2024 at
+ 02:38:58PM +0000, John Garry wrote: > > > Add a generic helper for [...] 
  Content analysis details:   (-0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [139.178.84.217 listed in sa-trusted.bondedsender.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [139.178.84.217 listed in bl.score.senderscore.com]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sKIO3-00007Q-9w
-Subject: Re: [f2fs-dev] [PATCH 1/3] fs: Export in_group_or_capable()
+X-Headers-End: 1sKPGK-0005Fm-SD
+Subject: Re: [f2fs-dev] [PATCH v4 01/22] fs: Add
+ generic_atomic_write_valid_size()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,46 +117,129 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Youling Tang <tangyouling@kylinos.cn>,
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- Miklos Szeredi <miklos@szeredi.hu>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net,
- Alexander Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: ritesh.list@gmail.com, gfs2@lists.linux.dev,
+ mikulas@artax.karlin.mff.cuni.cz, hch@lst.de, agruenba@redhat.com,
+ miklos@szeredi.hu, linux-ext4@vger.kernel.org, catherine.hoang@oracle.com,
+ linux-block@vger.kernel.org, viro@zeniv.linux.org.uk, dchinner@redhat.com,
+ axboe@kernel.dk, brauner@kernel.org, tytso@mit.edu, martin.petersen@oracle.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, mcgrof@kernel.org, jack@suse.com,
+ linux-fsdevel@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org, chandan.babu@oracle.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, 20 Jun 2024 11:23:33 +0800, Youling Tang wrote:
-> Export in_group_or_capable() as a VFS helper function.
+On Thu, Jun 13, 2024 at 08:35:53AM +0100, John Garry wrote:
+> On 12/06/2024 22:10, Darrick J. Wong wrote:
+> > On Fri, Jun 07, 2024 at 02:38:58PM +0000, John Garry wrote:
+> > > Add a generic helper for FSes to validate that an atomic write is
+> > > appropriately sized (along with the other checks).
+> > > 
+> > > Signed-off-by: John Garry <john.g.garry@oracle.com>
+> > > ---
+> > >   include/linux/fs.h | 12 ++++++++++++
+> > >   1 file changed, 12 insertions(+)
+> > > 
+> > > diff --git a/include/linux/fs.h b/include/linux/fs.h
+> > > index 069cbab62700..e13d34f8c24e 100644
+> > > --- a/include/linux/fs.h
+> > > +++ b/include/linux/fs.h
+> > > @@ -3645,4 +3645,16 @@ bool generic_atomic_write_valid(loff_t pos, struct iov_iter *iter)
+> > >   	return true;
+> > >   }
+> > > +static inline
+> > > +bool generic_atomic_write_valid_size(loff_t pos, struct iov_iter *iter,
+> > > +				unsigned int unit_min, unsigned int unit_max)
+> > > +{
+> > > +	size_t len = iov_iter_count(iter);
+> > > +
+> > > +	if (len < unit_min || len > unit_max)
+> > > +		return false;
+> > > +
+> > > +	return generic_atomic_write_valid(pos, iter);
+> > > +}
+> > 
+> > Now that I look back at "fs: Initial atomic write support" I wonder why
+> > not pass the iocb and the iov_iter instead of pos and the iov_iter?
 > 
+> The original user of generic_atomic_write_valid() [blkdev_dio_unaligned() or
+> blkdev_dio_invalid() with the rename] used these same args, so I just went
+> with that.
+
+Don't let the parameter types of static blockdev helpers determine the
+VFS API that filesystems need to implement untorn writes.
+
+In the block layer enablement patch, this could easily be:
+
+bool generic_atomic_write_valid(const struct kiocb *iocb,
+				const struct iov_iter *iter)
+{
+	size_t len = iov_iter_count(iter);
+
+	if (!iter_is_ubuf(iter))
+		return false;
+
+	if (!is_power_of_2(len))
+		return false;
+
+	if (!IS_ALIGNED(iocb->ki_pos, len))
+		return false;
+
+	return true;
+}
+
+Then this becomes:
+
+bool generic_atomic_write_valid_size(const struct kiocb *iocb,
+				     const struct iov_iter *iter,
+				     unsigned int unit_min,
+				     unsigned int unit_max)
+{
+	size_t len = iov_iter_count(iter);
+
+	if (len < unit_min || len > unit_max)
+		return false;
+
+	return generic_atomic_write_valid(iocb, iter);
+}
+
+Yes, that means you have to rearrange the calling conventions of
+blkdev_dio_invalid a little bit, but the first two arguments match
+->read_iter and ->write_iter.  Filesystem writers can see that the first
+two arguments are the first two parameters to foofs_write_iter() and
+focus on the hard part, which is figuring out unit_{min,max}.
+
+static ssize_t
+xfs_file_dio_write(
+	struct kiocb		*iocb,
+	struct iov_iter		*from)
+{
+...
+	if ((iocb->ki_flags & IOCB_ATOMIC) &&
+	    !generic_atomic_write_valid_size(iocb, from,
+			i_blocksize(inode),
+			XFS_FSB_TO_B(mp, ip->i_extsize)))
+		return -EINVAL;
+	}
+
+
+> > And can these be collapsed into a single generic_atomic_write_checks()
+> > function?
 > 
+> bdev file operations would then need to use
+> generic_atomic_write_valid_size(), and there is no unit_min and unit_max
+> size there, apart from bdev awu min and max. And if I checked them, we would
+> be duplicating checks (of awu min and max) in the block layer.
 
-This makes sense to me.
+Fair enough, I concede this point.
 
----
+--D
 
-Applied to the vfs.misc branch of the vfs/vfs.git tree.
-Patches in the vfs.misc branch should appear in linux-next soon.
-
-Please report any outstanding bugs that were missed during review in a
-new review to the original patch series allowing us to drop it.
-
-It's encouraged to provide Acked-bys and Reviewed-bys even though the
-patch has now been applied. If possible patch trailers will be updated.
-
-Note that commit hashes shown below are subject to change due to rebase,
-trailer updates or similar. If in doubt, please check the listed branch.
-
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
-branch: vfs.misc
-
-[1/3] fs: Export in_group_or_capable()
-      https://git.kernel.org/vfs/vfs/c/daf0f1ce3585
-[2/3] f2fs: Use in_group_or_capable() helper
-      https://git.kernel.org/vfs/vfs/c/29a76d8b349b
-[3/3] fuse: Use in_group_or_capable() helper
-      https://git.kernel.org/vfs/vfs/c/d128e6b878ac
+> 
+> Cheers,
+> John
+> 
 
 
 _______________________________________________
