@@ -2,53 +2,54 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EF7290FBBB
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Jun 2024 05:43:40 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 744C290FBBC
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Jun 2024 05:43:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sK8hw-0006fh-5x;
-	Thu, 20 Jun 2024 03:43:32 +0000
+	id 1sK8hw-0003Pa-La;
+	Thu, 20 Jun 2024 03:43:33 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <youling.tang@linux.dev>) id 1sK8hn-0006fJ-Dg
+ (envelope-from <youling.tang@linux.dev>) id 1sK8hr-0003PQ-1I
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 20 Jun 2024 03:43:23 +0000
+ Thu, 20 Jun 2024 03:43:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=U4hYVIA6yQ2MONsCKt5U/6Cm9Ie2DwTEa6j9RLjLJdo=; b=ihTXCDRnTxf5bmx7HbU7mXeaow
- b9xNFWRnkwMGseF8xWyCLZTTOk6TgOG6wbC3eul8al1WOanZIrm2JkcCVzc/pB6zxobMrc5bF80fF
- 4Gk08TpSQ/vbdeK07YmzpkCdnW+qiaU1nD32tzsSKbB0aykAO6Jt0upGU7wqdNlHdPGw=;
+ bh=SUmHFYVsSdRNn5kuyX1XQfBw/O2XJKBxeFC/8akhqcc=; b=IC64MJhU3G7uQc/l6m8/vkhhub
+ 2GPcgofhdqX90qymL1m12gfAPYAFv5A7cjhSn3lliaAnvZJaGAmTon7lx2obJ11tlOQto+AtZrF7U
+ FAwHQQjWdnTX+iHFfYjDFchDYouUtDPXMp8ud3Vvx3ynAGZIFDCowustnXH2hC2rf1C0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=U4hYVIA6yQ2MONsCKt5U/6Cm9Ie2DwTEa6j9RLjLJdo=; b=Q
- mCRLdS4e7mvNLy2rmVR+GAZo+CAEb5blYl9qkmPrsLuw+1oHEKGOVN/oA5bR2hTmh3Cyms+W5PFQr
- TcG8MGQuSQ1HpWrmWiJZHS0Drlw0NCn2bU0VJ9TQMSXeE4B4UYx+J39v5skCZfk9ew1UtJ7hwHrQA
- CHlGZ/CeWSE/Q4og=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=SUmHFYVsSdRNn5kuyX1XQfBw/O2XJKBxeFC/8akhqcc=; b=RYFcOyHb7TiYDPxR8BN6HfM9Yh
+ YdoXBt/yjabWCNnhth6SUGMfaRyI9lR6+0D4By8ytYv6UTCkeo/CHpeyxU0l23ew+JVtoVGnj3jLk
+ iBL2yeAquMAol55GN34Zy546ZGagNS+7kI4cULdsEtcl8s+tbtFBuIOlEiRhh21jtwIA=;
 Received: from out-176.mta0.migadu.com ([91.218.175.176])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sK8hm-0005ZS-2s for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 20 Jun 2024 03:43:23 +0000
+ id 1sK8hr-0005Zw-5r for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 20 Jun 2024 03:43:27 +0000
 X-Envelope-To: viro@zeniv.linux.org.uk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1718853831;
+ t=1718853839;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=U4hYVIA6yQ2MONsCKt5U/6Cm9Ie2DwTEa6j9RLjLJdo=;
- b=aO6OxvGeYfmnteld4qR4vHnaEEGayn2lxvfnyqniovj11v36kzQfepm/BgRH7Om9UggVDF
- fj+V5+9LdCLt/XqjCrk9qRdvZvcNFhpiL/JpvW4RUd0uOevUJVdSxrS2rcVdrp7aBlJplg
- LjDONSu94rKyMyNh0rkXJW3wrD8At38=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SUmHFYVsSdRNn5kuyX1XQfBw/O2XJKBxeFC/8akhqcc=;
+ b=FpGmzYaKBkuMDo7Iq/S0iQT3ZIiFEx5kW+x8bcs0MiYI57ry6AMOyq+TRv5jAD1kBs6EOP
+ 5wmZSNNZXohmoVrx/q4DXXHe7xJuJktrLHwXwAjdtfdih+WsCyZuBsGQTM3uQ7356ly02p
+ sGXcDWAZ7Rmpvo91AFFeSa5dR4IyRLk=
 X-Envelope-To: brauner@kernel.org
 X-Envelope-To: jaegeuk@kernel.org
 X-Envelope-To: chao@kernel.org
@@ -65,8 +66,10 @@ From: Youling Tang <youling.tang@linux.dev>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Christian Brauner <brauner@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
  Chao Yu <chao@kernel.org>, Miklos Szeredi <miklos@szeredi.hu>
-Date: Thu, 20 Jun 2024 11:23:33 +0800
-Message-Id: <20240620032335.147136-1-youling.tang@linux.dev>
+Date: Thu, 20 Jun 2024 11:23:34 +0800
+Message-Id: <20240620032335.147136-2-youling.tang@linux.dev>
+In-Reply-To: <20240620032335.147136-1-youling.tang@linux.dev>
+References: <20240620032335.147136-1-youling.tang@linux.dev>
 MIME-Version: 1.0
 X-Migadu-Flow: FLOW_OUT
 X-Spam-Score: -0.2 (/)
@@ -76,14 +79,20 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Youling Tang <tangyouling@kylinos.cn> Export
+ Content preview: From: Youling Tang <tangyouling@kylinos.cn> Use the
  in_group_or_capable()
- as a VFS helper function. Signed-off-by: Youling Tang <tangyouling@kylinos.cn>
- --- fs/attr.c | 2 -- fs/inode.c | 1 + include/linux/fs.h | 2 ++ 3 files
- changed, 3 insertions(+), 2 deletions(-) 
+ helper function to simplify the code. Signed-off-by: Youling Tang
+ <tangyouling@kylinos.cn>
+ --- fs/f2fs/acl.c | 3 +-- fs/f2fs/file.c | 4 +--- 2 files changed,
+ 2 insertions(+), 5 deletions(-) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [91.218.175.176 listed in sa-trusted.bondedsender.org]
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
@@ -93,11 +102,6 @@ X-Spam-Report: Spam detection software,
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [91.218.175.176 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [91.218.175.176 listed in sa-trusted.bondedsender.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -107,8 +111,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sK8hm-0005ZS-2s
-Subject: [f2fs-dev] [PATCH 1/3] fs: Export in_group_or_capable()
+X-Headers-End: 1sK8hr-0005Zw-5r
+Subject: [f2fs-dev] [PATCH 2/3] f2fs: Use in_group_or_capable() helper
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -129,53 +133,44 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Youling Tang <tangyouling@kylinos.cn>
 
-Export in_group_or_capable() as a VFS helper function.
+Use the in_group_or_capable() helper function to simplify the code.
 
 Signed-off-by: Youling Tang <tangyouling@kylinos.cn>
 ---
- fs/attr.c          | 2 --
- fs/inode.c         | 1 +
- include/linux/fs.h | 2 ++
- 3 files changed, 3 insertions(+), 2 deletions(-)
+ fs/f2fs/acl.c  | 3 +--
+ fs/f2fs/file.c | 4 +---
+ 2 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/fs/attr.c b/fs/attr.c
-index 960a310581eb..825007d5cda4 100644
---- a/fs/attr.c
-+++ b/fs/attr.c
-@@ -17,8 +17,6 @@
- #include <linux/filelock.h>
- #include <linux/security.h>
+diff --git a/fs/f2fs/acl.c b/fs/f2fs/acl.c
+index ec2aeccb69a3..8bffdeccdbc3 100644
+--- a/fs/f2fs/acl.c
++++ b/fs/f2fs/acl.c
+@@ -219,8 +219,7 @@ static int f2fs_acl_update_mode(struct mnt_idmap *idmap,
+ 		return error;
+ 	if (error == 0)
+ 		*acl = NULL;
+-	if (!vfsgid_in_group_p(i_gid_into_vfsgid(idmap, inode)) &&
+-	    !capable_wrt_inode_uidgid(idmap, inode, CAP_FSETID))
++	if (!in_group_or_capable(idmap, inode, i_gid_into_vfsgid(idmap, inode)))
+ 		mode &= ~S_ISGID;
+ 	*mode_p = mode;
+ 	return 0;
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 5c0b281a70f3..7a23434963d1 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -923,10 +923,8 @@ static void __setattr_copy(struct mnt_idmap *idmap,
+ 		inode_set_ctime_to_ts(inode, attr->ia_ctime);
+ 	if (ia_valid & ATTR_MODE) {
+ 		umode_t mode = attr->ia_mode;
+-		vfsgid_t vfsgid = i_gid_into_vfsgid(idmap, inode);
  
--#include "internal.h"
--
- /**
-  * setattr_should_drop_sgid - determine whether the setgid bit needs to be
-  *                            removed
-diff --git a/fs/inode.c b/fs/inode.c
-index 3a41f83a4ba5..e0815acc5abb 100644
---- a/fs/inode.c
-+++ b/fs/inode.c
-@@ -2538,6 +2538,7 @@ bool in_group_or_capable(struct mnt_idmap *idmap,
- 		return true;
- 	return false;
- }
-+EXPORT_SYMBOL(in_group_or_capable);
- 
- /**
-  * mode_strip_sgid - handle the sgid bit for non-directories
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 0283cf366c2a..c375a4af7b11 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -1926,6 +1926,8 @@ void inode_init_owner(struct mnt_idmap *idmap, struct inode *inode,
- extern bool may_open_dev(const struct path *path);
- umode_t mode_strip_sgid(struct mnt_idmap *idmap,
- 			const struct inode *dir, umode_t mode);
-+bool in_group_or_capable(struct mnt_idmap *idmap,
-+			 const struct inode *inode, vfsgid_t vfsgid);
- 
- /*
-  * This is the "filldir" function type, used by readdir() to let
+-		if (!vfsgid_in_group_p(vfsgid) &&
+-		    !capable_wrt_inode_uidgid(idmap, inode, CAP_FSETID))
++		if (!in_group_or_capable(idmap, inode, i_gid_into_vfsgid(idmap, inode)))
+ 			mode &= ~S_ISGID;
+ 		set_acl_inode(inode, mode);
+ 	}
 -- 
 2.34.1
 
