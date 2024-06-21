@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7BF0912F58
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jun 2024 23:19:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 75A65913011
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 22 Jun 2024 00:08:04 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sKlf5-0003HU-J7;
-	Fri, 21 Jun 2024 21:19:12 +0000
+	id 1sKmQE-0002rq-Pz;
+	Fri, 21 Jun 2024 22:07:55 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <djwong@kernel.org>) id 1sKlex-000360-M1
+ (envelope-from <willmcvicker@google.com>) id 1sKmQD-0002rk-DV
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Jun 2024 21:19:04 +0000
+ Fri, 21 Jun 2024 22:07:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Hvq9h6mabFYXfd0UKQQOAJjmhnw2i9mdwqhg3VpUv+E=; b=KnWGpA4F8ykDi+2O1d2t71odAk
- JdDa/7cfCyLZIyvv+v9oA0VD+S+atTqb+Z5jh6cnTx3tVrCMSvKC6eC1T1YgrFmLJbKamBKf4IC67
- wXYZHjbu+CC5rpe733oFEPjRr1Phv5S8kqwTC2yIGWRbAYhnKTyvzCIcSYTrWiXNrhNU=;
+ bh=qlrUdHgGXihL/s+EgvCZEvEZrMZokYDaqZqpEHg6XbA=; b=Etmxoo3FSfiOrtWUbua1z0TKCg
+ 9KaX721CPIoeGoHhii/tUJsp5e7lpfgs0BoyRXyUR6AIWUk91Jvqzir5nr6JwewUoyNB3TALjMPLE
+ jIeaBQdOx7ZWTdGxpXq8XLfDW8y9sddRr0CF4Bf4sKQgI+acGKEtM+N85Jsa7KIyuJfc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,76 +31,113 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Hvq9h6mabFYXfd0UKQQOAJjmhnw2i9mdwqhg3VpUv+E=; b=Gn/F58AURQ1tOiA8o8ICLNensJ
- rILqkiooHjO8ncGqgPvsZ91Wk06CwmhieDoKCw/ViagRm9pydqdTAC5FRFJZVFIiCD5ER2h3M/dGs
- HnP01zK6avstywXm3/3KRlxNK9WxHucdm4Fw/5HQ4swPf/83RtQPcQDgN+mDV3uvK+KA=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=qlrUdHgGXihL/s+EgvCZEvEZrMZokYDaqZqpEHg6XbA=; b=SWHSq7A+GKAJFyubdRDd8rKrvy
+ Rlq83q4uHeW8lWfiN7P00rhllNkyK9NAEqfK06mm/4HnRZ1OxOv4s6eif23WAJMMojXb3l33xifW3
+ J5+yUIJe+J0MG43Nhv7oq0UzJvGR0TLN4YL0wXg4DGt8/gIutn/0K5Nd8L6kVEAr6t/8=;
+Received: from mail-qt1-f175.google.com ([209.85.160.175])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sKley-0002j3-Ao for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Jun 2024 21:19:04 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id B6804CE2D14;
- Fri, 21 Jun 2024 21:18:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7A1AC2BBFC;
- Fri, 21 Jun 2024 21:18:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1719004736;
- bh=sdtBjsr+XiHzFFwJkoRXFeC0FXv2NWldnm0I6mueIIk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=C2j0J7XYnglGPEiEziaR5oJH2YSHKc+/x1SlIkP213F7Ne1JnvVZgZz9tuky+Aasy
- 6MZy17hsxxBt4Ba+DYJAqIhtz2nV+WGetvSA99yPiipqs9cjZNMOxbYaCNY3YcsAG0
- HiAHxsFtoKEI2Y+6IAExVu2LiF4RYYYqYVlTUskJEAe4ESUa+1W9M2nNkrGtq8huU5
- KngZUgVIh3zUgw0al2QnLAYMhYAn5jMED5Q0x25hq0a8LUy6zpZhsowQHWaCrSTxOb
- cM3OxhmkgUB0Xa8k/tYmqM7nB8FdZQtkPANImh5zh6pzmGKxfm6QB5LJGB/XggKl0D
- ynjuqanOQhjkg==
-Date: Fri, 21 Jun 2024 14:18:55 -0700
-From: "Darrick J. Wong" <djwong@kernel.org>
-To: John Garry <john.g.garry@oracle.com>
-Message-ID: <20240621211855.GY3058325@frogsfrogsfrogs>
-References: <20240607143919.2622319-1-john.g.garry@oracle.com>
- <20240607143919.2622319-3-john.g.garry@oracle.com>
- <20240612213235.GK2764752@frogsfrogsfrogs>
- <59255aa1-a769-437b-8fbb-71f53fd7920f@oracle.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1sKmQD-0004iF-O4 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Jun 2024 22:07:53 +0000
+Received: by mail-qt1-f175.google.com with SMTP id
+ d75a77b69052e-4405dffca81so311011cf.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 21 Jun 2024 15:07:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1719007667; x=1719612467;
+ darn=lists.sourceforge.net; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qlrUdHgGXihL/s+EgvCZEvEZrMZokYDaqZqpEHg6XbA=;
+ b=r6OC/cFWahmVnZMD08Kbo9bvKA25nem5BU907qYAxhfKEWXAD+dt3nFQlXouR9vYHi
+ zw3uGoTyyZGCe1dCFeHglaJx0g8J3SQkJHRCuwlCSJaK2c9dIdrCeka7NklSJgVAlgCD
+ NhavtvmChs9aBPEmFHor7nqbWOpVqG2160chWYPBusBLZiMQ8/vJjg8J0X1SatxjyUp6
+ TEqnBjkENWLUrlPOVojtDFe2apnUtcw4JTWq5sIR/oY9veP39brMerV1Qmzw1YY0YARS
+ Ir7e0AstK9XXwM+9MQprpkhkTayf5mG6ULt5RNQGnVEP54dRccTcXX6Cs5QKSwgHGI+L
+ Vz/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719007667; x=1719612467;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qlrUdHgGXihL/s+EgvCZEvEZrMZokYDaqZqpEHg6XbA=;
+ b=cXJ6nnp0x80PYhLgMbry76AwsL35arCNhz+sUZSdtbocTmRNYafjheAphwz3unD8ux
+ w/t8eTFILwXQ3L65GO916iWBQM9gtfD5y5V755YdMvT0M6SmBx1RkmFjAYuMRmNZSCKS
+ gQqAESizMqoTNma/e0lu3WgJxj/YipLfqu740L1GpQLFPZC1u5tO+FawRaWI/dNQFSB/
+ 6SHiqpRQQeKRm9IA2Y5D6nyJ3V5CHDB55w6xXu3T0WYsM6jO1qlh47fm9hmG32r0GH5D
+ POeyg2dT4fJVXjDoee5lDAvBjHgdVJVkcUTukORFQzjDsjpYQ+yyIGMWkDNpqzhTKWLW
+ WY7w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVaXku0Iukkamr4gHhyMpoJJlb0CkeIU5ORm9DnHXMCE6jY2yhdGt7KmZJs4MXsvO/LlvNMq6dSfSA6oNLZGrIi3dGGmTX45lCq8YXjuuV86aipmw2wDg==
+X-Gm-Message-State: AOJu0YxYyWjQsLFqeflNVI2rU8IBOdyZN8XsKsE+I2/A0CQsp/2ZKFzo
+ Bi6j6Ig/OfWfZ9xe92G03p2Igr41rciNleeVXdTsq1mqyUEZhRNuVfpwblpLLcYjIf1woqZRwqz
+ y8Q==
+X-Google-Smtp-Source: AGHT+IEx++ezoVub5SOEh9xhLwbBZL8BdR18TTcUskjdhukEtqq4FP0yVpR6/gM15x7oUCPPTDXFJQ==
+X-Received: by 2002:a17:903:294c:b0:1f6:7fce:5684 with SMTP id
+ d9443c01a7336-1fa09edcad2mr522365ad.3.1719005785564; 
+ Fri, 21 Jun 2024 14:36:25 -0700 (PDT)
+Received: from google.com (7.104.168.34.bc.googleusercontent.com.
+ [34.168.104.7]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-70651305157sm1862472b3a.208.2024.06.21.14.36.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Jun 2024 14:36:25 -0700 (PDT)
+Date: Fri, 21 Jun 2024 14:36:21 -0700
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <ZnXyVWsUpY4GywNY@google.com>
+References: <20240618022334.1576056-1-jaegeuk@kernel.org>
+ <2cb67503-d974-4db2-942d-b68b69de9447@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <59255aa1-a769-437b-8fbb-71f53fd7920f@oracle.com>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <2cb67503-d974-4db2-942d-b68b69de9447@kernel.org>
+X-Spam-Score: -20.3 (--------------------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jun 13, 2024 at 11:31:35AM +0100, John Garry wrote:
- > On 12/06/2024 22:32, Darrick J. Wong wrote: > > > unsigned int fs_block_size
- = i_blocksize(inode), pad; > > > + u64 io_block_size = iomap- [...] 
- Content analysis details:   (-0.3 points, 6.0 required)
+ Content preview:  On 06/19/2024, Chao Yu wrote: > On 2024/6/18 10:23, Jaegeuk
+ Kim wrote: > > mkdir /mnt/test/comp > > f2fs_io setflags compression
+ /mnt/test/comp
+ > > dd if=/dev/zero of=/mnt/test/comp/testfile bs=16k co [...] 
+ Content analysis details:   (-20.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [145.40.73.55 listed in sa-trusted.bondedsender.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
+ 0.4 HK_RANDOM_FROM         From username looks random
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [209.85.160.175 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [145.40.73.55 listed in bl.score.senderscore.com]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ [209.85.160.175 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.160.175 listed in sa-accredit.habeas.com]
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
+ welcome-list
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.160.175 listed in wl.mailspike.net]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
+ welcome-list
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sKley-0002j3-Ao
-Subject: Re: [f2fs-dev] [PATCH v4 02/22] iomap: Allow filesystems set IO
- block zeroing size
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
+ Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1sKmQD-0004iF-O4
+Subject: Re: [f2fs-dev] [PATCH] f2fs: assign CURSEG_ALL_DATA_ATGC if blkaddr
+ is valid
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,263 +149,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ritesh.list@gmail.com, gfs2@lists.linux.dev,
- mikulas@artax.karlin.mff.cuni.cz, hch@lst.de, agruenba@redhat.com,
- miklos@szeredi.hu, linux-ext4@vger.kernel.org, catherine.hoang@oracle.com,
- linux-block@vger.kernel.org, viro@zeniv.linux.org.uk, dchinner@redhat.com,
- axboe@kernel.dk, brauner@kernel.org, tytso@mit.edu, martin.petersen@oracle.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, mcgrof@kernel.org, jack@suse.com,
- linux-fsdevel@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org, chandan.babu@oracle.com
+From: William McVicker via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: William McVicker <willmcvicker@google.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jun 13, 2024 at 11:31:35AM +0100, John Garry wrote:
-> On 12/06/2024 22:32, Darrick J. Wong wrote:
-> > > unsigned int fs_block_size = i_blocksize(inode), pad;
-> > > +	u64 io_block_size = iomap->io_block_size;
-> > I wonder, should iomap be nice and not require filesystems to set
-> > io_block_size themselves unless they really need it?
-> 
-> That's what I had in v3, like:
-> 
-> if (iomap->io_block_size)
-> 	io_block_size = iomap->io_block_size;
-> else
-> 	io_block_size = i_block_size(inode)
-> 
-> but it was suggested to change that (to like what I have here).
-
-oh, ok.  Ignore that comment, then. :)
-
-> > Anyone working on
-> > an iomap port while this patchset is in progress may or may not remember
-> > to add this bit if they get their port merged after atomicwrites is
-> > merged; and you might not remember to prevent the bitrot if the reverse
-> > order happens.
-> 
-> Sure, I get your point.
-> 
-> However, OTOH, if we check xfs_bmbt_to_iomap(), it does set all or close to
-> all members of struct iomap, so we are just continuing that trend, i.e. it
-> is the job of the FS callback to set all these members.
-> 
+On 06/19/2024, Chao Yu wrote:
+> On 2024/6/18 10:23, Jaegeuk Kim wrote:
+> > mkdir /mnt/test/comp
+> > f2fs_io setflags compression /mnt/test/comp
+> > dd if=/dev/zero of=/mnt/test/comp/testfile bs=16k count=1
+> > truncate --size 13 /mnt/test/comp/testfile
 > > 
-> > 	u64 io_block_size = iomap->io_block_size ?: i_blocksize(inode);
+> > In the above scenario, we can get a BUG_ON.
+> >   kernel BUG at fs/f2fs/segment.c:3589!
+> >   Call Trace:
+> >    do_write_page+0x78/0x390 [f2fs]
+> >    f2fs_outplace_write_data+0x62/0xb0 [f2fs]
+> >    f2fs_do_write_data_page+0x275/0x740 [f2fs]
+> >    f2fs_write_single_data_page+0x1dc/0x8f0 [f2fs]
+> >    f2fs_write_multi_pages+0x1e5/0xae0 [f2fs]
+> >    f2fs_write_cache_pages+0xab1/0xc60 [f2fs]
+> >    f2fs_write_data_pages+0x2d8/0x330 [f2fs]
+> >    do_writepages+0xcf/0x270
+> >    __writeback_single_inode+0x44/0x350
+> >    writeback_sb_inodes+0x242/0x530
+> >    __writeback_inodes_wb+0x54/0xf0
+> >    wb_writeback+0x192/0x310
+> >    wb_workfn+0x30d/0x400
 > > 
-> > >   	loff_t length = iomap_length(iter);
-> > >   	loff_t pos = iter->pos;
-> > >   	blk_opf_t bio_opf;
-> > > @@ -287,6 +287,7 @@ static loff_t iomap_dio_bio_iter(const struct iomap_iter *iter,
-> > >   	int nr_pages, ret = 0;
-> > >   	size_t copied = 0;
-> > >   	size_t orig_count;
-> > > +	unsigned int pad;
-> > >   	if ((pos | length) & (bdev_logical_block_size(iomap->bdev) - 1) ||
-> > >   	    !bdev_iter_is_aligned(iomap->bdev, dio->submit.iter))
-> > > @@ -355,7 +356,14 @@ static loff_t iomap_dio_bio_iter(const struct iomap_iter *iter,
-> > >   	if (need_zeroout) {
-> > >   		/* zero out from the start of the block to the write offset */
-> > > -		pad = pos & (fs_block_size - 1);
-> > > +		if (is_power_of_2(io_block_size)) {
-> > > +			pad = pos & (io_block_size - 1);
-> > > +		} else {
-> > > +			loff_t _pos = pos;
-> > > +
-> > > +			pad = do_div(_pos, io_block_size);
-> > > +		}
-> > Please don't opencode this twice.
+> > The reason is we gave CURSEG_ALL_DATA_ATGC to COMPR_ADDR where the
+> > page was set the gcing flag by set_cluster_dirty().
 > > 
-> > static unsigned int offset_in_block(loff_t pos, u64 blocksize)
-> > {
-> > 	if (likely(is_power_of_2(blocksize)))
-> > 		return pos & (blocksize - 1);
-> > 	return do_div(pos, blocksize);
-> > }
+> > Cc: stable@vger.kernel.org
+> > Fixes: 4961acdd65c9 ("f2fs: fix to tag gcing flag on page during block migration")
+> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 > 
-> ok, fine
-> 
-> > 
-> > 		pad = offset_in_block(pos, io_block_size);
-> > 		if (pad)
-> > 			...
-> > 
-> > Also, what happens if pos-pad points to a byte before the mapping?
-> 
-> It's the job of the FS to map in something aligned to io_block_size. Having
-> said that, I don't think we are doing that for XFS (which sets io_block_size
-> > i_block_size(inode)), so I need to check that.
+> Reviewed-by: Chao Yu <chao@kernel.org>
 
-<nod>  You can only play with the mapping that the fs gave you.
-If xfs doesn't give you a big enough mapping, then that's a programming
-bug to WARN_ON_ONCE about and return EIO.
+Hi Jaegeuk,
 
-I hadn't realized that the ->iomap_begin function is required to
-provide mappings that are aligned to io_block_size.
+I've been running my personal Pixel 8a device with this change for the past
+3 days and haven't hit any kernal panics since applying it. Feel free to
+include:
 
-> 
-> > 
-> > > +
-> > >   		if (pad)
-> > >   			iomap_dio_zero(iter, dio, pos - pad, pad);
-> > >   	}
-> > > @@ -429,9 +437,16 @@ static loff_t iomap_dio_bio_iter(const struct iomap_iter *iter,
-> > >   	if (need_zeroout ||
-> > >   	    ((dio->flags & IOMAP_DIO_WRITE) && pos >= i_size_read(inode))) {
-> > >   		/* zero out from the end of the write to the end of the block */
-> > > -		pad = pos & (fs_block_size - 1);
-> > > +		if (is_power_of_2(io_block_size)) {
-> > > +			pad = pos & (io_block_size - 1);
-> > > +		} else {
-> > > +			loff_t _pos = pos;
-> > > +
-> > > +			pad = do_div(_pos, io_block_size);
-> > > +		}
-> > > +
-> > >   		if (pad)
-> > > -			iomap_dio_zero(iter, dio, pos, fs_block_size - pad);
-> > > +			iomap_dio_zero(iter, dio, pos, io_block_size - pad);
-> > What if pos + io_block_size - pad points to a byte after the end of the
-> > mapping?
-> 
-> as above, we expect this to be mapped in (so ok to zero)
-> 
-> > 
-> > >   	}
-> > >   out:
-> > >   	/* Undo iter limitation to current extent */
-> > > diff --git a/fs/xfs/xfs_iomap.c b/fs/xfs/xfs_iomap.c
-> > > index 378342673925..ecb4cae88248 100644
-> > > --- a/fs/xfs/xfs_iomap.c
-> > > +++ b/fs/xfs/xfs_iomap.c
-> > > @@ -127,6 +127,7 @@ xfs_bmbt_to_iomap(
-> > >   	}
-> > >   	iomap->offset = XFS_FSB_TO_B(mp, imap->br_startoff);
-> > >   	iomap->length = XFS_FSB_TO_B(mp, imap->br_blockcount);
-> > > +	iomap->io_block_size = i_blocksize(VFS_I(ip));
-> > >   	if (mapping_flags & IOMAP_DAX)
-> > >   		iomap->dax_dev = target->bt_daxdev;
-> > >   	else
-> > > diff --git a/fs/zonefs/file.c b/fs/zonefs/file.c
-> > > index 3b103715acc9..bf2cc4bee309 100644
-> > > --- a/fs/zonefs/file.c
-> > > +++ b/fs/zonefs/file.c
-> > > @@ -50,6 +50,7 @@ static int zonefs_read_iomap_begin(struct inode *inode, loff_t offset,
-> > >   		iomap->addr = (z->z_sector << SECTOR_SHIFT) + iomap->offset;
-> > >   		iomap->length = isize - iomap->offset;
-> > >   	}
-> > > +	iomap->io_block_size = i_blocksize(inode);
-> > >   	mutex_unlock(&zi->i_truncate_mutex);
-> > >   	trace_zonefs_iomap_begin(inode, iomap);
-> > > @@ -99,6 +100,7 @@ static int zonefs_write_iomap_begin(struct inode *inode, loff_t offset,
-> > >   		iomap->type = IOMAP_MAPPED;
-> > >   		iomap->length = isize - iomap->offset;
-> > >   	}
-> > > +	iomap->io_block_size = i_blocksize(inode);
-> > >   	mutex_unlock(&zi->i_truncate_mutex);
-> > >   	trace_zonefs_iomap_begin(inode, iomap);
-> > > diff --git a/include/linux/iomap.h b/include/linux/iomap.h
-> > > index 6fc1c858013d..d63a35b77907 100644
-> > > --- a/include/linux/iomap.h
-> > > +++ b/include/linux/iomap.h
-> > > @@ -103,6 +103,8 @@ struct iomap {
-> > >   	void			*private; /* filesystem private */
-> > >   	const struct iomap_folio_ops *folio_ops;
-> > >   	u64			validity_cookie; /* used with .iomap_valid() */
-> > > +	/* io block zeroing size, not necessarily a power-of-2  */
-> > size in bytes?
-> > 
-> > I'm not sure what "io block zeroing" means.
-> 
-> Naming is hard. Essentally we are trying to reuse the sub-fs block zeroing
-> code for sub-extent granule writes. More below.
+Tested-by: Will McVicker <willmcvicker@google.com>
 
-Yeah.  For sub-fsblock zeroing we issue (chained) bios to write zeroes
-to the sectors surrounding the part we're actually writing, then we're
-issuing the write itself, and finally the ioend converts the mapping to
-unwritten.
-
-For untorn writes we're doing the same thing, but now on the level of
-multiple fsblocks.  I guess this is all going to support a 
-
-
-<nod> "IO granularity" ?  For untorn writes I guess you want mappings
-that are aligned to a supported untorn write granularity; for bs > ps
-filesystems I guess the IO granularity is 
-
-> > What are you trying to
-> > accomplish here?  Let's say the fsblock size is 4k and the allocation
-> > unit (aka the atomic write size) is 16k.
-> 
-> ok, so I say here that the extent granule is 16k
-> 
-> > Userspace wants a direct write
-> > to file offset 8192-12287, and that space is unwritten:
-> > 
-> > uuuu
-> >    ^
-> > 
-> > Currently we'd just write the 4k and run the io completion handler, so
-> > the final state is:
-> > 
-> > uuWu
-> > 
-> > Instead, if the fs sets io_block_size to 16384, does this direct write
-> > now amplify into a full 16k write?
-> 
-> Yes, but only when the extent is newly allocated and we require zeroing.
-> 
-> > With the end result being:
-> > ZZWZ
-> 
-> Yes
-> 
-> > 
-> > only.... I don't see the unwritten areas being converted to written?
-> 
-> See xfs_iomap_write_unwritten() change in the next patch
-> 
-> > I guess for an atomic write you'd require the user to write 0-16383?
-> 
-> Not exactly
-> 
-> > 
-> > <still confused about why we need to do this, maybe i'll figure it out
-> > as I go along>
-> 
-> This zeroing is just really required for atomic writes. The purpose is to
-> zero the extent granule for any write within a newly allocated granule.
-> 
-> Consider we have uuWu, above. If the user then attempts to write the full
-> 16K as an atomic write, the iomap iter code would generate writes for sizes
-> 8k, 4k, and 4k, i.e. not a single 16K write. This is not acceptable. So the
-> idea is to zero the full extent granule when allocated, so we have ZZWZ
-> after the 4k write at offset 8192, above. As such, if we then attempt this
-> 16K atomic write, we get a single 16K BIO, i.e. there is no unwritten extent
-> conversion.
-
-Wait, are we issuing zeroing writes for 0-8191 and 12288-16383, then
-issuing a single atomic write for 0-16383?  That won't work, because all
-the bios attached to an iomap_dio are submitted and execute
-asynchronously.  I think you need ->iomap_begin to do XFS_BMAPI_ZERO
-allocations if the writes aren't aligned to the minimum untorn write
-granularity.
-
-> I am not sure if we should be doing this only for atomic writes inodes, or
-> also forcealign only or RT.
-
-I think it only applies to untorn writes because the default behavior
-everywhere is is that writes can tear.
-
---D
-
-> Thanks,
-> John
-> 
-> 
-> 
+Thanks,
+Will
 
 
 _______________________________________________
