@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64E9F912793
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jun 2024 16:23:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7BF0912F58
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jun 2024 23:19:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sKfB8-0007Rc-V8;
-	Fri, 21 Jun 2024 14:23:50 +0000
+	id 1sKlf5-0003HU-J7;
+	Fri, 21 Jun 2024 21:19:12 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kent.overstreet@linux.dev>) id 1sKfB7-0007RW-1h
+ (envelope-from <djwong@kernel.org>) id 1sKlex-000360-M1
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Jun 2024 14:23:48 +0000
+ Fri, 21 Jun 2024 21:19:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7s3nraX3meU88oDt2QxTb0nIt092nRV6YyzqRLfGesw=; b=jX+FBX7z7JBuCct8hO77ySA01v
- 85ueAY4hZycqGUchpgQy5gewPGL/LhUBEHp5ES5FBszWAji2tx6EsOvLp8Hlp+Y1dl7we4TSknpry
- exxgqwPzdu+YE93B+rDsCX56TWA1GmGpvlDk+PAEyUUGS/JsO2qomcUh5iQWNwLLsyWc=;
+ bh=Hvq9h6mabFYXfd0UKQQOAJjmhnw2i9mdwqhg3VpUv+E=; b=KnWGpA4F8ykDi+2O1d2t71odAk
+ JdDa/7cfCyLZIyvv+v9oA0VD+S+atTqb+Z5jh6cnTx3tVrCMSvKC6eC1T1YgrFmLJbKamBKf4IC67
+ wXYZHjbu+CC5rpe733oFEPjRr1Phv5S8kqwTC2yIGWRbAYhnKTyvzCIcSYTrWiXNrhNU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,87 +31,76 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7s3nraX3meU88oDt2QxTb0nIt092nRV6YyzqRLfGesw=; b=IrVJd63jliS/D+P6BscsLHjG0p
- qAweu1DyNLv+tYFWrZXBGYUILXNpIMDwKM7ivgUWpnxdEDQqf+BHogtZhGQ2b1B9KHgJVPV40l65O
- FKfd8SgA13lvl+0RR2d+b+IodUf++9eDBcIt0sivzMjPOBxhFhXRocch8SOLYBXV6Jy4=;
-Received: from out-174.mta0.migadu.com ([91.218.175.174])
+ bh=Hvq9h6mabFYXfd0UKQQOAJjmhnw2i9mdwqhg3VpUv+E=; b=Gn/F58AURQ1tOiA8o8ICLNensJ
+ rILqkiooHjO8ncGqgPvsZ91Wk06CwmhieDoKCw/ViagRm9pydqdTAC5FRFJZVFIiCD5ER2h3M/dGs
+ HnP01zK6avstywXm3/3KRlxNK9WxHucdm4Fw/5HQ4swPf/83RtQPcQDgN+mDV3uvK+KA=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sKfB5-00084t-M8 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Jun 2024 14:23:48 +0000
-X-Envelope-To: yi.sun@unisoc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1718979815;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=7s3nraX3meU88oDt2QxTb0nIt092nRV6YyzqRLfGesw=;
- b=xAjRQ0qfong4mJ7qrVMt9jyf6XGP4CctOHJ/+3A+ta9Fl5fSiVki1lM8bhcMoJKOXf60WO
- 90doMTyqBOujiLFcyxoeTk58oHuxEFgejEGsY8QsLTdiTo4fJpPFFRQVnNQgo1JJsT9qkg
- FhfEXj0FMq6xNOQHDsCZJB+uHwjLWw4=
-X-Envelope-To: sunyibuaa@gmail.com
-X-Envelope-To: tj@kernel.org
-X-Envelope-To: jaegeuk@kernel.org
-X-Envelope-To: chao@kernel.org
-X-Envelope-To: ebiggers@google.com
-X-Envelope-To: jiangshanlai@gmail.com
-X-Envelope-To: linux-kernel@vger.kernel.org
-X-Envelope-To: linux-f2fs-devel@lists.sourceforge.net
-X-Envelope-To: niuzhiguo84@gmail.com
-X-Envelope-To: hao_hao.wang@unisoc.com
-X-Envelope-To: yunlongxing23@gmail.com
-Date: Fri, 21 Jun 2024 10:23:31 -0400
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Kent Overstreet <kent.overstreet@linux.dev>
-To: Yi Sun <yi.sun@unisoc.com>
-Message-ID: <dst4qsqyrj4mvnpgrgaaqdzazn27xghjaudzdmpdwyb2guklag@ggrdrcpjclhb>
-References: <20240621062617.595007-1-yi.sun@unisoc.com>
- <20240621062617.595007-2-yi.sun@unisoc.com>
+ id 1sKley-0002j3-Ao for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Jun 2024 21:19:04 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id B6804CE2D14;
+ Fri, 21 Jun 2024 21:18:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7A1AC2BBFC;
+ Fri, 21 Jun 2024 21:18:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1719004736;
+ bh=sdtBjsr+XiHzFFwJkoRXFeC0FXv2NWldnm0I6mueIIk=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=C2j0J7XYnglGPEiEziaR5oJH2YSHKc+/x1SlIkP213F7Ne1JnvVZgZz9tuky+Aasy
+ 6MZy17hsxxBt4Ba+DYJAqIhtz2nV+WGetvSA99yPiipqs9cjZNMOxbYaCNY3YcsAG0
+ HiAHxsFtoKEI2Y+6IAExVu2LiF4RYYYqYVlTUskJEAe4ESUa+1W9M2nNkrGtq8huU5
+ KngZUgVIh3zUgw0al2QnLAYMhYAn5jMED5Q0x25hq0a8LUy6zpZhsowQHWaCrSTxOb
+ cM3OxhmkgUB0Xa8k/tYmqM7nB8FdZQtkPANImh5zh6pzmGKxfm6QB5LJGB/XggKl0D
+ ynjuqanOQhjkg==
+Date: Fri, 21 Jun 2024 14:18:55 -0700
+From: "Darrick J. Wong" <djwong@kernel.org>
+To: John Garry <john.g.garry@oracle.com>
+Message-ID: <20240621211855.GY3058325@frogsfrogsfrogs>
+References: <20240607143919.2622319-1-john.g.garry@oracle.com>
+ <20240607143919.2622319-3-john.g.garry@oracle.com>
+ <20240612213235.GK2764752@frogsfrogsfrogs>
+ <59255aa1-a769-437b-8fbb-71f53fd7920f@oracle.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240621062617.595007-2-yi.sun@unisoc.com>
-X-Migadu-Flow: FLOW_OUT
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <59255aa1-a769-437b-8fbb-71f53fd7920f@oracle.com>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jun 21, 2024 at 02:26:16PM +0800, Yi Sun wrote: >
- Many works will go to submit_bio(), and in many cases the io priority of >
- kworker cannot meet the real-time requirements of this work. > > So [...]
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Thu, Jun 13, 2024 at 11:31:35AM +0100, John Garry wrote:
+ > On 12/06/2024 22:32, Darrick J. Wong wrote: > > > unsigned int fs_block_size
+ = i_blocksize(inode), pad; > > > + u64 io_block_size = iomap- [...] 
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: linux.dev]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [91.218.175.174 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [91.218.175.174 listed in sa-accredit.habeas.com]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [91.218.175.174 listed in list.dnswl.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ [145.40.73.55 listed in sa-trusted.bondedsender.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [145.40.73.55 listed in bl.score.senderscore.com]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1sKfB5-00084t-M8
-Subject: Re: [f2fs-dev] [PATCH 1/2] workqueue: add io priority to work_struct
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sKley-0002j3-Ao
+Subject: Re: [f2fs-dev] [PATCH v4 02/22] iomap: Allow filesystems set IO
+ block zeroing size
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,166 +112,262 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: yunlongxing23@gmail.com, ebiggers@google.com, jiangshanlai@gmail.com,
+Cc: ritesh.list@gmail.com, gfs2@lists.linux.dev,
+ mikulas@artax.karlin.mff.cuni.cz, hch@lst.de, agruenba@redhat.com,
+ miklos@szeredi.hu, linux-ext4@vger.kernel.org, catherine.hoang@oracle.com,
+ linux-block@vger.kernel.org, viro@zeniv.linux.org.uk, dchinner@redhat.com,
+ axboe@kernel.dk, brauner@kernel.org, tytso@mit.edu, martin.petersen@oracle.com,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- sunyibuaa@gmail.com, tj@kernel.org, jaegeuk@kernel.org,
- Hao_hao.Wang@unisoc.com
+ linux-xfs@vger.kernel.org, mcgrof@kernel.org, jack@suse.com,
+ linux-fsdevel@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org, chandan.babu@oracle.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jun 21, 2024 at 02:26:16PM +0800, Yi Sun wrote:
-> Many works will go to submit_bio(), and in many cases the io priority of
-> kworker cannot meet the real-time requirements of this work.
+On Thu, Jun 13, 2024 at 11:31:35AM +0100, John Garry wrote:
+> On 12/06/2024 22:32, Darrick J. Wong wrote:
+> > > unsigned int fs_block_size = i_blocksize(inode), pad;
+> > > +	u64 io_block_size = iomap->io_block_size;
+> > I wonder, should iomap be nice and not require filesystems to set
+> > io_block_size themselves unless they really need it?
 > 
-> So add the basic attribute ioprio to work_struct, and kworker can adjust
-> its io priority according to this attribute.
+> That's what I had in v3, like:
 > 
-> Add function set_work_ioprio() to set the io priority of this work.
-> Add function may_adjust_work_task_ioprio() to adjust kworker's io priority.
-> Add function restore_work_task_ioprio() to restore kworker's io priority.
+> if (iomap->io_block_size)
+> 	io_block_size = iomap->io_block_size;
+> else
+> 	io_block_size = i_block_size(inode)
+> 
+> but it was suggested to change that (to like what I have here).
 
-work_struct!?
+oh, ok.  Ignore that comment, then. :)
 
-there's a lot of task_struct properties we would want work_struct to
-inherit if we went this route, but it's just not feasible, work_struct
-should be small and thin.
+> > Anyone working on
+> > an iomap port while this patchset is in progress may or may not remember
+> > to add this bit if they get their port merged after atomicwrites is
+> > merged; and you might not remember to prevent the bitrot if the reverse
+> > order happens.
+> 
+> Sure, I get your point.
+> 
+> However, OTOH, if we check xfs_bmbt_to_iomap(), it does set all or close to
+> all members of struct iomap, so we are just continuing that trend, i.e. it
+> is the job of the FS callback to set all these members.
+> 
+> > 
+> > 	u64 io_block_size = iomap->io_block_size ?: i_blocksize(inode);
+> > 
+> > >   	loff_t length = iomap_length(iter);
+> > >   	loff_t pos = iter->pos;
+> > >   	blk_opf_t bio_opf;
+> > > @@ -287,6 +287,7 @@ static loff_t iomap_dio_bio_iter(const struct iomap_iter *iter,
+> > >   	int nr_pages, ret = 0;
+> > >   	size_t copied = 0;
+> > >   	size_t orig_count;
+> > > +	unsigned int pad;
+> > >   	if ((pos | length) & (bdev_logical_block_size(iomap->bdev) - 1) ||
+> > >   	    !bdev_iter_is_aligned(iomap->bdev, dio->submit.iter))
+> > > @@ -355,7 +356,14 @@ static loff_t iomap_dio_bio_iter(const struct iomap_iter *iter,
+> > >   	if (need_zeroout) {
+> > >   		/* zero out from the start of the block to the write offset */
+> > > -		pad = pos & (fs_block_size - 1);
+> > > +		if (is_power_of_2(io_block_size)) {
+> > > +			pad = pos & (io_block_size - 1);
+> > > +		} else {
+> > > +			loff_t _pos = pos;
+> > > +
+> > > +			pad = do_div(_pos, io_block_size);
+> > > +		}
+> > Please don't opencode this twice.
+> > 
+> > static unsigned int offset_in_block(loff_t pos, u64 blocksize)
+> > {
+> > 	if (likely(is_power_of_2(blocksize)))
+> > 		return pos & (blocksize - 1);
+> > 	return do_div(pos, blocksize);
+> > }
+> 
+> ok, fine
+> 
+> > 
+> > 		pad = offset_in_block(pos, io_block_size);
+> > 		if (pad)
+> > 			...
+> > 
+> > Also, what happens if pos-pad points to a byte before the mapping?
+> 
+> It's the job of the FS to map in something aligned to io_block_size. Having
+> said that, I don't think we are doing that for XFS (which sets io_block_size
+> > i_block_size(inode)), so I need to check that.
 
-You're always embedding work_struct into your own struct, I would
-suggest tracking this yourself - or coming up with a new heavier
-standard struct that embeds a work_struct and has io path options,
-there's more than just priority.
+<nod>  You can only play with the mapping that the fs gave you.
+If xfs doesn't give you a big enough mapping, then that's a programming
+bug to WARN_ON_ONCE about and return EIO.
+
+I hadn't realized that the ->iomap_begin function is required to
+provide mappings that are aligned to io_block_size.
 
 > 
-> Signed-off-by: Yi Sun <yi.sun@unisoc.com>
-> ---
->  include/linux/workqueue.h       |  9 ++++++
->  include/linux/workqueue_types.h |  6 ++++
->  kernel/workqueue.c              | 51 +++++++++++++++++++++++++++++++++
->  3 files changed, 66 insertions(+)
+> > 
+> > > +
+> > >   		if (pad)
+> > >   			iomap_dio_zero(iter, dio, pos - pad, pad);
+> > >   	}
+> > > @@ -429,9 +437,16 @@ static loff_t iomap_dio_bio_iter(const struct iomap_iter *iter,
+> > >   	if (need_zeroout ||
+> > >   	    ((dio->flags & IOMAP_DIO_WRITE) && pos >= i_size_read(inode))) {
+> > >   		/* zero out from the end of the write to the end of the block */
+> > > -		pad = pos & (fs_block_size - 1);
+> > > +		if (is_power_of_2(io_block_size)) {
+> > > +			pad = pos & (io_block_size - 1);
+> > > +		} else {
+> > > +			loff_t _pos = pos;
+> > > +
+> > > +			pad = do_div(_pos, io_block_size);
+> > > +		}
+> > > +
+> > >   		if (pad)
+> > > -			iomap_dio_zero(iter, dio, pos, fs_block_size - pad);
+> > > +			iomap_dio_zero(iter, dio, pos, io_block_size - pad);
+> > What if pos + io_block_size - pad points to a byte after the end of the
+> > mapping?
 > 
-> diff --git a/include/linux/workqueue.h b/include/linux/workqueue.h
-> index fb3993894536..f6191774b730 100644
-> --- a/include/linux/workqueue.h
-> +++ b/include/linux/workqueue.h
-> @@ -286,6 +286,9 @@ static inline unsigned int work_static(struct work_struct *work) { return 0; }
->  		lockdep_init_map(&(_work)->lockdep_map, "(work_completion)"#_work, (_key), 0); \
->  		INIT_LIST_HEAD(&(_work)->entry);			\
->  		(_work)->func = (_func);				\
-> +		(_work)->ioprio = 0;					\
-> +		(_work)->ori_ioprio = 0;				\
-> +		(_work)->ioprio_flag = 0;				\
->  	} while (0)
->  #else
->  #define __INIT_WORK_KEY(_work, _func, _onstack, _key)			\
-> @@ -294,6 +297,9 @@ static inline unsigned int work_static(struct work_struct *work) { return 0; }
->  		(_work)->data = (atomic_long_t) WORK_DATA_INIT();	\
->  		INIT_LIST_HEAD(&(_work)->entry);			\
->  		(_work)->func = (_func);				\
-> +		(_work)->ioprio = 0;					\
-> +		(_work)->ori_ioprio = 0;				\
-> +		(_work)->ioprio_flag = 0;				\
->  	} while (0)
->  #endif
->  
-> @@ -585,6 +591,9 @@ extern struct work_struct *current_work(void);
->  extern bool current_is_workqueue_rescuer(void);
->  extern bool workqueue_congested(int cpu, struct workqueue_struct *wq);
->  extern unsigned int work_busy(struct work_struct *work);
-> +extern void set_work_ioprio(struct work_struct *work, unsigned short ioprio);
-> +extern void may_adjust_work_task_ioprio(struct work_struct *work);
-> +extern void restore_work_task_ioprio(struct work_struct *work);
->  extern __printf(1, 2) void set_worker_desc(const char *fmt, ...);
->  extern void print_worker_info(const char *log_lvl, struct task_struct *task);
->  extern void show_all_workqueues(void);
-> diff --git a/include/linux/workqueue_types.h b/include/linux/workqueue_types.h
-> index 4c38824f3ab4..d9969596bbc3 100644
-> --- a/include/linux/workqueue_types.h
-> +++ b/include/linux/workqueue_types.h
-> @@ -17,6 +17,12 @@ struct work_struct {
->  	atomic_long_t data;
->  	struct list_head entry;
->  	work_func_t func;
-> +	/* If the work does submit_bio, io priority may be needed. */
-> +	unsigned short ioprio;
-> +	/* Record kworker's original io priority. */
-> +	unsigned short ori_ioprio;
-> +	/* Whether the work has set io priority? */
-> +	long ioprio_flag;
->  #ifdef CONFIG_LOCKDEP
->  	struct lockdep_map lockdep_map;
->  #endif
-> diff --git a/kernel/workqueue.c b/kernel/workqueue.c
-> index 003474c9a77d..a44a8f92eec2 100644
-> --- a/kernel/workqueue.c
-> +++ b/kernel/workqueue.c
-> @@ -55,6 +55,7 @@
->  #include <linux/kvm_para.h>
->  #include <linux/delay.h>
->  #include <linux/irq_work.h>
-> +#include <linux/ioprio.h>
->  
->  #include "workqueue_internal.h"
->  
-> @@ -6025,6 +6026,56 @@ unsigned int work_busy(struct work_struct *work)
->  }
->  EXPORT_SYMBOL_GPL(work_busy);
->  
-> +/**
-> + * set_work_ioprio - set io priority for the current work
-> + * @work: the work to be set
-> + * @ioprio: desired io priority
-> + *
-> + * This function can be called after INIT_WORK if the io priority
-> + * of the work needs to adjust. And it is recommended to use this
-> + * function together with may_adjust_work_task_ioprio() and
-> + * restore_work_task_ioprio().
-> + */
-> +void set_work_ioprio(struct work_struct *work, unsigned short ioprio)
-> +{
-> +	work->ioprio = ioprio;
-> +	work->ioprio_flag = 1;
-> +}
-> +EXPORT_SYMBOL_GPL(set_work_ioprio);
-> +
-> +/**
-> + * may_adjust_work_task_ioprio - adjust the io priority of kworker
-> + * @work: the work that kworker will do
-> + *
-> + * It is recommended to use this function together with set_work_ioprio()
-> + * and restore_work_task_ioprio().
-> + */
-> +void may_adjust_work_task_ioprio(struct work_struct *work)
-> +{
-> +	if (work->ioprio_flag) {
-> +		work->ori_ioprio = get_current_ioprio();
-> +		set_task_ioprio(current, work->ioprio);
-> +	}
-> +}
-> +EXPORT_SYMBOL_GPL(may_adjust_work_task_ioprio);
-> +
-> +/**
-> + * restore_work_task_ioprio - restore the io priority of kworker
-> + * @work: the work that kworker just did
-> + *
-> + * When kworker finishes the work, the original io priority of
-> + * kworker should be restored. It is recommended to use this function
-> + * together with set_work_ioprio() and may_adjust_work_task_ioprio().
-> + */
-> +void restore_work_task_ioprio(struct work_struct *work)
-> +{
-> +	if (work->ioprio_flag) {
-> +		set_task_ioprio(current, work->ori_ioprio);
-> +		work->ioprio_flag = 0;
-> +	}
-> +}
-> +EXPORT_SYMBOL_GPL(restore_work_task_ioprio);
-> +
->  /**
->   * set_worker_desc - set description for the current work item
->   * @fmt: printf-style format string
-> -- 
-> 2.25.1
+> as above, we expect this to be mapped in (so ok to zero)
+> 
+> > 
+> > >   	}
+> > >   out:
+> > >   	/* Undo iter limitation to current extent */
+> > > diff --git a/fs/xfs/xfs_iomap.c b/fs/xfs/xfs_iomap.c
+> > > index 378342673925..ecb4cae88248 100644
+> > > --- a/fs/xfs/xfs_iomap.c
+> > > +++ b/fs/xfs/xfs_iomap.c
+> > > @@ -127,6 +127,7 @@ xfs_bmbt_to_iomap(
+> > >   	}
+> > >   	iomap->offset = XFS_FSB_TO_B(mp, imap->br_startoff);
+> > >   	iomap->length = XFS_FSB_TO_B(mp, imap->br_blockcount);
+> > > +	iomap->io_block_size = i_blocksize(VFS_I(ip));
+> > >   	if (mapping_flags & IOMAP_DAX)
+> > >   		iomap->dax_dev = target->bt_daxdev;
+> > >   	else
+> > > diff --git a/fs/zonefs/file.c b/fs/zonefs/file.c
+> > > index 3b103715acc9..bf2cc4bee309 100644
+> > > --- a/fs/zonefs/file.c
+> > > +++ b/fs/zonefs/file.c
+> > > @@ -50,6 +50,7 @@ static int zonefs_read_iomap_begin(struct inode *inode, loff_t offset,
+> > >   		iomap->addr = (z->z_sector << SECTOR_SHIFT) + iomap->offset;
+> > >   		iomap->length = isize - iomap->offset;
+> > >   	}
+> > > +	iomap->io_block_size = i_blocksize(inode);
+> > >   	mutex_unlock(&zi->i_truncate_mutex);
+> > >   	trace_zonefs_iomap_begin(inode, iomap);
+> > > @@ -99,6 +100,7 @@ static int zonefs_write_iomap_begin(struct inode *inode, loff_t offset,
+> > >   		iomap->type = IOMAP_MAPPED;
+> > >   		iomap->length = isize - iomap->offset;
+> > >   	}
+> > > +	iomap->io_block_size = i_blocksize(inode);
+> > >   	mutex_unlock(&zi->i_truncate_mutex);
+> > >   	trace_zonefs_iomap_begin(inode, iomap);
+> > > diff --git a/include/linux/iomap.h b/include/linux/iomap.h
+> > > index 6fc1c858013d..d63a35b77907 100644
+> > > --- a/include/linux/iomap.h
+> > > +++ b/include/linux/iomap.h
+> > > @@ -103,6 +103,8 @@ struct iomap {
+> > >   	void			*private; /* filesystem private */
+> > >   	const struct iomap_folio_ops *folio_ops;
+> > >   	u64			validity_cookie; /* used with .iomap_valid() */
+> > > +	/* io block zeroing size, not necessarily a power-of-2  */
+> > size in bytes?
+> > 
+> > I'm not sure what "io block zeroing" means.
+> 
+> Naming is hard. Essentally we are trying to reuse the sub-fs block zeroing
+> code for sub-extent granule writes. More below.
+
+Yeah.  For sub-fsblock zeroing we issue (chained) bios to write zeroes
+to the sectors surrounding the part we're actually writing, then we're
+issuing the write itself, and finally the ioend converts the mapping to
+unwritten.
+
+For untorn writes we're doing the same thing, but now on the level of
+multiple fsblocks.  I guess this is all going to support a 
+
+
+<nod> "IO granularity" ?  For untorn writes I guess you want mappings
+that are aligned to a supported untorn write granularity; for bs > ps
+filesystems I guess the IO granularity is 
+
+> > What are you trying to
+> > accomplish here?  Let's say the fsblock size is 4k and the allocation
+> > unit (aka the atomic write size) is 16k.
+> 
+> ok, so I say here that the extent granule is 16k
+> 
+> > Userspace wants a direct write
+> > to file offset 8192-12287, and that space is unwritten:
+> > 
+> > uuuu
+> >    ^
+> > 
+> > Currently we'd just write the 4k and run the io completion handler, so
+> > the final state is:
+> > 
+> > uuWu
+> > 
+> > Instead, if the fs sets io_block_size to 16384, does this direct write
+> > now amplify into a full 16k write?
+> 
+> Yes, but only when the extent is newly allocated and we require zeroing.
+> 
+> > With the end result being:
+> > ZZWZ
+> 
+> Yes
+> 
+> > 
+> > only.... I don't see the unwritten areas being converted to written?
+> 
+> See xfs_iomap_write_unwritten() change in the next patch
+> 
+> > I guess for an atomic write you'd require the user to write 0-16383?
+> 
+> Not exactly
+> 
+> > 
+> > <still confused about why we need to do this, maybe i'll figure it out
+> > as I go along>
+> 
+> This zeroing is just really required for atomic writes. The purpose is to
+> zero the extent granule for any write within a newly allocated granule.
+> 
+> Consider we have uuWu, above. If the user then attempts to write the full
+> 16K as an atomic write, the iomap iter code would generate writes for sizes
+> 8k, 4k, and 4k, i.e. not a single 16K write. This is not acceptable. So the
+> idea is to zero the full extent granule when allocated, so we have ZZWZ
+> after the 4k write at offset 8192, above. As such, if we then attempt this
+> 16K atomic write, we get a single 16K BIO, i.e. there is no unwritten extent
+> conversion.
+
+Wait, are we issuing zeroing writes for 0-8191 and 12288-16383, then
+issuing a single atomic write for 0-16383?  That won't work, because all
+the bios attached to an iomap_dio are submitted and execute
+asynchronously.  I think you need ->iomap_begin to do XFS_BMAPI_ZERO
+allocations if the writes aren't aligned to the minimum untorn write
+granularity.
+
+> I am not sure if we should be doing this only for atomic writes inodes, or
+> also forcealign only or RT.
+
+I think it only applies to untorn writes because the default behavior
+everywhere is is that writes can tear.
+
+--D
+
+> Thanks,
+> John
+> 
+> 
 > 
 
 
