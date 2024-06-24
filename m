@@ -2,106 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98F90915594
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jun 2024 19:40:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9332B915591
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jun 2024 19:40:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sLngH-0004Iv-Op;
-	Mon, 24 Jun 2024 17:40:41 +0000
+	id 1sLngE-0003Eo-4a;
+	Mon, 24 Jun 2024 17:40:38 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sLngF-0004Ip-Ve
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sLngD-0003Ed-3a
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Jun 2024 17:40:39 +0000
+ Mon, 24 Jun 2024 17:40:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pAGYVWze2bAloo5z0K/TKnx4xVR3y/T9b6qdRSyUCqc=; b=a9FGCnj4OkPXNv8dkkNM3XKbdd
- 2OPwC1kSBiuZcO7RcEkFwTxD/rp7kBwFbBktcUmQt5k5ITNpijttZJFQl6n8kYGEMWi1IdcO6+qDa
- HESRZZ450b5FTHueLanjhGVysQFTAF1gwBgPiXbNLGRJ6my9vzIbqpX8o1/Vhf6jI7b0=;
+ bh=3ZI0bDNvgnIynanqouddiAy9fDn3gCWPdgY3h/nIA6g=; b=NFK1Yc6YOXJcpT5DOe82lXZfa/
+ 9aI40O/l8H+8SK9ySlzDJ8DwOdkPB/BiCoj6t9psO7B/8CXw5rNClZOYR2/8gghQX/7Sfzu8O0wND
+ Ssh0rcD+CiGiaPj0AwcBfwSNMV7kIhH9Lx8W1G4b2B87Z7PUVCk3zBV/wMC4NioBAEPI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pAGYVWze2bAloo5z0K/TKnx4xVR3y/T9b6qdRSyUCqc=; b=D8ugIEAuBGTKwBW6LMqUwFH+IH
- Iu+H0p66hhU1tJHeCfXc/85gNh6xzrTx9qWhC0OcLq3CKUqlg+RXMmurZmIiaOshfm5VwHHyuA+Lx
- aaWKCMLupUuGsV4+XKHHKHSbDvWEZKKPZTkIKmtqAM7msV72ewk2MXQGusKGFcobwNSY=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=3ZI0bDNvgnIynanqouddiAy9fDn3gCWPdgY3h/nIA6g=; b=fbn0t5vSoeyYDhq04IgBj1J0P7
+ ShrNKFIxIxopeje4jjYteWgwJQ/3vJLh+Xj7sttiSwlmJGY1T1Y8f/cfw7C6vSmdlmZAm6QvL3sN4
+ Jrk7sJlDI4biN0jp5n5jGkk2LJlu3VWWwNhygWpeVWbJISpQ2epcSMTDse3IJ7XDmZN0=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sLngF-00023v-BD for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Jun 2024 17:40:39 +0000
+ id 1sLngD-00023i-Ia for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Jun 2024 17:40:37 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id D3081CE134F
- for <linux-f2fs-devel@lists.sourceforge.net>;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 72D8A60DD0;
  Mon, 24 Jun 2024 17:40:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 07D57C32789;
- Mon, 24 Jun 2024 17:40:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 1F5EAC4AF0B;
+ Mon, 24 Jun 2024 17:40:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1719250831;
- bh=cVZguKETeKIYSegRsLSDsF+ocn6kUtTa2dnkN7qny8k=;
+ bh=y+3HBYbLlNGdn/StePP7MdTMbYY+NAYSYK1c+0uNZTc=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=CPavk1N/CfgB5i6aKmd98eXP58YRJCznv0VMuBaHiSlqNPERXtcr5gKjJ4jJcv+49
- y1e1lYJ7BmNcr/IKlKU0Yu6n/FFldPUegW/xd4bindRky6ec3uL2OxiSAbbuBg2/zo
- RssF/NSP7BFMPL6k6wA8yUuiQBTBtWemwyaMI8ObZtGZnB2geY/Q61aeR1h+stBjck
- km1+cva12wyZ8ShxfawpeOSeH9ZAHIVy2vJyDM4GUNRCcgNa2LkCNJiRqLeHvwiWgK
- 0/ppXqXkVmUjJQURzK4hfNT01ZXDb2a2b2tmmQAlGSL/uScAIDd6V05lGmFk4SNlQ4
- Ww37vgtplBjyA==
+ b=jAoOntiPcsQXOh41dcTZrzJwHDLIccPkc442vDJm6/PQYfu/nXmMAN/CJxTBfZC5J
+ 7bQy/+pGcFzN+tH6IZlX/jnhYi/+bMtyJK/u+qG0DIJOdSvRphlqX+aB0Lk8BSl8Q9
+ DP2T7F46I6GKkQ9P38868EtWy2ovPzia1l1gfWb+aExNDNw3JqdwCb6IT4aU8iMkTO
+ hjgRXqsY4zyV/CpkJBpa/ZhrpQPMdJHCcZRch9z05lhaNc5smaOP5YRlJdAPX5BGyJ
+ emxSkRK+bLzT2L9ctHJbYgzlk5jA12dZrqtH6OFJ/slQctABZdBKmYLft330iYWvQN
+ lSzrpDG/Xr9+A==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- D89D1C43612; Mon, 24 Jun 2024 17:40:30 +0000 (UTC)
+ EF3AAC43613; Mon, 24 Jun 2024 17:40:30 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <171925083088.4247.5859176757737434245.git-patchwork-notify@kernel.org>
+Message-Id: <171925083097.4247.3362095080701103412.git-patchwork-notify@kernel.org>
 Date: Mon, 24 Jun 2024 17:40:30 +0000
-References: <20240618022334.1576056-1-jaegeuk@kernel.org>
-In-Reply-To: <20240618022334.1576056-1-jaegeuk@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: -0.4 (/)
+References: <1718271333-32179-1-git-send-email-zhiguo.niu@unisoc.com>
+In-Reply-To: <1718271333-32179-1-git-send-email-zhiguo.niu@unisoc.com>
+To: Zhiguo Niu <zhiguo.niu@unisoc.com>
+X-Spam-Score: -5.4 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 18 Jun 2024 02:23:34 +0000 you
- wrote: > mkdir /mnt/test/comp > f2fs_io setflags compression /mnt/test/comp
- > dd if=/dev/zero of=/mnt/test/comp/testfile bs=16k count=1 > truncate --size
- 13 /mnt [...] 
- Content analysis details:   (-0.4 points, 6.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 13 Jun 2024 17:35:33 +0800 you
+ wrote: > mnt_{want, drop}_write_file is more suitable than > file_{start,
+ end}_wrtie
+ and also is consistent with > other ioctl operations. > > Signed-off-by:
+ Zhigu [...] 
+ Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [145.40.73.55 listed in sa-accredit.habeas.com]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [145.40.73.55 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [139.178.84.217 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in sa-trusted.bondedsender.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sLngF-00023v-BD
-Subject: Re: [f2fs-dev] [PATCH] f2fs: assign CURSEG_ALL_DATA_ATGC if blkaddr
- is valid
+X-Headers-End: 1sLngD-00023i-Ia
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to use mnt_{want,
+ drop}_write_file replace file_{start, end}_wrtie
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,8 +115,9 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org,
+ Hao_hao.Wang@unisoc.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -124,34 +127,19 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Tue, 18 Jun 2024 02:23:34 +0000 you wrote:
-> mkdir /mnt/test/comp
-> f2fs_io setflags compression /mnt/test/comp
-> dd if=/dev/zero of=/mnt/test/comp/testfile bs=16k count=1
-> truncate --size 13 /mnt/test/comp/testfile
+On Thu, 13 Jun 2024 17:35:33 +0800 you wrote:
+> mnt_{want,drop}_write_file is more suitable than
+> file_{start,end}_wrtie and also is consistent with
+> other ioctl operations.
 > 
-> In the above scenario, we can get a BUG_ON.
->  kernel BUG at fs/f2fs/segment.c:3589!
->  Call Trace:
->   do_write_page+0x78/0x390 [f2fs]
->   f2fs_outplace_write_data+0x62/0xb0 [f2fs]
->   f2fs_do_write_data_page+0x275/0x740 [f2fs]
->   f2fs_write_single_data_page+0x1dc/0x8f0 [f2fs]
->   f2fs_write_multi_pages+0x1e5/0xae0 [f2fs]
->   f2fs_write_cache_pages+0xab1/0xc60 [f2fs]
->   f2fs_write_data_pages+0x2d8/0x330 [f2fs]
->   do_writepages+0xcf/0x270
->   __writeback_single_inode+0x44/0x350
->   writeback_sb_inodes+0x242/0x530
->   __writeback_inodes_wb+0x54/0xf0
->   wb_writeback+0x192/0x310
->   wb_workfn+0x30d/0x400
-> 
-> [...]
+> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+> ---
+>  fs/f2fs/file.c | 24 ++++++++++++++++--------
+>  1 file changed, 16 insertions(+), 8 deletions(-)
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: assign CURSEG_ALL_DATA_ATGC if blkaddr is valid
-    https://git.kernel.org/jaegeuk/f2fs/c/8cb1f4080dd9
+  - [f2fs-dev] f2fs: fix to use mnt_{want, drop}_write_file replace file_{start, end}_wrtie
+    https://git.kernel.org/jaegeuk/f2fs/c/1efb7c8fd8bf
 
 You are awesome, thank you!
 -- 
