@@ -2,150 +2,152 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15AFC914F49
+	by mail.lfdr.de (Postfix) with ESMTPS id 11F34914F47
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jun 2024 15:56:16 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sLkAx-00026d-D6;
-	Mon, 24 Jun 2024 13:56:07 +0000
+	id 1sLkB0-0007fm-Ls;
+	Mon, 24 Jun 2024 13:56:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <shengyong@oppo.com>) id 1sLkAw-00026M-2D
+ (envelope-from <shengyong@oppo.com>) id 1sLkAy-0007ff-VM
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Jun 2024 13:56:06 +0000
+ Mon, 24 Jun 2024 13:56:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9GkPvUNVsdFXB93WA+bb+Fjm+hmAqDXEKGA+foASdLQ=; b=XeEH/v3k+42pLZdjSXRZGZhQas
- ABtaivk5LYpVrNKtb9X5CsGFIFRBcaV4iXDLm0y1nLUAadJNdmxqPbCUKx2xQzbSmIOaqFiSK0NyE
- gLbJ6CJj8rhEHVsMTpOs740mn4gUjmq+Kf5nigbaxQmhJYqGTb4gjbuQxXYBaXGw7bFY=;
+ bh=1XkzWrJunNjwg07SZ0xtl89vq9kjD5f3AOik3evu6LI=; b=IOc9qKMGBM+Van3V3cK6FtjQ1a
+ W4r5r9bKfVvMk2PI7+gu7jJnOHVIM4ZHxQ4Z4ekBTJhVV4OrhQbGLP1N+wwEkfera2UeULkJ35VJg
+ KDAx0hSp+3y4sR6CNpr+bSJpKGeumlcuCTne4RUgUz2gbNRgxINml3vp37dp6ooTsq4E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=9GkPvUNVsdFXB93WA+bb+Fjm+hmAqDXEKGA+foASdLQ=; b=Z
- EZU6aVt+Yp+OI6tI1SxqUEBdGtWLJX4J/4i/1jrxMMiMnraKmDveQ0tLRB2LEjAhEr7vvYquMWiXO
- Qo4s/M/yx505GYGndIt8/ERs2frkVMGTjzCsx3FYrA5FYNmwthHmrfYr7ZuiE3ts6wG3Xin0UJhVD
- pkFw8qi7BmBqB+G4=;
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=1XkzWrJunNjwg07SZ0xtl89vq9kjD5f3AOik3evu6LI=; b=i6AhTq3A7ptX0H4wxobXMFB3kq
+ gf6HH58Lm5TGk26slaMUllTnJYCxcVIRCEMyhwb7nTRdT9pdLDLOpaNx6N2vJHWQdZVaXS3Vu7U9h
+ apre57gLO8/B542hDktNQM8/P1pBVhGnaGOMV5t6EOlVRMF1fR0umcQd5/BIN/wbGSKE=;
 Received: from mail-sgaapc01on2083.outbound.protection.outlook.com
  ([40.107.215.83] helo=APC01-SG2-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sLkAt-00018a-1S for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Jun 2024 13:56:06 +0000
+ id 1sLkAx-00018a-Jt for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Jun 2024 13:56:08 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VT+vDwD/+r1gJV3nqWKDu+kI7ZeL3QA6UpGj7+MHsWrNbSFMwpNPHQdpXINTYl1ulx/vBtXQTLxZkdmW1nIYFdejqCOmoXceslTSY07alSPa6iaJQ5yMGuzZYyJouXSVQhiGzGcd4QtxXUQDS99/7C8Ci2MwvU1COq8fx/jPHi3lUdkXV7gNiYOtjdSu72t58FxDwcy+M+zUqHniKqE5m7bipsEv3WmNqz7D/WUNZ+qAD8y0LLOAUf6VZbIsto8+1Mf5fCawh8uQQZG4W2BY++rPoK6NHdHSYfkoKdCnL18pHrOqHGkYDHfjnWghIh9u5r/EJkY/9IEhVBoSxPa3LA==
+ b=QJpox9wENd691wH9e5+T7W/XlUnc9my8JoQS04XICnl4vvdXLv+pkNe+nuco4gyDio7EG0R/EIteJgXJXDdh2pvK2SitV77BaRjeHPzTspKIEMwNBTfN5inHg7UXSuSJ3Kj/YxdpY4B5VzHAu7KmjIvLZb+DjrW4BD7rq4gux3e11L110jAQcc4TZwyXqMV99uPK/GV3liiWLNpOyJfgNDjIErRh+OPcUf6oNu5A5GJ9FFde0qtNIXau8xF8zPtlh2xYgXb6TPqMgicOaaeBb3LwNqHqYHUO79ATuQnuCV7WpUPe/OJyglxlQUVc4kk9ZniynIuL/hlgBl2emFrBqA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9GkPvUNVsdFXB93WA+bb+Fjm+hmAqDXEKGA+foASdLQ=;
- b=m7tXp/uJjA30QyV4kmZ0o9zAksEwc5DIcpNCi5ELcKhTgdqT0ST414WAF2dZfiQEXkxNtQxfesk76Rxlcd5F1D1s0bIaIaARBDAa6jjUVckzRbseMQgrZFc68Kz08R5OIiSgBk0uA9ClPg117uVIhmvK0fs+Kle4P79e6W2juw3yhO4iEy6BtdGlpk0Bi+y//EmTVkzqTZrSdIiuwD268V6cwFvGYr70FTFB21DdGLH842QOC7rbRtLseQbbwJTqioAf9LFExB2uiKoaGDJ09Xg+S+GvSJTPW/ZmgtRzBCcThjgCXQjBEGZygrVQXzH8OJAgSzIpySPAfZ1Q5acHKQ==
+ bh=1XkzWrJunNjwg07SZ0xtl89vq9kjD5f3AOik3evu6LI=;
+ b=dg4wIU+0+D0OWheJ4TtAp+b+2ksQeutcy1emmo0ajuKilg9xvK/VO7o+vPfesbzpcurgOinZxG++IA/aGhGb7yGckP2p++A1G8/ktDGf2r1vQ1EHjshJAPAAEH3/ukbIFe3epjNMgJUY0UKeoABMtByNVL3xphRugsMGQR3bH1Sc4NRgVDimwp6J6DYiuNhHfDrNLCsCjk3+4FM8RBbLV2M2RBwLVZqObN1Zo70s5F42pXrTSeixzP4sVg3I51OtSlD9pm5qs0lkGW6Ug9W3qMQmrBWHaVuEUueYpqhseRByG8Eiaf/OZMAcGAC290TR0pYzH0aWMQc8453BtlfFMA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oppo.com; dmarc=pass action=none header.from=oppo.com;
  dkim=pass header.d=oppo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9GkPvUNVsdFXB93WA+bb+Fjm+hmAqDXEKGA+foASdLQ=;
- b=LDDmUSUaanAR/qVvq30l6acRF2XGpvrdf9OZBZt2mwqtQ7xSWxUaJPtupZZcem4c2YS4vEIi9E4jWYVwp/FDApi+xwkWFSG2N9UjNlsg5VuAKe5S+BYdqnCi3bliZZEI/SGbtbc/gSbWDKFu3MsetG7ZPl5vJf2D3rBA/PUc+pI=
+ bh=1XkzWrJunNjwg07SZ0xtl89vq9kjD5f3AOik3evu6LI=;
+ b=tbrJhf66Y3NZ2fInGvdnYA4cknln5IqVodPZAJL1WzkcqGzonpGH4QngX0bHYsUAwQ5QrKX36eQvXEnsz6fmz66r/69xbqGSupt9rzz2OSBdds3CO11O7yLLwV8vVkV1x616Jin5wA3ON54FdFewSpynpJmSBNs9/kbqueS2an8=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oppo.com;
 Received: from SEYPR02MB6014.apcprd02.prod.outlook.com (2603:1096:101:6b::10)
  by SEYPR02MB7438.apcprd02.prod.outlook.com (2603:1096:101:1e5::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.28; Mon, 24 Jun
- 2024 13:55:53 +0000
+ 2024 13:55:54 +0000
 Received: from SEYPR02MB6014.apcprd02.prod.outlook.com
  ([fe80::bb06:c283:a50:7796]) by SEYPR02MB6014.apcprd02.prod.outlook.com
  ([fe80::bb06:c283:a50:7796%7]) with mapi id 15.20.7677.033; Mon, 24 Jun 2024
- 13:55:53 +0000
+ 13:55:54 +0000
 To: chao@kernel.org,
 	jaegeuk@kernel.org
-Date: Mon, 24 Jun 2024 21:55:23 +0800
-Message-Id: <20240624135532.3330136-1-shengyong@oppo.com>
+Date: Mon, 24 Jun 2024 21:55:24 +0800
+Message-Id: <20240624135532.3330136-2-shengyong@oppo.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240624135532.3330136-1-shengyong@oppo.com>
+References: <20240624135532.3330136-1-shengyong@oppo.com>
 X-ClientProxiedBy: SI2P153CA0001.APCP153.PROD.OUTLOOK.COM (2603:1096:4:140::7)
  To SEYPR02MB6014.apcprd02.prod.outlook.com
  (2603:1096:101:6b::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SEYPR02MB6014:EE_|SEYPR02MB7438:EE_
-X-MS-Office365-Filtering-Correlation-Id: 36957d1f-77ec-46f5-a034-08dc94555ce5
+X-MS-Office365-Filtering-Correlation-Id: 9ebb7a23-6436-41d4-500e-08dc94555db5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230037|366013|52116011|376011|1800799021|38350700011; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?H1t+FFtyOfPpKP7uS2iwCGTfclw80jh4tOJo5STRhql6KvxwaadlHNjNx9ve?=
- =?us-ascii?Q?Qxmn4W4gGsQmcKbgGZFDkNie+GS2X92SxloApTaUtlLG4hx4SzI1x2QQ2BjE?=
- =?us-ascii?Q?+zcUvOJBvHtAn+tyOZf3BXVscxoRjpiWNZbbEfrWJBEGozpS97Z38L0yn/cH?=
- =?us-ascii?Q?tFnTasq5fgCS/jygXlkooRERR2tLnuOLQrGhvTEKE/oh02M1IzZoC7y8I8zW?=
- =?us-ascii?Q?YlIQmB9+ftTJbT8yMMeqoPo9xV1mRrRzDOlnn2mm5euZ4mKwnJUOj9eHMQeF?=
- =?us-ascii?Q?MIwo2yvjT3keooxtN1IyEk+tzPlncCM5Z0xgjv60OtekeXidyZH83bCL8B0C?=
- =?us-ascii?Q?fT1Z311mvHIthV+q+/C4eaCyPQnhxwCFeGNj5yh9wuFSg5+9ovdORxgkmT/T?=
- =?us-ascii?Q?BTTAQFosCAyz3oTmAhQ8PRPZBt05pv3LhtF09cs35o0djtBFWMRuz6kEyy19?=
- =?us-ascii?Q?nitRRwu5FydhP0Ac3jVkl9BMBpCJYNEq+uPhsbz3IQQHh/QnSETtbqPnr/Be?=
- =?us-ascii?Q?pJZK/ySBYZuQiMIFG35Ki58Sf3tcgiWbfQ/QdmR7FP8HFPI74eNEPlkaZAgU?=
- =?us-ascii?Q?aLybMZcFk/FJ71fqPV8423pkJ5TqqVayufbcHA7IB8K0IJs0boia9sGsp+H4?=
- =?us-ascii?Q?S32w2G5HS1XBtLz/0fnZ+m0/UAv3gwebh4ep2PTKw0qrwLrCKq2tv6CdpfCs?=
- =?us-ascii?Q?kv4gsijq5mH4rWNKVGo94Ad46MxoTO+LAkABF1bDNaVLBr2p3yxS5HgAyQhT?=
- =?us-ascii?Q?il2CSle1CrxPjR31DH2wG6jckuhxi3+2hG/8s88Ihf/HDTRKo5NA0z5w0eky?=
- =?us-ascii?Q?K++WRUr2pU7MYXSDhPonbFk6ZA+RiQ1j+JT4UIf6nlmDCqMDYD57ADjer+PK?=
- =?us-ascii?Q?LfDvrk+ZjPib9Ld9UZA4ATB84VqvqXdSdjNAgD8CozJlavxhlFEFSSYcp1Cn?=
- =?us-ascii?Q?9DXugGR8O9cleXlcynsF5WLmvgSs7wH/Ly4VuIOmq4pYRaJOz7gxQM2pSawd?=
- =?us-ascii?Q?gknuQ+lhM7E79AKKS9JXl9r2IoNokZSfpoMXQE8kYCkHthSl2fPsCoD2vAd0?=
- =?us-ascii?Q?VJ4zhkV8X9FstF7qbh/wO4fp4CU/9ZWx68LJQl3BU9oWjy41gIgovfw45/2X?=
- =?us-ascii?Q?STsZWMc1CbqwOX6T0u6HVgfH4gDpEtySJ4zL4/EQQROFV4NgNZHhxuY6VOOO?=
- =?us-ascii?Q?/4vLXl1gkioTnhnXn1xuETqTxWknMaUGtTJawXSyRRQ4uUO8DLysw3i9slzX?=
- =?us-ascii?Q?XkSEz8zuxeoiBvJsbPSxgnhjXlbVH7t87/8pxjlensdstYUXG97s2xTBrM/y?=
- =?us-ascii?Q?m1IQXpndqJzicWu9dKLouiNxum6UbE6IFRdGWNHD/hEx/zXvxUKGbqvuy9Gf?=
- =?us-ascii?Q?UNEqmWA=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?XwvPW59p1GZ/qDXjYEXxUfvsWvvrKYVaWtS0WaZvuVJyF+Ta34EFKWTRpTbr?=
+ =?us-ascii?Q?xD9G80C3AmhvS9Hd5UetS9CPmSLESegiVMNT5MR9hnRB5Yy21vIii04uMKBf?=
+ =?us-ascii?Q?5SQ9IExfR06MYb6V6oFmZNAwcxm6qls7MhZeliG4sqyqVx7jXRrmAv+RSGTt?=
+ =?us-ascii?Q?8+ap2iskRuxdoPHNBfMTF5/qs09u9gZFNLAZzBLEOUm4Xm5m8yAKZYdVydy9?=
+ =?us-ascii?Q?RkauxGt6A8SS2e34N88feThYLUTiStfVVHsHjxop+V5MtGl3FPad69rpGwHC?=
+ =?us-ascii?Q?sHTnbucuYJ8B/MXIo9BtVVr9daZHRqG1Ry3w3+TNxZlNBzdGsCm8OQ0AwI5c?=
+ =?us-ascii?Q?ImMByw1gLNmzf7oWVNcsQIV43MlupXqHY5d8RG8+DMDtHlteGZjNc599oSbL?=
+ =?us-ascii?Q?nQe27VheP3rBgzY5n6mHR6Xe8iS/KoRvQNuQkQLaq0xK8wf9kSofXY6aGwg+?=
+ =?us-ascii?Q?hEVBm25+uZvcfDIB3RUnJUQ9whLPTfaxAtKsegnSACBvZgRBlARDiYJsHjWc?=
+ =?us-ascii?Q?Z74FgeiAVo3rWmcrLSQBphDVxuJk9VK1CcuJgPoJwy7EpBUUO8KgjKyYmFyQ?=
+ =?us-ascii?Q?sEcJaG01wf05qic4HECjcv62MpN74h0ylkWqnHErrU8e907GeKNmGNUtG4Vr?=
+ =?us-ascii?Q?jvF/ceAxavtR/crjwypVF/0oXFne9fASMxbs3EJ/+EHYImjqEAgcMdj84y/T?=
+ =?us-ascii?Q?WDtqwahR245SqJvr/VN2v7Emx88+Bp1mDSBXwpR+9YBkQWo+rS8hfL3gwfGe?=
+ =?us-ascii?Q?zZPfi5O8UlmYiRMuYsZgKcYAjrFJEB+gWRgc/uxX4Z2geOjMVGrHnKUdf7So?=
+ =?us-ascii?Q?wQvPdt6vxomH4IutMxvQsbuSmAf13UteMlMvjZyBkAU/t8nS2eqcPUXxRhxg?=
+ =?us-ascii?Q?V0b973SggCaAh+w9BoDxpwGZol/zeOGDW/pE0WaHs7RjoQJ7xBdg1QcnDV7C?=
+ =?us-ascii?Q?cccy5lzC6IHCcfz43jyNHGes2PWG262FNr94ad9fK9viziGFkN1/7s15U+8h?=
+ =?us-ascii?Q?avZOHAqzw02ftzPqFWYdxW3kylUK+imrpxYeSLXlhIhPAuP9K9mz/3yQLpk/?=
+ =?us-ascii?Q?6MJJQyqR2N5ybwo6YUlWmYQTsZKyoWdnkas5tJrk7324OVX9qGUkfWVkXKY+?=
+ =?us-ascii?Q?UIa2kWW7Il78nIvGe9yC4TyNirNByaomn3T8V1HI211Ko6hX6+PGAwNkFo6t?=
+ =?us-ascii?Q?lDVDikta2WAXGd0CQJw3parbyRGFhYQnjHEJvU6qhT2QVPkfD/GTpaUOwVZT?=
+ =?us-ascii?Q?Hd8w5Ie/dksUAKaojsIIW/8R1IrRIjzXiL4/5CWTofi/RedVhf2bf8+vVyh2?=
+ =?us-ascii?Q?QPwvsdHbmiAC9tg1Q3j0sGEtg/YFGUiZJvTVvaXN9oHLDCcHLC87KXzWY5A3?=
+ =?us-ascii?Q?66VoxJs=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SEYPR02MB6014.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230037)(366013)(52116011)(376011)(1800799021)(38350700011); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?rhmmfmuU52TzwXWNV+pxzsNgx9iscdzamtS+Lkj5z7caRMq4xGTSpG2IEhT9?=
- =?us-ascii?Q?AbTm3NUwOcDFpsEi0MgQJAcXBs8THSlG/gUKS2cFYFTGmz3aNudc1+T0XEmf?=
- =?us-ascii?Q?H9Bi2Otf4pIzN35WpwOe086VCcY8DVMyJWNvVMPyCQ4DESx4XN5kmnOpEerX?=
- =?us-ascii?Q?zN7KDCms/xMbq7wVCPbeqSr0VtnOy+gtOR1Hmd1lB+8Mc6VQEXB6RHYNZ995?=
- =?us-ascii?Q?daqDs3afq/64fNSMIA/+EEIpvDFEKtTGjfB0lFQMFUCTvvTNkeIM1FptOVfn?=
- =?us-ascii?Q?cibJis0PWiHg5DeNtw/xIJayzzS08OQPch1x8Ny0ocYxCrJPPusvmuooETnJ?=
- =?us-ascii?Q?h3nLt0HvA3SEGBs+OkAWClm4jUT3FuVRwNjMo6u1OWhZKN2ePNG6G8GIS4m8?=
- =?us-ascii?Q?nfB5FRGJCpifLWYPoLgfhTIBWPvjQMA/SmaRG+t+W3Jaf7pxQOLt8NwgrODi?=
- =?us-ascii?Q?9/DR/Z1dkU+x8wq2vNJ/yIqYUIBkhl3hLTv+RSPMrH5ESSmncGrXwStmESEc?=
- =?us-ascii?Q?pY91o2ytlyovICr6HJsgwvvymCZqDzULm82eTRWMCTgvHN9HaDE5Va4wyonn?=
- =?us-ascii?Q?+WsL/Rf/iLLWC5yN68eU9fh+wVpFQuBWaQiB4YmZn7othR9faIrP40MNLq7p?=
- =?us-ascii?Q?jTKJGX8cMxhDZJ0h8HN25KimmiuMbihXYMSNAvd4JewXxCPd5FYX8cQqPar/?=
- =?us-ascii?Q?clPXDF0nVW7CN6yj4MY1OBKvLRleN/Hhk35LuAFEA+QK8UtEppHVonRVmb9C?=
- =?us-ascii?Q?LosnHZ0Isk7951sDLTCXwYb6J3tMs+2B48sgXx6xJfKoay+mPolNDKhpn7P/?=
- =?us-ascii?Q?MY4VW6KMqsJ2FU12r+EyQj8X7W2FPAIQW59zS/WZ0OH9+pPwVpmL/x1Sn0Y8?=
- =?us-ascii?Q?7w2j3VIRPJkhnMwIrZ5USkNKgFU7igfvGWQTsTxhjk1gISCXmwdohradfckd?=
- =?us-ascii?Q?0j1fPxN/PgnxQLBrwUJzFP5KNCachmkG1bsVsE1InpxWrYAxrU21JOj22kWn?=
- =?us-ascii?Q?KcN5aS2NMvU51YLJaNW9EmeWJ7DIREYB4NUVZqhrsqv9xmthXvxUs5nHIWzY?=
- =?us-ascii?Q?gJTXfZlKY39idYGJzNey//4frsS/AC89xjQMbxjK7G5q7nbSSEslJF4YBTxH?=
- =?us-ascii?Q?jUYeFN505EAMdvvC5nK/tER5g/29eDGQUYQphtbFLrxX6DLNpEmpoNObVDHL?=
- =?us-ascii?Q?Sy3m892p31/si1lhByNP18mS98rX4PoqGNpmgvaVsG3a5zGgHgb0tR3yRikI?=
- =?us-ascii?Q?LBpJpHOo97Y6aAxEPpZldfL3AMOhaUz1dbrUf8jIgiuXtd3WZwlFQk9jgb+C?=
- =?us-ascii?Q?8EuuVKSpGnX0CpqOK/iEn7qgwmrtnD0CO6IkFpIz6bpo965NjYFx2Tt5F/bH?=
- =?us-ascii?Q?SU9Z1hLU5n6jlfD/AL3KOa8GsfnfvmHX/5eCVHGYKMEtkwaNrNswEfIJhVqK?=
- =?us-ascii?Q?OHG9x6bxaBtf9YodYPpne9TbFBOiMIoRso9WHFKf6Zy6BofsKcm5mFfO6zBv?=
- =?us-ascii?Q?zqbm39lDfLSKxjFl5uYNSOrtG3PXg+BCv/pyRizuFhenYXLH/rhWSuJZR/Pw?=
- =?us-ascii?Q?Y8QsB0W4JuNFY0Xqyd2afE2goxwDMhvFqz2HacBd?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dJAQPGoDtpXBZaJR+6+sEAQuQmgRHcyMRfcbeK5yVwDoiU7Ihm8Cr2kygC/m?=
+ =?us-ascii?Q?JKPlt2G2URH6DvhKOtKi/UdCrPSH5qAu/8fIAq7IQLUr4kHKFPINI1iiMOMS?=
+ =?us-ascii?Q?AB08CsQOPWtm2HpK3/CTvLeQH1uWpHMPXhPZH5RWCVZlKrW9/+5RigX14wOz?=
+ =?us-ascii?Q?9/vcouN5OYUfRE+UAUJPz0Q5n1UsFIraUxZCsOQGPKBQzIc3R9rgc5mhHjLB?=
+ =?us-ascii?Q?YGTU7oRGDRrZIuIjs5oBD5Dlx0kGzAcPEBq3qpWQ4IcixkpOFUaIsSNp+9lj?=
+ =?us-ascii?Q?6PKlcTolpsNddUDXxo0dbw/UfJ4kR5j3TbuHtAs520jHUtoL69Mt5V6B03kk?=
+ =?us-ascii?Q?Y6grpwqddDaVhql5aYOkf7t9B3vGSFSN2A2tKsDK6bIN9H8xred5SYVnEHBh?=
+ =?us-ascii?Q?qgbToYyLU1AWNc4ZxfiJXPzzCeliTpgK/YA3TSCctZfTRLGKFOvKYwxNig3F?=
+ =?us-ascii?Q?OPUfFuIgTowblewfENV6Fxy31E0yQsAZ1CLSeG/x/GrptkMQFcYtMmJ6IfNx?=
+ =?us-ascii?Q?vbHvG58m/RZey7bD3wcx0oxeKrwU6o8mtB00sYjq/+9+fX881wF6XfdXliBc?=
+ =?us-ascii?Q?iMXkwWS1ly8OJMtWuAOjyuv7ffCKrLq8kRc7FBZeTE3T0Qw0lsSRJH0HAO58?=
+ =?us-ascii?Q?kLfi5j1tOvDiewP43fBVLgWZiUN1X2j7nxywEZYEL7nvZVUIdL/ejF0bS/sw?=
+ =?us-ascii?Q?fWnQdEgArrPcoNipbcD4CML+aR+UxfJC/jLX4d7czgMOCjX1S+gxUgR2XKLS?=
+ =?us-ascii?Q?mkoInpy4jvMltsjyZdYBWpu/qI6zdMJ0EoE4pwmofSzMQRPVqhZ4mLUGbAMB?=
+ =?us-ascii?Q?TSp/MGESQ+dfTXpaM/xExB6ZYsdTMuDuTlizxvkNSjsdMn9RXWJ06ecVevOG?=
+ =?us-ascii?Q?pqmZRLtk8qQGZ3yc7BdIGWrdAGmDFL3BPzie07d1AOWe0BuvqRgyKM7V2/Eg?=
+ =?us-ascii?Q?74BLjp9cqejx16Sh3AZOGiIO/rt0G2EwdBHzDu3oeihkuK4bGw2GReWfO/Kr?=
+ =?us-ascii?Q?eetZG8k1UyBaRXkx5gpW6pWyCvv7gMVIK0ZilTzi2uOAnbIcVLMG2+dfnms/?=
+ =?us-ascii?Q?BKEAgqqM5H0mqE3vt1Y8sfM5a1ZvY2b4qlLtVtiVimAnZGuU3ODaboWtP09L?=
+ =?us-ascii?Q?p6PviJu4WwnUDijCdxmQi6lxIa8NIB338JiOYPo3rfoKgfwS4ML8H0pXv5HD?=
+ =?us-ascii?Q?XVd+ncF8YY2QGHB6pIpSjZbBtjjccxBMuDsKjCXMbwe6Z49c967VO9P0I1VL?=
+ =?us-ascii?Q?ZBlxwMm5Odztw9+9tWpp7Wrcp5rZEoJeyyhXeO1TvoGMhOK+WvyT9j7NMs3u?=
+ =?us-ascii?Q?wVGq1cLbV99QcVrAdC3z+UbZJdEthmKTuJuNiv1B6GAg5zgRL0undb7+GWeC?=
+ =?us-ascii?Q?XoeazcKdK47mVo4ZRYGsfCuf753zmS9YIADzLGv6meHB9wfXYLzdgRCNoKvg?=
+ =?us-ascii?Q?ar/xm+S4SX9+Z1nzdBRacntQ+LrTA9r0X2OQUpJlrUqNJ10akiOiLkYAZTXj?=
+ =?us-ascii?Q?asIKWzW+f2gjclqibcFgtEBmby/lvXiC4rfsYTeXBmT5nYaeTHeBwUDo6n2r?=
+ =?us-ascii?Q?P/bmUhNgXV/ni/pdgdtoOvP3H22CI+NHx4c5vNtW?=
 X-OriginatorOrg: oppo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 36957d1f-77ec-46f5-a034-08dc94555ce5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ebb7a23-6436-41d4-500e-08dc94555db5
 X-MS-Exchange-CrossTenant-AuthSource: SEYPR02MB6014.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2024 13:55:53.3412 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2024 13:55:54.6970 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KjHGcopfG5gjPpYjP+C8kdDnOKcQPyyqRALrOy/URYfmCqjW/yIl6Y3pCG1HaaDsZlTnpl5EOTpDgclll9v6Uw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7mvNkGxODablXfcoB9CUJZIN9Hrbk/CHNa46U2uQMPuQSFmc6RTc9UTlCdQy+IJhbXxeJuy9Xdi1bc0I6F/FYQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR02MB7438
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -154,37 +156,37 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This patchset introduces a new tool inject.f2fs to modify
- metadata or data (directory entry) of f2fs image offline flexibly. With
- inject.f2fs, 
- it is easier to generate a corrupted f2fs image, which can help verify fsck
- or reproduce userspace behaviors of some a fault. If option `--dry-run' is
- used, nothing really gets chang [...] 
+ Content preview: Signed-off-by: Sheng Yong <shengyong@oppo.com> ---
+ fsck/fsck.h
+ | 3 +++ fsck/main.c | 2 +- 2 files changed, 4 insertions(+), 1 deletion(-)
+ diff --git a/fsck/fsck.h b/fsck/fsck.h index 6cac926..4ca75b3 100644 ---
+ a/fsck/fsck.h +++ b/fsck/fsck.h @@ -353,4 +353,7 @@ int update_inode(struct
+ f2fs_sb_info *sbi, struct f2fs_node *inode, int flu [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: oppo.com]
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [40.107.215.83 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [40.107.215.83 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [40.107.215.83 listed in bl.score.senderscore.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.215.83 listed in wl.mailspike.net]
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: oppo.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [40.107.215.83 listed in sa-trusted.bondedsender.org]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [40.107.215.83 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.215.83 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -192,8 +194,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1sLkAt-00018a-1S
-Subject: [f2fs-dev] [RFC PATCH 00/10] f2fs-tools: introduce inject.f2fs
+X-Headers-End: 1sLkAx-00018a-Jt
+Subject: [f2fs-dev] [RFC PATCH 01/10] f2fs-tools: export is_digits
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -212,112 +214,37 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patchset introduces a new tool inject.f2fs to modify metadata or
-data (directory entry) of f2fs image offline flexibly.
+Signed-off-by: Sheng Yong <shengyong@oppo.com>
+---
+ fsck/fsck.h | 3 +++
+ fsck/main.c | 2 +-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
-With inject.f2fs, it is easier to generate a corrupted f2fs image, which
-can help verify fsck or reproduce userspace behaviors of some a fault.
-If option `--dry-run' is used, nothing really gets changed, and that
-could be used to get the value of a specified field.
-
-inject.f2fs allows injecting some members in sb, cp, nat, sit, ssa, node
-and dentry for now. For example,
-
-Inject sb's magic
-=================
-inject.f2fs --sb 0 --mb magic --val 0x12345 $DEV
-
-Info: inject sb auto
-Info: inject member magic
-Info: inject value 74565 : 0x12345
-[...]
-Info: inject magic of sb 1: 0xf2f52010 -> 0x12345
-[update_superblock: 890] Info: Done to update superblock
-
-Inject cp's cur_data_segno
-==========================
-inject.f2fs --cp 0 --mb cur_data_segno --idx 1 --val 0x12345 $DEV
-
-Info: inject cp pack auto
-Info: inject member cur_data_segno
-Info: inject slot index 1
-Info: inject value 74565 : 0x12345
-[...]
-Info: inject cur_data_segno[1] of cp 1: 0x4 -> 0x12345
-Info: write_checkpoint() cur_cp:2
-
-Inject nat's ino
-================
-inject.f2fs --nat 0 --mb ino --nid $INO --val 0x12345 $DEV
-
-Info: inject nat pack auto
-Info: inject nid 4 : 0x4
-Info: inject member ino
-Info: inject value 74565 : 0x12345
-[...]
-Info: inject nat entry ino of nid 4 in pack 1: 4 -> 74565
-
-Inject ssa's nid
-================
-inject.f2fs --ssa --blk $BLK --mb nid --val 0x12345 $DEV
-
-Info: inject ssa
-Info: inject blkaddr 7511 : 0x1d57
-Info: inject member nid
-Info: inject value 74565 : 0x12345
-[...]
-Info: auto idx = 343
-Info: inject summary entry nid of block 0x1d57: 0x4 -> 0x12345
-
-Inject inode's i_addr
-=====================
-inject.f2fs --node --nid $INO --mb i_addr --idx 100 --val 0x12345 $DEV
-
-Info: inject node
-Info: inject nid 4 : 0x4
-Info: inject member i_addr
-Info: inject slot index 100
-Info: inject value 74565 : 0x12345
-[...]
-Info: inject inode i_addr[100] of nid 4: 0x20864 -> 0x12345
-
-Inject inode's dentry hash
-==========================
-inject.f2fs --dent --nid $INO --mb d_hash --val 0x12345 $DEV
-
-Info: inject dentry
-Info: inject nid 4 : 0x4
-Info: inject member d_hash
-Info: inject value 74565 : 0x12345
-[..]
-Info: inject dentry d_hash of nid 4: 0xc77b804e -> 0x12345
-
-Sheng Yong (10):
-  f2fs-tools: export is_digits
-  inject.f2fs: introduce inject.f2fs
-  inject.f2fs: add sb injection
-  inject.f2fs: add cp injection
-  inject.f2fs: add nat injection
-  inject.f2fs: add sit injection
-  inject.f2fs: add ssa injection
-  inject.f2fs: add node injection
-  inject.f2fs: add dentry injection
-  man: add inject.f2fs man page
-
- fsck/Makefile.am  |    5 +-
- fsck/fsck.h       |    5 +
- fsck/inject.c     | 1049 +++++++++++++++++++++++++++++++++++++++++++++
- fsck/inject.h     |   41 ++
- fsck/main.c       |   38 +-
- fsck/mount.c      |    6 +
- include/f2fs_fs.h |    2 +
- man/Makefile.am   |    2 +-
- man/inject.f2fs.8 |  225 ++++++++++
- 9 files changed, 1369 insertions(+), 4 deletions(-)
- create mode 100644 fsck/inject.c
- create mode 100644 fsck/inject.h
- create mode 100644 man/inject.f2fs.8
-
+diff --git a/fsck/fsck.h b/fsck/fsck.h
+index 6cac926..4ca75b3 100644
+--- a/fsck/fsck.h
++++ b/fsck/fsck.h
+@@ -353,4 +353,7 @@ int update_inode(struct f2fs_sb_info *sbi, struct f2fs_node *inode,
+ int flush_nat_journal_entries(struct f2fs_sb_info *sbi);
+ int flush_sit_journal_entries(struct f2fs_sb_info *sbi);
+ 
++/* main.c */
++int is_digits(char *optarg);
++
+ #endif /* _FSCK_H_ */
+diff --git a/fsck/main.c b/fsck/main.c
+index 6edc902..9bda412 100644
+--- a/fsck/main.c
++++ b/fsck/main.c
+@@ -166,7 +166,7 @@ void label_usage()
+ 	exit(1);
+ }
+ 
+-static int is_digits(char *optarg)
++int is_digits(char *optarg)
+ {
+ 	unsigned int i;
+ 
 -- 
 2.40.1
 
