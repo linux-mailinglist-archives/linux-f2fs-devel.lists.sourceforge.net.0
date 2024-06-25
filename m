@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5E2C915D30
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2024 05:14:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 347E6915D31
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2024 05:14:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sLwdO-0008MS-CE;
-	Tue, 25 Jun 2024 03:14:18 +0000
+	id 1sLwdR-000895-4j;
+	Tue, 25 Jun 2024 03:14:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1sLwdM-0008MF-L7
+ (envelope-from <chao@kernel.org>) id 1sLwdP-00088y-B7
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Jun 2024 03:14:16 +0000
+ Tue, 25 Jun 2024 03:14:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NmHJXYGisQ1RRwa4ETkJsHZbDJngqxhu7cjxBCLxnGU=; b=bHOCYpcAe3OUmfLIRSaoxDDC6R
- llUCG/cW4XuBGD7jZKwR8kfHjVCcgH2kdCcd/aCE7t8sLr9g5P6hcIeaScKy34dV2qyEC1khZCTsn
- 6xp9G8o2Ajb4vfUIcMhICfEaGTpQqzMWZNH3ZfASMOqY7jcGEeBJAYQArL0vtibsqpKE=;
+ bh=zFoPWh3n1vldeyDoiiwfNDaGFyKz3NB2faLdmiv25Cs=; b=LoaY7wRFJeu3UZ6AMpvs9w7Daz
+ KKNLXjQ2jlD41Z5NNQFaYpTTwQLRZHZJWuW1f2gIfpF6MlYCJlijyNxxCoRbXFtwtxhyBVxYnrhkY
+ lVvHwwDmtIKg/7AcqjhCQ04mlIRuWhPHSQdK+bP+wMSbyWY9EJ/37PqJ9irxDiykZzSw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,34 +31,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NmHJXYGisQ1RRwa4ETkJsHZbDJngqxhu7cjxBCLxnGU=; b=S3L617wsPK7AbVhdrb4A+xuBCN
- DqN95UX7NLc9YvLiMRWlyA1xMCXQuM/edkWE3sgdtPRO75UR9RS5Flxf6QCK0lEtnNPYkfsPAja5D
- mvsPw7RKfystaKynYn9L5rqorPotmwQE6EpmL+M0x74VBcTkdlejihl63GM4GrqhhGws=;
+ bh=zFoPWh3n1vldeyDoiiwfNDaGFyKz3NB2faLdmiv25Cs=; b=AnpHDp5uMXeGNaO7UWsdIyvC0+
+ 84P/SIt2Y8600Eyn9Lv1NysRRLek/wosuNF0vdx8R0Ks6We4lhNNIJbZSwJhzsTwpWOcvCwec9wmx
+ 6L59GnnqwP6rvEPmC7y7A+zcParV59BQ4cVgU35WRepaxn7krxmNplwyWcBVnlDR2zvE=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sLwdN-0001VR-0s for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Jun 2024 03:14:16 +0000
+ id 1sLwdO-0001Vd-QS for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Jun 2024 03:14:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id DCC96611CC
+ by dfw.source.kernel.org (Postfix) with ESMTP id A85A6611DE
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 25 Jun 2024 03:14:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D2CF7C4AF09;
  Tue, 25 Jun 2024 03:14:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 912ECC4AF07;
- Tue, 25 Jun 2024 03:14:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1719285245;
- bh=7i9ANIkcb5e+IjTGnXP1+fnS3hh1UJ930GMPGvqfu9I=;
+ s=k20201202; t=1719285247;
+ bh=xmtO96A+N055YtD+3waXk7KlXygllEUWidyxOMqx4xI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=oMOyQR//ysFjBcydfxv3gFlf1Xl1zVfYea9wWSmsmP7PuAKdH2XRqxpQeBvN5fA6q
- YzzQsRaPy8yrJSo+a0BFSoZGbpseVHwr5mlpjK3l9xj8fbRlmzVxaKpQuT9Sslchtt
- hubqkx+BApzr9szwqKRcMXJAav2kTc4TCbD94LiG3lJP1DpEOgF8/fYdDPLEelq6qU
- l33HIsHL2lIdUZTr79zgDPr0cqe/s1YY+YXQIkwkSiFbG+Lwpb//PWreEFEAxlV7Ba
- +WM6BMUOWrzs+tu2YA+IzWwLaN7KZmimrX/Z3MnOcbxCRJASdsij4aDkXp/XOiKIiB
- SOpaIjO7/PJmA==
+ b=As17zSnO0H4YoH+VEVrP911ZuxvwpgRbdBTze0ZpkNW/ELFc5oFf3HykaV5PANk7V
+ 2ab/7PRTOjsr6r8s93ABFdevstCei9Equ9lwnzbWYj1q5ETshXq2OnFghqFDsYetV1
+ Cde/ANAIZobA0uB4A09LUfECsCiwkmMdt3OW8WYqBlPQyRuSoNfvV/HYYSNknt6EPn
+ P+LmSyn3ekDO+OGnl3c9P0GY+b3aoDdWe5ijfWLYOGBwW2xUP+oEaIkr0p5a5e6iD4
+ akbjT990sIF+LS/A7BewqCDY92BD8N15JmuelcQLhk3z1FnqQL/qKl/J329434dGdF
+ yGpMuq1R6GzIA==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Tue, 25 Jun 2024 11:13:50 +0800
-Message-Id: <20240625031351.3586955-3-chao@kernel.org>
+Date: Tue, 25 Jun 2024 11:13:51 +0800
+Message-Id: <20240625031351.3586955-4-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240625031351.3586955-1-chao@kernel.org>
 References: <20240625031351.3586955-1-chao@kernel.org>
@@ -70,11 +70,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: We should always truncate pagecache while truncating on-disk
- data. Fixes: a46bebd502fe ("f2fs: synchronize atomic write aborts")
- Signed-off-by:
- Chao Yu <chao@kernel.org> --- fs/f2fs/file.c | 1 + 1 file changed,
- 1 insertion(+)
+ Content preview:  atomic write can only be used via buffered IO, let's fail
+ direct IO on atomic_file and return -EOPNOTSUPP. Signed-off-by: Chao Yu
+ <chao@kernel.org>
+ --- fs/f2fs/file.c | 15 +++++++++++++++ 1 file changed, 15 insertions(+) 
  Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -99,9 +98,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sLwdN-0001VR-0s
-Subject: [f2fs-dev] [PATCH 3/4] f2fs: atomic: fix to truncate pagecache
- before on-disk metadata truncation
+X-Headers-End: 1sLwdO-0001Vd-QS
+Subject: [f2fs-dev] [PATCH 4/4] f2fs: atomic: fix to forbid dio in
+ atomic_file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,26 +117,61 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-We should always truncate pagecache while truncating on-disk data.
+atomic write can only be used via buffered IO, let's fail direct IO on
+atomic_file and return -EOPNOTSUPP.
 
-Fixes: a46bebd502fe ("f2fs: synchronize atomic write aborts")
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/file.c | 1 +
- 1 file changed, 1 insertion(+)
+ fs/f2fs/file.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 2203904383a6..0355cb054521 100644
+index 0355cb054521..a527de1e7a2f 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -2185,6 +2185,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp, bool truncate)
- 		clear_inode_flag(fi->cow_inode, FI_INLINE_DATA);
- 	} else {
- 		/* Reuse the already created COW inode */
-+		truncate_setsize(inode, 0);
- 		ret = f2fs_do_truncate_blocks(fi->cow_inode, 0, true);
- 		if (ret) {
- 			f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
+@@ -2150,6 +2150,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp, bool truncate)
+ 		goto out;
+ 
+ 	f2fs_down_write(&fi->i_gc_rwsem[WRITE]);
++	f2fs_down_write(&fi->i_gc_rwsem[READ]);
+ 
+ 	/*
+ 	 * Should wait end_io to count F2FS_WB_CP_DATA correctly by
+@@ -2209,6 +2210,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp, bool truncate)
+ 	}
+ 	f2fs_i_size_write(fi->cow_inode, isize);
+ 
++	f2fs_up_write(&fi->i_gc_rwsem[READ]);
+ 	f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
+ 
+ 	f2fs_update_time(sbi, REQ_TIME);
+@@ -4537,6 +4539,13 @@ static ssize_t f2fs_dio_read_iter(struct kiocb *iocb, struct iov_iter *to)
+ 		f2fs_down_read(&fi->i_gc_rwsem[READ]);
+ 	}
+ 
++	/* dio is not compatible w/ atomic file */
++	if (f2fs_is_atomic_file(inode)) {
++		f2fs_up_read(&fi->i_gc_rwsem[READ]);
++		ret = -EOPNOTSUPP;
++		goto out;
++	}
++
+ 	/*
+ 	 * We have to use __iomap_dio_rw() and iomap_dio_complete() instead of
+ 	 * the higher-level function iomap_dio_rw() in order to ensure that the
+@@ -4948,6 +4957,12 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+ 	/* Determine whether we will do a direct write or a buffered write. */
+ 	dio = f2fs_should_use_dio(inode, iocb, from);
+ 
++	/* dio is not compatible w/ atomic write */
++	if (dio && f2fs_is_atomic_file(inode)) {
++		ret = -EOPNOTSUPP;
++		goto out_unlock;
++	}
++
+ 	/* Possibly preallocate the blocks for the write. */
+ 	target_size = iocb->ki_pos + iov_iter_count(from);
+ 	preallocated = f2fs_preallocate_blocks(iocb, from, dio);
 -- 
 2.40.1
 
