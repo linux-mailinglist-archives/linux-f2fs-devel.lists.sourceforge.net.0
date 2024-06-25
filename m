@@ -2,107 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D17E915B85
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2024 03:14:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0AFC2915C3A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jun 2024 04:31:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sLuli-00019Q-Qy;
-	Tue, 25 Jun 2024 01:14:47 +0000
+	id 1sLvxX-0007Je-G4;
+	Tue, 25 Jun 2024 02:31:02 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1sLulh-00019A-4U
+ (envelope-from <wangzijie1@honor.com>) id 1sLvxV-0007JP-CB
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Jun 2024 01:14:45 +0000
+ Tue, 25 Jun 2024 02:31:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sATDNmcmGDNQ1n2laPas1zAQn3ALoKaqNNCgSdZxbfo=; b=kzW55GRN7hxm6RIty74SPoqkM5
- kXn9dgG1Qz2JpvC9MMxg5EFayZ959BeW9Q8CqiBN/aJo/0or1wTytDYzUdv/xl4TwBF6IyPrZ786E
- jPGE0OPRJ+yurCK7GeZICCW2//NgsIA/Ir1VxVLtzwytrHGKDBTicHE0eHvEeP4dwsg0=;
+ bh=UN1TaMFB/EGH3L36QJNeBlysuxglu7nOsR37DD/f/dM=; b=QKJGdIDuorydpKDV9HET4MGrvF
+ jtMB5lxuVtpu8UZIRgkBNAnj2pSEAALjR1xVAgmm/pGDc9HgGW37GvInWuEh0pAf+6c7jztKikX52
+ JHLdwA/DNN0X6+3HwAc3hWPg/Rg7M02FU+PrgE8/wwbpcVDPbdonpRZepckXycSRC38I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sATDNmcmGDNQ1n2laPas1zAQn3ALoKaqNNCgSdZxbfo=; b=OueKU0tTBU8Xsa0nVXr9ZWibK1
- GJRhZSTqo0adpn2eSO//xcs+nm6LO0PZS5AbZSQDWvD+y/qGRZpopWA7h0R7OpKWhl6wr/Ae06HjY
- KKJlwOeIeKB93/pSRPSt+J0178RBX6BAzV63pooARumM0XRkQVb5RdjsXVUZGYpi+uKw=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=UN1TaMFB/EGH3L36QJNeBlysuxglu7nOsR37DD/f/dM=; b=PULfWVgvjVzY+eJZriARX1AIZ2
+ Zw0hgqQ9kYgqS7PdjKjt+YChXdGLAVfhGj7Sj7cJCnE0mrXypFO/yI8UYdmPP+XkwchW1gXKi7O1J
+ kXG9XDI/0LUOw6V3TCVUSSpNxfQ/UT7qJqmlYU4habhQwM8gLqHxElgE5PDKXPX3gon0=;
+Received: from mta21.honor.com ([81.70.160.142] helo=mta21.hihonor.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sLulh-0004hw-49 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Jun 2024 01:14:45 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 7E8A5CE0225;
- Tue, 25 Jun 2024 01:14:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEE13C2BBFC;
- Tue, 25 Jun 2024 01:14:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1719278076;
- bh=zue60nLKRM9hqp7Y2+yqVUlGb8bESpFQm08i1f8AibQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=QXtQsr1KkNNyPrUujsETwUHpG/tBp/hBqa81QZ+o/H6RXq4ZDGaNYr6cHY3eoobWm
- JYwdrLrfDKD6+V8B5TwnFbH3i19QbMRerWrbTSunDCGP8bKsUDmu4ijtk4JE36TZa2
- NCDUCYO5glFDw9PTI68qqCazP+RO81st6ABlpOgRC3PA5v1ddfai/7FxVGsvRgHP4+
- aLsknnM6fYyE3Mg+usUCrDyKG13a4pBD3mf8IHhuGkK4EJUg0AKd5aL7ORsT9m6ASZ
- SX2O3o8lv20VRJI5AC4EYg2bc+fIoNFqWr1OgKM5oYgWT6nrX+b4+QNBKXprqCmFBN
- 5lst4wena6yLg==
-Message-ID: <f0adf39a-5c07-49bd-910d-eebbc5f41dc1@kernel.org>
-Date: Tue, 25 Jun 2024 09:14:33 +0800
+ id 1sLvxU-0004xl-EX for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Jun 2024 02:31:00 +0000
+Received: from w003.hihonor.com (unknown [10.68.17.88])
+ by mta21.hihonor.com (SkyGuard) with ESMTPS id 4W7T012wlGzYkxx6;
+ Tue, 25 Jun 2024 10:13:37 +0800 (CST)
+Received: from a011.hihonor.com (10.68.31.243) by w003.hihonor.com
+ (10.68.17.88) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.25; Tue, 25 Jun
+ 2024 10:14:34 +0800
+Received: from localhost.localdomain (10.144.23.14) by a011.hihonor.com
+ (10.68.31.243) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.25; Tue, 25 Jun
+ 2024 10:14:33 +0800
+From: wangzijie <wangzijie1@honor.com>
+To: <chao@kernel.org>
+Date: Tue, 25 Jun 2024 10:14:33 +0800
+Message-ID: <20240625021433.798568-1-wangzijie1@honor.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240111081743.2999210-1-chao@kernel.org>
+References: <20240111081743.2999210-1-chao@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20240606095451.4088735-1-chao@kernel.org>
- <ZnmylaqsdF65PVDp@google.com>
-Content-Language: en-US
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZnmylaqsdF65PVDp@google.com>
-X-Spam-Score: -0.4 (/)
+X-Originating-IP: [10.144.23.14]
+X-ClientProxiedBy: w010.hihonor.com (10.68.28.113) To a011.hihonor.com
+ (10.68.31.243)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/6/25 1:53, Jaegeuk Kim wrote: > On 06/06, Chao Yu
- wrote: >> Commit 59c9081bc86e ("f2fs: allow write page cache when writting
- cp") >> allows write() to write data to page cache during checkpoin [...]
- Content analysis details:   (-0.4 points, 6.0 required)
+ Content preview:  > We may trigger high frequent checkpoint for below case:
+ > 1. mkdir /mnt/dir1; set dir1 encrypted > 2. touch /mnt/file1;
+ fsync /mnt/file1
+ > 3. mkdir /mnt/dir2; set dir2 encrypted > 4. touch /mnt/file [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [145.40.73.55 listed in sa-accredit.habeas.com]
+ [81.70.160.142 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [145.40.73.55 listed in bl.score.senderscore.com]
+ [81.70.160.142 listed in bl.score.senderscore.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
  DNSWL was blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [145.40.73.55 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sLulh-0004hw-49
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to update user block counts in
- block_operations()
+ for more information. [81.70.160.142 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [81.70.160.142 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1sLvxU-0004xl-EX
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: reduce expensive checkpoint trigger
+ frequency
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,97 +108,148 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, zhiguo.niu@unisoc.com, linux-kernel@vger.kernel.org,
+ bintian.wang@honor.com, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/6/25 1:53, Jaegeuk Kim wrote:
-> On 06/06, Chao Yu wrote:
->> Commit 59c9081bc86e ("f2fs: allow write page cache when writting cp")
->> allows write() to write data to page cache during checkpoint, so block
->> count fields like .total_valid_block_count, .alloc_valid_block_count
->> and .rf_node_block_count may encounter race condition as below:
->>
->> CP				Thread A
->> - write_checkpoint
->>   - block_operations
->>    - f2fs_down_write(&sbi->node_change)
->>    - __prepare_cp_block
->>    : ckpt->valid_block_count = .total_valid_block_count
->>    - f2fs_up_write(&sbi->node_change)
->> 				- write
->> 				 - f2fs_preallocate_blocks
->> 				  - f2fs_map_blocks(,F2FS_GET_BLOCK_PRE_AIO)
->> 				   - f2fs_map_lock
->> 				    - f2fs_down_read(&sbi->node_change)
->> 				   - f2fs_reserve_new_blocks
->> 				    - inc_valid_block_count
->> 				    : percpu_counter_add(&sbi->alloc_valid_block_count, count)
->> 				    : sbi->total_valid_block_count += count
->> 				    - f2fs_up_read(&sbi->node_change)
->>   - do_checkpoint
->>   : sbi->last_valid_block_count = sbi->total_valid_block_count
->>   : percpu_counter_set(&sbi->alloc_valid_block_count, 0)
->>   : percpu_counter_set(&sbi->rf_node_block_count, 0)
->> 				- fsync
->> 				 - need_do_checkpoint
->> 				  - f2fs_space_for_roll_forward
->> 				  : alloc_valid_block_count was reset to zero,
->> 				    so, it may missed last data during checkpoint
->>
->> Let's change to update .total_valid_block_count, .alloc_valid_block_count
->> and .rf_node_block_count in block_operations(), then their access can be
->> protected by .node_change and .cp_rwsem lock, so that it can avoid above
->> race condition.
->>
->> Fixes: 59c9081bc86e ("f2fs: allow write page cache when writting cp")
->> Cc: Yunlei He <heyunlei@oppo.com>
->> Signed-off-by: Chao Yu <chao@kernel.org>
->> ---
->>   fs/f2fs/checkpoint.c | 11 ++++++-----
->>   1 file changed, 6 insertions(+), 5 deletions(-)
->>
->> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
->> index 66eaad591b60..010bbd5af211 100644
->> --- a/fs/f2fs/checkpoint.c
->> +++ b/fs/f2fs/checkpoint.c
->> @@ -1298,6 +1298,12 @@ static int block_operations(struct f2fs_sb_info *sbi)
->>   	 * dirty node blocks and some checkpoint values by block allocation.
->>   	 */
->>   	__prepare_cp_block(sbi);
->> +
->> +	/* update user_block_counts */
->> +	sbi->last_valid_block_count = sbi->total_valid_block_count;
->> +	percpu_counter_set(&sbi->alloc_valid_block_count, 0);
->> +	percpu_counter_set(&sbi->rf_node_block_count, 0);
+> We may trigger high frequent checkpoint for below case:
+> 1. mkdir /mnt/dir1; set dir1 encrypted
+> 2. touch /mnt/file1; fsync /mnt/file1
+> 3. mkdir /mnt/dir2; set dir2 encrypted
+> 4. touch /mnt/file2; fsync /mnt/file2
+> ...
 > 
-> Need to add this in __prepare_cp_block()?
-
-Fine to me, will update in v2.
-
-Thanks,
-
+> Although, newly created dir and file are not related, due to
+> commit bbf156f7afa7 ("f2fs: fix lost xattrs of directories"), we will
+> trigger checkpoint whenever fsync() comes after a new encrypted dir
+> created.
 > 
->> +
->>   	f2fs_up_write(&sbi->node_change);
->>   	return err;
->>   }
->> @@ -1575,11 +1581,6 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>   		start_blk += NR_CURSEG_NODE_TYPE;
->>   	}
->>   
->> -	/* update user_block_counts */
->> -	sbi->last_valid_block_count = sbi->total_valid_block_count;
->> -	percpu_counter_set(&sbi->alloc_valid_block_count, 0);
->> -	percpu_counter_set(&sbi->rf_node_block_count, 0);
->> -
->>   	/* Here, we have one bio having CP pack except cp pack 2 page */
->>   	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
->>   	/* Wait for all dirty meta pages to be submitted for IO */
->> -- 
->> 2.40.1
->>
+> In order to avoid such condition, let's record an entry including
+> directory's ino into global cache when we initialize encryption policy
+> in a checkpointed directory, and then only trigger checkpoint() when
+> target file's parent has non-persisted encryption policy, for the case
+> its parent is not checkpointed, need_do_checkpoint() has cover that
+> by verifying it with f2fs_is_checkpointed_node().
+> 
+> Reported-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+> Tested-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+> Reported-by: Yunlei He <heyunlei@hihonor.com>
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+> v3:
+> - Recently, Zhiguo Niu reported the same issue, so I repost this
+> patch for comments.
+>  fs/f2fs/f2fs.h              |  2 ++
+>  fs/f2fs/file.c              |  3 +++
+>  fs/f2fs/xattr.c             | 16 ++++++++++++++--
+>  include/trace/events/f2fs.h |  3 ++-
+>  4 files changed, 21 insertions(+), 3 deletions(-)
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index e2e0ca45f881..0094a8c85f4a 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -279,6 +279,7 @@ enum {
+>  	APPEND_INO,		/* for append ino list */
+>  	UPDATE_INO,		/* for update ino list */
+>  	TRANS_DIR_INO,		/* for transactions dir ino list */
+> +	ENC_DIR_INO,		/* for encrypted dir ino list */
+>  	FLUSH_INO,		/* for multiple device flushing */
+>  	MAX_INO_ENTRY,		/* max. list */
+>  };
+> @@ -1147,6 +1148,7 @@ enum cp_reason_type {
+>  	CP_FASTBOOT_MODE,
+>  	CP_SPEC_LOG_NUM,
+>  	CP_RECOVER_DIR,
+> +	CP_ENC_DIR,
+>  };
+>  
+>  enum iostat_type {
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 8198afb5fb9c..18b33b1f0c83 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -218,6 +218,9 @@ static inline enum cp_reason_type need_do_checkpoint(struct inode *inode)
+>  		f2fs_exist_written_data(sbi, F2FS_I(inode)->i_pino,
+>  							TRANS_DIR_INO))
+>  		cp_reason = CP_RECOVER_DIR;
+> +	else if (f2fs_exist_written_data(sbi, F2FS_I(inode)->i_pino,
+> +							ENC_DIR_INO))
+> +		cp_reason = CP_ENC_DIR;
+>  
+>  	return cp_reason;
+>  }
+> diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+> index f290fe9327c4..cbd1b88297fe 100644
+> --- a/fs/f2fs/xattr.c
+> +++ b/fs/f2fs/xattr.c
+> @@ -629,6 +629,7 @@ static int __f2fs_setxattr(struct inode *inode, int index,
+>  			const char *name, const void *value, size_t size,
+>  			struct page *ipage, int flags)
+>  {
+> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>  	struct f2fs_xattr_entry *here, *last;
+>  	void *base_addr, *last_base_addr;
+>  	int found, newsize;
+> @@ -772,8 +773,19 @@ static int __f2fs_setxattr(struct inode *inode, int index,
+>  	if (index == F2FS_XATTR_INDEX_ENCRYPTION &&
+>  			!strcmp(name, F2FS_XATTR_NAME_ENCRYPTION_CONTEXT))
+>  		f2fs_set_encrypted_inode(inode);
+> -	if (S_ISDIR(inode->i_mode))
+> -		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_CP);
+> +
+> +	if (S_ISDIR(inode->i_mode)) {
+> +		/*
+> +		 * In restrict mode, fsync() always tries triggering checkpoint
+> +		 * for all metadata consistency, in other mode, it only triggers
+> +		 * checkpoint when parent's encryption metadata updates.
+> +		 */
+> +		if (F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_STRICT)
+> +			set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_CP);
+> +		else if (IS_ENCRYPTED(inode) &&
+> +			f2fs_is_checkpointed_node(sbi, inode->i_ino))
+> +			f2fs_add_ino_entry(sbi, inode->i_ino, ENC_DIR_INO);
+> +	}
+>  
+>  same:
+>  	if (is_inode_flag_set(inode, FI_ACL_MODE)) {
+> diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+> index 7ed0fc430dc6..48f2e399e184 100644
+> --- a/include/trace/events/f2fs.h
+> +++ b/include/trace/events/f2fs.h
+> @@ -139,7 +139,8 @@ TRACE_DEFINE_ENUM(EX_BLOCK_AGE);
+>  		{ CP_NODE_NEED_CP,	"node needs cp" },		\
+>  		{ CP_FASTBOOT_MODE,	"fastboot mode" },		\
+>  		{ CP_SPEC_LOG_NUM,	"log type is 2" },		\
+> -		{ CP_RECOVER_DIR,	"dir needs recovery" })
+> +		{ CP_RECOVER_DIR,	"dir needs recovery" },		\
+> +		{ CP_ENC_DIR,		"persist encryption policy" })
+>  
+>  #define show_shutdown_mode(type)					\
+>  	__print_symbolic(type,						\
+> -- 
+> 2.40.1
+
+Hi, Chao
+I noticed the discussion about patch v2, Jaegeuk mentioned no encryption case:
+1) parent is checkpointed
+2) set_xattr(dir) w/ new xnid
+3) create(file)
+4) fsync(file)
+We will not trigger checkpoint() after this change.
+So, how about adding a rule in need_do_checkpoint? We can judge if the parent has xnid 
+being checkpointed or not, if not we can still trigger checkpoint() and keep the same 
+behavior before this change.
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+
 
 
 _______________________________________________
