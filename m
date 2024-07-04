@@ -2,160 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76928927102
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 Jul 2024 09:56:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B31A9271FC
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 Jul 2024 10:46:51 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sPHKX-0007yc-LT;
-	Thu, 04 Jul 2024 07:56:37 +0000
+	id 1sPI71-0004dh-Mz;
+	Thu, 04 Jul 2024 08:46:44 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daejun7.park@samsung.com>) id 1sPHKW-0007yQ-LG
+ (envelope-from <chao@kernel.org>) id 1sPI70-0004dU-K9
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 Jul 2024 07:56:37 +0000
+ Thu, 04 Jul 2024 08:46:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- Date:Message-ID:In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nJsXcRh8QdAcnpMVPzgSJc5Ql2XpNsjVAnlyj6Jj21k=; b=exlI18fGXwmdjIOM7U1B8dri3J
- 8WqQzzr492PnnDoBd/ryALTTxfQkcd/fMb6SsKA2W+5cirN7dlmMqXJ2PvFVwaWwc+l2l+mkVHcwD
- y1DzuzSQ1HY4sipIdS0AJdYL6kXR8jcqZ1tyF1T+h+qKNaQLia3dMYLcfkQEh6MGatac=;
+ bh=MW2zYKCFM0itTPO5deZmv0x8siibhKPXWW7S2uDZzc4=; b=dkpOkgTIfJ2WkOfDYLer+noQfh
+ b9DL7fBJUseY7XD2chwDfDSiH0jtf/Hxk4qZbO1NEL2bjVuubDa3RInK7tW93PSgqSkbAg15NyajK
+ 2l5CEJYHp9aAvsQu4w/qABnZUDcdLn4tb8ubXanRtsFf+aUBfJ/9ugIiI/ZdHX0JESk0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:
- In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nJsXcRh8QdAcnpMVPzgSJc5Ql2XpNsjVAnlyj6Jj21k=; b=Booo5pGzT34afIXNilTkVrJGj7
- 9mQCRFlZtcQGVCQLnJgDbX7stlnuCkvJ9rf9T8BXHVrL+Qvab993XIU8CDe8jmdQ6/aZDJOafxz54
- c5nelw5vRTe4HlkxyuwEf0KIm+TPEXUNxau2HpEjcsMea7JFv2t5TaBuqEqTdjYX6dZA=;
-Received: from mailout4.samsung.com ([203.254.224.34])
+ bh=MW2zYKCFM0itTPO5deZmv0x8siibhKPXWW7S2uDZzc4=; b=Q1DKKr7XIMFFAnWYSUTlLlY0Ml
+ Az1tRWepcyPRZAAaV2yZBZfQzLTZowj/DsF8Jb1VvXHUFT0vG3ExVH0g9y+62tOBiySYIQ1xQLgRZ
+ USNXPHFoaRCBzFzC+vLE4xY41J+suAmeXy6k2ZVSF6C6N14daiZdnbCKU+LYeh9B2uaM=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sPHKW-00061d-9N for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 Jul 2024 07:56:36 +0000
-Received: from epcas2p1.samsung.com (unknown [182.195.41.53])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20240704075623epoutp04659586d89fe24a4dd8f3546ca84f3405~e83MWvgPU2884428844epoutp04W
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  4 Jul 2024 07:56:23 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20240704075623epoutp04659586d89fe24a4dd8f3546ca84f3405~e83MWvgPU2884428844epoutp04W
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1720079783;
- bh=nJsXcRh8QdAcnpMVPzgSJc5Ql2XpNsjVAnlyj6Jj21k=;
- h=Subject:Reply-To:From:To:CC:In-Reply-To:Date:References:From;
- b=hUZo2lFO9JAVBbmKdTLqah9esllONPctYb0vygtxRSltCrxU436cg2pvLEsu9hWfr
- uO6gRfZCVjjVH+9b125cD+h8W2J22sfJXeY2cq9m71M3ZFHPE0EavW2TIB667n37Xe
- OwCEICWBRKLdLR/stWFHH3dxhreIAtHhd949UBxE=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas2p3.samsung.com (KnoxPortal) with ESMTP id
- 20240704075622epcas2p3878696583b1c0cb0147035b39ab9565e~e83MAG6Bt1605416054epcas2p3X;
- Thu,  4 Jul 2024 07:56:22 +0000 (GMT)
-Received: from epsmges2p2.samsung.com (unknown [182.195.36.99]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4WF89L41yWz4x9Q4; Thu,  4 Jul
- 2024 07:56:22 +0000 (GMT)
-X-AuditID: b6c32a46-f3bff7000000250d-e2-668655a60689
-Received: from epcas2p2.samsung.com ( [182.195.41.54]) by
- epsmges2p2.samsung.com (Symantec Messaging Gateway) with SMTP id
- A5.A5.09485.6A556866; Thu,  4 Jul 2024 16:56:22 +0900 (KST)
-Mime-Version: 1.0
-From: Daejun Park <daejun7.park@samsung.com>
-To: Chao Yu <chao@kernel.org>, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "daehojeong@google.com" <daehojeong@google.com>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>
-X-Priority: 3
-X-Content-Kind-Code: NORMAL
-In-Reply-To: <460c4708-3ec6-4fbc-8f6c-7f8e5f901061@kernel.org>
-X-CPGS-Detection: blocking_info_exchange
-X-Drm-Type: N,general
-X-Msg-Generator: Mail
-X-Msg-Type: PERSONAL
-X-Reply-Demand: N
-Message-ID: <20240704075521epcms2p49cc9985b6624e4e1129907e883fbc1d9@epcms2p4>
-Date: Thu, 04 Jul 2024 16:55:21 +0900
-X-CMS-MailID: 20240704075521epcms2p49cc9985b6624e4e1129907e883fbc1d9
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-X-CPGSPASS: Y
-X-CPGSPASS: Y
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprHJsWRmVeSWpSXmKPExsWy7bCmme6y0LY0g4XPOCxOTz3LZPHykKbF
- 1Pa9jBarHoRb/DhpYtG/u53F4sn6WcwWlxa5W1zeNYfNouWPk8X5ia+ZLFZ1zGW0mHr+CJMD
- r8eCTaUem1Z1snnsXvCZyaNvyypGj8+b5AJYo7JtMlITU1KLFFLzkvNTMvPSbZW8g+Od403N
- DAx1DS0tzJUU8hJzU22VXHwCdN0yc4DOU1IoS8wpBQoFJBYXK+nb2RTll5akKmTkF5fYKqUW
- pOQUmBfoFSfmFpfmpevlpZZYGRoYGJkCFSZkZ5xct4W9YK5URfvGScwNjEcluxg5OSQETCR2
- /l7C3MXIxSEksINR4uD+j+xdjBwcvAKCEn93CIPUCAsESdw++ZgJxBYSUJJYf3EWO0RcT+LW
- wzWMIDabgI7E9BP3weIiApOZJPbdzwaZySwwg0li3uleNohlvBIz2p+yQNjSEtuXbwVr5hSw
- kzjw+jUTRFxD4seyXmYIW1Ti5uq37DD2+2PzGSFsEYnWe2ehagQlHvzcDRWXlLg9dxNUfb7E
- /yvLoewaiW0H5kHZ+hLXOjaC3cAr4Csxp7sP7DYWAVWJc4fnQc1xkWjfcxHsHmYBbYllC18z
- g8KEWUBTYv0ufRBTQkBZ4sgtFogKPomOw3/ZYT5s2PgbK3vHvCdQH6pJrPu5nmkCo/IsREDP
- QrJrFsKuBYzMqxjFUguKc9NTi40KjOBxm5yfu4kRnFC13HYwTnn7Qe8QIxMH4yFGCQ5mJRFe
- qffNaUK8KYmVValF+fFFpTmpxYcYTYG+nMgsJZqcD0zpeSXxhiaWBiZmZobmRqYG5krivPda
- 56YICaQnlqRmp6YWpBbB9DFxcEo1MKkk/9aJXRJufO5QuvNJHRbGdRfWOjL9Lzfn97l4KVtw
- g2PUua+Hj9j58pnZXti6/hnLybDj+n92m3Fl2v1i33whNPPC4rf7GZ7xtbX5HD+X1G4rdJnx
- S0zpW8OZgoy+78ytb+cbPGrcb5wdPblcB5gT8vlu/uWpXCbI8/12itWV6qXvVjhd8UnIm7us
- cnJ0XFae8XGT+xNEFszaXchZ6boqcULL04kbC0V87zWf0byouvT5tCcuv5funNUQPmu/zLcb
- D2vtCucW1Ok0CnxYvauxlmVC1OOrphNMl/7yEjuuccxvR73jEXbHu3t9fI4Fc0pFTNbhXPzJ
- ba77ln1bm5nqziWtFPP/v37p5YYZMkosxRmJhlrMRcWJAJrXiIYxBAAA
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240704010121epcms2p4cff8b25d976d4a1b820ba18f1eb5aa90
-References: <460c4708-3ec6-4fbc-8f6c-7f8e5f901061@kernel.org>
- <20240704010121epcms2p4cff8b25d976d4a1b820ba18f1eb5aa90@epcms2p4>
- <CGME20240704010121epcms2p4cff8b25d976d4a1b820ba18f1eb5aa90@epcms2p4>
+ id 1sPI70-0001zL-Rw for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 04 Jul 2024 08:46:42 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id B9A1C624FB;
+ Thu,  4 Jul 2024 08:46:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04CD1C3277B;
+ Thu,  4 Jul 2024 08:46:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1720082796;
+ bh=ZxRLkDRdvAg3y5cVKYOdLAYOAli7hUoWN2F6wd8SGsg=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=mtl92JMjymjC+BRRawFCLgS4lRWNWJo5JiHwak1oxHrXC8sez3cJXddYh2zVie9MA
+ MLLYpjDkdtjBvmMNcX/f0Fp1bWLr0rf/oNoeobhdbeGkQpuK7lhX78WClQ1tU/Tz+C
+ zp83gLhCHzGp6jTYxHGLqcf+29DFDJkxFF0usLBgzaoSYQNF14j3PuP2rpFuKmTIot
+ GMVn+Yo/i3fKsW/8uPT0Q2a2aE7fizDaXli0Ej0Eihf1A2+iVmLVztRp3ioM9BMSrQ
+ JvkCxCYz4AeuE2bOhXHEjwhLf6cimvQKe7I1gGBE/RIdfIF5RWi7y0IXie7rjJ2XUS
+ C68G/NTlOuQFg==
+Message-ID: <cbc18f90-9c5a-49b0-9c6f-d1fbab0f2df1@kernel.org>
+Date: Thu, 4 Jul 2024 16:46:28 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Liao Yuanhong <liaoyuanhong@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20240702062952.28859-1-liaoyuanhong@vivo.com>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20240702062952.28859-1-liaoyuanhong@vivo.com>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Hi Chao Yu, >  >--------- Original Message --------- >Sender
-    : Chao Yu <chao@kernel.org> >Date : 2024-07-04 16:16 (GMT+9) >Title : Re:
-    [PATCH] f2fs: fix null reference error when checking end of zon [...] 
- 
+ Content preview:  On 2024/7/2 14:29, Liao Yuanhong wrote: > Currently, we are
+ using a mix of traditional UFS and zone UFS to support > some functionalities
+ that cannot be achieved on zone UFS alone. However, > there ar [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
-                             blocked.  See
-                             http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
-                              for more information.
-                             [URIs: samsung.com]
-  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                         [203.254.224.34 listed in sa-trusted.bondedsender.org]
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                            [203.254.224.34 listed in bl.score.senderscore.com]
-  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
-                             [203.254.224.34 listed in wl.mailspike.net]
-  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in bl.score.senderscore.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sPHKW-00061d-9N
-Subject: Re: [f2fs-dev] (2) [PATCH] f2fs: fix null reference error when
- checking end of zone
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sPI70-0001zL-Rw
+Subject: Re: [f2fs-dev] [PATCH] f2fs:Add write priority option based on zone
+ UFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -167,49 +109,169 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: daejun7.park@samsung.com
-Cc: Nayeon Kim <nayeoni.kim@samsung.com>, Siwoo Jung <siu.jung@samsung.com>,
- Seokhwan Kim <sukka.kim@samsung.com>, Dongjin Kim <dongjin_.kim@samsung.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-kernel@vger.kernel.org, bo.wu@vivo.com,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-SGnCoENoYW8gWXUsDQo+wqANCj4tLS0tLS0tLS0gT3JpZ2luYWwgTWVzc2FnZSAtLS0tLS0tLS0N
-Cj5TZW5kZXIgOiBDaGFvIFl1IDxjaGFvQGtlcm5lbC5vcmc+DQo+RGF0ZSA6IDIwMjQtMDctMDQg
-MTY6MTYgKEdNVCs5KQ0KPlRpdGxlIDogUmU6IFtQQVRDSF0gZjJmczogZml4IG51bGwgcmVmZXJl
-bmNlIGVycm9yIHdoZW4gY2hlY2tpbmcgZW5kIG9mIHpvbmUNCj7CoA0KPk9uIDIwMjQvNy80IDk6
-MDEsIERhZWp1biBQYXJrIHdyb3RlOg0KPj4gVGhpcyBwYXRjaCBmaXhlcyBhIHBvdGVudGlhbGx5
-IG51bGwgcG9pbnRlciBiZWluZyBhY2Nlc3NlZCBieQ0KPj4gaXNfZW5kX3pvbmVfYmxrYWRkcigp
-IHRoYXQgY2hlY2tzIHRoZSBsYXN0IGJsb2NrIG9mIGEgem9uZQ0KPj4gd2hlbiBmMmZzIGlzIG1v
-dW50ZWQgYXMgYSBzaW5nbGUgZGV2aWNlLg0KPg0KPmJsa3pvbmVkIGZlYXR1cmUgZGVwZW5kcyBv
-biBtdWx0aXBsZSBkZXZpY2UgZmVhdHVyZT8gT25lIHJlZ3VsYXINCj5kZXZpY2UgYW5kIG9uZSBz
-ZXEtem9uZSBkZXZpY2U/DQoNCkFjY29yZGluZyB0byBta2ZzLmYyZnMsIGlmIHRoZXJlIGFyZSBh
-IHN1ZmZpY2llbnQgbnVtYmVyIG9mDQpjb252ZW50aW9uYWwgem9uZXMsIGEgc2luZ2xlIHpvbmVk
-IGRldmljZSBjYW4gYmUgdXNlZC4NCg0KVGhhbmtzLA0KRGFlanVuDQoNCj4NCj5UaGFua3MsDQo+
-DQo+Pg0KPj4gRml4ZXM6IGUwNjdkYzNjNmI5YyAoImYyZnM6IG1haW50YWluIHNpeCBvcGVuIHpv
-bmVzIGZvciB6b25lZCBkZXZpY2VzIikNCj4+IFNpZ25lZC1vZmYtYnk6IERhZWp1biBQYXJrIDxk
-YWVqdW43LnBhcmtAc2Ftc3VuZy5jb20+DQo+PiAtLS0NCj4+wqAgZnMvZjJmcy9kYXRhLmMgNCAr
-KystDQo+PsKgIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkN
-Cj4+DQo+PiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9kYXRhLmMgYi9mcy9mMmZzL2RhdGEuYw0KPj4g
-aW5kZXggYjZkY2IzYmNhZWY3Li4xYWE3ZWVmYTY1OWMgMTAwNjQ0DQo+PiAtLS0gYS9mcy9mMmZz
-L2RhdGEuYw0KPj4gKysrIGIvZnMvZjJmcy9kYXRhLmMNCj4+IEBAIC05MjUsNiArOTI1LDcgQEAg
-aW50IGYyZnNfbWVyZ2VfcGFnZV9iaW8oc3RydWN0IGYyZnNfaW9faW5mbyAqZmlvKQ0KPj7CoCAj
-aWZkZWYgQ09ORklHX0JMS19ERVZfWk9ORUQNCj4+wqAgc3RhdGljIGJvb2wgaXNfZW5kX3pvbmVf
-YmxrYWRkcihzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmksIGJsb2NrX3QgYmxrYWRkcikNCj4+wqAg
-ew0KPj4gKyDCoCDCoCDCoCDCoHN0cnVjdCBibG9ja19kZXZpY2UgKmJkZXYgPSBzYmktPnNiLT5z
-X2JkZXY7DQo+PsKgIMKgIMKgIMKgIMKgIMKgaW50IGRldmkgPSAwOw0KPj7CoA0KPj7CoCDCoCDC
-oCDCoCDCoCDCoGlmIChmMmZzX2lzX211bHRpX2RldmljZShzYmkpKSB7DQo+PiBAQCAtOTM1LDgg
-KzkzNiw5IEBAIHN0YXRpYyBib29sIGlzX2VuZF96b25lX2Jsa2FkZHIoc3RydWN0IGYyZnNfc2Jf
-aW5mbyAqc2JpLCBibG9ja190IGJsa2FkZHIpDQo+PsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgIMKgIMKgIMKgIMKgcmV0dXJuIGZhbHNlOw0KPj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoH0NCj4+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBibGthZGRyIC09IEZERVYoZGV2
-aSkuc3RhcnRfYmxrOw0KPj4gKyDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoGJkZXYgPSBGREVWKGRl
-dmkpLmJkZXY7DQo+PsKgIMKgIMKgIMKgIMKgIMKgfQ0KPj4gLSDCoCDCoCDCoCDCoHJldHVybiBi
-ZGV2X2lzX3pvbmVkKEZERVYoZGV2aSkuYmRldikgJiYNCj4+ICsgwqAgwqAgwqAgwqByZXR1cm4g
-YmRldl9pc196b25lZChiZGV2KSAmJg0KPj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoGYy
-ZnNfYmxrel9pc19zZXEoc2JpLCBkZXZpLCBibGthZGRyKSAmJg0KPj7CoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCDCoChibGthZGRyICUgc2JpLT5ibG9ja3NfcGVyX2Jsa3ogPT0gc2JpLT5ibG9j
-a3NfcGVyX2Jsa3ogLSAxKTsNCj4+wqAgfQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYy
-ZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2Uu
-bmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On 2024/7/2 14:29, Liao Yuanhong wrote:
+> Currently, we are using a mix of traditional UFS and zone UFS to support
+> some functionalities that cannot be achieved on zone UFS alone. However,
+> there are some issues with this approach. There exists a significant
+> performance difference between traditional UFS and zone UFS. Under normal
+> usage, we prioritize writes to zone UFS. However, in critical conditions
+> (such as when the entire UFS is almost full), we cannot determine whether
+> data will be written to traditional UFS or zone UFS. This can lead to
+> significant performance fluctuations, which is not conducive to
+> development and testing. To address this, we have added an option
+> zlu_io_enable under sys with the following three modes:
+> 1) zlu_io_enable == 0:Normal mode, prioritize writing to zone UFS;
+> 2) zlu_io_enable == 1:Zone UFS only mode, only allow writing to zone UFS;
+> 3) zlu_io_enable == 2:Traditional UFS priority mode, prioritize writing to
+> traditional UFS.
+
+Use blkzone_alloc_policy instead of zlu_io_enable? Not sure.
+
+Should update manual of f2fs sysfs entry.
+
+> 
+> Signed-off-by: Liao Yuanhong <liaoyuanhong@vivo.com>
+> Signed-off-by: Wu Bo <bo.wu@vivo.com>
+> ---
+>   fs/f2fs/f2fs.h    |  5 +++++
+>   fs/f2fs/segment.c | 23 ++++++++++++++++++++++-
+>   fs/f2fs/sysfs.c   | 13 +++++++++++++
+>   3 files changed, 40 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index f7ee6c5e371e..7ba782bd15b2 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -1781,6 +1781,11 @@ struct f2fs_sb_info {
+>   	u64 committed_atomic_block;
+>   	u64 revoked_atomic_block;
+>   
+> +#ifdef CONFIG_BLK_DEV_ZONED
+> +	/* For adjust the priority writing position of data in zone UFS */
+> +	unsigned int zlu_io_enable;		/* data write mode */
+> +#endif
+
+#ifdef CONFIG_BLK_DEV_ZONED
+	unsigned int blocks_per_blkz;		/* F2FS blocks per zone */
+	unsigned int max_open_zones;		/* max open zone resources of the zoned device */
+	/* For adjust the priority writing position of data in zone UFS */
+	unsigned int zlu_io_enable;		/* data write mode */
+#endif
+
+> +
+>   #ifdef CONFIG_F2FS_FS_COMPRESSION
+>   	struct kmem_cache *page_array_slab;	/* page array entry */
+>   	unsigned int page_array_slab_size;	/* default page array slab size */
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 4db1add43e36..327457c28700 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -2686,17 +2686,38 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
+>   			goto got_it;
+>   	}
+>   
+> +#ifdef CONFIG_BLK_DEV_ZONED
+>   	/*
+>   	 * If we format f2fs on zoned storage, let's try to get pinned sections
+>   	 * from beginning of the storage, which should be a conventional one.
+>   	 */
+>   	if (f2fs_sb_has_blkzoned(sbi)) {
+> -		segno = pinning ? 0 : max(first_zoned_segno(sbi), *newseg);
+> +		if (sbi->zlu_io_enable == 2)		/* Prioritize writing to traditional UFS */
+
+Please use a macro instead of magic number.
+
+> +			segno = 0;
+> +		else
+> +			segno = pinning ? 0 : max(first_zoned_segno(sbi), *newseg);
+>   		hint = GET_SEC_FROM_SEG(sbi, segno);
+>   	}
+> +#endif
+>   
+>   find_other_zone:
+>   	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
+> +
+> +#ifdef CONFIG_BLK_DEV_ZONED
+> +	if (secno >= MAIN_SECS(sbi) && f2fs_sb_has_blkzoned(sbi)) {
+> +		if (sbi->zlu_io_enable == 1) {		/* Write only to zone UFS */
+
+Ditto.
+
+And we'd better initialize it w/ default policy in somewhere.
+
+> +			hint = GET_SEC_FROM_SEG(sbi, first_zoned_segno(sbi));
+> +			secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
+> +		} else
+> +			secno = find_first_zero_bit(free_i->free_secmap,
+> +								MAIN_SECS(sbi));
+> +		if (secno >= MAIN_SECS(sbi)) {
+> +			ret = -ENOSPC;
+> +			goto out_unlock;
+> +		}
+> +	}
+> +#endif
+> +
+>   	if (secno >= MAIN_SECS(sbi)) {
+>   		secno = find_first_zero_bit(free_i->free_secmap,
+>   							MAIN_SECS(sbi));
+> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> index fee7ee45ceaa..bc9e5e8bb749 100644
+> --- a/fs/f2fs/sysfs.c
+> +++ b/fs/f2fs/sysfs.c
+> @@ -627,6 +627,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+>   	}
+>   #endif
+>   
+> +#ifdef CONFIG_BLK_DEV_ZONED
+> +	if (!strcmp(a->attr.name, "zlu_io_enable")) {
+
+Should check validation of new value?
+
+> +		sbi->zlu_io_enable = t;
+> +		return count;
+> +	}
+> +#endif
+> +
+>   #ifdef CONFIG_F2FS_FS_COMPRESSION
+>   	if (!strcmp(a->attr.name, "compr_written_block") ||
+>   		!strcmp(a->attr.name, "compr_saved_block")) {
+> @@ -1006,6 +1013,9 @@ F2FS_SBI_GENERAL_RW_ATTR(dir_level);
+>   F2FS_SBI_GENERAL_RW_ATTR(iostat_enable);
+>   F2FS_SBI_GENERAL_RW_ATTR(iostat_period_ms);
+>   #endif
+> +#ifdef CONFIG_BLK_DEV_ZONED
+> +F2FS_SBI_GENERAL_RW_ATTR(zlu_io_enable);
+
+#ifdef CONFIG_BLK_DEV_ZONED
+F2FS_SBI_GENERAL_RO_ATTR(unusable_blocks_per_sec);
+F2FS_SBI_GENERAL_RW_ATTR(zlu_io_enable);
+#endif
+
+Thanks,
+
+> +#endif
+>   F2FS_SBI_GENERAL_RW_ATTR(readdir_ra);
+>   F2FS_SBI_GENERAL_RW_ATTR(max_io_bytes);
+>   F2FS_SBI_GENERAL_RW_ATTR(data_io_flag);
+> @@ -1153,6 +1163,9 @@ static struct attribute *f2fs_attrs[] = {
+>   #ifdef CONFIG_F2FS_IOSTAT
+>   	ATTR_LIST(iostat_enable),
+>   	ATTR_LIST(iostat_period_ms),
+> +#endif
+> +#ifdef CONFIG_BLK_DEV_ZONED
+> +	ATTR_LIST(zlu_io_enable),
+>   #endif
+>   	ATTR_LIST(readdir_ra),
+>   	ATTR_LIST(max_io_bytes),
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
