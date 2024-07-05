@@ -2,170 +2,196 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CA7D9283A4
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 Jul 2024 10:25:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id EABD792864C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 Jul 2024 12:03:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sPeFt-0003Fu-IK;
-	Fri, 05 Jul 2024 08:25:21 +0000
+	id 1sPfmc-0004kw-2W;
+	Fri, 05 Jul 2024 10:03:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <s_min.jeong@samsung.com>) id 1sPeFs-0003Fo-AS
+ (envelope-from <liaoyuanhong@vivo.com>) id 1sPfmZ-0004ko-Mj
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 Jul 2024 08:25:20 +0000
+ Fri, 05 Jul 2024 10:03:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yjiQRI88LrEgQXuAT2KgD2ughIWt1fQ1A7RP58k7J2c=; b=dBaJZsLyLOvI5uxkEqM1bcC9fj
- RinpTFZikGG8m1t/tfIDVaSPeIqy28OneiG3bhJOkDYAFKVO+Rzs+K7LWrcjRICGZ5y4taOVKRMBY
- mDoNtjhhlUQQFDVRK9L0VP6yAGFcfU66njdiXI6S1u0btT4pd7V0yerKTvB2vs52fJ2c=;
+ bh=6AeyS1YGXun5k78Brcj11zEowrTKYVPh2u3tv9kMGtw=; b=m6bG2TyyWRVdPUJJ6+jRrBSGB5
+ EYIvgin380nCs9A8+YhKKSs28MUA7TYCN5XTAIasx3qdPCnjphWUv3wwLVPJvvcqrZKPfvVLyELJ7
+ j/YIkQmrFgRKUZDeGNBJYNlwp8V83E1/x9Hwel5kJD+Vqt1royiS6pdPSf4ozUMgCFj0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id
- :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=yjiQRI88LrEgQXuAT2KgD2ughIWt1fQ1A7RP58k7J2c=; b=e
- MtdbaiFwY6ImA+ucGZoAMOxpaInaZaJGBZ4F5BqRsO5Sq/lSf5Y/vjOxh+Hq0jP7hHTMNsu1MbR9D
- YZAIbYRQv5QI/l39nK+stPcPo/in8NhJOlArFO1Y0++oocXTJq6N7DVuZFJYLVXyBiyOLREC9E6iW
- SfwCdu1631M/E0GQ=;
-Received: from mailout3.samsung.com ([203.254.224.33])
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=6AeyS1YGXun5k78Brcj11zEowrTKYVPh2u3tv9kMGtw=; b=WwWembJVP+/sdSLb7RkOuAj8ms
+ rm9pmfkR2EQbu2/uYSOFmu+qkL28YZvyI38KcN32NT3PufvQzTNVfgNQgfKZ6b3sbHM4smp2Mah5g
+ EI2OskImrJYxCfKNfxv467wapL5GLHrti3FFa2Lq2teyRNo4n7ZEPklTu8JYjbdLekrk=;
+Received: from mail-tyzapc01on2081.outbound.protection.outlook.com
+ ([40.107.117.81] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sPeFs-0002zv-4O for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 Jul 2024 08:25:20 +0000
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20240705082512epoutp0390a0d539d9b40c113062eb46e697b716~fQ5o0DdC02208622086epoutp03H
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  5 Jul 2024 08:25:12 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20240705082512epoutp0390a0d539d9b40c113062eb46e697b716~fQ5o0DdC02208622086epoutp03H
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1720167912;
- bh=yjiQRI88LrEgQXuAT2KgD2ughIWt1fQ1A7RP58k7J2c=;
- h=From:To:Cc:Subject:Date:References:From;
- b=Jxi04vmTYWHQisaGxNAO70Q2M6JX7mljei6uRTxJtWEUM4R23uC0fagtvJ0UmSuyD
- um3blOlRqxt+ekkc/0lysq5wtPhVexIoStdVWJl8P5g5Ty1/POTsMrjv/hHGmNCK/O
- YIBLw+VAmLS3oRSGW2xSbZ3kZ9ty32AiSlAQA2+s=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20240705082511epcas1p10cdb1a06d4257b48d6db75d1968c2e44~fQ5oinNMn1756817568epcas1p1U;
- Fri,  5 Jul 2024 08:25:11 +0000 (GMT)
-Received: from epsmges1p4.samsung.com (unknown [182.195.38.240]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4WFmm7488Nz4x9Pt; Fri,  5 Jul
- 2024 08:25:11 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- 03.06.09910.7EDA7866; Fri,  5 Jul 2024 17:25:11 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20240705082511epcas1p24b7b63d5e714a25213dbe07affa52f69~fQ5n6U0hh1315913159epcas1p23;
- Fri,  5 Jul 2024 08:25:11 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240705082511epsmtrp23c1de109b1ef9173de99959af431a8d5~fQ5n5ubAW2780227802epsmtrp2d;
- Fri,  5 Jul 2024 08:25:11 +0000 (GMT)
-X-AuditID: b6c32a38-c9ffa700000226b6-97-6687ade7a06e
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 6A.40.29940.7EDA7866; Fri,  5 Jul 2024 17:25:11 +0900 (KST)
-Received: from localhost.localdomain (unknown [10.253.98.34]) by
- epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20240705082511epsmtip2df6cc542e7a1643d3f4e762addc5c5e8~fQ5nu0crb2772627726epsmtip2X;
- Fri,  5 Jul 2024 08:25:11 +0000 (GMT)
-From: Sunmin Jeong <s_min.jeong@samsung.com>
-To: jaegeuk@kernel.org, chao@kernel.org
-Date: Fri,  5 Jul 2024 17:25:03 +0900
-Message-Id: <20240705082503.805358-1-s_min.jeong@samsung.com>
+ id 1sPfmY-0001cl-Jv for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 05 Jul 2024 10:03:11 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=iYRdNU5lQtTFxjagQAa45ejCcGta2XpfNxyIwpwMLMvSN2XeD0GFnrnsfN5y97wpeLox9mnT016W43b6lEH7FhXo4SVmBq2BzNZb6Wxbu2OLXHECo4hp+u631uk7U1hoGygqu+NQgSTFPGWb44uYBRR7Z2Bmm8dRmCQdVGZ0pHBNwtTv4wiVM14l8gzdx5/yX5DMSq37fFGlGYaOhgpWz67uedKd232M/li9UCLwMSp2dbI+eSjspdH5E4M1jAs8ZSlBm/BSsHPVOz+oPDGdDmEj7VKDHDCnr7naupwpNr4xYSPN4UjnP7vToFTdSKjXNO+U11YySiLdZoqXNIAi3Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6AeyS1YGXun5k78Brcj11zEowrTKYVPh2u3tv9kMGtw=;
+ b=gIMX2qc58O31sNJSYc10G9yORXVMyJnF/HFizdYiJhRtkvXvhV8R3U2aJxNdOnCsU1N3SfBzn/mrEYG1yNQVekm/jXA5im6g9UtoARPZBxTH/uaCxdHCyAQd244kwdeMH8G9zcgTebFrWn/cI3+Q2LWG1zu8/zxtq8raH9MCyvVJn0yFktjMltVqYSgdiJSkTqIBDLPXwje64vf/tEMhQUh2iuyZpqg8rSLna4Z6mbPAYNpgHrPzLLe+Xw8vrFMPV+l/2JrIjCayGt7KBYzLLscyELJCjZUQSB6SvaexrxcSQoyHt1saJrp6e+dSKMJVgjiWqO4UIOBNS1UhjC1nYw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6AeyS1YGXun5k78Brcj11zEowrTKYVPh2u3tv9kMGtw=;
+ b=iFwx702BOiXNGpmfLhIAMTLKoagWQi7PLwKWs7ewX8F16FC7TUlNKJl6OViaeZw6dGJK0h65xmo8c7wPmZhuEfp9XzNWMQrC/XFs/rMYAGR6UoFqLFKMIMvg2aLqQOVqYQi8cCHuoSyt+9GbLrTna6GGatNBPsfvXpJ9vgdE2f996U4OZ/gMuRmHeTEG07Gtl4V3wwKXQEs55i/28TiRd4geQCWoUbnDGMvOxb+3515G2/gi/jZUHIICvoAKUvRjqpYo0y0HdW65OJ/NLPASTGmRAV8oJO9AEcAyGFOcODJuLqKh11KihAd1qzhosm/Qh/rsNWNcrec/Lf/jRqY65w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from SEZPR06MB5576.apcprd06.prod.outlook.com (2603:1096:101:c9::14)
+ by TYSPR06MB6625.apcprd06.prod.outlook.com (2603:1096:400:47d::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.25; Fri, 5 Jul
+ 2024 09:47:03 +0000
+Received: from SEZPR06MB5576.apcprd06.prod.outlook.com
+ ([fe80::5c0a:2748:6a72:99b6]) by SEZPR06MB5576.apcprd06.prod.outlook.com
+ ([fe80::5c0a:2748:6a72:99b6%6]) with mapi id 15.20.7741.029; Fri, 5 Jul 2024
+ 09:47:02 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Date: Fri,  5 Jul 2024 17:46:41 +0800
+Message-Id: <20240705094641.13451-1-liaoyuanhong@vivo.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240702062952.28859-1-liaoyuanhong@vivo.com>
+References: <20240702062952.28859-1-liaoyuanhong@vivo.com>
+X-ClientProxiedBy: TY2PR02CA0062.apcprd02.prod.outlook.com
+ (2603:1096:404:e2::26) To SEZPR06MB5576.apcprd06.prod.outlook.com
+ (2603:1096:101:c9::14)
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrKKsWRmVeSWpSXmKPExsWy7bCmge7zte1pBn/+yFucnnqWyWJq+15G
- iyfrZzFbXFrkbrGg9TeLxZZ/R1gtFmx8xGgxY/9TdgcOjwWbSj02repk89i94DOTR9+WVYwe
- nzfJBbBGZdtkpCampBYppOYl56dk5qXbKnkHxzvHm5oZGOoaWlqYKynkJeam2iq5+AToumXm
- AF2ipFCWmFMKFApILC5W0rezKcovLUlVyMgvLrFVSi1IySkwK9ArTswtLs1L18tLLbEyNDAw
- MgUqTMjOmLLqFGtBq1bFr09pDYzXlLoYOTkkBEwkLm9oY+ti5OIQEtjBKHFoxTQo5xOjxLp7
- TxghnG+MErM27WGBaTm/4DArRGIvUEvjZVaQBFhL8/EyEJtNQEfi4dTbYA0iAuoSpyYtZQFp
- YBa4yijRvu85WEJYwF7iy6TzzCA2i4CqxNwnO8DivAK2EkeOvGOC2CYvMfPSd3aIuKDEyZlP
- wGqYgeLNW2czgwyVELjELnFp430ghwPIcZE4tUEOoldY4tXxLewQtpTE53d72SDsYomj8zew
- Q/Q2MErc+HoTqsheorm1mQ1kDrOApsT6XfoQu/gk3n3tYYUYzyvR0SYEUa0q0f1oCTOELS2x
- 7NhBdogSD4mXPy0gQRIr8WRvC/sERrlZSB6YheSBWQi7FjAyr2IUSy0ozk1PLTYsMIHHY3J+
- 7iZGcPrTstjBOPftB71DjEwcjIcYJTiYlUR4pd43pwnxpiRWVqUW5ccXleakFh9iNAUG6URm
- KdHkfGACziuJNzSxNDAxMzKxMLY0NlMS5z1zpSxVSCA9sSQ1OzW1ILUIpo+Jg1OqgUlcsK56
- FWdSdRtn08Zp2o0Tee5t8Ld9U2i2I0PrtIi31YWvVs1GOTJunCtzX+dJfGCb9mP60mk/6nor
- LrQ0+CS95j2xMU9YyW3nYb814nobdzkuMVR0lr285IP8xbUC4kscrq/6c+r1sbPqPMsUVi32
- TJwx10x94aY+nTUsib3O3u+Nj+4S/JexeV5aSqn6P80JJ30uZ+lM61V/5HJjrbZcwbmJrz94
- 6B9+tUhP3lLlkFaSClPpenPVv2f3Ofdud1+hoKhicMjjom9nuaROh8Gj1Qpa371lnBW8J6lm
- bys4uPxwSJrFTo0dexbLWE5vm7vsGcce13SV/W1zRZ9VW/uv/cmUOWdF/sQHMwx3pimxFGck
- GmoxFxUnAgA8oXEeCAQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrALMWRmVeSWpSXmKPExsWy7bCSvO7zte1pBv/Pc1ucnnqWyWJq+15G
- iyfrZzFbXFrkbrGg9TeLxZZ/R1gtFmx8xGgxY/9TdgcOjwWbSj02repk89i94DOTR9+WVYwe
- nzfJBbBGcdmkpOZklqUW6dslcGVMWXWKtaBVq+LXp7QGxmtKXYycHBICJhLnFxxm7WLk4hAS
- 2M0ocWXWfPYuRg6ghLTEsT9FEKawxOHDxRAlHxgl5m25zgTSyyagI/Fw6m0WEFtEQFPiSOdM
- dpAiZoHbjBLfV7SDJYQF7CW+TDrPDGKzCKhKzH2yAyzOK2ArceTIOyaII+QlZl76zg4RF5Q4
- OfMJWA0zULx562zmCYx8s5CkZiFJLWBkWsUomVpQnJueW2xYYJiXWq5XnJhbXJqXrpecn7uJ
- ERyoWpo7GLev+qB3iJGJg/EQowQHs5IIr9T75jQh3pTEyqrUovz4otKc1OJDjNIcLErivOIv
- elOEBNITS1KzU1MLUotgskwcnFINTK4WbpHHIz/fc1wnsUrPoWz+CqYSW51255fRnGKLLh11
- veOmxsmR+tfspHJwp9TC5bwLX53ilPYNtp2/cV0979yvhrJi+1/2/0rzZywS19TbV7r2uIe/
- 5Oq4us45WVWOvU9Yur/c67jqxqV8b39L3+oCj+VainWsYS/Pz8xn92zO/KL79Jv79INGc/7e
- 8r1XKvDuRrOrc6zYxx1Z+/ecfnPZrFA7vbssYqLtZ7vVV7YrVWz4dpRHQ1RucaXspNkTgn+x
- PVkXxs2stK7U41XwxMAuh6MpBfXaGQIzUm7v0rftbZ/f5sRztvBOp8RzL+tQibPzDVY8+6Vp
- ZnnAUzP4vvkCVr1zc5gFv1wIKDujxFKckWioxVxUnAgAhOw/HMMCAAA=
-X-CMS-MailID: 20240705082511epcas1p24b7b63d5e714a25213dbe07affa52f69
-X-Msg-Generator: CA
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240705082511epcas1p24b7b63d5e714a25213dbe07affa52f69
-References: <CGME20240705082511epcas1p24b7b63d5e714a25213dbe07affa52f69@epcas1p2.samsung.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5576:EE_|TYSPR06MB6625:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0414de78-7c4a-4f5f-c529-08dc9cd76bc5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|52116014|376014|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?WrhN28s9hAMapXu47s7B66L2qKeHCyhYFOcdX7w4ku5ni3mqQIIkzoEP/20r?=
+ =?us-ascii?Q?N8iowNUpNN3Phgj6yYKlerEiitMF3y2gyQTPLxRSHkdCudf/bqSihe92gL5E?=
+ =?us-ascii?Q?8p2C6s01bh1JzFJNqGC/aSYY9XX79CLhZzCgCUSAyJyZulv3st3jFO7ll50j?=
+ =?us-ascii?Q?KrG+e6dqY2R00+t1lZPGOSYO8IuIq5DsLuoAEzXg0ahy1Fnf8W69rC3bS3bS?=
+ =?us-ascii?Q?WjpGyN004nkG8P/cX9XMmHOGvXoDCkYwsnYd/nCsYlL1bJWeBoOU/Pat6e+V?=
+ =?us-ascii?Q?dQVeRrJ4oZ0XKWFi1SX3gU9m5bVKUOIdckX1GjiUk8fQHRUWvh36wQUaCSuN?=
+ =?us-ascii?Q?ijKrU5sri/VjOArMHQb6BtB9ccpolL5+QjkrgYPdvBRWiVJDNwAXVw84f3wQ?=
+ =?us-ascii?Q?IrI3z2U8ZNqMy8eXmlq+HzqE4+1a+BLhxp+KMWL8lV8Jp0t5fZSfgTxzQiLO?=
+ =?us-ascii?Q?u96Alcfe3DCiDjziPdIQEIDNbAa5GX702CMTNrwCuYfNiM+tkDq3J5RNbZ4/?=
+ =?us-ascii?Q?UkR879c/qSXUX3Y76UnScMOPoQrj76ub821CY7A69fi90cig+Qb89ANY1Lid?=
+ =?us-ascii?Q?KuLKPpyoeJiZbRWuDz++/QAskyF3DgYtnG36WpkHWX3fsg0i5To9OW86w2oo?=
+ =?us-ascii?Q?nYtZAdFct79eM/zDbYl0pOSkbyitzQFlbNDqOESDcPI0zwq+s0EVhEIKYLn4?=
+ =?us-ascii?Q?ea2ijM5P36uj/Qq92hBHY52JWYZOTH0B1DqeKl9rZsdGraz+RXPsd64pnUZn?=
+ =?us-ascii?Q?EZdZAsu9qkz0aDvGjDfU9aAl1m1aa3RDt2x41ZRAC/ZQgL3mSMmSWSQoa2k3?=
+ =?us-ascii?Q?bLEJzJkCiq3WVsVEsnei4lLyu/YzIclwvy3qyrJPwHJeclD05pu9QP36xFVd?=
+ =?us-ascii?Q?q+1IXNYjwbcc6pWGOjWS/uRpijxD1yRRli1KjbfewSGHG1OgLOIopxw3KaH7?=
+ =?us-ascii?Q?JjvCbj5lAvOUqHsIas9R7fXLu1sj2hLxlrqCn8JDUo3epsMs9jRmO4UamV0V?=
+ =?us-ascii?Q?GBa46nJsPypqLjEFL2MagNrOlTiv/LV+2oIFSRgHkFtz4mKOqUT9J4quSPN4?=
+ =?us-ascii?Q?+mFMzf08FRhqaKdlLxk8QURlEscHg68BkpqbXt86CHlYFwgAluU3FVDqfpld?=
+ =?us-ascii?Q?pTeh9Ag4Ear0r2RySYxkLjGeunimO0rGE18gt681UdITAZYMVTExo5ira+f0?=
+ =?us-ascii?Q?qcKbdLXA5KY5HWfsZ9PNzDpZZsMrSRX1IAcn11hCnFYJnjBG0l/Lls8VS16U?=
+ =?us-ascii?Q?u0QxHJ9vHfZAwQ7qeP7yO9Wq/8KvgJvMaHhZZHEM19exxBl0W8vEn0L8HnXg?=
+ =?us-ascii?Q?2OLDqOWFPhrgyuUCh+O7KHfLHuzPffWcY9hK4HJwQv3RGEQ4YayanCRgjhhK?=
+ =?us-ascii?Q?XlqzoGFHuCDKiW/+KgcpDPwrNDzwLTu///AP//8197qmc/PANQ=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SEZPR06MB5576.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?VfEK6juiZ1vTyBL8ZzfeOpaYa63VCU4AzknbA5tOysjXkFzvc+7zUo0vrTef?=
+ =?us-ascii?Q?KH42EnIcmxOLeLIBoJSO8auUpTm77LeeVmYtvqyP752G+8ccsdSQjvcjn8WJ?=
+ =?us-ascii?Q?+1IPHgLeqZHwiVgPMXMHampib85yO1ZRVZ+HcPyRnmT35OLyJl6dm29tF/qj?=
+ =?us-ascii?Q?9is0dp7OpJ9tkp+ossEgBjdY7b+t1XxfcPgGrSk8l947YuDmpvRRSOQPZLNv?=
+ =?us-ascii?Q?atw3+2DfpHeinOfp5LrPxibjk4jyijL/fbwuJu5P2xQaYYGAAQKPqmOLGCN/?=
+ =?us-ascii?Q?NkJMRXyU5YpFSaLpNp5FP7ijhTXEPmCZ45t+p+VAQq4sSGYM9V1XkAJsToyY?=
+ =?us-ascii?Q?hlXmZcNTsr2dUf9nlIgSW2U8CRH75Q84wgvGU6JguTJTyrIrsjsRGfJpTQU7?=
+ =?us-ascii?Q?BpeT0dDdOtmXvyxQb63GJKrGxUozfi7Nk0yACEyWPW1fWLbQvN1UAnIPXdnl?=
+ =?us-ascii?Q?7TBQY0IsU7kEhWss41KGhZXzk0o9zvBZ1y9cxVvhM46S6F+Ro/9Omlh9GXSG?=
+ =?us-ascii?Q?pdU/Ysk5eRGluZ6rsD1+xr5y7LK2P+EVWVIBrxDVSRl0OAGMgiNZfPitXtgd?=
+ =?us-ascii?Q?zcDs1Zs+z5F1HYUInbQcxOs3++mz0C17m3RHuv6J6dhw3Lr8TOuPF8NUf1Sq?=
+ =?us-ascii?Q?a0wrf6nNGQv4bfntXB7dfyh+lRwA9mfYAcVI3lTJV65cxiSBNxmdxxC1AdAI?=
+ =?us-ascii?Q?yDM90Okfv2oIUhTR3AtfWsj4C78V3SvG++nj1N9npsUKkTDz62TTuJxwUsok?=
+ =?us-ascii?Q?SNaC6AAjOyIlfgzgLabmUD2+VOlqBIyOpD0Aa/V/Mb3ROBAEm1mGVapmrWY0?=
+ =?us-ascii?Q?W14x4O44HQsDK6+Hbxgftp7k/v9VaoOfeVbNvDvRQTbLVGu8CWHXfCUdaIQ7?=
+ =?us-ascii?Q?7t9XPp7pLgLSukroGqwWRftuhvwMbhHGCd0sAuTXkTWIeXnLxgzcb9KODQbk?=
+ =?us-ascii?Q?RjgWlw45DYUuakxrFUVMBc6BkuAmoQxH+IP6wD4M70UNVqQfY7A3doGfpZW2?=
+ =?us-ascii?Q?sa3qlzaHGgv/uTlMLbjePf1CDD8A6ymesMtMA9HC4cPz2zKFx9fgMmhUcN0V?=
+ =?us-ascii?Q?bqZp8H512Hd4ca3GmAxljRNAL5iCE/v+XX0TLf0yJDPtzgjW0JDdSjpRyh2Q?=
+ =?us-ascii?Q?GOdfxrxQTNE+3pDhMEzHBmV/D64hmegimvrvjJETtkqnLV3RXrtHre0RxMdU?=
+ =?us-ascii?Q?H07bjIu/kaLYCf3TODDcgzWutHgaJvAjxta6grXSYvSQHj9QvJnfgelFCcxI?=
+ =?us-ascii?Q?hZug1vgwgXi9/UNzrNSDcoo+tvIIYL7B3rFvXU8Z29rB9vKezxtc99bLhgS0?=
+ =?us-ascii?Q?GnHh6hAhoVqtGL/4OO6c9InURZEdg51JZDrSw/RwXhrg59K/Cx3iWFwpW8MN?=
+ =?us-ascii?Q?4qXY1TwaoosLf2mATv7E2Qel+qr5/46uYUidIooNrgeKOilGU8JV/asMgnVC?=
+ =?us-ascii?Q?MIWIFOALSiafa/bVJagX6nmylI/qxpXYdIPQh/DSslV6qItT8QTQFY1Jsx5n?=
+ =?us-ascii?Q?NfCM6G0RXakd74xC4ycF3nNVXiJegSGzMsmRE8CkPzuXfXntOvBZd8fpSBjZ?=
+ =?us-ascii?Q?FqINFhJ7z4Ou4dUOt3jq84zi6iNEZ6jtgY2Aj0bf?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0414de78-7c4a-4f5f-c529-08dc9cd76bc5
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5576.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2024 09:47:02.2486 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0IQag3uSCyaPiEZ6SFMyKdstBFOK0GB9NEQAE3HS3Gfw1p5gPOkaoAAZe5jT7OITCfka1C1PurmHkP1jn1Nzag==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYSPR06MB6625
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In case of the COW file,
- new updates and GC writes are already
- separated to page caches of the atomic file and COW file. As some cases that
- use the meta inode for GC, there are some race issues betwee [...] 
+ Content preview:  Currently, we are using a mix of traditional UFS and zone
+ UFS to support some functionalities that cannot be achieved on zone UFS alone.
+ However, there are some issues with this approach. There exists [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: samsung.com]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
+ for more information. [URIs: vivo.com]
+ 0.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
+ 0.0 HK_RANDOM_FROM         From username looks random
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [203.254.224.33 listed in sa-accredit.habeas.com]
+ [40.107.117.81 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [203.254.224.33 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.254.224.33 listed in wl.mailspike.net]
+ [40.107.117.81 listed in bl.score.senderscore.com]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.117.81 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sPeFs-0002zv-4O
-Subject: [f2fs-dev] [PATCH v2 2/2] f2fs: use meta inode for GC of COW file
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+X-Headers-End: 1sPfmY-0001cl-Jv
+Subject: [f2fs-dev] [PATCH v2] f2fs:Add write priority option based on zone
+ UFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -177,160 +203,188 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: daehojeong@google.com, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Sungjong Seo <sj1557.seo@samsung.com>
+From: Liao Yuanhong via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Liao Yuanhong <liaoyuanhong@vivo.com>
+Cc: Liao Yuanhong <liaoyuanhong@vivo.com>, linux-kernel@vger.kernel.org,
+ bo.wu@vivo.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In case of the COW file, new updates and GC writes are already
-separated to page caches of the atomic file and COW file. As some cases
-that use the meta inode for GC, there are some race issues between a
-foreground thread and GC thread.
+Currently, we are using a mix of traditional UFS and zone UFS to support 
+some functionalities that cannot be achieved on zone UFS alone. However, 
+there are some issues with this approach. There exists a significant 
+performance difference between traditional UFS and zone UFS. Under normal 
+usage, we prioritize writes to zone UFS. However, in critical conditions 
+(such as when the entire UFS is almost full), we cannot determine whether 
+data will be written to traditional UFS or zone UFS. This can lead to 
+significant performance fluctuations, which is not conducive to 
+development and testing. To address this, we have added an option 
+zlu_io_enable under sys with the following three modes:
+1) zlu_io_enable == 0:Normal mode, prioritize writing to zone UFS;
+2) zlu_io_enable == 1:Zone UFS only mode, only allow writing to zone UFS;
+3) zlu_io_enable == 2:Traditional UFS priority mode, prioritize writing to 
+traditional UFS.
 
-To handle them, we need to take care when to invalidate and wait
-writeback of GC pages in COW files as the case of using the meta inode.
-Also, a pointer from the COW inode to the original inode is required to
-check the state of original pages.
-
-For the former, we can solve the problem by using the meta inode for GC
-of COW files. Then let's get a page from the original inode in
-move_data_block when GCing the COW file to avoid race condition.
-
-Fixes: 3db1de0e582c ("f2fs: change the current atomic write way")
-Cc: stable@vger.kernel.org #v5.19+
-Reviewed-by: Sungjong Seo <sj1557.seo@samsung.com>
-Reviewed-by: Yeongjin Gil <youngjin.gil@samsung.com>
-Signed-off-by: Sunmin Jeong <s_min.jeong@samsung.com>
+Signed-off-by: Liao Yuanhong <liaoyuanhong@vivo.com>
+Signed-off-by: Wu Bo <bo.wu@vivo.com>
 ---
 v2:
-- use union for cow inode to point to atomic inode
- fs/f2fs/data.c   |  2 +-
- fs/f2fs/f2fs.h   | 13 +++++++++++--
- fs/f2fs/file.c   |  3 +++
- fs/f2fs/gc.c     | 12 ++++++++++--
- fs/f2fs/inline.c |  2 +-
- fs/f2fs/inode.c  |  3 ++-
- 6 files changed, 28 insertions(+), 7 deletions(-)
+	-Change name to blkzone_alloc_policy,
+	-Update manual of f2fs sysfs entry,
+	-Use macro instead of magic number,
+	-Initialize it w/ default policy in f2fs_scan_devices,
+	-Add validation check,
+	-Merged the ifdef PROFIG-BLK-DEV_ZONED area.
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 14 ++++++++++++++
+ fs/f2fs/f2fs.h                          |  6 ++++++
+ fs/f2fs/segment.c                       | 25 ++++++++++++++++++++++++-
+ fs/f2fs/super.c                         |  1 +
+ fs/f2fs/sysfs.c                         | 11 +++++++++++
+ 5 files changed, 56 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 9a213d03005d..f6b1782f965a 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2606,7 +2606,7 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
- 		return true;
- 	if (IS_NOQUOTA(inode))
- 		return true;
--	if (f2fs_is_atomic_file(inode))
-+	if (f2fs_used_in_atomic_write(inode))
- 		return true;
- 	/* rewrite low ratio compress data w/ OPU mode to avoid fragmentation */
- 	if (f2fs_compressed_file(inode) &&
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index cad6c3dc1f9c..3500920ab7ce 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -763,3 +763,17 @@ Date:		November 2023
+ Contact:	"Chao Yu" <chao@kernel.org>
+ Description:	It controls to enable/disable IO aware feature for background discard.
+ 		By default, the value is 1 which indicates IO aware is on.
++
++What:		/sys/fs/f2fs/<disk>/blkzone_alloc_policy
++Date:		July 2024
++Contact:	"Yuanhong Liao" <liaoyuanhong@vivo.com>
++Description:	The zone UFS we are currently using consists of two parts:
++		conventional zones and sequential zones. It can be used to control which part
++		to prioritize for writes, with a default value of 0.
++
++		========================  =========================================
++		value					  description
++		blkzone_alloc_policy = 0  Prioritize writing to sequential zones
++		blkzone_alloc_policy = 1  Only allow writing to sequential zones
++		blkzone_alloc_policy = 2  Prioritize writing to conventional zones
++		========================  =========================================
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 796ae11c0fa3..4a8621e4a33a 100644
+index f7ee6c5e371e..29b0e8897e81 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -843,7 +843,11 @@ struct f2fs_inode_info {
- 	struct task_struct *atomic_write_task;	/* store atomic write task */
- 	struct extent_tree *extent_tree[NR_EXTENT_CACHES];
- 					/* cached extent_tree entry */
--	struct inode *cow_inode;	/* copy-on-write inode for atomic write */
-+	union {
-+		struct inode *cow_inode;	/* copy-on-write inode for atomic write */
-+		struct inode *atomic_inode;
-+					/* point to atomic_inode, available only for cow_inode */
-+	};
+@@ -134,6 +134,10 @@ typedef u32 nid_t;
  
- 	/* avoid racing between foreground op and gc */
- 	struct f2fs_rwsem i_gc_rwsem[2];
-@@ -4263,9 +4267,14 @@ static inline bool f2fs_post_read_required(struct inode *inode)
- 		f2fs_compressed_file(inode);
- }
+ #define COMPRESS_EXT_NUM		16
  
-+static inline bool f2fs_used_in_atomic_write(struct inode *inode)
-+{
-+	return f2fs_is_atomic_file(inode) || f2fs_is_cow_file(inode);
-+}
++#define PRIOR_SEQUENTIAL		0
++#define ONLY_SEQUENTIAL			1
++#define PRIOR_CONVENTIONAL		2
 +
- static inline bool f2fs_meta_inode_gc_required(struct inode *inode)
- {
--	return f2fs_post_read_required(inode) || f2fs_is_atomic_file(inode);
-+	return f2fs_post_read_required(inode) || f2fs_used_in_atomic_write(inode);
- }
- 
  /*
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index e4a7cff00796..547e7ec32b1f 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2183,6 +2183,9 @@ static int f2fs_ioc_start_atomic_write(struct file *filp, bool truncate)
+  * An implementation of an rwsem that is explicitly unfair to readers. This
+  * prevents priority inversion when a low-priority reader acquires the read lock
+@@ -1555,6 +1559,8 @@ struct f2fs_sb_info {
+ #ifdef CONFIG_BLK_DEV_ZONED
+ 	unsigned int blocks_per_blkz;		/* F2FS blocks per zone */
+ 	unsigned int max_open_zones;		/* max open zone resources of the zoned device */
++	/* For adjust the priority writing position of data in zone UFS */
++	unsigned int blkzone_alloc_policy;		/* data write mode */
+ #endif
  
- 		set_inode_flag(fi->cow_inode, FI_COW_FILE);
- 		clear_inode_flag(fi->cow_inode, FI_INLINE_DATA);
-+
-+		/* Set the COW inode's atomic_inode to the atomic inode */
-+		F2FS_I(fi->cow_inode)->atomic_inode = inode;
- 	} else {
- 		/* Reuse the already created COW inode */
- 		ret = f2fs_do_truncate_blocks(fi->cow_inode, 0, true);
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index cb3006551ab5..61913fcefd9e 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1186,7 +1186,11 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
- 	};
- 	int err;
- 
--	page = f2fs_grab_cache_page(mapping, index, true);
-+	if (f2fs_is_cow_file(inode))
-+		page = f2fs_grab_cache_page(F2FS_I(inode)->atomic_inode->i_mapping,
-+						index, true);
-+	else
-+		page = f2fs_grab_cache_page(mapping, index, true);
- 	if (!page)
- 		return -ENOMEM;
- 
-@@ -1282,7 +1286,11 @@ static int move_data_block(struct inode *inode, block_t bidx,
- 				CURSEG_ALL_DATA_ATGC : CURSEG_COLD_DATA;
- 
- 	/* do not read out */
--	page = f2fs_grab_cache_page(inode->i_mapping, bidx, false);
-+	if (f2fs_is_cow_file(inode))
-+		page = f2fs_grab_cache_page(F2FS_I(inode)->atomic_inode->i_mapping,
-+						bidx, false);
-+	else
-+		page = f2fs_grab_cache_page(inode->i_mapping, bidx, false);
- 	if (!page)
- 		return -ENOMEM;
- 
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index 1fba5728be70..cca7d448e55c 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -16,7 +16,7 @@
- 
- static bool support_inline_data(struct inode *inode)
- {
--	if (f2fs_is_atomic_file(inode))
-+	if (f2fs_used_in_atomic_write(inode))
- 		return false;
- 	if (!S_ISREG(inode->i_mode) && !S_ISLNK(inode->i_mode))
- 		return false;
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 7a3e2458b2d9..18dea43e694b 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -804,8 +804,9 @@ void f2fs_evict_inode(struct inode *inode)
- 
- 	f2fs_abort_atomic_write(inode, true);
- 
--	if (fi->cow_inode) {
-+	if (fi->cow_inode && f2fs_is_cow_file(fi->cow_inode)) {
- 		clear_inode_flag(fi->cow_inode, FI_COW_FILE);
-+		F2FS_I(fi->cow_inode)->atomic_inode = NULL;
- 		iput(fi->cow_inode);
- 		fi->cow_inode = NULL;
+ 	/* for node-related operations */
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 4db1add43e36..7b8dc255836b 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -2686,17 +2686,40 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
+ 			goto got_it;
  	}
+ 
++#ifdef CONFIG_BLK_DEV_ZONED
+ 	/*
+ 	 * If we format f2fs on zoned storage, let's try to get pinned sections
+ 	 * from beginning of the storage, which should be a conventional one.
+ 	 */
+ 	if (f2fs_sb_has_blkzoned(sbi)) {
+-		segno = pinning ? 0 : max(first_zoned_segno(sbi), *newseg);
++		/* Prioritize writing to conventional zones */
++		if (sbi->blkzone_alloc_policy == PRIOR_CONVENTIONAL)
++			segno = 0;
++		else
++			segno = pinning ? 0 : max(first_zoned_segno(sbi), *newseg);
+ 		hint = GET_SEC_FROM_SEG(sbi, segno);
+ 	}
++#endif
+ 
+ find_other_zone:
+ 	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
++
++#ifdef CONFIG_BLK_DEV_ZONED
++	if (secno >= MAIN_SECS(sbi) && f2fs_sb_has_blkzoned(sbi)) {
++		/* Write only to sequential zones */
++		if (sbi->blkzone_alloc_policy == ONLY_SEQUENTIAL) {
++			hint = GET_SEC_FROM_SEG(sbi, first_zoned_segno(sbi));
++			secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
++		} else
++			secno = find_first_zero_bit(free_i->free_secmap,
++								MAIN_SECS(sbi));
++		if (secno >= MAIN_SECS(sbi)) {
++			ret = -ENOSPC;
++			goto out_unlock;
++		}
++	}
++#endif
++
+ 	if (secno >= MAIN_SECS(sbi)) {
+ 		secno = find_first_zero_bit(free_i->free_secmap,
+ 							MAIN_SECS(sbi));
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 4a1bc8f40f9a..d5b0b7b141ce 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4229,6 +4229,7 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+ 	sbi->aligned_blksize = true;
+ #ifdef CONFIG_BLK_DEV_ZONED
+ 	sbi->max_open_zones = UINT_MAX;
++	sbi->blkzone_alloc_policy = PRIOR_SEQUENTIAL;
+ #endif
+ 
+ 	for (i = 0; i < max_devices; i++) {
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index fee7ee45ceaa..359a12f84060 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -627,6 +627,15 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 	}
+ #endif
+ 
++#ifdef CONFIG_BLK_DEV_ZONED
++	if (!strcmp(a->attr.name, "blkzone_alloc_policy")) {
++		if (t < PRIOR_SEQUENTIAL || t > PRIOR_CONVENTIONAL)
++			return -EINVAL;
++		sbi->blkzone_alloc_policy = t;
++		return count;
++	}
++#endif
++
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ 	if (!strcmp(a->attr.name, "compr_written_block") ||
+ 		!strcmp(a->attr.name, "compr_saved_block")) {
+@@ -1033,6 +1042,7 @@ F2FS_SBI_GENERAL_RW_ATTR(warm_data_age_threshold);
+ F2FS_SBI_GENERAL_RW_ATTR(last_age_weight);
+ #ifdef CONFIG_BLK_DEV_ZONED
+ F2FS_SBI_GENERAL_RO_ATTR(unusable_blocks_per_sec);
++F2FS_SBI_GENERAL_RW_ATTR(blkzone_alloc_policy);
+ #endif
+ 
+ /* STAT_INFO ATTR */
+@@ -1187,6 +1197,7 @@ static struct attribute *f2fs_attrs[] = {
+ #endif
+ #ifdef CONFIG_BLK_DEV_ZONED
+ 	ATTR_LIST(unusable_blocks_per_sec),
++	ATTR_LIST(blkzone_alloc_policy),
+ #endif
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ 	ATTR_LIST(compr_written_block),
 -- 
 2.25.1
 
