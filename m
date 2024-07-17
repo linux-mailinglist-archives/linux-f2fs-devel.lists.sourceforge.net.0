@@ -2,68 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C326193355E
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jul 2024 04:15:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2377B933979
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jul 2024 10:57:20 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sTuCQ-0003nN-QD;
-	Wed, 17 Jul 2024 02:15:22 +0000
+	id 1sU0TC-0001Xc-Bj;
+	Wed, 17 Jul 2024 08:57:07 +0000
 Received: from [172.30.29.67] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1sTuCO-0003nG-Ng
+ (envelope-from <chao@kernel.org>) id 1sU0TA-0001XW-Qk
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Jul 2024 02:15:20 +0000
+ Wed, 17 Jul 2024 08:57:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=d/dAWT9XM5iwaVChgeTKHUgkbbITDVgzE++3uZIdIk0=; b=JrkZR88gWu9fs5/Dx/WNRkfX/r
- 09twWNF5ukihSs+IWDrXPqNXR6rU1wYHyUn9cdpx4TEN9cMx8mPt714YVh+Mj2RdGtSyJhrinajlQ
- Fa914FvbHx2mTtRDlQFduCAroz4AQeW81cML4JQlOvvUZt6Fjh8C1k9wBHe/wPGHmQDg=;
+ bh=RDcn0+SwLLC66Ofyto5JVxsq332qU1FGYcqOxXuF/3w=; b=Fwy3/Int6LQJ7o+DhPXO6qiG4G
+ 2oDJQBmMhzV5lqZy51qXKqOL0FAgYxFf13PmezDliQTl2qjMrMRb0E/Ryd9bONIpltoJ9kid22lBS
+ 9OnpXG9O3C6NZtFXZK9dpa9x4nLMp58wPgRQ4LiofW3isKcHbY5a6I8/aUdsr0QdjrKY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=d/dAWT9XM5iwaVChgeTKHUgkbbITDVgzE++3uZIdIk0=; b=e0KEXuYPBl+u6nT8+45bKOVXHL
- Q98ySQteoi3LGeoSFppFQ24bJxyQLzfvo+3mvHsjuYWwYNlyFlgjaDgHYgXa8qJEpJD8LC3QvUGL2
- 8KpiGz9YrdX09PDyKEFz4o/wiv7E/LjUb5vJEZma5DfeCkAGJ+d8p0lc+VsmJelA68io=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=RDcn0+SwLLC66Ofyto5JVxsq332qU1FGYcqOxXuF/3w=; b=l
+ 8Am62mWM1Pc7lu3v/nTo6HxDoGFt3wBO2z80K/13e/sbLec4SBRe2WiUO+FFzza4dCgl9GjvN5WTs
+ ovzUnY7tMIspjJiTien0mczZZ75nNpi4OXIlcs9aq6jMa+0oQyoZJ6jZqf3YYf40ms+C+0MzIRFgF
+ Cve70UidSsy+6zrE=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sTuCO-0007DM-4b for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Jul 2024 02:15:20 +0000
+ id 1sU0TB-0007PT-IA for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 17 Jul 2024 08:57:05 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 063B26144F;
- Wed, 17 Jul 2024 02:15:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E35CC4AF0B;
- Wed, 17 Jul 2024 02:15:06 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 1FB7FCE147B
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 17 Jul 2024 08:56:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 778A1C32782;
+ Wed, 17 Jul 2024 08:56:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1721182508;
- bh=JDMdTBK533cE5W5mFyM7mGuboxDe9l/eKUVpOdZrZ7A=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=cAPZoRkz5bOLp1XOTUkssEeKzvJ67dbBD77aPtCOWcWKcLR+BWat2BMPjlLZ7bsRd
- etgMGetD7jtxB6RZgCSNi/1xmeKvwOj4JL9OD8Qanw8FwJ1XNQT3kJm6MKD/z4Ujxs
- GoMliS4L+djKjphL5HZ8k+vQjF1mGEhTbYgmOCGnVCFIGBvNXGVa5E1tX++eSqx/HJ
- wBpQb0s6L1GZhus285MKVRWcnxcZwyZVaOiJPShvOJXygyLL9jxQBjfKhZZZZtJ6cM
- gSIzG88hyN045x7uAIaneAYeB9XgDZzLGgAZWitnEaahhcD9P109Fu4Jgf4B4IWUUo
- fibZREA71/U2w==
-Message-ID: <9809963e-1cb5-4884-92b7-6855f2556f46@kernel.org>
-Date: Wed, 17 Jul 2024 10:15:04 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Zorro Lang <zlang@redhat.com>
-References: <20240625140233.3907012-1-chao@kernel.org>
- <20240716110342.2jhwp3wn65pvhoyd@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-Content-Language: en-US
+ s=k20201202; t=1721206612;
+ bh=W3AX7o2Z0KOMf9lp2VcCg52cU7BwCpHSPdlSEAF8AsA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=eepxZSYgNtuSPgyKI4VQLPFnUi8AeekTpSxBwk5kWoo8RhXE8x7dAqjCmmLhMarLk
+ z065/r1oQVnhShPW7l726Qe2p8qrIwzwUFhnAerUMNsVPiD5ktHeOBcel7MlX3UvJe
+ j8hSIs8L8ExjSpTORaiYFx7VUoKV3i5makjPzxotNlEElUW7yOqKVMv+yLchak7lKJ
+ ywa4QA5eyug+2tLXXkfDi5H2yFLnrwJqPBjX4GRRSbOQT+XmXBJS5JlcPTywZK9eTZ
+ wKephhSoC5PsrQcXjNy12UJfL7t7TqAsIWlIjC1+uFCSE5V/DcXoEtMplL+WgsiGgo
+ DFoczieq9Jpxw==
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20240716110342.2jhwp3wn65pvhoyd@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+To: jaegeuk@kernel.org
+Date: Wed, 17 Jul 2024 16:56:42 +0800
+Message-Id: <20240717085642.2154123-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -71,39 +68,40 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/7/16 19:03, Zorro Lang wrote: > On Tue, Jun 25, 2024
- at 10:02:33PM +0800, Chao Yu wrote: >> In this patch, we simulate race case
- in between sqlite atomic write >> and direct IO w/ below steps: [...] 
+ Content preview:  Quoted from manual of chattr: " CHATTR(1) ... ATTRIBUTES A
+ file with the 'd' attribute set is not a candidate for backup when the dump(8)
+ program is run. " Once we set F2FS_NODUMP_FL flag to inode, do not allow
+ dumping info from it. 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ [145.40.73.55 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ [145.40.73.55 listed in bl.score.senderscore.com]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [145.40.73.55 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sTuCO-0007DM-4b
-Subject: Re: [f2fs-dev] [PATCH] f2fs: test for race condition in between
- atomic_write and dio
+X-Headers-End: 1sU0TB-0007PT-IA
+Subject: [f2fs-dev] [PATCH] f2fs-tools: fix to do not dump inode if it has
+ F2FS_NODUMP_FL flag
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,126 +113,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daeho Jeong <daehojeong@google.com>,
- fstests@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/7/16 19:03, Zorro Lang wrote:
-> On Tue, Jun 25, 2024 at 10:02:33PM +0800, Chao Yu wrote:
->> In this patch, we simulate race case in between sqlite atomic write
->> and direct IO w/ below steps:
->> 1. create a regular file, and initialize it w/ 0xff data
->> 2. start transaction (via F2FS_IOC_START_ATOMIC_WRITE) on it
->> 3. write transaction data
->> 4. trigger direct read/write IO on it to check whether it fails or not
->> 5. commit and end the transaction (via F2FS_IOC_COMMIT_ATOMIC_WRITE)
->> This is a regression test to check handling of race condition in
->> between atomic_write and direct IO.
->>
->> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
->> Cc: Daeho Jeong <daehojeong@google.com>
->> Signed-off-by: Chao Yu <chao@kernel.org>
->> ---
->>   tests/f2fs/004     | 45 +++++++++++++++++++++++++++++++++++++++++++++
->>   tests/f2fs/004.out |  3 +++
->>   2 files changed, 48 insertions(+)
->>   create mode 100755 tests/f2fs/004
->>   create mode 100644 tests/f2fs/004.out
->>
->> diff --git a/tests/f2fs/004 b/tests/f2fs/004
->> new file mode 100755
->> index 00000000..26862cb5
->> --- /dev/null
->> +++ b/tests/f2fs/004
->> @@ -0,0 +1,45 @@
->> +#! /bin/bash
->> +# SPDX-License-Identifier: GPL-2.0
->> +# Copyright (c) 2024 Oppo.  All Rights Reserved.
->> +#
->> +# FS QA Test No. f2fs/004
->> +#
->> +# Test that we will simulate race case in between sqlite atomic write
->> +# and direct IO w/ below steps:
->> +# 1. create a regular file, and initialize it w/ 0xff data
->> +# 2. start transaction (via F2FS_IOC_START_ATOMIC_WRITE) on it
->> +# 3. write transaction data
->> +# 4. trigger direct read/write IO to check whether it fails or not
->> +# 5. commit and end the transaction (via F2FS_IOC_COMMIT_ATOMIC_WRITE)
->> +# This is a regression test to check handling of race condition in
->> +# between atomic_write and direct IO.
-> 
-> Same as last patch, please add _fixed_by_kernel_commit.
-> 
->> +#
->> +. ./common/preamble
->> +_begin_fstest auto quick
->> +
->> +. ./common/filter
->> +
->> +_supported_fs f2fs
->     ^^^^^
-> It's not needed
-> 
->> +_require_scratch
->> +_require_xfs_io_command "pwrite"
->     ^^^^
-> It can be removed too I think.
-> 
->> +
->> +_scratch_mkfs >> $seqres.full
->> +_scratch_mount >> $seqres.full
->> +
->> +dbfile=$SCRATCH_MNT/dbfile
->> +
->> +# start atomic_write on dbfile & write data to dbfile
->> +touch $dbfile
->> +$F2FS_IO_PROG write 1 0 32 zero atomic_commit $dbfile 3000 >> $seqres.full &
-> 
-> There's a backgroup process too. Better to make sure it's done "kill && wait"
-> before the end of the test.
-> 
->> +
->> +# simulate concurrent direct read/write IO
->> +$XFS_IO_PROG -d -c "pread 0 128k" $dbfile
->> +$XFS_IO_PROG -d -c "pwrite 0 128k" $dbfile
-> 
-> Do you need _require_odirect (not sure about that:).
-> 
->> +
->> +# wait for atomic_write commit completion
->> +sleep 5
->> +
->> +_scratch_unmount
->     ^^^^
-> It's not necessary.
+Quoted from manual of chattr:
+"
+CHATTR(1)
+...
 
-Zorro, thanks for the comments, will update.
+ATTRIBUTES
+A file with the 'd' attribute set is not a candidate for backup when
+the dump(8) program is run.
+"
 
-Thanks,
+Once we set F2FS_NODUMP_FL flag to inode, do not allow dumping info
+from it.
 
-> 
-> Thanks,
-> Zorro
-> 
->> +
->> +status=0
->> +exit
->> diff --git a/tests/f2fs/004.out b/tests/f2fs/004.out
->> new file mode 100644
->> index 00000000..3af79541
->> --- /dev/null
->> +++ b/tests/f2fs/004.out
->> @@ -0,0 +1,3 @@
->> +QA output created by 004
->> +pread: Operation not supported
->> +pwrite: Operation not supported
->> -- 
->> 2.40.1
->>
->>
-> 
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fsck/dump.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/fsck/dump.c b/fsck/dump.c
+index 8d5613e..1fb9a1d 100644
+--- a/fsck/dump.c
++++ b/fsck/dump.c
+@@ -605,6 +605,10 @@ static int dump_filesystem(struct f2fs_sb_info *sbi, struct node_info *ni,
+ 		MSG(force, "Wrong name info\n\n");
+ 		return -1;
+ 	}
++	if (le32_to_cpu(inode->i_flags) & F2FS_NODUMP_FL) {
++		MSG(force, "File has nodump flag\n\n");
++		return -1;
++	}
+ 	base_path = base_path ?: "./lost_found";
+ 	if (force)
+ 		goto dump;
+-- 
+2.40.1
+
 
 
 _______________________________________________
