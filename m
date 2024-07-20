@@ -2,94 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75E70934B08
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Jul 2024 11:37:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AC1E937FBF
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 20 Jul 2024 09:43:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sUNZQ-00050a-VU;
-	Thu, 18 Jul 2024 09:37:05 +0000
+	id 1sV4kh-00083E-8k;
+	Sat, 20 Jul 2024 07:43:34 +0000
 Received: from [172.30.29.67] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1sUNZO-00050H-MN
+ (envelope-from <chao@kernel.org>) id 1sV4kf-000835-6c
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 18 Jul 2024 09:37:03 +0000
+ Sat, 20 Jul 2024 07:43:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uNfHogV4hPXl0HPtvGJm/JMfXIaCooS8YfZmcvsX0+s=; b=B24A8Adc8EQ2zNiPaKRXFdAxGQ
- kj+ecazqYjyHbzRlahesLH9s3POOYevTeH+JVc6MDZrUfwyMP9emeg79rXLv50D1Q7Gae55eTR3eG
- ypG4HHj1hwjugslX3Tr3qlMawIXHqw0zMFthIXk2jZee+z+W4S40ph6bI6vAHV4muBOw=;
+ bh=0TXDpwqr7waFP6q6XjPvlKSLDK5e8HXeltuX6pqcWKg=; b=b3VW9bOLnL8WmTP0UmhoVfaDZP
+ GzS607gFfdpWuoG79n7rvX3U8oOU9os/dhQ4rsyS8CygJduJnov/Irm21hHJpkHmeFsQPh4Fg1EZK
+ 5CX/QumyY1KrzLtt1SXtkJ1BTw8aE86rnKygUHmmj/a//ZfM9TLvu5OJVR4LUxVtUuZU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=uNfHogV4hPXl0HPtvGJm/JMfXIaCooS8YfZmcvsX0+s=; b=m
- pGKG5sVG/hlz+x/pcaWAc3cqe4j01Xe0GBKPmSLlE6l+tMA6WZgo4nBXAVHr5iSeNHm9WAlWdYT3B
- SeJsb1H71PruweiOb2HRgYh6adg6kOWW5xOp+Vic0uyt4tvMp2XgGBw9dHRCYbjtwHJkmpF1IYqjE
- 9P5A2EeRZe8Y1A5k=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
+ List-Owner:List-Archive; bh=0TXDpwqr7waFP6q6XjPvlKSLDK5e8HXeltuX6pqcWKg=; b=P
+ OZdiMooBhd0qtVPa/X53Y470AK7zOvXfImUvZuN6e0Thda437I9pV2kWpq9eD2NCGCEdPPfw0+fWJ
+ A51tJRdIGy8Y5B56+sGfZ6WgU9TFyGVMYpMxG9BwsYyuUiPOqyht6nGgLCXsvEUJxJpNIR9IKLyrd
+ /l7ZS8/bD6TTIF+Q=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sUNZN-0005pQ-93 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 18 Jul 2024 09:37:02 +0000
-Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 46I9aRQF021665;
- Thu, 18 Jul 2024 17:36:27 +0800 (+08)
- (envelope-from Zhiguo.Niu@unisoc.com)
-Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4WPnc51fvGz2KVL6p;
- Thu, 18 Jul 2024 17:31:01 +0800 (CST)
-Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Thu, 18 Jul 2024 17:36:24 +0800
-From: Zhiguo Niu <zhiguo.niu@unisoc.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Thu, 18 Jul 2024 17:36:06 +0800
-Message-ID: <1721295366-21008-1-git-send-email-zhiguo.niu@unisoc.com>
-X-Mailer: git-send-email 1.9.1
+ id 1sV4kc-0007jU-Rq for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 20 Jul 2024 07:43:32 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id CB3DCCE1B53;
+ Sat, 20 Jul 2024 07:43:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8DFAAC2BD10;
+ Sat, 20 Jul 2024 07:43:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1721461403;
+ bh=SXN+gBJcErBmdJHeulGYWX8/O+1JBPPNS2SRTZEpCgI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=cPLgDzP1xDCVd2Wy/UdRsW7Xlq3BYU/Y/CALW15l82YVagp2mEqc/c6O/WIWwEmNO
+ 99kQvhnIii771O/efwiWgrk9riv788Xx34eV1HFQkUKzkYezn7DbBg/6eg1DtQE+8q
+ 28g/M3m9bPT7VhxDmqwumezttGi1BCU0xWCMOHwJw8wGpS7EK7u5cZ3AsaabwdOMbS
+ jrelTeBtv6X20V4tjTiEbnFITpn+G2iTrIi9YQB0xr/bt8n9wLY+qEWgXwpwHFUhWO
+ 6+5MU5wHmBGGtonVqRbbNQEtbWlSUJmuLEsv8MYmmLnqdVDzahCj0pvNsSMAQBF8Yp
+ K7Gf7ItFaRy3Q==
+From: Chao Yu <chao@kernel.org>
+To: Zorro Lang <zlang@redhat.com>
+Date: Sat, 20 Jul 2024 15:43:16 +0800
+Message-Id: <20240720074316.3302470-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-X-Originating-IP: [10.0.73.87]
-X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 46I9aRQF021665
-X-Spam-Score: -5.0 (-----)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This is a supplement to commit 6d1451bf7f84 ("f2fs: fix to
- use per-inode maxbytes") for some missed cases, also cleanup redundant code
- in f2fs_llseek. Cc: Chengguang Xu <cgxu519@mykernel.net> Signed-off-by: Zhiguo
- Niu <zhiguo.niu@unisoc.com> --- fs/f2fs/data.c | 2 +- fs/f2fs/file.c | 7
- ++----- fs/f2fs/verity.c | 5 +++-- 3 files changed, 6 insertions [...] 
- Content analysis details:   (-5.0 points, 6.0 required)
+ Content preview: Test that we will simulate sqlite atomic write logic w/ below
+ steps: 1. create a regular file, and initialize it w/ 0xff data 2. start
+ transaction (via F2FS_IOC_START_ATOMIC_WRITE) on it 3. write tran [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [222.66.158.135 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [222.66.158.135 listed in sa-trusted.bondedsender.org]
+ high trust [145.40.73.55 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [222.66.158.135 listed in bl.score.senderscore.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1sUNZN-0005pQ-93
-Subject: [f2fs-dev] [PATCH] f2fs: fix to use per-inode maxbytes and cleanup
+ [145.40.73.55 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [145.40.73.55 listed in sa-accredit.habeas.com]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sV4kc-0007jU-Rq
+Subject: [f2fs-dev] [PATCH v2] f2fs: test for race condition in between
+ atomic_write and gc
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,87 +109,126 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, zhiguo.niu@unisoc.com,
- Hao_hao.Wang@unisoc.com
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daeho Jeong <daehojeong@google.com>,
+ fstests@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This is a supplement to commit 6d1451bf7f84 ("f2fs: fix to use per-inode maxbytes")
-for some missed cases, also cleanup redundant code in f2fs_llseek.
+Test that we will simulate sqlite atomic write logic w/ below steps:
+1. create a regular file, and initialize it w/ 0xff data
+2. start transaction (via F2FS_IOC_START_ATOMIC_WRITE) on it
+3. write transaction data
+4. trigger foreground GC to migrate data block of the file
+5. commit and end the transaction
+6. check consistency of transaction
+This is a regression test to check handling of race condition in
+between atomic_write and GC.
 
-Cc: Chengguang Xu <cgxu519@mykernel.net>
-Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Daeho Jeong <daehojeong@google.com>
+Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/data.c   | 2 +-
- fs/f2fs/file.c   | 7 ++-----
- fs/f2fs/verity.c | 5 +++--
- 3 files changed, 6 insertions(+), 8 deletions(-)
+v2:
+- add kill&wait in _clean() to avoid umount failure
+- some cleanups
+- use exported helpler
+ tests/f2fs/003     | 65 ++++++++++++++++++++++++++++++++++++++++++++++
+ tests/f2fs/003.out | 11 ++++++++
+ 2 files changed, 76 insertions(+)
+ create mode 100755 tests/f2fs/003
+ create mode 100644 tests/f2fs/003.out
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 6457e5b..1d41d99 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2064,7 +2064,7 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
- static inline loff_t f2fs_readpage_limit(struct inode *inode)
- {
- 	if (IS_ENABLED(CONFIG_FS_VERITY) && IS_VERITY(inode))
--		return inode->i_sb->s_maxbytes;
-+		return max_file_blocks(inode) << F2FS_BLKSIZE_BITS;
- 
- 	return i_size_read(inode);
- }
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index effbaa6..e6411d5 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -431,7 +431,7 @@ static bool __found_offset(struct address_space *mapping,
- static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
- {
- 	struct inode *inode = file->f_mapping->host;
--	loff_t maxbytes = inode->i_sb->s_maxbytes;
-+	loff_t maxbytes = max_file_blocks(inode) << F2FS_BLKSIZE_BITS;
- 	struct dnode_of_data dn;
- 	pgoff_t pgofs, end_offset;
- 	loff_t data_ofs = offset;
-@@ -513,10 +513,7 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
- static loff_t f2fs_llseek(struct file *file, loff_t offset, int whence)
- {
- 	struct inode *inode = file->f_mapping->host;
--	loff_t maxbytes = inode->i_sb->s_maxbytes;
--
--	if (f2fs_compressed_file(inode))
--		maxbytes = max_file_blocks(inode) << F2FS_BLKSIZE_BITS;
-+	loff_t maxbytes = max_file_blocks(inode) << F2FS_BLKSIZE_BITS;
- 
- 	switch (whence) {
- 	case SEEK_SET:
-diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
-index f7bb0c5..7fc787c 100644
---- a/fs/f2fs/verity.c
-+++ b/fs/f2fs/verity.c
-@@ -74,7 +74,7 @@ static int pagecache_write(struct inode *inode, const void *buf, size_t count,
- 	struct address_space *mapping = inode->i_mapping;
- 	const struct address_space_operations *aops = mapping->a_ops;
- 
--	if (pos + count > inode->i_sb->s_maxbytes)
-+	if (pos + count > (max_file_blocks(inode) << F2FS_BLKSIZE_BITS))
- 		return -EFBIG;
- 
- 	while (count) {
-@@ -237,7 +237,8 @@ static int f2fs_get_verity_descriptor(struct inode *inode, void *buf,
- 	pos = le64_to_cpu(dloc.pos);
- 
- 	/* Get the descriptor */
--	if (pos + size < pos || pos + size > inode->i_sb->s_maxbytes ||
-+	if (pos + size < pos ||
-+	    pos + size > (max_file_blocks(inode) << F2FS_BLKSIZE_BITS) ||
- 	    pos < f2fs_verity_metadata_pos(inode) || size > INT_MAX) {
- 		f2fs_warn(F2FS_I_SB(inode), "invalid verity xattr");
- 		f2fs_handle_error(F2FS_I_SB(inode),
+diff --git a/tests/f2fs/003 b/tests/f2fs/003
+new file mode 100755
+index 00000000..c30e874a
+--- /dev/null
++++ b/tests/f2fs/003
+@@ -0,0 +1,65 @@
++#! /bin/bash
++# SPDX-License-Identifier: GPL-2.0
++# Copyright (c) 2024 Oppo.  All Rights Reserved.
++#
++# FS QA Test No. f2fs/003
++#
++# Test that we will simulate sqlite atomic write logic w/ below steps:
++# 1. create a regular file, and initialize it w/ 0xff data
++# 2. start transaction (via F2FS_IOC_START_ATOMIC_WRITE) on it
++# 3. write transaction data
++# 4. trigger foreground GC to migrate data block of the file
++# 5. commit and end the transaction (via F2FS_IOC_COMMIT_ATOMIC_WRITE)
++# 6. check consistency of transaction w/ in-memory and on-disk data
++# This is a regression test to check handling of race condition in
++# between atomic_write and GC.
++#
++. ./common/preamble
++_begin_fstest auto quick
++
++. ./common/filter
++
++_cleanup()
++{
++	kill -9 $atomic_write_pid > /dev/null 2>&1
++	wait > /dev/null 2>&1
++}
++
++_require_scratch
++_require_xfs_io_command "fpunch"
++
++_scratch_mkfs >> $seqres.full
++_scratch_mount >> $seqres.full
++
++dbfile=$SCRATCH_MNT/dbfile
++foo=$SCRATCH_MNT/foo
++bar=$SCRATCH_MNT/bar
++
++$XFS_IO_PROG -c "pwrite 0 512k -S 0xff" -c "fsync" -f $dbfile >> $seqres.full
++$XFS_IO_PROG -c "pwrite 0 2m" -c "fsync" -f $foo >> $seqres.full
++sync
++
++# start atomic_write on dbfile & write data to dbfile
++$F2FS_IO_PROG write 1 0 32 zero atomic_commit $dbfile 3000 >> $seqres.full &
++atomic_write_pid=$!
++
++$XFS_IO_PROG -c "fpunch 0 2m" $foo >> $seqres.full
++$XFS_IO_PROG -c "pwrite 0 2m" -c "fsync" -f $bar >> $seqres.full
++
++# persist all dirty data
++sync
++echo 3 > /proc/sys/vm/drop_caches
++
++# trigger foreground GC to migrate data block of atomic_file
++$F2FS_IO_PROG gc 1 $SCRATCH_MNT > /dev/null 2>&1
++
++# wait for atomic_write commit completion
++sleep 5
++# print in-memory data
++_hexdump $dbfile
++echo 3 > /proc/sys/vm/drop_caches
++# print on-disk data
++_hexdump $dbfile
++
++status=0
++exit
+diff --git a/tests/f2fs/003.out b/tests/f2fs/003.out
+new file mode 100644
+index 00000000..64698d84
+--- /dev/null
++++ b/tests/f2fs/003.out
+@@ -0,0 +1,11 @@
++QA output created by 003
++000000 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  >................<
++*
++020000 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  >................<
++*
++080000
++000000 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  >................<
++*
++020000 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  >................<
++*
++080000
 -- 
-1.9.1
+2.40.1
 
 
 
