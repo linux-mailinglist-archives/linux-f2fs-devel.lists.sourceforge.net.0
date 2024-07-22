@@ -2,132 +2,132 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B69EB93878C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jul 2024 04:40:39 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3454493878D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jul 2024 04:40:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sViyV-0000QW-OC;
-	Mon, 22 Jul 2024 02:40:32 +0000
+	id 1sViyk-0001fI-JT;
+	Mon, 22 Jul 2024 02:40:46 +0000
 Received: from [172.30.29.67] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sunjunchao2870@gmail.com>) id 1sViyU-0000QN-88
+ (envelope-from <sunjunchao2870@gmail.com>) id 1sViyj-0001fB-O0
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 Jul 2024 02:40:30 +0000
+ Mon, 22 Jul 2024 02:40:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=elEEYZRwm6kdR8yLX+1o/shGO6nrBPkjdm0LE5hLK6w=; b=FfEpohrrI6PLKVNv7hnTD3+awO
- 4kZGoWKZ4gFgdTMYicL3/rsk4siSJwCxswemf6/FTfUsSnSp8/6ElVeA2aoGrOjMu3bOyaubi7kOb
- UVJmfiIOVBT0yy2RUmVJPu6OGUWbFKJNAY0A2LqpeEmRhcO+S9Wq0ZKgwOe2MSg2OnfY=;
+ bh=XgoPaACOHdxYIeUc9eqLRX+KncIIzbG71ydHebrRo0k=; b=OhRDkLNg2Xh+VWpFD9BMD9mdUn
+ 7v3Uwi4HgeoNkBrZpHi9T0sThISiFZja472tuXFnA6h/fOw6Yd3ypDiwOGH+qrWwtmwAwZ1Tr60G7
+ tabSUIeR9zJUz3yo6YGS2NVKBjxWKIVd2uunCuRqayEHGYuCUdkxoDBqtYfqiGqenu4o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=elEEYZRwm6kdR8yLX+1o/shGO6nrBPkjdm0LE5hLK6w=; b=M
- URsP4bHc/4dWN22Gw9mY01TsxkgH8EfZysxuH+T+iZWifjMM0Uq+aXE+W/r88EXMUykTT6ECmAIsP
- Q5L4OxGecuK1kItVkaF2DwTngfLYggIEzHgct/2vklQ6N7vvlH+j3u4RTtm7SIe5dJfimF2H5gr3/
- FDurq8byWaquz46s=;
-Received: from mail-pl1-f177.google.com ([209.85.214.177])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=XgoPaACOHdxYIeUc9eqLRX+KncIIzbG71ydHebrRo0k=; b=CHRfLWBBkcgpUVcBwCHHE2KHCF
+ hpFTspwIGxGsJifNyWq8cPx9yTZzqujQFq6EIDGoD+uh0HuZT8RVWLQbH1gXeW1ZL2qSq+wG1LTg/
+ fdPiWNN/66thYaOX/Vx6Al+H4W2yhU3+p9PtKQFv+5D0DHRtw+AjsNe2CFF4LLpyY3HM=;
+Received: from mail-pf1-f170.google.com ([209.85.210.170])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1sViyU-0002Ab-Dl for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 Jul 2024 02:40:30 +0000
-Received: by mail-pl1-f177.google.com with SMTP id
- d9443c01a7336-1fc692abba4so23032355ad.2
+ id 1sViyi-0002Bb-JB for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 22 Jul 2024 02:40:45 +0000
+Received: by mail-pf1-f170.google.com with SMTP id
+ d2e1a72fcca58-70d1cbbeeaeso298263b3a.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 21 Jul 2024 19:40:30 -0700 (PDT)
+ Sun, 21 Jul 2024 19:40:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721616024; x=1722220824; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=elEEYZRwm6kdR8yLX+1o/shGO6nrBPkjdm0LE5hLK6w=;
- b=Qe3mvnwYiopWJd9uA2dSAdmEGjBGePGvfMsUi3qCVlnp+I4dXm2wE9Q0KH5REP6YZX
- PxVVr/2IFLHFq+eTCg5qj7pNOKVuf6W/n/sCz5EwVZdPWtZKrW9YIylzUeDdUcefWiXE
- NYKdg3tEBRQCVfZJdd/2vIiTEnJ/rl4y4DWbHn1hHconffwqEjveAthfglue0DwJtct3
- axXsYSYgtCq6ZVe41bbDlBVBOfhAn3FIvlGMo72P54qLodcdE3dd7dwePLfid8jCQv4B
- 2pnurukMQfyV8j8N3YF7YCzfuV/8LSTAzu73e3hNJjRkLta1950bQw8GmgWLr+qy6pxa
- 2UyQ==
+ d=gmail.com; s=20230601; t=1721616033; x=1722220833; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XgoPaACOHdxYIeUc9eqLRX+KncIIzbG71ydHebrRo0k=;
+ b=UwKUnp5rMSzgN2bkmmmi6iQ0h5Yw3DrpZ5IMo81cP69q1qzh5i7n//kRzlzCI93HmK
+ IlSpl824Imj7PpDTNqUgdA7psjAOW29fPpKKzGbhX/kuxLfn9EjpFEZpfDKeDwqKl/Ml
+ xBNKyk2kCBP88EtdnLRHnU8oq+Sfb2LbtM+LhuXibvp90uCBuhYGzPvl2xHl0n1QO2nU
+ KNSES7oewcj/IQA6OvyCrQ04LyP8nMe11Z/W0W8AysEla6+07HAlDYoGzsgPTOCijeVM
+ UYzS+KSUTx9V1+dJm2a/gISljGDOTp5NtXeVa71Xw/ZL1CrKgEtKCYIqWyxrmFy7hvkd
+ 5mgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721616024; x=1722220824;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=elEEYZRwm6kdR8yLX+1o/shGO6nrBPkjdm0LE5hLK6w=;
- b=vtUSS5hiM3hUmZ40WXewEnoe6nRLLqXhHsPcHQ8ZmE/Ji9/S3Uaq+1qfoEZ5Y+AZRt
- PWE5m1FofuuQygNk22jCDmHjJbU4qWGgwk0UlpFcMOIJYR9eQCPAM7XGkLV6IfnP7jgi
- e8k8s4ckwy4CvIYMMUTZi8bjvVUPqSXZVvF0H3HTNoHAnpF83SO3NPpLHnhmtaHJgDiF
- IoW3FUz7s/2IQHG/9eDri623ommPkCDhKZb9Ydw1koh6peviLDYNVEXO3g6rYvxh8QGF
- LIpW6P3YUsOAkDimOv2CVIDNBH/T2CBQuDw3JdwwzQ5WZ9Ouzmr460yekXNkXFAb/U3z
- rLlg==
-X-Gm-Message-State: AOJu0Yz7UVuZiGX6uiwfcTwnQqoSPluH0l0f6murlNrXLSBQiMAAwlKS
- ycpkaZmI4TN4rSesSo0s4RY1fvoErX9Hm241YMy+jJA+2lbiG08zZqF7yNjtb2M=
-X-Google-Smtp-Source: AGHT+IEKI4x1Wl5vEQnLTJBYAlodFx72aEbEvTd8pBGZHw4GzeBO9F+7+fB1ZFOG2INQebf0Jct5rw==
-X-Received: by 2002:a17:903:22cb:b0:1fc:4aa0:fb14 with SMTP id
- d9443c01a7336-1fd74520166mr37051425ad.2.1721616024246; 
- Sun, 21 Jul 2024 19:40:24 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721616033; x=1722220833;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XgoPaACOHdxYIeUc9eqLRX+KncIIzbG71ydHebrRo0k=;
+ b=oYQiu0I1TXIhTi56sVVxDiBD38vcop3ozI631aQw+AR8uzP49nmMcIxslThBr1d6nQ
+ vjqQAit4OXREljX6iT5fkbGCio+sdlJdY+zGbt+MAQHf3X5unyqNVtu9qqw/mnYtob+M
+ RoceoYS437HHJuHM94h9n3UkhNL6T7/nEsYwmV0/F5SAutFm3oFa/GsJYRkXr0iUT/x3
+ E2DS4vAuiBu8MYZy+lhYCKwX6ym5przsMiTvUIaWoQrp/58Ygx/1jDsokhpVvijcbars
+ OVWy2p3rJllXepXN+Wzd99IL1hoUdLMz97pnyOtkPkuJtEva9Io2r3Kx3gLece6ub/RV
+ YkJw==
+X-Gm-Message-State: AOJu0Yxb8sjXPFZOyAIJFqyMH/verxEQgb0me/f1Ky4WRvZfMDPVWlKa
+ dsy4NUMq+wWjqxRwfgR1Ky6mOAwsIEsjzP3c+wAaSA+HCFouyEaq+MNJkY3lRQ8=
+X-Google-Smtp-Source: AGHT+IGzd3X/sO8yD1jSaEHwiYF2YaLIio0eAVUGTerGz4kJk+9WFUaoXGIbfIcji5IOdnY9X01m6w==
+X-Received: by 2002:a05:6a21:3a46:b0:1c0:e540:7336 with SMTP id
+ adf61e73a8af0-1c42286b324mr4416607637.6.1721616033083; 
+ Sun, 21 Jul 2024 19:40:33 -0700 (PDT)
 Received: from localhost ([114.242.33.243]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fda360473dsm4798135ad.203.2024.07.21.19.40.22
+ d9443c01a7336-1fd6f25adfasm43335655ad.36.2024.07.21.19.40.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jul 2024 19:40:23 -0700 (PDT)
+ Sun, 21 Jul 2024 19:40:32 -0700 (PDT)
 From: Julian Sun <sunjunchao2870@gmail.com>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Sun, 21 Jul 2024 22:39:12 -0400
-Message-Id: <20240722023913.54788-1-sunjunchao2870@gmail.com>
+Date: Sun, 21 Jul 2024 22:39:13 -0400
+Message-Id: <20240722023913.54788-2-sunjunchao2870@gmail.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240722023913.54788-1-sunjunchao2870@gmail.com>
+References: <20240722023913.54788-1-sunjunchao2870@gmail.com>
 MIME-Version: 1.0
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The macro on_f2fs_build_free_nids accepts a parameter nmi,
- but it was not used, rather the variable nm_i was directly used, which may
- be a local variable inside a function that calls the macros. Signed-off-by:
- Julian Sun --- fs/f2fs/node.c | 2 +- 1 file changed, 1 insertion(+),
- 1 deletion(-)
+ Content preview:  The macro stat_inc_cp_count accepts a parameter si, but it
+ was not used, rather the variable sbi was directly used, which may be a local
+ variable inside a function that calls the macros. Signed-off-by: Julian Sun
+ --- fs/f2fs/f2fs.h | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) 
  Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.177 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
  in digit [sunjunchao2870[at]gmail.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [sunjunchao2870[at]gmail.com]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.214.177 listed in sa-trusted.bondedsender.org]
+ [209.85.210.170 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.214.177 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [sunjunchao2870[at]gmail.com]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ [209.85.210.170 listed in bl.score.senderscore.com]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.177 listed in wl.mailspike.net]
+ [209.85.210.170 listed in wl.mailspike.net]
  -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1sViyU-0002Ab-Dl
-Subject: [f2fs-dev] [PATCH v2 1/2] f2fs: fix macro definition
- on_f2fs_build_free_nids
+X-Headers-End: 1sViyi-0002Bb-JB
+Subject: [f2fs-dev] [PATCH v2 2/2] f2fs: fix macro definition
+ stat_inc_cp_count
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -144,28 +144,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The macro on_f2fs_build_free_nids accepts a parameter nmi,
-but it was not used, rather the variable nm_i was directly used,
+The macro stat_inc_cp_count accepts a parameter si,
+but it was not used, rather the variable sbi was directly used,
 which may be a local variable inside a function that calls the macros.
 
 Signed-off-by: Julian Sun <sunjunchao2870@gmail.com>
 ---
- fs/f2fs/node.c | 2 +-
+ fs/f2fs/f2fs.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index b72ef96f7e33..58721a55f173 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -20,7 +20,7 @@
- #include "iostat.h"
- #include <trace/events/f2fs.h>
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 8a9d910aa552..bb407c3ebb4d 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3987,7 +3987,7 @@ static inline struct f2fs_stat_info *F2FS_STAT(struct f2fs_sb_info *sbi)
  
--#define on_f2fs_build_free_nids(nmi) mutex_is_locked(&(nm_i)->build_lock)
-+#define on_f2fs_build_free_nids(nm_i) mutex_is_locked(&(nm_i)->build_lock)
- 
- static struct kmem_cache *nat_entry_slab;
- static struct kmem_cache *free_nid_slab;
+ #define stat_inc_cp_call_count(sbi, foreground)				\
+ 		atomic_inc(&sbi->cp_call_count[(foreground)])
+-#define stat_inc_cp_count(si)		(F2FS_STAT(sbi)->cp_count++)
++#define stat_inc_cp_count(sbi)		(F2FS_STAT(sbi)->cp_count++)
+ #define stat_io_skip_bggc_count(sbi)	((sbi)->io_skip_bggc++)
+ #define stat_other_skip_bggc_count(sbi)	((sbi)->other_skip_bggc++)
+ #define stat_inc_dirty_inode(sbi, type)	((sbi)->ndirty_inode[type]++)
 -- 
 2.39.2
 
