@@ -2,108 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9037493B411
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jul 2024 17:44:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 037F693B5C3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jul 2024 19:19:27 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sWe9l-0005L0-Ql;
-	Wed, 24 Jul 2024 15:43:57 +0000
+	id 1sWfe3-0000qC-EG;
+	Wed, 24 Jul 2024 17:19:19 +0000
 Received: from [172.30.29.67] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <BATV+577de27a8df23d97afd0+7640+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1sWe9j-0005Kn-Da for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Jul 2024 15:43:55 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <n.zhandarovich@fintech.ru>) id 1sWfe1-0000q5-Op
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 24 Jul 2024 17:19:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=A5NCdA5yQOqvciqjVmzO4FQb/LC/NqR4RCRHik4/Oxc=; b=jBJDKZgprqdXSPZVF+O1GRXZXp
- EjsjJmF8YMSeqYd5SKlX//owSM2/vUjGSO4sxwa/LKotDEQptREroSJNp7cztZOSnpyZXnipsI4Xq
- GKGNmfvxXhqQqACTMpPN1ts3e+gYoXz1qiuJyFM3fts7JX4Lc5OtcJCgNbVTj+8gnDsg=;
+ bh=U9ly8I5/I3GWMuVwLZ1H/RN9JgTLhEc/iauMR2BOiCo=; b=A6f8BpmhoDX2ObWCvn6y6asKDf
+ JGiyWFquPihMwWyzbwedkxNUBEkfDLUV7KfZi6dwZ30bNiEDasFJGEs2V7ERsqMWH+ANxfbFr9nXB
+ /CwaVQ8OmZb5ny0uiOfZxG61mzTC+TEjTRI42ffpFhC6FPeNMEZRwkBwpKayeuYFDwkI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=A5NCdA5yQOqvciqjVmzO4FQb/LC/NqR4RCRHik4/Oxc=; b=R3o0fNvStCUxq0hdDbCXf81Qlk
- diSxDabQSjEbjTRLmYW2l6SkWL2vdXcIrC/6DJ069KQyLFUgDvcz6IAPZm1oXkioFHoMemn9SCsSD
- gtXNIlbjSPzM3K5JFIj9sFWaztVclqffbVgFbgT8krYm5PSwc3sJ88juzMBg7EUjpdDk=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=U9ly8I5/I3GWMuVwLZ1H/RN9JgTLhEc/iauMR2BOiCo=; b=Q
+ EW4WYHB/AztssEoBMPamloWN3E8KZ8wvgd0J496XZr0PhfA34SAbQQFGjUAKZBHQefywgVUv+y5C1
+ K6vEvOg3d82N9hTChK/zpYF5IbC9heGAWpUmw5jeX6kkvX2YXXK2ispGj2Yf4kaGxZLTxYsne/nXZ
+ kIi344kQ2GkoGSh4=;
+Received: from exchange.fintech.ru ([195.54.195.159])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sWe9i-0006oG-1O for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Jul 2024 15:43:54 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Transfer-Encoding
- :Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
- Sender:Reply-To:Content-ID:Content-Description;
- bh=A5NCdA5yQOqvciqjVmzO4FQb/LC/NqR4RCRHik4/Oxc=; b=xBBhe6jVMTs+rNw1ry/JeDmbO3
- MNV3LRo+Yl7MrNMLXKUiUDh5a3l9B6nf0f4P0IsTIY0nSlDEHnV7a6G5I2EsV8/T4721oBI5r3MGc
- 3bgO/JHGl3nAfelh+Kd6Thukp30duUluFSk8tydhbdTnaK6QW2elJGcYbFqV8rWXjiP3d5KDfa8w4
- PKjt6QhDh7m9FgZOlBwsfH+sj8NdO57AqPTZgajuCBIN3V0F78TjO4UmAGVqo581pq2+6oegH//ao
- JHXnFbMNWsFGotBDBWynEQzuNL5NRzCkOLNKenS7i9xbMEBAP0uAoZ6mo4RKLEfZS3L7srGg/rYXh
- hSFx2mNg==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1sWe9Y-0000000FoTR-2trX;
- Wed, 24 Jul 2024 15:43:44 +0000
-Date: Wed, 24 Jul 2024 08:43:44 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Youling Tang <youling.tang@linux.dev>
-Message-ID: <ZqEhMCjdFwC3wF4u@infradead.org>
-References: <20240723083239.41533-1-youling.tang@linux.dev>
- <20240723083239.41533-2-youling.tang@linux.dev>
- <Zp-_RDk5n5431yyh@infradead.org>
- <0a63dfd1-ead3-4db3-a38c-2bc1db65f354@linux.dev>
+ (TLS1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.95) id 1sWfe0-0004PQ-0L
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 24 Jul 2024 17:19:17 +0000
+Received: from Ex16-01.fintech.ru (10.0.10.18) by exchange.fintech.ru
+ (195.54.195.169) with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 24 Jul
+ 2024 20:05:49 +0300
+Received: from localhost (10.0.253.138) by Ex16-01.fintech.ru (10.0.10.18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2242.4; Wed, 24 Jul
+ 2024 20:05:48 +0300
+From: Nikita Zhandarovich <n.zhandarovich@fintech.ru>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
+Date: Wed, 24 Jul 2024 10:05:44 -0700
+Message-ID: <20240724170544.11372-1-n.zhandarovich@fintech.ru>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <0a63dfd1-ead3-4db3-a38c-2bc1db65f354@linux.dev>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -0.2 (/)
+X-Originating-IP: [10.0.253.138]
+X-ClientProxiedBy: Ex16-02.fintech.ru (10.0.10.19) To Ex16-01.fintech.ru
+ (10.0.10.18)
+X-Spam-Score: -5.0 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jul 24, 2024 at 09:57:05AM +0800, Youling Tang wrote:
- > module_init(initfn)/module_exit(exitfn) has two definitions (via MODULE):
- > - buindin: uses do_initcalls() to iterate over the contents [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: The result of multiplication between values derived from
+ functions
+ dir_buckets() and bucket_blocks() *could* technically reach 2^30 * 2^2 =
+ 2^32. While unlikely to happen, it is prudent to ensure that it will not lead
+ to integer overflow. Thus, use mul_u32_u32() as it's more appropriate to
+ mitigate the issue. 
+ Content analysis details:   (-5.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [195.54.195.159 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [198.137.202.133 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [198.137.202.133 listed in sa-accredit.habeas.com]
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
+ [195.54.195.159 listed in bl.score.senderscore.com]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [195.54.195.159 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
-X-Headers-End: 1sWe9i-0006oG-1O
-Subject: Re: [f2fs-dev] [PATCH 1/4] module: Add module_subinit{_noexit} and
- module_subeixt helper macros
+X-Headers-End: 1sWfe0-0004PQ-0L
+Subject: [f2fs-dev] [PATCH] f2fs: prevent possible int overflow in
+ dir_block_index()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,59 +99,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-arch@vger.kernel.org, Youling Tang <tangyouling@kylinos.cn>,
- linux-f2fs-devel@lists.sourceforge.net, tytso@mit.edu,
- Arnd Bergmann <arnd@arndb.de>, Josef Bacik <josef@toxicpanda.com>,
- linux-kernel@vger.kernel.org, Christoph Hellwig <hch@infradead.org>,
- Chris Mason <clm@fb.com>, Luis Chamberlain <mcgrof@kernel.org>,
- Andreas Dilger <adilger.kernel@dilger.ca>, linux-btrfs@vger.kernel.org,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-ext4@vger.kernel.org, linux-modules@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: lvc-project@linuxtesting.org, stable@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Nikita Zhandarovich <n.zhandarovich@fintech.ru>,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jul 24, 2024 at 09:57:05AM +0800, Youling Tang wrote:
-> module_init(initfn)/module_exit(exitfn) has two definitions (via MODULE):
-> - buindin: uses do_initcalls() to iterate over the contents of the specif=
-ied
-> =A0 section and executes all initfn functions in the section in the order=
- in
-> =A0 which they are stored (exitfn is not required).
-> =
+The result of multiplication between values derived from functions
+dir_buckets() and bucket_blocks() *could* technically reach
+2^30 * 2^2 = 2^32.
 
-> - ko: run do_init_module(mod)->do_one_initcall(mod->init) to execute init=
-fn
-> =A0 of the specified module.
-> =
+While unlikely to happen, it is prudent to ensure that it will not
+lead to integer overflow. Thus, use mul_u32_u32() as it's more
+appropriate to mitigate the issue.
 
-> If we change module_subinit to something like this, not called in
-> module_init,
+Found by Linux Verification Center (linuxtesting.org) with static
+analysis tool SVACE.
 
-> Not only do we want to ensure that exit is executed in reverse order of
-> init, but we also want to ensure the order of init.
+Fixes: 3843154598a0 ("f2fs: introduce large directory support")
+Cc: stable@vger.kernel.org
+Signed-off-by: Nikita Zhandarovich <n.zhandarovich@fintech.ru>
+---
+ fs/f2fs/dir.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Yes.
-
-> This does not guarantee the order in which init will be executed (although
-> the init/exit order will remain the same)
-
-Hmm, so the normal built-in initcalls depend on the link order, but when
-they are in the same file, the compiler can reorder them before we even
-get to the linker.
-
-I wonder what a good syntax would be to still avoid the boilerplate
-code.  We'd probably need one macro to actually define the init/exit
-table in a single statement so that it can't be reordered, but that
-would lose the ability to actually declare the module subinit/exit
-handlers in multiple files, which really is the biggest win of this
-scheme as it allows to keep the functions static instead of exposing
-them to other compilation units.
-
-And in fact even in your three converted file systems, most
-subinit/exit handler are in separate files, so maybe instead
-enforcing that there is just one per file and slightly refactoring
-the code so that this is the case might be the best option?
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index cbd7a5e96a37..14900ca8a9ff 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -166,7 +166,8 @@ static unsigned long dir_block_index(unsigned int level,
+ 	unsigned long bidx = 0;
+ 
+ 	for (i = 0; i < level; i++)
+-		bidx += dir_buckets(i, dir_level) * bucket_blocks(i);
++		bidx += mul_u32_u32(dir_buckets(i, dir_level),
++				    bucket_blocks(i));
+ 	bidx += idx * bucket_blocks(level);
+ 	return bidx;
+ }
 
 
 _______________________________________________
