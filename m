@@ -2,116 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B504793C7A6
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jul 2024 19:28:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7EF293C7C7
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jul 2024 19:46:28 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sX2GU-0002Xu-EE;
-	Thu, 25 Jul 2024 17:28:31 +0000
+	id 1sX2Xj-0003SY-QH;
+	Thu, 25 Jul 2024 17:46:20 +0000
 Received: from [172.30.29.67] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kreijack@libero.it>) id 1sX2GR-0002Xl-Ku
+ (envelope-from <jaegeuk@kernel.org>) id 1sX2Xh-0003SQ-AZ
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 Jul 2024 17:28:28 +0000
+ Thu, 25 Jul 2024 17:46:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:Reply-To:MIME-Version:Date:Message-ID:Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NfPTdF6NiK8Ugj9UJnwjr7KjQLdt6YNvXp7SXJiAaTA=; b=IQrKh2NvTPQzrqEUL0+dNDzjcH
- NzuXol9Nbp+d58/5bx8Xi2OC0jaSreRAsp7cm6o0GDYoCI2Y24rmOppLyZEBfrSmbH/rctinwXFN+
- FYoPbTQMXDdbyqXlPuB5mmnC9ViYCcoFK0X97yEdINCrqNAjY+fQ/MhMN3bDNveDOsww=;
+ bh=YfbQbkrLuzdRorUufOxakZMq28wrCfPNBIhvBwZv8nQ=; b=aRMQu48LyjbFF7HQZ/puHSD7nx
+ ffNYfgN3HGf8G6/e2vxshcXqFeJjAk6NRfcNrqUBfcRN7mgk5/ZdvfqXA19Lc3Msan5G0qZ1RZPfA
+ q/j4G6wjsy3Rj41fwRSYVoTWUDORCK6ObEN/FS9FPUFbNeXrhIkxCm1dyXt2IHtARDpQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:Reply-To:MIME-Version:Date:Message-ID:Sender:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NfPTdF6NiK8Ugj9UJnwjr7KjQLdt6YNvXp7SXJiAaTA=; b=dSLyM3QzY/JRI8RLw361IUisDW
- kmLXqDA15IFBXmcFBV30/SdTnHudt0igAVZrXKUyAzRWxt2eApdLqRViP23PlJnup89xBOjwvY8sQ
- KulqcvyMGSHMNIEVR3UxD72rMzVI2nl6RRcIKXkgbFh+pZIr2a5xqPpjeEzV6VTn1UOc=;
-Received: from smtp-18.italiaonline.it ([213.209.10.18] helo=libero.it)
+ bh=YfbQbkrLuzdRorUufOxakZMq28wrCfPNBIhvBwZv8nQ=; b=hBvEWWqNnCEVAqPIRyzraG3QLu
+ ItdaTuQd+SAY4DCEEXEOXzne2wwdpeparXoGwtmrdhYWq/ncb7GhD3a7lPWUPAYkRg4O0erEt6t0K
+ sjbzli0J+UifVVFgz3VlddIMeQ/3nOwShTZh8KHYKGhAeW8x6wo+qbjOTI0Lew9D4RoM=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sX2GR-0007XC-Da for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 Jul 2024 17:28:28 +0000
-Received: from [192.168.1.27] ([84.220.171.3]) by smtp-18.iol.local with ESMTPA
- id X22gsAgcOUZkEX22hsDYMn; Thu, 25 Jul 2024 19:14:16 +0200
-x-libjamoibt: 1601
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=libero.it; s=s2021;
- t=1721927656; bh=NfPTdF6NiK8Ugj9UJnwjr7KjQLdt6YNvXp7SXJiAaTA=;
- h=From;
- b=sv2rZIsuh+TZrJuuwjVZQ+UNjifdwjxYosNmNRvlVCw3eTselSqPsCJJ+mfWUKChB
- IOW33olXIzZzs49jRf2lXOOZh9jSEas/WyD9vlIUHYsMa58AYH02usPcCXsVq30MxA
- w9UnOEfc3/FF8gl3OtLWEnMDA3ETw4T+AHiiamykbU37SUDAIUf4qAmMUaeeRdqomW
- 53FHICYBUJER18vN9zpu0yI7fUDZf/FdS9ETOvwQaFrRlXx/FEJfsuqm3Q16TqPvSl
- BWUZOheBPOTcHIQmeHKLax//MkJWiEHZrHbcmk64/nw7G1Mhd6PbCLw1W2HB6KVhan
- OofMRLPiVNNVg==
-X-CNFS-Analysis: v=2.4 cv=P43xhTAu c=1 sm=1 tr=0 ts=66a287e8 cx=a_exe
- a=hciw9o01/L1eIHAASTHaSw==:117 a=hciw9o01/L1eIHAASTHaSw==:17
- a=IkcTkHD0fZMA:10 a=2a-IQ_BPnOOq8STWmVUA:9 a=QEXdDO2ut3YA:10
-Message-ID: <68584887-3dec-4ce5-8892-86af50651c41@libero.it>
-Date: Thu, 25 Jul 2024 19:14:14 +0200
+ id 1sX2Xg-0000Dm-C7 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 25 Jul 2024 17:46:18 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 6F1D3CE13D6;
+ Thu, 25 Jul 2024 17:46:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60811C32782;
+ Thu, 25 Jul 2024 17:46:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1721929563;
+ bh=A6gk7PsWmC2pENQ5J0eqwtVvTxvCzdSlNV8DcbLRYnI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=PBaJ7dHLBoSuZWNdrSdceCySve6fcq//jgpmwPx9/JVp1I8QOx4ljvBiCwZP9F2Zh
+ JSctpwEY4FE4QmFLTezpm5Pu9ppY5qHI3OhzcG7mc0aTrejOJNH4rl84anRxlT2tQ/
+ 5xH+tr1JeLsyTQ3PRAUQ4h6SGRJPCd+cNiK8Jd2cVILKmOMZ2pRV47dCmsvMMB+ZND
+ W1HdhVFq+Zf55pWLyr80+9Euh5I5pJjeJpLVom0WH7qBeUcMLzzqO1NNHoXEwRQSYC
+ 3g6DqK5iwGerudG0ozQXGKndGMjOaFrpc51lSCXM2evqbyMPELoZlHPlyjJAeppe+E
+ gLnYFUPFEM5YQ==
+Date: Thu, 25 Jul 2024 17:46:01 +0000
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Daniel Rosenberg <drosen@google.com>
+Message-ID: <ZqKPWYuvzMW7J8CS@google.com>
+References: <20240723211157.27618-1-drosen@google.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Christoph Hellwig <hch@infradead.org>, Arnd Bergmann <arnd@arndb.de>
-References: <20240723083239.41533-1-youling.tang@linux.dev>
- <20240723083239.41533-2-youling.tang@linux.dev>
- <Zp-_RDk5n5431yyh@infradead.org>
- <0a63dfd1-ead3-4db3-a38c-2bc1db65f354@linux.dev>
- <ZqEhMCjdFwC3wF4u@infradead.org>
- <895360e3-97bb-4188-a91d-eaca3302bd43@linux.dev>
- <ZqJjsg3s7H5cTWlT@infradead.org>
- <61beb54b-399b-442d-bfdb-bad23cefa586@app.fastmail.com>
- <ZqJwa2-SsIf0aA_l@infradead.org>
-Content-Language: en-US
-In-Reply-To: <ZqJwa2-SsIf0aA_l@infradead.org>
-X-CMAE-Envelope: MS4xfG/Wvh0SRpiC6+9TK5wDnJHkad1zDDvsaBJvq3RV0wxQe/gsCv892ru65MTczmo5pUQbMVX1NrSDKvwqHfPhuJBf0ZxGzZeEL+a+mvbgls/Akdt1xnWI
- QVhkfaLd9wCv/5kE+RXroTc8NBaqfGNvTkgm8wW/kV+ID+bMQPyU9v2N50kCXz/az8FjEsLILcwQkb56M9QCNJLf5/x4Edv+D9ZhMzYbSo8fSwZGhzvPUhFy
- alLW3nbg9ry6fouAwd6fMSP76dUADaS1CRxSpsHzaCoHNwECubxa/2NXm3ZYxMpcjU8sN2MtV21GcpexDxmy+Sr3xbx+P6Vt1DU7fGY56SSYqSvs5k73a0Du
- GxpE2dsJ5cD+U0N9zYReAO4pGZvz3VWIDnOB06t6HoHLF24cazVbsYQuF6IIM2VQm7Mbu1G8Jd56XLbPJb4RCy1Z1fkWC6H3z8C7pr/rpSYiK3hhZBwrFydP
- fUV66fKGVnIFcE1O24B5weWxHgrN1goxpDFVQDc77xc6wCo7bDDaJuZCdAvJHBUQWMiYTlZRbSMOBMvY1xkCktZX2iS13vdrThLlld56N+oUhO0t70FYx+uj
- YxVqoXAL4Ts8d2ykDkeTVr3CUL4HiWTiWGozXnb8THEphRoSBFPeFuOUBiETwenwSU0MOY11dbBFOqGBybicQS69laD9aAqO314s+9tUAJrvzHltLzTYuD/q
- PdS1vxWgkiPYI+0XgUX2wtTCNSW5xE4Skow3bECu2B4KzzaztlFzYA==
-X-Spam-Score: 0.8 (/)
+Content-Disposition: inline
+In-Reply-To: <20240723211157.27618-1-drosen@google.com>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 25/07/2024 17.34, Christoph Hellwig wrote: > On Thu, Jul
- 25, 2024 at 05:30:58PM +0200, Arnd Bergmann wrote: >> Now I think we could
- just make the module_init() macro >> do the same thing as a built [...] 
- Content analysis details:   (0.8 points, 6.0 required)
+ Content preview:  On 07/23, Daniel Rosenberg wrote: > Previously,
+ dumped symlinks
+ would always create regular files instead. > This allows symlinks to be dumped
+ as symlinks with the -L option. > > The i_name field's na [...] 
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: libero.it]
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [213.209.10.18 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [kreijack[at]libero.it]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [213.209.10.18 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [213.209.10.18 listed in bl.score.senderscore.com]
+ [145.40.73.55 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [145.40.73.55 listed in sa-trusted.bondedsender.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
@@ -119,11 +95,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 1.0 FREEMAIL_REPLYTO       Reply-To/From or Reply-To/body contain
- different freemails
-X-Headers-End: 1sX2GR-0007XC-Da
-Subject: Re: [f2fs-dev] [PATCH 1/4] module: Add module_subinit{_noexit} and
- module_subeixt helper macros
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sX2Xg-0000Dm-C7
+Subject: Re: [f2fs-dev] [PATCH v3] dump.f2fs: Dump symlinks as symlinks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -135,127 +109,511 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Goffredo Baroncelli via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: kreijack@inwind.it
-Cc: Goffredo Baroncelli <kreijack@libero.it>,
- Linux-Arch <linux-arch@vger.kernel.org>, Youling Tang <tangyouling@kylinos.cn>,
- linux-f2fs-devel@lists.sourceforge.net, Theodore Ts'o <tytso@mit.edu>,
- Josef Bacik <josef@toxicpanda.com>, linux-kernel@vger.kernel.org,
- Chris Mason <clm@fb.com>, Luis Chamberlain <mcgrof@kernel.org>,
- Andreas Dilger <adilger.kernel@dilger.ca>, linux-btrfs@vger.kernel.org,
- Youling Tang <youling.tang@linux.dev>, David Sterba <dsterba@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org,
- linux-modules@vger.kernel.org
+Cc: kernel-team@android.com, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 25/07/2024 17.34, Christoph Hellwig wrote:
-> On Thu, Jul 25, 2024 at 05:30:58PM +0200, Arnd Bergmann wrote:
->> Now I think we could just make the module_init() macro
->> do the same thing as a built-in initcall() and put
->> an entry in a special section, to let you have multiple
->> entry points in a loadable module.
->>
->> There are still at least two problems though:
->>
->> - while link order is defined between files in a module,
->>    I don't think there is any guarantee for the order between
->>    two initcalls of the same level within a single file.
+On 07/23, Daniel Rosenberg wrote:
+> Previously, dumped symlinks would always create regular files instead.
+> This allows symlinks to be dumped as symlinks with the -L option.
 > 
-> I think the sanest answer is to only allow one per file.  If you
-> are in the same file anyway calling one function from the other
-> is not a big burden.  It really is when they are spread over files
-> when it is annoying, and the three examples show that pretty
-> clearly.
+> The i_name field's name may not be the same as the actual name from the
+> dirent, so we use the dirent name when available.
 > 
->> - For built-in code we don't have to worry about matching
->>    the order of the exit calls since they don't exist there.
->>    As I understand, the interesting part of this patch
->>    series is about making sure the order matches between
->>    init and exit, so there still needs to be a way to
->>    express a pair of such calls.
+> Currently hardlinks aren't detected, so print a warning if we notice a
+> nondirectory with a link count over 1.
 > 
-> That's why you want a single macro to define the init and exit
-> callbacks, so that the order can be matched up and so that
-> error unwinding can use the relative position easily.
+> Signed-off-by: Daniel Rosenberg <drosen@google.com>
+> ---
 > 
+> V3: Fixed le32_to_cpu => le64_to_cpu
+> V2: Fixed some issues on the Windows build. Also S_ISLNK is defined as
+> false for the Windows build, so I adjusted some checks to not rely on that.
+> Removed some unused variables.
+> 
+>  fsck/dump.c       | 121 ++++++++++++++++++++++++++++++++++------------
+>  fsck/fsck.c       |   4 +-
+>  fsck/fsck.h       |   2 +-
+>  fsck/main.c       |  13 ++++-
+>  include/f2fs_fs.h |   8 +++
+>  lib/libf2fs_io.c  |  10 ++++
+>  man/dump.f2fs.8   |   3 ++
+>  7 files changed, 125 insertions(+), 36 deletions(-)
+> 
+> diff --git a/fsck/dump.c b/fsck/dump.c
+> index 8d5613e..493a80d 100644
+> --- a/fsck/dump.c
+> +++ b/fsck/dump.c
+> @@ -253,20 +253,27 @@ static void dump_folder_contents(struct f2fs_sb_info *sbi, u8 *bitmap,
+>  {
+>  	int i;
+>  	int name_len;
+> +	char name[F2FS_NAME_LEN + 1] = {0};
+>  
+>  	for (i = 0; i < max; i++) {
+>  		if (test_bit_le(i, bitmap) == 0)
+>  			continue;
+>  		name_len = le16_to_cpu(dentry[i].name_len);
+> +		if (name_len == 0 || name_len > F2FS_NAME_LEN) {
+> +			MSG(c.force, "Wrong name info\n\n");
+> +			ASSERT(name_len == 0 || name_len > F2FS_NAME_LEN);
+> +		}
+>  		if (name_len == 1 && filenames[i][0] == '.')
+>  			continue;
+>  		if (name_len == 2 && filenames[i][0] == '.' && filenames[i][1] == '.')
+>  			continue;
+> -		dump_node(sbi, le32_to_cpu(dentry[i].ino), 1, NULL, 0, 1);
+> +		strncpy(name, (const char *)filenames[i], name_len);
+> +		name[name_len] = 0;
+> +		dump_node(sbi, le32_to_cpu(dentry[i].ino), 1, NULL, 0, 1, name);
+>  	}
+>  }
+>  
+> -static void dump_data_blk(struct f2fs_sb_info *sbi, __u64 offset, u32 blkaddr, bool is_folder)
+> +static void dump_data_blk(struct f2fs_sb_info *sbi, __u64 offset, u32 blkaddr, int type)
+>  {
+>  	char buf[F2FS_BLKSIZE];
+>  
+> @@ -307,11 +314,15 @@ static void dump_data_blk(struct f2fs_sb_info *sbi, __u64 offset, u32 blkaddr, b
+>  		ASSERT(ret >= 0);
+>  	}
+>  
+> -	if (is_folder) {
+> +	if (S_ISDIR(type)) {
+>  		struct f2fs_dentry_block *d = (struct f2fs_dentry_block *) buf;
+>  
+>  		dump_folder_contents(sbi, d->dentry_bitmap, F2FS_DENTRY_BLOCK_DENTRIES(d),
+>  					F2FS_DENTRY_BLOCK_FILENAMES(d), NR_DENTRY_IN_BLOCK);
+> +#if !defined(__MINGW32__)
+> +	} if (S_ISLNK(type)) {
+> +		dev_write_symlink(buf, c.dump_sym_target_len);
+> +#endif
+>  	} else {
+>  		/* write blkaddr */
+>  		dev_write_dump(buf, offset, F2FS_BLKSIZE);
+> @@ -319,7 +330,7 @@ static void dump_data_blk(struct f2fs_sb_info *sbi, __u64 offset, u32 blkaddr, b
+>  }
+>  
+>  static void dump_node_blk(struct f2fs_sb_info *sbi, int ntype,
+> -				u32 nid, u32 addr_per_block, u64 *ofs, int is_dir)
+> +				u32 nid, u32 addr_per_block, u64 *ofs, int type)
+>  {
+>  	struct node_info ni;
+>  	struct f2fs_node *node_blk;
+> @@ -356,20 +367,20 @@ static void dump_node_blk(struct f2fs_sb_info *sbi, int ntype,
+>  		switch (ntype) {
+>  		case TYPE_DIRECT_NODE:
+>  			dump_data_blk(sbi, *ofs * F2FS_BLKSIZE,
+> -					le32_to_cpu(node_blk->dn.addr[i]), is_dir);
+> +					le32_to_cpu(node_blk->dn.addr[i]), type);
+>  			(*ofs)++;
+>  			break;
+>  		case TYPE_INDIRECT_NODE:
+>  			dump_node_blk(sbi, TYPE_DIRECT_NODE,
+>  					le32_to_cpu(node_blk->in.nid[i]),
+>  					addr_per_block,
+> -					ofs, is_dir);
+> +					ofs, type);
+>  			break;
+>  		case TYPE_DOUBLE_INDIRECT_NODE:
+>  			dump_node_blk(sbi, TYPE_INDIRECT_NODE,
+>  					le32_to_cpu(node_blk->in.nid[i]),
+>  					addr_per_block,
+> -					ofs, is_dir);
+> +					ofs, type);
+>  			break;
+>  		}
+>  	}
+> @@ -377,7 +388,7 @@ static void dump_node_blk(struct f2fs_sb_info *sbi, int ntype,
+>  }
+>  
+>  #ifdef HAVE_FSETXATTR
+> -static void dump_xattr(struct f2fs_sb_info *sbi, struct f2fs_node *node_blk, int is_dir)
+> +static void dump_xattr(struct f2fs_sb_info *sbi, struct f2fs_node *node_blk, int type)
+>  {
+>  	void *xattr;
+>  	void *last_base_addr;
+> @@ -431,19 +442,26 @@ static void dump_xattr(struct f2fs_sb_info *sbi, struct f2fs_node *node_blk, int
+>  
+>  		DBG(1, "fd %d xattr_name %s\n", c.dump_fd, xattr_name);
+>  #if defined(__linux__)
+> -		if (is_dir) {
+> +		if (S_ISDIR(type)) {
+>  			ret = setxattr(".", xattr_name, value,
+>  							le16_to_cpu(ent->e_value_size), 0);
+> +		} if (S_ISLNK(type) && c.preserve_symlinks) {
+> +			ret = lsetxattr(c.dump_symlink, xattr_name, value,
+> +							le16_to_cpu(ent->e_value_size), 0);
+>  		} else {
+>  			ret = fsetxattr(c.dump_fd, xattr_name, value,
+>  							le16_to_cpu(ent->e_value_size), 0);
+>  		}
+>  
+>  #elif defined(__APPLE__)
+> -		if (is_dir) {
+> +		if (S_ISDIR(type)) {
+>  			ret = setxattr(".", xattr_name, value,
+>  					le16_to_cpu(ent->e_value_size), 0,
+>  					XATTR_CREATE);
+> +		} if (S_ISLNK(type) && c.preserve_symlinks) {
+> +			ret = lsetxattr(c.dump_symlink, xattr_name, value,
+> +					le16_to_cpu(ent->e_value_size), 0,
+> +					XATTR_CREATE);
+>  		} else {
+>  			ret = fsetxattr(c.dump_fd, xattr_name, value,
+>  					le16_to_cpu(ent->e_value_size), 0,
+> @@ -473,14 +491,21 @@ static int dump_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
+>  	u32 i = 0;
+>  	u64 ofs = 0;
+>  	u32 addr_per_block;
+> -	bool is_dir = S_ISDIR(le16_to_cpu(node_blk->i.i_mode));
+> +	u16 type = le16_to_cpu(node_blk->i.i_mode);
+>  	int ret = 0;
+>  
+>  	if ((node_blk->i.i_inline & F2FS_INLINE_DATA)) {
+>  		DBG(3, "ino[0x%x] has inline data!\n", nid);
+>  		/* recover from inline data */
+> -		dev_write_dump(inline_data_addr(node_blk),
+> +#if !defined(__MINGW32__)
+> +		if (S_ISLNK(type) && c.preserve_symlinks) {
+> +			dev_write_symlink(inline_data_addr(node_blk), c.dump_sym_target_len);
+> +		} else
+> +#endif
+> +		{
+> +			dev_write_dump(inline_data_addr(node_blk),
+>  						0, MAX_INLINE_DATA(node_blk));
+> +		}
+>  		ret = -1;
+>  		goto dump_xattr;
+>  	}
+> @@ -504,7 +529,7 @@ static int dump_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
+>  	/* check data blocks in inode */
+>  	for (i = 0; i < ADDRS_PER_INODE(&node_blk->i); i++, ofs++)
+>  		dump_data_blk(sbi, ofs * F2FS_BLKSIZE, le32_to_cpu(
+> -			node_blk->i.i_addr[get_extra_isize(node_blk) + i]), is_dir);
+> +			node_blk->i.i_addr[get_extra_isize(node_blk) + i]), type);
+>  
+>  	/* check node blocks in inode */
+>  	for (i = 0; i < 5; i++) {
+> @@ -513,26 +538,26 @@ static int dump_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
+>  					le32_to_cpu(F2FS_INODE_I_NID(&node_blk->i, i)),
+>  					addr_per_block,
+>  					&ofs,
+> -					is_dir);
+> +					type);
+>  		else if (i == 2 || i == 3)
+>  			dump_node_blk(sbi, TYPE_INDIRECT_NODE,
+>  					le32_to_cpu(F2FS_INODE_I_NID(&node_blk->i, i)),
+>  					addr_per_block,
+>  					&ofs,
+> -					is_dir);
+> +					type);
+>  		else if (i == 4)
+>  			dump_node_blk(sbi, TYPE_DOUBLE_INDIRECT_NODE,
+>  					le32_to_cpu(F2FS_INODE_I_NID(&node_blk->i, i)),
+>  					addr_per_block,
+>  					&ofs,
+> -					is_dir);
+> +					type);
+>  		else
+>  			ASSERT(0);
+>  	}
+>  	/* last block in extent cache */
+>  	print_extent(true);
+>  dump_xattr:
+> -	dump_xattr(sbi, node_blk, is_dir);
+> +	dump_xattr(sbi, node_blk, type);
+>  	return ret;
+>  }
+>  
+> @@ -555,6 +580,23 @@ static void dump_file(struct f2fs_sb_info *sbi, struct node_info *ni,
+>  	close(c.dump_fd);
+>  }
+>  
+> +static void dump_link(struct f2fs_sb_info *sbi, struct node_info *ni,
+> +				struct f2fs_node *node_blk, char *name)
+> +{
+> +#if defined(__MINGW32__)
+> +	dump_file(sbi, ni, node_blk, name);
+> +#else
+> +	struct f2fs_inode *inode = &node_blk->i;
+> +	int len = le64_to_cpu(inode->i_size);
+> +
+> +	if (!c.preserve_symlinks)
+> +		return dump_file(sbi, ni, node_blk, name);
+> +	c.dump_symlink = name;
+> +	c.dump_sym_target_len = len + 1;
+> +	dump_inode_blk(sbi, ni->ino, node_blk);
+> +#endif
+> +}
+> +
+>  static void dump_folder(struct f2fs_sb_info *sbi, struct node_info *ni,
+>  				struct f2fs_node *node_blk, char *path, int is_root)
+>  {
+> @@ -580,18 +622,24 @@ static void dump_folder(struct f2fs_sb_info *sbi, struct node_info *ni,
+>  
+>  static int dump_filesystem(struct f2fs_sb_info *sbi, struct node_info *ni,
+>  				struct f2fs_node *node_blk, int force, char *base_path,
+> -				bool is_base, bool allow_folder)
+> +				bool is_base, bool allow_folder, char *dirent_name)
+>  {
+>  	struct f2fs_inode *inode = &node_blk->i;
+>  	u32 imode = le16_to_cpu(inode->i_mode);
+> -	u32 namelen = le32_to_cpu(inode->i_namelen);
+> -	char name[F2FS_NAME_LEN + 1] = {0};
+> +	u32 ilinks = le32_to_cpu(inode->i_links);
+> +	u32 i_namelen = le32_to_cpu(inode->i_namelen);
+> +	char i_name[F2FS_NAME_LEN + 1] = {0};
+> +	char *name;
 
-Instead of relying to the "expected" order of the compiler/linker,
-why doesn't manage the chain explicitly ? Something like:
+        char *name = NULL;
+Assigned NULL to avoid build warning.
 
-struct __subexitcall_node {
-	void (*exitfn)(void);
-	struct subexitcall_node  *next;
-
-static inline void __subexitcall_rollback(struct __subexitcall_node *p)
-{
-	while (p) {
-		p->exitfn();
-		p = p->next;
-	}
-}
-
-#define __subinitcall_noexit(initfn, rollback)					\
-do {										\
-	int _ret;								\
-	_ret = initfn();							\
-	if (_ret < 0) {								\
-		__subexitcall_rollback(rollback);				\
-		return _ret;							\
-	}									\
-} while (0)
-
-#define __subinitcall(initfn, exitfn, rollback)						\
-do {											\
-	static subexitcall_node node = {exitfn, rollback->head};	                \
-	__subinitcall_noexit(initfn, rollback);						\
-	rollback = &node;
-} while (0)
-
-
-#define MODULE_SUBINIT_INIT(rollback) \
-	struct __subexitcall_node	*rollback = NULL
-
-#define MODULE_SUBINIT_CALL(initfn, exitfn, rollback) \
-	__subinitcall(initfn, exitfn, rollback)
-
-#define MODULE_SUBINIT_CALL_NOEXIT(initfn, rollback) \
-	__subinitcall_noexit(initfn, rollback)
-
-#define MODULE_SUBEXIT(rollback) 		\
-do {						\
-	__subexitcall_rollback(rollback);	\
-	rollback = NULL;			\
-} while(0)
-
-usage:
-
-	MODULE_SUBINIT_INIT(rollback);
-
-	
-	MODULE_SUBINIT_CALL(init_a, exit_a, rollback);
-	MODULE_SUBINIT_CALL(init_b, exit_b, rollback);
-	MODULE_SUBINIT_CALL_NOEXIT(init_c, rollback);
-
-
-	MODULE_SUBEXIT(rollback);
-
-this would cost +1 pointer for each function. But this would save from situation like
-
-	r = init_a();
-	if (r)
-		init_b();
-	init_c();
-
-
-
-
--- 
-gpg @keyserver.linux.it: Goffredo Baroncelli <kreijackATinwind.it>
-Key fingerprint BBF5 1610 0B64 DAC6 5F7D  17B2 0EDA 9B37 8B82 E0B5
-
+>  	char path[1024] = {0};
+>  	char ans[255] = {0};
+>  	int is_encrypted = file_is_encrypt(inode);
+>  	int is_root = sbi->root_ino_num == ni->nid;
+>  	int ret;
+>  
+> +	if (!S_ISDIR(imode) && ilinks != 1) {
+> +		MSG(force, "Warning: Hard link detected. Dumped files may be duplicated\n");
+> +	}
+> +
+>  	if (is_encrypted) {
+>  		MSG(force, "File is encrypted\n");
+>  		return -1;
+> @@ -601,7 +649,7 @@ static int dump_filesystem(struct f2fs_sb_info *sbi, struct node_info *ni,
+>  		MSG(force, "Not a valid file type\n\n");
+>  		return -1;
+>  	}
+> -	if (!is_root && (namelen == 0 || namelen > F2FS_NAME_LEN)) {
+> +	if (!is_root && !dirent_name && (i_namelen == 0 || i_namelen > F2FS_NAME_LEN)) {
+>  		MSG(force, "Wrong name info\n\n");
+>  		return -1;
+>  	}
+> @@ -614,7 +662,7 @@ static int dump_filesystem(struct f2fs_sb_info *sbi, struct node_info *ni,
+>  		return dump_inode_blk(sbi, ni->ino, node_blk);
+>  
+>  	printf("Do you want to dump this %s into %s/? [Y/N] ",
+> -			S_ISREG(imode) || S_ISLNK(imode) ? "file" : "folder",
+> +			S_ISDIR(imode) ? "folder" : "file",
+>  			base_path);
+>  	ret = scanf("%s", ans);
+>  	ASSERT(ret >= 0);
+> @@ -635,23 +683,34 @@ dump:
+>  
+>  		/* make a file */
+>  		if (!is_root) {
+> -			strncpy(name, (const char *)inode->i_name, namelen);
+> -			name[namelen] = 0;
+> +			/* The i_name name may be out of date. Prefer dirent_name */
+> +			if (dirent_name) {
+> +				name = dirent_name;
+> +			} else  {
+> +				strncpy(i_name, (const char *)inode->i_name, i_namelen);
+> +				i_name[i_namelen] = 0;
+> +				name = i_name;
+> +			}
+>  		}
+>  
+> -		if (S_ISREG(imode) || S_ISLNK(imode)) {
+> +		if (S_ISREG(imode)) {
+>  			dump_file(sbi, ni, node_blk, name);
+> -		} else {
+> +		} else if (S_ISDIR(imode)) {
+>  			dump_folder(sbi, ni, node_blk, name, is_root);
+> +		} else {
+> +			dump_link(sbi, ni, node_blk, name);
+>  		}
+>  
+>  #if !defined(__MINGW32__)
+>  		/* fix up mode/owner */
+>  		if (c.preserve_perms) {
+> -			if (is_root)
+> +			if (is_root) {
+> +				name = i_name;
+>  				strncpy(name, ".", 2);
+> -			ASSERT(chmod(name, imode) == 0);
+> -			ASSERT(chown(name, inode->i_uid, inode->i_gid) == 0);
+> +			}
+> +			if (!S_ISLNK(imode))
+> +				ASSERT(chmod(name, imode) == 0);
+> +			ASSERT(lchown(name, inode->i_uid, inode->i_gid) == 0);
+>  		}
+>  #endif
+>  		if (is_base)
+> @@ -705,7 +764,7 @@ void dump_node_scan_disk(struct f2fs_sb_info *sbi, nid_t nid)
+>  	free(node_blk);
+>  }
+>  
+> -int dump_node(struct f2fs_sb_info *sbi, nid_t nid, int force, char *base_path, int base, int allow_folder)
+> +int dump_node(struct f2fs_sb_info *sbi, nid_t nid, int force, char *base_path, int base, int allow_folder, char *dirent_name)
+>  {
+>  	struct node_info ni;
+>  	struct f2fs_node *node_blk;
+> @@ -740,7 +799,7 @@ int dump_node(struct f2fs_sb_info *sbi, nid_t nid, int force, char *base_path, i
+>  			print_node_info(sbi, node_blk, force);
+>  
+>  		if (ni.ino == ni.nid)
+> -			ret = dump_filesystem(sbi, &ni, node_blk, force, base_path, base, allow_folder);
+> +			ret = dump_filesystem(sbi, &ni, node_blk, force, base_path, base, allow_folder, dirent_name);
+>  	} else {
+>  		print_node_info(sbi, node_blk, force);
+>  		MSG(force, "Invalid (i)node block\n\n");
+> diff --git a/fsck/fsck.c b/fsck/fsck.c
+> index 7400dcf..b79b354 100644
+> --- a/fsck/fsck.c
+> +++ b/fsck/fsck.c
+> @@ -1651,7 +1651,7 @@ static void print_dentry(struct f2fs_sb_info *sbi, __u8 *name,
+>  			d = d->next;
+>  		}
+>  		printf("/%s", new);
+> -		if (dump_node(sbi, le32_to_cpu(dentry[idx].ino), 0, NULL, 0, 0))
+> +		if (dump_node(sbi, le32_to_cpu(dentry[idx].ino), 0, NULL, 0, 0, NULL))
+>  			printf("\33[2K\r");
+>  	} else {
+>  		for (i = 1; i < depth; i++)
+> @@ -3632,7 +3632,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+>  		if (!strcasecmp(ans, "y")) {
+>  			for (i = 0; i < fsck->nr_nat_entries; i++) {
+>  				if (f2fs_test_bit(i, fsck->nat_area_bitmap))
+> -					dump_node(sbi, i, 1, NULL, 1, 0);
+> +					dump_node(sbi, i, 1, NULL, 1, 0, NULL);
+>  			}
+>  		}
+>  	}
+> diff --git a/fsck/fsck.h b/fsck/fsck.h
+> index 6cac926..476b436 100644
+> --- a/fsck/fsck.h
+> +++ b/fsck/fsck.h
+> @@ -277,7 +277,7 @@ struct dump_option {
+>  extern void nat_dump(struct f2fs_sb_info *, nid_t, nid_t);
+>  extern void sit_dump(struct f2fs_sb_info *, unsigned int, unsigned int);
+>  extern void ssa_dump(struct f2fs_sb_info *, int, int);
+> -extern int dump_node(struct f2fs_sb_info *, nid_t, int, char *, int, int);
+> +extern int dump_node(struct f2fs_sb_info *, nid_t, int, char *, int, int, char *);
+>  extern int dump_info_from_blkaddr(struct f2fs_sb_info *, u32);
+>  extern unsigned int start_bidx_of_node(unsigned int, struct f2fs_node *);
+>  extern void dump_node_scan_disk(struct f2fs_sb_info *sbi, nid_t nid);
+> diff --git a/fsck/main.c b/fsck/main.c
+> index c13e287..af00fa5 100644
+> --- a/fsck/main.c
+> +++ b/fsck/main.c
+> @@ -102,6 +102,7 @@ void dump_usage()
+>  	MSG(0, "  -y alias for -f\n");
+>  	MSG(0, "  -o dump inodes to the given path\n");
+>  	MSG(0, "  -P preserve mode/owner/group for dumped inode\n");
+> +	MSG(0, "  -L Preserves symlinks. Otherwise symlinks are dumped as regular files.\n");
+>  	MSG(0, "  -V print the version number and exit\n");
+>  
+>  	exit(1);
+> @@ -389,7 +390,7 @@ void f2fs_parse_options(int argc, char *argv[])
+>  		}
+>  	} else if (!strcmp("dump.f2fs", prog)) {
+>  #ifdef WITH_DUMP
+> -		const char *option_string = "d:fi:I:n:Mo:Prs:Sa:b:Vy";
+> +		const char *option_string = "d:fi:I:n:LMo:Prs:Sa:b:Vy";
+>  		static struct dump_option dump_opt = {
+>  			.nid = 0,	/* default root ino */
+>  			.start_nat = -1,
+> @@ -479,6 +480,14 @@ void f2fs_parse_options(int argc, char *argv[])
+>  				err = EWRONG_OPT;
+>  #else
+>  				c.preserve_perms = 1;
+> +#endif
+> +				break;
+> +			case 'L':
+> +#if defined(__MINGW32__)
+> +				MSG(0, "-L not supported for Windows\n");
+> +				err = EWRONG_OPT;
+> +#else
+> +				c.preserve_symlinks = 1;
+>  #endif
+>  				break;
+>  			case 'V':
+> @@ -957,7 +966,7 @@ static void do_dump(struct f2fs_sb_info *sbi)
+>  	if (opt->blk_addr != -1)
+>  		dump_info_from_blkaddr(sbi, opt->blk_addr);
+>  	if (opt->nid)
+> -		dump_node(sbi, opt->nid, c.force, opt->base_path, 1, 1);
+> +		dump_node(sbi, opt->nid, c.force, opt->base_path, 1, 1, NULL);
+>  	if (opt->scan_nid)
+>  		dump_node_scan_disk(sbi, opt->scan_nid);
+>  
+> diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+> index 870a6e4..08ba32d 100644
+> --- a/include/f2fs_fs.h
+> +++ b/include/f2fs_fs.h
+> @@ -1478,6 +1478,8 @@ struct f2fs_configuration {
+>  	uint16_t s_encoding_flags;
+>  	int32_t kd;
+>  	int32_t dump_fd;
+> +	char *dump_symlink;
+> +	int dump_sym_target_len;
+>  	struct device_info devices[MAX_DEVICES];
+>  	int ndevs;
+>  	char *extension_list[2];
+> @@ -1540,7 +1542,10 @@ struct f2fs_configuration {
+>  	struct selinux_opt seopt_file[8];
+>  	int nr_opt;
+>  #endif
+> +
+> +	/* dump parameters */
+>  	int preserve_perms;
+> +	int preserve_symlinks;
+>  
+>  	/* resize parameters */
+>  	int safe_resize;
+> @@ -1614,6 +1619,9 @@ extern int dev_readahead(__u64, size_t UNUSED(len));
+>  extern int dev_write(void *, __u64, size_t);
+>  extern int dev_write_block(void *, __u64);
+>  extern int dev_write_dump(void *, __u64, size_t);
+> +#if !defined(__MINGW32__)
+> +extern int dev_write_symlink(char *, size_t);
+> +#endif
+>  /* All bytes in the buffer must be 0 use dev_fill(). */
+>  extern int dev_fill(void *, __u64, size_t);
+>  extern int dev_fill_block(void *, __u64);
+> diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c
+> index b2d6933..f39367a 100644
+> --- a/lib/libf2fs_io.c
+> +++ b/lib/libf2fs_io.c
+> @@ -598,6 +598,16 @@ int dev_write_dump(void *buf, __u64 offset, size_t len)
+>  	return 0;
+>  }
+>  
+> +#if !defined(__MINGW32__)
+> +int dev_write_symlink(char *buf, size_t len)
+> +{
+> +	buf[len] = 0;
+> +	if (symlink(buf, c.dump_symlink))
+> +		return -1;
+> +	return 0;
+> +}
+> +#endif
+> +
+>  int dev_fill(void *buf, __u64 offset, size_t len)
+>  {
+>  	int fd;
+> diff --git a/man/dump.f2fs.8 b/man/dump.f2fs.8
+> index 60d6783..4035d57 100644
+> --- a/man/dump.f2fs.8
+> +++ b/man/dump.f2fs.8
+> @@ -71,6 +71,9 @@ Dump inodes to the given path
+>  .BI \-P
+>  Preserve mode/owner/group for dumped inode
+>  .TP
+> +.BI \-L
+> +Preserves symlinks. Otherwise symlinks are dumped as regular files.
+> +.TP
+>  .BI \-I " inode number"
+>  Specify an inode number and scan full disk to dump out, include history inode block
+>  .TP
+> 
+> base-commit: 584ebc710bc0779381595135e0686492c3908a20
+> -- 
+> 2.45.2.1089.g2a221341d9-goog
 
 
 _______________________________________________
