@@ -2,102 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7EF293C7C7
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jul 2024 19:46:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5050793C86D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jul 2024 20:40:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sX2Xj-0003SY-QH;
-	Thu, 25 Jul 2024 17:46:20 +0000
+	id 1sX3NZ-0001kY-Da;
+	Thu, 25 Jul 2024 18:39:52 +0000
 Received: from [172.30.29.67] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1sX2Xh-0003SQ-AZ
+ (envelope-from <jaegeuk@kernel.org>) id 1sX3NY-0001kS-D9
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 Jul 2024 17:46:18 +0000
+ Thu, 25 Jul 2024 18:39:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YfbQbkrLuzdRorUufOxakZMq28wrCfPNBIhvBwZv8nQ=; b=aRMQu48LyjbFF7HQZ/puHSD7nx
- ffNYfgN3HGf8G6/e2vxshcXqFeJjAk6NRfcNrqUBfcRN7mgk5/ZdvfqXA19Lc3Msan5G0qZ1RZPfA
- q/j4G6wjsy3Rj41fwRSYVoTWUDORCK6ObEN/FS9FPUFbNeXrhIkxCm1dyXt2IHtARDpQ=;
+ bh=ett5PzhDuG419l00fA1V98eEF8nQ7SW/myeQLHm7Kmg=; b=OrJASHpEn8xWJck/enci1AL0LE
+ ByJWhgx1sWn4Vc0k66UdpHbBXKUvsyfR3Zv2ufk9+QHBFQQN6cJIe71m7pmJWQnvZp61WrH4P0z6e
+ IuwPmDEDip6CZaUfsQRffJeE0HYu/mOiZA0PLSSReZ/SHgiRRjtNL1jVjztgNkJFMz1Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=YfbQbkrLuzdRorUufOxakZMq28wrCfPNBIhvBwZv8nQ=; b=hBvEWWqNnCEVAqPIRyzraG3QLu
- ItdaTuQd+SAY4DCEEXEOXzne2wwdpeparXoGwtmrdhYWq/ncb7GhD3a7lPWUPAYkRg4O0erEt6t0K
- sjbzli0J+UifVVFgz3VlddIMeQ/3nOwShTZh8KHYKGhAeW8x6wo+qbjOTI0Lew9D4RoM=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ett5PzhDuG419l00fA1V98eEF8nQ7SW/myeQLHm7Kmg=; b=G
+ aaAagLEEtq9bFSK0sg0eg0NnaI58hmBMWq6RZiIja1r10UfK5zyAPEFjIx8DunpIYgPZ1Zm5Oz3Fp
+ Gx5IlmTK4CRGTNkgYYT8taQJ9MqQ0hh5kKxEsQPHFWrNZW2dcNz7KMTccDCRtnAOKguBOwZW1aItL
+ fDht2wsn6N05PFaU=;
 Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sX2Xg-0000Dm-C7 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 Jul 2024 17:46:18 +0000
+ id 1sX3NW-0002b8-NH for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 25 Jul 2024 18:39:51 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 6F1D3CE13D6;
- Thu, 25 Jul 2024 17:46:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60811C32782;
- Thu, 25 Jul 2024 17:46:03 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 0B2C6CE11C4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 25 Jul 2024 18:39:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 406FAC116B1;
+ Thu, 25 Jul 2024 18:39:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1721929563;
- bh=A6gk7PsWmC2pENQ5J0eqwtVvTxvCzdSlNV8DcbLRYnI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=PBaJ7dHLBoSuZWNdrSdceCySve6fcq//jgpmwPx9/JVp1I8QOx4ljvBiCwZP9F2Zh
- JSctpwEY4FE4QmFLTezpm5Pu9ppY5qHI3OhzcG7mc0aTrejOJNH4rl84anRxlT2tQ/
- 5xH+tr1JeLsyTQ3PRAUQ4h6SGRJPCd+cNiK8Jd2cVILKmOMZ2pRV47dCmsvMMB+ZND
- W1HdhVFq+Zf55pWLyr80+9Euh5I5pJjeJpLVom0WH7qBeUcMLzzqO1NNHoXEwRQSYC
- 3g6DqK5iwGerudG0ozQXGKndGMjOaFrpc51lSCXM2evqbyMPELoZlHPlyjJAeppe+E
- gLnYFUPFEM5YQ==
-Date: Thu, 25 Jul 2024 17:46:01 +0000
+ s=k20201202; t=1721932783;
+ bh=xKTlnWYyf5DCq8YNjso4UaUHl1+arRmwm8nOCn7EuSw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=I4Qrc7c21I07tMbEeiO7L/Y+viG05osGtekqrAiJh5DPWB1y6Zdws7cYbtsYD6m/8
+ aSiuk/qL6okgt58rZCoeIxd6opTHtoPf8PLUdqOSzbcNzm7g/sv7R7ExNnC6wvHJq8
+ HEg+SibUCLJh4M04NrBTucEdvJF+05cwufjfYjEtF1AS8CBjCQKcvN62Hz3KITsXAn
+ qDNoj76P1+WYEoXghJYIarWNTnJf/j+ni5MBjBIo4B6g1VxLKUKnBNGktt//Rr7wph
+ gvB+kzJuehwgQPDzbyObTR2NKt5eICujIMEsKEWw7w0MoOhcp3iYWwq06Y8eBHZwO7
+ 4WVD6VT4Vvn5g==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Daniel Rosenberg <drosen@google.com>
-Message-ID: <ZqKPWYuvzMW7J8CS@google.com>
-References: <20240723211157.27618-1-drosen@google.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 25 Jul 2024 18:39:41 +0000
+Message-ID: <20240725183941.655356-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.46.0.rc1.232.g9752f9e123-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240723211157.27618-1-drosen@google.com>
-X-Spam-Score: -0.3 (/)
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 07/23, Daniel Rosenberg wrote: > Previously,
- dumped symlinks
- would always create regular files instead. > This allows symlinks to be dumped
- as symlinks with the -L option. > > The i_name field's na [...] 
- Content analysis details:   (-0.3 points, 6.0 required)
+ Content preview: Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> ---
+ fsck/inject.c
+ | 28 +++++++++++++++ 1 file changed, 15 insertions(+), 13 deletions(-) diff
+ --git a/fsck/inject.c b/fsck/inject.c index 2a21dae293f6..4ffdfd0f0b5d 100644
+ --- a/fsck/inject.c +++ b/fsck/inject.c @@ -211, 6 +211,
+ 8 @@ int inject_parse_options(int
+ argc, char *argv[], struct i [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [145.40.73.55 listed in bl.score.senderscore.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [145.40.73.55 listed in sa-trusted.bondedsender.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [145.40.73.55 listed in bl.score.senderscore.com]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.73.55 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sX2Xg-0000Dm-C7
-Subject: Re: [f2fs-dev] [PATCH v3] dump.f2fs: Dump symlinks as symlinks
+X-Headers-End: 1sX3NW-0002b8-NH
+Subject: [f2fs-dev] [PATCH] inject.f2fs: fix some build errors
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,511 +113,119 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel-team@android.com, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 07/23, Daniel Rosenberg wrote:
-> Previously, dumped symlinks would always create regular files instead.
-> This allows symlinks to be dumped as symlinks with the -L option.
-> 
-> The i_name field's name may not be the same as the actual name from the
-> dirent, so we use the dirent name when available.
-> 
-> Currently hardlinks aren't detected, so print a warning if we notice a
-> nondirectory with a link count over 1.
-> 
-> Signed-off-by: Daniel Rosenberg <drosen@google.com>
-> ---
-> 
-> V3: Fixed le32_to_cpu => le64_to_cpu
-> V2: Fixed some issues on the Windows build. Also S_ISLNK is defined as
-> false for the Windows build, so I adjusted some checks to not rely on that.
-> Removed some unused variables.
-> 
->  fsck/dump.c       | 121 ++++++++++++++++++++++++++++++++++------------
->  fsck/fsck.c       |   4 +-
->  fsck/fsck.h       |   2 +-
->  fsck/main.c       |  13 ++++-
->  include/f2fs_fs.h |   8 +++
->  lib/libf2fs_io.c  |  10 ++++
->  man/dump.f2fs.8   |   3 ++
->  7 files changed, 125 insertions(+), 36 deletions(-)
-> 
-> diff --git a/fsck/dump.c b/fsck/dump.c
-> index 8d5613e..493a80d 100644
-> --- a/fsck/dump.c
-> +++ b/fsck/dump.c
-> @@ -253,20 +253,27 @@ static void dump_folder_contents(struct f2fs_sb_info *sbi, u8 *bitmap,
->  {
->  	int i;
->  	int name_len;
-> +	char name[F2FS_NAME_LEN + 1] = {0};
->  
->  	for (i = 0; i < max; i++) {
->  		if (test_bit_le(i, bitmap) == 0)
->  			continue;
->  		name_len = le16_to_cpu(dentry[i].name_len);
-> +		if (name_len == 0 || name_len > F2FS_NAME_LEN) {
-> +			MSG(c.force, "Wrong name info\n\n");
-> +			ASSERT(name_len == 0 || name_len > F2FS_NAME_LEN);
-> +		}
->  		if (name_len == 1 && filenames[i][0] == '.')
->  			continue;
->  		if (name_len == 2 && filenames[i][0] == '.' && filenames[i][1] == '.')
->  			continue;
-> -		dump_node(sbi, le32_to_cpu(dentry[i].ino), 1, NULL, 0, 1);
-> +		strncpy(name, (const char *)filenames[i], name_len);
-> +		name[name_len] = 0;
-> +		dump_node(sbi, le32_to_cpu(dentry[i].ino), 1, NULL, 0, 1, name);
->  	}
->  }
->  
-> -static void dump_data_blk(struct f2fs_sb_info *sbi, __u64 offset, u32 blkaddr, bool is_folder)
-> +static void dump_data_blk(struct f2fs_sb_info *sbi, __u64 offset, u32 blkaddr, int type)
->  {
->  	char buf[F2FS_BLKSIZE];
->  
-> @@ -307,11 +314,15 @@ static void dump_data_blk(struct f2fs_sb_info *sbi, __u64 offset, u32 blkaddr, b
->  		ASSERT(ret >= 0);
->  	}
->  
-> -	if (is_folder) {
-> +	if (S_ISDIR(type)) {
->  		struct f2fs_dentry_block *d = (struct f2fs_dentry_block *) buf;
->  
->  		dump_folder_contents(sbi, d->dentry_bitmap, F2FS_DENTRY_BLOCK_DENTRIES(d),
->  					F2FS_DENTRY_BLOCK_FILENAMES(d), NR_DENTRY_IN_BLOCK);
-> +#if !defined(__MINGW32__)
-> +	} if (S_ISLNK(type)) {
-> +		dev_write_symlink(buf, c.dump_sym_target_len);
-> +#endif
->  	} else {
->  		/* write blkaddr */
->  		dev_write_dump(buf, offset, F2FS_BLKSIZE);
-> @@ -319,7 +330,7 @@ static void dump_data_blk(struct f2fs_sb_info *sbi, __u64 offset, u32 blkaddr, b
->  }
->  
->  static void dump_node_blk(struct f2fs_sb_info *sbi, int ntype,
-> -				u32 nid, u32 addr_per_block, u64 *ofs, int is_dir)
-> +				u32 nid, u32 addr_per_block, u64 *ofs, int type)
->  {
->  	struct node_info ni;
->  	struct f2fs_node *node_blk;
-> @@ -356,20 +367,20 @@ static void dump_node_blk(struct f2fs_sb_info *sbi, int ntype,
->  		switch (ntype) {
->  		case TYPE_DIRECT_NODE:
->  			dump_data_blk(sbi, *ofs * F2FS_BLKSIZE,
-> -					le32_to_cpu(node_blk->dn.addr[i]), is_dir);
-> +					le32_to_cpu(node_blk->dn.addr[i]), type);
->  			(*ofs)++;
->  			break;
->  		case TYPE_INDIRECT_NODE:
->  			dump_node_blk(sbi, TYPE_DIRECT_NODE,
->  					le32_to_cpu(node_blk->in.nid[i]),
->  					addr_per_block,
-> -					ofs, is_dir);
-> +					ofs, type);
->  			break;
->  		case TYPE_DOUBLE_INDIRECT_NODE:
->  			dump_node_blk(sbi, TYPE_INDIRECT_NODE,
->  					le32_to_cpu(node_blk->in.nid[i]),
->  					addr_per_block,
-> -					ofs, is_dir);
-> +					ofs, type);
->  			break;
->  		}
->  	}
-> @@ -377,7 +388,7 @@ static void dump_node_blk(struct f2fs_sb_info *sbi, int ntype,
->  }
->  
->  #ifdef HAVE_FSETXATTR
-> -static void dump_xattr(struct f2fs_sb_info *sbi, struct f2fs_node *node_blk, int is_dir)
-> +static void dump_xattr(struct f2fs_sb_info *sbi, struct f2fs_node *node_blk, int type)
->  {
->  	void *xattr;
->  	void *last_base_addr;
-> @@ -431,19 +442,26 @@ static void dump_xattr(struct f2fs_sb_info *sbi, struct f2fs_node *node_blk, int
->  
->  		DBG(1, "fd %d xattr_name %s\n", c.dump_fd, xattr_name);
->  #if defined(__linux__)
-> -		if (is_dir) {
-> +		if (S_ISDIR(type)) {
->  			ret = setxattr(".", xattr_name, value,
->  							le16_to_cpu(ent->e_value_size), 0);
-> +		} if (S_ISLNK(type) && c.preserve_symlinks) {
-> +			ret = lsetxattr(c.dump_symlink, xattr_name, value,
-> +							le16_to_cpu(ent->e_value_size), 0);
->  		} else {
->  			ret = fsetxattr(c.dump_fd, xattr_name, value,
->  							le16_to_cpu(ent->e_value_size), 0);
->  		}
->  
->  #elif defined(__APPLE__)
-> -		if (is_dir) {
-> +		if (S_ISDIR(type)) {
->  			ret = setxattr(".", xattr_name, value,
->  					le16_to_cpu(ent->e_value_size), 0,
->  					XATTR_CREATE);
-> +		} if (S_ISLNK(type) && c.preserve_symlinks) {
-> +			ret = lsetxattr(c.dump_symlink, xattr_name, value,
-> +					le16_to_cpu(ent->e_value_size), 0,
-> +					XATTR_CREATE);
->  		} else {
->  			ret = fsetxattr(c.dump_fd, xattr_name, value,
->  					le16_to_cpu(ent->e_value_size), 0,
-> @@ -473,14 +491,21 @@ static int dump_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->  	u32 i = 0;
->  	u64 ofs = 0;
->  	u32 addr_per_block;
-> -	bool is_dir = S_ISDIR(le16_to_cpu(node_blk->i.i_mode));
-> +	u16 type = le16_to_cpu(node_blk->i.i_mode);
->  	int ret = 0;
->  
->  	if ((node_blk->i.i_inline & F2FS_INLINE_DATA)) {
->  		DBG(3, "ino[0x%x] has inline data!\n", nid);
->  		/* recover from inline data */
-> -		dev_write_dump(inline_data_addr(node_blk),
-> +#if !defined(__MINGW32__)
-> +		if (S_ISLNK(type) && c.preserve_symlinks) {
-> +			dev_write_symlink(inline_data_addr(node_blk), c.dump_sym_target_len);
-> +		} else
-> +#endif
-> +		{
-> +			dev_write_dump(inline_data_addr(node_blk),
->  						0, MAX_INLINE_DATA(node_blk));
-> +		}
->  		ret = -1;
->  		goto dump_xattr;
->  	}
-> @@ -504,7 +529,7 @@ static int dump_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->  	/* check data blocks in inode */
->  	for (i = 0; i < ADDRS_PER_INODE(&node_blk->i); i++, ofs++)
->  		dump_data_blk(sbi, ofs * F2FS_BLKSIZE, le32_to_cpu(
-> -			node_blk->i.i_addr[get_extra_isize(node_blk) + i]), is_dir);
-> +			node_blk->i.i_addr[get_extra_isize(node_blk) + i]), type);
->  
->  	/* check node blocks in inode */
->  	for (i = 0; i < 5; i++) {
-> @@ -513,26 +538,26 @@ static int dump_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
->  					le32_to_cpu(F2FS_INODE_I_NID(&node_blk->i, i)),
->  					addr_per_block,
->  					&ofs,
-> -					is_dir);
-> +					type);
->  		else if (i == 2 || i == 3)
->  			dump_node_blk(sbi, TYPE_INDIRECT_NODE,
->  					le32_to_cpu(F2FS_INODE_I_NID(&node_blk->i, i)),
->  					addr_per_block,
->  					&ofs,
-> -					is_dir);
-> +					type);
->  		else if (i == 4)
->  			dump_node_blk(sbi, TYPE_DOUBLE_INDIRECT_NODE,
->  					le32_to_cpu(F2FS_INODE_I_NID(&node_blk->i, i)),
->  					addr_per_block,
->  					&ofs,
-> -					is_dir);
-> +					type);
->  		else
->  			ASSERT(0);
->  	}
->  	/* last block in extent cache */
->  	print_extent(true);
->  dump_xattr:
-> -	dump_xattr(sbi, node_blk, is_dir);
-> +	dump_xattr(sbi, node_blk, type);
->  	return ret;
->  }
->  
-> @@ -555,6 +580,23 @@ static void dump_file(struct f2fs_sb_info *sbi, struct node_info *ni,
->  	close(c.dump_fd);
->  }
->  
-> +static void dump_link(struct f2fs_sb_info *sbi, struct node_info *ni,
-> +				struct f2fs_node *node_blk, char *name)
-> +{
-> +#if defined(__MINGW32__)
-> +	dump_file(sbi, ni, node_blk, name);
-> +#else
-> +	struct f2fs_inode *inode = &node_blk->i;
-> +	int len = le64_to_cpu(inode->i_size);
-> +
-> +	if (!c.preserve_symlinks)
-> +		return dump_file(sbi, ni, node_blk, name);
-> +	c.dump_symlink = name;
-> +	c.dump_sym_target_len = len + 1;
-> +	dump_inode_blk(sbi, ni->ino, node_blk);
-> +#endif
-> +}
-> +
->  static void dump_folder(struct f2fs_sb_info *sbi, struct node_info *ni,
->  				struct f2fs_node *node_blk, char *path, int is_root)
->  {
-> @@ -580,18 +622,24 @@ static void dump_folder(struct f2fs_sb_info *sbi, struct node_info *ni,
->  
->  static int dump_filesystem(struct f2fs_sb_info *sbi, struct node_info *ni,
->  				struct f2fs_node *node_blk, int force, char *base_path,
-> -				bool is_base, bool allow_folder)
-> +				bool is_base, bool allow_folder, char *dirent_name)
->  {
->  	struct f2fs_inode *inode = &node_blk->i;
->  	u32 imode = le16_to_cpu(inode->i_mode);
-> -	u32 namelen = le32_to_cpu(inode->i_namelen);
-> -	char name[F2FS_NAME_LEN + 1] = {0};
-> +	u32 ilinks = le32_to_cpu(inode->i_links);
-> +	u32 i_namelen = le32_to_cpu(inode->i_namelen);
-> +	char i_name[F2FS_NAME_LEN + 1] = {0};
-> +	char *name;
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fsck/inject.c | 28 +++++++++++++++-------------
+ 1 file changed, 15 insertions(+), 13 deletions(-)
 
-        char *name = NULL;
-Assigned NULL to avoid build warning.
+diff --git a/fsck/inject.c b/fsck/inject.c
+index 2a21dae293f6..4ffdfd0f0b5d 100644
+--- a/fsck/inject.c
++++ b/fsck/inject.c
+@@ -211,6 +211,8 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
+ 
+ 	while ((o = getopt_long(argc, argv, option_string,
+ 				long_opt, NULL)) != EOF) {
++		long nid, blk;
++
+ 		switch (o) {
+ 		case 1:
+ 			c.dry_run = 1;
+@@ -265,10 +267,10 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
+ 			MSG(0, "Info: inject nat pack %s\n", pack[opt->nat]);
+ 			break;
+ 		case 9:
+-			opt->nid = strtol(optarg, &endptr, 0);
+-			if (opt->nid == LONG_MAX || opt->nid == LONG_MIN ||
+-			    *endptr != '\0')
++			nid = strtol(optarg, &endptr, 0);
++			if (nid >= UINT_MAX || *endptr != '\0')
+ 				return -ERANGE;
++			opt->nid = nid;
+ 			MSG(0, "Info: inject nid %u : 0x%x\n", opt->nid, opt->nid);
+ 			break;
+ 		case 10:
+@@ -280,10 +282,10 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
+ 			MSG(0, "Info: inject sit pack %s\n", pack[opt->sit]);
+ 			break;
+ 		case 11:
+-			opt->blk = strtol(optarg, &endptr, 0);
+-			if (opt->blk == LONG_MAX || opt->blk == LONG_MIN ||
+-			    *endptr != '\0')
++			blk = strtol(optarg, &endptr, 0);
++			if (blk >= UINT_MAX || *endptr != '\0')
+ 				return -ERANGE;
++			opt->blk = blk;
+ 			MSG(0, "Info: inject blkaddr %u : 0x%x\n", opt->blk, opt->blk);
+ 			break;
+ 		case 12:
+@@ -432,7 +434,7 @@ static int inject_cp(struct f2fs_sb_info *sbi, struct inject_option *opt)
+ 	}
+ 
+ 	if (!strcmp(opt->mb, "checkpoint_ver")) {
+-		MSG(0, "Info: inject checkpoint_ver of cp %d: 0x%llx -> 0x%lx\n",
++		MSG(0, "Info: inject checkpoint_ver of cp %d: 0x%llx -> 0x%"PRIx64"\n",
+ 		    opt->cp, get_cp(checkpoint_ver), (u64)opt->val);
+ 		set_cp(checkpoint_ver, (u64)opt->val);
+ 	} else if (!strcmp(opt->mb, "ckpt_flags")) {
+@@ -510,7 +512,7 @@ static int inject_nat(struct f2fs_sb_info *sbi, struct inject_option *opt)
+ 	int ret;
+ 
+ 	if (!IS_VALID_NID(sbi, opt->nid)) {
+-		ERR_MSG("Invalid nid %u range [%u:%lu]\n", opt->nid, 0,
++		ERR_MSG("Invalid nid %u range [%u:%"PRIu64"]\n", opt->nid, 0,
+ 			NAT_ENTRY_PER_BLOCK *
+ 			((get_sb(segment_count_nat) << 1) <<
+ 			 sbi->log_blocks_per_seg));
+@@ -627,7 +629,7 @@ static int inject_sit(struct f2fs_sb_info *sbi, struct inject_option *opt)
+ 		sit->valid_map[opt->idx] = (u8)opt->val;
+ 	} else if (!strcmp(opt->mb, "mtime")) {
+ 		MSG(0, "Info: inject sit entry mtime of block 0x%x "
+-		    "in pack %d: %lu -> %lu\n", opt->blk, opt->sit,
++		    "in pack %d: %"PRIu64" -> %"PRIu64"\n", opt->blk, opt->sit,
+ 		    le64_to_cpu(sit->mtime), (u64)opt->val);
+ 		sit->mtime = cpu_to_le64((u64)opt->val);
+ 	} else {
+@@ -752,11 +754,11 @@ static int inject_inode(struct f2fs_sb_info *sbi, struct f2fs_node *node,
+ 		    opt->nid, le32_to_cpu(inode->i_links), (u32)opt->val);
+ 		inode->i_links = cpu_to_le32((u32)opt->val);
+ 	} else if (!strcmp(opt->mb, "i_size")) {
+-		MSG(0, "Info: inject inode i_size of nid %u: %lu -> %lu\n",
++		MSG(0, "Info: inject inode i_size of nid %u: %"PRIu64" -> %"PRIu64"\n",
+ 		    opt->nid, le64_to_cpu(inode->i_size), (u64)opt->val);
+ 		inode->i_size = cpu_to_le64((u64)opt->val);
+ 	} else if (!strcmp(opt->mb, "i_blocks")) {
+-		MSG(0, "Info: inject inode i_blocks of nid %u: %lu -> %lu\n",
++		MSG(0, "Info: inject inode i_blocks of nid %u: %"PRIu64" -> %"PRIu64"\n",
+ 		    opt->nid, le64_to_cpu(inode->i_blocks), (u64)opt->val);
+ 		inode->i_blocks = cpu_to_le64((u64)opt->val);
+ 	} else if (!strcmp(opt->mb, "i_extra_isize")) {
+@@ -835,7 +837,7 @@ static int inject_node(struct f2fs_sb_info *sbi, struct inject_option *opt)
+ 	int ret;
+ 
+ 	if (!IS_VALID_NID(sbi, opt->nid)) {
+-		ERR_MSG("Invalid nid %u range [%u:%lu]\n", opt->nid, 0,
++		ERR_MSG("Invalid nid %u range [%u:%"PRIu64"]\n", opt->nid, 0,
+ 			NAT_ENTRY_PER_BLOCK *
+ 			((get_sb(segment_count_nat) << 1) <<
+ 			 sbi->log_blocks_per_seg));
+@@ -865,7 +867,7 @@ static int inject_node(struct f2fs_sb_info *sbi, struct inject_option *opt)
+ 		footer->flag = cpu_to_le32((u32)opt->val);
+ 	} else if (!strcmp(opt->mb, "cp_ver")) {
+ 		MSG(0, "Info: inject node footer cp_ver of nid %u: "
+-		    "0x%lx -> 0x%lx\n", opt->nid, le64_to_cpu(footer->cp_ver),
++		    "0x%"PRIx64" -> 0x%"PRIx64"\n", opt->nid, le64_to_cpu(footer->cp_ver),
+ 		    (u64)opt->val);
+ 		footer->cp_ver = cpu_to_le64((u64)opt->val);
+ 	} else if (!strcmp(opt->mb, "next_blkaddr")) {
+-- 
+2.46.0.rc1.232.g9752f9e123-goog
 
->  	char path[1024] = {0};
->  	char ans[255] = {0};
->  	int is_encrypted = file_is_encrypt(inode);
->  	int is_root = sbi->root_ino_num == ni->nid;
->  	int ret;
->  
-> +	if (!S_ISDIR(imode) && ilinks != 1) {
-> +		MSG(force, "Warning: Hard link detected. Dumped files may be duplicated\n");
-> +	}
-> +
->  	if (is_encrypted) {
->  		MSG(force, "File is encrypted\n");
->  		return -1;
-> @@ -601,7 +649,7 @@ static int dump_filesystem(struct f2fs_sb_info *sbi, struct node_info *ni,
->  		MSG(force, "Not a valid file type\n\n");
->  		return -1;
->  	}
-> -	if (!is_root && (namelen == 0 || namelen > F2FS_NAME_LEN)) {
-> +	if (!is_root && !dirent_name && (i_namelen == 0 || i_namelen > F2FS_NAME_LEN)) {
->  		MSG(force, "Wrong name info\n\n");
->  		return -1;
->  	}
-> @@ -614,7 +662,7 @@ static int dump_filesystem(struct f2fs_sb_info *sbi, struct node_info *ni,
->  		return dump_inode_blk(sbi, ni->ino, node_blk);
->  
->  	printf("Do you want to dump this %s into %s/? [Y/N] ",
-> -			S_ISREG(imode) || S_ISLNK(imode) ? "file" : "folder",
-> +			S_ISDIR(imode) ? "folder" : "file",
->  			base_path);
->  	ret = scanf("%s", ans);
->  	ASSERT(ret >= 0);
-> @@ -635,23 +683,34 @@ dump:
->  
->  		/* make a file */
->  		if (!is_root) {
-> -			strncpy(name, (const char *)inode->i_name, namelen);
-> -			name[namelen] = 0;
-> +			/* The i_name name may be out of date. Prefer dirent_name */
-> +			if (dirent_name) {
-> +				name = dirent_name;
-> +			} else  {
-> +				strncpy(i_name, (const char *)inode->i_name, i_namelen);
-> +				i_name[i_namelen] = 0;
-> +				name = i_name;
-> +			}
->  		}
->  
-> -		if (S_ISREG(imode) || S_ISLNK(imode)) {
-> +		if (S_ISREG(imode)) {
->  			dump_file(sbi, ni, node_blk, name);
-> -		} else {
-> +		} else if (S_ISDIR(imode)) {
->  			dump_folder(sbi, ni, node_blk, name, is_root);
-> +		} else {
-> +			dump_link(sbi, ni, node_blk, name);
->  		}
->  
->  #if !defined(__MINGW32__)
->  		/* fix up mode/owner */
->  		if (c.preserve_perms) {
-> -			if (is_root)
-> +			if (is_root) {
-> +				name = i_name;
->  				strncpy(name, ".", 2);
-> -			ASSERT(chmod(name, imode) == 0);
-> -			ASSERT(chown(name, inode->i_uid, inode->i_gid) == 0);
-> +			}
-> +			if (!S_ISLNK(imode))
-> +				ASSERT(chmod(name, imode) == 0);
-> +			ASSERT(lchown(name, inode->i_uid, inode->i_gid) == 0);
->  		}
->  #endif
->  		if (is_base)
-> @@ -705,7 +764,7 @@ void dump_node_scan_disk(struct f2fs_sb_info *sbi, nid_t nid)
->  	free(node_blk);
->  }
->  
-> -int dump_node(struct f2fs_sb_info *sbi, nid_t nid, int force, char *base_path, int base, int allow_folder)
-> +int dump_node(struct f2fs_sb_info *sbi, nid_t nid, int force, char *base_path, int base, int allow_folder, char *dirent_name)
->  {
->  	struct node_info ni;
->  	struct f2fs_node *node_blk;
-> @@ -740,7 +799,7 @@ int dump_node(struct f2fs_sb_info *sbi, nid_t nid, int force, char *base_path, i
->  			print_node_info(sbi, node_blk, force);
->  
->  		if (ni.ino == ni.nid)
-> -			ret = dump_filesystem(sbi, &ni, node_blk, force, base_path, base, allow_folder);
-> +			ret = dump_filesystem(sbi, &ni, node_blk, force, base_path, base, allow_folder, dirent_name);
->  	} else {
->  		print_node_info(sbi, node_blk, force);
->  		MSG(force, "Invalid (i)node block\n\n");
-> diff --git a/fsck/fsck.c b/fsck/fsck.c
-> index 7400dcf..b79b354 100644
-> --- a/fsck/fsck.c
-> +++ b/fsck/fsck.c
-> @@ -1651,7 +1651,7 @@ static void print_dentry(struct f2fs_sb_info *sbi, __u8 *name,
->  			d = d->next;
->  		}
->  		printf("/%s", new);
-> -		if (dump_node(sbi, le32_to_cpu(dentry[idx].ino), 0, NULL, 0, 0))
-> +		if (dump_node(sbi, le32_to_cpu(dentry[idx].ino), 0, NULL, 0, 0, NULL))
->  			printf("\33[2K\r");
->  	} else {
->  		for (i = 1; i < depth; i++)
-> @@ -3632,7 +3632,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
->  		if (!strcasecmp(ans, "y")) {
->  			for (i = 0; i < fsck->nr_nat_entries; i++) {
->  				if (f2fs_test_bit(i, fsck->nat_area_bitmap))
-> -					dump_node(sbi, i, 1, NULL, 1, 0);
-> +					dump_node(sbi, i, 1, NULL, 1, 0, NULL);
->  			}
->  		}
->  	}
-> diff --git a/fsck/fsck.h b/fsck/fsck.h
-> index 6cac926..476b436 100644
-> --- a/fsck/fsck.h
-> +++ b/fsck/fsck.h
-> @@ -277,7 +277,7 @@ struct dump_option {
->  extern void nat_dump(struct f2fs_sb_info *, nid_t, nid_t);
->  extern void sit_dump(struct f2fs_sb_info *, unsigned int, unsigned int);
->  extern void ssa_dump(struct f2fs_sb_info *, int, int);
-> -extern int dump_node(struct f2fs_sb_info *, nid_t, int, char *, int, int);
-> +extern int dump_node(struct f2fs_sb_info *, nid_t, int, char *, int, int, char *);
->  extern int dump_info_from_blkaddr(struct f2fs_sb_info *, u32);
->  extern unsigned int start_bidx_of_node(unsigned int, struct f2fs_node *);
->  extern void dump_node_scan_disk(struct f2fs_sb_info *sbi, nid_t nid);
-> diff --git a/fsck/main.c b/fsck/main.c
-> index c13e287..af00fa5 100644
-> --- a/fsck/main.c
-> +++ b/fsck/main.c
-> @@ -102,6 +102,7 @@ void dump_usage()
->  	MSG(0, "  -y alias for -f\n");
->  	MSG(0, "  -o dump inodes to the given path\n");
->  	MSG(0, "  -P preserve mode/owner/group for dumped inode\n");
-> +	MSG(0, "  -L Preserves symlinks. Otherwise symlinks are dumped as regular files.\n");
->  	MSG(0, "  -V print the version number and exit\n");
->  
->  	exit(1);
-> @@ -389,7 +390,7 @@ void f2fs_parse_options(int argc, char *argv[])
->  		}
->  	} else if (!strcmp("dump.f2fs", prog)) {
->  #ifdef WITH_DUMP
-> -		const char *option_string = "d:fi:I:n:Mo:Prs:Sa:b:Vy";
-> +		const char *option_string = "d:fi:I:n:LMo:Prs:Sa:b:Vy";
->  		static struct dump_option dump_opt = {
->  			.nid = 0,	/* default root ino */
->  			.start_nat = -1,
-> @@ -479,6 +480,14 @@ void f2fs_parse_options(int argc, char *argv[])
->  				err = EWRONG_OPT;
->  #else
->  				c.preserve_perms = 1;
-> +#endif
-> +				break;
-> +			case 'L':
-> +#if defined(__MINGW32__)
-> +				MSG(0, "-L not supported for Windows\n");
-> +				err = EWRONG_OPT;
-> +#else
-> +				c.preserve_symlinks = 1;
->  #endif
->  				break;
->  			case 'V':
-> @@ -957,7 +966,7 @@ static void do_dump(struct f2fs_sb_info *sbi)
->  	if (opt->blk_addr != -1)
->  		dump_info_from_blkaddr(sbi, opt->blk_addr);
->  	if (opt->nid)
-> -		dump_node(sbi, opt->nid, c.force, opt->base_path, 1, 1);
-> +		dump_node(sbi, opt->nid, c.force, opt->base_path, 1, 1, NULL);
->  	if (opt->scan_nid)
->  		dump_node_scan_disk(sbi, opt->scan_nid);
->  
-> diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-> index 870a6e4..08ba32d 100644
-> --- a/include/f2fs_fs.h
-> +++ b/include/f2fs_fs.h
-> @@ -1478,6 +1478,8 @@ struct f2fs_configuration {
->  	uint16_t s_encoding_flags;
->  	int32_t kd;
->  	int32_t dump_fd;
-> +	char *dump_symlink;
-> +	int dump_sym_target_len;
->  	struct device_info devices[MAX_DEVICES];
->  	int ndevs;
->  	char *extension_list[2];
-> @@ -1540,7 +1542,10 @@ struct f2fs_configuration {
->  	struct selinux_opt seopt_file[8];
->  	int nr_opt;
->  #endif
-> +
-> +	/* dump parameters */
->  	int preserve_perms;
-> +	int preserve_symlinks;
->  
->  	/* resize parameters */
->  	int safe_resize;
-> @@ -1614,6 +1619,9 @@ extern int dev_readahead(__u64, size_t UNUSED(len));
->  extern int dev_write(void *, __u64, size_t);
->  extern int dev_write_block(void *, __u64);
->  extern int dev_write_dump(void *, __u64, size_t);
-> +#if !defined(__MINGW32__)
-> +extern int dev_write_symlink(char *, size_t);
-> +#endif
->  /* All bytes in the buffer must be 0 use dev_fill(). */
->  extern int dev_fill(void *, __u64, size_t);
->  extern int dev_fill_block(void *, __u64);
-> diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c
-> index b2d6933..f39367a 100644
-> --- a/lib/libf2fs_io.c
-> +++ b/lib/libf2fs_io.c
-> @@ -598,6 +598,16 @@ int dev_write_dump(void *buf, __u64 offset, size_t len)
->  	return 0;
->  }
->  
-> +#if !defined(__MINGW32__)
-> +int dev_write_symlink(char *buf, size_t len)
-> +{
-> +	buf[len] = 0;
-> +	if (symlink(buf, c.dump_symlink))
-> +		return -1;
-> +	return 0;
-> +}
-> +#endif
-> +
->  int dev_fill(void *buf, __u64 offset, size_t len)
->  {
->  	int fd;
-> diff --git a/man/dump.f2fs.8 b/man/dump.f2fs.8
-> index 60d6783..4035d57 100644
-> --- a/man/dump.f2fs.8
-> +++ b/man/dump.f2fs.8
-> @@ -71,6 +71,9 @@ Dump inodes to the given path
->  .BI \-P
->  Preserve mode/owner/group for dumped inode
->  .TP
-> +.BI \-L
-> +Preserves symlinks. Otherwise symlinks are dumped as regular files.
-> +.TP
->  .BI \-I " inode number"
->  Specify an inode number and scan full disk to dump out, include history inode block
->  .TP
-> 
-> base-commit: 584ebc710bc0779381595135e0686492c3908a20
-> -- 
-> 2.45.2.1089.g2a221341d9-goog
 
 
 _______________________________________________
