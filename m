@@ -2,83 +2,119 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEC3893C475
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jul 2024 16:40:16 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4553293C6DD
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jul 2024 17:56:48 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sWzdU-0005P8-DZ;
-	Thu, 25 Jul 2024 14:40:04 +0000
+	id 1sX0pY-0006Jp-Qf;
+	Thu, 25 Jul 2024 15:56:36 +0000
 Received: from [172.30.29.67] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <BATV+eb6281b6209e17a76e98+7641+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1sWzdS-0005Oz-CC for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 Jul 2024 14:40:02 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <arnd@arndb.de>) id 1sX0pX-0006Jh-3u
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 25 Jul 2024 15:56:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Subject:Cc:
+ To:From:Date:References:In-Reply-To:Message-Id:MIME-Version:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fT+P3bL2alqk783XUIpMyvxWyxVKIMjRx9YDa8Msrv8=; b=GynBRVxsE+v/vttj3DmZUTmfy8
- wdoOT2Fz+RbasrEcQbYi8LeceUI7djNSVDgIhbGs0GpghEEdGZup0IKLO8QiVBNASHd4wb12XzCoa
- CiIRx1bFJK1BAJIRqejyjoGIRCtNmATAC8SVVvG0FwzGlxsP5+C8tV4LvFzH7ky6ySvs=;
+ bh=SH2QsIwdxGEwvXnuqvyw/+HD9jOx3EvErodiIHyLnIE=; b=IrZoxY5bAR8GXsBsvzBOpoQf7J
+ /7/bqb+5s6G2GW6xZsytXZuIqt+Q+dbbHMmHaxEYgjJsztdA8SjvTBU1lGv+EGBEqFlSu67PfzYn+
+ kUfL1c2J3oIUQoQrkmF3uKk66RKryqbOdgtwsq58qBIxw5D9uihGktvcwUnrFz0V5JNU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Subject:Cc:To:From:Date:References
+ :In-Reply-To:Message-Id:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=fT+P3bL2alqk783XUIpMyvxWyxVKIMjRx9YDa8Msrv8=; b=mS4KW2evOL2bZ40MokHpA6Ar+C
- I3B9/3WNTizPUErEwwsP8hLfc6rnVQrE7ycCwz3g6v2Tz7ZkOSow8B9t3VD86OpXcVX7m3TBRe8zy
- qF3htqXwyl+9ox49wkZTLyFxjI5y5RFLR0YWhGlLpot83HjexJZVdO8PDaa9yficQlwo=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ bh=SH2QsIwdxGEwvXnuqvyw/+HD9jOx3EvErodiIHyLnIE=; b=dk8dTFQgXfIPmb1GmNUs17hhsC
+ uM9Wqm4Z3/62Fr9DQRnfknEyVQe6xVXyF1W/4PSZApPSyq3r8Uie4Q5I6aa1092Yc87jetMDu3nmO
+ iI7x81NBNwMwLiAFUDeCXHNEqO4Fjxa3onEntI9ewziCV2w08xZUVIJSDFuQMWsSi1Sg=;
+Received: from fhigh4-smtp.messagingengine.com ([103.168.172.155])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sWzdR-0005iB-GW for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 Jul 2024 14:40:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Transfer-Encoding
- :Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
- Sender:Reply-To:Content-ID:Content-Description;
- bh=fT+P3bL2alqk783XUIpMyvxWyxVKIMjRx9YDa8Msrv8=; b=WL5/OYQ+RT6V2Tl5hRTNfUjVwL
- oYtEItO5DN/EmTddff9oHpV7Z1VvU/Hz+Wd/ZHHcYbz51Wp7Pyq1+pk0K/7zQPkMmENAMlmbCODHD
- e5Vr8IhAmtm1e63eRQfIZYn4YhuFhEfyTM2m+FX40WG1cnKnrVwE7Qp3XJyhDFybOgRokQsOqhLVU
- exQ2/h/Jc8DM+0kWg1+tInyN9tyTGSg30g+Urn5OCITbb2OMIKeZqU36FmGsCWt4pMVGSDnv5zLvN
- cjcI8uRXUENjfZNyTD2zcw+U34WMrESbsJV14YTD1M0PxUQTTJxWSlubgoMyN5eOUzZyr4+eXPHz4
- BZFIqkRQ==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1sWzdC-00000001Iql-2cGb;
- Thu, 25 Jul 2024 14:39:46 +0000
-Date: Thu, 25 Jul 2024 07:39:46 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Youling Tang <youling.tang@linux.dev>
-Message-ID: <ZqJjsg3s7H5cTWlT@infradead.org>
+ id 1sX0pV-0002WG-L2 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 25 Jul 2024 15:56:34 +0000
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 9A68811401F9;
+ Thu, 25 Jul 2024 11:31:21 -0400 (EDT)
+Received: from imap51 ([10.202.2.101])
+ by compute4.internal (MEProxy); Thu, 25 Jul 2024 11:31:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1721921481;
+ x=1722007881; bh=SH2QsIwdxGEwvXnuqvyw/+HD9jOx3EvErodiIHyLnIE=; b=
+ AsoACoRhcJpNk1G2Ie/w5Db0mrpEH7bVkMaqvotJq6aNTS72PDERWycZ6/9oxdUF
+ T78xaWaFifaFbhnWKLDkBrwaCuuouLBY1ZMAI4sr4sGquAemJyGvIyoxkwIMzwB8
+ IJADDWMULQ2e+Zf7v9pOCio3I7qGUMOdm6BL4cs8TI98qX5RhlWHR400ut+2HKL/
+ ysxEijoHjVqcBBdsuNmGjvACmAsGvgZf2ePB1vvW5lXx73l9hmmTx0J4sWbF9nq5
+ LYMp5S5GmSMOfgRrptXB8nxX/Kd8SFXol9skC8EQAjWi/egT5Cs6giZXIM+XRhbH
+ VkDGOwEtG/FA4IHW8FcrTA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1721921481; x=
+ 1722007881; bh=SH2QsIwdxGEwvXnuqvyw/+HD9jOx3EvErodiIHyLnIE=; b=u
+ 59KnImr5u7plQjCm5IdkuXjwp7Yg5w5qU1lAeJC9rRpyBmQYvOnpyWptgl5C/BQI
+ 4fs7rQLpJ4lnlznMxXIqsaNCSw5khKJnxuuDIyPUELSlipT7N1wcAJX/8IG0SkFN
+ 5hCDrkxVBeoTJHoUTIbWVLqC1Vk5zbmy2auDAYrx74nEgdFOHhDSm1POUPg2onyi
+ yaJ+/pGtiLieoFksCTekqnXlUGGgd6i00ZCqdUjJrB0XyQFecqG7DXLyeClrON9f
+ cam0xe25g+Vq++2Nt0Xh2V99St2Td8aoNrEfsDIAeLFfwtnLt3YuZVPytZzMQDhf
+ F9kg196C2Zk2/S4VS/EVg==
+X-ME-Sender: <xms:yG-iZphKtVbvGeOra7bx7_P00WK7AJ1N69H7OkBzwxPLQkutlAqBAw>
+ <xme:yG-iZuBuS6hA-oRNqknuvPN0fwDH2yAjvromFeTmHmqO3BzwylC7kDy80tLoKIaN8
+ NcYDDeJe1sabbxUVxA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrieefgdeklecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpefofgggkfgjfhffhffvvefutgfgsehtqhertderreejnecuhfhrohhmpedftehr
+ nhguuceuvghrghhmrghnnhdfuceorghrnhgusegrrhhnuggsrdguvgeqnecuggftrfgrth
+ htvghrnhepgeefjeehvdelvdffieejieejiedvvdfhleeivdelveehjeelteegudektdfg
+ jeevnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprg
+ hrnhgusegrrhhnuggsrdguvgdpnhgspghrtghpthhtoheptd
+X-ME-Proxy: <xmx:yG-iZpHNm9tchrmE9bJF1DcsnXEzL6Amsc7aFYo53az5BN5AVn_YXg>
+ <xmx:yG-iZuQ4lgBYBlNmGyNXtRPCgk6MPlrAMIg8jNUEPRHm7yZH-VS-Kw>
+ <xmx:yG-iZmzVhp2U5gM4RXhKAMfji2rXp3FRTVHsghjm4KoDHm2DuSEASA>
+ <xmx:yG-iZk6Dnh53-LHldUTZ5cpmQKq7GFuUL5bLrHFFiHiIzPQjSszb3Q>
+ <xmx:yW-iZrh4M8MuFBJArq-ve0DQb30ZD5adlHyKr7qa1nrEfOYdYv2J8WhV>
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 89CFFB60098; Thu, 25 Jul 2024 11:31:20 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-582-g5a02f8850-fm-20240719.002-g5a02f885
+MIME-Version: 1.0
+Message-Id: <61beb54b-399b-442d-bfdb-bad23cefa586@app.fastmail.com>
+In-Reply-To: <ZqJjsg3s7H5cTWlT@infradead.org>
 References: <20240723083239.41533-1-youling.tang@linux.dev>
  <20240723083239.41533-2-youling.tang@linux.dev>
  <Zp-_RDk5n5431yyh@infradead.org>
  <0a63dfd1-ead3-4db3-a38c-2bc1db65f354@linux.dev>
  <ZqEhMCjdFwC3wF4u@infradead.org>
  <895360e3-97bb-4188-a91d-eaca3302bd43@linux.dev>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <895360e3-97bb-4188-a91d-eaca3302bd43@linux.dev>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -5.2 (-----)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+ <ZqJjsg3s7H5cTWlT@infradead.org>
+Date: Thu, 25 Jul 2024 17:30:58 +0200
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Christoph Hellwig" <hch@infradead.org>,
+ "Youling Tang" <youling.tang@linux.dev>
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  
- Content preview:  On Thu, Jul 25, 2024 at 11:01:33AM +0800, Youling Tang wrote:
-    > - It doesn't feel good to have only one subinit/exit in a file. >   Assuming
-    that there is only one file in each file, how do we >   ens [...] 
+ Content preview:  On Thu, Jul 25, 2024, at 16:39, Christoph Hellwig wrote: >
+    On Thu, Jul 25, 2024 at 11:01:33AM +0800, Youling Tang wrote: >> - It doesn't
+    feel good to have only one subinit/exit in a file. >> Â  Assumi [...] 
  
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content analysis details:   (-0.2 points, 6.0 required)
  
   pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -86,30 +122,32 @@ X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.
                              blocked.  See
                              http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
                               for more information.
-                             [URIs: infradead.org]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [198.137.202.133 listed in list.dnswl.org]
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                           [198.137.202.133 listed in bl.score.senderscore.com]
+                             [URIs: messagingengine.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
   0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
                              query to Validity was blocked.  See
                              https://knowledge.validity.com/hc/en-us/articles/20961730681243
                               for more information.
-                             [198.137.202.133 listed in sa-accredit.habeas.com]
-  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+                             [103.168.172.155 listed in sa-accredit.habeas.com]
+  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+                             query to Validity was blocked.  See
+                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
+                              for more information.
+                           [103.168.172.155 listed in bl.score.senderscore.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+                             DNSWL was blocked.  See
+                             http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+                              for more information.
+                             [103.168.172.155 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
                              envelope-from domain
-X-Headers-End: 1sWzdR-0005iB-GW
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+                             author's domain
+X-Headers-End: 1sX0pV-0002WG-L2
 Subject: Re: [f2fs-dev] [PATCH 1/4] module: Add module_subinit{_noexit} and
  module_subeixt helper macros
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -123,68 +161,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-arch@vger.kernel.org, Youling Tang <tangyouling@kylinos.cn>,
- linux-f2fs-devel@lists.sourceforge.net, tytso@mit.edu,
- Arnd Bergmann <arnd@arndb.de>, Josef Bacik <josef@toxicpanda.com>,
- linux-kernel@vger.kernel.org, Christoph Hellwig <hch@infradead.org>,
- Chris Mason <clm@fb.com>, Luis Chamberlain <mcgrof@kernel.org>,
+Cc: Linux-Arch <linux-arch@vger.kernel.org>,
+ Youling Tang <tangyouling@kylinos.cn>, linux-f2fs-devel@lists.sourceforge.net,
+ Theodore Ts'o <tytso@mit.edu>, Josef Bacik <josef@toxicpanda.com>,
+ linux-kernel@vger.kernel.org, Chris Mason <clm@fb.com>,
+ Luis Chamberlain <mcgrof@kernel.org>,
  Andreas Dilger <adilger.kernel@dilger.ca>, linux-btrfs@vger.kernel.org,
  David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
  linux-ext4@vger.kernel.org, linux-modules@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jul 25, 2024 at 11:01:33AM +0800, Youling Tang wrote:
-> - It doesn't feel good to have only one subinit/exit in a file.
-> =A0 Assuming that there is only one file in each file, how do we
-> =A0 ensure that the files are linked in order?(Is it sorted by *.o
-> =A0 in the Makefile?)
-
-Yes, link order already matterns for initialization order for built-in
-code, so this is a well known concept.
-
-> - Even if the order of each init is linked correctly, then the
-> =A0 runtime will be iterated through the .subinitcall.init section,
-> =A0 which executes each initfn in sequence (similar to do_initcalls),
-> =A0 which means that no other code can be inserted between each subinit.
-
-I don't understand this comment.  What do you mean with no other
-code could be inserted?
-
-> If module_subinit is called in module_init, other code can be inserted
-> between subinit, similar to the following:
-> =
-
-> ```
-> static int __init init_example(void)
-> {
-> =A0=A0 =A0module_subinit(inita, exita);
-> =
-
-> =A0=A0 =A0otherthing...
-> =
-
-> =A0=A0 =A0module_subinit(initb, exitb);
-> =
-
-> =A0=A0 =A0return 0;
-> }
-
-Yikes.  That's really not the point of having init calls, but just
-really, really convoluted control flow.
-
-> module_init(init_example);
-> ```
-> =
-
-> IMHO, module_subinit() might be better called in module_init().
-
-I strongly disagree.
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gVGh1LCBKdWwgMjUsIDIwMjQsIGF0IDE2OjM5LCBDaHJpc3RvcGggSGVsbHdpZyB3cm90ZToK
+PiBPbiBUaHUsIEp1bCAyNSwgMjAyNCBhdCAxMTowMTozM0FNICswODAwLCBZb3VsaW5nIFRhbmcg
+d3JvdGU6Cj4+IC0gSXQgZG9lc24ndCBmZWVsIGdvb2QgdG8gaGF2ZSBvbmx5IG9uZSBzdWJpbml0
+L2V4aXQgaW4gYSBmaWxlLgo+PiDCoCBBc3N1bWluZyB0aGF0IHRoZXJlIGlzIG9ubHkgb25lIGZp
+bGUgaW4gZWFjaCBmaWxlLCBob3cgZG8gd2UKPj4gwqAgZW5zdXJlIHRoYXQgdGhlIGZpbGVzIGFy
+ZSBsaW5rZWQgaW4gb3JkZXI/KElzIGl0IHNvcnRlZCBieSAqLm8KPj4gwqAgaW4gdGhlIE1ha2Vm
+aWxlPykKPgo+IFllcywgbGluayBvcmRlciBhbHJlYWR5IG1hdHRlcm5zIGZvciBpbml0aWFsaXph
+dGlvbiBvcmRlciBmb3IgYnVpbHQtaW4KPiBjb2RlLCBzbyB0aGlzIGlzIGEgd2VsbCBrbm93biBj
+b25jZXB0LgoKTm90ZTogSSByZW1vdmVkIHRoZSBvbGQgd2F5IG9mIGVudGVyaW5nIGEgbW9kdWxl
+IGEgZmV3CnllYXJzIGFnbywgd2hpY2ggYWxsb3dlZCBzaW1wbHkgZGVmaW5pbmcgYSBmdW5jdGlv
+biBjYWxsZWQKaW5pdF9tb2R1bGUoKS4gVGhlIGxhc3Qgb25lIG9mIHRoZXNlIHdhcyBhMDdkOGVj
+ZjZiMzkKKCJldGhlcm5ldDogaXNhOiBjb252ZXJ0IHRvIG1vZHVsZV9pbml0L21vZHVsZV9leGl0
+IikuCgpOb3cgSSB0aGluayB3ZSBjb3VsZCBqdXN0IG1ha2UgdGhlIG1vZHVsZV9pbml0KCkgbWFj
+cm8KZG8gdGhlIHNhbWUgdGhpbmcgYXMgYSBidWlsdC1pbiBpbml0Y2FsbCgpIGFuZCBwdXQKYW4g
+ZW50cnkgaW4gYSBzcGVjaWFsIHNlY3Rpb24sIHRvIGxldCB5b3UgaGF2ZSBtdWx0aXBsZQplbnRy
+eSBwb2ludHMgaW4gYSBsb2FkYWJsZSBtb2R1bGUuCgpUaGVyZSBhcmUgc3RpbGwgYXQgbGVhc3Qg
+dHdvIHByb2JsZW1zIHRob3VnaDoKCi0gd2hpbGUgbGluayBvcmRlciBpcyBkZWZpbmVkIGJldHdl
+ZW4gZmlsZXMgaW4gYSBtb2R1bGUsCiAgSSBkb24ndCB0aGluayB0aGVyZSBpcyBhbnkgZ3VhcmFu
+dGVlIGZvciB0aGUgb3JkZXIgYmV0d2VlbgogIHR3byBpbml0Y2FsbHMgb2YgdGhlIHNhbWUgbGV2
+ZWwgd2l0aGluIGEgc2luZ2xlIGZpbGUuCgotIEZvciBidWlsdC1pbiBjb2RlIHdlIGRvbid0IGhh
+dmUgdG8gd29ycnkgYWJvdXQgbWF0Y2hpbmcKICB0aGUgb3JkZXIgb2YgdGhlIGV4aXQgY2FsbHMg
+c2luY2UgdGhleSBkb24ndCBleGlzdCB0aGVyZS4KICBBcyBJIHVuZGVyc3RhbmQsIHRoZSBpbnRl
+cmVzdGluZyBwYXJ0IG9mIHRoaXMgcGF0Y2gKICBzZXJpZXMgaXMgYWJvdXQgbWFraW5nIHN1cmUg
+dGhlIG9yZGVyIG1hdGNoZXMgYmV0d2VlbgogIGluaXQgYW5kIGV4aXQsIHNvIHRoZXJlIHN0aWxs
+IG5lZWRzIHRvIGJlIGEgd2F5IHRvCiAgZXhwcmVzcyBhIHBhaXIgb2Ygc3VjaCBjYWxscy4KCiAg
+ICAgQXJuZAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+CkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291
+cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZv
+L2xpbnV4LWYyZnMtZGV2ZWwK
