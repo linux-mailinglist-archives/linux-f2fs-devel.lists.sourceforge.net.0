@@ -2,113 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0D1593DC19
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 Jul 2024 02:14:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06B4893DD17
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 Jul 2024 05:26:05 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sXV56-0002fq-M5;
-	Sat, 27 Jul 2024 00:14:41 +0000
+	id 1sXY4C-00088J-9d;
+	Sat, 27 Jul 2024 03:25:57 +0000
 Received: from [172.30.29.67] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3KySkZgMKEEAreeiqqing.eqonkpwz-h4hu-fgxgnnkuvu.uqwteghqtig.pgv@flex--pcc.bounces.google.com>)
- id 1sXV54-0002fg-Vd for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 27 Jul 2024 00:14:39 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <jaegeuk@kernel.org>) id 1sXY4B-00088B-JJ
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 27 Jul 2024 03:25:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Mime-Version:
- Message-Id:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UxEbXk8sjYfJnszBYV/U6tD0PeIchNjCPKOCbBglaT4=; b=lBZ+2+5GGGQMTJmH++Oy9xOA8C
- QTDPCe1qcFYwRCxLwygaa1ez8cwl3uAsyRN/fo1jGFKTgPDu7Lvz94+n0rszKzIIICE/qlccI9TzZ
- +iX8ceHaEKBuf7RG5u07hrcYK+7WLsKbZIxMigoNAsMJClrC1bvA0IsSvADc2pUnQUdw=;
+ bh=DXCWiVdNZAwnHnkGcJCSpF5wib8TLr/CME4SSeql6HE=; b=WlKMSgkDvCS6Qd5AQ+6Q5vh01T
+ B2PclEZAiJcHntXl1R1/RuuJjzpFXLmXG9qkOSfNTEwNOP0drIZhXmNIDfYu2UK5vnm8ebD2YOGlp
+ OQgUvrzJt/9cKM3zckDFvfNxwuSB6vNrqS7kWE6ynGanG/b154f19RPAsOMJxQ88rqqY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Mime-Version:Message-Id:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=UxEbXk8sjYfJnszBYV/U6tD0PeIchNjCPKOCbBglaT4=; b=H
- FIUJsbW+A6a9ufoScuvN7/8O9lj8BNNijdIohKAdpSkaJ3kchpe/kXs+ir/Dt54K+x1pG5MEWl+13
- yrco0Ly2ZQFFXMyh+NfImWZ4e4KItHEKDx9JGqUAsfYjuyHJFclKCIt++oxO97WiAI4aQrLna54hq
- 5axUMM+oYhbguAiw=;
-Received: from mail-pl1-f202.google.com ([209.85.214.202])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=DXCWiVdNZAwnHnkGcJCSpF5wib8TLr/CME4SSeql6HE=; b=CzRITgJkTP2COHIG2kOipu9oHn
+ P4tP4rBHliwzHOmGJfkrHfJ5cRAbVSN7JTB8tgcfv6ShIl+SXbsB7mPg7yqgOKivRW/+9nRr5TRVy
+ T1S5OUnr+1eR4Bm136mG1SRjcNgfF3ywzjJS5kIGmWSsmGBSUA0m5xU6oe6D4/UpfLpM=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1sXV55-0000Qt-2D for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 27 Jul 2024 00:14:39 +0000
-Received: by mail-pl1-f202.google.com with SMTP id
- d9443c01a7336-1fd8677380dso10238595ad.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 26 Jul 2024 17:14:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1722039268; x=1722644068;
- darn=lists.sourceforge.net; 
- h=cc:to:from:subject:mime-version:message-id:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=UxEbXk8sjYfJnszBYV/U6tD0PeIchNjCPKOCbBglaT4=;
- b=YpASitkmQSW84wYkgZgYEE34mRzfihZ1yAKx6hSacl0l7QiFspm9H9yEPGHIXMWadW
- +VsrmIQsV7mtywxFkKvCGm/t20qmtDU3BdwTk4ANDPqhYfdBp5TxEwhR+6hMvJnVGIEo
- GJJgzq2mXy8zYPXt1rBZYj1niz9/qvRHDCjiMVgEiOaMqg8dJlnFbL9zhFsgOqE7cTRw
- xwyXiJ1UtcO7sdFjUgnv+ZcA5xou/P3ijH6+qoOIRqHuUt0wORr94432z0D5yy75HHvQ
- cvpWYqjoXekkAfOlpiGs6FKwjRb3g+H9qg6lkuSr1UciJi4mG6QFjQBqkYplpAs0+GNl
- Yszg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722039268; x=1722644068;
- h=cc:to:from:subject:mime-version:message-id:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=UxEbXk8sjYfJnszBYV/U6tD0PeIchNjCPKOCbBglaT4=;
- b=XL6tAu46gWxy+pDT7kNu2A3WO7w755qWaxejWPA3X1pcY5DPf5KkQxeh+Nf/Z5XEzV
- ZsneJVzvAcHYjCzgCHElnQSE1Qa6sI2tixWSxyNKMbJMEPnR+JrB5vE5J/PbnMAqtRAr
- O0mD0eYKD4Nm3ar0pT4jCm0JZp3EX3wBxeQ6IRrK9Eyis3SizfOKBb20+Quc9ijiUjYL
- LzTksHN5zAD+msZ4ZKAiCpRyucEe9wq3+x52wvRUGEijsqzm+mJhT3i8FbMBUjqNqjM0
- FxFyC6ODWNU1B4YzVdvz3HhXPAlkvHUpJakUUNkCcfS381tZK0NHPxek25UhAHKUnq3z
- DCmQ==
-X-Gm-Message-State: AOJu0Yyv7o77P5kg6wK2ORHPsjsGNoYnzts7GooSq2buoHZ4xjoaNer4
- On3IkBa5yb+PdsAbNGAm2WN9T3RKB4uQR6I49iDtsR0PRYET5o5FVj2il10GGrE/qw==
-X-Google-Smtp-Source: AGHT+IGDTpp651+Ae+mAPWXKUcL4AvGkhvxlzhCl/W+3VowgNjRkKPd5HaIzcMKI6Cno4jqokg1nve4=
-X-Received: from pcc-desktop.svl.corp.google.com
- ([2620:15c:2d3:205:4799:26a1:4da2:c60f])
- (user=pcc job=sendgmr) by 2002:a81:ff12:0:b0:66b:fb2f:1c2 with SMTP id
- 00721157ae682-67a09b6f148mr354947b3.7.1722033195698; Fri, 26 Jul 2024
- 15:33:15 -0700 (PDT)
-Date: Fri, 26 Jul 2024 15:33:09 -0700
-Message-Id: <20240726223309.2102788-1-pcc@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.46.0.rc1.232.g9752f9e123-goog
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: -7.7 (-------)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1sXY4B-0008G7-IS for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 27 Jul 2024 03:25:56 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 29E8D60DF5;
+ Sat, 27 Jul 2024 03:25:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65736C32781;
+ Sat, 27 Jul 2024 03:25:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1722050744;
+ bh=w91TPZxrPsLeGlqQhW0PLg/jt9TLaAwIo3cgRjJDId0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=nXnJmNVUzTa2/THaMDB+O+XHDPW1Uvfrm9w3kiaRn6s6vnvRCz8jNH0JG/8R3g8KK
+ uKqaClfuehITn6N9CSomcqqWgWbT12iDvXj3syrhTlUNbrj5e4KNJLtqnh8Ajo9Tez
+ 5jmB0MPP0W+NZt67aaNKKuR0mXvzb2+90/XHC7kgk/e41+r4V73u1IN5tucMLSyfLw
+ er9q14gjURPO8rL+gQRGAS5F123pHWaWDJgxBMy+hG3u0gZO7LAY6EjHEFnhvX3M07
+ PXGKXWlsQvyXIt1a2Tag9f1MUJeJMh9PxOxRQwrw9wIe03X1PXEiuKr0R/6dax+sFV
+ xrLGPVyYHJTQQ==
+Date: Sat, 27 Jul 2024 03:25:42 +0000
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZqRotoF2iDcx2MZF@google.com>
+References: <20240221073249.1710026-1-jinbaoliu365@gmail.com>
+ <a2bf5d3e-6727-44d7-b1a0-3b1bcc7edad1@kernel.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <a2bf5d3e-6727-44d7-b1a0-3b1bcc7edad1@kernel.org>
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: The path field in c.devices[i] is a pointer and is normally
- filled in using strdup. This makes it invalid to copy MAX_PATH_LEN bytes
- from it because the string may be shorter than that. Therefore, fix [...] 
- Content analysis details:   (-7.7 points, 6.0 required)
+ Content preview:  On 07/26, Chao Yu wrote: > On 2024/2/21 15:32, liujinbao1
+ wrote: > > From: liujinbao1 <liujinbao1@xiaomi.com> > > > > When we add "atgc"
+ to the fstab table, ATGC is not immediately enabled. > > There [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [209.85.214.202 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.214.202 listed in sa-accredit.habeas.com]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.214.202 listed in bl.score.senderscore.com]
+ [139.178.84.217 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in sa-trusted.bondedsender.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
- welcome-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
@@ -117,13 +97,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.202 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1sXV55-0000Qt-2D
-Subject: [f2fs-dev] [PATCH] mkfs.f2fs: Fix out-of-bounds read in
- f2fs_prepare_super_block
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sXY4B-0008G7-IS
+Subject: Re: [f2fs-dev] [PATCH] f2fs: sysfs: support atgc_enabled
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -135,41 +111,83 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Peter Collingbourne via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Peter Collingbourne <pcc@google.com>
-Cc: Peter Collingbourne <pcc@google.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: liujinbao1 <jinbaoliu365@gmail.com>, liujinbao1 <liujinbao1@xiaomi.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The path field in c.devices[i] is a pointer and is normally filled
-in using strdup. This makes it invalid to copy MAX_PATH_LEN bytes
-from it because the string may be shorter than that. Therefore,
-fix the code to use strncpy to copy the string instead.
+On 07/26, Chao Yu wrote:
+> On 2024/2/21 15:32, liujinbao1 wrote:
+> > From: liujinbao1 <liujinbao1@xiaomi.com>
+> > 
+> > When we add "atgc" to the fstab table, ATGC is not immediately enabled.
+> > There is a 7-day time threshold, and we can use "atgc_enabled" to
+> > show whether ATGC is enabled.
+> 
+> Oh, I missed to reply on this patch, what about adding this readonly
+> atgc_enabled sysfs entry into /sys/fs/f2fs/<dev>/stat/ directory?
 
-Signed-off-by: Peter Collingbourne <pcc@google.com>
----
- mkfs/f2fs_format.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+It looks like not stat.
 
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index c9d335a..b053685 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -316,7 +316,7 @@ static int f2fs_prepare_super_block(void)
- 					c.blks_per_seg - 1;
- 		}
- 		if (c.ndevs > 1) {
--			memcpy(sb->devs[i].path, c.devices[i].path, MAX_PATH_LEN);
-+			strncpy((char *)sb->devs[i].path, c.devices[i].path, MAX_PATH_LEN);
- 			sb->devs[i].total_segments =
- 					cpu_to_le32(c.devices[i].total_segments);
- 		}
--- 
-2.46.0.rc1.232.g9752f9e123-goog
-
+> 
+> Thanks,
+> 
+> > 
+> > Signed-off-by: liujinbao1 <liujinbao1@xiaomi.com>
+> > ---
+> >   Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++
+> >   fs/f2fs/sysfs.c                         | 8 ++++++++
+> >   2 files changed, 14 insertions(+)
+> > 
+> > diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+> > index 36c3cb547901..8597dfaef700 100644
+> > --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+> > +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+> > @@ -564,6 +564,12 @@ Description:	When ATGC is on, it controls age threshold to bypass GCing young
+> >   		candidates whose age is not beyond the threshold, by default it was
+> >   		initialized as 604800 seconds (equals to 7 days).
+> > +What:		/sys/fs/f2fs/<disk>/atgc_enabled
+> > +Date:		Feb 2024
+> > +Contact:	"Jinbao Liu" <liujinbao1@xiaomi.com>
+> > +Description:	It represents whether ATGC is on or off. The value is 1 which
+> > +               indicates that ATGC is on, and 0 indicates that it is off.
+> > +
+> >   What:		/sys/fs/f2fs/<disk>/gc_reclaimed_segments
+> >   Date:		July 2021
+> >   Contact:	"Daeho Jeong" <daehojeong@google.com>
+> > diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> > index 417fae96890f..0915872abd97 100644
+> > --- a/fs/f2fs/sysfs.c
+> > +++ b/fs/f2fs/sysfs.c
+> > @@ -143,6 +143,12 @@ static ssize_t pending_discard_show(struct f2fs_attr *a,
+> >   				&SM_I(sbi)->dcc_info->discard_cmd_cnt));
+> >   }
+> > +static ssize_t atgc_enabled_show(struct f2fs_attr *a,
+> > +		struct f2fs_sb_info *sbi, char *buf)
+> > +{
+> > +	return sysfs_emit(buf, "%d\n", sbi->am.atgc_enabled ? 1 : 0);
+> > +}
+> > +
+> >   static ssize_t gc_mode_show(struct f2fs_attr *a,
+> >   		struct f2fs_sb_info *sbi, char *buf)
+> >   {
+> > @@ -1017,6 +1023,7 @@ F2FS_GENERAL_RO_ATTR(encoding);
+> >   F2FS_GENERAL_RO_ATTR(mounted_time_sec);
+> >   F2FS_GENERAL_RO_ATTR(main_blkaddr);
+> >   F2FS_GENERAL_RO_ATTR(pending_discard);
+> > +F2FS_GENERAL_RO_ATTR(atgc_enabled);
+> >   F2FS_GENERAL_RO_ATTR(gc_mode);
+> >   #ifdef CONFIG_F2FS_STAT_FS
+> >   F2FS_GENERAL_RO_ATTR(moved_blocks_background);
+> > @@ -1144,6 +1151,7 @@ static struct attribute *f2fs_attrs[] = {
+> >   	ATTR_LIST(atgc_candidate_count),
+> >   	ATTR_LIST(atgc_age_weight),
+> >   	ATTR_LIST(atgc_age_threshold),
+> > +	ATTR_LIST(atgc_enabled),
+> >   	ATTR_LIST(seq_file_ra_mul),
+> >   	ATTR_LIST(gc_segment_mode),
+> >   	ATTR_LIST(gc_reclaimed_segments),
 
 
 _______________________________________________
