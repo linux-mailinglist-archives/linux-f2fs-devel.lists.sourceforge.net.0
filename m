@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C149093F720
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2024 15:59:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B767293FA85
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2024 18:21:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sYQu7-0001YR-2H;
-	Mon, 29 Jul 2024 13:59:10 +0000
+	id 1sYT7c-0000n2-2o;
+	Mon, 29 Jul 2024 16:21:16 +0000
 Received: from [172.30.29.67] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tytso@mit.edu>) id 1sYQu5-0001YI-Km
+ (envelope-from <jaegeuk@kernel.org>) id 1sYT7b-0000mr-49
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Jul 2024 13:59:09 +0000
+ Mon, 29 Jul 2024 16:21:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PM7Dhelwt8evrmwJBsFtoBMEI3ETn1PNdtUW08NA2t0=; b=ZPqODtNLrmtxKPT+Tv3kVKg30i
- xozTw3/KKoPcLYRxj/PHp3PQ8vi6Ukn99Lj5Eu4Qnut1dTrPBCabFN18U3V+hx+nFKANM8+itkycC
- fLWOAx1AjOvZyvoW7gOHPpwESLQLrNKsqtpWXLgMD8gYyPlQPHYTN056ZPXkLFMj+Ct8=;
+ bh=RyLLDcP9fQPvwMvGxlJI/YA7XNQpWN6BnebzhWAmhSA=; b=NPM6XrDDgROCn9EPn4BXQqdZAN
+ C3LZ0EPjIaFMNjS5GJZUcZvT/ukyR8jUM96okNxJH8TDK4WoQjuEOJbp8TeXkWT4KPe3Rp1AoY/YI
+ Sh03hBTmKm97tPvIhpN5S3D8jxipPjRqGEl2tbuv0V6V2Dzr4aEQb7xdxyZkDHIZhqSk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,67 +31,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PM7Dhelwt8evrmwJBsFtoBMEI3ETn1PNdtUW08NA2t0=; b=IkNuecOyt5bdVfTmLVA4HBBBRl
- jYv6RfmQQUJVz4I/WoAHDc5mJjV9/3rTcrfMWdBoKQXIHRXR7SCvSnDeqf+JH3Cpom5cPOOHwDNMI
- 8+Z8fIRPtUJnkJRdfq4y6BobzJ7KdLx/IDMo+0B3FTvhgWqS0sh4aqlhF8UAHbYpSDiY=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ bh=RyLLDcP9fQPvwMvGxlJI/YA7XNQpWN6BnebzhWAmhSA=; b=YeEc0KjTZDE6sTmRWhKZEcHNfH
+ /hoAPoYQC+z+wRYv6aWmA9uu1uB5mSrvLPi93wggkZdBqmKY02jQw9XlIauyeXGIZqPUkIuwYfa25
+ pOFz6sfF1cAGAnlOPWWadiQcSFbljLPcplsTFg9RLLw5cX8oE/EqxymiLFOWMMaXz+0c=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sYQu3-00015O-LY for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Jul 2024 13:59:08 +0000
-Received: from cwcc.thunk.org (pool-173-48-113-198.bstnma.fios.verizon.net
- [173.48.113.198]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 46TDwmVU016155
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 29 Jul 2024 09:58:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
- t=1722261532; bh=PM7Dhelwt8evrmwJBsFtoBMEI3ETn1PNdtUW08NA2t0=;
- h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
- b=mzrbQO8z5kGT7QrVsd7S36FKlagze53iuANsryUVbqE2vNlJqGm2c7jzPQFw+M/Lo
- Q6snREaMJuIDbwc9yA+W0bu2/Bek1F4/aRsRcCqpcStJgP6lLpQyUIxYMqMasNMmJe
- MKAbdgzt3IvNc3aAcH6IfoBl8lh48hVSB0VW7kz3pmapwQ/kXr7SI9eLF6vHd3d8RW
- uR3AQ/CMwQoewSX6076TUuXVYlqYlieHJ5OJS2ySdJEUrdWVFKoC1xuFrsYdL57xmn
- A27g05NMVy4148nADQRz8SrUDI84rPzMGWygSrUMeazfyeyfieFGc/yRi17Bl6bBkl
- w2Tkh1JbsZU1A==
-Received: by cwcc.thunk.org (Postfix, from userid 15806)
- id EC47215C02D3; Mon, 29 Jul 2024 09:58:47 -0400 (EDT)
-Date: Mon, 29 Jul 2024 09:58:47 -0400
-From: "Theodore Ts'o" <tytso@mit.edu>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20240729135847.GB557749@mit.edu>
-References: <0000000000004ff2dc061e281637@google.com>
- <20240729-himbeeren-funknetz-96e62f9c7aee@brauner>
- <20240729132721.hxih6ehigadqf7wx@quack3>
+ id 1sYT7a-0001KF-7r for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 29 Jul 2024 16:21:15 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id DF36961B77
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 29 Jul 2024 16:21:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68BEBC4AF19;
+ Mon, 29 Jul 2024 16:21:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1722270063;
+ bh=L6jcEa8CfEldUuj1WusbJIcpD6rrcXH0GVGphBmFRwg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=RvEaVZVKOp986/b3JSq7HO+zqtJTxfVCLOEH5WROoYKTVhKIsEXEvTEaDoSlwVtrf
+ g4sJ9q1hNLetbliwaOap3O9yPw2vmOY1Cz0jcl7W2N9EadlfEcEqS3hCOkXEhhMAkU
+ LGo+H1Q/+rD3gocQ4okL7fERC1XVxxe7hLfKzX1PXnqBpTbsZtzv/LLmB8kPE4+8A5
+ PRgvhDJjlk129VH4MXAfIPBVPkvuOHwQA1CO5u9rNECztOvKzH8U8ux/oyG+blRQEa
+ qgt7nPx1cOm01PoA/8fmoEtz1FeqVMW2up1ovkd2Sw0HNe7foQYdg52U+8eQMP1lCV
+ juwf9kz7BwZ0Q==
+Date: Mon, 29 Jul 2024 16:21:01 +0000
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZqfBbQGxwpAvCO2m@google.com>
+References: <20240712073415.227226-1-chao@kernel.org>
+ <ZqKDnpzwX85RyGaa@google.com>
+ <c2b7d0cd-ea10-4e25-829c-53967927bd03@kernel.org>
+ <ZqRpHOJyWU3Sn8Ma@google.com>
+ <74dbb5f1-1565-4971-ae5c-c176d62cfa8f@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240729132721.hxih6ehigadqf7wx@quack3>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <74dbb5f1-1565-4971-ae5c-c176d62cfa8f@kernel.org>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Jul 29, 2024 at 03:27:21PM +0200, Jan Kara wrote:
- > > So in ext4 we have EXT4_FLAGS_SHUTDOWN flag which we now use > internally
- instead of SB_RDONLY flag for checking whether the > filesystem [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 07/29, Chao Yu wrote: > On 2024/7/27 11:27, Jaegeuk Kim
+ wrote: > > On 07/26, Chao Yu wrote: > > > On 2024/7/26 0:55, Jaegeuk Kim
+ wrote: > > > > On 07/12, Chao Yu wrote: > > > > > All directory bloc [...]
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [18.9.28.11 listed in sa-trusted.bondedsender.org]
+ [139.178.84.217 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [18.9.28.11 listed in bl.score.senderscore.com]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [18.9.28.11 listed in list.dnswl.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ [139.178.84.217 listed in bl.score.senderscore.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
@@ -100,8 +99,10 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1sYQu3-00015O-LY
-Subject: Re: [f2fs-dev] [syzbot] [f2fs?] WARNING in rcu_sync_dtor
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sYT7a-0001KF-7r
+Subject: Re: [f2fs-dev] [PATCH] f2fs: don't traverse directory blocks after
+ EOF
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,65 +114,92 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christian Brauner <brauner@kernel.org>, Mateusz Guzik <mjguzik@gmail.com>,
- paulmck@kernel.org, frank.li@vivo.com, linux-kernel@vger.kernel.org,
- syzkaller-bugs@googlegroups.com, Oleg Nesterov <oleg@redhat.com>,
- Hillf Danton <hdanton@sina.com>,
- syzbot <syzbot+20d7e439f76bbbd863a7@syzkaller.appspotmail.com>,
- rcu@vger.kernel.org, viro@zeniv.linux.org.uk, Jan Kara <jack@suse.com>,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jul 29, 2024 at 03:27:21PM +0200, Jan Kara wrote:
+On 07/29, Chao Yu wrote:
+> On 2024/7/27 11:27, Jaegeuk Kim wrote:
+> > On 07/26, Chao Yu wrote:
+> > > On 2024/7/26 0:55, Jaegeuk Kim wrote:
+> > > > On 07/12, Chao Yu wrote:
+> > > > > All directory blocks are within the scope of i_size, so let's limit
+> > > > > the end_block to just check valid dirent blocks.
+> > > > 
+> > > > Do we really need this?
+> > > 
+> > > f2fs_readdir() and f2fs_empty_dir() uses dir_blocks() for upper boundary,
+> > > this patch aligns find_in_level() w/ them.
+> > > 
+> > > Also, it can avoid grabbing never used page cache across EOF.
+> > > 
+> > > So, we can consider taking this patch?
+> > 
+> > I'm wondering whether the current code has a bug or not.
 > 
-> So in ext4 we have EXT4_FLAGS_SHUTDOWN flag which we now use
-> internally instead of SB_RDONLY flag for checking whether the
-> filesystem was shutdown (because otherwise races between remount and
-> hitting fs error were really messy). However we still *also* set
-> SB_RDONLY so that VFS bails early from some paths which generally
-> results in less error noise in kernel logs and also out of caution
-> of not breaking something in this path. That being said we also
-> support EXT4_IOC_SHUTDOWN ioctl for several years and in that path
-> we set EXT4_FLAGS_SHUTDOWN without setting SB_RDONLY and nothing
-> seems to have blown up. So I'm inclined to belive we could remove
-> setting of SB_RDONLY from ext4 error handling. Ted, what do you
-> think?
+> I think it's not a bug, but, in corner case it may waste memory and
+> cause a bit performance reduction.
 
-Well, there are some failures of generic/388 (which involves calling
-the shutdown ioctl while running fsstress).  I believe that most of
-those failures are file system corruption errors, as opposed to other
-sorts of failures, but we don't run KASAN kernels all that often,
-especially since generic/388 is now on the exclude list.
+Well, I don't think it's really a problem.
 
-The failure rate of generic/388 varies depending on the storage device
-involved, but it varies from less than 10% to 50% of the time, if
-memory serves correctly.  Since EXT4_IOC_SHUTDOWN is used most of the
-time as a debugging/test (although there are some users use it in
-production, but the failure rate when you're not doing something
-really aggressive like fsstress is very small), this has been on the
-"one of these days, when we have tons of free time, we should really
-look into this.  The challenge is fixing this in a way that doesn't
-involve adding new locking in various file system hotpaths.
-
-So "nothing seems to have blown up" might be a bit strong.  But it's
-something we can try doing, and see whether it results in more rather
-than less syzbot complaints.
-
-> Also as the "filesystem shutdown" is spreading across multiple
-> filesystems, I'm playing with the idea that maybe we could lift a
-> flag like this to VFS so that we can check it in VFS paths and abort
-> some operations early.  But so far I'm not convinced the gain is
-> worth the need to iron out various subtle semantical differences of
-> "shutdown" among filesystems.
-
-I think that might be a good idea.  Hopefully subtle semantic
-differences are ones that won't matter in terms of the VFS aborting
-operations early.
-
-						- Ted
+> 
+> Thanks,
+> 
+> > 
+> > > 
+> > > Thanks,
+> > > 
+> > > > 
+> > > > > 
+> > > > > Meanwhile, it uses dir_blocks() instead of variable for cleanup in
+> > > > > __f2fs_find_entry().
+> > > > > 
+> > > > > Signed-off-by: Chao Yu <chao@kernel.org>
+> > > > > ---
+> > > > >    fs/f2fs/dir.c | 6 ++++--
+> > > > >    1 file changed, 4 insertions(+), 2 deletions(-)
+> > > > > 
+> > > > > diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+> > > > > index 02c9355176d3..d4591c215f07 100644
+> > > > > --- a/fs/f2fs/dir.c
+> > > > > +++ b/fs/f2fs/dir.c
+> > > > > @@ -305,18 +305,21 @@ static struct f2fs_dir_entry *find_in_level(struct inode *dir,
+> > > > >    	int s = GET_DENTRY_SLOTS(fname->disk_name.len);
+> > > > >    	unsigned int nbucket, nblock;
+> > > > >    	unsigned int bidx, end_block;
+> > > > > +	unsigned long last_block;
+> > > > >    	struct page *dentry_page;
+> > > > >    	struct f2fs_dir_entry *de = NULL;
+> > > > >    	pgoff_t next_pgofs;
+> > > > >    	bool room = false;
+> > > > >    	int max_slots;
+> > > > > +	last_block = dir_blocks(dir);
+> > > > >    	nbucket = dir_buckets(level, F2FS_I(dir)->i_dir_level);
+> > > > >    	nblock = bucket_blocks(level);
+> > > > >    	bidx = dir_block_index(level, F2FS_I(dir)->i_dir_level,
+> > > > >    			       le32_to_cpu(fname->hash) % nbucket);
+> > > > >    	end_block = bidx + nblock;
+> > > > > +	end_block = min_t(unsigned int, end_block, last_block);
+> > > > >    	while (bidx < end_block) {
+> > > > >    		/* no need to allocate new dentry pages to all the indices */
+> > > > > @@ -361,7 +364,6 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
+> > > > >    					 const struct f2fs_filename *fname,
+> > > > >    					 struct page **res_page)
+> > > > >    {
+> > > > > -	unsigned long npages = dir_blocks(dir);
+> > > > >    	struct f2fs_dir_entry *de = NULL;
+> > > > >    	unsigned int max_depth;
+> > > > >    	unsigned int level;
+> > > > > @@ -373,7 +375,7 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
+> > > > >    		goto out;
+> > > > >    	}
+> > > > > -	if (npages == 0)
+> > > > > +	if (dir_blocks(dir) == 0)
+> > > > >    		goto out;
+> > > > >    	max_depth = F2FS_I(dir)->i_current_depth;
+> > > > > -- 
+> > > > > 2.40.1
 
 
 _______________________________________________
