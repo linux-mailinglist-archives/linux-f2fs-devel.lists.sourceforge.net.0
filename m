@@ -2,107 +2,151 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9328693F0A5
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2024 11:11:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D24B93F6A7
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Jul 2024 15:27:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sYMPR-000386-NX;
-	Mon, 29 Jul 2024 09:11:13 +0000
+	id 1sYQPY-0008Pb-HH;
+	Mon, 29 Jul 2024 13:27:36 +0000
 Received: from [172.30.29.67] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1sYMPQ-000380-FU
+ (envelope-from <jack@suse.cz>) id 1sYQPW-0008PS-Ps
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Jul 2024 09:11:11 +0000
+ Mon, 29 Jul 2024 13:27:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YuYatmd3clTxaLD7TvQLfwmK4XbsSCKeDc9eo8olJWU=; b=AcW5GesNVvvpbXoGZjNHngqRdf
- cWWjtcOVRTMDm99Kbz88jei+vvTOpEBxmvNRPS8xBDLXb5hP+sTGsPUJzcFuElDb1Oh7s/eNH7TW7
- YFcZQkdRBfSsP4rzTZ/eM4VFCSKr2QXroNlmJwXxZN5uiKN7O1KIcbzhc+yhuBWYVaC0=;
+ bh=cA0sKnmcbKHN+5poM2Gwzel0FDApKbV56UYCatcL7bE=; b=WPnxIHIjlJSRNekP1STdpU5tce
+ c+FAeskWLssFXOWSJ43OwaHN/31QcfvSwsh2ruFR6hPivbxGFCKk6WxlgvIEXYR/3TLdN+gsBZ9PG
+ Q/In7pi69i1iKx5YeJgjF14Que8JrSzys5cL/TRe9N1T4LMhQNWIzlOXlOEhnwOPK5Mo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YuYatmd3clTxaLD7TvQLfwmK4XbsSCKeDc9eo8olJWU=; b=a8JosP0UEVMwPehPwyyMogPSDF
- Kgwn3jmnwr4uLls6Mc0f8Ocj4EKEpWucRwpPRyNZsVOcA2YFYl8GDvZ0tEoKfuWTCbITZH4ihlYJz
- Es7EyjjMaR8gglvw5SziGg4Tvh4A4xObYtERYA+uPSUdk5nhmNeNzbS9SFcduJsTEyeI=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=cA0sKnmcbKHN+5poM2Gwzel0FDApKbV56UYCatcL7bE=; b=XrHmhXFJirYFYtvIgwbw8LjlWg
+ X6/PB5gnZIp0GPycmOe+lc/zIDOllS+QATECAOWAiO5PvrZdSdq1Hhm4WAPay675sjOSu1C3ansqv
+ UgeGi8jKJuESRr+l3YQHkVNMwArtcoKiiAQKDlb6w5lnGbpXPxZujMDfzzyYaadIpxVA=;
+Received: from smtp-out1.suse.de ([195.135.223.130])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sYMPO-0001sE-Ll for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Jul 2024 09:11:11 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 54505615F9;
- Mon, 29 Jul 2024 09:11:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA12DC4AF0B;
- Mon, 29 Jul 2024 09:10:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1722244260;
- bh=xVnMBh/aez2MOmOwqxtLn5QGRZA8Jl3rF19QRIJ2IQk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=G/pjLPvITN4go8z7Ltk2CncC08ns95Rs4oL9LM14dVLHhP8oVdgmL9yC72O057BzU
- tjsvRpYnd+5afErtDbXnj20utAF9T51uS0OxRjoTVfcvHrJHSW3IX1NqgsXoMFm7gN
- GvnUsMp4kedFae2KFJ5Un9k2RnBhdngO+3dtVMXcLymXuPtLTkXVPDvR/M+CGwJmXg
- x5h8/6c5JdgX35oRXqFyYkFDjfU0QoJx1kjJ/rBbKcDwIEnjsJzsf6QnAYA73xHR6R
- 5yWHWsWEWtaShsF3lwcZh0x4SWwmZVqVcqImXBQ4HRajTVJ2LFYst45BA9JR/wOoAM
- DzzYnZcUPaaZA==
-From: Christian Brauner <brauner@kernel.org>
-To: Jan Kara <jack@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Chao Yu <chao@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 29 Jul 2024 11:10:09 +0200
-Message-ID: <20240729-himbeeren-funknetz-96e62f9c7aee@brauner>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <0000000000004ff2dc061e281637@google.com>
-References: 
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1sYQPV-0007cz-Hq for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 29 Jul 2024 13:27:34 +0000
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id E067F21ABC;
+ Mon, 29 Jul 2024 13:27:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1722259642; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=cA0sKnmcbKHN+5poM2Gwzel0FDApKbV56UYCatcL7bE=;
+ b=GOg+KqteQTiABuMLkONHkkQqDi9CWNISiA42PWBd6tBN1LrzZHYSnJIOgfjuI/F4BrAnu4
+ PmOZ6aoddmjs4bM27zUbbRtFpHUHn5cMq9uhCSm65Dwsk0ZvsFi+Eev1dq/rmYXlIg9Dvo
+ dKrcoDP66XZMp72xHlxRJ5a2eCGTIyY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1722259642;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=cA0sKnmcbKHN+5poM2Gwzel0FDApKbV56UYCatcL7bE=;
+ b=mssZc+dWsaDWX6G1Z81Z9mVnCMeQIKDBeeN8GeMNSfkrtAVFPI+0ZsaokUtTgcYSe+PPlR
+ VfWK/UPBgxDAnyAQ==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1722259641; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=cA0sKnmcbKHN+5poM2Gwzel0FDApKbV56UYCatcL7bE=;
+ b=WuU2gCVpi0VpfhEjlPLAEf8P1ZNDFqSTQUD2Msx0Rz9cU/3rWE6Sm086IHeXzTyLdOi6Oi
+ ZxJkmkvR/KeysUT+IF5bJa7yRxNOWjnYwnoCxHI1mqdB8iSMRG5Pg6px732y/ihU0sv1Zl
+ kWBur90hgwyvMSgEdnPZ9j8AOa2iAUQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1722259641;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=cA0sKnmcbKHN+5poM2Gwzel0FDApKbV56UYCatcL7bE=;
+ b=7ekSSZDjkiW5NnN+2hwFDBVRJDLREXGvb8S7MhyadF1e1L/sESkskvzc/MxkGKv5ZEQoir
+ iJv7SHaOYS0o5mBA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D453D1368A;
+ Mon, 29 Jul 2024 13:27:21 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id QJPTM7mYp2aIVQAAD6G6ig
+ (envelope-from <jack@suse.cz>); Mon, 29 Jul 2024 13:27:21 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id 79BC1A099C; Mon, 29 Jul 2024 15:27:21 +0200 (CEST)
+Date: Mon, 29 Jul 2024 15:27:21 +0200
+From: Jan Kara <jack@suse.cz>
+To: Christian Brauner <brauner@kernel.org>
+Message-ID: <20240729132721.hxih6ehigadqf7wx@quack3>
+References: <0000000000004ff2dc061e281637@google.com>
+ <20240729-himbeeren-funknetz-96e62f9c7aee@brauner>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2865; i=brauner@kernel.org;
- h=from:subject:message-id; bh=xVnMBh/aez2MOmOwqxtLn5QGRZA8Jl3rF19QRIJ2IQk=;
- b=owGbwMvMwCU28Zj0gdSKO4sYT6slMaQtj5mxPzxu6b6GjxN+hv+pOBF54kUQ/4X5TJLMLB5vv
- J+qpvG+7yhlYRDjYpAVU2RxaDcJl1vOU7HZKFMDZg4rE8gQBi5OAZhItSnDPxWpm1+2syT0aHtb
- GUn/0xfxe79hRsj3JSHdcp+mMLt+bWJk+FPF9ZZt+fH5tw5N0mPJe9a1xGaxk98DvfgLHwwylbo
- TmAA=
-X-Developer-Key: i=brauner@kernel.org; a=openpgp;
- fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
-X-Spam-Score: -5.3 (-----)
+Content-Disposition: inline
+In-Reply-To: <20240729-himbeeren-funknetz-96e62f9c7aee@brauner>
+X-Spam-Level: *
+X-Spamd-Result: default: False [1.90 / 50.00]; SUSPICIOUS_RECIPS(1.50)[];
+ URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=b698a1b2fcd7ef5f];
+ NEURAL_HAM_LONG(-1.00)[-1.000]; MID_RHS_NOT_FQDN(0.50)[];
+ MIME_GOOD(-0.10)[text/plain]; REDIRECTOR_URL(0.00)[goo.gl];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
+ MISSING_XM_UA(0.00)[]; TAGGED_RCPT(0.00)[20d7e439f76bbbd863a7];
+ RCPT_COUNT_TWELVE(0.00)[18]; MIME_TRACE(0.00)[0:+];
+ RCVD_COUNT_THREE(0.00)[3];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com,sina.com]; TO_DN_SOME(0.00)[];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ FREEMAIL_CC(0.00)[suse.com,kernel.org,lists.sourceforge.net,syzkaller.appspotmail.com,redhat.com,gmail.com,sina.com,vger.kernel.org,vivo.com,suse.cz,googlegroups.com,zeniv.linux.org.uk,mit.edu];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[appspotmail.com:email,imap1.dmz-prg2.suse.org:helo,syzkaller.appspot.com:url,suse.com:email];
+ RCVD_TLS_LAST(0.00)[];
+ DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+ SUBJECT_HAS_QUESTION(0.00)[]
+X-Spam-Flag: NO
+X-Spam-Score: 1.90
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jul 26, 2024 at 08:23:02AM GMT,
- syzbot wrote: > syzbot has bisected this issue to: > > commit
- b62e71be2110d8b52bf5faf3c3ed7ca1a0c113a5
- > Author: Chao Yu <chao@kernel.org> > Date: Sun Apr 23 15 [...] 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  On Mon 29-07-24 11:10:09, Christian Brauner wrote: > On Fri, 
+ Jul 26, 2024 at 08:23:02AM GMT, syzbot wrote: > > syzbot has bisected this
+ issue to: > > > > commit b62e71be2110d8b52bf5faf3c3ed7ca1a0c113a [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
  blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
  for more information. [URIs: goo.gl]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
+ [195.135.223.130 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [195.135.223.130 listed in sa-accredit.habeas.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -110,8 +154,7 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sYMPO-0001sE-Ll
+X-Headers-End: 1sYQPV-0007cz-Hq
 Subject: Re: [f2fs-dev] [syzbot] [f2fs?] WARNING in rcu_sync_dtor
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -124,72 +167,108 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christian Brauner <brauner@kernel.org>, Mateusz Guzik <mjguzik@gmail.com>,
- jack@suse.cz, paulmck@kernel.org, frank.li@vivo.com,
- linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com,
- Hillf Danton <hdanton@sina.com>, Oleg Nesterov <oleg@redhat.com>,
- rcu@vger.kernel.org, viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org,
- syzbot <syzbot+20d7e439f76bbbd863a7@syzkaller.appspotmail.com>
+Cc: Ted Tso <tytso@mit.edu>, Hillf Danton <hdanton@sina.com>,
+ Mateusz Guzik <mjguzik@gmail.com>, jack@suse.cz, paulmck@kernel.org,
+ frank.li@vivo.com, linux-kernel@vger.kernel.org,
+ syzkaller-bugs@googlegroups.com, Oleg Nesterov <oleg@redhat.com>,
+ syzbot <syzbot+20d7e439f76bbbd863a7@syzkaller.appspotmail.com>,
+ rcu@vger.kernel.org, viro@zeniv.linux.org.uk, Jan Kara <jack@suse.com>,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jul 26, 2024 at 08:23:02AM GMT, syzbot wrote:
-> syzbot has bisected this issue to:
+On Mon 29-07-24 11:10:09, Christian Brauner wrote:
+> On Fri, Jul 26, 2024 at 08:23:02AM GMT, syzbot wrote:
+> > syzbot has bisected this issue to:
+> > 
+> > commit b62e71be2110d8b52bf5faf3c3ed7ca1a0c113a5
+> > Author: Chao Yu <chao@kernel.org>
+> > Date:   Sun Apr 23 15:49:15 2023 +0000
+> > 
+> >     f2fs: support errors=remount-ro|continue|panic mountoption
+> > 
+> > bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=119745f1980000
+> > start commit:   1722389b0d86 Merge tag 'net-6.11-rc1' of git://git.kernel...
+> > git tree:       upstream
+> > final oops:     https://syzkaller.appspot.com/x/report.txt?x=139745f1980000
+> > console output: https://syzkaller.appspot.com/x/log.txt?x=159745f1980000
+> > kernel config:  https://syzkaller.appspot.com/x/.config?x=b698a1b2fcd7ef5f
+> > dashboard link: https://syzkaller.appspot.com/bug?extid=20d7e439f76bbbd863a7
+> > syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1237a1f1980000
+> > C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=115edac9980000
+> > 
+> > Reported-by: syzbot+20d7e439f76bbbd863a7@syzkaller.appspotmail.com
+> > Fixes: b62e71be2110 ("f2fs: support errors=remount-ro|continue|panic mountoption")
+> > 
+> > For information about bisection process see: https://goo.gl/tpsmEJ#bisection
 > 
-> commit b62e71be2110d8b52bf5faf3c3ed7ca1a0c113a5
-> Author: Chao Yu <chao@kernel.org>
-> Date:   Sun Apr 23 15:49:15 2023 +0000
+> Thanks to Paul and Oleg for point me in the right direction and
+> explaining that rcu sync warning.
 > 
->     f2fs: support errors=remount-ro|continue|panic mountoption
+> That patch here is remounting a superblock read-only directly by raising
+> SB_RDONLY without the involvement of the VFS at all. That's pretty
+> broken and is likely to cause trouble if done wrong. The rough order of
+> operations to transition rw->ro usualy include checking that the
+> filsystem is unfrozen, and marking all mounts read-only, then calling
+> into the filesystem so it can do whatever it wants to do.
+
+Yeah, this way of handling filesystem errors dates back to days when the
+world was much simpler :) It has been always a bit of a hack (but when you
+try to limit damage from corrupted on-disk data structures, a bit of
+hackiness is acceptable) but it is doubly so these days.
+
+> In any case, all of this requires holding sb->s_umount. Not holding
+> sb->s_umount will end up confusing freeze_super() (Thanks to Oleg for
+> noticing!). When freeze_super() is called on a non-ro filesystem it will
+> acquire
+> percpu_down_write(SB_FREEZE_WRITE+SB_FREEZE_PAGEFAULT+SB_FREEZE_FS) and
+> thaw_super() needs to call
+> sb_freeze_unlock(SB_FREEZE_FS+SB_FREEZE_PAGEFAULT+SB_FREEZE_WRITE) but
+> because you just raise SB_RDONLY you end up causing thaw_super() to skip
+> that step causing the bug in rcu_sync_dtor() to be noticed.
+
+Yeah, good spotting.
+
+> Btw, ext4 has similar logic where it raises SB_RDONLY without checking
+> whether the filesystem is frozen.
 > 
-> bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=119745f1980000
-> start commit:   1722389b0d86 Merge tag 'net-6.11-rc1' of git://git.kernel...
-> git tree:       upstream
-> final oops:     https://syzkaller.appspot.com/x/report.txt?x=139745f1980000
-> console output: https://syzkaller.appspot.com/x/log.txt?x=159745f1980000
-> kernel config:  https://syzkaller.appspot.com/x/.config?x=b698a1b2fcd7ef5f
-> dashboard link: https://syzkaller.appspot.com/bug?extid=20d7e439f76bbbd863a7
-> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1237a1f1980000
-> C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=115edac9980000
-> 
-> Reported-by: syzbot+20d7e439f76bbbd863a7@syzkaller.appspotmail.com
-> Fixes: b62e71be2110 ("f2fs: support errors=remount-ro|continue|panic mountoption")
-> 
-> For information about bisection process see: https://goo.gl/tpsmEJ#bisection
+> So I guess, this is technically ok as long as that emergency SB_RDONLY raising
+> in sb->s_flags is not done while the fs is already frozen. I think ext4 can
+> probably never do that. Jan?
 
-Thanks to Paul and Oleg for point me in the right direction and
-explaining that rcu sync warning.
+You'd wish (or maybe I'd wish ;) No, ext4 can hit it in the same way f2fs
+can. All it takes is for ext4 to hit some metadata corruption on read from
+disk while the filesystem is frozen.
 
-That patch here is remounting a superblock read-only directly by raising
-SB_RDONLY without the involvement of the VFS at all. That's pretty
-broken and is likely to cause trouble if done wrong. The rough order of
-operations to transition rw->ro usualy include checking that the
-filsystem is unfrozen, and marking all mounts read-only, then calling
-into the filesystem so it can do whatever it wants to do.
+> My guess is that something in f2fs can end up raising SB_RDONLY after
+> the filesystem is frozen and so it causes this bug. I suspect this is coming
+> from the gc_thread() which might issue a f2fs_stop_checkpoint() while the fs is
+> already about to be frozen but before the gc thread is stopped as part of the
+> freeze.
 
-In any case, all of this requires holding sb->s_umount. Not holding
-sb->s_umount will end up confusing freeze_super() (Thanks to Oleg for
-noticing!). When freeze_super() is called on a non-ro filesystem it will
-acquire
-percpu_down_write(SB_FREEZE_WRITE+SB_FREEZE_PAGEFAULT+SB_FREEZE_FS) and
-thaw_super() needs to call
-sb_freeze_unlock(SB_FREEZE_FS+SB_FREEZE_PAGEFAULT+SB_FREEZE_WRITE) but
-because you just raise SB_RDONLY you end up causing thaw_super() to skip
-that step causing the bug in rcu_sync_dtor() to be noticed.
+So in ext4 we have EXT4_FLAGS_SHUTDOWN flag which we now use internally
+instead of SB_RDONLY flag for checking whether the filesystem was shutdown
+(because otherwise races between remount and hitting fs error were really
+messy). However we still *also* set SB_RDONLY so that VFS bails early from
+some paths which generally results in less error noise in kernel logs and
+also out of caution of not breaking something in this path. That being said
+we also support EXT4_IOC_SHUTDOWN ioctl for several years and in that path
+we set EXT4_FLAGS_SHUTDOWN without setting SB_RDONLY and nothing seems to
+have blown up. So I'm inclined to belive we could remove setting of
+SB_RDONLY from ext4 error handling. Ted, what do you think?
 
-Btw, ext4 has similar logic where it raises SB_RDONLY without checking
-whether the filesystem is frozen.
+Also as the "filesystem shutdown" is spreading across multiple filesystems,
+I'm playing with the idea that maybe we could lift a flag like this to VFS
+so that we can check it in VFS paths and abort some operations early.  But
+so far I'm not convinced the gain is worth the need to iron out various
+subtle semantical differences of "shutdown" among filesystems.
 
-So I guess, this is technically ok as long as that emergency SB_RDONLY raising
-in sb->s_flags is not done while the fs is already frozen. I think ext4 can
-probably never do that. Jan?
-
-My guess is that something in f2fs can end up raising SB_RDONLY after
-the filesystem is frozen and so it causes this bug. I suspect this is coming
-from the gc_thread() which might issue a f2fs_stop_checkpoint() while the fs is
-already about to be frozen but before the gc thread is stopped as part of the
-freeze.
+								Honza
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
 
 _______________________________________________
