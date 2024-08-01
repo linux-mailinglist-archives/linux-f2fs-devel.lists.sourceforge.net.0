@@ -2,63 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CF2C943F42
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Aug 2024 03:36:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A117F944575
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Aug 2024 09:33:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sZKjs-0003ZC-Uj;
-	Thu, 01 Aug 2024 01:36:20 +0000
+	id 1sZQIz-0006Bt-Cc;
+	Thu, 01 Aug 2024 07:32:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1sZKjr-0003Z0-Qn
+ (envelope-from <r.smirnov@omp.ru>) id 1sZQIw-0006Bk-7e
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Aug 2024 01:36:19 +0000
+ Thu, 01 Aug 2024 07:32:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=p89/ke6veiUyQwPrRMNiA7OsGqADKpNqrPFrAzRK0Ko=; b=iVFB9srS0kQ2CueZFoXvRBFPD+
- ensbElcZuwokitqYRGSUjHT4bq+DEXq2acAHBuhxURgdJ9sE9Sr7tRypKnX01DmTCy4/jtyqykJNz
- 7pqShVmNt1dXiuhJ73p7czePjrmld2R9lu0hNUNZNqUj51X8Xb7kz5wFIAIBO7+B9kYs=;
+ bh=axE+jbd7RQC5wPWslqcJEBZKojhg7GQ/nt7SfAYBDC8=; b=F5cCDGPeGEQqJI7m41BXsBtIpB
+ 3pzbtyt4nH10F3fYyDYvEv9HVEJBF2mkG+2bpXA6MbblGn3B+AFXZ5/kgOuHer5qYlLS/Y0UZ64Ae
+ 5C6BhKcSu6BFahcBlFV/l3BY0Jbm84AbzEURi/J9AGYf43uWLBFzVDoD5Nopyxs+ySQo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=p89/ke6veiUyQwPrRMNiA7OsGqADKpNqrPFrAzRK0Ko=; b=S
- uuJyBVPMVBN2Ly2rsA/O9jarz4ROSM0ty0WYlSJbMvtNS5qx4P/IKNz4hxTC019W61lpG5mPSTau0
- xy+2xSlN6uqLSzCF/uYaZGg/qbSa2gh4YKLXGYkcHlZggrjoWPhYWu2kWdy9aoyuex1on+xQczwEE
- D1Q/gQib+JUncWt4=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
+ List-Owner:List-Archive; bh=axE+jbd7RQC5wPWslqcJEBZKojhg7GQ/nt7SfAYBDC8=; b=I
+ 0RayhoV2bisf36LlRmJwJdq/r8sacOPWCFpWXuEtIor4U7Qi9Y+6mSzv3/WnjYQsyxqEevE9H/O4y
+ OW+83wMypPdavCuwi6DWtFLOxyk24imvhepkIjJ8wHbGTBhfcJvrexiLF1lX1HHoNtv4LYRzx9by3
+ i3nS8xDub+gxUV4A=;
+Received: from mx01.omp.ru ([90.154.21.10])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sZKjq-00070p-81 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Aug 2024 01:36:19 +0000
-Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 4711YTAU036418;
- Thu, 1 Aug 2024 09:34:29 +0800 (+08)
- (envelope-from Zhiguo.Niu@unisoc.com)
-Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4WZBDz2gzhz2M40TH;
- Thu,  1 Aug 2024 09:28:35 +0800 (CST)
-Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Thu, 1 Aug 2024 09:34:26 +0800
-From: Zhiguo Niu <zhiguo.niu@unisoc.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Thu, 1 Aug 2024 09:33:51 +0800
-Message-ID: <1722476031-22106-1-git-send-email-zhiguo.niu@unisoc.com>
-X-Mailer: git-send-email 1.9.1
+ (TLS1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.95) id 1sZQIs-000128-PF
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 01 Aug 2024 07:32:54 +0000
+Received: from inp1wst083.omp.ru (81.22.207.138) by msexch01.omp.ru
+ (10.188.4.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.2.1258.12; Thu, 1 Aug
+ 2024 10:17:19 +0300
+From: Roman Smirnov <r.smirnov@omp.ru>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
+Date: Thu, 1 Aug 2024 10:17:07 +0300
+Message-ID: <20240801071707.8296-1-r.smirnov@omp.ru>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-Originating-IP: [10.0.73.87]
-X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 4711YTAU036418
+X-Originating-IP: [81.22.207.138]
+X-ClientProxiedBy: msexch01.omp.ru (10.188.4.12) To msexch01.omp.ru
+ (10.188.4.12)
+X-KSE-ServerInfo: msexch01.omp.ru, 9
+X-KSE-AntiSpam-Interceptor-Info: scan successful
+X-KSE-AntiSpam-Version: 6.1.0, Database issued on: 08/01/2024 06:59:26
+X-KSE-AntiSpam-Status: KAS_STATUS_NOT_DETECTED
+X-KSE-AntiSpam-Method: none
+X-KSE-AntiSpam-Rate: 0
+X-KSE-AntiSpam-Info: Lua profiles 186817 [Jul 31 2024]
+X-KSE-AntiSpam-Info: Version: 6.1.0.4
+X-KSE-AntiSpam-Info: Envelope from: r.smirnov@omp.ru
+X-KSE-AntiSpam-Info: LuaCore: 24 0.3.24
+ 186c4d603b899ccfd4883d230c53f273b80e467f
+X-KSE-AntiSpam-Info: {rep_avail}
+X-KSE-AntiSpam-Info: {Tracking_from_domain_doesnt_match_to}
+X-KSE-AntiSpam-Info: omp.ru:7.1.1; inp1wst083.omp.ru:7.1.1; 81.22.207.138:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2
+X-KSE-AntiSpam-Info: ApMailHostAddress: 81.22.207.138
+X-KSE-AntiSpam-Info: Rate: 0
+X-KSE-AntiSpam-Info: Status: not_detected
+X-KSE-AntiSpam-Info: Method: none
+X-KSE-AntiSpam-Info: Auth:dmarc=temperror header.from=omp.ru;spf=temperror
+ smtp.mailfrom=omp.ru;dkim=none
+X-KSE-Antiphishing-Info: Clean
+X-KSE-Antiphishing-ScanningType: Heuristic
+X-KSE-Antiphishing-Method: None
+X-KSE-Antiphishing-Bases: 08/01/2024 07:03:00
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean, bases: 8/1/2024 5:04:00 AM
+X-KSE-Attachment-Filter-Triggered-Rules: Clean
+X-KSE-Attachment-Filter-Triggered-Filters: Clean
+X-KSE-BulkMessagesFiltering-Scan-Result: InTheLimit
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -66,11 +89,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Use F2FS_BYTES_TO_BLK(bytes) and F2FS_BLK_TO_BYTES(blk) for
- cleanup Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com> ---
- fs/f2fs/checkpoint.c
- | 2 +- fs/f2fs/debug.c | 2 +- fs/f2fs/file.c | 6 +++--- fs/f2fs/node.c |
- 4 ++-- fs/f2fs/super.c | 2 +- include/linux/f2fs_fs. [...] 
+ Content preview: If invalid data is copied from user space and if GET_SEGNO()
+ returns NULL_SEGNO an overflow is possible. Add checks for invalid values.
+ Found by Linux Verification Center (linuxtesting.org) with Svace. 
  Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -78,20 +99,20 @@ X-Spam-Report: Spam detection software,
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [222.66.158.135 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ [90.154.21.10 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [222.66.158.135 listed in sa-trusted.bondedsender.org]
+ [90.154.21.10 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
  DNSWL was blocked.  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [222.66.158.135 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ for more information. [90.154.21.10 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1sZKjq-00070p-81
-Subject: [f2fs-dev] [PATCH] f2fs: clean up val{>>,<<}F2FS_BLKSIZE_BITS
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+X-Headers-End: 1sZQIs-000128-PF
+Subject: [f2fs-dev] [PATCH] f2fs: file: add checks to f2fs_ioc_flush_device()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,125 +124,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, zhiguo.niu@unisoc.com,
- Hao_hao.Wang@unisoc.com
+Cc: Sergey Shtylyov <s.shtylyov@omp.ru>, lvc-project@linuxtesting.org,
+ linux-kernel@vger.kernel.org, Karina Yankevich <k.yankevich@omp.ru>,
+ linux-f2fs-devel@lists.sourceforge.net, Roman Smirnov <r.smirnov@omp.ru>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Use F2FS_BYTES_TO_BLK(bytes) and F2FS_BLK_TO_BYTES(blk) for cleanup
+If invalid data is copied from user space and if GET_SEGNO()
+returns NULL_SEGNO an overflow is possible.
 
-Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+Add checks for invalid values.
+
+Found by Linux Verification Center (linuxtesting.org) with Svace.
+
+Signed-off-by: Roman Smirnov <r.smirnov@omp.ru>
 ---
- fs/f2fs/checkpoint.c    | 2 +-
- fs/f2fs/debug.c         | 2 +-
- fs/f2fs/file.c          | 6 +++---
- fs/f2fs/node.c          | 4 ++--
- fs/f2fs/super.c         | 2 +-
- include/linux/f2fs_fs.h | 2 +-
- 6 files changed, 9 insertions(+), 9 deletions(-)
+ fs/f2fs/file.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index bdd9632..f3d22b8 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1551,7 +1551,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 		blk = start_blk + BLKS_PER_SEG(sbi) - nm_i->nat_bits_blocks;
- 		for (i = 0; i < nm_i->nat_bits_blocks; i++)
- 			f2fs_update_meta_page(sbi, nm_i->nat_bits +
--					(i << F2FS_BLKSIZE_BITS), blk + i);
-+					F2FS_BLK_TO_BYTES(i), blk + i);
- 	}
- 
- 	/* write out checkpoint buffer at block 0 */
-diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
-index 8b0e1e7..546b8ba 100644
---- a/fs/f2fs/debug.c
-+++ b/fs/f2fs/debug.c
-@@ -275,7 +275,7 @@ static void update_mem_info(struct f2fs_sb_info *sbi)
- 	/* build nm */
- 	si->base_mem += sizeof(struct f2fs_nm_info);
- 	si->base_mem += __bitmap_size(sbi, NAT_BITMAP);
--	si->base_mem += (NM_I(sbi)->nat_bits_blocks << F2FS_BLKSIZE_BITS);
-+	si->base_mem += F2FS_BLK_TO_BYTES(NM_I(sbi)->nat_bits_blocks);
- 	si->base_mem += NM_I(sbi)->nat_blocks *
- 				f2fs_bitmap_size(NAT_ENTRY_PER_BLOCK);
- 	si->base_mem += NM_I(sbi)->nat_blocks / 8;
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 41ef3ad..7709aed 100644
+index 168f08507004..1b9c4fee9db1 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -2984,9 +2984,9 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
- 	}
+@@ -3093,6 +3093,9 @@ static int f2fs_ioc_flush_device(struct file *filp, unsigned long arg)
+ 		start_segno = dev_start_segno;
+ 	end_segno = min(start_segno + range.segments, dev_end_segno);
  
- 	f2fs_lock_op(sbi);
--	ret = __exchange_data_block(src, dst, pos_in >> F2FS_BLKSIZE_BITS,
--				pos_out >> F2FS_BLKSIZE_BITS,
--				len >> F2FS_BLKSIZE_BITS, false);
-+	ret = __exchange_data_block(src, dst, F2FS_BYTES_TO_BLK(pos_in),
-+				F2FS_BYTES_TO_BLK(pos_out),
-+				F2FS_BYTES_TO_BLK(len), false);
- 
- 	if (!ret) {
- 		if (dst_max_i_size)
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 2fe182f..9e7a6e2 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -3166,7 +3166,7 @@ static int __get_nat_bitmaps(struct f2fs_sb_info *sbi)
- 
- 	nm_i->nat_bits_blocks = F2FS_BLK_ALIGN((nat_bits_bytes << 1) + 8);
- 	nm_i->nat_bits = f2fs_kvzalloc(sbi,
--			nm_i->nat_bits_blocks << F2FS_BLKSIZE_BITS, GFP_KERNEL);
-+			F2FS_BLK_TO_BYTES(nm_i->nat_bits_blocks), GFP_KERNEL);
- 	if (!nm_i->nat_bits)
- 		return -ENOMEM;
- 
-@@ -3185,7 +3185,7 @@ static int __get_nat_bitmaps(struct f2fs_sb_info *sbi)
- 		if (IS_ERR(page))
- 			return PTR_ERR(page);
- 
--		memcpy(nm_i->nat_bits + (i << F2FS_BLKSIZE_BITS),
-+		memcpy(nm_i->nat_bits + F2FS_BLK_TO_BYTES(i),
- 					page_address(page), F2FS_BLKSIZE);
- 		f2fs_put_page(page, 1);
- 	}
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 4d2f3bb..977f038 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3317,7 +3317,7 @@ loff_t max_file_blocks(struct inode *inode)
- 	 * fit within U32_MAX + 1 data units.
- 	 */
- 
--	result = min(result, (((loff_t)U32_MAX + 1) * 4096) >> F2FS_BLKSIZE_BITS);
-+	result = min(result, F2FS_BYTES_TO_BLK(((loff_t)U32_MAX + 1) * 4096));
- 
- 	return result;
- }
-diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
-index 01bee2b..f17f89a 100644
---- a/include/linux/f2fs_fs.h
-+++ b/include/linux/f2fs_fs.h
-@@ -19,7 +19,6 @@
- #define F2FS_BLKSIZE_BITS		PAGE_SHIFT /* bits for F2FS_BLKSIZE */
- #define F2FS_MAX_EXTENSION		64	/* # of extension entries */
- #define F2FS_EXTENSION_LEN		8	/* max size of extension */
--#define F2FS_BLK_ALIGN(x)	(((x) + F2FS_BLKSIZE - 1) >> F2FS_BLKSIZE_BITS)
- 
- #define NULL_ADDR		((block_t)0)	/* used as block_t addresses */
- #define NEW_ADDR		((block_t)-1)	/* used as block_t addresses */
-@@ -28,6 +27,7 @@
- #define F2FS_BYTES_TO_BLK(bytes)	((bytes) >> F2FS_BLKSIZE_BITS)
- #define F2FS_BLK_TO_BYTES(blk)		((blk) << F2FS_BLKSIZE_BITS)
- #define F2FS_BLK_END_BYTES(blk)		(F2FS_BLK_TO_BYTES(blk + 1) - 1)
-+#define F2FS_BLK_ALIGN(x)			(F2FS_BYTES_TO_BLK((x) + F2FS_BLKSIZE - 1))
- 
- /* 0, 1(node nid), 2(meta nid) are reserved node id */
- #define F2FS_RESERVED_NODE_NUM		3
++	if (start_segno > F2FS_MAX_SEGMENT - range.segments || end_segno == NULL_SEGNO)
++		return -EINVAL;
++
+ 	while (start_segno < end_segno) {
+ 		if (!f2fs_down_write_trylock(&sbi->gc_lock)) {
+ 			ret = -EBUSY;
 -- 
-1.9.1
+2.43.0
 
 
 
