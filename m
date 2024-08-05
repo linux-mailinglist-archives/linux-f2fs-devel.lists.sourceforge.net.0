@@ -2,106 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A80C947DE7
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  5 Aug 2024 17:22:30 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E572E948602
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2024 01:31:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sazXM-00072r-3V;
-	Mon, 05 Aug 2024 15:22:16 +0000
+	id 1sb7AU-00012v-W0;
+	Mon, 05 Aug 2024 23:31:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3G-6wZgkbAPYqwxiYjjcpYnngb.emmejcsqcpamlrclr.amk@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1sazXK-00072k-Tc for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 05 Aug 2024 15:22:14 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sb7AJ-00012A-Fe
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 05 Aug 2024 23:31:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
+ Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fqYQ1rnc25cZh5MXJtV/NcibaXRvGQIgXbkVXCpo9Vg=; b=b47ZIFxSFA0e8FdVWvii9uPygw
- d5FQVnOX7+c5wBJxuh9dvTSawebKLCe7bnWILHL6ft6qYxLOuYaE/10HbreoRalM1heXvwU2ZYIxA
- RlYXRKBRQ3txlkdWdgvxao0bumMq9csaJKnLaBMCFLjiIQjdQ9IxoeMSDUyx3VyiUBMw=;
+ bh=QI51opC7KD1vANyMspI/F92VlKxnx9igF/eL3mKOWfA=; b=NGwI4Xi+9QZDEUMd4CB5U7ng73
+ DGMc6xVKsU50lY8coii+2j5EPaL2NWVKgA741gvyu6nEELbj3bPG1NTPNkNdL6gxqZQGbrgEaaJe4
+ 14pJseGFTOf7wbZsr++TYlVtxXfBvsLXDa8sdZ8GnWdXZ3nnFF1rx7V9CXsbiA7AZhbo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=fqYQ1rnc25cZh5MXJtV/NcibaXRvGQIgXbkVXCpo9Vg=; b=C
- 2cAU59ji0TfrjM5idhoVrea0Vk2ko0iUp2bqsQ3boqCL5P4VTrFkoydkgTgkDFNO43reB1tjGz7eK
- ry66f0i3EeUG4qPoLymxoIvCT+X1BoReulxgvYPsC8dkAKOD+9JvDOlwzHR8Temrtdv0B9rHWQTKq
- pzoxTz2lDnU29h+0=;
-Received: from mail-io1-f69.google.com ([209.85.166.69])
+ ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=QI51opC7KD1vANyMspI/F92VlKxnx9igF/eL3mKOWfA=; b=BVsLZeUyAoRKYzFJpM67kwoXjk
+ bU3A3ox+aeD5qznAQrBJdwN+A4UPENn6S4wXRc8FjsUWTs94WgF+Fk6kvZNR8B41uV4HbHrOpMmKc
+ KY47xEh6qP3OIa6h4nSv8Eq5zp21EMZBY0rBHo1M2Wn2J5PFIhmsSme4mrA8I1gyxAoI=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1sazXK-0002Kc-8A for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 05 Aug 2024 15:22:14 +0000
-Received: by mail-io1-f69.google.com with SMTP id
- ca18e2360f4ac-81f8c780fe7so1511877639f.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 05 Aug 2024 08:22:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722871323; x=1723476123;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fqYQ1rnc25cZh5MXJtV/NcibaXRvGQIgXbkVXCpo9Vg=;
- b=PX/aTdkulkbRR/8/yaWz65gsAqUcgwSDbuhRfaqS1m5wDVwnYzLqrZ5g1gBeTJaaCc
- HbX4KXksbnN66wpiUIleOm6yrLgPjcV8fOJ9fwnH34wdc8gHVeAS+xgJocLWKPtr1Syh
- GaLP9aB4w4kArpxJmVRd6Z+17QaywMvwiu09o/010wdY4F1Hhhu+4c6qyIc6a0Ymvtlz
- 3/7KbJ4MbTOX9HH4IuE7BeXGTW7h6cAn1ckUF56Hqc+8+rmzARMt0hPA+7m+dhEwO7aU
- rTTG/nJjmsq7bPeZcX+onALkDM/nhNLG+Xr8cAUfNyizjnvg9gvYt4xCWOA4YKYs71cb
- f/hA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWS+NsbReyA+vYhZXhyHUvDl6DrqxEyjgLfNdDOWyC3BjCO/DJSqlMBXTKXcwvYCcMS0KBE/sBdc3eUNlRu4RO9@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwkOO5fv3+s0oYRJmOJern8RaZlpqSVqCIw2+9QyODqOG/D9tUz
- cWhlFLN8MBiScuafYqpMWhZWplCeyPk0AqM6GBOeU3Kh2JspAUZKaZ4RJ1qxJa3FQbm+6+JzWss
- DDv2W/G5eDdfTNsA1RuTwT3eYQkz0zHIG7uTcKXyBmQ9DIkxKYOSEyLA=
-X-Google-Smtp-Source: AGHT+IHIVNrWhdKuYXvlWP06vdiuw1dl3ZRddzqrJ/HvcfeJ2tl/ButFA0z7NeffmCSpRGbYFawwBfu5eYDV1ordM3AX4Z51JLo3
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1sb7AJ-00059y-FL for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 05 Aug 2024 23:31:00 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id C3786CE0BB0;
+ Mon,  5 Aug 2024 23:30:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id DD84AC4AF11;
+ Mon,  5 Aug 2024 23:30:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1722900651;
+ bh=Wh51ZHgQcyh0zd1MDxB5eTQ+FzwRqW7yMqfoRE3VMbk=;
+ h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+ b=CZAomYw5RPntrjFHWbtiFkfi3lM6eZ0tIoasIlqI3TLzWzel+O15SmXRmsS6cChFm
+ 0gT/M6cmKYRfjOdfYWxN9amf1siP93iJvdY5h/DsIdT3+5oH9WKJrE3FHo1QnjOB89
+ yzBzOrzTRP2oFqjVzhLor79Ay01jI67L67KuVNPzsYrVUwJ8/ECe5NBUcFWwrgSWls
+ NpTPYnMOwkT9XFAdrg848FnOibkgpIhgNYrzzKxhKEVjgWWF0/sQFbJZKa6wgZei1P
+ t6n8xvXv/2ZJtWnUHtpxfEchf7K6yNgBH0r8sL0sdwN8lnO8Uc4FZ4LYTPSKccIrXM
+ H1Wf18PTad1rg==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ C6BF0D20ABC; Mon,  5 Aug 2024 23:30:51 +0000 (UTC)
 MIME-Version: 1.0
-X-Received: by 2002:a05:6638:410b:b0:4be:d44b:de24 with SMTP id
- 8926c6da1cb9f-4c8d560df7amr526272173.2.1722871323340; Mon, 05 Aug 2024
- 08:22:03 -0700 (PDT)
-Date: Mon, 05 Aug 2024 08:22:03 -0700
-In-Reply-To: <0000000000004d2e4d061a401e51@google.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <00000000000038c729061ef13d67@google.com>
-From: syzbot <syzbot+f195123a45ad487ca66c@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: -4.7 (----)
+From: patchwork-bot+f2fs@kernel.org
+Message-Id: <172290065181.2803.9692794676706839195.git-patchwork-notify@kernel.org>
+Date: Mon, 05 Aug 2024 23:30:51 +0000
+References: <1721975246-32345-1-git-send-email-zhiguo.niu@unisoc.com>
+In-Reply-To: <1721975246-32345-1-git-send-email-zhiguo.niu@unisoc.com>
+To: Zhiguo Niu <zhiguo.niu@unisoc.com>
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: syzbot suspects this issue was fixed by commit: commit
- a8eb3de28e7a365690c61161e7a07a4fc7c60bbf
- Author: Chao Yu <chao@kernel.org> Date: Mon Jun 3 01:07:45 2024 +0000 f2fs:
- fix return value of f2fs_convert_inline_inode() 
- Content analysis details:   (-4.7 points, 6.0 required)
+ Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 26 Jul 2024 14:27:26 +0800 you
+ wrote: > This is a supplement to commit 6d1451bf7f84 ("f2fs: fix to use
+ per-inode
+ maxbytes") > for some missed cases, also cleanup redundant code in f2fs_llseek.
+ [...] Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: goo.gl]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [209.85.166.69 listed in list.dnswl.org]
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.69 listed in wl.mailspike.net]
-X-Headers-End: 1sazXK-0002Kc-8A
-Subject: Re: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_vm_page_mkwrite
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.73.55 listed in list.dnswl.org]
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sb7AJ-00059y-FL
+Subject: Re: [f2fs-dev] [PATCH V2] f2fs: fix to use per-inode maxbytes and
+ cleanup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,31 +105,39 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org,
+ Hao_hao.Wang@unisoc.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-syzbot suspects this issue was fixed by commit:
+Hello:
 
-commit a8eb3de28e7a365690c61161e7a07a4fc7c60bbf
-Author: Chao Yu <chao@kernel.org>
-Date:   Mon Jun 3 01:07:45 2024 +0000
+This patch was applied to jaegeuk/f2fs.git (dev)
+by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-    f2fs: fix return value of f2fs_convert_inline_inode()
+On Fri, 26 Jul 2024 14:27:26 +0800 you wrote:
+> This is a supplement to commit 6d1451bf7f84 ("f2fs: fix to use per-inode maxbytes")
+> for some missed cases, also cleanup redundant code in f2fs_llseek.
+> 
+> Cc: Chengguang Xu <cgxu519@mykernel.net>
+> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+> ---
+> v2: use Macro F2FS_BLK_TO_BYTES
+> 
+> [...]
 
-bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=1055414b980000
-start commit:   83814698cf48 Merge tag 'powerpc-6.10-2' of git://git.kerne..
-git tree:       upstream
-kernel config:  https://syzkaller.appspot.com/x/.config?x=238430243a58f702
-dashboard link: https://syzkaller.appspot.com/bug?extid=f195123a45ad487ca66c
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1129d362980000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=10d4ce06980000
+Here is the summary with links:
+  - [f2fs-dev,V2] f2fs: fix to use per-inode maxbytes and cleanup
+    https://git.kernel.org/jaegeuk/f2fs/c/a6c12809975b
 
-If the result looks correct, please mark the issue as fixed by replying with:
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
 
-#syz fix: f2fs: fix return value of f2fs_convert_inline_inode()
 
-For information about bisection process see: https://goo.gl/tpsmEJ#bisection
 
 
 _______________________________________________
