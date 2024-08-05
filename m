@@ -2,68 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C6469485F9
+	by mail.lfdr.de (Postfix) with ESMTPS id 95EDF9485F6
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2024 01:31:11 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sb7AT-0000Vs-KI;
-	Mon, 05 Aug 2024 23:31:09 +0000
+	id 1sb7AT-0000Vj-7t;
+	Mon, 05 Aug 2024 23:31:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sb7AN-0000VT-Oq
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sb7AJ-0000VD-H7
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 05 Aug 2024 23:31:03 +0000
+ Mon, 05 Aug 2024 23:30:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yjwSa4DELho24fGJ2WqH6mb+14hdUnihgKso6cEC/+s=; b=Mt+o5G4ZJLujBgJNlAUUd8I0k2
- fuh3fsAj42stIr5yxrKqcToXR6zbtOboHcb6wLwl6aVaKwAeI3ghFwNE++YN4yISdqBCtBbYckO0/
- KxJmSCc2piIixVq6pwezECbd454Z/zrbk0+v6BJSfNZ8bO98z0sbMlxzg1fkqB2o/+z0=;
+ bh=RzPQloPSDcjyj3p18ji965oiI7wpJ3EFi+S5/iB9wtM=; b=LF56Q8DK/wlpvathNbJnE2xfwY
+ 1xCwZ3RVIGMMgJRp5461y5HELTmD6g3r3Dm//iPVtcZLZCxKeqrw7zdiPcP8Ue8+53ONJu8KKX1L7
+ /B2202r94W2r4I7MGUlH5LKXUEFfDrmvUL5d1HrZhRSPhrdcz7+EdNg4DMQAHeFSVtB0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yjwSa4DELho24fGJ2WqH6mb+14hdUnihgKso6cEC/+s=; b=jYxWjrYRk1vwI9eCOyg5+c12+Y
- 8ea39K1tEE7JBAmE+OT6EBVuWbxAQ8A9YfQIVv3Yk9Z0us6iHxtgSnel22QSlx4z+O+oqS7ALXQvG
- F/sLJi2eXighLgZG33V4ZivN2UslR63NsV6zoS3twnB4jDJC7lxehzoBGsDVNTDSlOck=;
+ bh=RzPQloPSDcjyj3p18ji965oiI7wpJ3EFi+S5/iB9wtM=; b=hjaMfY8mLSx1BpxTgPWfbYk5vv
+ +jEO3eBtbKLR/uOT3FN4aTPZCfZ3iD0C85iUHSOU9paAjX6vUDfvRw92/J8uxiX/ra2jBSXqazAVa
+ YUMpMc2zaiikX2rWOws1HLTHNuVqB8mDu0CK5x69f6AUo9wU0OuahVyLNHwVOTCOZCO4=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sb7AM-0005AK-Fh for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 05 Aug 2024 23:31:03 +0000
+ id 1sb7AH-00059t-Pf for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 05 Aug 2024 23:30:58 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 2558260EAB;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 7177760EB3;
  Mon,  5 Aug 2024 23:30:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id CE5ADC4AF0E;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id DAE35C4AF0F;
  Mon,  5 Aug 2024 23:30:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1722900651;
- bh=Rsa4UgKROg3oElaqYDmOCqPOaaR0RW68YsBwnLH5WlE=;
+ bh=X7ausYPDDFnL539kbYS2qwmsnC8TcaLxcrV/4ugzBLU=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=jlYNOe11nzSMe16nbuiN7KrLdj2E1D3+nzi2YTBDpuZCcZlv0Lvr+RVy4AyIRCxfS
- 3u/zWt9cgRGhgLa0GqPezKWPOrW6oeb8V9f+yTtZFrQ51goEylGGQOG2D/Jv72vyFJ
- HVX3qwHuHeFen1klrnJqqAHNY7TtGQiUZ24mSvqGuGEuUyqB+UKHperK1KZ56YSJK8
- X/t5Wl3UyTQp67YQyVzkem4oyvlJS7lqT48IBRxAaX/Y1kcZVGSLfpChThiVcl1cau
- UkafDYiE0zqbcvg/Etx0pubR/YKzHolwzmf8z07kFKdL834cH+SFItEuE/HPHDBRBs
- z+cmd1KCx8EmQ==
+ b=O4YTc9sWjimtkICsL+mDWcgVSigSYVDD1C5Pn0COjmh7EraFGynstCs8goqdosuop
+ AJ8xLiCvrZTEanpO/C4oen2UDpGR/b8TqbXS3SdzIKqBo+iQ4+I/5RbGoZEZs9W0/5
+ oUkLntNV3CEUMzrUpw9IUe9X1WajbQD6TeDzEac2JoQrjg4u0wOT9NQ8X8qS8GjiRg
+ OYS7HZK0TGzDmzhPZjP8NjxDjyDNAEw8cTLo/3yckqSQwzHCbX3NGECfBcVyC/oUuN
+ PkWpd4eAV+2+9rZnK/2mb9bzsYLjB7mRi9BY7FMF5plRZKbszLFuhmBSqeDkOCVhhV
+ drXi3ojhRmfeg==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- B64F5C43140; Mon,  5 Aug 2024 23:30:51 +0000 (UTC)
+ CF486D20AA6; Mon,  5 Aug 2024 23:30:51 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <172290065174.2803.15142106569963496847.git-patchwork-notify@kernel.org>
+Message-Id: <172290065184.2803.16077457643424916047.git-patchwork-notify@kernel.org>
 Date: Mon, 05 Aug 2024 23:30:51 +0000
-References: <20240715123451.7918-1-liaoyuanhong@vivo.com>
-In-Reply-To: <20240715123451.7918-1-liaoyuanhong@vivo.com>
-To: Liao Yuanhong <liaoyuanhong@vivo.com>
+References: <20240625031351.3586955-1-chao@kernel.org>
+In-Reply-To: <20240625031351.3586955-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -71,11 +71,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 15 Jul 2024 20:34:51 +0800 you
- wrote: > Currently, we are using a mix of traditional UFS and zone UFS to
- support > some functionalities that cannot be achieved on zone UFS alone.
- However, > th [...] 
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 25 Jun 2024 11:13:48 +0800 you
+ wrote: > Case #1: > SQLite App GC Thread Kworker Shrinker > -
+ f2fs_ioc_start_atomic_write
+ > > - f2fs_ioc_commit_atomic_write > - f2fs_commit_atomic_write > - fil [...]
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,9 +90,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sb7AM-0005AK-Fh
-Subject: Re: [f2fs-dev] [PATCH v5] f2fs:Add write priority option based on
- zone UFS
+X-Headers-End: 1sb7AH-00059t-Pf
+Subject: Re: [f2fs-dev] [PATCH 1/4] f2fs: atomic: fix to avoid racing w/ GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,38 +103,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org, bo.wu@vivo.com,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ daehojeong@google.com, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This patch was applied to jaegeuk/f2fs.git (dev)
+This series was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon, 15 Jul 2024 20:34:51 +0800 you wrote:
-> Currently, we are using a mix of traditional UFS and zone UFS to support
-> some functionalities that cannot be achieved on zone UFS alone. However,
-> there are some issues with this approach. There exists a significant
-> performance difference between traditional UFS and zone UFS. Under normal
-> usage, we prioritize writes to zone UFS. However, in critical conditions
-> (such as when the entire UFS is almost full), we cannot determine whether
-> data will be written to traditional UFS or zone UFS. This can lead to
-> significant performance fluctuations, which is not conducive to
-> development and testing. To address this, we have added an option
-> zlu_io_enable under sys with the following three modes:
-> 1) zlu_io_enable == 0:Normal mode, prioritize writing to zone UFS;
-> 2) zlu_io_enable == 1:Zone UFS only mode, only allow writing to zone UFS;
-> 3) zlu_io_enable == 2:Traditional UFS priority mode, prioritize writing to
-> traditional UFS.
+On Tue, 25 Jun 2024 11:13:48 +0800 you wrote:
+> Case #1:
+> SQLite App		GC Thread		Kworker		Shrinker
+> - f2fs_ioc_start_atomic_write
+> 
+> - f2fs_ioc_commit_atomic_write
+>  - f2fs_commit_atomic_write
+>   - filemap_write_and_wait_range
+>   : write atomic_file's data to cow_inode
+> 								echo 3 > drop_caches
+> 								to drop atomic_file's
+> 								cache.
+> 			- f2fs_gc
+> 			 - gc_data_segment
+> 			  - move_data_page
+> 			   - set_page_dirty
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v5] f2fs:Add write priority option based on zone UFS
-    https://git.kernel.org/jaegeuk/f2fs/c/8444ce524947
+  - [f2fs-dev,1/4] f2fs: atomic: fix to avoid racing w/ GC
+    https://git.kernel.org/jaegeuk/f2fs/c/1a0bd289a5db
+  - [f2fs-dev,2/4] f2fs: atomic: fix to not allow GC to pollute atomic_file
+    https://git.kernel.org/jaegeuk/f2fs/c/7566a155c666
+  - [f2fs-dev,3/4] f2fs: atomic: fix to truncate pagecache before on-disk metadata truncation
+    (no matching commit)
+  - [f2fs-dev,4/4] f2fs: atomic: fix to forbid dio in atomic_file
+    https://git.kernel.org/jaegeuk/f2fs/c/374a8881ce4c
 
 You are awesome, thank you!
 -- 
