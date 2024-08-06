@@ -2,69 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B491A948608
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2024 01:31:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BAFC9487AC
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2024 04:44:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sb7Aa-0007Lf-Hd;
-	Mon, 05 Aug 2024 23:31:16 +0000
+	id 1sbAB0-00028P-CN;
+	Tue, 06 Aug 2024 02:43:55 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sb7AT-0007K9-T3
+ (envelope-from <jaegeuk@kernel.org>) id 1sbAAz-00028J-JF
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 05 Aug 2024 23:31:09 +0000
+ Tue, 06 Aug 2024 02:43:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mohzRqGp0lB1XD6NTabSPNvOOfz9/mphFADFxt2Z3hY=; b=Uu6f+9RaE5SRX2Hoyy/g+XTIwW
- N9INKSfA5PBs8/tbW957Zj3NdRv5pj4n2BIiFbTseTvid1c2sOw3BwFXAT/uWIpZsl8mesFsaHJ67
- 6BEk9LM3iteEMxh+95QsdCIzfQxQB1jMADAWg8fJdOVapFd521Syke1JnEikP+tmFUrc=;
+ bh=OLyj2RUlWkDLTR+NehXcDV2TwIH5G94v7zIOBSqpv2Y=; b=gBdUP6UN5dJAnH43f2Bezg66ao
+ Pg9s90aHN2pi3yOvBCycLbtzpkCIapOXgOWPxAGg3n0RL8ljKbXzp3pPBfy5ujeX7z3ieERKzNTgp
+ dR+31hU+2LeIO2ewqUdMUnPtTLzgkHpJUgxjvG9FOeZnVGnN8Ey76/h/FdvEIgtNzO+U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mohzRqGp0lB1XD6NTabSPNvOOfz9/mphFADFxt2Z3hY=; b=Y2tOsnll+CddX13ZyxiaKjpZch
- csQD8QpzA4vE4Ydb/urDWnUC6zFfyhGVogLC8MREd63bdTjxUHhoxyrgaAMWGQnJhjIl215HpjnVr
- jfuYBnDPEd2wu+y3j1qrNfQkW7JJx8cjaJArJjUMdk4Ohm+23PyRm/kVtiITPOP6VEXE=;
+ ;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=OLyj2RUlWkDLTR+NehXcDV2TwIH5G94v7zIOBSqpv2Y=; b=bYE42t/zGz7+gExqju7IThSklt
+ TixE8l75xjjeB8jpMHhr7yioOenvNNVjJxWfd1thxUiwvej/sOvbwS1kzzq0IGrteB6W0vyXMEwsQ
+ VEipJlk+1monBqzDW2QTs8BKe2k/jNaIoaSqXOYv/848CSyMqQGSd3OiiFVxBHBXMwJ4=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sb7AS-0005BD-NJ for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 05 Aug 2024 23:31:09 +0000
+ id 1sbAAz-00065L-LW for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Aug 2024 02:43:54 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E46F060EC9
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4310660E93
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  5 Aug 2024 23:30:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 2CCE8C4AF62;
- Mon,  5 Aug 2024 23:30:52 +0000 (UTC)
+ Tue,  6 Aug 2024 02:43:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5B10C32782;
+ Tue,  6 Aug 2024 02:43:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1722900652;
- bh=JB9tHugh5uz1t6hACHVOqtzb1kHKTIVf1m+7h7eV5Uk=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=jy4+WdYzgUpAAveKz+mEPJ8TCm1ihX4hZd7WwbqGxCXWYN7P30ZRJzo0GcKXjb6bW
- AhgDk0SQTWgRZxnbXRPhHpSo8d7p/ivP4NS582WZSmZ7JEKH9O0Cqd1L5qb1eNcABC
- k1xBa0PM8J2UlUSp41wOKDP/HkJ7TphzNXkx2EVlLp2tekZAh5SfZZHGGg2kRF6TTI
- c2XFbtkfhJht3sldXIVRjLyeCqxuD/dKvWpiNek2xbjPk9K90FdZbdb32PdburL8N2
- zLGgiE36yPE1c32OZ4X9WtG0YaNXHjadEYoNZQfDvdIbWP0A5dY5vlc6jmbG4yFo6N
- UyCTTKpDjH85A==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 21668D20ABC; Mon,  5 Aug 2024 23:30:52 +0000 (UTC)
-MIME-Version: 1.0
-From: patchwork-bot+f2fs@kernel.org
-Message-Id: <172290065212.2803.17197676609534608059.git-patchwork-notify@kernel.org>
-Date: Mon, 05 Aug 2024 23:30:52 +0000
-References: <20240627071521.1557830-1-chao@kernel.org>
-In-Reply-To: <20240627071521.1557830-1-chao@kernel.org>
+ s=k20201202; t=1722912223;
+ bh=1gQt/xGiNzbNxHjkcFls8MV62aqxPJqo4osSDIzjg5M=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=p4vt2xXgNp2e8HCJlCzpA1pTKzEmRd4zdAfLkKdxneYhNTihGUp6ix0Fh4D9eGF8P
+ DmAAMpI71pzEVsnLUO1FTpkZbzGB+DH5r8EMe1JOuYkkC8+6vYmTBarjVJv1XRHtD4
+ 9Qu27mD1XlTueCmN93PCb96KgOPkLoBqlm4gP1gU/BWx4/h6N3F2fA0e8ltTX9D7Bn
+ dJ0o2UrNf7MmSG19BtiAC7QJKqtQCg74AANwmJ+9BYOeTqm2oVghanSthBlzq9NIyc
+ +8lQh70cFUn3Zp1rCRML2fgn1YTyooT+Mc7aiULXYgOIKRtDfnKylw4G5KLkzuRVXA
+ 1HM6nvYEcO9cw==
+Date: Tue, 6 Aug 2024 02:43:41 +0000
+From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <chao@kernel.org>
+Message-ID: <ZrGN3ed4pN5Ii67m@google.com>
+References: <20240801011337.3772536-1-chao@kernel.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20240801011337.3772536-1-chao@kernel.org>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,16 +70,13 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 27 Jun 2024 15:15:21 +0800 you
- wrote: > If lfs mode is on, buffered read may race w/ OPU dio write as below, 
- > it may cause buffered read hits unwritten data unexpectly, and for > dio
- read, th [...] 
+ Content preview:  On 08/01,
+ Chao Yu wrote: > We should always truncate pagecache
+ while truncating on-disk data. > > Fixes: a46bebd502fe ("f2fs: synchronize
+ atomic write aborts") > Signed-off-by: Chao Yu <chao@kernel.or [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -90,10 +85,13 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sb7AS-0005BD-NJ
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix to avoid racing in between read
- and OPU dio write
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sbAAz-00065L-LW
+Subject: Re: [f2fs-dev] [PATCH v3 3/4] f2fs: atomic: fix to truncate
+ pagecache before on-disk metadata truncation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,57 +103,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello:
-
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
-
-On Thu, 27 Jun 2024 15:15:21 +0800 you wrote:
-> If lfs mode is on, buffered read may race w/ OPU dio write as below,
-> it may cause buffered read hits unwritten data unexpectly, and for
-> dio read, the race condition exists as well.
+On 08/01, Chao Yu wrote:
+> We should always truncate pagecache while truncating on-disk data.
 > 
-> Thread A			Thread B
-> - f2fs_file_write_iter
->  - f2fs_dio_write_iter
->   - __iomap_dio_rw
->    - f2fs_iomap_begin
->     - f2fs_map_blocks
->      - __allocate_data_block
->       - allocated blkaddr #x
->        - iomap_dio_submit_bio
-> 				- f2fs_file_read_iter
-> 				 - filemap_read
-> 				  - f2fs_read_data_folio
-> 				   - f2fs_mpage_readpages
-> 				    - f2fs_map_blocks
-> 				     : get blkaddr #x
-> 				    - f2fs_submit_read_bio
-> 				IRQ
-> 				- f2fs_read_end_io
-> 				 : read IO on blkaddr #x complete
-> IRQ
-> - iomap_dio_bio_end_io
->  : direct write IO on blkaddr #x complete
+> Fixes: a46bebd502fe ("f2fs: synchronize atomic write aborts")
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+> v3:
+> - check dirty page before truncation
+> - use invalidate_mapping_pages() instead of truncate_inode_pages()
+> - set i_size to zero after truncation
+>  fs/f2fs/file.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 > 
-> [...]
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index ac61c88f7688..a316c21539d1 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -2199,11 +2199,17 @@ static int f2fs_ioc_start_atomic_write(struct file *filp, bool truncate)
+>  		F2FS_I(fi->cow_inode)->atomic_inode = inode;
+>  	} else {
+>  		/* Reuse the already created COW inode */
+> +		f2fs_bug_on(sbi, get_dirty_pages(fi->cow_inode));
+> +
+> +		invalidate_mapping_pages(fi->cow_inode->i_mapping, 0, -1);
+> +
+>  		ret = f2fs_do_truncate_blocks(fi->cow_inode, 0, true);
+>  		if (ret) {
+>  			f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
+>  			goto out;
+>  		}
+> +
+> +		i_size_write(fi->cow_inode, 0);
 
-Here is the summary with links:
-  - [f2fs-dev,v3] f2fs: fix to avoid racing in between read and OPU dio write
-    https://git.kernel.org/jaegeuk/f2fs/c/415ea641b020
+Do we really need this?
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
-
+>  	}
+>  
+>  	f2fs_write_inode(inode, NULL);
+> -- 
+> 2.40.1
 
 
 _______________________________________________
