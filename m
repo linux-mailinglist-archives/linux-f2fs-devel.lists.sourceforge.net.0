@@ -2,28 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DB90949935
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Aug 2024 22:36:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F61A949E94
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Aug 2024 05:46:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sbQue-00051x-08;
-	Tue, 06 Aug 2024 20:36:08 +0000
+	id 1sbXdH-0006tm-LK;
+	Wed, 07 Aug 2024 03:46:39 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1sbQuc-00051n-Ek
- for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Aug 2024 20:36:06 +0000
+ (envelope-from <willy@infradead.org>) id 1sbXdG-0006tR-57;
+ Wed, 07 Aug 2024 03:46:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yOZsdAQoHQ9ECHbMTj5+F8nYAi2mJLf7YFtaK8qMTBw=; b=MMHih2jmdJcHWzli7MFUhlhvf6
- 9NjBKaawJOJTD7++qiZKHUwo3ISHb2Tz1B4gurEg1Va1Xsv6w6LoeGS5KP88HCfWsTRJYFHmVinmg
- RAFNmW0GnCX3J6TDctmSMCocRhbBGLerMvdAC6yGKOvdWTITeNb0FYOik5dt3Giv7N40=;
+ bh=Jy5sBXXGr2voNP18guOdqKk17MKFMl8ptCuzk1nlp0Q=; b=N1SW6z63RenxgiO8rEsxLhDf33
+ TfFtF4OeT3TgDEZez0f4Xk0oe+gcMkEZu1DJSrDL5ufZnzK8dkwFzclVmK3BlPWlXdsTUzBIij4yK
+ 2+2zOYnLubFQQAk093pqSAUJn4AGmQB280rgkWtMNAMaOZSPSlWcCBc3kAW9BSgANafk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,64 +30,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=yOZsdAQoHQ9ECHbMTj5+F8nYAi2mJLf7YFtaK8qMTBw=; b=gGykS0CsMPmmEEDA+F5pSpSKkj
- 9/iwb50IfOK8FhthtYM2mC8M/fK0mc6nIv0+LwGnX4GP4+3XqHzfpTYyUWimFchSFw8h83+5uBo4Y
- BYWeXX7QWWsTSaBkQNYbiZ8qzWKhGHkSwQkt92SwoG8Iw7um9+VFwS6xIDB7SAE+hBIU=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=Jy5sBXXGr2voNP18guOdqKk17MKFMl8ptCuzk1nlp0Q=; b=aOLsL2s4SFHkxoine04O2BVo/r
+ PiUjjKiOkPtwPcDcOJ5XNSGJs4LmHsdTvmNrXKb1BrSVKG+FHG4B73ZXIcOita5EN4+oQzyA6VUoD
+ uHQO7qvNv4RcZYKeOaXMurnAGFB4zjOqhQIP7vuvv+NSmsLqUWV8u4GLFtWhZuNy7z8w=;
+Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sbQub-0003Gi-Q0 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Aug 2024 20:36:06 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 706D86106C;
- Tue,  6 Aug 2024 20:35:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9740C32786;
- Tue,  6 Aug 2024 20:35:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1722976555;
- bh=mQKKY+nJ0uY3IUjy66Pt5rpL9+oW2CYI1J7x+XK/Jeg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=D0BwozzLVeCTO5xLh+2V+tVO09O1fALeoDn/XLIOJCzgRktz/iS1yA7bnwjdwnB/L
- 3bNedjEs09by6tGVJUZ60VNgEcGGzRTf2d6a/LQQPrXssFqsfVZshykd5KREtpvdmQ
- bwwqv1j/QfOXHj0zPqOvjYYXX4y2diTiFjZuZDIN4M8t2JAKxBR/DeYH7ezk6e2ORE
- iC8hRd+pK5RJ3t17k4pBiFIVSnmH14+XBnYsIrTsscdO5uuImvaV8VHyJpOSqc7pht
- 96NnXIgZOeW06vJYckV1miaiQESD9FHrFwxFv9yyGIlSDgWcb8WLatR6+ZRjPk/yOo
- 4sHe8UcrxbZnw==
-Date: Tue, 6 Aug 2024 13:35:53 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Jann Horn <jannh@google.com>
-Message-ID: <20240806203553.GA2447@sol.localdomain>
-References: <20240806-f2fs-atomic-write-v1-1-8a586e194fd7@google.com>
+ id 1sbXdF-00039d-Aq; Wed, 07 Aug 2024 03:46:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=Jy5sBXXGr2voNP18guOdqKk17MKFMl8ptCuzk1nlp0Q=; b=kBpsMhbZ+1Pgy99WHBD3YzI4XG
+ Hqy0KiWbREOfNTGd4D85Ztw2vyfymYiId0v/fTjNdlVAQK/i5x/NoKEy/QsyytCQ29qGuUAPcq9Qm
+ vjWq9+4BtI6nienJ8u7m7JMTT8t8SpdKlmHFaOFuyV61i2voDWVr/HNRi6uBFNEFEKkv5wF5jsRT4
+ QsFXi0/Oqo98Wx1ic4RCpOZYs5IrLeuD9EiwRoO7eiq16UpiiqcAEe8uXB9oQygLNDqEwGOxHUSal
+ larh/IiUtXsxc/JN3FDf2sNmqYdwc6o9DNqJ+ZGljoforqQ0namjXayDrOo23zksSQNAh0C4Om5cd
+ UgGbrBrg==;
+Received: from willy by casper.infradead.org with local (Exim 4.97.1 #2 (Red
+ Hat Linux)) id 1sbXct-00000006gRT-3Off;
+ Wed, 07 Aug 2024 03:46:16 +0000
+Date: Wed, 7 Aug 2024 04:46:15 +0100
+From: Matthew Wilcox <willy@infradead.org>
+To: kernel test robot <oliver.sang@intel.com>,
+ Ryan Roberts <ryan.roberts@arm.com>, Christian Brauner <brauner@kernel.org>
+Message-ID: <ZrLuBz1eBdgFzIyC@casper.infradead.org>
+References: <202408062249.2194d51b-lkp@intel.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240806-f2fs-atomic-write-v1-1-8a586e194fd7@google.com>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <202408062249.2194d51b-lkp@intel.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Aug 06, 2024 at 04:07:16PM +0200,
- Jann Horn via Linux-f2fs-devel
- wrote: > The F2FS ioctls for starting and committing atomic writes check
- for > inode_owner_or_capable(), but this does not give [...] 
- Content analysis details:   (-0.3 points, 6.0 required)
+ Content preview:  On Tue, Aug 06, 2024 at 10:26:17PM +0800, kernel test robot
+ wrote: > kernel test robot noticed "kernel_BUG_at_include/linux/page-flags.h"
+ on: > > commit: cdc4ad36a871b7ac43fcc6b2891058d332ce60ce ("fs: [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: infradead.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sbQub-0003Gi-Q0
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Require FMODE_WRITE for atomic write
- ioctls
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1sbXdF-00039d-Aq
+Subject: Re: [f2fs-dev] [linux-next:master] [fs] cdc4ad36a8:
+ kernel_BUG_at_include/linux/page-flags.h
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,42 +99,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: jfs-discussion@lists.sourceforge.net,
+ Linux Memory Management List <linux-mm@kvack.org>,
+ linux-mtd@lists.infradead.org, linux-nilfs@vger.kernel.org, lkp@intel.com,
+ linux-bcachefs@vger.kernel.org, linux-ext4@vger.kernel.org,
+ devel@lists.orangefs.org, intel-gfx@lists.freedesktop.org,
+ ecryptfs@vger.kernel.org, linux-um@lists.infradead.org,
+ reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
+ ocfs2-devel@lists.linux.dev, ceph-devel@vger.kernel.org,
+ linux-nfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, oe-lkp@lists.linux.dev,
+ linux-fsdevel@vger.kernel.org, ntfs3@lists.linux.dev,
+ linux-karma-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Aug 06, 2024 at 04:07:16PM +0200, Jann Horn via Linux-f2fs-devel wrote:
-> The F2FS ioctls for starting and committing atomic writes check for
-> inode_owner_or_capable(), but this does not give LSMs like SELinux or
-> Landlock an opportunity to deny the write access - if the caller's FSUID
-> matches the inode's UID, inode_owner_or_capable() immediately returns true.
+On Tue, Aug 06, 2024 at 10:26:17PM +0800, kernel test robot wrote:
+> kernel test robot noticed "kernel_BUG_at_include/linux/page-flags.h" on:
 > 
-> There are scenarios where LSMs want to deny a process the ability to write
-> particular files, even files that the FSUID of the process owns; but this
-> can currently partially be bypassed using atomic write ioctls in two ways:
+> commit: cdc4ad36a871b7ac43fcc6b2891058d332ce60ce ("fs: Convert aops->write_begin to take a folio")
+> https://git.kernel.org/cgit/linux/kernel/git/next/linux-next.git master
 > 
->  - F2FS_IOC_START_ATOMIC_REPLACE + F2FS_IOC_COMMIT_ATOMIC_WRITE can
->    truncate an inode to size 0
->  - F2FS_IOC_START_ATOMIC_WRITE + F2FS_IOC_ABORT_ATOMIC_WRITE can revert
->    changes another process concurrently made to a file
+> [test failed on linux-next/master 1e391b34f6aa043c7afa40a2103163a0ef06d179]
 > 
-> Fix it by requiring FMODE_WRITE for these operations, just like for
-> F2FS_IOC_MOVE_RANGE. Since any legitimate caller should only be using these
-> ioctls when intending to write into the file, that seems unlikely to break
-> anything.
-> 
-> Fixes: 88b88a667971 ("f2fs: support atomic writes")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Jann Horn <jannh@google.com>
-> ---
->  fs/f2fs/file.c | 9 +++++++++
->  1 file changed, 9 insertions(+)
+> in testcase: boot
 
-Reviewed-by: Eric Biggers <ebiggers@google.com>
+This patch should fix it.
 
-- Eric
+Christian, can you squash the fix in?
+
+
+diff --git a/mm/shmem.c b/mm/shmem.c
+index 7d28304aea0f..66ff87417090 100644
+--- a/mm/shmem.c
++++ b/mm/shmem.c
+@@ -2904,7 +2904,8 @@ shmem_write_begin(struct file *file, struct address_space *mapping,
+ 	if (ret)
+ 		return ret;
+ 
+-	if (folio_test_has_hwpoisoned(folio)) {
++	if (folio_test_hwpoison(folio) ||
++	    (folio_test_large(folio) && folio_test_has_hwpoisoned(folio))) {
+ 		folio_unlock(folio);
+ 		folio_put(folio);
+ 		return -EIO;
 
 
 _______________________________________________
