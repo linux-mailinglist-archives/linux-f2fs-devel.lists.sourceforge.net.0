@@ -2,90 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F61A949E94
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Aug 2024 05:46:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EA1494A22A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Aug 2024 09:57:23 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sbXdH-0006tm-LK;
-	Wed, 07 Aug 2024 03:46:39 +0000
+	id 1sbbXk-0004CY-MQ;
+	Wed, 07 Aug 2024 07:57:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1sbXdG-0006tR-57;
- Wed, 07 Aug 2024 03:46:38 +0000
+ (envelope-from <ryan.roberts@arm.com>) id 1sbbXh-0004CJ-TJ;
+ Wed, 07 Aug 2024 07:57:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Jy5sBXXGr2voNP18guOdqKk17MKFMl8ptCuzk1nlp0Q=; b=N1SW6z63RenxgiO8rEsxLhDf33
- TfFtF4OeT3TgDEZez0f4Xk0oe+gcMkEZu1DJSrDL5ufZnzK8dkwFzclVmK3BlPWlXdsTUzBIij4yK
- 2+2zOYnLubFQQAk093pqSAUJn4AGmQB280rgkWtMNAMaOZSPSlWcCBc3kAW9BSgANafk=;
+ bh=mqvL9kVCgzj7U7irHa2ORnVHw0WuVj0xvWQ+gN18bsg=; b=fva2hF/2JyTnYzrjpNdp0Rd7Ni
+ pGqYz3B5wqIe+2qv5YFBk0RyoobI6riesnXhr+WJmy2Ovf1xWDC1JEfGQFuX5GicjlK3xnJGcbPiS
+ IABul81MYI39QamklmTKX5nHmo6FJd6ARUNuZ0YADQg3ONDx3GcppWMlhCARI8ya9bt0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Jy5sBXXGr2voNP18guOdqKk17MKFMl8ptCuzk1nlp0Q=; b=aOLsL2s4SFHkxoine04O2BVo/r
- PiUjjKiOkPtwPcDcOJ5XNSGJs4LmHsdTvmNrXKb1BrSVKG+FHG4B73ZXIcOita5EN4+oQzyA6VUoD
- uHQO7qvNv4RcZYKeOaXMurnAGFB4zjOqhQIP7vuvv+NSmsLqUWV8u4GLFtWhZuNy7z8w=;
-Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sbXdF-00039d-Aq; Wed, 07 Aug 2024 03:46:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=Jy5sBXXGr2voNP18guOdqKk17MKFMl8ptCuzk1nlp0Q=; b=kBpsMhbZ+1Pgy99WHBD3YzI4XG
- Hqy0KiWbREOfNTGd4D85Ztw2vyfymYiId0v/fTjNdlVAQK/i5x/NoKEy/QsyytCQ29qGuUAPcq9Qm
- vjWq9+4BtI6nienJ8u7m7JMTT8t8SpdKlmHFaOFuyV61i2voDWVr/HNRi6uBFNEFEKkv5wF5jsRT4
- QsFXi0/Oqo98Wx1ic4RCpOZYs5IrLeuD9EiwRoO7eiq16UpiiqcAEe8uXB9oQygLNDqEwGOxHUSal
- larh/IiUtXsxc/JN3FDf2sNmqYdwc6o9DNqJ+ZGljoforqQ0namjXayDrOo23zksSQNAh0C4Om5cd
- UgGbrBrg==;
-Received: from willy by casper.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1sbXct-00000006gRT-3Off;
- Wed, 07 Aug 2024 03:46:16 +0000
-Date: Wed, 7 Aug 2024 04:46:15 +0100
-From: Matthew Wilcox <willy@infradead.org>
-To: kernel test robot <oliver.sang@intel.com>,
- Ryan Roberts <ryan.roberts@arm.com>, Christian Brauner <brauner@kernel.org>
-Message-ID: <ZrLuBz1eBdgFzIyC@casper.infradead.org>
-References: <202408062249.2194d51b-lkp@intel.com>
+ bh=mqvL9kVCgzj7U7irHa2ORnVHw0WuVj0xvWQ+gN18bsg=; b=DIt2IsF2cj8NaDNFKik4X1z97E
+ slfcujXjyWAQfiPIiBsaxy6E0/BAju4sQz+ej7RNyJ++8SbP6gMPDM+JQCr1e+dFT9o6Jh8r4306t
+ iROnNENXxvtniBDQ1T18U51MmSHaxAN66fYbvwkzhVfQSXj+U6eyWNv5+CpnOJ9cMwsw=;
+Received: from foss.arm.com ([217.140.110.172])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1sbbXh-0003Ao-Ue; Wed, 07 Aug 2024 07:57:10 +0000
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6FBB2FEC;
+ Wed,  7 Aug 2024 00:38:55 -0700 (PDT)
+Received: from [10.57.81.112] (unknown [10.57.81.112])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 687A53F5A1;
+ Wed,  7 Aug 2024 00:38:25 -0700 (PDT)
+Message-ID: <e693ed7a-97bf-486b-84fb-f57e44a399b4@arm.com>
+Date: Wed, 7 Aug 2024 08:38:23 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <202408062249.2194d51b-lkp@intel.com>
-X-Spam-Score: -0.2 (/)
+User-Agent: Mozilla Thunderbird
+Content-Language: en-GB
+To: Matthew Wilcox <willy@infradead.org>,
+ kernel test robot <oliver.sang@intel.com>,
+ Christian Brauner <brauner@kernel.org>
+References: <202408062249.2194d51b-lkp@intel.com>
+ <ZrLuBz1eBdgFzIyC@casper.infradead.org>
+From: Ryan Roberts <ryan.roberts@arm.com>
+In-Reply-To: <ZrLuBz1eBdgFzIyC@casper.infradead.org>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Aug 06, 2024 at 10:26:17PM +0800, kernel test robot
- wrote: > kernel test robot noticed "kernel_BUG_at_include/linux/page-flags.h"
- on: > > commit: cdc4ad36a871b7ac43fcc6b2891058d332ce60ce ("fs: [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 07/08/2024 04:46, Matthew Wilcox wrote: > On Tue, Aug 06, 
+ 2024 at 10:26:17PM +0800, kernel test robot wrote: >> kernel test robot noticed
+ "kernel_BUG_at_include/linux/page-flags.h" on: >> >> commit [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
-X-Headers-End: 1sbXdF-00039d-Aq
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [217.140.110.172 listed in list.dnswl.org]
+X-Headers-End: 1sbbXh-0003Ao-Ue
 Subject: Re: [f2fs-dev] [linux-next:master] [fs] cdc4ad36a8:
  kernel_BUG_at_include/linux/page-flags.h
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -115,35 +103,42 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Aug 06, 2024 at 10:26:17PM +0800, kernel test robot wrote:
-> kernel test robot noticed "kernel_BUG_at_include/linux/page-flags.h" on:
+On 07/08/2024 04:46, Matthew Wilcox wrote:
+> On Tue, Aug 06, 2024 at 10:26:17PM +0800, kernel test robot wrote:
+>> kernel test robot noticed "kernel_BUG_at_include/linux/page-flags.h" on:
+>>
+>> commit: cdc4ad36a871b7ac43fcc6b2891058d332ce60ce ("fs: Convert aops->write_begin to take a folio")
+>> https://git.kernel.org/cgit/linux/kernel/git/next/linux-next.git master
+>>
+>> [test failed on linux-next/master 1e391b34f6aa043c7afa40a2103163a0ef06d179]
+>>
+>> in testcase: boot
 > 
-> commit: cdc4ad36a871b7ac43fcc6b2891058d332ce60ce ("fs: Convert aops->write_begin to take a folio")
-> https://git.kernel.org/cgit/linux/kernel/git/next/linux-next.git master
+> This patch should fix it.
 > 
-> [test failed on linux-next/master 1e391b34f6aa043c7afa40a2103163a0ef06d179]
+> Christian, can you squash the fix in?
 > 
-> in testcase: boot
+> 
+> diff --git a/mm/shmem.c b/mm/shmem.c
+> index 7d28304aea0f..66ff87417090 100644
+> --- a/mm/shmem.c
+> +++ b/mm/shmem.c
+> @@ -2904,7 +2904,8 @@ shmem_write_begin(struct file *file, struct address_space *mapping,
+>  	if (ret)
+>  		return ret;
+>  
+> -	if (folio_test_has_hwpoisoned(folio)) {
+> +	if (folio_test_hwpoison(folio) ||
+> +	    (folio_test_large(folio) && folio_test_has_hwpoisoned(folio))) {
 
-This patch should fix it.
+Reviewed-by: Ryan Roberts <ryan.roberts@arm.com>
+Tested-by: Ryan Roberts <ryan.roberts@arm.com>
 
-Christian, can you squash the fix in?
 
+>  		folio_unlock(folio);
+>  		folio_put(folio);
+>  		return -EIO;
 
-diff --git a/mm/shmem.c b/mm/shmem.c
-index 7d28304aea0f..66ff87417090 100644
---- a/mm/shmem.c
-+++ b/mm/shmem.c
-@@ -2904,7 +2904,8 @@ shmem_write_begin(struct file *file, struct address_space *mapping,
- 	if (ret)
- 		return ret;
- 
--	if (folio_test_has_hwpoisoned(folio)) {
-+	if (folio_test_hwpoison(folio) ||
-+	    (folio_test_large(folio) && folio_test_has_hwpoisoned(folio))) {
- 		folio_unlock(folio);
- 		folio_put(folio);
- 		return -EIO;
 
 
 _______________________________________________
