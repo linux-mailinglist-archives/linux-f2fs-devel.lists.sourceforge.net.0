@@ -2,82 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C66AC94C615
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Aug 2024 22:57:55 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A3F694C761
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Aug 2024 01:33:15 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1scACi-0005Zw-8x;
-	Thu, 08 Aug 2024 20:57:48 +0000
+	id 1scCd0-0004qf-OK;
+	Thu, 08 Aug 2024 23:33:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1scACg-0005Zo-Jr
+ (envelope-from <jaegeuk@kernel.org>) id 1scCcy-0004qZ-2T
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Aug 2024 20:57:46 +0000
+ Thu, 08 Aug 2024 23:33:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FYwedYS9Hg40duzkJFTbP0P8VSdUTT8yJ1ieY7fxwdY=; b=e4EOJohLj7SoxVBbVMRo3wET/X
- 6wNS/PkPWyQlFnilHb3Ni8cAkeH2uYW0kbYlSuJtWvDhnY6fSEtjyl3vWhlo5gO+iCNKZZ9Oh12QI
- IfbrxL3YJp8XMj+7QVCE9FsRisSB60egH5M39m1Y5QNVj1xrZ0eiHjdTHCErVVwITG3k=;
+ bh=6EwkzYvpwjbkMPsbFqMbVQm7IQwP37odGXvFjZS7m40=; b=jHXC9G59AISv86/MxTXGMFEbFq
+ MG0+09nWd+1XhMDWy3r1mkQuzehqmqsq97ny69ZPmcy8cxRv41MNE+aWMXH0ZxkPp7+duEAqUnYL0
+ e0/dxYa50+zyYbmlOIckJpD4hnbZ4qw5x2u1FmBvmzhNLmXhqVatSaVQMC2qJBBL9TKc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=FYwedYS9Hg40duzkJFTbP0P8VSdUTT8yJ1ieY7fxwdY=; b=J
- hwtolwxGnzDO81rW8PCxl57qusHUToBSy9dT9pvYRR9zUf8fmkqw6dodlef0iH57blIjiwJAhVZkn
- 1wVetWYMrTyUkpKH+aTXa1P9NVmGXZ1x2vJ1mwePoNiB3XqaTzmXskMt3E07ckB+s3C2SyvAUx7GJ
- MituoF9c879xL9x4=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ List-Owner:List-Archive; bh=6EwkzYvpwjbkMPsbFqMbVQm7IQwP37odGXvFjZS7m40=; b=m
+ vtC+TcghJsKb4uhPdW+FJn5zkoo4zbzX8IZ3q460ummmEPMU4fsbehjGQGClfxdnLept/NejwCH1C
+ 2wlz5GD9S8Tu/5glgC7NHWQkFZuqIw9UYEpaD5uTiKzeAmKKmzmoagI7xwEo16nqJonZO6b7ihBrr
+ wBUlIZNTQJEQUCXk=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1scACg-0005Bn-0O for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Aug 2024 20:57:46 +0000
+ id 1scCcx-0005aa-99 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Aug 2024 23:33:04 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A440D615B5
+ by sin.source.kernel.org (Postfix) with ESMTP id 96D8ECE1319
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  8 Aug 2024 20:57:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40CCAC32782;
- Thu,  8 Aug 2024 20:57:35 +0000 (UTC)
+ Thu,  8 Aug 2024 23:32:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC624C32782;
+ Thu,  8 Aug 2024 23:32:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1723150655;
- bh=4yzlQrcZXNiLzTX5F20mj6lid7SEECniwl867Zkhdnw=;
+ s=k20201202; t=1723159970;
+ bh=SqbKcKgerBBcSMoxuW0vFyTYPvj2SwiCchQNiIKg/ZY=;
  h=From:To:Cc:Subject:Date:From;
- b=WejhZPqjhf29zDOLu+NmYNmTk9ilq+0OTj1mwlOhcyQ6AsdcWlKWqUwR5x2snQNtq
- oqy0UsGLErH7AsBDTUbBJOqcG1SL53WmpFXx+G8vhOwK2gljvuwkUrAIS/MiWDWtpV
- n7bFfmJfDRUICT1YyD3IqXqVhQhPIWBhWBHNmpAT81/PNlNr7wP8YxgpLwBzqWtzbG
- nARUY2ZV6qFFVWJ4d84k0W0y0KyvQYHz0LVwU1OG7AgeAy0s5DunXwJZqPnpyEJLRX
- lW/FckNgBsK6xJxbcYuOaHJ1WW6Jqm6Il9/VHINTRvMXcLeM+DzwGTHnYNfjPP6wpm
- x4b1LcZz5p+Ng==
+ b=G8RycILBUAehWRxSyEijZbVifXt2gNF8vx+podPkP98qQsGTPoTOsz5KBFnqHKvet
+ SgiVGWaBVjVa3dhyeFbP1zETG57AvxCef42V52Iif5kq+w4k8xJrPhYVY+avY3ksVE
+ xzaBwtwlYnP9u6p+8+IZ2G1JKQAmfkvL9VZVT/EFrBDNbkVb7TPV5d/gjq0VhoTPKL
+ W3d0ji478UFxBNLROnd3tZ87j+M5iKsv1CYWnz9nGJCyRD+kMlnRHPDnwf/5FUiM+2
+ wHZsXc2TtsBq9OqvYMHpr7c2LR6Eh8hLmDKM4rrVo1cz8nMBEqQPLkorSdl0hq26PT
+ YzSBsvdpB8WXA==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu,  8 Aug 2024 20:57:32 +0000
-Message-ID: <20240808205732.292600-1-jaegeuk@kernel.org>
+Date: Thu,  8 Aug 2024 23:32:48 +0000
+Message-ID: <20240808233248.323318-1-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.46.0.76.ge559c4bf1a-goog
 MIME-Version: 1.0
-X-Spam-Score: -0.3 (/)
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Should finish zones if they are open. Signed-off-by: Jaegeuk
- Kim <jaegeuk@kernel.org> --- include/f2fs_fs.h | 2 ++ lib/libf2fs_zoned.c
- | 5 +++-- 2 files changed, 5 insertions(+),
- 2 deletions(-) diff --git a/include/f2fs_fs.h
- b/include/f2fs_fs.h index 3f5583d18329..15a1c82ae18f 100644 ---
- a/include/f2fs_fs.h +++ b/include/f2fs_fs.h @@ -1742, 6 +1742,
- 8 @@ blk_zone_cond_str(struct blk_zone *blkz [...] 
- Content analysis details:   (-0.3 points, 6.0 required)
+ Content preview:  It'll crach fsck.f2fs. Even, let's keep the write pointers
+ and just finish it. Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> ---
+ fsck/fsck.c
+ | 20 ++++++++ 1 file changed, 8 insertions(+), 12 deletions(-) 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -87,13 +86,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1scACg-0005Bn-0O
-Subject: [f2fs-dev] [PATCH] fsck.f2fs: don't finish zones if it's not open
+X-Headers-End: 1scCcx-0005aa-99
+Subject: [f2fs-dev] [PATCH] fsck.f2fs: don't call dev_fill w/ null buffer
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,50 +105,53 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Should finish zones if they are open.
+It'll crach fsck.f2fs. Even, let's keep the write pointers and just finish it.
 
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- include/f2fs_fs.h   | 2 ++
- lib/libf2fs_zoned.c | 5 +++--
- 2 files changed, 5 insertions(+), 2 deletions(-)
+ fsck/fsck.c | 20 ++++++++------------
+ 1 file changed, 8 insertions(+), 12 deletions(-)
 
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 3f5583d18329..15a1c82ae18f 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -1742,6 +1742,8 @@ blk_zone_cond_str(struct blk_zone *blkz)
-  * Handle kernel zone capacity support
-  */
- #define blk_zone_empty(z)	(blk_zone_cond(z) == BLK_ZONE_COND_EMPTY)
-+#define blk_zone_open(z)	(blk_zone_cond(z) == BLK_ZONE_COND_IMP_OPEN ||	\
-+				 blk_zone_cond(z) == BLK_ZONE_COND_EXP_OPEN)
- #define blk_zone_sector(z)	(z)->start
- #define blk_zone_length(z)	(z)->len
- #define blk_zone_wp_sector(z)	(z)->wp
-diff --git a/lib/libf2fs_zoned.c b/lib/libf2fs_zoned.c
-index 221d7d1337c7..89ba5ad73a76 100644
---- a/lib/libf2fs_zoned.c
-+++ b/lib/libf2fs_zoned.c
-@@ -513,7 +513,7 @@ int f2fs_finish_zone(int i, void *blkzone)
- 	struct blk_zone_range range;
- 	int ret;
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index a18bee9d0c3b..5fe8ad4ef327 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -3299,8 +3299,9 @@ static int chk_and_fix_wp_with_sit(int UNUSED(i), void *blkzone, void *opaque)
+ 					"segment 0x%x", zone_segno);
+ 				ret = f2fs_reset_zone(wpd->dev_index, blkz);
+ 				if (ret) {
+-					printf("[FSCK] Write pointer reset "
+-					       "failed: %s\n", dev->path);
++					ASSERT_MSG("Write pointer reset "
++					       "failed: %s, err=%d\n",
++					       dev->path, ret);
+ 					return ret;
+ 				}
+ 				fsck->chk.wp_fixed = 1;
+@@ -3326,18 +3327,13 @@ static int chk_and_fix_wp_with_sit(int UNUSED(i), void *blkzone, void *opaque)
  
--	if (!blk_zone_seq(blkz) || blk_zone_empty(blkz))
-+	if (!blk_zone_seq(blkz) || !blk_zone_open(blkz))
- 		return 0;
- 
- 	/* Non empty sequential zone: finish */
-@@ -522,7 +522,8 @@ int f2fs_finish_zone(int i, void *blkzone)
- 	ret = ioctl(dev->fd, BLKFINISHZONE, &range);
- 	if (ret != 0) {
- 		ret = -errno;
--		ERR_MSG("ioctl BLKFINISHZONE failed: errno=%d\n", errno);
-+		ERR_MSG("ioctl BLKFINISHZONE failed: errno=%d, status=%s\n",
-+			errno, blk_zone_cond_str(blkz));
+ 	ret = f2fs_finish_zone(wpd->dev_index, blkz);
+ 	if (ret) {
+-		u64 fill_sects = blk_zone_length(blkz) -
+-			(blk_zone_wp_sector(blkz) - blk_zone_sector(blkz));
+-		printf("[FSCK] Finishing zone failed: %s\n", dev->path);
+-		ret = dev_fill(NULL, wp_block * F2FS_BLKSIZE,
+-			(fill_sects >> log_sectors_per_block) * F2FS_BLKSIZE);
+-		if (ret)
+-			printf("[FSCK] Fill up zone failed: %s\n", dev->path);
++		ASSERT_MSG("Finishing zone failed: %s, err=%d\n",
++			dev->path, ret);
++		return ret;
  	}
  
- 	return ret;
+-	if (!ret)
+-		fsck->chk.wp_fixed = 1;
+-	return ret;
++	fsck->chk.wp_fixed = 1;
++	return 0;
+ }
+ 
+ static void fix_wp_sit_alignment(struct f2fs_sb_info *sbi)
 -- 
 2.46.0.76.ge559c4bf1a-goog
 
