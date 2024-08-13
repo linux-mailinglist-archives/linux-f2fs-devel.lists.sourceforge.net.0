@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A57D950746
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Aug 2024 16:14:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65DD3950749
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Aug 2024 16:14:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sdsHa-0008EI-Q8;
-	Tue, 13 Aug 2024 14:13:54 +0000
+	id 1sdsHk-0007JG-Qa;
+	Tue, 13 Aug 2024 14:14:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1sdsHY-0008EC-Rp
+ (envelope-from <chao@kernel.org>) id 1sdsHi-0007J5-L2
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Aug 2024 14:13:52 +0000
+ Tue, 13 Aug 2024 14:14:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CgUI+2tXv2m0nVzqIL76WrwoGRP9ACYfDzKtSiw9BfM=; b=e/8T0eg0KnP68rQNOQ/KmSK9og
- ycA7bcIKZiMtkvYiEyki27/7aAxJYOQBLX0ZPOkDq+yJUz8YB+3EPOtQ969XzH+KpFkjq9WEQePIF
- 4nOz6ezCYNehBlRtYIY1nFEr8BOVE5nu6WKtXloxlrdk+Z/BiylfJ4BqaoVAX/qpU7ZQ=;
+ bh=Nu4q/nFZYYBYeYZkY4mJDO7VXvwLTIoN1gM1xC/rvio=; b=RdjMcmyMb09EthTXgjO0eRyeod
+ RsRVIetihcoyxKeC5OWnyfhSV4g1rU/LYsiyudVNqVK8CJdfUq+oTDe3/EftsI2AxhWfjIDitVvAj
+ J19Sl/bZY8IMDpuiP6pbiiE7IwXn7t7Y74jrknqqcq1PKyK46hdZOo8HiWgGEFtIQ6nc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,40 +31,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CgUI+2tXv2m0nVzqIL76WrwoGRP9ACYfDzKtSiw9BfM=; b=SVmwaK6aJkKecQ6+y89FZt4mGL
- H9dWIgjAlLJMahGja1q355M2z+AwVdGOYRU8y34wWuQOyGCKUK5gbVOtLATisHxv+dHkngfqeLAy6
- xashyqOnO91fj7fy8Sv7uOpVu8vuAwJNp9aR04LM4X2V7kvAqh7zOssd1hJx1TUp02NM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=Nu4q/nFZYYBYeYZkY4mJDO7VXvwLTIoN1gM1xC/rvio=; b=MJeEEqo/vlHefjg2bkluEDHywu
+ CMQ2hAhdRQAngkYZMGgHgabBRJ4y2BJRw7riu+54HnxBun3vsknuIN6AN/STaJsIC/0SV65Q7TfxP
+ SxId1LDpVchB2PsZyOUtMyLCsBe/4UeKojVp+r0UsY/BBhTh1KliTGPeTj3F3y75DHbI=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sdsHY-0001CJ-3l for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Aug 2024 14:13:52 +0000
+ id 1sdsHg-0001Cs-U4 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Aug 2024 14:14:01 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id BD9446170E;
+ by sin.source.kernel.org (Postfix) with ESMTP id 3E5ACCE13CA;
+ Tue, 13 Aug 2024 14:13:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F278BC4AF09;
  Tue, 13 Aug 2024 14:13:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04FC6C4AF0B;
- Tue, 13 Aug 2024 14:13:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1723558426;
- bh=r8VUUyyyojUjPoAkVdjtfFrqOLyTXjXWxZ3MOiPSYtc=;
+ s=k20201202; t=1723558428;
+ bh=eWtrXzMhJKS5xOWZigySRTMy/cUMuJ5/xx/SVnO/CfE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=q7Ws6BEUshWrGSkJ6u4ewdjywioZy237bBmdMqh1qJUIyGgigcirqLDjCC+IxTknZ
- 5fVyXQ+QUcBwqUiDQPBEDOHzeBk2KuzDq1Tl9sTJuVSCL45d+EQi9sPHGJz0fgzm2Z
- 6pKbzAhXdL2RLzcYIJKnPM1yjoNxsvq/oP2NUu0LmuIGrZe1YuS2Y11rcXC7bALDQw
- XzD2mqp2kfacqv9pyuCySGeuwzcU499UfsiQnAB1aeNC4Kg+CPs226Hd/thhKUW+f0
- 0quITyLHUZZS5mLINWSNJqMiiDrczFepJXA2q6+N6aOviZT2opgDepR2f9Sb+fxePA
- aTO8Aq0m3Vtzg==
+ b=deSS6dQWX6MhyUkHKOW35OnUJXdbXGhjTAED2iUx20cNK7aJallgy3rIyQ1jlXP23
+ o58u1wZSlop3de6DqDEwwyRCEY9DF85+1eNYjfKxMNLXfXvfLhAFNDW6KnvbZa6Ss5
+ RxtFQfYz2MCMpny54vB2qv81YayXky0y9l0rIsT6zQbLnzj32w0uf3+IRYPFJI7gN/
+ aWmhxuwul5XvIW5LukXURj9dqVIy9fJ0iNNJwzLZPjYVrDuTdCAM8eymv1NbfoJzzw
+ z7haXumUHWmdZTrXHy8lDCs95z/GBNzJUn4ROcm5UFNIR/lnFGWTpZXTym3tPNEM+9
+ m49vf8yl4rPpg==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Tue, 13 Aug 2024 22:13:24 +0800
-Message-Id: <20240813141331.417067-2-chao@kernel.org>
+Date: Tue, 13 Aug 2024 22:13:25 +0800
+Message-Id: <20240813141331.417067-3-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240813141331.417067-1-chao@kernel.org>
 References: <20240813141331.417067-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -74,26 +74,27 @@ X-Spam-Report: Spam detection software,
  https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
  Cc: Matthew Wilcox <willy@infradead.org> Signed-off-by: Chao Yu
  <chao@kernel.org>
- --- fs/f2fs/file.c | 32 ++++++++++++++++ 1 file changed, 16 insertions(+),
- 16 deletions(-) 
+ --- fs/f2fs/data.c | 3 +-- fs/f2fs/dir.c | 2 +- fs/f2fs/f2fs.h | 2 +-
+ fs/f2fs/inline.c | 2 +- fs/f2fs/node.c | 2 +- 5 [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ high trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sdsHY-0001CJ-3l
-Subject: [f2fs-dev] [PATCH 2/9] f2fs: convert f2fs_vm_page_mkwrite() to use
- folio
+X-Headers-End: 1sdsHg-0001Cs-U4
+Subject: [f2fs-dev] [PATCH 3/9] f2fs: convert
+ f2fs_clear_page_cache_dirty_tag() to use folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,106 +120,80 @@ prepare for removal of 'index' field in structure page [1].
 Cc: Matthew Wilcox <willy@infradead.org>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/file.c | 32 ++++++++++++++++----------------
- 1 file changed, 16 insertions(+), 16 deletions(-)
+ fs/f2fs/data.c   | 3 +--
+ fs/f2fs/dir.c    | 2 +-
+ fs/f2fs/f2fs.h   | 2 +-
+ fs/f2fs/inline.c | 2 +-
+ fs/f2fs/node.c   | 2 +-
+ 5 files changed, 5 insertions(+), 6 deletions(-)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 8d2f4160a8eb..3c73da7bb05a 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -53,7 +53,7 @@ static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 100b6526717f..0df5a0c66ede 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -4117,9 +4117,8 @@ const struct address_space_operations f2fs_dblock_aops = {
+ 	.swap_deactivate = f2fs_swap_deactivate,
+ };
  
- static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+-void f2fs_clear_page_cache_dirty_tag(struct page *page)
++void f2fs_clear_page_cache_dirty_tag(struct folio *folio)
  {
--	struct page *page = vmf->page;
-+	struct folio *folio = page_folio(vmf->page);
- 	struct inode *inode = file_inode(vmf->vma->vm_file);
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	struct dnode_of_data dn;
-@@ -85,7 +85,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+-	struct folio *folio = page_folio(page);
+ 	struct address_space *mapping = folio->mapping;
+ 	unsigned long flags;
  
- #ifdef CONFIG_F2FS_FS_COMPRESSION
- 	if (f2fs_compressed_file(inode)) {
--		int ret = f2fs_is_compressed_cluster(inode, page->index);
-+		int ret = f2fs_is_compressed_cluster(inode, folio->index);
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index 14900ca8a9ff..5fcc952107e9 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -868,7 +868,7 @@ void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
  
- 		if (ret < 0) {
- 			err = ret;
-@@ -105,11 +105,11 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
+ 	if (bit_pos == NR_DENTRY_IN_BLOCK &&
+ 		!f2fs_truncate_hole(dir, page->index, page->index + 1)) {
+-		f2fs_clear_page_cache_dirty_tag(page);
++		f2fs_clear_page_cache_dirty_tag(page_folio(page));
+ 		clear_page_dirty_for_io(page);
+ 		ClearPageUptodate(page);
+ 		clear_page_private_all(page);
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index df436dd3aac1..a4b90215a51f 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3890,7 +3890,7 @@ void f2fs_write_failed(struct inode *inode, loff_t to);
+ void f2fs_invalidate_folio(struct folio *folio, size_t offset, size_t length);
+ bool f2fs_release_folio(struct folio *folio, gfp_t wait);
+ bool f2fs_overwrite_io(struct inode *inode, loff_t pos, size_t len);
+-void f2fs_clear_page_cache_dirty_tag(struct page *page);
++void f2fs_clear_page_cache_dirty_tag(struct folio *folio);
+ int f2fs_init_post_read_processing(void);
+ void f2fs_destroy_post_read_processing(void);
+ int f2fs_init_post_read_wq(struct f2fs_sb_info *sbi);
+diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+index d76a3bed7093..98d122164cd1 100644
+--- a/fs/f2fs/inline.c
++++ b/fs/f2fs/inline.c
+@@ -281,7 +281,7 @@ int f2fs_write_inline_data(struct inode *inode, struct page *page)
+ 			 page, 0, MAX_INLINE_DATA(inode));
+ 	set_page_dirty(ipage);
  
- 	file_update_time(vmf->vma->vm_file);
- 	filemap_invalidate_lock_shared(inode->i_mapping);
--	lock_page(page);
--	if (unlikely(page->mapping != inode->i_mapping ||
--			page_offset(page) > i_size_read(inode) ||
--			!PageUptodate(page))) {
--		unlock_page(page);
-+	folio_lock(folio);
-+	if (unlikely(folio->mapping != inode->i_mapping ||
-+			folio_pos(folio) > i_size_read(inode) ||
-+			!folio_test_uptodate(folio))) {
-+		folio_unlock(folio);
- 		err = -EFAULT;
- 		goto out_sem;
+-	f2fs_clear_page_cache_dirty_tag(page);
++	f2fs_clear_page_cache_dirty_tag(page_folio(page));
+ 
+ 	set_inode_flag(inode, FI_APPEND_WRITE);
+ 	set_inode_flag(inode, FI_DATA_EXIST);
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 9e7a6e21f30c..20518c12f5b7 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -123,7 +123,7 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
+ static void clear_node_page_dirty(struct page *page)
+ {
+ 	if (PageDirty(page)) {
+-		f2fs_clear_page_cache_dirty_tag(page);
++		f2fs_clear_page_cache_dirty_tag(page_folio(page));
+ 		clear_page_dirty_for_io(page);
+ 		dec_page_count(F2FS_P_SB(page), F2FS_DIRTY_NODES);
  	}
-@@ -117,9 +117,9 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
- 	set_new_dnode(&dn, inode, NULL, NULL, 0);
- 	if (need_alloc) {
- 		/* block allocation */
--		err = f2fs_get_block_locked(&dn, page->index);
-+		err = f2fs_get_block_locked(&dn, folio->index);
- 	} else {
--		err = f2fs_get_dnode_of_data(&dn, page->index, LOOKUP_NODE);
-+		err = f2fs_get_dnode_of_data(&dn, folio->index, LOOKUP_NODE);
- 		f2fs_put_dnode(&dn);
- 		if (f2fs_is_pinned_file(inode) &&
- 		    !__is_valid_data_blkaddr(dn.data_blkaddr))
-@@ -127,11 +127,11 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
- 	}
- 
- 	if (err) {
--		unlock_page(page);
-+		folio_unlock(folio);
- 		goto out_sem;
- 	}
- 
--	f2fs_wait_on_page_writeback(page, DATA, false, true);
-+	f2fs_wait_on_page_writeback(folio_page(folio, 0), DATA, false, true);
- 
- 	/* wait for GCed page writeback via META_MAPPING */
- 	f2fs_wait_on_block_writeback(inode, dn.data_blkaddr);
-@@ -139,18 +139,18 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
- 	/*
- 	 * check to see if the page is mapped already (no holes)
- 	 */
--	if (PageMappedToDisk(page))
-+	if (folio_test_mappedtodisk(folio))
- 		goto out_sem;
- 
- 	/* page is wholly or partially inside EOF */
--	if (((loff_t)(page->index + 1) << PAGE_SHIFT) >
-+	if (((loff_t)(folio->index + 1) << PAGE_SHIFT) >
- 						i_size_read(inode)) {
- 		loff_t offset;
- 
- 		offset = i_size_read(inode) & ~PAGE_MASK;
--		zero_user_segment(page, offset, PAGE_SIZE);
-+		folio_zero_segment(folio, offset, folio_size(folio));
- 	}
--	set_page_dirty(page);
-+	folio_mark_dirty(folio);
- 
- 	f2fs_update_iostat(sbi, inode, APP_MAPPED_IO, F2FS_BLKSIZE);
- 	f2fs_update_time(sbi, REQ_TIME);
-@@ -162,7 +162,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
- out:
- 	ret = vmf_fs_error(err);
- 
--	trace_f2fs_vm_page_mkwrite(inode, page->index, vmf->vma->vm_flags, ret);
-+	trace_f2fs_vm_page_mkwrite(inode, folio->index, vmf->vma->vm_flags, ret);
- 	return ret;
- }
- 
 -- 
 2.40.1
 
