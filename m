@@ -2,112 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C31A950E25
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Aug 2024 22:49:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3A93950FB6
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Aug 2024 00:24:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sdySW-0003RT-HX;
-	Tue, 13 Aug 2024 20:49:37 +0000
+	id 1sdzwI-0001dw-J6;
+	Tue, 13 Aug 2024 22:24:26 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <32Ma7ZgkbAJEDJK5v66zCvAA3y.19916zFDzCx98Ez8E.x97@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1sdySU-0003RJ-PT for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Aug 2024 20:49:35 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <jaegeuk@kernel.org>) id 1sdzwG-0001dp-RD
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Aug 2024 22:24:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=c5Kkke9tL3v4lVVfPkmFG8izoAwG1RpBwsTReLWE04I=; b=cnKB9cWcbNz9gLK39OJAG0ThTv
- D6HPuLsx44iPR5z43/8dEG7e85q8oRNQEnaaYGjC7Mqqh9riQ+7YbUsNTZ/oRpkBILgKbBTzKNE2v
- rVZCPAmAZFpI2Jo3F+HKZWQFBOb39MOsd1XzlQD0YvZ5ntfjlPqn0Fh+ZhAlQTrtof/M=;
+ bh=XCJ5L/qBbRtlqCgQHurGa6Pla/0fxN9Eh6Xk9bKi4Dc=; b=GNxYXqrGq6MWoHbKfGsDATQ0ah
+ tcyFZm08XOR0cHReINI9HiZ2JI5/XOIQ4w+g5mylj9OzIc2tNGbiVE4qO8Qq5oQHsM2EqQVc14X0q
+ J/cJBY4ZrvNaT1ODftwUSXpONPpFQdOvY/yMFlC6pfB5sUy5RkXKGneJPtmn8SDQIB2Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=c5Kkke9tL3v4lVVfPkmFG8izoAwG1RpBwsTReLWE04I=; b=B
- CF65wUIN7np5X9iDz8yrxM/3rlwN7YWBwGG1fBPRSiX3dSgCgm/YkNrTKqLiStO0IFkMF0tzL7aGs
- NGBvH7JziH2woXFgZHl5NnHTD0mU6AoHx0jQszU/iu5MHbyUOtXhkuApA1bQbIprwhePu2B0TuHZJ
- ft50rvla0aBYW2Mg=;
-Received: from mail-il1-f200.google.com ([209.85.166.200])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=XCJ5L/qBbRtlqCgQHurGa6Pla/0fxN9Eh6Xk9bKi4Dc=; b=JW3tmZ7+ZPsnbuUFjrGn6r/PtW
+ Jk46j4HuQaaGOYHebT7mg7o1NsRWugrnG9CSrpSHYDk9cGdTLzRNuAJJarjgnPiVO7f3QAMIjUkVc
+ 5MUoiwRB8Qfe2HaeIlkvvq7m2OtcETSE3On0w+3E7qf1GW4upUbO8s8IiU1sKmjkjrHM=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1sdySU-0004yi-OR for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Aug 2024 20:49:35 +0000
-Received: by mail-il1-f200.google.com with SMTP id
- e9e14a558f8ab-39ad7e6b4deso76086675ab.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 13 Aug 2024 13:49:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723582169; x=1724186969;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=c5Kkke9tL3v4lVVfPkmFG8izoAwG1RpBwsTReLWE04I=;
- b=o7sKhkxIRC92dPIPOD08i4njfnhWUDP3L2rfabIQH5uVLDPgxkwb7FV24tWD8JylC7
- z+P5+HYtM6zFEGhVeAqgAkSrcHtnABlmH0bq+baakNeIkmppJU6KjjOMgYBUMTHybvlv
- Q1r/3o5+ubm+2XjrVycVMd3kaG3p5HEmlS1XUAjG+xKR2oZ4lPPOaogzjLzsIk1X0Xhv
- DGcD3NTsCtdxtS2bdrbaLN9UldkYHP1dMiheFX0KaTF3KK3nbQMqciHfvGNyzBPDSY8m
- AEBdT2yCJStDKt0eXG1H/m2JxQLoT+bJpIbSXnreUHU8AmnK3e+99xngfuYLIrQMrUqe
- gz2Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX/rybxOaX2UjtxorjYy8jhsUCJbVYF07jBkeIyUR6/h4kRkjwzbQTojwWAYW1VKp/yGZ4DQL2IgLDEbMLRdz+b8DaE51NGsXjIR/Z7VwVVWD3z4OMBUg==
-X-Gm-Message-State: AOJu0Yzh61555EwOhTBkEhzRoLqriLvqO6Qig/qjVWq46c1PEZohgc/E
- AZZForMs5dSRTnVSCsVHB802TQbNwFp8Bx4l/6xVncRy1p7vJD7OBt/pmd6phUGtF5SqS86puzV
- qYofFPubVkvvAsd3MLGZSBpO5/5IYJk34OJqRKw2A74FQvVGiPEGicLM=
-X-Google-Smtp-Source: AGHT+IHxnlYeDkxLzfdRvriRh4COdW9nBQXt9nEoPN/DpZLTo0V4Qzu1bzwzXUiRALbjaRfvOPOYfvwMrEdFz5GhjZY2J4mGlAdS
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1sdzwF-0000en-Fo for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Aug 2024 22:24:24 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 0BA59617E9;
+ Tue, 13 Aug 2024 22:24:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F219C32782;
+ Tue, 13 Aug 2024 22:24:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1723587857;
+ bh=FISE9M2iXKBizsZDyLHfPlfGorD8VjeOKo/Zy+6/20I=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=MrX6Or5fRLw/LYLHscOX0JQUcI40kv592n4OIBAuBU1sARxo8BAgDYUO9ByT5ueVX
+ Xg+iHRjn/f8a7RNapmXmh8ohboE+K/WjixGgWGKK+7Ab3RQV2Fv+T7ncq7zPyXToHR
+ ofotxbcA5DCI/xF4Kz7eFvtVTKrOWFwKmnhpPUY5ilumanY398kXaL/4GdayuiNJpv
+ UpTbgAcY0XCCCRChYciEoFenF/9P1Ht34xlxY+oR9nLBi7fNEyJjPXF3aPED74h5Ef
+ E2+Wu+I6fsWOOPTa4eQ6JF1ZK/icx+16iHQkTD8wI2WO64RPRA7huO12p1KQHZQyK2
+ vQEc2AWnXeynw==
+Date: Tue, 13 Aug 2024 22:24:15 +0000
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZrvdD6EVJAik1b5w@google.com>
+References: <20240813141331.417067-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:1ca7:b0:39a:ea89:22e8 with SMTP id
- e9e14a558f8ab-39d1245851dmr454095ab.2.1723582168930; Tue, 13 Aug 2024
- 13:49:28 -0700 (PDT)
-Date: Tue, 13 Aug 2024 13:49:28 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000ebae95061f96be85@google.com>
-From: syzbot <syzbot+78ff2855f26377625419@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+Content-Disposition: inline
+In-Reply-To: <20240813141331.417067-1-chao@kernel.org>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 9e6869691724
- Add linux-next specific files for 20240812 git tree: linux-next
- console+strace:
- https://syzkaller.appspot.com/x/log.txt?x=177ea68d980000 kernel config:
- https://syzkaller.apps [...] 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  Could you please test this series? I hit kernel hang along
+ with refcount warning in f2fs_put_dic, when running fsstress. You can reproduce
+ it quickly. On 08/13, Chao Yu wrote: > onvert to use folio, so that we can
+ get rid of 'page->index' to > prepare for removal of 'index' field in
+ structure
+ page [1]. > > [1] https://lore.kernel.org/all/Zp8fgUSIBGQ [...] 
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: googleapis.com]
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [209.85.166.200 listed in list.dnswl.org]
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.0 FROM_LOCAL_DIGITS      From: localpart has long digit sequence
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.200 listed in wl.mailspike.net]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sdySU-0004yi-OR
-Subject: [f2fs-dev] [syzbot] [f2fs?] WARNING: lock held when returning to
- user space in f2fs_commit_atomic_write
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1sdzwF-0000en-Fo
+Subject: Re: [f2fs-dev] [PATCH 1/9] f2fs: convert
+ f2fs_compress_ctx_add_page() to use folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,85 +102,111 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+Could you please test this series? I hit kernel hang along with refcount warning
+in f2fs_put_dic, when running fsstress. You can reproduce it quickly.
 
-syzbot found the following issue on:
-
-HEAD commit:    9e6869691724 Add linux-next specific files for 20240812
-git tree:       linux-next
-console+strace: https://syzkaller.appspot.com/x/log.txt?x=177ea68d980000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=61ba6f3b22ee5467
-dashboard link: https://syzkaller.appspot.com/bug?extid=78ff2855f26377625419
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=13deecd5980000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=12c1fdd9980000
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/f1b086192f50/disk-9e686969.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/b457920fb52e/vmlinux-9e686969.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/e63ba9cce98a/bzImage-9e686969.xz
-mounted in repro: https://storage.googleapis.com/syzbot-assets/a0c7f05fa485/mount_0.gz
-
-The issue was bisected to:
-
-commit 7566a155c666dd23b413a002a50cd9ae7b95f053
-Author: Chao Yu <chao@kernel.org>
-Date:   Tue Jun 25 03:13:49 2024 +0000
-
-    f2fs: atomic: fix to not allow GC to pollute atomic_file
-
-bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=1255068d980000
-final oops:     https://syzkaller.appspot.com/x/report.txt?x=1155068d980000
-console output: https://syzkaller.appspot.com/x/log.txt?x=1655068d980000
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+78ff2855f26377625419@syzkaller.appspotmail.com
-Fixes: 7566a155c666 ("f2fs: atomic: fix to not allow GC to pollute atomic_file")
-
-F2FS-fs (loop0): Found nat_bits in checkpoint
-F2FS-fs (loop0): Try to recover 1th superblock, ret: 0
-F2FS-fs (loop0): Mounted with checkpoint version = 48b305e4
-syz-executor306: attempt to access beyond end of device
-loop0: rw=2049, sector=45096, nr_sectors = 64 limit=40427
-================================================
-WARNING: lock held when returning to user space!
-6.11.0-rc3-next-20240812-syzkaller #0 Not tainted
-------------------------------------------------
-syz-executor306/5229 is leaving the kernel with locks still held!
-1 lock held by syz-executor306/5229:
- #0: ffff8880473a18b0 (&fi->i_gc_rwsem[WRITE]){+.+.}-{3:3}, at: f2fs_down_write fs/f2fs/f2fs.h:2196 [inline]
- #0: ffff8880473a18b0 (&fi->i_gc_rwsem[WRITE]){+.+.}-{3:3}, at: f2fs_commit_atomic_write+0x105/0x1510 fs/f2fs/segment.c:388
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-For information about bisection process see: https://goo.gl/tpsmEJ#bisection
-
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
+On 08/13, Chao Yu wrote:
+> onvert to use folio, so that we can get rid of 'page->index' to
+> prepare for removal of 'index' field in structure page [1].
+> 
+> [1] https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
+> 
+> Cc: Matthew Wilcox <willy@infradead.org>
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>  fs/f2fs/compress.c | 14 +++++++-------
+>  fs/f2fs/data.c     |  4 ++--
+>  fs/f2fs/f2fs.h     |  2 +-
+>  3 files changed, 10 insertions(+), 10 deletions(-)
+> 
+> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> index 990b93689b46..eb5cd1457ffc 100644
+> --- a/fs/f2fs/compress.c
+> +++ b/fs/f2fs/compress.c
+> @@ -160,17 +160,17 @@ void f2fs_destroy_compress_ctx(struct compress_ctx *cc, bool reuse)
+>  		cc->cluster_idx = NULL_CLUSTER;
+>  }
+>  
+> -void f2fs_compress_ctx_add_page(struct compress_ctx *cc, struct page *page)
+> +void f2fs_compress_ctx_add_page(struct compress_ctx *cc, struct folio *folio)
+>  {
+>  	unsigned int cluster_ofs;
+>  
+> -	if (!f2fs_cluster_can_merge_page(cc, page->index))
+> +	if (!f2fs_cluster_can_merge_page(cc, folio->index))
+>  		f2fs_bug_on(F2FS_I_SB(cc->inode), 1);
+>  
+> -	cluster_ofs = offset_in_cluster(cc, page->index);
+> -	cc->rpages[cluster_ofs] = page;
+> +	cluster_ofs = offset_in_cluster(cc, folio->index);
+> +	cc->rpages[cluster_ofs] = folio_page(folio, 0);
+>  	cc->nr_rpages++;
+> -	cc->cluster_idx = cluster_idx(cc, page->index);
+> +	cc->cluster_idx = cluster_idx(cc, folio->index);
+>  }
+>  
+>  #ifdef CONFIG_F2FS_FS_LZO
+> @@ -1093,7 +1093,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>  		if (PageUptodate(page))
+>  			f2fs_put_page(page, 1);
+>  		else
+> -			f2fs_compress_ctx_add_page(cc, page);
+> +			f2fs_compress_ctx_add_page(cc, page_folio(page));
+>  	}
+>  
+>  	if (!f2fs_cluster_is_empty(cc)) {
+> @@ -1123,7 +1123,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>  		}
+>  
+>  		f2fs_wait_on_page_writeback(page, DATA, true, true);
+> -		f2fs_compress_ctx_add_page(cc, page);
+> +		f2fs_compress_ctx_add_page(cc, page_folio(page));
+>  
+>  		if (!PageUptodate(page)) {
+>  release_and_retry:
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index e9570f4e0f21..100b6526717f 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -2429,7 +2429,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
+>  		if (ret)
+>  			goto set_error_page;
+>  
+> -		f2fs_compress_ctx_add_page(&cc, &folio->page);
+> +		f2fs_compress_ctx_add_page(&cc, folio);
+>  
+>  		goto next_page;
+>  read_single_page:
+> @@ -3161,7 +3161,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
+>  #ifdef CONFIG_F2FS_FS_COMPRESSION
+>  			if (f2fs_compressed_file(inode)) {
+>  				folio_get(folio);
+> -				f2fs_compress_ctx_add_page(&cc, &folio->page);
+> +				f2fs_compress_ctx_add_page(&cc, folio);
+>  				continue;
+>  			}
+>  #endif
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 51fd5063a69c..df436dd3aac1 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -4322,7 +4322,7 @@ bool f2fs_cluster_can_merge_page(struct compress_ctx *cc, pgoff_t index);
+>  bool f2fs_all_cluster_page_ready(struct compress_ctx *cc, struct page **pages,
+>  				int index, int nr_pages, bool uptodate);
+>  bool f2fs_sanity_check_cluster(struct dnode_of_data *dn);
+> -void f2fs_compress_ctx_add_page(struct compress_ctx *cc, struct page *page);
+> +void f2fs_compress_ctx_add_page(struct compress_ctx *cc, struct folio *folio);
+>  int f2fs_write_multi_pages(struct compress_ctx *cc,
+>  						int *submitted,
+>  						struct writeback_control *wbc,
+> -- 
+> 2.40.1
 
 
 _______________________________________________
