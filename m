@@ -2,63 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E54CC951C20
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Aug 2024 15:48:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 988FA951C3C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Aug 2024 15:51:35 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1seEMk-0006cr-Bl;
-	Wed, 14 Aug 2024 13:48:42 +0000
+	id 1seEPL-0006hf-TH;
+	Wed, 14 Aug 2024 13:51:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1seEMi-0006cl-ES
+ (envelope-from <chao@kernel.org>) id 1seEPI-0006hX-AB
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Aug 2024 13:48:40 +0000
+ Wed, 14 Aug 2024 13:51:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WDlpJHA17VbVcj/5/KFD30uoW08xvAC1hTf5oYRgX60=; b=LRH+am+EcFeQKW5k67AlQQq7py
- jCZjdlvnDhbBcIztW0TpLkTUxSTSe/tGnoynwi3d8h/3fNnrMF+Rd/YPwvS0HtL1UR+47ntzz9Cgx
- 7MxpgM51SgtRnWt+w7ROx4Wc6mghJnvOfK7NqHkqOtAh6fckGeg8HJI/1doZ+3ymLOLA=;
+ bh=v6so2n1jQRJdssKcNJO4HhrixUA74RmirSd4RGgmal4=; b=Fdqrm2ku7vxTLXwlbkgX9Fj2j/
+ aefIQvQtpflr0XmK3fS/EGywpbbD/rGc4mwTbWIU9aC9KrXJYMy16PMDai85yy5BhQIg3OnnqDg0a
+ VJKEA2BJ5dtS2wTP4wLqXO/46K2A7M/4sW3ZrPa1f/+0cbe2SzP5ch3AFb7BF40Lmm4U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=WDlpJHA17VbVcj/5/KFD30uoW08xvAC1hTf5oYRgX60=; b=S
- BM0RqqWjhvtZaV5Q4ZFHjVQXrMJPPs5WWqGOwedpSETX5ZMUb05d6hjs74N9I2jUJPFQ+zIo2Rxjj
- 3Db1q1i8ndcm64wU0fraksshUiZLabJoBNMcwtqbumQo68Fu8WiGZBx40oFWki8FxOsw2QQo/iN6p
- BHKVT9iuChvGlR9w=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ List-Owner:List-Archive; bh=v6so2n1jQRJdssKcNJO4HhrixUA74RmirSd4RGgmal4=; b=a
+ UZBUn0wYOghe9dUDO7OZ8nfQ2ftniyQpHQ1Rb59De2xs4w1VKGYvoQX41SBUSezVHCbKGetHwtWzG
+ zWZwb9mWvpG+IVVfwGmEGvZF37gjGNDH8A9xTYvbq3JYRDqgkVW9ccj1hzdTC/nJL+79HGkm57xbf
+ LTax5B+iw9GbMyn4=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1seEMh-0002B3-LR for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Aug 2024 13:48:40 +0000
+ id 1seEPH-0002M0-76 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 14 Aug 2024 13:51:20 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4DC7761A5F
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 14 Aug 2024 13:48:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6D5FC32786;
- Wed, 14 Aug 2024 13:48:27 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 31B6FCE19D8;
+ Wed, 14 Aug 2024 13:51:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D143CC4AF0A;
+ Wed, 14 Aug 2024 13:51:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1723643309;
- bh=TV7e8O5Dp1Ln1kyoeo3xPcNmajK9Di/HeAdWJnXc+QE=;
+ s=k20201202; t=1723643466;
+ bh=rxaqh40G6QYbFhGgXzDOgOuj/ji5qhnZ1FN1k7hQmDE=;
  h=From:To:Cc:Subject:Date:From;
- b=hrvbRPMYY3E1N+RGXO5pT93z20i48atFAcLwYJTvO+k9i9dN4KGN1vRzX5gZ5OBDM
- F9KhGZ853eIhSAo/2NvBr952pzUCO6t31S3qZfp7BHbHsDyEuqoQjN2t6z7j501yi3
- dRiuXZVu5vKhQ/QQ/HHW9oOFd9TRqBCFZy30LoMzYsZbxD/qwchaXi6Q1PsHu4OiEt
- s2Ji+0yXTi134fOcybzSmERgTV2aMNJujQA9CGKeffHbRJAowyuDdU4eg1qHOUaFgj
- QWPt47JfizVwcIYraEjOoGA8NAv0wffnwWaC65NxRURZzLK317eAukCFzH5lS8K03I
- wVdMemaiwsCMQ==
+ b=RLzMJL93JuH3bI0OtgWhHncPf+1MJqropPEpPcbKCeHmsq3OEPdiA0IkI0LHOnGTe
+ M3eweyiCpZll8WleGA5CYE4hb8lLAmDqJ+Dr5yVQcfcsNoNaWWZX7VjQcT9dtzBiHh
+ lHueliT5I8GztePjze4luzL6G3Xzt5b7KXerBKb0aZ6h9vWxJYjmYUYsZALNYuORJ5
+ /TtUO21OQV/cMv4sY+/RQUULAsPktfNAziwORx7SUcoYMhj5x9K2tfSr1emQYa3Nny
+ Jw68in1/TVX3dwu5A6+YOEt8y9Tjdy+I4DY2jdO/9Vgn+R7CokpLA/9zILbOQ3q2Q2
+ Eon8aEiqKGx9A==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Wed, 14 Aug 2024 21:48:15 +0800
-Message-Id: <20240814134815.801303-1-chao@kernel.org>
+Date: Wed, 14 Aug 2024 21:50:59 +0800
+Message-Id: <20240814135059.802454-1-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 X-Spam-Score: -0.3 (/)
@@ -68,19 +67,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: SQLite App GC Thread Shrinker - f2fs_ioc_start_atomic_write
- - f2fs_ioc_commit_atomic_write - f2fs_commit_atomic_write -
- filemap_write_and_wait_range
- : write atomic_file's data to cow_inode echo 3 > drop_caches - f2fs_gc -
- gc_data_segment - move_data_page - set [...] 
+ Content preview:  Convert to use folio, so that we can get rid of 'page->index'
+ to prepare for removal of 'index' field in structure page [1]. [1]
+ https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
+ Cc: Matthew Wilcox <willy@infradead.org> Signed-off-by: Chao Yu
+ <chao@kernel.org>
+ --- v2: - check return value of bio_add_folio() correctly. fs/f2fs/data.c
+ | 28 ++++++++++++++++ 1 file cha [...] 
  Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -91,9 +87,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1seEMh-0002B3-LR
-Subject: [f2fs-dev] [PATCH v2 2/4] f2fs: atomic: fix to not allow GC to
- pollute atomic_file
+X-Headers-End: 1seEPH-0002M0-76
+Subject: [f2fs-dev] [PATCH v2 8/9] f2fs: convert f2fs_read_multi_pages() to
+ use folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,107 +101,105 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-SQLite App			GC Thread	Shrinker
-- f2fs_ioc_start_atomic_write
+Convert to use folio, so that we can get rid of 'page->index' to
+prepare for removal of 'index' field in structure page [1].
 
-- f2fs_ioc_commit_atomic_write
- - f2fs_commit_atomic_write
-  - filemap_write_and_wait_range
-  : write atomic_file's data to cow_inode
-						echo 3 > drop_caches
-				- f2fs_gc
-				 - gc_data_segment
-				  - move_data_page
-				   - set_page_dirty
-				   : it may load data of previous
-				     transaction into pagecache.
-  - f2fs_down_write(&fi->i_gc_rwsem[WRITE])
-  - __f2fs_commit_atomic_write
-  - f2fs_up_write(&fi->i_gc_rwsem[WRITE])
+[1] https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
 
-During committing atomic_file, GC may be triggered to migrate
-atomic_file's block, so it may contain data of previous transaction
-in page cache, we should drop atomic_file's cache once it was
-migrated by GC.
-
-And also, we should writeback atomic_file and cow_file's data
-w/ i_gc_rwsem lock held, in order to avoid block address change
-during __f2fs_commit_atomic_write().
-
-Meahwhile, this patch adds f2fs_wait_on_block_writeback_range()
-to wait completion of block migration.
-
-Fixes: 3db1de0e582c ("f2fs: change the current atomic write way")
+Cc: Matthew Wilcox <willy@infradead.org>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
 v2:
-- fix error path handling.
- fs/f2fs/segment.c | 27 +++++++++++++++++++++++----
- 1 file changed, 23 insertions(+), 4 deletions(-)
+- check return value of bio_add_folio() correctly.
+ fs/f2fs/data.c | 28 ++++++++++++++++------------
+ 1 file changed, 16 insertions(+), 12 deletions(-)
 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 3aee71c9f3c6..a43054ab0cf1 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -236,6 +236,9 @@ static int __replace_atomic_write_block(struct inode *inode, pgoff_t index,
- 		return err;
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 0779e222f709..4f4e76c33611 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2207,19 +2207,22 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 	/* get rid of pages beyond EOF */
+ 	for (i = 0; i < cc->cluster_size; i++) {
+ 		struct page *page = cc->rpages[i];
++		struct folio *folio;
+ 
+ 		if (!page)
+ 			continue;
+-		if ((sector_t)page->index >= last_block_in_file) {
+-			zero_user_segment(page, 0, PAGE_SIZE);
+-			if (!PageUptodate(page))
+-				SetPageUptodate(page);
+-		} else if (!PageUptodate(page)) {
++
++		folio = page_folio(page);
++		if ((sector_t)folio->index >= last_block_in_file) {
++			folio_zero_segment(folio, 0, folio_size(folio));
++			if (!folio_test_uptodate(folio))
++				folio_mark_uptodate(folio);
++		} else if (!folio_test_uptodate(folio)) {
+ 			continue;
+ 		}
+-		unlock_page(page);
++		folio_unlock(folio);
+ 		if (for_write)
+-			put_page(page);
++			folio_put(folio);
+ 		cc->rpages[i] = NULL;
+ 		cc->nr_rpages--;
+ 	}
+@@ -2279,7 +2282,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
  	}
  
-+	if (__is_valid_data_blkaddr(dn.data_blkaddr))
-+		f2fs_wait_on_block_writeback_range(inode, dn.data_blkaddr, 1);
-+
- 	if (recover) {
- 		/* dn.data_blkaddr is always valid */
- 		if (!__is_valid_data_blkaddr(new_addr)) {
-@@ -339,6 +342,9 @@ static int __f2fs_commit_atomic_write(struct inode *inode)
- 				goto out;
+ 	for (i = 0; i < cc->nr_cpages; i++) {
+-		struct page *page = dic->cpages[i];
++		struct folio *folio = page_folio(dic->cpages[i]);
+ 		block_t blkaddr;
+ 		struct bio_post_read_ctx *ctx;
+ 
+@@ -2289,7 +2292,8 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 
+ 		f2fs_wait_on_block_writeback(inode, blkaddr);
+ 
+-		if (f2fs_load_compressed_page(sbi, page, blkaddr)) {
++		if (f2fs_load_compressed_page(sbi, folio_page(folio, 0),
++								blkaddr)) {
+ 			if (atomic_dec_and_test(&dic->remaining_pages)) {
+ 				f2fs_decompress_cluster(dic, true);
+ 				break;
+@@ -2299,7 +2303,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 
+ 		if (bio && (!page_is_mergeable(sbi, bio,
+ 					*last_block_in_bio, blkaddr) ||
+-		    !f2fs_crypt_mergeable_bio(bio, inode, page->index, NULL))) {
++		    !f2fs_crypt_mergeable_bio(bio, inode, folio->index, NULL))) {
+ submit_and_realloc:
+ 			f2fs_submit_read_bio(sbi, bio, DATA);
+ 			bio = NULL;
+@@ -2308,7 +2312,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 		if (!bio) {
+ 			bio = f2fs_grab_read_bio(inode, blkaddr, nr_pages,
+ 					f2fs_ra_op_flags(rac),
+-					page->index, for_write);
++					folio->index, for_write);
+ 			if (IS_ERR(bio)) {
+ 				ret = PTR_ERR(bio);
+ 				f2fs_decompress_end_io(dic, ret, true);
+@@ -2318,7 +2322,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
  			}
+ 		}
  
-+			f2fs_wait_on_block_writeback_range(cow_inode,
-+								blkaddr, 1);
-+
- 			new = f2fs_kmem_cache_alloc(revoke_entry_slab, GFP_NOFS,
- 							true, NULL);
+-		if (bio_add_page(bio, page, blocksize, 0) < blocksize)
++		if (!bio_add_folio(bio, folio, blocksize, 0))
+ 			goto submit_and_realloc;
  
-@@ -379,16 +385,29 @@ int f2fs_commit_atomic_write(struct inode *inode)
- 	struct f2fs_inode_info *fi = F2FS_I(inode);
- 	int err;
- 
-+	f2fs_down_write(&fi->i_gc_rwsem[WRITE]);
-+
- 	err = filemap_write_and_wait_range(inode->i_mapping, 0, LLONG_MAX);
- 	if (err)
--		return err;
-+		goto out;
- 
--	f2fs_down_write(&fi->i_gc_rwsem[WRITE]);
--	f2fs_lock_op(sbi);
-+	/* writeback GCing page of cow_inode */
-+	err = filemap_write_and_wait_range(fi->cow_inode->i_mapping,
-+							0, LLONG_MAX);
-+	if (err)
-+		goto out;
- 
--	err = __f2fs_commit_atomic_write(inode);
-+	filemap_invalidate_lock(inode->i_mapping);
-+
-+	/* don't allow clean page loaded by GC to pollute atomic_file */
-+	truncate_pagecache(inode, 0);
- 
-+	f2fs_lock_op(sbi);
-+	err = __f2fs_commit_atomic_write(inode);
- 	f2fs_unlock_op(sbi);
-+
-+	filemap_invalidate_unlock(inode->i_mapping);
-+out:
- 	f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
- 
- 	return err;
+ 		ctx = get_post_read_ctx(bio);
 -- 
 2.40.1
 
