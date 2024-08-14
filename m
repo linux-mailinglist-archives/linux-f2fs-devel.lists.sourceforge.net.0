@@ -2,94 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 988FA951C3C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Aug 2024 15:51:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E07E9951F88
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Aug 2024 18:11:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1seEPL-0006hf-TH;
-	Wed, 14 Aug 2024 13:51:23 +0000
+	id 1seGat-0005v8-5G;
+	Wed, 14 Aug 2024 16:11:27 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1seEPI-0006hX-AB
+ (envelope-from <jaegeuk@kernel.org>) id 1seGar-0005uv-Jd
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Aug 2024 13:51:20 +0000
+ Wed, 14 Aug 2024 16:11:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=v6so2n1jQRJdssKcNJO4HhrixUA74RmirSd4RGgmal4=; b=Fdqrm2ku7vxTLXwlbkgX9Fj2j/
- aefIQvQtpflr0XmK3fS/EGywpbbD/rGc4mwTbWIU9aC9KrXJYMy16PMDai85yy5BhQIg3OnnqDg0a
- VJKEA2BJ5dtS2wTP4wLqXO/46K2A7M/4sW3ZrPa1f/+0cbe2SzP5ch3AFb7BF40Lmm4U=;
+ bh=ttHVR81s8V5FJXhjBCaFKOlG2dYtSJNrEYskkluvMno=; b=MNtexMeIrAzP07wIqels1eTM/9
+ veNEHv+FVZuGO1zuU1ahDGx/K2mob0KDaHSsQcFJD6SbRQgwCvZaymV2FRM2FmzyVGugXakLKxl/m
+ RffzDQ+a9CwNPDNMl9IQa1V5aTHUVaaen+saiYpmXgb8k35Cs/hC18Enerfr9syNFayw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=v6so2n1jQRJdssKcNJO4HhrixUA74RmirSd4RGgmal4=; b=a
- UZBUn0wYOghe9dUDO7OZ8nfQ2ftniyQpHQ1Rb59De2xs4w1VKGYvoQX41SBUSezVHCbKGetHwtWzG
- zWZwb9mWvpG+IVVfwGmEGvZF37gjGNDH8A9xTYvbq3JYRDqgkVW9ccj1hzdTC/nJL+79HGkm57xbf
- LTax5B+iw9GbMyn4=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=ttHVR81s8V5FJXhjBCaFKOlG2dYtSJNrEYskkluvMno=; b=Fxk4hyvp2XgEdk3c6lD+HgRc+u
+ 0YWvmx6ufjNHXN5y2rWLH/n8rRs7P/ngRsv5wHgJo+63J/IRWxjEubgtsL6oDbWe4W7K7qSUYIm2c
+ BO9Gd5G6Fdsh//T5TVYsgIdoL16kJckDuP2wYKFpRrmeXa0pwLFAgMLrqwXUnH12kP5o=;
 Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1seEPH-0002M0-76 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Aug 2024 13:51:20 +0000
+ id 1seGaq-0004ts-Qq for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 14 Aug 2024 16:11:25 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 31B6FCE19D8;
- Wed, 14 Aug 2024 13:51:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D143CC4AF0A;
- Wed, 14 Aug 2024 13:51:04 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 103E4CE1A1F;
+ Wed, 14 Aug 2024 16:11:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A2E49C4AF0A;
+ Wed, 14 Aug 2024 16:11:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1723643466;
- bh=rxaqh40G6QYbFhGgXzDOgOuj/ji5qhnZ1FN1k7hQmDE=;
- h=From:To:Cc:Subject:Date:From;
- b=RLzMJL93JuH3bI0OtgWhHncPf+1MJqropPEpPcbKCeHmsq3OEPdiA0IkI0LHOnGTe
- M3eweyiCpZll8WleGA5CYE4hb8lLAmDqJ+Dr5yVQcfcsNoNaWWZX7VjQcT9dtzBiHh
- lHueliT5I8GztePjze4luzL6G3Xzt5b7KXerBKb0aZ6h9vWxJYjmYUYsZALNYuORJ5
- /TtUO21OQV/cMv4sY+/RQUULAsPktfNAziwORx7SUcoYMhj5x9K2tfSr1emQYa3Nny
- Jw68in1/TVX3dwu5A6+YOEt8y9Tjdy+I4DY2jdO/9Vgn+R7CokpLA/9zILbOQ3q2Q2
- Eon8aEiqKGx9A==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Wed, 14 Aug 2024 21:50:59 +0800
-Message-Id: <20240814135059.802454-1-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
+ s=k20201202; t=1723651876;
+ bh=xQGMhe8UU3rB9hjtZ+6qhiVkVFT1Lntea1bjy2W26PM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=jWJ8FVhjuOhdC/3vSOh/Df4f7fSyTrX56EDo/GnQ5aG3I5GTX9apy2OKS5qW0xWuq
+ 7Ft5efvuhWnVyt2ZpOPfBiIJDj1na5td3h4ju9lAwEC67dBuewXM3F3T4VmaAy4Glj
+ s+moWgzvN56CPZ96HJXrISNMbTTFxTJFY0SjbShwpOLJ2HgNRZSsMzsTR/NDI7n8D+
+ d7NQAms64qgsHv1OZsEysfTg2BAGcqZs1eYse1L6thFndfmftn6RzwfXosHXUwxhZT
+ gwy/yvzz8tIcKwlVhc9ZdRHeQG5gMAzZ544/c3tPhnka4W5WcZiPXQmuWakTEsSXmV
+ fCmCBb5fTg/Hg==
+Date: Wed, 14 Aug 2024 16:11:14 +0000
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZrzXIlJvWsOu2IIP@google.com>
+References: <0afb817e75a84859e1a86e1a7ba2041a9b852b6e.1723117820.git.christophe.jaillet@wanadoo.fr>
+ <99199c2a-1dbf-439c-ad24-68ed8844e096@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <99199c2a-1dbf-439c-ad24-68ed8844e096@kernel.org>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Convert to use folio, so that we can get rid of 'page->index'
- to prepare for removal of 'index' field in structure page [1]. [1]
- https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
- Cc: Matthew Wilcox <willy@infradead.org> Signed-off-by: Chao Yu
- <chao@kernel.org>
- --- v2: - check return value of bio_add_folio() correctly. fs/f2fs/data.c
- | 28 ++++++++++++++++ 1 file cha [...] 
+ Content preview:  Sorry, could you please post the patch to the mailing list
+ again? I don't see the first patch. Thanks, On 08/14, Chao Yu wrote: > On
+ 2024/8/8 19:50,
+ Christophe JAILLET wrote: > > This file already uses sysfs_emit().
+ So be consistent and also use > > sysfs_emit_at(). > > > > This slightly
+ simplifies the [...] 
  Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1seEPH-0002M0-76
-Subject: [f2fs-dev] [PATCH v2 8/9] f2fs: convert f2fs_read_multi_pages() to
- use folio
+X-Headers-End: 1seGaq-0004ts-Qq
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Use sysfs_emit_at() to simplify code
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,108 +103,30 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: kernel-janitors@vger.kernel.org,
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Convert to use folio, so that we can get rid of 'page->index' to
-prepare for removal of 'index' field in structure page [1].
+Sorry, could you please post the patch to the mailing list again?
+I don't see the first patch.
 
-[1] https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
+Thanks,
 
-Cc: Matthew Wilcox <willy@infradead.org>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-v2:
-- check return value of bio_add_folio() correctly.
- fs/f2fs/data.c | 28 ++++++++++++++++------------
- 1 file changed, 16 insertions(+), 12 deletions(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 0779e222f709..4f4e76c33611 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2207,19 +2207,22 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 	/* get rid of pages beyond EOF */
- 	for (i = 0; i < cc->cluster_size; i++) {
- 		struct page *page = cc->rpages[i];
-+		struct folio *folio;
- 
- 		if (!page)
- 			continue;
--		if ((sector_t)page->index >= last_block_in_file) {
--			zero_user_segment(page, 0, PAGE_SIZE);
--			if (!PageUptodate(page))
--				SetPageUptodate(page);
--		} else if (!PageUptodate(page)) {
-+
-+		folio = page_folio(page);
-+		if ((sector_t)folio->index >= last_block_in_file) {
-+			folio_zero_segment(folio, 0, folio_size(folio));
-+			if (!folio_test_uptodate(folio))
-+				folio_mark_uptodate(folio);
-+		} else if (!folio_test_uptodate(folio)) {
- 			continue;
- 		}
--		unlock_page(page);
-+		folio_unlock(folio);
- 		if (for_write)
--			put_page(page);
-+			folio_put(folio);
- 		cc->rpages[i] = NULL;
- 		cc->nr_rpages--;
- 	}
-@@ -2279,7 +2282,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 	}
- 
- 	for (i = 0; i < cc->nr_cpages; i++) {
--		struct page *page = dic->cpages[i];
-+		struct folio *folio = page_folio(dic->cpages[i]);
- 		block_t blkaddr;
- 		struct bio_post_read_ctx *ctx;
- 
-@@ -2289,7 +2292,8 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 
- 		f2fs_wait_on_block_writeback(inode, blkaddr);
- 
--		if (f2fs_load_compressed_page(sbi, page, blkaddr)) {
-+		if (f2fs_load_compressed_page(sbi, folio_page(folio, 0),
-+								blkaddr)) {
- 			if (atomic_dec_and_test(&dic->remaining_pages)) {
- 				f2fs_decompress_cluster(dic, true);
- 				break;
-@@ -2299,7 +2303,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 
- 		if (bio && (!page_is_mergeable(sbi, bio,
- 					*last_block_in_bio, blkaddr) ||
--		    !f2fs_crypt_mergeable_bio(bio, inode, page->index, NULL))) {
-+		    !f2fs_crypt_mergeable_bio(bio, inode, folio->index, NULL))) {
- submit_and_realloc:
- 			f2fs_submit_read_bio(sbi, bio, DATA);
- 			bio = NULL;
-@@ -2308,7 +2312,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 		if (!bio) {
- 			bio = f2fs_grab_read_bio(inode, blkaddr, nr_pages,
- 					f2fs_ra_op_flags(rac),
--					page->index, for_write);
-+					folio->index, for_write);
- 			if (IS_ERR(bio)) {
- 				ret = PTR_ERR(bio);
- 				f2fs_decompress_end_io(dic, ret, true);
-@@ -2318,7 +2322,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 			}
- 		}
- 
--		if (bio_add_page(bio, page, blocksize, 0) < blocksize)
-+		if (!bio_add_folio(bio, folio, blocksize, 0))
- 			goto submit_and_realloc;
- 
- 		ctx = get_post_read_ctx(bio);
--- 
-2.40.1
-
+On 08/14, Chao Yu wrote:
+> On 2024/8/8 19:50, Christophe JAILLET wrote:
+> > This file already uses sysfs_emit(). So be consistent and also use
+> > sysfs_emit_at().
+> > 
+> > This slightly simplifies the code and makes it more readable.
+> > 
+> > Signed-off-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+> 
+> Reviewed-by: Chao Yu <chao@kernel.org>
+> 
+> Thanks,
 
 
 _______________________________________________
