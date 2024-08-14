@@ -2,118 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EE38951452
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Aug 2024 08:15:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C373E95180D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Aug 2024 11:50:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1se7IM-00039N-6g;
-	Wed, 14 Aug 2024 06:15:42 +0000
+	id 1seAeD-0000RJ-6r;
+	Wed, 14 Aug 2024 09:50:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <eadavis@qq.com>) id 1se7IK-00039D-Rx
+ (envelope-from <chao@kernel.org>) id 1seAeB-0000RD-4V
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Aug 2024 06:15:41 +0000
+ Wed, 14 Aug 2024 09:50:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Date:Subject:Cc:To:From:Message-ID:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Vd36r7lQbv6nYXOkYc6WOC+IDipSdZw8rVIbaVDIHpg=; b=OPdk5odwX95ny6oNI2iNbAARqG
- Z5fza32SAZCbd+OWQgfwY69qMaA06rqxFtzGY+gKLF2Cvq7pqFN+CL4WOQqiGTzuNxmxBSpApUEaz
- RqsrSSxD62TnDIenYrWAGCEKQuirGL2wCjjJhObgu7T3YNab6W1e8D1/QBWGVinc9IE8=;
+ bh=vya1bNzsxVtkBhNXi1E1+O6mMX5jLT+ZTbbFoFY1rZ4=; b=hXpeguHAD6MKQkq4dULZtaJJkC
+ I1y/wAF9z8KcyqXB26vqnE62Jjfyk7xD1wDU2JvqgtLY9xsyFGZJuIjbrdKxhpaibncRmXUFe7iEP
+ YuDJnV8E2wO6WDvMJiV9Bg30ZZToF7WhtOO0VvHWD6FYriVOO7+bn9cr3YWQsJnAO5nA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Date:
- Subject:Cc:To:From:Message-ID:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Vd36r7lQbv6nYXOkYc6WOC+IDipSdZw8rVIbaVDIHpg=; b=NIodwTjdrd/T8cAwKKGgEyAqwX
- GCzSWLI0Qjvbq49IjgRAvnnTSkOvhJdoj8/fYUXZ2CtFQ5swq+0xJSjXjrwAGZN7ugw45nn2MeTd2
- 0w431D5uw5o23l8Fy0nsy3USehqoPnGJBlbD4Yn3OIAee9WsBUerKT+pIRxnaem74+4w=;
-Received: from out203-205-221-173.mail.qq.com ([203.205.221.173])
+ bh=vya1bNzsxVtkBhNXi1E1+O6mMX5jLT+ZTbbFoFY1rZ4=; b=V/DP03sf2uwRVTkPu3l4YpsLOg
+ ms58zq25UPc6OI6jWAN0vfeFZXEQEdrn49MpT4ADk1bh7SBbMpWbLL4Hdf7voL94G2UcVSMU4G0fn
+ 361NpzKpVOQL8JP1J1BwpJIKFTJxHpceHQUAbm292Q2vzzayfxGbGEifbTAzcZsvkC34=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1se7IJ-0007DG-37 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Aug 2024 06:15:40 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1723616126; bh=Vd36r7lQbv6nYXOkYc6WOC+IDipSdZw8rVIbaVDIHpg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=YQzcg8K15BFaQAXOgba4xMrMbTvvfM37gNhZXdVuQwbeqYNSeK4Nc37clQHgPn6WO
- 85TDjN+I1EZ04OXI19jhw3QrEMnnua4aL3hQ6gQVIy04BllItt6II0Pa6pDog4pEYi
- 68M2bmMZBdVBJv0tDXP2AMxhEthKtYl99mWQL6d4=
-Received: from pek-lxu-l1.wrs.com ([111.198.225.4])
- by newxmesmtplogicsvrsza15-1.qq.com (NewEsmtp) with SMTP
- id 78A8E64; Wed, 14 Aug 2024 14:01:56 +0800
-X-QQ-mid: xmsmtpt1723615316tx6efirj6
-Message-ID: <tencent_F748BAE7BB0A33E19E051BFF4B4D1BE72508@qq.com>
-X-QQ-XMAILINFO: OZZSS56D9fAjJIdlgdGWbpRtNP3ugXQhEvNeaN9QPTyTN8cb+fx+IOB34H/ROc
- zNf+xUHBe5NnK2nthP6uOo+g7aXn2ZQQ0Eb0Rey4qyGiFLanTuj530cxyXrqFqIccQj7O0GE5+qV
- eNPWckBmY3B27TBLPx1JQYxfd3r91v9sSfOpnuPpCHtoxyuKJOqLTaEZOcDSS897QumBSgTA/c2O
- w68cL38m98y3SlAEDatJRK96S0TSrcD1kjWjwlH89OKw1Lxwi1WEoyOeTlFd1nJD5QUKGoFC0qwR
- j1bh3sdgHaDFkcZZDNkYhNDNhsSOLkPp7b4AKnW/bg9OANbYHKKd8Vi8KJtI1lnh30qpfQBY2/MC
- 7d1Q5yux+sifwQIf/TCUoegXVlUefRaL+ahHhz400z7QMkfJCEI9w8hw1fEQzB/UdZCqapGRL/J7
- L3GqMG8TEiJk8SRId+JHL5d6ygOQ3o1j4wlTqaSJT2tiXX1TcXC8pSIEqxB42SQz/WPUNy2C4vW6
- K3ldM4ri3LiuCy16nMBk1Jv4UVYrYmqUcuXvk5i3sCNnx+pXyn7huvG/3q8ziPQXdeER5wDKmxSp
- NbUzQigGpQ9L3nd4vu5L4qDTt2kOTadi13t6c+wnPtR/AtdMsd/tsxsOmmvDxq//qQcGsfVin/pq
- 4MWqaM3VNb4ANuoTiZzdaTzcc2NINk52M/UH+zTBRKkFvLxVcS9ZMkoi4hJ7pzW7onPZpdX75RJz
- Bmu5oVWGdhUBqp/sD9TqiyyS2kbMsovbr2jL6cFFOC8ml/+4GU0pe95D1hZRI2URXlx9Z5oVJfda
- MA9e8M+oRjvmBikd/pq4+FRYEEk0hJTkxBhSbPLxxpuGK2kCGBz9k+Qs+yHoy+DqZ9Ca7HLlqjB7
- fiwoLsI7DGP2kRGA7YmOqinvvQnAIsvYOvzUKj3ChMe7Jt9/zrmJJpwS9IaXJvwU8MYT8xIiiYEN
- QxxlrupjItoRid4sZFOm6RyvzPECKVbCxEQbnxvCAGQt33exPNnoUWwsbKdjMRrkHxrELtRZkWmz
- KYYf9zVw==
-X-QQ-XMRINFO: MPJ6Tf5t3I/ycC2BItcBVIA=
-To: chao@kernel.org
-Date: Wed, 14 Aug 2024 14:01:57 +0800
-X-OQ-MSGID: <20240814060156.827415-2-eadavis@qq.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <02214d48-6aee-40f7-9a40-60b4091b5bfa@kernel.org>
-References: <02214d48-6aee-40f7-9a40-60b4091b5bfa@kernel.org>
+ id 1seAe9-0003e1-No for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 14 Aug 2024 09:50:26 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id E32E4CE11E1;
+ Wed, 14 Aug 2024 09:50:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67578C4AF0D;
+ Wed, 14 Aug 2024 09:50:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1723629012;
+ bh=301oXL9Be4WKrU7++f6Fb1I0bax0v9/4TZOUrpwc8EQ=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=UzUw+7mTmb669Okkkwlh2k+AJ6DGA7yTXI2MzkMEdR+po0KDC6asCBgzLuACXYC70
+ YQ5I2rI2pNeY7FpSJ5HkVt0QWwZ1HlUmqStfJuLfo2u25XlDcNRULPWMyPafGQDSoL
+ AusP6SpSMxEgoCkSn8+Uy7zQJoCxIcC5Y5uV5nD/Jg+WOD7xcPkgls9sTT9o+GE/d6
+ QICdIYodf3+R0zdIYA5w8DpI7it8PWa1WpNRhnMLQTquRWAecKxyBnhKOSNVR1mGXf
+ xfb7cSoIjUUg1M0BC7Jq94T028APt0kDUr7xJaCBr+1eTcQCpaZqRXFqQ78gI4bPpB
+ PVBb7iFbJGqdw==
+Message-ID: <7860b050-3948-4e23-b40f-a3df522477cd@kernel.org>
+Date: Wed, 14 Aug 2024 17:50:07 +0800
 MIME-Version: 1.0
-X-Spam-Score: -1.6 (-)
+User-Agent: Mozilla Thunderbird
+To: daejun7.park@samsung.com, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+References: <CGME20240801074715epcms2p788934486cd0e8090f67ed0d7cffbc91b@epcms2p7>
+ <20240801074715epcms2p788934486cd0e8090f67ed0d7cffbc91b@epcms2p7>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20240801074715epcms2p788934486cd0e8090f67ed0d7cffbc91b@epcms2p7>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, 14 Aug 2024 11:33:32 +0800, Chao Yu wrote: > > unlock
- i_gc_rwsem[WRITE] before quiting f2fs_commit_atomic_write > > > > Fixes:
- 7566a155c666 ("f2fs: atomic: fix to not allow GC to pollute atomi [...] 
- Content analysis details:   (-1.6 points, 6.0 required)
+ Content preview:  On 2024/8/1 15:47, Daejun Park wrote: > This patch addresses
+ the problem that when using LFS mode,
+ unused blocks > may occur in f2fs_map_blocks()
+ during block allocation for dio writes. > > If a new s [...] 
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: qq.com]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [203.205.221.173 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [eadavis[at]qq.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.205.221.173 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [145.40.73.55 listed in sa-accredit.habeas.com]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.4 RDNS_DYNAMIC           Delivered to internal network by host with
- dynamic-looking rDNS
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 3.2 HELO_DYNAMIC_IPADDR    Relay HELO'd using suspicious hostname (IP
- addr 1)
-X-Headers-End: 1se7IJ-0007DG-37
-Subject: Re: [f2fs-dev] [syzbot] [f2fs?] WARNING: lock held when returning
- to user space in f2fs_commit_atomic_write
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1seAe9-0003e1-No
+Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid unused block when dio write in
+ LFS mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,28 +111,63 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Edward Adam Davis via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Edward Adam Davis <eadavis@qq.com>
-Cc: eadavis@qq.com, syzkaller-bugs@googlegroups.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- jaegeuk@kernel.org, syzbot+78ff2855f26377625419@syzkaller.appspotmail.com
-Content-Type: text/plain; charset="us-ascii"
+Cc: Nayeon Kim <nayeoni.kim@samsung.com>, Siwoo Jung <siu.jung@samsung.com>,
+ Seokhwan Kim <sukka.kim@samsung.com>, Jeuk Kim <jeuk20.kim@samsung.com>,
+ Dongjin Kim <dongjin_.kim@samsung.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, 14 Aug 2024 11:33:32 +0800, Chao Yu wrote:
-> > unlock i_gc_rwsem[WRITE] before quiting f2fs_commit_atomic_write
-> >
-> > Fixes: 7566a155c666 ("f2fs: atomic: fix to not allow GC to pollute atomic_file")
+On 2024/8/1 15:47, Daejun Park wrote:
+> This patch addresses the problem that when using LFS mode, unused blocks
+> may occur in f2fs_map_blocks() during block allocation for dio writes.
 > 
-> Since original patch has not been merged, if you don't mind, I'd like to
-> fix this issue in original patch.
-Okay, it's a small matter.
+> If a new section is allocated during block allocation, it will not be
+> included in the map struct by map_is_mergeable() if the LBA of the
+
+I didn't get it, why below condition in map_is_mergeable() can not catch this
+case? Can you please explain more?
+
+	if (map->m_pblk != NEW_ADDR && blkaddr == (map->m_pblk + ofs))
+		return true;
+
+Thanks,
+
+> allocated block is not contiguous. However, the block already allocated
+> in this process will remain unused due to the LFS mode.
 > 
-> Thanks,
+> This patch avoids the possibility of unused blocks by escaping
+> f2fs_map_blocks() when allocating the last block in a section.
 > 
-> > Reported-by: syzbot+78ff2855f26377625419@syzkaller.appspotmail.com
+> Signed-off-by: Daejun Park <daejun7.park@samsung.com>
+> ---
+>   fs/f2fs/data.c | 13 +++++++++++++
+>   1 file changed, 13 insertions(+)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index b6dcb3bcaef7..b27a3f448f32 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -1711,6 +1711,19 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
+>   		dn.ofs_in_node = end_offset;
+>   	}
+>   
+> +	if (flag == F2FS_GET_BLOCK_DIO && f2fs_lfs_mode(sbi)) {
+> +		int segno = GET_SEGNO(sbi, blkaddr);
+> +		bool last_seg, last_blk;
+> +
+> +		last_seg = !((segno + 1) % SEGS_PER_SEC(sbi));
+> +		last_blk = (f2fs_usable_blks_in_seg(sbi, segno) - 1) ==
+> +				GET_BLKOFF_FROM_SEG0(sbi, blkaddr);
+> +
+> +		/* LBA of the next block to be allocated may not be contiguous. */
+> +		if (last_seg && last_blk)
+> +			goto sync_out;
+> +	}
+> +
+>   	if (pgofs >= end)
+>   		goto sync_out;
+>   	else if (dn.ofs_in_node < end_offset)
 
 
 
