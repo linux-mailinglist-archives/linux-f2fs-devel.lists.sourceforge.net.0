@@ -2,104 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BCAEC951819
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Aug 2024 11:58:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 045F395185C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Aug 2024 12:08:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1seAlo-0003es-9z;
-	Wed, 14 Aug 2024 09:58:20 +0000
+	id 1seAvK-0008PE-Bk;
+	Wed, 14 Aug 2024 10:08:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1seAlk-0003eY-UB
+ (envelope-from <chao@kernel.org>) id 1seAvI-0008P7-6H
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Aug 2024 09:58:16 +0000
+ Wed, 14 Aug 2024 10:08:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=61q2QTbshBzVYQ5FLMGKc7s0S3Ycxdb2QMzwlJ2Up/8=; b=iCkaznCx1mKpxO9Im0+XfRLGwO
- X1wZxM75o+jYLdZxKNKqUFjINrmhmXD8dOxgkWWgRfM+K5E79qZo2FuAx5Xl41O7pdKO7gulOnWAe
- ZxAUNb3xhtus18SFZ2v4qDgDizK3QGjKWvAHuzP4AUN0VZs6bfXQp/VVB/qegtfNOe68=;
+ bh=foK+dwbcPYKLpVyiGGJ94IUxT/lSBmzeEIuRLwFGz9g=; b=A8gw3sF5u/SN8Q1WjEypXGFjZf
+ 0D+srMZRkfjli5KXHJ8zodgo8b2MF6mBzXV3movch6b1h9ejdf5BPclxARtxvJoEhBzIIEH1RRQRj
+ 6X92NvjcQQrNi0xfcGAJTqVjo9eTfiKMXxeRStrGybRdOvoaL4MyJQyWJRyuzri0lHw8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=61q2QTbshBzVYQ5FLMGKc7s0S3Ycxdb2QMzwlJ2Up/8=; b=ZIjGGUOSn8atB5GwS4hUvL6qwZ
- yB0N+cWCDBo94N29jn1sgsjXtkfPKe64nXVWlD6jHBaDqlDU13zxv2I+i54wk4rEyOYdriiWjQAuZ
- zAUsT+rCP4syuAhUVjHAqGxHtcssDFB66O3ksM+R6qOrhzzn7V4/9zr+HHaPP3nh8oE8=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=foK+dwbcPYKLpVyiGGJ94IUxT/lSBmzeEIuRLwFGz9g=; b=Q2AkPZPOTi9x3ng49IZm+YHmFk
+ dolM+U7NONXaqqYxZfMsoZWk1Q9n926TPzCKmwsDmFP2zWnhrKJl6Zv066f09b/FilyLSxbt+QrHk
+ 0OKTXI+FfmFMZI38IX6oLhK5D+Tk5tLVlHY/cc8kJy+8LpM4tVvjVeF8Cn9XYlu5+M5w=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1seAlk-00041b-AW for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Aug 2024 09:58:16 +0000
+ id 1seAvI-0004ds-49 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 14 Aug 2024 10:08:08 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id ED216615C4;
- Wed, 14 Aug 2024 09:58:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79DDCC32786;
- Wed, 14 Aug 2024 09:58:04 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 48450CE10AB
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 14 Aug 2024 10:07:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F1E92C32786;
+ Wed, 14 Aug 2024 10:07:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1723629485;
- bh=c1DRi6NyZ8YeV/Jy6vvGJBLjP3EAf16yRRK8oKda6ws=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=MtUf2FdeFRqOGdcCUM5bgD1AXWndhJkKX8W9H8BhmeLL+hueXS8i2+E3mrqHJUU7w
- ho6ZgYru45RAZ+AtOlDy4Ooli8jN3XXPzoxKhXSPYpBYjD7Qfufhfq/9vgWYVQDotR
- /WEWnN5r2F3rCZ6NDbRhf+QD9o5r4vjAbXs/YvpLD0WCuTkN2f8nhP2mGd+YmvVLiV
- qQjIYVNvqDhV4TeRFEcbDuecL+mmyxU8ntq8DXbZ2NxF5ckZIVOl5GzJGQ05FU00D1
- ldWLI7Np8dRpYYtrXNlN53StzC1X/pHnIULZL8JvVy6Sesc1cHLHxI7k11TCNIDEh4
- dDcRo1LrmLMwQ==
-Message-ID: <99199c2a-1dbf-439c-ad24-68ed8844e096@kernel.org>
-Date: Wed, 14 Aug 2024 17:58:01 +0800
+ s=k20201202; t=1723630075;
+ bh=vAr1zcRM3lYJGDmtDIaFu/G96CSMjx3B0d5w3GD6udc=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=aRy5hkjNivlH1NYNLDStUiacX8yfUXJDYSf53LAr93vj4AqvxRD8mYxU8tmy/YKhq
+ EsI42n4M/4Oqp9mQ1Zg01IeFUwcAD4p/jujbzAWPXdKNa+ShwEI9LHdzobr5kKgR9o
+ wqZP6et+rlFlnbcYvO2dnSWuwlNiFS6CEOv42qQQ48Bgqyll+GjAFL7I1q0A+dCE7l
+ h9Ox8KvJ4+1QcuRyYhB2UPeaZpaYUgmL2IyhDwoKkUkcZVCAgU5zAbi2Z2hPi9CNBD
+ nAIJZaDZXXXaE6DxuuS5fJ9jBxa37MiD6vxb6aWR4hVN3EHGvXm57AUsovpMFKoJYp
+ ZglJHfcRXfN8g==
+Message-ID: <dcc14b9e-aeb0-4718-a60d-b40719ee6543@kernel.org>
+Date: Wed, 14 Aug 2024 18:07:51 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- Jaegeuk Kim <jaegeuk@kernel.org>
-References: <0afb817e75a84859e1a86e1a7ba2041a9b852b6e.1723117820.git.christophe.jaillet@wanadoo.fr>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+References: <20240808233248.323318-1-jaegeuk@kernel.org>
 Content-Language: en-US
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <0afb817e75a84859e1a86e1a7ba2041a9b852b6e.1723117820.git.christophe.jaillet@wanadoo.fr>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20240808233248.323318-1-jaegeuk@kernel.org>
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/8/8 19:50,
- Christophe JAILLET wrote: > This file already
- uses sysfs_emit(). So be consistent and also use > sysfs_emit_at(). > > This
- slightly simplifies the code and makes it more readable. > [...] 
- Content analysis details:   (-0.3 points, 6.0 required)
+ Content preview:  On 2024/8/9 7:32, Jaegeuk Kim wrote: > It'll crach fsck.f2fs.
+ Even, let's keep the write pointers and just finish it. > > Signed-off-by:
+ Jaegeuk Kim <jaegeuk@kernel.org> Reviewed-by: Chao Yu <chao@kernel.org> 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [139.178.84.217 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1seAlk-00041b-AW
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Use sysfs_emit_at() to simplify code
+X-Headers-End: 1seAvI-0004ds-49
+Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: don't call dev_fill w/ null buffer
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,19 +102,14 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/8/8 19:50, Christophe JAILLET wrote:
-> This file already uses sysfs_emit(). So be consistent and also use
-> sysfs_emit_at().
+On 2024/8/9 7:32, Jaegeuk Kim wrote:
+> It'll crach fsck.f2fs. Even, let's keep the write pointers and just finish it.
 > 
-> This slightly simplifies the code and makes it more readable.
-> 
-> Signed-off-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
 
