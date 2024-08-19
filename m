@@ -2,66 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10C909560DD
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2024 03:21:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 985699565AD
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2024 10:34:58 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sfr5E-0006QT-KQ;
-	Mon, 19 Aug 2024 01:21:20 +0000
+	id 1sfxqj-0001mK-Pc;
+	Mon, 19 Aug 2024 08:34:50 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1sfr5D-0006QK-60
+ (envelope-from <youngjin.gil@samsung.com>) id 1sfxqi-0001lu-Rs
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Aug 2024 01:21:19 +0000
+ Mon, 19 Aug 2024 08:34:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=h+943LVu/+8yhC2SFSEVrRdRoqjPDtyjWdl+009oEDo=; b=SB7u0qnwZLGehYiPdWFUVcVvYV
- KeuUwKWiqnPrT8uT9jlk/TdYfhj+j6Cl5T7qC+sADkBLMm9IsdJCyc4LpRIYHcgJHzHsCZdUziv7L
- 9YT1+6PfysWzHtv4NJGL19ujuzHsO0ZW9ELlfI1OFfhaJbNPGuLB/AYwfu4dTgF0FT8o=;
+ bh=IOXKdEMn1pqTvo4372OKnkgY5fJ2HVfDOAL5g6sVpBA=; b=lcdViMPMKYiFbTyWSb/V7v7nWh
+ zlGlEWfW9bg6MGV1YxOV2DnM7fjAFwrFghOpdrg7waSsSAalWmI8t0M9ril8yHgW/3ZM/oG8G+4Rf
+ BPCjs2JlXN4eLuz3wVUIgid3Hit32hJ4iivyKz4MubsqdymIHd3IhDDxDnWLUh5oK3nQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=h+943LVu/+8yhC2SFSEVrRdRoqjPDtyjWdl+009oEDo=; b=iPLZGyfeGW09W/PkMn7+hhXe9R
- 8nowk3PBCrIo8dau/MuXnXvdgTiuWh6W/8Mh4ScIm3gKU5PFFBPv92xblG6dAoot9eXTXT5z9O/h8
- Zx+hu9fPqzbOCJ6rMFJUCVebBktM257v3em97mbNbyYSfIXdrF6VcG74H7H+uLyXkvoc=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id
+ :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=IOXKdEMn1pqTvo4372OKnkgY5fJ2HVfDOAL5g6sVpBA=; b=c
+ yHSgp/3WWemq4hZN1QfSDo4qqP5gC3DA+eJhuXulVik/3qkmkQqgtNgvT2LcP8cPttPfIWg3gQiE7
+ yoTzl4EBlluptGIqnYz4jdGPLW8o/1OuQ2cMsubF23tqHGlNYKGVXX2jxB4hYLaqt1v4Y2ymcbXS1
+ zyO9pNlBX873D8qQ=;
+Received: from mailout1.samsung.com ([203.254.224.24])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sfr5C-0003ah-7S for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Aug 2024 01:21:19 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id D7BC960AB4;
- Mon, 19 Aug 2024 01:21:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 499A2C32786;
- Mon, 19 Aug 2024 01:21:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1724030467;
- bh=8r7Ek2cBap+An9MVHAkEPVDijkmUphd6VWrszUU4RwQ=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=T+m+gaxL0ONvBo5PpwKmPwBazX413BosT1YIQnpfbYi595iBphhR27qezpLQjqMeV
- FE8NE5PIt4amuOhNQrtyDOxS0KTLwcOw0e86qY+8D0p0MCGTOK0HEpqIUGeYyB0rl8
- 5yCJqwI+OTVnS1VnkvT4K1bJRSOow3dPfZxlHDj5BhTSKmz2nAE2bN4t6MO2oa14XM
- qG1cL6Eppd4gFWvGcwVM0rc/CUmS16BMShUlDRFviutZ5ynrmjTB1+uXPRgJbzwl1S
- MZ7tOZ3nc0iLkxMisHFsYat6vLxyqg0WZxn4GQt2SkwrCsug2e8AdlJQUFfiRrucye
- 2IjbFMyrf9MnA==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Mon, 19 Aug 2024 09:20:23 +0800
-Message-Id: <20240819012023.3871272-8-chao@kernel.org>
+ id 1sfxqh-0007Jb-Si for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Aug 2024 08:34:49 +0000
+Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20240819083435epoutp017cdf69ec1a408cc815cfddb0c6342179~tFDr6xNru1816518165epoutp01V
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 19 Aug 2024 08:34:35 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20240819083435epoutp017cdf69ec1a408cc815cfddb0c6342179~tFDr6xNru1816518165epoutp01V
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1724056475;
+ bh=IOXKdEMn1pqTvo4372OKnkgY5fJ2HVfDOAL5g6sVpBA=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=SVDynl/RTuBzdwTk5UwR6DXpIidtuPU2mXOaJAMtm0qHin1rWG28Evv/XInIynr9W
+ HAX125O52IIdtrufStC8n5q1Tp+FgVz7C7zpi3bbcfNORxjvy5JWXMQksfqOUnMdUM
+ O7nbce9ls3zdyg1uxk4P9CEGFNT5xI0vCj7CJ0d8=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTP id
+ 20240819083435epcas1p30d73781d6cf487039f480fa09fb7d6c5~tFDreaSyQ0437304373epcas1p3j;
+ Mon, 19 Aug 2024 08:34:35 +0000 (GMT)
+Received: from epsmges1p4.samsung.com (unknown [182.195.38.243]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4WnQrB4fY8z4x9Pp; Mon, 19 Aug
+ 2024 08:34:34 +0000 (GMT)
+Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
+ epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 12.3E.10258.A9303C66; Mon, 19 Aug 2024 17:34:34 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20240819083433epcas1p3861b773a5b21eea6f0332036a71bb5d7~tFDpOI9KF0215602156epcas1p31;
+ Mon, 19 Aug 2024 08:34:33 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20240819083432epsmtrp117563750cad156bd203d960893364771~tFDpNctB42831928319epsmtrp1I;
+ Mon, 19 Aug 2024 08:34:32 +0000 (GMT)
+X-AuditID: b6c32a38-995ff70000002812-b4-66c3039a44a2
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ FF.18.08456.89303C66; Mon, 19 Aug 2024 17:34:32 +0900 (KST)
+Received: from localhost.localdomain (unknown [10.253.99.41]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20240819083432epsmtip2f37a28ddf7ea71327b9184f53dfe76f1~tFDpAXiz31825918259epsmtip26;
+ Mon, 19 Aug 2024 08:34:32 +0000 (GMT)
+From: Yeongjin Gil <youngjin.gil@samsung.com>
+To: jaegeuk@kernel.org, chao@kernel.org, daehojeong@google.com
+Date: Mon, 19 Aug 2024 17:34:30 +0900
+Message-Id: <20240819083430.31852-1-youngjin.gil@samsung.com>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240819012023.3871272-1-chao@kernel.org>
-References: <20240819012023.3871272-1-chao@kernel.org>
 MIME-Version: 1.0
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrPJsWRmVeSWpSXmKPExsWy7bCmvu4s5sNpBn8fslqcnnqWyWJq+15G
+ iyfrZzFbrLzym8Xi0iJ3i8u75rBZLGgF8rb8O8JqMWP/U3YHTo8Fm0o9Nq3qZPPYveAzk0ff
+ llWMHp83yQWwRjUw2iQWJWdklqUqpOYl56dk5qXbKoWGuOlaKClk5BeX2CpFGxoa6RkamOsZ
+ GRnpmRrFWhmZKinkJeam2ipV6EL1KikUJRcA1eZWFgMNyEnVg4rrFafmpThk5ZeC/KBXnJhb
+ XJqXrpecn6ukUJaYUwo0Qkk/4Rtjxqy1y1kLPjlWXJxygaWBcYlZFyMnh4SAiUTDxw7GLkYu
+ DiGBHYwS286fhXI+MUq8bzvHBOF8Y5T4uXIzE0zL7OXTWCESexklXk9ZzQbXsnTFErAqNgFd
+ iakvn7KC2CICdhK3bi4C62AWeMMo8fHHZXaQhLBAuMSFLc/BbBYBVYlVWx+CNfMK2Epc+XWY
+ HWKdvMTNrv3MEHFBiZMzn7CA2MxA8eats5lBhkoI3GKX+Nz6EKrBReLYldNQtrDEq+NboGwp
+ iZf9bewQDasYJd60fmKCcLYzSkx/3MMGUWUv0dzaDGRzAK3QlFi/Sx9iG5/Eu689rBAlghKn
+ r3Uzg5RICPBKdLQJQYTVJK5M+gVVIiPR92AW1F4PidftbSwg5UICsRL3utgnMMrPQvLOLCTv
+ zELYu4CReRWjWGpBcW56arFhgQly1G5iBKdVLYsdjHPfftA7xMjEwXiIUYKDWUmEt/vlwTQh
+ 3pTEyqrUovz4otKc1OJDjMnAAJ7ILCWanA9M7Hkl8YZmZpYWlkYmhsZmhoaEhU0sDUzMjEws
+ jC2NzZTEec9cKUsVEkhPLEnNTk0tSC2C2cLEwSnVwKT4LfqsukbVtBu7JxvcNrDdGPrz8nFN
+ kcMv/zg1FK9zPzArPexrQvHv2gyHJ5uX913kTy6aFrvB6uXEi7ZVC+c1zL15gl365LJkg2W+
+ J5Pm3Sjb8+RLzTGtYp66C5aZ541Xxe92aj/atKb6dGv8mS3Xd5j2zPl2gOFg5XmLbz4XnCbK
+ /+/w6p9zel+qb3xj8OyLH2K9b+b8z2dX0mDnO7eM+RyP6sXyk3klgqyeM8pnRK9dve9Hk9Jh
+ Q/HyzrRKKYYZbS4PS5ur9L4xhT9fz77j+gaLf4bL47v03VpmvbnE/XvVk9bpSyYk6hnM09m2
+ /M2j+OdLCoymqJoHGHVmJ3ec5bjFqdlqn6+eXLlIplSJpTgj0VCLuag4EQCloRWSYgQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrKLMWRmVeSWpSXmKPExsWy7bCSvO4M5sNpBtcXmVqcnnqWyWJq+15G
+ iyfrZzFbrLzym8Xi0iJ3i8u75rBZLGgF8rb8O8JqMWP/U3YHTo8Fm0o9Nq3qZPPYveAzk0ff
+ llWMHp83yQWwRnHZpKTmZJalFunbJXBlzFq7nLXgk2PFxSkXWBoYl5h1MXJySAiYSMxePo0V
+ xBYS2M0oceN6GERcRuLPxPdsXYwcQLawxOHDxV2MXEAlHxglFnYtZgOpYRPQlZj68ilYr4iA
+ k8T/G+3sIDYzSNHvCZ4gtrBAqMTam12MIDaLgKrEqq0PmUBsXgFbiSu/DrND7JKXuNm1nxki
+ LihxcuYTFog58hLNW2czT2Dkm4UkNQtJagEj0ypGydSC4tz03GLDAqO81HK94sTc4tK8dL3k
+ /NxNjOCQ1dLawbhn1Qe9Q4xMHIyHGCU4mJVEeLtfHkwT4k1JrKxKLcqPLyrNSS0+xCjNwaIk
+ zvvtdW+KkEB6YklqdmpqQWoRTJaJg1Oqgcns3rEYTyOmbZPFIzzvHEpXDVsx/b4Pa1zDXifL
+ jXKBF33W7T0Tb71245RLDA6P835e1wxboNN/ycxuzp7a8w8v/T6vPcdciHtjSN/Jqm2f2Y44
+ XtI96CQc+MKHuSB0Y2v9t1P/GINUG+IMIsR28meaT3FL597oPvfwmtVvT8lbeNg41P+Y21Kl
+ +MOYb5r+5mdn1tyokP//mn1lodcRjcIv6ey9FzL/Jp5/HxKSE7vlcZjfVNnqswsm9S/69yfv
+ W8wtvVXt71eUZjVq7W2Yf3/5lLPNyRsvcbt6SKUkfyu9O/HEmd4neQZdD/9U5kjdNljH58Av
+ 72KcPylhyRQ7i6mlvW38zEyas01fXWuJ3q/EUpyRaKjFXFScCACnmlXJyAIAAA==
+X-CMS-MailID: 20240819083433epcas1p3861b773a5b21eea6f0332036a71bb5d7
+X-Msg-Generator: CA
+CMS-TYPE: 101P
+X-ArchiveUser: EV
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20240819083433epcas1p3861b773a5b21eea6f0332036a71bb5d7
+References: <CGME20240819083433epcas1p3861b773a5b21eea6f0332036a71bb5d7@epcas1p3.samsung.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -69,39 +131,44 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Convert to use folio, so that we can get rid of 'page->index'
- to prepare for removal of 'index' field in structure page [1]. [1]
- https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
- Cc: Matthew Wilcox <willy@infradead.org> Signed-off-by: Chao Yu
- <chao@kernel.org>
- --- fs/f2fs/compress.c | 2 +- fs/f2fs/data.c | 12 ++++++------ fs/f2fs/dir.c
- | 3 ++- fs/f2fs/inode.c | 3 ++- fs/f2fs/n [...] 
+ Content preview:  In f2fs_do_write_data_page, when the data block is NULL_ADDR,
+ it skips writepage considering that it has been already truncated. This
+ results
+ in an infinite loop as the PAGECACHE_TAG_TOWRITE tag is no [...] 
  Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: samsung.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-accredit.habeas.com]
+ [203.254.224.24 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ [203.254.224.24 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.24 listed in wl.mailspike.net]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sfr5C-0003ah-7S
-Subject: [f2fs-dev] [PATCH 8/8] f2fs: get rid of page->index
+X-Headers-End: 1sfxqh-0007Jb-Si
+Subject: [f2fs-dev] [PATCH v2] f2fs: compress: don't redirty sparse cluster
+ during {, de}compress
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,168 +180,243 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Jaewook Kim <jw5454.kim@samsung.com>, Sungjong Seo <sj1557.seo@samsung.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Convert to use folio, so that we can get rid of 'page->index' to
-prepare for removal of 'index' field in structure page [1].
+In f2fs_do_write_data_page, when the data block is NULL_ADDR, it skips
+writepage considering that it has been already truncated.
+This results in an infinite loop as the PAGECACHE_TAG_TOWRITE tag is not
+cleared during the writeback process for a compressed file including
+NULL_ADDR in compress_mode=user.
 
-[1] https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
+This is the reproduction process:
 
-Cc: Matthew Wilcox <willy@infradead.org>
-Signed-off-by: Chao Yu <chao@kernel.org>
+1. dd if=/dev/zero bs=4096 count=1024 seek=1024 of=testfile
+2. f2fs_io compress testfile
+3. dd if=/dev/zero bs=4096 count=1 conv=notrunc of=testfile
+4. f2fs_io decompress testfile
+
+To prevent the problem, let's check whether the cluster is fully
+allocated before redirty its pages.
+
+Fixes: 5fdb322ff2c2 ("f2fs: add F2FS_IOC_DECOMPRESS_FILE and F2FS_IOC_COMPRESS_FILE")
+Reviewed-by: Sungjong Seo <sj1557.seo@samsung.com>
+Reviewed-by: Sunmin Jeong <s_min.jeong@samsung.com>
+Tested-by: Jaewook Kim <jw5454.kim@samsung.com>
+Signed-off-by: Yeongjin Gil <youngjin.gil@samsung.com>
 ---
- fs/f2fs/compress.c |  2 +-
- fs/f2fs/data.c     | 12 ++++++------
- fs/f2fs/dir.c      |  3 ++-
- fs/f2fs/inode.c    |  3 ++-
- fs/f2fs/node.c     |  4 ++--
- fs/f2fs/segment.c  |  3 ++-
- 6 files changed, 15 insertions(+), 12 deletions(-)
+v2:
+ - Rename function and enum value for readability
+
+---
+ fs/f2fs/compress.c | 36 ++++++++++++++++++++++++++++--------
+ fs/f2fs/f2fs.h     | 12 ++++++++++++
+ fs/f2fs/file.c     | 39 +++++++++++++++++++++------------------
+ 3 files changed, 61 insertions(+), 26 deletions(-)
 
 diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 67bb1e2e07a4..163ad0d7d495 100644
+index 990b93689b46..f55d54bb12f4 100644
 --- a/fs/f2fs/compress.c
 +++ b/fs/f2fs/compress.c
-@@ -881,7 +881,7 @@ static bool cluster_has_invalid_data(struct compress_ctx *cc)
- 		f2fs_bug_on(F2FS_I_SB(cc->inode), !page);
+@@ -945,7 +945,7 @@ static int __f2fs_get_cluster_blocks(struct inode *inode,
+ 	unsigned int cluster_size = F2FS_I(inode)->i_cluster_size;
+ 	int count, i;
  
- 		/* beyond EOF */
--		if (page->index >= nr_pages)
-+		if (page_folio(page)->index >= nr_pages)
- 			return true;
+-	for (i = 1, count = 1; i < cluster_size; i++) {
++	for (i = 0, count = 0; i < cluster_size; i++) {
+ 		block_t blkaddr = data_blkaddr(dn->inode, dn->node_page,
+ 							dn->ofs_in_node + i);
+ 
+@@ -956,8 +956,8 @@ static int __f2fs_get_cluster_blocks(struct inode *inode,
+ 	return count;
+ }
+ 
+-static int __f2fs_cluster_blocks(struct inode *inode,
+-				unsigned int cluster_idx, bool compr_blks)
++static int __f2fs_cluster_blocks(struct inode *inode, unsigned int cluster_idx,
++				enum cluster_check_type type)
+ {
+ 	struct dnode_of_data dn;
+ 	unsigned int start_idx = cluster_idx <<
+@@ -978,10 +978,12 @@ static int __f2fs_cluster_blocks(struct inode *inode,
  	}
- 	return false;
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index e69097267b99..c6d688208f8b 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -354,7 +354,7 @@ static void f2fs_write_end_io(struct bio *bio)
+ 
+ 	if (dn.data_blkaddr == COMPRESS_ADDR) {
+-		if (compr_blks)
+-			ret = __f2fs_get_cluster_blocks(inode, &dn);
+-		else
++		if (type == CLUSTER_COMPR_BLKS)
++			ret = 1 + __f2fs_get_cluster_blocks(inode, &dn);
++		else if (type == CLUSTER_IS_COMPR)
+ 			ret = 1;
++	} else if (type == CLUSTER_RAW_BLKS) {
++		ret = __f2fs_get_cluster_blocks(inode, &dn);
+ 	}
+ fail:
+ 	f2fs_put_dnode(&dn);
+@@ -991,7 +993,16 @@ static int __f2fs_cluster_blocks(struct inode *inode,
+ /* return # of compressed blocks in compressed cluster */
+ static int f2fs_compressed_blocks(struct compress_ctx *cc)
+ {
+-	return __f2fs_cluster_blocks(cc->inode, cc->cluster_idx, true);
++	return __f2fs_cluster_blocks(cc->inode, cc->cluster_idx,
++		CLUSTER_COMPR_BLKS);
++}
++
++/* return # of raw blocks in non-compressed cluster */
++static int f2fs_decompressed_blocks(struct inode *inode,
++				unsigned int cluster_idx)
++{
++	return __f2fs_cluster_blocks(inode, cluster_idx,
++		CLUSTER_RAW_BLKS);
+ }
+ 
+ /* return whether cluster is compressed one or not */
+@@ -999,7 +1010,16 @@ int f2fs_is_compressed_cluster(struct inode *inode, pgoff_t index)
+ {
+ 	return __f2fs_cluster_blocks(inode,
+ 		index >> F2FS_I(inode)->i_log_cluster_size,
+-		false);
++		CLUSTER_IS_COMPR);
++}
++
++/* return whether cluster contains non raw blocks or not */
++bool f2fs_is_sparse_cluster(struct inode *inode, pgoff_t index)
++{
++	unsigned int cluster_idx = index >> F2FS_I(inode)->i_log_cluster_size;
++
++	return f2fs_decompressed_blocks(inode, cluster_idx) !=
++		F2FS_I(inode)->i_cluster_size;
+ }
+ 
+ static bool cluster_may_compress(struct compress_ctx *cc)
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 51fd5063a69c..6b5a3b692c08 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -4302,6 +4302,11 @@ static inline bool f2fs_meta_inode_gc_required(struct inode *inode)
+  * compress.c
+  */
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
++enum cluster_check_type {
++	CLUSTER_IS_COMPR,   /* check only if compressed cluster */
++	CLUSTER_COMPR_BLKS, /* return # of compressed blocks in a cluster */
++	CLUSTER_RAW_BLKS    /* return # of raw blocks in a cluster */
++};
+ bool f2fs_is_compressed_page(struct page *page);
+ struct page *f2fs_compress_control_page(struct page *page);
+ int f2fs_prepare_compress_overwrite(struct inode *inode,
+@@ -4328,6 +4333,7 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
+ 						struct writeback_control *wbc,
+ 						enum iostat_type io_type);
+ int f2fs_is_compressed_cluster(struct inode *inode, pgoff_t index);
++bool f2fs_is_sparse_cluster(struct inode *inode, pgoff_t index);
+ void f2fs_update_read_extent_tree_range_compressed(struct inode *inode,
+ 				pgoff_t fofs, block_t blkaddr,
+ 				unsigned int llen, unsigned int c_len);
+@@ -4414,6 +4420,12 @@ static inline bool f2fs_load_compressed_page(struct f2fs_sb_info *sbi,
+ static inline void f2fs_invalidate_compress_pages(struct f2fs_sb_info *sbi,
+ 							nid_t ino) { }
+ #define inc_compr_inode_stat(inode)		do { } while (0)
++static inline int f2fs_is_compressed_cluster(
++				struct inode *inode,
++				pgoff_t index) { return 0; }
++static inline bool f2fs_is_sparse_cluster(
++				struct inode *inode,
++				pgoff_t index) { return true; }
+ static inline void f2fs_update_read_extent_tree_range_compressed(
+ 				struct inode *inode,
+ 				pgoff_t fofs, block_t blkaddr,
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 270c32e3385f..0362d7ad21cc 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -4220,9 +4220,8 @@ static int f2fs_ioc_decompress_file(struct file *filp)
+ 	struct inode *inode = file_inode(filp);
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	struct f2fs_inode_info *fi = F2FS_I(inode);
+-	pgoff_t page_idx = 0, last_idx;
+-	int cluster_size = fi->i_cluster_size;
+-	int count, ret;
++	pgoff_t page_idx = 0, last_idx, cluster_idx;
++	int ret;
+ 
+ 	if (!f2fs_sb_has_compression(sbi) ||
+ 			F2FS_OPTION(sbi).compress_mode != COMPR_MODE_USER)
+@@ -4257,10 +4256,15 @@ static int f2fs_ioc_decompress_file(struct file *filp)
+ 		goto out;
+ 
+ 	last_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
++	last_idx >>= fi->i_log_cluster_size;
++
++	for (cluster_idx = 0; cluster_idx < last_idx; cluster_idx++) {
++		page_idx = cluster_idx << fi->i_log_cluster_size;
++
++		if (!f2fs_is_compressed_cluster(inode, page_idx))
++			continue;
+ 
+-	count = last_idx - page_idx;
+-	while (count && count >= cluster_size) {
+-		ret = redirty_blocks(inode, page_idx, cluster_size);
++		ret = redirty_blocks(inode, page_idx, fi->i_cluster_size);
+ 		if (ret < 0)
+ 			break;
+ 
+@@ -4270,9 +4274,6 @@ static int f2fs_ioc_decompress_file(struct file *filp)
+ 				break;
  		}
  
- 		f2fs_bug_on(sbi, page->mapping == NODE_MAPPING(sbi) &&
--					page->index != nid_of_node(page));
-+				page_folio(page)->index != nid_of_node(page));
+-		count -= cluster_size;
+-		page_idx += cluster_size;
+-
+ 		cond_resched();
+ 		if (fatal_signal_pending(current)) {
+ 			ret = -EINTR;
+@@ -4299,9 +4300,9 @@ static int f2fs_ioc_compress_file(struct file *filp)
+ {
+ 	struct inode *inode = file_inode(filp);
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+-	pgoff_t page_idx = 0, last_idx;
+-	int cluster_size = F2FS_I(inode)->i_cluster_size;
+-	int count, ret;
++	struct f2fs_inode_info *fi = F2FS_I(inode);
++	pgoff_t page_idx = 0, last_idx, cluster_idx;
++	int ret;
  
- 		dec_page_count(sbi, type);
- 		if (f2fs_in_warm_node_list(sbi, page))
-@@ -703,7 +703,7 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
- 	bio = __bio_alloc(fio, 1);
+ 	if (!f2fs_sb_has_compression(sbi) ||
+ 			F2FS_OPTION(sbi).compress_mode != COMPR_MODE_USER)
+@@ -4335,10 +4336,15 @@ static int f2fs_ioc_compress_file(struct file *filp)
+ 	set_inode_flag(inode, FI_ENABLE_COMPRESS);
  
- 	f2fs_set_bio_crypt_ctx(bio, fio->page->mapping->host,
--			       fio->page->index, fio, GFP_NOIO);
-+			page_folio(fio->page)->index, fio, GFP_NOIO);
+ 	last_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
++	last_idx >>= fi->i_log_cluster_size;
  
- 	if (bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE) {
- 		bio_put(bio);
-@@ -802,7 +802,7 @@ static int add_ipu_page(struct f2fs_io_info *fio, struct bio **bio,
- 							    fio->new_blkaddr));
- 			if (f2fs_crypt_mergeable_bio(*bio,
- 					fio->page->mapping->host,
--					fio->page->index, fio) &&
-+					page_folio(fio->page)->index, fio) &&
- 			    bio_add_page(*bio, page, PAGE_SIZE, 0) ==
- 					PAGE_SIZE) {
- 				ret = 0;
-@@ -902,7 +902,7 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
- 	if (!bio) {
- 		bio = __bio_alloc(fio, BIO_MAX_VECS);
- 		f2fs_set_bio_crypt_ctx(bio, fio->page->mapping->host,
--				       fio->page->index, fio, GFP_NOIO);
-+				page_folio(fio->page)->index, fio, GFP_NOIO);
+-	count = last_idx - page_idx;
+-	while (count && count >= cluster_size) {
+-		ret = redirty_blocks(inode, page_idx, cluster_size);
++	for (cluster_idx = 0; cluster_idx < last_idx; cluster_idx++) {
++		page_idx = cluster_idx << fi->i_log_cluster_size;
++
++		if (f2fs_is_sparse_cluster(inode, page_idx))
++			continue;
++
++		ret = redirty_blocks(inode, page_idx, fi->i_cluster_size);
+ 		if (ret < 0)
+ 			break;
  
- 		add_bio_entry(fio->sbi, bio, page, fio->temp);
- 	} else {
-@@ -995,13 +995,13 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 	    (!io_is_mergeable(sbi, io->bio, io, fio, io->last_block_in_bio,
- 			      fio->new_blkaddr) ||
- 	     !f2fs_crypt_mergeable_bio(io->bio, fio->page->mapping->host,
--				       bio_page->index, fio)))
-+				page_folio(bio_page)->index, fio)))
- 		__submit_merged_bio(io);
- alloc_new:
- 	if (io->bio == NULL) {
- 		io->bio = __bio_alloc(fio, BIO_MAX_VECS);
- 		f2fs_set_bio_crypt_ctx(io->bio, fio->page->mapping->host,
--				       bio_page->index, fio, GFP_NOIO);
-+				page_folio(bio_page)->index, fio, GFP_NOIO);
- 		io->fio = *fio;
- 	}
+@@ -4348,9 +4354,6 @@ static int f2fs_ioc_compress_file(struct file *filp)
+ 				break;
+ 		}
  
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index 5fcc952107e9..1136539a57a8 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -842,6 +842,7 @@ void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
- 	struct	f2fs_dentry_block *dentry_blk;
- 	unsigned int bit_pos;
- 	int slots = GET_DENTRY_SLOTS(le16_to_cpu(dentry->name_len));
-+	pgoff_t index = page_folio(page)->index;
- 	int i;
- 
- 	f2fs_update_time(F2FS_I_SB(dir), REQ_TIME);
-@@ -867,7 +868,7 @@ void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
- 	set_page_dirty(page);
- 
- 	if (bit_pos == NR_DENTRY_IN_BLOCK &&
--		!f2fs_truncate_hole(dir, page->index, page->index + 1)) {
-+		!f2fs_truncate_hole(dir, index, index + 1)) {
- 		f2fs_clear_page_cache_dirty_tag(page_folio(page));
- 		clear_page_dirty_for_io(page);
- 		ClearPageUptodate(page);
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 5d7e4c7f5969..b2d5c3ef8e24 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -174,7 +174,8 @@ bool f2fs_inode_chksum_verify(struct f2fs_sb_info *sbi, struct page *page)
- 
- 	if (provided != calculated)
- 		f2fs_warn(sbi, "checksum invalid, nid = %lu, ino_of_node = %x, %x vs. %x",
--			  page->index, ino_of_node(page), provided, calculated);
-+			  page_folio(page)->index, ino_of_node(page),
-+			  provided, calculated);
- 
- 	return provided == calculated;
- }
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index f5e5abce695b..59b13ff243fa 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -919,7 +919,7 @@ static int truncate_node(struct dnode_of_data *dn)
- 	clear_node_page_dirty(dn->node_page);
- 	set_sbi_flag(sbi, SBI_IS_DIRTY);
- 
--	index = dn->node_page->index;
-+	index = page_folio(dn->node_page)->index;
- 	f2fs_put_page(dn->node_page, 1);
- 
- 	invalidate_mapping_pages(NODE_MAPPING(sbi),
-@@ -1869,7 +1869,7 @@ int f2fs_fsync_node_pages(struct f2fs_sb_info *sbi, struct inode *inode,
- 	}
- 	if (!ret && atomic && !marked) {
- 		f2fs_debug(sbi, "Retry to write fsync mark: ino=%u, idx=%lx",
--			   ino, last_page->index);
-+			   ino, page_folio(last_page)->index);
- 		lock_page(last_page);
- 		f2fs_wait_on_page_writeback(last_page, NODE, true, true);
- 		set_page_dirty(last_page);
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 3bda3f707007..fafbb1cbcb57 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -3564,7 +3564,8 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
- 		if (file_is_cold(inode) || f2fs_need_compress_data(inode))
- 			return CURSEG_COLD_DATA;
- 
--		type = __get_age_segment_type(inode, fio->page->index);
-+		type = __get_age_segment_type(inode,
-+				page_folio(fio->page)->index);
- 		if (type != NO_CHECK_TYPE)
- 			return type;
- 
+-		count -= cluster_size;
+-		page_idx += cluster_size;
+-
+ 		cond_resched();
+ 		if (fatal_signal_pending(current)) {
+ 			ret = -EINTR;
 -- 
 2.40.1
 
