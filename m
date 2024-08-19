@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83FC39560D9
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2024 03:21:12 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA9309560DA
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Aug 2024 03:21:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sfr55-0004bg-Sj;
-	Mon, 19 Aug 2024 01:21:11 +0000
+	id 1sfr57-0006Pk-9D;
+	Mon, 19 Aug 2024 01:21:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1sfr54-0004ba-Jq
+ (envelope-from <chao@kernel.org>) id 1sfr56-0006Pe-Bo
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Aug 2024 01:21:10 +0000
+ Mon, 19 Aug 2024 01:21:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pVkda070V/cbUxqxCp8oMh9qO6QLojXvPwXoNvqbT50=; b=gYqcIlaVedLtFNiGiy57qKgr+j
- /vX7DVdY1SYjxvFUGaIPyQ8A3Cv21lAoVM+mTfsQbGvZADjXrxDV/ZCQFQStzGJuEcQznmf30saKz
- mmZNJNk2ILbu0J6/GOczHMEpyT283Mi7NWEUA+GudNt5K1dA77SPUw2plNC4t8cQQBjE=;
+ bh=loFIPCariodcezIm7vURmikq8qlYJs1bGmAvOLs/g68=; b=nAB5HsqF/rQEKq47uw02/hDp82
+ 4da4VV9JIgQ5DZg6WD4EF/UD1pV2/x4lG4Mc4hwfVQnJKbaBC9mB01tHESH5LgCxErcWGCM1XIsf5
+ HkITLjQ6gL2B1iwgPpfDjCEtQbYfGU/qCr23cnaeaVK1twohe+aSmjy+bhsbB02Imvzw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,40 +31,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pVkda070V/cbUxqxCp8oMh9qO6QLojXvPwXoNvqbT50=; b=MYugnlEyxWJ/Pv1Fbfsx3IqLhB
- rTMzdy+yDK2D0pqzliCr+aSV+FklJjRud/prvM1fnU44glEGXmL3qsRBdGMioN90Rp6mAuMFfRyuf
- 3CMWPoaC5/516ZhrYZLhYWQKA7zk6iM/k7klAUV86JjRFVa1keYvinFotsBXelV25jwM=;
+ bh=loFIPCariodcezIm7vURmikq8qlYJs1bGmAvOLs/g68=; b=bhEFoti+Oqc1Ei+Akxwp6+moy0
+ i/R1dYvupDkiejS9JRytQD+cjM3fE4q0yQINNMAI89JCMHhBs1EXeaKMeAbKX9izOgaCYpybNRrJE
+ l5+XfnJsiOpYRl4Qejr4tMAAj2CfSwF0thl9ugVMRTk9d81Hp8jjKYReG2PFQnbHqSmU=;
 Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sfr53-0003Zi-5h for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Aug 2024 01:21:09 +0000
+ id 1sfr55-0003Zp-7I for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Aug 2024 01:21:12 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 69AC8CE092B;
+ by sin.source.kernel.org (Postfix) with ESMTP id 516A4CE0918;
+ Mon, 19 Aug 2024 01:21:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79264C4AF0F;
  Mon, 19 Aug 2024 01:21:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 92440C32786;
- Mon, 19 Aug 2024 01:21:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1724030462;
- bh=Gv9T9VqQEXP+t9GsufY3LhPD+LhHvt38T1omk9U0JGM=;
+ s=k20201202; t=1724030463;
+ bh=kXH69VauKPWX1aj+cT6JMgD13fkLJ9/JjHzU17y6Nko=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ZbRYsQzetuZRIRFPWhOiNqwQxgfMVNcgiXrmvVe0jjaau42YXhHHUtDXQYsNxAHPh
- GVPmMfmspB2yvdcXUBQ43orXBKCF59vSuW7T+XkhFZc4btSv89jvK9qvZ5B/0DkqQQ
- 803lkBBj/zf6CeXNu6+g9yNzxzpWu2o5hWhDDmOB/zlP4tNYHjPqcvreiQNuCY1RRm
- 38ZTIv028YQqmHv7mvYxUZQPs3p+3LqSrfVa/a6bC6QRuOexT8lN3iIhZx9UlF9hog
- J4tAGzPVTZpWCo4g+5tWXZ6XPifxbQrdnV7TK2A1pyNQRgb9TiSOG02+zO9ZynPE7g
- vqBK06cFORMjQ==
+ b=dUKrUfhcpOfGXfk1uInYHej6JA0dyGjBkCMuJrjvVXcBIgXNtZ/XOiEDsN0K7gGaZ
+ FMaqm4Eba+8bojSXs+rByMQv8YEtMTiYtG1+eh2QReDVC9TAR8Fsm/iiAEha5plGd3
+ 6zl9EQnnBg2m2A/F6ZfV6JG6dI0YVHXRJzKANT0UVuPE+Y9ssLRQWw/KHpCC2sF+xR
+ gA+gl1ZAne6NKInS6BGQWa8qShmmdrMLPwrEPEYos4IuMqn80uHa11LDwMnHsPyIxt
+ sH4l1vtrQBv2g5YbhtkZe6pY63mwGhSrZIarep9Zb5rySNaAg1T6eabGyaqtzUpBUT
+ AXu+RmSLwHPlQ==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Mon, 19 Aug 2024 09:20:20 +0800
-Message-Id: <20240819012023.3871272-5-chao@kernel.org>
+Date: Mon, 19 Aug 2024 09:20:21 +0800
+Message-Id: <20240819012023.3871272-6-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240819012023.3871272-1-chao@kernel.org>
 References: <20240819012023.3871272-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -74,38 +74,38 @@ X-Spam-Report: Spam detection software,
  https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
  Cc: Matthew Wilcox <willy@infradead.org> Signed-off-by: Chao Yu
  <chao@kernel.org>
- --- fs/f2fs/data.c | 9 +++++---- 1 file changed, 5 insertions(+),
- 4 deletions(-)
+ --- fs/f2fs/node.c | 19 ++++++++++--------- 1 file changed, 10 insertions(+), 
+ 9 deletions(-) 
  Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [145.40.73.55 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+ DNSWL was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [145.40.73.55 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [145.40.73.55 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [145.40.73.55 listed in sa-trusted.bondedsender.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [145.40.73.55 listed in list.dnswl.org]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sfr53-0003Zi-5h
-Subject: [f2fs-dev] [PATCH 5/8] f2fs: convert f2fs_write_data_page() to use
+X-Headers-End: 1sfr55-0003Zp-7I
+Subject: [f2fs-dev] [PATCH 6/8] f2fs: convert __write_node_page() to use
  folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -132,39 +132,87 @@ prepare for removal of 'index' field in structure page [1].
 Cc: Matthew Wilcox <willy@infradead.org>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/data.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ fs/f2fs/node.c | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index c57ddee2c7c5..e69097267b99 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2945,22 +2945,23 @@ int f2fs_write_single_data_page(struct folio *folio, int *submitted,
- static int f2fs_write_data_page(struct page *page,
- 					struct writeback_control *wbc)
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 7beaa3690e03..aeda3eecc9e2 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1608,6 +1608,7 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+ 				enum iostat_type io_type, unsigned int *seq_id)
  {
+ 	struct f2fs_sb_info *sbi = F2FS_P_SB(page);
 +	struct folio *folio = page_folio(page);
- #ifdef CONFIG_F2FS_FS_COMPRESSION
--	struct inode *inode = page->mapping->host;
-+	struct inode *inode = folio->mapping->host;
+ 	nid_t nid;
+ 	struct node_info ni;
+ 	struct f2fs_io_info fio = {
+@@ -1624,15 +1625,15 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+ 	};
+ 	unsigned int seq;
  
- 	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
- 		goto out;
+-	trace_f2fs_writepage(page_folio(page), NODE);
++	trace_f2fs_writepage(folio, NODE);
  
- 	if (f2fs_compressed_file(inode)) {
--		if (f2fs_is_compressed_cluster(inode, page->index)) {
--			redirty_page_for_writepage(wbc, page);
-+		if (f2fs_is_compressed_cluster(inode, folio->index)) {
-+			folio_redirty_for_writepage(wbc, folio);
- 			return AOP_WRITEPAGE_ACTIVATE;
- 		}
+ 	if (unlikely(f2fs_cp_error(sbi))) {
+ 		/* keep node pages in remount-ro mode */
+ 		if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_READONLY)
+ 			goto redirty_out;
+-		ClearPageUptodate(page);
++		folio_clear_uptodate(folio);
+ 		dec_page_count(sbi, F2FS_DIRTY_NODES);
+-		unlock_page(page);
++		folio_unlock(folio);
+ 		return 0;
  	}
- out:
- #endif
  
--	return f2fs_write_single_data_page(page_folio(page), NULL, NULL, NULL,
-+	return f2fs_write_single_data_page(folio, NULL, NULL, NULL,
- 						wbc, FS_DATA_IO, 0, true);
+@@ -1646,7 +1647,7 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+ 
+ 	/* get old block addr of this node page */
+ 	nid = nid_of_node(page);
+-	f2fs_bug_on(sbi, page->index != nid);
++	f2fs_bug_on(sbi, folio->index != nid);
+ 
+ 	if (f2fs_get_node_info(sbi, nid, &ni, !do_balance))
+ 		goto redirty_out;
+@@ -1660,10 +1661,10 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+ 
+ 	/* This page is already truncated */
+ 	if (unlikely(ni.blk_addr == NULL_ADDR)) {
+-		ClearPageUptodate(page);
++		folio_clear_uptodate(folio);
+ 		dec_page_count(sbi, F2FS_DIRTY_NODES);
+ 		f2fs_up_read(&sbi->node_write);
+-		unlock_page(page);
++		folio_unlock(folio);
+ 		return 0;
+ 	}
+ 
+@@ -1684,7 +1685,7 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+ 			*seq_id = seq;
+ 	}
+ 
+-	set_page_writeback(page);
++	folio_start_writeback(folio);
+ 
+ 	fio.old_blkaddr = ni.blk_addr;
+ 	f2fs_do_write_node_page(nid, &fio);
+@@ -1697,7 +1698,7 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+ 		submitted = NULL;
+ 	}
+ 
+-	unlock_page(page);
++	folio_unlock(folio);
+ 
+ 	if (unlikely(f2fs_cp_error(sbi))) {
+ 		f2fs_submit_merged_write(sbi, NODE);
+@@ -1711,7 +1712,7 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+ 	return 0;
+ 
+ redirty_out:
+-	redirty_page_for_writepage(wbc, page);
++	folio_redirty_for_writepage(wbc, folio);
+ 	return AOP_WRITEPAGE_ACTIVATE;
  }
  
 -- 
