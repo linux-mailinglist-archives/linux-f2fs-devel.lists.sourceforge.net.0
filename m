@@ -2,178 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48EDF957B93
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Aug 2024 04:45:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B370957BBF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Aug 2024 05:05:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sgErz-0000u1-RG;
-	Tue, 20 Aug 2024 02:45:15 +0000
+	id 1sgFAy-0006zD-Gi;
+	Tue, 20 Aug 2024 03:04:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <s_min.jeong@samsung.com>) id 1sgErx-0000tu-EW
+ (envelope-from <lizetao1@huawei.com>) id 1sgFAw-0006z7-PZ
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Aug 2024 02:45:13 +0000
+ Tue, 20 Aug 2024 03:04:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- MIME-Version:Message-ID:Date:Subject:In-Reply-To:Cc:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:CC:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uOUsp2Icyjguhl9fIySIi7C6jdasryy0Oh8rEgg4v8c=; b=lwrVwK0LwtcPJSQX7+awYY5qBx
- Nlo6RL/0tp5M+ZzCcOgJbAjME+laPunHUmGzPUPzh0juVzGCdCtUtEMt0yFWraq+djV+w9VBBxNbI
- PCtkM9WQ1BP3EB1jOH7v6EL/rKAiD/b84werPVE51PZ3hPGwRBvu3dCyiNWy+RcCepH0=;
+ bh=/NjW8uEolC9vsfatKG8PZgv56JHDiCECERPrlN/XsE0=; b=X79KzrRVh+pgvXg+JZEemAJ8VO
+ +CB1q9c268rWyGuRB55jNuWi0Gsbcyw9kajdTnaOJwmoNKzEoyVtX1GMaKzqmTYqP0DA4BIGFVXG/
+ 5UvwlM05Q4/eU2LD4YAGb7/NT8FuhllyCFiR9SALUBm+r+6J7qoL7cN1S+hVG4Ur+kPo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID
- :Date:Subject:In-Reply-To:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:CC:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uOUsp2Icyjguhl9fIySIi7C6jdasryy0Oh8rEgg4v8c=; b=POmr1eH4Df/2wN25R9VnHf5q8U
- bUdxrfOt2oTWzx/qGgyMvBmYCGpSz46zL05F2Ug7hdSpspF7vRofmi5BRfDIgfGqqJaOcdeo5f84C
- JalgxJcu9PqPPWmPZnpWFdoPUuih5PIxu5P+l6qqdQndR/vgRhl9VwNkTxIseveCeY74=;
-Received: from mailout4.samsung.com ([203.254.224.34])
+ bh=/NjW8uEolC9vsfatKG8PZgv56JHDiCECERPrlN/XsE0=; b=BodtKY+RjIAyiOoK9lZ3W9Wrti
+ SsxGtpbp6ygaTwQ4jw56NtniMNfgLDxgge29/SoRabILi6Y+tYbxkXy1F32bL3E3SbeGr5/VtbZ5t
+ MjTXrRmlMd9nO8j1c1l34Pf/7DAzecGRFLYphUNrEV4tPC54dmk4+abIAE8ga6I5TAZw=;
+Received: from szxga05-in.huawei.com ([45.249.212.191])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sgErv-0002nr-MQ for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Aug 2024 02:45:13 +0000
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20240820024459epoutp0404d59a039586382b57b3983507aec3a1~tT7uf8jjR0112201122epoutp04c
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 20 Aug 2024 02:44:59 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20240820024459epoutp0404d59a039586382b57b3983507aec3a1~tT7uf8jjR0112201122epoutp04c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1724121899;
- bh=uOUsp2Icyjguhl9fIySIi7C6jdasryy0Oh8rEgg4v8c=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=q4WxWuQgYAaBvjCt1yEgHXRj1sXAd1df+OVfsohZ1bnDFv6HaFOWCfZnth5ufT2Qz
- T6AcYX4d58bOckBjBZ51sL3s1x2hm0PYBghS+7M2pCbLnSEwmwo6pIdk6FMU7u3u1N
- 9Bbnct+C9GwakL8dxbrKUPAB9kEQ6V/p7bfzKW1s=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20240820024459epcas1p4ca50310821f59cc9142ec268a2c6ac30~tT7uI8iQd2303123031epcas1p48;
- Tue, 20 Aug 2024 02:44:59 +0000 (GMT)
-Received: from epsmges1p4.samsung.com (unknown [182.195.36.225]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4Wnv2L6NdVz4x9Pv; Tue, 20 Aug
- 2024 02:44:58 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- CE.0A.10258.A2304C66; Tue, 20 Aug 2024 11:44:58 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20240820024458epcas1p4b3bf4d42997870503bf57de45cd70fff~tT7td12FV2862028620epcas1p4S;
- Tue, 20 Aug 2024 02:44:58 +0000 (GMT)
-Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240820024458epsmtrp2072307dfd3d3e9a2d3a7ed303a0d2bf0~tT7tdPJ7b2857328573epsmtrp2R;
- Tue, 20 Aug 2024 02:44:58 +0000 (GMT)
-X-AuditID: b6c32a38-9ebb870000002812-10-66c4032ad489
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 6A.11.07567.A2304C66; Tue, 20 Aug 2024 11:44:58 +0900 (KST)
-Received: from sminjeong05 (unknown [10.253.99.183]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20240820024458epsmtip2c7f645bd56dc25285a8597c9c5e341b3~tT7tN-7iD0770507705epsmtip27;
- Tue, 20 Aug 2024 02:44:58 +0000 (GMT)
-From: "Sunmin Jeong" <s_min.jeong@samsung.com>
-To: "'Chao Yu'" <chao@kernel.org>, <jaegeuk@kernel.org>
-In-Reply-To: <20240814134815.801303-1-chao@kernel.org>
-Date: Tue, 20 Aug 2024 11:44:58 +0900
-Message-ID: <002e01daf2aa$f22d5430$d687fc90$@samsung.com>
+ id 1sgFAv-0003j0-AN for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Aug 2024 03:04:50 +0000
+Received: from mail.maildlp.com (unknown [172.19.163.44])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4WnvMF3YS8z1j6lf;
+ Tue, 20 Aug 2024 10:59:37 +0800 (CST)
+Received: from kwepemd500012.china.huawei.com (unknown [7.221.188.25])
+ by mail.maildlp.com (Postfix) with ESMTPS id 99D3514010C;
+ Tue, 20 Aug 2024 11:04:36 +0800 (CST)
+Received: from [10.67.111.176] (10.67.111.176) by
+ kwepemd500012.china.huawei.com (7.221.188.25) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.34; Tue, 20 Aug 2024 11:04:36 +0800
+Message-ID: <52808e24-923d-4758-a08f-7bba87fc42b0@huawei.com>
+Date: Tue, 20 Aug 2024 11:04:35 +0800
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: ko
-Thread-Index: AQLn9uQSv5kHFHDHqqjb+IXcXHMvoQHoUZ1QsAYfsRA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrPKsWRmVeSWpSXmKPExsWy7bCmnq4W85E0g32ndS1OTz3LZPFk/Sxm
- i0uL3C0u75rD5sDisWlVJ5vH7gWfmTw+b5ILYI7KtslITUxJLVJIzUvOT8nMS7dV8g6Od443
- NTMw1DW0tDBXUshLzE21VXLxCdB1y8wBWqakUJaYUwoUCkgsLlbSt7Mpyi8tSVXIyC8usVVK
- LUjJKTAr0CtOzC0uzUvXy0stsTI0MDAyBSpMyM44fWoFe8F86Yr3XxayNTBuFuti5OSQEDCR
- ODGxhaWLkYtDSGAHo8T3xbuZIZxPjBKLny9lhXC+MUrcPtDLDNOybl8/E0RiL6PE2qdnoape
- Mko87/nLDlLFJqAnMX31P7AOEQFziT2LX7GB2MwCPhK/b90Di3MKmElsv3aBFcQWFkiUmPDs
- HxOIzSKgKnF0wkRGEJtXwFLi6PlvrBC2oMTJmU9YIObIS2x/OwfqIgWJn0+XsULERSRmd7ZB
- 7bWSaO15APachMBbdoktu04zQjS4SDx+tpUVwhaWeHV8CzuELSXx+d1eNgi7WOLo/A3sEM0N
- jBI3vt6EKrKXaG5tBiriANqmKbF+lz7EYj6Jd197WEHCEgK8Eh1tQhDVqhLdj5ZA3SktsezY
- QagpHhJzl/9nncCoOAvJa7OQvDYLyTuzEJYtYGRZxSiWWlCcm55abFhgAo/u5PzcTYzglKhl
- sYNx7tsPeocYmTgYDzFKcDArifB2vzyYJsSbklhZlVqUH19UmpNafIjRFBjYE5mlRJPzgUk5
- ryTe0MTSwMTMyMTC2NLYTEmc98yVslQhgfTEktTs1NSC1CKYPiYOTqkGJunGfbr3xB2rvpcv
- Paa7ZUvojeNJDGx6LzhUWDy3v3KMi3jfEHla5eaBGR4vEk8tepWUKvtzo4fZ7x38advTzTcJ
- bijQ7JH8NCd0YsmuffUX1SZt5jdt05HROh2Qs79b92jd0rQ9K/pqGI0UfNuLxLPuaexPS5fU
- b/lXduD2EbZY1z07jJzkClPj3Z5fY3S6pFr8csf7ScLW3dInP12N9+OIrWeZqq7skaeZX9+x
- VvUlx03NhNjODRGb/R1vf717NnNDo8LlDKFbj1ieX7dky/cQ4j3L+UzU88EcuxLZ+EtvOP6U
- aRyUW/C6U94mn81usgHjc41mzYpzk4/7OB8pMOdIWJO3aEqAr1aRuZESS3FGoqEWc1FxIgA2
- rFlLEgQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrGLMWRmVeSWpSXmKPExsWy7bCSvK4W85E0gyWfhC1OTz3LZPFk/Sxm
- i0uL3C0u75rD5sDisWlVJ5vH7gWfmTw+b5ILYI7isklJzcksSy3St0vgyjh9agV7wXzpivdf
- FrI1MG4W62Lk5JAQMJFYt6+fqYuRi0NIYDejxIWbbSxdjBxACWmJY3+KIExhicOHiyFKnjNK
- fDx3gAmkl01AT2L66n/MILaIgKXEglnnWEBsZgE/iV0PVzBDNLQzSrzpWMIOkuAUMJPYfu0C
- K4gtLBAvMfPMREYQm0VAVeLoBAibF2jQ0fPfWCFsQYmTM5+A3cMMtKxtIyPEfHmJ7W/nMEPc
- ryDx8+kyVoi4iMTszjaoe6wkWnsesExgFJ6FZNIshEmzkEyahaR7ASPLKkbJ1ILi3PTcZMMC
- w7zUcr3ixNzi0rx0veT83E2M4KjQ0tjBeG/+P71DjEwcjIcYJTiYlUR4u18eTBPiTUmsrEot
- yo8vKs1JLT7EKM3BoiTOazhjdoqQQHpiSWp2ampBahFMlomDU6qB6Z2igq9KAeOXq/bhP996
- Vy6etd3Ki+9Y7sVHjsdizqS8m9pZckflsPUzhpIIJesu+QpL8eeHLO6+EVYK4svoWnayxN7o
- ot5Kztjr9zki54jXs/3U//x+AzvP+bBNa5cYLmm75an+PXLWr/9brwrqfdiqKKuyfcnMidb5
- rPyfg1sbzUKTXzjc5fnwii3sdsyK1Yuv8gm9Kr1XdL5Scvfqn7ee536r0ij99obxc0igOe+6
- L76L5vkwqV/qZD8gJKOwafaFQOEuXman9wvVTqxt9NP+VjffkF1Lq/Qgg7ZkI39ay345B7FN
- vWZLGLk89st92u7FeVLmmd7+qJVJ10o/XjAQF2p/2OIapG83o2C3EktxRqKhFnNRcSIAomEB
- +/kCAAA=
-X-CMS-MailID: 20240820024458epcas1p4b3bf4d42997870503bf57de45cd70fff
-X-Msg-Generator: CA
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240814135008epcas1p3e11d629481d51a4cc4af78dbe3e66fda
-References: <CGME20240814135008epcas1p3e11d629481d51a4cc4af78dbe3e66fda@epcas1p3.samsung.com>
- <20240814134815.801303-1-chao@kernel.org>
-X-Spam-Score: -0.3 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+User-Agent: Mozilla Thunderbird
+To: Chao Yu <chao@kernel.org>, <jaegeuk@kernel.org>
+References: <20240819012023.3871272-1-chao@kernel.org>
+ <20240819012023.3871272-2-chao@kernel.org>
+In-Reply-To: <20240819012023.3871272-2-chao@kernel.org>
+X-Originating-IP: [10.67.111.176]
+X-ClientProxiedBy: dggpeml100002.china.huawei.com (7.185.36.130) To
+ kwepemd500012.china.huawei.com (7.221.188.25)
+X-Spam-Score: -0.0 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello Chao Yu,
- >SQLite App GC Thread Shrinker >- f2fs_ioc_start_atomic_write
- > >- f2fs_ioc_commit_atomic_write > - f2fs_commit_atomic_write > -
- filemap_write_and_wait_range
- > : write atomic_file's data to cow_inode [...] 
- Content analysis details:   (-0.3 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  Hi, 在 2024/8/19 9:20, Chao Yu 写道: > Convert to use folio,
+    so that we can get rid of 'page->index' to > prepare for removal of 'index'
+    field in structure page [1]. > > [1] https://lore.kernel.org/all [...] 
+ 
+ Content analysis details:   (-0.0 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: samsung.com]
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [203.254.224.34 listed in sa-trusted.bondedsender.org]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [203.254.224.34 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.254.224.34 listed in wl.mailspike.net]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+                             query to Validity was blocked.  See
+                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
+                              for more information.
+                             [45.249.212.191 listed in sa-accredit.habeas.com]
+  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+                             query to Validity was blocked.  See
+                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
+                              for more information.
+                            [45.249.212.191 listed in bl.score.senderscore.com]
+  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
+                             DNSWL was blocked.  See
+                             http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+                              for more information.
+                             [45.249.212.191 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sgErv-0002nr-MQ
-Subject: Re: [f2fs-dev] [PATCH v2 2/4] f2fs: atomic: fix to not allow GC to
- pollute atomic_file
+X-Headers-End: 1sgFAv-0003j0-AN
+Subject: Re: [f2fs-dev] [PATCH 2/8] f2fs: convert f2fs_write_end() to use
+ folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -185,132 +107,73 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+From: Li Zetao via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Li Zetao <lizetao1@huawei.com>
+Cc: linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello Chao Yu,
-
->SQLite App			GC Thread	Shrinker
->- f2fs_ioc_start_atomic_write
->
->- f2fs_ioc_commit_atomic_write
-> - f2fs_commit_atomic_write
->  - filemap_write_and_wait_range
->  : write atomic_file's data to cow_inode
->						echo 3 > drop_caches
->				- f2fs_gc
->				 - gc_data_segment
->				  - move_data_page
-
-We modified the code to make GC of the atomic file go to move_data_block
-in commit b40a2b003709 (f2fs: use meta inode for GC of atomic file).
-Could you please check if this patch is still necessary?
-
-Thanks,
-
->				   - set_page_dirty
->				   : it may load data of previous
->				     transaction into pagecache.
->  - f2fs_down_write(&fi->i_gc_rwsem[WRITE])
->  - __f2fs_commit_atomic_write
->  - f2fs_up_write(&fi->i_gc_rwsem[WRITE])
->
->During committing atomic_file, GC may be triggered to migrate atomic_file's
->block, so it may contain data of previous transaction in page cache, we
->should drop atomic_file's cache once it was migrated by GC.
->
->And also, we should writeback atomic_file and cow_file's data w/ i_gc_rwsem
->lock held, in order to avoid block address change during
->__f2fs_commit_atomic_write().
->
->Meahwhile, this patch adds f2fs_wait_on_block_writeback_range()
->to wait completion of block migration.
->
->Fixes: 3db1de0e582c ("f2fs: change the current atomic write way")
->Signed-off-by: Chao Yu <chao@kernel.org>
->---
->v2:
->- fix error path handling.
-> fs/f2fs/segment.c | 27 +++++++++++++++++++++++----
-> 1 file changed, 23 insertions(+), 4 deletions(-)
->
->diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c index
->3aee71c9f3c6..a43054ab0cf1 100644
->--- a/fs/f2fs/segment.c
->+++ b/fs/f2fs/segment.c
->@@ -236,6 +236,9 @@ static int __replace_atomic_write_block(struct inode
->*inode, pgoff_t index,
-> 		return err;
-> 	}
->
->+	if (__is_valid_data_blkaddr(dn.data_blkaddr))
->+		f2fs_wait_on_block_writeback_range(inode, dn.data_blkaddr,
-1);
->+
-> 	if (recover) {
-> 		/* dn.data_blkaddr is always valid */
-> 		if (!__is_valid_data_blkaddr(new_addr)) { @@ -339,6 +342,9
-@@
->static int __f2fs_commit_atomic_write(struct inode *inode)
-> 				goto out;
-> 			}
->
->+			f2fs_wait_on_block_writeback_range(cow_inode,
->+								blkaddr, 1);
->+
-> 			new = f2fs_kmem_cache_alloc(revoke_entry_slab,
-GFP_NOFS,
-> 							true, NULL);
->
->@@ -379,16 +385,29 @@ int f2fs_commit_atomic_write(struct inode *inode)
-> 	struct f2fs_inode_info *fi = F2FS_I(inode);
-> 	int err;
->
->+	f2fs_down_write(&fi->i_gc_rwsem[WRITE]);
->+
-> 	err = filemap_write_and_wait_range(inode->i_mapping, 0, LLONG_MAX);
-> 	if (err)
->-		return err;
->+		goto out;
->
->-	f2fs_down_write(&fi->i_gc_rwsem[WRITE]);
->-	f2fs_lock_op(sbi);
->+	/* writeback GCing page of cow_inode */
->+	err = filemap_write_and_wait_range(fi->cow_inode->i_mapping,
->+							0, LLONG_MAX);
->+	if (err)
->+		goto out;
->
->-	err = __f2fs_commit_atomic_write(inode);
->+	filemap_invalidate_lock(inode->i_mapping);
->+
->+	/* don't allow clean page loaded by GC to pollute atomic_file */
->+	truncate_pagecache(inode, 0);
->
->+	f2fs_lock_op(sbi);
->+	err = __f2fs_commit_atomic_write(inode);
-> 	f2fs_unlock_op(sbi);
->+
->+	filemap_invalidate_unlock(inode->i_mapping);
->+out:
-> 	f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
->
-> 	return err;
->--
->2.40.1
->
->
->
->_______________________________________________
->Linux-f2fs-devel mailing list
->Linux-f2fs-devel@lists.sourceforge.net
->https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+SGksCgrlnKggMjAyNC84LzE5IDk6MjAsIENoYW8gWXUg5YaZ6YGTOgo+IENvbnZlcnQgdG8gdXNl
+IGZvbGlvLCBzbyB0aGF0IHdlIGNhbiBnZXQgcmlkIG9mICdwYWdlLT5pbmRleCcgdG8KPiBwcmVw
+YXJlIGZvciByZW1vdmFsIG9mICdpbmRleCcgZmllbGQgaW4gc3RydWN0dXJlIHBhZ2UgWzFdLgo+
+IAo+IFsxXSBodHRwczovL2xvcmUua2VybmVsLm9yZy9hbGwvWnA4ZmdVU0lCR1ExVE4wREBjYXNw
+ZXIuaW5mcmFkZWFkLm9yZy8KPiAKPiBDYzogTWF0dGhldyBXaWxjb3ggPHdpbGx5QGluZnJhZGVh
+ZC5vcmc+Cj4gU2lnbmVkLW9mZi1ieTogQ2hhbyBZdSA8Y2hhb0BrZXJuZWwub3JnPgo+IC0tLQo+
+ICAgZnMvZjJmcy9kYXRhLmMgfCAxOSArKysrKysrKysrLS0tLS0tLS0tCj4gICAxIGZpbGUgY2hh
+bmdlZCwgMTAgaW5zZXJ0aW9ucygrKSwgOSBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEv
+ZnMvZjJmcy9kYXRhLmMgYi9mcy9mMmZzL2RhdGEuYwo+IGluZGV4IDllMWFkZTEzMDYwYy4uZTEx
+NGQ3MzhiNmI0IDEwMDY0NAo+IC0tLSBhL2ZzL2YyZnMvZGF0YS5jCj4gKysrIGIvZnMvZjJmcy9k
+YXRhLmMKPiBAQCAtMzM3OCw3ICszMzc4LDcgQEAgdm9pZCBmMmZzX3dyaXRlX2ZhaWxlZChzdHJ1
+Y3QgaW5vZGUgKmlub2RlLCBsb2ZmX3QgdG8pCj4gICB9Cj4gICAKPiAgIHN0YXRpYyBpbnQgcHJl
+cGFyZV93cml0ZV9iZWdpbihzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmksCj4gLQkJCXN0cnVjdCBw
+YWdlICpwYWdlLCBsb2ZmX3QgcG9zLCB1bnNpZ25lZCBsZW4sCj4gKwkJCXN0cnVjdCBmb2xpbyAq
+Zm9saW8sIGxvZmZfdCBwb3MsIHVuc2lnbmVkIGludCBsZW4sCj4gICAJCQlibG9ja190ICpibGtf
+YWRkciwgYm9vbCAqbm9kZV9jaGFuZ2VkKQo+ICAgewo+ICAgCXN0cnVjdCBpbm9kZSAqaW5vZGUg
+PSBmb2xpby0+bWFwcGluZy0+aG9zdDsKPiBAQCAtMzQyNSw3ICszNDI1LDcgQEAgc3RhdGljIGlu
+dCBwcmVwYXJlX3dyaXRlX2JlZ2luKHN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaSwKPiAgIAkJCQlz
+ZXRfcGFnZV9wcml2YXRlX2lubGluZShpcGFnZSk7Cj4gICAJCQlnb3RvIG91dDsKPiAgIAkJfQo+
+IC0JCWVyciA9IGYyZnNfY29udmVydF9pbmxpbmVfcGFnZSgmZG4sIHBhZ2UpOwo+ICsJCWVyciA9
+IGYyZnNfY29udmVydF9pbmxpbmVfcGFnZSgmZG4sIGZvbGlvX3BhZ2UoZm9saW8sIDApKTsKPiAg
+IAkJaWYgKGVyciB8fCBkbi5kYXRhX2Jsa2FkZHIgIT0gTlVMTF9BRERSKQo+ICAgCQkJZ290byBv
+dXQ7Cj4gICAJfQo+IEBAIC0zNjI5LDcgKzM2MjksNyBAQCBzdGF0aWMgaW50IGYyZnNfd3JpdGVf
+YmVnaW4oc3RydWN0IGZpbGUgKmZpbGUsIHN0cnVjdCBhZGRyZXNzX3NwYWNlICptYXBwaW5nLAo+
+ICAgCWZvbGlvID0gcGFnZV9mb2xpbyhwYWdlKTsKPiAgIAo+ICAgCWlmIChmMmZzX2lzX2F0b21p
+Y19maWxlKGlub2RlKSkKPiAtCQllcnIgPSBwcmVwYXJlX2F0b21pY193cml0ZV9iZWdpbihzYmks
+IGZvbGlvLCBwb3MsIGxlbgo+ICsJCWVyciA9IHByZXBhcmVfYXRvbWljX3dyaXRlX2JlZ2luKHNi
+aSwgZm9saW8sIHBvcywgbGVuLApUaGlzIGhhcyBiZWVuIGNoYW5nZWQgaW4gdGhlIGZpcnN0IHBh
+dGNoLCBpdCBpcyByZWR1bmRhbnQgaGVyZS4KPiAgIAkJCQkJJmJsa2FkZHIsICZuZWVkX2JhbGFu
+Y2UsICZ1c2VfY293KTsKPiAgIAllbHNlCj4gICAJCWVyciA9IHByZXBhcmVfd3JpdGVfYmVnaW4o
+c2JpLCBmb2xpbywgcG9zLCBsZW4sCj4gQEAgLTM2OTgsNyArMzY5OCw4IEBAIHN0YXRpYyBpbnQg
+ZjJmc193cml0ZV9lbmQoc3RydWN0IGZpbGUgKmZpbGUsCj4gICAJCQlsb2ZmX3QgcG9zLCB1bnNp
+Z25lZCBsZW4sIHVuc2lnbmVkIGNvcGllZCwKPiAgIAkJCXN0cnVjdCBwYWdlICpwYWdlLCB2b2lk
+ICpmc2RhdGEpCj4gICB7Cj4gLQlzdHJ1Y3QgaW5vZGUgKmlub2RlID0gcGFnZS0+bWFwcGluZy0+
+aG9zdDsKPiArCXN0cnVjdCBmb2xpbyAqZm9saW8gPSBwYWdlX2ZvbGlvKHBhZ2UpOwo+ICsJc3Ry
+dWN0IGlub2RlICppbm9kZSA9IGZvbGlvLT5tYXBwaW5nLT5ob3N0Owo+ICAgCj4gICAJdHJhY2Vf
+ZjJmc193cml0ZV9lbmQoaW5vZGUsIHBvcywgbGVuLCBjb3BpZWQpOwo+ICAgCj4gQEAgLTM3MDcs
+MTcgKzM3MDgsMTcgQEAgc3RhdGljIGludCBmMmZzX3dyaXRlX2VuZChzdHJ1Y3QgZmlsZSAqZmls
+ZSwKPiAgIAkgKiBzaG91bGQgYmUgUEFHRV9TSVpFLiBPdGhlcndpc2UsIHdlIHRyZWF0IGl0IHdp
+dGggemVybyBjb3BpZWQgYW5kCj4gICAJICogbGV0IGdlbmVyaWNfcGVyZm9ybV93cml0ZSgpIHRy
+eSB0byBjb3B5IGRhdGEgYWdhaW4gdGhyb3VnaCBjb3BpZWQ9MC4KPiAgIAkgKi8KPiAtCWlmICgh
+UGFnZVVwdG9kYXRlKHBhZ2UpKSB7Cj4gKwlpZiAoIWZvbGlvX3Rlc3RfdXB0b2RhdGUoZm9saW8p
+KSB7Cj4gICAJCWlmICh1bmxpa2VseShjb3BpZWQgIT0gbGVuKSkKPiAgIAkJCWNvcGllZCA9IDA7
+Cj4gICAJCWVsc2UKPiAtCQkJU2V0UGFnZVVwdG9kYXRlKHBhZ2UpOwo+ICsJCQlmb2xpb19tYXJr
+X3VwdG9kYXRlKGZvbGlvKTsKPiAgIAl9Cj4gICAKPiAgICNpZmRlZiBDT05GSUdfRjJGU19GU19D
+T01QUkVTU0lPTgo+ICAgCS8qIG92ZXJ3cml0ZSBjb21wcmVzc2VkIGZpbGUgKi8KPiAgIAlpZiAo
+ZjJmc19jb21wcmVzc2VkX2ZpbGUoaW5vZGUpICYmIGZzZGF0YSkgewo+IC0JCWYyZnNfY29tcHJl
+c3Nfd3JpdGVfZW5kKGlub2RlLCBmc2RhdGEsIHBhZ2UtPmluZGV4LCBjb3BpZWQpOwo+ICsJCWYy
+ZnNfY29tcHJlc3Nfd3JpdGVfZW5kKGlub2RlLCBmc2RhdGEsIGZvbGlvLT5pbmRleCwgY29waWVk
+KTsKPiAgIAkJZjJmc191cGRhdGVfdGltZShGMkZTX0lfU0IoaW5vZGUpLCBSRVFfVElNRSk7Cj4g
+ICAKPiAgIAkJaWYgKHBvcyArIGNvcGllZCA+IGlfc2l6ZV9yZWFkKGlub2RlKSAmJgo+IEBAIC0z
+NzMwLDEwICszNzMxLDEwIEBAIHN0YXRpYyBpbnQgZjJmc193cml0ZV9lbmQoc3RydWN0IGZpbGUg
+KmZpbGUsCj4gICAJaWYgKCFjb3BpZWQpCj4gICAJCWdvdG8gdW5sb2NrX291dDsKPiAgIAo+IC0J
+c2V0X3BhZ2VfZGlydHkocGFnZSk7Cj4gKwlmb2xpb19tYXJrX2RpcnR5KGZvbGlvKTsKPiAgIAo+
+ICAgCWlmIChmMmZzX2lzX2F0b21pY19maWxlKGlub2RlKSkKPiAtCQlzZXRfcGFnZV9wcml2YXRl
+X2F0b21pYyhwYWdlKTsKPiArCQlzZXRfcGFnZV9wcml2YXRlX2F0b21pYyhmb2xpb19wYWdlKGZv
+bGlvLCAwKSk7Cj4gICAKPiAgIAlpZiAocG9zICsgY29waWVkID4gaV9zaXplX3JlYWQoaW5vZGUp
+ICYmCj4gICAJICAgICFmMmZzX3Zlcml0eV9pbl9wcm9ncmVzcyhpbm9kZSkpIHsKCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVs
+IG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRw
+czovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVs
+Cg==
