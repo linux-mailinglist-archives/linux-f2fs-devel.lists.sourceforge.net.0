@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53D4C95AB90
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Aug 2024 05:02:57 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC51695ABAD
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Aug 2024 05:05:46 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sgy64-0001QL-EC;
-	Thu, 22 Aug 2024 03:02:49 +0000
+	id 1sgy8s-0005Fv-TC;
+	Thu, 22 Aug 2024 03:05:42 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1sgy61-0001QE-MS
+ (envelope-from <willy@infradead.org>) id 1sgy8r-0005Fo-Ss
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 Aug 2024 03:02:46 +0000
+ Thu, 22 Aug 2024 03:05:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YP2WB9dywIKVl9Gv1GKu83gWXpOmL4vFmjgq2eXETAs=; b=KV2Y5CaX4o5D+Y635elv0gb4MC
- VyJdWS6kjkBns28ovy2qGW65FdjaYp5qNbM+iZEXzZ4IgPEZl9mXMcMXv6JsGgjCCvRWrP6ifKkCL
- iMxw9Vgc03MkMNS3wWTPKYNm1gzIuAQeEeQr24lWrrMhTW1mNyDmYB4/W2XjFEcQtBds=;
+ bh=/39cXkFQGxlaFd0Pa67D2DLMvy/gj6d8MFLoE30g3zQ=; b=U6AobW6Dypetj1cmAihanDFznw
+ ohqSkOVu4RRoRemFPljWWgvU4ihoX1Np1Sia5itSGUVxzcK0alWOnL2NBqNy+M+CV11nrYyop5h2m
+ HP7sLalZn5z5FpEfj4A99lgxoR59Vgl59mTl56x9yzcgGY2m30F/7va7mewvwfnq9OfM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,36 +31,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YP2WB9dywIKVl9Gv1GKu83gWXpOmL4vFmjgq2eXETAs=; b=TqBGsNcgCuAkY62ClIsgn/rbCO
- hzwRvTad2sZ7eVpO6dWtWm/zs3KGKqqtbVa5CT0/Cqx822s9OpzlrMePKVbu2PSSkglVlKMYYgF/o
- 7ctymlpS9ssr4/LcASaj2+2PFQc4Mb1Y7g4GG6rG9JOOOh7AfPO4jfAxwBgDGffLpaG8=;
+ bh=/39cXkFQGxlaFd0Pa67D2DLMvy/gj6d8MFLoE30g3zQ=; b=MoZBTmXZnykMPA1Zo1zN0oZ9KA
+ 4NekxKQacCcmRI8abALCMG06J3xPIsplumvC461v03okj+ppwRPAJclfFSHSkVMTzD+vAUShxd4yD
+ YA2i+aEb+NXTrnHNtj68WbIP6t8XEBFLIplvcursqdvtOng6kKHg1rbnWy5FKvQ3VgZs=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sgy5y-0001m3-VY for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 Aug 2024 03:02:46 +0000
+ id 1sgy8r-0001so-8r for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 22 Aug 2024 03:05:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=YP2WB9dywIKVl9Gv1GKu83gWXpOmL4vFmjgq2eXETAs=; b=tsP+Ivm4NO+sSJwPyA2wMNQNG2
- huv4hwou6iHRS8RadzEzCt/gdHsr37RMgLucOon9zavHKgQ4uxBF4hqb9O2rKhwlWZtCH33FaxNrX
- L1DN9elxnbBXr5dSACoaSNu6GV7TJ2h+Ho80Pxo0av6CnZDs8TnA9xmdAWvfXcyKNxLOPrsdvYzIh
- MQoPrVSeGcBDQVqsmCYzG9pl7GwVLWpR4JAMY4+Qgb4Fwvg4/EO93V6uCAi6Jty03kYnwnUC/r0/9
- 107GuRyRqxeS12obIE+QbR4GqiZiBbJ3WHrXsmGH+PPrDbL9vWX0ANVfu7snBP8gpCBJ7BoZxY7Qw
- ZgM6MEVg==;
+ bh=/39cXkFQGxlaFd0Pa67D2DLMvy/gj6d8MFLoE30g3zQ=; b=DkjUvQVwSOMWvwftwO2L7k0+H/
+ K0eMeRkzxxIFu25jCjiOAKwGKBrMfrgMlB65XjSoZotPwvwqppZPsM2NMOHduHlaGlqfbxbAi0sPG
+ 3k0L/uFoCbD4W9uRVvDuK7KRigMwbebQJTlKSlbkZOnkufEhFasrnP0qSEIXNHKwJuFIj6mncPd7d
+ c1WMTyYhmB4rhrXHRh60IxNGUJs+ufrTqFAX4M5R/CPnj9U80zSJ5Owpz1jit5EkcRXTAHAXQquqD
+ +e9ISWApA7e8vRqnwxFrZjS5iO03ye/FRk7T1Erx5BDH7IzuEga86Hf/BadfuoDCLgMa/qFnEdWop
+ dJ8zZ2KA==;
 Received: from willy by casper.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1sgy5g-0000000A0kZ-07wC;
- Thu, 22 Aug 2024 03:02:24 +0000
-Date: Thu, 22 Aug 2024 04:02:23 +0100
+ Hat Linux)) id 1sgy8j-0000000A0xp-1qAc;
+ Thu, 22 Aug 2024 03:05:33 +0000
+Date: Thu, 22 Aug 2024 04:05:33 +0100
 From: Matthew Wilcox <willy@infradead.org>
 To: Li Zetao <lizetao1@huawei.com>
-Message-ID: <ZsaqPwOVA216C9Av@casper.infradead.org>
+Message-ID: <Zsaq_QkyQIhGsvTj@casper.infradead.org>
 References: <20240822013714.3278193-1-lizetao1@huawei.com>
- <20240822013714.3278193-2-lizetao1@huawei.com>
+ <20240822013714.3278193-3-lizetao1@huawei.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240822013714.3278193-2-lizetao1@huawei.com>
+In-Reply-To: <20240822013714.3278193-3-lizetao1@huawei.com>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -68,24 +68,30 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Aug 22, 2024 at 09:37:01AM +0800, Li Zetao wrote:
- > -void clear_page_extent_mapped(struct page *page) > +void
- clear_page_extent_mapped(struct
- folio *folio) Rename it to clear_folio_extent_mapped()? 
+ Content preview:  On Thu, Aug 22, 2024 at 09:37:02AM +0800, Li Zetao wrote:
+ > static struct extent_buffer *get_next_extent_buffer( > - const struct
+ btrfs_fs_info
+ *fs_info, struct page *page, u64 bytenr) > + const struc [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: infradead.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [90.155.50.34 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [90.155.50.34 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [90.155.50.34 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [90.155.50.34 listed in bl.score.senderscore.com]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -93,13 +99,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [90.155.50.34 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sgy5y-0001m3-VY
-Subject: Re: [f2fs-dev] [PATCH 01/14] btrfs: convert
- clear_page_extent_mapped() to take a folio
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1sgy8r-0001so-8r
+Subject: Re: [f2fs-dev] [PATCH 02/14] btrfs: convert
+ get_next_extent_buffer() to take a folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,11 +120,29 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Aug 22, 2024 at 09:37:01AM +0800, Li Zetao wrote:
-> -void clear_page_extent_mapped(struct page *page)
-> +void clear_page_extent_mapped(struct folio *folio)
+On Thu, Aug 22, 2024 at 09:37:02AM +0800, Li Zetao wrote:
+>  static struct extent_buffer *get_next_extent_buffer(
+> -		const struct btrfs_fs_info *fs_info, struct page *page, u64 bytenr)
+> +		const struct btrfs_fs_info *fs_info, struct folio *folio, u64 bytenr)
+>  {
+>  	struct extent_buffer *gang[GANG_LOOKUP_SIZE];
+>  	struct extent_buffer *found = NULL;
+> -	u64 page_start = page_offset(page);
+> -	u64 cur = page_start;
+> +	u64 folio_start = folio_pos(folio);
+> +	u64 cur = folio_start;
+>  
+> -	ASSERT(in_range(bytenr, page_start, PAGE_SIZE));
+> +	ASSERT(in_range(bytenr, folio_start, PAGE_SIZE));
+>  	lockdep_assert_held(&fs_info->buffer_lock);
+>  
+> -	while (cur < page_start + PAGE_SIZE) {
+> +	while (cur < folio_start + PAGE_SIZE) {
 
-Rename it to clear_folio_extent_mapped()?
+Presumably we want to support large folios in btrfs at some point?
+I certainly want to remove CONFIG_READ_ONLY_THP_FOR_FS soon and that'll
+be a bit of a regression for btrfs if it doesn't have large folio
+support.  So shouldn't we also s/PAGE_SIZE/folio_size(folio)/ ?
 
 
 
