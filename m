@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B04B495AA40
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Aug 2024 03:29:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D30F595AA37
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Aug 2024 03:29:57 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sgweD-0004Y0-3f;
-	Thu, 22 Aug 2024 01:29:57 +0000
+	id 1sgweC-0002vK-3m;
+	Thu, 22 Aug 2024 01:29:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lizetao1@huawei.com>) id 1sgwe9-0004XY-VS
+ (envelope-from <lizetao1@huawei.com>) id 1sgweA-0002v8-Bw
  for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 22 Aug 2024 01:29:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SWSzhBrXxOr6WgEmkqrkZZkRvAHOCL/VpoSPjVr/dHs=; b=AoiFGb8Tu3f79JThDNrtnNPL1V
- N0mYXGlffGUCAqJuHae5+E1rW+2ZkVVw5TsdgdTh3WGUfnGDYuchhF8taz3N/WLMQp8Fm/vTSZnuc
- zFxbPYLbiv+5Z2LJDEPq0nfQfZexyWI+9ovmUiDzcxrxrWkwiKLbpjjvYLViJliVYQhc=;
+ bh=1AcXvX91u9nuVp+ZWFW4c2c9NJg7RiMV+HHd3BwD344=; b=Vtm0h8oe8vRIKDQleBJZ5KKf5O
+ hMnqINmubKAwGpafI6ViEwdsnl4l+DH1EVexDRul3Ndh34I9CjMs7DHM/x9svMCiCB3uo3BlGHWrC
+ QTKaQXWMkl5R4ULzn6ZzEewXji3vhu0kp1bhzHKKviI2vdz11KMeN6h9qbbPuzGXlgXI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
@@ -31,27 +31,27 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SWSzhBrXxOr6WgEmkqrkZZkRvAHOCL/VpoSPjVr/dHs=; b=LOqV3y3+wZWWWBvnDF6baule7/
- BjEqLakXzPSAFgdubFJm3EwchIOPDGFXdWD+gOuxFYFqrZZqTd6TGEMwGgwHMr0cDDgwO0rKzeQ6X
- aQ21OHhSN+5QnoB7bqW3xcYmzKPbrtqLw/cY1dK56IAyaIgVtiU1ge5Ds3Tz2TPlX4GE=;
-Received: from szxga06-in.huawei.com ([45.249.212.32])
+ bh=1AcXvX91u9nuVp+ZWFW4c2c9NJg7RiMV+HHd3BwD344=; b=er7g6ZDaOsSgem/AyR29vQKfDn
+ HmTmV+iAMs+OG+u3Olwoq9WiuIpL5HeAJEw7UZOW8tifC9L92+V50+WlwCgqd76GO9jzOeP6aodPL
+ QC9voycKZt5gJis5Og+7O/Z1AUieXm/TwdOg8QCLBZKLmOy5Ui33LT3VxbeEsbNg9KdA=;
+Received: from szxga01-in.huawei.com ([45.249.212.187])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sgwe9-0006c4-IG for linux-f2fs-devel@lists.sourceforge.net;
+ id 1sgwe9-0006c3-2h for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 22 Aug 2024 01:29:54 +0000
-Received: from mail.maildlp.com (unknown [172.19.88.163])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4Wq5DL1829z1xvkB;
- Thu, 22 Aug 2024 09:27:46 +0800 (CST)
+Received: from mail.maildlp.com (unknown [172.19.163.252])
+ by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4Wq5Fn2Kl5zpVYq;
+ Thu, 22 Aug 2024 09:29:01 +0800 (CST)
 Received: from kwepemd500012.china.huawei.com (unknown [7.221.188.25])
- by mail.maildlp.com (Postfix) with ESMTPS id EA28618001B;
- Thu, 22 Aug 2024 09:29:40 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id 5BF4C1800D3;
+ Thu, 22 Aug 2024 09:29:41 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by kwepemd500012.china.huawei.com
  (7.221.188.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Thu, 22 Aug
  2024 09:29:40 +0800
 To: <clm@fb.com>, <josef@toxicpanda.com>, <dsterba@suse.com>, <terrelln@fb.com>
-Date: Thu, 22 Aug 2024 09:37:05 +0800
-Message-ID: <20240822013714.3278193-6-lizetao1@huawei.com>
+Date: Thu, 22 Aug 2024 09:37:06 +0800
+Message-ID: <20240822013714.3278193-7-lizetao1@huawei.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240822013714.3278193-1-lizetao1@huawei.com>
 References: <20240822013714.3278193-1-lizetao1@huawei.com>
@@ -59,39 +59,40 @@ MIME-Version: 1.0
 X-Originating-IP: [10.90.53.73]
 X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
  kwepemd500012.china.huawei.com (7.221.188.25)
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -5.0 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  The old page API is being gradually replaced and converted
  to use folio to improve code readability and avoid repeated conversion between
- page and folio. Moreover, use kmap_local_folio() instend of km [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ page and folio. Moreover, use folio_pos() instend of page_offs [...] 
+ Content analysis details:   (-5.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [45.249.212.32 listed in sa-accredit.habeas.com]
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [45.249.212.32 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [45.249.212.187 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [45.249.212.187 listed in wl.mailspike.net]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [45.249.212.187 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [45.249.212.32 listed in bl.score.senderscore.com]
+ [45.249.212.187 listed in bl.score.senderscore.com]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sgwe9-0006c4-IG
-Subject: [f2fs-dev] [PATCH 05/14] btrfs: convert read_key_bytes() to take a
- folio
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1sgwe9-0006c3-2h
+Subject: [f2fs-dev] [PATCH 06/14] btrfs: convert submit_eb_subpage() to take
+ a folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,73 +114,78 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 The old page API is being gradually replaced and converted to use folio
 to improve code readability and avoid repeated conversion between page
-and folio. Moreover, use kmap_local_folio() instend of kmap_local_page(),
+and folio. Moreover, use folio_pos() instend of page_offset(),
 which is more consistent with folio usage.
 
 Signed-off-by: Li Zetao <lizetao1@huawei.com>
 ---
- fs/btrfs/verity.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ fs/btrfs/extent_io.c | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/fs/btrfs/verity.c b/fs/btrfs/verity.c
-index 4042dd6437ae..e36dc99021a0 100644
---- a/fs/btrfs/verity.c
-+++ b/fs/btrfs/verity.c
-@@ -284,7 +284,7 @@ static int write_key_bytes(struct btrfs_inode *inode, u8 key_type, u64 offset,
-  *              page and ignore dest, but it must still be non-NULL to avoid the
-  *              counting-only behavior.
-  * @len:        length in bytes to read
-- * @dest_page:  copy into this page instead of the dest buffer
-+ * @dest_folio: copy into this folio instead of the dest buffer
-  *
-  * Helper function to read items from the btree.  This returns the number of
-  * bytes read or < 0 for errors.  We can return short reads if the items don't
-@@ -294,7 +294,7 @@ static int write_key_bytes(struct btrfs_inode *inode, u8 key_type, u64 offset,
-  * Returns number of bytes read or a negative error code on failure.
+diff --git a/fs/btrfs/extent_io.c b/fs/btrfs/extent_io.c
+index a0102b9b67ff..ca458237ac35 100644
+--- a/fs/btrfs/extent_io.c
++++ b/fs/btrfs/extent_io.c
+@@ -1818,12 +1818,11 @@ static noinline_for_stack void write_one_eb(struct extent_buffer *eb,
+  * Return >=0 for the number of submitted extent buffers.
+  * Return <0 for fatal error.
   */
- static int read_key_bytes(struct btrfs_inode *inode, u8 key_type, u64 offset,
--			  char *dest, u64 len, struct page *dest_page)
-+			  char *dest, u64 len, struct folio *dest_folio)
+-static int submit_eb_subpage(struct page *page, struct writeback_control *wbc)
++static int submit_eb_subpage(struct folio *folio, struct writeback_control *wbc)
  {
- 	struct btrfs_path *path;
- 	struct btrfs_root *root = inode->root;
-@@ -314,7 +314,7 @@ static int read_key_bytes(struct btrfs_inode *inode, u8 key_type, u64 offset,
- 	if (!path)
- 		return -ENOMEM;
+-	struct btrfs_fs_info *fs_info = page_to_fs_info(page);
+-	struct folio *folio = page_folio(page);
++	struct btrfs_fs_info *fs_info = folio_to_fs_info(folio);
+ 	int submitted = 0;
+-	u64 page_start = page_offset(page);
++	u64 folio_start = folio_pos(folio);
+ 	int bit_start = 0;
+ 	int sectors_per_node = fs_info->nodesize >> fs_info->sectorsize_bits;
  
--	if (dest_page)
-+	if (dest_folio)
- 		path->reada = READA_FORWARD;
- 
- 	key.objectid = btrfs_ino(inode);
-@@ -371,15 +371,15 @@ static int read_key_bytes(struct btrfs_inode *inode, u8 key_type, u64 offset,
- 		copy_offset = offset - key.offset;
- 
- 		if (dest) {
--			if (dest_page)
--				kaddr = kmap_local_page(dest_page);
-+			if (dest_folio)
-+				kaddr = kmap_local_folio(dest_folio, 0);
- 
- 			data = btrfs_item_ptr(leaf, path->slots[0], void);
- 			read_extent_buffer(leaf, kaddr + dest_offset,
- 					   (unsigned long)data + copy_offset,
- 					   copy_bytes);
- 
--			if (dest_page)
-+			if (dest_folio)
- 				kunmap_local(kaddr);
+@@ -1838,21 +1837,21 @@ static int submit_eb_subpage(struct page *page, struct writeback_control *wbc)
+ 		 * Take private lock to ensure the subpage won't be detached
+ 		 * in the meantime.
+ 		 */
+-		spin_lock(&page->mapping->i_private_lock);
++		spin_lock(&folio->mapping->i_private_lock);
+ 		if (!folio_test_private(folio)) {
+-			spin_unlock(&page->mapping->i_private_lock);
++			spin_unlock(&folio->mapping->i_private_lock);
+ 			break;
+ 		}
+ 		spin_lock_irqsave(&subpage->lock, flags);
+ 		if (!test_bit(bit_start + fs_info->subpage_info->dirty_offset,
+ 			      subpage->bitmaps)) {
+ 			spin_unlock_irqrestore(&subpage->lock, flags);
+-			spin_unlock(&page->mapping->i_private_lock);
++			spin_unlock(&folio->mapping->i_private_lock);
+ 			bit_start++;
+ 			continue;
  		}
  
-@@ -762,7 +762,7 @@ static struct page *btrfs_read_merkle_tree_page(struct inode *inode,
- 	 * [ inode objectid, BTRFS_MERKLE_ITEM_KEY, offset in bytes ]
- 	 */
- 	ret = read_key_bytes(BTRFS_I(inode), BTRFS_VERITY_MERKLE_ITEM_KEY, off,
--			     folio_address(folio), PAGE_SIZE, &folio->page);
-+			     folio_address(folio), PAGE_SIZE, folio);
- 	if (ret < 0) {
- 		folio_put(folio);
- 		return ERR_PTR(ret);
+-		start = page_start + bit_start * fs_info->sectorsize;
++		start = folio_start + bit_start * fs_info->sectorsize;
+ 		bit_start += sectors_per_node;
+ 
+ 		/*
+@@ -1861,7 +1860,7 @@ static int submit_eb_subpage(struct page *page, struct writeback_control *wbc)
+ 		 */
+ 		eb = find_extent_buffer_nolock(fs_info, start);
+ 		spin_unlock_irqrestore(&subpage->lock, flags);
+-		spin_unlock(&page->mapping->i_private_lock);
++		spin_unlock(&folio->mapping->i_private_lock);
+ 
+ 		/*
+ 		 * The eb has already reached 0 refs thus find_extent_buffer()
+@@ -1912,7 +1911,7 @@ static int submit_eb_page(struct page *page, struct btrfs_eb_write_context *ctx)
+ 		return 0;
+ 
+ 	if (page_to_fs_info(page)->nodesize < PAGE_SIZE)
+-		return submit_eb_subpage(page, wbc);
++		return submit_eb_subpage(folio, wbc);
+ 
+ 	spin_lock(&mapping->i_private_lock);
+ 	if (!folio_test_private(folio)) {
 -- 
 2.34.1
 
