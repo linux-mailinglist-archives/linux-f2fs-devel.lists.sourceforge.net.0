@@ -2,184 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22BFC9600F0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Aug 2024 07:13:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2C7D960217
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 27 Aug 2024 08:43:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sioW8-0007vL-NL;
-	Tue, 27 Aug 2024 05:13:20 +0000
+	id 1sipux-0002hj-D5;
+	Tue, 27 Aug 2024 06:43:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <joshi.k@samsung.com>) id 1sioVv-0007v4-Ui
+ (envelope-from <wangzijie1@honor.com>) id 1sipuv-0002hS-PF
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 27 Aug 2024 05:13:09 +0000
+ Tue, 27 Aug 2024 06:43:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- In-Reply-To:From:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cCXqZUrSYsLJrkst+rIGuVs2OORkCo1hPStex7N5M18=; b=EuMWDsZLgkWd8I6p3ExtTub8ZS
- p0PZ3rvm+s0TMWzDXbGlgSl2ebkRHAKHTaoJyirGUnpm4CsCoJaaBTcEjIenpzK+x0GSvYVv/ihf7
- yt1p9K8b0F92lo2q08hi6JLPmYpSqK4/O/+Eei8JeDUodG02MozvTBIa62Fba5wx7gXw=;
+ bh=1Bb2EojZ8NdwV6SpZUitilwwiTYftjULQ+lnsjoXY8M=; b=I3Atye/RlMcran9LXAEs+zciGq
+ Up4ZMmjRH5gkEgv2My+M3OI7ewEi3glD1kFa8PzofiBmz56xTSa4EibHOMyetS+6FM3mHEFs3kMqb
+ BHJ9k0BaP3zSfd1oN1LIJ0y9HOj3TUe+EM3R3XbgmnM71cJdTXbbY7odbRK8xiF0XGwo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:In-Reply-To:From:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=cCXqZUrSYsLJrkst+rIGuVs2OORkCo1hPStex7N5M18=; b=AoHvntA9QieMvOUR4AJlLzDqoA
- 5OeN2rldP8uRw5kdGDG2no41Oe6si2+0UGXZ6tdvzcVjSyVbz3k6XkrlLfZ41bhKoy07Z5whYG0QB
- GiVuNhm2qhdwJOGzjK25TzScibaYs/Ov/o5FlWNTifzsTkt7pKGFtcAl7kzsTRqFPi9Q=;
-Received: from mailout1.samsung.com ([203.254.224.24])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=1Bb2EojZ8NdwV6SpZUitilwwiTYftjULQ+lnsjoXY8M=; b=b
+ zhVduEAOU0z4yaOJ2b/qXTfg072pvhSHhCcZRZHOSM89N3vp/B09R09NwYY1B8Ig6EA6l3FRjktOR
+ hloutWXEgXyKVSXxJAMXRAbiwYR9Pct0XYK/ZLTgaawHUVo0UijuSMX+eAC+xXUSyviIIWPTVmuZl
+ ZS+iB79hccgbtg+E=;
+Received: from mta21.honor.com ([81.70.160.142] helo=mta21.hihonor.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sioVt-0001RR-Ph for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 27 Aug 2024 05:13:07 +0000
-Received: from epcas5p3.samsung.com (unknown [182.195.41.41])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20240827051252epoutp01a5b6ef512b0e49368d0d069e5f14913f~vfd2QaBnF0567405674epoutp01c
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 27 Aug 2024 05:12:52 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20240827051252epoutp01a5b6ef512b0e49368d0d069e5f14913f~vfd2QaBnF0567405674epoutp01c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1724735572;
- bh=cCXqZUrSYsLJrkst+rIGuVs2OORkCo1hPStex7N5M18=;
- h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=qyBfu9L8Jb6Uq6h5L7wRuie/68Jw3AJiXm+A1qgHdl/xrmoGf/MS4dkHIYw07Dav3
- FoJL/buNyWe5XBQ4h0oOdCRq6lR8PMBtnXYnS+dNgvaaI99aTm5gvYQccAJUH+q1fZ
- 2RsWgidvKMrOByzOPyRYfdtXmLvQ/CX0GtDUrs4U=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas5p2.samsung.com (KnoxPortal) with ESMTP id
- 20240827051252epcas5p260600137502baffea787d2207b444333~vfd1tcJNa2626726267epcas5p27;
- Tue, 27 Aug 2024 05:12:52 +0000 (GMT)
-Received: from epsmgec5p1-new.samsung.com (unknown [182.195.38.177]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4WtFzk37Szz4x9Pw; Tue, 27 Aug
- 2024 05:12:50 +0000 (GMT)
-Received: from epcas5p3.samsung.com ( [182.195.41.41]) by
- epsmgec5p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 71.DD.19863.2506DC66; Tue, 27 Aug 2024 14:12:50 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas5p4.samsung.com (KnoxPortal) with ESMTPA id
- 20240827051249epcas5p4dd527b84dd1ee5911cf84ad60132ea6a~vfdzdXQka1975319753epcas5p4q;
- Tue, 27 Aug 2024 05:12:49 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240827051249epsmtrp28959f7cbc47750675b06141c7b1eff23~vfdzccABd1630916309epsmtrp2v;
- Tue, 27 Aug 2024 05:12:49 +0000 (GMT)
-X-AuditID: b6c32a50-ef5fe70000004d97-ac-66cd60521094
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 8D.CE.19367.1506DC66; Tue, 27 Aug 2024 14:12:49 +0900 (KST)
-Received: from [107.122.11.51] (unknown [107.122.11.51]) by
- epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20240827051246epsmtip20a7e5909dff1f6550d059cc6769d7e3a~vfdwCkoxU0710507105epsmtip2l;
- Tue, 27 Aug 2024 05:12:46 +0000 (GMT)
-Message-ID: <3884220d-e553-a1c2-f636-0ff95500e8f5@samsung.com>
-Date: Tue, 27 Aug 2024 10:42:45 +0530
+ id 1sipuv-0006GA-K1 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 27 Aug 2024 06:43:02 +0000
+Received: from w011.hihonor.com (unknown [10.68.20.122])
+ by mta21.hihonor.com (SkyGuard) with ESMTPS id 4WtHVp4j8xzYl3hf;
+ Tue, 27 Aug 2024 14:21:22 +0800 (CST)
+Received: from a011.hihonor.com (10.68.31.243) by w011.hihonor.com
+ (10.68.20.122) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Tue, 27 Aug
+ 2024 14:22:45 +0800
+Received: from localhost.localdomain (10.144.23.14) by a011.hihonor.com
+ (10.68.31.243) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Tue, 27 Aug
+ 2024 14:22:44 +0800
+From: wangzijie <wangzijie1@honor.com>
+To: <chao@kernel.org>, <jaegeuk@kernel.org>
+Date: Tue, 27 Aug 2024 14:22:42 +0800
+Message-ID: <20240827062242.776881-1-wangzijie1@honor.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0)
- Gecko/20100101 Thunderbird/91.8.1
-Content-Language: en-US
-To: Bart Van Assche <bvanassche@acm.org>, axboe@kernel.dk,
- kbusch@kernel.org, hch@lst.de, sagi@grimberg.me, martin.petersen@oracle.com,
- James.Bottomley@HansenPartnership.com, brauner@kernel.org, jack@suse.cz,
- jaegeuk@kernel.org, jlayton@kernel.org, chuck.lever@oracle.com
-From: Kanchan Joshi <joshi.k@samsung.com>
-In-Reply-To: <d0e017ac-8367-4bb8-9b7f-d72dd068fdb1@acm.org>
-X-Brightmail-Tracker: H4sIAAAAAAAAA01TaVBbZRT1Lbw8sKmvAYaP/MD4qghUKLEhPBBoHZj6nKIGS6czHUYayWOR
- kIQshXacmiqliwoVbKgBB6ZDG020lKUsDThM6EIqFcZAS+hiK4lUKNQSl2ETEx6t/Dv3u+fc
- 89175+IIbx7j4wUKLaNWSOUkFoC290VGRr+793purMMQSFnuVGLUVN8sRBn+mEOo5TsTMOXs
- 7YKpby2XYaq25hOYcjUZEaq5EqfGb3s41NxZM4eqst2AqJ6xTdTPp9+gunvsKFV/1s2hPr3Z
- iVGmq//C1LmpRyg1aKzjbAuiHcM76MG7zShtqLqG0Y7rOrrFfAyjWxs/oq0NHpi2OvUY/dg9
- htIVbWaIHmi4xKE9LWGSdXsKk/IZqYxRCxhFjlJWoMhLJnfszE7NjhPHCqOFCVQ8KVBIi5hk
- Mi1dEr29QO5tkhTsk8p13ieJVKMhN6ckqZU6LSPIV2q0ySSjkslVIlWMRlqk0SnyYhSMNlEY
- G/tqnJe4tzC/95AVUV3ASn9pXob10Cm/45A/DggRKP/egxyHAnAe0Q0Bo60DY4NZCNQYBpCn
- wd8jN5AnEuus249NdEFgpm1uJcEjpiEwdyjBh7lECqh72LbigRIvgQlHtR/7vgHYv3KhPhxM
- vA/mR+ogHw4kkkDzgnmlDkKEgDFXPewzCCJOwqB3sQz1BYjPYMrY4GXhOEZEgqFqnU/gT7wG
- ZsYHOKz4edAxXbfybUBU+4OlWg/q4wMiDQwsZ7EdBILJq20cFvOBZ6YHY3EhuPfrPZTFH4LO
- 1orVIW0F+sVRP18ZxGvbdHEza7UefL7ggtnqXHC0nMeyXwB3q9yryhBw/1TjKqaBY96EsnOb
- gcBi2S3kBCQwrhmLcU37xjXdGP93boBQM8RnVJqiPCYnTiWMVjAlTzeeoyxqgVaOIErSCVnO
- L8XYIBiHbBDAETKIG+aw5/K4Mun+A4xama3WyRmNDYrzLugLhB+co/RekUKbLRQlxIrEYrEo
- YYtYSIZwpw5/LeMReVItU8gwKkb9RAfj/nw93JHWXJIYMa5/7s+/dq9vtU2038oOTbxYurui
- n+nv7SkN59zvT0+f29h1JnzLmzt/u7zrSH1nFma/Pf3D+V2ueL9niyucrxz90oYfNMSrLGe+
- ybAwg1GZS1bZZ8snQ8bdBeLMyQIyIuvjnEsdwwHGh6lN5ZUvLiA3u03FD7IM84qK9hJVSISk
- UW/O2PPOY9EQ98oJU+iPFtNoQEdKT59A1qrrtr9+2O4uPhY2Luh/eeO6f/p/mjJl/l476Try
- YOt3we9RBw6O8B8NhWuXVVbn4qzDEbr9Qr78rZL2a9vU+2rruiIrr2S4z6WWf7DJuSE1KQ6I
- RsW5+99mTj8TyK8ZlQx7nGUkqsmXCqMQtUb6H/KSClGNBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrMIsWRmVeSWpSXmKPExsWy7bCSvG5gwtk0g+9P9SxW3+1ns3h9+BOj
- xbQPP5kt/t99zmRx88BOJouVq48yWcye3sxk8WT9LGaLjf0cFo/vfGa3+LlsFbvFpEPXGC32
- 3tK2uLTI3WLP3pMsFvOXPWW36L6+g81i+fF/TBbrXr9nsTg/aw67g4jH5SveHufvbWTxmDbp
- FJvH5bOlHptWdbJ5bF5S77F7wWcmj903G9g8Pj69xeLRt2UVo8eZBUfYPT5vkgvgieKySUnN
- ySxLLdK3S+DKONC4m7lgK1vF/Y3/mRoYZ7B2MXJySAiYSOz+9BTI5uIQEtjOKNHceoYFIiEu
- 0XztBzuELSyx8t9zdoii14wS5/69YARJ8ArYScx5swVsEouAqsTzy5NZIeKCEidnPgEbJCqQ
- JLHnfiMTiC0sYCOx8fcqZhCbGWjBrSfzmUCGighMZZJY+eIq2AZmgbeMEq0HjrBArHvHKPHg
- 1Awgh4ODTUBT4sLkUpBuTgFriXePz7BDTDKT6NraxQhhy0tsfzuHeQKj0Cwkh8xCsnAWkpZZ
- SFoWMLKsYhRNLSjOTc9NLjDUK07MLS7NS9dLzs/dxAiOd62gHYzL1v/VO8TIxMF4iFGCg1lJ
- hFfu8sk0Id6UxMqq1KL8+KLSnNTiQ4zSHCxK4rzKOZ0pQgLpiSWp2ampBalFMFkmDk6pBqYF
- CyIWzAyWXHZs1Wsm65YE3izxZp5oPdUd+2YbP5SJX1x8XVr2dml0OH+vv6Nhc6PvTIWnP9/F
- Xo/KttjDvGaJuIn706aOfWtX+IWGZjc9+eSt8qyG46F0kVGawy62g7xsN4V9Jh0/dSeR7Yby
- w6zozxtOGPLJHzaZvX3N9+R9js7fe+JvuDs4KCgYWkzcqT+V936ko1yR8D+7hK6sB4qHFqXs
- cp6Q6BsuPs1lWbjM7MLY3jmPrBKyP0cf7XkQfl5hrWpwyzYdkfZ6/ZX7f5u780k6B+vf1b/e
- 849PcsU8IeUNonENeZOZq8XXleVJqZ9MTlnUPv9puYTu41vPbPgeH3OuX63v3regXuGREktx
- RqKhFnNRcSIAzdpe72YDAAA=
-X-CMS-MailID: 20240827051249epcas5p4dd527b84dd1ee5911cf84ad60132ea6a
-X-Msg-Generator: CA
-CMS-TYPE: 105P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240826171413epcas5p3f62c2cc57b50d6df8fa66af5fe5996c5
-References: <20240826170606.255718-1-joshi.k@samsung.com>
- <CGME20240826171413epcas5p3f62c2cc57b50d6df8fa66af5fe5996c5@epcas5p3.samsung.com>
- <20240826170606.255718-2-joshi.k@samsung.com>
- <d0e017ac-8367-4bb8-9b7f-d72dd068fdb1@acm.org>
-X-Spam-Score: -1.4 (-)
+X-Originating-IP: [10.144.23.14]
+X-ClientProxiedBy: w001.hihonor.com (10.68.25.235) To a011.hihonor.com
+ (10.68.31.243)
+X-Spam-Score: -5.0 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 8/26/2024 11:14 PM, Bart Van Assche wrote: > On 8/26/24
- 10:06 AM, Kanchan Joshi wrote: >> Change i_write_hint (in inode), bi_write_hint
- (in bio) and write_hint >> (in request) to use u8 data-type r [...] 
- Content analysis details:   (-1.4 points, 6.0 required)
+ Content preview: Thread A -dquot_initialize -dqget -f2fs_dquot_acquire
+ -v2_read_dquot
+ -qtree_read_dquot -find_tree_dqentry -f2fs_quota_read -read_cache_page_gfp
+ -do_read_cache_folio -fiemap_read_folio -folio_wait_lock [...] 
+ Content analysis details:   (-5.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: samsung.com]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [203.254.224.24 listed in bl.score.senderscore.com]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [81.70.160.142 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [203.254.224.24 listed in sa-trusted.bondedsender.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.254.224.24 listed in wl.mailspike.net]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ [81.70.160.142 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [81.70.160.142 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [81.70.160.142 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -1.2 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sioVt-0001RR-Ph
-Subject: Re: [f2fs-dev] [PATCH v4 1/5] fs, block: refactor enum rw_hint
+X-Headers-End: 1sipuv-0006GA-K1
+Subject: [f2fs-dev] [RFC PATCH] f2fs: don't set SBI_QUOTA_NEED_REPAIR flag
+ if receive SIGKILL
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -191,30 +105,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: vishak.g@samsung.com, linux-scsi@vger.kernel.org, gost.dev@samsung.com,
- linux-nvme@lists.infradead.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- javier.gonz@samsung.com
+Cc: wangzijie <wangzijie1@honor.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 8/26/2024 11:14 PM, Bart Van Assche wrote:
-> On 8/26/24 10:06 AM, Kanchan Joshi wrote:
->> Change i_write_hint (in inode), bi_write_hint (in bio) and write_hint
->> (in request) to use u8 data-type rather than this enum.
-> 
-> That sounds fishy to me. Why to increase the size of this enum? Why to
-> reduce the ability of the compiler to perform type checking? I think
-> this needs to be motivated clearly in the patch description.
+Thread A
+-dquot_initialize
+ -dqget
+  -f2fs_dquot_acquire
+   -v2_read_dquot
+    -qtree_read_dquot
+     -find_tree_dqentry
+      -f2fs_quota_read
+       -read_cache_page_gfp
+        -do_read_cache_folio
+         -fiemap_read_folio
+          -folio_wait_locked_killable
+           -receive SIGKILL : return -EINTR
+       -set SBI_QUOTA_NEED_REPAIR
+   -set SBI_QUOTA_NEED_REPAIR
 
-Since inode/bio/request stopped using this, the __packed annotation did 
-not seem to serve much purpose. But sure, I can retain the size/checks 
-on the renamed enum (rw_life_hint) too.
+When calling read_cache_page_gfp in quota read, thread may receive SIGKILL and
+set SBI_QUOTA_NEED_REPAIR, should we set SBI_QUOTA_NEED_REPAIR in this error path?
 
-Motivation for keeping u8 in inode/bio/request is to represent another 
-hint type. This is similar to ioprio where multiple io priority 
-classes/values are expressed within an int type.
+Signed-off-by: wangzijie <wangzijie1@honor.com>
+---
+ fs/f2fs/inode.c | 3 ++-
+ fs/f2fs/super.c | 6 +++---
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index ed629dabb..2af98e2b7 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -837,8 +837,9 @@ void f2fs_evict_inode(struct inode *inode)
+ 
+ 	err = f2fs_dquot_initialize(inode);
+ 	if (err) {
++		if (err != -EINTR)
++			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+ 		err = 0;
+-		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+ 	}
+ 
+ 	f2fs_remove_ino_entry(sbi, inode->i_ino, APPEND_INO);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 1f1b3647a..f99a36ff3 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2650,8 +2650,8 @@ static ssize_t f2fs_quota_read(struct super_block *sb, int type, char *data,
+ 			if (PTR_ERR(page) == -ENOMEM) {
+ 				memalloc_retry_wait(GFP_NOFS);
+ 				goto repeat;
+-			}
+-			set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
++			} else if (PTR_ERR(page) != -EINTR)
++				set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
+ 			return PTR_ERR(page);
+ 		}
+ 
+@@ -3070,7 +3070,7 @@ static int f2fs_dquot_acquire(struct dquot *dquot)
+ 
+ 	f2fs_down_read(&sbi->quota_sem);
+ 	ret = dquot_acquire(dquot);
+-	if (ret < 0)
++	if (ret < 0 && ret != -EINTR)
+ 		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+ 	f2fs_up_read(&sbi->quota_sem);
+ 	return ret;
+-- 
+2.25.1
+
 
 
 _______________________________________________
