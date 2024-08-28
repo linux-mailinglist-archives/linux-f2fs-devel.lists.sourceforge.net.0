@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A833962CA0
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 28 Aug 2024 17:42:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3981A962C8B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 28 Aug 2024 17:37:52 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sjKoq-0006NQ-Lb;
-	Wed, 28 Aug 2024 15:42:48 +0000
+	id 1sjKju-0006DO-4O;
+	Wed, 28 Aug 2024 15:37:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1sjKom-0006NG-1N
+ (envelope-from <jaegeuk@kernel.org>) id 1sjKjs-0006DI-HQ
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 28 Aug 2024 15:42:43 +0000
+ Wed, 28 Aug 2024 15:37:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=X4ItMOEGKSWGZYRnga6f3XHhmVIN/u24hLwcyEHww14=; b=PbA4qrTPqyH9Xj7Fq++/g9Ed1c
- OqddBobPzaYJk9sbbGc0Xhl00Dw/Qv4oV7hcfKy69xNqhpTTrIRExRd88r4toV4jb45y5XyJJgfPZ
- K1pjLut3tCRc15ITWeI63ZuOXMASRqZ90LOXtp0YbXsX5LV2ONnBA5DoGOuQi9AweI8s=;
+ bh=0f9U6nBX2L6hdyh782eLPsVD+/nmW02M+HPf6HiB1Gs=; b=LFKSwSJuJhlO4hp5kmjZvhnpxK
+ LPtCT88HrzLLtvLQ7KG/mjLVd/0TjxY8P3/h1mkqycnm99O8bGKHRKGopRgKIof9UcF+xPLVAq3RC
+ EZIbPoyWQotj7bVAXAKKLIi/hZpDeWdB823V1hXADGV+Q9sxFunibIQlZdMSR05KuosE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,80 +31,75 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=X4ItMOEGKSWGZYRnga6f3XHhmVIN/u24hLwcyEHww14=; b=AdZY6oRifgkDFE/cFcv8l6LI+0
- ZVtkRMZNPTKEZtymoIQR5V6o9pNr217cLij7WKB6wzFmut8uT6uV/U/ERjDDFtggCo55VMNi6LJ6g
- 9QrWtT6vhevxzX433yOrxZz493xwdMFAqnkZgjQ3xpR7PxAMNQWUDmYa+XTrNWokaFh0=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=0f9U6nBX2L6hdyh782eLPsVD+/nmW02M+HPf6HiB1Gs=; b=ZwDzRHWmql8vkPiU1clVf3ZfZT
+ 3pyvRNzzVng5yezZSTyj018ujNnMVCK82HjbthIVxYoIEJPeJ4+0UHc0xtEgHNGLsZTMQAQ1MvGgV
+ E3AB5Pfi/7sRWEvO/l2H0UkDxFkzlXxJK75JjFmNOdJy9pmUy6LIgtjw4OzFONzts4ZY=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sjKok-0001aW-Hn for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 28 Aug 2024 15:42:43 +0000
+ id 1sjKjq-0001Fl-S8 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 28 Aug 2024 15:37:39 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 27350A41AB2;
- Wed, 28 Aug 2024 15:42:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7912DC51587;
- Wed, 28 Aug 2024 15:26:42 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 19001CE1896
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 28 Aug 2024 15:37:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3A20C51EE5;
+ Wed, 28 Aug 2024 15:27:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1724858802;
- bh=k/WDgLr9ilvDDJLyAzEJMBsgISgafN8ICne+o59PpEk=;
+ s=k20201202; t=1724858860;
+ bh=golWfvhGGRNH0zGtd5RPOTm6f8BFtB3I2tmehBi4BmY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=lUqNmsuZvbVGjv7neQUwIXMLnFoL6zT9+9mJzsNv7nwZ9dwAlbNVa9DE6lHwFG3gG
- I9Vf25s1nzhN06UW+1DtsfvSFa4N3YoOqPw1bHcRAHXFPUU5IvWElsm+Xw35LNLOLS
- xGxXA0JraHYPCJSR5531sYWo1xcyyN8y32pT5CkhbavciuwPMAtNB78JkvGcEWMSnh
- sCVfGAqx/cvoa09sqMVtVxs2ZtlW0CaGNUN7/mS8xzZAdvEp0RLSAiK/tFdAJzoPOe
- /cXKbwnPCOHwFyZKAQg7eoOF0f7Y/YDB5/W56E1Aqdbed/AutgR5Yt66H5dgnp+zOf
- cNZrvfYaRvFHA==
-Date: Wed, 28 Aug 2024 15:26:40 +0000
-To: Julian Sun <sunjunchao2870@gmail.com>
-Message-ID: <Zs9BsP1UdFn4FoK5@google.com>
-References: <000000000000b0231406204772a1@google.com>
- <20240827034324.339129-1-sunjunchao2870@gmail.com>
+ b=Qjdofq8Yf4iRQblN+EzaiIT/YPNbh1xmY0tCxIg4kqxa2MJG5kz+UKiiVnPavj/1H
+ mhU4CWau6HfG2A8QCugQROGyCIrmGGAd+aCoQ8c24szWh82J1JJEqFphfmPCtJLJin
+ oySdiiN0olNiKTWmDFkx0h9k9LSd/FR8FHD66D7LvbPk7lvf+bvzffqLkaQcYXRFv6
+ /i0wAKfnJGlzHKul19ORm5adrSHSAwAqkJwZrVrxyLWnxfsC88ocz7yBb7edU0eUJz
+ WO5RfEnSemdQbmTxhJEg6nsH4aMUyJ5WG8E4KvKzWag8Ze9/4fpW+GPFy1rF/Uifzk
+ Ff2Nvm55fomsw==
+Date: Wed, 28 Aug 2024 15:27:39 +0000
+To: Chao Yu <chao@kernel.org>
+Message-ID: <Zs9B6-ocRysmPOKD@google.com>
+References: <20240814134815.801303-1-chao@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240827034324.339129-1-sunjunchao2870@gmail.com>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20240814134815.801303-1-chao@kernel.org>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 08/27, Julian Sun wrote: > Hi, all. > > Recently syzbot
- reported a bug as following: > > kernel BUG at fs/f2fs/inode.c:896! > CPU:
- 1 UID: 0 PID: 5217 Comm: syz-executor605 Not tainted 6.11.0-rc4-sy [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 08/14, Chao Yu wrote: > SQLite App GC Thread Shrinker >
+ - f2fs_ioc_start_atomic_write > > - f2fs_ioc_commit_atomic_write > -
+ f2fs_commit_atomic_write
+ > - filemap_write_and_wait_range > : write atom [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: syzkaller.appspot.com]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [147.75.193.91 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in sa-accredit.habeas.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [145.40.73.55 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [145.40.73.55 listed in bl.score.senderscore.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [147.75.193.91 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sjKok-0001aW-Hn
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Do not check the FI_DIRTY_INODE flag
- when umounting a ro fs.
+X-Headers-End: 1sjKjq-0001Fl-S8
+Subject: Re: [f2fs-dev] [PATCH v2 2/4] f2fs: atomic: fix to not allow GC to
+ pollute atomic_file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,99 +113,113 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com,
- syzkaller-bugs@googlegroups.com, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 08/27, Julian Sun wrote:
-> Hi, all.
+On 08/14, Chao Yu wrote:
+> SQLite App			GC Thread	Shrinker
+> - f2fs_ioc_start_atomic_write
 > 
-> Recently syzbot reported a bug as following:
+> - f2fs_ioc_commit_atomic_write
+>  - f2fs_commit_atomic_write
+>   - filemap_write_and_wait_range
+>   : write atomic_file's data to cow_inode
+> 						echo 3 > drop_caches
+> 				- f2fs_gc
+> 				 - gc_data_segment
+> 				  - move_data_page
+> 				   - set_page_dirty
+> 				   : it may load data of previous
+> 				     transaction into pagecache.
+>   - f2fs_down_write(&fi->i_gc_rwsem[WRITE])
+>   - __f2fs_commit_atomic_write
+>   - f2fs_up_write(&fi->i_gc_rwsem[WRITE])
 > 
-> kernel BUG at fs/f2fs/inode.c:896!
-> CPU: 1 UID: 0 PID: 5217 Comm: syz-executor605 Not tainted 6.11.0-rc4-syzkaller-00033-g872cf28b8df9 #0
-> RIP: 0010:f2fs_evict_inode+0x1598/0x15c0 fs/f2fs/inode.c:896
-> Call Trace:
->  <TASK>
->  evict+0x532/0x950 fs/inode.c:704
->  dispose_list fs/inode.c:747 [inline]
->  evict_inodes+0x5f9/0x690 fs/inode.c:797
->  generic_shutdown_super+0x9d/0x2d0 fs/super.c:627
->  kill_block_super+0x44/0x90 fs/super.c:1696
->  kill_f2fs_super+0x344/0x690 fs/f2fs/super.c:4898
->  deactivate_locked_super+0xc4/0x130 fs/super.c:473
->  cleanup_mnt+0x41f/0x4b0 fs/namespace.c:1373
->  task_work_run+0x24f/0x310 kernel/task_work.c:228
->  ptrace_notify+0x2d2/0x380 kernel/signal.c:2402
->  ptrace_report_syscall include/linux/ptrace.h:415 [inline]
->  ptrace_report_syscall_exit include/linux/ptrace.h:477 [inline]
->  syscall_exit_work+0xc6/0x190 kernel/entry/common.c:173
->  syscall_exit_to_user_mode_prepare kernel/entry/common.c:200 [inline]
->  __syscall_exit_to_user_mode_work kernel/entry/common.c:205 [inline]
->  syscall_exit_to_user_mode+0x279/0x370 kernel/entry/common.c:218
->  do_syscall_64+0x100/0x230 arch/x86/entry/common.c:89
->  entry_SYSCALL_64_after_hwframe+0x77/0x7f
+> During committing atomic_file, GC may be triggered to migrate
+> atomic_file's block, so it may contain data of previous transaction
+> in page cache, we should drop atomic_file's cache once it was
+> migrated by GC.
 > 
-> The syzbot constructed the following scenario: concurrently
-> creating directories and setting the file system to read-only.
-> In this case, while f2fs was making dir, the filesystem switched to
-> readonly, and when it tried to clear the dirty flag, it triggered this
-> code path: f2fs_mkdir()-> f2fs_sync_fs()->f2fs_write_checkpoint()
-> ->f2fs_readonly(). This resulted FI_DIRTY_INODE flag not being cleared,
-> which eventually led to a bug being triggered during the FI_DIRTY_INODE
-> check in f2fs_evict_inode().
+> And also, we should writeback atomic_file and cow_file's data
+> w/ i_gc_rwsem lock held, in order to avoid block address change
+> during __f2fs_commit_atomic_write().
 > 
-> In this case, we cannot do anything further, so if filesystem is readonly,
-> do not trigger the BUG. Instead, clean up resources to the best of our
-> ability to prevent triggering subsequent resource leak checks.
+> Meahwhile, this patch adds f2fs_wait_on_block_writeback_range()
+> to wait completion of block migration.
 > 
-> If there is anything important I'm missing, please let me know, thanks.
-> 
-> Reported-by: syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com
-> Closes: https://syzkaller.appspot.com/bug?extid=ebea2790904673d7c618
-> Fixes: ca7d802a7d8e ("f2fs: detect dirty inode in evict_inode")
-> CC: stable@vger.kernel.org
-> Signed-off-by: Julian Sun <sunjunchao2870@gmail.com>
+> Fixes: 3db1de0e582c ("f2fs: change the current atomic write way")
+> Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
->  fs/f2fs/inode.c | 8 ++++++--
->  1 file changed, 6 insertions(+), 2 deletions(-)
+> v2:
+> - fix error path handling.
+>  fs/f2fs/segment.c | 27 +++++++++++++++++++++++----
+>  1 file changed, 23 insertions(+), 4 deletions(-)
 > 
-> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-> index aef57172014f..52d273383ec2 100644
-> --- a/fs/f2fs/inode.c
-> +++ b/fs/f2fs/inode.c
-> @@ -892,8 +892,12 @@ void f2fs_evict_inode(struct inode *inode)
->  			atomic_read(&fi->i_compr_blocks));
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 3aee71c9f3c6..a43054ab0cf1 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -236,6 +236,9 @@ static int __replace_atomic_write_block(struct inode *inode, pgoff_t index,
+>  		return err;
+>  	}
 >  
->  	if (likely(!f2fs_cp_error(sbi) &&
-> -				!is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
-> -		f2fs_bug_on(sbi, is_inode_flag_set(inode, FI_DIRTY_INODE));
-> +				!is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
-> +		if (!f2fs_readonly(sbi->sb))
-> +			f2fs_bug_on(sbi, is_inode_flag_set(inode, FI_DIRTY_INODE));
-> +		else
-> +			f2fs_inode_synced(inode);
-> +	}
->  	else
->  		f2fs_inode_synced(inode);
+> +	if (__is_valid_data_blkaddr(dn.data_blkaddr))
+> +		f2fs_wait_on_block_writeback_range(inode, dn.data_blkaddr, 1);
+> +
+>  	if (recover) {
+>  		/* dn.data_blkaddr is always valid */
+>  		if (!__is_valid_data_blkaddr(new_addr)) {
+> @@ -339,6 +342,9 @@ static int __f2fs_commit_atomic_write(struct inode *inode)
+>  				goto out;
+>  			}
+>  
+> +			f2fs_wait_on_block_writeback_range(cow_inode,
+> +								blkaddr, 1);
+> +
+>  			new = f2fs_kmem_cache_alloc(revoke_entry_slab, GFP_NOFS,
+>  							true, NULL);
+>  
+> @@ -379,16 +385,29 @@ int f2fs_commit_atomic_write(struct inode *inode)
+>  	struct f2fs_inode_info *fi = F2FS_I(inode);
+>  	int err;
+>  
+> +	f2fs_down_write(&fi->i_gc_rwsem[WRITE]);
+> +
+>  	err = filemap_write_and_wait_range(inode->i_mapping, 0, LLONG_MAX);
+>  	if (err)
+> -		return err;
+> +		goto out;
+>  
+> -	f2fs_down_write(&fi->i_gc_rwsem[WRITE]);
+> -	f2fs_lock_op(sbi);
+> +	/* writeback GCing page of cow_inode */
+> +	err = filemap_write_and_wait_range(fi->cow_inode->i_mapping,
+> +							0, LLONG_MAX);
+> +	if (err)
+> +		goto out;
+>  
+> -	err = __f2fs_commit_atomic_write(inode);
+> +	filemap_invalidate_lock(inode->i_mapping);
+> +
+> +	/* don't allow clean page loaded by GC to pollute atomic_file */
+> +	truncate_pagecache(inode, 0);
 
-What about:
-
-  	if (likely(!f2fs_cp_error(sbi) &&
-		   !is_sbi_flag_set(sbi, SBI_CP_DISABLED)) &&
-		   !f2fs_readonly(sbi->sb)))
-		f2fs_bug_on(sbi, is_inode_flag_set(inode, FI_DIRTY_INODE));
-	else
-		f2fs_inode_synced(inode);
-
->
+Performance impact?
 
 >  
+> +	f2fs_lock_op(sbi);
+> +	err = __f2fs_commit_atomic_write(inode);
+>  	f2fs_unlock_op(sbi);
+> +
+> +	filemap_invalidate_unlock(inode->i_mapping);
+> +out:
+>  	f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
+>  
+>  	return err;
 > -- 
-> 2.39.2
+> 2.40.1
 
 
 _______________________________________________
