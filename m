@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6E9396525F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 Aug 2024 23:53:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1112F965262
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 Aug 2024 23:53:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sjn4g-0004cO-LD;
-	Thu, 29 Aug 2024 21:53:03 +0000
+	id 1sjn4l-0002oE-SB;
+	Thu, 29 Aug 2024 21:53:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1sjn4e-0004by-Qo
+ (envelope-from <daeho43@gmail.com>) id 1sjn4i-0002nx-3Q
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 29 Aug 2024 21:53:01 +0000
+ Thu, 29 Aug 2024 21:53:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=69BLrci8h2uTitvESztrQSBwSpGSo97sp/z053MaEPc=; b=OkFP71EbONPnQmPUC+qSqg9C5I
- 64tImLzfs9wA+gsxpRu0hH+KlDFD2Qstn1q7Pu2qSuLTcUbNlOz0dUpzDA3w2UK/E3OEJnRdUOofF
- M29j53oaJfqUecgKduK8gXbOHwKh/1L3qLu6cd9UlVVfGViai/EovnZeXkCx9b4AouS8=;
+ bh=zRLMPwvKQt3Fm+472wogPuvTaJti/5yUeUAEHMi0T1Y=; b=lQbl7bOeAtu5uNvCt73KG/aqDP
+ ke+16tuL/6rXvvznjhPcsvyXQTuUA5DNFBSH3+QgV58Yeu2LGvxC7O8eMntcVbcq2yNApf6sJnAqq
+ 0W+z4UBQmbVezpR6GS0zc6cUN65q0P2e7M9PxjKuoZR5QG/iZDqJthDbwD4+OJBtL/Qc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -31,61 +31,61 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=69BLrci8h2uTitvESztrQSBwSpGSo97sp/z053MaEPc=; b=eFlXFwz5zn7RIqIgMVMAPCRudS
- 1qsi62iDxrRNOmwYS/e/1w/t0Euizya1ptaKXd9+PrPCiS3xne1mHn1fhfm6JGXgZxN/vEjCs27aV
- XmSFZqHJyOboyqV+xMYyAPwFnK4MLe8vimqGyQXkjneXbgpFA+Q9UUWg4wCSfrVQd2Xw=;
-Received: from mail-ot1-f54.google.com ([209.85.210.54])
+ bh=zRLMPwvKQt3Fm+472wogPuvTaJti/5yUeUAEHMi0T1Y=; b=OirV6oj/2T/zHg2ZCwmylGYdei
+ 4CC5Vzisb8kIS59njeP/TOCEB0kRmUysPKJpycmwoJES7v81g266nO7ejCLoDcwXEDLn7Arb+YRKL
+ EJ6z9JVkA3FMoAlnsnORa8Ln63W6vKv2yP2KrWUjU2Cu6Nz7XZFMm84bopGcEMxcyHMg=;
+Received: from mail-oo1-f41.google.com ([209.85.161.41])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1sjn4e-0007bT-Rp for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 29 Aug 2024 21:53:01 +0000
-Received: by mail-ot1-f54.google.com with SMTP id
- 46e09a7af769-70f660d2250so274875a34.2
+ id 1sjn4h-0007bX-Gr for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 29 Aug 2024 21:53:04 +0000
+Received: by mail-oo1-f41.google.com with SMTP id
+ 006d021491bc7-5da686531d3so744945eaf.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 29 Aug 2024 14:53:00 -0700 (PDT)
+ Thu, 29 Aug 2024 14:53:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724968370; x=1725573170; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1724968373; x=1725573173; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=69BLrci8h2uTitvESztrQSBwSpGSo97sp/z053MaEPc=;
- b=IF8OYEL5NP8cHqROLZuGRhiTIcb2PcCFha/tp7bw7YCssaManvdQNLOLY6Z0eFmGKF
- q2sjHP0dytJZreaAxuvnlcnJ5JhdBQ3wJiSNN3/PnoCK0eioCoA9Aw6/jnRYsEF9IHnz
- Mr5t2rNPAi69gMFyntZ5lexG6Zu2FoxfVZp6YOe2ueL1boD/Zr7SXKtP5bzMDa/7LrES
- 9F42/uetPU55DBid2BRdYlxgxFSYDMgYLX4etVhn99qmKaNTwLgsICqxBMfxCafedRKF
- LGBHO95CqktlmChXju1Neya9A67/S359p+ku8biRdqvuwQMZp2xhrv4Nk8ij8+JNQRlX
- xuyA==
+ bh=zRLMPwvKQt3Fm+472wogPuvTaJti/5yUeUAEHMi0T1Y=;
+ b=PY75ohCU4UmHQMpxi+ojZQf3LO7Sb3TUzJzRVqoNL+2Zg7Lew4MDJiMWLVbfwltgeo
+ zBTdHFnvG6PYCY4spZKJZf0KU7FLbmgdZ9fntnhv3cHG5aDuIMod++E49e8aRczaxWg4
+ f7R1QdOOHasuGpnERTzLn0STatohe8jm8NPsl63tpCfeplBHudoaBTwMbI4JSkdSyog5
+ Zb06L0Hen2EwQw6x3/mIu8BfQ896W0HVu4IeIcU6cbt2Mulmegz+QmvqgMsVjGOqyaRS
+ sxlZukTkd9cjH/DCcKIoLQ2KbDvtrt+hmlbAAhASbxHZGxkuROfIBte7iK8tepS79vUk
+ u5VA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724968370; x=1725573170;
+ d=1e100.net; s=20230601; t=1724968373; x=1725573173;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=69BLrci8h2uTitvESztrQSBwSpGSo97sp/z053MaEPc=;
- b=npuC57jkdQgUnLWTiaTFk6VRFYLvCNtXe8YhjU97l7IgSLXXwSiTtAg+rhDd9MaGiP
- BlV8mj+ZmvOalUePa0IxIIZYKkjn4Egh4+qKY5rzU+TlmF1JAUp4hAJO2cNHxNMvEOJo
- f+gHVFtUeZ7cTPYwjNnLtbOGo3wFc6M8yFyuQpt4+6gjXNqPB88V5zb+Lh/02i343evS
- FZ1RCi28CaQqVPmUA/WrPdHgLPA1tSprUx4TAd8SfLGFpIoxj7T3GsW9JIGKJ1SUCVKh
- VspejdRMvvJQfNYhd4rZtEAh3VcMIq0Dc2+xVQEq7SrNiLbhzyxAdV8wsSXnh89Z0iGl
- Qp9Q==
+ bh=zRLMPwvKQt3Fm+472wogPuvTaJti/5yUeUAEHMi0T1Y=;
+ b=couynIsUUb/1XbKOpeSssQMtXl8ZCdUj+qeC6+Xy7FQYp5lc6LtJO0Ft8NMedyutsi
+ 8BePoFBnvuvBZcPmBWAuOg6lY8ohMq0CsBM7alunTKH6hdY16WRYfEa3HIvo+0CyfL7L
+ jd//dvc/PLuRFeJcZ5JmSLPL/fBiheYih01RQBKGVFt8e7XQuSQ+Bhu0c/j6vyt23eic
+ S40rmqYfjtqvssUt15lUyoRrvC9gbFxlNKlk3CXrSSbdJjhzx03cybR/v96vcpiX3mlv
+ 7Xvz+AiMCf9w2q9Pm2lxxQUVSnmeqaEFncMa6mCNR1IgGBumHYa4X+DbtFGGd+N5JSL1
+ C2Dg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWSDxpOs27MshgsaTq3xZT9WL6OtcHEeOMsOsYc7WbpEZ98JPiVG0jXCk/R+Ib84HxxrbvUAvkh62a62oBpc6H/@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YxInjMgRBCC96/u6d8uR31scSMhUsW4IPlHzSK76u5eeFQmGYa6
- BlSLKCwkYEVT5oDMNRV43HcSBXb5HKV0QEGxqk8MiskSFZ6t6BKh
-X-Google-Smtp-Source: AGHT+IH2rAoCzKieGURg0hEYXUEFMYscZLTq0dHlouR7C/XTDPs+NEDDfKhc1cHTJv8eT6BXCLxtxA==
-X-Received: by 2002:a05:6358:910d:b0:1b1:ac7f:51d5 with SMTP id
- e5c5f4694b2df-1b603cb548dmr515038355d.22.1724968370066; 
- Thu, 29 Aug 2024 14:52:50 -0700 (PDT)
+ AJvYcCXXx9/7JRgaT9sF+IhEid98d2pyo6a1LolJ/4dm2Y/i+u6Ts4dqIySesIDqgKhriFhy8o4DKnWTqdj27wkyuxZR@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yz+QUWC6yWTyrEpM0HeoyXWh25fcb+pdHl4ts41WkotAcNa60LI
+ UzjSN1p8AJDgqbPszkkIVKvOB7QICRqpKzQyPn1V/uh2ZkFLUQGM62Gbig==
+X-Google-Smtp-Source: AGHT+IHReHz5dkOTT0E3ySn9+cM7bJ/Nx1/8UlkAX6jCOafZzdoUXXv/EWl/dSX8evhDJKm++nRTGQ==
+X-Received: by 2002:a05:6358:9107:b0:1ac:f2bb:8aa6 with SMTP id
+ e5c5f4694b2df-1b603cc8d4amr518379555d.21.1724968372848; 
+ Thu, 29 Aug 2024 14:52:52 -0700 (PDT)
 Received: from daehojeong-desktop.mtv.corp.google.com
  ([2a00:79e0:2e14:7:a1e7:73eb:e77e:3e2b])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7d22e9d512asm1705653a12.78.2024.08.29.14.52.49
+ 41be03b00d2f7-7d22e9d512asm1705653a12.78.2024.08.29.14.52.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 14:52:49 -0700 (PDT)
+ Thu, 29 Aug 2024 14:52:52 -0700 (PDT)
 From: Daeho Jeong <daeho43@gmail.com>
 To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  kernel-team@android.com
-Date: Thu, 29 Aug 2024 14:52:37 -0700
-Message-ID: <20240829215242.3641502-2-daeho43@gmail.com>
+Date: Thu, 29 Aug 2024 14:52:38 -0700
+Message-ID: <20240829215242.3641502-3-daeho43@gmail.com>
 X-Mailer: git-send-email 2.46.0.469.g59c65b2a67-goog
 In-Reply-To: <20240829215242.3641502-1-daeho43@gmail.com>
 References: <20240829215242.3641502-1-daeho43@gmail.com>
@@ -97,11 +97,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Daeho Jeong Now we do readahead for a full section by
- not considering migration_granularity and it triggers unnecessary read. So,
- make it read with the correct amount. Signed-off-by: Daeho Jeong ---
- fs/f2fs/gc.c
- | 33 ++++++++++++++++++++ 1 file changed, 20 insertions(+), 13 deletions(-)
+ Content preview:  From: Daeho Jeong For the fine tuning of GC behavior, add
+ reserved_segments sysfs node. Signed-off-by: Daeho Jeong ---
+ Documentation/ABI/testing/sysfs-fs-f2fs
+ | 6 ++++++ fs/f2fs/sysfs.c | 2 ++ 2 files changed, 8 insertions(+) 
  Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -109,20 +108,20 @@ X-Spam-Report: Spam detection software,
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.210.54 listed in sa-accredit.habeas.com]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.210.54 listed in bl.score.senderscore.com]
+ [209.85.161.41 listed in sa-accredit.habeas.com]
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
  in digit [daeho43[at]gmail.com]
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [daeho43[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.161.41 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.54 listed in wl.mailspike.net]
+ [209.85.161.41 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -132,9 +131,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1sjn4e-0007bT-Rp
-Subject: [f2fs-dev] [PATCH 2/7] f2fs: read summary blocks with the correct
- amount for migration_granularity
+X-Headers-End: 1sjn4h-0007bX-Gr
+Subject: [f2fs-dev] [PATCH 3/7] f2fs: add reserved_segments sysfs node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -153,82 +151,48 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Daeho Jeong <daehojeong@google.com>
 
-Now we do readahead for a full section by not considering
-migration_granularity and it triggers unnecessary read. So, make it read
-with the correct amount.
+For the fine tuning of GC behavior, add reserved_segments sysfs node.
 
 Signed-off-by: Daeho Jeong <daehojeong@google.com>
 ---
- fs/f2fs/gc.c | 33 ++++++++++++++++++++-------------
- 1 file changed, 20 insertions(+), 13 deletions(-)
+ Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++
+ fs/f2fs/sysfs.c                         | 2 ++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 46e3bc26b78a..b5d3fd40b17a 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1708,24 +1708,33 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
- 	struct blk_plug plug;
- 	unsigned int segno = start_segno;
- 	unsigned int end_segno = start_segno + SEGS_PER_SEC(sbi);
-+	unsigned int sec_end_segno;
- 	int seg_freed = 0, migrated = 0;
- 	unsigned char type = IS_DATASEG(get_seg_entry(sbi, segno)->type) ?
- 						SUM_TYPE_DATA : SUM_TYPE_NODE;
- 	unsigned char data_type = (type == SUM_TYPE_DATA) ? DATA : NODE;
- 	int submitted = 0;
- 
--	if (__is_large_section(sbi))
--		end_segno = rounddown(end_segno, SEGS_PER_SEC(sbi));
-+	if (__is_large_section(sbi)) {
-+		sec_end_segno = rounddown(end_segno, SEGS_PER_SEC(sbi));
- 
--	/*
--	 * zone-capacity can be less than zone-size in zoned devices,
--	 * resulting in less than expected usable segments in the zone,
--	 * calculate the end segno in the zone which can be garbage collected
--	 */
--	if (f2fs_sb_has_blkzoned(sbi))
--		end_segno -= SEGS_PER_SEC(sbi) -
-+		/*
-+		 * zone-capacity can be less than zone-size in zoned devices,
-+		 * resulting in less than expected usable segments in the zone,
-+		 * calculate the end segno in the zone which can be garbage
-+		 * collected
-+		 */
-+		if (f2fs_sb_has_blkzoned(sbi))
-+			sec_end_segno -= SEGS_PER_SEC(sbi) -
- 					f2fs_usable_segs_in_sec(sbi, segno);
- 
-+		if (gc_type == BG_GC)
-+			end_segno = start_segno + sbi->migration_granularity;
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index cad6c3dc1f9c..4fcd0f824bde 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -763,3 +763,9 @@ Date:		November 2023
+ Contact:	"Chao Yu" <chao@kernel.org>
+ Description:	It controls to enable/disable IO aware feature for background discard.
+ 		By default, the value is 1 which indicates IO aware is on.
 +
-+		if (end_segno > sec_end_segno)
-+			end_segno = sec_end_segno;
-+	}
-+
- 	sanity_check_seg_type(sbi, get_seg_entry(sbi, segno)->type);
++What:		/sys/fs/f2fs/<disk>/reserved_segments
++Date:		August 2024
++Contact:	"Daeho Jeong" <daehojeong@google.com>
++Description:	In order to fine tune GC behavior, we can control the number of
++		reserved segments.
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index fee7ee45ceaa..2ed773132f40 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -969,6 +969,7 @@ SM_INFO_GENERAL_RW_ATTR(min_fsync_blocks);
+ SM_INFO_GENERAL_RW_ATTR(min_seq_blocks);
+ SM_INFO_GENERAL_RW_ATTR(min_hot_blocks);
+ SM_INFO_GENERAL_RW_ATTR(min_ssr_sections);
++SM_INFO_GENERAL_RW_ATTR(reserved_segments);
  
- 	/* readahead multi ssa blocks those have contiguous address */
-@@ -1762,9 +1771,6 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
- 
- 		if (get_valid_blocks(sbi, segno, false) == 0)
- 			goto freed;
--		if (gc_type == BG_GC && __is_large_section(sbi) &&
--				migrated >= sbi->migration_granularity)
--			goto skip;
- 		if (!PageUptodate(sum_page) || unlikely(f2fs_cp_error(sbi)))
- 			goto skip;
- 
-@@ -1803,7 +1809,8 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
- 
- 		if (__is_large_section(sbi))
- 			sbi->next_victim_seg[gc_type] =
--				(segno + 1 < end_segno) ? segno + 1 : NULL_SEGNO;
-+				(segno + 1 < sec_end_segno) ?
-+					segno + 1 : NULL_SEGNO;
- skip:
- 		f2fs_put_page(sum_page, 0);
- 	}
+ /* DCC_INFO ATTR */
+ DCC_INFO_RW_ATTR(max_small_discards, max_discards);
+@@ -1138,6 +1139,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(min_seq_blocks),
+ 	ATTR_LIST(min_hot_blocks),
+ 	ATTR_LIST(min_ssr_sections),
++	ATTR_LIST(reserved_segments),
+ 	ATTR_LIST(max_victim_search),
+ 	ATTR_LIST(migration_granularity),
+ 	ATTR_LIST(dir_level),
 -- 
 2.46.0.469.g59c65b2a67-goog
 
