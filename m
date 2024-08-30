@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20F2E966AE8
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 30 Aug 2024 22:52:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE953966AE7
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 30 Aug 2024 22:52:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sk8bC-0000mD-6s;
-	Fri, 30 Aug 2024 20:52:02 +0000
+	id 1sk8bA-0001TG-Og;
+	Fri, 30 Aug 2024 20:52:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sk8b8-0000lc-Jb
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sk8b9-0001St-OQ
  for linux-f2fs-devel@lists.sourceforge.net;
  Fri, 30 Aug 2024 20:51:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,64 +21,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oZrsCLSDhhzOngp3AjvhXO/yWEDOi9SRwjC2QUJ66P4=; b=AcHuvg5WAqOaaD49JuczU6+f2S
- qhzfCPm+4fXQDMGWNDXJfbLVhuoN09RiZ0i5U7sCMYqoQi/4iJVYa3jnu4LGxsl81rgQpc1IkN6t3
- k8nOYFKCRdglA3+brlzcEoOjjzDAcDqOIXa4IqJ53DbJ5TOa6GmjE9MMeWVx0oW9MPrE=;
+ bh=aHerplCGXQ+ywIIAU4R13A1h7CNEmNrv/nyaiWFsKvA=; b=J8aPbBBNdp+6GLAkpNIyRValg5
+ Bu0xSMk6fbi8bi02m2UB8+6fiwI+VhwKhyzlMIVTN5GdNDe5FcII9IgNHdSdICpJ52Oksdo5Yc5sK
+ D/NGV/ZWPZeXFvjtzF0AThuK5VKjRz1hiuExFjTaCsmEnfDXkh+sYrCx/WWIj90yYDZQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oZrsCLSDhhzOngp3AjvhXO/yWEDOi9SRwjC2QUJ66P4=; b=V1yLGlKs8tDu9Y0sb/oJCOmxie
- V/xv9GNU+DIUbD5JibFkKLL2lt4nNFP1wZlZhJSJPBCCmkDLPKo6rxxRqy/S6khu0xZCTLfEaHojb
- P4KNg8UN+3Fb3HOprN9QxusYii8Za9dixIk1LOC/gRUKOXD4Tp3J6xoBCgPGZNcc+Iis=;
+ bh=aHerplCGXQ+ywIIAU4R13A1h7CNEmNrv/nyaiWFsKvA=; b=TqTaTAjmf11+d1baBu1xRmMqWQ
+ QQKAKTIzKUQJUuoBefrgVTh5lsfHBBUH+5i9zND65mEWswFwlPnVgztscF326SdIZ0sok1lV5ku8l
+ DsvvDQMJa5KRAp40UN72DrAxiF1RWlPh04KyaxKB4MgE4fQAnpdIFadTayu10fDph9D8=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sk8b8-0005nb-Mi for linux-f2fs-devel@lists.sourceforge.net;
+ id 1sk8b9-0005nd-3N for linux-f2fs-devel@lists.sourceforge.net;
  Fri, 30 Aug 2024 20:51:59 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id F25CEA41A84;
- Fri, 30 Aug 2024 20:51:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3921C4CEC6;
- Fri, 30 Aug 2024 20:51:46 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 718F8A41AD3;
+ Fri, 30 Aug 2024 20:51:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B9D0C4CEC6;
+ Fri, 30 Aug 2024 20:51:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1725051106;
- bh=+uGLknkE6IoO7a90AR+5N+DJ4wXbk1knYsF6gQ4Z0iU=;
+ s=k20201202; t=1725051108;
+ bh=lFgtvMYeTEGkEcxfD1ufZdF6r7CAqSj8sqzU1hMPTxk=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=LuY3lw/o8cVgpsG0zbxiatyxvXTQqqsXeepFteXMMYvxLJCC0o2bVYp081n77XiWI
- VOHpM4dQUlKXlDyLPShI+nnB+JNP4895XkICs1aSsmfL4fZzx/Dgm4raGw3QAwD7Xv
- buQKS79wFpF2mQBvTzh0vJYznWS+1/lngLkTxpz+JMpMlCPFd5i+5zTvNTF9DW51Dc
- aXX0aPhDtuHfTpuZ6WsY7V9d15K2i9h3IbBhoE1hsWwx9+OVb9cWvPWpCSCiS2i0GY
- kerj/6Ft2ze9AA83B9gKwUBPIQb1CLGVHY4y5snf+9lCuUnrxDf9asWEBEyqKDc0GP
- W6RZcQplP69sg==
+ b=sOLi6IPXBHwOs1i6+i/qT1eUM5PMdvgWIJKK5+7iQJjQ2vG1cz/s+cEAlUGFbbqWv
+ MmA9yuKrsZwIr6FjhuqDAv9AJwH3w1cG4fy2gcHm6isnKmWUkV49JbUJB58AFDuokt
+ iwrCA8/88SzItefPtvqNOK0HKcJFM6u/odBu7DXWXthR7dWu9ZC0AIAtQCdpfhzJet
+ 9OrWcgvibzKrzyryqA1bFKAMTkrRzod7AZpfZSKUYdQY0+89Mlfk4CmRibqxNvHgg4
+ VJgfFhAYgLJAIj5MlCGDFTMMjMhzOMSzUU5G+p4TGnZJHqOmlSbJ+Hl/vqmq23455Q
+ /1GnIIL8uoBUA==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 70ECC3809A80; Fri, 30 Aug 2024 20:51:48 +0000 (UTC)
+ EB2FB3809A80; Fri, 30 Aug 2024 20:51:49 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <172505110700.2712133.2963157749047738751.git-patchwork-notify@kernel.org>
-Date: Fri, 30 Aug 2024 20:51:47 +0000
-References: <20240815004728.983290-1-chao@kernel.org>
-In-Reply-To: <20240815004728.983290-1-chao@kernel.org>
+Message-Id: <172505110849.2712133.2597797946591195513.git-patchwork-notify@kernel.org>
+Date: Fri, 30 Aug 2024 20:51:48 +0000
+References: <20240814135059.802454-1-chao@kernel.org>
+In-Reply-To: <20240814135059.802454-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 15 Aug 2024 08:47:28 +0800 you
- wrote: > From: Christophe JAILLET <christophe.jaillet@wanadoo.fr> > > This
- file already uses sysfs_emit(). So be consistent and also use >
- sysfs_emit_at(). > > T [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 14 Aug 2024 21:50:59 +0800 you
+ wrote: > Convert to use folio, so that we can get rid of 'page->index' to
+ > prepare for removal of 'index' field in structure page [1]. > > [1]
+ https://lore.kern [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [147.75.193.91 listed in sa-accredit.habeas.com]
@@ -89,18 +89,20 @@ X-Spam-Report: Spam detection software,
  [147.75.193.91 listed in bl.score.senderscore.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [147.75.193.91 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sk8b8-0005nb-Mi
-Subject: Re: [f2fs-dev] [PATCH RESEND] f2fs: Use sysfs_emit_at() to simplify
- code
+X-Headers-End: 1sk8b9-0005nd-3N
+Subject: Re: [f2fs-dev] [PATCH v2 8/9] f2fs: convert f2fs_read_multi_pages()
+ to use folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,8 +117,8 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, christophe.jaillet@wanadoo.fr,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org, willy@infradead.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -126,19 +128,20 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Thu, 15 Aug 2024 08:47:28 +0800 you wrote:
-> From: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+On Wed, 14 Aug 2024 21:50:59 +0800 you wrote:
+> Convert to use folio, so that we can get rid of 'page->index' to
+> prepare for removal of 'index' field in structure page [1].
 > 
-> This file already uses sysfs_emit(). So be consistent and also use
-> sysfs_emit_at().
+> [1] https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
 > 
-> This slightly simplifies the code and makes it more readable.
+> Cc: Matthew Wilcox <willy@infradead.org>
+> Signed-off-by: Chao Yu <chao@kernel.org>
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,RESEND] f2fs: Use sysfs_emit_at() to simplify code
-    https://git.kernel.org/jaegeuk/f2fs/c/f7a678bbe5a8
+  - [f2fs-dev,v2,8/9] f2fs: convert f2fs_read_multi_pages() to use folio
+    https://git.kernel.org/jaegeuk/f2fs/c/0a823f608bfe
 
 You are awesome, thank you!
 -- 
