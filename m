@@ -2,89 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB42996838C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  2 Sep 2024 11:48:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4815968486
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  2 Sep 2024 12:21:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sl3fl-0005lf-1q;
-	Mon, 02 Sep 2024 09:48:33 +0000
+	id 1sl4BS-0004JG-GH;
+	Mon, 02 Sep 2024 10:21:18 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <shivani.agarwal@broadcom.com>) id 1sl3fi-0005lY-Rr
+ (envelope-from <shivani.agarwal@broadcom.com>) id 1sl4BO-0004J8-Vh
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Sep 2024 09:48:30 +0000
+ Mon, 02 Sep 2024 10:21:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WGC2/wr/WrQEE/BTETF77jc4B4si+qDhZdrDFSYRq0o=; b=WDcZeVWyVvPPX8h6xLS/2Tbfhb
- YL9DVaEFAipUXzmrY4/jPyT9B3359qVUIUWfPgQfNVBs4oIGMKb54eMrLanhnC+LdkV0vWMezlPdo
- efrMGgE3KLlaK42zvqJGYp0dJcAHGVE9qbW2cU2XMtyU6wiZ6jQWkZC7a4pahfjDqYeM=;
+ bh=WGC2/wr/WrQEE/BTETF77jc4B4si+qDhZdrDFSYRq0o=; b=Rxbmwasd7Jk1S+kEtwgic4Kay0
+ QtGjfZMB21A25zMFB8xGSa5AZzrbDUVq00kWAeiXLSekOYIvR12bOxuZmDqA2zqQcT7eM97TaWxXc
+ dsCyKfN0CGxKiKazt+lXs1YDHvtLZm0IshELKB4+XOe1aIl2S5yLyZfEvxFE8sRercmE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=WGC2/wr/WrQEE/BTETF77jc4B4si+qDhZdrDFSYRq0o=; b=A
- tbUA9hnMYXKX0lScwVb8UCXA1V1s2rQn+GUTug2t7dAnkFwAHc+Yn2BK5JZkb1wk0fyTsZajbLsGE
- O49z1n6BDnHM4YZFgN6YTQgnrsyygqEoWZSfUzekQY+ZvIVDbytqVPog4bCAu19Q/4xzRlz42xR2k
- bCkEEZEVenHkJmg4=;
-Received: from mail-qv1-f49.google.com ([209.85.219.49])
+ List-Owner:List-Archive; bh=WGC2/wr/WrQEE/BTETF77jc4B4si+qDhZdrDFSYRq0o=; b=D
+ +Vvi8Q0m1pDq32RuxQvGU+x/IgJHUtoJzGy0ndsxjLAB8pSHPTaBdrZcW9wfBSu64GDSswS/qTU8G
+ RhLfKbHE+odVp1iwQbYPQihTfjD1MNAevouNortRK8pmvauf+2GeiH0MhOhLeg8gqic2wD5esTliN
+ g7bUdA7Nk6CmoIWg=;
+Received: from mail-pl1-f180.google.com ([209.85.214.180])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1sl3fh-0000OW-VB for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Sep 2024 09:48:30 +0000
-Received: by mail-qv1-f49.google.com with SMTP id
- 6a1803df08f44-6c352bcb569so12196526d6.0
+ id 1sl4BM-0003Ir-LB for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 02 Sep 2024 10:21:14 +0000
+Received: by mail-pl1-f180.google.com with SMTP id
+ d9443c01a7336-1fc47abc040so31962525ad.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 02 Sep 2024 02:48:29 -0700 (PDT)
+ Mon, 02 Sep 2024 03:21:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1725270499; x=1725875299;
+ d=broadcom.com; s=google; t=1725272462; x=1725877262;
  darn=lists.sourceforge.net; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=WGC2/wr/WrQEE/BTETF77jc4B4si+qDhZdrDFSYRq0o=;
- b=W5vgcTQ8VAc0KmQNNf3M9mz5thEEMIzKEIGyLWj39Hv2xlpD8EWuKEemW9+DoiXKjN
- /dSnRNGA4MMadGRsSx1kkJHlei1r1OcOvlAML/Rc/RqGfmqiJsOeB8TnPcsQhEskEt8D
- Va4AQeCigexIoPiFVOlPLescge6bM7u+8LP+o=
+ b=BBOKHHozQ7ypiRooTJAnPDHVTAefOCVFCWmpWMwKw2kXw79IcJJ4+YbzpBRPFdn2ms
+ t3MJz4Z4gd0WTOvUNxqjlxxDwkfWST4S5HbcZftZdwC35tKMgee7MZeodPqjnz7IwZIh
+ edJIpEclScQUQ53jBSMQGwf6AHjj4Em9XWadg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725270499; x=1725875299;
+ d=1e100.net; s=20230601; t=1725272462; x=1725877262;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=WGC2/wr/WrQEE/BTETF77jc4B4si+qDhZdrDFSYRq0o=;
- b=N7fIe06k9l7hQjS7+Hx+Ob8B1sdvpLopUqBgnxWqyver3KZtl2CbxGFL5XNUlZe+Ba
- TI6uCsHEtOFdrIh16eAjX8QfpCCzjzVCYDXkSOVGPXCAb+JSYpjgWQedMxJ94IrsobXF
- SivOBF4h3/LBe/BWfwoR1C1CM+M8W4zl3nvrolCAeS50/ht+DKKQZLtsmOFYMvJLLf7h
- vhUXbfYYz5f3jSIZQnYf72fj5sJX0F66/z06AzH9RE3vdX6hzyjDwhhhSwjjuOgoS7tx
- E8E1vuRHPbQTu39EEOuiz5kId4BhgcXIUU/Fus8q7usr/499+0Oq+iFQwmf6wEUlsqhh
- dCZg==
+ b=EdMsH4MBrgdz2sbEX/P/m2pILBwvpcZlQy8gCXR+QlWWSpEQUHw62osa7gXs9Alj1N
+ qMNcKnNXalO57uI1kLdES0QuJ6/AGIbwpjAYKAOpnS6stL5QnnX7vXfpb2zrcqosWWgm
+ Uve6KqBNgJhbnd6h5WBL4nklqD/oL8lF90gem/S8yQMyv7KsDDmjCQjTOonsVSylubQj
+ mDKhcGprlDrkd9vCzupnRe9uKttuYGAHz17ZMrJ8bokqT87noglK4HbZcxnKuKbvH26l
+ VEpwt4O9lBqoV9QQTif5WjW1B1FqyWZR5CCT2oKpQJglTGj8q4PxVQ4JPGU+WobsnvOo
+ gpjA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVSAYyiL89eI2X71wofZcGsTyK/GQkGmnxu+cDkfBzZTSOVmI+nqQBKMMmpxQJ+UAwXEpF2xMLeHZia1c2mKnBW@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YyCk3i+LWsF0s0kFP6axS2ds20OvTpnHibQeOAQA/ilRDOiiLTw
- 9o39qkujbfMfNlFGNguf6mA6XZgXVoVw6z2y6tGWigSryME4SJ2z/AfB/4H5v1ggiUx2F2zxMTX
- mQQza
-X-Google-Smtp-Source: AGHT+IHvDWC+orccoTAH9Nz3IAZQPy84jFzwKssu8xWtUujKJAW/7Ch2F+6bGNdqKjZicYipFJdvnQ==
-X-Received: by 2002:a17:903:22ce:b0:202:3a75:ec89 with SMTP id
- d9443c01a7336-205466f906dmr67691635ad.31.1725268943866; 
- Mon, 02 Sep 2024 02:22:23 -0700 (PDT)
+ AJvYcCV9HuUkSYy8CANZjVXo8oc/F6h2fEM9atJ4R4+FDnr6KBfNOCrjd8vvPaca/u7wVzBKV1SLf3C2NDUCtVhs9KWD@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YxVcWs75QrhuROQufB2Ajhhi4AiqX02O6Mwm6XIp8s3z8N9NBw1
+ B+zVoil9/8T8fj7dBaQZn9rZNagJifr+PTmbMoxRqUIMf5gDE16jXpGZ3iKGZNTv2Bo9rDKGs8G
+ PFtj1
+X-Google-Smtp-Source: AGHT+IFFpNABbTR0Od9shAUxCDh79Vy9bj/kSc4NPnioHYER2337/NQN6V4/JU6s6tEeQo6iwe2zmw==
+X-Received: by 2002:a17:90a:eb08:b0:2d8:d254:6cdd with SMTP id
+ 98e67ed59e1d1-2d8d2547050mr2801998a91.38.1725269184969; 
+ Mon, 02 Sep 2024 02:26:24 -0700 (PDT)
 Received: from shivania.eng.vmware.com ([66.170.99.1])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-205152cd65esm62705985ad.77.2024.09.02.02.22.22
+ 98e67ed59e1d1-2d82a6e0700sm7904747a91.1.2024.09.02.02.26.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Sep 2024 02:22:23 -0700 (PDT)
+ Mon, 02 Sep 2024 02:26:24 -0700 (PDT)
 To: stable@vger.kernel.org,
 	gregkh@linuxfoundation.org
-Date: Mon,  2 Sep 2024 02:22:13 -0700
-Message-Id: <20240902092213.4982-1-shivani.agarwal@broadcom.com>
+Date: Mon,  2 Sep 2024 02:26:16 -0700
+Message-Id: <20240902092616.5249-1-shivani.agarwal@broadcom.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Spam-Score: -0.4 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
@@ -94,14 +94,14 @@ X-Spam-Report: Spam detection software,
  Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
  298b1e4182d657c3e388adcc29477904e9600ed5
  ] chenyuwen reports a f2fs bug as below: 
- Content analysis details:   (-0.4 points, 6.0 required)
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.219.49 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.219.49 listed in wl.mailspike.net]
+ no trust [209.85.214.180 listed in list.dnswl.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.180 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
@@ -111,8 +111,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sl3fh-0000OW-VB
+X-Headers-End: 1sl4BM-0003Ir-LB
 Subject: [f2fs-dev] [PATCH v6.1] f2fs: fix to truncate preallocated blocks
  in f2fs_file_open()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
