@@ -2,95 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C45C96A0C5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Sep 2024 16:35:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7609596A212
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Sep 2024 17:21:25 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1slUd4-0003XA-6c;
-	Tue, 03 Sep 2024 14:35:34 +0000
+	id 1slVLI-0007Dg-Gu;
+	Tue, 03 Sep 2024 15:21:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1slUd2-0003Ww-Gv
- for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Sep 2024 14:35:32 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3XinXZgkbAEs5BCxnyyr4n22vq.t11tyr75r4p106r06.p1z@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1slVLG-0007DT-GU for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Sep 2024 15:21:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
+ :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8Lh3fAo8mieXU/bFURs8Kb/gQNeLJ59plH7Pj7I1xRI=; b=Z3AOG0GC941/H49fOUEvPzszYU
- NnKI7T8tDH5cavUO1sNg+IfmtJLnVv+6OAPnwqG6xfyVBf37amZSYDrIdy+DhCV3R/ofFLnDFkqD6
- 0jxUGQ5kcoVu4X+WRIasAHCehjSh5K6qg01VWiiAEb6NsPoHacP65FBFIUB1oGaNO0eM=;
+ bh=pdhWR+G8uLjBKfvU6iFCSQyIIWpyU5h8YmkzUpZmhvQ=; b=MXoi27aTZkDjI1sY1dEVtn3zWZ
+ Cimq51VD8QUUCJ+v7vPzkudhiz3gK6Rm2xPXp5tgwi4SRpXpbzMDQ9NaKxybVg/Kx9b8YLt43HiTJ
+ dE1a4OctkcrkBDaafQNlakgtN9ax0rxSL2qTxo3Kn0VWRxmDpUCo4/q9eWBCv/WL6DR8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=8Lh3fAo8mieXU/bFURs8Kb/gQNeLJ59plH7Pj7I1xRI=; b=Vcm6bdi3qLCqWnq4OQtAJIFmgF
- iTIrWPufUfKS+VRHZQ0HR1LdDDY5kk88H56XN/M/C1RpJ6i0g6c5nieoq88slKm7QkQIvUX9ckBaq
- obic05NQ2BwnjbHs8iXVk0zg7ZdlBdKXkHhj2JNO4bjzwr+b8ZrrlAAHIOznnZyqi0Bc=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
+ Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=pdhWR+G8uLjBKfvU6iFCSQyIIWpyU5h8YmkzUpZmhvQ=; b=O
+ Zxv+UL1QYXCNrUc+iL19S4bSuQCgc1j+Kj8yP4IOn5ZGVytGxknNOvKktAA9ReNTTO2SvZXYdsYGA
+ 2DFMr2ZUXaLJAyVT5tpjDb3KG3raUUsZ/NWjnm5YOOxIOFurVb5qEsG0EkzZgSbJU7Chw8pFJIE3C
+ 9UQI714lFr/ElPks=;
+Received: from mail-io1-f71.google.com ([209.85.166.71])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1slUd1-0002Rf-UU for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Sep 2024 14:35:32 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 2F4805C5977;
- Tue,  3 Sep 2024 14:35:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C0B35C4CEC7;
- Tue,  3 Sep 2024 14:35:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1725374121;
- bh=SXW9Lb7ZYF60TtJNxa2tzxDrQEAQyWEpctMJfc6+Lnw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=eI2Ty3YGWuQvGA9egzniLii9YQG8AfW76NMVfcefuZrmPyHF4bE1yl47co3r94xpr
- lNhNFIBfd7Y0gztaRlvnjUyXb19Ngt5hz/WgwYyYjoo9lfHoSQKPf3wWH65zGJMKi2
- Arx90hFQceXXoDMQtcWokmLo9jzFEWRZ4rbh/iLoGd87XjmjfDpuSvH++Lr66wZg82
- +zkUu/rWYqR291y8VeN48DA80+O0xdnW9HQFM+n8h6Tg+pInvmX70OxcqbV8yJi/V7
- I8xz7TmjCusWsM7jIh9ivWozgayqxQXB9TjsCfQpdOeXT9BWK58O0HMtvrXSJ4s4ao
- yaUovB82siFIQ==
-Date: Tue, 3 Sep 2024 16:35:14 +0200
-To: Kanchan Joshi <joshi.k@samsung.com>
-Message-ID: <20240903-erfassen-bandmitglieder-32dfaeee66b2@brauner>
-References: <CGME20240826171409epcas5p306ba210a9815e202556778a4c105b440@epcas5p3.samsung.com>
- <20240826170606.255718-1-joshi.k@samsung.com>
- <20a9df07-f49e-ee58-3d0b-b0209e29c6af@samsung.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1slVLF-0005ZT-MS for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Sep 2024 15:21:14 +0000
+Received: by mail-io1-f71.google.com with SMTP id
+ ca18e2360f4ac-82a124bc41aso655557639f.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 03 Sep 2024 08:21:13 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725376863; x=1725981663;
+ h=to:from:subject:message-id:in-reply-to:date:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pdhWR+G8uLjBKfvU6iFCSQyIIWpyU5h8YmkzUpZmhvQ=;
+ b=iycwluOUEaw//zV7m7kZ5wKJQwUzTo3xu8umK2RVbIRbMtNIKVTFz8tbHz4GdqR7/8
+ Vjo6lv0L73xQUUpuhDoB/yEf/XyK8SJsT7QHCVKzr3VMOUUR1tKjspT5oLpPEy0riFMQ
+ VbMWAaAYuViYDil7m7hTj2Gm7pDvynBzla0gIl3xPLR8r6Mx3VxMpZkle0gch5fiIvXp
+ EtIRkBunYdziQJwzPKYtIkEG4k5vI+nyGAxWkTmr/PAEkoIIAACytBrjjWK/434TNusv
+ kibXkdTjJy79lwiw/r51+vyu1dmyXAn4evbZA6yWdfbEnS8weStYfUU+c7az+c4e9L8j
+ lJnQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWUu7S3+pTHM1mK0ncUS0sm/OpidNoVXS/lWwMxwS4uqp0o24P9PkYyBiZbqWZxMEHxfhkScC46Q2sRHX2buw+J@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yz2UbwxWWn4eVm85hYcraoiLmJ1bpNqeYbsQDRlH9kvnKyH5ZQa
+ QR2vP4FbHC5njNlMpN9IQHMJOuVoRVOBq9yksBIiWsiczOu+b11Hjb7SCQqvJnzZcp65CkT+R5X
+ PSyNTTeQQm7qaxh72YjYUWtNPeu1K5xFnJyTI9te7YuKCZMA4Fbf6uQg=
+X-Google-Smtp-Source: AGHT+IGuYDrHt//evjliRlOW0PwEhQcMUXOrsfLe+oymCy5dcfAwaEBvDhuYp5TPwilcadbw76Ma+1wpUBvjZysjrMFhUGCA373t
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20a9df07-f49e-ee58-3d0b-b0209e29c6af@samsung.com>
-X-Spam-Score: -5.4 (-----)
+X-Received: by 2002:a05:6638:8506:b0:4ce:8f9c:c601 with SMTP id
+ 8926c6da1cb9f-4d017c6028bmr843346173.0.1725376862815; Tue, 03 Sep 2024
+ 08:21:02 -0700 (PDT)
+Date: Tue, 03 Sep 2024 08:21:02 -0700
+In-Reply-To: <10d4a49b-c596-418e-969c-0830d678de87@kernel.org>
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <0000000000000320e90621389b3f@google.com>
+From: syzbot <syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.6 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Sep 03, 2024 at 07:58:46PM GMT, Kanchan Joshi wrote:
- > Hi Amir, > > > On 8/26/2024 10:36 PM, Kanchan Joshi wrote: > > Current
- write-hint infrastructure supports 6 temperature-based data life > [...] 
- Content analysis details:   (-5.4 points, 6.0 required)
+ Content preview:  Hello,
+ syzbot has tested the proposed patch and the reproducer
+ did not trigger any issue: Reported-by:
+ syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com
+ Tested-by: syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com 
+ Content analysis details:   (0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.166.71 listed in list.dnswl.org]
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.71 listed in wl.mailspike.net]
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1slUd1-0002Rf-UU
-Subject: Re: [f2fs-dev] [PATCH v4 0/5] Write-placement hints and FDP
+X-Headers-End: 1slVLF-0005ZT-MS
+Subject: Re: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_evict_inode (3)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,54 +111,28 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Christian Brauner via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Christian Brauner <brauner@kernel.org>
-Cc: "axboe@kernel.dk" <axboe@kernel.dk>, linux-block@vger.kernel.org,
- vishak.g@samsung.com, jack@suse.cz, sagi@grimberg.me,
- martin.petersen@oracle.com, gost.dev@samsung.com, amir73il@gmail.com,
- jlayton@kernel.org, linux-nvme@lists.infradead.org,
- linux-f2fs-devel@lists.sourceforge.net, James.Bottomley@hansenpartnership.com,
- linux-fsdevel@vger.kernel.org, chuck.lever@oracle.com, javier.gonz@samsung.com,
- linux-scsi@vger.kernel.org, kbusch@kernel.org, jaegeuk@kernel.org, hch@lst.de,
- bvanassche@acm.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Sep 03, 2024 at 07:58:46PM GMT, Kanchan Joshi wrote:
-> Hi Amir,
-> 
-> 
-> On 8/26/2024 10:36 PM, Kanchan Joshi wrote:
-> > Current write-hint infrastructure supports 6 temperature-based data life
-> > hints.
-> > The series extends the infrastructure with a new temperature-agnostic
-> > placement-type hint. New fcntl codes F_{SET/GET}_RW_HINT_EX allow to
-> > send the hint type/value on file. See patch #3 commit description for
-> > the details.
-> > 
-> > Overall this creates 128 placement hint values [*] that users can pass.
-> > Patch #5 adds the ability to map these new hint values to nvme-specific
-> > placement-identifiers.
-> > Patch #4 restricts SCSI to use only life hint values.
-> > Patch #1 and #2 are simple prep patches.
-> > 
-> > [*] While the user-interface can support more, this limit is due to the
-> > in-kernel plumbing consideration of the inode size. Pahole showed 32-bit
-> > hole in the inode, but the code had this comment too:
-> > 
-> > /* 32-bit hole reserved for expanding i_fsnotify_mask */
-> > 
-> > Not must, but it will be good to know if a byte (or two) can be used
-> > here.
-> 
-> Since having one extra byte will simplify things, I can't help but ask - 
-> do you still have the plans to use this space (in entirety) within inode?
+Hello,
 
-I just freed up 8 bytes in struct inode with what's currently in -next.
-There will be no using up those 8 bytes unless it's for a good reason 
-and something that is very widely useful.
+syzbot has tested the proposed patch and the reproducer did not trigger any issue:
+
+Reported-by: syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com
+Tested-by: syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com
+
+Tested on:
+
+commit:         69dc8fbb f2fs: get rid of online repaire on corrupted ..
+git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git wip
+console output: https://syzkaller.appspot.com/x/log.txt?x=166e6963980000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=9358cc4a2e37fd30
+dashboard link: https://syzkaller.appspot.com/bug?extid=ebea2790904673d7c618
+compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
+
+Note: no patches were applied.
+Note: testing is done by a robot and is best-effort only.
 
 
 _______________________________________________
