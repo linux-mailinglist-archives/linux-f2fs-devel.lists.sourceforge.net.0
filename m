@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 983D49697EE
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Sep 2024 10:55:30 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0731969802
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Sep 2024 10:57:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1slPJq-00011h-2g;
-	Tue, 03 Sep 2024 08:55:22 +0000
+	id 1slPLT-0007LN-9u;
+	Tue, 03 Sep 2024 08:57:02 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bo.wu@vivo.com>) id 1slPJk-00011C-6X
+ (envelope-from <bo.wu@vivo.com>) id 1slPLO-0007L1-Ip
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Sep 2024 08:55:16 +0000
+ Tue, 03 Sep 2024 08:56:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
  :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jKRdl5s09iCG/1hRn+pGFaA9OVaf3V4M//GwCRvnKxk=; b=YcDQewBSFoUWeVFXNNvjnGCykB
- G22Dg3ZvEUvp/XTVh1b8r74+nuzHjhRgBVvjjF+fGeNMZb4criJwFORMb5Y9nRsgdmkFrZg2ZdFeb
- +ZsUzmzb4xTsXPOlVZ5OU75oVmCmewV6O4d5CY11h5ObweH8Tr7kCJWkzFbDBOaAZqoU=;
+ bh=zV/wxBoWCpRDMX0E9pav3c5V0+kf6YRvt/E5k66a+Hw=; b=DQ4g9mkR3rLmnM7gsPNeZSvgld
+ 0YHCoT3muBE0S5y/6p6ZWVaK32eh+CCug2a1gUPntjvmLipE+thYJmR8EOlviVlNyGvANaC9dBw/A
+ I8bd4kDtx/i1tkk/jkMeH1CaF/B3rDqKuSBUz4oAxRXCD4Sfx47BhwJ1LbI2SP5xvjKc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
@@ -31,43 +31,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jKRdl5s09iCG/1hRn+pGFaA9OVaf3V4M//GwCRvnKxk=; b=iytMo5eiQQtojH3jj+Au1m1BQa
- bgEYZSKe/U7+cw2PrsS1B8r5J/yAUSVLnjPR2g75j3/3gso4aE7ugcf2Py1YD4GYZffurjHFUOWph
- WFh02TFaaIQBVP3Wm/27xV5ybiGzUeriW+r9GuTX+5zfJ6mpiisXIvNYrm7L32KZhap8=;
-Received: from mail-sgaapc01on2052.outbound.protection.outlook.com
- ([40.107.215.52] helo=APC01-SG2-obe.outbound.protection.outlook.com)
+ bh=zV/wxBoWCpRDMX0E9pav3c5V0+kf6YRvt/E5k66a+Hw=; b=bvroiQY+CTgIE7B9sVVqi3iU85
+ G25ZRV9vyY2ePRrQEGMM1uz2cRjW/BnWNQrQYiqCe6EMB+ZOVo4LXr/NJdVgeoA76n2SpZkZzcv1y
+ o2XNdA/InUraNUs3iJjn8LHS/X4xFdZ+tCP9JfUcfzOLS292sIiiDaF5xXfVk2V8mmPE=;
+Received: from mail-psaapc01on2067.outbound.protection.outlook.com
+ ([40.107.255.67] helo=APC01-PSA-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1slPJj-0001R4-0E for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Sep 2024 08:55:16 +0000
+ id 1slPLK-0001ZA-VZ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Sep 2024 08:56:55 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eXxZ9o+EJWPK7oQ+YJIpQymhwq/fjP2epwg+Icp/f/HZAw6T71CHsnQuO4T303Y/hB22bo7vdmj9vm/ytRKZpn38O3oBmydVHpCrI1FdARoBcZ1MtEdBCns0Dbgo+UzeH7xZ3hpOtieqoq4HHt8RwSx7CRAiAob0hOUcX1ljemEjL/ecUmNv8IP2R/kdmaQ3wRL1ZdeTWzU7zUkr+VobV0zARWK4nz+yytNTlXXXbVIVm3/mD+cEivcvXN83ru5fCTJVIxfPOSqNPOiIarr4lQG0wGre5Qq/lJs6K9Ra6b3Blb4OerC24BbxPtH+jud4X/x/ROrzBay/IdhKJJvAYg==
+ b=S3WLT1WbSB/ornFLzvioDvc4bwxx6GZdhYRl5EolU3likt/jogFLJswM8k28XSQJR/1BOsBO07OgAgzPtk5o21WKJJ7gwGqHsHvwREahvsF7UHjpKzo3Li/pQB2pjqRIg7RsZwYVaaybbIZno4yhw3lZsXPxGw1mHPIx4lskWi9azBNW6+M1Ks4wKOavs9spL3i0TlC2lNv/xEiyX10doVmpTvLKoWKOfSUwiT5FauEDk9bB/EPt17bd16LXp4XVApTD+I3rWLO1OJ/C5qgMYqzH/fUVEdPyfB/LwJfBi1XG68ewDOcNmb4w78j/KM7ayHHq9obRLLSpZaNQ3xP/Ng==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jKRdl5s09iCG/1hRn+pGFaA9OVaf3V4M//GwCRvnKxk=;
- b=HfKoMX1jaigEPyiCDyRCn0j6vBvdYKzK7PUczSZFRsoLYEPRG/jV80Y/y1KjXrtBDL85NtfJk7NItBqErY7vL1luDVf5CEJ2TLk92izlX2YdSRgg4ytGOeeLl89rJ4JnM5NsZmsLQ2vZKf+wvtRqaVI4P/uEnOThrfq6Hagr50C+q2dNwzTsWem5tGjrD3pVOZR2CUtYk1+Ipfh3NA6/zRj/r5SrH8W1hqR3l3f45SfFU8QlDvXdhv0nEFQCr6MbWvIFxeScdJSft8VSuXGbrMetWHVdJhow7mJy+37ISJlhULPm8FbMtstC/5CS33+vBRPrvd6l4Z8mwnwU3hArOg==
+ bh=zV/wxBoWCpRDMX0E9pav3c5V0+kf6YRvt/E5k66a+Hw=;
+ b=bd9liCJh6cjMOsRuh9W+DINAYboeG2eyCUIgBA0DLNqr2l6lNhIU5vLK82R3ickBm0SEDG6TeYlpo7DJp6BDAPb1tx3lhJfRlzYlovTRX0XejQUjZQrkWknnp4P8ofkg1FxDEmh5OQ/JFM/FC6tN3Jolt5rzFmu9HGt0z3o/RCAUY+TMD7pKcjJXXXm+L3WksBvmUR1Ocp/AhxSxR7f9ircABOlC53Y29XNz1Piny6dh6WnhMncGFbuFvskWbKWRpoB9F5cyROIFzEJyTc52/7iyrR+qOVSTE1vVBbbc3FoZwBCHLDedZSDDUZgQHFovHFfnwOippNPzZVG4u60u1A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jKRdl5s09iCG/1hRn+pGFaA9OVaf3V4M//GwCRvnKxk=;
- b=Rr3jGNy2rxhmeqva3k0yr4pwtPi0+2senbJgiRtHOI/tjuGI+9xQzcv9SZk46210baoJvS4PoHogvEXNY+aQa0Tr1ZY1eV06YJrdJ5G1yb6Nu77RwVb1VUILalUP2IBAA74JlIyjSU8AaeYVkCsx+caf7Odatx4zIbQ4ugUAJeMhMNZX5SEGSrnKrEL+ohn/b7Fzm80HdTFGrjGgLxcDFAjUzERUeaqloyweBfY/0S1KV1m0h8dG4K14E070o8FvLNLWK77HfQ8ER6G1t9YyjtUtkzDgtXhkZdBl28vGKP9JlWIxr6uvMTDpi7nD7urYcWtjM/B6PvUAtHoJkvUbSQ==
+ bh=zV/wxBoWCpRDMX0E9pav3c5V0+kf6YRvt/E5k66a+Hw=;
+ b=W1003AVsPhq4g8w7i+uqAmWXft+n5QFZEzMCSucozxtQhVujdBPn6kc1qvInDl8gm710Y3ptx6IzL4nao8xTxiVG6RJApN4ZuAn/M3WqBPfArz/OUI5kmULla/WbibDWfdz93uKL0Y5eoniuLn3vrdwuBvvJxlLE+fNAbzv0Uhikh4OM+bMDYXMNJP2n88BRU0TavIFAjPuHUUd/ZZirsVtQ65WuV3nVyp3g2G2Y9viPOvOADsi2E2/NSpvVuny0+Nr5a7PNkg8IRRrYBJQy4bm6BFQTvodkLkkXw6HflEeCkd+fZNB5na499t++WVfEiDh3sC17zrUVG57teic8Uw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from PSAPR06MB4486.apcprd06.prod.outlook.com (2603:1096:301:89::11)
  by KL1PR0601MB5536.apcprd06.prod.outlook.com (2603:1096:820:bd::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.24; Tue, 3 Sep
- 2024 08:40:49 +0000
+ 2024 08:40:50 +0000
 Received: from PSAPR06MB4486.apcprd06.prod.outlook.com
  ([fe80::43cb:1332:afef:81e5]) by PSAPR06MB4486.apcprd06.prod.outlook.com
  ([fe80::43cb:1332:afef:81e5%6]) with mapi id 15.20.7918.024; Tue, 3 Sep 2024
- 08:40:49 +0000
+ 08:40:50 +0000
 To: linux-kernel@vger.kernel.org
-Date: Tue,  3 Sep 2024 02:54:47 -0600
-Message-Id: <395c6a887a35a5e3d396cf002914d236a288b235.1725334811.git.bo.wu@vivo.com>
+Date: Tue,  3 Sep 2024 02:54:48 -0600
+Message-Id: <e010cbd19a2aadf8d152e43867b9bad98567624b.1725334811.git.bo.wu@vivo.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1725334811.git.bo.wu@vivo.com>
 References: <cover.1725334811.git.bo.wu@vivo.com>
@@ -77,76 +77,76 @@ X-ClientProxiedBy: SI2PR02CA0008.apcprd02.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PSAPR06MB4486:EE_|KL1PR0601MB5536:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7ead4d76-14ec-48ab-2783-08dccbf41c8d
+X-MS-Office365-Filtering-Correlation-Id: 5aa681ee-5f54-4db0-eadf-08dccbf41d63
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|52116014|376014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?IDqs7k9p7qWkg82VOi3yWha2PauXCmTe6U1BAnpdfq6uRkdzYQSOuMOLc+Wp?=
- =?us-ascii?Q?jLIrqsF/bYrSyYfk0pjvcMbePXoT1pD7TTrj/QbwANQfyenGsQfft5voDh8G?=
- =?us-ascii?Q?a2usqo6CkFfiJqdzPjwsAib6FOyvY853b+yQ01dQtyrgxKpHMe9NCqVPfxdL?=
- =?us-ascii?Q?FcI2nMX54PkZWxP/cnO90v0K0dBxe1tm0KvlnndcDqfXxZqPM4e7vvRwBKpv?=
- =?us-ascii?Q?X73nN5d8af+bvtDeFalITgdWgRZECwMCf2uxvaXhD4BSai9lJr5U9JUh6KW9?=
- =?us-ascii?Q?C83bEWvdsP9cfQmUrKs+ogU+bxemhVFdhf1I1Otihf6upME+yzTJGKPQVynt?=
- =?us-ascii?Q?ujRDakEK0Q36JZC9JB2yOmvUIlfK+R/ZCcYQjuqk2AZa4Z5tXahpMyD0Th5o?=
- =?us-ascii?Q?8iY64jmgbWua/IuU5g5tt2Iru+fcww8xydICjdTfpr1Ug+Hx6PsJmYdAwSi8?=
- =?us-ascii?Q?eFhrI0f5M4F0L+YhOUqFZf6W623jawRNCM+LQ4x+fk6IodeZ/Wom+Pz6dVM1?=
- =?us-ascii?Q?+d7HwxqW8mEi3vLV88Ifu8C8+h9wxM9aSkf8Vn/+hn4jXTdBMlt7UcLncU7g?=
- =?us-ascii?Q?FbSsSLqr65S87zjFtvu7a0hhJSFZTKzdY2och1KMG4A982LsKEmvR5Aw/a5r?=
- =?us-ascii?Q?zaCK2fh1N1tI+oyH9lfZv7Fn28ztNf/fibB8YJGP3PBtHNmqFNwfb9EGARZB?=
- =?us-ascii?Q?31yCOwBrpbUU2M4iic5HClmYApCNJ3uSWBM8XFIBtm9fZCfTs+Q++wlS7Hfm?=
- =?us-ascii?Q?TONtJl8GKvDGXkw8sEI6tS7+i4sw9kQGNoUtyB45I4B9Dz7zjePtazF2eqT1?=
- =?us-ascii?Q?Bdk/HrzzKSCZ94OFxewfhg5zYZMrGZnP2F+GER/gkDbMQUkX0MejgwE2vuaR?=
- =?us-ascii?Q?MYfl/66ZgYab01i5hwT1tdotdMUN5kMWrKHU6IqZFWbrlFyB/IkWmRCCOB9p?=
- =?us-ascii?Q?+bCj0y9cFBaiBcuo5vu11p3vtm9wATgxCxcrBdqjHeoRQyX58+hpKyHP2Zqb?=
- =?us-ascii?Q?jYZKVCgpdOSQImxTL1h+lD27238mxtED1Fsl+klwsX42saw3o88G/+WDSz+T?=
- =?us-ascii?Q?hTo6HVh0wDifRQI/xsulkaIS04h0h2S4o9FCilcTyX9ENu2PcN2fOC2r+eOo?=
- =?us-ascii?Q?pQPfUZsGg3xLdveWdHPfJBjYyk82xkqY8Y1vFaKhvNnnynIcgfw/Lah3jzkb?=
- =?us-ascii?Q?WRVj/hjNyY+kKYgMzq+60TWBvE0aE3/QxnpYJ4DH2sNJHBNBNGB9OsE3K7+o?=
- =?us-ascii?Q?Aobyihnvaf797M1xE+TXkEoIbkDGKaaF9USkRfWiEr2G+Tf9J4/Hzu+BnADo?=
- =?us-ascii?Q?x11TKBOHpWoxwOrM9Y2F7rIDKN4XToOWNdvuwM51yPY/yTRm2r1zhYQ2yg77?=
- =?us-ascii?Q?OU6mc1XRAjPHRXo5R4I+M8ilVePghKIrrAAfvs14isUCM+txJw=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?jxtvMRSi3/2ZflBTNdlD3Vy6wqYGk04y5dFusvwau2evd1dvrQgNc1uuFoAz?=
+ =?us-ascii?Q?+Wxp1Gu6MJJ5RaJEwVToMTUuN1I8j9WRQ1lRDrRDZ4X/72j8VT2ddQXAPsI9?=
+ =?us-ascii?Q?2SZqZJcLrB1brDiBe9fV7nYQsCLv65t1btN1uhgC/dz2O7VNo998tZDBesxj?=
+ =?us-ascii?Q?2SDQUlyXxfnQbVfmelcwLsIQ7UBzKjQiWkgzFAk+r7B6l2OL4F0btKHDE3Bk?=
+ =?us-ascii?Q?2EvhlGlS1O+yIqiDC9FZ/EbV/DnxL+n3RWRJ7LHirc/LMrDZwpKdQWE/jPa9?=
+ =?us-ascii?Q?ZlOcK3TLJgI6vRpk7Yeu9UBBLEgcT7eLs3YtB4TfCQLBrQI12LIVacly29QD?=
+ =?us-ascii?Q?4YoqNDaqBgx61IvpkO+sRyLLP6KZzxnhUktSxZYLEBpE27FTStUAgJC0FC/c?=
+ =?us-ascii?Q?c+h/+6scciLc3lM5mSS9THY/oGTOwrBaBfsBd3gWfY6xYnl7BqvUg0zmNcU3?=
+ =?us-ascii?Q?eMvmMUgM1x6NB4IkJpdnEKkzVbFtP2Rdn9+SSWLgIjTZKzBk1EfUIboAJH39?=
+ =?us-ascii?Q?W9B6a7XynBpZAAXKNHSQqTk7WdlhzE+R0jZzLqX98rAyl24iVIlpF+fu1KSd?=
+ =?us-ascii?Q?crv5RC4hcPHDRgkkXGjtIJgE0LcJNp60TnbPqn9nmHw/40m3D/MbdioINqRp?=
+ =?us-ascii?Q?QfFOaCdWZTnaxJ0sTLx88gVMI0+Y70Ah3Sa81u9AOP0kaK8J2tiVqZV9eWAF?=
+ =?us-ascii?Q?IKvzMavpCLX02qobf0zDbZtbjNCyCjup1TKGgdNkiY/wD6EKGw179jsDRIyV?=
+ =?us-ascii?Q?OB5lOXhR3plT0gcnWMvBcgYNgmc9ypPVqHRjpt8inF3seK2yEg1SMkE7OBVa?=
+ =?us-ascii?Q?8FSS3PpFy8eZvRl0vgFCs6Eq2nmdZGWvX7gUTqcs/+7RGtxbnTsz77uo6Val?=
+ =?us-ascii?Q?R+261kifL0wNN/e3UuIf9igaHHuDsMXxy4zG10qsqDPgUK5dCvBtSslVN9yc?=
+ =?us-ascii?Q?4/4pJoXJdte0fb9mNUc6HHwLCoKc0tlMlQ9ifDzXhKabd1V0XPFClLBLXxjc?=
+ =?us-ascii?Q?MmQ3+gwJAIuvtBrqqvGT9vstWMlyOf3WhzMwaz+VLK8l4WRV24D2CdQV16s2?=
+ =?us-ascii?Q?3KMcnw5qf/J+N5ea4a+RXVbjRtjyXIz5mP64Vt7NKnN3mHU7DMYbSyan2R4v?=
+ =?us-ascii?Q?k3v88RjM21Ez7i3dONkiFDu9Zvw0cHxGbAZhGk0snJmC5sMuyeMnz6gBhKFr?=
+ =?us-ascii?Q?lFe6Y0UmXKsEvGLE9XYhq4m5wLQhMO8HrJlcUNSOWIuqg2ryGCV1qQo9uGfI?=
+ =?us-ascii?Q?2MxzeRyX/rvfMf596W+whnON2dkss6YiuE35xwf9ZP9M/swHuRa8Wk6RILYw?=
+ =?us-ascii?Q?K4PZt5QIST19eSInQUT8Q7LtE6fWeQbxSO3dsNHxUR0Jc42FfJPVJMFLUrz6?=
+ =?us-ascii?Q?6mdaJdSaC/lQwLjizYNjs/5kqKMxvM/EKGowkpDpJTMqhaDJmg=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PSAPR06MB4486.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zReNn32ph/2UO7QHVWw9ATNMIpb4wFT8sH1evRfWenxJE3ST9FvnyQ6uzlYq?=
- =?us-ascii?Q?X8wEqB1aiQynAJuEw0YkwoUtWeMyhDAEPBMsmm2lH9/gX8lRO/9AC52KBGD5?=
- =?us-ascii?Q?udV6HyRzejHUAYH81mEFw3u289XxZRq+pcZb/Mfg6ExD7kwNsXuI/q2c2hBB?=
- =?us-ascii?Q?EesYX2bH2y0jYEvoO6vK3H2fuzpfaFdwJSQiVByW41vy5LFemSDDrDLuqI+8?=
- =?us-ascii?Q?mqvk0GDq44wbaPN9NhWqdxAktyT1bk50uijIyPEHsWNYa4j4VwrLGejVugk1?=
- =?us-ascii?Q?M4npPqWATKrQeApqeIbt4JRCxQsKPscX71zwf+U9b+Bd32kmj0ZqPyRebHoR?=
- =?us-ascii?Q?YN3f2+TtDMWrbjVDp08ouopVvOptuORp3mCTbhLh+OWbJhhtx/mDhD4tmnXr?=
- =?us-ascii?Q?jOpJJB07jv4g4k/Wnhxg39JK5tcWyT7ZHWEbqYXtfPLS0z81m3YTqseN3rpf?=
- =?us-ascii?Q?A8Uwkn3isyWfl2UzOTkxJisCi4XzN50AkLPnS/VMvTxCyYyPc2cqx5Cwfa6M?=
- =?us-ascii?Q?v46NVaKIBAvOaa+HN4cPW7i/uwd9qSLqnRb5C3yjbaFdS/OuDwy60Qi9wsoB?=
- =?us-ascii?Q?JozrHYydVZnRIBNCLZKzcd1xmr2JoL5Fz4efEX/lgYRea+Y65jLdUzwAsByk?=
- =?us-ascii?Q?DT2oDoGwphLNpOfT6glcMdCU7UVtu7UOTJC+eFuNa7GIRRY2IeBxRtCdYEtJ?=
- =?us-ascii?Q?/AbWqLYZw1eRzneTldsIkalWO29hnM4Sm1+P00b07kLUCMZsC9sOkS94ry3S?=
- =?us-ascii?Q?+3iFmy7kPlzQaD8bb+Y5JqZHnDWfU3jTV1EFtRVJxIM0gUoS/jgsTtwUtQ3N?=
- =?us-ascii?Q?Eh6VtELci/L5LPnFv6djyu5+Oz5x6vBoqFs5gKSgbJbmhfHiNnSuXQJSndnt?=
- =?us-ascii?Q?skzp6Fry6Ec/5G1En39/Fp9a/BLQQp+0wwXoBAtnrfWjOazLmBIJp+2oU2+Q?=
- =?us-ascii?Q?OGhJenUaXBpzCoGR2eHFE4Lq/kn99NZB0T5WdEJXs6duh3M+OyZAA6QL/gRN?=
- =?us-ascii?Q?alRki+SA2EmPtXeeWLcskG/fBxpMf/6HCUPpp+pILhzw78mKlxmD6jsx5LDw?=
- =?us-ascii?Q?8BepCoV8Tvk0sFfgz9hhKYXrb/Olpo7a6YY7PKShHFWqxyRnUXOX8EuGGpT/?=
- =?us-ascii?Q?jx1ki35GzzbXaxbzE458OaaHtmRz9OVOwPiuGIdYvl6Tibp/vnJdDCG87JzS?=
- =?us-ascii?Q?WmvnSQKQZyBKCLZtdPweQiKWKrRRa34I+U/sZldjV+CpxWQthQQkWeQCsyIh?=
- =?us-ascii?Q?ifmlYQLkZIkQJPDzc1ew95p1u5osrJcJPxxAMDLy1gUNCpivubtIignGzNiV?=
- =?us-ascii?Q?CJTHW3rwQOWxv+mw57Xg6qpwqM34VIL0KeNvI3ZrnW83Bvq8lFgBRWMQrPke?=
- =?us-ascii?Q?HGn8rZckluFXZy9M3GqV+V8k+KHHWskmG25EmzHdfa6989G828JEpPTJ7FAj?=
- =?us-ascii?Q?Y9TpWIT7f6/fVn+LuVfX18Dc1sJee8MdH2/asxdOXBvawbhcUgNxtPz5+ukh?=
- =?us-ascii?Q?4NnfirGkc0/cVx76+b6heXeqttxWupx08LLTpEGFByx3WC7sXa2GelohONm3?=
- =?us-ascii?Q?9RiYz/EO4yyQ1SEn+j3aI9BFtIpxuq5BSTCiUq/C?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kuolJJfL+zlLFetG9L5amaCKVk3LgMm6C+KIFYeh2bgyaOLMx480YNVeAXxc?=
+ =?us-ascii?Q?Db5pNEk8h+cGM4T4VnJySmkhTBQIFEehQmsXeJ2DGF4CiLpO1VDAn912bFbf?=
+ =?us-ascii?Q?m9MWljJArytIFPSjc9ups6igUry4luRQc18aD88fmOtyVY1nEuv33dBrXiKr?=
+ =?us-ascii?Q?UH8C4Dg4ZeXJuIN2RUxf2Wwphd6D0rXKlhSuPR3r7XPorhTBEhRipKZvQ0Hs?=
+ =?us-ascii?Q?zoQlUTK+bkfsA1P0sqa2hFCt1g0mg5ZJ7dM+4zjPVIPh5sOe8cnnY/XDc7jN?=
+ =?us-ascii?Q?TBhOOO1J/DddsgN3mxMqoDn0cZzLsvnuXRMpI0gXB3NYU47561zr9FmoeT+D?=
+ =?us-ascii?Q?h6o+dXvieJ5/b9Nn3N79nK1ajFKWR53mP17lLMNagNB4MzD+heHnk4PSC30/?=
+ =?us-ascii?Q?P/mnUwgqIV4H5NT39tbHTFLW7Imazgs4WhRdO4r7mz85ziAeHJN2BmOy6LMs?=
+ =?us-ascii?Q?rUFEVwTZI72ioyYA2RsQz2hVvaP7b1rs10gxiF2nn57rkRKd/TfykemEE6CN?=
+ =?us-ascii?Q?airIsVsEyvSJQc7n6+oLWVky+LAaVAc3p6tZ2k0kJRSJcpMcQ90mDeT4h0nl?=
+ =?us-ascii?Q?FsBXmASsKvrDFbchCMfmuSlAJjZEMSkZ6D3r5PY5n1LWpitkn/msXu+ShDIc?=
+ =?us-ascii?Q?UQ5SDjQjqvYNFQaxB4KC6v5iUw4oF2a5XD0zW3yxtScrvJrVnyDJzmD/1+ZD?=
+ =?us-ascii?Q?jwMz2i9jJEvS4i7OqFd6PsFf4+vTHBmvipYiu5rZR5334UTnbuqD208h4dpF?=
+ =?us-ascii?Q?eetRTDLuCyfoG048VJKqsEffaEYdqHEL56mGZ4uX3SQSG3gJqGqNDHgyy1Qi?=
+ =?us-ascii?Q?Bf7Cm1wPs0cGpakLxpT6PNyPv2Ni+Uq9jqzLiWG40E+KMIZU7mZWlaqwaERw?=
+ =?us-ascii?Q?jyIVXyNv7/OpJk2aMR4kOSCk33w5CUnawCJEnFJ272yFjmTPC/6l0gsVfA9w?=
+ =?us-ascii?Q?gz9pgzFlGYmEPPoI+GOD3BO92123SNxW6d1uHYbyieY37LvwMh0x72rW8PWG?=
+ =?us-ascii?Q?ea0Yc06Y4eAyGaHh3IbMN3lU5lG5tg7faB7PG7DS13BH/Qz9EhWFOIPhMEjC?=
+ =?us-ascii?Q?+8SK6i8mpwYYZs+B53Uiqr3uPvQ5oMHEMnYdYBdDLkv7eoQytqNZRwue8Sj8?=
+ =?us-ascii?Q?sOBVtvcC1hDy1ydNxGdjR0lVUFS+RJ16D5Rw4MEfWbFvku0TZStVb362bP5n?=
+ =?us-ascii?Q?FDVWC5nB+y2e5gsX2hB+voewP4dE90P9ClGWl5Ynx0HAwr3JbcDdNvEGzuDb?=
+ =?us-ascii?Q?EDiP9wPg7Ejfwo/tOd1QKImYMbXO6jhws4ZBBHIX+0wCetIsr7+UC9SSiqaJ?=
+ =?us-ascii?Q?a8bQ/jvfiI8rkRE2+HBS/KYWiXc61WcKeBTvm4D9TeUlrGfBLeuMmPgNIygf?=
+ =?us-ascii?Q?14Df41lmjQ0iS9RIoCdusrQNZuIO25ZY3rzUcgcqhc1evF7QYg0GrPs1z9rJ?=
+ =?us-ascii?Q?vmvVMsRz5tmtc36X7pthy75ypqc6rN3Voef2GH9jWH2XljdG/Vap3hKBfxCl?=
+ =?us-ascii?Q?PgHY2ZJ4evS2RQTltczMaMWo0x/ZSv8Hsf8Mhn15Z0E9H/A2goq9lqR4slL3?=
+ =?us-ascii?Q?UGGiQnrSaFz9jVsPQi4mfEe00Yuij96cw/gLFPdH?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7ead4d76-14ec-48ab-2783-08dccbf41c8d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5aa681ee-5f54-4db0-eadf-08dccbf41d63
 X-MS-Exchange-CrossTenant-AuthSource: PSAPR06MB4486.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2024 08:40:49.2515 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2024 08:40:50.6561 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aC+AfFVNNqpEcEZAEHXppB49ePs7e1CW168XCrUZlSlT6cBS2TH2qZUlnmvsnfNdmvD7jMerepjf7Tl95aPqKQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: +z9U/wHB3saOYY+znAw42x3ITst/+riE/lFsifYUxyuNpAnGRcPffuuVfo+bxF+XVAJl9T3VqGMFDvCkPTsLZw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR0601MB5536
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -155,18 +155,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  As f2fs inline data is a special case of inline tail, we can
- expand inline tail based on inline data. If file tail can inline to inode
- block, not bother to pre-allocate block at write begin. When tail page writing
- back, inline it or normally write it if the tail is oversize. And when inode
- page writin [...] 
+ Content preview: Expand the inline data read & fiemap to support inline tail.
+ Signed-off-by: Wu Bo <bo.wu@vivo.com> --- fs/f2fs/data.c | 31
+ ++++++++++++++++++++++++++++++-
+ fs/f2fs/inline.c | 26 ++++++++++++ 2 files changed, 42 insertions(+), 15
+ deletions(-) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.255.67 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.215.52 listed in wl.mailspike.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -175,9 +175,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1slPJj-0001R4-0E
-Subject: [f2fs-dev] [PATCH 03/13] f2fs: implement inline tail write &
- truncate
+X-Headers-End: 1slPLK-0001ZA-VZ
+Subject: [f2fs-dev] [PATCH 04/13] f2fs: implement inline tail read & fiemap
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -197,273 +196,170 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-As f2fs inline data is a special case of inline tail, we can expand
-inline tail based on inline data.
-
-If file tail can inline to inode block, not bother to pre-allocate block
-at write begin. When tail page writing back, inline it or normally write
-it if the tail is oversize.
-And when inode page writing back, update inline data from tail page.
+Expand the inline data read & fiemap to support inline tail.
 
 Signed-off-by: Wu Bo <bo.wu@vivo.com>
 ---
- fs/f2fs/data.c   | 30 ++++++++++++++++++++++++++++++
- fs/f2fs/f2fs.h   | 16 ++++++++++++++++
- fs/f2fs/file.c   | 10 ++++++++++
- fs/f2fs/inline.c | 38 +++++++++++++++++++++++++++++++-------
- fs/f2fs/node.c   |  6 +++++-
- 5 files changed, 92 insertions(+), 8 deletions(-)
+ fs/f2fs/data.c   | 31 ++++++++++++++++++++++++++++++-
+ fs/f2fs/inline.c | 26 ++++++++++++--------------
+ 2 files changed, 42 insertions(+), 15 deletions(-)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 6457e5bca9c9..cd13b5703228 100644
+index cd13b5703228..476325a26d4e 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -2776,6 +2776,7 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
- 	loff_t psize = (loff_t)(page->index + 1) << PAGE_SHIFT;
- 	unsigned offset = 0;
- 	bool need_balance_fs = false;
-+	bool need_clear_tail = false;
- 	bool quota_inode = IS_NOQUOTA(inode);
- 	int err = 0;
- 	struct f2fs_io_info fio = {
-@@ -2867,6 +2868,16 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
- 			goto out;
- 	}
- 
-+	if (f2fs_has_inline_tail(inode) && page->index == end_index) {
-+		if (support_tail_inline(inode, i_size)) {
-+			err = f2fs_write_inline_data(inode, page);
-+			if (!err)
-+				goto out;
-+		} else {
-+			need_clear_tail = true;
-+		}
-+	}
-+
- 	if (err == -EAGAIN) {
- 		err = f2fs_do_write_data_page(&fio);
- 		if (err == -EAGAIN) {
-@@ -2889,6 +2900,11 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
- 	if (err && err != -ENOENT)
- 		goto redirty_out;
- 
-+	if (need_clear_tail) {
-+		err = f2fs_clear_inline_tail(inode, false);
-+		if (err)
-+			goto redirty_out;
-+	}
- out:
- 	inode_dec_dirty_pages(inode);
- 	if (err) {
-@@ -3393,6 +3409,11 @@ static int prepare_write_begin(struct f2fs_sb_info *sbi,
- 			flag = F2FS_GET_BLOCK_DEFAULT;
- 		f2fs_map_lock(sbi, flag);
- 		locked = true;
-+	} else if (f2fs_has_inline_tail(inode)) {
-+		if (!support_tail_inline(inode, pos + len)) {
-+			f2fs_map_lock(sbi, flag);
-+			locked = true;
-+		}
- 	} else if ((pos & PAGE_MASK) >= i_size_read(inode)) {
- 		f2fs_map_lock(sbi, flag);
- 		locked = true;
-@@ -3421,6 +3442,15 @@ static int prepare_write_begin(struct f2fs_sb_info *sbi,
- 			goto out;
- 	}
- 
-+	if (f2fs_has_inline_tail(inode)) {
-+		if (support_tail_inline(inode, pos + len)) {
-+			f2fs_do_read_inline_data(page_folio(page), ipage);
-+			if (inode->i_nlink)
-+				set_page_private_inline(ipage);
-+			goto out;
-+		}
-+	}
-+
- 	if (!f2fs_lookup_read_extent_cache_block(inode, index,
- 						 &dn.data_blkaddr)) {
- 		if (locked) {
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index e02a6619b90a..2e0530b55e74 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3322,6 +3322,21 @@ static inline int f2fs_has_inline_dentry(struct inode *inode)
- 	return is_inode_flag_set(inode, FI_INLINE_DENTRY);
- }
- 
-+static inline bool support_tail_inline(struct inode *inode, loff_t i_size)
-+{
-+	const pgoff_t tail_index = ((unsigned long long)i_size) >> PAGE_SHIFT;
-+	unsigned long tail_len = i_size & (PAGE_SIZE - 1);
-+
-+	if (tail_index > COMPACT_ADDRS_PER_INODE)
-+		return false;
-+	if (!tail_len)
-+		return false;
-+	if (tail_len > MAX_INLINE_DATA(inode))
-+		return false;
-+
-+	return true;
-+}
-+
- static inline int is_file(struct inode *inode, int type)
- {
- 	return F2FS_I(inode)->i_advise & type;
-@@ -4197,6 +4212,7 @@ void f2fs_truncate_inline_inode(struct inode *inode,
- int f2fs_read_inline_data(struct inode *inode, struct folio *folio);
- int f2fs_convert_inline_page(struct dnode_of_data *dn, struct page *page);
- int f2fs_convert_inline_inode(struct inode *inode);
-+int f2fs_clear_inline_tail(struct inode *inode, bool force);
- int f2fs_try_convert_inline_dir(struct inode *dir, struct dentry *dentry);
- int f2fs_write_inline_data(struct inode *inode, struct page *page);
- int f2fs_recover_inline_data(struct inode *inode, struct page *npage);
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 168f08507004..957d1ff55350 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -748,6 +748,9 @@ int f2fs_do_truncate_blocks(struct inode *inode, u64 from, bool lock)
- 		goto out;
- 	}
- 
-+	if (f2fs_has_inline_tail(inode) && f2fs_exist_data(inode))
-+		f2fs_truncate_inline_inode(inode, ipage, 0);
-+
- 	set_new_dnode(&dn, inode, ipage, NULL, 0);
- 	err = f2fs_get_dnode_of_data(&dn, free_from, LOOKUP_NODE_RA);
- 	if (err) {
-@@ -4703,6 +4706,13 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
- 			return ret;
- 	}
- 
-+	if (f2fs_has_inline_tail(inode) &&
-+			(pos + count > MAX_INLINE_TAIL(inode))) {
-+		ret = f2fs_clear_inline_tail(inode, true);
-+		if (ret)
-+			return ret;
-+	}
-+
- 	/* Do not preallocate blocks that will be written partially in 4KB. */
- 	map.m_lblk = F2FS_BLK_ALIGN(pos);
- 	map.m_len = F2FS_BYTES_TO_BLK(pos + count);
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index cca7d448e55c..2e63e9389fd7 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -102,6 +102,7 @@ void f2fs_truncate_inline_inode(struct inode *inode,
- {
- 	void *addr;
- 
-+	from = from & (PAGE_SIZE - 1);
- 	if (from >= MAX_INLINE_DATA(inode))
- 		return;
- 
-@@ -156,11 +157,12 @@ int f2fs_convert_inline_page(struct dnode_of_data *dn, struct page *page)
- 	};
- 	struct node_info ni;
- 	int dirty, err;
-+	pgoff_t index = page->index;
- 
- 	if (!f2fs_exist_data(dn->inode))
- 		goto clear_out;
- 
--	err = f2fs_reserve_block(dn, 0);
-+	err = f2fs_reserve_block(dn, index);
- 	if (err)
- 		return err;
- 
-@@ -176,8 +178,8 @@ int f2fs_convert_inline_page(struct dnode_of_data *dn, struct page *page)
- 	if (unlikely(dn->data_blkaddr != NEW_ADDR)) {
- 		f2fs_put_dnode(dn);
- 		set_sbi_flag(fio.sbi, SBI_NEED_FSCK);
--		f2fs_warn(fio.sbi, "%s: corrupted inline inode ino=%lx, i_addr[0]:0x%x, run fsck to fix.",
--			  __func__, dn->inode->i_ino, dn->data_blkaddr);
-+		f2fs_warn(fio.sbi, "%s: corrupted inline inode ino=%lx, i_addr[%lu]:0x%x, run fsck to fix.",
-+			  __func__, dn->inode->i_ino, index, dn->data_blkaddr);
- 		f2fs_handle_error(fio.sbi, ERROR_INVALID_BLKADDR);
- 		return -EFSCORRUPTED;
- 	}
-@@ -210,10 +212,33 @@ int f2fs_convert_inline_page(struct dnode_of_data *dn, struct page *page)
- clear_out:
- 	stat_dec_inline_inode(dn->inode);
- 	clear_inode_flag(dn->inode, FI_INLINE_DATA);
-+	if (index >= COMPACT_ADDRS_PER_INODE)
-+		clear_inode_flag(dn->inode, FI_INLINE_TAIL);
- 	f2fs_put_dnode(dn);
- 	return 0;
- }
- 
-+int f2fs_clear_inline_tail(struct inode *inode, bool force)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	struct page *ipage;
+@@ -1922,9 +1922,11 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 	u64 logical = 0, phys = 0, size = 0;
+ 	u32 flags = 0;
+ 	int ret = 0;
+-	bool compr_cluster = false, compr_appended;
++	bool compr_cluster = false, compr_appended, inline_tail = false;
+ 	unsigned int cluster_size = F2FS_I(inode)->i_cluster_size;
+ 	unsigned int count_in_cluster = 0;
 +	loff_t i_size = i_size_read(inode);
 +	pgoff_t end_index = i_size >> PAGE_SHIFT;
-+
-+	ipage = f2fs_get_node_page(sbi, inode->i_ino);
-+	if (IS_ERR(ipage))
-+		return PTR_ERR(ipage);
-+
-+	f2fs_truncate_inline_inode(inode, ipage, 0);
-+	clear_page_private_inline(ipage);
-+
-+	if (force || end_index >= COMPACT_ADDRS_PER_INODE)
-+		clear_inode_flag(inode, FI_INLINE_TAIL);
-+
-+	f2fs_put_page(ipage, 1);
-+	return 0;
-+}
-+
- int f2fs_convert_inline_inode(struct inode *inode)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-@@ -263,20 +288,19 @@ int f2fs_convert_inline_inode(struct inode *inode)
- int f2fs_write_inline_data(struct inode *inode, struct page *page)
- {
- 	struct dnode_of_data dn;
-+	pgoff_t index = page->index;
- 	int err;
+ 	loff_t maxbytes;
  
- 	set_new_dnode(&dn, inode, NULL, NULL, 0);
--	err = f2fs_get_dnode_of_data(&dn, 0, LOOKUP_NODE);
-+	err = f2fs_get_dnode_of_data(&dn, index, LOOKUP_NODE);
- 	if (err)
- 		return err;
+ 	if (fieinfo->fi_flags & FIEMAP_FLAG_CACHE) {
+@@ -1983,6 +1985,16 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 
+ 	/* HOLE */
+ 	if (!compr_cluster && !(map.m_flags & F2FS_MAP_FLAGS)) {
++		/*
++		 * There is a reserved space between address array and inline
++		 * data. So it must meet this hole state before inline data.
++		 */
++		if (f2fs_has_inline_tail(inode) && start_blk == end_index
++				&& f2fs_exist_data(inode)) {
++			inline_tail = true;
++			goto fill_extent;
++		}
++
+ 		start_blk = next_pgofs;
+ 
+ 		if (blks_to_bytes(inode, start_blk) < blks_to_bytes(inode,
+@@ -2000,6 +2012,7 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 		goto skip_fill;
+ 	}
+ 
++fill_extent:
+ 	if (size) {
+ 		flags |= FIEMAP_EXTENT_MERGED;
+ 		if (IS_ENCRYPTED(inode))
+@@ -2013,6 +2026,13 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 		size = 0;
+ 	}
+ 
++	if (inline_tail) {
++		start = blks_to_bytes(inode, start_blk);
++		ret = f2fs_inline_data_fiemap(inode, fieinfo, start, len);
++		if (ret != -EAGAIN)
++			goto out;
++	}
++
+ 	if (start_blk > last_blk)
+ 		goto out;
+ 
+@@ -2377,6 +2397,8 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ #endif
+ 	unsigned nr_pages = rac ? readahead_count(rac) : 1;
+ 	unsigned max_nr_pages = nr_pages;
++	loff_t i_size = i_size_read(inode);
++	pgoff_t end_index = i_size >> PAGE_SHIFT;
+ 	pgoff_t index;
+ 	int ret = 0;
+ 
+@@ -2397,6 +2419,12 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ 
+ 		index = folio_index(folio);
+ 
++		if (f2fs_has_inline_tail(inode) && index == end_index &&
++				f2fs_exist_data(inode)) {
++			ret = f2fs_read_inline_data(inode, folio);
++			goto out;
++		}
++
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ 		if (!f2fs_compressed_file(inode))
+ 			goto read_single_page;
+@@ -2462,6 +2490,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ 		}
+ #endif
+ 	}
++out:
+ 	if (bio)
+ 		f2fs_submit_read_bio(F2FS_I_SB(inode), bio, DATA);
+ 	return ret;
+diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+index 2e63e9389fd7..30b18053e784 100644
+--- a/fs/f2fs/inline.c
++++ b/fs/f2fs/inline.c
+@@ -86,8 +86,6 @@ void f2fs_do_read_inline_data(struct folio *folio, struct page *ipage)
+ 	if (folio_test_uptodate(folio))
+ 		return;
+ 
+-	f2fs_bug_on(F2FS_I_SB(inode), folio_index(folio));
+-
+ 	folio_zero_segment(folio, MAX_INLINE_DATA(inode), folio_size(folio));
+ 
+ 	/* Copy the whole inline data block */
+@@ -126,15 +124,12 @@ int f2fs_read_inline_data(struct inode *inode, struct folio *folio)
+ 		return PTR_ERR(ipage);
+ 	}
  
 -	if (!f2fs_has_inline_data(inode)) {
 +	if (!f2fs_has_inline_data(inode) && !f2fs_has_inline_tail(inode)) {
- 		f2fs_put_dnode(&dn);
+ 		f2fs_put_page(ipage, 1);
  		return -EAGAIN;
  	}
  
--	f2fs_bug_on(F2FS_I_SB(inode), page->index);
--
- 	f2fs_wait_on_page_writeback(dn.inode_page, NODE, true, true);
- 	memcpy_from_page(inline_data_addr(inode, dn.inode_page),
- 			 page, 0, MAX_INLINE_DATA(inode));
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index b72ef96f7e33..5c45de7f60a1 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -1514,6 +1514,8 @@ static void flush_inline_data(struct f2fs_sb_info *sbi, nid_t ino)
+-	if (folio_index(folio))
+-		folio_zero_segment(folio, 0, folio_size(folio));
+-	else
+-		f2fs_do_read_inline_data(folio, ipage);
++	f2fs_do_read_inline_data(folio, ipage);
+ 
+ 	if (!folio_test_uptodate(folio))
+ 		folio_mark_uptodate(folio);
+@@ -814,7 +809,7 @@ int f2fs_read_inline_dir(struct file *file, struct dir_context *ctx,
+ int f2fs_inline_data_fiemap(struct inode *inode,
+ 		struct fiemap_extent_info *fieinfo, __u64 start, __u64 len)
  {
- 	struct inode *inode;
- 	struct page *page;
-+	loff_t i_size;
-+	pgoff_t end_index;
- 	int ret;
+-	__u64 byteaddr, ilen;
++	__u64 byteaddr, ilen, offset;
+ 	__u32 flags = FIEMAP_EXTENT_DATA_INLINE | FIEMAP_EXTENT_NOT_ALIGNED |
+ 		FIEMAP_EXTENT_LAST;
+ 	struct node_info ni;
+@@ -826,7 +821,8 @@ int f2fs_inline_data_fiemap(struct inode *inode,
+ 		return PTR_ERR(ipage);
  
- 	/* should flush inline_data before evict_inode */
-@@ -1521,7 +1523,9 @@ static void flush_inline_data(struct f2fs_sb_info *sbi, nid_t ino)
- 	if (!inode)
- 		return;
+ 	if ((S_ISREG(inode->i_mode) || S_ISLNK(inode->i_mode)) &&
+-				!f2fs_has_inline_data(inode)) {
++				!f2fs_has_inline_data(inode) &&
++				!f2fs_has_inline_tail(inode)) {
+ 		err = -EAGAIN;
+ 		goto out;
+ 	}
+@@ -836,12 +832,14 @@ int f2fs_inline_data_fiemap(struct inode *inode,
+ 		goto out;
+ 	}
  
--	page = f2fs_pagecache_get_page(inode->i_mapping, 0,
-+	i_size = i_size_read(inode);
-+	end_index = i_size >> PAGE_SHIFT;
-+	page = f2fs_pagecache_get_page(inode->i_mapping, end_index,
- 					FGP_LOCK|FGP_NOWAIT, 0);
- 	if (!page)
- 		goto iput_out;
+-	ilen = min_t(size_t, MAX_INLINE_DATA(inode), i_size_read(inode));
+-	if (start >= ilen)
++	ilen = min_t(size_t, MAX_INLINE_DATA(inode),
++			i_size_read(inode) & (PAGE_SIZE - 1));
++	offset = start & (PAGE_SIZE - 1);
++	if (offset >= ilen)
+ 		goto out;
+-	if (start + len < ilen)
+-		ilen = start + len;
+-	ilen -= start;
++	if (offset + len < ilen)
++		ilen = offset + len;
++	ilen -= offset;
+ 
+ 	err = f2fs_get_node_info(F2FS_I_SB(inode), inode->i_ino, &ni, false);
+ 	if (err)
 -- 
 2.35.3
 
