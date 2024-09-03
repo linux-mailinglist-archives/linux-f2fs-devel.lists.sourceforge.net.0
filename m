@@ -2,104 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7609596A212
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Sep 2024 17:21:25 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C45B96A44B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Sep 2024 18:29:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1slVLI-0007Dg-Gu;
-	Tue, 03 Sep 2024 15:21:16 +0000
+	id 1slWPe-0004q8-EJ;
+	Tue, 03 Sep 2024 16:29:50 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3XinXZgkbAEs5BCxnyyr4n22vq.t11tyr75r4p106r06.p1z@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1slVLG-0007DT-GU for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Sep 2024 15:21:14 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <ebiggers@kernel.org>) id 1slWPY-0004py-UK
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Sep 2024 16:29:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pdhWR+G8uLjBKfvU6iFCSQyIIWpyU5h8YmkzUpZmhvQ=; b=MXoi27aTZkDjI1sY1dEVtn3zWZ
- Cimq51VD8QUUCJ+v7vPzkudhiz3gK6Rm2xPXp5tgwi4SRpXpbzMDQ9NaKxybVg/Kx9b8YLt43HiTJ
- dE1a4OctkcrkBDaafQNlakgtN9ax0rxSL2qTxo3Kn0VWRxmDpUCo4/q9eWBCv/WL6DR8=;
+ bh=C86PEr1XhwhBenjNEO6dMgSwx2bLiE0KYyM/M7q4kvk=; b=L9VEFkGMaBrczxj1VaD94zSncw
+ z6pJXvHFHmdvqLhYxABf3V0n/n5PBgnOvxkF/QWUrjtcFWMOyffv97YI+egmvNgGRbujHX89ZXyJL
+ 5urPo7HifNx2M+XPyzCJlwlPfQN514iX4qYhUC3mO6Klw/85YN1EA5IGEzQeMSBHSSLs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=pdhWR+G8uLjBKfvU6iFCSQyIIWpyU5h8YmkzUpZmhvQ=; b=O
- Zxv+UL1QYXCNrUc+iL19S4bSuQCgc1j+Kj8yP4IOn5ZGVytGxknNOvKktAA9ReNTTO2SvZXYdsYGA
- 2DFMr2ZUXaLJAyVT5tpjDb3KG3raUUsZ/NWjnm5YOOxIOFurVb5qEsG0EkzZgSbJU7Chw8pFJIE3C
- 9UQI714lFr/ElPks=;
-Received: from mail-io1-f71.google.com ([209.85.166.71])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=C86PEr1XhwhBenjNEO6dMgSwx2bLiE0KYyM/M7q4kvk=; b=fIvcH0j/Eb9KtZzaB6SOa5yKwk
+ Di6pp4bspgw5mWg53rd7gVHpuvzONQ4FaZoRtlGaAytrBKC+ylUpnS7Kf5vNSRyiyWqrjPHsZfDyS
+ Z25JBfHpWC+TQn4fpDY4QG7mMKgk625m5g/uLNIxQmztn58/uAiqfa+k8uICw5CnlOHI=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1slVLF-0005ZT-MS for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Sep 2024 15:21:14 +0000
-Received: by mail-io1-f71.google.com with SMTP id
- ca18e2360f4ac-82a124bc41aso655557639f.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 03 Sep 2024 08:21:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725376863; x=1725981663;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pdhWR+G8uLjBKfvU6iFCSQyIIWpyU5h8YmkzUpZmhvQ=;
- b=iycwluOUEaw//zV7m7kZ5wKJQwUzTo3xu8umK2RVbIRbMtNIKVTFz8tbHz4GdqR7/8
- Vjo6lv0L73xQUUpuhDoB/yEf/XyK8SJsT7QHCVKzr3VMOUUR1tKjspT5oLpPEy0riFMQ
- VbMWAaAYuViYDil7m7hTj2Gm7pDvynBzla0gIl3xPLR8r6Mx3VxMpZkle0gch5fiIvXp
- EtIRkBunYdziQJwzPKYtIkEG4k5vI+nyGAxWkTmr/PAEkoIIAACytBrjjWK/434TNusv
- kibXkdTjJy79lwiw/r51+vyu1dmyXAn4evbZA6yWdfbEnS8weStYfUU+c7az+c4e9L8j
- lJnQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWUu7S3+pTHM1mK0ncUS0sm/OpidNoVXS/lWwMxwS4uqp0o24P9PkYyBiZbqWZxMEHxfhkScC46Q2sRHX2buw+J@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yz2UbwxWWn4eVm85hYcraoiLmJ1bpNqeYbsQDRlH9kvnKyH5ZQa
- QR2vP4FbHC5njNlMpN9IQHMJOuVoRVOBq9yksBIiWsiczOu+b11Hjb7SCQqvJnzZcp65CkT+R5X
- PSyNTTeQQm7qaxh72YjYUWtNPeu1K5xFnJyTI9te7YuKCZMA4Fbf6uQg=
-X-Google-Smtp-Source: AGHT+IGuYDrHt//evjliRlOW0PwEhQcMUXOrsfLe+oymCy5dcfAwaEBvDhuYp5TPwilcadbw76Ma+1wpUBvjZysjrMFhUGCA373t
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1slWPY-0002HT-1e for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Sep 2024 16:29:44 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 13429A43CCB;
+ Tue,  3 Sep 2024 16:29:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B2E8C4CEC8;
+ Tue,  3 Sep 2024 16:29:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1725380972;
+ bh=EJ6Qf87LF+8EEuxbRvNJ7RXNZ9lSq9Z1jt1pM/CA0DI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=T7zc3eXbphsEbKYxwNbQdLIaLm6GjCC8A3CYECftE8c8++uAYSOXmPebtZ1SvlBcN
+ 8+kaFR2E52gOgpcOpPYa9pMSp07q8bpuulsarniDXsnF3QZu2OLMT6QFAWbcIEmpFo
+ jkAkAikjSDaQB3jLs8vRZ5G5n02j3Y8wzW9pmKS+HQFyN+XC43LbkBAqUSIipDvKwB
+ DuA8nJopOoGjvjJavbPSAkgddgtwtrc/nZJhO84il/3fDAFMRWaqtoFy5MNRnUbt23
+ Y55ErbW/KqIk9VXD53olQds6nbEPxXhJYcy6R+8ZlZIMrLPtefEQykfdoTqwPo1v5i
+ hKH+QEZHg7HPw==
+Date: Tue, 3 Sep 2024 09:29:30 -0700
+To: Wu Bo <bo.wu@vivo.com>
+Message-ID: <20240903162930.GA2743@sol.localdomain>
+References: <cover.1725334811.git.bo.wu@vivo.com>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6638:8506:b0:4ce:8f9c:c601 with SMTP id
- 8926c6da1cb9f-4d017c6028bmr843346173.0.1725376862815; Tue, 03 Sep 2024
- 08:21:02 -0700 (PDT)
-Date: Tue, 03 Sep 2024 08:21:02 -0700
-In-Reply-To: <10d4a49b-c596-418e-969c-0830d678de87@kernel.org>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <0000000000000320e90621389b3f@google.com>
-From: syzbot <syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+Content-Disposition: inline
+In-Reply-To: <cover.1725334811.git.bo.wu@vivo.com>
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot has tested the proposed patch and the reproducer
- did not trigger any issue: Reported-by:
- syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com
- Tested-by: syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  On Tue, Sep 03, 2024 at 02:54:44AM -0600,
+ Wu Bo via Linux-f2fs-devel
+ wrote: > The inode in F2FS occupies an entire 4k block. For many small files, 
+ this means > they consume much more space than their [...] 
+ Content analysis details:   (-0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.71 listed in list.dnswl.org]
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.71 listed in wl.mailspike.net]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1slVLF-0005ZT-MS
-Subject: Re: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_evict_inode (3)
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1slWPY-0002HT-1e
+Subject: Re: [f2fs-dev] [PATCH 00/13] f2fs: introduce inline tail
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,28 +99,98 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Eric Biggers via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Eric Biggers <ebiggers@kernel.org>
+Cc: Wu Bo <wubo.oduw@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+On Tue, Sep 03, 2024 at 02:54:44AM -0600, Wu Bo via Linux-f2fs-devel wrote:
+> The inode in F2FS occupies an entire 4k block. For many small files, this means
+> they consume much more space than their actual size. Therefore, there is
+> significant potential to better utilize the inode block space.
+> 
+> Currently, F2FS has two features to make use of the inode block space: inline
+> data and inline xattr.
+> 
+> Inline data stores file which size is smaller then 3.5k in inode block. However,
+> for slightly larger small files, there still have much waste.
+> For example, a 5k file requires 3 blocks, totaling 12k of space, which is
+> more than twice the size of the file itself!
+> 
+> Additionally, the end of a file often does not occupy an entire block. If we can
+> store the end of the file data within the inode block, we can save an entire
+> block for the file. This is particularly important for small files.
+> 
+> In fact, the current inline data is a special case of inline tail, and
+> inline tail is an extension of inline data.
+> 
+> To make it simple, inline tail only on small files(<64k). And for larger files,
+> inline tails don't provide any significant benefits.
+> 
+> The layout of an inline tail inode block is following:
+> 
+> | inode block     | 4096 |     inline tail enable    |
+> | --------------- | ---- | --------------------------|
+> | inode info      | 360  |                           |
+> | --------------- | ---- | --------------------------|
+> |                 |      | extra info         | 0~36 |
+> |                 |      | **compact_addr[16] | 64   |
+> | addr table[923] | 3692 | reserved           | 4    |
+> |                 |      | **tail data        |      |
+> |                 |      | inline_xattr       | 200  |
+> | --------------- | ---- | --------------------------|
+> | nid table[5]    | 20   |
+> | node footer     | 24   |
+> 
+> F2fs-tools to support inline tail:
+> https://lore.kernel.org/linux-f2fs-devel/20240903075931.3339584-1-bo.wu@vivo.com
+> 
+> I tested inline tail by copying the source code of Linux 6.9.7. The storage
+> space was reduced by approximately 8%. Additionally, due to the reduced IO, the
+> copy time also reduced by around 10%.
+> 
+> This patch series has been tested with xfstests by running 'kvm-xfstests -c f2fs
+> -g quick' both with and without the patch; no regressions were observed.
+> The test result is:
+> f2fs/default: 583 tests, 6 failures, 213 skipped, 650 seconds
+>   Failures: generic/050 generic/064 generic/250 generic/252 generic/563
+>       generic/735
+>       Totals: 607 tests, 213 skipped, 30 failures, 0 errors, 579s
+> 
+> Wu Bo (13):
+>   f2fs: add inline tail mount option
+>   f2fs: add inline tail disk layout definition
+>   f2fs: implement inline tail write & truncate
+>   f2fs: implement inline tail read & fiemap
+>   f2fs: set inline tail flag when create inode
+>   f2fs: fix address info has been truncated
+>   f2fs: support seek for inline tail
+>   f2fs: convert inline tail when inode expand
+>   f2fs: fix data loss during inline tail writing
+>   f2fs: avoid inlining quota files
+>   f2fs: fix inline tail data lost
+>   f2fs: convert inline tails to avoid potential issues
+>   f2fs: implement inline tail forward recovery
+> 
+>  fs/f2fs/data.c     |  93 +++++++++++++++++++++++++-
+>  fs/f2fs/f2fs.h     |  46 ++++++++++++-
+>  fs/f2fs/file.c     |  85 +++++++++++++++++++++++-
+>  fs/f2fs/inline.c   | 159 +++++++++++++++++++++++++++++++++++++++------
+>  fs/f2fs/inode.c    |   6 ++
+>  fs/f2fs/namei.c    |   3 +
+>  fs/f2fs/node.c     |   6 +-
+>  fs/f2fs/recovery.c |   9 ++-
+>  fs/f2fs/super.c    |  25 +++++++
+>  fs/f2fs/verity.c   |   4 ++
+>  10 files changed, 409 insertions(+), 27 deletions(-)
 
-syzbot has tested the proposed patch and the reproducer did not trigger any issue:
+This is disabled on encrypted files, right?
 
-Reported-by: syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com
-Tested-by: syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com
-
-Tested on:
-
-commit:         69dc8fbb f2fs: get rid of online repaire on corrupted ..
-git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git wip
-console output: https://syzkaller.appspot.com/x/log.txt?x=166e6963980000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=9358cc4a2e37fd30
-dashboard link: https://syzkaller.appspot.com/bug?extid=ebea2790904673d7c618
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-
-Note: no patches were applied.
-Note: testing is done by a robot and is best-effort only.
+- Eric
 
 
 _______________________________________________
