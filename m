@@ -2,197 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E37D5969A26
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Sep 2024 12:29:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A9DC969EE5
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Sep 2024 15:19:39 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1slQnA-0000nK-Uy;
-	Tue, 03 Sep 2024 10:29:44 +0000
+	id 1slTRQ-0005Nf-FT;
+	Tue, 03 Sep 2024 13:19:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <shengyong@oppo.com>) id 1slQn8-0000n4-QI
+ (envelope-from <sunjunchao2870@gmail.com>) id 1slTRO-0005NR-GW
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Sep 2024 10:29:43 +0000
+ Tue, 03 Sep 2024 13:19:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Sender:Reply-To:
+ :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gFqCxxf73eAb3UdUo7enSfo21KMF5eskPxkHn0fSUww=; b=CIQU9LkTjOkYBelXcUKPMhSDjc
- uTw6Y1v4irFHoggjhxiGV8/qf51UXinlPzZbl4kfNKvKNShZxfO23aKVREF/LfxLQKMKpl5NtQJKR
- jFp2sCkLbIWTrdqPSleX/KA5NpWP+jVIW6AfQWLn5xoYBclU0eC0jlF2DhoDDtfP958c=;
+ bh=nXLxdtE8dKy73TUb2uzwOpBR3I6kFdQEuWkttJKFH4c=; b=MrmEtHCq1yIBeyHcVJAuFFoiW5
+ vxa0C+0bEfy4Vf8rI0hIphwE2W+YIpjbRG9A4K7ZtiGC2iqS6sK8ciI5uptroX6wiOFz6SR1DIz4q
+ eVX2GqnCH8iwHDK8XfcjcWWqG0RpXlltYSpIF2ftPTtvMmONqnBruq+BNJHzt/uXlloI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gFqCxxf73eAb3UdUo7enSfo21KMF5eskPxkHn0fSUww=; b=eyrNFAmWOp/Mpy6E9sC4ynwdaO
- KLL0Y7iqCBozlI+Ba2S05euAAKeqfQxXymW5HMXnaGHYuvv55VnPNubXEUDlmaoNycrD+uVsh0/vw
- XwoJyzcGX5NV4CSzko4TAECCHJhPHK76TL7Q9e4SSlID5OYE5XglqBrg+x/+zz/nuArg=;
-Received: from mail-sgaapc01on2087.outbound.protection.outlook.com
- ([40.107.215.87] helo=APC01-SG2-obe.outbound.protection.outlook.com)
+ bh=nXLxdtE8dKy73TUb2uzwOpBR3I6kFdQEuWkttJKFH4c=; b=EeNHT4JhZuAhUBw8e1GMH5mOuA
+ JL8K338kmVclRcL/Yy7e7Tn0jsupDDqlBOVk7ylbnFCnYjo4VaiaPTi7nBDiIETVYFuGn/l4JaxtY
+ eckUgzPHfrm8eVfrDNlDYrsMle0nNc+KMlkjgkrV4TjWjHgFJpqrjt1cI0K5RjXywcE4=;
+Received: from mail-oo1-f43.google.com ([209.85.161.43])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1slQn7-0001JH-Cr for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Sep 2024 10:29:42 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lsajau+z/b551vK/v/PVsQoPT85X43kZ3auB+19Lx9HXfUe3C2Js2Q5w/BLx3YbPgiguMKm0G/jAdQ7nGx2mOiBb1LgBbgvs6fhOLthof8cOGCgJswJLT0EiCN31yKH73f4ch4rrnrubTRy8Xm4SGcHw7F+DPo4+SuHxFWkD5TxPV7lS9ZrvN4gYZTKvMxAkgWK2XG7WLD0WMTVWReQLxkAjLC31X5Ca+Is7+SZz521Ua7+ujO0yAvYsigRyjUwDrhdd1SisZWZMf7p3rZw6pBH+1pFl8xnuoNXxzfcuO3/8s3tbP1by1ueG0ZTU+ZBxUWrm7hSTxnBPO11auBZZoA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gFqCxxf73eAb3UdUo7enSfo21KMF5eskPxkHn0fSUww=;
- b=mEU0uhjL3UnRbI258LPApRYOjtswEBMq/e9M114OiD7C8X3w+PqwbG8SfrYzQt7Aj8kF2ZavjQnNO+y3lgRahiKMPcjx0ASQfIT0jiNNHxp2MTdbDJ5h+/Lj6vzfPqld/RaJNnzbebecz6qiS6awsYJL1rzWKdSEsOK6RdxlR6Gc5KJ1oC9TLkCOaGnmqe5ILjde7a3SOdqSePtCBKPbTpLZPOAcmJhBUAIKCsuWrsH1s8X5sZyLyoMH5gdPKsxq16Y18sN357dS+Cbk3g6Q4LMknX3LZvpg9VTnkGY6XoLY8VAhYnnEMpBcx8gCjjbvgpXZzIqOR4ZFHTgTZk/BBg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oppo.com; dmarc=pass action=none header.from=oppo.com;
- dkim=pass header.d=oppo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gFqCxxf73eAb3UdUo7enSfo21KMF5eskPxkHn0fSUww=;
- b=OGx+v3P6EHK8VQeSkwlZXnKLcSHTyLiNyniuALUrObJeDrRzDVGr7qpmyneKmODWGJvSM2eZOoYcXisZUv18aQzAy2JwGldygfDWhTUA72tWQMm3A8uL6Wz9+UT2Rn6JrfFVgDe5ldIJ3djDuqxxd8J+N2M0buwBwzGkN6xW8Pc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oppo.com;
-Received: from SEYPR02MB6014.apcprd02.prod.outlook.com (2603:1096:101:6b::10)
- by TYZPR02MB5762.apcprd02.prod.outlook.com (2603:1096:400:1d2::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.27; Tue, 3 Sep
- 2024 10:14:04 +0000
-Received: from SEYPR02MB6014.apcprd02.prod.outlook.com
- ([fe80::bb06:c283:a50:7796]) by SEYPR02MB6014.apcprd02.prod.outlook.com
- ([fe80::bb06:c283:a50:7796%6]) with mapi id 15.20.7918.024; Tue, 3 Sep 2024
- 10:14:03 +0000
-Message-ID: <8d9ebf65-a1e4-4151-8ecb-92a531a7a938@oppo.com>
-Date: Tue, 3 Sep 2024 18:14:00 +0800
-User-Agent: Mozilla Thunderbird
-To: chao@kernel.org, jaegeuk@kernel.org
-References: <20240704025740.527171-1-shengyong@oppo.com>
- <20240704025740.527171-10-shengyong@oppo.com>
-Content-Language: en-US
-In-Reply-To: <20240704025740.527171-10-shengyong@oppo.com>
-X-ClientProxiedBy: SG2P153CA0044.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::13)
- To SEYPR02MB6014.apcprd02.prod.outlook.com
- (2603:1096:101:6b::10)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1slTRN-0005jh-OL for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Sep 2024 13:19:26 +0000
+Received: by mail-oo1-f43.google.com with SMTP id
+ 006d021491bc7-5dfa315ccf1so3147707eaf.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 03 Sep 2024 06:19:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1725369555; x=1725974355; darn=lists.sourceforge.net;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=nXLxdtE8dKy73TUb2uzwOpBR3I6kFdQEuWkttJKFH4c=;
+ b=fhRY9JcaCWyiPyGpX33XyZx3E39dfEojgieZNnpxWmNRNhYzGoHq+WCgNq32upIiKb
+ DUOz2y0b/T2o/rmdMyNMtjagq+/IA4FjW2F/1zEUN6cDP3rBz+Dsur1nVGXJ1t8OJhdk
+ upVS58RJ8KPFhTEgDYg+dAhrVOnG8yFlGVXpbIIEIHBlOo1phuhTKi1ofEFBRDbdq/tC
+ nQlObgUBUbNuDqoJDqiXdMIKGMcR/PQ/Zmg8oWk3LKYqSDWOq/3RKKAOpy5tmA+WIPGX
+ zejipUf3lrn4jZlgLWxhL7y3rMcZPljP1kv6j7FtTJ+5QNKho9HTwoMVY/4EvUIC08OD
+ 6vZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725369555; x=1725974355;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nXLxdtE8dKy73TUb2uzwOpBR3I6kFdQEuWkttJKFH4c=;
+ b=EgGyGWZRj2cbezQb+8sYxrnCB/6e69JDNUnd9sUxRVeKJzX0UESRASlYDZdQvpjoBr
+ ZMIgYgCU06RxF/pzVKPAaM9M5GSLgqaGLxp1WkCIwiQvGDNkC3WPw4TFR6qsw3Rygins
+ oco4/6WAOQntIzXx78EKukyJyU9+XSDf8/X5hc/W1obAwSIVENxWgwNn2WN+eRyqO2us
+ fPD9KdWdFbg1DA7qY/4BpiqW2ta0+P715QyNzWfknmPAXmLKWbYoeE6NY+dBJg+e61ej
+ 0L2cQFx68YZrhvvsgmxsGIsqQBVG3MT61uCqYKf6sf/nQq6rDRkwEzxec4vR2hZXECGS
+ rY8g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVlUpDTrjTWxXzOI+bax7vJRT3JNZ//KLm6RFbkIewbnYaow1X3MO0S4Y6+7Gm+51vNfrm6wo/ouTdYmkpUAxi9@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YysFEmc6l3Jo3GmpriShqLvG1ACTtnRElwT9AWivFyymz/p12R5
+ H0Gc7TZ3Q1MG4XMwHFDrllYc6PNdmCB7A2CEKTUbK1wU7r5ZALZKRtj332Qe
+X-Google-Smtp-Source: AGHT+IHmqKB2ApI4jtmnVOIKPHAaEfmCOJEP0+RdE5W02PZplPzBvvvrHQ15gjBnd/lnsJzhYx3fSg==
+X-Received: by 2002:a05:6358:528a:b0:1b8:15fd:49f6 with SMTP id
+ e5c5f4694b2df-1b815fd4c10mr151831555d.27.1725369554677; 
+ Tue, 03 Sep 2024 06:19:14 -0700 (PDT)
+Received: from [127.0.0.1] ([191.96.241.67]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-7d22e9be21bsm7983314a12.74.2024.09.03.06.19.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Sep 2024 06:19:14 -0700 (PDT)
+Message-ID: <db89aa34ab0068581ecb103b3aea0d484d8534bc.camel@gmail.com>
+From: Julian Sun <sunjunchao2870@gmail.com>
+To: Chao Yu <chao@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 03 Sep 2024 21:19:10 +0800
+In-Reply-To: <0f1e5069-7ff0-4d5f-8a3a-3806c8d21487@kernel.org>
+References: <20240828165425.324845-1-sunjunchao2870@gmail.com>
+ <0f1e5069-7ff0-4d5f-8a3a-3806c8d21487@kernel.org>
+User-Agent: Evolution 3.46.4-2 
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEYPR02MB6014:EE_|TYZPR02MB5762:EE_
-X-MS-Office365-Filtering-Correlation-Id: b3daa385-cc1b-48f9-d66c-08dccc01230d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MEVFRXJ0K3l0bXpZS3dNNTY0YjFBTlU4d3MwZ1pnbnhYZGEvNHFZUzlsSjBF?=
- =?utf-8?B?U3ZOaWZKN1JBdGNMdW02WEE5Wk1kZ1h4TkR4Qmh2N2tTRVFRaU93TEFwTnpZ?=
- =?utf-8?B?SzliZ2NzNSs2bk5ORVlnUDdWQnlSM1hkVWlmSXF2VnFJMmt1NlRpeU9hTmkr?=
- =?utf-8?B?WS9neEdTNVNJZ2p5K01GMVBMV0c0Wm5mN0ZEQWIrVDhtMmpwUmV0ejErVll1?=
- =?utf-8?B?N0VvSGE0R2lZRVJndmo5ZTlYVng2UjBULytwdUN6VCsrRlFTS0ZESkFHdWwv?=
- =?utf-8?B?VFRPOUVsQ2Y2Mmk3aUJ4aHVtd1JmSEdSQkx5RUx1Z2Z0RDVab2VXT3JTY2gr?=
- =?utf-8?B?TC9sY0hZQTBLRU9zKzdneVQvUC9xNGhpc1BzVjNvU21tS3FLaVRqT28vbDh0?=
- =?utf-8?B?NS96Ni9mQVlPM1NrSjEvbjlPUGVqYTQvL3o4UW1VOFlwQ0xyRW1PQnF1ejg3?=
- =?utf-8?B?OU5uRmlFQUEwNEFqS1V0eXYwRERJeEZ5Z0MxcWlNNlBsT1BONVVSc1pNSWF4?=
- =?utf-8?B?UkJiR1F2NTRGTG1GaXFiRmRxdWhrVEhkWlFQeHZHSVNsZXY4eXA4NUdubllQ?=
- =?utf-8?B?emN0UXRMbkhLdTVHSWVDdDFlcGdDY0g2MEhST21hWCs5MG9ySUZsL25GbWFz?=
- =?utf-8?B?UHNYRXQvMnpjWGNLZmlEalNlZDVsa3BEQU1PekFVMWNYenNtR0R4WTVDRXVi?=
- =?utf-8?B?bWZQMlpGbTBaYTFDTjR4bjFyclVSMk9Cb2VUTnVWYmtGMFZ6ZlJETGI0eEN5?=
- =?utf-8?B?MHNVMDdYWU5GaFhtYkxudHFxY3hlT05xWWZoQlJ1a3NOdHA5OFJPV1RsaFgv?=
- =?utf-8?B?a2krVlhOUFFYbFJKNHZsU3pkTUZQZHBHa0NtSmc0ZmsvK2VHc0ZuRisybVJX?=
- =?utf-8?B?dzdxS0ZVQjJYNFFzVmVaajl5dHlid0x0ZXpMNkNWS0RVZUpTRG0vZHdUODJ4?=
- =?utf-8?B?MzlQMWV3NWRGdERYYk1rTkhKK1VMZytRWVZkZTBlZ1pncTVtMklGbTVkMTU0?=
- =?utf-8?B?WmZFMnYvMnhNOUtGc09nZXFxc1pZaG10cnQ0L25qVlpRK2o5QWpnTEFadHVq?=
- =?utf-8?B?Wk9ITlFkb3FKc055M2lhTFVzOG5ENFZuc1JLZllWWVp5Vzh0VENGWWhZYits?=
- =?utf-8?B?S002eXB2OG5KdllGWGdpZ3J2Sm1YSEU4L0hBNzRzeWF2VWVheFoyeGdodGJC?=
- =?utf-8?B?d1doZWRqQ0E3NWx0VUdOSDlkTXRWNUU3aklaM3l6NVhMQzNvcjdtempSQ1g4?=
- =?utf-8?B?Qm1FV1FQTWJNMXpTN0xlbE1VMjZpTHlCOVVzaGU4ODc5WDJqNVBkSDdzTEYx?=
- =?utf-8?B?UTJxdGM4MzdlMVVRSXg3ZTBQWHA4dkxEdTZjakpoT2I0SU1EcFhSOUpkczFX?=
- =?utf-8?B?Y3dvSjFlSURCaVQvRk04aVpvR1lucm84YXhYZHdwVVFWbXR3YktzeEpXckIz?=
- =?utf-8?B?VERENUV4ZWhXczgxcmFQY1B2OGNpT08vZ0FBV3p3TE5XWXRoeEd6UzRhNlBZ?=
- =?utf-8?B?VENyQVdPbXRndXlZcTZGQWMyTFdxMmFEMnJ2dTdTcUpHL0drMU5PSXRDL3ls?=
- =?utf-8?B?aGJNMEVpTzdyeE9yWkhpTDBoenIxYW8xOU5iWU1XaEgwdmxzMlcrSmJCQzVa?=
- =?utf-8?B?aktnb1RLWGo4MTkyVng2R0FQWjJDQzhTcVovcjVaK081RUQzL2hZQ3YvSHpY?=
- =?utf-8?B?VW9BMXRMVko0emg4WjVNVjYreGJGL09hK0tzTXd0WTlYb1A0L2hmU21EZUVZ?=
- =?utf-8?B?STdDY1NER0xneFlWdUJuRzlFSGxZdzRhTzNGa3V1SWlGZ1lTYjdZcEEwTzgw?=
- =?utf-8?B?QmxhQVBEV0pUNGgvUzZaQT09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEYPR02MB6014.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eGU2eUw3NGtQa24vS1E5S3A0eUk5WHFYVFZKeEpoWVVxamhmVlppVHBKN29B?=
- =?utf-8?B?emNqWTZ3ZlE3OS9kQlRSa3ZHN1UxUEo1amhVdStrL2hLaWNYcVJSM0VrUHo0?=
- =?utf-8?B?akpoamVld1BteXRhZUl6dmpITmczeUZNZzBGbGtsb2pYQ25TTTRRQ3hQa3ZD?=
- =?utf-8?B?aFUzN1BMV01zc20xZ2VUTVNKSU9kT0ZvQjNMRnZKMlhibXJNdC91NHRqVHRF?=
- =?utf-8?B?SHpxSWsyTmppNm9zUnhiL0R1VHNlcGRCb28wOGdXYUtaT2l1Tm4zYnNqUmZv?=
- =?utf-8?B?OEFyK0tlUmxReHR0QmVVaXdEV3FEZEpSWVp5SHNIUXgxcTRKSDU4RUtJd2kz?=
- =?utf-8?B?OFVKYUZmODAzS28reUxtYmNud2NGU2dZVXRWcFVDRzVVazZrZk8zdzVGdXp6?=
- =?utf-8?B?MlJhbjJXVDM2b3NEdnVwc3hFY2c5MXVXZUVNSTF4RXU4bElQSTFDdkl0WkVJ?=
- =?utf-8?B?WnVHZlNiSFgwS2Z2c29wL3RtNUhpRWRWQTNLbXZ0OTkrYUhTbTd5dHMzNm5l?=
- =?utf-8?B?YkdzYzNrb0F2M3lBS0NrZnl2OElnVTBFR09QZjR6Y081bDlPaVU5di9HaW9u?=
- =?utf-8?B?MXpmRjgwNnd3TnN3Y1RBZkpjT3hubFVIdTN2UzFlRnlka3l5bC8rbk8yalAr?=
- =?utf-8?B?SmdpNWE5emtMWGdONXlWbnNQT3hZK0ZRL3E1cWtycWdMRjFSZkZlUTZzaGk4?=
- =?utf-8?B?dHJrYitJSFNBcHZkMlFhUmkzM3BLOGdFNE90bm9tbmRqOUFYVG9XMUNZWHpB?=
- =?utf-8?B?ZmNJV1Evb3FMZmV1eUNmNnFBREQ0SFgxWmgyRGU1T1hDSDMrRFlTUVpnWTdD?=
- =?utf-8?B?V0dqYW5YYjBXcUtjVnhqNnVOMUpaV0N5VVRKRDh5RlVpandnZTdSRDk0ZkxK?=
- =?utf-8?B?eEpnaVZ2aUYxdy91WTIyODdERmliRW5kQUNvT2d2NnBkakJ2ZmJJUTZRbHg3?=
- =?utf-8?B?TXB2Rnh6MTBES2s4Wm5ENUxhczdLb3lweUtnTmNXd3BPSlhTTGpOTzA3eUxC?=
- =?utf-8?B?VXlkUEpXU2QxVjQzYXhsU29LNDN0M0N3ZU5tVVNuQ1ZxcEJkQkFTcHpSUkNK?=
- =?utf-8?B?QXZKK1psdUVVcUx5b1RUWFNuQ2FZV1AzYUVFU1lDSUswK1dLb1BTSDU3c2la?=
- =?utf-8?B?cHR4L1ZEZUh2dkl5K1lETHRBaEFObWovcCtTZDhTRzh4SzA4TEJIcnA0UEJ6?=
- =?utf-8?B?R042aml2ZDJMNEw5anBPbWpGWGlFSkYzWFhDcEdkZzVaN0hRampYczRCUSsw?=
- =?utf-8?B?aUIwOG5LVlE5eUxzTnFCN0pVL2lnNlZLbm43SnBEekZWSG1kS0owNmUrcjBl?=
- =?utf-8?B?TWxubmlRY2hpbXNrWGlPbE9ORjNVZzA1ZXdGYk5aYlNGNWd4UWh1ZWE5ajBs?=
- =?utf-8?B?dkN0alczK2R0M2VzWlpCb0lNRHZSN1RrS2ZwK3gwQ1NIQ2NyVERKQ3RkbE9F?=
- =?utf-8?B?NEFMRmhLcHg0M1BmMzJCbzVmWllNZ3JzMjhEMHpOK1BRZHl0Y21TbmtCZjl0?=
- =?utf-8?B?RGtEMHJSZFp2QkIxbEZocHdsMk5YNUJvVnVjNDVVeDNmTFIvdHpUaWgwMXdH?=
- =?utf-8?B?ZnMxV1RlL2I3RlNRTGpSMkhXNWtYT2pjQUVSTzV2MUYxN3NrMk5XVkVkTGR5?=
- =?utf-8?B?TU55MzU0Ny9UVXFWbllLR0ZQWk1uVkhKN2xqbDNTZ3FmaVI3alZaY3JmR01R?=
- =?utf-8?B?cUl0bU8yaWhjRnhJUzRDQURDZmQ0MWUyRDBvV1dkTE1JNlAyWG9vZXpHZGVq?=
- =?utf-8?B?UlgvQUc4WW9vWGNYOHVOOWZqaVRtR1grYUw4bU5LTlp0eTZLVGlnWUZPRTRE?=
- =?utf-8?B?d1ZJQnBQdThFYnhLdkxoa0ZwWU1Kb1ozT2RYa1J2cEhMQzMwNlZncXkwd292?=
- =?utf-8?B?SHpiWXV3ekpLbW5SSmF4N1ZseUR6emJZMzR6dGtuQmY3V0V0dHhoZThKQXh5?=
- =?utf-8?B?NmViZFdQZHlJVmh1R0w3OXFpZ3UzZjhKR2J5QVFXc1R5WVEyNFNaZElCUWZH?=
- =?utf-8?B?UVljMFlNWnpYaTVDR1JQRGgwaDlXTGgwYW5JbG05RWVpWjdrZzE5NG00YXpi?=
- =?utf-8?B?ZXZSM1U3WGZEZHlkZU8yK0tWbDhZd3VMU3dCbUlQWW5acTNQWVhmOVJDVnlk?=
- =?utf-8?Q?B3MpflPNI8LfQfD7MuNNJhtql?=
-X-OriginatorOrg: oppo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b3daa385-cc1b-48f9-d66c-08dccc01230d
-X-MS-Exchange-CrossTenant-AuthSource: SEYPR02MB6014.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2024 10:14:03.6669 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fsFI4oTxen0d0Y/UpFslrtA86p+dBIeaKgzeYp4fX0kyzwNtdc9AtzYSk66M5BxpVtn7sN1T+7OYLTGFyVNNvQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR02MB5762
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi, Jaegeuk,
- I noticed that this commit is not queued in either
- dev or master branch. Do you have any comments on this commit :-) thanks,
- shengyong 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Mon, 2024-09-02 at 16:13 +0800,
+ Chao Yu wrote: > On 2024/8/29
+ 0:54, Julian Sun wrote: > > Hi, all. > > > > Recently syzbot reported a bug
+ as following: > > > > kernel BUG at fs/f2fs/inode.c:896! > [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [sunjunchao2870[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.215.87 listed in wl.mailspike.net]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [sunjunchao2870[at]gmail.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.161.43 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.161.43 listed in wl.mailspike.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1slQn7-0001JH-Cr
-Subject: Re: [f2fs-dev] [RCF PATCH v3 09/10] inject.f2fs: add dentry
- injection
+X-Headers-End: 1slTRN-0005jh-OL
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Do not check the FI_DIRTY_INODE
+ flag when umounting a ro fs.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -204,307 +135,88 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Sheng Yong via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Sheng Yong <shengyong@oppo.com>
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: jaegeuk@kernel.org, syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com,
+ stable@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi, Jaegeuk,
-
-I noticed that this commit is not queued in either dev or master branch.
-Do you have any comments on this commit :-)
-
-thanks,
-shengyong
-
-On 2024/7/4 10:57, Sheng Yong wrote:
-> This patch enables injecting dentry block or dir entry.
-> print_raw_dentry_info() is added to show values of node footer.
-> 
-> The meanings of options are:
->   * dent: means dentry is injected.
-> 
-> The members could be injected in cp contains:
->   * d_bitmap: dentry block d_bitmap of nid
->   * d_hash: dentry hash
->   * d_ino: dentry ino
->   * d_ftype: dentry ftype
-> 
-> Signed-off-by: Sheng Yong <shengyong@oppo.com>
-> ---
->   fsck/inject.c | 184 ++++++++++++++++++++++++++++++++++++++++++++++++++
->   fsck/inject.h |   1 +
->   2 files changed, 185 insertions(+)
-> 
-> diff --git a/fsck/inject.c b/fsck/inject.c
-> index 2a21dae..a7d2a2c 100644
-> --- a/fsck/inject.c
-> +++ b/fsck/inject.c
-> @@ -10,6 +10,7 @@
->    */
->   
->   #include <getopt.h>
-> +#include "node.h"
->   #include "inject.h"
->   
->   static void print_raw_nat_entry_info(struct f2fs_nat_entry *ne)
-> @@ -74,6 +75,17 @@ static void print_node_footer_info(struct node_footer *footer)
->   	DISP_u32(footer, next_blkaddr);
->   }
->   
-> +static void print_raw_dentry_info(struct f2fs_dir_entry *dentry)
-> +{
-> +	if (!c.dbg_lv)
-> +		return;
-> +
-> +	DISP_u32(dentry, hash_code);
-> +	DISP_u32(dentry, ino);
-> +	DISP_u16(dentry, name_len);
-> +	DISP_u8(dentry, file_type);
-> +}
-> +
->   void inject_usage(void)
->   {
->   	MSG(0, "\nUsage: inject.f2fs [options] device\n");
-> @@ -92,6 +104,7 @@ void inject_usage(void)
->   	MSG(0, "  --sit <0|1|2> --mb <name> --blk <blk> [--idx <index>] --val <value> inject sit entry\n");
->   	MSG(0, "  --ssa --mb <name> --blk <blk> [--idx <index>] --val <value> inject summary entry\n");
->   	MSG(0, "  --node --mb <name> --nid <nid> [--idx <index>] --val <value> inject node\n");
-> +	MSG(0, "  --dent --mb <name> --nid <ino> [--idx <index>] --val <value> inject ino's dentry\n");
->   	MSG(0, "  --dry-run do not really inject\n");
->   
->   	exit(1);
-> @@ -186,6 +199,16 @@ static void inject_node_usage(void)
->   	MSG(0, "  addr: inject {in}direct node nid/addr array selected by --idx <index>\n");
->   }
->   
-> +static void inject_dent_usage(void)
-> +{
-> +	MSG(0, "inject.f2fs --dent --mb <name> --nid <nid> [--idx <index>] --val <value> inject dentry\n");
-> +	MSG(0, "[mb]:\n");
-> +	MSG(0, "  d_bitmap: inject dentry block d_bitmap of nid\n");
-> +	MSG(0, "  d_hash: inject dentry hash\n");
-> +	MSG(0, "  d_ino: inject dentry ino\n");
-> +	MSG(0, "  d_ftype: inject dentry ftype\n");
-> +}
-> +
->   int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
->   {
->   	int o = 0;
-> @@ -206,6 +229,7 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
->   		{"blk", required_argument, 0, 11},
->   		{"ssa", no_argument, 0, 12},
->   		{"node", no_argument, 0, 13},
-> +		{"dent", no_argument, 0, 14},
->   		{0, 0, 0, 0}
->   	};
->   
-> @@ -294,6 +318,10 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
->   			opt->node = true;
->   			MSG(0, "Info: inject node\n");
->   			break;
-> +		case 14:
-> +			opt->dent = true;
-> +			MSG(0, "Info: inject dentry\n");
-> +			break;
->   		case 'd':
->   			if (optarg[0] == '-' || !is_digits(optarg))
->   				return EWRONG_OPT;
-> @@ -323,6 +351,9 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
->   			} else if (opt->node) {
->   				inject_node_usage();
->   				exit(0);
-> +			} else if (opt->dent) {
-> +				inject_dent_usage();
-> +				exit(0);
->   			}
->   			return EUNKNOWN_OPT;
->   		}
-> @@ -898,6 +929,157 @@ out:
->   	return ret;
->   }
->   
-> +static int find_dir_entry(struct f2fs_dentry_ptr *d, nid_t ino)
-> +{
-> +	struct f2fs_dir_entry *de;
-> +	int slot = 0;
-> +
-> +	while (slot < d->max) {
-> +		if (!test_bit_le(slot, d->bitmap)) {
-> +			slot++;
-> +			continue;
-> +		}
-> +
-> +		de = &d->dentry[slot];
-> +		if (le32_to_cpu(de->ino) == ino && de->hash_code != 0)
-> +			return slot;
-> +		if (de->name_len == 0) {
-> +			slot++;
-> +			continue;
-> +		}
-> +		slot += GET_DENTRY_SLOTS(le16_to_cpu(de->name_len));
-> +	}
-> +
-> +	return -ENOENT;
-> +}
-> +
-> +static int inject_dentry(struct f2fs_sb_info *sbi, struct inject_option *opt)
-> +{
-> +	struct node_info ni;
-> +	struct f2fs_node *node_blk = NULL;
-> +	struct f2fs_inode *inode;
-> +	struct f2fs_dentry_ptr d;
-> +	void *inline_dentry;
-> +	struct f2fs_dentry_block *dent_blk = NULL;
-> +	block_t addr = 0;
-> +	void *buf = NULL;
-> +	struct f2fs_dir_entry *dent = NULL;
-> +	struct dnode_of_data dn;
-> +	nid_t pino;
-> +	int slot = -ENOENT, ret;
-> +
-> +	node_blk = malloc(F2FS_BLKSIZE);
-> +	ASSERT(node_blk != NULL);
-> +
-> +	/* get child inode */
-> +	get_node_info(sbi, opt->nid, &ni);
-> +	ret = dev_read_block(node_blk, ni.blk_addr);
-> +	ASSERT(ret >= 0);
-> +	pino = le32_to_cpu(node_blk->i.i_pino);
-> +
-> +	/* get parent inode */
-> +	get_node_info(sbi, pino, &ni);
-> +	ret = dev_read_block(node_blk, ni.blk_addr);
-> +	ASSERT(ret >= 0);
-> +	inode = &node_blk->i;
-> +
-> +	/* find child dentry */
-> +	if (inode->i_inline & F2FS_INLINE_DENTRY) {
-> +		inline_dentry = inline_data_addr(node_blk);
-> +		make_dentry_ptr(&d, node_blk, inline_dentry, 2);
-> +		addr = ni.blk_addr;
-> +		buf = node_blk;
-> +
-> +		slot = find_dir_entry(&d, opt->nid);
-> +		if (slot >= 0)
-> +			dent = &d.dentry[slot];
-> +	} else {
-> +		unsigned int level, dirlevel, nbucket;
-> +		unsigned long i, end;
-> +
-> +		level = le32_to_cpu(inode->i_current_depth);
-> +		dirlevel = le32_to_cpu(inode->i_dir_level);
-> +		nbucket = dir_buckets(level, dirlevel);
-> +		end = dir_block_index(level, dirlevel, nbucket) +
-> +						bucket_blocks(level);
-> +
-> +		dent_blk = malloc(F2FS_BLKSIZE);
-> +		ASSERT(dent_blk != NULL);
-> +
-> +		for (i = 0; i < end; i++) {
-> +			memset(&dn, 0, sizeof(dn));
-> +			set_new_dnode(&dn, node_blk, NULL, pino);
-> +			ret = get_dnode_of_data(sbi, &dn, i, LOOKUP_NODE);
-> +			if (ret < 0)
-> +				break;
-> +			addr = dn.data_blkaddr;
-> +			if (dn.inode_blk != dn.node_blk)
-> +				free(dn.node_blk);
-> +			if (addr == NULL_ADDR || addr == NEW_ADDR)
-> +				continue;
-> +			if (!f2fs_is_valid_blkaddr(sbi, addr, DATA_GENERIC)) {
-> +				MSG(0, "invalid blkaddr 0x%x at offset %lu\n",
-> +				    addr, i);
-> +				continue;
-> +			}
-> +			ret = dev_read_block(dent_blk, addr);
-> +			ASSERT(ret >= 0);
-> +
-> +			make_dentry_ptr(&d, node_blk, dent_blk, 1);
-> +			slot = find_dir_entry(&d, opt->nid);
-> +			if (slot >= 0) {
-> +				dent = &d.dentry[slot];
-> +				buf = dent_blk;
-> +				break;
-> +			}
-> +		}
-> +	}
-> +
-> +	if (slot < 0) {
-> +		ERR_MSG("dentry of ino %u not found\n", opt->nid);
-> +		ret = -ENOENT;
-> +		goto out;
-> +	}
-> +
-> +	if (!strcmp(opt->mb, "d_bitmap")) {
-> +		MSG(0, "Info: inject dentry bitmap of nid %u: 1 -> 0\n",
-> +		    opt->nid);
-> +		test_and_clear_bit_le(slot, d.bitmap);
-> +	} else if (!strcmp(opt->mb, "d_hash")) {
-> +		MSG(0, "Info: inject dentry d_hash of nid %u: "
-> +		    "0x%x -> 0x%x\n", opt->nid, le32_to_cpu(dent->hash_code),
-> +		    (u32)opt->val);
-> +		dent->hash_code = cpu_to_le32((u32)opt->val);
-> +	} else if (!strcmp(opt->mb, "d_ino")) {
-> +		MSG(0, "Info: inject dentry d_ino of nid %u: "
-> +		    "%u -> %u\n", opt->nid, le32_to_cpu(dent->ino),
-> +		    (nid_t)opt->val);
-> +		dent->ino = cpu_to_le32((nid_t)opt->val);
-> +	} else if (!strcmp(opt->mb, "d_ftype")) {
-> +		MSG(0, "Info: inject dentry d_type of nid %u: "
-> +		    "%d -> %d\n", opt->nid, dent->file_type,
-> +		    (u8)opt->val);
-> +		dent->file_type = (u8)opt->val;
-> +	} else {
-> +		ERR_MSG("unknown or unsupported member \"%s\"\n", opt->mb);
-> +		ret = -EINVAL;
-> +		goto out;
-> +	}
-> +
-> +	print_raw_dentry_info(dent);
-> +
-> +	if (inode->i_inline & F2FS_INLINE_DENTRY)
-> +		ret = update_inode(sbi, buf, &addr);
-> +	else
-> +		ret = update_block(sbi, buf, &addr, NULL);
-> +	ASSERT(ret >= 0);
-> +
-> +out:
-> +	free(node_blk);
-> +	free(dent_blk);
-> +	return ret;
-> +}
-> +
->   int do_inject(struct f2fs_sb_info *sbi)
->   {
->   	struct inject_option *opt = (struct inject_option *)c.private;
-> @@ -915,6 +1097,8 @@ int do_inject(struct f2fs_sb_info *sbi)
->   		ret = inject_ssa(sbi, opt);
->   	else if (opt->node)
->   		ret = inject_node(sbi, opt);
-> +	else if (opt->dent)
-> +		ret = inject_dentry(sbi, opt);
->   
->   	return ret;
->   }
-> diff --git a/fsck/inject.h b/fsck/inject.h
-> index 9b14c31..43c21b5 100644
-> --- a/fsck/inject.h
-> +++ b/fsck/inject.h
-> @@ -32,6 +32,7 @@ struct inject_option {
->   	int sit;		/* which sit pack */
->   	bool ssa;
->   	bool node;
-> +	bool dent;
->   };
->   
->   void inject_usage(void);
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gTW9uLCAyMDI0LTA5LTAyIGF0IDE2OjEzICswODAwLCBDaGFvIFl1IHdyb3RlOgo+IE9uIDIw
+MjQvOC8yOSAwOjU0LCBKdWxpYW4gU3VuIHdyb3RlOgo+ID4gSGksIGFsbC4KPiA+IAo+ID4gUmVj
+ZW50bHkgc3l6Ym90IHJlcG9ydGVkIGEgYnVnIGFzIGZvbGxvd2luZzoKPiA+IAo+ID4ga2VybmVs
+IEJVRyBhdCBmcy9mMmZzL2lub2RlLmM6ODk2IQo+ID4gQ1BVOiAxIFVJRDogMCBQSUQ6IDUyMTcg
+Q29tbTogc3l6LWV4ZWN1dG9yNjA1IE5vdCB0YWludGVkIDYuMTEuMC0KPiA+IHJjNC1zeXprYWxs
+ZXItMDAwMzMtZzg3MmNmMjhiOGRmOSAjMAo+ID4gUklQOiAwMDEwOmYyZnNfZXZpY3RfaW5vZGUr
+MHgxNTk4LzB4MTVjMCBmcy9mMmZzL2lub2RlLmM6ODk2Cj4gPiBDYWxsIFRyYWNlOgo+ID4gwqAg
+PFRBU0s+Cj4gPiDCoCBldmljdCsweDUzMi8weDk1MCBmcy9pbm9kZS5jOjcwNAo+ID4gwqAgZGlz
+cG9zZV9saXN0IGZzL2lub2RlLmM6NzQ3IFtpbmxpbmVdCj4gPiDCoCBldmljdF9pbm9kZXMrMHg1
+ZjkvMHg2OTAgZnMvaW5vZGUuYzo3OTcKPiA+IMKgIGdlbmVyaWNfc2h1dGRvd25fc3VwZXIrMHg5
+ZC8weDJkMCBmcy9zdXBlci5jOjYyNwo+ID4gwqAga2lsbF9ibG9ja19zdXBlcisweDQ0LzB4OTAg
+ZnMvc3VwZXIuYzoxNjk2Cj4gPiDCoCBraWxsX2YyZnNfc3VwZXIrMHgzNDQvMHg2OTAgZnMvZjJm
+cy9zdXBlci5jOjQ4OTgKPiA+IMKgIGRlYWN0aXZhdGVfbG9ja2VkX3N1cGVyKzB4YzQvMHgxMzAg
+ZnMvc3VwZXIuYzo0NzMKPiA+IMKgIGNsZWFudXBfbW50KzB4NDFmLzB4NGIwIGZzL25hbWVzcGFj
+ZS5jOjEzNzMKPiA+IMKgIHRhc2tfd29ya19ydW4rMHgyNGYvMHgzMTAga2VybmVsL3Rhc2tfd29y
+ay5jOjIyOAo+ID4gwqAgcHRyYWNlX25vdGlmeSsweDJkMi8weDM4MCBrZXJuZWwvc2lnbmFsLmM6
+MjQwMgo+ID4gwqAgcHRyYWNlX3JlcG9ydF9zeXNjYWxsIGluY2x1ZGUvbGludXgvcHRyYWNlLmg6
+NDE1IFtpbmxpbmVdCj4gPiDCoCBwdHJhY2VfcmVwb3J0X3N5c2NhbGxfZXhpdCBpbmNsdWRlL2xp
+bnV4L3B0cmFjZS5oOjQ3NyBbaW5saW5lXQo+ID4gwqAgc3lzY2FsbF9leGl0X3dvcmsrMHhjNi8w
+eDE5MCBrZXJuZWwvZW50cnkvY29tbW9uLmM6MTczCj4gPiDCoCBzeXNjYWxsX2V4aXRfdG9fdXNl
+cl9tb2RlX3ByZXBhcmUga2VybmVsL2VudHJ5L2NvbW1vbi5jOjIwMAo+ID4gW2lubGluZV0KPiA+
+IMKgIF9fc3lzY2FsbF9leGl0X3RvX3VzZXJfbW9kZV93b3JrIGtlcm5lbC9lbnRyeS9jb21tb24u
+YzoyMDUKPiA+IFtpbmxpbmVdCj4gPiDCoCBzeXNjYWxsX2V4aXRfdG9fdXNlcl9tb2RlKzB4Mjc5
+LzB4MzcwIGtlcm5lbC9lbnRyeS9jb21tb24uYzoyMTgKPiA+IMKgIGRvX3N5c2NhbGxfNjQrMHgx
+MDAvMHgyMzAgYXJjaC94ODYvZW50cnkvY29tbW9uLmM6ODkKPiA+IMKgIGVudHJ5X1NZU0NBTExf
+NjRfYWZ0ZXJfaHdmcmFtZSsweDc3LzB4N2YKPiA+IAo+ID4gVGhlIHN5emJvdCBjb25zdHJ1Y3Rl
+ZCB0aGUgZm9sbG93aW5nIHNjZW5hcmlvOiBjb25jdXJyZW50bHkKPiA+IGNyZWF0aW5nIGRpcmVj
+dG9yaWVzIGFuZCBzZXR0aW5nIHRoZSBmaWxlIHN5c3RlbSB0byByZWFkLW9ubHkuCj4gPiBJbiB0
+aGlzIGNhc2UsIHdoaWxlIGYyZnMgd2FzIG1ha2luZyBkaXIsIHRoZSBmaWxlc3lzdGVtIHN3aXRj
+aGVkIHRvCj4gPiByZWFkb25seSwgYW5kIHdoZW4gaXQgdHJpZWQgdG8gY2xlYXIgdGhlIGRpcnR5
+IGZsYWcsIGl0IHRyaWdnZXJlZAo+ID4gdGhpcwo+ID4gY29kZSBwYXRoOiBmMmZzX21rZGlyKCkt
+PiBmMmZzX3N5bmNfZnMoKS0+ZjJmc193cml0ZV9jaGVja3BvaW50KCkKPiA+IC0+ZjJmc19yZWFk
+b25seSgpLiBUaGlzIHJlc3VsdGVkIEZJX0RJUlRZX0lOT0RFIGZsYWcgbm90IGJlaW5nCj4gPiBj
+bGVhcmVkLAo+ID4gd2hpY2ggZXZlbnR1YWxseSBsZWQgdG8gYSBidWcgYmVpbmcgdHJpZ2dlcmVk
+IGR1cmluZyB0aGUKPiA+IEZJX0RJUlRZX0lOT0RFCj4gPiBjaGVjayBpbiBmMmZzX2V2aWN0X2lu
+b2RlKCkuCj4gPiAKPiA+IEluIHRoaXMgY2FzZSwgd2UgY2Fubm90IGRvIGFueXRoaW5nIGZ1cnRo
+ZXIsIHNvIGlmIGZpbGVzeXN0ZW0gaXMKPiA+IHJlYWRvbmx5LAo+ID4gZG8gbm90IHRyaWdnZXIg
+dGhlIEJVRy4gSW5zdGVhZCwgY2xlYW4gdXAgcmVzb3VyY2VzIHRvIHRoZSBiZXN0IG9mCj4gPiBv
+dXIKPiA+IGFiaWxpdHkgdG8gcHJldmVudCB0cmlnZ2VyaW5nIHN1YnNlcXVlbnQgcmVzb3VyY2Ug
+bGVhayBjaGVja3MuCj4gPiAKPiA+IElmIHRoZXJlIGlzIGFueXRoaW5nIGltcG9ydGFudCBJJ20g
+bWlzc2luZywgcGxlYXNlIGxldCBtZSBrbm93LAo+ID4gdGhhbmtzLgo+ID4gCj4gPiBSZXBvcnRl
+ZC1ieTogc3l6Ym90K2ViZWEyNzkwOTA0NjczZDdjNjE4QHN5emthbGxlci5hcHBzcG90bWFpbC5j
+b20KPiA+IENsb3NlczoKPiA+IGh0dHBzOi8vc3l6a2FsbGVyLmFwcHNwb3QuY29tL2J1Zz9leHRp
+ZD1lYmVhMjc5MDkwNDY3M2Q3YzYxOAo+ID4gRml4ZXM6IGNhN2Q4MDJhN2Q4ZSAoImYyZnM6IGRl
+dGVjdCBkaXJ0eSBpbm9kZSBpbiBldmljdF9pbm9kZSIpCj4gPiBDQzogc3RhYmxlQHZnZXIua2Vy
+bmVsLm9yZwo+ID4gU2lnbmVkLW9mZi1ieTogSnVsaWFuIFN1biA8c3VuanVuY2hhbzI4NzBAZ21h
+aWwuY29tPgo+ID4gLS0tCj4gPiDCoCBmcy9mMmZzL2lub2RlLmMgfCAzICsrLQo+ID4gwqAgMSBm
+aWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQo+ID4gCj4gPiBkaWZm
+IC0tZ2l0IGEvZnMvZjJmcy9pbm9kZS5jIGIvZnMvZjJmcy9pbm9kZS5jCj4gPiBpbmRleCBhZWY1
+NzE3MjAxNGYuLmViZjgyNWRiYTBhNSAxMDA2NDQKPiA+IC0tLSBhL2ZzL2YyZnMvaW5vZGUuYwo+
+ID4gKysrIGIvZnMvZjJmcy9pbm9kZS5jCj4gPiBAQCAtODkyLDcgKzg5Miw4IEBAIHZvaWQgZjJm
+c19ldmljdF9pbm9kZShzdHJ1Y3QgaW5vZGUgKmlub2RlKQo+ID4gwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYXRvbWljX3JlYWQoJmZpLT5pX2NvbXByX2Js
+b2NrcykpOwo+ID4gwqAgCj4gPiDCoMKgwqDCoMKgwqDCoMKgaWYgKGxpa2VseSghZjJmc19jcF9l
+cnJvcihzYmkpICYmCj4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAhaXNfc2JpX2ZsYWdfc2V0KHNiaSwKPiA+IFNCSV9DUF9E
+SVNBQkxFRCkpKQo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIWlzX3NiaV9mbGFnX3NldChzYmksCj4gPiBTQklfQ1BfRElT
+QUJMRUQpKSAmJgo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIWYyZnNfcmVhZG9ubHkoc2JpLT5zYikpCj4gCj4gSXMgaXQg
+ZmluZSB0byBkcm9wIHRoaXMgZGlydHkgaW5vZGU/IFNpbmNlIG9uY2UgaXQgcmVtb3VudHMgZjJm
+cyBhcwo+IHJ3IG9uZSwKPiBwcmV2aW91cyB1cGRhdGVzIG9uIHN1Y2ggaW5vZGUgbWF5IGJlIGxv
+c3Q/IE9yIGFtIEkgbWlzc2luZwo+IHNvbWV0aGluZz8KSGksIENoYW8uCgpJIGJlbGlldmUgdGhl
+IGlzc3VlIHlvdSBwb2ludGVkIG91dCBnb2VzIGJleW9uZCB0aGUgc2NvcGUgb2YgdGhlCnByb2Js
+ZW0gcmVwb3J0ZWQgYnkgc3l6Ym90LCBhcyBJIGhhdmUgc2VlbiB0aGlzIGlzc3VlIGluIHNvbWUg
+ZXhpc3RpbmcKY29kZSBhcyB3ZWxsLCBzdWNoIGFzIGluIHRoZSBoYW5kbGluZyBvZiByZWFkLW9u
+bHkgZmlsZSBzeXN0ZW1zIGluCmYyZnNfbWFya19pbm9kZV9kaXJ0eV9zeW5jKCksIGYyZnNfd3Jp
+dGVfY2hlY2twb2ludCgpLApmMmZzX2RvX3N5bmNfZmlsZSgpLCBldGMuCgpJZiB5b3UgZG8gYmVs
+aWV2ZSB0aGUgcHJvYmxlbSBuZWVkcyB0byBiZSBmaXhlZCwgd2UgY2FuIGRpc2N1c3MgaXQKZnVy
+dGhlciwgYnV0IGl0IHNob3VsZCBiZSBhZGRyZXNzZWQgaW4gYSBzZXBhcmF0ZSBwYXRjaC4KCklm
+IHRoZXJlIGlzIGFueXRoaW5nIGltcG9ydGFudCBJJ20gbWlzc2luZywgcGxlYXNlIGxldCBtZSBr
+bm93LCB0aGFua3MuCj4gCj4gVGhhbmtzLAo+IAo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqBmMmZzX2J1Z19vbihzYmksIGlzX2lub2RlX2ZsYWdfc2V0KGlub2RlLAo+ID4gRklf
+RElSVFlfSU5PREUpKTsKPiA+IMKgwqDCoMKgwqDCoMKgwqBlbHNlCj4gPiDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoGYyZnNfaW5vZGVfc3luY2VkKGlub2RlKTsKPiAKClRoYW5rcywK
+LS0gCkp1bGlhbiBTdW4gPHN1bmp1bmNoYW8yODcwQGdtYWlsLmNvbT4KCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxp
+bmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xp
+c3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
