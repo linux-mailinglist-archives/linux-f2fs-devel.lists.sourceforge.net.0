@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B7A596AA1D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Sep 2024 23:28:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AE8596AC7E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Sep 2024 00:48:04 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1slb4c-0008K4-70;
-	Tue, 03 Sep 2024 21:28:25 +0000
+	id 1slcJZ-0001fw-RI;
+	Tue, 03 Sep 2024 22:47:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1slb4Z-0008Jw-Po
+ (envelope-from <lkp@intel.com>) id 1slcJY-0001fq-Cd
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Sep 2024 21:28:23 +0000
+ Tue, 03 Sep 2024 22:47:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mp8gEYsxCjyTKJ/Ywxqi86n3c78E62eM0GdQlFAlOME=; b=DxiTfXM00cwFaVYjf2WFkBsmYn
- rMmT0Rx0EbASC7GgG9PIAavUymJMZko7ef4jLI2+HmSopTCf8DvwvOWmF3eZ+YiC6XxKSqYxtkz3z
- tjPO9QMZKmr/et8cHna1oNB01rci8Dt3qF+B/+6ZEIqWmG1AKakyu90gKwUZY4OtjTcs=;
+ bh=Gu46iluZAu8sVeXHcEJ0/g5EI5wyIZ2RXowRNqXHfd8=; b=d6OSNStZZ8gj6IxeuG1x8kW4Bf
+ ngCdH35pI5i1tscjuYZ5e+JjXsbkPzgrYn5F/QD6PfJYGphhW/xTMExjD5M/EtRiWR1fMEaOICXiS
+ 9xQSw5/6aI+sdWGE422C9eQ0R3c+8O1DKHT/M0nf9uWcAwaTAX5KLylA+MIdgoDQCYrU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,67 +31,82 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mp8gEYsxCjyTKJ/Ywxqi86n3c78E62eM0GdQlFAlOME=; b=UFE+5YgLYnDi7BXWWgBrARWlKT
- IaowTSqE3FNgoiVTRh9/Oh0JWusfrt3Kwynuu+oXd7wdz2no5yXybiuEZJPViYdsYtkFRs9/e27yW
- jFrw/8fhYJXRXGLASySK1vrPor+rag5YC5f2cXKO9r54fWg+vCDeaYZ+qunzYPNFYj/g=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=Gu46iluZAu8sVeXHcEJ0/g5EI5wyIZ2RXowRNqXHfd8=; b=i7a3nRofjpFW07KhNESmfUD4Pz
+ NwFUxHvUPlYyW5ptt7eQiUoVCL7ks7GaSCJfhhOWeLx0Tuv0VNqPvbiymDxKFa0I8INsAEtqLY3JQ
+ QRxdgrkyEJHfLieZmMD6KGswvymJYKnb+15A0Jyg5HyLIbU8OR/nCUmVAzvHbCfV57Lo=;
+Received: from mgamail.intel.com ([192.198.163.11])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1slb4Y-0003uR-6t for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Sep 2024 21:28:23 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5C5A95C564F;
- Tue,  3 Sep 2024 21:28:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43BC4C4CEC4;
- Tue,  3 Sep 2024 21:28:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1725398896;
- bh=Xxujy9Jn/rdO65bdpYdsNDOrY/VW8PljClb4fiGz4HU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=C6aK+YmvTPIaLm9xy8CjJC5xrvIaKJ6G9jwFCNByFRfdkABIpw5PKnBi/2MS7NQx/
- SidlfhBugbFlI9iGscNzT+amkmz9a4qo63XfYi/I0QxO0oEUHvnVRgTjg8vc9K4/V2
- +gRjwVwUnqERmDSRP698kXEMRgvM61MCNfMfVf6b9AA9PsGbXP9/5O3wlL5ToAjMFP
- +ggMcnu792AzlCiOJc8kyttw/ZCE3rS6VXA8hUCKSA7r/efvOj1g0K4SEGNXZIT+Y1
- 7F3z2RnktPyoQxsLxiaChI5qqiWScCHmwKMEAmx2N13GxNjOPSoJ4odMC3gOt090aw
- IrqXov1kGeJ/A==
-Date: Tue, 3 Sep 2024 21:28:14 +0000
-To: Sheng Yong <shengyong@oppo.com>
-Message-ID: <Ztd_bnL803LuQdyU@google.com>
-References: <20240704025740.527171-1-shengyong@oppo.com>
- <20240704025740.527171-10-shengyong@oppo.com>
- <8d9ebf65-a1e4-4151-8ecb-92a531a7a938@oppo.com>
+ id 1slcJS-0000XI-Uf for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Sep 2024 22:47:55 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1725403671; x=1756939671;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=iO/fNMW/wiTNAaqtQ6ViRfRRPRXDsdCIOiMd8CyEKww=;
+ b=FiLlEpXP6jKQeYby6q7WDSX44aFCTfC7NWXyikyuNdNGYRiYKEJWGicb
+ eNqJ7NBMy3oz8xVSvkgusWkCifzNA6pRJzzy4tOopuLKxRV75iKiAQPfE
+ 3ogCKnYiV9TDeqex89G6fhCUw9RhtvkYmuVcYlymfMpyKmj0vvIUANeaS
+ 4fHk14Z7a1p+3vJ3dmlL2I3Drxv1YpjsCJyJXv1qZonBlMHFVv/4kFW1N
+ mktQFEad9VGkMWF2ESBVEDbDpuLNaJ/HNhTpkZybOrB9WQXBRP0HJrZLH
+ xUfT6v2cc5UfvnaKXmEVZ7Nfdq8isXQCDwdQv9VpJVTC+z2cp07laeOwV w==;
+X-CSE-ConnectionGUID: 4DSpht6ISPCTh65NuhtNHw==
+X-CSE-MsgGUID: ZlfBogb1ToeGPyTsAo2LUg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11184"; a="34637222"
+X-IronPort-AV: E=Sophos;i="6.10,200,1719903600"; d="scan'208";a="34637222"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+ by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Sep 2024 15:47:40 -0700
+X-CSE-ConnectionGUID: qDXGN2SpRcmbs2Z1fHbSoA==
+X-CSE-MsgGUID: 7jsQSHVFTSO3IMmq2uCzug==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.10,200,1719903600"; d="scan'208";a="69223688"
+Received: from lkp-server01.sh.intel.com (HELO 9c6b1c7d3b50) ([10.239.97.150])
+ by fmviesa003.fm.intel.com with ESMTP; 03 Sep 2024 15:47:38 -0700
+Received: from kbuild by 9c6b1c7d3b50 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1slcJD-0007JK-3D;
+ Tue, 03 Sep 2024 22:47:35 +0000
+Date: Wed, 4 Sep 2024 06:47:13 +0800
+From: kernel test robot <lkp@intel.com>
+To: Wu Bo <bo.wu@vivo.com>, linux-kernel@vger.kernel.org
+Message-ID: <202409040652.Gn2vQXRR-lkp@intel.com>
+References: <b6e9e02244cf2460df1256e257103e2c77fae2a9.1725334811.git.bo.wu@vivo.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <8d9ebf65-a1e4-4151-8ecb-92a531a7a938@oppo.com>
-X-Spam-Score: -5.4 (-----)
+In-Reply-To: <b6e9e02244cf2460df1256e257103e2c77fae2a9.1725334811.git.bo.wu@vivo.com>
+X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 09/03, Sheng Yong wrote: > Hi, Jaegeuk, > > I noticed that
- this commit is not queued in either dev or master branch. > Do you have any
- comments on this commit :-) Thanks, I missed. Let me queue in the branches.
- :) Content analysis details:   (-5.4 points, 6.0 required)
+ Content preview:  Hi Wu,
+ kernel test robot noticed the following build warnings:
+ [auto build test WARNING on v6.11-rc6] [also build test WARNING on
+ linus/master]
+ [cannot apply to jaegeuk-f2fs/dev-test jaegeuk-f2fs/dev next-20240903] [If
+ your patch is applied to the wrong git tree, [...] 
+ Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [192.198.163.11 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1slb4Y-0003uR-6t
-Subject: Re: [f2fs-dev] [RCF PATCH v3 09/10] inject.f2fs: add dentry
- injection
+X-Headers-End: 1slcJS-0000XI-Uf
+Subject: Re: [f2fs-dev] [PATCH 13/13] f2fs: implement inline tail forward
+ recovery
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,298 +118,131 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: Chao Yu <yuchao0@huawei.com>, linux-f2fs-devel@lists.sourceforge.net,
+ oe-kbuild-all@lists.linux.dev, Wu Bo <wubo.oduw@gmail.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 09/03, Sheng Yong wrote:
-> Hi, Jaegeuk,
-> 
-> I noticed that this commit is not queued in either dev or master branch.
-> Do you have any comments on this commit :-)
+Hi Wu,
 
-Thanks, I missed. Let me queue in the branches. :)
+kernel test robot noticed the following build warnings:
 
-> 
-> thanks,
-> shengyong
-> 
-> On 2024/7/4 10:57, Sheng Yong wrote:
-> > This patch enables injecting dentry block or dir entry.
-> > print_raw_dentry_info() is added to show values of node footer.
-> > 
-> > The meanings of options are:
-> >   * dent: means dentry is injected.
-> > 
-> > The members could be injected in cp contains:
-> >   * d_bitmap: dentry block d_bitmap of nid
-> >   * d_hash: dentry hash
-> >   * d_ino: dentry ino
-> >   * d_ftype: dentry ftype
-> > 
-> > Signed-off-by: Sheng Yong <shengyong@oppo.com>
-> > ---
-> >   fsck/inject.c | 184 ++++++++++++++++++++++++++++++++++++++++++++++++++
-> >   fsck/inject.h |   1 +
-> >   2 files changed, 185 insertions(+)
-> > 
-> > diff --git a/fsck/inject.c b/fsck/inject.c
-> > index 2a21dae..a7d2a2c 100644
-> > --- a/fsck/inject.c
-> > +++ b/fsck/inject.c
-> > @@ -10,6 +10,7 @@
-> >    */
-> >   #include <getopt.h>
-> > +#include "node.h"
-> >   #include "inject.h"
-> >   static void print_raw_nat_entry_info(struct f2fs_nat_entry *ne)
-> > @@ -74,6 +75,17 @@ static void print_node_footer_info(struct node_footer *footer)
-> >   	DISP_u32(footer, next_blkaddr);
-> >   }
-> > +static void print_raw_dentry_info(struct f2fs_dir_entry *dentry)
-> > +{
-> > +	if (!c.dbg_lv)
-> > +		return;
-> > +
-> > +	DISP_u32(dentry, hash_code);
-> > +	DISP_u32(dentry, ino);
-> > +	DISP_u16(dentry, name_len);
-> > +	DISP_u8(dentry, file_type);
-> > +}
-> > +
-> >   void inject_usage(void)
-> >   {
-> >   	MSG(0, "\nUsage: inject.f2fs [options] device\n");
-> > @@ -92,6 +104,7 @@ void inject_usage(void)
-> >   	MSG(0, "  --sit <0|1|2> --mb <name> --blk <blk> [--idx <index>] --val <value> inject sit entry\n");
-> >   	MSG(0, "  --ssa --mb <name> --blk <blk> [--idx <index>] --val <value> inject summary entry\n");
-> >   	MSG(0, "  --node --mb <name> --nid <nid> [--idx <index>] --val <value> inject node\n");
-> > +	MSG(0, "  --dent --mb <name> --nid <ino> [--idx <index>] --val <value> inject ino's dentry\n");
-> >   	MSG(0, "  --dry-run do not really inject\n");
-> >   	exit(1);
-> > @@ -186,6 +199,16 @@ static void inject_node_usage(void)
-> >   	MSG(0, "  addr: inject {in}direct node nid/addr array selected by --idx <index>\n");
-> >   }
-> > +static void inject_dent_usage(void)
-> > +{
-> > +	MSG(0, "inject.f2fs --dent --mb <name> --nid <nid> [--idx <index>] --val <value> inject dentry\n");
-> > +	MSG(0, "[mb]:\n");
-> > +	MSG(0, "  d_bitmap: inject dentry block d_bitmap of nid\n");
-> > +	MSG(0, "  d_hash: inject dentry hash\n");
-> > +	MSG(0, "  d_ino: inject dentry ino\n");
-> > +	MSG(0, "  d_ftype: inject dentry ftype\n");
-> > +}
-> > +
-> >   int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
-> >   {
-> >   	int o = 0;
-> > @@ -206,6 +229,7 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
-> >   		{"blk", required_argument, 0, 11},
-> >   		{"ssa", no_argument, 0, 12},
-> >   		{"node", no_argument, 0, 13},
-> > +		{"dent", no_argument, 0, 14},
-> >   		{0, 0, 0, 0}
-> >   	};
-> > @@ -294,6 +318,10 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
-> >   			opt->node = true;
-> >   			MSG(0, "Info: inject node\n");
-> >   			break;
-> > +		case 14:
-> > +			opt->dent = true;
-> > +			MSG(0, "Info: inject dentry\n");
-> > +			break;
-> >   		case 'd':
-> >   			if (optarg[0] == '-' || !is_digits(optarg))
-> >   				return EWRONG_OPT;
-> > @@ -323,6 +351,9 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
-> >   			} else if (opt->node) {
-> >   				inject_node_usage();
-> >   				exit(0);
-> > +			} else if (opt->dent) {
-> > +				inject_dent_usage();
-> > +				exit(0);
-> >   			}
-> >   			return EUNKNOWN_OPT;
-> >   		}
-> > @@ -898,6 +929,157 @@ out:
-> >   	return ret;
-> >   }
-> > +static int find_dir_entry(struct f2fs_dentry_ptr *d, nid_t ino)
-> > +{
-> > +	struct f2fs_dir_entry *de;
-> > +	int slot = 0;
-> > +
-> > +	while (slot < d->max) {
-> > +		if (!test_bit_le(slot, d->bitmap)) {
-> > +			slot++;
-> > +			continue;
-> > +		}
-> > +
-> > +		de = &d->dentry[slot];
-> > +		if (le32_to_cpu(de->ino) == ino && de->hash_code != 0)
-> > +			return slot;
-> > +		if (de->name_len == 0) {
-> > +			slot++;
-> > +			continue;
-> > +		}
-> > +		slot += GET_DENTRY_SLOTS(le16_to_cpu(de->name_len));
-> > +	}
-> > +
-> > +	return -ENOENT;
-> > +}
-> > +
-> > +static int inject_dentry(struct f2fs_sb_info *sbi, struct inject_option *opt)
-> > +{
-> > +	struct node_info ni;
-> > +	struct f2fs_node *node_blk = NULL;
-> > +	struct f2fs_inode *inode;
-> > +	struct f2fs_dentry_ptr d;
-> > +	void *inline_dentry;
-> > +	struct f2fs_dentry_block *dent_blk = NULL;
-> > +	block_t addr = 0;
-> > +	void *buf = NULL;
-> > +	struct f2fs_dir_entry *dent = NULL;
-> > +	struct dnode_of_data dn;
-> > +	nid_t pino;
-> > +	int slot = -ENOENT, ret;
-> > +
-> > +	node_blk = malloc(F2FS_BLKSIZE);
-> > +	ASSERT(node_blk != NULL);
-> > +
-> > +	/* get child inode */
-> > +	get_node_info(sbi, opt->nid, &ni);
-> > +	ret = dev_read_block(node_blk, ni.blk_addr);
-> > +	ASSERT(ret >= 0);
-> > +	pino = le32_to_cpu(node_blk->i.i_pino);
-> > +
-> > +	/* get parent inode */
-> > +	get_node_info(sbi, pino, &ni);
-> > +	ret = dev_read_block(node_blk, ni.blk_addr);
-> > +	ASSERT(ret >= 0);
-> > +	inode = &node_blk->i;
-> > +
-> > +	/* find child dentry */
-> > +	if (inode->i_inline & F2FS_INLINE_DENTRY) {
-> > +		inline_dentry = inline_data_addr(node_blk);
-> > +		make_dentry_ptr(&d, node_blk, inline_dentry, 2);
-> > +		addr = ni.blk_addr;
-> > +		buf = node_blk;
-> > +
-> > +		slot = find_dir_entry(&d, opt->nid);
-> > +		if (slot >= 0)
-> > +			dent = &d.dentry[slot];
-> > +	} else {
-> > +		unsigned int level, dirlevel, nbucket;
-> > +		unsigned long i, end;
-> > +
-> > +		level = le32_to_cpu(inode->i_current_depth);
-> > +		dirlevel = le32_to_cpu(inode->i_dir_level);
-> > +		nbucket = dir_buckets(level, dirlevel);
-> > +		end = dir_block_index(level, dirlevel, nbucket) +
-> > +						bucket_blocks(level);
-> > +
-> > +		dent_blk = malloc(F2FS_BLKSIZE);
-> > +		ASSERT(dent_blk != NULL);
-> > +
-> > +		for (i = 0; i < end; i++) {
-> > +			memset(&dn, 0, sizeof(dn));
-> > +			set_new_dnode(&dn, node_blk, NULL, pino);
-> > +			ret = get_dnode_of_data(sbi, &dn, i, LOOKUP_NODE);
-> > +			if (ret < 0)
-> > +				break;
-> > +			addr = dn.data_blkaddr;
-> > +			if (dn.inode_blk != dn.node_blk)
-> > +				free(dn.node_blk);
-> > +			if (addr == NULL_ADDR || addr == NEW_ADDR)
-> > +				continue;
-> > +			if (!f2fs_is_valid_blkaddr(sbi, addr, DATA_GENERIC)) {
-> > +				MSG(0, "invalid blkaddr 0x%x at offset %lu\n",
-> > +				    addr, i);
-> > +				continue;
-> > +			}
-> > +			ret = dev_read_block(dent_blk, addr);
-> > +			ASSERT(ret >= 0);
-> > +
-> > +			make_dentry_ptr(&d, node_blk, dent_blk, 1);
-> > +			slot = find_dir_entry(&d, opt->nid);
-> > +			if (slot >= 0) {
-> > +				dent = &d.dentry[slot];
-> > +				buf = dent_blk;
-> > +				break;
-> > +			}
-> > +		}
-> > +	}
-> > +
-> > +	if (slot < 0) {
-> > +		ERR_MSG("dentry of ino %u not found\n", opt->nid);
-> > +		ret = -ENOENT;
-> > +		goto out;
-> > +	}
-> > +
-> > +	if (!strcmp(opt->mb, "d_bitmap")) {
-> > +		MSG(0, "Info: inject dentry bitmap of nid %u: 1 -> 0\n",
-> > +		    opt->nid);
-> > +		test_and_clear_bit_le(slot, d.bitmap);
-> > +	} else if (!strcmp(opt->mb, "d_hash")) {
-> > +		MSG(0, "Info: inject dentry d_hash of nid %u: "
-> > +		    "0x%x -> 0x%x\n", opt->nid, le32_to_cpu(dent->hash_code),
-> > +		    (u32)opt->val);
-> > +		dent->hash_code = cpu_to_le32((u32)opt->val);
-> > +	} else if (!strcmp(opt->mb, "d_ino")) {
-> > +		MSG(0, "Info: inject dentry d_ino of nid %u: "
-> > +		    "%u -> %u\n", opt->nid, le32_to_cpu(dent->ino),
-> > +		    (nid_t)opt->val);
-> > +		dent->ino = cpu_to_le32((nid_t)opt->val);
-> > +	} else if (!strcmp(opt->mb, "d_ftype")) {
-> > +		MSG(0, "Info: inject dentry d_type of nid %u: "
-> > +		    "%d -> %d\n", opt->nid, dent->file_type,
-> > +		    (u8)opt->val);
-> > +		dent->file_type = (u8)opt->val;
-> > +	} else {
-> > +		ERR_MSG("unknown or unsupported member \"%s\"\n", opt->mb);
-> > +		ret = -EINVAL;
-> > +		goto out;
-> > +	}
-> > +
-> > +	print_raw_dentry_info(dent);
-> > +
-> > +	if (inode->i_inline & F2FS_INLINE_DENTRY)
-> > +		ret = update_inode(sbi, buf, &addr);
-> > +	else
-> > +		ret = update_block(sbi, buf, &addr, NULL);
-> > +	ASSERT(ret >= 0);
-> > +
-> > +out:
-> > +	free(node_blk);
-> > +	free(dent_blk);
-> > +	return ret;
-> > +}
-> > +
-> >   int do_inject(struct f2fs_sb_info *sbi)
-> >   {
-> >   	struct inject_option *opt = (struct inject_option *)c.private;
-> > @@ -915,6 +1097,8 @@ int do_inject(struct f2fs_sb_info *sbi)
-> >   		ret = inject_ssa(sbi, opt);
-> >   	else if (opt->node)
-> >   		ret = inject_node(sbi, opt);
-> > +	else if (opt->dent)
-> > +		ret = inject_dentry(sbi, opt);
-> >   	return ret;
-> >   }
-> > diff --git a/fsck/inject.h b/fsck/inject.h
-> > index 9b14c31..43c21b5 100644
-> > --- a/fsck/inject.h
-> > +++ b/fsck/inject.h
-> > @@ -32,6 +32,7 @@ struct inject_option {
-> >   	int sit;		/* which sit pack */
-> >   	bool ssa;
-> >   	bool node;
-> > +	bool dent;
-> >   };
-> >   void inject_usage(void);
+[auto build test WARNING on v6.11-rc6]
+[also build test WARNING on linus/master]
+[cannot apply to jaegeuk-f2fs/dev-test jaegeuk-f2fs/dev next-20240903]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Wu-Bo/f2fs-add-inline-tail-mount-option/20240903-164436
+base:   v6.11-rc6
+patch link:    https://lore.kernel.org/r/b6e9e02244cf2460df1256e257103e2c77fae2a9.1725334811.git.bo.wu%40vivo.com
+patch subject: [PATCH 13/13] f2fs: implement inline tail forward recovery
+config: arc-randconfig-r112-20240903 (https://download.01.org/0day-ci/archive/20240904/202409040652.Gn2vQXRR-lkp@intel.com/config)
+compiler: arc-elf-gcc (GCC) 13.2.0
+reproduce: (https://download.01.org/0day-ci/archive/20240904/202409040652.Gn2vQXRR-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202409040652.Gn2vQXRR-lkp@intel.com/
+
+sparse warnings: (new ones prefixed by >>)
+>> fs/f2fs/inline.c:428:34: sparse: sparse: restricted __le32 degrades to integer
+
+vim +428 fs/f2fs/inline.c
+
+   416	
+   417	int f2fs_recover_inline_tail(struct inode *inode, struct page *npage)
+   418	{
+   419		struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+   420		struct f2fs_inode *ri = NULL;
+   421		void *src_addr, *dst_addr;
+   422		struct page *ipage;
+   423	
+   424		if (IS_INODE(npage))
+   425			ri = F2FS_INODE(npage);
+   426	
+   427		if (f2fs_has_inline_tail(inode) &&
+ > 428				ri && (ri->i_flags & F2FS_INLINE_TAIL)) {
+   429	process_inline:
+   430			if (!(ri->i_inline & F2FS_DATA_EXIST))
+   431				return 0;
+   432	
+   433			ipage = f2fs_get_node_page(sbi, inode->i_ino);
+   434			if (IS_ERR(ipage))
+   435				return PTR_ERR(ipage);
+   436	
+   437			f2fs_wait_on_page_writeback(ipage, NODE, true, true);
+   438	
+   439			src_addr = inline_data_addr(inode, npage);
+   440			dst_addr = inline_data_addr(inode, ipage);
+   441			memcpy(dst_addr, src_addr, MAX_INLINE_DATA(inode));
+   442	
+   443			set_inode_flag(inode, FI_DATA_EXIST);
+   444	
+   445			set_page_dirty(ipage);
+   446			f2fs_put_page(ipage, 1);
+   447			return 0;
+   448		}
+   449	
+   450		if (f2fs_has_inline_tail(inode)) {
+   451			ipage = f2fs_get_node_page(sbi, inode->i_ino);
+   452			if (IS_ERR(ipage))
+   453				return PTR_ERR(ipage);
+   454			f2fs_truncate_inline_inode(inode, ipage, 0);
+   455			clear_inode_flag(inode, FI_INLINE_TAIL);
+   456			f2fs_put_page(ipage, 1);
+   457		} else if (ri && (ri->i_inline & F2FS_INLINE_TAIL)) {
+   458			int ret;
+   459	
+   460			ret = f2fs_truncate_blocks(inode,
+   461					COMPACT_ADDRS_PER_INODE >> PAGE_SHIFT, false);
+   462			if (ret)
+   463				return ret;
+   464			goto process_inline;
+   465		}
+   466		return 0;
+   467	}
+   468	struct f2fs_dir_entry *f2fs_find_in_inline_dir(struct inode *dir,
+   469						const struct f2fs_filename *fname,
+   470						struct page **res_page)
+   471	{
+   472		struct f2fs_sb_info *sbi = F2FS_SB(dir->i_sb);
+   473		struct f2fs_dir_entry *de;
+   474		struct f2fs_dentry_ptr d;
+   475		struct page *ipage;
+   476		void *inline_dentry;
+   477	
+   478		ipage = f2fs_get_node_page(sbi, dir->i_ino);
+   479		if (IS_ERR(ipage)) {
+   480			*res_page = ipage;
+   481			return NULL;
+   482		}
+   483	
+   484		inline_dentry = inline_data_addr(dir, ipage);
+   485	
+   486		make_dentry_ptr_inline(dir, &d, inline_dentry);
+   487		de = f2fs_find_target_dentry(&d, fname, NULL);
+   488		unlock_page(ipage);
+   489		if (IS_ERR(de)) {
+   490			*res_page = ERR_CAST(de);
+   491			de = NULL;
+   492		}
+   493		if (de)
+   494			*res_page = ipage;
+   495		else
+   496			f2fs_put_page(ipage, 0);
+   497	
+   498		return de;
+   499	}
+   500	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
 
 _______________________________________________
