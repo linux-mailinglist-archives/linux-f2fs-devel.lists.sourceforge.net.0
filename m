@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D37F96CF90
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 Sep 2024 08:43:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 75AA596CF98
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 Sep 2024 08:43:52 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sm6Cm-0003Hv-Vz;
-	Thu, 05 Sep 2024 06:42:56 +0000
+	id 1sm6Dd-0002DY-G7;
+	Thu, 05 Sep 2024 06:43:50 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1sm6Cj-0003Hi-UE
+ (envelope-from <chao@kernel.org>) id 1sm6Dc-0002DS-Au
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 05 Sep 2024 06:42:53 +0000
+ Thu, 05 Sep 2024 06:43:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y9RIEXqM+yGND5i3jZL1/EyHqeTVi0+uXBe1Y/HyB94=; b=VTACUcP/hG3eyLpD+gGQAy5onE
- iHiddsZa6dW90/QlFD3TOYGl3dP55u10VeyXi/9aUTkYBZYjTkkuKB3gQj5ME6PxZOxSFAPNSxhZK
- zcnE4rY+owP9o62gmS5AkZijspp0S75gmB1a1znWtML42+tBm23HA3NQ3KpiznQ3Z/Dw=;
+ bh=g+2dr7wqPvua2aUg6LrXxvYMtX6lztzTsMKm88scRKY=; b=Fbpoj7ZMH8RSVGaFdzuh7UF/R1
+ v3sNT4Eyib4VHtxCahS1r/L5J8P/RCiSpwc/YDhoCLGYZx8pKFWaGEBsfP8P0LdjDfL7rn7KdvXSW
+ iz91D5qEV94YDPywgEtZctKLc7MXejTQnGjtH7TEOY0FlAbvMfbzoLN0CxQN5YTc/2WE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,40 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Y9RIEXqM+yGND5i3jZL1/EyHqeTVi0+uXBe1Y/HyB94=; b=F4LqEQW4PMKE8gg0jTGm9+EbT2
- Vbi/Ly//6YP77UeRi2ME7aLSLtcmWDnLzBg/kNRZmgElvmqMNruUDyWhsbhmbD+H237Mg/KYbhGE+
- n7lLJu5XtzUj50jHx3U2Ibw0GYBRdzoM4ljJEwVJqpKD4WhnSnCkIxcTFdYRdihJLdEk=;
+ bh=g+2dr7wqPvua2aUg6LrXxvYMtX6lztzTsMKm88scRKY=; b=A4ywWyGPIw5nEfylY/pGFsCDu7
+ UNqjBL8PPaQWRcs8HU9IrV/5kadG7HLQpAQ6KBlh14eqLC+z2ght4ABLk81v53//MkC0/iSyJe0kR
+ 5bRlRm/bUc8NDp6+1IMPAAaxhvPdFU6feUGfkAO1i1YykZtHiQ1/ySD6mz0t5m4SIuIE=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sm6Cj-0003uk-A4 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 05 Sep 2024 06:42:53 +0000
+ id 1sm6Dc-0003yX-De for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 05 Sep 2024 06:43:49 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 52CB3A43FE8;
- Thu,  5 Sep 2024 06:42:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E740C4CEC4;
- Thu,  5 Sep 2024 06:42:39 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 64ADEA440C0;
+ Thu,  5 Sep 2024 06:43:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E07EFC4CEC4;
+ Thu,  5 Sep 2024 06:43:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1725518562;
- bh=YC4Dj3WIbC+/DAKSdyjgYxMgy7t6d1aZCmT+bXSdd/8=;
+ s=k20201202; t=1725518617;
+ bh=qHz/VIWavBZ9/VrT8Dz11HQ70MwXkOtE2Y+4hjEG/+o=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=o93MJmLYEkq0zwjZB6iXqAfIeLQskY0HKtOn/OUqGTJgqOZvly6+QexpFQEv0cGZN
- Rf77/Xy6ewYMCrGFKcVmiqtyqfD47o8zLwBCniPQ6ipDllpYDzrx/qYqQvgJ5/1PS/
- q8fzcEA61vMOdWs5NYjvUKxqg3YNx1Pum3ILS6fSgvUxofgG96MPZ4eLLtAL+xcvD8
- AQKoTPfMsyT93x5p9W7d31Ulh8n0ol8ZdTBW0fUsmzimPxXOSRd78UREiS6QYjDCh5
- UypU3micUOpYKWC3k9tUcwimQWKMvZ3QBOrUvPzxDAxG5207+uvsw1s4ehIEdSnPSW
- bnCNqhtQ9oNJA==
-Message-ID: <7910ec29-79a9-4338-b731-0ae9e4698028@kernel.org>
-Date: Thu, 5 Sep 2024 14:42:37 +0800
+ b=ZVzkC0yWhSk8rCvxLC/hmGKnQNqTyWMAh4UFiGeCnGhykKYU9ft4ydmBGNcDYjZtA
+ ugsJfXeRR5iodXYIMzVo0jJuAdDyh4mfByD3k9dI/9sRDC9jd5qZBjUekuwf4oZV8u
+ aFPAXoGjtWG6vPhuDoNjL5WYPwsY+Obiyj5zd+DJJ1O139dQFLhviPG9n6wMxTiHvN
+ UGo4XmcaOrj44yU5+o5vfhppsFrLTc4bYpKLSoGG0M8GGylngfc3Us4a/2YdP+oQfK
+ bpVy3rVJvQiwlbj99QnETQWVCUgtPWKgsFat/rmFyGSxvs1RfFMCbrLZESF2h5gG9t
+ fj75io0N5JJOQ==
+Message-ID: <f26f25bf-145b-4e76-b7c1-1ad00cbfb4ab@kernel.org>
+Date: Thu, 5 Sep 2024 14:43:32 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: daejun7.park@samsung.com, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
  "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-References: <CGME20240904011217epcms2p5a1b15db8e0ae50884429da7be4af4de4@epcms2p5>
- <20240904011217epcms2p5a1b15db8e0ae50884429da7be4af4de4@epcms2p5>
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+References: <CGME20240905052433epcms2p1dac78dff43776cc158bac5ae9d118160@epcms2p1>
+ <20240905052433epcms2p1dac78dff43776cc158bac5ae9d118160@epcms2p1>
 Content-Language: en-US
-In-Reply-To: <20240904011217epcms2p5a1b15db8e0ae50884429da7be4af4de4@epcms2p5>
+In-Reply-To: <20240905052433epcms2p1dac78dff43776cc158bac5ae9d118160@epcms2p1>
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,10 +73,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/9/4 9:12, Daejun Park wrote: > This patch enables
- support for write hints by segment type. > > Signed-off-by: Daejun Park
- <daejun7.park@samsung.com>
- Reviewed-by: Chao Yu <chao@kernel.org> Thanks, 
+ Content preview:  On 2024/9/5 13:24, Daejun Park wrote: > This patch addresses
+ the problem that when using LFS mode,
+ unused blocks > may occur in f2fs_map_blocks()
+ during block allocation for dio writes. > > If a new s [...] 
  Content analysis details:   (-0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,8 +91,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sm6Cj-0003uk-A4
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs-tools: add write hint support
+X-Headers-End: 1sm6Dc-0003yX-De
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: avoid unused block when dio write
+ in LFS mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,8 +113,17 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/9/4 9:12, Daejun Park wrote:
-> This patch enables support for write hints by segment type.
+On 2024/9/5 13:24, Daejun Park wrote:
+> This patch addresses the problem that when using LFS mode, unused blocks
+> may occur in f2fs_map_blocks() during block allocation for dio writes.
+> 
+> If a new section is allocated during block allocation, it will not be
+> included in the map struct by map_is_mergeable() if the LBA of the
+> allocated block is not contiguous. However, the block already allocated
+> in this process will remain unused due to the LFS mode.
+> 
+> This patch avoids the possibility of unused blocks by escaping
+> f2fs_map_blocks() when allocating the last block in a section.
 > 
 > Signed-off-by: Daejun Park <daejun7.park@samsung.com>
 
