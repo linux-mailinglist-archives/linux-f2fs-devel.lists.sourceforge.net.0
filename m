@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B6A896E73F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  6 Sep 2024 03:21:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8B7296E7A8
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  6 Sep 2024 04:21:25 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1smNfG-0000nU-6z;
-	Fri, 06 Sep 2024 01:21:29 +0000
+	id 1smObA-00024R-OC;
+	Fri, 06 Sep 2024 02:21:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <SRS0=+ApI=QE=oppo.com=chao.yu@kernel.org>)
- id 1smNfE-0000nK-0q for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 06 Sep 2024 01:21:27 +0000
+ (envelope-from <chao@kernel.org>) id 1smOb9-00024L-7j
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 06 Sep 2024 02:21:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=76h1tDLnL79PBXDV1w5EM06K6hxOwgrV47t3JReSa50=; b=cCm04uv2Rk0DAb6voVyOMGZaAD
- YEMJnme6gVzCJToYgHY9lD72yu4EiFb0l/XxysuGl9P3Enmu9HQZu4CetCH6txswaYiwwW4aYlTaQ
- fmOyui13KlCIROBSqjqAqSYB4t+iiD9RX3sF4fQgvGlSeZ151AS28m91+ucEs5kOS0W4=;
+ bh=gUnhITdKRIGbRdgRbzJ4zk/0hcCx3aBI/gEAc5yO7MM=; b=Za8BJ2yI8wWffy9D7bdO5NxFS0
+ WSl18Gz/LxFtcYkJ7s3aqxpebR3tZGX2JuBgEUWFzT1On7EyhPkcUrbOHdqRZwmGWpIQT8DSsm0f+
+ B5LMrAi+ch6+Vb5uBu2LSFBat8NwDK20mKRBuznvwr0tg6BBQSgWQfmWVfeBZtnL8fng=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,50 +31,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=76h1tDLnL79PBXDV1w5EM06K6hxOwgrV47t3JReSa50=; b=l+bGOSqibA7fgrfA2sxMjByBZE
- Kt01RRhZwk+tFiwoR+yKJhGrtWTnVSp0PkMHwFOpJcDX4w3TB5s7muVgrZhyOv7PMpRLUtCMIBdv1
- z93RIewqXlKFFG1gua3zQjK5M9eCDSRc6L7V78kG3f/0MlmUEoKS2RY3+MyiUTyaQsX8=;
+ bh=gUnhITdKRIGbRdgRbzJ4zk/0hcCx3aBI/gEAc5yO7MM=; b=Wy3Gic7i0dJ78dvYPPm4trAGUT
+ DkZ4Uuv1n4h2koz0lK/jWxC7bCn09oWvXpakK2pg5XFsQxesef4wqSi3ikpJQyTLmjXa2ieUOUI9T
+ BSpABavcELA9tDGmpgpiucOyASVVkmthhl3DVORjyKLam7sS91etKIBdRLp40W7WOI2o=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1smNfC-0006bC-F5 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 06 Sep 2024 01:21:27 +0000
+ id 1smOb7-0002g2-W6 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 06 Sep 2024 02:21:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 3CB84A44473;
- Fri,  6 Sep 2024 01:21:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1401EC4CEC3;
- Fri,  6 Sep 2024 01:21:13 +0000 (UTC)
-Message-ID: <fcc7ac5f-98e8-4f30-bb95-9cda52856cba@oppo.com>
-Date: Fri, 6 Sep 2024 09:21:11 +0800
+ by nyc.source.kernel.org (Postfix) with ESMTP id 094BFA44532;
+ Fri,  6 Sep 2024 02:21:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 934CAC4CEC3;
+ Fri,  6 Sep 2024 02:21:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1725589267;
+ bh=88UqhZqlnFDosqx8wq1Nj/KcxKdngHyv5b1Bi4Zom/Y=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=SdQM+2wf+LOQuqoHuBv1kibxdXMz4CTY1J/7/WK/XvSTxxynG5lG9gUQzB5dB7Nw+
+ eGbNzuc7PAEWNyvb2H74hRKFWfdTKB/idZ7FKv1mgZTqQYCvJXFqSpLCyuhWJgbh5G
+ cIZamlVBiquW9uf4+Zs55np+EoYXBsdgJ1dKW0AyX5QBtjsgyNUzSrJtCDGjqSZICC
+ /lOqDkZjRblYRGq6Z3o/RxKeYQxj8wMvyH5EsYdK/bhnisx3EWmXw2eYDNQTJKE92Y
+ mfhD1JHI5o6hx6Gq/lw07BCiGbpLrVAdadSTMH1f5LhfnfsssnYj0NKZgD9wXkaPrb
+ imjeUPoidpZqw==
+Message-ID: <6a587bb2-8126-43d6-a6b5-d449dbc9a908@kernel.org>
+Date: Fri, 6 Sep 2024 10:21:03 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
-References: <20240905212014.1094170-1-daeho43@gmail.com>
+References: <20240829215242.3641502-1-daeho43@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20240905212014.1094170-1-daeho43@gmail.com>
-X-Spam-Score: 0.2 (/)
+In-Reply-To: <20240829215242.3641502-1-daeho43@gmail.com>
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/9/6 5:20,
- Daeho Jeong wrote: > From: Daeho Jeong <daehojeong@google.com>
- > > Fixed wrong endian conversions related to i_flags. > > Signed-off-by:
- Daeho Jeong <daehojeong@google.com> Reviewed-by: Chao Yu <chao@kernel.org>
- Content analysis details:   (0.2 points, 6.0 required)
+ Content preview:  On 2024/8/30 5:52, Daeho Jeong wrote: > From: Daeho Jeong
+ <daehojeong@google.com> > > Since we don't have any GC on device side for
+ zoned devices, need more > aggressive BG GC. So, tune the parameters [...]
+ Content analysis details:   (-0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1smNfC-0006bC-F5
-Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: fix wrong endian conversion
- related to i_flags
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1smOb7-0002g2-W6
+Subject: Re: [f2fs-dev] [PATCH 1/7] f2fs: make BG GC more aggressive for
+ zoned devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,16 +101,17 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao.yu@oppo.com>
+Reply-To: Chao Yu <chao@kernel.org>
 Cc: Daeho Jeong <daehojeong@google.com>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/9/6 5:20, Daeho Jeong wrote:
+On 2024/8/30 5:52, Daeho Jeong wrote:
 > From: Daeho Jeong <daehojeong@google.com>
 > 
-> Fixed wrong endian conversions related to i_flags.
+> Since we don't have any GC on device side for zoned devices, need more
+> aggressive BG GC. So, tune the parameters for that.
 > 
 > Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
