@@ -2,110 +2,156 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA7A5973929
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Sep 2024 15:57:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8E7A973B0F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Sep 2024 17:11:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1so1Me-0005MI-I3;
-	Tue, 10 Sep 2024 13:57:04 +0000
+	id 1so2WA-0005y4-1s;
+	Tue, 10 Sep 2024 15:10:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jyh429@gmail.com>) id 1so1Md-0005M7-5o
+ (envelope-from <joshi.k@samsung.com>) id 1so2W8-0005xu-5W
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Sep 2024 13:57:03 +0000
+ Tue, 10 Sep 2024 15:10:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UiJ6/NiAxMWwoZLksU92Vs8y9/jjGEjZVsnJDxc3H6g=; b=ee14QKnuSpsA4wAeIZ/TlS741z
- eNRGzcH6+9Ltdu2yMRIOVawCvGem8pTkIxAoRJKrtdgWs9yqkEH/UKvF1sJW2kwHIeVGPiW+LCHgi
- h3ey/HYToZIGrDGZyTReUSorGle79LDEGp2yZfchiyTnBCv9rWr1mbEnIDi9tiLqGg88=;
+ bh=tMfHqVkUXqCWtSwhV1wBahjAVG+ZNtgPS/8uMug7K84=; b=dewl70HdcC3ZLgFitKM09FwBUu
+ /SuOT+PW5ckJDKB9ntHcUJwYf6EFv6E9G38NJn73ue2sZIovjcde4LemYiYx8jSETymmHX3ORg+ya
+ k93IUavVSmNiO08rNs2EL4ZVhQNgBW/EeOQnJ2DT8Sxcu8qTLYKN3rEhwe0VT4HyH7EM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=UiJ6/NiAxMWwoZLksU92Vs8y9/jjGEjZVsnJDxc3H6g=; b=V
- 8qUhUoBacPxyoiuSv/dRQ0UfDpmJAdpxFk8E8N9yB3qx7DQDi9PtakuCxf23aRW6CIxdJGy/h3jGw
- 28yySCJQhSAifdmOcAtKpDECPFKXg0O13URR12+OVrSP8Kgmn9rE0KmqdiB+grd3f28qyseWiCNLd
- 6xPqAD1BzbjQq6e0=;
-Received: from mail-pl1-f178.google.com ([209.85.214.178])
+ h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id
+ :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=tMfHqVkUXqCWtSwhV1wBahjAVG+ZNtgPS/8uMug7K84=; b=S
+ PxKZZWxmNchc4oD5yIDSQmalmhoffwvki61W8SQtiB7L1tDBH1cQnFTdZF6ONmxP5fGeBGwdKMGEn
+ ElOwzIXfaII340zG5Qm83Fmu4WGaN7wHaDeJiLWjRrASLOcmXv0VIDvNv9TgaSTJr7grd6JYwxxk/
+ CK2VGV/d7kpezJPM=;
+Received: from mailout1.samsung.com ([203.254.224.24])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1so1Mc-0001Vs-Iz for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Sep 2024 13:57:03 +0000
-Received: by mail-pl1-f178.google.com with SMTP id
- d9443c01a7336-2068bee21d8so54971755ad.2
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1so2W6-0006IL-Ic for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Sep 2024 15:10:56 +0000
+Received: from epcas5p2.samsung.com (unknown [182.195.41.40])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20240910151042epoutp01f9c8eac4807ac0d19582920fee26ad00~z6p0GNApU0104601046epoutp01g
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 10 Sep 2024 06:57:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725976612; x=1726581412; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UiJ6/NiAxMWwoZLksU92Vs8y9/jjGEjZVsnJDxc3H6g=;
- b=Ig3s2NCyvqeBA+VmFcNP4Q5ClCRtMIhH419+TCKcTqUFHziKM+PHD6hyDUdqRaWzQl
- wV7DdDbARc03ipGNfMppN17fXnP91eA4//oyTs7PMaGucw9pPhVNDdO6Ayp39ikI/zy/
- og82Jdpa3WzpBfkx9ZlSYHt+Iz00SXyemdNAAEba1fcOtWkJGAvTR42q80oGcKLTIs+6
- dXdCaKwIr5jsjagKCyZT1je8gyJDVU0fuPVkzrUrlQldLgomyCKoAaK6TMiL4G5W/QyL
- /zoupNVv6cDgX6UA1jTH0WyLIxjvp3i9CNPZDSSINU/UK9acH13tHgbEXTMeNWbwc6DT
- R/Sw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725976612; x=1726581412;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UiJ6/NiAxMWwoZLksU92Vs8y9/jjGEjZVsnJDxc3H6g=;
- b=wilRtkL2uZgrYLV2WnY+ckrpiBwZEXHoYg1EaxNsFiFITsEt/JV3O/zJ0q39MoyRuW
- obYLq7H5afyFwg18S+QAxUZ2F7nDPcavuBZPAJaws+krtjK6Qel5XcMvTZ4WTHyf13pl
- 9LZzasMxqD04mu2CiS1Fd07McEPjCrVQ0yZeMBI1SN4kmMos0cZK9GFq9TItG4ZNAkR5
- EidFNlHV6wiLB/58sgxpBW9Z+B1nANGe2F56+ZNyxQRp36hb/4/uiQknyvljD8wWsrHN
- e03pjdEMZRZr1ezn7EwVeaWdQNrKCyuRdaDLWFwFC7Qx4/NvyfLMD4vx2rJK/HVSgf7K
- +kQQ==
-X-Gm-Message-State: AOJu0YyXN3w4DODs262Iww9Y4azxePKqeBdUU51Zxf9YxgIuBDQ0N4pI
- BHEpPBKMBfbMzOKFxhjOEqLidtRdMbx3O5+YC4BfcXZYyBXohT6r3aMb6zez
-X-Google-Smtp-Source: AGHT+IEN0rUdBgXg+4In1D5q6hvtsWIDFLUtM/NmJkI5GTwJJ/oyYdIKF49k/6SzKVf0VZ02c1xChg==
-X-Received: by 2002:a17:903:234e:b0:207:18cc:f76 with SMTP id
- d9443c01a7336-2074c5f2152mr11933075ad.23.1725976611523; 
- Tue, 10 Sep 2024 06:56:51 -0700 (PDT)
-Received: from DESKTOP-B5TBVBT.localdomain ([175.117.51.71])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20714b8d48fsm47556035ad.284.2024.09.10.06.56.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 06:56:51 -0700 (PDT)
-From: Yohan Joung <jyh429@gmail.com>
-X-Google-Original-From: Yohan Joung <yohan.joung@sk.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Tue, 10 Sep 2024 22:56:36 +0900
-Message-Id: <20240910135636.471-1-yohan.joung@sk.com>
+ Tue, 10 Sep 2024 15:10:42 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20240910151042epoutp01f9c8eac4807ac0d19582920fee26ad00~z6p0GNApU0104601046epoutp01g
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1725981042;
+ bh=tMfHqVkUXqCWtSwhV1wBahjAVG+ZNtgPS/8uMug7K84=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=pcvIAVn/I1Bf/bXsOgx5w6iBRfwpdFuCQHqjJ4DMhUJK/RR+cse37Wq4k6ZFPCbfR
+ IZauhR8TlenMhNGh9hap4go+nOlEsOaYnFkrbFuiqwDmrcXn/IBIWb4jlLyrvr7/gN
+ xLM/cvd2dM6zhO6MnK7xomfDqpVsQ9lSRBLuFP9g=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas5p2.samsung.com (KnoxPortal) with ESMTP id
+ 20240910151041epcas5p2048e076adae63fd931eff0bf46cfc739~z6pzhpH2J0258802588epcas5p2E;
+ Tue, 10 Sep 2024 15:10:41 +0000 (GMT)
+Received: from epsmgec5p1new.samsung.com (unknown [182.195.38.182]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4X36b43d18z4x9Pv; Tue, 10 Sep
+ 2024 15:10:40 +0000 (GMT)
+Received: from epcas5p4.samsung.com ( [182.195.41.42]) by
+ epsmgec5p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 57.86.08855.07160E66; Wed, 11 Sep 2024 00:10:40 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas5p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20240910151040epcas5p3f47fa7ea37a35f8b44dd9174689e1bb9~z6px9arLJ1076710767epcas5p3j;
+ Tue, 10 Sep 2024 15:10:40 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20240910151040epsmtrp2d8703cd5c3ed857f83a2ea796785047b~z6px8alcl0448904489epsmtrp2v;
+ Tue, 10 Sep 2024 15:10:40 +0000 (GMT)
+X-AuditID: b6c32a44-15fb870000002297-ea-66e061709026
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 87.DC.08964.F6160E66; Wed, 11 Sep 2024 00:10:39 +0900 (KST)
+Received: from localhost.localdomain (unknown [107.99.41.245]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20240910151035epsmtip265e38c1653c6a529f3d6411c350e9604~z6puGi-2A1662516625epsmtip2j;
+ Tue, 10 Sep 2024 15:10:35 +0000 (GMT)
+From: Kanchan Joshi <joshi.k@samsung.com>
+To: axboe@kernel.dk, kbusch@kernel.org, hch@lst.de, sagi@grimberg.me,
+ martin.petersen@oracle.com, James.Bottomley@HansenPartnership.com,
+ brauner@kernel.org, viro@zeniv.linux.org.uk, jack@suse.cz,
+ jaegeuk@kernel.org, jlayton@kernel.org, chuck.lever@oracle.com,
+ bvanassche@acm.org
+Date: Tue, 10 Sep 2024 20:31:55 +0530
+Message-Id: <20240910150200.6589-1-joshi.k@samsung.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+X-Brightmail-Tracker: H4sIAAAAAAAAA02Te0xbVRzHPffe3ha05lIQjrAwrJvLmDCKUE4NDBMZuwuLIVkwmQr1hl4e
+ A9qujzmNZhWETIi85mAwXntkQkEIZZsoYhy1vCdYxoBOSHElJCMbj85NBMGWy3T/fc7398r3
+ d84R4CIH6S/IVOpYjZLJFpOexA3z3uAQNWNPCysY9kXN0yUkWjCvAFSxtIqjzel5DE39/D2G
+ mpotGLpQmYchR1s1jtpLBOje704+Wr1q5CPL5gMSlffcAajbtg9ZLx1CP3YPEKj+6hwfFU10
+ kuibvg0MtS4sEmjknz4eGqmu4b/lS4/dTqBHZtoJuqJ8kKTHbulpk/FLku64cpruanBidNeU
+ gaSX52wEXXzNCOjhhl/4tNMUSJscD7BE4XtZ0Rkso2A1QawyVaXIVKbHiBOOyt+WR0rDJCES
+ GYoSBymZHDZGHHckMSQ+M9vlWRx0ksnWu6RERqsV7z8QrVHpdWxQhkqrixGzakW2OkIdqmVy
+ tHpleqiS1b0pCQsLj3QlfpiVYe/qwdUDAafKBpsxA1j0LgQeAkhFwLOTFqIQeApEVBeATTYT
+ 7g6IqBUAHfl+XOAxgPMtrdjTCsvtXzEu0A2gqaMWcAcngKPWKbIQCAQktReOntW7dR+qDoO9
+ o5atJJwqx+Cy/VvS3crb1arZ4ABuJqjd0Gy0brGQioKWR3cBN24nrLI+4XO6FxyochBuxl16
+ 3vULuLsppJYE8OboXzhXEAeflN7lc+wN7/dd22Z/6HzYTXKcBe1/2AmOP4WdHcU8jmOhYX2S
+ 53aAuxy0/bCfm/Ui/GrNgbllSAnhmQIRl/0KnCmf2670g7Pnr2wzDT+vGALcGpPh5mUjWQoC
+ q59xUP2Mg+r/hzUA3AheZtXanHQ2NVItUbIf/XeZqaocE9h67sFxnWCyfiO0B2AC0AOgABf7
+ CEsOzKSJhArm409YjUqu0Wez2h4Q6VprGe7/UqrK9V+UOrkkQhYWIZVKI2RvSCViP+FCfq1C
+ RKUzOjaLZdWs5mkdJvDwN2DyY51xsqO95ncla2W5XzwMTSvcN6b0uhd+mFAUjMjrTvYtHEua
+ vlj6Qd4gMAZtzK+U7krYE2u9/856sH6hiP3NmThUJj5ddN5n3D7Fm/1sObkxYeb4a3lR0c95
+ XYpN8x1WJRWEJxE7nD4/GauG1wZMf/Ia/QNaVClmlFJrT27LPdG0aPC0zTQUV/Bq+2v6R40y
+ Y3281lpjtAXUSXfgx2WvzjK+Zkv54cmvycaJ928EtntPXB9YzB8fyqisrBt8BHPvxEdf/K5y
+ NiTz77miMwlQvweIvAc7x0+97kFl9qoOvSCkbwX3t5pSb544t95e9/zmcnJKy84lm2o1+si5
+ x7sPigltBiMJxjVa5l8Au/SqdwQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprNIsWRmVeSWpSXmKPExsWy7bCSvG5+4oM0g/vHTS1W3+1ns3h9+BOj
+ xbQPP5kt/t99zmRx88BOJouVq48yWcye3sxk8WT9LGaLjf0cFo/vfGa3+LlsFbvF0f9v2Swm
+ HbrGaLH3lrbFpUXuFnv2nmSxmL/sKbtF9/UdbBbLj/9jslj3+j2Lxfm/x1ktzs+aw+4g5nH5
+ irfH+XsbWTymTTrF5nH5bKnHplWdbB6bl9R77F7wmclj980GNo+PT2+xePRtWcXocWbBEXaP
+ z5vkPDY9ecsUwBvFZZOSmpNZllqkb5fAlfFg9yHmgpPSFRNPrWZqYHwv3MXIySEhYCJx9Mo5
+ JhBbSGA3o8SlDUYQcXGJ5ms/2CFsYYmV/54D2VxANR8ZJTp2bAdq4OBgE9CUuDC5FKRGRGAd
+ k8SKaT4gNcwCc5gklnduZwZJCAMtWN3whBHEZhFQlTi86hKYzStgLnH0y21GiAXyEjMvfWeH
+ iAtKnJz5hAXEZgaKN2+dzTyBkW8WktQsJKkFjEyrGCVTC4pz03OLDQsM81LL9YoTc4tL89L1
+ kvNzNzGC409Lcwfj9lUf9A4xMnEwHmKU4GBWEuHtt7uXJsSbklhZlVqUH19UmpNafIhRmoNF
+ SZxX/EVvipBAemJJanZqakFqEUyWiYNTqoHJ6gffEdYCi0epl/5uf3BZ6KJJdbhnS6lDXHzC
+ 9flRAc6ZZrkGKc/cJ/BIM/Qu2KN11a5oadWu0MBS470l7gXTDr+o1Jt00mALr8yOjxuEUxNW
+ nGiZO6m029tSkb345wNdznlMUV8DRYtNznl+uzl/QavMk7h5n/eLd2xbeMJY6cesJRd80xpv
+ qwhvt5mnPNOW/7P6bu78hiLvxSVhbxS8jQLm/zBgu3ZO2WfbOaXcc/WLFfv2sV0/waeyc7FC
+ Jbf8us6/4Yenut9q/7FY97T+LFteU1vvrSeSK1OS8vN2cu08Mp15R9zZ9UYCFb6zVyxL+ilQ
+ deib3Mc1gQdn9XC8Mn3aMt3d5kvC/ykbuJWVWIozEg21mIuKEwHCFYnNLgMAAA==
+X-CMS-MailID: 20240910151040epcas5p3f47fa7ea37a35f8b44dd9174689e1bb9
+X-Msg-Generator: CA
+CMS-TYPE: 105P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20240910151040epcas5p3f47fa7ea37a35f8b44dd9174689e1bb9
+References: <CGME20240910151040epcas5p3f47fa7ea37a35f8b44dd9174689e1bb9@epcas5p3.samsung.com>
+X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  When formatting conventional partition with zoned one, we
- are already aligning the starting block address of the next device to the
- zone size. Therefore, we do not align the segment0 address to the zo [...]
- Content analysis details:   (0.1 points, 6.0 required)
+ Content preview: Current write-hint infrastructure supports 6
+ temperature-based
+ data lifetime hints. The series extends the infrastructure with a new
+ temperature-agnostic
+ placement-type hint. New fcntl codes F_{SET/GE [...] 
+ Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [jyh429[at]gmail.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [jyh429[at]gmail.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.178 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [203.254.224.24 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.24 listed in wl.mailspike.net]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -113,12 +159,10 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.178 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1so1Mc-0001Vs-Iz
-Subject: [f2fs-dev] [PATCH] mkfs.f2fs: adjust zone alignment when using
- convention partition with zoned one
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1so2W6-0006IL-Ic
+Subject: [f2fs-dev] [PATCH v5 0/5] data placement hints and FDP
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -130,50 +174,127 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: vishak.g@samsung.com, linux-scsi@vger.kernel.org, gost.dev@samsung.com,
+ linux-nvme@lists.infradead.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ javier.gonz@samsung.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When formatting conventional partition with zoned one, we are already
-aligning the starting block address of the next device to the zone size.
-Therefore, we do not align the segment0 address to the zone alignment.
-This reduces the wasted zone_align_start_offset.
+Current write-hint infrastructure supports 6 temperature-based data
+lifetime hints.
+The series extends the infrastructure with a new temperature-agnostic
+placement-type hint. New fcntl codes F_{SET/GET}_RW_HINT_EX allow to
+send the hint type/value on file. See patch #3 commit description and
+interface example below [*].
 
-Signed-off-by: Yohan Joung <yohan.joung@sk.com>
----
- mkfs/f2fs_format.c | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
+Overall this creates 127 placement hint values that users can pass.
 
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index 37d23f3..71f5ec8 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -252,11 +252,19 @@ static int f2fs_prepare_super_block(void)
- 
- 	set_sb(block_count, c.total_sectors >> log_sectors_per_block);
- 
--	zone_align_start_offset =
--		((uint64_t) c.start_sector * DEFAULT_SECTOR_SIZE +
--		2 * F2FS_BLKSIZE + zone_size_bytes - 1) /
--		zone_size_bytes * zone_size_bytes -
--		(uint64_t) c.start_sector * DEFAULT_SECTOR_SIZE;
-+	if (c.zoned_mode && c.ndevs > 1) {
-+		zone_align_start_offset =
-+			((uint64_t) c.start_sector * DEFAULT_SECTOR_SIZE +
-+			2 * F2FS_BLKSIZE + segment_size_bytes - 1) /
-+			segment_size_bytes * segment_size_bytes -
-+			(uint64_t) c.start_sector * DEFAULT_SECTOR_SIZE;
-+	} else {
-+		zone_align_start_offset =
-+			((uint64_t) c.start_sector * DEFAULT_SECTOR_SIZE +
-+			2 * F2FS_BLKSIZE + zone_size_bytes - 1) /
-+			zone_size_bytes * zone_size_bytes -
-+			(uint64_t) c.start_sector * DEFAULT_SECTOR_SIZE;
-+	}
- 
- 	if (c.feature & F2FS_FEATURE_RO)
- 		zone_align_start_offset = 8192;
+Patch #5 adds the ability to map these new hint values to nvme-specific
+placement-identifiers.
+Patch #4 restricts SCSI to use only lifetime hint values.
+Patch #1 and #2 are simple prep patches.
+
+[*]
+#define _GNU_SOURCE
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <inttypes.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <linux/fcntl.h>
+
+int main(int argc, char *argv[])
+{
+        struct rw_hint_ex set_hint_ex={}, get_hint_ex={};
+        int fd, ret;
+
+        if (argc < 4) {
+                fprintf(stderr, "Usage: %s file <hint type> <hint value>\n",
+                        argv[0]);
+                return 1;
+        }
+
+        fd = open(argv[1], O_CREAT|O_RDWR|O_DIRECT, 0644);
+        if (fd < 0) {
+                perror("open");
+                return 1;
+        }
+
+        set_hint_ex.type = atoi(argv[2]);
+        set_hint_ex.val = atol(argv[3]);
+
+        ret = fcntl(fd, F_SET_RW_HINT_EX, &set_hint_ex);
+        if (ret < 0) {
+                perror("fcntl: Error, F_SET_RW_HINT_EX");
+                goto close_fd;
+        }
+        ret = fcntl(fd, F_GET_RW_HINT_EX, &get_hint_ex);
+        if (ret < 0) {
+                perror("fcntl: Error, F_GET_RW_HINT_EX");
+                goto close_fd;
+        }
+        printf("set_hint (%d,%llu)\nget_hint (%d,%llu)\n",
+               set_hint_ex.type, set_hint_ex.val,
+               get_hint_ex.type, get_hint_ex.val);
+
+close_fd:
+        close(fd);
+        return 0;
+}
+
+/* set placement hint (type 2) with value 126 */
+# ./a.out /dev/nvme0n1 2 126
+set_hint (2,126)
+get_hint (2,126)
+
+/* invalid placement hint value */
+# ./a.out /dev/nvme0n1 2 128
+fcntl: Error, F_SET_RW_HINT_EX: Invalid argument
+
+Changes since v4:
+- Retain the size/type checking on the enum (Bart)
+- Use the name "*_lifetime_hint" rather than "*_life_hint" (Bart)
+
+Changes since v3:
+- 4 new patches to introduce placement hints
+- Make nvme patch use the placement hints rather than lifetime hints
+
+Changes since v2:
+- Base it on nvme-6.11 and resolve a merge conflict
+
+Changes since v1:
+- Reduce the fetched plids from 128 to 6 (Keith)
+- Use struct_size for a calculation (Keith)
+- Handle robot/sparse warning
+
+Kanchan Joshi (4):
+  fs, block: refactor enum rw_hint
+  fcntl: rename rw_hint_* to rw_lifetime_hint_*
+  fcntl: add F_{SET/GET}_RW_HINT_EX
+  nvme: enable FDP support
+
+Nitesh Shetty (1):
+  sd: limit to use write life hints
+
+ drivers/nvme/host/core.c   | 81 ++++++++++++++++++++++++++++++++++++++
+ drivers/nvme/host/nvme.h   |  4 ++
+ drivers/scsi/sd.c          |  7 ++--
+ fs/buffer.c                |  4 +-
+ fs/f2fs/f2fs.h             |  5 ++-
+ fs/f2fs/segment.c          |  5 ++-
+ fs/fcntl.c                 | 79 ++++++++++++++++++++++++++++++++++---
+ include/linux/blk-mq.h     |  2 +-
+ include/linux/blk_types.h  |  2 +-
+ include/linux/fs.h         |  2 +-
+ include/linux/nvme.h       | 19 +++++++++
+ include/linux/rw_hint.h    | 17 +++++++-
+ include/uapi/linux/fcntl.h | 14 +++++++
+ 13 files changed, 221 insertions(+), 20 deletions(-)
+
 -- 
 2.25.1
 
