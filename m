@@ -2,68 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6F2597486F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Sep 2024 05:06:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C3EAC97487E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Sep 2024 05:13:16 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1soDgn-00010f-33;
-	Wed, 11 Sep 2024 03:06:40 +0000
+	id 1soDn7-00019D-T0;
+	Wed, 11 Sep 2024 03:13:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1soDgl-00010Y-1o
+ (envelope-from <ebiggers@kernel.org>) id 1soDn7-000197-7H
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Sep 2024 03:06:38 +0000
+ Wed, 11 Sep 2024 03:13:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=guhPo1XXOSgiXF7DZhenTVkF1p6gDepr5ov0CHEtAc8=; b=ccMLuzxBzqXz3v63SpKqVlUjUM
- d1dE9Kh9NfRgrsBWy7itGVl7eiuAw5xd3EJiTf2ulHc/UhodYmGULaa/KpO+QYcsrgfPSwYV/oBvH
- 1m7O7NY25i3lrkwj/+S8qlvvRAfLlU3Dp6/vVGxpDKlWXs5hvRfQ8+G4gd1jbI0j+USA=;
+ bh=VWAqhzZMTqDKY56n9tvyt9q9Yw6aK39qh3PgztT4pnU=; b=MebB3kNVguNiH3IA/liMHl5juZ
+ q0CoOntq1o9uKVrGmhgrnuv0BYI8csRyL8IEFluIPjoQC9yooi/C0+MZU6A6DsMPT50injRtLjQWm
+ eSmlCQmResXmgWJt2Nj2T4dl7HW3GOnauc/Wp2v7jHQOkw2TClPhK0CU8emLXiJ4Zpws=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=guhPo1XXOSgiXF7DZhenTVkF1p6gDepr5ov0CHEtAc8=; b=Kh0G6m0WzpAe/geNY2czrvGG+k
- AbcCejNiCFog0WKnc1qO8WLwm2tkycawJuYzz5PffH+fY49De8Xxv0ibpE1MB0Ku/CCGHRRiv0d7P
- KmlBsuxPj612JqARYf1toKPi5P+Y4nLRMAXJ3EVZntz21O94T2yv42MLNacB4cJXOxXk=;
+ bh=VWAqhzZMTqDKY56n9tvyt9q9Yw6aK39qh3PgztT4pnU=; b=Qtxp6LBFNils32rFosh6GDXiZK
+ 4LTI+u0/Q+cfsILo5jx2cWGIEQ7Cl8/p8ldzS6lmBk9MgCxeNP9hmda9Iug+ctDzGeep18Ygv3giV
+ XKJlTDA1yRTbHUoeBcF+Use4Z8cH7F7m/HafCeHzVgsNF6wI25v81YgosAW82k0lCYVk=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1soDgj-00077U-N7 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Sep 2024 03:06:38 +0000
+ id 1soDn4-0007OZ-OO for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 11 Sep 2024 03:13:12 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id BB7865C02F1
+ by dfw.source.kernel.org (Postfix) with ESMTP id C1D145C0655
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 11 Sep 2024 03:06:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ABE57C4CEC3;
- Wed, 11 Sep 2024 03:06:25 +0000 (UTC)
+ Wed, 11 Sep 2024 03:13:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07C87C4CECD;
+ Wed, 11 Sep 2024 03:13:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1726023987;
- bh=ta0cFIxUrVPGw1Tmjosf+SAT1/5RHdhMnYyT7R228b4=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=r8bR7mv7IBeFSZZw43d/cTlxDeOIVvFOqHu8zm9TvTUtzJRdjSTcLWNRkgKefYMKm
- DO8GVMgRK1No87sOciBl+/gdgtE8lktLNfyEgIev4xJA41DQ3k2Kfts0Nfb5ZIA7ER
- 7KbowNJ9wmWjrKg6q+Oo4LcsgFuNdP5rmjAHpycEFvbpWZ1hNSuJdB1mFi8cSpnlhH
- CJS5Oj49VQHEoITQFokdmDjedUWI80GQDMHCt2sdNucrgKbBvgzfB+Zcnmlj8Uk+O9
- DEAIrXwJC4TBjIRVjIAKEa4GYdzmzpwWTGq+pBWCHJionkvLkEe5uqgQH/IpcGkILR
- aGKxi2YE37g6w==
-Message-ID: <44f5168e-3931-438e-8a85-3866f797f9b6@kernel.org>
-Date: Wed, 11 Sep 2024 11:06:22 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Eric Biggers <ebiggers@kernel.org>
+ s=k20201202; t=1726024385;
+ bh=r/VWMEcY649DSLSlsVg09/ckGhtXpJQl4tLw6/IicS4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=BClD5guezY3ZzSEZGN/fqRQZCXm/azwSJV60BYnhoyWy7ouXyaFIM2qrnLIGINXNc
+ d2SQ6lCoT6SkEMrJAxHFNol6cqAVw1IYHOmTsKPiZBn2zWlmVjqiNE/RRsakCnBIYx
+ 6XGtlObO4iTucHtnsrpCy69/6jL4pWPsiBuri5x4Vm/4DK7F5gv0Rlz7pIPr7r/qUb
+ 2vNqdhVcvnrdkvlpIFmcr815gt+aFrNLnxiSstVN7o/UXhnxcVNKmDUXoyROjUJFpg
+ 6104nKvoslXoEw8YQdEGU6NXvbJ3q426JqlCcqGNrCyAMtP+HI/gIfGj+idSADlzAi
+ eB1eBXV4OCR2g==
+Date: Tue, 10 Sep 2024 20:13:03 -0700
+To: Chao Yu <chao@kernel.org>
+Message-ID: <20240911031303.GA50432@sol.localdomain>
 References: <20240910125753.80502-1-chao@kernel.org>
  <20240910170600.GB2642@sol.localdomain>
-Content-Language: en-US
-In-Reply-To: <20240910170600.GB2642@sol.localdomain>
+ <44f5168e-3931-438e-8a85-3866f797f9b6@kernel.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <44f5168e-3931-438e-8a85-3866f797f9b6@kernel.org>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -71,9 +71,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/9/11 1:06, Eric Biggers wrote: > On Tue, Sep 10, 2024
- at 08:57:53PM +0800, Chao Yu via Linux-f2fs-devel wrote: >> After commit
- 5c8764f8679e ("f2fs: fix to force buffered IO on inline_data >> i [...] 
+ Content preview:  On Wed, Sep 11, 2024 at 11:06:22AM +0800, Chao Yu wrote: >
+ On 2024/9/11 1:06, Eric Biggers wrote: > > On Tue, Sep 10, 2024 at 08:57:53PM
+ +0800, Chao Yu via Linux-f2fs-devel wrote: > > > After commit 5 [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,7 +88,7 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1soDgj-00077U-N7
+X-Headers-End: 1soDn4-0007OZ-OO
 Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to tag STATX_DIOALIGN only if
  inode support dio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -102,123 +102,124 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
+From: Eric Biggers via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Eric Biggers <ebiggers@kernel.org>
 Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/9/11 1:06, Eric Biggers wrote:
-> On Tue, Sep 10, 2024 at 08:57:53PM +0800, Chao Yu via Linux-f2fs-devel wrote:
->> After commit 5c8764f8679e ("f2fs: fix to force buffered IO on inline_data
->> inode"), f2fs starts to force using buffered IO on inline_data inode.
->>
->> And also, it will cause f2fs_getattr() returning invalid zeroed value on
->> .dio_mem_align and .dio_offset_align fields, however, STATX_DIOALIGN flag
->> was been tagged. User may use zeroed .stx_dio_offset_align value
->> since STATX_DIOALIGN was been tagged, then it causes a deadloop during
->> generic/465 test due to below logic:
->>
->> align=stx_dio_offset_align(it equals to zero)
->> page_size=4096
->> while [ $align -le $page_size ]; do
->> 	echo "$AIO_TEST -a $align -d $testfile.$align" >> $seqres.full
->> 	$AIO_TEST -a $align -d $testfile.$align 2>&1 | tee -a $seqres.full
->> 	align=$((align * 2))
->> done
->>
->> Quoted from description of statx manual:
->>
->> " If  a  filesystem  does  not support a field or if it has an
->>    unrepresentable value (for instance, a file with an exotic type),
->>    then the mask bit corresponding to that field will be cleared in
->>    stx_mask even if the user asked for it and a dummy value will be
->>    filled in for compatibility purposes if one is available (e.g.,
->>    a dummy UID and GID may be specified to mount under some
->>    circumstances)."
->>
->> We should not set STATX_DIOALIGN flag in kstat.stx_mask if inode
->> does not support DIO, so that it can indicate related fields contain
->> dummy value, and avoid following incorrect use of them.
->>
->> Fixes: c8c02272a9f7 ("f2fs: support STATX_DIOALIGN")
+On Wed, Sep 11, 2024 at 11:06:22AM +0800, Chao Yu wrote:
+> On 2024/9/11 1:06, Eric Biggers wrote:
+> > On Tue, Sep 10, 2024 at 08:57:53PM +0800, Chao Yu via Linux-f2fs-devel wrote:
+> > > After commit 5c8764f8679e ("f2fs: fix to force buffered IO on inline_data
+> > > inode"), f2fs starts to force using buffered IO on inline_data inode.
+> > > 
+> > > And also, it will cause f2fs_getattr() returning invalid zeroed value on
+> > > .dio_mem_align and .dio_offset_align fields, however, STATX_DIOALIGN flag
+> > > was been tagged. User may use zeroed .stx_dio_offset_align value
+> > > since STATX_DIOALIGN was been tagged, then it causes a deadloop during
+> > > generic/465 test due to below logic:
+> > > 
+> > > align=stx_dio_offset_align(it equals to zero)
+> > > page_size=4096
+> > > while [ $align -le $page_size ]; do
+> > > 	echo "$AIO_TEST -a $align -d $testfile.$align" >> $seqres.full
+> > > 	$AIO_TEST -a $align -d $testfile.$align 2>&1 | tee -a $seqres.full
+> > > 	align=$((align * 2))
+> > > done
+> > > 
+> > > Quoted from description of statx manual:
+> > > 
+> > > " If  a  filesystem  does  not support a field or if it has an
+> > >    unrepresentable value (for instance, a file with an exotic type),
+> > >    then the mask bit corresponding to that field will be cleared in
+> > >    stx_mask even if the user asked for it and a dummy value will be
+> > >    filled in for compatibility purposes if one is available (e.g.,
+> > >    a dummy UID and GID may be specified to mount under some
+> > >    circumstances)."
+> > > 
+> > > We should not set STATX_DIOALIGN flag in kstat.stx_mask if inode
+> > > does not support DIO, so that it can indicate related fields contain
+> > > dummy value, and avoid following incorrect use of them.
+> > > 
+> > > Fixes: c8c02272a9f7 ("f2fs: support STATX_DIOALIGN")
+> > 
+> > When claiming to be Fixing a commit, please make sure to Cc the author of that
+> > commit.
 > 
-> When claiming to be Fixing a commit, please make sure to Cc the author of that
-> commit.
-
-No problem, will make sure they were Cced.
-
+> No problem, will make sure they were Cced.
 > 
->> Signed-off-by: Chao Yu <chao@kernel.org>
->> ---
->>   fs/f2fs/file.c | 11 ++++-------
->>   1 file changed, 4 insertions(+), 7 deletions(-)
->>
->> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->> index 99903eafa7fe..f0b8b77e93ba 100644
->> --- a/fs/f2fs/file.c
->> +++ b/fs/f2fs/file.c
->> @@ -906,14 +906,11 @@ int f2fs_getattr(struct mnt_idmap *idmap, const struct path *path,
->>   	 * f2fs sometimes supports DIO reads but not DIO writes.  STATX_DIOALIGN
->>   	 * cannot represent that, so in that case we report no DIO support.
->>   	 */
->> -	if ((request_mask & STATX_DIOALIGN) && S_ISREG(inode->i_mode)) {
->> -		unsigned int bsize = i_blocksize(inode);
->> -
->> +	if ((request_mask & STATX_DIOALIGN) && S_ISREG(inode->i_mode) &&
->> +				!f2fs_force_buffered_io(inode, WRITE)) {
->> +		stat->dio_mem_align = F2FS_BLKSIZE;
->> +		stat->dio_offset_align = F2FS_BLKSIZE;
->>   		stat->result_mask |= STATX_DIOALIGN;
->> -		if (!f2fs_force_buffered_io(inode, WRITE)) {
->> -			stat->dio_mem_align = bsize;
->> -			stat->dio_offset_align = bsize;
->> -		}
->>   	}
->>   
->>   	flags = fi->i_flags;
+> > 
+> > > Signed-off-by: Chao Yu <chao@kernel.org>
+> > > ---
+> > >   fs/f2fs/file.c | 11 ++++-------
+> > >   1 file changed, 4 insertions(+), 7 deletions(-)
+> > > 
+> > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > > index 99903eafa7fe..f0b8b77e93ba 100644
+> > > --- a/fs/f2fs/file.c
+> > > +++ b/fs/f2fs/file.c
+> > > @@ -906,14 +906,11 @@ int f2fs_getattr(struct mnt_idmap *idmap, const struct path *path,
+> > >   	 * f2fs sometimes supports DIO reads but not DIO writes.  STATX_DIOALIGN
+> > >   	 * cannot represent that, so in that case we report no DIO support.
+> > >   	 */
+> > > -	if ((request_mask & STATX_DIOALIGN) && S_ISREG(inode->i_mode)) {
+> > > -		unsigned int bsize = i_blocksize(inode);
+> > > -
+> > > +	if ((request_mask & STATX_DIOALIGN) && S_ISREG(inode->i_mode) &&
+> > > +				!f2fs_force_buffered_io(inode, WRITE)) {
+> > > +		stat->dio_mem_align = F2FS_BLKSIZE;
+> > > +		stat->dio_offset_align = F2FS_BLKSIZE;
+> > >   		stat->result_mask |= STATX_DIOALIGN;
+> > > -		if (!f2fs_force_buffered_io(inode, WRITE)) {
+> > > -			stat->dio_mem_align = bsize;
+> > > -			stat->dio_offset_align = bsize;
+> > > -		}
+> > >   	}
+> > >   	flags = fi->i_flags;
+> > 
+> > No, this patch is wrong and the existing code is correct.  The cases are:
 > 
-> No, this patch is wrong and the existing code is correct.  The cases are:
-
-Yes, you're right, thanks for pointing out this!
-
+> Yes, you're right, thanks for pointing out this!
 > 
->      STATX_DIOALIGN set and stx_dio_*_align nonzero:
->          File supports DIO.
+> > 
+> >      STATX_DIOALIGN set and stx_dio_*_align nonzero:
+> >          File supports DIO.
+> > 
+> >      STATX_DIOALIGN set and stx_dio_*_align zero:
+> >          File doesn't support DIO.
+> > 
+> >      STATX_DIOALIGN unset:
+> >          Filesystem doesn't support STATX_DIOALIGN, so it's unknown whether the
+> >          file supports DIO or not.
 > 
->      STATX_DIOALIGN set and stx_dio_*_align zero:
->          File doesn't support DIO.
+> Above description is clear to me.
 > 
->      STATX_DIOALIGN unset:
->          Filesystem doesn't support STATX_DIOALIGN, so it's unknown whether the
->          file supports DIO or not.
-
-Above description is clear to me.
-
+> > 
+> > Please see the statx(2) manual page which explains this too.
 > 
-> Please see the statx(2) manual page which explains this too.
-
-However, below manual seems not very clear about explaining what does it
-mean about STATX_DIOALIGN is set or not? At least not so clear like above
-description.
-
-        stx_dio_mem_align
-               The alignment (in bytes) required for user memory buffers for direct I/O (O_DIRECT) on this file, or 0 if direct I/O is not supported on this file.
-
-               STATX_DIOALIGN (stx_dio_mem_align and stx_dio_offset_align) is supported on block devices since Linux 6.1.  The support on regular files varies by filesystem; it is supported by ext4, f2fs, and xfs since  Linux
-               6.1.
-
-        stx_dio_offset_align
-               The  alignment  (in  bytes)  required  for  file  offsets  and  I/O  segment  lengths  for  direct  I/O  (O_DIRECT)  on this file, or 0 if direct I/O is not supported on this file.  This will only be nonzero if
-               stx_dio_mem_align is nonzero, and vice versa.
-
-Thanks,
-
+> However, below manual seems not very clear about explaining what does it
+> mean about STATX_DIOALIGN is set or not? At least not so clear like above
+> description.
 > 
-> - Eric
 
+It just works the same way that the other statx mask bits work.  See the
+following paragraph:
+
+    If a filesystem does not support a field or if it has an unrepresentable
+    value (for instance, a file with an exotic type), then the mask bit
+    corresponding to that field will be cleared in stx_mask even if the user
+    asked for it and a dummy value will be filled in for compatibility purposes
+    if one is available (e.g., a dummy UID and GID may be specified to mount
+    under some circumstances).
+
+It might be worth an explicit note in the documentation for stx_dio_mem_align,
+but I considered it to be covered by the above.
+
+- Eric
 
 
 _______________________________________________
