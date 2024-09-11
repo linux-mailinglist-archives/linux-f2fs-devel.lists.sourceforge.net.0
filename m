@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D5D797481E
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Sep 2024 04:13:12 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4E64974821
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Sep 2024 04:13:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1soCr0-0000so-IU;
-	Wed, 11 Sep 2024 02:13:10 +0000
+	id 1soCrO-0003fr-0l;
+	Wed, 11 Sep 2024 02:13:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1soCqy-0000sO-RR
+ (envelope-from <chao@kernel.org>) id 1soCrM-0003fk-Kr
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Sep 2024 02:13:08 +0000
+ Wed, 11 Sep 2024 02:13:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=AnY/XhBINgRNtOekTP5692lmvSKmPHGlNItwe9bYhTg=; b=gFXAzuAHdKES1scnQPhLA/1GZc
- E3/8v9ZfPmxxwpztyTr5xKEGV2YmLqv9H3tv0mWEJGCNuXcfXMYE+4v8l7bHVAtuH8/YX5ZkDQO0J
- +TBYQlAcFnh+5mV5NYvSDQyokSWWtvv2YFKRBOZCAomgOdZzFN0s6ICoNAupja0s0d0E=;
+ bh=EYa2Dzk/rSA6fuQHG/TKU8BNouAFf7bGHmEiXnz0OzM=; b=Qep/BcsqE57j7s9l9hKVVSFe7s
+ Nhw8YNMfYu5fh4svGWEKCChQYfozlncmJAFURhIjwWTHY8pAid9dPeoia3MBrbcHMixU9wdHGqN9C
+ 3nGIYIxJyaKCwg6fBks1PAi2Ug0c4jyL7bDWKzBPmaycOyrqzK6vN4+9Q8r8kLuuwIEY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,40 +31,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=AnY/XhBINgRNtOekTP5692lmvSKmPHGlNItwe9bYhTg=; b=keA+AIcT6x8a0pUOSNUnpsovTG
- 57W2Uwe1qR5u+ug8BcAbxOA8K67tj5U0QPfKIP4Tl/2z0ep3l4xt55sFyNfXtqmh9AIrlYZ1uuwhU
- EDI1dx/PD/Pba7SOLDTOfLYpZ+VBh8RuZUpAOdPnV4vPRmtr74zdcgU5iZKRAgdC/yR0=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=EYa2Dzk/rSA6fuQHG/TKU8BNouAFf7bGHmEiXnz0OzM=; b=Oqtw60Gs1f3Qfqs/YxcrMRCW9/
+ M6AxnkoDhiS5VyPdp/MlztbR0L9OxLe8KPRFgVIZXAIe4eTtFWTWDF59Xlu7U/M/OXx1NO46CjIS1
+ MY9dBYRjUM9uA+4Ewoab6vDXGkpIiMYxFPvirxzXmhUBB8CuntWymn+9kX7LPQqP2lYo=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1soCqy-0004vn-6B for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Sep 2024 02:13:08 +0000
+ id 1soCrM-00050E-20 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 11 Sep 2024 02:13:32 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id BBCFBA4086E;
- Wed, 11 Sep 2024 02:12:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4B7DC4CEC3;
- Wed, 11 Sep 2024 02:12:54 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 2F7AF5C063C;
+ Wed, 11 Sep 2024 02:13:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D355BC4CEC3;
+ Wed, 11 Sep 2024 02:13:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1726020776;
- bh=KGBFpE2v0O25fTbjwWCmCkxo26mXNN2U619DgMaGE8k=;
+ s=k20201202; t=1726020801;
+ bh=7C330WHM1h3otPTiJzP6prlQsfXkoroqppbhylWrFKQ=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=eIWKHLZFbEjyYWJeBcGx1dtSf4mi3v/HAr+dJxW6cKg6U5GlkfXTtnaO9aiMZGPAq
- fdJU4t92nMOAjhTyY76uoTZLzqpP88aKxmorD8SJB3sqnJGYx2+vXSYEo4Sm4IAkak
- Fq2f0JaZsv3+jkbQ3tu83JQIcOzp+zzzCYH2RwXJX87YM0gogL6YcvKc+5FiqHRv/F
- sdxwILEclQr7HCEuv1NL0BdVf/EkHQqbboAi4IXuUck7k3km7EzIK7EdvRxei0uIe9
- LoYDVTdxxiCpaxlrxeQXhSx3E1ALqh3LpfekIVU77j29ieN/lWq6+bnFYjNi46qnM2
- dq6hYixoASLJw==
-Message-ID: <4fa5e9e5-172c-4d2d-8954-9ec653b04a3a@kernel.org>
-Date: Wed, 11 Sep 2024 10:12:52 +0800
+ b=drH/MAEeUkyvj67TxLA0XKDvm3rj/9gLNAfOHw2fhY3l1gBmnIFh5mufh3QWqXz9W
+ AXivJMfvGheKuS3fn+yEWsUdwr5sDwrohm55nJy7h0SrR5j9+FrcrZ4YRnU57s5Uhq
+ Qed+nxSxEb1JFeZcSuon/nq3tDCpl24zhZ1OEDjc+1UbwEg33PuX3CDSeq1gP4zCRo
+ RTnBncXxz81H+K91qL4cTEj2R0uIzTyP4jD8tLjaAKI5jmm1kr1wK54I28CVA8gXhy
+ 67WNXYIcSiPAgAgZTlf9lXkQZY+4IUChSGGH3tpW7Hn/BmgXbKBeUrm4gihvaNx9QM
+ 4tv2VJbMsqvvQ==
+Message-ID: <981bde27-ffa8-4021-9766-e4db877aae38@kernel.org>
+Date: Wed, 11 Sep 2024 10:13:16 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
 References: <20240909221946.2004046-1-daeho43@gmail.com>
- <20240909221946.2004046-6-daeho43@gmail.com>
+ <20240909221946.2004046-7-daeho43@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20240909221946.2004046-6-daeho43@gmail.com>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20240909221946.2004046-7-daeho43@gmail.com>
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
@@ -72,11 +72,13 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On 2024/9/10 6:19, Daeho Jeong wrote: > From: Daeho Jeong
- <daehojeong@google.com> > > Added control knobs for gc_no_zoned_gc_percent
- and > gc_boost_zoned_gc_percent. > > Signed-off-by: Daeho Jeong <da [...]
- Content analysis details:   (-0.3 points, 6.0 required)
+ <daehojeong@google.com> > > We need to introduce a valid block ratio threshold
+ not to trigger > excessive GC for zoned deivces. The initial va [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -86,9 +88,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1soCqy-0004vn-6B
-Subject: Re: [f2fs-dev] [PATCH v2 6/7] f2fs: create gc_no_zoned_gc_percent
- and gc_boost_zoned_gc_percent
+X-Headers-End: 1soCrM-00050E-20
+Subject: Re: [f2fs-dev] [PATCH v2 7/7] f2fs: add valid block ratio not to do
+ excessive GC for one time GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,8 +112,10 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 On 2024/9/10 6:19, Daeho Jeong wrote:
 > From: Daeho Jeong <daehojeong@google.com>
 > 
-> Added control knobs for gc_no_zoned_gc_percent and
-> gc_boost_zoned_gc_percent.
+> We need to introduce a valid block ratio threshold not to trigger
+> excessive GC for zoned deivces. The initial value of it is 95%. So, F2FS
+> will stop the thread from intiating GC for sections having valid blocks
+> exceeding the ratio.
 > 
 > Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
