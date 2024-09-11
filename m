@@ -2,181 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56FDA9748D8
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Sep 2024 05:43:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 817DB974909
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Sep 2024 06:06:19 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1soEGq-0003wg-Du;
-	Wed, 11 Sep 2024 03:43:57 +0000
+	id 1soEcN-0004Wd-53;
+	Wed, 11 Sep 2024 04:06:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bo.wu@vivo.com>) id 1soEGn-0003wS-QF
+ (envelope-from <jaegeuk@kernel.org>) id 1soEcL-0004WU-6S
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Sep 2024 03:43:54 +0000
+ Wed, 11 Sep 2024 04:06:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/598dfLJPy+7sPDqd8Q4BZGjCDpXKKLbaoHLDkGjkWk=; b=LEH01waV+btDryKBVgJ8Cg1Nyu
- G8CGUsQ+SWru87zMtuFqB0bpLOz504Jow8JHyy2IGBVXWMIXJ+WjYWuB3RFAMpR3dHjY605BWftDu
- Dp41skQtkxKCiIrZkA8if5eF64AbpPW3UoHf+e0La5sX8gfefeSq7elq6pgj0sf0ZB4c=;
+ bh=dIoKGYTlwPu4sd6T3SZde18Zzrr+tZDI0UDt81IM/MA=; b=m/aK1IugSw3Vzsjvj39P+MBEl+
+ n+lH/YjR6QPnAJrCZ5wTFaGHH7UXhBLqiHxyRsq2l9r9MfcXAqYA/0GATSYnsyrMdEBgIvZjbCuEf
+ U3wubpHdcPNHUiNR4MsSBr5yD62f7v0JB7VErGAX9+DF2Cu/tY+ocl/Nyl109K37Qj9E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/598dfLJPy+7sPDqd8Q4BZGjCDpXKKLbaoHLDkGjkWk=; b=L2DtgTydA+OiKjXTvRCcVugsow
- 7xXfi2Iv/d7bReS1thE7X3aj8roXIn03G7/CR68oHL5LVkDPmy6GuqkZnq2OiHCADiiYVhtwesFjn
- RrUlLOngeKKQI+emp1lzvOi6eLKU8LeOWDY1mKONkudiYXMSNUxSkJuueXLuGf8gCTrI=;
-Received: from mail-psaapc01on2082.outbound.protection.outlook.com
- ([40.107.255.82] helo=APC01-PSA-obe.outbound.protection.outlook.com)
+ bh=dIoKGYTlwPu4sd6T3SZde18Zzrr+tZDI0UDt81IM/MA=; b=lXfHTzwG2IR5sLhfpjOHmtF/SG
+ fAcGeK5g2mKSaAlc613mw41fCcvEFz/uSTXjbA8+wgrt81QC3aio8yJdbqxcvhEvl1MKHhYuiYQTk
+ vNtFv5JOhZQYU5Ns0wL82yPCKiuuZA6ylGAc4stwhrijwoMF7UHioMMfLgguYJXTWVFI=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1soEGn-0000Nz-Sb for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Sep 2024 03:43:54 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rZgyVmNgmBfJ+7r3/AeKuDruuwGwjoo5+R/BipKBUnRqoISC3LRFlOwQcSpj0tIYx+gO1KY8+3ABMMmH41b8U43Rl9eI80x7BiDy3SnxQQV4XEF4vGxEVZGO31SSX1UruaCjxIJ3RZAAJKWcDLsTklvglaM9D3qLc/4qyCHcrEEfMwfdFqYl4dQTs/FQcrhY3j8AEvYTdPpHltPNixXEzdITdclg5H85nfmGzeih0f9g7Ykokm1dYqF8b43YxkRm+g8HyGTkhnoiJed/g87VEruCr8toUFeC9Zedxy5RsM0unV4Mr5fA1BHLSJuX18DBVEEYkwPjReBxJfEDjb5ltw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/598dfLJPy+7sPDqd8Q4BZGjCDpXKKLbaoHLDkGjkWk=;
- b=fYMiaqLP7sJ1DLz5VqnH3vnk7asm2w4OzLIpoFGCCrZ2MJ/i0FhpSpCSIH/1e80Odhw+R7fG0pgVMkQToQqvM+ShtBB8C8tAHacufswwI3JT2PZoGFep7Z49ts2jlsjCrxtAkdv0ptmrnOea725LIMiGC0Sx+Sj4YJS37nxnPdRff5D71agIyuNGpG+dJdQ+lm/WMHxIkXw8TDyjHzTMRplW4B33mO6fl3LVWYFgfatF54FZGrXRGZ3y1ZSh3WvNX7ea6ZBAxbTO3dTbxTtqruHnMCItddAG5bpD+Q79CvluX6vfbt/DOkF40FL22TuJBQA/QzKyszInNJ7/yyLgug==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/598dfLJPy+7sPDqd8Q4BZGjCDpXKKLbaoHLDkGjkWk=;
- b=naKQ+KNy7lB0LmMIhSQv4chHha5Q13OASrIPMSfOm1cQsAujAEVXRVflXIRnrWeBQGUGdLU5B1vJr1Mg3npqRDTmIGy7zsvG5gSyfkaWr4wAtbOi4AK/ZASf7Jceux2P2UXHyrLBA+KCy7S5Z16PdIKb4wk+8k9LzUlB+ECv3+yCkHMq82QHZTZhKpFG+dCqR7kpRVp/dpmvJ66K95VIw1QbQESVc85GTKgVJE+Yeb+GjoOmBjY8niQqsvAKi5XcF5Tg7lqjcoiCYC9CnU3WT0x9ZoDJiMGYomxQJ9/VIYt6Z0SsI/Nctlplmb0Vijf5HJy1spcoieQZjPmt0gVIiQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from PSAPR06MB4486.apcprd06.prod.outlook.com (2603:1096:301:89::11)
- by JH0PR06MB6917.apcprd06.prod.outlook.com (2603:1096:990:67::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.24; Wed, 11 Sep
- 2024 03:43:49 +0000
-Received: from PSAPR06MB4486.apcprd06.prod.outlook.com
- ([fe80::43cb:1332:afef:81e5]) by PSAPR06MB4486.apcprd06.prod.outlook.com
- ([fe80::43cb:1332:afef:81e5%4]) with mapi id 15.20.7962.016; Wed, 11 Sep 2024
- 03:43:48 +0000
-To: linux-kernel@vger.kernel.org
-Date: Tue, 10 Sep 2024 21:57:26 -0600
-Message-Id: <57e1dbb2f348ab61cbc82be7161d788a08b5fbed.1726024117.git.bo.wu@vivo.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1726024116.git.bo.wu@vivo.com>
-References: <cover.1726024116.git.bo.wu@vivo.com>
-X-ClientProxiedBy: SI2PR02CA0049.apcprd02.prod.outlook.com
- (2603:1096:4:196::7) To PSAPR06MB4486.apcprd06.prod.outlook.com
- (2603:1096:301:89::11)
+ id 1soEcH-0001p0-Mt for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 11 Sep 2024 04:06:09 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 2554BA4374D;
+ Wed, 11 Sep 2024 04:05:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 18C40C4CEC6;
+ Wed, 11 Sep 2024 04:05:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1726027554;
+ bh=XzYPsVfHBWIci6fQ7DX4h6t9ow7H8ltWz7JSMwyyVwc=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=dSoVSoDCp5eUwmX5Hqcrefm5pk7ZPF0oFYqqJ9gGa9g7GbqAUf1442yXAemQ1mDXC
+ QWxm16hz0odeC829RxsrLlvwJ6zcDspSRnwD3PXN2+Sr7E0o3vNzveVggvGr5BnO5b
+ aePBLo72Eo2uMbaBCjn6tng4b83y8D6CWtpZ1WVr9Mq5k8rx8D0veRlzYyzkhq2KK1
+ q7v1lTNC1m14bCLGwIDf6B4kDaVrye3Mthp9ZZtWn7+v4z0zA0wq3iLky71PVdqTKn
+ auAvxS65cbtMNZ49zwzvY6UsJDXr8XCXSw+ioVX0Z7/X+rCsGealB5SZcSAlYlGmlg
+ tsDcU9Wu7hSuA==
+Date: Wed, 11 Sep 2024 04:05:52 +0000
+To: Daejun Park <daejun7.park@samsung.com>,
+ Nayeon Kim <nayeoni.kim@samsung.com>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>, 
+ Siwoo Jung <siu.jung@samsung.com>, Seokhwan Kim <sukka.kim@samsung.com>,
+ Dongjin Kim <dongjin_.kim@samsung.com>
+Message-ID: <ZuEXIIDGLHWrTUcy@google.com>
+References: <CGME20240904011217epcms2p5a1b15db8e0ae50884429da7be4af4de4@epcms2p5>
+ <20240904011217epcms2p5a1b15db8e0ae50884429da7be4af4de4@epcms2p5>
+ <ZtucUU1vjLsbssPA@google.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PSAPR06MB4486:EE_|JH0PR06MB6917:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0af2ed3b-d4ad-4a41-ebcf-08dcd213f211
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|52116014|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9Z14hrNdP5kQoHyEezs+IzxGoUduxWny3QmImpxu37CjUxFzwDFIq43eGACg?=
- =?us-ascii?Q?BQS+s2B0NeyYlQNgN6+CWzuud5DNB+aHR5FqXS7btXAZdQ43Um9JNzM5aWH5?=
- =?us-ascii?Q?zabBZyW191jYq9rpctpkgn6CEX+bbbJr3sbcrG09uYT3/hm8OLyzvOhWlVqE?=
- =?us-ascii?Q?rDp/o3AvVhSJD85x5fLa3KJwR0Z+a6iKdFQfvd07dFL5qqX8spw0anMcuxB/?=
- =?us-ascii?Q?0tS9Feem8Rb1X2LPttuxJc34RD+6K0B5vshm8RX6noF4Kkhffsuyv6N8pLPn?=
- =?us-ascii?Q?9o2ShU9DrVwbQB8ofAnOGGV+WkKVzRaH8X2gKeUN34HHlv9LajxqNNXCG6Zw?=
- =?us-ascii?Q?CCp0ugyH/gBbCXc487Vi6CQ5geeXHEROwZkGCVutDDt8h9/W/1CVlpMxWlIW?=
- =?us-ascii?Q?HwyTsikDZqSj8ExjieVY7JHHGAIjFzI/W751VNcKHlRw/IC1djU1P7Oh20qQ?=
- =?us-ascii?Q?CRY8Mcnnprygwk2eDXee3i2+AZ3k0TX0XB8Qznm+3QFrwlZZ2c34SHPkiiUl?=
- =?us-ascii?Q?YktcDJ4rsYeKFuov4sDsblBJbJ4p+SwbzuUjXbPdpDDlxj+T4jXjiBV3EBwA?=
- =?us-ascii?Q?3z9TcFfcTe7ZQY214KgIiPVc/JnFk2GzfKa7npTMfhDKJbyf7OM8iiXmNcyW?=
- =?us-ascii?Q?ykPD5rp9jhnsTmNR+Lx0vv9HEYtOgvfIKlNf3U+MAeMV079e720TfN+laWzx?=
- =?us-ascii?Q?p15TR1ERnsqlVSjpInvBanNll+jC+qGnzR9bfQ+Ni1n45pLndzS9BFUXh8dH?=
- =?us-ascii?Q?RiRda4sjpuuo3kSfbPpGG9ZfHzbtPEiVm5OWeLtCc51tfXU20Ark6K+P9SEA?=
- =?us-ascii?Q?MeGQ0IjTpPq6+F5tzOT37zjYagmBSWL4X2bnVtArwr0BMvOwhrtxGTM+Bg4p?=
- =?us-ascii?Q?jHp6mZtceoFzzcboA+cYLSBoXAkdoSPFtaYQoga7CMR/YbtzHydo5yo+vjp5?=
- =?us-ascii?Q?HvsxXgZmOYuCK1kJfMQ1vdqxbwCvm4yW6gmnZog6A4lZu4u7B4jt9MuouXMv?=
- =?us-ascii?Q?JZ2WG9iPPRnhbVKFOoAGzmjBYCJlTrttNQ158/vMCcOlND8o9yzxvKHwnPmL?=
- =?us-ascii?Q?3iHsXuq0M5jM9BPia5OyX2xfScEqILKaqYatfgjbfkp35/SK8yMvdGr4NUoW?=
- =?us-ascii?Q?YJ+ZPtgvKC/mHE1Ihnk4iVmPdsRummNWDnYvHjkwwaimOFOULiowv8Gt1RUv?=
- =?us-ascii?Q?psdAmcU1gmLWvvS+gSKv0GG84CuyOvA3ged6jQzmlPF1ulHyR+oyYa5Tcgwq?=
- =?us-ascii?Q?R5jK4Z2l4ShGmBHrKyJ1WdG7l/whGDyah/0a26ZqBmx3kDFFapInAR+mZt7u?=
- =?us-ascii?Q?zIRfsU7xzRfAVm66mMAplS7NRVJ/ybo6GBon8W8lJzbsOnZOURhsHRl0HCgF?=
- =?us-ascii?Q?wGTxIo0wkl+YpNoXDOZ7QD6lchZXIn/WW554dpKMoPlctk2Mmw=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PSAPR06MB4486.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(52116014)(376014)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?czu8XGCwmSm2Vv/o6eGzVGOBRlIrmCGFMpH9UlB2aebllBZLndqvOPBifXLm?=
- =?us-ascii?Q?DO/EnS7orxqGh+0Iu0NHNHirHpYxkpyLyGv70qP0orcePqX3dF+LSX3fbsJd?=
- =?us-ascii?Q?v57yfEXkKIguKQ9+7VXRjJaFVzYZ5yMFTJk8ExcbdgdeMkbRufKsoMF+6TbQ?=
- =?us-ascii?Q?pw1pmnBiBWDlBtSKhK/f76DNmdIl+JpWcDhSP8SGI57MwvCetRAJH4AS5miC?=
- =?us-ascii?Q?LE0H7NSrQhMhBRI+fj9PrrlL3KaOIkA1/5ZwguzoY4AuxKHr/QoQuV+6GwQW?=
- =?us-ascii?Q?unINca7mxCKXgKf0xGkz+QWOldVoSTvyS2YY6/PWt5zjztqoj9+LIPlpGsjK?=
- =?us-ascii?Q?kjZ5TyXZPWBmj1V+8gKDbkaRdjZpIQMCYvCAoiT1h0kR4zljymy6NgCoczES?=
- =?us-ascii?Q?fzMRL3tsSlsB7wM7oM/R66HXZjyjA5/COprsw5ZOdIobD6qSTRb3lD1erzY4?=
- =?us-ascii?Q?0xrRLYcO2asgKYu5Q4Uz4W7PCc3otQxIfb3hKX55+0ydPSlRG4GSJBpzaXNA?=
- =?us-ascii?Q?1TmgpuGyD6WcznCd6y7mrto7ionLO/MvaSj/pUO+1PLMVxqSGP/vyJqZbviK?=
- =?us-ascii?Q?KB3hRHLjuKmbPBshBP50nffmQ/O/u7S+6NO/OaBHD2Dn8uEFxM1qvhxYN9zi?=
- =?us-ascii?Q?cgf2AZ9dpTmgQYqvSGEM6nVU+ucwL3VNL3Ui9y9rLIo24xt3vJKW+1gAI4FO?=
- =?us-ascii?Q?6EdqfHoFjtMZMN1m6TEMf/PIilE75RqxN/lmolx5yYOgH81DGdMXFegE0Uet?=
- =?us-ascii?Q?v+cgn6qk9rq7DV9qJkP9sDzitz5qq1lpj+L0PXRj3qEe/MRW85YqxPVZkEWV?=
- =?us-ascii?Q?XK66r6vTRcAcPAPm2/+bCjartrAh6JSdajPpZKJHO4JAGxwr+IWBRGu8RuR5?=
- =?us-ascii?Q?tC/30eeI3GAMOMFh6MjjuZFbIHe9WcO1sb9EskH90ejgcxJlacCnd5yYCF9J?=
- =?us-ascii?Q?HPHSXK4DaV4V1J51we5+Q8uOMNkboOuKLuW1heFlvSFar05ZeALZebTbSLhr?=
- =?us-ascii?Q?x2Px86NZmcNzVx8OHPeYzN8PlHDwQa53fzmn4KQORKfWz/UyTTUrV0yOfPgP?=
- =?us-ascii?Q?wr8XPUm0IGVPRBHPip6FyaEoqajX9I8ycS2hYRbWHrhNvRT+auy0izB/dH+r?=
- =?us-ascii?Q?7dO3bamKhFRlyqI1D1FXn0erT3K71N4pBXu2SE1yExPrK6Pb3ngKYgMrTefE?=
- =?us-ascii?Q?9Z71jHRcq/engCXv0h9j4Kx9suLhHR2h6pthqOSxsMRGxqXs1stBwcQt0qov?=
- =?us-ascii?Q?GG0mOhXzqmeVmlCvQoVC/fn01/ICF9f7JsHOtkX4znVUXKBrwclfP0nHjCKN?=
- =?us-ascii?Q?nEZhdjn5eu0NAG+sDF9NOX93rZBOfeNYvPHb+EFsqVIFeAvt2MDmQmgl8Knq?=
- =?us-ascii?Q?FPGNcUCya+o2hCsKYRP1SlaHW1MZ2GjFzy5J5IBgaKOAfmxkUkhBZ//hFPiF?=
- =?us-ascii?Q?wvXxopX31i1H3p/3L7Nyj0KX06QdEQryHJVcZnFBDaukSyjtH0OCROH3mQ9y?=
- =?us-ascii?Q?TYRte7Q5h8qzSMg0AW9rsOV/j1Fs356z2NNAkQOSGllYu4P9SbWoAXHhzeAG?=
- =?us-ascii?Q?2awPX4e/UtSyrrW97vIjij/PLK+c/h43O2AW4BF6?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0af2ed3b-d4ad-4a41-ebcf-08dcd213f211
-X-MS-Exchange-CrossTenant-AuthSource: PSAPR06MB4486.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2024 03:43:48.8654 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ACRkSFC6+7TSsZkqWtLOu+LTU7rH5+DjtfkV7Twz8OuLjsTuOAU/02b8CU8gwllDyEB5bu3pQLzvihpVBeEl0Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: JH0PR06MB6917
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <ZtucUU1vjLsbssPA@google.com>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The recovery logic is similar to that of inline data, except
- that the inline tail may require recovery of some blocks. This is because
- the inline tail has a 16-size block address array, whereas inline [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  Applied this as well. --- a/fsck/main.c +++ b/fsck/main.c
+ @@ -866,6 +866,12 @@ void f2fs_parse_options(int argc, char *argv[]) #endif
+ /* WITH_INJECT */ } +#if defined(__MINGW32__) + if (c.need_whint) { + MSG(0,
+ "-H not supported for Windows\n"); + err = EWRONG_OPT; + } +#endif if (err
+ == NOERROR) { add_default_options(); 
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.255.82 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.255.82 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1soEGn-0000Nz-Sb
-Subject: [f2fs-dev] [PATCH v2 13/13] f2fs: implement inline tail forward
- recovery
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1soEcH-0001p0-Mt
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs-tools: add write hint support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -188,125 +106,1520 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Wu Bo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Wu Bo <bo.wu@vivo.com>
-Cc: Wu Bo <wubo.oduw@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Wu Bo <bo.wu@vivo.com>, linux-f2fs-devel@lists.sourceforge.net
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The recovery logic is similar to that of inline data, except that the
-inline tail may require recovery of some blocks. This is because the
-inline tail has a 16-size block address array, whereas inline data does
-not.
+Applied this as well.
 
-Signed-off-by: Wu Bo <bo.wu@vivo.com>
----
- fs/f2fs/f2fs.h     |  1 +
- fs/f2fs/inline.c   | 51 ++++++++++++++++++++++++++++++++++++++++++++++
- fs/f2fs/recovery.c |  9 +++++++-
- 3 files changed, 60 insertions(+), 1 deletion(-)
+--- a/fsck/main.c
++++ b/fsck/main.c
+@@ -866,6 +866,12 @@ void f2fs_parse_options(int argc, char *argv[])
+ #endif /* WITH_INJECT */
+        }
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index f889d97209c7..7d5348e2127b 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4217,6 +4217,7 @@ int f2fs_clear_inline_tail(struct inode *inode, bool force);
- int f2fs_try_convert_inline_dir(struct inode *dir, struct dentry *dentry);
- int f2fs_write_inline_data(struct inode *inode, struct page *page);
- int f2fs_recover_inline_data(struct inode *inode, struct page *npage);
-+int f2fs_recover_inline_tail(struct inode *inode, struct page *npage);
- struct f2fs_dir_entry *f2fs_find_in_inline_dir(struct inode *dir,
- 					const struct f2fs_filename *fname,
- 					struct page **res_page);
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index c2f84f3dde67..76e0ff62be51 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -414,6 +414,57 @@ int f2fs_recover_inline_data(struct inode *inode, struct page *npage)
- 	return 0;
- }
- 
-+int f2fs_recover_inline_tail(struct inode *inode, struct page *npage)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	struct f2fs_inode *ri = NULL;
-+	void *src_addr, *dst_addr;
-+	struct page *ipage;
-+
-+	if (IS_INODE(npage))
-+		ri = F2FS_INODE(npage);
-+
-+	if (f2fs_has_inline_tail(inode) &&
-+			ri && (le32_to_cpu(ri->i_flags) & F2FS_INLINE_TAIL)) {
-+process_inline:
-+		if (!(ri->i_inline & F2FS_DATA_EXIST))
-+			return 0;
-+
-+		ipage = f2fs_get_node_page(sbi, inode->i_ino);
-+		if (IS_ERR(ipage))
-+			return PTR_ERR(ipage);
-+
-+		f2fs_wait_on_page_writeback(ipage, NODE, true, true);
-+
-+		src_addr = inline_data_addr(inode, npage);
-+		dst_addr = inline_data_addr(inode, ipage);
-+		memcpy(dst_addr, src_addr, MAX_INLINE_DATA(inode));
-+
-+		set_inode_flag(inode, FI_DATA_EXIST);
-+
-+		set_page_dirty(ipage);
-+		f2fs_put_page(ipage, 1);
-+		return 0;
-+	}
-+
-+	if (f2fs_has_inline_tail(inode)) {
-+		ipage = f2fs_get_node_page(sbi, inode->i_ino);
-+		if (IS_ERR(ipage))
-+			return PTR_ERR(ipage);
-+		f2fs_truncate_inline_inode(inode, ipage, 0);
-+		clear_inode_flag(inode, FI_INLINE_TAIL);
-+		f2fs_put_page(ipage, 1);
-+	} else if (ri && (le32_to_cpu(ri->i_inline) & F2FS_INLINE_TAIL)) {
-+		int ret;
-+
-+		ret = f2fs_truncate_blocks(inode,
-+				COMPACT_ADDRS_PER_INODE >> PAGE_SHIFT, false);
-+		if (ret)
-+			return ret;
-+		goto process_inline;
-+	}
-+	return 0;
-+}
- struct f2fs_dir_entry *f2fs_find_in_inline_dir(struct inode *dir,
- 					const struct f2fs_filename *fname,
- 					struct page **res_page)
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 9756f0f2b7f7..d73a557b82d9 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -645,9 +645,16 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
- 		goto out;
- 	}
- 
-+	err = f2fs_recover_inline_tail(inode, page);
-+	if (err)
-+		goto out;
-+
- 	/* step 3: recover data indices */
- 	start = f2fs_start_bidx_of_node(ofs_of_node(page), inode);
--	end = start + ADDRS_PER_PAGE(page, inode);
-+	if (f2fs_has_inline_tail(inode))
-+		end = COMPACT_ADDRS_PER_INODE;
-+	else
-+		end = start + ADDRS_PER_PAGE(page, inode);
- 
- 	set_new_dnode(&dn, inode, NULL, NULL, 0);
- retry_dn:
--- 
-2.35.3
++#if defined(__MINGW32__)
++       if (c.need_whint) {
++               MSG(0, "-H not supported for Windows\n");
++               err = EWRONG_OPT;
++       }
++#endif
+        if (err == NOERROR) {
+                add_default_options();
 
+diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c
+index c40d826c41b4..1923c0b87dfc 100644
+--- a/lib/libf2fs_io.c
++++ b/lib/libf2fs_io.c
+@@ -609,7 +609,6 @@ enum rw_hint f2fs_io_type_to_rw_hint(int seg_type)
+
+ static int __dev_write(void *buf, __u64 offset, size_t len, enum rw_hint whint)
+ {
+-       bool set_whint = (c.need_whint && (c.whint != whint));
+        int fd;
+
+        fd = __get_device_fd(&offset);
+@@ -619,7 +618,8 @@ static int __dev_write(void *buf, __u64 offset, size_t len, enum rw_hint whint)
+        if (lseek(fd, (off_t)offset, SEEK_SET) < 0)
+                return -1;
+
+-       if (set_whint) {
++#if ! defined(__MINGW32__)
++       if (c.need_whint && (c.whint != whint)) {
+                u64 hint = whint;
+                int ret;
+
+@@ -627,6 +627,7 @@ static int __dev_write(void *buf, __u64 offset, size_t len, enum rw_hint whint)
+                if (ret != -1)
+                        c.whint = whint;
+        }
++#endif
+
+        if (write(fd, buf, len) < 0)
+                return -1;
+
+
+On 09/07, Jaegeuk Kim via Linux-f2fs-devel wrote:
+> Applied this change for Android build.
+> 
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -4222,7 +4222,7 @@ int f2fs_sparse_initialize_meta(struct f2fs_sb_info *sbi)
+>         DBG(1, "\tSparse: filling sit area at block offset: 0x%08"PRIx64" len: %u\n",
+>                                                         sit_seg_addr, sit_size);
+>         ret = dev_fill(NULL, sit_seg_addr * F2FS_BLKSIZE,
+> -                                       sit_size * F2FS_BLKSIZE);
+> +                       sit_size * F2FS_BLKSIZE, WRITE_LIFE_NONE);
+>         if (ret) {
+>                 MSG(1, "\tError: While zeroing out the sit area "
+>                                 "on disk!!!\n");
+> @@ -4236,7 +4236,7 @@ int f2fs_sparse_initialize_meta(struct f2fs_sb_info *sbi)
+>         DBG(1, "\tSparse: filling nat area at block offset 0x%08"PRIx64" len: %u\n",
+>                                                         nat_seg_addr, nat_size);
+>         ret = dev_fill(NULL, nat_seg_addr * F2FS_BLKSIZE,
+> -                                       nat_size * F2FS_BLKSIZE);
+> +                       nat_size * F2FS_BLKSIZE, WRITE_LIFE_NONE);
+>         if (ret) {
+>                 MSG(1, "\tError: While zeroing out the nat area "
+>                                 "on disk!!!\n");
+> @@ -4248,7 +4248,7 @@ int f2fs_sparse_initialize_meta(struct f2fs_sb_info *sbi)
+>         DBG(1, "\tSparse: filling bitmap area at block offset 0x%08"PRIx64" len: %u\n",
+>                                         payload_addr, get_sb(cp_payload));
+>         ret = dev_fill(NULL, payload_addr * F2FS_BLKSIZE,
+> -                                       get_sb(cp_payload) * F2FS_BLKSIZE);
+> +                       get_sb(cp_payload) * F2FS_BLKSIZE, WRITE_LIFE_NONE);
+>         if (ret) {
+>                 MSG(1, "\tError: While zeroing out the nat/sit bitmap area "
+>                                 "on disk!!!\n");
+> @@ -4260,7 +4260,7 @@ int f2fs_sparse_initialize_meta(struct f2fs_sb_info *sbi)
+>         DBG(1, "\tSparse: filling bitmap area at block offset 0x%08"PRIx64" len: %u\n",
+>                                         payload_addr, get_sb(cp_payload));
+>         ret = dev_fill(NULL, payload_addr * F2FS_BLKSIZE,
+> -                                       get_sb(cp_payload) * F2FS_BLKSIZE);
+> +                       get_sb(cp_payload) * F2FS_BLKSIZE, WRITE_LIFE_NONE);
+>         if (ret) {
+>                 MSG(1, "\tError: While zeroing out the nat/sit bitmap area "
+>                                 "on disk!!!\n");
+> diff --git a/include/android_config.h b/include/android_config.h
+> index 9c8b163dac22..f5cd4dea0c99 100644
+> --- a/include/android_config.h
+> +++ b/include/android_config.h
+> @@ -1,9 +1,11 @@
+>  #if defined(__linux__)
+> +#define HAVE_ARCH_STRUCT_FLOCK 1
+>  #define HAVE_BLK_ZONE_REP_V2 1
+>  #define HAVE_BYTESWAP_H 1
+>  #define HAVE_FCNTL_H 1
+>  #define HAVE_FALLOC_H 1
+>  #define HAVE_FSYNC 1
+> +#define HAVE_LINUX_FCNTL_H 1
+>  #define HAVE_LINUX_HDREG_H 1
+>  #define HAVE_LINUX_LIMITS_H 1
+>  #define HAVE_LINUX_LOOP_H 1
+> 
+> On 09/04, Daejun Park wrote:
+> > This patch enables support for write hints by segment type.
+> > 
+> > Signed-off-by: Daejun Park <daejun7.park@samsung.com>
+> > ---
+> > 
+> > v2:
+> >  - Add -H option for write hint enabling.
+> >  - Keep last write hint to reduce fnctl call.
+> > 
+> >  configure.ac            |   2 +
+> >  fsck/defrag.c           |   5 +-
+> >  fsck/dir.c              |  27 +++++++---
+> >  fsck/fsck.c             |  24 +++++----
+> >  fsck/inject.c           |   4 +-
+> >  fsck/main.c             |  22 ++++++--
+> >  fsck/mount.c            |  43 ++++++++-------
+> >  fsck/node.c             |  11 ++--
+> >  fsck/resize.c           |  37 +++++++------
+> >  fsck/segment.c          |  21 +++++---
+> >  fsck/xattr.c            |   6 ++-
+> >  include/f2fs_fs.h       |  26 +++++++--
+> >  lib/libf2fs.c           |   6 +--
+> >  lib/libf2fs_io.c        | 117 ++++++++++++++++++++++++++++++----------
+> >  man/defrag.f2fs.8       |   6 +++
+> >  man/fsck.f2fs.8         |   6 +++
+> >  man/mkfs.f2fs.8         |   6 +++
+> >  man/resize.f2fs.8       |   6 +++
+> >  mkfs/f2fs_format.c      |  52 ++++++++++--------
+> >  mkfs/f2fs_format_main.c |   9 +++-
+> >  20 files changed, 309 insertions(+), 127 deletions(-)
+> > 
+> > diff --git a/configure.ac b/configure.ac
+> > index 21c6391..2053a65 100644
+> > --- a/configure.ac
+> > +++ b/configure.ac
+> > @@ -139,6 +139,8 @@ AC_CHECK_HEADERS(m4_flatten([
+> >  	fcntl.h
+> >  	kernel/uapi/linux/blkzoned.h
+> >  	linux/blkzoned.h
+> > +	linux/rw_hint.h
+> > +	linux/fcntl.h
+> >  	linux/falloc.h
+> >  	linux/fiemap.h
+> >  	linux/fs.h
+> > diff --git a/fsck/defrag.c b/fsck/defrag.c
+> > index 361fe73..9889b70 100644
+> > --- a/fsck/defrag.c
+> > +++ b/fsck/defrag.c
+> > @@ -23,12 +23,13 @@ static int migrate_block(struct f2fs_sb_info *sbi, u64 from, u64 to)
+> >  	ret = dev_read_block(raw, from);
+> >  	ASSERT(ret >= 0);
+> >  
+> > +	/* get segment type */
+> > +	se = get_seg_entry(sbi, GET_SEGNO(sbi, from));
+> >  	/* write to */
+> > -	ret = dev_write_block(raw, to);
+> > +	ret = dev_write_block(raw, to, f2fs_io_type_to_rw_hint(se->type));
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	/* update sit bitmap & valid_blocks && se->type */
+> > -	se = get_seg_entry(sbi, GET_SEGNO(sbi, from));
+> >  	offset = OFFSET_IN_SEG(sbi, from);
+> >  	type = se->type;
+> >  	se->valid_blocks--;
+> > diff --git a/fsck/dir.c b/fsck/dir.c
+> > index 3fac850..4debda8 100644
+> > --- a/fsck/dir.c
+> > +++ b/fsck/dir.c
+> > @@ -299,7 +299,9 @@ add_dentry:
+> >  
+> >  	if (c.zoned_model == F2FS_ZONED_HM) {
+> >  		if (datablk_alloced) {
+> > -			ret = dev_write_block(dentry_blk, dn.data_blkaddr);
+> > +			/* dentry uses hot data segment */
+> > +			ret = dev_write_block(dentry_blk, dn.data_blkaddr,
+> > +				f2fs_io_type_to_rw_hint(CURSEG_HOT_DATA));
+> >  		} else {
+> >  			ret = update_block(sbi, dentry_blk, &dn.data_blkaddr,
+> >  					dn.node_blk);
+> > @@ -309,7 +311,9 @@ add_dentry:
+> >  				dn.ndirty = 1;
+> >  		}
+> >  	} else {
+> > -		ret = dev_write_block(dentry_blk, dn.data_blkaddr);
+> > +		/* dentry uses hot data segment */
+> > +		ret = dev_write_block(dentry_blk, dn.data_blkaddr,
+> > +				f2fs_io_type_to_rw_hint(CURSEG_HOT_DATA));
+> >  	}
+> >  	ASSERT(ret >= 0);
+> >  
+> > @@ -336,8 +340,13 @@ add_dentry:
+> >  	}
+> >  
+> >  	if (dn.ndirty) {
+> > +		struct seg_entry *se;
+> > +
+> > +		/* get segment type for rw hint */
+> > +		se = get_seg_entry(sbi, GET_SEGNO(sbi, dn.node_blkaddr));
+> >  		ret = dn.alloced ?
+> > -			dev_write_block(dn.node_blk, dn.node_blkaddr) :
+> > +			dev_write_block(dn.node_blk, dn.node_blkaddr,
+> > +					f2fs_io_type_to_rw_hint(se->type)) :
+> >  			update_block(sbi, dn.node_blk, &dn.node_blkaddr, NULL);
+> >  		ASSERT(ret >= 0);
+> >  	}
+> > @@ -388,7 +397,8 @@ static void make_empty_dir(struct f2fs_sb_info *sbi, struct f2fs_node *inode)
+> >  	ret = reserve_new_block(sbi, &blkaddr, &sum, CURSEG_HOT_DATA, 0);
+> >  	ASSERT(!ret);
+> >  
+> > -	ret = dev_write_block(dent_blk, blkaddr);
+> > +	ret = dev_write_block(dent_blk, blkaddr,
+> > +			      f2fs_io_type_to_rw_hint(CURSEG_HOT_DATA));
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	inode->i.i_addr[get_extra_isize(inode)] = cpu_to_le32(blkaddr);
+> > @@ -424,7 +434,8 @@ static void page_symlink(struct f2fs_sb_info *sbi, struct f2fs_node *inode,
+> >  	ret = reserve_new_block(sbi, &blkaddr, &sum, CURSEG_WARM_DATA, 0);
+> >  	ASSERT(!ret);
+> >  
+> > -	ret = dev_write_block(data_blk, blkaddr);
+> > +	ret = dev_write_block(data_blk, blkaddr,
+> > +			      f2fs_io_type_to_rw_hint(CURSEG_WARM_DATA));
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	inode->i.i_addr[get_extra_isize(inode)] = cpu_to_le32(blkaddr);
+> > @@ -618,7 +629,8 @@ int convert_inline_dentry(struct f2fs_sb_info *sbi, struct f2fs_node *node,
+> >  		memcpy(dst.filename, src.filename, src.max * F2FS_SLOT_LEN);
+> >  
+> >  		ret = datablk_alloced ?
+> > -			dev_write_block(dentry_blk, dn.data_blkaddr) :
+> > +			dev_write_block(dentry_blk, dn.data_blkaddr,
+> > +					f2fs_io_type_to_rw_hint(CURSEG_HOT_DATA)) :
+> >  			update_block(sbi, dentry_blk, &dn.data_blkaddr, NULL);
+> >  		ASSERT(ret >= 0);
+> >  
+> > @@ -818,7 +830,8 @@ int f2fs_create(struct f2fs_sb_info *sbi, struct dentry *de)
+> >  	update_nat_blkaddr(sbi, de->ino, de->ino, blkaddr);
+> >  
+> >  write_child_dir:
+> > -	ret = nodeblk_alloced ? dev_write_block(child, blkaddr) :
+> > +	ret = nodeblk_alloced ? dev_write_block(child, blkaddr,
+> > +			f2fs_io_type_to_rw_hint(CURSEG_HOT_NODE)) :
+> >  		update_block(sbi, child, &blkaddr, NULL);
+> >  	ASSERT(ret >= 0);
+> >  
+> > diff --git a/fsck/fsck.c b/fsck/fsck.c
+> > index a18bee9..e4d4aae 100644
+> > --- a/fsck/fsck.c
+> > +++ b/fsck/fsck.c
+> > @@ -216,7 +216,7 @@ static int is_valid_ssa_node_blk(struct f2fs_sb_info *sbi, u32 nid,
+> >  		int ret2;
+> >  
+> >  		ssa_blk = GET_SUM_BLKADDR(sbi, segno);
+> > -		ret2 = dev_write_block(sum_blk, ssa_blk);
+> > +		ret2 = dev_write_block(sum_blk, ssa_blk, WRITE_LIFE_NONE);
+> >  		ASSERT(ret2 >= 0);
+> >  	}
+> >  out:
+> > @@ -350,7 +350,7 @@ static int is_valid_ssa_data_blk(struct f2fs_sb_info *sbi, u32 blk_addr,
+> >  		int ret2;
+> >  
+> >  		ssa_blk = GET_SUM_BLKADDR(sbi, segno);
+> > -		ret2 = dev_write_block(sum_blk, ssa_blk);
+> > +		ret2 = dev_write_block(sum_blk, ssa_blk, WRITE_LIFE_NONE);
+> >  		ASSERT(ret2 >= 0);
+> >  	}
+> >  out:
+> > @@ -2153,7 +2153,8 @@ int fsck_chk_orphan_node(struct f2fs_sb_info *sbi)
+> >  		if (f2fs_dev_is_writable() && c.fix_on &&
+> >  				entry_count != new_entry_count) {
+> >  			F2FS_ORPHAN_BLOCK_FOOTER(new_blk)->entry_count = cpu_to_le32(new_entry_count);
+> > -			ret = dev_write_block(new_blk, start_blk + i);
+> > +			ret = dev_write_block(new_blk, start_blk + i,
+> > +					      WRITE_LIFE_NONE);
+> >  			ASSERT(ret >= 0);
+> >  		}
+> >  		memset(orphan_blk, 0, F2FS_BLKSIZE);
+> > @@ -2569,12 +2570,13 @@ static void fix_checkpoint(struct f2fs_sb_info *sbi)
+> >  	if (sbi->cur_cp == 2)
+> >  		cp_blk_no += 1 << get_sb(log_blocks_per_seg);
+> >  
+> > -	ret = dev_write_block(cp, cp_blk_no++);
+> > +	ret = dev_write_block(cp, cp_blk_no++, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	for (i = 0; i < get_sb(cp_payload); i++) {
+> >  		ret = dev_write_block(((unsigned char *)cp) +
+> > -					(i + 1) * F2FS_BLKSIZE, cp_blk_no++);
+> > +					(i + 1) * F2FS_BLKSIZE, cp_blk_no++,
+> > +					WRITE_LIFE_NONE);
+> >  		ASSERT(ret >= 0);
+> >  	}
+> >  
+> > @@ -2586,7 +2588,8 @@ static void fix_checkpoint(struct f2fs_sb_info *sbi)
+> >  		if (!(flags & CP_UMOUNT_FLAG) && IS_NODESEG(i))
+> >  			continue;
+> >  
+> > -		ret = dev_write_block(curseg->sum_blk, cp_blk_no++);
+> > +		ret = dev_write_block(curseg->sum_blk, cp_blk_no++,
+> > +				      WRITE_LIFE_NONE);
+> >  		ASSERT(ret >= 0);
+> >  	}
+> >  
+> > @@ -2597,7 +2600,7 @@ static void fix_checkpoint(struct f2fs_sb_info *sbi)
+> >  	ret = f2fs_fsync_device();
+> >  	ASSERT(ret >= 0);
+> >  
+> > -	ret = dev_write_block(cp, cp_blk_no++);
+> > +	ret = dev_write_block(cp, cp_blk_no++, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	ret = f2fs_fsync_device();
+> > @@ -3328,9 +3331,11 @@ static int chk_and_fix_wp_with_sit(int UNUSED(i), void *blkzone, void *opaque)
+> >  	if (ret) {
+> >  		u64 fill_sects = blk_zone_length(blkz) -
+> >  			(blk_zone_wp_sector(blkz) - blk_zone_sector(blkz));
+> > +		struct seg_entry *se = get_seg_entry(sbi, wp_segno);
+> >  		printf("[FSCK] Finishing zone failed: %s\n", dev->path);
+> >  		ret = dev_fill(NULL, wp_block * F2FS_BLKSIZE,
+> > -			(fill_sects >> log_sectors_per_block) * F2FS_BLKSIZE);
+> > +			(fill_sects >> log_sectors_per_block) * F2FS_BLKSIZE,
+> > +			f2fs_io_type_to_rw_hint(se->type));
+> >  		if (ret)
+> >  			printf("[FSCK] Fill up zone failed: %s\n", dev->path);
+> >  	}
+> > @@ -3646,7 +3651,8 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+> >  					ssa_blk = GET_SUM_BLKADDR(sbi,
+> >  							curseg->segno);
+> >  					ret = dev_write_block(curseg->sum_blk,
+> > -							ssa_blk);
+> > +							ssa_blk,
+> > +							WRITE_LIFE_NONE);
+> >  					ASSERT(ret >= 0);
+> >  				}
+> >  				if (c.roll_forward)
+> > diff --git a/fsck/inject.c b/fsck/inject.c
+> > index 9dc085f..e24f3f5 100644
+> > --- a/fsck/inject.c
+> > +++ b/fsck/inject.c
+> > @@ -565,7 +565,7 @@ static int inject_nat(struct f2fs_sb_info *sbi, struct inject_option *opt)
+> >  	}
+> >  	print_raw_nat_entry_info(ne);
+> >  
+> > -	ret = dev_write_block(nat_blk, blk_addr);
+> > +	ret = dev_write_block(nat_blk, blk_addr, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  	/* restore NAT version bitmap */
+> >  	if (is_set)
+> > @@ -724,7 +724,7 @@ static int inject_ssa(struct f2fs_sb_info *sbi, struct inject_option *opt)
+> >  	print_sum_footer_info(footer);
+> >  
+> >  	ssa_blkaddr = GET_SUM_BLKADDR(sbi, segno);
+> > -	ret = dev_write_block(sum_blk, ssa_blkaddr);
+> > +	ret = dev_write_block(sum_blk, ssa_blkaddr, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  
+> >  out:
+> > diff --git a/fsck/main.c b/fsck/main.c
+> > index 8881936..43b807f 100644
+> > --- a/fsck/main.c
+> > +++ b/fsck/main.c
+> > @@ -77,6 +77,7 @@ void fsck_usage()
+> >  	MSG(0, "  -d debug level [default:0]\n");
+> >  	MSG(0, "  -f check/fix entire partition\n");
+> >  	MSG(0, "  -g add default options\n");
+> > +	MSG(0, "  -H support write hint\n");
+> >  	MSG(0, "  -l show superblock/checkpoint\n");
+> >  	MSG(0, "  -M show a file map\n");
+> >  	MSG(0, "  -O feature1[feature2,feature3,...] e.g. \"encrypt\"\n");
+> > @@ -108,6 +109,7 @@ void dump_usage()
+> >  	MSG(0, "  -b blk_addr (in 4KB)\n");
+> >  	MSG(0, "  -r dump out from the root inode\n");
+> >  	MSG(0, "  -f do not prompt before dumping\n");
+> > +	MSG(0, "  -H support write hint\n");
+> >  	MSG(0, "  -y alias for -f\n");
+> >  	MSG(0, "  -o dump inodes to the given path\n");
+> >  	MSG(0, "  -P preserve mode/owner/group for dumped inode\n");
+> > @@ -122,6 +124,7 @@ void defrag_usage()
+> >  	MSG(0, "\nUsage: defrag.f2fs [options] device\n");
+> >  	MSG(0, "[options]:\n");
+> >  	MSG(0, "  -d debug level [default:0]\n");
+> > +	MSG(0, "  -H support write hint\n");
+> >  	MSG(0, "  -s start block address [default: main_blkaddr]\n");
+> >  	MSG(0, "  -S sparse_mode\n");
+> >  	MSG(0, "  -l length [default:512 (2MB)]\n");
+> > @@ -136,6 +139,7 @@ void resize_usage()
+> >  	MSG(0, "\nUsage: resize.f2fs [options] device\n");
+> >  	MSG(0, "[options]:\n");
+> >  	MSG(0, "  -d debug level [default:0]\n");
+> > +	MSG(0, "  -H support write hint\n");
+> >  	MSG(0, "  -i extended node bitmap, node ratio is 20%% by default\n");
+> >  	MSG(0, "  -o overprovision percentage [default:auto]\n");
+> >  	MSG(0, "  -s safe resize (Does not resize metadata)\n");
+> > @@ -246,7 +250,7 @@ void f2fs_parse_options(int argc, char *argv[])
+> >  	}
+> >  
+> >  	if (!strcmp("fsck.f2fs", prog)) {
+> > -		const char *option_string = ":aC:c:m:Md:fg:lO:p:q:StyV";
+> > +		const char *option_string = ":aC:c:m:Md:fg:HlO:p:q:StyV";
+> >  		int opt = 0, val;
+> >  		char *token;
+> >  		struct option long_opt[] = {
+> > @@ -295,6 +299,10 @@ void f2fs_parse_options(int argc, char *argv[])
+> >  					MSG(0, "Info: Set conf for android\n");
+> >  				}
+> >  				break;
+> > +			case 'H':
+> > +				c.need_whint = true;
+> > +				c.whint = WRITE_LIFE_NOT_SET;
+> > +				break;
+> >  			case 'l':
+> >  				c.layout = 1;
+> >  				break;
+> > @@ -517,7 +525,7 @@ void f2fs_parse_options(int argc, char *argv[])
+> >  #endif
+> >  	} else if (!strcmp("defrag.f2fs", prog)) {
+> >  #ifdef WITH_DEFRAG
+> > -		const char *option_string = "d:s:Sl:t:iV";
+> > +		const char *option_string = "d:Hs:Sl:t:iV";
+> >  
+> >  		c.func = DEFRAG;
+> >  		while ((option = getopt(argc, argv, option_string)) != EOF) {
+> > @@ -533,6 +541,10 @@ void f2fs_parse_options(int argc, char *argv[])
+> >  				MSG(0, "Info: Debug level = %d\n",
+> >  							c.dbg_lv);
+> >  				break;
+> > +			case 'H':
+> > +				c.need_whint = true;
+> > +				c.whint = WRITE_LIFE_NOT_SET;
+> > +				break;
+> >  			case 's':
+> >  				if (strncmp(optarg, "0x", 2))
+> >  					ret = sscanf(optarg, "%"PRIu64"",
+> > @@ -577,7 +589,7 @@ void f2fs_parse_options(int argc, char *argv[])
+> >  #endif
+> >  	} else if (!strcmp("resize.f2fs", prog)) {
+> >  #ifdef WITH_RESIZE
+> > -		const char *option_string = "d:fst:io:V";
+> > +		const char *option_string = "d:fHst:io:V";
+> >  
+> >  		c.func = RESIZE;
+> >  		while ((option = getopt(argc, argv, option_string)) != EOF) {
+> > @@ -597,6 +609,10 @@ void f2fs_parse_options(int argc, char *argv[])
+> >  				c.force = 1;
+> >  				MSG(0, "Info: Force to resize\n");
+> >  				break;
+> > +			case 'H':
+> > +				c.need_whint = true;
+> > +				c.whint = WRITE_LIFE_NOT_SET;
+> > +				break;
+> >  			case 's':
+> >  				c.safe_resize = 1;
+> >  				break;
+> > diff --git a/fsck/mount.c b/fsck/mount.c
+> > index dab0611..4bb1cde 100644
+> > --- a/fsck/mount.c
+> > +++ b/fsck/mount.c
+> > @@ -889,7 +889,7 @@ void update_superblock(struct f2fs_super_block *sb, int sb_mask)
+> >  	memcpy(buf + F2FS_SUPER_OFFSET, sb, sizeof(*sb));
+> >  	for (addr = SB0_ADDR; addr < SB_MAX_ADDR; addr++) {
+> >  		if (SB_MASK(addr) & sb_mask) {
+> > -			ret = dev_write_block(buf, addr);
+> > +			ret = dev_write_block(buf, addr, WRITE_LIFE_NONE);
+> >  			ASSERT(ret >= 0);
+> >  		}
+> >  	}
+> > @@ -1783,7 +1783,8 @@ void write_nat_bits(struct f2fs_sb_info *sbi,
+> >  	DBG(1, "\tWriting NAT bits pages, at offset 0x%08x\n", blkaddr);
+> >  
+> >  	for (i = 0; i < nat_bits_blocks; i++) {
+> > -		if (dev_write_block(nat_bits + i * F2FS_BLKSIZE, blkaddr + i))
+> > +		if (dev_write_block(nat_bits + i * F2FS_BLKSIZE, blkaddr + i,
+> > +				    WRITE_LIFE_NONE))
+> >  			ASSERT_MSG("\tError: write NAT bits to disk!!!\n");
+> >  	}
+> >  	MSG(0, "Info: Write valid nat_bits in checkpoint\n");
+> > @@ -2155,7 +2156,8 @@ void update_sum_entry(struct f2fs_sb_info *sbi, block_t blk_addr,
+> >  							SUM_TYPE_DATA;
+> >  
+> >  	/* write SSA all the time */
+> > -	ret = dev_write_block(sum_blk, GET_SUM_BLKADDR(sbi, segno));
+> > +	ret = dev_write_block(sum_blk, GET_SUM_BLKADDR(sbi, segno),
+> > +			      WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	if (type == SEG_TYPE_NODE || type == SEG_TYPE_DATA ||
+> > @@ -2262,7 +2264,7 @@ void rewrite_current_sit_page(struct f2fs_sb_info *sbi,
+> >  {
+> >  	block_t blk_addr = current_sit_addr(sbi, segno);
+> >  
+> > -	ASSERT(dev_write_block(sit_blk, blk_addr) >= 0);
+> > +	ASSERT(dev_write_block(sit_blk, blk_addr, WRITE_LIFE_NONE) >= 0);
+> >  }
+> >  
+> >  void check_block_count(struct f2fs_sb_info *sbi,
+> > @@ -2552,7 +2554,7 @@ void update_nat_blkaddr(struct f2fs_sb_info *sbi, nid_t ino,
+> >  		entry->ino = cpu_to_le32(ino);
+> >  	entry->block_addr = cpu_to_le32(newaddr);
+> >  
+> > -	ret = dev_write_block(nat_block, block_addr);
+> > +	ret = dev_write_block(nat_block, block_addr, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  update_cache:
+> >  	if (c.func == FSCK)
+> > @@ -2848,7 +2850,7 @@ next:
+> >  	memcpy(&nat_block->entries[entry_off], &nat_in_journal(journal, i),
+> >  					sizeof(struct f2fs_nat_entry));
+> >  
+> > -	ret = dev_write_block(nat_block, block_addr);
+> > +	ret = dev_write_block(nat_block, block_addr, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  	i++;
+> >  	goto next;
+> > @@ -3028,7 +3030,8 @@ int find_next_free_block(struct f2fs_sb_info *sbi, u64 *to, int left,
+> >  			}
+> >  
+> >  			ssa_blk = GET_SUM_BLKADDR(sbi, curseg->segno);
+> > -			ret = dev_write_block(curseg->sum_blk, ssa_blk);
+> > +			ret = dev_write_block(curseg->sum_blk, ssa_blk,
+> > +					      WRITE_LIFE_NONE);
+> >  			ASSERT(ret >= 0);
+> >  
+> >  			curseg->segno = segno;
+> > @@ -3133,7 +3136,7 @@ void move_one_curseg_info(struct f2fs_sb_info *sbi, u64 from, int left,
+> >  
+> >  	/* update original SSA too */
+> >  	ssa_blk = GET_SUM_BLKADDR(sbi, curseg->segno);
+> > -	ret = dev_write_block(curseg->sum_blk, ssa_blk);
+> > +	ret = dev_write_block(curseg->sum_blk, ssa_blk, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  bypass_ssa:
+> >  	to = from;
+> > @@ -3286,7 +3289,7 @@ void nullify_nat_entry(struct f2fs_sb_info *sbi, u32 nid)
+> >  		FIX_MSG("Remove nid [0x%x] in NAT", nid);
+> >  	}
+> >  
+> > -	ret = dev_write_block(nat_block, block_addr);
+> > +	ret = dev_write_block(nat_block, block_addr, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  	free(nat_block);
+> >  }
+> > @@ -3318,7 +3321,7 @@ void duplicate_checkpoint(struct f2fs_sb_info *sbi)
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	ret = dev_write(buf, dst << F2FS_BLKSIZE_BITS,
+> > -				seg_size << F2FS_BLKSIZE_BITS);
+> > +				seg_size << F2FS_BLKSIZE_BITS, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	free(buf);
+> > @@ -3383,7 +3386,7 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
+> >  		cp_blk_no += 1 << get_sb(log_blocks_per_seg);
+> >  
+> >  	/* write the first cp */
+> > -	ret = dev_write_block(cp, cp_blk_no++);
+> > +	ret = dev_write_block(cp, cp_blk_no++, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	/* skip payload */
+> > @@ -3399,13 +3402,15 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
+> >  		if (!(flags & CP_UMOUNT_FLAG) && IS_NODESEG(i))
+> >  			continue;
+> >  
+> > -		ret = dev_write_block(curseg->sum_blk, cp_blk_no++);
+> > +		ret = dev_write_block(curseg->sum_blk, cp_blk_no++,
+> > +				      WRITE_LIFE_NONE);
+> >  		ASSERT(ret >= 0);
+> >  
+> >  		if (!(get_sb(feature) & F2FS_FEATURE_RO)) {
+> >  			/* update original SSA too */
+> >  			ssa_blk = GET_SUM_BLKADDR(sbi, curseg->segno);
+> > -			ret = dev_write_block(curseg->sum_blk, ssa_blk);
+> > +			ret = dev_write_block(curseg->sum_blk, ssa_blk,
+> > +					      WRITE_LIFE_NONE);
+> >  			ASSERT(ret >= 0);
+> >  		}
+> >  	}
+> > @@ -3419,7 +3424,7 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	/* write the last cp */
+> > -	ret = dev_write_block(cp, cp_blk_no++);
+> > +	ret = dev_write_block(cp, cp_blk_no++, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	ret = f2fs_fsync_device();
+> > @@ -3455,12 +3460,12 @@ void write_raw_cp_blocks(struct f2fs_sb_info *sbi,
+> >  		cp_blkaddr += 1 << get_sb(log_blocks_per_seg);
+> >  
+> >  	/* write the first cp block in this CP pack */
+> > -	ret = dev_write_block(cp, cp_blkaddr);
+> > +	ret = dev_write_block(cp, cp_blkaddr, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	/* write the second cp block in this CP pack */
+> >  	cp_blkaddr += get_cp(cp_pack_total_block_count) - 1;
+> > -	ret = dev_write_block(cp, cp_blkaddr);
+> > +	ret = dev_write_block(cp, cp_blkaddr, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  }
+> >  
+> > @@ -3695,6 +3700,7 @@ static int loop_node_chain_fix(block_t blkaddr_fast,
+> >  		block_t blkaddr, struct f2fs_node *node_blk)
+> >  {
+> >  	block_t blkaddr_entry, blkaddr_tmp;
+> > +	enum rw_hint whint;
+> >  	int err;
+> >  
+> >  	/* find the entry point of the looped node chain */
+> > @@ -3722,10 +3728,11 @@ static int loop_node_chain_fix(block_t blkaddr_fast,
+> >  
+> >  	/* fix the blkaddr of last node with NULL_ADDR. */
+> >  	F2FS_NODE_FOOTER(node_blk)->next_blkaddr = NULL_ADDR;
+> > +	whint = f2fs_io_type_to_rw_hint(CURSEG_WARM_NODE);
+> >  	if (IS_INODE(node_blk))
+> > -		err = write_inode(node_blk, blkaddr_tmp);
+> > +		err = write_inode(node_blk, blkaddr_tmp, whint);
+> >  	else
+> > -		err = dev_write_block(node_blk, blkaddr_tmp);
+> > +		err = dev_write_block(node_blk, blkaddr_tmp, whint);
+> >  	if (!err)
+> >  		FIX_MSG("Fix looped node chain on blkaddr %u\n",
+> >  				blkaddr_tmp);
+> > diff --git a/fsck/node.c b/fsck/node.c
+> > index 632151a..8d4479c 100644
+> > --- a/fsck/node.c
+> > +++ b/fsck/node.c
+> > @@ -78,7 +78,7 @@ int f2fs_rebuild_qf_inode(struct f2fs_sb_info *sbi, int qtype)
+> >  		goto err_out;
+> >  	}
+> >  
+> > -	ret = write_inode(raw_node, blkaddr);
+> > +	ret = write_inode(raw_node, blkaddr, f2fs_io_type_to_rw_hint(CURSEG_HOT_NODE));
+> >  	if (ret < 0) {
+> >  		MSG(1, "\tError: While rebuilding the quota inode to disk!\n");
+> >  		goto err_out;
+> > @@ -282,8 +282,13 @@ int get_dnode_of_data(struct f2fs_sb_info *sbi, struct dnode_of_data *dn,
+> >  			/* Parent node has changed */
+> >  			if (!parent_alloced)
+> >  				ret = update_block(sbi, parent, &nblk[i - 1], NULL);
+> > -			else
+> > -				ret = dev_write_block(parent, nblk[i - 1]);
+> > +			else {
+> > +				struct seg_entry *se;
+> > +
+> > +				se = get_seg_entry(sbi, GET_SEGNO(sbi, nblk[i - 1]));
+> > +				ret = dev_write_block(parent, nblk[i - 1],
+> > +						f2fs_io_type_to_rw_hint(se->type));
+> > +			}
+> >  			ASSERT(ret >= 0);
+> >  
+> >  			/* Function new_node_blk get a new f2fs_node blk and update*/
+> > diff --git a/fsck/resize.c b/fsck/resize.c
+> > index 049ddd3..9b3b071 100644
+> > --- a/fsck/resize.c
+> > +++ b/fsck/resize.c
+> > @@ -189,7 +189,8 @@ static void migrate_main(struct f2fs_sb_info *sbi, unsigned int offset)
+> >  			ASSERT(ret >= 0);
+> >  
+> >  			to = from + offset;
+> > -			ret = dev_write_block(raw, to);
+> > +			ret = dev_write_block(raw, to,
+> > +					      f2fs_io_type_to_rw_hint(se->type));
+> >  			ASSERT(ret >= 0);
+> >  
+> >  			get_sum_entry(sbi, from, &sum);
+> > @@ -218,7 +219,8 @@ static void move_ssa(struct f2fs_sb_info *sbi, unsigned int segno,
+> >  	if (type < SEG_TYPE_MAX) {
+> >  		int ret;
+> >  
+> > -		ret = dev_write_block(sum_blk, new_sum_blk_addr);
+> > +		ret = dev_write_block(sum_blk, new_sum_blk_addr,
+> > +				      WRITE_LIFE_NONE);
+> >  		ASSERT(ret >= 0);
+> >  		DBG(1, "Write summary block: (%d) segno=%x/%x --> (%d) %x\n",
+> >  				type, segno, GET_SUM_BLKADDR(sbi, segno),
+> > @@ -252,7 +254,8 @@ static void migrate_ssa(struct f2fs_sb_info *sbi,
+> >  			if (blkaddr < expand_sum_blkaddr) {
+> >  				move_ssa(sbi, offset++, blkaddr++);
+> >  			} else {
+> > -				ret = dev_write_block(zero_block, blkaddr++);
+> > +				ret = dev_write_block(zero_block, blkaddr++,
+> > +						      WRITE_LIFE_NONE);
+> >  				ASSERT(ret >=0);
+> >  			}
+> >  		}
+> > @@ -261,7 +264,8 @@ static void migrate_ssa(struct f2fs_sb_info *sbi,
+> >  		offset = MAIN_SEGS(sbi) - 1;
+> >  		while (blkaddr >= new_sum_blkaddr) {
+> >  			if (blkaddr >= expand_sum_blkaddr) {
+> > -				ret = dev_write_block(zero_block, blkaddr--);
+> > +				ret = dev_write_block(zero_block, blkaddr--,
+> > +						      WRITE_LIFE_NONE);
+> >  				ASSERT(ret >=0);
+> >  			} else {
+> >  				move_ssa(sbi, offset--, blkaddr--);
+> > @@ -360,7 +364,7 @@ static void migrate_nat(struct f2fs_sb_info *sbi,
+> >  				(block_off & ((1 << sbi->log_blocks_per_seg) - 1)));
+> >  
+> >  		/* new bitmap should be zeros */
+> > -		ret = dev_write_block(nat_block, block_addr);
+> > +		ret = dev_write_block(nat_block, block_addr, WRITE_LIFE_NONE);
+> >  		ASSERT(ret >= 0);
+> >  	}
+> >  	/* zero out newly assigned nids */
+> > @@ -381,7 +385,7 @@ static void migrate_nat(struct f2fs_sb_info *sbi,
+> >  		block_addr = (pgoff_t)(new_nat_blkaddr +
+> >  				(seg_off << sbi->log_blocks_per_seg << 1) +
+> >  				(block_off & ((1 << sbi->log_blocks_per_seg) - 1)));
+> > -		ret = dev_write_block(nat_block, block_addr);
+> > +		ret = dev_write_block(nat_block, block_addr, WRITE_LIFE_NONE);
+> >  		ASSERT(ret >= 0);
+> >  		DBG(3, "Write NAT: %lx\n", block_addr);
+> >  	}
+> > @@ -407,7 +411,8 @@ static void migrate_sit(struct f2fs_sb_info *sbi,
+> >  
+> >  	/* initialize with zeros */
+> >  	for (index = 0; index < sit_blks; index++) {
+> > -		ret = dev_write_block(sit_blk, get_newsb(sit_blkaddr) + index);
+> > +		ret = dev_write_block(sit_blk, get_newsb(sit_blkaddr) + index,
+> > +				      WRITE_LIFE_NONE);
+> >  		ASSERT(ret >= 0);
+> >  		DBG(3, "Write zero sit: %x\n", get_newsb(sit_blkaddr) + index);
+> >  	}
+> > @@ -425,7 +430,8 @@ static void migrate_sit(struct f2fs_sb_info *sbi,
+> >  
+> >  		if (ofs != pre_ofs) {
+> >  			blk_addr = get_newsb(sit_blkaddr) + pre_ofs;
+> > -			ret = dev_write_block(sit_blk, blk_addr);
+> > +			ret = dev_write_block(sit_blk, blk_addr,
+> > +					      WRITE_LIFE_NONE);
+> >  			ASSERT(ret >= 0);
+> >  			DBG(1, "Write valid sit: %x\n", blk_addr);
+> >  
+> > @@ -439,7 +445,7 @@ static void migrate_sit(struct f2fs_sb_info *sbi,
+> >  							se->valid_blocks);
+> >  	}
+> >  	blk_addr = get_newsb(sit_blkaddr) + ofs;
+> > -	ret = dev_write_block(sit_blk, blk_addr);
+> > +	ret = dev_write_block(sit_blk, blk_addr, WRITE_LIFE_NONE);
+> >  	DBG(1, "Write valid sit: %x\n", blk_addr);
+> >  	ASSERT(ret >= 0);
+> >  
+> > @@ -558,12 +564,12 @@ static void rebuild_checkpoint(struct f2fs_sb_info *sbi,
+> >  		new_cp_blk_no += 1 << get_sb(log_blocks_per_seg);
+> >  
+> >  	/* write first cp */
+> > -	ret = dev_write_block(new_cp, new_cp_blk_no++);
+> > +	ret = dev_write_block(new_cp, new_cp_blk_no++, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	memset(buf, 0, F2FS_BLKSIZE);
+> >  	for (i = 0; i < get_newsb(cp_payload); i++) {
+> > -		ret = dev_write_block(buf, new_cp_blk_no++);
+> > +		ret = dev_write_block(buf, new_cp_blk_no++, WRITE_LIFE_NONE);
+> >  		ASSERT(ret >= 0);
+> >  	}
+> >  
+> > @@ -573,7 +579,7 @@ static void rebuild_checkpoint(struct f2fs_sb_info *sbi,
+> >  		ret = dev_read_block(buf, orphan_blk_no++);
+> >  		ASSERT(ret >= 0);
+> >  
+> > -		ret = dev_write_block(buf, new_cp_blk_no++);
+> > +		ret = dev_write_block(buf, new_cp_blk_no++, WRITE_LIFE_NONE);
+> >  		ASSERT(ret >= 0);
+> >  	}
+> >  
+> > @@ -581,12 +587,13 @@ static void rebuild_checkpoint(struct f2fs_sb_info *sbi,
+> >  	for (i = 0; i < NO_CHECK_TYPE; i++) {
+> >  		struct curseg_info *curseg = CURSEG_I(sbi, i);
+> >  
+> > -		ret = dev_write_block(curseg->sum_blk, new_cp_blk_no++);
+> > +		ret = dev_write_block(curseg->sum_blk, new_cp_blk_no++,
+> > +				      WRITE_LIFE_NONE);
+> >  		ASSERT(ret >= 0);
+> >  	}
+> >  
+> >  	/* write the last cp */
+> > -	ret = dev_write_block(new_cp, new_cp_blk_no++);
+> > +	ret = dev_write_block(new_cp, new_cp_blk_no++, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	/* Write nat bits */
+> > @@ -595,7 +602,7 @@ static void rebuild_checkpoint(struct f2fs_sb_info *sbi,
+> >  
+> >  	/* disable old checkpoint */
+> >  	memset(buf, 0, F2FS_BLKSIZE);
+> > -	ret = dev_write_block(buf, old_cp_blk_no);
+> > +	ret = dev_write_block(buf, old_cp_blk_no, WRITE_LIFE_NONE);
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	free(buf);
+> > diff --git a/fsck/segment.c b/fsck/segment.c
+> > index 9bea105..96de22a 100644
+> > --- a/fsck/segment.c
+> > +++ b/fsck/segment.c
+> > @@ -322,12 +322,16 @@ static u64 f2fs_write_ex(struct f2fs_sb_info *sbi, nid_t ino, u8 *buffer,
+> >  		ASSERT(remained_blkentries > 0);
+> >  
+> >  		if (!has_data) {
+> > +			struct seg_entry *se;
+> > +
+> > +			se = get_seg_entry(sbi, GET_SEGNO(sbi, dn.node_blkaddr));
+> >  			dn.data_blkaddr = addr_type;
+> >  			set_data_blkaddr(&dn);
+> >  			idirty |= dn.idirty;
+> >  			if (dn.ndirty) {
+> >  				ret = dn.alloced ? dev_write_block(dn.node_blk,
+> > -					dn.node_blkaddr) :
+> > +					dn.node_blkaddr,
+> > +					f2fs_io_type_to_rw_hint(se->type)) :
+> >  					update_block(sbi, dn.node_blk,
+> >  					&dn.node_blkaddr, NULL);
+> >  				ASSERT(ret >= 0);
+> > @@ -365,7 +369,8 @@ static u64 f2fs_write_ex(struct f2fs_sb_info *sbi, nid_t ino, u8 *buffer,
+> >  
+> >  		if (c.zoned_model == F2FS_ZONED_HM) {
+> >  			if (datablk_alloced) {
+> > -				ret = dev_write_block(wbuf, blkaddr);
+> > +				ret = dev_write_block(wbuf, blkaddr,
+> > +					f2fs_io_type_to_rw_hint(CURSEG_WARM_DATA));
+> >  			} else {
+> >  				ret = update_block(sbi, wbuf, &blkaddr,
+> >  						dn.node_blk);
+> > @@ -375,7 +380,8 @@ static u64 f2fs_write_ex(struct f2fs_sb_info *sbi, nid_t ino, u8 *buffer,
+> >  					dn.ndirty = 1;
+> >  			}
+> >  		} else {
+> > -			ret = dev_write_block(wbuf, blkaddr);
+> > +			ret = dev_write_block(wbuf, blkaddr,
+> > +					f2fs_io_type_to_rw_hint(CURSEG_WARM_DATA));
+> >  		}
+> >  		ASSERT(ret >= 0);
+> >  
+> > @@ -386,8 +392,11 @@ static u64 f2fs_write_ex(struct f2fs_sb_info *sbi, nid_t ino, u8 *buffer,
+> >  
+> >  		dn.ofs_in_node++;
+> >  		if ((--remained_blkentries == 0 || count == 0) && (dn.ndirty)) {
+> > +			struct seg_entry *se;
+> > +			se = get_seg_entry(sbi, GET_SEGNO(sbi, dn.node_blkaddr));
+> >  			ret = dn.alloced ?
+> > -				dev_write_block(dn.node_blk, dn.node_blkaddr) :
+> > +				dev_write_block(dn.node_blk, dn.node_blkaddr,
+> > +						f2fs_io_type_to_rw_hint(se->type)) :
+> >  				update_block(sbi, dn.node_blk, &dn.node_blkaddr, NULL);
+> >  			ASSERT(ret >= 0);
+> >  		}
+> > @@ -764,7 +773,7 @@ int update_block(struct f2fs_sb_info *sbi, void *buf, u32 *blkaddr,
+> >  	int ret, type;
+> >  
+> >  	if (c.zoned_model != F2FS_ZONED_HM)
+> > -		return dev_write_block(buf, old_blkaddr);
+> > +		return dev_write_block(buf, old_blkaddr, WRITE_LIFE_NONE);
+> >  
+> >  	/* update sit bitmap & valid_blocks && se->type for old block*/
+> >  	se = get_seg_entry(sbi, GET_SEGNO(sbi, old_blkaddr));
+> > @@ -784,7 +793,7 @@ int update_block(struct f2fs_sb_info *sbi, void *buf, u32 *blkaddr,
+> >  		ASSERT(0);
+> >  	}
+> >  
+> > -	ret = dev_write_block(buf, new_blkaddr);
+> > +	ret = dev_write_block(buf, new_blkaddr, f2fs_io_type_to_rw_hint(type));
+> >  	ASSERT(ret >= 0);
+> >  
+> >  	*blkaddr = new_blkaddr;
+> > diff --git a/fsck/xattr.c b/fsck/xattr.c
+> > index 241e339..6373c06 100644
+> > --- a/fsck/xattr.c
+> > +++ b/fsck/xattr.c
+> > @@ -95,6 +95,7 @@ void write_all_xattrs(struct f2fs_sb_info *sbi,
+> >  	u64 inline_size = inline_xattr_size(&inode->i);
+> >  	int ret;
+> >  	bool xattrblk_alloced = false;
+> > +	struct seg_entry *se;
+> >  
+> >  	memcpy(inline_xattr_addr(&inode->i), txattr_addr, inline_size);
+> >  
+> > @@ -126,8 +127,9 @@ void write_all_xattrs(struct f2fs_sb_info *sbi,
+> >  	xattr_addr = (void *)xattr_node;
+> >  	memcpy(xattr_addr, txattr_addr + inline_size,
+> >  			F2FS_BLKSIZE - sizeof(struct node_footer));
+> > -
+> > -	ret = xattrblk_alloced ? dev_write_block(xattr_node, blkaddr) :
+> > +	se = get_seg_entry(sbi, GET_SEGNO(sbi, blkaddr));
+> > +	ret = xattrblk_alloced ? dev_write_block(xattr_node, blkaddr,
+> > +					f2fs_io_type_to_rw_hint(se->type)) :
+> >  		update_block(sbi, xattr_node, &blkaddr, NULL);
+> >  
+> >  free_xattr_node:
+> > diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+> > index 15a1c82..d1c656d 100644
+> > --- a/include/f2fs_fs.h
+> > +++ b/include/f2fs_fs.h
+> > @@ -60,6 +60,19 @@
+> >  #include <linux/blkzoned.h>
+> >  #endif
+> >  
+> > +#ifdef HAVE_LINUX_RW_HINT_H
+> > +#include <linux/rw_hint.h>
+> > +#else
+> > +enum rw_hint {
+> > +	WRITE_LIFE_NOT_SET	= 0,
+> > +	WRITE_LIFE_NONE,
+> > +	WRITE_LIFE_SHORT,
+> > +	WRITE_LIFE_MEDIUM,
+> > +	WRITE_LIFE_LONG,
+> > +	WRITE_LIFE_EXTREME
+> > +};
+> > +#endif
+> > +
+> >  #ifdef HAVE_LIBSELINUX
+> >  #include <selinux/selinux.h>
+> >  #include <selinux/label.h>
+> > @@ -1520,6 +1533,8 @@ struct f2fs_configuration {
+> >  	time_t fixed_time;
+> >  	int roll_forward;
+> >  	bool need_fsync;
+> > +	bool need_whint;
+> > +	int whint;
+> >  
+> >  	/* mkfs parameters */
+> >  	int fake_seed;
+> > @@ -1581,7 +1596,7 @@ extern unsigned int addrs_per_page(struct f2fs_inode *, bool);
+> >  extern unsigned int f2fs_max_file_offset(struct f2fs_inode *);
+> >  extern __u32 f2fs_inode_chksum(struct f2fs_node *);
+> >  extern __u32 f2fs_checkpoint_chksum(struct f2fs_checkpoint *);
+> > -extern int write_inode(struct f2fs_node *, u64);
+> > +extern int write_inode(struct f2fs_node *, u64, enum rw_hint);
+> >  
+> >  extern int get_bits_in_byte(unsigned char n);
+> >  extern int test_and_set_bit_le(u32, u8 *);
+> > @@ -1618,15 +1633,16 @@ extern int dev_readahead(__u64, size_t);
+> >  #else
+> >  extern int dev_readahead(__u64, size_t UNUSED(len));
+> >  #endif
+> > -extern int dev_write(void *, __u64, size_t);
+> > -extern int dev_write_block(void *, __u64);
+> > +extern enum rw_hint f2fs_io_type_to_rw_hint(int);
+> > +extern int dev_write(void *, __u64, size_t, enum rw_hint);
+> > +extern int dev_write_block(void *, __u64, enum rw_hint);
+> >  extern int dev_write_dump(void *, __u64, size_t);
+> >  #if !defined(__MINGW32__)
+> >  extern int dev_write_symlink(char *, size_t);
+> >  #endif
+> >  /* All bytes in the buffer must be 0 use dev_fill(). */
+> > -extern int dev_fill(void *, __u64, size_t);
+> > -extern int dev_fill_block(void *, __u64);
+> > +extern int dev_fill(void *, __u64, size_t, enum rw_hint);
+> > +extern int dev_fill_block(void *, __u64, enum rw_hint);
+> >  
+> >  extern int dev_read_block(void *, __u64);
+> >  extern int dev_reada_block(__u64);
+> > diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+> > index 1e0f422..ecd22d4 100644
+> > --- a/lib/libf2fs.c
+> > +++ b/lib/libf2fs.c
+> > @@ -603,12 +603,12 @@ __u32 f2fs_checkpoint_chksum(struct f2fs_checkpoint *cp)
+> >  	return chksum;
+> >  }
+> >  
+> > -int write_inode(struct f2fs_node *inode, u64 blkaddr)
+> > +int write_inode(struct f2fs_node *inode, u64 blkaddr, enum rw_hint whint)
+> >  {
+> >  	if (c.feature & F2FS_FEATURE_INODE_CHKSUM)
+> >  		inode->i.i_inode_checksum =
+> >  			cpu_to_le32(f2fs_inode_chksum(inode));
+> > -	return dev_write_block(inode, blkaddr);
+> > +	return dev_write_block(inode, blkaddr, whint);
+> >  }
+> >  
+> >  /*
+> > @@ -1005,7 +1005,7 @@ int get_device_info(int i)
+> >  #endif
+> >  
+> >  	if (!c.sparse_mode) {
+> > -		if (dev->zoned_model == F2FS_ZONED_HM && c.func == FSCK)
+> > +		if (dev->zoned_model == F2FS_ZONED_HM)
+> >  			flags |= O_DSYNC;
+> >  
+> >  		if (S_ISBLK(stat_buf->st_mode) &&
+> > diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c
+> > index f39367a..c40d826 100644
+> > --- a/lib/libf2fs_io.c
+> > +++ b/lib/libf2fs_io.c
+> > @@ -39,6 +39,11 @@
+> >  #include <inttypes.h>
+> >  #include "f2fs_fs.h"
+> >  
+> > +#ifdef HAVE_LINUX_FCNTL_H
+> > +#define HAVE_ARCH_STRUCT_FLOCK
+> > +#include <linux/fcntl.h>
+> > +#endif
+> > +
+> >  struct f2fs_configuration c;
+> >  
+> >  #ifdef HAVE_SPARSE_SPARSE_H
+> > @@ -553,11 +558,86 @@ int dev_readahead(__u64 offset, size_t UNUSED(len))
+> >  	return 0;
+> >  #endif
+> >  }
+> > +/*
+> > + * Copied from fs/f2fs/segment.c
+> > + */
+> > +/*
+> > + * This returns write hints for each segment type. This hints will be
+> > + * passed down to block layer as below by default.
+> > + *
+> > + * User                  F2FS                     Block
+> > + * ----                  ----                     -----
+> > + *                       META                     WRITE_LIFE_NONE|REQ_META
+> > + *                       HOT_NODE                 WRITE_LIFE_NONE
+> > + *                       WARM_NODE                WRITE_LIFE_MEDIUM
+> > + *                       COLD_NODE                WRITE_LIFE_LONG
+> > + * ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
+> > + * extension list        "                        "
+> > + *
+> > + * -- buffered io
+> > + *                       COLD_DATA                WRITE_LIFE_EXTREME
+> > + *                       HOT_DATA                 WRITE_LIFE_SHORT
+> > + *                       WARM_DATA                WRITE_LIFE_NOT_SET
+> > + *
+> > + * -- direct io
+> > + * WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
+> > + * WRITE_LIFE_SHORT      HOT_DATA                 WRITE_LIFE_SHORT
+> > + * WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_NOT_SET
+> > + * WRITE_LIFE_NONE       "                        WRITE_LIFE_NONE
+> > + * WRITE_LIFE_MEDIUM     "                        WRITE_LIFE_MEDIUM
+> > + * WRITE_LIFE_LONG       "                        WRITE_LIFE_LONG
+> > + */
+> > +enum rw_hint f2fs_io_type_to_rw_hint(int seg_type)
+> > +{
+> > +	switch (seg_type) {
+> > +	case CURSEG_WARM_DATA:
+> > +		return WRITE_LIFE_NOT_SET;
+> > +	case CURSEG_HOT_DATA:
+> > +		return WRITE_LIFE_SHORT;
+> > +	case CURSEG_COLD_DATA:
+> > +		return WRITE_LIFE_EXTREME;
+> > +	case CURSEG_WARM_NODE:
+> > +		return WRITE_LIFE_MEDIUM;
+> > +	case CURSEG_HOT_NODE:
+> > +		return WRITE_LIFE_NONE;
+> > +	case CURSEG_COLD_NODE:
+> > +		return WRITE_LIFE_LONG;
+> > +	default:
+> > +		return WRITE_LIFE_NONE;
+> > +	}
+> > +}
+> >  
+> > -int dev_write(void *buf, __u64 offset, size_t len)
+> > +static int __dev_write(void *buf, __u64 offset, size_t len, enum rw_hint whint)
+> >  {
+> > +	bool set_whint = (c.need_whint && (c.whint != whint));
+> >  	int fd;
+> >  
+> > +	fd = __get_device_fd(&offset);
+> > +	if (fd < 0)
+> > +		return fd;
+> > +
+> > +	if (lseek(fd, (off_t)offset, SEEK_SET) < 0)
+> > +		return -1;
+> > +
+> > +	if (set_whint) {
+> > +		u64 hint = whint;
+> > +		int ret;
+> > +
+> > +		ret = fcntl(fd, F_SET_RW_HINT, &hint);
+> > +		if (ret != -1)
+> > +			c.whint = whint;
+> > +	}
+> > +
+> > +	if (write(fd, buf, len) < 0)
+> > +		return -1;
+> > +
+> > +	c.need_fsync = true;
+> > +
+> > +	return 0;
+> > +}
+> > +
+> > +int dev_write(void *buf, __u64 offset, size_t len, enum rw_hint whint)
+> > +{
+> >  	if (c.dry_run)
+> >  		return 0;
+> >  
+> > @@ -572,21 +652,12 @@ int dev_write(void *buf, __u64 offset, size_t len)
+> >  	if (dcache_update_cache(buf, offset, len) < 0)
+> >  		return -1;
+> >  
+> > -	fd = __get_device_fd(&offset);
+> > -	if (fd < 0)
+> > -		return fd;
+> > -
+> > -	if (lseek(fd, (off_t)offset, SEEK_SET) < 0)
+> > -		return -1;
+> > -	if (write(fd, buf, len) < 0)
+> > -		return -1;
+> > -	c.need_fsync = true;
+> > -	return 0;
+> > +	return __dev_write(buf, offset, len, whint);
+> >  }
+> >  
+> > -int dev_write_block(void *buf, __u64 blk_addr)
+> > +int dev_write_block(void *buf, __u64 blk_addr, enum rw_hint whint)
+> >  {
+> > -	return dev_write(buf, blk_addr << F2FS_BLKSIZE_BITS, F2FS_BLKSIZE);
+> > +	return dev_write(buf, blk_addr << F2FS_BLKSIZE_BITS, F2FS_BLKSIZE, whint);
+> >  }
+> >  
+> >  int dev_write_dump(void *buf, __u64 offset, size_t len)
+> > @@ -608,32 +679,22 @@ int dev_write_symlink(char *buf, size_t len)
+> >  }
+> >  #endif
+> >  
+> > -int dev_fill(void *buf, __u64 offset, size_t len)
+> > +int dev_fill(void *buf, __u64 offset, size_t len, enum rw_hint whint)
+> >  {
+> > -	int fd;
+> > -
+> >  	if (c.sparse_mode)
+> >  		return sparse_write_zeroed_blk(offset / F2FS_BLKSIZE,
+> >  						len / F2FS_BLKSIZE);
+> >  
+> > -	fd = __get_device_fd(&offset);
+> > -	if (fd < 0)
+> > -		return fd;
+> > -
+> >  	/* Only allow fill to zero */
+> >  	if (*((__u8*)buf))
+> >  		return -1;
+> > -	if (lseek(fd, (off_t)offset, SEEK_SET) < 0)
+> > -		return -1;
+> > -	if (write(fd, buf, len) < 0)
+> > -		return -1;
+> > -	c.need_fsync = true;
+> > -	return 0;
+> > +
+> > +	return __dev_write(buf, offset, len, whint);
+> >  }
+> >  
+> > -int dev_fill_block(void *buf, __u64 blk_addr)
+> > +int dev_fill_block(void *buf, __u64 blk_addr, enum rw_hint whint)
+> >  {
+> > -	return dev_fill(buf, blk_addr << F2FS_BLKSIZE_BITS, F2FS_BLKSIZE);
+> > +	return dev_fill(buf, blk_addr << F2FS_BLKSIZE_BITS, F2FS_BLKSIZE, whint);
+> >  }
+> >  
+> >  int dev_read_block(void *buf, __u64 blk_addr)
+> > diff --git a/man/defrag.f2fs.8 b/man/defrag.f2fs.8
+> > index 34113de..fcbe3bc 100644
+> > --- a/man/defrag.f2fs.8
+> > +++ b/man/defrag.f2fs.8
+> > @@ -18,6 +18,9 @@ defrag.f2fs \- relocate blocks in a given area to the specified region
+> >  .I target block address
+> >  ]
+> >  [
+> > +.B \-H
+> > +]
+> > +[
+> >  .B \-i
+> >  .I direction
+> >  ]
+> > @@ -53,6 +56,9 @@ Specify the number of blocks to move.
+> >  .BI \-t " target block address"
+> >  Specify the destination block address.
+> >  .TP
+> > +.BI \-H
+> > +Specify support write hint.
+> > +.TP
+> >  .BI \-i " direction"
+> >  Set the direction to left. If it is not set, the direction becomes right
+> >  by default.
+> > diff --git a/man/fsck.f2fs.8 b/man/fsck.f2fs.8
+> > index aff4ff2..e39a846 100644
+> > --- a/man/fsck.f2fs.8
+> > +++ b/man/fsck.f2fs.8
+> > @@ -14,6 +14,9 @@ fsck.f2fs \- check a Linux F2FS file system
+> >  .I enable force fix
+> >  ]
+> >  [
+> > +.B \-H
+> > +]
+> > +[
+> >  .B \-M
+> >  .I show file map
+> >  ]
+> > @@ -48,6 +51,9 @@ module. It is disabled by default.
+> >  .BI \-f " enable force fix"
+> >  Enable to fix all the inconsistency in the partition.
+> >  .TP
+> > +.BI \-H
+> > +Specify support write hint.
+> > +.TP
+> >  .BI \-M " show files map"
+> >  Enable to show all the filenames and inode numbers stored in the image
+> >  .TP
+> > diff --git a/man/mkfs.f2fs.8 b/man/mkfs.f2fs.8
+> > index 1f0c724..de885be 100644
+> > --- a/man/mkfs.f2fs.8
+> > +++ b/man/mkfs.f2fs.8
+> > @@ -31,6 +31,9 @@ mkfs.f2fs \- create an F2FS file system
+> >  .I default-options
+> >  ]
+> >  [
+> > +.B \-H
+> > +]
+> > +[
+> >  .B \-i
+> >  ]
+> >  [
+> > @@ -152,6 +155,9 @@ The following values are supported:
+> >  Use default options for Android having "-d1 -f -w 4096 -R 0:0 -O encrypt -O project_quota,extra_attr,{quota} -O verity".
+> >  .RE
+> >  .TP
+> > +.BI \-H
+> > +Specify support write hint.
+> > +.TP
+> >  .BI \-i
+> >  Enable extended node bitmap.
+> >  .TP
+> > diff --git a/man/resize.f2fs.8 b/man/resize.f2fs.8
+> > index 3288760..d41ad79 100644
+> > --- a/man/resize.f2fs.8
+> > +++ b/man/resize.f2fs.8
+> > @@ -18,6 +18,9 @@ resize.f2fs \- resize filesystem size
+> >  .I overprovision-ratio-percentage
+> >  ]
+> >  [
+> > +.B \-H
+> > +]
+> > +[
+> >  .B \-i
+> >  ]
+> >  [
+> > @@ -53,6 +56,9 @@ Specify the percentage of the volume that will be used as overprovision area.
+> >  This area is hidden to users, and utilized by F2FS cleaner. If not specified, the
+> >  best number will be assigned automatically according to the partition size.
+> >  .TP
+> > +.BI \-H
+> > +Specify support write hint.
+> > +.TP
+> >  .BI \-i
+> >  Enable extended node bitmap.
+> >  .TP
+> > diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+> > index 247a836..8960b71 100644
+> > --- a/mkfs/f2fs_format.c
+> > +++ b/mkfs/f2fs_format.c
+> > @@ -640,7 +640,7 @@ static int f2fs_init_sit_area(void)
+> >  
+> >  	DBG(1, "\tFilling sit area at offset 0x%08"PRIx64"\n", sit_seg_addr);
+> >  	for (index = 0; index < (get_sb(segment_count_sit) / 2); index++) {
+> > -		if (dev_fill(zero_buf, sit_seg_addr, seg_size)) {
+> > +		if (dev_fill(zero_buf, sit_seg_addr, seg_size, WRITE_LIFE_NONE)) {
+> >  			MSG(1, "\tError: While zeroing out the sit area "
+> >  					"on disk!!!\n");
+> >  			free(zero_buf);
+> > @@ -674,7 +674,7 @@ static int f2fs_init_nat_area(void)
+> >  
+> >  	DBG(1, "\tFilling nat area at offset 0x%08"PRIx64"\n", nat_seg_addr);
+> >  	for (index = 0; index < get_sb(segment_count_nat) / 2; index++) {
+> > -		if (dev_fill(nat_buf, nat_seg_addr, seg_size)) {
+> > +		if (dev_fill(nat_buf, nat_seg_addr, seg_size, WRITE_LIFE_NONE)) {
+> >  			MSG(1, "\tError: While zeroing out the nat area "
+> >  					"on disk!!!\n");
+> >  			free(nat_buf);
+> > @@ -855,14 +855,14 @@ static int f2fs_write_check_point_pack(void)
+> >  
+> >  	DBG(1, "\tWriting main segments, cp at offset 0x%08"PRIx64"\n",
+> >  						cp_seg_blk);
+> > -	if (dev_write_block(cp, cp_seg_blk)) {
+> > +	if (dev_write_block(cp, cp_seg_blk, WRITE_LIFE_NONE)) {
+> >  		MSG(1, "\tError: While writing the cp to disk!!!\n");
+> >  		goto free_cp_payload;
+> >  	}
+> >  
+> >  	for (i = 0; i < get_sb(cp_payload); i++) {
+> >  		cp_seg_blk++;
+> > -		if (dev_fill_block(cp_payload, cp_seg_blk)) {
+> > +		if (dev_fill_block(cp_payload, cp_seg_blk, WRITE_LIFE_NONE)) {
+> >  			MSG(1, "\tError: While zeroing out the sit bitmap area "
+> >  					"on disk!!!\n");
+> >  			goto free_cp_payload;
+> > @@ -943,7 +943,7 @@ static int f2fs_write_check_point_pack(void)
+> >  	cp_seg_blk++;
+> >  	DBG(1, "\tWriting Segment summary for HOT/WARM/COLD_DATA, at offset 0x%08"PRIx64"\n",
+> >  			cp_seg_blk);
+> > -	if (dev_write_block(sum_compact, cp_seg_blk)) {
+> > +	if (dev_write_block(sum_compact, cp_seg_blk, WRITE_LIFE_NONE)) {
+> >  		MSG(1, "\tError: While writing the sum_blk to disk!!!\n");
+> >  		goto free_cp_payload;
+> >  	}
+> > @@ -957,7 +957,7 @@ static int f2fs_write_check_point_pack(void)
+> >  	cp_seg_blk++;
+> >  	DBG(1, "\tWriting Segment summary for HOT_NODE, at offset 0x%08"PRIx64"\n",
+> >  			cp_seg_blk);
+> > -	if (dev_write_block(sum, cp_seg_blk)) {
+> > +	if (dev_write_block(sum, cp_seg_blk, WRITE_LIFE_NONE)) {
+> >  		MSG(1, "\tError: While writing the sum_blk to disk!!!\n");
+> >  		goto free_cp_payload;
+> >  	}
+> > @@ -969,7 +969,7 @@ static int f2fs_write_check_point_pack(void)
+> >  	cp_seg_blk++;
+> >  	DBG(1, "\tWriting Segment summary for WARM_NODE, at offset 0x%08"PRIx64"\n",
+> >  			cp_seg_blk);
+> > -	if (dev_write_block(sum, cp_seg_blk)) {
+> > +	if (dev_write_block(sum, cp_seg_blk, WRITE_LIFE_NONE)) {
+> >  		MSG(1, "\tError: While writing the sum_blk to disk!!!\n");
+> >  		goto free_cp_payload;
+> >  	}
+> > @@ -980,7 +980,7 @@ static int f2fs_write_check_point_pack(void)
+> >  	cp_seg_blk++;
+> >  	DBG(1, "\tWriting Segment summary for COLD_NODE, at offset 0x%08"PRIx64"\n",
+> >  			cp_seg_blk);
+> > -	if (dev_write_block(sum, cp_seg_blk)) {
+> > +	if (dev_write_block(sum, cp_seg_blk, WRITE_LIFE_NONE)) {
+> >  		MSG(1, "\tError: While writing the sum_blk to disk!!!\n");
+> >  		goto free_cp_payload;
+> >  	}
+> > @@ -988,7 +988,7 @@ static int f2fs_write_check_point_pack(void)
+> >  	/* cp page2 */
+> >  	cp_seg_blk++;
+> >  	DBG(1, "\tWriting cp page2, at offset 0x%08"PRIx64"\n", cp_seg_blk);
+> > -	if (dev_write_block(cp, cp_seg_blk)) {
+> > +	if (dev_write_block(cp, cp_seg_blk, WRITE_LIFE_NONE)) {
+> >  		MSG(1, "\tError: While writing the cp to disk!!!\n");
+> >  		goto free_cp_payload;
+> >  	}
+> > @@ -1011,7 +1011,8 @@ static int f2fs_write_check_point_pack(void)
+> >  
+> >  		for (i = 0; i < nat_bits_blocks; i++) {
+> >  			if (dev_write_block(nat_bits + i *
+> > -						F2FS_BLKSIZE, cp_seg_blk + i)) {
+> > +						F2FS_BLKSIZE, cp_seg_blk + i,
+> > +						WRITE_LIFE_NONE)) {
+> >  				MSG(1, "\tError: write NAT bits to disk!!!\n");
+> >  				goto free_cp_payload;
+> >  			}
+> > @@ -1029,14 +1030,14 @@ static int f2fs_write_check_point_pack(void)
+> >  	cp_seg_blk = get_sb(segment0_blkaddr) + c.blks_per_seg;
+> >  	DBG(1, "\tWriting cp page 1 of checkpoint pack 2, at offset 0x%08"PRIx64"\n",
+> >  				cp_seg_blk);
+> > -	if (dev_write_block(cp, cp_seg_blk)) {
+> > +	if (dev_write_block(cp, cp_seg_blk, WRITE_LIFE_NONE)) {
+> >  		MSG(1, "\tError: While writing the cp to disk!!!\n");
+> >  		goto free_cp_payload;
+> >  	}
+> >  
+> >  	for (i = 0; i < get_sb(cp_payload); i++) {
+> >  		cp_seg_blk++;
+> > -		if (dev_fill_block(cp_payload, cp_seg_blk)) {
+> > +		if (dev_fill_block(cp_payload, cp_seg_blk, WRITE_LIFE_NONE)) {
+> >  			MSG(1, "\tError: While zeroing out the sit bitmap area "
+> >  					"on disk!!!\n");
+> >  			goto free_cp_payload;
+> > @@ -1048,7 +1049,7 @@ static int f2fs_write_check_point_pack(void)
+> >  					get_sb(cp_payload) - 1);
+> >  	DBG(1, "\tWriting cp page 2 of checkpoint pack 2, at offset 0x%08"PRIx64"\n",
+> >  				cp_seg_blk);
+> > -	if (dev_write_block(cp, cp_seg_blk)) {
+> > +	if (dev_write_block(cp, cp_seg_blk, WRITE_LIFE_NONE)) {
+> >  		MSG(1, "\tError: While writing the cp to disk!!!\n");
+> >  		goto free_cp_payload;
+> >  	}
+> > @@ -1082,7 +1083,7 @@ static int f2fs_write_super_block(void)
+> >  	memcpy(zero_buff + F2FS_SUPER_OFFSET, sb, sizeof(*sb));
+> >  	DBG(1, "\tWriting super block, at offset 0x%08x\n", 0);
+> >  	for (index = 0; index < 2; index++) {
+> > -		if (dev_write_block(zero_buff, index)) {
+> > +		if (dev_write_block(zero_buff, index, WRITE_LIFE_NONE)) {
+> >  			MSG(1, "\tError: While while writing super_blk "
+> >  					"on disk!!! index : %d\n", index);
+> >  			free(zero_buff);
+> > @@ -1135,7 +1136,8 @@ static int f2fs_discard_obsolete_dnode(void)
+> >  		memset(raw_node, 0, F2FS_BLKSIZE);
+> >  
+> >  		DBG(1, "\tDiscard dnode, at offset 0x%08"PRIx64"\n", offset);
+> > -		if (dev_write_block(raw_node, offset)) {
+> > +		if (dev_write_block(raw_node, offset,
+> > +				    f2fs_io_type_to_rw_hint(CURSEG_WARM_NODE))) {
+> >  			MSG(1, "\tError: While discarding direct node!!!\n");
+> >  			free(raw_node);
+> >  			return -1;
+> > @@ -1256,7 +1258,8 @@ static block_t f2fs_add_default_dentry_root(void)
+> >  	data_blkaddr = alloc_next_free_block(CURSEG_HOT_DATA);
+> >  
+> >  	DBG(1, "\tWriting default dentry root, at offset 0x%x\n", data_blkaddr);
+> > -	if (dev_write_block(dent_blk, data_blkaddr)) {
+> > +	if (dev_write_block(dent_blk, data_blkaddr,
+> > +			    f2fs_io_type_to_rw_hint(CURSEG_HOT_DATA))) {
+> >  		MSG(1, "\tError: While writing the dentry_blk to disk!!!\n");
+> >  		free(dent_blk);
+> >  		return 0;
+> > @@ -1301,7 +1304,8 @@ static int f2fs_write_root_inode(void)
+> >  	F2FS_NODE_FOOTER(raw_node)->next_blkaddr = cpu_to_le32(node_blkaddr + 1);
+> >  
+> >  	DBG(1, "\tWriting root inode (hot node), offset 0x%x\n", node_blkaddr);
+> > -	if (write_inode(raw_node, node_blkaddr) < 0) {
+> > +	if (write_inode(raw_node, node_blkaddr,
+> > +			f2fs_io_type_to_rw_hint(CURSEG_HOT_NODE)) < 0) {
+> >  		MSG(1, "\tError: While writing the raw_node to disk!!!\n");
+> >  		free(raw_node);
+> >  		return -1;
+> > @@ -1377,7 +1381,8 @@ static int f2fs_write_default_quota(int qtype, __le32 raw_id)
+> >  	for (i = 0; i < QUOTA_DATA; i++) {
+> >  		blkaddr = alloc_next_free_block(CURSEG_HOT_DATA);
+> >  
+> > -		if (dev_write_block(filebuf + i * F2FS_BLKSIZE, blkaddr)) {
+> > +		if (dev_write_block(filebuf + i * F2FS_BLKSIZE, blkaddr,
+> > +				    f2fs_io_type_to_rw_hint(CURSEG_HOT_DATA))) {
+> >  			MSG(1, "\tError: While writing the quota_blk to disk!!!\n");
+> >  			free(filebuf);
+> >  			return 0;
+> > @@ -1439,7 +1444,8 @@ static int f2fs_write_qf_inode(int qtype)
+> >  					cpu_to_le32(data_blkaddr + i);
+> >  
+> >  	DBG(1, "\tWriting quota inode (hot node), offset 0x%x\n", node_blkaddr);
+> > -	if (write_inode(raw_node, node_blkaddr) < 0) {
+> > +	if (write_inode(raw_node, node_blkaddr,
+> > +			f2fs_io_type_to_rw_hint(CURSEG_HOT_NODE)) < 0) {
+> >  		MSG(1, "\tError: While writing the raw_node to disk!!!\n");
+> >  		free(raw_node);
+> >  		return -1;
+> > @@ -1476,7 +1482,7 @@ static int f2fs_update_nat_default(void)
+> >  
+> >  	DBG(1, "\tWriting nat root, at offset 0x%08"PRIx64"\n",
+> >  					nat_seg_blk_offset);
+> > -	if (dev_write_block(nat_blk, nat_seg_blk_offset)) {
+> > +	if (dev_write_block(nat_blk, nat_seg_blk_offset, WRITE_LIFE_NONE)) {
+> >  		MSG(1, "\tError: While writing the nat_blk set0 to disk!\n");
+> >  		free(nat_blk);
+> >  		return -1;
+> > @@ -1516,7 +1522,8 @@ static block_t f2fs_add_default_dentry_lpf(void)
+> >  
+> >  	DBG(1, "\tWriting default dentry lost+found, at offset 0x%x\n",
+> >  							data_blkaddr);
+> > -	if (dev_write_block(dent_blk, data_blkaddr)) {
+> > +	if (dev_write_block(dent_blk, data_blkaddr,
+> > +			    f2fs_io_type_to_rw_hint(CURSEG_HOT_DATA))) {
+> >  		MSG(1, "\tError While writing the dentry_blk to disk!!!\n");
+> >  		free(dent_blk);
+> >  		return 0;
+> > @@ -1563,7 +1570,8 @@ static int f2fs_write_lpf_inode(void)
+> >  
+> >  	DBG(1, "\tWriting lost+found inode (hot node), offset 0x%x\n",
+> >  								node_blkaddr);
+> > -	if (write_inode(raw_node, node_blkaddr) < 0) {
+> > +	if (write_inode(raw_node, node_blkaddr,
+> > +			f2fs_io_type_to_rw_hint(CURSEG_HOT_NODE)) < 0) {
+> >  		MSG(1, "\tError: While writing the raw_node to disk!!!\n");
+> >  		err = -1;
+> >  		goto exit;
+> > diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+> > index c98e73c..d9cdd61 100644
+> > --- a/mkfs/f2fs_format_main.c
+> > +++ b/mkfs/f2fs_format_main.c
+> > @@ -56,6 +56,7 @@ static void mkfs_usage()
+> >  	MSG(0, "  -E [hot file ext list] e.g. \"db\"\n");
+> >  	MSG(0, "  -f force overwrite of the existing filesystem\n");
+> >  	MSG(0, "  -g add default options\n");
+> > +	MSG(0, "  -H support write hint\n");
+> >  	MSG(0, "  -i extended node bitmap, node ratio is 20%% by default\n");
+> >  	MSG(0, "  -l label\n");
+> >  	MSG(0, "  -U uuid\n");
+> > @@ -173,7 +174,7 @@ static void add_default_options(void)
+> >  
+> >  static void f2fs_parse_options(int argc, char *argv[])
+> >  {
+> > -	static const char *option_string = "qa:b:c:C:d:e:E:g:hil:mo:O:rR:s:S:z:t:T:U:Vfw:Z:";
+> > +	static const char *option_string = "qa:b:c:C:d:e:E:g:hHil:mo:O:rR:s:S:z:t:T:U:Vfw:Z:";
+> >  	static const struct option long_opts[] = {
+> >  		{ .name = "help", .has_arg = 0, .flag = NULL, .val = 'h' },
+> >  		{ .name = NULL, .has_arg = 0, .flag = NULL, .val = 0 }
+> > @@ -228,6 +229,10 @@ static void f2fs_parse_options(int argc, char *argv[])
+> >  		case 'h':
+> >  			mkfs_usage();
+> >  			break;
+> > +		case 'H':
+> > +			c.need_whint = true;
+> > +			c.whint = WRITE_LIFE_NOT_SET;
+> > +			break;
+> >  		case 'i':
+> >  			c.large_nat_bitmap = 1;
+> >  			break;
+> > @@ -475,7 +480,7 @@ int main(int argc, char *argv[])
+> >  		}
+> >  		/* wipe out other FS magics mostly first 4MB space */
+> >  		for (i = 0; i < 1024; i++)
+> > -			if (dev_fill_block(zero_buf, i))
+> > +			if (dev_fill_block(zero_buf, i, WRITE_LIFE_NONE))
+> >  				break;
+> >  		free(zero_buf);
+> >  		if (i != 1024) {
+> > -- 
+> > 2.25.1
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
