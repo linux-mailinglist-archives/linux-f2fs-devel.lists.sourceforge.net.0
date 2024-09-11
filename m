@@ -2,105 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98574974816
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Sep 2024 04:12:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CD48974819
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Sep 2024 04:12:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1soCq7-0005cQ-C1;
-	Wed, 11 Sep 2024 02:12:16 +0000
+	id 1soCqK-0000mL-Qg;
+	Wed, 11 Sep 2024 02:12:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3cvzgZgkbAC0bhiTJUUNaJYYRM.PXXPUNdbNaLXWcNWc.LXV@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1soCq4-0005cJ-Sn for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Sep 2024 02:12:13 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <chao@kernel.org>) id 1soCqJ-0000m8-KQ
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 11 Sep 2024 02:12:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VAb6PrucaF3wYrRP+7jKeLaHRcrUdHKeMrEXsjelCv4=; b=RIAA1NKhIpyvgAjzAQtdN8dRuK
- zkeByvUEcGtB+1P3/lnqu8kTH19LqM909UA9Gy0tYvg1FpF0sudoa5gK4pAHtxzxy0UE0QO913Fxl
- OVPmCcBF75aTiuZ5XyERFanX8zUQB9RkYfILMDeTEG+RdBYA3MgzbIUshtTJmBEmA1js=;
+ bh=px2AqrtuFotZ5t2D08oL2CvFg1X2zjNGPYD434j0fCU=; b=OQT9MYvtqOCfO+OJOXKlluF+RR
+ U4lbnOaZKw3QRAXPmsPiPar5Wl67rSUxpGAWjRuNCFtljsVCVS0nISn0uHkN2KznzGxxgVuzRpscV
+ 3GHilfsum5MGnKlTfPhrFbqDkKhmR2F+qfHMz3rdcHkiF3IRNDRPmFuyXNVv0TaR3+VU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=VAb6PrucaF3wYrRP+7jKeLaHRcrUdHKeMrEXsjelCv4=; b=N
- +H08XUTZArd77dWaNE2jBp+JEM4toN//nugz5aioVecTxAO8iROQCLID1GDmDQOAYIdFaF+Be23cP
- f56DPjyaeYMIDwpsk6IE6hZhGtqa5a3eBKWcGYgh7veeaHEmUy8RAwYjkoAMm8Hy9bctPGbv6FoHP
- jrdiueK6PLN4XqwM=;
-Received: from mail-io1-f69.google.com ([209.85.166.69])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=px2AqrtuFotZ5t2D08oL2CvFg1X2zjNGPYD434j0fCU=; b=lDc1kFUAawYA0hQ08IpTtsaJbh
+ Uu1WOH3uRwtJ/DEomTULe2QE5QDGAxW7FYaBgG7cnSNvqsoAJqizH62WpzLZrknwu4RKUz4CeF7Tl
+ u4kFeWXvZ6xJcA6yx2dBFHTX8McOg/r4W4shmzCOLFFxolAYwDAtRPIaZKXwV7GJajCM=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1soCq4-0004rU-RU for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Sep 2024 02:12:13 +0000
-Received: by mail-io1-f69.google.com with SMTP id
- ca18e2360f4ac-82a678fbd0dso197102939f.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 10 Sep 2024 19:12:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726020722; x=1726625522;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VAb6PrucaF3wYrRP+7jKeLaHRcrUdHKeMrEXsjelCv4=;
- b=nVBR8AHBG0kAEVkdLvoLPDOHouWH8iAYtscunW3cAK4ADkkhNHPpCNZv6VCqRNJ9Ge
- TUdzoEVqoBYM0DjTxtdjjZSqAbFJnNFErx9mn3D4X/0pxBhQxV2S59tdZTML9hAUrndP
- yHrQTL/e40rsHz+EBOFgfX0Qj02L8Rq4JBs9hRlbT38AwzlZnn7FUyt4xBP189ciw+YH
- pubcvvI0Dvwyfn5KTGYXaSmeX2yPKFpIkTciex1+jlQh03dvZCZUugrXg1jFszSD5db5
- uFbO3tg9M7VWoV7pT8xm/wWI/1VkIxYFiIoU1VuQOGy/bnh/67zCYMmZR9cw2/kfBiFX
- IF8A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWtlfZJjmxU4dJHuklpKju3IiMg54mVUXuB4iyInDxiGuM5rWGqZcEEtXkieNx/SnbDuNgkWbH7XQg6f0tbBWv9@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwHFy94bwA23QZ+fbYZ1OInn5YrgR2Aw2UYzzjZ5faw2qIMpZyg
- WaEIGOOTtX2K8YN5SUuHY4AP5CuJs1Gl4oZmHbv+HPu1aW+NuxmeE/y9vBwhgc9V0FjtNr52CjC
- ZC8HFiZ7CNixlXRRU5Z8Gy9vzlIxoHpzNPYakjHqLpMu4jUUfNJxeILw=
-X-Google-Smtp-Source: AGHT+IG8OnDxIx8zhynaeNrH9ZWBpxv85d4tUS50j5wGR/JJmwJu4dQH1js3aFIsJEZk1GEdjvAevNdyH7TIe6YwroIGKCIDGD5Y
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1soCqI-0004sC-VO for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 11 Sep 2024 02:12:27 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 92C3CA43FD2;
+ Wed, 11 Sep 2024 02:12:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D334C4CEC3;
+ Wed, 11 Sep 2024 02:12:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1726020740;
+ bh=LWsEjwaiPxkwFQ8eWGD/xC9gv87fzsLoBKo3pGlhlW0=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=bb6Zsm5OiQY9UHDz+tVXaxD/TWPeAQdJk2UuaQ11anAaRngLckFJOn1OW2NaXKY42
+ qH4sSDiT1GK4toPHFA5lqYl+cSIt8YXDE5MSegJMOE3YQd+Y9wkCW91Xl7xLEVDkio
+ H2U44WWgD4Z9BGXB3oaNL0ygW8qK2MguCzZSMHDX1dOEgLEEHMa/k43iJePGbyljWP
+ kzI5kJy55nBGp0iUJqqO5mCDbn5A/eE2WyJqQSuG80wYxgXig/gYXu1zW5gBB1e/83
+ c/k3soc0qyRn9QMzR1LWGQPAyvRBOHvBMxPikHOuruLTh1FltaF7YJJ0tBZvlHBv34
+ i7wJKVB9dejJQ==
+Message-ID: <14cfeb5f-3fa4-44b1-85f7-2eca124a882c@kernel.org>
+Date: Wed, 11 Sep 2024 10:12:17 +0800
 MIME-Version: 1.0
-X-Received: by 2002:a92:cd84:0:b0:3a0:57b5:72e6 with SMTP id
- e9e14a558f8ab-3a057b57348mr49780205ab.7.1726020722026; Tue, 10 Sep 2024
- 19:12:02 -0700 (PDT)
-Date: Tue, 10 Sep 2024 19:12:02 -0700
-In-Reply-To: <2fba030d-bd24-4a3d-852e-e10a484feaaf@kernel.org>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <00000000000002f8e20621ce84e3@google.com>
-From: syzbot <syzbot+20d7e439f76bbbd863a7@syzkaller.appspotmail.com>
-To: brauner@kernel.org, chao@kernel.org, jack@suse.cz, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
- linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com, 
- viro@zeniv.linux.org.uk
-X-Spam-Score: 3.1 (+++)
+User-Agent: Mozilla Thunderbird
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20240909221946.2004046-1-daeho43@gmail.com>
+ <20240909221946.2004046-4-daeho43@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20240909221946.2004046-4-daeho43@gmail.com>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot has tested the proposed patch and the reproducer
- did not trigger any issue: Reported-by:
- syzbot+20d7e439f76bbbd863a7@syzkaller.appspotmail.com
- Tested-by: syzbot+20d7e439f76bbbd863a7@syzkaller.appspotmail.com 
- Content analysis details:   (3.1 points, 6.0 required)
+ Content preview:  On 2024/9/10 6:19, Daeho Jeong wrote: > From: Daeho Jeong
+ <daehojeong@google.com> > > Need bigger BG GC migration window granularity
+ when free section is > running low. > > Signed-off-by: Daeho Jeong [...] 
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.69 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.69 listed in wl.mailspike.net]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- 2.5 SORTED_RECIPS          Recipient list is sorted by address
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1soCq4-0004rU-RU
-Subject: Re: [f2fs-dev] [syzbot] [f2fs?] WARNING in rcu_sync_dtor
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1soCqI-0004sC-VO
+Subject: Re: [f2fs-dev] [PATCH v2 4/7] f2fs: increase BG GC migration window
+ granularity when boosted for zoned devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,28 +101,24 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+On 2024/9/10 6:19, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> Need bigger BG GC migration window granularity when free section is
+> running low.
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
-syzbot has tested the proposed patch and the reproducer did not trigger any issue:
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-Reported-by: syzbot+20d7e439f76bbbd863a7@syzkaller.appspotmail.com
-Tested-by: syzbot+20d7e439f76bbbd863a7@syzkaller.appspotmail.com
-
-Tested on:
-
-commit:         f3815bfb f2fs: fix to tag STATX_DIOALIGN only if inode..
-git tree:       https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git wip
-console output: https://syzkaller.appspot.com/x/log.txt?x=1319e807980000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=9358cc4a2e37fd30
-dashboard link: https://syzkaller.appspot.com/bug?extid=20d7e439f76bbbd863a7
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-
-Note: no patches were applied.
-Note: testing is done by a robot and is best-effort only.
+Thanks,
 
 
 _______________________________________________
