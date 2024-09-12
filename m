@@ -2,128 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 489DC976F3F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Sep 2024 19:00:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D2FB9772B5
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Sep 2024 22:30:42 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sonAw-0005ee-MK;
-	Thu, 12 Sep 2024 17:00:11 +0000
+	id 1soqSX-0003zh-JA;
+	Thu, 12 Sep 2024 20:30:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1sonAv-0005eX-HE
+ (envelope-from <bvanassche@acm.org>) id 1soqSV-0003zb-Rk
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Sep 2024 17:00:10 +0000
+ Thu, 12 Sep 2024 20:30:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NIVKZWUip3GLsx70oKEFoxX4dCo2eU2HKBSzLiNYHak=; b=R1d6r0fppw/NcPu/YlQDHESjF6
- yCXvGc+GnstVFQYucnSlsgSIoAjbxA+10ciR07ltylhFL+cr2OqfzHe0E/nY7N6r3/gE+p4lW+Q/j
- RxvPN0DPKNAjOH1CdB49dmw9wjTINxJIzHb1BIb7uLwjsOq0f+QJvT5EvkwnmchgznOw=;
+ bh=JoPUxbKNemTOQj/Zcm/S7ujkVqb72FxciPCp7L8rpDU=; b=WnHtgVRTA4GyQ6jj8jnuv4QLDF
+ mlYoNt7pv7SdNRtKpuQsylIOfQ3G0e9JASCVuwSTNmAENC+ClnwFMJ07PDK1gf2IM06EGON6eDJVn
+ 31mF1VVtgotg7xjuvZxwfXOjFaJYQCD81oQUgnEFxhcj9tR+aFuyVhu3gx5RcjLnHiAg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=NIVKZWUip3GLsx70oKEFoxX4dCo2eU2HKBSzLiNYHak=; b=f
- anpzBPFs5gxhKLEgop3Nw9hN4YXYpDuZ2cHHeDYYHbAql+3ljPWHyeir4qb3lPYW1H5Z34/gM3t09
- S356B43rg8Mdd88B3cWbMk39RbmBJ9VU3CQd8kUrPbITlGyo67TqpRZQaP0j6LGTBBLJiuQbmjYxv
- CJllQfrw/l1FOq6M=;
-Received: from mail-pl1-f182.google.com ([209.85.214.182])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=JoPUxbKNemTOQj/Zcm/S7ujkVqb72FxciPCp7L8rpDU=; b=gTT+zM3fxCJyqTmLDV+dApzjFj
+ mut2GK57mtUTC9+ovdE6W/72Khw5qPRM3mh+mAOtSVA0coIwByao20UIADoW11JhakyIzdStRZo9m
+ GjFcU1tfbAo+vG/cTc0CeiPjlxfFvln4ZUxTy63+EUrLF4bf0ZAv9VyvmLK4+oyVLGq8=;
+Received: from 008.lax.mailroute.net ([199.89.1.11])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1sonAv-0002Zv-JT for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Sep 2024 17:00:10 +0000
-Received: by mail-pl1-f182.google.com with SMTP id
- d9443c01a7336-2053525bd90so34115ad.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 12 Sep 2024 10:00:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726160404; x=1726765204; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NIVKZWUip3GLsx70oKEFoxX4dCo2eU2HKBSzLiNYHak=;
- b=AJCIbXTIQbsbHZdFQilksewkafwCR13CmytuiViabKgQXD/XW3AqKqmt0dL1uDyU9r
- BGe8wO9M5syaR40wL8a/l/AWjCcRvXAaGF/D+CWgJELWrZKNhQuwBYLMUV8jtXyB+tWC
- kenS+mykZl6+e13WaY3pvH0YY6FNC05KR6IvNMcOqE/4w5JYZHpH55CpoHGexWHBaQze
- KDfp/EjFvZwQt9Eu+kWEg51iJpugLOOHVzmvQSnwdTR+CtuMq0D3XX0r1+vfa94SoDI7
- e1GL+cUtkobDYB5ZF4KkbifzvHpNclOg8+I355+iuUXP0Cwuh7XW9McrBxJTo7fBIAey
- TFug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726160404; x=1726765204;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NIVKZWUip3GLsx70oKEFoxX4dCo2eU2HKBSzLiNYHak=;
- b=KPKh8FsM6ctl5PhjG6Q6uN/eDFqQstM2NxZMjroMI3Ey5fg2G/UFhfO3kq4afNXGmT
- ovIDEMp7e9wbXW25B7/6gmJfu8xhGbD3vTdyCSRo22ng1LobVB3EgOvKDGxegP9Iy/zV
- YbGGDOHlLR95KRgGptbjnCRV/4WbelGPuisXNGJ26q9fZUmuMpSzXvXTm28Jg4SMGKg7
- wYIhar6Yyji3xdhH2HlL3ym0/GBZwD/J3E/MM3RaoVAi4wuONw/jae2RGx+mLk4JiGty
- /eUokxg4pqi/AEmEGOj+EDtSYuKZE/bosfQTWKJjM8BPTQ/ZmCDTZAdMnmQhe9rtkXtw
- c8Jg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVeXi4/vZM5w2rDaJTcKmdhJa5FqV/tvIL3/WWuYGkks3Tf0SNXBfx2cS0PVIKkZgRWdXgnk8Wy2l3QbZH9QatN@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yxvl81R0y98FvK7adehkQZQGMzRRPndMYHKWzICrauDskAyZ5W+
- VyIERQ8plWM+la4pSwn7poXGwf5iQyLWTmiqS1uOh/MmGlOzJ9C/
-X-Google-Smtp-Source: AGHT+IE02vl34aJqOrFB6OC4nqdE9Xan48RKJeN7El4vbOPifqBDLjurvNnyBh3MHNswUt5tytY8sw==
-X-Received: by 2002:a17:903:41d1:b0:206:d6ac:854f with SMTP id
- d9443c01a7336-2076e3157aemr52560915ad.3.1726160403556; 
- Thu, 12 Sep 2024 10:00:03 -0700 (PDT)
-Received: from daehojeong-desktop.mtv.corp.google.com
- ([2a00:79e0:2e14:7:a5d8:3c37:f48b:3b20])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2076b01a093sm16309775ad.276.2024.09.12.10.00.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 10:00:03 -0700 (PDT)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Thu, 12 Sep 2024 09:59:58 -0700
-Message-ID: <20240912165958.386947-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.46.0.662.g92d0881bb0-goog
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1soqSU-0003iD-Pk for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 12 Sep 2024 20:30:32 +0000
+Received: from localhost (localhost [127.0.0.1])
+ by 008.lax.mailroute.net (Postfix) with ESMTP id 4X4Tb03tzXz6ClSpy;
+ Thu, 12 Sep 2024 20:30:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
+ content-transfer-encoding:content-type:content-type:in-reply-to
+ :from:from:content-language:references:subject:subject
+ :user-agent:mime-version:date:date:message-id:received:received;
+ s=mr01; t=1726173015; x=1728765016; bh=JoPUxbKNemTOQj/Zcm/S7ujk
+ Vqb72FxciPCp7L8rpDU=; b=hH6eRhNtR22x34qVLVhBhAs9zKC5jX5xUull0HKd
+ cmgxk/UNnJpKcxNkOIS17H1Xfp7QcWx2voAJSOzuTvSJx0cgMJUC5tX1dK1gEy8z
+ OO778DUdPMTBViGFqSys0NpdDVtclnF1VD2ZjcqJ/sC+92pEzv8dNzsIIFFLdykd
+ +xsBSJnXpae75RDkwsn423y6Ahy4jNvODjnLhKsJElbcD9NhsXuH84irg2/gNejC
+ siDnbqIQQn/WkqYdUhuq6eP+mdkDv0OeISTR+4Y5SC0wGgqhUMLgcun2Yzv9kmuy
+ kzYxWZsFBAFm5IdevMHuC93m7imVwEcbPuTSBVuc/lFBvg==
+X-Virus-Scanned: by MailRoute
+Received: from 008.lax.mailroute.net ([127.0.0.1])
+ by localhost (008.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
+ id WSfMN2Lf5--p; Thu, 12 Sep 2024 20:30:15 +0000 (UTC)
+Received: from [192.168.51.14] (c-73-231-117-72.hsd1.ca.comcast.net
+ [73.231.117.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: bvanassche@acm.org)
+ by 008.lax.mailroute.net (Postfix) with ESMTPSA id 4X4TZq34P1z6ClY9y;
+ Thu, 12 Sep 2024 20:30:11 +0000 (UTC)
+Message-ID: <fe2ae1b7-7c77-49e1-ace0-50e937f2c32c@acm.org>
+Date: Thu, 12 Sep 2024 13:30:10 -0700
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+User-Agent: Mozilla Thunderbird
+To: Kanchan Joshi <joshi.k@samsung.com>, Christoph Hellwig <hch@lst.de>
+References: <20240910150200.6589-1-joshi.k@samsung.com>
+ <CGME20240910151044epcas5p37f61bb85ccf8b3eb875e77c3fc260c51@epcas5p3.samsung.com>
+ <20240910150200.6589-2-joshi.k@samsung.com> <20240912125347.GA28068@lst.de>
+ <0baddb91-b292-db90-8110-37fa5a19af01@samsung.com>
+Content-Language: en-US
+In-Reply-To: <0baddb91-b292-db90-8110-37fa5a19af01@samsung.com>
+X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Daeho Jeong We need to migrate data blocks even though
- it is full to secure space for zoned device file pinning. Signed-off-by:
- Daeho Jeong Fixes: 9703d69d9d15 ("f2fs: support file pinning for zoned
- devices")
- --- v2: change to fit on a new prototype of do_garbage_collect ---
- fs/f2fs/gc.c | 3 +-- 1 file changed [...] 
- Content analysis details:   (0.1 points, 6.0 required)
+ Content preview:  On 9/12/24 8:50 AM, Kanchan Joshi wrote: > Wherever hint is
+ being used in generic way, u8 data type is being used. Has it been considered
+ to introduce a new union and to use that as the type of 'hint' instead of
+ 'u8'? Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.182 listed in list.dnswl.org]
+ -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
+ low trust [199.89.1.11 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [daeho43[at]gmail.com]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [daeho43[at]gmail.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.182 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1sonAv-0002Zv-JT
-Subject: [f2fs-dev] [PATCH v2] f2fs: forcibly migrate to secure space for
- zoned device file pinning
+X-Headers-End: 1soqSU-0003iD-Pk
+Subject: Re: [f2fs-dev] [PATCH v5 1/5] fs, block: refactor enum rw_hint
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -135,41 +113,29 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
-Content-Type: text/plain; charset="us-ascii"
+From: Bart Van Assche via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Bart Van Assche <bvanassche@acm.org>
+Cc: axboe@kernel.dk, linux-block@vger.kernel.org, brauner@kernel.org,
+ jack@suse.cz, sagi@grimberg.me, martin.petersen@oracle.com,
+ gost.dev@samsung.com, jlayton@kernel.org, vishak.g@samsung.com,
+ linux-nvme@lists.infradead.org, linux-f2fs-devel@lists.sourceforge.net,
+ James.Bottomley@HansenPartnership.com, linux-fsdevel@vger.kernel.org,
+ chuck.lever@oracle.com, javier.gonz@samsung.com, viro@zeniv.linux.org.uk,
+ linux-scsi@vger.kernel.org, kbusch@kernel.org, jaegeuk@kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+On 9/12/24 8:50 AM, Kanchan Joshi wrote:
+> Wherever hint is being used in generic way, u8 data type is being used.
 
-We need to migrate data blocks even though it is full to secure space
-for zoned device file pinning.
+Has it been considered to introduce a new union and to use that as the
+type of 'hint' instead of 'u8'?
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
-Fixes: 9703d69d9d15 ("f2fs: support file pinning for zoned devices")
----
-v2: change to fit on a new prototype of do_garbage_collect
----
- fs/f2fs/gc.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+Thanks,
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index d3e3104c4492..baa98c3bd667 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -2070,8 +2070,7 @@ int f2fs_gc_range(struct f2fs_sb_info *sbi,
- 			.iroot = RADIX_TREE_INIT(gc_list.iroot, GFP_NOFS),
- 		};
- 
--		do_garbage_collect(sbi, segno, &gc_list, FG_GC,
--						dry_run_sections == 0, false);
-+		do_garbage_collect(sbi, segno, &gc_list, FG_GC, true, false);
- 		put_gc_inode(&gc_list);
- 
- 		if (!dry_run && get_valid_blocks(sbi, segno, true))
--- 
-2.46.0.662.g92d0881bb0-goog
-
+Bart.
 
 
 _______________________________________________
