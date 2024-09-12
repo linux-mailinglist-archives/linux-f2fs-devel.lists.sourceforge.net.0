@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67789976E28
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Sep 2024 17:51:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B79CB976E31
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Sep 2024 17:52:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1som6B-0007vt-0r;
-	Thu, 12 Sep 2024 15:51:10 +0000
+	id 1som77-0001Qg-QU;
+	Thu, 12 Sep 2024 15:52:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <joshi.k@samsung.com>) id 1som69-0007vm-PC
+ (envelope-from <joshi.k@samsung.com>) id 1som75-0001QY-9Z
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Sep 2024 15:51:09 +0000
+ Thu, 12 Sep 2024 15:52:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
  In-Reply-To:From:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=t9VILr0qkYP4rvJKavSsOF6cu9G5TqXZShkha385+XA=; b=mAnYd+qwS7AodnkKokrAAYmCCU
- S9Zqtjc9XRpdvedvAV+2Ae+obBs+4WtPiscodBF+8FMXewnHrfa/vyg6eJ5KY64zilN2hTBbKREHc
- 71t6R/27B6WgemLz7p274zIfKLIs9yCEmrEeIYRdg7AZCJrHO33d8JmTpmxEwLE/MXw0=;
+ bh=ogD3VarmZBqofCaEhBwy37cocHeN78bYb6jQ6Uf7V6o=; b=HCbJ/IcgRERDcfIp7zTHWbr8MT
+ FOx7cWu6d9e9xFKS2srdvMPhoXfO468IFeklVVBQo1lpfXufjGXw3T146NSQBg7qcJpGHdIHbiyJW
+ e+rkH7SefyUahff/Zg3aeo6hIsl8A3/LpRrFSeYj1t73HxOpU+FxcTDSz0MegbioviE0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=References:Content-Type:Content-Transfer-Encoding:In-Reply-To:From:Cc:To:
@@ -31,139 +31,140 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=t9VILr0qkYP4rvJKavSsOF6cu9G5TqXZShkha385+XA=; b=ch5+n3tBafrorki9ZWVFOoS/2V
- c8TahXJuqAIiUQMpFBCu4eVFThn6i2MQxrXnYzoGtZm3mxHMFsRZM93mAjNz0pLKH39Bh30LFVKnb
- InW15hUG+Wz4Hlb/KveqyOkVms6mDsMQFuYdGSg7Yop1JgFkc6A69CfLqhV9Gopqq3aE=;
-Received: from mailout3.samsung.com ([203.254.224.33])
+ bh=ogD3VarmZBqofCaEhBwy37cocHeN78bYb6jQ6Uf7V6o=; b=fA8UflWGZA/nNq5a5QPW0hGWpM
+ Py2hvXAJbT246WHAd+IwaJlT+5MQCXGuLp832/HMFhuX4trVNX93yPGpW48h7PC4GzbDOqZnZ0qnR
+ XnaMvuSJNi6H3I4hQW0WJKB5LypEy4rOKTJ5t03viQqtOhdjTpavEkylPiamGfkC+ewA=;
+Received: from mailout1.samsung.com ([203.254.224.24])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1som65-0007aV-SK for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Sep 2024 15:51:09 +0000
-Received: from epcas5p2.samsung.com (unknown [182.195.41.40])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20240912155053epoutp03b4411f06b2626db87f1dcd1496db6948~0ifeeKyaL0560505605epoutp036
+ id 1som73-0007dz-Dx for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 12 Sep 2024 15:52:06 +0000
+Received: from epcas5p1.samsung.com (unknown [182.195.41.39])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20240912155153epoutp013dfeeac569945a557f72088b3b40ce7f~0igV-P_yB1603216032epoutp01r
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 12 Sep 2024 15:50:53 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20240912155053epoutp03b4411f06b2626db87f1dcd1496db6948~0ifeeKyaL0560505605epoutp036
+ Thu, 12 Sep 2024 15:51:53 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20240912155153epoutp013dfeeac569945a557f72088b3b40ce7f~0igV-P_yB1603216032epoutp01r
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1726156253;
- bh=t9VILr0qkYP4rvJKavSsOF6cu9G5TqXZShkha385+XA=;
+ s=mail20170921; t=1726156313;
+ bh=ogD3VarmZBqofCaEhBwy37cocHeN78bYb6jQ6Uf7V6o=;
  h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=cX6fpqCdzPNuJGL7dr3izSpgxqHcAzY/DhTXjK1OxHiBa5quc3tYpqEGI6xdezVZ2
- BXHbIXeZwikjN7W6ze37q0ZUHI78N30v8qxJqshW84Fsnz6WEwTAk33VP7TZXhZlSi
- lyvA+KcAM1vGCFWd1L4fvmW4oVgt7HHSllFSeL0I=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas5p2.samsung.com (KnoxPortal) with ESMTP id
- 20240912155052epcas5p2b02dfa87f8f14aebc50237e7e689f9d1~0ifdLYGGZ0517205172epcas5p23;
- Thu, 12 Sep 2024 15:50:52 +0000 (GMT)
-Received: from epsmges5p2new.samsung.com (unknown [182.195.38.174]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4X4MNV5JVsz4x9Pp; Thu, 12 Sep
- 2024 15:50:50 +0000 (GMT)
-Received: from epcas5p1.samsung.com ( [182.195.41.39]) by
- epsmges5p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- A1.28.09743.ADD03E66; Fri, 13 Sep 2024 00:50:50 +0900 (KST)
+ b=CNy+vh8OlfAUQU6STxylZt3rOtST0gX7ocpkvXt9QFUBTNhJy8bxHRJElGmGABruf
+ HDeZkmkVkUTjX6d7UUq2Y5BafYfGhlkZVDWJbjkQAeta3dcaOxL2dSe+OCWtYbJQhX
+ zk83T9FA2dKm6sAUqBRC42B9iRUDRPvqZkywoo+U=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas5p4.samsung.com (KnoxPortal) with ESMTP id
+ 20240912155152epcas5p47c5b3d0ebbc56d4fd78e412f672a032e~0igU3thP41863618636epcas5p48;
+ Thu, 12 Sep 2024 15:51:52 +0000 (GMT)
+Received: from epsmges5p1new.samsung.com (unknown [182.195.38.178]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4X4MPg0hHXz4x9Pt; Thu, 12 Sep
+ 2024 15:51:51 +0000 (GMT)
+Received: from epcas5p2.samsung.com ( [182.195.41.40]) by
+ epsmges5p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 81.FB.09640.61E03E66; Fri, 13 Sep 2024 00:51:50 +0900 (KST)
 Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
  epcas5p4.samsung.com (KnoxPortal) with ESMTPA id
- 20240912155049epcas5p479bf103d5407f12aeeb936b3f167e9f0~0ifazBgj10514805148epcas5p4F;
- Thu, 12 Sep 2024 15:50:49 +0000 (GMT)
-Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
+ 20240912155150epcas5p47d1adaf8b89a69cdebdac6ebfad00663~0igTZuNAW0514805148epcas5p46;
+ Thu, 12 Sep 2024 15:51:50 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
  epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240912155049epsmtrp23139a0c48ea642236cda3a4145f6eb0e~0ifav_tYp3192931929epsmtrp2M;
- Thu, 12 Sep 2024 15:50:49 +0000 (GMT)
-X-AuditID: b6c32a4a-14fff7000000260f-37-66e30dda6919
+ 20240912155150epsmtrp2ee57b040836e07263dc1e25e003501ec~0igTYzFHe3192931929epsmtrp2E;
+ Thu, 12 Sep 2024 15:51:50 +0000 (GMT)
+X-AuditID: b6c32a49-a57ff700000025a8-2d-66e30e164cb8
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- EE.82.07567.9DD03E66; Fri, 13 Sep 2024 00:50:49 +0900 (KST)
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 49.30.08456.61E03E66; Fri, 13 Sep 2024 00:51:50 +0900 (KST)
 Received: from [107.122.11.51] (unknown [107.122.11.51]) by
  epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20240912155046epsmtip24aa2bc591086ec837e8ed050a50d5f8e~0ifX9cWQI0255602556epsmtip2G;
- Thu, 12 Sep 2024 15:50:46 +0000 (GMT)
-Message-ID: <0baddb91-b292-db90-8110-37fa5a19af01@samsung.com>
-Date: Thu, 12 Sep 2024 21:20:45 +0530
+ 20240912155147epsmtip2d84c7ce9c50e2549b6ff95529e30eb1f~0igQkXeS-0142101421epsmtip2g;
+ Thu, 12 Sep 2024 15:51:47 +0000 (GMT)
+Message-ID: <fccc2e54-a854-d6af-845b-dac27ed736f3@samsung.com>
+Date: Thu, 12 Sep 2024 21:21:46 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0)
  Gecko/20100101 Thunderbird/91.8.1
 Content-Language: en-US
 To: Christoph Hellwig <hch@lst.de>
 From: Kanchan Joshi <joshi.k@samsung.com>
-In-Reply-To: <20240912125347.GA28068@lst.de>
-X-Brightmail-Tracker: H4sIAAAAAAAAA02TfUxTZxTG9957aS8kdXcFwivZZrlTQTZKi6VeEBjJcN5Np4jZFmVLuaMX
- aCht0w/ZjBskgKGoKKgwOxzgB8S6iALZQEZUPtaxQcAxEVAQpR2MBqZAEEFkLa0b//3Ok+fk
- Oee8eXGUn8P1xxUqPatVMUqS44X92LopMGSQN5oiut23kbo8dJxD2VunAVXy+BlKLQ+NIdTA
- zUaEunS5HaG+K81BKGuNCaWuHcep0fszXOpZlZlLFbf0Aap58G3qj3PbqZ+bOzCqvMrGpY7c
- beBQ1ZYXCHXF/g9GdS9ZPKhuUxk31pfu/XMH3T18DaNLin/j0L1dBrrWbOTQdRey6KaKGYRu
- Gsjm0E9sgxhdWG8GdGdFG5eeqX2TrrVOIvG8/elRaSwjZ7UCVpWslitUqdHkjr2y92ThUpE4
- RBxBbSEFKiaDjSbjdsaHvK9QOtYlBQcYpcEhxTM6HRkaE6VVG/SsIE2t00eTrEau1Eg0Qh2T
- oTOoUoUqVh8pFonCwh3GpPQ0W20uqrHxv2zpOgqygWVNAfDEISGB53sauQXAC+cTTQDWHW3m
- uIppAH/vs6CuYg7Awvx27suW5X6b29UMYP5cj9s1CaC5/QeO08UjYuCt6iuYkzFiA6ysykdd
- +muw44x1RfclvoALd8qAk72JKNh4a2pFRwk/OGgtR5zsQ5DQNtEFnAEosYTCpafDHgUAxznE
- Jthz0uBET+Id2DvOc7Wugz9Nlq3MA4lqTzg1XwlcU8fBAesd9wbecMJS72Z/ODPVzHFxOhx5
- NIK5+BBsqCv0cPG7MPt5/0os6oituR7qyloDjy1aEacMCR7MP8x3uQPgcLHN3ekHH357wc00
- vH3K4r7bgOPUpzuRE0BgWnUV06rtTavWMf2fXAEwM1jLanQZqawuXBOmYjP/e/BkdUYtWPkN
- wR82gIcjj4UtAMFBC4A4SvrwijmPUvg8OfPVQVarlmkNSlbXAsIdz1OE+vsmqx3fSaWXiSUR
- IolUKpVEbJaKST+ePe+snE+kMno2nWU1rPZlH4J7+mcjca//mrjrg7sBV0sbx7tHSxPjPj4T
- nPdRrnGroCzSVgr1MsV4EGGUXxVOH9h9pFWgNWbVbPlkyCJ74Jt2b2GrUhK559Bfg/t4opIF
- I79oMXR+KkeiqGybTNjWF2T9rE1emeKLc7GqVwIvbesEJbOLARNTn+/p+zvzSdUimZXofXbX
- PSYmlF/3VCgNWz99/vnO2frskJ7tJ2PKuftj18/98r3fWxUB+xKz1moP3ohdTBjJU9JxgEzw
- 6ig9Nt+RflqROXyxJLloNvxoUMoy63P9hr0+6hv7uY1gcndu+c26dUmbHwSOMRfDuvtP3R/b
- G2vGhEnaT0NyJja8anzja3vB4TnVCxLTpTHiYFSrY/4FJg+SLJYEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrPIsWRmVeSWpSXmKPExsWy7bCSvO5N3sdpBodbdSxW3+1ns3h9+BOj
+In-Reply-To: <20240912125438.GB28068@lst.de>
+X-Brightmail-Tracker: H4sIAAAAAAAAA01TfVBUdRTt997b3QfT6nOR+MFIwJuhERTYjWV9ECCVxlM0mSH/URlc4AnE
+ 8nZnPyocGtEUjApkG1A2iA9JAxN1AQFxR0IawkJADNu1BYJdaUDAYKhAwfYDi//OvXPOPXPu
+ nYujguM8LzyDVTNKViojua7Y9dsBm4NeWTd+RFg8E0ldMhdxqanbc4AqfbKIUs/NEwhl7GhD
+ qLpLPyDUV2c/QSjLFR1KXSvCqfHf5nnU4oV6HqXtHAKUwbSFulcTS9009GBU5QUrj/rsQSuX
+ uti9glANU7MY1bfczaH6dOW8GHd68H4c3Td8DaNLtXe49GCvhtbXf8qlG2uP0e1V8wjdbszl
+ 0n9aTRhd2FQP6J+runj0vP5VWm+ZRuL5BzIj0xlpKqP0ZdgUeWoGmxZFxiUkvZ0UJhGKgkTh
+ 1DbSl5VmMVHkjj3xQe9kyGxxSd8PpDKNrRUvVanIkOhIpVyjZnzT5Sp1FMkoUmUKsSJYJc1S
+ adi0YJZRR4iEwtfDbMTDmeknGwIUVt5H+t5naC6o5hYAFxwSYlhZO8grAK64gGgHcOREKeIs
+ 5gDsNz7gOou/AOwaesp7IdEZHwI7FhAGAJdrQpykaQAHLlsdJD4RDX+sbkHsGCP8oWmkbrW/
+ AfaUWTA7dieS4dIv5Y5BbsQueLVxzMFBCQ9oslQ6tBsJElone4HdACWWUbj89zCnAOA4lwiA
+ /V9q7BwXYitc+acAdWp9YMt0OWrnQ+KiC+w1HOfa+ZDYAfXfxjkDuMHJ7qbVMF5wfsawuotM
+ ODo2ijlxDmxtLOQ48XaY++xXhy1qs71yI8RptQ5+8dSCOKfz4ek8gZPtB4e11lWlB/z9XO0q
+ pqFxtonjXJURQL1Jj50Bvro1W9GtSa9bk0b3v3MVwOqBJ6NQZaUxqjCFiGU+/O/cKfIsPXD8
+ QuCuVmAefRLcCRAcdAKIo+RGvpY7dkTAT5VmH2WU8iSlRsaoOkGY7TzFqJd7itz2TKw6SSQO
+ F4olEok4PFQiIj34U6cqUgVEmlTNZDKMglG+0CG4i1cuAvivbX0TnWx4DDdlJ9yqmI1+NBXl
+ 5z1bUhPZdrqL2bLz5cd+wUbikODz/cnJOa4l1ftUwUXrEzbFzPhZxAtLe9Th+/due7fOXzt+
+ tVmi9jfl9gzclEx/fzivXbg5dsTvbIqr4nqJt6Rvn3l7hyC0LCJ74jvOuPxcnMXzjcDmkqEN
+ zWdMC/7dRxPdgoofecdZ5u4Wxp7M3+vD9ssvG/ntS4d29xx8P0+WOj15ntMvXq4zo4kR+MM6
+ 08pBICXRtxYm/D0X23D+iXt3hgzCzJjn39ydrch5yTNRW3nsVsd5n6qPzX/caJMJftodeyp0
+ pqj5PfY+ZmbTvi7PN2rzD7QMlK0PIDFVulQUiCpV0n8BX9Ejc5QEAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrHIsWRmVeSWpSXmKPExsWy7bCSvK4Y3+M0gz37pC1W3+1ns3h9+BOj
  xbQPP5kt/t99zmRx88BOJouVq48yWcye3sxk8WT9LGaLjf0cFo/vfGa3+LlsFbvFpEPXGC32
  3tK2uLTI3WLP3pMsFvOXPWW36L6+g81i+fF/TBbrXr9nsTj/9zirxflZc9gdRD0uX/H2OH9v
  I4vHtEmn2Dwuny312LSqk81j85J6j90LPjN57L7ZwObx8ektFo++LasYPc4sOMLu8XmTnMem
- J2+ZAnijuGxSUnMyy1KL9O0SuDKebmphLngqVHHobA9jA+Nxvi5GTg4JAROJ/zeesnUxcnEI
- CexmlPjfu5QFIiEu0XztBzuELSyx8t9zdoii14wSN18+YQRJ8ArYSRxcvg6sgUVAVWLhsg5m
- iLigxMmZT8DiogJJEnvuNzKB2MICNhI7D74DizMDLbj1ZD5YXERASeLpq7OMIAuYBf4yS6z+
- /IsRYttNRoldbc2sXYwcHGwCmhIXJpeCmJwCOhKXX/BCzDGT6NraxQhhy0tsfzuHeQKj0Cwk
- Z8xCsm4WkpZZSFoWMLKsYpRMLSjOTc9NNiwwzEst1ytOzC0uzUvXS87P3cQITgNaGjsY783/
- p3eIkYmD8RCjBAezkgjvJLZHaUK8KYmVValF+fFFpTmpxYcYpTlYlMR5DWfMThESSE8sSc1O
- TS1ILYLJMnFwSjUwHVjE7LytTphBw0U05cuv2WIPGvduCW5am75ap1vshFYge9hbk6QHzoeO
- +07KTUrxtclccf/DZ515itV596cYP311/XNT+K8X9WG5r6N+3zGrEjmZpJjurrxsQd3V7823
- 0xQ0JDwP8mhfsF2rtNyP57/+LYZTrIan1e3fzuMO4+LetK3zeDajyukFS19OrxeY1z9tpljN
- 7Pg4C+bJWXySx+9wZsx8Hs1wYq6ayaQ70XJ/vyZxrbSPlPtofs5h8wJ1Buvl0UJX5G77u78L
- vtqzICup4GJ/euUmwRWmNlMdLWRuKq/5OUl89eLfgqcKF3o5vOqR8reUfmM8ozVnzhV18d3b
- +3Y7v9oStWM5u94lJZbijERDLeai4kQASkYcrXIDAAA=
-X-CMS-MailID: 20240912155049epcas5p479bf103d5407f12aeeb936b3f167e9f0
+ J2+ZAnijuGxSUnMyy1KL9O0SuDJa1mkWPGWv2HT2D3MD40K2LkZODgkBE4lZN28zdjFycQgJ
+ 7GaUOPrhIQtEQlyi+doPdghbWGLlv+dgtpDAa0aJKVNdQGxeATuJEwu3M4HYLAKqErfur2SH
+ iAtKnJz5BGyOqECSxJ77jWA1wgKeEhs2PwKrYQaaf+vJfLC4iICSxNNXZ8GOYBb4yyyx+vMv
+ qItuMkr8OrSPuYuRg4NNQFPiwuRSkAZOAR2Jfz+6mCEGmUl0be1ihLDlJba/ncM8gVFoFpI7
+ ZiHZNwtJyywkLQsYWVYxSqYWFOem5xYbFhjlpZbrFSfmFpfmpesl5+duYgQnAS2tHYx7Vn3Q
+ O8TIxMF4iFGCg1lJhHcS26M0Id6UxMqq1KL8+KLSnNTiQ4zSHCxK4rzfXvemCAmkJ5akZqem
+ FqQWwWSZODilGphkraZsaaoo/81ur8Jzn333hJZlD1qVKv1PKz+Oj/V2Y3nzTWXq4eoOofly
+ H5+IXuLNvv7YwFdDSK7ptg6nv5f41rcv7DZaxT3rtvp1c+mSiluO7VPLWj+taOu53++lVdPf
+ NM31/tSPP3dkF85VicvrNA1LYprxM4zbfNGB78wzft+1Ndkm7nF/+7bj3Mtidf913k1p77/L
+ 0Xzlycv8rbY/LzU1/LjK6GxganWo7cZzvrd9aR/CBTXupG1XnNe21cr5+m3Hay0eerxhD4un
+ zhStfGdeeOTEDMEvv80mzmfgkdFmfniOf/mPNDO7lwlvbq06vLdJ4YDLF3VT5tVfPRa9dTRb
+ d+uygPPUU0wxAlOVWIozEg21mIuKEwHcVuI6cQMAAA==
+X-CMS-MailID: 20240912155150epcas5p47d1adaf8b89a69cdebdac6ebfad00663
 X-Msg-Generator: CA
 CMS-TYPE: 105P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240910151044epcas5p37f61bb85ccf8b3eb875e77c3fc260c51
+X-CMS-RootMailID: 20240910151048epcas5p3c610d63022362ec5fcc6fc362ad2fb9f
 References: <20240910150200.6589-1-joshi.k@samsung.com>
- <CGME20240910151044epcas5p37f61bb85ccf8b3eb875e77c3fc260c51@epcas5p3.samsung.com>
- <20240910150200.6589-2-joshi.k@samsung.com> <20240912125347.GA28068@lst.de>
+ <CGME20240910151048epcas5p3c610d63022362ec5fcc6fc362ad2fb9f@epcas5p3.samsung.com>
+ <20240910150200.6589-3-joshi.k@samsung.com> <20240912125438.GB28068@lst.de>
 X-Spam-Score: -4.8 (----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 9/12/2024 6:23 PM, Christoph Hellwig wrote: > On Tue, Sep
- 10, 2024 at 08:31:56PM +0530, Kanchan Joshi wrote: >> Rename enum rw_hint
- to rw_lifetime_hint. >> Change i_write_hint (in inode), bi_write_ [...] 
+ Content preview:  On 9/12/2024 6:24 PM, Christoph Hellwig wrote: > On Tue, Sep
+ 10, 2024 at 08:31:57PM +0530, Kanchan Joshi wrote: >> F_GET/SET_RW_HINT fcntl
+ handlers query/set write life hints. >> Rename the handlers/h [...] 
  Content analysis details:   (-4.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [203.254.224.33 listed in list.dnswl.org]
+ medium trust [203.254.224.24 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.254.224.33 listed in wl.mailspike.net]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ [203.254.224.24 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -2.2 NICE_REPLY_A           Looks like a legit reply (A)
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1som65-0007aV-SK
-Subject: Re: [f2fs-dev] [PATCH v5 1/5] fs, block: refactor enum rw_hint
+X-Headers-End: 1som73-0007dz-Dx
+Subject: Re: [f2fs-dev] [PATCH v5 2/5] fcntl: rename rw_hint_* to
+ rw_lifetime_hint_*
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -187,61 +188,32 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 9/12/2024 6:23 PM, Christoph Hellwig wrote:
-> On Tue, Sep 10, 2024 at 08:31:56PM +0530, Kanchan Joshi wrote:
->> Rename enum rw_hint to rw_lifetime_hint.
->> Change i_write_hint (in inode), bi_write_hint(in bio), and write_hint
->> (in request) to use u8 data-type rather than this enum.
+On 9/12/2024 6:24 PM, Christoph Hellwig wrote:
+> On Tue, Sep 10, 2024 at 08:31:57PM +0530, Kanchan Joshi wrote:
+>> F_GET/SET_RW_HINT fcntl handlers query/set write life hints.
+>> Rename the handlers/helpers to be explicit that write life hints are
+>> being handled.
 >>
->> This is in preparation to introduce a new write hint type.
+>> This is in preparation to introduce a new interface that supports more
+>> than one type of write hint.
 > 
-> The rationale seems a bit sparse.  Why is it renamed?  Because the
-> name fits better, because you need the same for something else?
+> Wouldn't it make more sense to stick with the name as exposed in the
+> uapi? 
+
+uapi used
+for opcode: F_GET/SET_RW_HINT
+for values: RWH_WRITE_LIFE_*.
+
+The kernel handlers were using the name rw_hint_* (e.g., rw_hint_valid, 
+fcntl_get/set_rw_hint etc.). Since rw_hint is generic term, it seemed 
+clearer to call a spade a spade (e.g. rw_lifetime_hint_valid, 
+fcntl_get/set_lifetime_hint).
+
+  The same minda applies to the previous patch - in fact IFF we
+> decide to do the rename I'd probably expect both parts to go together.
 > 
 
-Right, new name fits better. Because 'enum rw_hint' is a generic name 
-that conveys 'any' hint. This was fine before. But once we start 
-supporting more than one hint type, we need to be specific what 
-hint-type is being handled. More below.
-
->>   static void submit_bh_wbc(blk_opf_t opf, struct buffer_head *bh,
->> -			  enum rw_hint hint, struct writeback_control *wbc);
->> +			  u8 hint, struct writeback_control *wbc);
-> 
-> And moving from the enum to an plain integer seems like a bit of a
-> retrograde step.
-
-This particular enum is hardwired to take 6 temperature-hint values [*].
-But this (and many other) functions act as a simple propagator, which do 
-not have to care whether hint type is lifetime or placement or anything 
-else.
-
-The creator/originator of the hint decides what hint to pass (userspace 
-in this case). And the consumer (driver in this case) decides whether or 
-not it understands the hint that has been passed. The intermediate 
-components/functions only need to pass the hint, regardless of its type, 
-down.
-
-Wherever hint is being used in generic way, u8 data type is being used. 
-  Down the line if a component/function needs to care for a specific 
-type, it can start decoding the passed hint type/value (using the 
-appropriate macro similar to what this series does for SCSI and NVMe).
-
-Overall, this also helps to avoid the churn. Otherwise we duplicate all 
-the propagation code that has been done for temperature hint across the 
-IO stack.
-
-[*]
-enum rw_hint {
-         WRITE_LIFE_NOT_SET      = RWH_WRITE_LIFE_NOT_SET,
-         WRITE_LIFE_NONE         = RWH_WRITE_LIFE_NONE,
-         WRITE_LIFE_SHORT        = RWH_WRITE_LIFE_SHORT,
-         WRITE_LIFE_MEDIUM       = RWH_WRITE_LIFE_MEDIUM,
-         WRITE_LIFE_LONG         = RWH_WRITE_LIFE_LONG,
-         WRITE_LIFE_EXTREME      = RWH_WRITE_LIFE_EXTREME,
-} __packed;
-
-
+Sure. I can merge both the patches if that's what you prefer.
 
 
 _______________________________________________
