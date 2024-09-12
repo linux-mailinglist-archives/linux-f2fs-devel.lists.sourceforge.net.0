@@ -2,91 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7564C976256
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Sep 2024 09:14:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3A8D976A2A
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Sep 2024 15:13:27 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1soe2G-0002Du-Ca;
-	Thu, 12 Sep 2024 07:14:36 +0000
+	id 1sojdS-0004K7-LP;
+	Thu, 12 Sep 2024 13:13:22 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1soe2E-0002Dn-Fv
+ (envelope-from <hch@lst.de>) id 1sojdR-0004K0-9Q
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Sep 2024 07:14:34 +0000
+ Thu, 12 Sep 2024 13:13:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GnOd1Kn77Xp8EZEniHYN06GmSJ+gyPOcYoqS9AtuvQA=; b=UHnwYLmeD2Jue+ZlM6IqT8d1ew
- BdjOin5lBnQT7WB7rqj7nIve8YFy4hoOfvFFTIziOV+wGbyyAMfHgrc8DPplJs01D2YnXB0ZwkS3s
- ozk8sBVmbvBg49jRfwKOnYLUIm1e13L3ce/jnrbqnYm1zWOyI62VKfayP5ktBZ5a+utQ=;
+ bh=8ha6rW27ZIti3ibXL0Tfok2s62J7TAoIUJwlpmmHK2s=; b=mWnw+vFRAdGAGvod6EtbfvERCV
+ G4ut2UR7twNdETS3ALAkQFqHnd5+z6NM2DFskD/H0T9ChFlQpzCcJyDO24QSnQUOU8KofF1Gn9mV/
+ S18qxfLZifMCyA9pLfzr0pxGt9Rm6yt5DcfPSygNRekjBknOeh4GAk8/O6VMF3qB8xRE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=GnOd1Kn77Xp8EZEniHYN06GmSJ+gyPOcYoqS9AtuvQA=; b=SWqtndl3YDNKpY40sss0cVrosw
- LI5sTsUcDPf9rqXDqpvUOdea7SI0ToiPy9YSr3BHsX2HGEHhd3I+YQg/fPDk3t3bR0HUlw2d5ql9d
- 5ESGie6UggkXXOktvODmWN4mP46Ejqi2TsitVFJM7oRzIerrsunNBpq3IcJbNqxOhMlI=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=8ha6rW27ZIti3ibXL0Tfok2s62J7TAoIUJwlpmmHK2s=; b=hSS/odKBHb70wpsyPJT1OCcu+S
+ EPQwKMMBzyiBv3A6TpLu84QL1NEwPtTHY5vmTf7351+hKe6VeTNoneJBlWGjE2OjJGwzawhuVcVyG
+ NYRSu/54WVrILNvxs2y63Xd6eTfbAsY4coH0HHs2KlgHb2KVhFZGM0k7DG+nVZOugQOY=;
+Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1soe2D-0000Go-MB for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Sep 2024 07:14:34 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 2B9D1A4402D;
- Thu, 12 Sep 2024 07:14:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39E1AC4CEC3;
- Thu, 12 Sep 2024 07:14:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1726125267;
- bh=ZA9BLxD+lQ9n6b28gDkrvcFthmnuikCEMekpEbh0DG8=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=Pa+3LdMJCowinybpA2znB7wcPMIXLIrrOvTLqsyo8CAXaDwGitwW2WGTHTFxIvDmS
- 38ikG4e/ucuwUbhydWUy2iqV2G5vgo52cA0ubLsKAsKTdfJxomzXwXTDMg6RQYbq7l
- 2h+CGZ9IBWw/BBU+NY0KhSMl/Fd+j71/+vM288l+lUthkAsu2rgHr03AA0pWnfnKlL
- Ex8w+ICqAD7dvJGy0JOGfKLEUYTE9Gjy9bYKkrApJ2Y7DXneF8EPK9jMu/JthOQV/t
- N0eFQiaF0aMR6/5rKRq6Esg7BlgqNeqjz5GSGO8TC1FNhx2wvyvzNH4u0+WGEoieMb
- a30ABy3GiOtug==
-Message-ID: <679c7dae-91c4-4ad0-a2cb-55dc92b47fd4@kernel.org>
-Date: Thu, 12 Sep 2024 15:14:24 +0800
+ id 1sojdP-0007jc-VW for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 12 Sep 2024 13:13:20 +0000
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 1096E227AAF; Thu, 12 Sep 2024 14:53:48 +0200 (CEST)
+Date: Thu, 12 Sep 2024 14:53:47 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Kanchan Joshi <joshi.k@samsung.com>
+Message-ID: <20240912125347.GA28068@lst.de>
+References: <20240910150200.6589-1-joshi.k@samsung.com>
+ <CGME20240910151044epcas5p37f61bb85ccf8b3eb875e77c3fc260c51@epcas5p3.samsung.com>
+ <20240910150200.6589-2-joshi.k@samsung.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Wu Bo <bo.wu@vivo.com>, linux-kernel@vger.kernel.org
-References: <cover.1726024116.git.bo.wu@vivo.com>
-Content-Language: en-US
-In-Reply-To: <cover.1726024116.git.bo.wu@vivo.com>
-X-Spam-Score: -0.3 (/)
+Content-Disposition: inline
+In-Reply-To: <20240910150200.6589-2-joshi.k@samsung.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/9/11 11:57, Wu Bo wrote: > The inode in F2FS occupies
- an entire 4k block. For many small files, this means > they consume much
- more space than their actual size. Therefore, there is > signific [...] 
- Content analysis details:   (-0.3 points, 6.0 required)
+ Content preview:  On Tue, Sep 10, 2024 at 08:31:56PM +0530,
+ Kanchan Joshi wrote:
+ > Rename enum rw_hint to rw_lifetime_hint. > Change i_write_hint (in inode),
+ bi_write_hint(in bio), and write_hint > (in request) to use [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1soe2D-0000Go-MB
-Subject: Re: [f2fs-dev] [PATCH v2 00/13] f2fs: introduce inline tail
+X-Headers-End: 1sojdP-0007jc-VW
+Subject: Re: [f2fs-dev] [PATCH v5 1/5] fs, block: refactor enum rw_hint
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,119 +81,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Wu Bo <wubo.oduw@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: axboe@kernel.dk, linux-block@vger.kernel.org, brauner@kernel.org,
+ jack@suse.cz, sagi@grimberg.me, martin.petersen@oracle.com,
+ gost.dev@samsung.com, jlayton@kernel.org, vishak.g@samsung.com,
+ linux-nvme@lists.infradead.org, linux-f2fs-devel@lists.sourceforge.net,
+ James.Bottomley@HansenPartnership.com, linux-fsdevel@vger.kernel.org,
+ chuck.lever@oracle.com, javier.gonz@samsung.com, viro@zeniv.linux.org.uk,
+ linux-scsi@vger.kernel.org, kbusch@kernel.org, jaegeuk@kernel.org, hch@lst.de,
+ bvanassche@acm.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/9/11 11:57, Wu Bo wrote:
-> The inode in F2FS occupies an entire 4k block. For many small files, this means
-> they consume much more space than their actual size. Therefore, there is
-> significant potential to better utilize the inode block space.
+On Tue, Sep 10, 2024 at 08:31:56PM +0530, Kanchan Joshi wrote:
+> Rename enum rw_hint to rw_lifetime_hint.
+> Change i_write_hint (in inode), bi_write_hint(in bio), and write_hint
+> (in request) to use u8 data-type rather than this enum.
 > 
-> Currently, F2FS has two features to make use of the inode block space: inline
-> data and inline xattr.
-> 
-> Inline data stores file which size is smaller then 3.5k in inode block. However,
-> for slightly larger small files, there still have much waste.
-> For example, a 5k file requires 3 blocks, totaling 12k of space, which is
-> more than twice the size of the file itself!
-> 
-> Additionally, the end of a file often does not occupy an entire block. If we can
-> store the end of the file data within the inode block, we can save an entire
-> block for the file. This is particularly important for small files.
-> 
-> In fact, the current inline data is a special case of inline tail, and
-> inline tail is an extension of inline data.
-> 
-> To make it simple, inline tail only on small files(<64k). And for larger files,
-> inline tails don't provide any significant benefits.
-> 
-> The layout of an inline tail inode block is following:
-> 
-> | inode block     | 4096 |     inline tail enable    |
-> | --------------- | ---- | --------------------------|
-> | inode info      | 360  |                           |
-> | --------------- | ---- | --------------------------|
-> |                 |      | extra info         | 0~36 |
-> |                 |      | **compact_addr[16] | 64   |
-> | addr table[923] | 3692 | reserved           | 4    |
-> |                 |      | **tail data        |      |
-> |                 |      | inline_xattr       | 200  |
-> | --------------- | ---- | --------------------------|
-> | nid table[5]    | 20   |
-> | node footer     | 24   |
-> 
-> F2fs-tools to support inline tail:
-> https://lore.kernel.org/linux-f2fs-devel/20240903075931.3339584-1-bo.wu@vivo.com
-> 
-> I tested inline tail by copying the source code of Linux 6.9.7. The storage
-> space was reduced by approximately 8%. Additionally, due to the reduced IO, the
-> copy time also reduced by around 10%.
-> 
-> This patch series has been tested with xfstests by running 'kvm-xfstests -c f2fs
-> -g quick' both with and without the patch; no regressions were observed.
-> The test result is:
-> f2fs/default: 583 tests, 6 failures, 213 skipped, 650 seconds
->    Failures: generic/050 generic/064 generic/250 generic/252 generic/563
->        generic/735
->        Totals: 607 tests, 213 skipped, 30 failures, 0 errors, 579s
+> This is in preparation to introduce a new write hint type.
 
-MKFS_OPTIONS  -- -O extra_attr,encrypt,inode_checksum,flexible_inline_xattr,inode_crtime,verity,compression -f /dev/vdc
-MOUNT_OPTIONS -- -o acl,user_xattr -o discard,inline_tail /dev/vdc /mnt/scratch_f2fs
+The rationale seems a bit sparse.  Why is it renamed?  Because the
+name fits better, because you need the same for something else?
 
-Before:
-Failures: generic/042 generic/050 generic/250 generic/252 generic/270 generic/389 generic/563 generic/700 generic/735
-Failed 9 of 746 tests
+>  static void submit_bh_wbc(blk_opf_t opf, struct buffer_head *bh,
+> -			  enum rw_hint hint, struct writeback_control *wbc);
+> +			  u8 hint, struct writeback_control *wbc);
 
-After:
-Failures: generic/042 generic/050 generic/125 generic/250 generic/252 generic/270 generic/389 generic/418 generic/551 generic/563 generic/700 generic/735
-Failed 12 of 746 tests
-
-Failures: f2fs/004
-
-Can you please check failed testcases?
-
-Thanks,
-
-> 
-> ---
-> v2:
-> - fix ARCH=arc build warning
-> 
-> ---
-> Wu Bo (13):
->    f2fs: add inline tail mount option
->    f2fs: add inline tail disk layout definition
->    f2fs: implement inline tail write & truncate
->    f2fs: implement inline tail read & fiemap
->    f2fs: set inline tail flag when create inode
->    f2fs: fix address info has been truncated
->    f2fs: support seek for inline tail
->    f2fs: convert inline tail when inode expand
->    f2fs: fix data loss during inline tail writing
->    f2fs: avoid inlining quota files
->    f2fs: fix inline tail data lost
->    f2fs: convert inline tails to avoid potential issues
->    f2fs: implement inline tail forward recovery
-> 
->   fs/f2fs/data.c     |  93 +++++++++++++++++++++++++-
->   fs/f2fs/f2fs.h     |  46 ++++++++++++-
->   fs/f2fs/file.c     |  85 +++++++++++++++++++++++-
->   fs/f2fs/inline.c   | 159 +++++++++++++++++++++++++++++++++++++++------
->   fs/f2fs/inode.c    |   6 ++
->   fs/f2fs/namei.c    |   3 +
->   fs/f2fs/node.c     |   6 +-
->   fs/f2fs/recovery.c |   9 ++-
->   fs/f2fs/super.c    |  25 +++++++
->   fs/f2fs/verity.c   |   4 ++
->   10 files changed, 409 insertions(+), 27 deletions(-)
-> 
-> 
-> base-commit: 67784a74e258a467225f0e68335df77acd67b7ab
+And moving from the enum to an plain integer seems like a bit of a
+retrograde step.
 
 
 
