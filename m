@@ -2,158 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B644797797E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Sep 2024 09:23:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B90E977993
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Sep 2024 09:25:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sp0eA-0003JE-9P;
-	Fri, 13 Sep 2024 07:23:14 +0000
+	id 1sp0fr-0002u2-UA;
+	Fri, 13 Sep 2024 07:24:59 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <joshi.k@samsung.com>) id 1sp0e8-0003J6-67
+ (envelope-from <lkp@intel.com>) id 1sp0fp-0002tw-Oi
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Sep 2024 07:23:12 +0000
+ Fri, 13 Sep 2024 07:24:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- In-Reply-To:From:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DfqqqIPcXuC33v4cLL0ODxpxiUkP1Rjz2JlXnKLXgh8=; b=mULC9PVChvcAY4ASOzylTbTm3w
- PAGQtD0iEmmk1GHBdezn52t/qufv35YkNvbnOnuVr4utN6bZGaxwvRjQ1F2IRo6KrJWRZoHANIHJP
- kR7kE3kFRxS8XthXSylIg8DU4ge4ozmmDjR9p3n+HrxG7d7IfCHJRuIqvmcy68Onkjew=;
+ bh=ZByVLXIUAVESYR15NEpFrphycW/eW/PwfVFbMCN+tjY=; b=dPwBTrhNkyc5r2XBRt0pjMShrz
+ RBaIfNu+qXaEvrDgcqInmPctmrb38ShBlyNdJGuaSqW+uxRVqKOsrJpcwIr5B8xnZvCljzWTFIkAb
+ 2qSHMD1MmpFP6JIwbTASuymfReaNT8i/yKp6JYV6jlaA2WLJNcgGYQBkIs48hNzYz7R0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:In-Reply-To:From:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DfqqqIPcXuC33v4cLL0ODxpxiUkP1Rjz2JlXnKLXgh8=; b=YbiU0Bg4psvVlLyziC1VXRiNK8
- viPI+jzUzFirUFwvwO1n20geIAk+9BE4l/cJhpeH2XQYYNq+H1tU97hxNJ0YNUYowjGgTNUHc+5Gp
- z/OjnTtt0q1oUUgGIuQPZLBTurEO+PteJGBrqO+Ap6s4idJk00kujjoua1rT4yt9Cjuo=;
-Received: from mailout3.samsung.com ([203.254.224.33])
+ bh=ZByVLXIUAVESYR15NEpFrphycW/eW/PwfVFbMCN+tjY=; b=BO1fhl/dauIe9Z8YOhsoaGiAc2
+ Nf/E1UHcCThsR/Adazd355k73PZUu0wBMfPKSkosM5a+BmPVmEWxYoT9Tp7lq98nt0fWhe49RL9kp
+ xma/+8mgdTVdAKVKAA2ZKdZPVNAWLdznNjVDvtc4ZEmizymDPjIu7SBFjSs9jF+CflBs=;
+Received: from mgamail.intel.com ([198.175.65.12])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sp0e6-0002S1-N6 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Sep 2024 07:23:12 +0000
-Received: from epcas5p1.samsung.com (unknown [182.195.41.39])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20240913072258epoutp03849b6bfa1427ac6e17841236ea3a3b6b~0vNSnBXt33198231982epoutp03y
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 13 Sep 2024 07:22:58 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20240913072258epoutp03849b6bfa1427ac6e17841236ea3a3b6b~0vNSnBXt33198231982epoutp03y
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1726212178;
- bh=DfqqqIPcXuC33v4cLL0ODxpxiUkP1Rjz2JlXnKLXgh8=;
- h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=oaUy9sBVP9dFId5l+KtVJaraEGn+CBmsqZSLSKhaCVPPx5yvvQX4XJSw7hVNzvwDC
- QgfRJ3PeRCHyi04mV0JpO9sUjDd5vXQg1ZuD1R28FC/hozRbnb2GHfRswdL84+Q2pC
- dZqepg0ezTPCzCQO6/6U6HD7356SIMccjvdIdBAY=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas5p3.samsung.com (KnoxPortal) with ESMTP id
- 20240913072258epcas5p397659184e19ff6cb4130a0130e08b500~0vNSDHDvv1522615226epcas5p3i;
- Fri, 13 Sep 2024 07:22:58 +0000 (GMT)
-Received: from epsmges5p1new.samsung.com (unknown [182.195.38.183]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4X4m401fQQz4x9Pt; Fri, 13 Sep
- 2024 07:22:56 +0000 (GMT)
-Received: from epcas5p3.samsung.com ( [182.195.41.41]) by
- epsmges5p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- F9.2C.09640.F48E3E66; Fri, 13 Sep 2024 16:22:56 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas5p4.samsung.com (KnoxPortal) with ESMTPA id
- 20240913072255epcas5p4ffa874219e563fd562003ce2c7ff0d3b~0vNPmRHie1203712037epcas5p4L;
- Fri, 13 Sep 2024 07:22:55 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240913072255epsmtrp23d9b77e732158615fd765343f8ffae55~0vNPlSX6H2729727297epsmtrp2B;
- Fri, 13 Sep 2024 07:22:55 +0000 (GMT)
-X-AuditID: b6c32a49-a57ff700000025a8-ac-66e3e84f6c4b
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- A5.F5.19367.F48E3E66; Fri, 13 Sep 2024 16:22:55 +0900 (KST)
-Received: from [107.122.11.51] (unknown [107.122.11.51]) by
- epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20240913072252epsmtip2556522eb0be364036be534a4f076b144~0vNMvbd2G1221912219epsmtip2y;
- Fri, 13 Sep 2024 07:22:52 +0000 (GMT)
-Message-ID: <ea71bdfd-f0f8-eb61-255d-68ea1e4421f1@samsung.com>
-Date: Fri, 13 Sep 2024 12:52:51 +0530
+ id 1sp0fk-0002VV-Vu for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 13 Sep 2024 07:24:57 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1726212293; x=1757748293;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=cAJ2hc6styUeyvqM7IkmTg7zicHXIvNVTcF+iiLVlH0=;
+ b=EVIE0oCB2dlLFKZcD423zUZSBdrk59un4whsPDr7WouCqSG1ppFAZYg+
+ ZNB8WXCwd3G75F6tZZSwvOEbj05yYN+nRBNWVKQCDhs5g/ylqRnVQtBwa
+ 3Sl7ZsYi+6EmU7WKb6J0vw5WjdFaGE476cl9wZduKHmm8geo7bPQDQe/a
+ Or1E+VZAJyp4x2ZPEKfC+lSHnMdjFB3sw2is9XTQ/gBTL+EQFcAGMRK5q
+ ZaIpPKVAV83Dm9Y5uyhKhoQ7RMGl8luS/jA5AE8g7rfrpOHvbIhLdEoe5
+ CNPs8BaqZp2RCeZ+bSv/k+q6g7GqP4jjFnKAAdmjz+o+pESTvwCV3jY+2 A==;
+X-CSE-ConnectionGUID: xHISaoEqToSAbFOwhWI0Hg==
+X-CSE-MsgGUID: 1qa/0Z8WSqytow8Yr7JjuA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11193"; a="36449460"
+X-IronPort-AV: E=Sophos;i="6.10,225,1719903600"; d="scan'208";a="36449460"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 Sep 2024 00:24:42 -0700
+X-CSE-ConnectionGUID: Ap6loFj6TAau8vbuXS7KOQ==
+X-CSE-MsgGUID: fLxY4fpNQv2k4at0hR2Z6w==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.10,225,1719903600"; d="scan'208";a="72565824"
+Received: from lkp-server01.sh.intel.com (HELO 53e96f405c61) ([10.239.97.150])
+ by fmviesa004.fm.intel.com with ESMTP; 13 Sep 2024 00:24:39 -0700
+Received: from kbuild by 53e96f405c61 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1sp0fV-00068O-2s;
+ Fri, 13 Sep 2024 07:24:37 +0000
+Date: Fri, 13 Sep 2024 15:24:11 +0800
+From: kernel test robot <lkp@intel.com>
+To: Wu Bo <bo.wu@vivo.com>, linux-kernel@vger.kernel.org
+Message-ID: <202409131549.6E5c04Zg-lkp@intel.com>
+References: <57e1dbb2f348ab61cbc82be7161d788a08b5fbed.1726024117.git.bo.wu@vivo.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0)
- Gecko/20100101 Thunderbird/91.8.1
-Content-Language: en-US
-To: Bart Van Assche <bvanassche@acm.org>, Christoph Hellwig <hch@lst.de>
-From: Kanchan Joshi <joshi.k@samsung.com>
-In-Reply-To: <fe2ae1b7-7c77-49e1-ace0-50e937f2c32c@acm.org>
-X-Brightmail-Tracker: H4sIAAAAAAAAA02TfVDTdRzH+z1s+2HN+4US36hwruQEj4fVGF+SBzu9/JloXFJeHrF+sB8D
- B9tuD0KIMdJKtCaRqSyeMo5iEJxAAQLx7FrSAeKIB5koD1EICrs6EaI2RsR/r8/7Ps+f+xCY
- q47jQSTKNYxKTifx2RvwH9q9vX0jp8biA3K+wmDZyDk2nG6fR+CFBwsY/GfkNxQOttSjsLSs
- E4VfXjyJwvFKAwavnCPg2C0bBy6UGDkwp60fgU1DO+CNy3thY5MZh4UlExx49tc6NvzGtIzC
- iun7OOz+28SC3YY8zi43qu/mfqrbegWnLuT8zKb6ftFSVcYsNlVdnEE1FNlQqmFQx6bmJoZw
- Sl9jRKiuog4OZavypKrGZ9BI7hFZSAJDSxgVj5HHKSSJcmkof/8h8W5xoChA4CsIhkF8npxO
- ZkL5eyIifV9NTLKPy+cdo5O0dimSVqv5/mEhKoVWw/ASFGpNKJ9RSpKUQqWfmk5Wa+VSPzmj
- eVkQEPBioN3xXVlCZcEirizFUnXGDlyHmNEzCEEAUgha5u24gXAlGxDwSWc122nMI+CL+UZ0
- zfiu+PxaxP0BX6dej4DMPiPmNGYQMPZ9GecM4kJwyTDw541MzME4uQ30Wkswp/4kMOeO4w52
- I2PBI0se4uBNZAiob51d0THSHQyNF64U20xSYOjeQUd+jPwdAxcHpzgOnU16g57PtQ53F3In
- eLh8m+UM3QJqZ/JW+gHk1y7g0nDratN7wMlbfg4fQG4Cf5hqOE72ALbZJraTZWD07iju5HRQ
- V61nOTkc6JYGWI40mL1s5VV/Z6mN4NPF8dXsXHD6I1en91ZgzZlYjXQHdy4VrzIFes+bVnfb
- jILZ3stINsIzrFuKYd3whnXTGP6vXITgRuRpRqlOljLqQKVAzqSsXTtOkVyFrLyCz746ZGT0
- gV8bghJIGwIIjL+Zm8O+G+/KldDvpTEqhVilTWLUbUig/TqfYR5ucQr7L8k1YoEwOEAoEomE
- wS+JBHx37vSH+RJXUkprGBnDKBnVf3Eo4eKhQ2P+ahTNtaiieqLSk2NMjx8J/EkzkGcJr42e
- DI+OuxZVKpo1gyVz9PLDbT+Gpd5pfS1GX3P9xOnXT2x8x52FTQ4svLW9YK4gKP9Q5shxH4sy
- W6acTXuEHx47WpGyNyLCs7OVc6D55vNzp2K7dr6puP1GBjx7veDUrqv++/KtvWJLrde30vDh
- HeVia7rs404N1V/G2pKhbxnKLjfPpxUe3D53tC3og9yWw1621P7h56b0tJek+AW58Nn0V2zN
- FFHaEysKeltkgegTErfGXE6dbBBuja1KbMfwAc9yWbYp8dgzMzz92IGsx64pJqqZrnvyRSJ+
- 8n3tU1lWaYfFerxiSZbCx9UJtMAHU6npfwE7LGK5kwQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA01ReUxScRzv997zvSdFvlDzl11GtZWVndpvZa7VqjdpdqyV3ZE8tIXKIJvd
- NmsVtTTaTJ+tzJIGNim1zJQO1JmU2SUViXZg2Ki0zM0OqYC1+d9nn+/n2r40LrIRofS2lB2c
- KkWqEJMC4kaNePSUZR3v5dNedwagYnsWiVw13wDK6fqBoz92J4Ze3a3EkL64DkP5ZzIx5DDy
- OLqWRaP3Ld0U+qEzUEhrtgJksk1CTwuXoGpTA4HO69opdPzFTRJdrndjqMTVSaCmvno/1MSf
- peYHs8+eS9im1msEm6O1kOyzxjS21HCMZMsuHWCrCroxtupVBsl+bbcR7MlyA2AfFtRSbHfp
- KLbU8RlbLlwniJZxim07OdXUmC2CJOO5X4RSj6dnGGqJDNCAaQBNQ2YW7Hw5RQMEtIipAFBv
- +Qk0wP8fHwIzrb2UDwdCvdtJ+UQuAE2NdZjnIGRiYM/Tg7gHE8x4+KRVh/v4IbAhz0F4cDCz
- FVa3HfTqA5loWHnvi5fH/xXYHOe9I4IYFto+xXnyceYjDvPcPO4ru4PB4o4jXhHJTISPT6d5
- vP7MXNjrbvPz5URBzXUN8OHRsOLzWTwbiPh+M/h+dXw/C9/PUgAIAwjmlOrkxOQE5fQItTRZ
- nZaSGJGQmlwKvO8PX3kT6Ix9EWaA0cAMII2Lg4Ra8p1cJJRJd+3mVKmbVWkKTm0Gw2lCHCIc
- qzgmEzGJ0h3cdo5Tcqr/V4z2D83AYnUj67c2tw6VPs9ds31pdqBrTmaXVrVl6aGeqLC4ztlF
- k39Zot4E7S0olI0Y5GweLGk9vLOyh4isuK341DdgdebCB4fipFeenCsJNxN8e85DAT/o7SIR
- sbYhZEKoY5+1pSz+5b3uo+4LRfnxF76Pepve1NGclDsxzCga4S+xXx7YFuk3Yea46LvfVjgW
- SuJjQIA29mdVpWv4kLLC8nVjalZoTTNUq5vl9quLx8nFa7J/0wtkWKzphIWs+WA9RdmH7XnU
- ksAOlSt0DHu4x5q3iS4zVos2dK0qcpbfH7AxVXnS2Z5+cU/S/sR5kYso6/qS3kt7iyR+YyKC
- 0LtbdnljiW2jmFAnSaeH4yq19C9zlmoQbQMAAA==
-X-CMS-MailID: 20240913072255epcas5p4ffa874219e563fd562003ce2c7ff0d3b
-X-Msg-Generator: CA
-CMS-TYPE: 105P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240910151044epcas5p37f61bb85ccf8b3eb875e77c3fc260c51
-References: <20240910150200.6589-1-joshi.k@samsung.com>
- <CGME20240910151044epcas5p37f61bb85ccf8b3eb875e77c3fc260c51@epcas5p3.samsung.com>
- <20240910150200.6589-2-joshi.k@samsung.com> <20240912125347.GA28068@lst.de>
- <0baddb91-b292-db90-8110-37fa5a19af01@samsung.com>
- <fe2ae1b7-7c77-49e1-ace0-50e937f2c32c@acm.org>
-X-Spam-Score: -4.2 (----)
+Content-Disposition: inline
+In-Reply-To: <57e1dbb2f348ab61cbc82be7161d788a08b5fbed.1726024117.git.bo.wu@vivo.com>
+X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 9/13/2024 2:00 AM, Bart Van Assche wrote: > On 9/12/24
- 8:50 AM, Kanchan Joshi wrote: >> Wherever hint is being used in generic way,
- u8 data type is being used. > > Has it been considered to introdu [...] 
- Content analysis details:   (-4.2 points, 6.0 required)
+ Content preview:  Hi Wu,
+ kernel test robot noticed the following build warnings:
+ [auto build test WARNING on 67784a74e258a467225f0e68335df77acd67b7ab] 
+ Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [203.254.224.33 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.254.224.33 listed in wl.mailspike.net]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ medium trust [198.175.65.12 listed in list.dnswl.org]
+ 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -161,11 +99,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -1.6 NICE_REPLY_A           Looks like a legit reply (A)
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sp0e6-0002S1-N6
-Subject: Re: [f2fs-dev] [PATCH v5 1/5] fs, block: refactor enum rw_hint
+X-Headers-End: 1sp0fk-0002VV-Vu
+Subject: Re: [f2fs-dev] [PATCH v2 13/13] f2fs: implement inline tail forward
+ recovery
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -177,27 +114,126 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: axboe@kernel.dk, linux-block@vger.kernel.org, brauner@kernel.org,
- jack@suse.cz, sagi@grimberg.me, martin.petersen@oracle.com,
- gost.dev@samsung.com, jlayton@kernel.org, vishak.g@samsung.com,
- linux-nvme@lists.infradead.org, linux-f2fs-devel@lists.sourceforge.net,
- James.Bottomley@HansenPartnership.com, linux-fsdevel@vger.kernel.org,
- chuck.lever@oracle.com, javier.gonz@samsung.com, viro@zeniv.linux.org.uk,
- linux-scsi@vger.kernel.org, kbusch@kernel.org, jaegeuk@kernel.org
+Cc: Chao Yu <yuchao0@huawei.com>, linux-f2fs-devel@lists.sourceforge.net,
+ oe-kbuild-all@lists.linux.dev, Wu Bo <wubo.oduw@gmail.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 9/13/2024 2:00 AM, Bart Van Assche wrote:
-> On 9/12/24 8:50 AM, Kanchan Joshi wrote:
->> Wherever hint is being used in generic way, u8 data type is being used.
-> 
-> Has it been considered to introduce a new union and to use that as the
-> type of 'hint' instead of 'u8'?
-> 
+Hi Wu,
 
-Is it same as your other question in patch 3?. I commented there.
-If not, can you expand on what you prefer (maybe with a code fragment).
+kernel test robot noticed the following build warnings:
+
+[auto build test WARNING on 67784a74e258a467225f0e68335df77acd67b7ab]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Wu-Bo/f2fs-add-inline-tail-mount-option/20240911-114705
+base:   67784a74e258a467225f0e68335df77acd67b7ab
+patch link:    https://lore.kernel.org/r/57e1dbb2f348ab61cbc82be7161d788a08b5fbed.1726024117.git.bo.wu%40vivo.com
+patch subject: [PATCH v2 13/13] f2fs: implement inline tail forward recovery
+config: x86_64-randconfig-121-20240913 (https://download.01.org/0day-ci/archive/20240913/202409131549.6E5c04Zg-lkp@intel.com/config)
+compiler: clang version 18.1.8 (https://github.com/llvm/llvm-project 3b5b5c1ec4a3095ab096dd780e84d7ab81f3d7ff)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240913/202409131549.6E5c04Zg-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202409131549.6E5c04Zg-lkp@intel.com/
+
+sparse warnings: (new ones prefixed by >>)
+>> fs/f2fs/inline.c:457:27: sparse: sparse: cast to restricted __le32
+
+vim +457 fs/f2fs/inline.c
+
+   416	
+   417	int f2fs_recover_inline_tail(struct inode *inode, struct page *npage)
+   418	{
+   419		struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+   420		struct f2fs_inode *ri = NULL;
+   421		void *src_addr, *dst_addr;
+   422		struct page *ipage;
+   423	
+   424		if (IS_INODE(npage))
+   425			ri = F2FS_INODE(npage);
+   426	
+   427		if (f2fs_has_inline_tail(inode) &&
+   428				ri && (le32_to_cpu(ri->i_flags) & F2FS_INLINE_TAIL)) {
+   429	process_inline:
+   430			if (!(ri->i_inline & F2FS_DATA_EXIST))
+   431				return 0;
+   432	
+   433			ipage = f2fs_get_node_page(sbi, inode->i_ino);
+   434			if (IS_ERR(ipage))
+   435				return PTR_ERR(ipage);
+   436	
+   437			f2fs_wait_on_page_writeback(ipage, NODE, true, true);
+   438	
+   439			src_addr = inline_data_addr(inode, npage);
+   440			dst_addr = inline_data_addr(inode, ipage);
+   441			memcpy(dst_addr, src_addr, MAX_INLINE_DATA(inode));
+   442	
+   443			set_inode_flag(inode, FI_DATA_EXIST);
+   444	
+   445			set_page_dirty(ipage);
+   446			f2fs_put_page(ipage, 1);
+   447			return 0;
+   448		}
+   449	
+   450		if (f2fs_has_inline_tail(inode)) {
+   451			ipage = f2fs_get_node_page(sbi, inode->i_ino);
+   452			if (IS_ERR(ipage))
+   453				return PTR_ERR(ipage);
+   454			f2fs_truncate_inline_inode(inode, ipage, 0);
+   455			clear_inode_flag(inode, FI_INLINE_TAIL);
+   456			f2fs_put_page(ipage, 1);
+ > 457		} else if (ri && (le32_to_cpu(ri->i_inline) & F2FS_INLINE_TAIL)) {
+   458			int ret;
+   459	
+   460			ret = f2fs_truncate_blocks(inode,
+   461					COMPACT_ADDRS_PER_INODE >> PAGE_SHIFT, false);
+   462			if (ret)
+   463				return ret;
+   464			goto process_inline;
+   465		}
+   466		return 0;
+   467	}
+   468	struct f2fs_dir_entry *f2fs_find_in_inline_dir(struct inode *dir,
+   469						const struct f2fs_filename *fname,
+   470						struct page **res_page)
+   471	{
+   472		struct f2fs_sb_info *sbi = F2FS_SB(dir->i_sb);
+   473		struct f2fs_dir_entry *de;
+   474		struct f2fs_dentry_ptr d;
+   475		struct page *ipage;
+   476		void *inline_dentry;
+   477	
+   478		ipage = f2fs_get_node_page(sbi, dir->i_ino);
+   479		if (IS_ERR(ipage)) {
+   480			*res_page = ipage;
+   481			return NULL;
+   482		}
+   483	
+   484		inline_dentry = inline_data_addr(dir, ipage);
+   485	
+   486		make_dentry_ptr_inline(dir, &d, inline_dentry);
+   487		de = f2fs_find_target_dentry(&d, fname, NULL);
+   488		unlock_page(ipage);
+   489		if (IS_ERR(de)) {
+   490			*res_page = ERR_CAST(de);
+   491			de = NULL;
+   492		}
+   493		if (de)
+   494			*res_page = ipage;
+   495		else
+   496			f2fs_put_page(ipage, 0);
+   497	
+   498		return de;
+   499	}
+   500	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
 
 _______________________________________________
