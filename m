@@ -2,66 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC93F97A8BF
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Sep 2024 23:30:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36D5F97A8C6
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Sep 2024 23:30:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sqJJ2-0007zd-F6;
-	Mon, 16 Sep 2024 21:30:48 +0000
+	id 1sqJJ7-0002l8-0Q;
+	Mon, 16 Sep 2024 21:30:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sqJJ1-0007zK-5p
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1sqJJ5-0002ku-HP
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 16 Sep 2024 21:30:47 +0000
+ Mon, 16 Sep 2024 21:30:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ve2mvte3bqvyqEOGjwLCt046fq2EtM/f+jCTGmd5SGM=; b=ZJKZI9EamLE+EeLwVyiHaub8AK
- D8uJ7pJOTsKBw0O5T1QTt4t1lsI1rONuXzRTjL9/z61QwySFf4XC64osH1rXzYXV4Te5JTUgQ6ri/
- oZW4aKetiZwDFbOt2Q2MhGnsCPp2Th8/5VzRmCXpQT9mPynXr48EsclM+i6CpEV4RrIw=;
+ bh=V+tT1AJ/9RGmjHH8HVhDbaVOZIwqixtSDvQa79z6sUo=; b=TPRVLfkEZNJOxhWR93yE9bDCnk
+ z9+Ok8hlneFPqq1sA81XtiDfdyKqe3gFe1Y0e1NtBO3XG5eeizORVGLGYTULG14xl52yW2nhkby8+
+ AlfU4M8TpAZWDXOjm9+uejeBdlD6a7gfKHShwwWFDoUXKxaa53JFjU/a2WyZ9gl5b0ro=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ve2mvte3bqvyqEOGjwLCt046fq2EtM/f+jCTGmd5SGM=; b=ikrCktcvxkWxlvKw6bHedcUuio
- zpnILw5YyjwzhqqjVJpwfPtwLv5b/1jx9o/dPes83A3brDqgDxRX0YUPL29f0q64TCF/kfSddtiwm
- HErfMgcHhiJwgpt4RbKs7h0M6ffMiGP1HYv7Gp8Vwhyd/pfso3IajNRQVPTPXLRkKehk=;
+ bh=V+tT1AJ/9RGmjHH8HVhDbaVOZIwqixtSDvQa79z6sUo=; b=Hrs848AP8dMX9hsvgewCjtiJlg
+ XgO8+qjhirHwWF8rxjy+POindn58MPVyhmntdvBIEDb/J+swHQYBMZGIg9/MRPoOwZLM5HI+N6BcB
+ V043MZiIglouLW9Li/+RYXmyDofmi9IT1I9Rgeg0/sGPhmcqlbyCYeiTZquDezrWYpjU=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sqJJ0-0000Oc-HI for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 16 Sep 2024 21:30:47 +0000
+ id 1sqJJ4-0000P8-Ui for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 16 Sep 2024 21:30:51 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7AB4A5C05F7;
- Mon, 16 Sep 2024 21:30:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4E4DC4CEC4;
- Mon, 16 Sep 2024 21:30:35 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id DAA245C0628;
+ Mon, 16 Sep 2024 21:30:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E42DC4CEC4;
+ Mon, 16 Sep 2024 21:30:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1726522235;
- bh=gpAhyyWTTofmD5p8pqREwF5xUfCBBnrCVAI8oGe8Bgg=;
+ s=k20201202; t=1726522237;
+ bh=DA/pGYkMc6X5k091k31gZIzgOwklfjJsQjPwiEsd4/w=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=c990Pe7+XpgXXAA49chRytqdlsJLhHDzty95z/zdhO2T6/VZAuNZoqUbhmCRD/RUA
- iNV/gNpEGdnUQdlxYpaEYznsZ5Viv/+IpsFJf229yIqVZKbGZGoy1/Q3Jmn+KxGqkf
- aTFeHUOHKhPtCYUePlKvEYM2y8CYvFhPX8eu60XLO++0P5iXvG4D5h1/7uKs9S6niz
- PRmRpL7B7wUNKQ9EKEkHdOxZHchTRp8vvXnuSXVZaAJSi6PBIM9X4gvdJM6p36DYtr
- bZdGXsUT1kmcr7Tm40X54M/uu/fvEwkjqbSe3qnT/39aFY3pot6EIVY2dFeX8U1WSI
- EkDUUudPePB5A==
+ b=tobJscG3wXitGqhxu+Nj01wjVddRJRRXzwrOpjDO/iKKsVlu8nfAB5hMpVhtAvllN
+ n7fYQsRfO8crdbxxenB2RzTMWFDqjuoP/hJnZDbQ0EUmrONuF2Otad2R6nf/7REZp2
+ Yvd5WVE8ZyFByUDkB03ySDvevUZT8whGnvHEtgr8I7/28YWcmEWqvuenzCSqJioIae
+ 32//jaDlbyJlJns2ARtjs70W5zCNYPSiW6kCpWj0szRi2szO3g38fVpob61+/2vpTM
+ a2BqpbCChiE/5olkjX26MxIM5zfBH/awJnpY9hiPG84wyz6D6yPP6xcHrOodGjTeBc
+ KXryEi/FtVqFQ==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- AE5393806644; Mon, 16 Sep 2024 21:30:38 +0000 (UTC)
+ 33BE73806644; Mon, 16 Sep 2024 21:30:40 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <172652223724.3820990.15004713720565188782.git-patchwork-notify@kernel.org>
-Date: Mon, 16 Sep 2024 21:30:37 +0000
-References: <20240904153306.816988-1-daeho43@gmail.com>
-In-Reply-To: <20240904153306.816988-1-daeho43@gmail.com>
-To: Daeho Jeong <daeho43@gmail.com>
+Message-Id: <172652223875.3820990.5151598286635393871.git-patchwork-notify@kernel.org>
+Date: Mon, 16 Sep 2024 21:30:38 +0000
+References: <20240906062724.3569496-1-chao@kernel.org>
+In-Reply-To: <20240906062724.3569496-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -70,11 +70,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 4 Sep 2024 08:33:06 -0700 you wrote:
- > From: Daeho Jeong <daehojeong@google.com> > > Keep atomic file clean while
- updating and make it dirtied during commit > in order to avoid unnecessary
- and [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 6 Sep 2024 14:27:24 +0800 you wrote:
+ > syzbot reports a f2fs bug as below: > > kernel BUG at fs/f2fs/inode.c:896!
+ > RIP: 0010:f2fs_evict_inode+0x1598/0x15c0 fs/f2fs/inode.c:896 > Call Trace:
+ > [...] Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -88,9 +87,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sqJJ0-0000Oc-HI
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: prevent atomic file from being
- dirtied before commit
+X-Headers-End: 1sqJJ4-0000P8-Ui
+Subject: Re: [f2fs-dev] [PATCH] f2fs: get rid of online repaire on corrupted
+ directory
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,7 +104,7 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: daehojeong@google.com, kernel-team@android.com,
+Cc: jaegeuk@kernel.org, syzbot+ebea2790904673d7c618@syzkaller.appspotmail.com,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -116,21 +115,37 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Wed,  4 Sep 2024 08:33:06 -0700 you wrote:
-> From: Daeho Jeong <daehojeong@google.com>
+On Fri,  6 Sep 2024 14:27:24 +0800 you wrote:
+> syzbot reports a f2fs bug as below:
 > 
-> Keep atomic file clean while updating and make it dirtied during commit
-> in order to avoid unnecessary and excessive inode updates in the previous
-> fix.
-> 
-> Fixes: 4bf78322346f ("f2fs: mark inode dirty for FI_ATOMIC_COMMITTED flag")
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> kernel BUG at fs/f2fs/inode.c:896!
+> RIP: 0010:f2fs_evict_inode+0x1598/0x15c0 fs/f2fs/inode.c:896
+> Call Trace:
+>  evict+0x532/0x950 fs/inode.c:704
+>  dispose_list fs/inode.c:747 [inline]
+>  evict_inodes+0x5f9/0x690 fs/inode.c:797
+>  generic_shutdown_super+0x9d/0x2d0 fs/super.c:627
+>  kill_block_super+0x44/0x90 fs/super.c:1696
+>  kill_f2fs_super+0x344/0x690 fs/f2fs/super.c:4898
+>  deactivate_locked_super+0xc4/0x130 fs/super.c:473
+>  cleanup_mnt+0x41f/0x4b0 fs/namespace.c:1373
+>  task_work_run+0x24f/0x310 kernel/task_work.c:228
+>  ptrace_notify+0x2d2/0x380 kernel/signal.c:2402
+>  ptrace_report_syscall include/linux/ptrace.h:415 [inline]
+>  ptrace_report_syscall_exit include/linux/ptrace.h:477 [inline]
+>  syscall_exit_work+0xc6/0x190 kernel/entry/common.c:173
+>  syscall_exit_to_user_mode_prepare kernel/entry/common.c:200 [inline]
+>  __syscall_exit_to_user_mode_work kernel/entry/common.c:205 [inline]
+>  syscall_exit_to_user_mode+0x279/0x370 kernel/entry/common.c:218
+>  do_syscall_64+0x100/0x230 arch/x86/entry/common.c:89
+>  entry_SYSCALL_64_after_hwframe+0x77/0x7f
+> RIP: 0010:f2fs_evict_inode+0x1598/0x15c0 fs/f2fs/inode.c:896
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v2] f2fs: prevent atomic file from being dirtied before commit
-    https://git.kernel.org/jaegeuk/f2fs/c/fccaa81de87e
+  - [f2fs-dev] f2fs: get rid of online repaire on corrupted directory
+    https://git.kernel.org/jaegeuk/f2fs/c/884ee6dc85b9
 
 You are awesome, thank you!
 -- 
