@@ -2,170 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6D9897A315
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Sep 2024 15:49:57 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7D8B97A387
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Sep 2024 16:01:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sqC6t-0008Uc-5o;
-	Mon, 16 Sep 2024 13:49:47 +0000
+	id 1sqCIO-00034H-Qh;
+	Mon, 16 Sep 2024 14:01:40 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <joshi.k@samsung.com>) id 1sqC6r-0008UU-9d
- for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 16 Sep 2024 13:49:45 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3NzroZgkbAIo6CDyozzs5o33wr.u22uzs86s5q217s17.q20@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1sqCIN-000343-Hr for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 16 Sep 2024 14:01:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- In-Reply-To:From:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BFqkL5mVC2rMqwvnxCQzzd01AUlbkq9ItY512dFJKEU=; b=W/eoEL+kaSlmUjL4Wjc8Cf8CfQ
- W/4Hnq2SSJzxerr+E7P4vnF9JKFHyhBkfxtTkj2ssSqpEZs6KONC13i0NnfKsxfcqU3wDZrq3T8n2
- Rbjg8OSSXBTHwZkCPoZhXvm5L+JbHU+PchH/E0XwGI83qhgK1aU9uKZzG4WKDiKi1/Z0=;
+ bh=zpTZa+3f5vFMtGc/xeY0K8UY7Tsj3VjLiMQkzWkik7s=; b=TSSPN4vrj8adt8IJYWd70+QgtC
+ gdGGcyysknOOglGCFusEEqNhCpI9BkrcVhQ8ymS5a33BRI4dw7clQL3yTlfGY0wnUCz/qjFqF11C3
+ TdcgGtN0IXXOGHKYf4S7Ga//HotibSdy1ODXODjvoOlgmXaG4SbqU4Pj74G274OIh8BI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:In-Reply-To:From:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=BFqkL5mVC2rMqwvnxCQzzd01AUlbkq9ItY512dFJKEU=; b=KW/4nbh9xSsoUzIQn+y0+DI4qE
- 4MASxa//XYE7Ht0xcX6MXJE3gch2tDwXtZqKnWDwA6iFvVuoh723Viz61UUrjNt0v0sEEN1yiNcKy
- 5cQNyxG6AkuwBMGEDN8fWs3mBPafnro1V4xKe0Cxm9Cjx+3gEOA6Cd2W2RUXlBANCmyo=;
-Received: from mailout1.samsung.com ([203.254.224.24])
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=zpTZa+3f5vFMtGc/xeY0K8UY7Tsj3VjLiMQkzWkik7s=; b=W
+ 8c3XXkyAYky7s+5lN6CgsVP7Dx7ZaQYB2YFMvSBdjOR0xEXsAiptHVDmnn74+KVh7gVHjysG5EA0p
+ sXIjyRyvw3lvKKWHP053QZeWn0j7dRKF949VR44gzD7J9cGl67aiwn60XqLx1dwyID6vUNiSOT696
+ fYF0abkMc8Xlz2Pk=;
+Received: from mail-il1-f198.google.com ([209.85.166.198])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sqC6n-0003B1-Pa for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 16 Sep 2024 13:49:45 +0000
-Received: from epcas5p4.samsung.com (unknown [182.195.41.42])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20240916134929epoutp0144c08edd276e7c1f2d08504b82e4efb0~1vanuxS_v0226802268epoutp01Y
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1sqCIM-0003f0-AX for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 16 Sep 2024 14:01:39 +0000
+Received: by mail-il1-f198.google.com with SMTP id
+ e9e14a558f8ab-3a05311890bso78942235ab.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 16 Sep 2024 13:49:29 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20240916134929epoutp0144c08edd276e7c1f2d08504b82e4efb0~1vanuxS_v0226802268epoutp01Y
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1726494569;
- bh=BFqkL5mVC2rMqwvnxCQzzd01AUlbkq9ItY512dFJKEU=;
- h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=qd+4bIdJ5q+l6jSQ5QaQB2B32T7O+8lGcAi85+xiuHx/55y70FSUDNRQBiO+3tS8K
- 3Y2URf6yxbnA8zbFAicMRuWuztpI5y9bujEku0fFoKPTfbUNXKqaciOsVKU/D7YQTF
- ENrWrWEa4/vRtkarxuN1MmGKdtamyUML4+TtQNKs=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas5p2.samsung.com (KnoxPortal) with ESMTP id
- 20240916134927epcas5p26a35ee17ef7995c6f226ca8d18e05809~1vamGwbwN0311103111epcas5p2h;
- Mon, 16 Sep 2024 13:49:27 +0000 (GMT)
-Received: from epsmges5p1new.samsung.com (unknown [182.195.38.183]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4X6mVZ2M2Dz4x9Pv; Mon, 16 Sep
- 2024 13:49:26 +0000 (GMT)
-Received: from epcas5p2.samsung.com ( [182.195.41.40]) by
- epsmges5p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 6C.32.09640.66738E66; Mon, 16 Sep 2024 22:49:26 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas5p3.samsung.com (KnoxPortal) with ESMTPA id
- 20240916134925epcas5p3771dd61e689dd5669b51c1183e382f4b~1vajzurKW0738707387epcas5p3V;
- Mon, 16 Sep 2024 13:49:25 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240916134925epsmtrp237639dd21ae5f1aede967bd1a37e60ad~1vajyzvUl1077710777epsmtrp2D;
- Mon, 16 Sep 2024 13:49:25 +0000 (GMT)
-X-AuditID: b6c32a49-a57ff700000025a8-7f-66e8376665a5
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 16.1F.08964.56738E66; Mon, 16 Sep 2024 22:49:25 +0900 (KST)
-Received: from [107.122.11.51] (unknown [107.122.11.51]) by
- epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20240916134922epsmtip21edf3a4cb3ab814ba4bb88bd4261e273~1vag57usc2461424614epsmtip22;
- Mon, 16 Sep 2024 13:49:22 +0000 (GMT)
-Message-ID: <4a39215a-1b0e-3832-93bd-61e422705f8b@samsung.com>
-Date: Mon, 16 Sep 2024 19:19:21 +0530
+ Mon, 16 Sep 2024 07:01:38 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726495287; x=1727100087;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zpTZa+3f5vFMtGc/xeY0K8UY7Tsj3VjLiMQkzWkik7s=;
+ b=CawAC5iI0cssucAZrsstrYLs4+6I8hAyeFkXsXcTjMoRuhQpsJT5+ofNgzhBqpda7u
+ +Y5pS4sxKWNxPz0UiA8jJrTKtsnpaVe2XLhQ+9IXfvGp+vQh+d7Ute8F/PhDq0MGSjvm
+ A+LePn7yQzTjAwQ8Fa7+eSwg/+G7MAIaS3ARLb1vSN1RKNTbwq+3xldyIEaWCPacDGRr
+ NKP8Qf/XCThdYTV7j4SQaJT0rscgFpG2/0nJ4RqDdYkb1x07wAx++WMt6B+tFYd4Mzbv
+ hgsPx0T14DIAj0aeBlq47a5Jgn1OCiHOi4UJCovOb6lICFCa6X6kBcUts6/SGJ2sLZeK
+ eZYw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWelIbNuPGfVR9RxxJcQND5lsVCT73NDa7t5/07k5XHypPnBvJLHuJXn3NqfVLOmQXLGslX7Ma6v+welapAP8Ex@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzO1b8/zo9X9HQN1DvYcK8xhA9NQ/RyLnvO0c2CwT70uf49nxnm
+ QLStDW7z9PmO3SLd2qZ9QwEB7rXHPNh8ztx5JmXp04Ex3XelFZG/2U1Pcnr9D629zsQ4dGeNmqf
+ 4YGILj1Ql2b1dbEEVElbYjg9UqeGtcbLqXWZDPPncMQi6AGI7CdBe4hk=
+X-Google-Smtp-Source: AGHT+IEOahGJnAYcNAFTeSSJn7eIBRm3sVV5bF1vc3boMhiNfydC+JbvSRUOSkHpZz3uDsCskC0osRJ9MSpbpgqswzSYIKS62sym
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0)
- Gecko/20100101 Thunderbird/91.8.1
-Content-Language: en-US
-To: Christoph Hellwig <hch@lst.de>
-From: Kanchan Joshi <joshi.k@samsung.com>
-In-Reply-To: <20240913080659.GA30525@lst.de>
-X-Brightmail-Tracker: H4sIAAAAAAAAA01Ta0xTZxjed07pRQY7Fjo+ybjYyYIwLh2lfDhgSzR6XF1Csi1MjEKFw2WU
- tukFdY5Y5jYEBAYycRUGKKDUxSo4BQq4cQnRcIuoVQSG2CrIGNdoGDLW9rCNf8/7fs/zPe8l
- LxvnZrPc2akyNaWUSaR85gbG9Y6tvgFJYRNJwZ3zzujSSCETTXXMA3R6dglHqyPPMPTw1yYM
- 1V3qwtDZ0uMYMht0OLpayEZPhhdYaKlWz0LF7fcBah3yR3fO7UItrbcYqKLWwkJ5pkYmutD9
- N4auL1fg6PLUDAP1r3Q7oH5dGevDN8nBu2Kyf/QqgzxdfJtJDvZqyHp9DpNsqD5GGisXMNL4
- UMsk5yxDDLLgmh6QPZWdLHKh3pOsN09j0U6xaREplCSRUnpTsgR5YqosOZIv/iRue1yoKFgQ
- IAhHYXxvmSSdiuTv2BMdsDNVau2Z750hkWqsqWiJSsUPiopQyjVqyjtFrlJH8ilFolQhVASq
- JOkqjSw5UEaptwmCg98LtRLj01Ke/VLCVHzjc/jc5BKuBdUeuYDNhoQQZvdtygUb2FzCCOCD
- CQOLDuYBHCxbwOjgBYCLRQ0gF3Dsiqbh8wz6oRXAE8snAR1MA1jR0MawsZyIKFhvNDrYMIPw
- gfcLh1l0fiO89aPZzuERB+Ff98rsv7oQkTAv32TP44QbHDJXYDbsSvCh5Xmv3QAnahmwZq6f
- aSucSWyFA6c0Ng6HeBcuPbntQGu94I3pMtzGh4SBA7tNE0y67B3QVPQ7i8Yu8Hn3tTXsDhf+
- bF3jpMGx8TEGjb+CjQ0FDjT+AGpfPXCw+eJWX0NzEO3lDPOXzRg9Ryd44jsuzd4MR4sta0o3
- +PhMtQNNIWFX1tqor2Bwpmmc9T3w1q2bim5d97p13ej+N64EDD3YRClU6cmUKlQhkFGH/tt3
- gjy9Htgvwm93IxgZmw1sBxgbtAPIxvmuTpHLliSuU6LkyJeUUh6n1EgpVTsIta6nCHfnJcit
- JyVTxwmE4cFCkUgkDA8RCfhuTlPflidyiWSJmkqjKAWl/FeHsTnuWizwaLemvXa+jCuFrvLJ
- lbZDztv9oxxvGGuqXGJCs4ZnnuZP6OfffuuMWmoQ64VH8Xz/3b5hLZ+bPh196mgxdpUEfXzq
- ck6vN3dvdukfdarVmPDNkx4os1TPyTWEvJitPz+n4+3p9d02ffi39J6vP3L8ovxm7MtXPgMx
- eMe+ldWbLQNnVzKzXs8IFw8diQ3r8VkM+WH/1E/z4i1e71z5LHf8kdfPBbhnrXuV4QIrotnT
- a7HczzNm71LORu2jClG8b7F0X+PFqaoSt6S2ZnjcIy7nIqsS8UbMWyaXa5h3D2qVuzJfHovo
- yz+ws+HeNE/cnoeZOftfKzDV9T2OB+/zMjoP3HmDz1ClSAR+uFIl+QfgcR/PmgQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrKIsWRmVeSWpSXmKPExsWy7bCSvG6q+Ys0g+9vRCxW3+1ns3h9+BOj
- xbQPP5kt/t99zmRx88BOJouVq48yWcye3sxk8WT9LGaLjf0cFo/vfGa3+LlsFbvFpEPXGC32
- 3tK2uLTI3WLP3pMsFvOXPWW36L6+g81i+fF/TBbbfs9ntlj3+j2Lxfm/x1ktzs+aw+4g5nH5
- irfH+XsbWTymTTrF5nH5bKnHplWdbB6bl9R77F7wmclj980GNo+PT2+xePRtWcXocWbBEXaP
- z5vkPDY9ecsUwBvFZZOSmpNZllqkb5fAlfF86xS2ghbVikUvfzI3MC6R7WLk5JAQMJHYeWcx
- SxcjF4eQwG5GifVHn7NAJMQlmq/9YIewhSVW/nvODlH0mlHi5t5mNpAEr4CdxKbdu1lBbBYB
- VYlr/XfYIeKCEidnPgEbJCqQJLHnfiMTiC0sYCvR3XsdLM4MtODWk/lgcREBJYmnr84ygixg
- FljGInFwylsmiG0bmCT+H94NNJWDg01AU+LC5FKQBk4BHYmfj0+xQgwyk+ja2sUIYctLbH87
- h3kCo9AsJHfMQrJvFpKWWUhaFjCyrGKUTC0ozk3PLTYsMMxLLdcrTswtLs1L10vOz93ECE4J
- Wpo7GLev+qB3iJGJg/EQowQHs5IIr+3vp2lCvCmJlVWpRfnxRaU5qcWHGKU5WJTEecVf9KYI
- CaQnlqRmp6YWpBbBZJk4OKUamK4l+DNkGAsZRG8ubjnim8D7Rp7vkYI+f8jxkouH2a/mPT1z
- 55laSfmznO+LJ3T7rLydb2Q4Q4U9Zt0/xtkzP66L++S19Hu5v1Tsqiij5FtG+vL7IxX/ivlE
- ynRdjDH6vYRzylExAYYT+humPaiYwpw4eXa7dGbvrDhXIfPrx5Uv+ffL1y4Peq16ZIb8P/uu
- xza13xmeKtmn8m9Lajw5dUrWtokukbXL2b9OK79T9V5GUqzRquOS4at/Um/1rVnv5Csv37jz
- aeajaEHhwxL67jrTO7sf8KokpvAXtt3V+nlIke2dwfHorMKDOqJ/lDf/lLA/cWp7ZmLsBaci
- mct5Tu72LtLsqm/FfjV8UalTYinOSDTUYi4qTgQArd2N5XgDAAA=
-X-CMS-MailID: 20240916134925epcas5p3771dd61e689dd5669b51c1183e382f4b
-X-Msg-Generator: CA
-CMS-TYPE: 105P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240910151057epcas5p3369c6257a6f169b4caa6dd59548b538c
-References: <20240910150200.6589-1-joshi.k@samsung.com>
- <CGME20240910151057epcas5p3369c6257a6f169b4caa6dd59548b538c@epcas5p3.samsung.com>
- <20240910150200.6589-5-joshi.k@samsung.com> <20240912130235.GB28535@lst.de>
- <e6ae5391-ae84-bae4-78ea-4983d04af69f@samsung.com>
- <20240913080659.GA30525@lst.de>
-X-Spam-Score: -4.2 (----)
+X-Received: by 2002:a92:c567:0:b0:39d:25d8:43a9 with SMTP id
+ e9e14a558f8ab-3a08b65fec5mr97990035ab.0.1726495287337; Mon, 16 Sep 2024
+ 07:01:27 -0700 (PDT)
+Date: Mon, 16 Sep 2024 07:01:27 -0700
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <0000000000004ef94906223d020e@google.com>
+From: syzbot <syzbot+6165bc9800cd6e1fe958@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, kent.overstreet@linux.dev, 
+ linux-bcachefs@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, 
+ linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
+X-Spam-Score: 2.0 (++)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 9/13/2024 1:36 PM, Christoph Hellwig wrote: > On Thu, Sep
- 12, 2024 at 10:01:00PM +0530, Kanchan Joshi wrote: >> Please see the response
- in patch #1. My worries were: >> (a) adding a new field and p [...] 
- Content analysis details:   (-4.2 points, 6.0 required)
+ Content preview:  Hello,
+ syzbot found the following issue on: HEAD commit: 98f7e32f20d2
+ Linux 6.11 git tree: upstream console output:
+ https://syzkaller.appspot.com/x/log.txt?x=13a5e277980000
+ kernel config: https://syzkaller.appspot.com/x/.config?x=c78874575ba70f [...]
+ Content analysis details:   (2.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [203.254.224.24 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.254.224.24 listed in wl.mailspike.net]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -1.7 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1sqC6n-0003B1-Pa
-Subject: Re: [f2fs-dev] [PATCH v5 4/5] sd: limit to use write life hints
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.166.198 listed in list.dnswl.org]
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 2.5 SORTED_RECIPS          Recipient list is sorted by address
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ -1.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.198 listed in wl.mailspike.net]
+X-Headers-End: 1sqCIM-0003f0-AX
+Subject: [f2fs-dev] [syzbot] [bcachefs?] INFO: task hung in vfs_rename
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -177,112 +110,213 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: axboe@kernel.dk, linux-block@vger.kernel.org, brauner@kernel.org,
- jack@suse.cz, sagi@grimberg.me, martin.petersen@oracle.com,
- gost.dev@samsung.com, jlayton@kernel.org, vishak.g@samsung.com,
- linux-nvme@lists.infradead.org, linux-f2fs-devel@lists.sourceforge.net,
- James.Bottomley@HansenPartnership.com, linux-fsdevel@vger.kernel.org,
- chuck.lever@oracle.com, javier.gonz@samsung.com, viro@zeniv.linux.org.uk,
- linux-scsi@vger.kernel.org, kbusch@kernel.org, jaegeuk@kernel.org,
- Nitesh Shetty <nj.shetty@samsung.com>, bvanassche@acm.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 9/13/2024 1:36 PM, Christoph Hellwig wrote:
-> On Thu, Sep 12, 2024 at 10:01:00PM +0530, Kanchan Joshi wrote:
->> Please see the response in patch #1. My worries were:
->> (a) adding a new field and propagating it across the stack will cause
->> code duplication.
->> (b) to add a new field we need to carve space within inode, bio and
->> request.
->> We had a hole in request, but it is set to vanish after ongoing
->> integrity refactoring patch of Keith [1]. For inode also, there is no
->> liberty at this point [2].
->>
->> I think current multiplexing approach is similar to ioprio where
->> multiple io priority classes/values are expressed within an int type.
->> And few kernel components choose to interpret certain ioprio values at will.
->>
->> And all this is still in-kernel details. Which can be changed if/when
->> other factors start helping.
-> 
-> Maybe part of the problem is that the API is very confusing.  A smal
-> part of that is of course that the existing temperature hints already
-> have some issues, but this seems to be taking them make it significantly
-> worse.
+Hello,
 
-Can you explain what part is confusing. This is a simple API that takes 
-type/value pair. Two types (and respective values) are clearly defined 
-currently, and more can be added in future.
+syzbot found the following issue on:
 
-> Note: this tries to include highlevel comments from the discussion of
-> the previous patches instead of splitting them over multiple threads.
-> 
-> F_{S,G}ET_RW_HINT works on arbitrary file descriptors with absolutely no
-> check for support by the device or file system and not check for the
-> file type.  That's not exactly good API design, but not really a major
-> because they are clearly designed as hints with a fixed number of
-> values, allowing the implementation to map them if not enough are
-> supported.
-> 
-> But if we increase this to a variable number of hints that don't have
-> any meaning (and even if that is just the rough order of the temperature
-> hints assigned to them), that doesn't really work.  We'll need an API
-> to check if these stream hints are supported and how many of them,
-> otherwise the applications can't make any sensible use of them.
+HEAD commit:    98f7e32f20d2 Linux 6.11
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=13a5e277980000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=c78874575ba70f27
+dashboard link: https://syzkaller.appspot.com/bug?extid=6165bc9800cd6e1fe958
+compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
 
-- Since writes are backward compatible, nothing bad happens if the 
-passed placement-hint value is not supported. Maybe desired outcome (in 
-terms of WAF reduction) may not come but that's not a kernel problem 
-anyway. It's rather about how well application is segregating and how 
-well device is doing its job.
+Unfortunately, I don't have any reproducer for this issue yet.
 
-- Device is perfectly happy to work with numbers (0 to 256 in current 
-spec) to produce some value (i.e., WAF reduction). Any extra 
-semantics/abstraction on these numbers only adds to the work without 
-increasing that value. If any application needs that, it's free to 
-attach any meaning/semantics to these numbers.
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/5d74d59e4416/disk-98f7e32f.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/aa8ddac249b8/vmlinux-98f7e32f.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/e275b6573f40/bzImage-98f7e32f.xz
 
-Extra abstraction has already been done with temperature-hint (over 
-multi-stream numbers). If that's useful somehow, we should consider 
-going back to using those (v3)? But if we are doing a new placement 
-hint, it's better to use plain numbers without any semantics. That will 
-be (a) more scalable, (b) be closer to what device can readily accept, 
-(c) justify why placement should be a different hint-type, and (d) help 
-Kernel because it has to do less (no intermediate mapping/transformation 
-etc).
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+6165bc9800cd6e1fe958@syzkaller.appspotmail.com
 
-IMHO sticking to the existing hint model and doing less (in terms of 
-abstraction, reporting and stuff) in kernel maybe a better path.
+INFO: task syz.1.151:6872 blocked for more than 143 seconds.
+      Not tainted 6.11.0-syzkaller #0
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz.1.151       state:D stack:26232 pid:6872  tgid:6826  ppid:6080   flags:0x00004004
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5188 [inline]
+ __schedule+0x17ae/0x4a10 kernel/sched/core.c:6529
+ __schedule_loop kernel/sched/core.c:6606 [inline]
+ schedule+0x14b/0x320 kernel/sched/core.c:6621
+ schedule_preempt_disabled+0x13/0x30 kernel/sched/core.c:6678
+ rwsem_down_write_slowpath+0xeeb/0x13b0 kernel/locking/rwsem.c:1178
+ __down_write_common kernel/locking/rwsem.c:1306 [inline]
+ __down_write kernel/locking/rwsem.c:1315 [inline]
+ down_write_nested+0x1e0/0x220 kernel/locking/rwsem.c:1696
+ vfs_rename+0x6a2/0xf00 fs/namei.c:4937
+ do_renameat2+0xd94/0x13f0 fs/namei.c:5123
+ __do_sys_rename fs/namei.c:5170 [inline]
+ __se_sys_rename fs/namei.c:5168 [inline]
+ __x64_sys_rename+0x82/0x90 fs/namei.c:5168
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f392db7def9
+RSP: 002b:00007f392d59c038 EFLAGS: 00000246 ORIG_RAX: 0000000000000052
+RAX: ffffffffffffffda RBX: 00007f392dd36208 RCX: 00007f392db7def9
+RDX: 0000000000000000 RSI: 0000000020000f40 RDI: 00000000200003c0
+RBP: 00007f392dbf0b76 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000001 R14: 00007f392dd36208 R15: 00007fff903dcd98
+ </TASK>
 
-> If these aren't just stream hints of the file system but you actually
-> want them as an abstract API for FDP you'll also need to actually
-> expose even more information like the reclaim unit size, but let's
-> ignore that for this part of the discssion.
-> 
-> Back the the API: the existing lifetime hints have basically three
-> layers:
-> 
->   1) syscall ABI
->   2) the hint stored in the inode
->   3) the hint passed in the bio
-> 
-> 1) is very much fixed for the temperature API, we just need to think if
->     we want to support it at the same time as a more general hints API.
->     Or if we can map one into another.  Or if we can't support them at
->     the same time how that is communicated.
-> 
-> For 2) and 3) we can use an actual union if we decide to not support
-> both at the same time, keyed off a flag outside the field, but if not
-> we simply need space for both.
-> 
+Showing all locks held in the system:
+1 lock held by khungtaskd/30:
+ #0: ffffffff8e738320 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire include/linux/rcupdate.h:326 [inline]
+ #0: ffffffff8e738320 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock include/linux/rcupdate.h:838 [inline]
+ #0: ffffffff8e738320 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x55/0x2a0 kernel/locking/lockdep.c:6626
+2 locks held by kworker/u8:5/1098:
+ #0: ffff8880b893e998 (&rq->__lock){-.-.}-{2:2}, at: raw_spin_rq_lock_nested+0x2a/0x140 kernel/sched/core.c:560
+ #1: ffff8880b8928948 (&per_cpu_ptr(group->pcpu, cpu)->seq){-.-.}-{0:0}, at: psi_task_switch+0x441/0x770 kernel/sched/psi.c:989
+4 locks held by kworker/u8:6/1106:
+ #0: ffff888020e82948 ((wq_completion)writeback){+.+.}-{0:0}, at: process_one_work kernel/workqueue.c:3206 [inline]
+ #0: ffff888020e82948 ((wq_completion)writeback){+.+.}-{0:0}, at: process_scheduled_works+0x90a/0x1830 kernel/workqueue.c:3312
+ #1: ffffc90004267d00 ((work_completion)(&(&wb->dwork)->work)){+.+.}-{0:0}, at: process_one_work kernel/workqueue.c:3207 [inline]
+ #1: ffffc90004267d00 ((work_completion)(&(&wb->dwork)->work)){+.+.}-{0:0}, at: process_scheduled_works+0x945/0x1830 kernel/workqueue.c:3312
+ #2: ffff88802c2360e0 (&type->s_umount_key#69){++++}-{3:3}, at: super_trylock_shared+0x22/0xf0 fs/super.c:562
+ #3: ffff8880254e52a0 (&sbi->gc_lock){+.+.}-{3:3}, at: f2fs_down_write fs/f2fs/f2fs.h:2175 [inline]
+ #3: ffff8880254e52a0 (&sbi->gc_lock){+.+.}-{3:3}, at: f2fs_balance_fs+0x5b0/0x7a0 fs/f2fs/segment.c:440
+2 locks held by getty/4976:
+ #0: ffff88802ffe40a0 (&tty->ldisc_sem){++++}-{0:0}, at: tty_ldisc_ref_wait+0x25/0x70 drivers/tty/tty_ldisc.c:243
+ #1: ffffc900031232f0 (&ldata->atomic_read_lock){+.+.}-{3:3}, at: n_tty_read+0x6ac/0x1e00 drivers/tty/n_tty.c:2211
+5 locks held by syz.1.151/6869:
+3 locks held by syz.1.151/6872:
+ #0: ffff88802c236420 (sb_writers#14){.+.+}-{0:0}, at: mnt_want_write+0x3f/0x90 fs/namespace.c:515
+ #1: ffff888061a7bec0 (&type->i_mutex_dir_key#10/1){+.+.}-{3:3}, at: inode_lock_nested include/linux/fs.h:835 [inline]
+ #1: ffff888061a7bec0 (&type->i_mutex_dir_key#10/1){+.+.}-{3:3}, at: lock_rename fs/namei.c:3147 [inline]
+ #1: ffff888061a7bec0 (&type->i_mutex_dir_key#10/1){+.+.}-{3:3}, at: do_renameat2+0x62c/0x13f0 fs/namei.c:5058
+ #2: ffff888061a7f370 (&sb->s_type->i_mutex_key#25/4){+.+.}-{3:3}, at: vfs_rename+0x6a2/0xf00 fs/namei.c:4937
+2 locks held by syz.1.278/7991:
+ #0: ffff88802c2360e0 (&type->s_umount_key#69){++++}-{3:3}, at: __super_lock fs/super.c:58 [inline]
+ #0: ffff88802c2360e0 (&type->s_umount_key#69){++++}-{3:3}, at: super_lock+0x27c/0x400 fs/super.c:120
+ #1: ffff8880259647d0 (&bdi->wb_switch_rwsem){+.+.}-{3:3}, at: bdi_down_write_wb_switch_rwsem fs/fs-writeback.c:388 [inline]
+ #1: ffff8880259647d0 (&bdi->wb_switch_rwsem){+.+.}-{3:3}, at: sync_inodes_sb+0x274/0xb20 fs/fs-writeback.c:2790
+2 locks held by syz.3.286/8085:
+ #0: ffff88802c2360e0 (&type->s_umount_key#69){++++}-{3:3}, at: __super_lock fs/super.c:58 [inline]
+ #0: ffff88802c2360e0 (&type->s_umount_key#69){++++}-{3:3}, at: super_lock+0x27c/0x400 fs/super.c:120
+ #1: ffff8880259647d0 (&bdi->wb_switch_rwsem){+.+.}-{3:3}, at: bdi_down_write_wb_switch_rwsem fs/fs-writeback.c:388 [inline]
+ #1: ffff8880259647d0 (&bdi->wb_switch_rwsem){+.+.}-{3:3}, at: sync_inodes_sb+0x274/0xb20 fs/fs-writeback.c:2790
+2 locks held by syz.3.286/8114:
+ #0: ffff88802c2360e0 (&type->s_umount_key#69){++++}-{3:3}, at: __super_lock fs/super.c:58 [inline]
+ #0: ffff88802c2360e0 (&type->s_umount_key#69){++++}-{3:3}, at: super_lock+0x27c/0x400 fs/super.c:120
+ #1: ffff8880259647d0 (&bdi->wb_switch_rwsem){+.+.}-{3:3}, at: bdi_down_write_wb_switch_rwsem fs/fs-writeback.c:388 [inline]
+ #1: ffff8880259647d0 (&bdi->wb_switch_rwsem){+.+.}-{3:3}, at: sync_inodes_sb+0x274/0xb20 fs/fs-writeback.c:2790
+2 locks held by syz.2.268/8388:
+ #0: ffff88802c2360e0 (&type->s_umount_key#69){++++}-{3:3}, at: __super_lock fs/super.c:58 [inline]
+ #0: ffff88802c2360e0 (&type->s_umount_key#69){++++}-{3:3}, at: super_lock+0x27c/0x400 fs/super.c:120
+ #1: ffff8880259647d0 (&bdi->wb_switch_rwsem){+.+.}-{3:3}, at: bdi_down_write_wb_switch_rwsem fs/fs-writeback.c:388 [inline]
+ #1: ffff8880259647d0 (&bdi->wb_switch_rwsem){+.+.}-{3:3}, at: sync_inodes_sb+0x274/0xb20 fs/fs-writeback.c:2790
+2 locks held by syz.4.303/8406:
+ #0: ffff88802c2360e0 (&type->s_umount_key#69){++++}-{3:3}, at: __super_lock fs/super.c:58 [inline]
+ #0: ffff88802c2360e0 (&type->s_umount_key#69){++++}-{3:3}, at: super_lock+0x27c/0x400 fs/super.c:120
+ #1: ffff8880259647d0 (&bdi->wb_switch_rwsem){+.+.}-{3:3}, at: bdi_down_write_wb_switch_rwsem fs/fs-writeback.c:388 [inline]
+ #1: ffff8880259647d0 (&bdi->wb_switch_rwsem){+.+.}-{3:3}, at: sync_inodes_sb+0x274/0xb20 fs/fs-writeback.c:2790
 
-Right, if there were space, we probably would have kept both.
-But particularly for these two types (temperature and placement) it's 
-probably fine if one overwrites the another. This is not automatic and 
-will happen only at the behest of user. And that's something we can 
-clearly document in the man page of the new fcntl. Hope that sounds fine?
+=============================================
+
+NMI backtrace for cpu 0
+CPU: 0 UID: 0 PID: 30 Comm: khungtaskd Not tainted 6.11.0-syzkaller #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 08/06/2024
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:93 [inline]
+ dump_stack_lvl+0x241/0x360 lib/dump_stack.c:119
+ nmi_cpu_backtrace+0x49c/0x4d0 lib/nmi_backtrace.c:113
+ nmi_trigger_cpumask_backtrace+0x198/0x320 lib/nmi_backtrace.c:62
+ trigger_all_cpu_backtrace include/linux/nmi.h:162 [inline]
+ check_hung_uninterruptible_tasks kernel/hung_task.c:223 [inline]
+ watchdog+0xff4/0x1040 kernel/hung_task.c:379
+ kthread+0x2f0/0x390 kernel/kthread.c:389
+ ret_from_fork+0x4b/0x80 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
+ </TASK>
+Sending NMI from CPU 0 to CPUs 1:
+NMI backtrace for cpu 1
+CPU: 1 UID: 0 PID: 6869 Comm: syz.1.151 Not tainted 6.11.0-syzkaller #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 08/06/2024
+RIP: 0010:io_serial_in+0x76/0xb0 drivers/tty/serial/8250/8250_port.c:406
+Code: b0 6f 5b fc 89 e9 41 d3 e6 48 83 c3 40 48 89 d8 48 c1 e8 03 42 80 3c 38 00 74 08 48 89 df e8 41 93 bf fc 44 03 33 44 89 f2 ec <0f> b6 c0 5b 41 5e 41 5f 5d c3 cc cc cc cc 89 e9 80 e1 07 38 c1 7c
+RSP: 0018:ffffc90004585f98 EFLAGS: 00000002
+RAX: 1ffffffff3485500 RBX: ffffffff9a42ad00 RCX: 0000000000000000
+RDX: 00000000000003fd RSI: 000000000003ffff RDI: 0000000000040000
+RBP: 0000000000000000 R08: ffffffff85381ca6 R09: 1ffff11004a66046
+R10: dffffc0000000000 R11: ffffffff85381c60 R12: dffffc0000000000
+R13: 0000000000002647 R14: 00000000000003fd R15: dffffc0000000000
+FS:  00007f392d5de6c0(0000) GS:ffff8880b8900000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000560cad2f6030 CR3: 000000006de62000 CR4: 00000000003506f0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+Call Trace:
+ <NMI>
+ </NMI>
+ <TASK>
+ serial_in drivers/tty/serial/8250/8250.h:137 [inline]
+ serial_lsr_in drivers/tty/serial/8250/8250.h:159 [inline]
+ wait_for_lsr drivers/tty/serial/8250/8250_port.c:2068 [inline]
+ serial8250_console_fifo_write drivers/tty/serial/8250/8250_port.c:3315 [inline]
+ serial8250_console_write+0x1099/0x1770 drivers/tty/serial/8250/8250_port.c:3393
+ console_emit_next_record kernel/printk/printk.c:2984 [inline]
+ console_flush_all+0x865/0xfd0 kernel/printk/printk.c:3050
+ console_unlock+0x13b/0x4d0 kernel/printk/printk.c:3119
+ vprintk_emit+0x5dc/0x7c0 kernel/printk/printk.c:2348
+ _printk+0xd5/0x120 kernel/printk/printk.c:2373
+ bio_check_eod block/blk-core.c:543 [inline]
+ submit_bio_noacct+0x1018/0x1920 block/blk-core.c:770
+ f2fs_submit_page_read+0x163/0x190 fs/f2fs/data.c:1114
+ f2fs_get_read_data_page+0x49f/0x750 fs/f2fs/data.c:1273
+ gc_data_segment fs/f2fs/gc.c:1607 [inline]
+ do_garbage_collect+0x3d62/0x7d80 fs/f2fs/gc.c:1774
+ f2fs_gc+0xf04/0x2fa0 fs/f2fs/gc.c:1877
+ f2fs_balance_fs+0x5f8/0x7a0 fs/f2fs/segment.c:442
+ f2fs_map_blocks+0x3dc5/0x4850 fs/f2fs/data.c:1781
+ f2fs_expand_inode_data+0x622/0xbb0 fs/f2fs/file.c:1806
+ f2fs_fallocate+0x448/0x960 fs/f2fs/file.c:1903
+ vfs_fallocate+0x553/0x6c0 fs/open.c:334
+ do_vfs_ioctl+0x2592/0x2e50 fs/ioctl.c:886
+ __do_sys_ioctl fs/ioctl.c:905 [inline]
+ __se_sys_ioctl+0x81/0x170 fs/ioctl.c:893
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f392db7def9
+Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f392d5de038 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00007f392dd36058 RCX: 00007f392db7def9
+RDX: 00000000200001c0 RSI: 0000000040305828 RDI: 0000000000000004
+RBP: 00007f392dbf0b76 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000001 R14: 00007f392dd36058 R15: 00007fff903dcd98
+ </TASK>
+
+
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
+
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
+
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
+
+If you want to undo deduplication, reply with:
+#syz undup
 
 
 _______________________________________________
