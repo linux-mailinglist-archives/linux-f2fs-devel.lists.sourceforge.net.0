@@ -2,177 +2,167 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16E6F97B958
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Sep 2024 10:28:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9222197BA8C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Sep 2024 12:06:56 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1sqq3F-0001xW-Sn;
-	Wed, 18 Sep 2024 08:28:41 +0000
+	id 1sqraC-0008WN-BW;
+	Wed, 18 Sep 2024 10:06:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hanqi@vivo.com>) id 1sqq3E-0001xO-6Y
+ (envelope-from <liuderong@oppo.com>) id 1sqraA-0008W7-6H
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Sep 2024 08:28:40 +0000
+ Wed, 18 Sep 2024 10:06:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zryOCH+ypVg+hR+D8adaW59oCZj6H096VSN9aNr11fo=; b=DHXZJ7UqFhi932NuqtJ9lHHlr4
- qR9QWO9zGl0fYKLizU06HdUBpFmBy2XtgBbtva7xSwaiYqJl1TjJ7zFpljhoyKNppLB6FPVpWz8Cs
- RF2WvivdIuKskFwfEpOpuIZbxJ4oid6GSc1w3E1ib2f8A/Qpqgd5bo7pj0z0SfmBQdSc=;
+ bh=2wovymd8akxg53irptRUgFwGJ9wUNA4VzdT4Dg8DoaE=; b=I/D3M0sj41EyXD1Z5KX/73c443
+ S/R5Cb0NGdgufq7IhnwHkXKQ9kn5anJe5AHvlxazCKVsZJGK+OHYq5WqOwnHzNcALBPFKBekD/mQB
+ GjhHOaFIAl82eXxRFmKDO9LzhW/8+IZFXzbnC8DBKf3behA6XXLiaZ9xx9ZaQUCuHQ5Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=zryOCH+ypVg+hR+D8adaW59oCZj6H096VSN9aNr11fo=; b=B
- gL6qjLkVbMyHl6G6WYixrrxBWq3RY+lF3gL31goyH0/9GicxujscRPwc/IpPO+EHYu6Hcob4ws74l
- 47akH/l8J45IK6lpcjoDAP62NkQ0weWI+7qFGvHEqoTAXCcmDB0gVoAsWVu6t+jIlXqtjANyEPAHL
- ME2JpqN0KA3Ye1ZQ=;
-Received: from mail-psaapc01on2074.outbound.protection.outlook.com
- ([40.107.255.74] helo=APC01-PSA-obe.outbound.protection.outlook.com)
+ List-Owner:List-Archive; bh=2wovymd8akxg53irptRUgFwGJ9wUNA4VzdT4Dg8DoaE=; b=Y
+ J9AtO9ArmHfuKZZEkt29/U8FosldkaqVx9avR1oe+mlhMH9zhmtP+sSw183eDDbPTkehl1V2fjbh+
+ IBYQCWnVghEHFzz5KIlxNnqTJ5QdZ357yTMP8gEODvH9EDp5ciAqCrP/sj3AG/b2CMFPmfsySy1sL
+ 3EPYjyWnSjpFAFBY=;
+Received: from mail-psaapc01on2087.outbound.protection.outlook.com
+ ([40.107.255.87] helo=APC01-PSA-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sqq3D-00058l-73 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Sep 2024 08:28:40 +0000
+ id 1sqra9-0003hh-B1 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 18 Sep 2024 10:06:46 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GKpEHB57VzrEFjE/HTgZ4nVs5AS7slOtaA7UhBT7FsuEv/h1JkWmkB04jwH+0Y2OfKEwgi99NcKadN05ClVuSD2GruaitZAH0BpLPmF7Uaj/0dp0s5eCWbgaIkfHQo3FHxEUMW4cJrCTYYW5erHiP+0nsQcScfJZ2+kyDu9cR6MWf0vh+z+gLtrdaUAjqgeaRZIWOGVJFGVUea++spYu67eox/RCPWSJQfKsYwL+8/c4PbhWKCqYTkka2La65ZLegE8oeMiOpe5dhikGlPGY0kOHe4ZQ1y76SWEktzaJnd9BGDrW6y96tUo3jcjHKIinVvaQnS0wi51R+SAwAXsbxQ==
+ b=bBNItt8CW58ODg5Dp8TAC5DWBq2EOBHTK1JBmki9Qqtd2pPKYbll+celRCd+YqLvz0EKX+ta1QoEZyLeB/QiqoPZER4CoQOBTQA9jcqOX6v2dA3tnDTR/DvAtbLnlXdiIUAZbd6GjXrB227wxVBGMxKFNOz927e79wWbynFfBBWacvKFvXsozvUvRQ28KV9fHfw9NZ+MVX04uC4yxZWSaTLH8sutsIzgV0X41iGVF/jaEIv/3QqSgV3PxCnDOmDxfDqJUZ3Re/GnaTvAeYz9X8rAPNVoP3UaIGx3eBdLusWAbq34frFq8e4bfG9SMpkPUNo13VTKcxnPxty0rShXzQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zryOCH+ypVg+hR+D8adaW59oCZj6H096VSN9aNr11fo=;
- b=IeABon6uQbR+s4of2/gml1zW8CwKqwefXPA1v+OIjrmVXImCwv2RFxXjGBGDiIb7SM9qfsmsUDVxs8rknzao15Up7EnV/hfNDqnNpajs5xrT8BeN6yAmEa/0/H33JPq+eDk47CP+68zOX21Df5EkUNHpb4DoqD4jjgfF+F3pR+fZwc9XpUGjaEKDBGvZnwjFv/llcpS7vDcZTg/M/yTkI7dI/KX8ky89OyKDRS9reC6wi6iv+yZN6mwlSItuJjmtpV0b1uDCHpC6RGCZ2fdh/ce1MA0XmCuqFLjo4P8S1bvpSUxs8kNpddGQz/fqldmyN1S37efI5TXzdme9wYSS1Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ bh=2wovymd8akxg53irptRUgFwGJ9wUNA4VzdT4Dg8DoaE=;
+ b=e0JRV7PopZxnY8sqY8eEZHbOrqnGoON0vj94c1ywCwoAOLA2oqeY0Vk5hsvrI+XNpJXrJlq254pIPvoKGQbcjZqo+dgUbHgOu1U/mfc0+GNkfYV3P8F4F6KNYKNyxyeLbrai3OfoXOuW5BbZljPVE3btApYuTNLK5qXl8T1zUcZHTZHlJhVTwDLDGpynYVlmnFLVANtO3KtPgjZkqieM2ZPIIFLtTu5lXd4idQ/dMxTXOZcnygwld4at7yJqLjoXb46Lb2IRDidkArRpWhlrFuxAVU3rTy1YH8bb7AhG0ir8zEetOctFEmjvQTyJDoL5C7v3ewNhAhDQdpeN3Qocrg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 58.252.5.68) smtp.rcpttodomain=kernel.org smtp.mailfrom=oppo.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=oppo.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zryOCH+ypVg+hR+D8adaW59oCZj6H096VSN9aNr11fo=;
- b=TiKM9U5MDf1Wa+rVWY2SCHDHyoNxIn+hYNwey0gYPZLctBAG4Qt1lqdaF9IX1NGR55wzF1GYj8E7E+Iu1giQQ9F28ehsQBROM/bplKe56oe0Q/AEXTUALZEpTwBgQRgAjA+LmMkabEy3Hw87nk61GhSQWMRcGKWzWgj2e2QKBU3bBiq1ukImhn7D+gDP3k3rUa9wuXYVlUPPrQ1cJ3UJO+aM6nYxqcBI6XRbCmMzWxC6zzzEX0/F3sMQkSq9N2ZQ7G+i21/iLZ2K+Twi1FmrgtEact/HMK891jRT5qJFZaEfed39QBMNBJMZEiuFF2VZgV4oCLrwlbNhISNtNmjTTg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB7140.apcprd06.prod.outlook.com (2603:1096:101:228::14)
- by TYZPR06MB5999.apcprd06.prod.outlook.com (2603:1096:400:33d::5)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=2wovymd8akxg53irptRUgFwGJ9wUNA4VzdT4Dg8DoaE=;
+ b=diGFlGUb6JqjFdhRoO+sPkery5D4VlagNE89yNO+gTJmpB0rRebLVuRPtDzCIfTdc+2gzz8JG5+d7FzTxwkxxKiSIfiwRxv2etpgsVY0TJyu4JDSi/IwBCV+5B5oE+zghxcnZ1IGYFUV0Pz54h8rAH5W29BUA+KqtpJSs4flf6M=
+Received: from PUZP153CA0007.APCP153.PROD.OUTLOOK.COM (2603:1096:301:c2::11)
+ by JH0PR02MB7375.apcprd02.prod.outlook.com (2603:1096:990:62::6) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.24; Wed, 18 Sep
- 2024 08:28:26 +0000
-Received: from SEZPR06MB7140.apcprd06.prod.outlook.com
- ([fe80::9eaf:17a9:78b4:67c0]) by SEZPR06MB7140.apcprd06.prod.outlook.com
- ([fe80::9eaf:17a9:78b4:67c0%5]) with mapi id 15.20.7982.012; Wed, 18 Sep 2024
- 08:28:26 +0000
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Wed, 18 Sep 2024 02:44:00 -0600
-Message-Id: <20240918084400.1821317-1-hanqi@vivo.com>
-X-Mailer: git-send-email 2.25.1
-X-ClientProxiedBy: SG2PR04CA0168.apcprd04.prod.outlook.com (2603:1096:4::30)
- To SEZPR06MB7140.apcprd06.prod.outlook.com (2603:1096:101:228::14)
+ 2024 10:06:31 +0000
+Received: from HK3PEPF0000021E.apcprd03.prod.outlook.com
+ (2603:1096:301:c2:cafe::7) by PUZP153CA0007.outlook.office365.com
+ (2603:1096:301:c2::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.6 via Frontend
+ Transport; Wed, 18 Sep 2024 10:06:30 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 58.252.5.68)
+ smtp.mailfrom=oppo.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=oppo.com;
+Received-SPF: Pass (protection.outlook.com: domain of oppo.com designates
+ 58.252.5.68 as permitted sender) receiver=protection.outlook.com;
+ client-ip=58.252.5.68; helo=mail.oppo.com; pr=C
+Received: from mail.oppo.com (58.252.5.68) by
+ HK3PEPF0000021E.mail.protection.outlook.com (10.167.8.40) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7918.13 via Frontend Transport; Wed, 18 Sep 2024 10:06:30 +0000
+Received: from cndgdcavdu0c-218-29.172.16.40.114 (172.16.40.118) by
+ mailappw30.adc.com (172.16.56.197) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Wed, 18 Sep 2024 18:06:29 +0800
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Wed, 18 Sep 2024 18:06:18 +0800
+Message-ID: <1726653980-590956-1-git-send-email-liuderong@oppo.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
+X-Originating-IP: [172.16.40.118]
+X-ClientProxiedBy: mailappw30.adc.com (172.16.56.197) To mailappw30.adc.com
+ (172.16.56.197)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB7140:EE_|TYZPR06MB5999:EE_
-X-MS-Office365-Filtering-Correlation-Id: 31c7a89c-b76b-43c6-e39c-08dcd7bbddc6
+X-MS-TrafficTypeDiagnostic: HK3PEPF0000021E:EE_|JH0PR02MB7375:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3a8e5736-11ce-4f3c-0eb4-08dcd7c99151
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|366016|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?2Ge29ORgkA3A5MVFMJRKZXj6npyAQ3Cj3SpdtqYofcHEsTraS1kYIq5CDriO?=
- =?us-ascii?Q?vTmQjuci1HQRqySGohL8Bsvg2RquY3h0dJSsjuSBXSrm58L7vhxBP7skEAX/?=
- =?us-ascii?Q?FvbcczuDab8cUNyo5FV14bGO+qtsMbJeu5Qp8uBR2HnTxKmd8L7n1UByPgQQ?=
- =?us-ascii?Q?i+xvoBYt36L8JEgEylH0dctiz55WCzbZUqjkB1iTFqUQPJrLuCoufFReDnGC?=
- =?us-ascii?Q?JacmiQFLpdbimKiXMs7z/uG2y/X/thKxccjmmZH4drfevsroM6bxR++N8kQf?=
- =?us-ascii?Q?DS6ICptmGCd6RxfyZZd7sIJQ7Lf2B1D6YQAryCAbStU0NtFG4kJGqkrn7KH7?=
- =?us-ascii?Q?DiNdWTcMigolyhP7To9ywMiyUUt0dAyKHd/OKDJy6E1cn7VqbfjIXuMch9q1?=
- =?us-ascii?Q?m+MZS3CwkBQ9Hb6iIhtS/t66Hu92Cy2IFSiIGxAZsH/kUIM+z55UP6wkPLs/?=
- =?us-ascii?Q?q3GT8hlLi27iOnTkRWI09jvUsayIWht4URY6wGvUibk1/Ww0oR5YGL3WoZ78?=
- =?us-ascii?Q?HrQ4EgcgysU1meo7jR6oFEjIU3DgeiNXxSOQnE1hWcJG82zx/cX6UYo8d4AS?=
- =?us-ascii?Q?H9xLMgtWsvPwlSd7DB6gxlt7fGoKQ9MjZ8Em+yaVmYQvwWEk+PoT4H/GLzp3?=
- =?us-ascii?Q?Hm/F6lhJs5iFxxM9gMFtYSXe0Kt028UPzmwef8emvOsZCj7T5/hl0dA5Exi1?=
- =?us-ascii?Q?Vw6PYIBo1gm3ywQ4DvI3nj4Kg6FiXSVBDpMWQu3pJSsJPYq6iZg6Acj9gJ2U?=
- =?us-ascii?Q?8Pv4eR1k69du75GUDrCkTdGN3RFIjG+R5J5qZcBkVwnAAW1w2CBOwZ3cIJkC?=
- =?us-ascii?Q?NHOV3Ksf4lhZlWx4pzqgU9F5CUtkkc1qkmYweg/XtdHKlQ3k3AA/NzwkTB7s?=
- =?us-ascii?Q?9c6pnu+QCvABv4UkCm9zM2KJuQk7wHhGwW2Sis8eAsQKv2OfL/35NT8SSa2k?=
- =?us-ascii?Q?4pKSYmc0+vXEwJQqRQd2PkkS7jabxWWz0yd6E+oVX+zzL+7GrCywrks2g2b8?=
- =?us-ascii?Q?bN7FR2SNHhBqEDB7/GV7fxtaoHkZIexTmFWOV0ANRKSXwJ0O6GIWA3TMnwcz?=
- =?us-ascii?Q?Mc7hceZ5dh0ZzL7fJkvYuL4om51C362WnDVaO+0OiGzPsTrCetdGk2oIkvjz?=
- =?us-ascii?Q?g3/sP0Wd54JSuBnkZEfTxb/FsA7evEWEITFO60Dgfd+UXtb3AaopTggLzKjK?=
- =?us-ascii?Q?pIgzUk4+CTBCKIjD0sc2gGjlLBIGe4gML005yvAbiVu5BOhP4ZrwmJBDhez1?=
- =?us-ascii?Q?+UlOnE2eTT55NTKZPozk4Gxel/6fP91LwHgSeuuXBP+1xJNXRAJXPdXwVbqj?=
- =?us-ascii?Q?NE+2eshB511wdUcNH5vDvuGLUVQ+NFys2d69royY23d7PA6RDRD1EoUjffBd?=
- =?us-ascii?Q?F5luEye84nSgFgZJE1vqALWjLqxjS5Hh6wWPNxjWuTDJyk69tw=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB7140.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(366016)(1800799024)(38350700014); DIR:OUT;
+ ARA:13230040|82310400026|376014|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?EumWgvz2Uu+KTv92Heo4aHCfRNTgirWHg+VFNwDHDM0rh4X1x1ufp+7ybb8w?=
+ =?us-ascii?Q?qr/gS1Ao2I4DGdW7OChG1bOcF/NAp++eqaGhxyzj5iOWoHduVOEGMmy27lPA?=
+ =?us-ascii?Q?ziIfU/Qx/pwKrKZ2OM4jtXLcAoWtV4ICMg1+vd+sUCjDv//OtEEKMWz03ux+?=
+ =?us-ascii?Q?xUUr7XLlr1UENywBcfUZZfah4mqtUnWPwcjktALFgnN6q/r/FiNjcnQqD+tx?=
+ =?us-ascii?Q?BNPhFjopJXySN2oklIU12BHXZh69hnisIbICppXyhID4ys4unp4kD6gABmhP?=
+ =?us-ascii?Q?TM1YfzMEuxSbUKUVwpzWuAzfqpQc+bMoKDWsRuJ/NmItscv90m1x/jHzYUk8?=
+ =?us-ascii?Q?lfybk5gJN9AsBmfO0LOttUOhzGfbgn0F1lbyRXgxhfFffvzyivrEgc84Y2Oh?=
+ =?us-ascii?Q?HVgC8wYaa5FpTmEG0iDCnHxvKfDCAh5v6FnNwCEbzuRjlcx/dTGDomG1RPVZ?=
+ =?us-ascii?Q?Xf/TXtpa7QoIfPwD9hjHinwSUUG2QMHXvHCxEm4vJoRmUWdMWcXZcGwtzmqN?=
+ =?us-ascii?Q?+dEt5nNltETG4bg+eMBzmSJzUfzZYdCAKj7Qboi2YmI5/fUDc0Z+rW3Ka36R?=
+ =?us-ascii?Q?zAVtgZeRY55nyQCHUeG9USrnJIts/Doaq0fGBhADPVPJLSJMhyoFbKEWIpAZ?=
+ =?us-ascii?Q?HgC4FiMeFvCGgdvAObddpsYoJhe716uvA+fbahjWSI/PpKW60jSkYaZxYFeS?=
+ =?us-ascii?Q?Mjq+6iMNvJ9GDpoqFIOo7t+tXsMF34myQhYR+XFFZyAF0r5svnub+0mDvUoS?=
+ =?us-ascii?Q?w5qu25MiA+l3IubY/jNcW9mzX+DiLId/+EHSL6QImS7McJ1QyS+2llkD6jzB?=
+ =?us-ascii?Q?EAyDWOMOv9+Xqu25iO9U3FOytF0zjR7j7awFGCwrSHJS+BXFw7VCaejbMB89?=
+ =?us-ascii?Q?tJ5/kim4hG8e0x3Y9YbpecxmonGvo5HEdRxN+kxeu16GIrwmqtjy7gdPITV3?=
+ =?us-ascii?Q?v9VplccmA8D4fDZqbnpixk5qAw4hBrdU0+oUDk6zEDO4xKKHAgPq92dpQUvo?=
+ =?us-ascii?Q?Lo46bxbX4Yr7wcacrSHgSSMQf2xWQVpSw3zySk7w8GvUVKWnjx7oKvB4j/tk?=
+ =?us-ascii?Q?jjyFsE6SapqNjaekpC2SE/JSWTGaPgaLrJF/6Ekfr5vVuOV7skQujuMztn/e?=
+ =?us-ascii?Q?y/7Wdgu9PVqFC4Z1zTBBHANBgLX6+3gF6Rk5XGTZBNIdMcQl58qD83dC8tpS?=
+ =?us-ascii?Q?iYDrnpyGUfBEzAmXN4fWJR0TTu8KqUKjJ7WvoGEfULLHk1iFrTe+Yf/bBTUF?=
+ =?us-ascii?Q?QYMgsyZWvxrT0vuQX4HzAn4LO+rTUp7eMwrxxq1lqP8olYTaF5esZ6qKwrKp?=
+ =?us-ascii?Q?pvxYCsKwBLkVoAy9Mm7C+b/cepiePgbjEVxPzScsvVmD62Fp5+uqp69W/tOH?=
+ =?us-ascii?Q?vbgc7y1VWOMUBTUjS8hANiSOaGTjpV9ONpjDUrEZhUl5vGtyAfyisMHwpIqx?=
+ =?us-ascii?Q?iHkM6OCnXieA3cwAOOcQmKJHunaKY9Rn?=
+X-Forefront-Antispam-Report: CIP:58.252.5.68; CTRY:CN; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.oppo.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
  SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?s9RTGKfYjEApCG6ZWVi/S8Ugs8gZbl526K3NN/Viqc/LsHDyN2n53Msb0o13?=
- =?us-ascii?Q?kn//NmCLPLYsy/wGP51nZUJA8GESmETw69n9dRgBKRSRGYj+yNv/E0L5sz1N?=
- =?us-ascii?Q?PYUqkphCidKzfIsqBBtA4dwhFmSaF5bdiom9iAx12sT1ZFAb1k+H+dBdgDlc?=
- =?us-ascii?Q?w4gfGb5Gpoik/WtePal+2vr9/dnVgUMHKPMn1O9Ezzfa06uvH4u7rDk9BVqx?=
- =?us-ascii?Q?dd5uSzxpLRlGJW6j6nCAM9a3ZtlEWnz9wF1CwXk2wva9AkDbbRVZJv2UsZyO?=
- =?us-ascii?Q?V/6a2SmumfO/k3dD9OEZgp0Me7jvnOV+LdTXS7YXc4vsZ1oT1p88S/x6Hy2c?=
- =?us-ascii?Q?rmb3nCos8+cRI4BRgNuktBSpTQo2FmdsgqMk12dkMQEYXLdi6OanGKO6Z15U?=
- =?us-ascii?Q?w/MfKXDoYjBL4uWTLQF82kK7b59II2Ctyy+Y9Py/0dEA9gRpbKqDUfM/XbuT?=
- =?us-ascii?Q?F6QmfPNuTudzTQHuuJcaCcE6Kg4LkcZS5TEScMt1R3XJwnKGbk3meaIPR66O?=
- =?us-ascii?Q?z8bR0bBBBF8xzOglgi0rmYA+2cRNfeXUYYyzxB4PdNTSUqrBMAYmPU8e5KKH?=
- =?us-ascii?Q?sa9cLk6qmuK1aIQz+cKA5vRMx9jWY4TA8JLqnkENzD8W9bjeKb9o5+PELNfw?=
- =?us-ascii?Q?Qb/GcsFo2OklHxXiwcGbtXB6k0UYIdIVDk6KV0OZWGexiG8FOpsWkb9fbBkH?=
- =?us-ascii?Q?UNbmXJHehTj/7d0X9wBKmsCxVQMHQfSNpfmtEug8K+tOfrOORn/81PklpQ+E?=
- =?us-ascii?Q?ox7FDcI67IqccZfE6uoLr3r5xezar35WWKs3e0giitorsH82rpq+nlCeaSxG?=
- =?us-ascii?Q?aUmassVZwbMgVzp5e4qXSRhk10YdiehvglmBxNHqwt1/lkYP5rZntbanS1OK?=
- =?us-ascii?Q?MEy0QrHlcLNink2DVckH9CHvnMFlzGlAQuDEGoujMyM3ic8QjUvxvtjnqusT?=
- =?us-ascii?Q?mCKMRpYp9HT09HRpRp7Tb22DbZPisA9cT001qRiNWxsnznm6nyigTgyfjw/4?=
- =?us-ascii?Q?sGb2VkMgmctKrqWYQqR2k0NhNni3FWWP66uXmq/ldDpANQUjxREvHF6ZWi2e?=
- =?us-ascii?Q?Ab4b5nvm9fqRsDDQr8uaWOf0WF4vkjIKKYosxoqdkbBioOGckSztVXlqIoXq?=
- =?us-ascii?Q?jFbuVd7Zd3LV2HCxKpW/5sWRdCpFAgqwUT4GwU4EUDk8ZbRDLa49qb24JZAy?=
- =?us-ascii?Q?H75+Vt/ACjDVoUxPRpVnjPfAGVhzW+o1r4FRm0kZPcVkPb0zA8vplEpF5kWE?=
- =?us-ascii?Q?b0XmppVP5j0ehqQTYvVatDEouIRmKZyqJJ/0fWIsVHf8DLnMli1LCe3ViRpW?=
- =?us-ascii?Q?8xeuGrn85+uvQM0RzZ1Wd79l8eYLgA+Kr0h0kvPkvYmwpPGx7UZ/SVHoScD3?=
- =?us-ascii?Q?D/25TcYeLFlNn/K0ZBNXM1eJd2vR0Vr3NMMqkdp0B9okcbsOOiqr2UVmzzvQ?=
- =?us-ascii?Q?ucYOkkfT5Ufkx8jjhU8ufBC0536Or/Po+DMt5GpJh+CrO0Krs/ZDiUosVHzO?=
- =?us-ascii?Q?XS1duhhCUMxgCmfUXyVI0ty2U9XNcu3jyqr1fV62cBW7KSbeRuCRYnGuQMw4?=
- =?us-ascii?Q?fv7Zh4KcYSaVOnghiNGxNi+eopx2pWu8krDOwy3J?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 31c7a89c-b76b-43c6-e39c-08dcd7bbddc6
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB7140.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Sep 2024 08:28:26.1349 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3hZMl7/2800xU/dNqpBSEbXTR0juxMHBrlOpYQ04lgkINYDz9eZ0wk6yYz1kLUNZPGX9whLw1MGF5tjA11a65A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB5999
+X-OriginatorOrg: oppo.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Sep 2024 10:06:30.4455 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3a8e5736-11ce-4f3c-0eb4-08dcd7c99151
+X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f1905eb1-c353-41c5-9516-62b4a54b5ee6; Ip=[58.252.5.68];
+ Helo=[mail.oppo.com]
+X-MS-Exchange-CrossTenant-AuthSource: HK3PEPF0000021E.apcprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: JH0PR02MB7375
 X-Spam-Score: -1.2 (-)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  creating a large files during checkpoint disable until it
- runs out of space and then delete it, then remount to enable checkpoint again, 
- and then unmount the filesystem triggers the f2fs_bug_on as bel [...] 
+ Content preview: From: liuderong <liuderong@oppo.com> In cost-benefit GC
+ algorithm, 
+ mtime will affect the selection of victim segment.For a large section, mtime
+ should be the mean value of valid blocks, in order to select correct victim
+ segment, it needs [...] 
  Content analysis details:   (-1.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -1.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.255.74 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1sqq3D-00058l-73
-Subject: [f2fs-dev] [PATCH] f2fs: fix f2fs_bug_on when uninstalling
- filesystem call f2fs_evict_inode.
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -1.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.255.87 listed in wl.mailspike.net]
+X-Headers-End: 1sqra9-0003hh-B1
+Subject: [f2fs-dev] [PATCH v3 0/2] f2fs: modify the calculation method of
+ mtime
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -184,85 +174,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Qi Han via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Qi Han <hanqi@vivo.com>
-Cc: Qi Han <hanqi@vivo.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: liuderong--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: liuderong@oppo.com
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-creating a large files during checkpoint disable until it runs out of
-space and then delete it, then remount to enable checkpoint again, and
-then unmount the filesystem triggers the f2fs_bug_on as below:
+From: liuderong <liuderong@oppo.com>
 
-------------[ cut here ]------------
-kernel BUG at fs/f2fs/inode.c:896!
-CPU: 2 UID: 0 PID: 1286 Comm: umount Not tainted 6.11.0-rc7-dirty #360
-Oops: invalid opcode: 0000 [#1] PREEMPT SMP NOPTI
-RIP: 0010:f2fs_evict_inode+0x58c/0x610
-Call Trace:
- __die_body+0x15/0x60
- die+0x33/0x50
- do_trap+0x10a/0x120
- f2fs_evict_inode+0x58c/0x610
- do_error_trap+0x60/0x80
- f2fs_evict_inode+0x58c/0x610
- exc_invalid_op+0x53/0x60
- f2fs_evict_inode+0x58c/0x610
- asm_exc_invalid_op+0x16/0x20
- f2fs_evict_inode+0x58c/0x610
- evict+0x101/0x260
- dispose_list+0x30/0x50
- evict_inodes+0x140/0x190
- generic_shutdown_super+0x2f/0x150
- kill_block_super+0x11/0x40
- kill_f2fs_super+0x7d/0x140
- deactivate_locked_super+0x2a/0x70
- cleanup_mnt+0xb3/0x140
- task_work_run+0x61/0x90
+In cost-benefit GC algorithm, mtime will affect
+the selection of victim segment.For a large section,
+mtime should be the mean value of valid blocks,
+in order to select correct victim segment,
+it needs to modify the calculation method of mtime.
 
-The root cause is: creating large files during disable checkpoint
-period results in not enough free segments, so when writing back root
-inode will failed in f2fs_enable_checkpoint. When umount the file
-system after enabling checkpoint, the root inode is dirty in
-f2fs_evict_inode function, which triggers BUG_ON. The steps to
-reproduce are as follows:
+v3:
+- add new define INVALID_MTIME and rename new API:f2fs_get_section_mtime
 
-dd if=/dev/zero of=f2fs.img bs=1M count=55
-mount f2fs.img f2fs_dir -o checkpoint=disable:10%
-dd if=/dev/zero of=big bs=1M count=50
-sync
-rm big
-mount -o remount,checkpoint=enable f2fs_dir
-umount f2fs_dir
+v2:
+- modify new API:get_section_mtime
 
-Let's redirty inode when there is not free segments during checkpoint
-is disable.
+liuderong (2):
+  f2fs: remove unused parameters
+  f2fs: introduce f2fs_get_section_mtime
 
-Signed-off-by: Qi Han <hanqi@vivo.com>
----
- fs/f2fs/inode.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ fs/f2fs/f2fs.h    |  5 +++--
+ fs/f2fs/gc.c      | 23 +++++++----------------
+ fs/f2fs/segment.c | 38 +++++++++++++++++++++++++++++++-------
+ fs/f2fs/segment.h |  6 ++++--
+ 4 files changed, 45 insertions(+), 27 deletions(-)
 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index aef57172014f..1ff391520cd9 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -770,8 +770,10 @@ int f2fs_write_inode(struct inode *inode, struct writeback_control *wbc)
- 		!is_inode_flag_set(inode, FI_DIRTY_INODE))
- 		return 0;
- 
--	if (!f2fs_is_checkpoint_ready(sbi))
-+	if (!f2fs_is_checkpoint_ready(sbi)) {
-+		f2fs_mark_inode_dirty_sync(inode, true);
- 		return -ENOSPC;
-+	}
- 
- 	/*
- 	 * We need to balance fs here to prevent from producing dirty node pages
 -- 
-2.39.0
+2.7.4
 
 
 
