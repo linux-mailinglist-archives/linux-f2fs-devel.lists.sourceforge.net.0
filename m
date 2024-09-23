@@ -2,103 +2,177 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FEE397DB9B
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Sep 2024 06:07:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4179397E5EE
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Sep 2024 08:22:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1srrP4-0005Gv-HJ;
-	Sat, 21 Sep 2024 04:07:27 +0000
+	id 1sscSY-0006iU-Ix;
+	Mon, 23 Sep 2024 06:22:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3d0buZgkbAPou01mcnngtcrrkf.iqqingwugteqpvgpv.eqo@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1srrP3-0005Gn-8V for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 21 Sep 2024 04:07:26 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <bo.wu@vivo.com>) id 1sscSW-0006iK-GE
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 23 Sep 2024 06:22:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VZyQv0qbFTPikDnecwxXC+O2lerTNeJjpgnb1XX0/fw=; b=i+WbtApsWX4SNZbovUz8oFKSq9
- MaXZsPfAHAxbVxhQhCzUhFtVm2I8uEWnuRfFfxjGcH0uGrqheHY2pbVF1zFxLC/4Ji5HP8mrGCksW
- N+J4ICFLuxMytXGH65BGFyx0utf8JqBvd5efnow9RAgm7IQaevXJhovdjWtG44/RHpKc=;
+ bh=N8i4d5da9yORPmkip5timpzrA2WyEM4mn5EMx6DjBug=; b=mib57m4nyfXAEvXNw12kO0Qxim
+ tmf2Mz67G8FHGllKhx4NTUxlCITERyIziGRu/81tScZ0ALHTDMLtu9gi45VimCVzLoiF6gmE/XrXV
+ dnV7NLM/DCm/L3NLdUSlb0zmGoLPpCWE4L8CD8A635uDG/sZ4cr8ygZMMnUwTMWZza50=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=VZyQv0qbFTPikDnecwxXC+O2lerTNeJjpgnb1XX0/fw=; b=R
- qpLy29vsZ6yuFAXbociALgdb9um7LBstFAq3HHvdYiQwvFqjFt6KNJxGHYFezfWSQkfXYoxVVdEsO
- oPsxyLam9PDMMrEjXUAQF2IwXBSK8pifmgRWzCq/iB+I5Yc4jAZyPJXhhTcXawZ0j1lPaD+jxTGze
- oSbYzvLtKWfTbBKI=;
-Received: from mail-io1-f69.google.com ([209.85.166.69])
+ List-Owner:List-Archive; bh=N8i4d5da9yORPmkip5timpzrA2WyEM4mn5EMx6DjBug=; b=K
+ LSrNsSk/BTMO79O0BYWCgjtvwC6gDXDq9k6eyWnwlwZnPKOhRw3lqBdr4RC4nK42k4kFmm0mXekIA
+ L0k/ycN6hSnqt3a3tU6XmZ5Oj31UlUewCy8r4RT/6Ud82rYe53HG6qQODcHotJJckduhv4R7GBLqH
+ NbZr5UzuizZuz9Sc=;
+Received: from mail-sgaapc01on2059.outbound.protection.outlook.com
+ ([40.107.215.59] helo=APC01-SG2-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1srrP3-0003F2-1Y for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 21 Sep 2024 04:07:25 +0000
-Received: by mail-io1-f69.google.com with SMTP id
- ca18e2360f4ac-82cfb2e416eso339341339f.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 20 Sep 2024 21:07:24 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726891639; x=1727496439;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VZyQv0qbFTPikDnecwxXC+O2lerTNeJjpgnb1XX0/fw=;
- b=CfyV0PtE3t23ydjC0nOJfvONT59P9DYvn0Wh+kW9qeg4uX8w9pqcxa783yvmrNYNi5
- avHny0AFAL19c0Hk9Y7Y3DaolX1zOwtrwOZvK8jqfwtkzXX2bPcsrxjnJ1+ILt4oPpHd
- US5lUZEaWZAkTiRlftBK5438M5lFaskQVtdZiNE0xRQox1w/eUXthC0Z8KfUDNqeg3NS
- TGGHhMnRGe+95y2C2fIPqycSeIb0vhZCjJReMLqdADxrSJ7mxkz3J5PYTdpJY2aoOisv
- 0yBpDrwiB4uuszXSyT9oeGD+20Da/hPGvCz2wgbQKZmtxda0WvAEfmcuwbYfUCBL1irW
- T4xw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXt1vGv+fuPCjRIQEglygz9dLdCPaLirisligwWSq5hRL+jka0f4vq++fuVh4870q6PhwcWVWoz+wiKFiNlilNi@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwDehAQX1sUuG4DougrZFNw4QGoRk5TdQGfa56ocQuvzJdZOSjY
- 4QtzTcnUPPx9vvOy0lubhNduEWSApKpeX3oVs6s03ieVg9eeViMlfZG9R9tf3h/BpJF/BS1W/EJ
- s5pF5Lyh0Vj16GMb18KLTpwQGrtSVh2mPoq0xZDMDgPdU6xlkUHP8+v4=
-X-Google-Smtp-Source: AGHT+IGagEIbUYS/f7DaoR1Nmc3vTRJc9NH3Fxg4o8jW3sMbO5Ea0a8swYel3t3i29Xazx//m8sNEIOwC3paOecwtQF/34bDOhBS
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1sscSU-0000kW-QV for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 23 Sep 2024 06:22:07 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=t1oV1Q6QycdNMC+qA1poWxsI0//lcb2XOpIHeXfzxoVdt4zhH3I5xBcFmHzXq40JROjjvasV1DE/XJOa42VPMxakD7Saqj9p56LXxVzUJ7f73yUKbG5kqTBYmismGbhWu1kVABVWmFhQ1m+EKuuHgtAZ5TnSwNHHr7TJXG1+P5InjQLgVOAH5V7w2EJdWrzOBsG3qnO61R+/91hwNGltgLmAWqTdRNDlHdR7QjBsIoD8ALmYnYwCaEMGpZUmICTshGaZtzXFPEg6c+TRvyt5d3h4fjO9m283I+WxhcCIWX4Nm0gN/bnIJu34TeRW/Zfkun26qe/IOm6Fwycq6hTq9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=N8i4d5da9yORPmkip5timpzrA2WyEM4mn5EMx6DjBug=;
+ b=qFFmrYAQ1PRKa/lFLRKahdYOqYZpSaTgoI/0+DfewInfJlO8rUY25DgW7TgayPFuY4huo410Rm9yc50q9od7p8AiJDkPSnNfU/AynTe2QdIk5UoADEdxVG1xH3md9rfzV854CwutJT+81GUoW8n8OZY7GLI0anvLqBbugIqWN7iJBPuHKbSMurls4E99FmRSbqHdI/490mlfRw4iZp4pdNYRlX6duYaSOhM52B7a16alOwBD0KLMlTy8YC5XoXFGdCxb7eTS67reztsWsq3+T2KeL637mUIf0RLhvMqQqSeqUbcBwNYTEVjll8CRQmp7P6ZnSI5Zt1nRPi+RYmKoWw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=N8i4d5da9yORPmkip5timpzrA2WyEM4mn5EMx6DjBug=;
+ b=JwiuYy+2ksHuZGhGeBuCXfBh8gNCTxASlZSag6PgaBk2VbcEzcXoFwxa4Zz0IS9FFLH6jFxFWYYkagxmbu2DoPauD7N8r3s7NJBmRx+3QPN5bqimiCXE60duFv0qdAwyyFav+Bmr+VUbDiKNr+aThMRnWdz7cSM1quPoPq+HklSA4jno4mZY8YoXvS60Qj5lMqcMmQNFY1yRXLhHSF+5Pe/dzFB9p033LxlWzSKphBwCZWzFnVuQ4zy+pNyS3oB2Lu9iK4cvxfQ5152SBndeLm0hiUJZqWFLTm7F3ylttEAM2xNOjwyXJfKSKQqGaAWHrdhYMqDpmAP26SpPx4z/Tw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from PSAPR06MB4486.apcprd06.prod.outlook.com (2603:1096:301:89::11)
+ by KL1PR06MB6273.apcprd06.prod.outlook.com (2603:1096:820:ec::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.25; Mon, 23 Sep
+ 2024 06:21:56 +0000
+Received: from PSAPR06MB4486.apcprd06.prod.outlook.com
+ ([fe80::43cb:1332:afef:81e5]) by PSAPR06MB4486.apcprd06.prod.outlook.com
+ ([fe80::43cb:1332:afef:81e5%5]) with mapi id 15.20.7982.022; Mon, 23 Sep 2024
+ 06:21:56 +0000
+To: linux-kernel@vger.kernel.org
+Date: Mon, 23 Sep 2024 00:37:32 -0600
+Message-Id: <20240923063732.2730521-1-bo.wu@vivo.com>
+X-Mailer: git-send-email 2.25.1
+X-ClientProxiedBy: SG2PR01CA0179.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:28::35) To PSAPR06MB4486.apcprd06.prod.outlook.com
+ (2603:1096:301:89::11)
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:2184:b0:3a0:4de2:3257 with SMTP id
- e9e14a558f8ab-3a0c8d28fcdmr41963305ab.18.1726891639107; Fri, 20 Sep 2024
- 21:07:19 -0700 (PDT)
-Date: Fri, 20 Sep 2024 21:07:19 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <66ee4677.050a0220.3195df.002a.GAE@google.com>
-From: syzbot <syzbot+44090b62afaabafe828a@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: -0.5 (/)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PSAPR06MB4486:EE_|KL1PR06MB6273:EE_
+X-MS-Office365-Filtering-Correlation-Id: 37f6ef91-d6ab-496b-d0ae-08dcdb9805bc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|52116014|376014|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?XjM8xb6WfSpjqSGJGNO5xtAywNEC6YDeK+U3aLXWfpFPH51CHaYybVnw624B?=
+ =?us-ascii?Q?pq2SqopJ+3K/0ix+4+tSxSR4TCFtu/txvgFJMRUaeWFUnAYBLOofyCXXIN55?=
+ =?us-ascii?Q?UMSsdn8cHju7dLffMKvVYVjp+o+Y+9LVxINq1segol7ehKL0FWpBYWeBtDiy?=
+ =?us-ascii?Q?VVoI6ibqXALXhtXe9Qv0y5t/OePjBoOumDG2G/8yXwfxtt8JyKJGbJYeYVSm?=
+ =?us-ascii?Q?awvxr6UIyYQ5zPC+YuPtpzmJ/yIeCkWzbglLjnT5HLN2NKt6UsJDMqQ38HMg?=
+ =?us-ascii?Q?j1YI+f+d7mCsOm4RVMNmvSgBFGQ8xMl4GRgGJhxE3pir3ex20I+1AYCsSW6c?=
+ =?us-ascii?Q?y/hNPDpqMxNfnPgKs/EGjo3DlhKdGkaiWUUBIkAwGEsM2tvvTnVE7Tk7GCly?=
+ =?us-ascii?Q?ork2eLspj1wPm1ztvM6+YzT4k6eYoJ2tPNEpClW6ll7axrpcxsklDxTKcI2W?=
+ =?us-ascii?Q?LijliMd2IL2nWy91yYsGN4YYhrUuq+/Rq0MhEuO0J0h+YBq4+7mNt8jol4Bh?=
+ =?us-ascii?Q?MwXJljvFzF5QHbEFL0VFbLVBf4Z7cj4KmMOsYZAaq5N8cO/5pdBZrMbM7yxk?=
+ =?us-ascii?Q?vDupHugkpJm5gAkU/HQNZdPDA/2udKsSgMssMLPmX7ZCcwUIahxfTE80zFY5?=
+ =?us-ascii?Q?p92QWHeg3bGzGoXTHQT4hN93xHJ/8lOR7jQJq1RJSuClLp/a1nx44S35JRwj?=
+ =?us-ascii?Q?cixWqUGwICM2GqmxBBHom8utKf13Bd82yo/kEpjuOWkpxG+9V0Fgc9YQzZ7C?=
+ =?us-ascii?Q?UTjeT/URoBlCPN3YTVx49jVj3q3llu1IjmUev9V2pHN+3ylxc/DF7rOYXjed?=
+ =?us-ascii?Q?/HKcIhEfIRxs0OTXUQjQ6mSKgreRj6Gxj2I0jSPKoF7fP4cWGGKju62HxKoy?=
+ =?us-ascii?Q?PfAgLLOR8idLE1Ni9CB6x7noCx83RAU63koP9dcQMldvdBeoD5qTMvelVRSm?=
+ =?us-ascii?Q?X6hd9i3XYXyrmi7uaLpJ0QdiQ1ktsidTX+z7TkYqo4vbwK8pwOTJZblmaQSa?=
+ =?us-ascii?Q?uSPxMUMSvB/+vGq25fw9I4rcn5kGvvxA8NYUvCeaWn0/c+750gcdft7bYqaE?=
+ =?us-ascii?Q?cPpjYnfgV1hvtdoObuAT74RZQdoxXJfr4nlBK+ucRhRT9dH3fqh23FWYCOIK?=
+ =?us-ascii?Q?+xwrd5oHpuvMBEq4B6Z0jLF4aJksO/1huRQoJqbhVri2Xq45LNpg4l854ZBH?=
+ =?us-ascii?Q?D7DnJhtoNpupuZOaIJv7UovpVzi5m+lx3Zu+y6LtHYA4e6NA7I/Z29HI51Jc?=
+ =?us-ascii?Q?ZQWy2JVuA+WlLJ41puYBMUis6mnOMZ4bUBWUK3UtYBRUe8sMs9W2ZoLGSkE0?=
+ =?us-ascii?Q?yqQmYwCN3/6lN7ag6k4boiOs9zO2mqVr7Di2UFhJAY3HEQ=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PSAPR06MB4486.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?i7yL8/+yyp8/vaixGEw/rFADmhJKbgskRFeNH9WTreHSrcxuValRRSi8TyJR?=
+ =?us-ascii?Q?s+AoxdjU+nySduH8JqpLvP2qE6Uzd1ar1ZEmC4sRgowBTsDouR7XPE3YsKx7?=
+ =?us-ascii?Q?bqxdGsbSX0G7tmQbY5IFdODodecXoPN4jwDUegjal++Z/8UEKef2aoNBulFA?=
+ =?us-ascii?Q?3Oet56Q9if2zf6cVVOy0e0DKPnm1xGttUpvL3F69e5Sw6wIXcU5Zzjqou/ck?=
+ =?us-ascii?Q?Rrcup+IYVto8HXcS2WILPbMTk7wm3JnZo/szewlBADC5jHfO0z7toePq2ZcB?=
+ =?us-ascii?Q?hEbahbC1fzzpJhibj6y07TP6tB0HH2frFRAqvlfPJ8o52cNurU9vQ+vFCcyo?=
+ =?us-ascii?Q?kfhyJG8xifPEL1jvgA86Rlsw/g6RA7cnZY8dfVhZfSZQK9Y76BEt16BBMydL?=
+ =?us-ascii?Q?YK6l/botA8pRcdlBk5hhZb5/9kUztDz0T5/oQCDJ2dNPno77ktuLR/ZaymRU?=
+ =?us-ascii?Q?+LYBWx7QXW1CAUJNUJZUlmPeKQXuYQbXcb/+XBG9kQXEBDAHGKPdx3n3X/Qj?=
+ =?us-ascii?Q?LwYCxo58toJ5Rvi7X6MdU9I1iD4R3mw143+1EAfFJGBgRlg4Nc/8wVyjQOEC?=
+ =?us-ascii?Q?efIE89+bdr8Ly9t8UAjOZ2lFIVLYP3gYTMDKmnBP76o8OkERHdS59jnF11e/?=
+ =?us-ascii?Q?t4LUypUhc5x1j3pXTr012cgyFLo89mzIQusTBRVW+7V6yOSuuo3spbCxjjm7?=
+ =?us-ascii?Q?2dzyaInOHEAgKDfF+rnCvZ2Sdr4M5vdiltYnmZ2f8Yca5mnElb9dosPFmxDn?=
+ =?us-ascii?Q?BLnIkZip2x6uFrB2TZqe3dSJCSg9UN6PY4cXgFGM7T6M1GTVIkuiK42pmwI0?=
+ =?us-ascii?Q?5GNWZlThuWc6wX6jxF0cu4MeMuA9zxlq8cRTYtHhL4bGcllyi9wv8VqPY+bV?=
+ =?us-ascii?Q?JUMd4pNzL7jzZZKg6BAGF2do7hMy2S5b4ouuCTr5mhVNA0p5v7ZVr/eBRYpE?=
+ =?us-ascii?Q?qyH8V5cxKgyxUlgObNRyAWSjd6VOx+NY1OraPzmA8tgKSDCCIBriOli+VoNQ?=
+ =?us-ascii?Q?V6wHo7RbHr7Z6XLW7+8VU39Vx1R0KWTHehW2fJ7VPzEh9KYAVLVepu1/HFY2?=
+ =?us-ascii?Q?rOgw4+kmje5VwVsejhRrihGUX55O8SZ7/xAUpf1JVcIJ+0klhXgiUHzJjYzo?=
+ =?us-ascii?Q?c2nlecO3CCdCxuTp+x+uZUTLF2UqMNzZEK0gsHaEiDB7VYzEqz9UcPBsAScg?=
+ =?us-ascii?Q?ZChPaExtJO2Bz5XvEbLwnSfc/1JZv8/vUB03ojEQi+9WENHlbTCww/nMk86Y?=
+ =?us-ascii?Q?VC8eUp0o/KHPI+O5LlASID/mavvOUe3KJwUTTIrxjWyV0mloGA0NLiZ1qh7p?=
+ =?us-ascii?Q?TXYmwMQJ00KOOg3QyvO3/43nIQpunqpjh+tRUkoKIdBQL3l7foWbJNGR4JWJ?=
+ =?us-ascii?Q?k/3ng3mv8GtpbgRBbWoEFqBLneloVqEyR1Ag0adVybBqiUN+0iFVDmxKgGdg?=
+ =?us-ascii?Q?xS5Zh1KkiNB9qHoqbDshgrFkQulOvainjwterM7rCUz+ab5jEXjlO3GWNRd1?=
+ =?us-ascii?Q?tzmWwg8sNtO899cjDsmzN4DJPTh+8O+llJTSRQQh9VtzHlb2e2o5KMSzhk/G?=
+ =?us-ascii?Q?EZki63RM2qQNs8m+Mgd3Ae+NNu7M2/yzeNAJVkEo?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 37f6ef91-d6ab-496b-d0ae-08dcdb9805bc
+X-MS-Exchange-CrossTenant-AuthSource: PSAPR06MB4486.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2024 06:21:56.0695 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: pWFMALCb7guTiFUkInIniPar17634EufSGZ0TTA5C31QsDoYB56fsGr/NAk4a9DiYYCk7vLGBk1VhdVjnM9cHw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR06MB6273
+X-Spam-Score: -1.1 (-)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 5f5673607153
- Merge branch 'for-next/core' into for-kernelci git tree:
- git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
- for-kernelci console output: https://syzkaller.appspot. [...] 
- Content analysis details:   (-0.5 points, 6.0 required)
+ Content preview: According to the definition of statx.stx_mask: It simply
+ informs
+ the caller which values are supported by the kernel and filesystem via the
+ statx.stx_mask field. (quote from the "Linux Programmer's Ma [...] 
+ Content analysis details:   (-1.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.69 listed in list.dnswl.org]
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ -0.9 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.215.59 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -1.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.69 listed in wl.mailspike.net]
-X-Headers-End: 1srrP3-0003F2-1Y
-Subject: [f2fs-dev] [syzbot] [f2fs?] WARNING: locking bug in f2fs_getxattr
- (2)
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1sscSU-0000kW-QV
+Subject: [f2fs-dev] [PATCH] f2fs: do not set STATX_DIOALIGN if dio is not
+ supported
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,121 +184,53 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Wu Bo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Wu Bo <bo.wu@vivo.com>
+Cc: Wu Bo <wubo.oduw@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Wu Bo <bo.wu@vivo.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+According to the definition of statx.stx_mask:
+It simply informs the caller which values are supported by the kernel
+and filesystem via the statx.stx_mask field.
+(quote from the "Linux Programmer's Manual").
 
-syzbot found the following issue on:
+Therefore, if the filesystem does not support DIO, it should not set
+the STATX_DIOALIGN flag.
 
-HEAD commit:    5f5673607153 Merge branch 'for-next/core' into for-kernelci
-git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
-console output: https://syzkaller.appspot.com/x/log.txt?x=13c8e200580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=dedbcb1ff4387972
-dashboard link: https://syzkaller.appspot.com/bug?extid=44090b62afaabafe828a
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-userspace arch: arm64
-
-Unfortunately, I don't have any reproducer for this issue yet.
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/40172aed5414/disk-5f567360.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/58372f305e9d/vmlinux-5f567360.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/d2aae6fa798f/Image-5f567360.gz.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+44090b62afaabafe828a@syzkaller.appspotmail.com
-
-F2FS-fs (loop1): invalid namelen(0), ino:0, run fsck to fix.
-------------[ cut here ]------------
-Looking for class "c->lock" with key init_kmem_cache_cpus.__key, but found a different class "&c->lock" with the same key
-WARNING: CPU: 1 PID: 6409 at kernel/locking/lockdep.c:934 look_up_lock_class+0xec/0x158 kernel/locking/lockdep.c:931
-Modules linked in:
-CPU: 1 UID: 0 PID: 6409 Comm: syz-executor Not tainted 6.11.0-rc7-syzkaller-g5f5673607153 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 08/06/2024
-pstate: 604000c5 (nZCv daIF +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
-pc : look_up_lock_class+0xec/0x158 kernel/locking/lockdep.c:931
-lr : look_up_lock_class+0xec/0x158 kernel/locking/lockdep.c:931
-sp : ffff80009d476c80
-x29: ffff80009d476c80 x28: dfff800000000000 x27: 0000000000000000
-x26: ffff800097041700 x25: ffff800097041000 x24: 0000000000000001
-x23: 0000000000000000 x22: 1ffff00011eae0b1 x21: ffff8000970a13b0
-x20: fffffdffbf769c10 x19: ffff800092b14580 x18: 0000000000000008
-x17: 2c79656b5f5f2e73 x16: ffff800083032784 x15: 0000000000000001
-x14: 1fffe000366d7a5a x13: 0000000000000000 x12: 0000000000000000
-x11: 0000000000000003 x10: 0000000000ff0100 x9 : b8f830333a1c6900
-x8 : b8f830333a1c6900 x7 : 0000000000000001 x6 : 0000000000000001
-x5 : ffff80009d4763d8 x4 : ffff80008f65b620 x3 : ffff8000806051a0
-x2 : 0000000000000001 x1 : 0000000100000001 x0 : 0000000000000000
-Call trace:
- look_up_lock_class+0xec/0x158 kernel/locking/lockdep.c:931
- register_lock_class+0x8c/0x6ac kernel/locking/lockdep.c:1283
- __lock_acquire+0x18c/0x779c kernel/locking/lockdep.c:5019
- lock_acquire+0x240/0x728 kernel/locking/lockdep.c:5759
- local_lock_acquire+0x3c/0x98 include/linux/local_lock_internal.h:29
- ___slab_alloc+0xcbc/0xf38 mm/slub.c:3776
- __slab_alloc+0x74/0xd0 mm/slub.c:3817
- __slab_alloc_node mm/slub.c:3870 [inline]
- slab_alloc_node mm/slub.c:4029 [inline]
- kmem_cache_alloc_noprof+0x26c/0x350 mm/slub.c:4048
- f2fs_kmem_cache_alloc fs/f2fs/f2fs.h:2835 [inline]
- xattr_alloc fs/f2fs/xattr.c:30 [inline]
- lookup_all_xattrs fs/f2fs/xattr.c:333 [inline]
- f2fs_getxattr+0x3b4/0x111c fs/f2fs/xattr.c:533
- f2fs_xattr_generic_get+0x130/0x174 fs/f2fs/xattr.c:63
- __vfs_getxattr+0x394/0x3c0 fs/xattr.c:423
- smk_fetch+0xc8/0x150 security/smack/smack_lsm.c:306
- smack_d_instantiate+0x594/0x880 security/smack/smack_lsm.c:3613
- security_d_instantiate+0x98/0xf0 security/security.c:3942
- d_splice_alias+0x70/0x310 fs/dcache.c:2987
- f2fs_lookup+0x270/0xaf4 fs/f2fs/namei.c:591
- __lookup_slow+0x250/0x374 fs/namei.c:1718
- lookup_slow+0x60/0x84 fs/namei.c:1735
- walk_component+0x280/0x36c fs/namei.c:2039
- lookup_last fs/namei.c:2542 [inline]
- path_lookupat+0x13c/0x3d0 fs/namei.c:2566
- filename_lookup+0x1d4/0x4e0 fs/namei.c:2595
- user_path_at+0x50/0x74 fs/namei.c:3002
- ksys_umount fs/namespace.c:2033 [inline]
- __do_sys_umount fs/namespace.c:2041 [inline]
- __se_sys_umount fs/namespace.c:2039 [inline]
- __arm64_sys_umount+0xf4/0x178 fs/namespace.c:2039
- __invoke_syscall arch/arm64/kernel/syscall.c:35 [inline]
- invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:49
- el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:132
- do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:151
- el0_svc+0x54/0x168 arch/arm64/kernel/entry-common.c:712
- el0t_64_sync_handler+0x84/0xfc arch/arm64/kernel/entry-common.c:730
- el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:598
-irq event stamp: 261568
-hardirqs last  enabled at (261567): [<ffff8000809d8e84>] seqcount_lockdep_reader_access+0x6c/0xd4 include/linux/seqlock.h:74
-hardirqs last disabled at (261568): [<ffff8000809ef7cc>] ___slab_alloc+0xc90/0xf38 mm/slub.c:3776
-softirqs last  enabled at (261538): [<ffff8000800307f8>] local_bh_enable+0x10/0x34 include/linux/bottom_half.h:32
-softirqs last disabled at (261536): [<ffff8000800307c4>] local_bh_disable+0x10/0x34 include/linux/bottom_half.h:19
----[ end trace 0000000000000000 ]---
-
-
+Signed-off-by: Wu Bo <bo.wu@vivo.com>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ fs/f2fs/file.c | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 168f08507004..bbb66be0deba 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -908,14 +908,13 @@ int f2fs_getattr(struct mnt_idmap *idmap, const struct path *path,
+ 	 * f2fs sometimes supports DIO reads but not DIO writes.  STATX_DIOALIGN
+ 	 * cannot represent that, so in that case we report no DIO support.
+ 	 */
+-	if ((request_mask & STATX_DIOALIGN) && S_ISREG(inode->i_mode)) {
++	if ((request_mask & STATX_DIOALIGN) && S_ISREG(inode->i_mode) &&
++			!f2fs_force_buffered_io(inode, WRITE)) {
+ 		unsigned int bsize = i_blocksize(inode);
+ 
+ 		stat->result_mask |= STATX_DIOALIGN;
+-		if (!f2fs_force_buffered_io(inode, WRITE)) {
+-			stat->dio_mem_align = bsize;
+-			stat->dio_offset_align = bsize;
+-		}
++		stat->dio_mem_align = bsize;
++		stat->dio_offset_align = bsize;
+ 	}
+ 
+ 	flags = fi->i_flags;
+-- 
+2.25.1
 
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
 
 
 _______________________________________________
