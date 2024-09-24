@@ -2,79 +2,125 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE73D9845C4
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Sep 2024 14:16:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 624DF984C3C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Sep 2024 22:39:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1st4TL-0006aa-4V;
-	Tue, 24 Sep 2024 12:16:51 +0000
+	id 1stCJU-0006cu-QQ;
+	Tue, 24 Sep 2024 20:39:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <n.zhandarovich@fintech.ru>) id 1st4TI-0006aS-Nz
+ (envelope-from <daeho43@gmail.com>) id 1stCJT-0006co-9U
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Sep 2024 12:16:48 +0000
+ Tue, 24 Sep 2024 20:39:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hHwvyKdZsKZRuH70HLay5NTrOocz1Vg8//PxQMkg4pQ=; b=ESpq+PxubtDk00waTROJJzKZKN
- Cb8oYcP93ecy/dQXutoJyMhWKmTkN4Al6nmkZRcrgudTYDP41ho1iLVNPXjDRKsgnw7tcGCwor8L1
- WpOW+VB5fz5Lh1/YEqwOFoOxnuTZ4oUVYXWhL4MlUn8A7owF7qy335OHQ+es3PSONqNE=;
+ bh=9pDtP0TFeh4f8em2lTQ9/4Ega78aws9KodDKklh867Q=; b=CJSbFJSWUmFpMKWcFwGVuw3tN2
+ AyIEeUImoxXlWxb9jTcXM1QIc5gZ5iw8rh0Gc/kv2CnGmcbnIp7mgfaM8nUFx0mRFdvBSKM6LGPMI
+ 37hdcXoByAfWuyLDgN+pkuGu1TFqZ1FmBDrRXtlHrOPHeQ7o8HM9CAf561jaGPrHaCdI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hHwvyKdZsKZRuH70HLay5NTrOocz1Vg8//PxQMkg4pQ=; b=ggQDa0BFGXLEgrch+G8C0jD0Tx
- 73Q/YHq1ExnNRGS1USbaSIQTC3FgYKj3azau8wi86pXui+bl6ERVcmE1ByPEJhP7HqxEL7tslvK+N
- ZG1sSfAPaCtrcowj6dZxhK1k845oWjUW+AQAHi5BdLcGBq1jsdT6G1uBS3Oc1605wr2E=;
-Received: from exchange.fintech.ru ([195.54.195.159])
+ bh=9pDtP0TFeh4f8em2lTQ9/4Ega78aws9KodDKklh867Q=; b=csZP0gQLhUd28pv1LTT2TT47pU
+ J5/1ZYoNVfG0dxIu4gp9Mx3KXLjnlea04svC19Kl35tFmfqP71BcsGuGnH9qx6rswMU/rc2bCGHpA
+ Vefd7SB+0Tgmb803tcwxxC2wblbXTMJIq93MNP0ak5IJos1wBR6wrcZX0EUbncsrCJ8U=;
+Received: from mail-vk1-f171.google.com ([209.85.221.171])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.95) id 1st4TI-0007Po-24
- for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Sep 2024 12:16:48 +0000
-Received: from Ex16-01.fintech.ru (10.0.10.18) by exchange.fintech.ru
- (195.54.195.169) with Microsoft SMTP Server (TLS) id 14.3.498.0; Tue, 24 Sep
- 2024 15:04:18 +0300
-Received: from localhost (10.0.253.138) by Ex16-01.fintech.ru (10.0.10.18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2242.4; Tue, 24 Sep
- 2024 15:04:18 +0300
-From: Nikita Zhandarovich <n.zhandarovich@fintech.ru>
-To: <stable@vger.kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Date: Tue, 24 Sep 2024 05:04:11 -0700
-Message-ID: <20240924120411.34948-2-n.zhandarovich@fintech.ru>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240924120411.34948-1-n.zhandarovich@fintech.ru>
-References: <20240924120411.34948-1-n.zhandarovich@fintech.ru>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1stCJT-0006BF-Ch for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 24 Sep 2024 20:39:11 +0000
+Received: by mail-vk1-f171.google.com with SMTP id
+ 71dfb90a1353d-502b405aa76so1482138e0c.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 24 Sep 2024 13:39:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1727210340; x=1727815140; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9pDtP0TFeh4f8em2lTQ9/4Ega78aws9KodDKklh867Q=;
+ b=BSevR1q5SywPp67GYVi5Sx+M65W3WGW3ACCEQQax6LCJY4mtyiQBwZtlhLy/WmUcJO
+ jACr1MFQDSmrAZyUWPDJltD4nnbKtUuXsMz1aOQ+EbUh0XUd8IbefletPIu8NvPjB72F
+ 83TlaQ7kyqXXdwW4N8XsGYe/bG4rnmHhzx4ypca/1XwO9jqZ+8lvOqb/a6INGlOzk4J6
+ 9xLNRTFvWJqxASQEDg5QDmhUpVbHQROsKoZ9wQDBX9sY3mxnUHrM5U3XkTu/LS1+3P0H
+ uAhS9fqmbNfT1vl6ZNS/ukj6uMTCzvDVr6dR3jkD1QrNZ9R5W4RwiOwjWyxNBFbIqfvI
+ zkDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727210340; x=1727815140;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9pDtP0TFeh4f8em2lTQ9/4Ega78aws9KodDKklh867Q=;
+ b=nLq5+5JxO4ivf06izbghYAZ7i77tLZZzBhXeYYrY/f6N1KUnQ58OvtZfTSUFieG6ji
+ Had0CDCxmHfRzkUSU/iA1Lh2V8Bpyh5ytE95vjuvGSux1X+VIBBh0Ve+G6msf6WyAYGz
+ J+sDqYXIhPVNbCnyo2n0OJe5bfLAuVKGhnRw5IYDjLxFya8TeKYhXWTxc+KNIwUAogBe
+ gwV47NM41iN5oSFQE6hWl6r36I7n/TKVVQag1j5t7qvHg1d11834aZDPq8oF3XdlD0bI
+ wqOyEzaft7PEGQmlrv5x0JIBPmx+zEgfmxxOPl2JHaDCttqKkSI1QYleAdHP4irjt8Rq
+ BBSg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW/rSnVx0QAyBVQOeqdp3HpxY6ubXIkogaP+hocLizwnczjwH4tKHf7wHm3SWAubIdP1wNdKCs6mXqctvMPCLAS@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzDChG7X4mqhnHvXGe6sITQHkpOK7r63gXL5mBC1BU/HHbBqbap
+ eE1/HSGOSTtiC90nw6F4jw7w8+jLdKsJopbtf5ze58LI0bMJJXKqv2nm+MvvOGR7EDqZ8CYB1lg
+ ouDOm9fB+sYHcq8bepWbvdFZQDfo=
+X-Google-Smtp-Source: AGHT+IE3/viCbvqxP6nX7bP+UETwVo3ZV3e6Mbz9lMQ8f54XnKROpQG6cTrdUZ9HbQpc7P+xHrpBXoL2LMA8d4JzmkE=
+X-Received: by 2002:a05:6122:4681:b0:4ef:6865:8ffd with SMTP id
+ 71dfb90a1353d-505c20a4069mr768586e0c.10.1727210340321; Tue, 24 Sep 2024
+ 13:39:00 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.0.253.138]
-X-ClientProxiedBy: Ex16-02.fintech.ru (10.0.10.19) To Ex16-01.fintech.ru
- (10.0.10.18)
-X-Spam-Score: 0.0 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+References: <20240924023007.2471817-1-chao@kernel.org>
+In-Reply-To: <20240924023007.2471817-1-chao@kernel.org>
+From: Daeho Jeong <daeho43@gmail.com>
+Date: Tue, 24 Sep 2024 13:38:48 -0700
+Message-ID: <CACOAw_y_csdZmj26C8bXNVxRirq2XBYpiFXN2EnJTTdPr6BmAQ@mail.gmail.com>
+To: Chao Yu <chao@kernel.org>
+X-Spam-Score: -0.8 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Yangtao Li <frank.li@vivo.com> commit
- 5bb9c111cd98ad844d48ace9924e29f56312f036
- upstream. BIW reduce the s_flag array size and make s_flag constant. 
- Content analysis details:   (0.0 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  On Mon, Sep 23, 2024 at 7:32 PM Chao Yu via Linux-f2fs-devel
+    wrote: > > Do sanity check for extent info of device alias inode, in order
+    to > avoid unexpected error caused by fuzz test. > > Cc: Dae [...] 
+ 
+ Content analysis details:   (-0.8 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.221.171 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1st4TI-0007Po-24
-Subject: [f2fs-dev] [PATCH 6.1 1/1] f2fs: convert to MAX_SBI_FLAG instead of
- 32 in stat_show()
+  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+                             in digit
+                             [daeho43[at]gmail.com]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+                             provider
+                             [daeho43[at]gmail.com]
+ -0.9 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.221.171 listed in wl.mailspike.net]
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+                             author's domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+                             envelope-from domain
+X-Headers-End: 1stCJT-0006BF-Ch
+Subject: Re: [f2fs-dev] [PATCH] f2fs: device alias: add sanity check for
+ device alias inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,114 +132,63 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: lvc-project@linuxtesting.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net,
- Nikita Zhandarovich <n.zhandarovich@fintech.ru>,
- Jaegeuk Kim <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Yangtao Li <frank.li@vivo.com>
-
-commit 5bb9c111cd98ad844d48ace9924e29f56312f036 upstream.
-
-BIW reduce the s_flag array size and make s_flag constant.
-
-Signed-off-by: Yangtao Li <frank.li@vivo.com>
-Reviewed-by: Chao Yu <chao@kernel.org>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-[Nikita: This patch has been cherry-picked from original commit:
-the only discrepancy was in stat_show(). Specifically, due to
-lack of commit dda7d77bcd42 ("f2fs: replace si->sbi w/ sbi in
-stat_show()") keep &si->sbi->s_flag instead of &sbi->s_flag.]
-Signed-off-by: Nikita Zhandarovich <n.zhandarovich@fintech.ru>
----
- fs/f2fs/debug.c | 36 ++++++++++++++++++------------------
- fs/f2fs/f2fs.h  |  6 +++++-
- 2 files changed, 23 insertions(+), 19 deletions(-)
-
-diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
-index a9baa121d829..002bf12b4e26 100644
---- a/fs/f2fs/debug.c
-+++ b/fs/f2fs/debug.c
-@@ -332,22 +332,22 @@ static void update_mem_info(struct f2fs_sb_info *sbi)
- #endif
- }
- 
--static char *s_flag[] = {
--	[SBI_IS_DIRTY]		= " fs_dirty",
--	[SBI_IS_CLOSE]		= " closing",
--	[SBI_NEED_FSCK]		= " need_fsck",
--	[SBI_POR_DOING]		= " recovering",
--	[SBI_NEED_SB_WRITE]	= " sb_dirty",
--	[SBI_NEED_CP]		= " need_cp",
--	[SBI_IS_SHUTDOWN]	= " shutdown",
--	[SBI_IS_RECOVERED]	= " recovered",
--	[SBI_CP_DISABLED]	= " cp_disabled",
--	[SBI_CP_DISABLED_QUICK]	= " cp_disabled_quick",
--	[SBI_QUOTA_NEED_FLUSH]	= " quota_need_flush",
--	[SBI_QUOTA_SKIP_FLUSH]	= " quota_skip_flush",
--	[SBI_QUOTA_NEED_REPAIR]	= " quota_need_repair",
--	[SBI_IS_RESIZEFS]	= " resizefs",
--	[SBI_IS_FREEZING]	= " freezefs",
-+static const char *s_flag[MAX_SBI_FLAG] = {
-+	[SBI_IS_DIRTY]		= "fs_dirty",
-+	[SBI_IS_CLOSE]		= "closing",
-+	[SBI_NEED_FSCK]		= "need_fsck",
-+	[SBI_POR_DOING]		= "recovering",
-+	[SBI_NEED_SB_WRITE]	= "sb_dirty",
-+	[SBI_NEED_CP]		= "need_cp",
-+	[SBI_IS_SHUTDOWN]	= "shutdown",
-+	[SBI_IS_RECOVERED]	= "recovered",
-+	[SBI_CP_DISABLED]	= "cp_disabled",
-+	[SBI_CP_DISABLED_QUICK]	= "cp_disabled_quick",
-+	[SBI_QUOTA_NEED_FLUSH]	= "quota_need_flush",
-+	[SBI_QUOTA_SKIP_FLUSH]	= "quota_skip_flush",
-+	[SBI_QUOTA_NEED_REPAIR]	= "quota_need_repair",
-+	[SBI_IS_RESIZEFS]	= "resizefs",
-+	[SBI_IS_FREEZING]	= "freezefs",
- };
- 
- static int stat_show(struct seq_file *s, void *v)
-@@ -367,8 +367,8 @@ static int stat_show(struct seq_file *s, void *v)
- 			"Disabled" : (f2fs_cp_error(si->sbi) ? "Error" : "Good"));
- 		if (si->sbi->s_flag) {
- 			seq_puts(s, "[SBI:");
--			for_each_set_bit(j, &si->sbi->s_flag, 32)
--				seq_puts(s, s_flag[j]);
-+			for_each_set_bit(j, &si->sbi->s_flag, MAX_SBI_FLAG)
-+				seq_printf(s, " %s", s_flag[j]);
- 			seq_puts(s, "]\n");
- 		}
- 		seq_printf(s, "[SB: 1] [CP: 2] [SIT: %d] [NAT: %d] ",
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 2b540d87859e..75db7c09bdfe 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1271,7 +1271,10 @@ struct f2fs_gc_control {
- 	unsigned int nr_free_secs;	/* # of free sections to do GC */
- };
- 
--/* For s_flag in struct f2fs_sb_info */
-+/*
-+ * For s_flag in struct f2fs_sb_info
-+ * Modification on enum should be synchronized with s_flag array
-+ */
- enum {
- 	SBI_IS_DIRTY,				/* dirty flag for checkpoint */
- 	SBI_IS_CLOSE,				/* specify unmounting */
-@@ -1288,6 +1291,7 @@ enum {
- 	SBI_QUOTA_NEED_REPAIR,			/* quota file may be corrupted */
- 	SBI_IS_RESIZEFS,			/* resizefs is in process */
- 	SBI_IS_FREEZING,			/* freezefs is in process */
-+	MAX_SBI_FLAG,
- };
- 
- enum {
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gTW9uLCBTZXAgMjMsIDIwMjQgYXQgNzozMuKAr1BNIENoYW8gWXUgdmlhIExpbnV4LWYyZnMt
+ZGV2ZWwKPGxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0PiB3cm90ZToKPgo+
+IERvIHNhbml0eSBjaGVjayBmb3IgZXh0ZW50IGluZm8gb2YgZGV2aWNlIGFsaWFzIGlub2RlLCBp
+biBvcmRlciB0bwo+IGF2b2lkIHVuZXhwZWN0ZWQgZXJyb3IgY2F1c2VkIGJ5IGZ1enogdGVzdC4K
+Pgo+IENjOiBEYWVobyBKZW9uZyA8ZGFlaG9qZW9uZ0Bnb29nbGUuY29tPgo+IFNpZ25lZC1vZmYt
+Ynk6IENoYW8gWXUgPGNoYW9Aa2VybmVsLm9yZz4KPiAtLS0KPgo+IFRvIERhZWhvIGFuZCBKYWVn
+ZXVrLAo+Cj4gTWVyZ2UgdGhpcyBpbnRvIGluaXRpYWwgcGF0Y2ggb3IgbWVyZ2UgaXQgc2VwYXJh
+dGVseSBpcyBib3RoIGZpbmUKPiB0byBtZS4KCkkgYW0gZ29pbmcgdG8gbWVyZ2UgdGhpcyBpbnRv
+IG15IG9uZS4gVGhhbmtzfiEKCj4KPiAgZnMvZjJmcy9leHRlbnRfY2FjaGUuYyB8IDMyICsrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKystCj4gIDEgZmlsZSBjaGFuZ2VkLCAzMSBpbnNlcnRp
+b25zKCspLCAxIGRlbGV0aW9uKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9leHRlbnRfY2Fj
+aGUuYyBiL2ZzL2YyZnMvZXh0ZW50X2NhY2hlLmMKPiBpbmRleCAwYzhhNzA1ZmFhOGIuLjViZjll
+NGMyYjQ5YyAxMDA2NDQKPiAtLS0gYS9mcy9mMmZzL2V4dGVudF9jYWNoZS5jCj4gKysrIGIvZnMv
+ZjJmcy9leHRlbnRfY2FjaGUuYwo+IEBAIC0yNCw2ICsyNCw3IEBAIGJvb2wgc2FuaXR5X2NoZWNr
+X2V4dGVudF9jYWNoZShzdHJ1Y3QgaW5vZGUgKmlub2RlLCBzdHJ1Y3QgcGFnZSAqaXBhZ2UpCj4g
+ICAgICAgICBzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkgPSBGMkZTX0lfU0IoaW5vZGUpOwo+ICAg
+ICAgICAgc3RydWN0IGYyZnNfZXh0ZW50ICppX2V4dCA9ICZGMkZTX0lOT0RFKGlwYWdlKS0+aV9l
+eHQ7Cj4gICAgICAgICBzdHJ1Y3QgZXh0ZW50X2luZm8gZWk7Cj4gKyAgICAgICBpbnQgZGV2aTsK
+Pgo+ICAgICAgICAgZ2V0X3JlYWRfZXh0ZW50X2luZm8oJmVpLCBpX2V4dCk7Cj4KPiBAQCAtMzgs
+NyArMzksMzYgQEAgYm9vbCBzYW5pdHlfY2hlY2tfZXh0ZW50X2NhY2hlKHN0cnVjdCBpbm9kZSAq
+aW5vZGUsIHN0cnVjdCBwYWdlICppcGFnZSkKPiAgICAgICAgICAgICAgICAgICAgICAgICAgIGVp
+LmJsaywgZWkuZm9mcywgZWkubGVuKTsKPiAgICAgICAgICAgICAgICAgcmV0dXJuIGZhbHNlOwo+
+ICAgICAgICAgfQo+IC0gICAgICAgcmV0dXJuIHRydWU7Cj4gKwo+ICsgICAgICAgaWYgKCFJU19E
+RVZJQ0VfQUxJQVNJTkcoaW5vZGUpKQo+ICsgICAgICAgICAgICAgICByZXR1cm4gdHJ1ZTsKPiAr
+Cj4gKyAgICAgICBmb3IgKGRldmkgPSAwOyBkZXZpIDwgc2JpLT5zX25kZXZzOyBkZXZpKyspIHsK
+PiArICAgICAgICAgICAgICAgaWYgKEZERVYoZGV2aSkuc3RhcnRfYmxrICE9IGVpLmJsayB8fAo+
+ICsgICAgICAgICAgICAgICAgICAgICAgIEZERVYoZGV2aSkuZW5kX2JsayAhPSBlaS5ibGsgKyBl
+aS5sZW4pCgplaS5ibGsgKyBlaS5sZW4gLT4gZWkuYmxrICsgZWkubGVuIC0gMT8KCj4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgY29udGludWU7Cj4gKwo+ICsgICAgICAgICAgICAgICBpZiAoZGV2
+aSA9PSAwKSB7Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgZjJmc193YXJuKHNiaSwKPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICIlczogaW5vZGUgKGlubz0lbHgpIGlzIGFuIGFs
+aWFzIG9mIG1ldGEgZGV2aWNlIiwKPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF9f
+ZnVuY19fLCBpbm9kZS0+aV9pbm8pOwo+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiBm
+YWxzZTsKPiArICAgICAgICAgICAgICAgfQo+ICsKPiArICAgICAgICAgICAgICAgaWYgKGJkZXZf
+aXNfem9uZWQoRkRFVihkZXZpKS5iZGV2KSkgewo+ICsgICAgICAgICAgICAgICAgICAgICAgIGYy
+ZnNfd2FybihzYmksCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiJXM6IGRldmlj
+ZSBhbGlhcyBpbm9kZSAoaW5vPSVseCkncyBleHRlbnQgaW5mbyAiCj4gKyAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAiWyV1LCAldSwgJXVdIG1hcHMgdG8gem9uZWQgYmxvY2sgZGV2aWNl
+IiwKPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF9fZnVuY19fLCBpbm9kZS0+aV9p
+bm8sIGVpLmJsaywgZWkuZm9mcywgZWkubGVuKTsKPiArICAgICAgICAgICAgICAgICAgICAgICBy
+ZXR1cm4gZmFsc2U7Cj4gKyAgICAgICAgICAgICAgIH0KPiArICAgICAgICAgICAgICAgcmV0dXJu
+IHRydWU7Cj4gKyAgICAgICB9Cj4gKwo+ICsgICAgICAgZjJmc193YXJuKHNiaSwgIiVzOiBkZXZp
+Y2UgYWxpYXMgaW5vZGUgKGlubz0lbHgpJ3MgZXh0ZW50IGluZm8gIgo+ICsgICAgICAgICAgICAg
+ICAgICAgICAgICJbJXUsICV1LCAldV0gaXMgaW5jb25zaXN0ZW50IHcvIGFueSBkZXZpY2VzIiwK
+PiArICAgICAgICAgICAgICAgICAgICAgICBfX2Z1bmNfXywgaW5vZGUtPmlfaW5vLCBlaS5ibGss
+IGVpLmZvZnMsIGVpLmxlbik7Cj4gKyAgICAgICByZXR1cm4gZmFsc2U7Cj4gIH0KPgo+ICBzdGF0
+aWMgdm9pZCBfX3NldF9leHRlbnRfaW5mbyhzdHJ1Y3QgZXh0ZW50X2luZm8gKmVpLAo+IC0tCj4g
+Mi40MC4xCj4KPgo+Cj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KPiBMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdAo+IExpbnV4LWYyZnMtZGV2ZWxA
+bGlzdHMuc291cmNlZm9yZ2UubmV0Cj4gaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlz
+dHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4
+LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9y
+Z2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
