@@ -2,124 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7924C9868B0
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Sep 2024 23:53:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C723C98755A
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Sep 2024 16:21:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1stZw9-0000tm-M2;
-	Wed, 25 Sep 2024 21:52:41 +0000
+	id 1stpMx-0005ht-Oo;
+	Thu, 26 Sep 2024 14:21:24 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1stZw7-0000tf-Bs
+ (envelope-from <kernel@pankajraghav.com>) id 1stpMp-0005hj-Lx
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Sep 2024 21:52:39 +0000
+ Thu, 26 Sep 2024 14:21:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8IMFZ7ULuyZoDeN1Acj+MYR2DjqIALKpB6PITKWqATw=; b=XD1Zmt8ixTlkI+Lmql6TxcSk3z
- h7hh8QemHfxmND1+dJ0W84D4h3GYPPEEk3yBeG9STki0cBKfZ4RDZPHGQsdNJr6yQyZJD9d55U10L
- +4jX4RBFMmhH1o4s0R+iuhuX/5idoejw1G+8FMw1ykcNndxJDMYLiqdKK1Qpc/OtbtKM=;
+ bh=w3yVqcJ29OEQ9vfqFMLDk33CQ5+GhguYzGm7fkCs0Fo=; b=Uv+aGfvValWaGkT4fm1jyqz4bB
+ C4+Ic0gTN+XsVRJYzA9EcEhDslFb06WcpuWtsrF/4PWgpWSIujzNnvzKs2qZHQ27Ez7NmhGMuRlYK
+ 4VnMdYoECb4zu7e2P2eDa1qBCH4L9ULHlAjcChAdC+VaA95ogJ68l9qQscNKYZ7KxzUA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=8IMFZ7ULuyZoDeN1Acj+MYR2DjqIALKpB6PITKWqATw=; b=D
- +EXdA8EqSo2VMfdYsiWWVc/a9UhvElWSjgwK2UuZ2qG2cCkCeDyrb57TE2oc87Ctpacm7dVl0CIYp
- C3ltjNT7fvZYvc5YsbKEn1/9etpESYcWpWF1TIhkdrJIhtsyMMlI7sGjq60NEDBajaSXsX3O+baoi
- 76kdvBZromK4vQsA=;
-Received: from mail-pl1-f178.google.com ([209.85.214.178])
+ List-Owner:List-Archive; bh=w3yVqcJ29OEQ9vfqFMLDk33CQ5+GhguYzGm7fkCs0Fo=; b=O
+ wMfw8DfiLd/21pM7zbB7uT1R5kF2CSiAJj5BtMyylnKE6Y8nJaQAap5kZs9AOoJiB5cZc3APwi6ml
+ WWd4CNE0YkW9HbeUTrB11jbEv3s8jSEjtWwtfATYezAZSXb9CJO/zJ7OISgT8aP+ByAVCDdmZPzjX
+ 0SDvpWvCr9QFFQb4=;
+Received: from mout-p-202.mailbox.org ([80.241.56.172])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1stZw6-0004gP-5J for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Sep 2024 21:52:39 +0000
-Received: by mail-pl1-f178.google.com with SMTP id
- d9443c01a7336-2053525bd90so2439875ad.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 25 Sep 2024 14:52:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727301147; x=1727905947; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8IMFZ7ULuyZoDeN1Acj+MYR2DjqIALKpB6PITKWqATw=;
- b=R/9GCVKiiz5yFUvCWB0xC5VyF2tQPt6rIDpr3cfuUqd8YPHeOfBCFm9IYqff0FMrzU
- ohAuk7/GXwNstaaS2KTZYy5MP4EcbkYknLm3I9ZZYen9mHioki+aRP1o/i+QC+tChr97
- l6GDtyyXZOZqDksK++rYaJcDbMJDnZajBP0HBam99kK9SuuBtGFsLGkn5BaKKZtjkaiP
- 4yprMdLk7dkLtBtIDQhsP+nX7XzIC6/nGVadd6yWL/xv+Ndxs/8n7TOF0qoW9dU0cxVL
- TpF67AqCQzm0gAeWWE7bNaPRrAx1dYTS9hke0r4GdMA95PYGXOcqXekEu79heiAGgAKa
- xYBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727301147; x=1727905947;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8IMFZ7ULuyZoDeN1Acj+MYR2DjqIALKpB6PITKWqATw=;
- b=vz3ARWfYfrypKHel+o/Sc0WBztznWZiG7WAXaPIx8E39aEIeOxK8tMOhc83AOh+L89
- CSM4mvE7w62S2zrSvgKeA629nXph6kjioCzVv1V8DvvNuvLNUW4Ix9PCepCgLAO5zy5V
- hI2VXVM3+6Ca+Jp/hXYdzF+0XpPxRKTqmwhg/2CUBDPb/4xmCpbi2jI43ov6iPHr7d0u
- ZglLqnr7TYqFkZOiG7BeOt/dl6785JrQjvd2wiLGcs6/gwyJWRS1UHS0t4Q/wXwfeukJ
- HGlPXPRN0IqobkB5DkUJtv7BK01fcYnVcmDb7uE1h0QcBeLzFdcvkfqGtBxkQ295Gul1
- n+0Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWYRZFs5IbTTYcsuEe7FE1RloNLMW5EwivDRxiV4iNtd16odA9+QHQoaOp4c1S9nH2piGFEypOsjSmgnydrO9vU@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzM64ggRZXmyj6hg5gbvQIiI/cF0XYP745NdwlkZZVSbxMpe5RY
- aQZtQi33L9Dgg/DJBrF7LWO+mgeGjqs/bpv9qzqZtsLOUUnAwo/6LZ8JKg==
-X-Google-Smtp-Source: AGHT+IGxpDjLe0Rr8KWwNkwR6rNOLn/iR5DPJ5ofvU0M7fpSWRGZEHEAg5BcHVbEc08rsZgPRAfD9Q==
-X-Received: by 2002:a17:90a:6b08:b0:2e0:7b35:31ce with SMTP id
- 98e67ed59e1d1-2e07b3532cfmr3086721a91.34.1727301147217; 
- Wed, 25 Sep 2024 14:52:27 -0700 (PDT)
-Received: from daehojeong-desktop.mtv.corp.google.com
- ([2a00:79e0:2e14:7:a7cb:a943:3ef3:3eee])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e06e19c318sm1957356a91.1.2024.09.25.14.52.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 14:52:26 -0700 (PDT)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Wed, 25 Sep 2024 14:52:21 -0700
-Message-ID: <20240925215221.3045262-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.46.0.792.g87dc391469-goog
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1stpMp-0008Rm-08 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 26 Sep 2024 14:21:16 +0000
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4XDwHx69cbz9v1R;
+ Thu, 26 Sep 2024 16:01:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pankajraghav.com;
+ s=MBO0001; t=1727359293;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=w3yVqcJ29OEQ9vfqFMLDk33CQ5+GhguYzGm7fkCs0Fo=;
+ b=B/hzg0lEblt0XlID897/ZRjsqDcP0jLjdHy9khrBa2XGuPS4avvtELj0OpJGDbeioi61t7
+ IeK7Uva9eqJjQJNAQtFL/osMaWw++FQkcMI5eaZcWmv8r1oYWl6Cd3MhhXzqO33Vy6lzR4
+ U9/k9KdJ1kENR8gfdRKxiBTsRxkcE0LFTdySUBPmIeExlE00t/iw/169IF3eYxskcdFDe5
+ ymmTPoKPSUEmOGSWxpnolvT7Ngwdty5KQb5HzdShLfad2IeycqmAo5Scf8CpSBiM+TPSeF
+ 4JNbWZqKFOT0cFl1qDt6C2Q/TSYsVSFRun1ld1P+Hl7fJ+YcXxaDFpk3T79qCA==
+To: Theodore Ts'o <tytso@mit.edu>, Chao Yu <chao@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, willy@infradead.org,
+ Josef Bacik <josef@toxicpanda.com>, Johannes Weiner <hannes@cmpxchg.org>,
+ =?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ "Darrick J . Wong" <djwong@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
+ Tejun Heo <tj@kernel.org>, akpm@linux-foundation.org,
+ Christian Brauner <brauner@kernel.org>,
+ Andreas Dilger <adilger.kernel@dilger.ca>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Jan Kara <jack@suse.cz>,
+ Chris Mason <clm@fb.com>, David Sterba <dsterba@suse.com>
+Date: Thu, 26 Sep 2024 16:01:21 +0200
+Message-ID: <20240926140121.203821-1-kernel@pankajraghav.com>
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+X-Rspamd-Queue-Id: 4XDwHx69cbz9v1R
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Daeho Jeong F2FS should understand how the device
- aliasing
- file works and support deleting the file after use. A device aliasing file
- can be created by mkfs.f2fs tool and it can map the whole device with an
- extre [...] 
- Content analysis details:   (0.1 points, 6.0 required)
+ Content preview: From: Pankaj Raghav <p.raghav@samsung.com> Most of the
+ callers
+ of wbc_account_cgroup_owner() are converting a folio to page before calling
+ the function. wbc_account_cgroup_owner() is converting the page back to a
+ folio to call mem_cgroup_css_f [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [daeho43[at]gmail.com]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [daeho43[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.178 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1stZw6-0004gP-5J
-Subject: [f2fs-dev] [PATCH v3] f2fs: introduce device aliasing file
+X-Headers-End: 1stpMp-0008Rm-08
+Subject: [f2fs-dev] [PATCH] fs/writeback: convert wbc_account_cgroup_owner
+ to take a folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,343 +110,262 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+From: "Pankaj Raghav \(Samsung\) via Linux-f2fs-devel"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: "Pankaj Raghav \(Samsung\)" <kernel@pankajraghav.com>
+Cc: Pankaj Raghav <p.raghav@samsung.com>, linux-doc@vger.kernel.org,
+ gost.dev@samsung.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ kernel@pankajraghav.com, mcgrof@kernel.org, linux-fsdevel@vger.kernel.org,
+ cgroups@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+From: Pankaj Raghav <p.raghav@samsung.com>
 
-F2FS should understand how the device aliasing file works and support
-deleting the file after use. A device aliasing file can be created by
-mkfs.f2fs tool and it can map the whole device with an extrent, not
-using node blocks. The file space should be pinned and normally used for
-read-only usages.
+Most of the callers of wbc_account_cgroup_owner() are converting a folio
+to page before calling the function. wbc_account_cgroup_owner() is
+converting the page back to a folio to call mem_cgroup_css_from_folio().
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
+Convert wbc_account_cgroup_owner() to take a folio instead of a page,
+and convert all callers to pass a folio directly except f2fs.
+
+Convert the page to folio for all the callers from f2fs as they were the
+only callers calling wbc_account_cgroup_owner() with a page. As f2fs is
+already in the process of converting to folios, these call sites might
+also soon be calling wbc_account_cgroup_owner() with a folio directly in
+the future.
+
+No functional changes. Only compile tested.
+
+Signed-off-by: Pankaj Raghav <p.raghav@samsung.com>
 ---
-v3: merged Chao's extent cache sanity check.
-    prevented device aliasing support with noextent mount option
-v2: changed the position of f2fs_destroy_extent_tree() only for device
-    aliasing files
----
- fs/f2fs/data.c         |  5 +++++
- fs/f2fs/extent_cache.c | 45 +++++++++++++++++++++++++++++++++++++++++-
- fs/f2fs/f2fs.h         |  5 +++++
- fs/f2fs/file.c         | 36 +++++++++++++++++++++++++++++----
- fs/f2fs/inode.c        | 12 ++++++++++-
- fs/f2fs/super.c        |  4 ++++
- fs/f2fs/sysfs.c        |  2 ++
- 7 files changed, 103 insertions(+), 6 deletions(-)
+ Documentation/admin-guide/cgroup-v2.rst | 2 +-
+ fs/btrfs/extent_io.c                    | 7 +++----
+ fs/btrfs/inode.c                        | 2 +-
+ fs/buffer.c                             | 4 ++--
+ fs/ext4/page-io.c                       | 2 +-
+ fs/f2fs/data.c                          | 9 ++++++---
+ fs/fs-writeback.c                       | 8 +++-----
+ fs/iomap/buffered-io.c                  | 2 +-
+ fs/mpage.c                              | 2 +-
+ include/linux/writeback.h               | 4 ++--
+ 10 files changed, 21 insertions(+), 21 deletions(-)
 
+diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+index 69af2173555fb..064012ea6f366 100644
+--- a/Documentation/admin-guide/cgroup-v2.rst
++++ b/Documentation/admin-guide/cgroup-v2.rst
+@@ -2945,7 +2945,7 @@ following two functions.
+ 	a queue (device) has been associated with the bio and
+ 	before submission.
+ 
+-  wbc_account_cgroup_owner(@wbc, @page, @bytes)
++  wbc_account_cgroup_owner(@wbc, @folio, @bytes)
+ 	Should be called for each data segment being written out.
+ 	While this function doesn't care exactly when it's called
+ 	during the writeback session, it's the easiest and most
+diff --git a/fs/btrfs/extent_io.c b/fs/btrfs/extent_io.c
+index 39c9677c47d5a..4667d1e034e0e 100644
+--- a/fs/btrfs/extent_io.c
++++ b/fs/btrfs/extent_io.c
+@@ -785,7 +785,7 @@ static void submit_extent_folio(struct btrfs_bio_ctrl *bio_ctrl,
+ 		}
+ 
+ 		if (bio_ctrl->wbc)
+-			wbc_account_cgroup_owner(bio_ctrl->wbc, &folio->page,
++			wbc_account_cgroup_owner(bio_ctrl->wbc, folio,
+ 						 len);
+ 
+ 		size -= len;
+@@ -1707,7 +1707,7 @@ static noinline_for_stack void write_one_eb(struct extent_buffer *eb,
+ 		ret = bio_add_folio(&bbio->bio, folio, eb->len,
+ 				    eb->start - folio_pos(folio));
+ 		ASSERT(ret);
+-		wbc_account_cgroup_owner(wbc, folio_page(folio, 0), eb->len);
++		wbc_account_cgroup_owner(wbc, folio, eb->len);
+ 		folio_unlock(folio);
+ 	} else {
+ 		int num_folios = num_extent_folios(eb);
+@@ -1721,8 +1721,7 @@ static noinline_for_stack void write_one_eb(struct extent_buffer *eb,
+ 			folio_start_writeback(folio);
+ 			ret = bio_add_folio(&bbio->bio, folio, eb->folio_size, 0);
+ 			ASSERT(ret);
+-			wbc_account_cgroup_owner(wbc, folio_page(folio, 0),
+-						 eb->folio_size);
++			wbc_account_cgroup_owner(wbc, folio, eb->folio_size);
+ 			wbc->nr_to_write -= folio_nr_pages(folio);
+ 			folio_unlock(folio);
+ 		}
+diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+index edac499fd83d2..eb64f04755c23 100644
+--- a/fs/btrfs/inode.c
++++ b/fs/btrfs/inode.c
+@@ -1729,7 +1729,7 @@ static bool run_delalloc_compressed(struct btrfs_inode *inode,
+ 			 * need full accuracy.  Just account the whole thing
+ 			 * against the first page.
+ 			 */
+-			wbc_account_cgroup_owner(wbc, &locked_folio->page,
++			wbc_account_cgroup_owner(wbc, locked_folio,
+ 						 cur_end - start);
+ 			async_chunk[i].locked_folio = locked_folio;
+ 			locked_folio = NULL;
+diff --git a/fs/buffer.c b/fs/buffer.c
+index 1fc9a50def0b5..32bd0f4c42236 100644
+--- a/fs/buffer.c
++++ b/fs/buffer.c
+@@ -2803,7 +2803,7 @@ static void submit_bh_wbc(blk_opf_t opf, struct buffer_head *bh,
+ 	bio->bi_iter.bi_sector = bh->b_blocknr * (bh->b_size >> 9);
+ 	bio->bi_write_hint = write_hint;
+ 
+-	__bio_add_page(bio, bh->b_page, bh->b_size, bh_offset(bh));
++	bio_add_folio_nofail(bio, bh->b_folio, bh->b_size, bh_offset(bh));
+ 
+ 	bio->bi_end_io = end_bio_bh_io_sync;
+ 	bio->bi_private = bh;
+@@ -2813,7 +2813,7 @@ static void submit_bh_wbc(blk_opf_t opf, struct buffer_head *bh,
+ 
+ 	if (wbc) {
+ 		wbc_init_bio(wbc, bio);
+-		wbc_account_cgroup_owner(wbc, bh->b_page, bh->b_size);
++		wbc_account_cgroup_owner(wbc, bh->b_folio, bh->b_size);
+ 	}
+ 
+ 	submit_bio(bio);
+diff --git a/fs/ext4/page-io.c b/fs/ext4/page-io.c
+index ad5543866d215..b7b9261fec3b5 100644
+--- a/fs/ext4/page-io.c
++++ b/fs/ext4/page-io.c
+@@ -421,7 +421,7 @@ static void io_submit_add_bh(struct ext4_io_submit *io,
+ 		io_submit_init_bio(io, bh);
+ 	if (!bio_add_folio(io->io_bio, io_folio, bh->b_size, bh_offset(bh)))
+ 		goto submit_and_retry;
+-	wbc_account_cgroup_owner(io->io_wbc, &folio->page, bh->b_size);
++	wbc_account_cgroup_owner(io->io_wbc, folio, bh->b_size);
+ 	io->io_next_block++;
+ }
+ 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index b94cf6eea2f9..385b46e62ede 100644
+index 94f7b084f6016..e3ce763cce18f 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -3441,6 +3441,11 @@ static int prepare_write_begin(struct f2fs_sb_info *sbi,
- 
- 	if (!f2fs_lookup_read_extent_cache_block(inode, index,
- 						 &dn.data_blkaddr)) {
-+		if (IS_DEVICE_ALIASING(inode)) {
-+			err = -ENODATA;
-+			goto out;
-+		}
-+
- 		if (locked) {
- 			err = f2fs_reserve_block(&dn, index);
- 			goto out;
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index 62ac440d9416..019c1f7b7fa5 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -24,6 +24,7 @@ bool sanity_check_extent_cache(struct inode *inode, struct page *ipage)
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	struct f2fs_extent *i_ext = &F2FS_INODE(ipage)->i_ext;
- 	struct extent_info ei;
-+	int devi;
- 
- 	get_read_extent_info(&ei, i_ext);
- 
-@@ -38,7 +39,36 @@ bool sanity_check_extent_cache(struct inode *inode, struct page *ipage)
- 			  ei.blk, ei.fofs, ei.len);
- 		return false;
+@@ -711,7 +711,8 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
  	}
--	return true;
-+
-+	if (!IS_DEVICE_ALIASING(inode))
-+		return true;
-+
-+	for (devi = 0; devi < sbi->s_ndevs; devi++) {
-+		if (FDEV(devi).start_blk != ei.blk ||
-+				FDEV(devi).end_blk != ei.blk + ei.len - 1)
-+			continue;
-+
-+		if (devi == 0) {
-+			f2fs_warn(sbi,
-+			    "%s: inode (ino=%lx) is an alias of meta device",
-+			    __func__, inode->i_ino);
-+			return false;
-+		}
-+
-+		if (bdev_is_zoned(FDEV(devi).bdev)) {
-+			f2fs_warn(sbi,
-+			    "%s: device alias inode (ino=%lx)'s extent info "
-+			    "[%u, %u, %u] maps to zoned block device",
-+			    __func__, inode->i_ino, ei.blk, ei.fofs, ei.len);
-+			return false;
-+		}
-+		return true;
-+	}
-+
-+	f2fs_warn(sbi, "%s: device alias inode (ino=%lx)'s extent info "
-+			"[%u, %u, %u] is inconsistent w/ any devices",
-+			__func__, inode->i_ino, ei.blk, ei.fofs, ei.len);
-+	return false;
- }
  
- static void __set_extent_info(struct extent_info *ei,
-@@ -76,6 +106,9 @@ static bool __init_may_extent_tree(struct inode *inode, enum extent_type type)
+ 	if (fio->io_wbc && !is_read_io(fio->op))
+-		wbc_account_cgroup_owner(fio->io_wbc, fio->page, PAGE_SIZE);
++		wbc_account_cgroup_owner(fio->io_wbc, page_folio(fio->page),
++					 PAGE_SIZE);
  
- static bool __may_extent_tree(struct inode *inode, enum extent_type type)
+ 	inc_page_count(fio->sbi, is_read_io(fio->op) ?
+ 			__read_io_type(page) : WB_DATA_TYPE(fio->page, false));
+@@ -911,7 +912,8 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+ 	}
+ 
+ 	if (fio->io_wbc)
+-		wbc_account_cgroup_owner(fio->io_wbc, fio->page, PAGE_SIZE);
++		wbc_account_cgroup_owner(fio->io_wbc, page_folio(fio->page),
++					 PAGE_SIZE);
+ 
+ 	inc_page_count(fio->sbi, WB_DATA_TYPE(page, false));
+ 
+@@ -1011,7 +1013,8 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
+ 	}
+ 
+ 	if (fio->io_wbc)
+-		wbc_account_cgroup_owner(fio->io_wbc, fio->page, PAGE_SIZE);
++		wbc_account_cgroup_owner(fio->io_wbc, page_folio(fio->page),
++					 PAGE_SIZE);
+ 
+ 	io->last_block_in_bio = fio->new_blkaddr;
+ 
+diff --git a/fs/fs-writeback.c b/fs/fs-writeback.c
+index d8bec3c1bb1fa..2391b09f4cede 100644
+--- a/fs/fs-writeback.c
++++ b/fs/fs-writeback.c
+@@ -890,17 +890,16 @@ EXPORT_SYMBOL_GPL(wbc_detach_inode);
+ /**
+  * wbc_account_cgroup_owner - account writeback to update inode cgroup ownership
+  * @wbc: writeback_control of the writeback in progress
+- * @page: page being written out
++ * @folio: folio being written out
+  * @bytes: number of bytes being written out
+  *
+- * @bytes from @page are about to written out during the writeback
++ * @bytes from @folio are about to written out during the writeback
+  * controlled by @wbc.  Keep the book for foreign inode detection.  See
+  * wbc_detach_inode().
+  */
+-void wbc_account_cgroup_owner(struct writeback_control *wbc, struct page *page,
++void wbc_account_cgroup_owner(struct writeback_control *wbc, struct folio *folio,
+ 			      size_t bytes)
  {
-+	if (IS_DEVICE_ALIASING(inode) && type == EX_READ)
-+		return true;
-+
- 	/*
- 	 * for recovered files during mount do not create extents
- 	 * if shrinker is not registered.
-@@ -401,6 +434,11 @@ void f2fs_init_read_extent_tree(struct inode *inode, struct page *ipage)
- 	if (atomic_read(&et->node_cnt) || !ei.len)
- 		goto skip;
+-	struct folio *folio;
+ 	struct cgroup_subsys_state *css;
+ 	int id;
  
-+	if (IS_DEVICE_ALIASING(inode)) {
-+		et->largest = ei;
-+		goto skip;
-+	}
-+
- 	en = __attach_extent_node(sbi, et, &ei, NULL,
- 				&et->root.rb_root.rb_node, true);
- 	if (en) {
-@@ -463,6 +501,11 @@ static bool __lookup_extent_tree(struct inode *inode, pgoff_t pgofs,
- 		goto out;
- 	}
+@@ -913,7 +912,6 @@ void wbc_account_cgroup_owner(struct writeback_control *wbc, struct page *page,
+ 	if (!wbc->wb || wbc->no_cgroup_owner)
+ 		return;
  
-+	if (IS_DEVICE_ALIASING(inode)) {
-+		ret = false;
-+		goto out;
-+	}
-+
- 	en = __lookup_extent_node(&et->root, et->cached_en, pgofs);
- 	if (!en)
- 		goto out;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 33f5449dc22d..b6ba22a1da47 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -213,6 +213,7 @@ struct f2fs_mount_info {
- #define F2FS_FEATURE_CASEFOLD			0x00001000
- #define F2FS_FEATURE_COMPRESSION		0x00002000
- #define F2FS_FEATURE_RO				0x00004000
-+#define F2FS_FEATURE_DEVICE_ALIAS		0x00008000
+-	folio = page_folio(page);
+ 	css = mem_cgroup_css_from_folio(folio);
+ 	/* dead cgroups shouldn't contribute to inode ownership arbitration */
+ 	if (!(css->flags & CSS_ONLINE))
+diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
+index 11ea747228aee..3d1fae7d3a64e 100644
+--- a/fs/iomap/buffered-io.c
++++ b/fs/iomap/buffered-io.c
+@@ -1833,7 +1833,7 @@ static int iomap_add_to_ioend(struct iomap_writepage_ctx *wpc,
+ 	if (ifs)
+ 		atomic_add(len, &ifs->write_bytes_pending);
+ 	wpc->ioend->io_size += len;
+-	wbc_account_cgroup_owner(wbc, &folio->page, len);
++	wbc_account_cgroup_owner(wbc, folio, len);
+ 	return 0;
+ }
  
- #define __F2FS_HAS_FEATURE(raw_super, mask)				\
- 	((raw_super->feature & cpu_to_le32(mask)) != 0)
-@@ -3046,6 +3047,7 @@ static inline void f2fs_change_bit(unsigned int nr, char *addr)
- #define F2FS_DIRSYNC_FL			0x00010000 /* dirsync behaviour (directories only) */
- #define F2FS_PROJINHERIT_FL		0x20000000 /* Create with parents projid */
- #define F2FS_CASEFOLD_FL		0x40000000 /* Casefolded file */
-+#define F2FS_DEVICE_ALIAS_FL		0x80000000 /* File for aliasing a device */
+diff --git a/fs/mpage.c b/fs/mpage.c
+index b5b5ddf9d513d..82aecf3727437 100644
+--- a/fs/mpage.c
++++ b/fs/mpage.c
+@@ -606,7 +606,7 @@ static int __mpage_writepage(struct folio *folio, struct writeback_control *wbc,
+ 	 * the confused fail path above (OOM) will be very confused when
+ 	 * it finds all bh marked clean (i.e. it will not write anything)
+ 	 */
+-	wbc_account_cgroup_owner(wbc, &folio->page, folio_size(folio));
++	wbc_account_cgroup_owner(wbc, folio, folio_size(folio));
+ 	length = first_unmapped << blkbits;
+ 	if (!bio_add_folio(bio, folio, length, 0)) {
+ 		bio = mpage_bio_submit_write(bio);
+diff --git a/include/linux/writeback.h b/include/linux/writeback.h
+index d6db822e4bb30..641a057e04132 100644
+--- a/include/linux/writeback.h
++++ b/include/linux/writeback.h
+@@ -217,7 +217,7 @@ void wbc_attach_and_unlock_inode(struct writeback_control *wbc,
+ 				 struct inode *inode)
+ 	__releases(&inode->i_lock);
+ void wbc_detach_inode(struct writeback_control *wbc);
+-void wbc_account_cgroup_owner(struct writeback_control *wbc, struct page *page,
++void wbc_account_cgroup_owner(struct writeback_control *wbc, struct folio *folio,
+ 			      size_t bytes);
+ int cgroup_writeback_by_id(u64 bdi_id, int memcg_id,
+ 			   enum wb_reason reason, struct wb_completion *done);
+@@ -324,7 +324,7 @@ static inline void wbc_init_bio(struct writeback_control *wbc, struct bio *bio)
+ }
  
- #define F2FS_QUOTA_DEFAULT_FL		(F2FS_NOATIME_FL | F2FS_IMMUTABLE_FL)
- 
-@@ -3061,6 +3063,8 @@ static inline void f2fs_change_bit(unsigned int nr, char *addr)
- /* Flags that are appropriate for non-directories/regular files. */
- #define F2FS_OTHER_FLMASK	(F2FS_NODUMP_FL | F2FS_NOATIME_FL)
- 
-+#define IS_DEVICE_ALIASING(inode)	(F2FS_I(inode)->i_flags & F2FS_DEVICE_ALIAS_FL)
-+
- static inline __u32 f2fs_mask_flags(umode_t mode, __u32 flags)
+ static inline void wbc_account_cgroup_owner(struct writeback_control *wbc,
+-					    struct page *page, size_t bytes)
++					    struct folio *folio, size_t bytes)
  {
- 	if (S_ISDIR(mode))
-@@ -4510,6 +4514,7 @@ F2FS_FEATURE_FUNCS(sb_chksum, SB_CHKSUM);
- F2FS_FEATURE_FUNCS(casefold, CASEFOLD);
- F2FS_FEATURE_FUNCS(compression, COMPRESSION);
- F2FS_FEATURE_FUNCS(readonly, RO);
-+F2FS_FEATURE_FUNCS(device_alias, DEVICE_ALIAS);
- 
- #ifdef CONFIG_BLK_DEV_ZONED
- static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 99903eafa7fe..f2d2d84d025b 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -725,6 +725,11 @@ int f2fs_do_truncate_blocks(struct inode *inode, u64 from, bool lock)
- 
- 	trace_f2fs_truncate_blocks_enter(inode, from);
- 
-+	if (IS_DEVICE_ALIASING(inode) && from) {
-+		err = -EINVAL;
-+		goto out_err;
-+	}
-+
- 	free_from = (pgoff_t)F2FS_BLK_ALIGN(from);
- 
- 	if (free_from >= max_file_blocks(inode))
-@@ -739,6 +744,21 @@ int f2fs_do_truncate_blocks(struct inode *inode, u64 from, bool lock)
- 		goto out;
- 	}
- 
-+	if (IS_DEVICE_ALIASING(inode)) {
-+		struct extent_tree *et = F2FS_I(inode)->extent_tree[EX_READ];
-+		struct extent_info ei = et->largest;
-+		unsigned int i;
-+
-+		for (i = 0; i < ei.len; i++)
-+			f2fs_invalidate_blocks(sbi, ei.blk + i);
-+
-+		dec_valid_block_count(sbi, inode, ei.len);
-+		f2fs_update_time(sbi, REQ_TIME);
-+
-+		f2fs_put_page(ipage, 1);
-+		goto out;
-+	}
-+
- 	if (f2fs_has_inline_data(inode)) {
- 		f2fs_truncate_inline_inode(inode, ipage, from);
- 		f2fs_put_page(ipage, 1);
-@@ -774,7 +794,7 @@ int f2fs_do_truncate_blocks(struct inode *inode, u64 from, bool lock)
- 	/* lastly zero out the first data page */
- 	if (!err)
- 		err = truncate_partial_data_page(inode, from, truncate_page);
--
-+out_err:
- 	trace_f2fs_truncate_blocks_exit(inode, err);
- 	return err;
- }
-@@ -992,7 +1012,8 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- 		return -EPERM;
- 
- 	if ((attr->ia_valid & ATTR_SIZE)) {
--		if (!f2fs_is_compress_backend_ready(inode))
-+		if (!f2fs_is_compress_backend_ready(inode) ||
-+				IS_DEVICE_ALIASING(inode))
- 			return -EOPNOTSUPP;
- 		if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED) &&
- 			!IS_ALIGNED(attr->ia_size,
-@@ -1860,7 +1881,7 @@ static long f2fs_fallocate(struct file *file, int mode,
- 		return -EIO;
- 	if (!f2fs_is_checkpoint_ready(F2FS_I_SB(inode)))
- 		return -ENOSPC;
--	if (!f2fs_is_compress_backend_ready(inode))
-+	if (!f2fs_is_compress_backend_ready(inode) || IS_DEVICE_ALIASING(inode))
- 		return -EOPNOTSUPP;
- 
- 	/* f2fs only support ->fallocate for regular file */
-@@ -3296,6 +3317,9 @@ int f2fs_pin_file_control(struct inode *inode, bool inc)
- 	struct f2fs_inode_info *fi = F2FS_I(inode);
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 
-+	if (IS_DEVICE_ALIASING(inode))
-+		return -EINVAL;
-+
- 	if (fi->i_gc_failures >= sbi->gc_pin_file_threshold) {
- 		f2fs_warn(sbi, "%s: Enable GC = ino %lx after %x GC trials",
- 			  __func__, inode->i_ino, fi->i_gc_failures);
-@@ -3326,6 +3350,9 @@ static int f2fs_ioc_set_pin_file(struct file *filp, unsigned long arg)
- 	if (f2fs_readonly(sbi->sb))
- 		return -EROFS;
- 
-+	if (!pin && IS_DEVICE_ALIASING(inode))
-+		return -EOPNOTSUPP;
-+
- 	ret = mnt_want_write_file(filp);
- 	if (ret)
- 		return ret;
-@@ -4764,7 +4791,8 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
- 	else
- 		return 0;
- 
--	map.m_may_create = true;
-+	if (!IS_DEVICE_ALIASING(inode))
-+		map.m_may_create = true;
- 	if (dio) {
- 		map.m_seg_type = f2fs_rw_hint_to_seg_type(sbi,
- 						inode->i_write_hint);
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 1ed86df343a5..25f66a0ed831 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -372,6 +372,12 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
- 		return false;
- 	}
- 
-+	if ((fi->i_flags & F2FS_DEVICE_ALIAS_FL) && !f2fs_sb_has_device_alias(sbi)) {
-+		f2fs_warn(sbi, "%s: inode (ino=%lx) has device alias flag, but the feature is off",
-+			  __func__, inode->i_ino);
-+		return false;
-+	}
-+
- 	return true;
  }
  
-@@ -823,7 +829,8 @@ void f2fs_evict_inode(struct inode *inode)
- 	f2fs_bug_on(sbi, get_dirty_pages(inode));
- 	f2fs_remove_dirty_inode(inode);
- 
--	f2fs_destroy_extent_tree(inode);
-+	if (!IS_DEVICE_ALIASING(inode))
-+		f2fs_destroy_extent_tree(inode);
- 
- 	if (inode->i_nlink || is_bad_inode(inode))
- 		goto no_delete;
-@@ -879,6 +886,9 @@ void f2fs_evict_inode(struct inode *inode)
- 		goto retry;
- 	}
- 
-+	if (IS_DEVICE_ALIASING(inode))
-+		f2fs_destroy_extent_tree(inode);
-+
- 	if (err) {
- 		f2fs_update_inode_page(inode);
- 		if (dquot_initialize_needed(inode))
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index fc2c586c7619..95097498b544 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -834,6 +834,10 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 			set_opt(sbi, READ_EXTENT_CACHE);
- 			break;
- 		case Opt_noextent_cache:
-+			if (F2FS_HAS_FEATURE(sbi, F2FS_FEATURE_DEVICE_ALIAS)) {
-+				f2fs_err(sbi, "device aliasing requires extent cache");
-+				return -EINVAL;
-+			}
- 			clear_opt(sbi, READ_EXTENT_CACHE);
- 			break;
- 		case Opt_noinline_data:
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index c56e8c873935..e51304bc65ea 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -1313,6 +1313,7 @@ F2FS_SB_FEATURE_RO_ATTR(sb_checksum, SB_CHKSUM);
- F2FS_SB_FEATURE_RO_ATTR(casefold, CASEFOLD);
- F2FS_SB_FEATURE_RO_ATTR(compression, COMPRESSION);
- F2FS_SB_FEATURE_RO_ATTR(readonly, RO);
-+F2FS_SB_FEATURE_RO_ATTR(device_alias, DEVICE_ALIAS);
- 
- static struct attribute *f2fs_sb_feat_attrs[] = {
- 	ATTR_LIST(sb_encryption),
-@@ -1329,6 +1330,7 @@ static struct attribute *f2fs_sb_feat_attrs[] = {
- 	ATTR_LIST(sb_casefold),
- 	ATTR_LIST(sb_compression),
- 	ATTR_LIST(sb_readonly),
-+	ATTR_LIST(sb_device_alias),
- 	NULL,
- };
- ATTRIBUTE_GROUPS(f2fs_sb_feat);
+
+base-commit: 92fc9636d1471b7f68bfee70c776f7f77e747b97
 -- 
-2.46.0.792.g87dc391469-goog
+2.44.1
 
 
 
