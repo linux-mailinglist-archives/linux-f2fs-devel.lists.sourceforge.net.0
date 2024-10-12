@@ -2,90 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B558C99AECA
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 12 Oct 2024 00:49:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 323CD99AFD3
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 12 Oct 2024 03:14:45 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1szORs-000724-Rr;
-	Fri, 11 Oct 2024 22:49:28 +0000
+	id 1szQiL-0000rw-L5;
+	Sat, 12 Oct 2024 01:14:37 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1szORr-00071t-T4
+ (envelope-from <chao@kernel.org>) id 1szQiK-0000rl-A7
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Oct 2024 22:49:27 +0000
+ Sat, 12 Oct 2024 01:14:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oT+NFL26PD4CXV7/ApRRBrTKeMGlB2R0MG6hxhbgq+o=; b=TLNbfGjDAFEcriy9KliFx/xdtl
- WpOthHZkPKIq9wpM6dpognCfLz5l30OpOYp2aBojJzWXyJRIyh5DK2y/bdPKNdJs2rm7dq4lXKm31
- 9p6wtT34FUcQuWwJioHqCwxdHruq5wFAwwQcBV6V2qAQZ+m0XJwWQT72YF3B3tQwtFrE=;
+ bh=5mg6NYDvupJv6CutMlUjxXLqj5k52d5JRmSBBtOx/ZU=; b=P9s8sR7pbL/ZpMxWBJlkQbR5IR
+ 5fHdYfHDoYzZj4H9gxjvI/+94NLRSCOdJIABblmC7v2Uu/LEwI9vOKxWd+cIgln9MeHxt0ctR1b4L
+ JCW+O1DhOLBW0CujjIf7jxuNGvPleZevL2zPkPjw6G99Wafq4vsEHAJLj7EbxHPb+5qE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=oT+NFL26PD4CXV7/ApRRBrTKeMGlB2R0MG6hxhbgq+o=; b=j
- 6/vUoA/xw9Q0sFSPKgGkfXNRs8/gRctAAqQFGkGLYkbTFh1ZcCsM5P3d03fIZ7zXIkuYwUyqoY9q5
- nvmi10XmPd41QVE8r56iLFcQLqqpoGjKsFmo9gxrZ83s8JxYU1pzhfN2n4gHhZqV1mBfsa4y4oHHa
- iHfaKLDJEeVPK6UA=;
+ List-Owner:List-Archive; bh=5mg6NYDvupJv6CutMlUjxXLqj5k52d5JRmSBBtOx/ZU=; b=k
+ 0JaURlB4e+7/PsvF68ZmL6tZ7VMf0fPcQpOT6ILuIahGkGK2Y8jOmxllD+EBGA5b70lIDtfjNzYw0
+ mYtck4ipcmRp+SvRud+KYNpWl/hqRwAjPt1IMWJUp2Vi9BUX4yT0dlZanVkv4iq5bIwgtG7pjv4UU
+ iGsW1YJeyRZmBNEE=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1szORr-00024M-2W for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Oct 2024 22:49:27 +0000
+ id 1szQiJ-0007vE-Js for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 12 Oct 2024 01:14:36 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 8FC40A45179
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 11 Oct 2024 22:49:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDDCFC4CED1;
- Fri, 11 Oct 2024 22:49:20 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 00D77A4535B;
+ Sat, 12 Oct 2024 01:14:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B308EC4CEC3;
+ Sat, 12 Oct 2024 01:14:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1728686961;
- bh=DxRZXqNLODkyf/maVnnefh/6722VNMphrmQdSpC63Xo=;
+ s=k20201202; t=1728695669;
+ bh=k4D5x4KbEGce1yIU0y1WdlxGh1G84wK2Xz30+tWn5OE=;
  h=From:To:Cc:Subject:Date:From;
- b=f1vILShhGRaU4QQ5drhKsbRqQL3Igqjpny8C6XVgHtCWVJ8K5UuVPAWelVa1ga9+X
- CN4mrIle4bYLWzaDOnURgFs3S2cisnImeAUueBsCORYNU4CPcFYn3DthrJszXc6VIZ
- BsIOFXXhsCwDF9weu3JV3dVS8MAEjWc7ma/1zSFKM0JmjZ3pSXidrc3Ac5AG8hC4ZV
- JIhWDcJrwIE+WgVSg8Eh7BcKwPyCr70PhuLG1dvGh08tBLZtdPflKVOO4xFyX378Pw
- CKql/RvLTwWL7eNFoGFxgwNlceGgepfoArnFDfFFMNbLu86XiZC5NNGAeh84eh93Gy
- GI9HjIJobLVzQ==
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 11 Oct 2024 22:49:19 +0000
-Message-ID: <20241011224919.1729312-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.47.0.rc1.288.g06298d1525-goog
+ b=FLnA0TStGvO2/bt4qkew1Pi3HWgV/AExdP0PjMk7Cdd3qYvCJQCaaka/hLw+sT63e
+ w69ZfgyQWbxp+21rqSEFgeZedoYjdgnzgOpTW7xHiVqM4kBY1MJ+oTMdNwHPrFhmuv
+ TKD9Sh12B89RN3tgqhdxKqTOXJgGOBiyg0Z6Ox3T/O7ApUtOa6Reqj2Cuohp/j6QbR
+ dyZbr0nZV7tW3o6DKo3W06UzKFVGeEGoGKZRDhZRHlQNlrAnhDwXLuXegA871lDQyT
+ +Vi33gBj8rMZTFjD39ttyfYCYyw+jpE9cvfztWIKJ294U+bnlswekeX6qYgVMyMwOr
+ KJLmqdOQjk8Gw==
+To: Zorro Lang <zlang@redhat.com>
+Date: Sat, 12 Oct 2024 09:14:19 +0800
+Message-Id: <20241012011419.4066147-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This adds a way to boost read performance by giving fadvise.
- Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> --- tools/f2fs_io/f2fs_io.c
- | 27 ++++++++++++++++++++------- 1 file changed, 20 insertions(+),
- 7 deletions(-)
+ Content preview:  The bug related to this regression testcase has been fixed
+ by commit b2c160f4f3cf ("f2fs: atomic: fix to forbid dio in atomic_file"),
+ let's add missing _fixed_by_kernel_commit line for this testcase. 
  Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1szORr-00024M-2W
-Subject: [f2fs-dev] [PATCH] f2fs_io: support fadvice for read
+X-Headers-End: 1szQiJ-0007vE-Js
+Subject: [f2fs-dev] [PATCH] f2fs/004: add missing _fixed_by_kernel_commit
+ line
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,92 +96,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daeho Jeong <daehojeong@google.com>,
+ fstests@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This adds a way to boost read performance by giving fadvise.
+The bug related to this regression testcase has been fixed by commit
+b2c160f4f3cf ("f2fs: atomic: fix to forbid dio in atomic_file"), let's
+add missing _fixed_by_kernel_commit line for this testcase.
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Daeho Jeong <daehojeong@google.com>
+Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- tools/f2fs_io/f2fs_io.c | 27 ++++++++++++++++++++-------
- 1 file changed, 20 insertions(+), 7 deletions(-)
+ tests/f2fs/004 | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index 8fbad3c8e563..5b67a92e0947 100644
---- a/tools/f2fs_io/f2fs_io.c
-+++ b/tools/f2fs_io/f2fs_io.c
-@@ -833,12 +833,15 @@ static void do_write_advice(int argc, char **argv, const struct cmd_desc *cmd)
+diff --git a/tests/f2fs/004 b/tests/f2fs/004
+index dd1ed5c1..e08cee11 100755
+--- a/tests/f2fs/004
++++ b/tests/f2fs/004
+@@ -25,6 +25,9 @@ _cleanup()
+ 	rm -r -f $tmp.*
+ }
  
- #define read_desc "read data from file"
- #define read_help					\
--"f2fs_io read [chunk_size in 4kb] [offset in chunk_size] [count] [IO] [print_nbytes] [file_path]\n\n"	\
-+"f2fs_io read [chunk_size in 4kb] [offset in chunk_size] [count] [IO] [advice] [print_nbytes] [file_path]\n\n"	\
- "Read data in file_path and print nbytes\n"		\
- "IO can be\n"						\
- "  buffered : buffered IO\n"				\
- "  dio      : direct IO\n"				\
- "  mmap     : mmap IO\n"				\
-+"advice can be\n"					\
-+" 1 : set sequential|willneed\n"			\
-+" 0 : none\n"						\
- 
- static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
- {
-@@ -851,9 +854,9 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
- 	u64 total_time = 0;
- 	int flags = 0;
- 	int do_mmap = 0;
--	int fd;
-+	int fd, advice;
- 
--	if (argc != 7) {
-+	if (argc != 8) {
- 		fputs("Excess arguments\n\n", stderr);
- 		fputs(cmd->cmd_help, stderr);
- 		exit(1);
-@@ -876,13 +879,22 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
- 	else if (strcmp(argv[4], "buffered"))
- 		die("Wrong IO type");
- 
--	print_bytes = atoi(argv[5]);
-+	print_bytes = atoi(argv[6]);
- 	if (print_bytes > buf_size)
- 		die("Print_nbytes should be less then chunk_size in kb");
- 
- 	print_buf = xmalloc(print_bytes);
- 
--	fd = xopen(argv[6], O_RDONLY | flags, 0);
-+	fd = xopen(argv[7], O_RDONLY | flags, 0);
++_fixed_by_kernel_commit b2c160f4f3cf \
++	"f2fs: atomic: fix to forbid dio in atomic_file"
 +
-+	advice = atoi(argv[5]);
-+	if (advice) {
-+		if (posix_fadvise(fd, 0, 4096, POSIX_FADV_SEQUENTIAL) != 0)
-+			die_errno("fadvise failed");
-+		if (posix_fadvise(fd, 0, 4096, POSIX_FADV_WILLNEED) != 0)
-+			die_errno("fadvise failed");
-+		printf("fadvise SEQUENTIAL|WILLNEED to a file: %s\n", argv[7]);
-+	}
- 
- 	total_time = get_current_us();
- 	if (do_mmap) {
-@@ -912,8 +924,9 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
- 		read_cnt = count * buf_size;
- 		memcpy(print_buf, data, print_bytes);
- 	}
--	printf("Read %"PRIu64" bytes total_time = %"PRIu64" us, print %u bytes:\n",
--		read_cnt, get_current_us() - total_time, print_bytes);
-+	printf("Read %"PRIu64" bytes total_time = %"PRIu64" us, BW = %.Lf MB/s print %u bytes:\n",
-+		read_cnt, get_current_us() - total_time,
-+		((long double)read_cnt / (get_current_us() - total_time) * 1000/1024 * 1000/1024 ), print_bytes);
- 	printf("%08"PRIx64" : ", offset);
- 	for (i = 1; i <= print_bytes; i++) {
- 		printf("%02x", print_buf[i - 1]);
+ _require_scratch
+ _require_odirect
+ _scratch_mkfs >> $seqres.full
 -- 
-2.47.0.rc1.288.g06298d1525-goog
+2.40.1
 
 
 
