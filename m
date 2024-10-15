@@ -2,64 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4193A99DC6F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Oct 2024 04:51:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9436199DCF5
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Oct 2024 05:44:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t0Xez-0001Ey-AZ;
-	Tue, 15 Oct 2024 02:51:46 +0000
+	id 1t0YTa-0003ct-4Z;
+	Tue, 15 Oct 2024 03:44:01 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t0Xew-0001Ep-Uo
+ (envelope-from <chao@kernel.org>) id 1t0YTX-0003cl-Jk
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Oct 2024 02:51:43 +0000
+ Tue, 15 Oct 2024 03:43:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pxiCCsuULI1JZG2LQOHaVzXh1g2r8v2g2qYcx6Ge6nM=; b=a/ue2XOyN2CI62bii7Zz5E21Rk
- Ienv5xeu9ClJRt7KjmkUkS9j00b0ezsNup63pOKi4JpgalQjmrkp4ThxIf2ySkY2kA0qsgcBA/URp
- Z/rxL8uy9nryFZV1WQHYoLw6Bm1YtIddEF8/g/1mAFfnAym6h9g0manQ9hNp1jFULM4s=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=pxiCCsuULI1JZG2LQOHaVzXh1g2r8v2g2qYcx6Ge6nM=; b=Cy+nZrOV1jJSs4yW5h/dQ+t4tA
- zCLb8ztm1DpnOh9Ge97IeOYOXJr2gpeYmjezN00ZrJ66X/iPMkTeE1X1JvyeSi8Jqt47B1M0Zs7+Y
- +4aSDQBVrUKNi72b7KzSNuibbLQF4oyeecxaDtZdNAIxjzBj7VTHTsjNUJxonFv1vLyQ=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=oVXrHamex21gJM8ygygk8adihv2ubooHfyL2wLVmitE=; b=Tvkjq2xmRA0FZkDXEjBv0EQnQN
+ HFGxX0WEpJf6qgYayxlxpz8mhGLqh48ssSHmKfgiGKf8dJFkaenNHXd5Bxana3qZR+ataqw4wt9Wo
+ OF5HG8IemU3Gm4vbpviZqyX83AlcRrb4JdmCya3Z6KC/r9qFtqbWb4xOFYJF1qAnr3UI=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=oVXrHamex21gJM8ygygk8adihv2ubooHfyL2wLVmitE=; b=F
+ eU+SeL2vSkYCNpas5UzxNy0jnoC+F0heVToiLlYRB1HussOgssnioUOGcFAr7N8US8v21d3mXPnin
+ mAGJMwrzNKpFvh6mvSSKCgHfOuj4PBySwfTt+w0cs3C5hKVF0YxuQVIQDwqnWHFuRBKMjRdnCG4Ek
+ X9u3DcetZaZdneYg=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t0Xew-0005Xs-TM for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Oct 2024 02:51:43 +0000
+ id 1t0YTW-0007B3-7F for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 15 Oct 2024 03:43:58 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 50A1FA401F9;
- Tue, 15 Oct 2024 02:51:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F8F1C4CED0;
- Tue, 15 Oct 2024 02:51:30 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 7D0F6A40B46;
+ Tue, 15 Oct 2024 03:43:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 358C4C4CEC7;
+ Tue, 15 Oct 2024 03:43:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1728960691;
- bh=Y05EfT0ASAjNhTImYRlNb+wZ7uQbgocCROAhY9S4ZAU=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=KWKKJK7vFQn9sRsbVTHVJFDV0KhaqMyDA65XyYsIdE6xEcXx7KE3wklyotJ7CET06
- 6bIvhp+iaxew4tV+3FuQnvzI2Cz82mURHKCzMd2su6As/Davr92etlVH8Xe9uLxCjG
- 6lhQ+Ts+YgrJmNCUhLj/8lgcZJR8p7ShTrnXW0VqRTQRrLlNN0BOPhGzGQV1Dt3km1
- aS8BfKruyBeHgn8c0JDh/3YJY7T/QLWs8r3kgice8P/2ImNvHZLDr4IuWgB5V8PTey
- jhomZNcd/L+UrZWWjPGOxrkDdyRAKrNi+q3HpurZl6wM3p50ASaWu12Ud/75XG+KW5
- ++/itwbhoM0Mg==
-To: Zorro Lang <zlang@redhat.com>
-Date: Tue, 15 Oct 2024 10:51:06 +0800
-Message-Id: <20241015025106.3203676-2-chao@kernel.org>
+ s=k20201202; t=1728963826;
+ bh=MjCUBiWnp9PMS4F87LZ3PySPrHGyFoBvs6QlesZy16M=;
+ h=From:To:Cc:Subject:Date:From;
+ b=sM3IzIhwsVrUavZoQV0F6rbspUDHCJnAElwhgYn0Tbzvg7H8J8YMbKnoDhb2nQwsp
+ t2as3W/T8hMqyF6nMRbe1oiYIHG5eE8diW3snDygg7JlS1u3Md1hppclS4yLX5DIBf
+ i15xfXpOpYi69Rj64hHGFXUymLI4AG+w52Nu+OA/6JX95NI1rQ8xMzTzJb+6lKjfGg
+ I5GcF57mfL2KNFj7N4s9DedmCvdbOF4MCd59N5TLILwpDzdCUrSYp+mWU9Gwjzkux1
+ yxILwgIbyq1Mit6M44qQQZcfFVEPsRyNizc7Zp5+UeZvivrdAw+Jxj5BPWTuuttQ3h
+ qyhU0OF1SaxuQ==
+To: jaegeuk@kernel.org
+Date: Tue, 15 Oct 2024 11:43:39 +0800
+Message-Id: <20241015034339.3244676-1-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20241015025106.3203676-1-chao@kernel.org>
-References: <20241015025106.3203676-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
@@ -68,14 +66,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: metadata of compressed inode should always be consistent
- after
- file compression, reservation, releasement and decompression, let's add a
- testcase to check it. Cc: Jaegeuk Kim <jaegeuk@kernel.org> Cc: Qi Han
- <hanqi@vivo.com>
- Signed-off-by: Chao Yu <chao@kernel.org> --- tests/f2fs/007 | 116
- +++++++++++++++++++++++++++++++++++++++++++++
- tests/f2fs/007.out | 4 [...] 
+ Content preview: It will trigger system panic w/ testcase in [1]: [ cut here
+ ] kernel BUG at fs/f2fs/segment.c:2752! RIP: 0010:new_curseg+0xc81/0x2110
+ Call Trace: f2fs_allocate_data_block+0x1c91/0x4540 do_write_page+0x163/0xdf0
+ f2fs_outplace_ [...] 
  Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,9 +83,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t0Xew-0005Xs-TM
-Subject: [f2fs-dev] [PATCH 2/2] f2fs/007: add testcase to check consistency
- of compressed inode metadata
+X-Headers-End: 1t0YTW-0007B3-7F
+Subject: [f2fs-dev] [PATCH] f2fs: fix to account dirty data in
+ __get_secs_required()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,158 +99,130 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Qi Han <hanqi@vivo.com>,
- fstests@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, Daniel Rosenberg <drosen@google.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-metadata of compressed inode should always be consistent after file
-compression, reservation, releasement and decompression, let's add
-a testcase to check it.
+It will trigger system panic w/ testcase in [1]:
 
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Qi Han <hanqi@vivo.com>
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/segment.c:2752!
+RIP: 0010:new_curseg+0xc81/0x2110
+Call Trace:
+ f2fs_allocate_data_block+0x1c91/0x4540
+ do_write_page+0x163/0xdf0
+ f2fs_outplace_write_data+0x1aa/0x340
+ f2fs_do_write_data_page+0x797/0x2280
+ f2fs_write_single_data_page+0x16cd/0x2190
+ f2fs_write_cache_pages+0x994/0x1c80
+ f2fs_write_data_pages+0x9cc/0xea0
+ do_writepages+0x194/0x7a0
+ filemap_fdatawrite_wbc+0x12b/0x1a0
+ __filemap_fdatawrite_range+0xbb/0xf0
+ file_write_and_wait_range+0xa1/0x110
+ f2fs_do_sync_file+0x26f/0x1c50
+ f2fs_sync_file+0x12b/0x1d0
+ vfs_fsync_range+0xfa/0x230
+ do_fsync+0x3d/0x80
+ __x64_sys_fsync+0x37/0x50
+ x64_sys_call+0x1e88/0x20d0
+ do_syscall_64+0x4b/0x110
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+The root cause is if checkpoint_disabling and lfs_mode are both on,
+it will trigger OPU for all overwritten data, it may cost more free
+segment than expected, so f2fs must account those data correctly to
+calculate cosumed free segments later, and return ENOSPC earlier to
+avoid run out of free segment during block allocation.
+
+[1] https://lore.kernel.org/fstests/20241015025106.3203676-1-chao@kernel.org/
+
+Fixes: 4354994f097d ("f2fs: checkpoint disabling")
+Cc: Daniel Rosenberg <drosen@google.com>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- tests/f2fs/007     | 116 +++++++++++++++++++++++++++++++++++++++++++++
- tests/f2fs/007.out |   4 ++
- 2 files changed, 120 insertions(+)
- create mode 100755 tests/f2fs/007
- create mode 100644 tests/f2fs/007.out
+ fs/f2fs/segment.h | 35 +++++++++++++++++++++++++----------
+ 1 file changed, 25 insertions(+), 10 deletions(-)
 
-diff --git a/tests/f2fs/007 b/tests/f2fs/007
-new file mode 100755
-index 00000000..274be806
---- /dev/null
-+++ b/tests/f2fs/007
-@@ -0,0 +1,116 @@
-+#! /bin/bash
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright (c) 2024 Oppo.  All Rights Reserved.
-+#
-+# FS QA Test No. f2fs/007
-+#
-+# This is a regression test to check whether compressed metadata
-+# can become inconsistent after file compression, reservation
-+# releasement, and decompression.
-+#
-+. ./common/preamble
-+_begin_fstest auto quick
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index e9cc73093417..55a01da6c4be 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -561,18 +561,21 @@ static inline int reserved_sections(struct f2fs_sb_info *sbi)
+ }
+ 
+ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
+-			unsigned int node_blocks, unsigned int dent_blocks)
++			unsigned int node_blocks, unsigned int data_blocks,
++			unsigned int dent_blocks)
+ {
+ 
+-	unsigned segno, left_blocks;
++	unsigned int segno, left_blocks, blocks;
+ 	int i;
+ 
+-	/* check current node sections in the worst case. */
+-	for (i = CURSEG_HOT_NODE; i <= CURSEG_COLD_NODE; i++) {
++	/* check current data/node sections in the worst case. */
++	for (i = CURSEG_HOT_DATA; i < NR_PERSISTENT_LOG; i++) {
+ 		segno = CURSEG_I(sbi, i)->segno;
+ 		left_blocks = CAP_BLKS_PER_SEC(sbi) -
+ 				get_ckpt_valid_blocks(sbi, segno, true);
+-		if (node_blocks > left_blocks)
 +
-+_cleanup()
-+{
-+	cd /
-+	rm -r -f tmp.*
-+}
++		blocks = i <= CURSEG_COLD_DATA ? data_blocks : node_blocks;
++		if (blocks > left_blocks)
+ 			return false;
+ 	}
+ 
+@@ -586,8 +589,9 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
+ }
+ 
+ /*
+- * calculate needed sections for dirty node/dentry
+- * and call has_curseg_enough_space
++ * calculate needed sections for dirty node/dentry and call
++ * has_curseg_enough_space, please note that, it needs to account
++ * dirty data as well in lfs mode when checkpoint is disabled.
+  */
+ static inline void __get_secs_required(struct f2fs_sb_info *sbi,
+ 		unsigned int *lower_p, unsigned int *upper_p, bool *curseg_p)
+@@ -596,19 +600,30 @@ static inline void __get_secs_required(struct f2fs_sb_info *sbi,
+ 					get_pages(sbi, F2FS_DIRTY_DENTS) +
+ 					get_pages(sbi, F2FS_DIRTY_IMETA);
+ 	unsigned int total_dent_blocks = get_pages(sbi, F2FS_DIRTY_DENTS);
++	unsigned int total_data_blocks = 0;
+ 	unsigned int node_secs = total_node_blocks / CAP_BLKS_PER_SEC(sbi);
+ 	unsigned int dent_secs = total_dent_blocks / CAP_BLKS_PER_SEC(sbi);
++	unsigned int data_secs = 0;
+ 	unsigned int node_blocks = total_node_blocks % CAP_BLKS_PER_SEC(sbi);
+ 	unsigned int dent_blocks = total_dent_blocks % CAP_BLKS_PER_SEC(sbi);
++	unsigned int data_blocks = 0;
 +
-+testfile_prefix=$SCRATCH_MNT/testfile
-+fio_config=$tmp.fio
-+
-+cat >$fio_config <<EOF
-+[write_compressed_data_30]
-+name=mytest
-+ioengine=psync
-+rw=write
-+direct=0
-+bs=1M
-+filesize=1M
-+numjobs=1
-+filename=/mnt/scratch_f2fs/testfile30
-+buffer_compress_percentage=30
-+
-+[write_compressed_data_60]
-+name=mytest
-+ioengine=psync
-+rw=write
-+direct=0
-+bs=1M
-+filesize=1M
-+numjobs=1
-+filename=/mnt/scratch_f2fs/testfile60
-+buffer_compress_percentage=60
-+
-+[write_compressed_data_90]
-+name=mytest
-+ioengine=psync
-+rw=write
-+direct=0
-+bs=1M
-+filesize=1M
-+numjobs=1
-+filename=/mnt/scratch_f2fs/testfile90
-+buffer_compress_percentage=90
-+EOF
-+
-+_require_fio $fio_config
-+_require_scratch
-+_scratch_mkfs "-f -O extra_attr,compression" >> $seqres.full
-+_scratch_mount "-o compress_mode=user,compress_extension=*" >> $seqres.full
-+
-+echo -e "Run fio to initialize file w/ specified compress ratio" >> $seqres.full
-+cat $fio_config >> $seqres.full
-+$FIO_PROG $fio_config >> $seqres.full
-+_scratch_unmount
-+
-+for i in 30 60 90; do
-+	testfile=$testfile_prefix$i
-+
-+	_scratch_mount "-o compress_mode=user" >> $seqres.full
-+	f2fs_io compress $testfile >> $seqres.full
-+	cblocks=`f2fs_io get_cblocks $testfile`
-+	echo "compression ratio is: "$cblocks" / 256"
-+
-+	_scratch_unmount
-+
-+	# 1. check after compression
-+	fsck -t $FSTYP -f $SCRATCH_DEV >> $seqres.full
-+	if [ $? -ne 0 ]; then
-+		_fail "filesystem becomes corrupted after compress"
-+	fi
-+
-+	_scratch_mount >> $seqres.full
-+	f2fs_io release_cblocks $testfile >> $seqres.full
-+	_scratch_unmount
-+
-+	# 2. check after releasement
-+	fsck -t $FSTYP -f $SCRATCH_DEV >> $seqres.full
-+	if [ $? -ne 0 ]; then
-+		_fail "filesystem becomes corrupted after release_cblocks"
-+	fi
-+
-+	_scratch_mount >> $seqres.full
-+	f2fs_io reserve_cblocks $testfile >> $seqres.full
-+	_scratch_unmount
-+
-+	# 3. check after rservation
-+	fsck -t $FSTYP -f $SCRATCH_DEV >> $seqres.full
-+	if [ $? -ne 0 ]; then
-+		_fail "filesystem becomes corrupted after reserve_cblocks"
-+	fi
-+
-+	_scratch_mount "-o compress_mode=user" >> $seqres.full
-+	f2fs_io decompress $testfile >> $seqres.full
-+	_scratch_unmount
-+
-+	# 4. check after decompression
-+	fsck -t $FSTYP -f $SCRATCH_DEV >> $seqres.full
-+	if [ $? -ne 0 ]; then
-+		_fail "filesystem becomes corrupted after decompress"
-+	fi
-+done
-+
-+status=0
-+exit
-diff --git a/tests/f2fs/007.out b/tests/f2fs/007.out
-new file mode 100644
-index 00000000..2ea71c18
---- /dev/null
-+++ b/tests/f2fs/007.out
-@@ -0,0 +1,4 @@
-+QA output created by 007
-+compression ratio is: 64 / 256
-+compression ratio is: 128 / 256
-+compression ratio is: 192 / 256
++	if (f2fs_lfs_mode(sbi) &&
++		unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
++		total_data_blocks = get_pages(sbi, F2FS_DIRTY_DATA);
++		data_secs = total_data_blocks / CAP_BLKS_PER_SEC(sbi);
++		data_blocks = total_data_blocks % CAP_BLKS_PER_SEC(sbi);
++	}
+ 
+ 	if (lower_p)
+-		*lower_p = node_secs + dent_secs;
++		*lower_p = node_secs + dent_secs + data_secs;
+ 	if (upper_p)
+ 		*upper_p = node_secs + dent_secs +
+-			(node_blocks ? 1 : 0) + (dent_blocks ? 1 : 0);
++			(node_blocks ? 1 : 0) + (dent_blocks ? 1 : 0) +
++			(data_blocks ? 1 : 0);
+ 	if (curseg_p)
+ 		*curseg_p = has_curseg_enough_space(sbi,
+-				node_blocks, dent_blocks);
++				node_blocks, data_blocks, dent_blocks);
+ }
+ 
+ static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
 -- 
 2.40.1
 
