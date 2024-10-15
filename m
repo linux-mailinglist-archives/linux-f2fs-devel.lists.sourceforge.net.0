@@ -2,62 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6294D99D90C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Oct 2024 23:32:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 008E799DAA6
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Oct 2024 02:23:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t0Sg8-0003kD-1v;
-	Mon, 14 Oct 2024 21:32:36 +0000
+	id 1t0VLo-00005E-Bf;
+	Tue, 15 Oct 2024 00:23:49 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1t0Sg6-0003k5-SI
+ (envelope-from <jaegeuk@kernel.org>) id 1t0VLn-000055-5J
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 14 Oct 2024 21:32:34 +0000
+ Tue, 15 Oct 2024 00:23:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=B0aPC2E6Icn6HYxd8/hNydibZThv7YtjhNjTd2Ghr5E=; b=nBzc26b8Sm0B5weBUn6F8uCk5E
- TvdZe1Y2hue2xHit5yZjHqcStQLRSEynNneN5ZnuvfxqBU4kerkOivrUAFUO9SdLzWV2AmRqikWDj
- UGnlHJOX/IsEPeNJEtrL8qepcwo2CE8fZKL/aixMYHTUc7TZl2iYLG0Kh/MEAvJfL5h0=;
+ bh=La0FbfaSsUe5f/URD5cSG8H/NZnbROBH69XqDFL+prM=; b=j8btcXKCdLuPFl01rnCeh9B0jB
+ WPTh+NgGpzzL8gPQDnLPpDNEbeh38ambh3JlQPnF3VubQ3ADRADKQGlVrtcwerKwatlUp76QgoqIN
+ 3wsgnHRET9mybKdbRRLvAQ3Aj4Djj+RNA7j7D3/PToNxkKUBXfcVNwZBNXyYPmhhXtOo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=B0aPC2E6Icn6HYxd8/hNydibZThv7YtjhNjTd2Ghr5E=; b=R
- L3AQbJDHaUReWMLS1ckQoK1m6WjeDDRTojGqtaHMVdhsAyDxbAjzdcgBuvW7Y5MpglWcyg2v/3etw
- E1f5siUfWxeXBqQ2N5IYTj6ncjAwP6MwmFzFGaAY5jXQxqtLt+k01JJJD1LH5SsRQMfyMHPSdgGTC
- VasfLPOgT0a3UbjY=;
+ List-Owner:List-Archive; bh=La0FbfaSsUe5f/URD5cSG8H/NZnbROBH69XqDFL+prM=; b=T
+ MJPGGAK/l3ucJRysEls6f2kKRxlYULN7rCBS21Whoijb1YcLSPrm5odzF298q41Q6bYof32PfVrMg
+ rhWM1U7AswsShfABK0jdVjn0f/0hF3RUH5R/44Wx7UERjDIFE2hTkhLADCu1b4bQ0dJX1p+FQ0vl/
+ EtaLOkk6ld3lZFWM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t0Sg6-00016D-7m for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 14 Oct 2024 21:32:34 +0000
+ id 1t0VLm-00081k-5D for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 15 Oct 2024 00:23:47 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5D3E05C591B
+ by dfw.source.kernel.org (Postfix) with ESMTP id 65AB75C5C20
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 14 Oct 2024 21:32:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5530AC4CEC3;
- Mon, 14 Oct 2024 21:32:23 +0000 (UTC)
+ Tue, 15 Oct 2024 00:23:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7FC2FC4CEC6;
+ Tue, 15 Oct 2024 00:23:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1728941543;
- bh=6xAHmC1sqHIbb+Fls85VH1FXONnNyQpdMKr7QSdVi98=;
+ s=k20201202; t=1728951815;
+ bh=HlqarReOghWkv7c5Sbqoy22zYM/VAvXmwpyI+qtURks=;
  h=From:To:Cc:Subject:Date:From;
- b=Y0D3Hd9zyiyNKEND5WqE8fPjvldNB5932XmDYEy4bu1wyU1YvFo9cjHSzludmLXIr
- 4+arwD0P8qZqJesysgm1Y07HNcct0avlWTnqMJ8oP0HHJhuwx4RnUaPjQ9XYv1RDY6
- vSkhzqz0sd8JGo4YRPBUQdgQP/NIKoK5wB/rCOBdGlGQFKoRZnHaR2wkXh9VpbXeKg
- H1a6TVC+juZ4RK59zCd3veEiQF8cPt8kvZSsz97dxFX1xZp4czmEXnNRqg+byrVgad
- 5QVlTDPaFuG+5dgp5PdL26VoBLQ/uC1LHV4KoVCTMjhjEZlZryYwO2/anAjgwIwTIe
- 1AOYkGUQ7w/Ug==
+ b=Nu5+PFy216il4QH6/f4VuuubHNOchJGMfGy03M4wDalR3YVOHdtavJt6ewK31WL5A
+ S97DFVcIZV+nhYO9atITF2AB9I85Kc+kwbLIlG+qehTeKFscOFRBzPI3SkJnUpoVI7
+ RLzE3NNCzwmw65OCWCpB2BvpLZWGqRZyOH/pxB/FL3BddNsvQcpDdvXjxKBkZVCEdg
+ 5pWpoWOO1ZGLK3NXu/1CH4qHxMJtu3l0LFzMnxvom+5rFHwHjxTeZlQYmcOqpn7y/w
+ DNW+IPF9aTb5HYVnqB5D5B4wueqcrudsbVIt8dsqlrOCv6G0ha/vJk5Wn1PRI+mA/V
+ n11U0tQ7/Wjmg==
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 14 Oct 2024 21:32:21 +0000
-Message-ID: <20241014213221.2599772-1-jaegeuk@kernel.org>
+Date: Tue, 15 Oct 2024 00:23:31 +0000
+Message-ID: <20241015002331.2724827-1-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.47.0.rc1.288.g06298d1525-goog
 MIME-Version: 1.0
 X-Spam-Score: -5.3 (-----)
@@ -67,12 +67,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> ---
- tools/f2fs_io/f2fs_io.c | 2 +- 1 file changed, 1 insertion(+),
- 1 deletion(-) diff --git a/tools/f2fs_io/f2fs_io.c
- b/tools/f2fs_io/f2fs_io.c index 5b67a92e0947..bcf9f491c14d 100644 ---
- a/tools/f2fs_io/f2fs_io.c
- +++ b/tools/f2fs_io/f2fs_io.c @@ -926,7 +926,7 @@ static void do_re [...]
+ Content preview: It's complicated to address libc and kernel headers.
+ Signed-off-by:
+ Jaegeuk Kim <jaegeuk@kernel.org> --- lib/libf2fs_io.c | 10 +++++----- 1 file
+ changed, 5 insertions(+),
+ 5 deletions(-) diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c
+ index 1923c0b87dfc..520ae0362fd4 100644 --- a/lib/libf2fs_io.c +++
+ b/lib/libf2fs_io.c
+ @@ -34,16 +34,16 @@ #include <linux/hdreg.h> #endif 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,8 +90,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t0Sg6-00016D-7m
-Subject: [f2fs-dev] [PATCH] f2fs_io: choose MB/s instead of MiB/s
+X-Headers-End: 1t0VLm-00081k-5D
+Subject: [f2fs-dev] [PATCH] f2fs-tools: remove linux/fcntl.h but define the
+ hint directly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,24 +111,39 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+It's complicated to address libc and kernel headers.
+
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- tools/f2fs_io/f2fs_io.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ lib/libf2fs_io.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index 5b67a92e0947..bcf9f491c14d 100644
---- a/tools/f2fs_io/f2fs_io.c
-+++ b/tools/f2fs_io/f2fs_io.c
-@@ -926,7 +926,7 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
- 	}
- 	printf("Read %"PRIu64" bytes total_time = %"PRIu64" us, BW = %.Lf MB/s print %u bytes:\n",
- 		read_cnt, get_current_us() - total_time,
--		((long double)read_cnt / (get_current_us() - total_time) * 1000/1024 * 1000/1024 ), print_bytes);
-+		((long double)read_cnt / (get_current_us() - total_time)), print_bytes);
- 	printf("%08"PRIx64" : ", offset);
- 	for (i = 1; i <= print_bytes; i++) {
- 		printf("%02x", print_buf[i - 1]);
+diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c
+index 1923c0b87dfc..520ae0362fd4 100644
+--- a/lib/libf2fs_io.c
++++ b/lib/libf2fs_io.c
+@@ -34,16 +34,16 @@
+ #include <linux/hdreg.h>
+ #endif
+ 
++#ifndef F_SET_RW_HINT
++#define F_LINUX_SPECIFIC_BASE 	1024
++#define F_SET_RW_HINT		(F_LINUX_SPECIFIC_BASE + 12)
++#endif
++
+ #include <stdbool.h>
+ #include <assert.h>
+ #include <inttypes.h>
+ #include "f2fs_fs.h"
+ 
+-#ifdef HAVE_LINUX_FCNTL_H
+-#define HAVE_ARCH_STRUCT_FLOCK
+-#include <linux/fcntl.h>
+-#endif
+-
+ struct f2fs_configuration c;
+ 
+ #ifdef HAVE_SPARSE_SPARSE_H
 -- 
 2.47.0.rc1.288.g06298d1525-goog
 
