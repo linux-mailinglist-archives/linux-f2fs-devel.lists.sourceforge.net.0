@@ -2,90 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A96819A0410
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Oct 2024 10:21:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F78E9A0426
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Oct 2024 10:24:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t0zHA-00038Y-BK;
-	Wed, 16 Oct 2024 08:21:01 +0000
+	id 1t0zKg-0003k0-Tm;
+	Wed, 16 Oct 2024 08:24:38 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t0zH7-00037u-TX
+ (envelope-from <chao@kernel.org>) id 1t0zKf-0003jr-KN
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 16 Oct 2024 08:20:58 +0000
+ Wed, 16 Oct 2024 08:24:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jbmfzzgAT5LLjG9EQIgvDNVnLlxkdw0Jjy9lGY06aZM=; b=HQ+7aZMWMWSDN14l5beVUkD8ho
- wcaOUogtu30v5WZumyeN+4mGEjySvYeX7hXqzdI4UrG5tZ067PVqzO7lmckLxOqjKVTXmoJQsbKcc
- 72iJLlhyRrcDohWfjT2Gi6FHTDP9u2iiSdmMkUv5sLamXkdOdsKbhVXyOt1oA5nbF3RM=;
+ bh=PW2/ey1ivIRzs2HnQJ3ejykHS993h00N2n5Zwi1kKpg=; b=fINxHqNBGSgO19IUZ6JYNyxWBr
+ 2C1BK4Ta1c0VNJOJ5QSPeOqYxkIbVT9YC38EVEINJn0ug6j1Z6yZDA7s0pMhh8o/edwuY5yXaVN7x
+ jqwbH/zHSu0D8pP/wto4W+ZB7jWiTccrVGpg/r7Ezf77XPsIb7lqencLRGplj9PDVmhc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=jbmfzzgAT5LLjG9EQIgvDNVnLlxkdw0Jjy9lGY06aZM=; b=J
- A4kL3oL+/pf15S5F657TZs0kExHyW2zYi37rlDN7TIP/psSGpQx3QwCuuJ3kEhn02cAZStBPIrzjc
- eqsWYiz5nI51n3dK8sAJcH4kfkgnPTcU1mhZu3TEAud8iRjNSonds8Sz2XBGL8y3YUsC4h+9FUZhs
- VidpNOgabb/notis=;
+ List-Owner:List-Archive; bh=PW2/ey1ivIRzs2HnQJ3ejykHS993h00N2n5Zwi1kKpg=; b=c
+ +DKjpXaAnNJNWugxORnSHZRGnEDN4dsxGVj7blaaQvFlT4sjptJLmSrhw4o0ljkk0bSEK932dz6l5
+ rST1Jt9OwM5acTKbTSainjtJV48k6F2lXM2njhHTaNVe7iO3qh55JWPKSMOu9gbIzIcewovPd/Bcs
+ WTdGrio0+o19HiKc=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t0zH6-0004Rh-Rp for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 16 Oct 2024 08:20:58 +0000
+ id 1t0zKe-0004qc-4l for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 16 Oct 2024 08:24:36 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 9E9B3A439F3
+ by nyc.source.kernel.org (Postfix) with ESMTP id 68E5EA43A32
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 16 Oct 2024 08:20:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 197B5C4CEC5;
- Wed, 16 Oct 2024 08:20:43 +0000 (UTC)
+ Wed, 16 Oct 2024 08:24:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EB620C4CEC5;
+ Wed, 16 Oct 2024 08:24:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1729066845;
- bh=5gT/ZrlswUwhWQfOx7oODTT8+c4NCUSMKOTvGTTq0BU=;
+ s=k20201202; t=1729067065;
+ bh=dIvzv7sd2ar5087L2o+rqiYca11YTybBulCn0tAdkJs=;
  h=From:To:Cc:Subject:Date:From;
- b=oL01O4G6ajjhC41oM+J3YLsh20XfCIV1n2bra39WEJDm4FU4zsXhCtKXybEbAog4q
- oOqUWd6iKwO+KEWdFM3vI1IvuAt4h8JaYRQbQrwRmIPYCjgAG2AsVT+FnTfQCNO28d
- OMWr5+v9hKTGgMG8k4/dWJ8Z8YySP74gtW7CE5tr6Rmy0w/eGx7iLWIu3DML82Psxn
- 8tzqkKkGEpsYKZTk/uVS8tfj2XeGNMx+N8KOt1wMEwLK+Sltp4kIBZGLkwBSGwTLJj
- QcSWcnRhEbEXcoLt7102TDZLgNKDK+e2pOvtdE91k8uX3WO4K4q0uxM6yRHeEI6KHD
- pcpgq5cMwDuIw==
+ b=MjsFNHMpAfiHtronLrckEagIn8Ut39up/JE8bzHTXsv1hhYjZDzqBWUWizVFGF6z0
+ CkHJ+fKtmLV1WNMs38G8pRS7IHr2hzuGO86u7b4YlxvpsyMQfCpY/mYb9R0H0ASgcz
+ i8gg690SRrfGlspZU27AnPpDmGeOGtnAP/+J76KRk0UOVtutgr+fkc0bPH0bKg6nj/
+ Fg4KyYmgI9+1HjBJXFKMFP9BYG/mwH/TZXvWo2YbzEgJFhK8/n6foBmyUtBQPDNA3+
+ 2gHDd3c08Ajo1Hv7zd3CxxZxzRjWVcS52TGEaYBsDtz7OoL3Bt0POPUM7TltbCqvtu
+ MnpzfvuX/zZNA==
 To: jaegeuk@kernel.org
-Date: Wed, 16 Oct 2024 16:20:38 +0800
-Message-Id: <20241016082038.607358-1-chao@kernel.org>
+Date: Wed, 16 Oct 2024 16:24:20 +0800
+Message-Id: <20241016082420.610844-1-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In __get_segment_type(), __get_segment_type_6() may return
- CURSEG_COLD_DATA_PINNED or CURSEG_ALL_DATA_ATGC log type,
- but following f2fs_get_segment_temp()
- can only handle persistent log type, fix it. 
+ Content preview:  This patch adds per-device stats in debugfs, the examples
+ are as below: mkfs.f2fs -f -c /dev/vdc /dev/vdb mount /dev/vdb /mnt/f2fs/
+ cat /sys/kernel/debug/f2fs/status Multidevice stats: [seg: inuse dirty full
+ free prefree] #0 5 0 0 4007 0 #1 1 0 0 8191 0 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t0zH6-0004Rh-Rp
-Subject: [f2fs-dev] [PATCH] f2fs: fix to parse temperature correctly in
- f2fs_get_segment_temp()
+X-Headers-End: 1t0zKe-0004qc-4l
+Subject: [f2fs-dev] [PATCH] f2fs: multidevice: add stats in debugfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,128 +103,218 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In __get_segment_type(), __get_segment_type_6() may return
-CURSEG_COLD_DATA_PINNED or CURSEG_ALL_DATA_ATGC log type, but
-following f2fs_get_segment_temp() can only handle persistent
-log type, fix it.
+This patch adds per-device stats in debugfs, the examples
+are as below:
+
+mkfs.f2fs -f -c /dev/vdc /dev/vdb
+mount /dev/vdb /mnt/f2fs/
+cat /sys/kernel/debug/f2fs/status
+
+Multidevice stats:
+  [seg:      inuse    dirty     full     free  prefree]
+  #0             5        0        0     4007        0
+  #1             1        0        0     8191        0
+
+mkfs.f2fs -f -s 2 -c /dev/vdc /dev/vdb
+mount /dev/vdb /mnt/f2fs
+cat /sys/kernel/debug/f2fs/status
+
+Multidevice stats:
+  [seg:      inuse    dirty     full     free  prefree] [sec:      inuse    dirty     full     free  prefree]
+  #0             5        0        0     4005        0                 5        0        0     2000        0
+  #1             1        0        0     8191        0                 1        0        0     4095        0
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/f2fs.h    |  5 +++--
- fs/f2fs/file.c    |  4 ++--
- fs/f2fs/segment.c | 33 +++++++++++++++++++++++++--------
- fs/f2fs/segment.h |  4 ----
- 4 files changed, 30 insertions(+), 16 deletions(-)
+ fs/f2fs/debug.c | 107 ++++++++++++++++++++++++++++++++++++++++++++++++
+ fs/f2fs/f2fs.h  |  14 +++++++
+ 2 files changed, 121 insertions(+)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index ce00cb546f4a..bda61d7ca8dd 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1019,7 +1019,7 @@ static inline void set_new_dnode(struct dnode_of_data *dn, struct inode *inode,
- #define NR_CURSEG_PERSIST_TYPE	(NR_CURSEG_DATA_TYPE + NR_CURSEG_NODE_TYPE)
- #define NR_CURSEG_TYPE		(NR_CURSEG_INMEM_TYPE + NR_CURSEG_PERSIST_TYPE)
- 
--enum {
-+enum log_type {
- 	CURSEG_HOT_DATA	= 0,	/* directory entry blocks */
- 	CURSEG_WARM_DATA,	/* data blocks */
- 	CURSEG_COLD_DATA,	/* multimedia or GCed data blocks */
-@@ -3758,7 +3758,8 @@ void f2fs_replace_block(struct f2fs_sb_info *sbi, struct dnode_of_data *dn,
- 			block_t old_addr, block_t new_addr,
- 			unsigned char version, bool recover_curseg,
- 			bool recover_newaddr);
--int f2fs_get_segment_temp(int seg_type);
-+enum temp_type f2fs_get_segment_temp(struct f2fs_sb_info *sbi,
-+						enum log_type seg_type);
- int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
- 			block_t old_blkaddr, block_t *new_blkaddr,
- 			struct f2fs_summary *sum, int type,
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 0e07231dc093..92d7c62eba29 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4858,8 +4858,8 @@ static void f2fs_dio_write_submit_io(const struct iomap_iter *iter,
- {
- 	struct inode *inode = iter->inode;
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
--	int seg_type = f2fs_rw_hint_to_seg_type(sbi, inode->i_write_hint);
--	enum temp_type temp = f2fs_get_segment_temp(seg_type);
-+	enum log_type type = f2fs_rw_hint_to_seg_type(sbi, inode->i_write_hint);
-+	enum temp_type temp = f2fs_get_segment_temp(sbi, type);
- 
- 	bio->bi_write_hint = f2fs_io_type_to_rw_hint(sbi, DATA, temp);
- 	submit_bio(bio);
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 859d70bbc5e7..3ed689157891 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -3582,18 +3582,35 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
- 	}
+diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
+index 546b8ba91261..278c8855ac0a 100644
+--- a/fs/f2fs/debug.c
++++ b/fs/f2fs/debug.c
+@@ -60,6 +60,70 @@ void f2fs_update_sit_info(struct f2fs_sb_info *sbi)
  }
  
--int f2fs_get_segment_temp(int seg_type)
-+enum temp_type f2fs_get_segment_temp(struct f2fs_sb_info *sbi,
-+						enum log_type type)
- {
--	if (IS_HOT(seg_type))
--		return HOT;
--	else if (IS_WARM(seg_type))
--		return WARM;
--	return COLD;
-+	struct curseg_info *curseg = CURSEG_I(sbi, type);
-+	enum temp_type temp;
+ #ifdef CONFIG_DEBUG_FS
++static void update_multidevice_stats(struct f2fs_sb_info *sbi)
++{
++	struct f2fs_stat_info *si = F2FS_STAT(sbi);
++	struct f2fs_dev_stats *dev_stats = si->dev_stats;
++	int i, j;
 +
-+	switch (curseg->seg_type) {
-+	case CURSEG_HOT_NODE:
-+	case CURSEG_HOT_DATA:
-+		temp = HOT;
-+		break;
-+	case CURSEG_WARM_NODE:
-+	case CURSEG_WARM_DATA:
-+		temp = WARM;
-+		break;
-+	case CURSEG_COLD_NODE:
-+	case CURSEG_COLD_DATA:
-+		temp = COLD;
-+		break;
-+	default:
-+		f2fs_bug_on(sbi, 1);
++	if (!f2fs_is_multi_device(sbi))
++		return;
++
++	memset(dev_stats, 0, sizeof(struct f2fs_dev_stats) * sbi->s_ndevs);
++	for (i = 0; i < sbi->s_ndevs; i++) {
++		unsigned int start_segno, end_segno;
++		block_t start_blk, end_blk;
++
++		if (i == 0) {
++			start_blk = MAIN_BLKADDR(sbi);
++			end_blk = FDEV(i).end_blk + 1 - SEG0_BLKADDR(sbi);
++		} else {
++			start_blk = FDEV(i).start_blk;
++			end_blk = FDEV(i).end_blk + 1;
++		}
++
++		start_segno = GET_SEGNO(sbi, start_blk);
++		end_segno = GET_SEGNO(sbi, end_blk);
++
++		for (j = start_segno; j < end_segno; j++) {
++			unsigned int seg_blks, sec_blks;
++
++			seg_blks = get_seg_entry(sbi, j)->valid_blocks;
++
++			/* update segment stats */
++			if (IS_CURSEG(sbi, j))
++				dev_stats[i].devstats[0][DEVSTAT_INUSE]++;
++			else if (seg_blks == BLKS_PER_SEG(sbi))
++				dev_stats[i].devstats[0][DEVSTAT_FULL]++;
++			else if (seg_blks != 0)
++				dev_stats[i].devstats[0][DEVSTAT_DIRTY]++;
++			else if (!test_bit(j, FREE_I(sbi)->free_segmap))
++				dev_stats[i].devstats[0][DEVSTAT_FREE]++;
++			else
++				dev_stats[i].devstats[0][DEVSTAT_PREFREE]++;
++
++			if (!__is_large_section(sbi) ||
++				(j % SEGS_PER_SEC(sbi)) != 0)
++				continue;
++
++			sec_blks = get_sec_entry(sbi, j)->valid_blocks;
++
++			/* update section stats */
++			if (IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi, j)))
++				dev_stats[i].devstats[1][DEVSTAT_INUSE]++;
++			else if (sec_blks == BLKS_PER_SEC(sbi))
++				dev_stats[i].devstats[1][DEVSTAT_FULL]++;
++			else if (sec_blks != 0)
++				dev_stats[i].devstats[1][DEVSTAT_DIRTY]++;
++			else if (!test_bit(GET_SEC_FROM_SEG(sbi, j),
++					FREE_I(sbi)->free_secmap))
++				dev_stats[i].devstats[1][DEVSTAT_FREE]++;
++			else
++				dev_stats[i].devstats[1][DEVSTAT_PREFREE]++;
++		}
++	}
++}
++
+ static void update_general_status(struct f2fs_sb_info *sbi)
+ {
+ 	struct f2fs_stat_info *si = F2FS_STAT(sbi);
+@@ -214,6 +278,8 @@ static void update_general_status(struct f2fs_sb_info *sbi)
+ 		si->valid_blks[type] += blks;
+ 	}
+ 
++	update_multidevice_stats(sbi);
++
+ 	for (i = 0; i < MAX_CALL_TYPE; i++)
+ 		si->cp_call_count[i] = atomic_read(&sbi->cp_call_count[i]);
+ 
+@@ -498,6 +564,36 @@ static int stat_show(struct seq_file *s, void *v)
+ 			   si->dirty_count);
+ 		seq_printf(s, "  - Prefree: %d\n  - Free: %d (%d)\n\n",
+ 			   si->prefree_count, si->free_segs, si->free_secs);
++		if (f2fs_is_multi_device(sbi)) {
++			seq_puts(s, "Multidevice stats:\n");
++			seq_printf(s, "  [seg:   %8s %8s %8s %8s %8s]",
++					"inuse", "dirty", "full", "free", "prefree");
++			if (__is_large_section(sbi))
++				seq_printf(s, " [sec:   %8s %8s %8s %8s %8s]\n",
++					"inuse", "dirty", "full", "free", "prefree");
++			else
++				seq_puts(s, "\n");
++
++			for (i = 0; i < sbi->s_ndevs; i++) {
++				seq_printf(s, "  #%-2d     %8u %8u %8u %8u %8u", i,
++					si->dev_stats[i].devstats[0][DEVSTAT_INUSE],
++					si->dev_stats[i].devstats[0][DEVSTAT_DIRTY],
++					si->dev_stats[i].devstats[0][DEVSTAT_FULL],
++					si->dev_stats[i].devstats[0][DEVSTAT_FREE],
++					si->dev_stats[i].devstats[0][DEVSTAT_PREFREE]);
++				if (!__is_large_section(sbi)) {
++					seq_puts(s, "\n");
++					continue;
++				}
++				seq_printf(s, "          %8u %8u %8u %8u %8u\n",
++					si->dev_stats[i].devstats[1][DEVSTAT_INUSE],
++					si->dev_stats[i].devstats[1][DEVSTAT_DIRTY],
++					si->dev_stats[i].devstats[1][DEVSTAT_FULL],
++					si->dev_stats[i].devstats[1][DEVSTAT_FREE],
++					si->dev_stats[i].devstats[1][DEVSTAT_PREFREE]);
++			}
++			seq_puts(s, "\n");
++		}
+ 		seq_printf(s, "CP calls: %d (BG: %d)\n",
+ 			   si->cp_call_count[TOTAL_CALL],
+ 			   si->cp_call_count[BACKGROUND]);
+@@ -665,6 +761,7 @@ int f2fs_build_stats(struct f2fs_sb_info *sbi)
+ {
+ 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
+ 	struct f2fs_stat_info *si;
++	struct f2fs_dev_stats *dev_stats;
+ 	unsigned long flags;
+ 	int i;
+ 
+@@ -672,6 +769,15 @@ int f2fs_build_stats(struct f2fs_sb_info *sbi)
+ 	if (!si)
+ 		return -ENOMEM;
+ 
++	dev_stats = f2fs_kzalloc(sbi, sizeof(struct f2fs_dev_stats) *
++						sbi->s_ndevs, GFP_KERNEL);
++	if (!dev_stats) {
++		kfree(si);
++		return -ENOMEM;
 +	}
 +
-+	return temp;
++	si->dev_stats = dev_stats;
++
+ 	si->all_area_segs = le32_to_cpu(raw_super->segment_count);
+ 	si->sit_area_segs = le32_to_cpu(raw_super->segment_count_sit);
+ 	si->nat_area_segs = le32_to_cpu(raw_super->segment_count_nat);
+@@ -724,6 +830,7 @@ void f2fs_destroy_stats(struct f2fs_sb_info *sbi)
+ 	list_del(&si->stat_list);
+ 	raw_spin_unlock_irqrestore(&f2fs_stat_lock, flags);
+ 
++	kfree(si->dev_stats);
+ 	kfree(si);
  }
  
- static int __get_segment_type(struct f2fs_io_info *fio)
- {
--	int type = 0;
-+	enum log_type type;
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index bda61d7ca8dd..56797f8e6659 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3942,6 +3942,19 @@ void f2fs_destroy_recovery_cache(void);
+  * debug.c
+  */
+ #ifdef CONFIG_F2FS_STAT_FS
++enum {
++	DEVSTAT_INUSE,
++	DEVSTAT_DIRTY,
++	DEVSTAT_FULL,
++	DEVSTAT_FREE,
++	DEVSTAT_PREFREE,
++	DEVSTAT_MAX,
++};
++
++struct f2fs_dev_stats {
++	unsigned int devstats[2][DEVSTAT_MAX];		/* 0: segs, 1: secs */
++};
++
+ struct f2fs_stat_info {
+ 	struct list_head stat_list;
+ 	struct f2fs_sb_info *sbi;
+@@ -4005,6 +4018,7 @@ struct f2fs_stat_info {
+ 	unsigned int block_count[2];
+ 	unsigned int inplace_count;
+ 	unsigned long long base_mem, cache_mem, page_mem;
++	struct f2fs_dev_stats *dev_stats;
+ };
  
- 	switch (F2FS_OPTION(fio->sbi).active_logs) {
- 	case 2:
-@@ -3609,7 +3626,7 @@ static int __get_segment_type(struct f2fs_io_info *fio)
- 		f2fs_bug_on(fio->sbi, true);
- 	}
- 
--	fio->temp = f2fs_get_segment_temp(type);
-+	fio->temp = f2fs_get_segment_temp(fio->sbi, type);
- 
- 	return type;
- }
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 55a01da6c4be..6a23bb1d16a2 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -34,10 +34,6 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
- 	f2fs_bug_on(sbi, seg_type >= NR_PERSISTENT_LOG);
- }
- 
--#define IS_HOT(t)	((t) == CURSEG_HOT_NODE || (t) == CURSEG_HOT_DATA)
--#define IS_WARM(t)	((t) == CURSEG_WARM_NODE || (t) == CURSEG_WARM_DATA)
--#define IS_COLD(t)	((t) == CURSEG_COLD_NODE || (t) == CURSEG_COLD_DATA)
--
- #define IS_CURSEG(sbi, seg)						\
- 	(((seg) == CURSEG_I(sbi, CURSEG_HOT_DATA)->segno) ||	\
- 	 ((seg) == CURSEG_I(sbi, CURSEG_WARM_DATA)->segno) ||	\
+ static inline struct f2fs_stat_info *F2FS_STAT(struct f2fs_sb_info *sbi)
 -- 
 2.40.1
 
