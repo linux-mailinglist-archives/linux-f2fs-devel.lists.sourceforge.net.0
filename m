@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 107639A1979
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Oct 2024 05:48:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AF8E9A1BC4
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Oct 2024 09:37:16 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t1HUb-0001kQ-BZ;
-	Thu, 17 Oct 2024 03:48:04 +0000
+	id 1t1L4B-0004AS-1s;
+	Thu, 17 Oct 2024 07:37:03 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t1HUa-0001kK-GA
+ (envelope-from <chao@kernel.org>) id 1t1L4A-0004AI-2a
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 17 Oct 2024 03:48:03 +0000
+ Thu, 17 Oct 2024 07:37:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3+lAm+7JMvyZlQflsP14CMzuKgG6qzVkGH5R8I/RGkA=; b=KxSMQYclpWa+Km8CCd1Ze5UAIW
- 6HZzAzaZMHYvdJt2SA2810E1BUZfvA84wWNJ9HieUEz1kcKJSogi6mO/jJ2wq2TGy7DcY7iSpf5td
- T9BDonhkYTenBGZVZI3IBYTgxsNgK4hK3fwkKFlJ3iTWaePjZ6gmy66etfoKxwf/lCkc=;
+ bh=6YyA817qnouGzck4BJQb3KNkj1Wa7Na3nYIc9/hUp7E=; b=F+uX6+dgL3XwKupPqQW8C/Ty9P
+ NfZvY8YtUEXYjNmpKwNuK0iCVo+570+j1vgmrZzSplc5V62pexrNdZgF6zWj/TjglfPqkNpzT0l8H
+ iuOoG/1DMIc69tQl2ZNsngPZ1eh0YnCFZgLBzkGiqmMMMR+1hcpQ605+35M1fw4U2FiU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,62 +31,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3+lAm+7JMvyZlQflsP14CMzuKgG6qzVkGH5R8I/RGkA=; b=I6ho2gh1C1yCZiSAmsaulaYP5E
- ZDxz6TPY1JopnkS7V1M99fL7vwKvnPKrHZDJ2UIS56BpnRRpPh7x2jEaQXNescFNo3I6DD8bsPVFG
- lotYOslzo+gBobvlO0BTr+Z8cP+VsEwoK048EHXeHzXaQXmZ65NaY20xpR/lb9xhfi5g=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=6YyA817qnouGzck4BJQb3KNkj1Wa7Na3nYIc9/hUp7E=; b=cPIAGjaPgjkvdG4pm5EP7213TR
+ CaLEnnr5J6A2Dj7mKGALKi6YyX0KQzcCo0iRpm7Ul2n19M2moDHZJAjwPIX8Jzcx9FF5/sz+y6H83
+ EEwJrSahK6lrTTP8I6DM4ajdVTSkT+SPhsPUGwjiecw/pmC2fFMHc0SGNThdX05aRTBA=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t1HUY-0007AJ-HZ for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 17 Oct 2024 03:48:03 +0000
+ id 1t1L49-0008MY-FD for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 17 Oct 2024 07:37:02 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id B03FFA434A9;
- Thu, 17 Oct 2024 03:47:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C8355C4CEC3;
- Thu, 17 Oct 2024 03:47:49 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id A8F925C542F;
+ Thu, 17 Oct 2024 07:36:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 57F4AC4CEC3;
+ Thu, 17 Oct 2024 07:36:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1729136871;
- bh=zfcS/CUov++kYnVioTemWtIyz8pFa4kV0Ve1lFvpLAA=;
+ s=k20201202; t=1729150610;
+ bh=DZW8tP1ExDwXOCc9NFCPeno7zioU/xqa4Gnd6frTMAY=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=mSnN3BsF4zk3ZaznITcxzjeD27rdUK+VDx322XPWmDbuz5Qzj5nrUXh2ae7l6MRux
- g5ZRgkh/2QI2T/eXczd5rsVflOkzu2RoEwFI6nbeWuolJzTtYYLjNeidyVP49N/Hk1
- uz7H6QbOyZsuPfd65ttq3av891QA24u6SsGLFqRsSXSUXwDfjh5RB5Kv2h27yPnnCb
- qbWhbTkKd3XlxSoYsR8Lfq7IqHFpidML6dUSk0i+33Qpy3tfkZsqmPDTIu3+27Jgee
- RoNZ5sWg8T2lxDXfLGoHK9sIvU3t9lSvypwknKyu6DQNwNYITGfAuoqHqzX/2xdp2/
- pWBs/qRZb+HQQ==
-Message-ID: <3f5ac7a7-b153-43e8-9a87-f8a9a432dd83@kernel.org>
-Date: Thu, 17 Oct 2024 11:47:47 +0800
+ b=CmDW5gtJs+QfR20iowIOMP8F+FXpQPYhNjdNz3mA5QiwP/ysIXyxxViYBsRkGivEX
+ Sxb/HRaVgFUeBkkXnkt3MTEEmrX1Lc76U2pOraohHb76hldUJ0rcEcCnSettmWtdbu
+ CLKhOKcpYQHai9neCzmZMqfrmf7bH0/dg7eWdbN57EmVFX3cRC0e4xBjSFGLsoiAKw
+ TK1/vxIvb05ygk4Ef3tGR5O/GIBbWpqilRe8uvZ712U8u52Flk3RE0dEqylp50nIen
+ L+z2Rjj80ZS2P5hJYyo6Ta14GUQ/eiEfp+ORuy7UgP7Zqu8Fc8R15A9gtDN4R8PyYa
+ sBmI6qwsTuFlg==
+Message-ID: <40d285ce-d2c5-4cb0-9040-fd35f9e14159@kernel.org>
+Date: Thu, 17 Oct 2024 15:36:46 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
-References: <20241015180936.1180394-1-daeho43@gmail.com>
+References: <20241015165427.1158782-1-daeho43@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20241015180936.1180394-1-daeho43@gmail.com>
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20241015165427.1158782-1-daeho43@gmail.com>
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/10/16 2:09, Daeho Jeong wrote: > From: Daeho Jeong
- <daehojeong@google.com> > > F2FS should understand how the device aliasing
- file works and support > deleting the file after use. A device ali [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 2024/10/16 0:54, Daeho Jeong wrote: > From: Daeho Jeong
+ <daehojeong@google.com> > > Now we reclaim too much space before allocating
+ pinned space for zoned > devices. > > Signed-off-by: Daeho Jeong [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t1HUY-0007AJ-HZ
-Subject: Re: [f2fs-dev] [PATCH v6] f2fs: introduce device aliasing file
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1t1L49-0008MY-FD
+Subject: Re: [f2fs-dev] [PATCH] f2fs: decrease spare area for pinned files
+ for zoned devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,443 +109,17 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/10/16 2:09, Daeho Jeong wrote:
+On 2024/10/16 0:54, Daeho Jeong wrote:
 > From: Daeho Jeong <daehojeong@google.com>
 > 
-> F2FS should understand how the device aliasing file works and support
-> deleting the file after use. A device aliasing file can be created by
-> mkfs.f2fs tool and it can map the whole device with an extent, not
-> using node blocks. The file space should be pinned and normally used for
-> read-only usages.
+> Now we reclaim too much space before allocating pinned space for zoned
+> devices.
 > 
 > Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> Reviewed-by: Chao Yu <chao@kernel.org>
-> ---
-> v6: added the description in the kernel doc.
-> v5: added a ioctl to know whether a file is for device aliasing
-> v4: added file pinning check in sanity check
-> v3: merged Chao's extent cache sanity check.
->      prevented device aliasing support with noextent mount option
-> v2: changed the position of f2fs_destroy_extent_tree() only for device
->      aliasing files
-> ---
->   Documentation/filesystems/f2fs.rst | 45 ++++++++++++++++++++++++++++++
->   fs/f2fs/data.c                     |  5 ++++
->   fs/f2fs/extent_cache.c             | 45 +++++++++++++++++++++++++++++-
->   fs/f2fs/f2fs.h                     |  5 ++++
->   fs/f2fs/file.c                     | 44 ++++++++++++++++++++++++++---
->   fs/f2fs/inode.c                    | 19 ++++++++++++-
->   fs/f2fs/super.c                    |  4 +++
->   fs/f2fs/sysfs.c                    |  2 ++
->   include/uapi/linux/f2fs.h          |  1 +
->   9 files changed, 164 insertions(+), 6 deletions(-)
-> 
-> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-> index 68a0885fb5e6..e61e8c630ecd 100644
-> --- a/Documentation/filesystems/f2fs.rst
-> +++ b/Documentation/filesystems/f2fs.rst
-> @@ -943,3 +943,48 @@ NVMe Zoned Namespace devices
->     can start before the zone-capacity and span across zone-capacity boundary.
->     Such spanning segments are also considered as usable segments. All blocks
->     past the zone-capacity are considered unusable in these segments.
-> +
-> +Device aliasing feature
-> +-----------------------
-> +
-> +f2fs can utilize a special file called a "device aliasing file." This file allows
-> +the entire storage device to be mapped with a single, large extent, not using
-> +the usual f2fs node structures. This mapped area is pinned and primarily intended
-> +for holding the space.
-> +
-> +Essentially, this mechanism allows a portion of the f2fs area to be temporarily
-> +reserved and used by another filesystem or for different purposes. Once that
-> +external usage is complete, the device aliasing file can be deleted, releasing
-> +the reserved space back to F2FS for its own use.
-> +
-> +<use-case>
-> +
-> +# ls /dev/vd*
-> +/dev/vdb (32GB) /dev/vdc (32GB)
-> +# mkfs.ext4 /dev/vdc
-> +# mkfs.f2fs -c /dev/vdc@vdc.file /dev/vdb
-> +# mount /dev/vdb /mnt/f2fs
-> +# ls -l /mnt/f2fs
-> +vdc.file
-> +# df -h
-> +/dev/vdb                            64G   33G   32G  52% /mnt/f2fs
-> +
-> +# mount -o loop /dev/vdc /mnt/ext4
-> +# df -h
-> +/dev/vdb                            64G   33G   32G  52% /mnt/f2fs
-> +/dev/loop7                          32G   24K   30G   1% /mnt/ext4
-> +# umount /mnt/ext4
-> +
-> +# f2fs_io getflags /mnt/f2fs/vdc.file
-> +get a flag on /mnt/f2fs/vdc.file ret=0, flags=nocow(pinned),immutable
-> +# f2fs_io setflags noimmutable /mnt/f2fs/vdc.file
-> +get a flag on noimmutable ret=0, flags=800010
-> +set a flag on /mnt/f2fs/vdc.file ret=0, flags=noimmutable
-> +# rm /mnt/f2fs/vdc.file
-> +# df -h
-> +/dev/vdb                            64G  753M   64G   2% /mnt/f2fs
-> +
-> +So, the key idea is, user can do any file operations on /dev/vdc, and
-> +reclaim the space after the use, while the space is counted as /data.
-> +That doesn't require modifying partition size and filesystem format.
-> +
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 94f7b084f601..90fa8ab85194 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -3441,6 +3441,11 @@ static int prepare_write_begin(struct f2fs_sb_info *sbi,
->   
->   	if (!f2fs_lookup_read_extent_cache_block(inode, index,
->   						 &dn.data_blkaddr)) {
-> +		if (IS_DEVICE_ALIASING(inode)) {
-> +			err = -ENODATA;
-> +			goto out;
-> +		}
-> +
->   		if (locked) {
->   			err = f2fs_reserve_block(&dn, index);
->   			goto out;
-> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-> index 62ac440d9416..019c1f7b7fa5 100644
-> --- a/fs/f2fs/extent_cache.c
-> +++ b/fs/f2fs/extent_cache.c
-> @@ -24,6 +24,7 @@ bool sanity_check_extent_cache(struct inode *inode, struct page *ipage)
->   	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->   	struct f2fs_extent *i_ext = &F2FS_INODE(ipage)->i_ext;
->   	struct extent_info ei;
-> +	int devi;
->   
->   	get_read_extent_info(&ei, i_ext);
->   
-> @@ -38,7 +39,36 @@ bool sanity_check_extent_cache(struct inode *inode, struct page *ipage)
->   			  ei.blk, ei.fofs, ei.len);
->   		return false;
->   	}
-> -	return true;
-> +
-> +	if (!IS_DEVICE_ALIASING(inode))
-> +		return true;
-> +
-> +	for (devi = 0; devi < sbi->s_ndevs; devi++) {
-> +		if (FDEV(devi).start_blk != ei.blk ||
-> +				FDEV(devi).end_blk != ei.blk + ei.len - 1)
-> +			continue;
-> +
-> +		if (devi == 0) {
-> +			f2fs_warn(sbi,
-> +			    "%s: inode (ino=%lx) is an alias of meta device",
-> +			    __func__, inode->i_ino);
-> +			return false;
-> +		}
-> +
-> +		if (bdev_is_zoned(FDEV(devi).bdev)) {
-> +			f2fs_warn(sbi,
-> +			    "%s: device alias inode (ino=%lx)'s extent info "
-> +			    "[%u, %u, %u] maps to zoned block device",
-> +			    __func__, inode->i_ino, ei.blk, ei.fofs, ei.len);
-> +			return false;
-> +		}
-> +		return true;
-> +	}
-> +
-> +	f2fs_warn(sbi, "%s: device alias inode (ino=%lx)'s extent info "
-> +			"[%u, %u, %u] is inconsistent w/ any devices",
-> +			__func__, inode->i_ino, ei.blk, ei.fofs, ei.len);
-> +	return false;
->   }
->   
->   static void __set_extent_info(struct extent_info *ei,
-> @@ -76,6 +106,9 @@ static bool __init_may_extent_tree(struct inode *inode, enum extent_type type)
->   
->   static bool __may_extent_tree(struct inode *inode, enum extent_type type)
->   {
-> +	if (IS_DEVICE_ALIASING(inode) && type == EX_READ)
-> +		return true;
-> +
->   	/*
->   	 * for recovered files during mount do not create extents
->   	 * if shrinker is not registered.
-> @@ -401,6 +434,11 @@ void f2fs_init_read_extent_tree(struct inode *inode, struct page *ipage)
->   	if (atomic_read(&et->node_cnt) || !ei.len)
->   		goto skip;
->   
-> +	if (IS_DEVICE_ALIASING(inode)) {
-> +		et->largest = ei;
-> +		goto skip;
-> +	}
-> +
->   	en = __attach_extent_node(sbi, et, &ei, NULL,
->   				&et->root.rb_root.rb_node, true);
->   	if (en) {
-> @@ -463,6 +501,11 @@ static bool __lookup_extent_tree(struct inode *inode, pgoff_t pgofs,
->   		goto out;
->   	}
->   
-> +	if (IS_DEVICE_ALIASING(inode)) {
-> +		ret = false;
-> +		goto out;
-> +	}
-> +
->   	en = __lookup_extent_node(&et->root, et->cached_en, pgofs);
->   	if (!en)
->   		goto out;
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 33f5449dc22d..b6ba22a1da47 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -213,6 +213,7 @@ struct f2fs_mount_info {
->   #define F2FS_FEATURE_CASEFOLD			0x00001000
->   #define F2FS_FEATURE_COMPRESSION		0x00002000
->   #define F2FS_FEATURE_RO				0x00004000
-> +#define F2FS_FEATURE_DEVICE_ALIAS		0x00008000
->   
->   #define __F2FS_HAS_FEATURE(raw_super, mask)				\
->   	((raw_super->feature & cpu_to_le32(mask)) != 0)
-> @@ -3046,6 +3047,7 @@ static inline void f2fs_change_bit(unsigned int nr, char *addr)
->   #define F2FS_DIRSYNC_FL			0x00010000 /* dirsync behaviour (directories only) */
->   #define F2FS_PROJINHERIT_FL		0x20000000 /* Create with parents projid */
->   #define F2FS_CASEFOLD_FL		0x40000000 /* Casefolded file */
-> +#define F2FS_DEVICE_ALIAS_FL		0x80000000 /* File for aliasing a device */
->   
->   #define F2FS_QUOTA_DEFAULT_FL		(F2FS_NOATIME_FL | F2FS_IMMUTABLE_FL)
->   
-> @@ -3061,6 +3063,8 @@ static inline void f2fs_change_bit(unsigned int nr, char *addr)
->   /* Flags that are appropriate for non-directories/regular files. */
->   #define F2FS_OTHER_FLMASK	(F2FS_NODUMP_FL | F2FS_NOATIME_FL)
->   
-> +#define IS_DEVICE_ALIASING(inode)	(F2FS_I(inode)->i_flags & F2FS_DEVICE_ALIAS_FL)
-> +
->   static inline __u32 f2fs_mask_flags(umode_t mode, __u32 flags)
->   {
->   	if (S_ISDIR(mode))
-> @@ -4510,6 +4514,7 @@ F2FS_FEATURE_FUNCS(sb_chksum, SB_CHKSUM);
->   F2FS_FEATURE_FUNCS(casefold, CASEFOLD);
->   F2FS_FEATURE_FUNCS(compression, COMPRESSION);
->   F2FS_FEATURE_FUNCS(readonly, RO);
-> +F2FS_FEATURE_FUNCS(device_alias, DEVICE_ALIAS);
->   
->   #ifdef CONFIG_BLK_DEV_ZONED
->   static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 9ae54c4c72fe..25d934357d3c 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -725,6 +725,11 @@ int f2fs_do_truncate_blocks(struct inode *inode, u64 from, bool lock)
->   
->   	trace_f2fs_truncate_blocks_enter(inode, from);
->   
-> +	if (IS_DEVICE_ALIASING(inode) && from) {
-> +		err = -EINVAL;
-> +		goto out_err;
-> +	}
-> +
->   	free_from = (pgoff_t)F2FS_BLK_ALIGN(from);
->   
->   	if (free_from >= max_file_blocks(inode))
-> @@ -739,6 +744,21 @@ int f2fs_do_truncate_blocks(struct inode *inode, u64 from, bool lock)
->   		goto out;
->   	}
->   
-> +	if (IS_DEVICE_ALIASING(inode)) {
-> +		struct extent_tree *et = F2FS_I(inode)->extent_tree[EX_READ];
-> +		struct extent_info ei = et->largest;
-> +		unsigned int i;
-> +
-> +		for (i = 0; i < ei.len; i++)
-> +			f2fs_invalidate_blocks(sbi, ei.blk + i);
-> +
-> +		dec_valid_block_count(sbi, inode, ei.len);
-> +		f2fs_update_time(sbi, REQ_TIME);
-> +
-> +		f2fs_put_page(ipage, 1);
-> +		goto out;
-> +	}
-> +
->   	if (f2fs_has_inline_data(inode)) {
->   		f2fs_truncate_inline_inode(inode, ipage, from);
->   		f2fs_put_page(ipage, 1);
-> @@ -774,7 +794,7 @@ int f2fs_do_truncate_blocks(struct inode *inode, u64 from, bool lock)
->   	/* lastly zero out the first data page */
->   	if (!err)
->   		err = truncate_partial_data_page(inode, from, truncate_page);
-> -
-> +out_err:
->   	trace_f2fs_truncate_blocks_exit(inode, err);
->   	return err;
->   }
-> @@ -992,7 +1012,8 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
->   		return -EPERM;
->   
->   	if ((attr->ia_valid & ATTR_SIZE)) {
-> -		if (!f2fs_is_compress_backend_ready(inode))
-> +		if (!f2fs_is_compress_backend_ready(inode) ||
-> +				IS_DEVICE_ALIASING(inode))
->   			return -EOPNOTSUPP;
->   		if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED) &&
->   			!IS_ALIGNED(attr->ia_size,
-> @@ -1860,7 +1881,7 @@ static long f2fs_fallocate(struct file *file, int mode,
->   		return -EIO;
->   	if (!f2fs_is_checkpoint_ready(F2FS_I_SB(inode)))
->   		return -ENOSPC;
-> -	if (!f2fs_is_compress_backend_ready(inode))
-> +	if (!f2fs_is_compress_backend_ready(inode) || IS_DEVICE_ALIASING(inode))
->   		return -EOPNOTSUPP;
->   
->   	/* f2fs only support ->fallocate for regular file */
-> @@ -3296,6 +3317,9 @@ int f2fs_pin_file_control(struct inode *inode, bool inc)
->   	struct f2fs_inode_info *fi = F2FS_I(inode);
->   	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->   
-> +	if (IS_DEVICE_ALIASING(inode))
-> +		return -EINVAL;
-> +
->   	if (fi->i_gc_failures >= sbi->gc_pin_file_threshold) {
->   		f2fs_warn(sbi, "%s: Enable GC = ino %lx after %x GC trials",
->   			  __func__, inode->i_ino, fi->i_gc_failures);
-> @@ -3326,6 +3350,9 @@ static int f2fs_ioc_set_pin_file(struct file *filp, unsigned long arg)
->   	if (f2fs_readonly(sbi->sb))
->   		return -EROFS;
->   
-> +	if (!pin && IS_DEVICE_ALIASING(inode))
-> +		return -EOPNOTSUPP;
-> +
->   	ret = mnt_want_write_file(filp);
->   	if (ret)
->   		return ret;
-> @@ -3391,6 +3418,12 @@ static int f2fs_ioc_get_pin_file(struct file *filp, unsigned long arg)
->   	return put_user(pin, (u32 __user *)arg);
->   }
->   
-> +static int f2fs_ioc_get_dev_alias_file(struct file *filp, unsigned long arg)
-> +{
-> +	return put_user(IS_DEVICE_ALIASING(file_inode(filp)) ? 1 : 0,
-> +			(u32 __user *)arg);
-> +}
-> +
->   int f2fs_precache_extents(struct inode *inode)
->   {
->   	struct f2fs_inode_info *fi = F2FS_I(inode);
-> @@ -4490,6 +4523,8 @@ static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->   		return f2fs_ioc_decompress_file(filp);
->   	case F2FS_IOC_COMPRESS_FILE:
->   		return f2fs_ioc_compress_file(filp);
-> +	case F2FS_IOC_GET_DEV_ALIAS_FILE:
 
-Needs to handle F2FS_IOC_GET_DEV_ALIAS_FILE in f2fs_compat_ioctl as well?
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-
-> +		return f2fs_ioc_get_dev_alias_file(filp, arg);
->   	default:
->   		return -ENOTTY;
->   	}
-> @@ -4764,7 +4799,8 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
->   	else
->   		return 0;
->   
-> -	map.m_may_create = true;
-> +	if (!IS_DEVICE_ALIASING(inode))
-> +		map.m_may_create = true;
->   	if (dio) {
->   		map.m_seg_type = f2fs_rw_hint_to_seg_type(sbi,
->   						inode->i_write_hint);
-> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-> index 1ed86df343a5..194dc0f53ad8 100644
-> --- a/fs/f2fs/inode.c
-> +++ b/fs/f2fs/inode.c
-> @@ -372,6 +372,19 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
->   		return false;
->   	}
->   
-> +	if (IS_DEVICE_ALIASING(inode)) {
-> +		if (!f2fs_sb_has_device_alias(sbi)) {
-> +			f2fs_warn(sbi, "%s: inode (ino=%lx) has device alias flag, but the feature is off",
-> +				  __func__, inode->i_ino);
-> +			return false;
-> +		}
-> +		if (!f2fs_is_pinned_file(inode)) {
-> +			f2fs_warn(sbi, "%s: inode (ino=%lx) has device alias flag, but is not pinned",
-> +				  __func__, inode->i_ino);
-> +			return false;
-> +		}
-> +	}
-> +
->   	return true;
->   }
->   
-> @@ -823,7 +836,8 @@ void f2fs_evict_inode(struct inode *inode)
->   	f2fs_bug_on(sbi, get_dirty_pages(inode));
->   	f2fs_remove_dirty_inode(inode);
->   
-> -	f2fs_destroy_extent_tree(inode);
-> +	if (!IS_DEVICE_ALIASING(inode))
-> +		f2fs_destroy_extent_tree(inode);
->   
->   	if (inode->i_nlink || is_bad_inode(inode))
->   		goto no_delete;
-> @@ -879,6 +893,9 @@ void f2fs_evict_inode(struct inode *inode)
->   		goto retry;
->   	}
->   
-> +	if (IS_DEVICE_ALIASING(inode))
-> +		f2fs_destroy_extent_tree(inode);
-> +
->   	if (err) {
->   		f2fs_update_inode_page(inode);
->   		if (dquot_initialize_needed(inode))
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 87ab5696bd48..30646418241c 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -834,6 +834,10 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->   			set_opt(sbi, READ_EXTENT_CACHE);
->   			break;
->   		case Opt_noextent_cache:
-> +			if (F2FS_HAS_FEATURE(sbi, F2FS_FEATURE_DEVICE_ALIAS)) {
-> +				f2fs_err(sbi, "device aliasing requires extent cache");
-> +				return -EINVAL;
-> +			}
->   			clear_opt(sbi, READ_EXTENT_CACHE);
->   			break;
->   		case Opt_noinline_data:
-> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> index c56e8c873935..e51304bc65ea 100644
-> --- a/fs/f2fs/sysfs.c
-> +++ b/fs/f2fs/sysfs.c
-> @@ -1313,6 +1313,7 @@ F2FS_SB_FEATURE_RO_ATTR(sb_checksum, SB_CHKSUM);
->   F2FS_SB_FEATURE_RO_ATTR(casefold, CASEFOLD);
->   F2FS_SB_FEATURE_RO_ATTR(compression, COMPRESSION);
->   F2FS_SB_FEATURE_RO_ATTR(readonly, RO);
-> +F2FS_SB_FEATURE_RO_ATTR(device_alias, DEVICE_ALIAS);
->   
->   static struct attribute *f2fs_sb_feat_attrs[] = {
->   	ATTR_LIST(sb_encryption),
-> @@ -1329,6 +1330,7 @@ static struct attribute *f2fs_sb_feat_attrs[] = {
->   	ATTR_LIST(sb_casefold),
->   	ATTR_LIST(sb_compression),
->   	ATTR_LIST(sb_readonly),
-> +	ATTR_LIST(sb_device_alias),
->   	NULL,
->   };
->   ATTRIBUTE_GROUPS(f2fs_sb_feat);
-> diff --git a/include/uapi/linux/f2fs.h b/include/uapi/linux/f2fs.h
-> index 955d440be104..f7aaf8d23e20 100644
-> --- a/include/uapi/linux/f2fs.h
-> +++ b/include/uapi/linux/f2fs.h
-> @@ -43,6 +43,7 @@
->   #define F2FS_IOC_DECOMPRESS_FILE	_IO(F2FS_IOCTL_MAGIC, 23)
->   #define F2FS_IOC_COMPRESS_FILE		_IO(F2FS_IOCTL_MAGIC, 24)
->   #define F2FS_IOC_START_ATOMIC_REPLACE	_IO(F2FS_IOCTL_MAGIC, 25)
-> +#define F2FS_IOC_GET_DEV_ALIAS_FILE	_IOR(F2FS_IOCTL_MAGIC, 26, __u32)
->   
->   /*
->    * should be same as XFS_IOC_GOINGDOWN.
-
 
 
 _______________________________________________
