@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 268639A3557
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 18 Oct 2024 08:27:11 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE49A9A3556
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 18 Oct 2024 08:27:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t1gRs-0006fg-Tp;
-	Fri, 18 Oct 2024 06:26:56 +0000
+	id 1t1gS0-0004oc-PU;
+	Fri, 18 Oct 2024 06:27:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t1gRr-0006fX-VI
+ (envelope-from <chao@kernel.org>) id 1t1gRz-0004oN-6F
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 18 Oct 2024 06:26:55 +0000
+ Fri, 18 Oct 2024 06:27:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=W4oWhutGt4EgCpIj5NVKahiwOGXeQI7gyWPoKAnn+tE=; b=bt+aqcXlDTLe5qN1Hh9YIWFpFu
- KdUtK43KPeBnRaL3OXW6tzcL6PvsOmSYqhsOxtOJcbA1lM630wUFgfRwdNEQgWZFrpTx+gja0zGJA
- ms2LjOlVDPOQyieZxmeY4/ZAhtLIp3gigz+yKWelENZ29Kj17gzGAoL6gif/7ZEi1st4=;
+ bh=8YjYESIMS6XMxcRca6Cis41SnqwSzqx+lIWmY2qaneM=; b=HAoG+c8xUgpvvXmiowmi8KDOh5
+ Dh8UctCLoUYUwf2A46IFnx1m5jUtMsfYc/hBnHT+mrMzfwH/AUpZJTc/fjLUB0U+eR8MsJftjZziZ
+ Hx2tGKue811se4mxYFChC50UtgNgM/arptIpRnp3T/dTXOqU7Inilb/ibMM6Rfq5fNTs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,53 +31,51 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=W4oWhutGt4EgCpIj5NVKahiwOGXeQI7gyWPoKAnn+tE=; b=d83GsjeNJ8Qt8jC8FeLoFwpmT4
- k9oGnrhALH+wcv6Oz8duvEwePM3PDFYLBQyVp8vGQKuvFzWupfbs9wC90j5z5dSkb/UlsnSzaR516
- 6zfEIT9A6sANKZ89dCiJgmcpmcFI3HUhCI1MQWowsvuUNgll/rxTYmH4s17B+fpl5moc=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=8YjYESIMS6XMxcRca6Cis41SnqwSzqx+lIWmY2qaneM=; b=f5dp0R2ni+XnUziKKVCWfISeyl
+ w1/svWFSwH3TCJun4ryMZIEUixF01OofW5nhaKueuTPFbN3hIHcWEf0BygUUa7xBXO6Fp3nUV7fqH
+ V2bYjxqt+PeQgDttfSmO+wbPj3iI/+1T11GP82PH+GFN8JJo9pMZ8HP1GgvpN+6VkOsQ=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t1gRr-0005LO-Ai for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 18 Oct 2024 06:26:55 +0000
+ id 1t1gRy-0005M2-4f for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 18 Oct 2024 06:27:03 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 84C4B5C5EC0
+ by nyc.source.kernel.org (Postfix) with ESMTP id 6AD0CA44527
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 18 Oct 2024 06:26:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B60AC4CECF;
- Fri, 18 Oct 2024 06:26:48 +0000 (UTC)
+ Fri, 18 Oct 2024 06:26:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1FDDDC4CEC3;
+ Fri, 18 Oct 2024 06:26:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1729232809;
- bh=YDbEYfqH5QdtjigKgVD4ialWiRbwxPVZKrn1ldhPIkE=;
+ s=k20201202; t=1729232811;
+ bh=29xKPT2f4WvFDNlKwJOT/T2nkzhUujZxCZronc8t5Ho=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=K8jlWh+44XiVhSGiHFKsH8jsPXnXCnFNl4ojrKKfU8rPpQK8KWLVaq7ZyM2mESb7a
- T2l33YpKCdAqrgMO78A8mkqq9/epz38zcQdkKWER5s5k1RZbclnYWjNqshCarShtgc
- 2STOsuK8jGm/bSfAP9mCg9aBW5vL6xnn7TuHimBq7PqKYoYnLMRHsZOjHunhz8QbFU
- 5Vy4rx2uzM95z2lDKxPo1Ghot2tHozVK9yrCzwWNdJ83rxT+FyFQCrla6prY0/LWsu
- p6Yt3w6ArJFj/E4Y5xtN1jYgvqSVviFlzJnVkuOXA6DVnGU6iQpgyQ33GSHN57MNiu
- 3cjW37nI5IF7Q==
+ b=JZP60lHEiUTNb7iX8ezSHM9FSIeRrDbnSWPX8dm782ij56p1n0Iy/7OoyWbYsooyg
+ U1bv7Tn5RRMxtIh19vCOBXdLek2KO02QXl9MmhT5DVyyNWkWcWnD2Nea9uMiCMkSWj
+ Wqhu2KUy/lhWUGqaVdzj28XNugMtwqrQSgtFhKugwBdVsh4qf2lqUb/V3seD2Vdkvb
+ MEuM/SWDbGQVfJ+EoR3uBDW8U/wRsP7UD64wyGwB4F/R6gZTnAdiYp2CFx+kgyy8Fc
+ JpWgoikS/1jFGNVue9cnGLryy4W3PWtaLcPffIAPXmsLs0YU6FaRE0/eMH9xP9gEAO
+ i65PK8JSYDEoQ==
 To: jaegeuk@kernel.org
-Date: Fri, 18 Oct 2024 14:26:37 +0800
-Message-Id: <20241018062638.2619214-2-chao@kernel.org>
+Date: Fri, 18 Oct 2024 14:26:38 +0800
+Message-Id: <20241018062638.2619214-3-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20241018062638.2619214-1-chao@kernel.org>
 References: <20241018062638.2619214-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -5.3 (-----)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  blkzoned feature enables lfs mode by default,
- for data updates
- from regular file, it only allow to use OPU, this patch changes to allow
- to use IPU if regular file's data block locates in regular block [...] 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview: Overhead of pinfile is heavy due to: 1) GC tries to skip
+ migrating
+ section which contains pinfile's data block, it will cost more time during
+ GC, 2) and also it will take high risk when GC unpins file [...] 
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -88,9 +86,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t1gRr-0005LO-Ai
-Subject: [f2fs-dev] [PATCH 2/3] f2fs: zone: allow IPU for regular file in
- regular block device
+X-Headers-End: 1t1gRy-0005M2-4f
+Subject: [f2fs-dev] [PATCH 3/3] f2fs: support NOCoW flag
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,56 +106,213 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-blkzoned feature enables lfs mode by default, for data updates from
-regular file, it only allow to use OPU, this patch changes to allow
-to use IPU if regular file's data block locates in regular block
-device, if data block locates in zoned block device, it still uses
-OPU.
+Overhead of pinfile is heavy due to:
+1) GC tries to skip migrating section which contains pinfile's data
+block, it will cost more time during GC,
+2) and also it will take high risk when GC unpins file and migrates
+it's data block once inode.i_gc_failure exceeds threshold.
+
+This patch proposes to support NOCoW flag on inode, which has similar
+semantics to pinfile:
+
+			Pinfile			NOCoW
+[Enable]
+only regular		yes			yes
+only empty file		yes			no
+blkzoned=on,mode=lfs	Support			Support
+blkzoned=off,mode=lfs	Not support		Not support
+
+[fsync/wb/dio IO behavior]
+block in regular device	IPU			IPU
+block in zoned device	N/A			OPU
+
+[Misc IO behavior]
+GC			skip/OPU		OPU
+defrag ioc/swapon	Not support		Support
+
+If userspace doesn't need pinned physical block address for following
+direct access, we can tag file w/ NOCoW flag instead of pinfile flag,
+we will be benefit from it for below cases:
+1) user's write won't fragment NOCoW file's data block due to IPU
+2) GC/defrag/swapon won't fail on NOCoW file.
+
+Please note that, this patch changes to not show NOCoW flag for a
+pinned file, the logic is as below:
+
+Before
+			Pinned file
+lsattr			C
+f2fs_io pinfile get	pinned
+
+After
+			Pinned file		NOCoW file
+lsattr			-			C
+f2fs_io pinfile get	pinned			un-pinned
+
+So, to consider backward compatibility, if NOCoW flag shown on a
+target inode, we need to check pinned flag to see whether NOCoW
+flag was really tagged or not.
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/data.c | 12 ++++++++++--
- fs/f2fs/f2fs.h |  5 +++++
- 2 files changed, 15 insertions(+), 2 deletions(-)
+ fs/f2fs/data.c | 21 ++++++++++++++++++++-
+ fs/f2fs/f2fs.h | 10 ++++++++--
+ fs/f2fs/file.c | 22 ++++++++++++++++++----
+ 3 files changed, 46 insertions(+), 7 deletions(-)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 949b6bb957c7..c6d0e4aa12e3 100644
+index c6d0e4aa12e3..b8ba97b2c11f 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -2648,8 +2648,16 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
- 		return false;
- 	if (fio && is_sbi_flag_set(sbi, SBI_NEED_FSCK))
+@@ -1636,7 +1636,7 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
+ 	/* use out-place-update for direct IO under LFS mode */
+ 	if (map->m_may_create && (is_hole ||
+ 		(flag == F2FS_GET_BLOCK_DIO && f2fs_lfs_mode(sbi) &&
+-		!f2fs_is_pinned_file(inode)))) {
++		!f2fs_is_pinned_file(inode) && !f2fs_is_nocow_file(inode)))) {
+ 		if (unlikely(f2fs_cp_error(sbi))) {
+ 			err = -EIO;
+ 			goto sync_out;
+@@ -2636,6 +2636,11 @@ bool f2fs_should_update_inplace(struct inode *inode, struct f2fs_io_info *fio)
+ 	if (file_is_cold(inode) && !is_inode_flag_set(inode, FI_OPU_WRITE))
  		return true;
--	if (f2fs_lfs_mode(sbi))
--		return true;
-+	if (f2fs_lfs_mode(sbi)) {
-+		/* no regular block device in mainarea */
-+		if (!f2fs_blkzoned_has_regular_section(sbi))
-+			return true;
-+		/* blkaddr locates in sequential zone */
-+		if (fio && __is_valid_data_blkaddr(fio->old_blkaddr) &&
-+			GET_SEGNO(sbi, fio->old_blkaddr) >=
-+					sbi->first_zoned_segno)
-+			return true;
-+	}
+ 
++	/* allows NOCoW file to be migrated during defragmentation and swapon */
++	if (f2fs_is_nocow_file(inode) &&
++		!is_inode_flag_set(inode, FI_OPU_WRITE))
++		return true;
++
+ 	return check_inplace_update_policy(inode, fio);
+ }
+ 
+@@ -2658,6 +2663,9 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
+ 					sbi->first_zoned_segno)
+ 			return true;
+ 	}
++	/* should check NOCoW flag after lfs_mode check condition */
++	if (f2fs_is_nocow_file(inode))
++		return false;
  	if (S_ISDIR(inode->i_mode))
  		return true;
  	if (IS_NOQUOTA(inode))
+@@ -2722,11 +2730,22 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
+ 						DATA_GENERIC_ENHANCE))
+ 			return -EFSCORRUPTED;
+ 
++		/*
++		 * if data block of NOCoW inode locates in sequential-zone,
++		 * let's trigger OPU.
++		 */
++		if (f2fs_is_nocow_file(inode) &&
++			f2fs_blkzoned_has_regular_section(fio->sbi) &&
++			GET_SEGNO(fio->sbi, fio->old_blkaddr) >=
++					fio->sbi->first_zoned_segno)
++			goto get_dnode;
++
+ 		ipu_force = true;
+ 		fio->need_lock = LOCK_DONE;
+ 		goto got_it;
+ 	}
+ 
++get_dnode:
+ 	/* Deadlock due to between page->lock and f2fs_lock_op */
+ 	if (fio->need_lock == LOCK_REQ && !f2fs_trylock_op(fio->sbi))
+ 		return -EAGAIN;
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 55bcd411257a..6781b4fab43f 100644
+index 6781b4fab43f..9b7fa960cd8b 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -4790,6 +4790,11 @@ static inline void f2fs_invalidate_internal_cache(struct f2fs_sb_info *sbi,
- 	f2fs_invalidate_compress_page(sbi, blkaddr);
+@@ -3047,6 +3047,7 @@ static inline void f2fs_change_bit(unsigned int nr, char *addr)
+ #define F2FS_NOCOMP_FL			0x00000400 /* Don't compress */
+ #define F2FS_INDEX_FL			0x00001000 /* hash-indexed directory */
+ #define F2FS_DIRSYNC_FL			0x00010000 /* dirsync behaviour (directories only) */
++#define F2FS_NOCOW_FL			0x00800000 /* Do not cow file */
+ #define F2FS_PROJINHERIT_FL		0x20000000 /* Create with parents projid */
+ #define F2FS_CASEFOLD_FL		0x40000000 /* Casefolded file */
+ #define F2FS_DEVICE_ALIAS_FL		0x80000000 /* File for aliasing a device */
+@@ -3332,6 +3333,11 @@ static inline bool f2fs_is_cow_file(struct inode *inode)
+ 	return is_inode_flag_set(inode, FI_COW_FILE);
  }
  
-+static inline bool f2fs_blkzoned_has_regular_section(struct f2fs_sb_info *sbi)
++static inline bool f2fs_is_nocow_file(struct inode *inode)
 +{
-+	return f2fs_sb_has_blkzoned(sbi) && sbi->first_zoned_segno;
++	return F2FS_I(inode)->i_flags & F2FS_NOCOW_FL;
 +}
 +
- #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
- #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
+ static inline void *inline_data_addr(struct inode *inode, struct page *page)
+ {
+ 	__le32 *addr = get_dnode_addr(inode, page);
+@@ -4658,8 +4664,8 @@ static inline bool f2fs_low_mem_mode(struct f2fs_sb_info *sbi)
+ static inline bool f2fs_may_compress(struct inode *inode)
+ {
+ 	if (IS_SWAPFILE(inode) || f2fs_is_pinned_file(inode) ||
+-		f2fs_is_atomic_file(inode) || f2fs_has_inline_data(inode) ||
+-		f2fs_is_mmap_file(inode))
++		f2fs_is_nocow_file(inode) || f2fs_is_atomic_file(inode) ||
++		f2fs_has_inline_data(inode) || f2fs_is_mmap_file(inode))
+ 		return false;
+ 	return S_ISREG(inode->i_mode) || S_ISDIR(inode->i_mode);
+ }
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 92d7c62eba29..580609223799 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1998,6 +1998,20 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+ 	if (IS_NOQUOTA(inode))
+ 		return -EPERM;
+ 
++	if ((iflags ^ masked_flags) & F2FS_NOCOW_FL) {
++		if (iflags & F2FS_NOCOW_FL) {
++			int ret;
++
++			if (!S_ISREG(inode->i_mode))
++				return -EINVAL;
++			if (f2fs_should_update_outplace(inode, NULL))
++				return -EINVAL;
++			ret = f2fs_convert_inline_inode(inode);
++			if (ret)
++				return ret;
++		}
++	}
++
+ 	if ((iflags ^ masked_flags) & F2FS_CASEFOLD_FL) {
+ 		if (!f2fs_sb_has_casefold(F2FS_I_SB(inode)))
+ 			return -EOPNOTSUPP;
+@@ -2077,6 +2091,7 @@ static const struct {
+ 	{ F2FS_NOCOMP_FL,	FS_NOCOMP_FL },
+ 	{ F2FS_INDEX_FL,	FS_INDEX_FL },
+ 	{ F2FS_DIRSYNC_FL,	FS_DIRSYNC_FL },
++	{ F2FS_NOCOW_FL,	FS_NOCOW_FL },
+ 	{ F2FS_PROJINHERIT_FL,	FS_PROJINHERIT_FL },
+ 	{ F2FS_CASEFOLD_FL,	FS_CASEFOLD_FL },
+ };
+@@ -2108,7 +2123,8 @@ static const struct {
+ 		FS_NOCOMP_FL |		\
+ 		FS_DIRSYNC_FL |		\
+ 		FS_PROJINHERIT_FL |	\
+-		FS_CASEFOLD_FL)
++		FS_CASEFOLD_FL |	\
++		FS_NOCOW_FL)
+ 
+ /* Convert f2fs on-disk i_flags to FS_IOC_{GET,SET}FLAGS flags */
+ static inline u32 f2fs_iflags_to_fsflags(u32 iflags)
+@@ -2171,7 +2187,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp, bool truncate)
+ 	inode_lock(inode);
+ 
+ 	if (!f2fs_disable_compressed_file(inode) ||
+-			f2fs_is_pinned_file(inode)) {
++		f2fs_is_pinned_file(inode) || f2fs_is_nocow_file(inode)) {
+ 		ret = -EINVAL;
+ 		goto out;
+ 	}
+@@ -3273,8 +3289,6 @@ int f2fs_fileattr_get(struct dentry *dentry, struct fileattr *fa)
+ 		fsflags |= FS_VERITY_FL;
+ 	if (f2fs_has_inline_data(inode) || f2fs_has_inline_dentry(inode))
+ 		fsflags |= FS_INLINE_DATA_FL;
+-	if (is_inode_flag_set(inode, FI_PIN_FILE))
+-		fsflags |= FS_NOCOW_FL;
+ 
+ 	fileattr_fill_flags(fa, fsflags & F2FS_GETTABLE_FS_FL);
  
 -- 
 2.40.1
