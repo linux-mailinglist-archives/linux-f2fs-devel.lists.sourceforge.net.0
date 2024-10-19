@@ -2,99 +2,109 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 718B29A461B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 18 Oct 2024 20:45:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2532B9A4E08
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 19 Oct 2024 15:01:29 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t1ryQ-00010h-UG;
-	Fri, 18 Oct 2024 18:45:19 +0000
+	id 1t294u-0007bm-QB;
+	Sat, 19 Oct 2024 13:01:09 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1t1ryP-00010Y-6P
+ (envelope-from <lkp@intel.com>) id 1t294b-0007b1-8t
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 18 Oct 2024 18:45:17 +0000
+ Sat, 19 Oct 2024 13:00:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kwj7QRIGHVZFemsl+DsYOf6RtRUQ0d5V3K0+370kME8=; b=CFiskibwinbZVGbyMwYE7vkyLp
- tGU5AVOc6eq4C2V2hM0CQNGWwHvuCje3nL8kbeIX69MY1NedwyyrIsmqJxOfuT4Y45Ln5HBCpFn87
- Xc4pH/QWIrB2wFTfGRTsNIBqhVXx8uDn7zisWTNj9ZaweXVC1ICinOTstD+BlsphB9Xw=;
+ bh=ix6wp4h+5YtULsxw61aSeKxyHM9NhIevm4jcdHlEGQY=; b=ZOvW4vxtu4Cva88Wifz8t9Gpgv
+ 5XxKyfQLR/K8PgVvAUE+Vx4anTfKvjlPaNRBoRDQxWrHGxMR/dYsepGlguK+lL+MGA/xDswOZw4Om
+ REbtKhufY+SdE7ZKy4htgXBhReNEhgs98pfGbuRIzpwRt7yB7cvITzblPfeJ93AxbkeA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kwj7QRIGHVZFemsl+DsYOf6RtRUQ0d5V3K0+370kME8=; b=EInwxJ74OUpJT9a4TiwpQ5ylKM
- +MW895WY/fK//e2qd+AxdxpfroP72y0DxI4vYwXjjKvedNiHv5DcIIXcPaO7cgWH7cWQshL46tf//
- z+TLxQGydHIYz3y97uPSwxe243wTDV1FghL2fMrnTzItyts9KS4LdIPJH3QeK7WSBN9w=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=ix6wp4h+5YtULsxw61aSeKxyHM9NhIevm4jcdHlEGQY=; b=UOlZnIhg8EYLHEGu1RcfLfEdT3
+ QahVclxwyBGoM7Pte3DAoD53Vplm90H9XtDD3RlKiMiV4mB5/t7kVu5YYq2E/7sJlZr26hzvpe0bE
+ Dkh2Iw2odd2AHAtMR9ANCGHPihdCKAjTRHCpo7GCgBocaAVN5Wd4kF9av67hsbZNQItE=;
+Received: from mgamail.intel.com ([192.198.163.10])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t1ryP-00013r-3y for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 18 Oct 2024 18:45:17 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 1D04C5C3D84;
- Fri, 18 Oct 2024 18:45:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0401DC4CED2;
- Fri, 18 Oct 2024 18:45:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1729277106;
- bh=CJqMmKGmlMC1ZgTSvCsZDhV/pMMcxUr0PbmDF9R/3J8=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Tb8QNDbBm1c5jVfWGHeTX79arz2h6WihIiGeGNIT1wKOvl2SnsoxQny2qbD9K1FS5
- 97IPTYhanx0dVA/KlRGXyEAFlT3qZc5C3vmIG1rDfkSH2LyQaUiCnmtuIj6YD37F5h
- g4WCzHrK0wC5FDmW5iezMTH7eAeEg/CHLKAH4Qp9fiamrAYfzwxlebwnZvFSKbxHAk
- yiQDNBYnN+xJV0CVw+2R+YJrgal7feu2DQYXE0AETmCZ4+krXjiiwSrmpxVeK46w6g
- MrU3gjK5ZqSFodlQJ5Ej0BiLUESxaSHZ8BqiviYFBDcr65dFbbHe+Yxb9T66VX434g
- 9ZMlF7J4BWWWg==
-To: dm-devel@lists.linux.dev
-Date: Fri, 18 Oct 2024 11:43:39 -0700
-Message-ID: <20241018184339.66601-5-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241018184339.66601-1-ebiggers@kernel.org>
-References: <20241018184339.66601-1-ebiggers@kernel.org>
+ id 1t294X-0002jE-OY for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 19 Oct 2024 13:00:49 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1729342846; x=1760878846;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=m7W4fJEtIeyu8tniSEMGnCUSt9Skkxkp3RQMvF94rpA=;
+ b=HH4gudqjmyPtzC0zF97OG5BIsSwXkGUXQj8DBT529J3n6JCo7WktcgwT
+ qs3o2tf6aQaic9nR6HNGrFFPudqfQfKW0wMhxpW6YYNhAG8VHo8AdbASq
+ Mw50FEGFDwRMBCYkJPlH49hneJgQMd8kVLj1u9yrW9tmAij4XbmUJqRk2
+ cDLIen5qVm0I7HpDL2xXK702EUifiNMxm6F/wGeTlMtiGbNIrieu0bMqa
+ R8uo70dOVcEtaaBDrbtmbFEFS3Ya97E4OhYSalSib9sNvBHPKvbNxpyk9
+ 6/CPtfTWffZip2wQWBLCzSX4jYri8ydoGI4qQMKdN5EJUquWRz0aOU4Dw g==;
+X-CSE-ConnectionGUID: YhffY3zaTkeSWoR3ebcdRw==
+X-CSE-MsgGUID: G3sDN3n8STGcEz5hm1KzBQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11230"; a="40232726"
+X-IronPort-AV: E=Sophos;i="6.11,216,1725346800"; d="scan'208";a="40232726"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+ by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Oct 2024 06:00:35 -0700
+X-CSE-ConnectionGUID: nRm6KXBBRZK57aaXZ94/mg==
+X-CSE-MsgGUID: uZ4+rfKdTee/kSSABrapEg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.11,216,1725346800"; d="scan'208";a="116580650"
+Received: from lkp-server01.sh.intel.com (HELO a48cf1aa22e8) ([10.239.97.150])
+ by orviesa001.jf.intel.com with ESMTP; 19 Oct 2024 06:00:33 -0700
+Received: from kbuild by a48cf1aa22e8 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1t294I-000P1B-2R;
+ Sat, 19 Oct 2024 13:00:30 +0000
+Date: Sat, 19 Oct 2024 20:59:56 +0800
+From: kernel test robot <lkp@intel.com>
+To: Chao Yu <yuchao0@huawei.com>, Chao Yu <chao@kernel.org>, jaegeuk@kernel.org
+Message-ID: <202410192028.vIwx2fbN-lkp@intel.com>
+References: <20241018092200.2792472-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+Content-Disposition: inline
+In-Reply-To: <20241018092200.2792472-1-chao@kernel.org>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> Set the
- bi_skip_dm_default_key
- flag on bios that are targeting the contents of an encrypted file and
- therefore
- should not be en/decrypted by dm-default-key. Signed-off-by: Eric Biggers
- <ebiggers@google.com> --- fs/crypto/inline_crypt.c | 14 +++++++++++++-
- fs/f2fs/data.c
- | 6 +++++- include/linux/fscrypt.h | 14 ++++++++++++++ 3 files changed, 32
- insertions( [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  Hi Chao,
+ kernel test robot noticed the following build errors:
+ [auto build test ERROR on jaegeuk-f2fs/dev-test] [also build test ERROR on
+ jaegeuk-f2fs/dev linus/master v6.12-rc3 next-20241018] [If your patch is
+ applied to the wrong git tree, kindly drop us a note [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [192.198.163.10 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t1ryP-00013r-3y
-Subject: [f2fs-dev] [RFC PATCH 4/4] ext4,
- f2fs: support metadata encryption via dm-default-key
+X-Headers-End: 1t294X-0002jE-OY
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to convert log type to segment
+ data type correctly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,163 +116,118 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Eric Biggers via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Eric Biggers <ebiggers@kernel.org>
-Cc: Israel Rukshin <israelr@nvidia.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, Mikulas Patocka <mpatocka@redhat.com>,
- Adrian Vovk <adrianvovk@gmail.com>, Md Sadre Alam <quic_mdalam@quicinc.com>,
- linux-ext4@vger.kernel.org, Milan Broz <gmazyland@gmail.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net, Chao Yu <yuchao0@huawei.com>,
+ linux-kernel@vger.kernel.org, oe-kbuild-all@lists.linux.dev
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+Hi Chao,
 
-Set the bi_skip_dm_default_key flag on bios that are targeting the
-contents of an encrypted file and therefore should not be en/decrypted
-by dm-default-key.
+kernel test robot noticed the following build errors:
 
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/crypto/inline_crypt.c | 14 +++++++++++++-
- fs/f2fs/data.c           |  6 +++++-
- include/linux/fscrypt.h  | 14 ++++++++++++++
- 3 files changed, 32 insertions(+), 2 deletions(-)
+[auto build test ERROR on jaegeuk-f2fs/dev-test]
+[also build test ERROR on jaegeuk-f2fs/dev linus/master v6.12-rc3 next-20241018]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
-index 40de69860dcf9..b75c69c09500b 100644
---- a/fs/crypto/inline_crypt.c
-+++ b/fs/crypto/inline_crypt.c
-@@ -261,17 +261,22 @@ static void fscrypt_generate_dun(const struct fscrypt_inode_info *ci,
-  *
-  * Normally the bio should be newly allocated (i.e. no pages added yet), as
-  * otherwise fscrypt_mergeable_bio() won't work as intended.
-  *
-  * The encryption context will be freed automatically when the bio is freed.
-+ *
-+ * This function also handles setting bi_skip_dm_default_key when needed.
-  */
- void fscrypt_set_bio_crypt_ctx(struct bio *bio, const struct inode *inode,
- 			       u64 first_lblk, gfp_t gfp_mask)
- {
- 	const struct fscrypt_inode_info *ci;
- 	u64 dun[BLK_CRYPTO_DUN_ARRAY_SIZE];
- 
-+	if (fscrypt_inode_should_skip_dm_default_key(inode))
-+		bio_set_skip_dm_default_key(bio);
-+
- 	if (!fscrypt_inode_uses_inline_crypto(inode))
- 		return;
- 	ci = inode->i_crypt_info;
- 
- 	fscrypt_generate_dun(ci, first_lblk, dun);
-@@ -342,20 +347,26 @@ EXPORT_SYMBOL_GPL(fscrypt_set_bio_crypt_ctx_bh);
-  *
-  * This function isn't required in cases where crypto-mergeability is ensured in
-  * another way, such as I/O targeting only a single file (and thus a single key)
-  * combined with fscrypt_limit_io_blocks() to ensure DUN contiguity.
-  *
-+ * This function also returns false if the next part of the I/O would need to
-+ * have a different value for the bi_skip_dm_default_key flag.
-+ *
-  * Return: true iff the I/O is mergeable
-  */
- bool fscrypt_mergeable_bio(struct bio *bio, const struct inode *inode,
- 			   u64 next_lblk)
- {
- 	const struct bio_crypt_ctx *bc = bio->bi_crypt_context;
- 	u64 next_dun[BLK_CRYPTO_DUN_ARRAY_SIZE];
- 
- 	if (!!bc != fscrypt_inode_uses_inline_crypto(inode))
- 		return false;
-+	if (bio_should_skip_dm_default_key(bio) !=
-+	    fscrypt_inode_should_skip_dm_default_key(inode))
-+		return false;
- 	if (!bc)
- 		return true;
- 
- 	/*
- 	 * Comparing the key pointers is good enough, as all I/O for each key
-@@ -385,11 +396,12 @@ bool fscrypt_mergeable_bio_bh(struct bio *bio,
- {
- 	const struct inode *inode;
- 	u64 next_lblk;
- 
- 	if (!bh_get_inode_and_lblk_num(next_bh, &inode, &next_lblk))
--		return !bio->bi_crypt_context;
-+		return !bio->bi_crypt_context &&
-+		       !bio_should_skip_dm_default_key(bio);
- 
- 	return fscrypt_mergeable_bio(bio, inode, next_lblk);
- }
- EXPORT_SYMBOL_GPL(fscrypt_mergeable_bio_bh);
- 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 94f7b084f6016..a413508210994 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -484,10 +484,12 @@ static void f2fs_set_bio_crypt_ctx(struct bio *bio, const struct inode *inode,
- 	 * The f2fs garbage collector sets ->encrypted_page when it wants to
- 	 * read/write raw data without encryption.
- 	 */
- 	if (!fio || !fio->encrypted_page)
- 		fscrypt_set_bio_crypt_ctx(bio, inode, first_idx, gfp_mask);
-+	else if (fscrypt_inode_should_skip_dm_default_key(inode))
-+		bio_set_skip_dm_default_key(bio);
- }
- 
- static bool f2fs_crypt_mergeable_bio(struct bio *bio, const struct inode *inode,
- 				     pgoff_t next_idx,
- 				     const struct f2fs_io_info *fio)
-@@ -495,11 +497,13 @@ static bool f2fs_crypt_mergeable_bio(struct bio *bio, const struct inode *inode,
- 	/*
- 	 * The f2fs garbage collector sets ->encrypted_page when it wants to
- 	 * read/write raw data without encryption.
- 	 */
- 	if (fio && fio->encrypted_page)
--		return !bio_has_crypt_ctx(bio);
-+		return !bio_has_crypt_ctx(bio) &&
-+			(bio_should_skip_dm_default_key(bio) ==
-+			 fscrypt_inode_should_skip_dm_default_key(inode));
- 
- 	return fscrypt_mergeable_bio(bio, inode, next_idx);
- }
- 
- void f2fs_submit_read_bio(struct f2fs_sb_info *sbi, struct bio *bio,
-diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index 772f822dc6b82..eac1917db79a9 100644
---- a/include/linux/fscrypt.h
-+++ b/include/linux/fscrypt.h
-@@ -890,10 +890,24 @@ static inline u64 fscrypt_limit_io_blocks(const struct inode *inode, u64 lblk,
- {
- 	return nr_blocks;
- }
- #endif /* !CONFIG_FS_ENCRYPTION_INLINE_CRYPT */
- 
-+#if IS_ENABLED(CONFIG_FS_ENCRYPTION) && IS_ENABLED(CONFIG_DM_DEFAULT_KEY)
-+static inline bool
-+fscrypt_inode_should_skip_dm_default_key(const struct inode *inode)
-+{
-+	return IS_ENCRYPTED(inode) && S_ISREG(inode->i_mode);
-+}
-+#else
-+static inline bool
-+fscrypt_inode_should_skip_dm_default_key(const struct inode *inode)
-+{
-+	return false;
-+}
-+#endif
-+
- /**
-  * fscrypt_inode_uses_inline_crypto() - test whether an inode uses inline
-  *					encryption
-  * @inode: an inode. If encrypted, its key must be set up.
-  *
+url:    https://github.com/intel-lab-lkp/linux/commits/Chao-Yu/f2fs-fix-to-convert-log-type-to-segment-data-type-correctly/20241018-172401
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
+patch link:    https://lore.kernel.org/r/20241018092200.2792472-1-chao%40kernel.org
+patch subject: [PATCH] f2fs: fix to convert log type to segment data type correctly
+config: x86_64-rhel-8.3 (https://download.01.org/0day-ci/archive/20241019/202410192028.vIwx2fbN-lkp@intel.com/config)
+compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20241019/202410192028.vIwx2fbN-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202410192028.vIwx2fbN-lkp@intel.com/
+
+All error/warnings (new ones prefixed by >>):
+
+>> fs/f2fs/segment.c:3818:38: warning: 'enum log_type' declared inside parameter list will not be visible outside of this definition or declaration
+    3818 | static int log_type_to_seg_type(enum log_type type)
+         |                                      ^~~~~~~~
+>> fs/f2fs/segment.c:3818:47: error: parameter 1 ('type') has incomplete type
+    3818 | static int log_type_to_seg_type(enum log_type type)
+         |                                 ~~~~~~~~~~~~~~^~~~
+>> fs/f2fs/segment.c:3818:12: error: function declaration isn't a prototype [-Werror=strict-prototypes]
+    3818 | static int log_type_to_seg_type(enum log_type type)
+         |            ^~~~~~~~~~~~~~~~~~~~
+   fs/f2fs/segment.c: In function 'do_write_page':
+>> fs/f2fs/segment.c:3843:14: error: variable 'type' has initializer but incomplete type
+    3843 |         enum log_type type = __get_segment_type(fio);
+         |              ^~~~~~~~
+>> fs/f2fs/segment.c:3843:23: error: storage size of 'type' isn't known
+    3843 |         enum log_type type = __get_segment_type(fio);
+         |                       ^~~~
+>> fs/f2fs/segment.c:3843:23: warning: unused variable 'type' [-Wunused-variable]
+   cc1: some warnings being treated as errors
+
+
+vim +3818 fs/f2fs/segment.c
+
+  3817	
+> 3818	static int log_type_to_seg_type(enum log_type type)
+  3819	{
+  3820		int seg_type = CURSEG_COLD_DATA;
+  3821	
+  3822		switch (type) {
+  3823		case CURSEG_HOT_DATA:
+  3824		case CURSEG_WARM_DATA:
+  3825		case CURSEG_COLD_DATA:
+  3826		case CURSEG_HOT_NODE:
+  3827		case CURSEG_WARM_NODE:
+  3828		case CURSEG_COLD_NODE:
+  3829			seg_type = (int)type;
+  3830			break;
+  3831		case CURSEG_COLD_DATA_PINNED:
+  3832		case CURSEG_ALL_DATA_ATGC:
+  3833			seg_type = CURSEG_COLD_DATA;
+  3834			break;
+  3835		default:
+  3836			break;
+  3837		}
+  3838		return seg_type;
+  3839	}
+  3840	
+  3841	static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
+  3842	{
+> 3843		enum log_type type = __get_segment_type(fio);
+  3844		int seg_type = log_type_to_seg_type(type);
+  3845		bool keep_order = (f2fs_lfs_mode(fio->sbi) &&
+  3846					seg_type == CURSEG_COLD_DATA);
+  3847	
+  3848		if (keep_order)
+  3849			f2fs_down_read(&fio->sbi->io_order_lock);
+  3850	
+  3851		if (f2fs_allocate_data_block(fio->sbi, fio->page, fio->old_blkaddr,
+  3852				&fio->new_blkaddr, sum, type, fio)) {
+  3853			if (fscrypt_inode_uses_fs_layer_crypto(fio->page->mapping->host))
+  3854				fscrypt_finalize_bounce_page(&fio->encrypted_page);
+  3855			end_page_writeback(fio->page);
+  3856			if (f2fs_in_warm_node_list(fio->sbi, fio->page))
+  3857				f2fs_del_fsync_node_entry(fio->sbi, fio->page);
+  3858			goto out;
+  3859		}
+  3860		if (GET_SEGNO(fio->sbi, fio->old_blkaddr) != NULL_SEGNO)
+  3861			f2fs_invalidate_internal_cache(fio->sbi, fio->old_blkaddr);
+  3862	
+  3863		/* writeout dirty page into bdev */
+  3864		f2fs_submit_page_write(fio);
+  3865	
+  3866		f2fs_update_device_state(fio->sbi, fio->ino, fio->new_blkaddr, 1);
+  3867	out:
+  3868		if (keep_order)
+  3869			f2fs_up_read(&fio->sbi->io_order_lock);
+  3870	}
+  3871	
+
 -- 
-2.47.0
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
 
 _______________________________________________
