@@ -2,107 +2,130 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 652ED9A6711
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Oct 2024 13:53:30 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B0C29A683D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Oct 2024 14:25:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t2qyQ-0006oj-5m;
-	Mon, 21 Oct 2024 11:53:22 +0000
+	id 1t2rTh-0002bI-5K;
+	Mon, 21 Oct 2024 12:25:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <mpatocka@redhat.com>) id 1t2qyO-0006k1-1k
+ (envelope-from <hca@linux.ibm.com>) id 1t2rTf-0002b6-TB
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Oct 2024 11:53:20 +0000
+ Mon, 21 Oct 2024 12:25:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:Message-ID:
- In-Reply-To:Subject:cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SNCQhHzFd1NUHzGxH9c1VqwwdqX/nhUWNke4YanTciI=; b=FUe/y6OwGtG54AacRyH5dKJdOF
- m6v4SHz7WyRPdIft1/5GJf3L5izIbMbTguc7GbqxxtizZ9TcNpX26A06fVdQGX7FbRyVUfQ9/YqDe
- ktbpyzx8E7KMkYK1Jvsac0Pli3hyRhIVMWEFbNuH7iYisCZFuSC05WCOM9SzgKfRt1Os=;
+ bh=92knE4jiltiV907EhRGLVYeamkXayI7j0BwYX0ZH1JA=; b=Qau5EYacp3IWdSBlfvSRnJmwOu
+ w9u6gelS1QsfzrPQ3mfBvRk3Y44FjQd5dE9UwzZho4BdQ9jv6uvauPJNPZIvcyKAEtjXdvCn3BVbD
+ kIwzqqbQ8tYAOdWD27MtbtA2Z6XXP+yBLWx0lS/xrXSKw7UnQvlbrASvqITx1V8oetMI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:References:Message-ID:In-Reply-To:Subject:cc:To
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
  :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SNCQhHzFd1NUHzGxH9c1VqwwdqX/nhUWNke4YanTciI=; b=GFJZyPb0M7+JXu+dDra/MW+CT9
- Ui7CoR3V0ZiGmhZiLsVVEgGaV3FHLru0jBNUzx8nlycBIwmaZ3FczvqbDZLdC/jP2Px2/Vs+cvpEv
- P7iq2EsgvcdM7WP0Jpw+aJ8Fm2wpr0JNJmhEhJg+KHMJ7Zu4M7kQw++I+6MK8ghBVw48=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ bh=92knE4jiltiV907EhRGLVYeamkXayI7j0BwYX0ZH1JA=; b=MQ+csflFXxSIKmcxdjEcNauwF+
+ O3BDMmv9eZJCXc81FjxHhR7BnMx6WYNMrgOyRkcwgPGiONxHCt96YNLY1VHkQAa/IwmAH7cy0MxvT
+ ZklBTGGPlX+YpscDaq06ZaS0I3OgKSSTFvPCam9xrU4DURkgLlrr/SK01iJYC/Yss5Wc=;
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t2qyO-00059Z-1C for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Oct 2024 11:53:20 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1729511593;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=SNCQhHzFd1NUHzGxH9c1VqwwdqX/nhUWNke4YanTciI=;
- b=ATio6u2UoW59Oec0TPKpOuak4ElGONBOV8KKVsNSgYCvUMNGqfU/BAxFYIc4XdwOCP3gt2
- 5P+lPaSRqe8x1SBlMZTxdHGVJgeR+fixpKNL+aB+Yzxfit6AUH3HDIEV/RH6qCwyUCFpwX
- xwBXifDz41mDNoE6E0l47U9T+fyxc/A=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-351-YKvOEUpcMDKgFALrgs2VdQ-1; Mon,
- 21 Oct 2024 07:53:08 -0400
-X-MC-Unique: YKvOEUpcMDKgFALrgs2VdQ-1
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 42C7619560AF; Mon, 21 Oct 2024 11:53:06 +0000 (UTC)
-Received: from [10.45.226.64] (unknown [10.45.226.64])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 1339E1956052; Mon, 21 Oct 2024 11:53:02 +0000 (UTC)
-Date: Mon, 21 Oct 2024 13:52:58 +0200 (CEST)
-From: Mikulas Patocka <mpatocka@redhat.com>
+ id 1t2rTf-00076w-1V for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 21 Oct 2024 12:25:39 +0000
+Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49L2KH3K032533;
+ Mon, 21 Oct 2024 10:40:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=pp1; bh=92knE4jiltiV907EhRGLVYeamkXayI
+ 7j0BwYX0ZH1JA=; b=WL4D7lJNas37Nzdhxi9rX+lx/0u/7ytK48q3TqjJR++gKt
+ r7ueMht7alDtgQ7pasPryEpqoYRd0OWJqyszZwZ+SpNOF2LJ1isSitDYhyMC/LAS
+ FwERDIOSqxtV94TGFg/XwPocGXOJNG9slT3/uBhOpxWpILgE6aPOyXK2xUh7rTpF
+ iZSfIsmznUv35ep6vlQ2EA5avKOIqsYrhOQyes8ee48qcQRT99bJpKxarFGhHfc/
+ Sf1AmAC4Lua0AKvgB9CPRIHyiQxUS0kOC4/Q4iiF3ywr7qQlDkQN+CyvM61jpuW4
+ hTkpnbK13JKGJKjwKEuAWROXZpMXdSctg6J3mWmA==
+Received: from ppma13.dal12v.mail.ibm.com
+ (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 42c5hm8my5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 21 Oct 2024 10:40:13 +0000 (GMT)
+Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma13.dal12v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 49L9CWB9018605;
+ Mon, 21 Oct 2024 10:40:12 GMT
+Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
+ by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 42csaj5kvs-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 21 Oct 2024 10:40:12 +0000
+Received: from smtpav01.fra02v.mail.ibm.com (smtpav01.fra02v.mail.ibm.com
+ [10.20.54.100])
+ by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 49LAe94P24249044
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 21 Oct 2024 10:40:10 GMT
+Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 389B320043;
+ Mon, 21 Oct 2024 10:40:09 +0000 (GMT)
+Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 7F0602004B;
+ Mon, 21 Oct 2024 10:40:08 +0000 (GMT)
+Received: from osiris (unknown [9.171.37.192])
+ by smtpav01.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+ Mon, 21 Oct 2024 10:40:08 +0000 (GMT)
+Date: Mon, 21 Oct 2024 12:40:07 +0200
 To: Eric Biggers <ebiggers@kernel.org>
-In-Reply-To: <20241018184339.66601-1-ebiggers@kernel.org>
-Message-ID: <b56689c6-c0cd-c44e-16fb-8a73c460aa87@redhat.com>
-References: <20241018184339.66601-1-ebiggers@kernel.org>
+Message-ID: <20241021104007.6950-E-hca@linux.ibm.com>
+References: <20241021002935.325878-1-ebiggers@kernel.org>
+ <20241021002935.325878-8-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Spam-Score: -2.3 (--)
+Content-Disposition: inline
+In-Reply-To: <20241021002935.325878-8-ebiggers@kernel.org>
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: f0A5vIL1iLbWasgVAUuToCuIbQMCR4iX
+X-Proofpoint-GUID: f0A5vIL1iLbWasgVAUuToCuIbQMCR4iX
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-10-15_01,2024-10-11_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 clxscore=1011
+ phishscore=0 impostorscore=0 priorityscore=1501 lowpriorityscore=0
+ bulkscore=0 mlxscore=0 adultscore=0 mlxlogscore=730 suspectscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2409260000 definitions=main-2410210076
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, 18 Oct 2024, Eric Biggers wrote: > This series adds
- "metadata encryption" support to ext4 and f2fs via a > new device-mapper
- target dm-default-key. dm-default-key encrypts all > data on a block device
- that isn't already encrypted by [...] 
- Content analysis details:   (-2.3 points, 6.0 required)
+ Content preview:  On Sun, Oct 20, 2024 at 05:29:27PM -0700, Eric Biggers wrote:
+ > From: Eric Biggers <ebiggers@google.com> > > Move the s390 CRC32 assembly
+ code into the lib directory and wire it up > to the library in [...] 
+ Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.129.124 listed in list.dnswl.org]
+ -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
+ low trust [148.163.156.1 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -1.7 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [170.10.129.124 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [148.163.156.1 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t2qyO-00059Z-1C
-Subject: Re: [f2fs-dev] [RFC PATCH 0/4] dm-default-key: target for
- filesystem metadata encryption
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1t2rTf-00076w-1V
+Subject: Re: [f2fs-dev] [PATCH 07/15] s390/crc32: expose CRC32 functions
+ through lib
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,68 +137,99 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: dm-devel@lists.linux.dev, Israel Rukshin <israelr@nvidia.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-block@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- Adrian Vovk <adrianvovk@gmail.com>, Md Sadre Alam <quic_mdalam@quicinc.com>,
- linux-ext4@vger.kernel.org, Milan Broz <gmazyland@gmail.com>
+From: Heiko Carstens via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Heiko Carstens <hca@linux.ibm.com>
+Cc: linux-arch@vger.kernel.org, linux-s390@vger.kernel.org,
+ Hendrik Brueckner <brueckner@linux.ibm.com>, linux-mips@vger.kernel.org,
+ x86@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-crypto@vger.kernel.org,
+ loongarch@lists.linux.dev, sparclinux@vger.kernel.org,
+ linux-riscv@lists.infradead.org, linux-ext4@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-
-
-On Fri, 18 Oct 2024, Eric Biggers wrote:
-
-> This series adds "metadata encryption" support to ext4 and f2fs via a
-> new device-mapper target dm-default-key.  dm-default-key encrypts all
-> data on a block device that isn't already encrypted by the filesystem.
+On Sun, Oct 20, 2024 at 05:29:27PM -0700, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> Except for the passthrough support, dm-default-key is basically the same
-> as the proposed dm-inlinecrypt which omits that feature
-> (https://lore.kernel.org/dm-devel/20241016232748.134211-1-ebiggers@kernel.org/).
+> Move the s390 CRC32 assembly code into the lib directory and wire it up
+> to the library interface.  This allows it to be used without going
+> through the crypto API.  It remains usable via the crypto API too via
+> the shash algorithms that use the library interface.  Thus all the
+> arch-specific "shash" code becomes unnecessary and is removed.
 > 
-> I am sending this out for reference, as dm-default-key (which Android
-> has been using for a while) hasn't previously been sent to the lists in
-> full, and there has been interest in it.  However, my current impression
-> is that this feature will need to be redesigned as a filesystem native
-> feature in order to make it upstream.  If that is indeed the case, then
-> IMO it would make sense to merge dm-inlinecrypt in the mean time instead
-> (or add its functionality to dm-crypt) so that anyone who just wants
-> "dm-crypt + inline encryption hardware" gets a solution for that.
+> Note: to see the diff from arch/s390/crypto/crc32-vx.c to
+> arch/s390/lib/crc32-glue.c, view this commit with 'git show -M10'.
+> 
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  arch/s390/Kconfig                      |   1 +
+>  arch/s390/configs/debug_defconfig      |   1 -
+>  arch/s390/configs/defconfig            |   1 -
+>  arch/s390/crypto/Kconfig               |  12 -
+>  arch/s390/crypto/Makefile              |   2 -
+>  arch/s390/crypto/crc32-vx.c            | 306 -------------------------
+>  arch/s390/lib/Makefile                 |   3 +
+>  arch/s390/lib/crc32-glue.c             |  82 +++++++
+>  arch/s390/{crypto => lib}/crc32-vx.h   |   0
+>  arch/s390/{crypto => lib}/crc32be-vx.c |   0
+>  arch/s390/{crypto => lib}/crc32le-vx.c |   0
+>  11 files changed, 86 insertions(+), 322 deletions(-)
+>  delete mode 100644 arch/s390/crypto/crc32-vx.c
+>  create mode 100644 arch/s390/lib/crc32-glue.c
+>  rename arch/s390/{crypto => lib}/crc32-vx.h (100%)
+>  rename arch/s390/{crypto => lib}/crc32be-vx.c (100%)
+>  rename arch/s390/{crypto => lib}/crc32le-vx.c (100%)
 
-I we merge dm-inlinecrypt, we can't remove it later because users will 
-depend on it. I think it is not sensible to have two targets 
-(dm-inlinecrypt and dm-default-key) that do almost the same thing.
+...
 
-I've got another idea - what about a new target "dm-metadata-switch" that 
-will take two block devices as arguments and it will pass metadata bios to 
-the first device and data bios to the second device - so that the logic 
-to decide where the bio will go would be decoupled from the encryption. 
-Then, you can put dm-crypt or dm-inlinecrypt underneath 
-"dm-metadata-switch".
+> -static int __init crc_vx_mod_init(void)
+> -{
+> -	return crypto_register_shashes(crc32_vx_algs,
+> -				       ARRAY_SIZE(crc32_vx_algs));
+> -}
+> -
+> -static void __exit crc_vx_mod_exit(void)
+> -{
+> -	crypto_unregister_shashes(crc32_vx_algs, ARRAY_SIZE(crc32_vx_algs));
+> -}
+> -
+> -module_cpu_feature_match(S390_CPU_FEATURE_VXRS, crc_vx_mod_init);
 
-----------------------
-|     filesystem     |
-----------------------
-          |
-          V
-----------------------
-| dm-metadata-switch |
-----------------------
-      |           |
-      V           |
-------------      |
-| dm-crypt |      |
-------------      |
-      |           |
-      V           V
--------------------------
-| physical block device |
--------------------------
+What makes sure that all of the code is available automatically if the
+CPU supports the instructions like before? I can see that all CRC32
+related config options support also module build options.
 
-Mikulas
+Before this patch, this module and hence the fast crc32 variants were
+loaded automatically when required CPU features were present.
+Right now I don't how this is happening with this series.
 
+> -MODULE_ALIAS_CRYPTO("crc32");
+> -MODULE_ALIAS_CRYPTO("crc32-vx");
+> -MODULE_ALIAS_CRYPTO("crc32c");
+> -MODULE_ALIAS_CRYPTO("crc32c-vx");
+
+...
+
+> +static int __init crc32_s390_init(void)
+> +{
+> +	if (cpu_have_feature(S390_CPU_FEATURE_VXRS))
+> +		static_branch_enable(&have_vxrs);
+> +	return 0;
+> +}
+> +arch_initcall(crc32_s390_init);
+
+I guess this should be changed to:
+
+module_cpu_feature_match(S390_CPU_FEATURE_VXRS, ...);
+
+Which would make at least the library functions available if cpu
+features are present. But this looks only like a partial solution of
+the above described problem.
+
+But maybe I'm missing something.
 
 
 _______________________________________________
