@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF34A9A7186
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Oct 2024 19:57:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13CEA9A72D1
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Oct 2024 21:03:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t2weQ-0000Mc-Ia;
-	Mon, 21 Oct 2024 17:57:06 +0000
+	id 1t2xgJ-00023Y-6l;
+	Mon, 21 Oct 2024 19:03:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1t2weD-0000La-Qz
+ (envelope-from <ebiggers@kernel.org>) id 1t2xgH-00023S-1v
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Oct 2024 17:56:53 +0000
+ Mon, 21 Oct 2024 19:03:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=35DwyUNuxg0gqkdcJJCZqsB1ixcCDL22oUqwrmbOulI=; b=ar4bT3uP5X+5xC9VqvOFVA9xog
- lBqMTPceq1CYouoJmMH0l/sFssIBpmoVh2jgwQAd+047poW9Mwdb5seBavOwvyH2s1txxE/4IF1jH
- w1O8PzJTi5WFMyvKnB/GAZNr3r0RXTgBv/H7GSaD+Wn63Ujc8BZ2Nn+8Yv0MweTYoGrQ=;
+ bh=eGknj5bcjDokOudLavIQ6fUBsId0XWCaZylxK4lSdtE=; b=FKkQQHzQ6Vq2GE7cXoxp0veQ/s
+ Hobg8EDeVLGqbjkoQHvEuPjRBqUWchS0Wb0cao4Dv3pjDG42uzevNcUFSJ0+yfbznQ/V5dbt582m/
+ y1fhAr6os800OMZb+AwIKIi1sd042JECadQ+WQTkoHXY5xUqengEZYf8msDeOkt9wlyA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,50 +31,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=35DwyUNuxg0gqkdcJJCZqsB1ixcCDL22oUqwrmbOulI=; b=J6acU4gvCwLzpW1ZSASU9AVDFh
- obFnZwdLWLrDgtr21AWrwmdD7+cncVK6lSjcy1GEVvYryihnBS3n6psSYH/xZk3sN/Y6QlRk4uWPm
- fxjkiQSujChThuWp9dtAOl6V5odBL3NhWG1c5u2nR4KiyzUwkTRFVg7HExFe2EwHwvQE=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=eGknj5bcjDokOudLavIQ6fUBsId0XWCaZylxK4lSdtE=; b=GPXIvJNvNOd4/p2JNRv9vB34H6
+ 99fD6hF6LOqWCxIIkKyxzLVgC+yiDg4qz7AqJ2zLBpokG6xX7TAKvyTjQGlIkuIN/49NsANmJutAd
+ o1Poznmv3E2WH7kILfbWWFg4WZOwSGKrNfIDmw49PxNyLvJ2VZAYybBgJ2rimOrq2bEQ=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t2weD-00048x-6L for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Oct 2024 17:56:53 +0000
+ id 1t2xgE-0007Jj-Rm for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 21 Oct 2024 19:03:04 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 5C0DCA4375B;
- Mon, 21 Oct 2024 17:56:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B2F2FC4CEC7;
- Mon, 21 Oct 2024 17:56:41 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id F08DF5C04CB;
+ Mon, 21 Oct 2024 19:02:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C4B23C4CEC3;
+ Mon, 21 Oct 2024 19:02:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1729533402;
- bh=iOp6UPk7kp6624trt50V9GCSl7TCmUx91AXnl52vexs=;
+ s=k20201202; t=1729537372;
+ bh=vsbnNtYOihL02PJdWlvwTbTMZpcopwhOkYgiKqHnc7g=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=sJQY/rj4pTIO5uEWlo1heoszsTNmf9jrwjFBD0lIbKoaTFxHVpdjurFhvf6qbFqVx
- 3p4d5v2zCCp/LbxdIlTGmC11dWGlMVeXXfBDk8A9Aml+/MAtk2IETKhnM8m6cKxkey
- BZF/dYUet13hmxhgQOUCWlo2mvzJlbvIRi1nLRTDg+g177wJbtfgI05mwIy3+AOG+C
- 2RdO3YmkeY7RM1WJnyPqFT2fPe/8kLv+1aQd4pfj1zTvRhlxt250RD3qNZbbCGpcse
- fs5+AtO+kgnLwq3Dm+Zt8UDEsdLr8Tbrkjy5WAyah1cfbA8sbkBGsmyodZGLNuMspU
- cTEE/rSNQw61A==
-Date: Mon, 21 Oct 2024 17:56:40 +0000
-To: Heiko Carstens <hca@linux.ibm.com>
-Message-ID: <20241021175640.GA1370449@google.com>
-References: <20241021002935.325878-1-ebiggers@kernel.org>
- <20241021002935.325878-8-ebiggers@kernel.org>
- <20241021104007.6950-E-hca@linux.ibm.com>
+ b=Cp31ZgBxuboh+ucSekXdmlnI3mHdudXaS7XYFnpwXwWiqGdcRZEOzo8U5ia9IlgdU
+ Q00gJVrAOakH0PUA/rFTlLRrwwoeKd2LfApKX8cA378JE5RRkvM3Uj95pHY15VikaY
+ r5paDpIv0Fim2yM8OB1fhAKrxJEAQc9AZlrqczh6wssbWPGyPB0YDkQdjJ5KBJPmtm
+ pGxANDmkvm2gPCXgM+hvzGe+I4ibtpNEyMcOgSkWiqVX/uupV1cgbdn5K38++K9Arn
+ /JOZ+ibZYxQBNUHJlaib87bqllhOEmT5zeMwrM4TQtGLd2jnN6pPKmAsz1wlSgltmJ
+ f1aPAjnqalVMQ==
+Date: Mon, 21 Oct 2024 19:02:49 +0000
+To: Mikulas Patocka <mpatocka@redhat.com>
+Message-ID: <20241021190249.GA1395714@google.com>
+References: <20241018184339.66601-1-ebiggers@kernel.org>
+ <20241018184339.66601-3-ebiggers@kernel.org>
+ <2caf648d-73cf-9436-2af4-ad530a966592@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20241021104007.6950-E-hca@linux.ibm.com>
-X-Spam-Score: -0.6 (/)
+In-Reply-To: <2caf648d-73cf-9436-2af4-ad530a966592@redhat.com>
+X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Oct 21, 2024 at 12:40:07PM +0200,
- Heiko Carstens wrote:
- > What makes sure that all of the code is available automatically if the
- > CPU supports the instructions like before? I can see that all [...] 
- Content analysis details:   (-0.6 points, 6.0 required)
+ Content preview:  On Mon, Oct 21, 2024 at 01:11:36PM +0200, Mikulas Patocka
+ wrote: > Hi > > What about using the REQ_META flag (it is set on metadata
+ bios and cleared > on data bios), instead of adding a new flag with [...] 
+ Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -86,10 +85,12 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t2weD-00048x-6L
-Subject: Re: [f2fs-dev] [PATCH 07/15] s390/crc32: expose CRC32 functions
- through lib
+X-Headers-End: 1t2xgE-0007Jj-Rm
+Subject: Re: [f2fs-dev] [RFC PATCH 2/4] block: add the
+ bi_skip_dm_default_key flag
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,57 +105,33 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: Eric Biggers via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Eric Biggers <ebiggers@kernel.org>
-Cc: linux-arch@vger.kernel.org, linux-s390@vger.kernel.org,
- Hendrik Brueckner <brueckner@linux.ibm.com>, linux-mips@vger.kernel.org,
- x86@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-crypto@vger.kernel.org,
- loongarch@lists.linux.dev, sparclinux@vger.kernel.org,
- linux-riscv@lists.infradead.org, linux-ext4@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
+Cc: dm-devel@lists.linux.dev, Israel Rukshin <israelr@nvidia.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-block@vger.kernel.org, linux-fscrypt@vger.kernel.org,
+ Adrian Vovk <adrianvovk@gmail.com>, Md Sadre Alam <quic_mdalam@quicinc.com>,
+ linux-ext4@vger.kernel.org, Milan Broz <gmazyland@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Oct 21, 2024 at 12:40:07PM +0200, Heiko Carstens wrote:
-> What makes sure that all of the code is available automatically if the
-> CPU supports the instructions like before? I can see that all CRC32
-> related config options support also module build options.
+On Mon, Oct 21, 2024 at 01:11:36PM +0200, Mikulas Patocka wrote:
+> Hi
 > 
-> Before this patch, this module and hence the fast crc32 variants were
-> loaded automatically when required CPU features were present.
-> Right now I don't how this is happening with this series.
-
-There's just a direct symbol dependency now.  For example
-ext4.ko -> crc32-s390.ko [crc32c_le_arch] -> crc32.ko [crc32c_le_base].
-So, crc32-$arch.ko always gets loaded when there is a user of one of the CRC32
-library functions, provided that it was enabled in the kconfig.
-
-crc32-$arch then calls either the accelerated code or the base code depending on
-the CPU features.  On most architectures including s390, I made this use a
-static branch, so there is almost no overhead (much less overhead than the
-indirect call that was needed before).
-
-This is the same way that some of the crypto library code already works.
-
-> > +static int __init crc32_s390_init(void)
-> > +{
-> > +	if (cpu_have_feature(S390_CPU_FEATURE_VXRS))
-> > +		static_branch_enable(&have_vxrs);
-> > +	return 0;
-> > +}
-> > +arch_initcall(crc32_s390_init);
+> What about using the REQ_META flag (it is set on metadata bios and cleared 
+> on data bios), instead of adding a new flag with the same meaning?
 > 
-> I guess this should be changed to:
-> 
-> module_cpu_feature_match(S390_CPU_FEATURE_VXRS, ...);
-> 
-> Which would make at least the library functions available if cpu
-> features are present. But this looks only like a partial solution of
-> the above described problem.
-> 
-> But maybe I'm missing something.
+> Mikulas
 
-This is not needed, as per the above.
+REQ_META is a hint and is not used for all metadata.
+
+And while metadata is the main point, more precisely the goal is to encrypt
+every block that isn't already encrypted.  That means that the contents of files
+that are unencrypted at the filesystem layer are encrypted by dm-default-key
+too.  So technically it's more than just metadata.
+
+To avoid recurring "oops, we forgot to encrypt this" bugs, the right model is
+really an opt-out flag, not opt-in.  And especially not opt-in via something
+that is currently just a hint and is used as such.
 
 - Eric
 
