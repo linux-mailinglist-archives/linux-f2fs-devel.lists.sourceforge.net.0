@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB00C9A93FE
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Oct 2024 01:19:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71D3B9A946A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Oct 2024 01:57:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t31fr-00085v-QI;
-	Mon, 21 Oct 2024 23:18:56 +0000
+	id 1t32Gr-0004Xp-Sr;
+	Mon, 21 Oct 2024 23:57:09 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1t31fq-00085n-Md
+ (envelope-from <jaegeuk@kernel.org>) id 1t32Gq-0004Xh-KG
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Oct 2024 23:18:55 +0000
+ Mon, 21 Oct 2024 23:57:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TJEuUutF3CkksJmv2r0M4/v8VtYQrAkLumT8KoOIcLE=; b=gcFEeYpi6XCcaDHwocfUq2tzqp
- +1hi6YbUFfocWX7NflzYX+lQ4FCfJiQQbzylDug9r6SR/IA6l/gyd1bXc+pzEzVSwjwsR/5I9ou0w
- VYpe8V8sDcnyj07P6ZDzKpLmHixwOrDuQIqSDbXii8kHSJAYYBWKAAEO4fbNWgWZhxTI=;
+ bh=b/jNN5gb5KmwDTo7X6nVharFl1xBnTm0acN6SfGnxpU=; b=HU3rD8ElMkR9tl9qZ4/t20RI3h
+ ozhuOJj91TcS45J7rky0QwY2I5Umr1Te1C6NjapLYE06hgokMZj08iQ6jRvZeQOI8fNT+AwGHo/JP
+ Cw5X9ExMrQbxR3nrRNqVUSA5uLws68rPSbD204UAYlcQe2tHgd/oXtBZY4XN5BLmZV9g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,64 +31,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TJEuUutF3CkksJmv2r0M4/v8VtYQrAkLumT8KoOIcLE=; b=Bgxvhm/P7GW5vLGkw2ue3CXyJq
- nNWRBkhkijOPSHCkpGcOc/Qw0gXvHeY21VzqJjCVATJnfIG2+byh7wc8MSV66ugsh2vgqRGPSt5fA
- RZGrNW8ltPTMqp+CoWskraK7JB7Io9cTFVLueiq1gLmNoCpvl0kDp5BSfFuCTxwSXZVY=;
+ bh=b/jNN5gb5KmwDTo7X6nVharFl1xBnTm0acN6SfGnxpU=; b=gTAyWG1z064qpo/3tsZdPgT9Zt
+ 7+fAyEcIh7XBs3hkN8flCmhHULbQuzsKQmzaSDCMXoFMb9H++dkichX0lRvqYOnspZnXlkqItnHLk
+ 6raNo+2dDEKHymEzdM4JUuqZqGs1ttf49Z26s4t6109AiwrtOEbcK2tpOT9HwvP0tLlk=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t31fq-0005sS-NE for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Oct 2024 23:18:55 +0000
+ id 1t32Gp-00085X-Qj for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 21 Oct 2024 23:57:08 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id D73CFA43D9B
+ by nyc.source.kernel.org (Postfix) with ESMTP id F272CA427C3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 21 Oct 2024 23:18:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75DC2C4CEC3;
- Mon, 21 Oct 2024 23:18:43 +0000 (UTC)
+ Mon, 21 Oct 2024 23:56:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FB43C4CEC3;
+ Mon, 21 Oct 2024 23:57:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1729552723;
- bh=qAofwyLaCqfFXe2wS/I3RsZjJtggKj/Ah91XXFai2Mg=;
+ s=k20201202; t=1729555021;
+ bh=s18HD12MJyz0CnqaYMbmgWatQPAaFuILvIsf9zvBi2g=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ABw98VDrR21T+xC8TzqmUzsOceiZqP+wfcVeLUD3eV8Qq2mYguTJl/H4zFuIR1lMn
- DwQBTOX3Xze02dJch2fNt8hlqTX7UBYMsL7X9jva2uYVaQn/BuUXETjEkGKGtY6DxU
- a5Hy2Da/ZxIMkkw4y5cha72MMJdSTAK8Z32Lhj5zqT73w+nS0keJR1qpohiGtKHupu
- 22bbEf6xCSRf55XABpSXCZFgs+Vv0BWcoUNv7ygibnEwpB/VXzRPNs8ifp6aeK8JuF
- gQQgS0ChLOBZBbAf6Zn3kgZjSaoIqruT2QmU4+WlKAayChLpbWVOP216kF2Jn2Modf
- biaTMSgpf03ug==
-Date: Mon, 21 Oct 2024 23:18:41 +0000
+ b=MdgjnWJPYysikgIUun9KWoxSrIvxfwqLvqMFo9UbeQqiZncgmTgXip7a+qAEF7pNR
+ 7qd0LPfPXv7QQj2siK9KMHj6eAQkYD0ZvKnX/AQrj/i32B14GHouYSppZMUPeOzhMV
+ jl7hPN3RD4eTIytO8l2ONC8rZBw2K3Et5S/f3qkVZHcqXDtmH1qgWfrU81Hz6hi89R
+ bb9HwtKIkkysDvIyZ/eaWTvWF5pWv4zK2qi4qoqD/cyQxBBos2h++67zo3sdA+Gjl3
+ PJNdV5AbpfZ1kU2JQFf9clW9S8RelhfPqA9TM9Fmi0zuaIrcwO5MH7UcpZuk9D1Pmk
+ BzjuT8ZnwfZvg==
+Date: Mon, 21 Oct 2024 23:56:59 +0000
 To: Chao Yu <chao@kernel.org>
-Message-ID: <ZxbhUUuKx_zaWAx4@google.com>
-References: <20241018062638.2619214-1-chao@kernel.org>
- <20241018062638.2619214-2-chao@kernel.org>
+Message-ID: <ZxbqS-jeQ6sDOeVH@google.com>
+References: <20241017012932.1570038-1-chao@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20241018062638.2619214-2-chao@kernel.org>
+In-Reply-To: <20241017012932.1570038-1-chao@kernel.org>
 X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 10/18, Chao Yu wrote: > blkzoned feature enables lfs mode
- by default, for data updates from > regular file, it only allow to use OPU,
- this patch changes to allow > to use IPU if regular file's data [...] 
+ Content preview:  On 10/17, Chao Yu wrote: > In __get_segment_type(),
+ __get_segment_type_6()
+ may return > CURSEG_COLD_DATA_PINNED or CURSEG_ALL_DATA_ATGC log type, but
+ > following f2fs_get_segment_temp() can only handl [...] 
  Content analysis details:   (-0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t31fq-0005sS-NE
-Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs: zone: allow IPU for regular file
- in regular block device
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1t32Gp-00085X-Qj
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to parse temperature correctly
+ in f2fs_get_segment_temp()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,64 +106,136 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 10/18, Chao Yu wrote:
-> blkzoned feature enables lfs mode by default, for data updates from
-> regular file, it only allow to use OPU, this patch changes to allow
-> to use IPU if regular file's data block locates in regular block
-> device, if data block locates in zoned block device, it still uses
-> OPU.
+On 10/17, Chao Yu wrote:
+> In __get_segment_type(), __get_segment_type_6() may return
+> CURSEG_COLD_DATA_PINNED or CURSEG_ALL_DATA_ATGC log type, but
+> following f2fs_get_segment_temp() can only handle persistent
+> log type, fix it.
 > 
 > Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
->  fs/f2fs/data.c | 12 ++++++++++--
->  fs/f2fs/f2fs.h |  5 +++++
->  2 files changed, 15 insertions(+), 2 deletions(-)
+> v2:
+> - initialize variable in f2fs_get_segment_temp() to avoid
+> static compilier complaint.
+>  fs/f2fs/f2fs.h    |  5 +++--
+>  fs/f2fs/file.c    |  4 ++--
+>  fs/f2fs/segment.c | 33 +++++++++++++++++++++++++--------
+>  fs/f2fs/segment.h |  4 ----
+>  4 files changed, 30 insertions(+), 16 deletions(-)
 > 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 949b6bb957c7..c6d0e4aa12e3 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -2648,8 +2648,16 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
->  		return false;
->  	if (fio && is_sbi_flag_set(sbi, SBI_NEED_FSCK))
->  		return true;
-> -	if (f2fs_lfs_mode(sbi))
-> -		return true;
-> +	if (f2fs_lfs_mode(sbi)) {
-> +		/* no regular block device in mainarea */
-> +		if (!f2fs_blkzoned_has_regular_section(sbi))
-> +			return true;
-> +		/* blkaddr locates in sequential zone */
-> +		if (fio && __is_valid_data_blkaddr(fio->old_blkaddr) &&
-> +			GET_SEGNO(sbi, fio->old_blkaddr) >=
-> +					sbi->first_zoned_segno)
-
-What if there's another regular device beyond zoned partition?
-I prefer to keep the entire area as lfs mode to simplify the performance.
-Do we really need IPU on conventional partition? Why not asking to use
-file pinning, if someone needs IPU?
-
-> +			return true;
-> +	}
->  	if (S_ISDIR(inode->i_mode))
->  		return true;
->  	if (IS_NOQUOTA(inode))
 > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 55bcd411257a..6781b4fab43f 100644
+> index f3ef4dc50992..56797f8e6659 100644
 > --- a/fs/f2fs/f2fs.h
 > +++ b/fs/f2fs/f2fs.h
-> @@ -4790,6 +4790,11 @@ static inline void f2fs_invalidate_internal_cache(struct f2fs_sb_info *sbi,
->  	f2fs_invalidate_compress_page(sbi, blkaddr);
+> @@ -1019,7 +1019,7 @@ static inline void set_new_dnode(struct dnode_of_data *dn, struct inode *inode,
+>  #define NR_CURSEG_PERSIST_TYPE	(NR_CURSEG_DATA_TYPE + NR_CURSEG_NODE_TYPE)
+>  #define NR_CURSEG_TYPE		(NR_CURSEG_INMEM_TYPE + NR_CURSEG_PERSIST_TYPE)
+>  
+> -enum {
+> +enum log_type {
+>  	CURSEG_HOT_DATA	= 0,	/* directory entry blocks */
+>  	CURSEG_WARM_DATA,	/* data blocks */
+>  	CURSEG_COLD_DATA,	/* multimedia or GCed data blocks */
+> @@ -3758,7 +3758,8 @@ void f2fs_replace_block(struct f2fs_sb_info *sbi, struct dnode_of_data *dn,
+>  			block_t old_addr, block_t new_addr,
+>  			unsigned char version, bool recover_curseg,
+>  			bool recover_newaddr);
+> -int f2fs_get_segment_temp(int seg_type);
+> +enum temp_type f2fs_get_segment_temp(struct f2fs_sb_info *sbi,
+> +						enum log_type seg_type);
+>  int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
+>  			block_t old_blkaddr, block_t *new_blkaddr,
+>  			struct f2fs_summary *sum, int type,
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 0e07231dc093..92d7c62eba29 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -4858,8 +4858,8 @@ static void f2fs_dio_write_submit_io(const struct iomap_iter *iter,
+>  {
+>  	struct inode *inode = iter->inode;
+>  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> -	int seg_type = f2fs_rw_hint_to_seg_type(sbi, inode->i_write_hint);
+> -	enum temp_type temp = f2fs_get_segment_temp(seg_type);
+> +	enum log_type type = f2fs_rw_hint_to_seg_type(sbi, inode->i_write_hint);
+> +	enum temp_type temp = f2fs_get_segment_temp(sbi, type);
+>  
+>  	bio->bi_write_hint = f2fs_io_type_to_rw_hint(sbi, DATA, temp);
+>  	submit_bio(bio);
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 0f4408fe2b19..8e80e6620854 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -3603,18 +3603,35 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
+>  	}
 >  }
 >  
-> +static inline bool f2fs_blkzoned_has_regular_section(struct f2fs_sb_info *sbi)
-> +{
-> +	return f2fs_sb_has_blkzoned(sbi) && sbi->first_zoned_segno;
-> +}
+> -int f2fs_get_segment_temp(int seg_type)
+> +enum temp_type f2fs_get_segment_temp(struct f2fs_sb_info *sbi,
+> +						enum log_type type)
+>  {
+> -	if (IS_HOT(seg_type))
+> -		return HOT;
+> -	else if (IS_WARM(seg_type))
+> -		return WARM;
+> -	return COLD;
+> +	struct curseg_info *curseg = CURSEG_I(sbi, type);
+> +	enum temp_type temp = COLD;
 > +
->  #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
->  #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
+> +	switch (curseg->seg_type) {
+> +	case CURSEG_HOT_NODE:
+> +	case CURSEG_HOT_DATA:
+> +		temp = HOT;
+> +		break;
+> +	case CURSEG_WARM_NODE:
+> +	case CURSEG_WARM_DATA:
+> +		temp = WARM;
+> +		break;
+> +	case CURSEG_COLD_NODE:
+> +	case CURSEG_COLD_DATA:
+> +		temp = COLD;
+> +		break;
+> +	default:
+> +		f2fs_bug_on(sbi, 1);
+> +	}
+> +
+> +	return temp;
+>  }
 >  
+>  static int __get_segment_type(struct f2fs_io_info *fio)
+>  {
+> -	int type = 0;
+> +	enum log_type type;
+
+Here as well.
+
+
+>  
+>  	switch (F2FS_OPTION(fio->sbi).active_logs) {
+>  	case 2:
+> @@ -3630,7 +3647,7 @@ static int __get_segment_type(struct f2fs_io_info *fio)
+>  		f2fs_bug_on(fio->sbi, true);
+>  	}
+>  
+> -	fio->temp = f2fs_get_segment_temp(type);
+> +	fio->temp = f2fs_get_segment_temp(fio->sbi, type);
+>  
+>  	return type;
+>  }
+> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+> index 55a01da6c4be..6a23bb1d16a2 100644
+> --- a/fs/f2fs/segment.h
+> +++ b/fs/f2fs/segment.h
+> @@ -34,10 +34,6 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
+>  	f2fs_bug_on(sbi, seg_type >= NR_PERSISTENT_LOG);
+>  }
+>  
+> -#define IS_HOT(t)	((t) == CURSEG_HOT_NODE || (t) == CURSEG_HOT_DATA)
+> -#define IS_WARM(t)	((t) == CURSEG_WARM_NODE || (t) == CURSEG_WARM_DATA)
+> -#define IS_COLD(t)	((t) == CURSEG_COLD_NODE || (t) == CURSEG_COLD_DATA)
+> -
+>  #define IS_CURSEG(sbi, seg)						\
+>  	(((seg) == CURSEG_I(sbi, CURSEG_HOT_DATA)->segno) ||	\
+>  	 ((seg) == CURSEG_I(sbi, CURSEG_WARM_DATA)->segno) ||	\
 > -- 
 > 2.40.1
 
