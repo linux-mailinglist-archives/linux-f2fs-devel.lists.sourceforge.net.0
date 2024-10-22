@@ -2,93 +2,91 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18F739A9C91
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Oct 2024 10:29:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C8989A9CDF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Oct 2024 10:36:53 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t3AGq-0007GH-TF;
-	Tue, 22 Oct 2024 08:29:40 +0000
+	id 1t3ANe-0007SQ-0z;
+	Tue, 22 Oct 2024 08:36:42 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t3AGp-0007G9-5p
+ (envelope-from <chao@kernel.org>) id 1t3ANb-0007SJ-DG
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 22 Oct 2024 08:29:39 +0000
+ Tue, 22 Oct 2024 08:36:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PCCtBxE876p+o4DQ0qk29SVVwHNw/eSbAdxPRhUMMHQ=; b=WzbtPmWxa9TRAMMY92jM/z+7ql
- KRuuvbG6dsU8Pb38LmCbQvi8DzkpVBxqjOt6qcyKacLEAPD2wkKJZjgpwkMUtvmedJNVJDEhijvQW
- ZtkSgLJDT3eXeHbFlGDv7kWXHro98cQGhR2S0E+UkAg3Ughd4qVVzzPzY+dktdt7aNa8=;
+ bh=IAQExpQ2VVXJqqOp1PjNKGgM0RL/TTaqEcQ4ZTKxblw=; b=L5iRTUhiJRlbVsvY4DPlrknkFn
+ nAZnnWp7lY8adGxxgFhSrYB76sVoNqRbmSYO774XUssl9Dk1bP4WKcgPU94FE7Bw+4X6o9RnPHWdG
+ ZK7+7olXwQmP2ciEPghFJ3qb1LcS0B3l9SjMhUPm4V0anJWvaX4c4JtitpIeK8bMnnc0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=PCCtBxE876p+o4DQ0qk29SVVwHNw/eSbAdxPRhUMMHQ=; b=TgPtCILvglQUGivpwNf6pRt6SW
- nFMw4WT9JPdDt4s+MyLmMOitv4f9Ji5o7xLQhh8zJ6txBX3DiGU/35m8EpRfOgHMXp5nLpjDrydg8
- MIYG2F0r2lVZA4SjTBgDOeBseszLz6CL1A7qkn8QEQyVJexTL+ydfzvWpSdx8JPY+3EE=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=IAQExpQ2VVXJqqOp1PjNKGgM0RL/TTaqEcQ4ZTKxblw=; b=B
+ fP15bARLrhxbawv9dVV4guAaSe3oZ6/hoak4ODpbOzOGUhGPFZkNV09ItKr7UqS6D7um3hrlqii4T
+ fr2AaOaSCbh2vEWet5n8CwccA/poBjb8iGGRWSTWqenSBzgp/EmX7LHy9+/H2FYSyR6P4Ye3Y/GlY
+ lrD7TmydjA604m14=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t3AGo-0000c3-03 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 22 Oct 2024 08:29:39 +0000
+ id 1t3ANa-000110-Ft for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 22 Oct 2024 08:36:39 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 2C1DCA434A7;
- Tue, 22 Oct 2024 08:29:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA7A1C4CEC3;
- Tue, 22 Oct 2024 08:29:30 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 98A2F5C42B7;
+ Tue, 22 Oct 2024 08:36:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E30CC4CEC3;
+ Tue, 22 Oct 2024 08:36:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1729585772;
- bh=QpgXa+F2w4Un2KUuhHW+3rAX/0v93+MFcwggWoH37aA=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=aiHUrbWrYclmi+p6FVOCSseagFOjqo4CJ+A79KKTt6iHY3R0wDHTHVmExK9Ax6NeQ
- sMGJXq0TtEZlZZSYXvT1HonOCXud7yEPWZgJzYzEAci+EbhsBKJySN6ZW0UrviPc1n
- iXEtfQKcK2v0YpJt6XgJotUev0pXlUZUgdwTRPKdmCC6kRsXDKWWlGE1RNWDf7br55
- ScNIGWAUyQcMAcBYD6Lpf741z0jbGHVe/e04dJ469+JxTWq/7jdalL2rCl7UyU91z/
- 6rHZi6itxl+8i0kYydonaKpmg4lUOXWxebSFEw4r/3+9PjlZbwGFHGi9NsW5KNabOG
- 7uJIClX9hFnMA==
-Message-ID: <0c28ce02-c1da-4259-b2e6-221693c2144f@kernel.org>
-Date: Tue, 22 Oct 2024 16:29:28 +0800
+ s=k20201202; t=1729586192;
+ bh=cs3qnvWB45CLzEZtHHIHemYwXCravNhrfo6+sjOzGEI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=PTTcR5kFjecbk2kTj1+N+U5csP5E00xLf3PwOvMxrVpdcMb3W1bRt8HsISsB2Tyt4
+ 8J/shNDHPCZwo338KpTdXdxSGLrzveL0Hd40hkjQG5zEpriU541cy9GKb1evLsyAvu
+ SlxXxpW7UyPj0pnZEvvHZZ/szVXt29mIuXyJfG/VppYXZX8SyABgCDKfzO8tMi45Ad
+ cB3iFLYBMhPem/jA5JgGDHA09SKu335YbrAVFExDPMqcGsvx1j5666Kr/KyLQnCb9p
+ zgdE/TcO3FPp8bOz6sQjKFY6JuMGlr0HoGN30K2WP2SJWvj4N+IgeEi8HpyAPeMeGl
+ 8Onaa64CuE0vA==
+To: jaegeuk@kernel.org
+Date: Tue, 22 Oct 2024 16:36:23 +0800
+Message-Id: <20241022083623.2641434-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: daejun7.park@samsung.com, "jaegeuk@kernel.org" <jaegeuk@kernel.org>
-References: <CGME20241022062159epcas2p30650063ebb022cd51a581d2df44a630f@epcms2p4>
- <20241022082201epcms2p4709ba723c9ba274b3a8cd128a99e0463@epcms2p4>
-Content-Language: en-US
-In-Reply-To: <20241022082201epcms2p4709ba723c9ba274b3a8cd128a99e0463@epcms2p4>
-X-Spam-Score: -0.7 (/)
+X-Spam-Score: -5.7 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/10/22 16:22, Daejun Park wrote: > Hi Chao Yu, > >
- >> >> --------- Original Message --------- >> Sender : Chao Yu via
- Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net> >> Date : 2024-10 [...] 
- Content analysis details:   (-0.7 points, 6.0 required)
+ Content preview: syzbot reports deadlock issue of f2fs as below:
+ ======================================================
+ WARNING: possible circular locking dependency detected
+ 6.12.0-rc3-syzkaller-00087-gc964ced77262 #0 Not tainted [...] 
+ Content analysis details:   (-5.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t3AGo-0000c3-03
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid potential deadlock in
+X-Headers-End: 1t3ANa-000110-Ft
+Subject: [f2fs-dev] [PATCH v2] f2fs: fix to avoid potential deadlock in
  f2fs_record_stop_reason()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -103,190 +101,236 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: "syzbot+be4a9983e95a5e25c8d3@syzkaller.appspotmail.com"
- <syzbot+be4a9983e95a5e25c8d3@syzkaller.appspotmail.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: syzbot+be4a9983e95a5e25c8d3@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyNC8xMC8yMiAxNjoyMiwgRGFlanVuIFBhcmsgd3JvdGU6Cj4gSGkgQ2hhbyBZdSwKPiAK
-PiAKPj4gICAKPj4gLS0tLS0tLS0tIE9yaWdpbmFsIE1lc3NhZ2UgLS0tLS0tLS0tCj4+IFNlbmRl
-ciA6IENoYW8gWXUgdmlhIExpbnV4LWYyZnMtZGV2ZWwgPGxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMu
-c291cmNlZm9yZ2UubmV0Pgo+PiBEYXRlIDogMjAyNC0xMC0yMiAxNToyMSAoR01UKzkpCj4+IFRp
-dGxlIDogW2YyZnMtZGV2XSBbUEFUQ0hdIGYyZnM6IGZpeCB0byBhdm9pZCBwb3RlbnRpYWwgZGVh
-ZGxvY2sgaW4gZjJmc19yZWNvcmRfc3RvcF9yZWFzb24oKQo+PiAgIAo+PiBzeXpib3QgcmVwb3J0
-cyBkZWFkbG9jayBpc3N1ZSBvZiBmMmZzIGFzIGJlbG93Ogo+Pgo+PiA9PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KPj4gV0FSTklORzogcG9zc2li
-bGUgY2lyY3VsYXIgbG9ja2luZyBkZXBlbmRlbmN5IGRldGVjdGVkCj4+IDYuMTIuMC1yYzMtc3l6
-a2FsbGVyLTAwMDg3LWdjOTY0Y2VkNzcyNjIgIzAgTm90IHRhaW50ZWQKPj4gLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4+IGtzd2FwZDAvNzkg
-aXMgdHJ5aW5nIHRvIGFjcXVpcmUgbG9jazoKPj4gZmZmZjg4ODAxMTgyNDA4OCAoJnNiaS0+c2Jf
-bG9jayl7KysrK30tezM6M30sIGF0OiBmMmZzX2Rvd25fd3JpdGUgZnMvZjJmcy9mMmZzLmg6MjE5
-OSBbaW5saW5lXQo+PiBmZmZmODg4MDExODI0MDg4ICgmc2JpLT5zYl9sb2NrKXsrKysrfS17Mzoz
-fSwgYXQ6IGYyZnNfcmVjb3JkX3N0b3BfcmVhc29uKzB4NTIvMHgxZDAgZnMvZjJmcy9zdXBlci5j
-OjQwNjgKPj4KPj4gYnV0IHRhc2sgaXMgYWxyZWFkeSBob2xkaW5nIGxvY2s6Cj4+IGZmZmY4ODgw
-NGJkOTI2MTAgKHNiX2ludGVybmFsIzIpey4rLit9LXswOjB9LCBhdDogZjJmc19ldmljdF9pbm9k
-ZSsweDY2Mi8weDE1YzAgZnMvZjJmcy9pbm9kZS5jOjg0Mgo+Pgo+PiB3aGljaCBsb2NrIGFscmVh
-ZHkgZGVwZW5kcyBvbiB0aGUgbmV3IGxvY2suCj4+Cj4+IHRoZSBleGlzdGluZyBkZXBlbmRlbmN5
-IGNoYWluIChpbiByZXZlcnNlIG9yZGVyKSBpczoKPj4KPj4gLT4gIzIgKHNiX2ludGVybmFsIzIp
-ey4rLit9LXswOjB9Ogo+PiAgwqAgwqAgwqAgbG9ja19hY3F1aXJlKzB4MWVkLzB4NTUwIGtlcm5l
-bC9sb2NraW5nL2xvY2tkZXAuYzo1ODI1Cj4+ICDCoCDCoCDCoCBwZXJjcHVfZG93bl9yZWFkIGlu
-Y2x1ZGUvbGludXgvcGVyY3B1LXJ3c2VtLmg6NTEgW2lubGluZV0KPj4gIMKgIMKgIMKgIF9fc2Jf
-c3RhcnRfd3JpdGUgaW5jbHVkZS9saW51eC9mcy5oOjE3MTYgW2lubGluZV0KPj4gIMKgIMKgIMKg
-IHNiX3N0YXJ0X2ludHdyaXRlKzB4NGQvMHgxYzAgaW5jbHVkZS9saW51eC9mcy5oOjE4OTkKPj4g
-IMKgIMKgIMKgIGYyZnNfZXZpY3RfaW5vZGUrMHg2NjIvMHgxNWMwIGZzL2YyZnMvaW5vZGUuYzo4
-NDIKPj4gIMKgIMKgIMKgIGV2aWN0KzB4NGU4LzB4OWIwIGZzL2lub2RlLmM6NzI1Cj4+ICDCoCDC
-oCDCoCBmMmZzX2V2aWN0X2lub2RlKzB4MWE0LzB4MTVjMCBmcy9mMmZzL2lub2RlLmM6ODA3Cj4+
-ICDCoCDCoCDCoCBldmljdCsweDRlOC8weDliMCBmcy9pbm9kZS5jOjcyNQo+PiAgwqAgwqAgwqAg
-ZGlzcG9zZV9saXN0IGZzL2lub2RlLmM6Nzc0IFtpbmxpbmVdCj4+ICDCoCDCoCDCoCBwcnVuZV9p
-Y2FjaGVfc2IrMHgyMzkvMHgyZjAgZnMvaW5vZGUuYzo5NjMKPj4gIMKgIMKgIMKgIHN1cGVyX2Nh
-Y2hlX3NjYW4rMHgzOGMvMHg0YjAgZnMvc3VwZXIuYzoyMjMKPj4gIMKgIMKgIMKgIGRvX3Nocmlu
-a19zbGFiKzB4NzAxLzB4MTE2MCBtbS9zaHJpbmtlci5jOjQzNQo+PiAgwqAgwqAgwqAgc2hyaW5r
-X3NsYWIrMHgxMDkzLzB4MTRkMCBtbS9zaHJpbmtlci5jOjY2Mgo+PiAgwqAgwqAgwqAgc2hyaW5r
-X29uZSsweDQzYi8weDg1MCBtbS92bXNjYW4uYzo0ODE4Cj4+ICDCoCDCoCDCoCBzaHJpbmtfbWFu
-eSBtbS92bXNjYW4uYzo0ODc5IFtpbmxpbmVdCj4+ICDCoCDCoCDCoCBscnVfZ2VuX3Nocmlua19u
-b2RlIG1tL3Ztc2Nhbi5jOjQ5NTcgW2lubGluZV0KPj4gIMKgIMKgIMKgIHNocmlua19ub2RlKzB4
-Mzc5OS8weDNkZTAgbW0vdm1zY2FuLmM6NTkzNwo+PiAgwqAgwqAgwqAga3N3YXBkX3Nocmlua19u
-b2RlIG1tL3Ztc2Nhbi5jOjY3NjUgW2lubGluZV0KPj4gIMKgIMKgIMKgIGJhbGFuY2VfcGdkYXQg
-bW0vdm1zY2FuLmM6Njk1NyBbaW5saW5lXQo+PiAgwqAgwqAgwqAga3N3YXBkKzB4MWNhMy8weDM3
-MDAgbW0vdm1zY2FuLmM6NzIyNgo+PiAgwqAgwqAgwqAga3RocmVhZCsweDJmMC8weDM5MCBrZXJu
-ZWwva3RocmVhZC5jOjM4OQo+PiAgwqAgwqAgwqAgcmV0X2Zyb21fZm9yaysweDRiLzB4ODAgYXJj
-aC94ODYva2VybmVsL3Byb2Nlc3MuYzoxNDcKPj4gIMKgIMKgIMKgIHJldF9mcm9tX2ZvcmtfYXNt
-KzB4MWEvMHgzMCBhcmNoL3g4Ni9lbnRyeS9lbnRyeV82NC5TOjI0NAo+Pgo+PiAtPiAjMSAoZnNf
-cmVjbGFpbSl7Ky4rLn0tezA6MH06Cj4+ICDCoCDCoCDCoCBsb2NrX2FjcXVpcmUrMHgxZWQvMHg1
-NTAga2VybmVsL2xvY2tpbmcvbG9ja2RlcC5jOjU4MjUKPj4gIMKgIMKgIMKgIF9fZnNfcmVjbGFp
-bV9hY3F1aXJlIG1tL3BhZ2VfYWxsb2MuYzozODM0IFtpbmxpbmVdCj4+ICDCoCDCoCDCoCBmc19y
-ZWNsYWltX2FjcXVpcmUrMHg4OC8weDEzMCBtbS9wYWdlX2FsbG9jLmM6Mzg0OAo+PiAgwqAgwqAg
-wqAgbWlnaHRfYWxsb2MgaW5jbHVkZS9saW51eC9zY2hlZC9tbS5oOjMxOCBbaW5saW5lXQo+PiAg
-wqAgwqAgwqAgcHJlcGFyZV9hbGxvY19wYWdlcysweDE0Ny8weDViMCBtbS9wYWdlX2FsbG9jLmM6
-NDQ5Mwo+PiAgwqAgwqAgwqAgX19hbGxvY19wYWdlc19ub3Byb2YrMHgxNmYvMHg3MTAgbW0vcGFn
-ZV9hbGxvYy5jOjQ3MjIKPj4gIMKgIMKgIMKgIGFsbG9jX3BhZ2VzX21wb2xfbm9wcm9mKzB4M2U4
-LzB4NjgwIG1tL21lbXBvbGljeS5jOjIyNjUKPj4gIMKgIMKgIMKgIGFsbG9jX3BhZ2VzX25vcHJv
-ZiBtbS9tZW1wb2xpY3kuYzoyMzQ1IFtpbmxpbmVdCj4+ICDCoCDCoCDCoCBmb2xpb19hbGxvY19u
-b3Byb2YrMHgxMjgvMHgxODAgbW0vbWVtcG9saWN5LmM6MjM1Mgo+PiAgwqAgwqAgwqAgZmlsZW1h
-cF9hbGxvY19mb2xpb19ub3Byb2YrMHhkZi8weDUwMCBtbS9maWxlbWFwLmM6MTAxMAo+PiAgwqAg
-wqAgwqAgZG9fcmVhZF9jYWNoZV9mb2xpbysweDJlYi8weDg1MCBtbS9maWxlbWFwLmM6Mzc4Nwo+
-PiAgwqAgwqAgwqAgcmVhZF9tYXBwaW5nX2ZvbGlvIGluY2x1ZGUvbGludXgvcGFnZW1hcC5oOjEw
-MTEgW2lubGluZV0KPj4gIMKgIMKgIMKgIGYyZnNfY29tbWl0X3N1cGVyKzB4M2MwLzB4N2QwIGZz
-L2YyZnMvc3VwZXIuYzo0MDMyCj4+ICDCoCDCoCDCoCBmMmZzX3JlY29yZF9zdG9wX3JlYXNvbisw
-eDEzYi8weDFkMCBmcy9mMmZzL3N1cGVyLmM6NDA3OQo+PiAgwqAgwqAgwqAgZjJmc19oYW5kbGVf
-Y3JpdGljYWxfZXJyb3IrMHgyYWMvMHg1YzAgZnMvZjJmcy9zdXBlci5jOjQxNzQKPj4gIMKgIMKg
-IMKgIGYyZnNfd3JpdGVfaW5vZGUrMHgzNWYvMHg0ZDAgZnMvZjJmcy9pbm9kZS5jOjc4NQo+PiAg
-wqAgwqAgwqAgd3JpdGVfaW5vZGUgZnMvZnMtd3JpdGViYWNrLmM6MTUwMyBbaW5saW5lXQo+PiAg
-wqAgwqAgwqAgX193cml0ZWJhY2tfc2luZ2xlX2lub2RlKzB4NzExLzB4MTBkMCBmcy9mcy13cml0
-ZWJhY2suYzoxNzIzCj4+ICDCoCDCoCDCoCB3cml0ZWJhY2tfc2luZ2xlX2lub2RlKzB4MWYzLzB4
-NjYwIGZzL2ZzLXdyaXRlYmFjay5jOjE3NzkKPj4gIMKgIMKgIMKgIHN5bmNfaW5vZGVfbWV0YWRh
-dGErMHhjNC8weDEyMCBmcy9mcy13cml0ZWJhY2suYzoyODQ5Cj4+ICDCoCDCoCDCoCBmMmZzX3Jl
-bGVhc2VfZmlsZSsweGE4LzB4MTAwIGZzL2YyZnMvZmlsZS5jOjE5NDEKPj4gIMKgIMKgIMKgIF9f
-ZnB1dCsweDIzZi8weDg4MCBmcy9maWxlX3RhYmxlLmM6NDMxCj4+ICDCoCDCoCDCoCB0YXNrX3dv
-cmtfcnVuKzB4MjRmLzB4MzEwIGtlcm5lbC90YXNrX3dvcmsuYzoyMjgKPj4gIMKgIMKgIMKgIHJl
-c3VtZV91c2VyX21vZGVfd29yayBpbmNsdWRlL2xpbnV4L3Jlc3VtZV91c2VyX21vZGUuaDo1MCBb
-aW5saW5lXQo+PiAgwqAgwqAgwqAgZXhpdF90b191c2VyX21vZGVfbG9vcCBrZXJuZWwvZW50cnkv
-Y29tbW9uLmM6MTE0IFtpbmxpbmVdCj4+ICDCoCDCoCDCoCBleGl0X3RvX3VzZXJfbW9kZV9wcmVw
-YXJlIGluY2x1ZGUvbGludXgvZW50cnktY29tbW9uLmg6MzI4IFtpbmxpbmVdCj4+ICDCoCDCoCDC
-oCBfX3N5c2NhbGxfZXhpdF90b191c2VyX21vZGVfd29yayBrZXJuZWwvZW50cnkvY29tbW9uLmM6
-MjA3IFtpbmxpbmVdCj4+ICDCoCDCoCDCoCBzeXNjYWxsX2V4aXRfdG9fdXNlcl9tb2RlKzB4MTY4
-LzB4MzcwIGtlcm5lbC9lbnRyeS9jb21tb24uYzoyMTgKPj4gIMKgIMKgIMKgIGRvX3N5c2NhbGxf
-NjQrMHgxMDAvMHgyMzAgYXJjaC94ODYvZW50cnkvY29tbW9uLmM6ODkKPj4gIMKgIMKgIMKgIGVu
-dHJ5X1NZU0NBTExfNjRfYWZ0ZXJfaHdmcmFtZSsweDc3LzB4N2YKPj4KPj4gLT4gIzAgKCZzYmkt
-PnNiX2xvY2speysrKyt9LXszOjN9Ogo+PiAgwqAgwqAgwqAgY2hlY2tfcHJldl9hZGQga2VybmVs
-L2xvY2tpbmcvbG9ja2RlcC5jOjMxNjEgW2lubGluZV0KPj4gIMKgIMKgIMKgIGNoZWNrX3ByZXZz
-X2FkZCBrZXJuZWwvbG9ja2luZy9sb2NrZGVwLmM6MzI4MCBbaW5saW5lXQo+PiAgwqAgwqAgwqAg
-dmFsaWRhdGVfY2hhaW4rMHgxOGVmLzB4NTkyMCBrZXJuZWwvbG9ja2luZy9sb2NrZGVwLmM6Mzkw
-NAo+PiAgwqAgwqAgwqAgX19sb2NrX2FjcXVpcmUrMHgxMzg0LzB4MjA1MCBrZXJuZWwvbG9ja2lu
-Zy9sb2NrZGVwLmM6NTIwMgo+PiAgwqAgwqAgwqAgbG9ja19hY3F1aXJlKzB4MWVkLzB4NTUwIGtl
-cm5lbC9sb2NraW5nL2xvY2tkZXAuYzo1ODI1Cj4+ICDCoCDCoCDCoCBkb3duX3dyaXRlKzB4OTkv
-MHgyMjAga2VybmVsL2xvY2tpbmcvcndzZW0uYzoxNTc3Cj4+ICDCoCDCoCDCoCBmMmZzX2Rvd25f
-d3JpdGUgZnMvZjJmcy9mMmZzLmg6MjE5OSBbaW5saW5lXQo+PiAgwqAgwqAgwqAgZjJmc19yZWNv
-cmRfc3RvcF9yZWFzb24rMHg1Mi8weDFkMCBmcy9mMmZzL3N1cGVyLmM6NDA2OAo+PiAgwqAgwqAg
-wqAgZjJmc19oYW5kbGVfY3JpdGljYWxfZXJyb3IrMHgyYWMvMHg1YzAgZnMvZjJmcy9zdXBlci5j
-OjQxNzQKPj4gIMKgIMKgIMKgIGYyZnNfZXZpY3RfaW5vZGUrMHhhNjEvMHgxNWMwIGZzL2YyZnMv
-aW5vZGUuYzo4ODMKPj4gIMKgIMKgIMKgIGV2aWN0KzB4NGU4LzB4OWIwIGZzL2lub2RlLmM6NzI1
-Cj4+ICDCoCDCoCDCoCBmMmZzX2V2aWN0X2lub2RlKzB4MWE0LzB4MTVjMCBmcy9mMmZzL2lub2Rl
-LmM6ODA3Cj4+ICDCoCDCoCDCoCBldmljdCsweDRlOC8weDliMCBmcy9pbm9kZS5jOjcyNQo+PiAg
-wqAgwqAgwqAgZGlzcG9zZV9saXN0IGZzL2lub2RlLmM6Nzc0IFtpbmxpbmVdCj4+ICDCoCDCoCDC
-oCBwcnVuZV9pY2FjaGVfc2IrMHgyMzkvMHgyZjAgZnMvaW5vZGUuYzo5NjMKPj4gIMKgIMKgIMKg
-IHN1cGVyX2NhY2hlX3NjYW4rMHgzOGMvMHg0YjAgZnMvc3VwZXIuYzoyMjMKPj4gIMKgIMKgIMKg
-IGRvX3Nocmlua19zbGFiKzB4NzAxLzB4MTE2MCBtbS9zaHJpbmtlci5jOjQzNQo+PiAgwqAgwqAg
-wqAgc2hyaW5rX3NsYWIrMHgxMDkzLzB4MTRkMCBtbS9zaHJpbmtlci5jOjY2Mgo+PiAgwqAgwqAg
-wqAgc2hyaW5rX29uZSsweDQzYi8weDg1MCBtbS92bXNjYW4uYzo0ODE4Cj4+ICDCoCDCoCDCoCBz
-aHJpbmtfbWFueSBtbS92bXNjYW4uYzo0ODc5IFtpbmxpbmVdCj4+ICDCoCDCoCDCoCBscnVfZ2Vu
-X3Nocmlua19ub2RlIG1tL3Ztc2Nhbi5jOjQ5NTcgW2lubGluZV0KPj4gIMKgIMKgIMKgIHNocmlu
-a19ub2RlKzB4Mzc5OS8weDNkZTAgbW0vdm1zY2FuLmM6NTkzNwo+PiAgwqAgwqAgwqAga3N3YXBk
-X3Nocmlua19ub2RlIG1tL3Ztc2Nhbi5jOjY3NjUgW2lubGluZV0KPj4gIMKgIMKgIMKgIGJhbGFu
-Y2VfcGdkYXQgbW0vdm1zY2FuLmM6Njk1NyBbaW5saW5lXQo+PiAgwqAgwqAgwqAga3N3YXBkKzB4
-MWNhMy8weDM3MDAgbW0vdm1zY2FuLmM6NzIyNgo+PiAgwqAgwqAgwqAga3RocmVhZCsweDJmMC8w
-eDM5MCBrZXJuZWwva3RocmVhZC5jOjM4OQo+PiAgwqAgwqAgwqAgcmV0X2Zyb21fZm9yaysweDRi
-LzB4ODAgYXJjaC94ODYva2VybmVsL3Byb2Nlc3MuYzoxNDcKPj4gIMKgIMKgIMKgIHJldF9mcm9t
-X2ZvcmtfYXNtKzB4MWEvMHgzMCBhcmNoL3g4Ni9lbnRyeS9lbnRyeV82NC5TOjI0NAo+Pgo+PiBv
-dGhlciBpbmZvIHRoYXQgbWlnaHQgaGVscCB1cyBkZWJ1ZyB0aGlzOgo+Pgo+PiBDaGFpbiBleGlz
-dHMgb2Y6Cj4+ICDCoCAmc2JpLT5zYl9sb2NrIC0tPiBmc19yZWNsYWltIC0tPiBzYl9pbnRlcm5h
-bCMyCj4+Cj4+IFBvc3NpYmxlIHVuc2FmZSBsb2NraW5nIHNjZW5hcmlvOgo+Pgo+PiAgwqAgwqAg
-wqAgQ1BVMMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIENQVTEKPj4gIMKgIMKgIMKgIC0t
-LS3CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAtLS0tCj4+ICDCoCBybG9jayhzYl9pbnRl
-cm5hbCMyKTsKPj4gIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IGxvY2soZnNfcmVjbGFpbSk7Cj4+ICDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCBsb2NrKHNiX2ludGVybmFsIzIpOwo+PiAgwqAgbG9jaygmc2JpLT5zYl9sb2Nr
-KTsKPj4KPj4gUm9vdCBjYXVzZSBpcyB0aGVyZSB3aWxsIGJlIHBvdGVudGlhbCBkZWFkbG9jayBp
-biBiZXR3ZWVuCj4+IGJlbG93IHRhc2tzOgo+Pgo+PiBUaHJlYWQgQSDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoEtzd2FwZAo+PiAtIGYyZnNfaW9jX2NvbW1p
-dF9hdG9taWNfd3JpdGUKPj4gLSBtbnRfd2FudF93cml0ZV9maWxlIC0tIGRvd25fcmVhZCBsb2Nr
-IEEKPj4gIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgIMKgIMKgLSBiYWxhbmNlX3BnZGF0Cj4+ICDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAtIF9fZnNfcmVjbGFpbV9hY3F1aXJlwqAg
-LS0gbG9jayBCCj4+ICDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoMKgIC0gc2hyaW5rX25vZGUKPj4gIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgwqAgLSBwcnVuZV9pY2FjaGVf
-c2IKPj4gIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgIMKgIMKgwqAgwqAgLSBkaXNwb3NlX2xpc3QKPj4gIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgwqAgwqAgLSBmMmZzX2V2aWN0X2lu
-b2RlCj4+ICDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCDCoMKgIMKgIMKgIC0gc2Jfc3RhcnRfaW50d3JpdGXCoCAtLSBkb3duX3JlYWQgbG9j
-ayBBCj4+IC0gZjJmc19kb19zeW5jX2ZpbGUKPj4gIMKgIC0gZjJmc193cml0ZV9pbm9kZQo+PiAg
-wqAgLSBmMmZzX2hhbmRsZV9jcml0aWNhbF9lcnJvcgo+PiAgwqAgwqAgLSBmMmZzX3JlY29yZF9z
-dG9wX3JlYXNvbgo+PiAgwqAgwqAgLSBmMmZzX2NvbW1pdF9zdXBlcgo+PiAgwqAgwqAgwqAgLSBy
-ZWFkX21hcHBpbmdfZm9saW8KPj4gIMKgIMKgIMKgIC0gZmlsZW1hcF9hbGxvY19mb2xpb19ub3By
-b2YKPj4gIMKgIMKgIMKgIMKgIC0gZnNfcmVjbGFpbV9hY3F1aXJlwqAgLS0gbG9jayBCCj4+Cj4+
-IEJvdGggdGhyZWFkcyB0cnkgdG8gYWNxdWlyZSByZWFkIGxvY2sgb2YgbG9jayBBLCB0aGVuIGl0
-cyB1cGNvbWluZyB3cml0ZQo+PiBsb2NrIGdyYWJiZXIgd2lsbCB0cmlnZ2VyIGRlYWRsb2NrLgo+
-Pgo+PiBMZXQncyBhbHdheXMgY3JlYXRlIGFuIGFzeW5jaHJvbm91cyB0YXNrIGluIGYyZnNfaGFu
-ZGxlX2NyaXRpY2FsX2Vycm9yKCkKPj4gcmF0aGVyIHRoYW4gY2FsbGluZyBmMmZzX3JlY29yZF9z
-dG9wX3JlYXNvbigpIHN5bmNocm9ub3VzbHkgdG8gYXZvaWQKPj4gdGhpcyBwb3RlbnRpYWwgZGVh
-ZGxvY2sgaXNzdWUuCj4+Cj4+IEZpeGVzOiBiNjJlNzFiZTIxMTAgKCJmMmZzOiBzdXBwb3J0IGVy
-cm9ycz1yZW1vdW50LXJvY29udGludWVwYW5pYyBtb3VudG9wdGlvbiIpCj4+IFJlcG9ydGVkLWJ5
-OiBzeXpib3QrYmU0YTk5ODNlOTVhNWUyNWM4ZDNAc3l6a2FsbGVyLmFwcHNwb3RtYWlsLmNvbQo+
-PiBDbG9zZXM6IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC82NzA0ZDY2Ny4wNTBhMDIyMC4x
-ZTRkNjIuMDA4MS5HQUVAZ29vZ2xlLmNvbQo+PiBTaWduZWQtb2ZmLWJ5OiBDaGFvIFl1IDxjaGFv
-QGtlcm5lbC5vcmc+Cj4+IC0tLQo+PiBmcy9mMmZzL3N1cGVyLmMgMTAgKysrKysrLS0tLQo+PiAx
-IGZpbGUgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQo+Pgo+PiBkaWZm
-IC0tZ2l0IGEvZnMvZjJmcy9zdXBlci5jIGIvZnMvZjJmcy9zdXBlci5jCj4+IGluZGV4IDkzMjVk
-OGRjN2Y3ZC4uMjFkNmZiNjAxNzFhIDEwMDY0NAo+PiAtLS0gYS9mcy9mMmZzL3N1cGVyLmMKPj4g
-KysrIGIvZnMvZjJmcy9zdXBlci5jCj4+IEBAIC00MTc0LDEwICs0MTc0LDEyIEBAIHZvaWQgZjJm
-c19oYW5kbGVfY3JpdGljYWxfZXJyb3Ioc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpLCB1bnNpZ25l
-ZCBjaGFyIHJlYXNvbiwKPj4gIMKgIMKgIMKgIMKgIMKgaWYgKCFmMmZzX2h3X2lzX3JlYWRvbmx5
-KHNiaSkpIHsKPj4gIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgc2F2ZV9zdG9wX3JlYXNvbihz
-YmksIHJlYXNvbik7Cj4+Cj4+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBpZiAoaXJxX2NvbnRl
-eHQgJiYgIXNodXRkb3duKQo+IAo+IEkgdGhpbmsgdGhlIGlycV9jb250ZXh0IHBhcmFtZXRlciBj
-YW4gYmUgcmVtb3ZlZCBmcm9tIGYyZnNfaGFuZGxlX2NyaXRpY2FsX2Vycm9yKCkuCgpBaCwgY29y
-cmVjdCwgbGV0IG1lIHVwZGF0ZSBpdCBpbiB2MiwgdGhhbmsgeW91IQoKVGhhbmtzLAoKPiAKPiBU
-aGFua3MsCj4gRGFlanVuCj4gCj4+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
-wqBzY2hlZHVsZV93b3JrKCZzYmktPnNfZXJyb3Jfd29yayk7Cj4+IC0gwqAgwqAgwqAgwqAgwqAg
-wqAgwqAgwqBlbHNlCj4+IC0gwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBmMmZz
-X3JlY29yZF9zdG9wX3JlYXNvbihzYmkpOwo+PiArIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgLyoK
-Pj4gKyDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAqIGFsd2F5cyBjcmVhdGUgYW4gYXN5bmNocm9u
-b3VzIHRhc2sgdG8gcmVjb3JkIHN0b3BfcmVhc29uCj4+ICsgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
-wqAgKiBpbiBvcmRlciB0byBhdm9pZCBwb3RlbnRpYWwgZGVhZGxvY2sgd2hlbiBydW5uaW5nIGlu
-dG8KPj4gKyDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAqIGYyZnNfcmVjb3JkX3N0b3BfcmVhc29u
-KCkgc3luY2hyb25vdXNseS4KPj4gKyDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAqLwo+PiArIMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgc2NoZWR1bGVfd29yaygmc2JpLT5zX2Vycm9yX3dvcmspOwo+
-PiAgwqAgwqAgwqAgwqAgwqB9Cj4+Cj4+ICDCoCDCoCDCoCDCoCDCoC8qCj4+IC0tCj4+IDIuNDAu
-MQo+Pgo+Pgo+Pgo+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwo+PiBMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdAo+PiBMaW51eC1mMmZzLWRldmVs
-QGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+PiBodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9s
-aXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCgoKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0Ckxp
-bnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNl
-Zm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+syzbot reports deadlock issue of f2fs as below:
+
+======================================================
+WARNING: possible circular locking dependency detected
+6.12.0-rc3-syzkaller-00087-gc964ced77262 #0 Not tainted
+------------------------------------------------------
+kswapd0/79 is trying to acquire lock:
+ffff888011824088 (&sbi->sb_lock){++++}-{3:3}, at: f2fs_down_write fs/f2fs/f2fs.h:2199 [inline]
+ffff888011824088 (&sbi->sb_lock){++++}-{3:3}, at: f2fs_record_stop_reason+0x52/0x1d0 fs/f2fs/super.c:4068
+
+but task is already holding lock:
+ffff88804bd92610 (sb_internal#2){.+.+}-{0:0}, at: f2fs_evict_inode+0x662/0x15c0 fs/f2fs/inode.c:842
+
+which lock already depends on the new lock.
+
+the existing dependency chain (in reverse order) is:
+
+-> #2 (sb_internal#2){.+.+}-{0:0}:
+       lock_acquire+0x1ed/0x550 kernel/locking/lockdep.c:5825
+       percpu_down_read include/linux/percpu-rwsem.h:51 [inline]
+       __sb_start_write include/linux/fs.h:1716 [inline]
+       sb_start_intwrite+0x4d/0x1c0 include/linux/fs.h:1899
+       f2fs_evict_inode+0x662/0x15c0 fs/f2fs/inode.c:842
+       evict+0x4e8/0x9b0 fs/inode.c:725
+       f2fs_evict_inode+0x1a4/0x15c0 fs/f2fs/inode.c:807
+       evict+0x4e8/0x9b0 fs/inode.c:725
+       dispose_list fs/inode.c:774 [inline]
+       prune_icache_sb+0x239/0x2f0 fs/inode.c:963
+       super_cache_scan+0x38c/0x4b0 fs/super.c:223
+       do_shrink_slab+0x701/0x1160 mm/shrinker.c:435
+       shrink_slab+0x1093/0x14d0 mm/shrinker.c:662
+       shrink_one+0x43b/0x850 mm/vmscan.c:4818
+       shrink_many mm/vmscan.c:4879 [inline]
+       lru_gen_shrink_node mm/vmscan.c:4957 [inline]
+       shrink_node+0x3799/0x3de0 mm/vmscan.c:5937
+       kswapd_shrink_node mm/vmscan.c:6765 [inline]
+       balance_pgdat mm/vmscan.c:6957 [inline]
+       kswapd+0x1ca3/0x3700 mm/vmscan.c:7226
+       kthread+0x2f0/0x390 kernel/kthread.c:389
+       ret_from_fork+0x4b/0x80 arch/x86/kernel/process.c:147
+       ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
+
+-> #1 (fs_reclaim){+.+.}-{0:0}:
+       lock_acquire+0x1ed/0x550 kernel/locking/lockdep.c:5825
+       __fs_reclaim_acquire mm/page_alloc.c:3834 [inline]
+       fs_reclaim_acquire+0x88/0x130 mm/page_alloc.c:3848
+       might_alloc include/linux/sched/mm.h:318 [inline]
+       prepare_alloc_pages+0x147/0x5b0 mm/page_alloc.c:4493
+       __alloc_pages_noprof+0x16f/0x710 mm/page_alloc.c:4722
+       alloc_pages_mpol_noprof+0x3e8/0x680 mm/mempolicy.c:2265
+       alloc_pages_noprof mm/mempolicy.c:2345 [inline]
+       folio_alloc_noprof+0x128/0x180 mm/mempolicy.c:2352
+       filemap_alloc_folio_noprof+0xdf/0x500 mm/filemap.c:1010
+       do_read_cache_folio+0x2eb/0x850 mm/filemap.c:3787
+       read_mapping_folio include/linux/pagemap.h:1011 [inline]
+       f2fs_commit_super+0x3c0/0x7d0 fs/f2fs/super.c:4032
+       f2fs_record_stop_reason+0x13b/0x1d0 fs/f2fs/super.c:4079
+       f2fs_handle_critical_error+0x2ac/0x5c0 fs/f2fs/super.c:4174
+       f2fs_write_inode+0x35f/0x4d0 fs/f2fs/inode.c:785
+       write_inode fs/fs-writeback.c:1503 [inline]
+       __writeback_single_inode+0x711/0x10d0 fs/fs-writeback.c:1723
+       writeback_single_inode+0x1f3/0x660 fs/fs-writeback.c:1779
+       sync_inode_metadata+0xc4/0x120 fs/fs-writeback.c:2849
+       f2fs_release_file+0xa8/0x100 fs/f2fs/file.c:1941
+       __fput+0x23f/0x880 fs/file_table.c:431
+       task_work_run+0x24f/0x310 kernel/task_work.c:228
+       resume_user_mode_work include/linux/resume_user_mode.h:50 [inline]
+       exit_to_user_mode_loop kernel/entry/common.c:114 [inline]
+       exit_to_user_mode_prepare include/linux/entry-common.h:328 [inline]
+       __syscall_exit_to_user_mode_work kernel/entry/common.c:207 [inline]
+       syscall_exit_to_user_mode+0x168/0x370 kernel/entry/common.c:218
+       do_syscall_64+0x100/0x230 arch/x86/entry/common.c:89
+       entry_SYSCALL_64_after_hwframe+0x77/0x7f
+
+-> #0 (&sbi->sb_lock){++++}-{3:3}:
+       check_prev_add kernel/locking/lockdep.c:3161 [inline]
+       check_prevs_add kernel/locking/lockdep.c:3280 [inline]
+       validate_chain+0x18ef/0x5920 kernel/locking/lockdep.c:3904
+       __lock_acquire+0x1384/0x2050 kernel/locking/lockdep.c:5202
+       lock_acquire+0x1ed/0x550 kernel/locking/lockdep.c:5825
+       down_write+0x99/0x220 kernel/locking/rwsem.c:1577
+       f2fs_down_write fs/f2fs/f2fs.h:2199 [inline]
+       f2fs_record_stop_reason+0x52/0x1d0 fs/f2fs/super.c:4068
+       f2fs_handle_critical_error+0x2ac/0x5c0 fs/f2fs/super.c:4174
+       f2fs_evict_inode+0xa61/0x15c0 fs/f2fs/inode.c:883
+       evict+0x4e8/0x9b0 fs/inode.c:725
+       f2fs_evict_inode+0x1a4/0x15c0 fs/f2fs/inode.c:807
+       evict+0x4e8/0x9b0 fs/inode.c:725
+       dispose_list fs/inode.c:774 [inline]
+       prune_icache_sb+0x239/0x2f0 fs/inode.c:963
+       super_cache_scan+0x38c/0x4b0 fs/super.c:223
+       do_shrink_slab+0x701/0x1160 mm/shrinker.c:435
+       shrink_slab+0x1093/0x14d0 mm/shrinker.c:662
+       shrink_one+0x43b/0x850 mm/vmscan.c:4818
+       shrink_many mm/vmscan.c:4879 [inline]
+       lru_gen_shrink_node mm/vmscan.c:4957 [inline]
+       shrink_node+0x3799/0x3de0 mm/vmscan.c:5937
+       kswapd_shrink_node mm/vmscan.c:6765 [inline]
+       balance_pgdat mm/vmscan.c:6957 [inline]
+       kswapd+0x1ca3/0x3700 mm/vmscan.c:7226
+       kthread+0x2f0/0x390 kernel/kthread.c:389
+       ret_from_fork+0x4b/0x80 arch/x86/kernel/process.c:147
+       ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
+
+other info that might help us debug this:
+
+Chain exists of:
+  &sbi->sb_lock --> fs_reclaim --> sb_internal#2
+
+ Possible unsafe locking scenario:
+
+       CPU0                    CPU1
+       ----                    ----
+  rlock(sb_internal#2);
+                               lock(fs_reclaim);
+                               lock(sb_internal#2);
+  lock(&sbi->sb_lock);
+
+Root cause is there will be potential deadlock in between
+below tasks:
+
+Thread A				Kswapd
+- f2fs_ioc_commit_atomic_write
+ - mnt_want_write_file -- down_read lock A
+					- balance_pgdat
+					 - __fs_reclaim_acquire  -- lock B
+					  - shrink_node
+					   - prune_icache_sb
+					    - dispose_list
+					     - f2fs_evict_inode
+					      - sb_start_intwrite  -- down_read lock A
+ - f2fs_do_sync_file
+  - f2fs_write_inode
+   - f2fs_handle_critical_error
+    - f2fs_record_stop_reason
+     - f2fs_commit_super
+      - read_mapping_folio
+       - filemap_alloc_folio_noprof
+        - fs_reclaim_acquire  -- lock B
+
+Both threads try to acquire read lock of lock A, then its upcoming write
+lock grabber will trigger deadlock.
+
+Let's always create an asynchronous task in f2fs_handle_critical_error()
+rather than calling f2fs_record_stop_reason() synchronously to avoid
+this potential deadlock issue.
+
+Fixes: b62e71be2110 ("f2fs: support errors=remount-ro|continue|panic mountoption")
+Reported-by: syzbot+be4a9983e95a5e25c8d3@syzkaller.appspotmail.com
+Closes: https://lore.kernel.org/all/6704d667.050a0220.1e4d62.0081.GAE@google.com
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v2:
+- remove unneeded irq_context parameter from
+f2fs_handle_critical_error() pointed by Daejun Park.
+ fs/f2fs/checkpoint.c |  2 +-
+ fs/f2fs/f2fs.h       |  3 +--
+ fs/f2fs/super.c      | 13 +++++++------
+ 3 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 7f76460b721f..efda9a022981 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -32,7 +32,7 @@ void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io,
+ 	f2fs_build_fault_attr(sbi, 0, 0);
+ 	if (!end_io)
+ 		f2fs_flush_merged_writes(sbi);
+-	f2fs_handle_critical_error(sbi, reason, end_io);
++	f2fs_handle_critical_error(sbi, reason);
+ }
+ 
+ /*
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 9b7fa960cd8b..18a3343d8831 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3644,8 +3644,7 @@ int f2fs_quota_sync(struct super_block *sb, int type);
+ loff_t max_file_blocks(struct inode *inode);
+ void f2fs_quota_off_umount(struct super_block *sb);
+ void f2fs_save_errors(struct f2fs_sb_info *sbi, unsigned char flag);
+-void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
+-							bool irq_context);
++void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason);
+ void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error);
+ void f2fs_handle_error_async(struct f2fs_sb_info *sbi, unsigned char error);
+ int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 9325d8dc7f7d..d9e64ed14092 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4161,8 +4161,7 @@ static bool system_going_down(void)
+ 		|| system_state == SYSTEM_RESTART;
+ }
+ 
+-void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
+-							bool irq_context)
++void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason)
+ {
+ 	struct super_block *sb = sbi->sb;
+ 	bool shutdown = reason == STOP_CP_REASON_SHUTDOWN;
+@@ -4174,10 +4173,12 @@ void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
+ 	if (!f2fs_hw_is_readonly(sbi)) {
+ 		save_stop_reason(sbi, reason);
+ 
+-		if (irq_context && !shutdown)
+-			schedule_work(&sbi->s_error_work);
+-		else
+-			f2fs_record_stop_reason(sbi);
++		/*
++		 * always create an asynchronous task to record stop_reason
++		 * in order to avoid potential deadlock when running into
++		 * f2fs_record_stop_reason() synchronously.
++		 */
++		schedule_work(&sbi->s_error_work);
+ 	}
+ 
+ 	/*
+-- 
+2.40.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
