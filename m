@@ -2,120 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0D4A9ABBA2
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Oct 2024 04:38:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71D2A9ABBB1
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Oct 2024 04:42:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t3RG9-000111-95;
-	Wed, 23 Oct 2024 02:38:06 +0000
+	id 1t3RKX-0004Kx-2j;
+	Wed, 23 Oct 2024 02:42:37 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1t3RG7-00010u-Jz
+ (envelope-from <chao@kernel.org>) id 1t3RKU-0004Kq-QY
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 23 Oct 2024 02:38:04 +0000
+ Wed, 23 Oct 2024 02:42:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HMyxQC4PiUMFEM2SCPgl/rqbsfz60eDAxA3ZwDK2x48=; b=AN4Z1SSC24djPFC10RDgqOTe+6
- WOuQXNLrIqOurFyjFxcOJh1C6NqC6ft0hV/7BTWbEKe8UKmG7Z0Rn8igTm9agNaxHc2aclWpsO9U8
- kC+5U5nAI+6n2/SXamurFNXzEpn8j+5LoAnYGMCAwNnFWXnl0hzpIP0+Z1Dej52HsSZA=;
+ bh=mDZI/C7vp+hCZhVGKpJ1IiCir/6LTD2QSKlBK2u430E=; b=ZsAeayLlmoZMBHY/BD+FFP/3qL
+ 2p1ELM8THNfMI1Ywb3OEmRKd/V6g78boAWcLLWoeK0N1HHKoHCuIgezPtp5VipaQhIzqp6Ra+j+4S
+ E7LQ94NxmiaHdcUrZR6yJe9XXK9yTr1ywi0a6KXng7ZN33Uvl71oGrMcp8rllrF2h0vA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=HMyxQC4PiUMFEM2SCPgl/rqbsfz60eDAxA3ZwDK2x48=; b=E9SH+OGuaGmYsHUDTol4+QZ7Yq
- 8gX+zcS8QYqRW6mZehXmFJljfLQGJGf4c+FwmJv6pNVhUd684tsm/5FM2cSlIlrj65IoNGLyne+63
- QqiP8qFZ7GRp1/jurN4ihzuqJH3ffmu6HDkkh+REyrhQXuCIR7I/v/76uwX6fQZ0DcJg=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ bh=mDZI/C7vp+hCZhVGKpJ1IiCir/6LTD2QSKlBK2u430E=; b=VGpNuevfhwOb1UGi+mwrQraB0n
+ MLCNAZysmimIKV9uaL6/fERtO2TiA5mzIY651XC3teBVfKn0EahLepvxCaQdYxZ5MQ9xtzboUzqJo
+ pT/GQ1TIiHqH93QGuRiXMQHUsIrKdmu/XiFW+M1MdBNCrw1szbQwkIqR1dAnbLO77RBA=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t3RG7-00044J-AV for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 23 Oct 2024 02:38:04 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1729651072;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=HMyxQC4PiUMFEM2SCPgl/rqbsfz60eDAxA3ZwDK2x48=;
- b=YxOaKJnjwp4TivYalJMxNv0KGbDPTI9/cemsiIn3RyVVB//TjcMX7+hkcbDKZhIcVoJQ9K
- PRqQWScQWShQfV+D5m4a84FIjSAUyrNrCNWeT4PG/BVwoep36LimZA9UNeT4phsejSiFQm
- 1doGVXpAuNXsXEL+0vWEoQGITdZDO8w=
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-529-fHByCxaWOY2S1-yA5KDzFA-1; Tue, 22 Oct 2024 22:37:50 -0400
-X-MC-Unique: fHByCxaWOY2S1-yA5KDzFA-1
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-71e8641f2a7so6999647b3a.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 22 Oct 2024 19:37:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729651069; x=1730255869;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HMyxQC4PiUMFEM2SCPgl/rqbsfz60eDAxA3ZwDK2x48=;
- b=XJBW4a4DjOG2Ypu/qlPXpOFXK2mYnKndTtn/gOfqn9KkaDcQ90q5Tt81eLxUVP9yDy
- 3UbycqRhyNhvKSYkPAq370cAiZDtAbeUcaMDvbCd7VDESb3VtrFYkTs/tKtC/Iyk28A8
- XM4MjRY726+2PNLTqqd4l2QdKqeL/gXwbjd5MeouRb1F01vGdERloij4UrzeZY7KvYaR
- D/qs7O0sTzBCpG8zInEdBtBOtJbrM3g8rfKS7NyF6FIEucA0FmbCQxzo6UcRsaI4FO5F
- J7rMlODEbaeF5cuQAkQCVBKlohLzNp3bmIgxbNkZb3T/MUNxTywnlL9UfLzvpLOh6TM5
- no2Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUF7a3oayxYML/2dueFgoFVQ3gxYmsayeeOxvurWITfkf4VVmOcgDEhrB344MDdi99XoMPciMMiOElhqZNguOJS@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YyJsdJa8H7QNSRLWlnOwqN+AKEzrvOQxkLVN/Bs1jUO4GQMXE6p
- a+g84U2ZDJUkgtN4eG7aoTNRqaY2XShvTjlkkpF0KmEHckvWKWvEKn4xvVdClxTfLaHrBoCkF/w
- e+S+leQeEyTHKzKcVTWrMbefBihdAbYvJZ0qV8aOjrblHD70SOB8L5u2SdSrdwzVKR7Ruf+fyau
- I=
-X-Received: by 2002:a05:6a21:3414:b0:1d9:11d0:1214 with SMTP id
- adf61e73a8af0-1d978ad59fdmr1454005637.1.1729651068971; 
- Tue, 22 Oct 2024 19:37:48 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHWdRDqvMToqLfw5Irv/0qSGvhfnUU9U2RLhMRTuUG8XqtShRz3ifBOR0NkHjH/wVntXXwLdg==
-X-Received: by 2002:a05:6a21:3414:b0:1d9:11d0:1214 with SMTP id
- adf61e73a8af0-1d978ad59fdmr1453988637.1.1729651068537; 
- Tue, 22 Oct 2024 19:37:48 -0700 (PDT)
-Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([43.228.180.230])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71ec1313926sm5370452b3a.4.2024.10.22.19.37.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Oct 2024 19:37:48 -0700 (PDT)
-Date: Wed, 23 Oct 2024 10:37:44 +0800
-From: Zorro Lang <zlang@redhat.com>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20241023023744.nvnuavzus26gjdj5@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-References: <20241015025106.3203676-1-chao@kernel.org>
+ id 1t3RKU-0004HD-4D for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 23 Oct 2024 02:42:34 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 167C65C5E4F;
+ Wed, 23 Oct 2024 02:42:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4D22EC4CEE4;
+ Wed, 23 Oct 2024 02:42:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1729651348;
+ bh=zmCAxVblrWxgvcfRLK0nZDoD+ZC3BM86UGf4ASXgOBY=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=IoDhXfQfFC2mf8gvAAVjFcSlfHCpzeq9Z4wNPH2GOLJJLDW+PFkvCv/fA+cmoumZk
+ x6DrvFLLwovMFNRlFxgWoRN9RliTdpr33kHVgizWexIVcYuFK5xbwAxGFP5aO9hidt
+ nk8i69Oi6J9GLxjIjx45Bl8mOv5zBxPAGsSsl8n7teIxPAwgIfgB+hmZrzxSk+xDKK
+ F1In2AZlH0KfYQeKcG0q2ETpyv32gg+820E6mqEALB+kF1/QuqI5k3RbSJRSLMkW5R
+ AKYLdJmMSSXKjFZVaHR3uX3PcJqQH9TPBpGX7iMt3o6mcy7B+Yq778LMu74GyM0pF5
+ YKZDdwt9JFBNw==
+Message-ID: <28ad2c90-a95c-440a-ae6a-5fb19bacd252@kernel.org>
+Date: Wed, 23 Oct 2024 10:42:23 +0800
 MIME-Version: 1.0
-In-Reply-To: <20241015025106.3203676-1-chao@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-X-Spam-Score: -2.4 (--)
+User-Agent: Mozilla Thunderbird
+To: Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
+References: <1729588481-29390-1-git-send-email-zhiguo.niu@unisoc.com>
+Content-Language: en-US
+In-Reply-To: <1729588481-29390-1-git-send-email-zhiguo.niu@unisoc.com>
+X-Spam-Score: -5.7 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Oct 15, 2024 at 10:51:05AM +0800, Chao Yu wrote: >
- This is a regression test to check whether f2fs handles dirty > data correctly
- when checkpoint is disabled, if lfs mode is on, > it will trig [...] 
- Content analysis details:   (-2.4 points, 6.0 required)
+ Content preview:  On 2024/10/22 17:14, Zhiguo Niu wrote: > GC_URGENT_MID is
+ introduced by commit > d98af5f45520 ("f2fs: introduce gc_urgent_mid mode"),
+ aim to does GC > forcibly uses cost benefit GC approach, but if AT [...] 
+ Content analysis details:   (-5.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -1.7 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [170.10.129.124 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.129.124 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -124,9 +87,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t3RG7-00044J-AV
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs/006: add testcase to check
- out-of-space case
+X-Headers-End: 1t3RKU-0004HD-4D
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid use GC_AT when setting
+ gc_mode as GC_URGENT_MID
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -138,111 +101,56 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Hao_hao.Wang@unisoc.com
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Oct 15, 2024 at 10:51:05AM +0800, Chao Yu wrote:
-> This is a regression test to check whether f2fs handles dirty
-> data correctly when checkpoint is disabled, if lfs mode is on,
-> it will trigger OPU for all overwritten data, this will cost
-> free segments, so f2fs must account overwritten data as OPU
-> data when calculating free space, otherwise, it may run out
-> of free segments in f2fs' allocation function, resulting in
-> panic.
-> 
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  tests/f2fs/006     | 52 ++++++++++++++++++++++++++++++++++++++++++++++
->  tests/f2fs/006.out |  6 ++++++
->  2 files changed, 58 insertions(+)
->  create mode 100755 tests/f2fs/006
->  create mode 100644 tests/f2fs/006.out
-> 
-> diff --git a/tests/f2fs/006 b/tests/f2fs/006
-> new file mode 100755
-> index 00000000..b359ef8f
-> --- /dev/null
-> +++ b/tests/f2fs/006
-> @@ -0,0 +1,52 @@
-> +#! /bin/bash
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) 2024 Oppo.  All Rights Reserved.
-> +#
-> +# FS QA Test No. f2fs/006
-> +#
-> +# This is a regression test to check whether f2fs handles dirty
-> +# data correctly when checkpoint is disabled, if lfs mode is on,
-> +# it will trigger OPU for all overwritten data, this will cost
-> +# free segments, so f2fs must account overwritten data as OPU
-> +# data when calculating free space, otherwise, it may run out
-> +# of free segments in f2fs' allocation function, resulting in
-> +# panic.
-> +#
-> +. ./common/preamble
-> +_begin_fstest auto quick
-> +
-> +_cleanup()
-> +{
-> +	rm -f $img
-> +	_scratch_unmount >> $seqres.full
-> +	cd /
-> +	rm -r -f $tmp.*
-> +}
-> +
-> +_require_scratch
-> +_scratch_mkfs >> $seqres.full
-> +_scratch_mount >> $seqres.full
-> +
-> +img=$SCRATCH_MNT/f2fs.img
-> +mnt=$SCRATCH_MNT/f2fs.mnt
-> +testfile=$mnt/testfile
-> +
-> +mkdir $mnt
-> +dd if=/dev/zero of=$img bs=1M count=100 2>/dev/null
-> +$MKFS_F2FS_PROG -f $img >/dev/null 2>&1
-> +sync
-> +
-> +# use mode=lfs to let f2fs always triggers OPU
-> +mount -t $FSTYP -o loop,mode=lfs,checkpoint=disable:10%,noinline_dentry $img $mnt
+On 2024/10/22 17:14, Zhiguo Niu wrote:
+> GC_URGENT_MID is introduced by commit
+> d98af5f45520 ("f2fs: introduce gc_urgent_mid mode"), aim to does GC
+> forcibly uses cost benefit GC approach, but if ATGC is enabled at
+> the same time, Age-threshold approach will be selected, which can only
+> do amount of GC and it is much less than the numbers of CB approach.
 
-Hi Chao,
+gc urgent low(2): lowers the bar of checking I/O idling in
+		  order to process outstanding discard commands and GC a
+		  little bit aggressively. uses cost benefit GC approach.
 
-Is the loop device necessary? What if use SCRATCH_DEV and SCRATCH_MNT directly?
+GC_URGENT_LOW uses CB algorithm as well?
 
 Thanks,
-Zorro
 
-> +
-> +dd if=/dev/zero of=$testfile bs=1M count=50 2>/dev/null
-> +
-> +# it may run out of free space of f2fs and hang kernel
-> +dd if=/dev/zero of=$testfile bs=1M count=50 conv=notrunc conv=fsync
-> +dd if=/dev/zero of=$testfile bs=1M count=50 conv=notrunc conv=fsync
-> +
-> +mount -o remount,checkpoint=enable $mnt
-> +umount $mnt
-> +
-> +status=0
-> +exit
-> diff --git a/tests/f2fs/006.out b/tests/f2fs/006.out
-> new file mode 100644
-> index 00000000..a2c7ba48
-> --- /dev/null
-> +++ b/tests/f2fs/006.out
-> @@ -0,0 +1,6 @@
-> +QA output created by 006
-> +50+0 records in
-> +50+0 records out
-> +dd: error writing '/mnt/scratch_f2fs/f2fs.mnt/testfile': No space left on device
-> +3+0 records in
-> +2+0 records out
-> -- 
-> 2.40.1
 > 
+> some traces:
+>    f2fs_gc-254:48-396     [007] ..... 2311600.684028: f2fs_gc_begin: dev = (254,48), gc_type = Background GC, no_background_GC = 0, nr_free_secs = 0, nodes = 1053, dents = 2, imeta = 18, free_sec:44898, free_seg:44898, rsv_seg:239, prefree_seg:0
+>    f2fs_gc-254:48-396     [007] ..... 2311600.684527: f2fs_get_victim: dev = (254,48), type = No TYPE, policy = (Background GC, LFS-mode, Age-threshold), victim = 10, cost = 4294364975, ofs_unit = 1, pre_victim_secno = -1, prefree = 0, free = 44898
+>    f2fs_gc-254:48-396     [007] ..... 2311600.714835: f2fs_gc_end: dev = (254,48), ret = 0, seg_freed = 0, sec_freed = 0, nodes = 1562, dents = 2, imeta = 18, free_sec:44898, free_seg:44898, rsv_seg:239, prefree_seg:0
+>    f2fs_gc-254:48-396     [007] ..... 2311600.714843: f2fs_background_gc: dev = (254,48), wait_ms = 50, prefree = 0, free = 44898
+>    f2fs_gc-254:48-396     [007] ..... 2311600.771785: f2fs_gc_begin: dev = (254,48), gc_type = Background GC, no_background_GC = 0, nr_free_secs = 0, nodes = 1562, dents = 2, imeta = 18, free_sec:44898, free_seg:44898, rsv_seg:239, prefree_seg:
+>    f2fs_gc-254:48-396     [007] ..... 2311600.772275: f2fs_gc_end: dev = (254,48), ret = -61, seg_freed = 0, sec_freed = 0, nodes = 1562, dents = 2, imeta = 18, free_sec:44898, free_seg:44898, rsv_seg:239, prefree_seg:0
+> 
+> Fixes: d98af5f45520 ("f2fs: introduce gc_urgent_mid mode")
+> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+> ---
+>   fs/f2fs/gc.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index e40bdd1..daecf69 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -257,6 +257,7 @@ static int select_gc_type(struct f2fs_sb_info *sbi, int gc_type)
+>   
+>   	switch (sbi->gc_mode) {
+>   	case GC_IDLE_CB:
+> +	case GC_URGENT_MID:
+>   		gc_mode = GC_CB;
+>   		break;
+>   	case GC_IDLE_GREEDY:
 
 
 
