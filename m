@@ -2,96 +2,142 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EEC3C9AC145
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Oct 2024 10:16:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E98B9AC6EA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Oct 2024 11:47:21 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t3WXb-0008KT-4q;
-	Wed, 23 Oct 2024 08:16:27 +0000
+	id 1t3XxQ-0000Hn-Hn;
+	Wed, 23 Oct 2024 09:47:12 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t3WXa-0008KI-4V
+ (envelope-from <daejun7.park@samsung.com>) id 1t3XxO-0000HR-La
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 23 Oct 2024 08:16:26 +0000
+ Wed, 23 Oct 2024 09:47:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ Date:Message-ID:In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=of1MI47wCja644OgQOb+mTDmo5hRD6gH/ChcvlQyF5g=; b=bQfM/+xCVjtlHrmFziDcjMZEZT
- sqvHTBwTYiqs1lQhxEzhcEIS0ap7v1+aDu/6nmSX3RLsX53XMxz2234SllcK4lsgRXMLjyUQQmoMN
- ijRIiPvjvwYtW3NkuUhKESXqsRtFJ5LXtTXTgENhAsoIcTXqLNbJHkiGfc7kcZsYvECY=;
+ bh=bGpLoC3knzXadOWZtYKaVuF5uOI+14bGyUxz/W66kSI=; b=S+9sS0VRshodQahPonv9pHjUM+
+ bu2ZWHMY2jgdVah6UxZBfr+BQwFCx/r8JazEKup4yocc0pyBYzfXCCXtMgR7c4JDhI+41J0h5WlE4
+ XrdDBaboLafkdEvZn4YVZBk/uyT4wOSTSOGWO5rpe50b0YXNsc3AQotAEg1F8yUmgWjs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:
+ In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=of1MI47wCja644OgQOb+mTDmo5hRD6gH/ChcvlQyF5g=; b=PUH3b3A/0oEZxbuY4IKwLcTieF
- K8WDc4ring8tyKp7XKWxULaDzMBd29xKyg5hKEHv6bjuz9mRq+D24hN3zpB5/3GtGOdwCmTjh0kqn
- HvNPv2088NeCHV6+B8311rmVMuSAWA/EU6cTDrd9SR/+MiUPB+IJUdfUPLS0buGsJp60=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=bGpLoC3knzXadOWZtYKaVuF5uOI+14bGyUxz/W66kSI=; b=lUbU72r5A9vv8iHOH6Of8epUim
+ 6NYXjGmBSUtbs1sRpLIByazrSWeuUkFazQnSNtnU0D9HIeT+MTBryd6qH0EqzLpX3GaRzJhctAlxL
+ B33qC2/bTw5mLtj2rHUBmOZNFadzcYTHgWYPi2Rj1ylRAz8w6aXyL8EOV0hDbXEgSMGw=;
+Received: from mailout2.samsung.com ([203.254.224.25])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t3WXZ-0003dT-36 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 23 Oct 2024 08:16:25 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 36341A44B9E;
- Wed, 23 Oct 2024 08:16:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 749DBC4CECD;
- Wed, 23 Oct 2024 08:16:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1729671374;
- bh=ny96yE+u0tbc540OPl+68cxi48B5XhGbATbld3m9Zf0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=aO68x6puPuyvAX9fExYgnnr6gVbl2DVv/nNC+5LVHw2aStd4sbDJTF0KNG74H8xmG
- CmM/TcCTc1t7sOEVjNnvKnpSwkpYb+gbPT8t9EGfuTsQQQavPKBFa6+4exFZ79WW1+
- GJf53si/dnz9lAMfl/hI9oKr7LJX5prZn2GSJPyq03/UJJmrSVgzun5kFDXqVb4C1g
- 4J4XW6pnGPLU/TUe48t9S1udOLJbykh7oI5tpdnekA1Iy/NeKn44DLNqeB9dVSYRzm
- rnmFbt3mEPOXOKnxZVfv4Yg48cO8wPhwS84OUIhlTUTGax1zLuGwyjKVcWKqDpoXz1
- k5y9NybdiSNxw==
-To: Zorro Lang <zlang@redhat.com>
-Date: Wed, 23 Oct 2024 16:16:02 +0800
-Message-Id: <20241023081602.3806579-2-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20241023081602.3806579-1-chao@kernel.org>
-References: <20241023081602.3806579-1-chao@kernel.org>
-MIME-Version: 1.0
-X-Spam-Score: -0.5 (/)
+ id 1t3XxL-0006Wa-DL for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 23 Oct 2024 09:47:10 +0000
+Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20241023094654epoutp024f1874d1834aaf38f56c67ea4065b161~BC_YHkwch2080620806epoutp02X
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 23 Oct 2024 09:46:54 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20241023094654epoutp024f1874d1834aaf38f56c67ea4065b161~BC_YHkwch2080620806epoutp02X
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1729676814;
+ bh=bGpLoC3knzXadOWZtYKaVuF5uOI+14bGyUxz/W66kSI=;
+ h=Subject:Reply-To:From:To:CC:In-Reply-To:Date:References:From;
+ b=HLcWtUe6xdWIfIfYobiGVYo6946fEOIVr1vHTfa9SmRWQzhkW+yWwnTzh+lO1Shaw
+ lACQdbg+eOiWLX6ieMtJ1ChtFbr8RvYmhSUa1PQxz4sCn8WHKTy5n6Rj47kT3++RTK
+ kjHmyJ/WzvKPApUVi3Jc9hqR24BoSUFCYngbbt1Q=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas2p2.samsung.com (KnoxPortal) with ESMTP id
+ 20241023094654epcas2p2ce40bff90e6e03b8a12b5d9b0e542a11~BC_X4DF5I3068730687epcas2p2G;
+ Wed, 23 Oct 2024 09:46:54 +0000 (GMT)
+Received: from epsmgec2p1.samsung.com (unknown [182.195.36.91]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4XYPMd4XTZz4x9Q8; Wed, 23 Oct
+ 2024 09:46:53 +0000 (GMT)
+X-AuditID: b6c32a43-7b1b87000000216f-f3-6718c60d579a
+Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
+ epsmgec2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 33.54.08559.D06C8176; Wed, 23 Oct 2024 18:46:53 +0900 (KST)
+Mime-Version: 1.0
+From: Daejun Park <daejun7.park@samsung.com>
+To: "chao@kernel.org" <chao@kernel.org>, "jaegeuk@kernel.org"
+ <jaegeuk@kernel.org>
+X-Priority: 3
+X-Content-Kind-Code: NORMAL
+In-Reply-To: <20241022083623.2641434-1-chao@kernel.org>
+X-CPGS-Detection: blocking_info_exchange
+X-Drm-Type: N,general
+X-Msg-Generator: Mail
+X-Msg-Type: PERSONAL
+X-Reply-Demand: N
+Message-ID: <20241023094553epcms2p1c4b830a99a1f6b10cba8fd9bbcd8e2ac@epcms2p1>
+Date: Wed, 23 Oct 2024 18:45:53 +0900
+X-CMS-MailID: 20241023094553epcms2p1c4b830a99a1f6b10cba8fd9bbcd8e2ac
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+X-CPGSPASS: Y
+X-CPGSPASS: Y
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpik+LIzCtJLcpLzFFi42LZdljTVJf3mES6wbMvShanp55lsnh5SNNi
+ 1YNwiyfrZzFbXFrkbnF51xw2i7+7brA5sHtsWtXJ5rF7wWcmj74tqxg9Zr5V8/i8SS6ANSrb
+ JiM1MSW1SCE1Lzk/JTMv3VbJOzjeOd7UzMBQ19DSwlxJIS8xN9VWycUnQNctMwfoBCWFssSc
+ UqBQQGJxsZK+nU1RfmlJqkJGfnGJrVJqQUpOgXmBXnFibnFpXrpeXmqJlaGBgZEpUGFCdsaF
+ DTNYC5ayVNxq2svYwPiAuYuRk0NCwETi/5ylTF2MXBxCAjsYJZ78fgzkcHDwCghK/N0hDFIj
+ LJAusbBpMguILSSgJLH+4ix2iLiexK2HaxhBbDYBHYnpJ+6DxUUEQiSa7jaxgcxkFtjOJHGz
+ +S/UMl6JGe1PWSBsaYnty7eCNXMKmEtM7N7BBBHXkPixrBeqXlTi5uq37DD2+2PzGSFsEYnW
+ e2ehagQlHvzcDRWXlLg9dxNUfb7E/yvLoewaiW0H5kHZ+hLXOjaC3cAr4Cuxt+MKWJxFQFVi
+ ++dnULe5SDx8fRzMZhaQl9j+dg4zKEyYBTQl1u/SBzElBJQljtyCquCT6Dj8lx3mw4aNv7Gy
+ d8x7AvWhmsS6n+uZJjAqz0IE9Cwku2Yh7FrAyLyKUSy1oDg3PTXZqMAQHrfJ+bmbGMGJUct5
+ B+OV+f/0DjEycTAeYpTgYFYS4VUqEU0X4k1JrKxKLcqPLyrNSS0+xGgK9OVEZinR5Hxgas4r
+ iTc0sTQwMTMzNDcyNTBXEue91zo3RUggPbEkNTs1tSC1CKaPiYNTqoHJ6jnjsRzV2Fdf8uY+
+ 6PuuGaCvmBJT4eBp/DpozYtrDX8u39lvK2bj6vOm50yXZsex5vQ0JyffrO/X6xmFjYS+ZjkK
+ PPwVeVEtIK25kGFLWHfPt8PP9z61Lsjasyuv41n9TYklE7f8tNsolKPHp33vzarg4M8ntl3u
+ /yLOnN29PXbZ+1dSkudm7Au/zTshL/Sf7frMJ4cNKj7ejzA1eX3hEc+ed+knt/28WdI981Gt
+ r20UD1fL1tpDnY118/sTXoUuY5M+dOn3OpFmv7lxLrWlD0LOWX+oE9CyvzlhD1ti4xKTX5Mk
+ WdW+1HB8TcwNzijqMb9ToxOd/vKrq8ylbXpOx+rSX4i7sZsZfQ6Zwq7EUpyRaKjFXFScCADi
+ gECHFQQAAA==
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20241022083741epcas2p3f9ca0827f9501134124fd47979e70cbc
+References: <20241022083623.2641434-1-chao@kernel.org>
+ <CGME20241022083741epcas2p3f9ca0827f9501134124fd47979e70cbc@epcms2p1>
+X-Spam-Score: -2.8 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: metadata of compressed inode should always be consistent
- after
- file compression, reservation, releasement and decompression, let's add a
- testcase to check it. Cc: Jaegeuk Kim <jaegeuk@kernel.org> Cc: Qi Han
- <hanqi@vivo.com>
- Signed-off-by: Chao Yu <chao@kernel.org> --- v2: - add
- _fixed_by_kernel_commit()
- - code cleanup - add error handling for _scratch_mkfs( [...] 
- Content analysis details:   (-0.5 points, 6.0 required)
+ Content preview:  Hi Chao Yu, > ... > > Let's always create an asynchronous
+ task in f2fs_handle_critical_error() > rather than calling
+ f2fs_record_stop_reason()
+ synchronously to avoid > this potential deadlock issue. > > Fixes: b6 [...]
+ Content analysis details:   (-2.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [203.254.224.25 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.25 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t3WXZ-0003dT-36
-Subject: [f2fs-dev] [PATCH v2 2/2] f2fs/007: add testcase to check
- consistency of compressed inode metadata
+X-Headers-End: 1t3XxL-0006Wa-DL
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to avoid potential deadlock in
+ f2fs_record_stop_reason()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,167 +149,30 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Qi Han <hanqi@vivo.com>,
- fstests@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Reply-To: daejun7.park@samsung.com
+Cc: "syzbot+be4a9983e95a5e25c8d3@syzkaller.appspotmail.com"
+ <syzbot+be4a9983e95a5e25c8d3@syzkaller.appspotmail.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-metadata of compressed inode should always be consistent after file
-compression, reservation, releasement and decompression, let's add
-a testcase to check it.
+Hi Chao Yu,
 
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Qi Han <hanqi@vivo.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-v2:
-- add _fixed_by_kernel_commit()
-- code cleanup
-- add error handling for _scratch_mkfs()
- tests/f2fs/007     | 116 +++++++++++++++++++++++++++++++++++++++++++++
- tests/f2fs/007.out |   4 ++
- 2 files changed, 120 insertions(+)
- create mode 100755 tests/f2fs/007
- create mode 100644 tests/f2fs/007.out
+> ...
+> 
+> Let's always create an asynchronous task in f2fs_handle_critical_error()
+> rather than calling f2fs_record_stop_reason() synchronously to avoid
+> this potential deadlock issue.
+> 
+> Fixes: b62e71be2110 ("f2fs: support errors=remount-rocontinuepanic mountoption")
+> Reported-by: syzbot+be4a9983e95a5e25c8d3@syzkaller.appspotmail.com
+> Closes: https://lore.kernel.org/all/6704d667.050a0220.1e4d62.0081.GAE@google.com
+> Signed-off-by: Chao Yu <chao@kernel.org>
 
-diff --git a/tests/f2fs/007 b/tests/f2fs/007
-new file mode 100755
-index 00000000..8979c21c
---- /dev/null
-+++ b/tests/f2fs/007
-@@ -0,0 +1,116 @@
-+#! /bin/bash
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright (c) 2024 Oppo.  All Rights Reserved.
-+#
-+# FS QA Test No. f2fs/007
-+#
-+# This is a regression test to check whether compressed metadata
-+# can become inconsistent after file compression, reservation
-+# releasement, and decompression.
-+#
-+. ./common/preamble
-+_begin_fstest auto quick rw compress
-+
-+_fixed_by_kernel_commit xxxxxxxxxxxx \
-+        "f2fs: compress: fix inconsistent update of i_blocks in release_compress_blocks and reserve_compress_blocks"
-+
-+testfile_prefix=$SCRATCH_MNT/testfile
-+fio_config=$tmp.fio
-+
-+cat >$fio_config <<EOF
-+[write_compressed_data_30]
-+name=mytest
-+ioengine=psync
-+rw=write
-+direct=0
-+bs=1M
-+filesize=1M
-+numjobs=1
-+filename=${testfile_prefix}30
-+buffer_compress_percentage=30
-+
-+[write_compressed_data_60]
-+name=mytest
-+ioengine=psync
-+rw=write
-+direct=0
-+bs=1M
-+filesize=1M
-+numjobs=1
-+filename=${testfile_prefix}60
-+buffer_compress_percentage=60
-+
-+[write_compressed_data_90]
-+name=mytest
-+ioengine=psync
-+rw=write
-+direct=0
-+bs=1M
-+filesize=1M
-+numjobs=1
-+filename=${testfile_prefix}90
-+buffer_compress_percentage=90
-+EOF
-+
-+_require_scratch
-+_require_fio $fio_config
-+_scratch_mkfs "-f -O extra_attr,compression" >> $seqres.full || _fail "mkfs failed"
-+_scratch_mount "-o compress_mode=user,compress_extension=*" >> $seqres.full
-+
-+echo -e "Run fio to initialize file w/ specified compress ratio" >> $seqres.full
-+cat $fio_config >> $seqres.full
-+$FIO_PROG $fio_config >> $seqres.full
-+_scratch_unmount
-+
-+# force to repaire if filesystem is corrupted
-+export FSCK_OPTIONS="-f $FSCK_OPTIONS"
-+
-+for i in 30 60 90; do
-+	testfile=$testfile_prefix$i
-+
-+	_scratch_mount "-o compress_mode=user" >> $seqres.full
-+	$F2FS_IO_PROG compress $testfile >> $seqres.full
-+	cblocks=`$F2FS_IO_PROG get_cblocks $testfile`
-+	echo "compression ratio is: "$cblocks" / 256"
-+
-+	_scratch_unmount
-+
-+	# 1. check after compression
-+	_check_scratch_fs
-+	if [ $? -ne 0 ]; then
-+		_fail "filesystem becomes corrupted after compress"
-+	fi
-+
-+	_scratch_mount >> $seqres.full
-+	$F2FS_IO_PROG release_cblocks $testfile >> $seqres.full
-+	_scratch_unmount
-+
-+	# 2. check after releasement
-+	_check_scratch_fs
-+	if [ $? -ne 0 ]; then
-+		_fail "filesystem becomes corrupted after release_cblocks"
-+	fi
-+
-+	_scratch_mount >> $seqres.full
-+	$F2FS_IO_PROG reserve_cblocks $testfile >> $seqres.full
-+	_scratch_unmount
-+
-+	# 3. check after rservation
-+	_check_scratch_fs
-+	if [ $? -ne 0 ]; then
-+		_fail "filesystem becomes corrupted after reserve_cblocks"
-+	fi
-+
-+	_scratch_mount "-o compress_mode=user" >> $seqres.full
-+	$F2FS_IO_PROG decompress $testfile >> $seqres.full
-+	_scratch_unmount
-+
-+	# 4. check after decompression
-+	_check_scratch_fs
-+	if [ $? -ne 0 ]; then
-+		_fail "filesystem becomes corrupted after decompress"
-+	fi
-+done
-+
-+status=0
-+exit
-diff --git a/tests/f2fs/007.out b/tests/f2fs/007.out
-new file mode 100644
-index 00000000..2ea71c18
---- /dev/null
-+++ b/tests/f2fs/007.out
-@@ -0,0 +1,4 @@
-+QA output created by 007
-+compression ratio is: 64 / 256
-+compression ratio is: 128 / 256
-+compression ratio is: 192 / 256
--- 
-2.40.1
-
+Reviewed-by: Daejun Park <daejun7.park@samsung.com>
 
 
 _______________________________________________
