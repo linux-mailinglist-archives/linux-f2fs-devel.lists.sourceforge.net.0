@@ -2,81 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B6D99B0E19
+	by mail.lfdr.de (Postfix) with ESMTPS id 934A89B0E1D
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Oct 2024 21:16:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t4Pmu-0003AO-D3;
-	Fri, 25 Oct 2024 19:15:55 +0000
+	id 1t4Pmv-0000Hs-0C;
+	Fri, 25 Oct 2024 19:15:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1t4Pmp-0003AG-Pa
+ (envelope-from <ebiggers@kernel.org>) id 1t4Pmt-0000Hj-Rv
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Oct 2024 19:15:51 +0000
+ Fri, 25 Oct 2024 19:15:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gUD0JLQy8tP5Fw9hKaruBFI07YFmoZewbrA21ci4eMg=; b=KiIoycYoouxmvogNOXj9r1q4lk
- GxpfmqkkYWViW/bzTZ1VROitztGxMeYHiLxZkymUru9cfN+xYNp+w9x+vWY8tZVrgcgJmwp4SdwSY
- eIRATvFLfMA7JVGwHx+NcE/4zGLDWgNByQB2DfmrW60qCec7fDQZF5GKzQy5ACC5f/yM=;
+ bh=VEpWY4sXA/S1bLoLnoNT9MT92zIxt9Oz+i41XLKt/cM=; b=JySK75zYGI04Fnj8dmgldaieuC
+ GwOhNtRcarLS93JYHHKs9UBBULXTyjcFV+JKSb0INlaXJOcFuy6fQyew1MkNOuqiyvja+pYRp/91e
+ VqbyGvCTTAhHGFdcy3zCzTlXEqFgEUxJ09HdVI+eVx7OOdD4RtthBp77wuwp8VoHWa6k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=gUD0JLQy8tP5Fw9hKaruBFI07YFmoZewbrA21ci4eMg=; b=h
- MvqI7ad4Wz0APSTUyB2vg+Geg9DxElxkVNPZ84xrVRqyapJRzbYuERsx+q0spnA31YZejhVk+F0Z+
- 76P/FdyEyPZw951qCsSBD73xPSKnHjtLRJHtCrflrdMt/sEvRCrcjiiQmP5uvWVyRdAYa46maL5zP
- /st67zWqEM4Em1os=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=VEpWY4sXA/S1bLoLnoNT9MT92zIxt9Oz+i41XLKt/cM=; b=gfrHspemLM0CixuBkhRif8awSY
+ YoYmqwoMZ+n3wY6Edfag5LcM6fhVQlBcNfKODbU+oWIxIpIh1WgcRRInKZEakjp5/eAsOpnopSBnB
+ gPI8wh6UBEg0BEnPGYZU9ffTduEw/RHn74DHXwOG5/APg7rj8oOqzVJq1cC+3GaWzwwk=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t4Pmo-0005fn-4q for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Oct 2024 19:15:51 +0000
+ id 1t4Pmt-0005hI-1I for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 25 Oct 2024 19:15:55 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id A6020A42B5F;
- Fri, 25 Oct 2024 19:13:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 475E8C4CEC3;
- Fri, 25 Oct 2024 19:15:42 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 698025C061C;
+ Fri, 25 Oct 2024 19:14:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4FEAC4CEE3;
+ Fri, 25 Oct 2024 19:15:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1729883743;
- bh=LZGDCp6OlDYJbJtHkdL+6H+pJYptArgs+2dHiDwITZc=;
- h=From:To:Cc:Subject:Date:From;
- b=Y0JN0wkwmr6zmfPhz4zcMXdXSOIJbvpOQK3aM+nPrlr7L/tFCk8os9NBxtFpg4vn0
- dLFBc416VqXGWtM9r9ov1yFLzdJ7tDKGM3DTCm8C1XP9h3pn2R5oHv8i37yCEgNrJm
- jYd7oy404MvLPHIfNzBnLjpTzFYm0NWzCQkNZVQfFpxZEqMgh8fzPSDEFy8pzvFM8E
- 4KZ9a1M2IYILzjlFTs/Xmryv9MzjfXWbQQ7IPSnK/QrKO0u1MI4GWcbTM+oT+2ekdq
- 6x6BQv/pD0QnVl3anqQ1StDrNgn9Gl/i37yoAyrCsV09En0oO+DVPJWjdzHdFCLW5G
- IjXRhBohyIqoQ==
+ s=k20201202; t=1729883744;
+ bh=ABiaGm+ovhik7YFigewZFubogtN32tz5BD1p0OQq720=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Vz1H2ANIZERjEpj+I85MKJfdlEpz1SofCIjzgMXNRgrjt8vSPi8NWgf8Q6R4pjn5r
+ X2cGZ6mXRM4KH4EJHSmPpw/sQpx1SXtGmPuNI0f4GTkha+23sVsdFNFd7oNgiKNIcK
+ Jeiz7i0/NpA9zcRhJUWRAgAppnb1vyaxtwlHI2wVbMQvS5SJL0WhiR5D+Epx1sd9PD
+ t6xEbw2ztBl7vtK2VjB5bf9Hc9lkERBR+cTObiA8hRyoMeNv+0AKkbhZIhy9ZUJYqD
+ nAQgRkoDXClPz1x5qFL7LMaY1913EqBa3xDEAbpa7lNBBD6ftJGS6Y6RMRGWhPAf/s
+ UKLLrPEYq5UmQ==
 To: linux-kernel@vger.kernel.org
-Date: Fri, 25 Oct 2024 12:14:36 -0700
-Message-ID: <20241025191454.72616-1-ebiggers@kernel.org>
+Date: Fri, 25 Oct 2024 12:14:37 -0700
+Message-ID: <20241025191454.72616-2-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.47.0
+In-Reply-To: <20241025191454.72616-1-ebiggers@kernel.org>
+References: <20241025191454.72616-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: 1.8 (+)
+X-Spam-Score: -5.7 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patchset is also available in git via: git fetch
- https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git
- crc32-lib-v2 CRC32 is a family of common non-cryptographic integrity check
- algorithms that are fairly fast with a portable C implementation and become
- far faster still with the CRC32 or carryless multiplication in [...] 
- Content analysis details:   (1.8 points, 6.0 required)
+ Content preview: From: Eric Biggers <ebiggers@google.com> Remove the leading
+ underscores from __crc32c_le_base(). This is in preparation for adding
+ crc32c_le_arch()
+ and eventually renaming __crc32c_le() to crc32c_le(). 
+ Content analysis details:   (-5.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -85,9 +87,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t4Pmo-0005fn-4q
-Subject: [f2fs-dev] [PATCH v2 00/18] Wire up CRC32 library functions to
- arch-optimized code
+X-Headers-End: 1t4Pmt-0005hI-1I
+Subject: [f2fs-dev] [PATCH v2 01/18] lib/crc32: drop leading underscores
+ from __crc32c_le_base
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,238 +109,166 @@ Cc: linux-arch@vger.kernel.org, linux-s390@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-crypto@vger.kernel.org,
  loongarch@lists.linux.dev, sparclinux@vger.kernel.org,
  linux-riscv@lists.infradead.org, linux-ext4@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
+ linuxppc-dev@lists.ozlabs.org, Ard Biesheuvel <ardb@kernel.org>,
+ linux-arm-kernel@lists.infradead.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patchset is also available in git via:
+From: Eric Biggers <ebiggers@google.com>
 
-    git fetch https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git crc32-lib-v2
+Remove the leading underscores from __crc32c_le_base().
 
-CRC32 is a family of common non-cryptographic integrity check algorithms
-that are fairly fast with a portable C implementation and become far
-faster still with the CRC32 or carryless multiplication instructions
-that most CPUs have.  9 architectures already have optimized code for at
-least some CRC32 variants; however, except for arm64 this optimized code
-was only accessible through the crypto API, not the library functions.
+This is in preparation for adding crc32c_le_arch() and eventually
+renaming __crc32c_le() to crc32c_le().
 
-This patchset fixes that so that the CRC32 library functions use the
-optimized code.  This allows users to just use the library instead of
-the crypto API.  This is much simpler and also improves performance due
-to eliminating the crypto API overhead including an indirect call.  Some
-examples of updating users are included at the end of the patchset.
+Reviewed-by: Ard Biesheuvel <ardb@kernel.org>
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ arch/arm64/lib/crc32-glue.c | 2 +-
+ arch/riscv/lib/crc32.c      | 2 +-
+ crypto/crc32c_generic.c     | 8 ++++----
+ include/linux/crc32.h       | 2 +-
+ lib/crc32.c                 | 4 ++--
+ lib/crc32test.c             | 2 +-
+ 6 files changed, 10 insertions(+), 10 deletions(-)
 
-Note: crc32c() was a weird case.  It was a library function layered on
-top of the crypto API, which in turn is layered on top of the real
-library functions.  So while it was easy to use, it was still subject to
-the crypto API overhead.  This patchset provides CRC32C acceleration in
-the real library functions directly.
-
-The updated CRC32 library design is:
-
-- Each arch's CRC32 code (all variants) is in arch/$ARCH/lib/crc32*.
-  This adopts what arm64 and riscv already did.  Note, the crypto
-  directory is not used because CRC32 is not a cryptographic algorithm.
-
-- Weak symbols are no longer used.  Instead there are crc32*_base() and
-  crc32*_arch(), and the appropriate ones are called based on the
-  kconfig.  This is similar to how the ChaCha20 library code works.
-
-- Each arch's CRC32 code is enabled by default when CRC32 is enabled,
-  but it can now be disabled, controlled by the choice that previously
-  controlled the base implementation only.  It can also now be built as
-  a module if CRC32 is a module too, in which case it will be
-  automatically loaded via direct symbol dependency when appropriate.
-
-- Instead of lots of pointless glue code that wires up each CRC32
-  variant to the crypto API for each architecture, we now just rely on
-  the existing shash algorithms that use the library functions.
-
-- As before, the library functions don't provide access to off-CPU
-  crypto accelerators.  But these appear to have very little, if any,
-  real-world relevance for CRC32 which is very fast on CPUs.
-
-Future work should apply a similar cleanup to crct10dif which is a
-variant of CRC16.
-
-I tested all arches in QEMU using CONFIG_CRC32_SELFTEST and the crypto
-self-tests, except for mips which I couldn't figure out how to do.
-
-This patchset has the following dependencies on recent patches, which
-hopefully will be merged soon through the appropriate trees:
-
-- "crypto - move crypto_simd_disabled_for_test to lib"
-  (https://lore.kernel.org/linux-crypto/20241018235343.425758-1-ebiggers@kernel.org/)
-- "crypto: x86/crc32c - jump table elimination and other cleanups"
-  (https://lore.kernel.org/linux-crypto/20241014042447.50197-1-ebiggers@kernel.org/)
-- "arm64: Speed up CRC-32 using PMULL instructions"
-  (https://lore.kernel.org/linux-crypto/20241018075347.2821102-5-ardb+git@google.com/)
-- "crypto: Enable fuzz testing for arch code"
-  (https://lore.kernel.org/linux-crypto/20241016185722.400643-4-ardb+git@google.com/)
-- "crypto: mips/crc32 - fix the CRC32C implementation"
-  (https://lore.kernel.org/linux-crypto/20241020180258.8060-1-ebiggers@kernel.org/)
-- "bcachefs: Explicitly select CRYPTO from BCACHEFS_FS"
-  (https://lore.kernel.org/linux-bcachefs/20241023183521.3752681-1-ebiggers@kernel.org/)
-
-Everything can be retrieved from git using the command given earlier.
-
-Since this patchset touches many areas, getting it merged may be
-difficult.  One option is a pull request with the whole patchset
-directly to Linus.  Another is to have at least patches 1-4 taken
-through the crypto tree in v6.13; then the arch patches can land
-separately afterwards, followed by the rest.
-
-Changed in v2:
-  - Added a way to determine if the arch-optimized code is actually
-    being used at runtime, and used this to register the appropriate
-    shash algorithms with crypto API.
-  - Added a patch that converts iSCSI to use the library.
-  - Listed a bcachefs patch as a dependency.
-  - Added Ard's Reviewed-by.
-
-Eric Biggers (18):
-  lib/crc32: drop leading underscores from __crc32c_le_base
-  lib/crc32: improve support for arch-specific overrides
-  lib/crc32: expose whether the lib is really optimized at runtime
-  crypto: crc32 - don't unnecessarily register arch algorithms
-  arm/crc32: expose CRC32 functions through lib
-  loongarch/crc32: expose CRC32 functions through lib
-  mips/crc32: expose CRC32 functions through lib
-  powerpc/crc32: expose CRC32 functions through lib
-  s390/crc32: expose CRC32 functions through lib
-  sparc/crc32: expose CRC32 functions through lib
-  x86/crc32: update prototype for crc_pcl()
-  x86/crc32: update prototype for crc32_pclmul_le_16()
-  x86/crc32: expose CRC32 functions through lib
-  lib/crc32: make crc32c() go directly to lib
-  ext4: switch to using the crc32c library
-  jbd2: switch to using the crc32c library
-  f2fs: switch to using the crc32 library
-  scsi: target: iscsi: switch to using the crc32c library
-
- arch/arm/Kconfig                              |   1 +
- arch/arm/configs/milbeaut_m10v_defconfig      |   1 -
- arch/arm/configs/multi_v7_defconfig           |   1 -
- arch/arm/crypto/Kconfig                       |  14 -
- arch/arm/crypto/Makefile                      |   2 -
- arch/arm/crypto/crc32-ce-glue.c               | 247 ------------
- arch/arm/lib/Makefile                         |   3 +
- .../crc32-ce-core.S => lib/crc32-core.S}      |   0
- arch/arm/lib/crc32-glue.c                     | 118 ++++++
- arch/arm64/Kconfig                            |   1 +
- arch/arm64/lib/Makefile                       |   3 +-
- arch/arm64/lib/crc32-glue.c                   |  30 +-
- arch/loongarch/Kconfig                        |   1 +
- arch/loongarch/configs/loongson3_defconfig    |   1 -
- arch/loongarch/crypto/Kconfig                 |   9 -
- arch/loongarch/crypto/Makefile                |   2 -
- arch/loongarch/crypto/crc32-loongarch.c       | 300 ---------------
- arch/loongarch/lib/Makefile                   |   2 +
- arch/loongarch/lib/crc32-loongarch.c          | 130 +++++++
- arch/mips/Kconfig                             |   5 +-
- arch/mips/configs/eyeq5_defconfig             |   1 -
- arch/mips/configs/eyeq6_defconfig             |   1 -
- arch/mips/configs/generic/32r6.config         |   2 -
- arch/mips/configs/generic/64r6.config         |   1 -
- arch/mips/crypto/Kconfig                      |   9 -
- arch/mips/crypto/Makefile                     |   2 -
- arch/mips/crypto/crc32-mips.c                 | 354 ------------------
- arch/mips/lib/Makefile                        |   2 +
- arch/mips/lib/crc32-mips.c                    | 187 +++++++++
- arch/powerpc/Kconfig                          |   1 +
- arch/powerpc/configs/powernv_defconfig        |   1 -
- arch/powerpc/configs/ppc64_defconfig          |   1 -
- arch/powerpc/crypto/Kconfig                   |  15 +-
- arch/powerpc/crypto/Makefile                  |   2 -
- arch/powerpc/crypto/crc32c-vpmsum_glue.c      | 173 ---------
- arch/powerpc/crypto/crct10dif-vpmsum_asm.S    |   2 +-
- arch/powerpc/lib/Makefile                     |   3 +
- arch/powerpc/lib/crc32-glue.c                 |  86 +++++
- .../{crypto => lib}/crc32-vpmsum_core.S       |   0
- .../{crypto => lib}/crc32c-vpmsum_asm.S       |   0
- arch/riscv/Kconfig                            |   1 +
- arch/riscv/lib/Makefile                       |   3 +-
- arch/riscv/lib/{crc32.c => crc32-riscv.c}     |  30 +-
- arch/s390/Kconfig                             |   1 +
- arch/s390/configs/debug_defconfig             |   1 -
- arch/s390/configs/defconfig                   |   1 -
- arch/s390/crypto/Kconfig                      |  12 -
- arch/s390/crypto/Makefile                     |   2 -
- arch/s390/crypto/crc32-vx.c                   | 306 ---------------
- arch/s390/lib/Makefile                        |   3 +
- arch/s390/lib/crc32-glue.c                    |  86 +++++
- arch/s390/{crypto => lib}/crc32-vx.h          |   0
- arch/s390/{crypto => lib}/crc32be-vx.c        |   0
- arch/s390/{crypto => lib}/crc32le-vx.c        |   0
- arch/sparc/Kconfig                            |   1 +
- arch/sparc/crypto/Kconfig                     |  10 -
- arch/sparc/crypto/Makefile                    |   4 -
- arch/sparc/crypto/crc32c_glue.c               | 184 ---------
- arch/sparc/lib/Makefile                       |   2 +
- arch/sparc/lib/crc32_glue.c                   |  86 +++++
- arch/sparc/{crypto => lib}/crc32c_asm.S       |   2 +-
- arch/x86/Kconfig                              |   1 +
- arch/x86/crypto/Kconfig                       |  22 --
- arch/x86/crypto/Makefile                      |   7 -
- arch/x86/crypto/crc32-pclmul_glue.c           | 202 ----------
- arch/x86/crypto/crc32c-intel_glue.c           | 250 -------------
- arch/x86/lib/Makefile                         |   4 +
- arch/x86/lib/crc32-glue.c                     | 116 ++++++
- .../crc32-pclmul_asm.S => lib/crc32-pclmul.S} |  19 +-
- .../crc32c-3way.S}                            |  63 ++--
- crypto/crc32_generic.c                        |   8 +-
- crypto/crc32c_generic.c                       |  12 +-
- drivers/target/iscsi/Kconfig                  |   3 +-
- drivers/target/iscsi/iscsi_target.c           | 153 +++-----
- drivers/target/iscsi/iscsi_target_login.c     |  50 ---
- drivers/target/iscsi/iscsi_target_login.h     |   1 -
- drivers/target/iscsi/iscsi_target_nego.c      |  21 +-
- fs/ext4/Kconfig                               |   3 +-
- fs/ext4/ext4.h                                |  25 +-
- fs/ext4/super.c                               |  15 -
- fs/f2fs/Kconfig                               |   3 +-
- fs/f2fs/f2fs.h                                |  19 +-
- fs/f2fs/super.c                               |  15 -
- fs/jbd2/Kconfig                               |   2 -
- fs/jbd2/journal.c                             |  25 +-
- include/linux/crc32.h                         |  50 ++-
- include/linux/crc32c.h                        |   7 +-
- include/linux/jbd2.h                          |  31 +-
- include/target/iscsi/iscsi_target_core.h      |   3 -
- lib/Kconfig                                   |  80 ++--
- lib/Makefile                                  |   1 -
- lib/crc32.c                                   |  29 +-
- lib/crc32test.c                               |   2 +-
- lib/libcrc32c.c                               |  74 ----
- 94 files changed, 1128 insertions(+), 2637 deletions(-)
- delete mode 100644 arch/arm/crypto/crc32-ce-glue.c
- rename arch/arm/{crypto/crc32-ce-core.S => lib/crc32-core.S} (100%)
- create mode 100644 arch/arm/lib/crc32-glue.c
- delete mode 100644 arch/loongarch/crypto/crc32-loongarch.c
- create mode 100644 arch/loongarch/lib/crc32-loongarch.c
- delete mode 100644 arch/mips/crypto/crc32-mips.c
- create mode 100644 arch/mips/lib/crc32-mips.c
- delete mode 100644 arch/powerpc/crypto/crc32c-vpmsum_glue.c
- create mode 100644 arch/powerpc/lib/crc32-glue.c
- rename arch/powerpc/{crypto => lib}/crc32-vpmsum_core.S (100%)
- rename arch/powerpc/{crypto => lib}/crc32c-vpmsum_asm.S (100%)
- rename arch/riscv/lib/{crc32.c => crc32-riscv.c} (90%)
- delete mode 100644 arch/s390/crypto/crc32-vx.c
- create mode 100644 arch/s390/lib/crc32-glue.c
- rename arch/s390/{crypto => lib}/crc32-vx.h (100%)
- rename arch/s390/{crypto => lib}/crc32be-vx.c (100%)
- rename arch/s390/{crypto => lib}/crc32le-vx.c (100%)
- delete mode 100644 arch/sparc/crypto/crc32c_glue.c
- create mode 100644 arch/sparc/lib/crc32_glue.c
- rename arch/sparc/{crypto => lib}/crc32c_asm.S (92%)
- delete mode 100644 arch/x86/crypto/crc32-pclmul_glue.c
- delete mode 100644 arch/x86/crypto/crc32c-intel_glue.c
- create mode 100644 arch/x86/lib/crc32-glue.c
- rename arch/x86/{crypto/crc32-pclmul_asm.S => lib/crc32-pclmul.S} (95%)
- rename arch/x86/{crypto/crc32c-pcl-intel-asm_64.S => lib/crc32c-3way.S} (92%)
- delete mode 100644 lib/libcrc32c.c
-
+diff --git a/arch/arm64/lib/crc32-glue.c b/arch/arm64/lib/crc32-glue.c
+index 295ae3e6b997..ad015223d15d 100644
+--- a/arch/arm64/lib/crc32-glue.c
++++ b/arch/arm64/lib/crc32-glue.c
+@@ -42,11 +42,11 @@ u32 __pure crc32_le(u32 crc, unsigned char const *p, size_t len)
+ }
+ 
+ u32 __pure __crc32c_le(u32 crc, unsigned char const *p, size_t len)
+ {
+ 	if (!alternative_has_cap_likely(ARM64_HAS_CRC32))
+-		return __crc32c_le_base(crc, p, len);
++		return crc32c_le_base(crc, p, len);
+ 
+ 	if (len >= min_len && cpu_have_named_feature(PMULL) && crypto_simd_usable()) {
+ 		kernel_neon_begin();
+ 		crc = crc32c_le_arm64_4way(crc, p, len);
+ 		kernel_neon_end();
+diff --git a/arch/riscv/lib/crc32.c b/arch/riscv/lib/crc32.c
+index d7dc599af3ef..333fb7af1192 100644
+--- a/arch/riscv/lib/crc32.c
++++ b/arch/riscv/lib/crc32.c
+@@ -224,11 +224,11 @@ u32 __pure crc32_le(u32 crc, unsigned char const *p, size_t len)
+ }
+ 
+ u32 __pure __crc32c_le(u32 crc, unsigned char const *p, size_t len)
+ {
+ 	return crc32_le_generic(crc, p, len, CRC32C_POLY_LE,
+-				CRC32C_POLY_QT_LE, __crc32c_le_base);
++				CRC32C_POLY_QT_LE, crc32c_le_base);
+ }
+ 
+ static inline u32 crc32_be_unaligned(u32 crc, unsigned char const *p,
+ 				     size_t len)
+ {
+diff --git a/crypto/crc32c_generic.c b/crypto/crc32c_generic.c
+index 7c2357c30fdf..635599b255ec 100644
+--- a/crypto/crc32c_generic.c
++++ b/crypto/crc32c_generic.c
+@@ -83,11 +83,11 @@ static int chksum_setkey(struct crypto_shash *tfm, const u8 *key,
+ static int chksum_update(struct shash_desc *desc, const u8 *data,
+ 			 unsigned int length)
+ {
+ 	struct chksum_desc_ctx *ctx = shash_desc_ctx(desc);
+ 
+-	ctx->crc = __crc32c_le_base(ctx->crc, data, length);
++	ctx->crc = crc32c_le_base(ctx->crc, data, length);
+ 	return 0;
+ }
+ 
+ static int chksum_update_arch(struct shash_desc *desc, const u8 *data,
+ 			      unsigned int length)
+@@ -106,11 +106,11 @@ static int chksum_final(struct shash_desc *desc, u8 *out)
+ 	return 0;
+ }
+ 
+ static int __chksum_finup(u32 *crcp, const u8 *data, unsigned int len, u8 *out)
+ {
+-	put_unaligned_le32(~__crc32c_le_base(*crcp, data, len), out);
++	put_unaligned_le32(~crc32c_le_base(*crcp, data, len), out);
+ 	return 0;
+ }
+ 
+ static int __chksum_finup_arch(u32 *crcp, const u8 *data, unsigned int len,
+ 			       u8 *out)
+@@ -198,16 +198,16 @@ static struct shash_alg algs[] = {{
+ }};
+ 
+ static int __init crc32c_mod_init(void)
+ {
+ 	/* register the arch flavor only if it differs from the generic one */
+-	return crypto_register_shashes(algs, 1 + (&__crc32c_le != &__crc32c_le_base));
++	return crypto_register_shashes(algs, 1 + (&__crc32c_le != &crc32c_le_base));
+ }
+ 
+ static void __exit crc32c_mod_fini(void)
+ {
+-	crypto_unregister_shashes(algs, 1 + (&__crc32c_le != &__crc32c_le_base));
++	crypto_unregister_shashes(algs, 1 + (&__crc32c_le != &crc32c_le_base));
+ }
+ 
+ subsys_initcall(crc32c_mod_init);
+ module_exit(crc32c_mod_fini);
+ 
+diff --git a/include/linux/crc32.h b/include/linux/crc32.h
+index 87f788c0d607..5b07fc9081c4 100644
+--- a/include/linux/crc32.h
++++ b/include/linux/crc32.h
+@@ -37,11 +37,11 @@ static inline u32 crc32_le_combine(u32 crc1, u32 crc2, size_t len2)
+ {
+ 	return crc32_le_shift(crc1, len2) ^ crc2;
+ }
+ 
+ u32 __pure __crc32c_le(u32 crc, unsigned char const *p, size_t len);
+-u32 __pure __crc32c_le_base(u32 crc, unsigned char const *p, size_t len);
++u32 __pure crc32c_le_base(u32 crc, unsigned char const *p, size_t len);
+ 
+ /**
+  * __crc32c_le_combine - Combine two crc32c check values into one. For two
+  * 			 sequences of bytes, seq1 and seq2 with lengths len1
+  * 			 and len2, __crc32c_le() check values were calculated
+diff --git a/lib/crc32.c b/lib/crc32.c
+index ff587fee3893..c67059b0082b 100644
+--- a/lib/crc32.c
++++ b/lib/crc32.c
+@@ -205,12 +205,12 @@ EXPORT_SYMBOL(crc32_le);
+ EXPORT_SYMBOL(__crc32c_le);
+ 
+ u32 __pure crc32_le_base(u32, unsigned char const *, size_t) __alias(crc32_le);
+ EXPORT_SYMBOL(crc32_le_base);
+ 
+-u32 __pure __crc32c_le_base(u32, unsigned char const *, size_t) __alias(__crc32c_le);
+-EXPORT_SYMBOL(__crc32c_le_base);
++u32 __pure crc32c_le_base(u32, unsigned char const *, size_t) __alias(__crc32c_le);
++EXPORT_SYMBOL(crc32c_le_base);
+ 
+ u32 __pure crc32_be_base(u32, unsigned char const *, size_t) __alias(crc32_be);
+ 
+ /*
+  * This multiplies the polynomials x and y modulo the given modulus.
+diff --git a/lib/crc32test.c b/lib/crc32test.c
+index 03cf5c1f2f5d..30b8da4d8be4 100644
+--- a/lib/crc32test.c
++++ b/lib/crc32test.c
+@@ -824,11 +824,11 @@ static void crc32test_regenerate(void)
+ 	for (i = 0; i < ARRAY_SIZE(test); i++) {
+ 		pr_info("{0x%08x, 0x%08x, 0x%08x, 0x%08x, 0x%08x, 0x%08x},\n",
+ 			test[i].crc, test[i].start, test[i].length,
+ 			crc32_le_base(test[i].crc, test_buf + test[i].start, test[i].length),
+ 			crc32_be_base(test[i].crc, test_buf + test[i].start, test[i].length),
+-			__crc32c_le_base(test[i].crc, test_buf + test[i].start, test[i].length));
++			crc32c_le_base(test[i].crc, test_buf + test[i].start, test[i].length));
+ 	}
+ }
+ 
+ static int __init crc32test_init(void)
+ {
 -- 
 2.47.0
 
