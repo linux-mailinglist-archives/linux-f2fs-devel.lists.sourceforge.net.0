@@ -2,132 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C64DD9AF8C6
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Oct 2024 06:11:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21F739AFB4D
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Oct 2024 09:40:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t4Bfg-0001dK-Si;
-	Fri, 25 Oct 2024 04:11:32 +0000
+	id 1t4Ew4-0001j4-T3;
+	Fri, 25 Oct 2024 07:40:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1t4Bff-0001dD-HA
+ (envelope-from <ardb@kernel.org>) id 1t4Ew3-0001iv-Gv
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Oct 2024 04:11:30 +0000
+ Fri, 25 Oct 2024 07:40:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3C6auYKzVKIpEFES/i+1K0CJmzvBwKiBfR6b6wIFhXE=; b=Fd/Q1bIuNqX9yyO0oRXnOa1MCk
- m60UN68B4mTcz0cKlZ94ynkEZm8dv6luSHD4HAKpQw7EFry2OyPV8Ulg3VrA6KplNskxBiDRKzOCt
- pTwonKaUIrlSklO2Glqy8spOt7SQ9+nQdN0tIPwBQeqIbVXVCSVdDW3+PifsgtTdEx1Y=;
+ bh=+Z5ww8tsz14z0EpRv1r8MjOBORCOnzfSXkYCYwpD6ZE=; b=T/Xc7QdjzMig1rxLsKOQpiSFDA
+ QFKUH9J+64CMPK/qLJFQ2/XnLn7/yOmlkiICKK13LI+VHJzs8tv/uDSnbH+bEKSKCuSVULRPBJB0T
+ pA90er+sJeNhZjGs6Ifj1ggiOQOQILob/dZeYs+ESxAwAaTJpacm/joVZ5pC9V4Ruv/Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3C6auYKzVKIpEFES/i+1K0CJmzvBwKiBfR6b6wIFhXE=; b=L6jy9e8C7stWlNA8I2odUsOLdi
- io54vG2vV5msevh1OVVEMSAataEpLYznbx1ic7arTNUgkup1P9tfpY+DoCgQVI6EIRZGVipXV1Gks
- 81BHdBo7+2skNyz6Lt8vrfiZeTrMA5wAoE85HGx20CNaT8qcLM9dqXkQ0oFdOX2cbF58=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ bh=+Z5ww8tsz14z0EpRv1r8MjOBORCOnzfSXkYCYwpD6ZE=; b=ajV2C8UVXX8j9MXT0BgKUA7JkP
+ zPfXOGVvx7tFOi+TMr8hV+t9hvuVx19DqPTL/5Go0Wn5Qfib7JvpH3uknPIUxfSpVkbYuxbkIOr7u
+ 20PNfkZLLSxnyk+8L0U+D9eH341MEm7jloB4t9UNhqy273UVE7SSGzSngyuKRgqOWYQw=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t4Bfe-000386-50 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Oct 2024 04:11:30 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1729829484;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=3C6auYKzVKIpEFES/i+1K0CJmzvBwKiBfR6b6wIFhXE=;
- b=E14iR4XFXqABFrQpogdWfgMTrrBWz5z7bl0TwzoTBlcpaiyZ/9FiEvjHH4Qu9OVo5Rs0Z+
- DA3NSIZpMXyGqASr1encPExU2+vZEUaIvjST68JsmKI2shu/8ZpQtpT44jo4moZeP1KWRa
- DBhpHiQtWY9CCblc3DaIA/wFmv8EtBE=
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
- [209.85.216.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-656-Y8iC84XVOsWEOT8f_u1cfw-1; Fri, 25 Oct 2024 00:11:21 -0400
-X-MC-Unique: Y8iC84XVOsWEOT8f_u1cfw-1
-Received: by mail-pj1-f72.google.com with SMTP id
- 98e67ed59e1d1-2e2bb354e91so1633982a91.2
+ id 1t4Ew3-0005w3-Av for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 25 Oct 2024 07:40:40 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 26BB9A42BE4
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 24 Oct 2024 21:11:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729829480; x=1730434280;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3C6auYKzVKIpEFES/i+1K0CJmzvBwKiBfR6b6wIFhXE=;
- b=NI7s8BPl6UiP8oUNgqBkK88Lxhye2dKnsqXwsdxZd4s6W0e7vF1MkoXH07LX2hK62D
- p6/6Wwva5iklFKdmKyVu3bN21o7/haUNXSH04WlIgA7p65Xpc1K0QuE5N51YZ66YGTBi
- 3osa01q41JWLWUKGMTBtDwbzVKbJ3oG4cG+Xxtqtf0oxDWP5fb6W6ucxFqRW8TJv9g4k
- f+6EkdbVSaz5KItFhSEbb94J2KmHjaTpy5NgISrw/eCJzrq7bT7YkJ+7pdTLPUrrom2y
- eHssc7PoL7oGBTldMChJXc5mV84OY9EQjNCmcePmdhCv+fZQixnOrU7dTIJEoDbVmVRU
- KRFQ==
+ Fri, 25 Oct 2024 07:38:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39E32C4CEE5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 25 Oct 2024 07:40:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1729842028;
+ bh=MU0jg6+43zlNLQVd5aws5IUywfNhZ0pf6SBTcrSFP0A=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=Bns4FpYEweNUDYPWIatTemxTcPXBriNtb6rjMCIGvpZQbQ7/qRGjK2NUk57EKd8ri
+ Mk7HPhv+F7E7+ne72q/Ef8D3KErbLL714tyOI87uCXXzpqZPjXEj/i4/+9MWReDl8T
+ 31XCgHFlQsFjl2p95RIKGtfYYk1e4JVgIerVkCXXYdafVkZcg3QKpbq5FXjAqZ38fM
+ DtIUhA6qC/BFjMOrnIVEq9dcd5psyxRFBFdvdxlZAU53TWdpVzWckgliF8es3kpb65
+ T8IX9T0uVRiGneDDJjNiP5c9pbh4ac6m1We4OCbuxBE3WORWLtjtdEfr9QTbaV9H3L
+ 0RlKKzK9CtgkA==
+Received: by mail-lf1-f42.google.com with SMTP id
+ 2adb3069b0e04-539d9fffea1so1594050e87.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 25 Oct 2024 00:40:28 -0700 (PDT)
 X-Forwarded-Encrypted: i=1;
- AJvYcCVIS0wDyGzSzgb4VPsy21M9rbdspkBBrO3QBmelMlwFvAxzUaSTaVzufpClvYx2hh6GEXO67nSjXHn1ZYAISsNb@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzCxEBsDzTrOL0hLdkFRHzDXRMBVnTP+Le0YBAAQL0sEAa+Lom+
- MJ0iWGh9IIDiB85MkJ/kxzlIoSMc5sUNiaaW7KAkQAFY4HMj85DC6VxS44EWd+EcvEYLs5CFnY5
- hW0JnxVDGN3FdmsEe3tLwevP6826iIE+bMqpux7be0dXfK1n4Z9xiqZ43FuvsXW0TUh760bXN6D
- w=
-X-Received: by 2002:a17:90a:d512:b0:2e0:921a:3383 with SMTP id
- 98e67ed59e1d1-2e76b5bbd39mr9869281a91.1.1729829480530; 
- Thu, 24 Oct 2024 21:11:20 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFtLxfla3FbB1McVSJoKWugUU11IDzU9KFpry60sKdXTkr7/Qylp9lAFDxB9cSVApc4jHKOjg==
-X-Received: by 2002:a17:90a:d512:b0:2e0:921a:3383 with SMTP id
- 98e67ed59e1d1-2e76b5bbd39mr9869267a91.1.1729829480205; 
- Thu, 24 Oct 2024 21:11:20 -0700 (PDT)
-Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([43.228.180.230])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e8e3749154sm322326a91.46.2024.10.24.21.11.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Oct 2024 21:11:19 -0700 (PDT)
-Date: Fri, 25 Oct 2024 12:11:15 +0800
-From: Zorro Lang <zlang@redhat.com>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20241025041115.fmv2wt7qy6s55hip@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-References: <20241012101501.377899-1-chao@kernel.org>
+ AJvYcCU1R7px/dggitUwxUQCAbV5/QpqOh2glP4eLZIIUezAr4P9D9TqPMWhWb48bxnuT9hTO0tdB6/vdZPt+S/QkbGd@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yxk14ZIDfYtqxBZGfAG92iaRIFGKFJZcJpl2YXeNr0HUyghDdl8
+ y3d+3hj6+gM1BolRa+6IrSGav7Os99UNEdePf1z+gKjwf3rZIrrs8AJ3VGfbNAfnRou0wjRDseE
+ uNZDTMmIhxNyD9TgJUGvLFas5ris=
+X-Google-Smtp-Source: AGHT+IEDAFlBfPHEymedMPiV9v2ocdpZeEcg/F0dpwJWqR1hIRTo+DXjnmCVJHCSWsx5j4Mh2CDnA31kbRPsOrauBps=
+X-Received: by 2002:a05:6512:3c8c:b0:539:8f3c:457c with SMTP id
+ 2adb3069b0e04-53b23e9d130mr2447127e87.53.1729842026517; Fri, 25 Oct 2024
+ 00:40:26 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20241012101501.377899-1-chao@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-X-Spam-Score: -0.5 (/)
+References: <20241021002935.325878-1-ebiggers@kernel.org>
+In-Reply-To: <20241021002935.325878-1-ebiggers@kernel.org>
+Date: Fri, 25 Oct 2024 09:40:15 +0200
+X-Gmail-Original-Message-ID: <CAMj1kXHDo8dijRbSVuHzTddMhp4A+nc1t8AgvoENmS=DZ-kAOQ@mail.gmail.com>
+Message-ID: <CAMj1kXHDo8dijRbSVuHzTddMhp4A+nc1t8AgvoENmS=DZ-kAOQ@mail.gmail.com>
+To: Eric Biggers <ebiggers@kernel.org>
+X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sat, Oct 12, 2024 at 06:15:01PM +0800, Chao Yu wrote: >
- This patch introduce a regression test to check whether f2fs handles > dirty
- inode correctly when checkpoint is disabled in a corner case, > [...] 
- Content analysis details:   (-0.5 points, 6.0 required)
+ Content preview:  On Mon, 21 Oct 2024 at 02:29,
+ Eric Biggers <ebiggers@kernel.org>
+ wrote: > > This patchset is also available in git via: > > git fetch
+ https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git
+ [...] Content analysis details:   (-0.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.133.124 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [170.10.133.124 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t4Bfe-000386-50
-Subject: Re: [f2fs-dev] [PATCH] f2fs/005: add testcase to check checkpoint
- disabling functionality
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1t4Ew3-0005w3-Av
+Subject: Re: [f2fs-dev] [PATCH 00/15] Wire up CRC32 library functions to
+ arch-optimized code
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -139,123 +114,119 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Qi Han <hanqi@vivo.com>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Ard Biesheuvel via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Ard Biesheuvel <ardb@kernel.org>
+Cc: linux-arch@vger.kernel.org, linux-s390@vger.kernel.org,
+ linux-mips@vger.kernel.org, x86@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-crypto@vger.kernel.org,
+ loongarch@lists.linux.dev, sparclinux@vger.kernel.org,
+ linux-riscv@lists.infradead.org, linux-ext4@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sat, Oct 12, 2024 at 06:15:01PM +0800, Chao Yu wrote:
-> This patch introduce a regression test to check whether f2fs handles
-> dirty inode correctly when checkpoint is disabled in a corner case,
-> it may hang umount before the bug is fixed.
-> 
-> Cc: Qi Han <hanqi@vivo.com>
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  tests/f2fs/005     | 59 ++++++++++++++++++++++++++++++++++++++++++++++
->  tests/f2fs/005.out |  1 +
->  2 files changed, 60 insertions(+)
->  create mode 100755 tests/f2fs/005
->  create mode 100644 tests/f2fs/005.out
-> 
-> diff --git a/tests/f2fs/005 b/tests/f2fs/005
-> new file mode 100755
-> index 00000000..4faf1bb9
-> --- /dev/null
-> +++ b/tests/f2fs/005
-> @@ -0,0 +1,59 @@
-> +#! /bin/bash
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) 2024 Oppo.  All Rights Reserved.
-> +#
-> +# FS QA Test No. f2fs/005
-> +#
-> +# This is a regression test to check whether f2fs handles dirty
-> +# inode correctly when checkpoint is disabled, it may hang umount
-> +# before the bug is fixed.
+On Mon, 21 Oct 2024 at 02:29, Eric Biggers <ebiggers@kernel.org> wrote:
+>
+> This patchset is also available in git via:
+>
+>     git fetch https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git crc32-lib-v1
+>
+> CRC32 is a family of common non-cryptographic integrity check algorithms
+> that are fairly fast with a portable C implementation and become far
+> faster still with the CRC32 or carryless multiplication instructions
+> that most CPUs have.  9 architectures already have optimized code for at
+> least some CRC32 variants; however, except for arm64 this optimized code
+> was only accessible through the crypto API, not the library functions.
+>
+> This patchset fixes that so that the CRC32 library functions use the
+> optimized code.  This allows users to just use the library instead of
+> the crypto API.  This is much simpler and also improves performance due
+> to eliminating the crypto API overhead including an indirect call.  Some
+> examples of updating users are included at the end of the patchset.
+>
+> Note: crc32c() was a weird case.  It was a library function layered on
+> top of the crypto API, which in turn is layered on top of the real
+> library functions.  So while it was easy to use, it was still subject to
+> the crypto API overhead.  This patchset provides CRC32C acceleration in
+> the real library functions directly.
+>
+> The updated CRC32 library design is:
+>
+> - Each arch's CRC32 code (all variants) is in arch/$ARCH/lib/crc32*.
+>   This adopts what arm64 and riscv already did.  Note, the crypto
+>   directory is not used because CRC32 is not a cryptographic algorithm.
+>
+> - Weak symbols are no longer used.  Instead there are crc32*_base() and
+>   crc32*_arch(), and the appropriate ones are called based on the
+>   kconfig.  This is similar to how the ChaCha20 library code works.
+>
+> - Each arch's CRC32 code is enabled by default when CRC32 is enabled,
+>   but it can now be disabled, controlled by the choice that previously
+>   controlled the base implementation only.  It can also now be built as
+>   a module if CRC32 is a module too.
+>
+> - Instead of lots of pointless glue code that wires up each CRC32
+>   variant to the crypto API for each architecture, we now just rely on
+>   the existing shash algorithms that use the library functions.
+>
+> - As before, the library functions don't provide access to off-CPU
+>   crypto accelerators.  But these appear to have very little, if any,
+>   real-world relevance for CRC32 which is very fast on CPUs.
+>
+> Future work should apply a similar cleanup to crct10dif which is a
+> variant of CRC16.
+>
+> I tested all arches in QEMU using CONFIG_CRC32_SELFTEST and the crypto
+> self-tests, except for mips which I couldn't figure out how to do.
+>
+> This patchset has the following dependencies on recent patches:
+>
+> - "crypto - move crypto_simd_disabled_for_test to lib"
+>   (https://lore.kernel.org/linux-crypto/20241018235343.425758-1-ebiggers@kernel.org/)
+> - "crypto: x86/crc32c - jump table elimination and other cleanups"
+>   (https://lore.kernel.org/linux-crypto/20241014042447.50197-1-ebiggers@kernel.org/)
+> - "arm64: Speed up CRC-32 using PMULL instructions"
+>   (https://lore.kernel.org/linux-crypto/20241018075347.2821102-5-ardb+git@google.com/)
+> - "crypto: Enable fuzz testing for arch code"
+>   (https://lore.kernel.org/linux-crypto/20241016185722.400643-4-ardb+git@google.com/)
+> - "crypto: mips/crc32 - fix the CRC32C implementation"
+>   (https://lore.kernel.org/linux-crypto/20241020180258.8060-1-ebiggers@kernel.org/)
+>
+> Everything can be retrieved from git using the command given earlier.
+>
+> Since this patchset touches many areas, getting it merged may be
+> difficult.  One option is a pull request with the whole patchset
+> directly to Linus.  Another is to have at least patches 1-2 and the
+> above dependencies taken through the crypto tree in v6.13; then the arch
+> patches can land separately afterwards, followed by the rest.
+>
+> Eric Biggers (15):
+>   lib/crc32: drop leading underscores from __crc32c_le_base
+>   lib/crc32: improve support for arch-specific overrides
+>   arm/crc32: expose CRC32 functions through lib
+>   loongarch/crc32: expose CRC32 functions through lib
+>   mips/crc32: expose CRC32 functions through lib
+>   powerpc/crc32: expose CRC32 functions through lib
+>   s390/crc32: expose CRC32 functions through lib
+>   sparc/crc32: expose CRC32 functions through lib
+>   x86/crc32: update prototype for crc_pcl()
+>   x86/crc32: update prototype for crc32_pclmul_le_16()
+>   x86/crc32: expose CRC32 functions through lib
+>   lib/crc32: make crc32c() go directly to lib
+>   ext4: switch to using the crc32c library
+>   jbd2: switch to using the crc32c library
+>   f2fs: switch to using the crc32 library
+>
+...
+>  89 files changed, 1002 insertions(+), 2455 deletions(-)
 
-Is this a duplicated test of another patch from you?
+Very nice cleanup!
 
-https://lore.kernel.org/fstests/20241025034413.5s6ecilfgqcoeudt@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com/T/#t
+For the series:
 
-Or just similar?
-
-If this's a different test ...(see below)
-
-> +#
-> +. ./common/preamble
-> +_begin_fstest auto quick
-> +
-> +_cleanup()
-> +{
-> +	rm -f $img
-> +	rmdir $mnt
-> +	_scratch_unmount >> $seqres.full
-> +	cd /
-> +	rm -r -f $tmp.*
-> +}
-> +
-> +_require_scratch
-> +_scratch_mkfs >> $seqres.full
-> +_scratch_mount >> $seqres.full
-> +
-> +img=$SCRATCH_MNT/f2fs.img
-> +mnt=$SCRATCH_MNT/f2fs.mnt
-> +testfile=$mnt/testfile
-> +tmpfile=$mnt/tmpfile
-> +tmpdir=$mnt/tmpdir
-> +
-> +mkdir $mnt
-> +dd if=/dev/zero of=$img bs=1M count=50 2>/dev/null
-> +$MKFS_F2FS_PROG -f $img >/dev/null 2>&1
-> +sync
-> +
-> +# use mode=lfs to let f2fs always triggers OPU
-> +mount -t $FSTYP -o loop,mode=lfs,checkpoint=disable:10%,noinline_dentry $img $mnt
-
-You can use _scratch_mkfs_sized, don't need a loop device.
-And without the loop device, above _cleanup is not needed either.
-
-> +
-> +dd if=/dev/zero of=$testfile bs=1M count=5 2>/dev/null
-> +mkdir $tmpdir
-> +touch $tmpfile
-> +sync
-> +
-> +# it dirties tmpdir inode by updating ctime,
-> +# but it doesn't moving the inode to gdirty_list.
-> +mv $tmpfile $tmpdir
-> +
-> +# it runs out of free segment
-> +dd if=/dev/zero of=$testfile bs=1M count=5 conv=notrunc conv=fsync 2>/dev/null
-> +
-> +mount -o remount,checkpoint=enable $mnt
-> +
-> +# it may hang umount if tmpdir is still dirty during evict()
-> +umount $mnt
-> +
-> +status=0
-> +exit
-> diff --git a/tests/f2fs/005.out b/tests/f2fs/005.out
-> new file mode 100644
-> index 00000000..caa3c880
-> --- /dev/null
-> +++ b/tests/f2fs/005.out
-> @@ -0,0 +1 @@
-> +QA output created by 005
-
-If nothing output, please:
-
-echo "Silence is golden"
-
-Thanks,
-Zorro
-
-> -- 
-> 2.40.1
-> 
-
+Reviewed-by: Ard Biesheuvel <ardb@kernel.org>
 
 
 _______________________________________________
