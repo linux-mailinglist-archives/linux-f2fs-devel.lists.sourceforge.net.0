@@ -2,67 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E9099B37DD
+	by mail.lfdr.de (Postfix) with ESMTPS id C2B029B37E1
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Oct 2024 18:40:55 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t5TjS-0005TQ-SB;
-	Mon, 28 Oct 2024 17:40:46 +0000
+	id 1t5TjX-0005UY-7o;
+	Mon, 28 Oct 2024 17:40:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1t5TjR-0005TC-6B
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1t5TjV-0005UF-Hw
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 17:40:45 +0000
+ Mon, 28 Oct 2024 17:40:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Xzs7mVJiY/99JH78lXhRI/gpdMH/B1l1q49UGHLlZkI=; b=Zw/+/OMqWLSUxKOoeZgOVnJ7Od
- NMMPzZcD8VxHdOR0J5zFzmBAPIHMqJepZ+nxR1szP6meA03gcicCIgQkfmwLrKrXmirToDGdhBrFj
- q2JsuWdweaNc+GK1tDFA9xXbxQYWpgwXQiOhZ3L8fEJE+fuXKx4ajnoFI2LcbY+aUQ4I=;
+ bh=J7HORIs4RAG1VqOetH5CF0vQI5uqYvd+1TGsl2XIL0o=; b=JKXSJ7u3l/rZKuaUPbQwY5KRr2
+ onfQ8yQw2NAAMS1e767dAZmNfnIDVcjbIg8luoqFE3IyIHpYo1sXMXnnknQr/1cBQclZWQOWR99CZ
+ xPuerFipT6fGmtAdWewD72tKi65T7/umwAv2nTPQH/VcnOk5f1KY63CfYBZFZZ46zpHw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Xzs7mVJiY/99JH78lXhRI/gpdMH/B1l1q49UGHLlZkI=; b=CuZ5PM64UatUKPYfRJrLHSqKq6
- tQ8XaauW1fc5OW+bNXC7FzFXKofkNeeIq+gt9VHzxzyT3e4fz3n8x1LMKUn+6I70WUqom0aBXABVr
- B9mCjRmFAkic6mZyWN507zP6+DcO/y0RF8pD5emrPlvoX5KitMUGZDJRdgLYSo0hGvl8=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=J7HORIs4RAG1VqOetH5CF0vQI5uqYvd+1TGsl2XIL0o=; b=lUoxBeSxpfkF4wTzO80hHqU4Gm
+ L0Rp1gbCr7JGkV9FP/0KuJZfyANFPCsDhUJTrAJBBa3dc7dS6FkC1BU+r8epbG+FfqKdx7DsU/TmN
+ WHeE3gpGv71tK9smGyu/TRz1YnZhmZaoS8tDH/ihADrGtZj0x3gul/Tb8fIEr3kNGRMw=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t5TjQ-0005HI-Jd for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 17:40:45 +0000
+ id 1t5TjU-0005Ho-TJ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Oct 2024 17:40:49 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C56F15C5DFB;
- Mon, 28 Oct 2024 17:39:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A1863C4CEED;
- Mon, 28 Oct 2024 17:40:36 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 2A746A42A22;
+ Mon, 28 Oct 2024 17:38:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9EA7C4CEC3;
+ Mon, 28 Oct 2024 17:40:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1730137236;
- bh=zUOiog+udt4w3pRdHXpty+ks/QHOzQoZWUfTUON0AYs=;
+ s=k20201202; t=1730137237;
+ bh=IYZJMW0PqsDnvR/T7OuWRv3s0dXr/XWCPZbw4RXqxRo=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=UsRHubI0me7oHxa5Kb7o/7aeKcWSxFiKQgLBQvaByvwSjv2FNS7+54LJVTaxb/mwQ
- UUsvqcCvOGPpsXvQRwHdX84W7MLdoiOz7JaN35kb0sk/pyfnW2zbAWKAIdFTsvm3Vf
- W/bkRpbIJwngDMFZaGIjl8TR8LTu4gboAEbILp3kFQYBx+9dIKbMeOM8HKNtMNSTzf
- bY0fP36aCD2ydDUJnNblZkM8vGrY3KLz8oR+Fm1Nm2zEZGpdxvFwj6uKqOV3R4MHuB
- dxYcQKmlFn7e6gS5bf5JMOzSGynQ8Xd9dJfViWRfbpYxnl4YgzoGzZpAf6f0REYwsH
- QjNoCfvF3xcmA==
+ b=XR4H32rxcjEjPoPeuFQAvvMMz5gyTuYrAgu/ik9SYyH22+ofCDhC69O2OQwcJkOoN
+ wnEn0d6fDFDwfnj+lsIIvP5z/iQ06/buiCAT+ZH52Hrvm+n2D1ttVIO/3lKsjHRscf
+ JinZ/qtlxP6Ii4DhTJkm3w+jf3hTFfmB4fZEjfprq8wgSUbMt4LbT0NYZsFvWo6Qt+
+ ji8SVfigolnnwRXNG/GnQNxLV8er7jITBDGnYGtvzHgRdmE5ORv3iKU2QT0EnSK9dl
+ reR+1IbPauMODCuGOIIAA9UdYo0Em3ye9BZG1RsqaIkhslP/262gvJG6v0LV76tdBR
+ o0G57wPjbTDdA==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 33F41380AC1C; Mon, 28 Oct 2024 17:40:45 +0000 (UTC)
+ 70C6D380AC1C; Mon, 28 Oct 2024 17:40:46 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <173013724399.126843.16835536679745667890.git-patchwork-notify@kernel.org>
-Date: Mon, 28 Oct 2024 17:40:43 +0000
-References: <20241011164450.3366215-1-yebin@huaweicloud.com>
-In-Reply-To: <20241011164450.3366215-1-yebin@huaweicloud.com>
-To: Ye Bin <yebin@huaweicloud.com>
-X-Spam-Score: -5.6 (-----)
+Message-Id: <173013724524.126843.7666285909402123945.git-patchwork-notify@kernel.org>
+Date: Mon, 28 Oct 2024 17:40:45 +0000
+References: <20240929080011.3802327-1-hanqi@vivo.com>
+In-Reply-To: <20240929080011.3802327-1-hanqi@vivo.com>
+To: Qi Han <hanqi@vivo.com>
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
@@ -70,15 +70,13 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Sat, 12 Oct 2024 00:44:50 +0800 you
- wrote: > From: Ye Bin <yebin10@huawei.com> > > There's issue as follows when
- concurrently installing the f2fs.ko > module and mounting the f2fs file
- system: > KA [...] 
- Content analysis details:   (-5.6 points, 6.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Sun, 29 Sep 2024 02:00:10 -0600 you
+ wrote: > After release a file and subsequently reserve it, the FSCK flag is
+ set > when the file is deleted, as shown in the following backtrace: > >
+ F2FS-fs (dm- [...] 
+ Content analysis details:   (-0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -89,9 +87,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t5TjQ-0005HI-Jd
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix null-ptr-deref in
- f2fs_submit_page_bio()
+X-Headers-End: 1t5TjU-0005Ho-TJ
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: compress: fix inconsistent update
+ of i_blocks in release_compress_blocks and reserve_compress_blocks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,7 +104,7 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, zhangxiaoxu5@huawei.com, linux-kernel@vger.kernel.org,
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -117,35 +115,31 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Sat, 12 Oct 2024 00:44:50 +0800 you wrote:
-> From: Ye Bin <yebin10@huawei.com>
+On Sun, 29 Sep 2024 02:00:10 -0600 you wrote:
+> After release a file and subsequently reserve it, the FSCK flag is set
+> when the file is deleted, as shown in the following backtrace:
 > 
-> There's issue as follows when concurrently installing the f2fs.ko
-> module and mounting the f2fs file system:
-> KASAN: null-ptr-deref in range [0x0000000000000020-0x0000000000000027]
-> RIP: 0010:__bio_alloc+0x2fb/0x6c0 [f2fs]
-> Call Trace:
->  <TASK>
->  f2fs_submit_page_bio+0x126/0x8b0 [f2fs]
->  __get_meta_page+0x1d4/0x920 [f2fs]
->  get_checkpoint_version.constprop.0+0x2b/0x3c0 [f2fs]
->  validate_checkpoint+0xac/0x290 [f2fs]
->  f2fs_get_valid_checkpoint+0x207/0x950 [f2fs]
->  f2fs_fill_super+0x1007/0x39b0 [f2fs]
->  mount_bdev+0x183/0x250
->  legacy_get_tree+0xf4/0x1e0
->  vfs_get_tree+0x88/0x340
->  do_new_mount+0x283/0x5e0
->  path_mount+0x2b2/0x15b0
->  __x64_sys_mount+0x1fe/0x270
->  do_syscall_64+0x5f/0x170
->  entry_SYSCALL_64_after_hwframe+0x76/0x7e
+> F2FS-fs (dm-48): Inconsistent i_blocks, ino:401231, iblocks:1448, sectors:1472
+> fs_rec_info_write_type+0x58/0x274
+> f2fs_rec_info_write+0x1c/0x2c
+> set_sbi_flag+0x74/0x98
+> dec_valid_block_count+0x150/0x190
+> f2fs_truncate_data_blocks_range+0x2d4/0x3cc
+> f2fs_do_truncate_blocks+0x2fc/0x5f0
+> f2fs_truncate_blocks+0x68/0x100
+> f2fs_truncate+0x80/0x128
+> f2fs_evict_inode+0x1a4/0x794
+> evict+0xd4/0x280
+> iput+0x238/0x284
+> do_unlinkat+0x1ac/0x298
+> __arm64_sys_unlinkat+0x48/0x68
+> invoke_syscall+0x58/0x11c
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: fix null-ptr-deref in f2fs_submit_page_bio()
-    https://git.kernel.org/jaegeuk/f2fs/c/b7d0a97b2808
+  - [f2fs-dev,v2] f2fs: compress: fix inconsistent update of i_blocks in release_compress_blocks and reserve_compress_blocks
+    https://git.kernel.org/jaegeuk/f2fs/c/26413ce18e85
 
 You are awesome, thank you!
 -- 
