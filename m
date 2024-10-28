@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 510BF9B2BCE
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Oct 2024 10:47:29 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D54D19B2C1C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Oct 2024 10:57:01 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t5MLJ-0003Wy-Km;
-	Mon, 28 Oct 2024 09:47:22 +0000
+	id 1t5MUa-0005ay-5V;
+	Mon, 28 Oct 2024 09:56:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t5MLI-0003Ws-Us
+ (envelope-from <chao@kernel.org>) id 1t5MUY-0005ar-B3
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 09:47:21 +0000
+ Mon, 28 Oct 2024 09:56:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uNYd2orsfRE59mjqYpYHEh5NPx+vfGeOf+aQoyQjT5Q=; b=VxvWMwwadrFHjMHHQXscaFJWr8
- ikJlATLZ4L5xoStWrz0mYlN2mf4NQrIQxXdiG3xSseVZQkNlKZQW8dX2wsdxfIjLY1bWDTAmb4TsY
- 5H8QKZVlabImd65MeT3L+r/TPbFzio0L2zRcpSha0XT0JzWiqMLIb8AizUpNTw/SX5jI=;
+ bh=TiSsZa6TiG1Ys5QE/Lsu5O2KE9DbgwibT6MzjVHFBrw=; b=FFuhyVBxibB245cRH0VX6LoBRk
+ YGXBK+9iMs7mLnEZETJqoAoXyVZKon6k5PQLf/wJ/d8zf4fQsUNbRd1QJIL30QES4PyjXHLIcpAf7
+ 5OGyhHmGZblDqz9WvZ1Cq1VxcJuG6syNFXH7tYEdha41dbM7mtci2MhOFoDT3L3+elb4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,38 +31,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uNYd2orsfRE59mjqYpYHEh5NPx+vfGeOf+aQoyQjT5Q=; b=QiH3DeTa7VaLSJEs1Rwp4tHwCx
- DtFLptp0hdQ+BfWPF1Sz2cLl58D71z4x3Uh5gfpL+JD0AMDnFCIS2+khMmW9mlunWpMDBCHdwfuFU
- zP23buDGgv0krdP7Ap6HXHO2J3DNMg+EwO5lxRZN3eZoXOCe/aUv+lfungV+yxPS2IRQ=;
+ bh=TiSsZa6TiG1Ys5QE/Lsu5O2KE9DbgwibT6MzjVHFBrw=; b=jIMe9E3a2q5PAqRieNrAH1FvCo
+ GeO4d6w/zL3V/fEYhKBPwWNtzjLtEqktB5vr0CXzDlPvSr4/RkoQOj0krQGtvyyVTNOQ0e4yCWoxO
+ oPx/QeFArIMsQKMMY1OLk3bxNt3IEXtYP4yFQnz4m9QgWiQEBn+o85uLN/lonWFU8lcM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t5MLI-0008Jh-SL for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 09:47:21 +0000
+ id 1t5MUX-0000Xy-G2 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Oct 2024 09:56:54 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 739D75C4A49;
- Mon, 28 Oct 2024 09:46:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F014AC4CEC3;
- Mon, 28 Oct 2024 09:47:08 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 0DF2D5C5986;
+ Mon, 28 Oct 2024 09:55:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5AFAFC4CEC3;
+ Mon, 28 Oct 2024 09:56:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1730108830;
- bh=kwJTSKGVyruOkdDlspu/YLGyPpmGn9rmrK+Eg8Xn3aM=;
+ s=k20201202; t=1730109402;
+ bh=Aw1TCrslxEE8zF/NKWKONs8Tgt/MP8lPVbB9dltlncg=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=QtrSsrtTIVq6Yz/DFOpvXZuqOY9CBjgyNLpkgXhMhL1MNMAkvwUtvHCaUhfHO72zo
- iv6kKOhw+DK4sxswV2uqfXGS1jnqjHKTl3Q5lIXAeQUi+Bd6NlS0mjo2oyImesv3pn
- bELkzeExEDnUGSK++tr0zybvjozX/J6P52ZNGaj6VJ7lc/ncFmuEOglsVyCdh2p1zP
- MgqRh7xXEb4SY1+NqzmDoJTLRxk76zO3yJOT3qZ4bGg8zHdLhAxHrnfHogk+vcsIQH
- MB7C8FOs1tkqv+r7WjUFw/U8SY2RX9Q6gr9lr/xZPuwjPF0ZBR7cFwgE6kJNiymquf
- HZjVCA14p49VA==
-Message-ID: <53cb9bde-d845-49d6-858e-147b0870fbbf@kernel.org>
-Date: Mon, 28 Oct 2024 17:47:06 +0800
+ b=SD2K2MIu7RtjoaKThBfqnKXJaiFigFhtWMPd6EvOphgekE/75Vx8s+HRJHaAIK2AL
+ QkU5O5PXfLjlYl4jZPCom3zaSeOZqLk/G80BtUZKI9IleSnWnOg26JlwHuMYU9klwc
+ cRMyJUoX4v3iJHQZB3NIVoyWizrREUY8NZgpWNuRhvqGDrN6gsW9I/ZxHyvEogKp1g
+ g9cXFddF6QPrtjSyCSKnNCXV5hvDVbjvPSbopocxT5+jmEvPvU3KB3hOonX/EJZZDb
+ F2PwsmY3PChl1wOhwaasfotrA/0H0vvfWouUKiubONiNTOR4t7Nyh4gDqJhUHhvEY2
+ GP1sX54mXOHaA==
+Message-ID: <85043d8c-78e3-43ef-a5ae-2299b63b67b7@kernel.org>
+Date: Mon, 28 Oct 2024 17:56:39 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Zorro Lang <zlang@redhat.com>
 References: <20241023081602.3806579-1-chao@kernel.org>
- <20241025034413.5s6ecilfgqcoeudt@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+ <20241023081602.3806579-2-chao@kernel.org>
+ <20241025035824.3i62khlg3juccxeb@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 Content-Language: en-US
-In-Reply-To: <20241025034413.5s6ecilfgqcoeudt@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+In-Reply-To: <20241025035824.3i62khlg3juccxeb@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -70,9 +71,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/10/25 11:44, Zorro Lang wrote: > On Wed, Oct 23, 2024
- at 04:16:01PM +0800, Chao Yu wrote: >> This is a regression test to check
- whether f2fs handles dirty >> data correctly when checkpoint is [...] 
+ Content preview:  On 2024/10/25 11:58, Zorro Lang wrote: > On Wed, Oct 23, 2024
+ at 04:16:02PM +0800, Chao Yu wrote: >> metadata of compressed inode should
+ always be consistent after file >> compression, reservation, re [...] 
  Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +89,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t5MLI-0008Jh-SL
-Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs/006: add testcase to check
- out-of-space case
+X-Headers-End: 1t5MUX-0000Xy-G2
+Subject: Re: [f2fs-dev] [PATCH v2 2/2] f2fs/007: add testcase to check
+ consistency of compressed inode metadata
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,123 +105,187 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Qi Han <hanqi@vivo.com>,
+ fstests@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/10/25 11:44, Zorro Lang wrote:
-> On Wed, Oct 23, 2024 at 04:16:01PM +0800, Chao Yu wrote:
->> This is a regression test to check whether f2fs handles dirty
->> data correctly when checkpoint is disabled, if lfs mode is on,
->> it will trigger OPU for all overwritten data, this will cost
->> free segments, so f2fs must account overwritten data as OPU
->> data when calculating free space, otherwise, it may run out
->> of free segments in f2fs' allocation function, resulting in
->> panic.
+On 2024/10/25 11:58, Zorro Lang wrote:
+> On Wed, Oct 23, 2024 at 04:16:02PM +0800, Chao Yu wrote:
+>> metadata of compressed inode should always be consistent after file
+>> compression, reservation, releasement and decompression, let's add
+>> a testcase to check it.
 >>
 >> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+>> Cc: Qi Han <hanqi@vivo.com>
 >> Signed-off-by: Chao Yu <chao@kernel.org>
 >> ---
 >> v2:
 >> - add _fixed_by_kernel_commit()
->> - use _scratch_mkfs_sized() rather than formating size-specified
->> loop device
 >> - code cleanup
->>   tests/f2fs/006     | 38 ++++++++++++++++++++++++++++++++++++++
->>   tests/f2fs/006.out |  6 ++++++
->>   2 files changed, 44 insertions(+)
->>   create mode 100755 tests/f2fs/006
->>   create mode 100644 tests/f2fs/006.out
+>> - add error handling for _scratch_mkfs()
+>>   tests/f2fs/007     | 116 +++++++++++++++++++++++++++++++++++++++++++++
+>>   tests/f2fs/007.out |   4 ++
+>>   2 files changed, 120 insertions(+)
+>>   create mode 100755 tests/f2fs/007
+>>   create mode 100644 tests/f2fs/007.out
 >>
->> diff --git a/tests/f2fs/006 b/tests/f2fs/006
+>> diff --git a/tests/f2fs/007 b/tests/f2fs/007
 >> new file mode 100755
->> index 00000000..63d00018
+>> index 00000000..8979c21c
 >> --- /dev/null
->> +++ b/tests/f2fs/006
->> @@ -0,0 +1,38 @@
+>> +++ b/tests/f2fs/007
+>> @@ -0,0 +1,116 @@
 >> +#! /bin/bash
 >> +# SPDX-License-Identifier: GPL-2.0
 >> +# Copyright (c) 2024 Oppo.  All Rights Reserved.
 >> +#
->> +# FS QA Test No. f2fs/006
+>> +# FS QA Test No. f2fs/007
 >> +#
->> +# This is a regression test to check whether f2fs handles dirty
->> +# data correctly when checkpoint is disabled, if lfs mode is on,
->> +# it will trigger OPU for all overwritten data, this will cost
->> +# free segments, so f2fs must account overwritten data as OPU
->> +# data when calculating free space, otherwise, it may run out
->> +# of free segments in f2fs' allocation function, resulting in
->> +# panic.
+>> +# This is a regression test to check whether compressed metadata
+>> +# can become inconsistent after file compression, reservation
+>> +# releasement, and decompression.
 >> +#
 >> +. ./common/preamble
->> +_begin_fstest auto quick
+>> +_begin_fstest auto quick rw compress
 >> +
 >> +_fixed_by_kernel_commit xxxxxxxxxxxx \
->> +	"f2fs: fix to account dirty data in __get_secs_required()"
+>> +        "f2fs: compress: fix inconsistent update of i_blocks in release_compress_blocks and reserve_compress_blocks"
 >> +
->> +testfile=$SCRATCH_MNT/testfile
+>> +testfile_prefix=$SCRATCH_MNT/testfile
+>> +fio_config=$tmp.fio
+>> +
+>> +cat >$fio_config <<EOF
+>> +[write_compressed_data_30]
+>> +name=mytest
+>> +ioengine=psync
+>> +rw=write
+>> +direct=0
+>> +bs=1M
+>> +filesize=1M
+>> +numjobs=1
+>> +filename=${testfile_prefix}30
+>> +buffer_compress_percentage=30
+>> +
+>> +[write_compressed_data_60]
+>> +name=mytest
+>> +ioengine=psync
+>> +rw=write
+>> +direct=0
+>> +bs=1M
+>> +filesize=1M
+>> +numjobs=1
+>> +filename=${testfile_prefix}60
+>> +buffer_compress_percentage=60
+>> +
+>> +[write_compressed_data_90]
+>> +name=mytest
+>> +ioengine=psync
+>> +rw=write
+>> +direct=0
+>> +bs=1M
+>> +filesize=1M
+>> +numjobs=1
+>> +filename=${testfile_prefix}90
+>> +buffer_compress_percentage=90
+>> +EOF
 >> +
 >> +_require_scratch
->> +_scratch_mkfs_sized $((1024*1024*100)) >> $seqres.full
->> +
->> +# use mode=lfs to let f2fs always triggers OPU
->> +_scratch_mount -o mode=lfs,checkpoint=disable:10%,noinline_dentry >> $seqres.full
->> +
->> +dd if=/dev/zero of=$testfile bs=1M count=50 2>/dev/null
->> +
->> +# it may run out of free space of f2fs and hang kernel
->> +dd if=/dev/zero of=$testfile bs=1M count=50 conv=notrunc conv=fsync
->> +dd if=/dev/zero of=$testfile bs=1M count=50 conv=notrunc conv=fsync
 > 
-> What kind of failure should be printed at here if test on unfixed kernel?
+> Better to move _require_scratch before "testfile_prefix=$SCRATCH_MNT/testfile".
+> Due to we'd better to make sure there's $SCRATCH_MNT, before using it.
+> 
+>> +_require_fio $fio_config
+>> +_scratch_mkfs "-f -O extra_attr,compression" >> $seqres.full || _fail "mkfs failed"
+>> +_scratch_mount "-o compress_mode=user,compress_extension=*" >> $seqres.full
+>> +
+>> +echo -e "Run fio to initialize file w/ specified compress ratio" >> $seqres.full
+>> +cat $fio_config >> $seqres.full
+>> +$FIO_PROG $fio_config >> $seqres.full
+>> +_scratch_unmount
+>> +
+>> +# force to repaire if filesystem is corrupted
+>> +export FSCK_OPTIONS="-f $FSCK_OPTIONS"
+>> +
+>> +for i in 30 60 90; do
+>> +	testfile=$testfile_prefix$i
+>> +
+>> +	_scratch_mount "-o compress_mode=user" >> $seqres.full
+>> +	$F2FS_IO_PROG compress $testfile >> $seqres.full
+>> +	cblocks=`$F2FS_IO_PROG get_cblocks $testfile`
+>> +	echo "compression ratio is: "$cblocks" / 256"
+>> +
+>> +	_scratch_unmount
+>> +
+>> +	# 1. check after compression
+>> +	_check_scratch_fs
+>> +	if [ $? -ne 0 ]; then
+>> +		_fail "filesystem becomes corrupted after compress"
+>> +	fi
+>> +
+>> +	_scratch_mount >> $seqres.full
+>> +	$F2FS_IO_PROG release_cblocks $testfile >> $seqres.full
+>> +	_scratch_unmount
+>> +
+>> +	# 2. check after releasement
+>> +	_check_scratch_fs
+>> +	if [ $? -ne 0 ]; then
+>> +		_fail "filesystem becomes corrupted after release_cblocks"
+> 
+> The _fail is not necessary, due to _check_scratch_fs will do "exit 1"
+> if it find a corruption. If you need some message, maybe echo it before
+> calling _check_scratch_fs?
+> 
+>> +	fi
+>> +
+>> +	_scratch_mount >> $seqres.full
+>> +	$F2FS_IO_PROG reserve_cblocks $testfile >> $seqres.full
+>> +	_scratch_unmount
+>> +
+>> +	# 3. check after rservation
+>> +	_check_scratch_fs
+>> +	if [ $? -ne 0 ]; then
+>> +		_fail "filesystem becomes corrupted after reserve_cblocks"
+>> +	fi
+> 
+> Same as above
+> 
+>> +
+>> +	_scratch_mount "-o compress_mode=user" >> $seqres.full
+>> +	$F2FS_IO_PROG decompress $testfile >> $seqres.full
+>> +	_scratch_unmount
+>> +
+>> +	# 4. check after decompression
+>> +	_check_scratch_fs
+>> +	if [ $? -ne 0 ]; then
+>> +		_fail "filesystem becomes corrupted after decompress"
+>> +	fi
+> 
+> Same as above.
 
-It will panic kernel w/o fix, can you please check dmesg?
-
-> I got:
-> 
-> # diff -u /root/git/xfstests/tests/f2fs/006.out /root/git/xfstests/results//default/f2fs/006.out.bad|less
-> --- /root/git/xfstests/tests/f2fs/006.out       2024-10-25 11:33:54.693883281 +0800
-> +++ /root/git/xfstests/results//default/f2fs/006.out.bad        2024-10-25 11:34:55.907252401 +0800
-> @@ -1,6 +1,6 @@
->   QA output created by 006
->   50+0 records in
->   50+0 records out
-> -dd: error writing '/mnt/scratch_f2fs/testfile': No space left on device
-> -3+0 records in
-> -2+0 records out
-> +dd: fsync failed for '/mnt/scratch/testfile': Input/output error
-> +50+0 records in
-> +50+0 records out
-> 
-> Does that mean the bug is reproduced?
- > >> +
->> +_scratch_remount checkpoint=enable
->> +
->> +status=0
->> +exit
->> diff --git a/tests/f2fs/006.out b/tests/f2fs/006.out
->> new file mode 100644
->> index 00000000..0d7b3910
->> --- /dev/null
->> +++ b/tests/f2fs/006.out
->> @@ -0,0 +1,6 @@
->> +QA output created by 006
->> +50+0 records in
->> +50+0 records out
->> +dd: error writing '/mnt/scratch_f2fs/testfile': No space left on device
-> 
-> The "/mnt/scratch_f2fs" should be SCRATCH_MNT, please use _filter_scratch()
-> by importing common/filter.
-
-Correct, let me fix this.
+Okay, let me update the patch.
 
 Thanks,
 
 > 
->> +3+0 records in
->> +2+0 records out
+> Thanks,
+> Zorro
+> 
+>> +done
+>> +
+>> +status=0
+>> +exit
+>> diff --git a/tests/f2fs/007.out b/tests/f2fs/007.out
+>> new file mode 100644
+>> index 00000000..2ea71c18
+>> --- /dev/null
+>> +++ b/tests/f2fs/007.out
+>> @@ -0,0 +1,4 @@
+>> +QA output created by 007
+>> +compression ratio is: 64 / 256
+>> +compression ratio is: 128 / 256
+>> +compression ratio is: 192 / 256
 >> -- 
 >> 2.40.1
 >>
