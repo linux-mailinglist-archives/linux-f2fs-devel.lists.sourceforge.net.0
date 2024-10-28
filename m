@@ -2,101 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D3F99B302F
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Oct 2024 13:27:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B16539B3213
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Oct 2024 14:46:51 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t5OqT-0005DC-Ao;
-	Mon, 28 Oct 2024 12:27:41 +0000
+	id 1t5Q51-0006WK-FP;
+	Mon, 28 Oct 2024 13:46:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1t5OqR-0005Cx-AF
+ (envelope-from <chao@kernel.org>) id 1t5Q4z-0006WE-Rf
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 12:27:39 +0000
+ Mon, 28 Oct 2024 13:46:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=phsbjsAXJjxyOoZJOt1lisRfRgL1jDkNT2j1S42R+Gc=; b=e/J0lbBTiwCft9bdMg8/vUW2/C
- 72/hlLjeCM/4ZbgPj1w2uiBNTM+75UkELPTRH2s1v6LdQmaj6jGmwfNfZebw3bDgdD4CNY/ZEh3Bz
- sVedLAjAsDMl9s40gZ+6FlARkN/N4efVJwPRcRHHP7OGNmeeV7Mu5lHwvhz9wEpN+zSk=;
+ bh=yYY6v4DvSP5jKMrnsD22WFypma8DJG8uzRpttB7M3nw=; b=DVJCR1SDFCVCWGy22sTYUp9mD0
+ In1FFkfq0a6AlafrdPzE32vIpF5FD8SFwGoKQMpnajRsWkFEbFAsAedKt21og+MJCbFM1UDoWLReF
+ biHt7NkaTROSBQRaBrvclb/DE15LlzSDBPX8BMrOnlGc8FqwZC6h6zA+fBKl+6ct3zcY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=phsbjsAXJjxyOoZJOt1lisRfRgL1jDkNT2j1S42R+Gc=; b=Q4wRDTy9PvYGIKUgsdOcrEhEx9
- 3y+RiLMx2gekO/8rK9Z1N7GqixN/3nTO6+k5Q5wWA/gnw3FDvgaeuTFMkpSwxfn971k26iYuBEeGU
- d84U6UrzJRtp4Oy4fCWpPjNKcP/D/sWJjnpXu2ASK/yq46zUQ1aL5o+D3Dd7R/6uzRBg=;
+ bh=yYY6v4DvSP5jKMrnsD22WFypma8DJG8uzRpttB7M3nw=; b=mCT2cf+nIO2GTqA6F0H4et4ugu
+ g8k2xNDi0krg4V3jlob1gv0HLszrsk/sujsVTyivCwrEcLgSUuDz7xWNbWFuwcP5g/UtrCVaBzE8m
+ 3f2sctJ6XTZnKTgbyhqmuftgZZz1o3OFrf3CokQ/X08fF6rtOz6QY1mvvK8h4UpJ7Vvw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t5OqQ-0002DI-HK for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 12:27:39 +0000
+ id 1t5Q4z-0006Iz-RV for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Oct 2024 13:46:46 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 24E335C0362;
- Mon, 28 Oct 2024 12:26:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F37D2C4CEC3;
- Mon, 28 Oct 2024 12:27:26 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6F53B5C5C26;
+ Mon, 28 Oct 2024 13:45:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 202C0C4CEC3;
+ Mon, 28 Oct 2024 13:46:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1730118452;
- bh=dBjKbQ72OiI43nKphYScHzSn1tB9+kybe2uOdPkKmfk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=YOSHXXADjGIBHyQ2Iftg3bbghvOAJhq4EiqJMrhlWca7rTdICjxerGGqjybHz8Qbc
- 1qq4wiHrRsAx7igB0qYo6Fqnnd4v2M9lfSoJiAEGsptqUmxJ3sPaIMsxPQFCXqFOFL
- G+8gnI756fFPrU5ye1iVoLnZitTPARuyPmAm5Zr5zW9eEIWd87YAkF5UWbkl8dzTD2
- Uyg1eVjUX/UcLLTT43Tpkx9dTMBwIE6R8L9X9vh1BDbi0Yg/K36rlQ2o1QGqS89eCT
- w666gTjX8lDiJQgsvbQmQAEqb5SeAZ7EXAbq3j/7n7enXbhgYmzw0IOiEXpI0DWbHu
- erUXacxTtG8bQ==
-To: "Pankaj Raghav (Samsung)" <kernel@pankajraghav.com>
-Date: Mon, 28 Oct 2024 13:27:12 +0100
-Message-ID: <20241028-jazzclub-kulant-81ce918f186d@brauner>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240926140121.203821-1-kernel@pankajraghav.com>
-References: <20240926140121.203821-1-kernel@pankajraghav.com>
+ s=k20201202; t=1730123195;
+ bh=nry+gNH1QKnuFPQC+0UEBGG0WSi8qsv9vjSD2K03t0Q=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=L6Oohx65HC9VznjV6wcBQIa0A3T+rSZZONfIj4lFmE85YaAKt1sYlCs+XYWwZjaRS
+ z4JtOJhNY6oTHrbRSK4lfqpPye9f5ILHNB4iMRvKyJrfIkW797H1cxJFJsuq7tXA6X
+ lWm7EKN98w2qOL11GrdV8lckd89JMm1s9KxFY4WVtzND15Zi91USxiChqpibibJfOe
+ 2STRopyxc220w2F//rO4YiJ7OnE9yA069eea64q+mEqDyWzLFz1JGLjfKe1G94KCiU
+ hk+zBb+NMYAE+hZChIi0QDRj9sM390w4+/djJhd0Or92p9zKBxwdRgP+etPFbuFs8B
+ FC8VbSAEC75UA==
+Message-ID: <0274ac17-246e-4a29-bf24-1d0123dce8e7@kernel.org>
+Date: Mon, 28 Oct 2024 21:46:31 +0800
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1219; i=brauner@kernel.org;
- h=from:subject:message-id; bh=dBjKbQ72OiI43nKphYScHzSn1tB9+kybe2uOdPkKmfk=;
- b=owGbwMvMwCU28Zj0gdSKO4sYT6slMaTLN2uu+DzdfEnhecaTkubfhQ409WjqduxOmMF7KdigI
- N+yyLeio5SFQYyLQVZMkcWh3SRcbjlPxWajTA2YOaxMIEMYuDgFYCI68xn+WZ87u07/2LedTZON
- LEs8muedMzWVfFfzOC1n1XFJ7/Ypcgz//bxEjzupHb2h6ccRwHzg3uLVWQlS/A75P0Ptmaw/fzr
- GBwA=
-X-Developer-Key: i=brauner@kernel.org; a=openpgp;
- fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
+User-Agent: Mozilla Thunderbird
+To: Zorro Lang <zlang@redhat.com>
+References: <20241012101501.377899-1-chao@kernel.org>
+ <20241025041115.fmv2wt7qy6s55hip@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+Content-Language: en-US
+In-Reply-To: <20241025041115.fmv2wt7qy6s55hip@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, 26 Sep 2024 16:01:21 +0200, Pankaj Raghav (Samsung)
- wrote: > Most of the callers of wbc_account_cgroup_owner() are converting
- a folio > to page before calling the function. wbc_account_cgroup_ [...] 
+ Content preview:  On 2024/10/25 12:11, Zorro Lang wrote: > On Sat, Oct 12, 2024
+ at 06:15:01PM +0800, Chao Yu wrote: >> This patch introduce a regression
+ test to check whether f2fs handles >> dirty inode correctly when [...] 
  Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t5OqQ-0002DI-HK
-Subject: Re: [f2fs-dev] [PATCH] fs/writeback: convert
- wbc_account_cgroup_owner to take a folio
+X-Headers-End: 1t5Q4z-0006Iz-RV
+Subject: Re: [f2fs-dev] [PATCH] f2fs/005: add testcase to check checkpoint
+ disabling functionality
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,54 +102,135 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Christian Brauner via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Christian Brauner <brauner@kernel.org>
-Cc: Jan Kara <jack@suse.cz>, linux-doc@vger.kernel.org,
- "Darrick J . Wong" <djwong@kernel.org>, Chris Mason <clm@fb.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>, Zefan Li <lizefan.x@bytedance.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- gost.dev@samsung.com, willy@infradead.org, linux-ext4@vger.kernel.org,
- Pankaj Raghav <p.raghav@samsung.com>, Josef Bacik <josef@toxicpanda.com>,
- Tejun Heo <tj@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>,
- David Sterba <dsterba@suse.com>, cgroups@vger.kernel.org,
- Christian Brauner <brauner@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, mcgrof@kernel.org,
- =?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
- Johannes Weiner <hannes@cmpxchg.org>, linux-fsdevel@vger.kernel.org,
- akpm@linux-foundation.org, linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Qi Han <hanqi@vivo.com>, fstests@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, 26 Sep 2024 16:01:21 +0200, Pankaj Raghav (Samsung) wrote:
-> Most of the callers of wbc_account_cgroup_owner() are converting a folio
-> to page before calling the function. wbc_account_cgroup_owner() is
-> converting the page back to a folio to call mem_cgroup_css_from_folio().
+On 2024/10/25 12:11, Zorro Lang wrote:
+> On Sat, Oct 12, 2024 at 06:15:01PM +0800, Chao Yu wrote:
+>> This patch introduce a regression test to check whether f2fs handles
+>> dirty inode correctly when checkpoint is disabled in a corner case,
+>> it may hang umount before the bug is fixed.
+>>
+>> Cc: Qi Han <hanqi@vivo.com>
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>>   tests/f2fs/005     | 59 ++++++++++++++++++++++++++++++++++++++++++++++
+>>   tests/f2fs/005.out |  1 +
+>>   2 files changed, 60 insertions(+)
+>>   create mode 100755 tests/f2fs/005
+>>   create mode 100644 tests/f2fs/005.out
+>>
+>> diff --git a/tests/f2fs/005 b/tests/f2fs/005
+>> new file mode 100755
+>> index 00000000..4faf1bb9
+>> --- /dev/null
+>> +++ b/tests/f2fs/005
+>> @@ -0,0 +1,59 @@
+>> +#! /bin/bash
+>> +# SPDX-License-Identifier: GPL-2.0
+>> +# Copyright (c) 2024 Oppo.  All Rights Reserved.
+>> +#
+>> +# FS QA Test No. f2fs/005
+>> +#
+>> +# This is a regression test to check whether f2fs handles dirty
+>> +# inode correctly when checkpoint is disabled, it may hang umount
+>> +# before the bug is fixed.
 > 
-> Convert wbc_account_cgroup_owner() to take a folio instead of a page,
-> and convert all callers to pass a folio directly except f2fs.
+> Is this a duplicated test of another patch from you?
 > 
-> [...]
+> https://lore.kernel.org/fstests/20241025034413.5s6ecilfgqcoeudt@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com/T/#t
+> 
+> Or just similar?
+> 
+> If this's a different test ...(see below)
 
-Applied to the vfs.misc branch of the vfs/vfs.git tree.
-Patches in the vfs.misc branch should appear in linux-next soon.
+It's a different one.
 
-Please report any outstanding bugs that were missed during review in a
-new review to the original patch series allowing us to drop it.
+> 
+>> +#
+>> +. ./common/preamble
+>> +_begin_fstest auto quick
+>> +
+>> +_cleanup()
+>> +{
+>> +	rm -f $img
+>> +	rmdir $mnt
+>> +	_scratch_unmount >> $seqres.full
+>> +	cd /
+>> +	rm -r -f $tmp.*
+>> +}
+>> +
+>> +_require_scratch
+>> +_scratch_mkfs >> $seqres.full
+>> +_scratch_mount >> $seqres.full
+>> +
+>> +img=$SCRATCH_MNT/f2fs.img
+>> +mnt=$SCRATCH_MNT/f2fs.mnt
+>> +testfile=$mnt/testfile
+>> +tmpfile=$mnt/tmpfile
+>> +tmpdir=$mnt/tmpdir
+>> +
+>> +mkdir $mnt
+>> +dd if=/dev/zero of=$img bs=1M count=50 2>/dev/null
+>> +$MKFS_F2FS_PROG -f $img >/dev/null 2>&1
+>> +sync
+>> +
+>> +# use mode=lfs to let f2fs always triggers OPU
+>> +mount -t $FSTYP -o loop,mode=lfs,checkpoint=disable:10%,noinline_dentry $img $mnt
+> 
+> You can use _scratch_mkfs_sized, don't need a loop device.
+> And without the loop device, above _cleanup is not needed either.
+> 
+>> +
+>> +dd if=/dev/zero of=$testfile bs=1M count=5 2>/dev/null
+>> +mkdir $tmpdir
+>> +touch $tmpfile
+>> +sync
+>> +
+>> +# it dirties tmpdir inode by updating ctime,
+>> +# but it doesn't moving the inode to gdirty_list.
+>> +mv $tmpfile $tmpdir
+>> +
+>> +# it runs out of free segment
+>> +dd if=/dev/zero of=$testfile bs=1M count=5 conv=notrunc conv=fsync 2>/dev/null
+>> +
+>> +mount -o remount,checkpoint=enable $mnt
+>> +
+>> +# it may hang umount if tmpdir is still dirty during evict()
+>> +umount $mnt
+>> +
+>> +status=0
+>> +exit
+>> diff --git a/tests/f2fs/005.out b/tests/f2fs/005.out
+>> new file mode 100644
+>> index 00000000..caa3c880
+>> --- /dev/null
+>> +++ b/tests/f2fs/005.out
+>> @@ -0,0 +1 @@
+>> +QA output created by 005
+> 
+> If nothing output, please:
+> 
+> echo "Silence is golden"
 
-It's encouraged to provide Acked-bys and Reviewed-bys even though the
-patch has now been applied. If possible patch trailers will be updated.
+Will update this patch according to your comments, thank you!
 
-Note that commit hashes shown below are subject to change due to rebase,
-trailer updates or similar. If in doubt, please check the listed branch.
+Thanks,
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
-branch: vfs.misc
+> 
+> Thanks,
+> Zorro
+> 
+>> -- 
+>> 2.40.1
+>>
+> 
 
-[1/1] fs/writeback: convert wbc_account_cgroup_owner to take a folio
-      https://git.kernel.org/vfs/vfs/c/30dac24e14b5
 
 
 _______________________________________________
