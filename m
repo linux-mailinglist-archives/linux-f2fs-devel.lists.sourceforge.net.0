@@ -2,66 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 279779B37D8
+	by mail.lfdr.de (Postfix) with ESMTPS id BD2E19B37E0
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Oct 2024 18:40:55 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t5TjR-0002KJ-KX;
-	Mon, 28 Oct 2024 17:40:45 +0000
+	id 1t5TjW-0006ZP-LN;
+	Mon, 28 Oct 2024 17:40:50 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1t5TjQ-0002KB-HW
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1t5TjU-0006ZF-Tr
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 17:40:43 +0000
+ Mon, 28 Oct 2024 17:40:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zn+GMwXpCTUYjykl3dQxHOlWEnkY6wvEbrDKjDCVsXU=; b=anC1eh8PtKtdoUmWzvQAvUjDBp
- q/JUMgU/c8y6N5MT5x9nsHzIxXj+XatEgahQ7S7Szdl5gC/JYMPKf/PhuVtICi2wplpGmFkOh6pCL
- mNcRj4KHT9pDTnULlt19OCes1FutJgy9zdO9isFqg9o2dmwMu9jyYyQJeAh8srHcTFEE=;
+ bh=eunP2ipoZwwc0aO0FlT9OgrEfHuufhoP7ilVVKziy7E=; b=HuzTZYGEq+0I6rXnAVgimFD2n/
+ htXZoKKJppl52fcws4spvcdiD4n6gKsvt9gCTtHwOGTa1aP4u65do5KUFc9MPIUmPSgrAeXOKRD75
+ iub2An9uOk39uXYgh1i2a3knrT6rSspT+s6vnVfqfMgzVM/iWvMLFcCErQUh3uvFtNww=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zn+GMwXpCTUYjykl3dQxHOlWEnkY6wvEbrDKjDCVsXU=; b=aG9HA8YCaNMjiW78XwuTZheb80
- ZWKnRNCTJcLip2OltoIxxs+qEj+En+ptqo8MjFD4UBLs0zv/STUZIIzbSiqSr2ByALvvsDqL+QmrQ
- ia5DV0OFlKzag1OK+GOeSYim879AduZE5UVq2eMxry0BlfsOB2WgSQQSO2aB+tMbpCx0=;
+ bh=eunP2ipoZwwc0aO0FlT9OgrEfHuufhoP7ilVVKziy7E=; b=lQrSAXHBbSHaBovgtynAugf2Vg
+ cwIkfSr/HW6bCdToAc7EoseEeJmGmuFICfuhIfEmzA4GUQeFlUOIEciuSCmV3Q3SwFGltdaN3x6Tf
+ VBoQ+UGfJQjqo6AdoOGgQPrxa4hwaSKo+gndYN+C9POySK4sARto4tOeSgP0Ye3Duc1M=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t5TjP-0005H9-Ba for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 17:40:43 +0000
+ id 1t5TjU-0005Hk-Bd for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Oct 2024 17:40:48 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 78BCC5C5DCA;
- Mon, 28 Oct 2024 17:39:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 505C6C4CEFB;
- Mon, 28 Oct 2024 17:40:34 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id D34BB5C5DF1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 28 Oct 2024 17:39:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A514EC4AF0B;
+ Mon, 28 Oct 2024 17:40:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1730137234;
- bh=QJdVL0zl/7RQZ5wBOC+lbZLbljUN2Y68RZmJB+6O3l8=;
+ s=k20201202; t=1730137235;
+ bh=hCLTyCHZZNaVX1YHFRpV0tcuaIeZgEzJXEYYh4gvRwI=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=b5/XNgcVrN2bDWX/Nixs1YF89pyv1SYp5ZP8OX2wLrd/xRGMcYUeY5hJyijD5VEdv
- ThrYPtvmbjFpzjuIxy86Nf/VuJhiCLgoMjg/1NMQpvy1Slh5q+kG9ANmNDCbLKtH0j
- 7W1DVAO530p9OkDuXu1338yseZ+2Hj2RsN6/Zo1O32tew+Vg1kqWS4+5/QoXuPRBtx
- n5mtA5lXRr65dcGHsE5F8wI9bB6Li57U1DyJ5vjJf7mOlq/boXhmVBYnQfeSea6J44
- ZVDCiLi6ZsfEECUE2P3MryasQi4ksZ5JPa8sWgPHRjVRRCTAynI+IkHozEHXr8/TAl
- 9r64vrIvPHqsw==
+ b=OKnE5Er2Y58DmhytZml+LbWwHJlKG5KZPZ5kifJso1TPuxWtD5eMtzlgqM1JejNZ+
+ /b5LaTFemQ9cii+lb8vYGbdeu1tv9X0SvwKNSEXduB2g5U1Hj8H8GtqiEU4RdSQsI+
+ v+EaoLb+N46hMCyPcS//8He9ga8q6A+753j+aBC34r9n6a95LURuu4tA86y0XuDMdP
+ Etl6d+7DOTIm8KSCJHXycF1WdJUBdfcsGoOFSlGLvH7gokrlsKovDpYYjzL+sYHn2k
+ o0dmcfFkSENMfhWKhGDppSCZuhI/LAazZDrgNLuYeqAQaewRKYfeeTWuIraQvMHcFT
+ GwlKP3RZn5ZcA==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- ADD99380AC1C; Mon, 28 Oct 2024 17:40:42 +0000 (UTC)
+ EAFAE380AC1C; Mon, 28 Oct 2024 17:40:43 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <173013724149.126843.14457893134521863981.git-patchwork-notify@kernel.org>
-Date: Mon, 28 Oct 2024 17:40:41 +0000
-References: <20241021044801.1358850-1-yangyongpeng1@oppo.com>
-In-Reply-To: <20241021044801.1358850-1-yangyongpeng1@oppo.com>
-To: Yongpeng Yang <yangyongpeng1@oppo.com>
+Message-Id: <173013724273.126843.1612111639944304594.git-patchwork-notify@kernel.org>
+Date: Mon, 28 Oct 2024 17:40:42 +0000
+References: <20241018062638.2619214-1-chao@kernel.org>
+In-Reply-To: <20241018062638.2619214-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -69,12 +70,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 21 Oct 2024 12:48:01 +0800 you
- wrote: > In the __f2fs_init_atgc_curseg->get_atssr_segment calling,
- > curseg->segno
- is NULL_SEGNO, indicating that there is no summary > block that needs to
- be w [...] 
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 18 Oct 2024 14:26:36 +0800 you
+ wrote: > first_zoned_segno() returns a fixed value,
+ let's cache it in > structure
+ f2fs_sb_info to avoid redundant calculation. > > Signed-off-by: Chao Yu
+ <chao@k [...] 
  Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,9 +91,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t5TjP-0005H9-Ba
-Subject: Re: [f2fs-dev] [PATCH] f2fs: check curseg->inited before
- write_sum_page in change_curseg
+X-Headers-End: 1t5TjU-0005Hk-Bd
+Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs: zone: introduce first_zoned_segno
+ in f2fs_sb_info
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,22 +116,28 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This patch was applied to jaegeuk/f2fs.git (dev)
+This series was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon, 21 Oct 2024 12:48:01 +0800 you wrote:
-> In the __f2fs_init_atgc_curseg->get_atssr_segment calling,
-> curseg->segno is NULL_SEGNO, indicating that there is no summary
-> block that needs to be written.
+On Fri, 18 Oct 2024 14:26:36 +0800 you wrote:
+> first_zoned_segno() returns a fixed value, let's cache it in
+> structure f2fs_sb_info to avoid redundant calculation.
 > 
-> Signed-off-by: Yongpeng Yang <yangyongpeng1@oppo.com>
+> Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
->  fs/f2fs/segment.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  fs/f2fs/f2fs.h    |  1 +
+>  fs/f2fs/segment.c |  4 ++--
+>  fs/f2fs/segment.h | 10 ----------
+>  fs/f2fs/super.c   | 13 +++++++++++++
+>  4 files changed, 16 insertions(+), 12 deletions(-)
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: check curseg->inited before write_sum_page in change_curseg
-    https://git.kernel.org/jaegeuk/f2fs/c/f2bbbe277c22
+  - [f2fs-dev,1/3] f2fs: zone: introduce first_zoned_segno in f2fs_sb_info
+    https://git.kernel.org/jaegeuk/f2fs/c/08060c0b1414
+  - [f2fs-dev,2/3] f2fs: zone: allow IPU for regular file in regular block device
+    (no matching commit)
+  - [f2fs-dev,3/3] f2fs: support NOCoW flag
+    (no matching commit)
 
 You are awesome, thank you!
 -- 
