@@ -2,66 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7D609B37DE
+	by mail.lfdr.de (Postfix) with ESMTPS id B5B4F9B37DF
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Oct 2024 18:40:55 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t5TjR-0006Yo-98;
-	Mon, 28 Oct 2024 17:40:45 +0000
+	id 1t5TjV-0002g4-1T;
+	Mon, 28 Oct 2024 17:40:49 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1t5TjP-0006Yh-Df
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1t5TjT-0002fr-Ml
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 17:40:43 +0000
+ Mon, 28 Oct 2024 17:40:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bdNmPF6A+z+p/TpiOnwDmadjcoDonfMvERZZewv17rU=; b=UxWCGW7pdmvw5H6JOgZ+1Z5UR9
- +Wwab8Kdp+/4p5fTMe3iP0S8qcVK036wJYX+1NH6LmBXvfc+n6zhgp2qOdgqHGvIOdUy0LSOwY7Vl
- FrqoTt70NZeCRNMKPMPv0ekg55vK9bcpvrbucwW+GKYoOiO3JutsCHMFGnwjdE0pjJ1c=;
+ bh=O42C7f87tihQL+ej9eXdS+xt2FKc2rDH5s3krVamips=; b=AD64FWzth/pTLNsQ8OBRJb8/ot
+ pYies5V0koFKaj10c7x82D6MFFoGOBWJ38q8iMrDw5Tysi5XylwohueL72mDjynrW9oYaj0bdMnzw
+ Lvdc7XOg0KJctHbPEEaaYsR9HWrS1lAWEtiklQpsqyUEZJMp96NO1GnMjZ0ybxvvOZLc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bdNmPF6A+z+p/TpiOnwDmadjcoDonfMvERZZewv17rU=; b=k8dMleC3TGG05uoO3pyTUqwogR
- PNVwimZyz4a5NGh0qbIkDXkAYoeS87mdzo3NtnAYMbLJnnLy7IESfRgE4IuiRCDQXubgk8KqBGl9C
- Qks6H7eFDRumWM9qE2fTVdgHy5HPgEUcipHid1qAT92cQ8thdP9e7mGcGZ735I3kYtQY=;
+ bh=O42C7f87tihQL+ej9eXdS+xt2FKc2rDH5s3krVamips=; b=GcQE77l9uawjnlhrSiiFgFgOB5
+ /jDeujf5PWMiRy6n4frni1Lg3ZIwki7znZgibODTK+Jv4d/EdL5pUYIvxxUVC9JzdLrluhUMNOm4s
+ SkxMxP1GVwdT4A10wGEqUDOqwrV/WTLOjCl1jqZIRe5ysuN5s7NIHMdBC7pw0DTwmhqI=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t5TjO-0005H5-SR for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 17:40:43 +0000
+ id 1t5TjT-0005Hh-SI for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Oct 2024 17:40:48 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id EE5AE5C5DC8;
- Mon, 28 Oct 2024 17:39:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C135BC4CEEB;
- Mon, 28 Oct 2024 17:40:31 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 577C15C4869;
+ Mon, 28 Oct 2024 17:39:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03F77C4CEF1;
+ Mon, 28 Oct 2024 17:40:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1730137231;
- bh=kCJ5JorSKHyA2UxhmbTseadz7Iu8NE9AytEHPbCv4n4=;
+ s=k20201202; t=1730137233;
+ bh=OQuqvgPpJTyymPkKHwhPpdLnmwUPe1+ON5uz/XBDNM8=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=Hfbfpzma3Ou8k/d2LW+ABdp2j7SEUfGS5C89tiRLERDYDNxRKw3UE33vsU1wqapz/
- fHcYHfBW52bffNODpBqc8AJtnixYSCU2LLmjJ7Ws2DbqPvNoZDVLfUXzaW8DIkOYt9
- etPdx7RANVUPlmkmRUEjwpfXNm7YCDkch4ZehSUdkLqICHeuBgopHZkOF9xHHPBIVs
- isRRdTdNTJB89nMrAIsYM2olzidAmA0iVKV0RlDPP8PxWOyk4i1s001lt88cFMneS3
- JoBKjgSdd6/ULznYLA+ov4ASJLq5/+XCLWcQQMsuZmHJh69NkoiDeX5FHaVutpO6Is
- gtpvH/5fbjhUg==
+ b=e3OrC9sAIpc9iKL1nLAhryd8obqC7SoBysVT3+UVb85m7FRcr3aF1dvYheK6hmBpT
+ NyjxEwqb5lVTkVCqdMejqaU91Z05zAiVzUkZttRXc3Jey+gSXCG9EDrwgudFu3pxiX
+ k/AU7jzGrCPM8bz7AgGAN6nUgO5nSYIvrKsUFFNf433MQqmC6AMmL/I7jbHxvPXicE
+ tQwAFOXv2LQ5dCLUH494bcavUzYqJZQJ2kJftLvIQosjdLcQ3a8+Fx4nYfl1BnbTKe
+ +YSCV1G2D6L4yrkgjgsjyIzjWKmURXDcYa18IjyT9PenudAHbDJlVOAAx60JcgfaOQ
+ GTyTFZ0lUciZA==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 34937380AC1C; Mon, 28 Oct 2024 17:40:40 +0000 (UTC)
+ 70F46380AC1C; Mon, 28 Oct 2024 17:40:41 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <173013723899.126843.17159941935914326247.git-patchwork-notify@kernel.org>
-Date: Mon, 28 Oct 2024 17:40:38 +0000
-References: <20241015165427.1158782-1-daeho43@gmail.com>
-In-Reply-To: <20241015165427.1158782-1-daeho43@gmail.com>
-To: Daeho Jeong <daeho43@gmail.com>
+Message-Id: <173013724023.126843.9607726471702748636.git-patchwork-notify@kernel.org>
+Date: Mon, 28 Oct 2024 17:40:40 +0000
+References: <20241016052758.3400359-1-yi.sun@unisoc.com>
+In-Reply-To: <20241016052758.3400359-1-yi.sun@unisoc.com>
+To: Yi Sun <yi.sun@unisoc.com>
 X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -69,11 +69,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 15 Oct 2024 09:54:27 -0700 you
- wrote: > From: Daeho Jeong <daehojeong@google.com> > > Now we reclaim too
- much space before allocating pinned space for zoned > devices. > >
- Signed-off-by: Daeho [...] 
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 16 Oct 2024 13:27:56 +0800 you
+ wrote: > Deleting large files is time-consuming, and a large part > of the
+ time is spent in f2fs_invalidate_blocks() >
+ ->down_write(sit_info->sentry_lock) and up [...] 
  Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,9 +89,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t5TjO-0005H5-SR
-Subject: Re: [f2fs-dev] [PATCH] f2fs: decrease spare area for pinned files
- for zoned devices
+X-Headers-End: 1t5TjT-0005Hh-SI
+Subject: Re: [f2fs-dev] [RFC PATCH 0/2] Speed up f2fs truncate
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,30 +105,35 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: daehojeong@google.com, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, sunyibuaa@gmail.com,
+ jaegeuk@kernel.org, hao_hao.wang@unisoc.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This patch was applied to jaegeuk/f2fs.git (dev)
+This series was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Tue, 15 Oct 2024 09:54:27 -0700 you wrote:
-> From: Daeho Jeong <daehojeong@google.com>
+On Wed, 16 Oct 2024 13:27:56 +0800 you wrote:
+> Deleting large files is time-consuming, and a large part
+> of the time is spent in f2fs_invalidate_blocks()
+> ->down_write(sit_info->sentry_lock) and up_write().
 > 
-> Now we reclaim too much space before allocating pinned space for zoned
-> devices.
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> If some blocks are continuous and belong to the same segment,
+> we can process these blocks at the same time. This can reduce
+> the number of calls to the down_write() and the up_write(),
+> thereby improving the overall speed of doing truncate.
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: decrease spare area for pinned files for zoned devices
-    https://git.kernel.org/jaegeuk/f2fs/c/b715716ee839
+  - [f2fs-dev,RFC,1/2] f2fs: introduce update_sit_entry_for_release()
+    https://git.kernel.org/jaegeuk/f2fs/c/af68d9b481ac
+  - [f2fs-dev,RFC,2/2] f2fs: introduce f2fs_invalidate_consecutive_blocks()
+    (no matching commit)
 
 You are awesome, thank you!
 -- 
