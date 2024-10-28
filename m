@@ -2,96 +2,126 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D54D19B2C1C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Oct 2024 10:57:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 444EA9B2CE8
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Oct 2024 11:29:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t5MUa-0005ay-5V;
-	Mon, 28 Oct 2024 09:56:56 +0000
+	id 1t5N06-00068r-79;
+	Mon, 28 Oct 2024 10:29:30 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t5MUY-0005ar-B3
+ (envelope-from <niuzhiguo84@gmail.com>) id 1t5N04-00068W-VJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 09:56:54 +0000
+ Mon, 28 Oct 2024 10:29:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TiSsZa6TiG1Ys5QE/Lsu5O2KE9DbgwibT6MzjVHFBrw=; b=FFuhyVBxibB245cRH0VX6LoBRk
- YGXBK+9iMs7mLnEZETJqoAoXyVZKon6k5PQLf/wJ/d8zf4fQsUNbRd1QJIL30QES4PyjXHLIcpAf7
- 5OGyhHmGZblDqz9WvZ1Cq1VxcJuG6syNFXH7tYEdha41dbM7mtci2MhOFoDT3L3+elb4=;
+ bh=e66hzpUkXwh1+UAivXnQMAmUZZGDpRptxtP/9uQ4ZKk=; b=aJIYcH1J1OfeAE494Evxo/Yq4w
+ D99avAjxVGCi4q90HdHh1cPd+Lz60UgmcSRz1UUpz6e0IuEQZbLzm59ETbSne42oMV/LMU29uDXYe
+ hscXbPb2Fg0jM7evWAzsulSXodbaRdoXWhRRJdGa13Gi/zbGU1taAp5tYYh1cBrgqE9o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TiSsZa6TiG1Ys5QE/Lsu5O2KE9DbgwibT6MzjVHFBrw=; b=jIMe9E3a2q5PAqRieNrAH1FvCo
- GeO4d6w/zL3V/fEYhKBPwWNtzjLtEqktB5vr0CXzDlPvSr4/RkoQOj0krQGtvyyVTNOQ0e4yCWoxO
- oPx/QeFArIMsQKMMY1OLk3bxNt3IEXtYP4yFQnz4m9QgWiQEBn+o85uLN/lonWFU8lcM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=e66hzpUkXwh1+UAivXnQMAmUZZGDpRptxtP/9uQ4ZKk=; b=bSGWdcj05xeZ5t41V2iU75VNEg
+ L0wXfboN5ke8u4MLFrEmutRWVtc1HmnbdAJZrE85LuAuj8fYanFc/dX28w5QmSjA3tk4/vi352aPL
+ PRG2OC7wNZ3TVdqFTnjcFLMKK1RAKQfasXjcgKuMt+u1jpIuOEwRcKSgZ3wxIV5Iaeiw=;
+Received: from mail-wr1-f42.google.com ([209.85.221.42])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t5MUX-0000Xy-G2 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Oct 2024 09:56:54 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 0DF2D5C5986;
- Mon, 28 Oct 2024 09:55:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5AFAFC4CEC3;
- Mon, 28 Oct 2024 09:56:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1730109402;
- bh=Aw1TCrslxEE8zF/NKWKONs8Tgt/MP8lPVbB9dltlncg=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=SD2K2MIu7RtjoaKThBfqnKXJaiFigFhtWMPd6EvOphgekE/75Vx8s+HRJHaAIK2AL
- QkU5O5PXfLjlYl4jZPCom3zaSeOZqLk/G80BtUZKI9IleSnWnOg26JlwHuMYU9klwc
- cRMyJUoX4v3iJHQZB3NIVoyWizrREUY8NZgpWNuRhvqGDrN6gsW9I/ZxHyvEogKp1g
- g9cXFddF6QPrtjSyCSKnNCXV5hvDVbjvPSbopocxT5+jmEvPvU3KB3hOonX/EJZZDb
- F2PwsmY3PChl1wOhwaasfotrA/0H0vvfWouUKiubONiNTOR4t7Nyh4gDqJhUHhvEY2
- GP1sX54mXOHaA==
-Message-ID: <85043d8c-78e3-43ef-a5ae-2299b63b67b7@kernel.org>
-Date: Mon, 28 Oct 2024 17:56:39 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1t5N04-0002Vj-UX for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Oct 2024 10:29:29 +0000
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-37d4fa7d3baso441048f8f.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 28 Oct 2024 03:29:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1730111357; x=1730716157; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=e66hzpUkXwh1+UAivXnQMAmUZZGDpRptxtP/9uQ4ZKk=;
+ b=TdG7lTO8gd9uxYYAmoKUdywTiRWNvmMq5OFwZAV1fyMbIc2am0eP39BAB+8PHR0m9l
+ WGTOASD0UH4gdUr4G4ZGE1r8fXkIv6c/XP28NfUeLHPEuEjltZUQ/xAzUwNR0Zc6tOUS
+ wk/vg1zEs0M6sna11KuRjd6ZM+C3+q5ThJBb0y6Pa5ugLmvad0geNJKBumhbYlez9/JG
+ 2cyi89gJAm1zw7udb/8iz6aDHpZLTAnOeHQQPUG04or2aWb2Fev5ohbPa3IHPHLf6989
+ O7XtYLm3vvLAnAJ+GfBi+j6dSOivcv0DUoY3zG0lDaIKkSAHORyzQpxVT4mmWTlTcmI1
+ apbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730111357; x=1730716157;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=e66hzpUkXwh1+UAivXnQMAmUZZGDpRptxtP/9uQ4ZKk=;
+ b=wzQxvRD5OaZVym1dugDzeBG9JLP4Esmxvb1VHqfIH8KWfajgcrwZ3b2NqerK7KJcPH
+ XcCpkxowMlKaHGGBLnQD3DLBh2Jv6j81oamnV1Gq9g2V+X1BCh2YR+41Ou63UdX1m3OA
+ LXhWkdhLb6F6cEfcuRztFB+y9vJbbCS3aBHhuP3di1SBxfrhPISvmJlC4ocRBsKXiZso
+ L4+yqAVTtyXgmMl4Zpt0lcNW8RD2+/mgZRaorRKRndReLBAubUF/XShIA/yUed44yTkY
+ hYA/Mh6d1vbzHeFxfiLbKUA6lGlQcvi8PmtVvhT6wNmHO5t3PRvKxSESV/G4lyOuOdYa
+ hSkQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXhXsUzcg950to1Q+rRTrehGKG9zUK0yK7XwQSFBm7y9xm8ky9sAHYgZZLFNmfBqL/SlssMX40zAnm4o9dykpgi@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yxsvatq5ZFZI7J90Zw+Owl3qYRLbGFYtwxfSHi4S2V9xqnEtkpO
+ cL8qNdQXD2f/3SQlmLwRI/dat8+8F+vphvO5h0NtTM8YtXdUQ4clJs1MoEH+76UAbLGoE6l/ezI
+ 3iaIi7PEuVj6EM1KyUnsoMw9BoHSvEg==
+X-Google-Smtp-Source: AGHT+IE1YBr0eKkaIlb+X8Y2dq45JaRERXIEnKMFMLPIGlhK2fYf1knJjHF6p2ekvt/howswXmhyYrH3666kcgnJWAs=
+X-Received: by 2002:a5d:6c6d:0:b0:37d:47f6:6fda with SMTP id
+ ffacd0b85a97d-3806117dde8mr2587347f8f.7.1730111357196; Mon, 28 Oct 2024
+ 03:29:17 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Zorro Lang <zlang@redhat.com>
-References: <20241023081602.3806579-1-chao@kernel.org>
- <20241023081602.3806579-2-chao@kernel.org>
- <20241025035824.3i62khlg3juccxeb@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-Content-Language: en-US
-In-Reply-To: <20241025035824.3i62khlg3juccxeb@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-X-Spam-Score: -5.6 (-----)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+References: <1729652883-12202-1-git-send-email-zhiguo.niu@unisoc.com>
+ <7d68560a-19ea-455c-ba23-1dda32ed4d15@kernel.org>
+In-Reply-To: <7d68560a-19ea-455c-ba23-1dda32ed4d15@kernel.org>
+From: Zhiguo Niu <niuzhiguo84@gmail.com>
+Date: Mon, 28 Oct 2024 18:29:05 +0800
+Message-ID: <CAHJ8P3LrnCYo_ETa7XPty_keAmPd_z8V9A2Bp6gDaxBMCxpPSA@mail.gmail.com>
+To: Chao Yu <chao@kernel.org>
+X-Spam-Score: 0.1 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/10/25 11:58, Zorro Lang wrote: > On Wed, Oct 23, 2024
- at 04:16:02PM +0800, Chao Yu wrote: >> metadata of compressed inode should
- always be consistent after file >> compression, reservation, re [...] 
- Content analysis details:   (-5.6 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  Chao Yu 于2024年10月28日周一 17:34写道： > > On 2024/10/23
+    11:08, Zhiguo Niu wrote: > > If gc_mode is set to GC_URGENT_LOW or GC_URGENT_MID,
+    cost benefit GC > > approach should be used, but [...] 
+ 
+ Content analysis details:   (0.1 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+                              no trust
+                             [209.85.221.42 listed in list.dnswl.org]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+                             in digit
+                             [niuzhiguo84[at]gmail.com]
+  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+                             provider
+                             [niuzhiguo84[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.221.42 listed in wl.mailspike.net]
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+                             envelope-from domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t5MUX-0000Xy-G2
-Subject: Re: [f2fs-dev] [PATCH v2 2/2] f2fs/007: add testcase to check
- consistency of compressed inode metadata
+                             author's domain
+X-Headers-End: 1t5N04-0002Vj-UX
+Subject: Re: [f2fs-dev] [PATCH V2] f2fs: fix to avoid use GC_AT when setting
+ gc_mode as GC_URGENT_LOW or GC_URGENT_MID
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,197 +133,63 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Qi Han <hanqi@vivo.com>,
- fstests@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Zhiguo Niu <zhiguo.niu@unisoc.com>,
+ jaegeuk@kernel.org, Hao_hao.Wang@unisoc.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/10/25 11:58, Zorro Lang wrote:
-> On Wed, Oct 23, 2024 at 04:16:02PM +0800, Chao Yu wrote:
->> metadata of compressed inode should always be consistent after file
->> compression, reservation, releasement and decompression, let's add
->> a testcase to check it.
->>
->> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
->> Cc: Qi Han <hanqi@vivo.com>
->> Signed-off-by: Chao Yu <chao@kernel.org>
->> ---
->> v2:
->> - add _fixed_by_kernel_commit()
->> - code cleanup
->> - add error handling for _scratch_mkfs()
->>   tests/f2fs/007     | 116 +++++++++++++++++++++++++++++++++++++++++++++
->>   tests/f2fs/007.out |   4 ++
->>   2 files changed, 120 insertions(+)
->>   create mode 100755 tests/f2fs/007
->>   create mode 100644 tests/f2fs/007.out
->>
->> diff --git a/tests/f2fs/007 b/tests/f2fs/007
->> new file mode 100755
->> index 00000000..8979c21c
->> --- /dev/null
->> +++ b/tests/f2fs/007
->> @@ -0,0 +1,116 @@
->> +#! /bin/bash
->> +# SPDX-License-Identifier: GPL-2.0
->> +# Copyright (c) 2024 Oppo.  All Rights Reserved.
->> +#
->> +# FS QA Test No. f2fs/007
->> +#
->> +# This is a regression test to check whether compressed metadata
->> +# can become inconsistent after file compression, reservation
->> +# releasement, and decompression.
->> +#
->> +. ./common/preamble
->> +_begin_fstest auto quick rw compress
->> +
->> +_fixed_by_kernel_commit xxxxxxxxxxxx \
->> +        "f2fs: compress: fix inconsistent update of i_blocks in release_compress_blocks and reserve_compress_blocks"
->> +
->> +testfile_prefix=$SCRATCH_MNT/testfile
->> +fio_config=$tmp.fio
->> +
->> +cat >$fio_config <<EOF
->> +[write_compressed_data_30]
->> +name=mytest
->> +ioengine=psync
->> +rw=write
->> +direct=0
->> +bs=1M
->> +filesize=1M
->> +numjobs=1
->> +filename=${testfile_prefix}30
->> +buffer_compress_percentage=30
->> +
->> +[write_compressed_data_60]
->> +name=mytest
->> +ioengine=psync
->> +rw=write
->> +direct=0
->> +bs=1M
->> +filesize=1M
->> +numjobs=1
->> +filename=${testfile_prefix}60
->> +buffer_compress_percentage=60
->> +
->> +[write_compressed_data_90]
->> +name=mytest
->> +ioengine=psync
->> +rw=write
->> +direct=0
->> +bs=1M
->> +filesize=1M
->> +numjobs=1
->> +filename=${testfile_prefix}90
->> +buffer_compress_percentage=90
->> +EOF
->> +
->> +_require_scratch
-> 
-> Better to move _require_scratch before "testfile_prefix=$SCRATCH_MNT/testfile".
-> Due to we'd better to make sure there's $SCRATCH_MNT, before using it.
-> 
->> +_require_fio $fio_config
->> +_scratch_mkfs "-f -O extra_attr,compression" >> $seqres.full || _fail "mkfs failed"
->> +_scratch_mount "-o compress_mode=user,compress_extension=*" >> $seqres.full
->> +
->> +echo -e "Run fio to initialize file w/ specified compress ratio" >> $seqres.full
->> +cat $fio_config >> $seqres.full
->> +$FIO_PROG $fio_config >> $seqres.full
->> +_scratch_unmount
->> +
->> +# force to repaire if filesystem is corrupted
->> +export FSCK_OPTIONS="-f $FSCK_OPTIONS"
->> +
->> +for i in 30 60 90; do
->> +	testfile=$testfile_prefix$i
->> +
->> +	_scratch_mount "-o compress_mode=user" >> $seqres.full
->> +	$F2FS_IO_PROG compress $testfile >> $seqres.full
->> +	cblocks=`$F2FS_IO_PROG get_cblocks $testfile`
->> +	echo "compression ratio is: "$cblocks" / 256"
->> +
->> +	_scratch_unmount
->> +
->> +	# 1. check after compression
->> +	_check_scratch_fs
->> +	if [ $? -ne 0 ]; then
->> +		_fail "filesystem becomes corrupted after compress"
->> +	fi
->> +
->> +	_scratch_mount >> $seqres.full
->> +	$F2FS_IO_PROG release_cblocks $testfile >> $seqres.full
->> +	_scratch_unmount
->> +
->> +	# 2. check after releasement
->> +	_check_scratch_fs
->> +	if [ $? -ne 0 ]; then
->> +		_fail "filesystem becomes corrupted after release_cblocks"
-> 
-> The _fail is not necessary, due to _check_scratch_fs will do "exit 1"
-> if it find a corruption. If you need some message, maybe echo it before
-> calling _check_scratch_fs?
-> 
->> +	fi
->> +
->> +	_scratch_mount >> $seqres.full
->> +	$F2FS_IO_PROG reserve_cblocks $testfile >> $seqres.full
->> +	_scratch_unmount
->> +
->> +	# 3. check after rservation
->> +	_check_scratch_fs
->> +	if [ $? -ne 0 ]; then
->> +		_fail "filesystem becomes corrupted after reserve_cblocks"
->> +	fi
-> 
-> Same as above
-> 
->> +
->> +	_scratch_mount "-o compress_mode=user" >> $seqres.full
->> +	$F2FS_IO_PROG decompress $testfile >> $seqres.full
->> +	_scratch_unmount
->> +
->> +	# 4. check after decompression
->> +	_check_scratch_fs
->> +	if [ $? -ne 0 ]; then
->> +		_fail "filesystem becomes corrupted after decompress"
->> +	fi
-> 
-> Same as above.
-
-Okay, let me update the patch.
-
-Thanks,
-
-> 
-> Thanks,
-> Zorro
-> 
->> +done
->> +
->> +status=0
->> +exit
->> diff --git a/tests/f2fs/007.out b/tests/f2fs/007.out
->> new file mode 100644
->> index 00000000..2ea71c18
->> --- /dev/null
->> +++ b/tests/f2fs/007.out
->> @@ -0,0 +1,4 @@
->> +QA output created by 007
->> +compression ratio is: 64 / 256
->> +compression ratio is: 128 / 256
->> +compression ratio is: 192 / 256
->> -- 
->> 2.40.1
->>
-> 
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+Q2hhbyBZdSA8Y2hhb0BrZXJuZWwub3JnPiDkuo4yMDI05bm0MTDmnIgyOOaXpeWRqOS4gCAxNzoz
+NOWGmemBk++8mgo+Cj4gT24gMjAyNC8xMC8yMyAxMTowOCwgWmhpZ3VvIE5pdSB3cm90ZToKPiA+
+IElmIGdjX21vZGUgaXMgc2V0IHRvIEdDX1VSR0VOVF9MT1cgb3IgR0NfVVJHRU5UX01JRCwgY29z
+dCBiZW5lZml0IEdDCj4gPiBhcHByb2FjaCBzaG91bGQgYmUgdXNlZCwgYnV0IGlmIEFUR0MgaXMg
+ZW5hYmxlZCBhdCB0aGUgc2FtZSB0aW1lLAo+ID4gQWdlLXRocmVzaG9sZCBhcHByb2FjaCB3aWxs
+IGJlIHNlbGVjdGVkLCB3aGljaCBjYW4gb25seSBkbyBhbW91bnQgb2YKPiA+IEdDIGFuZCBpdCBp
+cyBtdWNoIGxlc3MgdGhhbiB0aGUgbnVtYmVycyBvZiBDQiBhcHByb2FjaC4KPgo+IFRoZSBjb2Rl
+IGxvb2tzIGZpbmUgdG8gbWUsIHRoZXJlIGlzIG9uZSBtb3JlIHRoaW5nLCBjYW4geW91IHBsZWFz
+ZSB1cGRhdGUKPiBkZXNjcmlwdGlvbiBvZiBnY191cmdlbnQgaW4gc3lzZnMtZnMtZjJmcz8gc28g
+aXQgY2FuIGRlc2NyaWJlIGV4cGxpY2l0bHkKPiB0aGF0IGNvbmZpZ3VyaW5nIGdjX3VyZ2VudCB0
+byBsb3cgb3IgbWlkIHdpbGwgc2V0dXAgR0NfQ0IgR0MgcG9saWN5IHdoaWNoCj4gd2lsbCBvdmVy
+cmlkZSBHQ19BVC4KRGVhciBDaGFvLApPSywgdGhhbmtzIGZvciB5b3Ugc3VnZ2VzdGlvbnMuCgo+
+Cj4gVGhhbmtzLAo+Cj4gPgo+ID4gc29tZSB0cmFjZXM6Cj4gPiAgICBmMmZzX2djLTI1NDo0OC0z
+OTYgICAgIFswMDddIC4uLi4uIDIzMTE2MDAuNjg0MDI4OiBmMmZzX2djX2JlZ2luOiBkZXYgPSAo
+MjU0LDQ4KSwgZ2NfdHlwZSA9IEJhY2tncm91bmQgR0MsIG5vX2JhY2tncm91bmRfR0MgPSAwLCBu
+cl9mcmVlX3NlY3MgPSAwLCBub2RlcyA9IDEwNTMsIGRlbnRzID0gMiwgaW1ldGEgPSAxOCwgZnJl
+ZV9zZWM6NDQ4OTgsIGZyZWVfc2VnOjQ0ODk4LCByc3Zfc2VnOjIzOSwgcHJlZnJlZV9zZWc6MAo+
+ID4gICAgZjJmc19nYy0yNTQ6NDgtMzk2ICAgICBbMDA3XSAuLi4uLiAyMzExNjAwLjY4NDUyNzog
+ZjJmc19nZXRfdmljdGltOiBkZXYgPSAoMjU0LDQ4KSwgdHlwZSA9IE5vIFRZUEUsIHBvbGljeSA9
+IChCYWNrZ3JvdW5kIEdDLCBMRlMtbW9kZSwgQWdlLXRocmVzaG9sZCksIHZpY3RpbSA9IDEwLCBj
+b3N0ID0gNDI5NDM2NDk3NSwgb2ZzX3VuaXQgPSAxLCBwcmVfdmljdGltX3NlY25vID0gLTEsIHBy
+ZWZyZWUgPSAwLCBmcmVlID0gNDQ4OTgKPiA+ICAgIGYyZnNfZ2MtMjU0OjQ4LTM5NiAgICAgWzAw
+N10gLi4uLi4gMjMxMTYwMC43MTQ4MzU6IGYyZnNfZ2NfZW5kOiBkZXYgPSAoMjU0LDQ4KSwgcmV0
+ID0gMCwgc2VnX2ZyZWVkID0gMCwgc2VjX2ZyZWVkID0gMCwgbm9kZXMgPSAxNTYyLCBkZW50cyA9
+IDIsIGltZXRhID0gMTgsIGZyZWVfc2VjOjQ0ODk4LCBmcmVlX3NlZzo0NDg5OCwgcnN2X3NlZzoy
+MzksIHByZWZyZWVfc2VnOjAKPiA+ICAgIGYyZnNfZ2MtMjU0OjQ4LTM5NiAgICAgWzAwN10gLi4u
+Li4gMjMxMTYwMC43MTQ4NDM6IGYyZnNfYmFja2dyb3VuZF9nYzogZGV2ID0gKDI1NCw0OCksIHdh
+aXRfbXMgPSA1MCwgcHJlZnJlZSA9IDAsIGZyZWUgPSA0NDg5OAo+ID4gICAgZjJmc19nYy0yNTQ6
+NDgtMzk2ICAgICBbMDA3XSAuLi4uLiAyMzExNjAwLjc3MTc4NTogZjJmc19nY19iZWdpbjogZGV2
+ID0gKDI1NCw0OCksIGdjX3R5cGUgPSBCYWNrZ3JvdW5kIEdDLCBub19iYWNrZ3JvdW5kX0dDID0g
+MCwgbnJfZnJlZV9zZWNzID0gMCwgbm9kZXMgPSAxNTYyLCBkZW50cyA9IDIsIGltZXRhID0gMTgs
+IGZyZWVfc2VjOjQ0ODk4LCBmcmVlX3NlZzo0NDg5OCwgcnN2X3NlZzoyMzksIHByZWZyZWVfc2Vn
+Ogo+ID4gICAgZjJmc19nYy0yNTQ6NDgtMzk2ICAgICBbMDA3XSAuLi4uLiAyMzExNjAwLjc3MjI3
+NTogZjJmc19nY19lbmQ6IGRldiA9ICgyNTQsNDgpLCByZXQgPSAtNjEsIHNlZ19mcmVlZCA9IDAs
+IHNlY19mcmVlZCA9IDAsIG5vZGVzID0gMTU2MiwgZGVudHMgPSAyLCBpbWV0YSA9IDE4LCBmcmVl
+X3NlYzo0NDg5OCwgZnJlZV9zZWc6NDQ4OTgsIHJzdl9zZWc6MjM5LCBwcmVmcmVlX3NlZzowCj4g
+Pgo+ID4gRml4ZXM6IDBlNWU4MTExNGRlMSAoImYyZnM6IGFkZCBHQ19VUkdFTlRfTE9XIG1vZGUg
+aW4gZ2NfdXJnZW50IikKPiA+IEZpeGVzOiBkOThhZjVmNDU1MjAgKCJmMmZzOiBpbnRyb2R1Y2Ug
+Z2NfdXJnZW50X21pZCBtb2RlIikKPiA+IFNpZ25lZC1vZmYtYnk6IFpoaWd1byBOaXUgPHpoaWd1
+by5uaXVAdW5pc29jLmNvbT4KPiA+IC0tLQo+ID4gdjI6IG1ha2UgR0NfVVJHRU5UX0xPVyBhbHNv
+IHVzZSBDQiBhcHByb2FjaAo+ID4gLS0tCj4gPiAgIGZzL2YyZnMvZ2MuYyB8IDIgKysKPiA+ICAg
+MSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKQo+ID4KPiA+IGRpZmYgLS1naXQgYS9mcy9m
+MmZzL2djLmMgYi9mcy9mMmZzL2djLmMKPiA+IGluZGV4IGU0MGJkZDEuLjNlMWI2ZDIgMTAwNjQ0
+Cj4gPiAtLS0gYS9mcy9mMmZzL2djLmMKPiA+ICsrKyBiL2ZzL2YyZnMvZ2MuYwo+ID4gQEAgLTI1
+Nyw2ICsyNTcsOCBAQCBzdGF0aWMgaW50IHNlbGVjdF9nY190eXBlKHN0cnVjdCBmMmZzX3NiX2lu
+Zm8gKnNiaSwgaW50IGdjX3R5cGUpCj4gPgo+ID4gICAgICAgc3dpdGNoIChzYmktPmdjX21vZGUp
+IHsKPiA+ICAgICAgIGNhc2UgR0NfSURMRV9DQjoKPiA+ICsgICAgIGNhc2UgR0NfVVJHRU5UX0xP
+VzoKPiA+ICsgICAgIGNhc2UgR0NfVVJHRU5UX01JRDoKPiA+ICAgICAgICAgICAgICAgZ2NfbW9k
+ZSA9IEdDX0NCOwo+ID4gICAgICAgICAgICAgICBicmVhazsKPiA+ICAgICAgIGNhc2UgR0NfSURM
+RV9HUkVFRFk6Cj4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3Rz
+LnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0
+aW5mby9saW51eC1mMmZzLWRldmVsCg==
