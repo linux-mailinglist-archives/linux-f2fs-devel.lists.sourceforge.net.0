@@ -2,92 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FD999B58FB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2024 02:15:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 983A29B5D7B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Oct 2024 09:17:57 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t5xJD-0000fQ-TW;
-	Wed, 30 Oct 2024 01:15:40 +0000
+	id 1t63tI-0002NK-AR;
+	Wed, 30 Oct 2024 08:17:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t5xJC-0000fK-Mz
+ (envelope-from <chao@kernel.org>) id 1t63tD-0002Le-Ab
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Oct 2024 01:15:39 +0000
+ Wed, 30 Oct 2024 08:17:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sKMjunQSU62K7iSM8LlbPn/LZV6FceuwI50A1bIrc8M=; b=eYkEttjVKGMrEexHbIw5ZafuTf
- eEWht7Mo/7l7R9wr/FtAOCPsJwTeHJwd/ZEp652WpGkKFuCk9sQUJxDxnA4q6FXDLTrMedah8bgGS
- 6iD+5E0qxwFEUXAy3+27UV8x+8MEVPswJlu8YM5W8+q6mg6+VMWjmp8+BEDm1CLH4rU4=;
+ bh=WrNrGGvyzm46hgJTJ9wsXN4M7WMbPBNwZLd5HF6pXTY=; b=WCz8xN8s1Pe5i95GZfZ9qCY6O5
+ m0rfzJIZRVBei+WoeSTGMgsdSMbZsaXQv0WhQMsHgcSHynru4z1uJIXk0v2lmzIss5fwhm3ne7dxR
+ AjfHvruVd9w87o9fr1nz/DGjSuWWAKF6bCBzsl46OajUn2HVHJt9Gu6vhKxmz6TaFyr8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=sKMjunQSU62K7iSM8LlbPn/LZV6FceuwI50A1bIrc8M=; b=FP0RjxiGNgyefWrM1VJ4YKEeT/
- 0E/AurYQY2Oc9dnBYEssDxilC1Fpmi2jSdjEERiKj6Cqv9pjn8PoRkeU++5fJoOlL1NWPfEKGGBNo
- c7yRNFymyG9HGHfrYR9vdx4IyISVt/XIcXjJe2AU51l+lf744jGfVZyq3tGo5KiZnXFs=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=WrNrGGvyzm46hgJTJ9wsXN4M7WMbPBNwZLd5HF6pXTY=; b=T
+ fAFYw8e0LEopyEfAm3mCmMWhZ1lnuWfCmzZnB5oCM/vhTMDmISVDLk+wDjNTcp8WPxyruU3lxpGyx
+ 6tcGCxGnaXFFbfKqkZvU+B2514m0x5xIBNcyRuRNnIk4eYvS1/c2o8Etopbdu1720qomvESjds8L4
+ tqC0/4WwyGZsLUFM=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t5xJC-0004X9-PY for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Oct 2024 01:15:39 +0000
+ id 1t63tD-0008Ow-Af for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 30 Oct 2024 08:17:16 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 28888A43688;
- Wed, 30 Oct 2024 01:13:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93CF9C4CECD;
- Wed, 30 Oct 2024 01:15:31 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id B20D4A43890
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 30 Oct 2024 08:15:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0DFF5C4CEE4;
+ Wed, 30 Oct 2024 08:17:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1730250932;
- bh=nPbbsTDb7XfaekyVKBI0hGWozKznf6W/Da+mLTQB0Z8=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=bLIkzWgrPFxGJNEn7CpiQwT8lpP4gfuUFY+ibq36wZC2O/2QoQRGOVtdN4Kfq3UOg
- jzrt9bFALMibSSfEXdo9Ka6LDiG9YXZ1OOVQa+q26QOMwIoNiGr3SlBmuzHozEXff8
- 5o25be3+mmo7zJzpjYUq10e0MM7AxP1GXAD/VG0IeY7XTq8JE2Nzw0RaHx5JPbVSJj
- 66pi94Byxr12EXttp3xgTVeIGgddj/p+Y8e+fo67+Am6O420x2q1FPfXLXTzc7qmBY
- UkVnQxZ9kU3TOWQcWFOmMSKVS5h+yHuQ9/F2Efc5Vbuwoooo2kU8mSek5VK1I9Lovr
- Oh76XqFuLZxiA==
-Message-ID: <e3fe4218-4d2c-4bc6-beb7-0f69a2f780d7@kernel.org>
-Date: Wed, 30 Oct 2024 09:15:28 +0800
+ s=k20201202; t=1730276229;
+ bh=G0Jc5GwhCoQ+HTn/PbQQjj+Skqf8rx5u84YAdDP62Sc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=dOx+MpUyPE4FK0GEJyZlgAS4dCoAOUAd/yPHA/RxZ2KEqFrsmKs4meZWnlYVnW+ro
+ Cvc45xXgBRoiIaLphFODANzSc4KWr8yeXMTYAX/72+mqMBRsF8MIXQb3NY2dDC1mWO
+ yrcgcsSSy2G+ZUeYv7o+YPVL/g8pfXJC1/qSuPrFjAGp5c4KxrUkPST+udrJps32Bq
+ SOtgsosPs7dw3VHwIzi8ndDiQoa5NOdFrine7xsCklrSjZOsEevtKD9wIPSCtdtmLO
+ U4vibdYffmVUAFYkpC2Nx4Ns7Ax6SkaIZmhVvGyCpuA/p+7bfyAxFZY2HMTWoKo6b1
+ NOn7x/srXUQYw==
+To: jaegeuk@kernel.org
+Date: Wed, 30 Oct 2024 16:17:01 +0800
+Message-Id: <20241030081701.1853020-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: LongPing Wei <weilongping@oppo.com>, jaegeuk@kernel.org
-References: <20241029104907.310781-1-weilongping@oppo.com>
-Content-Language: en-US
-In-Reply-To: <20241029104907.310781-1-weilongping@oppo.com>
-X-Spam-Score: -0.5 (/)
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/10/29 18:49,
- LongPing Wei wrote: > additional_reserved_segments
- was introduced by > commit 300a842937fb ("f2fs: fix to reserve space for
- IO align feature"), > and its initialization was delete [...] 
- Content analysis details:   (-0.5 points, 6.0 required)
+ Content preview:  This patch introduces a new helper log_type_to_seg_type()
+ to convert log type to segment data type, and uses it to clean up opened codes
+ in build_curseg(), and also it fixes to convert log type before [...] 
+ Content analysis details:   (-0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t5xJC-0004X9-PY
-Subject: Re: [f2fs-dev] [PATCH] f2fs: clean up the unused variable
- additional_reserved_segments
+ valid -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1t63tD-0008Ow-Af
+Subject: [f2fs-dev] [PATCH v2] f2fs: fix to convert log type to segment data
+ type correctly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,22 +98,82 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/10/29 18:49, LongPing Wei wrote:
-> additional_reserved_segments was introduced by
-> commit 300a842937fb ("f2fs: fix to reserve space for IO align feature"),
-> and its initialization was deleted by
-> commit 87161a2b0aed ("f2fs: deprecate io_bits").
-> 
-> Signed-off-by: LongPing Wei <weilongping@oppo.com>
+This patch introduces a new helper log_type_to_seg_type() to convert
+log type to segment data type, and uses it to clean up opened codes
+in build_curseg(), and also it fixes to convert log type before use
+in do_write_page().
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v2:
+- no logic change, just rebase to last dev-test branch
+ fs/f2fs/segment.c | 36 ++++++++++++++++++++++++++++--------
+ 1 file changed, 28 insertions(+), 8 deletions(-)
 
-Thanks,
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index a0347a59be6c..279ce3bd6ddd 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -3833,10 +3833,35 @@ void f2fs_update_device_state(struct f2fs_sb_info *sbi, nid_t ino,
+ 	}
+ }
+ 
++static int log_type_to_seg_type(enum log_type type)
++{
++	int seg_type = CURSEG_COLD_DATA;
++
++	switch (type) {
++	case CURSEG_HOT_DATA:
++	case CURSEG_WARM_DATA:
++	case CURSEG_COLD_DATA:
++	case CURSEG_HOT_NODE:
++	case CURSEG_WARM_NODE:
++	case CURSEG_COLD_NODE:
++		seg_type = (int)type;
++		break;
++	case CURSEG_COLD_DATA_PINNED:
++	case CURSEG_ALL_DATA_ATGC:
++		seg_type = CURSEG_COLD_DATA;
++		break;
++	default:
++		break;
++	}
++	return seg_type;
++}
++
+ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
+ {
+-	int type = __get_segment_type(fio);
+-	bool keep_order = (f2fs_lfs_mode(fio->sbi) && type == CURSEG_COLD_DATA);
++	enum log_type type = __get_segment_type(fio);
++	int seg_type = log_type_to_seg_type(type);
++	bool keep_order = (f2fs_lfs_mode(fio->sbi) &&
++				seg_type == CURSEG_COLD_DATA);
+ 
+ 	if (keep_order)
+ 		f2fs_down_read(&fio->sbi->io_order_lock);
+@@ -4818,12 +4843,7 @@ static int build_curseg(struct f2fs_sb_info *sbi)
+ 				sizeof(struct f2fs_journal), GFP_KERNEL);
+ 		if (!array[i].journal)
+ 			return -ENOMEM;
+-		if (i < NR_PERSISTENT_LOG)
+-			array[i].seg_type = CURSEG_HOT_DATA + i;
+-		else if (i == CURSEG_COLD_DATA_PINNED)
+-			array[i].seg_type = CURSEG_COLD_DATA;
+-		else if (i == CURSEG_ALL_DATA_ATGC)
+-			array[i].seg_type = CURSEG_COLD_DATA;
++		array[i].seg_type = log_type_to_seg_type(i);
+ 		reset_curseg_fields(&array[i]);
+ 	}
+ 	return restore_curseg_summaries(sbi);
+-- 
+2.40.1
+
 
 
 _______________________________________________
