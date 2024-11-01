@@ -2,96 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7642A9B929E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  1 Nov 2024 14:54:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CCCE9B99D8
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  1 Nov 2024 22:06:49 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t6s6H-0004IH-Dq;
-	Fri, 01 Nov 2024 13:54:06 +0000
+	id 1t6yqs-0005I4-RH;
+	Fri, 01 Nov 2024 21:06:39 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t6s6G-0004IA-Hq
+ (envelope-from <jaegeuk@kernel.org>) id 1t6yqn-0005Ht-7X
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 01 Nov 2024 13:54:05 +0000
+ Fri, 01 Nov 2024 21:06:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dwax/0GHgBbbplJLy7dokIbVlgbgUv7kkTxMeg2TQ1I=; b=QG3+dJjAMgFmzdSxT+9lSyY9iP
- XJuRC5l6dGBwhDGnxyPNDcO6fdNkcXk8F4bj2g1cGXHwvP5jrksGHZpnZbpm86mxcaXVSifW0JN01
- hcriXT0Ig8Qyxgk74efYL6CPnHftUSd1t5PkBXovI7vFa4+yBfrbQMi3ut8RNtYU89/Q=;
+ bh=iaciUbOy8Rob9F1D5vlQ/KPnw+oMAYNTqUYT/ABfBmE=; b=Xt02xX5+Se6nbXVcixDX3jYY9Y
+ VT3Ybxj/f6SfUGaBMBiF6XWzv/A+yQaTEVfYi4Pci8cLMXyc2KzN7SxSFQ3RHBDQDnWiilbPzrssj
+ mcyCc1lYynvOPMG267Q9MGPovNoXCuF+fDWBz9VXB/esP++pVf1ThDnpoPEiQdkp5QW4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dwax/0GHgBbbplJLy7dokIbVlgbgUv7kkTxMeg2TQ1I=; b=U5CSkr1lg9qYmMSWDfARea8HUF
- on4U3ECTKaSQS0FUUIRfqzf+p4g4+Q4S8/xmRFKA8EI3MQA99yUGDAp6TwZCfKs6ELqbSkN86/IpY
- 3amJ/rVARaJoZn2XyHUSC88A+9IcX+n0ku6FXGd34SlOj1m4fa8wJtsBEmlqrPFDAGQQ=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=iaciUbOy8Rob9F1D5vlQ/KPnw+oMAYNTqUYT/ABfBmE=; b=LBazJyMROZVgdYacaI5/xMbM4R
+ sMZhu2L9ICTivEVQ1WOege2JNbJYODQUzF+OL2ls8TGRvmIDCAid2fqZa55H34RRAjYipwYGvxiqL
+ dGxcK1i7DsvHr6YJ1VTJZiZfQHsqEYUB9mymtm8wbQxEik7Vgk9t8wT83C9KrG2BzucM=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t6s6G-0005ID-Ja for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 01 Nov 2024 13:54:05 +0000
+ id 1t6yqn-0003to-8t for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 01 Nov 2024 21:06:33 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7F3255C7C7E;
- Thu, 31 Oct 2024 07:18:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1D03C4CEC3;
- Thu, 31 Oct 2024 07:19:17 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 164EAA44DCF;
+ Fri,  1 Nov 2024 21:04:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09CDEC4CECD;
+ Fri,  1 Nov 2024 21:06:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1730359160;
- bh=G1joOcZYVzyi+CpWThJYYljoZ34bPNrUyzqzZp2mieM=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=fMiC4EVapi5C1MT5gjVRtLMnN+GYG5+8V4cLi2fM6euLZJKtYxeUIMf+tfVkOjJWT
- 03+c1Ys1x42N1Xpmpydoe3KKZDiJeT0DJ2pHe6uZ0enYH0DXtaW7zw3hKckQu0ahwv
- l1N7gUzyUbZTTQXP0yhg7YUagZvFybjBFAKFWsoctk0+Smdf++ORcZpcTiS/nmY4UZ
- /DLLR50GTnrEuwg3JKQ2KBgMiTJXgPMGqfXCABJhGnr0P1vTLu6fra00FgUQuhewzB
- ejFgwia1s6NPgk00bxjCYgam//rmg68NdnY25m95Fva3rOyhY1lLrpb107odGHWOS+
- yOxT2UJEy4MWQ==
-Message-ID: <290e29df-3f63-4de9-a18f-c5c4190d85f1@kernel.org>
-Date: Thu, 31 Oct 2024 15:19:15 +0800
+ s=k20201202; t=1730495187;
+ bh=6r0kSGz22uyB0SBpH5zjJIdf6qncKwiekp9O4rAUAUA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=EOLbFIMGNUKs72gZPgmR4wOxbn3G0A+8h2r/vLQzpb1TtSkfi9g9mFvv2Zc7SDk44
+ q/NbICTH+a5uSel23gTHJA6FZ/dAcNHgbjS/WGXS2k/kEAXLBORtIB4KjMsxOtEkD/
+ 04QbSjBcUJSfbWgQyOo1GQRJltodhEzf27AJCEYz1soebWko8dktEV6xk07c8tk4ND
+ W7RmEqm2gDOieEmtVosjPbO85LX/LFgZpZBdZtpJLNcPoB8M1T0wQ3KPegAFFjE3iX
+ CtqPkML/7kZr5oyAdVIEUAx9Pj33EzGLV9CWtGRA3zLR2SWfOHMJ4gIbiIW7Gx6ocJ
+ RRoXjubbrlURA==
+Date: Fri, 1 Nov 2024 21:06:25 +0000
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZyVC0R8JYwMZXM9u@google.com>
+References: <20241031102200.440407-1-chao@kernel.org>
+ <ZyQtcbtzpixFd6Zs@google.com>
+ <fede8a9b-8532-4d63-a4db-b52ed088d6f8@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Yi Sun <yi.sun@unisoc.com>, jaegeuk@kernel.org
-References: <20241030103136.2874140-1-yi.sun@unisoc.com>
- <20241030103136.2874140-2-yi.sun@unisoc.com>
-Content-Language: en-US
-In-Reply-To: <20241030103136.2874140-2-yi.sun@unisoc.com>
-X-Spam-Score: -5.5 (-----)
+Content-Disposition: inline
+In-Reply-To: <fede8a9b-8532-4d63-a4db-b52ed088d6f8@kernel.org>
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/10/30 18:31,
- Yi Sun wrote: > When using update_sit_entry()
- to release consecutive blocks, > ensure that the consecutive blocks belong
- to the same segment. > Because after update_sit_entry_for_ [...] 
- Content analysis details:   (-5.5 points, 6.0 required)
+ Content preview:  On 11/01, Chao Yu wrote: > On 2024/11/1 9:22, Jaegeuk Kim
+ wrote: > > On 10/31, Chao Yu wrote: > > > f2fs_map_blocks() supports to map
+ continuous holes or preallocated > > > address, we should avoid se [...] 
+ Content analysis details:   (-0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t6s6G-0005ID-Ja
-Subject: Re: [f2fs-dev] [PATCH v2 1/5] f2fs: blocks need to belong to the
- same segment when using update_sit_entry()
+X-Headers-End: 1t6yqn-0003to-8t
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to map blocks correctly for direct
+ read
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,69 +100,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, sunyibuaa@gmail.com,
- hao_hao.wang@unisoc.com
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: kernel test robot <oliver.sang@intel.com>, linux-kernel@vger.kernel.org,
+ Cyril Hrubis <chrubis@suse.cz>, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/10/30 18:31, Yi Sun wrote:
-> When using update_sit_entry() to release consecutive blocks,
-> ensure that the consecutive blocks belong to the same segment.
-> Because after update_sit_entry_for_realese(), @segno is still
-> in use in update_sit_entry().
+On 11/01, Chao Yu wrote:
+> On 2024/11/1 9:22, Jaegeuk Kim wrote:
+> > On 10/31, Chao Yu wrote:
+> > > f2fs_map_blocks() supports to map continuous holes or preallocated
+> > > address, we should avoid setting F2FS_MAP_MAPPED for these cases
+> > > only, otherwise, it may fail f2fs_iomap_begin(), and make direct
+> > > write fallbacking to use buffered IO and flush, result in performance
+> > > regression.
+> > 
+> > Is this fixing direct write or read?
+> 
+> Direct write.
 
-I think this patch should be merged into
-"f2fs: introduce update_sit_entry_for_release()".
-
-Thanks,
+I was confising the patch subject is saying direct read.
 
 > 
-> Signed-off-by: Yi Sun <yi.sun@unisoc.com>
-> ---
->   fs/f2fs/segment.c | 11 +++++++++++
->   1 file changed, 11 insertions(+)
+> > 
+> > > 
+> > > Fixes: 9f0f6bf42714 ("f2fs: support to map continuous holes or preallocated address")
+> > > Reported-by: kernel test robot <oliver.sang@intel.com>
+> > > Closes: https://lore.kernel.org/oe-lkp/202409122103.e45aa13b-oliver.sang@intel.com
+> > > Cc: Cyril Hrubis <chrubis@suse.cz>
+> > > Signed-off-by: Chao Yu <chao@kernel.org>
+> > > ---
+> > >   fs/f2fs/data.c | 7 ++++++-
+> > >   1 file changed, 6 insertions(+), 1 deletion(-)
+> > > 
+> > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > > index 306b86b0595d..38b85160c6bd 100644
+> > > --- a/fs/f2fs/data.c
+> > > +++ b/fs/f2fs/data.c
+> > > @@ -1676,7 +1676,12 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
+> > >   		/* reserved delalloc block should be mapped for fiemap. */
+> > >   		if (blkaddr == NEW_ADDR)
+> > >   			map->m_flags |= F2FS_MAP_DELALLOC;
+> > > -		if (flag != F2FS_GET_BLOCK_DIO || !is_hole)
+> > > +		/*
+> > > +		 * f2fs_map_blocks() supports to map continuous holes or
+> > > +		 * preallocated address, don't set F2FS_MAP_MAPPED for these
+> > > +		 * cases only.
+> > > +		 */
+> > > +		if (flag != F2FS_GET_BLOCK_DIO || map->m_may_create || !is_hole)
+> > 
+> > So, this is adding map->m_may_create, which is for writes?
 > 
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index bb2fd98331cd..a5bd101c63a1 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -2424,6 +2424,10 @@ static void update_segment_mtime(struct f2fs_sb_info *sbi, block_t blkaddr,
->   		SIT_I(sbi)->max_mtime = ctime;
->   }
->   
-> +/*
-> + * NOTE: when updating multiple blocks at the same time, please ensure
-> + * that the consecutive input blocks belong to the same segment.
-> + */
->   static int update_sit_entry_for_release(struct f2fs_sb_info *sbi, struct seg_entry *se,
->   				block_t blkaddr, unsigned int offset, int del)
->   {
-> @@ -2434,6 +2438,8 @@ static int update_sit_entry_for_release(struct f2fs_sb_info *sbi, struct seg_ent
->   	int i;
->   	int del_count = -del;
->   
-> +	f2fs_bug_on(sbi, GET_SEGNO(sbi, blkaddr) != GET_SEGNO(sbi, blkaddr + del_count - 1));
-> +
->   	for (i = 0; i < del_count; i++) {
->   		exist = f2fs_test_and_clear_bit(offset + i, se->cur_valid_map);
->   #ifdef CONFIG_F2FS_CHECK_FS
-> @@ -2476,6 +2482,11 @@ static int update_sit_entry_for_release(struct f2fs_sb_info *sbi, struct seg_ent
->   	return del;
->   }
->   
-> +/*
-> + * If releasing blocks, this function supports updating multiple consecutive blocks
-> + * at one time, but please note that these consecutive blocks need to belong to the
-> + * same segment.
-> + */
->   static void update_sit_entry(struct f2fs_sb_info *sbi, block_t blkaddr, int del)
->   {
->   	struct seg_entry *se;
+> map->m_may_create is added for write path, w/o this condition, f2fs_map_blocks()
+> may missed to tag F2FS_MAP_MAPPED, result in that f2fs_iomap_begin() will return
+> -ENOTBLK.
 
+Is that something like this?
+
+/* DIO READ and hole case, should not map the blocks. */
+if (!(flag == F2FS_GET_BLOCK_DIO && is_hole && !map->m_may_create))
+
+> 
+> Am I missing someting?
+> 
+> Thanks,
+> 
+> > 
+> > >   			map->m_flags |= F2FS_MAP_MAPPED;
+> > >   		map->m_pblk = blkaddr;
+> > > -- 
+> > > 2.40.1
 
 
 _______________________________________________
