@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8ED709BC2A4
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Nov 2024 02:34:46 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E48749BC2D1
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Nov 2024 02:54:30 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t88Sw-0001l4-7A;
-	Tue, 05 Nov 2024 01:34:42 +0000
+	id 1t88lw-0005N5-B7;
+	Tue, 05 Nov 2024 01:54:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t88Sv-0001kx-CM
+ (envelope-from <chao@kernel.org>) id 1t88lu-0005Mn-UN
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 05 Nov 2024 01:34:42 +0000
+ Tue, 05 Nov 2024 01:54:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NHOy9HMfGZsNYCZrwLCSvIFDt8NcrmF4jHCNX3GgtvM=; b=bcsta4BV00HJ4B4EdpAyg2xs9m
- 8HWz731h4lhi+eDyePWDbgb7EEWh+biNQKE3uW+FVHw7Y/iSP2Dp5O0gMGQjup4emiOvyww12oqIQ
- PQfs2FP0XqEwTxrv5zl1PsDDM3uScqKulk8Sz61Nc+7JTld4skOFmJ/Xj6Mb86WlwGR4=;
+ bh=1FQeTwXvdyoTZ//kKNadkeycG9CD4exL2xuSlkw0tOA=; b=It3msqYdkDTa+0RJzp9XbbGXop
+ NVmUlp+JDGR1LVo86MNT7L+c3YjkC+icVxUkeI3y6luHam2z6I7veeBdEj51lX66sTas/Ql8Q+2q2
+ GX2yoX6jfMEe9fWTb4lRWEgExJ8/rPyp2eGoTq3PVMhHkItbrY7qpNVtopYAuSzkx/FE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,38 +31,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NHOy9HMfGZsNYCZrwLCSvIFDt8NcrmF4jHCNX3GgtvM=; b=Gta5M/uWFcbikDPfK2z6mCNSiI
- tnTZ0csMMqW13We9a4t5qLmay6Ndhxn+At7jaMarCo1CupILJzXc3OeohlYKmUM0zf3D4gNo+abNP
- /k71wLkFUAwPy7loUrv+SlX6dnaPEHQswc0jyefGvpnyLB567+DTAc3RHvoSN9wRsEnY=;
+ bh=1FQeTwXvdyoTZ//kKNadkeycG9CD4exL2xuSlkw0tOA=; b=TN1JrNgdqe3RjLzV4X4UJmpLra
+ qnmdKosMqDjoJssQMrs5gZU4QbyF5h7mOwyn76m9B3FTCzUzwUk2Xz87pr4HtfhFCbkotB3Cs+r9w
+ 4Vx4S74zfn0uB7tpy18F33pUr5tvcrUYBrjpOCC5JFA/UlucwHcA0scoT8xHEFwQkcbA=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t88Su-0006HP-IL for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 05 Nov 2024 01:34:41 +0000
+ id 1t88lu-0007Od-87 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 05 Nov 2024 01:54:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id BD667A41C59;
- Tue,  5 Nov 2024 01:32:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D0B7C4CECE;
- Tue,  5 Nov 2024 01:34:25 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 6FE1DA41C73;
+ Tue,  5 Nov 2024 01:52:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 871CCC4CECE;
+ Tue,  5 Nov 2024 01:54:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1730770469;
- bh=pZqyeDU4Z0xb82ka1rqo9zPh5E+ZbwXvL5ApzcS2al4=;
+ s=k20201202; t=1730771647;
+ bh=eVOa5xQIw5wXVux6yc3Qr0qhE7PGTsAlDSGrhyEDVSI=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=cilUS0qQCFaxNF3zH63qgUIqVpBsK5ZAO2+Mc4CrXmk6QZIa3ZA/1eyWd894pH2td
- p6DeOBI4b44PBAllxDSwZ+pvc/5OEkcYzKgLtcgnvluIpjNagN96SxdO1hq1RTBHL4
- IsHQ3dUtDassq5aGIJOJqxs+MkAOhLYww1/sRgfew7akFKeqGOT8zYLFCTpqAtJETh
- hetvPOAoOKDF42PLByagmL9JEdRSFvR3DT2TRaUD4mTfYhVrokbWecXm5y2cdsb4O7
- uykYoTN0CALyatfk7dtT2vPJ/mDxiOvw5DHvt59QcW4RICZcRPoNv9l/f+5h04HOGk
- wE3h4ii4bPJsw==
-Message-ID: <43d8b52e-5e5b-4a37-9a18-6ac392048d92@kernel.org>
-Date: Tue, 5 Nov 2024 09:34:23 +0800
+ b=Y7T5d9WmL2E5oZQt6fioBSN0Gu3FqRsW3rR+SpN8WpwjvMmV8VWhmQiyRoTxiU8uf
+ s4XbBQQWmmYypsX0hrPBrJyhyvZzVDfy0M+YkwKNk8pmS0pFWfxEunjHeA5u8tf9xV
+ U9zUdwmr2F98agTHWoV2338WVNH0Y9S9cqYDbfRP5lr3J+tmsLAWrhAVYYPFuFXEiv
+ vq6mwSDd0kqTX00go5eMUxH8V88c2yhq0t6+EZLFapmVgAIt68xG7jTNH1klBrCnvp
+ zi3eq3t0ouSfkVSuxK48O4k4VGMxZFmavM6Zuf6p22h4WWvIcRq3IgccZynkHWQTlA
+ HGbtFdIFhhTSg==
+Message-ID: <40643403-1209-465f-bede-a990d4b564e5@kernel.org>
+Date: Tue, 5 Nov 2024 09:54:03 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Eric Biggers <ebiggers@kernel.org>, linux-kernel@vger.kernel.org
-References: <20241103223154.136127-1-ebiggers@kernel.org>
- <20241103223154.136127-18-ebiggers@kernel.org>
+To: Yohan Joung <jyh429@gmail.com>, jaegeuk@kernel.org, daeho43@gmail.com
+References: <20241029134551.252-1-yohan.joung@sk.com>
 Content-Language: en-US
-In-Reply-To: <20241103223154.136127-18-ebiggers@kernel.org>
+In-Reply-To: <20241029134551.252-1-yohan.joung@sk.com>
 X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -70,9 +69,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/11/4 6:31, Eric Biggers via Linux-f2fs-devel wrote:
- > From: Eric Biggers <ebiggers@google.com> > > Now that the crc32() library
- function takes advantage of > architecture-specific optimization [...] 
+ Content preview:  On 2024/10/29 21:45, Yohan Joung wrote: > When formatting
+ conventional partition with zoned one, we are already > aligning the starting
+ block address of the next device to the zone size. > Therefore, [...] 
  Content analysis details:   (-0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -86,9 +85,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t88Su-0006HP-IL
-Subject: Re: [f2fs-dev] [PATCH v3 17/18] f2fs: switch to using the crc32
- library
+X-Headers-End: 1t88lu-0007Od-87
+Subject: Re: [f2fs-dev] [PATCH v2] mkfs.f2fs: adjust zone alignment when
+ using convention partition with zoned one
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,31 +101,73 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-arch@vger.kernel.org, linux-s390@vger.kernel.org, x86@kernel.org,
- linux-scsi@vger.kernel.org, linux-mips@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-crypto@vger.kernel.org,
- loongarch@lists.linux.dev, sparclinux@vger.kernel.org,
- linux-riscv@lists.infradead.org, linux-ext4@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, Ard Biesheuvel <ardb@kernel.org>,
- linux-arm-kernel@lists.infradead.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/11/4 6:31, Eric Biggers via Linux-f2fs-devel wrote:
-> From: Eric Biggers <ebiggers@google.com>
+On 2024/10/29 21:45, Yohan Joung wrote:
+> When formatting conventional partition with zoned one, we are already
+> aligning the starting block address of the next device to the zone size.
+> Therefore, we do not align the segment0 address to the zone alignment.
+> This reduces the wasted zone_align_start_offset.
 > 
-> Now that the crc32() library function takes advantage of
-> architecture-specific optimizations, it is unnecessary to go through the
-> crypto API.  Just use crc32().  This is much simpler, and it improves
-> performance due to eliminating the crypto API overhead.
+> Test result
+> segment0 blkaddr 389583 -> 119251
+> Add one additional section to main
 > 
-> Reviewed-by: Ard Biesheuvel <ardb@kernel.org>
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> Signed-off-by: Yohan Joung <yohan.joung@sk.com>
+> ---
+>   mkfs/f2fs_format.c | 10 +++++++---
+>   1 file changed, 7 insertions(+), 3 deletions(-)
+> 
+> diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+> index a01b19e..52a1e18 100644
+> --- a/mkfs/f2fs_format.c
+> +++ b/mkfs/f2fs_format.c
+> @@ -266,6 +266,7 @@ static int f2fs_prepare_super_block(void)
+>   	uint32_t log_sectorsize, log_sectors_per_block;
+>   	uint32_t log_blocksize, log_blks_per_seg;
+>   	uint32_t segment_size_bytes, zone_size_bytes;
+> +	uint32_t alignment_bytes;
+>   	uint32_t sit_segments, nat_segments;
+>   	uint32_t blocks_for_sit, blocks_for_nat, blocks_for_ssa;
+>   	uint32_t total_valid_blks_available;
+> @@ -305,10 +306,12 @@ static int f2fs_prepare_super_block(void)
+>   
+>   	set_sb(block_count, c.total_sectors >> log_sectors_per_block);
+>   
+> +	alignment_bytes = c.zoned_mode && c.ndevs > 1 ? segment_size_bytes : zone_size_bytes;
+> +
+>   	zone_align_start_offset =
+>   		((uint64_t) c.start_sector * DEFAULT_SECTOR_SIZE +
+> -		2 * F2FS_BLKSIZE + zone_size_bytes - 1) /
+> -		zone_size_bytes * zone_size_bytes -
+> +		2 * F2FS_BLKSIZE + alignment_bytes  - 1) /
+> +		alignment_bytes  * alignment_bytes  -
 
-Acked-by: Chao Yu <chao@kernel.org>
+round_up(..., alignment_bytes) * alignment_bytes - ?
+
+Otherwise, it looks good to me.
+
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
+
+>   		(uint64_t) c.start_sector * DEFAULT_SECTOR_SIZE;
+>   
+>   	if (c.feature & F2FS_FEATURE_RO)
+> @@ -327,7 +330,8 @@ static int f2fs_prepare_super_block(void)
+>   
+>   	if (c.zoned_mode && c.ndevs > 1)
+>   		zone_align_start_offset +=
+> -			(c.devices[0].total_sectors * c.sector_size) % zone_size_bytes;
+> +			(c.devices[0].total_sectors * c.sector_size -
+> +			 zone_align_start_offset) % zone_size_bytes;
+>   
+>   	set_sb(segment0_blkaddr, zone_align_start_offset / blk_size_bytes);
+>   	sb->cp_blkaddr = sb->segment0_blkaddr;
+
 
 
 _______________________________________________
