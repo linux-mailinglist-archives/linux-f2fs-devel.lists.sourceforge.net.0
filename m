@@ -2,82 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C423A9C197E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Nov 2024 10:47:14 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA85F9C2944
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  9 Nov 2024 02:39:01 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1t9La8-0002zd-7j;
-	Fri, 08 Nov 2024 09:47:07 +0000
+	id 1t9aR6-0004sO-HL;
+	Sat, 09 Nov 2024 01:38:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1t9La7-0002zX-7h
+ (envelope-from <danielyangkang@gmail.com>) id 1t9aR5-0004s8-3c
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 Nov 2024 09:47:06 +0000
+ Sat, 09 Nov 2024 01:38:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lTZd2riYcTluLcbKzK8e3Y4zGBDS43XaC/4hv8Iye+0=; b=j6fxfYmaHnfm6Tw+r4aDgzxXA2
- nPaF+AxDS0s9jJHpM0NTDJPJhQT252Y1pxY5REieIzBjPcC+vK6QcFHzogn6GubkQb90q2FD961Kk
- D2/qAWJ3008frpJ/9ZDTbkhNUnx/LjK6Uq0lh5l5qlWtKYXwfeGeD20RorGTFrvpOeFM=;
+ bh=bawIuU92Q74ggWk5pYR+Z5wr5o+e7Od2yBJHvPe/cZk=; b=j3SwFGJxXyKrzy0M60EWj3yaeQ
+ 83uOQOxg2ZK7eH/m1Ci4bXAy/OtCGQqVZe69xqaSUTxAYhoZNBcURypj5GQOHevZy3U1GN0Y8Z0mT
+ iaOoSo3IwcEd8RoNpV8GhUGxKEsxwolv4pNY0zFa4nI96exVHAnS8YEyKy8WBZeKtj54=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=lTZd2riYcTluLcbKzK8e3Y4zGBDS43XaC/4hv8Iye+0=; b=mzrUfEeeRFpH7TN7eOxeUV21sT
- 5H+nn9UEwxL9zyvPLOTJw8uIQEg0cXDToRoHpo76/edLlJJZ0DxeMrlqScbIqydp5ZgKAfVCU5M5a
- N/Z7mo+F/MAFLu6nqt0wcNO5QEN4+fZnEJug7ewZOk5uhWLNv+gQpEK3sCGatnEUdaNA=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=bawIuU92Q74ggWk5pYR+Z5wr5o+e7Od2yBJHvPe/cZk=; b=B
+ zM5aruZoKIzuEiC/iNTlrPuqDB2zO+B6IDZjeLjKiSjOZyJQvuRcgj4sqN8IGXh7hSeseiK41jOjR
+ Z37vBBc5ateR/lSC9hFyJGvq9pNMQxBmLU7WycUz1QUE2nBtHQgXHH0nwWAmMhqvzKB/iv0tKTWoO
+ cnBgxo1eVYIzTTsE=;
+Received: from mail-pl1-f176.google.com ([209.85.214.176])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1t9La5-0004Rp-Vr for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 Nov 2024 09:47:06 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 86D81A45253;
- Fri,  8 Nov 2024 09:45:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9C13C4CECD;
- Fri,  8 Nov 2024 09:46:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1731059219;
- bh=gftxDemJKqLJb4mPXXdNi/TfrkvP+Tbn9Ob+u48LGdg=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=KKXPLmlBGCfy1R0l/7mT7SkOr71BSLUeo7+zKNEUxKi8NkXAFa5KpOdZYZFvPOLml
- PQ3/cFBFJ5ZllbyLnHzk0lb9YueYLDkKyO0lO0WoP3wirO1hj1qIEfq49OaQvVSxfm
- L6FMmrsEPB4nzBLwS9IDgGoVDn+0GR/yssRro1NELONKB82oN0KrxHKwBQwC1kIKA1
- DboLEOeUE6egG5QljdrXnsCtRTrd/OiTXPYA56+2VGo5Uk84DQ6lrWvi6W6oCdjlRr
- 5Lh+7TOm6r9yXJUso1CVWpU8fsqlCCrg38oTKXS3LeKMHCetR90LOgkO+BBlV186vL
- az2Oir+syI2hg==
-Message-ID: <a1471ca1-e119-4106-8965-cd954c373a62@kernel.org>
-Date: Fri, 8 Nov 2024 17:46:54 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1t9aR4-00019V-7W for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 09 Nov 2024 01:38:47 +0000
+Received: by mail-pl1-f176.google.com with SMTP id
+ d9443c01a7336-20cdbe608b3so29775605ad.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 08 Nov 2024 17:38:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1731116320; x=1731721120; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bawIuU92Q74ggWk5pYR+Z5wr5o+e7Od2yBJHvPe/cZk=;
+ b=e/sbzf0lEcZKZQFFOWPZccdjo159jbi6HLXKaAKloHVHAinvVOd7ohfYc9lyVel/rf
+ 9ZpOmYaeiLfGKG0oy98Q9LUAOljnizaIlPhMYspCrHsQU3pZyI4lonKZ2ya7xvzc14vr
+ BLlDc/2zzxBz6fQ7eDwp4XtxKZjQUzyHeGPoJoLMjhw1wmpYgja56iExqBWuopWDg5nU
+ vc8rwhcWqmW2YfNz//ikmL4Sgsgdl8PxKrCddDRPleZOb5utEYfoOq8Toyx7heDXGHap
+ ZdnjX2NPtHiIbExgqmluA1ptqvrwP51Nu3rsUi6RUG5zmGF/a5XX9EieXtHSO/3sT0lp
+ 7IPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731116320; x=1731721120;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bawIuU92Q74ggWk5pYR+Z5wr5o+e7Od2yBJHvPe/cZk=;
+ b=CfKV8wNhXLu7vvgvIcQ71cKa7z0XVsN+dukZtI416oLwaQ+MqeUcdAbvJ8sopVaZKs
+ x1yZPrNrY6s+ZxOdmPCcdYiHapXiVhSIsOwvrdKCYLx5yA00tQc1lmkr0d/okNrxP84P
+ kgKsdYzx18MePmDCQ5AVkNlVuOFUCEhfnQBqbAjDOC0JmOfvSxgZKVmeCWTojTm2CnVG
+ cCCpntiItgEWz2Hdlyru3gEQYyY7BdYXlnpLKpc02toc/jTKEzsDIcxbvxRtsA2Cfm6e
+ cfkPe2Lye6JXWOPfEUxkieq53RFf8zhCpd4Mc3qsjhPy4CHAUEZ0b0r//cB2r7GhAUG+
+ 7M5A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXBwt1T6qGjSdUD2NbVfOWJuDvCDVWdNghskhz0nLdw+hrbKfqLlVs3SDxB9IZUTxlvo/jBRcTEkqZO+GXKbIIB@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yz4yPEwMfNVUSKb5HNeYoEF8W0Xtowu9U3jbUTmCAaRAY4u7vs1
+ YbCcRdHuBkRcQcIX2MRVUJQwlxDecXpqiY6PP86hXgMuRdbUxhdi
+X-Google-Smtp-Source: AGHT+IHjZCAp37vub2/la0ETYlZdowHlKQwip3eiKMZwcVF2lsyB0zO1XdQqTFMxsXDWTDJ75SGn8g==
+X-Received: by 2002:a17:902:ced1:b0:207:15f9:484a with SMTP id
+ d9443c01a7336-211835506c4mr59901975ad.15.1731116320486; 
+ Fri, 08 Nov 2024 17:38:40 -0800 (PST)
+Received: from debian.resnet.ucla.edu (s-169-232-97-87.resnet.ucla.edu.
+ [169.232.97.87]) by smtp.googlemail.com with ESMTPSA id
+ d9443c01a7336-21177e458bdsm37474515ad.133.2024.11.08.17.38.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Nov 2024 17:38:40 -0800 (PST)
+From: Daniel Yang <danielyangkang@gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net (open list:F2FS FILE SYSTEM),
+ linux-kernel@vger.kernel.org (open list)
+Date: Fri,  8 Nov 2024 17:38:19 -0800
+Message-Id: <20241109013819.5952-1-danielyangkang@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Daniel Yang <danielyangkang@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>, 
- "open list:F2FS FILE SYSTEM" <linux-f2fs-devel@lists.sourceforge.net>,
- open list <linux-kernel@vger.kernel.org>
-References: <20241106025858.495458-1-danielyangkang@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20241106025858.495458-1-danielyangkang@gmail.com>
-X-Spam-Score: -0.5 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/11/6 10:58,
- Daniel Yang wrote: > strcpy is deprecated.
- Kernel docs recommend replacing strcpy with > strscpy. The function strcpy()
- return value isn't used so there > shouldn't be an issue rep [...] 
- Content analysis details:   (-0.5 points, 6.0 required)
+ Content preview: strcpy is deprecated. Kernel docs recommend replacing strcpy
+ with strscpy. The function strcpy() return value isn't used so there shouldn't
+ be an issue replacing with the safer alternative strscpy. Signed-off-by:
+ Daniel Yang --- V1 -> V2: handle strscpy errors, changed prefix to f2fs 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [danielyangkang[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -87,10 +112,12 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1t9La5-0004Rp-Vr
-Subject: Re: [f2fs-dev] [PATCH] parse_options(): replace deprecated strcpy
- with strscpy
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.214.176 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.176 listed in list.dnswl.org]
+X-Headers-End: 1t9aR4-00019V-7W
+Subject: [f2fs-dev] [PATCH v2] f2fs: replace deprecated strcpy with strscpy
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,55 +129,59 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
+Cc: Daniel Yang <danielyangkang@gmail.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/11/6 10:58, Daniel Yang wrote:
-> strcpy is deprecated. Kernel docs recommend replacing strcpy with
-> strscpy. The function strcpy() return value isn't used so there
-> shouldn't be an issue replacing with the safer alternative strscpy.
+strcpy is deprecated. Kernel docs recommend replacing strcpy with
+strscpy. The function strcpy() return value isn't used so there
+shouldn't be an issue replacing with the safer alternative strscpy.
 
-It's better to add "f2fs: " prefix for commit title.
+Signed-off-by: Daniel Yang <danielyangkang@gmail.com>
+---
+V1 -> V2: handle strscpy errors, changed prefix to f2fs
 
-> 
-> Signed-off-by: Daniel Yang <danielyangkang@gmail.com>
-> ---
->   fs/f2fs/super.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 87ab5696b..ee8861b95 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -1158,7 +1158,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->   				break;
->   			}
->   
-> -			strcpy(ext[ext_cnt], name);
-> +			strscpy(ext[ext_cnt], name);
+ fs/f2fs/super.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-Needs to handle return value of strscpy()?
-
->   			F2FS_OPTION(sbi).compress_ext_cnt++;
->   			kfree(name);
->   			break;
-> @@ -1187,7 +1187,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->   				break;
->   			}
->   
-> -			strcpy(noext[noext_cnt], name);
-> +			strscpy(noext[noext_cnt], name);
-
-Ditto,
-
-Thanks,
-
->   			F2FS_OPTION(sbi).nocompress_ext_cnt++;
->   			kfree(name);
->   			break;
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 87ab5696b..4721a8a8f 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -5,6 +5,7 @@
+  * Copyright (c) 2012 Samsung Electronics Co., Ltd.
+  *             http://www.samsung.com/
+  */
+ #include <linux/module.h>
+ #include <linux/init.h>
+ #include <linux/fs.h>
+@@ -1158,7 +1159,10 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 				break;
+ 			}
+ 
+-			strcpy(ext[ext_cnt], name);
++			if (strscpy(ext[ext_cnt], name) == -E2BIG) {
++				kfree(name);
++				return -EINVAL;
++			}
+ 			F2FS_OPTION(sbi).compress_ext_cnt++;
+ 			kfree(name);
+ 			break;
+@@ -1187,7 +1191,10 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 				break;
+ 			}
+ 
+-			strcpy(noext[noext_cnt], name);
++			if (strscpy(noext[noext_cnt], name) == -E2BIG) {
++				kfree(name);
++				return -EINVAL;
++			}
+ 			F2FS_OPTION(sbi).nocompress_ext_cnt++;
+ 			kfree(name);
+ 			break;
+-- 
+2.39.5
 
 
 
