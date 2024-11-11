@@ -2,93 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B35CB9C36D8
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Nov 2024 04:05:16 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 134039C379C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Nov 2024 05:47:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tAKjk-0003Nq-Q0;
-	Mon, 11 Nov 2024 03:05:08 +0000
+	id 1tAMKR-0006g0-Hg;
+	Mon, 11 Nov 2024 04:47:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1tAKji-0003Nb-R0
+ (envelope-from <zangyangyang1@xiaomi.com>) id 1tAMKQ-0006fu-4V
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 11 Nov 2024 03:05:06 +0000
+ Mon, 11 Nov 2024 04:47:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=u7UX/izpOmCFAWFDMF8tJFgep5mM0uBjrtDEVZtPIRY=; b=hZRSxkVZwDe95W5IKR9Uql8iG7
- 0acVxMJK9mUNcb3glLkibedERM13s296A+cWKHO6U73hkhRtc+r9GsEvm/e0Xe+DEEM+EW+0NYrqF
- ltYu0ZL+pYMrnXDnMxwNFuCTyfzEzQHtXGyRRCyiLYclKInfRdHRLEqO9yiVXT+5AMww=;
+ bh=Cb9kxIxTB4hN/2bwYH/DzwuMji7+6l/cH7U3EEtV6cM=; b=NQJw7pimK/XGCSsulybWCP0PYE
+ rhJslJo8gdppDwX6zp8y1zKU5YdJN2/lIRqMQyCXx7BLpKzp22JBNk4TtiCFkk0hBQI2PTg84OrK8
+ ws9kDxFsKZSNOs/DVvw2Nsw35loC19hqDFCE2ErHxvdm03SKKzNJZ3HMHUnFTdR8xq7Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=u7UX/izpOmCFAWFDMF8tJFgep5mM0uBjrtDEVZtPIRY=; b=Y
- eqpCioV4u6DYyU7jo1JhUhFFVf0dlTaRB0Y8mZ00fVWEj0alySvb3Cw4Rukqh5FmyYa7Yyua3lfXC
- S9EdUK0LQW9Ai1AJdLZ9hMbDCpGi1zMZ0AySVhN3t6f+nREhQ/nT641FspyHdSdEKf4JZwuVxO0za
- VARRwrJYN3fL+r48=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tAKji-0004Se-6Z for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 11 Nov 2024 03:05:06 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 666055C56D6
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 11 Nov 2024 03:04:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79495C4CECD;
- Mon, 11 Nov 2024 03:05:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1731294300;
- bh=AWpyNMW1dieaheGEiGBKpMuE3jX/0v5RuFtwBBIpGKY=;
- h=From:To:Cc:Subject:Date:From;
- b=S6nzSunsDRvi04UmX5HBYR8HXp72cguc2pjKV9XDqfoaCqK56JRVvEVKnwEKAfKlo
- Mw4/ms7Vhs/Lr2xEBAK+WzBGDVFTDH3lAZgzxw8LFBCSTpdZJMpg1A7Kfs1m9xIoRI
- PSCwZ7sMKAf+bG/j+JBtbGygzFoOQeEc0E0sfUVNW7F+IrwwOnzCenYax+Rp4CLfvd
- Q4f6aosDsJjqE1ywnlAGPtdzlSMLplvP5Aqnqfnf3I6TelN9kRp2e2AE2JHIMnAV60
- gMA3KFIswKv8qayiL6ohnSF976JjzIc19AvClvLsKo5bkyqojtCmCssuuZwbAfA9D7
- YZJkMGThRm6XA==
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 11 Nov 2024 03:04:56 +0000
-Message-ID: <20241111030456.2572093-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.47.0.277.g8800431eea-goog
+ List-Owner:List-Archive; bh=Cb9kxIxTB4hN/2bwYH/DzwuMji7+6l/cH7U3EEtV6cM=; b=d
+ wAxOV9akACjSn+RdbPyJ32takLw8DUbF/bedr1lJL7jWyLTUb4N1gaxTknekbh0UumRvhuMRvm6RW
+ ympYp3wj3eYGln3KANeaDrY+kPkBEFPtyZBBV7AM458zSAuXZgDgE2FX6HLMloZRamdmHJuFeyR+l
+ l6oHYTYTC2gDgJLA=;
+Received: from outboundhk.mxmail.xiaomi.com ([118.143.206.90])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1tAMKO-0008Ku-HC for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 11 Nov 2024 04:47:06 +0000
+X-CSE-ConnectionGUID: dYd0hPmPRWe0Gi2iPRsQ+Q==
+X-CSE-MsgGUID: FObFf8BDSkCih4PgzoUiig==
+X-IronPort-AV: E=Sophos;i="6.12,144,1728921600"; d="scan'208";a="100694526"
+To: <chao@kernel.org>
+Date: Mon, 11 Nov 2024 12:31:06 +0800
+Message-ID: <20241111043106.864722-1-zangyangyang1@xiaomi.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-X-Spam-Score: -5.3 (-----)
+X-Originating-IP: [10.149.39.118]
+X-ClientProxiedBy: yz-mbx05.mioffice.cn (10.237.88.125) To
+ bj-mbx11.mioffice.cn (10.237.8.131)
+X-Spam-Score: 0.9 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The immutable bit disallows selinux permission which gives
- no way to clear it. Fixes: 8cc4e257ec20 ("mkfs.f2fs: add device aliasing
- feature") Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> ---
- mkfs/f2fs_format.c
- | 3 +-- 1 file changed, 1 insertion(+), 2 deletions(-) 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  f2fs_find_data_page is used to find dentry pages, I think
+ we should cache more dentry pages. Signed-off-by: zangyangyang1
+ <zangyangyang1@xiaomi.com>
+ --- fs/f2fs/data.c | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) 
+ Content analysis details:   (0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [118.143.206.90 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tAKji-0004Se-6Z
-Subject: [f2fs-dev] [PATCH] mkfs.f2fs: remove IMMUTABLE bit
+ 0.9 SPF_HELO_SOFTFAIL      SPF: HELO does not match SPF record (softfail)
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1tAMKO-0008Ku-HC
+Subject: [f2fs-dev] [PATCH] f2fs: cache more dentry pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,41 +81,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+From: zangyangyang1 via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: zangyangyang1 <zangyangyang1@xiaomi.com>
+Cc: jaegeuk@kernel.org, zangyangyang1 <zangyangyang1@xiaomi.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: multipart/mixed; boundary="===============5413053574646030212=="
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The immutable bit disallows selinux permission which gives no way to clear it.
+--===============5413053574646030212==
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-Fixes: 8cc4e257ec20 ("mkfs.f2fs: add device aliasing feature")
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+f2fs_find_data_page is used to find dentry pages,
+I think we should cache more dentry pages.
+
+Signed-off-by: zangyangyang1 <zangyangyang1@xiaomi.com>
 ---
- mkfs/f2fs_format.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ fs/f2fs/data.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index 52a1e1864b29..6635eed99813 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -1748,8 +1748,7 @@ static int f2fs_write_alias_inodes(void)
- 		dev_off++;
- 		f2fs_init_inode(sb, raw_node, ino, mkfs_time, 0x81c0);
- 
--		raw_node->i.i_flags = cpu_to_le32(F2FS_IMMUTABLE_FL |
--				F2FS_DEVICE_ALIAS_FL);
-+		raw_node->i.i_flags = cpu_to_le32(F2FS_DEVICE_ALIAS_FL);
- 		raw_node->i.i_inline = F2FS_PIN_FILE;
- 		raw_node->i.i_pino = sb->root_ino;
- 		filename = c.devices[i].alias_filename;
--- 
-2.47.0.277.g8800431eea-goog
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 402e00d54c0b..71ca987fe7cd 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1286,7 +1286,7 @@ struct page *f2fs_find_data_page(struct inode *inode,=
+ pgoff_t index,
+        struct address_space *mapping =3D inode->i_mapping;
+        struct page *page;
+
+-       page =3D find_get_page(mapping, index);
++       page =3D find_get_page_flags(mapping, index, FGP_ACCESSED);
+        if (page && PageUptodate(page))
+                return page;
+        f2fs_put_page(page, 0);
+--
+2.43.2
+
+#/******=B1=BE=D3=CA=BC=FE=BC=B0=C6=E4=B8=BD=BC=FE=BA=AC=D3=D0=D0=A1=C3=D7=
+=B9=AB=CB=BE=B5=C4=B1=A3=C3=DC=D0=C5=CF=A2=A3=AC=BD=F6=CF=DE=D3=DA=B7=A2=CB=
+=CD=B8=F8=C9=CF=C3=E6=B5=D8=D6=B7=D6=D0=C1=D0=B3=F6=B5=C4=B8=F6=C8=CB=BB=F2=
+=C8=BA=D7=E9=A1=A3=BD=FB=D6=B9=C8=CE=BA=CE=C6=E4=CB=FB=C8=CB=D2=D4=C8=CE=BA=
+=CE=D0=CE=CA=BD=CA=B9=D3=C3=A3=A8=B0=FC=C0=A8=B5=AB=B2=BB=CF=DE=D3=DA=C8=AB=
+=B2=BF=BB=F2=B2=BF=B7=D6=B5=D8=D0=B9=C2=B6=A1=A2=B8=B4=D6=C6=A1=A2=BB=F2=C9=
+=A2=B7=A2=A3=A9=B1=BE=D3=CA=BC=FE=D6=D0=B5=C4=D0=C5=CF=A2=A1=A3=C8=E7=B9=FB=
+=C4=FA=B4=ED=CA=D5=C1=CB=B1=BE=D3=CA=BC=FE=A3=AC=C7=EB=C4=FA=C1=A2=BC=B4=B5=
+=E7=BB=B0=BB=F2=D3=CA=BC=FE=CD=A8=D6=AA=B7=A2=BC=FE=C8=CB=B2=A2=C9=BE=B3=FD=
+=B1=BE=D3=CA=BC=FE=A3=A1 This e-mail and its attachments contain confidenti=
+al information from XIAOMI, which is intended only for the person or entity=
+ whose address is listed above. Any use of the information contained herein=
+ in any way (including, but not limited to, total or partial disclosure, re=
+production, or dissemination) by persons other than the intended recipient(=
+s) is prohibited. If you receive this e-mail in error, please notify the se=
+nder by phone or email immediately and delete it!******/#
 
 
+--===============5413053574646030212==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+
+--===============5413053574646030212==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Linux-f2fs-devel mailing list
 Linux-f2fs-devel@lists.sourceforge.net
 https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+
+--===============5413053574646030212==--
