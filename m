@@ -2,124 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E95E9C4335
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Nov 2024 18:08:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2B079C4B86
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Nov 2024 02:08:48 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tAXtM-0004pv-Qm;
-	Mon, 11 Nov 2024 17:07:56 +0000
+	id 1tAfOU-0007Qn-KV;
+	Tue, 12 Nov 2024 01:08:35 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1tAXtJ-0004pn-Uu
+ (envelope-from <jaegeuk@kernel.org>) id 1tAfOT-0007Qg-3E
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 11 Nov 2024 17:07:53 +0000
+ Tue, 12 Nov 2024 01:08:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=26L2jzx0WX57YZoCgN+U2AY3EnNhogrMyUmzYR/FRAo=; b=XrWebgL/MELgEbyvX7nLumfmOB
- r5x+SBcOJTFarSKaYlxWcsQ6Z3JvQCdMwr2uFOilgZJYtJN/WcK5zW2ha2w6SsEUB2Gb4sFxZ60as
- Tyg4EI3cU2lCxrOSsox8MNqEJllFlkbR1O3n0a9Qw5DBKgMU5gAFwvS4224mI8uscB/8=;
+ bh=GrTVMSroq+oH5A5w152y7NrA4kXhsCqx54X+YRGLlDU=; b=Rofe+061sJLIydVx4a365w0WqA
+ AxEPeFmVJyQR9xSA5+ogiG1kBi29bd32mdq6YHiP929TKFiTX7ZqoO4nqkP/Y4rSjK2tL8JsEkU8J
+ Np6Te2sQbsxIPauXUtmqUE5sGZJJ2MTFsCQIsh+n06GMwUb8JmyXED878oOpnSsj6YJk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=26L2jzx0WX57YZoCgN+U2AY3EnNhogrMyUmzYR/FRAo=; b=VaIdxPIuf546vNaTEfd7F+K9D1
- fBNvCiWk+YFqNoHi1EyHumGDOZX+NOgfZLGgKwAAg/cGdtxW5MiYjMXn1MeCOwAGZK6On01lTRsKj
- S8z9t3HLUEqf9hvr+vcwd1d+/eOmIv3NCG2rQjL9+iZKwMoly2UAMdeXi3xBZITFYspk=;
-Received: from mail-ot1-f51.google.com ([209.85.210.51])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=GrTVMSroq+oH5A5w152y7NrA4kXhsCqx54X+YRGLlDU=; b=T
+ FxXcjt8iAspor76QzfKcLuJEUYuL+EbLCFxlAT3jx/ejpgejnmRQG6iEkA0Ktri1KqxZRcER4n40k
+ ZxaxSdBZsnJOZa3xNscSmzgY6MCodXwmaQINWlLFBRzTECPxBy6ekMAlw+wF+X1UpOrs0Q2LhpRVk
+ 8XDGtk7wYTcixiXk=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1tAXtI-0004im-OK for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 11 Nov 2024 17:07:53 +0000
-Received: by mail-ot1-f51.google.com with SMTP id
- 46e09a7af769-718998df806so2316948a34.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 11 Nov 2024 09:07:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731344862; x=1731949662; darn=lists.sourceforge.net;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=26L2jzx0WX57YZoCgN+U2AY3EnNhogrMyUmzYR/FRAo=;
- b=HZKWdAeHoXxUEXeeb7zNNBaeHVrbnwzA49lIV0YvESWo+MrQN7Mki7/1GYV/pqygbf
- x9M2mCufY0PaYVtbEYfBFICqI63L0pMHq5jV8bmWUHgBX7I4QXMJaeDx2hlSuQAYoAbp
- 0Q+Qy7xqQ1r3ZpGhjbmzoNjMH/bPfact3DBFuKZ3WAUvt/zS6UJ4H2RenSdLPUzFyCIe
- r487QWh1IKbioib+LG9aUavcXbnOJebCb9KnicZwgwiu2qG+5aZC/X/j/G5Ejs/CX2Pt
- 0ppXhUKAzaUZVK8cQ1EldGi46JdonIf2eMGdDPe55tkqy2Xbs0kMbplUiayDJO9I6wO/
- Tg6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731344862; x=1731949662;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=26L2jzx0WX57YZoCgN+U2AY3EnNhogrMyUmzYR/FRAo=;
- b=Hm9RuEfOUwnelUk88Y8fxK+VoOpluU7vMTsGb7OM8EUKFdYvywTz7u8ouinwtwj1Eg
- psLcJdHvCh5YzobY1Cp4qZ8iUWdRfgjUh7vqqh5K+WXoLBybhystW9vkvHhncVQpnqNI
- RaxGgUg4P0yQibiSkFyTu7maOg5w0tlD7qNgyThRnsZgtvF1k+sAK0JLX62DdQ/Q8nXn
- T2VA8lYj1es7XZHfQY8Pimz12V++SNH+5erZ6lcbEcERY5X1J8RpcKuiDhStjXII283W
- v+Fk6afk11mlVKOaZjcYyR7LH6QtYd0vOSfs1mtNZBFNmomsYa+Nn5Jq9gqE4fc+3+fI
- kJGA==
-X-Gm-Message-State: AOJu0YwNXUTtzH9+CeFHQiIlbz0+TmSnPrBZQoY+Ospbd+qWey/MX/h+
- xbex3/w3h7jnPG8Z0P53A5ntl9TGcv+NcXiNbvKaWmpUu94Lr18hY71+1QvV/MGvJEDo0rr79ki
- 5NtEOvhxAvOmcmWzoOlkD7GRCyQRcyYvLRZ4=
-X-Google-Smtp-Source: AGHT+IGZXDGvvqvrKq67r/dAhexAaxUZE9mSpOOgVYdWqOm1hkPAPRuylQygxIwX97+UROKTF+H8WWUwii1c2TqNSdQ=
-X-Received: by 2002:a05:6358:f1c5:b0:1ad:14ec:a002 with SMTP id
- e5c5f4694b2df-1c641f90fcbmr473399755d.26.1731344861982; Mon, 11 Nov 2024
- 09:07:41 -0800 (PST)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1tAfOT-0005fX-6Y for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 Nov 2024 01:08:33 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6E1C25C5C4B;
+ Tue, 12 Nov 2024 01:07:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D626C4CECF;
+ Tue, 12 Nov 2024 01:08:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1731373702;
+ bh=Yvcx1AXHc9kQyvfwxXWWRFwqQa663r5SsuoB/VXqYXA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=CR0jeD4AnXXENKTzMnCiXV+YDbVByQZ1f1SM6m9Kz49TNoTgxYlqjiEzSrytFxW3/
+ 3yFUXYsZGSAW7NAwLrdHlKghhpBSWQLbwciLglfY+LG7CS/1HvegPgq1t3EqggOemD
+ 0GUQeW8vV0KKghLpb/dMH6o0Ma+Y9lYI182/NG2YBnIsnzgxIO61sjymclv7MUgmwt
+ nlV/7+V5sbZZBzBP4X3XtUDaNyeUMwF1/MWaD6A2fx9FF5aX6jcTpV+JLk3xAP+tmQ
+ G8niQcGQakL6PlRvAfZkeanxvqYc4IJZuwLSVKl4nVg2FIlKZ8vXcy/2S7xrN8woXC
+ TYuqrgoch00bQ==
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 12 Nov 2024 01:08:20 +0000
+Message-ID: <20241112010820.2788822-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.47.0.277.g8800431eea-goog
 MIME-Version: 1.0
-References: <20241111030456.2572093-1-jaegeuk@kernel.org>
-In-Reply-To: <20241111030456.2572093-1-jaegeuk@kernel.org>
-From: Daeho Jeong <daeho43@gmail.com>
-Date: Mon, 11 Nov 2024 09:07:31 -0800
-Message-ID: <CACOAw_xU71Eo=iLddogKWbuMcY7eco5QfvoZ5P-yAmThgvL8eA@mail.gmail.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: 0.1 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+X-Spam-Score: -5.3 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Reviewed-by: Daeho Jeong Thanks, On Sun, Nov 10, 2024 at 7:09 PM
-    Jaegeuk Kim via Linux-f2fs-devel wrote: > > The immutable bit disallows selinux
-    permission which gives no way to clear it. > > Fixes: 8cc4e257ec20 ("mkfs.f2fs:
-    add [...] 
- 
- Content analysis details:   (0.1 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview: This reverts commit 54f43a10fa257ad4af02a1d157fefef6ebcfa7dc.
+ The above commit broke the lazytime mount, given mount("/dev/vdb", "/mnt/test",
+ "f2fs", 0, "lazytime"); 
+ Content analysis details:   (-5.3 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-                             in digit
-                             [daeho43[at]gmail.com]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [daeho43[at]gmail.com]
-  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
-                             [209.85.210.51 listed in wl.mailspike.net]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.210.51 listed in list.dnswl.org]
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1tAXtI-0004im-OK
-Subject: Re: [f2fs-dev] [PATCH] mkfs.f2fs: remove IMMUTABLE bit
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tAfOT-0005fX-6Y
+Subject: [f2fs-dev] [PATCH] Revert "f2fs: remove unreachable lazytime mount
+ option parsing"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,36 +99,68 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daniel Rosenberg <drosen@google.com>,
+ stable@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-UmV2aWV3ZWQtYnk6IERhZWhvIEplb25nIDxkYWVob2plb25nQGdvb2dsZS5jb20+CgpUaGFua3Ms
-CgpPbiBTdW4sIE5vdiAxMCwgMjAyNCBhdCA3OjA54oCvUE0gSmFlZ2V1ayBLaW0gdmlhIExpbnV4
-LWYyZnMtZGV2ZWwKPGxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0PiB3cm90
-ZToKPgo+IFRoZSBpbW11dGFibGUgYml0IGRpc2FsbG93cyBzZWxpbnV4IHBlcm1pc3Npb24gd2hp
-Y2ggZ2l2ZXMgbm8gd2F5IHRvIGNsZWFyIGl0Lgo+Cj4gRml4ZXM6IDhjYzRlMjU3ZWMyMCAoIm1r
-ZnMuZjJmczogYWRkIGRldmljZSBhbGlhc2luZyBmZWF0dXJlIikKPiBTaWduZWQtb2ZmLWJ5OiBK
-YWVnZXVrIEtpbSA8amFlZ2V1a0BrZXJuZWwub3JnPgo+IC0tLQo+ICBta2ZzL2YyZnNfZm9ybWF0
-LmMgfCAzICstLQo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDIgZGVsZXRpb25z
-KC0pCj4KPiBkaWZmIC0tZ2l0IGEvbWtmcy9mMmZzX2Zvcm1hdC5jIGIvbWtmcy9mMmZzX2Zvcm1h
-dC5jCj4gaW5kZXggNTJhMWUxODY0YjI5Li42NjM1ZWVkOTk4MTMgMTAwNjQ0Cj4gLS0tIGEvbWtm
-cy9mMmZzX2Zvcm1hdC5jCj4gKysrIGIvbWtmcy9mMmZzX2Zvcm1hdC5jCj4gQEAgLTE3NDgsOCAr
-MTc0OCw3IEBAIHN0YXRpYyBpbnQgZjJmc193cml0ZV9hbGlhc19pbm9kZXModm9pZCkKPiAgICAg
-ICAgICAgICAgICAgZGV2X29mZisrOwo+ICAgICAgICAgICAgICAgICBmMmZzX2luaXRfaW5vZGUo
-c2IsIHJhd19ub2RlLCBpbm8sIG1rZnNfdGltZSwgMHg4MWMwKTsKPgo+IC0gICAgICAgICAgICAg
-ICByYXdfbm9kZS0+aS5pX2ZsYWdzID0gY3B1X3RvX2xlMzIoRjJGU19JTU1VVEFCTEVfRkwgfAo+
-IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgRjJGU19ERVZJQ0VfQUxJQVNfRkwpOwo+
-ICsgICAgICAgICAgICAgICByYXdfbm9kZS0+aS5pX2ZsYWdzID0gY3B1X3RvX2xlMzIoRjJGU19E
-RVZJQ0VfQUxJQVNfRkwpOwo+ICAgICAgICAgICAgICAgICByYXdfbm9kZS0+aS5pX2lubGluZSA9
-IEYyRlNfUElOX0ZJTEU7Cj4gICAgICAgICAgICAgICAgIHJhd19ub2RlLT5pLmlfcGlubyA9IHNi
-LT5yb290X2lubzsKPiAgICAgICAgICAgICAgICAgZmlsZW5hbWUgPSBjLmRldmljZXNbaV0uYWxp
-YXNfZmlsZW5hbWU7Cj4gLS0KPiAyLjQ3LjAuMjc3Lmc4ODAwNDMxZWVhLWdvb2cKPgo+Cj4KPiBf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+IExpbnV4LWYy
-ZnMtZGV2ZWwgbWFpbGluZyBsaXN0Cj4gTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3Jn
-ZS5uZXQKPiBodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51
-eC1mMmZzLWRldmVsCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0
-cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlz
-dGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+This reverts commit 54f43a10fa257ad4af02a1d157fefef6ebcfa7dc.
+
+The above commit broke the lazytime mount, given
+
+mount("/dev/vdb", "/mnt/test", "f2fs", 0, "lazytime");
+
+CC: stable@vger.kernel.org # 6.11+
+Signed-off-by: Daniel Rosenberg <drosen@google.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/super.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 49519439b770..35c4394e4fc6 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -150,6 +150,8 @@ enum {
+ 	Opt_mode,
+ 	Opt_fault_injection,
+ 	Opt_fault_type,
++	Opt_lazytime,
++	Opt_nolazytime,
+ 	Opt_quota,
+ 	Opt_noquota,
+ 	Opt_usrquota,
+@@ -226,6 +228,8 @@ static match_table_t f2fs_tokens = {
+ 	{Opt_mode, "mode=%s"},
+ 	{Opt_fault_injection, "fault_injection=%u"},
+ 	{Opt_fault_type, "fault_type=%u"},
++	{Opt_lazytime, "lazytime"},
++	{Opt_nolazytime, "nolazytime"},
+ 	{Opt_quota, "quota"},
+ 	{Opt_noquota, "noquota"},
+ 	{Opt_usrquota, "usrquota"},
+@@ -922,6 +926,12 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 			f2fs_info(sbi, "fault_type options not supported");
+ 			break;
+ #endif
++		case Opt_lazytime:
++			sb->s_flags |= SB_LAZYTIME;
++			break;
++		case Opt_nolazytime:
++			sb->s_flags &= ~SB_LAZYTIME;
++			break;
+ #ifdef CONFIG_QUOTA
+ 		case Opt_quota:
+ 		case Opt_usrquota:
+-- 
+2.47.0.277.g8800431eea-goog
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
