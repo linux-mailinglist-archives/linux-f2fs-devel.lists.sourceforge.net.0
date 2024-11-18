@@ -2,112 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8EF49D10AE
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Nov 2024 13:39:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AAD619D16A6
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Nov 2024 18:01:08 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tD12Q-0007uM-S7;
-	Mon, 18 Nov 2024 12:39:31 +0000
+	id 1tD57U-0005rw-LW;
+	Mon, 18 Nov 2024 17:01:01 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3ejU7ZwkbABMBHI3t44xAt881w.z77z4xDBxAv76Cx6C.v75@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1tD12P-0007uG-HV for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 18 Nov 2024 12:39:30 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1tD57K-0005rb-KI
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 18 Nov 2024 17:00:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JoqvCgtdU4lMJOv2UffTj7/ARJEytxGntBglXk5Ifig=; b=S7xD6QimTUAVzMCoRJTxad9qDg
- T4AWm/E2oV+BQop9KDIXsgm9EUAibDiezLE2dOtjDAkURxh0MxHRNOO+QtSgaCRi2mM8xKDI3iRHA
- MoHVgwwURNVY9GmT+xg/jd5W45/1uIxirDU0H/RiQ6infYiLXi3xf5l6g0FtL2vvTUfI=;
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=9MRXo7IadPp1cy7arPSydXzJLEZHDl469hHXuCsrhBY=; b=jCtn9pk4rEGj1XAjFizZDvGWQA
+ fmzNF5ew2pbsf/eBFjsnS9+sdQMgO4Zzv7VhyVi8H6w4lHVOidXCNxbajYAOhJGo7ya5dneTup9wc
+ ihTgBnJ78iHG0oUTub0vy9teeWHAJWFz8ababrT9C4dfWbs2MU1YZu/wXV5xPWqyWbwQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=JoqvCgtdU4lMJOv2UffTj7/ARJEytxGntBglXk5Ifig=; b=c
- zMnP2mhtAXrwA5dFZL8OLi1JJXsUrzw1lth0lk/h+cAaUvSvd7kJKi6g5AQI331i0zIfIRbDFimQp
- IKP5H+ZJ5Ktjd0HBnQCzt1aGYAlYHCbjZhfECTo4KLxHVyuBut99i2JexhopkPIktBLDo5kBDbrpp
- Txk/Aj926x8Mx6+Y=;
-Received: from mail-io1-f72.google.com ([209.85.166.72])
+ List-Owner:List-Archive; bh=9MRXo7IadPp1cy7arPSydXzJLEZHDl469hHXuCsrhBY=; b=F
+ fzOiqR+zTYmiBWq94PX5+KAxAIhYUhGXz8jl+O0MSVk9jdNLn88A4xMGSSJyRc4M3rHaiIWid37X6
+ PIgJFl375fKCoBlj6s0STtYq/EgdH5U17FuPRVZ1qEMztgNub9Y7FdlfW3MeaG9mOQ3kmpJUeAs0l
+ /f0cLa5tE450dwuE=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1tD12O-000276-KE for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 18 Nov 2024 12:39:30 +0000
-Received: by mail-io1-f72.google.com with SMTP id
- ca18e2360f4ac-83abf68e7ffso473600939f.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1tD576-0000yH-8Y for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 18 Nov 2024 17:00:42 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id E4C51A416D9
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 18 Nov 2024 04:39:28 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731933563; x=1732538363;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JoqvCgtdU4lMJOv2UffTj7/ARJEytxGntBglXk5Ifig=;
- b=CyQX5qeTeCHL7NLjXyJsTAWAcoW8nzcRe13skmdG7HDnLqA+G0qoCjimfr1j+44WCN
- /+g2KmfzE1WxRyFoAiWjMjTlcPAVKESrGXkX8OwlyAhZ3TlC4UD1E4KudF2D00/d2R2d
- jwegX5UCH9fhSbyK9fKLLwKNEdf0t7PGqtBCdf0gntnbiAR0h8rUywGqZ+Aedx8IPtbm
- IRSWtB/djmupkic5BMqO9tjvE8gQ46G4W9q0DoD0mWAX0OwIYkIumJsG6+vsGWSpsCLA
- KwZk/IgB5QgjyE1yktXCp6zj6KgMsrAMkp9C9f/iVB6w85Gx9ccAJ1NLe/jFOjwL4YQ+
- sbjQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVhjpCLJEWJ8PHyfvkoafEkB8hNcPn4SgEVQ5Vh7h5InAq+WaetMEkg2lytwcW+qbkQOQvqqi3bZa/oF7IZB8/A@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yx9tUomj90pMGMXMjD7karVdBSvvuWD4TO3p2PGNOrgnRKwZG+J
- hGBy/Y96dij3d2wSbo12tTXVweOcDkP+TrgWTDl+nZg+mTsYogQDPk3z2Ck7eMwqVD6OmGfRG0J
- tYgCC5eLLBt/gMknj9PLcf8Zr0lBwUzcHq9A1O7sOIJK4VHFjK0YDOWM=
-X-Google-Smtp-Source: AGHT+IF9mcBCCC9GPfOHSylucVBFguajg0Mg0J0fl5nAp/fpCTpCUXZ8MqkHvUNsT32nxmJyXSVkb35ODLRRyU28ZknoHd3/PNYu
+ Mon, 18 Nov 2024 16:58:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3043AC4CECC
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 18 Nov 2024 17:00:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1731949225;
+ bh=u9rwiy3SXlvAJQSB9dc5gbBiHUqudgcLjDSuTp1T1xM=;
+ h=Subject:From:Date:To:From;
+ b=av4c9RGNkpv37gLWl8zWco9p5A1FpMA96DCxPz1NJ4T5DI+2MEmYJEcFh38spZpUO
+ WPTHkrpj/q8x/W4xhz0O+aymWyYMWl78HG6RjTKBX5nqtBbEyRLG2McIyfqy/lk9UV
+ Dob+vZgJ+wqEq0UwKYqBcLVn6qWTar0nKOoEvZD25C52cjH/4I/3wZ1wSeYIJUARFe
+ ezGG2Rb+m1ww9vMtfLpZvhGsM9zWaAV6s//OZtIo4JwneBX+rdYpy98+4MWL7SeAF0
+ VMT5QbU5iF1DTVS7IHIbNRm/V+oVvfimpRcaLF8t+O6d5wlDI8VV247UoinpnWRF1J
+ ACfXb5e/JqJSg==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+ by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
+ ADD613809A80 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 18 Nov 2024 17:00:37 +0000 (UTC)
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:1522:b0:3a7:6721:7adb with SMTP id
- e9e14a558f8ab-3a767217ba0mr32243355ab.2.1731933562939; Mon, 18 Nov 2024
- 04:39:22 -0800 (PST)
-Date: Mon, 18 Nov 2024 04:39:22 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <673b357a.050a0220.87769.003c.GAE@google.com>
-From: syzbot <syzbot+list9deb5e64e2106995cbb1@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+Message-Id: <173194923625.4109060.2019499032578282587.git-patchwork-summary@kernel.org>
+Date: Mon, 18 Nov 2024 17:00:36 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello f2fs maintainers/developers, This is a 31-day syzbot
- report for the f2fs subsystem. All related reports/information can be found
- at: https://syzkaller.appspot.com/upstream/s/f2fs During the period, 1 new
- issues were detected and 0 were fixed. In total, 6 issues are still open
- and 47 have already been fixed. 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev] Revert "f2fs:
+ remove unreachable lazytime mount option parsing" Submitter: Jaegeuk Kim
+ <jaegeuk@kernel.org> Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.k [...] 
+ Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.72 listed in bl.score.senderscore.com]
+ [147.75.193.91 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.72 listed in sa-trusted.bondedsender.org]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+ [147.75.193.91 listed in sa-accredit.habeas.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.72 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.72 listed in wl.mailspike.net]
-X-Headers-End: 1tD12O-000276-KE
-Subject: [f2fs-dev] [syzbot] Monthly f2fs report (Nov 2024)
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tD576-0000yH-8Y
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,41 +113,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: patchwork-bot+f2fs--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: patchwork-bot+f2fs@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello f2fs maintainers/developers,
+Hello:
 
-This is a 31-day syzbot report for the f2fs subsystem.
-All related reports/information can be found at:
-https://syzkaller.appspot.com/upstream/s/f2fs
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-During the period, 1 new issues were detected and 0 were fixed.
-In total, 6 issues are still open and 47 have already been fixed.
+Patch: [f2fs-dev] Revert "f2fs: remove unreachable lazytime mount option parsing"
+  Submitter: Jaegeuk Kim <jaegeuk@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=908614
+  Lore link: https://lore.kernel.org/r/20241112010820.2788822-1-jaegeuk@kernel.org
 
-Some of the still happening issues:
+Patch: [f2fs-dev] f2fs: fix to avoid forcing direct write to use buffered IO on inline_data inode
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=905830
+  Lore link: https://lore.kernel.org/r/20241104015016.228963-1-chao@kernel.org
 
-Ref Crashes Repro Title
-<1> 1182    Yes   INFO: task hung in f2fs_balance_fs
-                  https://syzkaller.appspot.com/bug?extid=8b85865808c8908a0d8c
-<2> 72      No    INFO: task hung in vfs_rename
-                  https://syzkaller.appspot.com/bug?extid=6165bc9800cd6e1fe958
-<3> 4       No    WARNING: locking bug in f2fs_getxattr (2)
-                  https://syzkaller.appspot.com/bug?extid=44090b62afaabafe828a
+Patch: [f2fs-dev,v2] f2fs: fix to map blocks correctly for direct write
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=905827
+  Lore link: https://lore.kernel.org/r/20241104013551.218037-1-chao@kernel.org
 
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-To disable reminders for individual bugs, reply with the following command:
-#syz set <Ref> no-reminders
+Total patches: 3
 
-To change bug's subsystems, reply with:
-#syz set <Ref> subsystems: new-subsystem
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
 
-You may send multiple commands in a single email message.
+
 
 
 _______________________________________________
