@@ -2,174 +2,169 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 540BF9D1055
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DF449D1054
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Nov 2024 13:06:13 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tD0W5-0005ZV-GT;
-	Mon, 18 Nov 2024 12:06:05 +0000
+	id 1tD0W7-0004MJ-Nv;
+	Mon, 18 Nov 2024 12:06:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <shengyong@oppo.com>) id 1tD0Vx-0005Yb-Av
+ (envelope-from <shengyong@oppo.com>) id 1tD0Vy-0004Lz-I6
  for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 18 Nov 2024 12:05:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FhqZCPHAOOSYRPmvIeT2rkt1lLWK5UfH1AaPUsweE2U=; b=Wgq0ZrVAK+GKGr760b+/XbYtSF
- 53E441GKBjl8zOD3LlkborUnZdiZJiPOaptq8/k2U4BsNjEu8r3jBByUT1Wuyye3RXQw9lDNY+Pep
- Y2iX9lZdli8fOURcTiGvcaiKW2laLPDxB6Sp3wN1rYwcwC9hFXI5fVdvac0JtqD0Z5YY=;
+ bh=Tf5GjUFMmPyjkKLGlWRRxK/4JKTp73nBVTX1n5BWHvo=; b=ggLbObHpkX2mgXnmt+ba3ICvhM
+ QlsdEsDQST6P+cl5zACtfx4Cmc74RNQ/CEwJlCE/6ZlpDzLINlIno02XcSEnIvWQNDn+7P2XDEwi9
+ 4Yt8DtrT/ewqrZVLqRv0lskqwqoBUTiR/mRbpwOQQqIXyqmjI7egWECh3X7BfyPKV1GA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=FhqZCPHAOOSYRPmvIeT2rkt1lLWK5UfH1AaPUsweE2U=; b=m
- GjxD08zuCY48rqR0U+bCbwBmMTwuZIkZfHI12ZC7ZtXg+tQ1HQhWPeRQPrYRrJMyBbNvBJ1opilc0
- eYX+YOBamJmbtms+IlSnoCcyV3amfKkHrQ0Eimo+wNJjlR7q4Pcjxo3RSikFbjsKx50a/57TLKa6a
- QvNjYek/gtOmCl/Q=;
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Tf5GjUFMmPyjkKLGlWRRxK/4JKTp73nBVTX1n5BWHvo=; b=lIj/yeeeD6acmAEq5H6li88Zv7
+ Qf9eXNFyH3Cymh4HX23dG50VphrAbkHSKDiufkzxYBKT4f/GbZ7ag8oSuSGFHj3ZIVnKgctypzO5M
+ MUswQOted4ghMDsEjPJqWo/4kDzSrejmdr9Ikfe58OyNROKemXUwG5VVP6GK2Raj7zCU=;
 Received: from mail-eastasiaazon11010016.outbound.protection.outlook.com
  ([52.101.128.16] helo=HK2PR02CU002.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tD0Vv-0000I8-5t for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 18 Nov 2024 12:05:56 +0000
+ id 1tD0Vx-0000I8-5q for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 18 Nov 2024 12:05:57 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ax6nlAb/2WctJ6t0WXxQNoWFeeVac4O5z60Mf2UpgxbJh5GhpHck5G5uAE3y3HAlDUm8HDPORwN0Pav7gIZkCdtgjE718ZqGcBHKzNfdwey/UkHCgjraj/F27DCLO0ysYJwN68OWB4UdT7aeUrPJ+VAGBUCNI35DbUS2sZJFKOxzW8ico1q4AdKT94PA2cWC46Dq0TejALC/ZUYGHA6xwG3fejJ/9ph5KpRet2USUv3mo5DHmaGAyFrmcjbGpfqeRrEXGAtbMzTtp6Zklf0qi4VVZKSJTy+3wsO5KKXlwOdzvteoEdxev+NIZdephNcj86iNK0IfTIsxNixVZ7rF8Q==
+ b=e8Y5WtbAy4006JJVTZ2y4salJvL40P6uqexElQ2Gi/YPqHunOfkR3rqogHqx7D3sAzI/hqjHozRyRLXbSeRfuSS8qKWQwnzxMPEhGH9z3g+sDnNWeNEzvSvAA8OmtzawTuTZNn0sRQlquvGOvebAmbb8E5WzIjmm2UolvZcGdue//WTA+DZQnlYYubStOcQ4hX1pLUT5dPOQ+RVbvi20QEZEZa/B3g9asJemPYX81wpqB3y26R2wEPRldlkfr2qApAwpAZBtsEUQ+9S33jBQ/vQhFd9rz5L/MHp9hV+QhPW2JYT6IxuzbcFVAkqJmB+WrAtwqNrm5ARHuYgkgGcsRg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FhqZCPHAOOSYRPmvIeT2rkt1lLWK5UfH1AaPUsweE2U=;
- b=DIuVcE7+28EtZIQR2WpKcSuTgBLbxdt2P61nDAFSh7FZG0dwabu357A8dBUSqn7wIjOCU5zYMq7Xb7PZiU2V75rVwi+XlgN1BybahUvuA4jC9AlJJG5WnTJDkdZBgJMYYsz38rDK5ZKVPx2OD1LUhYQw/vLoQqD1Oq7OpqVIrkfTQuOwwpEK/OCPDhzO1dbY0uM6Pm52DdZyEMhaHtNBOqMOiOhlH2M54UXM1JiTTlF4e7SSn/MHoFkFbJvDBCQpZrUWKbxVUBaAQ9PQoAqA7LD3pw1kw8DltXObXG6k2c9sHDS5gN3Vgv82PKF1J6YdCaVfsMz0Dzd+lCT6aOsf+g==
+ bh=Tf5GjUFMmPyjkKLGlWRRxK/4JKTp73nBVTX1n5BWHvo=;
+ b=JkRpLyYOJOFCSfsDzGDF9/6xvvjXBzbfYPZaP9brvx5QZJaDauA922nm/Jb3+gjp6XrafrdxR0BX7fRxiJP1fM55MJpItJtuPn7HjBVH4lus4xj4Y5ELukwPIOyaLmyshRfAyeRRWkik5RqqvtIqoDa0BGGEu9KiLfE2NaAt2Bi0/Ia1UFhiqkHc4PqIaChBevipOgXu9Ba1N8I3c52z2QBRLM7UHg17KafMoT326VRiZ4Xjt9WYZB6cs/pSjzCcaWcn7/qPaHDEZr903mg9+oEa6Etk9KNi5OefVaYh887x7mKtbWW8zG4rv6OCVDZGUoUKLyu3edwTepasy73zVA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oppo.com; dmarc=pass action=none header.from=oppo.com;
  dkim=pass header.d=oppo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FhqZCPHAOOSYRPmvIeT2rkt1lLWK5UfH1AaPUsweE2U=;
- b=Xn7ccRUtbmkRQ6gsuf8JFBAzojKK6ky8FBzbmBAyVdmgvoFjTkMADavARlAnSm9WcgcYePENFyVIK7ktBRZfuar+Xe0CYyy9zMY4FCXooc+vIDru8ILDsW5Wk1rdUTZmBdJxeeWJJeBtsrkU6WekfjEcVjOWUPUu22GKIyVoA94=
+ bh=Tf5GjUFMmPyjkKLGlWRRxK/4JKTp73nBVTX1n5BWHvo=;
+ b=dWULMd+l+DZjUy0NKU5gQwJxltoFzhBS8QdB8liPBS9G3bvxvJ6zzzivAJM/bKO6Bc7qXYpEWkQFvwWKFpOph2gsrSd2Yx3mDbP8DRBvWDa/6t/K0uylcO6oWlQELetbdMewWC4cvTuo7ub+jbfrHpC6ePK/ezASguM61wkznzI=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oppo.com;
 Received: from SEYPR02MB6014.apcprd02.prod.outlook.com (2603:1096:101:6b::10)
  by TYZPR02MB5834.apcprd02.prod.outlook.com (2603:1096:400:1d1::6)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.22; Mon, 18 Nov
- 2024 12:05:40 +0000
+ 2024 12:05:42 +0000
 Received: from SEYPR02MB6014.apcprd02.prod.outlook.com
  ([fe80::bb06:c283:a50:7796]) by SEYPR02MB6014.apcprd02.prod.outlook.com
  ([fe80::bb06:c283:a50:7796%7]) with mapi id 15.20.8158.019; Mon, 18 Nov 2024
- 12:05:40 +0000
+ 12:05:42 +0000
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Mon, 18 Nov 2024 20:05:16 +0800
-Message-Id: <20241118120517.3533055-1-shengyong@oppo.com>
+Date: Mon, 18 Nov 2024 20:05:17 +0800
+Message-Id: <20241118120517.3533055-2-shengyong@oppo.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20241118120517.3533055-1-shengyong@oppo.com>
+References: <20241118120517.3533055-1-shengyong@oppo.com>
 X-ClientProxiedBy: TYCP286CA0314.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:400:38b::18) To SEYPR02MB6014.apcprd02.prod.outlook.com
  (2603:1096:101:6b::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SEYPR02MB6014:EE_|TYZPR02MB5834:EE_
-X-MS-Office365-Filtering-Correlation-Id: 77ad10b0-3c1c-457c-fe96-08dd07c951e9
+X-MS-Office365-Filtering-Correlation-Id: 103c997a-9a52-4291-35be-08dd07c95303
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|52116014|376014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?HralO9nQuDgo7cu5DG98xItFscOCFEk597s4PVYx3POuyopEddyYyIec0OV1?=
- =?us-ascii?Q?QBz3rW5bsZGdRHPLkRe6O8aZscrCmfJLbraO10a+QX8jHzfyeHtC22rMFO7o?=
- =?us-ascii?Q?NzlDfcj5gI2J2n/MG8tSuX9q6O+Ac/k8EVMGygJPbb9FdiBwhkIzr6fYrUI/?=
- =?us-ascii?Q?RfyvCNfhwcDIyAof0f4hBRefdRMMutCjr+/9wtw/0Le50BKyJ6AEVgFt0pDz?=
- =?us-ascii?Q?wcdz484mbOkagi4xt2xMFN87GW+qeKoPJpa1hwIwsD3l8a7wzjrQtG1J59wr?=
- =?us-ascii?Q?Hqqp9tnyMwoYJS08IROTTjPakv1E2lH1JcFJSxYQA7cgKpknJ96rT69Jm+fZ?=
- =?us-ascii?Q?jv43DoSQy3dOpsVOc4R9vTaP7PMvi5wIL3WGA/rksMtceFcP+UgwCAlgbYV9?=
- =?us-ascii?Q?W2IKljIp6sUZ3qykby6GJKo58XPQlZhk1cRdvSdMU5bpXfiTFcDvBHY5YJDs?=
- =?us-ascii?Q?nb5NYfjrhmi6ORpS5tSm6t5ssf3KptsEhX88IZYPG6QZELLWIYaMba2d0YgW?=
- =?us-ascii?Q?w1y3kS085scZC/I7IlaBEfOCfmY55rBqV7MlALG94tPJshYjHFaVjbTS0AzE?=
- =?us-ascii?Q?YrNl9Z4Xi9RZ0pBPvyRbmEeEfpIRmfL64Ga8PJTjvLZKbp0Epbde4FVVXBRR?=
- =?us-ascii?Q?qNlI+8dxSeOSTo89Gso2TocpaljSfEjX1l1FIXIPtd5SiflzYXCTvyPs8h31?=
- =?us-ascii?Q?l7CM/vUfPQ4TCBzCmevBRErl9QMsevCFbOPi7JqhFLsttEFLdwWxsSy7xF1l?=
- =?us-ascii?Q?0Y1hpSMfC0/A2r6NM24wSR35APFbhlftVg5qrB35+AZr8hcgKzJT5ARfUMI3?=
- =?us-ascii?Q?VEUVA0KaxT6Cuy4mkoq8Q+4WSiCqK3yHpFASQ2rhYbK9JxiMZAARRGLCInZV?=
- =?us-ascii?Q?k7PZt8dQke5W5zhLPEKHNZMhid/yotDJkeSfeo4RSJnYn27IgbEuJRI4h/eY?=
- =?us-ascii?Q?/eZPG1Yl2pEmSk/U4NAnW+0FUZMsjAniIxba8cc2CX38IftqJN/7pluVnWp/?=
- =?us-ascii?Q?VyYx67uRf0U0tIht/X0JSWW2Uqiz/ur87m7oOcQ6AoFQiK5I+lKeBDwxWXTD?=
- =?us-ascii?Q?s7A1allUWsQvXo0Qm7n13zSOcj7nfwzR50Lp6drg9/g/6ni1ybIE+6mPbNSH?=
- =?us-ascii?Q?0cISgqmC/NuOte2Ky3eqU4SVy6BJVBGscNoYXU+vGy/FuoWFbDqL6Gkic13k?=
- =?us-ascii?Q?fsIO09awj0iYayst/xre8jMcDDyCp0F51icZxix3tujUsudtb0J760/MAk4L?=
- =?us-ascii?Q?3KLMbALIMb+pf/5K/iYwh5OLmtIZIN4deqQPOYoznL8nSp69jAW6weVS9wE1?=
- =?us-ascii?Q?kprGSwokG8/lOoJBV5SNmo+wCArJ7plXUd2ogmFJWlXNExnkCTL7VV4UseD3?=
- =?us-ascii?Q?y1MLvBY=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9LxghMrOHbaDJF3bUkVOitmotx4ctXTwD2Ue15sPse9ahJEo8NCWE8gKLtgk?=
+ =?us-ascii?Q?1ImNEg2qt1G4CBpkcxn7DpSIpEL+rUZYPMKQOhb7wSXpgPX5WI0mc4ZXlKtq?=
+ =?us-ascii?Q?7J7IwBCZIlck9BXKH1L5o2866CbnJxEnlyoNHQR1cvW2F0ZIYT1FHBz3dAKN?=
+ =?us-ascii?Q?l6eOZ6Hu0US0oBSuGH2a0OGzXIeThl0/xuG2sAJTLkIebasAUk8kYd9XN8Mt?=
+ =?us-ascii?Q?7xtm2ygZtjnMWMew3Okssxo4id1bd+N0chTkjTEOY1ATXHiw0iIqzHnE1qnn?=
+ =?us-ascii?Q?aWv5h5XxrVVngPCuk0U9yiyJhKFWCWwgXTggyGGCMqGW968LoMO0ItEUiVmQ?=
+ =?us-ascii?Q?9IcnO8qXvfzcIRY8KFf9WdK4M4wVpkrtD9nT37PT5vABKCsMtepVF6Yjo8BQ?=
+ =?us-ascii?Q?n99AqLDhxqqMkjy4UDSfnK94O4laWWoex2+j/JkZVowH+KRS3St4C7nIeim4?=
+ =?us-ascii?Q?JksVfYm692n5aduIvY+7QDjvAcPuIsiMhRpFupmRRLpiaqXn7dHPTtLkA8f6?=
+ =?us-ascii?Q?IdiyDQpz8Ioz1xsvfvdj2K7BEXe60ja1qUrDXp0vBr9NTrSNJGljsB7KTlJ9?=
+ =?us-ascii?Q?M6Y63GsScXp9vrkS9urYzFqv8mCwWzH2l14mfI27q4JQC82qqArBAjVTKtk0?=
+ =?us-ascii?Q?M4VKMtH85wDdjilyLe0JmLsreOqAIUKjfwh7dU1C5otd2JCjfBklCux4HOVq?=
+ =?us-ascii?Q?JJ1ln2G8LTXD6CFOEDQfpOzQ8DC+Qd0NX1iCkdfoqGgkZjRbZ8uCV6vifet4?=
+ =?us-ascii?Q?22gm3H6UQwikOYp4ytsYDK6IJ9QvEEFJ9Dc5uWBJl79Uw1G1MX/kmBeq1aUa?=
+ =?us-ascii?Q?q7R+Er/KXSd06KUelABPGOfXAe7JNYe96ApBofAIeHp3nYYBZJqYofoUwOe4?=
+ =?us-ascii?Q?hBQLU6silaAuYxQ+Bw2E/7orbXQFIpEZPEWIMeB0UYlzOM8uEsVNPOQIqpX2?=
+ =?us-ascii?Q?cd4vIfWwDZJTySwiK6NwUApjG38hWPUbgSHoTpNV9KoNQIa6ttbbJ28cXvL+?=
+ =?us-ascii?Q?DjMjTWjpkWlvaUBPg5jVNqigJVSN3cabwT509vSO80RwAbiexa8Lp6iM8gYJ?=
+ =?us-ascii?Q?08yJ1p2NbWA9J3xbc6bJikyghEGW2LxbbVxxdK6Tl1gkMUtVRn2Ff065lgKL?=
+ =?us-ascii?Q?uGpDZlQgLZVNyGVtDzm3O+g0vg1W033TYmF4NhdKgBwpCgA2Y4xSws3DNqxZ?=
+ =?us-ascii?Q?gNd3NtcvHeOTfz28lvtJ+2Ue8NFVIf6nqoQ8UgVLHntUAc0ghK6w97Lukaju?=
+ =?us-ascii?Q?Y19SYlmrZXLMiGzOdp+TSOnZ69PDa9+KArZmL0MKfHnVFfj4uT77gypqxbHY?=
+ =?us-ascii?Q?8yFgAwEcPGQiCF8bRpNusQQNHsVZCoTu4Qz8oWZJFca12vv5lBd1hxcAVtRs?=
+ =?us-ascii?Q?SeTlRvM=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SEYPR02MB6014.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(52116014)(376014)(1800799024)(366016)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?DChuRx7QLTiFPsWIYjJRJBvdKeNMNtmCAFDEexj3yLnG+fhpZtLSwwe0Psv6?=
- =?us-ascii?Q?XSZYtdE0B7E/bNFmHFVvveYuDK1VIQ0T6yBpmAfxuQ7jpCoQ15kWdo536xRg?=
- =?us-ascii?Q?3AmRD36W9YKE0IZF6TlAfqJFqFxuFePZ0Yx4LmSOdM9Q8JQFmqB2IlctIoF3?=
- =?us-ascii?Q?4Dlxh2zbOMGjFLtsIo+E/d7Hl18hmsxhJKWNln2Xdxl0JBB1f3Uzw8IsTLlN?=
- =?us-ascii?Q?j5KpqYCWPfO1Pb4VIlYQKxGGp3RJqd/GSjRNxY+pyBVbuEzJHcpdIvdWqObI?=
- =?us-ascii?Q?XplL3yBt1p46744kZksC2Co0yr9sp37KD1jVH0T3E8qfS4l9tAE65upi1c27?=
- =?us-ascii?Q?m+PaHaNF5pa7L1MJSPGBX5RvNoaG8lCKxTEFdHnAy+BqeS0GOHtFjKrGuEed?=
- =?us-ascii?Q?OzGURe3uH9zO5GpaiL+l2f+oGw9qYomz+SjPi6Re2DYAVPOEuoW9DibpLi7W?=
- =?us-ascii?Q?lN1eUisbkZJyJ2BpyPAEsI+ic7rCLLcllNDYo8XEAqhZpLQACRZcL7bynVlK?=
- =?us-ascii?Q?edDF9NQIOuUSjsfWbZoYKEP9mHdUxD1aVZebu00fNxqsDOSQQOvEuPyMaPjw?=
- =?us-ascii?Q?qFex5JI4CkR0Y3GqQnbmiLTckcvSuCPzhWKy4a6jRw5qdaGcbgOKVIq17ye8?=
- =?us-ascii?Q?yMrWb5xfpkWT6RJ17mce18NaCubUIrdFR8+hTbC0RMYMuKz1pqzDjQALhxW0?=
- =?us-ascii?Q?Vd7Cs4u4QgLpkWGth8fP1esjFxCYcuE76X+KKeox+z+vUn4Y44Nnd1M2fegN?=
- =?us-ascii?Q?GGD9x4DfIxv48top0F8FNYutZB/z7mQRosl6Bkkr84QQj9gTafLulLy+4I8F?=
- =?us-ascii?Q?uP6v6ZZZ0o1varh+FslnkvL+L0A+A3Fu2JlIAp2ZdiuVB4jToqIKW+ghL7JV?=
- =?us-ascii?Q?sDdvpHhvHs/VYwJWUx4xWcc61emA8wHIQ8H5wqsvvr9dWW/cZB85kATrzBhW?=
- =?us-ascii?Q?JUHw2yMcL3zMRnesQiMTksSugCCwHylE8kCVb7cH1CaP3aor9J5/KEF64aQE?=
- =?us-ascii?Q?9RwBGN8urR5eUv3h8B1pCvEcZ5QDA5JW3QwSeTv0cSiqtOrMddvfJiGy/jDb?=
- =?us-ascii?Q?Z/RXTCFeYMEanY4rinmWazCAwFoTi1Q9jFeeUiJrQLX0tBpqyCL0WB3CgYVf?=
- =?us-ascii?Q?WDAAUFIIOnIQ1zeDpXJ9BZhqWmtFvFrSDy3CBcZbVpk2dXFV5gK3yXFE3Zvw?=
- =?us-ascii?Q?QmhV/6qFtHYDcKCOTZlV08VxoegwCUgILhF0e7soDFHWdV1kva+lAM7pkGuO?=
- =?us-ascii?Q?eh9LIthkW5+6P8ak47xCk+aIiBppc/KBPStX4rhj1P399hFm9WEhNhHm2Bv1?=
- =?us-ascii?Q?1Vk/UoQ3nZaqDZkTi8tsPRFh9KI9RqgYmPyZQ8NiCOAcQgGCRbcHIl9ms3IY?=
- =?us-ascii?Q?dhEdQ6bWw8Xjz03OWDjSW8BDIWNjwI76uVwtixoADLxwHN+qJw7Mjoq4IM7u?=
- =?us-ascii?Q?aT3X05wgDf+F9xjdISH7EvzS/NVAmINLdenbp6v86zXyxXeLeUlyCB6F8Ql9?=
- =?us-ascii?Q?e6PIlTlPThnWacJqbleHFcdr/tM/dgr9Erzd6WI+wj/YrwPGBDD3vN9JNtJv?=
- =?us-ascii?Q?bd6StLO5jFU3sSkixhxFYeCNIe4heFhYFmjeWrSz?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ZNZMnOFWc0b37vViLDsS/Es8joxsleoDXMusMY/E5le6pMm8rfe9NaDdWAcf?=
+ =?us-ascii?Q?U9jwr54g+qakK2IYAzWABzyrnR4N3ZXl2XCIyhVj70xx4vZxq3pcO5BtN6I2?=
+ =?us-ascii?Q?7h5jJ11IQju1hOqn2Of4Al2OtO0oRUSb9aRT0J3n5j1DUi0BiSC0C2hQ/5Mh?=
+ =?us-ascii?Q?o4OK6eeDdEo342iGK8dEV+1E76mLrWUq9HSfneKCMlMm23DPV6JV1bqZKzIz?=
+ =?us-ascii?Q?z3qW2bRsnLnDSrPz+4x/oZTsqzagDItoCi9nGVWGlb64+LtiTp0WXGrI7PUB?=
+ =?us-ascii?Q?ds/73VdH4IHF/Rqq8qCHA0EjeaK5D2O+HBbQOooAHprsx2rChi47YoayoCLV?=
+ =?us-ascii?Q?qPe3ZvDerBI1kGJ03JhShrpc/qe58AuddpuNkh7hy54q5JIelQC5fdcdJ1id?=
+ =?us-ascii?Q?SSJTuK+5qhod1C87o2b3l5EJPdJrugktEduzwWClqbpIH7iBeAsWw1GUfbCu?=
+ =?us-ascii?Q?5YHq+r6nEd226nBCXBm55vtvL/72qDqzhrmIca8zcHEQhmWgyQMlkUE6pGyu?=
+ =?us-ascii?Q?iq69Vwu2IRZrbTyMMg+giyIf5+6UzRUDJHFdL52groVL/zbRwwabh5Wc2RZp?=
+ =?us-ascii?Q?SjwaHL5ZHXdT6WCXP6v/1Hkb0yhG97gs66Y4cES3SqqsTyluQyvMPChNVY3l?=
+ =?us-ascii?Q?/vzrOwT6ecopPOamRxha+U//Of0mzKUG3wComOzZl0Pq5Iu6jD2EiAqZY4eJ?=
+ =?us-ascii?Q?EmWiqkONz31Nf2Kg9KddPV1OF16jjVNCf8trKnYNov6AKRk0/naqOhP/qoxV?=
+ =?us-ascii?Q?CaDh+PaPXz46Kzufh0xUccNjInPa7IPSdll9cUxDu+GBFvytcvIfCeUs6/Tl?=
+ =?us-ascii?Q?nnx61lZLfq4qSBzQVoT59yvyLzQ5szTe8yupHHTbu1/36Wy9U5XcyhqfDrxB?=
+ =?us-ascii?Q?tiv/mVT2cLlRLAm9j0Ogqx4qshnt/aAuFTTvo3A5Kjr6QlA9kg0rhT5SuuKn?=
+ =?us-ascii?Q?RI6/uAchr5mOXxElu75AEIoScRCtgKn8vxdK/r2rIvVBQ1YdY2FSVkWDfhqu?=
+ =?us-ascii?Q?7wy/1sqiaTU219lPss+TPlsOyJW0PF63Vo73o5WbLJWRI+/37qab44sAL4T6?=
+ =?us-ascii?Q?TE3ubvEiujTVL7L4nEAspYxqajdwPEhwad/pMWVPdr3Wb4lNTJeIu1lGwNk1?=
+ =?us-ascii?Q?8cItx6V96XpsY8L7cmDv/QcEnTp404vozVCC4ps57RHZiajMZ+9RsRJidmC9?=
+ =?us-ascii?Q?SfknPmmIEORWGPwN4MkqbDjDujjZx2VEtnubJtPS8nuWa6Yytd6rT1PDTu8d?=
+ =?us-ascii?Q?0BlrWks8VT/3bGEHb5G2NGz+cg4SnMtJO1DML2ISKVQA3EKJVZXHHXqvMAQ6?=
+ =?us-ascii?Q?1Cb4fP5yhkCaFQUflcorVzCpW7Ty6f0CRr8g8thL+by9B56aMMo8YFt8D14V?=
+ =?us-ascii?Q?vlx95WdNaPmMdRLjAo06AiKd5oJ6o5we8Kti0GVF7RgSSQaTPvfiLKnEuXe4?=
+ =?us-ascii?Q?lUfSfRZGTWSRq+NlrocXAB7mo3vTXCuNsjy0nP8/p/6RVcolJ+wTa2KUytue?=
+ =?us-ascii?Q?UMyacKI9Pv69vNeT+QhDePAn1ut2P0AfHdYLbt7djSiEBelyiy7tVbJHxkNG?=
+ =?us-ascii?Q?JbInqE0mUxhUHdNrwUXsZ73SWrbzzTs4EQ4zxcjW?=
 X-OriginatorOrg: oppo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77ad10b0-3c1c-457c-fe96-08dd07c951e9
+X-MS-Exchange-CrossTenant-Network-Message-Id: 103c997a-9a52-4291-35be-08dd07c95303
 X-MS-Exchange-CrossTenant-AuthSource: SEYPR02MB6014.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2024 12:05:40.3615 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2024 12:05:42.1895 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: rjk7bz9M/y545iBFJsc3I1ZrFWkHJYVoVOP86wrddLHFH7LWamVIskGCJJsK210gV2hhBzvSW4ywZT3evkbM4A==
+X-MS-Exchange-CrossTenant-UserPrincipalName: qmiSCpLt2aqbXMWut1LRn1yCLIsz/IM8CievXv1rLqvco/BBoYjGK2bqb4uYNiE28ayLkUTtTR5fAi9+cJQP+A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR02MB5834
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Fsync data recovery attempts to check and fix write pointer
- consistency of cursegs and all other zones. If the write pointers of cursegs
- are unaligned, cursegs are changed to new sections. If recovery fails, zone
- write pointers are still checked and fixed, but the latest checkpoint cannot
- be written back. Additionally, retry- mount skips recovery and rolls back
- to reuse the old cursegs [...] 
+ Content preview:  SBI_POR_DOING can be cleared after recovery is completed,
+ so that changes made before recovery can be persistent, and subsequent errors
+ can be recorded into cp/sb. Signed-off-by: Song Feng <songfeng@oppo.com>
+ Signed-off-by: Yongpeng Yang <yangyongpeng1@oppo.com> Signed-off-by: Sheng
+ Yong <shengyong@oppo.com> Reviewed-by: Chao Yu <chao@kernel.org> ---
+ fs/f2fs/sup [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [52.101.128.16 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [52.101.128.16 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -177,18 +172,25 @@ X-Spam-Report: Spam detection software,
  [52.101.128.16 listed in bl.score.senderscore.com]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
  [52.101.128.16 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [52.101.128.16 listed in sa-accredit.habeas.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [52.101.128.16 listed in list.dnswl.org]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1tD0Vv-0000I8-5t
-Subject: [f2fs-dev] [PATCH v2 1/2] f2fs: fix changing cursegs if recovery
- fails on zoned device
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1tD0Vx-0000I8-5q
+Subject: [f2fs-dev] [PATCH v2 2/2] f2fs: clear SBI_POR_DOING before initing
+ inmem curseg
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -207,153 +209,39 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Fsync data recovery attempts to check and fix write pointer consistency
-of cursegs and all other zones. If the write pointers of cursegs are
-unaligned, cursegs are changed to new sections.
-
-If recovery fails, zone write pointers are still checked and fixed,
-but the latest checkpoint cannot be written back. Additionally, retry-
-mount skips recovery and rolls back to reuse the old cursegs whose
-zones are already finished. This can lead to unaligned write later.
-
-This patch addresses the issue by leaving writer pointers untouched if
-recovery fails. When retry-mount is performed, cursegs and other zones
-are checked and fixed after skipping recovery.
+SBI_POR_DOING can be cleared after recovery is completed, so that
+changes made before recovery can be persistent, and subsequent
+errors can be recorded into cp/sb.
 
 Signed-off-by: Song Feng <songfeng@oppo.com>
 Signed-off-by: Yongpeng Yang <yangyongpeng1@oppo.com>
 Signed-off-by: Sheng Yong <shengyong@oppo.com>
+Reviewed-by: Chao Yu <chao@kernel.org>
 ---
-v2: * add wrapper to contain f2fs_fix_curseg_write_pointer and
-      f2fs_check_write_pointer
-    * make f2fs_fix_curseg_write_pointer and f2fs_check_write_pointer
-      static and remove their f2fs_ prefix
----
- fs/f2fs/f2fs.h     |  3 +--
- fs/f2fs/recovery.c |  9 ++-------
- fs/f2fs/segment.c  | 22 ++++++++++++++++++----
- fs/f2fs/super.c    | 15 ++++++---------
- 4 files changed, 27 insertions(+), 22 deletions(-)
+ fs/f2fs/super.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 33f5449dc22d..85de64b74003 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3771,8 +3771,7 @@ void f2fs_write_node_summaries(struct f2fs_sb_info *sbi, block_t start_blk);
- int f2fs_lookup_journal_in_cursum(struct f2fs_journal *journal, int type,
- 			unsigned int val, int alloc);
- void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc);
--int f2fs_fix_curseg_write_pointer(struct f2fs_sb_info *sbi);
--int f2fs_check_write_pointer(struct f2fs_sb_info *sbi);
-+int f2fs_check_and_fix_write_pointer(struct f2fs_sb_info *sbi);
- int f2fs_build_segment_manager(struct f2fs_sb_info *sbi);
- void f2fs_destroy_segment_manager(struct f2fs_sb_info *sbi);
- int __init f2fs_create_segment_manager_caches(void);
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index e4d81b8705d1..f35be2c48e3c 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -899,13 +899,8 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
- 	 * and the f2fs is not read only, check and fix zoned block devices'
- 	 * write pointer consistency.
- 	 */
--	if (f2fs_sb_has_blkzoned(sbi) && !f2fs_readonly(sbi->sb)) {
--		int err2 = f2fs_fix_curseg_write_pointer(sbi);
--
--		if (!err2)
--			err2 = f2fs_check_write_pointer(sbi);
--		if (err2)
--			err = err2;
-+	if (!err) {
-+		err = f2fs_check_and_fix_write_pointer(sbi);
- 		ret = err;
- 	}
- 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 1766254279d2..46f13adeb4e4 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -5207,7 +5207,7 @@ static int report_one_zone_cb(struct blk_zone *zone, unsigned int idx,
- 	return 0;
- }
- 
--static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
-+static int do_fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
- {
- 	struct curseg_info *cs = CURSEG_I(sbi, type);
- 	struct f2fs_dev_info *zbd;
-@@ -5312,12 +5312,12 @@ static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
- 	return 0;
- }
- 
--int f2fs_fix_curseg_write_pointer(struct f2fs_sb_info *sbi)
-+static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi)
- {
- 	int i, ret;
- 
- 	for (i = 0; i < NR_PERSISTENT_LOG; i++) {
--		ret = fix_curseg_write_pointer(sbi, i);
-+		ret = do_fix_curseg_write_pointer(sbi, i);
- 		if (ret)
- 			return ret;
- 	}
-@@ -5340,7 +5340,7 @@ static int check_zone_write_pointer_cb(struct blk_zone *zone, unsigned int idx,
- 	return check_zone_write_pointer(args->sbi, args->fdev, zone);
- }
- 
--int f2fs_check_write_pointer(struct f2fs_sb_info *sbi)
-+static int check_write_pointer(struct f2fs_sb_info *sbi)
- {
- 	int i, ret;
- 	struct check_zone_write_pointer_args args;
-@@ -5360,6 +5360,20 @@ int f2fs_check_write_pointer(struct f2fs_sb_info *sbi)
- 	return 0;
- }
- 
-+int f2fs_check_and_fix_write_pointer(struct f2fs_sb_info *sbi)
-+{
-+	int ret;
-+
-+	if (!f2fs_sb_has_blkzoned(sbi) || f2fs_readonly(sbi->sb))
-+		return 0;
-+
-+	f2fs_notice(sbi, "Checking entire write pointers");
-+	ret = fix_curseg_write_pointer(sbi);
-+	if (!ret)
-+		ret = check_write_pointer(sbi);
-+	return ret;
-+}
-+
- /*
-  * Return the number of usable blocks in a segment. The number of blocks
-  * returned is always equal to the number of blocks in a segment for
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 87ab5696bd48..072462896716 100644
+index 072462896716..1d22e5ee7331 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -4738,16 +4738,13 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- reset_checkpoint:
- 	/*
- 	 * If the f2fs is not readonly and fsync data recovery succeeds,
--	 * check zoned block devices' write pointer consistency.
-+	 * write pointer consistency of cursegs and other zones are already
-+	 * checked and fixed during recovery. However, if recovery fails,
-+	 * write pointers are left untouched, and retry-mount should check
-+	 * them here.
- 	 */
--	if (f2fs_sb_has_blkzoned(sbi) && !f2fs_readonly(sb)) {
--		int err2;
--
--		f2fs_notice(sbi, "Checking entire write pointers");
--		err2 = f2fs_check_write_pointer(sbi);
--		if (err2)
--			err = err2;
--	}
-+	if (skip_recovery)
-+		err = f2fs_check_and_fix_write_pointer(sbi);
+@@ -4748,13 +4748,13 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
  	if (err)
  		goto free_meta;
  
++	/* f2fs_recover_fsync_data() cleared this already */
++	clear_sbi_flag(sbi, SBI_POR_DOING);
++
+ 	err = f2fs_init_inmem_curseg(sbi);
+ 	if (err)
+ 		goto sync_free_meta;
+ 
+-	/* f2fs_recover_fsync_data() cleared this already */
+-	clear_sbi_flag(sbi, SBI_POR_DOING);
+-
+ 	if (test_opt(sbi, DISABLE_CHECKPOINT)) {
+ 		err = f2fs_disable_checkpoint(sbi);
+ 		if (err)
 -- 
 2.40.1
 
