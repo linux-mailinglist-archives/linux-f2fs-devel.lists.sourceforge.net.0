@@ -2,84 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEE0C9D4A42
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Nov 2024 10:54:49 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 482129D4E85
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Nov 2024 15:17:52 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tE3tb-0005QL-NZ;
-	Thu, 21 Nov 2024 09:54:44 +0000
+	id 1tE800-0002BZ-Pc;
+	Thu, 21 Nov 2024 14:17:36 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1tE3ta-0005QE-GU
+ (envelope-from <chao@kernel.org>) id 1tE800-0002BO-0C
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 21 Nov 2024 09:54:43 +0000
+ Thu, 21 Nov 2024 14:17:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LNK7yy+C9P+ozjAbeQDW5yVw6U7uKhe2PTGVTodDqFQ=; b=Wj7yuO8vbZGzPe5tKxaWq51I7Q
- oyS1r4DWvY2tV4TisjnGtzwQF4uRzUVvMuXYTbARCFui/TtUznBH0qnCVStT+Yhszp1XV8iY/MNW+
- eDq/wFu7xi6bo9T6gqmP0EwyV3WCj+rwtY2je4iQKBhIsWjexTnt7IT755pb6H+dGUDk=;
+ bh=Z2dRscrnGDI5v5SQH58MaG+ymszBDy2egRqEc8Iz6yw=; b=V+JHhkE96sW+FVLdTmUH29iD8U
+ M09LOrEQOEsfVeo5Cne/f0iATdmeqoqiJglMefO5EzMLT0aFZmNatx6RfngHTR0YLvGkD1NDxSBQ2
+ XT4UnZpdJ+VkfweYO4Pfa06LdcSciGM1W+SLrW3t3GiEL0FaKAklXPH6ac/h+3TDiiTY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=LNK7yy+C9P+ozjAbeQDW5yVw6U7uKhe2PTGVTodDqFQ=; b=lSsEehdjLsyIo3VTALEXYa75GT
- FerbtImmKuAJC5HkKHk9WDlIaubtS7PEAgptEYw1AyBH7Jovu8IOvlXiVi/X++gKzW24VnNTVOhPD
- fEQwfddL8RZBUur9EhrYpMrv6mHOROT6lylcyHay2eLae9qonIm1WtUr5m6lTdrqWW1Y=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Z2dRscrnGDI5v5SQH58MaG+ymszBDy2egRqEc8Iz6yw=; b=B
+ LnlB6nodSHXSeIrz+lwcIT0VunERlj3Av+JD/g826e/9H0uArBU3OeUY9WOknED0sg/mqRM2NXxse
+ RxhNQNS7CfK85IT8N7zOJwjg693VREHzBuBoMXZyKk4dKy/Olnu2v+zyVUaqPQyKv46yqSuVF+/jc
+ dicBaNnEdxo0adt0=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tE3ta-0001DC-KR for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 21 Nov 2024 09:54:43 +0000
+ id 1tE7zz-0003Ji-4t for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 21 Nov 2024 14:17:35 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 94467A4019B
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 21 Nov 2024 09:52:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 9D00EC4CECC
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 21 Nov 2024 09:54:31 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 25FCDA40A91;
+ Thu, 21 Nov 2024 14:15:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B2882C4CECC;
+ Thu, 21 Nov 2024 14:17:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1732182871;
- bh=LNK7yy+C9P+ozjAbeQDW5yVw6U7uKhe2PTGVTodDqFQ=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=EGnvIwNR31HQ+XnJIWqeZipSvMMNpFqo2zQPaPCaGbbfitKTGBNg4Q7v2aFHEBhFj
- ME2233+AgcubJUKPnAwQ1Ysm9as9g2pE9zIJE930jCpuqWK5OxfKtNIkFf/HJUo9TM
- 6spzfU/7Exn34lzo43OQQA8JEi9wLyT/UGY6xbhUZmsc+2JZaz5B+3hBATKg7HCFir
- 3GIfQN4a1woU7VihxMHJ5SosDArkSVpO2XaVYjrQkqSPchOW2IFcpO331HDxeRkjjA
- GAPqbZaXNRAg3EIHulUJZVigw2ehHUb6YasblxqUSPKmUMVQtnW3tqrCNp6Rl9GLH4
- 1xcbqQDUaxyLA==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 9385FC53BBF; Thu, 21 Nov 2024 09:54:31 +0000 (UTC)
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 21 Nov 2024 09:54:31 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: blocking
-X-Bugzilla-Who: chao@kernel.org
-X-Bugzilla-Status: ASSIGNED
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P3
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-219484-202145-UItptoV9mA@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-219484-202145@https.bugzilla.kernel.org/>
-References: <bug-219484-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1732198649;
+ bh=Nwing6hxd7cbL8mrx1UFhwO+4wTLgqqgFjW37N/tBsY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=WFBO2pNbkJJdN3p7N5UR1GeTs2j6WYsbgzGfuu+5SGkRUCMTRmfBooHBQHQM/Fsg2
+ k9Zr14TBDhpekulan4sDjdyDiGe054/+vJ9NYTAP77515vh6ZgBuesca6wwOesiboQ
+ aCrH2TzvD44QIcYNG59RfppvjzC/dgUc5oy80PlHtUiqdXk2J+MIX76aJzpYZSHyaj
+ z5tHo5O2mUbCN25lZL+wiXfHhnWzuZ7Ed1CXzMLME7qT81YdoPwMEkLEmAIFubXkbK
+ doltu3cGGVfqHr01kx4nvU6VFrC8b1a2UhsQv35/4W5nEZvBtHoSpYHB/dYH+Q+Ts6
+ qZvui8KMW5T6g==
+To: jaegeuk@kernel.org
+Date: Thu, 21 Nov 2024 22:17:16 +0800
+Message-Id: <20241121141716.3018855-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
@@ -88,12 +66,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=219484 ---
- Comment
- #7 from Chao Yu (chao@kernel.org) --- (In reply to piergiorgio.sartor from
- comment #3) > One more thing,
- possibly important. > > When I create the snapshot, 
- with the working kernel, while [...] 
+ Content preview: Piergiorgio reported a bug in bugzilla as below: [ cut here
+ ] WARNING: CPU: 2 PID: 969 at fs/f2fs/segment.c:1330 RIP:
+ 0010:__submit_discard_cmd+0x27d/0x400
+ [f2fs] Call Trace: __issue_discard_cmd+0x1ca/0x350 [f2fs] issue_disca [...]
  Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -119,9 +95,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tE3ta-0001DC-KR
-Subject: [f2fs-dev] [Bug 219484] f2fs discard causes kernel NULL pointer
- dereferencing
+X-Headers-End: 1tE7zz-0003Ji-4t
+Subject: [f2fs-dev] [PATCH] f2fs: fix to drop all discards after creating
+ snapshot on lvm device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,39 +109,118 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: bugzilla-daemon--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: bugzilla-daemon@kernel.org
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Piergiorgio Sartor <piergiorgio.sartor@nexgo.de>,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=219484
+Piergiorgio reported a bug in bugzilla as below:
 
---- Comment #7 from Chao Yu (chao@kernel.org) ---
-(In reply to piergiorgio.sartor from comment #3)
-> One more thing, possibly important.
-> 
-> When I create the snapshot, with the working kernel, while
-> "max_discard_segments" is still "1", the other two, "discard_max_bytes" and
-> "discard_max_hw_bytes" are both "0", instead of "2147450880".
+------------[ cut here ]------------
+WARNING: CPU: 2 PID: 969 at fs/f2fs/segment.c:1330
+RIP: 0010:__submit_discard_cmd+0x27d/0x400 [f2fs]
+Call Trace:
+ __issue_discard_cmd+0x1ca/0x350 [f2fs]
+ issue_discard_thread+0x191/0x480 [f2fs]
+ kthread+0xcf/0x100
+ ret_from_fork+0x31/0x50
+ ret_from_fork_asm+0x1a/0x30
 
-Thanks for the hint, I think that would be a key to the truth.
+w/ below testcase, it can reproduce this bug quickly:
+- pvcreate /dev/vdb
+- vgcreate myvg1 /dev/vdb
+- lvcreate -L 1024m -n mylv1 myvg1
+- mount /dev/myvg1/mylv1 /mnt/f2fs
+- dd if=/dev/zero of=/mnt/f2fs/file bs=1M count=20
+- sync
+- rm /mnt/f2fs/file
+- sync
+- lvcreate -L 1024m -s -n mylv1-snapshot /dev/myvg1/mylv1
+- umount /mnt/f2fs
 
-Thanks,
+The root cause is: it will update discard_max_bytes of mounted lvm
+device to zero after creating snapshot on this lvm device, then,
+__submit_discard_cmd() will pass parameter @nr_sects w/ zero value
+to __blkdev_issue_discard(), it returns a NULL bio pointer, result
+in panic.
 
-> 
-> Hope this helps,
-> 
-> bye,
-> 
-> pg
+This patch changes as below for fixing:
+1. Let's drop all remained discards in f2fs_unfreeze() if snapshot
+of lvm device is created.
+2. Checking discard_max_bytes before submitting discard during
+__submit_discard_cmd().
 
+Cc: stable@vger.kernel.org
+Fixes: 35ec7d574884 ("f2fs: split discard command in prior to block layer")
+Reported-by: Piergiorgio Sartor <piergiorgio.sartor@nexgo.de>
+Closes: https://bugzilla.kernel.org/show_bug.cgi?id=219484
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/segment.c | 16 +++++++++-------
+ fs/f2fs/super.c   | 12 ++++++++++++
+ 2 files changed, 21 insertions(+), 7 deletions(-)
+
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 7bdfe08ce9ea..af3fb3f6d9b5 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1290,16 +1290,18 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+ 						wait_list, issued);
+ 			return 0;
+ 		}
+-
+-		/*
+-		 * Issue discard for conventional zones only if the device
+-		 * supports discard.
+-		 */
+-		if (!bdev_max_discard_sectors(bdev))
+-			return -EOPNOTSUPP;
+ 	}
+ #endif
+ 
++	/*
++	 * stop issuing discard for any of below cases:
++	 * 1. device is conventional zone, but it doesn't support discard.
++	 * 2. device is regulare device, after snapshot it doesn't support
++	 * discard.
++	 */
++	if (!bdev_max_discard_sectors(bdev))
++		return -EOPNOTSUPP;
++
+ 	trace_f2fs_issue_discard(bdev, dc->di.start, dc->di.len);
+ 
+ 	lstart = dc->di.lstart;
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index c0670cd61956..fc7d463dee15 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1760,6 +1760,18 @@ static int f2fs_freeze(struct super_block *sb)
+ 
+ static int f2fs_unfreeze(struct super_block *sb)
+ {
++	struct f2fs_sb_info *sbi = F2FS_SB(sb);
++
++	/*
++	 * It will update discard_max_bytes of mounted lvm device to zero
++	 * after creating snapshot on this lvm device, let's drop all
++	 * remained discards.
++	 * We don't need to disable real-time discard because discard_max_bytes
++	 * will recover after removal of snapshot.
++	 */
++	if (test_opt(sbi, DISCARD) && !f2fs_hw_support_discard(sbi))
++		f2fs_issue_discard_timeout(sbi);
++
+ 	clear_sbi_flag(F2FS_SB(sb), SBI_IS_FREEZING);
+ 	return 0;
+ }
 -- 
-You may reply to this email to add a comment.
+2.40.1
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
