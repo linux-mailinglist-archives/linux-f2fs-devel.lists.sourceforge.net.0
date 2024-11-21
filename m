@@ -2,81 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03C179D509A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Nov 2024 17:21:04 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9428F9D5099
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Nov 2024 17:21:03 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tE9vG-000565-IQ;
-	Thu, 21 Nov 2024 16:20:50 +0000
+	id 1tE9vC-0008Tu-JP;
+	Thu, 21 Nov 2024 16:20:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1tE9uv-00055d-CK
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1tE9uv-0008Tc-Kb
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 21 Nov 2024 16:20:29 +0000
+ Thu, 21 Nov 2024 16:20:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
+ Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ylf+9EqPXUZqi7nrXirRDoQlecAcZw41b2Z1mqPq1N4=; b=k/ZMCHzwy55ft4iaKBgedabsZ6
- m59pGo2FiZ9hekvBY3228b4GK1H/bNUK41eXpqEwpRkJZwwXirpp4AL3XNH4UtlZCMeDG6HaAMPS9
- bCmls9E0EI1nylaR5UQ7m01kSfHp8sajGiUvas3sWkcH7gKiBejm6kETAeX5VsMAD+mM=;
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=UeePUssvUouxF51V0pP0R9mPuwgqD+AQ++4ydz0LC0c=; b=Q9pb1O3XW3QhnuE1cAYIrm7el0
+ rFXfrzNmxVH44ViyEsVewh+uHhu83ecBLQY49vBTr5dS77uBAnzuQZ4VOIwz5HtU/Kp1brqix3nUn
+ jTbVmdbruU9nTYom8s+1kBUNP0g6bSVcy0f6buSUq12zhveoT+E8t107rjqxZLyajH+4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
- Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Ylf+9EqPXUZqi7nrXirRDoQlecAcZw41b2Z1mqPq1N4=; b=E
- tXCCtE5aFUApNlFcwfoyQqjEok7z7qix1OzjF8Ld4Vj42ze5hdKU4w85w2bOPqnh8JZqBID9+GRvu
- 6D7jTpi+l/4nKchdqcn2TSiJ8XlzB/FAh/G3sIcgck6jLLB2N1F0MP70s+qXCbTpLxxj7+7roVxYH
- D9eBr0HBTxWFbXM0=;
+ ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=UeePUssvUouxF51V0pP0R9mPuwgqD+AQ++4ydz0LC0c=; b=eZVdSvRYs6HxM1qWhYHCfyD5+b
+ 8FsvwHzEjBlA6y4/bUD5phkSo4kEgsUQvNEd/4KcMOgt7URP6b8T32YXdGy5FcbSzviJ2tAzRm1NH
+ Kt53zaroQ5KbC8QCHENhpt0cJHs9cFgF0oaPo0jbs50qMDF08LpA3X7dB+nn6PDmjiX0=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tE9uu-0003P0-JP for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 21 Nov 2024 16:20:29 +0000
+ id 1tE9uv-0003P5-NC for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 21 Nov 2024 16:20:30 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 62CE15C5567
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8529F5C48FC
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 21 Nov 2024 16:19:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E883DC4CECC
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 21 Nov 2024 16:20:17 +0000 (UTC)
+ Thu, 21 Nov 2024 16:19:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16DD8C4CECC;
+ Thu, 21 Nov 2024 16:20:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1732206017;
- bh=yFOAyNABjH6ZIGCDIJf9+ldK4ZrKZPRu7HyL5d9zVgQ=;
- h=Subject:From:Date:To:From;
- b=JZSIBf8KXy24KXXe8QzwgTndhtbg8tydrd3rL0LkD3d/J6Ztx40XDFuhjwfA7V0iE
- /RLqIgBxMmt9SZUVdvDZ3z4wXAmCx5uPd3wSjhlzhZuvdPgjdrUMxZRYHu8/NMObhs
- Xaa6fMIANCeWGjCZm9UTOtSoCluMqf5lmHVTmT85kPFouHwNubel3BERy1XZ7QjGRe
- kQrCfhf7CwXAqmoTj6WrfKh2/ndt7oWVjEoNQT+/b6lqh4mNzPjzEIXQCb3R6GibMZ
- cXSmdcb+5HifPEIK5gohC+nDN/mFL+c2+teESew7GhZlhdctdsCsSTNKxXPFtjktX3
- 4MvJ6qxRKNcbg==
+ s=k20201202; t=1732206019;
+ bh=ZDtigLTDD88X3n5JZoGpSForIA9qoDETxrOoWIGrOVU=;
+ h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+ b=QUL5YxwV5iRpmQvfcXy2B2xb0Z1bdyJLHjojcBFqLr7eMW6DXxy5VHfxfG8qhpu8R
+ CIRoOoTwU4N1vh+5ecyddDNItuGwN9kynPoOP27YwomjQ95Q1v+3Smydxyo1cSPg2o
+ Tbi1XDu/D7RAKEGya0yPJIYuTxOj4kB9N05kXQjCsP9PR331FIMSCYm/yhxoeb6mGY
+ L55VxIFt0bbDDxci4uBNNz4fizQ3DNqOVESAo3OJr5Z52MyQ5KJUwRHbW6HmM3DKD+
+ oX4gUp2vjVEsv2FTKZnZGgLghvK6udzglkPSuhtqRiSqTTZ/B4a6EuPvQD/KeS1/6e
+ CSswbYCqybjTA==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- EF6B23809A00 for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 21 Nov 2024 16:20:30 +0000 (UTC)
+ 33D023809A00; Thu, 21 Nov 2024 16:20:32 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <173220602951.1977996.9439804708530834555.git-patchwork-summary@kernel.org>
-Date: Thu, 21 Nov 2024 16:20:29 +0000
-To: linux-f2fs-devel@lists.sourceforge.net
+Message-Id: <173220603104.1977996.13915931436818539295.git-patchwork-notify@kernel.org>
+Date: Thu, 21 Nov 2024 16:20:31 +0000
+References: <20241108012557.572782-1-chao@kernel.org>
+In-Reply-To: <20241108012557.572782-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: The following patches were marked "accepted", because
- they were applied to jaegeuk/f2fs.git (dev): Series: [f2fs-dev,1/4] f2fs:
- fix to do cast in F2FS_{BLK_TO_BYTES,
- BTYES_TO_BLK} to avoid overflow Submitter:
- Chao Yu <chao@kernel.org> Patchwork:
- https://patchwork.kernel.org/project/f2fs/list/?serie [...] 
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 8 Nov 2024 09:25:54 +0800 you wrote:
+ > It missed to cast variable to unsigned long long type before > bit shift,
+ which will cause overflow, fix it. > > Fixes: f7ef9b83b583 ("f2fs: introduce
+ ma [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -85,6 +83,8 @@ X-Spam-Report: Spam detection software,
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [139.178.84.217 listed in sa-accredit.habeas.com]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -92,18 +92,17 @@ X-Spam-Report: Spam detection software,
  [139.178.84.217 listed in bl.score.senderscore.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tE9uu-0003P0-JP
-Subject: [f2fs-dev] Patchwork summary for: f2fs
+X-Headers-End: 1tE9uv-0003P5-NC
+Subject: Re: [f2fs-dev] [PATCH 1/4] f2fs: fix to do cast in
+ F2FS_{BLK_TO_BYTES, BTYES_TO_BLK} to avoid overflow
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,53 +117,38 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-The following patches were marked "accepted", because they were applied to
-jaegeuk/f2fs.git (dev):
+This series was applied to jaegeuk/f2fs.git (dev)
+by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-Series: [f2fs-dev,1/4] f2fs: fix to do cast in F2FS_{BLK_TO_BYTES, BTYES_TO_BLK} to avoid overflow
-  Submitter: Chao Yu <chao@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=907585
-  Lore link: https://lore.kernel.org/r/20241108012557.572782-1-chao@kernel.org
-    Patches: [f2fs-dev,1/4] f2fs: fix to do cast in F2FS_{BLK_TO_BYTES, BTYES_TO_BLK} to avoid overflow
-             [f2fs-dev,2/4] f2fs: clean up w/ F2FS_{BLK_TO_BYTES, BTYES_TO_BLK}
-             [f2fs-dev,3/4] f2fs: fix to adjust appropriate length for fiemap
-             [f2fs-dev,4/4] f2fs: fix to requery extent which cross boundary of inquiry
+On Fri,  8 Nov 2024 09:25:54 +0800 you wrote:
+> It missed to cast variable to unsigned long long type before
+> bit shift, which will cause overflow, fix it.
+> 
+> Fixes: f7ef9b83b583 ("f2fs: introduce macros to convert bytes and blocks in f2fs")
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>  include/linux/f2fs_fs.h | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 
-Patch: [f2fs-dev,v3] f2fs: replace deprecated strcpy with strscpy
-  Submitter: Daniel Yang <danielyangkang@gmail.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=910505
-  Lore link: https://lore.kernel.org/r/20241118070141.3474-1-danielyangkang@gmail.com
+Here is the summary with links:
+  - [f2fs-dev,1/4] f2fs: fix to do cast in F2FS_{BLK_TO_BYTES, BTYES_TO_BLK} to avoid overflow
+    (no matching commit)
+  - [f2fs-dev,2/4] f2fs: clean up w/ F2FS_{BLK_TO_BYTES, BTYES_TO_BLK}
+    https://git.kernel.org/jaegeuk/f2fs/c/7461f3709418
+  - [f2fs-dev,3/4] f2fs: fix to adjust appropriate length for fiemap
+    https://git.kernel.org/jaegeuk/f2fs/c/77569f785c86
+  - [f2fs-dev,4/4] f2fs: fix to requery extent which cross boundary of inquiry
+    https://git.kernel.org/jaegeuk/f2fs/c/6787a8224585
 
-Series: [f2fs-dev,v3,1/2] f2fs: fix changing cursegs if recovery fails on zoned device
-  Submitter: Sheng Yong <shengyong@oppo.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=911444
-  Lore link: https://lore.kernel.org/r/20241121082657.2644346-1-shengyong@oppo.com
-    Patches: [f2fs-dev,v3,1/2] f2fs: fix changing cursegs if recovery fails on zoned device
-             [f2fs-dev,v3,2/2] f2fs: clear SBI_POR_DOING before initing inmem curseg
-
-Patch: [f2fs-dev] f2fs: clean up w/ F2FS_{BLK_TO_BYTES, BTYES_TO_BLK}
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=907165
-  Lore link: https://lore.kernel.org/r/20241107014602.3638020-1-chao@kernel.org
-
-Patch: [f2fs-dev] f2fs: adjust unusable cap before checkpoint=disable mode
-  Submitter: Daeho Jeong <daeho43@gmail.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=910718
-  Lore link: https://lore.kernel.org/r/20241118184535.1047327-1-daeho43@gmail.com
-
-
-Total patches: 9
-
+You are awesome, thank you!
 -- 
 Deet-doot-dot, I am a bot.
 https://korg.docs.kernel.org/patchwork/pwbot.html
