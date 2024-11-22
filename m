@@ -2,62 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E447D9D5995
+	by mail.lfdr.de (Postfix) with ESMTPS id CAFC89D5994
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Nov 2024 07:50:40 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tENUv-0000vk-N5;
-	Fri, 22 Nov 2024 06:50:34 +0000
+	id 1tENUs-0005Nv-Cb;
+	Fri, 22 Nov 2024 06:50:30 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tENUt-0000ve-Dz
+ (envelope-from <chao@kernel.org>) id 1tENUr-0005Np-DX
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 Nov 2024 06:50:32 +0000
+ Fri, 22 Nov 2024 06:50:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=we2b/C0PhQRGqFoWTqoKzjOsakbJXT04HjYLd1v4dQY=; b=gCIBj1LPh4Ek0VfRioIE6t8KL0
- VqOolNrbk2/d1kx4uhqp8uWoemLSPU8mM70ky/cp58IWYGelYJDWS77aEQakWuNqBdVfIXOWvQNIi
- SUvfAOMrA2wGKNVqUwKBbqqSDoR/Nf7D/T1ORGBQK534qPlk4Bq2H046xtr7xFDioehA=;
+ bh=HiQhmq5PPdQ0fYGEjoqkzoqn+B+OWGLErlKfYV1IuyQ=; b=k5C3X08Mjz07XNruzzoH9w66y5
+ /KOvenL4250GOq8TFN01vEh6UjFcLDt7hcAppfmcO/mS2AN2L44fAuBoNqgTAxgcc7BfvJSIz4EdF
+ Y6DaWVc2+AHPX9ISH6ID6lDT+zbsJkTPGJQX9GsHIW5YbLG5UVvwfhaO3KwidJZv/j4I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=we2b/C0PhQRGqFoWTqoKzjOsakbJXT04HjYLd1v4dQY=; b=U
- A7uFyWPUflTVNHmIc4UC5kfWfn58uQZtaYFsh2vapfEVg2RWBKnEjhZQs4SYBoplnzJJZhuZbgJfh
- 2+ssu7X+8YCBAfx2W1YpIA8r9stdyZUfvP8/rGtLkN/S3HQRf/9WqGO2MxyvWYXom4vLRLQyko9/M
- U4lHNsxLv43DFaFI=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=HiQhmq5PPdQ0fYGEjoqkzoqn+B+OWGLErlKfYV1IuyQ=; b=BfvyuihSYVFkkGAsHcRLWFOgoi
+ JxUfcubUcMn1gyyRaRP6mB7VFJ8jIZUKT7fqjVdERHOqTF1jgnIHl+gQGUIHFoWRGus0tidRFi4zH
+ JGZkOONVQXrED2nM1y3xnTrkQuQnljY30+2Sg6RexK+YQGly+C0gBvzESRqCLKSfttI8=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tENUt-0006rQ-Cf for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 Nov 2024 06:50:32 +0000
+ id 1tENUq-0006rJ-M5 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 22 Nov 2024 06:50:29 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 332A95C592E;
- Fri, 22 Nov 2024 06:49:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F020FC4CECE;
- Fri, 22 Nov 2024 06:50:18 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6FD4C5C5943;
+ Fri, 22 Nov 2024 06:49:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 38075C4CED1;
+ Fri, 22 Nov 2024 06:50:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1732258220;
- bh=ppR+9bFx7XFGx82bTz63XvGFhm3DKgJSHpQ9Nyj/KHI=;
- h=From:To:Cc:Subject:Date:From;
- b=NsYFuLFCOQxEEjPNbHcNwNjFaF79CNuWSZqk5cfKKd4ECHyyp4pRLRHTXHKdOpmsw
- uRvkj3UYj1Hq0fMhd7Up1xLZEkAGIT0qPYj1mCKA1KM5ZlOUpGnVsRttpYqXJ9SJ4K
- duLrOmm06hR1zGm31bO33SZItUY6z7uWyYFnz5vItjcQr3rhNX8QdDpWtgV2IOo1mG
- KR2n7HxOti9jS6/VXUl5/7iFMFwbqePBZWsrw9KY6J95VS3gehSYAlu26DJmAgIyXH
- YkUml/Ct+xMgtqA2r+SE8RAwJU8/8uAU1peEOeTcX0e9/6RmlMpRw9n7IBgNsy7AJ5
- 0bnQ9jjJMwEmA==
+ s=k20201202; t=1732258222;
+ bh=E/FXXn+DjDrsmgA7YZCC3j5iYUT9BJN7tfBff5UtGco=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=WQDuyh97OPLM4Y73U4u+zxVEgO9bkPlM7PzmDR5kHvZstQ5j0fE5G/FakYlIY+kzT
+ TDh1UEgYduuGCkyrr37Rr1tn7dVRsblMxYPlSHr70TRf+uke4uXwKTThFMWk0qVyGn
+ dnL9fH9b11tUdkOlEDOCPeng4fLuUOGJPd6wASI0CEyHYcPaXWQu32XnK2nnaqQqz9
+ MOIA5WBMUScFJclelYPSkwANSKHDtQ/iDhySrJ9Vn05/lpj24+OosFZMAYQ1iryR2f
+ 9wn8/ZGTJU22PLj0saw2spQ0EuS/3WtEU2Xt2n299Ifa2OXSnMy2DHwIi4QMbGByWl
+ GBcUHg/iYgbcg==
 To: jaegeuk@kernel.org
-Date: Fri, 22 Nov 2024 14:50:04 +0800
-Message-Id: <20241122065005.3772987-1-chao@kernel.org>
+Date: Fri, 22 Nov 2024 14:50:05 +0800
+Message-Id: <20241122065005.3772987-2-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20241122065005.3772987-1-chao@kernel.org>
+References: <20241122065005.3772987-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
@@ -66,9 +68,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: We use rwlock to protect core structure data of extent tree
- during its shrink, however, if there is a huge number of extent nodes in
- extent tree, during shrink of extent tree, it may hold rwlock for a [...] 
+ Content preview:  Quoted: "at this time, there are still 1086911 extent nodes
+ in this zombie extent tree that need to be cleaned up.
+ crash_arm64_sprd_v8.0.3++>
+ extent_tree.node_cnt ffffff80896cc500 node_cnt = { counter = 1086911 }, "
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -82,10 +85,10 @@ X-Spam-Report: Spam detection software,
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [139.178.84.217 listed in bl.score.senderscore.com]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -94,9 +97,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tENUt-0006rQ-Cf
-Subject: [f2fs-dev] [PATCH v2 1/2] f2fs: fix to shrink read extent node in
- batches
+X-Headers-End: 1tENUq-0006rJ-M5
+Subject: [f2fs-dev] [PATCH v2 2/2] f2fs: add a sysfs node to limit max read
+ extent count per-inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,14 +119,25 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-We use rwlock to protect core structure data of extent tree during
-its shrink, however, if there is a huge number of extent nodes in
-extent tree, during shrink of extent tree, it may hold rwlock for
-a very long time, which may trigger kernel hang issue.
+Quoted:
+"at this time, there are still 1086911 extent nodes in this zombie
+extent tree that need to be cleaned up.
 
-This patch fixes to shrink read extent node in batches, so that,
-critical region of the rwlock can be shrunk to avoid its extreme
-long time hold.
+crash_arm64_sprd_v8.0.3++> extent_tree.node_cnt ffffff80896cc500
+  node_cnt = {
+    counter = 1086911
+  },
+"
+
+As reported by Xiuhong, there will be a huge number of extent nodes
+in extent tree, it may potentially cause:
+- slab memory fragments
+- extreme long time shrink on extent tree
+- low mapping efficiency
+
+Let's add a sysfs node to limit max read extent count for each inode,
+by default, value of this threshold is 10240, it can be updated
+according to user's requirement.
 
 Reported-by: Xiuhong Wang <xiuhong.wang@unisoc.com>
 Closes: https://lore.kernel.org/linux-f2fs-devel/20241112110627.1314632-1-xiuhong.wang@unisoc.com/
@@ -132,159 +146,107 @@ Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
 v2:
-- no updates.
- fs/f2fs/extent_cache.c | 69 +++++++++++++++++++++++++-----------------
- 1 file changed, 41 insertions(+), 28 deletions(-)
+- fix to add missing max_read_extent_count sysfs entry declaration
+ Documentation/ABI/testing/sysfs-fs-f2fs |  6 ++++++
+ fs/f2fs/extent_cache.c                  |  5 ++++-
+ fs/f2fs/f2fs.h                          |  4 ++++
+ fs/f2fs/sysfs.c                         | 10 ++++++++++
+ 4 files changed, 24 insertions(+), 1 deletion(-)
 
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 513296bb6f29..3e1630c70d8a 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -822,3 +822,9 @@ Description:	It controls the valid block ratio threshold not to trigger excessiv
+ 		for zoned deivces. The initial value of it is 95(%). F2FS will stop the
+ 		background GC thread from intiating GC for sections having valid blocks
+ 		exceeding the ratio.
++
++What:		/sys/fs/f2fs/<disk>/max_read_extent_count
++Date:		November 2024
++Contact:	"Chao Yu" <chao@kernel.org>
++Description:	It controls max read extent count for per-inode, the value of threshold
++		is 10240 by default.
 diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index 019c1f7b7fa5..b7a6817b44b0 100644
+index b7a6817b44b0..347b3b647834 100644
 --- a/fs/f2fs/extent_cache.c
 +++ b/fs/f2fs/extent_cache.c
-@@ -379,21 +379,22 @@ static struct extent_tree *__grab_extent_tree(struct inode *inode,
+@@ -717,7 +717,9 @@ static void __update_extent_tree_range(struct inode *inode,
+ 		}
+ 
+ 		if (end < org_end && (type != EX_READ ||
+-				org_end - end >= F2FS_MIN_EXTENT_LEN)) {
++			(org_end - end >= F2FS_MIN_EXTENT_LEN &&
++			atomic_read(&et->node_cnt) <
++					sbi->max_read_extent_count))) {
+ 			if (parts) {
+ 				__set_extent_info(&ei,
+ 					end, org_end - end,
+@@ -1212,6 +1214,7 @@ void f2fs_init_extent_cache_info(struct f2fs_sb_info *sbi)
+ 	sbi->hot_data_age_threshold = DEF_HOT_DATA_AGE_THRESHOLD;
+ 	sbi->warm_data_age_threshold = DEF_WARM_DATA_AGE_THRESHOLD;
+ 	sbi->last_age_weight = LAST_AGE_WEIGHT;
++	sbi->max_read_extent_count = DEF_MAX_READ_EXTENT_COUNT;
  }
  
- static unsigned int __free_extent_tree(struct f2fs_sb_info *sbi,
--					struct extent_tree *et)
-+				struct extent_tree *et, unsigned int nr_shrink)
- {
- 	struct rb_node *node, *next;
- 	struct extent_node *en;
--	unsigned int count = atomic_read(&et->node_cnt);
-+	unsigned int count;
+ int __init f2fs_create_extent_cache(void)
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index b65b023a588a..6f2cbf4c5740 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -635,6 +635,9 @@ enum {
+ #define DEF_HOT_DATA_AGE_THRESHOLD	262144
+ #define DEF_WARM_DATA_AGE_THRESHOLD	2621440
  
- 	node = rb_first_cached(&et->root);
--	while (node) {
++/* default max read extent count per inode */
++#define DEF_MAX_READ_EXTENT_COUNT	10240
 +
-+	for (count = 0; node && count < nr_shrink; count++) {
- 		next = rb_next(node);
- 		en = rb_entry(node, struct extent_node, rb_node);
- 		__release_extent_node(sbi, et, en);
- 		node = next;
+ /* extent cache type */
+ enum extent_type {
+ 	EX_READ,
+@@ -1619,6 +1622,7 @@ struct f2fs_sb_info {
+ 	/* for extent tree cache */
+ 	struct extent_tree_info extent_tree[NR_EXTENT_CACHES];
+ 	atomic64_t allocated_data_blocks;	/* for block age extent_cache */
++	unsigned int max_read_extent_count;	/* max read extent count per inode */
+ 
+ 	/* The threshold used for hot and warm data seperation*/
+ 	unsigned int hot_data_age_threshold;
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index bdbf24db667b..6b99dc49f776 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -787,6 +787,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 		return count;
  	}
  
--	return count - atomic_read(&et->node_cnt);
-+	return count;
- }
- 
- static void __drop_largest_extent(struct extent_tree *et,
-@@ -622,6 +623,30 @@ static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
- 	return en;
- }
- 
-+static unsigned int __destroy_extent_node(struct inode *inode,
-+					enum extent_type type)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
-+	unsigned int nr_shrink = type == EX_READ ?
-+				READ_EXTENT_CACHE_SHRINK_NUMBER :
-+				AGE_EXTENT_CACHE_SHRINK_NUMBER;
-+	unsigned int node_cnt = 0;
-+
-+	if (!et || !atomic_read(&et->node_cnt))
-+		return 0;
-+
-+	while (atomic_read(&et->node_cnt)) {
-+		write_lock(&et->lock);
-+		node_cnt += __free_extent_tree(sbi, et, nr_shrink);
-+		write_unlock(&et->lock);
++	if (!strcmp(a->attr.name, "max_read_extent_count")) {
++		if (t > UINT_MAX)
++			return -EINVAL;
++		*ui = (unsigned int)t;
++		return count;
 +	}
 +
-+	f2fs_bug_on(sbi, atomic_read(&et->node_cnt));
-+
-+	return node_cnt;
-+}
-+
- static void __update_extent_tree_range(struct inode *inode,
- 			struct extent_info *tei, enum extent_type type)
- {
-@@ -760,9 +785,6 @@ static void __update_extent_tree_range(struct inode *inode,
- 		}
- 	}
- 
--	if (is_inode_flag_set(inode, FI_NO_EXTENT))
--		__free_extent_tree(sbi, et);
--
- 	if (et->largest_updated) {
- 		et->largest_updated = false;
- 		updated = true;
-@@ -780,6 +802,9 @@ static void __update_extent_tree_range(struct inode *inode,
- out_read_extent_cache:
- 	write_unlock(&et->lock);
- 
-+	if (is_inode_flag_set(inode, FI_NO_EXTENT))
-+		__destroy_extent_node(inode, EX_READ);
-+
- 	if (updated)
- 		f2fs_mark_inode_dirty_sync(inode, true);
- }
-@@ -942,10 +967,14 @@ static unsigned int __shrink_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink
- 	list_for_each_entry_safe(et, next, &eti->zombie_list, list) {
- 		if (atomic_read(&et->node_cnt)) {
- 			write_lock(&et->lock);
--			node_cnt += __free_extent_tree(sbi, et);
-+			node_cnt += __free_extent_tree(sbi, et,
-+					nr_shrink - node_cnt - tree_cnt);
- 			write_unlock(&et->lock);
- 		}
--		f2fs_bug_on(sbi, atomic_read(&et->node_cnt));
-+
-+		if (atomic_read(&et->node_cnt))
-+			goto unlock_out;
-+
- 		list_del_init(&et->list);
- 		radix_tree_delete(&eti->extent_tree_root, et->ino);
- 		kmem_cache_free(extent_tree_slab, et);
-@@ -1084,23 +1113,6 @@ unsigned int f2fs_shrink_age_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink
- 	return __shrink_extent_tree(sbi, nr_shrink, EX_BLOCK_AGE);
- }
- 
--static unsigned int __destroy_extent_node(struct inode *inode,
--					enum extent_type type)
--{
--	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
--	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
--	unsigned int node_cnt = 0;
--
--	if (!et || !atomic_read(&et->node_cnt))
--		return 0;
--
--	write_lock(&et->lock);
--	node_cnt = __free_extent_tree(sbi, et);
--	write_unlock(&et->lock);
--
--	return node_cnt;
--}
--
- void f2fs_destroy_extent_node(struct inode *inode)
- {
- 	__destroy_extent_node(inode, EX_READ);
-@@ -1109,7 +1121,6 @@ void f2fs_destroy_extent_node(struct inode *inode)
- 
- static void __drop_extent_tree(struct inode *inode, enum extent_type type)
- {
--	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
- 	bool updated = false;
- 
-@@ -1117,7 +1128,6 @@ static void __drop_extent_tree(struct inode *inode, enum extent_type type)
- 		return;
- 
- 	write_lock(&et->lock);
--	__free_extent_tree(sbi, et);
- 	if (type == EX_READ) {
- 		set_inode_flag(inode, FI_NO_EXTENT);
- 		if (et->largest.len) {
-@@ -1126,6 +1136,9 @@ static void __drop_extent_tree(struct inode *inode, enum extent_type type)
- 		}
- 	}
- 	write_unlock(&et->lock);
-+
-+	__destroy_extent_node(inode, type);
-+
- 	if (updated)
- 		f2fs_mark_inode_dirty_sync(inode, true);
- }
+ 	if (!strcmp(a->attr.name, "ipu_policy")) {
+ 		if (t >= BIT(F2FS_IPU_MAX))
+ 			return -EINVAL;
+@@ -1052,6 +1059,8 @@ F2FS_SBI_GENERAL_RW_ATTR(revoked_atomic_block);
+ F2FS_SBI_GENERAL_RW_ATTR(hot_data_age_threshold);
+ F2FS_SBI_GENERAL_RW_ATTR(warm_data_age_threshold);
+ F2FS_SBI_GENERAL_RW_ATTR(last_age_weight);
++/* read extent cache */
++F2FS_SBI_GENERAL_RW_ATTR(max_read_extent_count);
+ #ifdef CONFIG_BLK_DEV_ZONED
+ F2FS_SBI_GENERAL_RO_ATTR(unusable_blocks_per_sec);
+ F2FS_SBI_GENERAL_RW_ATTR(blkzone_alloc_policy);
+@@ -1242,6 +1251,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(hot_data_age_threshold),
+ 	ATTR_LIST(warm_data_age_threshold),
+ 	ATTR_LIST(last_age_weight),
++	ATTR_LIST(max_read_extent_count),
+ 	NULL,
+ };
+ ATTRIBUTE_GROUPS(f2fs);
 -- 
 2.40.1
 
