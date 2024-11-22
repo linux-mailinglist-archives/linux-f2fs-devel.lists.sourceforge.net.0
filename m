@@ -2,104 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CAFC89D5994
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Nov 2024 07:50:40 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 466429D5B1B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Nov 2024 09:39:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tENUs-0005Nv-Cb;
-	Fri, 22 Nov 2024 06:50:30 +0000
+	id 1tEPBz-00081h-Dr;
+	Fri, 22 Nov 2024 08:39:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tENUr-0005Np-DX
+ (envelope-from <chao@kernel.org>) id 1tEPBx-00081a-6y
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 Nov 2024 06:50:29 +0000
+ Fri, 22 Nov 2024 08:39:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HiQhmq5PPdQ0fYGEjoqkzoqn+B+OWGLErlKfYV1IuyQ=; b=k5C3X08Mjz07XNruzzoH9w66y5
- /KOvenL4250GOq8TFN01vEh6UjFcLDt7hcAppfmcO/mS2AN2L44fAuBoNqgTAxgcc7BfvJSIz4EdF
- Y6DaWVc2+AHPX9ISH6ID6lDT+zbsJkTPGJQX9GsHIW5YbLG5UVvwfhaO3KwidJZv/j4I=;
+ bh=hUDTkIf8Ob7QDcL1keKtzRRwcn+XOE0MRxR5Ragzd7w=; b=lllzyaTpwcIAkZwkHKacrS4oib
+ rhQwrksyGWM7DQiR+vUla8i4fMnB5YYx//p2bdihc53/n6w9eRZihoBRRgxR4KS99X+ESX6e/96l0
+ /3Yd0v5xIVnLDSg9S0ArqvFW9LqEyeOGLPVM4dgFAPcDovxBCueJPmmJNbFgGxNzNuGs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=HiQhmq5PPdQ0fYGEjoqkzoqn+B+OWGLErlKfYV1IuyQ=; b=BfvyuihSYVFkkGAsHcRLWFOgoi
- JxUfcubUcMn1gyyRaRP6mB7VFJ8jIZUKT7fqjVdERHOqTF1jgnIHl+gQGUIHFoWRGus0tidRFi4zH
- JGZkOONVQXrED2nM1y3xnTrkQuQnljY30+2Sg6RexK+YQGly+C0gBvzESRqCLKSfttI8=;
+ bh=hUDTkIf8Ob7QDcL1keKtzRRwcn+XOE0MRxR5Ragzd7w=; b=B0BNhbojBsWvcTJRfsT5eNHIC4
+ sIBMsRm9dk4Vpapj+QB59q++QhMRYgtaYLmCD+WZiK18q00Z74zKRCTmqFdHu6/AnXrOIYmCC07b1
+ +NEGFnR2lpaWHL0UUx0r8dTNliZ7uWa/dNjCeFNMdpY5DjRpVyoxD4WSI+a85B1qCtbw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tENUq-0006rJ-M5 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 Nov 2024 06:50:29 +0000
+ id 1tEPBw-0008Sc-0q for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 22 Nov 2024 08:39:04 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6FD4C5C5943;
- Fri, 22 Nov 2024 06:49:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 38075C4CED1;
- Fri, 22 Nov 2024 06:50:21 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id D91F35C037C;
+ Fri, 22 Nov 2024 08:38:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 49ABEC4CECE;
+ Fri, 22 Nov 2024 08:38:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1732258222;
- bh=E/FXXn+DjDrsmgA7YZCC3j5iYUT9BJN7tfBff5UtGco=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=WQDuyh97OPLM4Y73U4u+zxVEgO9bkPlM7PzmDR5kHvZstQ5j0fE5G/FakYlIY+kzT
- TDh1UEgYduuGCkyrr37Rr1tn7dVRsblMxYPlSHr70TRf+uke4uXwKTThFMWk0qVyGn
- dnL9fH9b11tUdkOlEDOCPeng4fLuUOGJPd6wASI0CEyHYcPaXWQu32XnK2nnaqQqz9
- MOIA5WBMUScFJclelYPSkwANSKHDtQ/iDhySrJ9Vn05/lpj24+OosFZMAYQ1iryR2f
- 9wn8/ZGTJU22PLj0saw2spQ0EuS/3WtEU2Xt2n299Ifa2OXSnMy2DHwIi4QMbGByWl
- GBcUHg/iYgbcg==
-To: jaegeuk@kernel.org
-Date: Fri, 22 Nov 2024 14:50:05 +0800
-Message-Id: <20241122065005.3772987-2-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20241122065005.3772987-1-chao@kernel.org>
-References: <20241122065005.3772987-1-chao@kernel.org>
+ s=k20201202; t=1732264738;
+ bh=Nc7CApd4MrHjmS7f8qqx7Yf5v+GWZ8jx1Pd9NTTkK90=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=ZoT5nWn3QWW7OgJEUD+Icg/ISDiYIMpOiIoYVIibVp9Z3b3vHwCy5B7eJGP0H/zhR
+ 6TLPhlMl2hBKk7+g4NoS0Z97Gkc0Q/Thyr8hMOhG2SUp0HL/PtT4hRTuHfpalyLQrU
+ TJMEH+9/Di4VOMN7Q5Ht4W4/oJzt0V2PXqsmNPEJ3WwrN4y3Cd/qi8dK+WXnx+XQ92
+ SsiV9znwFk1K51SjqSIWPerR/fcsQuxlAKaL4PZgtxHOjvqvIS1sg7ExhAbfksgAhH
+ IG1AXqWgG7US7cCl38OjXn6lLbzFh7LJS20DQSPMx4PP11RGvB7lT34Erm2gQfkDDi
+ ci6dlgSbqvWCQ==
+Message-ID: <80b3ece4-b162-4d0c-9a1f-e9cc3de5bb96@kernel.org>
+Date: Fri, 22 Nov 2024 16:38:54 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: zangyangyang1 <zangyangyang1@xiaomi.com>
+References: <20241111043106.864722-1-zangyangyang1@xiaomi.com>
+Content-Language: en-US
+In-Reply-To: <20241111043106.864722-1-zangyangyang1@xiaomi.com>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Quoted: "at this time, there are still 1086911 extent nodes
- in this zombie extent tree that need to be cleaned up.
- crash_arm64_sprd_v8.0.3++>
- extent_tree.node_cnt ffffff80896cc500 node_cnt = { counter = 1086911 }, "
+ Content preview:  On 2024/11/11 12:31,
+ zangyangyang1 wrote: > f2fs_find_data_page
+ is used to find dentry pages, > I think we should cache more dentry pages.
+ How about? "While traversing dir entries in dentry page, it's better to refresh
+ current accessed page in lru list by using FGP_ACCESSED flag, otherwise,
+ such page may has less chance to survive during memory rec [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-accredit.habeas.com]
+ [139.178.84.217 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [139.178.84.217 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tENUq-0006rJ-M5
-Subject: [f2fs-dev] [PATCH v2 2/2] f2fs: add a sysfs node to limit max read
- extent count per-inode
+X-Headers-End: 1tEPBw-0008Sc-0q
+Subject: Re: [f2fs-dev] [PATCH] f2fs: cache more dentry pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,143 +115,31 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: Xiuhong Wang <xiuhong.wang@unisoc.com>, Zhiguo Niu <zhiguo.niu@unisoc.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Quoted:
-"at this time, there are still 1086911 extent nodes in this zombie
-extent tree that need to be cleaned up.
+On 2024/11/11 12:31, zangyangyang1 wrote:
+> f2fs_find_data_page is used to find dentry pages,
+> I think we should cache more dentry pages.
 
-crash_arm64_sprd_v8.0.3++> extent_tree.node_cnt ffffff80896cc500
-  node_cnt = {
-    counter = 1086911
-  },
-"
+How about?
 
-As reported by Xiuhong, there will be a huge number of extent nodes
-in extent tree, it may potentially cause:
-- slab memory fragments
-- extreme long time shrink on extent tree
-- low mapping efficiency
+"While traversing dir entries in dentry page, it's better to refresh current
+accessed page in lru list by using FGP_ACCESSED flag, otherwise, such page
+may has less chance to survive during memory reclaim, result in causing
+additional IO when revisiting dentry page."
 
-Let's add a sysfs node to limit max read extent count for each inode,
-by default, value of this threshold is 10240, it can be updated
-according to user's requirement.
+> 
+> Signed-off-by: zangyangyang1 <zangyangyang1@xiaomi.com>
 
-Reported-by: Xiuhong Wang <xiuhong.wang@unisoc.com>
-Closes: https://lore.kernel.org/linux-f2fs-devel/20241112110627.1314632-1-xiuhong.wang@unisoc.com/
-Signed-off-by: Xiuhong Wang <xiuhong.wang@unisoc.com>
-Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-v2:
-- fix to add missing max_read_extent_count sysfs entry declaration
- Documentation/ABI/testing/sysfs-fs-f2fs |  6 ++++++
- fs/f2fs/extent_cache.c                  |  5 ++++-
- fs/f2fs/f2fs.h                          |  4 ++++
- fs/f2fs/sysfs.c                         | 10 ++++++++++
- 4 files changed, 24 insertions(+), 1 deletion(-)
+I think it's better to improve commit description, anyway, code part looks
+good to me.
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 513296bb6f29..3e1630c70d8a 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -822,3 +822,9 @@ Description:	It controls the valid block ratio threshold not to trigger excessiv
- 		for zoned deivces. The initial value of it is 95(%). F2FS will stop the
- 		background GC thread from intiating GC for sections having valid blocks
- 		exceeding the ratio.
-+
-+What:		/sys/fs/f2fs/<disk>/max_read_extent_count
-+Date:		November 2024
-+Contact:	"Chao Yu" <chao@kernel.org>
-+Description:	It controls max read extent count for per-inode, the value of threshold
-+		is 10240 by default.
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index b7a6817b44b0..347b3b647834 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -717,7 +717,9 @@ static void __update_extent_tree_range(struct inode *inode,
- 		}
- 
- 		if (end < org_end && (type != EX_READ ||
--				org_end - end >= F2FS_MIN_EXTENT_LEN)) {
-+			(org_end - end >= F2FS_MIN_EXTENT_LEN &&
-+			atomic_read(&et->node_cnt) <
-+					sbi->max_read_extent_count))) {
- 			if (parts) {
- 				__set_extent_info(&ei,
- 					end, org_end - end,
-@@ -1212,6 +1214,7 @@ void f2fs_init_extent_cache_info(struct f2fs_sb_info *sbi)
- 	sbi->hot_data_age_threshold = DEF_HOT_DATA_AGE_THRESHOLD;
- 	sbi->warm_data_age_threshold = DEF_WARM_DATA_AGE_THRESHOLD;
- 	sbi->last_age_weight = LAST_AGE_WEIGHT;
-+	sbi->max_read_extent_count = DEF_MAX_READ_EXTENT_COUNT;
- }
- 
- int __init f2fs_create_extent_cache(void)
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index b65b023a588a..6f2cbf4c5740 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -635,6 +635,9 @@ enum {
- #define DEF_HOT_DATA_AGE_THRESHOLD	262144
- #define DEF_WARM_DATA_AGE_THRESHOLD	2621440
- 
-+/* default max read extent count per inode */
-+#define DEF_MAX_READ_EXTENT_COUNT	10240
-+
- /* extent cache type */
- enum extent_type {
- 	EX_READ,
-@@ -1619,6 +1622,7 @@ struct f2fs_sb_info {
- 	/* for extent tree cache */
- 	struct extent_tree_info extent_tree[NR_EXTENT_CACHES];
- 	atomic64_t allocated_data_blocks;	/* for block age extent_cache */
-+	unsigned int max_read_extent_count;	/* max read extent count per inode */
- 
- 	/* The threshold used for hot and warm data seperation*/
- 	unsigned int hot_data_age_threshold;
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index bdbf24db667b..6b99dc49f776 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -787,6 +787,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 		return count;
- 	}
- 
-+	if (!strcmp(a->attr.name, "max_read_extent_count")) {
-+		if (t > UINT_MAX)
-+			return -EINVAL;
-+		*ui = (unsigned int)t;
-+		return count;
-+	}
-+
- 	if (!strcmp(a->attr.name, "ipu_policy")) {
- 		if (t >= BIT(F2FS_IPU_MAX))
- 			return -EINVAL;
-@@ -1052,6 +1059,8 @@ F2FS_SBI_GENERAL_RW_ATTR(revoked_atomic_block);
- F2FS_SBI_GENERAL_RW_ATTR(hot_data_age_threshold);
- F2FS_SBI_GENERAL_RW_ATTR(warm_data_age_threshold);
- F2FS_SBI_GENERAL_RW_ATTR(last_age_weight);
-+/* read extent cache */
-+F2FS_SBI_GENERAL_RW_ATTR(max_read_extent_count);
- #ifdef CONFIG_BLK_DEV_ZONED
- F2FS_SBI_GENERAL_RO_ATTR(unusable_blocks_per_sec);
- F2FS_SBI_GENERAL_RW_ATTR(blkzone_alloc_policy);
-@@ -1242,6 +1251,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(hot_data_age_threshold),
- 	ATTR_LIST(warm_data_age_threshold),
- 	ATTR_LIST(last_age_weight),
-+	ATTR_LIST(max_read_extent_count),
- 	NULL,
- };
- ATTRIBUTE_GROUPS(f2fs);
--- 
-2.40.1
+Reviewed-by: Chao Yu <chao@kernel.org>
 
+Thanks,
 
 
 _______________________________________________
