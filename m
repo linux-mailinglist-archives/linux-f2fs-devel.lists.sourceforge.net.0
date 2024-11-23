@@ -2,66 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74FE29D69BF
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 23 Nov 2024 16:50:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE94D9D69C0
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 23 Nov 2024 16:50:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tEsP9-00061f-VX;
-	Sat, 23 Nov 2024 15:50:40 +0000
+	id 1tEsPC-0002dq-RO;
+	Sat, 23 Nov 2024 15:50:42 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1tEsP8-00061Y-B0
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1tEsP8-0002dh-Uu
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 23 Nov 2024 15:50:39 +0000
+ Sat, 23 Nov 2024 15:50:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xAIuNU5ZYng/C7qQieVjvYjkkYjU4omMn9PqprxTWSY=; b=GnyO0EBaI+1uhpVh4+kMIn1DgH
- UBS8gwg9toTJ7TitvCQ/Araq+LtyVnE+4HdY0+ZsPiYX+mqhaIb+Vic34HxtgPHePAVis+V12xPil
- /TZ+HPvVwmaaChU4OuSt3xMXO8nSCwqFGq1JYRDhlIlcENhlXkWG29Cn2G6qcRXDyUz4=;
+ bh=DfZHbvaszgPdumfdTfGQChwPMsrE+vrkIxYqBszVN9E=; b=iKJKtHBWysLTTE2kEdrc5PTn8T
+ RKp6BqSBvaMeUXNvJRTvW1irvMzTv246pp0i8PyUJVtptuDs9xkNXLKl0KQsa6gYbK80MHuL6VTW8
+ c9JowNvAt93uEjV6CiEwNXmPMQE2eGuPA+XbjSCEJFwDdJ6q5MB7GDyUunci2o6Pnugc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xAIuNU5ZYng/C7qQieVjvYjkkYjU4omMn9PqprxTWSY=; b=BZr61W23rHhwkYn7wgX1U+/XcM
- 7QPzGbSEiyASqHuLQiNoFZXoO3xGwr+ucjAm9VpA5p85jgKlz0D1r90B/yPFAFm0xxIdIzgENsF1h
- jeSWZxVGmsTPQJN4HsXEpHB/yB6oit9ZDk2hqkibiZePOfNPs1mBqhMFNGvgm8H0+c2I=;
+ bh=DfZHbvaszgPdumfdTfGQChwPMsrE+vrkIxYqBszVN9E=; b=lSUe2KCCSAyh1BtCDUjmbBgaFF
+ zrVXjouPPlAediYjQW4gcvgQI7sok5aHVMaTFjx5zmkIJMYuoYneAyzMqjKxkbwOQqPzz7mv29a0s
+ LLKquLDyWD+ZjreDT4uiFe4PszJ0S/MgP0I8rng8RseVZhpQ+a7pGfb2BQG1wIXlUXvc=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tEsP7-0004M6-0y for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 23 Nov 2024 15:50:39 +0000
+ id 1tEsP8-0004MA-7m for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 23 Nov 2024 15:50:38 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 28360A403DF
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 23 Nov 2024 15:48:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05068C4CECD;
- Sat, 23 Nov 2024 15:50:26 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 653FAA403D5;
+ Sat, 23 Nov 2024 15:48:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 409A3C4CECF;
+ Sat, 23 Nov 2024 15:50:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1732377026;
- bh=XT9zzKOdfdchStJsLUSyFcrd594yylJRHhSHXGI1VVg=;
+ s=k20201202; t=1732377027;
+ bh=dtotHtOLZEq4lFv92Zs9oG8yEKOiZLjVNbIt8QDq6S4=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=DJtuPd2XOJby+FWLFQPznGujNiyucTulN0lI/PId/oFQUcpwQUxO8TPIOIXKytxZa
- FVT3PoTyQDrEMd4erPHGGoQCjKJEleuBtA1Y1l7t9EVaz8JyYjzYf2DQlcV9QHu8J9
- X6grHaYlc2CcnZdLX2dSPk0DM7bsIp4qqswy3WsjnQZUdx+2CMnz3RLmP5x2NvpG22
- wSF5vWXRu5WN4x6XEjJqmC/nrIPUghsp3855/O7Umqarzy8IQXQU3ARTh1GFjpiBIz
- 38BaZn0Q5UpF8sjNkDLfy7XIfBOLiJSTUc6QxxPVAkdkhtRUdgaPQDY8Z2R4TJRyUo
- yZz3+3IMx/Uww==
+ b=XFn77zh3+fKJRnqfBMpa8VOwmAIdyJTcc55zi6Ym8eVzq7ssSHin6oYHya/4+Vg38
+ pv/YlZ4JcUDMAI2VWSX+hEyMSjw7s1NjEiCriTcuwmbS/SRw/VRJ+iXGQwFdcQQg/B
+ OFSHikjPoNxGkIFNEBduB0AnnAXjJ08KF1isbncjYqtCCZV2sP3mvE9sxrG6Wc6PFe
+ PHJncKY7URC0aZUv4RRch0OWnDa5/d5ZySz4Na1vsfIVzFbTkd8Fssp59P0PvGSQKV
+ CkEQhzfiuK8boka32L2Gy9jC//o+HEPIuOvc9Ak5Uohp/RUWUBnzqqAE4N6EOlrHRn
+ ePJBBe6/cXkYw==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 71BCC3809A06; Sat, 23 Nov 2024 15:50:39 +0000 (UTC)
+ ADBA13809A06; Sat, 23 Nov 2024 15:50:40 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <173237703828.3018181.12274971002493220671.git-patchwork-notify@kernel.org>
-Date: Sat, 23 Nov 2024 15:50:38 +0000
-References: <20241120065850.1345670-1-chao@kernel.org>
-In-Reply-To: <20241120065850.1345670-1-chao@kernel.org>
+Message-Id: <173237703949.3018181.7264272337903464166.git-patchwork-notify@kernel.org>
+Date: Sat, 23 Nov 2024 15:50:39 +0000
+References: <20241122065005.3772987-1-chao@kernel.org>
+In-Reply-To: <20241122065005.3772987-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
@@ -70,11 +69,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 20 Nov 2024 14:58:50 +0800 you
- wrote: > If fs corruption occurs in f2fs_new_node_page(), let's print > more
- information about corrupted metadata into kernel log. > > Meanwhile, it updates
- to r [...] 
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 22 Nov 2024 14:50:04 +0800 you
+ wrote: > We use rwlock to protect core structure data of extent tree during
+ > its shrink, however, if there is a huge number of extent nodes in > extent
+ tree, du [...] 
  Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -100,9 +99,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tEsP7-0004M6-0y
-Subject: Re: [f2fs-dev] [PATCH] f2fs: print message if fscorrupted was found
- in f2fs_new_node_page()
+X-Headers-End: 1tEsP8-0004MA-7m
+Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: fix to shrink read extent node
+ in batches
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,30 +116,34 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: xiuhong.wang@unisoc.com, jaegeuk@kernel.org, zhiguo.niu@unisoc.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This patch was applied to jaegeuk/f2fs.git (dev)
+This series was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Wed, 20 Nov 2024 14:58:50 +0800 you wrote:
-> If fs corruption occurs in f2fs_new_node_page(), let's print
-> more information about corrupted metadata into kernel log.
+On Fri, 22 Nov 2024 14:50:04 +0800 you wrote:
+> We use rwlock to protect core structure data of extent tree during
+> its shrink, however, if there is a huge number of extent nodes in
+> extent tree, during shrink of extent tree, it may hold rwlock for
+> a very long time, which may trigger kernel hang issue.
 > 
-> Meanwhile, it updates to record ERROR_INCONSISTENT_NAT instead
-> of ERROR_INVALID_BLKADDR if blkaddr in nat entry is not
-> NULL_ADDR which means nat bitmap and nat entry is inconsistent.
+> This patch fixes to shrink read extent node in batches, so that,
+> critical region of the rwlock can be shrunk to avoid its extreme
+> long time hold.
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: print message if fscorrupted was found in f2fs_new_node_page()
-    https://git.kernel.org/jaegeuk/f2fs/c/81520c684ca6
+  - [f2fs-dev,v2,1/2] f2fs: fix to shrink read extent node in batches
+    https://git.kernel.org/jaegeuk/f2fs/c/3fc5d5a182f6
+  - [f2fs-dev,v2,2/2] f2fs: add a sysfs node to limit max read extent count per-inode
+    https://git.kernel.org/jaegeuk/f2fs/c/009a8241a8e5
 
 You are awesome, thank you!
 -- 
