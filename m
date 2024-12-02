@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C25FD9DF7B4
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  2 Dec 2024 02:10:17 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C637B9DF7AD
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  2 Dec 2024 02:10:16 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tHuww-0004xH-0J;
-	Mon, 02 Dec 2024 01:10:05 +0000
+	id 1tHuwq-0003a7-2k;
+	Mon, 02 Dec 2024 01:10:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1tHuwq-0004ve-Hh
+ (envelope-from <ebiggers@kernel.org>) id 1tHuwp-0003Z5-79
  for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 02 Dec 2024 01:09:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iTEVCCaAsXgZOCG2nS9h6bfz055lOrHqmbf6aFLwTs0=; b=TaCazlk1D3/Y9Ma5W6vJnJg2bc
- 1ri8SgavwvN/cTyBE143o8jLoORaE4lM0rZp2KFf6P8FUDLGnN9ELGdCGBznX17c0eJKAaIzBs02o
- FGQmqK/LkdKG6uGy9jrQkHmN1US0bDFCOVdWhni7mZpqB9RBkQFj3rxNjQIW4FnP033A=;
+ bh=98aAhony+oG7dxlmfuBhSzcm5NZAJPMsHXlN//Enqt0=; b=D60HsjmXOr8TI+67ixh0Sx0PbQ
+ hMqtOP5miCX5mObjsllTgU5NLuK0heiLKTkrOTHC+PeKrsJOJrX9pFypFFvspUAtMY/D4EN0SNG8m
+ R5nc98/zNRW4qYkViDAOtB6+WEWBse36Wb5kRZZGi8m4tUEZwlkKH4q/As8y3zcdjlqM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -31,76 +31,75 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iTEVCCaAsXgZOCG2nS9h6bfz055lOrHqmbf6aFLwTs0=; b=eMhPr7y49sho9dZN+ZMyL1n0MV
- OBznHn6RlbbK2HZN18YHmlVoUO7ge78VkixP/Gw1IxP9Ky7jUyrc0pjqKDi58y1her8CwVakHA1lU
- SeG55a8MM1SBpImJ0cgt8lzKjfnycHtQB0mkSzBkQ0s5HE/lBh/e/pi1/Nja5GgXF8FM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=98aAhony+oG7dxlmfuBhSzcm5NZAJPMsHXlN//Enqt0=; b=H2CsBhPATmHrgXaS0KAGG0f58L
+ SG78eSTkQFin03EZPLBQhVYPpAFI7aHzFbD7JTvAo0SxTLQFT68eHpoqzpwvgkhSR5NeFaDQCVmLd
+ 5ikPYR75JAUhgPtZbLjBJy1VP1VbdycVnEa1c7xM3ayVb+NVfUjUKOsej7Ma8jwR9NlY=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tHuwd-0006MA-U6 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Dec 2024 01:09:48 +0000
+ id 1tHuwc-0006Lz-Dv for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 02 Dec 2024 01:09:47 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 3033E5C64E3;
- Mon,  2 Dec 2024 01:08:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CAC1C4CEDC;
- Mon,  2 Dec 2024 01:09:34 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 574C2A40C1E;
+ Mon,  2 Dec 2024 01:07:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 10744C4CEDD;
+ Mon,  2 Dec 2024 01:09:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1733101774;
- bh=mzXFZZ0Vz/BRB/L8KPcvHF3jTMUR8RtIn7ipn8nX7g0=;
+ s=k20201202; t=1733101775;
+ bh=l+CLrwqJVSvfyOKygspLh9Mjv7UjhIJ0MHuliD+HqG4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=US1regxRVbMk/4uvzySwCFeNkxoYNQ94lMbWSxIZTHAkkd5Z96Ss7Xhfo6oWSayYd
- ZwghVlyjvVPk8m+Qu1guk6X1lfppEt5y9w50yTMWyQq8QJOjTbCEWBkgyTyuRKxnQE
- ufgOr1kPph2iib5kp5nY2bo2hSEwfFboPSEKeLpgcFKqHec8NJjfzkznHPXFY/oC03
- ozPa8a13L8/pSOu6I4NR8vy2SGjH68Q6t/wsC3hRsKxx5Mv+nK/ixpp/hRij2dd8CE
- Z2TSyP3nrCeYl+0+Efem28ljoF40vgj6y1rnVFpy9kL9TRl6JREdT7VQP0MMYJYR80
- Zx6g8YrIoJA9A==
+ b=sT/vap6RPh46beKww4TVJmC7hJ1nlRZguIaqKyI2L2sjnF0Q3JAc3a+fcPACVF2/X
+ iRozDD804ndJyynJIWjWRZIzKOt9C/DJBDJx47gyLFh90zPxPqnbPJuvp4mXi8JyMc
+ BnK15oWiSL6nTQLCyZJQcQ3FV2xAd1EmuWEWf2HlJlTXcKxbYF7eaMn8um5tGMH8EZ
+ ZgDWFM8jRXt9wVjpOLdPPWx5LIGYaF9jllwYz6HJ9TxsD81OfHbxgUGSBIybwHoCVH
+ u+ngQdT+SVxwSV3UYqtb1szMPTdg3TkLoyq2xjTRlHV0B9k0c/4X5zXiQUI5Tl1+g8
+ kCprWDCmk/mKA==
 To: linux-kernel@vger.kernel.org
-Date: Sun,  1 Dec 2024 17:08:35 -0800
-Message-ID: <20241202010844.144356-11-ebiggers@kernel.org>
+Date: Sun,  1 Dec 2024 17:08:36 -0800
+Message-ID: <20241202010844.144356-12-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20241202010844.144356-1-ebiggers@kernel.org>
 References: <20241202010844.144356-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -8.2 (--------)
+X-Spam-Score: -5.5 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> Move the sparc
- CRC32C
- assembly code into the lib directory and wire it up to the library interface.
- This allows it to be used without going through the crypto API. It remains
- usable via the crypto API [...] 
- Content analysis details:   (-8.2 points, 6.0 required)
+ Content preview:  From: Eric Biggers <ebiggers@google.com> - Change the len
+ parameter from unsigned int to size_t, so that the library function which
+ takes a size_t can safely use this code. - Rename to crc32c_x86_3way() which
+ is much clearer. 
+ Content analysis details:   (-5.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ [147.75.193.91 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ [147.75.193.91 listed in bl.score.senderscore.com]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tHuwd-0006MA-U6
-Subject: [f2fs-dev] [PATCH v4 10/19] sparc/crc32: expose CRC32 functions
- through lib
+X-Headers-End: 1tHuwc-0006Lz-Dv
+Subject: [f2fs-dev] [PATCH v4 11/19] x86/crc32: update prototype for
+ crc_pcl()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -128,414 +127,249 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Move the sparc CRC32C assembly code into the lib directory and wire it
-up to the library interface.  This allows it to be used without going
-through the crypto API.  It remains usable via the crypto API too via
-the shash algorithms that use the library interface.  Thus all the
-arch-specific "shash" code becomes unnecessary and is removed.
+- Change the len parameter from unsigned int to size_t, so that the
+  library function which takes a size_t can safely use this code.
 
-Note: to see the diff from arch/sparc/crypto/crc32c_glue.c to
-arch/sparc/lib/crc32_glue.c, view this commit with 'git show -M10'.
+- Rename to crc32c_x86_3way() which is much clearer.
+
+- Move the crc parameter to the front, as this is the usual convention.
 
 Reviewed-by: Ard Biesheuvel <ardb@kernel.org>
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- arch/sparc/Kconfig                      |   1 +
- arch/sparc/crypto/Kconfig               |  10 --
- arch/sparc/crypto/Makefile              |   4 -
- arch/sparc/crypto/crc32c_glue.c         | 184 ------------------------
- arch/sparc/lib/Makefile                 |   2 +
- arch/sparc/lib/crc32_glue.c             |  93 ++++++++++++
- arch/sparc/{crypto => lib}/crc32c_asm.S |   2 +-
- 7 files changed, 97 insertions(+), 199 deletions(-)
- delete mode 100644 arch/sparc/crypto/crc32c_glue.c
- create mode 100644 arch/sparc/lib/crc32_glue.c
- rename arch/sparc/{crypto => lib}/crc32c_asm.S (92%)
+ arch/x86/crypto/crc32c-intel_glue.c       |  7 ++-
+ arch/x86/crypto/crc32c-pcl-intel-asm_64.S | 63 ++++++++++++-----------
+ 2 files changed, 35 insertions(+), 35 deletions(-)
 
-diff --git a/arch/sparc/Kconfig b/arch/sparc/Kconfig
-index dcfdb7f1dae9..0f88123925a4 100644
---- a/arch/sparc/Kconfig
-+++ b/arch/sparc/Kconfig
-@@ -108,10 +108,11 @@ config SPARC64
- 	select ARCH_HAS_GIGANTIC_PAGE
- 	select HAVE_SOFTIRQ_ON_OWN_STACK
- 	select HAVE_SETUP_PER_CPU_AREA
- 	select NEED_PER_CPU_EMBED_FIRST_CHUNK
- 	select NEED_PER_CPU_PAGE_FIRST_CHUNK
-+	select ARCH_HAS_CRC32
+diff --git a/arch/x86/crypto/crc32c-intel_glue.c b/arch/x86/crypto/crc32c-intel_glue.c
+index 52c5d47ef5a1..603d159de400 100644
+--- a/arch/x86/crypto/crc32c-intel_glue.c
++++ b/arch/x86/crypto/crc32c-intel_glue.c
+@@ -39,12 +39,11 @@
+  * size is >= 512 to account
+  * for fpu state save/restore overhead.
+  */
+ #define CRC32C_PCL_BREAKEVEN	512
  
- config ARCH_PROC_KCORE_TEXT
- 	def_bool y
+-asmlinkage unsigned int crc_pcl(const u8 *buffer, unsigned int len,
+-				unsigned int crc_init);
++asmlinkage u32 crc32c_x86_3way(u32 crc, const u8 *buffer, size_t len);
+ #endif /* CONFIG_X86_64 */
  
- config CPU_BIG_ENDIAN
-diff --git a/arch/sparc/crypto/Kconfig b/arch/sparc/crypto/Kconfig
-index cfe5102b1c68..e858597de89d 100644
---- a/arch/sparc/crypto/Kconfig
-+++ b/arch/sparc/crypto/Kconfig
-@@ -14,20 +14,10 @@ config CRYPTO_DES_SPARC64
- 	  Length-preserving ciphers: DES with ECB and CBC modes
- 	  Length-preserving ciphers: Tripe DES EDE with ECB and CBC modes
+ static u32 crc32c_intel_le_hw_byte(u32 crc, unsigned char const *data, size_t length)
+ {
+ 	while (length--) {
+@@ -157,11 +156,11 @@ static int crc32c_pcl_intel_update(struct shash_desc *desc, const u8 *data,
+ 	 * use faster PCL version if datasize is large enough to
+ 	 * overcome kernel fpu state save/restore overhead
+ 	 */
+ 	if (len >= CRC32C_PCL_BREAKEVEN && crypto_simd_usable()) {
+ 		kernel_fpu_begin();
+-		*crcp = crc_pcl(data, len, *crcp);
++		*crcp = crc32c_x86_3way(*crcp, data, len);
+ 		kernel_fpu_end();
+ 	} else
+ 		*crcp = crc32c_intel_le_hw(*crcp, data, len);
+ 	return 0;
+ }
+@@ -169,11 +168,11 @@ static int crc32c_pcl_intel_update(struct shash_desc *desc, const u8 *data,
+ static int __crc32c_pcl_intel_finup(u32 *crcp, const u8 *data, unsigned int len,
+ 				u8 *out)
+ {
+ 	if (len >= CRC32C_PCL_BREAKEVEN && crypto_simd_usable()) {
+ 		kernel_fpu_begin();
+-		*(__le32 *)out = ~cpu_to_le32(crc_pcl(data, len, *crcp));
++		*(__le32 *)out = ~cpu_to_le32(crc32c_x86_3way(*crcp, data, len));
+ 		kernel_fpu_end();
+ 	} else
+ 		*(__le32 *)out =
+ 			~cpu_to_le32(crc32c_intel_le_hw(*crcp, data, len));
+ 	return 0;
+diff --git a/arch/x86/crypto/crc32c-pcl-intel-asm_64.S b/arch/x86/crypto/crc32c-pcl-intel-asm_64.S
+index 752812bc4991..9b8770503bbc 100644
+--- a/arch/x86/crypto/crc32c-pcl-intel-asm_64.S
++++ b/arch/x86/crypto/crc32c-pcl-intel-asm_64.S
+@@ -50,19 +50,20 @@
  
- 	  Architecture: sparc64
+ # Define threshold below which buffers are considered "small" and routed to
+ # regular CRC code that does not interleave the CRC instructions.
+ #define SMALL_SIZE 200
  
--config CRYPTO_CRC32C_SPARC64
--	tristate "CRC32c"
--	depends on SPARC64
--	select CRYPTO_HASH
--	select CRC32
--	help
--	  CRC32c CRC algorithm with the iSCSI polynomial (RFC 3385 and RFC 3720)
--
--	  Architecture: sparc64
--
- config CRYPTO_MD5_SPARC64
- 	tristate "Digests: MD5"
- 	depends on SPARC64
- 	select CRYPTO_MD5
- 	select CRYPTO_HASH
-diff --git a/arch/sparc/crypto/Makefile b/arch/sparc/crypto/Makefile
-index d257186c27d1..a2d7fca40cb4 100644
---- a/arch/sparc/crypto/Makefile
-+++ b/arch/sparc/crypto/Makefile
-@@ -10,17 +10,13 @@ obj-$(CONFIG_CRYPTO_MD5_SPARC64) += md5-sparc64.o
+-# unsigned int crc_pcl(const u8 *buffer, unsigned int len, unsigned int crc_init);
++# u32 crc32c_x86_3way(u32 crc, const u8 *buffer, size_t len);
  
- obj-$(CONFIG_CRYPTO_AES_SPARC64) += aes-sparc64.o
- obj-$(CONFIG_CRYPTO_DES_SPARC64) += des-sparc64.o
- obj-$(CONFIG_CRYPTO_CAMELLIA_SPARC64) += camellia-sparc64.o
+ .text
+-SYM_FUNC_START(crc_pcl)
+-#define    bufp		  %rdi
+-#define    bufp_d	  %edi
+-#define    len		  %esi
+-#define    crc_init	  %edx
+-#define    crc_init_q	  %rdx
++SYM_FUNC_START(crc32c_x86_3way)
++#define    crc0		  %edi
++#define    crc0_q	  %rdi
++#define    bufp		  %rsi
++#define    bufp_d	  %esi
++#define    len		  %rdx
++#define    len_dw	  %edx
+ #define    n_misaligned	  %ecx /* overlaps chunk_bytes! */
+ #define    n_misaligned_q %rcx
+ #define    chunk_bytes	  %ecx /* overlaps n_misaligned! */
+ #define    chunk_bytes_q  %rcx
+ #define    crc1		  %r8
+@@ -83,13 +84,13 @@ SYM_FUNC_START(crc_pcl)
+ 	# Process 1 <= n_misaligned <= 7 bytes individually in order to align
+ 	# the remaining data to an 8-byte boundary.
+ .Ldo_align:
+ 	movq	(bufp), %rax
+ 	add	n_misaligned_q, bufp
+-	sub	n_misaligned, len
++	sub	n_misaligned_q, len
+ .Lalign_loop:
+-	crc32b	%al, crc_init		# compute crc32 of 1-byte
++	crc32b	%al, crc0		# compute crc32 of 1-byte
+ 	shr	$8, %rax		# get next byte
+ 	dec	n_misaligned
+ 	jne     .Lalign_loop
+ .Laligned:
  
--obj-$(CONFIG_CRYPTO_CRC32C_SPARC64) += crc32c-sparc64.o
--
- sha1-sparc64-y := sha1_asm.o sha1_glue.o
- sha256-sparc64-y := sha256_asm.o sha256_glue.o
- sha512-sparc64-y := sha512_asm.o sha512_glue.o
- md5-sparc64-y := md5_asm.o md5_glue.o
+@@ -100,11 +101,11 @@ SYM_FUNC_START(crc_pcl)
+ 	cmp	$128*24, len
+ 	jae     .Lfull_block
  
- aes-sparc64-y := aes_asm.o aes_glue.o
- des-sparc64-y := des_asm.o des_glue.o
- camellia-sparc64-y := camellia_asm.o camellia_glue.o
--
--crc32c-sparc64-y := crc32c_asm.o crc32c_glue.o
-diff --git a/arch/sparc/crypto/crc32c_glue.c b/arch/sparc/crypto/crc32c_glue.c
-deleted file mode 100644
-index 913b9a09e885..000000000000
---- a/arch/sparc/crypto/crc32c_glue.c
-+++ /dev/null
-@@ -1,184 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-only
--/* Glue code for CRC32C optimized for sparc64 crypto opcodes.
-- *
-- * This is based largely upon arch/x86/crypto/crc32c-intel.c
-- *
-- * Copyright (C) 2008 Intel Corporation
-- * Authors: Austin Zhang <austin_zhang@linux.intel.com>
-- *          Kent Liu <kent.liu@intel.com>
-- */
--
--#define pr_fmt(fmt)	KBUILD_MODNAME ": " fmt
--
--#include <linux/init.h>
--#include <linux/module.h>
--#include <linux/string.h>
--#include <linux/kernel.h>
--#include <linux/crc32.h>
--
--#include <crypto/internal/hash.h>
--
--#include <asm/pstate.h>
--#include <asm/elf.h>
--#include <linux/unaligned.h>
--
--#include "opcodes.h"
--
--/*
-- * Setting the seed allows arbitrary accumulators and flexible XOR policy
-- * If your algorithm starts with ~0, then XOR with ~0 before you set
-- * the seed.
-- */
--static int crc32c_sparc64_setkey(struct crypto_shash *hash, const u8 *key,
--				 unsigned int keylen)
--{
--	u32 *mctx = crypto_shash_ctx(hash);
--
--	if (keylen != sizeof(u32))
--		return -EINVAL;
--	*mctx = get_unaligned_le32(key);
--	return 0;
--}
--
--static int crc32c_sparc64_init(struct shash_desc *desc)
--{
--	u32 *mctx = crypto_shash_ctx(desc->tfm);
--	u32 *crcp = shash_desc_ctx(desc);
--
--	*crcp = *mctx;
--
--	return 0;
--}
--
--extern void crc32c_sparc64(u32 *crcp, const u64 *data, unsigned int len);
--
--static u32 crc32c_compute(u32 crc, const u8 *data, unsigned int len)
--{
--	unsigned int n = -(uintptr_t)data & 7;
--
--	if (n) {
--		/* Data isn't 8-byte aligned.  Align it. */
--		n = min(n, len);
--		crc = __crc32c_le(crc, data, n);
--		data += n;
--		len -= n;
--	}
--	n = len & ~7U;
--	if (n) {
--		crc32c_sparc64(&crc, (const u64 *)data, n);
--		data += n;
--		len -= n;
--	}
--	if (len)
--		crc = __crc32c_le(crc, data, len);
--	return crc;
--}
--
--static int crc32c_sparc64_update(struct shash_desc *desc, const u8 *data,
--				 unsigned int len)
--{
--	u32 *crcp = shash_desc_ctx(desc);
--
--	*crcp = crc32c_compute(*crcp, data, len);
--	return 0;
--}
--
--static int __crc32c_sparc64_finup(const u32 *crcp, const u8 *data,
--				  unsigned int len, u8 *out)
--{
--	put_unaligned_le32(~crc32c_compute(*crcp, data, len), out);
--	return 0;
--}
--
--static int crc32c_sparc64_finup(struct shash_desc *desc, const u8 *data,
--				unsigned int len, u8 *out)
--{
--	return __crc32c_sparc64_finup(shash_desc_ctx(desc), data, len, out);
--}
--
--static int crc32c_sparc64_final(struct shash_desc *desc, u8 *out)
--{
--	u32 *crcp = shash_desc_ctx(desc);
--
--	put_unaligned_le32(~*crcp, out);
--	return 0;
--}
--
--static int crc32c_sparc64_digest(struct shash_desc *desc, const u8 *data,
--				 unsigned int len, u8 *out)
--{
--	return __crc32c_sparc64_finup(crypto_shash_ctx(desc->tfm), data, len,
--				      out);
--}
--
--static int crc32c_sparc64_cra_init(struct crypto_tfm *tfm)
--{
--	u32 *key = crypto_tfm_ctx(tfm);
--
--	*key = ~0;
--
--	return 0;
--}
--
--#define CHKSUM_BLOCK_SIZE	1
--#define CHKSUM_DIGEST_SIZE	4
--
--static struct shash_alg alg = {
--	.setkey			=	crc32c_sparc64_setkey,
--	.init			=	crc32c_sparc64_init,
--	.update			=	crc32c_sparc64_update,
--	.final			=	crc32c_sparc64_final,
--	.finup			=	crc32c_sparc64_finup,
--	.digest			=	crc32c_sparc64_digest,
--	.descsize		=	sizeof(u32),
--	.digestsize		=	CHKSUM_DIGEST_SIZE,
--	.base			=	{
--		.cra_name		=	"crc32c",
--		.cra_driver_name	=	"crc32c-sparc64",
--		.cra_priority		=	SPARC_CR_OPCODE_PRIORITY,
--		.cra_flags		=	CRYPTO_ALG_OPTIONAL_KEY,
--		.cra_blocksize		=	CHKSUM_BLOCK_SIZE,
--		.cra_ctxsize		=	sizeof(u32),
--		.cra_module		=	THIS_MODULE,
--		.cra_init		=	crc32c_sparc64_cra_init,
--	}
--};
--
--static bool __init sparc64_has_crc32c_opcode(void)
--{
--	unsigned long cfr;
--
--	if (!(sparc64_elf_hwcap & HWCAP_SPARC_CRYPTO))
--		return false;
--
--	__asm__ __volatile__("rd %%asr26, %0" : "=r" (cfr));
--	if (!(cfr & CFR_CRC32C))
--		return false;
--
--	return true;
--}
--
--static int __init crc32c_sparc64_mod_init(void)
--{
--	if (sparc64_has_crc32c_opcode()) {
--		pr_info("Using sparc64 crc32c opcode optimized CRC32C implementation\n");
--		return crypto_register_shash(&alg);
--	}
--	pr_info("sparc64 crc32c opcode not available.\n");
--	return -ENODEV;
--}
--
--static void __exit crc32c_sparc64_mod_fini(void)
--{
--	crypto_unregister_shash(&alg);
--}
--
--module_init(crc32c_sparc64_mod_init);
--module_exit(crc32c_sparc64_mod_fini);
--
--MODULE_LICENSE("GPL");
--MODULE_DESCRIPTION("CRC32c (Castagnoli), sparc64 crc32c opcode accelerated");
--
--MODULE_ALIAS_CRYPTO("crc32c");
--
--#include "crop_devid.c"
-diff --git a/arch/sparc/lib/Makefile b/arch/sparc/lib/Makefile
-index ee5091dd67ed..5724d0f356eb 100644
---- a/arch/sparc/lib/Makefile
-+++ b/arch/sparc/lib/Makefile
-@@ -51,5 +51,7 @@ lib-$(CONFIG_SPARC64) += copy_in_user.o memmove.o
- lib-$(CONFIG_SPARC64) += mcount.o ipcsum.o xor.o hweight.o ffs.o
+ .Lpartial_block:
+ 	# Compute floor(len / 24) to get num qwords to process from each lane.
+-	imul	$2731, len, %eax	# 2731 = ceil(2^16 / 24)
++	imul	$2731, len_dw, %eax	# 2731 = ceil(2^16 / 24)
+ 	shr	$16, %eax
+ 	jmp	.Lcrc_3lanes
  
- obj-$(CONFIG_SPARC64) += iomap.o
- obj-$(CONFIG_SPARC32) += atomic32.o
- obj-$(CONFIG_SPARC64) += PeeCeeI.o
-+obj-$(CONFIG_CRC32_ARCH) += crc32-sparc.o
-+crc32-sparc-y := crc32_glue.o crc32c_asm.o
-diff --git a/arch/sparc/lib/crc32_glue.c b/arch/sparc/lib/crc32_glue.c
-new file mode 100644
-index 000000000000..41076d2b1fd2
---- /dev/null
-+++ b/arch/sparc/lib/crc32_glue.c
-@@ -0,0 +1,93 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/* Glue code for CRC32C optimized for sparc64 crypto opcodes.
-+ *
-+ * This is based largely upon arch/x86/crypto/crc32c-intel.c
-+ *
-+ * Copyright (C) 2008 Intel Corporation
-+ * Authors: Austin Zhang <austin_zhang@linux.intel.com>
-+ *          Kent Liu <kent.liu@intel.com>
-+ */
-+
-+#define pr_fmt(fmt)	KBUILD_MODNAME ": " fmt
-+
-+#include <linux/init.h>
-+#include <linux/module.h>
-+#include <linux/kernel.h>
-+#include <linux/crc32.h>
-+#include <asm/pstate.h>
-+#include <asm/elf.h>
-+
-+static DEFINE_STATIC_KEY_FALSE(have_crc32c_opcode);
-+
-+u32 crc32_le_arch(u32 crc, const u8 *data, size_t len)
-+{
-+	return crc32_le_base(crc, data, len);
-+}
-+EXPORT_SYMBOL(crc32_le_arch);
-+
-+void crc32c_sparc64(u32 *crcp, const u64 *data, size_t len);
-+
-+u32 crc32c_le_arch(u32 crc, const u8 *data, size_t len)
-+{
-+	size_t n = -(uintptr_t)data & 7;
-+
-+	if (!static_branch_likely(&have_crc32c_opcode))
-+		return crc32c_le_base(crc, data, len);
-+
-+	if (n) {
-+		/* Data isn't 8-byte aligned.  Align it. */
-+		n = min(n, len);
-+		crc = crc32c_le_base(crc, data, n);
-+		data += n;
-+		len -= n;
-+	}
-+	n = len & ~7U;
-+	if (n) {
-+		crc32c_sparc64(&crc, (const u64 *)data, n);
-+		data += n;
-+		len -= n;
-+	}
-+	if (len)
-+		crc = crc32c_le_base(crc, data, len);
-+	return crc;
-+}
-+EXPORT_SYMBOL(crc32c_le_arch);
-+
-+u32 crc32_be_arch(u32 crc, const u8 *data, size_t len)
-+{
-+	return crc32_be_base(crc, data, len);
-+}
-+EXPORT_SYMBOL(crc32_be_arch);
-+
-+static int __init crc32_sparc_init(void)
-+{
-+	unsigned long cfr;
-+
-+	if (!(sparc64_elf_hwcap & HWCAP_SPARC_CRYPTO))
-+		return 0;
-+
-+	__asm__ __volatile__("rd %%asr26, %0" : "=r" (cfr));
-+	if (!(cfr & CFR_CRC32C))
-+		return 0;
-+
-+	static_branch_enable(&have_crc32c_opcode);
-+	pr_info("Using sparc64 crc32c opcode optimized CRC32C implementation\n");
-+	return 0;
-+}
-+arch_initcall(crc32_sparc_init);
-+
-+static void __exit crc32_sparc_exit(void)
-+{
-+}
-+module_exit(crc32_sparc_exit);
-+
-+u32 crc32_optimizations(void)
-+{
-+	if (static_key_enabled(&have_crc32c_opcode))
-+		return CRC32C_OPTIMIZATION;
-+	return 0;
-+}
-+EXPORT_SYMBOL(crc32_optimizations);
-+
-+MODULE_LICENSE("GPL");
-+MODULE_DESCRIPTION("CRC32c (Castagnoli), sparc64 crc32c opcode accelerated");
-diff --git a/arch/sparc/crypto/crc32c_asm.S b/arch/sparc/lib/crc32c_asm.S
-similarity index 92%
-rename from arch/sparc/crypto/crc32c_asm.S
-rename to arch/sparc/lib/crc32c_asm.S
-index b8659a479242..ee454fa6aed6 100644
---- a/arch/sparc/crypto/crc32c_asm.S
-+++ b/arch/sparc/lib/crc32c_asm.S
-@@ -1,11 +1,11 @@
- /* SPDX-License-Identifier: GPL-2.0 */
- #include <linux/linkage.h>
- #include <asm/visasm.h>
- #include <asm/asi.h>
+ .Lfull_block:
+ 	# Processing 128 qwords from each lane.
+@@ -123,20 +124,20 @@ SYM_FUNC_START(crc_pcl)
+ 	jl	.Lcrc_3lanes_4x_done
  
--#include "opcodes.h"
-+#include "../crypto/opcodes.h"
+ 	# Unroll the loop by a factor of 4 to reduce the overhead of the loop
+ 	# bookkeeping instructions, which can compete with crc32q for the ALUs.
+ .Lcrc_3lanes_4x_loop:
+-	crc32q	(bufp), crc_init_q
++	crc32q	(bufp), crc0_q
+ 	crc32q	(bufp,chunk_bytes_q), crc1
+ 	crc32q	(bufp,chunk_bytes_q,2), crc2
+-	crc32q	8(bufp), crc_init_q
++	crc32q	8(bufp), crc0_q
+ 	crc32q	8(bufp,chunk_bytes_q), crc1
+ 	crc32q	8(bufp,chunk_bytes_q,2), crc2
+-	crc32q	16(bufp), crc_init_q
++	crc32q	16(bufp), crc0_q
+ 	crc32q	16(bufp,chunk_bytes_q), crc1
+ 	crc32q	16(bufp,chunk_bytes_q,2), crc2
+-	crc32q	24(bufp), crc_init_q
++	crc32q	24(bufp), crc0_q
+ 	crc32q	24(bufp,chunk_bytes_q), crc1
+ 	crc32q	24(bufp,chunk_bytes_q,2), crc2
+ 	add	$32, bufp
+ 	sub	$4, %eax
+ 	jge	.Lcrc_3lanes_4x_loop
+@@ -144,42 +145,42 @@ SYM_FUNC_START(crc_pcl)
+ .Lcrc_3lanes_4x_done:
+ 	add	$4, %eax
+ 	jz	.Lcrc_3lanes_last_qword
  
- ENTRY(crc32c_sparc64)
- 	/* %o0=crc32p, %o1=data_ptr, %o2=len */
- 	VISEntryHalf
- 	lda	[%o0] ASI_PL, %f1
+ .Lcrc_3lanes_1x_loop:
+-	crc32q	(bufp), crc_init_q
++	crc32q	(bufp), crc0_q
+ 	crc32q	(bufp,chunk_bytes_q), crc1
+ 	crc32q	(bufp,chunk_bytes_q,2), crc2
+ 	add	$8, bufp
+ 	dec	%eax
+ 	jnz	.Lcrc_3lanes_1x_loop
+ 
+ .Lcrc_3lanes_last_qword:
+-	crc32q	(bufp), crc_init_q
++	crc32q	(bufp), crc0_q
+ 	crc32q	(bufp,chunk_bytes_q), crc1
+ # SKIP  crc32q	(bufp,chunk_bytes_q,2), crc2	; Don't do this one yet
+ 
+ 	################################################################
+ 	## 4) Combine three results:
+ 	################################################################
+ 
+ 	lea	(K_table-8)(%rip), %rax		# first entry is for idx 1
+ 	pmovzxdq (%rax,chunk_bytes_q), %xmm0	# 2 consts: K1:K2
+ 	lea	(chunk_bytes,chunk_bytes,2), %eax # chunk_bytes * 3
+-	sub	%eax, len			# len -= chunk_bytes * 3
++	sub	%rax, len			# len -= chunk_bytes * 3
+ 
+-	movq	crc_init_q, %xmm1		# CRC for block 1
++	movq	crc0_q, %xmm1			# CRC for block 1
+ 	pclmulqdq $0x00, %xmm0, %xmm1		# Multiply by K2
+ 
+ 	movq    crc1, %xmm2			# CRC for block 2
+ 	pclmulqdq $0x10, %xmm0, %xmm2		# Multiply by K1
+ 
+ 	pxor    %xmm2,%xmm1
+ 	movq    %xmm1, %rax
+ 	xor	(bufp,chunk_bytes_q,2), %rax
+-	mov	crc2, crc_init_q
+-	crc32	%rax, crc_init_q
++	mov	crc2, crc0_q
++	crc32	%rax, crc0_q
+ 	lea	8(bufp,chunk_bytes_q,2), bufp
+ 
+ 	################################################################
+ 	## 5) If more blocks remain, goto (2):
+ 	################################################################
+@@ -191,38 +192,38 @@ SYM_FUNC_START(crc_pcl)
+ 
+ 	#######################################################################
+ 	## 6) Process any remainder without interleaving:
+ 	#######################################################################
+ .Lsmall:
+-	test	len, len
++	test	len_dw, len_dw
+ 	jz	.Ldone
+-	mov	len, %eax
++	mov	len_dw, %eax
+ 	shr	$3, %eax
+ 	jz	.Ldo_dword
+ .Ldo_qwords:
+-	crc32q	(bufp), crc_init_q
++	crc32q	(bufp), crc0_q
+ 	add	$8, bufp
+ 	dec	%eax
+ 	jnz	.Ldo_qwords
+ .Ldo_dword:
+-	test	$4, len
++	test	$4, len_dw
+ 	jz	.Ldo_word
+-	crc32l	(bufp), crc_init
++	crc32l	(bufp), crc0
+ 	add	$4, bufp
+ .Ldo_word:
+-	test	$2, len
++	test	$2, len_dw
+ 	jz	.Ldo_byte
+-	crc32w	(bufp), crc_init
++	crc32w	(bufp), crc0
+ 	add	$2, bufp
+ .Ldo_byte:
+-	test	$1, len
++	test	$1, len_dw
+ 	jz	.Ldone
+-	crc32b	(bufp), crc_init
++	crc32b	(bufp), crc0
+ .Ldone:
+-	mov	crc_init, %eax
++	mov	crc0, %eax
+         RET
+-SYM_FUNC_END(crc_pcl)
++SYM_FUNC_END(crc32c_x86_3way)
+ 
+ .section	.rodata, "a", @progbits
+ 	################################################################
+ 	## PCLMULQDQ tables
+ 	## Table is 128 entries x 2 words (8 bytes) each
 -- 
 2.47.1
 
