@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2121B9DF7B0
+	by mail.lfdr.de (Postfix) with ESMTPS id E4BAE9DF7B9
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  2 Dec 2024 02:10:17 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tHuwr-0003bB-DJ;
-	Mon, 02 Dec 2024 01:10:02 +0000
+	id 1tHuwx-0002Wu-4R;
+	Mon, 02 Dec 2024 01:10:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1tHuwp-0003ZL-7A
+ (envelope-from <ebiggers@kernel.org>) id 1tHuwp-0002Td-Uq
  for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 02 Dec 2024 01:09:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hdpLlMUCirJAUkXR86UAeieeAY737MZjkGDM93jO0a8=; b=nWiSKz88ok6IheUXR4SG95blwX
- e3jT757ytdNP21+ge/l00P27h9w4k7UZmo5X75+UlrNEFCmStFabTyHfnFo/OQ30mv9IsySXa8tTz
- Bqi0PXUZ89rzIZX7jWKvzhbxEqcswTdUuDw/pvAiVT7puP2P8Z5DRs5bzCp+qfi8Dzrw=;
+ bh=eZxyC/oa3O5zPoDzB1CoMGk3nR9bO5IMGj2II6WDb4E=; b=GX2ZpqRRVfSvzYOu7Ub736gGrj
+ 8NqUixCkIn+XcgDeVFJL4/2MLYdgK8SJP8mgvR6p//MTRPRFuofiVIcW05D0fiZCGNWjGxRCHbYYs
+ xspjO0907j/dvowuZnOzjccVwVVfsgyUjAHnBuftop891xFKSZSsNU4Hcwz61+bGwHdc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -31,39 +31,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hdpLlMUCirJAUkXR86UAeieeAY737MZjkGDM93jO0a8=; b=KDo4TjyyXAfYV/3D4NYfGGaZl+
- Ex1ZboaC3NqeFKHSkwGxZAtwS1+M1B/tCdBQwPehDZq/lGDj3FrWCrv6p3wZI4DgqJVZNWm/zrhRx
- XkVBLAzww+omOvfRgdb8T3VmdVV7O6MsCW5rMp3fpoGM5TPZqG7wYsbcS9ykghQLcSaA=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=eZxyC/oa3O5zPoDzB1CoMGk3nR9bO5IMGj2II6WDb4E=; b=FxbBnqGzCuHWyVDlMFfRu1ocdD
+ MKHLGO68RbdlsXrjc3CjkTn2lAb5rjkEH/47+zu9KRiutnAOKOdIhRfVTSo6NoZqsZ2mFab6qrqMM
+ j2wGM9fzqWmCjIhGx4ZFJ8QitAPq2gBjSQCLB8gNwmPYZwafFw61/hEPb0GMe4vrUxnU=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tHuwf-0006ML-Ca for linux-f2fs-devel@lists.sourceforge.net;
+ id 1tHuwf-0006MN-UC for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 02 Dec 2024 01:09:50 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 66CBE5C64E4;
- Mon,  2 Dec 2024 01:08:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C67E5C4CEDC;
- Mon,  2 Dec 2024 01:09:37 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id C15CFA409EB;
+ Mon,  2 Dec 2024 01:07:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67777C4CED2;
+ Mon,  2 Dec 2024 01:09:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1733101778;
- bh=KoUVq0drmqDqH2C3r8/i3kiLa4MEP4LpLWyGCvNZTpc=;
+ bh=PP2VQoP2EFijtyRoI44vRPGiZLDX36MUSncHwQvCv1g=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=mYB6xWFB5p3wQOx9VHLybImcjIyOOm10NEjAsKMz0V9qmNxy7Th7UPbGJo8J96+vp
- fZmsVjnvHF4t2qe5xRLZ7LeZqfuvLl5/ym3ri7geL25mgb7TzB5ekEZB31vxqqdXwh
- g1v8AyUfJLEr5SlG0UQZFrddNfrGVpUQMFa1AUOCpsWqj1goJns0XIJssUbF5rKT3k
- R8voy7flPqVk0dH8j7P31ok9zo0IGEBxDbXem7pEaoQ+QIFIYjWhTZZ9FFeqJWITAx
- G8YoYTi2/CYEZafc4fippB4FQCDX8/kv66SY8bCormq9CW8Q1uMqEKZpmdcOLr5GuQ
- wznRVzs5HqmAg==
+ b=bRNBoGCIdmEvP2LAV9aWBOCE0RqRjoWRrZ+2pl/cgwyMG5vcj4ZuepINC3xC23PNF
+ TBeWWldGhWTEM9u2MN8vRuu82YxTCOmQkrMU5peDRfWyhTFYZE3wQ1Urlk6EofBZHp
+ s3UvN5XsBKV4ojBFGtnC4qSzxfRnrd8M/yPXNsmahCS0WWJ9o8qVjbOV81ZFQtYVsj
+ k9mN08Cz4bVHPfB4d0BHFdo/2/puo9xkszBMSSO7qc7nqwl5SSjCZtbmP85+lA+72Z
+ GOIEZwjftOrCVphym/y+1ftYXnre5El8IzQkuJVahwcqYxNkjTxvkFbkg8Z5jlPbqX
+ Ampooa4Yx32Ow==
 To: linux-kernel@vger.kernel.org
-Date: Sun,  1 Dec 2024 17:08:41 -0800
-Message-ID: <20241202010844.144356-17-ebiggers@kernel.org>
+Date: Sun,  1 Dec 2024 17:08:42 -0800
+Message-ID: <20241202010844.144356-18-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20241202010844.144356-1-ebiggers@kernel.org>
 References: <20241202010844.144356-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -8.2 (--------)
+X-Spam-Score: -5.5 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -74,33 +74,33 @@ X-Spam-Report: Spam detection software,
  optimizations, 
  it is unnecessary to go through the crypto API. Just use crc32c(). This is
  much simpler, and it [...] 
- Content analysis details:   (-8.2 points, 6.0 required)
+ Content analysis details:   (-5.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ [147.75.193.91 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [147.75.193.91 listed in bl.score.senderscore.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tHuwf-0006ML-Ca
-Subject: [f2fs-dev] [PATCH v4 16/19] ext4: switch to using the crc32c library
+X-Headers-End: 1tHuwf-0006MN-UC
+Subject: [f2fs-dev] [PATCH v4 17/19] jbd2: switch to using the crc32c library
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -139,162 +139,201 @@ Reviewed-by: Darrick J. Wong <djwong@kernel.org>
 Acked-by: Theodore Ts'o <tytso@mit.edu>
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ext4/Kconfig |  3 +--
- fs/ext4/ext4.h  | 25 +++----------------------
- fs/ext4/super.c | 15 ---------------
- 3 files changed, 4 insertions(+), 39 deletions(-)
+ fs/jbd2/Kconfig      |  2 --
+ fs/jbd2/journal.c    | 30 +++---------------------------
+ include/linux/jbd2.h | 33 +++------------------------------
+ 3 files changed, 6 insertions(+), 59 deletions(-)
 
-diff --git a/fs/ext4/Kconfig b/fs/ext4/Kconfig
-index e20d59221fc0..c9ca41d91a6c 100644
---- a/fs/ext4/Kconfig
-+++ b/fs/ext4/Kconfig
-@@ -29,12 +29,11 @@ config EXT3_FS_SECURITY
- config EXT4_FS
- 	tristate "The Extended 4 (ext4) filesystem"
- 	select BUFFER_HEAD
- 	select JBD2
- 	select CRC16
+diff --git a/fs/jbd2/Kconfig b/fs/jbd2/Kconfig
+index 4ad2c67f93f1..9c19e1512101 100644
+--- a/fs/jbd2/Kconfig
++++ b/fs/jbd2/Kconfig
+@@ -1,11 +1,9 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ config JBD2
+ 	tristate
+ 	select CRC32
 -	select CRYPTO
 -	select CRYPTO_CRC32C
-+	select CRC32
- 	select FS_IOMAP
- 	select FS_ENCRYPTION_ALGS if FS_ENCRYPTION
  	help
- 	  This is the next generation of the ext3 filesystem.
+ 	  This is a generic journaling layer for block devices that support
+ 	  both 32-bit and 64-bit block numbers.  It is currently used by
+ 	  the ext4 and OCFS2 filesystems, but it could also be used to add
+ 	  journal support to other file systems or block devices such
+diff --git a/fs/jbd2/journal.c b/fs/jbd2/journal.c
+index 7e49d912b091..d8084b31b361 100644
+--- a/fs/jbd2/journal.c
++++ b/fs/jbd2/journal.c
+@@ -1367,24 +1367,16 @@ static int journal_check_superblock(journal_t *journal)
+ 		printk(KERN_ERR "JBD2: Can't enable checksumming v1 and v2/3 "
+ 		       "at the same time!\n");
+ 		return err;
+ 	}
  
-diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-index 74f2071189b2..4e7de7eaa374 100644
---- a/fs/ext4/ext4.h
-+++ b/fs/ext4/ext4.h
-@@ -31,11 +31,11 @@
- #include <linux/wait.h>
- #include <linux/sched/signal.h>
- #include <linux/blockgroup_lock.h>
- #include <linux/percpu_counter.h>
- #include <linux/ratelimit.h>
+-	/* Load the checksum driver */
+ 	if (jbd2_journal_has_csum_v2or3_feature(journal)) {
+ 		if (sb->s_checksum_type != JBD2_CRC32C_CHKSUM) {
+ 			printk(KERN_ERR "JBD2: Unknown checksum type\n");
+ 			return err;
+ 		}
+ 
+-		journal->j_chksum_driver = crypto_alloc_shash("crc32c", 0, 0);
+-		if (IS_ERR(journal->j_chksum_driver)) {
+-			printk(KERN_ERR "JBD2: Cannot load crc32c driver.\n");
+-			err = PTR_ERR(journal->j_chksum_driver);
+-			journal->j_chksum_driver = NULL;
+-			return err;
+-		}
+ 		/* Check superblock checksum */
+ 		if (sb->s_checksum != jbd2_superblock_csum(journal, sb)) {
+ 			printk(KERN_ERR "JBD2: journal checksum error\n");
+ 			err = -EFSBADCRC;
+ 			return err;
+@@ -1606,12 +1598,10 @@ static journal_t *journal_init_common(struct block_device *bdev,
+ 
+ 	return journal;
+ 
+ err_cleanup:
+ 	percpu_counter_destroy(&journal->j_checkpoint_jh_count);
+-	if (journal->j_chksum_driver)
+-		crypto_free_shash(journal->j_chksum_driver);
+ 	kfree(journal->j_wbuf);
+ 	jbd2_journal_destroy_revoke(journal);
+ 	journal_fail_superblock(journal);
+ 	kfree(journal);
+ 	return ERR_PTR(err);
+@@ -2189,12 +2179,10 @@ int jbd2_journal_destroy(journal_t *journal)
+ 	if (journal->j_proc_entry)
+ 		jbd2_stats_proc_exit(journal);
+ 	iput(journal->j_inode);
+ 	if (journal->j_revoke)
+ 		jbd2_journal_destroy_revoke(journal);
+-	if (journal->j_chksum_driver)
+-		crypto_free_shash(journal->j_chksum_driver);
+ 	kfree(journal->j_fc_wbuf);
+ 	kfree(journal->j_wbuf);
+ 	kfree(journal);
+ 
+ 	return err;
+@@ -2335,31 +2323,19 @@ int jbd2_journal_set_features(journal_t *journal, unsigned long compat,
+ 			pr_err("JBD2: Cannot enable fast commits.\n");
+ 			return 0;
+ 		}
+ 	}
+ 
+-	/* Load the checksum driver if necessary */
+-	if ((journal->j_chksum_driver == NULL) &&
+-	    INCOMPAT_FEATURE_ON(JBD2_FEATURE_INCOMPAT_CSUM_V3)) {
+-		journal->j_chksum_driver = crypto_alloc_shash("crc32c", 0, 0);
+-		if (IS_ERR(journal->j_chksum_driver)) {
+-			printk(KERN_ERR "JBD2: Cannot load crc32c driver.\n");
+-			journal->j_chksum_driver = NULL;
+-			return 0;
+-		}
+-		/* Precompute checksum seed for all metadata */
+-		journal->j_csum_seed = jbd2_chksum(journal, ~0, sb->s_uuid,
+-						   sizeof(sb->s_uuid));
+-	}
+-
+ 	lock_buffer(journal->j_sb_buffer);
+ 
+-	/* If enabling v3 checksums, update superblock */
++	/* If enabling v3 checksums, update superblock and precompute seed */
+ 	if (INCOMPAT_FEATURE_ON(JBD2_FEATURE_INCOMPAT_CSUM_V3)) {
+ 		sb->s_checksum_type = JBD2_CRC32C_CHKSUM;
+ 		sb->s_feature_compat &=
+ 			~cpu_to_be32(JBD2_FEATURE_COMPAT_CHECKSUM);
++		journal->j_csum_seed = jbd2_chksum(journal, ~0, sb->s_uuid,
++						   sizeof(sb->s_uuid));
+ 	}
+ 
+ 	/* If enabling v1 checksums, downgrade superblock */
+ 	if (COMPAT_FEATURE_ON(JBD2_FEATURE_COMPAT_CHECKSUM))
+ 		sb->s_feature_incompat &=
+diff --git a/include/linux/jbd2.h b/include/linux/jbd2.h
+index 50f7ea8714bf..561025b4f3d9 100644
+--- a/include/linux/jbd2.h
++++ b/include/linux/jbd2.h
+@@ -26,11 +26,11 @@
+ #include <linux/mutex.h>
+ #include <linux/timer.h>
+ #include <linux/slab.h>
+ #include <linux/bit_spinlock.h>
+ #include <linux/blkdev.h>
 -#include <crypto/hash.h>
 +#include <linux/crc32c.h>
- #include <linux/falloc.h>
- #include <linux/percpu-rwsem.h>
- #include <linux/fiemap.h>
- #ifdef __KERNEL__
- #include <linux/compat.h>
-@@ -1660,13 +1660,10 @@ struct ext4_sb_info {
- 	struct task_struct *s_mmp_tsk;
+ #endif
  
- 	/* record the last minlen when FITRIM is called. */
- 	unsigned long s_last_trim_minblks;
+ #define journal_oom_retry 1
  
--	/* Reference to checksum algorithm driver via cryptoapi */
--	struct crypto_shash *s_chksum_driver;
+ /*
+@@ -1239,17 +1239,10 @@ struct journal_s
+ 	 * An opaque pointer to fs-private information.  ext3 puts its
+ 	 * superblock pointer here.
+ 	 */
+ 	void *j_private;
+ 
+-	/**
+-	 * @j_chksum_driver:
+-	 *
+-	 * Reference to checksum algorithm driver via cryptoapi.
+-	 */
+-	struct crypto_shash *j_chksum_driver;
 -
- 	/* Precomputed FS UUID checksum for seeding other checksums */
- 	__u32 s_csum_seed;
+ 	/**
+ 	 * @j_csum_seed:
+ 	 *
+ 	 * Precomputed journal UUID checksum for seeding other checksums.
+ 	 */
+@@ -1748,14 +1741,11 @@ static inline bool jbd2_journal_has_csum_v2or3_feature(journal_t *j)
+ 	return jbd2_has_feature_csum2(j) || jbd2_has_feature_csum3(j);
+ }
  
- 	/* Reclaim extents from extent status tree */
- 	struct shrinker *s_es_shrinker;
-@@ -2461,23 +2458,11 @@ static inline __le16 ext4_rec_len_to_disk(unsigned len, unsigned blocksize)
- #define DX_HASH_LAST 			DX_HASH_SIPHASH
+ static inline int jbd2_journal_has_csum_v2or3(journal_t *journal)
+ {
+-	WARN_ON_ONCE(jbd2_journal_has_csum_v2or3_feature(journal) &&
+-		     journal->j_chksum_driver == NULL);
+-
+-	return journal->j_chksum_driver != NULL;
++	return jbd2_journal_has_csum_v2or3_feature(journal);
+ }
  
- static inline u32 ext4_chksum(struct ext4_sb_info *sbi, u32 crc,
+ static inline int jbd2_journal_get_num_fc_blks(journal_superblock_t *jsb)
+ {
+ 	int num_fc_blocks = be32_to_cpu(jsb->s_num_fc_blks);
+@@ -1788,31 +1778,14 @@ static inline unsigned long jbd2_log_space_left(journal_t *journal)
+ #define BJ_Forget	2	/* Buffer superseded by this transaction */
+ #define BJ_Shadow	3	/* Buffer contents being shadowed to the log */
+ #define BJ_Reserved	4	/* Buffer is reserved for access by journal */
+ #define BJ_Types	5
+ 
+-/* JBD uses a CRC32 checksum */
+-#define JBD_MAX_CHECKSUM_SIZE 4
+-
+ static inline u32 jbd2_chksum(journal_t *journal, u32 crc,
  			      const void *address, unsigned int length)
  {
--	struct {
--		struct shash_desc shash;
--		char ctx[4];
--	} desc;
+-	DEFINE_RAW_FLEX(struct shash_desc, desc, __ctx,
+-		DIV_ROUND_UP(JBD_MAX_CHECKSUM_SIZE,
+-			     sizeof(*((struct shash_desc *)0)->__ctx)));
+-	int err;
 -
--	BUG_ON(crypto_shash_descsize(sbi->s_chksum_driver)!=sizeof(desc.ctx));
+-	BUG_ON(crypto_shash_descsize(journal->j_chksum_driver) >
+-		JBD_MAX_CHECKSUM_SIZE);
 -
--	desc.shash.tfm = sbi->s_chksum_driver;
--	*(u32 *)desc.ctx = crc;
+-	desc->tfm = journal->j_chksum_driver;
+-	*(u32 *)desc->__ctx = crc;
 -
--	BUG_ON(crypto_shash_update(&desc.shash, address, length));
+-	err = crypto_shash_update(desc, address, length);
+-	BUG_ON(err);
 -
--	return *(u32 *)desc.ctx;
+-	return *(u32 *)desc->__ctx;
 +	return crc32c(crc, address, length);
  }
  
- #ifdef __KERNEL__
- 
- /* hash info structure used by the directory hash */
-@@ -3274,15 +3259,11 @@ extern void ext4_group_desc_csum_set(struct super_block *sb, __u32 group,
- extern int ext4_register_li_request(struct super_block *sb,
- 				    ext4_group_t first_not_zeroed);
- 
- static inline int ext4_has_metadata_csum(struct super_block *sb)
+ /* Return most recent uncommitted transaction */
+ static inline tid_t  jbd2_get_latest_transaction(journal_t *journal)
  {
--	WARN_ON_ONCE(ext4_has_feature_metadata_csum(sb) &&
--		     !EXT4_SB(sb)->s_chksum_driver);
--
--	return ext4_has_feature_metadata_csum(sb) &&
--	       (EXT4_SB(sb)->s_chksum_driver != NULL);
-+	return ext4_has_feature_metadata_csum(sb);
- }
- 
- static inline int ext4_has_group_desc_csum(struct super_block *sb)
- {
- 	return ext4_has_feature_gdt_csum(sb) || ext4_has_metadata_csum(sb);
-diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-index 785809f33ff4..fdf4817a7dbc 100644
---- a/fs/ext4/super.c
-+++ b/fs/ext4/super.c
-@@ -1378,12 +1378,10 @@ static void ext4_put_super(struct super_block *sb)
- 	 * Now that we are completely done shutting down the
- 	 * superblock, we need to actually destroy the kobject.
- 	 */
- 	kobject_put(&sbi->s_kobj);
- 	wait_for_completion(&sbi->s_kobj_unregister);
--	if (sbi->s_chksum_driver)
--		crypto_free_shash(sbi->s_chksum_driver);
- 	kfree(sbi->s_blockgroup_lock);
- 	fs_put_dax(sbi->s_daxdev, NULL);
- 	fscrypt_free_dummy_policy(&sbi->s_dummy_enc_policy);
- #if IS_ENABLED(CONFIG_UNICODE)
- 	utf8_unload(sb->s_encoding);
-@@ -4632,19 +4630,10 @@ static int ext4_init_metadata_csum(struct super_block *sb, struct ext4_super_blo
- 		return -EINVAL;
- 	}
- 	ext4_setup_csum_trigger(sb, EXT4_JTR_ORPHAN_FILE,
- 				ext4_orphan_file_block_trigger);
- 
--	/* Load the checksum driver */
--	sbi->s_chksum_driver = crypto_alloc_shash("crc32c", 0, 0);
--	if (IS_ERR(sbi->s_chksum_driver)) {
--		int ret = PTR_ERR(sbi->s_chksum_driver);
--		ext4_msg(sb, KERN_ERR, "Cannot load crc32c driver.");
--		sbi->s_chksum_driver = NULL;
--		return ret;
--	}
--
- 	/* Check superblock checksum */
- 	if (!ext4_superblock_csum_verify(sb, es)) {
- 		ext4_msg(sb, KERN_ERR, "VFS: Found ext4 filesystem with "
- 			 "invalid superblock checksum.  Run e2fsck?");
- 		return -EFSBADCRC;
-@@ -5685,13 +5674,10 @@ failed_mount8: __maybe_unused
- 	flush_work(&sbi->s_sb_upd_work);
- 	ext4_stop_mmpd(sbi);
- 	del_timer_sync(&sbi->s_err_report);
- 	ext4_group_desc_free(sbi);
- failed_mount:
--	if (sbi->s_chksum_driver)
--		crypto_free_shash(sbi->s_chksum_driver);
--
- #if IS_ENABLED(CONFIG_UNICODE)
- 	utf8_unload(sb->s_encoding);
- #endif
- 
- #ifdef CONFIG_QUOTA
-@@ -7492,8 +7478,7 @@ static void __exit ext4_exit_fs(void)
- }
- 
- MODULE_AUTHOR("Remy Card, Stephen Tweedie, Andrew Morton, Andreas Dilger, Theodore Ts'o and others");
- MODULE_DESCRIPTION("Fourth Extended Filesystem");
- MODULE_LICENSE("GPL");
--MODULE_SOFTDEP("pre: crc32c");
- module_init(ext4_init_fs)
- module_exit(ext4_exit_fs)
 -- 
 2.47.1
 
