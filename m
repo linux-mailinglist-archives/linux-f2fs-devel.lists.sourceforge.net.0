@@ -2,150 +2,192 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BABF29E0C18
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  2 Dec 2024 20:29:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E6609E1537
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Dec 2024 09:10:02 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tIC6G-0006pN-Ad;
-	Mon, 02 Dec 2024 19:28:52 +0000
+	id 1tINyg-0006oT-LB;
+	Tue, 03 Dec 2024 08:09:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1tIC6E-0006pG-FJ
+ (envelope-from <guochunhai@vivo.com>) id 1tINye-0006nw-Cb
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Dec 2024 19:28:50 +0000
+ Tue, 03 Dec 2024 08:09:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bWFseO7m4ELWbMwwQF3QN9/V027VxEt3vnqTyrKXYoM=; b=JFWPBpDuBfyseQ1HwB4RxwUHFL
- P8uFGw0bWNqI6YM9IXNvgOMn4qhX0XBJcSOqv5IZvvPlwgaJz70ygI9gudckUmA4YiaAHqOuDtqUs
- VuYAfDWvleLsKKdD44kUZBOzyHh9new1TLGmSpaJa5Xivj630WKQZV3ihmMutd5e2pkc=;
+ bh=N9Ni5AHT7Qj1XSGX6KHCBR9pGyvC7E8sQuUmptqfnyQ=; b=HROb7IMN18a+K33WkujlrmUHF0
+ xR9Zi7RMyR4LjPH5R+zxEgfbvazxUYYjALVpm3xDZMNUhdrSCU+38uOYyNMO4o/xIp+xOZUzKeqW/
+ Ma4SKC9Tx5eMryi0f2e2Tx6YM81qhcFNUT0uIidE1WEKmwxnJ1yZVn5I99h05a5UKa+A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=bWFseO7m4ELWbMwwQF3QN9/V027VxEt3vnqTyrKXYoM=; b=RjQwTV7wf1vwwW6sSWWRThI/IZ
- VsyJkbobSG+ja7JnvHTY1iuPUVUthEmjdDXR1Xy9qPvuaDgzEEQSYROPmXxuJhiblB4+0vLl9u+tD
- WhMMZk4IY7SkK9IQxvuCZh0sLtlK18zGYGiq5M8viWLpI01sNwV8daWd+to0X0AZExcI=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=N9Ni5AHT7Qj1XSGX6KHCBR9pGyvC7E8sQuUmptqfnyQ=; b=D
+ w9t0DZ/VzNiD1sbUIUnYkAmN+3iOUG4TKi43M8ZHJoKqdxaEeV9h91OQQmzHzOXLMbii3we0radBL
+ +a2Fln2gyPDZuGfuwYGndsFN5T4lwt6HC5pw9e4JvJzSV1TNYzOpuCr82plwRSHcrwaqX93TN4DAg
+ G68DuIA284EEjHME=;
+Received: from mail-psaapc01on2080.outbound.protection.outlook.com
+ ([40.107.255.80] helo=APC01-PSA-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tIC6D-0008KW-JK for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Dec 2024 19:28:50 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1733167723;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=bWFseO7m4ELWbMwwQF3QN9/V027VxEt3vnqTyrKXYoM=;
- b=fJ6Hfbz2o0w9aIE1KX4T2ZvO/Rl52hnfCANUuISJz4lXch0AB012lYsTFzV+Lf0WAyWipx
- fJf1Ykfyyag6Yl4M3gGe6RJuAgubFr94706h3pObaCGHmu+1Le7zoD9Tx5Fpr9XOejPadX
- En7JFQAh3vuimHau0ZXbmHox/KIsGSM=
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-32-nNTEdUl8Ozyr4VZbZlO24Q-1; Mon, 02 Dec 2024 14:28:40 -0500
-X-MC-Unique: nNTEdUl8Ozyr4VZbZlO24Q-1
-X-Mimecast-MFC-AGG-ID: nNTEdUl8Ozyr4VZbZlO24Q
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-215b45a6e2aso3033895ad.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 02 Dec 2024 11:28:40 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733167720; x=1733772520;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bWFseO7m4ELWbMwwQF3QN9/V027VxEt3vnqTyrKXYoM=;
- b=mSN0W3nhWwFtCmSfhNV2tBBxOmZ1GeN5TW5zyoM/hT9kIckA1Ps0jAnVKsDzJsNIKv
- 4OmztqFBVJCIfQqxOjRrFiBT0M2bEl0Zh0Um9P+d0wC/etfa/UgEls8Le8mV8qp3ahL/
- /L++G0T8bzvX8T7vy7oquF08jM06jldPkMvXH8bsVHnK3g2aF6TeVtye83JfO8fEAIf4
- mNx6mGiJk04dNaJJxWKgcPVbkFthnh7W+EUCdZ3CgdRSlxvqpIniu5EJZ4325VrB0hN1
- bkKYnqWDmG7JkZiqS6zEyzNo4fFELiH3noBSlHHAceTVeET1Pzt8Q60O1QsEp5+whmmy
- lo2w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4mnVvh87TawXlXUp87BMMOV4ryT5vcGbN2TefTbuesVtGoj+Mm0+JnveNe3e3hf90SZ7eteXTo8kTy4yOHi87@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwwMDVPkNh8waTjCChyI85is/5w1BKQvY/HpkLMHuidmh3Vfn4F
- qZbHyyxyXZ015C3+k0DK2jjfGyeRLksGJMiNvMdGxr0g7YOeLqsiSIbDeiWlRqGYE3bnf52tQfH
- shnflTiacOV9jY9XZGwf8ufsmdahQ2weMvBtcyABoZwmA2h+29KNEy0+CKMqsN9BSfeb6RRK+Ck
- w=
-X-Gm-Gg: ASbGncs2IGMOBvcdKqO34LBwun9Y4W9ad+RmXBluAPOfQkwfDIEjY71m22rbHzBonl7
- gPEpz2ojo3gUkBC4q4igvaB+cJlFkdou+mReQ7wXvl5GSznFm9mkpJARWAMeVRWcHXaWk/+wj8o
- MtFO9WUCXphNkClKDv3toX5NYqt+DXXQsI+iS+vQNaDsPWeX3MV02dDCcVGWkuiKcuDgUx6nwkS
- aXa6Ev4Yw/+QFXgyJgHFsgxjVW0KXcig0b9rPBZIlzJkpaDSu4bnSViNzDYqwWyeKXnbkiLLz+d
- dmlIgNgUr2iiyNc=
-X-Received: by 2002:a17:902:f60f:b0:215:30d1:36f7 with SMTP id
- d9443c01a7336-21530d13a51mr267121055ad.44.1733167719869; 
- Mon, 02 Dec 2024 11:28:39 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFK2PWyR5izKn7DroMfkC2QjzimoUXMUUI84ZLwYBgzYg3xki1hiD7a+h4DUk2el7rGPxsNhw==
-X-Received: by 2002:a17:902:f60f:b0:215:30d1:36f7 with SMTP id
- d9443c01a7336-21530d13a51mr267120775ad.44.1733167719566; 
- Mon, 02 Dec 2024 11:28:39 -0800 (PST)
-Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([43.228.180.230])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21586d580a9sm28257345ad.277.2024.12.02.11.28.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Dec 2024 11:28:39 -0800 (PST)
-Date: Tue, 3 Dec 2024 03:28:35 +0800
-From: Zorro Lang <zlang@redhat.com>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20241202192835.seditdylbigpxte5@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-References: <20241202114149.2666-1-chao@kernel.org>
+ id 1tINye-0000fF-52 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Dec 2024 08:09:49 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=iXUAFY4os88a9VFeIb1WRBSCNDq98qt/Ei/hH5jVIP2T5OPMup6wp/8pKM7LftcMqSj/VA1vZURs38qy0UVP8z9HExkVaL2RL9FDG4vqsmzamXfZ9BradeYPP+nFJRaNJBf0RSx3IvtuFVJ7srUHoPpIiLcah9wOVGIesuKHIW0twSbvBWxp96rwH20Nrw8zY0vfVBW2cHki6oaXfKAJFTBvj9vrVIKV1DMmCVJMzsaKd/1P6yJAgZs1reLXk6kuaH9qHnyNWTi9RN1ckvWm5TEvzP32JpAnRasmj+EaBap7XB4CNDhWaU4aMH9wZfalQ71tivGRXxJpt3DsFrYvyw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=N9Ni5AHT7Qj1XSGX6KHCBR9pGyvC7E8sQuUmptqfnyQ=;
+ b=smZOe5sEE/RzchbIHjsAXU+YNDGwqmw+jKS/imcPD2zsDJyz4bN4wTDBNJDVF2wLyxL6jPnc8MOf4BiVUSe0wh0xqY4KSp0QRLxlkhpULMsNPoQRe5i8+Seqd/ctXAUu3mYvYQvweCHD+33VbSil3tfCc/9L+1E9aRAsHO5hvlde0at3J6MZawrQVYP2COrDVXY/swjm7bkhJ/9BynwcO/51LkScl5gm7lGAUZkh42awbGeJyPsEBBZBPfV9bOV+oMei1KijKFHpE1aqJTiRm7Ss4VJ1IOz/McpBDfrfvAT7RLG6Fj0xjd7go8e+St2zAUyjH3bGLvHtSojUWOn/sw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=N9Ni5AHT7Qj1XSGX6KHCBR9pGyvC7E8sQuUmptqfnyQ=;
+ b=ZNUiqIjER0yMbZ896mUBLBW88cJU7Jo8KGBYE3FPntYqERQc8/FEMtp8FjnlLhdsBzuTFQTrBp4Wm7enKLyiYY4trE/hmpWhdEWbCbHiYoAm4rNPfgI4jojU4W6iH6+NQY0LzwN4DPUt92YFaKK31mOKZPpdDPbiLJCF93WMxON6u4uuvQy148jjdY6J1dIyFqFyM4IbP7yFYFkXNV+mc/eSQp3nQhdieG8/PD249klvd893EcFDR29TB2oigiRMAiCJdwesXXSrbV1qptALudtesEbNodMaVlVlAGTxL+BS4O6A2CMBJR4kU72Zu6GucQvdgeK/G7+DBXsruqFrXw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from TYZPR06MB7096.apcprd06.prod.outlook.com (2603:1096:405:b5::13)
+ by JH0PR06MB7055.apcprd06.prod.outlook.com (2603:1096:990:6e::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.9; Tue, 3 Dec
+ 2024 06:35:39 +0000
+Received: from TYZPR06MB7096.apcprd06.prod.outlook.com
+ ([fe80::6c3a:9f76:c4a5:c2b]) by TYZPR06MB7096.apcprd06.prod.outlook.com
+ ([fe80::6c3a:9f76:c4a5:c2b%6]) with mapi id 15.20.8230.000; Tue, 3 Dec 2024
+ 06:35:37 +0000
+To: chao@kernel.org,
+	jaegeuk@kernel.org
+Date: Mon,  2 Dec 2024 23:51:08 -0700
+Message-Id: <20241203065108.2763436-1-guochunhai@vivo.com>
+X-Mailer: git-send-email 2.34.1
+X-ClientProxiedBy: SI1PR02CA0002.apcprd02.prod.outlook.com
+ (2603:1096:4:1f7::16) To TYZPR06MB7096.apcprd06.prod.outlook.com
+ (2603:1096:405:b5::13)
 MIME-Version: 1.0
-In-Reply-To: <20241202114149.2666-1-chao@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: tsCdWDkr9mdzs5g8wFInRxb1hLKeqNFGiICu93gbNUE_1733167720
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-X-Spam-Score: -3.2 (---)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYZPR06MB7096:EE_|JH0PR06MB7055:EE_
+X-MS-Office365-Filtering-Correlation-Id: 02420db3-c2ec-464d-5de7-08dd1364b2a0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|52116014|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?bQPBU/04mHb1Shs3H6xlWln/F/v3Al2iPFbpBo92K8yB1WZtBEW2wM6ZEeON?=
+ =?us-ascii?Q?ndi/dkKbF6CCtTB6RO0pKr60fgTd/2kwqxBT2DlZilnro8rNTK6v7atCYCoD?=
+ =?us-ascii?Q?chzZj0YNa/IRtGzctUE63wRdbhz3v9ZlMZiAKma9ZhnfpgBKHxmePc3iJY2s?=
+ =?us-ascii?Q?WWIF+MMtcCdw3LiDw1CWjlrcFkWz4XwQA+Si7qT8XUxrsKGg0qRImLyphDmS?=
+ =?us-ascii?Q?opMol9Z9j7OBEQYtTZfisUxtnhaZbNxT8cjJnmJ6KB2YbJwKDnhw5eYxoY1v?=
+ =?us-ascii?Q?8phMT0JhjbjGCUZ8glg8vfgD4youN6bkdsBlTBQBAQyBm+KjH9OvrbASVvq1?=
+ =?us-ascii?Q?IwBqCZcOiHfT/1U2DoFEAKSORdtOvjo5roLIlwh1kDB3z711botN4PSdlFI4?=
+ =?us-ascii?Q?rpdYtgCLcuJy30tvI0+0Zoxflv9P7g1CnmkoX3xfKWqI4tOJwDb/IMPl3/rq?=
+ =?us-ascii?Q?27ybx0UnnPjRM2TjWkqT98uVA22Ytg4eSHxE5Y4sTyb/F9vs9kZE+aRD4MLP?=
+ =?us-ascii?Q?Ev0fDfABWmt4OEhWl7l9yAAferSK5CndCMrxLPdjza/1eumG6smWbEvamlLG?=
+ =?us-ascii?Q?e0vgxDzf9EJjLh3BDqjT3CoDzBfLvYyfD4FdJ24JgMjvgj2eHbjrl+c4oQcJ?=
+ =?us-ascii?Q?GmoquA9Xv/YRuUXYFj3Im5NWTDliyWVuash7JJYqxrZzjEr4EsyOuCf3xCni?=
+ =?us-ascii?Q?QYPIR/uiv9Dvf1yTzIhi04n6voyYSbRETeFUxnG74++U8d+GpbW0kxdAUyg+?=
+ =?us-ascii?Q?yoq6xNGffvev7nidSIgqXXwUsrb/IKKcHeemjECxuUCeZ/3KSTXqby1q87KE?=
+ =?us-ascii?Q?SFl2BdG8/tkbDV5FPMlfuwyHECSVXYiTDfKd+5YGKvfVS1uC3hwWcNgZsrU/?=
+ =?us-ascii?Q?KRDij0hA5eHVqy2ITilYnSIaTL62XilWz+3/jVHg8idDN00PUQ+VWdKRWDvY?=
+ =?us-ascii?Q?EIrVQZBnsR/DreeQZmPt1M+qT+j1iPxLcdLVdpS6EL0ndAXyszBlJSOR+XdV?=
+ =?us-ascii?Q?TsBgClhX7ujT0I9VwNjyPjCw1PrezHjIcS3WIcIohmr6kXkZPvJXbPShPpy0?=
+ =?us-ascii?Q?PS6HKJY/FjFxsiu8iwEVq2vKuvWNPlrHgl2FG21LA0BANya5UamZaP8ZFL6Q?=
+ =?us-ascii?Q?ocAxqbPvOI06koNLz2QH38Nv3FreiISsJa0W7tWstbgo8gPm9e397KhjgMhX?=
+ =?us-ascii?Q?kJsc6lUhqOLuyrY6gYEvHRlWxBVaXkcU4zNq6QOmGxYX8vLpowgwWxvHNE5H?=
+ =?us-ascii?Q?o4zJDltdfF2ef/EbjCY20W5VOWqFULluMkZIDK1gtZggyze+kX7XaDlWfjLI?=
+ =?us-ascii?Q?t3LItiUYqocmb/R/rJLqGD3gNv24SNy9fgCkIQVsVEo12ulZ0Pm9ek2fakwm?=
+ =?us-ascii?Q?0Nf7gge1n1F9owH9JpbP+M0YzYDe4cObFWb/tAeuGeFzD1nVRg=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYZPR06MB7096.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?VAem7W1f+5Ku9xiBEQV8gMRnnLw16SOHyNghKz8BZaRF01BLjQ3pow9bkRpL?=
+ =?us-ascii?Q?hwih8gp8CnZIoEWcU17Ew/aIE1MxxU2+lbJ6Z/JoGrF2cNxThyiB/0pxG/v8?=
+ =?us-ascii?Q?g49cRkQ8vxUWqO8SUlGFqJYf0PItrOxY3sIHqsWQmpN0CtLebd8yE3Ic1T8/?=
+ =?us-ascii?Q?/WqO5cvw0NxRJK6c2Y3N1Mgli1BVLMGnk6p3PNueeODCRh/ihEAtym/beJC8?=
+ =?us-ascii?Q?SG2Zmcp4Tw9LFVAfpdt1ommmwBTSr66w7hbKVJSM96+kpzn5HlSEaouDeWnx?=
+ =?us-ascii?Q?JQvNqmRkLwHAnmuCvJa+Ywi3/1/gDAvI+AjWAf7g5wQ0C9wOdWh+gHRtyGg1?=
+ =?us-ascii?Q?noxdts6lGu31J9+SFYLllqJU/T+rjzQpJNt3hkc6iAET/HNgiATIsFvpBn6t?=
+ =?us-ascii?Q?J8VAcPx0MNvKJw/UL6L8+XapmZYlv5qJg4lxPA34pOmZsLiL6duRrSdye2ss?=
+ =?us-ascii?Q?2HM+oU4hyOguMvZ0/5neLqAvsQEf7SJVM8sib0I1FPwwovf1x4Uik46tA8uR?=
+ =?us-ascii?Q?Sa/qmQ5mnFO2St7cdVi3wkHRO06c8jSJRMcy1Ebx5IlIKU750EDxzbFEzadZ?=
+ =?us-ascii?Q?tcG/jzwgV5zFXVUWDzp9y9JdW0IJCamYTsGcglfJ+y3EKn1cNZWQnxrTSfOS?=
+ =?us-ascii?Q?wzTP4rjHGhLDPT44pbCnxbTHzHGB8Pk+bUO9gCCfNm8iQcrDAMmC1OnjlzLb?=
+ =?us-ascii?Q?0lIVF44JJZsc2KOqjYZMTgzRx5+EmsiS8Y9ciqth4oIWo3Mx9uWoMr4vxVmK?=
+ =?us-ascii?Q?CFYxZ3MuYHcg91eWChsNARkJee3JyCicoSptAbiBbZLfIkVGVcHg4Y+96BPn?=
+ =?us-ascii?Q?yN65/a6QAUqxE5cHIhbCBl+7Sc8cQyIutdNj00rS1WpxTuzuZH4yVEJt7vlX?=
+ =?us-ascii?Q?jmfxhiI29IzIBEa2lHRhQ8yJh8YJBnSUTiIs4sjP3RpKy0fGYvrY7Vb9wXoq?=
+ =?us-ascii?Q?Gd/pSka2D5ReM5lAn85TV98GkG6q/djcJ6BwfU3plu9dC/U3TUlhcuEKHG8K?=
+ =?us-ascii?Q?RW/f+KfaKJyji32zaxKeTncx43FV1LX4V/wxTfjLolVo68Vr8+VGKs0FAoP9?=
+ =?us-ascii?Q?CAgU59dmm87ZHOBWadJwHsX8wn0M7NmVLQBw0hILHdVEWOFKCMUjKKPezBaa?=
+ =?us-ascii?Q?hbH+XJ5cmegSCczLnLxOB8yB8khmR9WEdWkN349e1sowk3tT2Es57kn4Dg75?=
+ =?us-ascii?Q?kWaZ5IDlGJjtk5vQOnqOaete7dxgQS93eU1gbfaj5ZZKgI3lCrQ0S6gvQCKI?=
+ =?us-ascii?Q?KcTkDfVYCDu3jisGUvsvfRgvJgPLzpNtL2CIvhCwieyLujPnUM3whig9YqBy?=
+ =?us-ascii?Q?Ax9Nfqi0SHeu9N0N0IiY61PJsAviGh/msYS7cqkDD0qq99huRwzRE6gCcsX4?=
+ =?us-ascii?Q?ZAKZIEt64HRtQQtKdseqe6jzHxglgF+qbUKk9G0R92f/V6tVaqJ26A6xvM3f?=
+ =?us-ascii?Q?l0iTMknbBIQOEuykRBe8fEN3fQ9I+gPVTPEnvuIvGA3DFDwuywXcdedxfsni?=
+ =?us-ascii?Q?QrHtbsG/paB97rosThv5DKFP48cNcmsWgpSL0VrzYqVBS1xSBzY1S/lnMV1h?=
+ =?us-ascii?Q?i8xEwVlrowL5iHhakUtKGzPTIfahocUpXiVHfGH6?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 02420db3-c2ec-464d-5de7-08dd1364b2a0
+X-MS-Exchange-CrossTenant-AuthSource: TYZPR06MB7096.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 06:35:37.2566 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: W63zNyrLftVd0zMtG/vKiCaBd9jO6ogb2zb+OD/5mQpuTK2f2O0IqcDVjixkaGTQUiIciVNzXSv6q+xfhzQ+4w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: JH0PR06MB7055
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Dec 02, 2024 at 07:41:47PM +0800, Chao Yu wrote: >
- The bug related to this regression testcase has been fixed by commit >
- d5c367ef8287
- ("f2fs: fix f2fs_bug_on when uninstalling filesystem call [...] 
- Content analysis details:   (-3.2 points, 6.0 required)
+ Content preview: locate_dirty_segment() does not set any current active
+ segment
+ as a prefree segment. Thus, the issue described below may occur: Step 1:
+ During a checkpoint, add_discard_addrs() does not handle the current active
+ 'segment X' with 0 valid blocks (and non-zero discard blocks). As a result,
+ no struct discard_cmd is created for 'se [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [170.10.133.124 listed in sa-accredit.habeas.com]
+ [40.107.255.80 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [170.10.133.124 listed in bl.score.senderscore.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.133.124 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [170.10.133.124 listed in wl.mailspike.net]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [40.107.255.80 listed in bl.score.senderscore.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.255.80 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.255.80 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tIC6D-0008KW-JK
-Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs/005: update commit id in
- _fixed_by_kernel_commit line
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1tINye-0000fF-52
+Subject: [f2fs-dev] [PATCH] f2fs: fix missing discard for active segments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -157,49 +199,52 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
+From: Chunhai Guo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chunhai Guo <guochunhai@vivo.com>
+Cc: Chunhai Guo <guochunhai@vivo.com>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Dec 02, 2024 at 07:41:47PM +0800, Chao Yu wrote:
-> The bug related to this regression testcase has been fixed by commit
-> d5c367ef8287 ("f2fs: fix f2fs_bug_on when uninstalling filesystem call
-> f2fs_evict_inode."), let's update commit id in _fixed_by_kernel_commit
-> line.
-> 
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  tests/f2fs/005 | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/tests/f2fs/005 b/tests/f2fs/005
-> index a817d51a..33d4fdb9 100755
-> --- a/tests/f2fs/005
-> +++ b/tests/f2fs/005
-> @@ -11,7 +11,7 @@
->  . ./common/preamble
->  _begin_fstest auto quick
->  
-> -_fixed_by_kernel_commit xxxxxxxxxxxx \
-> +_fixed_by_kernel_commit d5c367ef8287 \
->  	"f2fs: fix f2fs_bug_on when uninstalling filesystem call f2fs_evict_inode."
+locate_dirty_segment() does not set any current active segment as a
+prefree segment. Thus, the issue described below may occur:
 
-I think we don't need to use 3 patches. As you just add missed commit id number,
-just merge them into one and named "f2fs: add commit id to _fixed_by_kernel_commit".
-Or if you hope I can do that when I merge it, feel free to tell me :)
+Step 1: During a checkpoint, add_discard_addrs() does not handle the
+current active 'segment X' with 0 valid blocks (and non-zero discard
+blocks). As a result, no struct discard_cmd is created for 'segment X'
+and the value of sbi->discard_blks cannot be reduced to 0 after the
+checkpoint.
 
-Others look good to me, with above change:
+Step 2: f2fs is umounted without setting CP_TRIMMED_FLAG, as
+sbi->discard_blks is non-zero.
 
-Reviewed-by: Zorro Lang <zlang@redhat.com>
+Since add_discard_addrs() can handle active segments with non-zero valid
+blocks, it is reasonable to fix this issue by also handling active
+segments with 0 valid blocks in add_discard_addrs().
 
->  
->  _require_scratch
-> -- 
-> 2.40.1
-> 
+Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
+---
+ fs/f2fs/segment.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index eade36c5ef13..4fb1dc4aab97 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -2090,7 +2090,9 @@ static bool add_discard_addrs(struct f2fs_sb_info *sbi, struct cp_control *cpc,
+ 		return false;
+ 
+ 	if (!force) {
+-		if (!f2fs_realtime_discard_enable(sbi) || !se->valid_blocks ||
++		if (!f2fs_realtime_discard_enable(sbi) ||
++			(!se->valid_blocks &&
++				!IS_CURSEG(sbi, cpc->trim_start)) ||
+ 			SM_I(sbi)->dcc_info->nr_discards >=
+ 				SM_I(sbi)->dcc_info->max_discards)
+ 			return false;
+-- 
+2.34.1
 
 
 
