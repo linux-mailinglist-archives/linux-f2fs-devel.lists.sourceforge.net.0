@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EC419E1AF0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Dec 2024 12:29:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8F969E1AF7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Dec 2024 12:31:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tIR6I-0006i4-F1;
-	Tue, 03 Dec 2024 11:29:55 +0000
+	id 1tIR7w-0003jk-Cu;
+	Tue, 03 Dec 2024 11:31:35 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tIR6H-0006hw-6E
+ (envelope-from <chao@kernel.org>) id 1tIR7v-0003jc-Fj
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Dec 2024 11:29:53 +0000
+ Tue, 03 Dec 2024 11:31:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2ddK8tRgLroTdYc0T9BZj/yTb0JJ3aQlOHRjmktNDOA=; b=cW31yb3v2t5uaXM0/aGHgcE5fL
- DmsvQ1ZQPTCnU0SXcScePVzE0GZAhAo5mGBRilD0kFu5OqAHWga5G4cpapuxlXLMMVikXrcEi5/Ih
- z7l+hqsqABuS8eBZ+z6IKvAW09SbYMpMCUx1ojEfRFv/ZQLZnqB98Gper1TU3pqvlCt0=;
+ bh=InCPvSah/+EyqGcgHkB/1AL7pKmIcOCJGtpSEO4kMNg=; b=ZXjmjULa8FUJe4+lqFQKqy6sVh
+ geMgIVPznBAWf0jsJ6Cjm7KPQ1yopmCEr4zdbWa+X92B+6j/UMRGbcR1RAv4cjfG9S4QGaLMrQy/v
+ XONekZbNOq7qBxLDXzAfeTbxFEehsytQcSN9ytOW2jfDc3pGAlm6LbauZ36eUCxCrPek=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,36 +31,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2ddK8tRgLroTdYc0T9BZj/yTb0JJ3aQlOHRjmktNDOA=; b=k6K1x9i/zhprtidVwB1iMDnGcq
- zLZZSdggfHjcGqL3kjmKUbUOA7ZmFwVYQj96SVJXJ6C08ryXIOHJWiz6KRQal4HS0NGzI9fxfv6oq
- +k5LWQ7akJNOJklBwSmFSbQNEc2vi8XYkPyIwFXiWQMHmUhLZ/xBWcykn5HUX0OdNtoE=;
+ bh=InCPvSah/+EyqGcgHkB/1AL7pKmIcOCJGtpSEO4kMNg=; b=KakdoXdvWVJJtJ3KlJI0CA07Da
+ /tVb+k/YEdtht4IhdsZcK2iRuDtkvAZrFmLEusGe9+1lavKp5ZcFCQOXSsaC9Qbp3923cUo/Q2tQg
+ IHXqw79Kc9C8HYwIWNltR3D8iMW8XbnVdFoIwfBv8OcpOR9YabyOKstm2NP4cEtJm1ys=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tIR6H-0003Jo-8K for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Dec 2024 11:29:53 +0000
+ id 1tIR7u-0003TI-9W for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Dec 2024 11:31:34 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id ED3B25C6C59;
- Tue,  3 Dec 2024 11:29:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82B2FC4CECF;
- Tue,  3 Dec 2024 11:29:46 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id F2E9B5C6C57;
+ Tue,  3 Dec 2024 11:30:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 35477C4CECF;
+ Tue,  3 Dec 2024 11:31:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1733225387;
- bh=X74TWF1ytlB9VTMizceG8lOApzyi9F37hg+n2wwuj7k=;
+ s=k20201202; t=1733225488;
+ bh=X/VoXBwRzqHrjBC7we7M7j9lYIb/a5xRXw8nAILemH8=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=EQUYTiJuPE7WCmO1Beh8Iszq3oiA40aUpK7YYVeS9YLs1GbjYla+Kq6bBvS6iJSld
- cUmcFyo9xy3K+EPbOx786HbZIHZ4I8cwr7IbFfj5jjKmpp4+azj6NAipccg8Avbbeq
- Ah74uqf2x2M2ge+iF5bbCGg0mnqVByvCL9ICueQMccU4eNYr+GNXoysXPqsLskr5f2
- bFNwW4l6O7kRChOWHEjM9gUM8xzbmEyI+2n3d4TAzZZUYs/BM3l7hkUm3M3PqnF2cL
- e09HLuSsfxhtIszptBgU0R2Wd2uoAdRExTfxc3vWvlY0p9q5VHywq7Jml1xi1MfbiJ
- REQPfr0v5quXA==
-Message-ID: <0d23e561-65b9-4e9e-ad56-ae4e44bd91ed@kernel.org>
-Date: Tue, 3 Dec 2024 19:29:46 +0800
+ b=kf1t8nb89qvPeclZwI9es92HZMlVp0G/nEqOdUfXHkkFpq9KLpX+AHWNRzPxtZ21e
+ ny8pTHr7/p9FoUWEfm29SlLxznH4nZfmnQvvTsLY25UoXIln+XIURatlO1hG7uKhNF
+ e36gDQCpzdDdQxssvg9QB/vhjbIxTlEXwXV3CJj8vofnqSFcSVDTtNwg+bP/vL7yBd
+ 6Zs/hvJgQtiM715idAw2vK9Xc/GdpHLMNLnswg5dSZCsO/GR70+Hme5bZfv2VEdD7f
+ 1c+cBc0gXV+S0EkghO9KxyRjYm4HzcgRxLzA11Usp9CwiBU6NXoeds/OFN5k1LalcL
+ 2hRZEMrW85dDw==
+Message-ID: <1d74a89c-c1b0-40a0-9f53-6b7682c527c9@kernel.org>
+Date: Tue, 3 Dec 2024 19:31:28 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Zorro Lang <zlang@redhat.com>
-References: <20241202114149.2666-1-chao@kernel.org>
- <20241202192835.seditdylbigpxte5@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+To: Leo Stone <leocstone@gmail.com>, jaegeuk@kernel.org
+References: <20241202171304.5430-1-leocstone@gmail.com>
 Content-Language: en-US
 Autocrypt: addr=chao@kernel.org; keydata=
  xsFNBFYs6bUBEADJuxYGZRMvAEySns+DKVtVQRKDYcHlmj+s9is35mtlhrLyjm35FWJY099R
@@ -104,45 +103,44 @@ Autocrypt: addr=chao@kernel.org; keydata=
  92Qh98hAj3cMFKtEVbLKJvrc2AO+mQlS7zl1qWblEhpZnXi05S1AoT0gDW2lwe54VfT3ySon
  8Klpbp5W4eEoY21tLwuNzgUMxmycfM4GaJWNCncKuMT4qGVQO9SPFs0vgUrdBUC5Pn5ZJ46X
  mZA0DUz0S8BJtYGI0DUC/jAKhIgy1vAx39y7sAshwu2VILa71tXJ
-In-Reply-To: <20241202192835.seditdylbigpxte5@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+In-Reply-To: <20241202171304.5430-1-leocstone@gmail.com>
 X-Spam-Score: -8.2 (--------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/12/3 3:28, Zorro Lang wrote: > On Mon, Dec 02, 2024
- at 07:41:47PM +0800, Chao Yu wrote: >> The bug related to this regression
- testcase has been fixed by commit >> d5c367ef8287 ("f2fs: fix f2fs [...] 
+ Content preview:  On 2024/12/3 1:12, Leo Stone wrote: > The syzbot reproducer
+ mounts a f2fs image, then tries to unlink an > existing file. However, the
+ unlinked file already has a link count of 0 > when it is read for [...] 
  Content analysis details:   (-8.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-accredit.habeas.com]
+ [139.178.84.217 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [139.178.84.217 listed in bl.score.senderscore.com]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tIR6H-0003Jo-8K
-Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs/005: update commit id in
- _fixed_by_kernel_commit line
+X-Headers-End: 1tIR7u-0003TI-9W
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: Add check for deleted inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -156,59 +154,27 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: syzbot+b01a36acd7007e273a83@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/12/3 3:28, Zorro Lang wrote:
-> On Mon, Dec 02, 2024 at 07:41:47PM +0800, Chao Yu wrote:
->> The bug related to this regression testcase has been fixed by commit
->> d5c367ef8287 ("f2fs: fix f2fs_bug_on when uninstalling filesystem call
->> f2fs_evict_inode."), let's update commit id in _fixed_by_kernel_commit
->> line.
->>
->> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
->> Signed-off-by: Chao Yu <chao@kernel.org>
->> ---
->>   tests/f2fs/005 | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/tests/f2fs/005 b/tests/f2fs/005
->> index a817d51a..33d4fdb9 100755
->> --- a/tests/f2fs/005
->> +++ b/tests/f2fs/005
->> @@ -11,7 +11,7 @@
->>   . ./common/preamble
->>   _begin_fstest auto quick
->>   
->> -_fixed_by_kernel_commit xxxxxxxxxxxx \
->> +_fixed_by_kernel_commit d5c367ef8287 \
->>   	"f2fs: fix f2fs_bug_on when uninstalling filesystem call f2fs_evict_inode."
+On 2024/12/3 1:12, Leo Stone wrote:
+> The syzbot reproducer mounts a f2fs image, then tries to unlink an
+> existing file. However, the unlinked file already has a link count of 0
+> when it is read for the first time in do_read_inode().
 > 
-> I think we don't need to use 3 patches. As you just add missed commit id number,
-> just merge them into one and named "f2fs: add commit id to _fixed_by_kernel_commit".
-> Or if you hope I can do that when I merge it, feel free to tell me :)
+> Add a check to sanity_check_inode() for i_nlink == 0.
+> 
+> Reported-by: syzbot+b01a36acd7007e273a83@syzkaller.appspotmail.com
+> Closes: https://syzkaller.appspot.com/bug?extid=b01a36acd7007e273a83
+> Fixes: 39a53e0ce0df ("f2fs: add superblock and major in-memory structure")
+> Signed-off-by: Leo Stone <leocstone@gmail.com>
 
-Zorro,
-
-I've sent a new patch, can you please help to review it? thank you.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-
-> 
-> Others look good to me, with above change:
-> 
-> Reviewed-by: Zorro Lang <zlang@redhat.com>
-> 
->>   
->>   _require_scratch
->> -- 
->> 2.40.1
->>
-> 
-
 
 
 _______________________________________________
