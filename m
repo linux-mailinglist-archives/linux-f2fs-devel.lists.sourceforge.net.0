@@ -2,63 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BABDE9E40D8
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Dec 2024 18:12:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93B799E40DC
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Dec 2024 18:13:03 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tIsvf-0000c7-UE;
-	Wed, 04 Dec 2024 17:12:47 +0000
+	id 1tIsvu-0000dN-BH;
+	Wed, 04 Dec 2024 17:13:02 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1tIsve-0000c0-GH
+ (envelope-from <sashal@kernel.org>) id 1tIsvs-0000d5-9o
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Dec 2024 17:12:46 +0000
+ Wed, 04 Dec 2024 17:13:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sNJKkMLSW7rQYfn+L+Pbh0cfUmU6NDUjvNHAwNBSDnI=; b=MSUK+7wQIOgGpb3NSJwv7OTB6E
- u81uSyWQYxKP0naPk9waYGrb7vXz0dYfJkZmFxlNV02dZc27rjHp7b2jwYVJoCZ0Q2iNtA4uL8gmA
- 5/0XB0hw7/jyvyHgelUa3EOur7Qw2wd7/dGSGHFG4W9/wjgT0DfPvkzvhaJFHRVqytbw=;
+ bh=elK7vN6PSzZPKJGu5FuxXin1NL9hJQIAxwwNYcZSYoM=; b=YeiVtMdQ04Hh8k4sMQKOU0G4Fs
+ vWjMjiab6N/MGUywJAUcR0hvUCpUWGQorksRLE1EPw+pfYlEjfsthfHQoxzp0hCS8XqQ3IfYCWjH/
+ E1NZOj9vlAWPsNCLB8vXlBdLVGWwf4yu7QfK0+G+rbhsoJxGEo0o8fwES4sXs4uSrkvE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=sNJKkMLSW7rQYfn+L+Pbh0cfUmU6NDUjvNHAwNBSDnI=; b=n
- UQELEeKFOb2dCg2+vnbYxhMibcFSbTXy1JJj/rkKfz/DTvpb/T8TYJYTPLsyyXWqi+hCxlqcNg9rK
- Bso1hKBLJ0mwrEJ8bS50jTcJqeODMnoJ37h4bf885heZJWCen50+kez0tvFVOvkvk47PwBWTFCqzV
- ZTj2UglslUUuA1sU=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=elK7vN6PSzZPKJGu5FuxXin1NL9hJQIAxwwNYcZSYoM=; b=VbF77CHxNYhCQ0Jo9ZJY8nVxuo
+ ++ktS6odXxQ3Bw5bG/lBUGW+0DEXSay9simQ57yQ8JCVu4/f6Ubamdfxq7UV5fOgpQ5gUhXM2R3Km
+ ODZJqsE8XfpvB5EFhL3aymnfmx0EnQvgcZHxjA5A6BjkzsuTkpsxeBIFvWKhO+bZb2iw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tIsvd-0006GK-RZ for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Dec 2024 17:12:46 +0000
+ id 1tIsvr-0006HO-NL for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Dec 2024 17:13:00 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 9D32D5C031D;
- Wed,  4 Dec 2024 17:11:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EA00C4CECD;
- Wed,  4 Dec 2024 17:12:34 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 7CF0B5C57AC
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  4 Dec 2024 17:12:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D3AFC4CECD;
+ Wed,  4 Dec 2024 17:12:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1733332355;
- bh=Ecb2xP1M0ahpfio66Drn0zqM7f8flqfdYAgcLDqoQis=;
- h=From:To:Cc:Subject:Date:From;
- b=clQAYRY1XQ4RnHF5elzhrxn/31I1ucvqOrQiNtyeR36RD8K9fEfmVllUuFkK0Yw8x
- fI8GZWuTLYKJZ2kr9EDzMUuFIUqERwlKj7ut3Na9DvvoocNilXahsYXj9+MuTu9RE2
- 3e2dzyRq1g2IOkTYynozSnJPKOcVx8ynhORsP2MSVnidFxW7lQij62oM436x40yXFd
- J3IxwUBMkQy21r1shg6dXqdEr8wBsTdSkVe+pz1MozFwCNsgz3VQ2pyLO8zZOP6vI0
- +qVwDcQqd+RJd3SMmlPlNZ/pXD1AUcb5/8IhiPHR7U2EShgBiD7yfRbq5TbQvAg4dJ
- /efKCb68X6KXA==
+ s=k20201202; t=1733332374;
+ bh=2OlqHmELl46jB5lrqzFLdLovDDf5gGuie87yirSOO2g=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=s9YaH1mPZx2k4ofjQjpFro7Vp/YKFcvlBdX2mq/JcBOkzul7EnjXDPFSAGuDYXYwv
+ NCuko20qN1+GYeAtZfPKJ/wgLlUdGaqln9UrJYtnO6OngrNULgLJ/qDuYcNNbxyO6w
+ y0tN90LM+y0g/9RBkmAS+HfHmaOF2ariymnCjZnWKCe7cI6d9Uo5UZh1UCvSnbHb3O
+ xRc63l4c5d7CjMoAaxnYY/fMAErPsfftF/hEWHQp9qN9WXU/BVLSJAirfsdNmYm98L
+ JKStrKz4jgiLsOZ7Z3aBSZ4ORkykHx4Nd615DcV0e5i8ar1cXI7QhQw4Wv5sofwvxH
+ mJKgqs8nrPWQA==
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed,  4 Dec 2024 11:00:58 -0500
-Message-ID: <20241204160115.2216718-1-sashal@kernel.org>
+Date: Wed,  4 Dec 2024 11:01:08 -0500
+Message-ID: <20241204160115.2216718-11-sashal@kernel.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241204160115.2216718-1-sashal@kernel.org>
+References: <20241204160115.2216718-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -70,11 +73,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Qi Han <hanqi@vivo.com> [ Upstream commit
- d5c367ef8287fb4d235c46a2f8c8d68715f3a0ca
- ] creating a large files during checkpoint disable until it runs out of space
- and then delete it, then remount to enable checkpoint again, and then unmount
- the filesystem triggers the f2fs_bug_on as bel [...] 
+ Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
+ 81520c684ca67aea6a589461a3caebb9b11dcc90
+ ] If fs corruption occurs in f2fs_new_node_page(), let's print more information
+ about corrupted metadata into kernel log. 
  Content analysis details:   (-8.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -100,9 +102,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tIsvd-0006GK-RZ
-Subject: [f2fs-dev] [PATCH AUTOSEL 6.6 01/12] f2fs: fix f2fs_bug_on when
- uninstalling filesystem call f2fs_evict_inode.
+X-Headers-End: 1tIsvr-0006HO-NL
+Subject: [f2fs-dev] [PATCH AUTOSEL 6.6 11/12] f2fs: print message if
+ fscorrupted was found in f2fs_new_node_page()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,87 +119,47 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: Sasha Levin via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Sasha Levin <sashal@kernel.org>
 Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Qi Han <hanqi@vivo.com>, linux-f2fs-devel@lists.sourceforge.net
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Qi Han <hanqi@vivo.com>
+From: Chao Yu <chao@kernel.org>
 
-[ Upstream commit d5c367ef8287fb4d235c46a2f8c8d68715f3a0ca ]
+[ Upstream commit 81520c684ca67aea6a589461a3caebb9b11dcc90 ]
 
-creating a large files during checkpoint disable until it runs out of
-space and then delete it, then remount to enable checkpoint again, and
-then unmount the filesystem triggers the f2fs_bug_on as below:
+If fs corruption occurs in f2fs_new_node_page(), let's print
+more information about corrupted metadata into kernel log.
 
-------------[ cut here ]------------
-kernel BUG at fs/f2fs/inode.c:896!
-CPU: 2 UID: 0 PID: 1286 Comm: umount Not tainted 6.11.0-rc7-dirty #360
-Oops: invalid opcode: 0000 [#1] PREEMPT SMP NOPTI
-RIP: 0010:f2fs_evict_inode+0x58c/0x610
-Call Trace:
- __die_body+0x15/0x60
- die+0x33/0x50
- do_trap+0x10a/0x120
- f2fs_evict_inode+0x58c/0x610
- do_error_trap+0x60/0x80
- f2fs_evict_inode+0x58c/0x610
- exc_invalid_op+0x53/0x60
- f2fs_evict_inode+0x58c/0x610
- asm_exc_invalid_op+0x16/0x20
- f2fs_evict_inode+0x58c/0x610
- evict+0x101/0x260
- dispose_list+0x30/0x50
- evict_inodes+0x140/0x190
- generic_shutdown_super+0x2f/0x150
- kill_block_super+0x11/0x40
- kill_f2fs_super+0x7d/0x140
- deactivate_locked_super+0x2a/0x70
- cleanup_mnt+0xb3/0x140
- task_work_run+0x61/0x90
+Meanwhile, it updates to record ERROR_INCONSISTENT_NAT instead
+of ERROR_INVALID_BLKADDR if blkaddr in nat entry is not
+NULL_ADDR which means nat bitmap and nat entry is inconsistent.
 
-The root cause is: creating large files during disable checkpoint
-period results in not enough free segments, so when writing back root
-inode will failed in f2fs_enable_checkpoint. When umount the file
-system after enabling checkpoint, the root inode is dirty in
-f2fs_evict_inode function, which triggers BUG_ON. The steps to
-reproduce are as follows:
-
-dd if=/dev/zero of=f2fs.img bs=1M count=55
-mount f2fs.img f2fs_dir -o checkpoint=disable:10%
-dd if=/dev/zero of=big bs=1M count=50
-sync
-rm big
-mount -o remount,checkpoint=enable f2fs_dir
-umount f2fs_dir
-
-Let's redirty inode when there is not free segments during checkpoint
-is disable.
-
-Signed-off-by: Qi Han <hanqi@vivo.com>
-Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/inode.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ fs/f2fs/node.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index a3e0c92735433..7ad4a92417591 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -788,8 +788,10 @@ int f2fs_write_inode(struct inode *inode, struct writeback_control *wbc)
- 		!is_inode_flag_set(inode, FI_DIRTY_INODE))
- 		return 0;
- 
--	if (!f2fs_is_checkpoint_ready(sbi))
-+	if (!f2fs_is_checkpoint_ready(sbi)) {
-+		f2fs_mark_inode_dirty_sync(inode, true);
- 		return -ENOSPC;
-+	}
- 
- 	/*
- 	 * We need to balance fs here to prevent from producing dirty node pages
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index c765bda3beaac..a555201d81584 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1321,7 +1321,12 @@ struct page *f2fs_new_node_page(struct dnode_of_data *dn, unsigned int ofs)
+ 		err = -EFSCORRUPTED;
+ 		dec_valid_node_count(sbi, dn->inode, !ofs);
+ 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+-		f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
++		f2fs_warn_ratelimited(sbi,
++			"f2fs_new_node_page: inconsistent nat entry, "
++			"ino:%u, nid:%u, blkaddr:%u, ver:%u, flag:%u",
++			new_ni.ino, new_ni.nid, new_ni.blk_addr,
++			new_ni.version, new_ni.flag);
++		f2fs_handle_error(sbi, ERROR_INCONSISTENT_NAT);
+ 		goto fail;
+ 	}
+ #endif
 -- 
 2.43.0
 
