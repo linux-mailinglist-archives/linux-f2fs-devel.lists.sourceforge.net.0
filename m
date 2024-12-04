@@ -2,69 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97D139E40D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Dec 2024 18:12:36 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BABDE9E40D8
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Dec 2024 18:12:49 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tIsvT-0006vM-6V;
-	Wed, 04 Dec 2024 17:12:35 +0000
+	id 1tIsvf-0000c7-UE;
+	Wed, 04 Dec 2024 17:12:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1tIsvR-0006v5-2n
+ (envelope-from <sashal@kernel.org>) id 1tIsve-0000c0-GH
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Dec 2024 17:12:33 +0000
+ Wed, 04 Dec 2024 17:12:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bmESxmNg12tkBkaMfzJOEZ6YL8d21ZcJf5nuxJLYNuU=; b=k0erEOJFTLYMxULavd6r1dgXIX
- i8DyxHNOz/Iqs2QhnGnGsRBkVSFLHGHzxr3fMH3ULRLDaXoIIRbliLM1HaKeBhJO/4yhEYb+djy7W
- bcZRYe56r8wCeBIUW/PEb4pyo8Fh77/Mqk89vDWE3sx2Iid32PjqEefv1800/JwRU0cQ=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=bmESxmNg12tkBkaMfzJOEZ6YL8d21ZcJf5nuxJLYNuU=; b=eOOH9uFcPRx6Ibm9OGh7N/7lbC
- Oq+38OQSQq9SVQQ6csavPa5+qQDDpFOnSEzj1e1aEd+86c/B15K1WeCkFL3S4xrbugYiBmWXR4nx+
- CrsY9vRi6Ce1em13Rtn/zv9Huu3zb7Ayb3bQB2AjoYp97ns/wdYuHMIliITnH5WJTU9s=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=sNJKkMLSW7rQYfn+L+Pbh0cfUmU6NDUjvNHAwNBSDnI=; b=MSUK+7wQIOgGpb3NSJwv7OTB6E
+ u81uSyWQYxKP0naPk9waYGrb7vXz0dYfJkZmFxlNV02dZc27rjHp7b2jwYVJoCZ0Q2iNtA4uL8gmA
+ 5/0XB0hw7/jyvyHgelUa3EOur7Qw2wd7/dGSGHFG4W9/wjgT0DfPvkzvhaJFHRVqytbw=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=sNJKkMLSW7rQYfn+L+Pbh0cfUmU6NDUjvNHAwNBSDnI=; b=n
+ UQELEeKFOb2dCg2+vnbYxhMibcFSbTXy1JJj/rkKfz/DTvpb/T8TYJYTPLsyyXWqi+hCxlqcNg9rK
+ Bso1hKBLJ0mwrEJ8bS50jTcJqeODMnoJ37h4bf885heZJWCen50+kez0tvFVOvkvk47PwBWTFCqzV
+ ZTj2UglslUUuA1sU=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tIsvQ-0006F2-9V for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Dec 2024 17:12:33 +0000
+ id 1tIsvd-0006GK-RZ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Dec 2024 17:12:46 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 13FE05C02C6;
- Wed,  4 Dec 2024 17:11:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8D81C4CED1;
- Wed,  4 Dec 2024 17:12:25 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 9D32D5C031D;
+ Wed,  4 Dec 2024 17:11:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EA00C4CECD;
+ Wed,  4 Dec 2024 17:12:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1733332346;
- bh=RT25nEuL3pPhxMt3tsbeuG3Jf0YoszoV6K+VlJp8YQU=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gtjy3/PABDzHAkUkpaYkHbYfQA9wMoqs2db3ypMV0OpyMttebmWhDlaAlhb+zHO17
- IGBe0zfI3QmDykimwYsYsXbVJL2VxOSxSekaP6eJHYL09nNHamle1/mSgjhvvWuN6g
- epuakFr62aoaCGAY6cxcCvg0TulElgi1dMCclTTk8pEXQGB4mX8R4xWtZFrKkoqrbP
- z4iSkO4xoCACoOf+1urCJqN/PUA5TLsGjaZlpFXDmlopnHryuhifu6B/HXyRdARR9a
- S3wjdqbghkn980jUbq76uBCgM3WN6/uvadEaov7UMFPeWPmDzjx3TfKhlqR60mqxx+
- LFRmpYaZ0Sc0Q==
+ s=k20201202; t=1733332355;
+ bh=Ecb2xP1M0ahpfio66Drn0zqM7f8flqfdYAgcLDqoQis=;
+ h=From:To:Cc:Subject:Date:From;
+ b=clQAYRY1XQ4RnHF5elzhrxn/31I1ucvqOrQiNtyeR36RD8K9fEfmVllUuFkK0Yw8x
+ fI8GZWuTLYKJZ2kr9EDzMUuFIUqERwlKj7ut3Na9DvvoocNilXahsYXj9+MuTu9RE2
+ 3e2dzyRq1g2IOkTYynozSnJPKOcVx8ynhORsP2MSVnidFxW7lQij62oM436x40yXFd
+ J3IxwUBMkQy21r1shg6dXqdEr8wBsTdSkVe+pz1MozFwCNsgz3VQ2pyLO8zZOP6vI0
+ +qVwDcQqd+RJd3SMmlPlNZ/pXD1AUcb5/8IhiPHR7U2EShgBiD7yfRbq5TbQvAg4dJ
+ /efKCb68X6KXA==
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed,  4 Dec 2024 11:00:38 -0500
-Message-ID: <20241204160044.2216380-13-sashal@kernel.org>
+Date: Wed,  4 Dec 2024 11:00:58 -0500
+Message-ID: <20241204160115.2216718-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241204160044.2216380-1-sashal@kernel.org>
-References: <20241204160044.2216380-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.11.10
+X-stable-base: Linux 6.6.63
 X-Spam-Score: -8.2 (--------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,11 +70,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
- 3fc5d5a182f6a1f8bd4dc775feb54c369dd2c343
- ] We use rwlock to protect core structure data of extent tree during its
- shrink, however, if there is a huge number of extent nodes in extent tree,
- during shrink of extent tree, it may hold rwlock for a [...] 
+ Content preview: From: Qi Han <hanqi@vivo.com> [ Upstream commit
+ d5c367ef8287fb4d235c46a2f8c8d68715f3a0ca
+ ] creating a large files during checkpoint disable until it runs out of space
+ and then delete it, then remount to enable checkpoint again, and then unmount
+ the filesystem triggers the f2fs_bug_on as bel [...] 
  Content analysis details:   (-8.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -102,9 +100,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tIsvQ-0006F2-9V
-Subject: [f2fs-dev] [PATCH AUTOSEL 6.11 13/13] f2fs: fix to shrink read
- extent node in batches
+X-Headers-End: 1tIsvd-0006GK-RZ
+Subject: [f2fs-dev] [PATCH AUTOSEL 6.6 01/12] f2fs: fix f2fs_bug_on when
+ uninstalling filesystem call f2fs_evict_inode.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,186 +116,88 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Sasha Levin via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Sasha Levin <sashal@kernel.org>
-Cc: Xiuhong Wang <xiuhong.wang@unisoc.com>, Sasha Levin <sashal@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, Zhiguo Niu <zhiguo.niu@unisoc.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Qi Han <hanqi@vivo.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <chao@kernel.org>
+From: Qi Han <hanqi@vivo.com>
 
-[ Upstream commit 3fc5d5a182f6a1f8bd4dc775feb54c369dd2c343 ]
+[ Upstream commit d5c367ef8287fb4d235c46a2f8c8d68715f3a0ca ]
 
-We use rwlock to protect core structure data of extent tree during
-its shrink, however, if there is a huge number of extent nodes in
-extent tree, during shrink of extent tree, it may hold rwlock for
-a very long time, which may trigger kernel hang issue.
+creating a large files during checkpoint disable until it runs out of
+space and then delete it, then remount to enable checkpoint again, and
+then unmount the filesystem triggers the f2fs_bug_on as below:
 
-This patch fixes to shrink read extent node in batches, so that,
-critical region of the rwlock can be shrunk to avoid its extreme
-long time hold.
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/inode.c:896!
+CPU: 2 UID: 0 PID: 1286 Comm: umount Not tainted 6.11.0-rc7-dirty #360
+Oops: invalid opcode: 0000 [#1] PREEMPT SMP NOPTI
+RIP: 0010:f2fs_evict_inode+0x58c/0x610
+Call Trace:
+ __die_body+0x15/0x60
+ die+0x33/0x50
+ do_trap+0x10a/0x120
+ f2fs_evict_inode+0x58c/0x610
+ do_error_trap+0x60/0x80
+ f2fs_evict_inode+0x58c/0x610
+ exc_invalid_op+0x53/0x60
+ f2fs_evict_inode+0x58c/0x610
+ asm_exc_invalid_op+0x16/0x20
+ f2fs_evict_inode+0x58c/0x610
+ evict+0x101/0x260
+ dispose_list+0x30/0x50
+ evict_inodes+0x140/0x190
+ generic_shutdown_super+0x2f/0x150
+ kill_block_super+0x11/0x40
+ kill_f2fs_super+0x7d/0x140
+ deactivate_locked_super+0x2a/0x70
+ cleanup_mnt+0xb3/0x140
+ task_work_run+0x61/0x90
 
-Reported-by: Xiuhong Wang <xiuhong.wang@unisoc.com>
-Closes: https://lore.kernel.org/linux-f2fs-devel/20241112110627.1314632-1-xiuhong.wang@unisoc.com/
-Signed-off-by: Xiuhong Wang <xiuhong.wang@unisoc.com>
-Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
+The root cause is: creating large files during disable checkpoint
+period results in not enough free segments, so when writing back root
+inode will failed in f2fs_enable_checkpoint. When umount the file
+system after enabling checkpoint, the root inode is dirty in
+f2fs_evict_inode function, which triggers BUG_ON. The steps to
+reproduce are as follows:
+
+dd if=/dev/zero of=f2fs.img bs=1M count=55
+mount f2fs.img f2fs_dir -o checkpoint=disable:10%
+dd if=/dev/zero of=big bs=1M count=50
+sync
+rm big
+mount -o remount,checkpoint=enable f2fs_dir
+umount f2fs_dir
+
+Let's redirty inode when there is not free segments during checkpoint
+is disable.
+
+Signed-off-by: Qi Han <hanqi@vivo.com>
+Reviewed-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/extent_cache.c | 69 +++++++++++++++++++++++++-----------------
- 1 file changed, 41 insertions(+), 28 deletions(-)
+ fs/f2fs/inode.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index 62ac440d94168..368d9cbdea743 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -346,21 +346,22 @@ static struct extent_tree *__grab_extent_tree(struct inode *inode,
- }
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index a3e0c92735433..7ad4a92417591 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -788,8 +788,10 @@ int f2fs_write_inode(struct inode *inode, struct writeback_control *wbc)
+ 		!is_inode_flag_set(inode, FI_DIRTY_INODE))
+ 		return 0;
  
- static unsigned int __free_extent_tree(struct f2fs_sb_info *sbi,
--					struct extent_tree *et)
-+				struct extent_tree *et, unsigned int nr_shrink)
- {
- 	struct rb_node *node, *next;
- 	struct extent_node *en;
--	unsigned int count = atomic_read(&et->node_cnt);
-+	unsigned int count;
- 
- 	node = rb_first_cached(&et->root);
--	while (node) {
-+
-+	for (count = 0; node && count < nr_shrink; count++) {
- 		next = rb_next(node);
- 		en = rb_entry(node, struct extent_node, rb_node);
- 		__release_extent_node(sbi, et, en);
- 		node = next;
- 	}
- 
--	return count - atomic_read(&et->node_cnt);
-+	return count;
- }
- 
- static void __drop_largest_extent(struct extent_tree *et,
-@@ -579,6 +580,30 @@ static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
- 	return en;
- }
- 
-+static unsigned int __destroy_extent_node(struct inode *inode,
-+					enum extent_type type)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
-+	unsigned int nr_shrink = type == EX_READ ?
-+				READ_EXTENT_CACHE_SHRINK_NUMBER :
-+				AGE_EXTENT_CACHE_SHRINK_NUMBER;
-+	unsigned int node_cnt = 0;
-+
-+	if (!et || !atomic_read(&et->node_cnt))
-+		return 0;
-+
-+	while (atomic_read(&et->node_cnt)) {
-+		write_lock(&et->lock);
-+		node_cnt += __free_extent_tree(sbi, et, nr_shrink);
-+		write_unlock(&et->lock);
+-	if (!f2fs_is_checkpoint_ready(sbi))
++	if (!f2fs_is_checkpoint_ready(sbi)) {
++		f2fs_mark_inode_dirty_sync(inode, true);
+ 		return -ENOSPC;
 +	}
-+
-+	f2fs_bug_on(sbi, atomic_read(&et->node_cnt));
-+
-+	return node_cnt;
-+}
-+
- static void __update_extent_tree_range(struct inode *inode,
- 			struct extent_info *tei, enum extent_type type)
- {
-@@ -717,9 +742,6 @@ static void __update_extent_tree_range(struct inode *inode,
- 		}
- 	}
  
--	if (is_inode_flag_set(inode, FI_NO_EXTENT))
--		__free_extent_tree(sbi, et);
--
- 	if (et->largest_updated) {
- 		et->largest_updated = false;
- 		updated = true;
-@@ -737,6 +759,9 @@ static void __update_extent_tree_range(struct inode *inode,
- out_read_extent_cache:
- 	write_unlock(&et->lock);
- 
-+	if (is_inode_flag_set(inode, FI_NO_EXTENT))
-+		__destroy_extent_node(inode, EX_READ);
-+
- 	if (updated)
- 		f2fs_mark_inode_dirty_sync(inode, true);
- }
-@@ -899,10 +924,14 @@ static unsigned int __shrink_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink
- 	list_for_each_entry_safe(et, next, &eti->zombie_list, list) {
- 		if (atomic_read(&et->node_cnt)) {
- 			write_lock(&et->lock);
--			node_cnt += __free_extent_tree(sbi, et);
-+			node_cnt += __free_extent_tree(sbi, et,
-+					nr_shrink - node_cnt - tree_cnt);
- 			write_unlock(&et->lock);
- 		}
--		f2fs_bug_on(sbi, atomic_read(&et->node_cnt));
-+
-+		if (atomic_read(&et->node_cnt))
-+			goto unlock_out;
-+
- 		list_del_init(&et->list);
- 		radix_tree_delete(&eti->extent_tree_root, et->ino);
- 		kmem_cache_free(extent_tree_slab, et);
-@@ -1041,23 +1070,6 @@ unsigned int f2fs_shrink_age_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink
- 	return __shrink_extent_tree(sbi, nr_shrink, EX_BLOCK_AGE);
- }
- 
--static unsigned int __destroy_extent_node(struct inode *inode,
--					enum extent_type type)
--{
--	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
--	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
--	unsigned int node_cnt = 0;
--
--	if (!et || !atomic_read(&et->node_cnt))
--		return 0;
--
--	write_lock(&et->lock);
--	node_cnt = __free_extent_tree(sbi, et);
--	write_unlock(&et->lock);
--
--	return node_cnt;
--}
--
- void f2fs_destroy_extent_node(struct inode *inode)
- {
- 	__destroy_extent_node(inode, EX_READ);
-@@ -1066,7 +1078,6 @@ void f2fs_destroy_extent_node(struct inode *inode)
- 
- static void __drop_extent_tree(struct inode *inode, enum extent_type type)
- {
--	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
- 	bool updated = false;
- 
-@@ -1074,7 +1085,6 @@ static void __drop_extent_tree(struct inode *inode, enum extent_type type)
- 		return;
- 
- 	write_lock(&et->lock);
--	__free_extent_tree(sbi, et);
- 	if (type == EX_READ) {
- 		set_inode_flag(inode, FI_NO_EXTENT);
- 		if (et->largest.len) {
-@@ -1083,6 +1093,9 @@ static void __drop_extent_tree(struct inode *inode, enum extent_type type)
- 		}
- 	}
- 	write_unlock(&et->lock);
-+
-+	__destroy_extent_node(inode, type);
-+
- 	if (updated)
- 		f2fs_mark_inode_dirty_sync(inode, true);
- }
+ 	/*
+ 	 * We need to balance fs here to prevent from producing dirty node pages
 -- 
 2.43.0
 
