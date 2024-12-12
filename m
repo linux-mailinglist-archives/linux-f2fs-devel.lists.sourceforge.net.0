@@ -2,126 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1BAC9EEB89
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Dec 2024 16:26:02 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA5AD9EEF26
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Dec 2024 17:11:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tLl4d-0002fu-7p;
-	Thu, 12 Dec 2024 15:25:55 +0000
+	id 1tLlmp-00064R-5T;
+	Thu, 12 Dec 2024 16:11:35 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1tLl4L-0002fa-V6
+ (envelope-from <jaegeuk@kernel.org>) id 1tLlmn-00064K-SV
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Dec 2024 15:25:38 +0000
+ Thu, 12 Dec 2024 16:11:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rSi1xdI5od5ZCAM650iQb9lLqRtVtvFFaJK5BCH8wRM=; b=QL5DHcpiyes+TcrZZH7FjRYjSf
- AUgWlZtZAbKCCLfBS/FB55lklxDN6CGU+OK9CVHV0sKRvXu4s3SSDlf2ypa/fwOva+XpwydCMAULJ
- qZokEU8ePKSGb3zqtUL0sDvUjXDshx70kUgrMCcPpvadYXrC3259QqylgFwUE3dnzp64=;
+ bh=iTJEB9fzU7wKbfIiUUbK9I5CXeV6gWJbSWRoN4OaakQ=; b=d2zzWQ5ZDsGFww95k4iIKayKP/
+ Th9n7Y31Exc8y01SQ0j3TsZ/KyP2fb9UQd7CJtMGJPbKLeIr5QY+BcUKeMpUaJj0kHTWAts2dmard
+ 7bAwUDNhVyf/VNtMlA1USDTRZZLipn+BKDLXeE1vM53vaHgjibV2VOAdWdJHQfxqcBMY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=rSi1xdI5od5ZCAM650iQb9lLqRtVtvFFaJK5BCH8wRM=; b=KFwLzvWAuQL31crVMqVwngIp0P
- re3QTlUi6y9FMSLuxZyJdXWGEwC0YseV1Vo9B4MRjfdu+tpjB0iH6IKRWPpLcap0D+eNcWy7lACT1
- 5H4IkjK2fzVKdQAnuCjBVBNPsk71B6THvAx18qMQ1Ot3sK1ECHHY4L7zwYw8FP4Hw3lU=;
+ bh=iTJEB9fzU7wKbfIiUUbK9I5CXeV6gWJbSWRoN4OaakQ=; b=fLEKA45ZhQoT7YnfeTNuTYZN3+
+ dkHUZH+m47ojTsrfiVTTWCCisXn2r/SdeA8LErABsAfo8rBwNCwZ+5EnFI4rsUJFx/qzIsnQGJIMh
+ LV9O8w86kOr6006AcFEc+m6RKCnVm1nQDaZvQ8km3H+0YSkZ/gsib419JYGgC06tqIrA=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tLl4M-0002K7-3f for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Dec 2024 15:25:38 +0000
+ id 1tLlmn-0005td-3P for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 12 Dec 2024 16:11:33 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 48C545C61EB
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 12 Dec 2024 15:24:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 607CFC4CED7
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 12 Dec 2024 15:25:27 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 5A1BF5C69BD;
+ Thu, 12 Dec 2024 16:10:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E30BC4CEDF;
+ Thu, 12 Dec 2024 16:11:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734017127;
- bh=rSi1xdI5od5ZCAM650iQb9lLqRtVtvFFaJK5BCH8wRM=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=cxsJ8NUjiC4hrsKDzNn+S5Hxl4FJa5twdyQoLbwUfctqIacHzZifT2d07WQ1NuXZY
- im6LVSktflW3lpTDGuE3GIKgM49tFp3iW/ZaYh9hNEiaslHrOiXJUZJQz383V5PUAH
- fdAHHxIuliPD3Hq0fbDRQvNM9yanecty2D4uiU45dIv6WDhsdec5S1FZwHQsYpnv1/
- lAFWwjlJZCb8zk9Fs7p8SuQgSKdhL8H3GCj5zgUMlOWuZI1Paxg+q1R+a4yGd0x87c
- WDyydagg2hGvHjtvEveQBtU8UdYeDTBw69zsp/yFUKtfVesvw9ikNHiv0icq48EaUh
- brCl4q4yT8ypw==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 52267C3279F; Thu, 12 Dec 2024 15:25:27 +0000 (UTC)
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 12 Dec 2024 15:25:27 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: blocking
-X-Bugzilla-Who: chao@kernel.org
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: CODE_FIX
-X-Bugzilla-Priority: P3
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-219586-202145-3ER8J0qwQV@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-219586-202145@https.bugzilla.kernel.org/>
-References: <bug-219586-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1734019882;
+ bh=dZ4VZAM7FcWZqocKTmrpQrhxyIrk8tVMApXVzVdvLhI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=kx3uPknHgsY5YLmOlqZ+PYIfqD4j8GA0jZpQxNfBxH+7fhXIHv+aaqrvTMYP1V+/2
+ FtOt1kkjWv6xZOuJYtL1ovJfo2dpPpgJP/zfDvvq2UuTSt/V+G8ZJ3pSNQ8LAaADlG
+ KDB/nh/gI+5eyUb9NHCOsmzuc1wEv6PQq9ZW+CRZ0XlarK3720M8FBN1B+817yvgCY
+ a7JxrLkwLBSUWmq3W4QjavY9iYvFCc5EUXs8bZL6R7wMOUlIKNKVFJq4uQ6MvF4SG+
+ FKz1iP+tBJR7obyvb5XZlm6/dZicQRFHEZ1hs5C3OCbiRc8dS/PqYwpJZsn5ijPOgy
+ Dn+D5ozW0ArHw==
+Date: Thu, 12 Dec 2024 16:11:20 +0000
+To: Dan Carpenter <dan.carpenter@linaro.org>
+Message-ID: <Z1sLKDtRa3wX2Z9g@google.com>
+References: <CGME20240819083433epcas1p3861b773a5b21eea6f0332036a71bb5d7@epcas1p3.samsung.com>
+ <20240819083430.31852-1-youngjin.gil@samsung.com>
+ <644671fc-b35d-4c53-ae25-356963466339@stanley.mountain>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <644671fc-b35d-4c53-ae25-356963466339@stanley.mountain>
 X-Spam-Score: -5.7 (-----)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=219586 --- Comment
-    #5 from Chao Yu (chao@kernel.org) --- (In reply to HanQi from comment #0)
-    > Hi everybody, > The f2fs filesystem is unable to read some files with special
-    characters, > such as ❤️, afte [...] 
- 
+ Content preview:  On 12/12, Dan Carpenter wrote: > On Mon, Aug 19,
+ 2024 at 05:34:30PM
+ +0900, Yeongjin Gil wrote: > > In f2fs_do_write_data_page, when the data
+ block is NULL_ADDR, it skips > > writepage considering that [...] 
  Content analysis details:   (-5.7 points, 6.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [139.178.84.217 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                            [139.178.84.217 listed in bl.score.senderscore.com]
-  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                         [139.178.84.217 listed in sa-trusted.bondedsender.org]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in bl.score.senderscore.com]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tLl4M-0002K7-3f
-Subject: [f2fs-dev] [Bug 219586] Unable to find file after unicode change
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tLlmn-0005td-3P
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: compress: don't redirty sparse
+ cluster during {, de}compress
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,25 +112,53 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: bugzilla-daemon--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: bugzilla-daemon@kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: daehojeong@google.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Sungjong Seo <sj1557.seo@samsung.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-aHR0cHM6Ly9idWd6aWxsYS5rZXJuZWwub3JnL3Nob3dfYnVnLmNnaT9pZD0yMTk1ODYKCi0tLSBD
-b21tZW50ICM1IGZyb20gQ2hhbyBZdSAoY2hhb0BrZXJuZWwub3JnKSAtLS0KKEluIHJlcGx5IHRv
-IEhhblFpIGZyb20gY29tbWVudCAjMCkKPiBIaSBldmVyeWJvZHksCj4gVGhlIGYyZnMgZmlsZXN5
-c3RlbSBpcyB1bmFibGUgdG8gcmVhZCBzb21lIGZpbGVzIHdpdGggc3BlY2lhbCBjaGFyYWN0ZXJz
-LAo+IHN1Y2ggYXMg4p2k77iPLCBhZnRlciB0aGUga2VybmVsIHdhcyB1cGRhdGVkIHdpdGggdGhl
-IGZvbGxvd2luZyBwYXRjaDoKPiBodHRwczovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgv
-a2VybmVsL2dpdC9zdGFibGUvbGludXguZ2l0L2NvbW1pdC8KPiA/aWQ9MThiNWY0N2U3ZGE0NmQz
-YTBkNzMzMWU0OGJlZmNhZjE1MWVkMmRkZgoKSGkgSGFuUWksIEkgZ3Vlc3MgeW91IGNhbiByZXBv
-cnQgdGhpcyBidWcgdG8gR2FicmllbCBLcmlzbWFuIEJlcnRhemkKPGtyaXNtYW5Aa2VybmVsLm9y
-Zz4/CgpUaGFua3MsCgotLSAKWW91IG1heSByZXBseSB0byB0aGlzIGVtYWlsIHRvIGFkZCBhIGNv
-bW1lbnQuCgpZb3UgYXJlIHJlY2VpdmluZyB0aGlzIG1haWwgYmVjYXVzZToKWW91IGFyZSB3YXRj
-aGluZyB0aGUgYXNzaWduZWUgb2YgdGhlIGJ1Zy4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4
-LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9y
-Z2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On 12/12, Dan Carpenter wrote:
+> On Mon, Aug 19, 2024 at 05:34:30PM +0900, Yeongjin Gil wrote:
+> > In f2fs_do_write_data_page, when the data block is NULL_ADDR, it skips
+> > writepage considering that it has been already truncated.
+> > This results in an infinite loop as the PAGECACHE_TAG_TOWRITE tag is not
+> > cleared during the writeback process for a compressed file including
+> > NULL_ADDR in compress_mode=user.
+> > 
+> > This is the reproduction process:
+> > 
+> > 1. dd if=/dev/zero bs=4096 count=1024 seek=1024 of=testfile
+> > 2. f2fs_io compress testfile
+> > 3. dd if=/dev/zero bs=4096 count=1 conv=notrunc of=testfile
+> > 4. f2fs_io decompress testfile
+> > 
+> > To prevent the problem, let's check whether the cluster is fully
+> > allocated before redirty its pages.
+> > 
+> 
+> We were discussing how to detect these sorts of things in the future.
+> Presumably a user found this by chance?  Xfstests has two tests which deal
+> with compression tests/f2fs/002 and tests/f2fs/007.  But it feels like
+> xfstests is not really the right place for this sort of thing, it would
+> be better as part of some sort of fuzz testing.
+> 
+> What do you think?
+
+Yeah, agreed that we must have tests to catch this. One way may be creating
+some basic disk images having some possible valid layout to see f2fs can
+work as intended. I feel we can put it in xfstests as wel?
+
+Chao, thoughts?
+
+> 
+> regards,
+> dan carpenter
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
