@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C35D9EE981
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Dec 2024 16:00:11 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB2549EEA63
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Dec 2024 16:13:34 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tLkff-0004YJ-NZ;
-	Thu, 12 Dec 2024 15:00:07 +0000
+	id 1tLksU-0001jA-OA;
+	Thu, 12 Dec 2024 15:13:22 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tLkfY-0004XO-Hj
+ (envelope-from <chao@kernel.org>) id 1tLksT-0001j2-VQ
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Dec 2024 15:00:00 +0000
+ Thu, 12 Dec 2024 15:13:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YlSUfr5EAJrkio1B/y9EcVPvi1WLg2N4PwB7A/6KKpA=; b=LiqlNLhP5Whxt0M+UnL/ki6Pxy
- yEu/73OVC9P2heUiiGcyYaZWhhVEDTwNQODepb+FePe7e3hdTRm9E9WkqqH1RUQVy89wI7/IAP9g5
- vySLEZaMKNn/CLIZMj0aCqaNW6aOSelD1z5xxU8o6LAFCifLaDde0N2rWY3lzaJuuhig=;
+ bh=R2Fo4b4Mxd9X0yHVbJclGKcnjXflMtqp05tt1vMeHZA=; b=AvOkTSis6kgEUVv5kNtjsfF+s/
+ L4PUtOuY7mF8nGdm9m+Z8KNXRc6UpYaQRC9OOzU3L40xrHFmpN/IKFQHbJMY013OvAYxTtjW+fL3c
+ PMuHWAWIRRA0MkY5CQ2KR8Dto4DLstLuoYtTX3IuIqg/VaUKWIYu3OmE9iIMdFAZ9BuE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,35 +31,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YlSUfr5EAJrkio1B/y9EcVPvi1WLg2N4PwB7A/6KKpA=; b=h0hrXUxUkFYX2qgcuZJnFtN3km
- C0ubP3niQkYipDynmtcLxnSHQLbGY8p3sXtB3aqjRtCh6WhS/6mBjLl+cgrWbsZOZ4TLE4fNqwTcI
- h+hcgAOGUgxhrLlDuJaEOr9ddXRMQfU6DtL9dTu9bMvS7drc/OFzIEg25gNFAgkZt/30=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=R2Fo4b4Mxd9X0yHVbJclGKcnjXflMtqp05tt1vMeHZA=; b=VsLn+SQcqSIzppRLt81HfT8uh7
+ G7W1YXMCCcFj3vIlcGG1kM/vo+ljpH7vvbx48Q/h0q1QYO4f9ciAxv0rpncjNhDbSFwu09PTvrr2e
+ yU8uSnT/GBMZw5a8jqUwehPsGJwBQdCxBhmk/B0dmvUEQX4Yh/FJ1jW9EDqozaRBL3nk=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tLkfX-0000GS-SN for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Dec 2024 15:00:00 +0000
+ id 1tLksS-0001Mu-O0 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 12 Dec 2024 15:13:21 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 248C35C6323;
- Thu, 12 Dec 2024 14:59:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E3CCC4CECE;
- Thu, 12 Dec 2024 14:59:52 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id CD179A42848;
+ Thu, 12 Dec 2024 15:11:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6CBC9C4CED7;
+ Thu, 12 Dec 2024 15:13:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734015594;
- bh=gj63/lgmCJ83d/T+E2tbXLD8bA62WmiZhc4ojJVHIcQ=;
+ s=k20201202; t=1734016394;
+ bh=6o5Ac02DNGl3GQMajr6PS9SNsNN98EfkqM+hnrpF8E0=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=FVmUShXCl+1y4S7nYzHEA7dvN5ruEiA4tVA2RhmV9eriGPExbKDK8ATHcJHp9nl9W
- vr+P3+b9yj5wdHJZhcaprWP5CpR9s7g/IaA7jFQP41BSM8z5bBOmk3n26fnQ3Pk0K4
- qKykMIFqcKHdd/btnhJTr5gUX9d/Z+DT3CTe1fwB4gWvDL1BowfFk19lMxH1YW2O7b
- TM2jcB8OyR3CvhvszSHOda1e+gCBD4m9VO6kImg8cIaTbvXyB+dkeTBlnb3VQxjNEK
- zRFH9Hdandj1ag8CR+NgrsSktLBxOnRmd8F9yeQ6c/k6dI9X2nRvJ4KRjscMVLKT9G
- RwuGX7Ex2blAg==
-Message-ID: <ec2729cc-2846-49c2-b7ca-4c1efe004cd1@kernel.org>
-Date: Thu, 12 Dec 2024 22:59:54 +0800
+ b=JHlXPAvOGkQ74DU2pwk6yYeoHXmnHCiz+80W656+c3cXKiNTEs1O+wKEkjON+XvV8
+ YCprHU7yGHK7uObDLTcgstMBtHrstImst/0rTXxI4Vl34eoL3NjXJUitCYOaXUddgi
+ ixQMaz+xvW14YZNjP7ALTi6Pk+hYBNX26JLQQgyJeQXu7/o3ncHeXBuMu1UAQOXAZO
+ /HUqzPBRxVfo5oLhfV6IT+edx/YLT33VOqB71b8/BcrGOMtkyxIWBbnKx2u3ssFdc2
+ dtAiIBQY1Mfyfh73/B4BYWenD3aNssi4g1nJfEWx9gie4NdPYG5N1ZtpK9nBPDZIB0
+ iKmtzxA/QLYxg==
+Message-ID: <47759d41-14a1-479e-82bb-7871f57b8089@kernel.org>
+Date: Thu, 12 Dec 2024 23:13:15 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Dmitry Antipov <dmantipov@yandex.ru>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20241204060934.697070-1-dmantipov@yandex.ru>
+To: LongPing Wei <weilongping@oppo.com>, jaegeuk@kernel.org
+References: <20241211001404.4120186-1-weilongping@oppo.com>
 Content-Language: en-US
 Autocrypt: addr=chao@kernel.org; keydata=
  xsFNBFYs6bUBEADJuxYGZRMvAEySns+DKVtVQRKDYcHlmj+s9is35mtlhrLyjm35FWJY099R
@@ -103,46 +103,45 @@ Autocrypt: addr=chao@kernel.org; keydata=
  92Qh98hAj3cMFKtEVbLKJvrc2AO+mQlS7zl1qWblEhpZnXi05S1AoT0gDW2lwe54VfT3ySon
  8Klpbp5W4eEoY21tLwuNzgUMxmycfM4GaJWNCncKuMT4qGVQO9SPFs0vgUrdBUC5Pn5ZJ46X
  mZA0DUz0S8BJtYGI0DUC/jAKhIgy1vAx39y7sAshwu2VILa71tXJ
-In-Reply-To: <20241204060934.697070-1-dmantipov@yandex.ru>
-X-Spam-Score: -5.7 (-----)
+In-Reply-To: <20241211001404.4120186-1-weilongping@oppo.com>
+X-Spam-Score: -3.0 (---)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/12/4 14:09,
- Dmitry Antipov wrote: > Syzbot has reported
- the following KMSAN splat: > > BUG: KMSAN: uninit-value in
- f2fs_new_node_page+0x1494/0x1630
- > f2fs_new_node_page+0x1494/0x1630 > f2fs_ne [...] 
- Content analysis details:   (-5.7 points, 6.0 required)
+ Content preview:  On 2024/12/11 8:14, LongPing Wei wrote: > This patch wants
+ to reduce the number of system calls to improve performance. > pread and
+ pwrite will only be used when the target platform support them. > > [...] 
+ Content analysis details:   (-3.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [147.75.193.91 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-accredit.habeas.com]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ [147.75.193.91 listed in bl.score.senderscore.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tLkfX-0000GS-SN
-Subject: Re: [f2fs-dev] [PATCH] f2fs: ensure that node info flags are always
- initialized
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tLksS-0001Mu-O0
+Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs-tools: use pread and pwrite when
+ they are available.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -156,67 +155,20 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-fsdevel@vger.kernel.org,
- syzbot+5141f6db57a2f7614352@syzkaller.appspotmail.com,
- lvc-project@linuxtesting.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: panglu2022@gmail.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/12/4 14:09, Dmitry Antipov wrote:
-> Syzbot has reported the following KMSAN splat:
+On 2024/12/11 8:14, LongPing Wei wrote:
+> This patch wants to reduce the number of system calls to improve performance.
+> pread and pwrite will only be used when the target platform support them.
 > 
-> BUG: KMSAN: uninit-value in f2fs_new_node_page+0x1494/0x1630
->   f2fs_new_node_page+0x1494/0x1630
->   f2fs_new_inode_page+0xb9/0x100
->   f2fs_init_inode_metadata+0x176/0x1e90
->   f2fs_add_inline_entry+0x723/0xc90
->   f2fs_do_add_link+0x48f/0xa70
->   f2fs_symlink+0x6af/0xfc0
->   vfs_symlink+0x1f1/0x470
->   do_symlinkat+0x471/0xbc0
->   __x64_sys_symlink+0xcf/0x140
->   x64_sys_call+0x2fcc/0x3d90
->   do_syscall_64+0xd9/0x1b0
->   entry_SYSCALL_64_after_hwframe+0x77/0x7f
-> 
-> Local variable new_ni created at:
->   f2fs_new_node_page+0x9d/0x1630
->   f2fs_new_inode_page+0xb9/0x100
-> 
-> So adjust 'f2fs_new_node_page()' to ensure that 'flag' field of on-stack
-> 'struct node_info' is always zeroed just like if it was allocated within
-> 'struct nat_entry' via 'f2fs_kmem_cache_alloc(..., GFP_F2FS_ZERO, ...)'
-> in '__alloc_nat_entry()'.
-> 
-> Reported-by: syzbot+5141f6db57a2f7614352@syzkaller.appspotmail.com
-> Closes: https://syzkaller.appspot.com/bug?extid=5141f6db57a2f7614352
-> Fixes: e05df3b115e7 ("f2fs: add node operations")
-> Signed-off-by: Dmitry Antipov <dmantipov@yandex.ru>
-> ---
->   fs/f2fs/node.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> index 0b900a7a48e5..5103cc0d95c4 100644
-> --- a/fs/f2fs/node.c
-> +++ b/fs/f2fs/node.c
-> @@ -1314,7 +1314,7 @@ struct page *f2fs_new_inode_page(struct inode *inode)
->   struct page *f2fs_new_node_page(struct dnode_of_data *dn, unsigned int ofs)
->   {
->   	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
-> -	struct node_info new_ni;
-> +	struct node_info new_ni = { .flag = 0 };
+> Signed-off-by: LongPing Wei <weilongping@oppo.com>
 
-We can initialize new_ni.flag in f2fs_get_node_info() to cover
-all similar cases?
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-
->   	struct page *page;
->   	int err;
->   
-
 
 
 _______________________________________________
