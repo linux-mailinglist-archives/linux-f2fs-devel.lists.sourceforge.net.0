@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0D689EE972
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Dec 2024 15:57:24 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C35D9EE981
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Dec 2024 16:00:11 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tLkcu-000737-4Y;
-	Thu, 12 Dec 2024 14:57:16 +0000
+	id 1tLkff-0004YJ-NZ;
+	Thu, 12 Dec 2024 15:00:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tLkcs-000730-Nv
+ (envelope-from <chao@kernel.org>) id 1tLkfY-0004XO-Hj
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Dec 2024 14:57:15 +0000
+ Thu, 12 Dec 2024 15:00:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=F+5+H6EqSpa+dhVO/wGA8u6ppY+KKsMvXbcpba+gCWY=; b=VIqnn+gOxj/BrZtRkb5F/vFNee
- 7No5YiyaYV1yxRpA5c9GioURzbXH5jrUkgiR1bl1J6AbgljCj3Ghg44xIDGMkPxIBesnGgQghWtNh
- /oWeOnVulks8VlWwoHDdKrGZ2TB/8N+9IebO2Drv3ihMMkydu9+ndzGlEwY5B389YXjo=;
+ bh=YlSUfr5EAJrkio1B/y9EcVPvi1WLg2N4PwB7A/6KKpA=; b=LiqlNLhP5Whxt0M+UnL/ki6Pxy
+ yEu/73OVC9P2heUiiGcyYaZWhhVEDTwNQODepb+FePe7e3hdTRm9E9WkqqH1RUQVy89wI7/IAP9g5
+ vySLEZaMKNn/CLIZMj0aCqaNW6aOSelD1z5xxU8o6LAFCifLaDde0N2rWY3lzaJuuhig=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,35 +31,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=F+5+H6EqSpa+dhVO/wGA8u6ppY+KKsMvXbcpba+gCWY=; b=WKrHqoigq4j076nEvFhvbJEX9W
- +D6J1oRyHBv+RwPSrtfvsVWelXt/PqK3k0+meyHOF3/dLVEGf9OeTM/P0gNfKNhSLa3UnF9fpZ/xd
- UYWo7/7vCVG0W2giokiMXY6IAp9bqjXUi+ZypUA7/+LMFxZple7NCJ50iEQGQ2nwyio0=;
+ bh=YlSUfr5EAJrkio1B/y9EcVPvi1WLg2N4PwB7A/6KKpA=; b=h0hrXUxUkFYX2qgcuZJnFtN3km
+ C0ubP3niQkYipDynmtcLxnSHQLbGY8p3sXtB3aqjRtCh6WhS/6mBjLl+cgrWbsZOZ4TLE4fNqwTcI
+ h+hcgAOGUgxhrLlDuJaEOr9ddXRMQfU6DtL9dTu9bMvS7drc/OFzIEg25gNFAgkZt/30=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tLkcr-0008RK-2w for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Dec 2024 14:57:15 +0000
+ id 1tLkfX-0000GS-SN for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 12 Dec 2024 15:00:00 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 472555C612B;
- Thu, 12 Dec 2024 14:56:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EF58C4CECE;
- Thu, 12 Dec 2024 14:57:06 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 248C35C6323;
+ Thu, 12 Dec 2024 14:59:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E3CCC4CECE;
+ Thu, 12 Dec 2024 14:59:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734015427;
- bh=uwblZSevv2D3PFiP82htjEa+bQ21czz1NNrxjWSAzwY=;
+ s=k20201202; t=1734015594;
+ bh=gj63/lgmCJ83d/T+E2tbXLD8bA62WmiZhc4ojJVHIcQ=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=D2L0oe8DEjgL/j+ayC2RToRh4lBZ2ZB64HVhkG2k4UIjQI0+r/z8snRbHzriqXgsM
- sFssW8hpK45lsZkZTrwY8teJCkBStFhtDNrtIF4uoZCnxStZsBIxITRqehsviS1Sps
- /kHXZ4K7noeEzR9d8ZIKgHTYpXfN3wPSiHdzKa8DvsWAH5JkQGqramcv6uzvvxCkRM
- Pj8VDzKagXITZlyObKm+IuNIjuDgViR9IY3hmq1xemrjvzCLIb888fuOJ7w492XWJ8
- BQRWX+uc74+tM6c+ASNNkZckGgtnjaMQJQ5t6dPJ2p6KNuIlYqt+YQ1ws8Q2R5Emq8
- ccfr/DV1KKCCQ==
-Message-ID: <6b31083d-aaf0-43a0-bc3d-bbb5d3055a5e@kernel.org>
-Date: Thu, 12 Dec 2024 22:57:08 +0800
+ b=FVmUShXCl+1y4S7nYzHEA7dvN5ruEiA4tVA2RhmV9eriGPExbKDK8ATHcJHp9nl9W
+ vr+P3+b9yj5wdHJZhcaprWP5CpR9s7g/IaA7jFQP41BSM8z5bBOmk3n26fnQ3Pk0K4
+ qKykMIFqcKHdd/btnhJTr5gUX9d/Z+DT3CTe1fwB4gWvDL1BowfFk19lMxH1YW2O7b
+ TM2jcB8OyR3CvhvszSHOda1e+gCBD4m9VO6kImg8cIaTbvXyB+dkeTBlnb3VQxjNEK
+ zRFH9Hdandj1ag8CR+NgrsSktLBxOnRmd8F9yeQ6c/k6dI9X2nRvJ4KRjscMVLKT9G
+ RwuGX7Ex2blAg==
+Message-ID: <ec2729cc-2846-49c2-b7ca-4c1efe004cd1@kernel.org>
+Date: Thu, 12 Dec 2024 22:59:54 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Yongpeng Yang <yangyongpeng1@oppo.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20241204033113.4133027-1-yangyongpeng1@oppo.com>
+To: Dmitry Antipov <dmantipov@yandex.ru>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20241204060934.697070-1-dmantipov@yandex.ru>
 Content-Language: en-US
 Autocrypt: addr=chao@kernel.org; keydata=
  xsFNBFYs6bUBEADJuxYGZRMvAEySns+DKVtVQRKDYcHlmj+s9is35mtlhrLyjm35FWJY099R
@@ -103,7 +103,7 @@ Autocrypt: addr=chao@kernel.org; keydata=
  92Qh98hAj3cMFKtEVbLKJvrc2AO+mQlS7zl1qWblEhpZnXi05S1AoT0gDW2lwe54VfT3ySon
  8Klpbp5W4eEoY21tLwuNzgUMxmycfM4GaJWNCncKuMT4qGVQO9SPFs0vgUrdBUC5Pn5ZJ46X
  mZA0DUz0S8BJtYGI0DUC/jAKhIgy1vAx39y7sAshwu2VILa71tXJ
-In-Reply-To: <20241204033113.4133027-1-yangyongpeng1@oppo.com>
+In-Reply-To: <20241204060934.697070-1-dmantipov@yandex.ru>
 X-Spam-Score: -5.7 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -111,9 +111,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/12/4 11:31, Yongpeng Yang wrote: > In SSR mode, the
- segment selected for allocation might be the same as > the target segment
- of the GC triggered by ioctl, resulting in the GC > moving the CUR [...] 
+ Content preview:  On 2024/12/4 14:09,
+ Dmitry Antipov wrote: > Syzbot has reported
+ the following KMSAN splat: > > BUG: KMSAN: uninit-value in
+ f2fs_new_node_page+0x1494/0x1630
+ > f2fs_new_node_page+0x1494/0x1630 > f2fs_ne [...] 
  Content analysis details:   (-5.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -138,9 +140,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tLkcr-0008RK-2w
-Subject: Re: [f2fs-dev] [PATCH V2] f2fs: The GC triggered by ioctl also
- needs to mark the segno as victim
+X-Headers-End: 1tLkfX-0000GS-SN
+Subject: Re: [f2fs-dev] [PATCH] f2fs: ensure that node info flags are always
+ initialized
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -154,35 +156,67 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fsdevel@vger.kernel.org,
+ syzbot+5141f6db57a2f7614352@syzkaller.appspotmail.com,
+ lvc-project@linuxtesting.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/12/4 11:31, Yongpeng Yang wrote:
-> In SSR mode, the segment selected for allocation might be the same as
-> the target segment of the GC triggered by ioctl, resulting in the GC
-> moving the CURSEG_I(sbi, type)->segno.
-> Thread A				Thread B or Thread A
-> - f2fs_ioc_gc_range
->   - __f2fs_ioc_gc_range(.victim_segno=segno#N)
->    - f2fs_gc
->     - __get_victim
->      - f2fs_get_victim
->      : segno#N is valid, return segno#N as source segment of GC
-> 					- f2fs_allocate_data_block
-> 						- need_new_seg
-> 						- get_ssr_segment
-> 						- f2fs_get_victim
-> 						: get segno #N as destination segment
-> 						- change_curseg
+On 2024/12/4 14:09, Dmitry Antipov wrote:
+> Syzbot has reported the following KMSAN splat:
 > 
-> Fixes: e066b83c9b40 ("f2fs: add ioctl to flush data from faster device to cold area")
-> Signed-off-by: Yongpeng Yang <yangyongpeng1@oppo.com>
+> BUG: KMSAN: uninit-value in f2fs_new_node_page+0x1494/0x1630
+>   f2fs_new_node_page+0x1494/0x1630
+>   f2fs_new_inode_page+0xb9/0x100
+>   f2fs_init_inode_metadata+0x176/0x1e90
+>   f2fs_add_inline_entry+0x723/0xc90
+>   f2fs_do_add_link+0x48f/0xa70
+>   f2fs_symlink+0x6af/0xfc0
+>   vfs_symlink+0x1f1/0x470
+>   do_symlinkat+0x471/0xbc0
+>   __x64_sys_symlink+0xcf/0x140
+>   x64_sys_call+0x2fcc/0x3d90
+>   do_syscall_64+0xd9/0x1b0
+>   entry_SYSCALL_64_after_hwframe+0x77/0x7f
+> 
+> Local variable new_ni created at:
+>   f2fs_new_node_page+0x9d/0x1630
+>   f2fs_new_inode_page+0xb9/0x100
+> 
+> So adjust 'f2fs_new_node_page()' to ensure that 'flag' field of on-stack
+> 'struct node_info' is always zeroed just like if it was allocated within
+> 'struct nat_entry' via 'f2fs_kmem_cache_alloc(..., GFP_F2FS_ZERO, ...)'
+> in '__alloc_nat_entry()'.
+> 
+> Reported-by: syzbot+5141f6db57a2f7614352@syzkaller.appspotmail.com
+> Closes: https://syzkaller.appspot.com/bug?extid=5141f6db57a2f7614352
+> Fixes: e05df3b115e7 ("f2fs: add node operations")
+> Signed-off-by: Dmitry Antipov <dmantipov@yandex.ru>
+> ---
+>   fs/f2fs/node.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index 0b900a7a48e5..5103cc0d95c4 100644
+> --- a/fs/f2fs/node.c
+> +++ b/fs/f2fs/node.c
+> @@ -1314,7 +1314,7 @@ struct page *f2fs_new_inode_page(struct inode *inode)
+>   struct page *f2fs_new_node_page(struct dnode_of_data *dn, unsigned int ofs)
+>   {
+>   	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
+> -	struct node_info new_ni;
+> +	struct node_info new_ni = { .flag = 0 };
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+We can initialize new_ni.flag in f2fs_get_node_info() to cover
+all similar cases?
 
 Thanks,
+
+>   	struct page *page;
+>   	int err;
+>   
+
 
 
 _______________________________________________
