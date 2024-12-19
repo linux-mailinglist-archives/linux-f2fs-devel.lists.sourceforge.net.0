@@ -2,106 +2,147 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B7919F7459
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Dec 2024 06:55:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B21DB9F7B2A
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Dec 2024 13:22:45 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tO9VG-0005RO-OP;
-	Thu, 19 Dec 2024 05:55:18 +0000
+	id 1tOFY6-0004sP-Bf;
+	Thu, 19 Dec 2024 12:22:38 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <9ef6h2ufu@euhomvc.com>) id 1tO9VA-0005RA-1I
+ (envelope-from <zlang@redhat.com>) id 1tOFY4-0004sH-UF
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 19 Dec 2024 05:55:12 +0000
+ Thu, 19 Dec 2024 12:22:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Subject:Content-Transfer-Encoding:Content-Type:
- MIME-Version:Date:To:From:Message-ID:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GBCkGSJyCZjulSuE49htfnws9vxzv7zJwf8up8gaYRs=; b=G5iioBKGQAOxNhapxwgRMD4mU1
- C/BxKKZP2HSqfZx3LL9Exsan1v3TVRs0Yu+OSO9Ieq/zNFul/4kX77nAMCIVQx66SMUWgTLG9pODn
- zS7pvIIPSria9VwxIthTYyEyPcSaOn5RPa7bub0KMah4Xa/PKQMhWMY86VPq4bNTANXs=;
+ bh=2cMCLi4zVEMDj7Al3ElXyo8OOv7M+q2sc/pVW1fsv0s=; b=WM5N3LLJoknsryIsgN/YAmZPeR
+ Jw3oVn+3b/V5CAAF/3Mfan4ToPWS85CguVA8DdhAd8pyU6akxzrvbGhAyCtDRwg0MItmnTKAZS6Qn
+ rEgUYeO6CciyO3uDxihVH5NLA65YpbIPnFGRcl5uePZBraV7u4K1DPkPCM415A3eDUJc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Subject:Content-Transfer-Encoding:Content-Type:MIME-Version:Date:To:From:
- Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=GBCkGSJyCZjulSuE49htfnws9vxzv7zJwf8up8gaYRs=; b=A
- fdADGmIb6qtnVO38dLkNfqe6WviF5/fv+euu1kiB9EI9uIWCOYk9668yadSOs2g7vYst0QuUoAJJ+
- jPR4XI7XJxjPuk3TC48Dg4l3AapID30l/36Nj8jaYsASbD2rya3Nyi7/KMiMLBUjpKA8fr8WXYjGo
- wdEsI9jyqEOh5hRo=;
-Received: from v103-3-189-170.myvps.jp ([103.3.189.170] helo=euhomvc.com)
+ h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=2cMCLi4zVEMDj7Al3ElXyo8OOv7M+q2sc/pVW1fsv0s=; b=FIS3IUkKFhhlqPZ4H7kFspwSLH
+ T8HT5owwTjhgVgP1wnASRTFdn6aPv9DFDK3L4NPyBumQJvjyNJUr25xK79CkjKVmixiTXEmJz9j3U
+ BTSOiaXvDwv9muuntRh2oI8RblG4QEr7nBaE2g1SuCwCTa0dfT9Y+e+Wm3NtGIz5T5IE=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tO9V8-0002Kt-MS for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 19 Dec 2024 05:55:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=default; d=euhomvc.com;
- h=Message-ID:From:To:Subject:Date:MIME-Version:Content-Type:
- Content-Transfer-Encoding; i=9ef6h2ufu@euhomvc.com;
- bh=GBCkGSJyCZjulSuE49htfnws9vxzv7zJwf8up8gaYRs=;
- b=d27UTdDVLxnO+sb67fwHhzfsiSwKCkrH3tUzQTQ6HWKfzUdbLfEoe0pYBwCXBVHzdbPk7o5csjXj
- ryuo8vRKWvvJgpY/Ta/k5rrsTX8ANCxMzdyX/2S2FbbCmToG9Nsj1Lt10HQsLk8UPNCxa/ZX3zFd
- oQMLpIPwApcNKjWID1E=
-Message-ID: <d56df10ac36fb7be9b771e1934efd8b4@euhomvc.com>
-From: "$B%f!<%7!<%+!<%I3t<02q<R(B" <9ef6h2ufu@euhomvc.com>
-To: linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Date: Wed, 18 Dec 2024 21:34:34 -0800
+ id 1tOFY3-0001U6-Me for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 19 Dec 2024 12:22:36 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1734610949;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=2cMCLi4zVEMDj7Al3ElXyo8OOv7M+q2sc/pVW1fsv0s=;
+ b=Zr/hFTebVq5q4gReMzcmT7HxdrFHPm85nXPYP/FTyYsUUmsR4CAepLCZTFOinc19psKPzp
+ iJocer6rSddGCwKBEr68Wv+BkIVo1QNylMyqGuyXHIZLaR6MCyrlEv2AeL6inqg60ETkZf
+ EC1T60aSVhZkN5qgJIfC7b0HizxUX/8=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-166-b8J8-cWTOwWSESuzXrCznQ-1; Thu, 19 Dec 2024 07:22:28 -0500
+X-MC-Unique: b8J8-cWTOwWSESuzXrCznQ-1
+X-Mimecast-MFC-AGG-ID: b8J8-cWTOwWSESuzXrCznQ
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-467ae19e34bso22222681cf.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 19 Dec 2024 04:22:28 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734610947; x=1735215747;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2cMCLi4zVEMDj7Al3ElXyo8OOv7M+q2sc/pVW1fsv0s=;
+ b=Orspw0pmQWXEcBYTIajz60BhvMDsOkSsLpvOgCkh1/uJLU65gfgP9FuTovR0vbTGsa
+ jPnB8lBoRFtWvUd7ZjIvllxFvr4OXdT+z0lFntsmtzLa0JMNVXrFPgIpj5NqxNSfmtxY
+ 9KajKcFKXP4ueM+fv8MOC4AGHAE45SA96IBhx8YmZXtp4oHWFg7NoV/WJiTpw4ekBtB3
+ S3MS0TuhyHTA9Zk2fyIQOuGS/fh5QbJEEzWlk4EdYcPb064Crx3nVokKr0qHEOl55OqV
+ oMDSSbZBtzpmR2fpCmer5Cf94Po7ldVzX5VWCQMDlLXmY6qZyDERqK4KjqK71hNtTk7h
+ LaeA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWurS05a8pNZLbhKgW4Hn0yeMFGW7BnGvuJ6gQVwLUT9Hk0y2cTvq6isP5VpKUQF0rLffC47M8V0H4P3ioXXHAM@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YyOBRf6OWqFyLV/vwQfKTbnrvgYTB0hOgqo1wNWO3XQ5//0eUMh
+ kky67tm/qUwz44p+ludRSoHSMkHEFFCWJNSlWuKhvy5X/skqwYV74ZpZIEFQ6n4mCjHuzzsivNn
+ alGCJNuQYxOFsmeycvhz21oS8lYfgQMe47RYoatsU54ArNmjxexftHk7mrXqAjB0qGigrGZM+54
+ xOjCNeCGAinA==
+X-Gm-Gg: ASbGncskcai45Dtf4Jz3a9dXtpIxBTGSpA1oNfJY/WxYkEzWicQy6i9tVRPgZbeoNw+
+ bT9hqn7nruAz6LUxOTpsy599r6woXTDqqqGP64pMgIg4IwoSwVbFcPLO2ExT9vxa4VpHC4CKZ0m
+ ubK7rjfz4LdKotGCc7mbHCiX9KepA+QaADa0YcUEzO05C1ZpaJ0OhcvPddWzv0JGIELKkLM3/25
+ 4U9ZfN+TJBGeFICSOFo30LoKeK/ia7nCMWAxNXodJF3QN0X35gS8BK/+PNgWZCx0PBuOBK2F2+q
+ +aKrEcR9izJMn098XuhLCg==
+X-Received: by 2002:a17:90b:270d:b0:2ee:cd83:8fc3 with SMTP id
+ 98e67ed59e1d1-2f443d71631mr4572264a91.37.1734610558903; 
+ Thu, 19 Dec 2024 04:15:58 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGKj8Q9BdoBGW4+XcL83PolilcHLx944IS9YHTz9Zw7rHpSMBE47UXoWK1Dd82IOjYEHShclA==
+X-Received: by 2002:a17:90b:270d:b0:2ee:cd83:8fc3 with SMTP id
+ 98e67ed59e1d1-2f443d71631mr4572240a91.37.1734610558578; 
+ Thu, 19 Dec 2024 04:15:58 -0800 (PST)
+Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([43.228.180.230])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2f2db9a661esm3119380a91.2.2024.12.19.04.15.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Dec 2024 04:15:58 -0800 (PST)
+Date: Thu, 19 Dec 2024 20:15:53 +0800
+From: Zorro Lang <zlang@redhat.com>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <20241219121553.s24w6rnws6relylc@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+References: <20241202155727.4221-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: 8.3 (++++++++)
+In-Reply-To: <20241202155727.4221-1-chao@kernel.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: UZZ_VQfobaixAmhMxXSJeAHshQwSNfoFmJNOevHgjoU_1734610948
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+X-Spam-Score: -1.3 (-)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
- has identified this incoming email as possible spam.  The original
+ has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
- the administrator of that system for details. Content preview:
- $B$3$s$K$A$O!"(BUC$B%+!<%I!J(BUC$B!K%^%$%l!<%8%P%s%/$h$jFCJL$J$*CN$i$;
- $G$9!#(B
- $B"#"""#(, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (,
- (, "#"""#(B $B!z(B
- UC$B%+!<%IG/2qHqL5NA%-%c%s%Z!<%s<B;\Cf(B $B!z(B 
- Content analysis details:   (8.3 points, 6.0 required)
+ the administrator of that system for details.
+ Content preview:  On Mon, Dec 02, 2024 at 11:57:27PM +0800, Chao Yu wrote: >
+ The bugs related to f2fs/00[5-7] regression testcases have been fixed > by
+ below commits: > > - d5c367ef8287 ("f2fs: fix f2fs_bug_on when uni [...] 
+ Content analysis details:   (-1.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 2.5 URIBL_DBL_SPAM         Contains a spam URL listed in the Spamhaus DBL
- blocklist [URIs: euhomvc.com]
- 3.6 RCVD_IN_SBL_CSS        RBL: Received via a relay in Spamhaus SBL-CSS
- [103.3.189.170 listed in zen.spamhaus.org]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [103.3.189.170 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [103.3.189.170 listed in bl.score.senderscore.com]
- 1.9 URIBL_ABUSE_SURBL      Contains an URL listed in the ABUSE SURBL
- blocklist [URIs: qn776yy.com]
- 0.1 URIBL_CSS_A Contains URL's A record listed in the Spamhaus CSS
- blocklist [URIs: euhomvc.com]
+ [170.10.133.124 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [170.10.133.124 listed in sa-trusted.bondedsender.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [170.10.133.124 listed in list.dnswl.org]
+ -1.1 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [170.10.133.124 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- 0.4 RDNS_DYNAMIC           Delivered to internal network by host with
- dynamic-looking rDNS
-X-VA-Spam-Flag: YES
-X-Spam-Flag: YES
-X-Headers-End: 1tO9V8-0002Kt-MS
-Subject: =?iso-8859-1?q?_=5Bf2fs-dev=5D_=5BSPAM=5D_=1B=24B!ZFCJL=25-=25c?=
- =?iso-8859-1?q?=25s=25Z!=3C=25s!=5B=1B=28BUC=1B=24B=25+!=3C=25IG/2qHqL5NA?=
- =?iso-8859-1?q?=25-=25c=25s=25Z!=3C=25s!=22=3A=23=249=240=3F=3D=2479=7E?=
- =?iso-8859-1?q?=24=5F=24r!*=1B=28B?=
+ valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tOFY3-0001U6-Me
+Subject: Re: [f2fs-dev] [PATCH] f2fs: add commit id to
+ _fixed_by_kernel_commit
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,85 +154,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="iso-2022-jp"
+Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-$B$3$s$K$A$O!"(BUC$B%+!<%I!J(BUC$B!K%^%$%l!<%8%P%s%/$h$jFCJL$J$*CN$i$;$G$9!#(B
+On Mon, Dec 02, 2024 at 11:57:27PM +0800, Chao Yu wrote:
+> The bugs related to f2fs/00[5-7] regression testcases have been fixed
+> by below commits:
+> 
+> - d5c367ef8287 ("f2fs: fix f2fs_bug_on when uninstalling filesystem call
+> f2fs_evict_inode.")
+> 
+> - 1acd73edbbfe ("f2fs: fix to account dirty data in __get_secs_required()")
+> 
+> - 26413ce18e85 ("f2fs: compress: fix inconsistent update of i_blocks in
+> release_compress_blocks and reserve_compress_blocks")
+> 
+> Let's add commit id to _fixed_by_kernel_commit in f2fs/00[5-7].
+> 
+> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
 
-$B"#"""#(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,"#"""#(B
+Reviewed-by: Zorro Lang <zlang@redhat.com>
 
-$B!z(B UC$B%+!<%IG/2qHqL5NA%-%c%s%Z!<%s<B;\Cf(B $B!z(B
-
-$B"#"""#(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,"#"""#(B
-
-$BJ?AG$h$j!V(BUC$B%+!<%I!W$r$40&8\;r$j!"8|$/8fNi?=$7>e$2$^$9!#(B
-
-$B$^$?$O(BUC$B%+!<%I$r(B2$B2s0J>e$4MxMQ$$$?$@$$$?$*5RMM$K!"(B
-
-$B<!G/EY$N(BUC$B%+!<%IG/2qHq$rL5NA$K$9$k%-%c%s%Z!<%s$r<B;\Cf$G$9!#(B
-
-$B$3$NAG@2$i$7$$FCE5$r$*8+F($7$J$/!*(B
-
-
-$B(.(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(B
-$B(-:#$9$0G/2qHq$rL5NA$K$9$k(B
-$B(1(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(B
-
-https://www2-uccord.qn776yy.com/?apply=ZAX64v5zQe8kh4c1D8msPICY9nQ
-
-$B(.(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(B
-$B(-FCE5FbMF(B
-$B(1(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(B
-
-$B<!G/EY$N(BUC$B%+!<%IG/2qHq$,L5NA$K!*(B
-24$B;~4V0JFb$K$*?=$79~$_$/$@$5$$!*(B
-
-$B(.(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(B
-$B(-BP>]%+!<%I(B
-$B(1(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(B
-UC$B%+!<%I!J0lHL!"%4!<%k%I!"%d%s%0%4!<%k%I!K(B
-UC$B%W%i%A%J%+!<%I(B
-$B%S%e!<%S%8%M%9%*!<%J!<%:%+!<%I!J0lHL%+!<%I!K(B
-UC$B%+!<%I%;%l%/%H(B
-FreeBO!($B%U%j!<%\(B!)
-$B%/!<%P!<(BUC$B%+!<%I(B
-JAF$B!&(BUC$B%+!<%I!J0lHL!"%4!<%k%I!K(B
-Tokyo Metro To Me CARD$B!J0lHL!"%4!<%k%I!K(B
-$B%W%i%9%O%C%T!<(BUC$B%+!<%I(B
-$B$_$:$[%^%$%l!<%8%/%i%V%+!<%I!J0lHL!"(BANA$B!"%4!<%k%I!K(B
-$B%d%^%@(BLABI$B%+!<%I!J0lHL!"%4!<%k%I!K(B
-$B7DXf%+!<%I!J0lHL!"%4!<%k%I!"%d%s%0%4!<%k%I!K(B
-WWF$B%+!<%I!J0lHL!"%4!<%k%I!"%;%l%/%H!K(B
-$B%A%'%s%P!<%:%+!<%I!J0lHL!"%4!<%k%I!K(B
-KIPS UC$B%+!<%I(B
-$B%S%C%/%+!<%I%$%s%?!<%J%7%g%J%k(B
-$B5~5^%W%l%_%"%]%$%s%H(B $B%7%k%P!<(B
-$B%d%^%O%_%e!<%8%C%/%a%s%P!<%:%W%l%_%"%`(B-UC$B%+!<%I(B
-MileagePlus UC$B%+!<%I!J0lHL!"%4!<%k%I!K(B
-
-$B(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(B
-
-$B:#8e$H$b!"!V(BUC$B%+!<%I!W$r$h$m$7$/$*4j$$$$$?$7$^$9!#(B
-
-$B(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,!y!y!y(B
-
-
-
-$B!Z$*Ld9g$;Ak8}![(B
-UC$B%+!<%I$*5R$5$^%;%s%?!<(B
-$B!&K\7o$K4X$9$k$*Ld9g$;Ak8}(B 0120-191-051$B!JM-NA!K(B
-
-$B(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(B
-
-$B!ZH/9T85![!'%f!<%7!<%+!<%I3t<02q<R(B
-
-$BEl5~ET9A6hBf>l(B2$B!<(B3$B!<(B2 $BBf>l%U%m%s%F%#%"%S%k(B
-
-$B7G:\$5$l$?5-;v!&FbMF$r5v2DL5$/MxMQ$9$k$3$H$r6X$8$^$9!#(B
-Copyright UC CARD Co.,Ltd.,All rights reserved.
-
-$B(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(B
+>  tests/f2fs/005 | 2 +-
+>  tests/f2fs/006 | 2 +-
+>  tests/f2fs/007 | 2 +-
+>  3 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/tests/f2fs/005 b/tests/f2fs/005
+> index a817d51a..33d4fdb9 100755
+> --- a/tests/f2fs/005
+> +++ b/tests/f2fs/005
+> @@ -11,7 +11,7 @@
+>  . ./common/preamble
+>  _begin_fstest auto quick
+>  
+> -_fixed_by_kernel_commit xxxxxxxxxxxx \
+> +_fixed_by_kernel_commit d5c367ef8287 \
+>  	"f2fs: fix f2fs_bug_on when uninstalling filesystem call f2fs_evict_inode."
+>  
+>  _require_scratch
+> diff --git a/tests/f2fs/006 b/tests/f2fs/006
+> index a9c823c1..c1f8d4ff 100755
+> --- a/tests/f2fs/006
+> +++ b/tests/f2fs/006
+> @@ -16,7 +16,7 @@
+>  . ./common/preamble
+>  _begin_fstest auto quick
+>  
+> -_fixed_by_kernel_commit xxxxxxxxxxxx \
+> +_fixed_by_kernel_commit 1acd73edbbfe \
+>  	"f2fs: fix to account dirty data in __get_secs_required()"
+>  
+>  _require_scratch
+> diff --git a/tests/f2fs/007 b/tests/f2fs/007
+> index 6451d4b4..37388433 100755
+> --- a/tests/f2fs/007
+> +++ b/tests/f2fs/007
+> @@ -11,7 +11,7 @@
+>  . ./common/preamble
+>  _begin_fstest auto quick rw compress
+>  
+> -_fixed_by_kernel_commit xxxxxxxxxxxx \
+> +_fixed_by_kernel_commit 26413ce18e85 \
+>          "f2fs: compress: fix inconsistent update of i_blocks in release_compress_blocks and reserve_compress_blocks"
+>  
+>  _require_scratch
+> -- 
+> 2.40.1
+> 
 
 
 
