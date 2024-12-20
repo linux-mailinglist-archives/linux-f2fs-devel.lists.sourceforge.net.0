@@ -2,76 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B6759F9348
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Dec 2024 14:31:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B48A9F935C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Dec 2024 14:35:42 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tOd6W-0007qQ-E4;
-	Fri, 20 Dec 2024 13:31:44 +0000
+	id 1tOdAF-00088B-4H;
+	Fri, 20 Dec 2024 13:35:35 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1tOd6N-0007pu-JC
+ (envelope-from <chao@kernel.org>) id 1tOd9r-000868-Pn
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 20 Dec 2024 13:31:35 +0000
+ Fri, 20 Dec 2024 13:35:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=AxO5YUGMEwDPx1fgwQ10tAH+mmi22Zui5Qs/9xQFp/w=; b=REueO8aW6zGk5HpMbzNTIKOmU/
- luKn8TjFW7A67fuPdiVEUxpV3Od1fdaFUE32bWAajrWLf/mh/DMga0sQ7yM3JYLWFaAg0zEzCC1RU
- /IC/MeoQxXtBOM5YfgzRsi/9MsjmhSH9Wud12/En4pOxtpgSdCTe8aExPu2SMIhu2a7g=;
+ bh=jEXR/4rkVou0RyycOVMOMuAW1TV+DXKeGxMu5+m2wYU=; b=JSTgU8l5eCvtxvMEXEwgdQtk82
+ OFms4Him4i74NgMhmA85g7MEVXwbQzdXGrHSWWc9UqM8Cs/HOJgExLFNcSKdeS7ODWaKMkk5xB5IP
+ FKtf+iCCWiQ1rn02vEZH6w68HxuA10EXPWuu0xPot18wjez8NVWLZ772INOL4o+HFGbw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=AxO5YUGMEwDPx1fgwQ10tAH+mmi22Zui5Qs/9xQFp/w=; b=F
- ErMKPJDfJYKL1fmAYbjFgaZSkDiWFO+RqGbIso7P58tqbiJFFl1lNUU8+dt4zPgYY7WHsoWaD8N64
- anmMUx0WK6sbBS5w7ZMymF0MSqVVZKjphymrODEToUNKK4LXU10fV65V8azSjHVR6sOoXX97vhGJp
- BXZbGcWWm1EzSrpY=;
-Received: from mgamail.intel.com ([198.175.65.11])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=jEXR/4rkVou0RyycOVMOMuAW1TV+DXKeGxMu5+m2wYU=; b=ICy564skvt0d/FjEy95yYvHZ4U
+ 1FoOv19qbqSP7QY24IZbjsGtW8kKqywx2no7CSs445hsVyy3bdWmw/yrG3vaTG5luzwYo2gb7/LpD
+ Op8TNYIxoM1uab5eOBtI+PhNAEZXgl7upIKozOD71WXKapktXtQRxTz+WfEs/6Wjcn2k=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tOd6J-0006W9-OA for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 20 Dec 2024 13:31:35 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1734701492; x=1766237492;
- h=date:from:to:cc:subject:message-id:mime-version;
- bh=kbm4obwbEUfjLX/YvlcqG7pXwN7DQoJTuwlgZn7OiAI=;
- b=XTpfRnPr+pPR3l0o7ZglYvzVPbyA2Jw9GijGxu+xhnig8+bCJXWs8xZP
- MSr1tJbZoTacbimBtatbHJP6d1MJ4T97PHX0l65y4ixI68jc4NIi+zSQh
- eaRNSQQIYIBE/5pPfPHWgpXMQo2uDgOLVq/WlahA2zPVMRHSXmpSPROJL
- ZtYurAp82IW4Apf2ehVWQDx44RPKXFDquaxjcGYSfKnVa/TLnyM0wAa2Y
- xFLTebVG5ZqLLmY6Fo1qeASAC7wxj0uESxmO17aBaIXHYpNhxEOWRrVGg
- R8it+ZIvMLdtdyjJ1kLN8fSiysdYqcyz7PUbJfkz7EuNgqpY2cdUQHVOv Q==;
-X-CSE-ConnectionGUID: 2Sut0CcgR56vXJJEAV63cA==
-X-CSE-MsgGUID: 1l39nIOZRtCQYOYpaKwHJg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11292"; a="45740733"
-X-IronPort-AV: E=Sophos;i="6.12,250,1728975600"; d="scan'208";a="45740733"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
- by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Dec 2024 05:31:27 -0800
-X-CSE-ConnectionGUID: sPiU42OGR9qtxom0zCRASw==
-X-CSE-MsgGUID: B5MiCPtuR9aSaMzt8hmrNw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="103502793"
-Received: from lkp-server01.sh.intel.com (HELO a46f226878e0) ([10.239.97.150])
- by orviesa005.jf.intel.com with ESMTP; 20 Dec 2024 05:31:24 -0800
-Received: from kbuild by a46f226878e0 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1tOd6A-0001BR-1k;
- Fri, 20 Dec 2024 13:31:22 +0000
-Date: Fri, 20 Dec 2024 21:31:20 +0800
-From: kernel test robot <lkp@intel.com>
-To: Daniel Lee <chullee@google.com>
-Message-ID: <202412202124.DeiZjaVi-lkp@intel.com>
+ id 1tOd9r-0006t4-0N for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 20 Dec 2024 13:35:11 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id DC8F9A40577;
+ Fri, 20 Dec 2024 13:33:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A1195C4CECD;
+ Fri, 20 Dec 2024 13:34:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1734701700;
+ bh=/pCL8SmvDN1adK2XgKrlvEN2dzWVOK6PwC0Dng81Xu8=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=jS/wKaIANi44myb+6InhsTLU2wrqHN1PWhLQah2vDf1S+BMVIJ1F/aPXKIEtugSzL
+ +7VgBZONc7cMH5U8oFXgbJkm3KiMHU8mTjCbsOqpqeps0BeD/ANNCYK77FztgVJxyh
+ IuC0sVwfuJVgdymhmR44uOYKS09+ZZtA0mRdB+WBmB4tn2JdRjZxzZ5l93ROWogXsa
+ xVFzYSAeEBOA004+erETQt6x6KQ+SP7OTs6T+BHs+52MLDxwfNUn4xN4TScQJF0oyO
+ +Gz4wRyEWIDTPiWcc3FSGOFs0EfXcWuVy4lx/UZZOE9WpTvVFg6qck7LzayYCbB4fE
+ b6VwXfIxkuuqQ==
+Message-ID: <3c65383e-be52-43c4-8ad2-b31e869a5a34@kernel.org>
+Date: Fri, 20 Dec 2024 21:34:57 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+To: Dmitry Antipov <dmantipov@yandex.ru>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <27ae035d-99b4-4954-97dd-ec62b60be375@yandex.ru>
+Content-Language: en-US
+Autocrypt: addr=chao@kernel.org; keydata=
+ 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
+In-Reply-To: <27ae035d-99b4-4954-97dd-ec62b60be375@yandex.ru>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -79,28 +111,26 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: tree:
- https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- dev-test head: 3f1a145b84bcf0fae986212590bfeeaf165d22d6 commit:
- 3f1a145b84bcf0fae986212590bfeeaf165d22d6
- [15/15] f2fs: Introduce [...] 
+ Content preview:  Hi, Dmitry, I agree w/ you,
+ I've figured out a patch previously, please check it?
+ https://lore.kernel.org/linux-f2fs-devel/20241216134600.8308-1-chao@kernel.org
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [198.175.65.11 listed in bl.score.senderscore.com]
+ [147.75.193.91 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [198.175.65.11 listed in sa-trusted.bondedsender.org]
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [198.175.65.11 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
+ [147.75.193.91 listed in sa-trusted.bondedsender.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -109,9 +139,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tOd6J-0006W9-OA
-Subject: [f2fs-dev] [jaegeuk-f2fs:dev-test 15/15] fs/f2fs/dir.c:339:1:
- warning: label 'start_find_entry' defined but not used
+X-Headers-End: 1tOd9r-0006t4-0N
+Subject: Re: [f2fs-dev] On FI_INLINE_XATTR vs. FI_EXTRA_ATTR
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,87 +152,69 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- oe-kbuild-all@lists.linux.dev
-Content-Type: text/plain; charset="us-ascii"
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
-head:   3f1a145b84bcf0fae986212590bfeeaf165d22d6
-commit: 3f1a145b84bcf0fae986212590bfeeaf165d22d6 [15/15] f2fs: Introduce linear search for dentries
-config: arc-randconfig-001-20241220 (https://download.01.org/0day-ci/archive/20241220/202412202124.DeiZjaVi-lkp@intel.com/config)
-compiler: arc-elf-gcc (GCC) 13.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20241220/202412202124.DeiZjaVi-lkp@intel.com/reproduce)
+Hi, Dmitry,
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202412202124.DeiZjaVi-lkp@intel.com/
+I agree w/ you, I've figured out a patch previously, please check it?
 
-All warnings (new ones prefixed by >>):
+https://lore.kernel.org/linux-f2fs-devel/20241216134600.8308-1-chao@kernel.org
 
-   fs/f2fs/dir.c: In function '__f2fs_find_entry':
->> fs/f2fs/dir.c:339:1: warning: label 'start_find_entry' defined but not used [-Wunused-label]
-     339 | start_find_entry:
-         | ^~~~~~~~~~~~~~~~
+On 2024/12/20 21:30, Dmitry Antipov wrote:
+> Does FI_INLINE_XATTR always assume FI_EXTRA_ATTR? Looking through the code, it's
+> not quite clear (at a first glance at least). If this is not so, I have a strong
+> suspicion that FI_INLINE_XATTR-related checks in sanity_check_inode() should be
+> moved to outer scope (outside of FI_EXTRA_ATTR check), i.e.:
+> 
+> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> index 282fd320bdb3..3061cf69a7fb 100644
+> --- a/fs/f2fs/inode.c
+> +++ b/fs/f2fs/inode.c
+> @@ -302,15 +302,7 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+>    				  F2FS_TOTAL_EXTRA_ATTR_SIZE);
+>    			return false;
+>    		}
+> -		if (f2fs_sb_has_flexible_inline_xattr(sbi) &&
+> -			f2fs_has_inline_xattr(inode) &&
+> -			(!fi->i_inline_xattr_size ||
+> -			fi->i_inline_xattr_size > MAX_INLINE_XATTR_SIZE)) {
+> -			f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_inline_xattr_size: %d, max: %lu",
+> -				  __func__, inode->i_ino, fi->i_inline_xattr_size,
+> -				  MAX_INLINE_XATTR_SIZE);
+> -			return false;
+> -		}
+> +
+>    		if (f2fs_sb_has_compression(sbi) &&
+>    			fi->i_flags & F2FS_COMPR_FL &&
+>    			F2FS_FITS_IN_INODE(ri, fi->i_extra_isize,
+> @@ -320,6 +312,16 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+>    		}
+>    	}
+> 
+> +	if (f2fs_sb_has_flexible_inline_xattr(sbi) &&
+> +	    f2fs_has_inline_xattr(inode) &&
+> +	    (!fi->i_inline_xattr_size ||
+> +	     fi->i_inline_xattr_size > MAX_INLINE_XATTR_SIZE)) {
+> +		f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_inline_xattr_size: %d, max: %lu",
+> +			  __func__, inode->i_ino, fi->i_inline_xattr_size,
+> +			  MAX_INLINE_XATTR_SIZE);
+> +		return false;
+> +	}
+> +
+>    	if (!f2fs_sb_has_extra_attr(sbi)) {
+>    		if (f2fs_sb_has_project_quota(sbi)) {
+>    			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
+> 
+> (Looking around https://syzkaller.appspot.com/bug?extid=e4876215632c2d23b481).
+> 
+> Dmitry
+> 
 
-
-vim +/start_find_entry +339 fs/f2fs/dir.c
-
-   326	
-   327	struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
-   328						 const struct f2fs_filename *fname,
-   329						 struct page **res_page)
-   330	{
-   331		unsigned long npages = dir_blocks(dir);
-   332		struct f2fs_dir_entry *de = NULL;
-   333		unsigned int max_depth;
-   334		unsigned int level;
-   335		bool use_hash = true;
-   336	
-   337		*res_page = NULL;
-   338	
- > 339	start_find_entry:
-   340		if (f2fs_has_inline_dentry(dir)) {
-   341			de = f2fs_find_in_inline_dir(dir, fname, res_page, use_hash);
-   342			goto out;
-   343		}
-   344	
-   345		if (npages == 0)
-   346			goto out;
-   347	
-   348		max_depth = F2FS_I(dir)->i_current_depth;
-   349		if (unlikely(max_depth > MAX_DIR_HASH_DEPTH)) {
-   350			f2fs_warn(F2FS_I_SB(dir), "Corrupted max_depth of %lu: %u",
-   351				  dir->i_ino, max_depth);
-   352			max_depth = MAX_DIR_HASH_DEPTH;
-   353			f2fs_i_depth_write(dir, max_depth);
-   354		}
-   355	
-   356		for (level = 0; level < max_depth; level++) {
-   357			de = find_in_level(dir, level, fname, res_page, use_hash);
-   358			if (de || IS_ERR(*res_page))
-   359				break;
-   360		}
-   361	
-   362	out:
-   363	#if IS_ENABLED(CONFIG_UNICODE)
-   364		if (IS_CASEFOLDED(dir) && !de && use_hash) {
-   365			use_hash = false;
-   366			goto start_find_entry;
-   367		}
-   368	#endif
-   369		/* This is to increase the speed of f2fs_create */
-   370		if (!de)
-   371			F2FS_I(dir)->task = current;
-   372		return de;
-   373	}
-   374	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
 
 
 _______________________________________________
