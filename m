@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 544399FA5CE
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 22 Dec 2024 14:36:15 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB1199FA5D3
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 22 Dec 2024 14:38:37 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tPM7q-0005dU-El;
-	Sun, 22 Dec 2024 13:36:05 +0000
+	id 1tPMAA-0001aB-TG;
+	Sun, 22 Dec 2024 13:38:30 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tPM7N-0005cp-0Y
+ (envelope-from <chao@kernel.org>) id 1tPMA8-0001a4-No
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 22 Dec 2024 13:35:36 +0000
+ Sun, 22 Dec 2024 13:38:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lp9q+dAV6OcYc32Mc2zrE8vTR3RnFdWnvTSDG37ML2g=; b=i/00C5RTYtb/8nLqTvlZdvQkN5
- euQhrDViOjB+F0cfDmNG6unxob8ErSyMu9L8BO3+EgBcqX8gl0iuD4gUHq4w4jCYgdU8ubu/ikBrV
- uFd1k1gdW+/SsAB0/fGgDmOGTMq4v6bA/aG1qwgIHyNVIXrcqxhPENUdBqYzB1PQ7SCA=;
+ bh=hHnJXxiAsKRENu6GMwMHw0rcz7p/E0o+5kfk3d3o7fo=; b=fJaiEfgHtYAIIAu2F7VRpX5lD8
+ 4mBvlNPhiN+KXhlmzejt6j7cDmR8W+AgHESVbYcMAmL3tGhJcsC7xX3ysBqSAPdEbpxbZwth3W4Pq
+ B5ynBg1I3ilTfXnDXk1k5OLXoLQF2Q2+3j5WYOTu/ssrgaQu37zesrHvKbQ1Xr58Bxnc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,35 +31,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lp9q+dAV6OcYc32Mc2zrE8vTR3RnFdWnvTSDG37ML2g=; b=erCCDN4pFl8bo5yRT2qLHVO+bw
- osnv/WvaCFyXMENCOv9NAHpy7eXM4PZSt1LiJziXKEJPGJ08cAi636CsalQlE5JHLj/qzM6H/LEOz
- ytDIFwmbMLZJKXjR0npEHWoJX6U8/MKPcNTu3YSNYs+rrSjK+sVye/limVWinvz+M+u4=;
+ bh=hHnJXxiAsKRENu6GMwMHw0rcz7p/E0o+5kfk3d3o7fo=; b=Pqva7PRJq1bZJCl61nVWGYcVcp
+ fHPfTgtYXbN3NC9PdjlyS8ZfvjWSfCjkOpoESvWFl8VucwUVr0WJGGPB1rFSZrSkC/kAL8kJVmmJn
+ GCUM9WGomClkuWkW+SpNEEbV2jl5wd5Aqj/IVxU411XpcoxPYIrSM980bLh1B+Rzi0as=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tPM7L-0002Ju-95 for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 22 Dec 2024 13:35:36 +0000
+ id 1tPMA7-0002Vz-K2 for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 22 Dec 2024 13:38:28 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 073395C4AE2;
- Sun, 22 Dec 2024 13:34:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A9EAC4CECD;
- Sun, 22 Dec 2024 13:35:28 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 59E1A5C45F9;
+ Sun, 22 Dec 2024 13:37:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8BD0CC4CECD;
+ Sun, 22 Dec 2024 13:38:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734874529;
- bh=0dsM31fJQKgcthSLK8YUfTa4nVPsUP8sWTs97urURj8=;
+ s=k20201202; t=1734874701;
+ bh=6/dGTxmiKyxfGKy1d9zptGKy8mVdVrN4wN/M4n3W21E=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=sIgfDueg+cpXr2muMdy7JDAopso+iVbZfqae/3YBt4Q/jtWDdrPYcQpM6nRKUbi6F
- aTQRB2w21UwRbb2gJQtbe+rQ6KxbWuz/EcAFEghQjIPLkZkFfcw1ClEu4PFpydPOIK
- +ETfJzPjM3v/XHf+oJxaVsTNuXp5XW1Bz85X2RECoJh3meFSX7Pakmqn3t2uqx4nzO
- 31ef/hMcdk6/BwyT/CSQqLJ9opdyR/MPzF1gDfiOSviX0P3OwnbyfuzS4SkPOeJUL9
- gxJ+EYK/q+L2P5eqOytkaFHb4Y/6aitwVTRXHgGcHjv36GbRpkcvfYEGEePtlXGmB+
- wF1RseAq5G3cQ==
-Message-ID: <4f6e5f65-117d-4459-905e-94d8a71d36ff@kernel.org>
-Date: Sun, 22 Dec 2024 21:35:25 +0800
+ b=Zt3UskQ9fRdd006K++sN1fMmQtGBKsy82alEuPgIOW+kcIrplobJCHSf2e/LHTpCb
+ fc13Au6nkmdUwS2kiIT7l71tGh0FRqHr+j5sE7a/cOkAPaonbgsIllwjZ8rkmnwrgf
+ Wq4oOGoD4jOfkEYXdSPPt/jPSxXzo9N5EcvTZeqpPHXckTl5n3ZbUf7WKnzics9Qr/
+ I+IJjJLDIJcV/+G8f2xs2v5bLRWrKUi47ZGuPK/D7+pCKkk2ilWhyC//QqH+TlnqyR
+ GPUfubVhTRfGygyXZN+ae2LViugzyucdXn0MsnR5QbrE5fxEhn2besOKUIwvIMH08U
+ 8lPoFIYSc+BzA==
+Message-ID: <136d1e9b-cc8c-4c21-b7f9-abed5741d5e1@kernel.org>
+Date: Sun, 22 Dec 2024 21:38:18 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Daniel Lee <chullee@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20241220234131.1089833-1-chullee@google.com>
+To: syzbot <syzbot+e4876215632c2d23b481@syzkaller.appspotmail.com>,
+ jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
+References: <6764cecc.050a0220.1bfc9e.0001.GAE@google.com>
 Content-Language: en-US
 Autocrypt: addr=chao@kernel.org; keydata=
  xsFNBFYs6bUBEADJuxYGZRMvAEySns+DKVtVQRKDYcHlmj+s9is35mtlhrLyjm35FWJY099R
@@ -103,7 +105,7 @@ Autocrypt: addr=chao@kernel.org; keydata=
  92Qh98hAj3cMFKtEVbLKJvrc2AO+mQlS7zl1qWblEhpZnXi05S1AoT0gDW2lwe54VfT3ySon
  8Klpbp5W4eEoY21tLwuNzgUMxmycfM4GaJWNCncKuMT4qGVQO9SPFs0vgUrdBUC5Pn5ZJ46X
  mZA0DUz0S8BJtYGI0DUC/jAKhIgy1vAx39y7sAshwu2VILa71tXJ
-In-Reply-To: <20241220234131.1089833-1-chullee@google.com>
+In-Reply-To: <6764cecc.050a0220.1bfc9e.0001.GAE@google.com>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -111,27 +113,28 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/12/21 7:41, Daniel Lee wrote: > This patch addresses
- an issue where some files in case-insensitive > directories become
- inaccessible
- due to changes in how the kernel function, > utf8_casefold( [...] 
+ Content preview: #syz test:
+ https://https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git
+ wip On 2024/12/20 9:56, syzbot wrote: > Hello, > > syzbot found the following
+ issue on: > > HEAD commit: 2e7aff49b5da Merge branches 'for-next/core' and
+ 'for-next/.. > git tree: git://git.kernel.org/pub/s [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [139.178.84.217 listed in bl.score.senderscore.com]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -140,8 +143,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tPM7L-0002Ju-95
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: Introduce linear search for dentries
+X-Headers-End: 1tPMA7-0002Vz-K2
+Subject: Re: [f2fs-dev] [syzbot] [f2fs?] UBSAN: array-index-out-of-bounds in
+ inline_xattr_addr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -155,236 +159,218 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/12/21 7:41, Daniel Lee wrote:
-> This patch addresses an issue where some files in case-insensitive
-> directories become inaccessible due to changes in how the kernel function,
-> utf8_casefold(), generates case-folded strings from the commit 5c26d2f1d3f5
-> ("unicode: Don't special case ignorable code points").
+#syz test: https://https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git wip
+
+On 2024/12/20 9:56, syzbot wrote:
+> Hello,
 > 
-> F2FS uses these case-folded names to calculate hash values for locating
-> dentries and stores them on disk. Since utf8_casefold() can produce
-> different output across kernel versions, stored hash values and newly
-> calculated hash values may differ. This results in affected files no
-> longer being found via the hash-based lookup.
+> syzbot found the following issue on:
 > 
-> To resolve this, the patch introduces a linear search fallback.
-> If the initial hash-based search fails, F2FS will sequentially scan the
-> directory entries.
+> HEAD commit:    2e7aff49b5da Merge branches 'for-next/core' and 'for-next/..
+> git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
+> console output: https://syzkaller.appspot.com/x/log.txt?x=11b77344580000
+> kernel config:  https://syzkaller.appspot.com/x/.config?x=696fb014d05da3a3
+> dashboard link: https://syzkaller.appspot.com/bug?extid=e4876215632c2d23b481
+> compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
+> userspace arch: arm64
+> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1121d4f8580000
+> C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=13511730580000
 > 
-> Fixes: 5c26d2f1d3f5 ("unicode: Don't special case ignorable code points")
-> Link: https://bugzilla.kernel.org/show_bug.cgi?id=219586
-> Signed-off-by: Daniel Lee <chullee@google.com>
+> Downloadable assets:
+> disk image: https://storage.googleapis.com/syzbot-assets/ef408f67fde3/disk-2e7aff49.raw.xz
+> vmlinux: https://storage.googleapis.com/syzbot-assets/414ac17a20dc/vmlinux-2e7aff49.xz
+> kernel image: https://storage.googleapis.com/syzbot-assets/a93415d2a7e7/Image-2e7aff49.gz.xz
+> mounted in repro: https://storage.googleapis.com/syzbot-assets/57bb66f25be5/mount_0.gz
+> 
+> IMPORTANT: if you fix the issue, please add the following tag to the commit:
+> Reported-by: syzbot+e4876215632c2d23b481@syzkaller.appspotmail.com
+> 
+> F2FS-fs (loop0): Failed to enable quota tracking (type=1, err=-22). Please run fsck to fix.
+> F2FS-fs (loop0): Cannot turn on quotas: error -22
+> F2FS-fs (loop0): Mounted with checkpoint version = 1b41e954
+> ------------[ cut here ]------------
+> UBSAN: array-index-out-of-bounds in fs/f2fs/f2fs.h:3292:19
+> index 18446744073709500059 is out of range for type '__le32[923]' (aka 'unsigned int[923]')
+> CPU: 0 UID: 0 PID: 6410 Comm: syz-executor883 Not tainted 6.13.0-rc2-syzkaller-g2e7aff49b5da #0
+> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/13/2024
+> Call trace:
+>   show_stack+0x2c/0x3c arch/arm64/kernel/stacktrace.c:484 (C)
+>   __dump_stack lib/dump_stack.c:94 [inline]
+>   dump_stack_lvl+0xe4/0x150 lib/dump_stack.c:120
+>   dump_stack+0x1c/0x28 lib/dump_stack.c:129
+>   ubsan_epilogue lib/ubsan.c:231 [inline]
+>   __ubsan_handle_out_of_bounds+0xf8/0x148 lib/ubsan.c:429
+>   inline_xattr_addr+0x524/0x530 fs/f2fs/f2fs.h:3292
+>   read_inline_xattr fs/f2fs/xattr.c:289 [inline]
+>   lookup_all_xattrs fs/f2fs/xattr.c:341 [inline]
+>   f2fs_getxattr+0x5b4/0x1064 fs/f2fs/xattr.c:533
+>   f2fs_xattr_generic_get+0x130/0x174 fs/f2fs/xattr.c:63
+>   __vfs_getxattr+0x394/0x3c0 fs/xattr.c:423
+>   smk_fetch+0xc8/0x150 security/smack/smack_lsm.c:306
+>   smack_d_instantiate+0x594/0x880 security/smack/smack_lsm.c:3615
+>   security_d_instantiate+0x100/0x204 security/security.c:4070
+>   d_splice_alias+0x70/0x310 fs/dcache.c:3001
+>   f2fs_lookup+0x4c8/0x948 fs/f2fs/namei.c:523
+>   lookup_one_qstr_excl+0x108/0x230 fs/namei.c:1692
+>   filename_create+0x230/0x468 fs/namei.c:4081
+>   do_mkdirat+0xac/0x574 fs/namei.c:4326
+>   __do_sys_mkdirat fs/namei.c:4349 [inline]
+>   __se_sys_mkdirat fs/namei.c:4347 [inline]
+>   __arm64_sys_mkdirat+0x8c/0xa4 fs/namei.c:4347
+>   __invoke_syscall arch/arm64/kernel/syscall.c:35 [inline]
+>   invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:49
+>   el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:132
+>   do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:151
+>   el0_svc+0x54/0x168 arch/arm64/kernel/entry-common.c:744
+>   el0t_64_sync_handler+0x84/0x108 arch/arm64/kernel/entry-common.c:762
+>   el0t_64_sync+0x198/0x19c arch/arm64/kernel/entry.S:600
+> ---[ end trace ]---
+> ==================================================================
+> BUG: KASAN: slab-use-after-free in read_inline_xattr fs/f2fs/xattr.c:291 [inline]
+> BUG: KASAN: slab-use-after-free in lookup_all_xattrs fs/f2fs/xattr.c:341 [inline]
+> BUG: KASAN: slab-use-after-free in f2fs_getxattr+0x5c8/0x1064 fs/f2fs/xattr.c:533
+> Read of size 209920 at addr ffff0000d7f1ebd4 by task syz-executor883/6410
+> 
+> CPU: 0 UID: 0 PID: 6410 Comm: syz-executor883 Not tainted 6.13.0-rc2-syzkaller-g2e7aff49b5da #0
+> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/13/2024
+> Call trace:
+>   show_stack+0x2c/0x3c arch/arm64/kernel/stacktrace.c:484 (C)
+>   __dump_stack lib/dump_stack.c:94 [inline]
+>   dump_stack_lvl+0xe4/0x150 lib/dump_stack.c:120
+>   print_address_description mm/kasan/report.c:378 [inline]
+>   print_report+0x198/0x538 mm/kasan/report.c:489
+>   kasan_report+0xd8/0x138 mm/kasan/report.c:602
+>   kasan_check_range+0x268/0x2a8 mm/kasan/generic.c:189
+>   __asan_memcpy+0x3c/0x84 mm/kasan/shadow.c:105
+>   read_inline_xattr fs/f2fs/xattr.c:291 [inline]
+>   lookup_all_xattrs fs/f2fs/xattr.c:341 [inline]
+>   f2fs_getxattr+0x5c8/0x1064 fs/f2fs/xattr.c:533
+>   f2fs_xattr_generic_get+0x130/0x174 fs/f2fs/xattr.c:63
+>   __vfs_getxattr+0x394/0x3c0 fs/xattr.c:423
+>   smk_fetch+0xc8/0x150 security/smack/smack_lsm.c:306
+>   smack_d_instantiate+0x594/0x880 security/smack/smack_lsm.c:3615
+>   security_d_instantiate+0x100/0x204 security/security.c:4070
+>   d_splice_alias+0x70/0x310 fs/dcache.c:3001
+>   f2fs_lookup+0x4c8/0x948 fs/f2fs/namei.c:523
+>   lookup_one_qstr_excl+0x108/0x230 fs/namei.c:1692
+>   filename_create+0x230/0x468 fs/namei.c:4081
+>   do_mkdirat+0xac/0x574 fs/namei.c:4326
+>   __do_sys_mkdirat fs/namei.c:4349 [inline]
+>   __se_sys_mkdirat fs/namei.c:4347 [inline]
+>   __arm64_sys_mkdirat+0x8c/0xa4 fs/namei.c:4347
+>   __invoke_syscall arch/arm64/kernel/syscall.c:35 [inline]
+>   invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:49
+>   el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:132
+>   do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:151
+>   el0_svc+0x54/0x168 arch/arm64/kernel/entry-common.c:744
+>   el0t_64_sync_handler+0x84/0x108 arch/arm64/kernel/entry-common.c:762
+>   el0t_64_sync+0x198/0x19c arch/arm64/kernel/entry.S:600
+> 
+> Allocated by task 6343:
+>   kasan_save_stack mm/kasan/common.c:47 [inline]
+>   kasan_save_track+0x40/0x78 mm/kasan/common.c:68
+>   kasan_save_alloc_info+0x40/0x50 mm/kasan/generic.c:568
+>   unpoison_slab_object mm/kasan/common.c:319 [inline]
+>   __kasan_slab_alloc+0x74/0x8c mm/kasan/common.c:345
+>   kasan_slab_alloc include/linux/kasan.h:250 [inline]
+>   slab_post_alloc_hook mm/slub.c:4104 [inline]
+>   slab_alloc_node mm/slub.c:4153 [inline]
+>   kmem_cache_alloc_noprof+0x254/0x410 mm/slub.c:4160
+>   getname_flags+0xcc/0x4b4 fs/namei.c:139
+>   getname+0x24/0x34 fs/namei.c:223
+>   do_sys_openat2+0xd0/0x1b8 fs/open.c:1396
+>   do_sys_open fs/open.c:1417 [inline]
+>   __do_sys_openat fs/open.c:1433 [inline]
+>   __se_sys_openat fs/open.c:1428 [inline]
+>   __arm64_sys_openat+0x1f0/0x240 fs/open.c:1428
+>   __invoke_syscall arch/arm64/kernel/syscall.c:35 [inline]
+>   invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:49
+>   el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:132
+>   do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:151
+>   el0_svc+0x54/0x168 arch/arm64/kernel/entry-common.c:744
+>   el0t_64_sync_handler+0x84/0x108 arch/arm64/kernel/entry-common.c:762
+>   el0t_64_sync+0x198/0x19c arch/arm64/kernel/entry.S:600
+> 
+> Freed by task 6343:
+>   kasan_save_stack mm/kasan/common.c:47 [inline]
+>   kasan_save_track+0x40/0x78 mm/kasan/common.c:68
+>   kasan_save_free_info+0x54/0x6c mm/kasan/generic.c:582
+>   poison_slab_object mm/kasan/common.c:247 [inline]
+>   __kasan_slab_free+0x64/0x8c mm/kasan/common.c:264
+>   kasan_slab_free include/linux/kasan.h:233 [inline]
+>   slab_free_hook mm/slub.c:2338 [inline]
+>   slab_free mm/slub.c:4598 [inline]
+>   kmem_cache_free+0x198/0x554 mm/slub.c:4700
+>   putname+0x130/0x184 fs/namei.c:296
+>   do_sys_openat2+0x164/0x1b8 fs/open.c:1410
+>   do_sys_open fs/open.c:1417 [inline]
+>   __do_sys_openat fs/open.c:1433 [inline]
+>   __se_sys_openat fs/open.c:1428 [inline]
+>   __arm64_sys_openat+0x1f0/0x240 fs/open.c:1428
+>   __invoke_syscall arch/arm64/kernel/syscall.c:35 [inline]
+>   invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:49
+>   el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:132
+>   do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:151
+>   el0_svc+0x54/0x168 arch/arm64/kernel/entry-common.c:744
+>   el0t_64_sync_handler+0x84/0x108 arch/arm64/kernel/entry-common.c:762
+>   el0t_64_sync+0x198/0x19c arch/arm64/kernel/entry.S:600
+> 
+> The buggy address belongs to the object at ffff0000d7f1e600
+>   which belongs to the cache names_cache of size 4096
+> The buggy address is located 1492 bytes inside of
+>   freed 4096-byte region [ffff0000d7f1e600, ffff0000d7f1f600)
+> 
+> The buggy address belongs to the physical page:
+> page: refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x117f18
+> head: order:3 mapcount:0 entire_mapcount:0 nr_pages_mapped:0 pincount:0
+> flags: 0x5ffc00000000040(head|node=0|zone=2|lastcpupid=0x7ff)
+> page_type: f5(slab)
+> raw: 05ffc00000000040 ffff0000c18958c0 dead000000000122 0000000000000000
+> raw: 0000000000000000 0000000000070007 00000001f5000000 0000000000000000
+> head: 05ffc00000000040 ffff0000c18958c0 dead000000000122 0000000000000000
+> head: 0000000000000000 0000000000070007 00000001f5000000 0000000000000000
+> head: 05ffc00000000003 fffffdffc35fc601 ffffffffffffffff 0000000000000000
+> head: 0000000000000008 0000000000000000 00000000ffffffff 0000000000000000
+> page dumped because: kasan: bad access detected
+> 
+> Memory state around the buggy address:
+>   ffff0000d7f1ea80: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+>   ffff0000d7f1eb00: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+>> ffff0000d7f1eb80: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+>                                                   ^
+>   ffff0000d7f1ec00: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+>   ffff0000d7f1ec80: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+> ==================================================================
+> 
+> 
 > ---
-> v3:
-> - Fix the unused label warning
-> v2:
-> - Only update chash if use_hash is true
->   fs/f2fs/dir.c    | 42 +++++++++++++++++++++++++++++++-----------
->   fs/f2fs/f2fs.h   |  6 ++++--
->   fs/f2fs/inline.c |  5 +++--
->   3 files changed, 38 insertions(+), 15 deletions(-)
+> This report is generated by a bot. It may contain errors.
+> See https://goo.gl/tpsmEJ for more information about syzbot.
+> syzbot engineers can be reached at syzkaller@googlegroups.com.
 > 
-> diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-> index 47a5c806cf16..058b8be9a373 100644
-> --- a/fs/f2fs/dir.c
-> +++ b/fs/f2fs/dir.c
-> @@ -175,7 +175,8 @@ static unsigned long dir_block_index(unsigned int level,
->   static struct f2fs_dir_entry *find_in_block(struct inode *dir,
->   				struct page *dentry_page,
->   				const struct f2fs_filename *fname,
-> -				int *max_slots)
-> +				int *max_slots,
-> +				bool use_hash)
->   {
->   	struct f2fs_dentry_block *dentry_blk;
->   	struct f2fs_dentry_ptr d;
-> @@ -183,7 +184,7 @@ static struct f2fs_dir_entry *find_in_block(struct inode *dir,
->   	dentry_blk = (struct f2fs_dentry_block *)page_address(dentry_page);
->   
->   	make_dentry_ptr_block(dir, &d, dentry_blk);
-> -	return f2fs_find_target_dentry(&d, fname, max_slots);
-> +	return f2fs_find_target_dentry(&d, fname, max_slots, use_hash);
->   }
->   
->   static inline int f2fs_match_name(const struct inode *dir,
-> @@ -208,7 +209,8 @@ static inline int f2fs_match_name(const struct inode *dir,
->   }
->   
->   struct f2fs_dir_entry *f2fs_find_target_dentry(const struct f2fs_dentry_ptr *d,
-> -			const struct f2fs_filename *fname, int *max_slots)
-> +			const struct f2fs_filename *fname, int *max_slots,
-> +			bool use_hash)
->   {
->   	struct f2fs_dir_entry *de;
->   	unsigned long bit_pos = 0;
-> @@ -231,7 +233,7 @@ struct f2fs_dir_entry *f2fs_find_target_dentry(const struct f2fs_dentry_ptr *d,
->   			continue;
->   		}
->   
-> -		if (de->hash_code == fname->hash) {
-> +		if (!use_hash || de->hash_code == fname->hash) {
->   			res = f2fs_match_name(d->inode, fname,
->   					      d->filename[bit_pos],
->   					      le16_to_cpu(de->name_len));
-> @@ -258,11 +260,12 @@ struct f2fs_dir_entry *f2fs_find_target_dentry(const struct f2fs_dentry_ptr *d,
->   static struct f2fs_dir_entry *find_in_level(struct inode *dir,
->   					unsigned int level,
->   					const struct f2fs_filename *fname,
-> -					struct page **res_page)
-> +					struct page **res_page,
-> +					bool use_hash)
->   {
->   	int s = GET_DENTRY_SLOTS(fname->disk_name.len);
->   	unsigned int nbucket, nblock;
-> -	unsigned int bidx, end_block;
-> +	unsigned int bidx, end_block, bucket_no;
->   	struct page *dentry_page;
->   	struct f2fs_dir_entry *de = NULL;
->   	pgoff_t next_pgofs;
-> @@ -272,8 +275,11 @@ static struct f2fs_dir_entry *find_in_level(struct inode *dir,
->   	nbucket = dir_buckets(level, F2FS_I(dir)->i_dir_level);
->   	nblock = bucket_blocks(level);
->   
-> +	bucket_no = use_hash ? le32_to_cpu(fname->hash) % nbucket : 0;
-> +
-> +start_find_bucket:
->   	bidx = dir_block_index(level, F2FS_I(dir)->i_dir_level,
-> -			       le32_to_cpu(fname->hash) % nbucket);
-> +			       bucket_no);
->   	end_block = bidx + nblock;
->   
->   	while (bidx < end_block) {
-> @@ -290,7 +296,7 @@ static struct f2fs_dir_entry *find_in_level(struct inode *dir,
->   			}
->   		}
->   
-> -		de = find_in_block(dir, dentry_page, fname, &max_slots);
-> +		de = find_in_block(dir, dentry_page, fname, &max_slots, use_hash);
->   		if (IS_ERR(de)) {
->   			*res_page = ERR_CAST(de);
->   			de = NULL;
-> @@ -307,7 +313,10 @@ static struct f2fs_dir_entry *find_in_level(struct inode *dir,
->   		bidx++;
->   	}
->   
-> -	if (!de && room && F2FS_I(dir)->chash != fname->hash) {
-> +	if (!use_hash && !de && ++bucket_no < nbucket)
-> +		goto start_find_bucket;
-> +
-> +	if (use_hash && !de && room && F2FS_I(dir)->chash != fname->hash) {
->   		F2FS_I(dir)->chash = fname->hash;
->   		F2FS_I(dir)->clevel = level;
-
-What about cleaning up w/
-
-	if (de)
-		return de;
-
-	if (use_hash) {
-		if (room && F2FS_I(dir)->chash != fname->hash) {
-			...
-		}
-	} else if (++bucket_no < nbucket)
-		goto start_find_bucket;
-	}
-	return NULL;
-
-Otherwise, it looks good to me, anyway,
-
-Reviewed-by: Chao Yu <chao@kernel.org>
-
-Thanks,
-
->   	}
-> @@ -323,11 +332,15 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
->   	struct f2fs_dir_entry *de = NULL;
->   	unsigned int max_depth;
->   	unsigned int level;
-> +	bool use_hash = true;
->   
->   	*res_page = NULL;
->   
-> +#if IS_ENABLED(CONFIG_UNICODE)
-> +start_find_entry:
-> +#endif
->   	if (f2fs_has_inline_dentry(dir)) {
-> -		de = f2fs_find_in_inline_dir(dir, fname, res_page);
-> +		de = f2fs_find_in_inline_dir(dir, fname, res_page, use_hash);
->   		goto out;
->   	}
->   
-> @@ -343,11 +356,18 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
->   	}
->   
->   	for (level = 0; level < max_depth; level++) {
-> -		de = find_in_level(dir, level, fname, res_page);
-> +		de = find_in_level(dir, level, fname, res_page, use_hash);
->   		if (de || IS_ERR(*res_page))
->   			break;
->   	}
-> +
->   out:
-> +#if IS_ENABLED(CONFIG_UNICODE)
-> +	if (IS_CASEFOLDED(dir) && !de && use_hash) {
-> +		use_hash = false;
-> +		goto start_find_entry;
-> +	}
-> +#endif
->   	/* This is to increase the speed of f2fs_create */
->   	if (!de)
->   		F2FS_I(dir)->task = current;
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index f523dd302bf6..1afebb9c4061 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -3588,7 +3588,8 @@ int f2fs_prepare_lookup(struct inode *dir, struct dentry *dentry,
->   			struct f2fs_filename *fname);
->   void f2fs_free_filename(struct f2fs_filename *fname);
->   struct f2fs_dir_entry *f2fs_find_target_dentry(const struct f2fs_dentry_ptr *d,
-> -			const struct f2fs_filename *fname, int *max_slots);
-> +			const struct f2fs_filename *fname, int *max_slots,
-> +			bool use_hash);
->   int f2fs_fill_dentries(struct dir_context *ctx, struct f2fs_dentry_ptr *d,
->   			unsigned int start_pos, struct fscrypt_str *fstr);
->   void f2fs_do_make_empty_dir(struct inode *inode, struct inode *parent,
-> @@ -4224,7 +4225,8 @@ int f2fs_write_inline_data(struct inode *inode, struct folio *folio);
->   int f2fs_recover_inline_data(struct inode *inode, struct page *npage);
->   struct f2fs_dir_entry *f2fs_find_in_inline_dir(struct inode *dir,
->   					const struct f2fs_filename *fname,
-> -					struct page **res_page);
-> +					struct page **res_page,
-> +					bool use_hash);
->   int f2fs_make_empty_inline_dir(struct inode *inode, struct inode *parent,
->   			struct page *ipage);
->   int f2fs_add_inline_entry(struct inode *dir, const struct f2fs_filename *fname,
-> diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-> index cbd2a0d34804..3e3c35d4c98b 100644
-> --- a/fs/f2fs/inline.c
-> +++ b/fs/f2fs/inline.c
-> @@ -352,7 +352,8 @@ int f2fs_recover_inline_data(struct inode *inode, struct page *npage)
->   
->   struct f2fs_dir_entry *f2fs_find_in_inline_dir(struct inode *dir,
->   					const struct f2fs_filename *fname,
-> -					struct page **res_page)
-> +					struct page **res_page,
-> +					bool use_hash)
->   {
->   	struct f2fs_sb_info *sbi = F2FS_SB(dir->i_sb);
->   	struct f2fs_dir_entry *de;
-> @@ -369,7 +370,7 @@ struct f2fs_dir_entry *f2fs_find_in_inline_dir(struct inode *dir,
->   	inline_dentry = inline_data_addr(dir, ipage);
->   
->   	make_dentry_ptr_inline(dir, &d, inline_dentry);
-> -	de = f2fs_find_target_dentry(&d, fname, NULL);
-> +	de = f2fs_find_target_dentry(&d, fname, NULL, use_hash);
->   	unlock_page(ipage);
->   	if (IS_ERR(de)) {
->   		*res_page = ERR_CAST(de);
+> syzbot will keep track of this issue. See:
+> https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+> 
+> If the report is already addressed, let syzbot know by replying with:
+> #syz fix: exact-commit-title
+> 
+> If you want syzbot to run the reproducer, reply with:
+> #syz test: git://repo/address.git branch-or-commit-hash
+> If you attach or paste a git patch, syzbot will apply it before testing.
+> 
+> If you want to overwrite report's subsystems, reply with:
+> #syz set subsystems: new-subsystem
+> (See the list of subsystem names on the web dashboard)
+> 
+> If the report is a duplicate of another one, reply with:
+> #syz dup: exact-subject-of-another-report
+> 
+> If you want to undo deduplication, reply with:
+> #syz undup
 
 
 
