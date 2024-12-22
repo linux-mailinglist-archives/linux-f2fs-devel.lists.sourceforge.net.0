@@ -2,150 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEA609FA5DB
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 22 Dec 2024 14:57:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D407E9FA7A3
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 22 Dec 2024 20:14:12 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tPMSo-0001vi-Or;
-	Sun, 22 Dec 2024 13:57:46 +0000
+	id 1tPROs-0004x3-1P;
+	Sun, 22 Dec 2024 19:14:02 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tPMSm-0001vZ-PC
- for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 22 Dec 2024 13:57:44 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <31WRoZwkbAIIy45qgrrkxgvvoj.muumrk0ykxiutzktz.ius@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1tPRON-0004wO-MH for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 22 Dec 2024 19:13:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
+ :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IDjy6zk/NZPYtAGW/d86AVZtLZsvyRkMfMoArnV6k20=; b=lzOlawQl+1uRhfFtgYVXoi9Hb7
- ebVXLDXROwjJlIZ6l2HuH0JyMWwnQBXEqeIBXUdrLaRP7IguU/PqWL/a7YHicKYYEDjNmI9mCFGW3
- DUHlcDszRonG5guyyCsbJPBWPN1Sa+47Deex4KNJnDejqJwa4t8hnxd4J8KXLfBb4tiA=;
+ bh=XUnHXLellpxXfJVJ34ASXd3kwMDn7EDnrcdkuZlh+9E=; b=DtrzMxPpG05ttxKK4q9cLXNSCx
+ eLoEMXa6wIP8q4zfEa8bgK/ibB/pU4/m1kNMVWs46CN1gIVQGwv5l4qQCNb9KXI0RtNbS8eNEcg20
+ s0tbm9dbXiWqwxux02IMQ1VPe7QNvFWudVZjrr1ToM0+dLGah1RITFyY0s4l9KvtGUUE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=IDjy6zk/NZPYtAGW/d86AVZtLZsvyRkMfMoArnV6k20=; b=CS/VWVADh+7gvZaJDytNyQa0x6
- 3DKkp8JiZP29EwoTJDGalmCPPaFcdMh+l9OArzrGH95foR3muuxuQDGUKGUxdvIcI9iagHVE1SDZP
- /dWjM5HiXl3K7SuODlIZJ+jCcNik9G0OF7KDZKK7L2gtjM1phkaqi7jyak7Q6ALMQSz8=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
+ Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=XUnHXLellpxXfJVJ34ASXd3kwMDn7EDnrcdkuZlh+9E=; b=Z
+ G/MqTRePIVorMIRfCawzeXYjKo194vigUZ3TQrI74TNPZ84Vr8dWvDKWUbWIQLS0047acn3D7mWRZ
+ xQkn4jfva5ne80966Jrv+AtC0dvtgp/gzJkihwE3kXWXw9mpzfKiyIvyrzE/kF47vUOnT+pSovkb2
+ aiMVoQfWylD9SmY8=;
+Received: from mail-il1-f205.google.com ([209.85.166.205])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tPMSl-0004ER-L2 for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 22 Dec 2024 13:57:44 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 358795C4B0E;
- Sun, 22 Dec 2024 13:56:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 733DBC4CECD;
- Sun, 22 Dec 2024 13:57:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734875852;
- bh=u68fwwpB05T9jSR9Ejqqa+HF0jdSD6kD2716pTq3fPg=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=gW8PdJAXZ3HMz/eUlLynmmDTj3k0Wi9mDY+xqBS6JY5zfPKfL6hF8lJKWDmtcWszt
- EiLb64BqECxWbgIMGl1lDxPFsS8NuW3v6402mHYtXBCmRQfFV4DSvFxqQ1WKDWR9q8
- oaGYoqm5dpvndeHc5nAzK4Hu0F1Anui8KUHplaOCYyTX8LIEez0tU0BxPo1MoPeV64
- iVwmKVeiftHYSiAr9FXIZ4xVOGGz5usReGaHeJ2ZhOIpV+S3Q6YqpHte/gJqPeKlTH
- c37/uQmf/kOr9MGY7QB91PM8xt1Cj+/bLngh2PrSZKGv73WcbK+5JXqxf2fsYNBLP5
- DoAoAmzg6+SGg==
-Message-ID: <3768d492-8de1-4165-948c-192054ff051b@kernel.org>
-Date: Sun, 22 Dec 2024 21:57:29 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1tPROM-0001F0-RM for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 22 Dec 2024 19:13:31 +0000
+Received: by mail-il1-f205.google.com with SMTP id
+ e9e14a558f8ab-3a812f562bbso74500195ab.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 22 Dec 2024 11:13:30 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734894805; x=1735499605;
+ h=to:from:subject:message-id:in-reply-to:date:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XUnHXLellpxXfJVJ34ASXd3kwMDn7EDnrcdkuZlh+9E=;
+ b=wvkRRYDMPM/iGTMM9mLToDXZNPg4R+lpZ8GqJkz4mOnmGaCqe1k/wOV0bDZf7upYq5
+ pN+hoXR4OaiQXBWzNtss7XmoWsJ+tTxqa2T5uf4D3XDGVr+2JZz2bu3/0XzorNxQaV4x
+ cMLKG1A+qEufduwb2ZoTru7ENczAlaJ52be3Je8TRMKMTHTFc/EdnJelEApmhcmQSJMI
+ 1TylSdHl/ZwNoRS+dxI8lhPufWi/H8CZt2tYUbHivZ8dldzL3qcwBvVHRYSDemKflJl3
+ Nu/5XNC7D+p5nEeYYkYlT4Q4F//gu2h+uaYUh0E+/FBDsjkUKiylhRnij/3PYh0fwZ5d
+ QOOw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXDq8T82MXJXqOLPfo599+APCamK584cCsOn9ilVw3u0G7XFl8jg8R5BSOTq/E9GLTsX2oilRnC+xo7/A7qxTQC@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzW8BLvGYarJQSPkIYDcXwWPD6w8F42VuCOrHga7dgpO05K4XS2
+ arKDUOr0HsZN7gA6hf+RQ5kWi325SxfByxo3XOMbPmjD7CU/qCYKMUwX/pL7wvPZkSnS9SGpioO
+ XaQ90qu+fYUMiF9u6erW+jb57tz4krAXTJPgPJeVNVzT827LqjzpqpUg=
+X-Google-Smtp-Source: AGHT+IHfYjtBAla6Dju0icxhJIz0UtiUbY8FgcltfTwTZ4qfzNIOkNHMtk0tklVq8RPqK564er2nxZ1fHKxNEz2ipBYlJ+sJO+P7
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: syzbot <syzbot+e4876215632c2d23b481@syzkaller.appspotmail.com>,
- jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
-References: <6764cecc.050a0220.1bfc9e.0001.GAE@google.com>
-Content-Language: en-US
-Autocrypt: addr=chao@kernel.org; keydata=
- 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
-In-Reply-To: <6764cecc.050a0220.1bfc9e.0001.GAE@google.com>
-X-Spam-Score: -5.3 (-----)
+X-Received: by 2002:a92:b710:0:b0:3a7:e732:471b with SMTP id
+ e9e14a558f8ab-3c4fd09b311mr47879635ab.11.1734894805111; Sun, 22 Dec 2024
+ 11:13:25 -0800 (PST)
+Date: Sun, 22 Dec 2024 11:13:25 -0800
+In-Reply-To: <674f4e7d.050a0220.17bd51.004f.GAE@google.com>
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <676864d5.050a0220.226966.002c.GAE@google.com>
+From: syzbot <syzbot+69f5379a1717a0b982a1@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.5 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: #syz test:
- https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git
- wip On 2024/12/20 9:56, syzbot wrote: > Hello, > > syzbot found the following
- issue on: > > HEAD commit: 2e7aff49b5da Merge branches 'for-next/core' and
- 'for-next/.. > git tree: git://git.kernel.org/pub/s [...] 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  syzbot has found a reproducer for the following issue on:
+ HEAD commit: bcde95ce32b6 Merge tag 'devicetree-fixes-for-6.13-1' of gi..
+ git tree: upstream console+strace:
+ https://syzkaller.appspot.com/x/log.txt?x=116c0adf980000
+ kernel config: https://syzkaller.a [...] 
+ Content analysis details:   (0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ [209.85.166.205 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
+ [209.85.166.205 listed in bl.score.senderscore.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.166.205 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tPMSl-0004ER-L2
+X-Headers-End: 1tPROM-0001F0-RM
 Subject: Re: [f2fs-dev] [syzbot] [f2fs?] UBSAN: array-index-out-of-bounds in
- inline_xattr_addr
+ read_inline_xattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -157,221 +119,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-#syz test: https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git wip
+syzbot has found a reproducer for the following issue on:
 
-On 2024/12/20 9:56, syzbot wrote:
-> Hello,
-> 
-> syzbot found the following issue on:
-> 
-> HEAD commit:    2e7aff49b5da Merge branches 'for-next/core' and 'for-next/..
-> git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
-> console output: https://syzkaller.appspot.com/x/log.txt?x=11b77344580000
-> kernel config:  https://syzkaller.appspot.com/x/.config?x=696fb014d05da3a3
-> dashboard link: https://syzkaller.appspot.com/bug?extid=e4876215632c2d23b481
-> compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-> userspace arch: arm64
-> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1121d4f8580000
-> C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=13511730580000
-> 
-> Downloadable assets:
-> disk image: https://storage.googleapis.com/syzbot-assets/ef408f67fde3/disk-2e7aff49.raw.xz
-> vmlinux: https://storage.googleapis.com/syzbot-assets/414ac17a20dc/vmlinux-2e7aff49.xz
-> kernel image: https://storage.googleapis.com/syzbot-assets/a93415d2a7e7/Image-2e7aff49.gz.xz
-> mounted in repro: https://storage.googleapis.com/syzbot-assets/57bb66f25be5/mount_0.gz
-> 
-> IMPORTANT: if you fix the issue, please add the following tag to the commit:
-> Reported-by: syzbot+e4876215632c2d23b481@syzkaller.appspotmail.com
-> 
-> F2FS-fs (loop0): Failed to enable quota tracking (type=1, err=-22). Please run fsck to fix.
-> F2FS-fs (loop0): Cannot turn on quotas: error -22
-> F2FS-fs (loop0): Mounted with checkpoint version = 1b41e954
-> ------------[ cut here ]------------
-> UBSAN: array-index-out-of-bounds in fs/f2fs/f2fs.h:3292:19
-> index 18446744073709500059 is out of range for type '__le32[923]' (aka 'unsigned int[923]')
-> CPU: 0 UID: 0 PID: 6410 Comm: syz-executor883 Not tainted 6.13.0-rc2-syzkaller-g2e7aff49b5da #0
-> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/13/2024
-> Call trace:
->   show_stack+0x2c/0x3c arch/arm64/kernel/stacktrace.c:484 (C)
->   __dump_stack lib/dump_stack.c:94 [inline]
->   dump_stack_lvl+0xe4/0x150 lib/dump_stack.c:120
->   dump_stack+0x1c/0x28 lib/dump_stack.c:129
->   ubsan_epilogue lib/ubsan.c:231 [inline]
->   __ubsan_handle_out_of_bounds+0xf8/0x148 lib/ubsan.c:429
->   inline_xattr_addr+0x524/0x530 fs/f2fs/f2fs.h:3292
->   read_inline_xattr fs/f2fs/xattr.c:289 [inline]
->   lookup_all_xattrs fs/f2fs/xattr.c:341 [inline]
->   f2fs_getxattr+0x5b4/0x1064 fs/f2fs/xattr.c:533
->   f2fs_xattr_generic_get+0x130/0x174 fs/f2fs/xattr.c:63
->   __vfs_getxattr+0x394/0x3c0 fs/xattr.c:423
->   smk_fetch+0xc8/0x150 security/smack/smack_lsm.c:306
->   smack_d_instantiate+0x594/0x880 security/smack/smack_lsm.c:3615
->   security_d_instantiate+0x100/0x204 security/security.c:4070
->   d_splice_alias+0x70/0x310 fs/dcache.c:3001
->   f2fs_lookup+0x4c8/0x948 fs/f2fs/namei.c:523
->   lookup_one_qstr_excl+0x108/0x230 fs/namei.c:1692
->   filename_create+0x230/0x468 fs/namei.c:4081
->   do_mkdirat+0xac/0x574 fs/namei.c:4326
->   __do_sys_mkdirat fs/namei.c:4349 [inline]
->   __se_sys_mkdirat fs/namei.c:4347 [inline]
->   __arm64_sys_mkdirat+0x8c/0xa4 fs/namei.c:4347
->   __invoke_syscall arch/arm64/kernel/syscall.c:35 [inline]
->   invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:49
->   el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:132
->   do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:151
->   el0_svc+0x54/0x168 arch/arm64/kernel/entry-common.c:744
->   el0t_64_sync_handler+0x84/0x108 arch/arm64/kernel/entry-common.c:762
->   el0t_64_sync+0x198/0x19c arch/arm64/kernel/entry.S:600
-> ---[ end trace ]---
-> ==================================================================
-> BUG: KASAN: slab-use-after-free in read_inline_xattr fs/f2fs/xattr.c:291 [inline]
-> BUG: KASAN: slab-use-after-free in lookup_all_xattrs fs/f2fs/xattr.c:341 [inline]
-> BUG: KASAN: slab-use-after-free in f2fs_getxattr+0x5c8/0x1064 fs/f2fs/xattr.c:533
-> Read of size 209920 at addr ffff0000d7f1ebd4 by task syz-executor883/6410
-> 
-> CPU: 0 UID: 0 PID: 6410 Comm: syz-executor883 Not tainted 6.13.0-rc2-syzkaller-g2e7aff49b5da #0
-> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/13/2024
-> Call trace:
->   show_stack+0x2c/0x3c arch/arm64/kernel/stacktrace.c:484 (C)
->   __dump_stack lib/dump_stack.c:94 [inline]
->   dump_stack_lvl+0xe4/0x150 lib/dump_stack.c:120
->   print_address_description mm/kasan/report.c:378 [inline]
->   print_report+0x198/0x538 mm/kasan/report.c:489
->   kasan_report+0xd8/0x138 mm/kasan/report.c:602
->   kasan_check_range+0x268/0x2a8 mm/kasan/generic.c:189
->   __asan_memcpy+0x3c/0x84 mm/kasan/shadow.c:105
->   read_inline_xattr fs/f2fs/xattr.c:291 [inline]
->   lookup_all_xattrs fs/f2fs/xattr.c:341 [inline]
->   f2fs_getxattr+0x5c8/0x1064 fs/f2fs/xattr.c:533
->   f2fs_xattr_generic_get+0x130/0x174 fs/f2fs/xattr.c:63
->   __vfs_getxattr+0x394/0x3c0 fs/xattr.c:423
->   smk_fetch+0xc8/0x150 security/smack/smack_lsm.c:306
->   smack_d_instantiate+0x594/0x880 security/smack/smack_lsm.c:3615
->   security_d_instantiate+0x100/0x204 security/security.c:4070
->   d_splice_alias+0x70/0x310 fs/dcache.c:3001
->   f2fs_lookup+0x4c8/0x948 fs/f2fs/namei.c:523
->   lookup_one_qstr_excl+0x108/0x230 fs/namei.c:1692
->   filename_create+0x230/0x468 fs/namei.c:4081
->   do_mkdirat+0xac/0x574 fs/namei.c:4326
->   __do_sys_mkdirat fs/namei.c:4349 [inline]
->   __se_sys_mkdirat fs/namei.c:4347 [inline]
->   __arm64_sys_mkdirat+0x8c/0xa4 fs/namei.c:4347
->   __invoke_syscall arch/arm64/kernel/syscall.c:35 [inline]
->   invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:49
->   el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:132
->   do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:151
->   el0_svc+0x54/0x168 arch/arm64/kernel/entry-common.c:744
->   el0t_64_sync_handler+0x84/0x108 arch/arm64/kernel/entry-common.c:762
->   el0t_64_sync+0x198/0x19c arch/arm64/kernel/entry.S:600
-> 
-> Allocated by task 6343:
->   kasan_save_stack mm/kasan/common.c:47 [inline]
->   kasan_save_track+0x40/0x78 mm/kasan/common.c:68
->   kasan_save_alloc_info+0x40/0x50 mm/kasan/generic.c:568
->   unpoison_slab_object mm/kasan/common.c:319 [inline]
->   __kasan_slab_alloc+0x74/0x8c mm/kasan/common.c:345
->   kasan_slab_alloc include/linux/kasan.h:250 [inline]
->   slab_post_alloc_hook mm/slub.c:4104 [inline]
->   slab_alloc_node mm/slub.c:4153 [inline]
->   kmem_cache_alloc_noprof+0x254/0x410 mm/slub.c:4160
->   getname_flags+0xcc/0x4b4 fs/namei.c:139
->   getname+0x24/0x34 fs/namei.c:223
->   do_sys_openat2+0xd0/0x1b8 fs/open.c:1396
->   do_sys_open fs/open.c:1417 [inline]
->   __do_sys_openat fs/open.c:1433 [inline]
->   __se_sys_openat fs/open.c:1428 [inline]
->   __arm64_sys_openat+0x1f0/0x240 fs/open.c:1428
->   __invoke_syscall arch/arm64/kernel/syscall.c:35 [inline]
->   invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:49
->   el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:132
->   do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:151
->   el0_svc+0x54/0x168 arch/arm64/kernel/entry-common.c:744
->   el0t_64_sync_handler+0x84/0x108 arch/arm64/kernel/entry-common.c:762
->   el0t_64_sync+0x198/0x19c arch/arm64/kernel/entry.S:600
-> 
-> Freed by task 6343:
->   kasan_save_stack mm/kasan/common.c:47 [inline]
->   kasan_save_track+0x40/0x78 mm/kasan/common.c:68
->   kasan_save_free_info+0x54/0x6c mm/kasan/generic.c:582
->   poison_slab_object mm/kasan/common.c:247 [inline]
->   __kasan_slab_free+0x64/0x8c mm/kasan/common.c:264
->   kasan_slab_free include/linux/kasan.h:233 [inline]
->   slab_free_hook mm/slub.c:2338 [inline]
->   slab_free mm/slub.c:4598 [inline]
->   kmem_cache_free+0x198/0x554 mm/slub.c:4700
->   putname+0x130/0x184 fs/namei.c:296
->   do_sys_openat2+0x164/0x1b8 fs/open.c:1410
->   do_sys_open fs/open.c:1417 [inline]
->   __do_sys_openat fs/open.c:1433 [inline]
->   __se_sys_openat fs/open.c:1428 [inline]
->   __arm64_sys_openat+0x1f0/0x240 fs/open.c:1428
->   __invoke_syscall arch/arm64/kernel/syscall.c:35 [inline]
->   invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:49
->   el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:132
->   do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:151
->   el0_svc+0x54/0x168 arch/arm64/kernel/entry-common.c:744
->   el0t_64_sync_handler+0x84/0x108 arch/arm64/kernel/entry-common.c:762
->   el0t_64_sync+0x198/0x19c arch/arm64/kernel/entry.S:600
-> 
-> The buggy address belongs to the object at ffff0000d7f1e600
->   which belongs to the cache names_cache of size 4096
-> The buggy address is located 1492 bytes inside of
->   freed 4096-byte region [ffff0000d7f1e600, ffff0000d7f1f600)
-> 
-> The buggy address belongs to the physical page:
-> page: refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x117f18
-> head: order:3 mapcount:0 entire_mapcount:0 nr_pages_mapped:0 pincount:0
-> flags: 0x5ffc00000000040(head|node=0|zone=2|lastcpupid=0x7ff)
-> page_type: f5(slab)
-> raw: 05ffc00000000040 ffff0000c18958c0 dead000000000122 0000000000000000
-> raw: 0000000000000000 0000000000070007 00000001f5000000 0000000000000000
-> head: 05ffc00000000040 ffff0000c18958c0 dead000000000122 0000000000000000
-> head: 0000000000000000 0000000000070007 00000001f5000000 0000000000000000
-> head: 05ffc00000000003 fffffdffc35fc601 ffffffffffffffff 0000000000000000
-> head: 0000000000000008 0000000000000000 00000000ffffffff 0000000000000000
-> page dumped because: kasan: bad access detected
-> 
-> Memory state around the buggy address:
->   ffff0000d7f1ea80: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->   ffff0000d7f1eb00: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->> ffff0000d7f1eb80: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->                                                   ^
->   ffff0000d7f1ec00: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->   ffff0000d7f1ec80: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
-> ==================================================================
-> 
-> 
-> ---
-> This report is generated by a bot. It may contain errors.
-> See https://goo.gl/tpsmEJ for more information about syzbot.
-> syzbot engineers can be reached at syzkaller@googlegroups.com.
-> 
-> syzbot will keep track of this issue. See:
-> https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-> 
-> If the report is already addressed, let syzbot know by replying with:
-> #syz fix: exact-commit-title
-> 
-> If you want syzbot to run the reproducer, reply with:
-> #syz test: git://repo/address.git branch-or-commit-hash
-> If you attach or paste a git patch, syzbot will apply it before testing.
-> 
-> If you want to overwrite report's subsystems, reply with:
-> #syz set subsystems: new-subsystem
-> (See the list of subsystem names on the web dashboard)
-> 
-> If the report is a duplicate of another one, reply with:
-> #syz dup: exact-subject-of-another-report
-> 
-> If you want to undo deduplication, reply with:
-> #syz undup
+HEAD commit:    bcde95ce32b6 Merge tag 'devicetree-fixes-for-6.13-1' of gi..
+git tree:       upstream
+console+strace: https://syzkaller.appspot.com/x/log.txt?x=116c0adf980000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=1234f097ee657d8b
+dashboard link: https://syzkaller.appspot.com/bug?extid=69f5379a1717a0b982a1
+compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=167f9f30580000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=142d7cf8580000
 
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/be6d4de70f82/disk-bcde95ce.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/70993500a1e4/vmlinux-bcde95ce.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/1018443184c5/bzImage-bcde95ce.xz
+mounted in repro: https://storage.googleapis.com/syzbot-assets/7e1b134be79c/mount_0.gz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+69f5379a1717a0b982a1@syzkaller.appspotmail.com
+
+F2FS-fs (loop0): Failed to enable quota tracking (type=1, err=-22). Please run fsck to fix.
+F2FS-fs (loop0): Cannot turn on quotas: error -22
+F2FS-fs (loop0): Mounted with checkpoint version = 1b41e954
+------------[ cut here ]------------
+UBSAN: array-index-out-of-bounds in fs/f2fs/f2fs.h:3292:19
+index 18446744073709500059 is out of range for type '__le32[923]' (aka 'unsigned int[923]')
+CPU: 0 UID: 0 PID: 5820 Comm: syz-executor178 Not tainted 6.13.0-rc3-syzkaller-00301-gbcde95ce32b6 #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/13/2024
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0x241/0x360 lib/dump_stack.c:120
+ ubsan_epilogue lib/ubsan.c:231 [inline]
+ __ubsan_handle_out_of_bounds+0x121/0x150 lib/ubsan.c:429
+ read_inline_xattr+0x273/0x280
+ lookup_all_xattrs fs/f2fs/xattr.c:341 [inline]
+ f2fs_getxattr+0x57b/0x13b0 fs/f2fs/xattr.c:533
+ __vfs_getxattr+0x433/0x470 fs/xattr.c:423
+ smk_fetch+0xb1/0x140 security/smack/smack_lsm.c:306
+ smack_d_instantiate+0x749/0xa50 security/smack/smack_lsm.c:3615
+ security_d_instantiate+0x107/0x1f0 security/security.c:4070
+ d_splice_alias+0x6f/0x330 fs/dcache.c:3001
+ f2fs_lookup+0x4ff/0x820 fs/f2fs/namei.c:523
+ lookup_one_qstr_excl+0x11f/0x260 fs/namei.c:1692
+ filename_create+0x297/0x540 fs/namei.c:4081
+ do_mkdirat+0xbd/0x3a0 fs/namei.c:4326
+ __do_sys_mkdir fs/namei.c:4354 [inline]
+ __se_sys_mkdir fs/namei.c:4352 [inline]
+ __x64_sys_mkdir+0x6c/0x80 fs/namei.c:4352
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f5566117ad7
+Code: ff ff 77 07 31 c0 c3 0f 1f 40 00 48 c7 c2 b8 ff ff ff f7 d8 64 89 02 b8 ff ff ff ff c3 66 0f 1f 44 00 00 b8 53 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007fff7eab6a58 EFLAGS: 00000246 ORIG_RAX: 0000000000000053
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f5566117ad7
+RDX: 0000000000000000 RSI: 00000000000001ff RDI: 0000000020000180
+RBP: 0000000020000180 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007fff7eab6af0 R14: 0000000000000000 R15: 0000000000000000
+ </TASK>
+---[ end trace ]---
+
+
+---
+If you want syzbot to run the reproducer, reply with:
+#syz test: git://repo/address.git branch-or-commit-hash
+If you attach or paste a git patch, syzbot will apply it before testing.
 
 
 _______________________________________________
