@@ -2,96 +2,140 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A32B49FB000
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Dec 2024 15:35:04 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 90D0E9FAF4A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Dec 2024 15:13:47 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tPjWO-0006OC-1M;
-	Mon, 23 Dec 2024 14:35:00 +0000
+	id 1tPjBh-0001KG-TH;
+	Mon, 23 Dec 2024 14:13:37 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tPjWM-0006O4-HX
+ (envelope-from <chao@kernel.org>) id 1tPjBf-0001K8-VO
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 23 Dec 2024 14:34:59 +0000
+ Mon, 23 Dec 2024 14:13:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kMjqOKZfjU/FwjdUZWH3ppVmqw2y3LqXHesR/QzeTQU=; b=XDsTA3gFSP3FYhA/u2rX6CAYUN
- SnHSWziE8VEArWYTVpsCTzJNdZDeY9jZ8RMaSI+j3934fRld/LlhlmvUXH4LKm7naPPj/KmRuA9GR
- GjbhlRqOEACeTaQNKQAZF7kYNoktqN8+ECecen2heAzuxpdEVF49OcmgEQ2MljK5sdy0=;
+ bh=KebQMvH5ekl0WbZYvyzk7R55WHOyOIf/D3I2qPonQMs=; b=HS5BkulRW5rJMbz4N2QyNcraPp
+ 3YJI5K96JqYpTCDWdL6YabYevVG16KMPSMdic0UQGC2JUZ8Do4dCXXapOeKJCB7jHKna+CIZdGcG4
+ M8s6gNkxIEMLPCUd/4oyCm8bI8w06Dk1E+cX9ckYFN6NE2ngasNyz18e/DnzvpYsF9WY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kMjqOKZfjU/FwjdUZWH3ppVmqw2y3LqXHesR/QzeTQU=; b=V1gvGki0iG5sSJbxJOIg0kQlgC
- HeIssq8s+MT8tUhuVS9JDWVHPUsseDvK5Ty1vTCXXxHXlPBpj/mzK/0lumKZGNHEihbS85GpJK2sq
- wK3UZTpgWne49ZcNSM5OalPZTup9WJrYNfeuOYO8SZ8/7oezkPMuNJNhMostOHT7oOzE=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=KebQMvH5ekl0WbZYvyzk7R55WHOyOIf/D3I2qPonQMs=; b=bKQvvp1wO1i6MWhWC1k4MDH6gl
+ +w0BD1TF4IWJEQjdtYnMVrgrqsoxIB0r4B6+fY2wQFGfWVgeTtt2gXCfWJyin4Sb1K+wHW/RhCs7d
+ mGVDrn0rWThwqmamht1UILvj5SYYAH/xRYXUC+cnzAxHjNKsi3fx2lC+73CXdbhVuYwg=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tPjWM-0004CZ-IG for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 23 Dec 2024 14:34:59 +0000
+ id 1tPjBf-0002k0-42 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 23 Dec 2024 14:13:35 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6736C5C5938
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 23 Dec 2024 14:34:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B06BDC4CED6;
- Mon, 23 Dec 2024 14:34:45 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 520CFA40D77;
+ Mon, 23 Dec 2024 14:11:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0DCE1C4CED3;
+ Mon, 23 Dec 2024 14:13:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734964487;
- bh=VoExVT7XSETeqfLPoMzHOXZlM95/se/ZF/joAL/Vt28=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=S1KYSWARLYFHMwTOj65ClztiCVzvCWL4Q+ugeAs0BK6ctDb28XWtHErG9rOgJ2wVT
- Wh5TCfVjIyMrqfHmSXJPApWhA5vQ7ZErYS9C1CyEgHQNjRx7gmRA82GLfeMPcD67nM
- XyqWg3T4rN/2e5z0K9Lgp8BOZOXW6ENIB3dEHiHl2DPCNTmsx3iTbYmDcwJJLpygSn
- w1kONiZUU8rc3goNVf0YgumE2Vi3wWoMwDmiawH4dqKQ9if5n4DblaLN47N5zieGH5
- 3m7z8aE3yjNlUY9y34jlCHFdwXVWpvmdwT9daztsPJWAc1bh+cRgOylc6z4C1G2ar5
- O6Gg9s2RPGdhQ==
-To: Zorro Lang <zlang@kernel.org>,
-	fstests@vger.kernel.org
-Date: Sat, 21 Dec 2024 16:23:45 +0800
-Message-Id: <20241221082345.196029-2-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20241221082345.196029-1-chao@kernel.org>
-References: <20241221082345.196029-1-chao@kernel.org>
+ s=k20201202; t=1734963209;
+ bh=su9knhlNxkMsyauWUBR8t/hhTw2AboVx5LlsHhCYf0k=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=jzw88RsoN6F94O8Ite0FFkE43qTrGVMXTR+JIOcd2o1QH8XlXOiJ3JX/+RWwB/ioX
+ oDIYg0cuPBbaFcX6u9tjE/33XWL2Rx5x9gxRsLwNLSyPe3du8YwCO4mtqQM+dnz1oo
+ zVOQmR0MFkMgsiUgVFBohatEwWPN8F7L06c4mUmV8GH1Md2vKxaAQmssXH+JJ0Bkoj
+ sKP8iik8pAJjntD63pJIBj2xCW+OC6NGMIk+kTg6w+ykc2iXzFltN6NxjuPXZFLeW4
+ 69gLeStLc01nezz1FMBv8oMTpDDz8s5ThEGjfbNLOuBT46KdAZcYGZ4p3QZUL+eiWC
+ csg1VOSl+Gv4A==
+Message-ID: <a441f694-b0f2-4a57-b4cc-b98cc995c323@kernel.org>
+Date: Mon, 23 Dec 2024 22:13:28 +0800
 MIME-Version: 1.0
-X-Spam-Score: -5.3 (-----)
+User-Agent: Mozilla Thunderbird
+To: syzbot <syzbot+69f5379a1717a0b982a1@syzkaller.appspotmail.com>,
+ jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
+References: <676864d5.050a0220.226966.002c.GAE@google.com>
+Content-Language: en-US
+Autocrypt: addr=chao@kernel.org; keydata=
+ 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
+In-Reply-To: <676864d5.050a0220.226966.002c.GAE@google.com>
+X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch introduce a regression testcase to check whether
- f2fs can handle discard correctly once underlying lvm device changes to not
- support discard after user creates snapshot on it. Related bug was fixed
- by commit bc8aeb04fd80 ("f2fs: fix to drop all discards after creating
- snapshot on lvm device") 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview: #syz test:
+ https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git
+ wip On 2024/12/23 3:13, syzbot wrote: > syzbot has found a reproducer for
+ the following issue on: > > HEAD commit: bcde95ce32b6 Merge tag
+ 'devicetree-fixes-for-6.13-1'
+ of gi.. > git tree: upstream > conso [...] 
+ Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
+ [147.75.193.91 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [147.75.193.91 listed in sa-trusted.bondedsender.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -100,9 +144,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tPjWM-0004CZ-IG
-Subject: [f2fs-dev] [PATCH v3 2/2] f2fs/008: test snapshot creation/deletion
- on lvm device
+X-Headers-End: 1tPjBf-0002k0-42
+Subject: Re: [f2fs-dev] [syzbot] [f2fs?] UBSAN: array-index-out-of-bounds in
+ read_inline_xattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,104 +160,81 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch introduce a regression testcase to check whether
-f2fs can handle discard correctly once underlying lvm device
-changes to not support discard after user creates snapshot
-on it.
+#syz test: https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git wip
 
-Related bug was fixed by commit bc8aeb04fd80 ("f2fs: fix to
-drop all discards after creating snapshot on lvm device")
-
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-v3:
-- rebase to last for-next branch
-- update according to Zorro's comments.
- tests/f2fs/008     | 57 ++++++++++++++++++++++++++++++++++++++++++++++
- tests/f2fs/008.out |  2 ++
- 2 files changed, 59 insertions(+)
- create mode 100755 tests/f2fs/008
- create mode 100644 tests/f2fs/008.out
-
-diff --git a/tests/f2fs/008 b/tests/f2fs/008
-new file mode 100755
-index 00000000..b85e321c
---- /dev/null
-+++ b/tests/f2fs/008
-@@ -0,0 +1,57 @@
-+#! /bin/bash
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright (c) 2024 Oppo.  All Rights Reserved.
-+#
-+# FS QA Test No. f2fs/008
-+#
-+# This is a regression test to check whether f2fs can handle
-+# discard correctly once underlying lvm device changes to not
-+# support discard after user creates snapshot on it.
-+#
-+
-+. ./common/preamble
-+_begin_fstest auto quick rw
-+
-+_fixed_by_kernel_commit bc8aeb04fd80 \
-+        "f2fs: fix to drop all discards after creating snapshot on lvm device"
-+
-+_require_scratch_nolvm
-+_require_block_device $SCRATCH_DEV
-+_require_command "$LVM_PROG" lvm
-+
-+lvname=lv_$seq
-+vgname=vg_$seq
-+testfile=$SCRATCH_MNT/testfile
-+
-+_cleanup()
-+{
-+	_unmount $SCRATCH_MNT >>$seqres.full 2>&1
-+	$LVM_PROG lvremove -ff /dev/mapper/$lvname-snapshot $vgname >>$seqres.full 2>&1
-+	$LVM_PROG lvremove -ff /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
-+	$LVM_PROG vgremove -ff $vgname >>$seqres.full 2>&1
-+	$LVM_PROG pvremove -ff $SCRATCH_DEV >>$seqres.full 2>&1
-+	_udev_wait --removed /dev/mapper/$vgname-$lvname
-+	cd /
-+	rm -f $tmp.*
-+}
-+
-+$LVM_PROG pvcreate -f $SCRATCH_DEV >>$seqres.full 2>&1
-+$LVM_PROG vgcreate -f $vgname $SCRATCH_DEV >>$seqres.full 2>&1
-+$LVM_PROG lvcreate -L 1024m -n $lvname $vgname >>$seqres.full 2>&1
-+_udev_wait /dev/mapper/$vgname-$lvname
-+
-+_mkfs_dev /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
-+_mount -o discard /dev/mapper/$vgname-$lvname $SCRATCH_MNT >>$seqres.full 2>&1
-+
-+dd if=/dev/zero of=$testfile bs=1M count=20 >>$seqres.full 2>&1
-+sync
-+rm -f $testfile
-+sync
-+
-+# create a snapshot on lvm device
-+$LVM_PROG lvcreate -L 1024m -s -n $lvname-snapshot /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
-+
-+echo "Silence is golden"
-+
-+status=0
-+exit
-diff --git a/tests/f2fs/008.out b/tests/f2fs/008.out
-new file mode 100644
-index 00000000..dd68d5a4
---- /dev/null
-+++ b/tests/f2fs/008.out
-@@ -0,0 +1,2 @@
-+QA output created by 008
-+Silence is golden
--- 
-2.40.1
+On 2024/12/23 3:13, syzbot wrote:
+> syzbot has found a reproducer for the following issue on:
+> 
+> HEAD commit:    bcde95ce32b6 Merge tag 'devicetree-fixes-for-6.13-1' of gi..
+> git tree:       upstream
+> console+strace: https://syzkaller.appspot.com/x/log.txt?x=116c0adf980000
+> kernel config:  https://syzkaller.appspot.com/x/.config?x=1234f097ee657d8b
+> dashboard link: https://syzkaller.appspot.com/bug?extid=69f5379a1717a0b982a1
+> compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
+> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=167f9f30580000
+> C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=142d7cf8580000
+> 
+> Downloadable assets:
+> disk image: https://storage.googleapis.com/syzbot-assets/be6d4de70f82/disk-bcde95ce.raw.xz
+> vmlinux: https://storage.googleapis.com/syzbot-assets/70993500a1e4/vmlinux-bcde95ce.xz
+> kernel image: https://storage.googleapis.com/syzbot-assets/1018443184c5/bzImage-bcde95ce.xz
+> mounted in repro: https://storage.googleapis.com/syzbot-assets/7e1b134be79c/mount_0.gz
+> 
+> IMPORTANT: if you fix the issue, please add the following tag to the commit:
+> Reported-by: syzbot+69f5379a1717a0b982a1@syzkaller.appspotmail.com
+> 
+> F2FS-fs (loop0): Failed to enable quota tracking (type=1, err=-22). Please run fsck to fix.
+> F2FS-fs (loop0): Cannot turn on quotas: error -22
+> F2FS-fs (loop0): Mounted with checkpoint version = 1b41e954
+> ------------[ cut here ]------------
+> UBSAN: array-index-out-of-bounds in fs/f2fs/f2fs.h:3292:19
+> index 18446744073709500059 is out of range for type '__le32[923]' (aka 'unsigned int[923]')
+> CPU: 0 UID: 0 PID: 5820 Comm: syz-executor178 Not tainted 6.13.0-rc3-syzkaller-00301-gbcde95ce32b6 #0
+> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/13/2024
+> Call Trace:
+>   <TASK>
+>   __dump_stack lib/dump_stack.c:94 [inline]
+>   dump_stack_lvl+0x241/0x360 lib/dump_stack.c:120
+>   ubsan_epilogue lib/ubsan.c:231 [inline]
+>   __ubsan_handle_out_of_bounds+0x121/0x150 lib/ubsan.c:429
+>   read_inline_xattr+0x273/0x280
+>   lookup_all_xattrs fs/f2fs/xattr.c:341 [inline]
+>   f2fs_getxattr+0x57b/0x13b0 fs/f2fs/xattr.c:533
+>   __vfs_getxattr+0x433/0x470 fs/xattr.c:423
+>   smk_fetch+0xb1/0x140 security/smack/smack_lsm.c:306
+>   smack_d_instantiate+0x749/0xa50 security/smack/smack_lsm.c:3615
+>   security_d_instantiate+0x107/0x1f0 security/security.c:4070
+>   d_splice_alias+0x6f/0x330 fs/dcache.c:3001
+>   f2fs_lookup+0x4ff/0x820 fs/f2fs/namei.c:523
+>   lookup_one_qstr_excl+0x11f/0x260 fs/namei.c:1692
+>   filename_create+0x297/0x540 fs/namei.c:4081
+>   do_mkdirat+0xbd/0x3a0 fs/namei.c:4326
+>   __do_sys_mkdir fs/namei.c:4354 [inline]
+>   __se_sys_mkdir fs/namei.c:4352 [inline]
+>   __x64_sys_mkdir+0x6c/0x80 fs/namei.c:4352
+>   do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+>   do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
+>   entry_SYSCALL_64_after_hwframe+0x77/0x7f
+> RIP: 0033:0x7f5566117ad7
+> Code: ff ff 77 07 31 c0 c3 0f 1f 40 00 48 c7 c2 b8 ff ff ff f7 d8 64 89 02 b8 ff ff ff ff c3 66 0f 1f 44 00 00 b8 53 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+> RSP: 002b:00007fff7eab6a58 EFLAGS: 00000246 ORIG_RAX: 0000000000000053
+> RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f5566117ad7
+> RDX: 0000000000000000 RSI: 00000000000001ff RDI: 0000000020000180
+> RBP: 0000000020000180 R08: 0000000000000000 R09: 0000000000000000
+> R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+> R13: 00007fff7eab6af0 R14: 0000000000000000 R15: 0000000000000000
+>   </TASK>
+> ---[ end trace ]---
+> 
+> 
+> ---
+> If you want syzbot to run the reproducer, reply with:
+> #syz test: git://repo/address.git branch-or-commit-hash
+> If you attach or paste a git patch, syzbot will apply it before testing.
 
 
 
