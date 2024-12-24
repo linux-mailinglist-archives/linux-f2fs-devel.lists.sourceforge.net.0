@@ -2,110 +2,147 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D114C9FB6EA
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Dec 2024 23:15:44 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3B089FBBB7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Dec 2024 10:59:00 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tPqiB-00028J-8Q;
-	Mon, 23 Dec 2024 22:15:38 +0000
+	id 1tQ1gh-00076z-Vz;
+	Tue, 24 Dec 2024 09:58:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3_eBpZwkbAKgaghSITTMZIXXQL.OWWOTMcaMZKWVbMVb.KWU@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1tPqi9-00028B-M9 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 23 Dec 2024 22:15:37 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <zlang@redhat.com>) id 1tQ1gS-00076n-Q0
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 24 Dec 2024 09:58:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DOTVch9ENjh5G2hZPXYsxsV+NVS0MEGDFAzp5NggGZo=; b=jMSma5TaztQky8lbUV+p4Xk6Vp
- eOq8vF1Aa8uRkZ6cqoqbxLZJVFdp0j3KH7hVxMVhGbDMMLHWFEzcQAem7MIm/R1dZ4U7bXjHKhwoI
- UvuAAzlt8TrAyQQh2gJw6UrGaVUgfL8aWzKEmxke+HR0C2uAvA9kfvxCzzOklrzBlWUE=;
+ bh=Inzfeq1sXuNH2Lm+tHdVFULsYJqwlPXXwNULENmuYDA=; b=ielcYEL+/FpJvlplPNpRCveJHh
+ Q4yEQLGsuY1XXByVXNj2Uwfjw6fWwZpWMbiOD3R/vSVYZ4EG2cJ0Iyz/Qcn2kbxtvdF1MOS9rCryi
+ /7VM1QGNSC+MBi6vi/RFS2hxM5b3i+5+wr7S1Z6fXbKZKWKWdh/944tOxdvpP7kkEFh0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DOTVch9ENjh5G2hZPXYsxsV+NVS0MEGDFAzp5NggGZo=; b=f
- ZLyXkdRYrFNJEdgfVDplwLSwRFHaHzDpVT1fVQiJdP/1kEFtMWl17B5XxCPZka7LcKXdyIOy0p1y2
- egNjOsfmqT8vVf3LnWd3tmBjkz9qFD09sTv71XBszm6yR3azxXpPv4t2PCKIJIeKhX6xcaDnaZ3h7
- L2tiSZRu3RVIJtzc=;
-Received: from mail-il1-f207.google.com ([209.85.166.207])
+ h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Inzfeq1sXuNH2Lm+tHdVFULsYJqwlPXXwNULENmuYDA=; b=QGYXiFxDH404F5oeaByt4+NxUm
+ PNjFGUV6ncnt5e0UVNj3Pcw4VoAU/3dmP8ygwt8pEh6qcsN/F4kYGZPjDfxWejWsd6K1dxsEjO6pH
+ BbRxdrRS2gZgcFH7XS7gAhBM/6h5EG2NXkVu+CuBw6IkvepEvGaE8+ei/byUZwyeFGr8=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1tPqi8-0003Ro-95 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 23 Dec 2024 22:15:37 +0000
-Received: by mail-il1-f207.google.com with SMTP id
- e9e14a558f8ab-3a812f562bbso94990225ab.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1tQ1gR-0004Bn-Ch for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 24 Dec 2024 09:58:36 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1735034309;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Inzfeq1sXuNH2Lm+tHdVFULsYJqwlPXXwNULENmuYDA=;
+ b=INWnWXW6c0GOx/AzSt28mVNEeYrPhukZfhY1R5UQbLgC0TQ2kOS2mJHnsu6BOF0MMiXWr2
+ uGtKEsh9LvcX3bYASkI8pqw/79vWJmUfkmfJcZs5KiMbcahQNCvGzPn4sjo6eZqSXws6d9
+ XaOic2cbH0PLYLXkEop7CtAitNYva/s=
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-513-IJd_m2aONS6IIiwUikwjtw-1; Tue, 24 Dec 2024 04:58:27 -0500
+X-MC-Unique: IJd_m2aONS6IIiwUikwjtw-1
+X-Mimecast-MFC-AGG-ID: IJd_m2aONS6IIiwUikwjtw
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2161d185f04so38561145ad.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 23 Dec 2024 14:15:36 -0800 (PST)
+ Tue, 24 Dec 2024 01:58:27 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734992125; x=1735596925;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DOTVch9ENjh5G2hZPXYsxsV+NVS0MEGDFAzp5NggGZo=;
- b=HmjaDOJrA9qVFzQokU8GQ+u5iRHTeFqKgaYu0dU1Fhaw9+fdZJwSdsEj43CWIDErjH
- C3o+njEUwgUG2e51+bE0fVAoOe/0vJlcFONPdgkOTMYghR7eZRImWeP6p7GHjmLryVK0
- lx/ulQq4QJC2J04Nfv2opZ14w+FemXZ6CylhpD4hdiNX2Sa9zIqc1cbIlFE9X8Yl5hvA
- sTIpFy8aRtsSJi05To0o86HKFuusPzVtSUH6fMUfeoIvjlC6P4bcRfB6OPWX3WWJGh19
- hqyJdS0A9wRaZTw9wnOslxXintHfdzLvlPCsegDsfz0PL1gN6qnEvyZJO33itw6gG0rn
- D5Xw==
+ d=1e100.net; s=20230601; t=1735034306; x=1735639106;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Inzfeq1sXuNH2Lm+tHdVFULsYJqwlPXXwNULENmuYDA=;
+ b=wSr74AVLWmL3hZcuceTNILbwypyYEVPuWTEmBycp5KAP+L0Khl5dQkou98d39iDiEC
+ QLTiEsx9vWqDGy1lKO+yZJenzKA+4k8vEcSe/Be5g8gmzJC+9Rk+B2SHQYw+prZoRVCT
+ VMKTJp26A8JXRxStgPMs+wLowPvuNyIKsNtabPnPr4LAsdDnLWGVR34SGuB+uc7h5wZE
+ FNaT2oWfok7vgpy5ffCAEbpXdF0T/zO+tEMfcPhgFesqtyCjgBUe8AuSuk0lyE8iO/Tz
+ DKmIzf0pC5kCfEGWN4spTS650z/ufzJE/4K7vmbA740Am4KGt8w8Hy2dh0gLMgP6zukT
+ BWSg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW2WET1pe52P5pjYDKdyUu8a085fMx+7Dp5mDiFzJvH7JR90K9iREV1UMnOXcabjFBydudnyJ62A8fVwqDGnPB+@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwqOETZDlANxjyGq/P1HuqjEsTnEEVFGBh6NagS2teDjyBlVSML
- 4ThzQktmuNCHw/X8rCIo9AiWcA1wTQpSxX1L+U4NIIwWp5k6ppKGXkfGkep36dt2Z5dEVVEP/dK
- rOoNCFONJvOBNx6fxp8hGarcOmmRVp26Alp2Hr4pQXKDOdl0QLV3WE7s=
-X-Google-Smtp-Source: AGHT+IGPeRMQL3aMwhdRAQ0M1vdTerKkog966OXNfFXn8MqyyOF6Eb5CcE69Hd8Npb8/iTWy3HQ00s8MCHM3cUXO5rPUebvd+4Mu
+ AJvYcCVcevl6TPfHNcfCpBJXriGfOiZ1Gks2mgJrPOVJWcLt75qTsThPD2VLA2oztyZdaq/PxU5VtyVGlm9NIboPUqPW@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzvN4vGvkZGqVWpzujR9IQg4OkAi82qMd/vS9BihWHXUdVb+ezH
+ T1s6MhhPvUsisaFqk1vepJkBDM+u6mMciqlNP4JhwV/ZiPFJP64cvTdkKB2FzMBGfgbX7lX2Ji3
+ A1okKMOiTN/y+cApU85JzSI+J94x/9O7hoi9Lh+GyxgenkbnCt45jdi3G2OcC0JSbUSwmcCznbw
+ 4=
+X-Gm-Gg: ASbGnctJ03VE9FhLbdVI6wj7Ge0I5UW8PALxiKqIj46fXpA0LkdFyPuoNr0Ipyb+MD6
+ YjnZxNDEcNHy4Kh64FM5jeSf6yZ4ufKD0P1IchkNujgIRadI9CEjQjT1Varo3hjToURxCaHd2Nj
+ hNxAkGBpDh4v655UEgO5vZMlAr0W1FLf6SCOb7Ow+5nlD8kq2/l4npIp/rW2Kxh9YBpWOFaChAn
+ n5Cqzk7JZOQkt/B9n/rmwQcgVQPtHd/Nq+9r7LhuI8NOO4XlzI2Z3boD9/FXtgok4eIPLd2s+DM
+ 7NnKvjulLjXVL6shrdJT2w==
+X-Received: by 2002:a05:6a21:670b:b0:1dc:7907:6d67 with SMTP id
+ adf61e73a8af0-1e5e081c8d0mr29646125637.40.1735034306588; 
+ Tue, 24 Dec 2024 01:58:26 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHQhQWgdN8z/ID1/XkVVG1F+Cp2R6jsZaHrijRdPme/htkaQtlVkt6GvWoU/Eq5c1ViULJR4g==
+X-Received: by 2002:a05:6a21:670b:b0:1dc:7907:6d67 with SMTP id
+ adf61e73a8af0-1e5e081c8d0mr29646098637.40.1735034306204; 
+ Tue, 24 Dec 2024 01:58:26 -0800 (PST)
+Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([43.228.180.230])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-72aad848020sm9377948b3a.81.2024.12.24.01.58.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Dec 2024 01:58:25 -0800 (PST)
+Date: Tue, 24 Dec 2024 17:58:21 +0800
+From: Zorro Lang <zlang@redhat.com>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <20241224095821.ylfv622fifsk3tsv@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+References: <20241221082345.196029-1-chao@kernel.org>
+ <20241221082345.196029-2-chao@kernel.org>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:2481:b0:3a7:2204:c83e with SMTP id
- e9e14a558f8ab-3c2d2782867mr158970395ab.10.1734992125514; Mon, 23 Dec 2024
- 14:15:25 -0800 (PST)
-Date: Mon, 23 Dec 2024 14:15:25 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <6769e0fd.050a0220.226966.0045.GAE@google.com>
-From: syzbot <syzbot+fbef817617f48116dbdd@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.5 (/)
+In-Reply-To: <20241221082345.196029-2-chao@kernel.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: lMTbMoJ4t2FSnONPF9Y17l_0yVnbUOKhpbZbrtAv4bY_1735034307
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: baaa2567a712
- Merge tag 'mmc-v6.13-rc2' of git://git.kernel.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=112cf730580000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.5 points, 6.0 required)
+ Content preview:  On Sat, Dec 21, 2024 at 04:23:45PM +0800, Chao Yu wrote: >
+ This patch introduce a regression testcase to check whether > f2fs can handle
+ discard correctly once underlying lvm device > changes to not s [...] 
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [170.10.129.124 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.207 listed in sa-trusted.bondedsender.org]
+ [170.10.129.124 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.207 listed in bl.score.senderscore.com]
+ [170.10.129.124 listed in bl.score.senderscore.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.207 listed in list.dnswl.org]
-X-Headers-End: 1tPqi8-0003Ro-95
-Subject: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_put_super (2)
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tQ1gR-0004Bn-Ch
+Subject: Re: [f2fs-dev] [PATCH v3 2/2] f2fs/008: test snapshot
+ creation/deletion on lvm device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,111 +154,117 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+On Sat, Dec 21, 2024 at 04:23:45PM +0800, Chao Yu wrote:
+> This patch introduce a regression testcase to check whether
+> f2fs can handle discard correctly once underlying lvm device
+> changes to not support discard after user creates snapshot
+> on it.
+> 
+> Related bug was fixed by commit bc8aeb04fd80 ("f2fs: fix to
+> drop all discards after creating snapshot on lvm device")
+> 
+> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+> v3:
+> - rebase to last for-next branch
+> - update according to Zorro's comments.
+>  tests/f2fs/008     | 57 ++++++++++++++++++++++++++++++++++++++++++++++
+>  tests/f2fs/008.out |  2 ++
+>  2 files changed, 59 insertions(+)
+>  create mode 100755 tests/f2fs/008
+>  create mode 100644 tests/f2fs/008.out
+> 
+> diff --git a/tests/f2fs/008 b/tests/f2fs/008
+> new file mode 100755
+> index 00000000..b85e321c
+> --- /dev/null
+> +++ b/tests/f2fs/008
+> @@ -0,0 +1,57 @@
+> +#! /bin/bash
+> +# SPDX-License-Identifier: GPL-2.0
+> +# Copyright (c) 2024 Oppo.  All Rights Reserved.
+> +#
+> +# FS QA Test No. f2fs/008
+> +#
+> +# This is a regression test to check whether f2fs can handle
+> +# discard correctly once underlying lvm device changes to not
+> +# support discard after user creates snapshot on it.
+> +#
+> +
+> +. ./common/preamble
+> +_begin_fstest auto quick rw
+> +
+> +_fixed_by_kernel_commit bc8aeb04fd80 \
+> +        "f2fs: fix to drop all discards after creating snapshot on lvm device"
+> +
+> +_require_scratch_nolvm
+> +_require_block_device $SCRATCH_DEV
+> +_require_command "$LVM_PROG" lvm
+> +
+> +lvname=lv_$seq
+> +vgname=vg_$seq
+> +testfile=$SCRATCH_MNT/testfile
+> +
+> +_cleanup()
+> +{
+> +	_unmount $SCRATCH_MNT >>$seqres.full 2>&1
+> +	$LVM_PROG lvremove -ff /dev/mapper/$lvname-snapshot $vgname >>$seqres.full 2>&1
+> +	$LVM_PROG lvremove -ff /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
+> +	$LVM_PROG vgremove -ff $vgname >>$seqres.full 2>&1
+> +	$LVM_PROG pvremove -ff $SCRATCH_DEV >>$seqres.full 2>&1
+> +	_udev_wait --removed /dev/mapper/$vgname-$lvname
+> +	cd /
+> +	rm -f $tmp.*
+> +}
+> +
+> +$LVM_PROG pvcreate -f $SCRATCH_DEV >>$seqres.full 2>&1
+> +$LVM_PROG vgcreate -f $vgname $SCRATCH_DEV >>$seqres.full 2>&1
+> +$LVM_PROG lvcreate -L 1024m -n $lvname $vgname >>$seqres.full 2>&1
 
-syzbot found the following issue on:
+The lvcreate might be blocked by:
+  "WARNING: f2fs signature detected on /dev/vg_008/lv_008 at offset 1024. Wipe it? [y/n]:"
 
-HEAD commit:    baaa2567a712 Merge tag 'mmc-v6.13-rc2' of git://git.kernel..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=112cf730580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=1234f097ee657d8b
-dashboard link: https://syzkaller.appspot.com/bug?extid=fbef817617f48116dbdd
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
+So better to use "lvcreate -y" or "yes | ...".
 
-Unfortunately, I don't have any reproducer for this issue yet.
+Thanks,
+Zorro
 
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/816d068f9171/disk-baaa2567.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/9b40d3a7d8cc/vmlinux-baaa2567.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/e9af7e09d18f/bzImage-baaa2567.xz
+> +_udev_wait /dev/mapper/$vgname-$lvname
+> +
+> +_mkfs_dev /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
+> +_mount -o discard /dev/mapper/$vgname-$lvname $SCRATCH_MNT >>$seqres.full 2>&1
+> +
+> +dd if=/dev/zero of=$testfile bs=1M count=20 >>$seqres.full 2>&1
+> +sync
+> +rm -f $testfile
+> +sync
+> +
+> +# create a snapshot on lvm device
+> +$LVM_PROG lvcreate -L 1024m -s -n $lvname-snapshot /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
+> +
+> +echo "Silence is golden"
+> +
+> +status=0
+> +exit
+> diff --git a/tests/f2fs/008.out b/tests/f2fs/008.out
+> new file mode 100644
+> index 00000000..dd68d5a4
+> --- /dev/null
+> +++ b/tests/f2fs/008.out
+> @@ -0,0 +1,2 @@
+> +QA output created by 008
+> +Silence is golden
+> -- 
+> 2.40.1
+> 
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+fbef817617f48116dbdd@syzkaller.appspotmail.com
-
-F2FS-fs (loop1): detect filesystem reference count leak during umount, type: 9, count: 2
-------------[ cut here ]------------
-kernel BUG at fs/f2fs/super.c:1667!
-Oops: invalid opcode: 0000 [#1] PREEMPT SMP KASAN PTI
-CPU: 1 UID: 0 PID: 7863 Comm: syz-executor Not tainted 6.13.0-rc3-syzkaller-00082-gbaaa2567a712 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 11/25/2024
-RIP: 0010:f2fs_put_super+0x1132/0x1150 fs/f2fs/super.c:1667
-Code: fd 41 bf 0c 00 00 00 4c 89 e7 44 89 fe e8 56 5a 00 00 4c 89 e7 31 f6 48 c7 c2 00 ab 4f 8c 44 89 f9 49 89 c0 e8 1f c2 fd ff 90 <0f> 0b e8 c7 45 a5 fd 90 0f 0b e8 af 6b c6 07 66 2e 0f 1f 84 00 00
-RSP: 0018:ffffc900045afae0 EFLAGS: 00010246
-RAX: dab673f7b3e95800 RBX: 0000000000000002 RCX: dab673f7b3e95800
-RDX: 0000000000000000 RSI: 0000000080000000 RDI: 0000000000000000
-RBP: ffffc900045afc18 R08: ffffffff817f09fc R09: 1ffff920008b5ed0
-R10: dffffc0000000000 R11: fffff520008b5ed1 R12: ffff88807e130000
-R13: dffffc0000000000 R14: ffff88805514e084 R15: 0000000000000009
-FS:  00005555840ad500(0000) GS:ffff8880b8700000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007ffe765b6f28 CR3: 000000006e1b6000 CR4: 00000000003526f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- generic_shutdown_super+0x139/0x2d0 fs/super.c:642
- kill_block_super+0x44/0x90 fs/super.c:1710
- kill_f2fs_super+0x344/0x690 fs/f2fs/super.c:4972
- deactivate_locked_super+0xc4/0x130 fs/super.c:473
- cleanup_mnt+0x41f/0x4b0 fs/namespace.c:1373
- task_work_run+0x24f/0x310 kernel/task_work.c:239
- resume_user_mode_work include/linux/resume_user_mode.h:50 [inline]
- exit_to_user_mode_loop kernel/entry/common.c:114 [inline]
- exit_to_user_mode_prepare include/linux/entry-common.h:329 [inline]
- __syscall_exit_to_user_mode_work kernel/entry/common.c:207 [inline]
- syscall_exit_to_user_mode+0x13f/0x340 kernel/entry/common.c:218
- do_syscall_64+0x100/0x230 arch/x86/entry/common.c:89
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7ff2c2d87057
-Code: a8 ff ff ff f7 d8 64 89 01 48 83 c8 ff c3 0f 1f 44 00 00 31 f6 e9 09 00 00 00 66 0f 1f 84 00 00 00 00 00 b8 a6 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 01 c3 48 c7 c2 a8 ff ff ff f7 d8 64 89 02 b8
-RSP: 002b:00007ffe765b76d8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a6
-RAX: 0000000000000000 RBX: 0000000000000000 RCX: 00007ff2c2d87057
-RDX: 0000000000000000 RSI: 0000000000000009 RDI: 00007ffe765b7790
-RBP: 00007ffe765b7790 R08: 0000000000000000 R09: 0000000000000000
-R10: 00000000ffffffff R11: 0000000000000246 R12: 00007ffe765b8810
-R13: 00007ff2c2e01894 R14: 00007ffe765b8850 R15: 0000000000000011
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:f2fs_put_super+0x1132/0x1150 fs/f2fs/super.c:1667
-Code: fd 41 bf 0c 00 00 00 4c 89 e7 44 89 fe e8 56 5a 00 00 4c 89 e7 31 f6 48 c7 c2 00 ab 4f 8c 44 89 f9 49 89 c0 e8 1f c2 fd ff 90 <0f> 0b e8 c7 45 a5 fd 90 0f 0b e8 af 6b c6 07 66 2e 0f 1f 84 00 00
-RSP: 0018:ffffc900045afae0 EFLAGS: 00010246
-RAX: dab673f7b3e95800 RBX: 0000000000000002 RCX: dab673f7b3e95800
-RDX: 0000000000000000 RSI: 0000000080000000 RDI: 0000000000000000
-RBP: ffffc900045afc18 R08: ffffffff817f09fc R09: 1ffff920008b5ed0
-R10: dffffc0000000000 R11: fffff520008b5ed1 R12: ffff88807e130000
-R13: dffffc0000000000 R14: ffff88805514e084 R15: 0000000000000009
-FS:  00005555840ad500(0000) GS:ffff8880b8600000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f4e760ce000 CR3: 000000006e1b6000 CR4: 00000000003526f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
 
 
 _______________________________________________
