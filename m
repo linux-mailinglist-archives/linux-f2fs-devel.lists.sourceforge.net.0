@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5590F9FCB22
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Dec 2024 14:18:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3933B9FCB2D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Dec 2024 14:27:19 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tQnlD-000464-CJ;
-	Thu, 26 Dec 2024 13:18:43 +0000
+	id 1tQntO-0001ba-MJ;
+	Thu, 26 Dec 2024 13:27:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tQnlC-00045s-3C
+ (envelope-from <chao@kernel.org>) id 1tQntN-0001bU-LX
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Dec 2024 13:18:42 +0000
+ Thu, 26 Dec 2024 13:27:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lhcRDzHGKdzLNMjdYNJ2UBFaBcRLMgA6zjMR3z+Hvyg=; b=IUeCRQ8u99Kg+rwvQlU+QHzmdO
- XWXLoPnm0ScY/o6C92V3HZbNKdg12JiWwcXWyU+zEvjtI4lECgUjM3PL536COJ0zJmMNP05x5aFaI
- uTHRClDQ3v8EbARfxL9nKiQZUzCqsQ3dnSoWSW1SuBbf/K4uSs/UnJcwzcqxo4RT9TCo=;
+ bh=/p+8m0D4UhtTxXVcDQuwku6CS0Nk5BVJH/BmCtFSxSc=; b=TbsWkgyjRDtP4rQo+fU+yAUNUt
+ cfDBfv1U/SmzGXQz+6iS0Ws/Zec/5NI0y+IDCtN2KwKOIjJd8RKo+gg6ewVlMuaFXZlQfL4VW36kk
+ VgHq/SwMFuhYJqjYnJHKLhj+CBo0wceAY5NDpjq81st7u9rfEG0QvKwN0+QmQnvbcIaI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,37 +31,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lhcRDzHGKdzLNMjdYNJ2UBFaBcRLMgA6zjMR3z+Hvyg=; b=cdV4+plwtGanxbT9bOCTU3FftT
- Nw3ZlEv7NCtkjFGGPNrhw9Id3hqWjfEIXZghRmhV5LI51V8JMhZVucHdMZ5DYtWUJhk9AHCQ372Hr
- CxRgPhbDyD4SxTOBNVJP2S2t2cKL5m2/hsojJJOhAl7VU2SxedvaNnCj1IK4foa+1iOs=;
+ bh=/p+8m0D4UhtTxXVcDQuwku6CS0Nk5BVJH/BmCtFSxSc=; b=jqzdEPEf96ysr/jyWTfX+0a14W
+ Q97AgIEN1dCybWI2lXo18gEuipqXSVKGCs4QNXE2CdtHI1BU7fYXhTUs3EpX1iQqEj+CuNmQL5agU
+ 10rVR+vO/gl/nEZxTxRXONb9Te0c3Yh1btIhj8chA16fPzZIaaqyZCRuC5IVgjiyCNMQ=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tQnlB-00031H-AK for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Dec 2024 13:18:42 +0000
+ id 1tQntM-0003cF-Cs for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 26 Dec 2024 13:27:08 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 498145C5931;
- Thu, 26 Dec 2024 13:17:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C649C4CEDC;
- Thu, 26 Dec 2024 13:18:29 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 617075C5D4A;
+ Thu, 26 Dec 2024 13:26:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C591CC4CED1;
+ Thu, 26 Dec 2024 13:27:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1735219110;
- bh=BEADzvU1Q7JbDiV1KLuhdTb1ySVauWyE3gOJTCLz5Hw=;
+ s=k20201202; t=1735219622;
+ bh=reeDSR7x1w7REqOMt3DPyrpSvGWsEvqLJOekFb3nsDw=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=bC2qHeIm2xdCYhZJcMP6xlzKejOGmSaNlfupiAX2MWoBxuxqqmy7cUx7XuHJG/LTb
- zlSv+PCRbSNUOmGazRc8g/woke1rRwcuHqw/Sroe5FILEEP6DjpXMcqQ5UZ0Tww4Ig
- GVhjcLl/0Agu09VnJn8VrW5B5CQFkQxUuYJh0IWlJobjQry2eAjT/DSH6JykWyFDhD
- SuRfNxYZMiSdmslCBqon/YCThFFLnDmP7Y5KaQtOnnxI5yY2Y6aOdRu+HsB8CRDGDg
- 42a103IOuJlx/BvUuwf+Q0a/769ljYN1f+SKej71QAnTY25/gSuZ1NNmmY929HXJeF
- sPCkUtrIYha3A==
-Message-ID: <38a448c9-5cd4-482e-8411-a801995199c3@kernel.org>
-Date: Thu, 26 Dec 2024 21:18:36 +0800
+ b=QOSP7NxJ4VsKf//USpjiKXIQMKi1mf7wL3rH44NC/9d2Zifm7KbItPor2AToKgaFA
+ NUJFhjEJ8WAiSpg5Po+8PW/qBA0VU1oQI+yBZjf1B3bEruFhqDHRG0jsi05CldBQVU
+ q81NZagl/+58te1kwRcephONnEbBPGeNPPNiYRPeEQMP3+eOVrMoukN3OB2ZX7sRxm
+ CqCyp4rrLojnhnoJ1LqUPzhY0wqfxT3/wohk1fCZsQt7cQuSindbje2VI0PDJL5BwQ
+ OnXsNK5jVUv7/vV95+46tE6JynTZuwrZ9DiR6xu0Ho24e6MVoclW3cu+OB4u8uUfJi
+ 8hUYgG9wkfeww==
+Message-ID: <f49a164f-45fc-4c4a-8e71-019922b68968@kernel.org>
+Date: Thu, 26 Dec 2024 21:27:09 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Zorro Lang <zlang@redhat.com>
-References: <20241221082345.196029-1-chao@kernel.org>
- <20241221082345.196029-2-chao@kernel.org>
- <20241224095821.ylfv622fifsk3tsv@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+To: zangyangyang1 <zangyangyang1@xiaomi.com>
+References: <20241224114621.1220350-1-zangyangyang1@xiaomi.com>
 Content-Language: en-US
 Autocrypt: addr=chao@kernel.org; keydata=
  xsFNBFYs6bUBEADJuxYGZRMvAEySns+DKVtVQRKDYcHlmj+s9is35mtlhrLyjm35FWJY099R
@@ -105,7 +103,7 @@ Autocrypt: addr=chao@kernel.org; keydata=
  92Qh98hAj3cMFKtEVbLKJvrc2AO+mQlS7zl1qWblEhpZnXi05S1AoT0gDW2lwe54VfT3ySon
  8Klpbp5W4eEoY21tLwuNzgUMxmycfM4GaJWNCncKuMT4qGVQO9SPFs0vgUrdBUC5Pn5ZJ46X
  mZA0DUz0S8BJtYGI0DUC/jAKhIgy1vAx39y7sAshwu2VILa71tXJ
-In-Reply-To: <20241224095821.ylfv622fifsk3tsv@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+In-Reply-To: <20241224114621.1220350-1-zangyangyang1@xiaomi.com>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -113,26 +111,27 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2024/12/24 17:58, Zorro Lang wrote: > On Sat, Dec 21, 2024
- at 04:23:45PM +0800, Chao Yu wrote: >> This patch introduce a regression
- testcase to check whether >> f2fs can handle discard correctly on [...] 
+ Content preview:  On 2024/12/24 19:46,
+ zangyangyang1 via Linux-f2fs-devel wrote:
+ > When f2fs_write_single_data_page fails, f2fs_write_cache_pages > will use
+ the last 'submitted' value incorrectly, which will cause > 'n [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-accredit.habeas.com]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in bl.score.senderscore.com]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -141,9 +140,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tQnlB-00031H-AK
-Subject: Re: [f2fs-dev] [PATCH v3 2/2] f2fs/008: test snapshot
- creation/deletion on lvm device
+X-Headers-End: 1tQntM-0003cF-Cs
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix using wrong 'submitted' value in
+ f2fs_write_cache_pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -157,131 +156,40 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2024/12/24 17:58, Zorro Lang wrote:
-> On Sat, Dec 21, 2024 at 04:23:45PM +0800, Chao Yu wrote:
->> This patch introduce a regression testcase to check whether
->> f2fs can handle discard correctly once underlying lvm device
->> changes to not support discard after user creates snapshot
->> on it.
->>
->> Related bug was fixed by commit bc8aeb04fd80 ("f2fs: fix to
->> drop all discards after creating snapshot on lvm device")
->>
->> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
->> Signed-off-by: Chao Yu <chao@kernel.org>
->> ---
->> v3:
->> - rebase to last for-next branch
->> - update according to Zorro's comments.
->>   tests/f2fs/008     | 57 ++++++++++++++++++++++++++++++++++++++++++++++
->>   tests/f2fs/008.out |  2 ++
->>   2 files changed, 59 insertions(+)
->>   create mode 100755 tests/f2fs/008
->>   create mode 100644 tests/f2fs/008.out
->>
->> diff --git a/tests/f2fs/008 b/tests/f2fs/008
->> new file mode 100755
->> index 00000000..b85e321c
->> --- /dev/null
->> +++ b/tests/f2fs/008
->> @@ -0,0 +1,57 @@
->> +#! /bin/bash
->> +# SPDX-License-Identifier: GPL-2.0
->> +# Copyright (c) 2024 Oppo.  All Rights Reserved.
->> +#
->> +# FS QA Test No. f2fs/008
->> +#
->> +# This is a regression test to check whether f2fs can handle
->> +# discard correctly once underlying lvm device changes to not
->> +# support discard after user creates snapshot on it.
->> +#
->> +
->> +. ./common/preamble
->> +_begin_fstest auto quick rw
->> +
->> +_fixed_by_kernel_commit bc8aeb04fd80 \
->> +        "f2fs: fix to drop all discards after creating snapshot on lvm device"
->> +
->> +_require_scratch_nolvm
->> +_require_block_device $SCRATCH_DEV
->> +_require_command "$LVM_PROG" lvm
->> +
->> +lvname=lv_$seq
->> +vgname=vg_$seq
->> +testfile=$SCRATCH_MNT/testfile
->> +
->> +_cleanup()
->> +{
->> +	_unmount $SCRATCH_MNT >>$seqres.full 2>&1
->> +	$LVM_PROG lvremove -ff /dev/mapper/$lvname-snapshot $vgname >>$seqres.full 2>&1
->> +	$LVM_PROG lvremove -ff /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
->> +	$LVM_PROG vgremove -ff $vgname >>$seqres.full 2>&1
->> +	$LVM_PROG pvremove -ff $SCRATCH_DEV >>$seqres.full 2>&1
->> +	_udev_wait --removed /dev/mapper/$vgname-$lvname
->> +	cd /
->> +	rm -f $tmp.*
->> +}
->> +
->> +$LVM_PROG pvcreate -f $SCRATCH_DEV >>$seqres.full 2>&1
->> +$LVM_PROG vgcreate -f $vgname $SCRATCH_DEV >>$seqres.full 2>&1
->> +$LVM_PROG lvcreate -L 1024m -n $lvname $vgname >>$seqres.full 2>&1
+On 2024/12/24 19:46, zangyangyang1 via Linux-f2fs-devel wrote:
+> When f2fs_write_single_data_page fails, f2fs_write_cache_pages
+> will use the last 'submitted' value incorrectly, which will cause
+> 'nwritten' and 'wbc->nr_to_write' calculation errors
+ > > Signed-off-by: zangyangyang1 <zangyangyang1@xiaomi.com>
+> ---
+>   fs/f2fs/data.c | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> The lvcreate might be blocked by:
->    "WARNING: f2fs signature detected on /dev/vg_008/lv_008 at offset 1024. Wipe it? [y/n]:"
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 94f7b084f601..083acd7f5420 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -3179,6 +3179,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
+>                                  continue;
+>                          }
+>   #endif
+> +                       submitted = 0;
 
-Oh, I didn't encounter this... is it due to I use low version lvm tool?
-
-lvm version
-   LVM version:     2.03.11(2) (2021-01-08)
-   Library version: 1.02.175 (2021-01-08)
-   Driver version:  4.48.0
-
-> 
-> So better to use "lvcreate -y" or "yes | ...".
-
-Sure.
+How about initializing "submitted" in f2fs_write_single_data_page()
+to cover all cases in where we call f2fs_write_single_data_page()?
 
 Thanks,
 
-> 
-> Thanks,
-> Zorro
-> 
->> +_udev_wait /dev/mapper/$vgname-$lvname
->> +
->> +_mkfs_dev /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
->> +_mount -o discard /dev/mapper/$vgname-$lvname $SCRATCH_MNT >>$seqres.full 2>&1
->> +
->> +dd if=/dev/zero of=$testfile bs=1M count=20 >>$seqres.full 2>&1
->> +sync
->> +rm -f $testfile
->> +sync
->> +
->> +# create a snapshot on lvm device
->> +$LVM_PROG lvcreate -L 1024m -s -n $lvname-snapshot /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
->> +
->> +echo "Silence is golden"
->> +
->> +status=0
->> +exit
->> diff --git a/tests/f2fs/008.out b/tests/f2fs/008.out
->> new file mode 100644
->> index 00000000..dd68d5a4
->> --- /dev/null
->> +++ b/tests/f2fs/008.out
->> @@ -0,0 +1,2 @@
->> +QA output created by 008
->> +Silence is golden
->> -- 
->> 2.40.1
->>
-> 
+>                          ret = f2fs_write_single_data_page(folio,
+>                                          &submitted, &bio, &last_block,
+>                                          wbc, io_type, 0, true);
+> --
+> 2.43.2
 
 
 
