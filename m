@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEB739FD8F6
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 28 Dec 2024 05:28:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B68319FD8F7
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 28 Dec 2024 05:29:54 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tROQc-0001VS-LO;
-	Sat, 28 Dec 2024 04:27:54 +0000
+	id 1tROSW-0001YJ-6q;
+	Sat, 28 Dec 2024 04:29:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1tROQc-0001VM-4s
+ (envelope-from <zlang@redhat.com>) id 1tROSU-0001YD-SR
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 28 Dec 2024 04:27:54 +0000
+ Sat, 28 Dec 2024 04:29:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PxKP1JYtpYze2lidt7JggvzgICQVYYUkZoaw6OgMCWM=; b=izjPqgrkor8PA1ZAMwduxMDpSb
- /EUgqjsdoANEDAiCQtxWgBnD5UshIARHYkYLZv2urG96LgYH2lSqgXcqAUxkUaMnZn+muKUn+8UyD
- Rr79lBWSExnqCvHt0ZcmfAm5oZ3lU0fRmHPlnYnB9qmDTzvuT5HWeXpqfUT2+PBIPFlI=;
+ bh=7EfW69f1VbR875uQRLJFk3Xl8wJJasMX4yD9gMIjf4E=; b=bM4l0mbDT/+X7ku3/Pr8yPJz0c
+ HQf0pWkg74YKvyjOgiyx1ta0REpwq7izRUGIp2UiNRuXsWpZOwoxuOvlGJjBI6bE990P3a2Kovwho
+ SR0d6PFv7PfMTBwUurtFa612AEx/qomUHODk+KlBVZp2Y0OxFREDEI3g/ZXrkXPxuQa4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,117 +31,118 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PxKP1JYtpYze2lidt7JggvzgICQVYYUkZoaw6OgMCWM=; b=R1kE6zmouzRR9zV5ycyv5UBwFe
- qkJ3GfnpRvVdf8EyDiU2irGtCrGTc3y0nitL+HH1fVDMigeUiG/zFD0RS1Sf9MpAIK7s4m+pky3eG
- GJlP7CdVJoUFsfXMu+YEUYeOVRROhB+sDGHoRBPaPmsmVrQj4Pb+47IeSH4bOSJrS4qc=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ bh=7EfW69f1VbR875uQRLJFk3Xl8wJJasMX4yD9gMIjf4E=; b=VJ3a5OPZD896NUvJogOyxzSNzS
+ N3/eF1a0rLroWWyXlTFeTnm/YJa2iDFdjY+SK8+oYbRw3ipZrDvkpZQYjEGxHsInsQq6LpEo0aaXJ
+ hQJclleDBSkxzfwCBIst7F6Taid5dNOiBdYrpZmkeT4al2OrIwRGh8DljuXnYWTO3ftY=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tROQb-0007Yy-4x for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 28 Dec 2024 04:27:54 +0000
+ id 1tROSU-0007hE-5d for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 28 Dec 2024 04:29:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1735360066;
+ s=mimecast20190719; t=1735360179;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=PxKP1JYtpYze2lidt7JggvzgICQVYYUkZoaw6OgMCWM=;
- b=RSAnF43a5J4yo0JKW6oVR+tS5vRbDWcosgNL45DPraPljK4U25Hkbq2MqhlRewtf9apn0Y
- nRrgi93sdn2dJ8hvoUTbJVmhsMn9JHCQLmDdS+8MWZlo1fhzH13khcq/fhkmssbXZcJV82
- KClApkhAX+AwsLl4CKyzQsnFz9UbUwc=
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=7EfW69f1VbR875uQRLJFk3Xl8wJJasMX4yD9gMIjf4E=;
+ b=aw40skrhy+7VE4PvdQQ17FN0khdK9ptfe1ei9KGwRdwBx4F8i4aYgEOEWo/z0Mww23SpsU
+ 1XF5Jiuu5e0nD7Li0QwwxhEXcKIC+yzOVXvW+78J/oLY4YzASWO9QAVeigFV/wjmXJ+qA9
+ orLEgdokWGLRIBXSvApVRT/IReKH9Zg=
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-121-nah2zjd3MZWp-4MKDFQegA-1; Fri, 27 Dec 2024 23:27:45 -0500
-X-MC-Unique: nah2zjd3MZWp-4MKDFQegA-1
-X-Mimecast-MFC-AGG-ID: nah2zjd3MZWp-4MKDFQegA
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-216750b679eso83225095ad.1
+ us-mta-422-ZSLFk7ksPjaF57wR9Gltjw-1; Fri, 27 Dec 2024 23:29:38 -0500
+X-MC-Unique: ZSLFk7ksPjaF57wR9Gltjw-1
+X-Mimecast-MFC-AGG-ID: ZSLFk7ksPjaF57wR9Gltjw
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-2ef8c7ef51dso9728770a91.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 27 Dec 2024 20:27:44 -0800 (PST)
+ Fri, 27 Dec 2024 20:29:37 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735360064; x=1735964864;
+ d=1e100.net; s=20230601; t=1735360177; x=1735964977;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PxKP1JYtpYze2lidt7JggvzgICQVYYUkZoaw6OgMCWM=;
- b=BJYGGpVHJlVI51skoXaOSnniR/TNzB5XVseUqoayQfPtfXTXjtTQ1CSKujI55o+FgU
- NI7Chblm4aSRWg4/VhhOFXcDux2EsA+B793B6amsV7pUkQMdc8+tPNsg6r2W1mmALvzA
- k7Uxv9Fjo4APsx1PCDMColobH11saQrlbhsLgllR6hUF7m3ezf2njgCxKdQ20MXRnCso
- UMgBmF2wDk289ViNpIqLE2yzGiz8kF5cKOvrn9DaA4FSjdhISDM64Wy/fFLtprK6GqHJ
- HfuSzMwB1iSpg9mq8OhO10JKlR+yvEHEsbIqCo4qvBNp1uLliawK/g7aqZG/DpfGOFR1
- Kd1w==
+ bh=7EfW69f1VbR875uQRLJFk3Xl8wJJasMX4yD9gMIjf4E=;
+ b=kU0YYFwDi07lKu6jAfiTeDoq7DBIbYDVJUgZMz4U/mP5s3OmBLykBW0zLTi5wCSM4t
+ yoROEzRut34D1TPRpbSjGUBdBxUQ7KOhR24g+GAWwq7S52XjLLXPx/WsLRhecyEvYB9i
+ KY1QqK/09NCbjNqKOsryNp4xFqTYTLkNhBy294Tmogasw2LFn6bQCbz9trPtvOMIzO9h
+ 2L7Kme51VklpIjlXz7bKGK/mC0UQfyfq79ej2ED9yQEPe9NMR8W9HuCoL61XPorqCJzL
+ H5oKNKm/f0/LetD6+1j4umiu+luf8Rhmf3uXw6Xofz2GYJw4+ges7E1LI6vkYhhrF+3L
+ gvmQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUicQIWnCapCjyAN5ulNvzsxgO0bdlRzku2YRFWSo/hjKI5DyVIjwiZojeYqXmK6C+0sBeAswQz6dHqp3F/8Vd0@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YxWEz83XK0rkRGPDJ0fkCPU2aL+xS/gyBbE6Hy6BanfhWa9myNq
- OKYF8yMG3bRQDZR6hj/CzAK0JPtbBzO0DfgdZKs98IecYZujf6silAu2ocTeRxNXWDuU81XaoJ2
- aMfvyT024JkMn8tdCr5s9kVdQRTeYmnUT8BUcPEDZXphNAF33k7sQK3l+/bNJIJL5VfKZci/xH/
- Q=
-X-Gm-Gg: ASbGncvxyjP7SS9+8JWzoGXD0w7USOiIiznynJ1QpH3aF/jlLeXgntfx6lN2jGyzbof
- tKC52e8DHynu1auHDQp5f4tzgC3X+c5UyvEr69zRWWZSdTB556PBoTUfuoT+mRYUZhHYgQwj6fl
- reCzFtdCziU6cncfZy+3g19A06heHdYgFNAh2KzGHpn4IEQGMOTBe05aReRQOy1BxbB30JB8xfR
- 0JW9i1uAEYipFZGBFQtcHUyZ/qpdXGWKuDUg+xeeSXM3tEBvR2kYJLusZkE6dOyz9yEgMyY4lMw
- HUdpUnARgW0GqEHGYJxOvA==
-X-Received: by 2002:a17:903:1248:b0:215:a96d:ec17 with SMTP id
- d9443c01a7336-219e6e9f972mr388774555ad.14.1735360064117; 
- Fri, 27 Dec 2024 20:27:44 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFMN3qkkbg7IkE7tokaFOyB9J+Jlk/b/GquRVWEbzCvww8Aslq47g6LUtZs6GhTqkO4yMpgsQ==
-X-Received: by 2002:a17:903:1248:b0:215:a96d:ec17 with SMTP id
- d9443c01a7336-219e6e9f972mr388774435ad.14.1735360063819; 
- Fri, 27 Dec 2024 20:27:43 -0800 (PST)
+ AJvYcCU3loQEzlmQjSWStxRfRCUOkAtVJ0exvkbHhPOR9kwCjnNywApV+S4FXTQslm9xUEv6jQeWCHaTRK/b5rhUWZ14@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzoPJQhNCajF1ByiONcCuAqWvCSNTrFp8jD37m3wezZ+ofPYCm3
+ ck34PAPVkQ6YFxLs7Q1tbezxyB9TTKXf/15vMghk+Xbvha/5EDCjBzpJP0rdRW+O17I1wTP+CSR
+ rSTWimsdtjbcsh+41GGspaMh3eqWn16VrpBvVGgBoi2A0snK2qCi7/Dvujt2AX8W4kZvGJTvkhf
+ RsGLv5ucygsA==
+X-Gm-Gg: ASbGncsVBhH06f+4lmVSAJuoZUiV1AOcxr9nMEKXoG9wMxp0FqyaC/z2lGjPXoYZUI3
+ 0tuvYJyKnxulj+3CAYIKjstNoKfghLZRl07xUD5FfZkqDeYwEFRYYBs8NlTL8qFp30+ly9H/Mxx
+ YKEckKdMuqResNqTm1pXSq5lfAGQR2mPSggBu2hm+AbXynF4og7MMRvXh+txDaFOUOCorQ6fY36
+ wQCcJJHtitidj1SuXttrJeHNMwNoUl2fQJkFRTEYm7bvBv0YVyFO8hFb/DfEaiUTTNcYquqTovV
+ sJhq0AUkHbqoFfMtu+18FA==
+X-Received: by 2002:a17:90b:2b83:b0:2ef:9dbc:38d1 with SMTP id
+ 98e67ed59e1d1-2f4435ad5e6mr45177912a91.5.1735360176841; 
+ Fri, 27 Dec 2024 20:29:36 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF1MdxnWOsnF/Nx/tbnW5WGIG+UHcQ1Kyol/UUxYMSG87cGahqG+KdcewPaFgaSIsQRZPlBig==
+X-Received: by 2002:a17:90b:2b83:b0:2ef:9dbc:38d1 with SMTP id
+ 98e67ed59e1d1-2f4435ad5e6mr45177896a91.5.1735360176557; 
+ Fri, 27 Dec 2024 20:29:36 -0800 (PST)
 Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([43.228.180.230])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-219dc96e85csm142860585ad.61.2024.12.27.20.27.41
+ d9443c01a7336-219dc9f7356sm143127715ad.193.2024.12.27.20.29.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Dec 2024 20:27:43 -0800 (PST)
-Date: Sat, 28 Dec 2024 12:27:38 +0800
+ Fri, 27 Dec 2024 20:29:36 -0800 (PST)
+Date: Sat, 28 Dec 2024 12:29:32 +0800
 From: Zorro Lang <zlang@redhat.com>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <20241228042738.hk5k4impnvstjmj4@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+Message-ID: <20241228042932.jvevyhdxmp6sasjx@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 References: <20241226133631.9486-1-chao@kernel.org>
- <20241226133631.9486-2-chao@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20241226133631.9486-2-chao@kernel.org>
+In-Reply-To: <20241226133631.9486-1-chao@kernel.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: CJeGRoSYjVLu39k6ex1goKOwGa0c3qbriwIhab7XaD0_1735360064
+X-Mimecast-MFC-PROC-ID: v3Of2I3j3QpvoqraMSv2iY5zdgbPpyL-mdJEIvkHx20_1735360177
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Dec 26, 2024 at 09:36:31PM +0800, Chao Yu wrote: >
- This patch introduce a regression testcase to check whether > f2fs can handle
- discard correctly once underlying lvm device > changes to not s [...] 
+ Content preview:  On Thu, Dec 26, 2024 at 09:36:30PM +0800, Chao Yu wrote: >
+ Then, f2fs/* testcases can use this wrapped common helper instead of > raw
+ codes. > > Suggested-by: Zorro Lang <zlang@kernel.org> > Signed-of [...] 
  Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [170.10.129.124 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [170.10.129.124 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [170.10.133.124 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [170.10.133.124 listed in sa-accredit.habeas.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.129.124 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tROQb-0007Yy-4x
-Subject: Re: [f2fs-dev] [PATCH v4 2/2] f2fs/008: test snapshot
- creation/deletion on lvm device
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [170.10.133.124 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [170.10.133.124 listed in list.dnswl.org]
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tROSU-0007hE-5d
+Subject: Re: [f2fs-dev] [PATCH v4 1/2] common/rc: support f2fs in _mkfs_dev()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -159,113 +160,37 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Dec 26, 2024 at 09:36:31PM +0800, Chao Yu wrote:
-> This patch introduce a regression testcase to check whether
-> f2fs can handle discard correctly once underlying lvm device
-> changes to not support discard after user creates snapshot
-> on it.
+On Thu, Dec 26, 2024 at 09:36:30PM +0800, Chao Yu wrote:
+> Then, f2fs/* testcases can use this wrapped common helper instead of
+> raw codes.
 > 
-> Related bug was fixed by commit bc8aeb04fd80 ("f2fs: fix to
-> drop all discards after creating snapshot on lvm device")
-> 
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> Suggested-by: Zorro Lang <zlang@kernel.org>
 > Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
 > v4:
-> - use "lvcreate -y" to force wiping stale data in device.
->  tests/f2fs/008     | 57 ++++++++++++++++++++++++++++++++++++++++++++++
->  tests/f2fs/008.out |  2 ++
->  2 files changed, 59 insertions(+)
->  create mode 100755 tests/f2fs/008
->  create mode 100644 tests/f2fs/008.out
+> - no updates
+>  common/rc | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
-> diff --git a/tests/f2fs/008 b/tests/f2fs/008
-> new file mode 100755
-> index 00000000..47696f2b
-> --- /dev/null
-> +++ b/tests/f2fs/008
-> @@ -0,0 +1,57 @@
-> +#! /bin/bash
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) 2024 Oppo.  All Rights Reserved.
-> +#
-> +# FS QA Test No. f2fs/008
-> +#
-> +# This is a regression test to check whether f2fs can handle
-> +# discard correctly once underlying lvm device changes to not
-> +# support discard after user creates snapshot on it.
-> +#
-> +
-> +. ./common/preamble
-> +_begin_fstest auto quick rw
-> +
-> +_fixed_by_kernel_commit bc8aeb04fd80 \
-> +        "f2fs: fix to drop all discards after creating snapshot on lvm device"
-> +
-> +_require_scratch_nolvm
-> +_require_block_device $SCRATCH_DEV
-> +_require_command "$LVM_PROG" lvm
-> +
-> +lvname=lv_$seq
-> +vgname=vg_$seq
-> +testfile=$SCRATCH_MNT/testfile
-> +
-> +_cleanup()
-> +{
-> +	_unmount $SCRATCH_MNT >>$seqres.full 2>&1
-> +	$LVM_PROG lvremove -ff /dev/mapper/$lvname-snapshot $vgname >>$seqres.full 2>&1
-> +	$LVM_PROG lvremove -ff /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
-> +	$LVM_PROG vgremove -ff $vgname >>$seqres.full 2>&1
-> +	$LVM_PROG pvremove -ff $SCRATCH_DEV >>$seqres.full 2>&1
-> +	_udev_wait --removed /dev/mapper/$vgname-$lvname
-> +	cd /
-> +	rm -f $tmp.*
-> +}
-> +
-> +$LVM_PROG pvcreate -f $SCRATCH_DEV >>$seqres.full 2>&1
-> +$LVM_PROG vgcreate -f $vgname $SCRATCH_DEV >>$seqres.full 2>&1
-> +$LVM_PROG lvcreate -y -L 1024m -n $lvname $vgname >>$seqres.full 2>&1
+> diff --git a/common/rc b/common/rc
+> index 7b5bc0b4..ecac2de8 100644
+> --- a/common/rc
+> +++ b/common/rc
+> @@ -833,6 +833,9 @@ _try_mkfs_dev()
+>      ext2|ext3|ext4)
+>  	$MKFS_PROG -t $FSTYP -- -F $MKFS_OPTIONS $*
+>  	;;
+> +    f2fs)
+> +	$MKFS_PROG -t $FSTYP -- -f $MKFS_OPTIONS $*
+> +	;;
 
-OK, so you choose "-y" option. I think it's fine, due to this option was
-brought in by below commit [1] 11 years ago. It's nearly same old with f2fs :)
-So,
+Oh, that's fine to me if you don't want to use mkfs.f2fs directly.
 
 Reviewed-by: Zorro Lang <zlang@redhat.com>
 
-[1]
-  commit b6dab4e0598df7b6a44a32749fdb846c03aa692d
-  Author: Peter Rajnoha <prajnoha@redhat.com>
-  Date:   Wed Nov 6 16:16:34 2013 +0100
-
-    lv_manip: rename set_lv -> wipe_lv and include signature wiping capability
-
-
-
-> +_udev_wait /dev/mapper/$vgname-$lvname
-> +
-> +_mkfs_dev /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
-> +_mount -o discard /dev/mapper/$vgname-$lvname $SCRATCH_MNT >>$seqres.full 2>&1
-> +
-> +dd if=/dev/zero of=$testfile bs=1M count=20 >>$seqres.full 2>&1
-> +sync
-> +rm -f $testfile
-> +sync
-> +
-> +# create a snapshot on lvm device
-> +$LVM_PROG lvcreate -L 1024m -s -n $lvname-snapshot /dev/mapper/$vgname-$lvname >>$seqres.full 2>&1
-> +
-> +echo "Silence is golden"
-> +
-> +status=0
-> +exit
-> diff --git a/tests/f2fs/008.out b/tests/f2fs/008.out
-> new file mode 100644
-> index 00000000..dd68d5a4
-> --- /dev/null
-> +++ b/tests/f2fs/008.out
-> @@ -0,0 +1,2 @@
-> +QA output created by 008
-> +Silence is golden
+>      xfs)
+>  	$MKFS_PROG -t $FSTYP -- -f $MKFS_OPTIONS $*
+>  	;;
 > -- 
 > 2.40.1
 > 
