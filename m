@@ -2,214 +2,113 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 559839FF873
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Jan 2025 11:53:25 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CBF049FFA96
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Jan 2025 15:45:57 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tTIp9-0005Kv-SL;
-	Thu, 02 Jan 2025 10:53:07 +0000
+	id 1tTMSF-0008DM-6Q;
+	Thu, 02 Jan 2025 14:45:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <guochunhai@vivo.com>) id 1tTIp8-0005Km-At
- for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 02 Jan 2025 10:53:06 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3g6Z2ZwkbAOwgmnYOZZSfOddWR.UccUZSigSfQcbhSbh.Qca@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1tTMSA-0008DD-7U for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 02 Jan 2025 14:45:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
- Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
- :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
- :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1Ih/94V6rMTlQCwFqxyUnwPM76qjryi+TkvVEJOwxEs=; b=isaZ5WlK4eTY7c0Ww6heMl9JTc
- iz/ijHjmlnLgZ3Qi25WoIiUl4/cNDdP44cQ1uSqSR5MiJ/dJdDRbwSfyx9zQ1CXEiosYLE6J2yziM
- Lu4sOI4sPNoFtXUSxrP2WzFpcxHyOrFNWzmpnfKojPHKKPvCLUfY3cMr3Ev8fWnB1CUc=;
+ bh=ivsULfK+ZzTvO3DbL6uC7rzsm5SWLQfsBE/DdKr1YKE=; b=iRzdh2ZKmyg8eyL/eKhu32HRzb
+ 2Mq0Ie0cFRU9EFgl0U3BbcrOjJGRUd3m5SXlkXahmvPvR6tCSHGsRvY1BUXaGl3373CqQ5nFB2i0d
+ 2VxIULj+0JE7LIM77zXn4MwAqBDTTKcsbz7fES3h2PNvLR1LUn2Qj/+vsX9cYT2spWmk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
- In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=1Ih/94V6rMTlQCwFqxyUnwPM76qjryi+TkvVEJOwxEs=; b=U3DtkzGqVyFQM1odQ9tDx3kLl+
- txvK2CRYIRLKfKWiStj9Mm6nHwdF2Vnxi/iy6BMtzz4q9fiCY6qwafrmiE+mXL9rEfje65VhMngKJ
- UIQe21Kdvwn0HK2S978mmEE5Uqez7eF8vZcCNA5lOfubRLqWJXUciRJtchHNwRzsCZyk=;
-Received: from mail-psaapc01on2074.outbound.protection.outlook.com
- ([40.107.255.74] helo=APC01-PSA-obe.outbound.protection.outlook.com)
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ivsULfK+ZzTvO3DbL6uC7rzsm5SWLQfsBE/DdKr1YKE=; b=J
+ dYe/PtCC1EvxxxKObwfdKIrQ0ma90zTTIpG7rynwXmSIHOKRP+Ho/BUeuogBrs4q2cncmb+IAl6cP
+ RAQ+uUBGJYlPSUe5v/gQAzPMLI2sehcN/MlbabQaawg/yCK1qHwgDxBvCK0mI6TmbJqIQf/jQEHz8
+ NpT+YKADMDPp4of8=;
+Received: from mail-il1-f205.google.com ([209.85.166.205])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tTIp6-00033y-J4 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 02 Jan 2025 10:53:06 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oveYYgHqIckkt3X0aYRkjbGzFMuingIBn/oloKW5GHxHdSHEw7iSOlOCSzCHSVqKHBd/9oig0wUVgf+5+EBkx8YN5EU1nb3rmnPJjpYIHRvndBmnRufYHdCJMxOBAYet0SeE3IOkOw/fEv0s4HpK0vLZPxueMER1CLVdXAPkTjsbyztPVBFnTSx2Yw70TFIS9Qej4xJeXSmcw0esy5PqFEE2U/4B2BXPnN1wDZHh4TBI1KxpnFPiW8Sm/zHBAn5bnrt/VXPlRgxpH5EYkMFegpkevdxygqL29+hy1N5HW1pZC3O62SLAWcHVdkr0bvbEqf4k9hlv0XyvwOwaCsrDXg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1Ih/94V6rMTlQCwFqxyUnwPM76qjryi+TkvVEJOwxEs=;
- b=m8itWEyzHBIP/iyXjEL9mzkMMEHyc2IuqKrq4ezMpl94OmhJjZGczrDNgTHQYTwfG5XyWzTUCuOmm0e6sfE46h6ekr+3VAT8iVHo+LjUjiAS86hRg3xMj67fSI0xUWT9LsxhYZblHxRg3ecg790pKWDlCTHYangflIhLIvHoEutV8DFDplWm1MnrXMPFy4YG/NvnuUELmwPzL+f0tV7Joc/sTYHngVD84fJL9hyk7IpN/4epSuomxR9RY9+8WPshY8qejX7Fu8Med5ccFFPNBiQ5v2fQGXzxdLMlqSO4HcpNtIMYA7PXn3bL57ef2Z+augjmc6jAk86ueu9qVqW10g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1Ih/94V6rMTlQCwFqxyUnwPM76qjryi+TkvVEJOwxEs=;
- b=EVhk52URdMCFtyv59ZyoBBuq/EFPaISfykSHUH4Unke4UnaKnrYVBEluSpiCu1Gq2ej950L3qhSfJ9Cr89Xd2lVF/p1GKDltS2TKTkV5GODAH8fBGdEXgJT3ySOY8lAfV7/qbkOLPtSaTLU6aqIeQE3FkrHYSpIxPlLK0pRBmgYS6QeRXkGnqrZ2rQ0VM3B4ueVvIs1xMCWqqASpaCoykjqqAOmtBkjyarCsPGGWFQrNpxUDtuCCTH8yPdN9j8pnlSaRZqUMlJBIzG0ph5hj/eZgiJkUeNO+uZLC/lhOcjs+iIEJuN/WHf6SFNOWCxPzcZ92P/lXu1FLTXstTob8ZA==
-Received: from TYZPR06MB7096.apcprd06.prod.outlook.com (2603:1096:405:b5::13)
- by SEZPR06MB6408.apcprd06.prod.outlook.com (2603:1096:101:131::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8314.12; Thu, 2 Jan
- 2025 10:52:49 +0000
-Received: from TYZPR06MB7096.apcprd06.prod.outlook.com
- ([fe80::6c3a:9f76:c4a5:c2b]) by TYZPR06MB7096.apcprd06.prod.outlook.com
- ([fe80::6c3a:9f76:c4a5:c2b%4]) with mapi id 15.20.8314.001; Thu, 2 Jan 2025
- 10:52:49 +0000
-To: Chunhai Guo <guochunhai@vivo.com>, "chao@kernel.org" <chao@kernel.org>,
- "jaegeuk@kernel.org" <jaegeuk@kernel.org>
-Thread-Topic: [PATCH] f2fs: fix missing discard for active segments
-Thread-Index: AQHbRU2QFx/g8qISK0up0N3Ek11L5bMDflEA
-Date: Thu, 2 Jan 2025 10:52:49 +0000
-Message-ID: <5a898849-999f-403b-8e1a-761033b3f7b5@vivo.com>
-References: <20241203065108.2763436-1-guochunhai@vivo.com>
-In-Reply-To: <20241203065108.2763436-1-guochunhai@vivo.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TYZPR06MB7096:EE_|SEZPR06MB6408:EE_
-x-ms-office365-filtering-correlation-id: 518bc031-db36-4aeb-e96f-08dd2b1b9959
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?VHpFdFlJcTlrOXB5ck5VUENEdEVDRkowdis4Q2JBVVVvZWxNUVRpRVBxbTJG?=
- =?utf-8?B?Tm9EckJ6b0xSZHlGN2hlV1V0RSt3N3ZNUjdBTDlBQVg0Yzk3eEcweCsxMmlX?=
- =?utf-8?B?RkJJckhzd1B4NnkzYlNaL2w1TXlWRUtjNkppaWZLQ3hXRXlLNWNyMVlhWGlG?=
- =?utf-8?B?N3dBQUNpSzV5YndaWWpydXBidkFXUjNuaDYxZ1JtclFNN0JjR1lOc0hYVEdV?=
- =?utf-8?B?QTBZd01ud0FDRjRoOCtLYjJDZzdMS0JwVUh0ZnBHaWcyZi92cEVBTlhlYjM3?=
- =?utf-8?B?TUFGUTVKbGczd0FQTXFBaWxmV29KRXJHTURWWTY0OEhkYVZ4TjNnZHdMM3JR?=
- =?utf-8?B?M3B5R21SM0JyMFVvU1VZMld5OG4yVmJwMERZaHlWQTlJUElpZ2xTVHdyVUg5?=
- =?utf-8?B?V1BzRjFDQkp1S2NIU1dSaE5LbGU3Z2VGbVNFUGIwL0Z5M3JBS1M0VlFBUnZW?=
- =?utf-8?B?NkN5ZTJ0TUVYNXFEcWNOYVFhT05HWG15SklmSGNxWVhoMFdQR0I2ZVVycjEx?=
- =?utf-8?B?a3VUdEhYbStJV2d0UVdlSWxmSUM4Y3A1NlN3NFpIeit0cGJvREdQQTlISFhn?=
- =?utf-8?B?QnV0ZzV0S2FGTHovNzBtMUZEb1R4aVFrTURCUVlNbHFaL09iZFFWWGlEUWRP?=
- =?utf-8?B?cE9pcWZYZzZPWmRLemNHYWZ4eWRnZlkvSzNQK053b0dUdDhnaXZXdUdzaHRB?=
- =?utf-8?B?NllUZWZRN0tLVGQwU0VoUm1mcjdoZ3BWdmplOXFqN0haQks1QjRVWXB2QTN4?=
- =?utf-8?B?V1V0SU5abFowQVpSRzhsOVpVN05Zb2kvaTJPeVdWNnVITWd2M0EyeUlRUlJH?=
- =?utf-8?B?VnluZmFTUUtDazNVaE5yU2VRcWRodHdQLzlWcmJkcEhSMm54Z1ZDaWhFMFpj?=
- =?utf-8?B?bUZuVXNPRkxENkl4SWtpUXFxcU11bWduU0lFQW1wNk5Ta2xTME9nU3V1alpX?=
- =?utf-8?B?MTY4TGNOZ25XMW1lQ0ordEhLSFJiWGVzS0lXR3VkRlVmTGJFT0pEYjNiZERp?=
- =?utf-8?B?SThzYlN5RFB6UDJ4dG0zOVNYQ3hMNHAxZ1Z2SzB1WlVRdXhzWFVQaUZ3T2R6?=
- =?utf-8?B?c0N3NDJLMnZ5WVVwV3NpNERhQWVWZml3d0lBOEpyZFBnbG5lNC9JckdzSlpa?=
- =?utf-8?B?S24rYTRtNFU3aEJja3ZEdG1NQjdPVmluKzNsRXRLWllNZ0pTdjhYM081MEln?=
- =?utf-8?B?dVpVWFptYlBBMkxDcW5KS0lCR2xxM1FoSTRNdHRhcWMyN3FsdGUydTJGSnJp?=
- =?utf-8?B?NENYaDlpMjhTTDNHbEJhRTBNbEw0RitaSG05Ymswa3RhS2x5RitkaGRwbGdG?=
- =?utf-8?B?elRkbWtLN3ROa0haRitOdHMyRDkyaHgxUEFETVVyY1JvdlRGZU5SQndxNFRW?=
- =?utf-8?B?WE54WnVobDdWcFhhUC9jbGJZL1hTTkdvSjIzaWx4ZE8vaHBDWFNHWnJMU0No?=
- =?utf-8?B?WE9ydnZQTTlDUGphdHVmcUZEd0puN0dPY1VvUUxZU0R5MEFjZHRhMkxCN1R5?=
- =?utf-8?B?eWdobGx1UEZZMS9YbnVJcGJWMjFnaHJ5b3RpeUk2VnhlL0N0N0pVQ1lhUmxL?=
- =?utf-8?B?OWUrUGMyb090TWNLaURiRWQ1ODFGaEJqOHEzMjdRcEZOb2tjRWNHZllENTAr?=
- =?utf-8?B?eFNxUkhyRnlDMjVuakMvTjZFMkowbmZlY2RKOUNGMmlyVGEzU3ppM1VnU1Yz?=
- =?utf-8?B?aTF5QXduQ0dSelc2WGpVUDE5cTkrUWJiYURLUVZ6NEpnOVR1M1F5Q0R6UW16?=
- =?utf-8?B?S1Azd2NPME9rdkFLYmsrK05RS2ZhK1lhWW1tZkFTQ1g4YmpZcFl3WkJ5ODhO?=
- =?utf-8?B?Q2tLczRkK1ZNeXJjK2g0L1ZIbG5ad1VQWDlXQ0tmaTM3bjZRcSsvMktyeVVy?=
- =?utf-8?B?RlNnaGpQN3NTZXNPMEcyNklPaWxMU3JqaWVwUlpjVy9weFpwNFJPaUhYTjVD?=
- =?utf-8?Q?D0yDkbnUrm0fCoIq8uXMivz5ZoDfmFrW?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:TYZPR06MB7096.apcprd06.prod.outlook.com; PTR:;
- CAT:NONE; SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Z3ZSOU1pV0t4VVVueTZhRGpUMlRRUHBzK1BQdEcwSUhzRm1KQVNVRnJJNytI?=
- =?utf-8?B?MGt2UTZLMHRFMGgyWGQzQ0gwRm1OcUZCSlBuUWwvL0JWMXRMZ0JycTRodmh4?=
- =?utf-8?B?dDNEN0gwR3hBM294SmhwUEtwQkxSa3ZlRHRjUHUwaWpGaDAzSk8zaEo0Y25u?=
- =?utf-8?B?Z1pnMHBHYy9vVHJycXZKajNKaTd2UjM2MWt6Ym9KT1ViZlhQT0ozQ1RzOElT?=
- =?utf-8?B?cE1zOUo5ZHhHa1VNZG5wZi9JVytSb1BveHIwZFNxVlFRM2REeEg3bVA2SUkw?=
- =?utf-8?B?VXFMWFl4ZDY1Wkxjd3Q5M2l4RG5VQ2FJNWx5ZWxaYlk5blY3WHJHK29RM3JM?=
- =?utf-8?B?UnQ2M1dVVHo1c08rVm5sR1V0RFBSc200cEJoRTlhNjZBM2hUVVJiZnNJKzV3?=
- =?utf-8?B?NWZzU3dORFZkN1VKdDJEb3JmZFNsTDQxUXBYc2JiTjA5b053ZW1mN1dLbTVX?=
- =?utf-8?B?VG81eUdRZzc1dzZzOXhDdUpvL1NkSWdYWmlmM0kwZ0VOYVRBaFU1djYyY0dh?=
- =?utf-8?B?NDNVMlllQXFPT1VOMDRlR1htUXd4V2FwaFQ4SGF2NE5EMDZ4VisyVDVTTitQ?=
- =?utf-8?B?ZWZ0bEtyS0hqZC8wQ2hFaTc0SVppU3NLcTR5dkFuVzlVTjVFdzBQZGNyeWZF?=
- =?utf-8?B?aHhDQno0ay9xVlRVWmg3ZnlMSi9zb1ZvZ3pyVlJtM2M1dERmUk8xU3NJUnVt?=
- =?utf-8?B?eTNwbXR5SWdrMkxYdGM0QURDQWJLdnk3a0RwUm5vK3ZWOWpENWZ5MUoydmZa?=
- =?utf-8?B?R0pXOUc5V0FlaHVwNnRWcmoxeDB0bVVPWVZYZUlLNUVid3Y4aWxid0hudXQy?=
- =?utf-8?B?cTVISk42T2JwdE50UTZRR2MxY09ma1NnS2VySWw0dUtBSlgwS2M0US9nT1N2?=
- =?utf-8?B?alQ1KzNpWlZSMko3WkIwbE9DR1p2djY4LzhIMEJ3UDhmOUNIdnlNc2lpM2dz?=
- =?utf-8?B?VVJwZXRveW9LdXJHM1N0ZjN4a2czcGpPbDIxdlRKSDhmWXZSaDhTV1RxS0ZL?=
- =?utf-8?B?VHo3SXVXWnpTajN2YnlqT1EzTEhaTzkzd01HOWQ0Myt6UU5MZ0RteXhmYTd3?=
- =?utf-8?B?VDdpL2NTRTJmdC81YS9EWVVNSDN1MnBIYnkxZEx0ZGtQTVZsQ0hEenhDaCsr?=
- =?utf-8?B?RHFXcUQwS3ZYOXZoL1Y3c2ZMUlRtV0NPNTlJNEdaQk1JTkhYSmNaNmRUY1px?=
- =?utf-8?B?NC9oUjFuZXRseUEwYXNvZmRLM1VFYWRVN2IycmJ5MVpNZWpZMEJUK3UvOExW?=
- =?utf-8?B?N2V4TXJGbXhIZHU1ZnYyOXExOUs2QVEzYWo2WDRXRHA4SWxyRkZ3RmdvTDNp?=
- =?utf-8?B?Tkg5Z0hxVUcwbVJ6U3VQL210Z2V1aTg0WURBb3VraDlnYjNVeFRneEEvVm1s?=
- =?utf-8?B?V0RPS3RpZGsvbXYxRGhma3NCQWtYeXZOQWw5VEFnNDFNb3BCMjZaSU44QktH?=
- =?utf-8?B?NC80VGE4aW1rTHFCV2QyRGFrVTI2UkxrTmR0d05aMmo1Q2JSM0NsU2tXdDVv?=
- =?utf-8?B?bmc2eGt5N3RVaUZmejk2bTIwMmNYMFVPRTV6aWNJZzkzdXNtdnp5OXh1N0Y5?=
- =?utf-8?B?a2g2SURwUDBUUmVlTkxjZnp2dXRuK2JoT2hGSnMvMnMvUHNWeWNNR2RrbG9m?=
- =?utf-8?B?N0NJUncxOWlVeC9pN2xkZnJ0Y09WeURETENCK3UxMnVVcWxqejJZbzFWbWVY?=
- =?utf-8?B?d0pQSkEzK2ZJS2NRL2I5TkxCQ09sL204YWVzVkY4U2FUOEhkaUpUS1diL0Ew?=
- =?utf-8?B?UVZxN1I1MUFjT3lJQVRZKzgzVzlaaHA1VzFldU5hcGtDTDNCcFpRckZHSzlZ?=
- =?utf-8?B?dkRReE85QTEyeS9Bd3VlYlN0V3E4RktVWnQrdXpkS0x3eWtMcE9BN1l0MVFT?=
- =?utf-8?B?ZnhxS2Y0dHpFYklVVGhVWGpSKzkzQ3JwV01SYnhrbjhWc1dDQ1NzZTZ3NWg1?=
- =?utf-8?B?YWt6aFBicjgvd3lyQzROOWZ5clo4YUdQN1Z2aXljWUlvR29mdmlCRmlsNXA1?=
- =?utf-8?B?WXp2NlBZU01RTU9WRjdKUlNJU3VSdGphTHI2ZEV1ck92cmhWUnd1Mm4vT2dp?=
- =?utf-8?B?eHlVblVLWTM5dG9aU1VjS0o2UzFHbU5JUUtFdHo0NThhQityOEtGYWhRL2hi?=
- =?utf-8?Q?91r8=3D?=
-Content-ID: <F770974798DE764590385A28D997739E@apcprd06.prod.outlook.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1tTMS6-0007iU-7f for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 02 Jan 2025 14:45:35 +0000
+Received: by mail-il1-f205.google.com with SMTP id
+ e9e14a558f8ab-3a7d85ab308so109125085ab.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 02 Jan 2025 06:45:34 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1735829123; x=1736433923;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ivsULfK+ZzTvO3DbL6uC7rzsm5SWLQfsBE/DdKr1YKE=;
+ b=PAS0q+4G9jYwKSPoax8grAwemK8krlhbDhwjGEjdUbKvC5JwneCMLT2uWTAZZyJTxI
+ 3TgI3d7lN3N359qtSxpakxsHJFG0duOHSquMMEGMJYJJXIs6HmZHH71F7Dzrguf3J2CL
+ InqQZNmDbS+6+QtqcYGCzhsPj7ChEEVEdmeZAyKQfabrkjgtFeniFj+TrroahcZeC69X
+ ZIT+hsFP8COHOiCP5b6A3BGZwiW7dpUAtbvlt1aNxXdQW9yntDH4TpYRe2+2kLwmYLSh
+ k+xlTPQQNNoPGAY1ZwxfFBy+7rL845YrJ3KzAR6LTOXP+zZyTVRZQ3ARhqmhsF949M/y
+ r+ZQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWatoQOY58hrUObOrXkTaURAOCPqKBXF4cEYYVUoH+6Z8Z8QeUUYpISIYINFGwvnFgOl6AmQWStgbwY78WBtoEq@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YwirKV1SynGGqIIcnJbP77M29jCLdDt6niH0qbSj0Rpz08FRJAc
+ z9jb4Hb9w92lMUcLpzSFLrQOwZkzd3wZyZJKDOUxiSMS24QMYxyjtuWUn30514rtugTIRvB6fC7
+ 16hSaQV4aGJaS7CzBbd1sKV6BjvC7JL1Iv/47cLiosifwqqfAf8R7PMA=
+X-Google-Smtp-Source: AGHT+IHWVLojWEw6PZvqD+plZze52iNLZPYUFfLRbFh4e8I6/s0I4K8Rq5emaVlJiL6WwBB3V+YGE28vWQ0X9rOWmBSQVoN2+E5h
 MIME-Version: 1.0
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TYZPR06MB7096.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 518bc031-db36-4aeb-e96f-08dd2b1b9959
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Jan 2025 10:52:49.2999 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 4HkC6jwAm9N4mUObwaVzOBqtib7ZXPcPQneQ07rTlbH5MvkMkZTUiQ2dOXyF5IlnakpdFmiSGvSgLYVsXkkaJA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR06MB6408
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-Received: by 2002:a92:ca09:0:b0:3a7:8d8e:e730 with SMTP id
+ e9e14a558f8ab-3c2d54348admr275238395ab.22.1735829123455; Thu, 02 Jan 2025
+ 06:45:23 -0800 (PST)
+Date: Thu, 02 Jan 2025 06:45:23 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <6776a683.050a0220.3a8527.0042.GAE@google.com>
+From: syzbot <syzbot+f5e74075e096e757bdbf@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.5 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  在 12/3/2024 2:51 PM, Chunhai Guo 写道: Dear Chao & Jaegeuk,
-    Could you please help review this patch? Currently, this issue is quite easy
-    to reproduce in some projects. 
- 
- Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  Hello,
+ syzbot found the following issue on: HEAD commit: 573067a5a685
+ Merge branch 'for-next/core' into for-kernelci git tree:
+ git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
+ for-kernelci console output: https://syzkaller.appspot. [...] 
+ Content analysis details:   (0.5 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
-                             The query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                             [40.107.255.74 listed in sa-accredit.habeas.com]
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                             [40.107.255.74 listed in bl.score.senderscore.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [40.107.255.74 listed in list.dnswl.org]
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.166.205 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.166.205 listed in bl.score.senderscore.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.166.205 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [40.107.255.74 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
-X-Headers-End: 1tTIp6-00033y-J4
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix missing discard for active segments
+ [209.85.166.205 listed in wl.mailspike.net]
+X-Headers-End: 1tTMS6-0007iU-7f
+Subject: [f2fs-dev] [syzbot] [f2fs?] KASAN: slab-out-of-bounds Read in
+ f2fs_getxattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -221,45 +120,170 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chunhai Guo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chunhai Guo <guochunhai@vivo.com>
-Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-5ZyoIDEyLzMvMjAyNCAyOjUxIFBNLCBDaHVuaGFpIEd1byDlhpnpgZM6DQoNCkRlYXIgQ2hhbyAm
-IEphZWdldWssDQoNCkNvdWxkIHlvdSBwbGVhc2UgaGVscCByZXZpZXcgdGhpcyBwYXRjaD8gQ3Vy
-cmVudGx5LCB0aGlzIGlzc3VlIGlzIHF1aXRlIA0KZWFzeSB0byByZXByb2R1Y2UgaW4gc29tZSBw
-cm9qZWN0cy4NCg0KVGhhbmtzLA0KDQo+IGxvY2F0ZV9kaXJ0eV9zZWdtZW50KCkgZG9lcyBub3Qg
-c2V0IGFueSBjdXJyZW50IGFjdGl2ZSBzZWdtZW50IGFzIGENCj4gcHJlZnJlZSBzZWdtZW50LiBU
-aHVzLCB0aGUgaXNzdWUgZGVzY3JpYmVkIGJlbG93IG1heSBvY2N1cjoNCj4NCj4gU3RlcCAxOiBE
-dXJpbmcgYSBjaGVja3BvaW50LCBhZGRfZGlzY2FyZF9hZGRycygpIGRvZXMgbm90IGhhbmRsZSB0
-aGUNCj4gY3VycmVudCBhY3RpdmUgJ3NlZ21lbnQgWCcgd2l0aCAwIHZhbGlkIGJsb2NrcyAoYW5k
-IG5vbi16ZXJvIGRpc2NhcmQNCj4gYmxvY2tzKS4gQXMgYSByZXN1bHQsIG5vIHN0cnVjdCBkaXNj
-YXJkX2NtZCBpcyBjcmVhdGVkIGZvciAnc2VnbWVudCBYJw0KPiBhbmQgdGhlIHZhbHVlIG9mIHNi
-aS0+ZGlzY2FyZF9ibGtzIGNhbm5vdCBiZSByZWR1Y2VkIHRvIDAgYWZ0ZXIgdGhlDQo+IGNoZWNr
-cG9pbnQuDQo+DQo+IFN0ZXAgMjogZjJmcyBpcyB1bW91bnRlZCB3aXRob3V0IHNldHRpbmcgQ1Bf
-VFJJTU1FRF9GTEFHLCBhcw0KPiBzYmktPmRpc2NhcmRfYmxrcyBpcyBub24temVyby4NCj4NCj4g
-U2luY2UgYWRkX2Rpc2NhcmRfYWRkcnMoKSBjYW4gaGFuZGxlIGFjdGl2ZSBzZWdtZW50cyB3aXRo
-IG5vbi16ZXJvIHZhbGlkDQo+IGJsb2NrcywgaXQgaXMgcmVhc29uYWJsZSB0byBmaXggdGhpcyBp
-c3N1ZSBieSBhbHNvIGhhbmRsaW5nIGFjdGl2ZQ0KPiBzZWdtZW50cyB3aXRoIDAgdmFsaWQgYmxv
-Y2tzIGluIGFkZF9kaXNjYXJkX2FkZHJzKCkuDQo+DQo+IFNpZ25lZC1vZmYtYnk6IENodW5oYWkg
-R3VvIDxndW9jaHVuaGFpQHZpdm8uY29tPg0KPiAtLS0NCj4gICBmcy9mMmZzL3NlZ21lbnQuYyB8
-IDQgKysrLQ0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24o
-LSkNCj4NCj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvc2VnbWVudC5jIGIvZnMvZjJmcy9zZWdtZW50
-LmMNCj4gaW5kZXggZWFkZTM2YzVlZjEzLi40ZmIxZGM0YWFiOTcgMTAwNjQ0DQo+IC0tLSBhL2Zz
-L2YyZnMvc2VnbWVudC5jDQo+ICsrKyBiL2ZzL2YyZnMvc2VnbWVudC5jDQo+IEBAIC0yMDkwLDcg
-KzIwOTAsOSBAQCBzdGF0aWMgYm9vbCBhZGRfZGlzY2FyZF9hZGRycyhzdHJ1Y3QgZjJmc19zYl9p
-bmZvICpzYmksIHN0cnVjdCBjcF9jb250cm9sICpjcGMsDQo+ICAgCQlyZXR1cm4gZmFsc2U7DQo+
-ICAgDQo+ICAgCWlmICghZm9yY2UpIHsNCj4gLQkJaWYgKCFmMmZzX3JlYWx0aW1lX2Rpc2NhcmRf
-ZW5hYmxlKHNiaSkgfHwgIXNlLT52YWxpZF9ibG9ja3MgfHwNCj4gKwkJaWYgKCFmMmZzX3JlYWx0
-aW1lX2Rpc2NhcmRfZW5hYmxlKHNiaSkgfHwNCj4gKwkJCSghc2UtPnZhbGlkX2Jsb2NrcyAmJg0K
-PiArCQkJCSFJU19DVVJTRUcoc2JpLCBjcGMtPnRyaW1fc3RhcnQpKSB8fA0KPiAgIAkJCVNNX0ko
-c2JpKS0+ZGNjX2luZm8tPm5yX2Rpc2NhcmRzID49DQo+ICAgCQkJCVNNX0koc2JpKS0+ZGNjX2lu
-Zm8tPm1heF9kaXNjYXJkcykNCj4gICAJCQlyZXR1cm4gZmFsc2U7DQoNCg0KCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFp
-bGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8v
-bGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+Hello,
+
+syzbot found the following issue on:
+
+HEAD commit:    573067a5a685 Merge branch 'for-next/core' into for-kernelci
+git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
+console output: https://syzkaller.appspot.com/x/log.txt?x=108aa818580000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=cd7202b56d469648
+dashboard link: https://syzkaller.appspot.com/bug?extid=f5e74075e096e757bdbf
+compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
+userspace arch: arm64
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=10b9cac4580000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=178bb0b0580000
+
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/9d3b5c855aa0/disk-573067a5.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/0c06fc1ead83/vmlinux-573067a5.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/3390e59b9e4b/Image-573067a5.gz.xz
+mounted in repro: https://storage.googleapis.com/syzbot-assets/eddf26185633/mount_0.gz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+f5e74075e096e757bdbf@syzkaller.appspotmail.com
+
+F2FS-fs (loop0): invalid crc value
+F2FS-fs (loop0): Found nat_bits in checkpoint
+F2FS-fs (loop0): Mounted with checkpoint version = 1b41e954
+==================================================================
+BUG: KASAN: slab-out-of-bounds in __find_xattr fs/f2fs/xattr.c:235 [inline]
+BUG: KASAN: slab-out-of-bounds in __find_inline_xattr fs/f2fs/xattr.c:261 [inline]
+BUG: KASAN: slab-out-of-bounds in lookup_all_xattrs fs/f2fs/xattr.c:345 [inline]
+BUG: KASAN: slab-out-of-bounds in f2fs_getxattr+0xf5c/0x1064 fs/f2fs/xattr.c:533
+Read of size 4 at addr ffff0000cc09b278 by task syz-executor773/6410
+
+CPU: 0 UID: 0 PID: 6410 Comm: syz-executor773 Not tainted 6.13.0-rc3-syzkaller-g573067a5a685 #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/13/2024
+Call trace:
+ show_stack+0x2c/0x3c arch/arm64/kernel/stacktrace.c:466 (C)
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0xe4/0x150 lib/dump_stack.c:120
+ print_address_description mm/kasan/report.c:378 [inline]
+ print_report+0x198/0x538 mm/kasan/report.c:489
+ kasan_report+0xd8/0x138 mm/kasan/report.c:602
+ __asan_report_load4_noabort+0x20/0x2c mm/kasan/report_generic.c:380
+ __find_xattr fs/f2fs/xattr.c:235 [inline]
+ __find_inline_xattr fs/f2fs/xattr.c:261 [inline]
+ lookup_all_xattrs fs/f2fs/xattr.c:345 [inline]
+ f2fs_getxattr+0xf5c/0x1064 fs/f2fs/xattr.c:533
+ f2fs_xattr_generic_get+0x130/0x174 fs/f2fs/xattr.c:63
+ __vfs_getxattr+0x394/0x3c0 fs/xattr.c:423
+ smk_fetch+0xc8/0x150 security/smack/smack_lsm.c:306
+ smack_d_instantiate+0x594/0x880 security/smack/smack_lsm.c:3615
+ security_d_instantiate+0x100/0x204 security/security.c:4070
+ d_splice_alias+0x70/0x310 fs/dcache.c:3001
+ f2fs_lookup+0x4c8/0x948 fs/f2fs/namei.c:523
+ lookup_open fs/namei.c:3627 [inline]
+ open_last_lookups fs/namei.c:3748 [inline]
+ path_openat+0xf7c/0x2b14 fs/namei.c:3984
+ do_filp_open+0x1e8/0x404 fs/namei.c:4014
+ do_sys_openat2+0x124/0x1b8 fs/open.c:1402
+ do_sys_open fs/open.c:1417 [inline]
+ __do_sys_openat fs/open.c:1433 [inline]
+ __se_sys_openat fs/open.c:1428 [inline]
+ __arm64_sys_openat+0x1f0/0x240 fs/open.c:1428
+ __invoke_syscall arch/arm64/kernel/syscall.c:35 [inline]
+ invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:49
+ el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:132
+ do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:151
+ el0_svc+0x54/0x168 arch/arm64/kernel/entry-common.c:744
+ el0t_64_sync_handler+0x84/0x108 arch/arm64/kernel/entry-common.c:762
+ el0t_64_sync+0x198/0x19c arch/arm64/kernel/entry.S:600
+
+Allocated by task 6410:
+ kasan_save_stack mm/kasan/common.c:47 [inline]
+ kasan_save_track+0x40/0x78 mm/kasan/common.c:68
+ kasan_save_alloc_info+0x40/0x50 mm/kasan/generic.c:568
+ poison_kmalloc_redzone mm/kasan/common.c:377 [inline]
+ __kasan_kmalloc+0xac/0xc4 mm/kasan/common.c:394
+ kasan_kmalloc include/linux/kasan.h:260 [inline]
+ __do_kmalloc_node mm/slub.c:4298 [inline]
+ __kmalloc_noprof+0x32c/0x54c mm/slub.c:4310
+ kmalloc_noprof include/linux/slab.h:905 [inline]
+ f2fs_kmalloc fs/f2fs/f2fs.h:3428 [inline]
+ f2fs_kzalloc+0x124/0x254 fs/f2fs/f2fs.h:3447
+ xattr_alloc fs/f2fs/xattr.c:34 [inline]
+ lookup_all_xattrs fs/f2fs/xattr.c:333 [inline]
+ f2fs_getxattr+0xc60/0x1064 fs/f2fs/xattr.c:533
+ f2fs_xattr_generic_get+0x130/0x174 fs/f2fs/xattr.c:63
+ __vfs_getxattr+0x394/0x3c0 fs/xattr.c:423
+ smk_fetch+0xc8/0x150 security/smack/smack_lsm.c:306
+ smack_d_instantiate+0x594/0x880 security/smack/smack_lsm.c:3615
+ security_d_instantiate+0x100/0x204 security/security.c:4070
+ d_splice_alias+0x70/0x310 fs/dcache.c:3001
+ f2fs_lookup+0x4c8/0x948 fs/f2fs/namei.c:523
+ lookup_open fs/namei.c:3627 [inline]
+ open_last_lookups fs/namei.c:3748 [inline]
+ path_openat+0xf7c/0x2b14 fs/namei.c:3984
+ do_filp_open+0x1e8/0x404 fs/namei.c:4014
+ do_sys_openat2+0x124/0x1b8 fs/open.c:1402
+ do_sys_open fs/open.c:1417 [inline]
+ __do_sys_openat fs/open.c:1433 [inline]
+ __se_sys_openat fs/open.c:1428 [inline]
+ __arm64_sys_openat+0x1f0/0x240 fs/open.c:1428
+ __invoke_syscall arch/arm64/kernel/syscall.c:35 [inline]
+ invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:49
+ el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:132
+ do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:151
+ el0_svc+0x54/0x168 arch/arm64/kernel/entry-common.c:744
+ el0t_64_sync_handler+0x84/0x108 arch/arm64/kernel/entry-common.c:762
+ el0t_64_sync+0x198/0x19c arch/arm64/kernel/entry.S:600
+
+The buggy address belongs to the object at ffff0000cc09b260
+ which belongs to the cache kmalloc-16 of size 16
+The buggy address is located 12 bytes to the right of
+ allocated 12-byte region [ffff0000cc09b260, ffff0000cc09b26c)
+
+The buggy address belongs to the physical page:
+page: refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x10c09b
+flags: 0x5ffc00000000000(node=0|zone=2|lastcpupid=0x7ff)
+page_type: f5(slab)
+raw: 05ffc00000000000 ffff0000c0001640 dead000000000100 dead000000000122
+raw: 0000000000000000 0000000080800080 00000001f5000000 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffff0000cc09b100: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
+ ffff0000cc09b180: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
+>ffff0000cc09b200: fa fb fc fc fa fb fc fc fa fb fc fc 00 04 fc fc
+                                                                ^
+ ffff0000cc09b280: 00 06 fc fc fa fb fc fc fa fb fc fc fa fb fc fc
+ ffff0000cc09b300: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
+==================================================================
+
+
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
+
+If you want syzbot to run the reproducer, reply with:
+#syz test: git://repo/address.git branch-or-commit-hash
+If you attach or paste a git patch, syzbot will apply it before testing.
+
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
+
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
+
+If you want to undo deduplication, reply with:
+#syz undup
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
