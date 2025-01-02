@@ -2,151 +2,153 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC0679FF7D8
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Jan 2025 11:12:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46F079FF801
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Jan 2025 11:28:58 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tTIBO-0003LF-CI;
-	Thu, 02 Jan 2025 10:12:03 +0000
+	id 1tTIRe-0004Pe-C3;
+	Thu, 02 Jan 2025 10:28:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <guochunhai@vivo.com>) id 1tTIBM-0003Kp-3X
+ (envelope-from <guochunhai@vivo.com>) id 1tTIRc-0004PV-R4
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 02 Jan 2025 10:12:01 +0000
+ Thu, 02 Jan 2025 10:28:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=awZuLS7x7kb1byXWnsoOqp+GnJ3ZsR4Gljuu0h2nnbM=; b=Uz47Cl8Wa0F33zb3mriUYOQhm5
- 2YWluvLdQmVJuIiD5qJhOKXbZe5rsQ5xEuQiIuKBetpnzRzr41VKqOJ3h49Ei8HCWxa0UKxUj9xj9
- qhLe2ZDGxyys6ebTvRqSYlvpJ9sUzWajUyhcQnooho39sH2FzpVQntL6HRU4xSBjmDis=;
+ bh=T1aMG3GVzwYX0HJCTcQ9ArjF5DoPr2yQtdqerUg8mC0=; b=Z6pI1x2QS72Kd4tqpuQKckVgV8
+ UxjDz32JxOUPzGXurHi+brILJaNNSOe6XFuAWrb6BZRG+laKpWB9vhT/hDuyueHH1n1aJ/AE5i+HN
+ A8wdXvNBr0Uod6RL0OFJJ9aN0+LG3DdI0zEQfphBtl+/TqgxBHYx1BbplL5m98rdwZRQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=awZuLS7x7kb1byXWnsoOqp+GnJ3ZsR4Gljuu0h2nnbM=; b=A
- fBhDOes2GUd7xfp84FPImwKic+MRsWG12mrFi6tnEs3QjGsJq6mNT+BrdJDCc+qg/g/RuEACtlwsT
- 2SYhLV0yFixjTZJmrdTu68/lN9hXrmvxGpJth/k/T1qDX1hSvd+jSa0c/RUxu4L4igW7A9jnC7hBd
- LRcAXmZj+haiCYO0=;
-Received: from mail-eastasiaazon11011006.outbound.protection.outlook.com
- ([52.101.129.6] helo=HK3PR03CU002.outbound.protection.outlook.com)
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=T1aMG3GVzwYX0HJCTcQ9ArjF5DoPr2yQtdqerUg8mC0=; b=RhwZCfHc95QP5nu+ikoyOoGw1M
+ Yko22l+8Oq9+wCc/dmJc6G+IMEvYCfsw544zvy/HqUnsL+/+TeKLuV+pVFjq1AW57urQjoaNRURIF
+ kQQmhFlZhk2wxn1EzEt9TdYMFeQZykD0CZ5jkIBe3HCiSh3qukUthlmp1uS5oKi6V864=;
+Received: from mail-eastasiaazon11011018.outbound.protection.outlook.com
+ ([52.101.129.18] helo=HK3PR03CU002.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tTIBL-0007H8-Qf for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 02 Jan 2025 10:12:00 +0000
+ id 1tTIRc-0000rJ-SS for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 02 Jan 2025 10:28:49 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sM/bdLVeRcfe5bTa32n5UISwIztg457XrPcvRO8u3VT+pMWb3E3Y6z/uigpfSf+SZ0iOOi8MaRgt04VKAFmgCeJw50dC3iFPWHs1UZLwjAsJO6P7ApLarBCXoAvVDX1xbI30ly/aZ+Z0AOQtQr7/Q18inyDAIhMsa8dyYqadwjvhR4tlc3hyvtVBnD2JgmcI7uwDOvJPVMOTv7AN+kFsFRjHVSO0FmPEnzs9ieIiKVGIun04iYDPzXvX0PbjG5C1/9TK147d2eNwQpDXJeOHIlyTA8pVuzmuXy2x3XHZHvpJFfC3HGPEITZ3SFxkIFODNKeHhFO7JYVwSCt+HGblmQ==
+ b=HRnwIIRUoMVIdEIgsa7np7TCJ1Tw7ZqXWAEEAiHnphEmEjxxKgKdPHwxECKMveO9YDc4jG/CiUb841UOHm1S+ypl4HB27OOtjGNYc+dGRJ6cV5YYri/YzpRCe7s6Of4AjjFxfNcLT4qCnHECXSy44X+sVaMt4EMIfEdNV+3r19mxif+k0OwiEHI+IiX3DuLFmV4aU7Uc/5IFttneL6ME2Wkdcc/+kQ54Gj3sZdH9L0trhqdzWP/BXOCe3eSRW426nMiE75O5QH2F0dCAZboPzlj0UY6TaT361Oti2HaF/Kw0itwQL71HeSv+eHIws/a4O1uk/vPrIck+hWlWL47Udg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=awZuLS7x7kb1byXWnsoOqp+GnJ3ZsR4Gljuu0h2nnbM=;
- b=kRWbwoHU/Ds9Up2iz0GJmfOpAxTxPoXMB4RRjkML98Raxerw+HmldEdHCrXJcQlAB+KGx5HTQ1yLLOj3vvtaayFubgwmZgoSQDfe7CbPf2Z7R//tNTtqYUSZGfUOumIyMoJtP5JCKkH9tcfphmXqxDxA3hOKxzHjfPwmOTNxVJ71y0uck10BvNV2WE40CgA8fCN5ihTOXM1HT5SUegRo/jyZ4RNmq7H0hTFYYN+OtTPng1egteEaBu8xzla+h7yb0YLipEtQIP9vjC0RKLeTNKgx0dFaNKDSP27OIg+5ZneiQgUYws0zmdXiFGj2JzJbLpmi4ay9ONQaryIS9r3NSQ==
+ bh=T1aMG3GVzwYX0HJCTcQ9ArjF5DoPr2yQtdqerUg8mC0=;
+ b=QQFtpOsm80FTKe3XM4rf1DfIZunP8zveWTGQobzlHRgFWFiSLMdBXs4aCXipKOltU2vkFzTotnkUpWeHx488FErZERcUwwx1HUEZwhC3YWBf5UE4qdBIm0OSix9eLh88u2FVrV2Yl0Qn1JeC7wY9empoQC5pgUo6sXbSUGAdb3d3RUt/eH+etnxQk4EiKfWc4Ltgyooe08SY/vDyqPnXQwlkpog/NU1jGamjpP1FYEPAZRD/pGIMt0+bOALXwMuTQ7XWcmtFuGsuBbxh2pKeVYn3blwuFTvffMgRH3m9K+2vFTDOaRZPDh5UxHqeN3G8RkuwbJfJv97Gf5WTtUDsXw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=awZuLS7x7kb1byXWnsoOqp+GnJ3ZsR4Gljuu0h2nnbM=;
- b=ZUhiBRL33jbztC+WvotO+hiraCS5SfTJVMJoaJqTCTaFOa4kf9/ziw8e8UIYy+30jK/Bb0ViEuGsmXu0S3BPj/4hTMhhLv+Rxy/owrogV7+oU65RmxylKM4UDMudJ0gc5HFjb+IZZ46OCiauekaHXiBPoJGmCkK6yyUuajnxVhGnRZTyuvNVPrTJ/ejWgFFwOLlh5zcVa22byEXw5mOl1sFJhPmZyVPz0sW/KPiIHh9h+F9WwrMRGhcgYJdTI4kZcFpDVDFQHT9GdVJzGdO3dJnSaNfjlgpzyVycsitIZLxoUO45Ml9EUJm3yJgGkgC5lZBT+Gz2vVf3ZOnaWcNJOw==
+ bh=T1aMG3GVzwYX0HJCTcQ9ArjF5DoPr2yQtdqerUg8mC0=;
+ b=KitFuBENhRbu4d2h1JaDkH7Izyx7tDof6ee1t0SCQ+UzOCU+klSyR7p9mlcGAPpIjEX7WWOGPrt8TpxzRxdI+bLMw2izY5q+UuuqW82Bp/Ygzb3NBPLyQ1C35/VBpgiL1Su0eOuC0hB1n2KwTt/k6eWtSy14GxoB7YyHfdulXmpeSO9MUwUhPJKnUGWGk+niDWtojS1u+YsYKMC2SrMmYyhcBAHXKQPKI3Nyt8K7q9t7mU67CjEbiVlcXR4zM75Mm0JKX6Zcak8r3ErpIvw2kesKuH4BZSi3g0U41xkK+5R0wtLG16KiBw2kdNDBzQ/ljzZTLrjF3cepu4/LR+Tb6A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from TYZPR06MB7096.apcprd06.prod.outlook.com (2603:1096:405:b5::13)
  by KL1PR0601MB5726.apcprd06.prod.outlook.com (2603:1096:820:bc::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8314.9; Thu, 2 Jan
- 2025 09:55:42 +0000
+ 2025 09:55:57 +0000
 Received: from TYZPR06MB7096.apcprd06.prod.outlook.com
  ([fe80::6c3a:9f76:c4a5:c2b]) by TYZPR06MB7096.apcprd06.prod.outlook.com
  ([fe80::6c3a:9f76:c4a5:c2b%4]) with mapi id 15.20.8314.001; Thu, 2 Jan 2025
- 09:55:42 +0000
+ 09:55:57 +0000
 To: chao@kernel.org,
 	jaegeuk@kernel.org
-Date: Thu,  2 Jan 2025 03:13:08 -0700
-Message-Id: <20250102101310.580277-1-guochunhai@vivo.com>
+Date: Thu,  2 Jan 2025 03:13:09 -0700
+Message-Id: <20250102101310.580277-2-guochunhai@vivo.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250102101310.580277-1-guochunhai@vivo.com>
+References: <20250102101310.580277-1-guochunhai@vivo.com>
 X-ClientProxiedBy: SGAP274CA0010.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b6::22)
  To TYZPR06MB7096.apcprd06.prod.outlook.com
  (2603:1096:405:b5::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: TYZPR06MB7096:EE_|KL1PR0601MB5726:EE_
-X-MS-Office365-Filtering-Correlation-Id: b58fa0ef-781f-4ea5-d634-08dd2b139ea3
+X-MS-Office365-Filtering-Correlation-Id: 702d3094-53d7-43ae-c25b-08dd2b13a796
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|52116014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?7is3waDxhfxjWG6lhFaz8iEY8q8ZMRRLLqpA6hsM9YRkYWjNiBZFuKjxlr3y?=
- =?us-ascii?Q?wZkBMtek27uDWqMNW8t2rlHWwjROmDKtm0S2S5+SKvUwxM2DUqBwbbgcmv7t?=
- =?us-ascii?Q?Z1AXF0rAVPQdwkjBNs2a7h90ainbSOHn7llU0qG4N8O7AuxzzJ2uRPtbviOe?=
- =?us-ascii?Q?HX8E8okuXSprOwSYmzCuHhI6Imy5Oz5uYASChdkRQY2uteroalQcDYNAIc6j?=
- =?us-ascii?Q?lyu+wUR1OfIVuGF7bNgEX35B9FN099Gb45fsnjac75hFTCDfBn9qPUPtXATo?=
- =?us-ascii?Q?6YTsYxzZalay9FYtc+HRJuHFq9k12YEhipofyjCTd1i0suj48sQjpdAX6xnw?=
- =?us-ascii?Q?LgHtvGcRr3V/OC/dOCnU0Do1PbWznRsQIQveV7L6uq4JvsiVMlnv3ghmfBO0?=
- =?us-ascii?Q?O/CWOWRJLK0tLPR7XH2EXtj4mg4Hm8QmhoyfCWDN5gSWIc7GOuZYcAuxFL5H?=
- =?us-ascii?Q?h3S84ih8rSw/DmD9aSyuuJU9VIZwzq4SeHVk5dqH3qFGP7UbPPdjqwNCq5mt?=
- =?us-ascii?Q?oIPWH3V24+MkCuuZXx4xUO/CS0Ab4CgrKEq6LTGvQ0AKqKbYFMdI2cfs5qUj?=
- =?us-ascii?Q?J/XnyC8qzSTDbuz175eSgSo0EJOrctpXOjQcuEXORqThXQSf9Q6OoyP3hp5U?=
- =?us-ascii?Q?GXSuw2fqPPy8Fl2pDjd76bp+xJSxYISHb0CtDpcStJjdj3a432b1a1cT2Amu?=
- =?us-ascii?Q?WGILkP59MQXk/pcAXM9hqQv6Z0tr9ScBpMnz9s5WEM/IBgqn+cNKTyCipK1R?=
- =?us-ascii?Q?Sgx4eSfexv4H/B1nK1ssiwG+CgQWe0crSnVXJjMcewC9L7HFHWzaBXYmsxhg?=
- =?us-ascii?Q?HIeVBQ3eK4m+3onGMHebpwC+/jnueNJYOp66q1n+lu8UW9neL8vRHGr4/nc4?=
- =?us-ascii?Q?WwRk3dk3fPMQmd66CKIgNc4YzkFBNZ7wKPek5YMnMsJPA+knSyPsE0P6OpTH?=
- =?us-ascii?Q?oEnbRLBDAGn+gbGuYFSwpWgSLMIVgQNpA+5kEHEZ0qQjDh1b8u7lCCMRuFD/?=
- =?us-ascii?Q?bK2pfdpH9GstahJisllqK9Q2B7peDd1s2tMLi/fdhJducsj3Pn9enWPphwBf?=
- =?us-ascii?Q?n4gcGDZ1zHtD0Y9DpIfJUX3uAtQWB9D00+bsa6olbofreqg7/gFKgC4/LnBw?=
- =?us-ascii?Q?MSHTBJCLXc88gaRahGwERWy72nbdhVXbrril+Xm68gwDTgwBOXmSL+wQe46z?=
- =?us-ascii?Q?xkVMeSFOWQX5HPaXILehbwNgmx/UdqVcAnQbI0yR04sVt+ZWzCLTrJRFCzm9?=
- =?us-ascii?Q?prHPKDUzbZs+J9UO9P9yui/ysyOfotNZ76ZJsI2zYtOcN3PynZyUSeV4pLGE?=
- =?us-ascii?Q?NxDBTgz8Cd1FfS426N7S9KpUOv8sUSpp4PrEaDwWD3DCS6twA0eeS/dp5AsY?=
- =?us-ascii?Q?7yuR0C0Vd6vV7QsfSKc8gJMd/xMEI48wqquZ4zT2UOdWfoxNzP9LXorOyIrU?=
- =?us-ascii?Q?S+3PXTI4wwk1XBjH1R1xtGSRlf9HqIbf?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?kYO9XkNKfRvoagVFSlty0Yik75qrAk/cFiX9ReohfON2NaY7kiAWuVwuiyt+?=
+ =?us-ascii?Q?8sIzl0zV1RXmk+vNIXT5WdCwNJa1wu8BZF/WdguNSLQOi/A7VBr5I8vxKbkD?=
+ =?us-ascii?Q?c5VQJowe6bQVG39MEZxhEThwaN9HDtvwlfynFV+2yNc6aqHW/aXMIrjQh9mC?=
+ =?us-ascii?Q?fSp4kN7OPXg3BWQDmMPsNPC0z51BPCGcBd0gbG6EVSJgQSv3QJV90Rr7RiZ1?=
+ =?us-ascii?Q?T3K5ny44umv1zWHqehimeNdXiEAwWTT36aBCeQ9yB0S9SAc89lIIjSDIIuKq?=
+ =?us-ascii?Q?PWQCDI1Xt0mrdXtwtoTV7GpKJw532hEsv3ficrt69/jmdDQPdyZhGAu4fV4F?=
+ =?us-ascii?Q?WegdpJc53/GbToieKevchYcPkOvm6c+dRXF+7T8DP9IJbyxxSxSJp9avpJli?=
+ =?us-ascii?Q?ayF2SU7lpWs3F0fWNUgsIT81Dps9K+iu8b3tVH30tH2mkkZkwdIzZvOUzPhB?=
+ =?us-ascii?Q?khOOCKv9egx1kALrE8kUMRhEFt7svnl8ShqDvKoZxZ2uEhGlMZbXq6ivYAOq?=
+ =?us-ascii?Q?e85bxM591Gnqp+V2w6kHKcJ9bqnbXN9wApZ9OJ3aA0JDzznwtlto4lHZ3AHx?=
+ =?us-ascii?Q?+ih6sIfrTRxwyI0ZgEF35A/U9yZaPVfuLr5coD1AMOoVo8j2aTHQIk6fxmgQ?=
+ =?us-ascii?Q?lhmbxOhcHrTxx0tiMBJGxq4wqqUsqDECutPvyem/dEETtpsJH4fVDaslQXA3?=
+ =?us-ascii?Q?IkVuoucrstxaJRmg0HKRTj0xnKFj/mNn6uo4dMwWFxToWhnXrFG3Lb/vC3AY?=
+ =?us-ascii?Q?gLIyVx/CYp72F4ynGLp01D9eFl38IgmBzHmXGNBj8l0+SWpO/anvDamuPe0z?=
+ =?us-ascii?Q?eB9KMlsZz86TsS2XOcPtEiVWsdKXvNII2IwjOafbhPntz6Kv07XrbLR9NBMy?=
+ =?us-ascii?Q?I3vgh5uoCVy2Fb/UgVdR4JVtfcQ3AErh1xhIlpS9V/4pfzHmRGIWUUlUjYu1?=
+ =?us-ascii?Q?OnGcuQojrD++axi5mUEnO0YqdAJZPRg4tKpWPMY96vYbdCG5sy+8vY8hD8MC?=
+ =?us-ascii?Q?m4KubZ5Xi6aHJRS8ICiKkLI+q3LICcPdDKiFQaFBfZIW/eV59Dl8dZySIo58?=
+ =?us-ascii?Q?2uYL6Kz9zs2a0Y+E4njvpYtyOVM73RxDNMB1dCE/mLulrEkamTZ8nsVSTstO?=
+ =?us-ascii?Q?91uwbhNaeeNg+iI2wm+xeh4B37kwTAeYCGa2eSK2V7GuZw54DcrHSuTBhcis?=
+ =?us-ascii?Q?l8SQaYikMkyI3cb1aHO2iVRNEiUVKqRGOLIqbVGteVjW6mYRNNxlDiMpL1/G?=
+ =?us-ascii?Q?iIp4fEEix0JCW+QophSd6Fh3Q04XD006s2K0kp36tbKd2HQApyuR3vKvewFA?=
+ =?us-ascii?Q?nktPmPKKauHCoJLiXNRmD/nuCwca7k79v14mBFB+s6quLVHKDOjnaAsKEcFu?=
+ =?us-ascii?Q?2nGuOkl0e4ZbxU2mEtRYAJwATMDlHHgIg25SZNrgVVj7GsjaZSm9BFrlUjtM?=
+ =?us-ascii?Q?z03LXRJYAzUtfQiHC58ulTEmiG7t2HEQ?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:TYZPR06MB7096.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(52116014)(1800799024)(366016)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0BqAgQ5UimnIydADRP3HyJ1ryqTbYwt4odPFTCkgoVsePJ2pInYhV65SN7Kj?=
- =?us-ascii?Q?OPklBGeE5vkLcV4XrFt+0WuFGLMvKleMQtesvAmnvcQ1Bj5soBrs1/2xsbzl?=
- =?us-ascii?Q?8pZhENp7YgOvb1hUy2SykNRqnlx2NcS6pCeR0Y+lu4I8S4F04eZkDDmTkEb0?=
- =?us-ascii?Q?qcsw4hCMlMwQhTgsbIuByB+3/eFd1Guf6qERnKn9WEowrdMPa+LMGJQUQDPT?=
- =?us-ascii?Q?d58ooj0EbKSiaNwEbqsZ2hN80i1T0V9O0ejRgZQtlKydzkNauFY26Quwxsg8?=
- =?us-ascii?Q?Olxd0kEwxkrFMeyNli0W/ycjtoCzbV/yQ3X0ukcDawteQnNy5/BJYHwadhsU?=
- =?us-ascii?Q?HXi3Q1Nbx+XZbd0YTxg1x/GWq4JObMtp4ytHgThmsUfQNsvNY5Fr/8YV5QsI?=
- =?us-ascii?Q?k8feMpdiw9o7DcmC7MLEb+XFxwdP91KOIDss3qIQOGTdHNoJ5GZ3Bl8dlR6+?=
- =?us-ascii?Q?RdSdTflqiU33JPQC2ZLJNt4GnJ2UAeZf9n51pEKcMIkkpnlqtpC6lQOz8eUk?=
- =?us-ascii?Q?/CqQeaqwlC7cbxsjUPWcr4JBtikOiE254FYuqYTwYBZYXPeNqk1eZZy/ronE?=
- =?us-ascii?Q?T4ulzuGnFFb5RIXxeKrVZx0i/rYWI08SGlBjSKwYoKO6/BwBasnyrYTOTdoS?=
- =?us-ascii?Q?VzEvrn0UHW7Eann9H5IZrHnvsGNNjc6RoN5/oxS+93K0hVKEJLllBEZ6Tyqw?=
- =?us-ascii?Q?CATjW0VCe4uES8Zx39OzokRfYiUM8BszNTz8Sk8B4zoQK8/IZF1cGO15RlQ/?=
- =?us-ascii?Q?0n2JFM5/04W41KboFQvbmtU7BT3ph/4XX9TZSHW5wpuXJp3V+dEdv2Gx7oUY?=
- =?us-ascii?Q?fwgMmSuPlSxuANUwo5rJDwsVogBQS5BT0tHNHBfiF1tvl18EGi/H2cJuqFUD?=
- =?us-ascii?Q?mzlzORSFNtJGFKIUwHI6UsnuSB7npy2ViuGwvqLBcsPM5sFxYbmz4UPcS4d8?=
- =?us-ascii?Q?7S6cScAF5GCiVhYfiFVVnrHQcce3N6d218oaGfV0AsmdvS39MeaBta4zaBk8?=
- =?us-ascii?Q?NmG/us1fhokMjD+kAbJBXGOap3bx5gxoQMeWfSajIbk1o+p8YQr52Z+ZZ4vx?=
- =?us-ascii?Q?ZTODgJsmai6P9QPJKHklc/kvaaCO6KsRQf+etORhpYClpxNHxsnJai/HY4Yj?=
- =?us-ascii?Q?JKHHBEcLQeJfSzADtLSuLVTX3FkheUmecILjX1uCzkEYNlJIOcRpmWKfyUNh?=
- =?us-ascii?Q?qjnAXXk15He0w500PbjSolBY1WU4Kn12TvwdNLWfb+5f/Li33c7mr2uSw2Sr?=
- =?us-ascii?Q?20j+rOPbq1dEHtC14VE0cZHwybkzdljAB92fkq7uHRWottwJawA97ysQbdrp?=
- =?us-ascii?Q?gldQowNHSJTEoh+m9wPRNwjtxez8rcFA8woZVMo1d7BxWeKq0U4nY2FD8xh3?=
- =?us-ascii?Q?WDmpNeUtBV5MLGU1weWtQobQ99jCsanFd1LrgGKXxIo52EPb6YmDl8sEL+NA?=
- =?us-ascii?Q?1Vohw0WznPdwPoOTD1qUO1zJTjAZowJ3Pusc4H0auuuLgUDSd+sCBLcjsL0d?=
- =?us-ascii?Q?OxRTSvindXQa8P7ntoBWTfj7lilTrohNxDZ07OJDO2vS+3B79I2+TRuvNdWe?=
- =?us-ascii?Q?6+t/LXnzYVITCWqPlak6jgOGidOghAjCSE7b4p7H?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?i3x3x8SUPaaAfPinpUW+3UO5m+FzSuuOnpBxkI06iEIjTC8AxryZ8ZG4+fd0?=
+ =?us-ascii?Q?GSEwbBknu918HMIk9O0XEVV13uZp8GXMmcAD7gPj6FdIi5d7hAFJQMIoKd0m?=
+ =?us-ascii?Q?kAf/2jZDc/xU0O3YptKBpABlTjYb6QtjX9dTzuha+4VjyzybwDc1j3wFgijx?=
+ =?us-ascii?Q?kHhMJQsktEpugJjq6XWgJEr5U+qxKH0w+hy0DBpIq2NVbA+YpHMSQ735gMZJ?=
+ =?us-ascii?Q?39p8kdFixyLzoKyM4ejPmQHfgJYIb39Sks1l1/kce4GH0kZAiyqtwBgdQLjM?=
+ =?us-ascii?Q?8dMJtXwuDQd+mBI1I61oNDEz+obIwCB9Ngn/eKrDnoKcfMUN/uzNkazcnM+C?=
+ =?us-ascii?Q?7TU0uQYI6um6IoMAm44FpLd/d13lbn7dnYT0+KwyCoZDz6GhtkrGeZFAju8c?=
+ =?us-ascii?Q?P1VhNy09ARTQxSFf0F2B2QsFbtEN/I8/TXlaxl0mTwEqtcmVeNON52FrfCjG?=
+ =?us-ascii?Q?J5IEQWte9mcwlj9zkM49Lu0xr4Uhm9n0pkz9UwUzz28TeDsqH3iCwTb2+PUw?=
+ =?us-ascii?Q?6nTHHIzCAm6LRJ42mkwqErUMBrHJVyvm+1GrH1unf8xT+AXoqm2ugNI0BqKn?=
+ =?us-ascii?Q?QZbq83+NxDUocAGHufSQpqL5sBYnr7emQhaBAjLqCsiuQrWASK960R1tZYRD?=
+ =?us-ascii?Q?vbkThNdAoBcD2WdHPOntLSC5PkjYWiNewpLcGVrJW24xfP9sjjatDvQqjjWg?=
+ =?us-ascii?Q?DWDWdlmbxFoi7uT/aA0C3ZmxnD3cLFyJWrN+JaI+JocCEAOT3NpRMjrArjsF?=
+ =?us-ascii?Q?jtVcqjjkpo45WAv/w782CSszkA1THI0D8i2sQP/16WFfJkYVFm1ERYldmibU?=
+ =?us-ascii?Q?oCTbPR6lD7XgFtMXMWmlargGGNrO1EkWoye65VpSrDmaVvN/OhdD+hOLdSgQ?=
+ =?us-ascii?Q?QP0L1SCUYUW/U0x/dBPr6cEnllFbNLthk+8VqfSavsrWbUcbf3G/By7jT+rD?=
+ =?us-ascii?Q?0ALd7Rtdq/oxbplFstOgmnhfvPaH97bKTr+N3bdE3rTT23CeLD4CGp3/oUjD?=
+ =?us-ascii?Q?yfZ+Kt+l5pFc0PwAd5fxW9im0ut+wZze2aaGcGZrZLbITKbPOCsg0QmRUX/0?=
+ =?us-ascii?Q?MfNQLD8AyPsxg2+NfoSnsTCLpFiiKYKiW9GPRtc0lWvwEX6nlLatYcu8o/g9?=
+ =?us-ascii?Q?IwhURfswo8F6nqFjZ4M79DU2ymZaqaPcj6mus7I1R+GIW9NPPIUNMNfXBNHe?=
+ =?us-ascii?Q?DARf19wfJ+llx+mQ51tAll+x6R2Tmb0TQRNX9ChnczaDgw2RPeYHMstKwYWa?=
+ =?us-ascii?Q?IeM5nKvyUTvSVLo/ISH+rpD2kDsQcshAR50QNnzENYvxZ+KwIatKzvRfnK/I?=
+ =?us-ascii?Q?RvLNri6tukPukjI+wD9YcFuqJm07AFuKhd1LXBaaO4yC4urGS/d1FkSLMZYj?=
+ =?us-ascii?Q?NxKGA/s6l+MXcD/r+S2pumk80GdlWH5tLfzoJb2+lUtSzqOuow2jrW/pX8aG?=
+ =?us-ascii?Q?VrxpTO7MDvTUA9ZO8rxCscXWqil991lKGwdjtPitamYHQsma//ylxqvf9ObX?=
+ =?us-ascii?Q?sAjkZ71Npfh9FGsf8OU3Nud0wd+tZcDyED/uSy8d5BOuIDzzroM7BMFyc/KE?=
+ =?us-ascii?Q?q0xSFB5KqLCewuyVGMW1ZGmci93Ipr6TstJdNsf4?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b58fa0ef-781f-4ea5-d634-08dd2b139ea3
+X-MS-Exchange-CrossTenant-Network-Message-Id: 702d3094-53d7-43ae-c25b-08dd2b13a796
 X-MS-Exchange-CrossTenant-AuthSource: TYZPR06MB7096.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jan 2025 09:55:42.4089 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jan 2025 09:55:57.3838 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BqIVdMDpXyolCAe1Nlcq39tJ44TdxCuPEXwuc2z2HoBdkoqUmRBUklwOaSVUV68hn8k15H6VQKRGCIiiULJxDg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: kkr328L6kNVa3DQX6ua41YRUztjaXVerdl8x4TV3GgbtMFKkBfIM0AB2MduO8pd/90tSWKdoKIZdkwUranQJRg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR0601MB5726
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -155,10 +157,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: fstrim may miss candidates that need to be discarded in
- fstrim, 
- as shown in the examples below. The root cause is that when cpc->reason is
- set with CP_DISCARD, add_discard_addrs() expects that ckpt_va [...] 
+ Content preview: If userspace issues an fstrim with a range that does not
+ include
+ all segments with small discards, these segments will be reused without being
+ discarded. This patch fixes this issue. This patch is som [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -166,16 +168,16 @@ X-Spam-Report: Spam detection software,
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [52.101.129.6 listed in sa-accredit.habeas.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [52.101.129.18 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [52.101.129.6 listed in bl.score.senderscore.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [52.101.129.6 listed in list.dnswl.org]
+ [52.101.129.18 listed in bl.score.senderscore.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [52.101.129.18 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -183,9 +185,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1tTIBL-0007H8-Qf
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: fix missing discard candidates in
- fstrim
+X-Headers-End: 1tTIRc-0000rJ-SS
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix missing small discard in fstrim
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -205,85 +206,53 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-fstrim may miss candidates that need to be discarded in fstrim, as shown in
-the examples below.
-The root cause is that when cpc->reason is set with CP_DISCARD,
-add_discard_addrs() expects that ckpt_valid_map and cur_valid_map have been
-synced by seg_info_to_raw_sit() [1] and tries to find the candidates based
-on ckpt_valid_map and discard_map. However, seg_info_to_raw_sit() does not
-actually run before f2fs_exist_trim_candidates(), which results in failure.
+If userspace issues an fstrim with a range that does not include all
+segments with small discards, these segments will be reused without being
+discarded. This patch fixes this issue.
+This patch is somewhat similar to commit 650d3c4e56e1 ("f2fs: fix a missing
+discard prefree segments").
 
-root# cp testfile /f2fs_mountpoint
-
-root# f2fs_io fiemap 0 1 /f2fs_mountpoint/testfile
-Fiemap: offset = 0 len = 1
-        logical addr.    physical addr.   length           flags
-0       0000000000000000 0000000406a00000 000000003d800000 00001000
-
-root# rm /f2fs_mountpoint/testfile
-
-root# fstrim -v -o 0x406a00000 -l 1024M /f2fs_mountpoint -- no candidate is found
-/f2fs_mountpoint: 0 B (0 bytes) trimmed
-
-[1] Please refer to commit d7bc2484b8d4 ("f2fs: fix small discards not to
-issue redundantly") for the relationship between seg_info_to_raw_sit() and
-add_discard_addrs().
-
-Fixes: 25290fa5591d ("f2fs: return fs_trim if there is no candidate")
+Fixes: d7bc2484b8d4 ("f2fs: fix small discards not to issue redundantly")
 Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
 ---
- fs/f2fs/segment.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ fs/f2fs/segment.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
 diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index eade36c5ef13..8fe9f794b581 100644
+index 8fe9f794b581..af9a62591c49 100644
 --- a/fs/f2fs/segment.c
 +++ b/fs/f2fs/segment.c
-@@ -2070,7 +2070,7 @@ static int f2fs_issue_discard(struct f2fs_sb_info *sbi,
- }
+@@ -4552,6 +4552,8 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 	struct list_head *head = &SM_I(sbi)->sit_entry_set;
+ 	bool to_journal = !is_sbi_flag_set(sbi, SBI_IS_RESIZEFS);
+ 	struct seg_entry *se;
++	bool force = (cpc->reason & CP_DISCARD);
++	__u64 trim_start = cpc->trim_start;
  
- static bool add_discard_addrs(struct f2fs_sb_info *sbi, struct cp_control *cpc,
--							bool check_only)
-+					bool synced, bool check_only)
- {
- 	int entries = SIT_VBLOCK_MAP_SIZE / sizeof(unsigned long);
- 	struct seg_entry *se = get_seg_entry(sbi, cpc->trim_start);
-@@ -2098,7 +2098,7 @@ static bool add_discard_addrs(struct f2fs_sb_info *sbi, struct cp_control *cpc,
+ 	down_write(&sit_i->sentry_lock);
  
- 	/* SIT_VBLOCK_MAP_SIZE should be multiple of sizeof(unsigned long) */
- 	for (i = 0; i < entries; i++)
--		dmap[i] = force ? ~ckpt_map[i] & ~discard_map[i] :
-+		dmap[i] = synced ? ~ckpt_map[i] & ~discard_map[i] :
- 				(cur_map[i] ^ ckpt_map[i]) & ckpt_map[i];
+@@ -4609,7 +4611,9 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ #endif
  
- 	while (force || SM_I(sbi)->dcc_info->nr_discards <=
-@@ -3275,7 +3275,7 @@ bool f2fs_exist_trim_candidates(struct f2fs_sb_info *sbi,
- 
- 	down_write(&SIT_I(sbi)->sentry_lock);
- 	for (; cpc->trim_start <= cpc->trim_end; cpc->trim_start++) {
--		if (add_discard_addrs(sbi, cpc, true)) {
-+		if (add_discard_addrs(sbi, cpc, false, true)) {
- 			has_candidate = true;
- 			break;
- 		}
-@@ -4611,7 +4611,7 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
  			/* add discard candidates */
- 			if (!(cpc->reason & CP_DISCARD)) {
+-			if (!(cpc->reason & CP_DISCARD)) {
++			if (!force || (force &&
++					(segno < trim_start ||
++					 segno > cpc->trim_end))) {
  				cpc->trim_start = segno;
--				add_discard_addrs(sbi, cpc, false);
-+				add_discard_addrs(sbi, cpc, false, false);
+ 				add_discard_addrs(sbi, cpc, false, false);
  			}
- 
- 			if (to_journal) {
-@@ -4653,7 +4653,7 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 		__u64 trim_start = cpc->trim_start;
+@@ -4649,8 +4653,8 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 	f2fs_bug_on(sbi, !list_empty(head));
+ 	f2fs_bug_on(sbi, sit_i->dirty_sentries);
+ out:
+-	if (cpc->reason & CP_DISCARD) {
+-		__u64 trim_start = cpc->trim_start;
++	if (force) {
++		cpc->trim_start = trim_start;
  
  		for (; cpc->trim_start <= cpc->trim_end; cpc->trim_start++)
--			add_discard_addrs(sbi, cpc, false);
-+			add_discard_addrs(sbi, cpc, true, false);
- 
- 		cpc->trim_start = trim_start;
- 	}
+ 			add_discard_addrs(sbi, cpc, true, false);
 -- 
 2.34.1
 
