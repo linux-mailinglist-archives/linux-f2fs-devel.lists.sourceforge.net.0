@@ -2,111 +2,138 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A17C2A016BA
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  4 Jan 2025 21:31:22 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E75EA01E41
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jan 2025 04:37:36 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tUAng-00088x-Cg;
-	Sat, 04 Jan 2025 20:31:12 +0000
+	id 1tUdvl-0001bs-0X;
+	Mon, 06 Jan 2025 03:37:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3hpp5ZwkbAOMXdePFQQJWFUUNI.LTTLQJZXJWHTSYJSY.HTR@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1tUAne-00088e-7i for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 04 Jan 2025 20:31:10 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <zangyangyang66@gmail.com>) id 1tUdvj-0001bm-Pl
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 06 Jan 2025 03:37:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TawJqxFkG0sJydy2ftO+462SsxIaxbD3wY6nFlK90fM=; b=LNoIFHP4AWpTpx40jRm+pNuVFj
- yMCOw26VoS+94N0RLRz/Pucm52HPqhcvvGvzEqTJ2rbsU9GY9G6Ay73S5FkdjrYxystlVeaZB4eCv
- 7qLOMTcksdeU1QEX6qj9f/UHP+jQUCaUKMca1mRBgQGmvJJwqXPcqcrnqsjmCxY+6dBo=;
+ bh=iLPtRbtGEa+mBJPdTtjo4hImxFMP4KOO18lJsBNVW0M=; b=MrvN5R0li1GoYtmfFavSPSzXYG
+ XJWEvsmu0g3y4mWXZrB1JBc/LHNsOpUdWp+l3ffEOsYeONPgU/Cro4fyNt3A4XTxZ8CiLpJQxTV+/
+ 6CSDrgUXT8c9o/BAn7YLgZl1E9Xz+rcZTJUn87L4sd0kqcFKue3zfY6Am+eTpcKFivV8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=TawJqxFkG0sJydy2ftO+462SsxIaxbD3wY6nFlK90fM=; b=j
- SpsUGiPOzjW4YO5tHfeENRkYmyoWhWKaAtXtyhvQfBOwUO+bB6JUPUg+oYTeXatoGGCiRuxt/Tptk
- 69D1MXaRGxGmVHRp8q6RHmybyhfivpmcv/QEJtQCeK2VhwG23BX0mkxNZdyRrmCDAq6RCDA21Tm8Z
- dGsHjeS/qaa7t+Zk=;
-Received: from mail-il1-f198.google.com ([209.85.166.198])
+ List-Owner:List-Archive; bh=iLPtRbtGEa+mBJPdTtjo4hImxFMP4KOO18lJsBNVW0M=; b=i
+ 6yAcG9rS0vWjPmlX8oQkMQzgYVjGtbv68SSWyo2OvFEVC+b04LM9ZhMLzNlJMBe1OwkaIebu9x8Zw
+ XZI2uAgaHiyqPQiABX7HVUZC2stMTy68+MJi6dKXhMFUOGZkGaWW07VBmVHTfKiDXU65aiY+hpSvN
+ 42sHJBGGe6uKp3Nk=;
+Received: from mail-pj1-f46.google.com ([209.85.216.46])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1tUAnc-0002kq-Cu for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 04 Jan 2025 20:31:10 +0000
-Received: by mail-il1-f198.google.com with SMTP id
- e9e14a558f8ab-3ac005db65eso130559555ab.3
+ id 1tUdvi-0004du-Kg for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 06 Jan 2025 03:37:27 +0000
+Received: by mail-pj1-f46.google.com with SMTP id
+ 98e67ed59e1d1-2ef8c012913so15255705a91.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 04 Jan 2025 12:31:08 -0800 (PST)
+ Sun, 05 Jan 2025 19:37:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1736134636; x=1736739436; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iLPtRbtGEa+mBJPdTtjo4hImxFMP4KOO18lJsBNVW0M=;
+ b=NTgHx/4DcmHxpl9bw1Kf1d6DOZRA21JmvOkXELn3YsZMXPxFT+TrDwqMotMwHBzZCq
+ W7JkqBt0aQ2p0reUlIqW9Ug+ZBy06doXUZlq/8PFX7OadvIqolcf3Q5fNFXn4uzJdEeI
+ TKa6MQFkrm7XpKJkRq1gI/WhfdAk4l2NFDkJNfZH1tg6COcDfThHdrJnprnMUscfG3Cm
+ +hwfUb53Y1JGNbmpkR7ohXFFGjQscMZWGauoL0uozvuvhdzJC1BcxU297OeoGBxu6Zur
+ v2Kl7Yxg+USi98s+WbUfz7MFMGYgKcUOQGILXusxM7mC0hVjMw08vkP5jeynsjFi/rY6
+ W4Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736022662; x=1736627462;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TawJqxFkG0sJydy2ftO+462SsxIaxbD3wY6nFlK90fM=;
- b=o5ghayG6BcWvvzSqx2ik/94h3A0kis0p0fcsdQmwomtjMILk+6PV+BPMdbw/XEAk+q
- c/jPktTZDYNi401U++cK6kT3CYI6aNFWHEo5fnBvA55iXofanzJy4TKqq3DXNvnaQSUg
- CJA309TulE8B0l8Y1KFTzWlecO8PLmzBr2HRpJeQ0OAO0V70Z+Z/hvg9bgn8hGB6AwQp
- DG7J2ohOU/uj6yLSnUVJl61xy0v/LomslYO6tFP2gcMAhbjKNJpVy7HgXqz/GA6C7zjl
- Cra9pAfQqpRa9+pTVbTr4R3E2XWLMiow4mFD607yZ0McA9wFMSKm4/4ZYBzmltmt48NO
- V5fA==
+ d=1e100.net; s=20230601; t=1736134636; x=1736739436;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iLPtRbtGEa+mBJPdTtjo4hImxFMP4KOO18lJsBNVW0M=;
+ b=rIg7I8SieL3yXjr5gj9lwd5AQkw8orp6AjOV2N+PfRrmdR9KiE55iDfRp/lgB237bN
+ kUaAPZnUaOB4kkzDUkntD66hydISfwh3EqF1yLBmt5kfP1GSVTd0KZPDHqwsNm/bwbYS
+ 65sf6WfMBl00aGcMIrXkSUSc6jrCQ56RTjodGat+kmykWTI7cJMVdFQzZSByeLj2Dive
+ x35E6uKa0wn1GZ64aNrr7CXEUSyRF5OWla1k4AoQuRlJLJzK7JAKAN/pZ9K7PeseX2xM
+ TfIE5oVW0fa+E/oXKDFF6NRQI9PLYtjcr4paHiUSORbo4gUCFmrmBxCGwmgWJyIV/dMp
+ SA+A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX5BLdsTFA01/VpIYvhANbZHXH2vCnxB4OI3MqOqd/sfTfD+1jgrv7pvgepP/9wkt1Zha4H3zIhEzQZpnuvArp9@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzQ2pSY+k6MwB+cZtQ8Maf9YvK3odrSz/g7YqQkoDhDtTxXRKfq
- nK+8vp0rjC5lhkz9zVGZPx7zNWqAi+ME3bttjxwXb4f92PzBlN36Z12T7zU6vpIv+G720MXIz8t
- 11gfgK7sZjydY87YLgC+W/v+jfnhf1sKUXkDE1w3euTJHHSbnHmVTAaw=
-X-Google-Smtp-Source: AGHT+IEKgeOBhN4AUbtS6D8mtflQLUsRC0+40Q4pTSlJLV9Q9SjtBWaoufV196MRcrdZueXFXrvvGYyxEhZjsgDSPuAKN9/WFv88
+ AJvYcCXNuAo21709Ecz03J7KYB/izWwhTZm8mYGw782aQAPdUAiperIyMSsxS+TbKriwnbyYH/DPTE0YqZ5ZNsfgjJMn@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yyu7ZF1jbEjVvJ/qyl6FkM7rTWP+E64kUNql7Ug9+hDIHeYHQIU
+ 1VWNlSnMfwf84OGRhjtulTwqkC1I4t3d188qTYwgalIT+38kYkp7
+X-Gm-Gg: ASbGnct0J0pLv2e1JcwpZJ2rGl4noCmQ3o+UemFZJvg8nEZlInmBp16+qXjtGrN6ueO
+ dyiHSWNb6E0qyrbSHlBdMjGqP88SvU/68MHnvMNhuzwgEHu1nYtBQVvNsaOl3Bb8m5NKxEs8Al+
+ CSEI98CP7izl8JpTl6SuTFqLoQaiztThNMi3BjqA9/mdx5yenbShYKLMvfIFO+/2h6wwSZAFJMQ
+ Iwhy5DaYW/OHurqg0vs3mPiZHsvAJ9O0AwWhRIij9Y3p3bFXKBQGDUUOfnBw+7eK+0=
+X-Google-Smtp-Source: AGHT+IEiGPZ+QN5vuq+SORhI6FYKRQgbA2CV0CQAJWglVxl/XO6DI/ww+TIuLDisbBojF5e0qsusEA==
+X-Received: by 2002:a17:90b:2e4a:b0:2ee:ab04:1037 with SMTP id
+ 98e67ed59e1d1-2f452e36956mr89705391a91.17.1736134635933; 
+ Sun, 05 Jan 2025 19:37:15 -0800 (PST)
+Received: from zyy.mioffice.cn ([2408:8607:1b00:8:b27b:25ff:fe28:43a8])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2f2ed644846sm38112695a91.28.2025.01.05.19.37.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 05 Jan 2025 19:37:15 -0800 (PST)
+From: zangyangyang <zangyangyang66@gmail.com>
+X-Google-Original-From: zangyangyang <zangyangyang1@xiaomi.com>
+To: chao@kernel.org
+Date: Mon,  6 Jan 2025 11:36:45 +0800
+Message-ID: <20250106033645.4043618-1-zangyangyang1@xiaomi.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:5a4:b0:3cd:df49:45d5 with SMTP id
- e9e14a558f8ab-3cddf49465bmr21136415ab.8.1736022662647; Sat, 04 Jan 2025
- 12:31:02 -0800 (PST)
-Date: Sat, 04 Jan 2025 12:31:02 -0800
-In-Reply-To: <6776a683.050a0220.3a8527.0042.GAE@google.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <67799a86.050a0220.380ff0.0005.GAE@google.com>
-From: syzbot <syzbot+f5e74075e096e757bdbf@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: syzbot has bisected this issue to: commit
- 388a2a0640e16a8887f0d47dab207f344fbdb913
- Author: Chao Yu <chao@kernel.org> Date: Thu Jun 6 09:55:51 2024 +0000 f2fs:
- remove redundant sanity check in sanity_check_inode() 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  From: zangyangyang1 When f2fs_write_single_data_page fails, 
+ f2fs_write_cache_pages will use the last 'submitted' value incorrectly, which
+ will cause 'nwritten' and 'wbc->nr_to_write' calculation errors 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [zangyangyang66[at]gmail.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.46 listed in list.dnswl.org]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.216.46 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.198 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.166.198 listed in sa-accredit.habeas.com]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [209.85.216.46 listed in bl.score.senderscore.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.198 listed in wl.mailspike.net]
-X-Headers-End: 1tUAnc-0002kq-Cu
-Subject: Re: [f2fs-dev] [syzbot] [f2fs?] KASAN: slab-out-of-bounds Read in
- f2fs_getxattr
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [zangyangyang66[at]gmail.com]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.46 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1tUdvi-0004du-Kg
+Subject: [f2fs-dev] [PATCH v3] f2fs: fix using wrong 'submitted' value in
+ f2fs_write_cache_pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,32 +145,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: jaegeuk@kernel.org, zangyangyang1 <zangyangyang1@xiaomi.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-syzbot has bisected this issue to:
+From: zangyangyang1 <zangyangyang1@xiaomi.com>
 
-commit 388a2a0640e16a8887f0d47dab207f344fbdb913
-Author: Chao Yu <chao@kernel.org>
-Date:   Thu Jun 6 09:55:51 2024 +0000
+When f2fs_write_single_data_page fails, f2fs_write_cache_pages
+will use the last 'submitted' value incorrectly, which will cause
+'nwritten' and 'wbc->nr_to_write' calculation errors
 
-    f2fs: remove redundant sanity check in sanity_check_inode()
+Signed-off-by: zangyangyang1 <zangyangyang1@xiaomi.com>
+---
+v3: No logical changes, just format patch
+v2: Initialize "submitted" in f2fs_write_single_data_page()
+---
+ fs/f2fs/data.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=175f1418580000
-start commit:   63676eefb7a0 Merge tag 'sched_ext-for-6.13-rc5-fixes' of g..
-git tree:       upstream
-final oops:     https://syzkaller.appspot.com/x/report.txt?x=14df1418580000
-console output: https://syzkaller.appspot.com/x/log.txt?x=10df1418580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=ba7cde9482d6bb6
-dashboard link: https://syzkaller.appspot.com/bug?extid=f5e74075e096e757bdbf
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1676430f980000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=13e34edf980000
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 94f7b084f601..f772fbc7f331 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2816,6 +2816,9 @@ int f2fs_write_single_data_page(struct folio *folio, int *submitted,
+ 
+ 	trace_f2fs_writepage(folio, DATA);
+ 
++	if (submitted)
++		*submitted = 0;
++
+ 	/* we should bypass data pages to proceed the kworker jobs */
+ 	if (unlikely(f2fs_cp_error(sbi))) {
+ 		mapping_set_error(folio->mapping, -EIO);
+-- 
+2.43.2
 
-Reported-by: syzbot+f5e74075e096e757bdbf@syzkaller.appspotmail.com
-Fixes: 388a2a0640e1 ("f2fs: remove redundant sanity check in sanity_check_inode()")
-
-For information about bisection process see: https://goo.gl/tpsmEJ#bisection
 
 
 _______________________________________________
