@@ -2,109 +2,134 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A25E6A072BA
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jan 2025 11:19:57 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55EF1A0749D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jan 2025 12:27:15 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tVpdl-0003mc-Vv;
-	Thu, 09 Jan 2025 10:19:51 +0000
+	id 1tVqgt-0006Uz-DF;
+	Thu, 09 Jan 2025 11:27:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tVpdi-0003mS-Nv
+ (envelope-from <qasdev00@gmail.com>) id 1tVqgs-0006Us-8s
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Jan 2025 10:19:47 +0000
+ Thu, 09 Jan 2025 11:27:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Reply-To:Message-ID:
+ Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DnGzGN46ABPUYj13iBK41O9rDvHTh/Nk5/6RWM/5X6I=; b=gA9wR9+iWrv/3MSH9eYwoPJZ2q
- EGvUFvbwhrwWyjF9BUwKUsn8FryoGuyoSv7U9JYccOG0Ayqs+nCVEWprcTRExCTUaTD/lQLnbfbjj
- Q74L+NpvVgP3J17mVZMPKunJgBjYHxCJC4bwKAs3jaeX36+7MdBU1xEN7v8SBxLG5txw=;
+ bh=9eAda4W9uA5cE++I7CCfl9HPy3qcN5K2hzuEOSwc3VY=; b=XuZvHe2CaWrh4ZEG0CXyF+xupB
+ rfcmtP7QQZ3sLOIv8jmv8RzVR8onS2wGfPXvMwpQGvt0PsG3dhb8d9LoVsjJbe+7npwQxpTbd2xVL
+ 7nFJzjbJgwm5QKPkOGjS6oGuDAfQYwDRLqdT2arpDhYz3sEONh+EjlFIXvNO4DC2RpIY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=DnGzGN46ABPUYj13iBK41O9rDvHTh/Nk5/6RWM/5X6I=; b=hBeMAEA4VpK/Xdb5fNLX9VJWru
- a+xHKJ8pBoeCgHpxwfKqm5erk2aJOrOyZ215pMMBET9NCyplYg1ruxwgmWNLw4HkofHhoIq0wYv4v
- dGLwGwlfliPVNmJTmFq4pilHozAjV7difK7BXJDb+hoq9iwUQuU39lgKZA8/C00UWZZc=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ h=Content-Type:MIME-Version:Reply-To:Message-ID:Subject:Cc:To:From:Date:
+ Sender:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=9eAda4W9uA5cE++I7CCfl9HPy3qcN5K2hzuEOSwc3VY=; b=d
+ XeOjUqIM8q8XcXoAe+vLBrpphLARRgZ363X3ydHlpialrsRczvnvFcMkJF0J9jR7iA8/9r9LmdPah
+ U66DQ3FFS3wXWs4TFWGXwq9Ht1IM11wxuYkfo+V3dwfDJxFrDpVnH9++OPC7ozF1YU1PW9Uoo1+BL
+ bstV67LNMqUk+CpU=;
+Received: from mail-wr1-f42.google.com ([209.85.221.42])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tVpdi-00014f-N7 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Jan 2025 10:19:47 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 6CDD2A417BF;
- Thu,  9 Jan 2025 10:17:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A46A2C4CED2;
- Thu,  9 Jan 2025 10:19:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1736417975;
- bh=/lnpVRbIiNnAMXvuz8l3NCVw6gk1GOjOPRD83aNR0pA=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=dtg8fgSC+TBewhD0wc0s2bhlkd5irpTcCY+jRmy3FM8GSYQAmnlwAP9yp0HvGiP+1
- 9SvGHqlmZeyyph9C+c8LpzZeA7KJfpAXK/uTgg16PjqiPkwyrCNjmL37szBEXMPwkL
- uZDsIEhjro1UoyASgCPz6XbV6kbS98kjdj42wO6N+MLsltZkhz6iXdHfJsZHFRohAE
- JwPV72Hkk4Sz0IQdacVTxhnHAav2YCTkUFKugLRBVukFyCPc2a1gfmEhKzuMscfvUb
- kPZuDavllQAhww8bSxv8ELUJis0UF+ShUa1sIXr8s/5L814nIUNmJU3EaTiAywrGm1
- VNe3H11rpH8nQ==
-Message-ID: <22b3633b-63af-4678-86c5-2ce2a6636f07@kernel.org>
-Date: Thu, 9 Jan 2025 18:19:32 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1tVqgq-0005rb-Ub for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 09 Jan 2025 11:27:05 +0000
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-385d7b4da2bso668657f8f.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 09 Jan 2025 03:27:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1736422018; x=1737026818; darn=lists.sourceforge.net;
+ h=content-disposition:mime-version:reply-to:message-id:subject:cc:to
+ :from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=9eAda4W9uA5cE++I7CCfl9HPy3qcN5K2hzuEOSwc3VY=;
+ b=Ey0gB8hITFNMW2AtHGdBjM55mBHNerjR6iRm7aHSaOo08sJAzBnAgte/j62p6OC5el
+ /QIxjl8z5wCQVpU03FQ8QclsFKLkhclyEPNov02bH2kNM99hHR+ls2cgHwPAWOqlJG5w
+ /xMFI8pKrKKS77BU4A/SsyMVtS2qQrSy2vVL7dNDx+S5y3sNicoSUJwuDjJD982a38gp
+ 6DOH0JQh01diE5w1LYLFoKWrcMUThH+FfGz4LdF9sdoMXaXuIUDzx9++SUhAEu75Y2jf
+ Sqor2Zsz+IIrpgdydv+kHYCICxetOWV9ih7TQptwGiGWkk9fgt/dBdZf6+U5klvu513s
+ rP2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736422018; x=1737026818;
+ h=content-disposition:mime-version:reply-to:message-id:subject:cc:to
+ :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9eAda4W9uA5cE++I7CCfl9HPy3qcN5K2hzuEOSwc3VY=;
+ b=XTy7fX/AJ6P2IDx1VPJ6vAdvvdeRnkndB+1e1PVRLqYumn+rj01DtkHSN5TeruvBcG
+ ZV2TqqU3VXb2yCKjO+5J5FlB0K+fWmAW7TXnayjgAajEpKNvnfF86pjvd9Qjqv40p6Sx
+ KmSKz/YgCINwhyVgee5+zIm5A6plKoOldi6u30fyGeeIwYayR21Ftjn7AMfcutOjvZIE
+ xmTYo2mi1LkAj28Sy1cJ07RIL+oqkjhvUvujJbN/jXzD2lxkr6QYI2/Y681Cy/b9USXN
+ ChTsWXz7J8i8hzRv91GYOAN9vMnNtPnH5AcQulgfBgi2D98eaX5IyNULbJZm7FwNxavd
+ j46w==
+X-Gm-Message-State: AOJu0YzVsyhNmdFlTIWYdONpPhSZR7mnx9k4pxmXHJFfzKCrBd/e/vPn
+ +4bI08QTJ4xk1vbnCxemhsEG+43/pdFS+qe63y2kp4I06mnVJdOfNmBM6g==
+X-Gm-Gg: ASbGnctgwpoUREmxYHen+kOKkhMaiLRNfxnkrQ+W+J92lhqBwcL6jwffJslrvWtnqwV
+ QKQCG28Amt28tSJygNgMFU1X1brT2L5PnsoheAGEU1unWX2sYZnb2zBLlPejAS9Wn6ThvxQkV+W
+ RAACxdS7iUrNRMzSBonszi1ONlIdLPss1w60EKgWQlXuPLvNFB+gHwQ1x8wVbGalJNaGRxO4EnW
+ K7jv0tdvrbEu5DQNu3Ft81K3othY2Ob71qSB/c2dEwn0o17CfamnEHp7djU
+X-Google-Smtp-Source: AGHT+IEIipjxaw0cGgvTADCEmk3PrGI5Nblz7EQ892CI6E1dqlG1uD6HCFQ8XMLZ+VvwHoEXEFgl7g==
+X-Received: by 2002:a5d:5f82:0:b0:385:fa26:f0ac with SMTP id
+ ffacd0b85a97d-38a872fc03fmr5762638f8f.7.1736422018064; 
+ Thu, 09 Jan 2025 03:26:58 -0800 (PST)
+Received: from qasdev.system ([2a02:c7c:6696:8300:d3fc:38ce:272d:9a1e])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a8e4c1cf2sm1556980f8f.99.2025.01.09.03.26.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jan 2025 03:26:57 -0800 (PST)
+Date: Thu, 9 Jan 2025 11:26:47 +0000
+From: qasdev <qasdev00@gmail.com>
+To: Chao Yu <chao@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <Z3-yd3LlQY_32kMe@qasdev.system>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: =?UTF-8?B?6Ien6Ziz6Ziz?= <zangyangyang66@gmail.com>
-References: <20250106033645.4043618-1-zangyangyang1@xiaomi.com>
- <Z37D7TRFCvqMoX5U@google.com>
- <CAEJnjmwVm87QVYminhzfJC5So+QFDoad7yfhQKepwRoR5pLsXw@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CAEJnjmwVm87QVYminhzfJC5So+QFDoad7yfhQKepwRoR5pLsXw@mail.gmail.com>
-X-Spam-Score: -2.9 (--)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+Content-Disposition: inline
+X-Spam-Score: 0.1 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 1/9/25 10:23, 臧阳阳 wrote: > Jaegeuk Kim <jaegeuk@kernel.org>
-    于2025年1月9日周四 02:29写道： > >> >> On 01/06, zangyangyang wrote:
-    >>> From: zangyangyang1 <zangyangyang1@xiaomi.com> >> [...] 
- 
- Content analysis details:   (-2.9 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On Thu, Jan 09, 2025 at 05:02:02PM +0800, Chao Yu wrote: >
+ On 1/9/25 00:23, qasdev wrote: > > On Wed, Jan 08, 2025 at 07:44:03PM +0800,
+ Chao Yu wrote: > > > Hi Qasim, > > > > > > On 2025/1/8 07:03, qa [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
-                             medium trust
-                             [147.75.193.91 listed in list.dnswl.org]
-  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
-                             The query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                             [147.75.193.91 listed in sa-accredit.habeas.com]
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                             [147.75.193.91 listed in bl.score.senderscore.com]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.221.42 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.221.42 listed in bl.score.senderscore.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [qasdev00[at]gmail.com]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [qasdev00[at]gmail.com]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.42 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.221.42 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tVpdi-00014f-N7
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix using wrong 'submitted' value
- in f2fs_write_cache_pages
+ author's domain
+X-Headers-End: 1tVqgq-0005rb-Ub
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix slab-out-of-bounds Read KASAN bug
+ in f2fs_getxattr()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,41 +141,104 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: zangyangyang1 <zangyangyang1@xiaomi.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Reply-To: 08098e46-0468-4fec-b2fb-9ea7414eaea0@kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMS85LzI1IDEwOjIzLCDoh6fpmLPpmLMgd3JvdGU6Cj4gSmFlZ2V1ayBLaW0gPGphZWdldWtA
-a2VybmVsLm9yZz4g5LqOMjAyNeW5tDHmnIg55pel5ZGo5ZubIDAyOjI55YaZ6YGT77yaCj4gCj4+
-Cj4+IE9uIDAxLzA2LCB6YW5neWFuZ3lhbmcgd3JvdGU6Cj4+PiBGcm9tOiB6YW5neWFuZ3lhbmcx
-IDx6YW5neWFuZ3lhbmcxQHhpYW9taS5jb20+Cj4+Pgo+Pj4gV2hlbiBmMmZzX3dyaXRlX3Npbmds
-ZV9kYXRhX3BhZ2UgZmFpbHMsIGYyZnNfd3JpdGVfY2FjaGVfcGFnZXMKPj4+IHdpbGwgdXNlIHRo
-ZSBsYXN0ICdzdWJtaXR0ZWQnIHZhbHVlIGluY29ycmVjdGx5LCB3aGljaCB3aWxsIGNhdXNlCj4+
-PiAnbndyaXR0ZW4nIGFuZCAnd2JjLT5ucl90b193cml0ZScgY2FsY3VsYXRpb24gZXJyb3JzCj4+
-Pgo+Pj4gU2lnbmVkLW9mZi1ieTogemFuZ3lhbmd5YW5nMSA8emFuZ3lhbmd5YW5nMUB4aWFvbWku
-Y29tPgo+Pj4gLS0tCj4+PiB2MzogTm8gbG9naWNhbCBjaGFuZ2VzLCBqdXN0IGZvcm1hdCBwYXRj
-aAo+Pj4gdjI6IEluaXRpYWxpemUgInN1Ym1pdHRlZCIgaW4gZjJmc193cml0ZV9zaW5nbGVfZGF0
-YV9wYWdlKCkKPj4+IC0tLQo+Pj4gICBmcy9mMmZzL2RhdGEuYyB8IDMgKysrCj4+PiAgIDEgZmls
-ZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKykKPj4+Cj4+PiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9k
-YXRhLmMgYi9mcy9mMmZzL2RhdGEuYwo+Pj4gaW5kZXggOTRmN2IwODRmNjAxLi5mNzcyZmJjN2Yz
-MzEgMTAwNjQ0Cj4+PiAtLS0gYS9mcy9mMmZzL2RhdGEuYwo+Pj4gKysrIGIvZnMvZjJmcy9kYXRh
-LmMKPj4+IEBAIC0yODE2LDYgKzI4MTYsOSBAQCBpbnQgZjJmc193cml0ZV9zaW5nbGVfZGF0YV9w
-YWdlKHN0cnVjdCBmb2xpbyAqZm9saW8sIGludCAqc3VibWl0dGVkLAo+Pj4KPj4+ICAgICAgICB0
-cmFjZV9mMmZzX3dyaXRlcGFnZShmb2xpbywgREFUQSk7Cj4+Pgo+Pj4gKyAgICAgaWYgKHN1Ym1p
-dHRlZCkKPj4+ICsgICAgICAgICAgICAgKnN1Ym1pdHRlZCA9IDA7Cj4+Cj4+IEkgZG9uJ3QgdGhp
-bmsgdGhpcyBpcyBjb3JyZWN0LCBhcyBjYWxsZXJzIHNob3VsZCBoYW5kbGUgaXQuCj4gCj4gSGks
-IENoYW8sIHdoYXQgZG8geW91IHRoaW5rPwoKQm90aCBhcmUgZmluZSB0byBtZSwgcHJldmlvdXNs
-eSBJIHN1Z2dlc3QgdG8gaGFuZGxlIGl0IGluIApmMmZzX3dyaXRlX3NpbmdsZV9kYXRhX3BhZ2Uo
-KSwgYmVjYXVzZSBJJ20gd29ycmllZCBhYm91dCB3ZSBtYXkgbWlzcyB0byBoYW5kbGUgCml0IGlu
-IGFueSBwb3NzaWJsZSBjYWxsZXIgaW4gZnVydGhlci4KClRoYW5rcywKCj4gCj4gVGhhbmtzCj4g
-Cj4+Cj4+PiArCj4+PiAgICAgICAgLyogd2Ugc2hvdWxkIGJ5cGFzcyBkYXRhIHBhZ2VzIHRvIHBy
-b2NlZWQgdGhlIGt3b3JrZXIgam9icyAqLwo+Pj4gICAgICAgIGlmICh1bmxpa2VseShmMmZzX2Nw
-X2Vycm9yKHNiaSkpKSB7Cj4+PiAgICAgICAgICAgICAgICBtYXBwaW5nX3NldF9lcnJvcihmb2xp
-by0+bWFwcGluZywgLUVJTyk7Cj4+PiAtLQo+Pj4gMi40My4yCgoKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBs
-aXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMu
-c291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On Thu, Jan 09, 2025 at 05:02:02PM +0800, Chao Yu wrote:
+> On 1/9/25 00:23, qasdev wrote:
+> > On Wed, Jan 08, 2025 at 07:44:03PM +0800, Chao Yu wrote:
+> > > Hi Qasim,
+> > > 
+> > > On 2025/1/8 07:03, qasdev wrote:
+> > > > In f2fs_getxattr(), the function lookup_all_xattrs() allocates a 12-byte
+> > > > (base_size) buffer for an inline extended attribute. However, when
+> > > > __find_inline_xattr() calls __find_xattr(), it uses the macro
+> > > > "list_for_each_xattr(entry, addr)", which starts by calling
+> > > > XATTR_FIRST_ENTRY(addr). This skips a 24-byte struct f2fs_xattr_header
+> > > > at the beginning of the buffer, causing an immediate out-of-bounds read
+> > > > in a 12-byte allocation. The subsequent !IS_XATTR_LAST_ENTRY(entry)
+> > > > check then dereferences memory outside the allocated region, triggering
+> > > > the slab-out-of bounds read.
+> > > > 
+> > > > This patch prevents the out-of-bounds read by adding a check to bail
+> > > > out early if inline_size is too small and does not account for the
+> > > > header plus the 4-byte value that IS_XATTR_LAST_ENTRY reads.
+> > > 
+> > > Thank you very much for analyzing this issue, the root cause you figured out
+> > > makes sense to me.
+> > > 
+> > > Can you please check the patch in below link? It seems it can fix this issue
+> > > as well? IIUC.
+> > > 
+> > > https://lore.kernel.org/linux-f2fs-devel/20241216134600.8308-1-chao@kernel.org/
+> > > 
+> > > Thanks,
+> > 
+> > Hi Chao,
+> > 
+> > I tested the patch you linked on my machine and with syzbot, and both tests succeeded. The patch you linked works very well.
+> 
+> Hi Qasdev,
+> 
+> Thanks for the test!
+> 
+> > Here is the link to the results of the testing of both patches: https://syzkaller.appspot.com/bug?extid=f5e74075e096e757bdbf
+> > 
+> > Would it be possible to include me in the Tested-by header and any other contribution acknowledgments you feel appropriate?
+> > > Thanks!
+> > 
+> > Best regards,
+> > Qasim
+> > 
+> > > 
+> > > > 
+> > > > Reported-by: syzbot <syzbot+f5e74075e096e757bdbf@syzkaller.appspotmail.com>
+> > > > Closes: https://syzkaller.appspot.com/bug?extid=f5e74075e096e757bdbf
+> > > > Tested-by: syzbot <syzbot+f5e74075e096e757bdbf@syzkaller.appspotmail.com>
+> > > > Tested-by: Qasim Ijaz <qasdev00@gmail.com>
+> 
+> IMO, it will be better to quoted your comment description and all above tags
+> into the patch, what do you think?
+> 
+> Thanks,
+
+Hi Chao,
+
+Thank you for the suggestion. I agree that quoting my comment description and tags into the patch would provide helpful context.
+
+Please feel free to include them as appropriate. Let me know if you need anything else from me.
+
+Best regards,
+Qasim
+
+> 
+> > > > Fixes: 388a2a0640e1 ("f2fs: remove redundant sanity check in sanity_check_inode()")
+> > > > Signed-off-by: Qasim Ijaz <qasdev00@gmail.com>
+> > > > ---
+> > > >    fs/f2fs/xattr.c | 3 +++
+> > > >    1 file changed, 3 insertions(+)
+> > > > 
+> > > > diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+> > > > index 3f3874943679..cf82646bca0e 100644
+> > > > --- a/fs/f2fs/xattr.c
+> > > > +++ b/fs/f2fs/xattr.c
+> > > > @@ -329,6 +329,9 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
+> > > >    	if (!xnid && !inline_size)
+> > > >    		return -ENODATA;
+> > > > +	if (inline_size < sizeof(struct f2fs_xattr_header) + sizeof(__u32))
+> > > > +		return -ENODATA;
+> > > > +
+> > > >    	*base_size = XATTR_SIZE(inode) + XATTR_PADDING_SIZE;
+> > > >    	txattr_addr = xattr_alloc(F2FS_I_SB(inode), *base_size, is_inline);
+> > > >    	if (!txattr_addr)
+> > > 
+> 
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
