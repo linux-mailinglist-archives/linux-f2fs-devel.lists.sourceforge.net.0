@@ -2,68 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DB65A10655
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jan 2025 13:14:19 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FA77A106B4
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jan 2025 13:34:35 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tXfo9-0002yC-FM;
-	Tue, 14 Jan 2025 12:14:08 +0000
+	id 1tXg7j-0008P2-Kk;
+	Tue, 14 Jan 2025 12:34:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tXfo4-0002y2-Sc
+ (envelope-from <chao@kernel.org>) id 1tXg7i-0008Os-Lj
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 14 Jan 2025 12:14:04 +0000
+ Tue, 14 Jan 2025 12:34:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YiL3+ztai5BphHUGBEzL0s4BR4o6gB94qoNGnJzs1JQ=; b=ek84RDtLZXeU1ARYQ3GWyMDUb7
- na3nwpSS8S803xoe9TB4qW7ejG2IsAtsiNKF2UcjGE12BXN2Wioc6wfkIdlaleJOkdsEjcZN25Wp8
- B0Z+qnTd4NMJdv+v0bPXWBUJeCUC1YipzBcDuxH2tl1RKKQVXhzTsYTCfhHmAs9r60/4=;
+ bh=AO2csc++QV3v54TEitftSi6kA0P6KKaIXsbd79xIS28=; b=cGeim06h2WJN0hXyVBGmUzRrJ3
+ g2iBwM/yKTeRwXeKU4vaRm52fAso9EOprbuEprVzms5taLNI25+eHh6D4eIm90JCGNU6z2P0V4ef6
+ bYVd3DrF/SQui6S3suIGcoh0ohWJapYoaipPGyVoPV+H67AGEiMebCrhiPI53cYAd050=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=YiL3+ztai5BphHUGBEzL0s4BR4o6gB94qoNGnJzs1JQ=; b=crc4G1ysigNVQUpU44S83P+kzs
- CRp1WSZqm60iG0pv0uJQ8m9H78TUCsnk1a0LMvkGgbj7yzOGQm7EytdzrY+08nPXCY09rEZWjGd+c
- wI4VgtHW3N24zYGF51PlPmLL7IvrNAzzNvTalnv9mW9QNOtVRTBIP9H+Lmpa5ym3iN2M=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=AO2csc++QV3v54TEitftSi6kA0P6KKaIXsbd79xIS28=; b=O
+ pKmCswKqCsFmYfD6pug7zwmh9wGTt+Ssvxwc1866gWcWAKX9roPAmJGY7o5IZD0fks0IqHQX3HOVo
+ PGrDQSxai1ZNW/EOPUbgZLljFTxKNRsHwU4IzwHbaD/IqcukipSE1q/8X3CD3gVXCyU+5YAs9u+xF
+ AyZxm9Eg56val5l8=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tXfo3-0000ZE-Jz for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 14 Jan 2025 12:14:04 +0000
+ id 1tXg7h-0001VT-Qv for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 14 Jan 2025 12:34:22 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 66D8E5C4D68
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 14 Jan 2025 12:13:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2360EC4CEDD;
- Tue, 14 Jan 2025 12:13:56 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id A827E5C5867;
+ Tue, 14 Jan 2025 12:33:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6146CC4CEDD;
+ Tue, 14 Jan 2025 12:34:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1736856837;
- bh=EjCUYjTNkR1ofNQGE6VV9sm8XgJo0k7xoj4WRSdF4qY=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=bJJkxx5g1OYY9me0/v9eI3XHKLinMvXdyy5bhYLCgFh8hBGioFp4l3O4ivTrHphNz
- xat9aHQDT/XcFLiKNkI7hzcSryVaPmivI+Nlz8nS0O/nEXTUngF3X0vBQwmkTuWgqF
- JF/fkKrYcfjjhHftY+HLos88sC4MOgNj9dIAhJbhXXbfB4Bi2rk2mu6JM8Qzly4Loc
- MHruTo0mMuhBhxompSWiIzPzprJVVtionokk3+cfQ/zR6PqzzNaJWYSDWzhmeC1CzV
- sfc68kstcruQjBVr30WFmxp/aBWVcPkOviJG6UCu3DhOfNF7m+tyog4Jqxc8iLEPhR
- KUZnTg+jH4VZw==
-Message-ID: <a9874f06-a209-4f0f-b983-f7ff5d3cae6f@kernel.org>
-Date: Tue, 14 Jan 2025 20:13:53 +0800
+ s=k20201202; t=1736858056;
+ bh=9k58zGpL3oL/ItwhZdersURYgrd7RDYnth+g55CHYxI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=WezotQfMzgD+Oeuu/8l32awstOUVwH532xW1aVcNPntXQMwzukVSUDVkfZcK6fYrx
+ WVbdUq+HaiG44jomU3cDQZ3s0oVJKgKyzcT53Ks/tXc4tmwxocPBltkH+pVBcZCGu/
+ MKO70XsG7uop2+6rQECwwCy/3DlXmtHXykD45QhTih3zP8tMKHGZJ/Emt+CKcEfdXw
+ nDGK1QTPW6Kz2QbsD77cij6I4OVqNem5wt1IWchfvrJofDcqz52iVfiobEdJnylL+D
+ PT4tcDOqBtpsPZIGoWCx83wVanO7B7EAVMtOSTGpO4+SkBJiJ4Jf47roJEArzxngHe
+ /46SQ7gBDwxpw==
+To: jaegeuk@kernel.org
+Date: Tue, 14 Jan 2025 20:34:10 +0800
+Message-ID: <20250114123410.29123-1-chao@kernel.org>
+X-Mailer: git-send-email 2.48.0.rc2.279.g1de40edade-goog
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20250108181908.4148111-1-jaegeuk@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20250108181908.4148111-1-jaegeuk@kernel.org>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -71,10 +66,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 1/9/25 02:19, Jaegeuk Kim via Linux-f2fs-devel wrote: >
- Let's remove unclear blk_finish_plug. > > Signed-off-by: Jaegeuk Kim
- <jaegeuk@kernel.org>
- Reviewed-by: Chao Yu <chao@kernel.org> Thanks, 
+ Content preview: syzbot reported an out-of-range access issue as below: UBSAN:
+ array-index-out-of-bounds in fs/f2fs/f2fs.h:3292:19 index 18446744073709550491
+ is out of range for type '__le32[923]' (aka 'unsigned int[923]') CPU: 0 UID:
+ 0 PID: 5338 Comm: syz.0.0 Not tainted [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -86,7 +81,7 @@ X-Spam-Report: Spam detection software,
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ [139.178.84.217 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -100,8 +95,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tXfo3-0000ZE-Jz
-Subject: Re: [f2fs-dev] [PATCH] f2fs: remove blk_finish_plug
+X-Headers-End: 1tXg7h-0001VT-Qv
+Subject: [f2fs-dev] [PATCH v2] f2fs: fix to do sanity check correctly on
+ i_inline_xattr_size
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,18 +111,148 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
+Cc: Qasim Ijaz <qasdev00@gmail.com>,
+ syzbot+69f5379a1717a0b982a1@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org,
+ syzbot <syzbot+f5e74075e096e757bdbf@syzkaller.appspotmail.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 1/9/25 02:19, Jaegeuk Kim via Linux-f2fs-devel wrote:
-> Let's remove unclear blk_finish_plug.
-> 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+syzbot reported an out-of-range access issue as below:
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+UBSAN: array-index-out-of-bounds in fs/f2fs/f2fs.h:3292:19
+index 18446744073709550491 is out of range for type '__le32[923]' (aka 'unsigned int[923]')
+CPU: 0 UID: 0 PID: 5338 Comm: syz.0.0 Not tainted 6.12.0-syzkaller-10689-g7af08b57bcb9 #0
+Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2~bpo12+1 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0x241/0x360 lib/dump_stack.c:120
+ ubsan_epilogue lib/ubsan.c:231 [inline]
+ __ubsan_handle_out_of_bounds+0x121/0x150 lib/ubsan.c:429
+ read_inline_xattr+0x273/0x280
+ lookup_all_xattrs fs/f2fs/xattr.c:341 [inline]
+ f2fs_getxattr+0x57b/0x13b0 fs/f2fs/xattr.c:533
+ vfs_getxattr_alloc+0x472/0x5c0 fs/xattr.c:393
+ ima_read_xattr+0x38/0x60 security/integrity/ima/ima_appraise.c:229
+ process_measurement+0x117a/0x1fb0 security/integrity/ima/ima_main.c:353
+ ima_file_check+0xd9/0x120 security/integrity/ima/ima_main.c:572
+ security_file_post_open+0xb9/0x280 security/security.c:3121
+ do_open fs/namei.c:3830 [inline]
+ path_openat+0x2ccd/0x3590 fs/namei.c:3987
+ do_file_open_root+0x3a7/0x720 fs/namei.c:4039
+ file_open_root+0x247/0x2a0 fs/open.c:1382
+ do_handle_open+0x85b/0x9d0 fs/fhandle.c:414
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
 
-Thanks,
+index: 18446744073709550491 (decimal, unsigned long long)
+= 0xfffffffffffffb9b (hexadecimal) = -1125 (decimal, long long)
+UBSAN detects that inline_xattr_addr() tries to access .i_addr[-1125].
+
+w/ below testcase, it can reproduce this bug easily:
+- mkfs.f2fs -f -O extra_attr,flexible_inline_xattr /dev/sdb
+- mount -o inline_xattr_size=512 /dev/sdb /mnt/f2fs
+- touch /mnt/f2fs/file
+- umount /mnt/f2fs
+- inject.f2fs --node --mb i_inline --nid 4 --val 0x1 /dev/sdb
+- inject.f2fs --node --mb i_inline_xattr_size --nid 4 --val 2048 /dev/sdb
+- mount /dev/sdb /mnt/f2fs
+- getfattr /mnt/f2fs/file
+
+The root cause is if metadata of filesystem and inode were fuzzed as below:
+- extra_attr feature is enabled
+- flexible_inline_xattr feature is enabled
+- ri.i_inline_xattr_size = 2048
+- F2FS_EXTRA_ATTR bit in ri.i_inline was not set
+
+sanity_check_inode() will skip doing sanity check on fi->i_inline_xattr_size,
+result in using invalid inline_xattr_size later incorrectly, fix it.
+
+Meanwhile, let's fix to check lower boundary for .i_inline_xattr_size w/
+MIN_INLINE_XATTR_SIZE like we did in parse_options().
+
+There is a related issue reported by syzbot, Qasim Ijaz has anlyzed and
+fixed it w/ very similar way [1], as discussed, we all agree that it will
+be better to do sanity check in sanity_check_inode() for fix, so finally,
+let's fix these two related bugs w/ current patch.
+
+Including commit message from Qasim's patch as below, thanks a lot for
+his contribution.
+
+"In f2fs_getxattr(), the function lookup_all_xattrs() allocates a 12-byte
+(base_size) buffer for an inline extended attribute. However, when
+__find_inline_xattr() calls __find_xattr(), it uses the macro
+"list_for_each_xattr(entry, addr)", which starts by calling
+XATTR_FIRST_ENTRY(addr). This skips a 24-byte struct f2fs_xattr_header
+at the beginning of the buffer, causing an immediate out-of-bounds read
+in a 12-byte allocation. The subsequent !IS_XATTR_LAST_ENTRY(entry)
+check then dereferences memory outside the allocated region, triggering
+the slab-out-of bounds read.
+
+This patch prevents the out-of-bounds read by adding a check to bail
+out early if inline_size is too small and does not account for the
+header plus the 4-byte value that IS_XATTR_LAST_ENTRY reads."
+
+[1]: https://lore.kernel.org/linux-f2fs-devel/Z32y1rfBY9Qb5ZjM@qasdev.system/
+
+Fixes: 6afc662e68b5 ("f2fs: support flexible inline xattr size")
+Reported-by: syzbot+69f5379a1717a0b982a1@syzkaller.appspotmail.com
+Closes: https://lore.kernel.org/linux-f2fs-devel/674f4e7d.050a0220.17bd51.004f.GAE@google.com
+Reported-by: syzbot <syzbot+f5e74075e096e757bdbf@syzkaller.appspotmail.com>
+Closes: https://syzkaller.appspot.com/bug?extid=f5e74075e096e757bdbf
+Tested-by: syzbot <syzbot+f5e74075e096e757bdbf@syzkaller.appspotmail.com>
+Tested-by: Qasim Ijaz <qasdev00@gmail.com>
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v2:
+- including commit message from Qasim's patch.
+ fs/f2fs/inode.c | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index 282fd320bdb3..7de33da8b3ea 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -302,15 +302,6 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 				  F2FS_TOTAL_EXTRA_ATTR_SIZE);
+ 			return false;
+ 		}
+-		if (f2fs_sb_has_flexible_inline_xattr(sbi) &&
+-			f2fs_has_inline_xattr(inode) &&
+-			(!fi->i_inline_xattr_size ||
+-			fi->i_inline_xattr_size > MAX_INLINE_XATTR_SIZE)) {
+-			f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_inline_xattr_size: %d, max: %lu",
+-				  __func__, inode->i_ino, fi->i_inline_xattr_size,
+-				  MAX_INLINE_XATTR_SIZE);
+-			return false;
+-		}
+ 		if (f2fs_sb_has_compression(sbi) &&
+ 			fi->i_flags & F2FS_COMPR_FL &&
+ 			F2FS_FITS_IN_INODE(ri, fi->i_extra_isize,
+@@ -320,6 +311,16 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 		}
+ 	}
+ 
++	if (f2fs_sb_has_flexible_inline_xattr(sbi) &&
++		f2fs_has_inline_xattr(inode) &&
++		(fi->i_inline_xattr_size < MIN_INLINE_XATTR_SIZE ||
++		fi->i_inline_xattr_size > MAX_INLINE_XATTR_SIZE)) {
++		f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_inline_xattr_size: %d, min: %lu, max: %lu",
++			  __func__, inode->i_ino, fi->i_inline_xattr_size,
++			  MIN_INLINE_XATTR_SIZE, MAX_INLINE_XATTR_SIZE);
++		return false;
++	}
++
+ 	if (!f2fs_sb_has_extra_attr(sbi)) {
+ 		if (f2fs_sb_has_project_quota(sbi)) {
+ 			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
+-- 
+2.48.0.rc2.279.g1de40edade-goog
+
 
 
 _______________________________________________
