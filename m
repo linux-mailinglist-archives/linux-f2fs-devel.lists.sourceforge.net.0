@@ -2,93 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AD84A1191A
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Jan 2025 06:40:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C301A12E2E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Jan 2025 23:18:40 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tXw8f-0002UR-TH;
-	Wed, 15 Jan 2025 05:40:25 +0000
+	id 1tYBiZ-0004lg-Or;
+	Wed, 15 Jan 2025 22:18:32 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Yi.Sun@unisoc.com>) id 1tXw8d-0002UB-W9
+ (envelope-from <jaegeuk@kernel.org>) id 1tYBiX-0004lX-WD
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Jan 2025 05:40:24 +0000
+ Wed, 15 Jan 2025 22:18:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DE/wmiR415TuyckHXZML5Ap4HudH2t45yx+zSV7vs6o=; b=ZXUjuAW+6mk0jiPgiXtYLspyMr
- C49l6dpIwcMnrL6kXfdla0iWUPiZNhv5jrbYdfRr27sTHo12Po70Uv5wDYhLf4ZIMBp/j0Oy1wZdH
- 8eGAh43ZQIcpXcfvxraXmsTxBj3dg1s1zEZXiCNvKwmMRes1Riw/Wzg1aIgDl4nYBINE=;
+ bh=ZH3FC8jLJrToI4zTUxTYu7lPzGVMNcokhjRaRCl9R6U=; b=g8X9rh7c3ZsxMPi8GbcRiZYPDm
+ o+ddiX6u8VZGCbGrrGlrisZIg91Jgxk0vmsziV/rle1ho0i+HAY5w8hIug3Hizbm/2WAaGJDE4zr2
+ 1brHcCnGVkhM89VVqUZZtpxgznML2srKJ8verRgeOYnS4dAerGrRriOdaeySHzmsPs0Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DE/wmiR415TuyckHXZML5Ap4HudH2t45yx+zSV7vs6o=; b=i
- hL0Vgs9uhouLMPTe3h5mJzXIBEGj0KFebc/e2vY7HYK5EE2eVaPYL6FmiRX/30R+z1Puzi81yUjex
- lW+5BMbnev5dIQb7OGVZhmMsRVwWxbTTKUn3SYiMlyi2/vxXAPs6EbXjExjb16fM9StOC0pGecoTz
- Rh4mUlNMIhzMDjS8=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
+ List-Owner:List-Archive; bh=ZH3FC8jLJrToI4zTUxTYu7lPzGVMNcokhjRaRCl9R6U=; b=P
+ 64wyVioS2tsb7OR9KV03+acNDjmGNXz2RJoSCFNipBfc6xQsCorhwp9vwwRmIHGmLuLkHgGjljAC4
+ 2ciz/KEy8XL0G6a+lFYCevb6X5ezMwqUpSQGBoPq6tvTWg6mJu/liqHPIO2CTidLQ9evPbo30nr0w
+ PwR06o10RRdhNojY=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tXw8c-0000NI-Md for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Jan 2025 05:40:23 +0000
-Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 50F5dpFl086005;
- Wed, 15 Jan 2025 13:39:51 +0800 (+08)
- (envelope-from Yi.Sun@unisoc.com)
-Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4YXvr84Tsmz2NhqqX;
- Wed, 15 Jan 2025 13:36:40 +0800 (CST)
-Received: from tj10379pcu1.spreadtrum.com (10.5.32.15) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Wed, 15 Jan 2025 13:39:49 +0800
-From: Yi Sun <yi.sun@unisoc.com>
-To: <chao@kernel.org>, <jaegeuk@kernel.org>
-Date: Wed, 15 Jan 2025 13:39:43 +0800
-Message-ID: <20250115053943.2450661-1-yi.sun@unisoc.com>
-X-Mailer: git-send-email 2.25.1
+ id 1tYBiY-0002T9-67 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 15 Jan 2025 22:18:30 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 127F55C5F0C
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 15 Jan 2025 22:17:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72980C4CED1;
+ Wed, 15 Jan 2025 22:18:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1736979499;
+ bh=4kIsyU5rXlE9mJi6lc1dgFWaOsh3YjfD1MJ8YxXEfHE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=CiZhLZis9cbUuPEn8ToQCFY/JaNvClQNwvbK2d/zIc9vZGLzhUgzL6DZnInE+BJ65
+ /NEqory891caawzwM6y1dB2Ow6YNB/Y0JqFaRXtqz0yJCV1UaJNdqX28wQNb8SU6TA
+ XqGeq5XGNVY1Bh1SdenM+favpDOPr+RB21vgja3U0K1VUvPoXyDWrqGNszsBKNPSKs
+ G70loWi5s+3uI9jIPi1nNuxOWNb/sQOWGC70B2zJiTaD/iM5Aeun1oaUT676LZFFiZ
+ j5yxBdMtvUAzNzKdNaVqmRXGhH7yht0I/WstHD8TcpgKMNa8BANEkBCnHHfctzrJ3v
+ CfWE/m3lbndlQ==
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Wed, 15 Jan 2025 22:16:50 +0000
+Message-ID: <20250115221814.1920703-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.48.0.rc2.279.g1de40edade-goog
 MIME-Version: 1.0
-X-Originating-IP: [10.5.32.15]
-X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 50F5dpFl086005
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Function f2fs_invalidate_blocks() can process consecutive
- blocks at a time, so f2fs_truncate_data_blocks_range() is optimized to use
- the new functionality of f2fs_invalidate_blocks(). Add two variables @blkstart
- and @blklen, @blkstart records the first address of the consecutive blocks,
- and @blkstart records the number of consecutive blocks. 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview: If users clearly know which file-backed pages to reclaim in
+ system view, they can use this ioctl() to register in advance and reclaim
+ all at once later. Change log from v2: - add more boundary checks -
+ de-register the range, if len is zero 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [222.66.158.135 listed in sa-accredit.habeas.com]
+ [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [222.66.158.135 listed in bl.score.senderscore.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1tXw8c-0000NI-Md
-Subject: [f2fs-dev] [PATCH v5] f2fs: Optimize
- f2fs_truncate_data_blocks_range()
+ [139.178.84.217 listed in bl.score.senderscore.com]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tYBiY-0002T9-67
+Subject: [f2fs-dev] [PATCH 0/2 v3] add ioctl/sysfs to donate file-backed
+ pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,94 +111,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Ke.Wang@unisoc.com, yi.sun@unisoc.com, linux-kernel@vger.kernel.org,
- zhiguo.niu@unisoc.com, linux-f2fs-devel@lists.sourceforge.net,
- Hao_hao.Wang@unisoc.com
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Function f2fs_invalidate_blocks() can process consecutive
-blocks at a time, so f2fs_truncate_data_blocks_range() is
-optimized to use the new functionality of
-f2fs_invalidate_blocks().
+If users clearly know which file-backed pages to reclaim in system view, they
+can use this ioctl() to register in advance and reclaim all at once later.
 
-Add two variables @blkstart and @blklen, @blkstart records
-the first address of the consecutive blocks, and @blkstart
-records the number of consecutive blocks.
+Change log from v2:
+ - add more boundary checks
+ - de-register the range, if len is zero
 
-Signed-off-by: Yi Sun <yi.sun@unisoc.com>
----
- fs/f2fs/file.c | 29 +++++++++++++++++++++++++----
- 1 file changed, 25 insertions(+), 4 deletions(-)
+Jaegeuk Kim (2):
+  f2fs: register inodes which is able to donate pages
+  f2fs: add a sysfs entry to request donate file-backed pages
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index c43d64898d8b..00fcac45f1bb 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -621,8 +621,11 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
- 	int cluster_index = 0, valid_blocks = 0;
- 	int cluster_size = F2FS_I(dn->inode)->i_cluster_size;
- 	bool released = !atomic_read(&F2FS_I(dn->inode)->i_compr_blocks);
-+	block_t blkstart;
-+	int blklen = 0;
- 
- 	addr = get_dnode_addr(dn->inode, dn->node_page) + ofs;
-+	blkstart = le32_to_cpu(*addr);
- 
- 	/* Assumption: truncation starts with cluster */
- 	for (; count > 0; count--, addr++, dn->ofs_in_node++, cluster_index++) {
-@@ -638,26 +641,44 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
- 		}
- 
- 		if (blkaddr == NULL_ADDR)
--			continue;
-+			goto next;
- 
- 		f2fs_set_data_blkaddr(dn, NULL_ADDR);
- 
- 		if (__is_valid_data_blkaddr(blkaddr)) {
- 			if (time_to_inject(sbi, FAULT_BLKADDR_CONSISTENCE))
--				continue;
-+				goto next;
- 			if (!f2fs_is_valid_blkaddr_raw(sbi, blkaddr,
- 						DATA_GENERIC_ENHANCE))
--				continue;
-+				goto next;
- 			if (compressed_cluster)
- 				valid_blocks++;
- 		}
- 
--		f2fs_invalidate_blocks(sbi, blkaddr, 1);
-+		if (blkstart + blklen == blkaddr) {
-+			blklen++;
-+		} else {
-+			f2fs_invalidate_blocks(sbi, blkstart, blklen);
-+			blkstart = blkaddr;
-+			blklen = 1;
-+		}
- 
- 		if (!released || blkaddr != COMPRESS_ADDR)
- 			nr_free++;
-+
-+		continue;
-+
-+next:
-+		if (blklen)
-+			f2fs_invalidate_blocks(sbi, blkstart, blklen);
-+
-+		blkstart = le32_to_cpu(*(addr + 1));
-+		blklen = 0;
- 	}
- 
-+	if (blklen)
-+		f2fs_invalidate_blocks(sbi, blkstart, blklen);
-+
- 	if (compressed_cluster)
- 		f2fs_i_compr_blocks_update(dn->inode, valid_blocks, false);
- 
+ Documentation/ABI/testing/sysfs-fs-f2fs |  7 +++
+ fs/f2fs/debug.c                         |  3 ++
+ fs/f2fs/f2fs.h                          | 14 +++++-
+ fs/f2fs/file.c                          | 64 +++++++++++++++++++++++++
+ fs/f2fs/inode.c                         | 14 ++++++
+ fs/f2fs/shrinker.c                      | 27 +++++++++++
+ fs/f2fs/super.c                         |  1 +
+ fs/f2fs/sysfs.c                         |  8 ++++
+ include/uapi/linux/f2fs.h               |  7 +++
+ 9 files changed, 144 insertions(+), 1 deletion(-)
+
 -- 
-2.25.1
+2.48.0.rc2.279.g1de40edade-goog
 
 
 
