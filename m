@@ -2,67 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40D5FA1562F
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AD19A1562E
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Jan 2025 19:00:25 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tYqdb-0006ZN-Jv;
-	Fri, 17 Jan 2025 18:00:08 +0000
+	id 1tYqdb-0005fO-VR;
+	Fri, 17 Jan 2025 18:00:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <mchehab+huawei@kernel.org>) id 1tYqda-0006ZF-2Y
+ (envelope-from <mchehab+huawei@kernel.org>) id 1tYqda-0005fF-Kb
  for linux-f2fs-devel@lists.sourceforge.net;
  Fri, 17 Jan 2025 18:00:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Sender:Content-Transfer-Encoding:MIME-Version:
- Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RimRJhO8mN/0VIbcekX4TIH+fDhZfzDhpoNRBIHOHSI=; b=AcFB2l69RU71ReWVA4Dev11udb
- +zLyo+g+QYRXl4Np3BK795Kktsv17aeeAlenKkt47t/Kn26+4RkhR6NAApUQB/PmZS8t2BtpGbabx
- 7S0rgUtf3vY+AMpoUVpHEd4tLyiBmGJUx00Z6Onzhqunk2Pp0bElFX0G0LjaXMOXoh50=;
+ References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Reply-To:
+ Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=NrzCUjuyyOaBrX/0DzVynM9u/q8suCvOfT3uvb1YHn8=; b=L0b58LEmWI31y+s+r0nh9Cjn/E
+ k2OcPciHCRqlC5rn/QnO2aVWNtOwKki22gdDOatDoblV5xaZMluSKl6WGkjlOMfGJeHOj2lyDZ9fM
+ +GacRRXaDfEAOI9sxw3JusjVR8U28jrm9SPTT75pYmVZpGBITAqX0v5D0YE3fZWR7c+E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Sender:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:
- To:From:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=RimRJhO8mN/0VIbcekX4TIH+fDhZfzDhpoNRBIHOHSI=; b=B
- cHaO3C6IjxpDueUJDAWldtbFPV02BREYrYwkpZqNhl+wFaUGtvaMN0Wnn8D+PIYdsfNJJSmO8SmDV
- v44jzb/1jJG6JATnbGKLi2hIOB/lUsqfxqgOzaeUEV9xIx64Gg94ENqRjcshi7lYKB7SI2Cxovmt1
- rMCF9ZAmITeotRhI=;
+ h=Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+ Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=NrzCUjuyyOaBrX/0DzVynM9u/q8suCvOfT3uvb1YHn8=; b=jRNjxUqwUek60t1NZ872J0H6cT
+ g095tPKgar+xxcfI1SZnWPqzG0dOlUBe71kIWL1PzouAYzx6J39xZu6GBnqVyvT39FVLdd6BbGamF
+ WsZ3+xePXbnLqdtpGvdaA96J0+d24iS8rIRdbHHulwKA0/8DEeXYDfUjpU/sknHBrP+c=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tYqdZ-0003Yw-UO for linux-f2fs-devel@lists.sourceforge.net;
+ id 1tYqdZ-0003Yy-W8 for linux-f2fs-devel@lists.sourceforge.net;
  Fri, 17 Jan 2025 18:00:06 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id D7AC25C63C8;
+ by dfw.source.kernel.org (Postfix) with ESMTP id F3FFF5C63CF;
  Fri, 17 Jan 2025 17:59:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7FDAC4CEE2;
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3653C4CEE5;
  Fri, 17 Jan 2025 17:59:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1737136795;
- bh=GbqeT7eeAHIjJRdLRDZggAAJcM/bUobSgiiZNrAeh2s=;
- h=From:To:Cc:Subject:Date:From;
- b=UJ4BLVfBc5CgoQgarhyz8frZd3QYr1vcDc2Q23SSXR+RqDZQtU/odh+ZiYIU39zNC
- 4Goye5M2FBfXHDElyZQ7t1tD2NWBMpzpZmfcf9XIpBWH4maYz2EhpE7hLxjaKdW9Ti
- Dm3xEBD0kdXOMipbvNS5HVNC1tSBM0ufLIFAeVkQf6CBKC3EtCxwJNQyfEKeoKXOY5
- 7CEBYMrCHsZabraQCo0XylISR1P8O2ATNSp57I8fO0WzV5AIvXNB89q4L/mh8J4zPB
- cZVttfxstovxydmK5i+zItsh6M/7UCwzlpHwCX1pueQUgv2Awf3n4imiO0Oj2vRDAY
- 6+sBgdQWecUsQ==
+ bh=eIZnybLSi/SLtggShPreZtgXkXe68+zdK87zK1E6aBk=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=LQ0CPjeRomhFFivBHEMXxVMtQP6ArQOenqkH5GJGLVKNAkyrc5VWIyMJ4PFiHjKbY
+ /cU0sdHLypqD0i+Gm/PeKDFE6R4Ocpc9ZK4VTGruCGmCgFbLyHM2PgOBGY8TDyZBjZ
+ B4429v/xUGcKDIBwHmLHEHaopdkYhMQ7QMa6jWCV9MdLMzvoxqsBmoxhIUb5HGiZyK
+ 2kQvCVZvRKucD9CorqAuOqx3CbbbMHjELlwigycTLby17ZdBdjNrduZI0qJUJf5nQP
+ vIjxV7i1+H9Nkfsrn06XjmH1iGGXS+0gVRMya9bNTDj15BDW4So+9q228ziSreuL2Y
+ x1ZVds80tZYSw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
  (envelope-from <mchehab+huawei@kernel.org>)
- id 1tYqdM-00000006AjU-1Ray; Fri, 17 Jan 2025 18:59:52 +0100
+ id 1tYqdM-00000006Ajn-210m; Fri, 17 Jan 2025 18:59:52 +0100
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
  Jonathan Corbet <corbet@lwn.net>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Date: Fri, 17 Jan 2025 18:59:29 +0100
-Message-ID: <cover.1737135484.git.mchehab+huawei@kernel.org>
+Date: Fri, 17 Jan 2025 18:59:34 +0100
+Message-ID: <c8bfa2da4e705aa036f773947a99f2cc8d37ca1b.1737135484.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <cover.1737135484.git.mchehab+huawei@kernel.org>
+References: <cover.1737135484.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
@@ -71,11 +73,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Jon/Greg, The main goal of this RFC is to give a heads
- up of a work I've been doing to replace the get_abi.pl script with a python
- version. Patches 1-6 are OK to be applied: - Patch 1 changes the sort criteria
- of the ABI generation to use alphabetic order: currently, it is *almost*
- alphabetic, but, on some cases, it orders on a different [...] 
+ Content preview:  Some date tags are missing colons. Add them to comply with
+ ABI description and produce right results when converted to html/pdf.
+ Signed-off-by:
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org> ---
+ Documentation/ABI/testing/sysfs-fs-f2fs
+ | 4 ++-- 1 file changed, 2 insertions(+), 2 deletions(-) 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -101,8 +104,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tYqdZ-0003Yw-UO
-Subject: [f2fs-dev] [PATCH RFC 00/10] Improve ABI documentation generation
+X-Headers-End: 1tYqdZ-0003Yy-W8
+Subject: [f2fs-dev] [PATCH RFC 05/10] ABI: sysfs-fs-f2fs: fix date tags
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,95 +120,44 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: Mauro Carvalho Chehab via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
- Jaegeuk Kim <mchehab+huawei@kernel.org>, James Clark <james.clark@linaro.org>,
- linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net,
- Johannes Berg <johannes@sipsolutions.net>, coresight@lists.linaro.org,
- linux-arm-kernel@lists.infradead.org, Mike Leach <mike.leach@linaro.org>
+Cc: Jaegeuk Kim <mchehab+huawei@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Jon/Greg,
+Some date tags are missing colons. Add them to comply with
+ABI description and produce right results when converted to html/pdf.
 
-The main goal of this RFC is to give a heads up of a work I've been doing to
-replace the get_abi.pl script with a python version.
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Patches 1-6 are OK to be applied:
-- Patch 1 changes the sort criteria of the ABI generation to use alphabetic order:
-  currently, it is *almost* alphabetic, but, on some cases, it orders on a different
-  way. No changes at the content, just at the order. 
-  I wrote it mainly to use the same sort criteria as the new tool, but IMO it is
-  worth applying even before we switch to the python version.
-
-- Patches 2-6 fix some ABI tag problems. They're independent of the rest and
-  can also be applied without  other patches on this series.
-
-The remaining patches (7-10) are RFC for a new tool.
-
-The new tool uses a cleaned-up version of the same algorithms I wrote in Perl,
-re-writen in Python. While doing the conversion, I got rid of some stuff that aren't
-needed anymore.
-
-The new tool has two additional changes:
-- the validate tool now detects a duplicate definition when files with the same name
-  exists on different parts of the ABI documentation (if one asks to build them altogether);
-- it fixes a bug on one of the files whose "what" keys weren't properly parsed.
-
-Patches 7 and 8 are already in good shape (IMHO).
-
-Patch 9 replaces "get_abi.pl" by "get_abi.py" exec for htmldocs/pdfdocs targets.
-It is not on its final shape, as my end goal is to do a python include and use the
-class directly there instead of calling an exec file, but such change will require
-some work (I'll likely implement an interactor at the class instead of just returning
-a big amount of text).
-
-Patch 10 is just a boilerplate to one additional functionality of the perl script that
-would require a lot of work to implement: check undefined/bad defined symbols
-at the local machine's sysfs and compare with ABI.
-
-Before getting patches 7-10 merged, I'd like to implement patch 10. This may
-take some time, as the ABI check there is not the simplest code I wrote.
-
-Yet, I'd like to get some feedback about patches 7-9 while I'm working on 
-patch 10, so, let me send what I have so far as a RFC.
-
-I hope this would make more people look at the code, as right now, we had only
-6 persons/6 patches besides me that touched the code.
-
-Mauro Carvalho Chehab (10):
-  scripts/get_abi.pl use label to better sort ABI symbols and files
-  ABI: sysfs-class-rfkill: fix kernelversion tags
-  ABI: sysfs-bus-coresight-*: fix kernelversion tags
-  ABI: sysfs-driver-dma-idxd: fix date tags
-  ABI: sysfs-fs-f2fs: fix date tags
-  ABI: sysfs-power: fix a what tag
-  [RFC] scripts: add a get_abi.py tool to generate ReST output
-  [RFC] scripts/get_abi.py: add support for symbol search
-  [RFC] docs: use get_abi.py for ABI generation
-  [RFC BOILERPLATE] scripts/get_abi.py: add support for undefined ABIs
-
- Documentation/ABI/removed/sysfs-class-rfkill  |   2 +-
- Documentation/ABI/stable/sysfs-class-rfkill   |  12 +-
- .../ABI/stable/sysfs-driver-dma-idxd          |   4 +-
- .../testing/sysfs-bus-coresight-devices-cti   |  78 +-
- .../testing/sysfs-bus-coresight-devices-tpdm  |  52 +-
- Documentation/ABI/testing/sysfs-fs-f2fs       |   4 +-
- Documentation/ABI/testing/sysfs-power         |   2 +-
- Documentation/admin-guide/abi-obsolete.rst    |   1 -
- Documentation/admin-guide/abi-removed.rst     |   1 -
- Documentation/admin-guide/abi-stable.rst      |   1 -
- Documentation/admin-guide/abi-testing.rst     |   1 -
- Documentation/sphinx/kernel_abi.py            |  10 +-
- scripts/get_abi.pl                            |   3 +-
- scripts/get_abi.py                            | 678 ++++++++++++++++++
- 14 files changed, 760 insertions(+), 89 deletions(-)
- create mode 100755 scripts/get_abi.py
-
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 3e1630c70d8a..e44bb614964b 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -347,7 +347,7 @@ Description:	Used to control configure extension list:
+ 		- [c] means add/del cold file extension
+ 
+ What:		/sys/fs/f2fs/<disk>/unusable
+-Date		April 2019
++Date:		April 2019
+ Contact:	"Daniel Rosenberg" <drosen@google.com>
+ Description:	If checkpoint=disable, it displays the number of blocks that
+ 		are unusable.
+@@ -355,7 +355,7 @@ Description:	If checkpoint=disable, it displays the number of blocks that
+ 		would be unusable if checkpoint=disable were to be set.
+ 
+ What:		/sys/fs/f2fs/<disk>/encoding
+-Date		July 2019
++Date:		July 2019
+ Contact:	"Daniel Rosenberg" <drosen@google.com>
+ Description:	Displays name and version of the encoding set for the filesystem.
+ 		If no encoding is set, displays (none)
 -- 
 2.47.1
-
 
 
 
