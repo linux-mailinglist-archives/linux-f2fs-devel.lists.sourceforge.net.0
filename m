@@ -2,93 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E2C4A15494
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Jan 2025 17:44:13 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 40D5FA1562F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Jan 2025 19:00:25 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tYpS4-0006tR-V7;
-	Fri, 17 Jan 2025 16:44:08 +0000
+	id 1tYqdb-0006ZN-Jv;
+	Fri, 17 Jan 2025 18:00:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1tYpS2-0006tH-79
+ (envelope-from <mchehab+huawei@kernel.org>) id 1tYqda-0006ZF-2Y
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 17 Jan 2025 16:44:05 +0000
+ Fri, 17 Jan 2025 18:00:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Sender:Content-Transfer-Encoding:MIME-Version:
+ Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9apYPZCK6iiRlvg31grIPApRFGsdu1wFq4DyEMUcomA=; b=WW8zJ/d/aRxc7j+brPwFO9KefJ
- 1RhNEnotNf/5B6LY2EMbSSjiiM+jUWdakh4oIWLpU2KBGGuKR5Ia6Csiwiz/6/NrqmwDpH468lhp+
- 6DOznLjegI96+ia/iCLyhKYsKGdua9G9XnNSOTlO4KUBt8lwyEDO58GVFwNX61sdIYrA=;
+ bh=RimRJhO8mN/0VIbcekX4TIH+fDhZfzDhpoNRBIHOHSI=; b=AcFB2l69RU71ReWVA4Dev11udb
+ +zLyo+g+QYRXl4Np3BK795Kktsv17aeeAlenKkt47t/Kn26+4RkhR6NAApUQB/PmZS8t2BtpGbabx
+ 7S0rgUtf3vY+AMpoUVpHEd4tLyiBmGJUx00Z6Onzhqunk2Pp0bElFX0G0LjaXMOXoh50=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=9apYPZCK6iiRlvg31grIPApRFGsdu1wFq4DyEMUcomA=; b=gUqDgyZaWVojgJPbpvncJ/BaBe
- s1O78jzL06Dw4E6ed/FZowC2L3U4ZP4leJxU4pIt2eK2dL2hLXs7w1gOyuarhrzwA4FgYIi2VobDP
- hv7QPGI/rtqU8wjXtnKjR9DRfw3f+vJVGE9wyfCIj6frKO8J6QZU8AqfVCjNENpjEjy4=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ h=Sender:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:
+ To:From:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=RimRJhO8mN/0VIbcekX4TIH+fDhZfzDhpoNRBIHOHSI=; b=B
+ cHaO3C6IjxpDueUJDAWldtbFPV02BREYrYwkpZqNhl+wFaUGtvaMN0Wnn8D+PIYdsfNJJSmO8SmDV
+ v44jzb/1jJG6JATnbGKLi2hIOB/lUsqfxqgOzaeUEV9xIx64Gg94ENqRjcshi7lYKB7SI2Cxovmt1
+ rMCF9ZAmITeotRhI=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tYpS0-0005Iz-P0 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 17 Jan 2025 16:44:05 +0000
+ id 1tYqdZ-0003Yw-UO for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 17 Jan 2025 18:00:06 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 1F3E9A4322D
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 17 Jan 2025 16:42:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C046EC4CEE4;
- Fri, 17 Jan 2025 16:43:58 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id D7AC25C63C8;
+ Fri, 17 Jan 2025 17:59:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7FDAC4CEE2;
+ Fri, 17 Jan 2025 17:59:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1737132238;
- bh=F0vkTJTkyTvfngV4uDlYkjuPGTuyhZdjL5IwXGCY0oc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=l/p07+nLpXRj0WiPsh9fF1NE7XMzh09Qa/w+Vra5F5NbsyTvdYX24AMVeFUaPRZSd
- vvgevZfpt3vgNL802WFab4d2Dt5fOPnkQ0xe+f6YvI/BggTZo+z40skRERDuuzG1B8
- C/IQN/dMFQ2WyZfEOxXwyMNs8C/gAJFNyActsP/Qp/zz3ADyoD3V5kK4r8ntz8j6tx
- iML8V788vIyGfre51L9Kkzw7gCMN9lCQZ6dP9PIOlKd9z3O4Qzhvyn15zumuydqtfb
- RrU9sKvIUtOrEbFxe9/0sCgq8H7vKpnsRPOJX597Ab5fblHTcTjVP0MVX1RxzMaYsN
- ct1VharAAT/FA==
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 17 Jan 2025 16:41:18 +0000
-Message-ID: <20250117164350.2419840-3-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.48.0.rc2.279.g1de40edade-goog
-In-Reply-To: <20250117164350.2419840-1-jaegeuk@kernel.org>
-References: <20250117164350.2419840-1-jaegeuk@kernel.org>
+ s=k20201202; t=1737136795;
+ bh=GbqeT7eeAHIjJRdLRDZggAAJcM/bUobSgiiZNrAeh2s=;
+ h=From:To:Cc:Subject:Date:From;
+ b=UJ4BLVfBc5CgoQgarhyz8frZd3QYr1vcDc2Q23SSXR+RqDZQtU/odh+ZiYIU39zNC
+ 4Goye5M2FBfXHDElyZQ7t1tD2NWBMpzpZmfcf9XIpBWH4maYz2EhpE7hLxjaKdW9Ti
+ Dm3xEBD0kdXOMipbvNS5HVNC1tSBM0ufLIFAeVkQf6CBKC3EtCxwJNQyfEKeoKXOY5
+ 7CEBYMrCHsZabraQCo0XylISR1P8O2ATNSp57I8fO0WzV5AIvXNB89q4L/mh8J4zPB
+ cZVttfxstovxydmK5i+zItsh6M/7UCwzlpHwCX1pueQUgv2Awf3n4imiO0Oj2vRDAY
+ 6+sBgdQWecUsQ==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98)
+ (envelope-from <mchehab+huawei@kernel.org>)
+ id 1tYqdM-00000006AjU-1Ray; Fri, 17 Jan 2025 18:59:52 +0100
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Date: Fri, 17 Jan 2025 18:59:29 +0100
+Message-ID: <cover.1737135484.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-X-Spam-Score: -2.6 (--)
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  1. ioctl(fd1, F2FS_IOC_DONATE_RANGE, {0,3}); 2. ioctl(fd2,
- F2FS_IOC_DONATE_RANGE, {1,2}); 3. ioctl(fd3, F2FS_IOC_DONATE_RANGE, {3,1});
- 4. echo 3 > /sys/fs/f2fs/blk/donate_caches will reclaim 3 page cache ranges,
- registered by #1, #2, and #3. 
- Content analysis details:   (-2.6 points, 6.0 required)
+ Content preview:  Hi Jon/Greg, The main goal of this RFC is to give a heads
+ up of a work I've been doing to replace the get_abi.pl script with a python
+ version. Patches 1-6 are OK to be applied: - Patch 1 changes the sort criteria
+ of the ABI generation to use alphabetic order: currently, it is *almost*
+ alphabetic, but, on some cases, it orders on a different [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [147.75.193.91 listed in bl.score.senderscore.com]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in sa-accredit.habeas.com]
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
+ [139.178.84.217 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in bl.score.senderscore.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -99,9 +101,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tYpS0-0005Iz-P0
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: add a sysfs entry to request donate
- file-backed pages
+X-Headers-End: 1tYqdZ-0003Yw-UO
+Subject: [f2fs-dev] [PATCH RFC 00/10] Improve ABI documentation generation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,136 +114,98 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+From: Mauro Carvalho Chehab via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
+ Jaegeuk Kim <mchehab+huawei@kernel.org>, James Clark <james.clark@linaro.org>,
+ linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net,
+ Johannes Berg <johannes@sipsolutions.net>, coresight@lists.linaro.org,
+ linux-arm-kernel@lists.infradead.org, Mike Leach <mike.leach@linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-1. ioctl(fd1, F2FS_IOC_DONATE_RANGE, {0,3});
-2. ioctl(fd2, F2FS_IOC_DONATE_RANGE, {1,2});
-3. ioctl(fd3, F2FS_IOC_DONATE_RANGE, {3,1});
-4. echo 3 > /sys/fs/f2fs/blk/donate_caches
+Hi Jon/Greg,
 
-will reclaim 3 page cache ranges, registered by #1, #2, and #3.
+The main goal of this RFC is to give a heads up of a work I've been doing to
+replace the get_abi.pl script with a python version.
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- Documentation/ABI/testing/sysfs-fs-f2fs |  7 +++++++
- fs/f2fs/f2fs.h                          |  2 ++
- fs/f2fs/shrinker.c                      | 27 +++++++++++++++++++++++++
- fs/f2fs/sysfs.c                         |  8 ++++++++
- 4 files changed, 44 insertions(+)
+Patches 1-6 are OK to be applied:
+- Patch 1 changes the sort criteria of the ABI generation to use alphabetic order:
+  currently, it is *almost* alphabetic, but, on some cases, it orders on a different
+  way. No changes at the content, just at the order. 
+  I wrote it mainly to use the same sort criteria as the new tool, but IMO it is
+  worth applying even before we switch to the python version.
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 3e1630c70d8a..6f9d8b8889fd 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -828,3 +828,10 @@ Date:		November 2024
- Contact:	"Chao Yu" <chao@kernel.org>
- Description:	It controls max read extent count for per-inode, the value of threshold
- 		is 10240 by default.
-+
-+What:		/sys/fs/f2fs/<disk>/donate_caches
-+Date:		December 2024
-+Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
-+Description:	It reclaims the certian file-backed pages registered by
-+		ioctl(F2FS_IOC_DONATE_RANGE).
-+		For example, writing N tries to drop N address spaces in LRU.
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 951fbc3f94c7..399ddd10a94f 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1637,6 +1637,7 @@ struct f2fs_sb_info {
- 
- 	/* control donate caches */
- 	unsigned int donate_files;
-+	unsigned int donate_caches;
- 
- 	/* basic filesystem units */
- 	unsigned int log_sectors_per_block;	/* log2 sectors per block */
-@@ -4259,6 +4260,7 @@ unsigned long f2fs_shrink_count(struct shrinker *shrink,
- 			struct shrink_control *sc);
- unsigned long f2fs_shrink_scan(struct shrinker *shrink,
- 			struct shrink_control *sc);
-+void f2fs_donate_caches(struct f2fs_sb_info *sbi);
- void f2fs_join_shrinker(struct f2fs_sb_info *sbi);
- void f2fs_leave_shrinker(struct f2fs_sb_info *sbi);
- 
-diff --git a/fs/f2fs/shrinker.c b/fs/f2fs/shrinker.c
-index 83d6fb97dcae..22f62813910b 100644
---- a/fs/f2fs/shrinker.c
-+++ b/fs/f2fs/shrinker.c
-@@ -130,6 +130,33 @@ unsigned long f2fs_shrink_scan(struct shrinker *shrink,
- 	return freed;
- }
- 
-+void f2fs_donate_caches(struct f2fs_sb_info *sbi)
-+{
-+	struct inode *inode;
-+	struct f2fs_inode_info *fi;
-+	int nfiles = sbi->donate_caches;
-+
-+	while (nfiles--) {
-+		spin_lock(&sbi->inode_lock[DONATE_INODE]);
-+		if (list_empty(&sbi->inode_list[DONATE_INODE])) {
-+			spin_unlock(&sbi->inode_lock[DONATE_INODE]);
-+			break;
-+		}
-+		fi = list_first_entry(&sbi->inode_list[DONATE_INODE],
-+					struct f2fs_inode_info, gdonate_list);
-+		list_move_tail(&fi->gdonate_list, &sbi->inode_list[DONATE_INODE]);
-+		inode = igrab(&fi->vfs_inode);
-+		spin_unlock(&sbi->inode_lock[DONATE_INODE]);
-+
-+		if (!inode)
-+			continue;
-+
-+		invalidate_inode_pages2_range(inode->i_mapping,
-+					fi->donate_start, fi->donate_end);
-+		iput(inode);
-+	}
-+}
-+
- void f2fs_join_shrinker(struct f2fs_sb_info *sbi)
- {
- 	spin_lock(&f2fs_list_lock);
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 6b99dc49f776..f81190fabdd3 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -811,6 +811,12 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 		return count;
- 	}
- 
-+	if (!strcmp(a->attr.name, "donate_caches")) {
-+		sbi->donate_caches = min(t, sbi->donate_files);
-+		f2fs_donate_caches(sbi);
-+		return count;
-+	}
-+
- 	*ui = (unsigned int)t;
- 
- 	return count;
-@@ -1030,6 +1036,7 @@ F2FS_SBI_GENERAL_RW_ATTR(max_victim_search);
- F2FS_SBI_GENERAL_RW_ATTR(migration_granularity);
- F2FS_SBI_GENERAL_RW_ATTR(migration_window_granularity);
- F2FS_SBI_GENERAL_RW_ATTR(dir_level);
-+F2FS_SBI_GENERAL_RW_ATTR(donate_caches);
- #ifdef CONFIG_F2FS_IOSTAT
- F2FS_SBI_GENERAL_RW_ATTR(iostat_enable);
- F2FS_SBI_GENERAL_RW_ATTR(iostat_period_ms);
-@@ -1178,6 +1185,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(migration_granularity),
- 	ATTR_LIST(migration_window_granularity),
- 	ATTR_LIST(dir_level),
-+	ATTR_LIST(donate_caches),
- 	ATTR_LIST(ram_thresh),
- 	ATTR_LIST(ra_nid_pages),
- 	ATTR_LIST(dirty_nats_ratio),
+- Patches 2-6 fix some ABI tag problems. They're independent of the rest and
+  can also be applied without  other patches on this series.
+
+The remaining patches (7-10) are RFC for a new tool.
+
+The new tool uses a cleaned-up version of the same algorithms I wrote in Perl,
+re-writen in Python. While doing the conversion, I got rid of some stuff that aren't
+needed anymore.
+
+The new tool has two additional changes:
+- the validate tool now detects a duplicate definition when files with the same name
+  exists on different parts of the ABI documentation (if one asks to build them altogether);
+- it fixes a bug on one of the files whose "what" keys weren't properly parsed.
+
+Patches 7 and 8 are already in good shape (IMHO).
+
+Patch 9 replaces "get_abi.pl" by "get_abi.py" exec for htmldocs/pdfdocs targets.
+It is not on its final shape, as my end goal is to do a python include and use the
+class directly there instead of calling an exec file, but such change will require
+some work (I'll likely implement an interactor at the class instead of just returning
+a big amount of text).
+
+Patch 10 is just a boilerplate to one additional functionality of the perl script that
+would require a lot of work to implement: check undefined/bad defined symbols
+at the local machine's sysfs and compare with ABI.
+
+Before getting patches 7-10 merged, I'd like to implement patch 10. This may
+take some time, as the ABI check there is not the simplest code I wrote.
+
+Yet, I'd like to get some feedback about patches 7-9 while I'm working on 
+patch 10, so, let me send what I have so far as a RFC.
+
+I hope this would make more people look at the code, as right now, we had only
+6 persons/6 patches besides me that touched the code.
+
+Mauro Carvalho Chehab (10):
+  scripts/get_abi.pl use label to better sort ABI symbols and files
+  ABI: sysfs-class-rfkill: fix kernelversion tags
+  ABI: sysfs-bus-coresight-*: fix kernelversion tags
+  ABI: sysfs-driver-dma-idxd: fix date tags
+  ABI: sysfs-fs-f2fs: fix date tags
+  ABI: sysfs-power: fix a what tag
+  [RFC] scripts: add a get_abi.py tool to generate ReST output
+  [RFC] scripts/get_abi.py: add support for symbol search
+  [RFC] docs: use get_abi.py for ABI generation
+  [RFC BOILERPLATE] scripts/get_abi.py: add support for undefined ABIs
+
+ Documentation/ABI/removed/sysfs-class-rfkill  |   2 +-
+ Documentation/ABI/stable/sysfs-class-rfkill   |  12 +-
+ .../ABI/stable/sysfs-driver-dma-idxd          |   4 +-
+ .../testing/sysfs-bus-coresight-devices-cti   |  78 +-
+ .../testing/sysfs-bus-coresight-devices-tpdm  |  52 +-
+ Documentation/ABI/testing/sysfs-fs-f2fs       |   4 +-
+ Documentation/ABI/testing/sysfs-power         |   2 +-
+ Documentation/admin-guide/abi-obsolete.rst    |   1 -
+ Documentation/admin-guide/abi-removed.rst     |   1 -
+ Documentation/admin-guide/abi-stable.rst      |   1 -
+ Documentation/admin-guide/abi-testing.rst     |   1 -
+ Documentation/sphinx/kernel_abi.py            |  10 +-
+ scripts/get_abi.pl                            |   3 +-
+ scripts/get_abi.py                            | 678 ++++++++++++++++++
+ 14 files changed, 760 insertions(+), 89 deletions(-)
+ create mode 100755 scripts/get_abi.py
+
 -- 
-2.48.0.rc2.279.g1de40edade-goog
+2.47.1
+
 
 
 
