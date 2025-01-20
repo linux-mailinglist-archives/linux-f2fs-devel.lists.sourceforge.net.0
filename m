@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC8A9A16BC8
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Jan 2025 12:46:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DBD7DA16C4D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Jan 2025 13:25:29 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tZqEI-0007Vv-VI;
-	Mon, 20 Jan 2025 11:46:06 +0000
+	id 1tZqqJ-0008G2-3w;
+	Mon, 20 Jan 2025 12:25:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tZqEH-0007Vp-HC
+ (envelope-from <chao@kernel.org>) id 1tZqqI-0008Fu-5c
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Jan 2025 11:46:05 +0000
+ Mon, 20 Jan 2025 12:25:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zeRWPw9NCQarh7TuZ01uOR0zxVQk/eU6TQkPNkkl4F0=; b=esGvfH+4m69PQxUXos5JvFmpGN
- yo4Lz4MMcts7A+BX1dGf0e4vTmKbPL2Tg4qDhCT8PrjhPWoBtGQte9ENTXfiJqFC+LDu4YYa9L0ja
- PLJwcbw26m6zZ12qv+YGh1yuKWPfZ5ENuhxfkV+a+9XPzM9cDhE7XHEOeNZYUk1WaNv4=;
+ bh=kXuhl0sVPqbzFCiNpoRoSW2l4bGz4mMl9q/+PX28WRU=; b=U0Q/opyz3YgWLtmH+MeLMniUBB
+ EPYmYjPqgVDSfIYWCUsYh+VmcwrPRiFSNI9OrPnyag4g4ZW7ghIUPWma/NVxu6X8TPQwEGyO/ABkP
+ SB64ZywXnAfbTX7yvFqoo0Zy8Q4aD0mbwJkh6po04vWGRZsSg1J/n67VF6NsN79c9ybE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,65 +31,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zeRWPw9NCQarh7TuZ01uOR0zxVQk/eU6TQkPNkkl4F0=; b=f10HTOlgHlpjrcrYpysf6t9+4D
- FNa9KGwXj2+nEzoJK9NzxKbnWPaMNwyu4bD8sZI2gAqfINekDf9yWIwCS48+tLUyi29MHGbPsrVd+
- H9rQPAGqRZ34icMGWwv1XyfTXnMEM3+XnPkApjBhzFd55GiagMdLgvOnWyj8imYLZuts=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=kXuhl0sVPqbzFCiNpoRoSW2l4bGz4mMl9q/+PX28WRU=; b=Nz3216wZQSKlVUJTg00jZkIbJX
+ QoTpJAjSxk7A+4X10YUl1e6CuMEohHiLvdYDhZ4BhBdY1qnZzAPDBhcUcbKGhWAsx1/9j9HPS58Lz
+ C6XeW9S4OA/ojOvd9wfhsUJKzYygB3TKpMsiXywx+izydPzkGvIhf3r6QtqnNLAD0c0c=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tZqEF-0007u0-EN for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Jan 2025 11:46:05 +0000
+ id 1tZqqH-0001vj-Fd for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 Jan 2025 12:25:22 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 1CE53A40E0C;
- Mon, 20 Jan 2025 11:44:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89972C4CEDD;
- Mon, 20 Jan 2025 11:45:56 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 998405C59F2;
+ Mon, 20 Jan 2025 12:24:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E662BC4CEDD;
+ Mon, 20 Jan 2025 12:25:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1737373557;
- bh=v5EFNyYmGybl5D6TEXBjTvplmgaf3jTdVmghx0iQKn8=;
+ s=k20201202; t=1737375910;
+ bh=sPS18muDCtBOUW0OqUdtnsEKIul3j7CdK5hJRv/QnHU=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=E0oxIIQIdzn3PfKwmCFtewHpsdJpi2edxPMv0ffGO1INQksQ2q9GSP6YBcGywAT4o
- JxmgdeJFDcOTJZa8ZK5QGsEtMix2G8qC5tu3OZ6apPb2OgoPwzCbMTg7AAaU9Seanr
- UaFLJpMr6hawCj7XoE7kxKZcfLsHHhOIDXVMlWnyGhWUSRs1PP/apmVlWA+zLRe2Aj
- f+ErxkY88mUnBLkOf14hVhTKdSBQ53ABOTb4h05LwenVnUCCg2t7voFqJX+jiDAHEn
- 86Us8y8DmXzXco/3OFN3yhbfW7RCHRu00AAOSWvfvLSwq4S4zQdYC+3GvfzmHW80Qx
- wPqWZup+PqqiA==
-Message-ID: <77fa4633-f7db-4daa-a9e1-3fdb5bf9dd1d@kernel.org>
-Date: Mon, 20 Jan 2025 19:45:54 +0800
+ b=Ld2MY9RNACM0BYN7MwrUyjoAVkYhMrhcCEizUfuiVE5qyaPmXhg2JMtReY0mBUTfx
+ d6SUtbeydLiYGYHm7emnpVI1C/nyqaUVcM/tcfDmQuMHwA36ydOycWrHdVOdOgVpKX
+ IH8pc1AQ6t3DUZ5/aiv8XOLXeVb60k6LFzOnpjyRlLeEuCFrJnAhtCUsl31MuhTymy
+ AxXExtFNQjVr0gc7QC9NP/OYGi73J1Ogns18MwuHmwxpWuHhhvDBGjRTq3nOCn2rsE
+ uZPn/DQtno8hoLVPDlBz7QFyOp24UePZiZyyWPOeaKUkZ5BfiqAS+UVFPPYO5/AY1P
+ 0a6CJb4Et8xpg==
+Message-ID: <4270b213-e4f9-46b2-958a-df3dbaaed969@kernel.org>
+Date: Mon, 20 Jan 2025 20:25:08 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Chunhai Guo <guochunhai@vivo.com>, jaegeuk@kernel.org
-References: <20250119140834.1061145-1-guochunhai@vivo.com>
+References: <20250109122755.177926-1-guochunhai@vivo.com>
 Content-Language: en-US
-In-Reply-To: <20250119140834.1061145-1-guochunhai@vivo.com>
-X-Spam-Score: -5.5 (-----)
+In-Reply-To: <20250109122755.177926-1-guochunhai@vivo.com>
+X-Spam-Score: -8.2 (--------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 1/19/25 22:08,
- Chunhai Guo wrote: > fstrim may miss candidates
- that need to be discarded, as shown in the > examples below. > > The root
- cause is that when cpc->reason is set with CP_DISCARD, > add [...] 
- Content analysis details:   (-5.5 points, 6.0 required)
+ Content preview:  On 1/9/25 20:27, Chunhai Guo wrote: > During a checkpoint,
+ the current active segment X may not be handled > properly. This occurs when
+ segment X has 0 valid blocks and a non-zero How does this happen? Allocator
+ selects a dirty segment w/ SSR? and the left valid data blocks were deleted
+ later before following checkpoint? 
+ Content analysis details:   (-8.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in bl.score.senderscore.com]
+ [139.178.84.217 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in sa-trusted.bondedsender.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [139.178.84.217 listed in sa-accredit.habeas.com]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -98,9 +99,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tZqEF-0007u0-EN
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix missing discard candidates in
- fstrim
+X-Headers-End: 1tZqqH-0001vj-Fd
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix missing discard for active
+ segments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,94 +120,79 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 1/19/25 22:08, Chunhai Guo wrote:
-> fstrim may miss candidates that need to be discarded, as shown in the
-> examples below.
-> 
-> The root cause is that when cpc->reason is set with CP_DISCARD,
-> add_discard_addrs() expects that ckpt_valid_map and cur_valid_map have
-> been synced by seg_info_to_raw_sit() [1], and it tries to find the
-> candidates based on ckpt_valid_map and discard_map. However,
-> seg_info_to_raw_sit() does not actually run before
-> f2fs_exist_trim_candidates(), resulting in the failure.
-> 
-> The code logic can be simplified for all cases by finding all the
-> discard blocks based only on discard_map. This might result in more
-> discard blocks being sent for the segment during the first checkpoint
-> after mounting, which were originally expected to be sent only in
-> fstrim. Regardless, these discard blocks should eventually be sent, and
-> the simplified code makes sense in this context.
-> 
-> root# cp testfile /f2fs_mountpoint
-> 
-> root# f2fs_io fiemap 0 1 /f2fs_mountpoint/testfile
-> Fiemap: offset = 0 len = 1
->          logical addr.    physical addr.   length           flags
-> 0       0000000000000000 0000000406a00000 000000003d800000 00001000
-> 
-> root# rm /f2fs_mountpoint/testfile
-> 
-> root# fstrim -v -o 0x406a00000 -l 1024M /f2fs_mountpoint -- no candidate is found
-> /f2fs_mountpoint: 0 B (0 bytes) trimmed
-> 
-> Relevant code process of the root cause:
-> f2fs_trim_fs()
->      f2fs_write_checkpoint()
->          ...
->          if (cpc->reason & CP_DISCARD) {
->                  if (!f2fs_exist_trim_candidates(sbi, cpc)) {
->                      unblock_operations(sbi);
->                      goto out; // No candidates are found here, and it exits.
->                  }
->              ...
->          }
-> 
-> [1] Please refer to commit d7bc2484b8d4 ("f2fs: fix small discards not
-> to issue redundantly") for the relationship between
-> seg_info_to_raw_sit() and add_discard_addrs().
-> 
-> Fixes: 25290fa5591d ("f2fs: return fs_trim if there is no candidate")
-> Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
-> ---
-> v1: https://lore.kernel.org/linux-f2fs-devel/20250102101310.580277-1-guochunhai@vivo.com/
-> v1->v2: Find all the discard blocks based only on discard_map in add_discard_addrs().
-> ---
->   fs/f2fs/segment.c | 5 +----
->   1 file changed, 1 insertion(+), 4 deletions(-)
-> 
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 13ee73a3c481..25ea892a42dd 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -2074,8 +2074,6 @@ static bool add_discard_addrs(struct f2fs_sb_info *sbi, struct cp_control *cpc,
->   {
->   	int entries = SIT_VBLOCK_MAP_SIZE / sizeof(unsigned long);
->   	struct seg_entry *se = get_seg_entry(sbi, cpc->trim_start);
-> -	unsigned long *cur_map = (unsigned long *)se->cur_valid_map;
-> -	unsigned long *ckpt_map = (unsigned long *)se->ckpt_valid_map;
->   	unsigned long *discard_map = (unsigned long *)se->discard_map;
->   	unsigned long *dmap = SIT_I(sbi)->tmp_map;
->   	unsigned int start = 0, end = -1;
-> @@ -2100,8 +2098,7 @@ static bool add_discard_addrs(struct f2fs_sb_info *sbi, struct cp_control *cpc,
->   
->   	/* SIT_VBLOCK_MAP_SIZE should be multiple of sizeof(unsigned long) */
->   	for (i = 0; i < entries; i++)
-> -		dmap[i] = force ? ~ckpt_map[i] & ~discard_map[i] :
-> -				(cur_map[i] ^ ckpt_map[i]) & ckpt_map[i];
-> +		dmap[i] = ~discard_map[i];
+On 1/9/25 20:27, Chunhai Guo wrote:
+> During a checkpoint, the current active segment X may not be handled
+> properly. This occurs when segment X has 0 valid blocks and a non-zero
 
-discard is critical, we need more sanity check here, maybe:
+How does this happen? Allocator selects a dirty segment w/ SSR? and the
+left valid data blocks were deleted later before following checkpoint?
 
-/* never issue discard to valid data's block address */
-f2fs_bug_on(sbi, (cur_map[i] ^ discard_map[i]) & cur_map[i]);
-
-Can you please check this?
+If so, pending discard count in that segment should be in range of (0, 512)?
 
 Thanks,
 
+> number of discard blocks, for the following reasons:
+> 
+> locate_dirty_segment() does not mark any active segment as a prefree
+> segment. As a result, segment X is not included in dirty_segmap[PRE], and
+> f2fs_clear_prefree_segments() skips it when handling prefree segments.
+> 
+> add_discard_addrs() skips any segment with 0 valid blocks, so segment X is
+> also skipped.
+> 
+> Consequently, no `struct discard_cmd` is actually created for segment X.
+> However, the ckpt_valid_map and cur_valid_map of segment X are synced by
+> seg_info_to_raw_sit() during the current checkpoint process. As a result,
+> it cannot find the missing discard bits even in subsequent checkpoints.
+> Consequently, the value of sbi->discard_blks remains non-zero. Thus, when
+> f2fs is umounted, CP_TRIMMED_FLAG will not be set due to the non-zero
+> sbi->discard_blks.
+> 
+> Relevant code process:
+> 
+> f2fs_write_checkpoint()
+>      f2fs_flush_sit_entries()
+>           list_for_each_entry_safe(ses, tmp, head, set_list) {
+>               for_each_set_bit_from(segno, bitmap, end) {
+>                   ...
+>                   add_discard_addrs(sbi, cpc, false); // skip segment X due to its 0 valid blocks
+>                   ...
+>                   seg_info_to_raw_sit(); // sync ckpt_valid_map with cur_valid_map for segment X
+>                   ...
+>               }
+>           }
+>      f2fs_clear_prefree_segments(); // segment X is not included in dirty_segmap[PRE] and is skipped
+> 
+> Since add_discard_addrs() can handle active segments with non-zero valid
+> blocks, it is reasonable to fix this issue by allowing it to also handle
+> active segments with 0 valid blocks.
+> 
+> Fixes: b29555505d81 ("f2fs: add key functions for small discards")
+> Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
+> ---
+> v1: https://lore.kernel.org/linux-f2fs-devel/20241203065108.2763436-1-guochunhai@vivo.com/
+> v1->v2:
+>   - Modify the commit message to make it easier to understand.
+>   - Add fixes to the commit.
+> ---
+>   fs/f2fs/segment.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 86e547f008f9..13ee73a3c481 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -2090,7 +2090,9 @@ static bool add_discard_addrs(struct f2fs_sb_info *sbi, struct cp_control *cpc,
+>   		return false;
 >   
->   	while (force || SM_I(sbi)->dcc_info->nr_discards <=
->   				SM_I(sbi)->dcc_info->max_discards) {
+>   	if (!force) {
+> -		if (!f2fs_realtime_discard_enable(sbi) || !se->valid_blocks ||
+> +		if (!f2fs_realtime_discard_enable(sbi) ||
+> +			(!se->valid_blocks &&
+> +				!IS_CURSEG(sbi, cpc->trim_start)) ||
+>   			SM_I(sbi)->dcc_info->nr_discards >=
+>   				SM_I(sbi)->dcc_info->max_discards)
+>   			return false;
 
 
 
