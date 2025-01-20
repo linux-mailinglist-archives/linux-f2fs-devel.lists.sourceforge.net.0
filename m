@@ -2,106 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60133A16659
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Jan 2025 06:27:34 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97668A167F4
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Jan 2025 09:12:49 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tZkJq-0002SU-Cy;
-	Mon, 20 Jan 2025 05:27:26 +0000
+	id 1tZmtj-00034I-27;
+	Mon, 20 Jan 2025 08:12:39 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tZkJp-0002SM-1B
- for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Jan 2025 05:27:25 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3aQWOZwkbAO4iopaQbbUhQffYT.WeeWbUkiUhSedjUdj.Sec@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1tZmth-00034A-OT for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 Jan 2025 08:12:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SC/7SQWWSDG50DuYUJsbUuo+hkRZV4L8GHYuMNBlO+o=; b=LWtwJ4xmC5EXRwU0r/VvngfwfT
- pkYHgOqKzy3P+IJ5n9e9v9Oo5WgLcrbBdmRfcE9WtXTbaVTsimnareV/kaW1mAdmwd1LasOtXVBKy
- /qNM/0crz88aJZfdz53gBMGWWACtxLEQ+4yiokrEwxVcdpweL4gxyLTqsfRGWOo76ZX0=;
+ bh=0jHtGaaurlw347aA65AxAWQzOjmETotxR6X8Ce/SJCI=; b=UYBJR0ENErP9G3hBKuE7QvSNxl
+ YN64LxIfWnFX93uMLRFgEYV2mwV+id4b7tQTAyn6LG7RcRL5AoLiP3WGlgzTAagsCshOR4pu17lcz
+ vsFZZTZm8PVJ+bQ1tp7FRbGM+ZfvdDBWnGJjhRalquWM/dW9OBXkpIs6xN5wYZuftKUM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=SC/7SQWWSDG50DuYUJsbUuo+hkRZV4L8GHYuMNBlO+o=; b=fFF6M0Wv5/dhJlmJj9eNvKWI5w
- D8wt9Z+e0b2MoRP9ZuWJgSI9wnZGKgaLqsuDo4fyVmXze9NJ5GTY7vycUBXUdhGqpeCrmRzMwTAc+
- JYG4lHXkx3sO/3Aap+zRNWAbP3fpWmhSW0uxLgLhs38GcUj0cT+95GfDReZy9PM2Yo6A=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=0jHtGaaurlw347aA65AxAWQzOjmETotxR6X8Ce/SJCI=; b=S
+ SrT8m2zpHW30D3Ud6NT9akT5vaxGLTRtgW6BueFFkjEUTavuU1Edy6cG+zjOgKwfhdA+psmMsdTEQ
+ 5GbIYeyMiUhaIt2Z1SHz8XT3bVNM6yjq5FkjbupQYy4tGnHTS3bkM4EY6RGkMhKucVdPP1vfDnAeg
+ vtu2SstCg7LK2XC4=;
+Received: from mail-il1-f197.google.com ([209.85.166.197])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tZkJo-0008DB-CO for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Jan 2025 05:27:24 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 00AB8A40B3B
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1tZmth-00080M-19 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 Jan 2025 08:12:37 +0000
+Received: by mail-il1-f197.google.com with SMTP id
+ e9e14a558f8ab-3ce81a40f5cso69421025ab.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 20 Jan 2025 05:25:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26D09C4CEDD;
- Mon, 20 Jan 2025 05:27:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1737350833;
- bh=pzAwjPJxS6Eln+ye2RNva3/5+EU2r17j4VQfvjjRO5s=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=cuFrJRGv7Hp7+j1UEoNd1I5hRtHApQtO/QLbyiiXF6dzLnUGkVLVp6r7E34wN03N1
- Pvf3JMIEkrFZBXDPHiF9X3NnGKI3vxUCvU4YpoKPYOg6wk7n/AMutjDvY0bhXHINg8
- LmdzAPOVmYaI3nhx9jzYK4nkZaXvAUwgZFxgkiO8huJp1ClBT39YzYu3sO4hTRyAE9
- ifrgo5LTNaMyAZkZSE6Hh19flFcZaz9a0osmIFer4PyWnrVwntGF2CB5bA65OuG9hd
- POPItpvP4CoCe909tf4AkQpg/9JfxKR8YoJ2n/2kXjk8k3BcU/zIu4BTGRGhUV4gzg
- Bn9a1qPYHteLA==
-Message-ID: <4e1348cc-9b91-40f0-b740-d26530fac6ce@kernel.org>
-Date: Mon, 20 Jan 2025 13:27:09 +0800
+ Mon, 20 Jan 2025 00:12:36 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737360746; x=1737965546;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=0jHtGaaurlw347aA65AxAWQzOjmETotxR6X8Ce/SJCI=;
+ b=X86r5oGfGpof/SI/r6iJL6mUdRUCRkNZRXQIeuVczlhaOCKnRuGOzKmvgExDt9Shnr
+ yt/RApXaukcid5499E5Vuj6KMVwNd2Idf5WFgO6JbeXCaMkgK4wXFezCbTgwry8auAgw
+ xZA7BQklM2dI+b2H/epJ6rtLndY89p7ITz9b23IbeOTyE4WqSiXrQE4qCPSp6+0bcW1h
+ lamBOMGydEnA0yiqlQSZTh/0oojZSzKs7WGkfUkoMje0NzOcN9k+nd2OaSXGAqtphck6
+ IF084dQeGp3NZ+rJ5VpSR6NXnlEp6Ly6Tk3Y3lbDimjqRQVJRM4XUsr1woW5yEg9swGL
+ oUww==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUUzJ+TlZOYbjBd7uV8lTThpyoZ63bmKV02iNv29zQuypqbQDVo6lIz/dY7HWix3LCZDvWi+luU6bsz60gj6BkF@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yzxa4UGtUuyqSeJoTVDtccvw0dSKVpkheypOUlULpyiRUP9O9MO
+ mJK6QLh1QHOdFa2M/xQHxvceEh16ev/72e6W9FdAcetUrnErCCK+ur45lAqMEw1boaSS3BxXABS
+ 9GamYhHReaHJCidV5bwBZSw6giqE1joS3gniGe2MVsCLKvCqfcAf05D0=
+X-Google-Smtp-Source: AGHT+IFLtXFG9mvvSoLBFWxrlHR8zX/Z+Lco4OyYIb2C6MtInQaHoKI05Mm15k23HXfZCo4QncJ5gcRFnsyhevrKAFmP0ya76xa4
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20250117220955.2482817-1-jaegeuk@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20250117220955.2482817-1-jaegeuk@kernel.org>
-X-Spam-Score: -5.5 (-----)
+X-Received: by 2002:a05:6e02:2492:b0:3cf:5c1:5ff8 with SMTP id
+ e9e14a558f8ab-3cf744b936cmr108125335ab.19.1737360745864; Mon, 20 Jan 2025
+ 00:12:25 -0800 (PST)
+Date: Mon, 20 Jan 2025 00:12:25 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <678e0569.050a0220.303755.006b.GAE@google.com>
+From: syzbot <syzbot+listb3ca2fa8712aa4561883@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 1/18/25 06:09, Jaegeuk Kim via Linux-f2fs-devel wrote:
- > In f2fs_new_inode(), if we fail to get a new inode, we go iput(), followed
- by > f2fs_evict_inode(). If the inode is not marked as bad, it'll [...] 
- Content analysis details:   (-5.5 points, 6.0 required)
+ Content preview:  Hello f2fs maintainers/developers, This is a 31-day syzbot
+ report for the f2fs subsystem. All related reports/information can be found
+ at: https://syzkaller.appspot.com/upstream/s/f2fs During the period, 3 new
+ issues were detected and 0 were fixed. In total, 13 issues are still open
+ and 49 have already been fixed. 
+ Content analysis details:   (0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [147.75.193.91 listed in sa-accredit.habeas.com]
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in bl.score.senderscore.com]
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tZkJo-0008DB-CO
-Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid trying to get invalid block
- address
+ [209.85.166.197 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.166.197 listed in sa-trusted.bondedsender.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.197 listed in wl.mailspike.net]
+X-Headers-End: 1tZmth-00080M-19
+Subject: [f2fs-dev] [syzbot] Monthly f2fs report (Jan 2025)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,52 +117,49 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 1/18/25 06:09, Jaegeuk Kim via Linux-f2fs-devel wrote:
-> In f2fs_new_inode(), if we fail to get a new inode, we go iput(), followed by
-> f2fs_evict_inode(). If the inode is not marked as bad, it'll try to call
-> f2fs_remove_inode_page() which tries to read the inode block given node id.
-> But, there's no block address allocated yet, which gives a chance to access
-> a wrong block address, if the block device has some garbage data in NAT table.
-> 
-> We need to make sure NAT table should have zero data for all the unallocated
-> node ids, but also would be better to take this unnecessary path as well.
-> Let's mark the faild inode as bad.
-> 
+Hello f2fs maintainers/developers,
 
-Needs a fixes line?
+This is a 31-day syzbot report for the f2fs subsystem.
+All related reports/information can be found at:
+https://syzkaller.appspot.com/upstream/s/f2fs
 
-Fixes: 0abd675e97e6 ("f2fs: support plain user/group quota")
+During the period, 3 new issues were detected and 0 were fixed.
+In total, 13 issues are still open and 49 have already been fixed.
 
-Otherwise, it looks good to me.
+Some of the still happening issues:
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Ref Crashes Repro Title
+<1> 1231    Yes   INFO: task hung in f2fs_balance_fs
+                  https://syzkaller.appspot.com/bug?extid=8b85865808c8908a0d8c
+<2> 107     Yes   WARNING in f2fs_unlink
+                  https://syzkaller.appspot.com/bug?extid=b01a36acd7007e273a83
+<3> 61      No    INFO: task hung in f2fs_file_open
+                  https://syzkaller.appspot.com/bug?extid=6b03a52da637aa5db978
+<4> 37      Yes   WARNING in f2fs_rename2
+                  https://syzkaller.appspot.com/bug?extid=82064afd8bd59070fc22
+<5> 12      No    kernel BUG in new_curseg (2)
+                  https://syzkaller.appspot.com/bug?extid=15669ec8c35ddf6c3d43
+<6> 7       No    WARNING: locking bug in f2fs_getxattr (2)
+                  https://syzkaller.appspot.com/bug?extid=44090b62afaabafe828a
+<7> 6       Yes   UBSAN: array-index-out-of-bounds in inline_xattr_addr
+                  https://syzkaller.appspot.com/bug?extid=e4876215632c2d23b481
 
-Thanks,
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
->   fs/f2fs/namei.c | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-> index 57d46e1439de..a278c7da8177 100644
-> --- a/fs/f2fs/namei.c
-> +++ b/fs/f2fs/namei.c
-> @@ -341,6 +341,7 @@ static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
->   	trace_f2fs_new_inode(inode, err);
->   	dquot_drop(inode);
->   	inode->i_flags |= S_NOQUOTA;
-> +	make_bad_inode(inode);
->   	if (nid_free)
->   		set_inode_flag(inode, FI_FREE_NID);
->   	clear_nlink(inode);
+To disable reminders for individual bugs, reply with the following command:
+#syz set <Ref> no-reminders
 
+To change bug's subsystems, reply with:
+#syz set <Ref> subsystems: new-subsystem
+
+You may send multiple commands in a single email message.
 
 
 _______________________________________________
