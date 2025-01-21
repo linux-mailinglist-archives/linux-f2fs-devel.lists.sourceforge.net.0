@@ -2,96 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 042F5A18268
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C8BDA1826B
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Jan 2025 18:00:31 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1taHc1-0005Bw-EC;
-	Tue, 21 Jan 2025 17:00:24 +0000
+	id 1taHc2-0000Lb-S9;
+	Tue, 21 Jan 2025 17:00:26 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1taHc0-0005Bo-68
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1taHc1-0000LT-EM
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Jan 2025 17:00:23 +0000
+ Tue, 21 Jan 2025 17:00:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tU68BosziqlsRNmnir16Gne8AwFU9S1Kjldcmemu4u0=; b=OfMHCV9V43LOCey6aS/DKYuDei
- EHnQ+qRY+0aOcSY0GVV3W3fEMDi6a8EAXHd70E3nrOlvVGlUdDiPFdLWgCybvXSM7euE90oNjv8k+
- 73bukDOrddm9xdsYSe4h2GvMo4jnveTWYMbq8YLlQ9YeLhHGbgORWAdNCWkubFXfuMGc=;
+ bh=OjUB9Z2nYciyj9oa1AoI4iJtrPe5OYkooz28uiqtm9M=; b=Zivyz4yIdPnYJ249pMk5UVCmoT
+ ajXFUGMhozGjmvAgN+u4vMFU/WZrZy33B6cNcT1VheyaVN5z0/Yf6C/5nR2XVuTRbu7FjE7QwHgac
+ wMsGpHw0T4wYqwdSGCHX0IQhAE5VJMcDBsV8PaANrYbjfwFpbIKWaZF7h/tN87miS27E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tU68BosziqlsRNmnir16Gne8AwFU9S1Kjldcmemu4u0=; b=RXX9iRatf8SD196x3n5WPDaMJb
- AXvjVG7AQuV2osXqtPRY0b3szpskv2KxYyfIcmNodwmGcUaG+0CyiS57f6hOP29Gz/vJUr/NsS9xA
- aTnBkaSWl+OIwr3xshhq1EzmP4kao+0CON3e55RBunZyKnKpleoCbHK+a/KBrv5iDdaw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=OjUB9Z2nYciyj9oa1AoI4iJtrPe5OYkooz28uiqtm9M=; b=C40QAkGQg8hFamG+mjLXexxf2W
+ XRcSoIqDYUkF5bnaFI508ULtMWMmPoJ7DZvli2t7Cnvtlt86+5eE33N+f6kwfaORqA+kAUAS/3OJV
+ HToutChTf8dMjii9rVc2DCO7Rt5XggUtSRgDWZn/nKGZhN45Yhx4CpX72nB/XGSDSZZo=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1taHby-0005k8-Vb for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Jan 2025 17:00:23 +0000
+ id 1taHc0-0005kH-OW for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 21 Jan 2025 17:00:25 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 2F8E45C5AC8
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 21 Jan 2025 16:59:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 517D7C4CEDF;
- Tue, 21 Jan 2025 17:00:12 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 83339A41DBC;
+ Tue, 21 Jan 2025 16:58:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4961C4CEE6;
+ Tue, 21 Jan 2025 17:00:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1737478812;
- bh=Yrfr2RwBD67uJAD5IUrw6DIO25JQZMHl277q1iw0o4s=;
+ s=k20201202; t=1737478813;
+ bh=jONEZRcx/K7eHrTIo0CVH1iksGCFRlswlFc+4BaWmYA=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=dBGqWCDqx7LuP2dQlLLxMIqqsOOuD9IJJfLGB1+ubcIIdEh0FvEKnwfVxyYQ2xR9N
- UEMFHYC7NPqYvH0OmdOEshfMj+mPOH337OZL/nm57fh9GExYmGN2fdYNBJy9QQ/wgI
- KNdsKbZap4M7hzM30MUXE9q3jyTcWoDBJP9p4qmrad4MHm75rvNL49W0bPVGRrhVl5
- V2iNK4EQVsdmsLhvcI1VO01TFml/At5urb71KVB1FccOPMcPLfQ4bnZkqGt2cfev8P
- +cK5aBVx8c88KsXsSSHIIZzB8fAI57yCKPAlp5hOb1O8SsMsulb3T/S+6qUvDOnD7c
- TscyN8/gkS1zA==
+ b=sCbbYEQr1Z8AehoaJGIZ7nuUC70bXTB7kuUH5aSQCbxbQ/2PB5N9LKfCrHB8cp9yK
+ aghvOUNKHEKNEQVZpYq/+2fZ2rJBRz9PF3g/fFwOlUcFQ7AOnvUCc4xiCqBHwQRBFH
+ giCFBJvGSh9BPwPjTP56Czz/Z3KVFXRs1uaYMbzGaffQYkF7x9pNK1Rmp3dZk8VMS8
+ Uw4RCDOazy49iC00euGmdBIhyGUBkGFCf6L2tZDOp/VvngBZtpE6c+hcxhbg4ZwzvA
+ W3Z6Z8h6yONsco7Hyq4FR8MY6CDa9b4hxdp9Hkl+AELh9IB733xMT7dJ+eFsTSS6BS
+ 3Ebjm6mEmESaw==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- AEF93380AA75; Tue, 21 Jan 2025 17:00:37 +0000 (UTC)
+ 3410E380AA75; Tue, 21 Jan 2025 17:00:39 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <173747883624.55169.5980716764876460895.git-patchwork-notify@kernel.org>
-Date: Tue, 21 Jan 2025 17:00:36 +0000
-References: <20250117220955.2482817-1-jaegeuk@kernel.org>
-In-Reply-To: <20250117220955.2482817-1-jaegeuk@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: -8.2 (--------)
+Message-Id: <173747883774.55169.9141276708415158056.git-patchwork-notify@kernel.org>
+Date: Tue, 21 Jan 2025 17:00:37 +0000
+References: <20250120111941.191621-1-chao@kernel.org>
+In-Reply-To: <20250120111941.191621-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
+X-Spam-Score: -5.5 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 17 Jan 2025 22:09:55 +0000 you
- wrote: > In f2fs_new_inode(), if we fail to get a new inode, we go iput(),
- followed by > f2fs_evict_inode(). If the inode is not marked as bad, it'll
- try to call [...] 
- Content analysis details:   (-8.2 points, 6.0 required)
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 20 Jan 2025 19:19:40 +0800 you
+ wrote: > syzbot reported a f2fs bug as below: > > [ cut here ] > kernel BUG
+ at fs/f2fs/gc.c:373! > CPU: 0 UID: 0 PID: 5316 Comm: syz.0.0 [...] 
+ Content analysis details:   (-5.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ [147.75.193.91 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [147.75.193.91 listed in sa-accredit.habeas.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
@@ -100,9 +98,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1taHby-0005k8-Vb
-Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid trying to get invalid block
- address
+X-Headers-End: 1taHc0-0005kH-OW
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: fix to avoid return invalid mtime
+ from f2fs_get_section_mtime()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,32 +115,46 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: syzbot+b9972806adbe20a910eb@syzkaller.appspotmail.com, jaegeuk@kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This patch was applied to jaegeuk/f2fs.git (dev)
+This series was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Fri, 17 Jan 2025 22:09:55 +0000 you wrote:
-> In f2fs_new_inode(), if we fail to get a new inode, we go iput(), followed by
-> f2fs_evict_inode(). If the inode is not marked as bad, it'll try to call
-> f2fs_remove_inode_page() which tries to read the inode block given node id.
-> But, there's no block address allocated yet, which gives a chance to access
-> a wrong block address, if the block device has some garbage data in NAT table.
+On Mon, 20 Jan 2025 19:19:40 +0800 you wrote:
+> syzbot reported a f2fs bug as below:
 > 
-> We need to make sure NAT table should have zero data for all the unallocated
-> node ids, but also would be better to take this unnecessary path as well.
-> Let's mark the faild inode as bad.
+> ------------[ cut here ]------------
+> kernel BUG at fs/f2fs/gc.c:373!
+> CPU: 0 UID: 0 PID: 5316 Comm: syz.0.0 Not tainted 6.13.0-rc3-syzkaller-00044-gaef25be35d23 #0
+> RIP: 0010:get_cb_cost fs/f2fs/gc.c:373 [inline]
+> RIP: 0010:get_gc_cost fs/f2fs/gc.c:406 [inline]
+> RIP: 0010:f2fs_get_victim+0x68b1/0x6aa0 fs/f2fs/gc.c:912
+> Call Trace:
+>  <TASK>
+>  __get_victim fs/f2fs/gc.c:1707 [inline]
+>  f2fs_gc+0xc89/0x2f60 fs/f2fs/gc.c:1915
+>  f2fs_ioc_gc fs/f2fs/file.c:2624 [inline]
+>  __f2fs_ioctl+0x4cc9/0xb8b0 fs/f2fs/file.c:4482
+>  vfs_ioctl fs/ioctl.c:51 [inline]
+>  __do_sys_ioctl fs/ioctl.c:906 [inline]
+>  __se_sys_ioctl+0xf5/0x170 fs/ioctl.c:892
+>  do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+>  do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
+>  entry_SYSCALL_64_after_hwframe+0x77/0x7f
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: avoid trying to get invalid block address
-    https://git.kernel.org/jaegeuk/f2fs/c/e02938613eb2
+  - [f2fs-dev,1/2] f2fs: fix to avoid return invalid mtime from f2fs_get_section_mtime()
+    https://git.kernel.org/jaegeuk/f2fs/c/75fe3d484897
+  - [f2fs-dev,2/2] f2fs: procfs: show mtime in segment_bits
+    https://git.kernel.org/jaegeuk/f2fs/c/46bbac0db377
 
 You are awesome, thank you!
 -- 
