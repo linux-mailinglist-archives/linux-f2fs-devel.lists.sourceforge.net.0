@@ -2,108 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C304FA19DD6
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Jan 2025 06:03:11 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72AA0A19EBC
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Jan 2025 08:14:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tapMs-0002Sd-VZ;
-	Thu, 23 Jan 2025 05:03:02 +0000
+	id 1tarQA-0002n3-MZ;
+	Thu, 23 Jan 2025 07:14:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kmjldy@loveyournewgreenhome.com>) id 1tapMp-0002SM-ON
+ (envelope-from <huangjianan@xiaomi.com>) id 1tarQA-0002mw-1p
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Jan 2025 05:02:59 +0000
+ Thu, 23 Jan 2025 07:14:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Date:Subject:To:From:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gJxkAyIn77PQOhX01r8TO2a4bj59KyM7DQFPjrIt45U=; b=U077HiKXIa7C3aiBT7nYKcG4A2
- ChSEYQ7yJidY/uwhjQdzc24KxypCZPi5r9n/AyjgL3Z0u/ypFbpm6TeuGHbWs3TWQi0dG9hEGPEjQ
- 9LVjZu+reR+BFYUnpxIkzzDRy5xpVJimtJE+FUgqk5K+9CrkEaYm0yaH/yxYeWyBM60I=;
+ bh=znQ83vYfgDLoD00O0W+/20NyZyhbsP6lOfbQMEmUQBU=; b=JfbQ66mkccMh/bEbaeInGKwDcK
+ hGEg8Vays0ae7M3jG2YsS5cPD1T9n0iAF5VsxRPkDvUy/RXRi6Iu9EY58LzKPsk4n3rzwGQLvPnLV
+ YDFm3B0nhbpyboDKTDqyOcGf5mxYNOFI7N/j3Yr9Enr33zoyA9fCq0rNR0gi4KpjhySQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Subject:To:From:
- Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=gJxkAyIn77PQOhX01r8TO2a4bj59KyM7DQFPjrIt45U=; b=h
- prod19Qp0bpYAMV0mkjbdzGWogy68qv+0/TFlSeEcw71y38ZZxD9BazS2OhmbFBs32Q0XSYQROLnC
- BU5fSrNdbTzPbO3KjIooHjYESyoVR/4Ng4ftzvkmM6WhMXL23IqYTwv2VCC3uMtLRQT27vInuaBxu
- fVYC4L5Z+0WdolSc=;
-Received: from v157-7-142-223.myvps.jp ([157.7.142.223]
- helo=loveyournewgreenhome.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tapMo-0003bR-1l for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Jan 2025 05:02:59 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=default;
- d=loveyournewgreenhome.com; 
- h=Message-ID:From:To:Subject:Date:MIME-Version:Content-Type:
- Content-Transfer-Encoding; i=kmjldy@loveyournewgreenhome.com;
- bh=gJxkAyIn77PQOhX01r8TO2a4bj59KyM7DQFPjrIt45U=;
- b=wPzrcUN57YiTDzm7f3v+2lzX5pHVjmn4D72/v8Q9y+sfV3PjzZmt3Ax3nkZ1AqeaFFxDEhAggjhL
- iUYqCy64pvHoiLfrVWvabrJMJTNLlgB2FlOcPKm2+5CDiYg8Lbp45ndPc+Vqw+ME3HuZBzDhXWdi
- OuFrCkEw39QEDkNTGKU=
-Message-ID: <9718e6eb626bb6b4578635d935542f40@loveyournewgreenhome.com>
-From: "$B%4!<%k%I%]%$%s%H%+!<%I!&%W%i%9(B" <kmjldy@loveyournewgreenhome.com>
-To: linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Date: Thu, 23 Jan 2025 12:42:25 +0800
+ List-Owner:List-Archive; bh=znQ83vYfgDLoD00O0W+/20NyZyhbsP6lOfbQMEmUQBU=; b=L
+ EXCKz6JCUROxVW4awA0bCZfw7OvRxZ3dEvnQVD8gA9la/CUThrKjwPLllSQ2eCUIbGALew/nTBV+Z
+ wthaM0Ekkf2xo4UZjnjcIxZwcSTubN/aqyUvim9sKppOLdrI/cQC6OYcsrZuyqqehdv6moH2RVsY2
+ KWOCnePbNMv0urJc=;
+Received: from outboundhk.mxmail.xiaomi.com ([207.226.244.122])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1tarQ8-0000aS-6m for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 23 Jan 2025 07:14:33 +0000
+X-CSE-ConnectionGUID: 33F8P/r9SuOQculHWvQUTg==
+X-CSE-MsgGUID: fsJpJdfeQyi1PQl6b1AImg==
+X-IronPort-AV: E=Sophos;i="6.13,227,1732550400"; d="scan'208";a="131114153"
+To: <linux-f2fs-devel@lists.sourceforge.net>, <chao@kernel.org>,
+ <jaegeuk@kernel.org>
+Date: Thu, 23 Jan 2025 15:14:17 +0800
+Message-ID: <20250123071417.253019-1-huangjianan@xiaomi.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Spam-Score: 6.8 (++++++)
+X-Originating-IP: [10.237.8.164]
+X-ClientProxiedBy: BJ-MBX17.mioffice.cn (10.237.8.137) To YZ-MBX05.mioffice.cn
+ (10.237.88.125)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has identified this incoming email as possible spam.  The original
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: $B$$$D$b(B
- $B%4!<%k%I%]%$%s%H%+!<%I!&%W%i%9$r$4MxMQ$$$?$@$-!"@?$K$"$j$,
- $H$&$4$6$$$^$9!#(B
- $B(, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (, (,
- (B $B!z(B $B%4!<%k%I%]%$%s%H%+!<%I!&%W%i%92q0wMM8BDj(B
- $BFCJL%-%c%s%Z!<%s(B $B!z(B $B(, (, (, (, (, (, (, (, (, (, (, (, (, (, (,
- (, (, (, (, (, (B
- Content analysis details:   (6.8 points, 6.0 required)
+ Content preview:  When testing the atomic write fix patches, the f2fs_bug_on
+ was triggered as below: [ cut here ] kernel BUG at fs/f2fs/inode.c:935! Oops:
+ invalid opcode: 0000 [#1] PREEMPT SMP PTI CPU: 3 UID: 0 PID: 257 Comm: bash
+ Not tainted 6.13.0-rc1-00033-gc283a70d3497 #5 [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 1.0 HK_RANDOM_FROM         From username looks random
- 0.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
- 1.9 URIBL_ABUSE_SURBL      Contains an URL listed in the ABUSE SURBL
- blocklist [URIs: ycuxione.com]
- 3.6 RCVD_IN_SBL_CSS        RBL: Received via a relay in Spamhaus SBL-CSS
- [157.7.142.223 listed in zen.spamhaus.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [157.7.142.223 listed in sa-accredit.habeas.com]
+ [207.226.244.122 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [157.7.142.223 listed in bl.score.senderscore.com]
- 0.1 URIBL_CSS_A Contains URL's A record listed in the Spamhaus CSS
- blocklist [URIs: loveyournewgreenhome.com]
+ [207.226.244.122 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [207.226.244.122 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.4 RDNS_DYNAMIC           Delivered to internal network by host with
- dynamic-looking rDNS
-X-Headers-End: 1tapMo-0003bR-1l
-Subject: =?iso-8859-1?q?_=5Bf2fs-dev=5D_=1B=24B!Z=3F7=3DU=3DiGd!=5B=254!?=
- =?iso-8859-1?q?=3C=25k=25I=25=5D=25=24=25s=25H=25+!=3C=25I!=26=25W=25i=25?=
- =?iso-8859-1?q?92q0wMM8BDj!*=1B=28B10=2C000=1B=24B1=5F=25-=25c=25C=257=25?=
- =?iso-8859-1?q?e=25P=25C=25/!*=1B=28B?=
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1tarQ8-0000aS-6m
+Subject: [f2fs-dev] [PATCH] f2fs: fix inconsistent dirty state of atomic file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,48 +92,89 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="iso-2022-jp"
+From: Jianan Huang via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jianan Huang <huangjianan@xiaomi.com>
+Cc: daehojeong@google.com, jnhuang95@gmail.com, linux-kernel@vger.kernel.org,
+ wanghui33@xiaomi.com, yudongbin@xiaomi.com
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+When testing the atomic write fix patches, the f2fs_bug_on was
+triggered as below:
 
-$B$$$D$b(B $B%4!<%k%I%]%$%s%H%+!<%I!&%W%i%9$r$4MxMQ$$$?$@$-!"@?$K$"$j$,$H$&$4$6$$$^$9!#(B
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/inode.c:935!
+Oops: invalid opcode: 0000 [#1] PREEMPT SMP PTI
+CPU: 3 UID: 0 PID: 257 Comm: bash Not tainted 6.13.0-rc1-00033-gc283a70d3497 #5
+RIP: 0010:f2fs_evict_inode+0x50f/0x520
+Call Trace:
+ <TASK>
+ ? __die_body+0x65/0xb0
+ ? die+0x9f/0xc0
+ ? do_trap+0xa1/0x170
+ ? f2fs_evict_inode+0x50f/0x520
+ ? f2fs_evict_inode+0x50f/0x520
+ ? handle_invalid_op+0x65/0x80
+ ? f2fs_evict_inode+0x50f/0x520
+ ? exc_invalid_op+0x39/0x50
+ ? asm_exc_invalid_op+0x1a/0x20
+ ? __pfx_f2fs_get_dquots+0x10/0x10
+ ? f2fs_evict_inode+0x50f/0x520
+ ? f2fs_evict_inode+0x2e5/0x520
+ evict+0x186/0x2f0
+ prune_icache_sb+0x75/0xb0
+ super_cache_scan+0x1a8/0x200
+ do_shrink_slab+0x163/0x320
+ shrink_slab+0x2fc/0x470
+ drop_slab+0x82/0xf0
+ drop_caches_sysctl_handler+0x4e/0xb0
+ proc_sys_call_handler+0x183/0x280
+ vfs_write+0x36d/0x450
+ ksys_write+0x68/0xd0
+ do_syscall_64+0xc8/0x1a0
+ ? arch_exit_to_user_mode_prepare+0x11/0x60
+ ? irqentry_exit_to_user_mode+0x7e/0xa0
 
-$B(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(B
-$B!z(B $B%4!<%k%I%]%$%s%H%+!<%I!&%W%i%92q0wMM8BDj(B $BFCJL%-%c%s%Z!<%s(B $B!z(B
-$B(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(,(B
+The root cause is: f2fs uses FI_ATOMIC_DIRTIED to indicate dirty
+atomic files during commit. If the inode is dirtied during commit,
+such as by f2fs_i_pino_write, the vfs inode keeps clean and the
+f2fs inode is set to FI_DIRTY_INODE. The FI_DIRTY_INODE flag cann't
+be cleared by write_inode later due to the clean vfs inode. Finally,
+f2fs_bug_on is triggered due to this inconsistent state when evict.
 
-2024$BG/(B1$B7n0J9_$K%h%I%P%7(B.com$B$r$4MxMQ$$$?$@$$$?$*5RMM!"(B
-$B$^$?$O%4!<%k%I%]%$%s%H%+!<%I!&%W%i%9$r(B2$B2s0J>e$4MxMQ$$$?$@$$$?$*5RMM$K!"(B
-$B:GBg(B10,000$B1_%-%c%C%7%e%P%C%/$,$b$i$($k%-%c%s%Z!<%s<B;\Cf!#$3$NAG@2$i$7$$FCE5$r$*8+F($7$J$/!*(B
+To reproduce this situation:
+- fd = open("/mnt/test.db", O_WRONLY)
+- ioctl(fd, F2FS_IOC_START_ATOMIC_WRITE)
+- mv /mnt/test.db /mnt/test1.db
+- ioctl(fd, F2FS_IOC_COMMIT_ATOMIC_WRITE)
+- echo 3 > /proc/sys/vm/drop_caches
 
+To fix this problem, clear FI_DIRTY_INODE after commit, then
+f2fs_mark_inode_dirty_sync will ensure a consistent dirty state.
 
-$B"'(B $B:#$9$0%-%c%C%7%e%P%C%/FCE5$r<j$KF~$l$^$7$g$&(B
+Fixes: fccaa81de87e ("f2fs: prevent atomic file from being dirtied before commit")
+Signed-off-by: Yunlei He <heyunlei@xiaomi.com>
+Signed-off-by: Jianan Huang <huangjianan@xiaomi.com>
+---
+ fs/f2fs/segment.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-https://goldpoint-co-jp.ycuxione.com/?apply=07kwokz9hh40YE3QXKJWh4gCZs29P0
-
-$B"#(B $BFCE5FbMF!'(B
-$B!;(B $BFCJL$K?JDh$9$k%]%$%s%H!J(B1$BK|1_AjEv!K(B
-$B!;(B $BMxMQ2DG=%7!<%s!'K\%+!<%I2q0wMM$N$*0zMn$78}:B$X$4JV6b(B
-$B"($=$NB>$N$4MxMQBe6b$,$"$k>l9g$OAj;&$H$J$j$^$9!#(B
-$B!=!=!=(B
-$B"#(B $B$4Cm0U;v9`!'(B
-$B!=!=!=(B
-$B0J2<$N>l9g$O%-%c%s%Z!<%s%]%$%s%H4T85$NBP>]30$H$J$j$^$9(B
-
-$B!;%+!<%I$4MxMQBe6b$N$*;YJ'$$$rCYBZ$5$l$?>l9g(B($B;YJ'4|F|L$E~MhJ,$r=|$/(B)
-$B!;FCE5%]%$%s%H4T85;~E@$GBP>]%+!<%I$r2rLs!J%+!<%I2q0w;q3J$NAS<:$r4^$`!K$5$l$F$$$k>l9g(B
-
-
-$B(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(B
-$B!c$*Ld$$9g$o$;!d(B
-
-$B3t<02q<R%4!<%k%I%]%$%s%H%^!<%1%F%#%s%0(B
-$B")(B160-8486
-$BEl5~ET?7=I6h?7=I(B5$BCzL\(B3$BHV(B1$B9f(B
-0570-06-7070$B!J8GDjEEOC(B3$BJ,(B/8.5$B1_!!7HBSEEOC(B20$BIC(B/10$B1_!K(B
-$B1D6H;~4V(B: $B7n(B-$BEZ(B 9:00-17:00$B!JF|!&=KF|!&G/KvG/;O$O5Y6H!K(B
-$B(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(B
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index dc1b47f9269a..71b509a31eae 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -201,6 +201,7 @@ void f2fs_abort_atomic_write(struct inode *inode, bool clean)
+ 	clear_inode_flag(inode, FI_ATOMIC_FILE);
+ 	if (is_inode_flag_set(inode, FI_ATOMIC_DIRTIED)) {
+ 		clear_inode_flag(inode, FI_ATOMIC_DIRTIED);
++		clear_inode_flag(inode, FI_DIRTY_INODE);
+ 		f2fs_mark_inode_dirty_sync(inode, true);
+ 	}
+ 	stat_dec_atomic_inode(inode);
+-- 
+2.43.0
 
 
 
