@@ -2,95 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AED83A1AE6C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jan 2025 03:07:23 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEB48A1AFC0
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Jan 2025 06:14:54 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tb96P-0000kQ-Ol;
-	Fri, 24 Jan 2025 02:07:22 +0000
+	id 1tbC1j-0004iL-Uy;
+	Fri, 24 Jan 2025 05:14:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <huangjianan@xiaomi.com>) id 1tb96O-0000kJ-95
+ (envelope-from <chao@kernel.org>) id 1tbC1i-0004iC-DI
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 24 Jan 2025 02:07:21 +0000
+ Fri, 24 Jan 2025 05:14:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
- Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
- :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
- :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jVavKbQvG6u3yXfUONSt2rdpwdZ+B2uKJ4AZJgRySxo=; b=HGDaXGyQqduxNsjuH9EAmvEMNE
- 36J/GMUh+QVzxGXZKau+YwScLiVewB0kHwigpkkOfpj1AlyL45ymdQjxoYWVmJOHsa8rKahDE27T0
- NsZaMu2gwFqidAwRmhDoj0+bciMKonaqBZXk0WFIB7DpKlM75PGqL18n6GuiThq0aj+I=;
+ bh=JqiveiY1JA+OgfyWg+U5Siy8FwBl37LZjsYcP2dy5iE=; b=cFXjFRApc+fc/Nfi/QOrVYTHhs
+ 4lmzFnR21gef5sDX9r8pffrLEZ5/KMlCGhT5EpoMR7dHbFrMe9NkQJ0MkHxcBTV53mXMcUx4IeFYV
+ aWa4IkPCfiWXpAhK4eGQWas/qCqB+KHmBHjYn8coClp6k//PFqKiziIW1kbL0a98U/jM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
- In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jVavKbQvG6u3yXfUONSt2rdpwdZ+B2uKJ4AZJgRySxo=; b=Cd4+BevIc7wTwPSLKWMDt6kf5y
- QbE/GsHnmUNtO6xVKz5MRr8yx+fRyH3CyNcwxpXUoIa0zTKEiL6RqbM0c6x6piezHK7w/t+y1BwWm
- ESCj/+kK+xoHz5xsniCv6G36XQfMTv/ENhgO2qPB+UyuP3owpXBcy8frNWVr9Sj3XvNg=;
-Received: from outboundhk.mxmail.xiaomi.com ([118.143.206.90])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1tb96N-0001LW-Qg for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 24 Jan 2025 02:07:20 +0000
-X-CSE-ConnectionGUID: iWKHtGIKQn65tT+FwA283w==
-X-CSE-MsgGUID: eHGXqyQETsiLfLo7HBoHPw==
-X-IronPort-AV: E=Sophos;i="6.13,230,1732550400"; d="scan'208";a="105591658"
-To: Chao Yu <chao@kernel.org>, "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, "jaegeuk@kernel.org"
- <jaegeuk@kernel.org>
-Thread-Topic: [External Mail]Re: [f2fs-dev] [PATCH] f2fs: fix inconsistent
- dirty state of atomic file
-Thread-Index: AQHbbWZrBacCkLfDy0OzXVWD1DNMKrMjl2MAgAEMqAA=
-Date: Fri, 24 Jan 2025 01:51:28 +0000
-Message-ID: <03f1d5e8-db4d-499a-88ce-2594fddca8c3@xiaomi.com>
-References: <20250123071417.253019-1-huangjianan@xiaomi.com>
- <8bee628f-69a4-419e-aaee-c72b7c7861f9@kernel.org>
-In-Reply-To: <8bee628f-69a4-419e-aaee-c72b7c7861f9@kernel.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.149.46.75]
-Content-ID: <6BEB9ED923F9B7408E10E88D41E076AB@xiaomi.com>
+ bh=JqiveiY1JA+OgfyWg+U5Siy8FwBl37LZjsYcP2dy5iE=; b=lPx0zm95iesYnHSFr8XuVw/yyd
+ o9Nz/57msVCd5V/TPlgGKvUe7zUY5cnGq1GTj4FWqZVpQX5r9yNmvMzHltHIkT282a0kAScEcq2ZA
+ rVBZ6rqbQVL1zkJJushMs4qgXonrMv0UPINBTXWVJrfLJ0bsJp+CGA71WZE9bfx66IDA=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1tbC1h-0003RG-1j for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 24 Jan 2025 05:14:41 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 5B3805C46B1;
+ Fri, 24 Jan 2025 05:13:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5FB08C4CED2;
+ Fri, 24 Jan 2025 05:14:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1737695675;
+ bh=2jOEOLQybauA8dK++V0eJu8P7lO4XN/lHOd1F+peXeM=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=f5MZsM8m7WrobiV+Roo+t6i7wbVHmOYs8zri5pl59TJQQvaWNMBjNgdHiWJG2H10N
+ ZSCzOx9Fn6o9BbMaGoJ+/U+prxKpM01pRGmyc6Q3RdiQMpuK8GdY2oyAsr5ycIS8qY
+ U6yR+2stU0YjNnXyXQJqDgaPZvOi0Vz4Y/QGOeihmCDBqXZzHJwlonW4NkQ+ZWmxgo
+ VoX7iPXcs7pWXYDmn/lDorOWnigypVS2/6bFWHeabW6/okgUaeJXTGA2iL2hlaAB66
+ SM94dGZXCLFUIcj7pz0IhZtrPN6KUL7h0CXqbwvEwuWFTOY4zS5hJRxR91b0m7hPf+
+ uv1d0ccLy+aOQ==
+Message-ID: <a9b641d6-b442-4e31-9da2-a6ce4dc6f7c4@kernel.org>
+Date: Fri, 24 Jan 2025 13:14:31 +0800
 MIME-Version: 1.0
-X-Spam-Score: 0.9 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+User-Agent: Mozilla Thunderbird
+To: Jianan Huang <huangjianan@xiaomi.com>,
+ linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org
+References: <20250123071417.253019-1-huangjianan@xiaomi.com>
+ <20250124015042.273336-1-huangjianan@xiaomi.com>
+Content-Language: en-US
+In-Reply-To: <20250124015042.273336-1-huangjianan@xiaomi.com>
+X-Spam-Score: -8.2 (--------)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 2025/1/23 17:49, Chao Yu wrote: > [外部邮件] 此邮件来源于小米公司外部，请谨慎处理。若对邮件安全性存疑，请将邮件转发给misec@xiaomi.com进行反馈
-    > > On 1/23 [...] 
- 
- Content analysis details:   (0.9 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On 1/24/25 09:50,
+ Jianan Huang wrote: > When testing the atomic
+ write fix patches, the f2fs_bug_on was > triggered as below: > > [ cut here
+ ] > kernel BUG at fs/f2fs/inode.c:93 [...] 
+ Content analysis details:   (-8.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
-                             [118.143.206.90 listed in wl.mailspike.net]
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                            [118.143.206.90 listed in bl.score.senderscore.com]
-  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                         [118.143.206.90 listed in sa-trusted.bondedsender.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.9 SPF_HELO_SOFTFAIL      SPF: HELO does not match SPF record (softfail)
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1tb96N-0001LW-Qg
-Subject: Re: [f2fs-dev] [External Mail]Re: [PATCH] f2fs: fix inconsistent
- dirty state of atomic file
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in sa-accredit.habeas.com]
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tbC1h-0003RG-1j
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix inconsistent dirty state of
+ atomic file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,77 +114,108 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Huang Jianan via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Huang Jianan <huangjianan@xiaomi.com>
-Cc: =?utf-8?B?5L+e5Lic5paM?= <yudongbin@xiaomi.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- =?utf-8?B?546L6L6J?= <wanghui33@xiaomi.com>,
- "daehojeong@google.com" <daehojeong@google.com>,
- "jnhuang95@gmail.com" <jnhuang95@gmail.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: daehojeong@google.com, linux-kernel@vger.kernel.org, jnhuang95@gmail.com,
+ yudongbin@xiaomi.com, wanghui33@xiaomi.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyNS8xLzIzIDE3OjQ5LCBDaGFvIFl1IHdyb3RlOg0KPiBb5aSW6YOo6YKu5Lu2XSDmraTp
-gq7ku7bmnaXmupDkuo7lsI/nsbPlhazlj7jlpJbpg6jvvIzor7fosKjmhY7lpITnkIbjgILoi6Xl
-r7npgq7ku7blronlhajmgKflrZjnlpHvvIzor7flsIbpgq7ku7bovazlj5Hnu5ltaXNlY0B4aWFv
-bWkuY29t6L+b6KGM5Y+N6aaIDQo+IA0KPiBPbiAxLzIzLzI1IDE1OjE0LCBKaWFuYW4gSHVhbmcg
-dmlhIExpbnV4LWYyZnMtZGV2ZWwgd3JvdGU6DQo+PiBXaGVuIHRlc3RpbmcgdGhlIGF0b21pYyB3
-cml0ZSBmaXggcGF0Y2hlcywgdGhlIGYyZnNfYnVnX29uIHdhcw0KPj4gdHJpZ2dlcmVkIGFzIGJl
-bG93Og0KPj4NCj4+IC0tLS0tLS0tLS0tLVsgY3V0IGhlcmUgXS0tLS0tLS0tLS0tLQ0KPj4ga2Vy
-bmVsIEJVRyBhdCBmcy9mMmZzL2lub2RlLmM6OTM1IQ0KPj4gT29wczogaW52YWxpZCBvcGNvZGU6
-IDAwMDAgWyMxXSBQUkVFTVBUIFNNUCBQVEkNCj4+IENQVTogMyBVSUQ6IDAgUElEOiAyNTcgQ29t
-bTogYmFzaCBOb3QgdGFpbnRlZCA2LjEzLjAtcmMxLTAwMDMzLWdjMjgzYTcwZDM0OTcgIzUNCj4+
-IFJJUDogMDAxMDpmMmZzX2V2aWN0X2lub2RlKzB4NTBmLzB4NTIwDQo+PiBDYWxsIFRyYWNlOg0K
-Pj4gICA8VEFTSz4NCj4+ICAgPyBfX2RpZV9ib2R5KzB4NjUvMHhiMA0KPj4gICA/IGRpZSsweDlm
-LzB4YzANCj4+ICAgPyBkb190cmFwKzB4YTEvMHgxNzANCj4+ICAgPyBmMmZzX2V2aWN0X2lub2Rl
-KzB4NTBmLzB4NTIwDQo+PiAgID8gZjJmc19ldmljdF9pbm9kZSsweDUwZi8weDUyMA0KPj4gICA/
-IGhhbmRsZV9pbnZhbGlkX29wKzB4NjUvMHg4MA0KPj4gICA/IGYyZnNfZXZpY3RfaW5vZGUrMHg1
-MGYvMHg1MjANCj4+ICAgPyBleGNfaW52YWxpZF9vcCsweDM5LzB4NTANCj4+ICAgPyBhc21fZXhj
-X2ludmFsaWRfb3ArMHgxYS8weDIwDQo+PiAgID8gX19wZnhfZjJmc19nZXRfZHF1b3RzKzB4MTAv
-MHgxMA0KPj4gICA/IGYyZnNfZXZpY3RfaW5vZGUrMHg1MGYvMHg1MjANCj4+ICAgPyBmMmZzX2V2
-aWN0X2lub2RlKzB4MmU1LzB4NTIwDQo+PiAgIGV2aWN0KzB4MTg2LzB4MmYwDQo+PiAgIHBydW5l
-X2ljYWNoZV9zYisweDc1LzB4YjANCj4+ICAgc3VwZXJfY2FjaGVfc2NhbisweDFhOC8weDIwMA0K
-Pj4gICBkb19zaHJpbmtfc2xhYisweDE2My8weDMyMA0KPj4gICBzaHJpbmtfc2xhYisweDJmYy8w
-eDQ3MA0KPj4gICBkcm9wX3NsYWIrMHg4Mi8weGYwDQo+PiAgIGRyb3BfY2FjaGVzX3N5c2N0bF9o
-YW5kbGVyKzB4NGUvMHhiMA0KPj4gICBwcm9jX3N5c19jYWxsX2hhbmRsZXIrMHgxODMvMHgyODAN
-Cj4+ICAgdmZzX3dyaXRlKzB4MzZkLzB4NDUwDQo+PiAgIGtzeXNfd3JpdGUrMHg2OC8weGQwDQo+
-PiAgIGRvX3N5c2NhbGxfNjQrMHhjOC8weDFhMA0KPj4gICA/IGFyY2hfZXhpdF90b191c2VyX21v
-ZGVfcHJlcGFyZSsweDExLzB4NjANCj4+ICAgPyBpcnFlbnRyeV9leGl0X3RvX3VzZXJfbW9kZSsw
-eDdlLzB4YTANCj4+DQo+PiBUaGUgcm9vdCBjYXVzZSBpczogZjJmcyB1c2VzIEZJX0FUT01JQ19E
-SVJUSUVEIHRvIGluZGljYXRlIGRpcnR5DQo+PiBhdG9taWMgZmlsZXMgZHVyaW5nIGNvbW1pdC4g
-SWYgdGhlIGlub2RlIGlzIGRpcnRpZWQgZHVyaW5nIGNvbW1pdCwNCj4+IHN1Y2ggYXMgYnkgZjJm
-c19pX3Bpbm9fd3JpdGUsIHRoZSB2ZnMgaW5vZGUga2VlcHMgY2xlYW4gYW5kIHRoZQ0KPj4gZjJm
-cyBpbm9kZSBpcyBzZXQgdG8gRklfRElSVFlfSU5PREUuIFRoZSBGSV9ESVJUWV9JTk9ERSBmbGFn
-IGNhbm4ndA0KPj4gYmUgY2xlYXJlZCBieSB3cml0ZV9pbm9kZSBsYXRlciBkdWUgdG8gdGhlIGNs
-ZWFuIHZmcyBpbm9kZS4gRmluYWxseSwNCj4+IGYyZnNfYnVnX29uIGlzIHRyaWdnZXJlZCBkdWUg
-dG8gdGhpcyBpbmNvbnNpc3RlbnQgc3RhdGUgd2hlbiBldmljdC4NCj4+DQo+PiBUbyByZXByb2R1
-Y2UgdGhpcyBzaXR1YXRpb246DQo+PiAtIGZkID0gb3BlbigiL21udC90ZXN0LmRiIiwgT19XUk9O
-TFkpDQo+PiAtIGlvY3RsKGZkLCBGMkZTX0lPQ19TVEFSVF9BVE9NSUNfV1JJVEUpDQo+PiAtIG12
-IC9tbnQvdGVzdC5kYiAvbW50L3Rlc3QxLmRiDQo+PiAtIGlvY3RsKGZkLCBGMkZTX0lPQ19DT01N
-SVRfQVRPTUlDX1dSSVRFKQ0KPj4gLSBlY2hvIDMgPiAvcHJvYy9zeXMvdm0vZHJvcF9jYWNoZXMN
-Cj4+DQo+PiBUbyBmaXggdGhpcyBwcm9ibGVtLCBjbGVhciBGSV9ESVJUWV9JTk9ERSBhZnRlciBj
-b21taXQsIHRoZW4NCj4+IGYyZnNfbWFya19pbm9kZV9kaXJ0eV9zeW5jIHdpbGwgZW5zdXJlIGEg
-Y29uc2lzdGVudCBkaXJ0eSBzdGF0ZS4NCj4+DQo+PiBGaXhlczogZmNjYWE4MWRlODdlICgiZjJm
-czogcHJldmVudCBhdG9taWMgZmlsZSBmcm9tIGJlaW5nIGRpcnRpZWQgYmVmb3JlIGNvbW1pdCIp
-DQo+PiBTaWduZWQtb2ZmLWJ5OiBZdW5sZWkgSGUgPGhleXVubGVpQHhpYW9taS5jb20+DQo+PiBT
-aWduZWQtb2ZmLWJ5OiBKaWFuYW4gSHVhbmcgPGh1YW5namlhbmFuQHhpYW9taS5jb20+DQo+PiAt
-LS0NCj4+ICAgZnMvZjJmcy9zZWdtZW50LmMgfCAxICsNCj4+ICAgMSBmaWxlIGNoYW5nZWQsIDEg
-aW5zZXJ0aW9uKCspDQo+Pg0KPj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvc2VnbWVudC5jIGIvZnMv
-ZjJmcy9zZWdtZW50LmMNCj4+IGluZGV4IGRjMWI0N2Y5MjY5YS4uNzFiNTA5YTMxZWFlIDEwMDY0
-NA0KPj4gLS0tIGEvZnMvZjJmcy9zZWdtZW50LmMNCj4+ICsrKyBiL2ZzL2YyZnMvc2VnbWVudC5j
-DQo+PiBAQCAtMjAxLDYgKzIwMSw3IEBAIHZvaWQgZjJmc19hYm9ydF9hdG9taWNfd3JpdGUoc3Ry
-dWN0IGlub2RlICppbm9kZSwgYm9vbCBjbGVhbikNCj4+ICAgICAgICBjbGVhcl9pbm9kZV9mbGFn
-KGlub2RlLCBGSV9BVE9NSUNfRklMRSk7DQo+PiAgICAgICAgaWYgKGlzX2lub2RlX2ZsYWdfc2V0
-KGlub2RlLCBGSV9BVE9NSUNfRElSVElFRCkpIHsNCj4+ICAgICAgICAgICAgICAgIGNsZWFyX2lu
-b2RlX2ZsYWcoaW5vZGUsIEZJX0FUT01JQ19ESVJUSUVEKTsNCj4+ICsgICAgICAgICAgICAgY2xl
-YXJfaW5vZGVfZmxhZyhpbm9kZSwgRklfRElSVFlfSU5PREUpOw0KPiANCj4gSmlhbmFuLA0KPiAN
-Cj4gQ2FuIHlvdSBwbGVhc2UgYWRkIGNvbW1lbnRzIGZvciB0aGlzIGNoYW5nZT8gb3RoZXJ3aXNl
-IGl0IGxvb2tzIGdvb2QgdG8gbWUuDQoNClVwZGF0ZWQgaW4gdjIuDQoNClRoYW5rcywNCg0KPiAN
-Cj4gVGhhbmtzLA0KPiANCj4+ICAgICAgICAgICAgICAgIGYyZnNfbWFya19pbm9kZV9kaXJ0eV9z
-eW5jKGlub2RlLCB0cnVlKTsNCj4+ICAgICAgICB9DQo+PiAgICAgICAgc3RhdF9kZWNfYXRvbWlj
-X2lub2RlKGlub2RlKTsNCj4gDQoNCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRl
-dmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9s
-aXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+
+
+On 1/24/25 09:50, Jianan Huang wrote:
+> When testing the atomic write fix patches, the f2fs_bug_on was
+> triggered as below:
+> 
+> ------------[ cut here ]------------
+> kernel BUG at fs/f2fs/inode.c:935!
+> Oops: invalid opcode: 0000 [#1] PREEMPT SMP PTI
+> CPU: 3 UID: 0 PID: 257 Comm: bash Not tainted 6.13.0-rc1-00033-gc283a70d3497 #5
+> RIP: 0010:f2fs_evict_inode+0x50f/0x520
+> Call Trace:
+>  <TASK>
+>  ? __die_body+0x65/0xb0
+>  ? die+0x9f/0xc0
+>  ? do_trap+0xa1/0x170
+>  ? f2fs_evict_inode+0x50f/0x520
+>  ? f2fs_evict_inode+0x50f/0x520
+>  ? handle_invalid_op+0x65/0x80
+>  ? f2fs_evict_inode+0x50f/0x520
+>  ? exc_invalid_op+0x39/0x50
+>  ? asm_exc_invalid_op+0x1a/0x20
+>  ? __pfx_f2fs_get_dquots+0x10/0x10
+>  ? f2fs_evict_inode+0x50f/0x520
+>  ? f2fs_evict_inode+0x2e5/0x520
+>  evict+0x186/0x2f0
+>  prune_icache_sb+0x75/0xb0
+>  super_cache_scan+0x1a8/0x200
+>  do_shrink_slab+0x163/0x320
+>  shrink_slab+0x2fc/0x470
+>  drop_slab+0x82/0xf0
+>  drop_caches_sysctl_handler+0x4e/0xb0
+>  proc_sys_call_handler+0x183/0x280
+>  vfs_write+0x36d/0x450
+>  ksys_write+0x68/0xd0
+>  do_syscall_64+0xc8/0x1a0
+>  ? arch_exit_to_user_mode_prepare+0x11/0x60
+>  ? irqentry_exit_to_user_mode+0x7e/0xa0
+> 
+> The root cause is: f2fs uses FI_ATOMIC_DIRTIED to indicate dirty
+> atomic files during commit. If the inode is dirtied during commit,
+> such as by f2fs_i_pino_write, the vfs inode keeps clean and the
+> f2fs inode is set to FI_DIRTY_INODE. The FI_DIRTY_INODE flag cann't
+> be cleared by write_inode later due to the clean vfs inode. Finally,
+> f2fs_bug_on is triggered due to this inconsistent state when evict.
+> 
+> To reproduce this situation:
+> - fd = open("/mnt/test.db", O_WRONLY)
+> - ioctl(fd, F2FS_IOC_START_ATOMIC_WRITE)
+> - mv /mnt/test.db /mnt/test1.db
+> - ioctl(fd, F2FS_IOC_COMMIT_ATOMIC_WRITE)
+> - echo 3 > /proc/sys/vm/drop_caches
+> 
+> To fix this problem, clear FI_DIRTY_INODE after commit, then
+> f2fs_mark_inode_dirty_sync will ensure a consistent dirty state.
+> 
+> Fixes: fccaa81de87e ("f2fs: prevent atomic file from being dirtied before commit")
+> Signed-off-by: Yunlei He <heyunlei@xiaomi.com>
+> Signed-off-by: Jianan Huang <huangjianan@xiaomi.com>
+> ---
+> Changes since v1:
+> - Add comments suggested by Chao.
+> - Add missing stat reduction.
+> 
+>  fs/f2fs/segment.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+> 
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index dc1b47f9269a..de1597110f76 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -201,6 +201,15 @@ void f2fs_abort_atomic_write(struct inode *inode, bool clean)
+>  	clear_inode_flag(inode, FI_ATOMIC_FILE);
+>  	if (is_inode_flag_set(inode, FI_ATOMIC_DIRTIED)) {
+>  		clear_inode_flag(inode, FI_ATOMIC_DIRTIED);
+> +		/*
+> +		 * The vfs inode keeps clean during commit, but the f2fs inode
+> +		 * doesn't. So clear the dirty state after commit and let
+> +		 * f2fs_mark_inode_dirty_sync ensure a consistent dirty state.
+> +		 */
+> +		if (is_inode_flag_set(inode, FI_DIRTY_INODE)) {
+> +			clear_inode_flag(inode, FI_DIRTY_INODE);
+> +			stat_dec_dirty_inode(F2FS_I_SB(inode), DIRTY_META);
+> +		}
+
+How about calling f2fs_inode_synced() directly?
+
+>  		f2fs_mark_inode_dirty_sync(inode, true);
+>  	}
+>  	stat_dec_atomic_inode(inode);
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
