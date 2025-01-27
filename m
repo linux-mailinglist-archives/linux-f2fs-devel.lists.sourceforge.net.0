@@ -2,106 +2,114 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D57BA1C025
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 25 Jan 2025 02:20:28 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AA3EA1D1D4
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Jan 2025 08:57:14 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tbUqR-0005OK-Pg;
-	Sat, 25 Jan 2025 01:20:19 +0000
+	id 1tcJzU-0003Yx-J1;
+	Mon, 27 Jan 2025 07:57:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1tbUqO-0005OE-Gd
- for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 25 Jan 2025 01:20:15 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3KzyXZwkbAEQy45qgrrkxgvvoj.muumrk0ykxiutzktz.ius@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1tcJz5-0003YM-2Q for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 27 Jan 2025 07:56:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ywfWVCRmBuzI9/CFzvLEtqTwD5TNAFqAJPpYA35lIyk=; b=gUQYTO3d4mG580tNg9NdjxQSe8
- K8j5sNVHAwnQM3bvTm8B6pdQYLiE5QkmRv+IsgyQzkrkAgdIFE1qttD4LD/Z7Tvctr/yCMSkQYVn1
- +Rah7EH3l/7OdjmLw5wWFj3e+kzqjgs1o9Eds2tjh5Exv/v8XjkzucvzK8rSPCT1mdoA=;
+ bh=hJcB7Kr/MyGcTqRVm2CC+tjRLzd0VrcBipQTfCjD3gM=; b=BUIPLlcrpnjMRUNCPXWNabxtIF
+ /qRHdt6SibpEy/KaZkLg8PkQdeo0hxaJpSJLlzke9qboScnOj3M1XQ+aW4rbcL5gbddpw1mL8Iqrc
+ agKFHRdwiYQqIT9nhB5xECd/lMa08Ob9C+EB/SDwOS19Wxp2hV0yzobsYnj+j4GHBqlU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ywfWVCRmBuzI9/CFzvLEtqTwD5TNAFqAJPpYA35lIyk=; b=QxniZQId5CbLBHIhbaSM3a93s2
- rmEUIyqamgYQy3JFpPUT6t164OHup5ZlJaEsf04rmxnLVDXZkgQj9b5DEhiHgC6VnT6vSqyveC+fu
- SxV3zz0Y1aFC1QlZoqGdw+N0miVhSrhECIWyJgaK54IZ3JecOzKmGacBXVGOe3BfwNkw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ ;
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=hJcB7Kr/MyGcTqRVm2CC+tjRLzd0VrcBipQTfCjD3gM=; b=i
+ XDVagijMjGbNI9Qco3PnRCj7SsiNJUwOddZM+nJDUFUPren1Ek5TtpGBBwU7e96niaogsgYx89uTE
+ 0iUNTIFRklbZvVWU2/CWyet/iwU0K2gCwKeYHbzTm5Lmwz05Sl8AjeeCRVaLbxCQuBD92yarqcMB6
+ 022+dfLR93e8uEho=;
+Received: from mail-io1-f77.google.com ([209.85.166.77])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tbUqN-0001lm-9m for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 25 Jan 2025 01:20:15 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A4B195C5ADB;
- Sat, 25 Jan 2025 01:19:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89524C4CEE1;
- Sat, 25 Jan 2025 01:20:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1737768004;
- bh=nutvGNIkKEz4gbsW7HF0bd5iw8lyBvTI3VbocdOzGFo=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=gsoere13jSFyZ0Ep2YyPcV5lFnzVlNYlW0Ag2tmtOe6lz8crgoDxdKFh1uWDihtYO
- W2LovnW3W6PFDNdbBxhEO1ASzQINwHSBbAM+ahttqqtVFyG3EZ+a6ryN530C6kYEWD
- pKBNMp7MbJcIRSlKG0pJh3Yx/DkP/lanS0lFmI4Zq5g2QeuyLBK35IJllRpJ99w2/w
- lTEX/7nBspZv9zJRoEVaqsHjMHHRnWpyAFXNE3pct3z1CmMrdOA5afj3hyAmjdeCTu
- 358hPuqHJry4RL61nTOGHWszBZNCgMVff18YfN0g4OAKM2Zx++imfClIEuZPt8KH5E
- L/T8rGRY+G3Ew==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
- by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- AE0F9380AA79; Sat, 25 Jan 2025 01:20:30 +0000 (UTC)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1tcJz4-0004QM-6i for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 27 Jan 2025 07:56:39 +0000
+Received: by mail-io1-f77.google.com with SMTP id
+ ca18e2360f4ac-844e5b72c69so648773639f.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 26 Jan 2025 23:56:38 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737964587; x=1738569387;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=hJcB7Kr/MyGcTqRVm2CC+tjRLzd0VrcBipQTfCjD3gM=;
+ b=kiXjnOpUeMw8HUYX6Q0X+ME0F3X3JxgFPXjxft+IAQcXD7kjp7RYBO0IgCLvMUCFG8
+ nZLY5mQcK08IFKSSxuJd6GVj+dL3pUcwZ5d2FNq/qxjpoytCQqa29Gl2Ph0GEi7JSbBa
+ jfb2TLuZWPcBTT567+VeW3tCTliC0PUi5M7qw1CJn7I2CH6dmkv5BLkGsX7S4X78tcjr
+ dnkDBKzPPj9ILj00YGwidszwwJ+8KYbi0oOOcueilhBydlKAAZkjfcojkYOS4sBPEMjJ
+ 4nnJgBQS1tbq7IOFneblSl+iW8IFOcuaZusoUVmU0OP+rwcykUPo6q7WH8D5mn3vu8x+
+ OA+w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWgJR+V0Kfe2eMTs2I1++o89IUZzFouCFgc95mYKXoE5hTx3J+If8+7JGfxgc5//gX3xnE/MiE4myndp/76DCRg@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yw1bzhUGWk7VTb1Rtk4pQZkajqYxskO9913pEZbamh027H20aEO
+ +jswhygXsa2nzZV3ZclCpzMVGAJjradT1qHGkT8BEQh321icE0jaC4PugdgvZxE5Mv/QKhrF9Mr
+ aYxqCuaY34QWtisOyP3EKvbxlW4L+ZYyQ5c+qyOYrvS11Pl9RjAxAWpw=
+X-Google-Smtp-Source: AGHT+IGOhcSC4/+e0ekoStNGl5inEYUNQoGUudSGvUzDLwM1ViRAAYMRdPfoeRKOH7yYKUS8nunoyEl3MHhqp6n8wj6MmMTABlrC
 MIME-Version: 1.0
-Message-Id: <173776802950.2231594.13552564580598358004.git-patchwork-notify@kernel.org>
-Date: Sat, 25 Jan 2025 01:20:29 +0000
-References: <20250124055751.283198-1-huangjianan@xiaomi.com>
-In-Reply-To: <20250124055751.283198-1-huangjianan@xiaomi.com>
-To: Jianan Huang <huangjianan@xiaomi.com>
-X-Spam-Score: -8.2 (--------)
+X-Received: by 2002:a05:6e02:1c23:b0:3ce:8ed9:ca94 with SMTP id
+ e9e14a558f8ab-3cf744905d8mr339180105ab.14.1737964587474; Sun, 26 Jan 2025
+ 23:56:27 -0800 (PST)
+Date: Sun, 26 Jan 2025 23:56:27 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <67973c2b.050a0220.11b1bb.0089.GAE@google.com>
+From: syzbot <syzbot+b6b347b7a4ea1b2e29b6@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.4 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 24 Jan 2025 13:57:51 +0800 you
- wrote: > When testing the atomic write fix patches, the f2fs_bug_on was >
- triggered as below: > > [ cut here ] > kernel BUG at fs/f2fs/in [...] 
- Content analysis details:   (-8.2 points, 6.0 required)
+ Content preview:  Hello,
+ syzbot found the following issue on: HEAD commit: df60eac9efe8
+ Merge tag 'for-linus-6.14-1' of https://githu.. git tree: upstream console
+ output: https://syzkaller.appspot.com/x/log.txt?x=10e14a38580000 kernel
+ config: https://syzkaller.a [...] 
+ Content analysis details:   (0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ [209.85.166.77 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ [209.85.166.77 listed in bl.score.senderscore.com]
+ 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.77 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.166.77 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -3.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tbUqN-0001lm-9m
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix inconsistent dirty state of
- atomic file
+X-Headers-End: 1tcJz4-0004QM-6i
+Subject: [f2fs-dev] [syzbot] [f2fs?] BUG: unable to handle kernel paging
+ request in has_enough_free_secs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,70 +121,139 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: patchwork-bot+f2fs--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: daehojeong@google.com, jnhuang95@gmail.com, linux-kernel@vger.kernel.org,
- yudongbin@xiaomi.com, jaegeuk@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, wanghui33@xiaomi.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello:
+Hello,
 
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
+syzbot found the following issue on:
 
-On Fri, 24 Jan 2025 13:57:51 +0800 you wrote:
-> When testing the atomic write fix patches, the f2fs_bug_on was
-> triggered as below:
-> 
-> ------------[ cut here ]------------
-> kernel BUG at fs/f2fs/inode.c:935!
-> Oops: invalid opcode: 0000 [#1] PREEMPT SMP PTI
-> CPU: 3 UID: 0 PID: 257 Comm: bash Not tainted 6.13.0-rc1-00033-gc283a70d3497 #5
-> RIP: 0010:f2fs_evict_inode+0x50f/0x520
-> Call Trace:
->  <TASK>
->  ? __die_body+0x65/0xb0
->  ? die+0x9f/0xc0
->  ? do_trap+0xa1/0x170
->  ? f2fs_evict_inode+0x50f/0x520
->  ? f2fs_evict_inode+0x50f/0x520
->  ? handle_invalid_op+0x65/0x80
->  ? f2fs_evict_inode+0x50f/0x520
->  ? exc_invalid_op+0x39/0x50
->  ? asm_exc_invalid_op+0x1a/0x20
->  ? __pfx_f2fs_get_dquots+0x10/0x10
->  ? f2fs_evict_inode+0x50f/0x520
->  ? f2fs_evict_inode+0x2e5/0x520
->  evict+0x186/0x2f0
->  prune_icache_sb+0x75/0xb0
->  super_cache_scan+0x1a8/0x200
->  do_shrink_slab+0x163/0x320
->  shrink_slab+0x2fc/0x470
->  drop_slab+0x82/0xf0
->  drop_caches_sysctl_handler+0x4e/0xb0
->  proc_sys_call_handler+0x183/0x280
->  vfs_write+0x36d/0x450
->  ksys_write+0x68/0xd0
->  do_syscall_64+0xc8/0x1a0
->  ? arch_exit_to_user_mode_prepare+0x11/0x60
->  ? irqentry_exit_to_user_mode+0x7e/0xa0
-> 
-> [...]
+HEAD commit:    df60eac9efe8 Merge tag 'for-linus-6.14-1' of https://githu..
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=10e14a38580000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=e56f16478dfabb4
+dashboard link: https://syzkaller.appspot.com/bug?extid=b6b347b7a4ea1b2e29b6
+compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
 
-Here is the summary with links:
-  - [f2fs-dev,v3] f2fs: fix inconsistent dirty state of atomic file
-    https://git.kernel.org/jaegeuk/f2fs/c/03511e936916
+Unfortunately, I don't have any reproducer for this issue yet.
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/c42a22eab378/disk-df60eac9.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/e8d947efbb6a/vmlinux-df60eac9.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/0225eaefda10/bzImage-df60eac9.xz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+b6b347b7a4ea1b2e29b6@syzkaller.appspotmail.com
+
+F2FS-fs (loop3): Stopped filesystem due to reason: 7
+kworker/u8:7: attempt to access beyond end of device
+loop3: rw=1, sector=45096, nr_sectors = 8 limit=40427
+BUG: unable to handle page fault for address: ffffed1604ea3dfa
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0000) - not-present page
+PGD 23ffee067 P4D 23ffee067 PUD 0 
+Oops: Oops: 0000 [#1] PREEMPT SMP KASAN PTI
+CPU: 0 UID: 0 PID: 2977 Comm: kworker/u8:7 Not tainted 6.13.0-syzkaller-04541-gdf60eac9efe8 #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 12/27/2024
+Workqueue: writeback wb_workfn (flush-7:3)
+RIP: 0010:get_ckpt_valid_blocks fs/f2fs/segment.h:361 [inline]
+RIP: 0010:has_curseg_enough_space fs/f2fs/segment.h:570 [inline]
+RIP: 0010:__get_secs_required fs/f2fs/segment.h:620 [inline]
+RIP: 0010:has_not_enough_free_secs fs/f2fs/segment.h:633 [inline]
+RIP: 0010:has_enough_free_secs+0x575/0x1660 fs/f2fs/segment.h:649
+Code: 3c 08 00 74 12 48 89 ef e8 88 30 0d fe 48 b9 00 00 00 00 00 fc ff df 4b 8d 1c 7f 48 c1 e3 04 48 03 5d 00 48 89 d8 48 c1 e8 03 <0f> b6 04 08 84 c0 0f 85 bc 02 00 00 44 0f b7 63 02 41 81 e4 ff 03
+RSP: 0018:ffffc9000baa7268 EFLAGS: 00010a06
+RAX: 1ffff11604ea3dfa RBX: ffff88b02751efd0 RCX: dffffc0000000000
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000001
+RBP: ffff888028c058e8 R08: ffffffff83f643f7 R09: 1ffff110037e6a00
+R10: dffffc0000000000 R11: ffffed10037e6a01 R12: 1ffff110037e682e
+R13: ffff88801bf34170 R14: 0000000000000001 R15: 00000000ffffffff
+FS:  0000000000000000(0000) GS:ffff8880b8600000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffffed1604ea3dfa CR3: 0000000033f0a000 CR4: 00000000003526f0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+Call Trace:
+ <TASK>
+ f2fs_is_checkpoint_ready fs/f2fs/segment.h:671 [inline]
+ f2fs_write_inode+0x425/0x540 fs/f2fs/inode.c:791
+ write_inode fs/fs-writeback.c:1525 [inline]
+ __writeback_single_inode+0x708/0x10d0 fs/fs-writeback.c:1745
+ writeback_sb_inodes+0x820/0x1360 fs/fs-writeback.c:1976
+ wb_writeback+0x413/0xb80 fs/fs-writeback.c:2156
+ wb_do_writeback fs/fs-writeback.c:2303 [inline]
+ wb_workfn+0x410/0x1080 fs/fs-writeback.c:2343
+ process_one_work kernel/workqueue.c:3236 [inline]
+ process_scheduled_works+0xa66/0x1840 kernel/workqueue.c:3317
+ worker_thread+0x870/0xd30 kernel/workqueue.c:3398
+ kthread+0x7a9/0x920 kernel/kthread.c:464
+ ret_from_fork+0x4b/0x80 arch/x86/kernel/process.c:148
+ ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
+ </TASK>
+Modules linked in:
+CR2: ffffed1604ea3dfa
+---[ end trace 0000000000000000 ]---
+RIP: 0010:get_ckpt_valid_blocks fs/f2fs/segment.h:361 [inline]
+RIP: 0010:has_curseg_enough_space fs/f2fs/segment.h:570 [inline]
+RIP: 0010:__get_secs_required fs/f2fs/segment.h:620 [inline]
+RIP: 0010:has_not_enough_free_secs fs/f2fs/segment.h:633 [inline]
+RIP: 0010:has_enough_free_secs+0x575/0x1660 fs/f2fs/segment.h:649
+Code: 3c 08 00 74 12 48 89 ef e8 88 30 0d fe 48 b9 00 00 00 00 00 fc ff df 4b 8d 1c 7f 48 c1 e3 04 48 03 5d 00 48 89 d8 48 c1 e8 03 <0f> b6 04 08 84 c0 0f 85 bc 02 00 00 44 0f b7 63 02 41 81 e4 ff 03
+RSP: 0018:ffffc9000baa7268 EFLAGS: 00010a06
+RAX: 1ffff11604ea3dfa RBX: ffff88b02751efd0 RCX: dffffc0000000000
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000001
+RBP: ffff888028c058e8 R08: ffffffff83f643f7 R09: 1ffff110037e6a00
+R10: dffffc0000000000 R11: ffffed10037e6a01 R12: 1ffff110037e682e
+R13: ffff88801bf34170 R14: 0000000000000001 R15: 00000000ffffffff
+FS:  0000000000000000(0000) GS:ffff8880b8600000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: ffffed1604ea3dfa CR3: 0000000033f0a000 CR4: 00000000003526f0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+----------------
+Code disassembly (best guess):
+   0:	3c 08                	cmp    $0x8,%al
+   2:	00 74 12 48          	add    %dh,0x48(%rdx,%rdx,1)
+   6:	89 ef                	mov    %ebp,%edi
+   8:	e8 88 30 0d fe       	call   0xfe0d3095
+   d:	48 b9 00 00 00 00 00 	movabs $0xdffffc0000000000,%rcx
+  14:	fc ff df
+  17:	4b 8d 1c 7f          	lea    (%r15,%r15,2),%rbx
+  1b:	48 c1 e3 04          	shl    $0x4,%rbx
+  1f:	48 03 5d 00          	add    0x0(%rbp),%rbx
+  23:	48 89 d8             	mov    %rbx,%rax
+  26:	48 c1 e8 03          	shr    $0x3,%rax
+* 2a:	0f b6 04 08          	movzbl (%rax,%rcx,1),%eax <-- trapping instruction
+  2e:	84 c0                	test   %al,%al
+  30:	0f 85 bc 02 00 00    	jne    0x2f2
+  36:	44 0f b7 63 02       	movzwl 0x2(%rbx),%r12d
+  3b:	41                   	rex.B
+  3c:	81                   	.byte 0x81
+  3d:	e4 ff                	in     $0xff,%al
+  3f:	03                   	.byte 0x3
 
 
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
+
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
+
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
+
+If you want to undo deduplication, reply with:
+#syz undup
 
 
 _______________________________________________
