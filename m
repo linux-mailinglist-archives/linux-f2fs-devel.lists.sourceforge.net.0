@@ -2,114 +2,109 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2AA3EA1D1D4
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Jan 2025 08:57:14 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C764CA20232
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 28 Jan 2025 01:07:32 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tcJzU-0003Yx-J1;
-	Mon, 27 Jan 2025 07:57:04 +0000
+	id 1tcZ8P-0007GL-OI;
+	Tue, 28 Jan 2025 00:07:17 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3KzyXZwkbAEQy45qgrrkxgvvoj.muumrk0ykxiutzktz.ius@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1tcJz5-0003YM-2Q for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 27 Jan 2025 07:56:39 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <mchehab+huawei@kernel.org>) id 1tcZ8O-0007Ff-Ie
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 28 Jan 2025 00:07:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Sender:Content-Transfer-Encoding:MIME-Version:
+ Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hJcB7Kr/MyGcTqRVm2CC+tjRLzd0VrcBipQTfCjD3gM=; b=BUIPLlcrpnjMRUNCPXWNabxtIF
- /qRHdt6SibpEy/KaZkLg8PkQdeo0hxaJpSJLlzke9qboScnOj3M1XQ+aW4rbcL5gbddpw1mL8Iqrc
- agKFHRdwiYQqIT9nhB5xECd/lMa08Ob9C+EB/SDwOS19Wxp2hV0yzobsYnj+j4GHBqlU=;
+ bh=4nS+zcLGjC94QdNZM5xUIENfjbztQuxI85OTjKJkWDE=; b=kQ4G4L6E0nleVrt5Mnp62lLJW+
+ 2L++cnVLC3h4MQIVZvkoVJ8iNJKGunm6XeKj8J8ER9BraPfq1VERjQpzSMefBhE/2GBUXPdn59F2x
+ s8eGMskRCIBPSILB8GfBqsIcI/aVVi6E6m2dL/Ah4VJ4op/BLUJtXraofmrvMS6lIJhQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Sender:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:
+ To:From:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=hJcB7Kr/MyGcTqRVm2CC+tjRLzd0VrcBipQTfCjD3gM=; b=i
- XDVagijMjGbNI9Qco3PnRCj7SsiNJUwOddZM+nJDUFUPren1Ek5TtpGBBwU7e96niaogsgYx89uTE
- 0iUNTIFRklbZvVWU2/CWyet/iwU0K2gCwKeYHbzTm5Lmwz05Sl8AjeeCRVaLbxCQuBD92yarqcMB6
- 022+dfLR93e8uEho=;
-Received: from mail-io1-f77.google.com ([209.85.166.77])
+ List-Owner:List-Archive; bh=4nS+zcLGjC94QdNZM5xUIENfjbztQuxI85OTjKJkWDE=; b=b
+ mGQvdDJMAwuvhicZX1dhR6HxrUaykK5QHb/b/039bxesVBVFU2S/csdFA65E4h4pPM7tG1YeQLAVp
+ GTF8aySmhZV5JXc/p/3cDg3tCHhcMoD0qgOWhmcctS4mnI/QSpVSa9s5kRv4YflfGJFGzN99b5QG1
+ Rnc4JdCkOePakFJs=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1tcJz4-0004QM-6i for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 27 Jan 2025 07:56:39 +0000
-Received: by mail-io1-f77.google.com with SMTP id
- ca18e2360f4ac-844e5b72c69so648773639f.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 26 Jan 2025 23:56:38 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737964587; x=1738569387;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hJcB7Kr/MyGcTqRVm2CC+tjRLzd0VrcBipQTfCjD3gM=;
- b=kiXjnOpUeMw8HUYX6Q0X+ME0F3X3JxgFPXjxft+IAQcXD7kjp7RYBO0IgCLvMUCFG8
- nZLY5mQcK08IFKSSxuJd6GVj+dL3pUcwZ5d2FNq/qxjpoytCQqa29Gl2Ph0GEi7JSbBa
- jfb2TLuZWPcBTT567+VeW3tCTliC0PUi5M7qw1CJn7I2CH6dmkv5BLkGsX7S4X78tcjr
- dnkDBKzPPj9ILj00YGwidszwwJ+8KYbi0oOOcueilhBydlKAAZkjfcojkYOS4sBPEMjJ
- 4nnJgBQS1tbq7IOFneblSl+iW8IFOcuaZusoUVmU0OP+rwcykUPo6q7WH8D5mn3vu8x+
- OA+w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWgJR+V0Kfe2eMTs2I1++o89IUZzFouCFgc95mYKXoE5hTx3J+If8+7JGfxgc5//gX3xnE/MiE4myndp/76DCRg@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yw1bzhUGWk7VTb1Rtk4pQZkajqYxskO9913pEZbamh027H20aEO
- +jswhygXsa2nzZV3ZclCpzMVGAJjradT1qHGkT8BEQh321icE0jaC4PugdgvZxE5Mv/QKhrF9Mr
- aYxqCuaY34QWtisOyP3EKvbxlW4L+ZYyQ5c+qyOYrvS11Pl9RjAxAWpw=
-X-Google-Smtp-Source: AGHT+IGOhcSC4/+e0ekoStNGl5inEYUNQoGUudSGvUzDLwM1ViRAAYMRdPfoeRKOH7yYKUS8nunoyEl3MHhqp6n8wj6MmMTABlrC
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1tcZ7v-0007sY-QA for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 28 Jan 2025 00:06:48 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 28F90A41634;
+ Tue, 28 Jan 2025 00:04:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA0CDC4CEE7;
+ Tue, 28 Jan 2025 00:06:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1738022796;
+ bh=x0APBPBQWrivChaCg4k0Jly7N3L+drRwEE2afrYm3Ko=;
+ h=From:To:Cc:Subject:Date:From;
+ b=YVMdUUsPMxPbkAk4qEzxydaiheiKgPq0V/bec3NjHqtsuNI4LbgEBDEej9+LgNza+
+ ljIEnlJ8dOW66epiiZtLELOhM7CI9Xmfl04mwJsxOPi5DZqupGOzyLYI8OrEB0YMLK
+ 2aabCdo/efDt+1ketrNTclboOiYMqtBF3chVGB2EMC4yfr4ULHJGHphSkN/9c0uXJr
+ 2zeCibWgf8wkOz10yK0tDHg/2UyTNfnmjDli87oee4K3CFTkaD0PhvQA9VygWXf7kB
+ Qo1Ry12uzmRsVIoEnhnI2jD01cboTneK2GBz8V4u2Zk1oJeS56JxjuAeS7Lo5BEMUu
+ 9jWWaNQP5ViKg==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98)
+ (envelope-from <mchehab+huawei@kernel.org>)
+ id 1tcZ7h-0000000DRKO-2KyQ; Tue, 28 Jan 2025 01:06:33 +0100
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Date: Tue, 28 Jan 2025 01:05:49 +0100
+Message-ID: <cover.1738020236.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:1c23:b0:3ce:8ed9:ca94 with SMTP id
- e9e14a558f8ab-3cf744905d8mr339180105ab.14.1737964587474; Sun, 26 Jan 2025
- 23:56:27 -0800 (PST)
-Date: Sun, 26 Jan 2025 23:56:27 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <67973c2b.050a0220.11b1bb.0089.GAE@google.com>
-From: syzbot <syzbot+b6b347b7a4ea1b2e29b6@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.4 (/)
+X-Spam-Score: -3.8 (---)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: df60eac9efe8
- Merge tag 'for-linus-6.14-1' of https://githu.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=10e14a38580000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.4 points, 6.0 required)
+ Content preview:  Hi Jon/Greg,
+ That's the second version of my RFC patches meant
+ to modenize the ABI parser that I wrote in Perl. I originally started it
+ due to some issues I noticed when searching for ABI symbols. While I could
+ just go ahead and fix the already existing script, I noticed that the script
+ maintainance didn't have [...] 
+ Content analysis details:   (-3.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.77 listed in sa-trusted.bondedsender.org]
+ [147.75.193.91 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.77 listed in bl.score.senderscore.com]
- 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [147.75.193.91 listed in bl.score.senderscore.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.77 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.77 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1tcJz4-0004QM-6i
-Subject: [f2fs-dev] [syzbot] [f2fs?] BUG: unable to handle kernel paging
- request in has_enough_free_secs
+ -1.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tcZ7v-0007sY-QA
+Subject: [f2fs-dev] [RFC v2 00/38] Improve ABI documentation generation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,139 +116,203 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Mauro Carvalho Chehab via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: linux-pm@vger.kernel.org, Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+ netdev@vger.kernel.org, coresight@lists.linaro.org, linux-usb@vger.kernel.org,
+ linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-iio@vger.kernel.org, linux-hardening@vger.kernel.org,
+ workflows@vger.kernel.org, bpf@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+Hi Jon/Greg,
 
-syzbot found the following issue on:
+That's the second version of my RFC patches meant to modenize the ABI
+parser that I wrote in Perl.
 
-HEAD commit:    df60eac9efe8 Merge tag 'for-linus-6.14-1' of https://githu..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=10e14a38580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=e56f16478dfabb4
-dashboard link: https://syzkaller.appspot.com/bug?extid=b6b347b7a4ea1b2e29b6
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
+I originally started it due to some issues I noticed when searching for
+ABI symbols. While I could just go ahead and fix the already existing
+script, I noticed that the script maintainance didn't have much care over
+all those years, probably because it is easier to find Python programmers
+those days.
 
-Unfortunately, I don't have any reproducer for this issue yet.
+Also, the code is complex and was not using modules or classes and
+were using lots of global variables.
 
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/c42a22eab378/disk-df60eac9.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/e8d947efbb6a/vmlinux-df60eac9.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/0225eaefda10/bzImage-df60eac9.xz
+So, I decided to rewrite it in Python. I started with a manual conversion
+for each function. Yet, to avoid future maintainership issues, I opted to
+divide the code on three classes. One class for the ABI parser, another
+one for regex conversion (used when checking symbols from local hardware,
+and an extra class for undefined symbols check.
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+b6b347b7a4ea1b2e29b6@syzkaller.appspotmail.com
+I opted to change the Sphinx integration gradually using different
+patch sets on 4 phases:
 
-F2FS-fs (loop3): Stopped filesystem due to reason: 7
-kworker/u8:7: attempt to access beyond end of device
-loop3: rw=1, sector=45096, nr_sectors = 8 limit=40427
-BUG: unable to handle page fault for address: ffffed1604ea3dfa
-#PF: supervisor read access in kernel mode
-#PF: error_code(0x0000) - not-present page
-PGD 23ffee067 P4D 23ffee067 PUD 0 
-Oops: Oops: 0000 [#1] PREEMPT SMP KASAN PTI
-CPU: 0 UID: 0 PID: 2977 Comm: kworker/u8:7 Not tainted 6.13.0-syzkaller-04541-gdf60eac9efe8 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 12/27/2024
-Workqueue: writeback wb_workfn (flush-7:3)
-RIP: 0010:get_ckpt_valid_blocks fs/f2fs/segment.h:361 [inline]
-RIP: 0010:has_curseg_enough_space fs/f2fs/segment.h:570 [inline]
-RIP: 0010:__get_secs_required fs/f2fs/segment.h:620 [inline]
-RIP: 0010:has_not_enough_free_secs fs/f2fs/segment.h:633 [inline]
-RIP: 0010:has_enough_free_secs+0x575/0x1660 fs/f2fs/segment.h:649
-Code: 3c 08 00 74 12 48 89 ef e8 88 30 0d fe 48 b9 00 00 00 00 00 fc ff df 4b 8d 1c 7f 48 c1 e3 04 48 03 5d 00 48 89 d8 48 c1 e8 03 <0f> b6 04 08 84 c0 0f 85 bc 02 00 00 44 0f b7 63 02 41 81 e4 ff 03
-RSP: 0018:ffffc9000baa7268 EFLAGS: 00010a06
-RAX: 1ffff11604ea3dfa RBX: ffff88b02751efd0 RCX: dffffc0000000000
-RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000001
-RBP: ffff888028c058e8 R08: ffffffff83f643f7 R09: 1ffff110037e6a00
-R10: dffffc0000000000 R11: ffffed10037e6a01 R12: 1ffff110037e682e
-R13: ffff88801bf34170 R14: 0000000000000001 R15: 00000000ffffffff
-FS:  0000000000000000(0000) GS:ffff8880b8600000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: ffffed1604ea3dfa CR3: 0000000033f0a000 CR4: 00000000003526f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- f2fs_is_checkpoint_ready fs/f2fs/segment.h:671 [inline]
- f2fs_write_inode+0x425/0x540 fs/f2fs/inode.c:791
- write_inode fs/fs-writeback.c:1525 [inline]
- __writeback_single_inode+0x708/0x10d0 fs/fs-writeback.c:1745
- writeback_sb_inodes+0x820/0x1360 fs/fs-writeback.c:1976
- wb_writeback+0x413/0xb80 fs/fs-writeback.c:2156
- wb_do_writeback fs/fs-writeback.c:2303 [inline]
- wb_workfn+0x410/0x1080 fs/fs-writeback.c:2343
- process_one_work kernel/workqueue.c:3236 [inline]
- process_scheduled_works+0xa66/0x1840 kernel/workqueue.c:3317
- worker_thread+0x870/0xd30 kernel/workqueue.c:3398
- kthread+0x7a9/0x920 kernel/kthread.c:464
- ret_from_fork+0x4b/0x80 arch/x86/kernel/process.c:148
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
- </TASK>
-Modules linked in:
-CR2: ffffed1604ea3dfa
----[ end trace 0000000000000000 ]---
-RIP: 0010:get_ckpt_valid_blocks fs/f2fs/segment.h:361 [inline]
-RIP: 0010:has_curseg_enough_space fs/f2fs/segment.h:570 [inline]
-RIP: 0010:__get_secs_required fs/f2fs/segment.h:620 [inline]
-RIP: 0010:has_not_enough_free_secs fs/f2fs/segment.h:633 [inline]
-RIP: 0010:has_enough_free_secs+0x575/0x1660 fs/f2fs/segment.h:649
-Code: 3c 08 00 74 12 48 89 ef e8 88 30 0d fe 48 b9 00 00 00 00 00 fc ff df 4b 8d 1c 7f 48 c1 e3 04 48 03 5d 00 48 89 d8 48 c1 e8 03 <0f> b6 04 08 84 c0 0f 85 bc 02 00 00 44 0f b7 63 02 41 81 e4 ff 03
-RSP: 0018:ffffc9000baa7268 EFLAGS: 00010a06
-RAX: 1ffff11604ea3dfa RBX: ffff88b02751efd0 RCX: dffffc0000000000
-RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000001
-RBP: ffff888028c058e8 R08: ffffffff83f643f7 R09: 1ffff110037e6a00
-R10: dffffc0000000000 R11: ffffed10037e6a01 R12: 1ffff110037e682e
-R13: ffff88801bf34170 R14: 0000000000000001 R15: 00000000ffffffff
-FS:  0000000000000000(0000) GS:ffff8880b8600000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: ffffed1604ea3dfa CR3: 0000000033f0a000 CR4: 00000000003526f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-----------------
-Code disassembly (best guess):
-   0:	3c 08                	cmp    $0x8,%al
-   2:	00 74 12 48          	add    %dh,0x48(%rdx,%rdx,1)
-   6:	89 ef                	mov    %ebp,%edi
-   8:	e8 88 30 0d fe       	call   0xfe0d3095
-   d:	48 b9 00 00 00 00 00 	movabs $0xdffffc0000000000,%rcx
-  14:	fc ff df
-  17:	4b 8d 1c 7f          	lea    (%r15,%r15,2),%rbx
-  1b:	48 c1 e3 04          	shl    $0x4,%rbx
-  1f:	48 03 5d 00          	add    0x0(%rbp),%rbx
-  23:	48 89 d8             	mov    %rbx,%rax
-  26:	48 c1 e8 03          	shr    $0x3,%rax
-* 2a:	0f b6 04 08          	movzbl (%rax,%rcx,1),%eax <-- trapping instruction
-  2e:	84 c0                	test   %al,%al
-  30:	0f 85 bc 02 00 00    	jne    0x2f2
-  36:	44 0f b7 63 02       	movzwl 0x2(%rbx),%r12d
-  3b:	41                   	rex.B
-  3c:	81                   	.byte 0x81
-  3d:	e4 ff                	in     $0xff,%al
-  3f:	03                   	.byte 0x3
+1. minimal integration: just execute the new script on a similar way as
+   the perl one;
+2. the kernel_abi module was changed to import the ABI parser class,
+   using it directly;
+3. the logic at kernel_abi were rewritten to better integrate. As a bonus,
+   Sphinx now imports ReST data symbol by symbol. That solves one of
+   the issues I was discomfortable with the original approach: when lots
+   of data is sent to Sphinx parser, it stops in the middle of processing.
+   This was addressed in the past on a hacky way, but it could cause
+   problems in the future as the number of symbols increase;
+4. the ABI parser part is now called either by automarkup and kernel_abi.
+   This allowed automarkup to solve ABI symbols.
 
+Together with this series, I added some patches fixing issues and warnings
+when generating documentation.
+
+Some notes about this new RFC:
+
+- despite being able to generate documentation cross-references with
+  auto-markup, the documentation build timt didn't increase on my machine
+  (it was actually 5 seconds faster);
+- I rewrote some algorithms at the undefined symbol detection code. With
+  that, it is now a lot faster than the previous version, at least on my desktop
+  (wich has 24 CPU threads). I didn't try it on a server yet;
+- the undefined parser can optionally use multiple CPUs. This sounds
+  fancier than it seems: Python (up to version 3.12) is really bad with
+  multi-CPU support and doesn't have real multi-thread support. Python
+  3.13 has now an optional way to address that (although I didn't test yet,
+  as it requires Python manual compilation). When such feature becomes
+  standard, maybe the undefined symbols detection will be faster.
+
+Btw, I'm opting to send this as an RFC because I'd like to have more
+people testing and checking it. In particular, the undefined ABI check
+is complex, as it requires lots of tricks to reduce the run time from hours
+to seconds.
+  
+On this series we have:
+
+patches 1 to 11: several bug fixes addressing issues at ABI symbols;
+patch 12: a fix for scripts/documentation-file-ref-check
+patches 13-15: create new script with rest and search logic and 
+  minimally integrate with kernel_abi Sphinx extension(phase 1);
+patches 16-19: implement phase 2: class integration (phase 2);
+patch 20: fix a bug at kernel_abi: the way it splits lines is buggy;
+patches  21-24: rewrite kernel_abi logic to make it simpler and more
+  robust;
+patches 25-27: add cross-reference support at automarkup;
+patches 28-36: several ABI cleanups to cope with the improvements;
+patch 37: implement undefined command;
+patch 38: get rid of the old Perl script.
+
+To make it easier to review/apply, I may end breaking the next version
+on a couple of different patchsets. Still it would be nice to have more
+people testing it and providing some feedback.
 
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+RFC v2:
+  - Dropped a patch touching the perl script;
+  - Implemented phases 2-4 of the script's logic;
+  - Added ABI cross-references via automarkup;
+  - Added support for undefined logic;
+  - Added more ABI and scripts' fixes;
+  - Added undefined logic;
+  - Added a patch to remove the old tool.
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+Mauro Carvalho Chehab (38):
+  docs: power: video.rst: fix a footnote reference
+  docs: media: ipu3: fix two footnote references
+  docs: block: ublk.rst: remove a reference from a dropped text
+  docs: sphinx: remove kernellog.py file
+  docs: sphinx/kernel_abi: adjust coding style
+  docs: admin-guide: abi: add SPDX tags to ABI files
+  ABI: sysfs-class-rfkill: fix kernelversion tags
+  ABI: sysfs-bus-coresight-*: fix kernelversion tags
+  ABI: sysfs-driver-dma-idxd: fix date tags
+  ABI: sysfs-fs-f2fs: fix date tags
+  ABI: sysfs-power: fix a what tag
+  scripts/documentation-file-ref-check: don't check perl/python scripts
+  scripts/get_abi.py: add a Python tool to generate ReST output
+  scripts/get_abi.py: add support for symbol search
+  docs: use get_abi.py for ABI generation
+  scripts/get_abi.py: optimize parse_abi() function
+  scripts/get_abi.py: use an interactor for ReST output
+  docs: sphinx/kernel_abi: use AbiParser directly
+  docs: sphinx/kernel_abi: reduce buffer usage for ABI messages
+  docs: sphinx/kernel_abi: properly split lines
+  scripts/get_abi.pl: Add filtering capabilities to rest output
+  scripts/get_abi.pl: add support to parse ABI README file
+  docs: sphinx/kernel_abi: parse ABI files only once
+  docs: admin-guide/abi: split files from symbols
+  docs: sphinx/automarkup: add cross-references for ABI
+  docs: sphinx/kernel_abi: avoid warnings during Sphinx module init
+  scripts/get_abi.py: Rename title name for ABI files
+  docs: media: Allow creating cross-references for RC ABI
+  docs: thunderbolt: Allow creating cross-references for ABI
+  docs: arm: asymmetric-32bit: Allow creating cross-references for ABI
+  docs: arm: generic-counter: Allow creating cross-references for ABI
+  docs: iio: Allow creating cross-references ABI
+  docs: networking: Allow creating cross-references statistics ABI
+  docs: submit-checklist: Allow creating cross-references for ABI README
+  docs: translations: Allow creating cross-references for ABI README
+  docs: ABI: drop two duplicate symbols
+  scripts/get_abi.py: add support for undefined ABIs
+  scripts/get_abi.pl: drop now obsoleted script
 
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
+ Documentation/ABI/removed/sysfs-class-rfkill  |    2 +-
+ Documentation/ABI/stable/sysfs-class-rfkill   |   12 +-
+ .../ABI/stable/sysfs-devices-system-cpu       |   10 -
+ .../ABI/stable/sysfs-driver-dma-idxd          |    4 +-
+ .../testing/sysfs-bus-coresight-devices-cti   |   78 +-
+ .../testing/sysfs-bus-coresight-devices-tpdm  |   52 +-
+ Documentation/ABI/testing/sysfs-fs-f2fs       |    4 +-
+ Documentation/ABI/testing/sysfs-power         |    2 +-
+ .../admin-guide/abi-obsolete-files.rst        |    7 +
+ Documentation/admin-guide/abi-obsolete.rst    |    6 +-
+ Documentation/admin-guide/abi-readme-file.rst |    6 +
+ .../admin-guide/abi-removed-files.rst         |    7 +
+ Documentation/admin-guide/abi-removed.rst     |    6 +-
+ .../admin-guide/abi-stable-files.rst          |    7 +
+ Documentation/admin-guide/abi-stable.rst      |    6 +-
+ .../admin-guide/abi-testing-files.rst         |    7 +
+ Documentation/admin-guide/abi-testing.rst     |    6 +-
+ Documentation/admin-guide/abi.rst             |   17 +
+ Documentation/admin-guide/media/ipu3.rst      |   12 +-
+ Documentation/admin-guide/thunderbolt.rst     |    2 +-
+ Documentation/arch/arm64/asymmetric-32bit.rst |    2 +-
+ Documentation/block/ublk.rst                  |    2 -
+ Documentation/driver-api/generic-counter.rst  |    4 +-
+ Documentation/driver-api/iio/core.rst         |    2 +-
+ Documentation/iio/iio_devbuf.rst              |    2 +-
+ Documentation/networking/statistics.rst       |    2 +-
+ Documentation/power/video.rst                 |    2 +-
+ Documentation/process/submit-checklist.rst    |    2 +-
+ Documentation/sphinx/automarkup.py            |   56 +
+ Documentation/sphinx/kernel_abi.py            |  162 +-
+ Documentation/sphinx/kerneldoc.py             |   14 +-
+ Documentation/sphinx/kernellog.py             |   22 -
+ Documentation/sphinx/kfigure.py               |   81 +-
+ .../it_IT/process/submit-checklist.rst        |    2 +-
+ .../sp_SP/process/submit-checklist.rst        |    2 +-
+ .../zh_CN/process/submit-checklist.rst        |    2 +-
+ .../zh_TW/process/submit-checklist.rst        |    2 +-
+ .../userspace-api/media/rc/rc-sysfs-nodes.rst |    2 +-
+ scripts/documentation-file-ref-check          |    2 +-
+ scripts/get_abi.pl                            | 1103 -------------
+ scripts/get_abi.py                            | 1437 +++++++++++++++++
+ 41 files changed, 1804 insertions(+), 1354 deletions(-)
+ create mode 100644 Documentation/admin-guide/abi-obsolete-files.rst
+ create mode 100644 Documentation/admin-guide/abi-readme-file.rst
+ create mode 100644 Documentation/admin-guide/abi-removed-files.rst
+ create mode 100644 Documentation/admin-guide/abi-stable-files.rst
+ create mode 100644 Documentation/admin-guide/abi-testing-files.rst
+ delete mode 100644 Documentation/sphinx/kernellog.py
+ delete mode 100755 scripts/get_abi.pl
+ create mode 100755 scripts/get_abi.py
 
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
+-- 
+2.48.1
 
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
 
-If you want to undo deduplication, reply with:
-#syz undup
 
 
 _______________________________________________
