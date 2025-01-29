@@ -2,66 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6A44A215D4
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Jan 2025 01:56:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F382A215D6
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Jan 2025 01:56:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tcwN9-00080t-Et;
-	Wed, 29 Jan 2025 00:56:03 +0000
+	id 1tcwNC-0004DL-MX;
+	Wed, 29 Jan 2025 00:56:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1tcwN2-00080a-Vl
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1tcwN4-0004Cz-Nq
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 29 Jan 2025 00:55:56 +0000
+ Wed, 29 Jan 2025 00:55:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hJQf0TPyuhEeQZ0a4V+OZ72Iu2iKhB0OFe4o6fsP+TM=; b=aIIT3GOb7S1Tq3x7NNf9mujlIG
- zEUwQmZW+F2hQEdCNb5SP3LyaYxrHnBe108DYC9LPQEGpDRlMtEVZFtNnsa71rsNXejDAQ1PeTf02
- Vyk7jK7jUbjBIuuYd3u2pS/9bC4qmpB+7CoCIJF1I0pyvCwGeMzAcabL77HbK0x81Zrg=;
+ bh=hXRqZ1VfveiCnn35o7HLJurX4+K1Ri+isTuSXXyYOQY=; b=bOwKGsy30REtsmxm0xFGeqcsPv
+ xhdgB4UPsXqpjdTN+TE3/8O18jVA2PweCG96l561h+U1nLsfz5YyPew7Z/QF5EMFT5QG26SvA8XG5
+ 4FfK4+IoQ0Vg43LGxr0Yk9dHKR6BXrjJk3KFQvfaqW7qP+j38BV5Gx4cAtIxo7NFjfz8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hJQf0TPyuhEeQZ0a4V+OZ72Iu2iKhB0OFe4o6fsP+TM=; b=NI0rvw0zYzjLNfbl2HS8+auFkF
- Rk9jaWttTPZSPsymkfmcoiOu7pM9wXefRl7uPP+3zbzuVka0ZTzyL783v/31Sk8Q7dpI+Kqf4k72E
- zpywvRNSijAxgJJfcSoF5Y+X2qL1eCgHMzTB1lgTuE4EDDqHruHtIHqdteRnvmLF5phY=;
+ bh=hXRqZ1VfveiCnn35o7HLJurX4+K1Ri+isTuSXXyYOQY=; b=FDqnnnSttjrtdEOjVJQjsaf+s6
+ blNIESkCLR1bVyuWWJ0Vb++GMm/b4wiEBDFaUYpUkoZBv6SwmmVDlAKut6WWSyMN1P84iVG96qEp6
+ dQFCcpv1VU0J5D7t5+pCUE15q6BkfHqOFfncRVG0gHyd806NWQfF8nDsPIQis5Aj+XEA=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tcwN1-0001Lh-TM for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 29 Jan 2025 00:55:56 +0000
+ id 1tcwN3-0001Ln-IN for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 29 Jan 2025 00:55:58 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 6219CA415EA;
- Wed, 29 Jan 2025 00:53:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF0E2C4CED3;
- Wed, 29 Jan 2025 00:55:44 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id EA6A1A41651;
+ Wed, 29 Jan 2025 00:53:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2BDD9C4CEED;
+ Wed, 29 Jan 2025 00:55:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1738112144;
- bh=7lLgfsbUvvXkuZ/CHyObEqTqK07OIPpnMi3L8CLFkWY=;
+ s=k20201202; t=1738112146;
+ bh=E7SMn7UwC8b0qGiERpygySgP6h2jvicUtzMHrC7lB0U=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=a0Tp33LEr5mdpx4Jdes8W04nWqwEaLorvXlTwLQeltYmYb4klZ+1dz2ywlTC1b8vX
- 3+k4ui1fUmLbcFjL5APZZHqXajEfDw8XK18yEtuoVQbYLE2/KJ3OWDxcoyJSsIsYNE
- DtQEthCyYqS56sQa1kB1Swn6qPUBhCaLAgWkwja3f55uChLvycrhuijZWm8POhmtni
- ykUeyJuvAvFNmoLZJQP4RIXBzVayDzL59pE6M7xHqHJCz+rWiTvl4EPHbNFmFx8Chm
- 4j7efWWME8OF3uvIkfJk+9cFoNkYjHICLOSesiRjPTBgLZGNKhAvpDasPjs5mHTnv5
- F99y903Tt3oVw==
+ b=fZw6MReAikaXmK4YW7Llx9xS4AZREWDVf+VbEuhy7K5j/LpgE7j3g4mGnR9EHqExT
+ V0kZiClE2/Vbh3TvYLRpqSSWW1gu1H4xZYWgX8ok3cSy+5oeP8OS4P1L3YkdfBA9nH
+ QmO3dMtn+ImUdjs5yE7jAsKioOpnj7OtsoAvlgOUh1eKvjLqkuo0RE/gUANcWBubNN
+ WsDioFefbuBTBmF2YtPx+AiF6qLab2nsgdzuYqQs725jBoJlg1Yj7w22IhNIVWNr01
+ 8Yl8tbvDUl+Ds6GwEYmfvCJrv2QlWKNl0DwRZkktsQH+OCBIoQSbbM9WZRjRsz9/Dh
+ n7OhUFf4o8JtQ==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- EAE01380AA66; Wed, 29 Jan 2025 00:56:11 +0000 (UTC)
+ 33C1B380AA66; Wed, 29 Jan 2025 00:56:13 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <173811217076.3973351.8137382917166262630.git-patchwork-notify@kernel.org>
-Date: Wed, 29 Jan 2025 00:56:10 +0000
-References: <20241202010844.144356-1-ebiggers@kernel.org>
-In-Reply-To: <20241202010844.144356-1-ebiggers@kernel.org>
-To: Eric Biggers <ebiggers@kernel.org>
+Message-Id: <173811217199.3973351.14941578865039072034.git-patchwork-notify@kernel.org>
+Date: Wed, 29 Jan 2025 00:56:11 +0000
+References: <Z5hYrgYwNJuaPFF1@google.com>
+In-Reply-To: <Z5hYrgYwNJuaPFF1@google.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
 X-Spam-Score: -3.8 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -69,12 +69,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Eric Biggers <ebiggers@google.com>: On Sun, 1 Dec 2024 17:08:25 -0800 you
- wrote: > This patchset applies to v6.13-rc1 and is also available in git
- via: > > git fetch
- https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git
- crc [...] 
+ Content preview: Hello: This pull request was applied to jaegeuk/f2fs.git
+ (dev)
+ by Linus Torvalds <torvalds@linux-foundation.org>: On Tue, 28 Jan 2025 04:10:22
+ +0000 you wrote: > Hi Linus, > > Could you please consider this pull request?
+ > > Thanks, > > The following changes since commit
+ 40384c840ea1944d7c5a392e8975ed088ecf0b37: [...] 
  Content analysis details:   (-3.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -100,9 +100,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -1.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tcwN1-0001Lh-TM
-Subject: Re: [f2fs-dev] [PATCH v4 00/19] Wire up CRC32 library functions to
- arch-optimized code
+X-Headers-End: 1tcwN3-0001Ln-IN
+Subject: Re: [f2fs-dev] [GIT PULL] f2fs update for 6.14-rc1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,75 +116,31 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: linux-arch@vger.kernel.org, linux-s390@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-scsi@vger.kernel.org, x86@kernel.org,
- linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org,
- linux-crypto@vger.kernel.org, loongarch@lists.linux.dev,
- sparclinux@vger.kernel.org, linux-riscv@lists.infradead.org,
- linux-f2fs-devel@lists.sourceforge.net, linuxppc-dev@lists.ozlabs.org,
- linux-arm-kernel@lists.infradead.org
+Cc: torvalds@linux-foundation.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This series was applied to jaegeuk/f2fs.git (dev)
-by Eric Biggers <ebiggers@google.com>:
+This pull request was applied to jaegeuk/f2fs.git (dev)
+by Linus Torvalds <torvalds@linux-foundation.org>:
 
-On Sun,  1 Dec 2024 17:08:25 -0800 you wrote:
-> This patchset applies to v6.13-rc1 and is also available in git via:
+On Tue, 28 Jan 2025 04:10:22 +0000 you wrote:
+> Hi Linus,
 > 
->     git fetch https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git crc32-lib-v4
+> Could you please consider this pull request?
 > 
-> CRC32 is a family of common non-cryptographic integrity check algorithms
-> that are fairly fast with a portable C implementation and become far
-> faster still with the CRC32 or carryless multiplication instructions
-> that most CPUs have.  9 architectures already have optimized code for at
-> least some CRC32 variants; however, except for arm64 this optimized code
-> was only accessible through the crypto API, not the library functions.
+> Thanks,
+> 
+> The following changes since commit 40384c840ea1944d7c5a392e8975ed088ecf0b37:
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v4,01/19] lib/crc32: drop leading underscores from __crc32c_le_base
-    https://git.kernel.org/jaegeuk/f2fs/c/0a499a7e9819
-  - [f2fs-dev,v4,02/19] lib/crc32: improve support for arch-specific overrides
-    https://git.kernel.org/jaegeuk/f2fs/c/d36cebe03c3a
-  - [f2fs-dev,v4,03/19] lib/crc32: expose whether the lib is really optimized at runtime
-    https://git.kernel.org/jaegeuk/f2fs/c/b5ae12e0ee09
-  - [f2fs-dev,v4,04/19] crypto: crc32 - don't unnecessarily register arch algorithms
-    https://git.kernel.org/jaegeuk/f2fs/c/780acb2543ea
-  - [f2fs-dev,v4,05/19] arm/crc32: expose CRC32 functions through lib
-    https://git.kernel.org/jaegeuk/f2fs/c/1e1b6dbc3d9c
-  - [f2fs-dev,v4,06/19] loongarch/crc32: expose CRC32 functions through lib
-    https://git.kernel.org/jaegeuk/f2fs/c/72f51a4f4b07
-  - [f2fs-dev,v4,07/19] mips/crc32: expose CRC32 functions through lib
-    https://git.kernel.org/jaegeuk/f2fs/c/289c270eab5e
-  - [f2fs-dev,v4,08/19] powerpc/crc32: expose CRC32 functions through lib
-    https://git.kernel.org/jaegeuk/f2fs/c/372ff60ac4dd
-  - [f2fs-dev,v4,09/19] s390/crc32: expose CRC32 functions through lib
-    https://git.kernel.org/jaegeuk/f2fs/c/008071917dfc
-  - [f2fs-dev,v4,10/19] sparc/crc32: expose CRC32 functions through lib
-    https://git.kernel.org/jaegeuk/f2fs/c/0f60a8ace577
-  - [f2fs-dev,v4,11/19] x86/crc32: update prototype for crc_pcl()
-    https://git.kernel.org/jaegeuk/f2fs/c/64e3586c0b61
-  - [f2fs-dev,v4,12/19] x86/crc32: update prototype for crc32_pclmul_le_16()
-    https://git.kernel.org/jaegeuk/f2fs/c/1e6b72e60a5a
-  - [f2fs-dev,v4,13/19] x86/crc32: expose CRC32 functions through lib
-    https://git.kernel.org/jaegeuk/f2fs/c/55d1ecceb8d6
-  - [f2fs-dev,v4,14/19] bcachefs: Explicitly select CRYPTO from BCACHEFS_FS
-    https://git.kernel.org/jaegeuk/f2fs/c/cc354fa7f016
-  - [f2fs-dev,v4,15/19] lib/crc32: make crc32c() go directly to lib
-    https://git.kernel.org/jaegeuk/f2fs/c/38a9a5121c3b
-  - [f2fs-dev,v4,16/19] ext4: switch to using the crc32c library
-    https://git.kernel.org/jaegeuk/f2fs/c/f2b4fa19647e
-  - [f2fs-dev,v4,17/19] jbd2: switch to using the crc32c library
-    https://git.kernel.org/jaegeuk/f2fs/c/dd348f054b24
-  - [f2fs-dev,v4,18/19] f2fs: switch to using the crc32 library
-    https://git.kernel.org/jaegeuk/f2fs/c/3ca4bec40ee2
-  - [f2fs-dev,v4,19/19] scsi: target: iscsi: switch to using the crc32c library
-    https://git.kernel.org/jaegeuk/f2fs/c/31e4cdde4d8b
+  - [f2fs-dev,GIT,PULL] f2fs update for 6.14-rc1
+    https://git.kernel.org/jaegeuk/f2fs/c/6d61a53dd6f5
 
 You are awesome, thank you!
 -- 
