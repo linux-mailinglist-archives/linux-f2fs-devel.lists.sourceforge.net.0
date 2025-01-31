@@ -2,106 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DC1CA24535
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 31 Jan 2025 23:25:21 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB60EA24545
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 31 Jan 2025 23:29:39 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tdzRv-0003de-PG;
-	Fri, 31 Jan 2025 22:25:19 +0000
+	id 1tdzVz-0004vZ-TE;
+	Fri, 31 Jan 2025 22:29:31 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1tdzRu-0003dY-IB
+ (envelope-from <jaegeuk@kernel.org>) id 1tdzVz-0004vN-1B
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 31 Jan 2025 22:25:17 +0000
+ Fri, 31 Jan 2025 22:29:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7kq0+C6CqyFHJx/YySgBHOYWNcRvmV/Fg4JyHamy6is=; b=c/e3vzNHZfe1IlmfKsBAJnhEIt
- zvlREjEKUatuqyBTIrk1I1BLZoFmF8kTlGYWwavSAP9m5UmO1N9hFLP1bjQdD2VVRI7cz8Wvutvx6
- aNach8KV8NOxBTbB9TuNemcBOA9qFbTvflaApF2MHVAtVtjF5ZJxxqg3FR7N8E8yZYbA=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=7kq0+C6CqyFHJx/YySgBHOYWNcRvmV/Fg4JyHamy6is=; b=F03MxGcR91PZxaplWcFMZr0S2B
- kXIqT2irl4f4cUUsm58jumUiv8JHq2Lw11gvADBveqZHDwasd0+a0yNJeyqmnUVwrI4p1mg852wVB
- K8AR8ZanJcZsGAIiSUH2b0BJjKQmQSwQJdl03Gw4V3Li4RWx+eCQRobXrMgTXrnWXTH8=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=0xPJIZnPSNAlPtUjvM6lch1/HX3hzlAnohwGHYYv6Ew=; b=BLUD9MP4cHG++fi1ozirB1GNLr
+ NP+iZ3HuBMLXwlXOuL6AWVNAO9oF2TNMErtQ5P4tCpoJ26l5FK74U0PLG7/X3zp28asHvruFIdz9V
+ zVfQp/ErEWywG8ICkJLbVXRCVllL12hnMVUmOtUd5FmQoIAQP7dBilBjUnpuZlRj80iM=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=0xPJIZnPSNAlPtUjvM6lch1/HX3hzlAnohwGHYYv6Ew=; b=A
+ qGL9dTEwg9b4xG0XoVyY7TY/petWOqg83ExXoMsXFP3pK4uHWUxIQ4F+IAlQIEGBTnqKNzcAxB939
+ A8N3g2cvHaW/1p5VJhGAx2IHODfaVCGX8/kstixBSrXfPNhO+w+m9jP4K3Z3+sGu+U5QmgK7M8kjf
+ NH7qvZZ81VeCXZKE=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tdzRs-0003dd-W3 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 31 Jan 2025 22:25:17 +0000
+ id 1tdzVy-0003pJ-Dg for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 31 Jan 2025 22:29:30 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id BAE2AA41FB6
+ by dfw.source.kernel.org (Postfix) with ESMTP id 1C86F5C613A
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 31 Jan 2025 22:23:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE22BC4CED1;
- Fri, 31 Jan 2025 22:25:05 +0000 (UTC)
+ Fri, 31 Jan 2025 22:28:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ADEEDC4CED1;
+ Fri, 31 Jan 2025 22:29:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1738362306;
- bh=sFFU7C1MzuogcM5wOGc++NVm3alLfLou2/czRdP08Bg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=MdjLNYDuy3w5w8H4jJ9Smxyk/5V98BhSy0J9Go5yG4129fsJ8zOPbFf4D/8o8d7U8
- 1Tzd36ACHEXN2XtmG1YNMjr4/pwI4PaQAyWlfVWHftip9WEHywVmXmHkVtmKLkHS7/
- /dYzpcw5QFVTQqxhfIkTFdX8URo/HDqCflvOBAvD2iznulDiBNdPfaihEpzQGU09Af
- TvDR4oGOPqx3zlkDk5yUt0hdHW4xR9acsHpZWRJcH3uZLMlN3Y4sVeEsWUPf19dwfF
- s7kLP9ovHILbEqlidpTZA7ST+YnL1ZdqwP37NJovSNKJ3eI1aH+0n0UAJwB1rHrm6j
- hPZg9zbuDbC3A==
+ s=k20201202; t=1738362559;
+ bh=QYCqaewGw/fEDB0FLcm50v51JOesOr9vxV6zfWBMiGs=;
+ h=From:To:Cc:Subject:Date:From;
+ b=eoFKkdk8f7T2ouE7ZjJ3CmuOMBotbZO1zogE4bWRslI3y/3Q6Bb0VI467cptW9jvK
+ Z6986fInKW0yFnSyHHMGwWJQ7Plkt3HWnGz/M6hKlWKoExR+1I1WoR6XgonTLh0PbU
+ 1kr6qcSUNnbO6rwjf5J87iHHV4dqnuccJNUZZQcJO+xBSjcsW9DDoyzkCaVDQRP+dw
+ hwi6+TRCFyYLCW6nr35YvA7QheGz/kODNM620g1A4iItfRxqiMYi9ctZUSoOcAMX/f
+ BkaIwoemdgbdlWISSqOu3Zik2w13M3H3AeVSuZjwkrZv5Sp7nhc2ggvx8CKBjWRTmf
+ 7CtdkXQMru2LQ==
 To: linux-kernel@vger.kernel.org,
 	linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 31 Jan 2025 22:24:57 +0000
-Message-ID: <20250131222457.1634039-2-jaegeuk@kernel.org>
+Date: Fri, 31 Jan 2025 22:27:55 +0000
+Message-ID: <20250131222914.1634961-1-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.48.1.362.g079036d154-goog
-In-Reply-To: <20250131222457.1634039-1-jaegeuk@kernel.org>
-References: <20250131222457.1634039-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -3.8 (---)
+X-Spam-Score: -6.5 (------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In /sys/fs/f2fs/features, there's no f2fs_sb_info, so let's
- avoid to get the pointer. Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
- --- fs/f2fs/sysfs.c | 74 ++++++++++++++++++++++++++++++++++ 1 file changed,
- 52 insertions(+), 22 deletions(-) 
- Content analysis details:   (-3.8 points, 6.0 required)
+ Content preview:  Note, let me keep improving this patch set, while trying to
+ get some feedbacks from MM and API folks from [1]. If users clearly know
+ which file-backed pages to reclaim in system view, they can use this ioctl()
+ to register in advance and reclaim all at once later. 
+ Content analysis details:   (-6.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in sa-trusted.bondedsender.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [139.178.84.217 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in bl.score.senderscore.com]
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
+ [139.178.84.217 listed in bl.score.senderscore.com]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -1.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tdzRs-0003dd-W3
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: introduce f2fs_base_attr for global
- sysfs entries
+X-Headers-End: 1tdzVy-0003pJ-Dg
+Subject: [f2fs-dev] [PATCH 0/2 v8] add ioctl/sysfs to donate file-backed
+ pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,147 +118,47 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In /sys/fs/f2fs/features, there's no f2fs_sb_info, so let's avoid to get
-the pointer.
+Note, let me keep improving this patch set, while trying to get some feedbacks
+from MM and API folks from [1].
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/sysfs.c | 74 ++++++++++++++++++++++++++++++++++---------------
- 1 file changed, 52 insertions(+), 22 deletions(-)
+If users clearly know which file-backed pages to reclaim in system view, they
+can use this ioctl() to register in advance and reclaim all at once later.
 
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 001e97cd0a96..4bd7b17a20c8 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -61,6 +61,12 @@ struct f2fs_attr {
- 	int id;
- };
- 
-+struct f2fs_base_attr {
-+	struct attribute attr;
-+	ssize_t (*show)(struct f2fs_base_attr *a, char *buf);
-+	ssize_t (*store)(struct f2fs_base_attr *a, const char *buf, size_t len);
-+};
-+
- static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
- 			     struct f2fs_sb_info *sbi, char *buf);
- 
-@@ -862,6 +868,25 @@ static void f2fs_sb_release(struct kobject *kobj)
- 	complete(&sbi->s_kobj_unregister);
- }
- 
-+static ssize_t f2fs_base_attr_show(struct kobject *kobj,
-+				struct attribute *attr, char *buf)
-+{
-+	struct f2fs_base_attr *a = container_of(attr,
-+				struct f2fs_base_attr, attr);
-+
-+	return a->show ? a->show(a, buf) : 0;
-+}
-+
-+static ssize_t f2fs_base_attr_store(struct kobject *kobj,
-+				struct attribute *attr,
-+				const char *buf, size_t len)
-+{
-+	struct f2fs_base_attr *a = container_of(attr,
-+				struct f2fs_base_attr, attr);
-+
-+	return a->store ? a->store(a, buf, len) : 0;
-+}
-+
- /*
-  * Note that there are three feature list entries:
-  * 1) /sys/fs/f2fs/features
-@@ -880,14 +905,13 @@ static void f2fs_sb_release(struct kobject *kobj)
-  *     please add new on-disk feature in this list only.
-  *     - ref. F2FS_SB_FEATURE_RO_ATTR()
-  */
--static ssize_t f2fs_feature_show(struct f2fs_attr *a,
--		struct f2fs_sb_info *sbi, char *buf)
-+static ssize_t f2fs_feature_show(struct f2fs_base_attr *a, char *buf)
- {
- 	return sysfs_emit(buf, "supported\n");
- }
- 
- #define F2FS_FEATURE_RO_ATTR(_name)				\
--static struct f2fs_attr f2fs_attr_##_name = {			\
-+static struct f2fs_base_attr f2fs_base_attr_##_name = {		\
- 	.attr = {.name = __stringify(_name), .mode = 0444 },	\
- 	.show	= f2fs_feature_show,				\
- }
-@@ -1256,37 +1280,38 @@ static struct attribute *f2fs_attrs[] = {
- };
- ATTRIBUTE_GROUPS(f2fs);
- 
-+#define BASE_ATTR_LIST(name) (&f2fs_base_attr_##name.attr)
- static struct attribute *f2fs_feat_attrs[] = {
- #ifdef CONFIG_FS_ENCRYPTION
--	ATTR_LIST(encryption),
--	ATTR_LIST(test_dummy_encryption_v2),
-+	BASE_ATTR_LIST(encryption),
-+	BASE_ATTR_LIST(test_dummy_encryption_v2),
- #if IS_ENABLED(CONFIG_UNICODE)
--	ATTR_LIST(encrypted_casefold),
-+	BASE_ATTR_LIST(encrypted_casefold),
- #endif
- #endif /* CONFIG_FS_ENCRYPTION */
- #ifdef CONFIG_BLK_DEV_ZONED
--	ATTR_LIST(block_zoned),
-+	BASE_ATTR_LIST(block_zoned),
- #endif
--	ATTR_LIST(atomic_write),
--	ATTR_LIST(extra_attr),
--	ATTR_LIST(project_quota),
--	ATTR_LIST(inode_checksum),
--	ATTR_LIST(flexible_inline_xattr),
--	ATTR_LIST(quota_ino),
--	ATTR_LIST(inode_crtime),
--	ATTR_LIST(lost_found),
-+	BASE_ATTR_LIST(atomic_write),
-+	BASE_ATTR_LIST(extra_attr),
-+	BASE_ATTR_LIST(project_quota),
-+	BASE_ATTR_LIST(inode_checksum),
-+	BASE_ATTR_LIST(flexible_inline_xattr),
-+	BASE_ATTR_LIST(quota_ino),
-+	BASE_ATTR_LIST(inode_crtime),
-+	BASE_ATTR_LIST(lost_found),
- #ifdef CONFIG_FS_VERITY
--	ATTR_LIST(verity),
-+	BASE_ATTR_LIST(verity),
- #endif
--	ATTR_LIST(sb_checksum),
-+	BASE_ATTR_LIST(sb_checksum),
- #if IS_ENABLED(CONFIG_UNICODE)
--	ATTR_LIST(casefold),
-+	BASE_ATTR_LIST(casefold),
- #endif
--	ATTR_LIST(readonly),
-+	BASE_ATTR_LIST(readonly),
- #ifdef CONFIG_F2FS_FS_COMPRESSION
--	ATTR_LIST(compression),
-+	BASE_ATTR_LIST(compression),
- #endif
--	ATTR_LIST(pin_file),
-+	BASE_ATTR_LIST(pin_file),
- 	NULL,
- };
- ATTRIBUTE_GROUPS(f2fs_feat);
-@@ -1362,9 +1387,14 @@ static struct kset f2fs_kset = {
- 	.kobj	= {.ktype = &f2fs_ktype},
- };
- 
-+static const struct sysfs_ops f2fs_feat_attr_ops = {
-+	.show	= f2fs_base_attr_show,
-+	.store	= f2fs_base_attr_store,
-+};
-+
- static const struct kobj_type f2fs_feat_ktype = {
- 	.default_groups = f2fs_feat_groups,
--	.sysfs_ops	= &f2fs_attr_ops,
-+	.sysfs_ops	= &f2fs_feat_attr_ops,
- };
- 
- static struct kobject f2fs_feat = {
+I'd like to propose this API in F2FS only, since
+1) the use-case is quite limited in Android at the moment. Once it's generall
+accepted with more use-cases, happy to propose a generic API such as fadvise.
+Please chime in, if there's any needs.
+
+2) it's file-backed pages which requires to maintain the list of inode objects.
+I'm not sure this fits in MM tho, also happy to listen to any feedback.
+
+[1] https://lore.kernel.org/lkml/Z4qmF2n2pzuHqad_@google.com/
+
+Change log from v7:
+ - change the sysfs entry to reclaim pages in all f2fs mounts
+
+Change log from v6:
+ - change sysfs entry name to reclaim_caches_kb
+
+Jaegeuk Kim (2):
+  f2fs: register inodes which is able to donate pages
+  f2fs: add a sysfs entry to request donate file-backed pages
+
+Jaegeuk Kim (2):
+  f2fs: register inodes which is able to donate pages
+  f2fs: add a sysfs entry to request donate file-backed pages
+
+ Documentation/ABI/testing/sysfs-fs-f2fs |  7 ++
+ fs/f2fs/debug.c                         |  3 +
+ fs/f2fs/f2fs.h                          | 14 +++-
+ fs/f2fs/file.c                          | 60 +++++++++++++++++
+ fs/f2fs/inode.c                         | 14 ++++
+ fs/f2fs/shrinker.c                      | 90 +++++++++++++++++++++++++
+ fs/f2fs/super.c                         |  1 +
+ fs/f2fs/sysfs.c                         | 63 +++++++++++++++++
+ include/uapi/linux/f2fs.h               |  7 ++
+ 9 files changed, 258 insertions(+), 1 deletion(-)
+
 -- 
 2.48.1.362.g079036d154-goog
 
