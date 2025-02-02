@@ -2,138 +2,136 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB8ACA24EBC
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  2 Feb 2025 16:05:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D3F0A24ECD
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  2 Feb 2025 16:26:21 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tebWw-00008Z-Ow;
-	Sun, 02 Feb 2025 15:05:02 +0000
+	id 1tebrQ-0006rk-EJ;
+	Sun, 02 Feb 2025 15:26:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Markus.Elfring@web.de>) id 1tebWv-00007o-4L
+ (envelope-from <axboe@kernel.dk>) id 1tebrP-0006rd-7I
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 02 Feb 2025 15:05:00 +0000
+ Sun, 02 Feb 2025 15:26:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:Subject:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=I3GckS+Bmfn0RBXo0V9D7uiW+6F71KvgXL8u85A42Ww=; b=FK6F0uWkeDCsgTZwpgURM3YAXM
- CCp953xNjWp+EXgSnLFlfiRC5BAeqPG39yXrjy9/75mgzpfO5KvtW6JztiSw0DCZDFLf3jPBnpecS
- Z3CSAKX31gbM3bEHUGP3vcNF+oBTjkLoyYrAfwyp9eKreWL83vfilLdQqy4xb/zsQ55M=;
+ bh=nAuHDWmks/PdDVRNMLxmVkyazEwen7unn+lyClwJsgI=; b=QntiPldi7s8tEHlqvusMLEWxYN
+ i3cEY2EII3XkTDF5DhknqOQhVbMN51AGwPBbH3sL0v2H09G23LfpUNu19osveWUJL2qJ3a5RxBOaO
+ Wi1iCDIy1qx1mNZMft9k7Y+kkdjFCYJUpMt5OclmnjcdQu6XbwVrllNye4Ti5rbQJg9o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Subject:
- References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=I3GckS+Bmfn0RBXo0V9D7uiW+6F71KvgXL8u85A42Ww=; b=axN4VKnWar5gp6183QRGBvpcJr
- sYhCFjNbX/bQFToQbjzuTHMiXXJbBWB0xfK+prx8errs9Fzfkhh7Z+lbwnYLFg7XEDLAjQyKV1pO7
- nyz9JNGT9jumOIAIwRyQ06VF2JcS3y2jobwscXn+VhbyBuVB3jMpX2j/pxq1mqIsNdcs=;
-Received: from mout.web.de ([212.227.17.11])
+ bh=nAuHDWmks/PdDVRNMLxmVkyazEwen7unn+lyClwJsgI=; b=lz1uD1Iyv53Nyhbeyb62fJuImX
+ Rl/ze4nxDu4TAIxndfcTQI5xmoSjLNCfdpdIxMKlMgdvncnJOvH69yaYBB0MjMZtJsP2jSqQoxqCR
+ piBSO3Xmyxf2wfQLFjZi7NrY1hOhVH9daDwhtc0yNxpp8iIgoxhpByYWYAGH5VqpcUxo=;
+Received: from mail-qt1-f174.google.com ([209.85.160.174])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tebWt-0000qZ-Ir for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 02 Feb 2025 15:05:00 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
- s=s29768273; t=1738508688; x=1739113488; i=markus.elfring@web.de;
- bh=I3GckS+Bmfn0RBXo0V9D7uiW+6F71KvgXL8u85A42Ww=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:References:
- Subject:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- cc:content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=PCmGJCidNphod8rEJzr4B00d5bwlsfnJ0MhtrDQp05yCMIY37DjtZJ/RU0bQ9eFT
- bHw6WQzLSvvuo/wnzESQUzBFBC73QTlCqnVvjxP3Eu0JjdUHz0Z5R+nrcUGU0SLiT
- R71hyWh0D993S7M8RQPm/vMpzfJSPO5oUtMph0npJ5/1I+VtwGOhiUxSHDwMOuZNI
- C5nL2H3VA8n63YUyS/mEEhd3qa9MCG3HISeXbx0mxvbHJN+SMdvKxc0ioW2BzHLwo
- BiaZS4/7jM8K4FMO0eWb7ktdTA+RvG8ljiHAP3WOHA9SC5tU2ItKlsXQ482A2qPzI
- LWemRu3nACKNwmYWQg==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.178.29] ([94.31.93.26]) by smtp.web.de (mrweb105
- [213.165.67.124]) with ESMTPSA (Nemesis) id 1MPaIK-1trL9t29cA-00Nnjb; Sun, 02
- Feb 2025 15:58:59 +0100
-Message-ID: <82b65a27-8e7a-49b6-b7b0-a4721ce0282c@web.de>
-Date: Sun, 2 Feb 2025 15:58:59 +0100
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1tebrM-0001kO-GB for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 02 Feb 2025 15:26:11 +0000
+Received: by mail-qt1-f174.google.com with SMTP id
+ d75a77b69052e-46fa764aac2so31710241cf.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 02 Feb 2025 07:26:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kernel-dk.20230601.gappssmtp.com; s=20230601; t=1738509957; x=1739114757;
+ darn=lists.sourceforge.net; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nAuHDWmks/PdDVRNMLxmVkyazEwen7unn+lyClwJsgI=;
+ b=frODVAY1jrIn2TwojMv5CClABhepZajoJHJD1yr5CwGMZ3YW18Bj4gI2u5OSm0cXyN
+ Qe7pWPiQB8O37F0kO+w3tgsYafKTPWiRG7j9LllOChbpaSZoUDH1C1DK0ExF3GWHG3xs
+ 3yz2dCSy8RBUVYh4xKdr1eyMJxKjTu8M1Mm8GQWuGUgKbpmHHArLPw1cpFquXItqgtzT
+ 47EedimkbZK4iTSB/YRqjkVo8aSCqSd3B7tTH1k/I57XQtPB9JfsrA+zPHCLbqCgFr0N
+ eU1mVGV5Zg79fBVJblbtKN3UEDDbUip1ay/Z+iEWe98wyS/MgZuVu8S0LMn+F3/5irtz
+ qR2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738509957; x=1739114757;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=nAuHDWmks/PdDVRNMLxmVkyazEwen7unn+lyClwJsgI=;
+ b=r5Xiibx40xEbGzDaVbwd3ihgY0c9VLiZkN4ekR2IfWrxTipb8estUa3tzHXVj46ZPL
+ Ci7CWo4zRDUpbZeMSIWN1xtBxkgYwiXEde5V9O9DeTwL32kLaIf1v+qfjGA/BnK4AwjM
+ 6r5mo0SI0fyknV5PBa5Y0D7uMhf6s5gkpobXIt1F3BYviF8cTgmYfO9mPglHqViXVGf4
+ DI1eohL7Hts6d6DTmzO+YjdKK6IcMABJ3VXovBZ7tBPlDL55szgsRhoqw7i5JmX2FTc1
+ uZM4ZUiIA5v/fNfKa4+kheN41Zov2CpHzWX+Ki9xm6yB/f/WWd7vXTBFtPZNXbnxeNJJ
+ NOig==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUxZxOavF7t3dwilO/03Hl1FqUtBalMBs4UtwanXP9VHMlOkOgUb5R0/4m2upOM6Fk0fF7eZf8KjusimvwQI2Wu@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yw2AmtpsZyUNPmawb5/OxYdL0/BwZ+SZZDBHrVQNY6PV4Ku4ZA6
+ keLdfl9YBTtOAUQ+/Gy51tJPfyhCPzSOWP3CcWjs3lwz79GDYPpGONGlxrgcuz0oEZgOch3+L9X
+ L
+X-Gm-Gg: ASbGncvcgw0rTe0Oer5Le2IMZ7rp8Ge8/jWT4WKFTLh821pMNY6z807Imwx/g5lcnjX
+ XY20rhJXkX6Quv856/+wu++3e41X6v2FfaayZAKrL46YQTJwvO2oOp4EuVKIIo9E3u0KLmvq96i
+ itZvYFOFuYc0vioDCltYDWFH1FDR9pmyB7woUuZmB3dgypUsHIDIwbydR15GGtotnJ0mWSrtyqg
+ C8Bb50+9IYh78wNrnGqAgYvLTlMcOFJV4lS7dhcv8X7+gccjuFEYNVptoS/dovEkzyD262sHZg9
+ CUyO7GFEBQ6U
+X-Google-Smtp-Source: AGHT+IGukiziiC1rLjM6JzNMSPR3ZwXkwHF2OgEI6BKabzKWh1pSdyxOGKbkMwtPxxnvRPz9dK83Ig==
+X-Received: by 2002:a05:6602:418b:b0:843:e8d0:a728 with SMTP id
+ ca18e2360f4ac-8541111199cmr2011722539f.4.1738508713097; 
+ Sun, 02 Feb 2025 07:05:13 -0800 (PST)
+Received: from [192.168.1.150] ([198.8.77.157])
+ by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-854a15cf87dsm197686139f.5.2025.02.02.07.05.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 02 Feb 2025 07:05:12 -0800 (PST)
+Message-ID: <4c45eff4-e87a-4eff-a760-b3b7d86b1987@kernel.dk>
+Date: Sun, 2 Feb 2025 08:05:11 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
-References: <20250131222457.1634039-1-jaegeuk@kernel.org>
-Content-Language: en-GB
-In-Reply-To: <20250131222457.1634039-1-jaegeuk@kernel.org>
-X-Provags-ID: V03:K1:XJAqUxI1M8FQjColY8RxoBsqzXl3zDmWMHbpsMwu1tWuZScnYdd
- nbeOtIvJUafwAqApMraOiAn6h2GpcmWeKnQetXgC5QsdHSkpgZXpbJwaIREMbGq4lLxZnj1
- x12i3FSgu2g5I83gjHznFO0Z6Xk0Wlj+dF6wsrktNAxKx/KOfOp7v6NfVAnyVadLfMZRv/I
- /Vd3KtzGdQF99EzEETh4Q==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:yz2xNDN0OaY=;q5ZuErU5Ur/nn/Z2KZnYcPiv5zu
- 6tAs8Z3ZMyxj7rLw/HBVnjFia11oEtcKMZMy3ZBITj1zb26YCYgsb3E8EHGgPBngJEzCTQZbH
- Py05xde6fALo1H0Iy3MRYIj7rpEjVnrDGlwvlovug1eHOJqJNsKn22k5ExqrU7LrWy/sCx2LT
- afLyKOxIskmnREmheOmWAY/bzKQ4xLJlF62suTkF5vo59qpqOrT7W0xKpqfuO64jRwTAgc/f2
- SOrHzECsyX0sV5emH8Bk67vZz1q92QWCsdlvZXS1YQVaVKWYiuFhuGDLU8n99aOf5dKModZ7N
- hZ/TzNFQicb73Fu8xaVZGsisWuAZuu8I+oTCBGbwb81g56nN/oYyErcTntulQpwxtbwGMb0QE
- iQlKUlPAbKGh5O5a2uNW1czT6ymtDPYWEjRhoxg23OFRfaSJ7Qi2cGhlgMMvETc1XWK3pTUDr
- kRS4+3fOJom94/a37czlKGYFDPZw8jF39GD6Q8t0wSH+mdAvVYo8LZPnuGZbBYtXIFPtkoNEV
- e/gvGUDAGNdqlYxmP214XSseUp/M7N+Qu2IpCNHGYkjtbYOpwUgVRS4frpEomn2sOrdr+34ed
- 5DA79vwR7mP5t8fsaHlMIT2jqa57tiaL+P3D9RtEyjnoFEmqR1FS2FL/9AzCCnQlMX5WoeQZV
- 3XKnN4ik5j3RRAA/RNYhqEOQw/L2pLyFBAsGeZVqEZr4OnuPb0dlhp7EThPz8W05ApD+B4xyU
- 7An6yvAy/8Koaro79ZDqHNErRqvXMV7zSWb8b0mBL8mQ0KzJdI8BWAzk+767Z/yo6q9tOKfd/
- 02SP7r8TdULy6XK7Xt1sCFXHoOAAVA+V16lG3zDV5mCaEgyM5cHLwrC4FuqaF3zGFSSsdkwef
- SZ/iOhkIq0mfDD307QPPLYinUN0KktxVwQZGAoPbkwESHqcUfQr06NCcXkESJeoj0awRDtRTk
- rxUf3WIj1QT3aKBKV658L85yZtjCWMxOvAerTLAcOB3WzDDXRiKX/crFV7EqEkyqAx4NV3diF
- LFmwiDfTXWvNVPIbHISlwFHaiTvEsOfcz1XeqQMFk9L4Yr4WN5Ipt4rWGxGEwwzcafXtO+bRO
- YyFn5dJXjeJMFHQgvQ3f+06HWNNyObK7y+I1J5TUZN2WCzCAaMd1hyGMGTwslhDjB0FueGo/+
- gHd3LEb/9tm83i2z1orbYhEYxSK2ohGhghLGPWk/z9q7Tqk1PeGM2dLMHNphTWP6xac+lPQf/
- q+2C96G8x2g3PchSte/7aIwms5/5LicRcYGxcG3QTt/7YuMcPG+haOUoEOz0QwfVbBO5X3ZyU
- nchP5RZ3AUZMYm0QXLdi+Wl3sXoMUzba6u3lsK7qjQ+xKHxFTGCv+71jJYsj5SWp0AU
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+To: Kohei Enju <enjuk@amazon.com>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-kernel@vger.kernel.org
+References: <20250202043253.64389-1-enjuk@amazon.com>
+Content-Language: en-US
+From: Jens Axboe <axboe@kernel.dk>
+In-Reply-To: <20250202043253.64389-1-enjuk@amazon.com>
+X-Spam-Score: -0.0 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  > Fix a wrong kobject_put in the error path. * How do you
-   think about to add any tags (like “Fixes” and “Cc”) accordingly? *
-    Will cover letters be usually helpful for such patch series? 
- 
- Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On 2/1/25 9:32 PM,
+ Kohei Enju wrote: > When __GFP_DIRECT_RECLAIM
+ (included in both GFP_NOIO and GFP_KERNEL) is > specified, bio_alloc_bioset()
+ never fails to allocate a bio. > Commit 67883ade7a98 ("f2 [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.160.174 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.160.174 listed in bl.score.senderscore.com]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [212.227.17.11 listed in list.dnswl.org]
-  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                             [212.227.17.11 listed in sa-accredit.habeas.com]
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                             [212.227.17.11 listed in bl.score.senderscore.com]
+ no trust [209.85.160.174 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
-                             [212.227.17.11 listed in wl.mailspike.net]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [209.85.160.174 listed in wl.mailspike.net]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [markus.elfring[at]web.de]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1tebWt-0000qZ-Ir
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: don't kobject_put in the error case
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1tebrM-0001kO-GB
+Subject: Re: [f2fs-dev] [PATCH v1] f2fs: remove unnecessary null checking
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -145,18 +143,29 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Markus Elfring via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Markus Elfring <Markus.Elfring@web.de>
-Cc: LKML <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Damien Le Moal <damien.lemoal@wdc.com>,
+ Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>,
+ Johannes Thumshirn <johannes.thumshirn@wdc.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Kohei Enju <kohei.enju@gmail.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-PiBGaXggYSB3cm9uZyBrb2JqZWN0X3B1dCBpbiB0aGUgZXJyb3IgcGF0aC4KCiogSG93IGRvIHlv
-dSB0aGluayBhYm91dCB0byBhZGQgYW55IHRhZ3MgKGxpa2Ug4oCcRml4ZXPigJ0gYW5kIOKAnENj
-4oCdKSBhY2NvcmRpbmdseT8KCiogV2lsbCBjb3ZlciBsZXR0ZXJzIGJlIHVzdWFsbHkgaGVscGZ1
-bCBmb3Igc3VjaCBwYXRjaCBzZXJpZXM/CgoKUmVnYXJkcywKTWFya3VzCgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWls
-aW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9s
-aXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On 2/1/25 9:32 PM, Kohei Enju wrote:
+> When __GFP_DIRECT_RECLAIM (included in both GFP_NOIO and GFP_KERNEL) is
+> specified, bio_alloc_bioset() never fails to allocate a bio.
+> Commit 67883ade7a98 ("f2fs: remove FAULT_ALLOC_BIO") replaced
+> f2fs_bio_alloc() with bio_alloc_bioset(), but null checking after
+> bio_alloc_bioset() was still left.
+
+Reviewed-by: Jens Axboe <axboe@kernel.dk>
+
+-- 
+Jens Axboe
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
