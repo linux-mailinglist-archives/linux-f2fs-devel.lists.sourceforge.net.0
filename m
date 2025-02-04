@@ -2,107 +2,117 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F13BA26B88
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Feb 2025 06:49:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAFFFA26CFD
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Feb 2025 09:06:58 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tfBoh-0001XP-6g;
-	Tue, 04 Feb 2025 05:49:47 +0000
+	id 1tfDxJ-0002X5-6p;
+	Tue, 04 Feb 2025 08:06:49 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <BATV+ea2238c820210655d397+7835+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1tfBog-0001XI-15 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Feb 2025 05:49:47 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <lkp@intel.com>) id 1tfDxG-0002W9-Vf
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 04 Feb 2025 08:06:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=s5Zhk5Xv/to3IdCo2qfEM3Rd+KIEFauoYnzDJ0mZZUM=; b=IY5pgR7frECZy9DFxanaCzd3rS
- th5WdL7Bx7OHgynTz5lm6WdnNOXKQxYBGz/+YfYCVWohAdeuISe3aIk+TkIBMfUeV+am4eg6J0lIk
- ObMH/8bsvZi2B9SPITLEijMIZY0OgDTk9BYhtgk2MtknUJ31se6DrxjTq81BSTH8JR7A=;
+ bh=RKOsRlaNvPL21CPQTiXjgo5WtPBvPw0AkhepGLD+Uk8=; b=WTJ1zMOeuPN7rVMYTJymFWi4wd
+ fpuv7qm9nSYTYF/wKRZFDzQPxtucStqN8vBke8LDDTkmHoiJ6dulmqVrF3niVD6Wdk+YSDMC2F1SY
+ 22kGvWGdJwELBGLhDdmBmUZHK8Cw6mJuRWtg2YdANhobZAqXJDV95mI39IGojx70DQOg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=s5Zhk5Xv/to3IdCo2qfEM3Rd+KIEFauoYnzDJ0mZZUM=; b=FpmWhnHSA7upUGjZNZLfGlLmpA
- N3pnUanK+4qA8Zhs+m6zlGlo3p36UlEIcdDGMrsi+tqfFBN0aVQ/rNYUiKIzAgXv9ew7dcloXL4+t
- e7n1rg70lKWO2T4BQ3QIMh8iGTMC9Ihz7daT6OaLvAC+GfWWW2G3Nw3UIPnkie7IfGS4=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=RKOsRlaNvPL21CPQTiXjgo5WtPBvPw0AkhepGLD+Uk8=; b=A
+ JjL2gM0tuuk8bwCENHpZfz1b1gVK2eZf3/6wKkVEarm8zfOoU+Y8z/aHngzTzBoDpzUf3kzpV12ZL
+ 092dSJEJWP4DCWbcJUpYsVrfp2W9/R7dyx3x2G1eY3SSwYNpkSvMyvL6By2cxTM61SNSiMBum8AN/
+ AqA47JdiSjbxBpFg=;
+Received: from mgamail.intel.com ([192.198.163.8])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tfBod-000137-7v for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Feb 2025 05:49:46 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=s5Zhk5Xv/to3IdCo2qfEM3Rd+KIEFauoYnzDJ0mZZUM=; b=2teENuLyXvCrs6O7KUZeOOB4IB
- Bn2GJi+MbkopSRPect/FNTGL5iDJOzvTmAoo0YT3ykWhkSffKRAZdI2SL9SPX3PfcKh9fCpWcmN4d
- W+K9CnK+Qb7vzSYoz9fB4ZyA2+6QnfieF+7nheA1bWJ1Wid2Cs/PU5NqTptK7SYqS2w+5X4xBc/fS
- mnfThaeA2Xm3zjtcU25OnvMxrhrsD4F1kBYMXY3lLX2X1NEcdfMqZnWbqS883n5GeNzNlasdXmudK
- 8uUsWqpbESK+d8HEyHAPmiPoaTqjf7d5mgO/eQ52PqS2rmEZvpziJMquLjq0xEfLeiT61Nnx7ULit
- yCIzlXZg==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.98 #2 (Red Hat
- Linux)) id 1tfBoS-0000000HIzb-0ClL; Tue, 04 Feb 2025 05:49:32 +0000
-Date: Mon, 3 Feb 2025 21:49:32 -0800
-From: Christoph Hellwig <hch@infradead.org>
+ id 1tfDxD-0002a2-Km for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 04 Feb 2025 08:06:47 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1738656403; x=1770192403;
+ h=date:from:to:cc:subject:message-id:mime-version;
+ bh=TrvkCF04MEiPuvtlS3hO+AoilWK1NPuWpdTo4cFzql0=;
+ b=eC5s46lglOCCI0VkvqogoH0WBGizPcLNWmOROaYWMvUOZrzJ/DQ7744A
+ NOSHqSvqKeCPW+PFFO28fcB7r2porJ1iPlV0sSz/cO5tC5GiOzP4Z83D+
+ Hc1y8DrRPR78b+TFb5S0vEBtMcZE3CILfDuGlqmnczi+djbalMrxLsFKb
+ QlTV1xB6b+LmxKmSIpbScWs7mU21xppyQ9ek3txG9Z1CNjbOtteCO7+JS
+ lOW6wJ7QJHFVKJ7ktkxhnYmkuj7Ep1XEhyFfdeGst+nP0H2k6hY9IA9vi
+ nPhaX5Ycz3xMY5WeVOGZ0MICqRkWfIjIioojk+gsKI+0LIcnphjeSO7hB g==;
+X-CSE-ConnectionGUID: r6bzNsqYTxKh9dfOd78Mag==
+X-CSE-MsgGUID: XltjOs//TpujDtiCoZ2Crw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11335"; a="56707193"
+X-IronPort-AV: E=Sophos;i="6.13,258,1732608000"; d="scan'208";a="56707193"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+ by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Feb 2025 00:06:33 -0800
+X-CSE-ConnectionGUID: MRQ9FLLtSL+1bqYsdw2RlA==
+X-CSE-MsgGUID: 97tr8tbtSWOrrx927DjDWw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.13,258,1732608000"; d="scan'208";a="115524486"
+Received: from lkp-server01.sh.intel.com (HELO d63d4d77d921) ([10.239.97.150])
+ by orviesa004.jf.intel.com with ESMTP; 04 Feb 2025 00:06:32 -0800
+Received: from kbuild by d63d4d77d921 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1tfDwz-000sBX-0w;
+ Tue, 04 Feb 2025 08:06:29 +0000
+Date: Tue, 4 Feb 2025 16:05:33 +0800
+From: kernel test robot <lkp@intel.com>
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <Z6GqbJxJAsRPQ4uQ@infradead.org>
-References: <20250131222914.1634961-1-jaegeuk@kernel.org>
+Message-ID: <202502041610.nmS1Brio-lkp@intel.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20250131222914.1634961-1-jaegeuk@kernel.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jan 31, 2025 at 10:27:55PM +0000, Jaegeuk Kim wrote:
- > Note, let me keep improving this patch set,
- while trying to get some feedbacks
- > from MM and API folks from [1]. Please actually drive it instead of only
- interacting once after I told you to. The feedback is clearly that it is
- a MM thing, so please drive it forward instead of going back to the hacky
- file system [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview: tree:
+ https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ dev-test head: f0d674f43daa7e255465f8d847734a6b9b0f63db commit:
+ f0d674f43daa7e255465f8d847734a6b9b0f63db
+ [4/4] f2fs: add a sysfs [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [198.137.202.133 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [198.137.202.133 listed in sa-trusted.bondedsender.org]
+ [192.198.163.8 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [192.198.163.8 listed in bl.score.senderscore.com]
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [198.137.202.133 listed in list.dnswl.org]
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ medium trust [192.198.163.8 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1tfBod-000137-7v
-Subject: Re: [f2fs-dev] [PATCH 0/2 v8] add ioctl/sysfs to donate file-backed
- pages
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tfDxD-0002a2-Km
+Subject: [f2fs-dev] [jaegeuk-f2fs:dev-test 4/4] fs/f2fs/sysfs.c:923:6:
+ warning: variable 'res' is used uninitialized whenever 'if' condition is
+ false
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,65 +124,60 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
- linux-api@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: llvm@lists.linux.dev, linux-f2fs-devel@lists.sourceforge.net,
+ oe-kbuild-all@lists.linux.dev
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jan 31, 2025 at 10:27:55PM +0000, Jaegeuk Kim wrote:
-> Note, let me keep improving this patch set, while trying to get some feedbacks
-> from MM and API folks from [1].
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
+head:   f0d674f43daa7e255465f8d847734a6b9b0f63db
+commit: f0d674f43daa7e255465f8d847734a6b9b0f63db [4/4] f2fs: add a sysfs entry to request donate file-backed pages
+config: i386-buildonly-randconfig-003-20250204 (https://download.01.org/0day-ci/archive/20250204/202502041610.nmS1Brio-lkp@intel.com/config)
+compiler: clang version 19.1.3 (https://github.com/llvm/llvm-project ab51eccf88f5321e7c60591c5546b254b6afab99)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250204/202502041610.nmS1Brio-lkp@intel.com/reproduce)
 
-Please actually drive it instead of only interacting once after
-I told you to.  The feedback is clearly that it is a MM thing, so please
-drive it forward instead of going back to the hacky file system version.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202502041610.nmS1Brio-lkp@intel.com/
 
-> 
-> If users clearly know which file-backed pages to reclaim in system view, they
-> can use this ioctl() to register in advance and reclaim all at once later.
-> 
-> I'd like to propose this API in F2FS only, since
-> 1) the use-case is quite limited in Android at the moment. Once it's generall
-> accepted with more use-cases, happy to propose a generic API such as fadvise.
-> Please chime in, if there's any needs.
-> 
-> 2) it's file-backed pages which requires to maintain the list of inode objects.
-> I'm not sure this fits in MM tho, also happy to listen to any feedback.
-> 
-> [1] https://lore.kernel.org/lkml/Z4qmF2n2pzuHqad_@google.com/
-> 
-> Change log from v7:
->  - change the sysfs entry to reclaim pages in all f2fs mounts
-> 
-> Change log from v6:
->  - change sysfs entry name to reclaim_caches_kb
-> 
-> Jaegeuk Kim (2):
->   f2fs: register inodes which is able to donate pages
->   f2fs: add a sysfs entry to request donate file-backed pages
-> 
-> Jaegeuk Kim (2):
->   f2fs: register inodes which is able to donate pages
->   f2fs: add a sysfs entry to request donate file-backed pages
-> 
->  Documentation/ABI/testing/sysfs-fs-f2fs |  7 ++
->  fs/f2fs/debug.c                         |  3 +
->  fs/f2fs/f2fs.h                          | 14 +++-
->  fs/f2fs/file.c                          | 60 +++++++++++++++++
->  fs/f2fs/inode.c                         | 14 ++++
->  fs/f2fs/shrinker.c                      | 90 +++++++++++++++++++++++++
->  fs/f2fs/super.c                         |  1 +
->  fs/f2fs/sysfs.c                         | 63 +++++++++++++++++
->  include/uapi/linux/f2fs.h               |  7 ++
->  9 files changed, 258 insertions(+), 1 deletion(-)
-> 
-> -- 
-> 2.48.1.362.g079036d154-goog
-> 
-> 
----end quoted text---
+All warnings (new ones prefixed by >>):
+
+>> fs/f2fs/sysfs.c:923:6: warning: variable 'res' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+     923 |         if (!strcmp(a->attr.name, "reclaim_caches_kb"))
+         |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   fs/f2fs/sysfs.c:926:33: note: uninitialized use occurs here
+     926 |         return sysfs_emit(buf, "%u\n", res);
+         |                                        ^~~
+   fs/f2fs/sysfs.c:923:2: note: remove the 'if' if its condition is always true
+     923 |         if (!strcmp(a->attr.name, "reclaim_caches_kb"))
+         |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     924 |                 res = f2fs_donate_files();
+   fs/f2fs/sysfs.c:921:18: note: initialize the variable 'res' to silence this warning
+     921 |         unsigned int res;
+         |                         ^
+         |                          = 0
+   1 warning generated.
+
+
+vim +923 fs/f2fs/sysfs.c
+
+   918	
+   919	static ssize_t f2fs_tune_show(struct f2fs_base_attr *a, char *buf)
+   920	{
+   921		unsigned int res;
+   922	
+ > 923		if (!strcmp(a->attr.name, "reclaim_caches_kb"))
+   924			res = f2fs_donate_files();
+   925	
+   926		return sysfs_emit(buf, "%u\n", res);
+   927	}
+   928	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
 
 _______________________________________________
