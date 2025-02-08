@@ -2,112 +2,139 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC200A2D3CA
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  8 Feb 2025 05:27:47 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F33FA2D678
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  8 Feb 2025 14:54:40 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tgcRN-0008RH-TY;
-	Sat, 08 Feb 2025 04:27:37 +0000
+	id 1tglHy-0004Pg-G4;
+	Sat, 08 Feb 2025 13:54:29 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3LN2mZwkbAMU39Avlwwp2l00to.rzzrwp53p2nzy4py4.nzx@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1tgcRM-0008RB-Dz for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 08 Feb 2025 04:27:36 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <jyh429@gmail.com>) id 1tglHx-0004PT-4J
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 08 Feb 2025 13:54:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hEcdCIGgB0Vn/57Ax2iihJ0TfDTBfU1K58AmEwI4seE=; b=HQp8/ZbrropJc9gv113rDjR+gg
- E96reDlNbVje1ORrqqGQ66LchY4//eT4FoFSt1CGFnVAyr5TkqDcWV13oqyrntCioPC6taeZZJbdO
- maxfWTmQkOFM6f/kXHTBoaPV9vSbypQfr05scktUABlwNVmbkQuB4Pya435il5b/op/U=;
+ bh=iFnScfrb4FHKoOTGmqlb5WR9qT5yGH/QUW4XVtfAjOc=; b=IFodeJ3s6g9i8aoxfWUxzjwW/8
+ Wh5h/hAJ+hYVxdtBdYMJNPXqht2GHNE0+OFmVLFKSihgPx4M3X9QcLi98XVV1vzfpBfIt7bTf/a2o
+ AKYhkeq0/DEdIT9LU5oJOwpCMFSq/98vZeOJbvqiNdxHYGxFuj148minLVeVad++bmqo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=hEcdCIGgB0Vn/57Ax2iihJ0TfDTBfU1K58AmEwI4seE=; b=X
- Tyo53I1m1GS4HG6zcxh+0jwel9LqnYnzKqNkc5jO6v4r4AzpAHer+Qsl4+PXOTL2EzWyywlYlJwRY
- uQHFf/XdD0+EKhoteuA3OAzZbgEC2KNtz+pV2R7NlrYx292yhni8aGjgtYG0HimvR/1VhMdVgnvoZ
- eAN1kiihJ273EX3g=;
-Received: from mail-il1-f208.google.com ([209.85.166.208])
+ List-Owner:List-Archive; bh=iFnScfrb4FHKoOTGmqlb5WR9qT5yGH/QUW4XVtfAjOc=; b=B
+ xp669vpgwhNwsA4WV+3NhEv9DyoNOSbUapN7KvHQVPjIBrJ8zttEN5Ofn9+wLjRJPEd1rReBTyfr3
+ SFziEBEBiitnF+stFEZS3sKfAAFC7vPR1mMKedHfcQGD1EThO3lGvND9egYIjiKngt5c3wcYBa5mu
+ dal9kaX/liSBbjIA=;
+Received: from mail-pl1-f177.google.com ([209.85.214.177])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1tgcRL-0002o0-6t for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 08 Feb 2025 04:27:36 +0000
-Received: by mail-il1-f208.google.com with SMTP id
- e9e14a558f8ab-3ce81a40f5cso49109745ab.1
+ id 1tglHv-0000bE-Pi for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 08 Feb 2025 13:54:28 +0000
+Received: by mail-pl1-f177.google.com with SMTP id
+ d9443c01a7336-21f710c17baso5076885ad.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 07 Feb 2025 20:27:34 -0800 (PST)
+ Sat, 08 Feb 2025 05:54:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1739022862; x=1739627662; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iFnScfrb4FHKoOTGmqlb5WR9qT5yGH/QUW4XVtfAjOc=;
+ b=SXrRep+/GLJnW0YygK4hmz1kWj+zxEMeEsy/0xMVuLmA/63IC+/1v7EDdjkg8jdG3m
+ JpNXmYxT7+l63oKNs/XvxOePR7S0H/H+MSfpPcvoLy2MIgvBQFDgrzN9EuL457k9dzcb
+ 5zYijuK0hzPrkOHMxpxBB1fkp/0nbNW5zmBEmNHJnn0cdKbRWlfP2pm4MgS4AYltveDW
+ CAYVHvrZqp0qCJ6Iwwf9ANJL68qn5PpekHhpWc1epYJLc7fzYvKjDpFI0nEUEjf8wL2K
+ bPtKXbthBCRrqTHN0qXzTlTGv9RRVe6AZQZymcHLEccIsDKeZmj++0+DuZD7QVot/SaW
+ s8tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738988844; x=1739593644;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hEcdCIGgB0Vn/57Ax2iihJ0TfDTBfU1K58AmEwI4seE=;
- b=EykNnHfIud+q3C1MRe8QJQFYydq6BBZJK36smxbNz3HfAW77XDcgJ3/QPPmljQoH19
- ftG+EihNP20sLrx8bHcRcCkVLSIxPg5bxX+Xcx77O+7JRq99Iqjyz/LsNpIWmFoVuAMe
- lq4BcNM+7mk7hQpktlHDx+sHs1gECNuSuWOsEiB/2jr+sH6KjGFssuNxbeS0Fn8W2pdD
- hO4nh6FsEPsQSEbvEPnXYg3B+6ECv5DOAIZlX4uy9OlzquNTnI4TA+gzLx1idBk1JcZ0
- uJKWeo6StaETWG7C48MCupdzt8O2UA133Bc3T8xFBFTdsVY1hFtyhtPdSIndMaYcqFgh
- CrHg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVOSpRys/aKQV9ocHyNUzHWos8U68YHF7b9f7rf+SwBN4YCPnuxs33qh+ZQ1pC2IRsE+0rPcodTbcwTUFdaXJPS@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yxulrf40kTB5j24Avuc0sz6kS3NZQZXYuQH+8dZbuIbAa+Bk1cX
- 4fzO6f0OvWGS/Cx2aspVE3M+UXVjU384vEdylH6X2/sQWSj2YkZYg3lSj6ZWCT6sx5njed2Rbip
- yGkHQF679TtdhHA+IAmFULNFB4D6I7uQmSJ7HjmWSvsHMTImxOR7tTaA=
-X-Google-Smtp-Source: AGHT+IGONa3WrAbCBs+aXEuwguWbD84J1vU/jPAEW3IeTBy5fJyVH1dHuEQCe9ofULEBI7Wfi/BzguJoDjtGlw0wXDHBxKdjnSZu
+ d=1e100.net; s=20230601; t=1739022862; x=1739627662;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iFnScfrb4FHKoOTGmqlb5WR9qT5yGH/QUW4XVtfAjOc=;
+ b=QMwPt4GfS0sOCxqogxrSk5K8Dj7oixuPXeyiuKjwJVvs0QlmyZ6Kpp6f1rwXHg191B
+ jp1yJplH5qyW7UP0+B6junMcuLNdJGgTArmPu4sGrVUNucF3C5H/rzCl7fTCvflNBfIZ
+ prbgNgeUqVCZdTcjBBEryTy7mxYa6MQjjbk3jP8MB2ReB+i6Qg4OdrfqV5svL+WSmFJP
+ oBbIfD034gLoIyeZu5Mm/47S5fFvpDuyIx8ZIHe/4jovt29W6UWakQXrCSHNncOvKDSD
+ 0h/3LvqiACxIebtjKSS41AHSm4/d08oZgc6ZuHwnw3pi4CVdIMsZVLHTDwwpmzYx/XIa
+ Z0Gw==
+X-Gm-Message-State: AOJu0YzcxKMjS2V8HH/Or1gN0CxKYF0ZRLooJjwK+2X5SNcOt7JDnOpe
+ aw2/gOi8tDYfq/PHmxu4Dz0kSE7/FvfksZr0y0o7MvP8JLj6OBFf
+X-Gm-Gg: ASbGnctH4WqO2/qL/6HKml39/jfCtQi5gkEE4n1a8Nly/MtBg2wJiV97tTCcyO9VvDv
+ 3GrVTzs1uaDEo1cQRZyDuaU9icIixgaA3iB7COkMnfgh3lPX7E4h33hwZdE4c4txQaSFskW7ihG
+ vHU4+SpeoyTuDNdmD4OGlcymEX+6g/JBHmDvFhGvltLQ/qOzBiFJa8sYPrA3vDzVMTbPw9dA8Fx
+ aEMbOriwq4ID/Shu2pa6A3ZpsHzCtrrTn1d1DQvkED7yAuj6uEbfKSWSL1tNCGqB3FsD//AV0Bx
+ fqtgGLH16z4uaWVHZVbz+N612EjOvuQ4J5LjmtsBULFK
+X-Google-Smtp-Source: AGHT+IFbxc3GAXDoXKJ5rW0syHVzL3E4LhgGQxe7npP3vn/vPOBix39tigacRyRjZC1ZeMRoWdpayA==
+X-Received: by 2002:a05:6a00:1acc:b0:725:e015:9082 with SMTP id
+ d2e1a72fcca58-7305d421bf5mr10321913b3a.5.1739022862027; 
+ Sat, 08 Feb 2025 05:54:22 -0800 (PST)
+Received: from DESKTOP-B5TBVBT.localdomain ([175.117.51.71])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73048ad292dsm4749597b3a.61.2025.02.08.05.54.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 08 Feb 2025 05:54:21 -0800 (PST)
+From: Yohan Joung <jyh429@gmail.com>
+X-Google-Original-From: Yohan Joung <yohan.joung@sk.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org,
+	daeho43@gmail.com
+Date: Sat,  8 Feb 2025 22:54:14 +0900
+Message-Id: <20250208135414.417-1-yohan.joung@sk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Received: by 2002:a92:c544:0:b0:3d0:47e3:40bb with SMTP id
- e9e14a558f8ab-3d13dcfd0bdmr45240225ab.4.1738988844299; Fri, 07 Feb 2025
- 20:27:24 -0800 (PST)
-Date: Fri, 07 Feb 2025 20:27:24 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <67a6dd2c.050a0220.110943.0008.GAE@google.com>
-From: syzbot <syzbot+92895fc54ccb69ca6fa9@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.4 (/)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 0de63bb7d919
- Merge tag 'pull-fix' of git://git.kernel.org/.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=1699f5f8580000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.4 points, 6.0 required)
+ Content preview:  currently,
+ zone reset only occurs when there is urgent utilization
+ and when pending blocks are reallocated. this causes performance degradation, 
+ so we are modifying it to allow pending reset zones to [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.177 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.208 listed in sa-trusted.bondedsender.org]
+ [209.85.214.177 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.208 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.208 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.208 listed in wl.mailspike.net]
+ [209.85.214.177 listed in bl.score.senderscore.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [jyh429[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
-X-Headers-End: 1tgcRL-0002o0-6t
-Subject: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in folio_end_read
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [jyh429[at]gmail.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.177 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1tglHv-0000bE-Pi
+Subject: [f2fs-dev] [PATCH v1] f2fs: separate discard and zone reset command
+ from pend list
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,149 +146,124 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+currently, zone reset only occurs when there is urgent utilization and
+when pending blocks are reallocated. this causes performance
+degradation, so we are modifying it to allow pending reset zones to be
+issued.
 
-syzbot found the following issue on:
-
-HEAD commit:    0de63bb7d919 Merge tag 'pull-fix' of git://git.kernel.org/..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=1699f5f8580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=1909f2f0d8e641ce
-dashboard link: https://syzkaller.appspot.com/bug?extid=92895fc54ccb69ca6fa9
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-
-Unfortunately, I don't have any reproducer for this issue yet.
-
-Downloadable assets:
-disk image (non-bootable): https://storage.googleapis.com/syzbot-assets/7feb34a89c2a/non_bootable_disk-0de63bb7.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/1142009a30a7/vmlinux-0de63bb7.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/5d9e46a8998d/bzImage-0de63bb7.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+92895fc54ccb69ca6fa9@syzkaller.appspotmail.com
-
-page: refcount:2 mapcount:0 mapping:ffff8880455a0220 index:0x3807 pfn:0x5806b
-memcg:ffff888036be0000
-aops:f2fs_meta_aops ino:2
-flags: 0x4fff400000000a9(locked|waiters|uptodate|lru|node=1|zone=1|lastcpupid=0x7ff)
-raw: 04fff400000000a9 ffffea0001184188 ffff88804368b240 ffff8880455a0220
-raw: 0000000000003807 0000000000000000 00000002ffffffff ffff888036be0000
-page dumped because: VM_BUG_ON_FOLIO(success && folio_test_uptodate(folio))
-page_owner tracks the page as allocated
-page last allocated via order 0, migratetype Unmovable, gfp_mask 0x40c40(GFP_NOFS|__GFP_COMP), pid 5320, tgid 5319 (syz.0.0), ts 62351716889, free_ts 62334302156
- set_page_owner include/linux/page_owner.h:32 [inline]
- post_alloc_hook+0x1f4/0x240 mm/page_alloc.c:1551
- prep_new_page mm/page_alloc.c:1559 [inline]
- get_page_from_freelist+0x365c/0x37a0 mm/page_alloc.c:3477
- __alloc_frozen_pages_noprof+0x292/0x710 mm/page_alloc.c:4739
- alloc_pages_mpol+0x311/0x660 mm/mempolicy.c:2270
- alloc_frozen_pages_noprof mm/mempolicy.c:2341 [inline]
- alloc_pages_noprof+0x121/0x190 mm/mempolicy.c:2361
- folio_alloc_noprof+0x1e/0x30 mm/mempolicy.c:2371
- filemap_alloc_folio_noprof+0xe1/0x540 mm/filemap.c:1019
- __filemap_get_folio+0x438/0xae0 mm/filemap.c:1970
- pagecache_get_page+0x2c/0x130 mm/folio-compat.c:87
- f2fs_pagecache_get_page fs/f2fs/f2fs.h:2804 [inline]
- ra_data_block+0x674/0xb40 fs/f2fs/gc.c:1263
- gc_data_segment fs/f2fs/gc.c:1627 [inline]
- do_garbage_collect+0x3b55/0x80e0 fs/f2fs/gc.c:1825
- f2fs_gc+0xf3a/0x2f60 fs/f2fs/gc.c:1929
- f2fs_balance_fs+0x5f1/0x810 fs/f2fs/segment.c:456
- f2fs_write_single_data_page+0x12ed/0x1bd0 fs/f2fs/data.c:2896
- f2fs_write_cache_pages fs/f2fs/data.c:3154 [inline]
- __f2fs_write_data_pages fs/f2fs/data.c:3309 [inline]
- f2fs_write_data_pages+0x1e03/0x3670 fs/f2fs/data.c:3336
- do_writepages+0x35f/0x880 mm/page-writeback.c:2687
-page last free pid 1037 tgid 1037 stack trace:
- reset_page_owner include/linux/page_owner.h:25 [inline]
- free_pages_prepare mm/page_alloc.c:1127 [inline]
- free_frozen_pages+0xe0d/0x10e0 mm/page_alloc.c:2660
- fscrypt_finalize_bounce_page include/linux/fscrypt.h:1119 [inline]
- f2fs_write_end_io+0x3cd/0x9a0 fs/f2fs/data.c:335
- blk_update_request+0x5e5/0x1160 block/blk-mq.c:983
- blk_mq_end_request+0x3e/0x70 block/blk-mq.c:1145
- loop_handle_cmd drivers/block/loop.c:1946 [inline]
- loop_process_work+0x1bc8/0x21c0 drivers/block/loop.c:1964
- process_one_work kernel/workqueue.c:3236 [inline]
- process_scheduled_works+0xa66/0x1840 kernel/workqueue.c:3317
- worker_thread+0x870/0xd30 kernel/workqueue.c:3398
- kthread+0x7a9/0x920 kernel/kthread.c:464
- ret_from_fork+0x4b/0x80 arch/x86/kernel/process.c:148
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
-------------[ cut here ]------------
-kernel BUG at mm/filemap.c:1526!
-Oops: invalid opcode: 0000 [#1] PREEMPT SMP KASAN NOPTI
-CPU: 0 UID: 0 PID: 27 Comm: kworker/u4:2 Not tainted 6.14.0-rc1-syzkaller-00020-g0de63bb7d919 #0
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2~bpo12+1 04/01/2014
-Workqueue: loop0 loop_workfn
-RIP: 0010:folio_end_read+0x239/0x240 mm/filemap.c:1526
-Code: 4f c7 ff 4c 89 ef 48 c7 c6 e0 d3 13 8c e8 6f 64 11 00 90 0f 0b e8 c7 4f c7 ff 4c 89 ef 48 c7 c6 20 cc 13 8c e8 58 64 11 00 90 <0f> 0b 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
-RSP: 0018:ffffc900004e73e8 EFLAGS: 00010246
-RAX: df44434cf2d67900 RBX: 0000000000000008 RCX: 0000000000000001
-RDX: dffffc0000000000 RSI: ffffffff8c0aa680 RDI: 0000000000000001
-RBP: 0000000000000000 R08: ffffffff942f9947 R09: 1ffffffff285f328
-R10: dffffc0000000000 R11: fffffbfff285f329 R12: ffffea0001601ac8
-R13: ffffea0001601ac0 R14: 1ffffd40002c0359 R15: 0000000000000001
-FS:  0000000000000000(0000) GS:ffff88801fc00000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f716e9b0fe0 CR3: 0000000011832000 CR4: 0000000000352ef0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- f2fs_finish_read_bio+0x3bb/0x850 fs/f2fs/data.c:154
- blk_update_request+0x5e5/0x1160 block/blk-mq.c:983
- blk_mq_end_request+0x3e/0x70 block/blk-mq.c:1145
- loop_handle_cmd drivers/block/loop.c:1946 [inline]
- loop_process_work+0x1bc8/0x21c0 drivers/block/loop.c:1964
- process_one_work kernel/workqueue.c:3236 [inline]
- process_scheduled_works+0xa66/0x1840 kernel/workqueue.c:3317
- worker_thread+0x870/0xd30 kernel/workqueue.c:3398
- kthread+0x7a9/0x920 kernel/kthread.c:464
- ret_from_fork+0x4b/0x80 arch/x86/kernel/process.c:148
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:folio_end_read+0x239/0x240 mm/filemap.c:1526
-Code: 4f c7 ff 4c 89 ef 48 c7 c6 e0 d3 13 8c e8 6f 64 11 00 90 0f 0b e8 c7 4f c7 ff 4c 89 ef 48 c7 c6 20 cc 13 8c e8 58 64 11 00 90 <0f> 0b 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
-RSP: 0018:ffffc900004e73e8 EFLAGS: 00010246
-RAX: df44434cf2d67900 RBX: 0000000000000008 RCX: 0000000000000001
-RDX: dffffc0000000000 RSI: ffffffff8c0aa680 RDI: 0000000000000001
-RBP: 0000000000000000 R08: ffffffff942f9947 R09: 1ffffffff285f328
-R10: dffffc0000000000 R11: fffffbfff285f329 R12: ffffea0001601ac8
-R13: ffffea0001601ac0 R14: 1ffffd40002c0359 R15: 0000000000000001
-FS:  0000000000000000(0000) GS:ffff88801fc00000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f716e9b0fe0 CR3: 0000000043542000 CR4: 0000000000352ef0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-
-
+Signed-off-by: Yohan Joung <yohan.joung@sk.com>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ fs/f2fs/f2fs.h    |  3 ++-
+ fs/f2fs/segment.c | 21 +++++++++++++++------
+ 2 files changed, 17 insertions(+), 7 deletions(-)
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 1afa7be16e7d..09a7e13c0d00 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -349,6 +349,7 @@ struct discard_entry {
+ 
+ /* max discard pend list number */
+ #define MAX_PLIST_NUM		512
++#define ZONE_PLIST_NUM		1
+ #define plist_idx(blk_num)	((blk_num) >= MAX_PLIST_NUM ?		\
+ 					(MAX_PLIST_NUM - 1) : ((blk_num) - 1))
+ 
+@@ -410,7 +411,7 @@ struct discard_policy {
+ struct discard_cmd_control {
+ 	struct task_struct *f2fs_issue_discard;	/* discard thread */
+ 	struct list_head entry_list;		/* 4KB discard entry list */
+-	struct list_head pend_list[MAX_PLIST_NUM];/* store pending entries */
++	struct list_head pend_list[MAX_PLIST_NUM + ZONE_PLIST_NUM];/* store pending entries */
+ 	struct list_head wait_list;		/* store on-flushing entries */
+ 	struct list_head fstrim_list;		/* in-flight discard from fstrim */
+ 	wait_queue_head_t discard_wait_queue;	/* waiting queue for wake-up */
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index c282e8a0a2ec..1c32252db525 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -962,7 +962,10 @@ static struct discard_cmd *__create_discard_cmd(struct f2fs_sb_info *sbi,
+ 
+ 	f2fs_bug_on(sbi, !len);
+ 
+-	pend_list = &dcc->pend_list[plist_idx(len)];
++	if (f2fs_sb_has_blkzoned(sbi) && bdev_is_zoned(bdev))
++		pend_list = &dcc->pend_list[MAX_PLIST_NUM];
++	else
++		pend_list = &dcc->pend_list[plist_idx(len)];
+ 
+ 	dc = f2fs_kmem_cache_alloc(discard_cmd_slab, GFP_NOFS, true, NULL);
+ 	INIT_LIST_HEAD(&dc->list);
+@@ -1649,6 +1652,8 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+ 	struct discard_cmd *dc, *tmp;
+ 	struct blk_plug plug;
+ 	int i, issued;
++	int plist_num = f2fs_sb_has_blkzoned(sbi) ?
++		MAX_PLIST_NUM + ZONE_PLIST_NUM : MAX_PLIST_NUM;
+ 	bool io_interrupted = false;
+ 
+ 	if (dpolicy->timeout)
+@@ -1656,12 +1661,12 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+ 
+ retry:
+ 	issued = 0;
+-	for (i = MAX_PLIST_NUM - 1; i >= 0; i--) {
++	for (i = plist_num - 1; i >= 0; i--) {
+ 		if (dpolicy->timeout &&
+ 				f2fs_time_over(sbi, UMOUNT_DISCARD_TIMEOUT))
+ 			break;
+ 
+-		if (i + 1 < dpolicy->granularity)
++		if (i + 1 < dpolicy->granularity && i + 1 != plist_num)
+ 			break;
+ 
+ 		if (i + 1 < dcc->max_ordered_discard && dpolicy->ordered) {
+@@ -1720,6 +1725,8 @@ static bool __drop_discard_cmd(struct f2fs_sb_info *sbi)
+ 	struct list_head *pend_list;
+ 	struct discard_cmd *dc, *tmp;
+ 	int i;
++	int plist_num = f2fs_sb_has_blkzoned(sbi) ?
++		MAX_PLIST_NUM + ZONE_PLIST_NUM : MAX_PLIST_NUM;
+ 	bool dropped = false;
+ 
+ 	mutex_lock(&dcc->cmd_lock);
+@@ -2305,7 +2312,7 @@ int f2fs_start_discard_thread(struct f2fs_sb_info *sbi)
+ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
+ {
+ 	struct discard_cmd_control *dcc;
+-	int err = 0, i;
++	int err = 0, i, plist_num;
+ 
+ 	if (SM_I(sbi)->dcc_info) {
+ 		dcc = SM_I(sbi)->dcc_info;
+@@ -2316,7 +2323,9 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
+ 	if (!dcc)
+ 		return -ENOMEM;
+ 
+-	dcc->discard_io_aware_gran = MAX_PLIST_NUM;
++	plist_num = f2fs_sb_has_blkzoned(sbi) ?
++		MAX_PLIST_NUM + ZONE_PLIST_NUM : MAX_PLIST_NUM;
++	dcc->discard_io_aware_gran = plist_num;
+ 	dcc->discard_granularity = DEFAULT_DISCARD_GRANULARITY;
+ 	dcc->max_ordered_discard = DEFAULT_MAX_ORDERED_DISCARD_GRANULARITY;
+ 	dcc->discard_io_aware = DPOLICY_IO_AWARE_ENABLE;
+@@ -2326,7 +2335,7 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
+ 		dcc->discard_granularity = BLKS_PER_SEC(sbi);
+ 
+ 	INIT_LIST_HEAD(&dcc->entry_list);
+-	for (i = 0; i < MAX_PLIST_NUM; i++)
++	for (i = 0; i < plist_num; i++)
+ 		INIT_LIST_HEAD(&dcc->pend_list[i]);
+ 	INIT_LIST_HEAD(&dcc->wait_list);
+ 	INIT_LIST_HEAD(&dcc->fstrim_list);
+-- 
+2.25.1
 
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
 
 
 _______________________________________________
