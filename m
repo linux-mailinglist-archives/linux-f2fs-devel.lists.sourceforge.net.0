@@ -2,90 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5735A2F54E
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Feb 2025 18:30:28 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CFB85A2F712
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Feb 2025 19:31:08 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1thXbw-0002NA-CF;
-	Mon, 10 Feb 2025 17:30:21 +0000
+	id 1thYYZ-0005A5-0m;
+	Mon, 10 Feb 2025 18:30:55 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1thXbu-0002Mx-SR
+ (envelope-from <corbet@lwn.net>) id 1thYYX-00059x-EV
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Feb 2025 17:30:19 +0000
+ Mon, 10 Feb 2025 18:30:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VtOBtpWpXL1G88rz26gKAlSoFKBQQ4AVk07VKGAXRmU=; b=ilWYGz09M2+PDtrOIP+l8mitPa
- EOGaGXSVI2TdVfDGZoMYuzeqdWgcA1/O7amaFZd6zaiapz1DwigEOQeKObvWIKRbcb89/h3M7zYNr
- 3L24mviEd4X2CJRJTeB8RirMIwNOsP7vghAlgN7jpRZHftfkbjdPOyFJOZOySGIrVnRM=;
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
+ References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=vlbv0FSFlLbSmcwi0qSd9c4OoNOyoJGUgwl16y4Fj8k=; b=igFIYsQYjzSQfG2J0JtHsc4QV0
+ HQ4Sjk9Fl2yH8z0RhQFSpLVd7wD3Z/UHK9rwJJYmG3cOj7TNGjvy2Bc4SKJiK9y/aJxa7Rzr8A9EI
+ E3glfu4JHAJ/IxgkRrxeQjmGTvVhy5MdeyUZSWhuMXc9eIR8D0/OsJVZGC4CPrqAOASE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VtOBtpWpXL1G88rz26gKAlSoFKBQQ4AVk07VKGAXRmU=; b=F9RKPO1U2A/iRoQKebptaaChZn
- udFmN+mdMAvG6q/7+2xs0CkQ2XKc1FFhbZRd6nGO6NDn23pOj/T7yr77I5NwsFSSx/ZhbNLLnD1Gx
- 8mnsgQv4Igmd30OAdSNXb0gxbjJnnn24jS1BC5INsIpY5BxYmg59O5lpJWKqZlgfsMgo=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ ;
+ h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=vlbv0FSFlLbSmcwi0qSd9c4OoNOyoJGUgwl16y4Fj8k=; b=myzrRrmQfHoDLUJ4c0QV8CCjZF
+ NcqMiTcNzBCtYJhpkhyH2VKdhQ6ftvC56SXPM1YKGYmk+g7J1yzurrKBZZffSp6/bsTFbKCG/n3ZC
+ 6V6ydpyejhpFBi1JMzFQvhZuQ/nLymigXF7zDQhq2J0TH82rDvLqtOo+F/0Lxm1RIuw0=;
+Received: from ms.lwn.net ([45.79.88.28])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1thXbt-0005Qm-U0 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Feb 2025 17:30:19 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E11BE5C5CFE;
- Mon, 10 Feb 2025 17:29:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 379CDC4CED1;
- Mon, 10 Feb 2025 17:30:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1739208612;
- bh=bPe9LIG/drrnqprJKulv02oVjfrWQtDlPp/JMf9iM/I=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=UbhqunpiUj4T0dAHLKpFT4aonN16xuIIlkoRlE4BJ5Q2UK5D8l5w8fVZJRZ20TqfF
- ODmg7nFDnfJbUmXrZCL/DCiC/qAhzNbww7kaziTjbE8/yFgeiDEEzTO8p7+ppMsVVR
- 9JtQgBLvhDMqHAKe9m3XWLDqDbpuqGbZfKPoCQpV5v06JlDbi3HK8W0S8e3i8FuHYw
- NhuauKMgm4XixzmGv8/XSn+C6ja46olg1UBe59uB9EjboAJoZ2+lXOAkJ/2V0OSweg
- q8TMHjiIDa+lNvZkeRwgK7gjYgtIkUA/4ZbQz23fOpeR6ofl7Fkd+icxkzXCNwjsVC
- HtLDXOTHkaVCg==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
- by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- EAE27380AA66; Mon, 10 Feb 2025 17:30:41 +0000 (UTC)
+ id 1thYYW-0001ki-O5 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Feb 2025 18:30:53 +0000
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 0D1D5411A1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+ t=1739212247; bh=vlbv0FSFlLbSmcwi0qSd9c4OoNOyoJGUgwl16y4Fj8k=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=PxFnHkEKSZrBYbzFpew/UljRdQUkTOX+qKIpKomAZlWSWpxide9l4c2bxkwdMwNWF
+ sWHrza4QeD17HbEJ1GVDgKEHsQ4J5fGszAooe0rUMV8SpHN2AnJh5s+msApTtSueTq
+ kldvsJD8z29V82iGnnNsIvc0IpF/n5AUf1V7EwE15mOEBZuS5tkWNvoYAelEzc0LtF
+ 9A/zQoFU1JnwlyetVPR6L3frzztdtk0XDVlSCAuejySkEp8NEq0ylr0UsJ5g1a1OZE
+ Vo03pIkLZ7JlMiGrr1nPdfsokPnHNxFSVgl0KcZB06VxFdKHkJg6ydIZAOvztgFrBm
+ SzjyXR5yVqF2g==
+Received: from localhost (unknown [IPv6:2601:280:5e00:625::1fe])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by ms.lwn.net (Postfix) with ESMTPSA id 0D1D5411A1;
+ Mon, 10 Feb 2025 18:30:46 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Linux Doc Mailing
+ List <linux-doc@vger.kernel.org>
+In-Reply-To: <cover.1739182025.git.mchehab+huawei@kernel.org>
+References: <cover.1739182025.git.mchehab+huawei@kernel.org>
+Date: Mon, 10 Feb 2025 11:30:46 -0700
+Message-ID: <87h651zm7d.fsf@trenco.lwn.net>
 MIME-Version: 1.0
-Message-Id: <173920864074.3835961.7030694610964519057.git-patchwork-notify@kernel.org>
-Date: Mon, 10 Feb 2025 17:30:40 +0000
-References: <1739150649-31850-1-git-send-email-zhiguo.niu@unisoc.com>
-In-Reply-To: <1739150649-31850-1-git-send-email-zhiguo.niu@unisoc.com>
-To: Zhiguo Niu <zhiguo.niu@unisoc.com>
-X-Spam-Score: -6.6 (------)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 10 Feb 2025 09:24:09 +0800 you
- wrote: > Quoted from include/linux/shrinker.h > "count_objects should return
- the number of freeable items in the cache. If > there are no objects to free, 
- it sho [...] 
- Content analysis details:   (-6.6 points, 6.0 required)
+ Content preview:  Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+ > Hi Jon/Greg, > > This series replace get_abi.pl with a Python version. >
+ > I originally started it due to some issues I noticed when searching for
+ > ABI symbols. While I could just go ahead and fix [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [45.79.88.28 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ [45.79.88.28 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [45.79.88.28 listed in bl.score.senderscore.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -93,15 +98,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1thXbt-0005Qm-U0
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to return SHRINK_EMPTY if no
- objects to free
+X-Headers-End: 1thYYW-0001ki-O5
+Subject: Re: [f2fs-dev] [PATCH 00/27] Improve ABI documentation generation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,41 +111,69 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: patchwork-bot+f2fs--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org,
- Hao_hao.Wang@unisoc.com
+Cc: Tony Luck <tony.luck@intel.com>, Suzuki K Poulose <suzuki.poulose@arm.com>,
+ Jaegeuk Kim <mchehab+huawei@kernel.org>, James Clark <james.clark@linaro.org>,
+ linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, "Guilherme G.
+ Piccoli" <gpiccoli@igalia.com>, linux-hardening@vger.kernel.org,
+ coresight@lists.linaro.org, Johannes Berg <johannes@sipsolutions.net>,
+ bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ Mike Leach <mike.leach@linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello:
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
 
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
+> Hi Jon/Greg,
+>
+> This series replace get_abi.pl with a Python version.
+>
+> I originally started it due to some issues I noticed when searching for
+> ABI symbols. While I could just go ahead and fix the already existing
+> script, I noticed that the script maintainance didn't have much care over
+> all those years, probably because it is easier to find Python programmers
+> those days.
+>
+> Also, the code is complex and was not using modules or classes and
+> were using lots of global variables.
+>
+> So, I decided to rewrite it in Python. I started with a manual conversion
+> for each function. Yet, to avoid future maintainership issues, I opted to
+> divide the main code on three classes, each on a sepaparate file.
+>
+> Just like the original RFC, I opted to keep the Sphinx kernel-abi module
+> on three different phases:
+>
+> - call get_abi.py as an exec file;
+> - import AbiParser on a minimal integration scenario;
+> - cleanup the code to avoid needing to parse line numbers from the text.
+>
+> This way, if something goes wrong, it would be easier to just revert any
+> offending patches, It also provides a better rationale about what each
+> logical change is doing.
+>
+> The initial patches on this series do some preparation work and
+> cleans some ABI symbol bugs that lack ":" delimiter.
+>
+> I opted to place on this series the Sphinx and Python version updates.
+>
+> I still have ~10 patches here with additional cleanups, from the original
+> series I sent as RFC but let's get the main changes merged first.
 
-On Mon, 10 Feb 2025 09:24:09 +0800 you wrote:
-> Quoted from include/linux/shrinker.h
-> "count_objects should return the number of freeable items in the cache. If
->  there are no objects to free, it should return SHRINK_EMPTY, while 0 is
->  returned in cases of the number of freeable items cannot be determined
->  or shrinker should skip this cache for this time (e.g., their number
->  is below shrinkable limit)."
-> 
-> [...]
+OK, I have applied this set - it seems to work for me, though it does
+lead to some changes in the organization of
+Documentation/admin-guide/abi.html in the output.
 
-Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to return SHRINK_EMPTY if no objects to free
-    https://git.kernel.org/jaegeuk/f2fs/c/bd409934c061
+It would be nice if, eventually, we could put the README link up at the
+top rather than under "ABI file", or even just include its contents
+there directly.
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+Anyway, let's see how this goes :)
 
+Thanks,
 
+jon
 
 
 _______________________________________________
