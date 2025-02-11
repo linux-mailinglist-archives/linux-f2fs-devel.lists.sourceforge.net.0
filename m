@@ -2,111 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF194A303A6
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Feb 2025 07:35:20 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E01B3A303AF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Feb 2025 07:37:25 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1thjrV-00024W-NJ;
-	Tue, 11 Feb 2025 06:35:14 +0000
+	id 1thjtU-0005bi-Rw;
+	Tue, 11 Feb 2025 06:37:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3le-qZwkbAGQUabMCNNGTCRRKF.IQQINGWUGTEQPVGPV.EQO@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1thjrU-00024Q-MC for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Feb 2025 06:35:13 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <chao@kernel.org>) id 1thjtT-0005bZ-4P
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Feb 2025 06:37:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Dnf+unHgvHTOrmxMwDXxzV/B0XTEiQ7sh1xCaruwTsc=; b=lEb/ZXhqAHuSsFKJhrv5jTF4tY
- YDi/Qr85BLEWBvYHrzovg2LAP3GACAFwBUO2uOsKEqTVNKO9zLekZ+OBi/v46lS+P1AG+NpezpSh/
- JcrGZXVGIlDSse56V0vWIOkpn7BZvEpdKYh+c/PplKarE4A9Kesq/QOLWR71mIYixoK0=;
+ bh=pNDXhF5FNklOXI0ktLcp3mnOw5yoFiXiia46J5BqihQ=; b=Fm+LE8AP41AwsFtusU6yFi4iNr
+ ETkQ0E6xzL0xQeUHIiOzUeq/w/Dmiob3y0/1+R/6LiSB7mDP2KUWvvq+de9xZUCkEZfS8PQPIgk3t
+ 27M4JkZ4PRS4rs/HNTbcvi+RCNdgYAj6gnfTZblSEVSXKwqjg6zq/NivjDnonwC0BYXo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Dnf+unHgvHTOrmxMwDXxzV/B0XTEiQ7sh1xCaruwTsc=; b=H
- J9iQyqqfZfjqaUpVSjI1WZv1WTMMUbv+v5fk6Unif1Doavz9M+RrxmID42/L5M8n1M86hsodMZxmf
- qnEZugoFttDzwektPUdLXngjHIVXbjIZYaDAMAN+vo4M2Zd00LfgHaQ8znXISOiK7h/ccJ+GnGEe6
- +LYevu0tUQM8Z6v4=;
-Received: from mail-il1-f197.google.com ([209.85.166.197])
+ List-Owner:List-Archive; bh=pNDXhF5FNklOXI0ktLcp3mnOw5yoFiXiia46J5BqihQ=; b=X
+ NJC5qC7nFOgQSsZNR9nBBpjDEtbl0KREBRlKGT3Ff7zBjnyABzQKxpnK7OB3R5VTLlO2WG61m59e+
+ 5nGswVgtA/e8i8tm0jSGCzkpt6mDlpRST1i043lnH1VoCcqcgVy3vwiLk2Pp7nNUTX+bf5y2BbPaD
+ u3KrZi1AULR8rTKw=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1thjrU-00067V-Fr for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Feb 2025 06:35:13 +0000
-Received: by mail-il1-f197.google.com with SMTP id
- e9e14a558f8ab-3d1445827f9so23699785ab.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 10 Feb 2025 22:35:12 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739255702; x=1739860502;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Dnf+unHgvHTOrmxMwDXxzV/B0XTEiQ7sh1xCaruwTsc=;
- b=hX4EGCRweJLTqt6wzaifm82sEh+dqE2YyvqST9EkmZ+R80AKGfO0g/AyRx1CL4mDt/
- ALEGJOtabMcYkqZZxF5YBiAeiud5upn6j+Wn1f6b65o2HpYjX31FgVNWaZDX3rvhuJ0B
- Pg7dTZ/VK2GASq3TW/paAK7jxRJIRaJvaYYdUI8zXSNCt8NXzyGgJev5MEb8BbPs1iZN
- RvlAJKkhOPDV09QJhZEWGgVCrAIJ0qKxdwDrbNwopp1SC1eB37hAfop9ILu5wvb1ScKL
- V0xM2vvapk/QN/LSg53PA9fAx4Km7KuUUM2VZ2gU8SNqNtQa04+OUItlQ0DeJ13vwcs5
- DjUg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXphHvBSRs9NXgXYl7SazYXtle6jsltvtqTfsp2Iz0BTGTRaWg9pGKkayr51+2VeFCnPqTXFDJ+8+6TkCzUZuR8@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwjsAol38f+HNP3kr3oeZpWnDEl73nEb2WBD8KoUfwOefhdli+s
- EifZZ9iHjmO5AFU9WcH39Vrnmsp8lR3jm9NcDUI5KxhypHhN+b6nTJLGR+wRYrlhoxpSb0mTwiA
- XiA5Ws8Et7pRTSp5StGWgjTq/rADWh6MlAx8h5JofiMQxC9CQd0G/2Ac=
-X-Google-Smtp-Source: AGHT+IGhMpMslXeGt3lLc1bKjPLawiRW7Nr5XJfSjPoi5bXWQhfcePiwGkI8j4D9+XAfR17GTUtGVMBsAPUuBwhwa8MQ/zJKNdWo
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1thjtR-0006FE-Lg for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Feb 2025 06:37:14 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 5F4E5A400E4;
+ Tue, 11 Feb 2025 06:35:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EAE3CC4CEDD;
+ Tue, 11 Feb 2025 06:37:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1739255827;
+ bh=2yiMq0kic3NrnbeSa2ncweARleUMsxv2MZfLUAhekBg=;
+ h=From:To:Cc:Subject:Date:From;
+ b=RPf78K2q9HUuMOvKHKYTYMZJZdjnBS6vsvOPMVUBAIJyjzkerItYnNHWGIHGehp0t
+ DuHptmwQCwGdWvyWZk1C1hReI98IYHFXxKEkFMlRAw8ZEL86X1NSidX59sou2OWptE
+ nU+FTOC2/hSG0lFgFlbqiX3ZeF/fMrcv23k763ar3NTcHhRb4osPRZ7kGntG7dzvgF
+ G+7VcDaen4CkYphc73WVcwqbaL2HDlf8qwHUITwq2fyKVtcrFow4vZpF1awrvK3U+Z
+ Zm7tAUJf4spebyJw0Z03mypGy/2H1it+VlGrqIChHo9AQOElXdq6adr2dv6+Pq/GX7
+ UfJ73yRjneO7Q==
+To: jaegeuk@kernel.org
+Date: Tue, 11 Feb 2025 14:36:57 +0800
+Message-ID: <20250211063657.405289-1-chao@kernel.org>
+X-Mailer: git-send-email 2.48.1.502.g6dc24dfdaf-goog
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:1909:b0:3d0:1abc:fe03 with SMTP id
- e9e14a558f8ab-3d13df2351bmr155028975ab.15.1739255701871; Mon, 10 Feb 2025
- 22:35:01 -0800 (PST)
-Date: Mon, 10 Feb 2025 22:35:01 -0800
-In-Reply-To: <c6764fc9-9ced-4a55-a91d-ae29e3db2433@kernel.org>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <67aaef95.050a0220.110943.003b.GAE@google.com>
-From: syzbot <syzbot+15669ec8c35ddf6c3d43@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.3 (/)
+X-Spam-Score: -3.9 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot has tested the proposed patch and the reproducer
- did not trigger any issue: Reported-by:
- syzbot+15669ec8c35ddf6c3d43@syzkaller.appspotmail.com
- Tested-by: syzbot+15669ec8c35ddf6c3d43@syzkaller.appspotmail.com 
- Content analysis details:   (0.3 points, 6.0 required)
+ Content preview: syzbot reports a f2fs bug as below: [ cut here ] kernel BUG
+ at fs/f2fs/segment.c:2746! CPU: 0 UID: 0 PID: 5323 Comm: syz.0.0 Not tainted
+ 6.13.0-rc2-syzkaller-00018-g7cb1b4663150 #0 RIP: 0010:get_new_segment fs/f2
+ [...] Content analysis details:   (-3.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.166.197 listed in sa-accredit.habeas.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.197 listed in bl.score.senderscore.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.197 listed in wl.mailspike.net]
-X-Headers-End: 1thjrU-00067V-Fr
-Subject: Re: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in new_curseg (2)
+ [147.75.193.91 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [147.75.193.91 listed in sa-trusted.bondedsender.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1thjtR-0006FE-Lg
+Subject: [f2fs-dev] [PATCH] f2fs: fix to avoid panic once fallocation fails
+ for pinfile
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,28 +108,146 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: syzbot+15669ec8c35ddf6c3d43@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+syzbot reports a f2fs bug as below:
 
-syzbot has tested the proposed patch and the reproducer did not trigger any issue:
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/segment.c:2746!
+CPU: 0 UID: 0 PID: 5323 Comm: syz.0.0 Not tainted 6.13.0-rc2-syzkaller-00018-g7cb1b4663150 #0
+RIP: 0010:get_new_segment fs/f2fs/segment.c:2746 [inline]
+RIP: 0010:new_curseg+0x1f52/0x1f70 fs/f2fs/segment.c:2876
+Call Trace:
+ <TASK>
+ __allocate_new_segment+0x1ce/0x940 fs/f2fs/segment.c:3210
+ f2fs_allocate_new_section fs/f2fs/segment.c:3224 [inline]
+ f2fs_allocate_pinning_section+0xfa/0x4e0 fs/f2fs/segment.c:3238
+ f2fs_expand_inode_data+0x696/0xca0 fs/f2fs/file.c:1830
+ f2fs_fallocate+0x537/0xa10 fs/f2fs/file.c:1940
+ vfs_fallocate+0x569/0x6e0 fs/open.c:327
+ do_vfs_ioctl+0x258c/0x2e40 fs/ioctl.c:885
+ __do_sys_ioctl fs/ioctl.c:904 [inline]
+ __se_sys_ioctl+0x80/0x170 fs/ioctl.c:892
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
 
+Concurrent pinfile allocation may run out of free section, result in
+panic in get_new_segment(), let's expand pin_sem lock coverage to
+include f2fs_gc(), so that we can make sure to reclaim enough free
+space for following allocation.
+
+In addition, do below changes to enhance error path handling:
+- call f2fs_bug_on() only in non-pinfile allocation path in
+get_new_segment().
+- call reset_curseg_fields() to reset all fields of curseg in
+new_curseg()
+
+Fixes: f5a53edcf01e ("f2fs: support aligned pinned file")
 Reported-by: syzbot+15669ec8c35ddf6c3d43@syzkaller.appspotmail.com
-Tested-by: syzbot+15669ec8c35ddf6c3d43@syzkaller.appspotmail.com
+Closes: https://lore.kernel.org/linux-f2fs-devel/675cd64e.050a0220.37aaf.00bb.GAE@google.com
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/file.c    |  8 +++++---
+ fs/f2fs/segment.c | 20 ++++++++++----------
+ 2 files changed, 15 insertions(+), 13 deletions(-)
 
-Tested on:
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 2f93a27d2f45..4c563edbf5c6 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1834,18 +1834,20 @@ static int f2fs_expand_inode_data(struct inode *inode, loff_t offset,
+ 
+ 		map.m_len = sec_blks;
+ next_alloc:
++		f2fs_down_write(&sbi->pin_sem);
++
+ 		if (has_not_enough_free_secs(sbi, 0, f2fs_sb_has_blkzoned(sbi) ?
+ 			ZONED_PIN_SEC_REQUIRED_COUNT :
+ 			GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi)))) {
+ 			f2fs_down_write(&sbi->gc_lock);
+ 			stat_inc_gc_call_count(sbi, FOREGROUND);
+ 			err = f2fs_gc(sbi, &gc_control);
+-			if (err && err != -ENODATA)
++			if (err && err != -ENODATA) {
++				f2fs_up_write(&sbi->pin_sem);
+ 				goto out_err;
++			}
+ 		}
+ 
+-		f2fs_down_write(&sbi->pin_sem);
+-
+ 		err = f2fs_allocate_pinning_section(sbi);
+ 		if (err) {
+ 			f2fs_up_write(&sbi->pin_sem);
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index c282e8a0a2ec..6ebe25eafafa 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -2806,7 +2806,7 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
+ 							MAIN_SECS(sbi));
+ 		if (secno >= MAIN_SECS(sbi)) {
+ 			ret = -ENOSPC;
+-			f2fs_bug_on(sbi, 1);
++			f2fs_bug_on(sbi, !pinning);
+ 			goto out_unlock;
+ 		}
+ 	}
+@@ -2848,7 +2848,7 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
+ out_unlock:
+ 	spin_unlock(&free_i->segmap_lock);
+ 
+-	if (ret == -ENOSPC)
++	if (ret == -ENOSPC && !pinning)
+ 		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_NO_SEGMENT);
+ 	return ret;
+ }
+@@ -2921,6 +2921,13 @@ static unsigned int __get_next_segno(struct f2fs_sb_info *sbi, int type)
+ 	return curseg->segno;
+ }
+ 
++static void reset_curseg_fields(struct curseg_info *curseg)
++{
++	curseg->inited = false;
++	curseg->segno = NULL_SEGNO;
++	curseg->next_segno = 0;
++}
++
+ /*
+  * Allocate a current working segment.
+  * This function always allocates a free segment in LFS manner.
+@@ -2939,7 +2946,7 @@ static int new_curseg(struct f2fs_sb_info *sbi, int type, bool new_sec)
+ 	ret = get_new_segment(sbi, &segno, new_sec, pinning);
+ 	if (ret) {
+ 		if (ret == -ENOSPC)
+-			curseg->segno = NULL_SEGNO;
++			reset_curseg_fields(curseg);
+ 		return ret;
+ 	}
+ 
+@@ -3710,13 +3717,6 @@ static void f2fs_randomize_chunk(struct f2fs_sb_info *sbi,
+ 		get_random_u32_inclusive(1, sbi->max_fragment_hole);
+ }
+ 
+-static void reset_curseg_fields(struct curseg_info *curseg)
+-{
+-	curseg->inited = false;
+-	curseg->segno = NULL_SEGNO;
+-	curseg->next_segno = 0;
+-}
+-
+ int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
+ 		block_t old_blkaddr, block_t *new_blkaddr,
+ 		struct f2fs_summary *sum, int type,
+-- 
+2.48.1.502.g6dc24dfdaf-goog
 
-commit:         b278ebc2 f2fs: fix to avoid panic once fallocation fai..
-git tree:       https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git bugfix/syzbot
-console output: https://syzkaller.appspot.com/x/log.txt?x=1191c3f8580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=147b7d49d83b8036
-dashboard link: https://syzkaller.appspot.com/bug?extid=15669ec8c35ddf6c3d43
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-
-Note: no patches were applied.
-Note: testing is done by a robot and is best-effort only.
 
 
 _______________________________________________
