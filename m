@@ -2,87 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B74BA31C2F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Feb 2025 03:40:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39BBAA31C7F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Feb 2025 04:00:35 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ti2fg-0004n2-TV;
-	Wed, 12 Feb 2025 02:40:16 +0000
+	id 1ti2zD-0001nX-1V;
+	Wed, 12 Feb 2025 03:00:27 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1ti2ff-0004mw-D7
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1ti2z9-0001nN-TU
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Feb 2025 02:40:14 +0000
+ Wed, 12 Feb 2025 03:00:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NBOxFvUDdllO6MIj+38zTQP6OPlmRPPe1WnDnnIfAKk=; b=m81zUHn73C22AcZHAHALKHvUuR
- EK/Rq4e58QHrvdmZKdICFreEFe2GinECDhyOK2QocaLSQzgrlTFG0AdKtIrSpdXs6xYvJ9zSWhWll
- 4cKmLUpGB+yCMCq3jUmMSUtVQO8s2ACqZao46D8dkTdGEnW4/Uhi+doPcxy0kICmfXpY=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=n2CRfA3Fg/E3w3AclExIBdeswh9xS0HJyvp4fmruKPs=; b=PDltM13g997U+EerDg3j+2CR/u
+ zKXbnlA5CuNQTB337dOWxAO79IJyW6eg4apN2zdy18zf1lZFProganSktUfcHg6ee91vPs89ILnlB
+ 2X8TMXHNLOQwXM9bAcnHd+GCnjeCzXifVsrTqvjNwVuBZ+UUR7RkiyrGHL+U4KR5AyBg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NBOxFvUDdllO6MIj+38zTQP6OPlmRPPe1WnDnnIfAKk=; b=KQUFP5/f+ZQvn5rJl/dUJ+En4b
- xLIjNfw+FnZdkh12NXojPMOkRuBlwBZMWs+Rr/YzKq9eGmWNAz//66m01Y4sM9F9CEocvordyWWws
- FoLAI+bM8/gpQvxrN+udMzxJh8tD0WZUHepA6bYVI5V4n5DrXTqunhiiEBUDziEbr6Wo=;
+ ;
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=n2CRfA3Fg/E3w3AclExIBdeswh9xS0HJyvp4fmruKPs=; b=Z
+ 7/3i1k9YvfErW1NQOIu6cK3h/beTBVFXw/OnXM4QPl2NeOnB+BcLe7PbTYCoLpxQtEncHpCuoeGGn
+ bFocMObr0hGH+GkGUNxbaeLFtP0ws654x5vcw4jcfjL3xbPxhYtKpfPSa52fB6daMUv0P5KB4qZ43
+ hxtvbRfpgfR12ja4=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ti2fe-0000ms-0Y for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Feb 2025 02:40:14 +0000
+ id 1ti2z6-0002CC-8u for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 12 Feb 2025 03:00:21 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id CD3F2A40F1F
+ by nyc.source.kernel.org (Postfix) with ESMTP id 28584A40EEB
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 12 Feb 2025 02:38:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFFEAC4CEDD;
- Wed, 12 Feb 2025 02:40:02 +0000 (UTC)
+ Wed, 12 Feb 2025 02:58:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45702C4CEDD
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 12 Feb 2025 03:00:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1739328002;
- bh=qCqjKDkgcJ9MTQY84WTCtp38UhKYa6ZgpJr4unZFVtU=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=tTK4Ay43kUqtrBJl7vMg8mVzH7+9t+lhzK5y2Z9LIeOLOVNR+xSh0fNVcujXn+EP9
- n2pCBhaOw4TXM2LDpgBb5+Ew63guS85rUlAW+BeZiwScbFrVgT9uOVgk7Bbie3TeSH
- +u9QyXCMdvDadvlXzj/IOLydnveTxUk0EhQHMvfOwXrc76TOQtiExS57hxgcmOLDZp
- Ym6h7+f+k7ssd6AQSyST28/TJtFf9MMcHf3zKkqu6WfoApfuzS+8hRTUWFBW6sszji
- Sh6DjAJ9l3M01DzaEW3J3ZqnxCo9MyX7OoR6/57J7rwopmtFuPPWvfQp4fXQdqtXPN
- CWrMG0ncsJVNg==
+ s=k20201202; t=1739329209;
+ bh=z28u0LksvZp5sb8TYGa2PGyVWFMKJdqExNoU9QeFHpg=;
+ h=Subject:From:Date:To:From;
+ b=qltxLNoVv/eBJoZacBjOGeXkL2koBDVOoM959Z6wtpwCl5YNIGCycyoJLbodSqVbH
+ lAhACQi9ujiAQehOcHDV6+vtg5i2RS8GQKTn0xzKq1ELKNr0Jb93gInL0uL7NmSXWk
+ 7VAtoHh10wK7RqotKTff3awxY/GvL65gtpMMNA3lWybe7NM84XkL/8Q8WZNQ3mreNY
+ 0Y1+nNoXGs8750MlBcKywriASREKD7dI8e0h2fMCqKK8RMYY5mwaHVJXKs2ZiJ7ST+
+ OybhsGq5NCuJhAPaAlExZFRvr7NvFYi4Yfsayjqurh39Kqqq09uhX9WX64ZfQFwgNn
+ gF5ZAfIRx92vQ==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- EB854380AAFF; Wed, 12 Feb 2025 02:40:32 +0000 (UTC)
+ 3A877380AAFF for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 12 Feb 2025 03:00:39 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <173932803180.78500.9143356682528307382.git-patchwork-notify@kernel.org>
-Date: Wed, 12 Feb 2025 02:40:31 +0000
-References: <20250212015413.666375-1-chao@kernel.org>
-In-Reply-To: <20250212015413.666375-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+Message-Id: <173932923766.82998.17919721663275604798.git-patchwork-summary@kernel.org>
+Date: Wed, 12 Feb 2025 03:00:37 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -4.0 (----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 12 Feb 2025 09:54:12 +0800 you
- wrote: > F2FS-fs (dm-105): inconsistent node block, nid:430,
- node_footer[nid:2198964142, ino:598252782, ofs:118300154,
- cpver:5409237455940746069, blkaddr:2125070942] [...] 
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev,v3,RESEND]
+ f2fs: add check for deleted inode Submitter: Chao Yu <chao@kernel.org>
+ Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/project/f2fs/list [...] 
  Content analysis details:   (-4.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in sa-trusted.bondedsender.org]
+ [147.75.193.91 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -95,14 +96,12 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ti2fe-0000ms-0Y
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: don't retry IO for corrupted data
- scenario
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ti2z6-0002CC-8u
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,38 +116,30 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This series was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-On Wed, 12 Feb 2025 09:54:12 +0800 you wrote:
-> F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-> F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-> F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-> F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-> F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-> F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-> F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-> F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-> F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-> F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-> 
-> [...]
+Patch: [f2fs-dev,v3,RESEND] f2fs: add check for deleted inode
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=932638
+  Lore link: https://lore.kernel.org/r/20250211071725.457343-1-chao@kernel.org
 
-Here is the summary with links:
-  - [f2fs-dev,1/2] f2fs: don't retry IO for corrupted data scenario
-    (no matching commit)
-  - [f2fs-dev,2/2] f2fs: add dump_stack() in f2fs_handle_critical_error()
-    https://git.kernel.org/jaegeuk/f2fs/c/4f91f074702a
+Patch: [f2fs-dev] f2fs: fix to avoid panic once fallocation fails for pinfile
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=932637
+  Lore link: https://lore.kernel.org/r/20250211063657.405289-1-chao@kernel.org
 
-You are awesome, thank you!
+
+Total patches: 2
+
 -- 
 Deet-doot-dot, I am a bot.
 https://korg.docs.kernel.org/patchwork/pwbot.html
