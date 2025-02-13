@@ -2,93 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72FC8A34CB6
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 Feb 2025 19:01:45 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72540A34CBA
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 Feb 2025 19:02:01 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tidWr-0001Gf-2s;
-	Thu, 13 Feb 2025 18:01:36 +0000
+	id 1tidXB-0006g2-3b;
+	Thu, 13 Feb 2025 18:01:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1tidWp-0001GX-VZ
+ (envelope-from <jaegeuk@kernel.org>) id 1tidX9-0006fu-Pp
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Feb 2025 18:01:35 +0000
+ Thu, 13 Feb 2025 18:01:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NTqinVqD0Fe7M69K76e6I6LhhnHxMiXEQN7yyovOEXA=; b=gM6LBWqQ/BB6Mhh0Z6Gwpfq4ds
- KtJ2E5bNLRFFopGgTWTpCn1QFlYVisyeX1oGnmQAaP/YmoRU0gn5Nbg05+znPe+2oYqAiyjQNqQDi
- 657eVOju7IRbKZ01RdfaTLk9+c4rC+mh8PgkkjPQI8AME5o9ZP6vhnx/0D2QIJye8ZM0=;
+ bh=etkomFXr4/IuIcI4nHoogOxKooxq2q9LY3Zkr/OSmOo=; b=C11cfH0BbmqMc2Qc8Pr396LGHr
+ lxiX/pkbyh3xQh2QHqjV4q87g8SoZDxWUDztwGd28dVXYev2TqUsx5VmJ2SczstQUYhBrmIZhRWtf
+ 8Rcs+v+WcSD9mIHTusSzi6lZCifEpTVxmxex7Ipa4zV1VfEjgQJdisVmq1eNZ6lM4ja4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=NTqinVqD0Fe7M69K76e6I6LhhnHxMiXEQN7yyovOEXA=; b=RSZ7qW4eGbMd3/OAO2UQ0GzXqp
- FH3K5OCxpYqCha+yPmm1uCr+w/ybtCzOwKNsljXmxKKYVoTrbevT7ko6mmvK1B0JzmTNjCLSixDvS
- AsmkrKJjMIZueynrqUP7UdNXCT4FI+w/l/5wgo3f8JY1phYjQh36g+o5ozMByiaSCkrA=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=etkomFXr4/IuIcI4nHoogOxKooxq2q9LY3Zkr/OSmOo=; b=R
+ X5qcVBmyUMOLQphCPvbhXblgFp4p5luoMSvKIKtUMof1CYwmBIQLD89L1gXtvHEjYvAZyxBG+Wq4b
+ /i846WmPku6bxa4G9A0zSR2JLhsJ6NG88owbrfsj2Kb18siU6RmY7AYmYkBFk2moHWUbxzrE6v+V0
+ BixHWP64B9IIgFxY=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tidWo-0000Xd-Hg for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Feb 2025 18:01:35 +0000
+ id 1tidX9-0000YX-1q for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 13 Feb 2025 18:01:55 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 91C4B5C5827;
- Thu, 13 Feb 2025 18:00:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99098C4CED1;
- Thu, 13 Feb 2025 18:01:23 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 1ABCCA42821
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 13 Feb 2025 17:59:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04F74C4CED1;
+ Thu, 13 Feb 2025 18:01:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1739469683;
- bh=D+/vdJ8x43Y7tH3mHS8FOCprLNgHQv5bttwXyXFdFJo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=VM1JBmkc8yxs32Xupt2EZs2OpEisQNQWdebs/TDoPAlu+gpcHeIBwLiWGqOvV0NH3
- g4L5kxBZWtMzm+y4+aAfX3XfRtSHVeN5jmFGJTlyNj21n6k7UIVYwfhY1sbHnslxHh
- Ijj5rAhSUUSnu7zWOZasGTK2v9PE/s4av8xpvaga6cKM3SKvftAH1Mkg/9DzB9RV8P
- UxVTU8J/jPssXzukxy9yZUCGM9xwmF64r401jIWtm6ZjAXhqV6lbcRdCHWd+VA8vxh
- pYVAn7m/3wnqF99xWsLobH9zeG1Xz8oVa4/DwTnVX09jypq6yAatIFLVxUvu7/dCb5
- /2vz3TByplLdw==
-Date: Thu, 13 Feb 2025 18:01:21 +0000
-To: Chao Yu <chao@kernel.org>
-Message-ID: <Z64zcac0_dw1_rML@google.com>
-References: <20250212075242.988652-1-chao@kernel.org>
+ s=k20201202; t=1739469704;
+ bh=Q+OW2aGUNBqv2QBKefyntT017Lfwys1/4EA4EGN3rXQ=;
+ h=From:To:Cc:Subject:Date:From;
+ b=SxwPjd1c0aICOqFsiiVB1vgiSO3XFbnUQZKSQiYJdVNSt6ke7lnkr4Q/xvGH8seA8
+ 9adgl2lG0NEsz+Bwkz0hCyA/dNdayCGFwVAhmBsMA2xQ8dNhLDBVuMhsAO9pJ4aCF/
+ eJb8CZPAYlL33ZSMGDFMsKlI9bE0GO35dguMS8U8jYoshGyBZgIq6wqNL19+6Sb+4V
+ VFTpGJVpwHo6Kp3X/VuuNL5HRruUJwRJQ2eUuni0+946Ru0fr+7s0pzG0Clf1l1Rug
+ Rfa4nvVpxj2cQWy+3sS1TWlU+s4IYPP1RyIePDYySzz5nBSBeafaBJH8Av7DBqB8/k
+ I7sc6O8624GWw==
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 13 Feb 2025 18:01:40 +0000
+Message-ID: <20250213180142.1366047-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.48.1.601.g30ceb7b040-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250212075242.988652-1-chao@kernel.org>
-X-Spam-Score: -6.7 (------)
+X-Spam-Score: -4.0 (----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 02/12,
- Chao Yu wrote: > syzbot reports a f2fs bug as below:
- > > F2FS-fs (loop3): Stopped filesystem due to reason: 7 > kworker/u8:7:
- attempt to access beyond end of device > BUG: unable to handle p [...] 
- Content analysis details:   (-6.7 points, 6.0 required)
+ Content preview: Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> ---
+ tools/f2fs_io/f2fs_io.c | 9 +++++++++ 1 file changed,
+ 9 insertions(+) diff --git a/tools/f2fs_io/f2fs_io.c
+ b/tools/f2fs_io/f2fs_io.c index fa01f8fd4809..e7ad22e08ba5 100644 ---
+ a/tools/f2fs_io/f2fs_io.c
+ +++ b/tools/f2fs_io/f2fs_io.c @@ -441,7 +441,10 @@ static void do_s [...]
+ Content analysis details:   (-4.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
+ [147.75.193.91 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [147.75.193.91 listed in sa-accredit.habeas.com]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -97,9 +98,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tidWo-0000Xd-Hg
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid accessing uninitialized
- curseg
+X-Headers-End: 1tidX9-0000YX-1q
+Subject: [f2fs-dev] [PATCH 1/2] f2fs_io: support fadvise dontneed, random,
+ and noreuse
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,146 +114,49 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: linux-kernel@vger.kernel.org,
- syzbot+b6b347b7a4ea1b2e29b6@syzkaller.appspotmail.com,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 02/12, Chao Yu wrote:
-> syzbot reports a f2fs bug as below:
-> 
-> F2FS-fs (loop3): Stopped filesystem due to reason: 7
-> kworker/u8:7: attempt to access beyond end of device
-> BUG: unable to handle page fault for address: ffffed1604ea3dfa
-> RIP: 0010:get_ckpt_valid_blocks fs/f2fs/segment.h:361 [inline]
-> RIP: 0010:has_curseg_enough_space fs/f2fs/segment.h:570 [inline]
-> RIP: 0010:__get_secs_required fs/f2fs/segment.h:620 [inline]
-> RIP: 0010:has_not_enough_free_secs fs/f2fs/segment.h:633 [inline]
-> RIP: 0010:has_enough_free_secs+0x575/0x1660 fs/f2fs/segment.h:649
->  <TASK>
->  f2fs_is_checkpoint_ready fs/f2fs/segment.h:671 [inline]
->  f2fs_write_inode+0x425/0x540 fs/f2fs/inode.c:791
->  write_inode fs/fs-writeback.c:1525 [inline]
->  __writeback_single_inode+0x708/0x10d0 fs/fs-writeback.c:1745
->  writeback_sb_inodes+0x820/0x1360 fs/fs-writeback.c:1976
->  wb_writeback+0x413/0xb80 fs/fs-writeback.c:2156
->  wb_do_writeback fs/fs-writeback.c:2303 [inline]
->  wb_workfn+0x410/0x1080 fs/fs-writeback.c:2343
->  process_one_work kernel/workqueue.c:3236 [inline]
->  process_scheduled_works+0xa66/0x1840 kernel/workqueue.c:3317
->  worker_thread+0x870/0xd30 kernel/workqueue.c:3398
->  kthread+0x7a9/0x920 kernel/kthread.c:464
->  ret_from_fork+0x4b/0x80 arch/x86/kernel/process.c:148
->  ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
-> 
-> Commit 8b10d3653735 ("f2fs: introduce FAULT_NO_SEGMENT") allows to trigger
-> no free segment fault in allocator, then it will update curseg->segno to
-> NULL_SEGNO, though, CP_ERROR_FLAG has been set, f2fs_write_inode() missed
-> to check the flag, and access invalid curseg->segno directly in below call
-> path, then resulting in panic:
-> 
-> - f2fs_write_inode
->  - f2fs_is_checkpoint_ready
->   - has_enough_free_secs
->    - has_not_enough_free_secs
->     - __get_secs_required
->      - has_curseg_enough_space
->       - get_ckpt_valid_blocks
->       : access invalid curseg->segno
-> 
-> To avoid this issue, let's:
-> - check CP_ERROR_FLAG flag in prior to f2fs_is_checkpoint_ready() in
-> f2fs_write_inode().
-> - in has_curseg_enough_space(), a) verify status of curseg before accessing
-> its field, and b) grab curseg_mutex lock to avoid race condition.
-> 
-> Fixes: 8b10d3653735 ("f2fs: introduce FAULT_NO_SEGMENT")
-> Reported-by: syzbot+b6b347b7a4ea1b2e29b6@syzkaller.appspotmail.com
-> Closes: https://lore.kernel.org/all/67973c2b.050a0220.11b1bb.0089.GAE@google.com
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  fs/f2fs/inode.c   |  7 +++++++
->  fs/f2fs/segment.h | 27 ++++++++++++++++++++++-----
->  2 files changed, 29 insertions(+), 5 deletions(-)
-> 
-> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-> index 02f1b69d03d8..5c1b515eab36 100644
-> --- a/fs/f2fs/inode.c
-> +++ b/fs/f2fs/inode.c
-> @@ -799,6 +799,13 @@ int f2fs_write_inode(struct inode *inode, struct writeback_control *wbc)
->  		!is_inode_flag_set(inode, FI_DIRTY_INODE))
->  		return 0;
->  
-> +	/*
-> +	 * no need to update inode page, ultimately f2fs_evict_inode() will
-> +	 * clear dirty status of inode.
-> +	 */
-> +	if (f2fs_cp_error(sbi))
-> +		return -EIO;
-> +
->  	if (!f2fs_is_checkpoint_ready(sbi)) {
->  		f2fs_mark_inode_dirty_sync(inode, true);
->  		return -ENOSPC;
-> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-> index 943be4f1d6d2..e9fcf2b85b76 100644
-> --- a/fs/f2fs/segment.h
-> +++ b/fs/f2fs/segment.h
-> @@ -559,15 +559,23 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
->  			unsigned int node_blocks, unsigned int data_blocks,
->  			unsigned int dent_blocks)
->  {
-> -
-> +	struct curseg_info *curseg;
->  	unsigned int segno, left_blocks, blocks;
->  	int i;
->  
->  	/* check current data/node sections in the worst case. */
->  	for (i = CURSEG_HOT_DATA; i < NR_PERSISTENT_LOG; i++) {
-> -		segno = CURSEG_I(sbi, i)->segno;
-> -		left_blocks = CAP_BLKS_PER_SEC(sbi) -
-> +		curseg = CURSEG_I(sbi, i);
-> +
-> +		mutex_lock(&curseg->curseg_mutex);
-> +		if (!curseg->inited || curseg->segno == NULL_SEGNO) {
-> +			left_blocks = 0;
-> +		} else {
-> +			segno = curseg->segno;
-> +			left_blocks = CAP_BLKS_PER_SEC(sbi) -
->  				get_ckpt_valid_blocks(sbi, segno, true);
-> +		}
-> +		mutex_unlock(&curseg->curseg_mutex);
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ tools/f2fs_io/f2fs_io.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-This looks a bit worrisome, as it'll block user-facing allocation. Can we
-have another way to prevent the issue?
+diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+index fa01f8fd4809..e7ad22e08ba5 100644
+--- a/tools/f2fs_io/f2fs_io.c
++++ b/tools/f2fs_io/f2fs_io.c
+@@ -441,7 +441,10 @@ static void do_shutdown(int argc, char **argv, const struct cmd_desc *cmd)
+ "fadvice given the file\n"					\
+ "advice can be\n"						\
+ " willneed\n"							\
++" dontneed\n"							\
++" noreuse\n"							\
+ " sequential\n"							\
++" random\n"							\
+ 
+ static void do_fadvise(int argc, char **argv, const struct cmd_desc *cmd)
+ {
+@@ -458,8 +461,14 @@ static void do_fadvise(int argc, char **argv, const struct cmd_desc *cmd)
+ 
+ 	if (!strcmp(argv[1], "willneed")) {
+ 		advice = POSIX_FADV_WILLNEED;
++	} else if (!strcmp(argv[1], "dontneed")) {
++		advice = POSIX_FADV_DONTNEED;
++	} else if (!strcmp(argv[1], "noreuse")) {
++		advice = POSIX_FADV_NOREUSE;
+ 	} else if (!strcmp(argv[1], "sequential")) {
+ 		advice = POSIX_FADV_SEQUENTIAL;
++	} else if (!strcmp(argv[1], "random")) {
++		advice = POSIX_FADV_RANDOM;
+ 	} else {
+ 		fputs("Wrong advice\n\n", stderr);
+ 		fputs(cmd->cmd_help, stderr);
+-- 
+2.48.1.601.g30ceb7b040-goog
 
->  
->  		blocks = i <= CURSEG_COLD_DATA ? data_blocks : node_blocks;
->  		if (blocks > left_blocks)
-> @@ -575,9 +583,18 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
->  	}
->  
->  	/* check current data section for dentry blocks. */
-> -	segno = CURSEG_I(sbi, CURSEG_HOT_DATA)->segno;
-> -	left_blocks = CAP_BLKS_PER_SEC(sbi) -
-> +	curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
-> +
-> +	mutex_lock(&curseg->curseg_mutex);
-> +	if (!curseg->inited || curseg->segno == NULL_SEGNO) {
-> +		left_blocks = 0;
-> +	} else {
-> +		segno = curseg->segno;
-> +		left_blocks = CAP_BLKS_PER_SEC(sbi) -
->  			get_ckpt_valid_blocks(sbi, segno, true);
-> +	}
-> +	mutex_unlock(&curseg->curseg_mutex);
-> +
->  	if (dent_blocks > left_blocks)
->  		return false;
->  	return true;
-> -- 
-> 2.48.1.502.g6dc24dfdaf-goog
 
 
 _______________________________________________
