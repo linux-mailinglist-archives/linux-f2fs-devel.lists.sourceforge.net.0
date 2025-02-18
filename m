@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E492EA3931F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Feb 2025 06:52:26 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A57EA39313
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Feb 2025 06:52:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tkGWw-00026B-8z;
-	Tue, 18 Feb 2025 05:52:25 +0000
+	id 1tkGWn-0004sl-On;
+	Tue, 18 Feb 2025 05:52:18 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1tkGWq-00024E-8u
+ (envelope-from <willy@infradead.org>) id 1tkGWl-0004sA-3W
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Feb 2025 05:52:19 +0000
+ Tue, 18 Feb 2025 05:52:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cM12HuwtYvDW5RZv6niKy3FbHGL/VsXhMZwF7o58pWw=; b=fxFJWkazflFrCOted9xBr24UFS
- QVaIWiO3LdkdSkhBvlFzXObh6V7sWpPA8YkCBbt6ThcdyGCgdUl7rVTzuuRU3zKbg4cUmt2Onkxdn
- yZYv6rdQ8ncYOn81zchG8bD3RnOBD3f7ScloIPysnAdXCc+UNERTMuRl50bfHMG8fUIM=;
+ bh=+DXT/7jgKhUnDWqt8Mtbn1jWwn4NhU9BvgnRZLnP7oI=; b=jwMXcgwW3LL8p1Y2UlhRMKwYTY
+ nFxP/aI8GoGUBZeYuOv2Jqet6UV0OvAp2qTcQs3UcyNWI4gjX5hidXslh3zi0/ILkN6eEPoXmaHzb
+ xssq5d8oq1P7gqXkg5jiutH7aPmBxBxjcWQbC97TTYOihgt7i7F8LETMDKVddgWODsrI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -31,31 +31,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=cM12HuwtYvDW5RZv6niKy3FbHGL/VsXhMZwF7o58pWw=; b=UeZbfWJ2DefyjmWxsVw8gB7fFr
- GH7aaQ6uGcyweLIBu8s/W96X6OIyz2e/YdKRCF44BXFYbMaa+daHWh/NXWdTtD61ItMkoOknXV/Cm
- pM8wlWRm/JYfIZaxN/LmAH7fJyqQxIGo/a2XPkNMsl+vW6o0LlU5/yux3nMKn6U9Mkys=;
+ bh=+DXT/7jgKhUnDWqt8Mtbn1jWwn4NhU9BvgnRZLnP7oI=; b=KudP9/I9aWX5TZ5UOMsU0u7Pfp
+ GxNSUczin62OYRMs+4OyvsSxdg1ZwW8JMaLq4+dmkkA541KmE8Y9WYsWO5qrIUcu//qWPZjncyZi7
+ Xqx8AY7kLxA2RplYBa7OtOLNuTITUdg8pvvbAiIlm5JSkw3LhHj484fxmcGrKY/sOgZE=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tkGWo-0007cC-R2 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Feb 2025 05:52:19 +0000
+ id 1tkGWj-0007bX-VD for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Feb 2025 05:52:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=cM12HuwtYvDW5RZv6niKy3FbHGL/VsXhMZwF7o58pWw=; b=GOymUiexKmbKfjBa+VOTayPnaZ
- DjxAAIJUF/FUf4CRNU/kaL2XC886bosYTB1fdFVid4eVQmB2nWhAhQgFqoKXbJJy0DQ34yAteTyAJ
- nKnNnWfZrKnN/ISAhv37QR3LkSNma4pKftrPHF96xJklIG387bboRogN142hE5HigjVtPFvKNiVVf
- 6VVyApExrz38dGvGHSrWrjE6qkW1ncy45/7ZYIdMy4Vt+GKIKjvedFS9GkbaYlcn/ehxc4VqX89Ow
- wbn8J+Zk1RGHoh6iEsA7Ex9sqz95aVCqIvovldmWwyI7s36W48q+w5ibwFBLMxT1bcWvMdbQGnLIU
- NrElmvmQ==;
+ bh=+DXT/7jgKhUnDWqt8Mtbn1jWwn4NhU9BvgnRZLnP7oI=; b=X0ySKVfv41IZznMQtusWy7gBIZ
+ wpoe37tHDKtafHvjPDLFSbzN+kgAtnt1DnRjeDMXNnMWLOI1g7/ZLgRkuayEhuu659MYURymOmoaF
+ 0r95q15LolTymW7dgBW+jHPw3FJSB2QwI4PpF6SRNMmH71YpQGhnVZ+lEAjkUveVynKBzvlAiWuKL
+ WiyeZK7vYmFzvRzK2QKWbieHg4gQ1aHLvH9ZbqANfn3B1CzH9FPO7tQYVdevLbn1tORTFjqPAsL0A
+ 0len7Lgj/GvMOPK98pi2WHsFz2TyAk2TmvFbN30S6H4TDOSwSbEQWqY0fMLPM9ujeCc3d/6eU/yXO
+ CwWQGsww==;
 Received: from willy by casper.infradead.org with local (Exim 4.98 #2 (Red Hat
- Linux)) id 1tkGWd-00000002TsZ-2F1Z; Tue, 18 Feb 2025 05:52:07 +0000
+ Linux)) id 1tkGWd-00000002Tsg-2p0c; Tue, 18 Feb 2025 05:52:07 +0000
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 To: Jaegeuk Kim <jaegeuk@kernel.org>,
 	Chao Yu <chao@kernel.org>
-Date: Tue, 18 Feb 2025 05:51:49 +0000
-Message-ID: <20250218055203.591403-16-willy@infradead.org>
+Date: Tue, 18 Feb 2025 05:51:50 +0000
+Message-ID: <20250218055203.591403-17-willy@infradead.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250218055203.591403-1-willy@infradead.org>
 References: <20250218055203.591403-1-willy@infradead.org>
@@ -67,11 +67,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: The compiler can make some optimisations if we tell it that
- a function call doesn't change this memory. Signed-off-by: Matthew Wilcox
- (Oracle) <willy@infradead.org> --- fs/f2fs/f2fs.h | 2 +- fs/f2fs/node.h |
- 6 +++--- 2 files changed, 4 insertions(+), 4 deletions(-) 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  All its callers now have access to a folio, so pass it in.
+ Removes an access to page->mapping. Signed-off-by: Matthew Wilcox (Oracle)
+ <willy@infradead.org> --- fs/f2fs/data.c | 2 +- fs/f2fs/f2fs.h | 3 ++-
+ fs/f2fs/node.c
+ | 8 ++++---- fs/f2fs/segment.c | 2 +- 4 files changed, 8 insertions(+), 7
+ d [...] Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
@@ -95,9 +96,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1tkGWo-0007cC-R2
-Subject: [f2fs-dev] [PATCH 15/27] f2fs: Mark some functions as taking a
- const page pointer
+X-Headers-End: 1tkGWj-0007bX-VD
+Subject: [f2fs-dev] [PATCH 16/27] f2fs: Convert f2fs_in_warm_node_list() to
+ take a folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,59 +117,84 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The compiler can make some optimisations if we tell it that a function
-call doesn't change this memory.
+All its callers now have access to a folio, so pass it in.  Removes
+an access to page->mapping.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 ---
- fs/f2fs/f2fs.h | 2 +-
- fs/f2fs/node.h | 6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ fs/f2fs/data.c    | 2 +-
+ fs/f2fs/f2fs.h    | 3 ++-
+ fs/f2fs/node.c    | 8 ++++----
+ fs/f2fs/segment.c | 2 +-
+ 4 files changed, 8 insertions(+), 7 deletions(-)
 
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 5ec4395ef06d..d297e9ae6391 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -358,7 +358,7 @@ static void f2fs_write_end_io(struct bio *bio)
+ 				folio->index != nid_of_node(&folio->page));
+ 
+ 		dec_page_count(sbi, type);
+-		if (f2fs_in_warm_node_list(sbi, &folio->page))
++		if (f2fs_in_warm_node_list(sbi, folio))
+ 			f2fs_del_fsync_node_entry(sbi, &folio->page);
+ 		clear_page_private_gcing(&folio->page);
+ 		folio_end_writeback(folio);
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index cf664ca38905..a941a0750712 100644
+index a941a0750712..bbaa61da83a8 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -2017,7 +2017,7 @@ static inline struct f2fs_checkpoint *F2FS_CKPT(struct f2fs_sb_info *sbi)
- 	return (struct f2fs_checkpoint *)(sbi->ckpt);
+@@ -3667,7 +3667,8 @@ struct node_info;
+ 
+ int f2fs_check_nid_range(struct f2fs_sb_info *sbi, nid_t nid);
+ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type);
+-bool f2fs_in_warm_node_list(struct f2fs_sb_info *sbi, struct page *page);
++bool f2fs_in_warm_node_list(struct f2fs_sb_info *sbi,
++		const struct folio *folio);
+ void f2fs_init_fsync_node_info(struct f2fs_sb_info *sbi);
+ void f2fs_del_fsync_node_entry(struct f2fs_sb_info *sbi, struct page *page);
+ void f2fs_reset_fsync_node_info(struct f2fs_sb_info *sbi);
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index db97624e30b3..da28e295c701 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -310,10 +310,10 @@ static unsigned int __gang_lookup_nat_set(struct f2fs_nm_info *nm_i,
+ 							start, nr);
  }
  
--static inline struct f2fs_node *F2FS_NODE(struct page *page)
-+static inline struct f2fs_node *F2FS_NODE(const struct page *page)
+-bool f2fs_in_warm_node_list(struct f2fs_sb_info *sbi, struct page *page)
++bool f2fs_in_warm_node_list(struct f2fs_sb_info *sbi, const struct folio *folio)
  {
- 	return (struct f2fs_node *)page_address(page);
- }
-diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
-index 6aea13024ac1..281d53c95c9a 100644
---- a/fs/f2fs/node.h
-+++ b/fs/f2fs/node.h
-@@ -248,7 +248,7 @@ static inline nid_t nid_of_node(struct page *node_page)
- 	return le32_to_cpu(rn->footer.nid);
+-	return NODE_MAPPING(sbi) == page->mapping &&
+-			IS_DNODE(page) && is_cold_node(page);
++	return NODE_MAPPING(sbi) == folio->mapping &&
++			IS_DNODE(&folio->page) && is_cold_node(&folio->page);
  }
  
--static inline unsigned int ofs_of_node(struct page *node_page)
-+static inline unsigned int ofs_of_node(const struct page *node_page)
- {
- 	struct f2fs_node *rn = F2FS_NODE(node_page);
- 	unsigned flag = le32_to_cpu(rn->footer.flag);
-@@ -342,7 +342,7 @@ static inline bool is_recoverable_dnode(struct page *page)
-  *                 `- indirect node ((6 + 2N) + (N - 1)(N + 1))
-  *                       `- direct node
-  */
--static inline bool IS_DNODE(struct page *node_page)
-+static inline bool IS_DNODE(const struct page *node_page)
- {
- 	unsigned int ofs = ofs_of_node(node_page);
+ void f2fs_init_fsync_node_info(struct f2fs_sb_info *sbi)
+@@ -1694,7 +1694,7 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
+ 		fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
  
-@@ -389,7 +389,7 @@ static inline nid_t get_nid(struct page *p, int off, bool i)
-  *  - Mark cold data pages in page cache
-  */
- 
--static inline int is_node(struct page *page, int type)
-+static inline int is_node(const struct page *page, int type)
- {
- 	struct f2fs_node *rn = F2FS_NODE(page);
- 	return le32_to_cpu(rn->footer.flag) & BIT(type);
+ 	/* should add to global list before clearing PAGECACHE status */
+-	if (f2fs_in_warm_node_list(sbi, page)) {
++	if (f2fs_in_warm_node_list(sbi, folio)) {
+ 		seq = f2fs_add_fsync_node_entry(sbi, page);
+ 		if (seq_id)
+ 			*seq_id = seq;
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 088b4ad81771..0c5fdb58ade3 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -3916,7 +3916,7 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
+ 		if (fscrypt_inode_uses_fs_layer_crypto(folio->mapping->host))
+ 			fscrypt_finalize_bounce_page(&fio->encrypted_page);
+ 		folio_end_writeback(folio);
+-		if (f2fs_in_warm_node_list(fio->sbi, fio->page))
++		if (f2fs_in_warm_node_list(fio->sbi, folio))
+ 			f2fs_del_fsync_node_entry(fio->sbi, fio->page);
+ 		goto out;
+ 	}
 -- 
 2.47.2
 
