@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9E2AA3D3B5
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Feb 2025 09:51:50 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE96DA3D3B2
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Feb 2025 09:51:44 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tl2HW-0005F2-BL;
-	Thu, 20 Feb 2025 08:51:41 +0000
+	id 1tl2HT-0004Sv-4P;
+	Thu, 20 Feb 2025 08:51:39 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <arefev@swemel.ru>) id 1tl2HH-0005Em-NL
+ (envelope-from <arefev@swemel.ru>) id 1tl2HG-0004S5-JZ
  for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 20 Feb 2025 08:51:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,41 +21,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wv18Jol842R9T3SS69TEywGruu7oG3ejKG6BBb5YsZM=; b=emUiWMyU1bsaqXUM1R5QvtccKN
- AVhtrKkCEvItW8YqobuaaILd6Ytkj8l4QfGklgiUrHjbT3SlLqhmcIn3XFFUbi4pzNZanxZZKyecr
- UPXy83rfia+o/oQMqaCmvBQNPu6hnk0HwOWY/hwD9VcAXSW+XJ+GCPlvgCknOGSSz/No=;
+ bh=d8GxD/nSg4QuXrGtxNLMlKR9bIHa3KWtotKGTok0/mA=; b=gY8Dhh7e0qNMxDx3hS1HEpuI0g
+ eYGFKoSQwKES7/3Qip0Md4HIsTekDkC52txfwjAVZpSyWtGv95lng0sRMin0jfF9TYwd8GVOlwd1U
+ GQcv2UwRu4c+MLngLTmApm69qyZSjZ/LvqhyDcUSgp4Eu+WXva44z7MVCD/h0kw8Apqk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=wv18Jol842R9T3SS69TEywGruu7oG3ejKG6BBb5YsZM=; b=H
- BpZeyhd1GSVGGZPqVgM9dami3w5tErKrimZyojlpVP9quzG/6na5qCUBvL8Yo0BX4YQQGzLUSDm+L
- 48i7R9u8SfaRKtz4CciJyOid1HvViyWcC4gXVzHvPMJCYBsFy96LGuCzv9de5u6kRWZdSoeLgJojI
- BmYMQtpIy/BM0P2E=;
+ List-Owner:List-Archive; bh=d8GxD/nSg4QuXrGtxNLMlKR9bIHa3KWtotKGTok0/mA=; b=h
+ mi7SJpW4z7ngaeY5YzUbK30g+gxv5dreCFccMeg3XoJA9CAiLYTNEiTgXQmpbWMZmTjqihz4IHR1Q
+ ln916iZQDnvoGgAHW8fL3DLgbflcFbJx8uAeCMxquKlWWEHuE1AEwrSeow2JA9emzqQ1gjBj9Ndr6
+ fF4wxtWnLMugAxlc=;
 Received: from mx.swemel.ru ([95.143.211.150])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tl2HF-0003hf-HD for linux-f2fs-devel@lists.sourceforge.net;
+ id 1tl2HF-0003hg-IC for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 20 Feb 2025 08:51:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=swemel.ru; s=mail;
- t=1740040382;
+ t=1740040393;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=wv18Jol842R9T3SS69TEywGruu7oG3ejKG6BBb5YsZM=;
- b=Vjr+Jc8HelsS7C1LhZ31LJSFIMd6XxRKWgKY0fARhrUO++tbpFJcQShWls4eyY8Oh/hSeO
- bKgt2oTvN2JXKQ/uI5Cp+pOEejuq9R1aNoSZlnetrX8sK5InRFke8Unh7TkmQpQHWH169l
- 013wo5vMRmzs4VtBnizCnSPYM7Remj8=
+ bh=d8GxD/nSg4QuXrGtxNLMlKR9bIHa3KWtotKGTok0/mA=;
+ b=fNn9OBnEuMjVle3FsNoiA6nIPNk86bfhvQN8qzyIvyFOo8+lGKt2OkCMvJTWvSSrNm6RNl
+ 0A2sz9j3MfbNH81CuWl+HMKCsI0AwkNnqy4QHKovG/Cw5MOAm7kVjZ01UFoHtqnQyR8FPU
+ hl6UlfwQIWGUK15bP8K/FM2KbaaW9ao=
 To: stable@vger.kernel.org,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Date: Thu, 20 Feb 2025 11:33:01 +0300
-Message-ID: <20250220083302.5902-1-arefev@swemel.ru>
+Date: Thu, 20 Feb 2025 11:33:11 +0300
+Message-ID: <20250220083313.5918-1-arefev@swemel.ru>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -70,8 +70,8 @@ X-Spam-Report: Spam detection software,
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [95.143.211.150 listed in sa-trusted.bondedsender.org]
@@ -84,13 +84,13 @@ X-Spam-Report: Spam detection software,
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1tl2HF-0003hf-HD
-Subject: [f2fs-dev] [PATCH 5.15] f2fs: fix shift-out-of-bounds in
+X-Headers-End: 1tl2HF-0003hg-IC
+Subject: [f2fs-dev] [PATCH 5.10] f2fs: fix shift-out-of-bounds in
  parse_options()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -149,17 +149,17 @@ Signed-off-by: Denis Arefev <arefev@swemel.ru>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index f8aaff9b1784..c0fa7d785f3c 100644
+index 9afbb51bd678..5fd64bc35f31 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -891,8 +891,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+@@ -722,8 +722,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
  			if (args->from && match_int(args, &arg))
  				return -EINVAL;
- 			if (arg <= 0 || arg > __ilog2_u32(BIO_MAX_VECS)) {
+ 			if (arg <= 0 || arg > __ilog2_u32(BIO_MAX_PAGES)) {
 -				f2fs_warn(sbi, "Not support %d, larger than %d",
--					  1 << arg, BIO_MAX_VECS);
+-					  1 << arg, BIO_MAX_PAGES);
 +				f2fs_warn(sbi, "Not support 2^%d, invalid argument %d",
-+					  arg, BIO_MAX_VECS);
++					arg, BIO_MAX_PAGES);
  				return -EINVAL;
  			}
  			F2FS_OPTION(sbi).write_io_size_bits = arg;
