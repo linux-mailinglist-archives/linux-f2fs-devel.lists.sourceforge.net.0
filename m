@@ -2,143 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4CA5A3EB4C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Feb 2025 04:26:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A692A3EC00
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Feb 2025 05:55:45 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tlJfr-0007if-Rg;
-	Fri, 21 Feb 2025 03:25:59 +0000
+	id 1tlL4b-0004sn-Cw;
+	Fri, 21 Feb 2025 04:55:36 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tlJfq-0007iY-HO
+ (envelope-from <jaegeuk@kernel.org>) id 1tlL4U-0004sc-MV
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Feb 2025 03:25:58 +0000
+ Fri, 21 Feb 2025 04:55:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eXPPLmQzGqUKpYEeVGoIsOEZY/3payuJ6MGf0/8x7rA=; b=mAeaEI7iPSjUQNJrx+Rj7aertP
- 81SGjrdtbwURoJ9EgA8dmGfzVwyjbQEcCz5G48RCjGehFgAdxD0tsqYHi6u2GGvu2Vf0XK/iDLh3e
- bugw8Z3S4mS17qF0sm+kNteG5AfiOGHnaj8UPI78Q1XO3K+ks2kibSuB6N4D7ambclrs=;
+ bh=pDzCMNB4JM4Tu+Cwz6uhVkh3rFLcrdRL8yhtjBgWd4s=; b=gEDoY9pL8ZHf8LA7W3gRAuN2vZ
+ 9gizus1T1+pH3/vaUpWKhLGor5lj8MoRWEdKIIkC1MaecGWYpx/ES0OdtsCgdFsfnnlM06QQZcKqq
+ qHX/TqkgIFHHLrZXYBuASBnjEFYp4P80H5pVQwLiQsptCk+kxXxQdqyrJvjCjn+89n7o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eXPPLmQzGqUKpYEeVGoIsOEZY/3payuJ6MGf0/8x7rA=; b=VlKaP0a8JeVWsB1YrW5RgIiYuS
- /PERYvQZymguHs/tS5S+Yk1UbwoXYbskpPZA8GoINtkY1JdUttGslvj5utiV65EdQYqLDZlXcAejd
- 607BDQ0i72Jz0ga3eDoMLU7POwQoe+boCGm2BMswRS9XZh74qbQxFjJh3uS+LMOkQnB8=;
+ bh=pDzCMNB4JM4Tu+Cwz6uhVkh3rFLcrdRL8yhtjBgWd4s=; b=K1NKHW1Ktd1UveA9BE2RHWIZod
+ qD+XxYVhbzBFk89Fjdehla8kQYkFxMLJGpOcjOrFvrBoZId6hK/l+idc7QpnZla1SzshyFLo4hb9c
+ rtz8TFAkvF4z7UOIq9yeO8q2cpdOQ5sRu5H9xsY0xiM2G/SpaA093dn9Y52rRFCZgj00=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tlJfp-00006h-Rb for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Feb 2025 03:25:58 +0000
+ id 1tlL4T-00044U-EU for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Feb 2025 04:55:30 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 5CC0C683DF;
- Fri, 21 Feb 2025 03:25:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB82BC4CEE2;
- Fri, 21 Feb 2025 03:25:50 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id DDA1F6111F;
+ Fri, 21 Feb 2025 04:55:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E556C4CEE2;
+ Fri, 21 Feb 2025 04:55:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1740108351;
- bh=z6ZLHSTIS8zbklIzGbcjY13oe8pKhcXUJoTvzgFp9WY=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=S/tR0ZKB68sG4mTa10nWA/BdH75PSsp17ZUMmEQgnUvvmhKi0NI/LjPHLYid5Dn39
- /jAV0LKUmJQb5VjSex1Db5ha26lBlk8JvA2/J51C/1NOn+/6ei4a3blxhHM2x5coI1
- nP7Qx31r0nM/FD6vwkOFmR+D2PWsnI4bX0IuhJZblR0dHZRxfharh4P+beOiYKG9+l
- VRdfIsd8/CGAmq8H2pScnnwjHEquE/HueTOhJKCcAKzKPgVadgQHvqFTG/JQjZChS4
- 4Zr1Z/xMP2BZpEZt6NUSqedUwCHiIxy94dO+hwseaq9ZJyfEAMpg4JrKRMSOdAxtLW
- S5Xxv5/Cw5ppQ==
-Message-ID: <b4728fe3-11c2-4352-9725-113f356d2711@kernel.org>
-Date: Fri, 21 Feb 2025 11:25:49 +0800
+ s=k20201202; t=1740113718;
+ bh=TRrzP0CzcVFMmpJmC4JuqExk9+bEFTrmjzrUl7P32zs=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=pREs7JkFO7CYYWH8ZpiN7cqx7xyHHCRaPb2iyeGo0yAlDCJtRaFsU4akHKcaEwXlG
+ QHOqiH75KyJoSXzpBxSukeffFi/B3HcJEjLMArOOBCqtFf+i7gzHQI7Pd4Dj7sDE/n
+ dbYDxP9h7sAWRC2hofXAIfLVb8t42TulN+taDuxEqU0K4IZVGVPp7c+xmRmtZ+ewSO
+ yWH7vwPrXx6kF0CXRN1PNIKeo7K3ZDX1xtISS4YmYmxvo67ZnNdpu8dW3Huap10RZj
+ ++yaDHIvpCLoVA/5LlxIvAkaR5p01adyV65/egDNhzeTc/90SJurTcb16i61yDAA6h
+ zbwi7l/PDCOVA==
+Date: Fri, 21 Feb 2025 04:55:16 +0000
+To: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+Message-ID: <Z7gHNEBYx5XdfQw5@google.com>
+References: <20250218055203.591403-1-willy@infradead.org>
+ <20250218055203.591403-4-willy@infradead.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: YangYang Zang <zangyangyang66@gmail.com>, jaegeuk@kernel.org
-References: <20250213070340.388007-1-zangyangyang1@xiaomi.com>
-Content-Language: en-US
-Autocrypt: addr=chao@kernel.org; keydata=
- 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
-In-Reply-To: <20250213070340.388007-1-zangyangyang1@xiaomi.com>
+Content-Disposition: inline
+In-Reply-To: <20250218055203.591403-4-willy@infradead.org>
 X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2025/2/13 15:03, YangYang Zang wrote: > Now we can only
- set pin for files with size 0, > so we need to call fallocate frequently.
- > Therefore, add an optional option to the set > subcommand to call [...]
+ Content preview:  On 02/18,
+ Matthew Wilcox (Oracle) wrote: > Convert f2fs_put_page()
+ to f2fs_folio_put() and add a wrapper. > Replaces three calls to
+ compound_head()
+ with one. > > Signed-off-by: Matthew Wilcox (Oracle) [...] 
  Content analysis details:   (-0.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [172.105.4.254 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [172.105.4.254 listed in sa-accredit.habeas.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tlJfp-00006h-Rb
-Subject: Re: [f2fs-dev] [PATCH] f2fs_io: fallocate when setting pinfile
+ valid -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tlL4T-00044U-EU
+Subject: Re: [f2fs-dev] [PATCH 03/27] f2fs: Add f2fs_folio_put()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -150,25 +109,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: YangYang Zang <zangyangyang1@xiaomi.com>,
- linux-f2fs-devel@lists.sourceforge.net
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: linux-fsdevel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2025/2/13 15:03, YangYang Zang wrote:
-> Now we can only set pin for files with size 0,
-> so we need to call fallocate frequently.
-> Therefore, add an optional option to the set
-> subcommand to call fallocate when setting pinfile.
+On 02/18, Matthew Wilcox (Oracle) wrote:
+> Convert f2fs_put_page() to f2fs_folio_put() and add a wrapper.
+> Replaces three calls to compound_head() with one.
 > 
-> Signed-off-by: YangYang Zang <zangyangyang1@xiaomi.com>
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> ---
+>  fs/f2fs/f2fs.h | 15 ++++++++++-----
+>  1 file changed, 10 insertions(+), 5 deletions(-)
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index b05653f196dd..5e01a08afbd7 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -2806,16 +2806,21 @@ static inline struct page *f2fs_pagecache_get_page(
+>  	return pagecache_get_page(mapping, index, fgp_flags, gfp_mask);
+>  }
+>  
+> -static inline void f2fs_put_page(struct page *page, int unlock)
+> +static inline void f2fs_folio_put(struct folio *folio, bool unlock)
+>  {
+> -	if (!page)
+> +	if (!folio)
+>  		return;
+>  
+>  	if (unlock) {
+> -		f2fs_bug_on(F2FS_P_SB(page), !PageLocked(page));
+> -		unlock_page(page);
+> +		f2fs_bug_on(F2FS_F_SB(folio), !folio_test_locked(folio));
+> +		folio_unlock(folio);
+>  	}
+> -	put_page(page);
+> +	folio_put(folio);
+> +}
+> +
+> +static inline void f2fs_put_page(struct page *page, int unlock)
+> +{
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+I got a kernel panic, since there are still several places to pass a null
+page pointer, which feeds to page_folio() which doesn't expect the null.
 
-Thanks,
+Applying this can avoid the panic.
+
+	if (!page)
+		return;
+
+> +	f2fs_folio_put(page_folio(page), unlock);
+>  }
+>  
+>  static inline void f2fs_put_dnode(struct dnode_of_data *dn)
+> -- 
+> 2.47.2
+> 
 
 
 _______________________________________________
