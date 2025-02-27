@@ -2,94 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72BEEA48A85
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Feb 2025 22:31:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F96CA48E13
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Feb 2025 02:43:38 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tnlTS-0006lB-2g;
-	Thu, 27 Feb 2025 21:31:18 +0000
+	id 1tnpPO-0001vf-IL;
+	Fri, 28 Feb 2025 01:43:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1tnlTQ-0006l3-DK
+ (envelope-from <chao@kernel.org>) id 1tnpPM-0001vN-Fm
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 27 Feb 2025 21:31:17 +0000
+ Fri, 28 Feb 2025 01:43:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=21L/EqPraoZhH5P2r+VPekiFyK6vEPhatZbEQIHgLeY=; b=YAg40a2aeR1nylNGTXXFM0KjA3
- 15NQhORumgqQeZsbLp72koH/vmh/HLmU2DwWaNGZ/nPegTB0AvhZik7tawmD2kPmI6H7yl1jPdxUF
- CjC+Dq1xB9ERz/YTF0EXT90ZLVLAsiMV0hO+WlbSGYdlGQ9ipXjeDo4o0GCdYN6KDuWU=;
+ bh=SVW7vZ2fOWgCm866Phot8Dy+8xxKvbdTVHOK8F2W2S8=; b=VLiw8a1lTKTF0FfoKkZtPnTZck
+ gLSSYZsIoep36qfGuwlPS8sPIChr8GbphtP5NBU/P1jIwqGfqTntj5TPXjtLAuEmiudl+pAxnWiya
+ 12XAWU3n4dNVMMpa6Bb8rVD7vEY4Vk4F4uxG9iTV3XD8u3GJ4oZdcXAnsjY96I7DrZg8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=21L/EqPraoZhH5P2r+VPekiFyK6vEPhatZbEQIHgLeY=; b=eYf5dUMfklSpJRyyeMRJJRlE0v
- x2+I7CzIa5qo7CzLiw69JBWANcjW3Zt3NotcA3tJxazelbgCZw2BprJjVjul3FtJEl3LvnAIKB2T4
- yNYqRyx6JiZDD1KBPpjyWMhLctijD8v4PFYG06j3Aoq253eTooCrBhTHOrP99IUE8dak=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=SVW7vZ2fOWgCm866Phot8Dy+8xxKvbdTVHOK8F2W2S8=; b=H
+ vdHyV7+i9xzHPO9cZ98yDBRvk5gsabQE+ax+3qxCp9MSGXzm5mVuQbCyuLe2Css/D03q2bVYpGpwm
+ QOwYpRoEa8kMTaFqc+aPvjQ5ifzpoFVM22yMcAeNPGdw/BH+QykA7p6IFRd06map0E/TxQDEgbE4N
+ zoWFDnxzYBOx9wLY=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tnlTQ-00079p-EZ for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 27 Feb 2025 21:31:17 +0000
+ id 1tnpPL-000872-I0 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 28 Feb 2025 01:43:21 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 278455C4BAF;
- Thu, 27 Feb 2025 21:28:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 76740C4CEDD;
- Thu, 27 Feb 2025 21:31:10 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 23D8061138;
+ Fri, 28 Feb 2025 01:43:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E0D18C4CEDD;
+ Fri, 28 Feb 2025 01:43:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1740691870;
- bh=Uex2exXxw8sF1aGanevdICvCrEBztUODkzUSVwWbgfE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=kyMxHtaYNfUw+Wnf7dmzPePMLnz/klDd+UjLGFIZKBumQ8CSYJL95PkR7wKyXyvav
- k3XHNKLiSKrmoBxcsE9xjByQCkOVN6LgDy5FoRN+HyzzinURFusWOwQu3V6RaC75GB
- /kafT7gSLJeEBtALaTcpr7PcIM+TY/8HyWxOzyhwFoyn0yk0Hpp+80PhOlbq45ykTD
- hQfyR2ydu7IzOfiVUZnWkG2qqxLMnsau9mkua1IE3vPYl1tzXq4ITCnU9wbPm2HGLm
- hlru3JMKACjnHtBQoDqUK9sJNYchjj0sr14L2V1b/9QgbCGgAs9Sp7g0P8Zl7bHJ8T
- XNhyPU+35kUrg==
-Date: Thu, 27 Feb 2025 21:31:08 +0000
-To: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-Message-ID: <Z8DZnHBF_o8JSkPp@google.com>
-References: <20250218055203.591403-1-willy@infradead.org>
- <20250218055203.591403-4-willy@infradead.org>
- <Z7gHNEBYx5XdfQw5@google.com> <Z7wdb8nnXaUnD0CJ@google.com>
+ s=k20201202; t=1740706988;
+ bh=4bxHTBKUgXhyLP5114/1Rtwa8qJMLVErQlbUUaq298Y=;
+ h=From:To:Cc:Subject:Date:From;
+ b=aXMnK34lixU/3T7P4eBmggcjLP8+w4YFbd8Y6WF19U+wtDSjjrr4JW4P/EJRBWCK7
+ Oyn3KaGELp480PUPQbApkSTWHm2r1SklCZZOTiIN4Cdvu4SSz1Nk4zl1M1mpKarm02
+ ESdWNJIodv49ItHHp9lhuY87bgV2Re9Htg/xPtz4j3adGv66Mb5JQHB0Hm/YmGkJrQ
+ RkZjXVfLmm7XbJVLv/dcF2mdoRHhE7wmrt6wJi9EjxFiBh5zt6CuW9hqXIOoCcddIP
+ 5LmMRlhJyDxp+UgByKwp6Gpoi/aZe7zYH9gNMcaYYzIIiGqMZfw8WExDG78uJT6xMQ
+ 7RojYi2ibN45g==
+To: jaegeuk@kernel.org
+Date: Thu, 27 Feb 2025 23:54:20 +0800
+Message-Id: <20250227155420.48885-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <Z7wdb8nnXaUnD0CJ@google.com>
-X-Spam-Score: -5.6 (-----)
+X-Spam-Score: 0.5 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 02/24, Jaegeuk Kim wrote: > Hi Matthew, > > On 02/21,
- Jaegeuk Kim wrote: > > On 02/18,
- Matthew Wilcox (Oracle) wrote: > > > Convert f2fs_put_page()
- to f2fs_folio_put() and add a wrapper. > > > Repl [...] 
- Content analysis details:   (-5.6 points, 6.0 required)
+ Content preview: From: Leo Stone <leocstone@gmail.com> The syzbot reproducer
+ mounts a f2fs image, then tries to unlink an existing file. However, the
+ unlinked file already has a link count of 0 when it is read for the first
+ time in do_read_inode(). 
+ Content analysis details:   (0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ 1.1 DATE_IN_PAST_06_12     Date: is 6 to 12 hours before Received: date
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ [172.105.4.254 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.105.4.254 listed in bl.score.senderscore.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
@@ -99,8 +94,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tnlTQ-00079p-EZ
-Subject: Re: [f2fs-dev] [PATCH 03/27] f2fs: Add f2fs_folio_put()
+X-Headers-End: 1tnpPL-000872-I0
+Subject: [f2fs-dev] [PATCH v5] f2fs: add check for deleted inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,78 +107,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: linux-fsdevel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: syzbot+b01a36acd7007e273a83@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, Leo Stone <leocstone@gmail.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 02/24, Jaegeuk Kim wrote:
-> Hi Matthew,
-> 
-> On 02/21, Jaegeuk Kim wrote:
-> > On 02/18, Matthew Wilcox (Oracle) wrote:
-> > > Convert f2fs_put_page() to f2fs_folio_put() and add a wrapper.
-> > > Replaces three calls to compound_head() with one.
-> > > 
-> > > Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-> > > ---
-> > >  fs/f2fs/f2fs.h | 15 ++++++++++-----
-> > >  1 file changed, 10 insertions(+), 5 deletions(-)
-> > > 
-> > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > > index b05653f196dd..5e01a08afbd7 100644
-> > > --- a/fs/f2fs/f2fs.h
-> > > +++ b/fs/f2fs/f2fs.h
-> > > @@ -2806,16 +2806,21 @@ static inline struct page *f2fs_pagecache_get_page(
-> > >  	return pagecache_get_page(mapping, index, fgp_flags, gfp_mask);
-> > >  }
-> > >  
-> > > -static inline void f2fs_put_page(struct page *page, int unlock)
-> > > +static inline void f2fs_folio_put(struct folio *folio, bool unlock)
-> > >  {
-> > > -	if (!page)
-> > > +	if (!folio)
-> > >  		return;
-> > >  
-> > >  	if (unlock) {
-> > > -		f2fs_bug_on(F2FS_P_SB(page), !PageLocked(page));
-> > > -		unlock_page(page);
-> > > +		f2fs_bug_on(F2FS_F_SB(folio), !folio_test_locked(folio));
-> > > +		folio_unlock(folio);
-> > >  	}
-> > > -	put_page(page);
-> > > +	folio_put(folio);
-> > > +}
-> > > +
-> > > +static inline void f2fs_put_page(struct page *page, int unlock)
-> > > +{
-> > 
-> > I got a kernel panic, since there are still several places to pass a null
-> > page pointer, which feeds to page_folio() which doesn't expect the null.
-> > 
-> > Applying this can avoid the panic.
-> > 
-> > 	if (!page)
-> > 		return;
-> 
-> Please let me know, if you want me to apply this to your patch directly, or post
-> v2.
+From: Leo Stone <leocstone@gmail.com>
 
-I applied the fix into your patch. Thanks.
+The syzbot reproducer mounts a f2fs image, then tries to unlink an
+existing file. However, the unlinked file already has a link count of 0
+when it is read for the first time in do_read_inode().
 
-> 
-> Thanks,
-> 
-> > 
-> > > +	f2fs_folio_put(page_folio(page), unlock);
-> > >  }
-> > >  
-> > >  static inline void f2fs_put_dnode(struct dnode_of_data *dn)
-> > > -- 
-> > > 2.47.2
-> > > 
+Add a check to sanity_check_inode() for i_nlink == 0.
+
+[Chao Yu: rebase the code and fix orphan inode recovery issue]
+Reported-by: syzbot+b01a36acd7007e273a83@syzkaller.appspotmail.com
+Closes: https://syzkaller.appspot.com/bug?extid=b01a36acd7007e273a83
+Fixes: 39a53e0ce0df ("f2fs: add superblock and major in-memory structure")
+Signed-off-by: Leo Stone <leocstone@gmail.com>
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v5:
+- only check i_nlink in lookup()
+ fs/f2fs/namei.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index 949621bc0d07..e39533482b45 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -502,6 +502,14 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
+ 		goto out;
+ 	}
+ 
++	if (inode->i_nlink == 0) {
++		f2fs_warn(F2FS_I_SB(inode), "%s: inode (ino=%lx) has zero i_nlink",
++			  __func__, inode->i_ino);
++		err = -EFSCORRUPTED;
++		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
++		goto out_iput;
++	}
++
+ 	if (IS_ENCRYPTED(dir) &&
+ 	    (S_ISDIR(inode->i_mode) || S_ISLNK(inode->i_mode)) &&
+ 	    !fscrypt_has_permitted_context(dir, inode)) {
+-- 
+2.40.1
+
 
 
 _______________________________________________
