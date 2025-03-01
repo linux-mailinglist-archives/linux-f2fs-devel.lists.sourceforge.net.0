@@ -2,96 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 727BBA4A275
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Feb 2025 20:09:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CC94A4A753
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  1 Mar 2025 02:16:24 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1to5jZ-0004sC-US;
-	Fri, 28 Feb 2025 19:09:18 +0000
+	id 1toBST-0005bd-1G;
+	Sat, 01 Mar 2025 01:16:01 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1to5jY-0004s2-RS
+ (envelope-from <chao@kernel.org>) id 1toBSR-0005bK-Je
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Feb 2025 19:09:17 +0000
+ Sat, 01 Mar 2025 01:16:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RBWHALs+pQra8EBxbjJTamIGlpgwDEYEyC8sfc9N6p4=; b=NUSP2XsXABiYvq7I8gEWoQREwx
- NYunzKyrJ9hPBOOx07xw48bLIPFsEDeK++aHjQ4bdHZ71VtK9JjpOKtLvYu9q1kpt9Zi0ss80ZxYJ
- TrasWPjx8+3EEfsfOHOGslSGw7G6oRUoXC0iloQlImj5unjEOYBMq1EY4AE0CAl8eg14=;
+ bh=Dg3CPuibkA+8LZkbLMH77toWzdbjNhWgHE5fia07VkI=; b=Nq/+OPqdUxWA0+xqfJ+Mzq1Oxs
+ +Vjjt5cOYI9KA3HCzupb0/927zOqcz1ZmLQxErJsAHdmClq6W621HE3WsBD4ZEHkWndybBofuKnXJ
+ xBCig7KLi9HMoh29CifTwiwlVA9NXUNwpzmDMENhGJ8c0jOM2s3eirs/n8TOuATkXLrQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RBWHALs+pQra8EBxbjJTamIGlpgwDEYEyC8sfc9N6p4=; b=U9/bRoVxz3wk3wrhQIO0FZ6UpJ
- lepCYKBrJm6+GAWWNnY4/zcqcHwF1VDGPD/A8Sf4qpdmNF/p5gRCTtOVgFm9n+MxvKeUpE9ebYuq8
- TUUYSYlKZoT1Aq/I17hkUSFLOV7Ug2RSga27L+KgEH/6r5/AVYO9sobqQHPdudl92wNI=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=Dg3CPuibkA+8LZkbLMH77toWzdbjNhWgHE5fia07VkI=; b=Fa/o8LTmJIF8J2XpAsOVT2/5Hj
+ 1u8XkKPQyFwroBs65cnht5QFlLuNCOHEEhtpm8BfEiIJLvofSw7qnjmI49eu70NrO2xfGFl1ZaSgo
+ BkG6L4lf++Z+JYYTBR4HLX6azB0yra1rL3PmJ6Cm2NI4NjUFuPbeesMRhhnXdt0n3ffU=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1to5jO-0000ZR-T6 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Feb 2025 19:09:17 +0000
+ id 1toBSR-0006tt-JH for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 01 Mar 2025 01:16:00 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A647D5C6995
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 28 Feb 2025 19:06:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B553C4CED6;
- Fri, 28 Feb 2025 19:09:01 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 4AC3061160;
+ Sat,  1 Mar 2025 01:15:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F0F0C4CED6;
+ Sat,  1 Mar 2025 01:15:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1740769741;
- bh=9YuEuWyD2rw96fYZspKuWjKx/UU5T7CzTFvFhynJyvo=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=S7P9mm+21YhRrnfZg62atZ+HolVEiqZnquBpwotZK6LlQxfxNoFjTSwfJ2iVZon3b
- R0CwnncJ1Abz+o67KjSZ/SQ4KNVie7m4YcA1+/5VUbqDGBHaxWMS5oTAF66Jd1cBFx
- eZynDJ/lFHkW/63M0xXCL5tTZU4QIp4BCmOi3Z7Fdoo+sWzDCCxk254scps8oLR74+
- lKf5UxFEp2shLW4JoTJnWuYP3QX55+qArBpvsggOays4bbe2ShDYDxVTEsba4I/i+e
- fJCE0+p+x+JBOQEmz1oIN+vr5D+vmcnk7V1uMDRgFUflr0gE6q90prKxcM7Qbtl2cs
- 1UHJUI7fzmicg==
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 28 Feb 2025 19:08:54 +0000
-Message-ID: <20250228190854.422890-2-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
-In-Reply-To: <20250228190854.422890-1-jaegeuk@kernel.org>
-References: <20250228190854.422890-1-jaegeuk@kernel.org>
+ s=k20201202; t=1740791748;
+ bh=gwP/lAwkf+yOnx27eEqF2ecPLEyoDU7PhipvMcy//xc=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=vKKQ5HcYczvq1COSyQF8Ci6vVbTOSCTdNyvZE8OSqHMP1rZFxIKslUuicU0uvpCZW
+ OL1qK9IYhpVt0GJbiODPHAzr23L4BvZGQtjjvlQTOTImubOwP4ddlJvIT/KhKcSvDt
+ 6cKLF+wCWdu2ExPnj6+RDbib6sI2svJP8tjRvRGCuAVNRLnSCpnlA+++U10z/vLm2+
+ 2Uv8VsG0kmJ/GW41upFzM2tnoJrlPD08SLRfDhHjK8D3VPZ1nzNWV8RAmcZM3nZO6z
+ 4G9Vs7lnxP2e1fQiiqvdNJw0htDdWbjXqzahuZ70zoYQQsqG61VmMLVILzgVbyo0eW
+ EpgwvoccKx+6w==
+Message-ID: <39268c84-f514-48b7-92f6-b298d55dfc62@kernel.org>
+Date: Sat, 1 Mar 2025 09:15:53 +0800
 MIME-Version: 1.0
-X-Spam-Score: -5.6 (-----)
+User-Agent: Mozilla Thunderbird
+To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20250218055203.591403-1-willy@infradead.org>
+ <20250218055203.591403-18-willy@infradead.org>
+Content-Language: en-US
+In-Reply-To: <20250218055203.591403-18-willy@infradead.org>
+X-Spam-Score: -0.6 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This adds a command to call ioctl(F2FS_IOC_IO_PRIO).
- Signed-off-by:
- Jaegeuk Kim <jaegeuk@kernel.org> --- man/f2fs_io.8 | 3 +++
- tools/f2fs_io/f2fs_io.c
- | 35 +++++++++++++++++++++++++++++++++++ tools/f2fs_io/f2fs_io.h | 7 +++++++
- 3 files changed, 45 inser [...] 
- Content analysis details:   (-5.6 points, 6.0 required)
+ Content preview:  On 2025/2/18 13:51, Matthew Wilcox (Oracle) wrote: > Change
+ __get_node_page() to return a folio and convert back to a page in >
+ f2fs_get_node_page()
+ and f2fs_get_node_page_ra(). > > Signed-off-by: Mat [...] 
+ Content analysis details:   (-0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
+ [172.105.4.254 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [172.105.4.254 listed in bl.score.senderscore.com]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
@@ -100,9 +98,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1to5jO-0000ZR-T6
-Subject: [f2fs-dev] [PATCH 2/2] f2fs_io: add ioprio command to give a io
- priority hint
+X-Headers-End: 1toBSR-0006tt-JH
+Subject: Re: [f2fs-dev] [PATCH 17/27] f2fs: Add f2fs_get_node_folio()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,116 +111,102 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-fsdevel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This adds a command to call ioctl(F2FS_IOC_IO_PRIO).
+On 2025/2/18 13:51, Matthew Wilcox (Oracle) wrote:
+> Change __get_node_page() to return a folio and convert back to a page in
+> f2fs_get_node_page() and f2fs_get_node_page_ra().
+> 
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> ---
+>   fs/f2fs/f2fs.h |  1 +
+>   fs/f2fs/node.c | 18 +++++++++++++-----
+>   2 files changed, 14 insertions(+), 5 deletions(-)
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index bbaa61da83a8..8f23bb082c6f 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -3689,6 +3689,7 @@ struct page *f2fs_new_inode_page(struct inode *inode);
+>   struct page *f2fs_new_node_page(struct dnode_of_data *dn, unsigned int ofs);
+>   void f2fs_ra_node_page(struct f2fs_sb_info *sbi, nid_t nid);
+>   struct page *f2fs_get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid);
+> +struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid);
+>   struct page *f2fs_get_node_page_ra(struct page *parent, int start);
+>   int f2fs_move_node_page(struct page *node_page, int gc_type);
+>   void f2fs_flush_inline_data(struct f2fs_sb_info *sbi);
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index da28e295c701..2d161ddda9c3 100644
+> --- a/fs/f2fs/node.c
+> +++ b/fs/f2fs/node.c
+> @@ -1449,7 +1449,7 @@ void f2fs_ra_node_page(struct f2fs_sb_info *sbi, nid_t nid)
+>   	f2fs_put_page(apage, err ? 1 : 0);
+>   }
+>   
+> -static struct page *__get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid,
+> +static struct folio *__get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
+>   					struct page *parent, int start)
+>   {
+>   	struct folio *folio;
+> @@ -1462,7 +1462,7 @@ static struct page *__get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid,
+>   repeat:
+>   	folio = f2fs_grab_cache_folio(NODE_MAPPING(sbi), nid, false);
+>   	if (IS_ERR(folio))
+> -		return ERR_CAST(folio);
+> +		return folio;
+>   
+>   	err = read_node_page(&folio->page, 0);
+>   	if (err < 0) {
+> @@ -1493,7 +1493,7 @@ static struct page *__get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid,
+>   	}
+>   page_hit:
+>   	if (likely(nid == nid_of_node(&folio->page)))
+> -		return &folio->page;
+> +		return folio;
+>   
+>   	f2fs_warn(sbi, "inconsistent node block, nid:%lu, node_footer[nid:%u,ino:%u,ofs:%u,cpver:%llu,blkaddr:%u]",
+>   			  nid, nid_of_node(&folio->page), ino_of_node(&folio->page),
+> @@ -1512,17 +1512,25 @@ static struct page *__get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid,
+>   	return ERR_PTR(err);
+>   }
+>   
+> +struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid)
+> +{
+> +	return __get_node_folio(sbi, nid, NULL, 0);
+> +}
+> +
+>   struct page *f2fs_get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid)
+>   {
+> -	return __get_node_page(sbi, nid, NULL, 0);
+> +	struct folio *folio = __get_node_folio(sbi, nid, NULL, 0);
+> +
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- man/f2fs_io.8           |  3 +++
- tools/f2fs_io/f2fs_io.c | 35 +++++++++++++++++++++++++++++++++++
- tools/f2fs_io/f2fs_io.h |  7 +++++++
- 3 files changed, 45 insertions(+)
+	if (IS_ERR(folio))
+		return ERR_CAST(folio));
 
-diff --git a/man/f2fs_io.8 b/man/f2fs_io.8
-index 5def508e494f..b71965cf447a 100644
---- a/man/f2fs_io.8
-+++ b/man/f2fs_io.8
-@@ -181,6 +181,9 @@ Trigger gc to move data blocks from specified address range
- .TP
- \fBget_advise\fR \fI[file]\fR
- Get i_advise value and info in file
-+.TP
-+\fBioprio\fR \fI[hint] [file]\fR
-+Set ioprio to the file. The ioprio can be ioprio_write.
- .SH AUTHOR
- This version of
- .B f2fs_io
-diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index 05126c8b44a6..155d44f147ad 100644
---- a/tools/f2fs_io/f2fs_io.c
-+++ b/tools/f2fs_io/f2fs_io.c
-@@ -498,6 +498,40 @@ static void do_fadvise(int argc, char **argv, const struct cmd_desc *cmd)
- 	exit(0);
- }
- 
-+#define ioprio_desc "ioprio"
-+#define ioprio_help						\
-+"f2fs_io ioprio [hint] [file]\n\n"				\
-+"ioprio given the file\n"					\
-+"hint can be\n"							\
-+" ioprio_write\n"						\
-+
-+static void do_ioprio(int argc, char **argv, const struct cmd_desc *cmd)
-+{
-+	int fd, hint;
-+
-+	if (argc != 3) {
-+		fputs("Excess arguments\n\n", stderr);
-+		fputs(cmd->cmd_help, stderr);
-+		exit(1);
-+	}
-+
-+	fd = xopen(argv[2], O_RDWR, 0);
-+
-+	if (!strcmp(argv[1], "ioprio_write")) {
-+		hint = F2FS_IOPRIO_WRITE;
-+	} else {
-+		fputs("Not supported hint\n\n", stderr);
-+		fputs(cmd->cmd_help, stderr);
-+		exit(1);
-+	}
-+
-+	if (ioctl(fd, F2FS_IOC_IO_PRIO, &hint) != 0)
-+		die_errno("ioprio failed");
-+
-+	printf("ioprio_hint %d to a file: %s\n", hint, argv[2]);
-+	exit(0);
-+}
-+
- #define pinfile_desc "pin file control"
- #define pinfile_help						\
- "f2fs_io pinfile [get|set|unset] [file] {size}\n\n"		\
-@@ -1966,6 +2000,7 @@ const struct cmd_desc cmd_list[] = {
- 	CMD(removexattr),
- 	CMD(lseek),
- 	CMD(get_advise),
-+	CMD(ioprio),
- 	{ NULL, NULL, NULL, NULL, 0 }
- };
- 
-diff --git a/tools/f2fs_io/f2fs_io.h b/tools/f2fs_io/f2fs_io.h
-index c32def72fe45..22102884faab 100644
---- a/tools/f2fs_io/f2fs_io.h
-+++ b/tools/f2fs_io/f2fs_io.h
-@@ -94,6 +94,8 @@ typedef u32	__be32;
- #define F2FS_IOC_DECOMPRESS_FILE        _IO(F2FS_IOCTL_MAGIC, 23)
- #define F2FS_IOC_COMPRESS_FILE          _IO(F2FS_IOCTL_MAGIC, 24)
- #define F2FS_IOC_START_ATOMIC_REPLACE	_IO(F2FS_IOCTL_MAGIC, 25)
-+#define F2FS_IOC_GET_DEV_ALIAS_FILE	_IOR(F2FS_IOCTL_MAGIC, 26, __u32)
-+#define F2FS_IOC_IO_PRIO		_IOW(F2FS_IOCTL_MAGIC, 28, __u32)
- 
- #ifndef FSCRYPT_POLICY_V1
- #define FSCRYPT_POLICY_V1		0
-@@ -193,6 +195,11 @@ struct fsverity_enable_arg {
- #define FADVISE_VERITY_BIT	0x40
- #define FADVISE_TRUNC_BIT	0x80
- 
-+/* used for F2FS_IOC_IO_PRIO */
-+enum {
-+	F2FS_IOPRIO_WRITE = 1,  /* high write priority */
-+};
-+
- #ifndef FS_IMMUTABLE_FL
- #define FS_IMMUTABLE_FL			0x00000010 /* Immutable file */
- #endif
--- 
-2.48.1.711.g2feabab25a-goog
+> +	return &folio->page;
+>   }
+>   
+>   struct page *f2fs_get_node_page_ra(struct page *parent, int start)
+>   {
+>   	struct f2fs_sb_info *sbi = F2FS_P_SB(parent);
+>   	nid_t nid = get_nid(parent, start, false);
+> +	struct folio *folio = __get_node_folio(sbi, nid, parent, start);
+>   
+
+	if (IS_ERR(folio))
+		return ERR_CAST(folio));
+
+> -	return __get_node_page(sbi, nid, parent, start);
+> +	return &folio->page;
+>   }
+>   
+>   static void flush_inline_data(struct f2fs_sb_info *sbi, nid_t ino)
 
 
 
