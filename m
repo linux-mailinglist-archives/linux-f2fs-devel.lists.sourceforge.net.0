@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9EDE2A4B66C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  3 Mar 2025 04:16:19 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04956A4B66F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  3 Mar 2025 04:17:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1towHf-0003a2-Bv;
-	Mon, 03 Mar 2025 03:15:59 +0000
+	id 1towJ9-0007H8-MU;
+	Mon, 03 Mar 2025 03:17:31 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1towHe-0003Zv-JF
+ (envelope-from <chao@kernel.org>) id 1towJ9-0007H2-2Q
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Mar 2025 03:15:59 +0000
+ Mon, 03 Mar 2025 03:17:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=j4n7W1x0TstHZgD5vGjpHRLfQUH0ov4E2kbdAjRSBv8=; b=ELsgEMLOQadbBZSsu4chfa7eLq
- OVuqa4+we2LoVvazxgUYDaqxx1jK81Mxyg11TnJn8l1SxkiaHm3SclHRZOnbqxje5q/Jim8vdHP+d
- UspRNg/kjvKk9aR4NySDbRKmc+GDPqbKPYJ/9nYhHaeYY68S5ugEJzEQcR+G/VSIaMvM=;
+ bh=hYQRF10o1rlyK26JQAiawb4sms3BjNFBmdhCrqLwu9I=; b=fnDLJ8k2Iya978SwXTGmynaNtE
+ MdJc+uplO+cm/kWm7OQkrNVhMjz8nl+8QPc/TUUjzTK0BVVnUnzl2OxPvaQV0Ss2b5S2O6c/Mg42e
+ js3s21Tqyx56PDnb518PuP10PRq4VLZY5Rj4/BuBsJD1RKDcvxj9sNvg+5gzlHBwG0xI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,51 +31,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=j4n7W1x0TstHZgD5vGjpHRLfQUH0ov4E2kbdAjRSBv8=; b=P/f9+JFgKpwQPouA4QC3pX9vPQ
- /VNdJV8EVBTiGahXqBjwOsgLXZMcGb6p0ViyHmfTBz+62tgviIDxnVsE5p8Ds+zXSzl0laNJH0vvz
- LDFuh7mlXeME+XNEvdvfIxzuwhw9DvPVWJYseP/78uweqpsVR1U4bnOmlLzz9a1N+OjU=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=hYQRF10o1rlyK26JQAiawb4sms3BjNFBmdhCrqLwu9I=; b=IjIsLylQQ7MwYcqULy+M9uxd6K
+ WFGXinUo1/SGmAKl4krSjIUYHzmQnjICw7gAuCQXMc58BuMGrVL6rv7QyW9DBteHtWk/1VoXXvBml
+ FyDzF0tAYrwZrVwleQP6T+CdUWBBzl03Yl3X3rBa4VK6QporPwMRzN3Vy1OsPAtbEOwc=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1towHZ-0004rP-7X for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Mar 2025 03:15:58 +0000
+ id 1towJ2-0004yt-T2 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 03 Mar 2025 03:17:30 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id DA1C4611CA;
- Mon,  3 Mar 2025 03:15:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8B5FC4CED6;
- Mon,  3 Mar 2025 03:15:45 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id A12775C4236;
+ Mon,  3 Mar 2025 03:14:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60C0AC4CED6;
+ Mon,  3 Mar 2025 03:17:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1740971747;
- bh=5M/kwU8mFCcQDQ71TdlsVXaQJdVcyUzLgfKCSWf6PZc=;
+ s=k20201202; t=1740971834;
+ bh=xU5JJtuoZOpfWjy3eZBFySpzJHmspTF01WDRNyO7QoM=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=KbzSZBJqN6E30b7AjA7koMSrqH1JdCVxLVZWT/v2TbYGvHvLxMklNhGpkMCy4R0xk
- /HMsZB69cwCoSEHcPSli+YBnmIzIutoEraG/+yKOssVD4WYNjEvRnkfPXzGj/h3FC6
- Qpdm+qB3/nGS+EeuAjC9Uncwn22wq29LKX94cs+n3On6sDqibptNCYeyLnTt2AN60g
- HR7KRMrE+NKI1wvtTXrB0CQAO+vBTaMwNBQTSSjsr+JABXbGmHCM56vuSe6JwIRKyz
- mFj7I1Qp7XtRpMplGG33WLLp145A5icUWXMzeewFmBOSnT4uZAR4xeyfJRQKZV0XAn
- ZcU8wC/p85v+Q==
-Message-ID: <152da38e-ecb1-4333-8c86-b0fc343d7de7@kernel.org>
-Date: Mon, 3 Mar 2025 11:15:43 +0800
+ b=Z8wh3aTQTZE3YLeJMJ3rsk+Y9ooPr5UGHrcsdC3XTaMS2W3mPzSkK+r+K2q0zkO2N
+ l0JXGgiM6nLCwnZGaQZozhBHnhThtKRTbw4mZJhQRE6fh3vF14ES1TYudE8oqz98gn
+ qu6FQKAqJHJ9abZgB6AQHFAFAudTt5D/Ap/uLN5ghbumNYALzOAl8S0SKUgk3aQWYF
+ GAcJ6RfCkULS3m22jnOEHRRlxBrnSIdtleg8LPQhvhmbnmRjmRvr9EbKA2IuuOD8XH
+ 7pOWGNI/tRtixEwBCN6NxQXmHXJhE8XYUQZ6YtbczOuAG17EPk7Ilp7eMSxJLmG78D
+ S2X7HtGDaTgrQ==
+Message-ID: <f5e744d2-02b1-4f6c-9467-b3925368b9a7@kernel.org>
+Date: Mon, 3 Mar 2025 11:17:10 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Matthew Wilcox <willy@infradead.org>
-References: <20250218055203.591403-1-willy@infradead.org>
- <20250218055203.591403-18-willy@infradead.org>
- <39268c84-f514-48b7-92f6-b298d55dfc62@kernel.org>
- <Z8Jq7PQNRDu_zmGq@casper.infradead.org>
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20250228184752.1668252-1-daeho43@gmail.com>
 Content-Language: en-US
-In-Reply-To: <Z8Jq7PQNRDu_zmGq@casper.infradead.org>
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20250228184752.1668252-1-daeho43@gmail.com>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 3/1/25 10:03, Matthew Wilcox wrote: > On Sat, Mar 01, 2025
- at 09:15:53AM +0800, Chao Yu wrote: >>> struct page *f2fs_get_node_page(struct
- f2fs_sb_info *sbi, pgoff_t nid) >>> { >>> - return __get_no [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 3/1/25 02:47,
+ Daeho Jeong wrote: > From: Daeho Jeong <daehojeong@google.com>
+ > > add ftruncate command to do file truncate. > > Signed-off-by: Daeho Jeong
+ <daehojeong@google.com> Reviewed-by: Chao Yu <chao@kernel.org> 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -84,21 +83,25 @@ X-Spam-Report: Spam detection software,
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.105.4.254 listed in sa-trusted.bondedsender.org]
+ [139.178.84.217 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.105.4.254 listed in bl.score.senderscore.com]
+ [139.178.84.217 listed in bl.score.senderscore.com]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1towHZ-0004rP-7X
-Subject: Re: [f2fs-dev] [PATCH 17/27] f2fs: Add f2fs_get_node_folio()
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1towJ2-0004yt-T2
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs-tools: add ftruncate command in
+ f2fs_io
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,34 +115,21 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 3/1/25 10:03, Matthew Wilcox wrote:
-> On Sat, Mar 01, 2025 at 09:15:53AM +0800, Chao Yu wrote:
->>>   struct page *f2fs_get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid)
->>>   {
->>> -	return __get_node_page(sbi, nid, NULL, 0);
->>> +	struct folio *folio = __get_node_folio(sbi, nid, NULL, 0);
->>> +
->>
->> 	if (IS_ERR(folio))
->> 		return ERR_CAST(folio));
->>
->>> +	return &folio->page;
+On 3/1/25 02:47, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
 > 
-> No need.  It'll probably generate the saame code (or if not, it'll
-> generate worse code) and this wrapper function has to be deleted in
-> the next six to nine months anyway.  We use this idiom extensively.
+> add ftruncate command to do file truncate.
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
-Oh, correct, seems return value '&folio->page' is equal to value of folio
-as I checked.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-
 
 
 _______________________________________________
