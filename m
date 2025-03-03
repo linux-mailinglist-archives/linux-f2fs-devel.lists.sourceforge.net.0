@@ -2,61 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A47BEA4B676
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  3 Mar 2025 04:24:31 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A99F1A4B67B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  3 Mar 2025 04:26:03 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1towPp-0003os-Tr;
-	Mon, 03 Mar 2025 03:24:26 +0000
+	id 1towRL-0003X8-Ot;
+	Mon, 03 Mar 2025 03:26:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1towPo-0003oj-Je
+ (envelope-from <chao@kernel.org>) id 1towRK-0003X2-Pg
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Mar 2025 03:24:25 +0000
+ Mon, 03 Mar 2025 03:25:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SPaEFBOc6ReKDEztQBArwXm2fAZvxk2aZ7JGRWxo4/4=; b=P9L5comGJjbt09WOCFcGykSw0p
- abEzslled28dWOCD1eHKgKfTyUJCYv1r1iGGyJ5h8ViEr9H4xVLPnRAWAAUGrXIlde/U9motUy8gM
- 8vF5sFKS7kHEXEJHXwZFP0qXJCQ0DXGCIsBV6FOq6CRpXXgaGscwPCTsJOc86vAcdnKw=;
+ bh=ika4eURtYe5YDXMX5TCB+mo5iuZKV8o1LvmVYhptBpg=; b=Xcq0/KKpGytbBIPqW5N/R8BnIb
+ oNsHigUrL/UnRVibRtgPMLmbVHCHjaJR47GwHdhrFLM43HItJLcnRG4k5eFRRszKxQfeEb2fv6eez
+ YzyYEBTEzAZytFaKIsXml+o1d1H28Lr53YMuZjSr8t6olRqmsGSjK1JXrsfI57yd3SJw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=SPaEFBOc6ReKDEztQBArwXm2fAZvxk2aZ7JGRWxo4/4=; b=m
- 8T6xZLy/ErAsnHvBJx3JJIZ1yu6Y83AfP5e4pvj82v8y8fuBD4YCqog+fVdwdUeCTOg5Re7PAfIhx
- x/fREtiB0IIWQcQZrdQ+VRXgTQtCcvIY48OYE2U0+n7swENM8OgSo3BMmYDtgz2CC5g0fnBMD3l8j
- X9RK+gKESQdL0a14=;
+ List-Owner:List-Archive; bh=ika4eURtYe5YDXMX5TCB+mo5iuZKV8o1LvmVYhptBpg=; b=l
+ huPP3ipnceiPR3bb5MwXxBqx07hiFevILJ+FrIUZ88y9vlgVKt2F7lY2nB9NWE9jR/L40g6MfGP4L
+ O4CtSiUARcJq6gKVizQ4LLFRdvYsHMkxFMxtU1qPQKA/kvr8XeIHWHp+2wbO3kqswXilCHLUIlSYY
+ EasH0SPa8Tfy3I+E=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1towPj-0005ZV-CG for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Mar 2025 03:24:25 +0000
+ id 1towRL-0005er-0j for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 03 Mar 2025 03:25:59 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 287975C5422;
- Mon,  3 Mar 2025 03:21:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E40B9C4CED6;
- Mon,  3 Mar 2025 03:24:06 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id CEC275C5427
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  3 Mar 2025 03:23:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 281E5C4CED6;
+ Mon,  3 Mar 2025 03:25:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1740972248;
- bh=RB8f6v1FChOFx3oTiK9roU5+20gBklSvWNyNHoGVju4=;
+ s=k20201202; t=1740972348;
+ bh=7fBJ+9SkI851aRpJLiCAVAcdqfXjwH5g0lFDk3gGWVs=;
  h=From:To:Cc:Subject:Date:From;
- b=VM6JpyElOBLl2jwsohZHzQmfDKiugxIRGBK2jUeETXUOwLFXwf41KVd/xGQC2NDGz
- gkNhVKuuqY+LLysDXo7ojkX3LtwXbW7vAy0F/3zaIvvcgcImRyQGi9IbmZw6kBx6qc
- l/M4enfHdXEuezwfslqXJ8EqhpI/N0d4ztqqLdpNtbP7YVbkeDZkY9ySfXoLrZieXq
- P0Ub65CilqHwtVC9GAVa/mLCdEWZSbpjn0R7bKQasc/k46/546dNApBJJCSoS3ugQi
- Q68TFUDuGp1S3NO7UWq/HWkda5X5Qx2f8GQSr4MIp+S4C3gSkA1cuEl0mYM/2qb1iU
- 406wkj5jA60mw==
+ b=OM4rpPP4GFlRA/XDbjnPWZe1YXGy5r5ZL6IbUFzaPpMMzsh2NrLb39V2Wb24gdl4A
+ tits4FnyopTerfSpURwHWpTH5/heyR3erk/9cxz2Lo6L8Y5mCDQZj47AptfyyuP4bj
+ DjiXPTO6KeQP59rvPJdPVf6LQq82DrlvzSN4Db4YOutDi+0e91P9uD4c0KVKRG+fDY
+ eycw+nwpLdhJhbeU3pVz9ByHzl1xbXquzib91HVfx5SEqn+Mlf4TGqPlGbWjaXxuN5
+ xZBCalowRpKnRUQygOELr2EYj1txyLFPKIreiyi94g1T4V5VG15oI8MJ0tbfVZwNbv
+ IKVayumeCjylg==
 To: jaegeuk@kernel.org
-Date: Mon,  3 Mar 2025 11:23:29 +0800
-Message-ID: <20250303032329.1309786-1-chao@kernel.org>
+Date: Mon,  3 Mar 2025 11:25:00 +0800
+Message-ID: <20250303032500.1310215-1-chao@kernel.org>
 X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
 MIME-Version: 1.0
 X-Spam-Score: -5.2 (-----)
@@ -66,10 +67,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Jan Prusakowski reported a kernel hang issue as below: When
- running xfstests on linux-next kernel (6.14.0-rc3, 6.12) I encountered a
- problem in generic/475 test where fsstress process gets blocked in
- __f2fs_write_data_pages() and the test hangs. The optio [...] 
+ Content preview: f2fs_recover_quota_begin() and f2fs_recover_quota_end()
+ should be called in pair,
+ there is some cases we may skip calling f2fs_recover_quota_end(), 
+ fix it. Fixes: e1bb7d3d9cbf ("f2fs: fix to recover quota data correctly")
+ Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/super.c | 2 +- 1 file
+ changed, 1 insertion(+), 1 deletion(-) 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +97,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1towPj-0005ZV-CG
-Subject: [f2fs-dev] [PATCH] f2fs: fix potential deadloop in
- prepare_compress_overwrite()
+X-Headers-End: 1towRL-0005er-0j
+Subject: [f2fs-dev] [PATCH] f2fs: fix to call f2fs_recover_quota_end()
+ correctly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,105 +113,37 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: Jan Prusakowski <jprusakowski@google.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Jan Prusakowski reported a kernel hang issue as below:
+f2fs_recover_quota_begin() and f2fs_recover_quota_end() should be called
+in pair, there is some cases we may skip calling f2fs_recover_quota_end(),
+fix it.
 
-When running xfstests on linux-next kernel (6.14.0-rc3, 6.12) I
-encountered a problem in generic/475 test where fsstress process
-gets blocked in __f2fs_write_data_pages() and the test hangs.
-The options I used are:
-
-MKFS_OPTIONS  -- -O compression -O extra_attr -O project_quota -O quota /dev/vdc
-MOUNT_OPTIONS -- -o acl,user_xattr -o discard,compress_extension=* /dev/vdc /vdc
-
-INFO: task kworker/u8:0:11 blocked for more than 122 seconds.
-      Not tainted 6.14.0-rc3-xfstests-lockdep #1
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:kworker/u8:0    state:D stack:0     pid:11    tgid:11    ppid:2      task_flags:0x4208160 flags:0x00004000
-Workqueue: writeback wb_workfn (flush-253:0)
-Call Trace:
- <TASK>
- __schedule+0x309/0x8e0
- schedule+0x3a/0x100
- schedule_preempt_disabled+0x15/0x30
- __mutex_lock+0x59a/0xdb0
- __f2fs_write_data_pages+0x3ac/0x400
- do_writepages+0xe8/0x290
- __writeback_single_inode+0x5c/0x360
- writeback_sb_inodes+0x22f/0x570
- wb_writeback+0xb0/0x410
- wb_do_writeback+0x47/0x2f0
- wb_workfn+0x5a/0x1c0
- process_one_work+0x223/0x5b0
- worker_thread+0x1d5/0x3c0
- kthread+0xfd/0x230
- ret_from_fork+0x31/0x50
- ret_from_fork_asm+0x1a/0x30
- </TASK>
-
-The root cause is: once generic/475 starts toload error table to dm
-device, f2fs_prepare_compress_overwrite() will loop reading compressed
-cluster pages due to IO error, meanwhile it has held .writepages lock,
-it can block all other writeback tasks.
-
-Let's fix this issue w/ below changes:
-- add f2fs_handle_page_eio() in prepare_compress_overwrite() to
-detect IO error.
-- detect cp_error earler in f2fs_read_multi_pages().
-
-Fixes: 4c8ff7095bef ("f2fs: support data compression")
-Reported-by: Jan Prusakowski <jprusakowski@google.com>
+Fixes: e1bb7d3d9cbf ("f2fs: fix to recover quota data correctly")
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/compress.c |  1 +
- fs/f2fs/data.c     | 10 ++++++----
- 2 files changed, 7 insertions(+), 4 deletions(-)
+ fs/f2fs/super.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 985690d81a82..9b94810675c1 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -1150,6 +1150,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
- 		f2fs_compress_ctx_add_page(cc, page_folio(page));
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 7a8fcc1e278c..3c875dc07266 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4805,10 +4805,10 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 		}
+ 	}
  
- 		if (!PageUptodate(page)) {
-+			f2fs_handle_page_eio(sbi, page_folio(page), DATA);
- release_and_retry:
- 			f2fs_put_rpages(cc);
- 			f2fs_unlock_rpages(cc, i + 1);
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index f1554a5a3d7a..09437dbd1b42 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2190,6 +2190,12 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 	int i;
- 	int ret = 0;
- 
-+	if (unlikely(f2fs_cp_error(sbi))) {
-+		ret = -EIO;
-+		from_dnode = false;
-+		goto out_put_dnode;
-+	}
-+
- 	f2fs_bug_on(sbi, f2fs_cluster_is_empty(cc));
- 
- 	last_block_in_file = F2FS_BYTES_TO_BLK(f2fs_readpage_limit(inode) +
-@@ -2233,10 +2239,6 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 	if (ret)
- 		goto out;
- 
--	if (unlikely(f2fs_cp_error(sbi))) {
--		ret = -EIO;
--		goto out_put_dnode;
--	}
- 	f2fs_bug_on(sbi, dn.data_blkaddr != COMPRESS_ADDR);
- 
- skip_reading_dnode:
++reset_checkpoint:
+ #ifdef CONFIG_QUOTA
+ 	f2fs_recover_quota_end(sbi, quota_enabled);
+ #endif
+-reset_checkpoint:
+ 	/*
+ 	 * If the f2fs is not readonly and fsync data recovery succeeds,
+ 	 * write pointer consistency of cursegs and other zones are already
 -- 
 2.48.1
 
