@@ -2,107 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 159B0A55D3F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 Mar 2025 02:43:22 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD0DDA55D67
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 Mar 2025 02:59:49 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tqMk4-0000wG-0G;
-	Fri, 07 Mar 2025 01:43:12 +0000
+	id 1tqN03-0006IE-M7;
+	Fri, 07 Mar 2025 01:59:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tqMk2-0000w4-PZ
+ (envelope-from <chao@kernel.org>) id 1tqN02-0006I8-NE
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Mar 2025 01:43:11 +0000
+ Fri, 07 Mar 2025 01:59:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ja0fBXQ/ZMb9xZb8awESnxhhtMCXbjsD6xxtu1f0EP8=; b=k2brAlXd7NMqwZymEg+hkpdFyu
- FA6fwN9YS9lENDR06iCuh3BspT7t/It92ITCYYi8bTw3qtTfVI23RUT3uJC/izj/wd1DyObM6uh6e
- N0sGntzxEppPWWQ/7B1JznVqP4OVxBOoeX9jhYW8+hJm+DKOwd8aiT7d7KRhxlEzJe1A=;
+ bh=zJWaFfgZ96ZQ4M0LEXSTVBzOALO1krZgLxb4xALCmrY=; b=O8fp9iVVNL39855Szr59Ssdx25
+ 0CFTp8KbcVoCriv5ljTCHHUG/CFTCVkaCVR2VQBRNhIKh4/CMVPaIC5M0JmGnmQL1lQFtzINUr98Q
+ TO0+WbmJwPy9E0ctALCnPUIkvCM7ANNF/HdJBRYI1UHTcvFUg0c6GoIYn2Lp+ijfSCjQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Ja0fBXQ/ZMb9xZb8awESnxhhtMCXbjsD6xxtu1f0EP8=; b=R3pA/vjk0mKweIE98LO1xrmwS5
- 9j8hGs5s7xD7Rkdy0WTZlzhfZa+tlYvo2FBpzsG/+GYr8AmCczimrB2IgJ/wRTkAf/TL5Fh1L1djM
- puf2WWun1jhBq/7od5ZZKl6MwV5OfCRGC0DCkh2VGhXyIxYaeKu+9nN4EuVKVI0MniBQ=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=zJWaFfgZ96ZQ4M0LEXSTVBzOALO1krZgLxb4xALCmrY=; b=h
+ XO2hFTSi4EDMm6kQKnlvEHzZtPt0LdiiONNHLrJymLQYWEBB32QTZWvwXOe2fgmQqcOfM+kMiImch
+ 9LF7YIG5oa6A1jKEd5Eqa6m2DF87G63kVD8CVGOtwIfl5nb++szS+wMUs1Zo7EJXBwc5HrwRwFny5
+ jr0Mq+r7JSm9xowU=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tqMk2-0000Nj-CF for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Mar 2025 01:43:11 +0000
+ id 1tqN01-0002ak-9G for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 07 Mar 2025 01:59:42 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 0FD575C5B42
+ by nyc.source.kernel.org (Postfix) with ESMTP id E7036A453B6
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  7 Mar 2025 01:40:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 935ABC4CEE0;
- Fri,  7 Mar 2025 01:43:03 +0000 (UTC)
+ Fri,  7 Mar 2025 01:54:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 912CFC4CEE0;
+ Fri,  7 Mar 2025 01:59:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1741311784;
- bh=BDV9kjaOfeZANxxlGMEpdQrn7UZVuTJtsTsRsmKlYes=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=HRmbScHlrOrfIYI3MGAdkvDsj/6ap8Je18r9jwPAp3pxlz8m9rEC1O3/lgVmIg0tv
- rPI4HSiOuPXMgf4ckwYZ/lhAz9JRwmLNk59f+GOF/CSu0QAVdHk32QOKTZ3DJdNgPh
- vBb/PzrqtBGGHskoggrpzXpVFmdS8ZzQqsKRwiyQnCwbnOPoKeNgV2aP9fIp/SyTfO
- bLu4HX1a0XO0dIgepC/tyScMTfo9ZJ46uuxRj5uGMApDoe55rf0NXnJnAFj5zAQrrK
- m2SC4iOGqjHPzs4X6OEnC6wnpGqFqBYz/7dO0uBRsdL7nu3EB+cZzgbGSKGtW3rz4l
- moJRnykwyt+3A==
-Message-ID: <74ff4248-d3d6-456e-99db-83f256e5042b@kernel.org>
-Date: Fri, 7 Mar 2025 09:43:00 +0800
+ s=k20201202; t=1741312775;
+ bh=y1TeRT/xJwOgfkIvXjd1ognWa6hRM/GXzy+JGbaOE6E=;
+ h=From:To:Cc:Subject:Date:From;
+ b=RpXmXqWP9UWU/QL611ul9JWrYlwsARc4THWNSOMNqQF+Yj3H3LSavfPK/iXpO2qJi
+ NdV9/Yx8ZHiJlRjhS512wgLlkOUubzsJPMEooKyueFG8wvWeep9eS4GU0E5IpMd8Dn
+ OYiPIpLWMBCqUFt50zeApNmY8atVS0GzUYBWaaL9uSktVdyVK+iiD9a7Mrw1QsVEqz
+ mCIvcjM2KkediB8e022chCH6cfSHeDA2SbLko+ClUeYBU0EJjOsxXdFhtIgJtub/vj
+ 1CSxJGXMcCgSaWg6su2zUoBRNMs+gZ+rEEcIh4YzKK7E9RuTe2p3KWHi01+cH603Mg
+ wqAo2/VeWFDFA==
+To: jaegeuk@kernel.org
+Date: Fri,  7 Mar 2025 09:59:25 +0800
+Message-Id: <20250307015925.9077-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20250305110712.2114200-1-chao@kernel.org>
- <Z8hgoRHUbdaGxtpz@google.com>
- <06419a6c-ef99-412c-9ad5-88d734410c24@kernel.org>
- <Z8naUxzVkLUYcjnJ@google.com>
-Content-Language: en-US
-In-Reply-To: <Z8naUxzVkLUYcjnJ@google.com>
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2025/3/7 01:24, Jaegeuk Kim wrote: > On 03/06, Chao Yu
- wrote: >> On 3/5/25 22:33, Jaegeuk Kim wrote: >>> Chao, >>> >>> How about
- disabling nat_bits during mount and removing all the relevant codes [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  This patch turns off nat_bits feature by default in Android, 
+ for other scenario, keep it on and keep an eye on it. Signed-off-by: Chao
+ Yu <chao@kernel.org> --- v2: - fix to disable nat_bits feature in fsck tool.
+ fsck/main.c | 3 +++ fsck/mount.c | 3 ++- include/f2fs_fs.h | 6 ++++++
+ mkfs/f2fs_format.c | 3 ++- mkfs/f [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [147.75.193.91 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ [147.75.193.91 listed in sa-accredit.habeas.com]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tqMk2-0000Nj-CF
-Subject: Re: [f2fs-dev] [PATCH] Revert "f2fs: rebuild nat_bits during umount"
+X-Headers-End: 1tqN01-0002ak-9G
+Subject: [f2fs-dev] [PATCH v2] f2fs-tools: disable nat_bits by default in
+ Android
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,344 +113,105 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2025/3/7 01:24, Jaegeuk Kim wrote:
-> On 03/06, Chao Yu wrote:
->> On 3/5/25 22:33, Jaegeuk Kim wrote:
->>> Chao,
->>>
->>> How about disabling nat_bits during mount and removing all the relevant codes
->>> together?
->>
->> Jaegeuk, let me do this in separated patches:
->> - remove recovery code
->> - disable by default
->> - remove all other basic code
->>
->> Otherwise, if we gather all changes in to one patch, it's hard to bisect
->> code once there is a bug.
-> 
-> After refreshing myself, it seems we can keep the old nat_bits conservatively,
-> but remove this recovery code only w/ disable by default. Let's try this first.
+This patch turns off nat_bits feature by default in Android,
+for other scenario, keep it on and keep an eye on it.
 
-Sure, let me append the disabling patch.
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v2:
+- fix to disable nat_bits feature in fsck tool.
+ fsck/main.c             | 3 +++
+ fsck/mount.c            | 3 ++-
+ include/f2fs_fs.h       | 6 ++++++
+ mkfs/f2fs_format.c      | 3 ++-
+ mkfs/f2fs_format_main.c | 1 +
+ 5 files changed, 14 insertions(+), 2 deletions(-)
 
-Thanks,
-
-> 
->>
->> Thanks,
->>
->>>
->>> On 03/05, Chao Yu wrote:
->>>> It reports that there is potential corruption in node footer,
->>>> the most suspious feature is nat_bits, let's revert recovery
->>>> related code.
->>>>
->>>> Signed-off-by: Chao Yu <chao@kernel.org>
->>>> ---
->>>>   fs/f2fs/checkpoint.c |  21 +++------
->>>>   fs/f2fs/f2fs.h       |  32 +++++++++++++-
->>>>   fs/f2fs/node.c       | 101 ++++++++++---------------------------------
->>>>   3 files changed, 59 insertions(+), 95 deletions(-)
->>>>
->>>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
->>>> index bc9369ea6607..1bc5c2006c56 100644
->>>> --- a/fs/f2fs/checkpoint.c
->>>> +++ b/fs/f2fs/checkpoint.c
->>>> @@ -1348,21 +1348,13 @@ static void update_ckpt_flags(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>   	struct f2fs_checkpoint *ckpt = F2FS_CKPT(sbi);
->>>>   	unsigned long flags;
->>>>   
->>>> -	if (cpc->reason & CP_UMOUNT) {
->>>> -		if (le32_to_cpu(ckpt->cp_pack_total_block_count) +
->>>> -			NM_I(sbi)->nat_bits_blocks > BLKS_PER_SEG(sbi)) {
->>>> -			clear_ckpt_flags(sbi, CP_NAT_BITS_FLAG);
->>>> -			f2fs_notice(sbi, "Disable nat_bits due to no space");
->>>> -		} else if (!is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG) &&
->>>> -						f2fs_nat_bitmap_enabled(sbi)) {
->>>> -			f2fs_enable_nat_bits(sbi);
->>>> -			set_ckpt_flags(sbi, CP_NAT_BITS_FLAG);
->>>> -			f2fs_notice(sbi, "Rebuild and enable nat_bits");
->>>> -		}
->>>> -	}
->>>> -
->>>>   	spin_lock_irqsave(&sbi->cp_lock, flags);
->>>>   
->>>> +	if ((cpc->reason & CP_UMOUNT) &&
->>>> +			le32_to_cpu(ckpt->cp_pack_total_block_count) >
->>>> +			sbi->blocks_per_seg - NM_I(sbi)->nat_bits_blocks)
->>>> +		disable_nat_bits(sbi, false);
->>>> +
->>>>   	if (cpc->reason & CP_TRIMMED)
->>>>   		__set_ckpt_flags(ckpt, CP_TRIMMED_FLAG);
->>>>   	else
->>>> @@ -1545,8 +1537,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>   	start_blk = __start_cp_next_addr(sbi);
->>>>   
->>>>   	/* write nat bits */
->>>> -	if ((cpc->reason & CP_UMOUNT) &&
->>>> -			is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG)) {
->>>> +	if (enabled_nat_bits(sbi, cpc)) {
->>>>   		__u64 cp_ver = cur_cp_version(ckpt);
->>>>   		block_t blk;
->>>>   
->>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>>> index 6b4579b05dbf..8d8917b92b5d 100644
->>>> --- a/fs/f2fs/f2fs.h
->>>> +++ b/fs/f2fs/f2fs.h
->>>> @@ -2231,6 +2231,36 @@ static inline void f2fs_up_write(struct f2fs_rwsem *sem)
->>>>   #endif
->>>>   }
->>>>   
->>>> +static inline void disable_nat_bits(struct f2fs_sb_info *sbi, bool lock)
->>>> +{
->>>> +	unsigned long flags;
->>>> +	unsigned char *nat_bits;
->>>> +
->>>> +	/*
->>>> +	 * In order to re-enable nat_bits we need to call fsck.f2fs by
->>>> +	 * set_sbi_flag(sbi, SBI_NEED_FSCK). But it may give huge cost,
->>>> +	 * so let's rely on regular fsck or unclean shutdown.
->>>> +	 */
->>>> +
->>>> +	if (lock)
->>>> +		spin_lock_irqsave(&sbi->cp_lock, flags);
->>>> +	__clear_ckpt_flags(F2FS_CKPT(sbi), CP_NAT_BITS_FLAG);
->>>> +	nat_bits = NM_I(sbi)->nat_bits;
->>>> +	NM_I(sbi)->nat_bits = NULL;
->>>> +	if (lock)
->>>> +		spin_unlock_irqrestore(&sbi->cp_lock, flags);
->>>> +
->>>> +	kvfree(nat_bits);
->>>> +}
->>>> +
->>>> +static inline bool enabled_nat_bits(struct f2fs_sb_info *sbi,
->>>> +					struct cp_control *cpc)
->>>> +{
->>>> +	bool set = is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG);
->>>> +
->>>> +	return (cpc) ? (cpc->reason & CP_UMOUNT) && set : set;
->>>> +}
->>>> +
->>>>   static inline void f2fs_lock_op(struct f2fs_sb_info *sbi)
->>>>   {
->>>>   	f2fs_down_read(&sbi->cp_rwsem);
->>>> @@ -3695,7 +3725,6 @@ int f2fs_truncate_inode_blocks(struct inode *inode, pgoff_t from);
->>>>   int f2fs_truncate_xattr_node(struct inode *inode);
->>>>   int f2fs_wait_on_node_pages_writeback(struct f2fs_sb_info *sbi,
->>>>   					unsigned int seq_id);
->>>> -bool f2fs_nat_bitmap_enabled(struct f2fs_sb_info *sbi);
->>>>   int f2fs_remove_inode_page(struct inode *inode);
->>>>   struct page *f2fs_new_inode_page(struct inode *inode);
->>>>   struct page *f2fs_new_node_page(struct dnode_of_data *dn, unsigned int ofs);
->>>> @@ -3723,7 +3752,6 @@ int f2fs_recover_xattr_data(struct inode *inode, struct page *page);
->>>>   int f2fs_recover_inode_page(struct f2fs_sb_info *sbi, struct page *page);
->>>>   int f2fs_restore_node_summary(struct f2fs_sb_info *sbi,
->>>>   			unsigned int segno, struct f2fs_summary_block *sum);
->>>> -void f2fs_enable_nat_bits(struct f2fs_sb_info *sbi);
->>>>   int f2fs_flush_nat_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc);
->>>>   int f2fs_build_node_manager(struct f2fs_sb_info *sbi);
->>>>   void f2fs_destroy_node_manager(struct f2fs_sb_info *sbi);
->>>> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
->>>> index 5f512dd5fadf..8c35fd4fa200 100644
->>>> --- a/fs/f2fs/node.c
->>>> +++ b/fs/f2fs/node.c
->>>> @@ -2311,24 +2311,6 @@ static void __move_free_nid(struct f2fs_sb_info *sbi, struct free_nid *i,
->>>>   	}
->>>>   }
->>>>   
->>>> -bool f2fs_nat_bitmap_enabled(struct f2fs_sb_info *sbi)
->>>> -{
->>>> -	struct f2fs_nm_info *nm_i = NM_I(sbi);
->>>> -	unsigned int i;
->>>> -	bool ret = true;
->>>> -
->>>> -	f2fs_down_read(&nm_i->nat_tree_lock);
->>>> -	for (i = 0; i < nm_i->nat_blocks; i++) {
->>>> -		if (!test_bit_le(i, nm_i->nat_block_bitmap)) {
->>>> -			ret = false;
->>>> -			break;
->>>> -		}
->>>> -	}
->>>> -	f2fs_up_read(&nm_i->nat_tree_lock);
->>>> -
->>>> -	return ret;
->>>> -}
->>>> -
->>>>   static void update_free_nid_bitmap(struct f2fs_sb_info *sbi, nid_t nid,
->>>>   							bool set, bool build)
->>>>   {
->>>> @@ -3010,23 +2992,7 @@ static void __adjust_nat_entry_set(struct nat_entry_set *nes,
->>>>   	list_add_tail(&nes->set_list, head);
->>>>   }
->>>>   
->>>> -static void __update_nat_bits(struct f2fs_nm_info *nm_i, unsigned int nat_ofs,
->>>> -							unsigned int valid)
->>>> -{
->>>> -	if (valid == 0) {
->>>> -		__set_bit_le(nat_ofs, nm_i->empty_nat_bits);
->>>> -		__clear_bit_le(nat_ofs, nm_i->full_nat_bits);
->>>> -		return;
->>>> -	}
->>>> -
->>>> -	__clear_bit_le(nat_ofs, nm_i->empty_nat_bits);
->>>> -	if (valid == NAT_ENTRY_PER_BLOCK)
->>>> -		__set_bit_le(nat_ofs, nm_i->full_nat_bits);
->>>> -	else
->>>> -		__clear_bit_le(nat_ofs, nm_i->full_nat_bits);
->>>> -}
->>>> -
->>>> -static void update_nat_bits(struct f2fs_sb_info *sbi, nid_t start_nid,
->>>> +static void __update_nat_bits(struct f2fs_sb_info *sbi, nid_t start_nid,
->>>>   						struct page *page)
->>>>   {
->>>>   	struct f2fs_nm_info *nm_i = NM_I(sbi);
->>>> @@ -3035,7 +3001,7 @@ static void update_nat_bits(struct f2fs_sb_info *sbi, nid_t start_nid,
->>>>   	int valid = 0;
->>>>   	int i = 0;
->>>>   
->>>> -	if (!is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG))
->>>> +	if (!enabled_nat_bits(sbi, NULL))
->>>>   		return;
->>>>   
->>>>   	if (nat_index == 0) {
->>>> @@ -3046,36 +3012,17 @@ static void update_nat_bits(struct f2fs_sb_info *sbi, nid_t start_nid,
->>>>   		if (le32_to_cpu(nat_blk->entries[i].block_addr) != NULL_ADDR)
->>>>   			valid++;
->>>>   	}
->>>> -
->>>> -	__update_nat_bits(nm_i, nat_index, valid);
->>>> -}
->>>> -
->>>> -void f2fs_enable_nat_bits(struct f2fs_sb_info *sbi)
->>>> -{
->>>> -	struct f2fs_nm_info *nm_i = NM_I(sbi);
->>>> -	unsigned int nat_ofs;
->>>> -
->>>> -	f2fs_down_read(&nm_i->nat_tree_lock);
->>>> -
->>>> -	for (nat_ofs = 0; nat_ofs < nm_i->nat_blocks; nat_ofs++) {
->>>> -		unsigned int valid = 0, nid_ofs = 0;
->>>> -
->>>> -		/* handle nid zero due to it should never be used */
->>>> -		if (unlikely(nat_ofs == 0)) {
->>>> -			valid = 1;
->>>> -			nid_ofs = 1;
->>>> -		}
->>>> -
->>>> -		for (; nid_ofs < NAT_ENTRY_PER_BLOCK; nid_ofs++) {
->>>> -			if (!test_bit_le(nid_ofs,
->>>> -					nm_i->free_nid_bitmap[nat_ofs]))
->>>> -				valid++;
->>>> -		}
->>>> -
->>>> -		__update_nat_bits(nm_i, nat_ofs, valid);
->>>> +	if (valid == 0) {
->>>> +		__set_bit_le(nat_index, nm_i->empty_nat_bits);
->>>> +		__clear_bit_le(nat_index, nm_i->full_nat_bits);
->>>> +		return;
->>>>   	}
->>>>   
->>>> -	f2fs_up_read(&nm_i->nat_tree_lock);
->>>> +	__clear_bit_le(nat_index, nm_i->empty_nat_bits);
->>>> +	if (valid == NAT_ENTRY_PER_BLOCK)
->>>> +		__set_bit_le(nat_index, nm_i->full_nat_bits);
->>>> +	else
->>>> +		__clear_bit_le(nat_index, nm_i->full_nat_bits);
->>>>   }
->>>>   
->>>>   static int __flush_nat_entry_set(struct f2fs_sb_info *sbi,
->>>> @@ -3094,7 +3041,7 @@ static int __flush_nat_entry_set(struct f2fs_sb_info *sbi,
->>>>   	 * #1, flush nat entries to journal in current hot data summary block.
->>>>   	 * #2, flush nat entries to nat page.
->>>>   	 */
->>>> -	if ((cpc->reason & CP_UMOUNT) ||
->>>> +	if (enabled_nat_bits(sbi, cpc) ||
->>>>   		!__has_cursum_space(journal, set->entry_cnt, NAT_JOURNAL))
->>>>   		to_journal = false;
->>>>   
->>>> @@ -3141,7 +3088,7 @@ static int __flush_nat_entry_set(struct f2fs_sb_info *sbi,
->>>>   	if (to_journal) {
->>>>   		up_write(&curseg->journal_rwsem);
->>>>   	} else {
->>>> -		update_nat_bits(sbi, start_nid, page);
->>>> +		__update_nat_bits(sbi, start_nid, page);
->>>>   		f2fs_put_page(page, 1);
->>>>   	}
->>>>   
->>>> @@ -3172,7 +3119,7 @@ int f2fs_flush_nat_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>   	 * during unmount, let's flush nat_bits before checking
->>>>   	 * nat_cnt[DIRTY_NAT].
->>>>   	 */
->>>> -	if (cpc->reason & CP_UMOUNT) {
->>>> +	if (enabled_nat_bits(sbi, cpc)) {
->>>>   		f2fs_down_write(&nm_i->nat_tree_lock);
->>>>   		remove_nats_in_journal(sbi);
->>>>   		f2fs_up_write(&nm_i->nat_tree_lock);
->>>> @@ -3188,7 +3135,7 @@ int f2fs_flush_nat_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>>   	 * entries, remove all entries from journal and merge them
->>>>   	 * into nat entry set.
->>>>   	 */
->>>> -	if (cpc->reason & CP_UMOUNT ||
->>>> +	if (enabled_nat_bits(sbi, cpc) ||
->>>>   		!__has_cursum_space(journal,
->>>>   			nm_i->nat_cnt[DIRTY_NAT], NAT_JOURNAL))
->>>>   		remove_nats_in_journal(sbi);
->>>> @@ -3225,18 +3172,15 @@ static int __get_nat_bitmaps(struct f2fs_sb_info *sbi)
->>>>   	__u64 cp_ver = cur_cp_version(ckpt);
->>>>   	block_t nat_bits_addr;
->>>>   
->>>> +	if (!enabled_nat_bits(sbi, NULL))
->>>> +		return 0;
->>>> +
->>>>   	nm_i->nat_bits_blocks = F2FS_BLK_ALIGN((nat_bits_bytes << 1) + 8);
->>>>   	nm_i->nat_bits = f2fs_kvzalloc(sbi,
->>>>   			F2FS_BLK_TO_BYTES(nm_i->nat_bits_blocks), GFP_KERNEL);
->>>>   	if (!nm_i->nat_bits)
->>>>   		return -ENOMEM;
->>>>   
->>>> -	nm_i->full_nat_bits = nm_i->nat_bits + 8;
->>>> -	nm_i->empty_nat_bits = nm_i->full_nat_bits + nat_bits_bytes;
->>>> -
->>>> -	if (!is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG))
->>>> -		return 0;
->>>> -
->>>>   	nat_bits_addr = __start_cp_addr(sbi) + BLKS_PER_SEG(sbi) -
->>>>   						nm_i->nat_bits_blocks;
->>>>   	for (i = 0; i < nm_i->nat_bits_blocks; i++) {
->>>> @@ -3253,12 +3197,13 @@ static int __get_nat_bitmaps(struct f2fs_sb_info *sbi)
->>>>   
->>>>   	cp_ver |= (cur_cp_crc(ckpt) << 32);
->>>>   	if (cpu_to_le64(cp_ver) != *(__le64 *)nm_i->nat_bits) {
->>>> -		clear_ckpt_flags(sbi, CP_NAT_BITS_FLAG);
->>>> -		f2fs_notice(sbi, "Disable nat_bits due to incorrect cp_ver (%llu, %llu)",
->>>> -			cp_ver, le64_to_cpu(*(__le64 *)nm_i->nat_bits));
->>>> +		disable_nat_bits(sbi, true);
->>>>   		return 0;
->>>>   	}
->>>>   
->>>> +	nm_i->full_nat_bits = nm_i->nat_bits + 8;
->>>> +	nm_i->empty_nat_bits = nm_i->full_nat_bits + nat_bits_bytes;
->>>> +
->>>>   	f2fs_notice(sbi, "Found nat_bits in checkpoint");
->>>>   	return 0;
->>>>   }
->>>> @@ -3269,7 +3214,7 @@ static inline void load_free_nid_bitmap(struct f2fs_sb_info *sbi)
->>>>   	unsigned int i = 0;
->>>>   	nid_t nid, last_nid;
->>>>   
->>>> -	if (!is_set_ckpt_flags(sbi, CP_NAT_BITS_FLAG))
->>>> +	if (!enabled_nat_bits(sbi, NULL))
->>>>   		return;
->>>>   
->>>>   	for (i = 0; i < nm_i->nat_blocks; i++) {
->>>> -- 
->>>> 2.48.1
+diff --git a/fsck/main.c b/fsck/main.c
+index 25d50e2..9e0f94e 100644
+--- a/fsck/main.c
++++ b/fsck/main.c
+@@ -219,6 +219,9 @@ static void __add_fsck_options(void)
+ {
+ 	/* -a */
+ 	c.auto_fix = 1;
++
++	/* disable nat_bits feature by default */
++	c.disabled_feature |= F2FS_FEATURE_NAT_BITS;
+ }
+ 
+ static void add_default_options(void)
+diff --git a/fsck/mount.c b/fsck/mount.c
+index e493f22..0b05f00 100644
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -1713,7 +1713,8 @@ u32 update_nat_bits_flags(struct f2fs_super_block *sb,
+ 	nat_bits_bytes = get_sb(segment_count_nat) << 5;
+ 	nat_bits_blocks = F2FS_BYTES_TO_BLK((nat_bits_bytes << 1) + 8 +
+ 						F2FS_BLKSIZE - 1);
+-	if (get_cp(cp_pack_total_block_count) <=
++	if (!(c.disabled_feature & F2FS_FEATURE_NAT_BITS) &&
++			get_cp(cp_pack_total_block_count) <=
+ 			(1 << get_sb(log_blocks_per_seg)) - nat_bits_blocks)
+ 		flags |= CP_NAT_BITS_FLAG;
+ 	else
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index 0cb9228..bb40adc 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -1471,6 +1471,11 @@ enum {
+ 
+ #define MAX_CACHE_SUMS			8
+ 
++/* feature list in Android */
++enum {
++	F2FS_FEATURE_NAT_BITS = 0x0001,
++};
++
+ struct f2fs_configuration {
+ 	uint32_t conf_reserved_sections;
+ 	uint32_t reserved_segments;
+@@ -1537,6 +1542,7 @@ struct f2fs_configuration {
+ 	int large_nat_bitmap;
+ 	int fix_chksum;			/* fix old cp.chksum position */
+ 	unsigned int feature;			/* defined features */
++	unsigned int disabled_feature;	/* disabled feature, used for Android only */
+ 	unsigned int quota_bits;	/* quota bits */
+ 	time_t fixed_time;
+ 	int roll_forward;
+diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+index 6635eed..c28ebb0 100644
+--- a/mkfs/f2fs_format.c
++++ b/mkfs/f2fs_format.c
+@@ -893,7 +893,8 @@ static int f2fs_write_check_point_pack(void)
+ 	/* cp page (2), data summaries (1), node summaries (3) */
+ 	set_cp(cp_pack_total_block_count, 6 + get_sb(cp_payload));
+ 	flags = CP_UMOUNT_FLAG | CP_COMPACT_SUM_FLAG;
+-	if (get_cp(cp_pack_total_block_count) <=
++	if (!(c.disabled_feature & F2FS_FEATURE_NAT_BITS) &&
++			get_cp(cp_pack_total_block_count) <=
+ 			(1 << get_sb(log_blocks_per_seg)) - nat_bits_blocks)
+ 		flags |= CP_NAT_BITS_FLAG;
+ 
+diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+index 9407f5b..5b4569d 100644
+--- a/mkfs/f2fs_format_main.c
++++ b/mkfs/f2fs_format_main.c
+@@ -143,6 +143,7 @@ static void add_default_options(void)
+ 		force_overwrite = 1;
+ 		c.wanted_sector_size = F2FS_BLKSIZE;
+ 		c.root_uid = c.root_gid = 0;
++		c.disabled_feature |= F2FS_FEATURE_NAT_BITS;
+ 
+ 		/* RO doesn't need any other features */
+ 		if (c.feature & F2FS_FEATURE_RO)
+-- 
+2.40.1
 
 
 
