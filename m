@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47A6BA55F07
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 Mar 2025 04:57:43 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0567CA55F0C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 Mar 2025 04:58:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tqOqD-0000Cx-Iz;
-	Fri, 07 Mar 2025 03:57:40 +0000
+	id 1tqOql-0000se-H8;
+	Fri, 07 Mar 2025 03:58:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ddiss@suse.de>) id 1tqOqB-0000Cn-5i
+ (envelope-from <ddiss@suse.de>) id 1tqOqj-0000sK-GX
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Mar 2025 03:57:38 +0000
+ Fri, 07 Mar 2025 03:58:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
  :References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3EqZiiZ+ozrGjSz/52JKPoRDB4+ZJlXZJl90Ra/Iwqk=; b=azS4NIzuWsTu5gZZsRNi/RWeQP
- 67yGxnC6zveC9D0JI6S2mm4gDTfvVSJfWmN+JYl+fFnLnOMWJ4AvxkSYUtcFatshQMdq3hpqEuZ93
- YUJfmR9dbTQP6P8gHZ5yNUd1m/pvr3PZHOZv9ozO9UB0OvFhZ59IjZUwPRs5zpo3nS0Q=;
+ bh=4o8aIqRMXFiWv6nSz2UHztvIYHb6zxhdcrhJDENIKyc=; b=ewnfbVYmzzDMAgOHsgrT486emP
+ vWve4ggMbZ01TOC0pI4DOK1jqUoRaWcd0i3pynM4EywS5iRPiMYFOwZkLLLQzx4TRXso/uBzl2B1z
+ kVvs+yRrz9tdrXX2Gea0SvJwcpmFMdjymnuECpveEYqAeHyuItNv4Ipfwe+79Ts2D7w4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
@@ -31,113 +31,106 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3EqZiiZ+ozrGjSz/52JKPoRDB4+ZJlXZJl90Ra/Iwqk=; b=l2OdYf+LdqnwTBFtK3dIyDGzgI
- Xcl5VV48udJBE+HyvmVAlNYbz+Dc/6e+hvhcA3qMuUCUqzlclTJhtP+XsD8D+UEoxfmw3YOtQpWI+
- lgJnQROKLJXxu8zEvcxPkElJzzPZwCFhB5S2DiVt8bXBNWjbGPHJhl52GkgX3li1WnCQ=;
+ bh=4o8aIqRMXFiWv6nSz2UHztvIYHb6zxhdcrhJDENIKyc=; b=Ua/v614ZI0qW9nCsiypDmRUX9T
+ vIVQD8PusREzd73Phfxq3lRjkEsgAA1iVRpK+M9y9y6SD1CexBJfB08ADNyVMTONLkTQMrI6TQlrs
+ HpHPmKCpuUEwg1/E02qrJlC94ukhvJSBulD4q7+jiP+xSo1HjCQQE06lHaO/uW3cgCbY=;
 Received: from smtp-out1.suse.de ([195.135.223.130])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1tqOpz-0000vp-OT for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Mar 2025 03:57:38 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ id 1tqOqe-00011h-Gz for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 07 Mar 2025 03:58:14 +0000
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id EE469211B5;
- Fri,  7 Mar 2025 03:57:15 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id E3CF4211B5;
+ Fri,  7 Mar 2025 03:57:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1741319836; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1741319877; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3EqZiiZ+ozrGjSz/52JKPoRDB4+ZJlXZJl90Ra/Iwqk=;
- b=rR/AWl5ZKqoN+5REtULvSYyI3QD+hiMLnWIc953AHhrBqdVqBef4zSrRvuIiwIyL8p87kx
- 5U80e7B2WnhP6GzEdnuwxLZbzLNxc0ofQanScyVmXx7R2l0SSTWMT5lrMWsWY7inAVXi+o
- xcv1fSc43rMfj9H2uADEG/cXCCyG7aQ=
+ bh=4o8aIqRMXFiWv6nSz2UHztvIYHb6zxhdcrhJDENIKyc=;
+ b=wlht1gpYnN5SmHI42RDa+AIWQgKo/iKQhaT9yDWLH3yVYh5sksSrxFrOtkq5PRAGMbhN+f
+ UHQgjAbiaNo1b6EIW7g9mwCht4nVgI0ZIyI2rFa+v8fGgBZUL//eyQSpogNPrE08cqGNF8
+ Kcn6t/y5NJUxOc8O22cmFaaltB7nebw=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1741319836;
+ s=susede2_ed25519; t=1741319877;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3EqZiiZ+ozrGjSz/52JKPoRDB4+ZJlXZJl90Ra/Iwqk=;
- b=NmG3PqUHOG/gElZS3aoXB0ayujHyotRawvpk/QtDuyDCgGSUCn3E5/avYFHqMgrHZuuW7f
- 884u2AeXJNqax/Bw==
+ bh=4o8aIqRMXFiWv6nSz2UHztvIYHb6zxhdcrhJDENIKyc=;
+ b=E0iA8HcjjZZTT0wPyVe+HZYuond7Ve6AIw8sOmbeN+Rche5/Ew0ulQ+dna4eK73dboT0M2
+ Cj1/pASzpScehKBw==
 Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=NtHfIdNt;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=Pl38iTOt
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1741319835; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1741319876; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3EqZiiZ+ozrGjSz/52JKPoRDB4+ZJlXZJl90Ra/Iwqk=;
- b=NtHfIdNt5/ve51A4lGurC9eolmseMxD3F/EEP6H3cOkLInqowwls3nvVI70cFxK4/8TbMw
- vKWSxNJmTAD81FF5eLCYcyLOVLaHNs8i15hP+jwoZzJqat9dSoq5akfCOiyXzFwAfH/d0T
- 9xKnGi7G8WiZGlGO3wuTFtgHOeMTAvw=
+ bh=4o8aIqRMXFiWv6nSz2UHztvIYHb6zxhdcrhJDENIKyc=;
+ b=ynvxscYm61TsqdrAMWiGEnDOItLiHtc5A/VOlWigseoGD/mw6We4vfnGCef6lKN39+eL0/
+ sE3t23RO420xKRkhp3U3wfPX4u6MpynqKb21MeLPSxFantnE7vPA5T7ujlOYZ12Cfxuo/e
+ oTJREtLZjnekc8/FLBp03Bq86d/eAFM=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1741319835;
+ s=susede2_ed25519; t=1741319876;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3EqZiiZ+ozrGjSz/52JKPoRDB4+ZJlXZJl90Ra/Iwqk=;
- b=Pl38iTOtVXYr3ej2bIJsRi3Gdth6zi0Xns067VcrO3AVfi2mKSzxcgSPERsBa53QA+l3iK
- 7dbYuUtMNe8G6KAA==
+ bh=4o8aIqRMXFiWv6nSz2UHztvIYHb6zxhdcrhJDENIKyc=;
+ b=6uLa5+624FKsVXx3hGB7aBKNJbOnDofhNn1ZHoZ8J9DnxjA+VUzweKvFI+yctosj5x2RO1
+ Zk1sUlTvXFRt3AAw==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id E3FB613726;
- Fri,  7 Mar 2025 03:57:13 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D02C813726;
+ Fri,  7 Mar 2025 03:57:54 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id A0R/JpluymfOaAAAD6G6ig
- (envelope-from <ddiss@suse.de>); Fri, 07 Mar 2025 03:57:13 +0000
-Date: Fri, 7 Mar 2025 14:57:01 +1100
+ by imap1.dmz-prg2.suse.org with ESMTPSA id ytCfIcJuymcBaQAAD6G6ig
+ (envelope-from <ddiss@suse.de>); Fri, 07 Mar 2025 03:57:54 +0000
+Date: Fri, 7 Mar 2025 14:57:49 +1100
 From: David Disseldorp <ddiss@suse.de>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <20250307145701.3676d880.ddiss@suse.de>
-In-Reply-To: <20250306081809.2397527-2-chao@kernel.org>
+Message-ID: <20250307145749.7bda92e8.ddiss@suse.de>
+In-Reply-To: <20250306081809.2397527-3-chao@kernel.org>
 References: <20250306081809.2397527-1-chao@kernel.org>
- <20250306081809.2397527-2-chao@kernel.org>
+ <20250306081809.2397527-3-chao@kernel.org>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: EE469211B5
-X-Spam-Score: -3.51
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.51 / 50.00]; BAYES_HAM(-3.00)[99.99%];
- NEURAL_HAM_LONG(-1.00)[-1.000]; MID_CONTAINS_FROM(1.00)[];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; ARC_NA(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
- MIME_TRACE(0.00)[0:+]; MISSING_XM_UA(0.00)[];
- TO_DN_SOME(0.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
- RCVD_TLS_ALL(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- RCPT_COUNT_FIVE(0.00)[5]; RCVD_COUNT_TWO(0.00)[2];
- TO_MATCH_ENVRCPT_ALL(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.de:dkim,suse.de:mid,suse.de:email];
- DKIM_TRACE(0.00)[suse.de:+]
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spam-Flag: NO
 X-Spam-Level: 
+X-Spamd-Result: default: False [-3.30 / 50.00]; BAYES_HAM(-3.00)[99.99%];
+ MID_CONTAINS_FROM(1.00)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-0.990]; MIME_GOOD(-0.10)[text/plain];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
+ MIME_TRACE(0.00)[0:+]; TO_DN_SOME(0.00)[];
+ MISSING_XM_UA(0.00)[]; RCVD_TLS_ALL(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_HAS_DN(0.00)[];
+ RCPT_COUNT_FIVE(0.00)[5]; FROM_EQ_ENVFROM(0.00)[];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo, suse.de:email,
+ suse.de:mid]
+X-Spam-Score: -3.30
+X-Spam-Flag: NO
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, 6 Mar 2025 16:18:07 +0800, Chao Yu wrote: > export
- F2FS_INJECT_PROG w/ inject.f2fs, it can be used for fault injection. > >
- Cc: Jaegeuk Kim <jaegeuk@kernel.org> > Signed-off-by: Chao Yu
- <chao@kernel.org> > --- > common/config | 1 + > 1 file c [...] 
+ Content preview:  On Thu, 6 Mar 2025 16:18:08 +0800, Chao Yu wrote: > Support
+ f2fs in _repair_scratch_fs(), and use -f to repair the image > forcely. >
+ > Cc: Jaegeuk Kim <jaegeuk@kernel.org> > Signed-off-by: Chao Yu
+ <chao@kernel.org> > --- > common/rc | 3 +++ > 1 file [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.223.130 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -148,18 +141,18 @@ X-Spam-Report: Spam detection software,
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [195.135.223.130 listed in bl.score.senderscore.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.223.130 listed in list.dnswl.org]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1tqOpz-0000vp-OT
-Subject: Re: [f2fs-dev] [PATCH 2/4] common/config: export F2FS_INJECT_PROG
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+X-Headers-End: 1tqOqe-00011h-Gz
+Subject: Re: [f2fs-dev] [PATCH 3/4] common/rc: support f2fs in
+ _repair_scratch_fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -177,28 +170,31 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu,  6 Mar 2025 16:18:07 +0800, Chao Yu wrote:
+On Thu,  6 Mar 2025 16:18:08 +0800, Chao Yu wrote:
 
-> export F2FS_INJECT_PROG w/ inject.f2fs, it can be used for fault injection.
+> Support f2fs in _repair_scratch_fs(), and use -f to repair the image
+> forcely.
 > 
 > Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 > Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
->  common/config | 1 +
->  1 file changed, 1 insertion(+)
+>  common/rc | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
-> diff --git a/common/config b/common/config
-> index 8d3047a5..05f192ea 100644
-> --- a/common/config
-> +++ b/common/config
-> @@ -317,6 +317,7 @@ export MKFS_BTRFS_PROG=$(set_mkfs_prog_path_with_opts btrfs)
->  export MKFS_F2FS_PROG=$(set_mkfs_prog_path_with_opts f2fs)
->  export DUMP_F2FS_PROG=$(type -P dump.f2fs)
->  export F2FS_IO_PROG=$(type -P f2fs_io)
-> +export F2FS_INJECT_PROG=$(type -P inject.f2fs)
->  export BTRFS_UTIL_PROG=$(type -P btrfs)
->  export BTRFS_SHOW_SUPER_PROG=$(type -P btrfs-show-super)
->  export BTRFS_CONVERT_PROG=$(type -P btrfs-convert)
+> diff --git a/common/rc b/common/rc
+> index ca755055..bf24da4e 100644
+> --- a/common/rc
+> +++ b/common/rc
+> @@ -1500,6 +1500,9 @@ _repair_scratch_fs()
+>  	# want the test to fail:
+>  	_check_scratch_fs
+>  	;;
+> +    f2fs)
+> +	fsck -t $FSTYP -f $SCRATCH_DEV
+> +	;;
+>      *)
+>  	local dev=$SCRATCH_DEV
+>  	local fstyp=$FSTYP
 
 Reviewed-by: David Disseldorp <ddiss@suse.de>
 
