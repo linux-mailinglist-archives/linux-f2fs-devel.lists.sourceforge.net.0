@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69F37A5BFB5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Mar 2025 12:49:17 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 03F1CA5BFB7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Mar 2025 12:49:29 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1try6b-00073p-Ld;
-	Tue, 11 Mar 2025 11:49:06 +0000
+	id 1try6t-0005jo-Jy;
+	Tue, 11 Mar 2025 11:49:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1try6Z-00073h-QF
+ (envelope-from <chao@kernel.org>) id 1try6s-0005jf-48
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Mar 2025 11:49:04 +0000
+ Tue, 11 Mar 2025 11:49:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZV8SfdmAYYRjxZYl+60/mnv/ptgzISctLkr76mAkXhI=; b=f1AnesNNn9vjU5KCGYbz5OQFdJ
- yJemkB7VXRbh9HbBsLLmjRmYosK1ex9QY+uzgsKLM5HqeAPhn2fNbxuT2rJyNSRspNK4ZLYLEwaiQ
- uuvFzUVoWZ0TMEa2wBF2m3NZwtl+W9eDiNS3VgRAWG4vH01A2xh5MhkPtHgTIiqN6vQc=;
+ bh=R8Q9TUFUcmUCmJa8fuQjdoN8lxpUwl7YK8Kj11w5jfs=; b=H3/NaMeE8zNZi3oJ4IGdGIaUg5
+ KODaAJM6nw6qWUtW/r9F2ajfo3Ps0z/syI4sfO0a/s7FcZzD88dPySXeOE8QFiR9soZTIE02iV7/N
+ 836BHqdWzWHyrvd5Re7BT8bkHsuSrOSgutWAhELr5LdR/GKhDpoQe9UblJsDxv1dxBKI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,67 +31,54 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZV8SfdmAYYRjxZYl+60/mnv/ptgzISctLkr76mAkXhI=; b=BVO+SwXZaZDOUON9f7cNPLgsDT
- OIMs/yv+ugjbQjHBKevV0ZXNj2UhhDW+fIMt9+Ic4R4BfEmGw4iVDOpA2Lr0qOAi7n5/fzG7fVPeE
- onB9cuCiGAeA/JdNy3HzteoTZXZ3sKBEdY8YD6y/jgbi4rdxYzf+BL2jR3dT50jr5sgA=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=R8Q9TUFUcmUCmJa8fuQjdoN8lxpUwl7YK8Kj11w5jfs=; b=HQiRit+Rl34aHpNb+zKTlGhGBe
+ TBbgW1443ZLSTy8ZjvUdbThrA2pQzOMcxGZWtjJupJ/fqUS8Yvu/LJ3BoTO6EhdZAg3eeA+TwXEsp
+ EpA6sgado6oNDU26wqR4PFC552Ox04M7bKTuvBYojmfugaWgi80LQDRzAX7xUXUx7o7E=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1try6U-0003Ox-VU for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Mar 2025 11:49:04 +0000
+ id 1try6g-0003Rj-Rc for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Mar 2025 11:49:21 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C84EC5C5C43;
- Tue, 11 Mar 2025 11:46:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C71AC4CEE9;
- Tue, 11 Mar 2025 11:48:51 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 11964A46A15;
+ Tue, 11 Mar 2025 11:43:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2CB98C4CEEE;
+ Tue, 11 Mar 2025 11:48:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1741693733;
- bh=ct1RD5Dm6Apm9DcwI7XbOMNgTuO9NkqnuJ8nAT5LQqk=;
+ s=k20201202; t=1741693739;
+ bh=RtjSiZtx5omuFVg3avMcut1p0gnfZssAhseajHHPr5c=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=pXEEMMWpBGQjI7QDoUTKp7aHbBl3dKuT95/mUUumVuP6bS8hOCAAnCOVklo0Rc6kH
- i7bXA8Ese0b/ZTRW3QLP1npyf8+Ws+hUA+Sg4nnEkIdBegDmdypio4SUPt7CXslPVG
- VELsElybZiwM5nIPqLSAHSkUko+ArtNhXozvhP7YDn1v6n9F9DAsoww77BFWQvqQvB
- qHNpk5BQBhq9X2e/kcluQGIjlNdmsdJ/8+ol7UAbVDGWu1HpCDI8nueHU7B3/Vx0eW
- lYNgmFHAtTA4dgo6jkzHPWulU0ZtGSteNo8fAnw5e9EwCMLja1KMa+AhW847UeuiN6
- 5SbewQNfaeFyQ==
-Message-ID: <9562210b-bf6e-4bbc-860f-40aec418ea36@kernel.org>
-Date: Tue, 11 Mar 2025 19:48:48 +0800
+ b=swP1eeJqz9wAlJelMRxacwPkGbFz6jh0DEgR7pUP0pbGycnEyhtMvsxwzvh1LD5YK
+ LIWiwzgY+BbGJA4LoafjQO1AIywnS7Ytl+SWVG+GRSpnHY9/8IQvUwVYDJlcraPMAs
+ LV/m0fXHIp7yUFNWeMFD8Pat0sQ9MRj+e+tCxbVAGB1ZS0wof2BtbTeOnvfeJMbszb
+ dqR+bVNWcQiFi/HU4KrBZ3QtI6tIhYCGKUpbEQlAjBsXZH3R9UU+ecDDfb5PVarKv6
+ 6u8RLr1+cdGZ4G/j28jn7Yd25DHwweCCO2+Npv1xiJIA5QkVPIxgwOQU/rGSQyb7Ka
+ hlK49v4FGxpIQ==
+Message-ID: <88e7f270-a752-471b-b57a-8b557c586ed4@kernel.org>
+Date: Tue, 11 Mar 2025 19:48:57 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
  Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20250307182151.3397003-1-willy@infradead.org>
- <20250307182151.3397003-2-willy@infradead.org>
+ <20250307182151.3397003-3-willy@infradead.org>
 Content-Language: en-US
-In-Reply-To: <20250307182151.3397003-2-willy@infradead.org>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20250307182151.3397003-3-willy@infradead.org>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 3/8/25 02:21,
- Matthew Wilcox (Oracle) wrote: > We're almost
- able to remove a_ops->writepage. This check is unnecessary > as we'll never
- call into __f2fs_write_data_pages() for character > devices. [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 3/8/25 02:21, Matthew Wilcox (Oracle) wrote: > Mappings
+ which implement writepages should not implement writepage > as it can only
+ harm writeback patterns. > > Signed-off-by: Matthew Wilcox (Oracle [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-accredit.habeas.com]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -99,9 +86,21 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [147.75.193.91 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [147.75.193.91 listed in bl.score.senderscore.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1try6U-0003Ox-VU
-Subject: Re: [f2fs-dev] [PATCH 1/4] f2fs: Remove check for ->writepage
+X-Headers-End: 1try6g-0003Rj-Rc
+Subject: Re: [f2fs-dev] [PATCH 2/4] f2fs: Remove f2fs_write_data_page()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,9 +120,8 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 3/8/25 02:21, Matthew Wilcox (Oracle) wrote:
-> We're almost able to remove a_ops->writepage.  This check is unnecessary
-> as we'll never call into __f2fs_write_data_pages() for character
-> devices.
+> Mappings which implement writepages should not implement writepage
+> as it can only harm writeback patterns.
 > 
 > Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 
