@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D5ACA5C34B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Mar 2025 15:09:45 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55D9EA5C356
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Mar 2025 15:11:13 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ts0If-0006CQ-BA;
-	Tue, 11 Mar 2025 14:09:41 +0000
+	id 1ts0K5-0001s7-RW;
+	Tue, 11 Mar 2025 14:11:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1ts0Id-0006CJ-Up
+ (envelope-from <zlang@redhat.com>) id 1ts0K4-0001ru-Bg
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Mar 2025 14:09:39 +0000
+ Tue, 11 Mar 2025 14:11:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QHN+WyTXC9cTVt8Szj+5ZB32yaeO7+nSt9V6FrdnRtk=; b=SFMZ/We4cTl5vqJ8GDFoAYGluA
- 8vux/oqabUSc+4kmThh0UiXKeZUafsxW+OLsURKhOnmA/SMJO/ejGiklNz3/0fO/C4GEwvpHTQ4Ms
- 8L3aDKrT8HMmoN/JADtuvLVOTFa5YswBhit5MQR4AUZMeVODf1qOiH54YKxpoNjnlwXI=;
+ bh=SkvND+eYHH9qsacQ7rfWb/ck3Os9E/r1JZIjq4LYTVM=; b=SjuApCGPTuHdnztNL+yJcdJGZB
+ 64id+g10FFPikIP4IvnGLakVMAj07WcnR2Y2PPsrOPWb2bqPtJ6qNc8dfG74wrctYZgaiDhHJ77fo
+ RdppTUw5U4md/UEI3jBYEjqpavyIgZc5GunGt3P0mFmkS/so3W5oOiDFEu4yJPJTfn9Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,78 +31,78 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=QHN+WyTXC9cTVt8Szj+5ZB32yaeO7+nSt9V6FrdnRtk=; b=Vzs59U/lY2RBnnukvdNiy3UTZu
- 1NC/dFjV1khWPZxEaZo0eYl/6eRlw6VaNLZzoaR0be/ftMHRFuiP00kpHyfIArzCr7+tfEUeq1rNz
- 4VJGwPEb/lik2P20DXfNA9LHDhiAm8nwdMXji2xCHtoqnTEO9cpDN10MqbBCTSe2HsvM=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ bh=SkvND+eYHH9qsacQ7rfWb/ck3Os9E/r1JZIjq4LYTVM=; b=fK2fj0Jqle8LhfdwrCFETnY9w4
+ MXfGkwjyfZ6zvIv3uYKxd+XkGd5aoXEeEq5KE1g12BeLUEsuOyCkZPLNdELUGQDJTlen//VgOfncD
+ 9sm1SfNIUnouPJ7DNUWCOTIseeKiRa+cELaR3wr69Kw9T/iP1Yn6hHIDGJm7rcBlvGEY=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ts0IY-0005eh-56 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Mar 2025 14:09:39 +0000
+ id 1ts0Jz-00062L-Ex for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Mar 2025 14:11:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1741702168;
+ s=mimecast20190719; t=1741702257;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=QHN+WyTXC9cTVt8Szj+5ZB32yaeO7+nSt9V6FrdnRtk=;
- b=bQ6vO8ALGigRZrcptizNsaX9sF4Ut/zY9mg4d+P62gT32cMLZVJbYtB4vMNNHF+BTfc4Cg
- li/87CLTOdpTVN840Mo+WAFgll/NanWHDBaNXuxnNfOUWuFGKfFu45kYthFLx9ll11FtQd
- p5+gFmWgula6pOaoRvaV3PoB0WcmdpU=
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=SkvND+eYHH9qsacQ7rfWb/ck3Os9E/r1JZIjq4LYTVM=;
+ b=JE4LpVlx9PiD7dDjPMTD2uI/BMLuO2l91vwbsaOESmpZ+/U8aD2KYJ04i22MIE32Od5IR3
+ FXYQRb0SsPy+s3XPFWcslddfqtZ05G+mX3oCjCxm2OwWWkyETfA9y1WheyTrs3wEOb1js4
+ MbiT21dQeeo5+m5An0w11jt2qPwhSPM=
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-303-Jdsx_S1pPA-_jaXQ9fsgFw-1; Tue, 11 Mar 2025 10:09:27 -0400
-X-MC-Unique: Jdsx_S1pPA-_jaXQ9fsgFw-1
-X-Mimecast-MFC-AGG-ID: Jdsx_S1pPA-_jaXQ9fsgFw_1741702166
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-223f3357064so88501155ad.3
+ us-mta-452-yrxifYo4Pkm3RfNhLtP01A-1; Tue, 11 Mar 2025 10:10:55 -0400
+X-MC-Unique: yrxifYo4Pkm3RfNhLtP01A-1
+X-Mimecast-MFC-AGG-ID: yrxifYo4Pkm3RfNhLtP01A_1741702253
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-225505d1ca5so47485595ad.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 11 Mar 2025 07:09:27 -0700 (PDT)
+ Tue, 11 Mar 2025 07:10:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741702166; x=1742306966;
+ d=1e100.net; s=20230601; t=1741702253; x=1742307053;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QHN+WyTXC9cTVt8Szj+5ZB32yaeO7+nSt9V6FrdnRtk=;
- b=xSAthfpAUyxLrqkPTNyy8JbWXrsT7FFLUdIc0u/K9qn7A9nJX42Xlmws8Rd4H2ezj/
- ZFO9GQZpaD7NiT3bAhI6DqNudd7a+cy9jKEnzTCI0pS/6hLK8tPaooiESzr0WT/5Xb4r
- tVxPrNv8T/RsAFYcGPd8K4C/JUknAeuuRKAeVW+T7zbNChM8MG9iKzzlVXZgEoUnP7wz
- e/rO5UCP7FL+6oqjUesTuOGt37MPxfA8yhT6aFeuGHmQBShqinW5CCKdhIxANF66lsIc
- QHELFnAJO/CLg/z4OXPLvlyloDWqUWLBEgUdDbYFFsJF/nG92wKimbBcxeNSTZUJOJK1
- f62A==
+ bh=SkvND+eYHH9qsacQ7rfWb/ck3Os9E/r1JZIjq4LYTVM=;
+ b=mCggmsW+c1qoKrKQEMGo3SCvb4bpHGbzY+qd+DGCbcLAGKPYRVKE6XIMtPOeWQzyBu
+ 2gtMCucryo3/HyPnOAEaY/9qeepdgh0EVIUn6QOG6bLustg8TU/lzZ8cPNijb7UkE07T
+ OUYFNmzY1KTO9dt5waJlrymP/C5pK6rBuJZylOX+U3q1TSchhKwM3cCfIS8ZPCcyTjv/
+ rdhGHM2+N02pdOHVhkUpv/RDn3x71E8VHtIGeYMzi4ei3CkBEeV+w/lS6Cwxfwei96Px
+ YSavdI4TJVcujmLS1ZlInw+fez1h17OhpXB7bO0k23hHiRn63NO/uGNq/+s22j/GxoAS
+ gfvA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLVPCxvGl2Mu7i4Qa1L9DsuVd/sfsGUztDF2vNYtzvu+ocCfMXcTSdYkLWnRODU/vlD+N7ofO/zIj28ymWNARb@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YxFGOAGGMk0luT+LckG04tbtQsPboI1yiv+9ViuKsDYD2XcA3eB
- kZ/R4lfNcCtsCPXcglzN7rEAYJl4RfQXGwbCKnS+gWBFJANLL3O8pi+HMFbkrWHm7YOIRnjMX9+
- DRuuWf5hA5U78N6I0oOEqFcw+s+ISySE7QwCizHZbWK9Dx307M2JvmZUIadrC9+2QXSQ13mQfDk
- M=
-X-Gm-Gg: ASbGncsJa8eGk42gQOvRq3/ryzZIsAumGXUIcLnp+po3wjrDeECI9S11tRDsVJoggBL
- Y2CMn/XjWNqAom9TmJsrDSautH1qpmBPqoC01esM/RyrBC6QrB3cTNKSUqQsKRewFmbIoYCX5mU
- nNGQau15e8pDFoamDajE1Z0YADFR7/N7zlIXf74C+fMfxzGP8vz6HbjZbP6Q36M0LU/kweqrCg8
- bCJpKTOXJGHrCYYL/pBadvb5VLtMVZnPWX20eNnhUOKObC/beWEMVjT5fQA4Trzd8sFA3UriIvJ
- LSE9W690nv0BxZj9Ijm19JYsREfxg18xj/Cnq0bhoxuUTmgwnMlC78cf
-X-Received: by 2002:a05:6a00:27a0:b0:736:532b:7c10 with SMTP id
- d2e1a72fcca58-736aaae81dbmr24406303b3a.21.1741702165932; 
- Tue, 11 Mar 2025 07:09:25 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFwRe8L4LDh2K3HMdnKilzZNO0IeGk2PElblD0WViJm8ydFFUjXMlOdlQ58DkPx2DHiK9Q+JQ==
-X-Received: by 2002:a05:6a00:27a0:b0:736:532b:7c10 with SMTP id
- d2e1a72fcca58-736aaae81dbmr24406271b3a.21.1741702165614; 
- Tue, 11 Mar 2025 07:09:25 -0700 (PDT)
+ AJvYcCUk6JBtbWOJ2NMOGH17HroeXO6w1Ggbz0sjZDUsTmVRLnUOJiNdC5Q6eGbYexv92FCjYW4Y2lkPV8FYXdjbSm17@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzolOwvRqARy3pf/7rTcIjTzUtBWmo2rib3xggUrL0j/+qDY/aL
+ FSrFcIlOZQQHysmMh1/IMuVihFTq+DmFC8NEl61RQYM5C6YBp1dG8UGn7SCk9SxFJ7VDncUz4AH
+ 4SqD/bXbM+0FRpng+STQeCUA93rQC/ocNA2JS89evFT72ZHWDeqjDvnfsYm7Im/MK0PwWJdX8ww
+ 8=
+X-Gm-Gg: ASbGnctipSG9ePnfUyiM9HcLFx/RLYyM50C76EXpBzdKZMW3BGoKSmWtA2GZ8E2tUqX
+ Dti8isMZPxGFcjvVzRwzrZQWny8wmr2JwCD0JbHICzMSG8nXkqenZIZCkTMPFw1fvL5tIdddWhb
+ GvUZjkQ+gfjZoS7b1Jat6Lts0qGCUsjKmsjFvHeMbCfwhnlmvu0fMnr+TwX+EC6irm0RkkHOTkn
+ ErPkg/Rp5FFw0BpOu4rh5B8WhZcK9G6nImi2PnBQkQvYI7iocRkNEZ8tym7qYeXCkKYK3638KnY
+ HAYuB7KE77zycxELmU8jhYjoDzV4aBbaY8Cx84AAPvlXJH5JcOelhCcN
+X-Received: by 2002:a05:6a00:a09:b0:736:ab1d:83c4 with SMTP id
+ d2e1a72fcca58-736eb65d07amr5709724b3a.0.1741702253336; 
+ Tue, 11 Mar 2025 07:10:53 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFGBAe6qYUv/1LSdx10iDSl+9jxSxX1nvqdNSscZ0FP3Zlo9UqY1wsdnnJeIUzm79j1aANS0w==
+X-Received: by 2002:a05:6a00:a09:b0:736:ab1d:83c4 with SMTP id
+ d2e1a72fcca58-736eb65d07amr5709685b3a.0.1741702253020; 
+ Tue, 11 Mar 2025 07:10:53 -0700 (PDT)
 Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([43.228.180.230])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-736aead3439sm8716245b3a.64.2025.03.11.07.09.23
+ d2e1a72fcca58-736d8f0ea83sm4312868b3a.143.2025.03.11.07.10.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 07:09:25 -0700 (PDT)
-Date: Tue, 11 Mar 2025 22:09:19 +0800
+ Tue, 11 Mar 2025 07:10:51 -0700 (PDT)
+Date: Tue, 11 Mar 2025 22:10:46 +0800
 From: Zorro Lang <zlang@redhat.com>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <20250311140919.5r4vossfrose2w2q@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+Message-ID: <20250311141046.hpwurbjqc6dbwoml@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 References: <20250311080430.3696582-1-chao@kernel.org>
- <20250311080430.3696582-3-chao@kernel.org>
+ <20250311080430.3696582-4-chao@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20250311080430.3696582-3-chao@kernel.org>
+In-Reply-To: <20250311080430.3696582-4-chao@kernel.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: qmyMh8LXolWqueYsB0hlVqy_VqafGVl3wZqTcX58IbA_1741702166
+X-Mimecast-MFC-PROC-ID: _rZfATgcS1jwnM8wgIoWR4zVEtuktEpy98V-Fw9Urwg_1741702253
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
 X-Spam-Score: -0.2 (/)
@@ -112,26 +112,24 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Mar 11, 2025 at 04:04:27PM +0800, Chao Yu wrote: >
- Let's export F2FS_FSCK_PROG, then we can use it in > _check_f2fs_filesystem()
- later. > > Cc: Jaegeuk Kim <jaegeuk@kernel.org> > Signed-off-by [...] 
+ Content preview:  On Tue, Mar 11, 2025 at 04:04:28PM +0800, Chao Yu wrote: >
+ Otherwise, mkfs will fail due to there is an existing filesystem > in the
+ image. > > Cc: Jaegeuk Kim <jaegeuk@kernel.org> > Signed-off-by: Ch [...]
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [170.10.129.124 listed in sa-trusted.bondedsender.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [170.10.133.124 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [170.10.129.124 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [170.10.129.124 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.129.124 listed in list.dnswl.org]
+ [170.10.133.124 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [170.10.133.124 listed in sa-trusted.bondedsender.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -141,10 +139,12 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [170.10.133.124 listed in wl.mailspike.net]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ts0IY-0005eh-56
-Subject: Re: [f2fs-dev] [PATCH v3 3/6] common/config: export F2FS_FSCK_PROG
+X-Headers-End: 1ts0Jz-00062L-Ex
+Subject: Re: [f2fs-dev] [PATCH v3 4/6] common/rc: use -f for mkfs.f2fs by
+ default
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -162,38 +162,47 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Mar 11, 2025 at 04:04:27PM +0800, Chao Yu wrote:
-> Let's export F2FS_FSCK_PROG, then we can use it in
-> _check_f2fs_filesystem() later.
+On Tue, Mar 11, 2025 at 04:04:28PM +0800, Chao Yu wrote:
+> Otherwise, mkfs will fail due to there is an existing filesystem
+> in the image.
 > 
 > Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 > Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
-
-Although patch 2 and 3 can be in one patch, I don't mind seperating
-them if you'd like.
+> v3:
+> - split change from f2fs/009, and cover both _scratch_mkfs() and
+> _try_scratch_mkfs_sized()
 
 Reviewed-by: Zorro Lang <zlang@redhat.com>
 
-> v3:
-> - export F2FS_FSCK_PROG, and it will be used latter
->  common/config | 1 +
->  1 file changed, 1 insertion(+)
+>  common/rc | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> diff --git a/common/config b/common/config
-> index 7d017a05..79bec87f 100644
-> --- a/common/config
-> +++ b/common/config
-> @@ -317,6 +317,7 @@ export MKFS_F2FS_PROG=$(set_mkfs_prog_path_with_opts f2fs)
->  export DUMP_F2FS_PROG=$(type -P dump.f2fs)
->  export F2FS_IO_PROG=$(type -P f2fs_io)
->  export F2FS_INJECT_PROG=$(type -P inject.f2fs)
-> +export F2FS_FSCK_PROG=$(type -P fsck.f2fs)
->  export BTRFS_UTIL_PROG=$(type -P btrfs)
->  export BTRFS_SHOW_SUPER_PROG=$(type -P btrfs-show-super)
->  export BTRFS_CONVERT_PROG=$(type -P btrfs-convert)
+> diff --git a/common/rc b/common/rc
+> index ca755055..23b642f4 100644
+> --- a/common/rc
+> +++ b/common/rc
+> @@ -993,7 +993,7 @@ _scratch_mkfs()
+>  		mkfs_filter="grep -v -e ^Warning: -e \"^mke2fs \""
+>  		;;
+>  	f2fs)
+> -		mkfs_cmd="$MKFS_F2FS_PROG"
+> +		mkfs_cmd="$MKFS_F2FS_PROG -f"
+>  		mkfs_filter="cat"
+>  		;;
+>  	ocfs2)
+> @@ -1336,7 +1336,7 @@ _try_scratch_mkfs_sized()
+>  	f2fs)
+>  		# mkfs.f2fs requires # of sectors as an input for the size
+>  		local sector_size=`blockdev --getss $SCRATCH_DEV`
+> -		$MKFS_F2FS_PROG $MKFS_OPTIONS "$@" $SCRATCH_DEV `expr $fssize / $sector_size`
+> +		$MKFS_F2FS_PROG -f $MKFS_OPTIONS "$@" $SCRATCH_DEV `expr $fssize / $sector_size`
+>  		;;
+>  	tmpfs)
+>  		local free_mem=`_free_memory_bytes`
 > -- 
 > 2.48.1
+> 
 > 
 
 
