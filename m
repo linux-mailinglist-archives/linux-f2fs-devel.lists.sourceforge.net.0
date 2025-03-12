@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 874BDA5D492
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Mar 2025 04:02:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA176A5D4A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Mar 2025 04:11:31 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tsCMj-0006WE-55;
-	Wed, 12 Mar 2025 03:02:41 +0000
+	id 1tsCV7-0007Jn-Bw;
+	Wed, 12 Mar 2025 03:11:22 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tsCMb-0006VY-HY
+ (envelope-from <chao@kernel.org>) id 1tsCUy-0007Iz-9w
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Mar 2025 03:02:34 +0000
+ Wed, 12 Mar 2025 03:11:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bHZujeiEqMdgyuTjm1WYZIN5Rp3xt9vyDmYT0Vm68sk=; b=LjePilwUi0QM5Vh/xgYgq8TROt
- vW57lsXkY3skYzbeW7Pr8hHqnM3DVDlQc4b5AmhLJWFE2nRmwXRXFLfdcahc2cD2AUag1mSKaT7wa
- hOqdq7GOVaOxyqAP5EsJDPGWm6jEtfdg5Bb8JfnV9c9KsFQGS50bHNQDPVrmelA6kOA4=;
+ bh=dPFCF6gUxcMs97FDc+sodqLNlLCjCRIEHNoSWCuwn0g=; b=Cf6pNnHryUubFIXQljIVoVUZxi
+ sdLoIrJW6Oi4WAueGfqYtpkmck84VwRlKdP7putEBfe+MuixuumYXFcee4UHittlcSOS4mqtBX1Pk
+ L2UikWW8mYAhyp2Faf2SJdiVLaWTxL58JPTSVNuuTj/JVkOthU97Y0JLitxIt1jLevCg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,61 +31,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bHZujeiEqMdgyuTjm1WYZIN5Rp3xt9vyDmYT0Vm68sk=; b=Qo4RHCuxhJ4J09M5p9zSmlRs0X
- 4xjQ+YV00bVYOmldEhNrw0nKKYYICexNcaFjFsas5d94g6O25ENksSJd2a4fp32eTdxdzYNmnKfkX
- nC7dfXD1GceM3omnkrMPgAnVQHuN/vy95tsmGwNBfpQA/A0SGJAwzsDgVIa6SvkaNTj4=;
+ bh=dPFCF6gUxcMs97FDc+sodqLNlLCjCRIEHNoSWCuwn0g=; b=U7A52ZoarkpNwvoX+nSW0r+wqD
+ Y+syi83+Lw4U1M9xtphmLcbza10ep2rd1Ay91ufDuvGbThlbr/iYv4r/ItJcv2/qXY8uhis1XAyIm
+ TLX77LBjZNdSWyYn96WUCn42IfW6kbT6F3yEqmsON3/QNX/NpeBY/S2Kdc6jL6DDGkko=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tsCMR-000215-C6 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Mar 2025 03:02:34 +0000
+ id 1tsCUo-0003P9-EN for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 12 Mar 2025 03:11:13 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 39C065C05F5
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 12 Mar 2025 03:00:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16A65C4CEE9;
- Wed, 12 Mar 2025 03:02:16 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4B2FD5C1A3D;
+ Wed, 12 Mar 2025 03:08:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 810B7C4CEE9;
+ Wed, 12 Mar 2025 03:10:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1741748537;
- bh=2q/pmvSIKejPKZMaDtl6agp9KC+1aqmR5w5zdwLlgg0=;
+ s=k20201202; t=1741749051;
+ bh=JN9hrFcuVsm/kzMWV0C4GoKl1UA1F2QYyIAMQiXa21g=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=h6XbN18FcjF7ZfrYWirhReVluImYqcRs+DO5RpB6UVFdGM0vLj+uu2HNo/GISMR/D
- GtJylaw3DoqEFlEqXzLGbbZvkOB/wa6BIcfwjy+6M9AMb2+uJymIF5ApQnrWzjd5Ho
- ohtAPtQE7Q2/wK9gGC/MQDj+3z7FwSTo8E/BCO0gMpGQERpV/awaFjvtxeZvlqqsLG
- LE/YbNmbmmjTTChUUMnwFdhDXgZmVEMu/1IEb5sdQ8rcRAJvC2muH6rhnNyCU5TtQV
- aa52yeHDkrffP9YKQaxwhyKFLq90u0FdWW8FYurBNVEymabolkkPb+I7Ns/NWlNvXQ
- ZZBdZFvXSqj4g==
-Message-ID: <7ad8054b-1985-4561-b62a-d39bea9945f4@kernel.org>
-Date: Wed, 12 Mar 2025 11:02:15 +0800
+ b=KGCI2qmDF/nPuNmD95u3xguSDkH5F6psu+hRbWjekqCHHoj95yvAviTdBM99MNbnG
+ x1FycFHck5Azx4EF935LOrgPIgDLYFy9KPCsENZr/5NCezNH5KhP487qzGwwtfIZbQ
+ EFG2cs8yQ+O+EshhOEN5jNOmD2xAd++9NaJuyyTgJSuH3plUCXDoZOKuqojwNQGOuv
+ GjJUbpzDRlc2ssFTvvrul4GviQkmGR+FTRYHLYdUO5QQaeOiB3tPGBxAN7rE4CpKwL
+ sPNRCK9Y4RImPJe5wdQ0BWLBQsRyBOeOEuBWqCff/TiPNJ3VK/fD+jTAOljtbW1WTN
+ 7t3z33loR4Rvg==
+Message-ID: <5f8c60ec-2186-4315-b8c2-74aee91205df@kernel.org>
+Date: Wed, 12 Mar 2025 11:10:48 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20250304011036.1373650-1-jaegeuk@kernel.org>
- <15ca9817-e830-4387-ad9a-623c782e57ff@kernel.org>
- <Z9CQx2fw2rssEzwK@google.com>
+To: Eric Sandeen <sandeen@redhat.com>, linux-f2fs-devel@lists.sourceforge.net
+References: <20250303172127.298602-1-sandeen@redhat.com>
+ <20250303172127.298602-4-sandeen@redhat.com>
 Content-Language: en-US
-In-Reply-To: <Z9CQx2fw2rssEzwK@google.com>
+In-Reply-To: <20250303172127.298602-4-sandeen@redhat.com>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 3/12/25 03:36, Jaegeuk Kim wrote: > On 03/11,
- Chao Yu wrote:
- >> On 3/4/25 09:10, Jaegeuk Kim via Linux-f2fs-devel wrote: >>> From: Jaegeuk
- Kim <jaegeuk@google.com> >>> >>> This adds a fragread comm [...] 
+ Content preview:  On 3/4/25 01:12, Eric Sandeen wrote: > From: Eric Sandeen
+ <sandeen@sandeen.net> > > The current options parsing function both parses
+ options and validates > them - factor the validation out to reduce [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
@@ -93,17 +85,22 @@ X-Spam-Report: Spam detection software,
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [139.178.84.217 listed in sa-accredit.habeas.com]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in bl.score.senderscore.com]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tsCMR-000215-C6
-Subject: Re: [f2fs-dev] [PATCH] f2fs_io: add fragread command to evaluate
- fragmented buffer for reads
+X-Headers-End: 1tsCUo-0003P9-EN
+Subject: Re: [f2fs-dev] [PATCH 3/9] f2fs: factor out an f2fs_default_check
+ function
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,168 +114,83 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, Eric Sandeen <sandeen@sandeen.net>,
+ lihongbo22@huawei.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 3/12/25 03:36, Jaegeuk Kim wrote:
-> On 03/11, Chao Yu wrote:
->> On 3/4/25 09:10, Jaegeuk Kim via Linux-f2fs-devel wrote:
->>> From: Jaegeuk Kim <jaegeuk@google.com>
->>>
->>> This adds a fragread command in f2fs_io, which is able to measure the
->>> read performance on fragmented data buffer.
->>>
->>> Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
->>> ---
->>>  tools/f2fs_io/f2fs_io.c | 110 ++++++++++++++++++++++++++++++++++++++++
->>>  1 file changed, 110 insertions(+)
->>>
->>> diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
->>> index b72c26648f56..8431262575e0 100644
->>> --- a/tools/f2fs_io/f2fs_io.c
->>> +++ b/tools/f2fs_io/f2fs_io.c
->>> @@ -1018,6 +1018,115 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
->>>  	exit(0);
->>>  }
->>>  
->>> +#define fragread_desc "read data with a fragmented buffer from file"
->>> +#define fragread_help					\
->>> +"f2fs_io fragread [chunk_size in 4kb] [offset in chunk_size] [count] [advice] [file_path]\n\n"	\
->>> +"Read data in file_path and print nbytes\n"		\
->>> +"advice can be\n"					\
->>> +" 1 : set sequential|willneed\n"			\
->>> +" 0 : none\n"						\
->>> +
->>> +#ifndef PAGE_SIZE
->>> +#define PAGE_SIZE sysconf(_SC_PAGESIZE)
->>> +#endif
->>> +#define ALLOC_SIZE (2 * 1024 * 1024 - 4 * 1024) // 2MB - 4KB
->>> +
->>> +static void do_fragread(int argc, char **argv, const struct cmd_desc *cmd)
->>> +{
->>> +	u64 buf_size = 0, ret = 0, read_cnt = 0;
->>> +	u64 offset;
->>> +	char *buf = NULL;
->>> +	uintptr_t idx, ptr;
->>> +	unsigned bs, count, i;
->>> +	u64 total_time = 0;
->>> +	int flags = 0, alloc_count = 0;
->>> +	void *mem_hole, **mem_holes;
->>> +	int fd, advice;
->>> +
->>> +	if (argc != 6) {
->>> +		fputs("Excess arguments\n\n", stderr);
->>> +		fputs(cmd->cmd_help, stderr);
->>> +		exit(1);
->>> +	}
->>> +
->>> +	bs = atoi(argv[1]);
->>> +	if (bs > 256 * 1024)
->>> +		die("Too big chunk size - limit: 1GB");
->>> +	buf_size = bs * F2FS_DEFAULT_BLKSIZE;
->>> +
->>> +	offset = atoi(argv[2]) * buf_size;
->>> +	count = atoi(argv[3]);
->>> +	advice = atoi(argv[4]);
->>> +	mem_holes = xmalloc(sizeof(void *) * (buf_size / PAGE_SIZE));
->>> +
->>> +	/* 1. Allocate the buffer using mmap. */
->>> +	buf = mmap(NULL, buf_size, PROT_READ | PROT_WRITE,
->>> +				MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
->>> +
->>> +	/* 2. Loop and touch each page. */
->>> +	for (idx = (uintptr_t)buf; idx < (uintptr_t)buf + buf_size;
->>> +						idx += PAGE_SIZE)
->>> +	{
->>> +		/* Touch the current page. */
->>> +		volatile char *page = (volatile char *)idx;
->>> +		*page;
->>> +
->>> +		/* 3. Allocate (2M - 4K) memory using mmap and touch all of it. */
->>> +		mem_hole = mmap(NULL, ALLOC_SIZE, PROT_READ | PROT_WRITE,
->>> +					MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
->>> +		if (mem_hole == MAP_FAILED)
->>> +			die_errno("map failed");
->>> +
->>> +		/* Store the allocated memory pointer. */
->>> +		mem_holes[alloc_count++] = mem_hole;
->>
->> Do we need to call mlock to hold allocated cache in the memory, if
->> administrator enables swap, memory fragment will be gone once anonymous
->> pages are swapped to device?
+On 3/4/25 01:12, Eric Sandeen wrote:
+> From: Eric Sandeen <sandeen@sandeen.net>
 > 
-> Hmm, the test is going to use this very intensively, so is it possible?
+> The current options parsing function both parses options and validates
+> them - factor the validation out to reduce the size of the function and
+> make transition to the new mount API possible, because under the new mount
+> API, options are parsed one at a time, and cannot all be tested at the end
+> of the parsing function.
+> 
+> Signed-off-by: Eric Sandeen <sandeen@redhat.com>
+> ---
+>  fs/f2fs/super.c | 16 ++++++++++++++--
+>  1 file changed, 14 insertions(+), 2 deletions(-)
+> 
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 29b3aa1ee99c..7cfd5e4e806e 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -687,7 +687,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>  	int ret;
+>  
+>  	if (!options)
+> -		goto default_check;
 
-Not sure, but I doubt it is possible to happen in low-end device? due to it has
-very less memory and system may has already token the most of memory.
+Eric, do you know in which condition options can be NULL, mount w/o any
+specified options?
+
+If so, maybe we'd keep this in order to chech whether default options
+generated from default_options() is conflicted or not? What do you think?
 
 Thanks,
 
-> 
->>
->> Thanks,
->>
->>> +
->>> +		/* Touch all allocated memory. */
->>> +		for (ptr = (uintptr_t)mem_hole;
->>> +			ptr < (uintptr_t)mem_hole + ALLOC_SIZE;
->>> +						ptr += PAGE_SIZE) {
->>> +			volatile char *alloc_page = (volatile char *)ptr;
->>> +			*alloc_page;
->>> +		}
->>> +	}
->>> +	printf("Touched allocated memory: count = %u\n", alloc_count);
->>> +	printf(" - allocated memory: = ");
->>> +	for (idx = 0; idx < 5; idx++)
->>> +		printf(" %p", mem_holes[idx]);
->>> +	printf("\n");
->>> +
->>> +	fd = xopen(argv[5], O_RDONLY | flags, 0);
->>> +
->>> +	if (advice) {
->>> +		if (posix_fadvise(fd, 0, F2FS_DEFAULT_BLKSIZE,
->>> +				POSIX_FADV_SEQUENTIAL) != 0)
->>> +			die_errno("fadvise failed");
->>> +		if (posix_fadvise(fd, 0, F2FS_DEFAULT_BLKSIZE,
->>> +				POSIX_FADV_WILLNEED) != 0)
->>> +			die_errno("fadvise failed");
->>> +		printf("fadvise SEQUENTIAL|WILLNEED to a file: %s\n", argv[5]);
->>> +	}
->>> +
->>> +	total_time = get_current_us();
->>> +
->>> +	for (i = 0; i < count; i++) {
->>> +		ret = pread(fd, buf, buf_size, offset + buf_size * i);
->>> +		if (ret != buf_size) {
->>> +			printf("pread expected: %"PRIu64", readed: %"PRIu64"\n",
->>> +					buf_size, ret);
->>> +			if (ret > 0)
->>> +				read_cnt += ret;
->>> +			break;
->>> +		}
->>> +
->>> +		read_cnt += ret;
->>> +	}
->>> +	printf("Fragmented_Read %"PRIu64" bytes total_time = %"PRIu64" us, BW = %.Lf MB/s\n",
->>> +		read_cnt, get_current_us() - total_time,
->>> +		((long double)read_cnt / (get_current_us() - total_time)));
->>> +	printf("\n");
->>> +	exit(0);
->>> +}
->>> +
->>>  #define randread_desc "random read data from file"
->>>  #define randread_help					\
->>>  "f2fs_io randread [chunk_size in 4kb] [count] [IO] [advise] [file_path]\n\n"	\
->>> @@ -2002,6 +2111,7 @@ const struct cmd_desc cmd_list[] = {
->>>  	CMD(write_advice),
->>>  	CMD(read),
->>>  	CMD(randread),
->>> +	CMD(fragread),
->>>  	CMD(fiemap),
->>>  	CMD(gc_urgent),
->>>  	CMD(defrag_file),
+> +		return 0;
+>  
+>  	while ((p = strsep(&options, ",")) != NULL) {
+>  		int token;
+> @@ -1318,7 +1318,11 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>  			return -EINVAL;
+>  		}
+>  	}
+> -default_check:
+> +	return 0;
+> +}
+> +
+> +static int f2fs_default_check(struct f2fs_sb_info *sbi)
+> +{
+>  #ifdef CONFIG_QUOTA
+>  	if (f2fs_check_quota_options(sbi))
+>  		return -EINVAL;
+> @@ -2364,6 +2368,10 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+>  	}
+>  #endif
+>  
+> +	err = f2fs_default_check(sbi);
+> +	if (err)
+> +		goto restore_opts;
+> +
+>  	/* flush outstanding errors before changing fs state */
+>  	flush_work(&sbi->s_error_work);
+>  
+> @@ -4489,6 +4497,10 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>  	if (err)
+>  		goto free_options;
+>  
+> +	err = f2fs_default_check(sbi);
+> +	if (err)
+> +		goto free_options;
+> +
+>  	sb->s_maxbytes = max_file_blocks(NULL) <<
+>  				le32_to_cpu(raw_super->log_blocksize);
+>  	sb->s_max_links = F2FS_LINK_MAX;
 
 
 
