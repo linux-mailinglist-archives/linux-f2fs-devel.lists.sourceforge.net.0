@@ -2,104 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF568A5D401
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Mar 2025 02:23:16 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2CDAA5D487
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Mar 2025 03:53:56 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tsAoM-0005qN-MN;
-	Wed, 12 Mar 2025 01:23:06 +0000
+	id 1tsCE7-0007OI-Id;
+	Wed, 12 Mar 2025 02:53:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1tsAoL-0005qG-TV
+ (envelope-from <chao@kernel.org>) id 1tsCE5-0007OC-PO
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Mar 2025 01:23:05 +0000
+ Wed, 12 Mar 2025 02:53:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2BkME6RAyPE5gIrBr5FD8wgvVVYEVmv74kfkpzdsfm8=; b=EqqDQUbGXrVxZChxHC8J4NKGzW
- m5lNGLZR/TgRGMkZrZavWwYs3Uyne56IISem55E7SHBq6jB3XsGfpNW5RbaoiuUsITSPJvAap+mnY
- 9WO6QwWhI1HSIx4IFA4pBsoJW9ZRZRCRc7J7GLXP7GGIC+FwFDTTR2DBPllGEeF1Yuc0=;
+ bh=eCZ4O/rS37qJSTd4itT+S8dTU8z1duuXOpUksYqlGG8=; b=VGZBTEskd/KKJox0f/Rm8nDcin
+ VKtw86Rbd12EPCQusD3BEAraEu1SF9WLUoqkvHy0BftHgF5E8/I1HnASqLEJfJ2GPiTLvPvzUq8/W
+ orjnA3gSgQxLwZPi7iI+1tIX+LnSTDHUl1uniAvOcrYIDg8TbvzQzrWI9CXZyhesKbeg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2BkME6RAyPE5gIrBr5FD8wgvVVYEVmv74kfkpzdsfm8=; b=C5qRyByJaY7j4TM8o6F4F4eOdy
- C1JSWpObK7zbdqu8/oHfhSwspQ5Kt653NF7RVX6CvR5al09l5hHOsCFPlLPj0poLR8tJKVPBNcQ0h
- 6QOIrndtUFN7795fTXDXKGFtxN0gveX7rgrFf90V3Oscfws2VxZAaMbNJfqsLfv9P2Sw=;
+ bh=eCZ4O/rS37qJSTd4itT+S8dTU8z1duuXOpUksYqlGG8=; b=LGzmma8HFvUo8J6kLztFCDLwZX
+ mA9LuBAYUr8hV6zY/QAqOyNzQi9MBxOpX982dDfIrQAKPfyM6agiK2afA98Gp066I20MI50PlMP5t
+ 8xzJHNnYOlCjPBfCrcA5Unkz/gPhVaLnMwUuU7sabSa5wGs4YwkZRQrQSfgKOwhY70ro=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tsAoA-0003jf-LY for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Mar 2025 01:23:05 +0000
+ id 1tsCE4-0000Rx-18 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 12 Mar 2025 02:53:46 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id EF339A46B5C;
- Wed, 12 Mar 2025 01:17:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4D771C4CEE9;
- Wed, 12 Mar 2025 01:22:43 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 52CB8A46CCF;
+ Wed, 12 Mar 2025 02:48:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6490C4CEE9;
+ Wed, 12 Mar 2025 02:53:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1741742563;
- bh=zmNim0dctvfuEGmbNDy9LxXIRA1vynbumloK6EoX7OI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=iSuwI+ueQbilvaQvmASkAI9XTb2Uy8RGLqyyoqUD4PFKsmLVVd5MQbgxUQsZgwLT+
- NGUC4BLxxVBttJ+Ukw3iumO/DXAkiO63/sVi/s6gArWhDVseggV3ShLYP3lhwYT0Mg
- QSZ71aO1G3HXRCSC2RViynSMigPMlWj3+6sxQVYIEkppIpeHA7yeuawPIEMQoTvXYg
- TZ81b2JpzqHwNO079lp7eyrVaBpVBgwuVejL11APq8WQ4QVVjDVZBjOCTHGK2xQNwT
- 4ZNu4oCG1ID2QJDmWQjlGbgZKcGHSXiB93rRqCFlpficQeapbldc919L9VvaEl3T33
- TybhysWLI5tFA==
-Date: Wed, 12 Mar 2025 01:22:41 +0000
-To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <Z9Dh4UL7uTm3cQM3@google.com>
-References: <20250307182151.3397003-1-willy@infradead.org>
- <174172263873.214029.5458881997469861795.git-patchwork-notify@kernel.org>
- <Z9DSym8c9h53Xmr8@casper.infradead.org>
+ s=k20201202; t=1741748013;
+ bh=c0nPNHMEj2EaB+IMjd+p9+tgLxA5qJUbIMyOKfrGB2I=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=cqoGY/xy1CZSuwHMNm7+wcJRMr9dw75RK2vLwdY0xXWJSU+bhYoBY0Dzsu+9/+bqB
+ HlUX8ofx31wB+3Tib/NN9pEfjUS6tfe50oy11L4KFpAkfEYcfsBu3aaVP22H8kE01y
+ NErHMhVKZDFMV3kHCtDPfS3XqQHVNESNdkPeRorE4zCjIRAGSC3H3nC1a7i0YLHP4X
+ 504lcEBts1wOk/fO+NvvE72KjT1MKjtkTlup8CoKwmrj5rAkQ/aRFYKteLL4mljzFH
+ ZEkt8M4qRbwjVsCeTcTJYcx/x6cU7DH8/rcsp4bFhcLWxMInsSNY4N/6xFJu5nLdvD
+ oV6GtYJb7cOLg==
+Message-ID: <7de8de7c-4dc3-40c6-8435-122f72944850@kernel.org>
+Date: Wed, 12 Mar 2025 10:53:29 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <Z9DSym8c9h53Xmr8@casper.infradead.org>
+User-Agent: Mozilla Thunderbird
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20250311182931.1043290-1-daeho43@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20250311182931.1043290-1-daeho43@gmail.com>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 03/12, Matthew Wilcox wrote: > On Tue, Mar 11, 2025 at
- 07:50:38PM +0000, patchwork-bot+f2fs@kernel.org wrote: > > Hello: > > > >
- This series was applied to jaegeuk/f2fs.git (dev) > > by Jaegeuk Kim [...]
+ Content preview:  On 3/12/25 02:29,
+ Daeho Jeong wrote: > From: Daeho Jeong <daehojeong@google.com>
+ > > For several zoned storage devices, vendors will provide extra space >
+ which was used for device level GC than specs [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [147.75.193.91 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [147.75.193.91 listed in bl.score.senderscore.com]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [147.75.193.91 listed in sa-trusted.bondedsender.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tsAoA-0003jf-LY
-Subject: Re: [f2fs-dev] [PATCH 0/4] f2fs: Remove uses of writepage
+X-Headers-End: 1tsCE4-0000Rx-18
+Subject: Re: [f2fs-dev] [PATCH] f2fs: add carve_out sysfs node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,30 +112,27 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: linux-fsdevel@vger.kernel.org, patchwork-bot+f2fs@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/12, Matthew Wilcox wrote:
-> On Tue, Mar 11, 2025 at 07:50:38PM +0000, patchwork-bot+f2fs@kernel.org wrote:
-> > Hello:
-> > 
-> > This series was applied to jaegeuk/f2fs.git (dev)
-> > by Jaegeuk Kim <jaegeuk@kernel.org>:
+On 3/12/25 02:29, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
 > 
-> Thanks!
+> For several zoned storage devices, vendors will provide extra space
+> which was used for device level GC than specs and F2FS can use this
+> space for filesystem level GC. To do that, we can reserve the space
+> using reserved_blocks. However, it is not enough, since this extra
+> space should not be shown to users. So, with this new sysfs node,
+> we can hide the space by substracting reserved_blocks from total
+> bytes.
 > 
-> FWIW, I have a tree with 75 patches in it on top of this that do more
-> folio conversion work.  It's not done yet; maybe another 200 patches to
-> go?  I don't think it's worth posting at this point in the cycle, so
-> I'll wait until -rc1 to post, by which point it'll probably be much
-> larger.
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
-Ok, thanks for the work! Will keep an eye on.
+
 
 
 _______________________________________________
