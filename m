@@ -2,107 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A414A5FF19
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 Mar 2025 19:20:23 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7AE8EA5FF18
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 Mar 2025 19:20:15 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tsnAD-0004RJ-QJ;
-	Thu, 13 Mar 2025 18:20:13 +0000
+	id 1tsnA6-0000cE-MQ;
+	Thu, 13 Mar 2025 18:20:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1tsnAC-0004RB-Dw
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1tsnA5-0000c4-H6
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Mar 2025 18:20:11 +0000
+ Thu, 13 Mar 2025 18:20:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
+ Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=usBwcVuk/tXjaeYaFmuY8RWmeCvFsNvZIINoJEj/M2E=; b=T44H3iy26rpR4my+qmgzLqakKm
- 1vf8mya2p4cmFVPNILcRLdocLS0N/ouI9ciUXo1jG6nU654LRasT6v7320mNkLLNFwRVGe+Qrvnxb
- NOySJPYRQ/4utI37xW381Hvwqdhjy8XM1cHCVVhwASx1z1GKKXV3vw2CqJ9Uwxl9Q5FY=;
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=PN3e7hhG2JOKmnNQbz9O/WFmhX7q7YAiyFI6ao561rY=; b=hcZD71R/UxxQo4/hPizh2hJhnk
+ 2H+kZHXemyHpN35+DzkEDk98TjLBs9BiIDoTZ0Xou0+OEZO87MYrQXF8CS3/E8DtYg5wOrwWqrjC1
+ ns8TrBDTlVkbp5yPLqjFVbluYsPY7P1y/Xt9elErg8FAabmPVzpMCfwt5nhoDnF1SrRM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
- Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=usBwcVuk/tXjaeYaFmuY8RWmeCvFsNvZIINoJEj/M2E=; b=L
- m5F14AoJLNjiHvec1zMbLUOwRJn+jWtRBqQf3lJlveQVP1zXqdA6uQAY9V3j/yTGkaTqlRI8MvrF1
- NQXwl1CXFxUuJYlKF9D/78vt9K2y2IhtgARKl+20lnF8344Gp3LFyveWtLqYT9MIgQo+hBBQfc1on
- MF+bOdvJ9ZK7P2ro=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=PN3e7hhG2JOKmnNQbz9O/WFmhX7q7YAiyFI6ao561rY=; b=YCZQNi8ntKJ1oKU41bm5l2e7az
+ VLELnmTO/QipBroR5OJGPKlVOMHGPEoeyK7vB/8o00pLyETTMn4htdG8WhP3O7FH/gwblbb2g2l5n
+ lZ4HUe1zEmPHcEm4UiQyRLwXhE6A6Il13Ys6YalHpTO33ZiZae7PwPLhK6BdCopdQs0E=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tsnA4-0004Q1-QS for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Mar 2025 18:20:11 +0000
+ id 1tsnA5-0004QA-Kd for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 13 Mar 2025 18:20:06 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 3D3C8A47885
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 13 Mar 2025 18:14:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB21FC4CEDD
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 13 Mar 2025 18:19:58 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 798B85C3549;
+ Thu, 13 Mar 2025 18:17:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7BAEC4CEDD;
+ Thu, 13 Mar 2025 18:19:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1741889998;
- bh=X0wRJXYCsaAceTy0UU+aThtu3/2BHFyjN8HNhUGKOis=;
- h=Subject:From:Date:To:From;
- b=XpEMWdS6DjQdyIvNEZToP66skVTjJswgE+wWgzKJbabrq5+T1oBjXIZ2+GkJj46r5
- /4+5wTkhIQeYCfHCfdVKTuKCT9/A3rrMsYl+TWa8izNcVaq7K+lKy1Xbdfmp4QJMJd
- virbXtzK66ISX259HPWqPDYQi0nUMxB/1lnFxLpoBQH2CzUE34+QMwauKjGWLcJGGW
- NcXxc4lppihHQqwX4YO/2HQ0Wtgc06HI3N30ZKksRJJ3lJ+g891RnZCS9LXSPSpkKS
- F1WFkMp6Pk2ZCQgNDW13T8k954LXOw7nxHbo74LjxOdh+Aa1udyIojVJARGPrAZsO4
- PMRS6DY4intBA==
+ s=k20201202; t=1741890000;
+ bh=JcZSXIOAHPgvBQ2KGu8M0cJY4B1MRK5/h3YqAHvaW74=;
+ h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+ b=n+KUPPqnLvxYNZLbEnW25rEM9ZgL6wrt07I4zgnPtrfZTG/3W60vtF+VoXAQ7dncs
+ 6KGBmFL358sZ0Et2tXVZpX8iwRb1dcqzBJD5qCKy4uR2xlnAUkjO3XcZkhpoZ/Yhpq
+ nR3skKOpZw6gpkl66QF/MkXRontwSwU+0DBZZp+iXvRySBU8lqLt1HmQ80lztZ1/Af
+ bw+5FfS/OV5+X7qoxvWWvQhWZkZxT1y1tP78h05T9jW2Q2GiduaORdbpSO21uLWGcw
+ gCyOso45KKmXquJhM3bZZ836IiYtiZLMjDrgdoNwooTCMt16xNZje1voGmlxsKPdK0
+ 0hDhJIbV4BDrg==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 769A73806651 for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 13 Mar 2025 18:20:34 +0000 (UTC)
+ ADC303806651; Thu, 13 Mar 2025 18:20:35 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <174189003287.1620163.13863046210344887343.git-patchwork-summary@kernel.org>
-Date: Thu, 13 Mar 2025 18:20:32 +0000
-To: linux-f2fs-devel@lists.sourceforge.net
-X-Spam-Score: -2.5 (--)
+Message-Id: <174189003450.1620163.5293489407347859969.git-patchwork-notify@kernel.org>
+Date: Thu, 13 Mar 2025 18:20:34 +0000
+References: <20250303172127.298602-1-sandeen@redhat.com>
+In-Reply-To: <20250303172127.298602-1-sandeen@redhat.com>
+To: Eric Sandeen <sandeen@redhat.com>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: The following patches were marked "accepted", because
- they were applied to jaegeuk/f2fs.git (dev): Series: f2fs: first steps towards
- mount API conversion Submitter: Eric Sandeen <sandeen@redhat.com> Committer:
- Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
- https://patchwork.kernel.org/project/f2fs/lis [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 3 Mar 2025 11:12:10 -0600 you wrote:
+ > I have been struggling to get to a good series to convert f2fs to the >
+ new mount API. f2fs is more complex, because much of the option parsing >
+ assumes [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in sa-trusted.bondedsender.org]
+ [139.178.84.217 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in bl.score.senderscore.com]
+ [139.178.84.217 listed in bl.score.senderscore.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tsnA4-0004Q1-QS
-Subject: [f2fs-dev] Patchwork summary for: f2fs
+ valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tsnA5-0004QA-Kd
+Subject: Re: [f2fs-dev] [PATCH 0/9] f2fs: first steps towards mount API
+ conversion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,31 +115,48 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
+Cc: jaegeuk@kernel.org, lihongbo22@huawei.com,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-The following patches were marked "accepted", because they were applied to
-jaegeuk/f2fs.git (dev):
+This series was applied to jaegeuk/f2fs.git (dev)
+by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-Series: f2fs: first steps towards mount API conversion
-  Submitter: Eric Sandeen <sandeen@redhat.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=939708
-  Lore link: https://lore.kernel.org/r/20250303172127.298602-1-sandeen@redhat.com
-    Patches: [f2fs-dev,1/9] f2fs: use f2fs_sb_has_device_alias during option parsing
-             [f2fs-dev,2/9] f2fs: consolidate unsupported option handling errors
-             [f2fs-dev,3/9] f2fs: factor out an f2fs_default_check function
-             [f2fs-dev,6/9] f2fs: Pass sbi rather than sb to f2fs_set_test_dummy_encryption
-             [f2fs-dev,7/9] f2fs: defer readonly check vs norecovery
-             [f2fs-dev,8/9] f2fs: pass sbi rather than sb to quota qf_name helpers
-             [f2fs-dev,9/9] f2fs: pass sbi rather than sb to parse_options()
+On Mon,  3 Mar 2025 11:12:10 -0600 you wrote:
+> I have been struggling to get to a good series to convert f2fs to the
+> new mount API. f2fs is more complex, because much of the option parsing
+> assumes that the superblock has already been read from disk, and uses
+> that to test various on-disk features, etc. All of those tests will need
+> to be moved to after parsing is complete, and this series is just a
+> start.
+> 
+> [...]
 
+Here is the summary with links:
+  - [f2fs-dev,1/9] f2fs: use f2fs_sb_has_device_alias during option parsing
+    https://git.kernel.org/jaegeuk/f2fs/c/64ee7503cbf6
+  - [f2fs-dev,2/9] f2fs: consolidate unsupported option handling errors
+    https://git.kernel.org/jaegeuk/f2fs/c/277352b6cbed
+  - [f2fs-dev,3/9] f2fs: factor out an f2fs_default_check function
+    https://git.kernel.org/jaegeuk/f2fs/c/abd0e040e9a5
+  - [f2fs-dev,4/9] f2fs: make INLINECRYPT a mount option flag
+    (no matching commit)
+  - [f2fs-dev,5/9] f2fs: make LAZYTIME a mount option flag
+    (no matching commit)
+  - [f2fs-dev,6/9] f2fs: Pass sbi rather than sb to f2fs_set_test_dummy_encryption
+    https://git.kernel.org/jaegeuk/f2fs/c/0edcb2197e76
+  - [f2fs-dev,7/9] f2fs: defer readonly check vs norecovery
+    https://git.kernel.org/jaegeuk/f2fs/c/9cca49875997
+  - [f2fs-dev,8/9] f2fs: pass sbi rather than sb to quota qf_name helpers
+    https://git.kernel.org/jaegeuk/f2fs/c/b7de231b9df4
+  - [f2fs-dev,9/9] f2fs: pass sbi rather than sb to parse_options()
+    https://git.kernel.org/jaegeuk/f2fs/c/71e9bd3d5c04
 
-Total patches: 7
-
+You are awesome, thank you!
 -- 
 Deet-doot-dot, I am a bot.
 https://korg.docs.kernel.org/patchwork/pwbot.html
