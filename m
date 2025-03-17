@@ -2,103 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63709A62062
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Mar 2025 23:30:16 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64115A63CE1
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Mar 2025 04:19:37 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ttDXf-0002GV-7R;
-	Fri, 14 Mar 2025 22:30:11 +0000
+	id 1tu10j-0006Ig-9K;
+	Mon, 17 Mar 2025 03:19:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1ttDXd-0002GN-Qc
+ (envelope-from <chao@kernel.org>) id 1tu10h-0006Ia-RQ
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 14 Mar 2025 22:30:09 +0000
+ Mon, 17 Mar 2025 03:19:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cM1wyMGZgOBjTNaXrF/bnhitF/Jwqw5UH8fS6yl02HA=; b=MyvHWouaoSC6r/ltC8VTbdtw/6
- KBcbAZL/i5A4Qd5Ea41WBX/p5H+tsmSNeqEUEofpVLpnPHMm8H71KNK45j5oEczD2bBdvwt4OWhDn
- ID82IQtbCo1NHdXNbZrYZ5ki3uy2AXXicErtzkMobFNzx7Wuf55uMukovhz2eBBvKiIw=;
+ bh=Hdq4ttCWz1rxCXOwzzQJ4uCL2pGRywI8bq8GztVfiPw=; b=Or3qirRY1p4oe67MwxatvJxhUD
+ dEPIpZH1jY0tnDRXPTbFhQ0JoW6J51p8V6XF7NT/UJ+r6qKIO/W1SMVSeKiVqgMaCdAginubaG93K
+ gxewiVNTJatfwl8z+KYo5dgYezLSS/lvkJGHO17FP97F6TxMS/PFphhe/G9NDtfT5xGI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cM1wyMGZgOBjTNaXrF/bnhitF/Jwqw5UH8fS6yl02HA=; b=EfFyAJyKr+TeoxO+D3JavhIRLO
- kWizvwjWUqDZ9bsscruULBIM+wuIPexYZIqshzbmXV4wBV13p+RV5yExkG80rtJHu5KYiNS7U1UlF
- OkmaENYZQ2A4MGFqRSw8pyc6p19ZWZBEYhCiDp1QGcZyTnkZl89GiD4GiNAVixGGJ2Fg=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ ;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Hdq4ttCWz1rxCXOwzzQJ4uCL2pGRywI8bq8GztVfiPw=; b=OvDV7KY/cB6foiOqdjHaA7utGJ
+ tqktf0D8fM6COEA+iVu8rRI8A6W+SttINCwKznvFqz6FjipbVwaw9GfGnCElZ7L6XIgsrhQqB8NDF
+ OiCFsj5HvEFCBwyl+cTlC3xcnjTEWOL3jaQGFc/snI7XeD1TRkt0H2BAmLoUwsE+7y6Q=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ttDXd-0007iz-6w for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 14 Mar 2025 22:30:09 +0000
+ id 1tu10b-0002bp-JR for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 17 Mar 2025 03:19:27 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 05D115C5402;
- Fri, 14 Mar 2025 22:27:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6EDA3C4CEE9;
- Fri, 14 Mar 2025 22:29:58 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 53032A45A3A;
+ Mon, 17 Mar 2025 03:13:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B83BC4CEDD;
+ Mon, 17 Mar 2025 03:19:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1741991398;
- bh=ZVN1gXmayXjszbtmz2X55ie4YM/+jBh6LnYxP8usMAk=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=XoJJWhnxgbgyUBrWJ+Q0You4CIaneFkMJfxD57iTPu0ZYE4H6jNLvbZUbzoDzTmoN
- tc81Nwwj8vA8n3CVuM8ljmX6Ux31/XiPVU9rse7sit70yDydfTlCdM3iOS+04LhdFu
- vKPhDhYTvyld1Wg3iGnQw0MMoAw0huMsy6ELDjLHRBDKdhinv8O9P2OYC/PzCV+lAw
- PAE3G1WMDLyL0RXO55CL9kkavgZal8n/6L6YehkFkP8XVxBQeUDfkjTtOponGswDBA
- AH8jzZpWY7AipGXgsm7QdlKOid5oX/Yoag3erxpmMxzXtphsTGWpAxrFf5ICrZVrCf
- YMlvmkWPtV+gg==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
- by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 70F22380CFE7; Fri, 14 Mar 2025 22:30:34 +0000 (UTC)
+ s=k20201202; t=1742181550;
+ bh=L0PJqC1PTugn//RGlYwlepsaqcqfuN2HtfJiHb56oCY=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=YKsdNyHoTbLlziSdq7r15mjUuCHat9pwbBycRj32chjsn88NnG0g64cO+h5Q272BH
+ GZ5TUjN/OX3b+go5RQFqTanGJgK6xufWk+SJtIidHCzs5C6lv7xOXwcMorFuDfKQ0a
+ cZr9sAOOXdnzZWi7hyML30zzD8j0/gyHoDKL1/OwaVaFTTk9hCUiiYo0pl6r7haffl
+ VnQWIl7KkfLMBrpYl2Ot20oITQXdSSFiYT+yeVLMJpLyY+3iWyioSlIb5Waj4g8ZIA
+ i8282XgHJ6qHlZeCMI8v0DeK/yJGaY37U3eW6XF82Eu/Pwx2GqRYqMUYRvRNfDG9u+
+ +64Fqb7mR2wVw==
+Message-ID: <a6137820-5dde-4b81-a330-ad0ff42bc607@kernel.org>
+Date: Mon, 17 Mar 2025 11:19:07 +0800
 MIME-Version: 1.0
-Message-Id: <174199143325.2405968.380584551658170427.git-patchwork-notify@kernel.org>
-Date: Fri, 14 Mar 2025 22:30:33 +0000
-References: <20250314120651.443184-1-youngjin.gil@samsung.com>
+User-Agent: Mozilla Thunderbird
+To: Yeongjin Gil <youngjin.gil@samsung.com>, jaegeuk@kernel.org,
+ daehojeong@google.com, linux-f2fs-devel@lists.sourceforge.net,
+ linux-kernel@vger.kernel.org
+References: <CGME20250314120658epcas1p2d3ec037c294d4c907ce7fa2fe1c3aa27@epcas1p2.samsung.com>
+ <20250314120651.443184-1-youngjin.gil@samsung.com>
+Content-Language: en-US
 In-Reply-To: <20250314120651.443184-1-youngjin.gil@samsung.com>
-To: Yeongjin Gil <youngjin.gil@samsung.com>
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -2.8 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 14 Mar 2025 21:06:51 +0900 you
- wrote: > In the case of the following call stack for an atomic file,
- > FI_DIRTY_INODE
- is set, but FI_ATOMIC_DIRTIED is not subsequently set. > > f2fs_file_write_
- [...] Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 3/14/25 20:06, Yeongjin Gil wrote: > In the case of the
+ following call stack for an atomic file, > FI_DIRTY_INODE is set,
+ but FI_ATOMIC_DIRTIED
+ is not subsequently set. > > f2fs_file_write_iter > f [...] 
+ Content analysis details:   (-2.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ [147.75.193.91 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [147.75.193.91 listed in sa-accredit.habeas.com]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ttDXd-0007iz-6w
+ -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tu10b-0002bp-JR
 Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid atomicity corruption of
  atomic file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -112,22 +115,14 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: patchwork-bot+f2fs--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: daehojeong@google.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org,
- sj1557.seo@samsung.com
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: sj1557.seo@samsung.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello:
-
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
-
-On Fri, 14 Mar 2025 21:06:51 +0900 you wrote:
+On 3/14/25 20:06, Yeongjin Gil wrote:
 > In the case of the following call stack for an atomic file,
 > FI_DIRTY_INODE is set, but FI_ATOMIC_DIRTIED is not subsequently set.
 > 
@@ -138,18 +133,25 @@ On Fri, 14 Mar 2025 21:06:51 +0900 you wrote:
 >         __mark_inode_dirty(dquot)
 >           f2fs_dirty_inode
 > 
-> [...]
+> If FI_ATOMIC_DIRTIED is not set, atomic file can encounter corruption
+> due to a mismatch between old file size and new data.
+> 
+> To resolve this issue, I changed to set FI_ATOMIC_DIRTIED when
+> FI_DIRTY_INODE is set. This ensures that FI_DIRTY_INODE, which was
+> previously cleared by the Writeback thread during the commit atomic, is
+> set and i_size is updated.
 
-Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to avoid atomicity corruption of atomic file
-    https://git.kernel.org/jaegeuk/f2fs/c/c60b556bfe0a
+I guess we need to add a regression testcase to cover this issue.
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+> 
+> Fixes: fccaa81de87e ("f2fs: prevent atomic file from being dirtied before commit")
+> Reviewed-by: Sungjong Seo <sj1557.seo@samsung.com>
+> Reviewed-by: Sunmin Jeong <s_min.jeong@samsung.com>
+> Signed-off-by: Yeongjin Gil <youngjin.gil@samsung.com>
 
+Reviewed-by: Chao Yu <chao@kernel.org>
 
+Thanks,
 
 
 _______________________________________________
