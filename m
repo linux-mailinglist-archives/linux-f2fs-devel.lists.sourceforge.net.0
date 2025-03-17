@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64115A63CE1
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Mar 2025 04:19:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28E54A63D01
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Mar 2025 04:20:55 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tu10j-0006Ig-9K;
-	Mon, 17 Mar 2025 03:19:28 +0000
+	id 1tu123-0006LZ-NB;
+	Mon, 17 Mar 2025 03:20:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1tu10h-0006Ia-RQ
+ (envelope-from <chao@kernel.org>) id 1tu122-0006LT-Pw
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Mar 2025 03:19:27 +0000
+ Mon, 17 Mar 2025 03:20:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Hdq4ttCWz1rxCXOwzzQJ4uCL2pGRywI8bq8GztVfiPw=; b=Or3qirRY1p4oe67MwxatvJxhUD
- dEPIpZH1jY0tnDRXPTbFhQ0JoW6J51p8V6XF7NT/UJ+r6qKIO/W1SMVSeKiVqgMaCdAginubaG93K
- gxewiVNTJatfwl8z+KYo5dgYezLSS/lvkJGHO17FP97F6TxMS/PFphhe/G9NDtfT5xGI=;
+ bh=I1dIyDtpubE2ZF6+Qfe3OY/GthKcyPImati0/i8uwOk=; b=R3QIfej2XL+c9wnpNxw2kRujxT
+ J6Ijtwc6We+wyroBkPJJvlHpge73NojZPKSxPLDav1ApyGmBIXFZZCFGIKVH6Zy6iSUqSMRCIvbA3
+ MWYtde7oCmWwA5mo5djlEhw1yXHmGHlZi8WRB5SiLMakdvWNC3vumx/vPg3x5l5JS1eo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,51 +31,47 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Hdq4ttCWz1rxCXOwzzQJ4uCL2pGRywI8bq8GztVfiPw=; b=OvDV7KY/cB6foiOqdjHaA7utGJ
- tqktf0D8fM6COEA+iVu8rRI8A6W+SttINCwKznvFqz6FjipbVwaw9GfGnCElZ7L6XIgsrhQqB8NDF
- OiCFsj5HvEFCBwyl+cTlC3xcnjTEWOL3jaQGFc/snI7XeD1TRkt0H2BAmLoUwsE+7y6Q=;
+ bh=I1dIyDtpubE2ZF6+Qfe3OY/GthKcyPImati0/i8uwOk=; b=kbD9eUf2IHqXsHRrMsFJnLPgvF
+ TRZ+sObyFEvMoOQE28Cl099HnPvI7hSzE19HYo7RB9+iHrZxpNztmsbiJsx/RcZwsBuHvxhAKe6m6
+ 3AoyY48epVquXqu2jTYrBN2PFWuX+5DCpIXa0WHVOksQQ2Za/7Zgm0VnQFPloBu3tgh4=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tu10b-0002bp-JR for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Mar 2025 03:19:27 +0000
+ id 1tu11r-0002fQ-Hd for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 17 Mar 2025 03:20:50 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 53032A45A3A;
- Mon, 17 Mar 2025 03:13:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B83BC4CEDD;
- Mon, 17 Mar 2025 03:19:08 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 45999A48A10;
+ Mon, 17 Mar 2025 03:14:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DE44C4CEDD;
+ Mon, 17 Mar 2025 03:20:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1742181550;
- bh=L0PJqC1PTugn//RGlYwlepsaqcqfuN2HtfJiHb56oCY=;
+ s=k20201202; t=1742181628;
+ bh=na9zDyLGCts4zvbhbnkO+YnZ1DfpFRD6cSk88Yd3fd8=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=YKsdNyHoTbLlziSdq7r15mjUuCHat9pwbBycRj32chjsn88NnG0g64cO+h5Q272BH
- GZ5TUjN/OX3b+go5RQFqTanGJgK6xufWk+SJtIidHCzs5C6lv7xOXwcMorFuDfKQ0a
- cZr9sAOOXdnzZWi7hyML30zzD8j0/gyHoDKL1/OwaVaFTTk9hCUiiYo0pl6r7haffl
- VnQWIl7KkfLMBrpYl2Ot20oITQXdSSFiYT+yeVLMJpLyY+3iWyioSlIb5Waj4g8ZIA
- i8282XgHJ6qHlZeCMI8v0DeK/yJGaY37U3eW6XF82Eu/Pwx2GqRYqMUYRvRNfDG9u+
- +64Fqb7mR2wVw==
-Message-ID: <a6137820-5dde-4b81-a330-ad0ff42bc607@kernel.org>
-Date: Mon, 17 Mar 2025 11:19:07 +0800
+ b=g/Q2ClrZM9mzpJD9kygj613MO2sLMyM7EwJ5BhQ2LE2zFtc/VXz/OuSMFs6glsIqR
+ JgYH+oXbyioDQkWpGMGNQZMAJkUlyUd4V7vokitTy3e2w6Av2EZoFpHJyhx/EL2eK0
+ Ui3ooDZVGhBc78nktNMBwfZ2vNBKXG3tdHdx44XzUo6dmIGYC12xTST1eXnjrvkgMq
+ 6AFjre2q9RnIPx+acObHEkiTse7lEU7Cb1IPHG/O/T9IyycStt+kZzI3UkUAL9HUds
+ tM3xcpo2NsokBHXeg24du/Hp8b1yrrNTT7Omn+0XkYswHun3z98PaFR/lkiVVZE10g
+ DrF2T41b6xpqg==
+Message-ID: <d1d43936-1de7-4550-8bf2-f4c604b367d1@kernel.org>
+Date: Mon, 17 Mar 2025 11:20:25 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Yeongjin Gil <youngjin.gil@samsung.com>, jaegeuk@kernel.org,
- daehojeong@google.com, linux-f2fs-devel@lists.sourceforge.net,
- linux-kernel@vger.kernel.org
-References: <CGME20250314120658epcas1p2d3ec037c294d4c907ce7fa2fe1c3aa27@epcas1p2.samsung.com>
- <20250314120651.443184-1-youngjin.gil@samsung.com>
+To: Yohan Joung <jyh429@gmail.com>, jaegeuk@kernel.org, daeho43@gmail.com
+References: <20250312134805.362-1-yohan.joung@sk.com>
 Content-Language: en-US
-In-Reply-To: <20250314120651.443184-1-youngjin.gil@samsung.com>
+In-Reply-To: <20250312134805.362-1-yohan.joung@sk.com>
 X-Spam-Score: -2.8 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 3/14/25 20:06, Yeongjin Gil wrote: > In the case of the
- following call stack for an atomic file, > FI_DIRTY_INODE is set,
- but FI_ATOMIC_DIRTIED
- is not subsequently set. > > f2fs_file_write_iter > f [...] 
+ Content preview:  On 3/12/25 21:48, Yohan Joung wrote: > this is unnecessary
+ when we know we are overwriting already allocated > blocks and the overhead
+ of starting a transaction can be significant > especially for mul [...] 
  Content analysis details:   (-2.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,22 +84,21 @@ X-Spam-Report: Spam detection software,
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [147.75.193.91 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [147.75.193.91 listed in sa-accredit.habeas.com]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tu10b-0002bp-JR
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid atomicity corruption of
- atomic file
+X-Headers-End: 1tu11r-0002fQ-Hd
+Subject: Re: [f2fs-dev] [PATCH v1] f2fs: optimize f2fs DIO overwrites
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,41 +112,42 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: sj1557.seo@samsung.com
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 3/14/25 20:06, Yeongjin Gil wrote:
-> In the case of the following call stack for an atomic file,
-> FI_DIRTY_INODE is set, but FI_ATOMIC_DIRTIED is not subsequently set.
+On 3/12/25 21:48, Yohan Joung wrote:
+> this is unnecessary when we know we are overwriting already allocated
+> blocks and the overhead of starting a transaction can be significant
+> especially for multithreaded workloads doing small writes.
 > 
-> f2fs_file_write_iter
->   f2fs_map_blocks
->     f2fs_reserve_new_blocks
->       inc_valid_block_count
->         __mark_inode_dirty(dquot)
->           f2fs_dirty_inode
+> Signed-off-by: Yohan Joung <yohan.joung@sk.com>
+> ---
+>  fs/f2fs/data.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> If FI_ATOMIC_DIRTIED is not set, atomic file can encounter corruption
-> due to a mismatch between old file size and new data.
-> 
-> To resolve this issue, I changed to set FI_ATOMIC_DIRTIED when
-> FI_DIRTY_INODE is set. This ensures that FI_DIRTY_INODE, which was
-> previously cleared by the Writeback thread during the commit atomic, is
-> set and i_size is updated.
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index d872f785a996..b55d253f7be9 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -4181,7 +4181,8 @@ static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+>  	map.m_next_pgofs = &next_pgofs;
+>  	map.m_seg_type = f2fs_rw_hint_to_seg_type(F2FS_I_SB(inode),
+>  						inode->i_write_hint);
+> -	if (flags & IOMAP_WRITE)
+> +	if ((flags & IOMAP_WRITE) &&
+> +		!f2fs_overwrite_io(inode, offset, length))
 
-I guess we need to add a regression testcase to cover this issue.
-
-> 
-> Fixes: fccaa81de87e ("f2fs: prevent atomic file from being dirtied before commit")
-> Reviewed-by: Sungjong Seo <sj1557.seo@samsung.com>
-> Reviewed-by: Sunmin Jeong <s_min.jeong@samsung.com>
-> Signed-off-by: Yeongjin Gil <youngjin.gil@samsung.com>
-
-Reviewed-by: Chao Yu <chao@kernel.org>
+Can you please add a comment for this change? Otherwise it looks
+fine to me.
 
 Thanks,
+
+>  		map.m_may_create = true;
+>  
+>  	err = f2fs_map_blocks(inode, &map, F2FS_GET_BLOCK_DIO);
+
 
 
 _______________________________________________
