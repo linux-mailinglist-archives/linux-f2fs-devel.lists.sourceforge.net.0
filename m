@@ -2,106 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC30CA6670F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Mar 2025 04:13:15 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74B50A69E37
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Mar 2025 03:23:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tuNO7-0001ke-Si;
-	Tue, 18 Mar 2025 03:13:07 +0000
+	id 1tv5Ys-0006H6-6o;
+	Thu, 20 Mar 2025 02:23:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1tuNNx-0001kA-5m
+ (envelope-from <chao@kernel.org>) id 1tv5Yo-0006Gy-Vo
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Mar 2025 03:12:56 +0000
+ Thu, 20 Mar 2025 02:23:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=j30EyuKRkenIwnZLLKFdhA7RoWKdbbMnCAfNnTXUd4U=; b=dvnuuAKG8SC9/4SlFn0fIyYVMQ
- bliufeHpIfpK1ZaXf0xk2QjiDphsW+dkiIVctfELHJv4iOjQ3Q9XZ87wzxHFnvmka0WqQW9WT2O/e
- A5D/VpRG9wxRCLf4B4Uy3XWBk1LfV6S5G33IAn+QMg9nsD6TaGujpj+YyrKHQzivviL0=;
+ bh=f6H4Jedbbn/7Mk64z/C8NQiQ6n2WCvY14Q8pE2Ff4rw=; b=BwgJbun4T/ZuQgpzXoM2zEl84z
+ KOkWqkeLNhIyLiy3KOkwYoYTMQtkLiQ4AC2plJ1tb5V8gWcInm3WVL8uQV6MjmGjsR60aAZcnuOpk
+ rwb7PYx42px1PKg6nnXEXwTAWBSzZ0DWBimDuaddOfZ6FeM7s/WLV4yx75vwDb2dOfro=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=j30EyuKRkenIwnZLLKFdhA7RoWKdbbMnCAfNnTXUd4U=; b=Mz4VaExXRyQGEMPMi3WgFQMwmg
- hD/GR2EvJDNwjsFarDFGOIJgYdadQYaulh2AQxiWKaBNz5NMKZNhEEQAmPNIMKafeNKIH3VuegpBf
- vL8AbNRFZNcYxTxjICkQZ0Msrg9RxIfGwge5M8yFuk1yP8aja4fY2aC1fd1tMqXAZklM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=f6H4Jedbbn/7Mk64z/C8NQiQ6n2WCvY14Q8pE2Ff4rw=; b=l
+ ajW1Njf7UCNY6YuaNPMZt6HPvPnwobFBGQdKNJatGR3ThQZ5QwGlYpyrdrOViLzC/hTNlrioyuPe6
+ o59K2SA9uTW9Fdk6l/zqAOBUbygqMQaNF+rv3xfExFTMAp6o/WXGAhpyJAyBbpSqSuSC/dkFOSUAs
+ VJ0xxe6tF/0axth4=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tuNNu-0003cl-3I for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Mar 2025 03:12:54 +0000
+ id 1tv5Ye-0007LX-4q for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 20 Mar 2025 02:23:06 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id CEEB95C49A0
+ by tor.source.kernel.org (Postfix) with ESMTP id F2A5768324
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 18 Mar 2025 03:10:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50505C4CEED
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 18 Mar 2025 03:12:48 +0000 (UTC)
+ Thu, 20 Mar 2025 02:22:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F0316C4CEE4;
+ Thu, 20 Mar 2025 02:22:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1742267568;
- bh=zWJrgld3kzX8lTcSqkFht/3E6ksq4zXOtBR3EA8SNwM=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=rU0fw1cIdUZHCjB+6jcrsWnMD1re/PaCB7AKmCFyztsyg2DZ/kZ8UdapduozD6jSd
- MurysPFYiezPkuyrJPrDrfNzKq49N5wZkMCqV7vhbUPJLUQlc7soc2JaQFkOkvsONq
- AxIx2yU9OM6x0Wp0JuRAaw/9Ahjti099MNhZihxvRg6+1+O6qFYUyAXdVveuNH2Zfm
- J1bTABz2eE2nFrXuVpqDY16l+FU7xuIm1Oa3sSpvmehLD1wKPX7+FZ6OXR/L78DHR2
- pOnHffCcHIszHltdSzs/5ITtzxuKJYGoEBgrOBui1WCowhhTonFao4LGYEdHC3R+vj
- fR9+GOb6yfU0Q==
-Date: Tue, 18 Mar 2025 03:12:46 +0000
-To: linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <Z9jkrorMIqWCzRT3@google.com>
-References: <20250304011036.1373650-1-jaegeuk@kernel.org>
- <Z9iT2mbav0SNUKO4@google.com>
+ s=k20201202; t=1742437365;
+ bh=W7q6/PTwJrqZQUKTE/L2eAuHe1DXB/d42aG5MQ4jxcA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=SCk442lmYPaXAGDnk5j7Z3iS8kIKBgaGbOHm5Qqd3iKft7cefuA2aemDt2LhRE6L5
+ RPk9Ulu4TfOESGU9MlfQG3eJaCvIJadkpZ6qw6Pn0ycmdcFul8THx3d4ySQKdodBuy
+ e0QeN5I6cYzacySyNpk8lJM3WP+MoWQOL06ssfQY4Q9tlSIgyd9kmFpwFi5rVkRstP
+ IsUziD6c/kQQdZoWGlIcRc9hOf0D8/W3EXaAMh3Vl/XabFjqaXdYOA2gZUNMLvb+wM
+ agp09fdxMq+Wr+uh2S5rQzQB/6r/BLtq9RsM10IpuW5YWJ7miaOiQ8yLzBX3UHvr5I
+ jjhKaVBQZi+KQ==
+To: jaegeuk@kernel.org
+Date: Thu, 20 Mar 2025 10:22:29 +0800
+Message-ID: <20250320022230.1938110-1-chao@kernel.org>
+X-Mailer: git-send-email 2.49.0.395.g12beb8f557-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <Z9iT2mbav0SNUKO4@google.com>
-X-Spam-Score: -5.5 (-----)
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Ping. On 03/17, Jaegeuk Kim via Linux-f2fs-devel wrote: >
- This adds a fragread command in f2fs_io, which is able to measure the > read
- performance on fragmented data buffer. > > Signed-off-by: Jaegeuk Kim < [...]
- Content analysis details:   (-5.5 points, 6.0 required)
+ Content preview: This patch adds a proc entry named inject_stats to show total
+ injected count for each fault type. cat /proc/fs/f2fs/<dev>/inject_stats
+ fault_type injected_count kmalloc 0 kvmalloc 0 page alloc 0 page get 0 alloc
+ bio(obsolete) 0 alloc nid 0 orphan 0 no more block 0 too big dir depth 0
+ evict_inode f [...] 
+ Content analysis details:   (-0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-accredit.habeas.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ [172.105.4.254 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.105.4.254 listed in sa-trusted.bondedsender.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1tuNNu-0003cl-3I
-Subject: Re: [f2fs-dev] [f2fs-dev v2] [PATCH] f2fs_io: add fragread command
- to evaluate fragmented buffer for reads
+X-Headers-End: 1tv5Ye-0007LX-4q
+Subject: [f2fs-dev] [PATCH v2 1/2] f2fs: add a proc entry show inject stats
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,168 +108,126 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Ping.
+This patch adds a proc entry named inject_stats to show total injected
+count for each fault type.
 
-On 03/17, Jaegeuk Kim via Linux-f2fs-devel wrote:
-> This adds a fragread command in f2fs_io, which is able to measure the
-> read performance on fragmented data buffer.
-> 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
-> ---
-> 
->  Change log from v1:
->   - add mlock
-> 
->  tools/f2fs_io/f2fs_io.c | 114 ++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 114 insertions(+)
-> 
-> diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-> index 44d389dbd771..57a931d5769c 100644
-> --- a/tools/f2fs_io/f2fs_io.c
-> +++ b/tools/f2fs_io/f2fs_io.c
-> @@ -1005,6 +1005,119 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
->  	exit(0);
->  }
->  
-> +#define fragread_desc "read data with a fragmented buffer from file"
-> +#define fragread_help					\
-> +"f2fs_io fragread [chunk_size in 4kb] [offset in chunk_size] [count] [advice] [file_path]\n\n"	\
-> +"Read data in file_path and print nbytes\n"		\
-> +"advice can be\n"					\
-> +" 1 : set sequential|willneed\n"			\
-> +" 0 : none\n"						\
-> +
-> +#ifndef PAGE_SIZE
-> +#define PAGE_SIZE sysconf(_SC_PAGESIZE)
-> +#endif
-> +#define ALLOC_SIZE (2 * 1024 * 1024 - 4 * 1024) // 2MB - 4KB
-> +
-> +static void do_fragread(int argc, char **argv, const struct cmd_desc *cmd)
-> +{
-> +	u64 buf_size = 0, ret = 0, read_cnt = 0;
-> +	u64 offset;
-> +	char *buf = NULL;
-> +	uintptr_t idx, ptr;
-> +	unsigned bs, count, i;
-> +	u64 total_time = 0;
-> +	int flags = 0, alloc_count = 0;
-> +	void *mem_hole, **mem_holes;
-> +	int fd, advice;
-> +
-> +	if (argc != 6) {
-> +		fputs("Excess arguments\n\n", stderr);
-> +		fputs(cmd->cmd_help, stderr);
-> +		exit(1);
-> +	}
-> +
-> +	bs = atoi(argv[1]);
-> +	if (bs > 256 * 1024)
-> +		die("Too big chunk size - limit: 1GB");
-> +	buf_size = bs * F2FS_DEFAULT_BLKSIZE;
-> +
-> +	offset = atoi(argv[2]) * buf_size;
-> +	count = atoi(argv[3]);
-> +	advice = atoi(argv[4]);
-> +	mem_holes = xmalloc(sizeof(void *) * (buf_size / PAGE_SIZE));
-> +
-> +	/* 1. Allocate the buffer using mmap. */
-> +	buf = mmap(NULL, buf_size, PROT_READ | PROT_WRITE,
-> +				MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-> +
-> +	/* 2. Loop and touch each page. */
-> +	for (idx = (uintptr_t)buf; idx < (uintptr_t)buf + buf_size;
-> +						idx += PAGE_SIZE)
-> +	{
-> +		/* Touch the current page. */
-> +		volatile char *page = (volatile char *)idx;
-> +		*page;
-> +
-> +		/* 3. Allocate (2M - 4K) memory using mmap and touch all of it. */
-> +		mem_hole = mmap(NULL, ALLOC_SIZE, PROT_READ | PROT_WRITE,
-> +					MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-> +		if (mem_hole == MAP_FAILED)
-> +			die_errno("map failed");
-> +
-> +		/* Store the allocated memory pointer. */
-> +		mem_holes[alloc_count++] = mem_hole;
-> +
-> +		/* Touch all allocated memory. */
-> +		for (ptr = (uintptr_t)mem_hole;
-> +			ptr < (uintptr_t)mem_hole + ALLOC_SIZE;
-> +						ptr += PAGE_SIZE) {
-> +			volatile char *alloc_page = (volatile char *)ptr;
-> +			*alloc_page;
-> +		}
-> +	}
-> +	printf("Touched allocated memory: count = %u\n", alloc_count);
-> +	printf(" - allocated memory: = ");
-> +	for (idx = 0; idx < 5; idx++)
-> +		printf(" %p", mem_holes[idx]);
-> +	printf("\n");
-> +
-> +	/* Pin the pages. */
-> +	if (mlock(buf, buf_size))
-> +		die_errno("mlock failed");
-> +
-> +	fd = xopen(argv[5], O_RDONLY | flags, 0);
-> +
-> +	if (advice) {
-> +		if (posix_fadvise(fd, 0, F2FS_DEFAULT_BLKSIZE,
-> +				POSIX_FADV_SEQUENTIAL) != 0)
-> +			die_errno("fadvise failed");
-> +		if (posix_fadvise(fd, 0, F2FS_DEFAULT_BLKSIZE,
-> +				POSIX_FADV_WILLNEED) != 0)
-> +			die_errno("fadvise failed");
-> +		printf("fadvise SEQUENTIAL|WILLNEED to a file: %s\n", argv[5]);
-> +	}
-> +
-> +	total_time = get_current_us();
-> +
-> +	for (i = 0; i < count; i++) {
-> +		ret = pread(fd, buf, buf_size, offset + buf_size * i);
-> +		if (ret != buf_size) {
-> +			printf("pread expected: %"PRIu64", readed: %"PRIu64"\n",
-> +					buf_size, ret);
-> +			if (ret > 0)
-> +				read_cnt += ret;
-> +			break;
-> +		}
-> +
-> +		read_cnt += ret;
-> +	}
-> +	printf("Fragmented_Read %"PRIu64" bytes total_time = %"PRIu64" us, BW = %.Lf MB/s\n",
-> +		read_cnt, get_current_us() - total_time,
-> +		((long double)read_cnt / (get_current_us() - total_time)));
-> +	printf("\n");
-> +	exit(0);
-> +}
-> +
->  #define randread_desc "random read data from file"
->  #define randread_help					\
->  "f2fs_io randread [chunk_size in 4kb] [count] [IO] [advise] [file_path]\n\n"	\
-> @@ -1989,6 +2102,7 @@ const struct cmd_desc cmd_list[] = {
->  	CMD(write_advice),
->  	CMD(read),
->  	CMD(randread),
-> +	CMD(fragread),
->  	CMD(fiemap),
->  	CMD(gc_urgent),
->  	CMD(defrag_file),
-> -- 
-> 2.49.0.rc1.451.g8f38331e32-goog
-> 
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+cat /proc/fs/f2fs/<dev>/inject_stats
+fault_type              injected_count
+kmalloc                 0
+kvmalloc                0
+page alloc              0
+page get                0
+alloc bio(obsolete)     0
+alloc nid               0
+orphan                  0
+no more block           0
+too big dir depth       0
+evict_inode fail        0
+truncate fail           0
+read IO error           0
+checkpoint error        0
+discard error           0
+write IO error          0
+slab alloc              0
+dquot initialize        0
+lock_op                 0
+invalid blkaddr         0
+inconsistent blkaddr    0
+no free segment         0
+inconsistent footer     0
+
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v2:
+- add missing CONFIG_F2FS_FAULT_INJECTION
+ fs/f2fs/f2fs.h  |  3 +++
+ fs/f2fs/super.c |  1 +
+ fs/f2fs/sysfs.c | 22 ++++++++++++++++++++++
+ 3 files changed, 26 insertions(+)
+
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index f1576dc6ec67..986ee5b9326d 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -73,6 +73,8 @@ struct f2fs_fault_info {
+ 	atomic_t inject_ops;
+ 	int inject_rate;
+ 	unsigned int inject_type;
++	/* Used to account total count of injection for each type */
++	unsigned int inject_count[FAULT_MAX];
+ };
+ 
+ extern const char *f2fs_fault_name[FAULT_MAX];
+@@ -1902,6 +1904,7 @@ static inline bool __time_to_inject(struct f2fs_sb_info *sbi, int type,
+ 	atomic_inc(&ffi->inject_ops);
+ 	if (atomic_read(&ffi->inject_ops) >= ffi->inject_rate) {
+ 		atomic_set(&ffi->inject_ops, 0);
++		ffi->inject_count[type]++;
+ 		f2fs_info_ratelimited(sbi, "inject %s in %s of %pS",
+ 				f2fs_fault_name[type], func, parent_func);
+ 		return true;
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index f087b2b71c89..dfe0604ab558 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -47,6 +47,7 @@ const char *f2fs_fault_name[FAULT_MAX] = {
+ 	[FAULT_KVMALLOC]		= "kvmalloc",
+ 	[FAULT_PAGE_ALLOC]		= "page alloc",
+ 	[FAULT_PAGE_GET]		= "page get",
++	[FAULT_ALLOC_BIO]		= "alloc bio(obsolete)",
+ 	[FAULT_ALLOC_NID]		= "alloc nid",
+ 	[FAULT_ORPHAN]			= "orphan",
+ 	[FAULT_BLOCK]			= "no more block",
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index c69161366467..46fa94db08a8 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -1679,6 +1679,24 @@ static int __maybe_unused disk_map_seq_show(struct seq_file *seq,
+ 	return 0;
+ }
+ 
++#ifdef CONFIG_F2FS_FAULT_INJECTION
++static int __maybe_unused inject_stats_seq_show(struct seq_file *seq,
++						void *offset)
++{
++	struct super_block *sb = seq->private;
++	struct f2fs_sb_info *sbi = F2FS_SB(sb);
++	struct f2fs_fault_info *ffi = &F2FS_OPTION(sbi).fault_info;
++	int i;
++
++	seq_puts(seq, "fault_type		injected_count\n");
++
++	for (i = 0; i < FAULT_MAX; i++)
++		seq_printf(seq, "%-24s%-10u\n", f2fs_fault_name[i],
++						ffi->inject_count[i]);
++	return 0;
++}
++#endif
++
+ int __init f2fs_init_sysfs(void)
+ {
+ 	int ret;
+@@ -1770,6 +1788,10 @@ int f2fs_register_sysfs(struct f2fs_sb_info *sbi)
+ 				discard_plist_seq_show, sb);
+ 	proc_create_single_data("disk_map", 0444, sbi->s_proc,
+ 				disk_map_seq_show, sb);
++#ifdef CONFIG_F2FS_FAULT_INJECTION
++	proc_create_single_data("inject_stats", 0444, sbi->s_proc,
++				inject_stats_seq_show, sb);
++#endif
+ 	return 0;
+ put_feature_list_kobj:
+ 	kobject_put(&sbi->s_feature_list_kobj);
+-- 
+2.48.1
+
 
 
 _______________________________________________
