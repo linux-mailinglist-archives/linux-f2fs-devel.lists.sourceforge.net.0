@@ -2,128 +2,165 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B628A6B315
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Mar 2025 03:58:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4AA8CA6B3A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Mar 2025 05:21:44 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tvSaM-0005uM-R4;
-	Fri, 21 Mar 2025 02:58:15 +0000
+	id 1tvTsx-0001gy-Sj;
+	Fri, 21 Mar 2025 04:21:32 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nzzhao.sigma@gmail.com>) id 1tvSaL-0005uF-Ll
+ (envelope-from <songfengcn@hotmail.com>) id 1tvTsw-0001gp-Ow
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Mar 2025 02:58:14 +0000
+ Fri, 21 Mar 2025 04:21:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:Subject:Message-ID:Date:From:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :From:To:Date:Message-ID:Sender:Reply-To:Subject:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=S447nBCZ5qz1dgsS7t4G7vGWWAqy5N52biZgpco2oDI=; b=Y3C96r368rz5qRc0aqHI0QuQzJ
- tp3plEpeVpbwuwbcuMrA0uWJm6qLUO4G3r5DEdpL9rZ3CrIlfkPjfGUa9hDqZUG8CLiFsalKuon5E
- YGLX4HqBLzec4QNymh1Uix+zQ41EoCj0c/741bjiAoNsA6Vtr3esP/GeL2AxAD+n5Ndw=;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=; b=BQRrhcwgx9eTtL6uabKO93Eukk
+ UBPZCc2Ugr5jWDl7Sh5UKTTGVZV0Yty3Ny8mh9eUcAY78HL4pjvho91r6lnFfj2AEymVjqnfO2ps0
+ KAPxA/M3Z5uIXljavZAf5bpUS2m+vRSPwdJl8cD/Cu6gJpq7yx6nwoMLogYl80YJh67M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:Subject:Message-ID:Date:From:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=S447nBCZ5qz1dgsS7t4G7vGWWAqy5N52biZgpco2oDI=; b=W
- Oi4SNS88h+dW6MUDA7494HTEXQggj2lTaAnr+CE0Vj3Bv65PMeH9hH9finbW48lx9xDrDrd6iVLsp
- zJWdCjFGLXFkWAnhqGUw6G5uBS//+Xp+CDyP69kI7+ZL8Z0y+wOwddWYpsYbYEVjVsLOy7KAhaU00
- S9gNw9MxtWB2a+Vc=;
-Received: from mail-oa1-f67.google.com ([209.85.160.67])
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:From:To:Date:
+ Message-ID:Sender:Reply-To:Subject:Cc:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=; b=C15PWYx7Ac6sa8+C6gHF9tkzPA
+ Uovlg1HrQJ2yTO4jnN0RNYZVSKFGlUi1jIvIzql1XK6tMUHm7ZhAssSbFH2ROlYb0AS56YWH/IEBE
+ 2+BApljj7qKMS/SKttUn1bLUXPsPWqEnuWTiFUYLw9r09NhpXHj9bUa5+1bq+KDF86UI=;
+Received: from mail-co1nam11olkn2080.outbound.protection.outlook.com
+ ([40.92.18.80] helo=NAM11-CO1-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1tvSaL-00077i-5h for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Mar 2025 02:58:14 +0000
-Received: by mail-oa1-f67.google.com with SMTP id
- 586e51a60fabf-2a01bcd0143so1713630fac.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 20 Mar 2025 19:58:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742525887; x=1743130687; darn=lists.sourceforge.net;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=S447nBCZ5qz1dgsS7t4G7vGWWAqy5N52biZgpco2oDI=;
- b=RPGN//hCrEe6WYDVDxe3XTad0OBVUVlgSRNJPvxVo25j2A+b8+FwOA+YdT+HFKkj7a
- CwIKsmI7OZiV2wcMjR6VRkcMYX+8YrN9UswL5+g9LpqgMleDBO030XAkbG+gRI9Flj+3
- F+CLz1wPnG7k5D1/O0bV0dDTMqmDrRigO4CWkGu+NFckT3LeJXSp05b8FvnfsURdCAjb
- Gb8TbKABOXjfA9pFYObRkrTZzyKABCSnoomGwWme7MmBoo3fgSYUWXHEF1y//uelskT+
- mPLxd2Ai9+eKkPm1rBkbCjJ1aMYTFnMM3jNswVnlwpDCdxFoZNb1nS749w9ilxbgoNnH
- veUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742525887; x=1743130687;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=S447nBCZ5qz1dgsS7t4G7vGWWAqy5N52biZgpco2oDI=;
- b=pHrCEZGD0XAGbY3kkS9w+JrmWSIZz1u06LmNREUhhLg7+EGmPC/pv3Ss6br4wckxCM
- U9SH3mAZcbNcWZLoVfzJMzGPtC6lOQTuSRV18LTqagD+0iZIsvWXXFE1flBSl/r7NQF7
- fkNN8In2jqovuojViAaTKxU4CkVsd7O03+0d1A5AOVsRgMalM+1BJDN/G8sK77GSY2NB
- D3/UIMnCrAUJWJDtRnC+Y8OoxnOXaSnAsKABnZHNzOV+oMg3gwRu4nMAjfEw85Sr+j1Q
- iEwE0ukWjCfWyLJomXn8SBGAw71ArboV/VhmR3Z3BVWo9poS7dDR81m4ZiuVKwqt86ae
- rH5A==
-X-Gm-Message-State: AOJu0YzCklLCe0x/IU181c2d/aIz6Ab2dBVrPB4YNT55hpLguVr6/oJ5
- 4xJKh8w/DEm99q1i6SYOxOXGlKi4L7DqCnk4u+sDvIh2Ja8V5Z1yp8yALSheJqs3KNOJGwfWScF
- vCI8Hh3ozw2yBebcKqF90ToGemkYryNHuflw=
-X-Gm-Gg: ASbGncuJI2R+/fu3G2yJt3PFHdbfOZ11UxW+fheii4Q5dDu1W5Zkyr/b9GpwLkLpTqK
- qCrXbg/VhgrgZdsnBqf6a3maUbYpEBpW0mrcKyHd2xx+Lca/IveQtWVIB6/KQ8iOvcuaFT51kZH
- RPrX+XfWm9LNZE7AzkLUGGIO2ZNDs=
-X-Google-Smtp-Source: AGHT+IEtB/QKsumNF0e1z9H9Qp9BwGIYRKtCKNgszw0nvOKAwlR3PJztJUVfLRN2gdT77c0PDeJO9WMCZOG9cRnUa/w=
-X-Received: by 2002:a05:6871:4102:b0:2a7:d8cb:5284 with SMTP id
- 586e51a60fabf-2c780247c70mr1260446fac.7.1742525887002; Thu, 20 Mar 2025
- 19:58:07 -0700 (PDT)
-MIME-Version: 1.0
-From: Nanzhe Zhao <nzzhao.sigma@gmail.com>
-Date: Fri, 21 Mar 2025 10:57:55 +0800
-X-Gm-Features: AQ5f1Joey8ATtOGys54VZB9gojvqymtcK-pbMuPI0bEyPQS47Bhu25pX2DA4PgA
-Message-ID: <CAMLCH1F8niz3qifu9pt6C3yLhonadD=feaPtWKhCaRD8FPJhRg@mail.gmail.com>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1tvTsr-0001ng-IR for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Mar 2025 04:21:31 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=siKNDnC3ahi2YpBm5HGzJjeiwC5jeD61mOWZyow47bsWnQ39y/X3uqP3I3Ypmka1uVIels8xDPoqo4IEUiHUmLnAK99hDUxO6QVIBRz/ZL5VE1cZr86vY9dWRKRVMnKHRw9AogRACNholcoNf2y8/PoS+2TioXaDbg26maEkwNY0dOLAQaaI0Ybpn+lFTRXNHXgJTN2W7X/Ozi9p+UjjnGElWaTZtnk8nyjGXQkCuqGEzKobAfVI9Pj9/CckiS46YNlvF/MAnTIMw6aU+gZF1FbuJgbnLPbX/RqeGR18ysdL98S7MUHpJtxdKwrQJ68eDNcHrupmWi7qIcBo8ffpMQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=BU3N6aZ3fAdW07dB4LNes5Yhj7LHWAY98XvOBLy2SElZdvUpHk4KTLUMP15rLG6e+nNXf+FcJFfsGGUWPeu4vpZS1+Mre6V1uGutwskTmb+KLGZASqiC3XdUU8kgG5Uqea7LIrk6hoSzR8j/DQw66MQo0RWFyjatOWzPJRrF2LRCiks+jRrFdaa+SuWvCHpQlc9R4pOyYz233jOkVEdUZu8RBUjLhnWfj0P7el4a89G+D/RFSQlXxRqOvzfOokTpwPlvvL1RVtYG2YoD1FfI+qtbsJZnDJ/lpzXlWiFQWhoCCiTIAUvE1cMSfa1FjK/Zy2ZtzgG8ToOdubAjFW2z1A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=DkZgjpJGa9zfNRwx0WIgUdCGmwqZoN8j2APv1CZ+zUS+vvNWX46ofj1+k7d5mvE5lu+VJnm7x5rnYZnyWEE2mgdud11ncaMtMeSoQDg4Q2uMNqCU4qEOKrYnnNn4n0T/t2lV6bXhfiuWRxhlB3/WaNNZEwN+tZ9Bl/6TUtawCqnmAdHSfprjdplANeyaYNaBAfPdUVECBLZfwOL0EPiwJfGYG8MvxJzps+1af3VeK1FC/FR+Mu/RoQ/DvPILbXnK4iNulriULSaq/PCzFwqdSg/pFUDh5lfDtZRLkfyaK0IcawaYLtxGXHo26hNeD7zJsevCO6TAI17C0WQbKBjV+w==
+Received: from PH7PR22MB5400.namprd22.prod.outlook.com (2603:10b6:510:31c::16)
+ by IA0PPF3D5EE5909.namprd22.prod.outlook.com
+ (2603:10b6:20f:fc04::d1c) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.34; Fri, 21 Mar
+ 2025 04:21:19 +0000
+Received: from PH7PR22MB5400.namprd22.prod.outlook.com
+ ([fe80::c4e8:8b9b:19e:f64f]) by PH7PR22MB5400.namprd22.prod.outlook.com
+ ([fe80::c4e8:8b9b:19e:f64f%4]) with mapi id 15.20.8583.010; Fri, 21 Mar 2025
+ 04:21:18 +0000
+Message-ID: <PH7PR22MB5400F279B088C6365A502656DDDB2@PH7PR22MB5400.namprd22.prod.outlook.com>
+Date: Fri, 21 Mar 2025 12:21:05 +0800
+User-Agent: Mozilla Thunderbird
 To: linux-f2fs-devel@lists.sourceforge.net
-X-Spam-Score: -0.2 (/)
+From: Felix Song <songfengcn@hotmail.com>
+X-ClientProxiedBy: SI2PR02CA0034.apcprd02.prod.outlook.com
+ (2603:1096:4:195::9) To PH7PR22MB5400.namprd22.prod.outlook.com
+ (2603:10b6:510:31c::16)
+X-Microsoft-Original-Message-ID: <f797c814-2a21-4106-967c-c91b38b7fd38@hotmail.com>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR22MB5400:EE_|IA0PPF3D5EE5909:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1feff432-984e-4c90-c10f-08dd682fd3ad
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|7092599003|461199028|15080799006|5072599009|19110799003|6090799003|440099028|3412199025|3430499032|850799032;
+X-Microsoft-Antispam-Message-Info: AeG8iJEd06m+zstmOQtK6IcblwoxDMQZl7au5AuQYiTZH56LuhmtFrfAjrs/HreB6cKWt1hwcEclLoWjlFEFYmbj885rqUXU7H/7+71nIstbFgx6hb479Oc7db1/SIcyJOOXoo0mWvDjOTQTHqApQUGW5nZK6+Yae/MQJfRTnwL8lJH8e9i3UXGsOXq6XzpSSfvd+Yo10Jv3urwc2Wvez/Y5cbfPdXmv7y3ldZhbII64innk9dA2L1Z62Dbmv3KhX37g/WplgA+PHCX9HZkabWouBOypjtxexXB35FOUdewg9mQHAuwWo3WWBt53sqB95Ay3CQAEXxlQL0eiKquDmKo0splX22+2lcZ7lvKgyazbGUPnWm1rbwCKPeJJwOrFHfb6GjBrgtLC48chjRkN2bZWJDt6dpwx0e50PPoxHuYhQ/HYZLqI/K8t6lbw9Hg0x8rX6My8I/1OZK7z3di5TcXQOtW7/2h2JTCxnamW8X6E+RsbQ3q/DEBkdvxklwoofS7/FDgNu/QQ0mAO5p+v7o1snwrSLSys9wM9wk43btw3oHMD795n3jXXY7D48QhPZAA91A1ft8aaH+Ge8zGbnasgjQRUJyAc9Pz3N+SwX6HFjiEpsjjGOHaJjp47FzRlDLADiYnGxl95dNFvdwv98ijqLW5homr2ZjScJlrqFq4FAxXY4K/sfHabLDEhYcnXA36MvtJgwor3S0xoiOq1zMO4sfvZI4+oqfXbqmQx26LpYCtJHwLWxYu+kYdkhgRN1k+p7jkX/BY+JodYZ6izXy0Jb117wCcljiblYSDGO53L+B6taiGD3zV350TaVcD7hu1xZNEf7D7IxSY4ORDy8d48NmsNYmbTEAoOXgCm+Vg=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TXVjWXB3dFhWSDVFckFjUVlxakgxeFpiYzVZZFBSMWNldEVTbXlyM0RONzR4?=
+ =?utf-8?B?L0VVL3Q0Wk1aVFYxSVY3dkdtUzFYNCszYVlzTnNWZTJFVnlyZENjNUdESm8v?=
+ =?utf-8?B?bEJiSFQ3L2V2MTlPWXQ2bFJHTDBmUlNlT3lhU3VFOFVNMkxSazE4Z2E4eU5r?=
+ =?utf-8?B?bHBpbjdQZEtmaXlHV3BiS0h4bmZJbzFCQzJzY2dIZWZTU1NMWlNKbC9ITU11?=
+ =?utf-8?B?UkkyVEt0endiU29nMWJPUnNEMkloanJnOXVEVHU4bTVVcHpiRFYrQ2hOeEdr?=
+ =?utf-8?B?WC9yN2twODlXOVhoTFBwQktjSWR6Sm0xS0NEVHk1VFp3OThUdlNyeUttQm9B?=
+ =?utf-8?B?d1FZdUEyMU12Z1E0MnJJMi9WUXBDOWhQVkxidWdvUFdVUVVmU2wvUWxnL3Bj?=
+ =?utf-8?B?LzNoWXl4QmszZ3FSTDQrdEtwb2tGcit6ZGNKaDg1REN1TlZNTW1vUThab2NI?=
+ =?utf-8?B?SElCY0RpVmVVRWF4U1RaRjkyRFJTWlpmWUJpZlJKamErbnVYUnMvelVyODcy?=
+ =?utf-8?B?SGJyb0Q0aFdjVktONmNFV2pRL3VDbCtuUHpqWGNka0JkMUF3akFJTndJVVpN?=
+ =?utf-8?B?SlIyWWZFS25JN3p4RmRGSEZxMGtKeFVYeDduZkhvK0VkbWVXQjFDaFdlRFRE?=
+ =?utf-8?B?cWFtdFo3T05rTkdBRGFQRllVU2RZYnR6UWZhSUUvYldZclBod0wzTll1ZXQy?=
+ =?utf-8?B?STN3RlYxaVZYM3BGZGNNYXB3ZUFKSDgydk9FVTdIUHdhamdtSFVwdU4xaTRq?=
+ =?utf-8?B?MmRoZGRTK1hCWENFL0tsaW1SOW5abzN3L09SK1BCYXBIanNKa0FNSXgxRFdp?=
+ =?utf-8?B?MFVUcWZDNkpyTlRUckR1ak9NM1FTdnlNVGJ6Q2lTUkdCTzg5T2Z4eEJweU9C?=
+ =?utf-8?B?bStVWFpSQTNaejZRRkVkMzFOcEhmRG1zUTdPL0tGMDRlYUIrSDQwdlJWdlhZ?=
+ =?utf-8?B?MXErekk3UUNrOXlWL0V2K1hxOUZnYkdtZDhCeHl6YWFpMTk1aFNoQzB6MjJz?=
+ =?utf-8?B?cXZXOUpMNTNGRjZoY2x3amhkQmU5NE5EOXU3MlB6MzJ3alk0RERJVHZLd0hi?=
+ =?utf-8?B?TTM2YWZzdnpBb2ZEaTc1TEZnNkt0VjJMUWFrNkVBK0FQU09BOU5XS1NYaGhz?=
+ =?utf-8?B?VDMrVXRzWmJDS3ZUc2lWRjMyamp5d2lXU2pIdENEeG1qUzNJSEpYVjQwN2sz?=
+ =?utf-8?B?Q0xJMklRZDBDRFhzUWdrdmVFSnhYMzY3ZVd0WU9ZemZLV25HRzZhQVExQ0VZ?=
+ =?utf-8?B?aDJWUERQMlVPOTJmUHFOdlBTN0E4NndBR0NRRDZIMGhHSEZCNmdxc1psaG95?=
+ =?utf-8?B?ZlFxT1U2NnNNeE5oZ3ByWC9TYnpnTmt4dUpDZmRUbVhKcFFKOFlPbG10NWJ5?=
+ =?utf-8?B?bGhkSnNjajVGYW5KRS9Yb0pwY0hsL1NNS3Q2YmJjU1pGczd5ajUrb1ZCOS9V?=
+ =?utf-8?B?VEhERDBXS0xad2N6Uk1hMUMvakdBOE1VTEZIZlIxZEhNUUNvTUl6ZzJZRUxq?=
+ =?utf-8?B?clYrTkM2bWQ5MUs0cXNGNXJpUEJiK3FtUTZjNEI1cmxQSHVNWDk4MGxiRUNM?=
+ =?utf-8?B?ZmV0OHhHUU02R3JJZ0ZOQjdqcUxuREtIWmNuZkdNbVJZYnVmd3BsaU0wOGxx?=
+ =?utf-8?Q?9LXzTkNFbf43C1n4bUk8p7sldGz1HKv+nBRQCRX6YOcM=3D?=
+X-OriginatorOrg: sct-15-20-7719-20-msonline-outlook-7da6c.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1feff432-984e-4c90-c10f-08dd682fd3ad
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR22MB5400.namprd22.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2025 04:21:18.6583 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PPF3D5EE5909
+X-Spam-Score: 7.1 (+++++++)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ has identified this incoming email as possible spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  Dear f2fs developers, My name is [Your Name], and I am an
- undergraduate student from Nanjing University of Technology in China. I am
- a newcomer to kernel development, and I am currently learning about f2fs
- and working on e [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ the administrator of that system for details. Content preview:  
+ Content analysis details:   (7.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.160.67 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.160.67 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.160.67 listed in bl.score.senderscore.com]
+ [40.92.18.80 listed in bl.score.senderscore.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.92.18.80 listed in list.dnswl.org]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [40.92.18.80 listed in sa-accredit.habeas.com]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.92.18.80 listed in wl.mailspike.net]
+ 1.2 FORGED_HOTMAIL_RCVD2   hotmail.com 'From' address, but no
+ 'Received:'
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [nzzhao.sigma[at]gmail.com]
+ provider [songfengcn[at]hotmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.160.67 listed in wl.mailspike.net]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1tvSaL-00077i-5h
-Subject: [f2fs-dev] [DISCUSSION] f2fs: GC: Addressing Non-Contiguous Page
- Cache Indices for Large Folio Allocation
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 2.0 PYZOR_CHECK            Listed in Pyzor
+ (https://pyzor.readthedocs.io/en/latest/)
+ 2.3 EMPTY_MESSAGE          Message appears to have no textual parts
+ 1.8 MISSING_SUBJECT        Missing Subject: header
+X-Headers-End: 1tvTsr-0001ng-IR
+Subject: [f2fs-dev] (no subject)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -135,159 +172,11 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Dear f2fs developers,
 
-My name is [Your Name], and I am an undergraduate student from Nanjing
-University of Technology in China. I am a newcomer to kernel
-development, and I am currently learning about f2fs and working on
-enabling large folio support.
-
-After studying the concept of folios, especially after listening to
-Mr. Matthew Wilcox's talk on folios, if I understand correctly, the
-most crucial requirement for folios is that the constituent pages must
-be contiguous in both physical and virtual memory.  Furthermore, the
-indices of these constituent pages within the page cache must also be
-consecutive. For example, an order-2 folio, which comprises four
-pages, must have page cache indices of 0, 1, 2, and 3.
-
-Currently, the f2fs garbage collection code, primarily the
-`gc_data_segment` and `gc_node_segment` functions, still interacts
-with the page cache using the `page` structure directly. However,
-refactoring them to interact with the page cache using folios
-encounters a significant challenge.  Taking `gc_node_segment` as an
-example, in phase 1, it pre-reads all node pages from a victim segment
-into the page cache:
-
-/* f2fs/gc.c */
-/* line: 1024 */
-static int gc_node_segment(struct f2fs_sb_info *sbi,
-struct f2fs_summary *sum, unsigned int segno, int gc_type)
-{
-struct f2fs_summary *entry;
-block_t start_addr;
-int off;
-int phase = 0;
-bool fggc = (gc_type == FG_GC);
-int submitted = 0;
-unsigned int usable_blks_in_seg = f2fs_usable_blks_in_seg(sbi, segno);
-
-start_addr = START_BLOCK(sbi, segno);
-
-next_step:
-entry = sum;
-
-/* .... other code .... */
-
-if (phase == 0) {
-/* read ahead NAT block */
-}
-
-if (phase == 1) {
-/* line: 1063 */
-f2fs_ra_node_page(sbi, nid);
-continue;
-}
-
-/* phase == 2: get node page, perform move node page, let page cache
-* write them back */
-
-}
-
-if (++phase < 3)
-goto next_step;
-
-if (fggc)
-atomic_dec(&sbi->wb_sync_req[NODE]);
-return submitted;
-}
-
-The issue is that `f2fs_ra_node_page` directly inserts a key-value
-pair into the page cache, using the nid as the index (key) and a page
-as the value. However, within a segment, the nids recorded in the
-`f2fs_summary_block` are not guaranteed to be contiguous. This
-directly violates the folio requirement for consecutive page cache
-indices. Although folios can represent a single page (if order is 0),
-which means it's technically feasible to transition the interface from
-`page` to `folio`. I have noticed Mr. Wilcox's recent patches working
-on supporting folios in some GC-related functions.  However, this
-non-contiguous index issue prevents us from allocating higher-order
-folios during the GC process, thus limiting the potential benefits of
-large folios for LRU reclaim and other aspects.
-
-Now, I would like to propose some potential solutions that I have been
-considering to address this issue.  I have two approaches in mind: one
-is a more conservative approach, and the other is a more aggressive
-one. Let's continue to use the pre-reading of node pages in phase 1 of
-`gc_node_segment` as an example.
-
-The more conservative approach would be to, before pre-reading node
-pages, first retrieve all nids from the current summary block. Then,
-we could de-duplicate these nids, sort them, and divide them into
-clusters of as contiguous nids as possible.  For each cluster, we
-could then allocate a folio with an order that best fits the cluster
-size and place it into the page cache.
-
-To illustrate the conservative approach with a more concrete example,
-let's say a summary block contains the following nids: `[5, 3, 6, 1,
-4, 9, 12, 9]`. We can process this list as follows:
- 1. **De-duplication and Sorting:** First, we de-duplicate and sort
-the nids, resulting in: `[1, 3, 4, 5, 6, 9, 12]`.
- 2. **Clustering and Folio Allocation:** We can then identify
-contiguous clusters. In this example, `[3, 4, 5, 6]` forms a
-contiguous sequence. Therefore, we could allocate an order-2 folio to
-accommodate this cluster of four nids. For the remaining nids `[1, 9,
-12]`, we would allocate order-0 folios.
-
-The more aggressive approach would be to remap the nids in the summary
-block during the GC process, mapping them to contiguous integer
-indices. This could potentially allow for better allocation of
-higher-order folios. However, this approach would introduce
-significant additional workload and overhead in multiple dimensions.
-It would require maintaining an index remapping table in memory. Given
-the potentially large number of nids, this might lead to considerable
-memory consumption.
-
-Furthermore, the additional lookup overhead would also be substantial,
-especially considering that f2fs is often used in mobile devices,
-which have stringent real-time performance requirements.  Moreover,
-this approach would involve extensive code modifications.  Using
-[https://elixir.bootlin.com/linux](https://elixir.bootlin.com/linux),
-I found that `f2fs_get_node_page` is called in over 20 locations.
-Implementing this aggressive approach would mean that all these calls
-to `f2fs_get_node_page` would need to perform an extra lookup to
-translate from the nid to the remapped index.
-
-Therefore, I personally question whether introducing such significant
-changes and incurring such substantial overhead is truly worthwhile,
-especially just for the sake of higher-order folios.  Another unique
-issue with this aggressive approach is its lack of generality compared
-to the more conservative one.  The index discontinuity problem we
-discussed actually exists for pre-reading NAT blocks, node blocks, and
-data blocks in the GC process. However, NAT blocks, node blocks, and
-data blocks have different numbering schemes and are managed by
-different address_space page caches.  I have been using node page
-pre-reading as an example for analysis, which implies that this index
-remapping scheme I've conceived might not be suitable for data blocks
-or NAT blocks.
-
-In terms of next steps, I plan to focus on implementing the
-conservative approach and submitting a patch for your review. As a
-newcomer to kernel development, writing robust test cases is still a
-challenge for me. Any pointers or best practices on testing in this
-area would be immensely helpful. My main purpose in writing to the
-list is to seek your expert opinions on two key questions: Firstly,
-from your perspective, is the current inability of GC to allocate
-higher-order folios a significant concern for f2fs? Secondly, I would
-be very grateful for any feedback, especially critical feedback, on my
-proposed solutions. I understand they are just initial ideas and
-likely have room for improvement. Thank you for your time, patience,
-and expertise. I am keen to learn from your feedback and contribute to
-the f2fs community.
-Best regards.
 
 
 _______________________________________________
