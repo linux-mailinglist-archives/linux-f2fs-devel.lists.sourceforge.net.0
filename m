@@ -2,114 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 847F1A6CEEB
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 23 Mar 2025 12:35:29 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0251CA6CFBE
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 23 Mar 2025 15:28:54 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1twJbq-0000wv-FJ;
-	Sun, 23 Mar 2025 11:35:18 +0000
+	id 1twMJg-0006Qs-47;
+	Sun, 23 Mar 2025 14:28:44 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nzzhao.sigma@gmail.com>) id 1twJbo-0000wm-P4
+ (envelope-from <willy@infradead.org>) id 1twMJd-0006Qk-KV
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 23 Mar 2025 11:35:16 +0000
+ Sun, 23 Mar 2025 14:28:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vG33RxBwHa70Jw48weg1wd26DQIu8TvJqTqy3Mcpjcw=; b=Lh2atjz+gUwuR6cuSk6n9TEyGH
- 6KKcDPNUohKLu4ysS8k0y2EQLcI1TPIGRdBwzmIgmNxACDYtJE+mipiUr8U7ewgyZxgxZETVXMRRN
- Mhobip0GRJuRdYfRgv5vKJBYOzFDr+RDRrk0dbMo7267HbS106m0vRu0xDTy+YA3Crqw=;
+ bh=CTqjP0pu5/py1p0o6HQAaOkcAajxuHgEAqXR8efZbpY=; b=bHHqExGQ2mxkwNbhUe5TBdNtg5
+ N7LDWxlUPATDwJTtlc1d4RdLu5+v3Iu9YBKhBw24jlLuivVL4Jk0GOdsJlc0IcIfJBEQq/BHwsjRs
+ RCUa4/pDDzlA6gnoFIm1DFXVf0bDkRQHriTQZQWyK//9hTgz57VU0ORjRPQcpIRJqlXc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:MIME-Version:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=vG33RxBwHa70Jw48weg1wd26DQIu8TvJqTqy3Mcpjcw=; b=j
- ylhJhXaiyjXcXuzgemSgpWSXTNx0F2FN332PCCLNzfO6zcj5wtsQ4UWnGrb5ZRltWGpiub8p4l8tP
- mM77BcxPkeksxcvXesJQglKenjTzKregTMR8ytoCw5LbNTjjHs0xQ0szWy+sbanNTnrblI6NCp02W
- ohPRIjl/2zrtc5yo=;
-Received: from mail-oo1-f66.google.com ([209.85.161.66])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=CTqjP0pu5/py1p0o6HQAaOkcAajxuHgEAqXR8efZbpY=; b=izT8Qo6vcMf+13vePikfTvfePG
+ iFnLtjV0J9wLr+GobrBzrz+giVrMph4PSt/nqXvErJzhr+60kevf9PhToFEpKlOP80QKRgxBnHOHn
+ YWXCQX0vl3HwRJSLEVdHam62u0QGeHvtQ+nxQ6B9KhaXR8SQnwgwyt/LLcvBPtU0vnPY=;
+Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1twJbo-0007BU-54 for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 23 Mar 2025 11:35:16 +0000
-Received: by mail-oo1-f66.google.com with SMTP id
- 006d021491bc7-602224af11bso1732499eaf.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 23 Mar 2025 04:35:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742729710; x=1743334510; darn=lists.sourceforge.net;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=vG33RxBwHa70Jw48weg1wd26DQIu8TvJqTqy3Mcpjcw=;
- b=IzCCzsLJXEG5xhUOdbR4+yykoQEIR1PRWFOARPruoSFBwOENYtSnbm8QzKNPz1Ie0o
- oQ68nnU+J9DPpL4WXlQHGwgPUVL7c43uE/o0DHwVaeefPduaG+Zee+7/RTSrWG+01ER7
- UfoRG6hIoMEi1XqBkXfHsj/7sdfOq/GJACuqpjGr7OOq863TQ6sQ88m9B6CCwecx345G
- yg5K924ZDXHyrlU+3MZsOEnUTPujWUbFxRk1Ovf5Wjr+9mWr/DLe4ugGoSbQT/jladO+
- YaVWqlhkK8dFrFcMt3fetItK5JOj5mN2nsA1j54Y2ccbhfGO6xhz0hgusq0J16gairOs
- +8XA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742729710; x=1743334510;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vG33RxBwHa70Jw48weg1wd26DQIu8TvJqTqy3Mcpjcw=;
- b=DPwL3rOw/Dc9NLyBkCla5en7uRipoWzX5CK0BqWN0Uo6zl4MkIAu1rU82ZRnZTDziM
- xQRKPD/iW7dkGqEUMiyEun1Ej/qQJSJg0EPdsD2VXbK3wKrh8QJYevBY7/KIR99cG2qn
- J/04fHrtlJJBg5oHfN4t7FO/uX4/lu1vDuMiDwcgoY2gcEblxzhFJ7B/twMvdaaGw3cN
- AJW7N8Q7BRnSIdqSd/8WEIIiAUTPYGZvQDAsE1GYMIE6ulE/qVr08lnc3dFvvMaZzaDE
- gVb5mBVR0AXRPkw0kEngqAqYqajUykNp83xVsuWSjVstHDH24j0Iq5Nb4p5OyyH50xNA
- BrRg==
-X-Gm-Message-State: AOJu0YxLnKYrfN0GRd2blTgv6dBlkRUjXSmI6Vn5AyZ7slg731PC/4Ai
- gq9IrmLnt++UsoAalrO7D9pj1PyNtdRIZoBX/FnmUcdKNDOoY8VMWBtzBrqtgLEH/U4U1Z/w5s8
- oIe0NjEQfgVpcZjWcdjLrZqLehz5zBph1lBfVeg==
-X-Gm-Gg: ASbGncuFfFUCbb4yGwiYq4JmXa0L1PGpT2IqLU3uEsdHIy4LynjtVCKCPRPJk4gFTix
- kj5iWScJxakuCpepl4PysHgHoR+LU/MsvUnE7AWegMtTYQNh9xGoyXmBFAqxIaZyJA1A0BVQmCU
- uwBAJS25y7y1rfB39Bs88etObTOwE=
-X-Google-Smtp-Source: AGHT+IF0dM64YGcU3yY5TDvaEWU2GZ2u5fvzqx95UXCG0yAFljJiBQQwXUwT8kVchoEQADzwODGepSBXX2aJ0v7M6yU=
-X-Received: by 2002:a05:6870:4686:b0:29d:c624:7c3d with SMTP id
- 586e51a60fabf-2c7805046c0mr6144550fac.32.1742729710397; Sun, 23 Mar 2025
- 04:35:10 -0700 (PDT)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1twMJX-0008Il-DS for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 23 Mar 2025 14:28:42 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=CTqjP0pu5/py1p0o6HQAaOkcAajxuHgEAqXR8efZbpY=; b=gKDFvi7u0cEAh1Gs42QaKro+XD
+ il/rcO56sQ/sLCMARlDrkw1ZaV9ixbvG7PX48fTVyiRB2XuXM6w5HbM8/HvzApRHbmu4BQl8VrunS
+ /hu/JV8ih8tcBChHVRkV9lCTyovlX7rrpAq1Vd4E2UpR6S37m5TphhC/yrVAWIlB8daMBi29A3GM/
+ pGfrind04fZtKKcDQDChPJjux57WAHkjX6Nm+Td5o6PlTxnSPEEwH3rFVcD75s7c1BbfEHbR+gc7Z
+ z14aoV9PdztJAMr5I34Pcg8t3RuahWutYIXnKuSZbtLZkYaFWMNI0RETy5zNsvR5UuN8W6gdHDiZ0
+ li72sP4Q==;
+Received: from willy by casper.infradead.org with local (Exim 4.98 #2 (Red Hat
+ Linux)) id 1twMJP-00000006gA7-3OrP; Sun, 23 Mar 2025 14:28:27 +0000
+Date: Sun, 23 Mar 2025 14:28:27 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Nanzhe Zhao <nzzhao.sigma@gmail.com>
+Message-ID: <Z-Aai24gPXWQp8qi@casper.infradead.org>
+References: <CAMLCH1FEuoDxFFQ8HuUdBDMfzsyaS2LWyVh+eyGCpgxnKGa7rA@mail.gmail.com>
 MIME-Version: 1.0
-From: Nanzhe Zhao <nzzhao.sigma@gmail.com>
-Date: Sun, 23 Mar 2025 19:34:59 +0800
-X-Gm-Features: AQ5f1Jo1W6vsPMM2-iXx8A7YDl1JreiXd1bLFVmUu9stNHz8jduh6EEGwS0HCY8
-Message-ID: <CAMLCH1FEuoDxFFQ8HuUdBDMfzsyaS2LWyVh+eyGCpgxnKGa7rA@mail.gmail.com>
-To: willy@infradead.org
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <CAMLCH1FEuoDxFFQ8HuUdBDMfzsyaS2LWyVh+eyGCpgxnKGa7rA@mail.gmail.com>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Dear Mr.Matthew I hope this email finds you well. I've
- recently
- been studying your patch 'f2fs: Remove uses of writepage'. I understand the
- rationale behind it, especially with the page cache and file I/O increasingly
- adopting folios in place of the [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Sun, Mar 23, 2025 at 07:34:59PM +0800, Nanzhe Zhao wrote:
+ > I've recently been studying your patch 'f2fs: Remove uses of > writepage'.
+ I understand the rationale behind it, especially with the > pa [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.161.66 listed in sa-trusted.bondedsender.org]
+ [90.155.50.34 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.161.66 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [90.155.50.34 listed in bl.score.senderscore.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [90.155.50.34 listed in list.dnswl.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [nzzhao.sigma[at]gmail.com]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -117,14 +93,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.161.66 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.161.66 listed in wl.mailspike.net]
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1twJbo-0007BU-54
-Subject: [f2fs-dev] Inquiry regarding plans on vmscan pageout supporting fs
- writepages
+X-Headers-End: 1twMJX-0008Il-DS
+Subject: Re: [f2fs-dev] Inquiry regarding plans on vmscan pageout supporting
+ fs writepages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -141,30 +112,49 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Dear Mr.Matthew
+On Sun, Mar 23, 2025 at 07:34:59PM +0800, Nanzhe Zhao wrote:
+> I've recently been studying your patch 'f2fs: Remove uses of
+> writepage'.  I understand the rationale behind it, especially with the
+> page cache and file I/O increasingly adopting folios in place of the
+> traditional page structure. This trend indeed renders the legacy
+> `writepage` function in file systems not only unnecessary but
+> potentially detrimental.  This is particularly true for file systems
+> like F2FS, which, as you know, has already fully implemented the
+> `writepages` function for all its `address_space_operations`.
+> 
+> However, as you've pointed out, the `pageout` function within vmscan,
+> which `kswapd` uses for dirty page writeback, doesn't currently
+> support calling the file system's
+> `address_space_operations->writepages`.  I was wondering if you have
+> any plans to improve this situation, and if so, could you perhaps
+> share some insights into the general direction or approach you might
+> be considering?
 
-I hope this email finds you well.
+commit 21b4ee7029c9
+Author: Dave Chinner <dchinner@redhat.com>
+Date:   Tue Aug 10 18:33:41 2021 -0700
 
-I've recently been studying your patch 'f2fs: Remove uses of
-writepage'.  I understand the rationale behind it, especially with the
-page cache and file I/O increasingly adopting folios in place of the
-traditional page structure. This trend indeed renders the legacy
-`writepage` function in file systems not only unnecessary but
-potentially detrimental.  This is particularly true for file systems
-like F2FS, which, as you know, has already fully implemented the
-`writepages` function for all its `address_space_operations`.
+    xfs: drop ->writepage completely
 
-However, as you've pointed out, the `pageout` function within vmscan,
-which `kswapd` uses for dirty page writeback, doesn't currently
-support calling the file system's
-`address_space_operations->writepages`.  I was wondering if you have
-any plans to improve this situation, and if so, could you perhaps
-share some insights into the general direction or approach you might
-be considering?
+    ->writepage is only used in one place - single page writeback from
+    memory reclaim. We only allow such writeback from kswapd, not from
+    direct memory reclaim, and so it is rarely used. When it comes from
+    kswapd, it is effectively random dirty page shoot-down, which is
+    horrible for IO patterns. We will already have background writeback
+    trying to clean all the dirty pages in memory as efficiently as
+    possible, so having kswapd interrupt our well formed IO stream only
+    slows things down. So get rid of xfs_vm_writepage() completely.
 
-Thank you for your time and consideration.
+    Signed-off-by: Dave Chinner <dchinner@redhat.com>
+    [djwong: forward port to 5.15]
+    Reviewed-by: Darrick J. Wong <djwong@kernel.org>
+    Signed-off-by: Darrick J. Wong <djwong@kernel.org>
 
-Best regards,
+
+https://lore.kernel.org/linux-fsdevel/20181109151239.GD9153@infradead.org/
+
+There's probably some other good documentation around why we're doing
+this, but this is all I have handy.
 
 
 _______________________________________________
