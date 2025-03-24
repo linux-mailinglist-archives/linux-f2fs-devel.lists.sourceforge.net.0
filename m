@@ -2,112 +2,134 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF221A6D0CB
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 23 Mar 2025 20:30:47 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C7FBA6D298
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Mar 2025 01:47:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1twR1p-0000wj-Qw;
-	Sun, 23 Mar 2025 19:30:38 +0000
+	id 1twVyY-0007ot-5T;
+	Mon, 24 Mar 2025 00:47:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3UGHgZwkbANkNTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1twR1n-0000wQ-EI for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 23 Mar 2025 19:30:36 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <nzzhao.sigma@gmail.com>) id 1twVyX-0007on-9s
+ for Linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Mar 2025 00:47:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NBdbNcX35k7KZavDe8NK2BNik7XoCQAB+GSEaX7GVKw=; b=DYKaAvfMNPpZ8oYktCTnlUQt5/
- jvdfYWIOSGtzU+Ne1ordclGY1uCU89n1G85+05hG1IZbhe8h0+6YnF1/Kw3XA+kJhwtMuKtjkA5qu
- n7mGC154o3PtCH4KD0dAVl8Y7Fp8VOH0zK07+fiDMpbP8Lui4zjYx+YX5fuuMKEUATEc=;
+ bh=vQQKvP5R8luVRxbpNB9L+v+/4SSjmK/Mdr0BaGbE3hk=; b=Z4TtfOzimQTCnIRxhMM3HK9i/M
+ RYdyBgU3jPoiFaIjSspKw2rMANyxK9Vt0MCQSIr2Z7s5qjJGx4lOqffCf4peqTwxmyayKglQ5IB2v
+ ErvSgrN99I61ShGGk9LmR8edEGnxVUatkC9j1uq4B0eUEqbrEoeWaH0xPv+wwB+vp8kQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=NBdbNcX35k7KZavDe8NK2BNik7XoCQAB+GSEaX7GVKw=; b=V
- brmFXGDGdp6Jeyf5k8ep7HCNInFLP9c1lJlx17Xcf94Ad5SbEiLH5euwrFZ9FJbkFDYgf5Cj+Bkmm
- SgS1mMG2wi/PAxVJhFPd9VDdG6M8qeWP3iWQjTdrLuAre2ZA3/RxR497CM295O5QlMoIfi7Mg5lnM
- Nfx14EF15LPBpkSE=;
-Received: from mail-io1-f77.google.com ([209.85.166.77])
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=vQQKvP5R8luVRxbpNB9L+v+/4SSjmK/Mdr0BaGbE3hk=; b=mabKMdb+7qm9tJAgbU27oB2X15
+ iuPUE7C7VH/90r5Bj6JuMb49kcWrZITisRZl796jB4YxXXI4bcV4ogd2x7GchAlgCCHoNGC0fKG1M
+ QiwmDyb2XCKz0IJwnhmGnR4VwmYU423dhVeRaDKqM/RdLObCAhXmDfoRpAqjhldMnl40=;
+Received: from mail-oa1-f67.google.com ([209.85.160.67])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1twR1n-0008N0-8v for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 23 Mar 2025 19:30:36 +0000
-Received: by mail-io1-f77.google.com with SMTP id
- ca18e2360f4ac-85dad593342so340442739f.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 23 Mar 2025 12:30:35 -0700 (PDT)
+ id 1twVyR-0000CS-KI for Linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Mar 2025 00:47:33 +0000
+Received: by mail-oa1-f67.google.com with SMTP id
+ 586e51a60fabf-2c12f9e9449so2016072fac.3
+ for <Linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 23 Mar 2025 17:47:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1742777237; x=1743382037; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vQQKvP5R8luVRxbpNB9L+v+/4SSjmK/Mdr0BaGbE3hk=;
+ b=QH88YiWTWxr5XnU9c+S1pPDSy0Y3FGuTUmkqZXmQIR82bQqa6fI0qVnHGx+Fe8FLMa
+ Ab0izhd7SplLgHEanL2yxLIze73rdM0TY7DgYx5YPOTAkwda2KWn6Gg5/jnwAqopqYA1
+ lYcx5UAxVb39QX1PuWha+6UlH3+zvB5T9N80/sY+ABwNf9+ZeHhgcB2a9HXBDYdVsxBw
+ l2HhRCzW1sz7DgOLLie7M5HxhzDwcRL9NbWpqIcPOuOqcQ0sJQSQJGGykArJAQpBzsnR
+ Pa7BjYT0xkY1SrfAYFNrxsDlpfL+9xQPn5IlxhaD+LqN22ZCSLU9GUT+7TuzenWCBKJf
+ TPug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742758224; x=1743363024;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=NBdbNcX35k7KZavDe8NK2BNik7XoCQAB+GSEaX7GVKw=;
- b=Ix4oj7Qjf2ohyLsFKCSgqz3apfAPclABumurNXbfQ/Q6UdM+tjvkGniKBQoagN2VM5
- 8X452zZDO18A+ta+LMXHTCMkkrMqwNZYKIn7TPjllktMqh7bZ05+nR/B0d1dRU6nJt1R
- BeSj5HcWkHHwck8fxMx0O5QolwKjOGXrB3HgzlJeBm5UrEKOgHbYhnUahBCSJkxnDQMX
- +Os6bShoD4XGXV6XQFpz0doULGIfp3zbt0n6vlmaVlptY58BNEPu6LAnXPdjKCdLxVMR
- 7LefH1grgrvLfILDRxDGaF+ZyUm2W76p58tDYG8dgOrqeyANKRgc7qRdXLoxxZ2Q3QZo
- D65w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWPfO7e1J1ZzQcqDDLKFDEY2W5C9pI1dnmy3S48nyG5wnCD2Aco2rA+SzBzcILx75vtsAnCXfq0JIWwmdiNWVYQ@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzXjKWv3a37zZdfCv0JySQgt53jfndWeitmQeBW4JlsZ3IDCXuV
- nlCIL4N3PEMvD2XqxeQ7Jb5x70lMvIDIFURr876uRYBg/fFQ0tZ+eWoVngpYuL0cQR0Y7eyzIWq
- yC+YguzXuGBrER4jXwCxMTsHF23/BKsWhUH1ko2pnP4R874nUREacyeA=
-X-Google-Smtp-Source: AGHT+IGdAfspnFJau/nx7QI/bP4UmwZEZnEWUxrdOwsULAo5UQUbuqNUGzIAxpI6B8ihAdzW+mZOGNsg28jHvVx91uf45AZIOI/K
+ d=1e100.net; s=20230601; t=1742777237; x=1743382037;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vQQKvP5R8luVRxbpNB9L+v+/4SSjmK/Mdr0BaGbE3hk=;
+ b=RWcmTYnn95kzL95t3vGo5jfbeD6DV2yoYr3b9yyAkuEoWMngtZCeofVJu/O2SofSZU
+ O3DNGqaa+Wfk0fAjYDK25dgTpkmFBtfg12d9esNnix2kKaUq1a3RAd8GdnYxZ9UTfbHU
+ 9OZ+tAJugdPrW82A5eyxjlKg5ehmUCxrJy+4fJk0984WxOze3EvdFLbsv1WliuG+dS1O
+ n8oGEwu9ud4CNRwRmkgeGGrK+ue+1S35cnmgQPUnzGKw7mNvSqpUBzQp0TGLaoVapPwc
+ i9DiCYdnQsH9JWWH7MPD44ZzgoTs612ip9ZlBDkYYnfDPdXeZiVsQzBRFgzmSpRCfBr/
+ 7wng==
+X-Gm-Message-State: AOJu0Yzj/wzghh5EIZn4cmqtCyXkiX2VZTJjjJTGpzNDB0ewTSfJRJMO
+ 5MeH5L1upd7dMAanb5o36pbFxW2UxOun0KqMZDDyO1aoUkgeoZ6tKAJSRQInjSk9BbXIYoQGlgk
+ unNV6v8VCf87pOXFJZBrktNQGR7Ln1HwEKeWBtA==
+X-Gm-Gg: ASbGncthqpWyJp7XTfWVXmLKh3XtIgp0CO/FnLixzPGqcijB8rhMjEWBl6BWHDgaj+t
+ /Sx8ad1LFUY8Um72Fb9DUsuoKEELAbf8/knEWVolKWE1nD8DMDmAhnCNEo/OO+AZfoHF/RF+ztR
+ UdJ9O80p6Em9qv0YW+EqDeGFUxJ/Y=
+X-Google-Smtp-Source: AGHT+IHdn10GojP/SGSwOE4gTYXWjJduJ0jsS/ILcnm3mSJx+6n722jMETSN07CQDbzJqgqEmo2kgSUhRH4oNrrezsQ=
+X-Received: by 2002:a05:6871:107:b0:2bc:9787:affe with SMTP id
+ 586e51a60fabf-2c78028974bmr6718394fac.10.1742777236756; Sun, 23 Mar 2025
+ 17:47:16 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:19ce:b0:3d4:6dd2:3989 with SMTP id
- e9e14a558f8ab-3d5961865f7mr102804875ab.20.1742758224512; Sun, 23 Mar 2025
- 12:30:24 -0700 (PDT)
-Date: Sun, 23 Mar 2025 12:30:24 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <67e06150.050a0220.21942d.0005.GAE@google.com>
-From: syzbot <syzbot+cc448dcdc7ae0b4e4ffa@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.4 (/)
+References: <CAMLCH1FEuoDxFFQ8HuUdBDMfzsyaS2LWyVh+eyGCpgxnKGa7rA@mail.gmail.com>
+ <Z-Aai24gPXWQp8qi@casper.infradead.org>
+In-Reply-To: <Z-Aai24gPXWQp8qi@casper.infradead.org>
+From: Nanzhe Zhao <nzzhao.sigma@gmail.com>
+Date: Mon, 24 Mar 2025 08:47:05 +0800
+X-Gm-Features: AQ5f1Jo6dtgYXcwlTLKzS5eo5IWJmlCDJRYikRcngGTd0FIUnv2lA3JssssPxR4
+Message-ID: <CAMLCH1HsT+AVZSXAh8Q7Zr9C3SzaegfMdE6fzKp0X0FDt9JSbA@mail.gmail.com>
+To: Matthew Wilcox <willy@infradead.org>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 81e4f8d68c66
- Merge tag 'pmdomain-v6.14-rc4' of git://git.k.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=139a6004580000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.4 points, 6.0 required)
+ Content preview:  Thank you very much for your prompt and insightful reply!
+ I truly appreciate you taking the time to address my question so quickly.
+ I understand now. It seems the kernel's flusher threads are indeed sufficient
+ for handling dirty page writeback effectively. And I realize that they
+ ultimately call `do_writepages` to execute the file [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [nzzhao.sigma[at]gmail.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.77 listed in bl.score.senderscore.com]
+ [209.85.160.67 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.77 listed in sa-accredit.habeas.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.77 listed in wl.mailspike.net]
- 0.1 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [209.85.160.67 listed in sa-accredit.habeas.com]
+ -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.160.67 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.77 listed in list.dnswl.org]
-X-Headers-End: 1twR1n-0008N0-8v
-Subject: [f2fs-dev] [syzbot] [f2fs?] INFO: task hung in f2fs_grab_cache_page
+ no trust [209.85.160.67 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1twVyR-0000CS-KI
+Subject: Re: [f2fs-dev] Inquiry regarding plans on vmscan pageout supporting
+ fs writepages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,163 +141,71 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
-
-syzbot found the following issue on:
-
-HEAD commit:    81e4f8d68c66 Merge tag 'pmdomain-v6.14-rc4' of git://git.k..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=139a6004580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=27515cfdbafbb90d
-dashboard link: https://syzkaller.appspot.com/bug?extid=cc448dcdc7ae0b4e4ffa
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=12756e98580000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=10e3744c580000
-
-Downloadable assets:
-disk image (non-bootable): https://storage.googleapis.com/syzbot-assets/7feb34a89c2a/non_bootable_disk-81e4f8d6.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/285c520dda1c/vmlinux-81e4f8d6.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/048e25a8dfed/bzImage-81e4f8d6.xz
-mounted in repro: https://storage.googleapis.com/syzbot-assets/52a1b1c7431f/mount_0.gz
-  fsck result: failed (log: https://syzkaller.appspot.com/x/fsck.log?x=159a6004580000)
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+cc448dcdc7ae0b4e4ffa@syzkaller.appspotmail.com
-
-INFO: task syz-executor140:5308 blocked for more than 143 seconds.
-      Not tainted 6.14.0-rc7-syzkaller-00069-g81e4f8d68c66 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor140 state:D stack:24016 pid:5308  tgid:5308  ppid:5306   task_flags:0x400140 flags:0x00000006
-Call Trace:
- <TASK>
- context_switch kernel/sched/core.c:5378 [inline]
- __schedule+0x190e/0x4c90 kernel/sched/core.c:6765
- __schedule_loop kernel/sched/core.c:6842 [inline]
- schedule+0x14b/0x320 kernel/sched/core.c:6857
- io_schedule+0x8d/0x110 kernel/sched/core.c:7690
- folio_wait_bit_common+0x839/0xee0 mm/filemap.c:1317
- __folio_lock mm/filemap.c:1664 [inline]
- folio_lock include/linux/pagemap.h:1163 [inline]
- __filemap_get_folio+0x147/0xb40 mm/filemap.c:1917
- pagecache_get_page+0x2c/0x130 mm/folio-compat.c:87
- find_get_page_flags include/linux/pagemap.h:842 [inline]
- f2fs_grab_cache_page+0x2b/0x320 fs/f2fs/f2fs.h:2776
- __get_node_page+0x131/0x11b0 fs/f2fs/node.c:1463
- read_xattr_block+0xfb/0x190 fs/f2fs/xattr.c:306
- lookup_all_xattrs fs/f2fs/xattr.c:355 [inline]
- f2fs_getxattr+0x676/0xf70 fs/f2fs/xattr.c:533
- __f2fs_get_acl+0x52/0x870 fs/f2fs/acl.c:179
- f2fs_acl_create fs/f2fs/acl.c:375 [inline]
- f2fs_init_acl+0xd7/0x9b0 fs/f2fs/acl.c:418
- f2fs_init_inode_metadata+0xa0f/0x1050 fs/f2fs/dir.c:539
- f2fs_add_inline_entry+0x448/0x860 fs/f2fs/inline.c:666
- f2fs_add_dentry+0xba/0x1e0 fs/f2fs/dir.c:765
- f2fs_do_add_link+0x28c/0x3a0 fs/f2fs/dir.c:808
- f2fs_add_link fs/f2fs/f2fs.h:3616 [inline]
- f2fs_mknod+0x2e8/0x5b0 fs/f2fs/namei.c:766
- vfs_mknod+0x36d/0x3b0 fs/namei.c:4191
- unix_bind_bsd net/unix/af_unix.c:1286 [inline]
- unix_bind+0x563/0xe30 net/unix/af_unix.c:1379
- __sys_bind_socket net/socket.c:1817 [inline]
- __sys_bind+0x1e4/0x290 net/socket.c:1848
- __do_sys_bind net/socket.c:1853 [inline]
- __se_sys_bind net/socket.c:1851 [inline]
- __x64_sys_bind+0x7a/0x90 net/socket.c:1851
- do_syscall_x64 arch/x86/entry/common.c:52 [inline]
- do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7f31e6165dc9
-RSP: 002b:00007fff2bc5b438 EFLAGS: 00000246 ORIG_RAX: 0000000000000031
-RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f31e6165dc9
-RDX: 000000000000006e RSI: 0000400000000080 RDI: 0000000000000004
-RBP: 00000000000014bb R08: 0000000000000000 R09: 0000000000000000
-R10: 000000000000557f R11: 0000000000000246 R12: 00007fff2bc5b480
-R13: 00007fff2bc5b560 R14: 431bde82d7b634db R15: 00007f31e61af01d
- </TASK>
-
-Showing all locks held in the system:
-1 lock held by khungtaskd/26:
- #0: ffffffff8eb393e0 (rcu_read_lock){....}-{1:3}, at: rcu_lock_acquire include/linux/rcupdate.h:337 [inline]
- #0: ffffffff8eb393e0 (rcu_read_lock){....}-{1:3}, at: rcu_read_lock include/linux/rcupdate.h:849 [inline]
- #0: ffffffff8eb393e0 (rcu_read_lock){....}-{1:3}, at: debug_show_all_locks+0x55/0x2a0 kernel/locking/lockdep.c:6746
-3 locks held by kworker/u4:7/1038:
- #0: ffff888030f3a148 ((wq_completion)writeback){+.+.}-{0:0}, at: process_one_work kernel/workqueue.c:3213 [inline]
- #0: ffff888030f3a148 ((wq_completion)writeback){+.+.}-{0:0}, at: process_scheduled_works+0x98b/0x18e0 kernel/workqueue.c:3319
- #1: ffffc9000256fc60 ((work_completion)(&(&wb->dwork)->work)){+.+.}-{0:0}, at: process_one_work kernel/workqueue.c:3214 [inline]
- #1: ffffc9000256fc60 ((work_completion)(&(&wb->dwork)->work)){+.+.}-{0:0}, at: process_scheduled_works+0x9c6/0x18e0 kernel/workqueue.c:3319
- #2: ffff888011e7c0e0 (&type->s_umount_key#42){.+.+}-{4:4}, at: super_trylock_shared+0x22/0xf0 fs/super.c:562
-2 locks held by getty/5107:
- #0: ffff88801f4d90a0 (&tty->ldisc_sem){++++}-{0:0}, at: tty_ldisc_ref_wait+0x25/0x70 drivers/tty/tty_ldisc.c:243
- #1: ffffc9000019b2f0 (&ldata->atomic_read_lock){+.+.}-{4:4}, at: n_tty_read+0x616/0x1770 drivers/tty/n_tty.c:2211
-5 locks held by syz-executor140/5308:
- #0: ffff888011e7c420 (sb_writers#10){.+.+}-{0:0}, at: mnt_want_write+0x3f/0x90 fs/namespace.c:547
- #1: ffff888045a992d8 (&type->i_mutex_dir_key#6/1){+.+.}-{4:4}, at: inode_lock_nested include/linux/fs.h:912 [inline]
- #1: ffff888045a992d8 (&type->i_mutex_dir_key#6/1){+.+.}-{4:4}, at: filename_create+0x260/0x540 fs/namei.c:4082
- #2: ffff888011fa03b0 (&sbi->cp_rwsem){.+.+}-{4:4}, at: f2fs_down_read fs/f2fs/f2fs.h:2175 [inline]
- #2: ffff888011fa03b0 (&sbi->cp_rwsem){.+.+}-{4:4}, at: f2fs_lock_op fs/f2fs/f2fs.h:2224 [inline]
- #2: ffff888011fa03b0 (&sbi->cp_rwsem){.+.+}-{4:4}, at: f2fs_mknod+0x1f8/0x5b0 fs/f2fs/namei.c:765
- #3: ffff888045a99948 (&fi->i_xattr_sem){.+.+}-{4:4}, at: f2fs_down_read fs/f2fs/f2fs.h:2175 [inline]
- #3: ffff888045a99948 (&fi->i_xattr_sem){.+.+}-{4:4}, at: f2fs_add_dentry+0x9f/0x1e0 fs/f2fs/dir.c:764
- #4: ffff888045a99f70 (&fi->i_sem/1){+.+.}-{4:4}, at: f2fs_down_write_nested fs/f2fs/f2fs.h:2202 [inline]
- #4: ffff888045a99f70 (&fi->i_sem/1){+.+.}-{4:4}, at: f2fs_add_inline_entry+0x431/0x860 fs/f2fs/inline.c:664
-2 locks held by f2fs_ckpt-7:0/5310:
- #0: ffff888011fa1350 (&sbi->gc_lock){+.+.}-{4:4}, at: f2fs_down_write fs/f2fs/f2fs.h:2191 [inline]
- #0: ffff888011fa1350 (&sbi->gc_lock){+.+.}-{4:4}, at: __write_checkpoint_sync fs/f2fs/checkpoint.c:1783 [inline]
- #0: ffff888011fa1350 (&sbi->gc_lock){+.+.}-{4:4}, at: __checkpoint_and_complete_reqs+0xcf/0x3b0 fs/f2fs/checkpoint.c:1803
- #1: ffff888011fa0318 (&sbi->cp_global_sem){+.+.}-{4:4}, at: f2fs_down_write fs/f2fs/f2fs.h:2191 [inline]
- #1: ffff888011fa0318 (&sbi->cp_global_sem){+.+.}-{4:4}, at: f2fs_write_checkpoint+0x21f/0x1c80 fs/f2fs/checkpoint.c:1653
-
-=============================================
-
-NMI backtrace for cpu 0
-CPU: 0 UID: 0 PID: 26 Comm: khungtaskd Not tainted 6.14.0-rc7-syzkaller-00069-g81e4f8d68c66 #0
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2~bpo12+1 04/01/2014
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:94 [inline]
- dump_stack_lvl+0x241/0x360 lib/dump_stack.c:120
- nmi_cpu_backtrace+0x49c/0x4d0 lib/nmi_backtrace.c:113
- nmi_trigger_cpumask_backtrace+0x198/0x320 lib/nmi_backtrace.c:62
- trigger_all_cpu_backtrace include/linux/nmi.h:162 [inline]
- check_hung_uninterruptible_tasks kernel/hung_task.c:236 [inline]
- watchdog+0x1058/0x10a0 kernel/hung_task.c:399
- kthread+0x7a9/0x920 kernel/kthread.c:464
- ret_from_fork+0x4b/0x80 arch/x86/kernel/process.c:148
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:244
- </TASK>
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+VGhhbmsgeW91IHZlcnkgbXVjaCBmb3IgeW91ciBwcm9tcHQgYW5kIGluc2lnaHRmdWwgcmVwbHkh
+IEkgdHJ1bHkKYXBwcmVjaWF0ZSB5b3UgdGFraW5nIHRoZSB0aW1lIHRvIGFkZHJlc3MgbXkgcXVl
+c3Rpb24gc28gcXVpY2tseS4KCkkgdW5kZXJzdGFuZCBub3cuIEl0IHNlZW1zIHRoZSBrZXJuZWwn
+cyBmbHVzaGVyIHRocmVhZHMgYXJlIGluZGVlZApzdWZmaWNpZW50IGZvciBoYW5kbGluZyBkaXJ0
+eSBwYWdlIHdyaXRlYmFjayBlZmZlY3RpdmVseS4gQW5kIEkKcmVhbGl6ZSB0aGF0IHRoZXkgdWx0
+aW1hdGVseSBjYWxsIGBkb193cml0ZXBhZ2VzYCB0byBleGVjdXRlIHRoZSBmaWxlCnN5c3RlbSdz
+IHNwZWNpZmljIGB3cml0ZXBhZ2VzYCBpbXBsZW1lbnRhdGlvbi4gIEl0J3MgYWxzbyBjbGVhciB0
+aGF0CnRoZSBzY2VuYXJpbyB3aGVyZSBga3N3YXBkYCBpbml0aWF0ZXMgZGlydHkgcGFnZSB3cml0
+ZWJhY2sgaXMKcmVsYXRpdmVseSBpbmZyZXF1ZW50LgoKS25vd2luZyB0aGF0IHRoZSBGMkZTIGNv
+bW11bml0eSBpcyBjdXJyZW50bHkgaGVhdmlseSBpbnZlc3RlZCBpbiB0aGUKZm9saW8gc3VwcG9y
+dCBlZmZvcnQsIEkgd2FudGVkIHRvIGFsc28gYnJpbmcgdXAgc29tZSBvYnNlcnZhdGlvbnMgYW5k
+CnF1ZXN0aW9ucyByZWdhcmRpbmcgZm9saW8gc3VwcG9ydCBpbiBGMkZTIGdhcmJhZ2UgY29sbGVj
+dGlvbi4KU3BlY2lmaWNhbGx5LCBJJ20gY29uY2VybmVkIGFib3V0IHRoZSBjaGFsbGVuZ2Ugb2Yg
+YWxsb2NhdGluZwpoaWdoLW9yZGVyIGZvbGlvcyBkdWUgdG8gbm9uLWNvbnRpZ3VvdXMgaW5kZXgg
+cmFuZ2VzIGR1cmluZyB0aGUgR0MKcHJvY2Vzcy4gSSd2ZSBpbml0aWF0ZWQgYSBkaXNjdXNzaW9u
+IGFib3V0IHRoaXMgaXNzdWUgb24gdGhlIGYyZnMKbWFpbGluZyBsaXN0IGluIGFuIGVtYWlsCnRo
+cmVhZC5baHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtZjJmcy1kZXZlbC9DQU1MQ0gxRjhu
+aXozcWlmdTlwdDZDM3lMaG9uYWREPWZlYVB0V0toQ2FSRDhGUEpoUmdAbWFpbC5nbWFpbC5jb20v
+VC8jdV0KSSB3b3VsZCBiZSBncmF0ZWZ1bCBpZiB5b3UgYW5kIG90aGVyIGRldmVsb3BlcnMgY291
+bGQgdGFrZSBhIGxvb2sgYW5kCnNoYXJlIHlvdXIgdGhvdWdodHMuCgpCZXN0IHJlZ2FyZHMsCgpN
+YXR0aGV3IFdpbGNveCA8d2lsbHlAaW5mcmFkZWFkLm9yZz4g5LqOMjAyNeW5tDPmnIgyM+aXpeWR
+qOaXpSAyMjoyOOWGmemBk++8mgo+Cj4gT24gU3VuLCBNYXIgMjMsIDIwMjUgYXQgMDc6MzQ6NTlQ
+TSArMDgwMCwgTmFuemhlIFpoYW8gd3JvdGU6Cj4gPiBJJ3ZlIHJlY2VudGx5IGJlZW4gc3R1ZHlp
+bmcgeW91ciBwYXRjaCAnZjJmczogUmVtb3ZlIHVzZXMgb2YKPiA+IHdyaXRlcGFnZScuICBJIHVu
+ZGVyc3RhbmQgdGhlIHJhdGlvbmFsZSBiZWhpbmQgaXQsIGVzcGVjaWFsbHkgd2l0aCB0aGUKPiA+
+IHBhZ2UgY2FjaGUgYW5kIGZpbGUgSS9PIGluY3JlYXNpbmdseSBhZG9wdGluZyBmb2xpb3MgaW4g
+cGxhY2Ugb2YgdGhlCj4gPiB0cmFkaXRpb25hbCBwYWdlIHN0cnVjdHVyZS4gVGhpcyB0cmVuZCBp
+bmRlZWQgcmVuZGVycyB0aGUgbGVnYWN5Cj4gPiBgd3JpdGVwYWdlYCBmdW5jdGlvbiBpbiBmaWxl
+IHN5c3RlbXMgbm90IG9ubHkgdW5uZWNlc3NhcnkgYnV0Cj4gPiBwb3RlbnRpYWxseSBkZXRyaW1l
+bnRhbC4gIFRoaXMgaXMgcGFydGljdWxhcmx5IHRydWUgZm9yIGZpbGUgc3lzdGVtcwo+ID4gbGlr
+ZSBGMkZTLCB3aGljaCwgYXMgeW91IGtub3csIGhhcyBhbHJlYWR5IGZ1bGx5IGltcGxlbWVudGVk
+IHRoZQo+ID4gYHdyaXRlcGFnZXNgIGZ1bmN0aW9uIGZvciBhbGwgaXRzIGBhZGRyZXNzX3NwYWNl
+X29wZXJhdGlvbnNgLgo+ID4KPiA+IEhvd2V2ZXIsIGFzIHlvdSd2ZSBwb2ludGVkIG91dCwgdGhl
+IGBwYWdlb3V0YCBmdW5jdGlvbiB3aXRoaW4gdm1zY2FuLAo+ID4gd2hpY2ggYGtzd2FwZGAgdXNl
+cyBmb3IgZGlydHkgcGFnZSB3cml0ZWJhY2ssIGRvZXNuJ3QgY3VycmVudGx5Cj4gPiBzdXBwb3J0
+IGNhbGxpbmcgdGhlIGZpbGUgc3lzdGVtJ3MKPiA+IGBhZGRyZXNzX3NwYWNlX29wZXJhdGlvbnMt
+PndyaXRlcGFnZXNgLiAgSSB3YXMgd29uZGVyaW5nIGlmIHlvdSBoYXZlCj4gPiBhbnkgcGxhbnMg
+dG8gaW1wcm92ZSB0aGlzIHNpdHVhdGlvbiwgYW5kIGlmIHNvLCBjb3VsZCB5b3UgcGVyaGFwcwo+
+ID4gc2hhcmUgc29tZSBpbnNpZ2h0cyBpbnRvIHRoZSBnZW5lcmFsIGRpcmVjdGlvbiBvciBhcHBy
+b2FjaCB5b3UgbWlnaHQKPiA+IGJlIGNvbnNpZGVyaW5nPwo+Cj4gY29tbWl0IDIxYjRlZTcwMjlj
+OQo+IEF1dGhvcjogRGF2ZSBDaGlubmVyIDxkY2hpbm5lckByZWRoYXQuY29tPgo+IERhdGU6ICAg
+VHVlIEF1ZyAxMCAxODozMzo0MSAyMDIxIC0wNzAwCj4KPiAgICAgeGZzOiBkcm9wIC0+d3JpdGVw
+YWdlIGNvbXBsZXRlbHkKPgo+ICAgICAtPndyaXRlcGFnZSBpcyBvbmx5IHVzZWQgaW4gb25lIHBs
+YWNlIC0gc2luZ2xlIHBhZ2Ugd3JpdGViYWNrIGZyb20KPiAgICAgbWVtb3J5IHJlY2xhaW0uIFdl
+IG9ubHkgYWxsb3cgc3VjaCB3cml0ZWJhY2sgZnJvbSBrc3dhcGQsIG5vdCBmcm9tCj4gICAgIGRp
+cmVjdCBtZW1vcnkgcmVjbGFpbSwgYW5kIHNvIGl0IGlzIHJhcmVseSB1c2VkLiBXaGVuIGl0IGNv
+bWVzIGZyb20KPiAgICAga3N3YXBkLCBpdCBpcyBlZmZlY3RpdmVseSByYW5kb20gZGlydHkgcGFn
+ZSBzaG9vdC1kb3duLCB3aGljaCBpcwo+ICAgICBob3JyaWJsZSBmb3IgSU8gcGF0dGVybnMuIFdl
+IHdpbGwgYWxyZWFkeSBoYXZlIGJhY2tncm91bmQgd3JpdGViYWNrCj4gICAgIHRyeWluZyB0byBj
+bGVhbiBhbGwgdGhlIGRpcnR5IHBhZ2VzIGluIG1lbW9yeSBhcyBlZmZpY2llbnRseSBhcwo+ICAg
+ICBwb3NzaWJsZSwgc28gaGF2aW5nIGtzd2FwZCBpbnRlcnJ1cHQgb3VyIHdlbGwgZm9ybWVkIElP
+IHN0cmVhbSBvbmx5Cj4gICAgIHNsb3dzIHRoaW5ncyBkb3duLiBTbyBnZXQgcmlkIG9mIHhmc192
+bV93cml0ZXBhZ2UoKSBjb21wbGV0ZWx5Lgo+Cj4gICAgIFNpZ25lZC1vZmYtYnk6IERhdmUgQ2hp
+bm5lciA8ZGNoaW5uZXJAcmVkaGF0LmNvbT4KPiAgICAgW2Rqd29uZzogZm9yd2FyZCBwb3J0IHRv
+IDUuMTVdCj4gICAgIFJldmlld2VkLWJ5OiBEYXJyaWNrIEouIFdvbmcgPGRqd29uZ0BrZXJuZWwu
+b3JnPgo+ICAgICBTaWduZWQtb2ZmLWJ5OiBEYXJyaWNrIEouIFdvbmcgPGRqd29uZ0BrZXJuZWwu
+b3JnPgo+Cj4KPiBodHRwczovL2xvcmUua2VybmVsLm9yZy9saW51eC1mc2RldmVsLzIwMTgxMTA5
+MTUxMjM5LkdEOTE1M0BpbmZyYWRlYWQub3JnLwo+Cj4gVGhlcmUncyBwcm9iYWJseSBzb21lIG90
+aGVyIGdvb2QgZG9jdW1lbnRhdGlvbiBhcm91bmQgd2h5IHdlJ3JlIGRvaW5nCj4gdGhpcywgYnV0
+IHRoaXMgaXMgYWxsIEkgaGF2ZSBoYW5keS4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1m
+MmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdl
+Lm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
