@@ -2,90 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C7FBA6D298
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Mar 2025 01:47:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FCEBA6D3BB
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Mar 2025 06:35:23 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1twVyY-0007ot-5T;
-	Mon, 24 Mar 2025 00:47:34 +0000
+	id 1twaSx-0004vz-OB;
+	Mon, 24 Mar 2025 05:35:15 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nzzhao.sigma@gmail.com>) id 1twVyX-0007on-9s
- for Linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Mar 2025 00:47:33 +0000
+ (envelope-from <chao@kernel.org>) id 1twaSr-0004vo-6L
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Mar 2025 05:35:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vQQKvP5R8luVRxbpNB9L+v+/4SSjmK/Mdr0BaGbE3hk=; b=Z4TtfOzimQTCnIRxhMM3HK9i/M
- RYdyBgU3jPoiFaIjSspKw2rMANyxK9Vt0MCQSIr2Z7s5qjJGx4lOqffCf4peqTwxmyayKglQ5IB2v
- ErvSgrN99I61ShGGk9LmR8edEGnxVUatkC9j1uq4B0eUEqbrEoeWaH0xPv+wwB+vp8kQ=;
+ bh=7Yn1FbZEhPslpbYzkRdJapnx1M5noYaaHJMyd9BC410=; b=JI5NvBzTA4lUjA41nPcZVr33XS
+ ZkWR/vaM3IMHSonTOJJAnEzxEgX0h1TZ6qkre4avrPaFKmGPNec0r45mJ7PsEr2/dDlgMYbR7qsEF
+ KYvdOcnSRZ/gsum3YflY9rVZbeNL5uVsp+2nkrZmRMyysTB3z3/Z4ambIYvfyIa4X3Xw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=vQQKvP5R8luVRxbpNB9L+v+/4SSjmK/Mdr0BaGbE3hk=; b=mabKMdb+7qm9tJAgbU27oB2X15
- iuPUE7C7VH/90r5Bj6JuMb49kcWrZITisRZl796jB4YxXXI4bcV4ogd2x7GchAlgCCHoNGC0fKG1M
- QiwmDyb2XCKz0IJwnhmGnR4VwmYU423dhVeRaDKqM/RdLObCAhXmDfoRpAqjhldMnl40=;
-Received: from mail-oa1-f67.google.com ([209.85.160.67])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=7Yn1FbZEhPslpbYzkRdJapnx1M5noYaaHJMyd9BC410=; b=H
+ XsEK2V3XSGBAbNHTiIErhx55TKbWqeBHC+O73Ubwb5kMSlp0uX++pAifBraTtZlUf62qB3yObfiB4
+ zQXgGOP7IE+4/Q0g5iYYrlos5zrEv1iug/EtqJEifcnQ6dPjahZcR5ImyCeYif+aU0kWjGbAa2jzr
+ +b/Nlsa7jzydfYv0=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1twVyR-0000CS-KI for Linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Mar 2025 00:47:33 +0000
-Received: by mail-oa1-f67.google.com with SMTP id
- 586e51a60fabf-2c12f9e9449so2016072fac.3
- for <Linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 23 Mar 2025 17:47:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742777237; x=1743382037; darn=lists.sourceforge.net;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vQQKvP5R8luVRxbpNB9L+v+/4SSjmK/Mdr0BaGbE3hk=;
- b=QH88YiWTWxr5XnU9c+S1pPDSy0Y3FGuTUmkqZXmQIR82bQqa6fI0qVnHGx+Fe8FLMa
- Ab0izhd7SplLgHEanL2yxLIze73rdM0TY7DgYx5YPOTAkwda2KWn6Gg5/jnwAqopqYA1
- lYcx5UAxVb39QX1PuWha+6UlH3+zvB5T9N80/sY+ABwNf9+ZeHhgcB2a9HXBDYdVsxBw
- l2HhRCzW1sz7DgOLLie7M5HxhzDwcRL9NbWpqIcPOuOqcQ0sJQSQJGGykArJAQpBzsnR
- Pa7BjYT0xkY1SrfAYFNrxsDlpfL+9xQPn5IlxhaD+LqN22ZCSLU9GUT+7TuzenWCBKJf
- TPug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742777237; x=1743382037;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vQQKvP5R8luVRxbpNB9L+v+/4SSjmK/Mdr0BaGbE3hk=;
- b=RWcmTYnn95kzL95t3vGo5jfbeD6DV2yoYr3b9yyAkuEoWMngtZCeofVJu/O2SofSZU
- O3DNGqaa+Wfk0fAjYDK25dgTpkmFBtfg12d9esNnix2kKaUq1a3RAd8GdnYxZ9UTfbHU
- 9OZ+tAJugdPrW82A5eyxjlKg5ehmUCxrJy+4fJk0984WxOze3EvdFLbsv1WliuG+dS1O
- n8oGEwu9ud4CNRwRmkgeGGrK+ue+1S35cnmgQPUnzGKw7mNvSqpUBzQp0TGLaoVapPwc
- i9DiCYdnQsH9JWWH7MPD44ZzgoTs612ip9ZlBDkYYnfDPdXeZiVsQzBRFgzmSpRCfBr/
- 7wng==
-X-Gm-Message-State: AOJu0Yzj/wzghh5EIZn4cmqtCyXkiX2VZTJjjJTGpzNDB0ewTSfJRJMO
- 5MeH5L1upd7dMAanb5o36pbFxW2UxOun0KqMZDDyO1aoUkgeoZ6tKAJSRQInjSk9BbXIYoQGlgk
- unNV6v8VCf87pOXFJZBrktNQGR7Ln1HwEKeWBtA==
-X-Gm-Gg: ASbGncthqpWyJp7XTfWVXmLKh3XtIgp0CO/FnLixzPGqcijB8rhMjEWBl6BWHDgaj+t
- /Sx8ad1LFUY8Um72Fb9DUsuoKEELAbf8/knEWVolKWE1nD8DMDmAhnCNEo/OO+AZfoHF/RF+ztR
- UdJ9O80p6Em9qv0YW+EqDeGFUxJ/Y=
-X-Google-Smtp-Source: AGHT+IHdn10GojP/SGSwOE4gTYXWjJduJ0jsS/ILcnm3mSJx+6n722jMETSN07CQDbzJqgqEmo2kgSUhRH4oNrrezsQ=
-X-Received: by 2002:a05:6871:107:b0:2bc:9787:affe with SMTP id
- 586e51a60fabf-2c78028974bmr6718394fac.10.1742777236756; Sun, 23 Mar 2025
- 17:47:16 -0700 (PDT)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1twaSq-0005AB-Ex for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Mar 2025 05:35:09 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id C262043852;
+ Mon, 24 Mar 2025 05:35:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6BC1EC4CEDD;
+ Mon, 24 Mar 2025 05:35:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1742794502;
+ bh=52w8Wpv5PinsOVJq2d+oGkiibjsHyI9Z1MEiD2pJ5pw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=guLB0uAi7STxIafoYt5winJJgEWHBLI2BrBB5omOq33rrsuKtaEw6wQYZeOg65QZ0
+ Rw6oiw3Jt/UOPRCd5Commlp93fzOTuCCfq4P46ZVdwe+dGBkDlojgbKkeby2yMKbgH
+ zCz2ETwJvRHrM8LOlDFq7+EUPgmJ3NI0MPzLyCOSgPdE/lg5nJ+kLV/O+fiWYr01h/
+ SLp2kcCzdGKv+07L1UIAiIi0oWbXXLMHdoswd72TogFYAL931rsZVlu5tv7lE2fIcS
+ bZLGTMADlZfg9414ZA3sjoACYIHsftxxB9F4sWccZcqNzD0oMFEw7hM3jhGIlF8mIy
+ Iog4F2WCv8Eyw==
+To: jaegeuk@kernel.org
+Date: Mon, 24 Mar 2025 13:33:39 +0800
+Message-ID: <20250324053339.2994251-1-chao@kernel.org>
+X-Mailer: git-send-email 2.49.0.395.g12beb8f557-goog
 MIME-Version: 1.0
-References: <CAMLCH1FEuoDxFFQ8HuUdBDMfzsyaS2LWyVh+eyGCpgxnKGa7rA@mail.gmail.com>
- <Z-Aai24gPXWQp8qi@casper.infradead.org>
-In-Reply-To: <Z-Aai24gPXWQp8qi@casper.infradead.org>
-From: Nanzhe Zhao <nzzhao.sigma@gmail.com>
-Date: Mon, 24 Mar 2025 08:47:05 +0800
-X-Gm-Features: AQ5f1Jo6dtgYXcwlTLKzS5eo5IWJmlCDJRYikRcngGTd0FIUnv2lA3JssssPxR4
-Message-ID: <CAMLCH1HsT+AVZSXAh8Q7Zr9C3SzaegfMdE6fzKp0X0FDt9JSbA@mail.gmail.com>
-To: Matthew Wilcox <willy@infradead.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -93,32 +66,27 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Thank you very much for your prompt and insightful reply!
- I truly appreciate you taking the time to address my question so quickly.
- I understand now. It seems the kernel's flusher threads are indeed sufficient
- for handling dirty page writeback effectively. And I realize that they
- ultimately call `do_writepages` to execute the file [...] 
+ Content preview: syzbot reported a f2fs bug as below: INFO: task
+ syz-executor140:5308
+ blocked for more than 143 seconds. Not tainted
+ 6.14.0-rc7-syzkaller-00069-g81e4f8d68c66
+ #0 "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+ tas [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [nzzhao.sigma[at]gmail.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.160.67 listed in bl.score.senderscore.com]
+ [172.234.252.31 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.160.67 listed in sa-accredit.habeas.com]
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.160.67 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.160.67 listed in list.dnswl.org]
+ [172.234.252.31 listed in sa-trusted.bondedsender.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -126,10 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1twVyR-0000CS-KI
-Subject: Re: [f2fs-dev] Inquiry regarding plans on vmscan pageout supporting
- fs writepages
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1twaSq-0005AB-Ex
+Subject: [f2fs-dev] [PATCH] f2fs: fix to do sanity check on ino and xnid
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -141,71 +108,112 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: syzbot+cc448dcdc7ae0b4e4ffa@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-VGhhbmsgeW91IHZlcnkgbXVjaCBmb3IgeW91ciBwcm9tcHQgYW5kIGluc2lnaHRmdWwgcmVwbHkh
-IEkgdHJ1bHkKYXBwcmVjaWF0ZSB5b3UgdGFraW5nIHRoZSB0aW1lIHRvIGFkZHJlc3MgbXkgcXVl
-c3Rpb24gc28gcXVpY2tseS4KCkkgdW5kZXJzdGFuZCBub3cuIEl0IHNlZW1zIHRoZSBrZXJuZWwn
-cyBmbHVzaGVyIHRocmVhZHMgYXJlIGluZGVlZApzdWZmaWNpZW50IGZvciBoYW5kbGluZyBkaXJ0
-eSBwYWdlIHdyaXRlYmFjayBlZmZlY3RpdmVseS4gQW5kIEkKcmVhbGl6ZSB0aGF0IHRoZXkgdWx0
-aW1hdGVseSBjYWxsIGBkb193cml0ZXBhZ2VzYCB0byBleGVjdXRlIHRoZSBmaWxlCnN5c3RlbSdz
-IHNwZWNpZmljIGB3cml0ZXBhZ2VzYCBpbXBsZW1lbnRhdGlvbi4gIEl0J3MgYWxzbyBjbGVhciB0
-aGF0CnRoZSBzY2VuYXJpbyB3aGVyZSBga3N3YXBkYCBpbml0aWF0ZXMgZGlydHkgcGFnZSB3cml0
-ZWJhY2sgaXMKcmVsYXRpdmVseSBpbmZyZXF1ZW50LgoKS25vd2luZyB0aGF0IHRoZSBGMkZTIGNv
-bW11bml0eSBpcyBjdXJyZW50bHkgaGVhdmlseSBpbnZlc3RlZCBpbiB0aGUKZm9saW8gc3VwcG9y
-dCBlZmZvcnQsIEkgd2FudGVkIHRvIGFsc28gYnJpbmcgdXAgc29tZSBvYnNlcnZhdGlvbnMgYW5k
-CnF1ZXN0aW9ucyByZWdhcmRpbmcgZm9saW8gc3VwcG9ydCBpbiBGMkZTIGdhcmJhZ2UgY29sbGVj
-dGlvbi4KU3BlY2lmaWNhbGx5LCBJJ20gY29uY2VybmVkIGFib3V0IHRoZSBjaGFsbGVuZ2Ugb2Yg
-YWxsb2NhdGluZwpoaWdoLW9yZGVyIGZvbGlvcyBkdWUgdG8gbm9uLWNvbnRpZ3VvdXMgaW5kZXgg
-cmFuZ2VzIGR1cmluZyB0aGUgR0MKcHJvY2Vzcy4gSSd2ZSBpbml0aWF0ZWQgYSBkaXNjdXNzaW9u
-IGFib3V0IHRoaXMgaXNzdWUgb24gdGhlIGYyZnMKbWFpbGluZyBsaXN0IGluIGFuIGVtYWlsCnRo
-cmVhZC5baHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtZjJmcy1kZXZlbC9DQU1MQ0gxRjhu
-aXozcWlmdTlwdDZDM3lMaG9uYWREPWZlYVB0V0toQ2FSRDhGUEpoUmdAbWFpbC5nbWFpbC5jb20v
-VC8jdV0KSSB3b3VsZCBiZSBncmF0ZWZ1bCBpZiB5b3UgYW5kIG90aGVyIGRldmVsb3BlcnMgY291
-bGQgdGFrZSBhIGxvb2sgYW5kCnNoYXJlIHlvdXIgdGhvdWdodHMuCgpCZXN0IHJlZ2FyZHMsCgpN
-YXR0aGV3IFdpbGNveCA8d2lsbHlAaW5mcmFkZWFkLm9yZz4g5LqOMjAyNeW5tDPmnIgyM+aXpeWR
-qOaXpSAyMjoyOOWGmemBk++8mgo+Cj4gT24gU3VuLCBNYXIgMjMsIDIwMjUgYXQgMDc6MzQ6NTlQ
-TSArMDgwMCwgTmFuemhlIFpoYW8gd3JvdGU6Cj4gPiBJJ3ZlIHJlY2VudGx5IGJlZW4gc3R1ZHlp
-bmcgeW91ciBwYXRjaCAnZjJmczogUmVtb3ZlIHVzZXMgb2YKPiA+IHdyaXRlcGFnZScuICBJIHVu
-ZGVyc3RhbmQgdGhlIHJhdGlvbmFsZSBiZWhpbmQgaXQsIGVzcGVjaWFsbHkgd2l0aCB0aGUKPiA+
-IHBhZ2UgY2FjaGUgYW5kIGZpbGUgSS9PIGluY3JlYXNpbmdseSBhZG9wdGluZyBmb2xpb3MgaW4g
-cGxhY2Ugb2YgdGhlCj4gPiB0cmFkaXRpb25hbCBwYWdlIHN0cnVjdHVyZS4gVGhpcyB0cmVuZCBp
-bmRlZWQgcmVuZGVycyB0aGUgbGVnYWN5Cj4gPiBgd3JpdGVwYWdlYCBmdW5jdGlvbiBpbiBmaWxl
-IHN5c3RlbXMgbm90IG9ubHkgdW5uZWNlc3NhcnkgYnV0Cj4gPiBwb3RlbnRpYWxseSBkZXRyaW1l
-bnRhbC4gIFRoaXMgaXMgcGFydGljdWxhcmx5IHRydWUgZm9yIGZpbGUgc3lzdGVtcwo+ID4gbGlr
-ZSBGMkZTLCB3aGljaCwgYXMgeW91IGtub3csIGhhcyBhbHJlYWR5IGZ1bGx5IGltcGxlbWVudGVk
-IHRoZQo+ID4gYHdyaXRlcGFnZXNgIGZ1bmN0aW9uIGZvciBhbGwgaXRzIGBhZGRyZXNzX3NwYWNl
-X29wZXJhdGlvbnNgLgo+ID4KPiA+IEhvd2V2ZXIsIGFzIHlvdSd2ZSBwb2ludGVkIG91dCwgdGhl
-IGBwYWdlb3V0YCBmdW5jdGlvbiB3aXRoaW4gdm1zY2FuLAo+ID4gd2hpY2ggYGtzd2FwZGAgdXNl
-cyBmb3IgZGlydHkgcGFnZSB3cml0ZWJhY2ssIGRvZXNuJ3QgY3VycmVudGx5Cj4gPiBzdXBwb3J0
-IGNhbGxpbmcgdGhlIGZpbGUgc3lzdGVtJ3MKPiA+IGBhZGRyZXNzX3NwYWNlX29wZXJhdGlvbnMt
-PndyaXRlcGFnZXNgLiAgSSB3YXMgd29uZGVyaW5nIGlmIHlvdSBoYXZlCj4gPiBhbnkgcGxhbnMg
-dG8gaW1wcm92ZSB0aGlzIHNpdHVhdGlvbiwgYW5kIGlmIHNvLCBjb3VsZCB5b3UgcGVyaGFwcwo+
-ID4gc2hhcmUgc29tZSBpbnNpZ2h0cyBpbnRvIHRoZSBnZW5lcmFsIGRpcmVjdGlvbiBvciBhcHBy
-b2FjaCB5b3UgbWlnaHQKPiA+IGJlIGNvbnNpZGVyaW5nPwo+Cj4gY29tbWl0IDIxYjRlZTcwMjlj
-OQo+IEF1dGhvcjogRGF2ZSBDaGlubmVyIDxkY2hpbm5lckByZWRoYXQuY29tPgo+IERhdGU6ICAg
-VHVlIEF1ZyAxMCAxODozMzo0MSAyMDIxIC0wNzAwCj4KPiAgICAgeGZzOiBkcm9wIC0+d3JpdGVw
-YWdlIGNvbXBsZXRlbHkKPgo+ICAgICAtPndyaXRlcGFnZSBpcyBvbmx5IHVzZWQgaW4gb25lIHBs
-YWNlIC0gc2luZ2xlIHBhZ2Ugd3JpdGViYWNrIGZyb20KPiAgICAgbWVtb3J5IHJlY2xhaW0uIFdl
-IG9ubHkgYWxsb3cgc3VjaCB3cml0ZWJhY2sgZnJvbSBrc3dhcGQsIG5vdCBmcm9tCj4gICAgIGRp
-cmVjdCBtZW1vcnkgcmVjbGFpbSwgYW5kIHNvIGl0IGlzIHJhcmVseSB1c2VkLiBXaGVuIGl0IGNv
-bWVzIGZyb20KPiAgICAga3N3YXBkLCBpdCBpcyBlZmZlY3RpdmVseSByYW5kb20gZGlydHkgcGFn
-ZSBzaG9vdC1kb3duLCB3aGljaCBpcwo+ICAgICBob3JyaWJsZSBmb3IgSU8gcGF0dGVybnMuIFdl
-IHdpbGwgYWxyZWFkeSBoYXZlIGJhY2tncm91bmQgd3JpdGViYWNrCj4gICAgIHRyeWluZyB0byBj
-bGVhbiBhbGwgdGhlIGRpcnR5IHBhZ2VzIGluIG1lbW9yeSBhcyBlZmZpY2llbnRseSBhcwo+ICAg
-ICBwb3NzaWJsZSwgc28gaGF2aW5nIGtzd2FwZCBpbnRlcnJ1cHQgb3VyIHdlbGwgZm9ybWVkIElP
-IHN0cmVhbSBvbmx5Cj4gICAgIHNsb3dzIHRoaW5ncyBkb3duLiBTbyBnZXQgcmlkIG9mIHhmc192
-bV93cml0ZXBhZ2UoKSBjb21wbGV0ZWx5Lgo+Cj4gICAgIFNpZ25lZC1vZmYtYnk6IERhdmUgQ2hp
-bm5lciA8ZGNoaW5uZXJAcmVkaGF0LmNvbT4KPiAgICAgW2Rqd29uZzogZm9yd2FyZCBwb3J0IHRv
-IDUuMTVdCj4gICAgIFJldmlld2VkLWJ5OiBEYXJyaWNrIEouIFdvbmcgPGRqd29uZ0BrZXJuZWwu
-b3JnPgo+ICAgICBTaWduZWQtb2ZmLWJ5OiBEYXJyaWNrIEouIFdvbmcgPGRqd29uZ0BrZXJuZWwu
-b3JnPgo+Cj4KPiBodHRwczovL2xvcmUua2VybmVsLm9yZy9saW51eC1mc2RldmVsLzIwMTgxMTA5
-MTUxMjM5LkdEOTE1M0BpbmZyYWRlYWQub3JnLwo+Cj4gVGhlcmUncyBwcm9iYWJseSBzb21lIG90
-aGVyIGdvb2QgZG9jdW1lbnRhdGlvbiBhcm91bmQgd2h5IHdlJ3JlIGRvaW5nCj4gdGhpcywgYnV0
-IHRoaXMgaXMgYWxsIEkgaGF2ZSBoYW5keS4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1m
-MmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdl
-Lm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+syzbot reported a f2fs bug as below:
+
+INFO: task syz-executor140:5308 blocked for more than 143 seconds.
+      Not tainted 6.14.0-rc7-syzkaller-00069-g81e4f8d68c66 #0
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor140 state:D stack:24016 pid:5308  tgid:5308  ppid:5306   task_flags:0x400140 flags:0x00000006
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5378 [inline]
+ __schedule+0x190e/0x4c90 kernel/sched/core.c:6765
+ __schedule_loop kernel/sched/core.c:6842 [inline]
+ schedule+0x14b/0x320 kernel/sched/core.c:6857
+ io_schedule+0x8d/0x110 kernel/sched/core.c:7690
+ folio_wait_bit_common+0x839/0xee0 mm/filemap.c:1317
+ __folio_lock mm/filemap.c:1664 [inline]
+ folio_lock include/linux/pagemap.h:1163 [inline]
+ __filemap_get_folio+0x147/0xb40 mm/filemap.c:1917
+ pagecache_get_page+0x2c/0x130 mm/folio-compat.c:87
+ find_get_page_flags include/linux/pagemap.h:842 [inline]
+ f2fs_grab_cache_page+0x2b/0x320 fs/f2fs/f2fs.h:2776
+ __get_node_page+0x131/0x11b0 fs/f2fs/node.c:1463
+ read_xattr_block+0xfb/0x190 fs/f2fs/xattr.c:306
+ lookup_all_xattrs fs/f2fs/xattr.c:355 [inline]
+ f2fs_getxattr+0x676/0xf70 fs/f2fs/xattr.c:533
+ __f2fs_get_acl+0x52/0x870 fs/f2fs/acl.c:179
+ f2fs_acl_create fs/f2fs/acl.c:375 [inline]
+ f2fs_init_acl+0xd7/0x9b0 fs/f2fs/acl.c:418
+ f2fs_init_inode_metadata+0xa0f/0x1050 fs/f2fs/dir.c:539
+ f2fs_add_inline_entry+0x448/0x860 fs/f2fs/inline.c:666
+ f2fs_add_dentry+0xba/0x1e0 fs/f2fs/dir.c:765
+ f2fs_do_add_link+0x28c/0x3a0 fs/f2fs/dir.c:808
+ f2fs_add_link fs/f2fs/f2fs.h:3616 [inline]
+ f2fs_mknod+0x2e8/0x5b0 fs/f2fs/namei.c:766
+ vfs_mknod+0x36d/0x3b0 fs/namei.c:4191
+ unix_bind_bsd net/unix/af_unix.c:1286 [inline]
+ unix_bind+0x563/0xe30 net/unix/af_unix.c:1379
+ __sys_bind_socket net/socket.c:1817 [inline]
+ __sys_bind+0x1e4/0x290 net/socket.c:1848
+ __do_sys_bind net/socket.c:1853 [inline]
+ __se_sys_bind net/socket.c:1851 [inline]
+ __x64_sys_bind+0x7a/0x90 net/socket.c:1851
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+
+Let's dump and check metadata of corrupted inode, it shows its xattr_nid
+is the same to its i_ino.
+
+dump.f2fs -i 3 chaseyu.img.raw
+i_xattr_nid                             [0x       3 : 3]
+
+So that, during mknod in the corrupted directory, it tries to get and
+lock inode page twice, result in deadlock.
+
+- f2fs_mknod
+ - f2fs_add_inline_entry
+  - f2fs_get_inode_page --- lock dir's inode page
+   - f2fs_init_acl
+    - f2fs_acl_create(dir,..)
+     - __f2fs_get_acl
+      - f2fs_getxattr
+       - lookup_all_xattrs
+        - __get_node_page --- try to lock dir's inode page
+
+In order to fix this, let's add sanity check on ino and xnid.
+
+Cc: stable@vger.kernel.org
+Reported-by: syzbot+cc448dcdc7ae0b4e4ffa@syzkaller.appspotmail.com
+Closes: https://lore.kernel.org/linux-f2fs-devel/67e06150.050a0220.21942d.0005.GAE@google.com
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/inode.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index 83f862578fc8..5c8634eaef7b 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -286,6 +286,12 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 		return false;
+ 	}
+ 
++	if (ino_of_node(node_page) == fi->i_xattr_nid) {
++		f2fs_warn(sbi, "%s: corrupted inode i_ino=%lx, xnid=%x, run fsck to fix.",
++			  __func__, inode->i_ino, fi->i_xattr_nid);
++		return false;
++	}
++
+ 	if (f2fs_has_extra_attr(inode)) {
+ 		if (!f2fs_sb_has_extra_attr(sbi)) {
+ 			f2fs_warn(sbi, "%s: inode (ino=%lx) is with extra_attr, but extra_attr feature is off",
+-- 
+2.48.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
