@@ -2,139 +2,137 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91B80A6EC0A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Mar 2025 10:00:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BCC7A6ED87
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Mar 2025 11:26:17 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tx08p-0003mM-TR;
-	Tue, 25 Mar 2025 09:00:11 +0000
+	id 1tx1U3-0005Uz-Hs;
+	Tue, 25 Mar 2025 10:26:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <niuzhiguo84@gmail.com>) id 1tx08n-0003mD-Mq
+ (envelope-from <david@fromorbit.com>) id 1tx1U2-0005Us-Gs
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Mar 2025 09:00:09 +0000
+ Tue, 25 Mar 2025 10:26:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=glsT11ch6LS6yViOCJ/VQP3qGlWpbr1oPnawjwbltqU=; b=U0+S9zKTNWn7YWXQ1XfVWqxB/d
- ZpkwwcRq8dm/KYQGIZz6TMXy9xnycvgTb37Zpdyy0NW7xTmi9Yi2LnxEy0NGpBgAelNQeQYAMYvTu
- 0TCx0xjVqYBYVOJroZpnbnUZSqJNGHhXHGSkrE8Yobes5hKL/3jl+UNHUVJXagMjNe60=;
+ bh=PuWY4FxnO4+NOwwcfeuO+0rdzoMVdvrsuUW0ofjodWo=; b=IFmwo4JqJAeKe76d6laDxr+TF0
+ McuTYtjWqbDS8zFWjuB+z2DwL2pijYh7zSQC7002rMZFKZk3PeT+VrRO7PMw2LvFZoDmp9ppWU7yc
+ 3lduwnCa/Qka5uI6gP2uFIC4Y8LI6xffy3kW5dDJUwS3E7t7N61Gma9abLJBhK14CBEE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=glsT11ch6LS6yViOCJ/VQP3qGlWpbr1oPnawjwbltqU=; b=Hd38fDP2MQX+ZNiPTx3SeGtAI6
- TWLelNj5Zg8XO5WNQA70D09BfHzWi45+Z8GC12yWsxr6CK3iI5V1f6htuRMaz8Q1+3eUdYbdgkAFz
- +ko4hI9bSgjOqedVY+DVwwRimDz/NGI0iiAPkE838rdsUgyX0TfW/GN17Nvyku48Ahic=;
-Received: from mail-wr1-f51.google.com ([209.85.221.51])
+ bh=PuWY4FxnO4+NOwwcfeuO+0rdzoMVdvrsuUW0ofjodWo=; b=FGw3tef0V9R/E7poO0sEP9vJSY
+ ck+/BOyCuRR+uzLE1BKTuYu42fEBXHZRdGoA8B2EnaLu6wjtliHyodM/HVQRm4q7aXyRBC3SjG/aF
+ /Muj5SBIdKaxTJpCo5NUtidNh5LgKXuSx6nn96i4w4eVbaE9JcOsoqq/o7FOY9DrySgg=;
+Received: from mail-oa1-f53.google.com ([209.85.160.53])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1tx08c-0008Qh-T0 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Mar 2025 09:00:09 +0000
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-3913290f754so681927f8f.1
+ id 1tx1To-0006aQ-5Z for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Mar 2025 10:26:10 +0000
+Received: by mail-oa1-f53.google.com with SMTP id
+ 586e51a60fabf-2c7f876b320so715515fac.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 25 Mar 2025 01:59:58 -0700 (PDT)
+ Tue, 25 Mar 2025 03:25:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742893187; x=1743497987; darn=lists.sourceforge.net;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=glsT11ch6LS6yViOCJ/VQP3qGlWpbr1oPnawjwbltqU=;
- b=RN4iGJQwmlbUqzJOVkCLtv4G9/kHY0QTf3jWtaQnxzpyG0qJ9Ay9H6M/c12PnPK1lH
- wJW+ZXrmaUEf3FoALI9k13JSPSiqDKLl1KDZ7t1JCRrSx65lUW2Bsl2YNvm4b2Mqji8S
- HcYibfPWSlj7k8gjnzzhK4m4hpsU5XXqpM8JMw58nifx2zF9QKwrugSytAh3BsyqULfZ
- 3lXBpS0iBuYoU35G7iA3sXwYnuK/zDER5JzJ/PPXmv0MjslW1L2M9pH1yKaHC7PYJqFK
- 773Ltx/vE2C/qzXllT/3pLEEoPBJAfaDBbTqN8XdlUMwDkfdetBDLN6xo7iBSkYxp7os
- DwFw==
+ d=fromorbit-com.20230601.gappssmtp.com; s=20230601; t=1742898345; x=1743503145;
+ darn=lists.sourceforge.net; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PuWY4FxnO4+NOwwcfeuO+0rdzoMVdvrsuUW0ofjodWo=;
+ b=YZxp4D4xmB8gutNB1l3aSTGh2YhJJchGtdvo/0tvtx6CCKVTf0mFTuSe3OyQr15FpZ
+ Mz+mlH88JnTHYkMdz2jXMToP1olKxI6cDYNmsdGbiBbXGj4iGijvwfRHiCtuBYv/8Xn9
+ sJNsP2n0AllUKXQpafxIOrpqg9sYE5fYAODPUFKmnnDU+fm7peAYKs2w+mZ71ucubAiK
+ aWFpLbx8eIT3DkqzXk1O5Wj+nueN4dkqSl/yjem3U0lv9DV8g8B8mP0bPt4NnFnP8ng8
+ mEAJMoNTXSssB5Cr940iUwmbwSSGq5HJ/JzngXMOi3GszbGUZ/so5WksCV0gbHgHLFPe
+ t1Cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742893187; x=1743497987;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=glsT11ch6LS6yViOCJ/VQP3qGlWpbr1oPnawjwbltqU=;
- b=l1Yafi9ew6Zuoomufe4PR7Q/Qi9Ocd+vBH2cyRVu7GD83BLV7kolt2yAAgFoTxTErB
- bPPU2VlOdmryaUFVVTGwvbfzslMsjUHyyx5CN18MOIyRTCiNM78vKugSKn6jC09rJGjh
- aMCNuTN9thH/QqIUwAWLWijBHDV5XuXgsRccvO/kXKW+4j+aMGNoyGVStIJUFrAKCgZu
- +/8aoWtMU5W7j3eYqcVxWtLBmY3ApyK6tOtOnXxOC6s/8Q6CyZfXkk3wOcZaOeDBmiVQ
- zCiyxEiV4XOPDh/hfJ0THNHCgZLBkuu9/KnyXCOpiK1/wlHd9J98gyvZqw1/uV9LrQ1C
- eGFA==
+ d=1e100.net; s=20230601; t=1742898345; x=1743503145;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PuWY4FxnO4+NOwwcfeuO+0rdzoMVdvrsuUW0ofjodWo=;
+ b=ESxqcUeGVCTHDDXiljNOQkhmrOzjqQpd3mfkIGiGCsMvKaUVovjqZmZd7BQufRw4Kp
+ GcqdxnqhLocmejfOGrnmbL9rjCuUUpJH4WKBX+ZdygMRBxmC1JTvAl7rUYSjOy9BJxSo
+ 8bW3X9vfuJYdianCYpnO8N4NomCuD3gBy9XhCr85sdISBjwos0B155zIIPmCkVSBQqAB
+ V2omwOL4P5n0cIRK8mCWGo8n5aF5EPmOrEZFX9jWh/+W/n5SPpxgdDL9z4/DWjR7xy4A
+ ZUqU/019MtGwu3JjgAzbC76w3ZVb1DY6BMxt2l+/x3jUQQex96eee5t75MgzCWuee8dM
+ JW+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU3uDg+caEwr+5Fuvg4wdfrYtykbF6Rs8bs/2ubMOkOV78wVc820ys7kfp395qfdG4r7+ULi+iLkHJ6Wdm5IoDs@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwF8UnxVVNTnxxVotFUc69AB6UXNjo0+asQShKuJbzOP4FMM2JJ
- vnhDlqEIAe4YsxL+tgNOC3cgpwV1dNHd2q9V9eahDoRH8KBARRdsYbJrAxDZR5ohvsu7JoReKxd
- 8pjKixze45oKbHRfHcbzxogia1QQ1PRrq
-X-Gm-Gg: ASbGncvYAQYSotJy56PYeMX++COjvOp0lab0vaZYxEudhxau2mytuedyU8tW4Ok6rXl
- JrSmrMEo0syfRPhbfYFDorTRIZbT1AD1WU91bc3W8QLy0hMQaicCfd3D/jhjsm//s43hNjmoEE4
- gr1L6OWn3UcBub+vflAItx4V3NXhE=
-X-Google-Smtp-Source: AGHT+IGlFLOkvqgLQoad7JIPOSLXkZC37ZBSFekySUSnVOY7c3NB6TdbLk5QHx4qnk7I2u+fUirodl2TMiGq3jgQXmw=
-X-Received: by 2002:a05:6000:1864:b0:391:10c5:d1b4 with SMTP id
- ffacd0b85a97d-3997f90c5c0mr5641935f8f.7.1742893187080; Tue, 25 Mar 2025
- 01:59:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250325081321.3296714-1-chao@kernel.org>
-In-Reply-To: <20250325081321.3296714-1-chao@kernel.org>
-From: Zhiguo Niu <niuzhiguo84@gmail.com>
-Date: Tue, 25 Mar 2025 16:59:35 +0800
-X-Gm-Features: AQ5f1Jqb4RDwBaBuaX-qxrbYUKJDl4U_AwjAIlhbhcx9wnk7MrjM02VFoCUQO30
-Message-ID: <CAHJ8P3+tfdMZ=MNdiYx0HCwf0vWuf9ezJONsrvEhh3DbcQhMiw@mail.gmail.com>
+ AJvYcCW20l/dlutH4vgZNiuWEyxIh3+UUeT7PzEOB3t+OfJfIOVsNlZ05fY1/rzDAOcbsWa5DBYiqNunK0evwx1LJL8v@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yy5DTIlwzlH+Tdq89PCmV4DkNSv/pD0HZnZeBJeHAZQSHr4dPh6
+ EGzeyvWPG/HKhnecOsKeo8osCcPNVmZhoTayDvFjUXQvEsmdAk/F9tl6fji7AGmENax6B0YnZCJ
+ n
+X-Gm-Gg: ASbGncvK+mxQByjQYN3Ea2KnwaXZtRZI6G/+hYZDzLf7v+YiONLPE3NMovN2ZlsEY+M
+ waKw8Es0bh9Z2ZbiKgFkTecw1nU0mwfWKONqHJD+F+M5wfjR9G8MWyT9sX+zyVyn87EUxiIBzkE
+ B8M1VEuQryXrcZI/5R9Ow0BD0gaRUHwZSvOQgyubSYhQtNhSIrflc8Y4WcpKBrZb9zPjeKRl040
+ 4SOUnxEiGipkqcorP+b8CEcdCQRA5a2WAq5zMPBCfQkw/d27S4I8UzduHCsADZ2+L3+GqjafiNq
+ iysqscZZsZU+Gs7+nca+gt8HtJF66YB1WdWy1GnXpTaSiJkjag3shGdD1O4andGn1GsMdwOW7aA
+ Km1et+WEkBn1ujMvolzBs
+X-Google-Smtp-Source: AGHT+IE7mretUNcH2qauevhGMcyv2ME+bUwpr7TkZvXTiCQuz3MoKuqVjSbqXqiXrp10chHoDpNk5Q==
+X-Received: by 2002:a05:6a20:914e:b0:1f5:862b:a583 with SMTP id
+ adf61e73a8af0-1fe4342cc3emr34821170637.34.1742894130098; 
+ Tue, 25 Mar 2025 02:15:30 -0700 (PDT)
+Received: from dread.disaster.area (pa49-186-36-239.pa.vic.optusnet.com.au.
+ [49.186.36.239]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7390600a75asm9575168b3a.84.2025.03.25.02.15.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Mar 2025 02:15:29 -0700 (PDT)
+Received: from dave by dread.disaster.area with local (Exim 4.98)
+ (envelope-from <david@fromorbit.com>) id 1tx0Na-0000000033c-36Np;
+ Tue, 25 Mar 2025 20:15:26 +1100
+Date: Tue, 25 Mar 2025 20:15:26 +1100
 To: Chao Yu <chao@kernel.org>
-X-Spam-Score: 0.1 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+Message-ID: <Z-J0LnCEWX2bo9LF@dread.disaster.area>
+References: <20250312072309.3989074-1-chao@kernel.org>
+ <20250312072309.3989074-6-chao@kernel.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20250312072309.3989074-6-chao@kernel.org>
+X-Spam-Score: 0.0 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Chao Yu via Linux-f2fs-devel 于2025年3月25日周二 16:15写道：
-    > > This patch uses i_sem to protect access/update on f2fs_inode_info.flag
-    > in finish_preallocate_blocks(), it avoids grabbing [...] 
- 
- Content analysis details:   (0.1 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On Wed, Mar 12, 2025 at 03:23:09PM +0800, Chao Yu wrote: >
+ This is a regression test to check whether fsck can handle corrupted > nlinks
+ correctly, it uses inject.f2fs to inject nlinks w/ wrong value, [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
-                             The query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                             [209.85.221.51 listed in sa-accredit.habeas.com]
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                             [209.85.221.51 listed in bl.score.senderscore.com]
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [niuzhiguo84[at]gmail.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-                             in digit
-                             [niuzhiguo84[at]gmail.com]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.221.51 listed in list.dnswl.org]
-  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.221.51 listed in wl.mailspike.net]
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-X-Headers-End: 1tx08c-0008Qh-T0
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: add a fast path in
- finish_preallocate_blocks()
+ no trust [209.85.160.53 listed in list.dnswl.org]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.160.53 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.160.53 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.160.53 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1tx1To-0006aQ-5Z
+Subject: Re: [f2fs-dev] [PATCH v4 6/6] f2fs/009: detect and repair nlink
+ corruption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -146,61 +144,149 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+From: Dave Chinner via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Dave Chinner <david@fromorbit.com>
+Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Q2hhbyBZdSB2aWEgTGludXgtZjJmcy1kZXZlbCA8bGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3Vy
-Y2Vmb3JnZS5uZXQ+CuS6jjIwMjXlubQz5pyIMjXml6XlkajkuowgMTY6MTXlhpnpgZPvvJoKPgo+
-IFRoaXMgcGF0Y2ggdXNlcyBpX3NlbSB0byBwcm90ZWN0IGFjY2Vzcy91cGRhdGUgb24gZjJmc19p
-bm9kZV9pbmZvLmZsYWcKPiBpbiBmaW5pc2hfcHJlYWxsb2NhdGVfYmxvY2tzKCksIGl0IGF2b2lk
-cyBncmFiYmluZyBpbm9kZV9sb2NrKCkgaW4KPiBlYWNoIG9wZW4oKS4KPgo+IFNpZ25lZC1vZmYt
-Ynk6IENoYW8gWXUgPGNoYW9Aa2VybmVsLm9yZz4KClJldmlld2VkLWJ5OiBaaGlndW8gTml1IDx6
-aGlndW8ubml1QHVuaXNvYy5jb20+CnRoYW5rc++8gQo+IC0tLQo+IHYyOgo+IC0gZ2V0IHJpZCBv
-ZiByZWFkIGxvY2sgZHVyaW5nIHF1ZXJ5aW5nIEZJX09QRU5FRF9GSUxFIG9uY2Ugd2UgaGVsZAo+
-IGlub2RlIGxvY2suCj4gIGZzL2YyZnMvZmlsZS5jIHwgMzcgKysrKysrKysrKysrKysrKysrKyst
-LS0tLS0tLS0tLS0tLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgMjAgaW5zZXJ0aW9ucygrKSwgMTcg
-ZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9maWxlLmMgYi9mcy9mMmZzL2Zp
-bGUuYwo+IGluZGV4IGFiYmNiYjU4NjVhMy4uYTcxOTQ2OTc2NzYxIDEwMDY0NAo+IC0tLSBhL2Zz
-L2YyZnMvZmlsZS5jCj4gKysrIGIvZnMvZjJmcy9maWxlLmMKPiBAQCAtNTU0LDE5ICs1NTQsMjEg
-QEAgc3RhdGljIGludCBmMmZzX2ZpbGVfbW1hcChzdHJ1Y3QgZmlsZSAqZmlsZSwgc3RydWN0IHZt
-X2FyZWFfc3RydWN0ICp2bWEpCj4KPiAgc3RhdGljIGludCBmaW5pc2hfcHJlYWxsb2NhdGVfYmxv
-Y2tzKHN0cnVjdCBpbm9kZSAqaW5vZGUpCj4gIHsKPiAtICAgICAgIGludCByZXQ7Cj4gKyAgICAg
-ICBpbnQgcmV0ID0gMDsKPiArICAgICAgIGJvb2wgb3BlbmVkOwo+Cj4gLSAgICAgICBpbm9kZV9s
-b2NrKGlub2RlKTsKPiAtICAgICAgIGlmIChpc19pbm9kZV9mbGFnX3NldChpbm9kZSwgRklfT1BF
-TkVEX0ZJTEUpKSB7Cj4gLSAgICAgICAgICAgICAgIGlub2RlX3VubG9jayhpbm9kZSk7Cj4gKyAg
-ICAgICBmMmZzX2Rvd25fcmVhZCgmRjJGU19JKGlub2RlKS0+aV9zZW0pOwo+ICsgICAgICAgb3Bl
-bmVkID0gaXNfaW5vZGVfZmxhZ19zZXQoaW5vZGUsIEZJX09QRU5FRF9GSUxFKTsKPiArICAgICAg
-IGYyZnNfdXBfcmVhZCgmRjJGU19JKGlub2RlKS0+aV9zZW0pOwo+ICsgICAgICAgaWYgKG9wZW5l
-ZCkKPiAgICAgICAgICAgICAgICAgcmV0dXJuIDA7Cj4gLSAgICAgICB9Cj4KPiAtICAgICAgIGlm
-ICghZmlsZV9zaG91bGRfdHJ1bmNhdGUoaW5vZGUpKSB7Cj4gLSAgICAgICAgICAgICAgIHNldF9p
-bm9kZV9mbGFnKGlub2RlLCBGSV9PUEVORURfRklMRSk7Cj4gLSAgICAgICAgICAgICAgIGlub2Rl
-X3VubG9jayhpbm9kZSk7Cj4gLSAgICAgICAgICAgICAgIHJldHVybiAwOwo+IC0gICAgICAgfQo+
-ICsgICAgICAgaW5vZGVfbG9jayhpbm9kZSk7Cj4gKyAgICAgICBpZiAoaXNfaW5vZGVfZmxhZ19z
-ZXQoaW5vZGUsIEZJX09QRU5FRF9GSUxFKSkKPiArICAgICAgICAgICAgICAgZ290byBvdXRfdW5s
-b2NrOwo+ICsKPiArICAgICAgIGlmICghZmlsZV9zaG91bGRfdHJ1bmNhdGUoaW5vZGUpKQo+ICsg
-ICAgICAgICAgICAgICBnb3RvIG91dF91cGRhdGU7Cj4KPiAgICAgICAgIGYyZnNfZG93bl93cml0
-ZSgmRjJGU19JKGlub2RlKS0+aV9nY19yd3NlbVtXUklURV0pOwo+ICAgICAgICAgZmlsZW1hcF9p
-bnZhbGlkYXRlX2xvY2soaW5vZGUtPmlfbWFwcGluZyk7Cj4gQEAgLTU3NiwxNiArNTc4LDE3IEBA
-IHN0YXRpYyBpbnQgZmluaXNoX3ByZWFsbG9jYXRlX2Jsb2NrcyhzdHJ1Y3QgaW5vZGUgKmlub2Rl
-KQo+Cj4gICAgICAgICBmaWxlbWFwX2ludmFsaWRhdGVfdW5sb2NrKGlub2RlLT5pX21hcHBpbmcp
-Owo+ICAgICAgICAgZjJmc191cF93cml0ZSgmRjJGU19JKGlub2RlKS0+aV9nY19yd3NlbVtXUklU
-RV0pOwo+IC0KPiAtICAgICAgIGlmICghcmV0KQo+IC0gICAgICAgICAgICAgICBzZXRfaW5vZGVf
-ZmxhZyhpbm9kZSwgRklfT1BFTkVEX0ZJTEUpOwo+IC0KPiAtICAgICAgIGlub2RlX3VubG9jayhp
-bm9kZSk7Cj4gICAgICAgICBpZiAocmV0KQo+IC0gICAgICAgICAgICAgICByZXR1cm4gcmV0Owo+
-ICsgICAgICAgICAgICAgICBnb3RvIG91dF91bmxvY2s7Cj4KPiAgICAgICAgIGZpbGVfZG9udF90
-cnVuY2F0ZShpbm9kZSk7Cj4gLSAgICAgICByZXR1cm4gMDsKPiArb3V0X3VwZGF0ZToKPiArICAg
-ICAgIGYyZnNfZG93bl93cml0ZSgmRjJGU19JKGlub2RlKS0+aV9zZW0pOwo+ICsgICAgICAgc2V0
-X2lub2RlX2ZsYWcoaW5vZGUsIEZJX09QRU5FRF9GSUxFKTsKPiArICAgICAgIGYyZnNfdXBfd3Jp
-dGUoJkYyRlNfSShpbm9kZSktPmlfc2VtKTsKPiArb3V0X3VubG9jazoKPiArICAgICAgIGlub2Rl
-X3VubG9jayhpbm9kZSk7Cj4gKyAgICAgICByZXR1cm4gcmV0Owo+ICB9Cj4KPiAgc3RhdGljIGlu
-dCBmMmZzX2ZpbGVfb3BlbihzdHJ1Y3QgaW5vZGUgKmlub2RlLCBzdHJ1Y3QgZmlsZSAqZmlscCkK
-PiAtLQo+IDIuNDguMQo+Cj4KPgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fCj4gTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPiBMaW51eC1mMmZz
-LWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+IGh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2Uu
-bmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwKCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlz
-dApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNv
-dXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+On Wed, Mar 12, 2025 at 03:23:09PM +0800, Chao Yu wrote:
+> This is a regression test to check whether fsck can handle corrupted
+> nlinks correctly, it uses inject.f2fs to inject nlinks w/ wrong value,
+> and expects fsck.f2fs can detect such corruption and do the repair.
+> 
+> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+> v4:
+> - remove unnecessary "_require_command fsck.f2fs"
+> - clean up _fixed_by_git_commit line
+> - fix to clean all tmp files in _cleanup
+>  tests/f2fs/009     | 147 +++++++++++++++++++++++++++++++++++++++++++++
+>  tests/f2fs/009.out |   2 +
+>  2 files changed, 149 insertions(+)
+>  create mode 100755 tests/f2fs/009
+>  create mode 100644 tests/f2fs/009.out
+> 
+> diff --git a/tests/f2fs/009 b/tests/f2fs/009
+> new file mode 100755
+> index 00000000..9120d8a5
+> --- /dev/null
+> +++ b/tests/f2fs/009
+> @@ -0,0 +1,147 @@
+> +#! /bin/bash
+> +# SPDX-License-Identifier: GPL-2.0
+> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
+> +#
+> +# FS QA Test No. f2fs/009
+> +#
+> +# This is a regression test to check whether fsck can handle corrupted
+> +# nlinks correctly, it uses inject.f2fs to inject nlinks w/ wrong value,
+> +# and expects fsck.f2fs can detect such corruption and do the repair.
+> +#
+> +. ./common/preamble
+> +_begin_fstest auto quick
+> +
+> +if [ ! -x "$(type -P socket)" ]; then
+> +	_notrun "Couldn't find socket"
+> +fi
+> +
+> +_require_scratch
+> +_require_command "$F2FS_INJECT_PROG" inject.f2fs
+> +
+> +_fixed_by_git_commit f2fs-tools 958cd6e \
+> +	"fsck.f2fs: support to repair corrupted i_links"
+> +
+> +filename=$SCRATCH_MNT/foo
+> +hardlink=$SCRATCH_MNT/bar
+> +
+> +_cleanup()
+> +{
+> +	if [ -n "$pid" ]; then
+> +		kill $pid &> /dev/null
+> +		wait
+> +	fi
+> +	cd /
+> +	rm -r -f $tmp.*
+> +}
+> +
+> +for ((i=0;i<14;i++)) do
+> +	echo "round: " $i >> $seqres.full
+> +
+> +	_scratch_mkfs >> $seqres.full
+> +	_scratch_mount
+> +
+> +	if [ $i == 0 ]; then
+> +		touch $filename
+> +		ino=`stat -c '%i' $filename`
+> +		nlink=0
+> +	elif [ $i == 1 ]; then
+.....
+
+Ok, it works, but it's a bit nasty. You want to run the same
+injection and checking on all types of inodes, so factor that out
+like so:
+
+inject_and_check()
+{
+	local nlink=$1
+	local ino=`stat -c '%i' $filename`
+
+	echo "ino:"$ino >> $seqres.full
+	echo "nlink:"$nlink >> $seqres.full
+
+	_scratch_unmount
+
+	$F2FS_INJECT_PROG --node --mb i_links --nid $ino --val $nlink $SCRATCH_DEV \
+		>> $seqres.full || _fail "fail to inject"
+
+	_check_scratch_fs >> $seqres.full 2>&1 && _fail "can't find corruption"
+	_repair_scratch_fs >> $seqres.full
+	_check_scratch_fs >> $seqres.full 2>&1 || _fail "fsck can't fix corruption"
+
+	_scratch_mount
+	_scratch_unmount
+
+	_scratch_mkfs >> $seqres.full
+	_scratch_mount
+}
+
+And now most of the test cases become this:
+
+_scratch_mkfs >> $seqres.full
+_scratch_mount
+
+touch $filename
+inject_and_check 0
+
+mkdir $filename
+inject_and_check 1
+
+mknod $filename c 9 0
+inject_and_check 0
+
+mknod $filename b 8 0
+inject_and_check 0
+
+.....
+
+The whacky cases with socket and orphan inodes can be handled
+by factoring inject_and_check so there's a second function that
+takes both ino and nlink as parameters.
+
+This gets rid of all the unnecessary if/elif logic and looping, 
+leaving only the test code that does the work behind.
+
+-Dave.
+-- 
+Dave Chinner
+david@fromorbit.com
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
