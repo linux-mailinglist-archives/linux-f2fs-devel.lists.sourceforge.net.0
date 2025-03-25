@@ -2,102 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF33BA6ED50
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Mar 2025 11:07:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F27EA6FEA5
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Mar 2025 13:55:37 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tx1Bm-0007a3-BN;
-	Tue, 25 Mar 2025 10:07:18 +0000
+	id 1tx3oX-0005DC-7o;
+	Tue, 25 Mar 2025 12:55:29 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1tx1Bc-0007ZN-Co
- for Linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Mar 2025 10:07:08 +0000
+ (envelope-from <chao@kernel.org>) id 1tx3oW-0005D6-1g
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Mar 2025 12:55:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Lw2NXFir6zRA3SdDn9Cv8bQ5oCG7r5IwZrxvl07pRdY=; b=bS/ymTOlE+B/lkek+S7DLu9DdS
- xYaG+oJTczJRyMqpeqUI4aviAxk/x4IwJoeCT3pd2KujLxCNa04i598Plf0/F+aDrk9gxfiuuHoEt
- u85XHvO2o59Kc/0NvNo6bQqrDKcflGdLL0MUvG2/38SpjkeDnAKvE94j1koEcUyxfLVM=;
+ bh=Vh2hajGyAeuUof7qCt9dz7FcP70pbH5IreAbsGEpFrU=; b=LGcwZB3FXpHZtLMfYTIA1jKNSr
+ t/yI1EFYVI5vvYz7zPlH0GziOzeiZkAoJeTkIKcze64Lmwktar6PK6Y42D3LlJ5MEMjywML6fOWG6
+ mWnYLvCOnZikjKL1MkjENiFWs288oFUAs9KHLyLOkVuxAm7m+w41VgvcZ7WH2zOPrerk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Lw2NXFir6zRA3SdDn9Cv8bQ5oCG7r5IwZrxvl07pRdY=; b=ABVt0a/csZLHPOhbmqQpTQcjy5
- g/LTHJ6/P/smNGmUyb4obYelDSQg5saKgHH5vmBghBs0DgwVJhq0XZTkcygRAp88BqM0XEiXMpR72
- N0BhiIwOAC055YTNYhvVrc4dkVcqGhHNiv/piTJUcamhWjKZXFcKqJtH0tPq9G1aHQGA=;
-Received: from casper.infradead.org ([90.155.50.34])
+ bh=Vh2hajGyAeuUof7qCt9dz7FcP70pbH5IreAbsGEpFrU=; b=Tug+a3mglZNZGL759EFVgSnucV
+ u6gQuFSXglngabW00XEzHPE84I53bsbJbG8kEkDVPI8ZnLdpMF9wVPQkf78VVXg3oh6D2UVmNjNE3
+ 9rvafPDgt+gpj26srXj2Hu/9zSNhG7sV6X2flH5oQoApmhMplC+XHWWCQRChrAl91KQQ=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tx1Ba-00054X-Ub for Linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Mar 2025 10:07:08 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=Lw2NXFir6zRA3SdDn9Cv8bQ5oCG7r5IwZrxvl07pRdY=; b=EutkRCejCq9V3jSwyWviKVwiQP
- P+YzTUnymsIqR/Ntnvvd5QRam4jqXlLxglq9nJ4b1xpRiE4Gj8LsFhy9crWjejAVqCewAHJoB8xLy
- eNvnsjjmsj9mgBFmfNKfi2nrtt3sQMZjWeIb0tnbSQXXxLe8Cl4irzRcAUqpWx4ZQLXZD7uYezkv4
- tmVfQci/E9/3uiqXM+Ezmca9hbVCI+MxrqnZURsUOV5Hevg3GPUYZ8UrcbGGuQNaDcKrt2+ONWyE4
- tnP8Kpdg5BZvRm4a3+RKs20e1tFCcqGA1WpZ5P1iJiMe3y42FO2RjtMxtTaW/14ssPCGt95aNZUB+
- tekW5qiA==;
-Received: from willy by casper.infradead.org with local (Exim 4.98 #2 (Red Hat
- Linux)) id 1tx1BP-00000003lJc-0hSO; Tue, 25 Mar 2025 10:06:55 +0000
-Date: Tue, 25 Mar 2025 10:06:55 +0000
-From: Matthew Wilcox <willy@infradead.org>
-To: Nanzhe Zhao <nzzhao.sigma@gmail.com>
-Message-ID: <Z-KAP6Jz_bjuPuyx@casper.infradead.org>
-References: <CAMLCH1FEuoDxFFQ8HuUdBDMfzsyaS2LWyVh+eyGCpgxnKGa7rA@mail.gmail.com>
- <Z-Aai24gPXWQp8qi@casper.infradead.org>
- <CAMLCH1HsT+AVZSXAh8Q7Zr9C3SzaegfMdE6fzKp0X0FDt9JSbA@mail.gmail.com>
+ id 1tx3oQ-0003zX-Nh for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Mar 2025 12:55:28 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 058C043C93;
+ Tue, 25 Mar 2025 12:55:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 578FAC4AF0B;
+ Tue, 25 Mar 2025 12:55:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1742907311;
+ bh=Kfw42C6tDQ+goG19KwTiJ4ohGwXs3Iv/EnsP7pZVEw4=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=jTGw74w+bYHU354IX+4j3pncVpAd1WQXe36LyM6cd8TToxzmR80jSm9TQfypLTVLs
+ IECD9ViwnwmaYEdHMMZuxX0ZW3nDy0LxECVBXkfWPYfrCSS8xX8zj+tR7qW7tfytsv
+ fe9Aaa1qp6KmmH7dsExF9xVuLbjC/kZ16U/1Iagcql4/5H0MLbgXfnVWliibjJ3+bV
+ usw1rywY9hxcKe6KzXTSIFi1+nLKQSg1t42Km9SODcS/O0T4TtsorvOkDRnLuxJiqQ
+ anmBIx5PsrRHndUqBzZQbHshpENfG921tZx3XEC5EAhAhvibocul5Z1A8xdS1nnzZw
+ DcHsRa6D3oyhQ==
+Message-ID: <68e0cf2c-31f2-47b6-a789-df2df3763856@kernel.org>
+Date: Tue, 25 Mar 2025 20:55:07 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAMLCH1HsT+AVZSXAh8Q7Zr9C3SzaegfMdE6fzKp0X0FDt9JSbA@mail.gmail.com>
-X-Spam-Score: -2.5 (--)
+User-Agent: Mozilla Thunderbird
+To: Dave Chinner <david@fromorbit.com>
+References: <20250312072309.3989074-1-chao@kernel.org>
+ <20250312072309.3989074-6-chao@kernel.org>
+ <Z-J0LnCEWX2bo9LF@dread.disaster.area>
+Content-Language: en-US
+In-Reply-To: <Z-J0LnCEWX2bo9LF@dread.disaster.area>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Mar 24, 2025 at 08:47:05AM +0800, Nanzhe Zhao wrote:
- > Knowing that the F2FS community is currently heavily invested in the >
- folio support effort, I wanted to also bring up some observations [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On 3/25/25 17:15, Dave Chinner wrote: > On Wed, Mar 12, 2025
+ at 03:23:09PM +0800, Chao Yu wrote: >> This is a regression test to check
+ whether fsck can handle corrupted >> nlinks correctly, it uses in [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [90.155.50.34 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [90.155.50.34 listed in bl.score.senderscore.com]
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [90.155.50.34 listed in list.dnswl.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ [172.234.252.31 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.234.252.31 listed in sa-trusted.bondedsender.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1tx1Ba-00054X-Ub
-Subject: Re: [f2fs-dev] Inquiry regarding plans on vmscan pageout supporting
- fs writepages
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tx3oQ-0003zX-Nh
+Subject: Re: [f2fs-dev] [PATCH v4 6/6] f2fs/009: detect and repair nlink
+ corruption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,38 +111,150 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linux-f2fs-devel@lists.sourceforge.net
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Mar 24, 2025 at 08:47:05AM +0800, Nanzhe Zhao wrote:
-> Knowing that the F2FS community is currently heavily invested in the
-> folio support effort, I wanted to also bring up some observations and
-> questions regarding folio support in F2FS garbage collection.
-> Specifically, I'm concerned about the challenge of allocating
-> high-order folios due to non-contiguous index ranges during the GC
-> process. I've initiated a discussion about this issue on the f2fs
-> mailing list in an email
-> thread.[https://lore.kernel.org/linux-f2fs-devel/CAMLCH1F8niz3qifu9pt6C3yLhonadD=feaPtWKhCaRD8FPJhRg@mail.gmail.com/T/#u]
-> I would be grateful if you and other developers could take a look and
-> share your thoughts.
+On 3/25/25 17:15, Dave Chinner wrote:
+> On Wed, Mar 12, 2025 at 03:23:09PM +0800, Chao Yu wrote:
+>> This is a regression test to check whether fsck can handle corrupted
+>> nlinks correctly, it uses inject.f2fs to inject nlinks w/ wrong value,
+>> and expects fsck.f2fs can detect such corruption and do the repair.
+>>
+>> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>> v4:
+>> - remove unnecessary "_require_command fsck.f2fs"
+>> - clean up _fixed_by_git_commit line
+>> - fix to clean all tmp files in _cleanup
+>>  tests/f2fs/009     | 147 +++++++++++++++++++++++++++++++++++++++++++++
+>>  tests/f2fs/009.out |   2 +
+>>  2 files changed, 149 insertions(+)
+>>  create mode 100755 tests/f2fs/009
+>>  create mode 100644 tests/f2fs/009.out
+>>
+>> diff --git a/tests/f2fs/009 b/tests/f2fs/009
+>> new file mode 100755
+>> index 00000000..9120d8a5
+>> --- /dev/null
+>> +++ b/tests/f2fs/009
+>> @@ -0,0 +1,147 @@
+>> +#! /bin/bash
+>> +# SPDX-License-Identifier: GPL-2.0
+>> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
+>> +#
+>> +# FS QA Test No. f2fs/009
+>> +#
+>> +# This is a regression test to check whether fsck can handle corrupted
+>> +# nlinks correctly, it uses inject.f2fs to inject nlinks w/ wrong value,
+>> +# and expects fsck.f2fs can detect such corruption and do the repair.
+>> +#
+>> +. ./common/preamble
+>> +_begin_fstest auto quick
+>> +
+>> +if [ ! -x "$(type -P socket)" ]; then
+>> +	_notrun "Couldn't find socket"
+>> +fi
+>> +
+>> +_require_scratch
+>> +_require_command "$F2FS_INJECT_PROG" inject.f2fs
+>> +
+>> +_fixed_by_git_commit f2fs-tools 958cd6e \
+>> +	"fsck.f2fs: support to repair corrupted i_links"
+>> +
+>> +filename=$SCRATCH_MNT/foo
+>> +hardlink=$SCRATCH_MNT/bar
+>> +
+>> +_cleanup()
+>> +{
+>> +	if [ -n "$pid" ]; then
+>> +		kill $pid &> /dev/null
+>> +		wait
+>> +	fi
+>> +	cd /
+>> +	rm -r -f $tmp.*
+>> +}
+>> +
+>> +for ((i=0;i<14;i++)) do
+>> +	echo "round: " $i >> $seqres.full
+>> +
+>> +	_scratch_mkfs >> $seqres.full
+>> +	_scratch_mount
+>> +
+>> +	if [ $i == 0 ]; then
+>> +		touch $filename
+>> +		ino=`stat -c '%i' $filename`
+>> +		nlink=0
+>> +	elif [ $i == 1 ]; then
+> .....
+> 
+> Ok, it works, but it's a bit nasty. You want to run the same
+> injection and checking on all types of inodes, so factor that out
+> like so:
+> 
+> inject_and_check()
+> {
+> 	local nlink=$1
+> 	local ino=`stat -c '%i' $filename`
+> 
+> 	echo "ino:"$ino >> $seqres.full
+> 	echo "nlink:"$nlink >> $seqres.full
+> 
+> 	_scratch_unmount
+> 
+> 	$F2FS_INJECT_PROG --node --mb i_links --nid $ino --val $nlink $SCRATCH_DEV \
+> 		>> $seqres.full || _fail "fail to inject"
+> 
+> 	_check_scratch_fs >> $seqres.full 2>&1 && _fail "can't find corruption"
+> 	_repair_scratch_fs >> $seqres.full
+> 	_check_scratch_fs >> $seqres.full 2>&1 || _fail "fsck can't fix corruption"
+> 
+> 	_scratch_mount
+> 	_scratch_unmount
+> 
+> 	_scratch_mkfs >> $seqres.full
+> 	_scratch_mount
+> }
+> 
+> And now most of the test cases become this:
+> 
+> _scratch_mkfs >> $seqres.full
+> _scratch_mount
+> 
+> touch $filename
+> inject_and_check 0
+> 
+> mkdir $filename
+> inject_and_check 1
+> 
+> mknod $filename c 9 0
+> inject_and_check 0
+> 
+> mknod $filename b 8 0
+> inject_and_check 0
+> 
+> .....
+> 
+> The whacky cases with socket and orphan inodes can be handled
+> by factoring inject_and_check so there's a second function that
+> takes both ino and nlink as parameters.
+> 
+> This gets rid of all the unnecessary if/elif logic and looping, 
+> leaving only the test code that does the work behind.
 
-Sorry, I'm at LSFMM this week and don't have time to dig into this.
-I hope you saw my recent email about folios:
+Thanks a lot for the suggestion, it will be more clean w/ above
+implementation, will update v5.
 
-https://lore.kernel.org/linux-f2fs-devel/Z9RR2ubkS9CafUdE@casper.infradead.org/
+Thanks,
 
-The fundamental problem is that f2fs has no per-block data structure.  In
-ext4, that's struct buffer_head.  For XFS, it's struct iomap_folio_state.
-For btrfs, it's struct btrfs_subpage and for bcachefs, it's struct
-bch_folio.
+> 
+> -Dave.
 
-Either f2fs needs to grow its own, or it needs to share iomap with
-XFS.  Both options are a lot of work; iomap doesn't support all the
-functionality that f2fs needs.  But btrfs is looking to move to using
-iomap and it has some of the same needs that f2fs has, so perhaps you
-can help each other.
 
 
 _______________________________________________
