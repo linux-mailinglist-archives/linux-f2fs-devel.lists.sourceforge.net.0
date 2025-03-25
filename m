@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C82FDA6E9D7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Mar 2025 07:54:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8D95A6E9FC
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Mar 2025 07:59:34 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1twyBN-0007b5-LW;
-	Tue, 25 Mar 2025 06:54:42 +0000
+	id 1twyG3-0003Pk-NW;
+	Tue, 25 Mar 2025 06:59:31 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1twyBM-0007aw-7D
+ (envelope-from <chao@kernel.org>) id 1twyG1-0003Pb-4z
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Mar 2025 06:54:40 +0000
+ Tue, 25 Mar 2025 06:59:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=41jOsPmXlc4wY70VS+5GprVWT6zVJVPAxPfc7BjiyoY=; b=IzY366Vnl9EWMHvYvf/XRxuoDg
- CGqg3yYz7OD5mIUBdbdeKBQ3i8uBzwVG+DXvg2tUhnt/bWeDKnbQeIvyZaHI5GgXKDQ1H3Hslh0QQ
- ab2HCZ3zkwb5dXpTq6i72HO2v/WTEIziVsYVfpH4n4z1kSkKB2+x+wWWB3+tRJkfVFsQ=;
+ bh=4y8jRtWJBuoVJGUCA5oaB/D2bGAzk3GQWHeQzBUC7Yw=; b=dIpx15LaMas79hx2nIR9SoOT7G
+ hAQDLUAjzJ8SbCXaGtIU3Iq+RixQZFgNPQsU6WRLj5eoDDlGfVSqO4BuVb785w15TAFCD4AcXN0Za
+ d9Cci6WC6EtsfkZyEYhQU+wda7zXLDpaUFDAC1i8Bp+oQLPl1s49k7xw0NZgnX8tYP6A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -31,64 +31,65 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=41jOsPmXlc4wY70VS+5GprVWT6zVJVPAxPfc7BjiyoY=; b=jo9nUi8rJ0KpeIrLLB3OAzMAzM
- 7mds6VLt/W4lSYSuC4zO23DsLBYltMsPyEo29wCARvC9s1eRPThnv2x9j85pDImmPA+oyDRZKRyaU
- /2rM0gQzNiAw78TzEVW7C0Q1gb/HxbEwhodBfO/2tlDIqZ7/ceoR9Hmn6LG4j2LqK9I0=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=4y8jRtWJBuoVJGUCA5oaB/D2bGAzk3GQWHeQzBUC7Yw=; b=Xup7uoamZbEgPUqokzsCWGpsVb
+ ZwWq+7XEN1zZIjL+7YHW5x3bGevTUYRr/ttTzgwj1sfcY7XiI26fJUcQRRGBFXwpZ+vRD8vPVSOOK
+ 6g3Lf11+mGj7F5V5itiUxwMQ8qQ7O2YUkcb/f9SH4TvTmXWOJjzT5ILXwW2Ce8Jk90bs=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1twyBB-0004dT-Mn for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Mar 2025 06:54:40 +0000
+ id 1twyFu-0004ut-OA for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Mar 2025 06:59:28 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id EEA466111E;
- Tue, 25 Mar 2025 06:54:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 924CBC4CEE8;
- Tue, 25 Mar 2025 06:54:17 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 659DE5C43CE;
+ Tue, 25 Mar 2025 06:57:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 11EF3C4CEEA;
+ Tue, 25 Mar 2025 06:59:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1742885658;
- bh=77DQRojoYWf5m2oCtXQuAg5HNyWuTE3SfSPulFwVz/w=;
+ s=k20201202; t=1742885957;
+ bh=KJTdAsEL/0ZMZpo4gzToh+crD41MLDFt9Xm+PUAS5NM=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=JFi3AUvssyipf+pEiWE4L2ZEhYlWxHOe96kSxSL3rif7TtZu9CoAz+PUQT2x7IZ31
- APzz9UPOT+wKXSlIBmbLwgAJYAkgvspvl5RM4Vcyq2+b/FTxWKK1Hvij8SLJocXn2O
- /OjSAzpCwxH38CrxWUqmM1aiowQfOiVeFfw+K0I5bLwIEimMFrXZLkuRI9httWDy7v
- pGe4f8WAFZhejN7Epfe/aC1kxPo+DbzTEWNyI3WzwGtuXa/q8n+Xy1DbQH+3L1BILw
- mA9CYt8Z4ktGdnujBM0AN99acB3HDIIcNEYLZBf+pVPkOBQ9Ro6N2Su5mcVTeG3ptf
- ZyeWLlZhV0yHA==
-Message-ID: <597972b3-7327-422d-962c-a7843eb0c516@kernel.org>
-Date: Tue, 25 Mar 2025 14:54:15 +0800
+ b=TeZQE5SGPooAGf6hqSybwvn7rDyWC0y16xToaKGZSKVzc6pe85JrlAPbWIDHXvQHz
+ iqSNHlXlhOCZhYPO+KRJvK5V1/Osm42AsJgcH8l5M+YgA2u/cj/827MQ1CtLt/cZ2I
+ 7bk4dnqAqQPhLNHqgEF6o+UVbNS1lTe+YStNhPC3nmzyq1B6RZFi9xkRei0YRWPj7l
+ nJIT1oWluPI4RPA42ntT+LpvwE74K//g/0fVzRmb3C90pB9NsyBE02Z/niiYNfxsVM
+ RrIjoS1aQ88oH7NZXh9O2uJ5/PfEWzRbQsX01Pzyl0PCK0wu2H/Nbt/m4y3hapoBQ/
+ 42P+cKgX9Qv/w==
+Message-ID: <e439117b-9f91-43c0-9203-1786a7372c95@kernel.org>
+Date: Tue, 25 Mar 2025 14:59:11 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Zorro Lang <zlang@redhat.com>
-References: <20250312072309.3989074-1-chao@kernel.org>
- <20250312072309.3989074-6-chao@kernel.org>
- <20250325010701.pe3u2qryvjwl6dpf@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+References: <20250324123836.3098377-1-chao@kernel.org>
+ <20250325011854.svncwerxilkimg5j@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 Content-Language: en-US
-In-Reply-To: <20250325010701.pe3u2qryvjwl6dpf@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20250325011854.svncwerxilkimg5j@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 3/25/25 09:07, Zorro Lang wrote: > On Wed, Mar 12, 2025
- at 03:23:09PM +0800, Chao Yu wrote: >> This is a regression test to check
- whether fsck can handle corrupted >> nlinks correctly, it uses inje [...]
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 3/25/25 09:18, Zorro Lang wrote: > On Mon, Mar 24, 2025
+ at 08:38:36PM +0800, Chao Yu wrote: >> This is a regression testcase to check
+ whether we will handle database >> inode dirty status correctly [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.105.4.254 listed in sa-trusted.bondedsender.org]
+ [139.178.84.217 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.105.4.254 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [139.178.84.217 listed in bl.score.senderscore.com]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -97,9 +98,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1twyBB-0004dT-Mn
-Subject: Re: [f2fs-dev] [PATCH v4 6/6] f2fs/009: detect and repair nlink
- corruption
+X-Headers-End: 1twyFu-0004ut-OA
+Subject: Re: [f2fs-dev] [PATCH] f2fs/010: test dirty status handling on
+ database file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,70 +114,119 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>, fstests@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org,
+ Zorro Lang <zlang@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 3/25/25 09:07, Zorro Lang wrote:
-> On Wed, Mar 12, 2025 at 03:23:09PM +0800, Chao Yu wrote:
->> This is a regression test to check whether fsck can handle corrupted
->> nlinks correctly, it uses inject.f2fs to inject nlinks w/ wrong value,
->> and expects fsck.f2fs can detect such corruption and do the repair.
+On 3/25/25 09:18, Zorro Lang wrote:
+> On Mon, Mar 24, 2025 at 08:38:36PM +0800, Chao Yu wrote:
+>> This is a regression testcase to check whether we will handle database
+>> inode dirty status correctly:
+>> 1. create a regular file, and write data into the file
+>> 2. start transaction on the file (via F2FS_IOC_START_ATOMIC_WRITE)
+>> 3. write transaction data to the file
+>> 4. rename the file
+>> 5. commit and end the transaction (via F2FS_IOC_COMMIT_ATOMIC_WRITE)
+>> 6. drop caches in order to call f2fs_evict_inode()
+>> It expects kernel panic will gone after we apply commit 03511e936916
+>> ("f2fs: fix inconsistent dirty state of atomic file").
 >>
 >> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+>> Cc: Daeho Jeong <daehojeong@google.com>
+>> Cc: Jianan Huang <huangjianan@xiaomi.com>
 >> Signed-off-by: Chao Yu <chao@kernel.org>
 >> ---
->> v4:
->> - remove unnecessary "_require_command fsck.f2fs"
->> - clean up _fixed_by_git_commit line
->> - fix to clean all tmp files in _cleanup
->>  tests/f2fs/009     | 147 +++++++++++++++++++++++++++++++++++++++++++++
->>  tests/f2fs/009.out |   2 +
->>  2 files changed, 149 insertions(+)
->>  create mode 100755 tests/f2fs/009
->>  create mode 100644 tests/f2fs/009.out
+>>  tests/f2fs/010     | 68 ++++++++++++++++++++++++++++++++++++++++++++++
+>>  tests/f2fs/010.out |  2 ++
+>>  2 files changed, 70 insertions(+)
+>>  create mode 100755 tests/f2fs/010
+>>  create mode 100644 tests/f2fs/010.out
 >>
->> diff --git a/tests/f2fs/009 b/tests/f2fs/009
+>> diff --git a/tests/f2fs/010 b/tests/f2fs/010
 >> new file mode 100755
->> index 00000000..9120d8a5
+>> index 00000000..360c09b9
 >> --- /dev/null
->> +++ b/tests/f2fs/009
->> @@ -0,0 +1,147 @@
+>> +++ b/tests/f2fs/010
+>> @@ -0,0 +1,68 @@
 >> +#! /bin/bash
 >> +# SPDX-License-Identifier: GPL-2.0
 >> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
 >> +#
->> +# FS QA Test No. f2fs/009
+>> +# FS QA Test No. f2fs/010
 >> +#
->> +# This is a regression test to check whether fsck can handle corrupted
->> +# nlinks correctly, it uses inject.f2fs to inject nlinks w/ wrong value,
->> +# and expects fsck.f2fs can detect such corruption and do the repair.
+>> +# This is a regression testcase to check whether we will handle database
+>> +# inode dirty status correctly:
+>> +# 1. create a regular file, and write data into the file
+>> +# 2. start transaction on the file (via F2FS_IOC_START_ATOMIC_WRITE)
+>> +# 3. write transaction data to the file
+>> +# 4. rename the file
+>> +# 5. commit and end the transaction (via F2FS_IOC_COMMIT_ATOMIC_WRITE)
+>> +# 6. drop caches in order to call f2fs_evict_inode()
+>> +# It expects kernel panic will gone after we apply commit 03511e936916
+>> +# ("f2fs: fix inconsistent dirty state of atomic file").
 >> +#
 >> +. ./common/preamble
 >> +_begin_fstest auto quick
 >> +
->> +if [ ! -x "$(type -P socket)" ]; then
+>> +_cleanup()
+>> +{
+>> +	kill -9 $atomic_write_pid > /dev/null 2>&1
 > 
-> Hi Chao,
+> [ -n "$atomic_write_pid" ] && kill -9 $atomic_write_pid
 > 
-> Which package provides this "socket" command? I tried to search it in Fedora, but
-> got nothing:
+>> +	wait
+>> +	cd /
+>> +	rm -r -f $tmp.*
+>> +}
+>> +
+>> +_fixed_by_kernel_commit 03511e936916 \
+>> +	"f2fs: fix inconsistent dirty state of atomic file"
+>> +
+>> +_require_scratch
+>> +_require_command "$F2FS_IO_PROG" f2fs_io
+>> +
+>> +_scratch_mkfs >> $seqres.full
+>> +_scratch_mount >> $seqres.full
+>> +
+>> +src_db=$SCRATCH_MNT/src.db
+>> +dst_db=$SCRATCH_MNT/dst.db
+>> +
+>> +# initialize database file
+>> +$XFS_IO_PROG -c "pwrite 0 4k" -c "fsync" -f $src_db >> $seqres.full
+>> +
+>> +# sync filesystem to clear dirty inode
+>> +sync
+>> +
+>> +# start atomic_write on src.db database file and commit transaction after 3000ms
+>> +$F2FS_IO_PROG write 1 0 0 zero atomic_commit $src_db 3000 >> $seqres.full &
+>> +atomic_write_pid=$!
+>> +
+>> +# wait a moment to let atomic write starts
+>> +sleep 1
+>> +
+>> +# it will dirty inode when updating i_pino
+>> +mv $src_db $dst_db
+>> +
+>> +# wait for atomic_write commit completion
+>> +sleep 4
+>> +
+>> +# drop caches in order to call f2fs_evict_inode()
+>> +echo 3 > /proc/sys/vm/drop_caches
+>> +
+>> +wait $atomic_write_pid
 > 
->   # yum search */socket
->   Updating and loading repositories:
->    Fedora - Rawhide - Developmental packages for the next Fedora release                                              100% |  19.1 KiB/s |  23.6 KiB |  00m01s
->    Fedora - Rawhide - Developmental packages for the next Fedora release                                              100% | 694.7 KiB/s |   6.9 MiB |  00m10s
->   Repositories loaded.
->   No matches found.
+> So after this line, the $atomic_write_pid has been released. If so, how about:
 > 
-> If it's a program by yourself, we might can put it in xfstests/src/socket.c?
+> unset atomic_write_pid
+> 
+> And then in _cleanup function .... (see above)
+> 
+> Others look good to me,
 
-Hi Zorro,
-
-It's not a program from me, I just installed it w/ "sudo apt install socket", can
-you try that?
+Oh, correct, will fix this. Thank you!
 
 Thanks,
 
@@ -184,146 +234,18 @@ Thanks,
 > Thanks,
 > Zorro
 > 
->> +	_notrun "Couldn't find socket"
->> +fi
->> +
->> +_require_scratch
->> +_require_command "$F2FS_INJECT_PROG" inject.f2fs
->> +
->> +_fixed_by_git_commit f2fs-tools 958cd6e \
->> +	"fsck.f2fs: support to repair corrupted i_links"
->> +
->> +filename=$SCRATCH_MNT/foo
->> +hardlink=$SCRATCH_MNT/bar
->> +
->> +_cleanup()
->> +{
->> +	if [ -n "$pid" ]; then
->> +		kill $pid &> /dev/null
->> +		wait
->> +	fi
->> +	cd /
->> +	rm -r -f $tmp.*
->> +}
->> +
->> +for ((i=0;i<14;i++)) do
->> +	echo "round: " $i >> $seqres.full
->> +
->> +	_scratch_mkfs >> $seqres.full
->> +	_scratch_mount
->> +
->> +	if [ $i == 0 ]; then
->> +		touch $filename
->> +		ino=`stat -c '%i' $filename`
->> +		nlink=0
->> +	elif [ $i == 1 ]; then
->> +		mkdir $filename
->> +		ino=`stat -c '%i' $filename`
->> +		nlink=1
->> +	elif [ $i == 2 ]; then
->> +		mknod $filename c 9 0
->> +		ino=`stat -c '%i' $filename`
->> +		nlink=0
->> +	elif [ $i == 3 ]; then
->> +		mknod $filename b 8 0
->> +		ino=`stat -c '%i' $filename`
->> +		nlink=0
->> +	elif [ $i == 4 ]; then
->> +		mkfifo $filename
->> +		ino=`stat -c '%i' $filename`
->> +		nlink=0
->> +	elif [ $i == 5 ]; then
->> +		socket -s $filename >> $seqres.full 2>&1 &
->> +		pid=$!
->> +		sleep 2
->> +		ino=`stat -c '%i' $filename`
->> +		kill $pid >> $seqres.full 2>&1
->> +		nlink=0
->> +	elif [ $i == 6 ]; then
->> +		ln -s $SCRATCH_MNT/empty $filename
->> +		ino=`stat -c '%i' $filename`
->> +		nlink=0
->> +	elif [ $i == 7 ]; then
->> +		# orphan inode
->> +		touch $filename
->> +		ino=`stat -c '%i' $filename`
->> +		$F2FS_IO_PROG write 1 0 1 zero atomic_commit $filename 5000 >> $seqres.full 2>&1 &
->> +		stat $filename >> $seqres.full
->> +		rm $filename
->> +		$F2FS_IO_PROG shutdown 1 $SCRATCH_MNT/ >> $seqres.full
->> +		sleep 6
->> +		nlink=1
->> +	elif [ $i == 8 ]; then
->> +		# hardlink on file
->> +		touch $filename
->> +		ino=`stat -c '%i' $filename`
->> +		ln $filename $hardlink
->> +		nlink=0
->> +	elif [ $i == 9 ]; then
->> +		# hardlink on charactor
->> +		mknod $filename c 9 0
->> +		ino=`stat -c '%i' $filename`
->> +		ln $filename $hardlink
->> +		nlink=0
->> +	elif [ $i == 10 ]; then
->> +		# hardlink on blockdev
->> +		mknod $filename b 8 0
->> +		ino=`stat -c '%i' $filename`
->> +		ln $filename $hardlink
->> +		nlink=0
->> +	elif [ $i == 11 ]; then
->> +		# hardlink on pipe
->> +		mkfifo $filename
->> +		ino=`stat -c '%i' $filename`
->> +		ln $filename $hardlink
->> +		nlink=0
->> +	elif [ $i == 12 ]; then
->> +		# hardlink on socket
->> +		socket -s $filename >> $seqres.full 2>&1 &
->> +		pid=$!
->> +		sleep 2
->> +		ino=`stat -c '%i' $filename`
->> +		kill $pid >> $seqres.full 2>&1
->> +		ln $filename $hardlink
->> +		nlink=0
->> +	elif [ $i == 13 ]; then
->> +		# hardlink on symlink
->> +		ln -s $SCRATCH_MNT/empty $filename
->> +		ino=`stat -c '%i' $filename`
->> +		ln $filename $hardlink
->> +		nlink=0
->> +	fi
->> +
->> +	if [ $i != 7 ]; then
->> +		stat $SCRATCH_MNT/* >> $seqres.full
->> +	fi
->> +	echo "ino:"$ino >> $seqres.full
->> +	echo "nlink:"$nlink >> $seqres.full
->> +
->> +	_scratch_unmount
->> +
->> +	$F2FS_INJECT_PROG --node --mb i_links --nid $ino --val $nlink $SCRATCH_DEV \
->> +		>> $seqres.full || _fail "fail to inject"
->> +
->> +	_check_scratch_fs >> $seqres.full 2>&1 && _fail "can't find corruption"
->> +	_repair_scratch_fs >> $seqres.full
->> +	_check_scratch_fs >> $seqres.full 2>&1 || _fail "fsck can't fix corruption"
->> +
->> +	_scratch_mount
->> +	_scratch_unmount
->> +done
 >> +
 >> +echo "Silence is golden"
 >> +
 >> +status=0
 >> +exit
->> diff --git a/tests/f2fs/009.out b/tests/f2fs/009.out
+>> diff --git a/tests/f2fs/010.out b/tests/f2fs/010.out
 >> new file mode 100644
->> index 00000000..7e977155
+>> index 00000000..1d83a8d6
 >> --- /dev/null
->> +++ b/tests/f2fs/009.out
+>> +++ b/tests/f2fs/010.out
 >> @@ -0,0 +1,2 @@
->> +QA output created by 009
+>> +QA output created by 010
 >> +Silence is golden
 >> -- 
 >> 2.48.1
