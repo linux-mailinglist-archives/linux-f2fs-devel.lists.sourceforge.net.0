@@ -2,107 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9BCCA70E52
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Mar 2025 01:56:56 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 517A4A70F5A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Mar 2025 04:25:13 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1txF4R-0004dJ-K8;
-	Wed, 26 Mar 2025 00:56:40 +0000
+	id 1txHO5-0002q4-UC;
+	Wed, 26 Mar 2025 03:25:05 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1txF4Q-0004dB-3u
+ (envelope-from <chao@kernel.org>) id 1txHO4-0002px-Mi
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 26 Mar 2025 00:56:38 +0000
+ Wed, 26 Mar 2025 03:25:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/K6SdQgOzXbljSbaFexcMPY4TGlD97ZZ0DCXd5kKlOE=; b=Lq44dvrHY3KuhBKnIzxVn0W6rF
- ldwGd5B9M1GhusFZJu0+nMb3KOVYS4DEZfwAIJH+VYf7s5MKkBYUCAvafIs26eyeKnG+HjPqHnQMD
- nzvBTlCfrkbbq/XXWSfM5kI2A+0qluki2gT+pDhFxxm13444m3zaq6k8l+plG8rrvQvU=;
+ bh=lYwSI+UfJ8nJ35/ucGFPAfAzbUxMFOnZmKsO2TepCUs=; b=KmU+DM3sYBcOA5tfucgu9x6kxl
+ wmS5PG1MJTGT9mH8KV20SFUwjNtU5sKQ/oH+7a/dAJoDvica3HVVRNH0aLSeDHD8TYk07EW49CI0p
+ Ei9BRO0G+RfTHPvqyYY1xRsv62FVH1q/y/1PXecl+KGSED+csSFhiUw3kUKkGTV8ISiA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/K6SdQgOzXbljSbaFexcMPY4TGlD97ZZ0DCXd5kKlOE=; b=DcWtEbPl8f+oZpBQPMisrFBQ9p
- D9L4vMdohhPuuw/cTc3SQP4kmvW/JwVBddrGPw6D6DV8LWboSGY7JNRyqN+f+bsa8rzBg8IHdmvSk
- aHEL6MU17WEMtgvqbAHhEuBHS9K4OCMcvEXAgcV9aTC45XA0kNqywMab+WBxSkjtFTrg=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ bh=lYwSI+UfJ8nJ35/ucGFPAfAzbUxMFOnZmKsO2TepCUs=; b=jgQeMffaLEkymD8h6m+0GHHAWK
+ JiGDGCOsQJUznkt7i00KwJ2EP7PxJiFugo+KUdDUG38UHdc02DQUodcbG1+mZaGM8LM1+an+0gTY8
+ ofAb9HimHpvTUvoWsP1dTcNi8wDxy8f+6S1R6ctstCEsslwBD8L7SR6OuR3P9q5NkzIU=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1txF4F-0004Cu-6i for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 26 Mar 2025 00:56:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1742950576;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=/K6SdQgOzXbljSbaFexcMPY4TGlD97ZZ0DCXd5kKlOE=;
- b=Cnn/EwbaR7jOIpbOuOnGzgLjhEHcu7vfC4rAXiCJ9EbTnfS0EFTRI0f0QndLx7D90pvOO2
- dIcE0zaG1aQ8ZJ/95qoaOdDkqxqra1Wqn9qEVzq2xmb0GIAoxwYSVihlngw5QXO5eFpHfW
- OMxY26sjcbX1p+nCEdj8YuuNL83RMFw=
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-112-8cBou4tcOPmBBrgPHIxV4Q-1; Tue, 25 Mar 2025 20:56:14 -0400
-X-MC-Unique: 8cBou4tcOPmBBrgPHIxV4Q-1
-X-Mimecast-MFC-AGG-ID: 8cBou4tcOPmBBrgPHIxV4Q_1742950574
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2242f3fd213so97980605ad.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 25 Mar 2025 17:56:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742950574; x=1743555374;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/K6SdQgOzXbljSbaFexcMPY4TGlD97ZZ0DCXd5kKlOE=;
- b=BHz6ZbU4DbdYy8H3izj6MPlt2Xdioxdm7csDHKMahhvZCb/bMtdsQakza21uogj5bP
- PYDorYxo9Ly03MuMfRzx7+xkgLMNO+2eUaMmVhGU4Yh3l6gWKaxYiAM6beZ83fl7O8Cg
- GL7mSDAdJdqDLJbbJOEHmmyLqjKprMD5dFJC5ZijGgG9HRVBkb12KR/KRGTfpZbVEZPW
- gKarGJQOfFqLPoqh0QzL8S6H/b6q+3g24Dq2VWhjw+sm9/x1smLuONcBbsj4Yl9ScuKL
- Sw4/zEyNaMlY73sglZCfFPq8V099wHEDH81X4bIXiua6lERIpmN5p+KbSOglkSBKjHSA
- Qsog==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXfiW475TFJ525SUr8C24I2tyHhQuIF3lscmvCgePnHJynfM+98f3RFa9vtUl0StmT4UResXPg7Z392+lOxxxIo@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzRzz69YVdDc/YeqpsPUdxLRNUEJaUWHhDakILlYV08k7juZbMU
- fW4UJQA7K3i+m1zp4ml5drBVWaldIK3jXvz89s+D+eNFfSDbbHi3FCpGVqAzjpYpZ60qUy3a9jq
- 80G3TixO1ms7LuDKhXmK/+NdvDeSXxc//oGVwru+5QHkvHP4IqFQBz9KxLiUfP5O3ns+/9XuvKc
- w=
-X-Gm-Gg: ASbGncukJiTjES/6mtS7+OSAKiq2cvTKhdwd6/mqz8JtT0KaZK2wQe0hw3hiGDizzed
- ix/m07M60JlUw3QK8QKPW4yDGeNiE5F75rWK/N0VDdtlbQvu7REMrsLccMhxf9fAnHamoXaGzm4
- KIMhiOx0r9nTXYYiRQWCdNxOgL6JLr96F5gefvm/5CWjxct6UNciwJ4DSiA442HIEUCPSDjWXKV
- yjagD/cb/ereT32aPwsnn27jg/CkGkopLmdAbA2igXnraW6H9IxUSs4eUX8L4Tx1q4SnecJ0LjN
- Af/znqnm6dwl3/xOkPby/4vEX8/sH7V+ll26rf7jextsCnFcbGdsZ3tm
-X-Received: by 2002:a17:903:2ecb:b0:224:1221:1ab4 with SMTP id
- d9443c01a7336-22780db101dmr319118165ad.22.1742950573811; 
- Tue, 25 Mar 2025 17:56:13 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFiom4y0E7ipbRr3hLdXuZPOncTeT9D36443uQvS5xvm68/hNHMJ/9AxSqb7DSpSFB4YNjMVA==
-X-Received: by 2002:a17:903:2ecb:b0:224:1221:1ab4 with SMTP id
- d9443c01a7336-22780db101dmr319117935ad.22.1742950573486; 
- Tue, 25 Mar 2025 17:56:13 -0700 (PDT)
-Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([43.228.180.230])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-227811f443asm97012375ad.228.2025.03.25.17.56.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Mar 2025 17:56:13 -0700 (PDT)
-Date: Wed, 26 Mar 2025 08:56:09 +0800
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20250326005609.zrgpfuycgtihmmym@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-References: <20250325083428.3301950-1-chao@kernel.org>
+ id 1txHNy-0000fN-7r for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 26 Mar 2025 03:25:04 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 20C8761132;
+ Wed, 26 Mar 2025 03:24:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2890FC4CEE2;
+ Wed, 26 Mar 2025 03:24:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1742959487;
+ bh=slulgQE+aQy8LnXABstJI1BsbYuK7K2GlkRqWtbSuz8=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=F9FPCAbzYPZeT7YoHrHWfj7nRRfLTkWj90rnHLh+VVjsp+DRmVQRme/X4w3npGZx+
+ ax5usCDXTPnwLm+b67FHZjFrwEDp8HmzjU70dO7wp9ChsewDV5YDIIn6DZsIo11IrT
+ IM10FIOzkiiY2IDQSdWfpgbrLxUCP3VlmG/2Vep32R3p/+4Psq2QFOkykI3C//zx8j
+ 1rsRH4R1gMKOiWWel35ifQuag9+NrsPM2tjXRIcYJQfSXSfxnmVsn/hKhKfqqmmdUl
+ etYNpPDJFYDVXGqRnSriuUQ1pAzlFImYq64qZkPtW2BWsAA57JEXR43aO1LIjbz92C
+ 6tXHSWF6yyKxg==
+Message-ID: <5ae5a7d0-18bb-49f1-abb2-46807e39a7fe@kernel.org>
+Date: Wed, 26 Mar 2025 11:24:44 +0800
 MIME-Version: 1.0
-In-Reply-To: <20250325083428.3301950-1-chao@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: h7dSkPHDTvDWVEnU96lA7ZsGBfuDJaqLHZGVxBB8S0w_1742950574
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+To: Zorro Lang <zlang@redhat.com>, Dave Chinner <david@fromorbit.com>
+References: <20250325125824.3367060-1-chao@kernel.org>
+ <20250325125824.3367060-6-chao@kernel.org>
+ <Z-M6PkLZI2LIOlXY@dread.disaster.area>
+ <20250326004748.bx2z62lpqpg6rjlj@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+Content-Language: en-US
+In-Reply-To: <20250326004748.bx2z62lpqpg6rjlj@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -110,28 +72,24 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Mar 25, 2025 at 04:34:28PM +0800, Chao Yu wrote: >
- This is a regression testcase to check whether we will handle database >
- inode dirty status correctly: > 1. create a regular file, and write [...] 
+ Content preview:  On 3/26/25 08:47, Zorro Lang wrote: > On Wed, Mar 26, 2025
+ at 10:20:30AM +1100, Dave Chinner wrote: >> On Tue, Mar 25, 2025 at 08:58:24PM
+ +0800, Chao Yu wrote: >>> This is a regression test to check w [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.133.124 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [170.10.133.124 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [170.10.133.124 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [170.10.133.124 listed in wl.mailspike.net]
+ [172.105.4.254 listed in bl.score.senderscore.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.105.4.254 listed in sa-trusted.bondedsender.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -140,9 +98,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1txF4F-0004Cu-6i
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs/010: test dirty status handling on
- database file
+X-Headers-End: 1txHNy-0000fN-7r
+Subject: Re: [f2fs-dev] [PATCH v5 6/6] f2fs/009: detect and repair nlink
+ corruption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -154,132 +112,142 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Zorro Lang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Zorro Lang <zlang@redhat.com>
-Cc: Daeho Jeong <daehojeong@google.com>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org,
- Zorro Lang <zlang@kernel.org>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: jaegeuk@kernel.org, fstests@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Mar 25, 2025 at 04:34:28PM +0800, Chao Yu wrote:
-> This is a regression testcase to check whether we will handle database
-> inode dirty status correctly:
-> 1. create a regular file, and write data into the file
-> 2. start transaction on the file (via F2FS_IOC_START_ATOMIC_WRITE)
-> 3. write transaction data to the file
-> 4. rename the file
-> 5. commit and end the transaction (via F2FS_IOC_COMMIT_ATOMIC_WRITE)
-> 6. drop caches in order to call f2fs_evict_inode()
-> It expects kernel panic will gone after we apply commit 03511e936916
-> ("f2fs: fix inconsistent dirty state of atomic file").
+On 3/26/25 08:47, Zorro Lang wrote:
+> On Wed, Mar 26, 2025 at 10:20:30AM +1100, Dave Chinner wrote:
+>> On Tue, Mar 25, 2025 at 08:58:24PM +0800, Chao Yu wrote:
+>>> This is a regression test to check whether fsck can handle corrupted
+>>> nlinks correctly, it uses inject.f2fs to inject nlinks w/ wrong value,
+>>> and expects fsck.f2fs can detect such corruption and do the repair.
+>>>
+>>> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+>>> Signed-off-by: Chao Yu <chao@kernel.org>
+>>> ---
+>>> v5:
+>>> - clean up codes suggested by Dave.
+>>>  tests/f2fs/009     | 141 +++++++++++++++++++++++++++++++++++++++++++++
+>>>  tests/f2fs/009.out |   2 +
+>>>  2 files changed, 143 insertions(+)
+>>>  create mode 100755 tests/f2fs/009
+>>>  create mode 100644 tests/f2fs/009.out
+>>>
+>>> diff --git a/tests/f2fs/009 b/tests/f2fs/009
+>>> new file mode 100755
+>>> index 00000000..864fdcfb
+>>> --- /dev/null
+>>> +++ b/tests/f2fs/009
+>>> @@ -0,0 +1,141 @@
+>>> +#! /bin/bash
+>>> +# SPDX-License-Identifier: GPL-2.0
+>>> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
+>>> +#
+>>> +# FS QA Test No. f2fs/009
+>>> +#
+>>> +# This is a regression test to check whether fsck can handle corrupted
+>>> +# nlinks correctly, it uses inject.f2fs to inject nlinks w/ wrong value,
+>>> +# and expects fsck.f2fs can detect such corruption and do the repair.
+>>> +#
+>>> +. ./common/preamble
+>>> +_begin_fstest auto quick
+>>> +
+>>> +if [ ! -x "$(type -P socket)" ]; then
+>>> +	_notrun "Couldn't find socket"
+>>> +fi
+>>
+>> Perhaps something like:
+>>
+>> _require_command $(type -P socket) socket
 > 
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-> Cc: Daeho Jeong <daehojeong@google.com>
-> Cc: Jianan Huang <huangjianan@xiaomi.com>
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
-> v2:
-> - fix to unset atomic_write_pid to avoid killing process w/ dummy pid value
-
-This version is good to me, if no more review points from f2fs list, I'll merge
-this version.
-
-Reviewed-by: Zorro Lang <zlang@redhat.com>
-
->  tests/f2fs/010     | 69 ++++++++++++++++++++++++++++++++++++++++++++++
->  tests/f2fs/010.out |  2 ++
->  2 files changed, 71 insertions(+)
->  create mode 100755 tests/f2fs/010
->  create mode 100644 tests/f2fs/010.out
+> Good point! Maybe double quotation marks -- "$(type -P socket)" is
+> helpful, due to if socket isn't installed, there will be only one
+> argument.
 > 
-> diff --git a/tests/f2fs/010 b/tests/f2fs/010
-> new file mode 100755
-> index 00000000..50e37817
-> --- /dev/null
-> +++ b/tests/f2fs/010
-> @@ -0,0 +1,69 @@
-> +#! /bin/bash
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
-> +#
-> +# FS QA Test No. f2fs/010
-> +#
-> +# This is a regression testcase to check whether we will handle database
-> +# inode dirty status correctly:
-> +# 1. create a regular file, and write data into the file
-> +# 2. start transaction on the file (via F2FS_IOC_START_ATOMIC_WRITE)
-> +# 3. write transaction data to the file
-> +# 4. rename the file
-> +# 5. commit and end the transaction (via F2FS_IOC_COMMIT_ATOMIC_WRITE)
-> +# 6. drop caches in order to call f2fs_evict_inode()
-> +# It expects kernel panic will gone after we apply commit 03511e936916
-> +# ("f2fs: fix inconsistent dirty state of atomic file").
-> +#
-> +. ./common/preamble
-> +_begin_fstest auto quick
-> +
-> +_cleanup()
-> +{
-> +	[ -n "$atomic_write_pid" ] && kill -9 $atomic_write_pid
-> +	wait
-> +	cd /
-> +	rm -r -f $tmp.*
-> +}
-> +
-> +_fixed_by_kernel_commit 03511e936916 \
-> +	"f2fs: fix inconsistent dirty state of atomic file"
-> +
-> +_require_scratch
-> +_require_command "$F2FS_IO_PROG" f2fs_io
-> +
-> +_scratch_mkfs >> $seqres.full
-> +_scratch_mount >> $seqres.full
-> +
-> +src_db=$SCRATCH_MNT/src.db
-> +dst_db=$SCRATCH_MNT/dst.db
-> +
-> +# initialize database file
-> +$XFS_IO_PROG -c "pwrite 0 4k" -c "fsync" -f $src_db >> $seqres.full
-> +
-> +# sync filesystem to clear dirty inode
-> +sync
-> +
-> +# start atomic_write on src.db database file and commit transaction after 3000ms
-> +$F2FS_IO_PROG write 1 0 0 zero atomic_commit $src_db 3000 >> $seqres.full &
-> +atomic_write_pid=$!
-> +
-> +# wait a moment to let atomic write starts
-> +sleep 1
-> +
-> +# it will dirty inode when updating i_pino
-> +mv $src_db $dst_db
-> +
-> +# wait for atomic_write commit completion
-> +sleep 4
-> +
-> +# drop caches in order to call f2fs_evict_inode()
-> +echo 3 > /proc/sys/vm/drop_caches
-> +
-> +wait $atomic_write_pid
-> +unset atomic_write_pid
-> +
-> +echo "Silence is golden"
-> +
-> +status=0
-> +exit
-> diff --git a/tests/f2fs/010.out b/tests/f2fs/010.out
-> new file mode 100644
-> index 00000000..1d83a8d6
-> --- /dev/null
-> +++ b/tests/f2fs/010.out
-> @@ -0,0 +1,2 @@
-> +QA output created by 010
-> +Silence is golden
-> -- 
-> 2.48.1
+>>
+>> would be more consistent with all the other code that checks for
+
+Agreed.
+
+>> installed utilities that a test requires?
+>>
+>>> +_require_scratch
+>>> +_require_command "$F2FS_INJECT_PROG" inject.f2fs
+>>> +
+>>> +_fixed_by_git_commit f2fs-tools 958cd6e \
+>>> +	"fsck.f2fs: support to repair corrupted i_links"
+>>> +
+>>> +filename=$SCRATCH_MNT/foo
+>>> +hardlink=$SCRATCH_MNT/bar
+>>> +
+>>> +_cleanup()
+>>> +{
+>>> +	if [ -n "$pid" ]; then
+>>> +		kill $pid &> /dev/null
+>>> +		wait
+>>> +	fi
+>>> +	cd /
+>>> +	rm -r -f $tmp.*
+>>> +}
+>>> +
+>>> +_inject_and_check()
+>>
+>> Single leading "_" is reserved for fstests functions, not for local
+>> test functions.
+
+Oh, got it.
+
+>>
+>> Just call this one "inject_and_test", because that is what it does,
+>> and call this one:
+>>
+>>> +inject_and_check()
+>>> +{
+>>> +	local nlink=$1
+>>> +	local create_hardlink=$2
+>>> +	local ino=$3
+>>> +
+>>> +	if [ -z $ino ]; then
+>>> +		ino=`stat -c '%i' $filename`
+>>> +	fi
+>>> +
+>>> +	if [ $create_hardlink == 1 ]; then
+>>> +		ln $filename $hardlink
+>>> +	fi
+>>> +
+>>> +	_inject_and_check $nlink $ino
+>>> +}
+>>
+>> something like check_links()
+>>
+>> Otherwise this is a good improvement.
+
+Thanks Dave for all your review and suggestion!
+
 > 
+> Hi Chao, if you agree with all these changes, and don't need to change more, I can
+> help to merge this patchset with above changes. Or you'd like to send a new version?
+
+Zorro, I'm fine w/ all the changes, I'm appreciate for that if you can
+help to update the patch!
+
+Thanks,
+
+> 
+> Thanks,
+> Zorro
+> 
+>>
+>> -Dave.
+>> -- 
+>> Dave Chinner
+>> david@fromorbit.com
+>>
 > 
 
 
