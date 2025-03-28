@@ -2,104 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC3FFA742D0
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Mar 2025 04:30:09 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27621A742D6
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Mar 2025 04:41:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ty0Pu-0005MV-DQ;
-	Fri, 28 Mar 2025 03:29:59 +0000
+	id 1ty0aa-0007xt-6o;
+	Fri, 28 Mar 2025 03:41:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1ty0Ps-0005MP-Uh
+ (envelope-from <yohan.joung@sk.com>) id 1ty0aY-0007xm-ON
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Mar 2025 03:29:57 +0000
+ Fri, 28 Mar 2025 03:40:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JCA38pvHT1dZ9UIjbQDIGLG/W4VaDhW1DYdZPWu18XE=; b=HitQMCkoOPmZ8J/aTBtTw3dqHi
- i4n57GOVoEHkUu/SN61a7Cgn/NZD+67nHMGCU9C2xUV2z3ozThcrOhBnBZXQyEQn5mEG9MqedzU+9
- N094P7SwTGTHqArNawFW6/1gWmbAebUfrU0tRXs9WW4nVIFrNn3lZfjN2JujbvnegHDY=;
+ bh=+Fpk5q+DL6eSAjY7P9CU8lttSPAJR4QFVI3ljb4GX5I=; b=mewQQXeaXdDvfBAEfJ7iaWYVBr
+ 8yMx0I//kSwdt7SyjAQoKIu3qS/pF/RuMoB0DsrZObn+1iChozAm/ICfjAgwSyH8j7/lbdLtdm7/3
+ reUlKJAMFqS2Ak3QHyi8qqrxJfJyOEFx1RTTdnpfzL85h3/DE216RlL0y9ZlH4C2Lt9c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JCA38pvHT1dZ9UIjbQDIGLG/W4VaDhW1DYdZPWu18XE=; b=joIELyhRnm3WYlxwcidsV/iDgQ
- TXSmDgVnHzG3xNk/GjBV6Wj+I8PjeC4qAn1mxfrAFY479blhm3qV/m4y9BdKMJ06Z5Li4voY8PI3i
- kbENTRSaws0DgPKHl77c7BECWyqXxyb52zmYUl6owXa1r/E6SKlDZ9FD23pkJApU38Pw=;
-Received: from sea.source.kernel.org ([172.234.252.31])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ty0Pn-0003ik-SH for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Mar 2025 03:29:57 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 10C484453A;
- Fri, 28 Mar 2025 03:29:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 24C50C4CEDD;
- Fri, 28 Mar 2025 03:29:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743132586;
- bh=fFHh/7o5dVm+ZWv7/WGLvJs+KgMMTP4llLeLOFEYEVM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=oAorpbq28XkkI2Dp2iR+VZdQOb0oqdrOxk7WjqCNo0z8LpXPphVbxHONeQQsVY0O9
- w8GAVuureAjqfv8BN1b+yBnUh/8L6EA7ncXKzX4OWgU9fJK1amWEPSoIVVzo7zZlBl
- 6cESQiQvaMg47G0rxZWVfx4+JYc4lZG6Z8yFC+MIrAKYBgrITHXPXGxZOLxwCNJpUx
- zQSIvrNKhs8kzpKdpLpMw7wELBKuaV5AIGuskgS9L3rW0BQ0t5Ykl8YTUXZ5XG6mgN
- hw1iDxCZ9j7InszfHE83oeRcjNv+zHhkyxnEMaGuT197ExUZZH0gKwCZYjqqr/As5R
- xz+G5iRpQPoxw==
-Date: Fri, 28 Mar 2025 03:29:44 +0000
-To: Chao Yu <chao@kernel.org>
-Message-ID: <Z-YXqKOIgYCpfuL0@google.com>
-References: <20250325080646.3291947-1-chao@kernel.org>
+ bh=+Fpk5q+DL6eSAjY7P9CU8lttSPAJR4QFVI3ljb4GX5I=; b=B11U3FZXh9pgHa31VVl1BSJHPt
+ K2cGwPu/fT3Umozsdf5T+SgxqYpkXTNWmGKdUO6V/f+dtAd+ZH6X6CT7YwFQDNngNaaxrLtk14cgG
+ CaIujRilwTZSFX9plvZaQPmzAvk4lGc+x/0gyWEo87/e2atRCyZVqbA2YJxsiCy++Z0I=;
+Received: from exvmail3.skhynix.com ([166.125.252.90]
+ helo=invmail3.skhynix.com)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1ty0aW-0004L9-Kv for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 28 Mar 2025 03:40:59 +0000
+X-AuditID: a67dfc59-057ff7000000aab6-1a-67e61a3bc9ce
+From: "yohan.joung" <yohan.joung@sk.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 28 Mar 2025 12:40:36 +0900
+Message-ID: <20250328034042.2444-1-yohan.joung@sk.com>
+X-Mailer: git-send-email 2.49.0.windows.1
+In-Reply-To: <60e763d5-dff4-44a1-9e80-48d384335027@kernel.org>
+References: <60e763d5-dff4-44a1-9e80-48d384335027@kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250325080646.3291947-1-chao@kernel.org>
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrPLMWRmVeSWpSXmKPExsXC9ZZnka611LN0g7OLVSxOTz3LZPHmyBkW
+ iyfrZzFbfLl6jd3i0iJ3i8u75rA5sHnsnHWX3WPTqk42j90LPjN5fN4kF8ASxWWTkpqTWZZa
+ pG+XwJXRtvw8W0GfXcWTg5eZGhiXGXQxcnJICJhIXHqwkBXGnv/nLTOIzSagIfGntxfMFhHQ
+ kpjY8Jexi5GLg1lgHqPEp/0bmUEcYYHFjBK3bj5jAqliEVCVaDp+gBHE5hUwk9i26xELxFRN
+ iR1fzoPVcArYSdx/PB0sLiRgK7Hr7j82iHpBiZMznwDFOYA2qEusnycEEmYWkJdo3jobbJeE
+ wBI2ie4rL5khZkpKHFxxg2UCo8AsJO2zENpnIWlfwMi8ilEkM68sNzEzx1ivODujMi+zQi85
+ P3cTIzCYl9X+idzB+O1C8CFGAQ5GJR7eA7ZP04VYE8uKK3MPMUpwMCuJ8EpeeZIuxJuSWFmV
+ WpQfX1Sak1p8iFGag0VJnNfoW3mKkEB6YklqdmpqQWoRTJaJg1OqgXH6ruQoi2mb2X99btzN
+ qOivyJ91OvzAlP37m9tKblrk3T9/knWe/vOsm5tLbbnFD62qujv55e7NbU1lPyMabuWoi23x
+ rw7/23c+6Uzw7Ri7tdv5pt+VMqzdd1HxSDVrzJJF10+XmGw76fx1xq2pq00ki5b+mtf7NJL1
+ htw0w4euCUbp4r0/PdOVWIozEg21mIuKEwFJj0oNYgIAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrBLMWRmVeSWpSXmKPExsXCNUNljq611LN0g30fJC1OTz3LZPHmyBkW
+ iyfrZzFbfLl6jd3i0iJ3i8u75rBZTJh7lcni/dZ7jA4cHjtn3WX32LSqk81j94LPTB7fbnt4
+ fN4kF8AaxWWTkpqTWZZapG+XwJXRtvw8W0GfXcWTg5eZGhiXGXQxcnJICJhIzP/zlhnEZhPQ
+ kPjT2wtmiwhoSUxs+MvYxcjFwSwwj1Hi0/6NzCCOsMBiRolbN58xgVSxCKhKNB0/wAhi8wqY
+ SWzb9YgFYqqmxI4v58FqOAXsJO4/ng4WFxKwldh19x8bRL2gxMmZT4DiHEAb1CXWzxMCCTML
+ yEs0b53NPIGRdxaSqlkIVbOQVC1gZF7FKJKZV5abmJljplecnVGZl1mhl5yfu4kRGJ7Lav9M
+ 2sH47bL7IUYBDkYlHt4Dtk/ThVgTy4orcw8xSnAwK4nwSl55ki7Em5JYWZValB9fVJqTWnyI
+ UZqDRUmc1ys8NUFIID2xJDU7NbUgtQgmy8TBKdXAeKA4SrVjV/CpkjR9pmdPtpSneDIrq+V9
+ 5rKMPqJ22IBHj21lEI93b8EL/5tG4W4uGTZtwSKB4mvsP1xmDnpxIrmdXZwt87ZaStLF/Xe2
+ rGzorZBnPK7IdPjEi/1Mwd0vLkyNMs24m+D5/M0KrdLbF2avOtZ7YYLdj3bOiNad0ze3v2mc
+ emu2EktxRqKhFnNRcSIA+phMcUsCAAA=
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: It seems this patch breaks the multi-partition cases. On
- 03/25, 
- Chao Yu wrote: > A zoned device can has both conventional zones and sequential
- zones,
- > so we should not treat first segment of zoned device as first_zoned_segno, 
- > instead, we need to check [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  > From: Chao Yu <chao@kernel.org> > Sent: Thursday, March
+   27, 2025 10:48 PM > To: 정요한(JOUNG YOHAN) Mobile AE <yohan.joung@sk.com>;
+    Yohan Joung > <jyh429@gmail.com>; jaegeuk@kernel.org; daeho43@g [...] 
+ 
+ Content analysis details:   (0.0 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [172.234.252.31 listed in sa-trusted.bondedsender.org]
+  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+                             The query to Validity was blocked.  See
+                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
+                              for more information.
+                         [166.125.252.90 listed in sa-trusted.bondedsender.org]
+  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+                             query to Validity was blocked.  See
+                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
+                              for more information.
+                            [166.125.252.90 listed in bl.score.senderscore.com]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [172.234.252.31 listed in bl.score.senderscore.com]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ty0Pn-0003ik-SH
-Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: zone: fix to calculate
- first_zoned_segno correctly
+X-Headers-End: 1ty0aW-0004L9-Kv
+Subject: Re: [f2fs-dev] [External Mail] Re: [External Mail] Re: [PATCH]
+ f2fs: prevent the current section from being selected as a victim during
+ garbage collection
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,154 +113,149 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: jyh429@gmail.com, linux-kernel@vger.kernel.org, pilhyun.kim@sk.com,
+ jaegeuk@kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-It seems this patch breaks the multi-partition cases.
-
-On 03/25, Chao Yu wrote:
-> A zoned device can has both conventional zones and sequential zones,
-> so we should not treat first segment of zoned device as first_zoned_segno,
-> instead, we need to check zone type for each zone during traversing zoned
-> device to find first_zoned_segno.
-> 
-> Otherwise, for below case, first_zoned_segno will be 0, which could be
-> wrong.
-> 
-> create_null_blk 512 2 1024 1024
-> mkfs.f2fs -m /dev/nullb0
-> 
-> Fixes: 9703d69d9d15 ("f2fs: support file pinning for zoned devices")
-> Cc: Daeho Jeong <daehojeong@google.com>
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
-> v2:
-> - traverse w/ zone unit in get_first_zoned_segno()
->  fs/f2fs/f2fs.h    | 18 +++++++++++++-----
->  fs/f2fs/segment.c |  2 +-
->  fs/f2fs/super.c   | 37 +++++++++++++++++++++++++++++++++----
->  3 files changed, 47 insertions(+), 10 deletions(-)
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index ca884e39a5ff..3dea037faa55 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -4630,12 +4630,16 @@ F2FS_FEATURE_FUNCS(readonly, RO);
->  F2FS_FEATURE_FUNCS(device_alias, DEVICE_ALIAS);
->  
->  #ifdef CONFIG_BLK_DEV_ZONED
-> -static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
-> -				    block_t blkaddr)
-> +static inline bool f2fs_zone_is_seq(struct f2fs_sb_info *sbi, int devi,
-> +							unsigned int zone)
->  {
-> -	unsigned int zno = blkaddr / sbi->blocks_per_blkz;
-> +	return test_bit(zone, FDEV(devi).blkz_seq);
-> +}
->  
-> -	return test_bit(zno, FDEV(devi).blkz_seq);
-> +static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
-> +								block_t blkaddr)
-> +{
-> +	return f2fs_zone_is_seq(sbi, devi, blkaddr / sbi->blocks_per_blkz);
->  }
->  #endif
->  
-> @@ -4711,9 +4715,13 @@ static inline bool f2fs_valid_pinned_area(struct f2fs_sb_info *sbi,
->  					  block_t blkaddr)
->  {
->  	if (f2fs_sb_has_blkzoned(sbi)) {
-> +#ifdef CONFIG_BLK_DEV_ZONED
->  		int devi = f2fs_target_device_index(sbi, blkaddr);
->  
-> -		return !bdev_is_zoned(FDEV(devi).bdev);
-> +		return !f2fs_blkz_is_seq(sbi, devi, blkaddr);
-> +#else
-> +		return true;
-> +#endif
->  	}
->  	return true;
->  }
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 396ef71f41e3..dc360b4b0569 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -3311,7 +3311,7 @@ int f2fs_allocate_pinning_section(struct f2fs_sb_info *sbi)
->  
->  	if (f2fs_sb_has_blkzoned(sbi) && err == -EAGAIN && gc_required) {
->  		f2fs_down_write(&sbi->gc_lock);
-> -		err = f2fs_gc_range(sbi, 0, GET_SEGNO(sbi, FDEV(0).end_blk),
-> +		err = f2fs_gc_range(sbi, 0, sbi->first_zoned_segno - 1,
->  				true, ZONED_PIN_SEC_REQUIRED_COUNT);
->  		f2fs_up_write(&sbi->gc_lock);
->  
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 011925ee54f8..9a42a1323f42 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -4307,12 +4307,33 @@ static void f2fs_record_error_work(struct work_struct *work)
->  
->  static inline unsigned int get_first_zoned_segno(struct f2fs_sb_info *sbi)
->  {
-> +#ifdef CONFIG_BLK_DEV_ZONED
-> +	unsigned int zoneno, total_zones;
->  	int devi;
->  
-> -	for (devi = 0; devi < sbi->s_ndevs; devi++)
-> -		if (bdev_is_zoned(FDEV(devi).bdev))
-> -			return GET_SEGNO(sbi, FDEV(devi).start_blk);
-> -	return 0;
-> +	if (!f2fs_sb_has_blkzoned(sbi))
-> +		return NULL_SEGNO;
-> +
-> +	for (devi = 0; devi < sbi->s_ndevs; devi++) {
-> +		if (!bdev_is_zoned(FDEV(devi).bdev))
-> +			continue;
-> +
-> +		total_zones = GET_ZONE_FROM_SEG(sbi, FDEV(devi).total_segments);
-> +
-> +		for (zoneno = 0; zoneno < total_zones; zoneno++) {
-> +			unsigned int segs, blks;
-> +
-> +			if (!f2fs_zone_is_seq(sbi, devi, zoneno))
-> +				continue;
-> +
-> +			segs = GET_SEG_FROM_SEC(sbi,
-> +					zoneno * sbi->secs_per_zone);
-> +			blks = SEGS_TO_BLKS(sbi, segs);
-> +			return GET_SEGNO(sbi, FDEV(devi).start_blk + blks);
-> +		}
-> +	}
-> +#endif
-> +	return NULL_SEGNO;
->  }
->  
->  static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
-> @@ -4349,6 +4370,14 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
->  #endif
->  
->  	for (i = 0; i < max_devices; i++) {
-> +		if (max_devices == 1) {
-> +			FDEV(i).total_segments =
-> +				le32_to_cpu(raw_super->segment_count_main);
-> +			FDEV(i).start_blk = 0;
-> +			FDEV(i).end_blk = FDEV(i).total_segments *
-> +						BLKS_PER_SEG(sbi);
-> +		}
-> +
->  		if (i == 0)
->  			FDEV(0).bdev_file = sbi->sb->s_bdev_file;
->  		else if (!RDEV(i).path[0])
-> -- 
-> 2.48.1
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+PiBGcm9tOiBDaGFvIFl1IDxjaGFvQGtlcm5lbC5vcmc+Cj4gU2VudDogVGh1cnNkYXksIE1hcmNo
+IDI3LCAyMDI1IDEwOjQ4IFBNCj4gVG86IOygleyalO2VnChKT1VORyBZT0hBTikgTW9iaWxlIEFF
+IDx5b2hhbi5qb3VuZ0Bzay5jb20+OyBZb2hhbiBKb3VuZwo+IDxqeWg0MjlAZ21haWwuY29tPjsg
+amFlZ2V1a0BrZXJuZWwub3JnOyBkYWVobzQzQGdtYWlsLmNvbQo+IENjOiBjaGFvQGtlcm5lbC5v
+cmc7IGxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0OyBsaW51eC0KPiBrZXJu
+ZWxAdmdlci5rZXJuZWwub3JnOyDquYDtlYTtmIQoS0lNIFBJTEhZVU4pIE1vYmlsZSBBRSA8cGls
+aHl1bi5raW1Ac2suY29tPgo+IFN1YmplY3Q6IFtFeHRlcm5hbCBNYWlsXSBSZTogW0V4dGVybmFs
+IE1haWxdIFJlOiBbRXh0ZXJuYWwgTWFpbF0gUmU6Cj4gW1BBVENIXSBmMmZzOiBwcmV2ZW50IHRo
+ZSBjdXJyZW50IHNlY3Rpb24gZnJvbSBiZWluZyBzZWxlY3RlZCBhcyBhIHZpY3RpbQo+IGR1cmlu
+ZyBnYXJiYWdlIGNvbGxlY3Rpb24KPiAKPiBPbiAyMDI1LzMvMjcgMTY6MDAsIHlvaGFuLmpvdW5n
+QHNrLmNvbSB3cm90ZToKPiA+PiBGcm9tOiBDaGFvIFl1IDxjaGFvQGtlcm5lbC5vcmc+Cj4gPj4g
+U2VudDogVGh1cnNkYXksIE1hcmNoIDI3LCAyMDI1IDQ6MzAgUE0KPiA+PiBUbzog7KCV7JqU7ZWc
+KEpPVU5HIFlPSEFOKSBNb2JpbGUgQUUgPHlvaGFuLmpvdW5nQHNrLmNvbT47IFlvaGFuIEpvdW5n
+Cj4gPj4gPGp5aDQyOUBnbWFpbC5jb20+OyBqYWVnZXVrQGtlcm5lbC5vcmc7IGRhZWhvNDNAZ21h
+aWwuY29tCj4gPj4gQ2M6IGNoYW9Aa2VybmVsLm9yZzsgbGludXgtZjJmcy1kZXZlbEBsaXN0cy5z
+b3VyY2Vmb3JnZS5uZXQ7IGxpbnV4LQo+ID4+IGtlcm5lbEB2Z2VyLmtlcm5lbC5vcmc7IOq5gO2V
+hO2YhChLSU0gUElMSFlVTikgTW9iaWxlIEFFCj4gPj4gPHBpbGh5dW4ua2ltQHNrLmNvbT4KPiA+
+PiBTdWJqZWN0OiBbRXh0ZXJuYWwgTWFpbF0gUmU6IFtFeHRlcm5hbCBNYWlsXSBSZTogW1BBVENI
+XSBmMmZzOgo+ID4+IHByZXZlbnQgdGhlIGN1cnJlbnQgc2VjdGlvbiBmcm9tIGJlaW5nIHNlbGVj
+dGVkIGFzIGEgdmljdGltIGR1cmluZwo+ID4+IGdhcmJhZ2UgY29sbGVjdGlvbgo+ID4+Cj4gPj4g
+T24gMy8yNy8yNSAxNDo0MywgeW9oYW4uam91bmdAc2suY29tIHdyb3RlOgo+ID4+Pj4gRnJvbTog
+Q2hhbyBZdSA8Y2hhb0BrZXJuZWwub3JnPgo+ID4+Pj4gU2VudDogVGh1cnNkYXksIE1hcmNoIDI3
+LCAyMDI1IDM6MDIgUE0KPiA+Pj4+IFRvOiBZb2hhbiBKb3VuZyA8anloNDI5QGdtYWlsLmNvbT47
+IGphZWdldWtAa2VybmVsLm9yZzsKPiA+Pj4+IGRhZWhvNDNAZ21haWwuY29tCj4gPj4+PiBDYzog
+Y2hhb0BrZXJuZWwub3JnOyBsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldDsg
+bGludXgtCj4gPj4+PiBrZXJuZWxAdmdlci5rZXJuZWwub3JnOyDsoJXsmpTtlZwoSk9VTkcgWU9I
+QU4pIE1vYmlsZSBBRQo+ID4+Pj4gPHlvaGFuLmpvdW5nQHNrLmNvbT4KPiA+Pj4+IFN1YmplY3Q6
+IFtFeHRlcm5hbCBNYWlsXSBSZTogW1BBVENIXSBmMmZzOiBwcmV2ZW50IHRoZSBjdXJyZW50Cj4g
+Pj4+PiBzZWN0aW9uIGZyb20gYmVpbmcgc2VsZWN0ZWQgYXMgYSB2aWN0aW0gZHVyaW5nIGdhcmJh
+Z2UgY29sbGVjdGlvbgo+ID4+Pj4KPiA+Pj4+IE9uIDMvMjYvMjUgMjI6MTQsIFlvaGFuIEpvdW5n
+IHdyb3RlOgo+ID4+Pj4+IFdoZW4gc2VsZWN0aW5nIGEgdmljdGltIHVzaW5nIG5leHRfdmljdGlt
+X3NlZyBpbiBhIGxhcmdlIHNlY3Rpb24sCj4gPj4+Pj4gdGhlIHNlbGVjdGVkIHNlY3Rpb24gbWln
+aHQgYWxyZWFkeSBoYXZlIGJlZW4gY2xlYXJlZCBhbmQKPiA+Pj4+PiBkZXNpZ25hdGVkIGFzIHRo
+ZSBuZXcgY3VycmVudCBzZWN0aW9uLCBtYWtpbmcgaXQgYWN0aXZlbHkgaW4gdXNlLgo+ID4+Pj4+
+IFRoaXMgYmVoYXZpb3IgY2F1c2VzIGluY29uc2lzdGVuY3kgYmV0d2VlbiB0aGUgU0lUIGFuZCBT
+U0EuCj4gPj4+Pgo+ID4+Pj4gSGksIGRvZXMgdGhpcyBmaXggeW91ciBpc3N1ZT8KPiA+Pj4KPiA+
+Pj4gVGhpcyBpcyBhbiBpc3N1ZSB0aGF0IGFyaXNlcyB3aGVuIGRpdmlkaW5nIGEgbGFyZ2Ugc2Vj
+dGlvbiBpbnRvCj4gPj4+IHNlZ21lbnRzIGZvciBnYXJiYWdlIGNvbGxlY3Rpb24uCj4gPj4+IGNh
+dXNlZCBieSB0aGUgYmFja2dyb3VuZCBHQyAoZ2FyYmFnZSBjb2xsZWN0aW9uKSB0aHJlYWQgaW4g
+bGFyZ2UKPiA+Pj4gc2VjdGlvbgo+ID4+PiBmMmZzX2djKHZpY3RpbV9zZWN0aW9uKSAtPgo+ID4+
+PiBmMmZzX2NsZWFyX3ByZWZyZWVfc2VnbWVudHModmljdGltX3NlY3Rpb24pLT4KPiA+Pj4gY3Vy
+c2VjKHZpY3RpbV9zZWN0aW9uKSAtPiBmMmZzX2djKHZpY3RpbV9zZWN0aW9uIGJ5IG5leHRfdmlj
+dGltX3NlZykKPiA+Pgo+ID4+IEkgZGlkbid0IGdldCBpdCwgd2h5IGYyZnNfZ2V0X3ZpY3RpbSgp
+IHdpbGwgcmV0dXJuIHNlY3Rpb24gd2hpY2ggaXMKPiA+PiB1c2VkIGJ5IGN1cnNlZz8gSXQgc2hv
+dWxkIGJlIGF2b2lkZWQgYnkgY2hlY2tpbmcgdy8gc2VjX3VzYWdlX2NoZWNrKCkuCj4gPj4KPiA+
+PiBPciB3ZSBtaXNzZWQgdG8gY2hlY2sgZ2Npbmcgc2VjdGlvbiB3aGljaCBuZXh0X3ZpY3RpbV9z
+ZWcgcG9pbnRzIHRvCj4gPj4gZHVyaW5nIGdldF9uZXdfc2VnbWVudCgpPwo+ID4+Cj4gPj4gQ2Fu
+IHRoaXMgaGFwcGVuPwo+ID4+Cj4gPj4gZS5nLgo+ID4+IC0gYmdnYyBzZWxlY3RzIHNlYyAjMAo+
+ID4+IC0gbmV4dF92aWN0aW1fc2VnOiBzZWcgIzAKPiA+PiAtIG1pZ3JhdGUgc2VnICMwIGFuZCBz
+dG9wCj4gPj4gLSBuZXh0X3ZpY3RpbV9zZWc6IHNlZyAjMQo+ID4+IC0gY2hlY2twb2ludCwgc2V0
+IHNlYyAjMCBmcmVlIGlmIHNlYyAjMCBoYXMgbm8gdmFsaWQgYmxvY2tzCj4gPj4gLSBhbGxvY2F0
+ZSBzZWcgIzAgaW4gc2VjICMwIGZvciBjdXJzZWcKPiA+PiAtIGN1cnNlZyBtb3ZlcyB0byBzZWcg
+IzEgYWZ0ZXIgYWxsb2NhdGlvbgo+ID4+IC0gYmdnYyB0cmllcyB0byBtaWdyYXRlIHNlZyAjMQo+
+ID4+Cj4gPj4gVGhhbmtzLAo+ID4gVGhhdCdzIGNvcnJlY3QKPiA+IEluIGYyZnNfZ2V0X3ZpY3Rp
+bSwgd2UgdXNlIG5leHRfdmljdGltX3NlZyB0byBkaXJlY3RseSBqdW1wIHRvCj4gPiBnb3RfcmVz
+dWx0LCB0aGVyZWJ5IGJ5cGFzc2luZyBzZWNfdXNhZ2VfY2hlY2sgV2hhdCBkbyB5b3UgdGhpbmsg
+YWJvdXQKPiA+IHRoaXMgY2hhbmdlPwo+ID4KPiA+IEBAIC04NTAsMTUgKzg1MCwyMCBAQCBpbnQg
+ZjJmc19nZXRfdmljdGltKHN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaSwKPiB1bnNpZ25lZCBpbnQg
+KnJlc3VsdCwKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICBwLm1pbl9zZWdubyA9IHNiaS0+
+bmV4dF92aWN0aW1fc2VnW0JHX0dDXTsKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAqcmVz
+dWx0ID0gcC5taW5fc2Vnbm87Cj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgc2JpLT5uZXh0
+X3ZpY3RpbV9zZWdbQkdfR0NdID0gTlVMTF9TRUdOTzsKPiA+IC0gICAgICAgICAgICAgICAgICAg
+ICAgIGdvdG8gZ290X3Jlc3VsdDsKPiA+ICAgICAgICAgICAgICAgICAgfQo+ID4gICAgICAgICAg
+ICAgICAgICBpZiAoZ2NfdHlwZSA9PSBGR19HQyAmJgo+ID4gICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgc2JpLT5uZXh0X3ZpY3RpbV9zZWdbRkdfR0NdICE9IE5VTExfU0VHTk8pIHsK
+PiA+ICAgICAgICAgICAgICAgICAgICAgICAgICBwLm1pbl9zZWdubyA9IHNiaS0+bmV4dF92aWN0
+aW1fc2VnW0ZHX0dDXTsKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAqcmVzdWx0ID0gcC5t
+aW5fc2Vnbm87Cj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgc2JpLT5uZXh0X3ZpY3RpbV9z
+ZWdbRkdfR0NdID0gTlVMTF9TRUdOTzsKPiA+IC0gICAgICAgICAgICAgICAgICAgICAgIGdvdG8g
+Z290X3Jlc3VsdDsKPiA+ICAgICAgICAgICAgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICAgICAg
+ICAgIHNlY25vID0gR0VUX1NFQ19GUk9NX1NFRyhzYmksIHNlZ25vKTsKPiA+ICsKPiA+ICsgICAg
+ICAgICAgICAgICBpZiAoc2VjX3VzYWdlX2NoZWNrKHNiaSwgc2Vjbm8pKQo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgZ290byBuZXh0Owo+ID4gKwo+ID4gKyAgICAgICAgICAgICAgIGdvdG8g
+Z290X3Jlc3VsdDsKPiA+ICAgICAgICAgIH0KPiAKPiBCdXQgc3RpbGwgYWxsb2NhdG9yIGNhbiBh
+c3NpZ24gdGhpcyBzZWdtZW50IGFmdGVyIHNlY191c2FnZV9jaGVjaygpIGluCj4gcmFjZSBjb25k
+aXRpb24sIHJpZ2h0PwpTaW5jZSB0aGUgQkcgR0MgdXNpbmcgbmV4dF92aWN0aW0gIHRha2VzIHBs
+YWNlIGFmdGVyIHRoZSBTSVQgdXBkYXRlIGluIGRvX2NoZWNrcG9pbnQsIAppdCBzZWVtcyB1bmxp
+a2VseSB0aGF0IGEgcmFjZSBjb25kaXRpb24gd2l0aCBzZWNfdXNhZ2VfY2hlY2sgd2lsbCBvY2N1
+ci4KPiAKPiBJTU8sIHdlIGNhbiBjbGVhciBuZXh0X3ZpY3RpbV9zZWdbXSBvbmNlIHNlY3Rpb24g
+aXMgZnJlZSBpbgo+IF9fc2V0X3Rlc3RfYW5kX2ZyZWUoKT8gc29tZXRoaW5nIGxpa2UgdGhpczoK
+SSB3aWxsIHRlc3QgaXQgYWNjb3JkaW5nIHRvIHlvdXIgc3VnZ2VzdGlvbi4KSWYgdGhlcmUgYXJl
+IG5vIGlzc3VlcywgY2FuIEkgc3VibWl0IGl0IGFnYWluIHdpdGggdGhlIHBhdGNoPwpUaGFua3MK
+PiAKPiAtLS0KPiAgIGZzL2YyZnMvc2VnbWVudC5oIHwgMTMgKysrKysrKysrKy0tLQo+ICAgMSBm
+aWxlIGNoYW5nZWQsIDEwIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAt
+LWdpdCBhL2ZzL2YyZnMvc2VnbWVudC5oIGIvZnMvZjJmcy9zZWdtZW50LmggaW5kZXgKPiAwNDY1
+ZGMwMGIzNDkuLjgyNmUzNzk5OTA4NSAxMDA2NDQKPiAtLS0gYS9mcy9mMmZzL3NlZ21lbnQuaAo+
+ICsrKyBiL2ZzL2YyZnMvc2VnbWVudC5oCj4gQEAgLTQ3Myw5ICs0NzMsMTYgQEAgc3RhdGljIGlu
+bGluZSB2b2lkIF9fc2V0X3Rlc3RfYW5kX2ZyZWUoc3RydWN0Cj4gZjJmc19zYl9pbmZvICpzYmks
+Cj4gICAJCQlnb3RvIHNraXBfZnJlZTsKPiAgIAkJbmV4dCA9IGZpbmRfbmV4dF9iaXQoZnJlZV9p
+LT5mcmVlX3NlZ21hcCwKPiAgIAkJCQlzdGFydF9zZWdubyArIFNFR1NfUEVSX1NFQyhzYmkpLCBz
+dGFydF9zZWdubyk7Cj4gLQkJaWYgKG5leHQgPj0gc3RhcnRfc2Vnbm8gKyB1c2FibGVfc2Vncykg
+ewo+IC0JCQlpZiAodGVzdF9hbmRfY2xlYXJfYml0KHNlY25vLCBmcmVlX2ktPmZyZWVfc2VjbWFw
+KSkKPiAtCQkJCWZyZWVfaS0+ZnJlZV9zZWN0aW9ucysrOwo+ICsJCWlmICgobmV4dCA+PSBzdGFy
+dF9zZWdubyArIHVzYWJsZV9zZWdzKSAmJgo+ICsJCQl0ZXN0X2FuZF9jbGVhcl9iaXQoc2Vjbm8s
+IGZyZWVfaS0+ZnJlZV9zZWNtYXApKSB7Cj4gKwkJCWZyZWVfaS0+ZnJlZV9zZWN0aW9ucysrOwo+
+ICsKPiArCQkJaWYgKEdFVF9TRUNfRlJPTV9TRUcoc2JpLT5uZXh0X3ZpY3RpbV9zZWdbQkdfR0Nd
+KSA9PQo+ICsJCQkJCQkJCQlzZWNubykKPiArCQkJCXNiaS0+bmV4dF92aWN0aW1fc2VnW0JHX0dD
+XSA9IE5VTExfU0VHTk87Cj4gKwkJCWlmIChHRVRfU0VDX0ZST01fU0VHKHNiaS0+bmV4dF92aWN0
+aW1fc2VnW0ZHX0dDXSkgPT0KPiArCQkJCQkJCQkJc2Vjbm8pCj4gKwkJCQlzYmktPm5leHRfdmlj
+dGltX3NlZ1tGR19HQ10gPSBOVUxMX1NFR05POwo+ICAgCQl9Cj4gICAJfQo+ICAgc2tpcF9mcmVl
+Ogo+IC0tCj4gMi40MC4xCj4gCj4gPj4KPiA+Pj4KPiA+Pj4gQmVjYXVzZSB0aGUgY2FsbCBzdGFj
+ayBpcyBkaWZmZXJlbnQsIEkgdGhpbmsgdGhhdCBpbiBvcmRlciB0byBoYW5kbGUKPiA+Pj4gZXZl
+cnl0aGluZyBhdCBvbmNlLCB3ZSBuZWVkIHRvIGFkZHJlc3MgaXQgd2l0aGluIGRvX2dhcmJhZ2Vf
+Y29sbGVjdCwKPiA+Pj4gb3Igb3RoZXJ3aXNlIGluY2x1ZGUgaXQgb24gYm90aCBzaWRlcy4KPiA+
+Pj4gV2hhdCBkbyB5b3UgdGhpbms/Cj4gPj4+Cj4gPj4+IFszMDE0Ni4zMzc0NzFdWyBUMTMwMF0g
+RjJGUy1mcyAoZG0tNTQpOiBJbmNvbnNpc3RlbnQgc2VnbWVudCAoNzA5NjEpCj4gPj4+IHR5cGUg
+WzAsIDFdIGluIFNTQSBhbmQgU0lUIFszMDE0Ni4zNDYxNTFdWyBUMTMwMF0gQ2FsbCB0cmFjZToK
+PiA+Pj4gWzMwMTQ2LjM0NjE1Ml1bIFQxMzAwXSAgZHVtcF9iYWNrdHJhY2UrMHhlOC8weDEwYyBb
+MzAxNDYuMzQ2MTU3XVsKPiA+Pj4gVDEzMDBdICBzaG93X3N0YWNrKzB4MTgvMHgyOCBbMzAxNDYu
+MzQ2MTU4XVsgVDEzMDBdCj4gPj4+IGR1bXBfc3RhY2tfbHZsKzB4NTAvMHg2YyBbMzAxNDYuMzQ2
+MTYxXVsgVDEzMDBdCj4gPj4+IGR1bXBfc3RhY2srMHgxOC8weDI4IFszMDE0Ni4zNDYxNjJdWyBU
+MTMwMF0KPiA+Pj4gZjJmc19zdG9wX2NoZWNrcG9pbnQrMHgxYy8weDNjIFszMDE0Ni4zNDYxNjVd
+WyBUMTMwMF0KPiA+Pj4gZG9fZ2FyYmFnZV9jb2xsZWN0KzB4NDFjLzB4MjcxYyBbMzAxNDYuMzQ2
+MTY3XVsgVDEzMDBdCj4gPj4+IGYyZnNfZ2MrMHgyN2MvMHg4MjggWzMwMTQ2LjM0NjE2OF1bIFQx
+MzAwXQo+ID4+PiBnY190aHJlYWRfZnVuYysweDI5MC8weDg4YyBbMzAxNDYuMzQ2MTY5XVsgVDEz
+MDBdCj4gPj4+IGt0aHJlYWQrMHgxMWMvMHgxNjQgWzMwMTQ2LjM0NjE3Ml1bIFQxMzAwXQo+ID4+
+PiByZXRfZnJvbV9mb3JrKzB4MTAvMHgyMAo+ID4+Pgo+ID4+PiBzdHJ1Y3QgY3Vyc2VnX2luZm8g
+OiAweGZmZmZmZjgwM2Y5NWU4MDAgewo+ID4+PiAJc2Vnbm8gICAgICAgIDogMHgxMTUzMSA6IDcw
+OTYxCj4gPj4+IH0KPiA+Pj4KPiA+Pj4gc3RydWN0IGYyZnNfc2JfaW5mbyA6IDB4ZmZmZmZmODgx
+MWQxMjAwMCB7Cj4gPj4+IAluZXh0X3ZpY3RpbV9zZWdbMF0gOiAweDExNTMxIDogNzA5NjEgfQo+
+ID4+Pgo+ID4+Pj4KPiA+Pj4+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2xpbnV4LWYyZnMtZGV2
+ZWwvMjAyNTAzMjUwODA2NDYuMzI5MTk0Ny0yLQo+ID4+Pj4gY2hhb0BrZXJuZWwub3JnCj4gPj4+
+Pgo+ID4+Pj4gVGhhbmtzLAo+ID4+Pj4KPiA+Pj4+Pgo+ID4+Pj4+IFNpZ25lZC1vZmYtYnk6IFlv
+aGFuIEpvdW5nIDx5b2hhbi5qb3VuZ0Bzay5jb20+Cj4gPj4+Pj4gLS0tCj4gPj4+Pj4gICBmcy9m
+MmZzL2djLmMgfCA0ICsrKysKPiA+Pj4+PiAgIDEgZmlsZSBjaGFuZ2VkLCA0IGluc2VydGlvbnMo
+KykKPiA+Pj4+Pgo+ID4+Pj4+IGRpZmYgLS1naXQgYS9mcy9mMmZzL2djLmMgYi9mcy9mMmZzL2dj
+LmMgaW5kZXgKPiA+Pj4+PiAyYjhmOTIzOWJlZGUuLjRiNWQxOGUzOTVlYiAxMDA2NDQKPiA+Pj4+
+PiAtLS0gYS9mcy9mMmZzL2djLmMKPiA+Pj4+PiArKysgYi9mcy9mMmZzL2djLmMKPiA+Pj4+PiBA
+QCAtMTkyNiw2ICsxOTI2LDEwIEBAIGludCBmMmZzX2djKHN0cnVjdCBmMmZzX3NiX2luZm8gKnNi
+aSwKPiA+Pj4+PiBzdHJ1Y3QKPiA+Pj4+IGYyZnNfZ2NfY29udHJvbCAqZ2NfY29udHJvbCkKPiA+
+Pj4+PiAgIAkJZ290byBzdG9wOwo+ID4+Pj4+ICAgCX0KPiA+Pj4+Pgo+ID4+Pj4+ICsJaWYgKF9f
+aXNfbGFyZ2Vfc2VjdGlvbihzYmkpICYmCj4gPj4+Pj4gKwkJCUlTX0NVUlNFQyhzYmksIEdFVF9T
+RUNfRlJPTV9TRUcoc2JpLCBzZWdubykpKQo+ID4+Pj4+ICsJCWdvdG8gc3RvcDsKPiA+Pj4+PiAr
+Cj4gPj4+Pj4gICAJc2VnX2ZyZWVkID0gZG9fZ2FyYmFnZV9jb2xsZWN0KHNiaSwgc2Vnbm8sICZn
+Y19saXN0LCBnY190eXBlLAo+ID4+Pj4+ICAgCQkJCWdjX2NvbnRyb2wtPnNob3VsZF9taWdyYXRl
+X2Jsb2NrcywKPiA+Pj4+PiAgIAkJCQlnY19jb250cm9sLT5vbmVfdGltZSk7Cj4gPj4+Cj4gPgoK
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1m
+MmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdl
+Lm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1m
+MmZzLWRldmVsCg==
