@@ -2,124 +2,139 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09E24A749EC
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Mar 2025 13:41:30 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D33AA75421
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 29 Mar 2025 05:19:26 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ty91R-0004ur-OF;
-	Fri, 28 Mar 2025 12:41:17 +0000
+	id 1tyNf9-0000PJ-DT;
+	Sat, 29 Mar 2025 04:19:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nzzhao.sigma@gmail.com>) id 1ty90b-0004th-Cp
- for Linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Mar 2025 12:40:24 +0000
+ (envelope-from <sandeen@redhat.com>) id 1tyNf8-0000P7-GI
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 29 Mar 2025 04:19:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ References:Cc:To:From:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6euDKESeEMnFVlUs3oNfEh+haXgPytg5QlqrvV0Al0k=; b=E+xHuI8opMOMVqE0l+yJEv6By/
- 6RtCHZWBMh4u3ejFNsVtawAuaiws4jYRG4vMY49k10KUkfsQTqHOMe59fuQFUm46bMdva+IMZ93jj
- /g6SKnLJZhUQqhPJvRh25JIkbrrNZ5La0FrkMBnk6q+hB9pL5aBKlE+7pgj20hswMUP4=;
+ bh=XWQvQV6eLCqyLjpmpylUTD4PAH8zIsvBt17CMqdmDc8=; b=NnsQmXwswiynxDWsLG8ZWQ+FDs
+ CFHn7X/4UdbqngSfoD32OaQ5X4gt3PgBQdb06P9aIbEKe+R4K5WbiIp4XuWu5UF7o4bNfTrGHXLXr
+ ODoi4MAFSTX0a3FV2HSM63JmPHxZdN7Uj46qtUugZ9OMEqxkQdOq/VsLv5SsNWChdpgg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:References:Cc:To:From:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6euDKESeEMnFVlUs3oNfEh+haXgPytg5QlqrvV0Al0k=; b=C1i96aZlNfNOymUbC667+QOxqe
- MXX2uwEh0ddQT7JAFHEwrtbO9+Ug8dzbbFncFhAXxO42ZjAb+RhX4Es6Xb/Xhwv2UYhqMWrDZ8XRC
- h9tljt0c+HQM4sEnbs/gbPAymFZcHga22Oq7F9YSlnDE1p57SDDDi9C+QIYDx17kt8MY=;
-Received: from mail-ot1-f66.google.com ([209.85.210.66])
+ bh=XWQvQV6eLCqyLjpmpylUTD4PAH8zIsvBt17CMqdmDc8=; b=khQgZP1cwuggUK+TMaaKEopfGh
+ MxAQLiKYG8tNZzODQIVzs3iDnWxkBGtbUHoxEQ1KYq9vXmxLu3q4TFfVNO31BqiwUyn/Hh55/JFbL
+ hjktRZUqvlEugHJtZG68taJzzPYEaauCRqkmQts/N6J2TY/gf01hap0YAn4D9z2s9Elk=;
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ty90N-00029O-85 for Linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Mar 2025 12:40:24 +0000
-Received: by mail-ot1-f66.google.com with SMTP id
- 46e09a7af769-72c173211feso703791a34.1
- for <Linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 28 Mar 2025 05:40:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743165605; x=1743770405; darn=lists.sourceforge.net;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6euDKESeEMnFVlUs3oNfEh+haXgPytg5QlqrvV0Al0k=;
- b=C/AUYU4UDkuParx+5JBkobNAUZxJQZZNqvlgmTPvoLg7TwG4nTD8/t9nar1lTj8gNj
- Bv9knQW4m9VDKxUW8do5bxlnhrgPOQybHr60wq/9qJj8IeaXOQk78He22s2Akna0O340
- jkt890WCosTPDKK1NUMbesBkLldFJOOUKzTfjPP6yyZM0aBk+k8eYCnBfrrR6kjm+a0/
- fHaIiXyqL9INRsFKN6krQCV9/SKIESkNNvTgcPAQNjqk37e7DaX85CXaS/3rzE1cPc+9
- 4l9A65p9UQr7TSvCNdZSisKA98lSW1VnA7cycYPnMx6vBmrBfjsJffAQ3s2YL26MSX4p
- 4fCA==
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1tyNf8-0002UL-Aa for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 29 Mar 2025 04:19:15 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1743221943;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=XWQvQV6eLCqyLjpmpylUTD4PAH8zIsvBt17CMqdmDc8=;
+ b=WPmwV6fScu60eB9IqalQcc7hpofwt2Tp8cNeDUspowp/0w/5ygVhsWy9AMK6FsRTBp/VTL
+ AZ5jmm+/A3+Y18EyLdttt4wkRj2Dgd5RUvA+UGPRRmvuhhXMfUCt11tAiinmlc2QsdnKVK
+ zLH+h6WhESfVngkqq+NSLjPCaF2GKS0=
+Received: from mail-io1-f71.google.com (mail-io1-f71.google.com
+ [209.85.166.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-657-fGc9M1vwPQio71Gy77wS2w-1; Sat, 29 Mar 2025 00:19:01 -0400
+X-MC-Unique: fGc9M1vwPQio71Gy77wS2w-1
+X-Mimecast-MFC-AGG-ID: fGc9M1vwPQio71Gy77wS2w_1743221941
+Received: by mail-io1-f71.google.com with SMTP id
+ ca18e2360f4ac-85b41b906b3so286839339f.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 28 Mar 2025 21:19:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743165605; x=1743770405;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6euDKESeEMnFVlUs3oNfEh+haXgPytg5QlqrvV0Al0k=;
- b=d9ozyBVS+Pvn7Qn5M+2duy0fU+W8QjQYzZS69Smh7ia1vNJ/fPNXDD7Rp1rXa3tbeI
- Tr/4HTyXqMCGi+7ukEFcu3RX/teMQqiXGlobgTsMHGTmrVigazhYAkq78mAqgQHZPT8Y
- xKOEmo+NRrGC53pxNX18HOGZlmWCl265J2/PHhT2OKC/HbyzxUKeSxmlq0DuNj38P+pK
- cQcyCd32ht4wUTjJqasArWvuydwVlS2XH8VnV+hGNYhn2PXXvJ/IZTMytt6oLoGaIRk3
- jEby8lGgR2X7veKT5zfpJYMHQmDUT6OiL7ThNf/ClVEh/mPnEm9h9yo6P4mdgb1ymva+
- tZLw==
-X-Gm-Message-State: AOJu0YwGC0Ukld2mQ4hZ+9pzGyjWo7cE+qoebH5Tvs2Jdam6eQDkXQrU
- SIp6/L+f3nPJfmPg8hdErhIpcTS71rVG2J4NVVgbPZZbA4BFC+h5geckRUm0Wj3PrLcDWWr3ote
- u/NqPjkT+jVn/wuYHcTUAkWK1UoCp5tR/ekGr4g==
-X-Gm-Gg: ASbGncu2cpYJ+YVReDt7i5PA2Kk2tNUJ2YgJUOW25Sde6K5Xhq4jk8VOKdv2n2IVYZo
- uzCpOOseBgkVcav389gjSdC1rHEgOQjqLRygSE4sV//aTXYwRYL8pMBeqZeeM3Gzf6mvArdHW3U
- ejFFgyLS4+SRQ8OUSo6j3ef1TvCV00AxnC0eCLIg==
-X-Google-Smtp-Source: AGHT+IHcYq8+3d1RBdKRXMEo+5v9hNSgz5SHB8zcOy45eGZSy+wRpJf1yHgpxQyftSy19NVLcZ8xr41bSaValh7w+J0=
-X-Received: by 2002:a05:6830:91b:b0:72b:8a8b:e032 with SMTP id
- 46e09a7af769-72c4c94440fmr5061493a34.2.1743165605294; Fri, 28 Mar 2025
- 05:40:05 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743221940; x=1743826740;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XWQvQV6eLCqyLjpmpylUTD4PAH8zIsvBt17CMqdmDc8=;
+ b=j3hYEtfcWswfosRn+OAzH0QMNhOhvxTYqC1EIQJyu/H4DayOhoiRX2GsuqMi4fSpV3
+ 50kVxsRWhtKR1EAUIfFLwDW9gyFr6txqIa09P/c7njmy+M5tzBZM7zaB2PnREdwl2BKb
+ Mtb9nA6rQOYGV1xMI2LwYiNVkwOF6l+D5/zU+I94JsQkTRQ3u5WOyljtVHJMfnKthEYE
+ P6WjI+LqrOofWTFPDGk7OBs9IjubwexdovJF5qFAMBwx9RG99UABt3x4b+p7EG5Uw/W+
+ qcM6gs0zUwnukt8nNuPjOFxy/1JE0ECzpL1+b7F4jrLrCGanTziqSbjWAelWCn39ixW+
+ Q/rA==
+X-Gm-Message-State: AOJu0Yxuak+d/jZyXwGhi9UPraQI/zm3QyWAx47ygOAVb79dGgF6G8F8
+ Nh7h9SRUYB75nffv/j5jjRdV3gIvk5fQCp3YBrkSVBTEsAnHFyMaKRgRUwpjRj43s7xnFhO68s7
+ lBlXg1Mky5NIEgtTks87WXNFgi1GfHqQh8taBnIPFcu3FKojkC3GNgJlGDOeBObo1pMtT4ka36m
+ IDYS1rN2gcl6nc1d48+WaZRVpCo8oxqn+bFdAyJ3sQnGeb6kpzkZwuR5GUsXoa
+X-Gm-Gg: ASbGnctNfSO1rLJ/izT34He6vsYSA183S93y5r8zbCa2flyBpkXmdeO8xkkRHATbMPy
+ 51tpoJFOS0thkqmzDAhdNQM+zczK4JTNbNvDQEecphMm2TpyEsC8+rU4KdKzAs15yAGcdxDlXE9
+ meQIarhWuVmw6YdvbDyou9vygCHKeOFyhzLTdKtMY6Avxa+BYe2rUaVGMWBW2MIvSmDGCtLPFQv
+ zpA5ME0w6Flc0eFxeXD22H05guk1OAODZZfHmuK5NSEEyY62caZ8/BzOvYv
+X-Received: by 2002:a05:6602:4c0c:b0:85b:3407:c8c with SMTP id
+ ca18e2360f4ac-85e9e90e27fmr148522539f.11.1743221940389; 
+ Fri, 28 Mar 2025 21:19:00 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGExIoKizic94Ep1259b4ThI1RryrGjFo02dROR3SQhmOwxnksfA9R27oGyVQxnvaNrC8Xuog==
+X-Received: by 2002:a05:6602:4c0c:b0:85b:3407:c8c with SMTP id
+ ca18e2360f4ac-85e9e90e27fmr148521139f.11.1743221939876; 
+ Fri, 28 Mar 2025 21:18:59 -0700 (PDT)
+Received: from [172.19.1.92] ([99.196.128.57])
+ by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4f46470f04csm757817173.23.2025.03.28.21.18.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 28 Mar 2025 21:18:59 -0700 (PDT)
+Message-ID: <79090775-413e-437e-ab07-ac6965932a32@redhat.com>
+Date: Sat, 29 Mar 2025 00:18:48 -0400
 MIME-Version: 1.0
-References: <CAMLCH1FEuoDxFFQ8HuUdBDMfzsyaS2LWyVh+eyGCpgxnKGa7rA@mail.gmail.com>
- <Z-Aai24gPXWQp8qi@casper.infradead.org>
- <CAMLCH1HsT+AVZSXAh8Q7Zr9C3SzaegfMdE6fzKp0X0FDt9JSbA@mail.gmail.com>
- <Z-KAP6Jz_bjuPuyx@casper.infradead.org>
- <Z-Lr_xtkYakqpf0j@casper.infradead.org>
-In-Reply-To: <Z-Lr_xtkYakqpf0j@casper.infradead.org>
-From: Nanzhe Zhao <nzzhao.sigma@gmail.com>
-Date: Fri, 28 Mar 2025 20:39:54 +0800
-X-Gm-Features: AQ5f1Jpgcb1FY5hEUaX_jojL88XK4YiNYdTrGOBD0meD6_Erut7xLLsfRfj_F7g
-Message-ID: <CAMLCH1FThw2hH3pNm_dYxDPRbQ=mPxXAdzsgSXHpa4oBzK80CQ@mail.gmail.com>
-To: Matthew Wilcox <willy@infradead.org>
-X-Spam-Score: -0.2 (/)
+User-Agent: Mozilla Thunderbird
+To: linux-f2fs-devel@lists.sourceforge.net
+References: <20250303172127.298602-1-sandeen@redhat.com>
+In-Reply-To: <20250303172127.298602-1-sandeen@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 8WFOluzvDnDZFjzy2zbJn2y7CsiijvPHNyT3O2Z1Mk4_1743221941
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+X-Spam-Score: 1.1 (+)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Dear Mr.Mattew: Thanks for your reply! >The fundamental
- problem is that f2fs has no per-block data structure. In > ext4,
- that's struct buffer_head.
- For XFS, it's struct iomap_folio_state. > For btrfs, [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  I was working on next steps for this, and I have a followup
+ question. Today, several mount options are simply ignored if the on-disk
+ format does not support them. For example: case Opt_compress_mode: if
+ (!f2fs_sb_has_compression(sbi))
+ { f2fs_info(sbi, "Image doesn't support compression"); break;
+ } name = match_strdup(&args[0]); 
+ if (!name) return -ENOMEM; if (!strcmp(name, [...] 
+ Content analysis details:   (1.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.66 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.210.66 listed in sa-accredit.habeas.com]
+ [170.10.129.124 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.210.66 listed in bl.score.senderscore.com]
+ [170.10.129.124 listed in bl.score.senderscore.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [170.10.129.124 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [170.10.129.124 listed in wl.mailspike.net]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [nzzhao.sigma[at]gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.66 listed in wl.mailspike.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -128,9 +143,11 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1ty90N-00029O-85
-Subject: Re: [f2fs-dev] Inquiry regarding plans on vmscan pageout supporting
- fs writepages
+ 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1tyNf8-0002UL-Aa
+Subject: Re: [f2fs-dev] [PATCH 0/9] f2fs: first steps towards mount API
+ conversion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -142,59 +159,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linux-f2fs-devel@lists.sourceforge.net
+From: Eric Sandeen via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Eric Sandeen <sandeen@redhat.com>
+Cc: jaegeuk@kernel.org, lihongbo22@huawei.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Dear Mr.Mattew:
-Thanks for your reply!
->The fundamental problem is that f2fs has no per-block data structure.  In
-> ext4, that's struct buffer_head.  For XFS, it's struct iomap_folio_state.
-> For btrfs, it's struct btrfs_subpage and for bcachefs, it's struct
-> bch_folio.
-Yes,now I'm fully aware of the seriousness of this problem.And I saw
-your most recent discussion with Mr.Jaegeuk Kim(about setting folio
-order fixed to 2 to address the problem of mounting a 16KB block size
-f2fs to a 4KB page size kernel).May I ask if you currently think that
-continuing the work on folio support for f2fs is still valuable?
-> Either f2fs needs to grow its own, or it needs to share iomap with
-> XFS.  Both options are a lot of work; iomap doesn't support all the
-> functionality that f2fs needs.  But btrfs is looking to move to using
-> iomap and it has some of the same needs that f2fs has, so perhaps you
-> can help each other.
-Recently I have studied iomap related code of XFS.As far as I know,XFS
-is the only fs that support iomap for readhead operations in buffered
-read.F2FS and ext4 now have 'filemap_read' called in buffered read
-path but they eventually call their legacy mpage_readpages function to
-perform the actual io behaviour.
-The fundamental problem is iomap is ideally suited for extent-based
-file systems like XFS Btrfs, however, it currently has poor
-compatibility with indirect pointer based file systems.So, based on
-the experience of adapting iomap for XFS, migrating it to f2fs is
-quite difficult, I suppose.It's possible that ext4 and f2fs are in
-similar situations in some respects(ext4 has indirected-based file and
-extent-based file simultaneously).I haven't saw the patch for ext4
-enabling large folios
-make readahead supporting iomap.
-But here's another problem.Due to f2fs's lack of a per-block data
-structure, all meta blocks(i.e. node blocks NAT blocks) are directly
-read into the page cache when performing block mapping, while ext4
-places them in buffer heads.In F2FS meta blocks are treated partially
-like file data blocks.They have their own inode,own address space and
-their own page cache.So in conclusion using iomap to bypass a
-per-block data structure in F2FS can be a hard task.
->
-> The other is that you could help out with the ext4 large folio conversion.
-> There are already patches for this:
-> As the cover letter says, "with the exception of fsverity, fscrypt,
-> and data=journal mode."  So you could perhaps apply this patch series
-> (patch 1 is now obsolete), and try to make fsverity work.
-Thank you very much for recommending the two projects!
-For fscrypt suporting large folio,maybe ext4 and f2fs can share
-experience.f2fs supports encrypt pages too and don't support large
-folio either.So yes just as you mentioned it can be generally help.
-Best regards.
+I was working on next steps for this, and I have a followup question.
+
+Today, several mount options are simply ignored if the on-disk format
+does not support them. For example:
+
+                case Opt_compress_mode:
+                        if (!f2fs_sb_has_compression(sbi)) {
+                                f2fs_info(sbi, "Image doesn't support compression");
+                                break;
+                        }
+                        name = match_strdup(&args[0]);
+                        if (!name)
+                                return -ENOMEM;
+                        if (!strcmp(name, "fs")) {
+                                F2FS_OPTION(sbi).compress_mode = COMPR_MODE_FS;
+                        } else if (!strcmp(name, "user")) {
+                                F2FS_OPTION(sbi).compress_mode = COMPR_MODE_USER;
+                        } else {
+                                kfree(name);
+                                return -EINVAL;
+                        }
+                        kfree(name);
+                        break;
+
+so if f2fs_sb_has_compression() is not true, then the option is ignored without
+any validation.
+
+in other words, "mount -o compress_mode=nope ..." will succeed if the feature
+is disabled on the filesystem.
+
+If I move the f2fs_sb_has_compression() check to later for the new mount API,
+then "mount -o compress_mode=nope ..."  will start failing for all images. Is
+this acceptable? It seems wise to reject invalid options rather than ignore them,
+even if they are incompatible with the format, but this would be a behavior
+change.
+
+The above would be simple enough to defer (maybe set to COMPR_MODE_INVAL and
+reject it later) but I think other options such as compress/nocompress extensions
+would be very messy to approach as "accept all options given during parsing,
+and validate them later only if the corresponding feature is present."
+
+So I wonder if a behavior change (stricter option validation) would be
+acceptable here?
+
+Thanks,
+-Eric
+
 
 
 _______________________________________________
