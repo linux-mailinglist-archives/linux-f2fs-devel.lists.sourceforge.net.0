@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 572E7A76E4F
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 31 Mar 2025 22:13:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56600A76E2E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 31 Mar 2025 22:13:27 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tzLVm-0000oU-5r;
-	Mon, 31 Mar 2025 20:13:34 +0000
+	id 1tzLVd-0003nu-30;
+	Mon, 31 Mar 2025 20:13:25 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1tzLVX-0000kB-MI
+ (envelope-from <willy@infradead.org>) id 1tzLVY-0003l8-2V
  for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 31 Mar 2025 20:13:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MKgrjelxP/m5iUdyJVlzQ9mEW5/4WxWKBR26K5cV7jY=; b=OUffqXtfNeASlwNbPm3DI3xP61
- hIACF7wg0GUC9c/GwaKo5DfasosVKq+wWklu0+dqRCrsatsKZexFCNCSEtJhmGg0LkN7on1GAZmGd
- VzGwFmYoFGdp6kA7OLwO+gJYwAH+1BtyEv2nIi1GfCUootb1vynsJ1bMyxLCnGXqcFDI=;
+ bh=R64l87c0qpc5q3PgOcIUGe9r+5fDzSd4O7jmU7743vA=; b=lXMa8e0GtWJvljv0MygfMmnHjQ
+ /u2nQImTFjts4iblJXy9aHUEQFsPXr0PpWa7y82P1XQPQgCTrHH9MIXSKqsnykoXghfBUXoz7U4vy
+ YvRKs8F7qryQiARUrUUuEv9dhkykNCa1QfqU6y3yGqJevBAkPAJ7HZt1/PMWEr4IBMjg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -31,59 +31,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MKgrjelxP/m5iUdyJVlzQ9mEW5/4WxWKBR26K5cV7jY=; b=CjTJgLGjvOraeyYoW0q5y8VwDV
- P1ffhKqH08/YsbDK75EuMXRpOBbG0QYivCWJaBo+3ekKBQjijX8wLifSCyo+pNm04nkO4Nn3YYb+6
- 4sVoLBtMhkV8CAYjtSHclkAV2J3183ep3exyNUfxTIC7hQVnOTZ5HHeRCXW5aDskUip8=;
+ bh=R64l87c0qpc5q3PgOcIUGe9r+5fDzSd4O7jmU7743vA=; b=aNNp9E2zvO23A70Y/h8XIZsXZ0
+ nxbKK72ZOoI3d/ANYsvloDndfnxwNRlYIHmsCLROAEDY0w36LgYYYbJRB0eOdMpbEZUqQOn5jtDmT
+ xciWZw9XozI49JYhqFaRRHw+f4asKhXTJHAYPiwO18HVy4QeqcTCiyBLCBTf8B7ZVRso=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tzLVN-0003YC-Bk for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 31 Mar 2025 20:13:20 +0000
+ id 1tzLVS-0003Yz-EU for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 31 Mar 2025 20:13:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=MKgrjelxP/m5iUdyJVlzQ9mEW5/4WxWKBR26K5cV7jY=; b=SKhTmD8htOxKSDQUDMEqcJRx74
- pkZxXTZzfAH/mtYxl9lmqQjvlSzGmFCIsAEV7o0EvvWOpiAU2HFExcZDHPeJZpm3bieDgzdiP8Eq5
- C6NYsah8RZvQ5hQbcbzYaKtw5BWLUC4bYdlacj16FzueFOpcbWMUS9wfOk74cinTQ+Qu1C8USu/y8
- uIgW5sLJlcdabJyZKhb6zlBiTUjMwZqgJ/ynon3hQUeqByefN4g+8PfaP/kDZ/lpJy3Sf4HCPwc+1
- pQqUFl3068WO5zejt+rngFc/CP95LR988Q1l+3WiMWk/K10otTkhHFbaz1uKbR4ffDxLjwOCrqJ/z
- bV9FICOQ==;
+ bh=R64l87c0qpc5q3PgOcIUGe9r+5fDzSd4O7jmU7743vA=; b=XbW0BuA7eY+PBdTR/YNLgCrfZo
+ DnAItsPZTApz9kaNXSoSXmXtsOsuNzVmT/bYKnT21QxpqblCbgxkO5PtFyW+VxX7fLEuIMffeDXfr
+ aFOwo82EfwmkNscXa2Qrxa5exVSae9AbBa6pStTbhAemOvQBtI0CfzBu/cMPMYTmn1vXBSWF3gLzy
+ xY1X+wVe2zLhgsKbVnMefkGnYWXMNNBf7ZWIbzNh+bJ20/iUxe9qkFSIlf9e6pBiZrfRHiH3CwcPb
+ cjtOWBJsC3QOjQ829kTuIzFu5SYhlJHPNLSS8fPdCq1mCF1cQEeIak4jio/60tY+CQfmKJMDv5O0d
+ 4hwTvtdw==;
 Received: from willy by casper.infradead.org with local (Exim 4.98.1 #2 (Red
- Hat Linux)) id 1tzLVH-00000004RWX-05XI;
+ Hat Linux)) id 1tzLVH-00000004RWj-0Wqe;
  Mon, 31 Mar 2025 20:13:03 +0000
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 To: Jaegeuk Kim <jaegeuk@kernel.org>,
 	Chao Yu <chao@kernel.org>
-Date: Mon, 31 Mar 2025 21:10:33 +0100
-Message-ID: <20250331201256.1057782-14-willy@infradead.org>
+Date: Mon, 31 Mar 2025 21:10:34 +0100
+Message-ID: <20250331201256.1057782-15-willy@infradead.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250331201256.1057782-1-willy@infradead.org>
 References: <20250331201256.1057782-1-willy@infradead.org>
 MIME-Version: 1.0
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: There were some missing conversions from
- f2fs_wait_on_page_writeback()
- to f2fs_folio_wait_writeback(). Saves a call to compound_head() at each
- callsite.
- Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org> ---
- fs/f2fs/checkpoint.c
- | 3 +-- fs/f2fs/data.c | 4 ++-- fs/f2fs/file.c | 2 +- 3 files changed, 4
- insertions(+), 5 deletions(-) 
+ Content preview:  The only caller which passes a page already has a folio, so
+ pass it in. Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+ --- fs/f2fs/data.c | 8 ++++---- fs/f2fs/f2fs.h | 2 +- fs/f2fs/segment.c |
+ 2 +- 3 files changed, 6 insertions(+), 6 deletions(-) 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [90.155.50.34 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -91,17 +82,23 @@ X-Spam-Report: Spam detection software,
  [90.155.50.34 listed in sa-accredit.habeas.com]
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
  medium trust [90.155.50.34 listed in list.dnswl.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [90.155.50.34 listed in bl.score.senderscore.com]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1tzLVN-0003YC-Bk
-Subject: [f2fs-dev] [PATCH 013/153] f2fs: Use f2fs_folio_wait_writeback()
+X-Headers-End: 1tzLVS-0003Yz-EU
+Subject: [f2fs-dev] [PATCH 014/153] f2fs: Pass a folio to
+ f2fs_submit_merged_ipu_write()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,66 +116,80 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-There were some missing conversions from f2fs_wait_on_page_writeback()
-to f2fs_folio_wait_writeback().  Saves a call to compound_head() at each
-callsite.
+The only caller which passes a page already has a folio, so pass
+it in.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 ---
- fs/f2fs/checkpoint.c | 3 +--
- fs/f2fs/data.c       | 4 ++--
- fs/f2fs/file.c       | 2 +-
- 3 files changed, 4 insertions(+), 5 deletions(-)
+ fs/f2fs/data.c    | 8 ++++----
+ fs/f2fs/f2fs.h    | 2 +-
+ fs/f2fs/segment.c | 2 +-
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index fdc310e9f261..55fcb9869531 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -456,8 +456,7 @@ long f2fs_sync_meta_pages(struct f2fs_sb_info *sbi, enum page_type type,
- 				goto continue_unlock;
- 			}
- 
--			f2fs_wait_on_page_writeback(&folio->page, META,
--					true, true);
-+			f2fs_folio_wait_writeback(folio, META, true, true);
- 
- 			if (!folio_clear_dirty_for_io(folio))
- 				goto continue_unlock;
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index e668497ed3fc..e6921a53c7a1 100644
+index e6921a53c7a1..23e37207ed90 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -3129,7 +3129,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
- 			if (folio_test_writeback(folio)) {
- 				if (wbc->sync_mode == WB_SYNC_NONE)
- 					goto continue_unlock;
--				f2fs_wait_on_page_writeback(&folio->page, DATA, true, true);
-+				f2fs_folio_wait_writeback(folio, DATA, true, true);
- 			}
+@@ -826,13 +826,13 @@ static int add_ipu_page(struct f2fs_io_info *fio, struct bio **bio,
+ }
  
- 			if (!folio_clear_dirty_for_io(folio))
-@@ -3624,7 +3624,7 @@ static int f2fs_write_begin(struct file *file, struct address_space *mapping,
+ void f2fs_submit_merged_ipu_write(struct f2fs_sb_info *sbi,
+-					struct bio **bio, struct page *page)
++					struct bio **bio, struct folio *folio)
+ {
+ 	enum temp_type temp;
+ 	bool found = false;
+ 	struct bio *target = bio ? *bio : NULL;
+ 
+-	f2fs_bug_on(sbi, !target && !page);
++	f2fs_bug_on(sbi, !target && !folio);
+ 
+ 	for (temp = HOT; temp < NR_TEMP_TYPE && !found; temp++) {
+ 		struct f2fs_bio_info *io = sbi->write_io[DATA] + temp;
+@@ -848,7 +848,7 @@ void f2fs_submit_merged_ipu_write(struct f2fs_sb_info *sbi,
+ 				found = (target == be->bio);
+ 			else
+ 				found = __has_merged_page(be->bio, NULL,
+-								page, 0);
++							&folio->page, 0);
+ 			if (found)
+ 				break;
  		}
- 	}
- 
--	f2fs_wait_on_page_writeback(&folio->page, DATA, false, true);
-+	f2fs_folio_wait_writeback(folio, DATA, false, true);
- 
- 	if (len == folio_size(folio) || folio_test_uptodate(folio))
- 		return 0;
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index abbcbb5865a3..25f69a308dde 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -131,7 +131,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
- 		goto out_sem;
- 	}
- 
--	f2fs_wait_on_page_writeback(folio_page(folio, 0), DATA, false, true);
-+	f2fs_folio_wait_writeback(folio, DATA, false, true);
- 
- 	/* wait for GCed page writeback via META_MAPPING */
- 	f2fs_wait_on_block_writeback(inode, dn.data_blkaddr);
+@@ -865,7 +865,7 @@ void f2fs_submit_merged_ipu_write(struct f2fs_sb_info *sbi,
+ 				found = (target == be->bio);
+ 			else
+ 				found = __has_merged_page(be->bio, NULL,
+-								page, 0);
++							&folio->page, 0);
+ 			if (found) {
+ 				target = be->bio;
+ 				del_bio_entry(be);
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index c8965fdcf3cb..4a30ded147e2 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3944,7 +3944,7 @@ void f2fs_submit_merged_write_cond(struct f2fs_sb_info *sbi,
+ 				struct inode *inode, struct page *page,
+ 				nid_t ino, enum page_type type);
+ void f2fs_submit_merged_ipu_write(struct f2fs_sb_info *sbi,
+-					struct bio **bio, struct page *page);
++					struct bio **bio, struct folio *folio);
+ void f2fs_flush_merged_writes(struct f2fs_sb_info *sbi);
+ int f2fs_submit_page_bio(struct f2fs_io_info *fio);
+ int f2fs_merge_page_bio(struct f2fs_io_info *fio);
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index d2f2f68da098..8476419db9e4 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -4165,7 +4165,7 @@ void f2fs_folio_wait_writeback(struct folio *folio, enum page_type type,
+ 		/* submit cached LFS IO */
+ 		f2fs_submit_merged_write_cond(sbi, NULL, &folio->page, 0, type);
+ 		/* submit cached IPU IO */
+-		f2fs_submit_merged_ipu_write(sbi, NULL, &folio->page);
++		f2fs_submit_merged_ipu_write(sbi, NULL, folio);
+ 		if (ordered) {
+ 			folio_wait_writeback(folio);
+ 			f2fs_bug_on(sbi, locked && folio_test_writeback(folio));
 -- 
 2.47.2
 
