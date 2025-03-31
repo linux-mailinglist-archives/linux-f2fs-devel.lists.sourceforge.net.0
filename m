@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6BB3A76E5D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 31 Mar 2025 22:13:40 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E557EA76E67
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 31 Mar 2025 22:13:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tzLVq-00017D-N1;
-	Mon, 31 Mar 2025 20:13:39 +0000
+	id 1tzLVu-0005nH-9D;
+	Mon, 31 Mar 2025 20:13:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1tzLVf-000102-DL
+ (envelope-from <willy@infradead.org>) id 1tzLVg-0005cT-QA
  for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 31 Mar 2025 20:13:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cGYRZBXTPHu3cRTtfBjxJzbWAZ8rfR+BCJj/s6DpjU8=; b=UoKDONiQ6LdqOQ/IdQakP004Pl
- hzkg7xIZnUtAbtHkgkeXcacdiiKSOGBK1WhJpOXb4P7bFGDoToDWAkP4WTCYp0v6BDBE/vDKBqcvK
- Wf7jGm+nv9qfZl0GUdC8Kidomv7iEbmnJO3BxoloG4gjvm0nAlSNkNFNMvkK8x7EEkcw=;
+ bh=t9T2N+BcLpB/YGj5dre8KW3ZYzF/CgLlDBbPsRMY5iI=; b=Rf0vmq7ptX5v0lvcuvcS7xSE4o
+ P0zIiAEQjTxXGSejVcGY8wAizmflTS1JBOPQpIScT0JKQ++BauZU25lSbkJnyadWqV167IRd7+4V0
+ YgGJGLOtTApZokfgOUpDNU2vSP613+rDlNd4U9+kll49gTbm21bmhfJrykUwNtdIGQO8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -31,52 +31,58 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=cGYRZBXTPHu3cRTtfBjxJzbWAZ8rfR+BCJj/s6DpjU8=; b=cK/lxpluvZI3F4lWyVOi5BGsfS
- Gpxu+uyQXVmX4k8Hbf7JAmDgx6IkTBBlNYQjQCIBdByUdu2uczDUrfnLIaIUl9abjROprVsHOy9EM
- 4sByz+TKFHZYNiJxFzd0ZgIKOb8f5buEwDpb/WH47+Ro2yIVYQZNsxVjQCsXS4Euk7aQ=;
+ bh=t9T2N+BcLpB/YGj5dre8KW3ZYzF/CgLlDBbPsRMY5iI=; b=i4IDHZ/vQIYkipPBUZzPxPvsyM
+ wFo+AhHCztqzsTMfeEUsqL+Li3yy3kNta6IOq/RCPUb8ipKbAym4s9fTidqB2Sf86NAFugIXKF36B
+ 9w24OFxHHHgwAhRBppEUAO9i6n2a0xc8zO4/zmUifD6KyGi+336pUMRv+sQbHOyzsOEU=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tzLVf-0003dX-BS for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 31 Mar 2025 20:13:27 +0000
+ id 1tzLVa-0003bZ-JK for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 31 Mar 2025 20:13:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=cGYRZBXTPHu3cRTtfBjxJzbWAZ8rfR+BCJj/s6DpjU8=; b=NzNGQLKMVR79mQVZgg/vvGK9dr
- NxiZagnvmn0y2AD+sjpLNsKW30ZIdkZvU7cIY5V6wLH66y9lAOtoWu5DLMxm3wel9XuXGvAB7vo+x
- nbOJLXs90wwDuvbgSKzqRuvJathxan/BAwtomk1quL960gqHsk68Iw7bMNTDrg1/io4ZOMLPU8SXe
- OZnx49pj5x9lt7oUkCgo0dLF58waokIhOAWBfAOuu/PbsHDa9rTy9K0kvfmr4h5HY3yNv/MAv0AnY
- 1KyGeLT8K6Stbfs/NWVsI2/qtqB44yuuUR8Tw0CtmCgDG1QIFoih6+/lFzVdqZkzqnEF6w+CCRaED
- Rw7qiulw==;
+ bh=t9T2N+BcLpB/YGj5dre8KW3ZYzF/CgLlDBbPsRMY5iI=; b=CrMHtm7k4iqQYW1C/PWd4FCAlo
+ XHOZjuIwD+xpNVcTBDdFhBk4rGmMXl3N9iysL28NaOE85tvO5+hfbuVN9nqKIninZLwn3FYJc/M/d
+ 4UuCYn3pevFGhIvDvf3fYb5ARKXivoeivjne6QyeH2VS0baPh9+oB1mFl6ygiLKuyudxMPvJoJNu8
+ 7fp6gQtt+GcLDBYiXi4ILmos2cbtc37bRlI8QZujTQ9LqdiFh5Jib9S8+5mT79AphsEKqwnY95pzE
+ BUaxfFdcNsEVWRSi4Slr5iwwLtFHF0Ell7JOEIN/buqYm+cR80Cyp38noAlUV+6XfPaTXufTNpywL
+ 7kct80NA==;
 Received: from willy by casper.infradead.org with local (Exim 4.98.1 #2 (Red
- Hat Linux)) id 1tzLVT-00000004S2I-2xAa;
+ Hat Linux)) id 1tzLVU-00000004S2z-0Yem;
  Mon, 31 Mar 2025 20:13:16 +0000
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 To: Jaegeuk Kim <jaegeuk@kernel.org>,
 	Chao Yu <chao@kernel.org>
-Date: Mon, 31 Mar 2025 21:11:48 +0100
-Message-ID: <20250331201256.1057782-89-willy@infradead.org>
+Date: Mon, 31 Mar 2025 21:11:49 +0100
+Message-ID: <20250331201256.1057782-90-willy@infradead.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250331201256.1057782-1-willy@infradead.org>
 References: <20250331201256.1057782-1-willy@infradead.org>
 MIME-Version: 1.0
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Pass the folio into make_empty_dir() and then into
- f2fs_get_new_data_folio().
- Removes a call to compound_head(). Signed-off-by: Matthew Wilcox (Oracle)
- <willy@infradead.org> --- fs/f2fs/data.c | 18 +++++++++--------- fs/f2fs/dir.c
- | 8 ++++---- fs/f2fs/f2fs.h | 2 +- 3 files changed, 14 insertions(+), 14
- deletions [...] 
+ Content preview:  Remove two hidden calls to compound_head() Signed-off-by:
+ Matthew Wilcox (Oracle) <willy@infradead.org> --- fs/f2fs/inline.c | 18
+ +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-) diff --git a/fs/f2fs/inline.c
+ b/fs/f2fs/inline.c index 9bac2c4e8937..4684ecc0cb5a 100644 ---
+ a/fs/f2fs/inline.c +++ b/fs/f2fs/inline.c @@ -595, 7 +595,
+ 7 @@ static int do_convert_inline_dir(struct inode [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [90.155.50.34 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
@@ -84,22 +90,18 @@ X-Spam-Report: Spam detection software,
  [90.155.50.34 listed in sa-accredit.habeas.com]
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
  medium trust [90.155.50.34 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [90.155.50.34 listed in bl.score.senderscore.com]
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1tzLVf-0003dX-BS
-Subject: [f2fs-dev] [PATCH 088/153] f2fs: Pass a folio to make_empty_dir()
+X-Headers-End: 1tzLVa-0003bZ-JK
+Subject: [f2fs-dev] [PATCH 089/153] f2fs: Use a folio in
+ f2fs_try_convert_inline_dir()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,117 +119,57 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Pass the folio into make_empty_dir() and then into
-f2fs_get_new_data_folio().  Removes a call to compound_head().
+Remove two hidden calls to compound_head()
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 ---
- fs/f2fs/data.c | 18 +++++++++---------
- fs/f2fs/dir.c  |  8 ++++----
- fs/f2fs/f2fs.h |  2 +-
- 3 files changed, 14 insertions(+), 14 deletions(-)
+ fs/f2fs/inline.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 733802a53444..3776c1f2ad42 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -1339,11 +1339,11 @@ struct folio *f2fs_get_lock_data_folio(struct inode *inode, pgoff_t index,
-  *
-  * Also, caller should grab and release a rwsem by calling f2fs_lock_op() and
-  * f2fs_unlock_op().
-- * Note that, ipage is set only by make_empty_dir, and if any error occur,
-- * ipage should be released by this function.
-+ * Note that, ifolio is set only by make_empty_dir, and if any error occur,
-+ * ifolio should be released by this function.
-  */
- struct folio *f2fs_get_new_data_folio(struct inode *inode,
--		struct page *ipage, pgoff_t index, bool new_i_size)
-+		struct folio *ifolio, pgoff_t index, bool new_i_size)
+diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+index 9bac2c4e8937..4684ecc0cb5a 100644
+--- a/fs/f2fs/inline.c
++++ b/fs/f2fs/inline.c
+@@ -595,7 +595,7 @@ static int do_convert_inline_dir(struct inode *dir, struct page *ipage,
+ int f2fs_try_convert_inline_dir(struct inode *dir, struct dentry *dentry)
  {
- 	struct address_space *mapping = inode->i_mapping;
- 	struct folio *folio;
-@@ -1353,20 +1353,20 @@ struct folio *f2fs_get_new_data_folio(struct inode *inode,
- 	folio = f2fs_grab_cache_folio(mapping, index, true);
- 	if (IS_ERR(folio)) {
- 		/*
--		 * before exiting, we should make sure ipage will be released
-+		 * before exiting, we should make sure ifolio will be released
- 		 * if any error occur.
- 		 */
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
+-	struct page *ipage;
++	struct folio *ifolio;
+ 	struct f2fs_filename fname;
+ 	void *inline_dentry = NULL;
+ 	int err = 0;
+@@ -609,22 +609,22 @@ int f2fs_try_convert_inline_dir(struct inode *dir, struct dentry *dentry)
+ 	if (err)
+ 		goto out;
+ 
+-	ipage = f2fs_get_inode_page(sbi, dir->i_ino);
+-	if (IS_ERR(ipage)) {
+-		err = PTR_ERR(ipage);
++	ifolio = f2fs_get_inode_folio(sbi, dir->i_ino);
++	if (IS_ERR(ifolio)) {
++		err = PTR_ERR(ifolio);
+ 		goto out_fname;
+ 	}
+ 
+-	if (f2fs_has_enough_room(dir, ipage, &fname)) {
+-		f2fs_put_page(ipage, 1);
++	if (f2fs_has_enough_room(dir, &ifolio->page, &fname)) {
++		f2fs_folio_put(ifolio, true);
+ 		goto out_fname;
+ 	}
+ 
+-	inline_dentry = inline_data_addr(dir, ipage);
++	inline_dentry = inline_data_addr(dir, &ifolio->page);
+ 
+-	err = do_convert_inline_dir(dir, ipage, inline_dentry);
++	err = do_convert_inline_dir(dir, &ifolio->page, inline_dentry);
+ 	if (!err)
 -		f2fs_put_page(ipage, 1);
 +		f2fs_folio_put(ifolio, true);
- 		return ERR_PTR(-ENOMEM);
- 	}
- 
--	set_new_dnode(&dn, inode, ipage, NULL, 0);
-+	set_new_dnode(&dn, inode, &ifolio->page, NULL, 0);
- 	err = f2fs_reserve_block(&dn, index);
- 	if (err) {
- 		f2fs_folio_put(folio, true);
- 		return ERR_PTR(err);
- 	}
--	if (!ipage)
-+	if (!ifolio)
- 		f2fs_put_dnode(&dn);
- 
- 	if (folio_test_uptodate(folio))
-@@ -1379,8 +1379,8 @@ struct folio *f2fs_get_new_data_folio(struct inode *inode,
- 	} else {
- 		f2fs_folio_put(folio, true);
- 
--		/* if ipage exists, blkaddr should be NEW_ADDR */
--		f2fs_bug_on(F2FS_I_SB(inode), ipage);
-+		/* if ifolio exists, blkaddr should be NEW_ADDR */
-+		f2fs_bug_on(F2FS_I_SB(inode), ifolio);
- 		folio = f2fs_get_lock_data_folio(inode, index, true);
- 		if (IS_ERR(folio))
- 			return folio;
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index aa8aafb6e332..25969d0ae76e 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -491,16 +491,16 @@ void f2fs_do_make_empty_dir(struct inode *inode, struct inode *parent,
- }
- 
- static int make_empty_dir(struct inode *inode,
--		struct inode *parent, struct page *page)
-+		struct inode *parent, struct folio *folio)
- {
- 	struct folio *dentry_folio;
- 	struct f2fs_dentry_block *dentry_blk;
- 	struct f2fs_dentry_ptr d;
- 
- 	if (f2fs_has_inline_dentry(inode))
--		return f2fs_make_empty_inline_dir(inode, parent, page);
-+		return f2fs_make_empty_inline_dir(inode, parent, &folio->page);
- 
--	dentry_folio = f2fs_get_new_data_folio(inode, page, 0, true);
-+	dentry_folio = f2fs_get_new_data_folio(inode, folio, 0, true);
- 	if (IS_ERR(dentry_folio))
- 		return PTR_ERR(dentry_folio);
- 
-@@ -528,7 +528,7 @@ struct page *f2fs_init_inode_metadata(struct inode *inode, struct inode *dir,
- 		if (S_ISDIR(inode->i_mode)) {
- 			/* in order to handle error case */
- 			folio_get(folio);
--			err = make_empty_dir(inode, dir, &folio->page);
-+			err = make_empty_dir(inode, dir, folio);
- 			if (err) {
- 				folio_lock(folio);
- 				goto put_error;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 192e49208a56..75194caaf317 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3955,7 +3955,7 @@ struct folio *f2fs_find_data_folio(struct inode *inode, pgoff_t index,
- struct folio *f2fs_get_lock_data_folio(struct inode *inode, pgoff_t index,
- 			bool for_write);
- struct folio *f2fs_get_new_data_folio(struct inode *inode,
--			struct page *ipage, pgoff_t index, bool new_i_size);
-+			struct folio *ifolio, pgoff_t index, bool new_i_size);
- int f2fs_do_write_data_page(struct f2fs_io_info *fio);
- int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag);
- int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ out_fname:
+ 	f2fs_free_filename(&fname);
+ out:
 -- 
 2.47.2
 
