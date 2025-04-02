@@ -2,101 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FB4CA785E1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Apr 2025 02:53:33 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D58CA786C0
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Apr 2025 05:11:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tzmM9-0001fR-7j;
-	Wed, 02 Apr 2025 00:53:26 +0000
+	id 1tzoVZ-0002uu-R7;
+	Wed, 02 Apr 2025 03:11:17 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yohan.joung@sk.com>) id 1tzmM7-0001fD-Qr
+ (envelope-from <willy@infradead.org>) id 1tzoVX-0002ul-T4
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 02 Apr 2025 00:53:24 +0000
+ Wed, 02 Apr 2025 03:11:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/3FkMq8zSX1LRYcPyK0quSDMfcfTZgOMk/B35pGgHPQ=; b=eawhpOMHeqjPXhe9lio4bjqOrA
- L3U8rfmNFjz4Fj7NHSUkak+gIu/kx0w5NjgQnV7MLuvhssQ07VIyTfTQNj+Jsu3WAoFqwMSpvdMkG
- 1Gji2LV/hUPHYitrycfQKAxomDAbWw4dtjkFJ7tJ/vHARGJoLly7Kemr2ML2yBkf/TQw=;
+ bh=rHBpRMhMd4e9ZA248Jg6tHY4xx+UFwF4Ug2t9CRPn/I=; b=Qv31t/1NGyPH5d9VKKrDOvNrVg
+ acPpJcOESj/cVV2pcAok7AyIz7jQJroc6q6/2ZAtFSgW9Ul7fIulcrN1+Wi2lfYXjfrxNqB0lEUek
+ aSbVCiOPSib1TyjoViXLA6LyD3YJjjL92n1as4GcMi19AcKO4Zjfnw7C3tUUf4xEBuCw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=/3FkMq8zSX1LRYcPyK0quSDMfcfTZgOMk/B35pGgHPQ=; b=i
- NZ4bqXKUKlP0BSz4kgS73STe8yydARwvQIignPHwB+M0vxhHbSUt1dok3+jupDXLD1H7qT7TVt4ae
- 4exo+tK2PYoKcq2MJiEhx9RAFyDEc/lf8ihPuMwhRlrLDFcxqMohItPxSPGBxacSp+/zKcsFezBwC
- E2vVhGj8fGKd8zM4=;
-Received: from exvmail3.skhynix.com ([166.125.252.90]
- helo=invmail3.skhynix.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1tzmLr-0000EL-Ei for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 02 Apr 2025 00:53:24 +0000
-X-AuditID: a67dfc59-057ff7000000aab6-3e-67ec8a6895c1
-From: "yohan.joung" <yohan.joung@sk.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Wed,  2 Apr 2025 09:52:18 +0900
-Message-ID: <20250402005219.2759-1-yohan.joung@sk.com>
-X-Mailer: git-send-email 2.49.0.windows.1
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=rHBpRMhMd4e9ZA248Jg6tHY4xx+UFwF4Ug2t9CRPn/I=; b=hgHDNOKeLn56I1bZn5s+OGRm5U
+ GAtKdKCkbNWY8EvkZxGEAAq5S7PES6lmGqqJTgnRz0KbqeCEmO0gA/MbGALJCCOKCdH+qHTNAJBgJ
+ S9y2aSiwdSPuoM1jI2vhyeht9LNDxegZGsuRKQj8SAUjaO1czkDHsrLS024wyafy0xKc=;
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1tzoVG-0006U1-4j for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 02 Apr 2025 03:11:15 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=rHBpRMhMd4e9ZA248Jg6tHY4xx+UFwF4Ug2t9CRPn/I=; b=ekFbKOPnBKwQEmiYAwB1VBUYGa
+ rvakAVNd6rxJQV2xKYSEYOIhH71iTN3BGXr4StYvykiTlMBuXIkPtwHTFRhg6Ol6E77EJ8PND+Yyd
+ 4kkijVu5dBPjjIWqBfXD21/M4Y2LpdlTYIXJ4iheetZWxXqkhw2N064Y+4nXL6TMzdumcna84Hr+B
+ eG3+rsenjfhjT7qTgOsSbQFxUVzqggHxjuYjV6XBtkfNCx7O7dt0vEpbg2cn7oOGGMzaqFMw4/G2u
+ 5CSSS9scfphRuLWyuzGrkoyQWdjVcQ2J4g0WvxZaP+/t6PwY3ouVcH3r7GMdt2DltTp3WBdz5PwSr
+ ZT0xFUcA==;
+Received: from willy by casper.infradead.org with local (Exim 4.98.1 #2 (Red
+ Hat Linux)) id 1tzoV9-00000008eyq-2ijD;
+ Wed, 02 Apr 2025 03:10:51 +0000
+Date: Wed, 2 Apr 2025 04:10:51 +0100
+From: Matthew Wilcox <willy@infradead.org>
+To: Nanzhe Zhao <nzzhao.sigma@gmail.com>
+Message-ID: <Z-yqu2zuoX4OIn14@casper.infradead.org>
+References: <CAMLCH1E_cayyv6y8w=u3i+VTgnJmtw7+_K3X23=6w7jKDWbmTw@mail.gmail.com>
+ <Z-oPTUrF7kkhzJg_@casper.infradead.org>
+ <CAMLCH1HTSXrK_qmPi9vzGFd4t1=EuQ4uc35rm4cQ6u-nDKw_Qg@mail.gmail.com>
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupjluLIzCtJLcpLzFFi42LhesuzUDej6026wfFDMhanp55lsniyfhaz
- xaVF7haXd81hc2Dx2LSqk81j94LPTB6fN8kFMEdx2aSk5mSWpRbp2yVwZTRtMCl4zl/xbe9v
- tgbGmbxdjJwcEgImEnvWn2ODsRvWfGYCsdkENCT+9PYyg9giApoSRzpnsoPYzAJlEnv+HGEB
- sYUF4iXO/bkHVM/BwSKgKvHmvwRImFfATOLx1RYmiJGaEju+nGeCiAtKnJz5hAVijLxE89bZ
- QOO5gGpuskpsnnoe6gZJiYMrbrBMYOSdhaRnFpKeBYxMqxhFMvPKchMzc4z1irMzKvMyK/SS
- 83M3MQJDaVntn8gdjN8uBB9iFOBgVOLhbeB9ky7EmlhWXJl7iFGCg1lJhDfi68t0Id6UxMqq
- 1KL8+KLSnNTiQ4zSHCxK4rxG38pThATSE0tSs1NTC1KLYLJMHJxSDYx8exX+tImES/r5m/sK
- yhx1sPhw/vK6a0YzPj3ZyX/S+rWJeyWXpZLZ7qKub4q9O8/+6pohOWNuVFmhxylH0YLa5IJ5
- p+Y7Xpi8siduQqPNZ7vKawHHk9mabmfuyH5bFeaoXL4+Z2LGc0aV0/qG11y3rRBzT7jItmH3
- PImlqqcEL4RcLfGe91mJpTgj0VCLuag4EQBJEN9uIQIAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrOJMWRmVeSWpSXmKPExsXCNUNljm5G15t0g4U94hanp55lsniyfhaz
- xaVF7haXd81hs5gw9yqTxfut9xgd2Dw2repk89i94DOTx7fbHh6fN8kFsERx2aSk5mSWpRbp
- 2yVwZTRtMCl4zl/xbe9vtgbGmbxdjJwcEgImEg1rPjOB2GwCGhJ/enuZQWwRAU2JI50z2UFs
- ZoEyiT1/jrCA2MIC8RLn/twDqufgYBFQlXjzXwIkzCtgJvH4agsTxEhNiR1fzjNBxAUlTs58
- wgIxRl6ieets5gmMXLOQpGYhSS1gZFrFKJKZV5abmJljplecnVGZl1mhl5yfu4kRGBzLav9M
- 2sH47bL7IUYBDkYlHt4G3jfpQqyJZcWVuYcYJTiYlUR4I76+TBfiTUmsrEotyo8vKs1JLT7E
- KM3BoiTO6xWemiAkkJ5YkpqdmlqQWgSTZeLglGpgzCh+e9GO4fIie7OmDuOTFvxCTovMN0Ve
- Sshs+J/6/mWgwLf0IBuXfK/uVbve/X2UxvfmJu/8ixP/GbBzCF12mebmmLLt7ISOPekZLY+y
- l8258eRqb5Gk3yeHC5ulN92ZtPRCW3eSVcy7vMzFs5681Quvanp/uMzp/bFf35sOHGev5bv4
- 5srBICWW4oxEQy3mouJEAKHlf04KAgAA
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <CAMLCH1HTSXrK_qmPi9vzGFd4t1=EuQ4uc35rm4cQ6u-nDKw_Qg@mail.gmail.com>
+X-Spam-Score: -1.2 (-)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: When selecting a victim using next_victim_seg in a large
- section, 
- the selected section might already have been cleared and designated as the
- new current section, making it actively in use. This behavi [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  On Tue, Apr 01, 2025 at 10:17:42PM +0800, Nanzhe Zhao wrote:
+ > Based on my understanding after studying the code related to F2FS's > use
+ of the private field of the page structure, it appears that F2F [...] 
+ Content analysis details:   (-1.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [166.125.252.90 listed in bl.score.senderscore.com]
+ [90.155.50.34 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [166.125.252.90 listed in sa-accredit.habeas.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1tzmLr-0000EL-Ei
-Subject: [f2fs-dev] [PATCH v2] f2fs: prevent the current section from being
- selected as a victim during GC
+ [90.155.50.34 listed in sa-trusted.bondedsender.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [90.155.50.34 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
+X-Headers-End: 1tzoVG-0006U1-4j
+Subject: Re: [f2fs-dev] [DISCUSSION]:f2fs:Approachs to address write
+ amplification in current aops->dirty_folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,73 +111,84 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: pilhyun.kim@sk.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When selecting a victim using next_victim_seg in a large section, the
-selected section might already have been cleared and designated as the
-new current section, making it actively in use.
-This behavior causes inconsistency between the SIT and SSA.
+On Tue, Apr 01, 2025 at 10:17:42PM +0800, Nanzhe Zhao wrote:
+> Based on my understanding after studying the code related to F2FS's
+> use of the private field of the page structure, it appears that F2FS
+> employs this field in a specific way. If the private field is not
+> interpreted as a pointer, it seems it could be used to store
+> additional flag bits. A key observation is that these functions seem
+> to apply to tail pages as well. Therefore, as you mentioned, if we are
+> using folios to manage multiple pages, it seems reasonable to consider
+> adding a similar field within the iomap_folio_state structure. This
+> would be analogous to how it currently tracks the uptodate and dirty
+> states for each subpage, allowing us to track the state of these
+> private fields for each subpage as well. Because it looks just like
+> F2FS is utilizing the private field as a way to extend the various
+> state flags of a page in memory. Perhaps it would be more appropriate
+> to directly name this new structure f2fs_folio_state? This is because
+> I'm currently unsure whether it will interact with existing iomap APIs
+> or if we will need to develop F2FS-specific APIs for it.
 
-F2FS-fs (dm-54): Inconsistent segment (70961) type [0, 1] in SSA and SIT
-Call trace:
-dump_backtrace+0xe8/0x10c
-show_stack+0x18/0x28
-dump_stack_lvl+0x50/0x6c
-dump_stack+0x18/0x28
-f2fs_stop_checkpoint+0x1c/0x3c
-do_garbage_collect+0x41c/0x271c
-f2fs_gc+0x27c/0x828
-gc_thread_func+0x290/0x88c
-kthread+0x11c/0x164
-ret_from_fork+0x10/0x20
+At this point, f2fs has no concept of head/tail pages.  Because it
+doesn't tell the VFS that it can handle large folios, it will only see
+order-0 pages.  The page->private member will go away, so filesystems
+cannot depend on being able to access it.  They only get folio->private,
+and it's recommended (but not required) that they use that to point to
+their own private per-folio struct.
 
-issue scenario
-segs_per_sec=2
-- seg#0 and seg#1 are all dirty
-- all valid blocks are removed in seg#1
-- gc select this sec and next_victim_seg=seg#0
-- migrate seg#0, next_victim_seg=seg#1
-- checkpoint -> sec(seg#0, seg#1)  becomes free
-- allocator assigns sec(seg#0, seg#1) to curseg
-- gc tries to migrate seg#1
+I do think the best approach is to extend iomap and then have f2fs use
+iomap, but I appreciate that is several large jobs.  It's worth it
+because it completely insulates f2fs from having to deal with
+pages/folios (except for metadata)
 
-Signed-off-by: yohan.joung <yohan.joung@sk.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/segment.h | 6 ++++++
- 1 file changed, 6 insertions(+)
+> > You're right that f2fs needs per-block dirty tracking if it is to
+> > support large folios.
+> 
+> I feel that we need to consider more than just this aspect. In fact,
+> it might be because we are still in the early stages of F2FS folio
+> support,so it leaves me the impression that the current F2FS folio
+> implementation is essentially just replacing struct page at the
+> interface level. It effectively acts just like a single page, or in
+> other words, a folio of order 0.
 
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 0465dc00b349..14d18bcf3559 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -460,6 +460,7 @@ static inline void __set_test_and_free(struct f2fs_sb_info *sbi,
- 		unsigned int segno, bool inmem)
- {
- 	struct free_segmap_info *free_i = FREE_I(sbi);
-+	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
- 	unsigned int secno = GET_SEC_FROM_SEG(sbi, segno);
- 	unsigned int start_segno = GET_SEG_FROM_SEC(sbi, secno);
- 	unsigned int next;
-@@ -476,6 +477,11 @@ static inline void __set_test_and_free(struct f2fs_sb_info *sbi,
- 		if (next >= start_segno + usable_segs) {
- 			if (test_and_clear_bit(secno, free_i->free_secmap))
- 				free_i->free_sections++;
-+
-+			if (test_and_clear_bit(secno, dirty_i->victim_secmap)) {
-+				sbi->next_victim_seg[BG_GC] = NULL_SEGNO;
-+				sbi->next_victim_seg[FG_GC] = NULL_SEGNO;
-+			}
- 		}
- 	}
- skip_free:
--- 
-2.33.0
+Right, that's the current approach.  We're taking it because the page
+APIs are being removed.  The f2fs developers have chosen to work on other
+projects instead of supporting large folios (which is their right),
+but they can't hold up the conversion of the entire filesystem stack
+from pages to folios, so they're getting the minimal conversion and can
+work on large folios when they have time.
 
+> As you can see in f2fs_mpage_readpages, after each folio is processed
+> in the loop, the nr_pages counter is only decremented by 1. Therefore,
+> it's clear that when the allocated folios in the page cache are all
+> iterated through, nr_pages still has remaining value, and the loop
+> continues. This naturally leads to a segmentation fault at index =
+> folio_index(folio); due to dereferencing a null pointer. Furthermore,
+> only the first page of each folio is submitted for I/O; the remaining
+> pages are not filled with data from disk.
+
+Yes, there are lots of places in f2fs that assume a folio only has a
+single page.
+
+> I am planning to prepare patches to address these issues and submit
+> them soon. I noticed you recently submitted a big bunch of patches on
+> folio. I would like to debug and test based on your patch.Therefore, I
+> was wondering if it would be possible for you to share your modified
+> F2FS code directly, or perhaps provide a link to your Git repository?
+> Manually copying and applying so many patches from the mailing list
+> would be quite cumbersome.
+
+Ah, you need a tool called b4.  Your distro may have it packaged,
+or you can get it from:
+
+https://git.kernel.org/pub/scm/utils/b4/b4.git
 
 
 _______________________________________________
