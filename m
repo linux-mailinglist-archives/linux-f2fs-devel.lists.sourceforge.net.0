@@ -2,112 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65F55A78567
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Apr 2025 02:00:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C4ECA785BE
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Apr 2025 02:34:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tzlXE-0002UQ-T8;
-	Wed, 02 Apr 2025 00:00:49 +0000
+	id 1tzm3l-0008Hd-4N;
+	Wed, 02 Apr 2025 00:34:24 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3FH7sZwkbAAk178tjuun0jyyrm.pxxpun31n0lxw2nw2.lxv@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1tzlXD-0002UJ-Nn for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 02 Apr 2025 00:00:48 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <yohan.joung@sk.com>) id 1tzm3Y-0008Gw-Aw
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 02 Apr 2025 00:34:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GsM3Ilm2N3CBIYDrmEbMx4uh1PJkyy+Bbjo8v8OIzH8=; b=l3liLsJ7kaCH3qc7linsHJSXOi
- hpd00xGMZUt0tdVU0QCfgvJwBKHY9eqrSzXp9sn4jTgmk4topTONRRgN/xoIxqvJM9uy6UcKzytba
- Q0Kz74I4bWd9YsIvnaZYXf20GmAjOUvuGWPwjtO9mauxl2kPpcz7BtjABKYiazywuyHQ=;
+ bh=bk/0LcdqaEI4WvG6iz1Guz9e7ybfi2TuUEKTxWANAYE=; b=Ky6mVXz0CJBIs/ZJaMwXlP+9Wq
+ 0PToK20wi5IgAgMMC24k0aU4uCqCyloWdtamCovqED8cKGyp6vqXoXydo12F/PnCnDZFZdA893L38
+ yYlkMR42sfO3KiEstLLmOMsZcx8qLOn9qDmChNDjxfn58UabjM0QKoMTtnL1/fvCGuuo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=GsM3Ilm2N3CBIYDrmEbMx4uh1PJkyy+Bbjo8v8OIzH8=; b=O
- OyMN3Pija/wQ18G8+IzQhJ7VW4zZfpffwM3gY6vmLLXvY0wBiWGW3KWtr/fh/1tAWO/cF9X65rUJJ
- JApqeyWVgqK+70rcok1C8Cwo4E7081h3V75PYZ3hMAbC1Z+HUhAYCd1SJP8JHvRLnQzewnZ0gwRNW
- NLU85nemMjpmH2RE=;
-Received: from mail-io1-f78.google.com ([209.85.166.78])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1tzlWx-0006JB-A3 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 02 Apr 2025 00:00:48 +0000
-Received: by mail-io1-f78.google.com with SMTP id
- ca18e2360f4ac-85b5e46a526so651350139f.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 01 Apr 2025 17:00:31 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743552020; x=1744156820;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=GsM3Ilm2N3CBIYDrmEbMx4uh1PJkyy+Bbjo8v8OIzH8=;
- b=YFvYaBEiq8TG0CcS6MJi4mwMGFaJvF5jMcUBNF2SSYr7YiB0/l0/5HEh2+2TwsstUY
- E9PmCJkHbLLFoSkpWpfdp6YqEiILOCVceY4n6H5hb/p/k4048HkU6JT9VeDfnEh7gwsy
- KLHaLkEQpOd9whLHj7cM7ivpJT9HkevFUx8NPx8naLkkTxLH3EoBBZdarJg+cLCCONa1
- RpkdslNYTkgAQvFKMMHxzdGjRiC+dN23yd/1xrAh2xSjcNGKmv4m7cYRX4E/pqIVfyrR
- JvYBrs2oJDcTzXWkF4xyR/Hd9DiMspbig7k6l7TSLUnIkuiSRYeaS0ZzgcEN0I99hYow
- 1YYA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWA4MjsF51So8+F5eDdPCPiOwK5WzAPTEL6YFJ0/QzVd7xV4/XXBj7b+ZA0DgXC17W1IqtnCKRu5gXDwOOOeiCq@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwMj+ZYoUvQoCb4orNH9uIrDbfFY13BDZDpkeXGIuQpIDrK0D07
- D0c6GtHkrdmR4XlIN5xspymuu89DkJ/cRGdT7Ys1CFoMLK/VTrgBWAUTbdx8MlF/k2g8sgpi2NO
- vrRgbvmD4hdcLrxBqB971WlEFsKyYV3yKTZVYeP2hPLPr3nlVHJcx7W8=
-X-Google-Smtp-Source: AGHT+IHeZKlpXHH1suOWjsbDsdSn84HHpn0TaUzLiOwfkGj943XDNLMffuhXk6TJOAS1x1S/0YTZ4f3JLmdC8mvSh96YQiSAILA6
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=bk/0LcdqaEI4WvG6iz1Guz9e7ybfi2TuUEKTxWANAYE=; b=NP+JFV5m1dd/z5dt0mutCDTWLG
+ JJe4q6Bm8jRE/bBV0WX+6IPsL9vkyMXaou2Nrg7Ay/qpMOgTG0+88JnAtH0mValJoOGyN3q/e39bX
+ oFmHsTkH/KAUWkbYdhLSsHABSU4qy1AX9ifdUFQ0HvKTbR4anfnib/6AwuCYq6vv3Wvg=;
+Received: from exvmail3.hynix.com ([166.125.252.90] helo=invmail3.skhynix.com)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1tzm3G-0007gz-3q for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 02 Apr 2025 00:34:11 +0000
+X-AuditID: a67dfc59-03fff7000000aab6-c9-67ec85e5bf2c
+From: "yohan.joung" <yohan.joung@sk.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Wed,  2 Apr 2025 09:33:39 +0900
+Message-ID: <20250402003340.2685-1-yohan.joung@sk.com>
+X-Mailer: git-send-email 2.49.0.windows.1
+In-Reply-To: <de99eee5-abb6-4645-b1f1-3154866f40a4@kernel.org>
+References: <de99eee5-abb6-4645-b1f1-3154866f40a4@kernel.org>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:746:b0:3d3:f27a:9101 with SMTP id
- e9e14a558f8ab-3d5e08e9ec2mr181422665ab.1.1743552020538; Tue, 01 Apr 2025
- 17:00:20 -0700 (PDT)
-Date: Tue, 01 Apr 2025 17:00:20 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <67ec7e14.050a0220.31979b.0031.GAE@google.com>
-From: syzbot <syzbot+803dd716c4310d16ff3a@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.3 (/)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrELMWRmVeSWpSXmKPExsXC9ZZnoe6z1jfpBk93sFqcnnqWyeLJ+lnM
+ Fl+uXmO3uLTI3eLyrjlsDqweO2fdZffYtKqTzWP3gs9MHp83yQWwRHHZpKTmZJalFunbJXBl
+ nGzfz17QnVFx93kPewPju+AuRk4OCQETiev7vzDC2Pu65zKD2GwCGhJ/envBbBEBLYmJDX+B
+ arg4mAU6GSXWH/zMCuIIC2xmlPj7eiJYFYuAqsSjqXPAJvEKmEl8vv2MBWKqpsSOL+eZuhg5
+ ODgF7CTOPiwBMYUEbCWWLI6BqBaUODnzCVg1s4C8RPPW2cwg4yUEetgkNp/fBnWcpMTBFTdY
+ JjDyz0LSMwtJzwJGplWMIpl5ZbmJmTnGesXZGZV5mRV6yfm5mxiBIbms9k/kDsZvF4IPMQpw
+ MCrx8DbwvkkXYk0sK67MPcQowcGsJMIb8fVluhBvSmJlVWpRfnxRaU5q8SFGaQ4WJXFeo2/l
+ KUIC6YklqdmpqQWpRTBZJg5OqQbGZQ7FmiZvvJhbX20uK7jnGFnclf4jxWj95VnZMwttbza3
+ 7+U/H/g4v529VJb10ZfH4UsjD/z0eJuS76fabxzx5vAt5fjOU5Z9W289SYz+YNyUXL3XVofp
+ r8vL5bW7vqYl92TLBh53v7hx7q/60MwazhY5bm7mmwe+zU+xnlYdxVmWr8iRNkmJpTgj0VCL
+ uag4EQDenHrCRQIAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprNLMWRmVeSWpSXmKPExsXCNUNlju7T1jfpBnPuWFqcnnqWyeLJ+lnM
+ Fl+uXmO3uLTI3eLyrjlsFhPmXmWyeL/1HqMDu8fOWXfZPTat6mTz2L3gM5PHt9seHp83yQWw
+ RnHZpKTmZJalFunbJXBlnGzfz17QnVFx93kPewPju+AuRk4OCQETiX3dc5lBbDYBDYk/vb1g
+ toiAlsTEhr+MXYxcHMwCnYwS6w9+ZgVxhAU2M0r8fT0RrIpFQFXi0dQ5jCA2r4CZxOfbz1gg
+ pmpK7PhynqmLkYODU8BO4uzDEhBTSMBWYsniGIhqQYmTM5+AVTMLyEs0b53NPIGRZxaS1Cwk
+ qQWMTKsYRTLzynITM3PM9IqzMyrzMiv0kvNzNzECg2xZ7Z9JOxi/XXY/xCjAwajEw9vA+yZd
+ iDWxrLgy9xCjBAezkghvxNeX6UK8KYmVValF+fFFpTmpxYcYpTlYlMR5vcJTE4QE0hNLUrNT
+ UwtSi2CyTBycUg2M9hNepoYzSG/nvvo2dts3/W8vvhSevrJzu8p5lsVHhS4drOV+nSF05sWW
+ aUV/HpcePBa9lqnYf+8ymfS07AV/Uz9ErOvYkTQ9y/3oG8/md/KLEyP+XzM26Ij4sWvq/8US
+ M8P23Y/T1g+pbufp8F9SyjG3XDIidMYNvsyZ+4Tv7zvBfFfpTJOtkBJLcUaioRZzUXEiAFsI
+ LQ0uAgAA
+X-CFilter-Loop: Reflected
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 4e82c87058f4
- Merge tag 'rust-6.15' of git://git.kernel.org.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=17007198580000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.3 points, 6.0 required)
+ Content preview: >>>>>>>>>>>>>>>> When selecting a victim using
+ next_victim_seg
+ in a large >>>>>>>>>>>>>>>> section, the selected section might already have
+ been >>>>>>>>>>>>>>>> cleared and designated as the new curr [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.166.78 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.166.78 listed in bl.score.senderscore.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.78 listed in list.dnswl.org]
+ [166.125.252.90 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [166.125.252.90 listed in sa-accredit.habeas.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.78 listed in wl.mailspike.net]
-X-Headers-End: 1tzlWx-0006JB-A3
-Subject: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_write_end_io
+X-Headers-End: 1tzm3G-0007gz-3q
+Subject: [f2fs-dev] [External Mail] Re: [External Mail] Re: [External Mail]
+ Re: [PATCH] f2fs: prevent the current section from being selected as a
+ victim during garbage collection
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,99 +111,372 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: jyh429@gmail.com, linux-kernel@vger.kernel.org, jaegeuk@kernel.org,
+ pilhyun.kim@sk.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
 
-syzbot found the following issue on:
-
-HEAD commit:    4e82c87058f4 Merge tag 'rust-6.15' of git://git.kernel.org..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=17007198580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=4253e469c0d32ef6
-dashboard link: https://syzkaller.appspot.com/bug?extid=803dd716c4310d16ff3a
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-
-Unfortunately, I don't have any reproducer for this issue yet.
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/5e6f1c2744e3/disk-4e82c870.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/5c1a60744d62/vmlinux-4e82c870.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/228bbd75bd12/bzImage-4e82c870.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+803dd716c4310d16ff3a@syzkaller.appspotmail.com
-
-------------[ cut here ]------------
-kernel BUG at fs/f2fs/data.c:358!
-Oops: invalid opcode: 0000 [#1] SMP KASAN PTI
-CPU: 1 UID: 0 PID: 23 Comm: ksoftirqd/1 Not tainted 6.14.0-syzkaller-10892-g4e82c87058f4 #0 PREEMPT(full) 
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 02/12/2025
-RIP: 0010:f2fs_write_end_io+0x77a/0x790 fs/f2fs/data.c:357
-Code: e8 8b 01 f2 fd e9 a2 fa ff ff 89 d9 80 e1 07 38 c1 0f 8c fe fa ff ff 48 89 df e8 11 01 f2 fd e9 f1 fa ff ff e8 87 92 8b fd 90 <0f> 0b e8 8f d4 ed 07 66 66 66 66 66 66 2e 0f 1f 84 00 00 00 00 00
-RSP: 0018:ffffc900001d79c0 EFLAGS: 00010246
-RAX: ffffffff8437d9e9 RBX: 0000000000000000 RCX: ffff88801da85a00
-RDX: 0000000000000100 RSI: 0000000000000000 RDI: 000000000000000a
-RBP: ffffc900001d7ac8 R08: ffffffff8437d696 R09: 1ffffd400012b785
-R10: dffffc0000000000 R11: fffff9400012b786 R12: 0000000000000001
-R13: dffffc0000000000 R14: 000000000000000a R15: ffffea000095bc00
-FS:  0000000000000000(0000) GS:ffff8881250e5000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007fd1b21f9438 CR3: 000000007b684000 CR4: 00000000003526f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- blk_update_request+0x5e5/0x1160 block/blk-mq.c:983
- blk_mq_end_request+0x3e/0x70 block/blk-mq.c:1145
- blk_complete_reqs block/blk-mq.c:1220 [inline]
- blk_done_softirq+0x100/0x150 block/blk-mq.c:1225
- handle_softirqs+0x2d6/0x9b0 kernel/softirq.c:579
- run_ksoftirqd+0xcf/0x130 kernel/softirq.c:968
- smpboot_thread_fn+0x576/0xaa0 kernel/smpboot.c:164
- kthread+0x7b7/0x940 kernel/kthread.c:464
- ret_from_fork+0x4b/0x80 arch/x86/kernel/process.c:153
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:f2fs_write_end_io+0x77a/0x790 fs/f2fs/data.c:357
-Code: e8 8b 01 f2 fd e9 a2 fa ff ff 89 d9 80 e1 07 38 c1 0f 8c fe fa ff ff 48 89 df e8 11 01 f2 fd e9 f1 fa ff ff e8 87 92 8b fd 90 <0f> 0b e8 8f d4 ed 07 66 66 66 66 66 66 2e 0f 1f 84 00 00 00 00 00
-RSP: 0018:ffffc900001d79c0 EFLAGS: 00010246
-RAX: ffffffff8437d9e9 RBX: 0000000000000000 RCX: ffff88801da85a00
-RDX: 0000000000000100 RSI: 0000000000000000 RDI: 000000000000000a
-RBP: ffffc900001d7ac8 R08: ffffffff8437d696 R09: 1ffffd400012b785
-R10: dffffc0000000000 R11: fffff9400012b786 R12: 0000000000000001
-R13: dffffc0000000000 R14: 000000000000000a R15: ffffea000095bc00
-FS:  0000000000000000(0000) GS:ffff8881250e5000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007fd1b21f9438 CR3: 000000007b684000 CR4: 00000000003526f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
+>>>>>>>>>>>>>>>> When selecting a victim using next_victim_seg in a large
+>>>>>>>>>>>>>>>> section, the selected section might already have been
+>>>>>>>>>>>>>>>> cleared and designated as the new current section,
+>>>>>>>>>>>>>>>> making it actively in
+>>>>>>>>> use.
+>>>>>>>>>>>>>>>> This behavior causes inconsistency between the SIT and SSA.
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> Hi, does this fix your issue?
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> This is an issue that arises when dividing a large section
+>>>>>>>>>>>>>> into segments for garbage collection.
+>>>>>>>>>>>>>> caused by the background GC (garbage collection) thread in
+>>>>>>>>>>>>>> large section
+>>>>>>>>>>>>>> f2fs_gc(victim_section) ->
+>>>>>>>>>>>>>> f2fs_clear_prefree_segments(victim_section)->
+>>>>>>>>>>>>>> cursec(victim_section) -> f2fs_gc(victim_section by
+>>>>>>>>>>>>>> next_victim_seg)
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> I didn't get it, why f2fs_get_victim() will return section
+>>>>>>>>>>>>> which is used by curseg? It should be avoided by checking
+>>>>>>>>>>>>> w/
+>>>>>>> sec_usage_check().
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> Or we missed to check gcing section which next_victim_seg
+>>>>>>>>>>>>> points to during get_new_segment()?
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> Can this happen?
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> e.g.
+>>>>>>>>>>>>> - bggc selects sec #0
+>>>>>>>>>>>>> - next_victim_seg: seg #0
+>>>>>>>>>>>>> - migrate seg #0 and stop
+>>>>>>>>>>>>> - next_victim_seg: seg #1
+>>>>>>>>>>>>> - checkpoint, set sec #0 free if sec #0 has no valid blocks
+>>>>>>>>>>>>> - allocate seg #0 in sec #0 for curseg
+>>>>>>>>>>>>> - curseg moves to seg #1 after allocation
+>>>>>>>>>>>>> - bggc tries to migrate seg #1
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> Thanks,
+>>>>>>>>>>>> That's correct
+>>>>>>>>>>>> In f2fs_get_victim, we use next_victim_seg to directly jump
+>>>>>>>>>>>> to got_result, thereby bypassing sec_usage_check What do you
+>>>>>>>>>>>> think about this change?
+>>>>>>>>>>>>
+>>>>>>>>>>>> @@ -850,15 +850,20 @@ int f2fs_get_victim(struct
+>>>>>>>>>>>> f2fs_sb_info *sbi,
+>>>>>>>>>>> unsigned int *result,
+>>>>>>>>>>>>                            p.min_segno = sbi->next_victim_seg[BG_GC];
+>>>>>>>>>>>>                            *result = p.min_segno;
+>>>>>>>>>>>>                            sbi->next_victim_seg[BG_GC] = NULL_SEGNO;
+>>>>>>>>>>>> -                       goto got_result;
+>>>>>>>>>>>>                    }
+>>>>>>>>>>>>                    if (gc_type == FG_GC &&
+>>>>>>>>>>>>
+>>>>>>>>>>>> sbi->next_victim_seg[FG_GC] != NULL_SEGNO)
+>>>>>>> {
+>>>>>>>>>>>>                            p.min_segno = sbi->next_victim_seg[FG_GC];
+>>>>>>>>>>>>                            *result = p.min_segno;
+>>>>>>>>>>>>                            sbi->next_victim_seg[FG_GC] = NULL_SEGNO;
+>>>>>>>>>>>> -                       goto got_result;
+>>>>>>>>>>>>                    }
+>>>>>>>>>>>> +
+>>>>>>>>>>>> +               secno = GET_SEC_FROM_SEG(sbi, segno);
+>>>>>>>>>>>> +
+>>>>>>>>>>>> +               if (sec_usage_check(sbi, secno))
+>>>>>>>>>>>> +                       goto next;
+>>>>>>>>>>>> +
+>>>>>>>>>>>> +               goto got_result;
+>>>>>>>>>>>>            }
+>>>>>>>>>>>
+>>>>>>>>>>> But still allocator can assign this segment after
+>>>>>>>>>>> sec_usage_check() in race condition, right?
+>>>>>>>>>> Since the BG GC using next_victim  takes place after the SIT
+>>>>>>>>>> update in do_checkpoint, it seems unlikely that a race
+>>>>>>>>>> condition with
+>>>>>>>>> sec_usage_check will occur.
+>>>>>>>>>
+>>>>>>>>> I mean this:
+>>>>>>>>>
+>>>>>>>>> - gc_thread
+>>>>>>>>>    - f2fs_gc
+>>>>>>>>>     - f2fs_get_victim
+>>>>>>>>>      - sec_usage_check --- segno #1 is not used in any cursegs
+>>>>>>>>> 					- f2fs_allocate_data_block
+>>>>>>>>> 					 - new_curseg
+>>>>>>>>> 					  - get_new_segment find segno #1
+>>>>>>>>>
+>>>>>>>>>     - do_garbage_collect
+>>>>>>>>>
+>>>>>>>>> Thanks,
+>>>>>>>>
+>>>>>>>> 						  do_checkpoint sec0 free
+>>>>>>>> 						  If sec0 is not freed, then
+>>>>>>> segno1 within sec0 cannot be
+>>>>>>>> allocated
+>>>>>>>> - gc_thread
+>>>>>>>>    - f2fs_gc
+>>>>>>>>     - f2fs_get_victim
+>>>>>>>>      - sec_usage_check  --- segno #1 is not used in any cursegs
+>>>>>>>> (but
+>>>>>>>> sec0
+>>>>>>> is already used)
+>>>>>>>> 							-
+>f2fs_allocate_data_block
+>>>>>>>> 							- new_curseg
+>>>>>>>> 							- get_new_segment find
+>>>>>>> segno #1
+>>>>>>>>
+>>>>>>>>     - do_garbage_collect
+>>>>>>>>
+>>>>>>>> I appreciate your patch, it is under testing.
+>>>>>>>> but I'm wondering if there's a risk of a race condition in this
+>>>>>>>> situation
+>>>>>>>
+>>>>>>> Oh, yes, I may missed that get_new_segment can return a free
+>>>>>>> segment in partial used section.
+>>>>>>>
+>>>>>>> So what do you think of this?
+>>>>>>> - check CURSEG() in do_garbage_collect() and get_victim()
+>>>>>>> - reset next_victim_seg[] in get_new_segment() and
+>>>>>>> __set_test_and_free() during checkpoint.
+>>>>>>>
+>>>>>>> Thanks,
+>>>>>>
+>>>>>> How about using victim_secmap?
+>>>>>> gc_thread
+>>>>>> 				mutex_lock(&DIRTY_I(sbi)->seglist_lock);
+>>>>>> 				__set_test_and_free
+>>>>>> 				check cur section next_victim clear
+>>>>>> 				mutex_unlock(&dirty_i->seglist_lock);
+>>>>>>
+>>>>>> mutex_lock(&dirty->seglist_lock);
+>>>>>> f2fs_get_victim
+>>>>>> mutex_unlock(&dirty_i->seglist_lock);
+>>>>>>
+>>>>>> static inline void __set_test_and_free(struct f2fs_sb_info *sbi,
+>>>>>>                 if (next >= start_segno + usable_segs) {
+>>>>>>                         if (test_and_clear_bit(secno, free_i->free_secmap))
+>>>>>>                                 free_i->free_sections++;
+>>>>>> +
+>>>>>> +                       if (test_and_clear_bit(secno, dirty_i-
+>>>> victim_secmap))
+>>>>>> +                               sbi->next_victim_seg[BG_GC] =
+>>>>>> + NULL_SEGNO;
+>>>>>
+>>>>> Can this happen?
+>>>>>
+>>>>> segs_per_sec=2
+>>>>>
+>>>>> - seg#0 and seg#1 are all dirty
+>>>>> - all valid blocks are removed in seg#1
+>>>>> - checkpoint -> seg#1 becomes free
+>>>>> - gc select this sec and next_victim_seg=seg#0
+>>>>> - migrate seg#0, next_victim_seg=seg#1
+>>>>> - allocator assigns seg#1 to curseg
+>>>>> - gc tries to migrate seg#1
+>>>
+>>> I meant for above case, below change still can not catch it, right?
+>>> since next_victim_seg[] was assigned after checkpoint.
+>>>
+>>> +	if (test_and_clear_bit(secno, dirty_i->victim_secmap))
+>>> +		sbi->next_victim_seg[BG_GC] = NULL_SEGNO;
+>>>
+>>> Thanks,
+>>>
+>> I understood what you said.
+>> It seems that without a checkpoint,
+>> we won't be able to allocate seg#1 in sec0 because when requesting a
+>> segment allocation, if it's not within the same section, it checks in
+>> a new secmap.
+>> please let me know, if there's anything I've missed
+>
+>Oh, I see, it always try to allocate segments sequentially in a large
+>section-size image, thanks for your explanation. :)
+>
+>static unsigned int __get_next_segno(struct f2fs_sb_info *sbi, int type)
+>{ ...
+>	if (__is_large_section(sbi)) {
+>...
+>		return curseg->segno;
+>...
+>}
+>
+>static int new_curseg(struct f2fs_sb_info *sbi, int type, bool new_sec)
+>{ ...
+>	segno = __get_next_segno(sbi, type);
+>	ret = get_new_segment(sbi, &segno, new_sec, pinning); ...
+>}
+>
+>BTW, I guess it could be more efficient if we can reuse free segment in
+>dirty section for conventional device.a
+It might cause file fragmentation, so we should consider it
+>
+>> Thanks
+>>
+>> static int get_new_segment(struct f2fs_sb_info *sbi,
+>> 			unsigned int *newseg, bool new_sec, bool pinning)
+>>
+>> 	if (!new_sec && ((*newseg + 1) % SEGS_PER_SEC(sbi))) {
+>> 		segno = find_next_zero_bit(free_i->free_segmap,
+>> 			GET_SEG_FROM_SEC(sbi, hint + 1), *newseg + 1);
+>> 		if (segno < GET_SEG_FROM_SEC(sbi, hint + 1))
+>> 			goto got_it;
+>> 	}
+>>
+>> find_other_zone:
+>> 	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi),
+>> hint);
+>>
+>>>>>
+>>>>> Thanks,
+>>>> The detailed scenario
+>>>> segs_per_sec=2
+>>>> - seg#0 and seg#1 are all dirty
+>>>> - all valid blocks are removed in seg#1
+>>>> - gc select this sec and next_victim_seg=seg#0
+>>>> - migrate seg#0, next_victim_seg=seg#1
+>>>> - checkpoint -> sec(seg#0, seg#1)  becomes free
+>
+>So, for this case, we can handle it only in checkpoint.
+>
+>>> +	if (test_and_clear_bit(secno, dirty_i->victim_secmap))
+>>> +		sbi->next_victim_seg[BG_GC] = NULL_SEGNO;
+>
+>Do we need to handle sbi->next_victim_seg[FG_GC] as well?
+I'll add it and submit the patch. 
+Thanks.
+>
+>Thanks,
+>
+>>>> - allocator assigns sec(seg#0, seg#1) to curseg
+>>>> - gc tries to migrate seg#1
+>>>>>
+>>>>>>                 }
+>>>>>>         }
+>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>>
+>>>>>>>>>>>
+>>>>>>>>>>> IMO, we can clear next_victim_seg[] once section is free in
+>>>>>>>>>>> __set_test_and_free()? something like this:
+>>>>>>>>>> I will test it according to your suggestion.
+>>>>>>>>>> If there are no issues, can I submit it again with the patch?
+>>>>>>>>>> Thanks
+>>>>>>>>>>>
+>>>>>>>>>>> ---
+>>>>>>>>>>>     fs/f2fs/segment.h | 13 ++++++++++---
+>>>>>>>>>>>     1 file changed, 10 insertions(+), 3 deletions(-)
+>>>>>>>>>>>
+>>>>>>>>>>> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h index
+>>>>>>>>>>> 0465dc00b349..826e37999085 100644
+>>>>>>>>>>> --- a/fs/f2fs/segment.h
+>>>>>>>>>>> +++ b/fs/f2fs/segment.h
+>>>>>>>>>>> @@ -473,9 +473,16 @@ static inline void
+>>>>>>>>>>> __set_test_and_free(struct f2fs_sb_info *sbi,
+>>>>>>>>>>>     			goto skip_free;
+>>>>>>>>>>>     		next = find_next_bit(free_i->free_segmap,
+>>>>>>>>>>>     				start_segno + SEGS_PER_SEC(sbi),
+>>>>>>> start_segno);
+>>>>>>>>>>> -		if (next >= start_segno + usable_segs) {
+>>>>>>>>>>> -			if (test_and_clear_bit(secno, free_i-
+>>>>>> free_secmap))
+>>>>>>>>>>> -				free_i->free_sections++;
+>>>>>>>>>>> +		if ((next >= start_segno + usable_segs) &&
+>>>>>>>>>>> +			test_and_clear_bit(secno, free_i->free_secmap))
+>>>>> {
+>>>>>>>>>>> +			free_i->free_sections++;
+>>>>>>>>>>> +
+>>>>>>>>>>> +			if (GET_SEC_FROM_SEG(sbi->next_victim_seg[BG_GC])
+>>>>> ==
+>>>>>>>>>>> +									secno)
+>>>>>>>>>>> +				sbi->next_victim_seg[BG_GC] = NULL_SEGNO;
+>>>>>>>>>>> +			if (GET_SEC_FROM_SEG(sbi->next_victim_seg[FG_GC])
+>>>>> ==
+>>>>>>>>>>> +									secno)
+>>>>>>>>>>> +				sbi->next_victim_seg[FG_GC] = NULL_SEGNO;
+>>>>>>>>>>>     		}
+>>>>>>>>>>>     	}
+>>>>>>>>>>>     skip_free:
+>>>>>>>>>>> --
+>>>>>>>>>>> 2.40.1
+>>>>>>>>>>>
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> Because the call stack is different, I think that in order
+>>>>>>>>>>>>>> to handle everything at once, we need to address it within
+>>>>>>>>>>>>>> do_garbage_collect, or otherwise include it on both sides.
+>>>>>>>>>>>>>> What do you think?
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> [30146.337471][ T1300] F2FS-fs (dm-54): Inconsistent
+>>>>>>>>>>>>>> segment
+>>>>>>>>>>>>>> (70961) type [0, 1] in SSA and SIT [30146.346151][ T1300]
+>>>>>>>>>>>>>> Call
+>>>>>>> trace:
+>>>>>>>>>>>>>> [30146.346152][ T1300]  dump_backtrace+0xe8/0x10c
+>>>>>>>>>>>>>> [30146.346157][ T1300]  show_stack+0x18/0x28
+>>>>>>>>>>>>>> [30146.346158][ T1300] dump_stack_lvl+0x50/0x6c
+>>>>>>>>>>>>>> [30146.346161][ T1300]
+>>>>>>>>>>>>>> dump_stack+0x18/0x28 [30146.346162][ T1300]
+>>>>>>>>>>>>>> f2fs_stop_checkpoint+0x1c/0x3c [30146.346165][ T1300]
+>>>>>>>>>>>>>> do_garbage_collect+0x41c/0x271c [30146.346167][ T1300]
+>>>>>>>>>>>>>> f2fs_gc+0x27c/0x828 [30146.346168][ T1300]
+>>>>>>>>>>>>>> gc_thread_func+0x290/0x88c [30146.346169][ T1300]
+>>>>>>>>>>>>>> kthread+0x11c/0x164 [30146.346172][ T1300]
+>>>>>>>>>>>>>> ret_from_fork+0x10/0x20
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> struct curseg_info : 0xffffff803f95e800 {
+>>>>>>>>>>>>>> 	segno        : 0x11531 : 70961
+>>>>>>>>>>>>>> }
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> struct f2fs_sb_info : 0xffffff8811d12000 {
+>>>>>>>>>>>>>> 	next_victim_seg[0] : 0x11531 : 70961 }
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> https://lore.kernel.org/linux-f2fs-devel/20250325080646.3
+>>>>>>>>>>>>>>> 29
+>>>>>>>>>>>>>>> 19
+>>>>>>>>>>>>>>> 47
+>>>>>>>>>>>>>>> -2
+>>>>>>>>>>>>>>> -
+>>>>>>>>>>>>>>> chao@kernel.org
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> Thanks,
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> Signed-off-by: Yohan Joung <yohan.joung@sk.com>
+>>>>>>>>>>>>>>>> ---
+>>>>>>>>>>>>>>>>     fs/f2fs/gc.c | 4 ++++
+>>>>>>>>>>>>>>>>     1 file changed, 4 insertions(+)
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c index
+>>>>>>>>>>>>>>>> 2b8f9239bede..4b5d18e395eb 100644
+>>>>>>>>>>>>>>>> --- a/fs/f2fs/gc.c
+>>>>>>>>>>>>>>>> +++ b/fs/f2fs/gc.c
+>>>>>>>>>>>>>>>> @@ -1926,6 +1926,10 @@ int f2fs_gc(struct f2fs_sb_info
+>>>>>>>>>>>>>>>> *sbi, struct
+>>>>>>>>>>>>>>> f2fs_gc_control *gc_control)
+>>>>>>>>>>>>>>>>     		goto stop;
+>>>>>>>>>>>>>>>>     	}
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> +	if (__is_large_section(sbi) &&
+>>>>>>>>>>>>>>>> +			IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi,
+>>> segno)))
+>>>>>>>>>>>>>>>> +		goto stop;
+>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>     	seg_freed = do_garbage_collect(sbi, segno,
+>>>>>>>>>>>>>>>> &gc_list,
+>>>>> gc_type,
+>>>>>>>>>>>>>>>>     				gc_control->should_migrate_blocks,
+>>>>>>>>>>>>>>>>     				gc_control->one_time);
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>
+>>>>>>>>>>
+>>>>>>>>
+>>>>
+>>>>
+>>
+>>
 
 
 _______________________________________________
