@@ -2,100 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1756A7896F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Apr 2025 10:05:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C86AA79ACB
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Apr 2025 06:21:38 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1tzt6F-0000Hd-Ng;
-	Wed, 02 Apr 2025 08:05:27 +0000
+	id 1u0C53-0008Gp-PL;
+	Thu, 03 Apr 2025 04:21:29 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yohan.joung@sk.com>) id 1tzt6E-0000HV-Pv
+ (envelope-from <thond2009@gmail.com>) id 1u0C52-0008Gi-LH
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 02 Apr 2025 08:05:26 +0000
+ Thu, 03 Apr 2025 04:21:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GSKkRupSlXl61Hp8fOhX2ezigD5ghY5TUcW/55pRDVw=; b=Xn0C/hVBVyLNASWIGxc6FTO3LF
- 3QETpr6nxLGyF95nJwtFN53GO9NQaDpK5wiuXAa0N70PSTokNW4M5S/uxBpdo7PDE4uQYmksMrldz
- M8B4VXx8r3PU23KBTW6kAwwjxz191mqlXg3wsjxSinnWdw2nh67I1wcy65ZTtgc8dsio=;
+ bh=GtsgyMd5k5S+RCVW953wEU0S2j9d9y2UJk6iVF/zlrc=; b=TMXcrG5JX2fUArE0senKND1YCj
+ ufBiI038J7qip+Uof3wtJmkEDprvMw3617D6MtMY0CCFc1bvS67/Z9xR3O8GV0xqU447dLttziB35
+ KMNFfFreU9U8BPK5PbMF7faVpuHrAbmo3hTN9ERgioq8I6f9nbd0jMrttT+u7SoykszU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=GSKkRupSlXl61Hp8fOhX2ezigD5ghY5TUcW/55pRDVw=; b=A
- M2Rud0R6zgxbADBiX/kpREY06rN4hwJSjir6FRnNzyLJX1S+A+0zjLKVoVr8y3xLv7eFTMH8nZRZj
- 9JGfE7SHjfzh4XUeREUk9oNzrVgUlN5rjZmzlnNjpZRs19A7OWDlRdtmdZXbwfq3TuHJ+D48Nf6BU
- vOC6avSDbAhOrMJ8=;
-Received: from exvmail3.hynix.com ([166.125.252.90] helo=invmail3.skhynix.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1tzt5y-0005ma-B6 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 02 Apr 2025 08:05:26 +0000
-X-AuditID: a67dfc59-03fff7000000aab6-0c-67ecefaf0c8d
-From: "yohan.joung" <yohan.joung@sk.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Wed,  2 Apr 2025 17:04:27 +0900
-Message-ID: <20250402080428.2811-1-yohan.joung@sk.com>
-X-Mailer: git-send-email 2.49.0.windows.1
+ List-Owner:List-Archive; bh=GtsgyMd5k5S+RCVW953wEU0S2j9d9y2UJk6iVF/zlrc=; b=a
+ v5f45qPXA2NVVZAaKIAqRYobB2Bjmn9fK5t7APw039uCl6vVvk4mGb0nSOJsP2qq/PcFKp+5e5EhL
+ GQ/05WApEGDtyzqgDfv0A9VdlxHDn25/O5KY7bqfczWPegBFE009ApGxwdgzJ6elMCbMOjwFSJyuN
+ xqlgkhvSTOvt+340=;
+Received: from lgeamrelo12.lge.com ([156.147.23.52] helo=lgeamrelo11.lge.com)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1u0C4l-0006Ke-KR for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 03 Apr 2025 04:21:27 +0000
+Received: from unknown (HELO lgemrelse6q.lge.com) (156.147.1.121)
+ by 156.147.23.52 with ESMTP; 3 Apr 2025 12:51:04 +0900
+X-Original-SENDERIP: 156.147.1.121
+X-Original-MAILFROM: thond2009@gmail.com
+Received: from unknown (HELO tho3-nguyen-weboscsm.bee-live.svc.cluster.local)
+ (10.185.60.101)
+ by 156.147.1.121 with ESMTP; 3 Apr 2025 12:51:04 +0900
+X-Original-SENDERIP: 10.185.60.101
+X-Original-MAILFROM: thond2009@gmail.com
+From: Nguyen Dat Tho <thond2009@gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Thu,  3 Apr 2025 12:50:57 +0900
+Message-Id: <20250403035057.304454-1-thond2009@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupjluLIzCtJLcpLzFFi42LhesuzUHf9+zfpBpu3K1mcnnqWyeLJ+lnM
- FpcWuVtc3jWHzYHFY9OqTjaP3Qs+M3l83iQXwBzFZZOSmpNZllqkb5fAlfF+3wO2gp28FWvP
- 1zcwLuHuYuTgkBAwkbjzTLeLkRPM/HP2JiuIzSagIfGnt5cZxBYR0JQ40jmTHcRmFiiT2PPn
- CAuILSwQL/GxeyFYDYuAqsSH2c/B4rwCZhKf+nexQMzUlNjx5TwTRFxQ4uTMJywQc+QlmrfO
- BurlAqq5yioxd95iNogGSYmDK26wTGDknYWkZxaSngWMTKsYRTLzynITM3OM9YqzMyrzMiv0
- kvNzNzECQ2lZ7Z/IHYzfLgQfYhTgYFTi4W3gfZMuxJpYVlyZe4hRgoNZSYS36CxQiDclsbIq
- tSg/vqg0J7X4EKM0B4uSOK/Rt/IUIYH0xJLU7NTUgtQimCwTB6dUA+PMfccDBD+7hz4tFru9
- 5EyTiiNHwE/F4Hl7jAQeNGyPSXXaXP9w3VqnQM5N5RoX9sScM9YqlUv8U3h9l4IE82YJ46PN
- jKduSYUFvmP//Xfr5tcq26f1K/zWkF+S0VhSND/+Kq9hblLA5wmPf+zX2+I8J0lPt/7VtcfS
- ZVGCfkYVvcdjXKrzNymxFGckGmoxFxUnAgCDhX/zIQIAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrBJMWRmVeSWpSXmKPExsXCNUNlju7692/SDdZdl7I4PfUsk8WT9bOY
- LS4tcre4vGsOm8WEuVeZLN5vvcfowOaxaVUnm8fuBZ+ZPL7d9vD4vEkugCWKyyYlNSezLLVI
- 3y6BK+P9vgdsBTt5K9aer29gXMLdxcjJISFgIvHn7E1WEJtNQEPiT28vM4gtIqApcaRzJjuI
- zSxQJrHnzxEWEFtYIF7iY/dCsBoWAVWJD7Ofg8V5BcwkPvXvYoGYqSmx48t5Joi4oMTJmU9Y
- IObISzRvnc08gZFrFpLULCSpBYxMqxhFMvPKchMzc8z0irMzKvMyK/SS83M3MQLDY1ntn0k7
- GL9ddj/EKMDBqMTD28D7Jl2INbGsuDL3EKMEB7OSCG/RWaAQb0piZVVqUX58UWlOavEhRmkO
- FiVxXq/w1AQhgfTEktTs1NSC1CKYLBMHp1QDo4R4cebx3TMz7q4zV0m7lPz+wNOzO6z4fuad
- 8xfevlZj+dxNnnOdJR7/0GaZ8Pa/cPC/fFWL0n9eamet99g73/Ng39jEpOTA6yBZ35Ojyem9
- 1tLZaeJB8YlTdp7sc3sn+Oxgwpqa+0vXPW02E9uSkXxCXMu8jvNazAHReqtA2yTLnWITny/K
- VGIpzkg01GIuKk4EAE0++7wLAgAA
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: 4.2 (++++)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: When selecting a victim using next_victim_seg in a large
- section, 
- the selected section might already have been cleared and designated as the
- new current section, making it actively in use. This behavi [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview: From: Nguyen Dat Tho gcc-15 switched to -std=c23 by default:
+ https://gcc.gnu.org/git/?p=gcc.git; a=commitdiff;
+ h=55e3bd376b2214e200fa76d12b67ff259b06c212
+ Content analysis details:   (4.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [166.125.252.90 listed in sa-accredit.habeas.com]
+ [156.147.23.52 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [166.125.252.90 listed in bl.score.senderscore.com]
+ [156.147.23.52 listed in bl.score.senderscore.com]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [thond2009[at]gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [156.147.23.52 listed in wl.mailspike.net]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [thond2009[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1tzt5y-0005ma-B6
-Subject: [f2fs-dev] [PATCH v3] f2fs: prevent the current section from being
- selected as a victim during GC
+ 0.0 DKIM_ADSP_CUSTOM_MED   No valid author signature, adsp_override is
+ CUSTOM_MED
+ 1.0 FORGED_GMAIL_RCVD      'From' gmail.com does not match 'Received'
+ headers
+ 1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 1.2 NML_ADSP_CUSTOM_MED    ADSP custom_med hit, and not from a mailing
+ list
+ 0.4 KHOP_HELO_FCRDNS       Relay HELO differs from its IP's reverse DNS
+ 0.0 SPOOFED_FREEMAIL       No description available.
+ 0.4 SPOOF_GMAIL_MID        From Gmail but it doesn't seem to be...
+X-Headers-End: 1u0C4l-0006Ke-KR
+Subject: [f2fs-dev] [PATCH] include/f2fs_fs.h: fix -std=c23 build failure
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,65 +108,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: pilhyun.kim@sk.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Nguyen Dat Tho <tho3.nguyen@lge.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When selecting a victim using next_victim_seg in a large section, the
-selected section might already have been cleared and designated as the
-new current section, making it actively in use.
-This behavior causes inconsistency between the SIT and SSA.
+From: Nguyen Dat Tho <tho3.nguyen@lge.com>
 
-F2FS-fs (dm-54): Inconsistent segment (70961) type [0, 1] in SSA and SIT
-Call trace:
-dump_backtrace+0xe8/0x10c
-show_stack+0x18/0x28
-dump_stack_lvl+0x50/0x6c
-dump_stack+0x18/0x28
-f2fs_stop_checkpoint+0x1c/0x3c
-do_garbage_collect+0x41c/0x271c
-f2fs_gc+0x27c/0x828
-gc_thread_func+0x290/0x88c
-kthread+0x11c/0x164
-ret_from_fork+0x10/0x20
+gcc-15 switched to -std=c23 by default:
 
-issue scenario
-segs_per_sec=2
-- seg#0 and seg#1 are all dirty
-- all valid blocks are removed in seg#1
-- gc select this sec and next_victim_seg=seg#0
-- migrate seg#0, next_victim_seg=seg#1
-- checkpoint -> sec(seg#0, seg#1)  becomes free
-- allocator assigns sec(seg#0, seg#1) to curseg
-- gc tries to migrate seg#1
+    https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
 
-Signed-off-by: yohan.joung <yohan.joung@sk.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
+As a result `f2fs-tools` fails as below, so only typedef u8 bool
+for __STDC_VERSION__ <= 201710L (C17)
+
+In file included from ../../git/lib/libf2fs_zoned.c:11:
+../../git/include/f2fs_fs.h:107:25: error: two or more data types in declaration specifiers
+  107 | typedef u8              bool;
+      |                         ^~~~
+../../git/include/f2fs_fs.h:107:1: warning: useless type name in empty declaration
+  107 | typedef u8              bool;
+
+Signed-off-by: Nguyen Dat Tho <tho3.nguyen@lge.com>
 ---
- fs/f2fs/segment.h | 6 ++++++
- 1 file changed, 6 insertions(+)
+ include/f2fs_fs.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 0465dc00b349..129df633d656 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -476,6 +476,12 @@ static inline void __set_test_and_free(struct f2fs_sb_info *sbi,
- 		if (next >= start_segno + usable_segs) {
- 			if (test_and_clear_bit(secno, free_i->free_secmap))
- 				free_i->free_sections++;
-+
-+			if (GET_SEC_FROM_SEG(sbi->next_victim_seg[BG_GC]) == secno)
-+				sbi->next_victim_seg[BG_GC] = NULL_SEGNO;
-+
-+			if (GET_SEC_FROM_SEG(sbi->next_victim_seg[FG_GC]) == secno)
-+				sbi->next_victim_seg[FG_GC] = NULL_SEGNO;
- 		}
- 	}
- skip_free:
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index f890634..1be77f1 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -103,7 +103,7 @@ typedef uint16_t	u16;
+ typedef uint8_t		u8;
+ typedef u32		block_t;
+ typedef u32		nid_t;
+-#ifndef bool
++#if defined __STDC__ && defined __STDC_VERSION__ && __STDC_VERSION__ <= 201710L
+ typedef u8		bool;
+ #endif
+ typedef unsigned long	pgoff_t;
 -- 
-2.33.0
+2.34.1
 
 
 
