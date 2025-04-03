@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94993A7A9D2
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Apr 2025 21:03:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DB35A7A9DB
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Apr 2025 21:04:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u0Pq6-0005qK-LO;
-	Thu, 03 Apr 2025 19:02:59 +0000
+	id 1u0Pr6-0008CM-5d;
+	Thu, 03 Apr 2025 19:04:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1u0Pq5-0005qE-E9
+ (envelope-from <sashal@kernel.org>) id 1u0Pqv-0008C6-S7
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 03 Apr 2025 19:02:57 +0000
+ Thu, 03 Apr 2025 19:03:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LT//OrtLz9w1KfJxtt/wcQ+0AuiMuDU3k1C8kmEKHEI=; b=Q1vqBfOnORRzVi551mhGDf2atU
- X/olRrYZ91hHx/Q6CPbm0vrRSaQWYDOcHABorWtzNWU7jg01+EtI3e7nXg0ZU+Q+47VbQUJiWUAgU
- ybakauahFACNOyEgPlT0YXmGfY4WrumUvUooGEvJFf3XHz+aOdmxrzc8crZJ6vnk2XSA=;
+ bh=04tKzSkGUEtdcouYIdtiHo+zQMqt4lTCaZ4U9l2Y5ck=; b=NPvNAE4hjrz5QcEN5utCmHQ12f
+ MZRNSCC9BO0gXyaX3OtylpKT4ph3wMpDx9uOQaSiS86wiLbzZhUGWuonvK4vBP4NOZOC81ZoDWptr
+ o3fr8b2qXPuJ62t6L8CEpuQrvjG/mj/b9dG1LhshGDihqtlOSq6JQk94+sADH1/Ez+B0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,34 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LT//OrtLz9w1KfJxtt/wcQ+0AuiMuDU3k1C8kmEKHEI=; b=F3BSVfOG7lTFAQCpD16+b3OLQE
- pUpRwTTno3fvoc3h3Gw7ZDQQn19PWI7ajd7s1AqMbKU5rePoHw7YHrxgIvLYta+FfkJMHzNwml/KK
- i8J7dP464DGO5VOxJQO3NM16zSFDwVAvBHRsPjd6f53r5j120kRpEAdlD/sZMh2fiq3c=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=04tKzSkGUEtdcouYIdtiHo+zQMqt4lTCaZ4U9l2Y5ck=; b=JZ/Rw+LN1UBXHBWw0mpadID0m3
+ sHjpiDSS/Fong98n2llnBHAbl0x07aBYUC1EtglKPGewdA/cA9kdFGaeZ7y5BF21PhpXt7ru0maEf
+ t+fXbcyYQsjGsri0LVOCrbKSXUKEcpIo5sxqhHDKvqSJSjxuZ5wHldOQ9LLmBCVWXUvA=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1u0Ppq-0002iv-6l for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 03 Apr 2025 19:02:57 +0000
+ id 1u0Pqg-0002l5-3T for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 03 Apr 2025 19:03:49 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 897A161143
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  3 Apr 2025 19:02:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7FCCEC4CEE8;
- Thu,  3 Apr 2025 19:02:35 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 4E0F244BC8;
+ Thu,  3 Apr 2025 19:03:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE4CAC4CEE3;
+ Thu,  3 Apr 2025 19:03:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743706956;
- bh=ktphqHlHc+qHY+dP4whpQVX97Exe5E0m0Nbmj+5KDJE=;
+ s=k20201202; t=1743707003;
+ bh=VWHViZ47zRj1wZgr0cptwKEW7JLzLculnIhN122Ojc0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=poQ7a+9+w/PR8EVTQF8w96pd9U5V0gC0Looga2RWiY4L0Ikptvx255gsSKtqG6Oxy
- T0PxG9WVaKZ6lFEgDlvWiVfi4SgdPJoel9eBQihET2JlBpmmkk5C53teG/ZcmlKLrJ
- ElEHtFpQGbv8r1SHtiU/F4HxS7ZZzuWVusmxXQlXVtd3IDPt6eZ1a8T+AcekY4q9qA
- sGR6azeLKINw8KL+6s8k6f00tI8Pp5/Vp1oX9XCo8NH4gLD/7IgKGGmzEaXKuCb080
- NTGljzCX8BwgGuIN6yQ02gEJtLxgMgHMP/VAaZn0EXDmGTJjxYBOfkvDbBk0hq1yGs
- 9Jcql9d5PuNlQ==
+ b=l7HzsNECVVkKJS4YXPvH1bEdECxHAXFz9Dgv7DIFOCW4tPbWu0V8WqFXjPCPnf2XD
+ AqN1S5msi+nIQU7wc66W450qaB3QdkqmJ9CdZQtKY/aTW3iSdWSxmzj7zOAhuOqUoA
+ WuUOao6MobhTrrWevzVDTTAfBr13HRAi+XkwVmFaV+w7E3ln/oezrcc+nUulAoo4gI
+ JyBIDssHIWz7hZUxjfpCWWQcr1rcAZ4a3DWXZMGEmBQKNOZq2skq5zFPRjFrgjqL+I
+ wCGEQ8pTLqzJXAZ5mJJ6LkiRZdtOueT9sQ9sv5dAjzq+LGyY8LeDslHFuyNz2IZ3Ma
+ acdcg0gSSh2xg==
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu,  3 Apr 2025 15:01:26 -0400
-Message-Id: <20250403190209.2675485-11-sashal@kernel.org>
+Date: Thu,  3 Apr 2025 15:01:45 -0400
+Message-Id: <20250403190209.2675485-30-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250403190209.2675485-1-sashal@kernel.org>
 References: <20250403190209.2675485-1-sashal@kernel.org>
@@ -74,26 +73,23 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
- 1534747d3170646ddeb9ea5f7caaac90359707cf
- ] F2FS-fs (dm-105): inconsistent node block, nid:430,
- node_footer[nid:2198964142, ino:598252782, ofs:118300154,
- cpver:5409237455940746069, blkaddr:2125070942]
- F2FS-fs (dm-105): inconsistent node block, nid: [...] 
+ e6494977bd4a83862118a05f57a8df40256951c0
+ ] syzbot reports an UBSAN issue as below: 
  Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [172.105.4.254 listed in sa-trusted.bondedsender.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.105.4.254 listed in bl.score.senderscore.com]
+ [172.234.252.31 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.234.252.31 listed in sa-trusted.bondedsender.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
@@ -102,9 +98,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1u0Ppq-0002iv-6l
-Subject: [f2fs-dev] [PATCH AUTOSEL 6.14 11/54] f2fs: don't retry IO for
- corrupted data scenario
+X-Headers-End: 1u0Pqg-0002l5-3T
+Subject: [f2fs-dev] [PATCH AUTOSEL 6.14 30/54] f2fs: fix to avoid
+ out-of-bounds access in f2fs_truncate_inode_blocks()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,53 +114,97 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Sasha Levin via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Sasha Levin <sashal@kernel.org>
-Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: syzbot+6653f10281a1badc749e@syzkaller.appspotmail.com,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Sasha Levin <sashal@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <chao@kernel.org>
 
-[ Upstream commit 1534747d3170646ddeb9ea5f7caaac90359707cf ]
+[ Upstream commit e6494977bd4a83862118a05f57a8df40256951c0 ]
 
-F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
-F2FS-fs (dm-105): inconsistent node block, nid:430, node_footer[nid:2198964142,ino:598252782,ofs:118300154,cpver:5409237455940746069,blkaddr:2125070942]
+syzbot reports an UBSAN issue as below:
 
-If node block is loaded successfully, but its content is inconsistent, it
-doesn't need to retry IO.
+------------[ cut here ]------------
+UBSAN: array-index-out-of-bounds in fs/f2fs/node.h:381:10
+index 18446744073709550692 is out of range for type '__le32[5]' (aka 'unsigned int[5]')
+CPU: 0 UID: 0 PID: 5318 Comm: syz.0.0 Not tainted 6.14.0-rc3-syzkaller-00060-g6537cfb395f3 #0
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0x241/0x360 lib/dump_stack.c:120
+ ubsan_epilogue lib/ubsan.c:231 [inline]
+ __ubsan_handle_out_of_bounds+0x121/0x150 lib/ubsan.c:429
+ get_nid fs/f2fs/node.h:381 [inline]
+ f2fs_truncate_inode_blocks+0xa5e/0xf60 fs/f2fs/node.c:1181
+ f2fs_do_truncate_blocks+0x782/0x1030 fs/f2fs/file.c:808
+ f2fs_truncate_blocks+0x10d/0x300 fs/f2fs/file.c:836
+ f2fs_truncate+0x417/0x720 fs/f2fs/file.c:886
+ f2fs_file_write_iter+0x1bdb/0x2550 fs/f2fs/file.c:5093
+ aio_write+0x56b/0x7c0 fs/aio.c:1633
+ io_submit_one+0x8a7/0x18a0 fs/aio.c:2052
+ __do_sys_io_submit fs/aio.c:2111 [inline]
+ __se_sys_io_submit+0x171/0x2e0 fs/aio.c:2081
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f238798cde9
 
+index 18446744073709550692 (decimal, unsigned long long)
+= 0xfffffffffffffc64 (hexadecimal, unsigned long long)
+= -924 (decimal, long long)
+
+In f2fs_truncate_inode_blocks(), UBSAN detects that get_nid() tries to
+access .i_nid[-924], it means both offset[0] and level should zero.
+
+The possible case should be in f2fs_do_truncate_blocks(), we try to
+truncate inode size to zero, however, dn.ofs_in_node is zero and
+dn.node_page is not an inode page, so it fails to truncate inode page,
+and then pass zeroed free_from to f2fs_truncate_inode_blocks(), result
+in this issue.
+
+	if (dn.ofs_in_node || IS_INODE(dn.node_page)) {
+		f2fs_truncate_data_blocks_range(&dn, count);
+		free_from += count;
+	}
+
+I guess the reason why dn.node_page is not an inode page could be: there
+are multiple nat entries share the same node block address, once the node
+block address was reused, f2fs_get_node_page() may load a non-inode block.
+
+Let's add a sanity check for such condition to avoid out-of-bounds access
+issue.
+
+Reported-by: syzbot+6653f10281a1badc749e@syzkaller.appspotmail.com
+Closes: https://lore.kernel.org/all/66fdcdf3.050a0220.40bef.0025.GAE@google.com
 Signed-off-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/inode.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ fs/f2fs/node.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 3dd25f64d6f1e..f238be29a70b0 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -765,8 +765,12 @@ void f2fs_update_inode_page(struct inode *inode)
- 		if (err == -ENOENT)
- 			return;
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index f88392fc4ba95..c1274bcec68b4 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1135,7 +1135,14 @@ int f2fs_truncate_inode_blocks(struct inode *inode, pgoff_t from)
+ 	trace_f2fs_truncate_inode_blocks_enter(inode, from);
  
-+		if (err == -EFSCORRUPTED)
-+			goto stop_checkpoint;
-+
- 		if (err == -ENOMEM || ++count <= DEFAULT_RETRY_IO_COUNT)
- 			goto retry;
-+stop_checkpoint:
- 		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_UPDATE_INODE);
- 		return;
+ 	level = get_node_path(inode, from, offset, noffset);
+-	if (level < 0) {
++	if (level <= 0) {
++		if (!level) {
++			level = -EFSCORRUPTED;
++			f2fs_err(sbi, "%s: inode ino=%lx has corrupted node block, from:%lu addrs:%u",
++					__func__, inode->i_ino,
++					from, ADDRS_PER_INODE(inode));
++			set_sbi_flag(sbi, SBI_NEED_FSCK);
++		}
+ 		trace_f2fs_truncate_inode_blocks_exit(inode, level);
+ 		return level;
  	}
 -- 
 2.39.5
