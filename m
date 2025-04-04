@@ -2,101 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 293DFA7B25F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Apr 2025 01:21:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6672DA7BD3A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Apr 2025 15:08:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u0TsU-00054L-Hw;
-	Thu, 03 Apr 2025 23:21:42 +0000
+	id 1u0gma-0006KP-UG;
+	Fri, 04 Apr 2025 13:08:29 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yohan.joung@sk.com>) id 1u0TsT-00054B-8W
- for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 03 Apr 2025 23:21:41 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3kNnvZwkbAEk39Avlwwp2l00to.rzzrwp53p2nzy4py4.nzx@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1u0gmA-0006JY-Qu for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 04 Apr 2025 13:08:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G1V6PwqH7BMQ97XkG02pq4AsLycT0KN5p+U2RGdD7zQ=; b=aJvtCxsOyNOcY8q7n9hkJTFaf+
- P4iwU56XFdowrJ9X4GsqYM6vRzEVZVdbxQfOVNxZ64uuuV72jUAw1oyPrwTlsUKYBa7HAFLaT9mBM
- becAAa526HmYAOEbXQTLZWhNi3/ojfviJX/mM1GKB55nrIfKjstoDhaah3Ud+UPshfzc=;
+ bh=l1fvMCY2JUJRG87qPby/oGePzuL1QA+lz/AMwwbDcE0=; b=exDeo1zJ7ikK0H5g/gG5d+qxLs
+ jm/VC1iJWJ7HV4FHWBzcLMiKwzoF7TCw6ZBT88pxolmESUl1CXaK/Zp1vNhUBvk0KRXjC0buLT2x4
+ ytzAj68Z2rYOh9APbNHsXfOy1BarCxqpTr/EHCREhRk8Rc5VNQ/teYM5VqLwzQvqeFPg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=G1V6PwqH7BMQ97XkG02pq4AsLycT0KN5p+U2RGdD7zQ=; b=H
- O3qtJoQIG1WFLwPUpcPmT3j1/FI4kRGKVmV/v709c0HoZ0/I7N8ngIRaFnLKS73weZjkGJy19QoP/
- fqKlNBgAV+VwpEIXo6fEENYi7ZyEEAiVdrqF1Kn4EWD2BKOQiCvIQTlLO6o/m7YHjp7qDbxZYLjPu
- smdeUhD5YBFkCKC8=;
-Received: from exvmail3.skhynix.com ([166.125.252.90]
- helo=invmail3.skhynix.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1u0TsC-0000Jl-2U for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 03 Apr 2025 23:21:41 +0000
-X-AuditID: a67dfc59-057ff7000000aab6-5c-67ef17e8b7e0
-From: "yohan.joung" <yohan.joung@sk.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Fri,  4 Apr 2025 08:21:06 +0900
-Message-ID: <20250403232107.2960-1-yohan.joung@sk.com>
-X-Mailer: git-send-email 2.49.0.windows.1
+ List-Owner:List-Archive; bh=l1fvMCY2JUJRG87qPby/oGePzuL1QA+lz/AMwwbDcE0=; b=I
+ ZVEynGCYyS+Kg2IA3sDfWhogZArBB/VGhACsdnw0HJEa84MUfjc+bPpXUKiexbVBZKGkptMV1f2x5
+ QdAOuDzTrSl5WCvCO66g/SLQkRMZBy3/q3CGZTCcLeISxUNmJ4QRWzZt2XrwSPgMASD/CqYZl9MB9
+ zB5wm7wU3WnbReOA=;
+Received: from mail-il1-f208.google.com ([209.85.166.208])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1u0gli-00046w-0z for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 04 Apr 2025 13:07:50 +0000
+Received: by mail-il1-f208.google.com with SMTP id
+ e9e14a558f8ab-3d43b460962so38628015ab.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 04 Apr 2025 06:07:33 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743772048; x=1744376848;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=l1fvMCY2JUJRG87qPby/oGePzuL1QA+lz/AMwwbDcE0=;
+ b=QBqaCQHWcNPbfF6IbAsBgZ3OXh7/O9pFoyhTQTvun3m7dhTexFIQ3mgViiZT06VTTj
+ p5mXUt6DbAShJC0lycKGZmL6/GGTvq+C3IgGuAyWFEOddKRYgdO3Mou23cwz5Fg6GnnG
+ ZJQIXJq5YQ8Mrb7rhw6gbSgJEGB7cUVGz/GElRD4sorll/HlwUTyNK8UFPce+KeKxLEA
+ aeG6pk2EbrMl7ksQ3xqLdrd6a34HNUzXVo9QqzvjcC4UurAMY1bxGm2fAlZyHAoa+jtA
+ 0HQtH2H+6xbmcr4zw97gtl6MnMI4QFYSdmMDjJpG7QRuWIdQfTJvthiGNtrKjm5fU1+B
+ am6w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUzZxjIxI631lBsbWUxDCxvo3ros1/gdGc4vAXNfZ78zVWuXhZy8IkLtsUfz5cEKvGObLr+7WyhkodpLd1m0FZL@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yyhi0xMUrclVOwzb/hL9o4nFkeDUeGIGkjuHnbCIGLOuSklNT0q
+ PCnXgJuSoiNE85CVs9HeDHeEED9ebTX9EB44bW7CF7NuADJB8aSiNcuJC0tORKb6AJUWTiaTAWo
+ OWem/5YD5AKeqWy/nHqG43Ts1zT+jDsNjnbCBIRQlPXql/U/Wf6Wx5Io=
+X-Google-Smtp-Source: AGHT+IGHrGv4gMDgf/BkqiwxQXwKZW9su5+LUh5CNYr3E8KbZRXr+gwIqFcuZmZ7O73uMjUrZtYhg9eGQAsB3jaGj9W6RrtaaIej
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupnluLIzCtJLcpLzFFi42LhesuzSPeF+Pt0g10b2SxOTz3LZPFk/Sxm
- i0uL3C0u75rD5sDisWlVJ5vH7gWfmTw+b5ILYI7isklJzcksSy3St0vgyjh74gJ7wT++it8n
- prA2MB7h6WLk5JAQMJHYOHs6I4y9aNIlMJtNQEPiT28vM4gtIqApcaRzJjuIzSxQJrHnzxEW
- EFtYIF7i7uYONhCbRUBVomPXMrBeXgEzie7Xf1kgZmpK7PhyngkiLihxcuYTFog58hLNW2cz
- Q9TcZJWYe1ALwpaUOLjiBssERt5ZSFpmIWlZwMi0ilEkM68sNzEzx1ivODujMi+zQi85P3cT
- IzCYltX+idzB+O1C8CFGAQ5GJR5ei8J36UKsiWXFlbmHGCU4mJVEeGW53qcL8aYkVlalFuXH
- F5XmpBYfYpTmYFES5zX6Vp4iJJCeWJKanZpakFoEk2Xi4JRqYFzzhFlv8sbpvhs/P3l+Ie5Z
- +VMfpSUtW5wuLcwtuGak/ceMnYFrCf8+3+C3On3enP+Yj09WMotpVl4iGBq46syFeWdnfS+Z
- yNe6Z1Ls2QXbpvgLO2vOFu/982TLzYezHx354aRal8Tc4DDRaolQfl2Su9S6R49YfIOvHQuy
- Ptuv8e5R60OBd8pKLMUZiYZazEXFiQDcP3A5IgIAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrJJMWRmVeSWpSXmKPExsXCNUNlju5z8ffpBr9XWFicnnqWyeLJ+lnM
- FpcWuVtc3jWHzWLC3KtMFu+33mN0YPPYtKqTzWP3gs9MHt9ue3h83iQXwBLFZZOSmpNZllqk
- b5fAlXH2xAX2gn98Fb9PTGFtYDzC08XIySEhYCKxaNIlRhCbTUBD4k9vLzOILSKgKXGkcyY7
- iM0sUCax588RFhBbWCBe4u7mDjYQm0VAVaJj1zKwXl4BM4nu139ZIGZqSuz4cp4JIi4ocXLm
- ExaIOfISzVtnM09g5JqFJDULSWoBI9MqRpHMvLLcxMwcM73i7IzKvMwKveT83E2MwABZVvtn
- 0g7Gb5fdDzEKcDAq8fBaFL5LF2JNLCuuzD3EKMHBrCTCK8v1Pl2INyWxsiq1KD++qDQntfgQ
- ozQHi5I4r1d4aoKQQHpiSWp2ampBahFMlomDU6qBMbnRR2r/vLAINjGllCe2pS9NTdLXX5OK
- bHt7O1n16/VIz90taRxB0mZBon4alWYs0aHmMaaT9mi8CK7mvPiwr+DtWnfreczbzu67qHX+
- voGbu2TpzKRI79lcwoU27tHH3rX/Wbfxd6Cn09USh6/PbH8ujLFv3r7lUAp76ocUtvlfhc0P
- BCgqsRRnJBpqMRcVJwIA72O5/wwCAAA=
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.0 (/)
+X-Received: by 2002:a05:6e02:2505:b0:3d4:3fed:81f7 with SMTP id
+ e9e14a558f8ab-3d6e3f8a346mr36349305ab.19.1743772048294; Fri, 04 Apr 2025
+ 06:07:28 -0700 (PDT)
+Date: Fri, 04 Apr 2025 06:07:28 -0700
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <67efd990.050a0220.2dd465.0212.GAE@google.com>
+From: syzbot <syzbot+9ee4dac2dd49f4cbdefc@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: When selecting a victim using next_victim_seg in a large
- section, 
- the selected section might already have been cleared and designated as the
- new current section, making it actively in use. This behavi [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  Hello,
+ syzbot found the following issue on: HEAD commit: 4e82c87058f4
+ Merge tag 'rust-6.15' of git://git.kernel.org.. git tree: upstream console
+ output: https://syzkaller.appspot.com/x/log.txt?x=11502404580000 kernel
+ config: https://syzkaller.a [...] 
+ Content analysis details:   (0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [166.125.252.90 listed in bl.score.senderscore.com]
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [166.125.252.90 listed in sa-accredit.habeas.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [209.85.166.208 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.166.208 listed in bl.score.senderscore.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.166.208 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1u0TsC-0000Jl-2U
-Subject: [f2fs-dev] [PATCH v5] f2fs: prevent the current section from being
- selected as a victim during GC
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.208 listed in wl.mailspike.net]
+X-Headers-End: 1u0gli-00046w-0z
+Subject: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_truncate_hole
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,70 +119,118 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: pilhyun.kim@sk.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When selecting a victim using next_victim_seg in a large section, the
-selected section might already have been cleared and designated as the
-new current section, making it actively in use.
-This behavior causes inconsistency between the SIT and SSA.
+Hello,
 
-F2FS-fs (dm-54): Inconsistent segment (70961) type [0, 1] in SSA and SIT
-Call trace:
-dump_backtrace+0xe8/0x10c
-show_stack+0x18/0x28
-dump_stack_lvl+0x50/0x6c
-dump_stack+0x18/0x28
-f2fs_stop_checkpoint+0x1c/0x3c
-do_garbage_collect+0x41c/0x271c
-f2fs_gc+0x27c/0x828
-gc_thread_func+0x290/0x88c
-kthread+0x11c/0x164
-ret_from_fork+0x10/0x20
+syzbot found the following issue on:
 
-issue scenario
-segs_per_sec=2
-- seg#0 and seg#1 are all dirty
-- all valid blocks are removed in seg#1
-- gc select this sec and next_victim_seg=seg#0
-- migrate seg#0, next_victim_seg=seg#1
-- checkpoint -> sec(seg#0, seg#1)  becomes free
-- allocator assigns sec(seg#0, seg#1) to curseg
-- gc tries to migrate seg#1
+HEAD commit:    4e82c87058f4 Merge tag 'rust-6.15' of git://git.kernel.org..
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=11502404580000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=f8721be6a767792
+dashboard link: https://syzkaller.appspot.com/bug?extid=9ee4dac2dd49f4cbdefc
+compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
 
-Signed-off-by: yohan.joung <yohan.joung@sk.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
+Unfortunately, I don't have any reproducer for this issue yet.
+
+Downloadable assets:
+disk image (non-bootable): https://storage.googleapis.com/syzbot-assets/7feb34a89c2a/non_bootable_disk-4e82c870.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/ccdcf680a51b/vmlinux-4e82c870.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/90fe1b8516ea/bzImage-4e82c870.xz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+9ee4dac2dd49f4cbdefc@syzkaller.appspotmail.com
+
+loop0: detected capacity change from 0 to 131072
+=======================================================
+WARNING: The mand mount option has been deprecated and
+         and is ignored by this kernel. Remove the mand
+         option from the mount to silence this warning.
+=======================================================
+F2FS-fs (loop0): Invalid segment/section count (31, 24 x 150994945)
+F2FS-fs (loop0): Can't find valid F2FS filesystem in 1th superblock
+F2FS-fs (loop0): invalid crc value
+F2FS-fs (loop0): Try to recover 1th superblock, ret: 0
+F2FS-fs (loop0): Mounted with checkpoint version = 48b305e4
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/file.c:1207!
+Oops: invalid opcode: 0000 [#1] SMP KASAN NOPTI
+CPU: 0 UID: 0 PID: 5327 Comm: syz.0.0 Not tainted 6.14.0-syzkaller-10892-g4e82c87058f4 #0 PREEMPT(full) 
+Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2~bpo12+1 04/01/2014
+RIP: 0010:f2fs_truncate_hole+0x511/0x520 fs/f2fs/file.c:1207
+Code: 00 65 49 8b 07 48 3b 84 24 e0 00 00 00 75 1d 89 d8 48 8d 65 d8 5b 41 5c 41 5d 41 5e 41 5f 5d c3 cc cc cc cc e8 00 1b 99 fd 90 <0f> 0b e8 68 3c 03 08 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000d4076c0 EFLAGS: 00010283
+RAX: ffffffff842a6210 RBX: 0000000000000000 RCX: 0000000000100000
+RDX: ffffc9000e52a000 RSI: 00000000000034f7 RDI: 00000000000034f8
+RBP: ffffc9000d4077f0 R08: ffffffff842a607d R09: 1ffff110088e93ee
+R10: dffffc0000000000 R11: ffffed10088e93ef R12: 0000000000100000
+R13: dffffc0000000000 R14: 00000000000006c0 R15: ffffc9000d407740
+FS:  00007f8796bba6c0(0000) GS:ffff88808c5b1000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f9428395ed8 CR3: 0000000033d36000 CR4: 0000000000352ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+Call Trace:
+ <TASK>
+ f2fs_punch_hole+0x250/0x2a0 fs/f2fs/file.c:1266
+ f2fs_fallocate+0x588/0xa10 fs/f2fs/file.c:1967
+ vfs_fallocate+0x627/0x7a0 fs/open.c:338
+ file_ioctl fs/ioctl.c:-1 [inline]
+ do_vfs_ioctl+0x2057/0x2750 fs/ioctl.c:885
+ __do_sys_ioctl fs/ioctl.c:904 [inline]
+ __se_sys_ioctl+0x80/0x160 fs/ioctl.c:892
+ do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+ do_syscall_64+0xf3/0x230 arch/x86/entry/syscall_64.c:94
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f8795d8d169
+Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f8796bba038 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00007f8795fa5fa0 RCX: 00007f8795d8d169
+RDX: 0000200000000480 RSI: 0000000040305829 RDI: 0000000000000007
+RBP: 00007f8795e0e2a0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000000000 R14: 00007f8795fa5fa0 R15: 00007ffe1a19b818
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:f2fs_truncate_hole+0x511/0x520 fs/f2fs/file.c:1207
+Code: 00 65 49 8b 07 48 3b 84 24 e0 00 00 00 75 1d 89 d8 48 8d 65 d8 5b 41 5c 41 5d 41 5e 41 5f 5d c3 cc cc cc cc e8 00 1b 99 fd 90 <0f> 0b e8 68 3c 03 08 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000d4076c0 EFLAGS: 00010283
+RAX: ffffffff842a6210 RBX: 0000000000000000 RCX: 0000000000100000
+RDX: ffffc9000e52a000 RSI: 00000000000034f7 RDI: 00000000000034f8
+RBP: ffffc9000d4077f0 R08: ffffffff842a607d R09: 1ffff110088e93ee
+R10: dffffc0000000000 R11: ffffed10088e93ef R12: 0000000000100000
+R13: dffffc0000000000 R14: 00000000000006c0 R15: ffffc9000d407740
+FS:  00007f8796bba6c0(0000) GS:ffff88808c5b1000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00005648f9c017f8 CR3: 0000000033d36000 CR4: 0000000000352ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+
+
 ---
- fs/f2fs/segment.h | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 0465dc00b349..0773283babfa 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -474,8 +474,15 @@ static inline void __set_test_and_free(struct f2fs_sb_info *sbi,
- 		next = find_next_bit(free_i->free_segmap,
- 				start_segno + SEGS_PER_SEC(sbi), start_segno);
- 		if (next >= start_segno + usable_segs) {
--			if (test_and_clear_bit(secno, free_i->free_secmap))
-+			if (test_and_clear_bit(secno, free_i->free_secmap)) {
- 				free_i->free_sections++;
-+
-+				if (GET_SEC_FROM_SEG(sbi, sbi->next_victim_seg[BG_GC]) == secno)
-+					sbi->next_victim_seg[BG_GC] = NULL_SEGNO;
-+
-+				if (GET_SEC_FROM_SEG(sbi, sbi->next_victim_seg[FG_GC]) == secno)
-+					sbi->next_victim_seg[FG_GC] = NULL_SEGNO;
-+			}
- 		}
- 	}
- skip_free:
--- 
-2.33.0
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
 
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
+
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
+
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
+
+If you want to undo deduplication, reply with:
+#syz undup
 
 
 _______________________________________________
