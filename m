@@ -2,204 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12943A7D6B3
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Apr 2025 09:51:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C17B5A7DD42
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Apr 2025 14:11:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u1hFs-0006K9-4M;
-	Mon, 07 Apr 2025 07:50:52 +0000
+	id 1u1lJX-0005LD-Mp;
+	Mon, 07 Apr 2025 12:10:55 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <prvs=6192f57107=donghua.liu@windriver.com>)
- id 1u1hFr-0006K1-8G for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Apr 2025 07:50:51 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3ssDzZwkbAEk39Avlwwp2l00to.rzzrwp53p2nzy4py4.nzx@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1u1lJW-0005L7-01 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 07 Apr 2025 12:10:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G7WoYLxQ3hJokl/a2E3YmpSMfBhX8S1Zw00WS0wEtZQ=; b=mNhP5rWXF9HGctzT8PiB/nNHvW
- EDMHA7Yp0zxOfDyQq8dLfm1dy7vQrH52H0kVHUhhGB0ZLG0ylyOEvgMIiBefGmTe8ttVr+to/0Ixi
- Q7zH4PG2kN9A7XosvDNeyy0EVFGdspH6CYVC0LaHzvMcjuu8FGloIALE5BvJOup+2610=;
+ bh=ek3zenkEspUnPBFxUqi4hppRRFoyjsM8PYzyIlaXi+M=; b=d0/2anq5sAy7H62SKMicGlbb9x
+ 7oJcjZMp0mmKw520tu1/qvFa2BAjQk3MHs3SzblOHXWrDMS9kBp9qFMa4agCyX5aPtGQo25gxfihA
+ BlcduEVizHx0NBfYZvj7RrWYc0Bt33iq/Ki2l4TR2KD0zn7OcpNQ33QqKxty6aSD5QAo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=G7WoYLxQ3hJokl/a2E3YmpSMfBhX8S1Zw00WS0wEtZQ=; b=b
- /UBZsMpCmYaNEFi+9Rs+D2FU7w3M/sQezPLrGWvyRQT5y6MAYSJMkFU6Gxla7tGMpYqV2H8DOFldC
- lqnAxcgTY4Y2FoXnm8sKIoIAcfY6PpbUv4wLSIq51fdH4fg4QigYXDN4gz2YaZIi64gthp/XaPzeZ
- HAbhgx0igLrystWI=;
-Received: from mx0b-0064b401.pphosted.com ([205.220.178.238])
+ List-Owner:List-Archive; bh=ek3zenkEspUnPBFxUqi4hppRRFoyjsM8PYzyIlaXi+M=; b=B
+ zKL9kmI51/rQUhsESwk9sq2gEYYjrrk6rEkELAo0ptwjXHlfs34IiJThFw19zQbikrFf75l6sKgDM
+ X0jnHuWnylb08K+Zvvik/zUlKvEKeqhdzRDPp7ulWPNmyW49w608JiY/+bCt5hm7LyPR/v7ElqVyU
+ Z0EiQ3zMwwlJtGVM=;
+Received: from mail-il1-f208.google.com ([209.85.166.208])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1u1hFb-0008WG-AO for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Apr 2025 07:50:51 +0000
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
- by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5376kS9q018612;
- Mon, 7 Apr 2025 07:26:31 GMT
-Received: from nam10-bn7-obe.outbound.protection.outlook.com
- (mail-bn7nam10lp2043.outbound.protection.outlook.com [104.47.70.43])
- by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45tug8hy51-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 07 Apr 2025 07:26:30 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YdtRY8bQMmLsIwBDYs5AgiX9JCnxkLbsNXrbtmaTsQK38kBozwZg+Nu7+bAK+HFMTUWLzGdk+XAQfOPPtC4+Y3mk2keAhbpZAK2iFS7ZxymC/pJ9d9EM6TpFcnWuyK4txmeqIY9xdzZujoeGcBuN/3c2HuN6iGAy4Sfs26hGmCm7vzL14zTXlitnVW46TYopqrUJ8W41HrWcYvXGBZO3fX2yuigbeoYsVWz1fEDCa0viayM0gZu844gjTs6m+mZ6LpnG1q6B1xmUKlzLZiZ7lOP9ntqSk6+RmbHy/zxtRvp8v6gwqLN2tEaCz37XkWLpf5bmXIFHipyqUgIdvYEVaQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G7WoYLxQ3hJokl/a2E3YmpSMfBhX8S1Zw00WS0wEtZQ=;
- b=Qp1UE8IiNyx1FMqGYCSpjrh4up2sF5LRRXnt1gDrWfxEQWpsQAkxT/T+LpVyx8Nd0MAP/eH0KEDqq2K9m/Q86X+RuaMev5VgvRUOL8ujIGAt5C9MeI9QkEXYuT/JpOQNL19YLwu/KO24KS/8ZtznGINVJ2nVddHmaHRtaT/dAd6VKLpleLKGF8qTPcmr0emvALWXtLRZMfoEV93WC1TStPD6jU2+jlgo5YeV2elZyxaA9R1R19oSK7aDpT4pt9yUPGoI7ocWaepaez+0f0eOTgQ7VYvsYVsTk7upqg9rFjpxagqXAbnyus6TCav13BH5M+kpspcLleqr2IuiXEkv5w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CY8PR11MB7012.namprd11.prod.outlook.com (2603:10b6:930:54::6)
- by PH0PR11MB7634.namprd11.prod.outlook.com (2603:10b6:510:28d::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.32; Mon, 7 Apr
- 2025 07:26:27 +0000
-Received: from CY8PR11MB7012.namprd11.prod.outlook.com
- ([fe80::83d5:946f:3692:8c0d]) by CY8PR11MB7012.namprd11.prod.outlook.com
- ([fe80::83d5:946f:3692:8c0d%4]) with mapi id 15.20.8606.033; Mon, 7 Apr 2025
- 07:26:26 +0000
-To: stable@vger.kernel.org
-Date: Mon,  7 Apr 2025 15:26:12 +0800
-Message-Id: <20250407072612.2961421-1-donghua.liu@windriver.com>
-X-Mailer: git-send-email 2.34.1
-X-ClientProxiedBy: SGXP274CA0024.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b8::36)
- To CY8PR11MB7012.namprd11.prod.outlook.com
- (2603:10b6:930:54::6)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1u1lJF-0007bK-Ct for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 07 Apr 2025 12:10:53 +0000
+Received: by mail-il1-f208.google.com with SMTP id
+ e9e14a558f8ab-3d43621bb7eso53804485ab.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 07 Apr 2025 05:10:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744027826; x=1744632626;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ek3zenkEspUnPBFxUqi4hppRRFoyjsM8PYzyIlaXi+M=;
+ b=rUkTm/eS+U/S/1f4Wvb0Yaz5PS3r2dS/06PL2RjCJefApVY138Q1mg+XEF4LdVhsm/
+ 4oD9M80rNmPe3dgCmqG0fm8vujTR9P+hrU7rrQCAgVqxOM0ng+tXQFbJgNIiKqxuiYjk
+ vLbt3p206WicTAhUhPKnNNyLkmSvGvMz0NxbIX0kJGp3tk5G7dGQfYEkMOEaPnTjaXTW
+ eDJmvEoTJbtxfM2HhvLnH/eDBdHUwqJiPm2An36a72oniAuZl9qwFLOdvTF6nblRj9Dd
+ Zmyde1fOpo6Qn7OEginYLjc6wu75ijbLrh0GMrPus2QXZWcb2B/gJKLRrlyXF+4fZoEx
+ QJOQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWcyzfGSf9XifdfmrBS9XaDD4ELPhdSN3UwGWRwxq8mhJ+xuWIc12ElY2cmTgAXAnIaC8GiHJtNzCfH1XGzwZHt@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzzAz8g6hdkLVI7K0mjQSvp4FUwHKlqgmIK6Jv5VyNcn50r0n/1
+ UTrhdpx6OFXTJdM+q76c3bETjtgAmCPEZd8gQPt/pHLcPCwjboqz/6kIoSDLrRyrr2DJgV2brwo
+ mbsqE6dPOnd9XoONbRkR/z4Fp3x2KGV3gwNbcnGIP9jqT1xQkUdCgDKw=
+X-Google-Smtp-Source: AGHT+IFYM5ksmjv1b4OvqMewkWsrKU9taPe63uEt219GP6/ajJ6mPw1jBDvuYCsKtLpSchTvjyEO2E9mY5CGHO+mOYX6kJJccGw4
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY8PR11MB7012:EE_|PH0PR11MB7634:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6cc2f2d0-8ef9-4353-c1cf-08dd75a581dc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|52116014|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?w8Aq44qsBUByOJRrlq9nMOId22QRaAp3K/OAHOiPNjS8DK8yfkbUNb4C+cy8?=
- =?us-ascii?Q?clbjaHrfXvEMqKncUVpRQBY+JlmvdtxqOdyWr9iXiHw7dTk4JqodW2YGeZ1r?=
- =?us-ascii?Q?q9Wo23yKdFZtUne5Nw02l1ieDOmS54cR3x8h/BohGCBXQ0iH+LI2z41iQToW?=
- =?us-ascii?Q?bwsXIkr9UaTQOGFlBKGFDnIArwXbT3s71++qICk9aVV6+FnrosMywQKivpn2?=
- =?us-ascii?Q?Qld4O9nwlgjY5EBHi3VmjKAURqwaCVTP+jU5zHRTP8WAXn54idRov9jhTdVT?=
- =?us-ascii?Q?nDL16PkeKYriqN+za41La/DT/BayCvxjVycUT6MRs7UPT3NAyGYdOL3yOsZO?=
- =?us-ascii?Q?R+4Zy8OEz1pdLqzqLpgQJdzYfStZ3o1MXGfffDM8cBG7zBz6DS+eFF9QCEEW?=
- =?us-ascii?Q?fz+bRL0RWz+NDdWENeulWdqUZNYkdUq2LKV6+52oO7EF8+xABT8iNe0Fya2Z?=
- =?us-ascii?Q?MPuf6eow9g0ZDlNeULmyDP/7bH8Z5dDBFvBictUIQuX0B1Of/hw+J4ZURk20?=
- =?us-ascii?Q?NyDZqgXwjqQ2RGLXrGPKucgwimKPiK1vjh9OLcHbVz3T+hoZTupNBmTT3YUH?=
- =?us-ascii?Q?aAVGWiWgmQWzaDAeTD3mXSsreyaIApt/OWVn/e0hgXBuWkcfd6muSBjMW+Mh?=
- =?us-ascii?Q?C5NNqpt7holMq9riEel4LojIBDwop68hZUN9zxVVRW1Hxq+ApgpV4XVhTdx3?=
- =?us-ascii?Q?R+yUcH/djzF0J8azePdm+LV722lO02Cp7PYRdJuO2dlq4YKjiTVD16YSKVoo?=
- =?us-ascii?Q?rbzinYhpchcrWyJA1PqHZORdy7F0ndw93fbNTtzR4rDMWFp3D2cPObaQMDrz?=
- =?us-ascii?Q?do5/gCgE2drvSklaCUJdRddBgCIDFy2Quef0+qRPy4W66N+kGTSOS7bg7kpW?=
- =?us-ascii?Q?EcK76ommzNTchSyQGxpbMglso2e1HiGUQuY9UAbIi3guSZFgE41k+VxSV5gg?=
- =?us-ascii?Q?9eKYTY18za/u36mR4eA/HuD4lPAlqfOiMUtZusrPauXC5DR5vdiAJ0lVS6NG?=
- =?us-ascii?Q?YyaeF4JpJpzhwvS4DlDJ1Z4AbDNGQNZW4wMw00xWlokESSSgQ645PopeleyU?=
- =?us-ascii?Q?hPwnWuzDh68vGMc0j4+vMG08/sCMJMx3raOscKY/FFhqEYgwV73lOoQfGsqB?=
- =?us-ascii?Q?QgfuyQ6mY6zRAv0/3Fqa7sAvNKrU57ccHIV5yvEnxXo1AaU9pvBq8hjt/cFY?=
- =?us-ascii?Q?/UMr2B0ANWpUPDCWUTxUIOLkb2D+dBXAuTZRKdt4bWHqO66URleC9I2JyQIi?=
- =?us-ascii?Q?s4qmd36eKnCLlSzQfLDfUC+S4qnMZLsmX8PRb6Zm3CCy9auoztiXCsyDYtJX?=
- =?us-ascii?Q?4GKKhIHLHBfZnUbKVaFRfL5X8o4g2s9on20n7Q5XEDXoVKGrlKPy8ktqoWyD?=
- =?us-ascii?Q?ykaYEItnCHq8yswqcTEqoxnlPlEKqGqPDt3VfAH8KQVE0+AtBM9SQ1LyX59g?=
- =?us-ascii?Q?lnQCnCm3RJwlFpq/kRnQ5fSVD4UtDaED?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CY8PR11MB7012.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(52116014)(366016)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?SBPj1C2XeMNNNb1POwvI/PVB4sZpQnoDdK4OuBryXNuZ9XwvF/9CLXnic3Q6?=
- =?us-ascii?Q?IKBBg+oGnngMzjdKJK4z/9nOhUNRyg1CiHARRmq7VyXn2oXhIt9vi7Yy4UGj?=
- =?us-ascii?Q?WExaaEauGFqoqkR1Tsg+2KCoPIHpufh0OiSNE5YE7m/2JtNJ8cOHJeTcsRXI?=
- =?us-ascii?Q?gPAxEC3g8qKiV6LGCx2hHxKI8voXOOnjCIU8bGm/bcqu4mu6+rvMsFJN6p09?=
- =?us-ascii?Q?AWlvDvKvdVmUcvGiU8m2ry4AU63BXglYf2vyXzxuG8ir26kEt3sB4V1J4vy2?=
- =?us-ascii?Q?cvq/avWZ75SiBiRjZs5rZtVzjo0cQRxTOj28lCcvp9oHa6Ri1OsliqUrdy2e?=
- =?us-ascii?Q?IXfFE3IdElf+8jzWuY8KLuQUeDuJAlWoxTy9zfSD1jAa0qsGr8cKscMYH8nm?=
- =?us-ascii?Q?Vn2N0UdaSp0zvMcNIAvDPgSw0KM4E+KC8xRPm8vNqSNr+d3APTjrLuQzASd3?=
- =?us-ascii?Q?JlQBwZGkaQe79acZFPTq9zn3nqDtoG5Btd+70P6qifc8ukuzW0bXDFlWtFOd?=
- =?us-ascii?Q?8iU7Q5koIrN1MR9BJ1vu24PS37IIG31dW6ASNErM4KIZdWrizWXmcWa51v+3?=
- =?us-ascii?Q?6f1qwjZ1+V0cGnYpX1nwi01LbX0O56/wv/2ojhkVQjuOID1L4lzYHO4l+UvI?=
- =?us-ascii?Q?2UNCzAYZ2RxQUkVKAcy32++V6WB1RfeBHTz1+OLjBXryWB1u7OCsb2WyG22e?=
- =?us-ascii?Q?KqVn8PYqjLGx3gAm1a1Y4F4VqMZ9BVfxE/GlZ6gXoHqfIFu1E7iuSqTfNhoJ?=
- =?us-ascii?Q?ORrArp1MSazffQWAmsgOEV+VPqhiF95RwR1334wxZ+BPlTGT7Q6/sFWbOaJT?=
- =?us-ascii?Q?Ej5R4uJTYOdK4Z029F9O5km0d7FzrcKPkDB3/gTxBOANvVwvLCjsDQ24nuC7?=
- =?us-ascii?Q?BRMvCoITuLoOKSdh6rB1RnYTZ4CxgdOA/hWI0ZnivT6PiklQ46Rok/0XKK/w?=
- =?us-ascii?Q?ODjcGxtn0SLi1vIRhpLjql6Mt7auxDrCZSVfTabbl9PNqjQinjmRJUlS/3SU?=
- =?us-ascii?Q?CUFmQIKfGdHpusXNLXWHbLkoPDrWNx9BlhdBC5HK7a465hkyi2arKvctNGzl?=
- =?us-ascii?Q?6RNwd/bv1a2fDWQjG8C1mo9WbqVeMv5Eg6zoSCg046OSs46VdxUTs/388nO7?=
- =?us-ascii?Q?n6TarrbRgrasjwK2b3IvUqEDq4URFCuwcdi+fKq4QuITjNI2Y+CEJuK2puQT?=
- =?us-ascii?Q?hj5k9o5XMdQq+3hHmTM3Yme/B/mc2/yJiGJEVQ0pBxfqUTHhYXbWf1eFdRiI?=
- =?us-ascii?Q?yD1r9rhQBWFfOcQ2Q6u0ifwp2iVDeMcdyjLL/Sm+1/iuwiAcO13L1ncAlDoI?=
- =?us-ascii?Q?3DOjFSFFO8Z29pw8XzV/eH9UweplARc2hVQILWuajAZEb2z+bAkYx3SgVNy4?=
- =?us-ascii?Q?O/gFNVZBF7gfK8TbI79PikO/Q/RhJxu8iI5LWSRiJ+gBfnp8VI2ivKpJzfBH?=
- =?us-ascii?Q?PUrEkbaS7NOO5FNSH+2D3nD+4IqC/0916Ym1licjAsj7E8t6JC9OGPGbgSrs?=
- =?us-ascii?Q?N2f+5EMluMME0AC++Cw1w98j70LjHHgmJjvGE2sUuTDYbRKUNE63hZfaZvIb?=
- =?us-ascii?Q?R3oxQCxW9oMx/ZOM6CG4xvb/t6L2P3YVcjmXvZ/ghPRNhcyAQJN0l9Gr1Wct?=
- =?us-ascii?Q?1A=3D=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6cc2f2d0-8ef9-4353-c1cf-08dd75a581dc
-X-MS-Exchange-CrossTenant-AuthSource: CY8PR11MB7012.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Apr 2025 07:26:26.7040 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1458Lj+cU0CMDFoeJo+YFyrDx63bdsDtccAUDnVspjWbzJWIXD/Ljut7WFsiq7OJ8sHYVkONK4FvIJ0wqofaTij89xhX9mT3E/d+5wRYts8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR11MB7634
-X-Proofpoint-GUID: TEf5uMv-BhURHUKcEIJzCjVTPJkdJ-km
-X-Authority-Analysis: v=2.4 cv=YJefyQGx c=1 sm=1 tr=0 ts=67f37e26 cx=c_pps
- a=GoGv2RwMe+/7w9MjyR+VRg==:117 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19
- a=xqWC_Br6kY4A:10 a=XR8D0OoHHMoA:10
- a=VwQbUJbxAAAA:8 a=t7CeM3EgAAAA:8 a=PsyGYZmSnXO8BiRk3wkA:9
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: TEf5uMv-BhURHUKcEIJzCjVTPJkdJ-km
-X-Sensitive_Customer_Information: Yes
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-07_02,2025-04-03_03,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- malwarescore=0 bulkscore=0 mlxlogscore=999 adultscore=0 lowpriorityscore=0
- mlxscore=0 clxscore=1011 impostorscore=0 phishscore=0 spamscore=0
- suspectscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
- definitions=main-2504070052
-X-Spam-Score: -0.7 (/)
+X-Received: by 2002:a05:6e02:3e90:b0:3d3:f72c:8fd8 with SMTP id
+ e9e14a558f8ab-3d6e3fea50fmr107239995ab.6.1744027826656; Mon, 07 Apr 2025
+ 05:10:26 -0700 (PDT)
+Date: Mon, 07 Apr 2025 05:10:26 -0700
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <67f3c0b2.050a0220.396535.0547.GAE@google.com>
+From: syzbot <syzbot+8b376a77b2f364097fbe@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
- 4ed886b187f47447ad559619c48c086f432d2b77
- ] - It missed to check validation of fault attrs in parse_options(), let's
- fix to add check condition in f2fs_build_fault_attr(). - Use
- f2fs_build_fault_attr() in __sbi_store() to clean up code. 
- Content analysis details:   (-0.7 points, 6.0 required)
+ Content preview:  Hello,
+ syzbot found the following issue on: HEAD commit: a1b5bd45d4ee
+ Merge tag 'usb-6.15-rc1' of git://git.kernel... git tree: upstream console
+ output: https://syzkaller.appspot.com/x/log.txt?x=174ffc3f980000 kernel
+ config: https://syzkaller.a [...] 
+ Content analysis details:   (0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [205.220.178.238 listed in list.dnswl.org]
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [205.220.178.238 listed in sa-trusted.bondedsender.org]
+ [209.85.166.208 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [205.220.178.238 listed in bl.score.senderscore.com]
+ [209.85.166.208 listed in bl.score.senderscore.com]
+ 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1u1hFb-0008WG-AO
-Subject: [f2fs-dev] [PATCH 5.15.y] f2fs: check validation of fault attrs in
- f2fs_build_fault_attr()
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.166.208 listed in list.dnswl.org]
+X-Headers-End: 1u1lJF-0007bK-Ct
+Subject: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in dec_valid_block_count
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -211,155 +117,125 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Cliff Liu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Cliff Liu <donghua.liu@windriver.com>
-Cc: donghua.liu@windriver.com, Zhe.He@windriver.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <chao@kernel.org>
+Hello,
 
-[ Upstream commit 4ed886b187f47447ad559619c48c086f432d2b77 ]
+syzbot found the following issue on:
 
-- It missed to check validation of fault attrs in parse_options(),
-let's fix to add check condition in f2fs_build_fault_attr().
-- Use f2fs_build_fault_attr() in __sbi_store() to clean up code.
+HEAD commit:    a1b5bd45d4ee Merge tag 'usb-6.15-rc1' of git://git.kernel...
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=174ffc3f980000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=6fe3b5e6a2cb1cc2
+dashboard link: https://syzkaller.appspot.com/bug?extid=8b376a77b2f364097fbe
+compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=148427cf980000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=17c9f7b0580000
 
-Signed-off-by: Chao Yu <chao@kernel.org>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-Signed-off-by: Cliff Liu <donghua.liu@windriver.com>
-Signed-off-by: He Zhe <Zhe.He@windriver.com>
+Downloadable assets:
+disk image (non-bootable): https://storage.googleapis.com/syzbot-assets/7feb34a89c2a/non_bootable_disk-a1b5bd45.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/8b14e02f603d/vmlinux-a1b5bd45.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/cc06cac05b38/bzImage-a1b5bd45.xz
+mounted in repro: https://storage.googleapis.com/syzbot-assets/697f78a4edc0/mount_0.gz
+  fsck result: failed (log: https://syzkaller.appspot.com/x/fsck.log?x=10ffca74580000)
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+8b376a77b2f364097fbe@syzkaller.appspotmail.com
+
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/f2fs.h:2521!
+Oops: invalid opcode: 0000 [#1] SMP KASAN NOPTI
+CPU: 0 UID: 0 PID: 5312 Comm: syz-executor407 Not tainted 6.14.0-syzkaller-12886-ga1b5bd45d4ee #0 PREEMPT(full) 
+Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2~bpo12+1 04/01/2014
+RIP: 0010:dec_valid_block_count+0x3b2/0x3c0 fs/f2fs/f2fs.h:2521
+Code: 8a 01 fe e9 80 fd ff ff e8 db 64 97 fd 48 c7 c7 60 6e 31 8f 4c 89 e6 48 89 da e8 39 aa 14 01 e9 73 fe ff ff e8 bf 64 97 fd 90 <0f> 0b 66 66 66 2e 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000d39f078 EFLAGS: 00010293
+RAX: ffffffff842bf2c1 RBX: 00000000fffffcda RCX: ffff88801f41a440
+RDX: 0000000000000000 RSI: 00000000000003fa RDI: 00000000000000d4
+RBP: 1ffff110082999f4 R08: ffffffff842bef72 R09: fffff52001a73e00
+R10: dffffc0000000000 R11: fffff52001a73e00 R12: ffff8880414ccfa4
+R13: dffffc0000000000 R14: ffff8880414cc000 R15: 00000000000003fa
+FS:  00007f5c4fc216c0(0000) GS:ffff88808c599000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f5c4fc00d58 CR3: 0000000043b00000 CR4: 0000000000352ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+Call Trace:
+ <TASK>
+ f2fs_truncate_data_blocks_range+0xc8c/0x11a0 fs/f2fs/file.c:695
+ truncate_dnode+0x417/0x740 fs/f2fs/node.c:973
+ truncate_nodes+0x3ec/0xf50 fs/f2fs/node.c:1014
+ f2fs_truncate_inode_blocks+0x8e3/0x1370 fs/f2fs/node.c:1197
+ f2fs_do_truncate_blocks+0x840/0x12b0 fs/f2fs/file.c:810
+ f2fs_truncate_blocks+0x10d/0x300 fs/f2fs/file.c:838
+ f2fs_truncate+0x417/0x720 fs/f2fs/file.c:888
+ f2fs_setattr+0xc4f/0x12f0 fs/f2fs/file.c:1112
+ notify_change+0xbca/0xe90 fs/attr.c:552
+ do_truncate+0x222/0x310 fs/open.c:65
+ handle_truncate fs/namei.c:3466 [inline]
+ do_open fs/namei.c:3849 [inline]
+ path_openat+0x2e4f/0x35d0 fs/namei.c:4004
+ do_filp_open+0x284/0x4e0 fs/namei.c:4031
+ do_sys_openat2+0x12b/0x1d0 fs/open.c:1429
+ do_sys_open fs/open.c:1444 [inline]
+ __do_sys_creat fs/open.c:1522 [inline]
+ __se_sys_creat fs/open.c:1516 [inline]
+ __x64_sys_creat+0x124/0x170 fs/open.c:1516
+ do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+ do_syscall_64+0xf3/0x230 arch/x86/entry/syscall_64.c:94
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f5c4fc6c839
+Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 81 18 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f5c4fc21218 EFLAGS: 00000246 ORIG_RAX: 0000000000000055
+RAX: ffffffffffffffda RBX: 00007f5c4fcf8608 RCX: 00007f5c4fc6c839
+RDX: 00007f5c4fc6c839 RSI: 0000000000000009 RDI: 0000200000000080
+RBP: 00007f5c4fcf8600 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00007f5c4fcc58f4
+R13: 0000200000000100 R14: 0031656c69662f2e R15: 0000200000000080
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:dec_valid_block_count+0x3b2/0x3c0 fs/f2fs/f2fs.h:2521
+Code: 8a 01 fe e9 80 fd ff ff e8 db 64 97 fd 48 c7 c7 60 6e 31 8f 4c 89 e6 48 89 da e8 39 aa 14 01 e9 73 fe ff ff e8 bf 64 97 fd 90 <0f> 0b 66 66 66 2e 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000d39f078 EFLAGS: 00010293
+RAX: ffffffff842bf2c1 RBX: 00000000fffffcda RCX: ffff88801f41a440
+RDX: 0000000000000000 RSI: 00000000000003fa RDI: 00000000000000d4
+RBP: 1ffff110082999f4 R08: ffffffff842bef72 R09: fffff52001a73e00
+R10: dffffc0000000000 R11: fffff52001a73e00 R12: ffff8880414ccfa4
+R13: dffffc0000000000 R14: ffff8880414cc000 R15: 00000000000003fa
+FS:  00007f5c4fc216c0(0000) GS:ffff88808c599000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f5c4fc00d58 CR3: 0000000043b00000 CR4: 0000000000352ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+
+
 ---
-Verified the build test after enabled CONFIG_F2FS_FAULT_INJECTION.
----
- fs/f2fs/f2fs.h  | 12 ++++++++----
- fs/f2fs/super.c | 27 ++++++++++++++++++++-------
- fs/f2fs/sysfs.c | 14 ++++++++++----
- 3 files changed, 38 insertions(+), 15 deletions(-)
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 135927974e28..e67be3783740 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -64,7 +64,7 @@ enum {
- 
- struct f2fs_fault_info {
- 	atomic_t inject_ops;
--	unsigned int inject_rate;
-+	int inject_rate;
- 	unsigned int inject_type;
- };
- 
-@@ -4373,10 +4373,14 @@ static inline bool f2fs_need_verity(const struct inode *inode, pgoff_t idx)
- }
- 
- #ifdef CONFIG_F2FS_FAULT_INJECTION
--extern void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
--							unsigned int type);
-+extern int f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned long rate,
-+							unsigned long type);
- #else
--#define f2fs_build_fault_attr(sbi, rate, type)		do { } while (0)
-+static int f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned long rate,
-+							unsigned long type)
-+{
-+	return 0;
-+}
- #endif
- 
- static inline bool is_journalled_quota(struct f2fs_sb_info *sbi)
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index f8aaff9b1784..0cf564ded140 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -61,21 +61,31 @@ const char *f2fs_fault_name[FAULT_MAX] = {
- 	[FAULT_DQUOT_INIT]	= "dquot initialize",
- };
- 
--void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
--							unsigned int type)
-+int f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned long rate,
-+							unsigned long type)
- {
- 	struct f2fs_fault_info *ffi = &F2FS_OPTION(sbi).fault_info;
- 
- 	if (rate) {
-+		if (rate > INT_MAX)
-+			return -EINVAL;
- 		atomic_set(&ffi->inject_ops, 0);
--		ffi->inject_rate = rate;
-+		ffi->inject_rate = (int)rate;
- 	}
- 
--	if (type)
--		ffi->inject_type = type;
-+	if (type) {
-+		if (type >= BIT(FAULT_MAX))
-+			return -EINVAL;
-+		ffi->inject_type = (unsigned int)type;
-+	}
- 
- 	if (!rate && !type)
- 		memset(ffi, 0, sizeof(struct f2fs_fault_info));
-+	else
-+		f2fs_info(sbi,
-+			"build fault injection attr: rate: %lu, type: 0x%lx",
-+								rate, type);
-+	return 0;
- }
- #endif
- 
-@@ -901,14 +911,17 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 		case Opt_fault_injection:
- 			if (args->from && match_int(args, &arg))
- 				return -EINVAL;
--			f2fs_build_fault_attr(sbi, arg, F2FS_ALL_FAULT_TYPE);
-+			if (f2fs_build_fault_attr(sbi, arg,
-+					F2FS_ALL_FAULT_TYPE))
-+				return -EINVAL;
- 			set_opt(sbi, FAULT_INJECTION);
- 			break;
- 
- 		case Opt_fault_type:
- 			if (args->from && match_int(args, &arg))
- 				return -EINVAL;
--			f2fs_build_fault_attr(sbi, 0, arg);
-+			if (f2fs_build_fault_attr(sbi, 0, arg))
-+				return -EINVAL;
- 			set_opt(sbi, FAULT_INJECTION);
- 			break;
- #else
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 63af1573ebca..30ff2c087726 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -407,10 +407,16 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 	if (ret < 0)
- 		return ret;
- #ifdef CONFIG_F2FS_FAULT_INJECTION
--	if (a->struct_type == FAULT_INFO_TYPE && t >= (1 << FAULT_MAX))
--		return -EINVAL;
--	if (a->struct_type == FAULT_INFO_RATE && t >= UINT_MAX)
--		return -EINVAL;
-+	if (a->struct_type == FAULT_INFO_TYPE) {
-+		if (f2fs_build_fault_attr(sbi, 0, t))
-+			return -EINVAL;
-+		return count;
-+	}
-+	if (a->struct_type == FAULT_INFO_RATE) {
-+		if (f2fs_build_fault_attr(sbi, t, 0))
-+			return -EINVAL;
-+		return count;
-+	}
- #endif
- 	if (a->struct_type == RESERVED_BLOCKS) {
- 		spin_lock(&sbi->stat_lock);
--- 
-2.34.1
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
 
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
+
+If you want syzbot to run the reproducer, reply with:
+#syz test: git://repo/address.git branch-or-commit-hash
+If you attach or paste a git patch, syzbot will apply it before testing.
+
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
+
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
+
+If you want to undo deduplication, reply with:
+#syz undup
 
 
 _______________________________________________
