@@ -2,68 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94A23A8376A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Apr 2025 05:53:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2DC1A837AA
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Apr 2025 06:10:27 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u2iyx-00047B-Ge;
-	Thu, 10 Apr 2025 03:53:39 +0000
+	id 1u2jF9-0006g3-6q;
+	Thu, 10 Apr 2025 04:10:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1u2iyp-00046x-6A
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1u2jF7-0006fk-F1
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Apr 2025 03:53:31 +0000
+ Thu, 10 Apr 2025 04:10:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ki/xvAQMjp5c5OA4NmrKd8EHYoH1iFKfp/eYnLhNDpQ=; b=DRUMqdQzaeUN6r1nOqFrZh0tiS
- tBO5x4clWkF3gjMS62MMMOYuDaSLnAn4qcKp9tMCDsqN7TBLSANucK4+eiXPL4g74YGLgS9ug5uFl
- fgs+CSiLNxAtGtIoMNylxUBVUCWvGpMf8CxPetMgO6kDlj5nMggR8cPc92qgHN3+rhJo=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=8jRb7COLF3AwXSp8DbS3mTKfFx3AexfxYV8qyWxLRFY=; b=l/obBu0nQlmfC1RODduRaqyD3E
+ cRWxH4Y9gWLcSaevevNAlJOF9H2pkoysTuokPwlGU/Q8yY1OOEntq4HUwnWqrQzmj69uNvvXFlDpZ
+ 7LJZlQml7ntOfmExlg1Cy0T8taIRBZuhpz+IeKek8mWBqIKQAd1kJlEQttKNyQCSQSLg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ki/xvAQMjp5c5OA4NmrKd8EHYoH1iFKfp/eYnLhNDpQ=; b=luDHGdVt3rabNak2S3VpmO2hq8
- vetLlW2cUCGU+WDUJCr49jeooRAO6dLSv7YqrvYcg9Rq8dKG9Qz6jA4uVEfEv2Z/FkR1v+KaDMhxR
- 9shxkmJZnLnOGcqNh+yj6DoXKoeEeFZxhPDHLjYu5DmkNBi5K3SvI1j5oRTz22FyiB0U=;
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=8jRb7COLF3AwXSp8DbS3mTKfFx3AexfxYV8qyWxLRFY=; b=h
+ hGpF7Z5+IN8kilg2tI0Puq8HqAJh4eMWWSoE7gA5oc+RClxfZwHvBnjPD++5TP/OQxvwJh7J5x692
+ OqdSU9o6XTlHBqJjL5dGZjfFq/zVpTPb1iDCQ5PrWmfIHiaih9Y9Vq+nl0N8EaO3FlEEuvkd0Q0ot
+ lCMF7Zg1No7jaz50=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1u2iyZ-0000Dc-Cc for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Apr 2025 03:53:31 +0000
+ id 1u2jEs-0001AF-I3 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 10 Apr 2025 04:10:22 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 08B3544147;
- Thu, 10 Apr 2025 03:53:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CCAAC4CEDD;
- Thu, 10 Apr 2025 03:53:09 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 667F249CE8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 10 Apr 2025 04:09:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1A4A6C4CEDD
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 10 Apr 2025 04:09:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744257189;
- bh=xZRnulTgJaXmjhTZz+dTF52Wj71JRTbBd/c0uCNWeCw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=iGyJvDEhmxUcgsH5hD1OIkht6AdvSEq4Opdr/nJ899yCLbAnN2i4PuW0Q9WyZ1IBH
- AIa1iE9cmvdGggoWuXSmc+oY8uQiLgB0seqH8cy7lT0qv/35WclMEgB0jlk6VDv4JF
- /AtGPbzYU9ZJFLKP2FdIqjZL1MfeOFdZ9YK45jvsowNYPrDROYltXMOUqeUBdkrLEA
- IvDIWASAe1nJ3+Q5+JXXpffMC/w4VoRX4Td5AVxELoHGQBaKjnpkY5TIHLD2APQU90
- vi73bz+CXCcjrZaF4+X6ssJzSEyfzHoShgERdefO+gMC/R0t8B7rArFlYiiLlVu5mf
- z3wKMfxwX2+mQ==
-Date: Thu, 10 Apr 2025 03:53:07 +0000
-To: Chao Yu <chao@kernel.org>
-Message-ID: <Z_dAo3uD1jKraegq@google.com>
-References: <20250403232107.2960-1-yohan.joung@sk.com>
- <Z_A5SWl1ueMTZxV0@google.com>
- <7059eada-a51d-4f68-b62a-0f2c89c9b01c@kernel.org>
- <87056483-6cf8-4b2e-82f1-dcda31a28afd@kernel.org>
+ s=k20201202; t=1744258196;
+ bh=xq0hiRzSPrXToLD20MmN9XOlLownFF7DdEfp/kLsj8s=;
+ h=Subject:From:Date:To:From;
+ b=LPgq8Na5Boff+JVBDPK5ezuOj+3UZMCBwCCH3ENrnj780n22vqXMl3KMeRCDbnvCs
+ gcREAmDCNWCx6vuoOBvIQzbtv0pOZ2nrKnjBAXxRn9KX+hK5ah+UVJAAnqFUUshqLv
+ 9SwRezZ6KSh3dj8oGIiBFUXeGXL1ulVSfkApgBlE+++j4KmiHB6QBcZ7heeWIXdnth
+ HLznx5uVVOnTUC3VUapA/rvTG56aN/2+wnKVVTG17umjO3a00QjJIJbs4LxacNvSBf
+ ot8yqc1ZX+0nG52dGIWwnp2T4q0EKFmYc/9zxMF3qzYb6bzE0EBeZra+743nnlOOaq
+ Lu5lm1qYOd/nQ==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+ by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
+ B1AFB380CEF9 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 10 Apr 2025 04:10:34 +0000 (UTC)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <87056483-6cf8-4b2e-82f1-dcda31a28afd@kernel.org>
+Message-Id: <174425823323.3146257.8736521266367630930.git-patchwork-summary@kernel.org>
+Date: Thu, 10 Apr 2025 04:10:33 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -71,9 +71,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 04/07, Chao Yu wrote: > On 4/7/25 10:08, Chao Yu wrote:
- > > On 4/5/25 03:55, Jaegeuk Kim wrote: > >> Hi Yohan, > >> > >> I modified
- this patch after applying the clean up by > >> > >> https://lore. [...] 
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Series: [f2fs-dev,v2,1/2] f2fs:
+ add a proc entry show inject stats Submitter: Chao Yu <chao@kernel.org>
+ Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/project/f2fs [...] 
  Content analysis details:   (-0.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,7 +90,7 @@ X-Spam-Report: Spam detection software,
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.234.252.31 listed in sa-trusted.bondedsender.org]
+ [172.234.252.31 listed in sa-accredit.habeas.com]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -97,9 +99,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1u2iyZ-0000Dc-Cc
-Subject: Re: [f2fs-dev] [PATCH v5] f2fs: prevent the current section from
- being selected as a victim during GC
+X-Headers-End: 1u2jEs-0001AF-I3
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,110 +112,71 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: pilhyun.kim@sk.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: patchwork-bot+f2fs--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: patchwork-bot+f2fs@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 04/07, Chao Yu wrote:
-> On 4/7/25 10:08, Chao Yu wrote:
-> > On 4/5/25 03:55, Jaegeuk Kim wrote:
-> >> Hi Yohan,
-> >>
-> >> I modified this patch after applying the clean up by
-> >>
-> >> https://lore.kernel.org/linux-f2fs-devel/20250404195442.413945-1-jaegeuk@kernel.org/T/#u
-> >>
-> >> --- a/fs/f2fs/segment.h
-> >> +++ b/fs/f2fs/segment.h
-> >> @@ -486,6 +486,11 @@ static inline void __set_test_and_free(struct f2fs_sb_info *sbi,
-> >>
-> >>         free_i->free_sections++;
-> >>
-> >> +       if (GET_SEC_FROM_SEG(sbi, sbi->next_victim_seg[BG_GC]) == secno)
-> >> +               sbi->next_victim_seg[BG_GC] = NULL_SEGNO;
-> >> +       if (GET_SEC_FROM_SEG(sbi, sbi->next_victim_seg[FG_GC]) == secno)
-> >> +               sbi->next_victim_seg[FG_GC] = NULL_SEGNO;
-> > 
-> > Reviewed-by: Chao Yu <chao@kernel.org>
-> 
-> Oh, can we add Fixes line to make it to be merged into stable kernel?
+Hello:
 
-Which one would be good to add?
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-> 
-> Thanks,
-> 
-> > 
-> > Thanks,
-> > 
-> >> +
-> >>  unlock_out:
-> >>         spin_unlock(&free_i->segmap_lock);
-> >>  }
-> >>
-> >> On 04/04, yohan.joung wrote:
-> >>> When selecting a victim using next_victim_seg in a large section, the
-> >>> selected section might already have been cleared and designated as the
-> >>> new current section, making it actively in use.
-> >>> This behavior causes inconsistency between the SIT and SSA.
-> >>>
-> >>> F2FS-fs (dm-54): Inconsistent segment (70961) type [0, 1] in SSA and SIT
-> >>> Call trace:
-> >>> dump_backtrace+0xe8/0x10c
-> >>> show_stack+0x18/0x28
-> >>> dump_stack_lvl+0x50/0x6c
-> >>> dump_stack+0x18/0x28
-> >>> f2fs_stop_checkpoint+0x1c/0x3c
-> >>> do_garbage_collect+0x41c/0x271c
-> >>> f2fs_gc+0x27c/0x828
-> >>> gc_thread_func+0x290/0x88c
-> >>> kthread+0x11c/0x164
-> >>> ret_from_fork+0x10/0x20
-> >>>
-> >>> issue scenario
-> >>> segs_per_sec=2
-> >>> - seg#0 and seg#1 are all dirty
-> >>> - all valid blocks are removed in seg#1
-> >>> - gc select this sec and next_victim_seg=seg#0
-> >>> - migrate seg#0, next_victim_seg=seg#1
-> >>> - checkpoint -> sec(seg#0, seg#1)  becomes free
-> >>> - allocator assigns sec(seg#0, seg#1) to curseg
-> >>> - gc tries to migrate seg#1
-> >>>
-> >>> Signed-off-by: yohan.joung <yohan.joung@sk.com>
-> >>> Signed-off-by: Chao Yu <chao@kernel.org>
-> >>> ---
-> >>>  fs/f2fs/segment.h | 9 ++++++++-
-> >>>  1 file changed, 8 insertions(+), 1 deletion(-)
-> >>>
-> >>> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-> >>> index 0465dc00b349..0773283babfa 100644
-> >>> --- a/fs/f2fs/segment.h
-> >>> +++ b/fs/f2fs/segment.h
-> >>> @@ -474,8 +474,15 @@ static inline void __set_test_and_free(struct f2fs_sb_info *sbi,
-> >>>  		next = find_next_bit(free_i->free_segmap,
-> >>>  				start_segno + SEGS_PER_SEC(sbi), start_segno);
-> >>>  		if (next >= start_segno + usable_segs) {
-> >>> -			if (test_and_clear_bit(secno, free_i->free_secmap))
-> >>> +			if (test_and_clear_bit(secno, free_i->free_secmap)) {
-> >>>  				free_i->free_sections++;
-> >>> +
-> >>> +				if (GET_SEC_FROM_SEG(sbi, sbi->next_victim_seg[BG_GC]) == secno)
-> >>> +					sbi->next_victim_seg[BG_GC] = NULL_SEGNO;
-> >>> +
-> >>> +				if (GET_SEC_FROM_SEG(sbi, sbi->next_victim_seg[FG_GC]) == secno)
-> >>> +					sbi->next_victim_seg[FG_GC] = NULL_SEGNO;
-> >>> +			}
-> >>>  		}
-> >>>  	}
-> >>>  skip_free:
-> >>> -- 
-> >>> 2.33.0
-> > 
+Series: [f2fs-dev,v2,1/2] f2fs: add a proc entry show inject stats
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=945764
+  Lore link: https://lore.kernel.org/r/20250320022230.1938110-1-chao@kernel.org
+    Patches: [f2fs-dev,v2,1/2] f2fs: add a proc entry show inject stats
+             [f2fs-dev,v2,2/2] f2fs: fix to update injection attrs according to fault_option
+
+Patch: [f2fs-dev,v2] f2fs: support to disable linear lookup fallback
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=948756
+  Lore link: https://lore.kernel.org/r/20250401035800.51504-1-chao@kernel.org
+
+Patch: [f2fs-dev,v2] f2fs: add a fast path in finish_preallocate_blocks()
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=947058
+  Lore link: https://lore.kernel.org/r/20250325081321.3296714-1-chao@kernel.org
+
+Patch: [f2fs-dev] f2fs: fix to set atomic write status more clear
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=947649
+  Lore link: https://lore.kernel.org/r/20250327055607.3829954-1-chao@kernel.org
+
+Patch: [f2fs-dev] f2fs: fix to do sanity check on ino and xnid
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=946667
+  Lore link: https://lore.kernel.org/r/20250324053339.2994251-1-chao@kernel.org
+
+Series: [f2fs-dev,v2,1/2] f2fs: zone: fix to calculate first_zoned_segno correctly
+  Submitter: Chao Yu <chao@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=947056
+  Lore link: https://lore.kernel.org/r/20250325080646.3291947-1-chao@kernel.org
+    Patches: [f2fs-dev,v2,1/2] f2fs: zone: fix to calculate first_zoned_segno correctly
+             [f2fs-dev,v2,2/2] f2fs: zone: fix to avoid inconsistence in between SIT and SSA
+
+Patch: [f2fs-dev] f2fs: clean up unnecessary indentation
+  Submitter: Jaegeuk Kim <jaegeuk@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=950072
+  Lore link: https://lore.kernel.org/r/20250404195442.413945-1-jaegeuk@kernel.org
+
+
+Total patches: 9
+
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
 
 
 _______________________________________________
