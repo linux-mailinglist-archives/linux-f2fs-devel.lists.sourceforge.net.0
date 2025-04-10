@@ -2,116 +2,138 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D2DFA83B49
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Apr 2025 09:34:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1596AA83D05
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Apr 2025 10:33:15 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u2mQs-00006J-DL;
-	Thu, 10 Apr 2025 07:34:42 +0000
+	id 1u2nLN-0002x0-PE;
+	Thu, 10 Apr 2025 08:33:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1u2mQq-000069-J9
+ (envelope-from <qkrwngud825@gmail.com>) id 1u2nLM-0002wn-Av
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Apr 2025 07:34:40 +0000
+ Thu, 10 Apr 2025 08:33:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cDzZBIqEL2EMr9Rlg3qTMZLhonMLfy5VgYhD/KSjUSA=; b=UW1kdqOwN8KZAQtVaHvb+2IaZY
- tCH/EAEso5qeC//wn84t1zwA9cAi06iaaSWQoUDt1Ud6k/WpNIdKvdC51Ls216JK02zZF1+sAjceO
- OhdTSjDvD7Qqy/obuPWJfyqf9mI4uWhLbyFKnuSuyqDgn+gxmC7dWQFXkb8OzlMgGcgk=;
+ bh=Yodtc9kIsQSbptJKTEuPdg/78bTjKeYaJegRIfR/OIs=; b=R2nH/npSBvb4kd/oWEpk6y3klt
+ i3tw3LPc/o+gCPB1bZWyF0soFowx6C7kDo1KUzIWvw7HRGeZyILiZbPhJH9rxRjm1FJxPkPDKCZhX
+ /xyCPcpVsVBpkkf6/jksXrw5Pa/gOUfJjw6yUuJrNOFUQXRqYRLay2Pho9oMrI9RNPd8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=cDzZBIqEL2EMr9Rlg3qTMZLhonMLfy5VgYhD/KSjUSA=; b=S1sETTNEyZFNlAyPLEhgwYVjvR
- rQ1i1+04gkh9GagtLp3bdrai7jYkE6/0SKkM84LIi/Y7AJ2q+pETgtjueq96NTiTjH83QodB8D+N/
- oafYCc+6z3kwp8CQkEWCyww/CMyhbDC/dUucJuKhVc6knlbLJ+tcW0xnJdkb1iiXRM18=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:MIME-Version:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Yodtc9kIsQSbptJKTEuPdg/78bTjKeYaJegRIfR/OIs=; b=J
+ eAT5fOwkHcUVXjpN7ivfVgmUfBZWys3dmL04D65WZ64d7CcRzFbuaADkZhR/W2NA6p2PUkKeKRCr8
+ cFLpK/+brI6BP9iz6UEe7/GKgD6bojdLQBNk1+SpulhZOFh6Xc3Z3TjXsuA7L9YUVjK04cNFhFtfk
+ tIaP7oqnWHjcps7A=;
+Received: from mail-ej1-f49.google.com ([209.85.218.49])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1u2mQa-0007Go-Oz for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Apr 2025 07:34:40 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 65A375C48C5;
- Thu, 10 Apr 2025 07:32:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B554C4CEDD;
- Thu, 10 Apr 2025 07:34:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744270459;
- bh=gIJBKnAaJ0QqWHzs+1rxmIMerBX6tToBacSqaCaMaoU=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=Ug4DzvP8O/m4dSVV+XrMDUXpGC4KqY4D8b+JZKD9L6and2rRchOrFuDMQYJW/+pop
- 493JgiqT/ZbH84P65ADY8OEOp19cTqm3oxbVClURmfMQ1uY4myCCmJgnOND8/2btlD
- maiY70aF2dlhtiQ+btwwkm5fKl/epIoqzPbsDyAN0DCBQNsPggAFlsNxs0xGSPMK72
- 3SJp/o8qCusLC1S2/wec8IKdXaq0vDAY15mtaxc5dUgb8Bf/d24GcE1DjUI/xQY6DI
- aAYkWnCFqnb57AX0LtCrI/xvLFNMFwHrmT3oGvUBwkK6dyXlRSPRFRZOCDlAkcSPhP
- IH08zt/i0TZfQ==
-Message-ID: <56d3c4f3-75d7-4167-947d-4830984321a1@kernel.org>
-Date: Thu, 10 Apr 2025 15:34:16 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1u2nL7-0000lP-Ax for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 10 Apr 2025 08:33:04 +0000
+Received: by mail-ej1-f49.google.com with SMTP id
+ a640c23a62f3a-ac339f53df9so103405066b.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 10 Apr 2025 01:32:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1744273963; x=1744878763; darn=lists.sourceforge.net;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Yodtc9kIsQSbptJKTEuPdg/78bTjKeYaJegRIfR/OIs=;
+ b=Vgr05muXRynnMijaGI/ceI66zbrnhVuxaNUJY8dDr1B/YJwMZeUCWzrFo5Dz4rdx6p
+ vQNJsmLvwYAOzCA1hSW+UsI5JY8CGn3zAuU9br6sEcTR1saO9N+RHlS34SIoGqVlkI7x
+ 4CP1t4IOdpsWxQUJ9ZupAAR3+i5BmBXxiir8e1G517SdtUb4IekehzYBqCWjjeZcp3Pt
+ x8AFrZCzCbo+NqEJScGX4fb8IaqobNStlNa/6zu14ZwV33xY+DnRue03eQc4VWS0BNIL
+ JPmthpKE+tIWvo7iEJ3Wk2WQ03Y2Mf+OHQvT2l6H6cRBWRTkY0jcyoGpeXPFDaoK6UuZ
+ 2xSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744273963; x=1744878763;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Yodtc9kIsQSbptJKTEuPdg/78bTjKeYaJegRIfR/OIs=;
+ b=Ko4SCEB4UHn9WM1C+tdm/oCzg4MyWp6PRocux5Vg2x7hq+xfFtfOCuGkcc+45fcc/4
+ 0cRmTj5+r2lQYkho3m+fVrjcQmJItLqxG8qDuJYGjVt1vedJvcgLevLbI5UNG3VbUVgi
+ Cm0iBuWUBdqY9FCqpfNNzO4khZvJogn2gFO8NnI3020kKstkqahBhQob5VknXZpNscCt
+ wNk5TDvf0UEWgSRAT6LTGYl1JAFiliHqXC7SWgVQnXRBe4LMpYGE/68WlId/8gsH3kP9
+ SeLsDYJd8hvkU7kGVcNXHDqfmEnTw9YX/BmYpFBrI5m26SQ0CG8IUQnjxUkZWvmha7tJ
+ 5/bQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWtHnjuzGt4HITE+z0fUwvi2vh3WPHUrTOHy4TylwDs2ESkvfl8W0Px4i7slCv125sv/RUhWCYH14TT6oUJnmC0@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yy9oMfyvW/ZwCzkyGWcDDI0DDSFSZG7UXu7ZMDG538BPHNXykth
+ jhAEtiwCuhZGzd9sUuxYSX8kyvUG6wadoOUu0y2sDymwUPoMucXcwVM71uNTrEQM1hVBg/b8QrJ
+ I/OrfW0RFeEPYxQS7TkoSkWhkr/+sfmXsTZY=
+X-Gm-Gg: ASbGnctYTCGsn8ZWSkK8ysT16+pIjt9SejUgnywbt4w9rM16k4kJC05vgjCFkB9LFJZ
+ 9Nxg/xQNq1WAJ+FwfYK09I+ZxqgITX6orU7Jp26QJ8Yi3wq4EpisPCMo0/CxWrQZrQ98LvfA3U4
+ /E26E2aURAUwlJTQwg4UxqDvo=
+X-Google-Smtp-Source: AGHT+IHVMbDuDa808LMO4W9ymcIWibkTCXQJET5e7ak4XpKQj5ONq5xlER6Rkg7FRYX9jRqAHGP6hhGrhs50ExXV5H8=
+X-Received: by 2002:a17:906:dc95:b0:ac6:b729:9285 with SMTP id
+ a640c23a62f3a-acabd515169mr145237966b.55.1744273962468; Thu, 10 Apr 2025
+ 01:32:42 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Juhyung Park <qkrwngud825@gmail.com>
-References: <88f281ff9ff9b1fb899c92d6b32f52b7@airmail.cc>
- <CAD14+f1CYZ-OyKg36b_=VPmbBK0LSiieq1pgtXUy4OV2+KrR_g@mail.gmail.com>
- <6e929f78-ab82-434b-a553-6e56d38fcfcc@kernel.org>
- <CAD14+f3CQr2FgUc8Ut6=O0gOd6cAmYyadSNBt9SVnishdzc4kQ@mail.gmail.com>
- <193b95bc-4148-43eb-9a7a-d501ae5d95c6@kernel.org>
- <CAD14+f18dXBLKK7nGiGt1rhtxPWVHXJ9wJzoaJjhNiPP_o3DUg@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CAD14+f18dXBLKK7nGiGt1rhtxPWVHXJ9wJzoaJjhNiPP_o3DUg@mail.gmail.com>
-X-Spam-Score: -5.8 (-----)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+From: Juhyung Park <qkrwngud825@gmail.com>
+Date: Thu, 10 Apr 2025 01:32:31 -0700
+X-Gm-Features: ATxdqUEIsXu4TxIcRgTIaFae4wqLHmGUoDnu9hHz3MGXZtIXynXVPWhWaOc7fsc
+Message-ID: <CAD14+f3D6iPOBxEgkZxxTsXCfwRKb9ph68JtUk3H9cn8ovLt9w@mail.gmail.com>
+To: Chao Yu <chao@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>, 
+ linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: 1.1 (+)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 4/10/25 15:08, Juhyung Park wrote: > On Thu, Apr 10, 2025
-    at 12:00 AM Chao Yu <chao@kernel.org> wrote: >> >> On 4/10/25 13:57, Juhyung
-    Park wrote: >>> Hi Chao, >>> >>> On Wed, Apr 9, 2025 at 10:5 [...] 
- 
- Content analysis details:   (-5.8 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  Hi everyone. Besides salvaging @uplinkr's data [1], I figured
+ it's important for us to understand why resize corrupts data in the first
+ place. I took some time today to have my laptop's 1.8TiB f2fs partition
+ resized slightly and managed to reproduce the data corruption. 
+ Content analysis details:   (1.1 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [139.178.84.217 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.218.49 listed in list.dnswl.org]
+ 0.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
+ 1.0 HK_RANDOM_FROM         From username looks random
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.218.49 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.218.49 listed in sa-accredit.habeas.com]
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: arter97.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [qkrwngud825[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                            [139.178.84.217 listed in bl.score.senderscore.com]
-  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                         [139.178.84.217 listed in sa-trusted.bondedsender.org]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
-                             blocked.  See
-                             http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
-                              for more information.
-                             [URIs: arter.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [qkrwngud825[at]gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.49 listed in wl.mailspike.net]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1u2mQa-0007Go-Oz
-Subject: Re: [f2fs-dev] Resize metadata corruption
+ author's domain
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1u2nL7-0000lP-Ax
+Subject: [f2fs-dev] Reproducing resize corruption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,97 +145,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: uplinkr@airmail.cc, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: uplinkr@airmail.cc
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gNC8xMC8yNSAxNTowOCwgSnVoeXVuZyBQYXJrIHdyb3RlOgo+IE9uIFRodSwgQXByIDEwLCAy
-MDI1IGF0IDEyOjAw4oCvQU0gQ2hhbyBZdSA8Y2hhb0BrZXJuZWwub3JnPiB3cm90ZToKPj4KPj4g
-T24gNC8xMC8yNSAxMzo1NywgSnVoeXVuZyBQYXJrIHdyb3RlOgo+Pj4gSGkgQ2hhbywKPj4+Cj4+
-PiBPbiBXZWQsIEFwciA5LCAyMDI1IGF0IDEwOjUy4oCvUE0gQ2hhbyBZdSA8Y2hhb0BrZXJuZWwu
-b3JnPiB3cm90ZToKPj4+Pgo+Pj4+IE9uIDQvNi8yNSAxNjozMCwgSnVoeXVuZyBQYXJrIHdyb3Rl
-Ogo+Pj4+PiBIaSBhbGwsCj4+Pj4+Cj4+Pj4+IEkgYWxzbyBlbmNvdW50ZXJlZCBzb21ldGhpbmcg
-c2ltaWxhciBhIHdoaWxlIGJhY2sgd2l0aCByZXNpemluZyBidXQKPj4+Pj4gZGlkbid0IHJlcG9y
-dCBpdCBhbmQganVzdCBtYW51YWxseSBtaWdyYXRlZCB0aGUgZmlsZXMuCj4+Pj4KPj4+PiBIaSBK
-dWh5dW5nLAo+Pj4+Cj4+Pj4gRGlkIHlvdSBkZXZlbG9wIGFuIGluZGl2aWR1YWwgdG9vbCB0byBt
-aWdyYXRlIHNwZWNpZmllZCBpbm9kZSB0byB0YXJnZXQKPj4+PiBibG9jayBhZGRyZXNzPwo+Pj4K
-Pj4+IE5vcGUuIEFuZCBuZWl0aGVyIGRpZCBAdXBsaW5rciB1c2UgYW55IGN1c3RvbSB0b29scyB0
-byBtZXNzIGFyb3VuZCB0aGUKPj4+IGYyZnMgcGFydGl0aW9uLgo+Pgo+PiBPaCwgc28gaG93IGRp
-ZCB5b3UgbWlncmF0ZSBmaWxlcyBtYW51YWxseT8KPiAKPiBZb3UgcmVtZW1iZXIgdGhlIGV4dGVu
-ZGVkIG5vZGUgYml0bWFwIGZpYXNjbyA6KQoKT2gsIHllcywgbHVja2lseSwgeW91IHJlcG9ydGVk
-IHRoYXQgYnVnIHNvIHF1aWNrbHksIHNvIHRoYXQgd2UgY2FuIGZpeAp0aGF0IGluIHRpbWUsIHRo
-YW5rIHlvdSEKCj4gQWZ0ZXIgdGhhdCwgd2hlbmV2ZXIgSSBydW4gZnNjayAob3IgaW4gdGhpcyBj
-YXNlLCByZXNpemUpLCBJIHdyYXAgdGhlCj4gZW50aXJlIHJhdyBibG9jayBkZXZpY2UgdG8gYSBk
-bS1zbmFwc2hvdCBzbyB0aGF0IG9yaWdpbmFsIHN0YXlzIGludGFjdAo+IGFuZCBydW4gaWYgb24g
-dG9wIG9mIHRoZSBkbSwgc28gdGhhdCBJIGRvbid0IHJ1biBpbnRvIGNvcm5lciBjYXNlcy4KCkkg
-dGhpbmsgaXQncyBhIGdvb2QgaGFiaXQgdG8gYWx3YXlzIG1ha2UgaW1wb3J0YW50IGRhdGEgYmVp
-bmcgYmFja3VwZWQuCgo+IAo+IFdoZW4gSSB3YXMgbWlncmF0aW5nIG15IHBlcnNvbmFsIGYyZnMg
-c2V0dXAgdG8gYW5vdGhlciBTU0QsIEkgaGFkCj4gc2ltaWxhciByZXNpemUvZnNjayB3YXJuaW5n
-cy9lcnJvcnMuIChJIHNob3VsZCd2ZSByZXBvcnRlZCB0aGlzIGJhY2sKPiB0aGVuLCBzb3JyeS4p
-CgpBbHJpZ2h0LCBhbnl3YXksIEknZCBsaWtlIHRvIHNheSBwbGVhc2UgZmVlbCBmcmVlIHRvIHJl
-cG9ydCBhbnkgYnVncyBvZgpmMmZzIHlvdSBlbmNvdW50ZXIgbGF0ZXIsIHdpbGwgYmUgYXBwcmVj
-aWF0ZSBmb3IgdGhhdC4gOikKCj4gU28gSSBkZWNpZGVkIHRvIGp1c3QgcnN5bmMgdGhlIHdob2xl
-IHBhcnRpdGlvbiBhZnRlciBtb3VudGluZyBpdCBhbmQKPiBtaWdyYXRlIHVuZGVyIFZGUyBhbmQg
-bm90IHJpc2sgdGhlIHBvdGVudGlhbCBjb3JuZXIgY2FzZS4KPiAKPiBTbyBmb3IgbXkgY2FzZSwg
-aXQgd2FzIGJlZm9yZSB0aGUgZGFtYWdlIHdhcyBkb25lICh3aXRoIGRtLXNuYXBzaG90KQo+IHVu
-bGlrZSBAdXBsaW5rci4KCk9rYXksIGdvdCBpdCwgdGhhbmtzIGZvciB0aGUgZGV0YWlscy4KClRo
-YW5rcywKCj4gCj4+Cj4+Pgo+Pj4+Cj4+Pj4+IEkgYXNzaXN0ZWQgaGltIHRvIGVuc3VyZSB1c2lu
-ZyB0aGUgbGF0ZXN0IGtlcm5lbC9mMmZzLXRvb2xzLCBidXQgaGlzCj4+Pj4+IG1ldGFkYXRhIHNl
-ZW1zIHByZXR0eSBiYWQgcmlnaHQgbm93IGFuZCBJIHN1Z2dlc3RlZCBoaW0gdG8gYXNrIHRoZQo+
-Pj4+PiBtYWlsaW5nIGxpc3QgZGlyZWN0bHkuCj4+Pj4KPj4+PiBJIGNoZWNrZWQgdGhlIGxvZywg
-SSBndWVzcyBpdCBhY3R1YWxseSBzZWVtcyBwcmV0dHkgYmFkLi4uIEkgZ3Vlc3Mgd2UKPj4+PiBu
-ZWVkIHRvIGZpbmQgb3V0IHRob3NlIGZpbGUgd2hpY2ggaGFzIG5vdCBiZWVuIG1pZ3JhdGVkIGNv
-cnJlY3RseSwgYW5kCj4+Pj4gdHJ5IHRvIGNvcnJlY3QgdGhlbSwgbWF5IGJlIHcvIGEgbmV3IHRv
-b2wuCj4+Pgo+Pj4gWWVhaCwgaGF2aW5nIGZzY2suZjJmcyBzZWdmYXVsdCBtaWQtd2F5IHBvc3Qg
-cmVzaXplIHdvbid0IGhlbHAgZWl0aGVyLgo+Pj4KPj4+Pgo+Pj4+IFRvIEphZWdldWssIGFueSB0
-aG91Z2h0cyBhYm91dCB0aGlzIHByb2JsZW0/Cj4+Pj4KPj4+Pj4KPj4+Pj4gVGhlIFVSTCB0aGVy
-ZSBzaG91bGQgYmUgaHR0cHM6Ly9hcnRlcjk3LmNvbS8uZjJmcy0yMDI1MDQwNi9mc2NrLmxvZyAs
-Cj4+Pj4+IGEgbGl0dGxlIHR5cG8gdGhlcmUuCj4+Pj4KPj4+PiBUaGFua3MsIEkgZGlkbid0IG5v
-dGljZSB0aGlzIHByZXZpb3VzbHkuCj4+Pj4KPj4+Pj4KPj4+Pj4gQ2FuIHdlIGhhdmUgc29tZSBz
-b3J0IG9mIENJL2F1dG9tYXRlZCB0ZXN0aW5nIGZvciB0aGUgcmVzaXppbmcgYXMgd2VsbD8KPj4+
-Pgo+Pj4+IEFncmVlZCwgd2lsbCB3b3JrIG9uIHNvbWUgdGVzdGNhc2VzIGZvciByZXNpemUuZjJm
-cyB3aGVuIEkgZ2V0IHNvbWUgZnJlZQo+Pj4+IHNsb3RzLgo+Pj4KPj4+IFNob3VsZCB3ZSBtYXJr
-IHRoaXMgZXhwZXJpbWVudGFsIGZvciB0aGUgdGltZSBiZWluZz8KPj4KPj4gQWdyZWVkLgo+Pgo+
-PiBUaGFua3MsCj4+Cj4+Pgo+Pj4gVGhhbmtzLgo+Pj4KPj4+Pgo+Pj4+IFRoYW5rcywKPj4+Pgo+
-Pj4+Pgo+Pj4+PiBUaGFua3MuCj4+Pj4+Cj4+Pj4+IE9uIFN1biwgQXByIDYsIDIwMjUgYXQgMToy
-NuKAr0FNIHVwbGlua3ItLS0gdmlhIExpbnV4LWYyZnMtZGV2ZWwKPj4+Pj4gPGxpbnV4LWYyZnMt
-ZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0PiB3cm90ZToKPj4+Pj4+Cj4+Pj4+PiBIZWxsbyBl
-dmVyeW9uZSwKPj4+Pj4+Cj4+Pj4+PiBJIGFtIGhhdmluZyB0cm91YmxlIHdpdGggRjJGUy4gU3Bl
-Y2lmaWNhbGx5LCBJIGJlbGlldmUgbWV0YWRhdGEgZ290Cj4+Pj4+PiBjb3JydXB0ZWQgd2hlbiBJ
-IHJlc2l6ZWQgaXQuIEkgaGF2ZSBhIDUxMiBHQiBkcml2ZS4gTXkgRjJGUyBwYXJ0aXRpb24KPj4+
-Pj4+IHdhcyBhcHByb3hpbWF0ZWx5IGxvY2F0ZWQgb24gMzY5LTQ5NyBHQiAoMTI4IEdCIHNpemUp
-LiBVc2luZyBHUGFydGVkLCBJCj4+Pj4+PiByZXNpemVkIGl0IHRvIDAuNS00OTcgR0IuIFdoaWxl
-IHRoZSBwYXJ0aXRpb24gcmVzaXppbmcgd2VudCB0aHJvdWdoCj4+Pj4+PiBzdWNjZXNzZnVsbHks
-IGZpbGVzeXN0ZW0gcmVzaXppbmcgaW5pdGlhbGx5IGZhaWxlZCB3aXRoICJNb3VudCB1bmNsZWFu
-Cj4+Pj4+PiBpbWFnZSB0byByZXBsYXkgbG9nIi4gSSBoYXZlIGRvbmUgdGhhdCBhbmQgcmV0cmll
-ZCByZXNpemluZy4KPj4+Pj4+Cj4+Pj4+PiBBZnRlcndhcmRzLCBob3dldmVyLCBmc2NrIHN0YXJ0
-ZWQgZ2l2aW5nIG91dCBhIGxvdCBvZiBlcnJvcnMsIGF0IG9uZQo+Pj4+Pj4gcG9pbnQgaXQgYXNr
-ZWQgaWYgSSB3aXNoZWQgdG8gcmVzdG9yZSBsb3N0IGRhdGEsIHdoaWNoIEkgYWdyZWVkIHRvLiBM
-b2dzCj4+Pj4+PiBzcGVjaWZpZWQgYSBsb3Qgb2YgbXkgZmlsZXMgKHdoaWNoIEkgY291bGQgdGVs
-bCBieSBmaWxlbmFtZXMpIGFuZAo+Pj4+Pj4gbWlkLXdheSB0aHJvdWdoIHRoZSBwcm9jZXNzLCBp
-dCBzZWdmYXVsdGVkLiBOb3csIHdoZW4gSSBydW4gZnNjaywgbm8KPj4+Pj4+IGZpbGVzIGFyZSBh
-c2tlZCB0byBiZSByZXN0b3JlZCwgYW5kIGl0IGNvbXBsZXRlcyBzdWNjZXNzZnVsbHkuIEhvd2V2
-ZXIsCj4+Pj4+PiB3aGVuIEkgYXR0ZW1wdCB0byBtb3VudCBpdCwgSSBnZXQgYW4gZXJyb3Igc2F5
-aW5nICJTdHJ1Y3R1cmUgbmVlZHMKPj4+Pj4+IGNsZWFuaW5nIi4KPj4+Pj4+Cj4+Pj4+PiBDb3Vs
-ZCBzb21lb25lIGhlbHAgbWUgcmVzdG9yZSBteSBtZXRhZGF0YSAoYXQgbGVhc3QsIGxvbmcgZW5v
-dWdoIHRvCj4+Pj4+PiBleHRyYWN0IG15IGZpbGVzKT8gVGhhbmtzLgo+Pj4+Pj4KPj4+Pj4+IGRt
-ZXNnIGxvZ3M6Cj4+Pj4+Pgo+Pj4+Pj4gWyAgIDk2LjE4NDEyN10gRjJGUy1mcyAobnZtZTBuMXA1
-KTogTWlzbWF0Y2ggdmFsaWQgYmxvY2tzIDc2OSB2cy4gNjgKPj4+Pj4+IFsgICA5Ni4xODgwNTBd
-IEYyRlMtZnMgKG52bWUwbjFwNSk6IEZhaWxlZCB0byBpbml0aWFsaXplIEYyRlMgc2VnbWVudAo+
-Pj4+Pj4gbWFuYWdlciAoLTExNykKPj4+Pj4+Cj4+Pj4+PiBmc2NrLmYyZnMgLS1kcnktcnVuIC1k
-IDMgbG9nczogaHR0cHM6Ly9hcnRlci5jb20vLmYyZnMtMjAyNTA0MDYvZnNjay5sb2cKPj4+Pj4+
-Cj4+Pj4+Pgo+Pj4+Pj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KPj4+Pj4+IExpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0Cj4+Pj4+PiBMaW51eC1m
-MmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+Pj4+Pj4gaHR0cHM6Ly9saXN0cy5zb3Vy
-Y2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo+Pj4+Pgo+Pj4+Pgo+
-Pj4+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+Pj4+
-PiBMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdAo+Pj4+PiBMaW51eC1mMmZzLWRldmVsQGxp
-c3RzLnNvdXJjZWZvcmdlLm5ldAo+Pj4+PiBodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9s
-aXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCj4+Pj4KPj4KCgoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5n
-IGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0
-cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+Hi everyone.
+
+Besides salvaging @uplinkr's data [1], I figured it's important for us
+to understand why resize corrupts data in the first place.
+
+I took some time today to have my laptop's 1.8TiB f2fs partition
+resized slightly and managed to reproduce the data corruption.
+
+I'm not necessarily sure whether this would be the same symptoms as
+@uplinkr's, but it's probably likely.
+
+Here's what I did:
+1. Remounted to checkpoint=disable
+2. Create a dm-snapshot of the current root device
+3. Mount snapshot to replay the log
+4. Unmount
+5. Resize sector 487248896 to 486539264
+# ./resize.f2fs -d 3 -s -i /dev/mapper/snap -t 486539264
+
+Latest f2fs-tools was used:
+33c5b9539af2 f2fs_io: add fragread command to evaluate fragmented
+buffer for reads
+
+This reproduced the mount and fsck failure.
+
+Mount log:
+[442431.020594] F2FS-fs (dm-2): invalid crc_offset: 0
+[442431.130055] F2FS-fs (dm-2): SIT is corrupted node# 13615201 vs 13616290
+[442431.139684] F2FS-fs (dm-2): Failed to initialize F2FS segment manager (-117)
+
+debugfs & resize log:
+https://arter97.com/.f2fs-20250410/
+
+The fsck log was way too large, 8.21GiB without "-d" flag and it
+contained many sensitive data, so I'm not uploading it for now.
+
+From looking at the dm stats, the fsck also wrote 2138 MiB to the
+snapshot device.
+
+Chao, can we start from here?
+Thanks.
+
+[1] https://lore.kernel.org/linux-f2fs-devel/608f23ce-56ef-4faf-bee1-3aa89786ed41@kernel.org/T/#mc628f8f3ca6c73178ffa1716f927755527856d4b
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
