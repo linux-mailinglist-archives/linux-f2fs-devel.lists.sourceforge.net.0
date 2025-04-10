@@ -2,138 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1596AA83D05
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Apr 2025 10:33:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36FB9A843F7
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Apr 2025 15:03:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u2nLN-0002x0-PE;
-	Thu, 10 Apr 2025 08:33:06 +0000
+	id 1u2rYZ-00072d-R4;
+	Thu, 10 Apr 2025 13:02:59 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <qkrwngud825@gmail.com>) id 1u2nLM-0002wn-Av
+ (envelope-from <nzzhao.sigma@gmail.com>) id 1u2rYY-00072X-I2
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Apr 2025 08:33:05 +0000
+ Thu, 10 Apr 2025 13:02:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Yodtc9kIsQSbptJKTEuPdg/78bTjKeYaJegRIfR/OIs=; b=R2nH/npSBvb4kd/oWEpk6y3klt
- i3tw3LPc/o+gCPB1bZWyF0soFowx6C7kDo1KUzIWvw7HRGeZyILiZbPhJH9rxRjm1FJxPkPDKCZhX
- /xyCPcpVsVBpkkf6/jksXrw5Pa/gOUfJjw6yUuJrNOFUQXRqYRLay2Pho9oMrI9RNPd8=;
+ bh=q4ME9urMDx9w+JoQLEzbCeGIf9AXoC9G+YsUnHnd4pM=; b=SyJEG2J/dH2d5H3PkFeD47ebPV
+ Ob+VUcrlNOu0aRRffDREMo9a6vdrRlMifJIpY2e/pf1Z+n+m5V4dTJc8vMjKTvygpRGm1oHKy/VFH
+ g+roNrbMghpDCXaomZ9g0R6eHZwNmYy2XhQYk9eOBQ1lGCMcae+7qUJ0jOAyFh7yhxDo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:MIME-Version:Sender:
  Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Yodtc9kIsQSbptJKTEuPdg/78bTjKeYaJegRIfR/OIs=; b=J
- eAT5fOwkHcUVXjpN7ivfVgmUfBZWys3dmL04D65WZ64d7CcRzFbuaADkZhR/W2NA6p2PUkKeKRCr8
- cFLpK/+brI6BP9iz6UEe7/GKgD6bojdLQBNk1+SpulhZOFh6Xc3Z3TjXsuA7L9YUVjK04cNFhFtfk
- tIaP7oqnWHjcps7A=;
-Received: from mail-ej1-f49.google.com ([209.85.218.49])
+ List-Owner:List-Archive; bh=q4ME9urMDx9w+JoQLEzbCeGIf9AXoC9G+YsUnHnd4pM=; b=k
+ smN/CELhOIJbjxD5kOp+B0apFDpbrxwwuzC3JQIuv9FZf82IXwv6b4o3tcK3NYaLjBtH12tTJlm+D
+ vKktpqRsuhpnQt9+N0Ug2NrlYU/8D4xHmwibdUk2kInUV8EDHxahb4L4BvdJbB54nAzrsebl1gW83
+ s0+8Ukqbdm+/QIS8=;
+Received: from mail-oa1-f65.google.com ([209.85.160.65])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1u2nL7-0000lP-Ax for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Apr 2025 08:33:04 +0000
-Received: by mail-ej1-f49.google.com with SMTP id
- a640c23a62f3a-ac339f53df9so103405066b.1
+ id 1u2rYI-0003oO-Qb for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 10 Apr 2025 13:02:58 +0000
+Received: by mail-oa1-f65.google.com with SMTP id
+ 586e51a60fabf-2b2b6019a74so347048fac.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 10 Apr 2025 01:32:49 -0700 (PDT)
+ Thu, 10 Apr 2025 06:02:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744273963; x=1744878763; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1744290152; x=1744894952; darn=lists.sourceforge.net;
  h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
  :date:message-id:reply-to;
- bh=Yodtc9kIsQSbptJKTEuPdg/78bTjKeYaJegRIfR/OIs=;
- b=Vgr05muXRynnMijaGI/ceI66zbrnhVuxaNUJY8dDr1B/YJwMZeUCWzrFo5Dz4rdx6p
- vQNJsmLvwYAOzCA1hSW+UsI5JY8CGn3zAuU9br6sEcTR1saO9N+RHlS34SIoGqVlkI7x
- 4CP1t4IOdpsWxQUJ9ZupAAR3+i5BmBXxiir8e1G517SdtUb4IekehzYBqCWjjeZcp3Pt
- x8AFrZCzCbo+NqEJScGX4fb8IaqobNStlNa/6zu14ZwV33xY+DnRue03eQc4VWS0BNIL
- JPmthpKE+tIWvo7iEJ3Wk2WQ03Y2Mf+OHQvT2l6H6cRBWRTkY0jcyoGpeXPFDaoK6UuZ
- 2xSw==
+ bh=q4ME9urMDx9w+JoQLEzbCeGIf9AXoC9G+YsUnHnd4pM=;
+ b=DwhlxkVnxBy3fNGvCwDz/8gokTdMBiok69AShDeMkC0Pq0+c7OrMsLI4Wx1iTDeayu
+ 7Ym/jWintBumevFv59hEMlDS3g8p+V9GtgSnrezSzIzd4xlSXfHz7pnWrXe31vJTYqEB
+ jDG/9LZwIeYcIHAc9jJsdV4QR7HZ8M743ikIPKWE2g3ceA7RHU3v+sDWldCL3g43meqv
+ xZHG9CvpLtZRuRA+QjeUR2gQIjI8tAlXmbosUP08lCecs1rQneaa7NssQJyILomCRt4b
+ eIHkkh0SY2WG01A6o4FP6Xxuqf3eSp0Ytgxh5qZ6O48+KNgHqV1O87JgOeojVkwydDDf
+ fcBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744273963; x=1744878763;
+ d=1e100.net; s=20230601; t=1744290152; x=1744894952;
  h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Yodtc9kIsQSbptJKTEuPdg/78bTjKeYaJegRIfR/OIs=;
- b=Ko4SCEB4UHn9WM1C+tdm/oCzg4MyWp6PRocux5Vg2x7hq+xfFtfOCuGkcc+45fcc/4
- 0cRmTj5+r2lQYkho3m+fVrjcQmJItLqxG8qDuJYGjVt1vedJvcgLevLbI5UNG3VbUVgi
- Cm0iBuWUBdqY9FCqpfNNzO4khZvJogn2gFO8NnI3020kKstkqahBhQob5VknXZpNscCt
- wNk5TDvf0UEWgSRAT6LTGYl1JAFiliHqXC7SWgVQnXRBe4LMpYGE/68WlId/8gsH3kP9
- SeLsDYJd8hvkU7kGVcNXHDqfmEnTw9YX/BmYpFBrI5m26SQ0CG8IUQnjxUkZWvmha7tJ
- 5/bQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWtHnjuzGt4HITE+z0fUwvi2vh3WPHUrTOHy4TylwDs2ESkvfl8W0Px4i7slCv125sv/RUhWCYH14TT6oUJnmC0@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yy9oMfyvW/ZwCzkyGWcDDI0DDSFSZG7UXu7ZMDG538BPHNXykth
- jhAEtiwCuhZGzd9sUuxYSX8kyvUG6wadoOUu0y2sDymwUPoMucXcwVM71uNTrEQM1hVBg/b8QrJ
- I/OrfW0RFeEPYxQS7TkoSkWhkr/+sfmXsTZY=
-X-Gm-Gg: ASbGnctYTCGsn8ZWSkK8ysT16+pIjt9SejUgnywbt4w9rM16k4kJC05vgjCFkB9LFJZ
- 9Nxg/xQNq1WAJ+FwfYK09I+ZxqgITX6orU7Jp26QJ8Yi3wq4EpisPCMo0/CxWrQZrQ98LvfA3U4
- /E26E2aURAUwlJTQwg4UxqDvo=
-X-Google-Smtp-Source: AGHT+IHVMbDuDa808LMO4W9ymcIWibkTCXQJET5e7ak4XpKQj5ONq5xlER6Rkg7FRYX9jRqAHGP6hhGrhs50ExXV5H8=
-X-Received: by 2002:a17:906:dc95:b0:ac6:b729:9285 with SMTP id
- a640c23a62f3a-acabd515169mr145237966b.55.1744273962468; Thu, 10 Apr 2025
- 01:32:42 -0700 (PDT)
+ bh=q4ME9urMDx9w+JoQLEzbCeGIf9AXoC9G+YsUnHnd4pM=;
+ b=sW7fCNjoNWU/Dv3vmZm35A8wxmtSXoHVWde80j1ohihXY3oE4CT1wSLfe0mS2h0kDU
+ yd4wohUx5NIwPu7zeJGtp8jnoey+yiKelEyT5qGIltNrsRKN0R5eaJn2uoGpA1LovnDt
+ uI/l7/japzAQcxdlGEH8YjFIYI6sYKoTVOFPLeNqFSSTWxklCKr5Pb955igZqbAC5NzY
+ 3ZUyzuGs86J4H5BTpxkSyfnvAj7RccvhChgJkPnBfWbP9C5SOl+zqT2KRHuObPyJRBP3
+ W16w1Yn04zwZC2y7h639TtuFXI6g1re8vua+yjdD+xtdIno5yKVz9bLeaaMSQ+p7Idho
+ rhJw==
+X-Gm-Message-State: AOJu0YxykaQ+r/cDRX6mffAySWfcxMVJsxr4s1OXDkrJ92z/bEJtQ1wN
+ nG2Cq9oZWxgFPXgYQKM3UH1oLF8TJGnmm4Ny+kKdwkTkNQJt/uuTZRK0zidkgFVQm5bC7x5GiMN
+ mKYr0H36wFwZeBFgEUc8xk7GZ2JnRReUI2PM6pyVi
+X-Gm-Gg: ASbGnct82SfBIRD1B10W4E4CxZMUI9eSCwf74DX0RifUexTS8qDROAqzn3fd2WkI9mS
+ hlYD8R6HVL9YLZABumKydJZRRCri8aIMhWkZ8628dhv1/2cgRwJFxzv63wjyMjQk1AwbA0eHdvc
+ RrnJqFE7r0ntVugHdN0uJ49hs=
+X-Google-Smtp-Source: AGHT+IHHcyM4JagDrfKqjXOkGzvmF1RNprivjAANSbGoRgiB6JEuGSqwHAUK2qAwMbRj12EYIDfIkKuSylMS/Pg0Jb0=
+X-Received: by 2002:a05:6870:af91:b0:2c1:5fcd:acc5 with SMTP id
+ 586e51a60fabf-2d0b5b5ba95mr1261542fac.10.1744290151636; Thu, 10 Apr 2025
+ 06:02:31 -0700 (PDT)
 MIME-Version: 1.0
-From: Juhyung Park <qkrwngud825@gmail.com>
-Date: Thu, 10 Apr 2025 01:32:31 -0700
-X-Gm-Features: ATxdqUEIsXu4TxIcRgTIaFae4wqLHmGUoDnu9hHz3MGXZtIXynXVPWhWaOc7fsc
-Message-ID: <CAD14+f3D6iPOBxEgkZxxTsXCfwRKb9ph68JtUk3H9cn8ovLt9w@mail.gmail.com>
-To: Chao Yu <chao@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>, 
- linux-f2fs-devel@lists.sourceforge.net
-X-Spam-Score: 1.1 (+)
+From: Nanzhe Zhao <nzzhao.sigma@gmail.com>
+Date: Thu, 10 Apr 2025 21:02:18 +0800
+X-Gm-Features: ATxdqUFTTYY99-WppmK1jjEehjBQpwRy--aYlho_VQOALBAltg7NTn_hrRWfjtc
+Message-ID: <CAMLCH1F+0be4Jffz6jy7da2THJcA=V6jDFAKWg8Z_e=Y9g0F4A@mail.gmail.com>
+To: "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi everyone. Besides salvaging @uplinkr's data [1], I figured
- it's important for us to understand why resize corrupts data in the first
- place. I took some time today to have my laptop's 1.8TiB f2fs partition
- resized slightly and managed to reproduce the data corruption. 
- Content analysis details:   (1.1 points, 6.0 required)
+ Content preview:  Dear f2fs Development Community, This thread is initiated
+ to discuss the challenge of integrating iomap_folio_state (hereafter referred
+ to as ifs) into f2fs pointed out by Mr. Matthew in this email: 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.218.49 listed in list.dnswl.org]
- 0.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
- 1.0 HK_RANDOM_FROM         From username looks random
+ no trust [209.85.160.65 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [nzzhao.sigma[at]gmail.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.160.65 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.218.49 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.218.49 listed in sa-accredit.habeas.com]
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: arter97.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [qkrwngud825[at]gmail.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [qkrwngud825[at]gmail.com]
+ [209.85.160.65 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.218.49 listed in wl.mailspike.net]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ [209.85.160.65 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1u2nL7-0000lP-Ax
-Subject: [f2fs-dev] Reproducing resize corruption
+X-Headers-End: 1u2rYI-0003oO-Qb
+Subject: [f2fs-dev] [DISCUSSION] Preliminary design thoughts on f2fs own
+ folio_state struct for folio->private
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -145,54 +135,120 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: uplinkr@airmail.cc
+Cc: "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
+ "v-songbaohua@oppo.com" <v-songbaohua@oppo.com>,
+ Matthew Wilcox <willy@infradead.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi everyone.
+Dear f2fs Development Community,
 
-Besides salvaging @uplinkr's data [1], I figured it's important for us
-to understand why resize corrupts data in the first place.
+This thread is initiated to discuss the challenge of integrating
+iomap_folio_state (hereafter referred to as ifs) into f2fs pointed out
+by Mr. Matthew in this email:
+https://lore.kernel.org/linux-f2fs-devel/CAMLCH1EOSvA1As4vdBcpsh75apFmknOfHihORxVOmmZ-+muK5Q@mail.gmail.com/T/#t
 
-I took some time today to have my laptop's 1.8TiB f2fs partition
-resized slightly and managed to reproduce the data corruption.
+> The challenge with that is that iomap does not support all the
+> functionality that f2fs requires.  The iomap data structure could
+> be duplicated inside f2fs, but then we hit the problem that f2fs
+> currently stores other information in folio->private.  So we'd need
+> to add a flags field to iomap_folio_state to store that information
+> instead.
 
-I'm not necessarily sure whether this would be the same symptoms as
-@uplinkr's, but it's probably likely.
 
-Here's what I did:
-1. Remounted to checkpoint=disable
-2. Create a dm-snapshot of the current root device
-3. Mount snapshot to replay the log
-4. Unmount
-5. Resize sector 487248896 to 486539264
-# ./resize.f2fs -d 3 -s -i /dev/mapper/snap -t 486539264
+To address this, I have designed a custom structure for f2fs, aiming
+to minimize modifications to existing iomap functionalities and data
+structures. The proposed structure, named f2fs_iomap_folio_state
+(hereafter referred to as f2fs_ifs), is defined as follows:
 
-Latest f2fs-tools was used:
-33c5b9539af2 f2fs_io: add fragread command to evaluate fragmented
-buffer for reads
+f2fs_iomap_folio_state
+{
+    struct iomap_folio_state ifs;
+    unsigned int magic_number;
+    unsigned int private; // for f2fs page private flags
+}
 
-This reproduced the mount and fsck failure.
+The f2fs_ifs structure embeds the standard ifs structure at the
+beginning of its definition. This ensures that the initial memory
+layout of f2fs_ifs is identical to ifs, thereby maintaining
+compatibility with a wide range of iomap APIs (excluding ifs_alloc and
+ifs_free). Importantly, calling ifs_alloc on a folio whose
+folio->private already points to an f2fs_ifs structure will not result
+in errors. This is because ifs_alloc is designed to return the
+existing pointer if folio->private is not NULL.
 
-Mount log:
-[442431.020594] F2FS-fs (dm-2): invalid crc_offset: 0
-[442431.130055] F2FS-fs (dm-2): SIT is corrupted node# 13615201 vs 13616290
-[442431.139684] F2FS-fs (dm-2): Failed to initialize F2FS segment manager (-117)
+My original purpose behind this design is to preserve the integrity of
+native iomap functions and data structures as much as possible. The
+level of customization currently provided by iomap functions for file
+systems appears to be insufficient for f2fs's requirements. For
+example, the iomap_readahead function's iomap_readpage_iter internally
+and inflexibly calls APIs like ifs_alloc.
 
-debugfs & resize log:
-https://arter97.com/.f2fs-20250410/
+Currently, there are two key technical details that require careful
+consideration:
 
-The fsck log was way too large, 8.21GiB without "-d" flag and it
-contained many sensitive data, so I'm not uploading it for now.
+Distinguishing between ifs and f2fs_ifs: A significant challenge is
+reliably differentiating whether a given folio->private pointer points
+to a standard ifs or our custom f2fs_ifs structure. This is a headache
+as it involves runtime type identification from a void*, which cannot
+be resolved through compile-time type checking. To mitigate this, I
+have introduced a magic_number field within f2fs_ifs. The proposed
+approach is to cast folio->private to f2fs_ifs, calculate an offset
+based on the size of the ifs structure (which is dynamically
+determined by the folio's block count due to the variable-sized state
+bitmap in ifs), and then check if the value at the magic_number field
+matches a pre-defined magic value. If a match is found, we infer that
+it is an f2fs_ifs.
 
-From looking at the dm stats, the fsck also wrote 2138 MiB to the
-snapshot device.
+However, this approach is not without risk. In the scenario where
+folio->private points to a regular ifs, and by a little chance, the
+value at the calculated offset within the ifs structure happens to
+coincide with our chosen magic number, the check would incorrectly
+identify it as f2fs_ifs. This could potentially lead to undefined
+behavior. I am actively seeking more robust solutions for this type
+identification problem and would greatly appreciate any suggestions or
+alternative approaches the community might offer.
 
-Chao, can we start from here?
-Thanks.
+Allocation Timing of f2fs_ifs: Another crucial aspect is determining
+the optimal timing for allocating f2fs_ifs. My current thinking is
+that allocating it during the readahead process might be advantageous.
+At this stage, the folio is under lock protection, ensuring thread
+safety. Furthermore, allocating f2fs_ifs during readahead could
+ideally ensure that the private field of all folios within the page
+cache consistently points to f2fs_ifs.I belive this will bring a lot
+of convenience.
+The implementation may be a bit tricky. If we intend to leverage
+iomap_readahead to provide an iomap-based readahead function for f2fs,
+custom iomap_begin and iomap_end operations will not suffice for
+allocating f2fs_ifs. This limitation arises because these functions do
+not have access to the necessary readahead_control and
+iomap_readpage_ctx structures, and consequently, cannot directly
+access the folio.
 
-[1] https://lore.kernel.org/linux-f2fs-devel/608f23ce-56ef-4faf-bee1-3aa89786ed41@kernel.org/T/#mc628f8f3ca6c73178ffa1716f927755527856d4b
+My current proposed solution is as follows:
+
+f2fs_iomap_readahead(readahead_control* rac)
+{
+    struct readahead_control rac_cp = copy_rac(rac);
+    struct folio* folio;
+    while (folio = readahead_folio(rac_cp)) {
+        f2fs_ifs_alloc(folio);
+    }
+    iomap_readahead(rac, &f2fs_buffered_read_iomap_ops);
+}
+
+Alternatively, we could consider duplicating the iomap_readahead
+function within f2fs and making the necessary modifications directly
+within the duplicated code.
+
+I would greatly appreciate any feedback, insights, and suggestions
+from the community regarding these technical details and the overall
+approach. Your expertise and perspectives are invaluable as we work
+towards a robust and efficient integration of iomap_folio_state into
+f2fs.
+
+Thank you for your time and consideration.
 
 
 _______________________________________________
