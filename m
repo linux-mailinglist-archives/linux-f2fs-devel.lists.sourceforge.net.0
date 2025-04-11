@@ -2,103 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2900A858D5
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Apr 2025 12:06:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD69BA858EE
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Apr 2025 12:07:44 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u3BH1-0000hd-Pd;
-	Fri, 11 Apr 2025 10:06:11 +0000
+	id 1u3BIT-0006t7-0n;
+	Fri, 11 Apr 2025 10:07:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1u3BGx-0000hT-KU
+ (envelope-from <chao@kernel.org>) id 1u3BIR-0006t0-3w
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Apr 2025 10:06:07 +0000
+ Fri, 11 Apr 2025 10:07:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UZT2WMM3+XC186zPVtIpXNgDDQ44dosvK0xYgwmlpgQ=; b=ZW0xBDQNnYUHoc1i97T/NNAjgR
- vEPDk054v2CTHAgnrJ0trjfcKNJuKCMOMtwaPCuonKv6hQopeiFizWtt7IMi82l+oqB2TnwnfMrhU
- iCCfEPyWgDnVWf2x9l2cGnX0wFviJoDM3neh2AgzpIwQfy/lG1Qv0AwA928U74Wu179s=;
+ bh=VxCLOZVFWQ8KX5fZ+9ZWfLcTs6fLvXsvVwY0X+r0YYY=; b=Ri8NcIUlP6k5/3bHJdMACzvBIW
+ mK7HBUi60ZkNRiRpuPAN2dCVivdANwBweAt+J5arHfT3cQ5mVnNEB9ib4cO0lJn45MTCDWmLFppYE
+ YAN0H0wQ7tW99sORtNjLb2LenP6Fd94/lWNEYRSA20mXpwCW2ywzM0v1sfi790nVjX88=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=UZT2WMM3+XC186zPVtIpXNgDDQ44dosvK0xYgwmlpgQ=; b=knzsWX5RPd0bz+GTwgbhuuBRtB
- aDui5R0+hWjvKF6TPui87vCOs+Ao5+nHztgNjHW99ps3yf8Jfp8bzI/j/+oytomxmmVPrgMmJRE1F
- vDnkoYNdjAx+Ls9znQ5i+22PI8mLWYCGxm23bR0p3r2aDHTL0o2WiHKQGN/le7hX6ErM=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=VxCLOZVFWQ8KX5fZ+9ZWfLcTs6fLvXsvVwY0X+r0YYY=; b=ZZYgD3hLbVbAROeWU3xm8Vjh/y
+ t6F3wFQkUaHKAHqnoCIf2Py21zbqbThXvUzkCRpNHFEMKWr92c7N4AZ55A3eZresJkwRFWVOUAVN8
+ DHrRWMGhjaj8wet+VMz3xdyavvEqf5HLiUjqjFu7qZsiaqnjLWG8ITexlCwrfV/L9a6E=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1u3BGe-0001ZU-SO for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Apr 2025 10:06:06 +0000
+ id 1u3BIB-0001xQ-0U for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 11 Apr 2025 10:07:39 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id A356EA4AA1B;
- Fri, 11 Apr 2025 10:00:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22CB3C4CEE7;
- Fri, 11 Apr 2025 10:05:36 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id C2F4243A60;
+ Fri, 11 Apr 2025 10:07:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C5A5C4CEE2;
+ Fri, 11 Apr 2025 10:07:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744365937;
- bh=xbk65NPFGf4rNxDEgiltPxJhu62ZocKp5X6vqSsX/04=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=WMI1RgI/sYZsCAXHDGaQWHCTvHWI+clyGBfgbbf2KpY3ligkWobZ9kEgi+L152oRP
- KFBD6su5i5b0L95yk7UqwPLU3f7yH+Lhix2qtcsI6V+s4KO+15cFoEBK0k+1OyMqTc
- uC56AuMu2muR1lh6cTgQ7hzFW6gE+icz958XQLkNkZdvC/bYNVQ1LuXmWvueJOFrhj
- LMalk+9T/mJoq0kKgVtXSwfA1Ki+VkHsaWFevA61xql/r6fsW6m9b6iASkbvrZ873O
- Z5kcle/7Ec9Af8y7MHJnRou5PJuggy+1U2iIHScnIN6JlTmYQl/yOsXS+B8KdbTh3Q
- DwKOI0/8r2Llg==
-To: jaegeuk@kernel.org
-Date: Fri, 11 Apr 2025 18:05:26 +0800
-Message-Id: <20250411100526.7939-2-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20250411100526.7939-1-chao@kernel.org>
-References: <20250411100526.7939-1-chao@kernel.org>
+ s=k20201202; t=1744366032;
+ bh=zog6+A4bgw41mwmAj6LyqLPSAxuQKdxXwCOjw49nIK8=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=T6FMzvCZcTie4kDjUokrIJ3jvbvbY/L/v5No62p6OonvotilYAET8qCvlwllba9Ez
+ EGI/qofFtMc5FENlcF0XIa5ez/ApZwKtFnBk9o9UDwmIknq2bnotER+/3ueDWqa7u7
+ OpA77z8I71PEMjsKoyijBKIs3ukTDLIf7FKRK8mtNGFJBl50xDfY42ev0AoPlzXb9t
+ YpvR90aJGBiz8ruQvetgz97r7agScgMiJyWkoguupJGhjNOO08YV+9zIlErwRIOL03
+ cNj/0WK6FJ8Fjg88vaVFyll6De4xHjx+vz82XZ6i5zxjVmCu0vLssk8OaVA1wGgzA2
+ LuqthIwCzwY+w==
+Message-ID: <de198b35-fdfd-4fe9-98b9-bb346a81b54c@kernel.org>
+Date: Fri, 11 Apr 2025 18:07:09 +0800
 MIME-Version: 1.0
-X-Spam-Score: -3.2 (---)
+User-Agent: Mozilla Thunderbird
+To: "yohan.joung" <yohan.joung@sk.com>
+References: <20250410001747.1844-1-yohan.joung@sk.com>
+Content-Language: en-US
+In-Reply-To: <20250410001747.1844-1-yohan.joung@sk.com>
+X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: resize.f2fs doesn't guarantee atomically resizing f2fs image,
- so that potential suddent power cut, IO error, out of memory, SIGKILL received
- or program exits due to other reasons may cause data corrup [...] 
- Content analysis details:   (-3.2 points, 6.0 required)
+ Content preview:  Yohan, Sorry for the delay, will catch up this a little bit
+ latter. On 2025/4/10 8:17, yohan.joung wrote: > hi jeageuk, chao > How about
+ changing the large section gc in this direction? > Thanks > >> Change the
+ large section GC to locate valid block segments instead o [...] 
+ Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.234.252.31 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [147.75.193.91 listed in sa-trusted.bondedsender.org]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ [172.234.252.31 listed in bl.score.senderscore.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1u3BGe-0001ZU-SO
-Subject: [f2fs-dev] [PATCH v2 2/2] resize.f2fs: add caution message for
- resize
+X-Headers-End: 1u3BIB-0001xQ-0U
+Subject: Re: [f2fs-dev] [PATCH v1] f2fs: Improve large section GC by
+ locating valid block segments
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,157 +112,295 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ jaegeuk@kernel.org, pilhyun.kim@sk.com
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-resize.f2fs doesn't guarantee atomically resizing f2fs image,
-so that potential suddent power cut, IO error, out of memory,
-SIGKILL received or program exits due to other reasons may cause
-data corruption.
+Yohan,
 
-This patch adds caution message for resize users to notice
-potential risk of using resizing tool, and remind them to backup
-data before resize.
+Sorry for the delay, will catch up this a little bit latter.
 
-resize.f2fs <partition>
-
-"Please notice there is high risk of data lost during resize, please backup your data before resize.
-Do you want to resize this partition? [y/n] y
-process resize"
-
-If we want to force to use resize.f2fs, we can use -F option,
-let's enable -F option in Android by default to not break any
-usage.
-
-Cc: Ju Hyung Park <qkrwngud825@gmail.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fsck/main.c       | 27 +++++++++++++++++++++++++--
- fsck/resize.c     |  2 +-
- include/f2fs_fs.h |  1 +
- man/resize.f2fs.8 | 12 ++++++++++++
- 4 files changed, 39 insertions(+), 3 deletions(-)
-
-diff --git a/fsck/main.c b/fsck/main.c
-index af40613..ef6b17d 100644
---- a/fsck/main.c
-+++ b/fsck/main.c
-@@ -222,6 +222,8 @@ static void add_default_options(void)
- 		if (c.func == FSCK) {
- 			/* -a */
- 			c.auto_fix = 1;
-+		} else if (c.func == RESIZE) {
-+			c.force = 1;
- 		}
- 
- 		/*
-@@ -601,7 +603,7 @@ void f2fs_parse_options(int argc, char *argv[])
- #endif
- 	} else if (!strcmp("resize.f2fs", prog)) {
- #ifdef WITH_RESIZE
--		const char *option_string = "d:fHst:o:V";
-+		const char *option_string = "d:fFHst:o:V";
- 
- 		c.func = RESIZE;
- 		while ((option = getopt(argc, argv, option_string)) != EOF) {
-@@ -618,9 +620,12 @@ void f2fs_parse_options(int argc, char *argv[])
- 							c.dbg_lv);
- 				break;
- 			case 'f':
-+				c.ignore_error = 1;
-+				MSG(0, "Info: Ingore error during resize\n");
-+				break;
-+			case 'F':
- 				c.force = 1;
- 				MSG(0, "Info: Force to resize\n");
--				break;
- 			case 'H':
- 				c.need_whint = true;
- 				c.whint = WRITE_LIFE_NOT_SET;
-@@ -1104,6 +1109,24 @@ out_range:
- #ifdef WITH_RESIZE
- static int do_resize(struct f2fs_sb_info *sbi)
- {
-+	char answer[255] = {0};
-+	int ret;
-+
-+	if (!c.force) {
-+retry:
-+		printf("\nPlease notice there is high risk of data lost during resize, "
-+			"please backup your data before resize.\n"
-+			"Do you want to resize this partition? [y/n] ");
-+		ret = scanf("%s", answer);
-+		ASSERT(ret >= 0);
-+		if (!strcasecmp(answer, "y"))
-+			printf("process resize\n");
-+		else if (!strcasecmp(answer, "n"))
-+			return 0;
-+		else
-+			goto retry;
-+	}
-+
- 	if (!c.target_sectors)
- 		c.target_sectors = c.total_sectors;
- 
-diff --git a/fsck/resize.c b/fsck/resize.c
-index 2681b9f..1ab7d75 100644
---- a/fsck/resize.c
-+++ b/fsck/resize.c
-@@ -765,7 +765,7 @@ int f2fs_resize(struct f2fs_sb_info *sbi)
- 		}
- 	else if (((c.target_sectors * c.sector_size >>
- 			get_sb(log_blocksize)) > get_sb(block_count)) ||
--			c.force)
-+			c.ignore_error)
- 		return f2fs_resize_grow(sbi);
- 	else {
- 		MSG(0, "Nothing to resize.\n");
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 7e3f25b..928f963 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -1528,6 +1528,7 @@ struct f2fs_configuration {
- 	int no_kernel_check;
- 	int fix_on;
- 	int force;
-+	int ignore_error;
- 	int defset;
- 	int bug_on;
- 	unsigned int invalid_sb;
-diff --git a/man/resize.f2fs.8 b/man/resize.f2fs.8
-index 02ff245..bdda4fd 100644
---- a/man/resize.f2fs.8
-+++ b/man/resize.f2fs.8
-@@ -18,6 +18,12 @@ resize.f2fs \- resize filesystem size
- .I overprovision-ratio-percentage
- ]
- [
-+.B \-f
-+]
-+[
-+.B \-F
-+]
-+[
- .B \-H
- ]
- [
-@@ -53,6 +59,12 @@ Specify the percentage of the volume that will be used as overprovision area.
- This area is hidden to users, and utilized by F2FS cleaner. If not specified, the
- best number will be assigned automatically according to the partition size.
- .TP
-+.BI \-f
-+Force to fix any inconsistent data during resize.
-+.TP
-+.BI \-F
-+Skip caution dialogue and resize partition directly.
-+.TP
- .BI \-H
- Specify support write hint.
- .TP
--- 
-2.40.1
+On 2025/4/10 8:17, yohan.joung wrote:
+> hi jeageuk, chao
+> How about changing the large section gc in this direction?
+> Thanks
+> 
+>> Change the large section GC to locate valid block segments instead of
+>> performing a sequential search. This modification enhances performance
+>> by reducing unnecessary block scanning in large storage sections.
+>>
+>> example :
+>> [invalid seg 0] [invalid seg 1] [invalid seg 2]
+>> [  valid seg 3] [  valid seg 4] [  valid seg 5]
+>>
+>> Current: In the first GC, nothing is moved,
+>> but in the second GC, segments 3, 4, and 5 are moved.
+>> Change: In the first GC, segments 3, 4, and 5 are moved.
+>>
+>> Signed-off-by: yohan.joung <yohan.joung@sk.com>
+>> ---
+>>   fs/f2fs/f2fs.h  |  2 ++
+>>   fs/f2fs/gc.c    | 92 +++++++++++++++++++++++++++++++++++--------------
+>>   fs/f2fs/gc.h    |  6 ++++
+>>   fs/f2fs/super.c |  8 ++++-
+>>   4 files changed, 82 insertions(+), 26 deletions(-)
+>>
+>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>> index f1576dc6ec67..348417edac25 100644
+>> --- a/fs/f2fs/f2fs.h
+>> +++ b/fs/f2fs/f2fs.h
+>> @@ -4008,6 +4008,8 @@ int f2fs_gc_range(struct f2fs_sb_info *sbi,
+>>   int f2fs_resize_fs(struct file *filp, __u64 block_count);
+>>   int __init f2fs_create_garbage_collection_cache(void);
+>>   void f2fs_destroy_garbage_collection_cache(void);
+>> +int __init f2fs_init_garbage_collection_summary_cache(void);
+>> +void f2fs_destroy_garbage_collection_summary_cache(void);
+>>   /* victim selection function for cleaning and SSR */
+>>   int f2fs_get_victim(struct f2fs_sb_info *sbi, unsigned int *result,
+>>   			int gc_type, int type, char alloc_mode,
+>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+>> index 2b8f9239bede..3b63e85fa038 100644
+>> --- a/fs/f2fs/gc.c
+>> +++ b/fs/f2fs/gc.c
+>> @@ -24,6 +24,7 @@
+>>   #include <trace/events/f2fs.h>
+>>   
+>>   static struct kmem_cache *victim_entry_slab;
+>> +static struct kmem_cache *gc_page_entry_slab;
+>>   
+>>   static unsigned int count_bits(const unsigned long *addr,
+>>   				unsigned int offset, unsigned int len);
+>> @@ -711,6 +712,30 @@ static void release_victim_entry(struct f2fs_sb_info *sbi)
+>>   	f2fs_bug_on(sbi, !list_empty(&am->victim_list));
+>>   }
+>>   
+>> +static struct gc_page_entry *add_gc_page_entry(struct list_head *gc_page_list,
+>> +					struct page *sum_page, unsigned int segno)
+>> +{
+>> +	struct gc_page_entry *gpe;
+>> +
+>> +	gpe = f2fs_kmem_cache_alloc(gc_page_entry_slab, GFP_NOFS, true, NULL);
+>> +	gpe->segno = segno;
+>> +	gpe->sum_page = sum_page;
+>> +	list_add_tail(&gpe->list, gc_page_list);
+>> +	return gpe;
+>> +}
+>> +
+>> +static void release_gc_page_entry(struct list_head *gc_page_list, bool putpage)
+>> +{
+>> +	struct gc_page_entry *gpe, *tmp;
+>> +
+>> +	list_for_each_entry_safe(gpe, tmp, gc_page_list, list) {
+>> +		if (putpage)
+>> +			f2fs_put_page(gpe->sum_page, 0);
+>> +		list_del(&gpe->list);
+>> +		kmem_cache_free(gc_page_entry_slab, gpe);
+>> +	}
+>> +}
+>> +
+>>   static bool f2fs_pin_section(struct f2fs_sb_info *sbi, unsigned int segno)
+>>   {
+>>   	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+>> @@ -1721,14 +1746,18 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
+>>   	struct page *sum_page;
+>>   	struct f2fs_summary_block *sum;
+>>   	struct blk_plug plug;
+>> +	struct gc_page_entry *gpe;
+>>   	unsigned int segno = start_segno;
+>>   	unsigned int end_segno = start_segno + SEGS_PER_SEC(sbi);
+>>   	unsigned int sec_end_segno;
+>> +	unsigned int window_granularity = 1;
+>>   	int seg_freed = 0, migrated = 0;
+>>   	unsigned char type = IS_DATASEG(get_seg_entry(sbi, segno)->type) ?
+>>   						SUM_TYPE_DATA : SUM_TYPE_NODE;
+>>   	unsigned char data_type = (type == SUM_TYPE_DATA) ? DATA : NODE;
+>>   	int submitted = 0;
+>> +	int gc_list_count = 0;
+>> +	LIST_HEAD(gc_page_list);
+>>   
+>>   	if (__is_large_section(sbi)) {
+>>   		sec_end_segno = rounddown(end_segno, SEGS_PER_SEC(sbi));
+>> @@ -1744,7 +1773,7 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
+>>   					f2fs_usable_segs_in_sec(sbi);
+>>   
+>>   		if (gc_type == BG_GC || one_time) {
+>> -			unsigned int window_granularity =
+>> +			window_granularity =
+>>   				sbi->migration_window_granularity;
+>>   
+>>   			if (f2fs_sb_has_blkzoned(sbi) &&
+>> @@ -1752,8 +1781,6 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
+>>   					sbi->gc_thread->boost_zoned_gc_percent))
+>>   				window_granularity *=
+>>   					BOOST_GC_MULTIPLE;
+>> -
+>> -			end_segno = start_segno + window_granularity;
+>>   		}
+>>   
+>>   		if (end_segno > sec_end_segno)
+>> @@ -1762,37 +1789,38 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
+>>   
+>>   	sanity_check_seg_type(sbi, get_seg_entry(sbi, segno)->type);
+>>   
+>> -	/* readahead multi ssa blocks those have contiguous address */
+>> -	if (__is_large_section(sbi))
+>> +	for (segno = start_segno; segno < end_segno; segno++) {
+>> +		if (!get_valid_blocks(sbi, segno, false))
+>> +			continue;
+>> +
+>> +		/* readahead multi ssa blocks those have contiguous address */
+>>   		f2fs_ra_meta_pages(sbi, GET_SUM_BLOCK(sbi, segno),
+>> -					end_segno - segno, META_SSA, true);
+>> +				window_granularity, META_SSA, true);
+>>   
+>> -	/* reference all summary page */
+>> -	while (segno < end_segno) {
+>> -		sum_page = f2fs_get_sum_page(sbi, segno++);
+>> +		/* reference all summary page */
+>> +		sum_page = f2fs_get_sum_page(sbi, segno);
+>>   		if (IS_ERR(sum_page)) {
+>>   			int err = PTR_ERR(sum_page);
+>> -
+>> -			end_segno = segno - 1;
+>> -			for (segno = start_segno; segno < end_segno; segno++) {
+>> -				sum_page = find_get_page(META_MAPPING(sbi),
+>> -						GET_SUM_BLOCK(sbi, segno));
+>> -				f2fs_put_page(sum_page, 0);
+>> -				f2fs_put_page(sum_page, 0);
+>> -			}
+>> +			release_gc_page_entry(&gc_page_list, true);
+>>   			return err;
+>>   		}
+>> +		add_gc_page_entry(&gc_page_list, sum_page, segno);
+>>   		unlock_page(sum_page);
+>> +		if (++gc_list_count >= window_granularity)
+>> +			break;
+>>   	}
+>>   
+>>   	blk_start_plug(&plug);
+>>   
+>> -	for (segno = start_segno; segno < end_segno; segno++) {
+>> +	list_for_each_entry(gpe, &gc_page_list, list) {
+>>   
+>>   		/* find segment summary of victim */
+>> -		sum_page = find_get_page(META_MAPPING(sbi),
+>> -					GET_SUM_BLOCK(sbi, segno));
+>> -		f2fs_put_page(sum_page, 0);
+>> +		sum_page = gpe->sum_page;
+>> +		segno = gpe->segno;
+>> +		if (!sum_page) {
+>> +			f2fs_err(sbi, "Failed to get summary page for segment %u", segno);
+>> +			goto skip;
+>> +		}
+>>   
+>>   		if (get_valid_blocks(sbi, segno, false) == 0)
+>>   			goto freed;
+>> @@ -1835,18 +1863,20 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
+>>   				get_valid_blocks(sbi, segno, false) == 0)
+>>   			seg_freed++;
+>>   
+>> -		if (__is_large_section(sbi))
+>> -			sbi->next_victim_seg[gc_type] =
+>> -				(segno + 1 < sec_end_segno) ?
+>> -					segno + 1 : NULL_SEGNO;
+>>   skip:
+>>   		f2fs_put_page(sum_page, 0);
+>>   	}
+>>   
+>> +	if (__is_large_section(sbi) && !list_empty(&gc_page_list))
+>> +		sbi->next_victim_seg[gc_type] =
+>> +			(segno + 1 < sec_end_segno) ?
+>> +				segno + 1 : NULL_SEGNO;
+>> +
+>>   	if (submitted)
+>>   		f2fs_submit_merged_write(sbi, data_type);
+>>   
+>>   	blk_finish_plug(&plug);
+>> +	release_gc_page_entry(&gc_page_list, false);
+>>   
+>>   	if (migrated)
+>>   		stat_inc_gc_sec_count(sbi, data_type, gc_type);
+>> @@ -2008,6 +2038,18 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+>>   	return ret;
+>>   }
+>>   
+>> +int __init f2fs_init_garbage_collection_summary_cache(void)
+>> +{
+>> +	gc_page_entry_slab = f2fs_kmem_cache_create("f2fs_gc_page_entry",
+>> +					sizeof(struct gc_page_entry));
+>> +	return gc_page_entry_slab ? 0 : -ENOMEM;
+>> +}
+>> +
+>> +void f2fs_destroy_garbage_collection_summary_cache(void)
+>> +{
+>> +	kmem_cache_destroy(gc_page_entry_slab);
+>> +}
+>> +
+>>   int __init f2fs_create_garbage_collection_cache(void)
+>>   {
+>>   	victim_entry_slab = f2fs_kmem_cache_create("f2fs_victim_entry",
+>> diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
+>> index 5c1eaf55e127..9c8695efe394 100644
+>> --- a/fs/f2fs/gc.h
+>> +++ b/fs/f2fs/gc.h
+>> @@ -82,6 +82,12 @@ struct victim_entry {
+>>   	struct list_head list;
+>>   };
+>>   
+>> +struct gc_page_entry {
+>> +	unsigned int segno;
+>> +	struct page *sum_page;
+>> +	struct list_head list;
+>> +};
+>> +
+>>   /*
+>>    * inline functions
+>>    */
+>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>> index f087b2b71c89..a3241730fe4f 100644
+>> --- a/fs/f2fs/super.c
+>> +++ b/fs/f2fs/super.c
+>> @@ -5090,9 +5090,12 @@ static int __init init_f2fs_fs(void)
+>>   	err = f2fs_create_garbage_collection_cache();
+>>   	if (err)
+>>   		goto free_extent_cache;
+>> -	err = f2fs_init_sysfs();
+>> +	err = f2fs_init_garbage_collection_summary_cache();
+>>   	if (err)
+>>   		goto free_garbage_collection_cache;
+>> +	err = f2fs_init_sysfs();
+>> +	if (err)
+>> +		goto free_garbage_collection_summary_cache;
+>>   	err = f2fs_init_shrinker();
+>>   	if (err)
+>>   		goto free_sysfs;
+>> @@ -5141,6 +5144,8 @@ static int __init init_f2fs_fs(void)
+>>   	f2fs_exit_shrinker();
+>>   free_sysfs:
+>>   	f2fs_exit_sysfs();
+>> +free_garbage_collection_summary_cache:
+>> +	f2fs_destroy_garbage_collection_summary_cache();
+>>   free_garbage_collection_cache:
+>>   	f2fs_destroy_garbage_collection_cache();
+>>   free_extent_cache:
+>> @@ -5172,6 +5177,7 @@ static void __exit exit_f2fs_fs(void)
+>>   	f2fs_destroy_root_stats();
+>>   	f2fs_exit_shrinker();
+>>   	f2fs_exit_sysfs();
+>> +	f2fs_destroy_garbage_collection_summary_cache();
+>>   	f2fs_destroy_garbage_collection_cache();
+>>   	f2fs_destroy_extent_cache();
+>>   	f2fs_destroy_recovery_cache();
+>> -- 
+>> 2.33.0
+>>
+>>
+>>
+>> _______________________________________________
+>> Linux-f2fs-devel mailing list
+>> Linux-f2fs-devel@lists.sourceforge.net
 
 
 
