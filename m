@@ -2,106 +2,151 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45333A86E52
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 12 Apr 2025 19:11:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CBA2A86E60
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 12 Apr 2025 19:18:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u3eNc-0004Ty-JX;
-	Sat, 12 Apr 2025 17:10:56 +0000
+	id 1u3eUa-0002Nf-QW;
+	Sat, 12 Apr 2025 17:18:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1u3eNa-0004To-IW
+ (envelope-from <sandeen@redhat.com>) id 1u3eUZ-0002NX-Kj
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 12 Apr 2025 17:10:53 +0000
+ Sat, 12 Apr 2025 17:18:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ References:Cc:To:From:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=D16ITCFMZGs8Za1lHdJVGu700hu18UxOEwp1Ka1o4NQ=; b=KULEgahXIzZmYlajQGl6x0M4/2
- QbiShzcRiIwCPHdDUFM2K1tpDKDxXjiWOBcNgOEm430UDaw2fXAyoOyxfQusAmQqwmT3EdmUSbtBY
- L7rDnMLa8+m7hw1IV1kUj7Mlc74naX6UMWtKxdg7XpL3VMHHTcG5ZX8SWzPyYcsyst0w=;
+ bh=7KSU53Ki2LBv6z7JFRDdcRHIpAh3oK7vx5DEadJypWk=; b=goa/mbQ/wHxpO5p4ke4k/bL5rK
+ 7mwBjS3EGQJMc5SgMsWE1QTrxPnkWQSfWuv4bYn5RAfknikV4YkpqU6sx/VU/hywVlMOMPn9iJDs0
+ medhllZh4GALVcZqZxZHxSZodOJo099VNINIxyGMLLspbxGx/yPJQZfRip0qOovX0vkw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=D16ITCFMZGs8Za1lHdJVGu700hu18UxOEwp1Ka1o4NQ=; b=Sh5yflnAJjShCpgK6CwA7YhHFK
- XfM9Z4miM+OmxaOjiVvvdy2hgi3O6Kca/uO0+aRVoIbXKcHbs1uhbdV2xW8GjTCOUcV+8zLGwGDOS
- 4OmliSEL7b2zjhVHHancYcNTyvUOkcYNoT96grMnhZudJZiLX5QV/roZ8JSfe03xF+ow=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ ;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:References:Cc:To:From:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=7KSU53Ki2LBv6z7JFRDdcRHIpAh3oK7vx5DEadJypWk=; b=VKP7HqdPV6Ioz5VkofyOQDC+m6
+ vF3p0kNhKnio2UrwdhAt/Jpk0OWYK26VemSa8ET2auyIgfuft0R3mRynGXH/cyK681A/jFax9VaBP
+ MunQd6/vfdiSmDhoCTuFDEgcYjagN9yHyQc37W90S78rM9cqAoCLrerCqVoFH+/jn54E=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1u3eNK-0008J0-Aj for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 12 Apr 2025 17:10:53 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id D83A95C567A;
- Sat, 12 Apr 2025 17:08:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A40DC4CEE3;
- Sat, 12 Apr 2025 17:10:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744477827;
- bh=qu1jYqemipsgVrkeM5Kv7xBfdBLk6/OQaJqZ6aUbcQg=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=LiIR8Qq2Enl14WL2Qd0xLUiqDSgvDoqaw/OJR/S+w6rEnPggdDZU62dKHM9OjkeFI
- +c+tiayjgrQ9BJgBSCICMsJOzk7RroN/w/3Ab9JHpf4UNhMv4FwmtVnhEXi+1SG9Eg
- sAigrS3NvyhHTq8HyNL+drkS/aIPX68P7VTiUyQsSIZDzJCR4ww8+/aU/2Bltw07j3
- WR7A/E7+3jJCSR1+Xr6HAjYhOeFcZs6/lt570A0AeIGZtT5Rjokt3vJdrS7Qpr3xRw
- 2ECGFfQ60A9zFkPhg+M1nGb/Bs3UTDt/JHXVmfH0CGMrDwPEiYsfhzDpXaBybi0R8n
- VQWVv2e7r6OIw==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
- by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 70C20380CED9; Sat, 12 Apr 2025 17:11:06 +0000 (UTC)
+ id 1u3eUJ-0000q5-N2 for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 12 Apr 2025 17:18:07 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1744478265;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7KSU53Ki2LBv6z7JFRDdcRHIpAh3oK7vx5DEadJypWk=;
+ b=GXx3+a3GRFM5kPH8Y7HppvL9eQTdGO/VErZI87Pzf/PQxVzk19Liv68WMISfxBNmMEQUbI
+ OlzCfruWjmqNOq/jZO6PCgYC+DQepCnFDuarzeS7pi5SsoTJiaXrUMx0dhbZ/ETRe9znxU
+ BDxAcJsN/nsZRizxzbbNpXHJ56hV2Hs=
+Received: from mail-io1-f71.google.com (mail-io1-f71.google.com
+ [209.85.166.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-460-jPBg0-m4P46XPNoCr_8iLQ-1; Sat, 12 Apr 2025 13:17:43 -0400
+X-MC-Unique: jPBg0-m4P46XPNoCr_8iLQ-1
+X-Mimecast-MFC-AGG-ID: jPBg0-m4P46XPNoCr_8iLQ_1744478262
+Received: by mail-io1-f71.google.com with SMTP id
+ ca18e2360f4ac-85b4ee2e69bso317888839f.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sat, 12 Apr 2025 10:17:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744478262; x=1745083062;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7KSU53Ki2LBv6z7JFRDdcRHIpAh3oK7vx5DEadJypWk=;
+ b=HI7qOrTmK9aoKB1HfUPowYgiZHuHdn/DRT3zU3ipOFcVzmlnMXyw8mpuoJ5PRvWDlQ
+ WQfNPqW3OmoANa4D2edGAugRUIpy5fhEE8YGCRpjVQHYVv04zKkJEbcjQwSyNq2+50gn
+ 7xLEX4cFmJOrhnmp4d39IsLsrUmKmwcIPgZsCp9LcY+wk/tbh7EKy7Gs/INSHMBseK2A
+ H41ilZXsCf47AzH+Wpx1ErsEo7tc9RlkQiRdIn2W96dn14HYp/3pYv0EipXG/RFO/5gS
+ euOrcsZi4znPFMMLo2FQe/cANAKuggD4ExS+cHTD2/SnJTG11eDzndBK/mgT/NWXza3J
+ 0exQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV+f2jTfzlXh171UOtt9sQm+7vMU4n73HLVtPu6VF48rhrb6aFPFsHh5FjjrxCJ+dtvPdtgPh4/ROPknj3zieSG@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YwM7yTJzfwmmygLPDKHL5PR41ZpQZgY2/xMMWm8wj/Mfdl9qGok
+ Xnhkduwf/Pbyujr2tNyAZI+qk9mKeo9dnEzh5M8IiU2zfwL2cXTPbsKV5Ws2qhsfHil+/t0td+p
+ V+OOCLXpYp0Ow2lczpnAhRkUT7VqoN8RjaFCBHE9uOHX2Zg2Qltbb81GgdqzZcTjQfLfRFIDmnC
+ E=
+X-Gm-Gg: ASbGncswcAu58GgdERA4GAsyZaPr5T9ik8QNTYKmrEfVMIBhFCcCdlBmLW7j7QSYxGm
+ b/TE9Cw5SRagv9exJALHVLmGIsV5Wi8B6jwKXE51HScGrvkJn8+9FjrK2l8tHcm1LYhrbHzoJPM
+ FIVfc8WiRLHNyv5NhJZitvafmR+nfoGIpOb1sr4ATrFHx9G3AFLXx3E3PIuXRI6QUDemWFlPoPm
+ ssKAntvXom+V7Q+THei6XkS7+47LRxxv39xfQECmBFjXjRx04YYi9kcN0Y=
+X-Received: by 2002:a05:6602:6a88:b0:861:6f48:5da5 with SMTP id
+ ca18e2360f4ac-8617cb323eemr925071639f.4.1744478262081; 
+ Sat, 12 Apr 2025 10:17:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFYm2jjwrX5i5SyWQgLLg0LBt22NgwKdGZhibF1rh/clcy+LhxQZJdnZpObMYfqXucvOrMuoA==
+X-Received: by 2002:a05:6602:6a88:b0:861:6f48:5da5 with SMTP id
+ ca18e2360f4ac-8617cb323eemr925069439f.4.1744478261599; 
+ Sat, 12 Apr 2025 10:17:41 -0700 (PDT)
+Received: from [172.19.0.161] ([99.196.129.205])
+ by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-86165428d82sm145178439f.20.2025.04.12.10.17.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 12 Apr 2025 10:17:40 -0700 (PDT)
+Message-ID: <6527ce81-e2c7-42fd-a39f-93380e133367@redhat.com>
+Date: Sat, 12 Apr 2025 19:17:30 +0200
 MIME-Version: 1.0
-Message-Id: <174447786527.711489.2899173657997269764.git-patchwork-notify@kernel.org>
-Date: Sat, 12 Apr 2025 17:11:05 +0000
-References: <20250408122208.2297777-1-chao@kernel.org>
-In-Reply-To: <20250408122208.2297777-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
-X-Spam-Score: -5.5 (-----)
+User-Agent: Mozilla Thunderbird
+To: Chao Yu <chao@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+References: <20250303172127.298602-1-sandeen@redhat.com>
+ <79090775-413e-437e-ab07-ac6965932a32@redhat.com>
+ <c2d62ced-3a4f-442c-b438-043eec017a45@kernel.org>
+ <63ecf5bc-7ddf-4d66-9e64-9d5923d12fcd@redhat.com>
+In-Reply-To: <63ecf5bc-7ddf-4d66-9e64-9d5923d12fcd@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: FLivGfXXHqAcSt0pQ2KRfYEWtdvTl3Ioh-Rg1uy1iaU_1744478262
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 8 Apr 2025 20:22:08 +0800 you wrote:
- > syzbot reported a f2fs bug as below: > > [ cut here ] > kernel BUG at
- fs/f2fs/f2fs.h:2521!
- > RIP: 0010:dec_valid_block_count+0x3b [...] 
- Content analysis details:   (-5.5 points, 6.0 required)
+ Content preview:  On 4/1/25 3:33 PM, Eric Sandeen wrote: > On 3/31/25 3:31 AM, 
+ Chao Yu wrote: >> On 3/29/25 12:18, Eric Sandeen wrote: >>> I was working
+ on next steps for this, and I have a followup question. >>> >>> T [...] 
+ Content analysis details:   (-0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [170.10.133.124 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [139.178.84.217 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [139.178.84.217 listed in sa-trusted.bondedsender.org]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ [170.10.133.124 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [170.10.133.124 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [170.10.133.124 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1u3eNK-0008J0-Aj
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to do sanity check on
- sbi->total_valid_block_count
+X-Headers-End: 1u3eUJ-0000q5-N2
+Subject: Re: [f2fs-dev] [PATCH 0/9] f2fs: first steps towards mount API
+ conversion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,60 +158,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: patchwork-bot+f2fs--- via Linux-f2fs-devel
+From: Eric Sandeen via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, syzbot+8b376a77b2f364097fbe@syzkaller.appspotmail.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Reply-To: Eric Sandeen <sandeen@redhat.com>
+Cc: jaegeuk@kernel.org, lihongbo22@huawei.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello:
-
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
-
-On Tue,  8 Apr 2025 20:22:08 +0800 you wrote:
-> syzbot reported a f2fs bug as below:
+On 4/1/25 3:33 PM, Eric Sandeen wrote:
+> On 3/31/25 3:31 AM, Chao Yu wrote:
+>> On 3/29/25 12:18, Eric Sandeen wrote:
+>>> I was working on next steps for this, and I have a followup question.
+>>>
+>>> Today, several mount options are simply ignored if the on-disk format
+>>> does not support them. For example:
+>>>
+>>>                 case Opt_compress_mode:
+>>>                         if (!f2fs_sb_has_compression(sbi)) {
+>>>                                 f2fs_info(sbi, "Image doesn't support compression");
+>>>                                 break;
+>>>                         }
+>>>                         name = match_strdup(&args[0]);
+>>>                         if (!name)
+>>>                                 return -ENOMEM;
+>>>                         if (!strcmp(name, "fs")) {
+>>>                                 F2FS_OPTION(sbi).compress_mode = COMPR_MODE_FS;
+>>>                         } else if (!strcmp(name, "user")) {
+>>>                                 F2FS_OPTION(sbi).compress_mode = COMPR_MODE_USER;
+>>>                         } else {
+>>>                                 kfree(name);
+>>>                                 return -EINVAL;
+>>>                         }
+>>>                         kfree(name);
+>>>                         break;
+>>>
+>>> so if f2fs_sb_has_compression() is not true, then the option is ignored without
+>>> any validation.
+>>>
+>>> in other words, "mount -o compress_mode=nope ..." will succeed if the feature
+>>> is disabled on the filesystem.
+>>>
+>>> If I move the f2fs_sb_has_compression() check to later for the new mount API,
+>>> then "mount -o compress_mode=nope ..."  will start failing for all images. Is
+>>> this acceptable? It seems wise to reject invalid options rather than ignore them,
+>>> even if they are incompatible with the format, but this would be a behavior
+>>> change.
+>>
+>> I'm fine w/ this change. IIRC, I haven't saw above use case, otherwise user
+>> should stop passing invalid mount option to f2fs.
 > 
-> ------------[ cut here ]------------
-> kernel BUG at fs/f2fs/f2fs.h:2521!
-> RIP: 0010:dec_valid_block_count+0x3b2/0x3c0 fs/f2fs/f2fs.h:2521
-> Call Trace:
->  f2fs_truncate_data_blocks_range+0xc8c/0x11a0 fs/f2fs/file.c:695
->  truncate_dnode+0x417/0x740 fs/f2fs/node.c:973
->  truncate_nodes+0x3ec/0xf50 fs/f2fs/node.c:1014
->  f2fs_truncate_inode_blocks+0x8e3/0x1370 fs/f2fs/node.c:1197
->  f2fs_do_truncate_blocks+0x840/0x12b0 fs/f2fs/file.c:810
->  f2fs_truncate_blocks+0x10d/0x300 fs/f2fs/file.c:838
->  f2fs_truncate+0x417/0x720 fs/f2fs/file.c:888
->  f2fs_setattr+0xc4f/0x12f0 fs/f2fs/file.c:1112
->  notify_change+0xbca/0xe90 fs/attr.c:552
->  do_truncate+0x222/0x310 fs/open.c:65
->  handle_truncate fs/namei.c:3466 [inline]
->  do_open fs/namei.c:3849 [inline]
->  path_openat+0x2e4f/0x35d0 fs/namei.c:4004
->  do_filp_open+0x284/0x4e0 fs/namei.c:4031
->  do_sys_openat2+0x12b/0x1d0 fs/open.c:1429
->  do_sys_open fs/open.c:1444 [inline]
->  __do_sys_creat fs/open.c:1522 [inline]
->  __se_sys_creat fs/open.c:1516 [inline]
->  __x64_sys_creat+0x124/0x170 fs/open.c:1516
->  do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
->  do_syscall_64+0xf3/0x230 arch/x86/entry/syscall_64.c:94
+> Great, I will proceed with this. It will make the conversion simpler (but may
+> make testing/validation more difficult, as behavior will change with invalid input).
+
+FYI - I don't think I will be able to complete this conversion task myself - f2fs is
+by far the most difficult conversion I've encountered, and my time for these sorts of
+projects is sadly limited. I do have one more patch series that moves a lot of the
+on-disk feature checking out of option parsing, and perhaps I will send it as an example
+at least.
+
+But I think it may be time to ask the f2fs experts to take over this effort, because
+I'm just not getting through it on my own.
+
+(We are down to only a small handful of filesystems left - in fact, I think only
+bfs, 9p, and f2fs, that don't have patches anywhere. So it would be really great to
+get some help on this.)
+
+Thanks,
+-Eric
+ 
+> -Eric
 > 
-> [...]
-
-Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to do sanity check on sbi->total_valid_block_count
-    https://git.kernel.org/jaegeuk/f2fs/c/05872a167c2c
-
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+>> Thanks,
 
 
 
