@@ -2,61 +2,62 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4171A897F0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Apr 2025 11:28:26 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0AF3A89819
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Apr 2025 11:39:06 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u4caW-0001nn-DO;
-	Tue, 15 Apr 2025 09:28:16 +0000
+	id 1u4ckv-0003h6-2v;
+	Tue, 15 Apr 2025 09:39:01 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1u4caQ-0001nc-DL
+ (envelope-from <chao@kernel.org>) id 1u4ckt-0003gy-Lv
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Apr 2025 09:28:10 +0000
+ Tue, 15 Apr 2025 09:39:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eFLyGN2CDA0UyOXA0we00MIBY1+pSIdc2Y5D7dwItHc=; b=TU95nKaj4VJxAhtVp8KNn1eeXb
- PYbiEqOrYgXWJ6NnP8bQPbAPJ8nnorJe+7k/3tdrwfbvu8Cql8xTphi56criFRZGWMOhFcfw5mP/q
- Bipu4NMGyVm883vdK23uazXcobkN7qgL1PJ6dVsX7WrCVvn5cZp2c+BNwKitgE4rEafc=;
+ bh=rtUbW2Mj2oCiUx2EPqVVRtZxZSm8qN6GHmAm/xIGtjk=; b=G0A/LP6RdTkRGs4uvxvn8XCwsV
+ BWksj3VRV7dzrYHsVX4mdVjdfb/AL1RlFmPAOaUDO8Bi+HKuUOL4f4CCgD/jkSdvO0b5twvDlUKu9
+ wofLdELOvWUr80+95MaxBD0pxINUZWpb9adWhVGNvDhNtqgGrgr2ktj/eaYFf6vWcZe8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=eFLyGN2CDA0UyOXA0we00MIBY1+pSIdc2Y5D7dwItHc=; b=h
- B78ppY6eUwMASMjLHnBRdgBdArvKgmZBAl+yaF/qTtIiKJWYrZTSrTxnvNjPqJDePFFeu5JGdzl03
- 3z23xwozyMaUSy4mKj+rHqc0Fdv8J17eUtOVtt2HKHGTmRKS+mxrrhGwcTpE56p1z8OGk/4/kmqiN
- wzukRDcSG+KWfldg=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ List-Owner:List-Archive; bh=rtUbW2Mj2oCiUx2EPqVVRtZxZSm8qN6GHmAm/xIGtjk=; b=f
+ KEmQUZRWSipJ6ZC/uX1hSMu8p/YOL9Jbdl/1kgRmZKCatAg29iMmcYayOrebJX2Dsk06uTIh4JS93
+ bR4Srpr15btaBQ1PyGQiHmvBDNY+aA0+y+Ykes9JxMVZPTY6gzAHHQBnshcwMpl4HoAIUuYAeHGm7
+ KLVW88wSrhn9D970=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1u4caA-0004Dp-Fh for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Apr 2025 09:28:10 +0000
+ id 1u4cke-0004nw-8v for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 15 Apr 2025 09:39:00 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id E785A4A38B;
- Tue, 15 Apr 2025 09:27:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF281C4CEDD;
- Tue, 15 Apr 2025 09:27:47 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 0B8EB6115F;
+ Tue, 15 Apr 2025 09:38:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC2F0C4CEDD;
+ Tue, 15 Apr 2025 09:38:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744709268;
- bh=5nV170JnOuuSF775PkK6gAX3Veu5L3jZc8xTlyApEzE=;
+ s=k20201202; t=1744709913;
+ bh=u0EytPYWMSeIqaz6DAmJzDvepXrVjSRMwN12Ddna4Ys=;
  h=From:To:Cc:Subject:Date:From;
- b=RAcVcz8J1EIprHJWjz/2SGxQHIDgr4FqwFpnvkP5hSnRNK2SLMvkD+AFF+RO+0012
- 0/o+mAs7nC6EE15erEvB13hkaEZAxMYLvQWQMzytGWvIqBArfOyMZ+dlOWAAH6PrgT
- mibBfqK4hk3kGnBerUlBPCdWwofA7NxHhMwo26xixo+sNEQEcmTfZ/8PwaYjHTqAM5
- AaVD+3YubaX5AwTKNYAA5Oy2Eumeyfo9C59nENBPum34rfOmbGRTLHlVPOLcbT9Cns
- Uc0arltmNWwwEczyMQAAmn2D6qyY9SiiUYZp3uyede9/QbPsmnLoqAIQqDOwvmA1vK
- p0Z0plNA0wpBA==
-To: jaegeuk@kernel.org
-Date: Tue, 15 Apr 2025 17:27:40 +0800
-Message-ID: <20250415092740.1096360-1-chao@kernel.org>
+ b=iDeDXkAtZ22AmwKMg1lzAiIVoSgjhgDm2WwARAZahJ+d2vFOQscrHu5kZBHJbN2Zj
+ lJi4TZoEH5TUmS7VWb3XJonCZaZJbolVV1bjLmKPQEcEW/mLptlK5M+ABHc2QA1B8k
+ 5ra5RMeayJ55GMpZAEiLop54cC+hAM4yE2/uUouua7pydGM6xy5gIkWEOdQpfen12V
+ IkHn+CsaDXACfqL3q6T+oy6ep2LdsTRLbFT7iXv/0BTxR2ck4Sh41guDEBDwPX/xc8
+ PrKIFYA8S/phEx5stCQN4gDD02dQ+GzWCviMMSKxDu1ye2OnHCssK6qtouPHI41urE
+ c7zJj+XwxChUA==
+To: Zorro Lang <zlang@kernel.org>,
+	fstests@vger.kernel.org
+Date: Tue, 15 Apr 2025 17:38:22 +0800
+Message-ID: <20250415093822.1100476-1-chao@kernel.org>
 X-Mailer: git-send-email 2.49.0.604.gff1f9ca942-goog
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
@@ -66,11 +67,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Support a new option --nolinear-lookup=X for fsck.f2fs to
- tune linear lookup fallback conditionally, X=1: disable linear lookup, X=0:
- enable linear lookup. This can help to 1) add a regression testcase to check
- kernel whether linear lookup fallback has fixed unicode red heart lookup
- issue, 2) once unicode bug has been fixed, we can use this option to dis [...]
+ Content preview:  As Han Qi reported in bugzilla [1],
+ commit 5c26d2f1d3f5 ("unicode:
+ Don't special case ignorable code points") changes logic to handle ignorable
+ code points, when we handle filename which has special u [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -78,12 +78,12 @@ X-Spam-Report: Spam detection software,
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.234.252.31 listed in bl.score.senderscore.com]
+ [172.105.4.254 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.234.252.31 listed in sa-accredit.habeas.com]
+ [172.105.4.254 listed in sa-accredit.habeas.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -94,9 +94,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1u4caA-0004Dp-Fh
-Subject: [f2fs-dev] [PATCH v3] fsck.f2fs: support to tune linear lookup
- feature
+X-Headers-End: 1u4cke-0004nw-8v
+Subject: [f2fs-dev] [PATCH v2] f2fs/012: test red heart lookup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,207 +109,93 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Support a new option --nolinear-lookup=X for fsck.f2fs to tune
-linear lookup fallback conditionally, X=1: disable linear lookup,
-X=0: enable linear lookup.
-
-This can help to 1) add a regression testcase to check kernel
-whether linear lookup fallback has fixed unicode red heart lookup
-issue, 2) once unicode bug has been fixed, we can use this option
-to disable linear lookup for performance recovery.
-
-Cc: Daniel Lee <chullee@google.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-v3:
-- since c.nolinear_lookup is zero by default, even we do not specify
---nolinear-lookup=X option, it will try to enable linear_lookup during
-fsck. Let's add enum to indicate status of c.nolinear_lookup option,
-by default set c.nolinear_lookup to LINEAR_LOOKUP_DEFAULT.
-LINEAR_LOOKUP_DEFAULT:	not to tune linear_lookup feature
-LINEAR_LOOKUP_ENABLE:	enable linear_lookup feature
-LINEAR_LOOKUP_DISABLE:	disable linear_lookup feature
- fsck/fsck.c       | 30 +++++++++++++++++++++++++++++-
- fsck/fsck.h       |  1 +
- fsck/main.c       | 10 ++++++++++
- include/f2fs_fs.h | 15 +++++++++++++--
- man/fsck.f2fs.8   |  3 +++
- 5 files changed, 56 insertions(+), 3 deletions(-)
-
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 8155cbd..73fcf07 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -2357,6 +2357,34 @@ int fsck_chk_quota_files(struct f2fs_sb_info *sbi)
- 	return ret;
- }
- 
-+void fsck_update_sb_flags(struct f2fs_sb_info *sbi)
-+{
-+	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
-+	u16 flags = get_sb(s_encoding_flags);
-+
-+	if (c.nolinear_lookup == LINEAR_LOOKUP_DISABLE) {
-+		if (!(flags & F2FS_ENC_NO_COMPAT_FALLBACK_FL)) {
-+			flags |= F2FS_ENC_NO_COMPAT_FALLBACK_FL;
-+			set_sb(s_encoding_flags, flags);
-+			c.fix_on = 1;
-+			c.invalid_sb |= SB_ENCODE_FLAG;
-+			INFO_MSG("Casefold: disable linear lookup\n");
-+		}
-+	} else if (c.nolinear_lookup == LINEAR_LOOKUP_ENABLE) {
-+		if (flags & F2FS_ENC_NO_COMPAT_FALLBACK_FL) {
-+			flags &= ~F2FS_ENC_NO_COMPAT_FALLBACK_FL;
-+			set_sb(s_encoding_flags, flags);
-+			c.fix_on = 1;
-+			c.invalid_sb |= SB_ENCODE_FLAG;
-+			INFO_MSG("Casefold: enable linear lookup\n");
-+		}
-+	} else {
-+		INFO_MSG("Casefold: linear_lookup [%s]\n",
-+			get_sb(s_encoding_flags) & F2FS_ENC_NO_COMPAT_FALLBACK_FL ?
-+			"disable" : "enable");
-+	}
-+}
-+
- int fsck_chk_meta(struct f2fs_sb_info *sbi)
- {
- 	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
-@@ -3770,7 +3798,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
- 		if (c.invalid_sb & SB_FS_ERRORS)
- 			memset(sb->s_errors, 0, MAX_F2FS_ERRORS);
- 
--		if (c.invalid_sb & SB_NEED_FIX)
-+		if (c.invalid_sb & (SB_NEED_FIX | SB_ENCODE_FLAG))
- 			update_superblock(sb, SB_MASK_ALL);
- 
- 		/* to return FSCK_ERROR_CORRECTED */
-diff --git a/fsck/fsck.h b/fsck/fsck.h
-index b581d3e..40cb6d9 100644
---- a/fsck/fsck.h
-+++ b/fsck/fsck.h
-@@ -188,6 +188,7 @@ extern int fsck_chk_dentry_blk(struct f2fs_sb_info *, int,
- int fsck_chk_inline_dentries(struct f2fs_sb_info *, struct f2fs_node *,
- 		struct child_info *);
- void fsck_chk_checkpoint(struct f2fs_sb_info *sbi);
-+void fsck_update_sb_flags(struct f2fs_sb_info *sbi);
- int fsck_chk_meta(struct f2fs_sb_info *sbi);
- void fsck_chk_and_fix_write_pointers(struct f2fs_sb_info *);
- int fsck_chk_curseg_info(struct f2fs_sb_info *);
-diff --git a/fsck/main.c b/fsck/main.c
-index 47ba6c9..b33ff26 100644
---- a/fsck/main.c
-+++ b/fsck/main.c
-@@ -91,6 +91,7 @@ void fsck_usage()
- 	MSG(0, "  --no-kernel-check skips detecting kernel change\n");
- 	MSG(0, "  --kernel-check checks kernel change\n");
- 	MSG(0, "  --debug-cache to debug cache when -c is used\n");
-+	MSG(0, "  --nolinear-lookup=X X=1: disable linear lookup, X=0: enable linear lookup\n");
- 	exit(1);
- }
- 
-@@ -263,6 +264,7 @@ void f2fs_parse_options(int argc, char *argv[])
- 			{"no-kernel-check", no_argument, 0, 2},
- 			{"kernel-check", no_argument, 0, 3},
- 			{"debug-cache", no_argument, 0, 4},
-+			{"nolinear-lookup", required_argument, 0, 5},
- 			{0, 0, 0, 0}
- 		};
- 
-@@ -287,6 +289,12 @@ void f2fs_parse_options(int argc, char *argv[])
- 			case 4:
- 				c.cache_config.dbg_en = true;
- 				break;
-+			case 5:
-+				if (!optarg || !strcmp(optarg, "0"))
-+					c.nolinear_lookup = LINEAR_LOOKUP_ENABLE;
-+				else
-+					c.nolinear_lookup = LINEAR_LOOKUP_DISABLE;
-+				break;
- 			case 'a':
- 				c.auto_fix = 1;
- 				MSG(0, "Info: Automatic fix mode enabled.\n");
-@@ -990,6 +998,8 @@ static int do_fsck(struct f2fs_sb_info *sbi)
- 			F2FS_FT_DIR, TYPE_INODE, &blk_cnt, &cbc, &child);
- 	fsck_chk_quota_files(sbi);
- 
-+	fsck_update_sb_flags(sbi);
-+
- 	ret = fsck_verify(sbi);
- 	fsck_free(sbi);
- 
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index f206994..b4114a5 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -682,7 +682,8 @@ enum {
- #define IS_DEVICE_ALIASING(fi)	((fi)->i_flags & cpu_to_le32(F2FS_DEVICE_ALIAS_FL))
- 
- #define F2FS_ENC_UTF8_12_1	1
--#define F2FS_ENC_STRICT_MODE_FL	(1 << 0)
-+#define F2FS_ENC_STRICT_MODE_FL		(1 << 0)
-+#define F2FS_ENC_NO_COMPAT_FALLBACK_FL	(1 << 1)
- 
- /* This flag is used by node and meta inodes, and by recovery */
- #define GFP_F2FS_ZERO	(GFP_NOFS | __GFP_ZERO)
-@@ -1467,7 +1468,9 @@ enum {
- #define SB_ABNORMAL_STOP	0x2	/* s_stop_reason is set except shutdown */
- #define SB_FS_ERRORS		0x4	/* s_erros is set */
- #define SB_INVALID		0x8	/* sb is invalid */
--#define SB_NEED_FIX (SB_ABNORMAL_STOP | SB_FS_ERRORS | SB_INVALID)
-+#define SB_ENCODE_FLAG		0x16	/* encode_flag */
-+#define SB_NEED_FIX		(SB_ABNORMAL_STOP | SB_FS_ERRORS |	\
-+				SB_INVALID | SB_ENCODE_FLAG)
- 
- #define MAX_CACHE_SUMS			8
- 
-@@ -1476,6 +1479,13 @@ enum {
- 	F2FS_FEATURE_NAT_BITS = 0x0001,
- };
- 
-+/* nolinear lookup tune */
-+enum {
-+	LINEAR_LOOKUP_DEFAULT = 0,
-+	LINEAR_LOOKUP_ENABLE,
-+	LINEAR_LOOKUP_DISABLE,
-+};
-+
- struct f2fs_configuration {
- 	uint32_t conf_reserved_sections;
- 	uint32_t reserved_segments;
-@@ -1541,6 +1551,7 @@ struct f2fs_configuration {
- 	int preserve_limits;		/* preserve quota limits */
- 	int large_nat_bitmap;
- 	int fix_chksum;			/* fix old cp.chksum position */
-+	int nolinear_lookup;		/* disable linear lookup */
- 	unsigned int feature;			/* defined features */
- 	unsigned int disabled_feature;	/* disabled feature, used for Android only */
- 	unsigned int quota_bits;	/* quota bits */
-diff --git a/man/fsck.f2fs.8 b/man/fsck.f2fs.8
-index e39a846..606e288 100644
---- a/man/fsck.f2fs.8
-+++ b/man/fsck.f2fs.8
-@@ -67,6 +67,9 @@ Enable to show every directory entries in the partition.
- Specify the level of debugging options.
- The default number is 0, which shows basic debugging messages.
- .TP
-+.BI \--nolinear-lookup
-+Tune linear lookup fallback, must specify an argument, 0: enable linear lookup, 1: disable linear lookup.
-+.TP
- .SH AUTHOR
- Initial checking code was written by Byoung Geun Kim <bgbg.kim@samsung.com>.
- Jaegeuk Kim <jaegeuk@kernel.org> reworked most parts of the codes to support
--- 
-2.49.0
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+QXMgSGFuIFFpIHJlcG9ydGVkIGluIGJ1Z3ppbGxhIFsxXSwgY29tbWl0IDVjMjZkMmYxZDNmNSAo
+InVuaWNvZGU6IERvbid0CnNwZWNpYWwgY2FzZSBpZ25vcmFibGUgY29kZSBwb2ludHMiKSBjaGFu
+Z2VzIGxvZ2ljIHRvIGhhbmRsZSBpZ25vcmFibGUKY29kZSBwb2ludHMsIHdoZW4gd2UgaGFuZGxl
+IGZpbGVuYW1lIHdoaWNoIGhhcyBzcGVjaWFsIHVuaWNvZGUgY2hhcmFjdG9yCmxpa2UgcmVkIGhl
+YXJ0IOKdpO+4jywgdXRmOF9jYXNlZm9sZCgpIG1heSByZXR1cm4gZGlmZmVyZW50IGxlbmd0aCB0
+aGFuIGluIHRoZQpwYXN0LCByZXN1bHQgaW4gdGhhdCBmMmZzIGNhY2x1YXRlcyBoYXNoIGNvZGUg
+aW5jb3JyZWNsdHksIGV2ZW50dWFsbHksCmZpbGVuYW1lIHcvIHNwZWNpYWwgdW5pY29kZSBjaGFy
+YWN0b3Igd2lsbCBub3QgYmUgZm91bmQgdy8gdGhlIHdyb25nIGhhc2gKY29kZS4KCmYyZnMgaGFz
+IGludHJvZHVjZXMgYSBsaW5lYXIgbG9va3VwIGZhbGxiYWNrIHcvIGNvbW1pdCA5MWI1ODdiYTc5
+ZTEKKCJmMmZzOiBJbnRyb2R1Y2UgbGluZWFyIHNlYXJjaCBmb3IgZGVudHJpZXMiKSwgb25jZSBo
+YXNoLWJhc2VkIGxvb2t1cApmYWlscywgaXQgdHJpZXMgbGluZWFyIGxvb2t1cCBhcyBhIGZhbGxi
+YWNrLgoKVGhpcyBwYXRjaCBjYW4gaGVscCB0byBjaGVjayB3aGV0aGVyIGxpbmVhciBsb29rdXAg
+ZmFsbGJhY2sgd29ya3Mgd2VsbApvciBub3QuCgpGaXJzdGx5LCB3ZSB1c2UgYmVsb3cgdGVzdGNh
+c2UgdG8gY2hlY2sgaG93IGhhc2ggY29kZSBjaGFuZ2VzOgoKbWtmcy5mMmZzIC1mIC1PIGNhc2Vm
+b2xkIC1DIHV0ZjggL2Rldi92ZGEKbW91bnQgL2Rldi92ZGEgL21udC9mMmZzCm1rZGlyIC9tbnQv
+ZjJmcy9kaXIvCmYyZnNfaW8gc2V0ZmxhZ3MgY2FzZWZvbGQgL21udC9mMmZzL2Rpcgp0b3VjaCAv
+bW50L2YyZnMvZGlyLyQnXHUyNzY0XHVmZTBmJwp1bW91bnQgL21udC9mMmZzCmR1bXAuZjJmcyAt
+aSA0IC1kIDMgL2Rldi92ZGEKZHVtcC5mMmZzIC1iICRibGthZGRyX29mX2RpciAtZCAzIC9kZXYv
+dmRhCgp3L28gKCJ1bmljb2RlOiBEb24ndCBzcGVjaWFsIGNhc2UgaWdub3JhYmxlIGNvZGUgcG9p
+bnRzIikKW2R1bXBfZGlyZW50OiA5OTFdIGJpdG1hcCBwb3NbMHgyXSBuYW1lW+KdpO+4j10gbGVu
+WzB4Nl0gaGFzaFsweDE5ZGQ3MTMyXSBpbm9bMHg1XSB0eXBlWzB4MV0KW2R1bXBfZGlyZW50OiA5
+OThdIG5hbWUoaGV4KVsweGUyIDB4OWQgMHhhNCAweGVmIDB4YjggMHg4ZiAweDBdCgp3LyAoInVu
+aWNvZGU6IERvbid0IHNwZWNpYWwgY2FzZSBpZ25vcmFibGUgY29kZSBwb2ludHMiKQpbZHVtcF9k
+aXJlbnQ6IDk5MV0gYml0bWFwIHBvc1sweDJdIG5hbWVb4p2k77iPXSBsZW5bMHg2XSBoYXNoWzB4
+OWEyZWEwNjhdIGlub1sweDVdIHR5cGVbMHgxXQpbZHVtcF9kaXJlbnQ6IDk5OF0gbmFtZShoZXgp
+WzB4ZTIgMHg5ZCAweGE0IDB4ZWYgMHhiOCAweDhmIDB4MF0KCkNvcnJlY3QgaGFzaCBjb2RlOgkw
+eDE5ZGQ3MTMyCldyb25nIGhhc2ggY29kZToJMHg5YTJlYTA2OAoKU28sIHdlIGNhbiB0ZXN0IGFz
+IGJlbG93OgoKMS4gY3JlYXRlIGZpbGUgdy8gcmVkIGhlYXJ0IGFzIGl0cyBmaWxlbmFtZQoyLiBp
+bmplY3Qgd3JvbmcgaGFzaCBjb2RlIHRvIHRoZSBmaWxlCjMuIGRpc2FibGUgbGluZWFyIGxvb2t1
+cCwgZXhwZWN0IGxvb2t1cCBmYWlsdXJlCjQuIGVuYWJsZSBsaW5lYXIgbG9va3VwLCBleHBlY3Qg
+bG9va3VwIHN1Y2NlZWQKClsxXSBodHRwczovL2J1Z3ppbGxhLmtlcm5lbC5vcmcvc2hvd19idWcu
+Y2dpP2lkPTIxOTU4NgoKQ2M6IEphZWdldWsgS2ltIDxqYWVnZXVrQGtlcm5lbC5vcmc+CkNjOiBE
+YW5pZWwgTGVlIDxjaHVsbGVlQGdvb2dsZS5jb20+ClNpZ25lZC1vZmYtYnk6IENoYW8gWXUgPGNo
+YW9Aa2VybmVsLm9yZz4KLS0tCnYyOgotIHR1bmUgbGluZWFyX2xvb2t1cCBmZWF0dXJlIGJlZm9y
+ZSBmYXVsdCBpbmplY3Rpb24KLSBjaGVjayBzdGF0dXMgYWZ0ZXIgdHVuaW5nIGxpbmVhcl9sb29r
+dXAgZmVhdHVyZQotIGNsZWFuIHVwIGNvZGVzCiB0ZXN0cy9mMmZzLzAxMiAgICAgfCA3MyArKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCiB0ZXN0cy9mMmZzLzAx
+Mi5vdXQgfCAgMiArKwogMiBmaWxlcyBjaGFuZ2VkLCA3NSBpbnNlcnRpb25zKCspCiBjcmVhdGUg
+bW9kZSAxMDA3NTUgdGVzdHMvZjJmcy8wMTIKIGNyZWF0ZSBtb2RlIDEwMDY0NCB0ZXN0cy9mMmZz
+LzAxMi5vdXQKCmRpZmYgLS1naXQgYS90ZXN0cy9mMmZzLzAxMiBiL3Rlc3RzL2YyZnMvMDEyCm5l
+dyBmaWxlIG1vZGUgMTAwNzU1CmluZGV4IDAwMDAwMDAwLi4zOGE2M2YyZQotLS0gL2Rldi9udWxs
+CisrKyBiL3Rlc3RzL2YyZnMvMDEyCkBAIC0wLDAgKzEsNzMgQEAKKyMhIC9iaW4vYmFzaAorIyBT
+UERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMAorIyBDb3B5cmlnaHQgKGMpIDIwMjUgQ2hh
+byBZdS4gIEFsbCBSaWdodHMgUmVzZXJ2ZWQuCisjCisjIEZTIFFBIFRlc3QgTm8uIGYyZnMvMDEy
+CisjCisjIFRoaXMgdGVzdGNhc2UgY2hlY2tzIHdoZXRoZXIgbGluZWFyIGxvb2t1cCBmYWxsYmFj
+ayB3b3JrcyB3ZWxsCisjIG9yIG5vdCBhcyBiZWxvdzoKKyMgMS5jcmVhdGUgZmlsZSB3LyByZWQg
+aGVhcnQgYXMgaXRzIGZpbGVuYW1lCisjIDIuaW5qZWN0IHdyb25nIGhhc2ggY29kZSB0byB0aGUg
+ZmlsZQorIyAzLmRpc2FibGUgbGluZWFyIGxvb2t1cCwgZXhwZWN0IGxvb2t1cCBmYWlsdXJlCisj
+IDQuZW5hYmxlIGxpbmVhciBsb29rdXAsIGV4cGVjdCBsb29rdXAgc3VjY2VlZAorIworLiAuL2Nv
+bW1vbi9wcmVhbWJsZQorX2JlZ2luX2ZzdGVzdCBhdXRvIHF1aWNrIGNhc2Vmb2xkCisKK19maXhl
+ZF9ieV9rZXJuZWxfY29tbWl0IDkxYjU4N2JhNzllMSBcCisJImYyZnM6IEludHJvZHVjZSBsaW5l
+YXIgc2VhcmNoIGZvciBkZW50cmllcyIKKworZXhwb3J0IExDX0FMTD1DLlVURi04CitfcmVxdWly
+ZV9zY3JhdGNoCitfcmVxdWlyZV9jb21tYW5kICIkRjJGU19JT19QUk9HIiBmMmZzX2lvCitfcmVx
+dWlyZV9jb21tYW5kICIkRjJGU19JTkpFQ1RfUFJPRyIgaW5qZWN0LmYyZnMKKworY2hlY2tfbG9v
+a3VwKCkKK3sKKwlsb2NhbCBub2xpbmVhcl9sb29rdXA9JDEKKwlsb2NhbCBkaXI9JFNDUkFUQ0hf
+TU5UL2RpcgorCSMgcmVkIGhlYXJ0IGNoYXJhY3RvciBpbiB1bmljb2RlIGZvcm1hdAorCWxvY2Fs
+IHJlZGhlYXJ0PSRkaXIvJCdcdTI3NjRcdWZlMGYnCisKKwlfc2NyYXRjaF9ta2ZzIC1PIGNhc2Vm
+b2xkIC1DIHV0ZjggPj4gJHNlcXJlcy5mdWxsCisJX3NjcmF0Y2hfbW91bnQKKworCW1rZGlyICRk
+aXIKKwkkRjJGU19JT19QUk9HIHNldGZsYWdzIGNhc2Vmb2xkICRkaXIgPj4gJHNlcXJlcy5mdWxs
+CisJdG91Y2ggJHJlZGhlYXJ0CisJaW5vPWBzdGF0IC1jICclaScgJHJlZGhlYXJ0YAorCV9zY3Jh
+dGNoX3VubW91bnQKKworCSMgc2hvdWxkIHR1bmUgbm9saW5lYXJfbG9va3VwIGZlYXR1cmUgYmVm
+b3JlIGZhdWx0IGluamVjdGlvbgorCSRGMkZTX0ZTQ0tfUFJPRyAtLW5vbGluZWFyLWxvb2t1cD0k
+bm9saW5lYXJfbG9va3VwICRTQ1JBVENIX0RFViA+PiAkc2VxcmVzLmZ1bGwKKworCSMgY2hlY2sg
+d2hldGhlciBsaW5lYXJfbG9va3VwIGlzIGNoYW5nZWQgYXMgZXhwZWN0ZWQKKwlpZiBbICRub2xp
+bmVhcl9sb29rdXAgPT0gIjEiIF07IHRoZW4KKwkJJEYyRlNfRlNDS19QUk9HICRTQ1JBVENIX0RF
+ViB8IGdyZXAgLXEgImxpbmVhcl9sb29rdXAgXFtkaXNhYmxlXF0iIHx8CVwKKwkJCQkJX2ZhaWwg
+ImxpbmVhcl9sb29rdXAgaXMgbm90IGRpc2FibGVkIgorCWVsc2UKKwkJJEYyRlNfRlNDS19QUk9H
+ICRTQ1JBVENIX0RFViB8IGdyZXAgLXEgImxpbmVhcl9sb29rdXAgXFtlbmFibGVcXSIgfHwJXAor
+CQkJCQlfZmFpbCAibGluZWFyX2xvb2t1cCBpcyBub3QgZW5hYmxlZCIKKwlmaQorCisJJEYyRlNf
+SU5KRUNUX1BST0cgLS1kZW50IC0tbWIgZF9oYXNoIC0tbmlkICRpbm8gLS12YWwgMHg5YTJlYTA2
+OCAkU0NSQVRDSF9ERVYgPj4gJHNlcXJlcy5mdWxsCisKKwlfc2NyYXRjaF9tb3VudAorCWlmIFsg
+JG5vbGluZWFyX2xvb2t1cCA9PSAiMSIgXTsgdGhlbgorCQlbIC1mICRyZWRoZWFydCBdICYmIF9m
+YWlsICJyZWQgaGVhcnQgZmlsZSBzaG91bGQgbm90IGV4aXN0IgorCWVsc2UKKwkJWyAtZiAkcmVk
+aGVhcnQgXSB8fCBfZmFpbCAicmVkIGhlYXJ0IGZpbGUgc2hvdWxkIGV4aXN0IgorCWZpCisJX3Nj
+cmF0Y2hfdW5tb3VudAorCisJIyB0byBhdm9pZCBfY2hlY2tfZmlsZXN5c3RlbXMgZmFpbHVyZSBp
+biB0aGUgZW5kIG9mIHRlc3QKKwlfcmVwYWlyX3NjcmF0Y2hfZnMgPj4gJHNlcXJlcy5mdWxsCit9
+CisKK2NoZWNrX2xvb2t1cCAxCitjaGVja19sb29rdXAgMAorCitlY2hvICJTaWxlbmNlIGlzIGdv
+bGRlbiIKKworc3RhdHVzPTAKK2V4aXQKZGlmZiAtLWdpdCBhL3Rlc3RzL2YyZnMvMDEyLm91dCBi
+L3Rlc3RzL2YyZnMvMDEyLm91dApuZXcgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAwMDAwMDAwMC4u
+M2FmZWNhMmYKLS0tIC9kZXYvbnVsbAorKysgYi90ZXN0cy9mMmZzLzAxMi5vdXQKQEAgLTAsMCAr
+MSwyIEBACitRQSBvdXRwdXQgY3JlYXRlZCBieSAwMTIKK1NpbGVuY2UgaXMgZ29sZGVuCi0tIAoy
+LjQ5LjAKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+TGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3Vy
+Y2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8v
+bGludXgtZjJmcy1kZXZlbAo=
