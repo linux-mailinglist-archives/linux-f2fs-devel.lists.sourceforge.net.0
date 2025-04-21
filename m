@@ -2,100 +2,120 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A5FAA953EB
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Apr 2025 18:16:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A00C6A9544E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Apr 2025 18:36:27 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u6tom-0008P9-IZ;
-	Mon, 21 Apr 2025 16:16:25 +0000
+	id 1u6u80-0007ix-Th;
+	Mon, 21 Apr 2025 16:36:17 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1u6tol-0008P2-7w
+ (envelope-from <lkp@intel.com>) id 1u6u7x-0007ia-C6
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Apr 2025 16:16:23 +0000
+ Mon, 21 Apr 2025 16:36:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Sw5joAi4KwYdFB1NLY2WoCDynsGBNXrFFgOHMWvKXgY=; b=HykTqh7t8NVndiXmGjD7vehd84
- 8rE74RdBiDMoaQ1W3PtyofyBYJ0d3XBjE2zEABIc3HjT/PRzuL+U1cQFW0PQQaD3Jm7yFcFh9e8or
- Wzl+pp1qCinxPiDkTjUWVqYWkxPDjITc+8B775VNOY/V5OlPk+h6MAtpXM4bQa3YNOQw=;
+ bh=+xVhiIynlBbUjSvg+sRBr0begU4s2nH1Pst1br8v3RM=; b=VymexYtetHCGBIaa/Aq/ZjaPLH
+ julJIcd6qoxl78qWug6IppOxV4dDRZEaohiYd1a0ONJOhH72HZyI6a7Myj89EbUOUoXMqY2wRz5g1
+ FTgrVp9TfQzL3N9iH4XmGXXeiQwr8tSz1Y3WX9NsWwDxGh0qD353E97cL0U6PaaWK7xE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Sw5joAi4KwYdFB1NLY2WoCDynsGBNXrFFgOHMWvKXgY=; b=N
- OcnMq70ovromT9tpyTeynpB5PSlf+FUqkSEKX94398Ef7b+b2anZUgVgH9HF3nvX4VlQFYfmZTm1s
- 1IVMn4Qc+kGPbbsgN75i9HtADeBQjwvwQkVZhEWcO55uVEooQCuD8rkUyyns4vIofKq6bAGg9D2G9
- OtmQQXE+NvPOcPMY=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+xVhiIynlBbUjSvg+sRBr0begU4s2nH1Pst1br8v3RM=; b=eVXy1Sg6TNv4zEBa6T8trjFClA
+ lhWwpPTRQCO+5PLGPOVk63ovue/OnTwbNShXpfn0pQt00ROZXVRMEYMuPaUtc5F/EwpKMBaikNQ8v
+ SRrTEtbg8PrArWfWXTTi/7CQ8xo+KnSju7oF3w7ZG5KtuSNLaMSNyZlB8y3xAv0J1ENU=;
+Received: from mgamail.intel.com ([192.198.163.7])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1u6toW-00019M-1m for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Apr 2025 16:16:23 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 3EB5FA4BD5E
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 21 Apr 2025 16:10:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE68CC4CEE4;
- Mon, 21 Apr 2025 16:15:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1745252157;
- bh=ijd7Th6XjvQmAHyaLdqyRMKXfm4BvzeeCU8FYlVFV3Y=;
- h=From:To:Cc:Subject:Date:From;
- b=JzCa6VnlwjUwFbMOGGzf1DrSxX06KkJS/Cx/ZwmwfHP5Uw2EuPBO5YLx8EphXQnZg
- 4H3sqo06cEb5XkuI4WZrJe/DHlNiXHsvBKVtiFSB2XoCaynI589j9eao0QdcznIRqG
- zFoVRi0d1v3XAEFGOCRO83FDapfCoxxK2A++0BdaCymXDX0MKbV7OnLaExHRwlv8DC
- UpkkfML7r3T7Du6KKUxqeCwT5peHR7hzsmvXCFJLNgqU1VEAfyGqmR54MyM4XarS4X
- ar+5Wac3IuB5vsDAuKIdS6btwOEyp6XR/9j1vLuWBQqTKUO1YgiF3OCpTb0EadKd35
- ig1Sq8PzljOVw==
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 21 Apr 2025 16:15:55 +0000
-Message-ID: <20250421161555.1630917-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.49.0.805.g082f7c87e0-goog
+ id 1u6u7e-0001wz-Gf for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 21 Apr 2025 16:36:14 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1745253355; x=1776789355;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=BIzR/H1F8de4lehses21qFDRgo7tYE5kewNC7o51Z8s=;
+ b=ILqtitmJrX/OVEc729nwrvJrxUcclld2b/OQT4i4cmflyD/sxZyiHvqO
+ FQqPcniyRCZEcp9v6urajXbdm6uN0U326gZIhAb70fkNhu1a5KIQq+hVl
+ tLAhXES6TyLr9eLWgUMc1TZqw1uMxMLtFxtf7cqOhY9p3xVxbvWKmsNSo
+ qnnb8cyI5sT4WYvhTdKHjl+VSn7wgv5E7GCQrGjuJAt7GH5CJFhGPxkEt
+ ihuHELoxiuiRYdYUuAcwQK3VAgJEqkgfLNvnm+Wa88XCT8y+JMu8hK0Fd
+ s9U+r6Jy4EeDNkcE9vF+e2+4sBcgxMXRqOrhzycCMdDA3g7VMsZsmqt/t w==;
+X-CSE-ConnectionGUID: cMvxyUjJQLC+NT2LyRvr6A==
+X-CSE-MsgGUID: lQQcNCVaTJ+Zjiob8tV8lA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11410"; a="72183694"
+X-IronPort-AV: E=Sophos;i="6.15,228,1739865600"; d="scan'208";a="72183694"
+Received: from orviesa008.jf.intel.com ([10.64.159.148])
+ by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 Apr 2025 09:35:44 -0700
+X-CSE-ConnectionGUID: Wh3D6qZUReScpja4mF35IQ==
+X-CSE-MsgGUID: 7PHXhzACSmiMwrQIePfuug==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,228,1739865600"; d="scan'208";a="132726322"
+Received: from lkp-server01.sh.intel.com (HELO 050dd05385d1) ([10.239.97.150])
+ by orviesa008.jf.intel.com with ESMTP; 21 Apr 2025 09:35:41 -0700
+Received: from kbuild by 050dd05385d1 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1u6u7P-0000El-1V;
+ Mon, 21 Apr 2025 16:35:39 +0000
+Date: Tue, 22 Apr 2025 00:34:53 +0800
+From: kernel test robot <lkp@intel.com>
+To: Eric Sandeen <sandeen@redhat.com>, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <202504220033.8EDCfvWU-lkp@intel.com>
+References: <20250420154647.1233033-6-sandeen@redhat.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20250420154647.1233033-6-sandeen@redhat.com>
 X-Spam-Score: -3.2 (---)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  If the device support write hints, let's assign it in Android
- devices. Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> --- fsck/main.c
- | 4 ++++ mkfs/f2fs_format_main.c | 4 ++++ 2 files changed, 8 insertions(+)
+ Content preview:  Hi Eric,
+ kernel test robot noticed the following build warnings:
+ [auto build test WARNING on v6.15-rc3] [also build test WARNING on
+ linus/master]
+ [cannot apply to jaegeuk-f2fs/dev-test jaegeuk-f2fs/dev next-20250417] [If
+ your patch is applied to the wrong git tree, [...] 
  Content analysis details:   (-3.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in sa-accredit.habeas.com]
+ [192.198.163.7 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [192.198.163.7 listed in bl.score.senderscore.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [192.198.163.7 listed in list.dnswl.org]
+ 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1u6toW-00019M-1m
-Subject: [f2fs-dev] [PATCH] f2fs-tools: enable write hint by default
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1u6u7e-0001wz-Gf
+Subject: Re: [f2fs-dev] [PATCH 5/7] f2fs: separate the options parsing and
+ options checking
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,54 +127,82 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Eric Sandeen <sandeen@redhat.com>, lihongbo22@huawei.com,
+ oe-kbuild-all@lists.linux.dev, linux-fsdevel@vger.kernel.org,
+ jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If the device support write hints, let's assign it in Android devices.
+Hi Eric,
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fsck/main.c             | 4 ++++
- mkfs/f2fs_format_main.c | 4 ++++
- 2 files changed, 8 insertions(+)
+kernel test robot noticed the following build warnings:
 
-diff --git a/fsck/main.c b/fsck/main.c
-index 423a9a63782c..cb51673aeda8 100644
---- a/fsck/main.c
-+++ b/fsck/main.c
-@@ -233,6 +233,10 @@ static void add_default_options(void)
- 
- 		/* disable nat_bits feature by default */
- 		c.disabled_feature |= F2FS_FEATURE_NAT_BITS;
-+
-+		/* enable write hitn by default */
-+		c.need_whint = true;
-+		c.whint = WRITE_LIFE_NOT_SET;
- 	}
- 	c.quota_fix = 1;
- }
-diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
-index 5b4569d9e3ab..3a8fde021373 100644
---- a/mkfs/f2fs_format_main.c
-+++ b/mkfs/f2fs_format_main.c
-@@ -156,6 +156,10 @@ static void add_default_options(void)
- 		c.feature |= F2FS_FEATURE_PRJQUOTA;
- 		c.feature |= F2FS_FEATURE_EXTRA_ATTR;
- 		c.feature |= F2FS_FEATURE_VERITY;
-+
-+		/* enable write hitn by default */
-+		c.need_whint = true;
-+		c.whint = WRITE_LIFE_NOT_SET;
- 		break;
- 	}
- #ifdef CONF_CASEFOLD
+[auto build test WARNING on v6.15-rc3]
+[also build test WARNING on linus/master]
+[cannot apply to jaegeuk-f2fs/dev-test jaegeuk-f2fs/dev next-20250417]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Eric-Sandeen/f2fs-Add-fs-parameter-specifications-for-mount-options/20250421-220156
+base:   v6.15-rc3
+patch link:    https://lore.kernel.org/r/20250420154647.1233033-6-sandeen%40redhat.com
+patch subject: [PATCH 5/7] f2fs: separate the options parsing and options checking
+config: arc-randconfig-001-20250421 (https://download.01.org/0day-ci/archive/20250422/202504220033.8EDCfvWU-lkp@intel.com/config)
+compiler: arc-linux-gcc (GCC) 11.5.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250422/202504220033.8EDCfvWU-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202504220033.8EDCfvWU-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+   In file included from include/linux/printk.h:7,
+                    from include/asm-generic/bug.h:22,
+                    from arch/arc/include/asm/bug.h:30,
+                    from include/linux/bug.h:5,
+                    from include/linux/thread_info.h:13,
+                    from include/asm-generic/preempt.h:5,
+                    from ./arch/arc/include/generated/asm/preempt.h:1,
+                    from include/linux/preempt.h:79,
+                    from include/linux/spinlock.h:56,
+                    from include/linux/mmzone.h:8,
+                    from include/linux/gfp.h:7,
+                    from include/linux/umh.h:4,
+                    from include/linux/kmod.h:9,
+                    from include/linux/module.h:17,
+                    from fs/f2fs/super.c:8:
+   fs/f2fs/super.c: In function 'handle_mount_opt':
+>> include/linux/kern_levels.h:5:25: warning: format '%lu' expects argument of type 'long unsigned int', but argument 4 has type 'unsigned int' [-Wformat=]
+       5 | #define KERN_SOH        "\001"          /* ASCII Start Of Header */
+         |                         ^~~~~~
+   include/linux/kern_levels.h:11:25: note: in expansion of macro 'KERN_SOH'
+      11 | #define KERN_ERR        KERN_SOH "3"    /* error conditions */
+         |                         ^~~~~~~~
+   fs/f2fs/f2fs.h:1871:33: note: in expansion of macro 'KERN_ERR'
+    1871 |         f2fs_printk(sbi, false, KERN_ERR fmt, ##__VA_ARGS__)
+         |                                 ^~~~~~~~
+   fs/f2fs/super.c:763:25: note: in expansion of macro 'f2fs_err'
+     763 |                         f2fs_err(NULL, "inline xattr size is out of range: %lu ~ %lu",
+         |                         ^~~~~~~~
+   fs/f2fs/super.c:718:15: warning: unused variable 'name' [-Wunused-variable]
+     718 |         char *name;
+         |               ^~~~
+
+
+vim +5 include/linux/kern_levels.h
+
+314ba3520e513a7 Joe Perches 2012-07-30  4  
+04d2c8c83d0e3ac Joe Perches 2012-07-30 @5  #define KERN_SOH	"\001"		/* ASCII Start Of Header */
+04d2c8c83d0e3ac Joe Perches 2012-07-30  6  #define KERN_SOH_ASCII	'\001'
+04d2c8c83d0e3ac Joe Perches 2012-07-30  7  
+
 -- 
-2.49.0.805.g082f7c87e0-goog
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
 
 _______________________________________________
