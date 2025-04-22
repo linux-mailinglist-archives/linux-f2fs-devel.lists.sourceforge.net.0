@@ -2,119 +2,132 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7309A96FF0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Apr 2025 17:07:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3174A9752A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Apr 2025 21:12:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u7FDm-0005Gc-LQ;
-	Tue, 22 Apr 2025 15:07:39 +0000
+	id 1u7J2E-00051Y-5J;
+	Tue, 22 Apr 2025 19:11:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nzzhao.sigma@gmail.com>) id 1u7FDl-0005GS-KQ
+ (envelope-from <daeho43@gmail.com>) id 1u7J2B-00051Q-SS
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 22 Apr 2025 15:07:38 +0000
+ Tue, 22 Apr 2025 19:11:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=puH9qIzvRTmk6NMn/K7232hqU8zQS4VxkhYiI763HTE=; b=S35/xjDj2n2BztFo/ZJApzrJzP
- Wukuo0tXxyBOhyqUo22uBsEi7ZcgwFr3Aa3pvAtNWYkKuV2eZ4UpoY7AD7mN07VYUlH4bnZPrfBqT
- 9TtFsZAgrADGvAo0zH6Ytlbqqi8ERA/BM9N+Xd7C86+v9mTM+0vqf2wN7omKUkFAJwRY=;
+ bh=wKTihN516LJ0PJ64bQu6hhA9LAhCer0ZXXVQAo8No4Q=; b=QYmH0jLGAnDxBVPxSr04KneZGa
+ cTAzB8Z6uZ3iynlCiXIMz9ByUfachgN8StrjS3edmabQJD5n3dKlc1IQUEoWuC3JkfhKFUGPO9rv4
+ Bi/Ni5kkqgOnRllfnjEXlFiScxPCgPwgfSl48SVx2UGvghOPY373gfIz1RK1B2vgpdHs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:MIME-Version:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=puH9qIzvRTmk6NMn/K7232hqU8zQS4VxkhYiI763HTE=; b=O
- +rvKQUHRTHJc3ViLVKQB0K2FTVyljb+bZHvEAPV5Bn04GSu5cSQm8RnEUS2JCR2WmMvTgtsZ7fQuh
- XiBxoKq/6fuMgRf05DZmic//VtN61ZxKRqSW5zmzNO1Ds9yfGj8gMBGJQWXeXi0aT8wMSM7bJyda5
- SvMONtTK4L7V8m80=;
-Received: from mail-oa1-f67.google.com ([209.85.160.67])
+ List-Owner:List-Archive; bh=wKTihN516LJ0PJ64bQu6hhA9LAhCer0ZXXVQAo8No4Q=; b=g
+ L0cuppCSOqSNBkpaxjx5fFwAasSutZE6/DEyZ52L6tQ3uH0XgTxBMU9wVcveMryzySKOsBPz32EqY
+ //4PBdo+BN2CmlVaAsFF5GtSAb2bN4PsVBxo6HkIWP3ZZ1c3DUyl9FtoPaDmZCvc1ilG67SdzX1xZ
+ ORX8vPKkKxiHVlw4=;
+Received: from mail-pf1-f176.google.com ([209.85.210.176])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1u7FDW-0001Gp-Ma for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 22 Apr 2025 15:07:38 +0000
-Received: by mail-oa1-f67.google.com with SMTP id
- 586e51a60fabf-2d4f832069cso2255069fac.0
+ id 1u7J1w-0000Ga-Iv for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 22 Apr 2025 19:11:56 +0000
+Received: by mail-pf1-f176.google.com with SMTP id
+ d2e1a72fcca58-739be717eddso4293380b3a.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 22 Apr 2025 08:07:22 -0700 (PDT)
+ Tue, 22 Apr 2025 12:11:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745334432; x=1745939232; darn=lists.sourceforge.net;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=puH9qIzvRTmk6NMn/K7232hqU8zQS4VxkhYiI763HTE=;
- b=L8jwzwqAsksU+3WZzY6PYxw6YzrXVyiXPJCHOtolH7CgV33t2B5Yjn6S8FRsZQHjnj
- qLgwljI255kA5TS7naFhfUj47POUpCYnzdccSdlfoWgK75C0PYG3wRPHBTFO192fcpRo
- XbAPppd4fH0oA3soU4pPFc9cwJswBjHx5FewzAsF3U/z7L43PR/jmRH5d8GM88oyOw4c
- d5bJYDYCf7mqb4Gt2e12gk73j1YGMFiFRqyIKYJKhmmud8HtnRUdNRk4WereJjKB+wA+
- Ebd9HeHbc4RqVUr9MJeNfG7iiU9RCclUVNWhp8kpCHOB2z0D9FpnXRIUoWmuz2mm1XUG
- /fxQ==
+ d=gmail.com; s=20230601; t=1745349095; x=1745953895; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wKTihN516LJ0PJ64bQu6hhA9LAhCer0ZXXVQAo8No4Q=;
+ b=kQswVxIFafYuYC5UZ24aFqn08/BbCxAFIVH74h4w2H8yeXWEluhmWfxF5HN/jBUS0S
+ 3u2sUaYLSbNU0Q4+V1nIwVSABGzjInpJxHrFMlr+j/EJGc+hYKPbKrer1RtlL6afHUbe
+ fVGKNNbqv5Gh98p0VN0ds2iPeMU+uDkhq4ZfX/55W2ewBaHZ6zQmLAszviVTUEpkmtIv
+ 9JYuVkgkchsWSP1ImlUPzRpcIUFQANbSrqzNm42aSwH+0l6KNQmBZIimJt+LlK7VsBo5
+ IEAnTJonNa1H0BYmFNPv8rREkiO+8bfraE6ESQc1htJZY/rFJg7OnfFtZixmjKgoRkoa
+ V3pA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745334432; x=1745939232;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=puH9qIzvRTmk6NMn/K7232hqU8zQS4VxkhYiI763HTE=;
- b=ps23B94QESmo3ZnClePMqTSDHncvysmjtxSv1uY0VgM+LXn9DtSAON7K/Euq73P5TA
- +UdhnWM89BqoEHerHSKoeNONqONuiRktukFgmkcESXNoTkGV8FnZ2SatZ8hklmnmkiKr
- vk34bA2hqUr19ZX0gEuv0cGYduh7f1/LY0cPu/E93ZHnzOlgWFnsJxK+G7d3471bOhXm
- TvfGPgqaO4P2UM2YhgnFiUomcAj7Cr3d8VoHka0zGnycThpx6h/BeBYLKK42UDNgUeig
- qNSj2CSJXmLMcW2GN72XbDvSNGNSmUDc9qBmSDn3/fVxpE8nGVU/IN3XWUB9XcEy8Xe6
- +E9w==
+ d=1e100.net; s=20230601; t=1745349095; x=1745953895;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wKTihN516LJ0PJ64bQu6hhA9LAhCer0ZXXVQAo8No4Q=;
+ b=txWUdWMczggOmKS3KwXKtwFCvnpDkYqU95g8eQMlbpjU7lEOk2L57k+F++Xhx/qC4s
+ kLDQKLRqABnML0wtChhSOfmOLhcUvt0jYWqIf2nhBd9ESkpFa/yiguVqaS0kRL54Rllr
+ hcRs4j/x3PaZW7BabMJclETUbTGCft3Z4hEbJB/V/1hVoRFo3pi7zhO3CAW/s4R9fMb5
+ Ceu9OkUHZXYqc6MJEIOAf5tdgQl6Vm5WTI5LGrljheC84wOGkUhiXtAEuY7KyhU8hzgJ
+ xLjeEsfFyVxMQ2X8A7jaGWSsWdJl6eNqYyg6mTgKKAd6+vYS7+H90nZTV5h+Fcy9tnku
+ nuxQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUqw/hEo6ncbjVJWIOm87357o3PG+11Ay8JG9H2+7VvdZEAztO5Wc7ArJubLTiUhJFrw0Vl6G5WEQU6k+zl9zPT@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YyKM6pyosydifkmeg3FIuU3fIMb0sI1gCPKvwiHaE2OF7D8Vuw7
- iYPPD37KAfaiN5IAtKJZRjMlSEMbZgh9d3PtXRxsTG4ljToMGIhTfPa/hzAwQ2jn3UJ6F2SHiBA
- Se/6FrKqnagG9PRT1tnYyRMWIiG3kmY3/0DvU0g==
-X-Gm-Gg: ASbGnctCKJ+1Mt3dpTiDaxP98a1uIwzIXljjakQuzPq9twcKeLb/prTxDMRWgwetT/n
- 6soM6xdlb7Fsm+rlm6BR8Tvc4wK0jcdwnHI3lbdQd/aW5jS8jgaKRuDHgUrLYX08/xn86N52QFT
- 6Ky82qGuiFeZMHFpYADLsKTA==
-X-Google-Smtp-Source: AGHT+IGTsk8lxoKou4Ltu2Z6lx5B/MEUCHsnpDapSM/pM71JODkfUX/pyxA4bm32UA4Vd1tBIfiRgXM2LFobtoAtieM=
-X-Received: by 2002:a05:6870:1b11:b0:2d0:4a2c:7c22 with SMTP id
- 586e51a60fabf-2d526ae9243mr9006299fac.18.1745334431822; Tue, 22 Apr 2025
- 08:07:11 -0700 (PDT)
+ AJvYcCWUPYHH/I/ikWMsl0YBS5WDXbw0ERGD0FCDREAyKf/dE9r0+ozna8ESRl1YPf3A47bWloh8QK4Xy0sTQxcQItnB@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzcAlQWkkbth8u0gBBquFLEDrRAHB5weA9m1hHPE1X4kdVU50WS
+ kELUwQOqYVs+uc9Cimu8ZlcpqCqyg21e5z1Ru90DP2h82lVxzaCx
+X-Gm-Gg: ASbGncv6+L8SixKO0RjVV5YRfbSVOicc0g4VyLA2Bq9hPS88zQdZUbnJHV/Xmvq/pAP
+ k9884oYZarO4DSQOfHIvAJKrOBrtHMHLNJSUdnW+HgK7VLmbHE3FWe1cMQASQVu08aXy7UoaPcO
+ N/SabnPTiRfqBeyhMY6lN3NR00RRrKZof7PZXNqJ+kWbhROsUD5688q59flhsWDGjyg83HueNMN
+ WNgTaC3J8W/6RgydkCh5Yml8RGRbhtg0On1AkjjI+dl4P6RfWkhAdOXwLya8M0nscUyMztJ+Y9c
+ t53KzFaHOmsEWqS1gS5CCKzT1JM0fHt/nCtUw4x5PYXR+JosBLUYUv3EivbJ+8oY7ymPmtUlntF
+ DeGzCuOqrNGETPcPe0VmgnP76c9TS7q46KVuz1z/j
+X-Google-Smtp-Source: AGHT+IELeYCox8pUMEvgPe7KvcZ5qh9tJ4MSDEqFRxHZRuMrXgnFrTLQ5vsxj1wEndQsJ2TPwFBM5A==
+X-Received: by 2002:a05:6a00:e05:b0:736:8c0f:774f with SMTP id
+ d2e1a72fcca58-73dc15d6751mr20881055b3a.22.1745349094784; 
+ Tue, 22 Apr 2025 12:11:34 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2a00:79e0:2e14:7:d927:9b9c:264:e35])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b0db13c1c40sm6150317a12.33.2025.04.22.12.11.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Apr 2025 12:11:34 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Tue, 22 Apr 2025 12:11:28 -0700
+Message-ID: <20250422191128.1346260-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.49.0.805.g082f7c87e0-goog
 MIME-Version: 1.0
-From: Nanzhe Zhao <nzzhao.sigma@gmail.com>
-Date: Tue, 22 Apr 2025 23:07:01 +0800
-X-Gm-Features: ATxdqUHvLVCqANVXieQfOfT0KSw8yaux35t85KAyVvUIKGIGemnUscUEboKooFI
-Message-ID: <CAMLCH1Gg=dbzc1z82D6SdrrHRNca4K3vWdiZ+6O+J3nbZ52Sww@mail.gmail.com>
-To: Matthew Wilcox <willy@infradead.org>
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Dear Matthew, Hope you are doing well. I've recently made
- some progress in enabling iomap support for buffered read and buffered write
- on regular files in f2fs. However, I'm encountering significant challenges
- when it comes to supporting i [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  From: Daeho Jeong In cases of removing memory donation, we
+ need to handle some error cases like ENOENT and EACCES (indicating the range
+ already has been donated). Signed-off-by: Daeho Jeong --- fs/f2fs/f2fs.h
+ | 1 + fs/f2fs/file.c | 21 ++++++++++++++------- fs/f2fs/shrinker.c | 5 +++++
+ 3 files changed, 20 insertions(+), 7 deletions(-) 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.160.67 listed in bl.score.senderscore.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.160.67 listed in sa-accredit.habeas.com]
+ [209.85.210.176 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.210.176 listed in bl.score.senderscore.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [nzzhao.sigma[at]gmail.com]
+ provider [daeho43[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.210.176 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.160.67 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.160.67 listed in wl.mailspike.net]
+ no trust [209.85.210.176 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -122,10 +135,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1u7FDW-0001Gp-Ma
-Subject: [f2fs-dev] [DISCUSSION]:Chanllenges encountered in converting page
- writeback to iomap
+X-Headers-End: 1u7J1w-0000Ga-Iv
+Subject: [f2fs-dev] [PATCH] f2fs: handle error cases of memory donation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -137,70 +148,129 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "v-songbaohua@oppo.com" <v-songbaohua@oppo.com>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Dear Matthew,
-Hope you are doing well.
+From: Daeho Jeong <daehojeong@google.com>
 
-I've recently made some progress in enabling iomap support for
-buffered read and buffered write on regular files in f2fs. However,
-I'm encountering significant challenges when it comes to supporting
-iomap for page writeback.
+In cases of removing memory donation, we need to handle some error cases
+like ENOENT and EACCES (indicating the range already has been donated).
 
-Currently, the f2fs_write_cache_pages function is indeed aware of
-larger order folio Well, its implementation involves setting a
-threshold, collecting a fixed number of pages from a folio on the
-stack, and then submitting IOs page by page using
-f2fs_write_single_page one by one. In other words, this results in
-folio -> page -> bio IO path.
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ fs/f2fs/f2fs.h     |  1 +
+ fs/f2fs/file.c     | 21 ++++++++++++++-------
+ fs/f2fs/shrinker.c |  5 +++++
+ 3 files changed, 20 insertions(+), 7 deletions(-)
 
-My understanding of iomap's writepages implementation is to treat a
-folio itself as a complete IO unit, rather than breaking it down into
-pages. Within the iomap_writepage_map_blocks framework, we consider
-both the mapping length returned by the filesystem's
-wpc->ops->map_blocks function and the dirty length within the folio to
-determine the final map_len. Then, we directly add this length and the
-folio to the bio, thus forming a direct folio-to-bio IO path.
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index f1576dc6ec67..e4b39550f380 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -821,6 +821,7 @@ enum {
+ 	FI_ATOMIC_DIRTIED,	/* indicate atomic file is dirtied */
+ 	FI_ATOMIC_REPLACE,	/* indicate atomic replace */
+ 	FI_OPENED_FILE,		/* indicate file has been opened */
++	FI_PAGE_DONATED,	/* indicate pages of file has been donated */
+ 	FI_MAX,			/* max flag, never be used */
+ };
+ 
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index abbcbb5865a3..0807f8e97492 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2464,19 +2464,20 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
+ 	return ret;
+ }
+ 
+-static void f2fs_keep_noreuse_range(struct inode *inode,
++static int f2fs_keep_noreuse_range(struct inode *inode,
+ 				loff_t offset, loff_t len)
+ {
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	u64 max_bytes = F2FS_BLK_TO_BYTES(max_file_blocks(inode));
+ 	u64 start, end;
++	int ret = 0;
+ 
+ 	if (!S_ISREG(inode->i_mode))
+-		return;
++		return 0;
+ 
+ 	if (offset >= max_bytes || len > max_bytes ||
+ 	    (offset + len) > max_bytes)
+-		return;
++		return 0;
+ 
+ 	start = offset >> PAGE_SHIFT;
+ 	end = DIV_ROUND_UP(offset + len, PAGE_SIZE);
+@@ -2484,7 +2485,7 @@ static void f2fs_keep_noreuse_range(struct inode *inode,
+ 	inode_lock(inode);
+ 	if (f2fs_is_atomic_file(inode)) {
+ 		inode_unlock(inode);
+-		return;
++		return 0;
+ 	}
+ 
+ 	spin_lock(&sbi->inode_lock[DONATE_INODE]);
+@@ -2493,7 +2494,10 @@ static void f2fs_keep_noreuse_range(struct inode *inode,
+ 		if (!list_empty(&F2FS_I(inode)->gdonate_list)) {
+ 			list_del_init(&F2FS_I(inode)->gdonate_list);
+ 			sbi->donate_files--;
+-		}
++			if (is_inode_flag_set(inode, FI_PAGE_DONATED))
++				ret = -EACCES;
++		} else
++			ret = -ENOENT;
+ 	} else {
+ 		if (list_empty(&F2FS_I(inode)->gdonate_list)) {
+ 			list_add_tail(&F2FS_I(inode)->gdonate_list,
+@@ -2505,9 +2509,12 @@ static void f2fs_keep_noreuse_range(struct inode *inode,
+ 		}
+ 		F2FS_I(inode)->donate_start = start;
+ 		F2FS_I(inode)->donate_end = end - 1;
++		clear_inode_flag(inode, FI_PAGE_DONATED);
+ 	}
+ 	spin_unlock(&sbi->inode_lock[DONATE_INODE]);
+ 	inode_unlock(inode);
++
++	return ret;
+ }
+ 
+ static int f2fs_ioc_fitrim(struct file *filp, unsigned long arg)
+@@ -5236,8 +5243,8 @@ static int f2fs_file_fadvise(struct file *filp, loff_t offset, loff_t len,
+ 	     f2fs_compressed_file(inode)))
+ 		f2fs_invalidate_compress_pages(F2FS_I_SB(inode), inode->i_ino);
+ 	else if (advice == POSIX_FADV_NOREUSE)
+-		f2fs_keep_noreuse_range(inode, offset, len);
+-	return 0;
++		err = f2fs_keep_noreuse_range(inode, offset, len);
++	return err;
+ }
+ 
+ #ifdef CONFIG_COMPAT
+diff --git a/fs/f2fs/shrinker.c b/fs/f2fs/shrinker.c
+index 9c8d3aee89af..1fa6619db40f 100644
+--- a/fs/f2fs/shrinker.c
++++ b/fs/f2fs/shrinker.c
+@@ -186,8 +186,13 @@ static unsigned int do_reclaim_caches(struct f2fs_sb_info *sbi,
+ 
+ 		len = fi->donate_end - fi->donate_start + 1;
+ 		npages = npages < len ? 0 : npages - len;
++
++		inode_lock(inode);
+ 		invalidate_inode_pages2_range(inode->i_mapping,
+ 					fi->donate_start, fi->donate_end);
++		set_inode_flag(inode, FI_PAGE_DONATED);
++		inode_unlock(inode);
++
+ 		iput(inode);
+ 		cond_resched();
+ 	}
+-- 
+2.49.0.805.g082f7c87e0-goog
 
-However, for f2fs, the tight coupling between its unique IO
-information structure, f2fs_io_info, and individual pages presents
-several challenges. For instance, f2fs_io_info stores both the old and
-new data block addresses from the dnode_of_data of a data page. Since
-f2fs employs both inplace and outplace update mechanisms, the old data
-block address becomes unreliable for write IO during outplace updates
-(a problem not encountered in read IO). This poses difficulties when
-writing back an entire folio. If we were to use iomap_writepages,
-wpc->ops->map_blocks might even need to differentiate between blocks
-within a folio that require inplace updates and those requiring
-outplace updates, and then split the mapping length accordingly. I
-feel this would lead to complex and confusing code. Furthermore,
-f2fs's current bio merging strategy considers not only the contiguity
-of adjacent filesystem blocks but also whether the io_type of two
-f2fs_io_info structures is the same. This information would be lost
-within the iomap writepage framework.
-
-Intuitively, I do believe iomap's approach of directly submitting a
-folio as a single unit to bio is very reasonable. After all, a folio
-contains sufficient information to do so, as it holds the logical
-indices of all pages. However, due to the aforementioned issues, f2fs
-currently has to decompose folios into pages for write IO. Moreover,
-if functions in GC and page cache that perform IO also aim to support
-folios, they might also have to resort to looping and decomposing
-folios into pages.
-
-What are your thoughts on this issue? Do you think decomposing folios
-into pages using loops would violate the design philosophy of folios?
-Or do you believe this approach is sufficient for f2fs IO? If we want
-to move away from this decomposition approach, do you have any
-suggestions?
-
-Looking forward to your reply.
-Best regards.
 
 
 _______________________________________________
