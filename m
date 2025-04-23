@@ -2,101 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F87AA9AFBC
+	by mail.lfdr.de (Postfix) with ESMTPS id 02875A9AFB8
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Apr 2025 15:51:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u7wzS-0000cC-GD;
-	Thu, 24 Apr 2025 13:51:45 +0000
+	id 1u7wzT-0002D0-QT;
+	Thu, 24 Apr 2025 13:51:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sandeen@redhat.com>) id 1u7wzR-0000c4-C8
+ (envelope-from <sandeen@redhat.com>) id 1u7wzS-0002Ct-2n
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Apr 2025 13:51:44 +0000
+ Thu, 24 Apr 2025 13:51:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=content-type:Content-Transfer-Encoding:MIME-Version
+ :References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=F850X9Wvb7zvNpfszgH9NKoEboiy7g5mNWn6Fyxim2o=; b=QC06QMcAh2Z/KuKb3auIFErP5u
- ZBUWq5Q6BAvLh1TGNe286DHhBko9zsRjmi7xBfqIvgobuYkQVX5zKLJ5Rg1uxZLvnSjN4vfBGfOUX
- AJCe66aWZpJwrKoCK+86YaRw0c8oYilepXCkhR7ybO5TXpS6ZWsf2/QurS+TfX09zqo4=;
+ bh=20X8W8gEmww41Q7n61pHQxjGF1NcC1fUPUqP1znWNZ8=; b=HCJoxMjlBpbFoDxK64IKMfF1HA
+ +c3eZnkI0tZOeHoh8QH5rRCVrt8fv7Tkhof8CftGkuK9w9zKPKPAuUdkpjkpuq2e6xOuNYk+VD2Nb
+ SvIIMKovneYCn2lzYpEZBVPFBsG/IvIGX8b9KO+PRBjzm54n2/UDXNxO9b7sycmCb1kY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=F850X9Wvb7zvNpfszgH9NKoEboiy7g5mNWn6Fyxim2o=; b=G
- 4ZMhPm5vcdhkRaOU5NJmXsFFDkcvyyvlBNlREsxPuX6oFX9IUolkD5VfL2TJgzjQp/1+N5iRMjJe9
- 4oW0oXBydww2NgFGFTiV75CyMRU42USE19wV2wEKFRd1JkEWlnV+awCkd+/cJp/zS/k09/6G3Yr8G
- zizU5O9/REguVCP0=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ h=content-type:Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=20X8W8gEmww41Q7n61pHQxjGF1NcC1fUPUqP1znWNZ8=; b=BtWu4P1N4wGA0lt4FXnr9HMrdC
+ UXsNcfy0qmQltYhStKM3/tFXHLt8bL0LNPBp4kFL2gSKnND+9F7DUk8fwEOgBR3enLFqH5DnTKnwO
+ WGqhtC0BqaguXtMJf8qqJDW7Zx0vrbh7H413mFWaOo+O0Af7Afl0MN1pewQOcaH6CErM=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1u7wzB-0000nS-0M for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Apr 2025 13:51:44 +0000
+ id 1u7wzC-0000nY-LV for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 24 Apr 2025 13:51:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1745502668;
+ s=mimecast20190719; t=1745502669;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=F850X9Wvb7zvNpfszgH9NKoEboiy7g5mNWn6Fyxim2o=;
- b=XVUo/GXLQO1xvocPd9kYNq60L8bCmU6+Gmd5g8/Awk2lrowmoqDR6W9sYiH8gvF8Q2ANFB
- qZhlN4IGaVwyjz9YOL9kn89hDiM0ktJvN5+v8/oC8KaUOHEuEhsqPDRBkEsySTLVt2eyQa
- Qd3zQlWDfyOLZQHI3WxO9ZZ0E+etQzY=
-Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com
- [209.85.210.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=20X8W8gEmww41Q7n61pHQxjGF1NcC1fUPUqP1znWNZ8=;
+ b=Y9lvVRhnIQv4sZEYPjw40bX4+DX5NFJeU1Na+i/8dOsFQ9MegT8eo6yMrGzmBK/gm5Ethk
+ 2w0XuEw6xSRAYJJh2DFpl+bo3gAgDtHuZtRyeTUcTxkcTaabuiO1tD75ueqg8SlQAiR7PP
+ 17mgWfccqEaRp9ItJtG5nYKRtFW247c=
+Received: from mail-ot1-f69.google.com (mail-ot1-f69.google.com
+ [209.85.210.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-446-t-FlPdpgOjOMZB15D949uw-1; Thu, 24 Apr 2025 09:51:07 -0400
-X-MC-Unique: t-FlPdpgOjOMZB15D949uw-1
-X-Mimecast-MFC-AGG-ID: t-FlPdpgOjOMZB15D949uw_1745502666
-Received: by mail-ot1-f70.google.com with SMTP id
- 46e09a7af769-72c0d69b71aso393383a34.3
+ us-mta-549-NzWH1fWAMGC_6EDGtlaatQ-1; Thu, 24 Apr 2025 09:51:08 -0400
+X-MC-Unique: NzWH1fWAMGC_6EDGtlaatQ-1
+X-Mimecast-MFC-AGG-ID: NzWH1fWAMGC_6EDGtlaatQ_1745502668
+Received: by mail-ot1-f69.google.com with SMTP id
+ 46e09a7af769-72c0d69b71aso393400a34.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 24 Apr 2025 06:51:07 -0700 (PDT)
+ Thu, 24 Apr 2025 06:51:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745502666; x=1746107466;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=F850X9Wvb7zvNpfszgH9NKoEboiy7g5mNWn6Fyxim2o=;
- b=C97wuxef2tEgeZJXxxA3UoTsUrf7mj+pnrEAUElseObXH2arjkBXlPkFBsK+N4wvo/
- uVoGX9EQZhra6JZ1/qpolVu1cB+gwrcSaQ+WI0Y5Pd2jAo8q5cLaL+6vJMiVSFsVxEYN
- Kdgrlr6JRRzUxAO1oqbnxbx7Y0A9NCTGWAtomHJVFo8awk/gHiu6CLMDWVcLHgl2qC2Y
- dGgyeUdEUbpgZAc0qXtdEQLxp2qWfwKx5c+AblTmDHS0R1rygXamI8d1J8Fv5Fm6/7qo
- Vv+SWlniXTqNm28nhfSs5n9sQ7+//T36roTcxdRviIznt1Bu0oqwC09mIfgxkD9MHIVz
- ppng==
-X-Gm-Message-State: AOJu0YxelE3fOeZFRQ95aI0EXh1tRwY8jCYbfC9pvxA9RhJ2ezepSVZy
- GN2jumvc09D1b/qaH0matIGYCz1Yqfik/YiE/V5uWENSh0T2tLDTPC/d1EpU6f6GIo+lBZw0tSD
- AV3Er9FbuRkqd9QyMhnVXvRDb/bovkb0SyCgAqfcWoZTqs2lG1euZINI2Yj4PO+kM0OYMhADHLS
- Fq3Z2K2eAcjjapkbrNAAZTRUh09qkN5ZPBZSZyUOCvZKUU00nbxg8Id1EmHfAB
-X-Gm-Gg: ASbGncunqU0ZuMR5/u4zOpbNGkztyCt5g2Y5PBwCYrqhlPOUeq1dXJrNuXA2mBbLssT
- qgV+FP3kvcy93iwmmz8akTUkIy4Kev0TcQmTtxPtUrp4wQdpC2ZmkEJ3eCD21nXpoaRn+o64Pi+
- LfCXllB6LLylFBR9Dk7kdE/Yv2jyyz5VHF1ObJAK6WX7ysKJwVP7umHyX4BV65T1DtcUJzSTqg1
- Ry69sSg35GZiW+PGkHkEnc6dCcFESu9HgSdOfEUCs5zaOH/nGxM8I01zjjM2BiaZ+DL5NH7qNZF
- ZKzLm+QupSVqAJ+0JB0fqTpxgiusJfm8zv6G5jAZZ6Y81TvjN6VtNds=
-X-Received: by 2002:a05:6830:6283:b0:72b:9b1f:2e1d with SMTP id
- 46e09a7af769-7304da4e008mr1777147a34.2.1745502666180; 
+ d=1e100.net; s=20230601; t=1745502668; x=1746107468;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=20X8W8gEmww41Q7n61pHQxjGF1NcC1fUPUqP1znWNZ8=;
+ b=Zj916GMeHUj5/+3d2AWSOIRJEXkND8yz9TeJKqDCLX3wUViaA/3pzn1Mso02N+18t6
+ jjF61bvqyMql2M8mHhku0m/8Sf2RF3rNi1OSlRGzOLNGSRAWfcEDq2xN4bfoUHb0BZmD
+ hrtzBDRkDrD22bAKbBa6mISkDqHGyVZkrrYw5Z3Tvd5U1cslvY592TPnhawxIFD0Gm61
+ sTEMazlvAOGaZ5CJsL6pT7ps0xkW6n3uUaB/YQ6/AXhZCa6bdpj2RcU711Cu2f7LDClu
+ tWPJwmv+IDdBSXYEpi7RlrbovE7vFotfyArdeCmKzF+zcIppKTQ+sekyTTCp+pKd24Jf
+ +kTA==
+X-Gm-Message-State: AOJu0Yz/vQH8DB/eIP1ffIvxm1c+bSDNoh/SKz2BBD6IobONa/nMASN2
+ TDQAkjUMk4M6QpzoqXzMwufjHa3vLveYZNiWs+CWLPXxi1PF1u1f5ASeUhKGchqaka27+Z+Gw0V
+ fvHq/eGldqsEjvjUnx2eXgvZIscYUIdaZtkBxAy8jZFE0jXw6Gh3e2MfR9Dzh+nQL1NrvMyZKoC
+ NlIMT3HKgpR5WXnTM6hhLs44rvXJOkyn9tI+XKJ83ZmWKuRS/Br2W34cTmC5Ti
+X-Gm-Gg: ASbGncuB4Z326nO4iisE/JOqREabR7JJBIIdszkdQpWWpbueC4l+SjfiI5VLE1d/rYA
+ X81FfFBDCyM5YMtJx6WNSjD09AeI2mk2RDaApCT/vroT7gyWRFeE9uCdZXsvUGZ/KwJPIh01eiY
+ YChGl+pPbJh90Mt1dn7jJI6Mdf5ji/sF1HSgv6iITEFsdf0MVMxqSQTB62ZHKBkHL68ERGbrBIQ
+ /xpRU8pm2jYsWO1tZz+6aUR5neJgtbod+iIgoqDSPSX77qZYg2pVqIv7it5jXAB2/VjGO2FU2Vt
+ vdltpG+qYy8kAUGBTA68E2DbGtF/Ap2grdsM1uPVtMMr+0Y6CH+VaU8=
+X-Received: by 2002:a05:6830:369b:b0:72b:99eb:7ce3 with SMTP id
+ 46e09a7af769-7304dbcd9admr1458748a34.18.1745502667425; 
+ Thu, 24 Apr 2025 06:51:07 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHUBkT8IuBa3hPdLMhwDATE3HSR3z4HwnotaHQjVHnEdLznwt0jtuOY3c4oz91usD9ZH5XVCA==
+X-Received: by 2002:a05:6830:369b:b0:72b:99eb:7ce3 with SMTP id
+ 46e09a7af769-7304dbcd9admr1458729a34.18.1745502666931; 
  Thu, 24 Apr 2025 06:51:06 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGOIadjNwkxxxrid67bBL9suXr9I5Y503+xGT837WbXF/k+0bW2wrNC0aPEhwyZfHn+pmx4GQ==
-X-Received: by 2002:a05:6830:6283:b0:72b:9b1f:2e1d with SMTP id
- 46e09a7af769-7304da4e008mr1777125a34.2.1745502665796; 
- Thu, 24 Apr 2025 06:51:05 -0700 (PDT)
 Received: from localhost.localdomain (nwtn-09-2828.dsl.iowatelecom.net.
  [67.224.43.12]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7304f37b158sm233595a34.49.2025.04.24.06.51.04
+ 46e09a7af769-7304f37b158sm233595a34.49.2025.04.24.06.51.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 06:51:05 -0700 (PDT)
+ Thu, 24 Apr 2025 06:51:06 -0700 (PDT)
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 23 Apr 2025 12:08:44 -0500
-Message-ID: <20250423170926.76007-1-sandeen@redhat.com>
+Date: Wed, 23 Apr 2025 12:08:45 -0500
+Message-ID: <20250423170926.76007-2-sandeen@redhat.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250423170926.76007-1-sandeen@redhat.com>
+References: <20250423170926.76007-1-sandeen@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: YfIYPBgd_dWo7HWw_ZCfIELLpqpJyDZF0nFLekozJoE_1745502666
+X-Mimecast-MFC-PROC-ID: vfv2bJNfM_gUzINcFNnnRCULK-7Przyq1UkUdDcnTm4_1745502668
 X-Mimecast-Originator: redhat.com
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -105,29 +108,28 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: V3: - Rebase onto
- git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- dev branch - Fix up some 0day robot warnings This is a forward-port of
- Hongbo's original f2fs mount API conversion,
- posted last August at
- https://lore.kernel.org/linux-f2fs-devel/20240814023912.3959299-1-lihongbo22@huawei.com/
+ Content preview: From: Hongbo Li <lihongbo22@huawei.com> Use an array of
+ `fs_parameter_spec`
+ called f2fs_param_specs to hold the mount option specifications for the new
+ mount api. Add constant_table structures for several options to facilitate
+ parsing. 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.133.124 listed in list.dnswl.org]
+ no trust [170.10.129.124 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [170.10.133.124 listed in sa-trusted.bondedsender.org]
+ [170.10.129.124 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [170.10.133.124 listed in bl.score.senderscore.com]
+ [170.10.129.124 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [170.10.133.124 listed in wl.mailspike.net]
+ [170.10.129.124 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.8 DATE_IN_PAST_12_24     Date: is 12 to 24 hours before Received: date
@@ -140,8 +142,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.8 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1u7wzB-0000nS-0M
-Subject: [f2fs-dev] [PATCH V3 0/7] f2fs: new mount API conversion
+X-Headers-End: 1u7wzC-0000nY-LV
+Subject: [f2fs-dev] [PATCH V3 1/7] f2fs: Add fs parameter specifications for
+ mount options
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -156,59 +159,176 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: Eric Sandeen via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Eric Sandeen <sandeen@redhat.com>
-Cc: linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, lihongbo22@huawei.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, lihongbo22@huawei.com,
+ Eric Sandeen <sandeen@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-VjM6Ci0gUmViYXNlIG9udG8gZ2l0Oi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJu
-ZWwvZ2l0L2phZWdldWsvZjJmcy5naXQKICBkZXYgYnJhbmNoCi0gRml4IHVwIHNvbWUgMGRheSBy
-b2JvdCB3YXJuaW5ncwoKVGhpcyBpcyBhIGZvcndhcmQtcG9ydCBvZiBIb25nYm8ncyBvcmlnaW5h
-bCBmMmZzIG1vdW50IEFQSSBjb252ZXJzaW9uLApwb3N0ZWQgbGFzdCBBdWd1c3QgYXQgCmh0dHBz
-Oi8vbG9yZS5rZXJuZWwub3JnL2xpbnV4LWYyZnMtZGV2ZWwvMjAyNDA4MTQwMjM5MTIuMzk1OTI5
-OS0xLWxpaG9uZ2JvMjJAaHVhd2VpLmNvbS8KCkkgaGFkIGJlZW4gdHJ5aW5nIHRvIGFwcHJvYWNo
-IHRoaXMgd2l0aCBhIGxpdHRsZSBsZXNzIGNvbXBsZXhpdHksCmJ1dCBpbiB0aGUgZW5kIEkgcmVh
-bGl6ZWQgdGhhdCBIb25nYm8ncyBhcHByb2FjaCAod2hpY2ggZm9sbG93cwp0aGUgZXh0NCBhcHBy
-b2FjaCkgd2FzIGEgZ29vZCBvbmUsIGFuZCBJIHdhcyBub3QgbWFraW5nIGFueSBwcm9ncnNzCm15
-c2VsZi4g8J+YiQoKSW4gYWRkaXRpb24gdG8gdGhlIGZvcndhcmQtcG9ydCwgSSBoYXZlIGFsc28g
-Zml4ZWQgYSBjb3VwbGUgYnVncyBJIGZvdW5kCmR1cmluZyB0ZXN0aW5nLCBhbmQgc29tZSBpbXBy
-b3ZlbWVudHMgLyBzdHlsZSBjaG9pY2VzIGFzIHdlbGwuIEhvbmdibyBhbmQKSSBoYXZlIGRpc2N1
-c3NlZCBtb3N0IG9mIHRoaXMgb2ZmLWxpc3QgYWxyZWFkeSwgc28gSSdtIHByZXNlbnRpbmcgdGhl
-Cm5ldCByZXN1bHQgaGVyZS4KClRoaXMgZG9lcyBwYXNzIG15IHR5cGljYWwgdGVzdGluZyB3aGlj
-aCBkb2VzIGEgbGFyZ2UgbnVtYmVyIG9mIHJhbmRvbQptb3VudHMvcmVtb3VudHMgd2l0aCB2YWxp
-ZCBhbmQgaW52YWxpZCBvcHRpb24gc2V0cywgb24gZjJmcyBmaWxlc3lzdGVtCmltYWdlcyB3aXRo
-IHZhcmlvdXMgZmVhdHVyZXMgaW4gdGhlIG9uLWRpc2sgc3VwZXJibG9jay4gKEkgd2FzIG5vdCBh
-YmxlCnRvIHRlc3QgYWxsIG9mIHRoaXMgY29tcGxldGVseSwgYXMgc29tZSBvcHRpb25zIG9yIGZl
-YXR1cmVzIHJlcXVpcmUKaGFyZHdhcmUgSSBkbid0IGhhdmUuKQoKVGhhbmtzLAotRXJpYwoKKEEg
-cmVjYXAgb2YgSG9uZ2JvJ3Mgb3JpZ2luYWwgY292ZXIgbGV0dGVyIGlzIGJlbG93LCBlZGl0ZWQg
-c2xpZ2h0bHkgZm9yCnRoaXMgc2VyaWVzOikKClNpbmNlIG1hbnkgZmlsZXN5c3RlbXMgaGF2ZSBk
-b25lIHRoZSBuZXcgbW91bnQgQVBJIGNvbnZlcnNpb24sCndlIGludHJvZHVjZSB0aGUgbmV3IG1v
-dW50IEFQSSBjb252ZXJzaW9uIGluIGYyZnMuCgpUaGUgc2VyaWVzIGNhbiBiZSBhcHBsaWVkIG9u
-IHRvcCBvZiB0aGUgY3VycmVudCBtYWlubGluZSB0cmVlCmFuZCB0aGUgd29yayBpcyBiYXNlZCBv
-biB0aGUgcGF0Y2hlcyBmcm9tIEx1a2FzIEN6ZXJuZXIgKGhhcwpkb25lIHRoaXMgaW4gZXh0NFsx
-XSkuIEhpcyBwYXRjaCBnaXZlIG1lIGEgbG90IG9mIGlkZWFzLgoKSGVyZSBpcyBhIGhpZ2ggbGV2
-ZWwgZGVzY3JpcHRpb24gb2YgdGhlIHBhdGNoc2V0OgoKMS4gUHJlcGFyZSB0aGUgZjJmcyBtb3Vu
-dCBwYXJhbWV0ZXJzIHJlcXVpcmVkIGJ5IHRoZSBuZXcgbW91bnQKQVBJIGFuZCB1c2UgaXQgZm9y
-IHBhcnNpbmcsIHdoaWxlIHN0aWxsIHVzaW5nIHRoZSBvbGQgQVBJIHRvCmdldCBtb3VudCBvcHRp
-b25zIHN0cmluZy4gU3BsaXQgdGhlIHBhcmFtZXRlciBwYXJzaW5nIGFuZAp2YWxpZGF0aW9uIG9m
-IHRoZSBwYXJzZV9vcHRpb25zIGhlbHBlciBpbnRvIHR3byBzZXBhcmF0ZQpoZWxwZXJzLgoKICBm
-MmZzOiBBZGQgZnMgcGFyYW1ldGVyIHNwZWNpZmljYXRpb25zIGZvciBtb3VudCBvcHRpb25zCiAg
-ZjJmczogbW92ZSB0aGUgb3B0aW9uIHBhcnNlciBpbnRvIGhhbmRsZV9tb3VudF9vcHQKCjIuIFJl
-bW92ZSB0aGUgdXNlIG9mIHNiL3NiaSBzdHJ1Y3R1cmUgb2YgZjJmcyBmcm9tIGFsbCB0aGUKcGFy
-c2luZyBjb2RlLCBiZWNhdXNlIHdpdGggdGhlIG5ldyBtb3VudCBBUEkgdGhlIHBhcnNpbmcgaXMK
-Z29pbmcgdG8gYmUgZG9uZSBiZWZvcmUgd2UgZXZlbiBnZXQgdGhlIHN1cGVyIGJsb2NrLiBJbiB0
-aGlzCnBhcnQsIHdlIGludHJvZHVjZSBmMmZzX2ZzX2NvbnRleHQgdG8gaG9sZCB0aGUgdGVtcG9y
-YXJ5Cm9wdGlvbnMgd2hlbiBwYXJzaW5nLiBGb3IgdGhlIHNpbXBsZSBvcHRpb25zIGNoZWNrLCBp
-dCBoYXMKdG8gYmUgZG9uZSBkdXJpbmcgcGFyc2luZyBieSB1c2luZyBmMmZzX2ZzX2NvbnRleHQg
-c3RydWN0dXJlLgpGb3IgdGhlIGNoZWNrIHdoaWNoIG5lZWRzIHNiL3NiaSwgd2UgZG8gdGhpcyBk
-dXJpbmcgc3VwZXIKYmxvY2sgZmlsbGluZy4KCiAgZjJmczogQWxsb3cgc2JpIHRvIGJlIE5VTEwg
-aW4gZjJmc19wcmludGsKICBmMmZzOiBBZGQgZjJmc19mc19jb250ZXh0IHRvIHJlY29yZCB0aGUg
-bW91bnQgb3B0aW9ucwogIGYyZnM6IHNlcGFyYXRlIHRoZSBvcHRpb25zIHBhcnNpbmcgYW5kIG9w
-dGlvbnMgY2hlY2tpbmcKCjMuIFN3aXRjaCB0aGUgZjJmcyB0byB1c2UgdGhlIG5ldyBtb3VudCBB
-UEkgZm9yIG1vdW50IGFuZApyZW1vdW50LgoKICBmMmZzOiBpbnRyb2R1Y2UgZnNfY29udGV4dF9v
-cGVyYXRpb24gc3RydWN0dXJlCiAgZjJmczogc3dpdGNoIHRvIHRoZSBuZXcgbW91bnQgYXBpCgpb
-MV0gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvYWxsLzIwMjExMDIxMTE0NTA4LjIxNDA3LTEtbGN6
-ZXJuZXJAcmVkaGF0LmNvbS8KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZl
-bEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlz
-dHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+From: Hongbo Li <lihongbo22@huawei.com>
+
+Use an array of `fs_parameter_spec` called f2fs_param_specs to
+hold the mount option specifications for the new mount api.
+
+Add constant_table structures for several options to facilitate
+parsing.
+
+Signed-off-by: Hongbo Li <lihongbo22@huawei.com>
+[sandeen: forward port, minor fixes and updates, more fsparam_enum]
+Signed-off-by: Eric Sandeen <sandeen@redhat.com>
+---
+ fs/f2fs/super.c | 122 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 122 insertions(+)
+
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 22f26871b7aa..ebea03bba054 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -27,6 +27,7 @@
+ #include <linux/part_stat.h>
+ #include <linux/zstd.h>
+ #include <linux/lz4.h>
++#include <linux/fs_parser.h>
+ 
+ #include "f2fs.h"
+ #include "node.h"
+@@ -194,9 +195,130 @@ enum {
+ 	Opt_age_extent_cache,
+ 	Opt_errors,
+ 	Opt_nat_bits,
++	Opt_jqfmt,
++	Opt_checkpoint,
+ 	Opt_err,
+ };
+ 
++static const struct constant_table f2fs_param_background_gc[] = {
++	{"on",		BGGC_MODE_ON},
++	{"off",		BGGC_MODE_OFF},
++	{"sync",	BGGC_MODE_SYNC},
++	{}
++};
++
++static const struct constant_table f2fs_param_mode[] = {
++	{"adaptive",		FS_MODE_ADAPTIVE},
++	{"lfs",			FS_MODE_LFS},
++	{"fragment:segment",	FS_MODE_FRAGMENT_SEG},
++	{"fragment:block",	FS_MODE_FRAGMENT_BLK},
++	{}
++};
++
++static const struct constant_table f2fs_param_jqfmt[] = {
++	{"vfsold",	QFMT_VFS_OLD},
++	{"vfsv0",	QFMT_VFS_V0},
++	{"vfsv1",	QFMT_VFS_V1},
++	{}
++};
++
++static const struct constant_table f2fs_param_alloc_mode[] = {
++	{"default",	ALLOC_MODE_DEFAULT},
++	{"reuse",	ALLOC_MODE_REUSE},
++	{}
++};
++static const struct constant_table f2fs_param_fsync_mode[] = {
++	{"posix",	FSYNC_MODE_POSIX},
++	{"strict",	FSYNC_MODE_STRICT},
++	{"nobarrier",	FSYNC_MODE_NOBARRIER},
++	{}
++};
++
++static const struct constant_table f2fs_param_compress_mode[] = {
++	{"fs",		COMPR_MODE_FS},
++	{"user",	COMPR_MODE_USER},
++	{}
++};
++
++static const struct constant_table f2fs_param_discard_unit[] = {
++	{"block",	DISCARD_UNIT_BLOCK},
++	{"segment",	DISCARD_UNIT_SEGMENT},
++	{"section",	DISCARD_UNIT_SECTION},
++	{}
++};
++
++static const struct constant_table f2fs_param_memory_mode[] = {
++	{"normal",	MEMORY_MODE_NORMAL},
++	{"low",		MEMORY_MODE_LOW},
++	{}
++};
++
++static const struct constant_table f2fs_param_errors[] = {
++	{"remount-ro",	MOUNT_ERRORS_READONLY},
++	{"continue",	MOUNT_ERRORS_CONTINUE},
++	{"panic",	MOUNT_ERRORS_PANIC},
++	{}
++};
++
++static const struct fs_parameter_spec f2fs_param_specs[] = {
++	fsparam_enum("background_gc", Opt_gc_background, f2fs_param_background_gc),
++	fsparam_flag("disable_roll_forward", Opt_disable_roll_forward),
++	fsparam_flag("norecovery", Opt_norecovery),
++	fsparam_flag_no("discard", Opt_discard),
++	fsparam_flag("no_heap", Opt_noheap),
++	fsparam_flag("heap", Opt_heap),
++	fsparam_flag_no("user_xattr", Opt_user_xattr),
++	fsparam_flag_no("acl", Opt_acl),
++	fsparam_s32("active_logs", Opt_active_logs),
++	fsparam_flag("disable_ext_identify", Opt_disable_ext_identify),
++	fsparam_flag_no("inline_xattr", Opt_inline_xattr),
++	fsparam_s32("inline_xattr_size", Opt_inline_xattr_size),
++	fsparam_flag_no("inline_data", Opt_inline_data),
++	fsparam_flag_no("inline_dentry", Opt_inline_dentry),
++	fsparam_flag_no("flush_merge", Opt_flush_merge),
++	fsparam_flag_no("barrier", Opt_barrier),
++	fsparam_flag("fastboot", Opt_fastboot),
++	fsparam_flag_no("extent_cache", Opt_extent_cache),
++	fsparam_flag("data_flush", Opt_data_flush),
++	fsparam_u32("reserve_root", Opt_reserve_root),
++	fsparam_gid("resgid", Opt_resgid),
++	fsparam_uid("resuid", Opt_resuid),
++	fsparam_enum("mode", Opt_mode, f2fs_param_mode),
++	fsparam_s32("fault_injection", Opt_fault_injection),
++	fsparam_u32("fault_type", Opt_fault_type),
++	fsparam_flag_no("lazytime", Opt_lazytime),
++	fsparam_flag_no("quota", Opt_quota),
++	fsparam_flag("usrquota", Opt_usrquota),
++	fsparam_flag("grpquota", Opt_grpquota),
++	fsparam_flag("prjquota", Opt_prjquota),
++	fsparam_string_empty("usrjquota", Opt_usrjquota),
++	fsparam_string_empty("grpjquota", Opt_grpjquota),
++	fsparam_string_empty("prjjquota", Opt_prjjquota),
++	fsparam_flag("nat_bits", Opt_nat_bits),
++	fsparam_enum("jqfmt", Opt_jqfmt, f2fs_param_jqfmt),
++	fsparam_enum("alloc_mode", Opt_alloc, f2fs_param_alloc_mode),
++	fsparam_enum("fsync_mode", Opt_fsync, f2fs_param_fsync_mode),
++	fsparam_string("test_dummy_encryption", Opt_test_dummy_encryption),
++	fsparam_flag("test_dummy_encryption", Opt_test_dummy_encryption),
++	fsparam_flag("inlinecrypt", Opt_inlinecrypt),
++	fsparam_string("checkpoint", Opt_checkpoint),
++	fsparam_flag_no("checkpoint_merge", Opt_checkpoint_merge),
++	fsparam_string("compress_algorithm", Opt_compress_algorithm),
++	fsparam_u32("compress_log_size", Opt_compress_log_size),
++	fsparam_string("compress_extension", Opt_compress_extension),
++	fsparam_string("nocompress_extension", Opt_nocompress_extension),
++	fsparam_flag("compress_chksum", Opt_compress_chksum),
++	fsparam_enum("compress_mode", Opt_compress_mode, f2fs_param_compress_mode),
++	fsparam_flag("compress_cache", Opt_compress_cache),
++	fsparam_flag("atgc", Opt_atgc),
++	fsparam_flag_no("gc_merge", Opt_gc_merge),
++	fsparam_enum("discard_unit", Opt_discard_unit, f2fs_param_discard_unit),
++	fsparam_enum("memory", Opt_memory_mode, f2fs_param_memory_mode),
++	fsparam_flag("age_extent_cache", Opt_age_extent_cache),
++	fsparam_enum("errors", Opt_errors, f2fs_param_errors),
++	{}
++};
++
+ static match_table_t f2fs_tokens = {
+ 	{Opt_gc_background, "background_gc=%s"},
+ 	{Opt_disable_roll_forward, "disable_roll_forward"},
+-- 
+2.49.0
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
