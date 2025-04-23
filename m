@@ -2,141 +2,137 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA007A999B3
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Apr 2025 22:50:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECE24A999E0
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Apr 2025 23:06:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u7h2x-00012u-8I;
-	Wed, 23 Apr 2025 20:50:19 +0000
+	id 1u7hIO-0001Ee-Sb;
+	Wed, 23 Apr 2025 21:06:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1u7h2k-00012L-O5
+ (envelope-from <kanepyork@gmail.com>) id 1u7hIN-0001EX-PG
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 23 Apr 2025 20:50:07 +0000
+ Wed, 23 Apr 2025 21:06:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:MIME-Version:References:In-Reply-To:From:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fFkkPBXFFdFSrV74lL2RXijCFkxgTbW7EfheadDhMlM=; b=By4ZOxKk15ag9uT9On8uaZkKMa
- CF7R6j5sy0wyGG16T1uGQGjnd8JYCTU0jb35KAE2wFAeeYDS7BLf1MojJX5gZ1E/DSvdDJGv7t983
- y3sRPhfG46d13ropvkCjP2zvpyr/O6litrrbnpjE2zDxJ4VSm5xE+iv/jEhImwnXqboQ=;
+ bh=6GgomoTqcxsuEbINY7I6CWSn0GXbkD5Th2M/o+l0ZGo=; b=g9KDh54vPW7JwUcFEwbfcho0N1
+ BGNoG6wRjP0UReP5STXwcm+1t4RxPyj/ybakVQ5+gGfCFgog89N4a6oABo+biG1HgaXex7ivEbxxZ
+ Ki5+0LbYPAqzjzoQaHKM5D2UkPg64VASjhg26jE4pxQG5Euzbgc6gMMlIMfudvOQGfPk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=fFkkPBXFFdFSrV74lL2RXijCFkxgTbW7EfheadDhMlM=; b=M
- 5lz7vcGwdlKxUsBQWPE2w0iWcrAsmwjK4emfP11CTN4xRqDnL6BAHqypq5bDq9MQCtH9oFvab7vm4
- sCCQKLtOsTHbDk38cq9QgAccJt+hNX9UkEh/NJQyZbv4I4qU+Zgb+pKXSUZpoqZcquisTEQkGmqbU
- rk5WIx0ThLiBcwEU=;
-Received: from mail-pf1-f175.google.com ([209.85.210.175])
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:
+ MIME-Version:References:In-Reply-To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=6GgomoTqcxsuEbINY7I6CWSn0GXbkD5Th2M/o+l0ZGo=; b=jMQcwncUWOAjOPM1yPuMH3a+yg
+ 43kTqvjrTIxh6fgrf39JOnF5ahAEKa7CxQE30aIbLDowY5tomw4hLjOs6gq1q3R5uoQ2URn0KFqdh
+ /69lNc/KhwAhZyXBBMHuIMorJu9jpxKzAQsQcUFQPLTSvSoa0gU4YhRubp6WkWu4zhCE=;
+Received: from mail-wr1-f52.google.com ([209.85.221.52])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1u7h2V-0002zH-E7 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 23 Apr 2025 20:50:07 +0000
-Received: by mail-pf1-f175.google.com with SMTP id
- d2e1a72fcca58-7370a2d1981so174023b3a.2
+ id 1u7hI8-0004hT-22 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 23 Apr 2025 21:06:15 +0000
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-39efc1365e4so138324f8f.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 23 Apr 2025 13:49:51 -0700 (PDT)
+ Wed, 23 Apr 2025 14:05:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745441381; x=1746046181; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=fFkkPBXFFdFSrV74lL2RXijCFkxgTbW7EfheadDhMlM=;
- b=LE1MtFav7W8O7PlAvFCSOgXssIWOV8gzcsBmf9bhr72F/GS7mcnXKaRz8aPAdlrSbC
- h8p5UgM+Pz0XvIyG0cr4iwaSBMvzX4eLzUjgMvzCGQylPmRY/AcSU0oa5E+VgIds4Xd6
- +Mu1Qho+Zjn5wnIDGI7k1cDgWinl70J3yhAp3kXNZReU5/VpuP48YjW7ot/Y3kpHYEiS
- vdP2crAKaRDMKRe4crp+6J5y6ax4RIMplsPZkxOwGjrvbFUYBKfVWPS6i4MxtTg3uGlG
- w8DapgPuCsWZz8tKey4hG87m5PU6PhgizcyqAUh/hIL/amYvet9lYlNpKnpuAoOBlSkz
- PEnQ==
+ d=gmail.com; s=20230601; t=1745442348; x=1746047148; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:cc:to:subject:message-id:date
+ :mime-version:references:in-reply-to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6GgomoTqcxsuEbINY7I6CWSn0GXbkD5Th2M/o+l0ZGo=;
+ b=JLlipDVNqAGsX+KAvtpS55BdYCjegAZblmtgg52IqINxaTAV6FakEpBFiK2QpC4S/p
+ XqWEAA5uFeVllUThpVF7MzNmX4AmlgpMdiB7+XOrV5532GHqSiOHAe12HSMejCsEnnBE
+ bQ4T7RbQ0d9idJ0E2ssc93SLaVpng/UnQ16xNpLwNzLd23/4XOnrsZ07i3gBZF6KXvze
+ ymTasAHS5AgeIRP2e57IEo4gygS4r0+1tUEokTkZxAyx/Y8KFYaGXaxBH8nXLo97AaL9
+ +bPTy9UqJEXLXwm7QM7qx4lWwg+xkIpiGn8+Ixsjxi5wmqniCnVk6Co5h/gSC8D1eWR/
+ X8+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745441381; x=1746046181;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fFkkPBXFFdFSrV74lL2RXijCFkxgTbW7EfheadDhMlM=;
- b=RAsYwsoo+8mP7ctZEs5RMAWuRPTc6uQxOSGZ3te9EfzXqbn4h1cg5uC3B/ljilz2TG
- gplUJ4R0QcFx4oBv7Y2dLMPXrr9h9XxcxEh1z7PCAmPupnMFl6zLs4BHqqLTvXtMCeT/
- H0VOx7r731PyPoXXPUDAalJy4zaby8BjbGZNddqUzNpXGyCwKc1b1a0RjZNyImKDxfZY
- 6T2qjV0wP7UcJtzN98D1R8D4qxRMqL1TeHz0jWsvQDOBkZeWOYbGm6JaKFJdvwiiFJF5
- yosOSYC2/QxAHDzY7tJ0Vb4iIHierrTQLcnl4RpUNEcYpZhdjvRvzsNuta449lTyzmCI
- z9aw==
+ d=1e100.net; s=20230601; t=1745442348; x=1746047148;
+ h=content-transfer-encoding:cc:to:subject:message-id:date
+ :mime-version:references:in-reply-to:from:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=6GgomoTqcxsuEbINY7I6CWSn0GXbkD5Th2M/o+l0ZGo=;
+ b=UhEmBKTmGUqwkg6y2Mzn076QzdjlLQhb6hNC+khJ8ojEfsps+U8kcWTTBI3Z/EYaiz
+ hJn1XprkykO2iehauORi+JvRD2Kq9hBrxrqj6YlhcEr3LHmp2hTmyszTqrEwiYbKs9lv
+ 7GLg4o6o0vOlRCorc3VzhQWo6Hk9LrAw3qtfE1GWRo+bPhKYYQlAwn/ejF2JhJ9/TKBE
+ 8tFy1+457Dt5jPEfDgQEUXggSgr0N1qob4ytgb9QYyUWgIY25fNxqAs0loWhVq3m1d+r
+ 7LoCx44pGlpLB5B2hytmylOhEI356f6nAoo+zm8uRlPaverfx//XZe4LoIbUyFom0IGd
+ /q/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVvfvRcNWPkGBMERnIJmYWlQVMI1Yob4P2Bnjx6p7kzELA1MAukqN+3vh4Pc/ccIdBM3rJgPsCj12T67KhkIt7G@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzaPkZZwi+KEcOfQk5fE2qfH2f0wMzwM9agqTqlqiMZvAiHf1X9
- BlFOzG2/LAGbJtxebhK1n1lfBQESPxnnG/zqDEA1gGmVpYe+R1qI
-X-Gm-Gg: ASbGnctmOshMcERS8lTj/Qy9frFSYjG430F8R+IbI/ovNF3zoFJoX156XAAacWz9NEf
- cOIkHsZiCiM2JNBrBJ5+ZkH3AirnSe77ThWjk6iqpxIonnJJLdlB2MYtfNiwBWwVmgvwfSsJBtP
- Cv/bUNI1CWuTyB3CNj6FlBj7WFJoNUpSl4LamtXsHHIY+9DZfa7nai3FpHs1Onp2WMX6GfcpeNw
- BaHfCTPIwKFrAHPq3oG+fWJaynH/TFq30tssdk4KECtNNrjbRKLQZu25JbNhThEmRaY0dWyp/Oz
- J55uv7yu9j/CYrcpoxqniTwZ3NGny2OKHiIim6UlwRs2k60bewaErwtFQiiSWYZryR4F56SKSIU
- 18MxeCFdlJYnQYZWFO5Z0KWAkvxTnm5ag
-X-Google-Smtp-Source: AGHT+IFwjUzOpbdI9GzZmAWxW0GeyrpeovFKMtz9ez3tSWXCTpH3YxHA3i6KQYceOr19FwuIGctLFw==
-X-Received: by 2002:a05:6a00:3406:b0:732:5276:4ac9 with SMTP id
- d2e1a72fcca58-73e24606fedmr251754b3a.9.1745441380729; 
- Wed, 23 Apr 2025 13:49:40 -0700 (PDT)
-Received: from daehojeong-desktop.mtv.corp.google.com
- ([2a00:79e0:2e14:7:7dbc:3d73:1245:bd40])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73e25acaba0sm825b3a.169.2025.04.23.13.49.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Apr 2025 13:49:40 -0700 (PDT)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Wed, 23 Apr 2025 13:49:34 -0700
-Message-ID: <20250423204935.2335000-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.49.0.805.g082f7c87e0-goog
+ AJvYcCWOk7EH3TDBrDgFJF7mGDajMPJ6+90MoZ/BLwX7Ktli3YfSMdwsfyZbiSSZAe2RB4k2ltdpr+WIGjDstm2oBCI5@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzL8ZKMCYqvjxyKzwyIZ43VZomrByRbTpFz4oThn4pnTr8g6Ffs
+ lj3cOLZBqcAE1On2AAkb8OKyBD37lvsfa5eXLepceQiQTYP0+bfp1S10nJHf93MYzhHr21t58J0
+ 0Gcais4ZikFNEWKNuW4+OTazR0OU=
+X-Gm-Gg: ASbGncv+azEIV3WF8Tbw2TmBrSgmLxBh1yWm0t4G1FHs4M/cEMnW/Scxfv8rsbDI2Od
+ sLJxjsvjt17/sLi7IR8CZm59TUuu4xr8m44lpRPNWTCbiH+BWnVV8GIV5UhvWbySrTymlDrFwxI
+ rAWmHUfxrJ4f9nrXR6sSwbyZda0rGA/1xsWA==
+X-Google-Smtp-Source: AGHT+IGUsLBPox/uWJmjVyGdZUaWrYeefwPGm1ePwVrDhg+0usyKnEvHQaxBIhl8yqvVIW79wshIanldFENL4YTbVZ8=
+X-Received: by 2002:a5d:64a4:0:b0:39f:e37:1733 with SMTP id
+ ffacd0b85a97d-3a06cf52369mr13252f8f.2.1745442348296; Wed, 23 Apr 2025
+ 14:05:48 -0700 (PDT)
+Received: from 753933720722 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 23 Apr 2025 14:05:47 -0700
+Received: from 753933720722 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 23 Apr 2025 14:05:47 -0700
+From: Kane York <kanepyork@gmail.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <68089b8d.050a0220.36a438.000a.GAE@google.com>
+References: <68089b8d.050a0220.36a438.000a.GAE@google.com>
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+Date: Wed, 23 Apr 2025 14:05:47 -0700
+X-Gm-Features: ATxdqUFZthFAklAVbjNKhw0GESMNNwLIui2BC5RgpHNS2pvWQzLydo6IzsEC7Q4
+Message-ID: <CABeNrKXCcXxviXQPdCk2R+o-M0VmOsowtWkTddQ5+Tua9eCrQg@mail.gmail.com>
+To: syzbot+effe7da6578cd423f98f@syzkaller.appspotmail.com
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Daeho Jeong In cases of removing memory donation, we
- need to handle some error cases like ENOENT and EACCES (indicating the range
- already has been donated). Signed-off-by: Daeho Jeong --- v2: use proper
- error code rename FI_DONATE_FINISHED and use it to fix race conditions ---
- fs/f2fs/f2fs.h | 1 + fs/f2fs/file.c | 23 ++++++++++++++++------- fs/f2fs/shri
- [...] Content analysis details:   (0.1 points, 6.0 required)
+ Content preview: This crash appears to entirely ignore the provided filesystem
+ images and just does tricky fallocate calls followed by a truncate, so it
+ should be easier than normal to diagnose. The cwd is opened with O_DIRECT.
+ (or this is EFAULT because path is nullptr?) 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.175 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.210.175 listed in sa-trusted.bondedsender.org]
+ [209.85.221.52 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.210.175 listed in bl.score.senderscore.com]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [daeho43[at]gmail.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [daeho43[at]gmail.com]
+ [209.85.221.52 listed in bl.score.senderscore.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [kanepyork[at]gmail.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.210.175 listed in wl.mailspike.net]
+ [209.85.221.52 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1u7h2V-0002zH-E7
-Subject: [f2fs-dev] [PATCH v2] f2fs: handle error cases of memory donation
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.221.52 listed in list.dnswl.org]
+X-Headers-End: 1u7hI8-0004hT-22
+Subject: Re: [f2fs-dev] [syzbot] [f2fs?] INFO: task hung in do_truncate (3)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -148,141 +144,74 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+Cc: brauner@kernel.org, kent.overstreet@linux.dev, jack@suse.cz,
+ syzkaller-bugs@googlegroups.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-bcachefs@vger.kernel.org,
+ viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+This crash appears to entirely ignore the provided filesystem images and just
+does tricky fallocate calls followed by a truncate, so it should be easier than
+normal to diagnose.
 
-In cases of removing memory donation, we need to handle some error cases
-like ENOENT and EACCES (indicating the range already has been donated).
+The cwd is opened with O_DIRECT. (or this is EFAULT because path is nullptr?)
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
----
-v2: use proper error code
-    rename FI_DONATE_FINISHED and use it to fix race conditions
----
- fs/f2fs/f2fs.h     |  1 +
- fs/f2fs/file.c     | 23 ++++++++++++++++-------
- fs/f2fs/shrinker.c | 13 ++++++++++---
- 3 files changed, 27 insertions(+), 10 deletions(-)
+The victim file is created with O_NONBLOCK and O_SYNC; that fd is discarded.
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index f1576dc6ec67..01ee8bbb5c84 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -821,6 +821,7 @@ enum {
- 	FI_ATOMIC_DIRTIED,	/* indicate atomic file is dirtied */
- 	FI_ATOMIC_REPLACE,	/* indicate atomic replace */
- 	FI_OPENED_FILE,		/* indicate file has been opened */
-+	FI_DONATE_FINISHED,	/* indicate page donation of file has been finished */
- 	FI_MAX,			/* max flag, never be used */
- };
- 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index abbcbb5865a3..61b88431fd43 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2464,19 +2464,20 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
- 	return ret;
- }
- 
--static void f2fs_keep_noreuse_range(struct inode *inode,
-+static int f2fs_keep_noreuse_range(struct inode *inode,
- 				loff_t offset, loff_t len)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	u64 max_bytes = F2FS_BLK_TO_BYTES(max_file_blocks(inode));
- 	u64 start, end;
-+	int ret = 0;
- 
- 	if (!S_ISREG(inode->i_mode))
--		return;
-+		return 0;
- 
- 	if (offset >= max_bytes || len > max_bytes ||
- 	    (offset + len) > max_bytes)
--		return;
-+		return 0;
- 
- 	start = offset >> PAGE_SHIFT;
- 	end = DIV_ROUND_UP(offset + len, PAGE_SIZE);
-@@ -2484,7 +2485,7 @@ static void f2fs_keep_noreuse_range(struct inode *inode,
- 	inode_lock(inode);
- 	if (f2fs_is_atomic_file(inode)) {
- 		inode_unlock(inode);
--		return;
-+		return 0;
- 	}
- 
- 	spin_lock(&sbi->inode_lock[DONATE_INODE]);
-@@ -2493,7 +2494,12 @@ static void f2fs_keep_noreuse_range(struct inode *inode,
- 		if (!list_empty(&F2FS_I(inode)->gdonate_list)) {
- 			list_del_init(&F2FS_I(inode)->gdonate_list);
- 			sbi->donate_files--;
--		}
-+			if (is_inode_flag_set(inode, FI_DONATE_FINISHED))
-+				ret = -EALREADY;
-+			else
-+				set_inode_flag(inode, FI_DONATE_FINISHED);
-+		} else
-+			ret = -ENOENT;
- 	} else {
- 		if (list_empty(&F2FS_I(inode)->gdonate_list)) {
- 			list_add_tail(&F2FS_I(inode)->gdonate_list,
-@@ -2505,9 +2511,12 @@ static void f2fs_keep_noreuse_range(struct inode *inode,
- 		}
- 		F2FS_I(inode)->donate_start = start;
- 		F2FS_I(inode)->donate_end = end - 1;
-+		clear_inode_flag(inode, FI_DONATE_FINISHED);
- 	}
- 	spin_unlock(&sbi->inode_lock[DONATE_INODE]);
- 	inode_unlock(inode);
-+
-+	return ret;
- }
- 
- static int f2fs_ioc_fitrim(struct file *filp, unsigned long arg)
-@@ -5236,8 +5245,8 @@ static int f2fs_file_fadvise(struct file *filp, loff_t offset, loff_t len,
- 	     f2fs_compressed_file(inode)))
- 		f2fs_invalidate_compress_pages(F2FS_I_SB(inode), inode->i_ino);
- 	else if (advice == POSIX_FADV_NOREUSE)
--		f2fs_keep_noreuse_range(inode, offset, len);
--	return 0;
-+		err = f2fs_keep_noreuse_range(inode, offset, len);
-+	return err;
- }
- 
- #ifdef CONFIG_COMPAT
-diff --git a/fs/f2fs/shrinker.c b/fs/f2fs/shrinker.c
-index 9c8d3aee89af..b88babcf6ab4 100644
---- a/fs/f2fs/shrinker.c
-+++ b/fs/f2fs/shrinker.c
-@@ -184,10 +184,17 @@ static unsigned int do_reclaim_caches(struct f2fs_sb_info *sbi,
- 		if (!inode)
- 			continue;
- 
--		len = fi->donate_end - fi->donate_start + 1;
--		npages = npages < len ? 0 : npages - len;
--		invalidate_inode_pages2_range(inode->i_mapping,
-+		inode_lock(inode);
-+		if (!is_inode_flag_set(inode, FI_DONATE_FINISHED)) {
-+			len = fi->donate_end - fi->donate_start + 1;
-+			npages = npages < len ? 0 : npages - len;
-+
-+			invalidate_inode_pages2_range(inode->i_mapping,
- 					fi->donate_start, fi->donate_end);
-+			set_inode_flag(inode, FI_DONATE_FINISHED);
-+		}
-+		inode_unlock(inode);
-+
- 		iput(inode);
- 		cond_resched();
- 	}
--- 
-2.49.0.805.g082f7c87e0-goog
+The victim file is opened again with O_SYNC and FALLOC_FL_ZERO_RANGE is called
+with a gargantuan size.
 
+The victim file is opened again with O_APPEND (!) and FALLOC_FL_INSERT_RANGE is
+called with a modest size.
+
+Truncate is called midway through the just-inserted range.
+
+Annotated calls below.
+
+# https://syzkaller.appspot.com/bug?id=7d29d6d7a773d4f608a33cf6a7593faadb1b5803
+# See https://goo.gl/kgGztJ for information about syzkaller reproducers.
+#{"threaded":true,"repeat":true,"procs":5,"slowdown":1,"sandbox":"none","sandbox_arg":0,"tun":true,"netdev":true,"resetnet":true,"cgroups":true,"binfmt_misc":true,"close_fds":true,"usb":true,"vhci":true,"wifi":true,"ieee802154":true,"sysctl":true,"swap":true,"tmpdir":true,"segv":true}
+# mount file2
+syz_mount_image$f2fs(&(0x7f0000000040),
+&(0x7f00000000c0)='./file2\x00', 0x0,
+&(0x7f0000000300)={[{@noinline_xattr}, {@noinline_dentry},
+{@prjjquota={'prjjquota', 0x3d, 'active_logs=4'}}, {@jqfmt_vfsv1},
+{@noinline_data}, {@noheap}, {@checkpoint_diasble}, {@fastboot},
+{@fsync_mode_strict}, {@discard_unit_section}]}, 0x21, 0x552d,
+&(0x7f000000abc0)="$[removed]")
+# EBADF
+pread64(0xffffffffffffffff, 0x0, 0x0, 0xfff)
+# EBADF
+openat$cgroup_freezer_state(0xffffffffffffffff, &(0x7f0000000080), 0x2, 0x0)
+# openat(AT_FDCWD, nullptr, O_DIRECT, 0)
+# EFAULT?
+openat$nullb(0xffffffffffffff9c, 0x0, 0x4000, 0x0)
+# mount 'bus'
+syz_mount_image$ext4(&(0x7f0000000080)='ext4\x00',
+&(0x7f00000000c0)='./bus\x00', 0x20081e,
+&(0x7f0000000040)={[{@nodelalloc}, {@orlov}, {@auto_da_alloc}]}, 0x1,
+0x4ef, &(0x7f00000003c0)="$[removed]")
+# open file1
+# O_RDWR | O_CREAT | O_NOCTTY | O_NONBLOCK | FASYNC | O_LARGEFILE | O_SYNC
+# perm 0500
+open(&(0x7f0000000080)='./file1\x00', 0x10b942, 0x140)
+# open file1
+# O_RDWR | O_CREAT | O_LARGEFILE | O_SYNC
+# perm 0210
+r0 = open(&(0x7f0000000100)='./file1\x00', 0x109042, 0x88)
+# fallocate FALLOC_FL_ZERO_RANGE, offset 0, size 0x7000000
+fallocate(r0, 0x10, 0x0, 0x7000000)
+# openat(AT_FDCWD) file1
+# O_WRONLY | O_CREAT | O_APPEND
+# perm 0512
+r1 = openat(0xffffffffffffff9c, &(0x7f0000000080)='./file1\x00', 0x441, 0x14a)
+# fallocate file1 FALLOC_FL_INSERT_RANGE, offset x4000, size x8000
+# EPERM?
+fallocate(r1, 0x20, 0x4000, 0x8000)
+# truncate file1 size x8001
+truncate(&(0x7f00000000c0)='./file1\x00', 0x8001)
 
 
 _______________________________________________
