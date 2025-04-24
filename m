@@ -2,102 +2,143 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BDFCA9A72D
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Apr 2025 10:58:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44A7FA9AAB3
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Apr 2025 12:44:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u7sPq-0006bb-5J;
-	Thu, 24 Apr 2025 08:58:42 +0000
+	id 1u7u3b-0005pC-05;
+	Thu, 24 Apr 2025 10:43:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1u7sPo-0006bU-7o
+ (envelope-from <dmantipov@yandex.ru>) id 1u7u3P-0005ox-HD
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Apr 2025 08:58:40 +0000
+ Thu, 24 Apr 2025 10:43:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1l/8MBTeGW0CRWvRghdDj60MKdgX5tGQQ+b+ccU9Uak=; b=hnQMG0LtyxDVt0oe41Xn+dyjEw
- y/Lltd0ASslXEVn/ktwyeleMb8Qs5fHjAUZBzc3UsUAH++5AiCmEcIwwopwhuR0o8cZb1IbbeHhoy
- HFLH68SO9d+bHE9TATyO9Y/w9eh44CqVQH8+W8L+2XmQXR+0ZLEa7YWW/9WyG8ChyUlY=;
+ bh=F6jrhSxfd3gqUNjPdCn+gfu0s+cIV0DBzgy9OhCCc6E=; b=mio5XuVZpnKwA1hsEJWLGksk9a
+ 2lxzBbLTLb2oIHYdcR1z7lI9O9pBRV9wSClKjHe7P/wE9fnHa15O8YEfVZuNXelOjSaA/msC8AFH7
+ CN1jgX/g+taVxdf0rtgWUzT2RF1saBOlaM6k4KXVhgdlFc28oUyThVK0r/7cXGvonsyc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
+ References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1l/8MBTeGW0CRWvRghdDj60MKdgX5tGQQ+b+ccU9Uak=; b=cpfgpny85d3rVOTomrglJzFWVV
- JcAfV7GhN6InnBejZAQ5wzJpkPKDH9bJ5kfS+PD+BJMYnBdYlhmoeDavZhvjdePrnswomJkQq3W2x
- RhTri8o9zl8lbourweyu9zAvxDtSydg2XqujAAg7s+JFBWRGX3UTdnHDjoXs9Sls67Vo=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=F6jrhSxfd3gqUNjPdCn+gfu0s+cIV0DBzgy9OhCCc6E=; b=ECJ7hw8f/Kekjb4TUQ35FGaLBF
+ 9poXMV9oI3RGeCBN+yQWk7qO8a+wdQFEwGFGyl4XDWA9fGrTAZgvQ08zOQ2EmbKDdcZSA7AdQHM7H
+ yTMfRgMMtylbkP9MmQ8vh8RtUtXmWPXg4dvRiaEJGUCwH7icWE7w8B4+7KX8kGhqU7S8=;
+Received: from forward500d.mail.yandex.net ([178.154.239.208])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1u7sPY-0007FF-Ii for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Apr 2025 08:58:40 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 2359A68456;
- Thu, 24 Apr 2025 08:57:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 984E3C4CEE3;
- Thu, 24 Apr 2025 08:58:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1745485093;
- bh=WRtAJIlD31W/MPCJbqHC+mOWsaKtdlry2yATw1XV86Y=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=YLRlM8BwTFRN0Sdx7f7US/aeOrjMwGV6YCJ1g5HuELbymZ3WXxP8XR/CGScuciFwT
- wzOHqrYtjjsVaJ1GGUwOzcSJPlwaxEdmNfxs9TKhcW39a6NM3/jvl98RUdTY64UgDC
- ZVmdoIBH/5APv94vRMzsFX72HO1LQJIWQKOWckwIc1iOsQ2f1ZfdaRypcfmuIDum9W
- oxwoGmA8RDh4iK9jYKZ+CJi88OzYuMTYlQK7LbBsAQgutNa0UF7K5rHXWt4TlI9JdG
- 1cWFKGMN+5SwRRNOn1zAvUswjF8E6+vgul02Pubvs173YMKx8+l710IyQksA57N78v
- PNXTdcyrM+GjA==
-Message-ID: <cfbe6edc-fcc3-4351-9c3d-5c6c18178835@kernel.org>
-Date: Thu, 24 Apr 2025 16:58:10 +0800
+ id 1u7u39-0002k9-BG for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 24 Apr 2025 10:43:40 +0000
+Received: from mail-nwsmtp-smtp-production-main-81.klg.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-81.klg.yp-c.yandex.net
+ [IPv6:2a02:6b8:c42:67a8:0:640:8b81:0])
+ by forward500d.mail.yandex.net (Yandex) with ESMTPS id 2790C61410;
+ Thu, 24 Apr 2025 13:43:11 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-81.klg.yp-c.yandex.net
+ (smtp/Yandex) with ESMTPSA id 9hNQhg8LmuQ0-ucElYKF6; 
+ Thu, 24 Apr 2025 13:43:10 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail;
+ t=1745491390; bh=F6jrhSxfd3gqUNjPdCn+gfu0s+cIV0DBzgy9OhCCc6E=;
+ h=In-Reply-To:Subject:To:From:Cc:Date:References:Message-ID;
+ b=l/8cAi+UJjl5UNJW7UtI/71KU1OzdLy9KG/4k6fpOtdoyQKE68mscEOFCTGltk8ej
+ 8iepdJcU0FgF0HYUvnHgSev/N2M/bmNCPBFC6OSbKKAUZnuuctw4lrh0QJmkrMHKuP
+ bXYxcZUyKaQypufD/+FK7NEmwY3ezkEX2v0smBXQ=
+Authentication-Results: mail-nwsmtp-smtp-production-main-81.klg.yp-c.yandex.net;
+ dkim=pass header.i=@yandex.ru
+Message-ID: <579042fc-d8e6-4ce4-b3d5-72cfb4102d3c@yandex.ru>
+Date: Thu, 24 Apr 2025 13:43:09 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Dmitry Antipov <dmantipov@yandex.ru>, Jaegeuk Kim <jaegeuk@kernel.org>
+Content-Language: en-MW
+To: Chao Yu <chao@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20250423161527.152834-1-dmantipov@yandex.ru>
-Content-Language: en-US
-In-Reply-To: <20250423161527.152834-1-dmantipov@yandex.ru>
-X-Spam-Score: -1.0 (-)
+ <cfbe6edc-fcc3-4351-9c3d-5c6c18178835@kernel.org>
+From: Dmitry Antipov <dmantipov@yandex.ru>
+Autocrypt: addr=dmantipov@yandex.ru; keydata=
+ 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
+ A/UwwXBRuvydGV0=
+In-Reply-To: <cfbe6edc-fcc3-4351-9c3d-5c6c18178835@kernel.org>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 4/24/25 00:15,
- Dmitry Antipov wrote: > In 'f2fs_write_end_io()', 
- end all of the in-progress writes with > -EFSCORRUPTED if the corresponding
- error was detected earlier. I guess we need to figure out why f2fs_bug_on()
- will be tiggerred? 
- Content analysis details:   (-1.0 points, 6.0 required)
+ Content preview:  On 4/24/25 11:58 AM,
+ Chao Yu wrote: > I guess we need to figure
+ out why f2fs_bug_on() will be tiggerred? > > f2fs_write_end_io() > { > ...
+ > f2fs_bug_on(sbi, folio->mapping == NODE_MAPPING(sbi) && > folio->index
+ != nid_of_node(&folio->p [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [178.154.239.208 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [dmantipov[at]yandex.ru]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.105.4.254 listed in sa-accredit.habeas.com]
+ [178.154.239.208 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.105.4.254 listed in bl.score.senderscore.com]
+ [178.154.239.208 listed in bl.score.senderscore.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.8 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1u7sPY-0007FF-Ii
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+X-Headers-End: 1u7u39-0002k9-BG
 Subject: Re: [f2fs-dev] [PATCH] fs: f2fs: end all corrupted fs writes with
  -EFSCORRUPTED
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -111,64 +152,30 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
 Cc: syzbot+803dd716c4310d16ff3a@syzkaller.appspotmail.com,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 4/24/25 00:15, Dmitry Antipov wrote:
-> In 'f2fs_write_end_io()', end all of the in-progress writes with
-> -EFSCORRUPTED if the corresponding error was detected earlier.
+On 4/24/25 11:58 AM, Chao Yu wrote:
 
-I guess we need to figure out why f2fs_bug_on() will be tiggerred?
-
-f2fs_write_end_io()
-{
-...
-		f2fs_bug_on(sbi, folio->mapping == NODE_MAPPING(sbi) &&
-				folio->index != nid_of_node(&folio->page));
-
-Thanks,
-
+> I guess we need to figure out why f2fs_bug_on() will be tiggerred?
 > 
-> Reported-by: syzbot+803dd716c4310d16ff3a@syzkaller.appspotmail.com
-> Closes: https://syzkaller.appspot.com/bug?extid=803dd716c4310d16ff3a
-> Signed-off-by: Dmitry Antipov <dmantipov@yandex.ru>
-> ---
->  fs/f2fs/data.c | 7 +++++++
->  1 file changed, 7 insertions(+)
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 54f89f0ee69b..755806868f0e 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -320,9 +320,11 @@ static void f2fs_write_end_io(struct bio *bio)
->  {
->  	struct f2fs_sb_info *sbi;
->  	struct folio_iter fi;
-> +	bool check;
->  
->  	iostat_update_and_unbind_ctx(bio);
->  	sbi = bio->bi_private;
-> +	check = is_sbi_flag_set(sbi, SBI_NEED_FSCK);
->  
->  	if (time_to_inject(sbi, FAULT_WRITE_IO))
->  		bio->bi_status = BLK_STS_IOERR;
-> @@ -331,6 +333,11 @@ static void f2fs_write_end_io(struct bio *bio)
->  		struct folio *folio = fi.folio;
->  		enum count_type type;
->  
-> +		if (check) {
-> +			mapping_set_error(folio->mapping, -EFSCORRUPTED);
-> +			continue;
-> +		}
-> +
->  		if (fscrypt_is_bounce_folio(folio)) {
->  			struct folio *io_folio = folio;
->  
+> f2fs_write_end_io()
+> {
+> ...
+> 		f2fs_bug_on(sbi, folio->mapping == NODE_MAPPING(sbi) &&
+> 				folio->index != nid_of_node(&folio->page));
+
+Well, syzkaller is very "creative" in generating weirdly damaged filesystems :-).
+
+An overall idea of the patch is that an attempt to complete I/O on a filesystem
+which is known to be "broken enough to run fsck" may make the things even worse
+(by making the filesystem even less consistent). So it may be safer just to
+refuse all in-flight write attempts at least.
+
+Dmitry
 
 
 
