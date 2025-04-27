@@ -2,118 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F33D3A9E205
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 27 Apr 2025 11:31:11 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F53CA9E20E
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 27 Apr 2025 11:32:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u8yLp-0004Np-3A;
-	Sun, 27 Apr 2025 09:31:04 +0000
+	id 1u8yMe-0002a9-HD;
+	Sun, 27 Apr 2025 09:31:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <devnull@nl6720.me>) id 1u8yLl-0004NZ-IK
+ (envelope-from <chao@kernel.org>) id 1u8yMc-0002a2-Su
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 27 Apr 2025 09:31:02 +0000
+ Sun, 27 Apr 2025 09:31:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gAxXGz+cueX6GJNN9VFNOvGxujqk6DES7Tcl0skEl2U=; b=GN84awau98QqbR76zz6k95aWD1
- i2sDzlwh/fvajg8c3YEuTmBy1wHiSXdjD7Q3IJC6igjXnZwXYUsFdD2SitwLdd4lQCb0lPJisrW0R
- qAw++UKukUCEUt1xths6fVHEtuyc7vB6puExWDzPYUgGMeyHgSrK3RQHMxHOqOYFZwQY=;
+ bh=/82Z/Rs3wusezc970Kh9dMTCBVmsbV7wmMwX8mozQBQ=; b=lrDo4xf/gYZpf4TGFgq5VRzR+f
+ 35aC7JBhHKDFQVwsYR8JFHykiC5Id++DTSYy+An5YgA6f7fu+u2J42ElK/ROyG95/ajaCPivf+2lI
+ c5WQC+Hnrr4lCCJCnrwugayjyqfP0Cst056YopcUVUja0si3X/PzTQaTldjRLxqKx5C0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gAxXGz+cueX6GJNN9VFNOvGxujqk6DES7Tcl0skEl2U=; b=mB96BeAQ+kIKlCcIcrODGahD8j
- nH4dHhq4ZT6tt1Cq2yfFyIWk7JIvYz7dNk6OF9IhHU1mfj7AqoRBc2birmPeOJ630lsi3VOTJTWZr
- LJ8pnlFsY9r01p6wnLuxfVKSQd5uwqYbmKdJ8jehDIgY1QVEdIHizvaT6pgSCmELUEP8=;
-Received: from dane.soverin.net ([185.233.34.11])
+ bh=/82Z/Rs3wusezc970Kh9dMTCBVmsbV7wmMwX8mozQBQ=; b=Pish30mlnrmtEaTX91zjWnBWlI
+ rwc8UJ6RazDU1awLNfaVdi3Z68EjsbN9mqZO4mZ+ajLIRvg8R3wmWzAO6HBiFXWIwHDUOfBb/HrG0
+ KJ+YBq7zl9vCd+qxV2qulzKwbJQJPU3e0Knn2sYO9ih0tpTw6g8LCmNBKc92UKYslGEc=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1u8yLU-00038z-Dy for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 27 Apr 2025 09:31:00 +0000
-Received: from smtp.soverin.net (unknown [10.10.4.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by dane.soverin.net (Postfix) with ESMTPS id 4ZlhBw6gmRz18bc;
- Sun, 27 Apr 2025 09:30:32 +0000 (UTC)
-Received: from smtp.soverin.net (smtp.soverin.net [10.10.4.99]) by soverin.net
- (Postfix) with ESMTPSA id 4ZlhBw1Jd1z5F; 
- Sun, 27 Apr 2025 09:30:32 +0000 (UTC)
-Authentication-Results: smtp.soverin.net; dkim=pass (2048-bit key;
- unprotected) header.d=nl6720.me header.i=@nl6720.me header.a=rsa-sha256
- header.s=soverin1 header.b=uPQh9P5d; dkim-atps=neutral
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nl6720.me; s=soverin1; 
- t=1745746232;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=gAxXGz+cueX6GJNN9VFNOvGxujqk6DES7Tcl0skEl2U=;
- b=uPQh9P5dYpBSmkf1gHxBl6VoQIFQI0vRXAf5q/m+fQTNHvB6a1IHrUEZEmNb4wS2hLbQXQ
- wySm7fsD5Mee9kbzzspshb18gaYlSUXdoto1/nEg3HZOf2bh3dlPsdWk1YzWhG0ncaKU8Y
- KtLU7qXKpC0DRSOHvw/aDQWsY5ZIE77Y2Lyl17h5FXhMiq0oVhtveFvWKwITN7rZtT4ILA
- JRbOfRuLbw7RVFOtFGTbQR0GooZgC/nE6IcUqNQLckJQthxPq0MVfBEV/gVnfzPOZWRVBg
- xfZZWdnqPwRVfU5Wo420Pb1Fch82hISNICiqiRt06kdxc1d0XnRrsUuFnb4a8w==
-X-CM-Analysis: v=2.4 cv=I7afRMgg c=1 sm=1 tr=0 ts=680df938
- a=gDLi7OiDnwTL5vi9sMxOwA==:117 a=gDLi7OiDnwTL5vi9sMxOwA==:17
- a=IkcTkHD0fZMA:10 a=MKtGQD3n3ToA:10 a=1oJP67jkp3AA:10 a=NEAV23lmAAAA:8
- a=AbWLNOroRT5PHBGQ9kkA:9 a=QEXdDO2ut3YA:10 a=u4TTkWy4iRif133gqW0v:22
-X-CM-Envelope: MS4xfPog7ibLOulLLthqgzYSoW9JRTXFZRjpkQKG1bEAlxk+Hjb9Rt86n9ZBf0bQ3NVRX3on3GElgdvB5lTFZYRWm57R/arggN4D3cb5vmAc7L+w1VsXtdeW
- QnoM7+pZEwZzsHHF0y7DjIJo59zE3JQgilWW51Cbr0BwS/DWk4gteRdBIywZCKJ06L1ND+WQjbmuJHYZ6aL75jfv82U1P+gQ6nygT4YHQEWpHJwmRwBrRDVM
-To: linux-f2fs-devel@lists.sourceforge.net, Chao Yu <chao@kernel.org>
-Date: Sun, 27 Apr 2025 12:30:31 +0300
-Message-ID: <2375737.ElGaqSPkdT@nl6720.me>
-In-Reply-To: <c2f5bc82-3e8d-4ca8-9818-d90be8ce374f@kernel.org>
-References: <20250425013623.918150-1-devnull@nl6720.me>
- <c2f5bc82-3e8d-4ca8-9818-d90be8ce374f@kernel.org>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1u8yMN-0003BK-IK for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 27 Apr 2025 09:31:55 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 4A1D74528B;
+ Sun, 27 Apr 2025 09:31:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 505B0C4CEEA;
+ Sun, 27 Apr 2025 09:31:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1745746294;
+ bh=TSG+PvlMK/tWr0V8fpAF0QQFiSStFGmRrXICg3TdMaI=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=E/i3KmKUhIjXuB011/CRSxWww/trpiXx9DmX8DKtOWApi2f93B0gNjTjl2pJTHW6G
+ 6Bsknybv75FenzCWwwPUaJQI4T5Enc8fBhTIcKxeNxCLSoiTfJsuKMTcGMy4ILSsTc
+ CqHX8tfHtGOdlXdTkJa7XveI8HdBPrNxb0oV04dM8IzN96He89xE/zdtoQH0dPvHTR
+ k/VROVYhOf2afr+hLcbBUOGRLWhvQoX1qJXHrW4EX3fcPNpp2JF2OaoQsW3oYjmWV/
+ znMbagjWrb7TocEuiyC85sEFVkJzEgRHQLc/zCD4+yGhH3LUCAFUFjUOGxzB8oUeVu
+ D5vjOkcMFvpsw==
+Message-ID: <e75b819f-97aa-48d3-80e8-9c0add157165@kernel.org>
+Date: Sun, 27 Apr 2025 17:31:31 +0800
 MIME-Version: 1.0
-X-Spampanel-Class: ham
-X-Spam-Score: -0.2 (/)
+User-Agent: Mozilla Thunderbird
+To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20250331201256.1057782-1-willy@infradead.org>
+ <20250331201256.1057782-9-willy@infradead.org>
+Content-Language: en-US
+In-Reply-To: <20250331201256.1057782-9-willy@infradead.org>
+X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sunday, 27 April 2025 11:45:59 EEST Chao Yu wrote: > On
- 4/25/25 09:36, nl6720 via Linux-f2fs-devel wrote: > > Some drives operate
- in "512e" configuration with their logical block > > size set to 51 [...]
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 4/1/25 04:10, Matthew Wilcox (Oracle) wrote: > Fetch a
+ folio from the pagecache instead of a page and operate on it > throughout.
+ Removes eight calls to compound_head() and an access to > page->map [...]
+ Content analysis details:   (-0.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [185.233.34.11 listed in sa-trusted.bondedsender.org]
+ [172.234.252.31 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [185.233.34.11 listed in bl.score.senderscore.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [185.233.34.11 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [172.234.252.31 listed in bl.score.senderscore.com]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1u8yLU-00038z-Dy
-Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: prefer physical over logical
- block size
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1u8yMN-0003BK-IK
+Subject: Re: [f2fs-dev] [PATCH 008/153] f2fs: Use a folio in
+ move_data_block()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,52 +111,114 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: nl6720 via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: nl6720 <devnull@nl6720.me>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sunday, 27 April 2025 11:45:59 EEST Chao Yu wrote:
-> On 4/25/25 09:36, nl6720 via Linux-f2fs-devel wrote:
-> > Some drives operate in "512e" configuration with their logical block
-> > size set to 512 bytes for legacy compatibility reasons while providing
-> > a more optimal 4096 byte value as the physical block size.
-> > 
-> > Since the physical block size is the smallest unit a physical storage
-> > device can write atomically, prefer it over the logical block size.
-> > 
-> > Closes: https://github.com/jaegeuk/f2fs-tools/issues/29
+On 4/1/25 04:10, Matthew Wilcox (Oracle) wrote:
+> Fetch a folio from the pagecache instead of a page and operate on it
+> throughout.  Removes eight calls to compound_head() and an access to
+> page->mapping.
 > 
-> f2fs uses PAGE_SIZE as block size, commonly it's 4096 rather than 512?
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> ---
+>  fs/f2fs/gc.c | 33 +++++++++++++++++----------------
+>  1 file changed, 17 insertions(+), 16 deletions(-)
+> 
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 2b8f9239bede..fa51b871290d 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -1307,7 +1307,8 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>  	struct dnode_of_data dn;
+>  	struct f2fs_summary sum;
+>  	struct node_info ni;
+> -	struct page *page, *mpage;
+> +	struct page *page;
+> +	struct folio *mfolio;
+>  	block_t newaddr;
+>  	int err = 0;
+>  	bool lfs_mode = f2fs_lfs_mode(fio.sbi);
+> @@ -1359,20 +1360,20 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>  	if (lfs_mode)
+>  		f2fs_down_write(&fio.sbi->io_order_lock);
+>  
+> -	mpage = f2fs_grab_cache_page(META_MAPPING(fio.sbi),
+> +	mfolio = f2fs_grab_cache_folio(META_MAPPING(fio.sbi),
+>  					fio.old_blkaddr, false);
+> -	if (!mpage) {
+> -		err = -ENOMEM;
+> +	if (IS_ERR(mfolio)) {
+> +		err = PTR_ERR(mfolio);
+>  		goto up_out;
+>  	}
+>  
+> -	fio.encrypted_page = mpage;
+> +	fio.encrypted_page = folio_file_page(mfolio, fio.old_blkaddr);
+>  
+> -	/* read source block in mpage */
+> -	if (!PageUptodate(mpage)) {
+> +	/* read source block in mfolio */
+> +	if (!folio_test_uptodate(mfolio)) {
+>  		err = f2fs_submit_page_bio(&fio);
+>  		if (err) {
+> -			f2fs_put_page(mpage, 1);
+> +			f2fs_folio_put(mfolio, true);
+>  			goto up_out;
+>  		}
+>  
+> @@ -1381,11 +1382,11 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>  		f2fs_update_iostat(fio.sbi, NULL, FS_GDATA_READ_IO,
+>  							F2FS_BLKSIZE);
+>  
+> -		lock_page(mpage);
+> -		if (unlikely(mpage->mapping != META_MAPPING(fio.sbi) ||
+> -						!PageUptodate(mpage))) {
+> +		folio_lock(mfolio);
+> +		if (unlikely(mfolio->mapping != META_MAPPING(fio.sbi) ||
+> +			     !folio_test_uptodate(mfolio))) {
+>  			err = -EIO;
+> -			f2fs_put_page(mpage, 1);
+> +			f2fs_folio_put(mfolio, 1);
 
-The thing mkfs.f2fs calls "sector size" in its output is 512 on 512e drives
-instead of 4096.
-E.g.:
+f2fs_folio_put(mfolio, true);
 
-    F2FS-tools: mkfs.f2fs Ver: 1.16.0 (2023-04-11)
+Thanks,
 
-Info: Disable heap-based policy
-Info: Debug level = 0
-Info: Trim is enabled
-Info: [/dev/disk/by-partlabel/512e] Disk Model: QEMU HARDDISK   
-Info: Segments per section = 1
-Info: Sections per zone = 1
-Info: sector size = 512
-Info: total sectors = 124997632 (61034 MB)
-Info: zone aligned segment0 blkaddr: 512
-Info: format version with
-  "Linux version 6.13.8-arch1-1 (linux@archlinux) (gcc (GCC) 14.2.1 20250207, GNU ld (GNU Binutils) 2.44) #1 SMP PREEMPT_DYNAMIC Sun, 23 Mar 2025 17:17:30 +0000"
-Info: [/dev/disk/by-partlabel/512e] Discarding device
-Info: This device doesn't support BLKSECDISCARD
-Info: Discarded 61034 MB
-Info: Overprovision ratio = 0.590%
-Info: Overprovision segments = 179 (GC reserved = 176)
-Info: format successful
-
-
-nl6720
-
+>  			goto up_out;
+>  		}
+>  	}
+> @@ -1396,7 +1397,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>  	err = f2fs_allocate_data_block(fio.sbi, NULL, fio.old_blkaddr, &newaddr,
+>  				&sum, type, NULL);
+>  	if (err) {
+> -		f2fs_put_page(mpage, 1);
+> +		f2fs_folio_put(mfolio, true);
+>  		/* filesystem should shutdown, no need to recovery block */
+>  		goto up_out;
+>  	}
+> @@ -1405,15 +1406,15 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>  				newaddr, FGP_LOCK | FGP_CREAT, GFP_NOFS);
+>  	if (!fio.encrypted_page) {
+>  		err = -ENOMEM;
+> -		f2fs_put_page(mpage, 1);
+> +		f2fs_folio_put(mfolio, true);
+>  		goto recover_block;
+>  	}
+>  
+>  	/* write target block */
+>  	f2fs_wait_on_page_writeback(fio.encrypted_page, DATA, true, true);
+>  	memcpy(page_address(fio.encrypted_page),
+> -				page_address(mpage), PAGE_SIZE);
+> -	f2fs_put_page(mpage, 1);
+> +				folio_address(mfolio), PAGE_SIZE);
+> +	f2fs_folio_put(mfolio, true);
+>  
+>  	f2fs_invalidate_internal_cache(fio.sbi, fio.old_blkaddr, 1);
+>  
 
 
 
