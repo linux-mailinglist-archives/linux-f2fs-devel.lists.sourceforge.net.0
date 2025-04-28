@@ -2,137 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91B47A9E62C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Apr 2025 04:16:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1107EA9E903
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Apr 2025 09:17:56 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1u9E2Y-0004pI-Hd;
-	Mon, 28 Apr 2025 02:16:15 +0000
+	id 1u9IkN-0003zS-Q1;
+	Mon, 28 Apr 2025 07:17:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ryncsn@gmail.com>) id 1u9E2X-0004pB-Qs
+ (envelope-from <chao@kernel.org>) id 1u9IkM-0003zK-Iw
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Apr 2025 02:16:14 +0000
+ Mon, 28 Apr 2025 07:17:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jQ3SWGn27BCwgTlwVuWoagqo48udMIdPe40yMeKOuL0=; b=HPmB2W2pfI5hqKiYuCqyh206dP
- RIBZOBeTV027nmg1DXXSk0bzc3bMRpC8RR0p6N8m9jwVHs/5AZhJJsU7Wy3Hr1koYI1yZWJADwnI1
- UPltgDH1/byLoteKniZ0UX1lHLI53gPfeq4I7VZi9C6KKLyts18lfqE83SGZ3fvvthiY=;
+ bh=DCV2DTco27yjwYjQYuiEXtmyx/85akFwXlQvHg1vi/M=; b=Q3QGRf9rdjL3uXmGz6eNdF1BHr
+ S2fWCf5sWAMtitwQIkRcTZwtg5WD6BjiYBW5Od+WpgIzh8V0O+QtxBLFSf1Ci4Fbs6RFeWvsD1kUs
+ O8t9vYr3SPZrCY1y91J/mvtAhlt6fWp9AFgoDZqYel+c69ZRHrw/qIV5Z3mWE8Mi+j+c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jQ3SWGn27BCwgTlwVuWoagqo48udMIdPe40yMeKOuL0=; b=fZoV9WvIEGkpMlMiH0YfX8uqjZ
- aqgUyiKyB4x7316ql+cY9cBe0KBreapzN9Mtt0pMHzj1G7QHVaKmme2d2Zxc4H4Hsb1lzCFzqhC8o
- ueBiJs964yQ0gWnQVScNYoSGhAu8k4EnS/ae7zpohzCTxmb45RrEdYF6IHRXnSdz9t9c=;
-Received: from mail-lj1-f178.google.com ([209.85.208.178])
+ bh=DCV2DTco27yjwYjQYuiEXtmyx/85akFwXlQvHg1vi/M=; b=UDTAykl4bSD4AVTDJS5FhrUL1E
+ 7S4N7X3G9wPWdLhiolM1YSp/vDh5aYGXRD3hq72jBA7hG80yP6POFqBVo3eSPwkisGT7ZL6Rekk4g
+ wBWTGl4UpcVOuhzoN7LSeZTfHbQLjFhwycdjyCkR5QFcHzSHoizkEmHdP/FrKHjC9LBI=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1u9E2H-00025I-7p for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Apr 2025 02:16:14 +0000
-Received: by mail-lj1-f178.google.com with SMTP id
- 38308e7fff4ca-310447fe59aso48927551fa.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 27 Apr 2025 19:15:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745806545; x=1746411345; darn=lists.sourceforge.net;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jQ3SWGn27BCwgTlwVuWoagqo48udMIdPe40yMeKOuL0=;
- b=mBN64xIQ7aF5VQCz946sYoPSv4sybXCXxP3XLPYHFGz6Umf9jR/a6BijuOKRklT21a
- LTDim5l2/WspD5aH0Lr+9ntLpiqBx8Tt9JvPJsE3UukMhmwn2FkLuyMH27+yWg2fT3Xz
- +dxAC6od6k9eOnnJgnb3u7HeTHpCVqPD8w6uQWQ4hT9X8d4tjUu5FY8082CUymjS/LJd
- phoqmDRh6zEjF2hnBZn9cKOxGSQeEKdUauLzXA/IuBEGdk/f7pABKR7g8eQfFpr9rCUG
- CzJBAO4f/cStStdEu9qzXGy6EL40yrEfI3JqrgHaJvQ3310BpjsAfwzJDQ9yl2Ny5ibf
- cjkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745806545; x=1746411345;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jQ3SWGn27BCwgTlwVuWoagqo48udMIdPe40yMeKOuL0=;
- b=t7dvz8lJR9c8gGOzjzXYMXHkN0FGUH7BT7GtWFKLFn4UuFyDjj85m/5Y7kN6dh7fGv
- 00RS+6om444l2ULvGr79vCjCP6QAuEcrXPq1jqjwa5UNXs6/761y47oAxq2PVPm70KZN
- RPXf+zPN8tGe4qAoWLg3xCq1zSOv8/6oo+GPXB0uBKowS+jvI953Jemd8xn7P3Wh9JjQ
- 2RVcEo9QDM8a4mR9ZBkMxoYBv1kzMX5pM8Yi3EFqaRSEojQa74pR7rITzgR0vAIXXwZ2
- LIegV3tPopobDAxBgyMUGOcmwcKlVjchWLsYiA0E7FfBaGP6PuWehbenVcbbScaUD6NU
- /+Ug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWmTgGh1Ktxn7imIWdozim8vbU+TVhXJ9hzRpxkyph20u4qxeNaDjTRXlmz7MjLuoROORj5gqgyF6TaJliB9jRV@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzUDQpPDG8M8z2ALF+n7hSQJ+0VckmZf/xkWTj7DtuJjpsu2Uc3
- oQAyWLwM3mFj8gUxjHGL4pNdPumY8znCgR2Cd/UlEwAd30NJmTcfgxWSqF1oG0oRQsD1ETFG2Z9
- Gfc1tDDSkSt4ep4NHqCz/lDl+r8w=
-X-Gm-Gg: ASbGncsFj225UmWC3VFXK4LnErwLh4l4WEYukdsZgjy6ZZdb+GVS7BaXtegKuQedPWe
- gVsSPw4w+P32CGIer0izHhzKah8f2MyTEyjTYnW0FkrA7dAZ/fcfBvkqK9r4y+iZ1Brbodrze8y
- AG4TFT4hYJSZ+dgyrwRqmS/Q==
-X-Google-Smtp-Source: AGHT+IG7UEnKhmPX+T19gOKipnSGym71p6ZlEfKrJBpXtksc/IGjLyEnGyNHwrp/yB99kgRbdAkVwlfdHrJjXVhJiuw=
-X-Received: by 2002:a2e:a362:0:b0:31a:ba1:2387 with SMTP id
- 38308e7fff4ca-31a0ba1259dmr13521411fa.31.1745806545244; Sun, 27 Apr 2025
- 19:15:45 -0700 (PDT)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1u9Ik5-0005oz-SI for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Apr 2025 07:17:45 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 5F5BD5C2784;
+ Mon, 28 Apr 2025 07:15:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43A99C4CEE4;
+ Mon, 28 Apr 2025 07:17:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1745824644;
+ bh=YUkBn+YGgb6a9ti3DPXRsHN58whlsVUjsvHQ5V36TjM=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=eNApAwGo6vNYXiFCokbGR92I8Kw5jpaRjbFRbcASkdnAfHmAcML+csvow2Uup7GK4
+ fYSjYbhNmIsxt2qvO73c0EBzuKk/ZDh3hVnGVjM2ed2h5EUy0i/aXtWGsb8nk9v585
+ O/E2tck4i3aeaJyBuKQ0kzsJWjqQilfYdgtxhgpI9HF1krxEeomVQLwWewUjIv2Ndj
+ 8KsuRzvhaRd3Sw8VXX3yCKLx4K2Mk07SvPUURRxV80fuh2odHx3EiCxoGWsm6p0UcQ
+ PHME/eUK5jnUxwZVKFBwCeN70AkuKGzVzK5nJSs2YLgfBimPhuYwY22BUuob7Kx63K
+ Mf+8fz3qKYbqw==
+Message-ID: <7e6e2a93-74fa-43af-9335-8acedabda4fd@kernel.org>
+Date: Mon, 28 Apr 2025 15:17:21 +0800
 MIME-Version: 1.0
-References: <20250427185908.90450-1-ryncsn@gmail.com>
- <20250427185908.90450-4-ryncsn@gmail.com>
- <aA7OuBS___7N4o8f@casper.infradead.org>
-In-Reply-To: <aA7OuBS___7N4o8f@casper.infradead.org>
-From: Kairui Song <ryncsn@gmail.com>
-Date: Mon, 28 Apr 2025 10:15:28 +0800
-X-Gm-Features: ATxdqUHA3mEQSXKaITqXynHJs1t56sCX-IGuXPrMu1ZBnnGmrsOauHofJ02bpR8
-Message-ID: <CAMgjq7A-mO0vs3ZX1m9i+dPSuSURwJUWL-03dMzGbbwkj_mHjA@mail.gmail.com>
-To: Matthew Wilcox <willy@infradead.org>
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+User-Agent: Mozilla Thunderbird
+To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20250331201256.1057782-1-willy@infradead.org>
+Content-Language: en-US
+In-Reply-To: <20250331201256.1057782-1-willy@infradead.org>
+X-Spam-Score: -5.7 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Mon, Apr 28, 2025 at 8:41 AM Matthew Wilcox wrote: >
-   > On Mon, Apr 28, 2025 at 02:59:05AM +0800, Kairui Song wrote: > > folio_index
-    is only needed for mixed usage of page cache and swap > > cac [...] 
- 
- Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On 4/1/25 04:10, Matthew Wilcox (Oracle) wrote: > Sorry for
+ the length of this series. Each patch in this series builds, > but obviously
+ I haven't done any testing. It should be easy to bisect > to an [...] 
+ Content analysis details:   (-5.7 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.208.178 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in bl.score.senderscore.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
-                             The query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                             [209.85.208.178 listed in sa-accredit.habeas.com]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [ryncsn[at]gmail.com]
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                            [209.85.208.178 listed in bl.score.senderscore.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.208.178 listed in wl.mailspike.net]
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-X-Headers-End: 1u9E2H-00025I-7p
-Subject: Re: [f2fs-dev] [PATCH 3/6] f2fs: drop usage of folio_index
+ envelope-from domain
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1u9Ik5-0005oz-SI
+Subject: Re: [f2fs-dev] [PATCH 000/153] f2fs folio conversions for 6.16
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -144,45 +111,216 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Nhat Pham <nphamcs@gmail.com>, Chris Li <chrisl@kernel.org>,
- David Hildenbrand <david@redhat.com>, Hugh Dickins <hughd@google.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Yosry Ahmed <yosryahmed@google.com>, linux-mm@kvack.org,
- Johannes Weiner <hannes@cmpxchg.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>, "Huang,
- Ying" <ying.huang@linux.alibaba.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gTW9uLCBBcHIgMjgsIDIwMjUgYXQgODo0MeKAr0FNIE1hdHRoZXcgV2lsY294IDx3aWxseUBp
-bmZyYWRlYWQub3JnPiB3cm90ZToKPgo+IE9uIE1vbiwgQXByIDI4LCAyMDI1IGF0IDAyOjU5OjA1
-QU0gKzA4MDAsIEthaXJ1aSBTb25nIHdyb3RlOgo+ID4gZm9saW9faW5kZXggaXMgb25seSBuZWVk
-ZWQgZm9yIG1peGVkIHVzYWdlIG9mIHBhZ2UgY2FjaGUgYW5kIHN3YXAKPiA+IGNhY2hlLCBmb3Ig
-cHVyZSBwYWdlIGNhY2hlIHVzYWdlLCB0aGUgY2FsbGVyIGNhbiBqdXN0IHVzZQo+ID4gZm9saW8t
-PmluZGV4IGluc3RlYWQuCj4gPgo+ID4gSXQgY2FuJ3QgYmUgYSBzd2FwIGNhY2hlIGZvbGlvIGhl
-cmUuICBTd2FwIG1hcHBpbmcgbWF5IG9ubHkgY2FsbCBpbnRvIGZzCj4gPiB0aHJvdWdoIGBzd2Fw
-X3J3YCBhbmQgdGhhdCBpcyBub3Qgc3VwcG9ydGVkIGZvciBmMmZzLiAgU28ganVzdCBkcm9wIGl0
-Cj4gPiBhbmQgdXNlIGZvbGlvLT5pbmRleCBpbnN0ZWFkLgo+ID4KPiA+IFNpZ25lZC1vZmYtYnk6
-IEthaXJ1aSBTb25nIDxrYXNvbmdAdGVuY2VudC5jb20+Cj4gPiBDYzogSmFlZ2V1ayBLaW0gPGph
-ZWdldWtAa2VybmVsLm9yZz4gKG1haW50YWluZXI6RjJGUyBGSUxFIFNZU1RFTSkKPiA+IENjOiBD
-aGFvIFl1IDxjaGFvQGtlcm5lbC5vcmc+IChtYWludGFpbmVyOkYyRlMgRklMRSBTWVNURU0pCj4g
-PiBDYzogbGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQgKG9wZW4gbGlzdDpG
-MkZTIEZJTEUgU1lTVEVNKQo+ID4gU2lnbmVkLW9mZi1ieTogS2FpcnVpIFNvbmcgPGthc29uZ0B0
-ZW5jZW50LmNvbT4KPgo+IFJldmlld2VkLWJ5OiBNYXR0aGV3IFdpbGNveCAoT3JhY2xlKSA8d2ls
-bHlAaW5mcmFkZWFkLm9yZz4KPgo+ID4gQEAgLTEzMCw3ICsxMzAsNyBAQCBpbnQgZjJmc19yZWFk
-X2lubGluZV9kYXRhKHN0cnVjdCBpbm9kZSAqaW5vZGUsIHN0cnVjdCBmb2xpbyAqZm9saW8pCj4g
-PiAgICAgICAgICAgICAgIHJldHVybiAtRUFHQUlOOwo+ID4gICAgICAgfQo+ID4KPiA+IC0gICAg
-IGlmIChmb2xpb19pbmRleChmb2xpbykpCj4gPiArICAgICBpZiAoZm9saW8tPmluZGV4KQo+ID4g
-ICAgICAgICAgICAgICBmb2xpb196ZXJvX3NlZ21lbnQoZm9saW8sIDAsIGZvbGlvX3NpemUoZm9s
-aW8pKTsKPiA+ICAgICAgIGVsc2UKPiA+ICAgICAgICAgICAgICAgZjJmc19kb19yZWFkX2lubGlu
-ZV9kYXRhKGZvbGlvLCBpcGFnZSk7Cj4KPiBUaGlzIGh1bmsgaXMgZ29pbmcgdG8gY29uZmxpY3Qg
-d2l0aCBhIHBhaXIgb2YgcGF0Y2hlcyBJIHNlbnQgdG8gZjJmcy1kZXZlbAo+IGEgZmV3IHdlZWtz
-IGFnby4gIEkgZG9uJ3QgdGhpbmsgdGhlcmUncyBhbnkgZXNjYXBpbmcgaXQsIGp1c3QgYSBoZWFk
-cy11cC4KPgoKVGhhbmtzIGZvciB0aGUgaW5mbywgdGhpcyBwYXRjaCBpcyBqdXN0IGNvbnZlcnRp
-bmcgZm9saW9faW5kZXggdG8KZm9saW8tPmluZGV4IHNvIGNvbmZsaWN0IHNob3VsZCBiZSBlYXN5
-IHRvIHJlc29sdmUgSSB0aGluaz8gSSBjYW4gZG8gYQpyZWJhc2UgbGF0ZXIgaWYgdGhhdCBzZXJp
-ZXMgaXMgbWVyZ2VkIGZpcnN0LgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2
-ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xp
-c3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On 4/1/25 04:10, Matthew Wilcox (Oracle) wrote:
+> Sorry for the length of this series.  Each patch in this series builds,
+> but obviously I haven't done any testing.  It should be easy to bisect
+> to any mistakes I've made.  This conversion isn't complete; I estimate
+> another 100 or so patches will be needed.
+> 
+> Matthew Wilcox (Oracle) (153):
+>   f2fs: Use a folio in f2fs_compress_free_page()
+>   f2fs: Use a folio in f2fs_write_raw_pages()
+>   f2fs: Introduce fio_inode()
+>   f2fs: Use F2FS_P_SB() in f2fs_is_compressed_page()
+>   f2fs: Use bio_for_each_folio_all() in __has_merged_page()
+>   f2fs: Use a folio in add_ipu_page()
+>   f2fs: Remove access to page->mapping in f2fs_is_cp_guaranteed()
+>   f2fs: Use a folio in move_data_block()
+>   f2fs: Use a folio in f2fs_quota_read()
+>   f2fs: Add f2fs_grab_meta_folio()
+>   f2fs: Use a folio in commit_checkpoint()
+>   f2fs: Convert __f2fs_write_meta_page() to __f2fs_write_meta_folio()
+>   f2fs: Use f2fs_folio_wait_writeback()
+>   f2fs: Pass a folio to f2fs_submit_merged_ipu_write()
+>   f2fs: Convert __get_meta_page() to __get_meta_folio()
+>   f2fs: Convert f2fs_get_tmp_page() to f2fs_get_tmp_folio()
+>   f2fs: Pass a folio to next_blkaddr_of_node()
+>   f2fs: Use a folio in f2fs_ra_meta_pages()
+>   f2fs: Use a folio in f2fs_ra_meta_pages_cond()
+>   f2fs: Use a folio in write_orphan_inodes()
+>   f2fs: Use a folio in get_next_nat_page()
+>   f2fs: Convert get_next_sit_page() to get_next_sit_folio()
+>   f2fs: Use a folio in f2fs_update_meta_page()
+>   f2fs: Use a folio in write_current_sum_page()
+>   f2fs: Use a folio in write_compacted_summaries()
+>   f2fs: Remove f2fs_grab_meta_page()
+>   f2fs: Add f2fs_get_meta_folio()
+>   f2fs: Use a folio in build_sit_entries()
+>   f2fs: Use a folio in f2fs_recover_orphan_inodes()
+>   f2fs: Use a folio in validate_checkpoint()
+>   f2fs: Use a folio in f2fs_get_valid_checkpoint()
+>   f2fs: Use a folio in f2fs_get_node_info()
+>   f2fs: Use a folio in __get_nat_bitmaps()
+>   f2fs: Use a folio in read_compacted_summaries()
+>   f2fs: Use a folio in read_normal_summaries()
+>   f2fs: Remove f2fs_get_meta_page()
+>   f2fs: Convert f2fs_get_meta_page_retry() to
+>     f2fs_get_meta_folio_retry()
+>   f2fs: Pass an address to scan_nat_page()
+>   f2fs: Add f2fs_get_sum_folio()
+>   f2fs: Use folios in do_garbage_collect()
+>   f2fs: Use a folio in check_index_in_prev_nodes()
+>   f2fs: Use a folio in change_curseg()
+>   f2fs: Remove f2fs_get_sum_page()
+>   f2fs: Use a folio in find_in_level()
+>   f2fs: Use a folio in f2fs_delete_entry()
+>   f2fs: Use a folio in f2fs_readdir()
+>   f2fs: Remove f2fs_find_data_page()
+>   f2fs: Use a folio in f2fs_get_new_data_page()
+>   f2fs: Use a folio in f2fs_migrate_blocks()
+>   f2fs: Add f2fs_get_new_data_folio()
+>   highmem: Add memcpy_folio()
+>   f2fs: Use a folio in __clone_blkaddrs()
+>   f2fs: Use a folio in f2fs_defragment_range()
+>   f2fs: Remove f2fs_get_lock_data_page()
+>   f2fs: Use a folio in fill_zero()
+>   f2fs: Use a folio in f2fs_add_regular_entry()
+>   f2fs: Use a folio in make_empty_dir()
+>   f2fs: Remove f2fs_get_new_data_page()
+>   f2fs: Use a folio in f2fs_xattr_fiemap()
+>   f2fs: Use a folio in ra_data_block()
+>   f2fs: Use a folio in move_data_block()
+>   f2fs: Use a folio in f2fs_convert_inline_inode()
+>   f2fs: Use a folio in f2fs_move_inline_dirents()
+>   f2fs: Add f2fs_new_node_folio()
+>   f2fs: Use a folio in f2fs_ra_node_page()
+>   f2fs: Convert read_node_page() to read_node_folio()
+>   f2fs: Pass a folio to f2fs_inode_chksum_verify()
+>   f2fs: Use a folio in f2fs_recover_inode_page()
+>   f2fs: Remove f2fs_grab_cache_page()
+>   f2fs: Add f2fs_get_xnode_folio()
+>   f2fs: Use a folio in write_all_xattrs()
+>   f2fs: Use a folio in f2fs_recover_xattr_data()
+>   f2fs: Add f2fs_get_node_folio()
+>   f2fs: Use folios in f2fs_get_dnode_of_data()
+>   f2fs: Use a folio in truncate_node()
+>   f2fs: Use a folio in truncate_nodes()
+>   f2fs: Use folios in truncate_partial_nodes()
+>   f2fs: Pass a folio to f2fs_ra_node_pages()
+>   f2fs: Use a folio in gc_node_segment()
+>   f2fs: Convert f2fs_move_node_page() to f2fs_move_node_folio()
+>   f2fs: Convert __write_node_page() to __write_node_folio()
+>   f2fs: Use a folio in is_alive()
+>   f2fs: Use a folio in check_index_in_prev_nodes()
+>   f2fs: Remove f2fs_get_node_page()
+>   f2fs: Use a folio in prepare_write_begin
+>   f2fs: Use a folio in __find_data_block()
+>   f2fs: Use a folio in f2fs_init_inode_metadata()
+>   f2fs: Pass a folio to make_empty_dir()
+>   f2fs: Use a folio in f2fs_try_convert_inline_dir()
+>   f2fs: Use a folio in f2fs_add_inline_entry()
+>   f2fs: Pass a folio to f2fs_move_inline_dirents()
+>   f2fs: Pass a folio to f2fs_move_rehashed_dirents()
+>   f2fs: Use a folio in f2fs_do_truncate_blocks()
+>   f2fs: Use a folio in f2fs_truncate_xattr_node()
+>   f2fs: Pass folios to set_new_dnode()
+>   f2fs: Convert f2fs_convert_inline_page() to
+>     f2fs_convert_inline_folio()
+>   f2fs: Use a folio in read_xattr_block()
+>   f2fs: Remove f2fs_get_xnode_page()
+>   f2fs: Use a folio in f2fs_write_inline_data()
+>   f2fs: Use a folio in f2fs_read_inline_data()
+>   f2fs: Use a folio in f2fs_recover_inline_data()
+>   f2fs: Use a folio in f2fs_find_in_inline_dir()
+>   f2fs: Use a folio in f2fs_empty_inline_dir()
+>   f2fs: Use a folio in f2fs_read_inline_dir()
+>   f2fs: Use a folio in f2fs_inline_data_fiemap()
+>   f2fs: Use a folio in f2fs_update_inode_page()
+>   f2fs: Use a folio in do_read_inode()
+>   f2fs: Pass folios to f2fs_init_acl()
+>   f2fs: Pass a folio to f2fs_setxattr()
+>   f2fs: Pass a folio to __f2fs_setxattr()
+>   f2fs: Pass a folio to write_all_xattrs()
+>   f2fs: Use a folio in read_inline_xattr()
+>   f2fs: Use a folio in f2fs_recover_inline_xattr()
+>   f2fs: Remove f2fs_get_inode_page()
+>   f2fs: Pass a folio to f2fs_getxattr()
+>   f2fs: Pass a folio to read_inline_xattr()
+>   f2fs: Pass a folio to do_recover_data()
+>   f2fs: Pass a folio to f2fs_recover_inline_xattr()
+>   f2fs: Pass a folio to inline_xattr_addr()
+>   f2fs: Pass a folio to init_dent_inode()
+>   f2fs: Pass a folio to f2fs_make_empty_inline_dir()
+>   f2fs: Pass a folio to f2fs_has_enough_room()
+>   f2fs: Convert dnode_of_data->inode_page to inode_folio
+>   f2fs: Pass a folio to f2fs_do_read_inline_data()
+>   f2fs: Pass a folio to f2fs_truncate_inline_inode()
+>   f2fs: Pass a folio to __f2fs_find_entry()
+>   f2fs: Pass a folio to f2fs_find_entry()
+>   f2fs: Pass a folio to f2fs_parent_dir()
+>   f2fs: Pass a folio to f2fs_delete_entry()
+>   f2fs: Pass a folio to f2fs_delete_inline_entry()
+>   f2fs: Pass a folio to f2fs_recover_inline_data()
+>   f2fs: Pass a folio to __recover_inline_status()
+>   f2fs: Pass a folio to inline_data_addr()
+>   f2fs: Convert f2fs_put_page_dic() to f2fs_put_folio_dic()
+>   f2fs: Pass a folio to f2fs_set_link()
+>   f2fs: Use a folio in need_inode_page_update()
+>   f2fs: Use a folio in f2fs_truncate_meta_inode_pages()
+>   f2fs: Use a folio in f2fs_cache_compressed_page()
+>   f2fs: Use a folio in prepare_compress_overwrite()
+>   f2fs: Convert f2fs_load_compressed_page() to
+>     f2fs_load_compressed_folio()
+>   f2fs: Use a folio in f2fs_encrypt_one_page()
+>   f2fs: Use a folio in redirty_blocks()
+>   f2fs: Use a folio in f2fs_wait_on_block_writeback()
+>   f2fs: Pass a folio to f2fs_init_read_extent_tree()
+>   f2fs: Return a folio from f2fs_init_inode_metadata()
+>   f2fs: Pass a folio to f2fs_update_inode()
+>   f2fs: Pass a folio to set_nid()
+>   f2fs: Convert dnode_of_data->node_page to node_folio
+>   f2fs: Pass a folio to get_dnode_addr()
+>   f2fs: Convert fsync_node_entry->page to folio
+>   f2fs: Remove f2fs_new_node_page()
+>   f2fs: Use a folio in flush_inline_data()
+>   f2fs: Convert clear_node_page_dirty() to clear_node_folio_dirty()
+
+Thanks for the work, the patchset looks good to me.
+
+Reviewed-by: Chao Yu <chao@kernel.org>
+
+Note that, it needs to clean up f2fs_put_page(, {0,1}) w/
+f2fs_folio_put(, {false,true}), I guess Jaegeuk could help to update
+directly in dev-test branch?
+
+Thanks,
+
+> 
+>  fs/f2fs/acl.c           |  33 ++-
+>  fs/f2fs/acl.h           |  10 +-
+>  fs/f2fs/checkpoint.c    | 193 +++++++--------
+>  fs/f2fs/compress.c      | 134 +++++-----
+>  fs/f2fs/data.c          | 208 ++++++++--------
+>  fs/f2fs/dir.c           | 240 +++++++++---------
+>  fs/f2fs/extent_cache.c  |  10 +-
+>  fs/f2fs/f2fs.h          | 184 +++++++-------
+>  fs/f2fs/file.c          | 155 ++++++------
+>  fs/f2fs/gc.c            | 140 ++++++-----
+>  fs/f2fs/inline.c        | 306 +++++++++++------------
+>  fs/f2fs/inode.c         |  94 +++----
+>  fs/f2fs/namei.c         | 112 ++++-----
+>  fs/f2fs/node.c          | 526 ++++++++++++++++++++--------------------
+>  fs/f2fs/node.h          |  12 +-
+>  fs/f2fs/recovery.c      | 178 +++++++-------
+>  fs/f2fs/segment.c       | 147 ++++++-----
+>  fs/f2fs/segment.h       |   6 +-
+>  fs/f2fs/super.c         |  36 ++-
+>  fs/f2fs/xattr.c         | 116 ++++-----
+>  fs/f2fs/xattr.h         |  24 +-
+>  include/linux/highmem.h |  27 +++
+>  22 files changed, 1444 insertions(+), 1447 deletions(-)
+> 
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
