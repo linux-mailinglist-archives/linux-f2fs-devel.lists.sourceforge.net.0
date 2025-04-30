@@ -2,140 +2,197 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60C6EAA53CC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Apr 2025 20:36:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF2EDAA567E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Apr 2025 23:09:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=NBDexJEPNokDraeb9tsv87yWjAGiZOpmo93zkn9aX+Y=; b=TIAcmkna17IdfROIMyd/U4i+lb
-	RTh1jg8VnoenQBTz4BgZ1vfKfqVTHvhx6Jw5Tj/B49rGXgGjMrvECRGmu0CbcnRHfXuF4D/FxoyQ6
-	Wk2eVHa7qtpkWMFsVBGC16HDlN7cQpPHEFssbSlUvmDrOHe0PbndObKqAcopDChML4Lo=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=VIx2pYVcQboP0xK+kReAbpyOgd335QeqVyjK8LRbjOk=; b=V/VasDLS5uNUf1Kmhtm4bXpVEh
+	BsHaUfBofPoyrAyUuEIVXz3yzNpsr5K2tWl1Gd8YtZ2pvQBtqtCGfQQXxYC336Sa7mV3rTw9WAX77
+	Fr/LdQ0F6yfTg3C35loE2iQ25pSyVpPsaKexEP2XgHwGKZ15uyWSXLr3GT5GJTH9d0d4=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uACHt-0000pB-WA;
-	Wed, 30 Apr 2025 18:36:06 +0000
+	id 1uAEgF-0000IC-TA;
+	Wed, 30 Apr 2025 21:09:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1uACHs-0000p5-5T
+ (envelope-from <david@redhat.com>) id 1uAEg8-0000HD-A3
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Apr 2025 18:36:04 +0000
+ Wed, 30 Apr 2025 21:09:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/k2V3a6IuNUogPtD0BCT7KcvtqpWHV5eTO7owG46Ck0=; b=St6NcJSMTHMIlxlC8lIdIVkmTJ
- 68QeWz5lBSaCoqMtraou2gEKBEFBaZOC98nh+nBAxgo8ErAL2wiv+qaftJoX8pD14qro2XZv0dhvU
- ejPkOLjrPXBtT68qt4vFfve1MntRPKKeNgU8RjzGP3ijVacLrGXV8yvo0c+/M9Tuevb8=;
+ bh=zivfWyNlrPG9L8bV6ILZM8QQWLlmYfH2OI8xtHwsDYA=; b=Cq+rLoeE+z81nk/pHzJbZsOqNR
+ w8jbaZL28fijp/uuZ0cjD+BK4RG7nvJZFwGFZMQT5970yVscI6B396Qd06FubLDoDfDvMwru3hl8x
+ oDrIBVljDxJfWcF47TZP5HaC6zvbJikmf85v2kz59QGM1ultjEmxvd4tpJ7QHwtX1hJY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=/k2V3a6IuNUogPtD0BCT7KcvtqpWHV5eTO7owG46Ck0=; b=k
- 8Dp8DGsnFwJJQQnd828Y27jmEqUzs5ablSIJvMfACbRc3KHGChVySR6c42S795eMNxvBQiAnl1aAy
- NoFGGuO8nM0lD0VARn81S/xZ7bBUHOp9CqdqmCHA8lR+bNa3vyzWsZHxbZRGtSBEeHsCizqakmeYU
- qbpdba2reMAh231k=;
-Received: from mail-pg1-f177.google.com ([209.85.215.177])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=zivfWyNlrPG9L8bV6ILZM8QQWLlmYfH2OI8xtHwsDYA=; b=MikJBAWIc9opoOcMDTMuV78fZS
+ tU9ZGC9NqxhoxLWd3Bdnlq2B2y0i5gm9iu6whUY7+pGVlZHuUG9UxHO41bY6OScXAoCzieBzydvrd
+ nQ0FrdBg5c/shhXkFFdzfEkU0kSHXRXMCdBX0Yj1M0tC0j3akden2AZVCF78F1MmvNYE=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uACHb-0002Bh-Pc for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Apr 2025 18:36:04 +0000
-Received: by mail-pg1-f177.google.com with SMTP id
- 41be03b00d2f7-af52a624283so235432a12.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uAEfs-00017e-E4 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 30 Apr 2025 21:09:16 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1746047329;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=zivfWyNlrPG9L8bV6ILZM8QQWLlmYfH2OI8xtHwsDYA=;
+ b=N9c5HTEqtEznulmY2v1sf0IEMbtWdT4MdCyVdYUwHt2i0FiYiiRD98ScictM+pXCV9sQlh
+ GUlbmIE5V0TDEpQVr6A3bRDHEulaCmzWeF34BTQASsmPs9+VpU3GapSImg/KyVpFOWuBDL
+ vCUanx+dju1hX+LtwOUzhHgVpMEM0Vc=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-76-hJ9Ob03OPpuw4ikNy-17mQ-1; Wed, 30 Apr 2025 17:08:47 -0400
+X-MC-Unique: hJ9Ob03OPpuw4ikNy-17mQ-1
+X-Mimecast-MFC-AGG-ID: hJ9Ob03OPpuw4ikNy-17mQ_1746047327
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-43d0a037f97so1170065e9.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 30 Apr 2025 11:35:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1746038137; x=1746642937; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/k2V3a6IuNUogPtD0BCT7KcvtqpWHV5eTO7owG46Ck0=;
- b=Jq5WeZMJhdDb8VQKA7tcn1FYz/iMOBvXr7sZyx6Vve5A54yxaha9VE4snd4np4PLYP
- fdskp/4fq6cPZ8q3jXZLKrjPsUruX4c7GqSjzMFen0a6e9WDWJMODBs97hZNz8z/oI79
- V1NDSFgQuMRdB1qOVwpYZwugETOxPDrOtOr//8Pn1WIwPwowyalZMv2b82C3UIhRs3Ob
- KSL+bwioxbhIB5JKAnq8QdN6HdlViwa/3LAJzE0aQfpC7X6Jp6xg4ZR6tZvr8cE8s0YI
- GL1QZwyRzCFfSQtPOgaXGA9FF/3d2IozArLdMgry/JTjuOXBQXF67j4C2aZvJKsX6VHc
- GD2w==
+ Wed, 30 Apr 2025 14:08:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746038137; x=1746642937;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/k2V3a6IuNUogPtD0BCT7KcvtqpWHV5eTO7owG46Ck0=;
- b=IZNuKzDLTq5z3dZHTKavraL7ZvLg1g4orrGc24rwm7BorSQaCO05oswO6yBZ1875Wh
- yEjMYaSex7cZkopngwMQ4F2bVj6XxR30AbnxuHHwVV1zpaZchPivLJ+fC1RIH+dWUMlu
- 5KiyHv1QQVvZWhzufKp0m3+odJYn2vkuF5VeAoINX5bnV6MuyVcUmRg006eLc9FP5bwX
- AKTYU0AupEQOWrl4i+uGOcSeLkQMhh5u3/j7d1eiAc3KvFyuZN1dY+jHOMfitkwQdPCG
- I0xJRmjoqZQBrwZ981mV/4p0QQO4Ijd6VE8hY4B8Ux7ifT28W15qgmRkTITG8f+WKXGw
- UErA==
+ d=1e100.net; s=20230601; t=1746047327; x=1746652127;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=zivfWyNlrPG9L8bV6ILZM8QQWLlmYfH2OI8xtHwsDYA=;
+ b=UHboXbv8pjFspWbobmk8+9Kvy0p5jVPCmYRVyodwEIZNAhyIp83JTCtcIMTTuJaJ/6
+ rNGPm3gdGJnVk5vnw7fFUzpwvxWex0QPuTstO2EQBSFtOt6YJWS4njuAibGwVozNIv4R
+ YuCy1HwchBCKDbXJrYECZzvqfAUMBEbPA1iODGi4XFH+lSaej3jYwCwlApchKaV0UaNj
+ OMztpj3oYCjoTV31srLArGr5LF8Jvhei3nP+TZmdJ4WlbKwE2EmIP1hnCFtrSqXKn8vV
+ 1K4X/mKLCSrDjRy+G9dY+EMlw8XRaSi88eAxWvdk9TMY9/kfCjslaMurx+/QmF92RD36
+ uJyw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxxxkyz15hp6iEE5O9iUKK9VCZG/GigXbHS6joU0vb8JWzsi7Wt/cI0LMTB0/tK1yauH6zEvWamg8arzZRa5tH@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yyz1X1IN9g36G5NXllqIIC9Hbrx8RbeRfRLuYzZyHZ7cVAGsqhU
- e1KXzBhZn11I1en0BVksmVlXo9ZAf4fxIco2GS3MUIA2BiFzqYci
-X-Gm-Gg: ASbGnctan1rSPxW/+XSoeKDYDziuyvN7zUo1cPmSGEEtfvGZdKUokKwVAh/Kv2y5RqS
- ckKK89dZ+46qop34sW4GxrUdoC+wndsg2iqKECxA9dLWontlCI511PT0tJ9lNSnNHLT0ZnhLPM5
- FMKu5uVP0ykTXEHesLXgL+yrKe8PduJzDwp1TYzPyBY2H8gT1TvuYJCT+9xzQcjdHXomukFWGx5
- 7mWQKcw01/95q/dkIQauzE8AdUitjhDERv3He2zUtIMWYHUkyY+qdnybIqC9iksMQF7BnZKe+1R
- YpRnLZfkAs4ZWFqSFNAV9E9QmOBwR3B6uqJ/lK+zjk1gItfy3RCDTSZAyE30sdkbkqusDmlmrNu
- bE3y+Fiy7voDqO4Du/IRCm/jb2OuBN88=
-X-Google-Smtp-Source: AGHT+IFV1qtxiHtD/XwAlW+boFX6QE8d+DlTnzRF4fb2Ql+KLFq18lOss4tuJEiY0Olsi1bTqL827Q==
-X-Received: by 2002:a05:6a20:2d26:b0:1f3:323e:3743 with SMTP id
- adf61e73a8af0-20b9774a6f5mr702896637.12.1746038136743; 
- Wed, 30 Apr 2025 11:35:36 -0700 (PDT)
-Received: from daehojeong-desktop.mtv.corp.google.com
- ([2a00:79e0:2e14:7:68e1:5e8b:62e8:977])
+ AJvYcCWVri1VnRGMKTCjoxSKO0Rwhu9zzYd71bs0RkgUCWmR6kZwLVFQ/i/RWIc91Yc5v76ElMRHnkw1NvEWEEhNOrON@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yxj8Gjzf3Rtf9IK01hBlNY26gKGLF18oePUhrZP0JxiE2gIq5xq
+ EzxXxT7n4WUJ5QbFpBTA/DxLY1dvvnc9F4QvuBq9Uya4/e3o0Am2MUSJUSNxMDS+DbaHNkP7RlV
+ D0tD+Ns08LhcO0ZXDhqA3d+jtmtp2G7CVCvXjJalpM5/HoU7+2nGKgr6UyGkr+IMdyyFgTCF17q
+ M=
+X-Gm-Gg: ASbGncv/pv3y0YYZupVB6ugUJM0D/42XKC07ubAxxtwOFvp45vr27g48cnp471H96NP
+ V3+nwAECAly2NKckBUB3gjPHnUtog9B0O8pSdziR9AJuexo2jvBFJD75WpQnee/ayOIaY2qIWt8
+ 0eXdnJ9pZ0nHmXHtkkixnY5SkbfmzieANsGAIJhBpvk5X83RGiZXw8Ri64Dx8XICoKd7RxTTZcN
+ cGs/oYCuTptOP0/M5JNd+PE8Rnt5SVMVAwdW7NT6DOoNTls8rnnnXck+tCEtML4bx2e3+SZ3XCN
+ b7MlPbLzXFQ/tKeSQrA+rpzaSxORpVYgqERqKChDlRgYruxjERQ+q1fB8y6tdOLlCWbuh9y39hz
+ BGbanKjZ+/XLsLMaPh8mG9c2mCV3rqVrNl668k6g=
+X-Received: by 2002:a05:600c:348f:b0:43d:53c:1ad6 with SMTP id
+ 5b1f17b1804b1-441b268b895mr33349955e9.26.1746047326795; 
+ Wed, 30 Apr 2025 14:08:46 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF2f0+HkEz4Uo33Hw3JPFkBBMMlgPMy0LoULhoOPwOo2pF6os8H6HmYyJy1+xhQYEFMMEFIlg==
+X-Received: by 2002:a05:600c:348f:b0:43d:53c:1ad6 with SMTP id
+ 5b1f17b1804b1-441b268b895mr33349775e9.26.1746047326420; 
+ Wed, 30 Apr 2025 14:08:46 -0700 (PDT)
+Received: from ?IPV6:2003:cb:c745:a500:7f54:d66b:cf40:8ee9?
+ (p200300cbc745a5007f54d66bcf408ee9.dip0.t-ipconnect.de.
+ [2003:cb:c745:a500:7f54:d66b:cf40:8ee9])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7403991fe17sm2080724b3a.51.2025.04.30.11.35.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 11:35:36 -0700 (PDT)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Wed, 30 Apr 2025 11:35:30 -0700
-Message-ID: <20250430183530.3254943-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.49.0.906.g1f30a19c02-goog
+ 5b1f17b1804b1-441b2b28718sm37053035e9.36.2025.04.30.14.08.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Apr 2025 14:08:46 -0700 (PDT)
+Message-ID: <16140962-0a11-4674-8799-a83a13e2aaad@redhat.com>
+Date: Wed, 30 Apr 2025 23:08:44 +0200
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+User-Agent: Mozilla Thunderbird
+To: Kairui Song <kasong@tencent.com>, linux-mm@kvack.org
+References: <20250430181052.55698-1-ryncsn@gmail.com>
+ <20250430181052.55698-4-ryncsn@gmail.com>
+Autocrypt: addr=david@redhat.com; keydata=
+ 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
+ WNyWQQ==
+Organization: Red Hat
+In-Reply-To: <20250430181052.55698-4-ryncsn@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: INOtqSjiHPuDcKJDv7DMwUejDvh1Jm_sMpztPhjTBbE_1746047327
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Daeho Jeong Due to the difficulty of intentionally
- corrupting
- specific metadata on some storage devices like zoned storage devices, it
- is challenging to effectively verify fsck functionality. To facilitate this
- v [...] Content analysis details:   (0.1 points, 6.0 required)
+ Content preview:  On 30.04.25 20:10, Kairui Song wrote: > From: Kairui Song
+ <kasong@tencent.com> > > folio_index is only needed for mixed usage of page
+ cache and swap > cache, for pure page cache usage, the caller can [...] 
+ Content analysis details:   (-0.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [209.85.215.177 listed in bl.score.senderscore.com]
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [209.85.215.177 listed in sa-accredit.habeas.com]
+ [170.10.133.124 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [170.10.133.124 listed in bl.score.senderscore.com]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.215.177 listed in list.dnswl.org]
+ no trust [170.10.133.124 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [170.10.133.124 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [daeho43[at]gmail.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [daeho43[at]gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.177 listed in wl.mailspike.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -144,8 +201,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1uACHb-0002Bh-Pc
-Subject: [f2fs-dev] [PATCH v5] f2fs-tools: introduce fault injection to fsck
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uAEfs-00017e-E4
+Subject: Re: [f2fs-dev] [PATCH v3 3/6] f2fs: drop usage of folio_index
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -157,585 +215,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
-Content-Type: text/plain; charset="us-ascii"
+From: David Hildenbrand via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: David Hildenbrand <david@redhat.com>
+Cc: Nhat Pham <nphamcs@gmail.com>, Chris Li <chrisl@kernel.org>,
+ Hugh Dickins <hughd@google.com>, linux-kernel@vger.kernel.org,
+ Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Yosry Ahmed <yosryahmed@google.com>, Johannes Weiner <hannes@cmpxchg.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
+ "Huang, Ying" <ying.huang@linux.alibaba.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+On 30.04.25 20:10, Kairui Song wrote:
+> From: Kairui Song <kasong@tencent.com>
+> 
+> folio_index is only needed for mixed usage of page cache and swap
+> cache, for pure page cache usage, the caller can just use
+> folio->index instead.
+> 
+> It can't be a swap cache folio here.  Swap mapping may only call into fs
+> through `swap_rw` but f2fs does not use that method for swap.
+> 
+> Signed-off-by: Kairui Song <kasong@tencent.com>
+> Cc: Jaegeuk Kim <jaegeuk@kernel.org> (maintainer:F2FS FILE SYSTEM)
+> Cc: Chao Yu <chao@kernel.org> (maintainer:F2FS FILE SYSTEM)
+> Cc: linux-f2fs-devel@lists.sourceforge.net (open list:F2FS FILE SYSTEM)
+> Reviewed-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> ---
 
-Due to the difficulty of intentionally corrupting specific metadata on
-some storage devices like zoned storage devices, it is challenging to
-effectively verify fsck functionality. To facilitate this verification,
-it is necessary to add a fault injection mode.
+Reviewed-by: David Hildenbrand <david@redhat.com>
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
----
-v5: add ASSERT_MSG()
-v4: fix print type and typos in man page
-v3: set limit on fault counts
-v2: print fault injection result
----
- fsck/fsck.c       | 131 ++++++++++++++++++++++++++++++++++++----------
- fsck/main.c       |  22 ++++++++
- fsck/mkquota.c    |   5 ++
- include/f2fs_fs.h |  58 ++++++++++++++++++++
- man/fsck.f2fs.8   |  36 +++++++++++++
- 5 files changed, 223 insertions(+), 29 deletions(-)
-
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 2cff33f..72a632e 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -16,6 +16,20 @@
- char *tree_mark;
- uint32_t tree_mark_size = 256;
- 
-+const char *f2fs_fault_name[FAULT_MAX] = {
-+	[FAULT_SEG_TYPE]	= "FAULT_SEG_TYPE",
-+	[FAULT_SUM_TYPE]	= "FAULT_SUM_TYPE",
-+	[FAULT_SUM_ENT]		= "FAULT_SUM_ENTRY",
-+	[FAULT_NAT]		= "FAULT_NAT_ENTRY",
-+	[FAULT_NODE]		= "FAULT_NODE_BLOCK",
-+	[FAULT_XATTR_ENT]	= "FAULT_XATTR_ENTRY",
-+	[FAULT_COMPR]		= "FAULT_COMPR_TYPE",
-+	[FAULT_INODE]		= "FAULT_INODE_ENTRY",
-+	[FAULT_DENTRY]		= "FAULT_DENTRY_BLOCK",
-+	[FAULT_DATA]		= "FAULT_DATA_BLOCK",
-+	[FAULT_QUOTA]		= "FAULT_QUOTA",
-+};
-+
- int f2fs_set_main_bitmap(struct f2fs_sb_info *sbi, u32 blk, int type)
- {
- 	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
-@@ -23,9 +37,9 @@ int f2fs_set_main_bitmap(struct f2fs_sb_info *sbi, u32 blk, int type)
- 	int fix = 0;
- 
- 	se = get_seg_entry(sbi, GET_SEGNO(sbi, blk));
--	if (se->type >= NO_CHECK_TYPE)
--		fix = 1;
--	else if (IS_DATASEG(se->type) != IS_DATASEG(type))
-+	if (time_to_inject(FAULT_SEG_TYPE) ||
-+			(se->type >= NO_CHECK_TYPE) ||
-+			(IS_DATASEG(se->type) != IS_DATASEG(type)))
- 		fix = 1;
- 
- 	/* just check data and node types */
-@@ -168,7 +182,8 @@ static int is_valid_ssa_node_blk(struct f2fs_sb_info *sbi, u32 nid,
- 
- 	sum_blk = get_sum_block(sbi, segno, &type);
- 
--	if (type != SEG_TYPE_NODE && type != SEG_TYPE_CUR_NODE) {
-+	if (time_to_inject(FAULT_SUM_TYPE) ||
-+			(type != SEG_TYPE_NODE && type != SEG_TYPE_CUR_NODE)) {
- 		/* can't fix current summary, then drop the block */
- 		if (!c.fix_on || type < 0) {
- 			ASSERT_MSG("Summary footer is not for node segment");
-@@ -189,7 +204,8 @@ static int is_valid_ssa_node_blk(struct f2fs_sb_info *sbi, u32 nid,
- 
- 	sum_entry = &(sum_blk->entries[offset]);
- 
--	if (le32_to_cpu(sum_entry->nid) != nid) {
-+	if (time_to_inject(FAULT_SUM_ENT) ||
-+			(le32_to_cpu(sum_entry->nid) != nid)) {
- 		if (!c.fix_on || type < 0) {
- 			DBG(0, "nid                       [0x%x]\n", nid);
- 			DBG(0, "target blk_addr           [0x%x]\n", blk_addr);
-@@ -282,7 +298,7 @@ static int is_valid_ssa_data_blk(struct f2fs_sb_info *sbi, u32 blk_addr,
- 	struct f2fs_summary *sum_entry;
- 	struct seg_entry * se;
- 	u32 segno, offset;
--	int need_fix = 0, ret = 0;
-+	int need_fix = 0, ret = 0, fault_sum_ent = 0;
- 	int type;
- 
- 	if (get_sb(feature) & F2FS_FEATURE_RO)
-@@ -293,7 +309,8 @@ static int is_valid_ssa_data_blk(struct f2fs_sb_info *sbi, u32 blk_addr,
- 
- 	sum_blk = get_sum_block(sbi, segno, &type);
- 
--	if (type != SEG_TYPE_DATA && type != SEG_TYPE_CUR_DATA) {
-+	if (time_to_inject(FAULT_SUM_TYPE) ||
-+			(type != SEG_TYPE_DATA && type != SEG_TYPE_CUR_DATA)) {
- 		/* can't fix current summary, then drop the block */
- 		if (!c.fix_on || type < 0) {
- 			ASSERT_MSG("Summary footer is not for data segment");
-@@ -314,7 +331,10 @@ static int is_valid_ssa_data_blk(struct f2fs_sb_info *sbi, u32 blk_addr,
- 
- 	sum_entry = &(sum_blk->entries[offset]);
- 
--	if (le32_to_cpu(sum_entry->nid) != parent_nid ||
-+	if (time_to_inject(FAULT_SUM_ENT))
-+		fault_sum_ent = 1;
-+
-+	if (fault_sum_ent || le32_to_cpu(sum_entry->nid) != parent_nid ||
- 			sum_entry->version != version ||
- 			le16_to_cpu(sum_entry->ofs_in_node) != idx_in_node) {
- 		if (!c.fix_on || type < 0) {
-@@ -333,7 +353,8 @@ static int is_valid_ssa_data_blk(struct f2fs_sb_info *sbi, u32 blk_addr,
- 			DBG(0, "Target data block addr    [0x%x]\n", blk_addr);
- 			ASSERT_MSG("Invalid data seg summary\n");
- 			ret = -EINVAL;
--		} else if (is_valid_summary(sbi, sum_entry, blk_addr)) {
-+		} else if (!fault_sum_ent &&
-+				is_valid_summary(sbi, sum_entry, blk_addr)) {
- 			/* delete wrong index */
- 			ret = -EINVAL;
- 		} else {
-@@ -397,6 +418,11 @@ err:
- static int sanity_check_nat(struct f2fs_sb_info *sbi, u32 nid,
- 						struct node_info *ni)
- {
-+	if (time_to_inject(FAULT_NAT)) {
-+		ASSERT_MSG("%s is injected.", f2fs_fault_name[FAULT_NAT]);
-+		return -EINVAL;
-+	}
-+
- 	if (!IS_VALID_NID(sbi, nid)) {
- 		ASSERT_MSG("nid is not valid. [0x%x]", nid);
- 		return -EINVAL;
-@@ -436,6 +462,11 @@ static int sanity_check_nid(struct f2fs_sb_info *sbi, u32 nid,
- 	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
- 	int ret;
- 
-+	if (time_to_inject(FAULT_NODE)) {
-+		ASSERT_MSG("%s is injected.", f2fs_fault_name[FAULT_NODE]);
-+		return -EINVAL;
-+	}
-+
- 	ret = sanity_check_nat(sbi, nid, ni);
- 	if (ret)
- 		return ret;
-@@ -865,7 +896,7 @@ int chk_extended_attributes(struct f2fs_sb_info *sbi, u32 nid,
- 				"end of list", nid);
- 		need_fix = true;
- 	}
--	if (need_fix && c.fix_on) {
-+	if ((time_to_inject(FAULT_XATTR_ENT) || need_fix) && c.fix_on) {
- 		memset(ent, 0, (u8 *)last_base_addr - (u8 *)ent);
- 		write_all_xattrs(sbi, inode, xattr_size, xattr);
- 		FIX_MSG("[0x%x] nullify wrong xattr entries", nid);
-@@ -907,7 +938,8 @@ void fsck_chk_inode_blk(struct f2fs_sb_info *sbi, u32 nid,
- 	if (!compressed)
- 		goto check_next;
- 
--	if (!compr_supported || (node_blk->i.i_inline & F2FS_INLINE_DATA)) {
-+	if (time_to_inject(FAULT_COMPR) || !compr_supported ||
-+			(node_blk->i.i_inline & F2FS_INLINE_DATA)) {
- 		/*
- 		 * The 'compression' flag in i_flags affects the traverse of
- 		 * the node tree.  Thus, it must be fixed unconditionally
-@@ -943,12 +975,13 @@ check_next:
- 			f2fs_set_main_bitmap(sbi, ni->blk_addr,
- 							CURSEG_WARM_NODE);
- 
--			if (i_links == 0 && (ftype == F2FS_FT_CHRDEV ||
-+			if (time_to_inject(FAULT_INODE) ||
-+				(i_links == 0 && (ftype == F2FS_FT_CHRDEV ||
- 				ftype == F2FS_FT_BLKDEV ||
- 				ftype == F2FS_FT_FIFO ||
- 				ftype == F2FS_FT_SOCK ||
- 				ftype == F2FS_FT_SYMLINK ||
--				ftype == F2FS_FT_REG_FILE)) {
-+				ftype == F2FS_FT_REG_FILE))) {
- 				ASSERT_MSG("ino: 0x%x ftype: %d has i_links: %u",
- 							nid, ftype, i_links);
- 				if (c.fix_on) {
-@@ -1008,7 +1041,8 @@ check_next:
- 		if (c.feature & F2FS_FEATURE_EXTRA_ATTR) {
- 			unsigned int isize =
- 				le16_to_cpu(node_blk->i.i_extra_isize);
--			if (isize > 4 * DEF_ADDRS_PER_INODE) {
-+			if (time_to_inject(FAULT_INODE) ||
-+					(isize > 4 * DEF_ADDRS_PER_INODE)) {
- 				ASSERT_MSG("[0x%x] wrong i_extra_isize=0x%x",
- 						nid, isize);
- 				if (c.fix_on) {
-@@ -1038,8 +1072,9 @@ check_next:
- 			unsigned int inline_size =
- 				le16_to_cpu(node_blk->i.i_inline_xattr_size);
- 
--			if (!inline_size ||
--					inline_size > MAX_INLINE_XATTR_SIZE) {
-+			if (time_to_inject(FAULT_INODE) ||
-+					(!inline_size ||
-+					inline_size > MAX_INLINE_XATTR_SIZE)) {
- 				ASSERT_MSG("[0x%x] wrong inline_xattr_size:%u",
- 						nid, inline_size);
- 				if (c.fix_on) {
-@@ -1056,9 +1091,10 @@ check_next:
- 	}
- 	ofs = get_extra_isize(node_blk);
- 
--	if ((node_blk->i.i_flags & cpu_to_le32(F2FS_CASEFOLD_FL)) &&
--	    (!S_ISDIR(le16_to_cpu(node_blk->i.i_mode)) ||
--	     !(c.feature & F2FS_FEATURE_CASEFOLD))) {
-+	if (time_to_inject(FAULT_INODE) ||
-+		 ((node_blk->i.i_flags & cpu_to_le32(F2FS_CASEFOLD_FL)) &&
-+		  (!S_ISDIR(le16_to_cpu(node_blk->i.i_mode)) ||
-+		   !(c.feature & F2FS_FEATURE_CASEFOLD)))) {
- 		ASSERT_MSG("[0x%x] unexpected casefold flag", nid);
- 		if (c.fix_on) {
- 			FIX_MSG("ino[0x%x] clear casefold flag", nid);
-@@ -1077,7 +1113,8 @@ check_next:
- 			qf_szchk_type[cur_qtype] = QF_SZCHK_INLINE;
- 		block_t blkaddr = le32_to_cpu(node_blk->i.i_addr[ofs]);
- 
--		if (blkaddr != NULL_ADDR) {
-+		if (time_to_inject(FAULT_INODE) ||
-+				(blkaddr != NULL_ADDR)) {
- 			ASSERT_MSG("[0x%x] wrong inline reserve blkaddr:%u",
- 					nid, blkaddr);
- 			if (c.fix_on) {
-@@ -1088,7 +1125,8 @@ check_next:
- 				need_fix = 1;
- 			}
- 		}
--		if (i_size > inline_size) {
-+		if (time_to_inject(FAULT_INODE) ||
-+				(i_size > inline_size)) {
- 			ASSERT_MSG("[0x%x] wrong inline size:%lu",
- 					nid, (unsigned long)i_size);
- 			if (c.fix_on) {
-@@ -1118,7 +1156,7 @@ check_next:
- 		block_t blkaddr = le32_to_cpu(node_blk->i.i_addr[ofs]);
- 
- 		DBG(3, "ino[0x%x] has inline dentry!\n", nid);
--		if (blkaddr != 0) {
-+		if (time_to_inject(FAULT_INODE) || (blkaddr != 0)) {
- 			ASSERT_MSG("[0x%x] wrong inline reserve blkaddr:%u",
- 								nid, blkaddr);
- 			if (c.fix_on) {
-@@ -1728,6 +1766,11 @@ static int f2fs_check_hash_code(int encoding, int casefolded,
- 			struct f2fs_dir_entry *dentry,
- 			const unsigned char *name, u32 len, int enc_name)
- {
-+	if (time_to_inject(FAULT_DENTRY)) {
-+		ASSERT_MSG("%s is injected.", f2fs_fault_name[FAULT_DENTRY]);
-+		return 1;
-+	}
-+
- 	/* Casefolded Encrypted names require a key to compute siphash */
- 	if (enc_name && casefolded)
- 		return 0;
-@@ -1806,7 +1849,8 @@ static int __chk_dots_dentries(struct f2fs_sb_info *sbi,
- 	int fixed = 0;
- 
- 	if ((name[0] == '.' && len == 1)) {
--		if (le32_to_cpu(dentry->ino) != child->p_ino) {
-+		if (time_to_inject(FAULT_DENTRY) ||
-+				(le32_to_cpu(dentry->ino) != child->p_ino)) {
- 			ASSERT_MSG("Bad inode number[0x%x] for '.', parent_ino is [0x%x]\n",
- 				le32_to_cpu(dentry->ino), child->p_ino);
- 			dentry->ino = cpu_to_le32(child->p_ino);
-@@ -1816,13 +1860,16 @@ static int __chk_dots_dentries(struct f2fs_sb_info *sbi,
- 
- 	if (name[0] == '.' && name[1] == '.' && len == 2) {
- 		if (child->p_ino == F2FS_ROOT_INO(sbi)) {
--			if (le32_to_cpu(dentry->ino) != F2FS_ROOT_INO(sbi)) {
-+			if (time_to_inject(FAULT_DENTRY) ||
-+					(le32_to_cpu(dentry->ino) !=
-+					 F2FS_ROOT_INO(sbi))) {
- 				ASSERT_MSG("Bad inode number[0x%x] for '..'\n",
- 					le32_to_cpu(dentry->ino));
- 				dentry->ino = cpu_to_le32(F2FS_ROOT_INO(sbi));
- 				fixed = 1;
- 			}
--		} else if (le32_to_cpu(dentry->ino) != child->pp_ino) {
-+		} else if (time_to_inject(FAULT_DENTRY) ||
-+				(le32_to_cpu(dentry->ino) != child->pp_ino)) {
- 			ASSERT_MSG("Bad inode number[0x%x] for '..', parent parent ino is [0x%x]\n",
- 				le32_to_cpu(dentry->ino), child->pp_ino);
- 			dentry->ino = cpu_to_le32(child->pp_ino);
-@@ -1833,7 +1880,7 @@ static int __chk_dots_dentries(struct f2fs_sb_info *sbi,
- 	if (f2fs_check_hash_code(get_encoding(sbi), casefolded, dentry, name, len, enc_name))
- 		fixed = 1;
- 
--	if (name[len] != '\0') {
-+	if (time_to_inject(FAULT_DENTRY) || (name[len] != '\0')) {
- 		ASSERT_MSG("'.' is not NULL terminated\n");
- 		name[len] = '\0';
- 		memcpy(*filename, name, len);
-@@ -1896,7 +1943,8 @@ static int __chk_dentries(struct f2fs_sb_info *sbi, int casefolded,
- 			i++;
- 			continue;
- 		}
--		if (!IS_VALID_NID(sbi, le32_to_cpu(dentry[i].ino))) {
-+		if (time_to_inject(FAULT_DENTRY) ||
-+				!IS_VALID_NID(sbi, le32_to_cpu(dentry[i].ino))) {
- 			ASSERT_MSG("Bad dentry 0x%x with invalid NID/ino 0x%x",
- 				    i, le32_to_cpu(dentry[i].ino));
- 			if (c.fix_on) {
-@@ -1910,7 +1958,9 @@ static int __chk_dentries(struct f2fs_sb_info *sbi, int casefolded,
- 		}
- 
- 		ftype = dentry[i].file_type;
--		if ((ftype <= F2FS_FT_UNKNOWN || ftype > F2FS_FT_LAST_FILE_TYPE)) {
-+		if (time_to_inject(FAULT_DENTRY) ||
-+				(ftype <= F2FS_FT_UNKNOWN ||
-+				 ftype > F2FS_FT_LAST_FILE_TYPE)) {
- 			ASSERT_MSG("Bad dentry 0x%x with unexpected ftype 0x%x",
- 						le32_to_cpu(dentry[i].ino), ftype);
- 			if (c.fix_on) {
-@@ -1925,7 +1975,8 @@ static int __chk_dentries(struct f2fs_sb_info *sbi, int casefolded,
- 
- 		name_len = le16_to_cpu(dentry[i].name_len);
- 
--		if (name_len == 0 || name_len > F2FS_NAME_LEN) {
-+		if (time_to_inject(FAULT_DENTRY) ||
-+				(name_len == 0 || name_len > F2FS_NAME_LEN)) {
- 			ASSERT_MSG("Bad dentry 0x%x with invalid name_len", i);
- 			if (c.fix_on) {
- 				FIX_MSG("Clear bad dentry 0x%x", i);
-@@ -2160,6 +2211,11 @@ int fsck_chk_data_blk(struct f2fs_sb_info *sbi, struct f2fs_inode *inode,
- 		return 0;
- 	}
- 
-+	if (time_to_inject(FAULT_DATA)) {
-+		ASSERT_MSG("%s is injected.", f2fs_fault_name[FAULT_DATA]);
-+		return -EINVAL;
-+	}
-+
- 	if (!f2fs_is_valid_blkaddr(sbi, blk_addr, DATA_GENERIC)) {
- 		ASSERT_MSG("blkaddress is not valid. [0x%x]", blk_addr);
- 		return -EINVAL;
-@@ -3575,6 +3631,19 @@ int fsck_chk_curseg_info(struct f2fs_sb_info *sbi)
- 	return ret;
- }
- 
-+void print_fault_cnt(struct f2fs_fault_info *ffi)
-+{
-+	int i;
-+
-+	printf("[Fault injection result]\n");
-+	for (i = 0; i < FAULT_MAX; i++) {
-+		printf("%s: %u", f2fs_fault_name[i], ffi->fault_cnt[i]);
-+		if (i < FAULT_MAX - 1)
-+			printf(", ");
-+	}
-+	printf("\n");
-+}
-+
- int fsck_verify(struct f2fs_sb_info *sbi)
- {
- 	unsigned int i = 0;
-@@ -3583,12 +3652,16 @@ int fsck_verify(struct f2fs_sb_info *sbi)
- 	u32 nr_unref_nid = 0;
- 	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
- 	struct hard_link_node *node = NULL;
-+	struct f2fs_fault_info *ffi = &c.fault_info;
- 	bool verify_failed = false;
- 	uint64_t max_blks, data_secs, node_secs, free_blks;
- 
- 	if (c.show_file_map)
- 		return 0;
- 
-+	if (ffi->inject_rate)
-+		print_fault_cnt(ffi);
-+
- 	printf("\n");
- 
- 	if (c.zoned_model == F2FS_ZONED_HM) {
-diff --git a/fsck/main.c b/fsck/main.c
-index cb51673..9e7027d 100644
---- a/fsck/main.c
-+++ b/fsck/main.c
-@@ -92,6 +92,8 @@ void fsck_usage()
- 	MSG(0, "  --kernel-check checks kernel change\n");
- 	MSG(0, "  --debug-cache to debug cache when -c is used\n");
- 	MSG(0, "  --nolinear-lookup=X X=1: disable linear lookup, X=0: enable linear lookup\n");
-+	MSG(0, "  --fault_injection=%%d to enable fault injection with specified injection rate\n");
-+	MSG(0, "  --fault_type=%%d to configure enabled fault injection type\n");
- 	exit(1);
- }
- 
-@@ -270,6 +272,8 @@ void f2fs_parse_options(int argc, char *argv[])
- 			{"kernel-check", no_argument, 0, 3},
- 			{"debug-cache", no_argument, 0, 4},
- 			{"nolinear-lookup", required_argument, 0, 5},
-+			{"fault_injection", required_argument, 0, 6},
-+			{"fault_type", required_argument, 0, 7},
- 			{0, 0, 0, 0}
- 		};
- 
-@@ -300,6 +304,24 @@ void f2fs_parse_options(int argc, char *argv[])
- 				else
- 					c.nolinear_lookup = LINEAR_LOOKUP_DISABLE;
- 				break;
-+			case 6:
-+				val = atoi(optarg);
-+				if ((unsigned int)val <= 1) {
-+					MSG(0, "\tError: injection rate must be larger "
-+							"than 1: %d\n", val);
-+					fsck_usage();
-+				}
-+				c.fault_info.inject_rate = val;
-+				c.fault_info.inject_type = F2FS_ALL_FAULT_TYPE;
-+				break;
-+			case 7:
-+				val = atoi(optarg);
-+				if (val >= (1UL << (FAULT_MAX))) {
-+					MSG(0, "\tError: Invalid inject type: %x\n", val);
-+					fsck_usage();
-+				}
-+				c.fault_info.inject_type = val;
-+				break;
- 			case 'a':
- 				c.auto_fix = 1;
- 				MSG(0, "Info: Automatic fix mode enabled.\n");
-diff --git a/fsck/mkquota.c b/fsck/mkquota.c
-index 2451b58..3f491d7 100644
---- a/fsck/mkquota.c
-+++ b/fsck/mkquota.c
-@@ -372,6 +372,11 @@ errcode_t quota_compare_and_update(struct f2fs_sb_info *sbi,
- 	dict_t *dict = qctx->quota_dict[qtype];
- 	errcode_t err = 0;
- 
-+	if (time_to_inject(FAULT_QUOTA)) {
-+		ASSERT_MSG("%s is injected.", f2fs_fault_name[FAULT_QUOTA]);
-+		return -EINVAL;
-+	}
-+
- 	if (!dict)
- 		goto out;
- 
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 12b08fb..c78c039 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -29,6 +29,7 @@
- #include <string.h>
- #include <time.h>
- #include <stdbool.h>
-+#include <limits.h>
- 
- #ifdef HAVE_CONFIG_H
- #include <config.h>
-@@ -1486,6 +1487,34 @@ enum {
- 	LINEAR_LOOKUP_DISABLE,
- };
- 
-+/* Fault inject control */
-+enum {
-+	FAULT_SEG_TYPE,
-+	FAULT_SUM_TYPE,
-+	FAULT_SUM_ENT,
-+	FAULT_NAT,
-+	FAULT_NODE,
-+	FAULT_XATTR_ENT,
-+	FAULT_COMPR,
-+	FAULT_INODE,
-+	FAULT_DENTRY,
-+	FAULT_DATA,
-+	FAULT_QUOTA,
-+	FAULT_MAX
-+};
-+
-+#define F2FS_ALL_FAULT_TYPE	((1UL << (FAULT_MAX)) - 1)
-+
-+struct f2fs_fault_info {
-+	int inject_ops;
-+	int inject_rate;
-+	unsigned int inject_type;
-+	unsigned int fault_cnt[FAULT_MAX];
-+};
-+
-+extern const char *f2fs_fault_name[FAULT_MAX];
-+#define IS_FAULT_SET(fi, type) ((fi)->inject_type & (1UL << (type)))
-+
- struct f2fs_configuration {
- 	uint32_t conf_reserved_sections;
- 	uint32_t reserved_segments;
-@@ -1616,6 +1645,9 @@ struct f2fs_configuration {
- 		struct f2fs_journal nat_jnl;
- 		char nat_bytes[F2FS_MAX_BLKSIZE];
- 	};
-+
-+	/* Fault injection control */
-+	struct f2fs_fault_info fault_info;
- };
- 
- extern int utf8_to_utf16(char *, const char *, size_t, size_t);
-@@ -2143,4 +2175,30 @@ static inline void check_block_struct_sizes(void)
- 			+ NR_DENTRY_IN_BLOCK * F2FS_SLOT_LEN * sizeof(u8) == F2FS_BLKSIZE);
- }
- 
-+/* Fault inject control */
-+#define time_to_inject(type) __time_to_inject(type, __func__, \
-+					__builtin_return_address(0))
-+static inline bool __time_to_inject(int type, const char *func,
-+		const char *parent_func)
-+{
-+	struct f2fs_fault_info *ffi = &c.fault_info;
-+
-+	if (!ffi->inject_rate)
-+		return false;
-+
-+	if (!IS_FAULT_SET(ffi, type))
-+		return false;
-+
-+	ffi->inject_ops++;
-+	if (ffi->inject_ops >= ffi->inject_rate) {
-+		ffi->inject_ops = 0;
-+		if (ffi->fault_cnt[type] != UINT_MAX)
-+			ffi->fault_cnt[type]++;
-+		MSG(0, "inject %s in %s of %p\n",
-+				f2fs_fault_name[type], func, parent_func);
-+		return true;
-+	}
-+	return false;
-+}
-+
- #endif	/*__F2FS_FS_H */
-diff --git a/man/fsck.f2fs.8 b/man/fsck.f2fs.8
-index 606e288..89cc455 100644
---- a/man/fsck.f2fs.8
-+++ b/man/fsck.f2fs.8
-@@ -70,6 +70,42 @@ The default number is 0, which shows basic debugging messages.
- .BI \--nolinear-lookup
- Tune linear lookup fallback, must specify an argument, 0: enable linear lookup, 1: disable linear lookup.
- .TP
-+.BI \-\-fault_injection=%d " enable fault injection"
-+Enable fault injection in all supported types with specified injection rate.
-+.TP
-+.BI \-\-fault_type=%d " configure fault injection type"
-+Support configuring fault injection type, should be enabled with
-+fault_injection option, fault type value is shown below, it supports
-+single or combined type.
-+.br
-+===========================      ===========
-+.br
-+Type_Name                        Type_Value
-+.br
-+===========================      ===========
-+.br
-+FAULT_SEG_TYPE                   0x00000001
-+.br
-+FAULT_SUM_TYPE                   0x00000002
-+.br
-+FAULT_SUM_ENT                    0x00000004
-+.br
-+FAULT_NAT                        0x00000008
-+.br
-+FAULT_NODE                       0x00000010
-+.br
-+FAULT_XATTR_ENT                  0x00000020
-+.br
-+FAULT_COMPR                      0x00000040
-+.br
-+FAULT_INODE                      0x00000080
-+.br
-+FAULT_DENTRY                     0x00000100
-+.br
-+FAULT_DATA                       0x00000200
-+.br
-+FAULT_QUOTA                      0x00000400
-+.TP
- .SH AUTHOR
- Initial checking code was written by Byoung Geun Kim <bgbg.kim@samsung.com>.
- Jaegeuk Kim <jaegeuk@kernel.org> reworked most parts of the codes to support
 -- 
-2.49.0.906.g1f30a19c02-goog
+Cheers,
+
+David / dhildenb
 
 
 
