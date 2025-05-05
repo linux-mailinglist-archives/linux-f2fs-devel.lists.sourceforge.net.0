@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BC0BAAA2E0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 May 2025 01:05:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7C97AAA311
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 May 2025 01:08:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-Id:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=fJ9jKVgCuzCNUh482ZL8OmkNFNgHQln7QsEvqloP4Fs=; b=iANW4TuLl08nJQuE9LD1v0S/ub
-	lqBh63ZLGbsIkCFP7ZxcLCDWbeile9s/fBDyxQIjHxJexRNYPQZNTP3J9yy/TIX90DRFVdnTuPSoP
-	zyvrXmGSOtkIZKSrYod04LRBCjc3m7JUNrU/lIFMFvIGwO2AFvQzqF5Uz/ThXxjdXLs8=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=CtMAfXeq+h/kfp4nO65QBlBC51wxaZbp8cwpN5IcEzU=; b=VZhcbSLpJwg1baB6I8RwvtTz/y
+	DjocdKU7e86+In/X2JinrasDY9iD69Jmznzmdy2bk2lDlxgEfJpNdtpf6lSxWgUM6BY/Cw7mpA31+
+	o/v8jf911PiivG7IiLTbBq9TIJrDytLjeDtwOpMpIIqddmgKyIhD1loVSDWPIOxzoSgM=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uC4sZ-0001Eb-E7;
-	Mon, 05 May 2025 23:05:43 +0000
+	id 1uC4vY-0007Et-Mn;
+	Mon, 05 May 2025 23:08:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1uC4sT-0001EM-2W
+ (envelope-from <sashal@kernel.org>) id 1uC4vX-0007En-Dm
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 05 May 2025 23:05:37 +0000
+ Mon, 05 May 2025 23:08:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hsJIhSL5Kkf3fUQHXrZMi5J9ZC6YL88/gk45A0UaVAE=; b=ec2B4Tx9RGRFNPB/mQ88pvRYMq
- jFTpg3QDbauzHt71iGQpFI272FN5vgBxiSItVNPylnL5LttJg7sfKHksc+vlKHRN+oB9ps5b8UGjc
- 19ULxDu7MRGG9RHGSnPpP8w3jNd3Pn8GzamfL/FT32wpIGyD8+wmt4c8X91m2sGnVP0Y=;
+ bh=PR3WyGFJFVsyIwQaDWpWedN9tKnQ8IHJZV1Wk85HvMs=; b=aJnf9DbfUuG8XaLNJk4jRGhxJY
+ osFng3huHiVDAcPAZn/4+nVOR5M82iioZfmR+HVhzoZJLinbUeFQxJ4XtBubC+IqFVD/Ux3XeXvD7
+ k9rWHIOCjlXhREeXbnpUBHb24b5EQB6+xJkOnPfcBWYXncac04TDOhb9/x6MvhI49Fmc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -40,67 +40,79 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hsJIhSL5Kkf3fUQHXrZMi5J9ZC6YL88/gk45A0UaVAE=; b=nTAo6nbbOfkgVGr9Wq0OJQ33MJ
- JmxMOU1Sp2H38ReTfaTf6woUkdpfDzqYw8eSUHAvF83t0L/x5QpCcPlTtauZMQDMUs3sQ8kRpku8B
- fmsm40g46yIyLtu5omgGoOT9q2chU6ix62fom5UtzxznscoErvoKPxYfrCX15RfH2x38=;
+ bh=PR3WyGFJFVsyIwQaDWpWedN9tKnQ8IHJZV1Wk85HvMs=; b=TCiplS9eDZJurqOQxkzpSxoc+q
+ sxpH5aYhxPhdr6Qoi/5acLGXmddumiNr61B4y57QRWM02BBd7l4hvOQ0q+37lZr6PVBTrL69DMTuq
+ fiDizk2bfMcj0LDgTIEzfX+BeA5uhm0kbBPPTKZNddsUboCgeOAFRUOIS+pid8vkgGNI=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uC4sD-0004EX-Hx for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 05 May 2025 23:05:37 +0000
+ id 1uC4vH-0004JS-OG for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 05 May 2025 23:08:47 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id DFAFF5C5AF9
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  5 May 2025 23:02:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0EB8DC4CEE4;
- Mon,  5 May 2025 23:05:09 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 1AE465C137C;
+ Mon,  5 May 2025 23:06:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 252F1C4CEEE;
+ Mon,  5 May 2025 23:08:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1746486310;
- bh=N/+gcBEjiAsAq7oPtWgwzPjGUF4foo1EgUZASPYJbdY=;
+ s=k20201202; t=1746486501;
+ bh=0uhOEJdesMZ0/FMN3zc75mJ1ev9hHoeL2W/wxepzwK0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=qK2UOzeSDBAFzTrcvoFv5hRx7SCKhlWLpl4pVOG7bwOyQxuQcfRIB3/wOobCs9xDg
- 0fwKaY/x8ASLpFM02rNGb8KVwzJPR4czYWe6E3EEaZ7ZU9vwSREgeMRp8iF13khSXg
- lyNSD2gQZPvFYAkLJqGC6C9y9YjnqWykJon9DnzOYlPP1DXehrXNSPu4LzIHi+lNHJ
- Q/csuA8csdnC0cRAKRzOPbKZQw/E2luTTiU6BJs89YkBHTb8khwvPR8MhPbz+OvlRZ
- 8fcXn+ze1tcd9e5gkLTPjrg00xji0f/HF8dIu+dbliLhfz6gHopQZOhwjewq3Xa9Rz
- cL9OhiBnNVAUg==
+ b=H8+DI7ZElXRFLCk8pNwP4B6SfdcXuO8ntSqY7g5kA21uo0LQtQ023mEC7s60mfY4k
+ /oMv9uKQXgadf93jQZbCK3tej7CbM9ETzmToEJ4Ds0BvG9S8l9KWToU94gzonT2wPz
+ E2d1rh5d+R9jqxMvhEzEXesDtEPxrQPsAIgRZNh+lN0WWRlhlLDUo8nDchAQ/eVQ/w
+ XYtrVTbX+yfcf73BB1nF0l9R6xPN250MuN3iCB+MBTRNIccFICPGyoz3tCdWz0IR0R
+ GZZHMpAx1hlg6bd74/UHg2+UIh2RjuIkDMKjquYfX92wtuQUS32/hbiUf49XC+xRXx
+ L7YqBS72IJEQg==
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon,  5 May 2025 18:55:53 -0400
-Message-Id: <20250505225634.2688578-253-sashal@kernel.org>
+Date: Mon,  5 May 2025 19:03:54 -0400
+Message-Id: <20250505230624.2692522-62-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250505225634.2688578-1-sashal@kernel.org>
-References: <20250505225634.2688578-1-sashal@kernel.org>
+In-Reply-To: <20250505230624.2692522-1-sashal@kernel.org>
+References: <20250505230624.2692522-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.6.89
-X-Spam-Score: -5.8 (-----)
-X-Spam-Report: Spam detection software, running on the system "6901ab67b84d", 
+X-stable-base: Linux 6.1.136
+X-Spam-Score: -6.6 (------)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Jaegeuk Kim <jaegeuk@kernel.org> [ Upstream commit
- 21925ede449e038ed6f9efdfe0e79f15bddc34bc
- ] In /sys/fs/f2fs/features, there's no f2fs_sb_info, so let's avoid to get
- the pointer. 
- Content analysis details:   (-5.8 points, 5.0 required)
+ Content preview:  From: Eric Sandeen <sandeen@redhat.com> [ Upstream commit
+ 9cca49875997a1a7e92800a828a62bacb0f577b9 ] Defer the readonly-vs-norecovery
+ check until after option parsing is done so that option parsing does not
+ require an active superblock for the test. Add a helpful message, while we're
+ at it. Content analysis details:   (-6.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/, high
- trust [139.178.84.217 listed in list.dnswl.org]
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [139.178.84.217 listed in sa-accredit.habeas.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uC4sD-0004EX-Hx
-Subject: [f2fs-dev] [PATCH AUTOSEL 6.6 253/294] f2fs: introduce
- f2fs_base_attr for global sysfs entries
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uC4vH-0004JS-OG
+Subject: [f2fs-dev] [PATCH AUTOSEL 6.1 062/212] f2fs: defer readonly check
+ vs norecovery
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,159 +126,60 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Sasha Levin via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Sasha Levin <sashal@kernel.org>
-Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Sasha Levin <sashal@kernel.org>, Eric Sandeen <sandeen@redhat.com>,
+ linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Jaegeuk Kim <jaegeuk@kernel.org>
+From: Eric Sandeen <sandeen@redhat.com>
 
-[ Upstream commit 21925ede449e038ed6f9efdfe0e79f15bddc34bc ]
+[ Upstream commit 9cca49875997a1a7e92800a828a62bacb0f577b9 ]
 
-In /sys/fs/f2fs/features, there's no f2fs_sb_info, so let's avoid to get
-the pointer.
+Defer the readonly-vs-norecovery check until after option parsing is done
+so that option parsing does not require an active superblock for the test.
+Add a helpful message, while we're at it.
 
+(I think could be moved back into parsing after we switch to the new mount
+API if desired, as the fs context will have RO state available.)
+
+Signed-off-by: Eric Sandeen <sandeen@redhat.com>
 Reviewed-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/sysfs.c | 74 ++++++++++++++++++++++++++++++++++---------------
- 1 file changed, 52 insertions(+), 22 deletions(-)
+ fs/f2fs/super.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 180feefc4a9ce..c4b0661888a15 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -61,6 +61,12 @@ struct f2fs_attr {
- 	int id;
- };
- 
-+struct f2fs_base_attr {
-+	struct attribute attr;
-+	ssize_t (*show)(struct f2fs_base_attr *a, char *buf);
-+	ssize_t (*store)(struct f2fs_base_attr *a, const char *buf, size_t len);
-+};
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 72160b906f4b3..0802357d45256 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -745,10 +745,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 			set_opt(sbi, DISABLE_ROLL_FORWARD);
+ 			break;
+ 		case Opt_norecovery:
+-			/* this option mounts f2fs with ro */
++			/* requires ro mount, checked in f2fs_default_check */
+ 			set_opt(sbi, NORECOVERY);
+-			if (!f2fs_readonly(sb))
+-				return -EINVAL;
+ 			break;
+ 		case Opt_discard:
+ 			if (!f2fs_hw_support_discard(sbi)) {
+@@ -1404,6 +1402,12 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 		f2fs_err(sbi, "Allow to mount readonly mode only");
+ 		return -EROFS;
+ 	}
 +
- static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
- 			     struct f2fs_sb_info *sbi, char *buf);
- 
-@@ -791,6 +797,25 @@ static void f2fs_sb_release(struct kobject *kobj)
- 	complete(&sbi->s_kobj_unregister);
++	if (test_opt(sbi, NORECOVERY) && !f2fs_readonly(sbi->sb)) {
++		f2fs_err(sbi, "norecovery requires readonly mount");
++		return -EINVAL;
++	}
++
+ 	return 0;
  }
  
-+static ssize_t f2fs_base_attr_show(struct kobject *kobj,
-+				struct attribute *attr, char *buf)
-+{
-+	struct f2fs_base_attr *a = container_of(attr,
-+				struct f2fs_base_attr, attr);
-+
-+	return a->show ? a->show(a, buf) : 0;
-+}
-+
-+static ssize_t f2fs_base_attr_store(struct kobject *kobj,
-+				struct attribute *attr,
-+				const char *buf, size_t len)
-+{
-+	struct f2fs_base_attr *a = container_of(attr,
-+				struct f2fs_base_attr, attr);
-+
-+	return a->store ? a->store(a, buf, len) : 0;
-+}
-+
- /*
-  * Note that there are three feature list entries:
-  * 1) /sys/fs/f2fs/features
-@@ -809,14 +834,13 @@ static void f2fs_sb_release(struct kobject *kobj)
-  *     please add new on-disk feature in this list only.
-  *     - ref. F2FS_SB_FEATURE_RO_ATTR()
-  */
--static ssize_t f2fs_feature_show(struct f2fs_attr *a,
--		struct f2fs_sb_info *sbi, char *buf)
-+static ssize_t f2fs_feature_show(struct f2fs_base_attr *a, char *buf)
- {
- 	return sysfs_emit(buf, "supported\n");
- }
- 
- #define F2FS_FEATURE_RO_ATTR(_name)				\
--static struct f2fs_attr f2fs_attr_##_name = {			\
-+static struct f2fs_base_attr f2fs_base_attr_##_name = {		\
- 	.attr = {.name = __stringify(_name), .mode = 0444 },	\
- 	.show	= f2fs_feature_show,				\
- }
-@@ -1166,37 +1190,38 @@ static struct attribute *f2fs_attrs[] = {
- };
- ATTRIBUTE_GROUPS(f2fs);
- 
-+#define BASE_ATTR_LIST(name) (&f2fs_base_attr_##name.attr)
- static struct attribute *f2fs_feat_attrs[] = {
- #ifdef CONFIG_FS_ENCRYPTION
--	ATTR_LIST(encryption),
--	ATTR_LIST(test_dummy_encryption_v2),
-+	BASE_ATTR_LIST(encryption),
-+	BASE_ATTR_LIST(test_dummy_encryption_v2),
- #if IS_ENABLED(CONFIG_UNICODE)
--	ATTR_LIST(encrypted_casefold),
-+	BASE_ATTR_LIST(encrypted_casefold),
- #endif
- #endif /* CONFIG_FS_ENCRYPTION */
- #ifdef CONFIG_BLK_DEV_ZONED
--	ATTR_LIST(block_zoned),
-+	BASE_ATTR_LIST(block_zoned),
- #endif
--	ATTR_LIST(atomic_write),
--	ATTR_LIST(extra_attr),
--	ATTR_LIST(project_quota),
--	ATTR_LIST(inode_checksum),
--	ATTR_LIST(flexible_inline_xattr),
--	ATTR_LIST(quota_ino),
--	ATTR_LIST(inode_crtime),
--	ATTR_LIST(lost_found),
-+	BASE_ATTR_LIST(atomic_write),
-+	BASE_ATTR_LIST(extra_attr),
-+	BASE_ATTR_LIST(project_quota),
-+	BASE_ATTR_LIST(inode_checksum),
-+	BASE_ATTR_LIST(flexible_inline_xattr),
-+	BASE_ATTR_LIST(quota_ino),
-+	BASE_ATTR_LIST(inode_crtime),
-+	BASE_ATTR_LIST(lost_found),
- #ifdef CONFIG_FS_VERITY
--	ATTR_LIST(verity),
-+	BASE_ATTR_LIST(verity),
- #endif
--	ATTR_LIST(sb_checksum),
-+	BASE_ATTR_LIST(sb_checksum),
- #if IS_ENABLED(CONFIG_UNICODE)
--	ATTR_LIST(casefold),
-+	BASE_ATTR_LIST(casefold),
- #endif
--	ATTR_LIST(readonly),
-+	BASE_ATTR_LIST(readonly),
- #ifdef CONFIG_F2FS_FS_COMPRESSION
--	ATTR_LIST(compression),
-+	BASE_ATTR_LIST(compression),
- #endif
--	ATTR_LIST(pin_file),
-+	BASE_ATTR_LIST(pin_file),
- 	NULL,
- };
- ATTRIBUTE_GROUPS(f2fs_feat);
-@@ -1263,9 +1288,14 @@ static struct kset f2fs_kset = {
- 	.kobj	= {.ktype = &f2fs_ktype},
- };
- 
-+static const struct sysfs_ops f2fs_feat_attr_ops = {
-+	.show	= f2fs_base_attr_show,
-+	.store	= f2fs_base_attr_store,
-+};
-+
- static const struct kobj_type f2fs_feat_ktype = {
- 	.default_groups = f2fs_feat_groups,
--	.sysfs_ops	= &f2fs_attr_ops,
-+	.sysfs_ops	= &f2fs_feat_attr_ops,
- };
- 
- static struct kobject f2fs_feat = {
 -- 
 2.39.5
 
