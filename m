@@ -2,86 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69913AABE86
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 May 2025 11:10:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D652FAACA08
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 May 2025 17:50:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=2wmBKqoHMRvEQbSp3C+AcevxobIRXCJRs3AG2xfv7f4=; b=Bk0n+R3PkYCugdy1wqiYsBVjE8
-	EUn0g2a3yL2gbnIc5tu7c14BTcLLBartEN8BnsrvywygKCHiSLocH/pUGlJ19T4i3tmp+F+udUBJH
-	+GPyEYJhDWr9E2VUA5exW7Utqyzb1v4ZeYnPAk6J/5dshnn8mtbQfFLwjUVmjGl0lVnc=;
+	List-Unsubscribe:List-Id:Subject:To:Date:Message-Id:MIME-Version:Sender:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=+uZRxsor2euF7n2wuOXInshvuUkcKSP2TcgncAnbXMU=; b=TAln0UKI1FVSmU/+LcZyUYgh9x
+	CerENHJc/3U4MkzHYKIOWh1IXCFzZRfyj8arSeqJ175xk56pBVBAp0AYmaKOaBNTf090Rsd203UeP
+	nsHBzFxt6G+p8it8gIB0SDgP0ipQLQ7aCzAD1YsNsngS0T9WoSoMLlfDqM2/3mc0KmPw=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uCEJI-0008UG-PO;
-	Tue, 06 May 2025 09:09:56 +0000
+	id 1uCKYl-0000Mf-EF;
+	Tue, 06 May 2025 15:50:19 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uCEJH-0008U9-6I
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uCKYj-0000MW-5g
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 May 2025 09:09:55 +0000
+ Tue, 06 May 2025 15:50:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FicDiA5Ndp4aQtpI5oawvRLKt/0ch/nQ8rNnEovikvE=; b=blyov/vj+ZJ932ocNAwyvUIYKH
- laUSVF3pWkHqJEyUk4oCHwfpEF2TNRGjeLXGdzYddc4jgU8qpdU4HwGJTiTs9ng6X2LbuhHN1PgLY
- tic0eEv8F6e9YO2TYhOyor7Cd0ZQcYIdUnE/GU0SXMifjT8xeq/jSHAfG7MHfcKsqryw=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=50y8aJkAXRA8AQnUYY/XRrRIAIPb8vFUzdySacQgf1E=; b=YdRx1ns+qxcNvTXVyZIUWWWdtw
+ Ii3cYCLYXDiYOovEPC85LiSLOjnhS/ni6lJRlsieV1dESOyeHF77mtt1/0Rx/Wsh6DCZceiOMgH8t
+ PNMUwj7Uv7uwzn/4oiqnwnnkETepDld3dRP9mDyuK3lOUPcxE2Xy0sECLAh8ly2SZd+k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=FicDiA5Ndp4aQtpI5oawvRLKt/0ch/nQ8rNnEovikvE=; b=M0mRm8nh7RMt4z+FMcRB1Kh+W7
- MbGI2aUX34bjXNd3xoEHt0KGIxQWqg/A8EwvO2UEv0X2oFSoj33BZjh1/MeA8aCbzAQfqoNfcseHK
- MuyAO3LyNiqLrwXpHpazsbwH0MyjusgJhKx1UR3r1O5xlIR6m+Il25kQFOiauVbNC3DU=;
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=50y8aJkAXRA8AQnUYY/XRrRIAIPb8vFUzdySacQgf1E=; b=O
+ 6+rp+KxztVhJmkayToryGLaVEyOfb6uJQY6UOLdLI8L6WSMxttnbdQkbUpbMtsBb+MuyIUXvA1hfe
+ MLg81LHgxkafvg3bSVfHOf90sMai+DXj5w9YYReDNnaMQK6tDObQmocyQcnvZknNj2xH2b3L4vU57
+ RiEaN3FoORglKC6k=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uCEJ1-0006HC-NL for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 May 2025 09:09:55 +0000
+ id 1uCKYS-0001jl-H0 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 May 2025 15:50:17 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 0951A5C0672;
- Tue,  6 May 2025 09:07:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A1CD5C4CEE4;
- Tue,  6 May 2025 09:09:27 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id D3D555C57D1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  6 May 2025 15:47:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B25ABC4CEE4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  6 May 2025 15:49:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1746522568;
- bh=FAVp5gt8PSpT2EQxUuM5Z3ZpVFQzfkF4ChHcboUUy+E=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=UNswAuDFp7+m3dYB43ly7MXiMujbuBIR7N0X2CDZcGdoREIfkrYH29B0GeDFBGDIu
- D4TEKeQ8B4OC6yOEdHU8cy/sV6vugnPMAaVZwcNrWCv+qzTsb2jXlGLXTdVJYjDCCx
- Fz7bthFBb3D1uK7bn2h6uzMXbwoolq/GLpoPr3QgfAFesiB8swJYAdJ6J2nCCxHMQo
- mdFmOyG+hOEfKO5lULSe4nqX3oRiX34aPsR6r7qrgEaA3zwnPSIVyaUcEGtBprAuvI
- CU2fQsKJoEKgq2U4E6iFx63ciqPpniyRPr8L1cBsx8YGZS9w7Dn2J1HDk7vVS3oyjz
- hLjCAW1KrNYrA==
-Message-ID: <1db80259-a29d-439e-aaff-2a7daac9c1e5@kernel.org>
-Date: Tue, 6 May 2025 17:09:26 +0800
+ s=k20201202; t=1746546588;
+ bh=ufbKGia51Op1ZHk9gemX0pc4WNafEoQEBuUzCS0O2ZE=;
+ h=Subject:From:Date:To:From;
+ b=E6pRGf786a2e8j/8F1682I06nI8pupj188SHUuTUbq88Ne42m+BLhQd10cMSPWJ2x
+ JKLs9Kh1IZt4fvzeLSVUTQAyWthdXft99F23nOkb0bYdsW7sGHc7tWYFyBVS69ERfM
+ ysxdEWbolYgCFSDsdU9Zpv2XfPtaENYxvcnOnjiLp8Yfw0gDkf+f1b5Y8gt4fXCDUQ
+ r+NHva+2E6aLcJKk38e4Ha9CK9uSA6CLdQiJWZ1k2rpbvlt0SSoHuJtli2x58XV+mo
+ +YO+Y64cvr4ekulxi7malDlgaK0Qav1EnKR5Kb2Vfh8MunGhujs/9cW91hWTb4Rzw9
+ /AKWTBATJpgSw==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+ by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
+ EE6C4380CFD7 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  6 May 2025 15:50:28 +0000 (UTC)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: "yohan.joung" <yohan.joung@sk.com>, jaegeuk@kernel.org,
- daehojeong@google.com
-References: <20250502044146.552-1-yohan.joung@sk.com>
-Content-Language: en-US
-In-Reply-To: <20250502044146.552-1-yohan.joung@sk.com>
+Message-Id: <174654662740.1568197.17613397160563686013.git-patchwork-summary@kernel.org>
+Date: Tue, 06 May 2025 15:50:27 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software, running on the system "6901ab67b84d", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2025/5/2 12:41, yohan.joung wrote: > In LFS mode,
- the previous segment cannot use invalid blocks,
- > so the remaining blocks from the next_blkoff
- of the current segment > to the end of the section a [...] 
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev,v2,1/2] f2fs:
+ sysfs: add encoding_flags entry Submitter: Chao Yu <chao@kernel.org>
+ Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/project/f2fs/lis [...] 
  Content analysis details:   (-5.8 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,9 +97,8 @@ X-Spam-Report: Spam detection software, running on the system "6901ab67b84d",
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uCEJ1-0006HC-NL
-Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: Add a method for calculating
- the remaining blocks in the current segment in LFS mode.
+X-Headers-End: 1uCKYS-0001jl-H0
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,80 +110,31 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: pilhyun.kim@sk.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: patchwork-bot+f2fs--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: patchwork-bot+f2fs@kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2025/5/2 12:41, yohan.joung wrote:
-> In LFS mode, the previous segment cannot use invalid blocks,
-> so the remaining blocks from the next_blkoff of the current segment
-> to the end of the section are calculated.
-> 
-> Signed-off-by: yohan.joung <yohan.joung@sk.com>
-> ---
->   fs/f2fs/segment.h | 21 +++++++++++++++++----
->   1 file changed, 17 insertions(+), 4 deletions(-)
-> 
-> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-> index 03c0f59be5a8..345da052f0e1 100644
-> --- a/fs/f2fs/segment.h
-> +++ b/fs/f2fs/segment.h
-> @@ -582,8 +582,14 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
->   		if (unlikely(segno == NULL_SEGNO))
->   			return false;
->   
-> -		left_blocks = CAP_BLKS_PER_SEC(sbi) -
-> -				get_ckpt_valid_blocks(sbi, segno, true);
-> +		if (f2fs_lfs_mode(sbi)) {
+Hello:
 
-f2fs_lfs_mode() && __is_large_section(sbi)?
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-> +			left_blocks = CAP_BLKS_PER_SEC(sbi) -
-> +				(segno - rounddown(segno, SEGS_PER_SEC(sbi))) * BLKS_PER_SEG(sbi) -
+Patch: [f2fs-dev,v2,1/2] f2fs: sysfs: add encoding_flags entry
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=959910
+  Lore link: https://lore.kernel.org/r/20250506074725.12315-1-chao@kernel.org
 
-How about using SEGS_TO_BLKS() which will be more efficient? and what do you
-think of introducing a new macro to improve code readability?
 
-#define GET_START_SEG_FROM_SEC(sbi, segno)	(rounddown(segno, SEGS_PER_SEC(sbi)))
+Total patches: 1
 
-> +				CURSEG_I(sbi, i)->next_blkoff;
-> +		} else {
-> +			left_blocks = CAP_BLKS_PER_SEC(sbi) -
-> +					get_ckpt_valid_blocks(sbi, segno, true);
-> +		}
->   
->   		blocks = i <= CURSEG_COLD_DATA ? data_blocks : node_blocks;
->   		if (blocks > left_blocks)
-> @@ -596,8 +602,15 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
->   	if (unlikely(segno == NULL_SEGNO))
->   		return false;
->   
-> -	left_blocks = CAP_BLKS_PER_SEC(sbi) -
-> -			get_ckpt_valid_blocks(sbi, segno, true);
-> +	if (f2fs_lfs_mode(sbi)) {
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
 
-Ditto,
-
-> +		left_blocks = CAP_BLKS_PER_SEC(sbi) -
-> +				(segno - rounddown(segno, SEGS_PER_SEC(sbi))) * BLKS_PER_SEG(sbi) -
-> +				CURSEG_I(sbi, CURSEG_HOT_DATA)->next_blkoff;
-
-Ditto,
-
-Thanks,
-
-> +	} else {
-> +		left_blocks = CAP_BLKS_PER_SEC(sbi) -
-> +				get_ckpt_valid_blocks(sbi, segno, true);
-> +	}
-> +
->   	if (dent_blocks > left_blocks)
->   		return false;
->   	return true;
 
 
 
