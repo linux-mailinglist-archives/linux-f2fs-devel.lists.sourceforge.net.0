@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99C35AAD9D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 May 2025 10:13:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BBA6DAADA17
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 May 2025 10:26:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=E2pfgBbFFJLdXu1C8jp+scGqyF+iSCSIdWQ4jS3v/HY=; b=XgTycw8wf55suKYc9AMwYRpFA/
-	ChN2tC1QZ8kh2ARwSJ2k/T/vY2daTLtwU08YQoeB9c++MfI5NVhi5KzWHbJPGX7C07mafrjcpSIy4
-	MXkbf1Y69RdMARM7sLY+hsa7h+VTvgYqyHfxGfreJWVW05pAKP+m24rFmK3OZtRWp4U4=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=FoW/PIsCndHxWszzDlqGsphTvCvEPasG8E/tFnDrvKw=; b=RJPBlewXTNINLGvtnWpWAm/ePK
+	K1MStWfvVUd1OdAqWo/A2LspnV+BeXW8pl3RoN4HqkO1t36/VlS6V2OItnRAeM/UGPvKRTEJ8HtUF
+	edfwo3UgBiMp4s9CnkZawVD1PDHaiXEHWubd9CXeJY/QP8DVJG1DVBQTeQKDqd9hY2a0=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uCZuH-0006k9-Dz;
-	Wed, 07 May 2025 08:13:33 +0000
+	id 1uCa6G-00016a-5D;
+	Wed, 07 May 2025 08:25:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uCZuG-0006k3-3w
+ (envelope-from <chao@kernel.org>) id 1uCa6A-00014J-4f
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 May 2025 08:13:32 +0000
+ Wed, 07 May 2025 08:25:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iKURaMRy17xvcmhmAbVSDj1jY+oERXMZP2XMy3oB2q0=; b=Lp91iPJpanpErCnjpgs7M5vT8P
- 5qZa4zzH6mPfpQHG5vQua409ZLIqKoFkLr7ZlHCf95CPqG+KYphZbgiEcmxcJQB+5LcagcxsSvH7Y
- tQj8VMX5TaNbHKDTSJZFz+r0aeRYHuKjDZwKBu14CCUGMNISfAlRXhwJ6YDqQ1zzccik=;
+ bh=jsL2zV2GI3izuE8kovX8w2HbmFyOHtTqGkpAU31XAmQ=; b=DgTNf+cfkQLg9vSILLxOTWSmLl
+ qVs7xw6J7AFD+oOUckLn4Q4N1qbkc3ZsTh8S6JdKHVrT2G3LUfr2ADEwhjmAa5AlNav+lomQ2MJO8
+ WQh8VpOvIeAr+ooyLhZuV56SIvKg9eh+lH52UGvMMdBTB6vKkhHrqGy6AJ+p+vPsLBFQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,49 +40,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iKURaMRy17xvcmhmAbVSDj1jY+oERXMZP2XMy3oB2q0=; b=QrFg8j2R+yBuzhV6zepMnSQZJy
- cPiX14FvgMRH78wLDUq8fXqhbX9S8icG1lo8U5FAWxvfGhhJs8Ms5uk4i28xC3iYXbJalfjB33BcC
- 2IH+vjnwP2mxRsvVGfrfaXBhntrdzKrHSTWGrTzNxbzT+5xUWD1oyVzITz79o1zANnsY=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=jsL2zV2GI3izuE8kovX8w2HbmFyOHtTqGkpAU31XAmQ=; b=JJZfojNGVIjDZ/egJOLtA1+dz+
+ gDmpeEhX8rqLadp61kTlCBD0qcCUeMe/7+tG2Fiu+BiAjkuCpLnl5YkYCOrDH327Mdi/beXiBZvfk
+ Zq1xtTMyeHa+qc3WzOXdTx62Xmuvot0sF7wFIFrvmPu2Hs52HjoHqUeB01MDfBPxI490=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uCZu0-0005iK-Ac for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 May 2025 08:13:32 +0000
+ id 1uCa5u-00074P-KV for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 May 2025 08:25:50 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 8F82BA4D64D;
- Wed,  7 May 2025 08:13:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F633C4CEE7;
- Wed,  7 May 2025 08:13:04 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id B03E6629E3;
+ Wed,  7 May 2025 08:25:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C6F5C4CEE7;
+ Wed,  7 May 2025 08:25:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1746605585;
- bh=IZxfW3aY2ijlXo9tHf4EeDK3rtqmiq2rj+jcSefHlrs=;
+ s=k20201202; t=1746606328;
+ bh=OHTRZaNtriLqkULeuZpFqR5miAeK7XH76kJ1OIoEIp8=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=ElyxMD0qsNo1xrvfU1I0zzDSuHpGGF6NYRI7mGgEXR2RCcX9OoDXSsSQf0+h5oqCW
- nS5Lr5XBOQBC9cREFI64aIZOfV/iBbMEcI+2xRZipvKzQQ4fs0nkzMf2AHkN22nqjt
- nCP81yAsScDYSgPhgrYYpl3GP1KPdEa9gZfha+QfNkxCOHmIZBKdnQVH4Li55+pQAR
- KigZ/nP7XeiM7GG2YRbfRF/ryeZN/9bzGyq+7z2XNnJE9/e+aXnrWSbrxwl9BTtTMH
- VgGMDmHz4fgWLpzinRMNmysi/LHZRbFJrzr1t7H5yADliZVG4zYKshlaVgeNsP1q8L
- kbxnA3kQwVbEw==
-Message-ID: <d9720676-5e03-4298-8811-f6cd0dc8ea0c@kernel.org>
-Date: Wed, 7 May 2025 16:13:02 +0800
+ b=Iz2x9TX7mItLvPjvCTtG/DtUzTG7cG+vx3C67sliDFTZCVNDt+RugtMjL0Alnr541
+ RG7XUUgt+11Go+hjm2B5WUUklfqlRugw4kon/1qwToK7HyQaEU/LRPq4uMxjY2t7hg
+ TeLOU927tc9BG8gTdsGJJaCY9FIiJ6wdsCXTZ48WFRr+fXTxzm5NbRZe7S56OW1/Tl
+ m1XsqwJnz+wZFBS0aO/3yKJ8vBvyVcofv1qdRKw8K5hY8OyrpjK9y6OEpooW8F9Q1+
+ EdfkJxV42kihFZIpSVTZ4UKrxGG7K7rtYPI9vWzFHpkcAMcQL8D+HXpLPWJc2lAmaS
+ uM9zTsk6FzQMg==
+Message-ID: <ddbb5e57-5a50-40fe-96ef-c2a3c0c72a13@kernel.org>
+Date: Wed, 7 May 2025 16:25:25 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Christoph Hellwig <hch@lst.de>
-References: <20250505092613.3451524-1-hch@lst.de>
- <43d55ab4-c490-4f3d-8331-dc47f427d06d@kernel.org>
- <20250507074817.GA4516@lst.de>
+To: "yohan.joung" <yohan.joung@sk.com>, jaegeuk@kernel.org,
+ daehojeong@google.com
+References: <20250507043038.591-1-yohan.joung@sk.com>
 Content-Language: en-US
-In-Reply-To: <20250507074817.GA4516@lst.de>
-X-Spam-Score: -3.9 (---)
+In-Reply-To: <20250507043038.591-1-yohan.joung@sk.com>
+X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam detection software, running on the system "6901ab67b84d", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 5/7/25 15:48, Christoph Hellwig wrote: > On Wed, May 07, 
- 2025 at 03:38:20PM +0800, Chao Yu wrote: >> On 5/5/25 17:25, Christoph Hellwig
- wrote: >>> Hi all, >>> >>> this almost entirely cleans up usa [...] 
- Content analysis details:   (-3.9 points, 5.0 required)
+ Content preview:  On 5/7/25 12:30, yohan.joung wrote: > In LFS mode,
+ the previous segment cannot use invalid blocks,
+ > so the remaining blocks from the next_blkoff
+ of the current segment > to the end of the section are [...] 
+ Content analysis details:   (-1.6 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -93,10 +93,9 @@ X-Spam-Report: Spam detection software, running on the system "6901ab67b84d",
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
-X-Headers-End: 1uCZu0-0005iK-Ac
-Subject: Re: [f2fs-dev] cleanup AOP_WRITEPAGE_ACTIVATE use in f2fs
+X-Headers-End: 1uCa5u-00074P-KV
+Subject: Re: [f2fs-dev] [PATCH v3 1/2] f2fs: add a method for calculating
+ the remaining blocks in the current segment in LFS mode.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,36 +109,77 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+Cc: pilhyun.kim@sk.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 5/7/25 15:48, Christoph Hellwig wrote:
-> On Wed, May 07, 2025 at 03:38:20PM +0800, Chao Yu wrote:
->> On 5/5/25 17:25, Christoph Hellwig wrote:
->>> Hi all,
->>>
->>> this almost entirely cleans up usage of AOP_WRITEPAGE_ACTIVATE in f2fs.
->>>
->>> f2fs_sync_node_pages can still return it in a way that is not handled
->>> by any caller and eventually is propagated to userspace.  This does look
->>> like a bug and needs attention by someone who actually knows the code.
->>
->> Oh, I guess this is a bug, thanks for catching this.
->>
->> Anyway, let me fix this based on your patchset.
+On 5/7/25 12:30, yohan.joung wrote:
+> In LFS mode, the previous segment cannot use invalid blocks,
+> so the remaining blocks from the next_blkoff of the current segment
+> to the end of the section are calculated.
 > 
-> I'll resend a fixed version later today, maybe wait for that.
+> Signed-off-by: yohan.joung <yohan.joung@sk.com>
+> ---
+>  fs/f2fs/segment.h | 23 +++++++++++++++++++----
+>  1 file changed, 19 insertions(+), 4 deletions(-)
+> 
+> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+> index 03c0f59be5a8..f5d30f32ebdb 100644
+> --- a/fs/f2fs/segment.h
+> +++ b/fs/f2fs/segment.h
+> @@ -102,6 +102,8 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
+>  #define CAP_SEGS_PER_SEC(sbi)					\
+>  	(SEGS_PER_SEC(sbi) -					\
+>  	BLKS_TO_SEGS(sbi, (sbi)->unusable_blocks_per_sec))
+> +#define GET_START_SEG_FROM_SEC(sbi, segno)			\
+> +	(rounddown(segno, SEGS_PER_SEC(sbi)))
+>  #define GET_SEC_FROM_SEG(sbi, segno)				\
+>  	(((segno) == -1) ? -1 : (segno) / SEGS_PER_SEC(sbi))
+>  #define GET_SEG_FROM_SEC(sbi, secno)				\
+> @@ -582,8 +584,14 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
+>  		if (unlikely(segno == NULL_SEGNO))
+>  			return false;
+>  
+> -		left_blocks = CAP_BLKS_PER_SEC(sbi) -
+> -				get_ckpt_valid_blocks(sbi, segno, true);
+> +		if (f2fs_lfs_mode(sbi) && __is_large_section(sbi)) {
+> +			left_blocks = CAP_BLKS_PER_SEC(sbi) -
+> +				(segno - GET_START_SEG_FROM_SEC(sbi, segno)) * BLKS_PER_SEG(sbi) -
 
-I've submitted a patch, maybe you can rebase new version on it?
+SEGS_TO_BLKS(sbi, (segno - GET_START_SEG_FROM_SEC(sbi, segno))) ?
 
-https://lore.kernel.org/linux-f2fs-devel/20250507080838.882657-1-chao@kernel.org
+> +				CURSEG_I(sbi, i)->next_blkoff;
+> +		} else {
+> +			left_blocks = CAP_BLKS_PER_SEC(sbi) -
+> +					get_ckpt_valid_blocks(sbi, segno, true);
+> +		}
+>  
+>  		blocks = i <= CURSEG_COLD_DATA ? data_blocks : node_blocks;
+>  		if (blocks > left_blocks)
+> @@ -596,8 +604,15 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
+>  	if (unlikely(segno == NULL_SEGNO))
+>  		return false;
+>  
+> -	left_blocks = CAP_BLKS_PER_SEC(sbi) -
+> -			get_ckpt_valid_blocks(sbi, segno, true);
+> +	if (f2fs_lfs_mode(sbi) && __is_large_section(sbi)) {
+> +		left_blocks = CAP_BLKS_PER_SEC(sbi) -
+> +				(segno - GET_START_SEG_FROM_SEC(sbi, segno)) * BLKS_PER_SEG(sbi) -
 
-https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git/commit/?h=bugfix/common&id=a0b7dfb634f98b88875e7bc3166159d2abc7f164
+Ditto,
 
-Thanks,
+> +				CURSEG_I(sbi, CURSEG_HOT_DATA)->next_blkoff;
+> +	} else {
+> +		left_blocks = CAP_BLKS_PER_SEC(sbi) -
+> +				get_ckpt_valid_blocks(sbi, segno, true);
+> +	}
+> +
+>  	if (dent_blocks > left_blocks)
+>  		return false;
+>  	return true;
+
 
 
 _______________________________________________
