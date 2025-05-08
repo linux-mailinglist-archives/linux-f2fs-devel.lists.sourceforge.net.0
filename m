@@ -2,107 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3A7EAB0073
+	by mail.lfdr.de (Postfix) with ESMTPS id 75F82AB0072
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 May 2025 18:30:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Date:Message-Id:MIME-Version:Sender:Cc:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=ZLKoDRiVAE4d45C1SV2tiaEIknf8UnE8lELv9VdbmXU=; b=VG+8Q69IlzBe6elnahDWRkhUSi
-	Pv/cN21LQ9PFOvG8v7uf74MoCzahRhCATPPTf7sz/J0j3gG+TFux6Z8zmhLfwz6J8paZUMRKY4wA5
-	oD3TWo3VfwvgkbrvJSxnudmRwr9NP8kZZQbq82oaF79cvZQrl8cN8uLH404U1o2A42rM=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
+	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=MwOQSk3EXxgdLGSttXHIEDIPLqH1SXoNhvM8kAXBI5U=; b=mi28J/S/bOuR3aFfagJCAXq5u8
+	STkQM6Yk4lKyul+LdI/zRd7orJmwus5ow2bD+QJoeOztzgZL4X4wUBncOsIJpEdWypf5dm2N6zNL0
+	CNF329DgBBaSCPdghWRYUT2xjSst2aXnsr4PhuBklg/njgT35BrhlSglYwUfNVFVif6I=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uD48N-0005X8-II;
-	Thu, 08 May 2025 16:30:07 +0000
+	id 1uD48M-0005EZ-6S;
+	Thu, 08 May 2025 16:30:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uD48M-0005Wm-9b
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uD48E-0005Df-Aq
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 May 2025 16:30:06 +0000
+ Thu, 08 May 2025 16:29:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
+ Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+sldNSfq3s9NKTCHsGM9kRvGY8i+rNReJmMOigzkNkg=; b=PeP9C9971HfJSbDnCtxIyil6zD
- aeFlSl/t8A1Yd2D3/mHcmBuOEmjOrQqIo0GjiPhjr/hQhIF9thlEuQs+y8PSCspAVXrKRtw9JFFYX
- VFDtthqMFCcmm5VjAwTd4XbvPGRxGWCF0B/Uk0UL59ndYOoCvumAmGavH1uZ5JmNS+F8=;
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=OYmhdkvEJqEH6V1rT99esUnfUbllCovL5w1fWurb10M=; b=N1h+Vf6DQ3cf/C5mwbUYdAJ5in
+ 2R+yyOnuqZf6Ge/Fk36d5foKREimu+/Yf3Wo19dxudKY/72H0/sGS3pw01r4x4g6oNtP+f2lG2v/A
+ iZi4XEYbFVCwkV0wA+qNHnSTdPTUMCA5ehtUH9CX1BBa+BW4Io2Zzb7k4qqchKS+1oJA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
- Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=+sldNSfq3s9NKTCHsGM9kRvGY8i+rNReJmMOigzkNkg=; b=R
- JURKhT4+a2oznR92Zcy5sG8dWk6hHUCDnRNMcGpGDiHKH8BagtaHfaFpfFMMXBptXbiajDSrQWtpl
- xOcQWNAV+LPOgHP5yOfk9jOzbhiIB8gldFp1awq19I8S++COEDteLY+7zXD/SFGloDPy1POmejY3J
- Hlf/75z1cP2+4Sp4=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=OYmhdkvEJqEH6V1rT99esUnfUbllCovL5w1fWurb10M=; b=AwcPAJbeNpgv7fonHWCYhR5srI
+ DhRYfCiMmPeQ0f9906A0vwRfT9HID92HFu7840Nlcrgfu9L/mRdOF8VMqoVFsXzZxjOCCDThY+eui
+ 77SLANyboRnWQsGNzAUg/pjEefaNVc0PncJEDSsuhLWD3S2wZUL0PqKii9VlqxoXdGL4=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uD48H-0007fC-FT for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 May 2025 16:30:02 +0000
+ id 1uD48D-0007ez-JC for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 May 2025 16:29:58 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id C0E10A4DF17
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  8 May 2025 16:29:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D68AC4CEEB
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  8 May 2025 16:29:50 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id DF3B660008;
+ Thu,  8 May 2025 16:29:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9057BC4CEE7;
+ Thu,  8 May 2025 16:29:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1746721790;
- bh=oCeTEL/+ZVNSZKErwBEfuhi1lMUuBM2mu29maT2vitY=;
- h=Subject:From:Date:To:From;
- b=IByBkzsFjAiQTNYVKJLsQ/kfHsruIlMtMbisliTEmGgX8VlRsKTOko1kTeDiza2jw
- y20+ws793z1uMhYkUcmVD7jqqHuLQLyH1pUCWveqnXcz9WYIESUAdiIur1NeygyLcs
- QvcdDnYjkUVkS335Yw0B1H8MLZ5B+dH8D3fBQG6BtvnBi8SM8J07iEc+8+Yk2lQKS5
- f1kJ0jvSur8cVXvdb2FJFEl82UkJ1NkRtNYfD/QT/WUkoPFuhf2Pgs5LpgzY2ttaS/
- 10EbeR52Co0C19QTr9MoYYjNnrCB3GQrm5rty8M42yO81UhBS/PZgOr102/mTftDvV
- 0ouUWov9rzIgw==
+ s=k20201202; t=1746721791;
+ bh=c05nwsF/Xsj3ZZ0udY2Gc5dtMsXMs8vJzGIq6HHgV7o=;
+ h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+ b=GKhuGYf1nw/QHswWp155Zar4n0RUfca1/0d160veT51Bc0tnKmcOitaBDKdMt8k8d
+ EXGdTkOugUgON7hRkQLqdFfPhOCWn26q8kBcHVdnMCYphP+Pu1niHNjT5eF28hBG53
+ jCpEIXiPLvcp104roIEFnMQ/dtrK/bzzXTweT/s3PkL6mlFmL4uBQ3Ix1ILrDgTdWL
+ Ak7eVihTMyLa8OlczX74d3rKdAN/fsL7VHKkzgC9xo+Mc+fUdMATqChBQcrbdwRs5H
+ FIlFs6k/IH6gM0JqSXDCNKpholTu6CrRs6b4+PDN07eacUgnAeEu+f21N+gl8CsTOc
+ s7IBciTEmxKnw==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 3884C380AA70 for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  8 May 2025 16:30:30 +0000 (UTC)
+ 7118D380AA70; Thu,  8 May 2025 16:30:31 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <174672182880.2971823.18131435625682656319.git-patchwork-summary@kernel.org>
-Date: Thu, 08 May 2025 16:30:28 +0000
-To: linux-f2fs-devel@lists.sourceforge.net
-X-Spam-Score: -3.9 (---)
+Message-Id: <174672183025.2971823.13421016836031371111.git-patchwork-notify@kernel.org>
+Date: Thu, 08 May 2025 16:30:30 +0000
+References: <20250508051520.4169795-2-hch@lst.de>
+In-Reply-To: <20250508051520.4169795-2-hch@lst.de>
+To: Christoph Hellwig <hch@lst.de>
+X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: The following patches were marked "accepted", because
- they were applied to jaegeuk/f2fs.git (dev): Series: [f2fs-dev,1/6] f2fs:
- fix to return correct error number in f2fs_sync_node_pages() Submitter:
- Christoph
- Hellwig <hch@lst.de> Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
- https://patch [...] 
- Content analysis details:   (-3.9 points, 6.0 required)
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 8 May 2025 07:14:27 +0200 you wrote:
+ > From: Chao Yu <chao@kernel.org> > > If __write_node_folio() failed, it
+ will return AOP_WRITEPAGE_ACTIVATE, > the incorrect return value may be passed
+ to [...] 
+ Content analysis details:   (-1.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.105.4.254 listed in bl.score.senderscore.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [147.75.193.91 listed in sa-accredit.habeas.com]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [147.75.193.91 listed in bl.score.senderscore.com]
+ [172.105.4.254 listed in sa-trusted.bondedsender.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -111,8 +106,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uD48H-0007fC-FT
-Subject: [f2fs-dev] Patchwork summary for: f2fs
+X-Headers-End: 1uD48D-0007ez-JC
+Subject: Re: [f2fs-dev] [PATCH 1/6] f2fs: fix to return correct error number
+ in f2fs_sync_node_pages()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,43 +123,49 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-The following patches were marked "accepted", because they were applied to
-jaegeuk/f2fs.git (dev):
+This series was applied to jaegeuk/f2fs.git (dev)
+by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-Series: [f2fs-dev,1/6] f2fs: fix to return correct error number in f2fs_sync_node_pages()
-  Submitter: Christoph Hellwig <hch@lst.de>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=960745
-  Lore link: https://lore.kernel.org/r/20250508051520.4169795-2-hch@lst.de
-    Patches: [f2fs-dev,1/6] f2fs: fix to return correct error number in f2fs_sync_node_pages()
-             [f2fs-dev,2/6] f2fs: return bool from __f2fs_write_meta_folio
-             [f2fs-dev,3/6] f2fs: remove wbc->for_reclaim handling
-             [f2fs-dev,4/6] f2fs: always unlock the page in f2fs_write_single_data_page
-             [f2fs-dev,5/6] f2fs: simplify return value handling in f2fs_fsync_node_pages
-             [f2fs-dev,6/6] f2fs: return bool from __write_node_folio
+On Thu,  8 May 2025 07:14:27 +0200 you wrote:
+> From: Chao Yu <chao@kernel.org>
+> 
+> If __write_node_folio() failed, it will return AOP_WRITEPAGE_ACTIVATE,
+> the incorrect return value may be passed to userspace in below path,
+> fix it.
+> 
+> - sync_filesystem
+>  - sync_fs
+>   - f2fs_issue_checkpoint
+>    - block_operations
+>     - f2fs_sync_node_pages
+>      - __write_node_folio
+>      : return AOP_WRITEPAGE_ACTIVATE
+> 
+> [...]
 
-Series: [f2fs-dev,1/4] f2fs: return bool from __f2fs_write_meta_folio
-  Submitter: Christoph Hellwig <hch@lst.de>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=959577
-  Lore link: https://lore.kernel.org/r/20250505092613.3451524-2-hch@lst.de
-    Patches: [f2fs-dev,1/4] f2fs: return bool from __f2fs_write_meta_folio
+Here is the summary with links:
+  - [f2fs-dev,1/6] f2fs: fix to return correct error number in f2fs_sync_node_pages()
+    https://git.kernel.org/jaegeuk/f2fs/c/43ba56a043b1
+  - [f2fs-dev,2/6] f2fs: return bool from __f2fs_write_meta_folio
+    https://git.kernel.org/jaegeuk/f2fs/c/39122e454419
+  - [f2fs-dev,3/6] f2fs: remove wbc->for_reclaim handling
+    https://git.kernel.org/jaegeuk/f2fs/c/402dd9f02ce4
+  - [f2fs-dev,4/6] f2fs: always unlock the page in f2fs_write_single_data_page
+    https://git.kernel.org/jaegeuk/f2fs/c/84c5d16711a3
+  - [f2fs-dev,5/6] f2fs: simplify return value handling in f2fs_fsync_node_pages
+    https://git.kernel.org/jaegeuk/f2fs/c/0638f28b3062
+  - [f2fs-dev,6/6] f2fs: return bool from __write_node_folio
+    https://git.kernel.org/jaegeuk/f2fs/c/80f31d2a7e5f
 
-Patch: [f2fs-dev] f2fs: fix to return correct error number in f2fs_sync_node_pages()
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=960362
-  Lore link: https://lore.kernel.org/r/20250507080838.882657-1-chao@kernel.org
-
-
-Total patches: 8
-
+You are awesome, thank you!
 -- 
 Deet-doot-dot, I am a bot.
 https://korg.docs.kernel.org/patchwork/pwbot.html
