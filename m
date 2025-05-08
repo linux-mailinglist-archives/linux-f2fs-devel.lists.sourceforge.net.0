@@ -2,92 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80865AAF150
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 May 2025 04:58:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64659AAF1AB
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 May 2025 05:29:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=NsuyZ+gk1SMWB/QtZSa3Lerwk5O4HCKH43UohPviBpo=; b=Zf3GOF8YA1TkNKTHcnmMBaFGSJ
-	HpxL1s2jrcwcvMVjTH1c0WyRN2lvC+E57t6vA1607kzXQdczbVnvx4nJTw2pWqkkWDQ+ID/OoQiRw
-	94YNQQKHMuDqLxByq0mJNfAVw9b/EEi++OdUQIx0Fm746j3+itzxHmhfSGvR6eEL/3xo=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=2bQKFgfM+Yzk5bJq7JUdHpPfG6KO6JPrdY2g3rc2dkk=; b=gPQbeCZsj7Dg5an2PpBXhuAjZZ
+	gQi46rZKJqqErRIDPIsD6n71bhmn5X91sSpS/EBpOYtjJki8ioGwnmtqs5EeDdRIAKgdH7VK+P8mz
+	LVwRSYbMFqRY2IDw3gcHixl/MBSfTLq6z9zmoifYcXAFk4cGmoB7yMgV8im5ir3PjODI=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uCrSx-0002IE-QE;
-	Thu, 08 May 2025 02:58:31 +0000
+	id 1uCrwg-0005pP-Ib;
+	Thu, 08 May 2025 03:29:14 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lihongbo22@huawei.com>) id 1uCrSw-0002I8-Qj
+ (envelope-from <chao@kernel.org>) id 1uCrwf-0005pJ-8c
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 May 2025 02:58:30 +0000
+ Thu, 08 May 2025 03:29:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:CC:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2K7TqxrsXhDRzY2DT2VoJLmFlFow0ZtYQCkaVkz2Ym0=; b=PgZESVuJmcw43jL0m9f+SptmxD
- LUFk6wBB3qj391TXy74b1pRWJwYEfv1pYvZHcpvoMOjnm81jAVU+xt6BdgBIMbHh+S7GIcEvWG0Ho
- kpYWk223RVM2r9Lv4uMzZNFdPM5VsyU6Dx7mkhcq4VBS0bub+VekK7Vq9Y3ggqcmIuYY=;
+ bh=L2YcMRuDsnSGzFV/+AXsZQO/T30WTrV56HlLTVN7nlg=; b=EulKSKa+ybeNr95LpoNUkOAJUT
+ /Jxz3yNDyR9s7CFjxhk9rZp7fDLxhi4VMTNKkmNvx4TB0wuyGANueCptcWilIMXyWJen3P/fbQuvo
+ 5aWfl8MNlg2XCJ8/pHz/5owR/dIFT6QDhhmbpglsix57z9dbJRui6DC2qRatKl4iltDc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:CC:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2K7TqxrsXhDRzY2DT2VoJLmFlFow0ZtYQCkaVkz2Ym0=; b=R5IbMRMYai70EhflOrTXQW+6aF
- lKWXQ4bDC4mEG0eEd3GHHCMsYsRjH6d8bXhgozwInwbJUP5gcyJ8sQ2ncpHwdoHKmLHxuSfD7D0BY
- q1qHgCQ3wgzRkkN3qWd+JJ5WcZbrL7NPG9YZITEchzDmoHFMr29QEaGalAj3FltbrBpg=;
-Received: from szxga01-in.huawei.com ([45.249.212.187])
+ bh=L2YcMRuDsnSGzFV/+AXsZQO/T30WTrV56HlLTVN7nlg=; b=Qa90neCUtzItNVEgqDL2DmR9MJ
+ C212C9qSnJQ0l8VamZnJtS5D7AVfrSk9Y61aA3MFdbeXDmhZWvmXImqWcXOU0FZrXWk/0pqcfNmMp
+ bkjfJrqDPXnG87l3NqhQze5vxbE8/QdRXq2ciLCUdVxonDDQYoz/gMYJWeNKNo2S3MhE=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uCrSv-00068Q-D4 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 May 2025 02:58:30 +0000
-Received: from mail.maildlp.com (unknown [172.19.163.174])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4ZtGXk2Jynz13Lc6;
- Thu,  8 May 2025 10:38:46 +0800 (CST)
-Received: from kwepemo500009.china.huawei.com (unknown [7.202.194.199])
- by mail.maildlp.com (Postfix) with ESMTPS id 57CE71400E3;
- Thu,  8 May 2025 10:40:04 +0800 (CST)
-Received: from [10.67.111.104] (10.67.111.104) by
- kwepemo500009.china.huawei.com (7.202.194.199) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Thu, 8 May 2025 10:40:03 +0800
-Message-ID: <6c3c7e74-b85b-44df-801b-b37845791051@huawei.com>
-Date: Thu, 8 May 2025 10:40:03 +0800
+ id 1uCrwe-0007MI-HD for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 May 2025 03:29:13 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id C55D545001;
+ Thu,  8 May 2025 03:29:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 78AFDC4CEE8;
+ Thu,  8 May 2025 03:29:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1746674941;
+ bh=pCyYn4N03Oez00d6sol7X1wiGTbexMKVucPmEMi0IPk=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=DDWeLQBqkgpfICJXdSRul+dq4RlkiTnu19VuG3L9CR74W81x6sF5Egv5CDgvc/D7r
+ PvGEVufGsH9PdoaHVh0fpKtIkvQ6SGr2km5hWp/Jlb/vSbbOEc56zTO9ku0Tg0vFxS
+ nFl5GEQcb6sPsHftw3b2Uy1r244u/NUu/9vuhaLBjQGxlIXBO0CeRlw02Au052//8D
+ RfqnddBC2R6o3qi/pm6VvKe7RSokVZAE6jFYf7/tc/ptFMJTm7ZrTEYKZ2/UvZxFen
+ VUgdDsp8BtEN8KCcir1N5jU+TToeJ3jbbOieePwB0rLQetkg4/3/O7dztdU+oPa5R1
+ omz4EiuXJP10Q==
+Message-ID: <e9a4bd0a-5f3c-4e13-ba4d-9f73782a37ba@kernel.org>
+Date: Thu, 8 May 2025 11:28:58 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Eric Sandeen <sandeen@redhat.com>, <linux-f2fs-devel@lists.sourceforge.net>
-References: <20250423170926.76007-1-sandeen@redhat.com>
- <20250423170926.76007-2-sandeen@redhat.com>
+To: Eric Sandeen <sandeen@redhat.com>, linux-f2fs-devel@lists.sourceforge.net
+References: <20250420154647.1233033-1-sandeen@redhat.com>
+ <20250420154647.1233033-3-sandeen@redhat.com>
+ <2e354373-9f00-4499-8812-bcb7f00a6dbc@kernel.org>
+ <db0c33f2-9fa0-4ee7-b5c9-e055fcc4d538@redhat.com>
 Content-Language: en-US
-In-Reply-To: <20250423170926.76007-2-sandeen@redhat.com>
-X-Originating-IP: [10.67.111.104]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- kwepemo500009.china.huawei.com (7.202.194.199)
-X-Spam-Score: -2.3 (--)
+In-Reply-To: <db0c33f2-9fa0-4ee7-b5c9-e055fcc4d538@redhat.com>
+X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam detection software, running on the system "6901ab67b84d", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2025/4/24 1:08, Eric Sandeen wrote: > From: Hongbo Li
- <lihongbo22@huawei.com> > > Use an array of `fs_parameter_spec` called
- f2fs_param_specs
- to > hold the mount option specifications for the new m [...] 
- Content analysis details:   (-2.3 points, 5.0 required)
+ Content preview:  On 5/7/25 20:31, Eric Sandeen wrote: > On 5/7/25 6:26 AM,
+ Chao Yu wrote: >> On 4/20/25 23:25, Eric Sandeen wrote: >>> From: Hongbo Li
+ <lihongbo22@huawei.com> >>> >>> In handle_mount_opt, we use fs_par [...] 
+ Content analysis details:   (-1.6 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.187 listed in list.dnswl.org]
-X-Headers-End: 1uCrSv-00068Q-D4
-Subject: Re: [f2fs-dev] [PATCH V3 1/7] f2fs: Add fs parameter specifications
- for mount options
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The query to
+ Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.234.252.31 listed in sa-accredit.habeas.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.234.252.31 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The query to
+ Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.234.252.31 listed in bl.score.senderscore.com]
+ -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uCrwe-0007MI-HD
+Subject: Re: [f2fs-dev] [PATCH 2/7] f2fs: move the option parser into
+ handle_mount_opt
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,177 +123,74 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Hongbo Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Hongbo Li <lihongbo22@huawei.com>
-Cc: linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, lihongbo22@huawei.com
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+On 5/7/25 20:31, Eric Sandeen wrote:
+> On 5/7/25 6:26 AM, Chao Yu wrote:
+>> On 4/20/25 23:25, Eric Sandeen wrote:
+>>> From: Hongbo Li <lihongbo22@huawei.com>
+>>>
+>>> In handle_mount_opt, we use fs_parameter to parse each option.
+>>> However we're still using the old API to get the options string.
+>>> Using fsparams parse_options allows us to remove many of the Opt_
+>>> enums, so remove them.
+>>>
+>>> The checkpoint disable cap (or percent) involves rather complex
+>>> parsing; we retain the old match_table mechanism for this, which
+>>> handles it well.
+>>>
+>>> There are some changes about parsing options:
+>>>   1. For `active_logs`, `inline_xattr_size` and `fault_injection`,
+>>>      we use s32 type according the internal structure to record the
+>>>      option's value.
+>>
+>> We'd better to use u32 type for these options, as they should never
+>> be negative.
+>>
+>> Can you please update based on below patch?
+>>
+>> https://lore.kernel.org/linux-f2fs-devel/20250507112425.939246-1-chao@kernel.org
+> 
+> Hi Chao - I agree that that patch makes sense, but maybe there is a timing
+> issue now? At the moment, there is a mix of signed and unsigned handling
+> for these options. I agree that the conversion series probably should have
+> left the parsing type as unsigned, but it was a mix internally, so it was
+> difficult to know for sure.
+> 
+> For your patch above, if it is to stand alone or be merged first, it 
+> should probably also change the current parsing to match_uint. (this would
+> also make it backportable to -stable kernels, if you want to).
+> 
+> Otherwise, I would suggest that if it is merged after the mount API series,
+> then your patch to clean up internal types could fix the (new mount API)
+> parsing from %s to %u at the same time?
+> 
+> Happy to do it either way but your patch should probably be internally
+> consistent, changing the parsing types at the same time.
+> 
+> (I suppose we could incorporate your patch into the mount API series too,
+> though it'd be a little strange to have a minor bugfix like this buried
+> in the series.)
 
+Eric,
 
-On 2025/4/24 1:08, Eric Sandeen wrote:
-> From: Hongbo Li <lihongbo22@huawei.com>
-> 
-> Use an array of `fs_parameter_spec` called f2fs_param_specs to
-> hold the mount option specifications for the new mount api.
-> 
-> Add constant_table structures for several options to facilitate
-> parsing.
-> 
-> Signed-off-by: Hongbo Li <lihongbo22@huawei.com>
-> [sandeen: forward port, minor fixes and updates, more fsparam_enum]
-> Signed-off-by: Eric Sandeen <sandeen@redhat.com>
-Thanks, I have checked this.
-Reviewed-by: Hongbo Li <lihongbo22@huawei.com>
+Yeah, it's a little bit strange to include that patch into mount API series,
+now, I realize that rebasing huge change to a minor fix is not necessary,
+anyway, let me focus on reviewing, and pickup that patch after mount API series
+be merged. :P
 
-> ---
->   fs/f2fs/super.c | 122 ++++++++++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 122 insertions(+)
+Thanks,
+
 > 
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 22f26871b7aa..ebea03bba054 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -27,6 +27,7 @@
->   #include <linux/part_stat.h>
->   #include <linux/zstd.h>
->   #include <linux/lz4.h>
-> +#include <linux/fs_parser.h>
->   
->   #include "f2fs.h"
->   #include "node.h"
-> @@ -194,9 +195,130 @@ enum {
->   	Opt_age_extent_cache,
->   	Opt_errors,
->   	Opt_nat_bits,
-> +	Opt_jqfmt,
-> +	Opt_checkpoint,
->   	Opt_err,
->   };
->   
-> +static const struct constant_table f2fs_param_background_gc[] = {
-> +	{"on",		BGGC_MODE_ON},
-> +	{"off",		BGGC_MODE_OFF},
-> +	{"sync",	BGGC_MODE_SYNC},
-> +	{}
-> +};
-> +
-> +static const struct constant_table f2fs_param_mode[] = {
-> +	{"adaptive",		FS_MODE_ADAPTIVE},
-> +	{"lfs",			FS_MODE_LFS},
-> +	{"fragment:segment",	FS_MODE_FRAGMENT_SEG},
-> +	{"fragment:block",	FS_MODE_FRAGMENT_BLK},
-> +	{}
-> +};
-> +
-> +static const struct constant_table f2fs_param_jqfmt[] = {
-> +	{"vfsold",	QFMT_VFS_OLD},
-> +	{"vfsv0",	QFMT_VFS_V0},
-> +	{"vfsv1",	QFMT_VFS_V1},
-> +	{}
-> +};
-> +
-> +static const struct constant_table f2fs_param_alloc_mode[] = {
-> +	{"default",	ALLOC_MODE_DEFAULT},
-> +	{"reuse",	ALLOC_MODE_REUSE},
-> +	{}
-> +};
-> +static const struct constant_table f2fs_param_fsync_mode[] = {
-> +	{"posix",	FSYNC_MODE_POSIX},
-> +	{"strict",	FSYNC_MODE_STRICT},
-> +	{"nobarrier",	FSYNC_MODE_NOBARRIER},
-> +	{}
-> +};
-> +
-> +static const struct constant_table f2fs_param_compress_mode[] = {
-> +	{"fs",		COMPR_MODE_FS},
-> +	{"user",	COMPR_MODE_USER},
-> +	{}
-> +};
-> +
-> +static const struct constant_table f2fs_param_discard_unit[] = {
-> +	{"block",	DISCARD_UNIT_BLOCK},
-> +	{"segment",	DISCARD_UNIT_SEGMENT},
-> +	{"section",	DISCARD_UNIT_SECTION},
-> +	{}
-> +};
-> +
-> +static const struct constant_table f2fs_param_memory_mode[] = {
-> +	{"normal",	MEMORY_MODE_NORMAL},
-> +	{"low",		MEMORY_MODE_LOW},
-> +	{}
-> +};
-> +
-> +static const struct constant_table f2fs_param_errors[] = {
-> +	{"remount-ro",	MOUNT_ERRORS_READONLY},
-> +	{"continue",	MOUNT_ERRORS_CONTINUE},
-> +	{"panic",	MOUNT_ERRORS_PANIC},
-> +	{}
-> +};
-> +
-> +static const struct fs_parameter_spec f2fs_param_specs[] = {
-> +	fsparam_enum("background_gc", Opt_gc_background, f2fs_param_background_gc),
-> +	fsparam_flag("disable_roll_forward", Opt_disable_roll_forward),
-> +	fsparam_flag("norecovery", Opt_norecovery),
-> +	fsparam_flag_no("discard", Opt_discard),
-> +	fsparam_flag("no_heap", Opt_noheap),
-> +	fsparam_flag("heap", Opt_heap),
-> +	fsparam_flag_no("user_xattr", Opt_user_xattr),
-> +	fsparam_flag_no("acl", Opt_acl),
-> +	fsparam_s32("active_logs", Opt_active_logs),
-> +	fsparam_flag("disable_ext_identify", Opt_disable_ext_identify),
-> +	fsparam_flag_no("inline_xattr", Opt_inline_xattr),
-> +	fsparam_s32("inline_xattr_size", Opt_inline_xattr_size),
-> +	fsparam_flag_no("inline_data", Opt_inline_data),
-> +	fsparam_flag_no("inline_dentry", Opt_inline_dentry),
-> +	fsparam_flag_no("flush_merge", Opt_flush_merge),
-> +	fsparam_flag_no("barrier", Opt_barrier),
-> +	fsparam_flag("fastboot", Opt_fastboot),
-> +	fsparam_flag_no("extent_cache", Opt_extent_cache),
-> +	fsparam_flag("data_flush", Opt_data_flush),
-> +	fsparam_u32("reserve_root", Opt_reserve_root),
-> +	fsparam_gid("resgid", Opt_resgid),
-> +	fsparam_uid("resuid", Opt_resuid),
-> +	fsparam_enum("mode", Opt_mode, f2fs_param_mode),
-> +	fsparam_s32("fault_injection", Opt_fault_injection),
-> +	fsparam_u32("fault_type", Opt_fault_type),
-> +	fsparam_flag_no("lazytime", Opt_lazytime),
-> +	fsparam_flag_no("quota", Opt_quota),
-> +	fsparam_flag("usrquota", Opt_usrquota),
-> +	fsparam_flag("grpquota", Opt_grpquota),
-> +	fsparam_flag("prjquota", Opt_prjquota),
-> +	fsparam_string_empty("usrjquota", Opt_usrjquota),
-> +	fsparam_string_empty("grpjquota", Opt_grpjquota),
-> +	fsparam_string_empty("prjjquota", Opt_prjjquota),
-> +	fsparam_flag("nat_bits", Opt_nat_bits),
-> +	fsparam_enum("jqfmt", Opt_jqfmt, f2fs_param_jqfmt),
-> +	fsparam_enum("alloc_mode", Opt_alloc, f2fs_param_alloc_mode),
-> +	fsparam_enum("fsync_mode", Opt_fsync, f2fs_param_fsync_mode),
-> +	fsparam_string("test_dummy_encryption", Opt_test_dummy_encryption),
-> +	fsparam_flag("test_dummy_encryption", Opt_test_dummy_encryption),
-> +	fsparam_flag("inlinecrypt", Opt_inlinecrypt),
-> +	fsparam_string("checkpoint", Opt_checkpoint),
-> +	fsparam_flag_no("checkpoint_merge", Opt_checkpoint_merge),
-> +	fsparam_string("compress_algorithm", Opt_compress_algorithm),
-> +	fsparam_u32("compress_log_size", Opt_compress_log_size),
-> +	fsparam_string("compress_extension", Opt_compress_extension),
-> +	fsparam_string("nocompress_extension", Opt_nocompress_extension),
-> +	fsparam_flag("compress_chksum", Opt_compress_chksum),
-> +	fsparam_enum("compress_mode", Opt_compress_mode, f2fs_param_compress_mode),
-> +	fsparam_flag("compress_cache", Opt_compress_cache),
-> +	fsparam_flag("atgc", Opt_atgc),
-> +	fsparam_flag_no("gc_merge", Opt_gc_merge),
-> +	fsparam_enum("discard_unit", Opt_discard_unit, f2fs_param_discard_unit),
-> +	fsparam_enum("memory", Opt_memory_mode, f2fs_param_memory_mode),
-> +	fsparam_flag("age_extent_cache", Opt_age_extent_cache),
-> +	fsparam_enum("errors", Opt_errors, f2fs_param_errors),
-> +	{}
-> +};
-> +
->   static match_table_t f2fs_tokens = {
->   	{Opt_gc_background, "background_gc=%s"},
->   	{Opt_disable_roll_forward, "disable_roll_forward"},
+> Thanks,
+> -Eric
+> 
+
 
 
 _______________________________________________
