@@ -2,105 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8196AAEDF1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 May 2025 23:36:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80865AAF150
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 May 2025 04:58:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=1h+pmxtz5gsp2tR18VkzNOnYfxxXNobdPR7qTS4ftc8=; b=BtzOo+dlsa/7fABD9pd+GuX0KH
-	KuQ5to/ZayjbeA+NyUcCrXwlHaiTLNt14i7apeS6eJPNN69Sk/ChFDJFPPucIVnhSJLfHiT+AwPrt
-	kSETetI1aqkx7893udDwar6/dsIpIjQsg8CUnP5423qPZGH3xEhCklWM89Hwfv1+KWMA=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=NsuyZ+gk1SMWB/QtZSa3Lerwk5O4HCKH43UohPviBpo=; b=Zf3GOF8YA1TkNKTHcnmMBaFGSJ
+	HpxL1s2jrcwcvMVjTH1c0WyRN2lvC+E57t6vA1607kzXQdczbVnvx4nJTw2pWqkkWDQ+ID/OoQiRw
+	94YNQQKHMuDqLxByq0mJNfAVw9b/EEi++OdUQIx0Fm746j3+itzxHmhfSGvR6eEL/3xo=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uCmRd-0007WT-PC;
-	Wed, 07 May 2025 21:36:49 +0000
+	id 1uCrSx-0002IE-QE;
+	Thu, 08 May 2025 02:58:31 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1uCmRc-0007W7-8t
+ (envelope-from <lihongbo22@huawei.com>) id 1uCrSw-0002I8-Qj
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 May 2025 21:36:48 +0000
+ Thu, 08 May 2025 02:58:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:CC:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+k7ukOVauH27eM283nNxgEDa46Bw1P0DkYmplLDe+Co=; b=kkv/2BtJXWufiSTRyotQVU+6qZ
- J1RigaX1JMEo+Kv7JM/l5urtxYkKo2HKmV4vsBMplyjksN4K7+SKLQw3hvkmBPdAifNetg8eUw3JY
- rONHnaeiu2bKdz/uFlf2mwZGnrcCdrz7D/tjg+ahtLqhdC0jhne+Q2/DmdY5G9rqaNSA=;
+ bh=2K7TqxrsXhDRzY2DT2VoJLmFlFow0ZtYQCkaVkz2Ym0=; b=PgZESVuJmcw43jL0m9f+SptmxD
+ LUFk6wBB3qj391TXy74b1pRWJwYEfv1pYvZHcpvoMOjnm81jAVU+xt6BdgBIMbHh+S7GIcEvWG0Ho
+ kpYWk223RVM2r9Lv4uMzZNFdPM5VsyU6Dx7mkhcq4VBS0bub+VekK7Vq9Y3ggqcmIuYY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:CC:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+k7ukOVauH27eM283nNxgEDa46Bw1P0DkYmplLDe+Co=; b=R2GjjDpM6CWVj7RYVtLn/YU+Lg
- 18CN1CzeDPM30AqLEn6fq+APWq1XVNl1Xj6MrOcxEdjOmSC7L1+9U9kjlzLRctxeVoIA+mUgugAPA
- MgYKbnu4/Wza/JfZ8FQ+66OtTLaclbY5Pbevvs/vzoa2xD6MRKLjv2ksZnQLVxN13MC8=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=2K7TqxrsXhDRzY2DT2VoJLmFlFow0ZtYQCkaVkz2Ym0=; b=R5IbMRMYai70EhflOrTXQW+6aF
+ lKWXQ4bDC4mEG0eEd3GHHCMsYsRjH6d8bXhgozwInwbJUP5gcyJ8sQ2ncpHwdoHKmLHxuSfD7D0BY
+ q1qHgCQ3wgzRkkN3qWd+JJ5WcZbrL7NPG9YZITEchzDmoHFMr29QEaGalAj3FltbrBpg=;
+Received: from szxga01-in.huawei.com ([45.249.212.187])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uCmRb-00007T-HI for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 May 2025 21:36:48 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 64B7C629E5;
- Wed,  7 May 2025 21:36:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA497C4CEE2;
- Wed,  7 May 2025 21:36:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1746653796;
- bh=rf1Gmwr6WthhJ4eu6zM0aOsriwhnXZ9Mu6TEWRFlGgQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=HaPmW32apFHwgWmFJ9h4cZxpOSCHIHJXPxRr0eRRusD6ZVS/14XoI0ktxt0dsd8Pt
- Pz5pDLa0Zw2pMVCsMVMsc1pCuxevwlGVM00xh4I/CgZJQxnGyol9CehTCWhaTjAEgn
- ZH/4aVXdHtxilbfR8RSyKpIUZLaem9HnrCk35jPG+7fdJGRdzEIsGuKWhh77/lam83
- 5XadviB+4FOCkff77rVllMQTa53MCO+sG7MIMuuQR8+Suf6U9Ut66ysL1L8XrlLqxd
- ofFYofGmWSN+J0zhpawz2vPtuH5ZoyYGk4eTKE0qB0G3F002NPzHDwdLI3wdJf+xVG
- UaAdKWmPmPe+w==
-Date: Wed, 7 May 2025 21:36:33 +0000
-To: Eric Sandeen <sandeen@redhat.com>
-Message-ID: <aBvSYa-0IxQREIUV@google.com>
-References: <f9170e82-a795-4d74-89f5-5c7c9d233978@redhat.com>
- <aBq2GrqV9hw5cTyJ@google.com>
- <380f3d52-1e48-4df0-a576-300278d98356@redhat.com>
- <25cb13c8-3123-4ee6-b0bc-b44f3039b6c1@redhat.com>
- <aBtyRFIrDU3IfQhV@google.com>
- <6528bdf7-3f8b-41c0-acfe-a293d68176a7@redhat.com>
- <aBu5CU7k0568RU6E@google.com>
- <e72e0693-6590-4c1e-8bb8-9d891e1bc5c0@redhat.com>
- <aBvCi9KplfQ_7Gsn@google.com>
- <f1674387-66d3-443f-8d48-74d8dfd111f1@redhat.com>
+ id 1uCrSv-00068Q-D4 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 May 2025 02:58:30 +0000
+Received: from mail.maildlp.com (unknown [172.19.163.174])
+ by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4ZtGXk2Jynz13Lc6;
+ Thu,  8 May 2025 10:38:46 +0800 (CST)
+Received: from kwepemo500009.china.huawei.com (unknown [7.202.194.199])
+ by mail.maildlp.com (Postfix) with ESMTPS id 57CE71400E3;
+ Thu,  8 May 2025 10:40:04 +0800 (CST)
+Received: from [10.67.111.104] (10.67.111.104) by
+ kwepemo500009.china.huawei.com (7.202.194.199) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Thu, 8 May 2025 10:40:03 +0800
+Message-ID: <6c3c7e74-b85b-44df-801b-b37845791051@huawei.com>
+Date: Thu, 8 May 2025 10:40:03 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <f1674387-66d3-443f-8d48-74d8dfd111f1@redhat.com>
-X-Spam-Score: -1.6 (-)
+User-Agent: Mozilla Thunderbird
+To: Eric Sandeen <sandeen@redhat.com>, <linux-f2fs-devel@lists.sourceforge.net>
+References: <20250423170926.76007-1-sandeen@redhat.com>
+ <20250423170926.76007-2-sandeen@redhat.com>
+Content-Language: en-US
+In-Reply-To: <20250423170926.76007-2-sandeen@redhat.com>
+X-Originating-IP: [10.67.111.104]
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ kwepemo500009.china.huawei.com (7.202.194.199)
+X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software, running on the system "6901ab67b84d", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 05/07, Eric Sandeen wrote: > On 5/7/25 3:28 PM, Jaegeuk
- Kim wrote: > >> But as far as I can tell, at least for the extent cache,
- remount is handled > >> properly already (with the hunk above): > >> [...]
- Content analysis details:   (-1.6 points, 5.0 required)
+ Content preview:  On 2025/4/24 1:08, Eric Sandeen wrote: > From: Hongbo Li
+ <lihongbo22@huawei.com> > > Use an array of `fs_parameter_spec` called
+ f2fs_param_specs
+ to > hold the mount option specifications for the new m [...] 
+ Content analysis details:   (-2.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uCmRb-00007T-HI
-Subject: Re: [f2fs-dev] [PATCH V3 0/7] f2fs: new mount API conversion
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [45.249.212.187 listed in list.dnswl.org]
+X-Headers-End: 1uCrSv-00068Q-D4
+Subject: Re: [f2fs-dev] [PATCH V3 1/7] f2fs: Add fs parameter specifications
+ for mount options
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,154 +99,177 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: linux-fsdevel@vger.kernel.org, lihongbo22@huawei.com,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+From: Hongbo Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Hongbo Li <lihongbo22@huawei.com>
+Cc: linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/07, Eric Sandeen wrote:
-> On 5/7/25 3:28 PM, Jaegeuk Kim wrote:
-> >> But as far as I can tell, at least for the extent cache, remount is handled
-> >> properly already (with the hunk above):
-> >>
-> >> # mkfs/mkfs.f2fs -c /dev/vdc@vdc.file /dev/vdb
-> >> # mount /dev/vdb mnt
-> >> # mount -o remount,noextent_cache mnt
-> >> mount: /root/mnt: mount point not mounted or bad option.
-> >>        dmesg(1) may have more information after failed mount system call.
-> >> # dmesg | tail -n 1
-> >> [60012.364941] F2FS-fs (vdb): device aliasing requires extent cache
-> >> #
-> >>
-> >> I haven't tested with i.e. blkzoned devices though, is there a testcase
-> >> that fails for you?
-> > I'm worrying about any missing case to check options enabled by default_options.
-> > For example, in the case of device_aliasing, we rely on enabling extent_cache
-> > by default_options, which was not caught by f2fs_check_opt_consistency.
-> > 
-> > I was thinking that we'd need a post sanity check.
+
+
+On 2025/4/24 1:08, Eric Sandeen wrote:
+> From: Hongbo Li <lihongbo22@huawei.com>
 > 
-> I see. If you want a "belt and suspenders" approach and it works for
-> you, no argument from me :)
+> Use an array of `fs_parameter_spec` called f2fs_param_specs to
+> hold the mount option specifications for the new mount api.
+> 
+> Add constant_table structures for several options to facilitate
+> parsing.
+> 
+> Signed-off-by: Hongbo Li <lihongbo22@huawei.com>
+> [sandeen: forward port, minor fixes and updates, more fsparam_enum]
+> Signed-off-by: Eric Sandeen <sandeen@redhat.com>
+Thanks, I have checked this.
+Reviewed-by: Hongbo Li <lihongbo22@huawei.com>
 
-Thanks. :)
-
-I just found that I had to check it's from remount or not. And, this change does
-not break my setup having a specific options. Let me queue the series back and
-wait for further review from Chao.
-
----
- fs/f2fs/super.c | 54 +++++++++++++++++++++++++++++++++----------------
- 1 file changed, 37 insertions(+), 17 deletions(-)
-
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index d89b9ede221e..0ee783224953 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1412,6 +1412,7 @@ static int f2fs_check_opt_consistency(struct fs_context *fc,
- 	}
- 
- 	if (f2fs_sb_has_device_alias(sbi) &&
-+			(ctx->opt_mask & F2FS_MOUNT_READ_EXTENT_CACHE) &&
- 			!ctx_test_opt(ctx, F2FS_MOUNT_READ_EXTENT_CACHE)) {
- 		f2fs_err(sbi, "device aliasing requires extent cache");
- 		return -EINVAL;
-@@ -1657,6 +1658,33 @@ static void f2fs_apply_options(struct fs_context *fc, struct super_block *sb)
- 	f2fs_apply_quota_options(fc, sb);
- }
- 
-+static int f2fs_sanity_check_options(struct f2fs_sb_info *sbi, bool remount)
-+{
-+	if (f2fs_sb_has_device_alias(sbi) &&
-+	    !test_opt(sbi, READ_EXTENT_CACHE)) {
-+		f2fs_err(sbi, "device aliasing requires extent cache");
-+		return -EINVAL;
-+	}
-+
-+	if (!remount)
-+		return 0;
-+
-+#ifdef CONFIG_BLK_DEV_ZONED
-+	if (f2fs_sb_has_blkzoned(sbi) &&
-+	    sbi->max_open_zones < F2FS_OPTION(sbi).active_logs) {
-+		f2fs_err(sbi,
-+			"zoned: max open zones %u is too small, need at least %u open zones",
-+				 sbi->max_open_zones, F2FS_OPTION(sbi).active_logs);
-+		return -EINVAL;
-+	}
-+#endif
-+	if (f2fs_lfs_mode(sbi) && !IS_F2FS_IPU_DISABLE(sbi)) {
-+		f2fs_warn(sbi, "LFS is not compatible with IPU");
-+		return -EINVAL;
-+	}
-+	return 0;
-+}
-+
- static struct inode *f2fs_alloc_inode(struct super_block *sb)
- {
- 	struct f2fs_inode_info *fi;
-@@ -2616,21 +2644,15 @@ static int __f2fs_remount(struct fs_context *fc, struct super_block *sb)
- 	default_options(sbi, true);
- 
- 	err = f2fs_check_opt_consistency(fc, sb);
--	if (err < 0)
-+	if (err)
- 		goto restore_opts;
- 
- 	f2fs_apply_options(fc, sb);
- 
--#ifdef CONFIG_BLK_DEV_ZONED
--	if (f2fs_sb_has_blkzoned(sbi) &&
--		sbi->max_open_zones < F2FS_OPTION(sbi).active_logs) {
--		f2fs_err(sbi,
--			"zoned: max open zones %u is too small, need at least %u open zones",
--				 sbi->max_open_zones, F2FS_OPTION(sbi).active_logs);
--		err = -EINVAL;
-+	err = f2fs_sanity_check_options(sbi, true);
-+	if (err)
- 		goto restore_opts;
--	}
--#endif
-+
- 	/* flush outstanding errors before changing fs state */
- 	flush_work(&sbi->s_error_work);
- 
-@@ -2663,12 +2685,6 @@ static int __f2fs_remount(struct fs_context *fc, struct super_block *sb)
- 		}
- 	}
- #endif
--	if (f2fs_lfs_mode(sbi) && !IS_F2FS_IPU_DISABLE(sbi)) {
--		err = -EINVAL;
--		f2fs_warn(sbi, "LFS is not compatible with IPU");
--		goto restore_opts;
--	}
--
- 	/* disallow enable atgc dynamically */
- 	if (no_atgc == !!test_opt(sbi, ATGC)) {
- 		err = -EINVAL;
-@@ -4808,11 +4824,15 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
- 	default_options(sbi, false);
- 
- 	err = f2fs_check_opt_consistency(fc, sb);
--	if (err < 0)
-+	if (err)
- 		goto free_sb_buf;
- 
- 	f2fs_apply_options(fc, sb);
- 
-+	err = f2fs_sanity_check_options(sbi, false);
-+	if (err)
-+		goto free_options;
-+
- 	sb->s_maxbytes = max_file_blocks(NULL) <<
- 				le32_to_cpu(raw_super->log_blocksize);
- 	sb->s_max_links = F2FS_LINK_MAX;
--- 
-2.49.0.1015.ga840276032-goog
-
+> ---
+>   fs/f2fs/super.c | 122 ++++++++++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 122 insertions(+)
+> 
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 22f26871b7aa..ebea03bba054 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -27,6 +27,7 @@
+>   #include <linux/part_stat.h>
+>   #include <linux/zstd.h>
+>   #include <linux/lz4.h>
+> +#include <linux/fs_parser.h>
+>   
+>   #include "f2fs.h"
+>   #include "node.h"
+> @@ -194,9 +195,130 @@ enum {
+>   	Opt_age_extent_cache,
+>   	Opt_errors,
+>   	Opt_nat_bits,
+> +	Opt_jqfmt,
+> +	Opt_checkpoint,
+>   	Opt_err,
+>   };
+>   
+> +static const struct constant_table f2fs_param_background_gc[] = {
+> +	{"on",		BGGC_MODE_ON},
+> +	{"off",		BGGC_MODE_OFF},
+> +	{"sync",	BGGC_MODE_SYNC},
+> +	{}
+> +};
+> +
+> +static const struct constant_table f2fs_param_mode[] = {
+> +	{"adaptive",		FS_MODE_ADAPTIVE},
+> +	{"lfs",			FS_MODE_LFS},
+> +	{"fragment:segment",	FS_MODE_FRAGMENT_SEG},
+> +	{"fragment:block",	FS_MODE_FRAGMENT_BLK},
+> +	{}
+> +};
+> +
+> +static const struct constant_table f2fs_param_jqfmt[] = {
+> +	{"vfsold",	QFMT_VFS_OLD},
+> +	{"vfsv0",	QFMT_VFS_V0},
+> +	{"vfsv1",	QFMT_VFS_V1},
+> +	{}
+> +};
+> +
+> +static const struct constant_table f2fs_param_alloc_mode[] = {
+> +	{"default",	ALLOC_MODE_DEFAULT},
+> +	{"reuse",	ALLOC_MODE_REUSE},
+> +	{}
+> +};
+> +static const struct constant_table f2fs_param_fsync_mode[] = {
+> +	{"posix",	FSYNC_MODE_POSIX},
+> +	{"strict",	FSYNC_MODE_STRICT},
+> +	{"nobarrier",	FSYNC_MODE_NOBARRIER},
+> +	{}
+> +};
+> +
+> +static const struct constant_table f2fs_param_compress_mode[] = {
+> +	{"fs",		COMPR_MODE_FS},
+> +	{"user",	COMPR_MODE_USER},
+> +	{}
+> +};
+> +
+> +static const struct constant_table f2fs_param_discard_unit[] = {
+> +	{"block",	DISCARD_UNIT_BLOCK},
+> +	{"segment",	DISCARD_UNIT_SEGMENT},
+> +	{"section",	DISCARD_UNIT_SECTION},
+> +	{}
+> +};
+> +
+> +static const struct constant_table f2fs_param_memory_mode[] = {
+> +	{"normal",	MEMORY_MODE_NORMAL},
+> +	{"low",		MEMORY_MODE_LOW},
+> +	{}
+> +};
+> +
+> +static const struct constant_table f2fs_param_errors[] = {
+> +	{"remount-ro",	MOUNT_ERRORS_READONLY},
+> +	{"continue",	MOUNT_ERRORS_CONTINUE},
+> +	{"panic",	MOUNT_ERRORS_PANIC},
+> +	{}
+> +};
+> +
+> +static const struct fs_parameter_spec f2fs_param_specs[] = {
+> +	fsparam_enum("background_gc", Opt_gc_background, f2fs_param_background_gc),
+> +	fsparam_flag("disable_roll_forward", Opt_disable_roll_forward),
+> +	fsparam_flag("norecovery", Opt_norecovery),
+> +	fsparam_flag_no("discard", Opt_discard),
+> +	fsparam_flag("no_heap", Opt_noheap),
+> +	fsparam_flag("heap", Opt_heap),
+> +	fsparam_flag_no("user_xattr", Opt_user_xattr),
+> +	fsparam_flag_no("acl", Opt_acl),
+> +	fsparam_s32("active_logs", Opt_active_logs),
+> +	fsparam_flag("disable_ext_identify", Opt_disable_ext_identify),
+> +	fsparam_flag_no("inline_xattr", Opt_inline_xattr),
+> +	fsparam_s32("inline_xattr_size", Opt_inline_xattr_size),
+> +	fsparam_flag_no("inline_data", Opt_inline_data),
+> +	fsparam_flag_no("inline_dentry", Opt_inline_dentry),
+> +	fsparam_flag_no("flush_merge", Opt_flush_merge),
+> +	fsparam_flag_no("barrier", Opt_barrier),
+> +	fsparam_flag("fastboot", Opt_fastboot),
+> +	fsparam_flag_no("extent_cache", Opt_extent_cache),
+> +	fsparam_flag("data_flush", Opt_data_flush),
+> +	fsparam_u32("reserve_root", Opt_reserve_root),
+> +	fsparam_gid("resgid", Opt_resgid),
+> +	fsparam_uid("resuid", Opt_resuid),
+> +	fsparam_enum("mode", Opt_mode, f2fs_param_mode),
+> +	fsparam_s32("fault_injection", Opt_fault_injection),
+> +	fsparam_u32("fault_type", Opt_fault_type),
+> +	fsparam_flag_no("lazytime", Opt_lazytime),
+> +	fsparam_flag_no("quota", Opt_quota),
+> +	fsparam_flag("usrquota", Opt_usrquota),
+> +	fsparam_flag("grpquota", Opt_grpquota),
+> +	fsparam_flag("prjquota", Opt_prjquota),
+> +	fsparam_string_empty("usrjquota", Opt_usrjquota),
+> +	fsparam_string_empty("grpjquota", Opt_grpjquota),
+> +	fsparam_string_empty("prjjquota", Opt_prjjquota),
+> +	fsparam_flag("nat_bits", Opt_nat_bits),
+> +	fsparam_enum("jqfmt", Opt_jqfmt, f2fs_param_jqfmt),
+> +	fsparam_enum("alloc_mode", Opt_alloc, f2fs_param_alloc_mode),
+> +	fsparam_enum("fsync_mode", Opt_fsync, f2fs_param_fsync_mode),
+> +	fsparam_string("test_dummy_encryption", Opt_test_dummy_encryption),
+> +	fsparam_flag("test_dummy_encryption", Opt_test_dummy_encryption),
+> +	fsparam_flag("inlinecrypt", Opt_inlinecrypt),
+> +	fsparam_string("checkpoint", Opt_checkpoint),
+> +	fsparam_flag_no("checkpoint_merge", Opt_checkpoint_merge),
+> +	fsparam_string("compress_algorithm", Opt_compress_algorithm),
+> +	fsparam_u32("compress_log_size", Opt_compress_log_size),
+> +	fsparam_string("compress_extension", Opt_compress_extension),
+> +	fsparam_string("nocompress_extension", Opt_nocompress_extension),
+> +	fsparam_flag("compress_chksum", Opt_compress_chksum),
+> +	fsparam_enum("compress_mode", Opt_compress_mode, f2fs_param_compress_mode),
+> +	fsparam_flag("compress_cache", Opt_compress_cache),
+> +	fsparam_flag("atgc", Opt_atgc),
+> +	fsparam_flag_no("gc_merge", Opt_gc_merge),
+> +	fsparam_enum("discard_unit", Opt_discard_unit, f2fs_param_discard_unit),
+> +	fsparam_enum("memory", Opt_memory_mode, f2fs_param_memory_mode),
+> +	fsparam_flag("age_extent_cache", Opt_age_extent_cache),
+> +	fsparam_enum("errors", Opt_errors, f2fs_param_errors),
+> +	{}
+> +};
+> +
+>   static match_table_t f2fs_tokens = {
+>   	{Opt_gc_background, "background_gc=%s"},
+>   	{Opt_disable_roll_forward, "disable_roll_forward"},
 
 
 _______________________________________________
