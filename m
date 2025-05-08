@@ -2,103 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 404E5AAF2B8
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 May 2025 07:16:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA76AAAF2D8
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 May 2025 07:24:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=3voq7VK6IezH9Ee+qK133dbpUVl/02+U1x/mZb1QHpI=; b=G0wIvLhAOF79rcxvQKoqegLZT3
-	PwrF8+DVuyts3dHR5mlYz0BdwgwYMZW2CquEmEwtLVToi0ojOwFVWimPdL9C3yCSdkgrZPyUOS8t3
-	4c3fGAVAPQdtFdUQfVU+drAWinXVx2Pv+1MYlClPWKJGyDJP59vD2coALnfD/B/vZaRI=;
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=8Z1Xe06X6s9oBpGHLNT/V0keQQRcrNeQvEPWlhbIEG4=; b=LdhnZ/YRzf+8ud7UfhW//dwP/l
+	eJWmFhw2G2vxreMdma/5U7Rh92JqAFEZjI3UeMXdRacEwhVbVUOh1x98Cru71JwpWWzT2Be0+itZF
+	6JT6+pYgGdazPZapLFmNB4Rdybjn4YzoSR/h3AcLO4lm4eKZvnkppy21Pj0GeWJojIs0=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uCtc4-0003IY-UB;
-	Thu, 08 May 2025 05:16:04 +0000
+	id 1uCtkX-0004Cm-Qd;
+	Thu, 08 May 2025 05:24:49 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <BATV+b29930b5fa9b2b8daadf+7928+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1uCtbv-0003HC-HW for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 May 2025 05:15:55 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <chao@kernel.org>) id 1uCtkV-0004CS-JD
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 May 2025 05:24:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1G4f4sk552Jl077q56Rrcrvm+8Rfw3GwTOMqnkMOeys=; b=irB/VH00wOF6XvwMLvSUeiNyp0
- a+Pm0oqBgiGA94kzC56gWm72mmy2ppVWfPzzIgTm6dWrtu20CxHqxMsOGZQoVz5JgPD9lnQUr2Epz
- 2tGRr+V83eCVic/kpjifrfevZt/xMaUKY1Ec0ebst3weZ6UmGHmCePBC27YNPElIIwVA=;
+ bh=Ev6jIx7ohozicYiIJ24TOyl+BBn1TztBGwUEBZYlY24=; b=f0ACrEKZ3yeVvjUUWXspMm6rpg
+ BEna0J3ofJsNzJ03MEvqKzHGLhdix8Dpioym2yQNAA+cFLVNXF5SRCQuck5TILu0vo1ocMsnj+JQz
+ 5oFvwHXJ8rXCLYsd5zKQv6pSwO8O/xjATs9gPOpa7s1HrPFkE7ajRZVnHCFALoxSsRlc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1G4f4sk552Jl077q56Rrcrvm+8Rfw3GwTOMqnkMOeys=; b=WTDMIuAOOZ/9eYk51iekOUsDKT
- w7Nis/1Q+r4th3cmRBJONU2rFafukyXOBuU8aADbkk/Ulrny2Y0dyPJP/pICJge2Ig3AjV5BwdtGQ
- ypdsw09iK4rFLIH21hrdzj+cGvgQWNy/KX9ZJe84FRClRp7Z1j/EGBt1rxtFaqAEWaHU=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ bh=Ev6jIx7ohozicYiIJ24TOyl+BBn1TztBGwUEBZYlY24=; b=TKGqgb2G9hEscaD+2dNpipZ7h4
+ Pi/oYAxe6z8V/km9dOoXbanW1PfRWPxsgeffuAGKOc7YaXPnBpoUAWW5r51hekFmGAhJT5GX5l50I
+ kOG/gUf9AdcbhbeEciyUGBkXCuBx2u3nw2UY9HKzMIVwUZq9muOFSZS3CgHSKCg5nRYk=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uCtbq-0003dQ-Or for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 May 2025 05:15:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=1G4f4sk552Jl077q56Rrcrvm+8Rfw3GwTOMqnkMOeys=; b=Rrmamjmozk1BTD7R9CmoYXv3pl
- Bvf1ZNDqPKeTU8uvHnzUdpCqhGO7ZQtAva7CKWlCchQRawXvRLhgn+1K3P+n84ZqRrCnoiQcbjJX/
- yAG2fsdkS5ioxnhyWYMzGdkD5O5yWkviKW3W4QHtI1rQhYq4KKvzzpTQONP14zYRQFTPfagHZrckS
- VFaft3ouWl7q2irQR9wvp46rLXsLzM8wK9BLoDpMC407Pk4l8LTwnBm4g8zqESiTPjlTBx2FWcc4N
- zd68aVAbWkgiBfyOPCG7SYqw2GbBYaDaTBG0Yub1JuqWAdNUQX/nYKA20MSP9+LVIIAgZkcBw5+d6
- S20tqtiA==;
-Received: from
- 2a02-8389-2341-5b80-2368-be33-a304-131f.cable.dynamic.v6.surfer.at
- ([2a02:8389:2341:5b80:2368:be33:a304:131f] helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1uCtbl-0000000HLhe-00t2; Thu, 08 May 2025 05:15:45 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Jaegeuk Kim <jaegeuk@kernel.org>,
-	Chao Yu <chao@kernel.org>
-Date: Thu,  8 May 2025 07:14:32 +0200
-Message-ID: <20250508051520.4169795-7-hch@lst.de>
-X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250508051520.4169795-1-hch@lst.de>
-References: <20250508051520.4169795-1-hch@lst.de>
+ id 1uCtkU-00042g-Tx for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 May 2025 05:24:47 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 29670629EA;
+ Thu,  8 May 2025 05:24:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BBD5EC4CEEB;
+ Thu,  8 May 2025 05:24:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1746681875;
+ bh=3sYe3SmDr32t4jdhPdpNaRqMy/gCrEWYAFqENM23+Ck=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=nkKcndVCogLG2QFxCShVKwWUcJz8xGvEWSYkRNmvM4xLuumnKVyoxdK0n+bRWaOHH
+ 69NynTzXm41IkDnHNnGz4Hiv8U94iEXY+/TL9GE8OXBVfoS0AiqGVjy/k1C9SwNiS9
+ 0Mxov+V4kN/yu32FWbBq7Y0ixBYSkQ+4onq5ojritBQ2tKziBviyCXqgLQl0vqrkxg
+ /JsUXuDhXTf5kmJbGpcr8Dsb8rqy4435zWlWKgVrbmAomXWqthsC5IqEPoMvCkUK8J
+ Pb/5yQ7R/fFvuPslzaF7UrSSVWOXh/skb3Xrc5mZ47V0MVuGPPG+rSQ81TAY9kGZJC
+ +TSa50/mAXxKg==
+Message-ID: <d747da62-d8ea-4e92-854d-50e8c849cb11@kernel.org>
+Date: Thu, 8 May 2025 13:24:32 +0800
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -2.3 (--)
+User-Agent: Mozilla Thunderbird
+To: Eric Sandeen <sandeen@redhat.com>, linux-f2fs-devel@lists.sourceforge.net
+References: <20250423170926.76007-1-sandeen@redhat.com>
+ <20250423170926.76007-2-sandeen@redhat.com>
+Content-Language: en-US
+In-Reply-To: <20250423170926.76007-2-sandeen@redhat.com>
+X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam detection software, running on the system "6901ab67b84d", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: __write_node_folio can only return 0 or
- AOP_WRITEPAGE_ACTIVATE.
- As part of phasing out AOP_WRITEPAGE_ACTIVATE, switch to a bool return instead.
- Signed-off-by: Christoph Hellwig <hch@lst.de> Reviewed-by: Chao Yu
- <chao@kernel.org>
- --- fs/f2fs/node.c | 29 +++++++++++++ 1 file changed, 13 insertions(+), 16
- deletions(-) 
- Content analysis details:   (-2.3 points, 5.0 required)
+ Content preview:  On 4/24/25 01:08,
+ Eric Sandeen wrote: > From: Hongbo Li <lihongbo22@huawei.com>
+ > > Use an array of `fs_parameter_spec` called f2fs_param_specs to > hold
+ the mount option specifications for the new mo [...] 
+ Content analysis details:   (-1.6 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [198.137.202.133 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
-X-Headers-End: 1uCtbq-0003dQ-Or
-Subject: [f2fs-dev] [PATCH 6/6] f2fs: return bool from __write_node_folio
+ -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uCtkU-00042g-Tx
+Subject: Re: [f2fs-dev] [PATCH V3 1/7] f2fs: Add fs parameter specifications
+ for mount options
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,118 +107,29 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, lihongbo22@huawei.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-__write_node_folio can only return 0 or AOP_WRITEPAGE_ACTIVATE.
-As part of phasing out AOP_WRITEPAGE_ACTIVATE, switch to a bool return
-instead.
+On 4/24/25 01:08, Eric Sandeen wrote:
+> From: Hongbo Li <lihongbo22@huawei.com>
+> 
+> Use an array of `fs_parameter_spec` called f2fs_param_specs to
+> hold the mount option specifications for the new mount api.
+> 
+> Add constant_table structures for several options to facilitate
+> parsing.
+> 
+> Signed-off-by: Hongbo Li <lihongbo22@huawei.com>
+> [sandeen: forward port, minor fixes and updates, more fsparam_enum]
+> Signed-off-by: Eric Sandeen <sandeen@redhat.com>
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/node.c | 29 +++++++++++++----------------
- 1 file changed, 13 insertions(+), 16 deletions(-)
 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index cbc7e9997b74..3f6b8037d25f 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -1651,7 +1651,7 @@ static struct folio *last_fsync_dnode(struct f2fs_sb_info *sbi, nid_t ino)
- 	return last_folio;
- }
- 
--static int __write_node_folio(struct folio *folio, bool atomic, bool *submitted,
-+static bool __write_node_folio(struct folio *folio, bool atomic, bool *submitted,
- 				struct writeback_control *wbc, bool do_balance,
- 				enum iostat_type io_type, unsigned int *seq_id)
- {
-@@ -1681,7 +1681,7 @@ static int __write_node_folio(struct folio *folio, bool atomic, bool *submitted,
- 		folio_clear_uptodate(folio);
- 		dec_page_count(sbi, F2FS_DIRTY_NODES);
- 		folio_unlock(folio);
--		return 0;
-+		return true;
- 	}
- 
- 	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
-@@ -1707,7 +1707,7 @@ static int __write_node_folio(struct folio *folio, bool atomic, bool *submitted,
- 		dec_page_count(sbi, F2FS_DIRTY_NODES);
- 		f2fs_up_read(&sbi->node_write);
- 		folio_unlock(folio);
--		return 0;
-+		return true;
- 	}
- 
- 	if (__is_valid_data_blkaddr(ni.blk_addr) &&
-@@ -1746,11 +1746,12 @@ static int __write_node_folio(struct folio *folio, bool atomic, bool *submitted,
- 
- 	if (do_balance)
- 		f2fs_balance_fs(sbi, false);
--	return 0;
-+	return true;
- 
- redirty_out:
- 	folio_redirty_for_writepage(wbc, folio);
--	return AOP_WRITEPAGE_ACTIVATE;
-+	folio_unlock(folio);
-+	return false;
- }
- 
- int f2fs_move_node_folio(struct folio *node_folio, int gc_type)
-@@ -1772,11 +1773,9 @@ int f2fs_move_node_folio(struct folio *node_folio, int gc_type)
- 			goto out_page;
- 		}
- 
--		if (__write_node_folio(node_folio, false, NULL,
--					&wbc, false, FS_GC_NODE_IO, NULL)) {
-+		if (!__write_node_folio(node_folio, false, NULL,
-+					&wbc, false, FS_GC_NODE_IO, NULL))
- 			err = -EAGAIN;
--			folio_unlock(node_folio);
--		}
- 		goto release_page;
- 	} else {
- 		/* set page dirty and write it */
-@@ -1871,11 +1870,10 @@ int f2fs_fsync_node_pages(struct f2fs_sb_info *sbi, struct inode *inode,
- 			if (!folio_clear_dirty_for_io(folio))
- 				goto continue_unlock;
- 
--			if (__write_node_folio(folio, atomic &&
-+			if (!__write_node_folio(folio, atomic &&
- 						folio == last_folio,
- 						&submitted, wbc, true,
- 						FS_NODE_IO, seq_id)) {
--				folio_unlock(folio);
- 				f2fs_folio_put(last_folio, false);
- 				folio_batch_release(&fbatch);
- 				ret = -EIO;
-@@ -2078,16 +2076,15 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
- 			set_fsync_mark(&folio->page, 0);
- 			set_dentry_mark(&folio->page, 0);
- 
--			ret = __write_node_folio(folio, false, &submitted,
--						wbc, do_balance, io_type, NULL);
--			if (ret) {
-+			if (!__write_node_folio(folio, false, &submitted,
-+					wbc, do_balance, io_type, NULL)) {
- 				folio_unlock(folio);
- 				folio_batch_release(&fbatch);
- 				ret = -EIO;
- 				goto out;
--			} else if (submitted) {
--				nwritten++;
- 			}
-+			if (submitted)
-+				nwritten++;
- 
- 			if (--wbc->nr_to_write == 0)
- 				break;
--- 
-2.47.2
-
+Thanks,
 
 
 _______________________________________________
