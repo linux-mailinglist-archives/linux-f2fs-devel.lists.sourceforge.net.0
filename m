@@ -2,73 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84A53AB0A45
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 May 2025 08:08:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19903AB0A7C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 May 2025 08:19:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=hjgCVRrwcG6OI3+w8Ouvbv2W6h4OzjWvFbpbRjqb7Dw=; b=G3DpSQHB4SlgBZX0qUJeoLoz+W
-	AOMSZz2XVjK/PDVJLeWoe5dgyBq67AmxNQnGVSi9pf/iUK1fqMHde3Sic5DoWaY0IBBEjmpwyJCgF
-	caRswo3F1KxBfsODbYxs91vLO2htth2I6KOEvFoqDvWAtlp9AO4cw4+cdFpvugscNN4A=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=XAEiC7yg0od6nVf529LqJzfGjMYGk3Sc6z5Mgs/Pv0g=; b=PHZi4FfwRUjUDM3GiWUCIpO0BR
+	SLHmK5HoqOdYSJ+NVz7hzYViwgNUiP/I4O7pKw5zPZ2/VZm50WjtwpGZnxjvdZ1j6hJZV7V3NxUp5
+	crd/cYPplBgCsPzDx0ZK32nWEI5rQrCBkoF261e/S0NCRi1SI8bFXGiGnxPR94kyXoJ8=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uDGuH-0002s2-8o;
-	Fri, 09 May 2025 06:08:25 +0000
+	id 1uDH4o-0002Tc-Lf;
+	Fri, 09 May 2025 06:19:18 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uDGuF-0002ru-P8
+ (envelope-from <chao@kernel.org>) id 1uDH4F-0002Sp-17
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 09 May 2025 06:08:23 +0000
+ Fri, 09 May 2025 06:18:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=reF1NazbxhHESRT4dRnTQA5MpMD7Sbsba7nQaJocQFA=; b=nPN+bN+G0mJ6jXxg0W45urmsHV
- 2kTQfr/s7PnmMe1GDuCdT6JeadWd3E2LeqiXJcMizikZ57ZBnH4j0gdSBmqh2diaRDECmVY+0Eh9C
- r87txD0DNmO/yq0DuuxtEkkS/XPi9Ki+j7lLiZxVXkftKghR+Wq0ocInsf5UExWInwBQ=;
+ bh=leYF/6OllHEfVq2PjKrIvniX5cHk634HJEi8CAGV2mc=; b=kS3h2q2Cw4LKGCmFir1hR16/tM
+ pHxLK1n6ReMQZlJ3VwQFjlL7KCKswTJ9MBqNuLFSpg3XoV8DQKimJvekZgj4hEU/O3oFi5SGc09go
+ YDZhCw59IA/Jy0s7Rqan7rl37w1ywzhXcR7a3Ruj9m+Xf6/rAW1k/hHTXd8klwYUuWIM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=reF1NazbxhHESRT4dRnTQA5MpMD7Sbsba7nQaJocQFA=; b=K
- hLNVDaLbrtmJ1TfHXTY1SSKRHYodT3Z+AH09HOPpamhgpSunmMA+GRukO6jTExarMZJW3HTCSlr2G
- jMvYQ0h23viJws+s5iTZBlODJuqi3QV50jpDjOqi14v7itJTzy91Be1qa+d+spRK3Wq//yhl+mlzW
- yCjcWRdMGnZjNIhM=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=leYF/6OllHEfVq2PjKrIvniX5cHk634HJEi8CAGV2mc=; b=J1vAbyoCS3qHhHy6gQ1FAmDu4P
+ 9MDDTB1xhtmLKUNrxpYmL+C4eGjMOTjmIKZQ7jR5r7L1x2ahzHfQlNb1i4N6tbLqP6toMtFEzsIsl
+ FxRZvEA3L61IVHIL3np/cCx9wKtsJXWz6XPM+7cQUbbxN/ot43Fkpn9/hvJHiCglvCmU=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uDGuE-0006Bd-Uo for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 09 May 2025 06:08:23 +0000
+ id 1uDH4E-0007sL-Cz for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 09 May 2025 06:18:42 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 944D0439D7;
- Fri,  9 May 2025 06:08:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37C6BC4CEE4;
- Fri,  9 May 2025 06:08:11 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id B2F7960008;
+ Fri,  9 May 2025 06:18:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93B6BC4CEE4;
+ Fri,  9 May 2025 06:18:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1746770892;
- bh=naHAN4PuFoyYOjUDd/vVoVDZ1KAERgLaEoZdCCJbCYs=;
- h=From:To:Cc:Subject:Date:From;
- b=kPVKf9hn2R9xC7m4ajHhi6KCFS1/amjw0cms0yrin6sJv7R2KmxbQEAGpNtXuAYOd
- lXd77g05+6O0Lr6PhbpmhMGwG6ICNqIL2WUZQ5tZxEN+nHN0rWuMvqc45/y7vRQUN3
- W9lTAZdEzeYDoMp9kOnfO+7mPsRhQaewFXNAOKTMQmDtxz4noa3EjX+Ee/KjjgRSTw
- tHJ7rNzUv2+Tzwg/Qbyz2+a1u0vXp7YgmvUTyu/5Sokuysj9tbPIEElZM7mwvU3Pr1
- JpdfThfBCRnXcRrwqV1oGGeNotqmJm4xNpPBzutdamD0mMcBi4pYNqjOZ156k6cPR/
- F9rPvBGAephPQ==
-To: Zorro Lang <zlang@kernel.org>,
-	fstests@vger.kernel.org
-Date: Fri,  9 May 2025 14:07:54 +0800
-Message-ID: <20250509060754.1677062-1-chao@kernel.org>
-X-Mailer: git-send-email 2.49.0.1015.ga840276032-goog
+ s=k20201202; t=1746771516;
+ bh=KmqICjcfsXcrZvh2/cY+7rCL2gKxbYcoMsbxZ/eMCTk=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=k5ntXOf+dA7Fs5gnT/Sk1v4aCG1pQU8PXcXiSE1PwT1dJ2u/+41AeeSwu1RDGWmgr
+ +chdEnEO+EVG1T9tNrn4xYCf8T1sjQEkztjjnCUNcwVIGv6J3IGrqmnrkPMB56RzrB
+ E321RaM1fkYFgsQ6jKwJB2DVRG3mO8mtoBaMoWFsTNIM2HeLe56zm+Vpk17JCc+ovI
+ 57FADuQMk2j2jBioaECeBnxQPJkt/YTWjqHXqycaSUia5R+PWkA4shDSfibmOnxAbl
+ 5TqqsEeNfUpUdp38ZP8APDWnqXhmeWH8zG8zrH+fNc9C7wZ+Ck2UxMlxIFg2+upc1P
+ oxtdpYYq7ViLA==
+Message-ID: <7eeb6cfb-3c64-49c5-8afa-a3a7cf272878@kernel.org>
+Date: Fri, 9 May 2025 14:18:33 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Jianan Huang <huangjianan@xiaomi.com>, jaegeuk@kernel.org
+References: <20250508124235.58858-1-huangjianan@xiaomi.com>
+Content-Language: en-US
+In-Reply-To: <20250508124235.58858-1-huangjianan@xiaomi.com>
 X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -76,23 +78,23 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This is a regression testcase to check whether we will handle
- database inode dirty status correctly: 1. mount f2fs image w/ timeout fault
- injection option 2. create a regular file, and write data into [...] 
+ Content preview:  On 5/8/25 20:42, Jianan Huang wrote: > Otherwise we will get
+ the following error when executing make uninstall: > > make uninstall-hook
+ > make[2]: Entering directory '/home/huangjianan/code/f2fs-tools [...] 
  Content analysis details:   (-1.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
  The query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.234.252.31 listed in sa-accredit.habeas.com]
+ [172.105.4.254 listed in sa-accredit.habeas.com]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [172.234.252.31 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [172.105.4.254 listed in bl.score.senderscore.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -102,9 +104,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uDGuE-0006Bd-Uo
-Subject: [f2fs-dev] [PATCH v3] f2fs/013: test to check potential corruption
- on atomic_write file
+X-Headers-End: 1uDH4E-0007sL-Cz
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs-tools: delete only if the
+ libf2fs_format.so* exists
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,124 +120,30 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, Daeho Jeong <daehojeong@google.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: wanghui33@xiaomi.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This is a regression testcase to check whether we will handle database
-inode dirty status correctly:
-1. mount f2fs image w/ timeout fault injection option
-2. create a regular file, and write data into the file
-3. start transaction on the file (via F2FS_IOC_START_ATOMIC_WRITE)
-4. write transaction data to the file
-5. commit and end the transaction (via F2FS_IOC_COMMIT_ATOMIC_WRITE)
-6. meanwhile loop call fsync in parallel
-Before f098aeba04c9 ("f2fs: fix to avoid atomicity corruption of atomic
-file"), database file may become corrupted after atomic write while
-there is concurrent dirty inode flush in background.
+On 5/8/25 20:42, Jianan Huang wrote:
+> Otherwise we will get the following error when executing make uninstall:
+> 
+> make  uninstall-hook
+> make[2]: Entering directory '/home/huangjianan/code/f2fs-tools/mkfs'
+> rm /usr/local/lib/libf2fs_format.so*
+> rm: cannot remove '/usr/local/lib/libf2fs_format.so*': No such file or directory
+> make[2]: *** [Makefile:827: uninstall-hook] Error 1
+> make[2]: Leaving directory '/home/huangjianan/code/f2fs-tools/mkfs'
+> make[1]: *** [Makefile:790: uninstall-am] Error 2
+> make[1]: Leaving directory '/home/huangjianan/code/f2fs-tools/mkfs'
+> make: *** [Makefile:418: uninstall-recursive] Error 1
+> 
+> Fixes: b067004c92dc ("add configure option --with-root-libdir")
+> Signed-off-by: Jianan Huang <huangjianan@xiaomi.com>
 
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Daeho Jeong <daehojeong@google.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-v3:
-- fix typo: s/relis/relies
- tests/f2fs/013     | 71 ++++++++++++++++++++++++++++++++++++++++++++++
- tests/f2fs/013.out |  2 ++
- 2 files changed, 73 insertions(+)
- create mode 100755 tests/f2fs/013
- create mode 100644 tests/f2fs/013.out
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-diff --git a/tests/f2fs/013 b/tests/f2fs/013
-new file mode 100755
-index 00000000..80ed2702
---- /dev/null
-+++ b/tests/f2fs/013
-@@ -0,0 +1,71 @@
-+#! /bin/bash
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
-+#
-+# FS QA Test No. f2fs/013
-+#
-+# This is a regression testcase to check whether we will handle database
-+# inode dirty status correctly:
-+# 1. mount f2fs image w/ timeout fault injection option
-+# 2. create a regular file, and write data into the file
-+# 3. start transaction on the file (via F2FS_IOC_START_ATOMIC_WRITE)
-+# 4. write transaction data to the file
-+# 5. commit and end the transaction (via F2FS_IOC_COMMIT_ATOMIC_WRITE)
-+# 6. meanwhile loop call fsync in parallel
-+# Before f098aeba04c9 ("f2fs: fix to avoid atomicity corruption of atomic
-+# file"), database file may become corrupted after atomic write while
-+# there is concurrent dirty inode flush in background.
-+#
-+. ./common/preamble
-+_begin_fstest auto quick
-+_require_kernel_config CONFIG_F2FS_FAULT_INJECTION
-+_require_command "$F2FS_IO_PROG" f2fs_io
-+
-+_cleanup()
-+{
-+	[ -n "$atomic_write_pid" ] && kill -9 $atomic_write_pid
-+	wait
-+	cd /
-+	rm -r -f $tmp.*
-+}
-+
-+_fixed_by_kernel_commit f098aeba04c9 \
-+	"f2fs: fix to avoid atomicity corruption of atomic file"
-+
-+_require_scratch
-+
-+_scratch_mkfs >> $seqres.full
-+# note that it relies on FAULT_TIMEOUT fault injection support in f2fs
-+_scratch_mount "-o fault_injection=1,fault_type=4194304" >> $seqres.full
-+
-+dbfile=$SCRATCH_MNT/file.db
-+
-+# initialize database file
-+$XFS_IO_PROG -c "pwrite 0 4k" -c "fsync" -f $dbfile >> $seqres.full
-+
-+# sync filesystem to clear dirty inode
-+sync
-+
-+# start atomic_write on src.db database file and commit transaction
-+$F2FS_IO_PROG write 1 0 2 zero atomic_commit $dbfile >> $seqres.full &
-+atomic_write_pid=$!
-+
-+# call fsync to flush dirty inode of database file in parallel
-+for ((j=0;j<1000;j++)) do
-+	$F2FS_IO_PROG fsync $dbfile >> $seqres.full
-+done
-+
-+wait $atomic_write_pid
-+unset atomic_write_pid
-+
-+# flush dirty data and drop cache
-+sync
-+echo 3 > /proc/sys/vm/drop_caches
-+
-+stat $dbfile -c %s
-+
-+rm $dbfile
-+sync
-+
-+status=0
-+exit
-diff --git a/tests/f2fs/013.out b/tests/f2fs/013.out
-new file mode 100644
-index 00000000..d9271f75
---- /dev/null
-+++ b/tests/f2fs/013.out
-@@ -0,0 +1,2 @@
-+QA output created by 013
-+8192
--- 
-2.49.0
-
+Thanks,
 
 
 _______________________________________________
