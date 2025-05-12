@@ -2,88 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79EFBAB2E4A
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 May 2025 06:03:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38448AB302A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 May 2025 09:00:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=YMLHakJlAnH8FvK2Xm9Lfc5H3kX5d/PFmJOkf0wyE7U=; b=Q8wpO7kni3NlDGmsQn62XYL8Nw
-	jlbMCkwt0KYV8qy+hCsckDn0PvbkMDTk1vw/WZURdhQ2h1d7cw6Q+h6Qb0QPJ0FhrW1NkGGWMRkwu
-	dfih2VuOUkjv94xItdJ2OF+rjG8bO7I9QkHKhB7O/Id1k4rRvfbDSuGsqjmsynDIh9/I=;
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=aqBWg6PfMxr79Znf0xNQiLNXsQ98QGbRJpPyYDhry10=; b=JApOn8PD5DUdP4kQ+ZafwK/Dp7
+	x4HBWmom8ZczFfQDb1AOdviQ1Whc/XzQQZQuE1QlsL8pEr635UxR5S02MWq/Vho+Quqrcn5R7xD4g
+	Ts8bPZiCLFYmxGdxFzm1QZki84szSCs/aWOlD/KddR51d7noe7WHe4TXuusg3jrVR840=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uEKNZ-0000uB-M6;
-	Mon, 12 May 2025 04:03:01 +0000
+	id 1uEN8h-0004Jj-G4;
+	Mon, 12 May 2025 06:59:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uEKNY-0000u4-AP
+ (envelope-from <chao@kernel.org>) id 1uEN8S-0004JT-Kw
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 May 2025 04:03:00 +0000
+ Mon, 12 May 2025 06:59:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2smRvuIebMVJ4/hGyDYxaz934AnGGVkrxhFdtuSrryA=; b=EqPxPP6sc751EO9ZHrb/sCP4Uq
- TbQ3XDLLWDwjO9F+2KzUFTLIT9q47SEpX+KUQyckaJ6dhC/0fOf2A/c8JxzuE46Hlsx6gy2owMIaa
- mwbohM/7/I43KSQnEvfy5ttCXBzkoNYRbhF6SHdgFtJf2PznX1ZxmQu2KWQdTL2Axnwo=;
+ bh=qniVw2pXU7TWnRln8ytimmI5PjJYdq/gCMD8/abJTNw=; b=EOBkRB2KYIl75zy9hX+rwKHhOX
+ SlwowT0oQQ268TTQT4Moo7tSFhb6MHAvLWizPWqgi3+4+xWdy0ol5+q9WIbUWnl2E+dnJiAjL2zGQ
+ Ck0bM1AOS2TFevN/+o6MPlxLOSBoYK4Qad3J3uVSclooMVzb6r/FPLA6O7geDYZDFuJk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=2smRvuIebMVJ4/hGyDYxaz934AnGGVkrxhFdtuSrryA=; b=aVXVdCqT1qONMihV9BsTwWuKbP
- f2atMI7YjDYLoYCzhhZfB+WEpjGYkvdrwzXLddiZUaj16eHpeuX/FG7JBi49dClmgZM+vyelpVxht
- 0eby54pmmjO8t9TdtkZc5pOKujgyETl6w0fdv19VMFwgmYtRnlfZZFaDI0BZwwjm7gXg=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=qniVw2pXU7TWnRln8ytimmI5PjJYdq/gCMD8/abJTNw=; b=F
+ Nz/Qn7PrQn8aKQ0uB6anMs7/f9f6X6NY9qSkGIY5+k8O1tSzyYvz7Deilq4RHd8m6gxDr90bP1Pc5
+ niYeamlVj9gGve7JR+doR2ZYeDdNkMS00PcZQvgFXNlovhnHZR0iJHfZtDyu8qNSyf/r7bFKr+Hc3
+ bL5r24Qnd26Mg1q4=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uEKNX-0000Dn-QP for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 May 2025 04:03:00 +0000
+ id 1uEN8S-0001Ue-2z for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 12 May 2025 06:59:36 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 2FC7CA40309;
- Mon, 12 May 2025 04:02:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D69E0C4CEE7;
- Mon, 12 May 2025 04:02:47 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id B116D44934;
+ Mon, 12 May 2025 06:59:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61D37C4CEE7;
+ Mon, 12 May 2025 06:59:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747022568;
- bh=2smRvuIebMVJ4/hGyDYxaz934AnGGVkrxhFdtuSrryA=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=SlBXXbUY6iRVZgPJGzdsovw3xzuKZBLncmsrEtybFW5FukBr4S5U0NUxS50KpLX7R
- 66zNzdxdvqdp/FFb/cgCJ7pPDuHcSAuy8Bzo5D2SZ1/1EriC/+hgp0UfVGQhsQaeug
- afYpLrpbbPoKzYWtq91P5g/nJTiLYsN6F7SzNNjkB1TjC/kxNPozDAdlQq2yrDZzHd
- cbkNFp6IfgqqKcs0WDvPeh64Bt7jJjDtRZ6gAaTBElQj6jjlhCt6vg8lGI4V0Iz7U2
- 9LpZB24chCGV25t+W/Y00KHSY8uC0rbcFyAi9FQ8pazth/W4TF6khcxhfSUI+8r1oQ
- W73+S7dhpJL5A==
-Message-ID: <9548f8d2-ead8-4176-8e28-ce3b6047bf06@kernel.org>
-Date: Mon, 12 May 2025 12:02:46 +0800
+ s=k20201202; t=1747033170;
+ bh=rJb4ar78moHg29UPU5USB46gFHse91i4J5qniDxEwO0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ZouP1lBJ7W4k9s8O0k/UQr8qP7fvgfox/rtwt7vsY2EthEcO5CgLW+E5pqiTq8lSw
+ rwU9gdcQ2FAEPjdIejApQj/IKH/cT1y5Rx3N/0Gpc0BckPRQbV0jW8/yzLZ4n6g0KB
+ MaTUzoczmsUueATv69FAJwiKTNZivbD0LbfsgVZy8WU1FwE8ZZuS7B1iM062s6Y1NA
+ CFq3jmgexXr1fhWf0pnN8Kagke/wlONnlBkKL3uFAJ6vGLDXJuo2G9hSWRGQHG/rvK
+ YXVAnX8PxxQbKvJZPf6AIVUFy8bhxnm04CRnGBmCR/V5ABhihlnFn5aSDCX2sUx193
+ RryCLBqQTiMBQ==
+To: jaegeuk@kernel.org
+Date: Mon, 12 May 2025 14:59:22 +0800
+Message-ID: <20250512065922.2565055-1-chao@kernel.org>
+X-Mailer: git-send-email 2.49.0.1015.ga840276032-goog
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jianan Huang <huangjianan@xiaomi.com>, jaegeuk@kernel.org
-References: <20250512033359.304795-1-huangjianan@xiaomi.com>
-Content-Language: en-US
-In-Reply-To: <20250512033359.304795-1-huangjianan@xiaomi.com>
-X-Spam-Score: -3.9 (---)
+X-Spam-Score: -1.6 (-)
 X-Spam-Report: Spam detection software, running on the system "6901ab67b84d", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 5/12/25 11:33, Jianan Huang wrote: > Signed-off-by: Jianan
- Huang <huangjianan@xiaomi.com> Reviewed-by: Chao Yu <chao@kernel.org> Thanks, 
- Content analysis details:   (-3.9 points, 5.0 required)
+ Content preview:  nl6720 reported in [1], mkfs.f2fs doesn't report block size, 
+ instead, it prints sector size which is not used inside f2fs. Let's print
+ block size as well during mkfs as below: output of mkfs.f2fs: Info: sector
+ size = 512 Info: total sectors = 16777216 (8192 MB) Info: block size = 4096
+ Content analysis details:   (-1.6 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -92,8 +89,8 @@ X-Spam-Report: Spam detection software, running on the system "6901ab67b84d",
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uEKNX-0000Dn-QP
-Subject: Re: [f2fs-dev] [PATCH] f2fs_io: print errno for flag operations
+X-Headers-End: 1uEN8S-0001Ue-2z
+Subject: [f2fs-dev] [PATCH] libf2fs: print block size
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,17 +104,45 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: wanghui33@xiaomi.com, linux-f2fs-devel@lists.sourceforge.net
+Cc: nl6720 <devnull@nl6720.me>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 5/12/25 11:33, Jianan Huang wrote:
-> Signed-off-by: Jianan Huang <huangjianan@xiaomi.com>
+nl6720 reported in [1], mkfs.f2fs doesn't report block size, instead,
+it prints sector size which is not used inside f2fs. Let's print block
+size as well during mkfs as below:
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+output of mkfs.f2fs:
 
-Thanks,
+Info: sector size = 512
+Info: total sectors = 16777216 (8192 MB)
+Info: block size = 4096
+
+[1] https://lore.kernel.org/linux-f2fs-devel/20250425013623.918150-1-devnull@nl6720.me
+
+Reported-by: nl6720 <devnull@nl6720.me>
+Closes: https://github.com/jaegeuk/f2fs-tools/issues/29
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ lib/libf2fs.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+index d2579d7..40c974d 100644
+--- a/lib/libf2fs.c
++++ b/lib/libf2fs.c
+@@ -1375,6 +1375,7 @@ int f2fs_get_f2fs_info(void)
+ 	MSG(0, "Info: total sectors = %"PRIu64" (%"PRIu64" MB)\n",
+ 				c.total_sectors, (c.total_sectors *
+ 					(c.sector_size >> 9)) >> 11);
++	MSG(0, "Info: block size = %u\n", c.blksize);
+ 	return 0;
+ }
+ 
+-- 
+2.49.0
+
 
 
 _______________________________________________
