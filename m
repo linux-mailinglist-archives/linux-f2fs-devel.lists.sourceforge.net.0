@@ -2,70 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4EA1ABA1EB
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 May 2025 19:35:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 41056ABB35E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 May 2025 04:38:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=+X1d6JbJKZ8JZHy5NXPq41e9Nx+FKfRwztqr65xCB1U=; b=U6CtyKDwfQjXqaJwkf2FCCdyCN
-	yLSGMuF8tzWKPotCx5+Ro8IfHJPxz8SN9ZQGgpCMmZzKmkASgkON5V4oidp7RI/eQWk4hLP8Zlxgm
-	qLqfzQsYDjq3fqjFY95WC7d31Meu9nsrs+AnpC7H1/YWAP7YR3cO9iiksNuiWywCB+Ks=;
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=y3EQmnP5nrXQJrzt3qms5ZAhjeuhcZTmd0mMwRwKSwg=; b=gzZLRxA3eAaS+NGZHcNan46HT4
+	pneunBE9BRNKlCa0CGjxhXvGuhlZG9rNrKWEIPUenRNxyxAUPboeUGb9/P9qpDEhC61F8dq8qpEiG
+	pcVEI490MxQFQKCw4GgWcu6Zod0ynTDfz+hBkJ/Dq5PganLzgoekma436VQBJzSKbwOs=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uFyyD-0006F4-Jt;
-	Fri, 16 May 2025 17:35:41 +0000
+	id 1uGqOs-00058H-NY;
+	Mon, 19 May 2025 02:38:46 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1uFyyB-0006Ex-Mt
+ (envelope-from <lihongbo22@huawei.com>) id 1uGqOq-00058B-N9
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 16 May 2025 17:35:39 +0000
+ Mon, 19 May 2025 02:38:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:CC:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dmxLVFEVWqWGNeFgsMC/7Qoz6LMTdjW/N+ZC8DjxLNY=; b=gpnZksmjS2GLoWRsvRb+U1l1O4
- CsRYsoPAADF1KYW/cRmtS+tEAkk5sjRiyerXoER7hx4EUoPCvzMxPh+gP7fHSBarBhiTO9fpSUwND
- tu95vCItoIBP5TgkRJKIK0pzNQdF3OvyX93SZQF55RYfGXURhI13nsqLpfXfaWyXnMh8=;
+ bh=SFCxU4k8hxukukPoXM18EkCrER+UuT1h2fCNJjsYCGI=; b=PsSQ6NYqw4NiLWcn643m8PUBwB
+ NqoopWp20R+5t8IGFUMtdko08FDCFwKh+WHQfXskMXsGfmyfEF+UTtJMJ4Dm6D1p8FcHVVPRoITCY
+ QKCTW0Jq2Wd5JgxU8isxpUxE7ZygWlvUouP+31E2DJezQclHYVhQwv/7B072aOuPb3hk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:CC:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dmxLVFEVWqWGNeFgsMC/7Qoz6LMTdjW/N+ZC8DjxLNY=; b=itkmRPFCahmKJ6w9ctnxLyFxzp
- ED0KKLyKo7UGRq6HEWh8bYP04livDkCFGKM4BAPEKYhBS1vl7xlCsXuqCT6dFiUrFTihz1u4Ehe06
- p06nC2VJmLEYzb3URzKICauOSyhu48JWaIrwsIcMIiqWOjCMbnElOpvA6KnEarLNmSHw=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=SFCxU4k8hxukukPoXM18EkCrER+UuT1h2fCNJjsYCGI=; b=duYlxi/laZSrVU33QHWmREg7pt
+ c1JgCkwZXfDZ5OVBvJeg1rlBVFuql091fJaj4IU8EF8wwsstOJQb+1p1HxkhX3d9aH2MkMX7E44rN
+ GyBYUdLRIFYAX/nPd8mKHh4YWGhLPRRTIubE7VtnseTUc5rp6rjP+NkMOHoDsSzUSBMI=;
+Received: from szxga05-in.huawei.com ([45.249.212.191])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uFyyA-0003YR-IE for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 16 May 2025 17:35:39 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id AD5B9A4C519;
- Fri, 16 May 2025 17:35:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06FADC4CEE4;
- Fri, 16 May 2025 17:35:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747416932;
- bh=MPTekxGp1fJB0qA5+SBiPb0jqUXH8X7HX6LExy+cHFc=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Cwvj3VD8e/alOnRN0tnbaGzel+7m032NProVyuNMKgq/8BldGo+Dj0dA4YWfis6Et
- gk5Fbgy9jBeSl6Dn4WFQupbdotDYNPPMlxBH4OvOYr+0bgZP67Gq7ArdPm+yAfoVZe
- QZKLS2Sv0y3LXwPHT9MU3fx6AL2Fhet4gYXRlJH2r1xC5KsZRBgaATEXV08Bx9rEFR
- 1hj1Mdjg4OQg5maRuu2Jh77M1HlDBRVI2JqXDTwH9vMVLgCY5Vkm+CwazrOKo5npTa
- cs/+SfnzyxS3xv3wLvcsVpgN7lA0my0+cWHM7sBkhCLnk3NhjlFXukhDoEfYU3Tc0I
- 3nTTyVzWUaQNw==
-Date: Fri, 16 May 2025 17:35:30 +0000
-To: Hongbo Li <lihongbo22@huawei.com>
-Message-ID: <aCd3YoPS_wm2dcff@google.com>
+ id 1uGqOo-00047s-2Q for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 May 2025 02:38:44 +0000
+Received: from mail.maildlp.com (unknown [172.19.88.234])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4b11yp2jcTz1R7M0;
+ Mon, 19 May 2025 10:36:18 +0800 (CST)
+Received: from kwepemo500009.china.huawei.com (unknown [7.202.194.199])
+ by mail.maildlp.com (Postfix) with ESMTPS id 889511400D2;
+ Mon, 19 May 2025 10:38:29 +0800 (CST)
+Received: from [10.67.111.104] (10.67.111.104) by
+ kwepemo500009.china.huawei.com (7.202.194.199) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Mon, 19 May 2025 10:38:29 +0800
+Message-ID: <ba636c8d-f612-4afc-813a-8bf0e9e602b3@huawei.com>
+Date: Mon, 19 May 2025 10:38:28 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20250423170926.76007-1-sandeen@redhat.com>
  <20250423170926.76007-8-sandeen@redhat.com>
  <ff2c9a74-f359-4bcc-9792-46af946c70ad@kernel.org>
@@ -74,32 +71,40 @@ References: <20250423170926.76007-1-sandeen@redhat.com>
  <2ea178cb-1ed3-40ba-8dc6-8fa3bff06850@huawei.com>
  <aCS3LZ3IOMgiissx@google.com>
  <ceeb4951-ee88-4cae-b20a-8c06edf2bfc3@huawei.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <ceeb4951-ee88-4cae-b20a-8c06edf2bfc3@huawei.com>
-X-Spam-Score: -3.9 (---)
-X-Spam-Report: Spam detection software, running on the system "6901ab67b84d", 
+ <aCd3YoPS_wm2dcff@google.com>
+Content-Language: en-US
+In-Reply-To: <aCd3YoPS_wm2dcff@google.com>
+X-Originating-IP: [10.67.111.104]
+X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
+ kwepemo500009.china.huawei.com (7.202.194.199)
+X-Spam-Score: -2.3 (--)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 05/16, Hongbo Li wrote: > > > On 2025/5/14 23:30, Jaegeuk
- Kim wrote: > > Hi, Hongbo, > > > > It seems we're getting more issues in
- the patch set. May I ask for some > > help sending the new patch s [...] 
- Content analysis details:   (-3.9 points, 5.0 required)
+ Content preview:  On 2025/5/17 1:35, Jaegeuk Kim wrote: > On 05/16, Hongbo Li
+ wrote: >> >> >> On 2025/5/14 23:30, Jaegeuk Kim wrote: >>> Hi, Hongbo, >>>
+ >>> It seems we're getting more issues in the patch set. May I as [...] 
+ Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [45.249.212.191 listed in sa-trusted.bondedsender.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [45.249.212.191 listed in bl.score.senderscore.com]
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [147.75.193.91 listed in list.dnswl.org]
- -1.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uFyyA-0003YR-IE
+ medium trust [45.249.212.191 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+X-Headers-End: 1uGqOo-00047s-2Q
 Subject: Re: [f2fs-dev] [PATCH V3 7/7] f2fs: switch to the new mount api
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -112,571 +117,357 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
+From: Hongbo Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Hongbo Li <lihongbo22@huawei.com>
 Cc: linux-fsdevel@vger.kernel.org, Eric Sandeen <sandeen@redhat.com>,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/16, Hongbo Li wrote:
-> =
-
-> =
-
-> On 2025/5/14 23:30, Jaegeuk Kim wrote:
-> > Hi, Hongbo,
-> > =
-
-> > It seems we're getting more issues in the patch set. May I ask for some
-> > help sending the new patch series having all the fixes that I made as w=
-ell
-> > as addressing the concerns? You can get the patches from [1].
-> > =
-
-> > [1] https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/lo=
-g/?h=3Ddev-test
-> > =
-
-> =
-
-> Hi, Jaegeuk
-> =
-
-> I will discuss these issues with Eric. It may take some time, but not too
-> long. When we send the next version, should we resend this patch series
-> based on dev-test after modifying the code, only removing your S-O-B?
-> (You'll ultimately add your S-O-B back yourself)
-
-Hi Hongbo,
-
-Thank you for this hard work. Could you please resend the entire patch-set =
-based
-on dev-test w/o my SOB? I'm going to dequeue the series from dev-test. Inst=
-ead,
-I rebased the latest version onto [2].
-
-Please also consider another report, [1].
-
-[1] https://lore.kernel.org/linux-f2fs-devel/2f16981b-0e13-4c64-83a8-d0e0b4=
-297348@suswa.mountain/T/#u
-[2] https://github.com/jaegeuk/f2fs/commits/mount/
-
-> =
-
-> Thanks,
-> Hongbo
-> =
-
-> > On 05/14, Hongbo Li wrote:
-> > > =
-
-> > > =
-
-> > > On 2025/5/14 12:03, Chao Yu wrote:
-> > > > On 5/14/25 10:33, Hongbo Li wrote:
-> > > > > =
-
-> > > > > =
-
-> > > > > On 2025/5/13 16:59, Chao Yu wrote:
-> > > > > > On 4/24/25 01:08, Eric Sandeen wrote:
-> > > > > > > From: Hongbo Li <lihongbo22@huawei.com>
-> > > > > > > =
-
-> > > > > > > The new mount api will execute .parse_param, .init_fs_context=
-, .get_tree
-> > > > > > > and will call .remount if remount happened. So we add the nec=
-essary
-> > > > > > > functions for the fs_context_operations. If .init_fs_context =
-is added,
-> > > > > > > the old .mount should remove.
-> > > > > > > =
-
-> > > > > > > See Documentation/filesystems/mount_api.rst for more informat=
-ion.
-> > > > > > =
-
-> > > > > > mkfs.f2fs -f -O extra_attr,flexible_inline_xattr /dev/vdb
-> > > > > > mount -o inline_xattr_size=3D512 /dev/vdb /mnt/f2fs
-> > > > > > mount: /mnt/f2fs: wrong fs type, bad option, bad superblock on =
-/dev/vdb, missing codepage or helper program, or other error.
-> > > > > >   =A0=A0=A0=A0=A0=A0=A0 dmesg(1) may have more information afte=
-r failed mount system call.
-> > > > > > dmesg
-> > > > > > [ 1758.202282] F2FS-fs (vdb): Image doesn't support compression
-> > > > > > [ 1758.202286] F2FS-fs (vdb): inline_xattr_size option should b=
-e set with inline_xattr option
-> > > > > > =
-
-> > > > > > Eric, Hongbo, can you please take a look at this issue?
-> > > > > > =
-
-> > > > > Sorry, we only check the option hold in ctx, we should do the dou=
-ble check in sbi. Or other elegant approaches.
-> > > > > =
-
-> > > > > For the "support compression", is it also the error in this testc=
-ase?
-> > > > =
-
-> > > > I think so, I checked this w/ additional logs, and found this:
-> > > > =
-
-> > > > #define F2FS_MOUNT_INLINE_XATTR_SIZE	0x00080000
-> > > > #define F2FS_SPEC_compress_chksum		(1 << 19) /* equal to 0x00080000)
-> > > > =
-
-> > > > 	if (!f2fs_sb_has_compression(sbi)) {
-> > > > 		if (test_compression_spec(ctx->opt_mask) ||
-> > > > 			ctx_test_opt(ctx, F2FS_MOUNT_COMPRESS_CACHE))
-> > > > 			f2fs_info(sbi, "Image doesn't support compression");
-> > > > 		clear_compression_spec(ctx);
-> > > > 		ctx->opt_mask &=3D ~F2FS_MOUNT_COMPRESS_CACHE;
-> > > > 		return 0;
-> > > > 	}
-> > > > =
-
-> > > > We should use test_compression_spec(ctx->spec_mask) instead of
-> > > > test_compression_spec(ctx->opt_mask) to check special mask of compr=
-ession
-> > > > option?
-> > > > =
-
-> > > =
-
-> > > Yeah, you're right. test_compression_spec is used to check spec_mask,=
- and we
-> > > got it wrong.
-> > > =
-
-> > > Thanks,
-> > > Hongbo
-> > > =
-
-> > > > Thanks,
-> > > > =
-
-> > > > > =
-
-> > > > > Thanks,
-> > > > > Hongbo
-> > > > > =
-
-> > > > > > Thanks,
-> > > > > > =
-
-> > > > > > > =
-
-> > > > > > > Signed-off-by: Hongbo Li <lihongbo22@huawei.com>
-> > > > > > > [sandeen: forward port]
-> > > > > > > Signed-off-by: Eric Sandeen <sandeen@redhat.com>
-> > > > > > > ---
-> > > > > > >   =A0 fs/f2fs/super.c | 156 +++++++++++++++++++--------------=
----------------
-> > > > > > >   =A0 1 file changed, 62 insertions(+), 94 deletions(-)
-> > > > > > > =
-
-> > > > > > > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> > > > > > > index 37497fd80bb9..041bd6c482a0 100644
-> > > > > > > --- a/fs/f2fs/super.c
-> > > > > > > +++ b/fs/f2fs/super.c
-> > > > > > > @@ -1141,47 +1141,6 @@ static int f2fs_parse_param(struct fs_=
-context *fc, struct fs_parameter *param)
-> > > > > > >   =A0=A0=A0=A0=A0 return 0;
-> > > > > > >   =A0 }
-> > > > > > >   =A0 -static int parse_options(struct fs_context *fc, char *=
-options)
-> > > > > > > -{
-> > > > > > > -=A0=A0=A0 struct fs_parameter param;
-> > > > > > > -=A0=A0=A0 char *key;
-> > > > > > > -=A0=A0=A0 int ret;
-> > > > > > > -
-> > > > > > > -=A0=A0=A0 if (!options)
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0 return 0;
-> > > > > > > -
-> > > > > > > -=A0=A0=A0 while ((key =3D strsep(&options, ",")) !=3D NULL) {
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0 if (*key) {
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 size_t v_len =3D 0;
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 char *value =3D strchr(key=
-, '=3D');
-> > > > > > > -
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 param.type =3D fs_value_is=
-_flag;
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 param.string =3D NULL;
-> > > > > > > -
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (value) {
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (value =3D=
-=3D key)
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 co=
-ntinue;
-> > > > > > > -
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 *value++ =3D 0;
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 v_len =3D strl=
-en(value);
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 param.string =
-=3D kmemdup_nul(value, v_len, GFP_KERNEL);
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (!param.str=
-ing)
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 re=
-turn -ENOMEM;
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 param.type =3D=
- fs_value_is_string;
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 }
-> > > > > > > -
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 param.key =3D key;
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 param.size =3D v_len;
-> > > > > > > -
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 ret =3D f2fs_parse_param(f=
-c, &param);
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 kfree(param.string);
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (ret < 0)
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 return ret;
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0 }
-> > > > > > > -=A0=A0=A0 }
-> > > > > > > -=A0=A0=A0 return 0;
-> > > > > > > -}
-> > > > > > > -
-> > > > > > >   =A0 /*
-> > > > > > >   =A0=A0 * Check quota settings consistency.
-> > > > > > >   =A0=A0 */
-> > > > > > > @@ -2583,13 +2542,12 @@ static void f2fs_enable_checkpoint(st=
-ruct f2fs_sb_info *sbi)
-> > > > > > >   =A0=A0=A0=A0=A0 f2fs_flush_ckpt_thread(sbi);
-> > > > > > >   =A0 }
-> > > > > > >   =A0 -static int f2fs_remount(struct super_block *sb, int *f=
-lags, char *data)
-> > > > > > > +static int __f2fs_remount(struct fs_context *fc, struct supe=
-r_block *sb)
-> > > > > > >   =A0 {
-> > > > > > >   =A0=A0=A0=A0=A0 struct f2fs_sb_info *sbi =3D F2FS_SB(sb);
-> > > > > > >   =A0=A0=A0=A0=A0 struct f2fs_mount_info org_mount_opt;
-> > > > > > > -=A0=A0=A0 struct f2fs_fs_context ctx;
-> > > > > > > -=A0=A0=A0 struct fs_context fc;
-> > > > > > >   =A0=A0=A0=A0=A0 unsigned long old_sb_flags;
-> > > > > > > +=A0=A0=A0 unsigned int flags =3D fc->sb_flags;
-> > > > > > >   =A0=A0=A0=A0=A0 int err;
-> > > > > > >   =A0=A0=A0=A0=A0 bool need_restart_gc =3D false, need_stop_g=
-c =3D false;
-> > > > > > >   =A0=A0=A0=A0=A0 bool need_restart_flush =3D false, need_sto=
-p_flush =3D false;
-> > > > > > > @@ -2635,7 +2593,7 @@ static int f2fs_remount(struct super_bl=
-ock *sb, int *flags, char *data)
-> > > > > > >   =A0 #endif
-> > > > > > >   =A0 =A0=A0=A0=A0=A0 /* recover superblocks we couldn't writ=
-e due to previous RO mount */
-> > > > > > > -=A0=A0=A0 if (!(*flags & SB_RDONLY) && is_sbi_flag_set(sbi, =
-SBI_NEED_SB_WRITE)) {
-> > > > > > > +=A0=A0=A0 if (!(flags & SB_RDONLY) && is_sbi_flag_set(sbi, S=
-BI_NEED_SB_WRITE)) {
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 err =3D f2fs_commit_super(sbi, =
-false);
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 f2fs_info(sbi, "Try to recover =
-all the superblocks, ret: %d",
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 err);
-> > > > > > > @@ -2645,21 +2603,11 @@ static int f2fs_remount(struct super_=
-block *sb, int *flags, char *data)
-> > > > > > >   =A0 =A0=A0=A0=A0=A0 default_options(sbi, true);
-> > > > > > >   =A0 -=A0=A0=A0 memset(&fc, 0, sizeof(fc));
-> > > > > > > -=A0=A0=A0 memset(&ctx, 0, sizeof(ctx));
-> > > > > > > -=A0=A0=A0 fc.fs_private =3D &ctx;
-> > > > > > > -=A0=A0=A0 fc.purpose =3D FS_CONTEXT_FOR_RECONFIGURE;
-> > > > > > > -
-> > > > > > > -=A0=A0=A0 /* parse mount options */
-> > > > > > > -=A0=A0=A0 err =3D parse_options(&fc, data);
-> > > > > > > -=A0=A0=A0 if (err)
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0 goto restore_opts;
-> > > > > > > -
-> > > > > > > -=A0=A0=A0 err =3D f2fs_check_opt_consistency(&fc, sb);
-> > > > > > > +=A0=A0=A0 err =3D f2fs_check_opt_consistency(fc, sb);
-> > > > > > >   =A0=A0=A0=A0=A0 if (err < 0)
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 goto restore_opts;
-> > > > > > >   =A0 -=A0=A0=A0 f2fs_apply_options(&fc, sb);
-> > > > > > > +=A0=A0=A0 f2fs_apply_options(fc, sb);
-> > > > > > >   =A0 =A0 #ifdef CONFIG_BLK_DEV_ZONED
-> > > > > > >   =A0=A0=A0=A0=A0 if (f2fs_sb_has_blkzoned(sbi) &&
-> > > > > > > @@ -2678,20 +2626,20 @@ static int f2fs_remount(struct super_=
-block *sb, int *flags, char *data)
-> > > > > > >   =A0=A0=A0=A0=A0=A0 * Previous and new state of filesystem i=
-s RO,
-> > > > > > >   =A0=A0=A0=A0=A0=A0 * so skip checking GC and FLUSH_MERGE co=
-nditions.
-> > > > > > >   =A0=A0=A0=A0=A0=A0 */
-> > > > > > > -=A0=A0=A0 if (f2fs_readonly(sb) && (*flags & SB_RDONLY))
-> > > > > > > +=A0=A0=A0 if (f2fs_readonly(sb) && (flags & SB_RDONLY))
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 goto skip;
-> > > > > > >   =A0 -=A0=A0=A0 if (f2fs_dev_is_readonly(sbi) && !(*flags & =
-SB_RDONLY)) {
-> > > > > > > +=A0=A0=A0 if (f2fs_dev_is_readonly(sbi) && !(flags & SB_RDON=
-LY)) {
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 err =3D -EROFS;
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 goto restore_opts;
-> > > > > > >   =A0=A0=A0=A0=A0 }
-> > > > > > >   =A0 =A0 #ifdef CONFIG_QUOTA
-> > > > > > > -=A0=A0=A0 if (!f2fs_readonly(sb) && (*flags & SB_RDONLY)) {
-> > > > > > > +=A0=A0=A0 if (!f2fs_readonly(sb) && (flags & SB_RDONLY)) {
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 err =3D dquot_suspend(sb, -1);
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 if (err < 0)
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 goto restore_opts;
-> > > > > > > -=A0=A0=A0 } else if (f2fs_readonly(sb) && !(*flags & SB_RDON=
-LY)) {
-> > > > > > > +=A0=A0=A0 } else if (f2fs_readonly(sb) && !(flags & SB_RDONL=
-Y)) {
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 /* dquot_resume needs RW */
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 sb->s_flags &=3D ~SB_RDONLY;
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 if (sb_any_quota_suspended(sb))=
- {
-> > > > > > > @@ -2747,7 +2695,7 @@ static int f2fs_remount(struct super_bl=
-ock *sb, int *flags, char *data)
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 goto restore_opts;
-> > > > > > >   =A0=A0=A0=A0=A0 }
-> > > > > > >   =A0 -=A0=A0=A0 if ((*flags & SB_RDONLY) && test_opt(sbi, DI=
-SABLE_CHECKPOINT)) {
-> > > > > > > +=A0=A0=A0 if ((flags & SB_RDONLY) && test_opt(sbi, DISABLE_C=
-HECKPOINT)) {
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 err =3D -EINVAL;
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 f2fs_warn(sbi, "disabling check=
-point not compatible with read-only");
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 goto restore_opts;
-> > > > > > > @@ -2758,7 +2706,7 @@ static int f2fs_remount(struct super_bl=
-ock *sb, int *flags, char *data)
-> > > > > > >   =A0=A0=A0=A0=A0=A0 * or if background_gc =3D off is passed =
-in mount
-> > > > > > >   =A0=A0=A0=A0=A0=A0 * option. Also sync the filesystem.
-> > > > > > >   =A0=A0=A0=A0=A0=A0 */
-> > > > > > > -=A0=A0=A0 if ((*flags & SB_RDONLY) ||
-> > > > > > > +=A0=A0=A0 if ((flags & SB_RDONLY) ||
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 (F2FS_OPTION(sbi).b=
-ggc_mode =3D=3D BGGC_MODE_OFF &&
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 !test_opt(sbi, GC_M=
-ERGE))) {
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 if (sbi->gc_thread) {
-> > > > > > > @@ -2772,7 +2720,7 @@ static int f2fs_remount(struct super_bl=
-ock *sb, int *flags, char *data)
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 need_stop_gc =3D true;
-> > > > > > >   =A0=A0=A0=A0=A0 }
-> > > > > > >   =A0 -=A0=A0=A0 if (*flags & SB_RDONLY) {
-> > > > > > > +=A0=A0=A0 if (flags & SB_RDONLY) {
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 sync_inodes_sb(sb);
-> > > > > > >   =A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0 set_sbi_flag(sbi, SBI_IS_DI=
-RTY);
-> > > > > > > @@ -2785,7 +2733,7 @@ static int f2fs_remount(struct super_bl=
-ock *sb, int *flags, char *data)
-> > > > > > >   =A0=A0=A0=A0=A0=A0 * We stop issue flush thread if FS is mo=
-unted as RO
-> > > > > > >   =A0=A0=A0=A0=A0=A0 * or if flush_merge is not passed in mou=
-nt option.
-> > > > > > >   =A0=A0=A0=A0=A0=A0 */
-> > > > > > > -=A0=A0=A0 if ((*flags & SB_RDONLY) || !test_opt(sbi, FLUSH_M=
-ERGE)) {
-> > > > > > > +=A0=A0=A0 if ((flags & SB_RDONLY) || !test_opt(sbi, FLUSH_ME=
-RGE)) {
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 clear_opt(sbi, FLUSH_MERGE);
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 f2fs_destroy_flush_cmd_control(=
-sbi, false);
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 need_restart_flush =3D true;
-> > > > > > > @@ -2827,7 +2775,7 @@ static int f2fs_remount(struct super_bl=
-ock *sb, int *flags, char *data)
-> > > > > > >   =A0=A0=A0=A0=A0=A0 * triggered while remount and we need to=
- take care of it before
-> > > > > > >   =A0=A0=A0=A0=A0=A0 * returning from remount.
-> > > > > > >   =A0=A0=A0=A0=A0=A0 */
-> > > > > > > -=A0=A0=A0 if ((*flags & SB_RDONLY) || test_opt(sbi, DISABLE_=
-CHECKPOINT) ||
-> > > > > > > +=A0=A0=A0 if ((flags & SB_RDONLY) || test_opt(sbi, DISABLE_C=
-HECKPOINT) ||
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 !test_opt(sbi, MERG=
-E_CHECKPOINT)) {
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 f2fs_stop_ckpt_thread(sbi);
-> > > > > > >   =A0=A0=A0=A0=A0 } else {
-> > > > > > > @@ -2854,7 +2802,7 @@ static int f2fs_remount(struct super_bl=
-ock *sb, int *flags, char *data)
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 (test_opt(sbi, POSIX_ACL) ? SB_=
-POSIXACL : 0);
-> > > > > > >   =A0 =A0=A0=A0=A0=A0 limit_reserve_root(sbi);
-> > > > > > > -=A0=A0=A0 *flags =3D (*flags & ~SB_LAZYTIME) | (sb->s_flags =
-& SB_LAZYTIME);
-> > > > > > > +=A0=A0=A0 fc->sb_flags =3D (flags & ~SB_LAZYTIME) | (sb->s_f=
-lags & SB_LAZYTIME);
-> > > > > > >   =A0 =A0=A0=A0=A0=A0 sbi->umount_lock_holder =3D NULL;
-> > > > > > >   =A0=A0=A0=A0=A0 return 0;
-> > > > > > > @@ -3523,7 +3471,6 @@ static const struct super_operations f2=
-fs_sops =3D {
-> > > > > > >   =A0=A0=A0=A0=A0 .freeze_fs=A0=A0=A0 =3D f2fs_freeze,
-> > > > > > >   =A0=A0=A0=A0=A0 .unfreeze_fs=A0=A0=A0 =3D f2fs_unfreeze,
-> > > > > > >   =A0=A0=A0=A0=A0 .statfs=A0=A0=A0=A0=A0=A0=A0 =3D f2fs_statf=
-s,
-> > > > > > > -=A0=A0=A0 .remount_fs=A0=A0=A0 =3D f2fs_remount,
-> > > > > > >   =A0=A0=A0=A0=A0 .shutdown=A0=A0=A0 =3D f2fs_shutdown,
-> > > > > > >   =A0 };
-> > > > > > >   =A0 @@ -4745,16 +4692,13 @@ static void f2fs_tuning_paramet=
-ers(struct f2fs_sb_info *sbi)
-> > > > > > >   =A0=A0=A0=A0=A0 sbi->readdir_ra =3D true;
-> > > > > > >   =A0 }
-> > > > > > >   =A0 -static int f2fs_fill_super(struct super_block *sb, voi=
-d *data, int silent)
-> > > > > > > +static int f2fs_fill_super(struct super_block *sb, struct fs=
-_context *fc)
-> > > > > > >   =A0 {
-> > > > > > >   =A0=A0=A0=A0=A0 struct f2fs_sb_info *sbi;
-> > > > > > >   =A0=A0=A0=A0=A0 struct f2fs_super_block *raw_super;
-> > > > > > > -=A0=A0=A0 struct f2fs_fs_context ctx;
-> > > > > > > -=A0=A0=A0 struct fs_context fc;
-> > > > > > >   =A0=A0=A0=A0=A0 struct inode *root;
-> > > > > > >   =A0=A0=A0=A0=A0 int err;
-> > > > > > >   =A0=A0=A0=A0=A0 bool skip_recovery =3D false, need_fsck =3D=
- false;
-> > > > > > > -=A0=A0=A0 char *options =3D NULL;
-> > > > > > >   =A0=A0=A0=A0=A0 int recovery, i, valid_super_block;
-> > > > > > >   =A0=A0=A0=A0=A0 struct curseg_info *seg_i;
-> > > > > > >   =A0=A0=A0=A0=A0 int retry_cnt =3D 1;
-> > > > > > > @@ -4767,9 +4711,6 @@ static int f2fs_fill_super(struct super=
-_block *sb, void *data, int silent)
-> > > > > > >   =A0=A0=A0=A0=A0 raw_super =3D NULL;
-> > > > > > >   =A0=A0=A0=A0=A0 valid_super_block =3D -1;
-> > > > > > >   =A0=A0=A0=A0=A0 recovery =3D 0;
-> > > > > > > -=A0=A0=A0 memset(&fc, 0, sizeof(fc));
-> > > > > > > -=A0=A0=A0 memset(&ctx, 0, sizeof(ctx));
-> > > > > > > -=A0=A0=A0 fc.fs_private =3D &ctx;
-> > > > > > >   =A0 =A0=A0=A0=A0=A0 /* allocate memory for f2fs-specific su=
-per block info */
-> > > > > > >   =A0=A0=A0=A0=A0 sbi =3D kzalloc(sizeof(struct f2fs_sb_info)=
-, GFP_KERNEL);
-> > > > > > > @@ -4820,22 +4761,12 @@ static int f2fs_fill_super(struct sup=
-er_block *sb, void *data, int silent)
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0 sizeof(raw_super->uuid));
-> > > > > > >   =A0 =A0=A0=A0=A0=A0 default_options(sbi, false);
-> > > > > > > -=A0=A0=A0 /* parse mount options */
-> > > > > > > -=A0=A0=A0 options =3D kstrdup((const char *)data, GFP_KERNEL=
-);
-> > > > > > > -=A0=A0=A0 if (data && !options) {
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0 err =3D -ENOMEM;
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0 goto free_sb_buf;
-> > > > > > > -=A0=A0=A0 }
-> > > > > > > -
-> > > > > > > -=A0=A0=A0 err =3D parse_options(&fc, options);
-> > > > > > > -=A0=A0=A0 if (err)
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0 goto free_options;
-> > > > > > >   =A0 -=A0=A0=A0 err =3D f2fs_check_opt_consistency(&fc, sb);
-> > > > > > > +=A0=A0=A0 err =3D f2fs_check_opt_consistency(fc, sb);
-> > > > > > >   =A0=A0=A0=A0=A0 if (err < 0)
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0 goto free_options;
-> > > > > > > +=A0=A0=A0=A0=A0=A0=A0 goto free_sb_buf;
-> > > > > > >   =A0 -=A0=A0=A0 f2fs_apply_options(&fc, sb);
-> > > > > > > +=A0=A0=A0 f2fs_apply_options(fc, sb);
-> > > > > > >   =A0 =A0=A0=A0=A0=A0 sb->s_maxbytes =3D max_file_blocks(NULL=
-) <<
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 le32_to=
-_cpu(raw_super->log_blocksize);
-> > > > > > > @@ -5160,7 +5091,6 @@ static int f2fs_fill_super(struct super=
-_block *sb, void *data, int silent)
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 if (err)
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 goto sync_free_meta;
-> > > > > > >   =A0=A0=A0=A0=A0 }
-> > > > > > > -=A0=A0=A0 kvfree(options);
-> > > > > > >   =A0 =A0=A0=A0=A0=A0 /* recover broken superblock */
-> > > > > > >   =A0=A0=A0=A0=A0 if (recovery) {
-> > > > > > > @@ -5255,7 +5185,6 @@ static int f2fs_fill_super(struct super=
-_block *sb, void *data, int silent)
-> > > > > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0 kfree(F2FS_OPTION(sbi).s_qf_nam=
-es[i]);
-> > > > > > >   =A0 #endif
-> > > > > > >   =A0=A0=A0=A0=A0 fscrypt_free_dummy_policy(&F2FS_OPTION(sbi)=
-.dummy_enc_policy);
-> > > > > > > -=A0=A0=A0 kvfree(options);
-> > > > > > >   =A0 free_sb_buf:
-> > > > > > >   =A0=A0=A0=A0=A0 kfree(raw_super);
-> > > > > > >   =A0 free_sbi:
-> > > > > > > @@ -5271,14 +5200,39 @@ static int f2fs_fill_super(struct sup=
-er_block *sb, void *data, int silent)
-> > > > > > >   =A0=A0=A0=A0=A0 return err;
-> > > > > > >   =A0 }
-> > > > > > >   =A0 -static struct dentry *f2fs_mount(struct file_system_ty=
-pe *fs_type, int flags,
-> > > > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 const char *dev_name, void=
- *data)
-> > > > > > > +static int f2fs_get_tree(struct fs_context *fc)
-> > > > > > >   =A0 {
-> > > > > > > -=A0=A0=A0 return mount_bdev(fs_type, flags, dev_name, data, =
-f2fs_fill_super);
-> > > > > > > +=A0=A0=A0 return get_tree_bdev(fc, f2fs_fill_super);
-> > > > > > > +}
-> > > > > > > +
-> > > > > > > +static int f2fs_reconfigure(struct fs_context *fc)
-> > > > > > > +{
-> > > > > > > +=A0=A0=A0 struct super_block *sb =3D fc->root->d_sb;
-> > > > > > > +
-> > > > > > > +=A0=A0=A0 return __f2fs_remount(fc, sb);
-> > > > > > > +}
-> > > > > > > +
-> > > > > > > +static void f2fs_fc_free(struct fs_context *fc)
-> > > > > > > +{
-> > > > > > > +=A0=A0=A0 struct f2fs_fs_context *ctx =3D fc->fs_private;
-> > > > > > > +=A0=A0=A0 int i;
-> > > > > > > +
-> > > > > > > +=A0=A0=A0 if (!ctx)
-> > > > > > > +=A0=A0=A0=A0=A0=A0=A0 return;
-> > > > > > > +
-> > > > > > > +#ifdef CONFIG_QUOTA
-> > > > > > > +=A0=A0=A0 for (i =3D 0; i < MAXQUOTAS; i++)
-> > > > > > > +=A0=A0=A0=A0=A0=A0=A0 kfree(F2FS_CTX_INFO(ctx).s_qf_names[i]=
-);
-> > > > > > > +#endif
-> > > > > > > +=A0=A0=A0 fscrypt_free_dummy_policy(&F2FS_CTX_INFO(ctx).dumm=
-y_enc_policy);
-> > > > > > > +=A0=A0=A0 kfree(ctx);
-> > > > > > >   =A0 }
-> > > > > > >   =A0 =A0 static const struct fs_context_operations f2fs_cont=
-ext_ops =3D {
-> > > > > > >   =A0=A0=A0=A0=A0 .parse_param=A0=A0=A0 =3D f2fs_parse_param,
-> > > > > > > +=A0=A0=A0 .get_tree=A0=A0=A0 =3D f2fs_get_tree,
-> > > > > > > +=A0=A0=A0 .reconfigure =3D f2fs_reconfigure,
-> > > > > > > +=A0=A0=A0 .free=A0=A0=A0 =3D f2fs_fc_free,
-> > > > > > >   =A0 };
-> > > > > > >   =A0 =A0 static void kill_f2fs_super(struct super_block *sb)
-> > > > > > > @@ -5322,10 +5276,24 @@ static void kill_f2fs_super(struct su=
-per_block *sb)
-> > > > > > >   =A0=A0=A0=A0=A0 }
-> > > > > > >   =A0 }
-> > > > > > >   =A0 +static int f2fs_init_fs_context(struct fs_context *fc)
-> > > > > > > +{
-> > > > > > > +=A0=A0=A0 struct f2fs_fs_context *ctx;
-> > > > > > > +
-> > > > > > > +=A0=A0=A0 ctx =3D kzalloc(sizeof(struct f2fs_fs_context), GF=
-P_KERNEL);
-> > > > > > > +=A0=A0=A0 if (!ctx)
-> > > > > > > +=A0=A0=A0=A0=A0=A0=A0 return -ENOMEM;
-> > > > > > > +
-> > > > > > > +=A0=A0=A0 fc->fs_private =3D ctx;
-> > > > > > > +=A0=A0=A0 fc->ops =3D &f2fs_context_ops;
-> > > > > > > +
-> > > > > > > +=A0=A0=A0 return 0;
-> > > > > > > +}
-> > > > > > > +
-> > > > > > >   =A0 static struct file_system_type f2fs_fs_type =3D {
-> > > > > > >   =A0=A0=A0=A0=A0 .owner=A0=A0=A0=A0=A0=A0=A0 =3D THIS_MODULE,
-> > > > > > >   =A0=A0=A0=A0=A0 .name=A0=A0=A0=A0=A0=A0=A0 =3D "f2fs",
-> > > > > > > -=A0=A0=A0 .mount=A0=A0=A0=A0=A0=A0=A0 =3D f2fs_mount,
-> > > > > > > +=A0=A0=A0 .init_fs_context =3D f2fs_init_fs_context,
-> > > > > > >   =A0=A0=A0=A0=A0 .kill_sb=A0=A0=A0 =3D kill_f2fs_super,
-> > > > > > >   =A0=A0=A0=A0=A0 .fs_flags=A0=A0=A0 =3D FS_REQUIRES_DEV | FS=
-_ALLOW_IDMAP,
-> > > > > > >   =A0 };
-> > > > > > =
-
-> > > > =
-
-> > > > =
-
-> > =
-
-> > =
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+CgpPbiAyMDI1LzUvMTcgMTozNSwgSmFlZ2V1ayBLaW0gd3JvdGU6Cj4gT24gMDUvMTYsIEhvbmdi
+byBMaSB3cm90ZToKPj4KPj4KPj4gT24gMjAyNS81LzE0IDIzOjMwLCBKYWVnZXVrIEtpbSB3cm90
+ZToKPj4+IEhpLCBIb25nYm8sCj4+Pgo+Pj4gSXQgc2VlbXMgd2UncmUgZ2V0dGluZyBtb3JlIGlz
+c3VlcyBpbiB0aGUgcGF0Y2ggc2V0LiBNYXkgSSBhc2sgZm9yIHNvbWUKPj4+IGhlbHAgc2VuZGlu
+ZyB0aGUgbmV3IHBhdGNoIHNlcmllcyBoYXZpbmcgYWxsIHRoZSBmaXhlcyB0aGF0IEkgbWFkZSBh
+cyB3ZWxsCj4+PiBhcyBhZGRyZXNzaW5nIHRoZSBjb25jZXJucz8gWW91IGNhbiBnZXQgdGhlIHBh
+dGNoZXMgZnJvbSBbMV0uCj4+Pgo+Pj4gWzFdIGh0dHBzOi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3Nj
+bS9saW51eC9rZXJuZWwvZ2l0L2phZWdldWsvZjJmcy5naXQvbG9nLz9oPWRldi10ZXN0Cj4+Pgo+
+Pgo+PiBIaSwgSmFlZ2V1awo+Pgo+PiBJIHdpbGwgZGlzY3VzcyB0aGVzZSBpc3N1ZXMgd2l0aCBF
+cmljLiBJdCBtYXkgdGFrZSBzb21lIHRpbWUsIGJ1dCBub3QgdG9vCj4+IGxvbmcuIFdoZW4gd2Ug
+c2VuZCB0aGUgbmV4dCB2ZXJzaW9uLCBzaG91bGQgd2UgcmVzZW5kIHRoaXMgcGF0Y2ggc2VyaWVz
+Cj4+IGJhc2VkIG9uIGRldi10ZXN0IGFmdGVyIG1vZGlmeWluZyB0aGUgY29kZSwgb25seSByZW1v
+dmluZyB5b3VyIFMtTy1CPwo+PiAoWW91J2xsIHVsdGltYXRlbHkgYWRkIHlvdXIgUy1PLUIgYmFj
+ayB5b3Vyc2VsZikKPiAKPiBIaSBIb25nYm8sCj4gCj4gVGhhbmsgeW91IGZvciB0aGlzIGhhcmQg
+d29yay4gQ291bGQgeW91IHBsZWFzZSByZXNlbmQgdGhlIGVudGlyZSBwYXRjaC1zZXQgYmFzZWQK
+PiBvbiBkZXYtdGVzdCB3L28gbXkgU09CPyBJJ20gZ29pbmcgdG8gZGVxdWV1ZSB0aGUgc2VyaWVz
+IGZyb20gZGV2LXRlc3QuIEluc3RlYWQsCj4gSSByZWJhc2VkIHRoZSBsYXRlc3QgdmVyc2lvbiBv
+bnRvIFsyXS4KPiAKPiBQbGVhc2UgYWxzbyBjb25zaWRlciBhbm90aGVyIHJlcG9ydCwgWzFdLgo+
+IAoKT2ssIGdvdCBpdCEKClRoYW5rcywKSG9uZ2JvCgo+IFsxXSBodHRwczovL2xvcmUua2VybmVs
+Lm9yZy9saW51eC1mMmZzLWRldmVsLzJmMTY5ODFiLTBlMTMtNGM2NC04M2E4LWQwZTBiNDI5NzM0
+OEBzdXN3YS5tb3VudGFpbi9ULyN1Cj4gWzJdIGh0dHBzOi8vZ2l0aHViLmNvbS9qYWVnZXVrL2Yy
+ZnMvY29tbWl0cy9tb3VudC8KPiAKPj4KPj4gVGhhbmtzLAo+PiBIb25nYm8KPj4KPj4+IE9uIDA1
+LzE0LCBIb25nYm8gTGkgd3JvdGU6Cj4+Pj4KPj4+Pgo+Pj4+IE9uIDIwMjUvNS8xNCAxMjowMywg
+Q2hhbyBZdSB3cm90ZToKPj4+Pj4gT24gNS8xNC8yNSAxMDozMywgSG9uZ2JvIExpIHdyb3RlOgo+
+Pj4+Pj4KPj4+Pj4+Cj4+Pj4+PiBPbiAyMDI1LzUvMTMgMTY6NTksIENoYW8gWXUgd3JvdGU6Cj4+
+Pj4+Pj4gT24gNC8yNC8yNSAwMTowOCwgRXJpYyBTYW5kZWVuIHdyb3RlOgo+Pj4+Pj4+PiBGcm9t
+OiBIb25nYm8gTGkgPGxpaG9uZ2JvMjJAaHVhd2VpLmNvbT4KPj4+Pj4+Pj4KPj4+Pj4+Pj4gVGhl
+IG5ldyBtb3VudCBhcGkgd2lsbCBleGVjdXRlIC5wYXJzZV9wYXJhbSwgLmluaXRfZnNfY29udGV4
+dCwgLmdldF90cmVlCj4+Pj4+Pj4+IGFuZCB3aWxsIGNhbGwgLnJlbW91bnQgaWYgcmVtb3VudCBo
+YXBwZW5lZC4gU28gd2UgYWRkIHRoZSBuZWNlc3NhcnkKPj4+Pj4+Pj4gZnVuY3Rpb25zIGZvciB0
+aGUgZnNfY29udGV4dF9vcGVyYXRpb25zLiBJZiAuaW5pdF9mc19jb250ZXh0IGlzIGFkZGVkLAo+
+Pj4+Pj4+PiB0aGUgb2xkIC5tb3VudCBzaG91bGQgcmVtb3ZlLgo+Pj4+Pj4+Pgo+Pj4+Pj4+PiBT
+ZWUgRG9jdW1lbnRhdGlvbi9maWxlc3lzdGVtcy9tb3VudF9hcGkucnN0IGZvciBtb3JlIGluZm9y
+bWF0aW9uLgo+Pj4+Pj4+Cj4+Pj4+Pj4gbWtmcy5mMmZzIC1mIC1PIGV4dHJhX2F0dHIsZmxleGli
+bGVfaW5saW5lX3hhdHRyIC9kZXYvdmRiCj4+Pj4+Pj4gbW91bnQgLW8gaW5saW5lX3hhdHRyX3Np
+emU9NTEyIC9kZXYvdmRiIC9tbnQvZjJmcwo+Pj4+Pj4+IG1vdW50OiAvbW50L2YyZnM6IHdyb25n
+IGZzIHR5cGUsIGJhZCBvcHRpb24sIGJhZCBzdXBlcmJsb2NrIG9uIC9kZXYvdmRiLCBtaXNzaW5n
+IGNvZGVwYWdlIG9yIGhlbHBlciBwcm9ncmFtLCBvciBvdGhlciBlcnJvci4KPj4+Pj4+PiAgICDC
+oMKgwqDCoMKgwqDCoCBkbWVzZygxKSBtYXkgaGF2ZSBtb3JlIGluZm9ybWF0aW9uIGFmdGVyIGZh
+aWxlZCBtb3VudCBzeXN0ZW0gY2FsbC4KPj4+Pj4+PiBkbWVzZwo+Pj4+Pj4+IFsgMTc1OC4yMDIy
+ODJdIEYyRlMtZnMgKHZkYik6IEltYWdlIGRvZXNuJ3Qgc3VwcG9ydCBjb21wcmVzc2lvbgo+Pj4+
+Pj4+IFsgMTc1OC4yMDIyODZdIEYyRlMtZnMgKHZkYik6IGlubGluZV94YXR0cl9zaXplIG9wdGlv
+biBzaG91bGQgYmUgc2V0IHdpdGggaW5saW5lX3hhdHRyIG9wdGlvbgo+Pj4+Pj4+Cj4+Pj4+Pj4g
+RXJpYywgSG9uZ2JvLCBjYW4geW91IHBsZWFzZSB0YWtlIGEgbG9vayBhdCB0aGlzIGlzc3VlPwo+
+Pj4+Pj4+Cj4+Pj4+PiBTb3JyeSwgd2Ugb25seSBjaGVjayB0aGUgb3B0aW9uIGhvbGQgaW4gY3R4
+LCB3ZSBzaG91bGQgZG8gdGhlIGRvdWJsZSBjaGVjayBpbiBzYmkuIE9yIG90aGVyIGVsZWdhbnQg
+YXBwcm9hY2hlcy4KPj4+Pj4+Cj4+Pj4+PiBGb3IgdGhlICJzdXBwb3J0IGNvbXByZXNzaW9uIiwg
+aXMgaXQgYWxzbyB0aGUgZXJyb3IgaW4gdGhpcyB0ZXN0Y2FzZT8KPj4+Pj4KPj4+Pj4gSSB0aGlu
+ayBzbywgSSBjaGVja2VkIHRoaXMgdy8gYWRkaXRpb25hbCBsb2dzLCBhbmQgZm91bmQgdGhpczoK
+Pj4+Pj4KPj4+Pj4gI2RlZmluZSBGMkZTX01PVU5UX0lOTElORV9YQVRUUl9TSVpFCTB4MDAwODAw
+MDAKPj4+Pj4gI2RlZmluZSBGMkZTX1NQRUNfY29tcHJlc3NfY2hrc3VtCQkoMSA8PCAxOSkgLyog
+ZXF1YWwgdG8gMHgwMDA4MDAwMCkKPj4+Pj4KPj4+Pj4gCWlmICghZjJmc19zYl9oYXNfY29tcHJl
+c3Npb24oc2JpKSkgewo+Pj4+PiAJCWlmICh0ZXN0X2NvbXByZXNzaW9uX3NwZWMoY3R4LT5vcHRf
+bWFzaykgfHwKPj4+Pj4gCQkJY3R4X3Rlc3Rfb3B0KGN0eCwgRjJGU19NT1VOVF9DT01QUkVTU19D
+QUNIRSkpCj4+Pj4+IAkJCWYyZnNfaW5mbyhzYmksICJJbWFnZSBkb2Vzbid0IHN1cHBvcnQgY29t
+cHJlc3Npb24iKTsKPj4+Pj4gCQljbGVhcl9jb21wcmVzc2lvbl9zcGVjKGN0eCk7Cj4+Pj4+IAkJ
+Y3R4LT5vcHRfbWFzayAmPSB+RjJGU19NT1VOVF9DT01QUkVTU19DQUNIRTsKPj4+Pj4gCQlyZXR1
+cm4gMDsKPj4+Pj4gCX0KPj4+Pj4KPj4+Pj4gV2Ugc2hvdWxkIHVzZSB0ZXN0X2NvbXByZXNzaW9u
+X3NwZWMoY3R4LT5zcGVjX21hc2spIGluc3RlYWQgb2YKPj4+Pj4gdGVzdF9jb21wcmVzc2lvbl9z
+cGVjKGN0eC0+b3B0X21hc2spIHRvIGNoZWNrIHNwZWNpYWwgbWFzayBvZiBjb21wcmVzc2lvbgo+
+Pj4+PiBvcHRpb24/Cj4+Pj4+Cj4+Pj4KPj4+PiBZZWFoLCB5b3UncmUgcmlnaHQuIHRlc3RfY29t
+cHJlc3Npb25fc3BlYyBpcyB1c2VkIHRvIGNoZWNrIHNwZWNfbWFzaywgYW5kIHdlCj4+Pj4gZ290
+IGl0IHdyb25nLgo+Pj4+Cj4+Pj4gVGhhbmtzLAo+Pj4+IEhvbmdibwo+Pj4+Cj4+Pj4+IFRoYW5r
+cywKPj4+Pj4KPj4+Pj4+Cj4+Pj4+PiBUaGFua3MsCj4+Pj4+PiBIb25nYm8KPj4+Pj4+Cj4+Pj4+
+Pj4gVGhhbmtzLAo+Pj4+Pj4+Cj4+Pj4+Pj4+Cj4+Pj4+Pj4+IFNpZ25lZC1vZmYtYnk6IEhvbmdi
+byBMaSA8bGlob25nYm8yMkBodWF3ZWkuY29tPgo+Pj4+Pj4+PiBbc2FuZGVlbjogZm9yd2FyZCBw
+b3J0XQo+Pj4+Pj4+PiBTaWduZWQtb2ZmLWJ5OiBFcmljIFNhbmRlZW4gPHNhbmRlZW5AcmVkaGF0
+LmNvbT4KPj4+Pj4+Pj4gLS0tCj4+Pj4+Pj4+ICAgIMKgIGZzL2YyZnMvc3VwZXIuYyB8IDE1NiAr
+KysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPj4+Pj4+Pj4g
+ICAgwqAgMSBmaWxlIGNoYW5nZWQsIDYyIGluc2VydGlvbnMoKyksIDk0IGRlbGV0aW9ucygtKQo+
+Pj4+Pj4+Pgo+Pj4+Pj4+PiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9zdXBlci5jIGIvZnMvZjJmcy9z
+dXBlci5jCj4+Pj4+Pj4+IGluZGV4IDM3NDk3ZmQ4MGJiOS4uMDQxYmQ2YzQ4MmEwIDEwMDY0NAo+
+Pj4+Pj4+PiAtLS0gYS9mcy9mMmZzL3N1cGVyLmMKPj4+Pj4+Pj4gKysrIGIvZnMvZjJmcy9zdXBl
+ci5jCj4+Pj4+Pj4+IEBAIC0xMTQxLDQ3ICsxMTQxLDYgQEAgc3RhdGljIGludCBmMmZzX3BhcnNl
+X3BhcmFtKHN0cnVjdCBmc19jb250ZXh0ICpmYywgc3RydWN0IGZzX3BhcmFtZXRlciAqcGFyYW0p
+Cj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgcmV0dXJuIDA7Cj4+Pj4+Pj4+ICAgIMKgIH0KPj4+Pj4+
+Pj4gICAgwqAgLXN0YXRpYyBpbnQgcGFyc2Vfb3B0aW9ucyhzdHJ1Y3QgZnNfY29udGV4dCAqZmMs
+IGNoYXIgKm9wdGlvbnMpCj4+Pj4+Pj4+IC17Cj4+Pj4+Pj4+IC3CoMKgwqAgc3RydWN0IGZzX3Bh
+cmFtZXRlciBwYXJhbTsKPj4+Pj4+Pj4gLcKgwqDCoCBjaGFyICprZXk7Cj4+Pj4+Pj4+IC3CoMKg
+wqAgaW50IHJldDsKPj4+Pj4+Pj4gLQo+Pj4+Pj4+PiAtwqDCoMKgIGlmICghb3B0aW9ucykKPj4+
+Pj4+Pj4gLcKgwqDCoMKgwqDCoMKgIHJldHVybiAwOwo+Pj4+Pj4+PiAtCj4+Pj4+Pj4+IC3CoMKg
+wqAgd2hpbGUgKChrZXkgPSBzdHJzZXAoJm9wdGlvbnMsICIsIikpICE9IE5VTEwpIHsKPj4+Pj4+
+Pj4gLcKgwqDCoMKgwqDCoMKgIGlmICgqa2V5KSB7Cj4+Pj4+Pj4+IC3CoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIHNpemVfdCB2X2xlbiA9IDA7Cj4+Pj4+Pj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IGNoYXIgKnZhbHVlID0gc3RyY2hyKGtleSwgJz0nKTsKPj4+Pj4+Pj4gLQo+Pj4+Pj4+PiAtwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCBwYXJhbS50eXBlID0gZnNfdmFsdWVfaXNfZmxhZzsKPj4+Pj4+
+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcGFyYW0uc3RyaW5nID0gTlVMTDsKPj4+Pj4+Pj4g
+LQo+Pj4+Pj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAodmFsdWUpIHsKPj4+Pj4+Pj4g
+LcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAodmFsdWUgPT0ga2V5KQo+Pj4+Pj4+
+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgY29udGludWU7Cj4+Pj4+
+Pj4+IC0KPj4+Pj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAqdmFsdWUrKyA9
+IDA7Cj4+Pj4+Pj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdl9sZW4gPSBzdHJs
+ZW4odmFsdWUpOwo+Pj4+Pj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHBhcmFt
+LnN0cmluZyA9IGttZW1kdXBfbnVsKHZhbHVlLCB2X2xlbiwgR0ZQX0tFUk5FTCk7Cj4+Pj4+Pj4+
+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKCFwYXJhbS5zdHJpbmcpCj4+Pj4+
+Pj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVOT01F
+TTsKPj4+Pj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwYXJhbS50eXBlID0g
+ZnNfdmFsdWVfaXNfc3RyaW5nOwo+Pj4+Pj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4+
+Pj4+Pj4+IC0KPj4+Pj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcGFyYW0ua2V5ID0ga2V5
+Owo+Pj4+Pj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwYXJhbS5zaXplID0gdl9sZW47Cj4+
+Pj4+Pj4+IC0KPj4+Pj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0ID0gZjJmc19wYXJz
+ZV9wYXJhbShmYywgJnBhcmFtKTsKPj4+Pj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAga2Zy
+ZWUocGFyYW0uc3RyaW5nKTsKPj4+Pj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKHJl
+dCA8IDApCj4+Pj4+Pj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIHJl
+dDsKPj4+Pj4+Pj4gLcKgwqDCoMKgwqDCoMKgIH0KPj4+Pj4+Pj4gLcKgwqDCoCB9Cj4+Pj4+Pj4+
+IC3CoMKgwqAgcmV0dXJuIDA7Cj4+Pj4+Pj4+IC19Cj4+Pj4+Pj4+IC0KPj4+Pj4+Pj4gICAgwqAg
+LyoKPj4+Pj4+Pj4gICAgwqDCoCAqIENoZWNrIHF1b3RhIHNldHRpbmdzIGNvbnNpc3RlbmN5Lgo+
+Pj4+Pj4+PiAgICDCoMKgICovCj4+Pj4+Pj4+IEBAIC0yNTgzLDEzICsyNTQyLDEyIEBAIHN0YXRp
+YyB2b2lkIGYyZnNfZW5hYmxlX2NoZWNrcG9pbnQoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpKQo+
+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgIGYyZnNfZmx1c2hfY2twdF90aHJlYWQoc2JpKTsKPj4+Pj4+
+Pj4gICAgwqAgfQo+Pj4+Pj4+PiAgICDCoCAtc3RhdGljIGludCBmMmZzX3JlbW91bnQoc3RydWN0
+IHN1cGVyX2Jsb2NrICpzYiwgaW50ICpmbGFncywgY2hhciAqZGF0YSkKPj4+Pj4+Pj4gK3N0YXRp
+YyBpbnQgX19mMmZzX3JlbW91bnQoc3RydWN0IGZzX2NvbnRleHQgKmZjLCBzdHJ1Y3Qgc3VwZXJf
+YmxvY2sgKnNiKQo+Pj4+Pj4+PiAgICDCoCB7Cj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgc3RydWN0
+IGYyZnNfc2JfaW5mbyAqc2JpID0gRjJGU19TQihzYik7Cj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAg
+c3RydWN0IGYyZnNfbW91bnRfaW5mbyBvcmdfbW91bnRfb3B0Owo+Pj4+Pj4+PiAtwqDCoMKgIHN0
+cnVjdCBmMmZzX2ZzX2NvbnRleHQgY3R4Owo+Pj4+Pj4+PiAtwqDCoMKgIHN0cnVjdCBmc19jb250
+ZXh0IGZjOwo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgIHVuc2lnbmVkIGxvbmcgb2xkX3NiX2ZsYWdz
+Owo+Pj4+Pj4+PiArwqDCoMKgIHVuc2lnbmVkIGludCBmbGFncyA9IGZjLT5zYl9mbGFnczsKPj4+
+Pj4+Pj4gICAgwqDCoMKgwqDCoCBpbnQgZXJyOwo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgIGJvb2wg
+bmVlZF9yZXN0YXJ0X2djID0gZmFsc2UsIG5lZWRfc3RvcF9nYyA9IGZhbHNlOwo+Pj4+Pj4+PiAg
+ICDCoMKgwqDCoMKgIGJvb2wgbmVlZF9yZXN0YXJ0X2ZsdXNoID0gZmFsc2UsIG5lZWRfc3RvcF9m
+bHVzaCA9IGZhbHNlOwo+Pj4+Pj4+PiBAQCAtMjYzNSw3ICsyNTkzLDcgQEAgc3RhdGljIGludCBm
+MmZzX3JlbW91bnQoc3RydWN0IHN1cGVyX2Jsb2NrICpzYiwgaW50ICpmbGFncywgY2hhciAqZGF0
+YSkKPj4+Pj4+Pj4gICAgwqAgI2VuZGlmCj4+Pj4+Pj4+ICAgIMKgIMKgwqDCoMKgwqAgLyogcmVj
+b3ZlciBzdXBlcmJsb2NrcyB3ZSBjb3VsZG4ndCB3cml0ZSBkdWUgdG8gcHJldmlvdXMgUk8gbW91
+bnQgKi8KPj4+Pj4+Pj4gLcKgwqDCoCBpZiAoISgqZmxhZ3MgJiBTQl9SRE9OTFkpICYmIGlzX3Ni
+aV9mbGFnX3NldChzYmksIFNCSV9ORUVEX1NCX1dSSVRFKSkgewo+Pj4+Pj4+PiArwqDCoMKgIGlm
+ICghKGZsYWdzICYgU0JfUkRPTkxZKSAmJiBpc19zYmlfZmxhZ19zZXQoc2JpLCBTQklfTkVFRF9T
+Ql9XUklURSkpIHsKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgwqDCoMKgIGVyciA9IGYyZnNfY29t
+bWl0X3N1cGVyKHNiaSwgZmFsc2UpOwo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgwqDCoMKgwqAgZjJm
+c19pbmZvKHNiaSwgIlRyeSB0byByZWNvdmVyIGFsbCB0aGUgc3VwZXJibG9ja3MsIHJldDogJWQi
+LAo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZXJyKTsKPj4+Pj4+
+Pj4gQEAgLTI2NDUsMjEgKzI2MDMsMTEgQEAgc3RhdGljIGludCBmMmZzX3JlbW91bnQoc3RydWN0
+IHN1cGVyX2Jsb2NrICpzYiwgaW50ICpmbGFncywgY2hhciAqZGF0YSkKPj4+Pj4+Pj4gICAgwqAg
+wqDCoMKgwqDCoCBkZWZhdWx0X29wdGlvbnMoc2JpLCB0cnVlKTsKPj4+Pj4+Pj4gICAgwqAgLcKg
+wqDCoCBtZW1zZXQoJmZjLCAwLCBzaXplb2YoZmMpKTsKPj4+Pj4+Pj4gLcKgwqDCoCBtZW1zZXQo
+JmN0eCwgMCwgc2l6ZW9mKGN0eCkpOwo+Pj4+Pj4+PiAtwqDCoMKgIGZjLmZzX3ByaXZhdGUgPSAm
+Y3R4Owo+Pj4+Pj4+PiAtwqDCoMKgIGZjLnB1cnBvc2UgPSBGU19DT05URVhUX0ZPUl9SRUNPTkZJ
+R1VSRTsKPj4+Pj4+Pj4gLQo+Pj4+Pj4+PiAtwqDCoMKgIC8qIHBhcnNlIG1vdW50IG9wdGlvbnMg
+Ki8KPj4+Pj4+Pj4gLcKgwqDCoCBlcnIgPSBwYXJzZV9vcHRpb25zKCZmYywgZGF0YSk7Cj4+Pj4+
+Pj4+IC3CoMKgwqAgaWYgKGVycikKPj4+Pj4+Pj4gLcKgwqDCoMKgwqDCoMKgIGdvdG8gcmVzdG9y
+ZV9vcHRzOwo+Pj4+Pj4+PiAtCj4+Pj4+Pj4+IC3CoMKgwqAgZXJyID0gZjJmc19jaGVja19vcHRf
+Y29uc2lzdGVuY3koJmZjLCBzYik7Cj4+Pj4+Pj4+ICvCoMKgwqAgZXJyID0gZjJmc19jaGVja19v
+cHRfY29uc2lzdGVuY3koZmMsIHNiKTsKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoCBpZiAoZXJyIDwg
+MCkKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gcmVzdG9yZV9vcHRzOwo+Pj4+
+Pj4+PiAgICDCoCAtwqDCoMKgIGYyZnNfYXBwbHlfb3B0aW9ucygmZmMsIHNiKTsKPj4+Pj4+Pj4g
+K8KgwqDCoCBmMmZzX2FwcGx5X29wdGlvbnMoZmMsIHNiKTsKPj4+Pj4+Pj4gICAgwqAgwqAgI2lm
+ZGVmIENPTkZJR19CTEtfREVWX1pPTkVECj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgaWYgKGYyZnNf
+c2JfaGFzX2Jsa3pvbmVkKHNiaSkgJiYKPj4+Pj4+Pj4gQEAgLTI2NzgsMjAgKzI2MjYsMjAgQEAg
+c3RhdGljIGludCBmMmZzX3JlbW91bnQoc3RydWN0IHN1cGVyX2Jsb2NrICpzYiwgaW50ICpmbGFn
+cywgY2hhciAqZGF0YSkKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgICogUHJldmlvdXMgYW5kIG5l
+dyBzdGF0ZSBvZiBmaWxlc3lzdGVtIGlzIFJPLAo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgwqAgKiBz
+byBza2lwIGNoZWNraW5nIEdDIGFuZCBGTFVTSF9NRVJHRSBjb25kaXRpb25zLgo+Pj4+Pj4+PiAg
+ICDCoMKgwqDCoMKgwqAgKi8KPj4+Pj4+Pj4gLcKgwqDCoCBpZiAoZjJmc19yZWFkb25seShzYikg
+JiYgKCpmbGFncyAmIFNCX1JET05MWSkpCj4+Pj4+Pj4+ICvCoMKgwqAgaWYgKGYyZnNfcmVhZG9u
+bHkoc2IpICYmIChmbGFncyAmIFNCX1JET05MWSkpCj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqDCoMKg
+wqDCoCBnb3RvIHNraXA7Cj4+Pj4+Pj4+ICAgIMKgIC3CoMKgwqAgaWYgKGYyZnNfZGV2X2lzX3Jl
+YWRvbmx5KHNiaSkgJiYgISgqZmxhZ3MgJiBTQl9SRE9OTFkpKSB7Cj4+Pj4+Pj4+ICvCoMKgwqAg
+aWYgKGYyZnNfZGV2X2lzX3JlYWRvbmx5KHNiaSkgJiYgIShmbGFncyAmIFNCX1JET05MWSkpIHsK
+Pj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgwqDCoMKgIGVyciA9IC1FUk9GUzsKPj4+Pj4+Pj4gICAg
+wqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gcmVzdG9yZV9vcHRzOwo+Pj4+Pj4+PiAgICDCoMKgwqDC
+oMKgIH0KPj4+Pj4+Pj4gICAgwqAgwqAgI2lmZGVmIENPTkZJR19RVU9UQQo+Pj4+Pj4+PiAtwqDC
+oMKgIGlmICghZjJmc19yZWFkb25seShzYikgJiYgKCpmbGFncyAmIFNCX1JET05MWSkpIHsKPj4+
+Pj4+Pj4gK8KgwqDCoCBpZiAoIWYyZnNfcmVhZG9ubHkoc2IpICYmIChmbGFncyAmIFNCX1JET05M
+WSkpIHsKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgwqDCoMKgIGVyciA9IGRxdW90X3N1c3BlbmQo
+c2IsIC0xKTsKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChlcnIgPCAwKQo+Pj4+
+Pj4+PiAgICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBnb3RvIHJlc3RvcmVfb3B0czsKPj4+
+Pj4+Pj4gLcKgwqDCoCB9IGVsc2UgaWYgKGYyZnNfcmVhZG9ubHkoc2IpICYmICEoKmZsYWdzICYg
+U0JfUkRPTkxZKSkgewo+Pj4+Pj4+PiArwqDCoMKgIH0gZWxzZSBpZiAoZjJmc19yZWFkb25seShz
+YikgJiYgIShmbGFncyAmIFNCX1JET05MWSkpIHsKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgwqDC
+oMKgIC8qIGRxdW90X3Jlc3VtZSBuZWVkcyBSVyAqLwo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgwqDC
+oMKgwqAgc2ItPnNfZmxhZ3MgJj0gflNCX1JET05MWTsKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKg
+wqDCoMKgIGlmIChzYl9hbnlfcXVvdGFfc3VzcGVuZGVkKHNiKSkgewo+Pj4+Pj4+PiBAQCAtMjc0
+Nyw3ICsyNjk1LDcgQEAgc3RhdGljIGludCBmMmZzX3JlbW91bnQoc3RydWN0IHN1cGVyX2Jsb2Nr
+ICpzYiwgaW50ICpmbGFncywgY2hhciAqZGF0YSkKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgwqDC
+oMKgIGdvdG8gcmVzdG9yZV9vcHRzOwo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgIH0KPj4+Pj4+Pj4g
+ICAgwqAgLcKgwqDCoCBpZiAoKCpmbGFncyAmIFNCX1JET05MWSkgJiYgdGVzdF9vcHQoc2JpLCBE
+SVNBQkxFX0NIRUNLUE9JTlQpKSB7Cj4+Pj4+Pj4+ICvCoMKgwqAgaWYgKChmbGFncyAmIFNCX1JE
+T05MWSkgJiYgdGVzdF9vcHQoc2JpLCBESVNBQkxFX0NIRUNLUE9JTlQpKSB7Cj4+Pj4+Pj4+ICAg
+IMKgwqDCoMKgwqDCoMKgwqDCoCBlcnIgPSAtRUlOVkFMOwo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKg
+wqDCoMKgwqAgZjJmc193YXJuKHNiaSwgImRpc2FibGluZyBjaGVja3BvaW50IG5vdCBjb21wYXRp
+YmxlIHdpdGggcmVhZC1vbmx5Iik7Cj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqDCoMKgwqDCoCBnb3Rv
+IHJlc3RvcmVfb3B0czsKPj4+Pj4+Pj4gQEAgLTI3NTgsNyArMjcwNiw3IEBAIHN0YXRpYyBpbnQg
+ZjJmc19yZW1vdW50KHN0cnVjdCBzdXBlcl9ibG9jayAqc2IsIGludCAqZmxhZ3MsIGNoYXIgKmRh
+dGEpCj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqDCoCAqIG9yIGlmIGJhY2tncm91bmRfZ2MgPSBvZmYg
+aXMgcGFzc2VkIGluIG1vdW50Cj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqDCoCAqIG9wdGlvbi4gQWxz
+byBzeW5jIHRoZSBmaWxlc3lzdGVtLgo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgwqAgKi8KPj4+Pj4+
+Pj4gLcKgwqDCoCBpZiAoKCpmbGFncyAmIFNCX1JET05MWSkgfHwKPj4+Pj4+Pj4gK8KgwqDCoCBp
+ZiAoKGZsYWdzICYgU0JfUkRPTkxZKSB8fAo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCAoRjJGU19PUFRJT04oc2JpKS5iZ2djX21vZGUgPT0gQkdHQ19NT0RFX09GRiAmJgo+
+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAhdGVzdF9vcHQoc2JpLCBHQ19N
+RVJHRSkpKSB7Cj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoc2JpLT5nY190aHJl
+YWQpIHsKPj4+Pj4+Pj4gQEAgLTI3NzIsNyArMjcyMCw3IEBAIHN0YXRpYyBpbnQgZjJmc19yZW1v
+dW50KHN0cnVjdCBzdXBlcl9ibG9jayAqc2IsIGludCAqZmxhZ3MsIGNoYXIgKmRhdGEpCj4+Pj4+
+Pj4+ICAgIMKgwqDCoMKgwqDCoMKgwqDCoCBuZWVkX3N0b3BfZ2MgPSB0cnVlOwo+Pj4+Pj4+PiAg
+ICDCoMKgwqDCoMKgIH0KPj4+Pj4+Pj4gICAgwqAgLcKgwqDCoCBpZiAoKmZsYWdzICYgU0JfUkRP
+TkxZKSB7Cj4+Pj4+Pj4+ICvCoMKgwqAgaWYgKGZsYWdzICYgU0JfUkRPTkxZKSB7Cj4+Pj4+Pj4+
+ICAgIMKgwqDCoMKgwqDCoMKgwqDCoCBzeW5jX2lub2Rlc19zYihzYik7Cj4+Pj4+Pj4+ICAgIMKg
+IMKgwqDCoMKgwqDCoMKgwqDCoCBzZXRfc2JpX2ZsYWcoc2JpLCBTQklfSVNfRElSVFkpOwo+Pj4+
+Pj4+PiBAQCAtMjc4NSw3ICsyNzMzLDcgQEAgc3RhdGljIGludCBmMmZzX3JlbW91bnQoc3RydWN0
+IHN1cGVyX2Jsb2NrICpzYiwgaW50ICpmbGFncywgY2hhciAqZGF0YSkKPj4+Pj4+Pj4gICAgwqDC
+oMKgwqDCoMKgICogV2Ugc3RvcCBpc3N1ZSBmbHVzaCB0aHJlYWQgaWYgRlMgaXMgbW91bnRlZCBh
+cyBSTwo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgwqAgKiBvciBpZiBmbHVzaF9tZXJnZSBpcyBub3Qg
+cGFzc2VkIGluIG1vdW50IG9wdGlvbi4KPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgICovCj4+Pj4+
+Pj4+IC3CoMKgwqAgaWYgKCgqZmxhZ3MgJiBTQl9SRE9OTFkpIHx8ICF0ZXN0X29wdChzYmksIEZM
+VVNIX01FUkdFKSkgewo+Pj4+Pj4+PiArwqDCoMKgIGlmICgoZmxhZ3MgJiBTQl9SRE9OTFkpIHx8
+ICF0ZXN0X29wdChzYmksIEZMVVNIX01FUkdFKSkgewo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgwqDC
+oMKgwqAgY2xlYXJfb3B0KHNiaSwgRkxVU0hfTUVSR0UpOwo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKg
+wqDCoMKgwqAgZjJmc19kZXN0cm95X2ZsdXNoX2NtZF9jb250cm9sKHNiaSwgZmFsc2UpOwo+Pj4+
+Pj4+PiAgICDCoMKgwqDCoMKgwqDCoMKgwqAgbmVlZF9yZXN0YXJ0X2ZsdXNoID0gdHJ1ZTsKPj4+
+Pj4+Pj4gQEAgLTI4MjcsNyArMjc3NSw3IEBAIHN0YXRpYyBpbnQgZjJmc19yZW1vdW50KHN0cnVj
+dCBzdXBlcl9ibG9jayAqc2IsIGludCAqZmxhZ3MsIGNoYXIgKmRhdGEpCj4+Pj4+Pj4+ICAgIMKg
+wqDCoMKgwqDCoCAqIHRyaWdnZXJlZCB3aGlsZSByZW1vdW50IGFuZCB3ZSBuZWVkIHRvIHRha2Ug
+Y2FyZSBvZiBpdCBiZWZvcmUKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgICogcmV0dXJuaW5nIGZy
+b20gcmVtb3VudC4KPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgICovCj4+Pj4+Pj4+IC3CoMKgwqAg
+aWYgKCgqZmxhZ3MgJiBTQl9SRE9OTFkpIHx8IHRlc3Rfb3B0KHNiaSwgRElTQUJMRV9DSEVDS1BP
+SU5UKSB8fAo+Pj4+Pj4+PiArwqDCoMKgIGlmICgoZmxhZ3MgJiBTQl9SRE9OTFkpIHx8IHRlc3Rf
+b3B0KHNiaSwgRElTQUJMRV9DSEVDS1BPSU5UKSB8fAo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCAhdGVzdF9vcHQoc2JpLCBNRVJHRV9DSEVDS1BPSU5UKSkgewo+Pj4+Pj4+
+PiAgICDCoMKgwqDCoMKgwqDCoMKgwqAgZjJmc19zdG9wX2NrcHRfdGhyZWFkKHNiaSk7Cj4+Pj4+
+Pj4+ICAgIMKgwqDCoMKgwqAgfSBlbHNlIHsKPj4+Pj4+Pj4gQEAgLTI4NTQsNyArMjgwMiw3IEBA
+IHN0YXRpYyBpbnQgZjJmc19yZW1vdW50KHN0cnVjdCBzdXBlcl9ibG9jayAqc2IsIGludCAqZmxh
+Z3MsIGNoYXIgKmRhdGEpCj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqDCoMKgwqDCoCAodGVzdF9vcHQo
+c2JpLCBQT1NJWF9BQ0wpID8gU0JfUE9TSVhBQ0wgOiAwKTsKPj4+Pj4+Pj4gICAgwqAgwqDCoMKg
+wqDCoCBsaW1pdF9yZXNlcnZlX3Jvb3Qoc2JpKTsKPj4+Pj4+Pj4gLcKgwqDCoCAqZmxhZ3MgPSAo
+KmZsYWdzICYgflNCX0xBWllUSU1FKSB8IChzYi0+c19mbGFncyAmIFNCX0xBWllUSU1FKTsKPj4+
+Pj4+Pj4gK8KgwqDCoCBmYy0+c2JfZmxhZ3MgPSAoZmxhZ3MgJiB+U0JfTEFaWVRJTUUpIHwgKHNi
+LT5zX2ZsYWdzICYgU0JfTEFaWVRJTUUpOwo+Pj4+Pj4+PiAgICDCoCDCoMKgwqDCoMKgIHNiaS0+
+dW1vdW50X2xvY2tfaG9sZGVyID0gTlVMTDsKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoCByZXR1cm4g
+MDsKPj4+Pj4+Pj4gQEAgLTM1MjMsNyArMzQ3MSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3Qgc3Vw
+ZXJfb3BlcmF0aW9ucyBmMmZzX3NvcHMgPSB7Cj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgLmZyZWV6
+ZV9mc8KgwqDCoCA9IGYyZnNfZnJlZXplLAo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgIC51bmZyZWV6
+ZV9mc8KgwqDCoCA9IGYyZnNfdW5mcmVlemUsCj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgLnN0YXRm
+c8KgwqDCoMKgwqDCoMKgID0gZjJmc19zdGF0ZnMsCj4+Pj4+Pj4+IC3CoMKgwqAgLnJlbW91bnRf
+ZnPCoMKgwqAgPSBmMmZzX3JlbW91bnQsCj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgLnNodXRkb3du
+wqDCoMKgID0gZjJmc19zaHV0ZG93biwKPj4+Pj4+Pj4gICAgwqAgfTsKPj4+Pj4+Pj4gICAgwqAg
+QEAgLTQ3NDUsMTYgKzQ2OTIsMTMgQEAgc3RhdGljIHZvaWQgZjJmc190dW5pbmdfcGFyYW1ldGVy
+cyhzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgc2JpLT5y
+ZWFkZGlyX3JhID0gdHJ1ZTsKPj4+Pj4+Pj4gICAgwqAgfQo+Pj4+Pj4+PiAgICDCoCAtc3RhdGlj
+IGludCBmMmZzX2ZpbGxfc3VwZXIoc3RydWN0IHN1cGVyX2Jsb2NrICpzYiwgdm9pZCAqZGF0YSwg
+aW50IHNpbGVudCkKPj4+Pj4+Pj4gK3N0YXRpYyBpbnQgZjJmc19maWxsX3N1cGVyKHN0cnVjdCBz
+dXBlcl9ibG9jayAqc2IsIHN0cnVjdCBmc19jb250ZXh0ICpmYykKPj4+Pj4+Pj4gICAgwqAgewo+
+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgIHN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaTsKPj4+Pj4+Pj4g
+ICAgwqDCoMKgwqDCoCBzdHJ1Y3QgZjJmc19zdXBlcl9ibG9jayAqcmF3X3N1cGVyOwo+Pj4+Pj4+
+PiAtwqDCoMKgIHN0cnVjdCBmMmZzX2ZzX2NvbnRleHQgY3R4Owo+Pj4+Pj4+PiAtwqDCoMKgIHN0
+cnVjdCBmc19jb250ZXh0IGZjOwo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgIHN0cnVjdCBpbm9kZSAq
+cm9vdDsKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoCBpbnQgZXJyOwo+Pj4+Pj4+PiAgICDCoMKgwqDC
+oMKgIGJvb2wgc2tpcF9yZWNvdmVyeSA9IGZhbHNlLCBuZWVkX2ZzY2sgPSBmYWxzZTsKPj4+Pj4+
+Pj4gLcKgwqDCoCBjaGFyICpvcHRpb25zID0gTlVMTDsKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoCBp
+bnQgcmVjb3ZlcnksIGksIHZhbGlkX3N1cGVyX2Jsb2NrOwo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKg
+IHN0cnVjdCBjdXJzZWdfaW5mbyAqc2VnX2k7Cj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgaW50IHJl
+dHJ5X2NudCA9IDE7Cj4+Pj4+Pj4+IEBAIC00NzY3LDkgKzQ3MTEsNiBAQCBzdGF0aWMgaW50IGYy
+ZnNfZmlsbF9zdXBlcihzdHJ1Y3Qgc3VwZXJfYmxvY2sgKnNiLCB2b2lkICpkYXRhLCBpbnQgc2ls
+ZW50KQo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgIHJhd19zdXBlciA9IE5VTEw7Cj4+Pj4+Pj4+ICAg
+IMKgwqDCoMKgwqAgdmFsaWRfc3VwZXJfYmxvY2sgPSAtMTsKPj4+Pj4+Pj4gICAgwqDCoMKgwqDC
+oCByZWNvdmVyeSA9IDA7Cj4+Pj4+Pj4+IC3CoMKgwqAgbWVtc2V0KCZmYywgMCwgc2l6ZW9mKGZj
+KSk7Cj4+Pj4+Pj4+IC3CoMKgwqAgbWVtc2V0KCZjdHgsIDAsIHNpemVvZihjdHgpKTsKPj4+Pj4+
+Pj4gLcKgwqDCoCBmYy5mc19wcml2YXRlID0gJmN0eDsKPj4+Pj4+Pj4gICAgwqAgwqDCoMKgwqDC
+oCAvKiBhbGxvY2F0ZSBtZW1vcnkgZm9yIGYyZnMtc3BlY2lmaWMgc3VwZXIgYmxvY2sgaW5mbyAq
+Lwo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgIHNiaSA9IGt6YWxsb2Moc2l6ZW9mKHN0cnVjdCBmMmZz
+X3NiX2luZm8pLCBHRlBfS0VSTkVMKTsKPj4+Pj4+Pj4gQEAgLTQ4MjAsMjIgKzQ3NjEsMTIgQEAg
+c3RhdGljIGludCBmMmZzX2ZpbGxfc3VwZXIoc3RydWN0IHN1cGVyX2Jsb2NrICpzYiwgdm9pZCAq
+ZGF0YSwgaW50IHNpbGVudCkKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2l6ZW9mKHJhd19zdXBlci0+dXVpZCkpOwo+Pj4+Pj4+
+PiAgICDCoCDCoMKgwqDCoMKgIGRlZmF1bHRfb3B0aW9ucyhzYmksIGZhbHNlKTsKPj4+Pj4+Pj4g
+LcKgwqDCoCAvKiBwYXJzZSBtb3VudCBvcHRpb25zICovCj4+Pj4+Pj4+IC3CoMKgwqAgb3B0aW9u
+cyA9IGtzdHJkdXAoKGNvbnN0IGNoYXIgKilkYXRhLCBHRlBfS0VSTkVMKTsKPj4+Pj4+Pj4gLcKg
+wqDCoCBpZiAoZGF0YSAmJiAhb3B0aW9ucykgewo+Pj4+Pj4+PiAtwqDCoMKgwqDCoMKgwqAgZXJy
+ID0gLUVOT01FTTsKPj4+Pj4+Pj4gLcKgwqDCoMKgwqDCoMKgIGdvdG8gZnJlZV9zYl9idWY7Cj4+
+Pj4+Pj4+IC3CoMKgwqAgfQo+Pj4+Pj4+PiAtCj4+Pj4+Pj4+IC3CoMKgwqAgZXJyID0gcGFyc2Vf
+b3B0aW9ucygmZmMsIG9wdGlvbnMpOwo+Pj4+Pj4+PiAtwqDCoMKgIGlmIChlcnIpCj4+Pj4+Pj4+
+IC3CoMKgwqDCoMKgwqDCoCBnb3RvIGZyZWVfb3B0aW9uczsKPj4+Pj4+Pj4gICAgwqAgLcKgwqDC
+oCBlcnIgPSBmMmZzX2NoZWNrX29wdF9jb25zaXN0ZW5jeSgmZmMsIHNiKTsKPj4+Pj4+Pj4gK8Kg
+wqDCoCBlcnIgPSBmMmZzX2NoZWNrX29wdF9jb25zaXN0ZW5jeShmYywgc2IpOwo+Pj4+Pj4+PiAg
+ICDCoMKgwqDCoMKgIGlmIChlcnIgPCAwKQo+Pj4+Pj4+PiAtwqDCoMKgwqDCoMKgwqAgZ290byBm
+cmVlX29wdGlvbnM7Cj4+Pj4+Pj4+ICvCoMKgwqDCoMKgwqDCoCBnb3RvIGZyZWVfc2JfYnVmOwo+
+Pj4+Pj4+PiAgICDCoCAtwqDCoMKgIGYyZnNfYXBwbHlfb3B0aW9ucygmZmMsIHNiKTsKPj4+Pj4+
+Pj4gK8KgwqDCoCBmMmZzX2FwcGx5X29wdGlvbnMoZmMsIHNiKTsKPj4+Pj4+Pj4gICAgwqAgwqDC
+oMKgwqDCoCBzYi0+c19tYXhieXRlcyA9IG1heF9maWxlX2Jsb2NrcyhOVUxMKSA8PAo+Pj4+Pj4+
+PiAgICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGxlMzJfdG9fY3B1KHJhd19z
+dXBlci0+bG9nX2Jsb2Nrc2l6ZSk7Cj4+Pj4+Pj4+IEBAIC01MTYwLDcgKzUwOTEsNiBAQCBzdGF0
+aWMgaW50IGYyZnNfZmlsbF9zdXBlcihzdHJ1Y3Qgc3VwZXJfYmxvY2sgKnNiLCB2b2lkICpkYXRh
+LCBpbnQgc2lsZW50KQo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKGVycikKPj4+
+Pj4+Pj4gICAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBzeW5jX2ZyZWVfbWV0YTsK
+Pj4+Pj4+Pj4gICAgwqDCoMKgwqDCoCB9Cj4+Pj4+Pj4+IC3CoMKgwqAga3ZmcmVlKG9wdGlvbnMp
+Owo+Pj4+Pj4+PiAgICDCoCDCoMKgwqDCoMKgIC8qIHJlY292ZXIgYnJva2VuIHN1cGVyYmxvY2sg
+Ki8KPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoCBpZiAocmVjb3ZlcnkpIHsKPj4+Pj4+Pj4gQEAgLTUy
+NTUsNyArNTE4NSw2IEBAIHN0YXRpYyBpbnQgZjJmc19maWxsX3N1cGVyKHN0cnVjdCBzdXBlcl9i
+bG9jayAqc2IsIHZvaWQgKmRhdGEsIGludCBzaWxlbnQpCj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqDC
+oMKgwqDCoCBrZnJlZShGMkZTX09QVElPTihzYmkpLnNfcWZfbmFtZXNbaV0pOwo+Pj4+Pj4+PiAg
+ICDCoCAjZW5kaWYKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoCBmc2NyeXB0X2ZyZWVfZHVtbXlfcG9s
+aWN5KCZGMkZTX09QVElPTihzYmkpLmR1bW15X2VuY19wb2xpY3kpOwo+Pj4+Pj4+PiAtwqDCoMKg
+IGt2ZnJlZShvcHRpb25zKTsKPj4+Pj4+Pj4gICAgwqAgZnJlZV9zYl9idWY6Cj4+Pj4+Pj4+ICAg
+IMKgwqDCoMKgwqAga2ZyZWUocmF3X3N1cGVyKTsKPj4+Pj4+Pj4gICAgwqAgZnJlZV9zYmk6Cj4+
+Pj4+Pj4+IEBAIC01MjcxLDE0ICs1MjAwLDM5IEBAIHN0YXRpYyBpbnQgZjJmc19maWxsX3N1cGVy
+KHN0cnVjdCBzdXBlcl9ibG9jayAqc2IsIHZvaWQgKmRhdGEsIGludCBzaWxlbnQpCj4+Pj4+Pj4+
+ICAgIMKgwqDCoMKgwqAgcmV0dXJuIGVycjsKPj4+Pj4+Pj4gICAgwqAgfQo+Pj4+Pj4+PiAgICDC
+oCAtc3RhdGljIHN0cnVjdCBkZW50cnkgKmYyZnNfbW91bnQoc3RydWN0IGZpbGVfc3lzdGVtX3R5
+cGUgKmZzX3R5cGUsIGludCBmbGFncywKPj4+Pj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+Y29uc3QgY2hhciAqZGV2X25hbWUsIHZvaWQgKmRhdGEpCj4+Pj4+Pj4+ICtzdGF0aWMgaW50IGYy
+ZnNfZ2V0X3RyZWUoc3RydWN0IGZzX2NvbnRleHQgKmZjKQo+Pj4+Pj4+PiAgICDCoCB7Cj4+Pj4+
+Pj4+IC3CoMKgwqAgcmV0dXJuIG1vdW50X2JkZXYoZnNfdHlwZSwgZmxhZ3MsIGRldl9uYW1lLCBk
+YXRhLCBmMmZzX2ZpbGxfc3VwZXIpOwo+Pj4+Pj4+PiArwqDCoMKgIHJldHVybiBnZXRfdHJlZV9i
+ZGV2KGZjLCBmMmZzX2ZpbGxfc3VwZXIpOwo+Pj4+Pj4+PiArfQo+Pj4+Pj4+PiArCj4+Pj4+Pj4+
+ICtzdGF0aWMgaW50IGYyZnNfcmVjb25maWd1cmUoc3RydWN0IGZzX2NvbnRleHQgKmZjKQo+Pj4+
+Pj4+PiArewo+Pj4+Pj4+PiArwqDCoMKgIHN0cnVjdCBzdXBlcl9ibG9jayAqc2IgPSBmYy0+cm9v
+dC0+ZF9zYjsKPj4+Pj4+Pj4gKwo+Pj4+Pj4+PiArwqDCoMKgIHJldHVybiBfX2YyZnNfcmVtb3Vu
+dChmYywgc2IpOwo+Pj4+Pj4+PiArfQo+Pj4+Pj4+PiArCj4+Pj4+Pj4+ICtzdGF0aWMgdm9pZCBm
+MmZzX2ZjX2ZyZWUoc3RydWN0IGZzX2NvbnRleHQgKmZjKQo+Pj4+Pj4+PiArewo+Pj4+Pj4+PiAr
+wqDCoMKgIHN0cnVjdCBmMmZzX2ZzX2NvbnRleHQgKmN0eCA9IGZjLT5mc19wcml2YXRlOwo+Pj4+
+Pj4+PiArwqDCoMKgIGludCBpOwo+Pj4+Pj4+PiArCj4+Pj4+Pj4+ICvCoMKgwqAgaWYgKCFjdHgp
+Cj4+Pj4+Pj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm47Cj4+Pj4+Pj4+ICsKPj4+Pj4+Pj4gKyNp
+ZmRlZiBDT05GSUdfUVVPVEEKPj4+Pj4+Pj4gK8KgwqDCoCBmb3IgKGkgPSAwOyBpIDwgTUFYUVVP
+VEFTOyBpKyspCj4+Pj4+Pj4+ICvCoMKgwqDCoMKgwqDCoCBrZnJlZShGMkZTX0NUWF9JTkZPKGN0
+eCkuc19xZl9uYW1lc1tpXSk7Cj4+Pj4+Pj4+ICsjZW5kaWYKPj4+Pj4+Pj4gK8KgwqDCoCBmc2Ny
+eXB0X2ZyZWVfZHVtbXlfcG9saWN5KCZGMkZTX0NUWF9JTkZPKGN0eCkuZHVtbXlfZW5jX3BvbGlj
+eSk7Cj4+Pj4+Pj4+ICvCoMKgwqAga2ZyZWUoY3R4KTsKPj4+Pj4+Pj4gICAgwqAgfQo+Pj4+Pj4+
+PiAgICDCoCDCoCBzdGF0aWMgY29uc3Qgc3RydWN0IGZzX2NvbnRleHRfb3BlcmF0aW9ucyBmMmZz
+X2NvbnRleHRfb3BzID0gewo+Pj4+Pj4+PiAgICDCoMKgwqDCoMKgIC5wYXJzZV9wYXJhbcKgwqDC
+oCA9IGYyZnNfcGFyc2VfcGFyYW0sCj4+Pj4+Pj4+ICvCoMKgwqAgLmdldF90cmVlwqDCoMKgID0g
+ZjJmc19nZXRfdHJlZSwKPj4+Pj4+Pj4gK8KgwqDCoCAucmVjb25maWd1cmUgPSBmMmZzX3JlY29u
+ZmlndXJlLAo+Pj4+Pj4+PiArwqDCoMKgIC5mcmVlwqDCoMKgID0gZjJmc19mY19mcmVlLAo+Pj4+
+Pj4+PiAgICDCoCB9Owo+Pj4+Pj4+PiAgICDCoCDCoCBzdGF0aWMgdm9pZCBraWxsX2YyZnNfc3Vw
+ZXIoc3RydWN0IHN1cGVyX2Jsb2NrICpzYikKPj4+Pj4+Pj4gQEAgLTUzMjIsMTAgKzUyNzYsMjQg
+QEAgc3RhdGljIHZvaWQga2lsbF9mMmZzX3N1cGVyKHN0cnVjdCBzdXBlcl9ibG9jayAqc2IpCj4+
+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgfQo+Pj4+Pj4+PiAgICDCoCB9Cj4+Pj4+Pj4+ICAgIMKgICtz
+dGF0aWMgaW50IGYyZnNfaW5pdF9mc19jb250ZXh0KHN0cnVjdCBmc19jb250ZXh0ICpmYykKPj4+
+Pj4+Pj4gK3sKPj4+Pj4+Pj4gK8KgwqDCoCBzdHJ1Y3QgZjJmc19mc19jb250ZXh0ICpjdHg7Cj4+
+Pj4+Pj4+ICsKPj4+Pj4+Pj4gK8KgwqDCoCBjdHggPSBremFsbG9jKHNpemVvZihzdHJ1Y3QgZjJm
+c19mc19jb250ZXh0KSwgR0ZQX0tFUk5FTCk7Cj4+Pj4+Pj4+ICvCoMKgwqAgaWYgKCFjdHgpCj4+
+Pj4+Pj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVOT01FTTsKPj4+Pj4+Pj4gKwo+Pj4+Pj4+
+PiArwqDCoMKgIGZjLT5mc19wcml2YXRlID0gY3R4Owo+Pj4+Pj4+PiArwqDCoMKgIGZjLT5vcHMg
+PSAmZjJmc19jb250ZXh0X29wczsKPj4+Pj4+Pj4gKwo+Pj4+Pj4+PiArwqDCoMKgIHJldHVybiAw
+Owo+Pj4+Pj4+PiArfQo+Pj4+Pj4+PiArCj4+Pj4+Pj4+ICAgIMKgIHN0YXRpYyBzdHJ1Y3QgZmls
+ZV9zeXN0ZW1fdHlwZSBmMmZzX2ZzX3R5cGUgPSB7Cj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgLm93
+bmVywqDCoMKgwqDCoMKgwqAgPSBUSElTX01PRFVMRSwKPj4+Pj4+Pj4gICAgwqDCoMKgwqDCoCAu
+bmFtZcKgwqDCoMKgwqDCoMKgID0gImYyZnMiLAo+Pj4+Pj4+PiAtwqDCoMKgIC5tb3VudMKgwqDC
+oMKgwqDCoMKgID0gZjJmc19tb3VudCwKPj4+Pj4+Pj4gK8KgwqDCoCAuaW5pdF9mc19jb250ZXh0
+ID0gZjJmc19pbml0X2ZzX2NvbnRleHQsCj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgLmtpbGxfc2LC
+oMKgwqAgPSBraWxsX2YyZnNfc3VwZXIsCj4+Pj4+Pj4+ICAgIMKgwqDCoMKgwqAgLmZzX2ZsYWdz
+wqDCoMKgID0gRlNfUkVRVUlSRVNfREVWIHwgRlNfQUxMT1dfSURNQVAsCj4+Pj4+Pj4+ICAgIMKg
+IH07Cj4+Pj4+Pj4KPj4+Pj4KPj4+Pj4KPj4+Cj4+Pgo+IAoKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0
+CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291
+cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
