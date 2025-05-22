@@ -2,102 +2,149 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A9E4AC0AC7
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 May 2025 13:48:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3A75AC134D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 May 2025 20:25:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=vC6pnzONRhCokvme9xJRf4C5QWCLwjUVvNNBCU387S8=; b=TOceb/3m/xxlHTfPyoIBlOo3BE
-	5lcSuD1qOZc7l6uKLOcJQJOeCd0iooBXPhZc9g1qCCG3LDXaPR4hjGbi4VPjP9EmPSflMrfErHHze
-	ZmLMn/qVjAOEp+jHhp6gDu+RfmMeJvFvs0YScSuO2Asag9Y23e8q1gENvMzd71qT+NZg=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=2zpxPgTDoFgdKHU5oUsHcXc4Mz0ZeXyyVgpA3YXnn4M=; b=jBJBcA01BfAO4HWDtJWcGG/tAC
+	CX9TQj1rtssq/NCLY0o/elH2UzxM+u6A1ikY7f/WZbZr/tHCzG+l3F//bl0bwytgN1zJhlFuIp4RZ
+	KbrvzsS55jLwr8EGpoUvudTOTxTA/TOqtVWXXfUwvzBnxgXb15/fWXQKD84wRaB7FY8c=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uI4Pr-0005R0-Cx;
-	Thu, 22 May 2025 11:48:51 +0000
+	id 1uIAbI-0000f2-QS;
+	Thu, 22 May 2025 18:25:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wangzijie1@honor.com>) id 1uI4Pq-0005Qr-1K
+ (envelope-from <daeho43@gmail.com>) id 1uIAbH-0000ev-Hb
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 May 2025 11:48:50 +0000
+ Thu, 22 May 2025 18:25:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bJA/1CuBVMur9ka9t9C3AbtTbIeYUMzJyRJUzlbOzww=; b=X0uMMCEmiTHKF7H7ylt8ttehnN
- 2WTn73gQyLBosBfvV8LBa0yL+bgeArYFyYJaz4aGtw01AhomMgRaZDGRK88+9JWIr5uofyBEAHmqU
- Da52uq7GcfppinvKLSrbj4d4dn6sj19bgMUyfbs+g6otUmDnJvMezTlQuvr2rGACAQwc=;
+ bh=3Gv5UL/mbvczA/AXhPs3M/C8hC0hgs1z+7M1Do9NPzY=; b=MxnS/1AvdGBCVng+cVIaDKB8+z
+ vQGtP0CRjixGPgkahBvHA6XR+MKf7/nz2GCM4FW7Zhr0EHrnDzAJriPjKYQJ6E/WnNrt8cuehlOFi
+ A8qG55lSb7g1dJbBndgJDwFr4QDwbA3WUwrH+eNSKiNpVKfmijn0xkhvyVtiaPmYpaC8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=bJA/1CuBVMur9ka9t9C3AbtTbIeYUMzJyRJUzlbOzww=; b=lLhYdTpq1QjqPNDlRcKNNLik2q
- +ofJGdlcOdr0uhy5sreWo560Yh+TqcEyEjQB36Mik44s52nQlSmz5XpTEAdx9kULE18FOZwVBkijG
- Mun8co1VBibjPQzbWOBzyIvkOWfc1J8oRFHrOeG9CNfEVxXoIBDvEHMX2SJPfX1w/Ego=;
-Received: from mta21.hihonor.com ([81.70.160.142])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=3Gv5UL/mbvczA/AXhPs3M/C8hC0hgs1z+7M1Do9NPzY=; b=R
+ RGZ+W3XvetGPhXRrFbYGKcjc21NQ0dcG2tVdMZi0tQ9gbI8BPx4ubYbIRN30lWKVUXFxrVriXG7sT
+ 5lgdcc5PhxeRKbnb9R0GuB1k+xGbcVMFxXsjPfIZjZ6JC33lFTEFC9cWZFBoRCx+3YlwM7rgo83Rk
+ QY3n+YD7ZrtS/L8k=;
+Received: from mail-pf1-f176.google.com ([209.85.210.176])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uI4Po-00026M-Fn for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 May 2025 11:48:49 +0000
-Received: from w011.hihonor.com (unknown [10.68.20.122])
- by mta21.hihonor.com (SkyGuard) with ESMTPS id 4b35fn0Rd6zYm66r;
- Thu, 22 May 2025 19:29:37 +0800 (CST)
-Received: from a011.hihonor.com (10.68.31.243) by w011.hihonor.com
- (10.68.20.122) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Thu, 22 May
- 2025 19:31:31 +0800
-Received: from localhost.localdomain (10.144.23.14) by a011.hihonor.com
- (10.68.31.243) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Thu, 22 May
- 2025 19:31:31 +0800
-From: wangzijie <wangzijie1@honor.com>
-To: <wangzijie1@honor.com>
-Date: Thu, 22 May 2025 19:31:30 +0800
-Message-ID: <20250522113130.174200-1-wangzijie1@honor.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250522015244.4132723-1-wangzijie1@honor.com>
-References: <20250522015244.4132723-1-wangzijie1@honor.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1uIAbG-00048L-Sx for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 22 May 2025 18:25:03 +0000
+Received: by mail-pf1-f176.google.com with SMTP id
+ d2e1a72fcca58-739b3fe7ce8so6790795b3a.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 22 May 2025 11:25:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1747938292; x=1748543092; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3Gv5UL/mbvczA/AXhPs3M/C8hC0hgs1z+7M1Do9NPzY=;
+ b=Fl/7tdHNRB3ANIRkSuelC36yAqtxPDeBBl52kF6Yegt2JMjbMgBQhEn/H6N2GVg+5h
+ S//1tpsohSoqkFJZ0xOG8c6FIGXNpTxIEAdtsEz0wyqAzLioGhkX468QgK/qyg4Yex2K
+ J8VzlCLhRnLS4sUihoi+mLsh23PgSSUaJ7QqdrzGMpLtCO3q761C0RA8j8eYQbuddFDR
+ qryufwbznLe73PJs7xYbrtE5eEk/D2v1HTsYi//qqlnh5cLtaaMHl56bm3KNZ4IjChPv
+ xeFZDAUEuSwx6OnlD7fxv6dOuAqEMgvrCPbWX41iNpIF8/jy0giv3pH34LwinWrD8nK3
+ qCaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747938292; x=1748543092;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3Gv5UL/mbvczA/AXhPs3M/C8hC0hgs1z+7M1Do9NPzY=;
+ b=iR4c3SzG/G1SqL67LmfWfjU7hLnhbQIUoXSOBlG7qfpFUV6Qu+jb7uqE2BeCvCl+US
+ QHdoKvX8B85ywFEp8hY83POlRDVN0ak1vbLZhG83LUMmt1eowVJUzim2iG3CL1BnXdjc
+ IthScb45DtxopLhdOBX5c3c8pS3s/XQ5cORwbRBAC5Ygl7yxHMR8Lanq8pG+r8jAZT75
+ aPg/nd1B5j3fJUvAOd2anhPjKa2HVU3e9k9LkUePIPlD0p/4AaAbdjGcuZgR/KDAD1+s
+ Xu4yNzWj4131iWExHEKXdBEEnzKovOwObCn5tOjHoRiq20UF5WvTUXHGiZHjjGhLvM5e
+ 2Vkg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWUvJY5JhMmsTXxD1E4tZODWu8okJF9js91hsbHqpto1xy/ikETTHlaTtjvZNWIfH4UjDd9R9qEkRUahvFPZzkE@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yw12ASsY0TkivlOhWVEfk8/x0s1cpZecd32yS2yiWNOSF/RZ4ex
+ iGGomsvbxPUkDMPt3QR2JU2BmPv82nMezqwiA16QGOP00l8t7Lh12CfM
+X-Gm-Gg: ASbGncs4OUdPhGH5RhcJRTtG0F4w9r0Z2f5Z2jVS61a88wbDeTZc+9cPZaJdnlPcFmc
+ UsIN3v6FGEGCXTxLH+A7j/KNm+yELcg1nXv1q/ukbcY16VjlbOMbzEONCEw9x0+1IR0+ny2iFIT
+ bdIc/3Fsu+KhslCIaxyOc3qY1AXdCAbXbCMw3uinP7mDR8R2obhaP3eHye2VuRK4FEFC5J7ax0q
+ 5MYiOhJr8a7qiR9coJ58DBbvlYF+09wKD+QTsU6xy6Q3Zv5WhrZAquG6JGvbWOS3cqfYl+bVyfy
+ pNQlxwnJyz8cXJaoC/De/I9s9HBHaSRcatyhDUS6Lzo+NWiG7LGoSstmZCYkbvV4U8DTqmphqaf
+ dK/r+qtNvvOOQuF9Sc5HkzW0cTbjGtYy5Zmf/xGsjlvY=
+X-Google-Smtp-Source: AGHT+IFvRdwBSifmAKqQ8TmXZ1JkfWoJi0ru8I5kEIWTXq/3P88sy9AQ+SfOw8VDwlqMIxj4sugp7g==
+X-Received: by 2002:a05:6a00:398f:b0:741:b3e2:635b with SMTP id
+ d2e1a72fcca58-742a98de416mr40902566b3a.24.1747938292113; 
+ Thu, 22 May 2025 11:24:52 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2a00:79e0:2e14:7:8127:b563:a3a1:d465])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-742a970c8a8sm11950732b3a.60.2025.05.22.11.24.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 May 2025 11:24:51 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Thu, 22 May 2025 11:24:45 -0700
+Message-ID: <20250522182445.2175742-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.49.0.1151.ga128411c76-goog
 MIME-Version: 1.0
-X-Originating-IP: [10.144.23.14]
-X-ClientProxiedBy: w003.hihonor.com (10.68.17.88) To a011.hihonor.com
- (10.68.31.243)
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  >On 5/22/25 09:52, wangzijie wrote: >> This patch add a ioctl
- to estimate compression gain. In user mode compression, users can define
- >> the interval between clusters for estimation sampling before c [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  From: Daeho Jeong Otherwise, it doesn't work with a crash.
+ Signed-off-by: Daeho Jeong --- lib/libf2fs.c | 5 +++++ 1 file changed, 5
+ insertions(+) 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [81.70.160.142 listed in sa-trusted.bondedsender.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [81.70.160.142 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [209.85.210.176 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [209.85.210.176 listed in sa-accredit.habeas.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1uI4Po-00026M-Fn
-Subject: Re: [f2fs-dev] [PATCH] f2fs : add a ioctl to estimate compression
- gain
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.210.176 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.176 listed in list.dnswl.org]
+X-Headers-End: 1uIAbG-00048L-Sx
+Subject: [f2fs-dev] [PATCH] mkfs.f2fs: ensure zone size is equal or bigger
+ than segment size
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,292 +156,38 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: feng.han@honor.com, tao.wangtao@honor.com, linux-kernel@vger.kernel.org,
- jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net, wangqi13@honor.com
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
->On 5/22/25 09:52, wangzijie wrote:
->> This patch add a ioctl to estimate compression gain. In user mode compression, users can define 
->> the interval between clusters for estimation sampling before compress and release ioctl to a file.
->> This can help users to decide whether to do compress in a fast way, especially for some large files.
->
->Zijie,
->
->Thanks for your contribution.
->
->But, have you considered estimating compression ratio in userspace,
->which may face less risk when there is bug in its implementation.
->Or you have a strong reason to do this in kernel?
->
->Thanks,
+From: Daeho Jeong <daehojeong@google.com>
 
-Hi Chao,
-I think that we can use some existing kernel code(which will be used to
-compress file later) to estimate compression gain directly, but I admit it's 
-safer to do this in userspace, thank you for your suggestion.
+Otherwise, it doesn't work with a crash.
 
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ lib/libf2fs.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
->> 
->> Signed-off-by: wangqi <wangqi13@honor.com>
->> Signed-off-by: wangzijie <wangzijie1@honor.com>
->> ---
->>  fs/f2fs/compress.c        | 107 ++++++++++++++++++++++++++++++++++++++
->>  fs/f2fs/f2fs.h            |   5 ++
->>  fs/f2fs/file.c            |  38 +++++++++++++-
->>  include/uapi/linux/f2fs.h |   8 +++
->>  4 files changed, 157 insertions(+), 1 deletion(-)
->> 
->> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
->> index 9b9481067..3fe160245 100644
->> --- a/fs/f2fs/compress.c
->> +++ b/fs/f2fs/compress.c
->> @@ -1621,6 +1621,113 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
->>  	return err;
->>  }
->>  
->> +int f2fs_estimate_compress(struct inode *inode,
->> +					struct f2fs_comp_estimate *estimate)
->> +{
->> +	unsigned long step, cluster_idx, nr_cluster;
->> +	block_t i, k;
->> +	pgoff_t page_idx;
->> +	int ret = 0;
->> +	__u64 saved_blocks = 0, compressible_clusters = 0;
->> +	struct page *page;
->> +	DEFINE_READAHEAD(ractl, NULL, NULL, inode->i_mapping, 0);
->> +	struct compress_ctx cc = {
->> +		.inode = inode,
->> +		.log_cluster_size = 0,
->> +		.cluster_size = 0,
->> +		.cluster_idx = NULL_CLUSTER,
->> +		.rpages = NULL,
->> +		.nr_rpages = 0,
->> +		.cpages = NULL,
->> +		.rbuf = NULL,
->> +		.cbuf = NULL,
->> +		.rlen = 0,
->> +		.private = NULL,
->> +	};
->> +
->> +	inode_lock_shared(inode);
->> +
->> +	cc.log_cluster_size = F2FS_I(inode)->i_log_cluster_size;
->> +	cc.cluster_size = F2FS_I(inode)->i_cluster_size;
->> +	cc.rlen = PAGE_SIZE * F2FS_I(inode)->i_cluster_size;
->> +
->> +	nr_cluster = (i_size_read(inode) + F2FS_BLKSIZE - 1) >>
->> +			(F2FS_BLKSIZE_BITS + cc.log_cluster_size);
->> +
->> +	if (!(nr_cluster >> (1 + estimate->log_sample_density))) {
->> +		ret = -EINVAL;
->> +		goto unlock_out;
->> +	}
->> +
->> +	if (f2fs_init_compress_ctx(&cc)) {
->> +		ret = -ENOMEM;
->> +		goto unlock_out;
->> +	}
->> +
->> +	step = nr_cluster >> estimate->log_sample_density;
->> +
->> +	for (cluster_idx = 0; cluster_idx < nr_cluster;
->> +		cluster_idx += step) {
->> +		page_idx = cluster_idx << F2FS_I(inode)->i_log_cluster_size;
->> +
->> +		if (f2fs_is_compressed_cluster(inode, page_idx))
->> +			continue;
->> +
->> +		ractl._index = page_idx;
->> +		page_cache_ra_unbounded(&ractl, cc.cluster_size, 0);
->> +
->> +		for (i = 0; i < cc.cluster_size; ++i) {
->> +			page = read_cache_page(inode->i_mapping, page_idx + i, NULL, NULL);
->> +			if (IS_ERR(page)) {
->> +				ret = PTR_ERR(page);
->> +				goto err_out;
->> +			}
->> +			f2fs_compress_ctx_add_page(&cc, page_folio(page));
->> +		}
->> +
->> +		ret = f2fs_compress_pages(&cc);
->> +		if (ret) {
->> +			if (ret == -EAGAIN)
->> +				goto free_rpages;
->> +			else
->> +				goto err_out;
->> +		}
->> +
->> +		saved_blocks += cc.cluster_size - cc.valid_nr_cpages;
->> +		compressible_clusters++;
->> +
->> +		for (k = 0; k < cc.nr_cpages; ++k) {
->> +			f2fs_compress_free_page(cc.cpages[k]);
->> +			cc.cpages[k] = NULL;
->> +		}
->> +
->> +		page_array_free(cc.inode, cc.cpages, cc.nr_cpages);
->> +free_rpages:
->> +		f2fs_put_rpages(&cc);
->> +		cc.nr_rpages = 0;
->> +		cc.cluster_idx = NULL_CLUSTER;
->> +	}
->> +
->> +	f2fs_destroy_compress_ctx(&cc, false);
->> +	inode_unlock_shared(inode);
->> +
->> +	estimate->saved_blocks = saved_blocks;
->> +	estimate->compressible_clusters = compressible_clusters;
->> +
->> +	if (ret == -EAGAIN)
->> +		ret = 0;
->> +
->> +	return ret;
->> +
->> +err_out:
->> +	f2fs_drop_rpages(&cc, i, 0);
->> +	f2fs_destroy_compress_ctx(&cc, false);
->> +
->> +unlock_out:
->> +	inode_unlock_shared(inode);
->> +	return ret;
->> +}
->> +
->>  static inline bool allow_memalloc_for_decomp(struct f2fs_sb_info *sbi,
->>  		bool pre_alloc)
->>  {
->> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->> index f1576dc6e..c0d3bd051 100644
->> --- a/fs/f2fs/f2fs.h
->> +++ b/fs/f2fs/f2fs.h
->> @@ -24,6 +24,7 @@
->>  #include <linux/quotaops.h>
->>  #include <linux/part_stat.h>
->>  #include <linux/rw_hint.h>
->> +#include <uapi/linux/f2fs.h>
->>  
->>  #include <linux/fscrypt.h>
->>  #include <linux/fsverity.h>
->> @@ -4448,6 +4449,7 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
->>  						struct writeback_control *wbc,
->>  						enum iostat_type io_type);
->>  int f2fs_is_compressed_cluster(struct inode *inode, pgoff_t index);
->> +int f2fs_estimate_compress(struct inode *inode, struct f2fs_comp_estimate *estimate);
->>  bool f2fs_is_sparse_cluster(struct inode *inode, pgoff_t index);
->>  void f2fs_update_read_extent_tree_range_compressed(struct inode *inode,
->>  				pgoff_t fofs, block_t blkaddr,
->> @@ -4539,6 +4541,9 @@ static inline void f2fs_invalidate_compress_pages(struct f2fs_sb_info *sbi,
->>  static inline int f2fs_is_compressed_cluster(
->>  				struct inode *inode,
->>  				pgoff_t index) { return 0; }
->> +static inline int f2fs_estimate_compress(
->> +				struct inode *inode,
->> +				struct f2fs_comp_estimate *estimate) { return 0; }
->>  static inline bool f2fs_is_sparse_cluster(
->>  				struct inode *inode,
->>  				pgoff_t index) { return true; }
->> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->> index abbcbb586..befd58c70 100644
->> --- a/fs/f2fs/file.c
->> +++ b/fs/f2fs/file.c
->> @@ -33,7 +33,6 @@
->>  #include "gc.h"
->>  #include "iostat.h"
->>  #include <trace/events/f2fs.h>
->> -#include <uapi/linux/f2fs.h>
->>  
->>  static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
->>  {
->> @@ -3525,6 +3524,40 @@ static int f2fs_ioc_io_prio(struct file *filp, unsigned long arg)
->>  	return 0;
->>  }
->>  
->> +static int f2fs_ioc_estimate_compress(struct file *filp, unsigned long arg)
->> +{
->> +	struct inode *inode = file_inode(filp);
->> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->> +	struct f2fs_comp_estimate estimate;
->> +	int ret = 0;
->> +
->> +	if (!f2fs_sb_has_compression(sbi) ||
->> +			F2FS_OPTION(sbi).compress_mode != COMPR_MODE_USER)
->> +		return -EOPNOTSUPP;
->> +
->> +	if (!f2fs_is_compress_backend_ready(inode))
->> +		return -EOPNOTSUPP;
->> +
->> +	if (!f2fs_compressed_file(inode) ||
->> +		is_inode_flag_set(inode, FI_COMPRESS_RELEASED))
->> +		return -EINVAL;
->> +
->> +	if (copy_from_user(&estimate, (struct f2fs_comp_estimate __user *)arg,
->> +		sizeof(struct f2fs_comp_estimate)))
->> +		return -EFAULT;
->> +
->> +	ret = f2fs_estimate_compress(inode, &estimate);
->> +
->> +	if (ret < 0)
->> +		return ret;
->> +
->> +	if (copy_to_user((struct f2fs_comp_estimate __user *)arg, &estimate,
->> +		sizeof(struct f2fs_comp_estimate)))
->> +		return -EFAULT;
->> +
->> +	return 0;
->> +}
->> +
->>  int f2fs_precache_extents(struct inode *inode)
->>  {
->>  	struct f2fs_inode_info *fi = F2FS_I(inode);
->> @@ -4628,6 +4661,8 @@ static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->>  		return f2fs_ioc_get_dev_alias_file(filp, arg);
->>  	case F2FS_IOC_IO_PRIO:
->>  		return f2fs_ioc_io_prio(filp, arg);
->> +	case F2FS_IOC_ESTIMATE_COMPRESS:
->> +		return f2fs_ioc_estimate_compress(filp, arg);
->>  	default:
->>  		return -ENOTTY;
->>  	}
->> @@ -5347,6 +5382,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
->>  	case F2FS_IOC_COMPRESS_FILE:
->>  	case F2FS_IOC_GET_DEV_ALIAS_FILE:
->>  	case F2FS_IOC_IO_PRIO:
->> +	case F2FS_IOC_ESTIMATE_COMPRESS:
->>  		break;
->>  	default:
->>  		return -ENOIOCTLCMD;
->> diff --git a/include/uapi/linux/f2fs.h b/include/uapi/linux/f2fs.h
->> index 795e26258..07c98985d 100644
->> --- a/include/uapi/linux/f2fs.h
->> +++ b/include/uapi/linux/f2fs.h
->> @@ -45,6 +45,8 @@
->>  #define F2FS_IOC_START_ATOMIC_REPLACE	_IO(F2FS_IOCTL_MAGIC, 25)
->>  #define F2FS_IOC_GET_DEV_ALIAS_FILE	_IOR(F2FS_IOCTL_MAGIC, 26, __u32)
->>  #define F2FS_IOC_IO_PRIO		_IOW(F2FS_IOCTL_MAGIC, 27, __u32)
->> +#define F2FS_IOC_ESTIMATE_COMPRESS	_IOR(F2FS_IOCTL_MAGIC, 28,	\
->> +						struct f2fs_comp_estimate)
->>  
->>  /*
->>   * should be same as XFS_IOC_GOINGDOWN.
->> @@ -104,4 +106,10 @@ struct f2fs_comp_option {
->>  	__u8 log_cluster_size;
->>  };
->>  
->> +struct f2fs_comp_estimate {
->> +	__u16 log_sample_density;
->> +	__u64 compressible_clusters;
->> +	__u64 saved_blocks;
->> +};
->> +
->>  #endif /* _UAPI_LINUX_F2FS_H */
->
->
->
->_______________________________________________
->Linux-f2fs-devel mailing list
->Linux-f2fs-devel@lists.sourceforge.net
->https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+index d2579d7..396e22c 100644
+--- a/lib/libf2fs.c
++++ b/lib/libf2fs.c
+@@ -1346,6 +1346,11 @@ int f2fs_get_f2fs_info(void)
+ 				return -1;
+ 			}
+ 			c.zone_blocks = c.devices[i].zone_blocks;
++			if (c.zone_blocks < DEFAULT_BLOCKS_PER_SEGMENT) {
++				MSG(0, "\tError: zone size should not be less "
++					"than segment size\n");
++				return -1;
++			}
+ 		}
+ 
+ 		/*
+-- 
+2.49.0.1151.ga128411c76-goog
 
 
 
