@@ -2,113 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63CFAAC1A17
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 May 2025 04:33:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2E75AC1A63
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 May 2025 05:26:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=3s2p+g1iTB9zbuhBx0Ml35btpnCkXqkMtQ9DBO/kkso=; b=fqa305Bg/vl05vOFntwfKIJYEj
-	AcPJPhHUd3g0hphhXe2O5n2CYlsbn1lRHxu4R3xI3ngScrVo87unOOOpS7NeSdYhq9wLkHaPtSw7C
-	gQ+RYs7jY0V/yTzJhzT8D9Wxk/qpDOtzk9xK7BiXbYy9xA/uksjo6V5xUqNm8QH5AH0w=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=IxlbPN9hqssC/Bh1lrx/NfC2KJVUfPuLxD3Q2ta660M=; b=VLk6xoeEOgCe5EAxzwlHTBUrng
+	GqRsQpjZj1h01B6x3cDpOAw4S20msQ6obRw60yyVXS8Q1hmi7YS+5k/etTyEWLG94rpPT3pGLfDNP
+	u5ptO3jf881mYLOlFI7DsbTRmkh57hYK+gqlrkxtDpaRi5QlJkwEdqmj+55eCr9u4y2Y=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uIIDV-0001nc-E6;
-	Fri, 23 May 2025 02:33:01 +0000
+	id 1uIJ2u-0006C7-9V;
+	Fri, 23 May 2025 03:26:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uIIDT-0001nW-Iv
+ (envelope-from <chao@kernel.org>) id 1uIJ2n-0006Bw-RI
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 May 2025 02:32:59 +0000
+ Fri, 23 May 2025 03:26:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=p4Wwmq/Uo4hs38PdQTmmnkZXVRJ7sfB4WXNpS8ox+Eg=; b=QN0Wdhhjfw5pZiepXSfe4Vv6ps
- 4Ffvb0i6Ihz22Ka6P3LsOE5TzXiPDWoj6HR3Suu9JeUokh5k5F2/xu/6kmB6rN0AmeSCcvnz4IncM
- dz5g7sTMt/qUD2lI2P5Ji98vlLfSD0jUurQo+6rNtB01L5hp3JHwcPkhWXWXCmhlasVw=;
+ bh=BeNQgTh4TtTdN4cXzV8e9IGEnJJrnIU/rLc318NHNqc=; b=HPKbhbt9lncl7saf3gymM3pSsV
+ 0meopMRbqI3qd1xmerks4+CoPcjFj4Tue5Z5frSh2iZJ7/yN4FghsvqydS8uxyVu4Q68uFfjE1iTj
+ Zc6VM98ceYVKRbgLJy9eipnbOMRr6h4WxDTxtF3uYai2mQlYQh0hfw6WDq9JhpOL2rPs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=p4Wwmq/Uo4hs38PdQTmmnkZXVRJ7sfB4WXNpS8ox+Eg=; b=bcNbixUHqG0EDYY1NBGH5eD/Rc
- Y0MpHGZS0JUpy41CsIaOsMrI71tXXxnJZnnlQL4nt+wPrQz1q5QYmr13bPsr9aK8/0TooN/K4Jh+k
- fULgChzdXquTzX1nhA2FzE+If3DB5fwmXLLwULe7Ufztrf+sG9G3bo2KqFYq911c5cJQ=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=BeNQgTh4TtTdN4cXzV8e9IGEnJJrnIU/rLc318NHNqc=; b=O
+ Hjc7xBNzk09N0JPtUPEeifdUS3ex2pybfZcGhYDRRN9XH7L77XkBbh/z+7rQkH7emQbKm0X6+2/pC
+ iWaOx0TnoXCjoL2Q0fO9sFBBDNWNAEQS+Tn6KxsI6sTyofSFdjv8nufLHliVQfMaElwV4cCXeBZVo
+ AFsQx9vZfWESbysQ=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uIIDS-0004hp-OA for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 May 2025 02:32:59 +0000
+ id 1uIJ2m-0000Zy-Vi for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 23 May 2025 03:26:01 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 4B2ED437D0;
- Fri, 23 May 2025 02:32:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ACEDEC4CEE4;
- Fri, 23 May 2025 02:32:51 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 2CFF3A4D99C;
+ Fri, 23 May 2025 03:25:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0021C4CEE9;
+ Fri, 23 May 2025 03:25:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747967573;
- bh=S25lebnZRW5zzcfOg+loS2fbdOdPCUzd3TChisW/CfM=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=F70IWq7dbwv1hU8ShOf7gZi/CeN0tFvoDF/xdoDjSTCg7r69c/Nt/aZXOj63N0ij6
- EsTNnnsgvIGGihMY7zUF3qyupf5ueE3KRoR0fr4rXRjgahIQmOM85ZWuMF3CsmcSsl
- PACw7y/5qOob1AoSrjQvhQmhqzo84vhUsN3AwDgKjXOiCzLORdjAkUw0EMOYXEA9J7
- D090s/p8cjd12xL6xZf+uYZ8/54BLYTuPVCdfW8D76FPtHfq41zWbh0wk5ARVTo4Df
- ROP1ePaGxKlyCO0NFHJanemjV1dV7+MGBSSuw/Xvf440cMwssyrOhVKyBclXAM1lkP
- ZA4j77cZtlZPw==
-Message-ID: <6c51b7aa-8caa-4dae-b079-01ea8571599b@kernel.org>
-Date: Fri, 23 May 2025 10:32:49 +0800
+ s=k20201202; t=1747970749;
+ bh=zs8r39vbFN2or9MqJTpefToKt3xi9idBEwDckvz2KwE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=RDLkN5U8S0h0uFcNamFboMXudFbJhQc8QAf3cr+uRhghhFNDHhun8aEUAm1nP4Qz2
+ rFZSWF2yCW026/4xDW44AG2ngCgkP/dEPvr7Ro4zwH2M3PYk1FgSA/rvBu0AJBSXfS
+ FxFI+l0dnWuS6VkcIRREzrs7uhqndFZrunEtPFhoQgMMYIMs+Vjmw0hRLl7jJOTvuo
+ 3S1TkRVeVBI3uAK4ppsodeKDJl67+lQMUl3jCY4uGtjA2b2ofyfkE9Gwvai8Fzox4k
+ duY0BuLGywslGToY01i6pmyX4xt2Tq/Kvll+2l+zLfGBr2p7xjRosazBI8jdcIuk9a
+ a92XCKLuQUV/Q==
+To: jaegeuk@kernel.org
+Date: Fri, 23 May 2025 11:25:45 +0800
+Message-ID: <20250523032545.1392641-1-chao@kernel.org>
+X-Mailer: git-send-email 2.49.0.1151.ga128411c76-goog
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Zhiguo Niu <niuzhiguo84@gmail.com>
-References: <20250521115635.829744-1-chao@kernel.org>
- <CAHJ8P3J8cX5+pVkE4TT24zh+wvW06KrpKXT2-7cRx3i8XzBbNw@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CAHJ8P3J8cX5+pVkE4TT24zh+wvW06KrpKXT2-7cRx3i8XzBbNw@mail.gmail.com>
-X-Spam-Score: -0.5 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-Spam-Score: -2.8 (--)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 5/23/25 09:39, Zhiguo Niu wrote: > Chao Yu via Linux-f2fs-devel
-    <linux-f2fs-devel@lists.sourceforge.net> > 于2025年5月21日周三 20:02写道：
-    >> >> INFO: task syz-executor328:5856 blocked for [...] 
- 
- Content analysis details:   (-0.5 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview: Syzbot reports a f2fs bug as below: INFO: task
+ syz-executor328:5856
+ blocked for more than 144 seconds. Not tainted
+ 6.15.0-rc6-syzkaller-00208-g3c21441eeffc
+ #0 "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+ tas [...] 
+ Content analysis details:   (-2.8 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                         [172.234.252.31 listed in sa-trusted.bondedsender.org]
-  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
-                             query to Validity was blocked.  See
-                             https://knowledge.validity.com/hc/en-us/articles/20961730681243
-                              for more information.
-                            [172.234.252.31 listed in bl.score.senderscore.com]
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [147.75.193.91 listed in sa-trusted.bondedsender.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [147.75.193.91 listed in bl.score.senderscore.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [147.75.193.91 listed in list.dnswl.org]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ author's domain
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uIIDS-0004hp-OA
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to skip f2fs_balance_fs() if
+X-Headers-End: 1uIJ2m-0000Zy-Vi
+Subject: [f2fs-dev] [PATCH v3] f2fs: fix to skip f2fs_balance_fs() if
  checkpoint is disabled
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -125,101 +124,116 @@ From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
 Cc: syzbot+aa5bb5f6860e08a60450@syzkaller.appspotmail.com,
  Qi Han <hanqi@vivo.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gNS8yMy8yNSAwOTozOSwgWmhpZ3VvIE5pdSB3cm90ZToKPiBDaGFvIFl1IHZpYSBMaW51eC1m
-MmZzLWRldmVsIDxsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldD4KPiDkuo4y
-MDI15bm0NeaciDIx5pel5ZGo5LiJIDIwOjAy5YaZ6YGT77yaCj4+Cj4+IElORk86IHRhc2sgc3l6
-LWV4ZWN1dG9yMzI4OjU4NTYgYmxvY2tlZCBmb3IgbW9yZSB0aGFuIDE0NCBzZWNvbmRzLgo+PiAg
-ICAgICBOb3QgdGFpbnRlZCA2LjE1LjAtcmM2LXN5emthbGxlci0wMDIwOC1nM2MyMTQ0MWVlZmZj
-ICMwCj4+ICJlY2hvIDAgPiAvcHJvYy9zeXMva2VybmVsL2h1bmdfdGFza190aW1lb3V0X3NlY3Mi
-IGRpc2FibGVzIHRoaXMgbWVzc2FnZS4KPj4gdGFzazpzeXotZXhlY3V0b3IzMjggc3RhdGU6RCBz
-dGFjazoyNDM5MiBwaWQ6NTg1NiAgdGdpZDo1ODMyICBwcGlkOjU4MjYgICB0YXNrX2ZsYWdzOjB4
-NDAwMDQwIGZsYWdzOjB4MDAwMDQwMDYKPj4gQ2FsbCBUcmFjZToKPj4gIDxUQVNLPgo+PiAgY29u
-dGV4dF9zd2l0Y2gga2VybmVsL3NjaGVkL2NvcmUuYzo1MzgyIFtpbmxpbmVdCj4+ICBfX3NjaGVk
-dWxlKzB4MTY4Zi8weDRjNzAga2VybmVsL3NjaGVkL2NvcmUuYzo2NzY3Cj4+ICBfX3NjaGVkdWxl
-X2xvb3Aga2VybmVsL3NjaGVkL2NvcmUuYzo2ODQ1IFtpbmxpbmVdCj4+ICBzY2hlZHVsZSsweDE2
-NS8weDM2MCBrZXJuZWwvc2NoZWQvY29yZS5jOjY4NjAKPj4gIGlvX3NjaGVkdWxlKzB4ODEvMHhl
-MCBrZXJuZWwvc2NoZWQvY29yZS5jOjc3NDIKPj4gIGYyZnNfYmFsYW5jZV9mcysweDRiNC8weDc4
-MCBmcy9mMmZzL3NlZ21lbnQuYzo0NDQKPj4gIGYyZnNfbWFwX2Jsb2NrcysweDNhZjEvMHg0M2Iw
-IGZzL2YyZnMvZGF0YS5jOjE3OTEKPj4gIGYyZnNfZXhwYW5kX2lub2RlX2RhdGErMHg2NTMvMHhh
-ZjAgZnMvZjJmcy9maWxlLmM6MTg3Mgo+PiAgZjJmc19mYWxsb2NhdGUrMHg0ZjUvMHg5OTAgZnMv
-ZjJmcy9maWxlLmM6MTk3NQo+PiAgdmZzX2ZhbGxvY2F0ZSsweDZhMC8weDgzMCBmcy9vcGVuLmM6
-MzM4Cj4+ICBpb2N0bF9wcmVhbGxvY2F0ZSBmcy9pb2N0bC5jOjI5MCBbaW5saW5lXQo+PiAgZmls
-ZV9pb2N0bCBmcy9pb2N0bC5jOi0xIFtpbmxpbmVdCj4+ICBkb192ZnNfaW9jdGwrMHgxYjhmLzB4
-MWViMCBmcy9pb2N0bC5jOjg4NQo+PiAgX19kb19zeXNfaW9jdGwgZnMvaW9jdGwuYzo5MDQgW2lu
-bGluZV0KPj4gIF9fc2Vfc3lzX2lvY3RsKzB4ODIvMHgxNzAgZnMvaW9jdGwuYzo4OTIKPj4gIGRv
-X3N5c2NhbGxfeDY0IGFyY2gveDg2L2VudHJ5L3N5c2NhbGxfNjQuYzo2MyBbaW5saW5lXQo+PiAg
-ZG9fc3lzY2FsbF82NCsweGY2LzB4MjEwIGFyY2gveDg2L2VudHJ5L3N5c2NhbGxfNjQuYzo5NAo+
-PiAgZW50cnlfU1lTQ0FMTF82NF9hZnRlcl9od2ZyYW1lKzB4NzcvMHg3Zgo+Pgo+PiBUaGUgcm9v
-dCBjYXVzZSBpcyBhZnRlciBjb21taXQgODRiNWJiOGJmMGY2ICgiZjJmczogbW9kaWZ5Cj4+IGYy
-ZnNfaXNfY2hlY2twb2ludF9yZWFkeSBsb2dpYyB0byBhbGxvdyBtb3JlIGRhdGEgdG8gYmUgd3Jp
-dHRlbiB3aXRoIHRoZQo+PiBDUCBkaXNhYmxlIiksIHdlIHdpbGwgZ2V0IGNoYW5jZSB0byBhbGxv
-dyBmMmZzX2lzX2NoZWNrcG9pbnRfcmVhZHkoKSB0bwo+PiByZXR1cm4gdHJ1ZSBvbmNlIGJlbG93
-IGNvbmRpdGlvbnMgYXJlIGFsbCB0cnVlOgo+PiAxLiBjaGVja3BvaW50IGlzIGRpc2FibGVkCj4+
-IDIuIHRoZXJlIGFyZSBub3QgZW5vdWdoIGZyZWUgc2VnbWVudHMKPj4gMy4gdGhlcmUgYXJlIGVu
-b3VnaCBmcmVlIGJsb2Nrcwo+Pgo+PiBUaGVuIGl0IHdpbGwgY2F1c2UgZjJmc19iYWxhbmNlX2Zz
-KCkgdG8gdHJpZ2dlciBmb3JlZ3JvdW5kIEdDLgo+Pgo+PiB2b2lkIGYyZnNfYmFsYW5jZV9mcyhz
-dHJ1Y3QgZjJmc19zYl9pbmZvICpzYmksIGJvb2wgbmVlZCkKPj4gLi4uCj4+ICAgICAgICAgaWYg
-KCFmMmZzX2lzX2NoZWNrcG9pbnRfcmVhZHkoc2JpKSkKPj4gICAgICAgICAgICAgICAgIHJldHVy
-bjsKPj4KPj4gQW5kIGl0IG1vdW50cyBmMmZzIGltYWdlIHcvIGdjX21lcmdlLGNoZWNrcG9pbnQ9
-ZGlzYWJsZSwgc28gYmVsb3cgZGVhZGxvb3AKPj4gd2lsbCBoYXBwZW46Cj4+Cj4+IC0gZjJmc19k
-b19zaHV0ZG93biAgICAgICAgICAgICAgLSB2ZnNfZmFsbG9jYXRlICAgICAgICAgICAgICAgICAg
-ICAgICAgIC0gZ2NfdGhyZWFkX2Z1bmMKPj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgLSBmaWxlX3N0YXJ0X3dyaXRlCj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAtIF9fc2Jfc3RhcnRfd3JpdGUoU0JfRlJFRVpFX1dSSVRFKQo+PiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAtIGYyZnNfZmFsbG9jYXRlCj4+ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAtIGYyZnNfZXhwYW5kX2lub2RlX2RhdGEKPj4gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAtIGYyZnNfbWFwX2Jsb2Nrcwo+PiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAtIGYyZnNfYmFsYW5jZV9mcwo+PiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgLSBwcmVwYXJlX3RvX3dhaXQKPj4gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIC0gd2FrZV91cChnY193YWl0X3F1ZXVlX2hlYWQpCj4+ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAtIGlvX3NjaGVkdWxlCj4+ICAtIGJk
-ZXZfZnJlZXplCj4+ICAgLSBmcmVlemVfc3VwZXIKPj4gICAgLSBzYi0+c193cml0ZXJzLmZyb3pl
-biA9IFNCX0ZSRUVaRV9XUklURTsKPj4gICAgLSBzYl93YWl0X3dyaXRlKHNiLCBTQl9GUkVFWkVf
-V1JJVEUpOwo+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgLSBpZiAoc2JpLT5zYi0+c193cml0ZXJzLmZyb3pl
-biA+PSBTQl9GUkVFWkVfV1JJVEUpIGNvbnRpbnVlOwo+PiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBjYXVz
-ZSBkZWFkbG9vcAo+Pgo+PiBUaGlzIHBhdGNoIGZpeCB0byBhZGQgY2hlY2sgY29uZGl0aW9uIGlu
-IGYyZnNfYmFsYW5jZV9mcygpLCBzbyB0aGF0IGlmCj4+IGNoZWNrcG9pbnQgaXMgZGlzYWJsZWQs
-IHdlIHdpbGwganVzdCBza2lwIHRyaWdnZXIgZm9yZWdyb3VuZCBHQyB0bwo+PiBhdm9pZCBhYm92
-ZSBkZWFkbG9vcCBpc3N1ZS4KPj4KPj4gUmVwb3J0ZWQtYnk6IHN5emJvdCthYTViYjVmNjg2MGUw
-OGE2MDQ1MEBzeXprYWxsZXIuYXBwc3BvdG1haWwuY29tCj4+IENsb3NlczogaHR0cHM6Ly9sb3Jl
-Lmtlcm5lbC5vcmcvbGludXgtZjJmcy1kZXZlbC82ODJkNzQzYS5hMDBhMDIyMC4yOWJjMjYuMDI4
-OS5HQUVAZ29vZ2xlLmNvbQo+PiBGaXhlczogODRiNWJiOGJmMGY2ICgiZjJmczogbW9kaWZ5IGYy
-ZnNfaXNfY2hlY2twb2ludF9yZWFkeSBsb2dpYyB0byBhbGxvdyBtb3JlIGRhdGEgdG8gYmUgd3Jp
-dHRlbiB3aXRoIHRoZSBDUCBkaXNhYmxlIikKPj4gQ2M6IFFpIEhhbiA8aGFucWlAdml2by5jb20+
-Cj4+IFNpZ25lZC1vZmYtYnk6IENoYW8gWXUgPGNoYW9Aa2VybmVsLm9yZz4KPj4gLS0tCj4+IHYy
-Ogo+PiAtIGFkZCBtaXNzaW5nIENsb3NlcyBsaW5lCj4+IC0gZml4IHRvIHVzZSBnaXQgY29tbWl0
-IGRlc2NyaXB0aW9uIHN0eWxlCj4+Cj4+ICBmcy9mMmZzL3NlZ21lbnQuYyB8IDIgKysKPj4gIDEg
-ZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKykKPj4KPj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMv
-c2VnbWVudC5jIGIvZnMvZjJmcy9zZWdtZW50LmMKPj4gaW5kZXggNWZmMDExMWVkOTc0Li4xOWI3
-MTZmZGE3MmEgMTAwNjQ0Cj4+IC0tLSBhL2ZzL2YyZnMvc2VnbWVudC5jCj4+ICsrKyBiL2ZzL2Yy
-ZnMvc2VnbWVudC5jCj4+IEBAIC00MzMsNiArNDMzLDggQEAgdm9pZCBmMmZzX2JhbGFuY2VfZnMo
-c3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpLCBib29sIG5lZWQpCj4+ICAgICAgICAgaWYgKG5lZWQg
-JiYgZXhjZXNzX2NhY2hlZF9uYXRzKHNiaSkpCj4+ICAgICAgICAgICAgICAgICBmMmZzX2JhbGFu
-Y2VfZnNfYmcoc2JpLCBmYWxzZSk7Cj4+Cj4+ICsgICAgICAgaWYgKHVubGlrZWx5KGlzX3NiaV9m
-bGFnX3NldChzYmksIFNCSV9DUF9ESVNBQkxFRCkpKQo+PiArICAgICAgICAgICAgICAgcmV0dXJu
-Owo+PiAgICAgICAgIGlmICghZjJmc19pc19jaGVja3BvaW50X3JlYWR5KHNiaSkpCj4+ICAgICAg
-ICAgICAgICAgICByZXR1cm47Cj4gSGkgQ2hhbywKPiBXaGVuIEkgcmVhZCB0aGlzIHBhdGNoLCBJ
-IGZlZWwgdGhhdCBpdCBpcyBzb21ld2hhdCByZWR1bmRhbnQgd2l0aCB0aGUKPiBmb2xsb3dpbmcg
-Y2hlY2tpbmcgYWJvdXQgU0JJX0NQX0RJU0FCTEVEIGluIGYyZnNfaXNfY2hlY2twb2ludF9yZWFk
-eS4KPiBDYW4gd2UgcmVvcmdhbml6ZSB0aGVzZSBjaGVja3MgZm9yIHRoZSBmMmZzX2JhbGFuY2Vf
-ZnMgY2FzZT8KClpoaWd1bywKCk9oLCBJIGFncmVlZC4gSSB0aGluayB3ZSBjYW4ganVzdCB1c2Ug
-aXNfc2JpX2ZsYWdfc2V0KHNiaSwgU0JJX0NQX0RJU0FCTEVEKQppbnN0ZWFkIG9mIGYyZnNfaXNf
-Y2hlY2twb2ludF9yZWFkeSgpIGhlcmUsIGxldCBtZSByZXZpc2UgaXQgaW4gdjMuCgotICAgICAg
-IGlmICghZjJmc19pc19jaGVja3BvaW50X3JlYWR5KHNiaSkpCisgICAgICAgaWYgKHVubGlrZWx5
-KGlzX3NiaV9mbGFnX3NldChzYmksIFNCSV9DUF9ESVNBQkxFRCkpKQoKVGhhbmtzLAoKPiBUaGlz
-IHdpbGwgbWFrZSB0aGUgY29kZSBlYXNpZXIgdG8gcmVhZCBhbmQgdW5kZXJzdGFuZC4KPiB0aGFu
-a3MhCj4+Cj4+IC0tCj4+IDIuNDkuMAo+Pgo+Pgo+Pgo+PiBfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwo+PiBMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlz
-dAo+PiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+PiBodHRwczovL2xp
-c3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCgoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMt
-ZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0
-Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMt
-ZGV2ZWwK
+Syzbot reports a f2fs bug as below:
+
+INFO: task syz-executor328:5856 blocked for more than 144 seconds.
+      Not tainted 6.15.0-rc6-syzkaller-00208-g3c21441eeffc #0
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor328 state:D stack:24392 pid:5856  tgid:5832  ppid:5826   task_flags:0x400040 flags:0x00004006
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5382 [inline]
+ __schedule+0x168f/0x4c70 kernel/sched/core.c:6767
+ __schedule_loop kernel/sched/core.c:6845 [inline]
+ schedule+0x165/0x360 kernel/sched/core.c:6860
+ io_schedule+0x81/0xe0 kernel/sched/core.c:7742
+ f2fs_balance_fs+0x4b4/0x780 fs/f2fs/segment.c:444
+ f2fs_map_blocks+0x3af1/0x43b0 fs/f2fs/data.c:1791
+ f2fs_expand_inode_data+0x653/0xaf0 fs/f2fs/file.c:1872
+ f2fs_fallocate+0x4f5/0x990 fs/f2fs/file.c:1975
+ vfs_fallocate+0x6a0/0x830 fs/open.c:338
+ ioctl_preallocate fs/ioctl.c:290 [inline]
+ file_ioctl fs/ioctl.c:-1 [inline]
+ do_vfs_ioctl+0x1b8f/0x1eb0 fs/ioctl.c:885
+ __do_sys_ioctl fs/ioctl.c:904 [inline]
+ __se_sys_ioctl+0x82/0x170 fs/ioctl.c:892
+ do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+ do_syscall_64+0xf6/0x210 arch/x86/entry/syscall_64.c:94
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+
+The root cause is after commit 84b5bb8bf0f6 ("f2fs: modify
+f2fs_is_checkpoint_ready logic to allow more data to be written with the
+CP disable"), we will get chance to allow f2fs_is_checkpoint_ready() to
+return true once below conditions are all true:
+1. checkpoint is disabled
+2. there are not enough free segments
+3. there are enough free blocks
+
+Then it will cause f2fs_balance_fs() to trigger foreground GC.
+
+void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
+...
+	if (!f2fs_is_checkpoint_ready(sbi))
+		return;
+
+And the testcase mounts f2fs image w/ gc_merge,checkpoint=disable, so deadloop
+will happen through below race condition:
+
+- f2fs_do_shutdown		- vfs_fallocate				- gc_thread_func
+				 - file_start_write
+				  - __sb_start_write(SB_FREEZE_WRITE)
+				 - f2fs_fallocate
+				  - f2fs_expand_inode_data
+				   - f2fs_map_blocks
+				    - f2fs_balance_fs
+				     - prepare_to_wait
+				     - wake_up(gc_wait_queue_head)
+				     - io_schedule
+ - bdev_freeze
+  - freeze_super
+   - sb->s_writers.frozen = SB_FREEZE_WRITE;
+   - sb_wait_write(sb, SB_FREEZE_WRITE);
+									 - if (sbi->sb->s_writers.frozen >= SB_FREEZE_WRITE) continue;
+									 : cause deadloop
+
+This patch fix to add check condition in f2fs_balance_fs(), so that if
+checkpoint is disabled, we will just skip trigger foreground GC to
+avoid such deadloop issue.
+
+Meanwhile let's remove f2fs_is_checkpoint_ready() check condition in
+f2fs_balance_fs(), since it's redundant, due to the main logic in the
+function is to check:
+a) whether checkpoint is disabled
+b) there is enough free segments
+
+f2fs_balance_fs() still has all logics after f2fs_is_checkpoint_ready()'s
+removal.
+
+Reported-by: syzbot+aa5bb5f6860e08a60450@syzkaller.appspotmail.com
+Closes: https://lore.kernel.org/linux-f2fs-devel/682d743a.a00a0220.29bc26.0289.GAE@google.com
+Fixes: 84b5bb8bf0f6 ("f2fs: modify f2fs_is_checkpoint_ready logic to allow more data to be written with the CP disable")
+Cc: Qi Han <hanqi@vivo.com>
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v3:
+- clean up the codes
+ fs/f2fs/segment.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 5ff0111ed974..24b4bb2a4b9b 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -433,7 +433,7 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
+ 	if (need && excess_cached_nats(sbi))
+ 		f2fs_balance_fs_bg(sbi, false);
+ 
+-	if (!f2fs_is_checkpoint_ready(sbi))
++	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
+ 		return;
+ 
+ 	/*
+-- 
+2.49.0
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
