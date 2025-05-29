@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78344AC7D5F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 May 2025 13:49:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2621FAC7D65
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 29 May 2025 13:50:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:References:MIME-Version:In-Reply-To:Message-Id:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=gmsmAtWdb7dCbie5ZKoU7a9N8xcz/E2LTyb35xD4ADA=; b=UNoRgnM2viemvAM3VrTkdcybHL
-	FrhTOwUsy6NlZwFCPbozB2dfifLnPixA4b6hiM6q5fHLAmnwZOHRcpxMCs/9rs/T6e3jNJm+RLqMB
-	i3N2qbLAWWXTC5o5qMNkifBAZSlRaegiyFF8hcbU8njMqSzXjiweIECzUtehb0j7wUhA=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=G3VOiQxzCEhPSCVaPdK4qiNOb78luUNBE6b1pyTZH0o=; b=NT+VE1R+OedRSvLaHxK25bOu6B
+	CT1ztIsbhqLnYSLpjKKatL8d9f/JqzJEpSQzaY9PNCytQGpcbpppCuIkwaNsh9LNRsrSMbOQg0J2K
+	zRDA3c55ErFygKT4iQV41ke1z9SEPacXy3eKeN71P909Ed4jx+rw5bzNXdwb+jX7MP90=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uKblK-0001K0-7C;
-	Thu, 29 May 2025 11:49:30 +0000
+	id 1uKblo-0001yd-U4;
+	Thu, 29 May 2025 11:50:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kundan.kumar@samsung.com>) id 1uKblH-0001Jt-UW
+ (envelope-from <kundan.kumar@samsung.com>) id 1uKblm-0001yO-Rg
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 29 May 2025 11:49:28 +0000
+ Thu, 29 May 2025 11:49:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
  MIME-Version:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gxeKWeWu/ySnXS2r9kcCICk1CnqlIWodIB1MsF0xVi8=; b=NPp1Qgdyepufm2sMfkvvYliYjM
- L7Bk5gVP2x6sZrkhAfdASJaqjZvauRKSy28LJ3GV5jrQvkY9V5SuBeYp5tjrSS6X5VNw5+opQpDcK
- 433OtAkhDEi79H/yBZ/9e2QyfcfFwO78kn2WndMz7gZggJVk9anqkcB3i9EP3R5/VrHw=;
+ bh=csRq9EOkjvotqyaMSnen4p9GhG5ZXIfAgw7tJJltvyc=; b=OVYyEuvmi0BeDPom+zd1ntcuVI
+ DXbKdbLiacUZBmwTyFEcrAvRf4mnGwBrdaWRwu6kmWPXoHQn9wl/TKC+0wmHXg+7A7NqlHG+mFngy
+ iNKI2HR3s99STNDrXortlL8XVc8lL9Wxc4rKFs7ig1HEzCfsDLw+dvoVGXAYegqz+cxY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:
@@ -40,51 +40,51 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gxeKWeWu/ySnXS2r9kcCICk1CnqlIWodIB1MsF0xVi8=; b=BnCiWeqgYDCy2q5ngx6/OhMI6Y
- 4d97Am4cdwdvlzQQNBp1xqsjtkCpbz2jXRrbq9P7uRnfx542yHYyiMYI0G72Er7olYXlIErAqc2dy
- zqoE8wuyC6XvbXrdi6pEpUvBUlGK3LJU2nq+GTtZWi0asjSoNGLQbcVvjOe/o3OJKx84=;
-Received: from mailout2.samsung.com ([203.254.224.25])
+ bh=csRq9EOkjvotqyaMSnen4p9GhG5ZXIfAgw7tJJltvyc=; b=FzzX53A6+dWK3zzv4l6V0zI8h5
+ 4poBZFEwUWRpP7SGHw74MLXebw2dcaGItLFs/AFjIRIZizTrLIyvGf3r9/TD24wTIAEGAHJ0l1FtQ
+ h1DcuhXoa9cJyZqqUPYa4u2vZMGnrM/nkSeO+Mw/6ncl2ECbZleuXgLUnZXzc/i6mFvA=;
+Received: from mailout4.samsung.com ([203.254.224.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uKblH-0000tM-HF for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 29 May 2025 11:49:27 +0000
+ id 1uKbll-0000yX-6u for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 29 May 2025 11:49:58 +0000
 Received: from epcas5p3.samsung.com (unknown [182.195.41.41])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20250529113401epoutp0260abb957a29d62e0c2359613cf886395~D-EIq4XfT2408624086epoutp02K
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20250529113403epoutp046ff79a1a25473d151f3ce78bbb536f61~D-EK263Sp2606426064epoutp04S
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 29 May 2025 11:34:01 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20250529113401epoutp0260abb957a29d62e0c2359613cf886395~D-EIq4XfT2408624086epoutp02K
+ Thu, 29 May 2025 11:34:03 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20250529113403epoutp046ff79a1a25473d151f3ce78bbb536f61~D-EK263Sp2606426064epoutp04S
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1748518441;
- bh=gxeKWeWu/ySnXS2r9kcCICk1CnqlIWodIB1MsF0xVi8=;
+ s=mail20170921; t=1748518443;
+ bh=csRq9EOkjvotqyaMSnen4p9GhG5ZXIfAgw7tJJltvyc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=LdAMmPTf7G967tZgBxoVcxP6UjI1IhyvI0wuuwABkl0ZGdU7y571LYC82/qUU0oNa
- jDJfeLsrlsQYbMvK0L+QCOmKQACmepewzUawNV3T48aUujY00TcQ4M29hMPu0JwmMR
- +eh5JZp+YHGPYTkdaqTtyLGmA7xoP2WHuD4bAmWw=
+ b=Jwv30oxJUTrMEulLh9JHduU96MUNim4Lc334qXNvAIy81vfUt8xJr4L/0pMwaYHmI
+ LPP15/RPWOZ8eZN5vRljK7MgWM3jGUWXbD+ZtMl0L4RliI6vyxWYecueQBk9R+y1LS
+ JOTHNjAjTZ1r2XCPhoKJZYaQwDkX6MV0U7MP/jQI=
 Received: from epsnrtp01.localdomain (unknown [182.195.42.153]) by
  epcas5p3.samsung.com (KnoxPortal) with ESMTPS id
- 20250529113359epcas5p39d7be00f8a656169b79d0370175eb687~D-EHRkHiq0522305223epcas5p3y;
- Thu, 29 May 2025 11:33:59 +0000 (GMT)
+ 20250529113403epcas5p3ecde97960ffa8d7d4d4b45c1779f89fc~D-EKN0Qi20520305203epcas5p37;
+ Thu, 29 May 2025 11:34:03 +0000 (GMT)
 Received: from epcas5p2.samsung.com (unknown [182.195.38.183]) by
- epsnrtp01.localdomain (Postfix) with ESMTP id 4b7PQZ5GZdz6B9m4; Thu, 29 May
- 2025 11:33:58 +0000 (GMT)
+ epsnrtp01.localdomain (Postfix) with ESMTP id 4b7PQd68wvz6B9m6; Thu, 29 May
+ 2025 11:34:01 +0000 (GMT)
 Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
  epcas5p2.samsung.com (KnoxPortal) with ESMTPA id
- 20250529113240epcas5p295dcf9a016cc28e5c3e88d698808f645~D-C9tkRkG0469904699epcas5p2M;
- Thu, 29 May 2025 11:32:40 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ 20250529113245epcas5p2978b77ce5ccf2d620f2a9ee5e796bee3~D-DBs3Xno1680116801epcas5p2Z;
+ Thu, 29 May 2025 11:32:45 +0000 (GMT)
+Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
  epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20250529113240epsmtrp1c4d25ba0721f6abf94540d54df86d1fb~D-C9sQSMO2113121131epsmtrp1N;
- Thu, 29 May 2025 11:32:40 +0000 (GMT)
-X-AuditID: b6c32a29-55afd7000000223e-3d-683845d8bfdf
+ 20250529113245epsmtrp147f2be7878fb2129e7ffc9db6335a65c~D-DBrXzPI2108121081epsmtrp1N;
+ Thu, 29 May 2025 11:32:45 +0000 (GMT)
+X-AuditID: b6c32a28-46cef70000001e8a-40-683845dd0a77
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 12.E0.08766.8D548386; Thu, 29 May 2025 20:32:40 +0900 (KST)
+ epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 1D.41.07818.DD548386; Thu, 29 May 2025 20:32:45 +0900 (KST)
 Received: from localhost.localdomain (unknown [107.99.41.245]) by
  epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20250529113236epsmtip2de2be54bb55648b69293e1f774bef02e~D-C527gT_2208622086epsmtip2t;
- Thu, 29 May 2025 11:32:36 +0000 (GMT)
+ 20250529113241epsmtip22d74af2e3aeb73a5e3c829e676ca9719~D-C9x9Brt2194921949epsmtip20;
+ Thu, 29 May 2025 11:32:40 +0000 (GMT)
 From: Kundan Kumar <kundan.kumar@samsung.com>
 To: jaegeuk@kernel.org, chao@kernel.org, viro@zeniv.linux.org.uk,
  brauner@kernel.org, jack@suse.cz, miklos@szeredi.hu, agruenba@redhat.com,
@@ -93,40 +93,84 @@ To: jaegeuk@kernel.org, chao@kernel.org, viro@zeniv.linux.org.uk,
  amir73il@gmail.com, axboe@kernel.dk, hch@lst.de, ritesh.list@gmail.com,
  djwong@kernel.org, dave@stgolabs.net, p.raghav@samsung.com,
  da.gomez@samsung.com
-Date: Thu, 29 May 2025 16:44:57 +0530
-Message-Id: <20250529111504.89912-7-kundan.kumar@samsung.com>
+Date: Thu, 29 May 2025 16:44:58 +0530
+Message-Id: <20250529111504.89912-8-kundan.kumar@samsung.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250529111504.89912-1-kundan.kumar@samsung.com>
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrJIsWRmVeSWpSXmKPExsWy7bCSvO4NV4sMg4bjxhbb1u1mt5izfg2b
- xYV1qxktWnf+Z7FomvCX2WL13X42i9eHPzFanJ56lsliyyV7i/eXtzFZrL65htFiy7F7jBaX
- n/BZ7J7+j9Xi5oGdTBYrVx9lspg9vZnJ4sn6WcwWW798ZbW4tMjdYs/ekywW99b8Z7W4cOA0
- q8WNCU8ZLZ7t3shs8XlpC7vFwVMd7Baf5gINOf/3OKvF7x9z2BzkPE4tkvDYOesuu8fmFVoe
- l8+Wemxa1cnmsenTJHaPEzN+s3i82DyT0WP3gs9MHrtvNrB5nLtY4fF+31U2j74tqxg9ps6u
- 9ziz4Ai7x4ppF5kChKK4bFJSczLLUov07RK4Mrb0nWMt+M9b8b6tg6mB8Rl3FyMnh4SAicSC
- KeeZuxi5OIQEdjNK3Ov5ywKRkJHYfXcnK4QtLLHy33N2iKKPjBJrX10E6uDgYBPQlfjRFAoS
- FxG4ySxx7uwZsAZmgX+MErtf6YDYwgLJEv0f3rCD2CwCqhKTd91nAunlFbCV+NwVADFfXmLm
- pe9gJZwCdhKLlnxlBLGFgEqW3lwLdg+vgKDEyZlPWCDGy0s0b53NPIFRYBaS1CwkqQWMTKsY
- JVMLinPTc4sNCwzzUsv1ihNzi0vz0vWS83M3MYJTg5bmDsbtqz7oHWJk4mA8xCjBwawkwttk
- b5YhxJuSWFmVWpQfX1Sak1p8iFGag0VJnFf8RW+KkEB6YklqdmpqQWoRTJaJg1OqgelYwAlV
- ptQDmneKbn13DF4kmn9x6a2DRhMjp04smNV0LzDrpmojZ6NcyuzgnKKXdYIXxeXtslz7tXq6
- tlx1dH+4vKw2svE9x92TLc2WJ6UuMjXJbt8gLJLS6zXH1qlvjXTHnBtvRC6vjFWIsUr1+B3J
- pDGt5ZuuiNss2VQjR/6X3XcPLWWQkyqsDnjGfOzTpGO5wSHGvgfXPK8xlfp99Pshm4LSE8u3
- CZs7sH5PZ9A9fPDXZddJ0pOLc7YtPjM1JOCulenDmbmdH3j2Sa7SUs3+rN48depC/jn3vx4N
- rbsl8W/Ko3+C57eyWC4Xfl4/2eu71+aw88tEZdLbc3rCXt14wH4t3W2r7QkLpX0VNUosxRmJ
- hlrMRcWJAMl6RFl8AwAA
-X-CMS-MailID: 20250529113240epcas5p295dcf9a016cc28e5c3e88d698808f645
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrOIsWRmVeSWpSXmKPExsWy7bCSvO5dV4sMg/s3OSy2rdvNbjFn/Ro2
+ iwvrVjNatO78z2LRNOEvs8Xqu/1sFq8Pf2K0OD31LJPFlkv2Fu8vb2OyWH1zDaPFlmP3GC0u
+ P+Gz2D39H6vFzQM7mSxWrj7KZDF7ejOTxZP1s5gttn75ympxaZG7xZ69J1ks7q35z2px4cBp
+ VosbE54yWjzbvZHZ4vPSFnaLg6c62C0+zQUacv7vcVaL3z/msDnIeZxaJOGxc9Zddo/NK7Q8
+ Lp8t9di0qpPNY9OnSeweJ2b8ZvF4sXkmo8fuBZ+ZPHbfbGDzOHexwuP9vqtsHn1bVjF6TJ1d
+ 73FmwRF2jxXTLjIFCEVx2aSk5mSWpRbp2yVwZTT/TC6YrFBx8qtKA+NVqS5GDg4JAROJtdfY
+ uhi5OIQEdjNKzFh4maWLkRMoLiOx++5OVghbWGLlv+fsEEUfGSWWnpjKBtLMJqAr8aMpFCQu
+ InCTWeLc2TNgDcwC/xgldr/SAbGFBdIk2jZtZASxWQRUJd5PaGIHsXkFbCX+/73NBLFAXmLm
+ pe9gcU4BO4lFS76C1QsB1Sy9uZYFol5Q4uTMJywQ8+UlmrfOZp7AKDALSWoWktQCRqZVjJKp
+ BcW56bnJhgWGeanlesWJucWleel6yfm5mxjBaUFLYwfju29N+ocYmTgYDzFKcDArifA22Ztl
+ CPGmJFZWpRblxxeV5qQWH2KU5mBREuddaRiRLiSQnliSmp2aWpBaBJNl4uCUamBS+HWY92pP
+ kj7fZNNTixVfGfFfW8V6K+RWY02TqsTxeeETA++/kXiw5/Puo3qfvs3xF9Fbejoq3eSZumDN
+ zBO23IYebYIMX3lul3r93NDvkvBsyYTHn2pPZgXwmE9XmRjhIiwqN83t6a+fPkuKuf8fCGVb
+ trzgyvrHCgtfcOckm8/6edkkzePLEnabza48H7yO6CQzbpx8QLIzJOyNjvCPKaFPD+fc2Lzr
+ 84Hb9T4rxCJT4nbpaed6lAuFJkUcvcR7Mvrh2q829nrf91wyz+B83Osan3C8RsHJc/2l2943
+ GO9HTrvpI9P7tOjzvsdO837qVa6x6O//s4OFm3sX45StMS8nrK3g/BWamTir51ycEktxRqKh
+ FnNRcSIAprgQRnoDAAA=
+X-CMS-MailID: 20250529113245epcas5p2978b77ce5ccf2d620f2a9ee5e796bee3
 X-Msg-Generator: CA
 X-Sendblock-Type: REQ_APPROVE
 CMS-TYPE: 105P
 cpgsPolicy: CPGSC10-542,Y
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20250529113240epcas5p295dcf9a016cc28e5c3e88d698808f645
+X-CMS-RootMailID: 20250529113245epcas5p2978b77ce5ccf2d620f2a9ee5e796bee3
 References: <20250529111504.89912-1-kundan.kumar@samsung.com>
- <CGME20250529113240epcas5p295dcf9a016cc28e5c3e88d698808f645@epcas5p2.samsung.com>
-X-Headers-End: 1uKblH-0000tM-HF
-Subject: [f2fs-dev] [PATCH 06/13] writeback: invoke all writeback contexts
- for flusher and dirtytime writeback
+ <CGME20250529113245epcas5p2978b77ce5ccf2d620f2a9ee5e796bee3@epcas5p2.samsung.com>
+X-Spam-Score: -5.4 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview: Modify sync related functions to iterate over all writeback
+ contexts. Signed-off-by: Kundan Kumar <kundan.kumar@samsung.com>
+ Signed-off-by:
+ Anuj Gupta <anuj20.g@samsung.com> --- fs/fs-writeback.c | 66
+ +++++++++++++++++++++++++++++++ 1 file changed, 44 in [...] 
+ Content analysis details:   (-5.4 points, 6.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: samsung.com]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [203.254.224.34 listed in sa-trusted.bondedsender.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [203.254.224.34 listed in list.dnswl.org]
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [203.254.224.34 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.34 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -2.9 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uKbll-0000yX-6u
+Subject: [f2fs-dev] [PATCH 07/13] writeback: modify sync related functions
+ to iterate over all writeback contexts
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -146,58 +190,125 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Modify flusher and dirtytime logic to iterate through all the writeback
-contexts.
+Modify sync related functions to iterate over all writeback contexts.
 
 Signed-off-by: Kundan Kumar <kundan.kumar@samsung.com>
 Signed-off-by: Anuj Gupta <anuj20.g@samsung.com>
 ---
- fs/fs-writeback.c | 16 ++++++++++------
- 1 file changed, 10 insertions(+), 6 deletions(-)
+ fs/fs-writeback.c | 66 +++++++++++++++++++++++++++++++----------------
+ 1 file changed, 44 insertions(+), 22 deletions(-)
 
 diff --git a/fs/fs-writeback.c b/fs/fs-writeback.c
-index 72b73c3353fe..9b0940a6fe78 100644
+index 9b0940a6fe78..7558b8a33fe0 100644
 --- a/fs/fs-writeback.c
 +++ b/fs/fs-writeback.c
-@@ -2389,12 +2389,14 @@ static void __wakeup_flusher_threads_bdi(struct backing_dev_info *bdi,
- 					 enum wb_reason reason)
- {
- 	struct bdi_writeback *wb;
-+	struct bdi_writeback_ctx *bdi_wb_ctx;
- 
- 	if (!bdi_has_dirty_io(bdi))
- 		return;
- 
--	list_for_each_entry_rcu(wb, &bdi->wb_ctx_arr[0]->wb_list, bdi_node)
--		wb_start_writeback(wb, reason);
-+	for_each_bdi_wb_ctx(bdi, bdi_wb_ctx)
-+		list_for_each_entry_rcu(wb, &bdi_wb_ctx->wb_list, bdi_node)
-+			wb_start_writeback(wb, reason);
+@@ -2752,11 +2752,13 @@ static void wait_sb_inodes(struct super_block *sb)
+ 	mutex_unlock(&sb->s_sync_lock);
  }
  
- void wakeup_flusher_threads_bdi(struct backing_dev_info *bdi,
-@@ -2444,15 +2446,17 @@ static DECLARE_DELAYED_WORK(dirtytime_work, wakeup_dirtytime_writeback);
- static void wakeup_dirtytime_writeback(struct work_struct *w)
+-static void __writeback_inodes_sb_nr(struct super_block *sb, unsigned long nr,
+-				     enum wb_reason reason, bool skip_if_busy)
++static void __writeback_inodes_sb_nr_ctx(struct super_block *sb,
++					 unsigned long nr,
++					 enum wb_reason reason,
++					 bool skip_if_busy,
++					 struct bdi_writeback_ctx *bdi_wb_ctx)
  {
- 	struct backing_dev_info *bdi;
+-	struct backing_dev_info *bdi = sb->s_bdi;
+-	DEFINE_WB_COMPLETION(done, bdi->wb_ctx_arr[0]);
++	DEFINE_WB_COMPLETION(done, bdi_wb_ctx);
+ 	struct wb_writeback_work work = {
+ 		.sb			= sb,
+ 		.sync_mode		= WB_SYNC_NONE,
+@@ -2766,13 +2768,23 @@ static void __writeback_inodes_sb_nr(struct super_block *sb, unsigned long nr,
+ 		.reason			= reason,
+ 	};
+ 
++	bdi_split_work_to_wbs(sb->s_bdi, bdi_wb_ctx, &work, skip_if_busy);
++	wb_wait_for_completion(&done);
++}
++
++static void __writeback_inodes_sb_nr(struct super_block *sb, unsigned long nr,
++				     enum wb_reason reason, bool skip_if_busy)
++{
++	struct backing_dev_info *bdi = sb->s_bdi;
 +	struct bdi_writeback_ctx *bdi_wb_ctx;
++
+ 	if (!bdi_has_dirty_io(bdi) || bdi == &noop_backing_dev_info)
+ 		return;
+ 	WARN_ON(!rwsem_is_locked(&sb->s_umount));
  
- 	rcu_read_lock();
- 	list_for_each_entry_rcu(bdi, &bdi_list, bdi_list) {
- 		struct bdi_writeback *wb;
+-	bdi_split_work_to_wbs(sb->s_bdi, bdi->wb_ctx_arr[0], &work,
+-			      skip_if_busy);
+-	wb_wait_for_completion(&done);
++	for_each_bdi_wb_ctx(bdi, bdi_wb_ctx)
++		__writeback_inodes_sb_nr_ctx(sb, nr, reason, skip_if_busy,
++					     bdi_wb_ctx);
+ }
  
--		list_for_each_entry_rcu(wb, &bdi->wb_ctx_arr[0]->wb_list,
--					bdi_node)
--			if (!list_empty(&wb->b_dirty_time))
--				wb_wakeup(wb);
-+		for_each_bdi_wb_ctx(bdi, bdi_wb_ctx)
-+			list_for_each_entry_rcu(wb, &bdi_wb_ctx->wb_list,
-+						bdi_node)
-+				if (!list_empty(&wb->b_dirty_time))
-+					wb_wakeup(wb);
- 	}
- 	rcu_read_unlock();
- 	schedule_delayed_work(&dirtytime_work, dirtytime_expire_interval * HZ);
+ /**
+@@ -2825,17 +2837,11 @@ void try_to_writeback_inodes_sb(struct super_block *sb, enum wb_reason reason)
+ }
+ EXPORT_SYMBOL(try_to_writeback_inodes_sb);
+ 
+-/**
+- * sync_inodes_sb	-	sync sb inode pages
+- * @sb: the superblock
+- *
+- * This function writes and waits on any dirty inode belonging to this
+- * super_block.
+- */
+-void sync_inodes_sb(struct super_block *sb)
++static void sync_inodes_bdi_wb_ctx(struct super_block *sb,
++				   struct backing_dev_info *bdi,
++				   struct bdi_writeback_ctx *bdi_wb_ctx)
+ {
+-	struct backing_dev_info *bdi = sb->s_bdi;
+-	DEFINE_WB_COMPLETION(done, bdi->wb_ctx_arr[0]);
++	DEFINE_WB_COMPLETION(done, bdi_wb_ctx);
+ 	struct wb_writeback_work work = {
+ 		.sb		= sb,
+ 		.sync_mode	= WB_SYNC_ALL,
+@@ -2846,6 +2852,25 @@ void sync_inodes_sb(struct super_block *sb)
+ 		.for_sync	= 1,
+ 	};
+ 
++	/* protect against inode wb switch, see inode_switch_wbs_work_fn() */
++	bdi_down_write_wb_ctx_switch_rwsem(bdi_wb_ctx);
++	bdi_split_work_to_wbs(bdi, bdi_wb_ctx, &work, false);
++	wb_wait_for_completion(&done);
++	bdi_up_write_wb_ctx_switch_rwsem(bdi_wb_ctx);
++}
++
++/**
++ * sync_inodes_sb	-	sync sb inode pages
++ * @sb: the superblock
++ *
++ * This function writes and waits on any dirty inode belonging to this
++ * super_block.
++ */
++void sync_inodes_sb(struct super_block *sb)
++{
++	struct backing_dev_info *bdi = sb->s_bdi;
++	struct bdi_writeback_ctx *bdi_wb_ctx;
++
+ 	/*
+ 	 * Can't skip on !bdi_has_dirty() because we should wait for !dirty
+ 	 * inodes under writeback and I_DIRTY_TIME inodes ignored by
+@@ -2855,11 +2880,8 @@ void sync_inodes_sb(struct super_block *sb)
+ 		return;
+ 	WARN_ON(!rwsem_is_locked(&sb->s_umount));
+ 
+-	/* protect against inode wb switch, see inode_switch_wbs_work_fn() */
+-	bdi_down_write_wb_ctx_switch_rwsem(bdi->wb_ctx_arr[0]);
+-	bdi_split_work_to_wbs(bdi, bdi->wb_ctx_arr[0], &work, false);
+-	wb_wait_for_completion(&done);
+-	bdi_up_write_wb_ctx_switch_rwsem(bdi->wb_ctx_arr[0]);
++	for_each_bdi_wb_ctx(bdi, bdi_wb_ctx)
++		sync_inodes_bdi_wb_ctx(sb, bdi, bdi_wb_ctx);
+ 
+ 	wait_sb_inodes(sb);
+ }
 -- 
 2.25.1
 
