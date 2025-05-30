@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBD3BAC8E95
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 30 May 2025 14:53:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 872F5AC91AB
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 30 May 2025 16:35:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=YrsS8iVE+o0kQJKh5PJyU1vb7kSL0mkSdP0Vo5XkdkU=; b=ldxwaT2R2FVufYqxbtZXrV2JGS
-	981visHJSGu35gqeUcBoPYfoq5e3kQL1pAWhEYyLJeI6LcesnVt7ynEQd1IuvAMFjz3GjzfjpeKqf
-	Io03jtNNRsTG3h40zShOKjfzdT7qcbRXC5w4/PSBUJ3jP1Ncs5IEUeUXyeValHyDrlWM=;
+	bh=o3EQG2lAP7iDVo+fqAtyGK9omUt2i/HvmF77adAI8wA=; b=V8fzXRmrPtwI41rtJsz1AKyjMe
+	4f+RlrFZfztQr91g9cTM8gesWpwdXhF2+xs/HBjH0hq5PqHBmwkt2ATSzkeR0VnLae9ns3ADGKIH9
+	VlNjErI7ZZ+VWXjt4kUvnwT08fv9sSfZ9+WeE+XVz76w0QqiXJWqPS/ZY9cDrqAYgK84=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uKzEd-0005CM-D8;
-	Fri, 30 May 2025 12:53:19 +0000
+	id 1uL0oy-0005OV-OL;
+	Fri, 30 May 2025 14:34:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uKzEc-0005C8-40
+ (envelope-from <chao@kernel.org>) id 1uL0ox-0005OI-G9
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 30 May 2025 12:53:18 +0000
+ Fri, 30 May 2025 14:34:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LPxsZCpkQCL0Tm6uGykQ2YrrphxCPcQQrdRumNjURu4=; b=ZDPFLCIhDARQ3myMMPMths1+j1
- /9wQUlQw3aZ5WD79BMOgpQyJe9h5dV8Wr3KGrRyYq6OGfkIntf4j/d8NXgd0e/RifXxfhV/OyLN2Q
- iPNgB6SxYPVw3k3fzXRK6NWWmTwMrIEsNvjtUsNBuZzCItRzdCn0DoZOjjF3zJ0B3ZdM=;
+ bh=d0AySjgt6kRkCCSlKABVCJFKYGqydWzv73KarpAVDkw=; b=DjnYQw0G0f4/aJh0NcmeoG47NE
+ LTxGG06rb8ZJDTwXh6NByG8BK514OGwPwO+SgUNb1uYs2vG3g3JVNs8lixk4/F+v9s8cXZ1NXmzkt
+ SUGkZX8M0xxduP9liUYOy8saI9NTU18vgVPlbU6ddNKL5ih8QRIn1qq/rL/7DA+baj8E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,40 +40,74 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LPxsZCpkQCL0Tm6uGykQ2YrrphxCPcQQrdRumNjURu4=; b=MkybMo7pKERuJ/QZ2V612ziaQn
- 2jHc0+vBQsauUMSmTvJ7goV8HFJBaD9MknyvP3w+eNmLJKuoXfbB9NErGhoi20GuGhwODG/3fJ30u
- aNKni6KKMNdLwNJS5tmu3WrGBqD8fgkuHm00Yl+KN2b6h7w/kViYCln8D6Aeb1YVVHKI=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=d0AySjgt6kRkCCSlKABVCJFKYGqydWzv73KarpAVDkw=; b=UIZSjnq66BAd2L9vmWT5Dyt4nN
+ BUunfCGC/hgnvxPydYl2DFhhEPPvh/wBTaLDUZNkxTWqE8J4KMTIOBAPa4jmHlIRxFgZeatkWch0v
+ U2kzJS21r+lCLAJJZv8rWgWVV+wrI/hAcJWVqdqzg7YT+u+Ncoagd26arJV4j+3MtzcQ=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uKzEb-0007O7-Ep for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 30 May 2025 12:53:18 +0000
+ id 1uL0ow-0003v7-T2 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 30 May 2025 14:34:55 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id CC7E8A4EF34;
- Fri, 30 May 2025 12:53:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05FFAC4CEEB;
- Fri, 30 May 2025 12:53:04 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 80B54435ED;
+ Fri, 30 May 2025 14:34:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E3668C4CEE9;
+ Fri, 30 May 2025 14:34:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1748609586;
- bh=SEikAtc7gEUD30o/zg/MQXV7dFuimQdgUgpDmBrr7OE=;
+ s=k20201202; t=1748615684;
+ bh=1S/VS8/Bcw6UStVGiFNaj5BF65cGwFQfGdO1d8CfHq8=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=bJjTNXGsVjKoduYFHsYbRmQB84krmxxZ4lK3HWTQB/4KUA3KcpO6/8dUEmkS2qHQM
- aAWMm55KQIBewZ57UUTOnd5XeGGnMTUkXT9ITm/InqOWc8lpy9yAZWbyqMlGMP1VHf
- y2OzCc73rgBs7LcBJ1pl3lhj53TSMcIgY3AjxeiwdeCd2MTC/fIcUO0OESalfEjLEm
- g0ERtqh0ZSVTYwyJA6LlutLWkeaO4vSb0PfZe43iaeCCMFvI32rSB8qsMcnG/c/qib
- dyUmy1RtN2OGvzMcxNozmxCia/WG1xWxWebEb8YMfaCCur/pBNTKsaOmY53k2CmD3D
- 09wJwUtlbicBw==
-Message-ID: <bd236bb4-ce45-47da-97da-4da12424a536@kernel.org>
-Date: Fri, 30 May 2025 20:53:26 +0800
+ b=Bgm755Vqkarxhu23N9mWuVlU6LqdXrH+xIdKNozIOQ8ypEhOtWtgmGn5CZvD/OsTw
+ FiimlU9VhnV5AsdVibbUggtf7G5qT4mUhx5k8fs6bd+ZjpGYhJMUpUK919uo9FZPDm
+ y1ZruOPNGXj6DuioF7H9HWSjh5iK8JUiLVcibJ1BTwrS3m0okRQGQxfqiNBUQELj0+
+ Au54IRZBbFz9ixufLpqmh5fX6UiGVHz4JA/akrQ25TPfcM2EmtYbsG0rUEjwHOcXp/
+ KsecO9F9gj0l2Q+sgzQJcCgRTKTX4W1UJnO5fvMJJYdzWe6IwD7LWGTkG5SBc9xmnz
+ NJqjNWKToMSsg==
+Message-ID: <8f56170c-d63a-41a2-a50a-a70de79965d3@kernel.org>
+Date: Fri, 30 May 2025 22:35:03 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Jan Prusakowski <jprusakowski@google.com>, Zorro Lang <zlang@kernel.org>, 
- fstests@vger.kernel.org
-References: <20250530092349.3407742-1-jprusakowski@google.com>
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20250529213750.1068920-1-daeho43@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20250530092349.3407742-1-jprusakowski@google.com>
-X-Headers-End: 1uKzEb-0007O7-Ep
-Subject: Re: [f2fs-dev] [PATCH v1] f2fs/004: avoid race condition in test
+In-Reply-To: <20250529213750.1068920-1-daeho43@gmail.com>
+X-Spam-Score: -3.1 (---)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview:  On 2025/5/30 5:37, Daeho Jeong wrote: > From: Daeho Jeong
+ <daehojeong@google.com> > > one_time mode is only for background GC. So, we
+ need to set it back to > false when foreground GC is enforced. > 
+ Content analysis details:   (-3.1 points, 6.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.234.252.31 listed in sa-accredit.habeas.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.234.252.31 listed in bl.score.senderscore.com]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.9 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uL0ow-0003v7-T2
+Subject: Re: [f2fs-dev] [PATCH] f2fs: turn off one_time when forcibly set to
+ foreground GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,24 +121,38 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2025/5/30 17:23, Jan Prusakowski via Linux-f2fs-devel wrote:
-> In current implementation the atomic write may not start before
-> the direct write and the test fails.
+On 2025/5/30 5:37, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
 > 
-> The patch adds a delay after starting the atomic write process
-> so it has a chance to actually start wrtiting data and set the
-> internal state of the file correctly.
+> one_time mode is only for background GC. So, we need to set it back to
+> false when foreground GC is enforced.
 > 
-> Signed-off-by: Jan Prusakowski <jprusakowski@google.com>
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Need a fixes line?
 
-Thanks,
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> ---
+>   fs/f2fs/gc.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 2b8f9239bede..f752dec71e45 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -1893,6 +1893,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+>   	/* Let's run FG_GC, if we don't have enough space. */
+>   	if (has_not_enough_free_secs(sbi, 0, 0)) {
+>   		gc_type = FG_GC;
+> +		gc_control->one_time = false;
+>   
+>   		/*
+>   		 * For example, if there are many prefree_segments below given
+
 
 
 _______________________________________________
