@@ -2,76 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A66BACC892
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jun 2025 15:59:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69B6DACC8AE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jun 2025 16:05:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=zXXtgbN7GDDJrPXSm2QdlYh19gZjBGR20IoxuSycLjI=; b=aEN08rQ34v9bd2zrj3tCqkpTyN
-	ksa4l5tq0eX/U4j61fD0+qIJw9CiTaM4oRC+NCxK8akfc1H90TCRnm719Zk5QLublFmexLS7xcRFy
-	k5HFkr7GQeg4v7OL+a8Hb6iRaeYW8NGwj81Le6gLPTqX8wdouVL+gVKt8wKiCt35TjNI=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=vQyjWM5erEyUQWo8vWFpz55ugHEBmHDD8/lG4lpTUqM=; b=CS9KskWdeovhHLWGQvvc9yScIc
+	nbLMZuve2HaEz71s71GBC7iqdElS5EQzMz+z0JNlRi3YziKiEH30CsPEz90BEWDo4E6MOqAJQOnFQ
+	gkP79PDqjruZ9El6zKpp6L+TkMoG+mDBs175R1FWRXpj7UmkltnZ5A81nFMOuirItT08=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uMSAj-0005BU-T6;
-	Tue, 03 Jun 2025 13:59:21 +0000
+	id 1uMSGF-00062m-7f;
+	Tue, 03 Jun 2025 14:05:03 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <orbea@riseup.net>) id 1uMSAi-0005BO-NX
+ (envelope-from <hch@lst.de>) id 1uMSGD-000625-2V
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jun 2025 13:59:20 +0000
+ Tue, 03 Jun 2025 14:05:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y4PVtOA4xaFcpNVXZkIbXk7tmbMGLt7I0dTTj+zf57o=; b=V5Wln0TAsjwIeHPyFDZ/hFE97p
- FNPLSbYQbCbvjctg1mxwuJ/muFsxnV3ycrlByZs8A35uu6zAOXiOy5cLfC53f7mb+ncDaEDLgnJFv
- 7QC37jl4tojeA+yLe2lH9ZTSCaPhA1n7yak2vvuKCzzshiSrt8Azqb16+qbAyGxJ55Ls=;
+ bh=KdeN+C81na59VFN4VjFpqchIQBdH9hme8BVMcCk6vsQ=; b=IY6sn5LEMAUI3FRMu+EnAXnmnh
+ WLHv2Gk6VAmTEfEvl1le268Vjx0r0fXoxrmT1cn56nfyOmAIYMNC9ob7vg0dhpv3Fz/Z7e7p8ByBW
+ w+Ni55BKSVyT5QEZgtGzvX1dqDjIIBsUzkF8O0pOFIJ6T6UoOUHzZVtn9xZ8moYmHSRo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Y4PVtOA4xaFcpNVXZkIbXk7tmbMGLt7I0dTTj+zf57o=; b=e
- wHamWkc7WnzuMYzJlLmpdw2L7FYgyfMZBr8BczOBDsocoObRGLZysxhsYRVq3IeIiEQscxozJa2zZ
- APU+Ki/cgMJQl9wWCXXmrKtVjpFvn4pOdy/hSteuZUf6YsiWhKR98O5yowfV7LvxT+iM7EyuwR6o3
- owvIgCzMAbiAx6AI=;
-Received: from mx1.riseup.net ([198.252.153.129])
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=KdeN+C81na59VFN4VjFpqchIQBdH9hme8BVMcCk6vsQ=; b=FyMXnHCoTH6XnNm85WDOz3LdO0
+ cDoz1QVM5b1i/UHcvv/ae6/C1Y0sdmOPvMZ3vyVPhdQU2qeyaegsf/E8KOwUvB3hNnZPZCNkkw5Eu
+ elr1axTOHRazaT+p7JOu62CXWsqYUVZWX7OPK9MLDOnGz/qs5rsDqX8C3vXDLBOd0scA=;
+Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uMSAh-0003wa-R6 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jun 2025 13:59:20 +0000
-Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx1.riseup.net (Postfix) with ESMTPS id 4bBXPn2DD8zDrgT
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  3 Jun 2025 13:59:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
- t=1748959149; bh=Z2sz3s9tFeDt27iSxKo/PNSYCNXTc4b5K/xYuoBzrjI=;
- h=From:To:Cc:Subject:Date:From;
- b=cxofmy4YcDZG2fTDnZrGEOXmmrX94aZHgvMAePM0NkM8Iryr2rJimA7SPcG37/gYF
- i+kUoNvgclxUpbtaPRmRmUzNmD9Fh2+hn8amxfj0sIOQ/8BoCxfK8xme5/6Q8TR7AT
- c6U3WEMzK397dT+xB4V8rS8qtjU1Ivax8sO7ms9Q=
-X-Riseup-User-ID: B4D925D47FEC40C6BEB794EBEDDEFF29239C27B4C9E97E93C2F3B3088EA0A8A1
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4bBXPm6dKjzJrcQ;
- Tue,  3 Jun 2025 13:59:08 +0000 (UTC)
-From: orbea@riseup.net
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue,  3 Jun 2025 06:59:05 -0700
-Message-ID: <20250603135905.13959-1-orbea@riseup.net>
+ id 1uMSGC-0004MS-BR for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Jun 2025 14:05:00 +0000
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 727C668D0F; Tue,  3 Jun 2025 16:04:45 +0200 (CEST)
+Date: Tue, 3 Jun 2025 16:04:45 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Anuj gupta <anuj1072538@gmail.com>
+Message-ID: <20250603140445.GA14351@lst.de>
+References: <CGME20250529113215epcas5p2edd67e7b129621f386be005fdba53378@epcas5p2.samsung.com>
+ <20250529111504.89912-1-kundan.kumar@samsung.com>
+ <20250602141904.GA21996@lst.de>
+ <c029d791-20ca-4f2e-926d-91856ba9d515@samsung.com>
+ <20250603132434.GA10865@lst.de>
+ <CACzX3AuBVsdEUy09W+L+xRAGLsUD0S9+J2AO8nSguA2nX5d8GQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Headers-End: 1uMSAh-0003wa-R6
-Subject: [f2fs-dev] [PATCH 1/1] mkfs: link using libf2fs.la
+Content-Disposition: inline
+In-Reply-To: <CACzX3AuBVsdEUy09W+L+xRAGLsUD0S9+J2AO8nSguA2nX5d8GQ@mail.gmail.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Headers-End: 1uMSGC-0004MS-BR
+Subject: Re: [f2fs-dev] [PATCH 00/13] Parallelizing filesystem writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,46 +77,36 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: orbea <orbea@riseup.net>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: ritesh.list@gmail.com, jack@suse.cz, djwong@kernel.org, amir73il@gmail.com,
+ david@fromorbit.com, gfs2@lists.linux.dev, linux-mm@kvack.org, clm@meta.com,
+ Christoph Hellwig <hch@lst.de>, dave@stgolabs.net, agruenba@redhat.com,
+ miklos@szeredi.hu, Kundan Kumar <kundan.kumar@samsung.com>,
+ willy@infradead.org, p.raghav@samsung.com,
+ Anuj Gupta/Anuj Gupta <anuj20.g@samsung.com>, linux-nfs@vger.kernel.org,
+ da.gomez@samsung.com, viro@zeniv.linux.org.uk, kundanthebest@gmail.com,
+ jaegeuk@kernel.org, axboe@kernel.dk, brauner@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, mcgrof@kernel.org, anna@kernel.org,
+ gost.dev@samsung.com, linux-fsdevel@vger.kernel.org, akpm@linux-foundation.org,
+ trondmy@kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: orbea <orbea@riseup.net>
-
-With slibtool the build will fail with 'cannot find -lf2fs'.
-
-To fix this it is better to use the canonical method of linking internal
-dependencies which is to use the generated .la files where the libtool
-implementation will know what to do with it.
-
-Gentoo-Issue: https://bugs.gentoo.org/929070
-Signed-off-by: orbea <orbea@riseup.net>
----
- mkfs/Makefile.am | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/mkfs/Makefile.am b/mkfs/Makefile.am
-index bfffd88..9273eb6 100644
---- a/mkfs/Makefile.am
-+++ b/mkfs/Makefile.am
-@@ -11,8 +11,8 @@ mkfs_f2fs_LDADD = ${libuuid_LIBS} ${libblkid_LIBS} $(top_builddir)/lib/libf2fs.l
- lib_LTLIBRARIES = libf2fs_format.la
- libf2fs_format_la_SOURCES = f2fs_format_main.c f2fs_format.c f2fs_format_utils.c
- libf2fs_format_la_CFLAGS = -DWITH_BLKDISCARD -D_FILE_OFFSET_BITS=64
--libf2fs_format_la_LDFLAGS = ${libblkid_LIBS} ${libuuid_LIBS} -L$(top_builddir)/lib -lf2fs \
--	-version-info $(FMT_CURRENT):$(FMT_REVISION):$(FMT_AGE)
-+libf2fs_format_la_LIBADD = ${libblkid_LIBS} ${libuuid_LIBS} $(top_builddir)/lib/libf2fs.la
-+libf2fs_format_la_LDFLAGS = -version-info $(FMT_CURRENT):$(FMT_REVISION):$(FMT_AGE)
- 
- install-exec-hook:
- 	if test -n "$(root_libdir)" -a "$(libdir)" != "$(root_libdir)" -a \
--- 
-2.49.0
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gVHVlLCBKdW4gMDMsIDIwMjUgYXQgMDc6MjI6MThQTSArMDUzMCwgQW51aiBndXB0YSB3cm90
+ZToKPiA+IEEgbW91bnQgb3B0aW9uIGlzIGFib3V0IHRoZSB3b3JzdCBwb3NzaWJsZSBpbnRlcmZh
+Y2UgZm9yIGJlaGF2aW9yCj4gPiB0aGF0IGRlcGVuZHMgb24gZmlsZSBzeXN0ZW0gaW1wbGVtZW50
+YXRpb24gYW5kIHBvc3NpYmx5IGhhcmR3YXJlCj4gPiBjaGFjdGVyaXN0aWNzLiAgVGhpcyBuZWVk
+cyB0byBiZSBzZXQgYnkgdGhlIGZpbGUgc3lzdGVtcywgcG9zc2libHkKPiA+IHVzaW5nIGdlbmVy
+aWMgaGVscGVycyB1c2luZyBoYXJkd2FyZSBpbmZvcm1hdGlvbi4KPiAKPiBSaWdodCwgdGhhdCBt
+YWtlcyBzZW5zZS4gSW5zdGVhZCBvZiB1c2luZyBhIG1vdW50IG9wdGlvbiwgd2UgY2FuCj4gaW50
+cm9kdWNlIGdlbmVyaWMgaGVscGVycyB0byBpbml0aWFsaXplIG11bHRpcGxlIHdyaXRlYmFjayBj
+b250ZXh0cwo+IGJhc2VkIG9uIHVuZGVybHlpbmcgaGFyZHdhcmUgY2hhcmFjdGVyaXN0aWNzIOKA
+lCBlLmcuLCBudW1iZXIgb2YgQ1BVcyBvcgo+IE5VTUEgdG9wb2xvZ3kuIEZpbGVzeXN0ZW1zIGxp
+a2UgWEZTIGFuZCBFWFQ0IGNhbiB0aGVuIGNhbGwgdGhlc2UgaGVscGVycwo+IGR1cmluZyBtb3Vu
+dCB0byBvcHQgaW50byBwYXJhbGxlbCB3cml0ZWJhY2sgaW4gYSBjb250cm9sbGVkIHdheS4KClll
+cy4gIEEgbW91bnQgb3B0aW9uIG1pZ2h0IHN0aWxsIGJlIHVzZWZ1bCB0byBvdmVycmlkZSB0aGlz
+IGRlZmF1bHQsCmJ1dCBpdCBzaG91bGQgbm90IGJlIG5lZWRlZCBmb3IgdGhlIG5vcm1hbCB1c2Ug
+Y2FzZS4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+TGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3Vy
+Y2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8v
+bGludXgtZjJmcy1kZXZlbAo=
