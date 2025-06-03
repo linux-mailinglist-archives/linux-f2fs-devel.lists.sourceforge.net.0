@@ -2,107 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38DFCACC87F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jun 2025 15:53:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A66BACC892
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jun 2025 15:59:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=5R3p4cviZK2eiiCHt+Mena7F2WKn0bl+MgxJ6VP5/Rs=; b=T56dO7jEVK9EjnUWUABl+SImwp
-	r6ktLB0YTatdAI+Gp+2KEJ71ofp3F80Y5Mj9FE8Xj+WMtN/NZ5KXHgu0ghcK6Z1WiYFkoW8FzU+8v
-	YGnxoL0/QdQ4gRvZeTGVRA93uUikYGvFhy5FSFLsIXznuRFpPMK6GwRcbFOlaGExpdCY=;
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=zXXtgbN7GDDJrPXSm2QdlYh19gZjBGR20IoxuSycLjI=; b=aEN08rQ34v9bd2zrj3tCqkpTyN
+	ksa4l5tq0eX/U4j61fD0+qIJw9CiTaM4oRC+NCxK8akfc1H90TCRnm719Zk5QLublFmexLS7xcRFy
+	k5HFkr7GQeg4v7OL+a8Hb6iRaeYW8NGwj81Le6gLPTqX8wdouVL+gVKt8wKiCt35TjNI=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uMS4g-00052s-JJ;
-	Tue, 03 Jun 2025 13:53:06 +0000
+	id 1uMSAj-0005BU-T6;
+	Tue, 03 Jun 2025 13:59:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <anuj1072538@gmail.com>) id 1uMS4e-00052m-Jk
+ (envelope-from <orbea@riseup.net>) id 1uMSAi-0005BO-NX
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jun 2025 13:53:04 +0000
+ Tue, 03 Jun 2025 13:59:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y3dgRxegT5qf67xryaScOvVUZaIAW5sj2uHc8EGQ1+g=; b=a97FU/Vq/mpfX53+vcy4LOg3sy
- We73KmLiukTdY0axw5eK6iocSOqi7Eiua9VpA7Jhp9BgfgEHUs48OnU0Qv1/rACenciP8hkHN/i+U
- n+Mofa8UaGjTXtT5ka2aN4N15OG2MxyQOoj9bE4s//LyMRcRCAxJQNinSQZ5FfEdi778=;
+ bh=Y4PVtOA4xaFcpNVXZkIbXk7tmbMGLt7I0dTTj+zf57o=; b=V5Wln0TAsjwIeHPyFDZ/hFE97p
+ FNPLSbYQbCbvjctg1mxwuJ/muFsxnV3ycrlByZs8A35uu6zAOXiOy5cLfC53f7mb+ncDaEDLgnJFv
+ 7QC37jl4tojeA+yLe2lH9ZTSCaPhA1n7yak2vvuKCzzshiSrt8Azqb16+qbAyGxJ55Ls=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Y3dgRxegT5qf67xryaScOvVUZaIAW5sj2uHc8EGQ1+g=; b=aM3osQmOITQFyoZFuKfM63FU54
- 93QjFYv2qbaQGH8V80v6JjiKUDpgfz+ZaS9ZT8aXPUmAtPbrCbKqi/l3kumxkylJgL1bZZ1qrO0np
- l44pLC5T3KzLna5BNmMubt3+L1QK5r26GiGKCJVL56GoJ0yPeXMMPOjs9EF0yTzcDgFg=;
-Received: from mail-ed1-f44.google.com ([209.85.208.44])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Y4PVtOA4xaFcpNVXZkIbXk7tmbMGLt7I0dTTj+zf57o=; b=e
+ wHamWkc7WnzuMYzJlLmpdw2L7FYgyfMZBr8BczOBDsocoObRGLZysxhsYRVq3IeIiEQscxozJa2zZ
+ APU+Ki/cgMJQl9wWCXXmrKtVjpFvn4pOdy/hSteuZUf6YsiWhKR98O5yowfV7LvxT+iM7EyuwR6o3
+ owvIgCzMAbiAx6AI=;
+Received: from mx1.riseup.net ([198.252.153.129])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uMS4d-0003Yk-UJ for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jun 2025 13:53:04 +0000
-Received: by mail-ed1-f44.google.com with SMTP id
- 4fb4d7f45d1cf-606ddbda275so186820a12.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uMSAh-0003wa-R6 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Jun 2025 13:59:20 +0000
+Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx1.riseup.net (Postfix) with ESMTPS id 4bBXPn2DD8zDrgT
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 03 Jun 2025 06:53:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748958777; x=1749563577; darn=lists.sourceforge.net;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Y3dgRxegT5qf67xryaScOvVUZaIAW5sj2uHc8EGQ1+g=;
- b=AO3BDde25lDjMXfMH92pWrvCfW/YJT8GqPV6sMVrM1VNzgc4Z3uNRon+9aoBpUCs76
- Ire/vg2bpMusbT7dkD0ArySu3vpv0SiDfQj7Va+Zuhv/Klzc6T0q2tnGqgGReLH/IaF6
- YCNKXPKQlUGllt/pjcBRuRr2O70wRTpLfSXin6cMRi5I0tN1BmPTdOcHEP2+4ZpI9jhW
- VS+hnFzynsVS2Ql6ZyGID+0KgHn+XgBechRZiPBehZvuj1R4T++2T/FCY8sPHECjp+Hl
- 5R1dtakMP8YMQffDA1vPTjhzRaGe8NHoQQIWqkDvmW0YPtAUqoolsb6BZaXH7kMq8Z1O
- 2jbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748958777; x=1749563577;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Y3dgRxegT5qf67xryaScOvVUZaIAW5sj2uHc8EGQ1+g=;
- b=Rp5F+sS9jq+9v/LpoH/Ik46hScX8crJG+KCzUH7wb3nteediG9spbGHj0B3bw59BJu
- cdQdAuZ1qYWLXb1PTK/iqK6/2Ffxfo2Jfwqo+p9xnvvpU8n4tJv4uwULO2oaSkPhHSic
- +7nI8s0s5fCVYjuUqU64Gpn7gB2XmPwKMWlaWQzCu0cPJTtKqXqJo396AOhS1prJAB24
- 7YGW/FSkvNkhQavGRcgFE73kX6icM+3OWE9sabUc+rJCFxQ0H0gx521Bat2wzmjDRkH9
- ofPeV8KNxwQoTfhr2VnEybUZssiKd/CghmFrBCgQCGKzrc5siRI91h/MUyJBR+H6lL+b
- NjvQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUo7IcHTsGELTKMZSEl6DPoqnbmF48JiLELjp3WBigJEGoRj3mjmsFjmvuaGFeQ3Xh2X7a5TNGWsHVWHbjuU6wi@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yy6wpC7Wd10S7kJ669nHTLS88YHyawhmMFyRuIEWZn5ET4PXbHl
- R+BqmfJrXYUSgW/pKig15AvG39xMYBVZeKng6HjCSAesurYq5y2GNBAdsJa0BIk/h3zRwHnpMH/
- dktps162GJe/yrdlZ0fLTbO0e10Z7EA==
-X-Gm-Gg: ASbGncuVH3DBoGZnU2xg/a6cNGzIHBaXanATWmokKQZg0UIPZ7GjUuMa8Sep6/6sBRI
- 3jP3U6YKG+VNaK3jRTyJfuAZcJ9t3EvIpBV6jx5liixtcIAm8Wp5+wKACw4kpO7Gh25FqAOtqos
- etQgISRk0a+99f+syYdUglkOm4OB3LM/85ARjs8Ubl32aYP0UCw0GDS4YbmSseDZlbc9K6ufPAe
- Q==
-X-Google-Smtp-Source: AGHT+IFus+lYy/Vn8DX7AejSTWq5DWSZv2otFfVWZOt+Ot1Cw3NBGg/aiRMWu1o2ZMIdoZsQp1gzV5igzu9cyaTxn5s=
-X-Received: by 2002:a17:907:3f0f:b0:ad8:9909:20b5 with SMTP id
- a640c23a62f3a-adb496037b7mr1318776566b.56.1748958777045; Tue, 03 Jun 2025
- 06:52:57 -0700 (PDT)
+ Tue,  3 Jun 2025 13:59:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
+ t=1748959149; bh=Z2sz3s9tFeDt27iSxKo/PNSYCNXTc4b5K/xYuoBzrjI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=cxofmy4YcDZG2fTDnZrGEOXmmrX94aZHgvMAePM0NkM8Iryr2rJimA7SPcG37/gYF
+ i+kUoNvgclxUpbtaPRmRmUzNmD9Fh2+hn8amxfj0sIOQ/8BoCxfK8xme5/6Q8TR7AT
+ c6U3WEMzK397dT+xB4V8rS8qtjU1Ivax8sO7ms9Q=
+X-Riseup-User-ID: B4D925D47FEC40C6BEB794EBEDDEFF29239C27B4C9E97E93C2F3B3088EA0A8A1
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4bBXPm6dKjzJrcQ;
+ Tue,  3 Jun 2025 13:59:08 +0000 (UTC)
+From: orbea@riseup.net
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue,  3 Jun 2025 06:59:05 -0700
+Message-ID: <20250603135905.13959-1-orbea@riseup.net>
 MIME-Version: 1.0
-References: <CGME20250529113215epcas5p2edd67e7b129621f386be005fdba53378@epcas5p2.samsung.com>
- <20250529111504.89912-1-kundan.kumar@samsung.com>
- <20250602141904.GA21996@lst.de>
- <c029d791-20ca-4f2e-926d-91856ba9d515@samsung.com>
- <20250603132434.GA10865@lst.de>
-In-Reply-To: <20250603132434.GA10865@lst.de>
-From: Anuj gupta <anuj1072538@gmail.com>
-Date: Tue, 3 Jun 2025 19:22:18 +0530
-X-Gm-Features: AX0GCFs142Om3-wJu99daJuShs3COk0AlQwDiy7BvMajL8e3IU6AzAyzk8BCwWQ
-Message-ID: <CACzX3AuBVsdEUy09W+L+xRAGLsUD0S9+J2AO8nSguA2nX5d8GQ@mail.gmail.com>
-To: Christoph Hellwig <hch@lst.de>
-X-Headers-End: 1uMS4d-0003Yk-UJ
-Subject: Re: [f2fs-dev] [PATCH 00/13] Parallelizing filesystem writeback
+X-Headers-End: 1uMSAh-0003wa-R6
+Subject: [f2fs-dev] [PATCH 1/1] mkfs: link using libf2fs.la
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,61 +83,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ritesh.list@gmail.com, jack@suse.cz, djwong@kernel.org, amir73il@gmail.com,
- david@fromorbit.com, gfs2@lists.linux.dev, linux-mm@kvack.org, clm@meta.com,
- dave@stgolabs.net, agruenba@redhat.com, miklos@szeredi.hu,
- Kundan Kumar <kundan.kumar@samsung.com>, willy@infradead.org,
- p.raghav@samsung.com, Anuj Gupta/Anuj Gupta <anuj20.g@samsung.com>,
- linux-nfs@vger.kernel.org, da.gomez@samsung.com, viro@zeniv.linux.org.uk,
- kundanthebest@gmail.com, jaegeuk@kernel.org, axboe@kernel.dk,
- brauner@kernel.org, linux-f2fs-devel@lists.sourceforge.net, mcgrof@kernel.org,
- anna@kernel.org, gost.dev@samsung.com, linux-fsdevel@vger.kernel.org,
- akpm@linux-foundation.org, trondmy@kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: orbea <orbea@riseup.net>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gVHVlLCBKdW4gMywgMjAyNSBhdCA2OjU04oCvUE0gQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBs
-c3QuZGU+IHdyb3RlOgo+Cj4gT24gVHVlLCBKdW4gMDMsIDIwMjUgYXQgMDI6NDY6MjBQTSArMDUz
-MCwgQW51aiBHdXB0YS9BbnVqIEd1cHRhIHdyb3RlOgo+ID4gT24gNi8yLzIwMjUgNzo0OSBQTSwg
-Q2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4gPiA+IE9uIFRodSwgTWF5IDI5LCAyMDI1IGF0IDA0
-OjQ0OjUxUE0gKzA1MzAsIEt1bmRhbiBLdW1hciB3cm90ZToKPiA+ID4gV2VsbCwgdGhlIHByb3Bl
-ciB0aGluZyB3b3VsZCBiZSB0byBmaWd1cmUgb3V0IGEgZ29vZCBkZWZhdWx0IGFuZCBub3QKPiA+
-ID4ganVzdCBrZWVwIHRoaW5ncyBhcy1pcywgbm8/Cj4gPgo+ID4gV2Ugb2JzZXJ2ZWQgdGhhdCBz
-b21lIGZpbGVzeXN0ZW1zLCBzdWNoIGFzIEJ0cmZzLCBkb24ndCBiZW5lZml0IGZyb20KPiA+IHRo
-aXMgaW5mcmEgZHVlIHRvIHRoZWlyIGRpc3RpbmN0IHdyaXRlYmFjayBhcmNoaXRlY3R1cmUuIFRv
-IHByZXNlcnZlCj4gPiBjdXJyZW50IGJlaGF2aW9yIGFuZCBhdm9pZCB1bmludGVuZGVkIGNoYW5n
-ZXMgZm9yIHN1Y2ggZmlsZXN5c3RlbXMsCj4gPiB3ZSBoYXZlIGtlcHQgbnJfd2JfY3R4PTEgYXMg
-dGhlIGRlZmF1bHQuIEZpbGVzeXN0ZW1zIHRoYXQgY2FuIHRha2UKPiA+IGFkdmFudGFnZSBvZiBw
-YXJhbGxlbCB3cml0ZWJhY2sgKHhmcywgZXh0NCkgY2FuIG9wdC1pbiB2aWEgYSBtb3VudAo+ID4g
-b3B0aW9uLiBBbHNvIHdlIHdhbnRlZCB0byByZWR1Y2UgcmlzayBkdXJpbmcgaW5pdGlhbCBpbnRl
-Z3JhdGlvbiBhbmQKPiA+IGhlbmNlIGtlcHQgaXQgYXMgb3B0LWluLgo+Cj4gQSBtb3VudCBvcHRp
-b24gaXMgYWJvdXQgdGhlIHdvcnN0IHBvc3NpYmxlIGludGVyZmFjZSBmb3IgYmVoYXZpb3IKPiB0
-aGF0IGRlcGVuZHMgb24gZmlsZSBzeXN0ZW0gaW1wbGVtZW50YXRpb24gYW5kIHBvc3NpYmx5IGhh
-cmR3YXJlCj4gY2hhY3RlcmlzdGljcy4gIFRoaXMgbmVlZHMgdG8gYmUgc2V0IGJ5IHRoZSBmaWxl
-IHN5c3RlbXMsIHBvc3NpYmx5Cj4gdXNpbmcgZ2VuZXJpYyBoZWxwZXJzIHVzaW5nIGhhcmR3YXJl
-IGluZm9ybWF0aW9uLgoKUmlnaHQsIHRoYXQgbWFrZXMgc2Vuc2UuIEluc3RlYWQgb2YgdXNpbmcg
-YSBtb3VudCBvcHRpb24sIHdlIGNhbgppbnRyb2R1Y2UgZ2VuZXJpYyBoZWxwZXJzIHRvIGluaXRp
-YWxpemUgbXVsdGlwbGUgd3JpdGViYWNrIGNvbnRleHRzCmJhc2VkIG9uIHVuZGVybHlpbmcgaGFy
-ZHdhcmUgY2hhcmFjdGVyaXN0aWNzIOKAlCBlLmcuLCBudW1iZXIgb2YgQ1BVcyBvcgpOVU1BIHRv
-cG9sb2d5LiBGaWxlc3lzdGVtcyBsaWtlIFhGUyBhbmQgRVhUNCBjYW4gdGhlbiBjYWxsIHRoZXNl
-IGhlbHBlcnMKZHVyaW5nIG1vdW50IHRvIG9wdCBpbnRvIHBhcmFsbGVsIHdyaXRlYmFjayBpbiBh
-IGNvbnRyb2xsZWQgd2F5LgoKPgo+ID4gVXNlZCBQTUVNIG9mIDZHCj4KPiBiYXR0ZXJ5L2NhcGFj
-aXRvciBiYWNrZWQgRFJBTSwgb3Igb3B0YW5lPwoKV2UgZW11bGF0ZWQgUE1FTSB1c2luZyBEUkFN
-IGJ5IGZvbGxvd2luZyB0aGUgc3RlcHMgaGVyZToKaHR0cHM6Ly93d3cuaW50ZWwuY29tL2NvbnRl
-bnQvd3d3L3VzL2VuL2RldmVsb3Blci9hcnRpY2xlcy90cmFpbmluZy9ob3ctdG8tZW11bGF0ZS1w
-ZXJzaXN0ZW50LW1lbW9yeS1vbi1hbi1pbnRlbC1hcmNoaXRlY3R1cmUtc2VydmVyLmh0bWwKCj4K
-PiA+Cj4gPiBhbmQgTlZNZSBTU0Qgb2YgMy44NCBUQgo+Cj4gQ29uc3VtZXIgZHJpdmUsIGVudGVy
-cHJpc2UgZHJpdmU/CgpJdCdzIGFuIGVudGVycHJpc2UtZ3JhZGUgZHJpdmUg4oCUIFNhbXN1bmcg
-UE0xNzMzCgo+Cj4gPiBGb3IgeGZzIHVzZWQgdGhpcyBjb21tYW5kOgo+ID4geGZzX2lvIC1jICJz
-dGF0IiAvbW50L3Rlc3RmaWxlCj4gPiBBbmQgZm9yIGV4dDQgdXNlZCB0aGlzOgo+ID4gZmlsZWZy
-YWcgL21udC90ZXN0ZmlsZQo+Cj4gZmlsZWZyYWcgbWVyZ2VzIGNvbnRpZ3VvdXMgZXh0ZW50cywg
-YW5kIG9ubHkgY291bnRzIHVwIGZvciBkaXNjb250aWd1b3VzCj4gbWFwcGluZ3MsIHdoaWxlIGZz
-eGF0dHIubmV4dGVudHMgY291bnRzIGFsbCBleHRlbnQgZXZlbiBpZiB0aGV5IGFyZQo+IGNvbnRp
-Z3VvdXMuICBTbyB5b3UgcHJvYmFibHkgd2FudCB0byB1c2UgZmlsZWZyYWcgZm9yIGJvdGggY2Fz
-ZXMuCgpHb3QgaXQg4oCUIHRoYW5rcyBmb3IgdGhlIGNsYXJpZmljYXRpb24uIFdlJ2xsIHN3aXRj
-aCB0byB1c2luZyBmaWxlZnJhZwphbmQgd2lsbCBzaGFyZSB1cGRhdGVkIGV4dGVudCBjb3VudCBu
-dW1iZXJzIGFjY29yZGluZ2x5LgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2
-ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xp
-c3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+From: orbea <orbea@riseup.net>
+
+With slibtool the build will fail with 'cannot find -lf2fs'.
+
+To fix this it is better to use the canonical method of linking internal
+dependencies which is to use the generated .la files where the libtool
+implementation will know what to do with it.
+
+Gentoo-Issue: https://bugs.gentoo.org/929070
+Signed-off-by: orbea <orbea@riseup.net>
+---
+ mkfs/Makefile.am | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/mkfs/Makefile.am b/mkfs/Makefile.am
+index bfffd88..9273eb6 100644
+--- a/mkfs/Makefile.am
++++ b/mkfs/Makefile.am
+@@ -11,8 +11,8 @@ mkfs_f2fs_LDADD = ${libuuid_LIBS} ${libblkid_LIBS} $(top_builddir)/lib/libf2fs.l
+ lib_LTLIBRARIES = libf2fs_format.la
+ libf2fs_format_la_SOURCES = f2fs_format_main.c f2fs_format.c f2fs_format_utils.c
+ libf2fs_format_la_CFLAGS = -DWITH_BLKDISCARD -D_FILE_OFFSET_BITS=64
+-libf2fs_format_la_LDFLAGS = ${libblkid_LIBS} ${libuuid_LIBS} -L$(top_builddir)/lib -lf2fs \
+-	-version-info $(FMT_CURRENT):$(FMT_REVISION):$(FMT_AGE)
++libf2fs_format_la_LIBADD = ${libblkid_LIBS} ${libuuid_LIBS} $(top_builddir)/lib/libf2fs.la
++libf2fs_format_la_LDFLAGS = -version-info $(FMT_CURRENT):$(FMT_REVISION):$(FMT_AGE)
+ 
+ install-exec-hook:
+ 	if test -n "$(root_libdir)" -a "$(libdir)" != "$(root_libdir)" -a \
+-- 
+2.49.0
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
