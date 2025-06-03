@@ -2,76 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D98C5ACBE0F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jun 2025 03:10:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 303DBACC03B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jun 2025 08:32:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=7sjArtM/PYW4YNcYQDgt7GBoWF+nej3VOx4izS2k2OM=; b=Hhrx6W7vctTp9tSHgrgvpdbZzh
-	a0dT63hHfEDCau6pwqgOOJKjZ1p4m/O2L/SsD5aDZIpuT/jASLpX6d6OMHkLkLvfAUnokQetFyZ5d
-	0qGuwPnWmcQVlc5C0uIVEsAe8EGNz8T0uzbUHcVlcDf9LS92v4+COraM1Nn4gX8R8PWQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=4NrFM5Xr5HXskNZkzoRnSddvvc67zm4uxeVMtLOUZas=; b=gXVmV7FRIxv8k2IJHEcvVawzzw
+	QvJozCyNJMpZHz/Pymai9Tq9D9qjb/+69zt+z5SQX1uwEj4CXwfIEO72XKUUZSrBtngtcVuB/itsJ
+	8Yt6zAYwilaphrZmq/JS5UsQwlDH34CKeqhOkZHCP6VeRnDPcZNVd7WyQvovIUo0Ba+Y=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uMGA5-0006p0-RJ;
-	Tue, 03 Jun 2025 01:09:53 +0000
+	id 1uMLBx-0007Pz-Vl;
+	Tue, 03 Jun 2025 06:32:09 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lihongbo22@huawei.com>) id 1uMGA4-0006ou-8h
+ (envelope-from <chao@kernel.org>) id 1uMLBn-0007PH-J1
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jun 2025 01:09:52 +0000
+ Tue, 03 Jun 2025 06:31:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:CC:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0KVKTOYrFynSk/TKRMKUw1vMRcnmMdgSEKFUDvivU8A=; b=CBWIYOfFarPzuT96HzauD7+4rX
- Q7pGs0f1Mjkqy62Z7inN+TGKaNpPuOdmK3n7c12cKYd9norYAkQodPHuMW0e5gOgWxC39clJCivc2
- ZRNU83OqaxcFG+7dtpiGx0dmCAOZXUW7woY/DO/Bt/QG23HVdyKe9bxZqJ0ptL/p6uAo=;
+ bh=kFqc6VdNWkVtoq3D81aSMo5KvSBNodIl9fIQJIJNwUc=; b=K3e3oWDd4KKZOcELzrcYQzmBiI
+ 9h7ne8TJQmwkM34A/O3/CJDv8KaGqfxrqdIN5yYLAa7H6g6tAS6SXymgbaRMVHx1pHAZ/5+ilsCJC
+ 6MsMfl2pZxBRLGfMJ0KJ8NHW6sVnCPjKlxPWQ+WN++IAasFs3oiGnY+WN1t5OagG29Xk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:CC:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0KVKTOYrFynSk/TKRMKUw1vMRcnmMdgSEKFUDvivU8A=; b=ML1gPOzeadBNfxcSb2Q/iHEILc
- Kb9D4FCNAHxNB4OLkITY8AE7Hpbw4RViC+lPegfb6kcXpgaeZy1xYOvYH/Ef+FMUZruZ7dssgT89c
- iwwqHTj5fmczJ+9ZgWqJ9J8vuJoIWxylT/DvABIhH1g/MLswwgLHMEvr8Tsal0olJpUU=;
-Received: from szxga06-in.huawei.com ([45.249.212.32])
+ bh=kFqc6VdNWkVtoq3D81aSMo5KvSBNodIl9fIQJIJNwUc=; b=D0bWEJImXCNyC+ZFn+0dT0B1Mb
+ jvwMXYNpZz048rsL9LyriJ5D+t7Goc/9JlFXfukym82/cuvy9Mm8M7EmV2BJhiU6u8LG1xLZ9yUFs
+ 0Quq1fcgGzHgOMTvxKi/HiOOYIKk4SmfwNVFdrlDwuzLTN2vgFetuzkcOFzOCz61ui+A=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uMGA2-0001dj-0W for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jun 2025 01:09:52 +0000
-Received: from mail.maildlp.com (unknown [172.19.88.214])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4bBCLf31Swz27hcD;
- Tue,  3 Jun 2025 09:10:18 +0800 (CST)
-Received: from kwepemo500009.china.huawei.com (unknown [7.202.194.199])
- by mail.maildlp.com (Postfix) with ESMTPS id 63FD11A016C;
- Tue,  3 Jun 2025 09:09:27 +0800 (CST)
-Received: from [10.67.111.104] (10.67.111.104) by
- kwepemo500009.china.huawei.com (7.202.194.199) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Tue, 3 Jun 2025 09:09:26 +0800
-Message-ID: <d23c6219-e2e1-4550-a2b3-8ce8f193c3f1@huawei.com>
-Date: Tue, 3 Jun 2025 09:09:26 +0800
+ id 1uMLBm-0008Cj-VX for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Jun 2025 06:31:59 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 3EA6F614AC;
+ Tue,  3 Jun 2025 06:31:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D85BFC4CEED;
+ Tue,  3 Jun 2025 06:31:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1748932307;
+ bh=DTaWC0NkSXOoT7o1IbYuGBZMUzk4wAoEkhyQa0+uLr4=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=j8VP4JxBboAEbKbTgrly8bM5XLAapF5NGGbtorH6HwgFbv5ysZHImbiTQ5jv5QbHT
+ S9LB3Q+JMhUHxjaTRyMDz+v5+vHo/ZFTRPR9AQRtVxnBWAbU8EixDZCAeWL9ogoapr
+ n366k8Y1R/cdOZFVKlJj6gkUY3n/N/8phzxRZfi3aIwbFterzLNSbDtFFIAvIRYQMk
+ 0GhB24xgrcDZuKZhFZiFRglOgiwIWz9juU2sRk5LaaDUIRG17Vin4YU2mG+VdXeH63
+ VxKCYNq9R1HpwOtAIErJoa7a+adLAem5kZRTCkqWyyOtHBFegfcJrgctGTWpqa/boD
+ iNSdFizGWibcQ==
+Message-ID: <f520c234-7b02-4087-a98e-33a51d2feba8@kernel.org>
+Date: Tue, 3 Jun 2025 14:31:46 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20250602090224.485077-1-lihongbo22@huawei.com>
- <aD3Lzsp-u6KuyGRt@google.com>
+To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org
+References: <20250601002709.4094344-1-willy@infradead.org>
 Content-Language: en-US
-In-Reply-To: <aD3Lzsp-u6KuyGRt@google.com>
-X-Originating-IP: [10.67.111.104]
-X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
- kwepemo500009.china.huawei.com (7.202.194.199)
-X-Headers-End: 1uMGA2-0001dj-0W
-Subject: Re: [f2fs-dev] [PATCH v4 0/7] f2fs: new mount API conversion
+In-Reply-To: <20250601002709.4094344-1-willy@infradead.org>
+X-Spam-Score: -0.3 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview:  On 2025/6/1 8:26,
+ Matthew Wilcox (Oracle) wrote: > This conversion
+ moved the folio_unlock() to inside __write_node_folio(), > but missed one
+ caller so we had a double-unlock on this path. > > Cc: Chri [...] 
+ Content analysis details:   (-0.3 points, 6.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.105.4.254 listed in bl.score.senderscore.com]
+ 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
+ The query to Validity was blocked.  See
+ https://knowledge.validity.com/hc/en-us/articles/20961730681243
+ for more information.
+ [172.105.4.254 listed in sa-trusted.bondedsender.org]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uMLBm-0008Cj-VX
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix __write_node_folio() conversion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,109 +119,28 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Hongbo Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Hongbo Li <lihongbo22@huawei.com>
-Cc: linux-fsdevel@vger.kernel.org, sandeen@redhat.com,
- linux-f2fs-devel@lists.sourceforge.net
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Christoph Hellwig <hch@lst.de>,
+ syzbot+c0dc46208750f063d0e0@syzkaller.appspotmail.com
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+On 2025/6/1 8:26, Matthew Wilcox (Oracle) wrote:
+> This conversion moved the folio_unlock() to inside __write_node_folio(),
+> but missed one caller so we had a double-unlock on this path.
+> 
+> Cc: Christoph Hellwig <hch@lst.de>
+> Cc: Chao Yu <chao@kernel.org>
+> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> Reported-by: syzbot+c0dc46208750f063d0e0@syzkaller.appspotmail.com
+> Fixes: 80f31d2a7e5f (f2fs: return bool from __write_node_folio)
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 
-
-On 2025/6/3 0:05, Jaegeuk Kim wrote:
-> Thanks you, Hongbo.
-> 
-> I just applied this series to the dev-test branch as below, and will
-> keep testing with incoming patches together. Let's see. :)
-> 
-> https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/log/?h=dev-test
-> 
-Ok, I will keep following up on this work with Eric.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-Hongbo
-
-> On 06/02, Hongbo Li wrote:
->> In this version, we have finished the issues pointed in v3.
->> First, I'd like to express my sincere thanks to Jaegeuk and Chao
->> for reviewing this patch series and providing corrections. I also
->> appreciate Eric for rebasing the patches onto the latest branch to
->> ensure forward compatibility.
->>
->> The latest patch series has addressed all the issues mentioned in
->> the previous set. For modified patches, I've re-added Signed-off-by
->> tags (SOB) and uniformly removed all Reviewed-by tags.
->>
->> v4:
->>    - Change is_remount as bool type in patch 2.
->>    - Remove the warning reported by Dan for patch 5.
->>    - Enhance sanity check and fix some coding style suggested by
->>      Jaegeuk in patch 5.
->>    - Change the log info when compression option conflicts in patch 5.
->>    - Fix the issues reported by code-reviewing in patch 5.
->>    - Context modified in patch 7.
->>
->> V3: https://lore.kernel.org/all/20250423170926.76007-1-sandeen@redhat.com/
->> - Rebase onto git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
->>    dev branch
->> - Fix up some 0day robot warnings
->>
->> (Here is the origianl cover letter:)
->>
->> Since many filesystems have done the new mount API conversion,
->> we introduce the new mount API conversion in f2fs.
->>
->> The series can be applied on top of the current mainline tree
->> and the work is based on the patches from Lukas Czerner (has
->> done this in ext4[1]). His patch give me a lot of ideas.
->>
->> Here is a high level description of the patchset:
->>
->> 1. Prepare the f2fs mount parameters required by the new mount
->> API and use it for parsing, while still using the old API to
->> get mount options string. Split the parameter parsing and
->> validation of the parse_options helper into two separate
->> helpers.
->>
->>    f2fs: Add fs parameter specifications for mount options
->>    f2fs: move the option parser into handle_mount_opt
->>
->> 2. Remove the use of sb/sbi structure of f2fs from all the
->> parsing code, because with the new mount API the parsing is
->> going to be done before we even get the super block. In this
->> part, we introduce f2fs_fs_context to hold the temporary
->> options when parsing. For the simple options check, it has
->> to be done during parsing by using f2fs_fs_context structure.
->> For the check which needs sb/sbi, we do this during super
->> block filling.
->>
->>    f2fs: Allow sbi to be NULL in f2fs_printk
->>    f2fs: Add f2fs_fs_context to record the mount options
->>    f2fs: separate the options parsing and options checking
->>
->> 3. Switch the f2fs to use the new mount API for mount and
->> remount.
->>
->>    f2fs: introduce fs_context_operation structure
->>    f2fs: switch to the new mount api
->>
->> [1] https://lore.kernel.org/all/20211021114508.21407-1-lczerner@redhat.com/
->>
->> Hongbo Li (7):
->>    f2fs: Add fs parameter specifications for mount options
->>    f2fs: move the option parser into handle_mount_opt
->>    f2fs: Allow sbi to be NULL in f2fs_printk
->>    f2fs: Add f2fs_fs_context to record the mount options
->>    f2fs: separate the options parsing and options checking
->>    f2fs: introduce fs_context_operation structure
->>    f2fs: switch to the new mount api
->>
->>   fs/f2fs/super.c | 2108 +++++++++++++++++++++++++++--------------------
->>   1 file changed, 1197 insertions(+), 911 deletions(-)
->>
->> -- 
->> 2.33.0
 
 
 _______________________________________________
