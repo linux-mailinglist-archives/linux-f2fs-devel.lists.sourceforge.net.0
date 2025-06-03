@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 303DBACC03B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jun 2025 08:32:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F75DACC090
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jun 2025 08:58:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=4NrFM5Xr5HXskNZkzoRnSddvvc67zm4uxeVMtLOUZas=; b=gXVmV7FRIxv8k2IJHEcvVawzzw
-	QvJozCyNJMpZHz/Pymai9Tq9D9qjb/+69zt+z5SQX1uwEj4CXwfIEO72XKUUZSrBtngtcVuB/itsJ
-	8Yt6zAYwilaphrZmq/JS5UsQwlDH34CKeqhOkZHCP6VeRnDPcZNVd7WyQvovIUo0Ba+Y=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=fmOVXFwp3LyAr2aI4dgnPmdt2FsR8q8/FoHHetWtR2c=; b=mbbdYajcLFegm9xAEw8izWks83
+	t8KNiotMNuucCkIkjn1nM6BKXf/CSMD9KFRC16IgOWwJDIEGh0kH3IC8nEJ/6YlEAdCvGcFnBMYVp
+	Sh7+skc4324hAsb+ULvyPXxJCuLY6BRHPqG3C7fQNBBy/Ty4XrIyyjLLXQ240jV+KDR0=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uMLBx-0007Pz-Vl;
-	Tue, 03 Jun 2025 06:32:09 +0000
+	id 1uMLbI-0005AW-Ak;
+	Tue, 03 Jun 2025 06:58:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uMLBn-0007PH-J1
+ (envelope-from <chao@kernel.org>) id 1uMLbG-0005AO-CB
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jun 2025 06:31:59 +0000
+ Tue, 03 Jun 2025 06:58:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kFqc6VdNWkVtoq3D81aSMo5KvSBNodIl9fIQJIJNwUc=; b=K3e3oWDd4KKZOcELzrcYQzmBiI
- 9h7ne8TJQmwkM34A/O3/CJDv8KaGqfxrqdIN5yYLAa7H6g6tAS6SXymgbaRMVHx1pHAZ/5+ilsCJC
- 6MsMfl2pZxBRLGfMJ0KJ8NHW6sVnCPjKlxPWQ+WN++IAasFs3oiGnY+WN1t5OagG29Xk=;
+ bh=xWmflv5+6woLi7/ToKoaDfzZzHUZ3qEAW0udeca1q2Q=; b=cvFFDk/cZQYhP81ML9iwFrP1Yi
+ Npm+3H3+8KPi0dN0Urc3akdyz4WHDI9d+nFUqR3rTuomsXp/0Hxq4OHexIUXiTWoosGumCBFYGKJG
+ F1jb9V9xK88yb3YAfZhdrzx2VeT6IKYMN1UmBO0uckZ7Ksh1rYPJJo4/QFkA78tucFAw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,74 +40,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kFqc6VdNWkVtoq3D81aSMo5KvSBNodIl9fIQJIJNwUc=; b=D0bWEJImXCNyC+ZFn+0dT0B1Mb
- jvwMXYNpZz048rsL9LyriJ5D+t7Goc/9JlFXfukym82/cuvy9Mm8M7EmV2BJhiU6u8LG1xLZ9yUFs
- 0Quq1fcgGzHgOMTvxKi/HiOOYIKk4SmfwNVFdrlDwuzLTN2vgFetuzkcOFzOCz61ui+A=;
+ bh=xWmflv5+6woLi7/ToKoaDfzZzHUZ3qEAW0udeca1q2Q=; b=KbrNuaAt01h+uHstrpMejsLaX7
+ Pzmlb04iqE/+yfzsXkQ+CpU1Tf5V8LybfBUacgdB6s01mbzb4/oEOFGwSF7sf1gDgqKEybIR/MQjq
+ IJGCOv8G6ykGfdlzw8R794Vmy9ACEocDKknizeKRYTwxcRxIdlm8pIGxG7sz2zbMyRVs=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uMLBm-0008Cj-VX for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jun 2025 06:31:59 +0000
+ id 1uMLbF-0001oL-PW for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Jun 2025 06:58:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 3EA6F614AC;
- Tue,  3 Jun 2025 06:31:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D85BFC4CEED;
- Tue,  3 Jun 2025 06:31:45 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 19E30614AC;
+ Tue,  3 Jun 2025 06:58:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 738DDC4CEED;
+ Tue,  3 Jun 2025 06:58:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1748932307;
- bh=DTaWC0NkSXOoT7o1IbYuGBZMUzk4wAoEkhyQa0+uLr4=;
+ s=k20201202; t=1748933891;
+ bh=EhXzen7gV3hUWh7pSnmCfc7yCVQh8WtqFqB2lUlXPZg=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=j8VP4JxBboAEbKbTgrly8bM5XLAapF5NGGbtorH6HwgFbv5ysZHImbiTQ5jv5QbHT
- S9LB3Q+JMhUHxjaTRyMDz+v5+vHo/ZFTRPR9AQRtVxnBWAbU8EixDZCAeWL9ogoapr
- n366k8Y1R/cdOZFVKlJj6gkUY3n/N/8phzxRZfi3aIwbFterzLNSbDtFFIAvIRYQMk
- 0GhB24xgrcDZuKZhFZiFRglOgiwIWz9juU2sRk5LaaDUIRG17Vin4YU2mG+VdXeH63
- VxKCYNq9R1HpwOtAIErJoa7a+adLAem5kZRTCkqWyyOtHBFegfcJrgctGTWpqa/boD
- iNSdFizGWibcQ==
-Message-ID: <f520c234-7b02-4087-a98e-33a51d2feba8@kernel.org>
-Date: Tue, 3 Jun 2025 14:31:46 +0800
+ b=e1AV42oKNVrAL1QDD9G7cYMRRHNLgJkIK13uwugGpv6JWWOdhDPpZ+FWb86V5AOp7
+ 5k8hMPEKLNqcyrh6c7r1BM7AhUf7ulGWNeHY0CKIefj910ibEwqHLsV7U4KdF4JWkB
+ e/FL9RTYcj87Qb5jcnS9GqbvxsakMeQXe9ssHWU2c6ulud35jML3wrHrmRm8Ua6+W5
+ 5PkbEY7AuqcJSrTQHvzNQy+pL2KiJG5V6Z4P7RC4Xyq7ijkWAIXaF8+4UfATND/eYE
+ 7CDJHqPAm9Rnuf8mezKlIqRPZiIe8RDRbCsODxq6VybefAFAqCQMvLMI6R08+qX2cy
+ +SFcgvWB4p/mA==
+Message-ID: <1691f701-0d52-4dae-b709-02ce7182a920@kernel.org>
+Date: Tue, 3 Jun 2025 14:58:10 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org
-References: <20250601002709.4094344-1-willy@infradead.org>
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20250529222532.1088106-1-daeho43@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20250601002709.4094344-1-willy@infradead.org>
-X-Spam-Score: -0.3 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  On 2025/6/1 8:26,
- Matthew Wilcox (Oracle) wrote: > This conversion
- moved the folio_unlock() to inside __write_node_folio(), > but missed one
- caller so we had a double-unlock on this path. > > Cc: Chri [...] 
- Content analysis details:   (-0.3 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [172.105.4.254 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [172.105.4.254 listed in sa-trusted.bondedsender.org]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uMLBm-0008Cj-VX
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix __write_node_folio() conversion
+In-Reply-To: <20250529222532.1088106-1-daeho43@gmail.com>
+X-Headers-End: 1uMLbF-0001oL-PW
+Subject: Re: [f2fs-dev] [PATCH] f2fs: make sure zoned device GC to use FG_GC
+ in shortage of free section
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,22 +88,18 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Christoph Hellwig <hch@lst.de>,
- syzbot+c0dc46208750f063d0e0@syzkaller.appspotmail.com
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2025/6/1 8:26, Matthew Wilcox (Oracle) wrote:
-> This conversion moved the folio_unlock() to inside __write_node_folio(),
-> but missed one caller so we had a double-unlock on this path.
+On 2025/5/30 6:25, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
 > 
-> Cc: Christoph Hellwig <hch@lst.de>
-> Cc: Chao Yu <chao@kernel.org>
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-> Reported-by: syzbot+c0dc46208750f063d0e0@syzkaller.appspotmail.com
-> Fixes: 80f31d2a7e5f (f2fs: return bool from __write_node_folio)
-> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> We already use FG_GC when we have free sections under
+> gc_boost_zoned_gc_percent. So, let's make it consistent.
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
 
