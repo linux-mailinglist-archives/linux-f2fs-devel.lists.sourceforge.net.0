@@ -2,87 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55A67ACC50D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jun 2025 13:12:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63D23ACC78B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jun 2025 15:19:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:From:Message-ID:Date:MIME-Version:Sender:Reply-To:Cc:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=aCLssoSLu/C9dOY1FxkqyNIndxqPT+pYzjIM0GSJGvc=; b=Wr9MbSkyRJX1E2CDETMbsV1MWa
-	o5zlAURVSaNFNgfOG0Q/GIOLfOm2C0xUDg8NhH8Mf0cIDvMhilL5pfGnqHFtWDYXBwoT5rZGxXKFP
-	211y/ByyZTw7mWD72bd5tn3AT4fAok80P/9r7NRpsCKcXKlmckA9vc8K9wqx6x79Pxrs=;
+	Subject:References:In-Reply-To:From:To:MIME-Version:Date:Message-ID:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=adpYjQPyYNFFN9Tb233jbcuZM+x7dn7gIfAM0GhECTk=; b=JN7ojzT9wD2+yZtjp35r+A83fn
+	PRQYkVjw/8C246AwR3lHFaKi2rnfqNaJGIqr87IGW+3LM9qec8O/fFBJKqROXuhC3Z9CRx1jgvmuW
+	q3GZzP4FVzxSkltloSpsDXdwHQQf+KLCSFOtKCelPJl9pglHtOjypllf5wptML6qz9rg=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uMPYM-0006YH-68;
-	Tue, 03 Jun 2025 11:11:34 +0000
+	id 1uMRXt-0004sK-5f;
+	Tue, 03 Jun 2025 13:19:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3Wtg-aAkbAE89FG1r22v8r66zu.x55x2vB9v8t54Av4A.t53@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1uMPYH-0006Y7-2F for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jun 2025 11:11:29 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <anuj20.g@samsung.com>) id 1uMRXq-0004s4-Qm
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Jun 2025 13:19:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ In-Reply-To:From:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MPvTW/GDXyB87H7GHZi01anQCBOqwa/W7+aatqdbldE=; b=Vfc1B9idvwV9HM/9D6VQNHhJad
- 8AjOYFBIXSo/fXpLo2Ti2C69zOrt7Mlu9a6P+VDnWr5V75aMb6ZwFNkRvf4cFMbaenyycMmGPyhaf
- cdFSQHFBsl9mdbGMpHbElVbTZ211ab2pDwOW5F6xLEUdKgH3Cejq4MT/MKP9rR3dQkhE=;
+ bh=lhg+yoxzmSUI95r9m4I7c09Wc8JZvBjC2Fu14XUQZiQ=; b=WYl7+/H7FJETygKxCKIeARDVwc
+ 7fZujTbwopk5OSkCOBMTiMphOP0sxDmpylKtgISyx5aHK5IZd9sFY4IviYAND7rAwRRVDp0KObTsu
+ XhFJ3MlvQlPj2kcwsX7zN2bzAAdJtSD1oj8GDFb2CJmsTuFJRfuOAf59jPqiyUfEfe/A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=MPvTW/GDXyB87H7GHZi01anQCBOqwa/W7+aatqdbldE=; b=M
- fEVCE3sBKxW5C+IVAFbkfYIvwYA1+hrCWC/QbFEIB/BDzsgtE/l73/eszK37A8sWoc1OO2vX+L/8I
- OEXGDO/PfQeJcDPSXhLIYNM+6S8ZDVTKpQS36IMJHcKgETiKXvEQGCCcPx+1mJ4cSFIty+GVlJDEJ
- yoWU1wP/FCoAyG2k=;
-Received: from mail-il1-f197.google.com ([209.85.166.197])
+ h=References:Content-Type:Content-Transfer-Encoding:In-Reply-To:From:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=lhg+yoxzmSUI95r9m4I7c09Wc8JZvBjC2Fu14XUQZiQ=; b=KaBasYYLyevnkZDLBxeiflyjU1
+ ZwgT5HLHeSlNDkhiQnkXas+VMGbxwa6l/FRSxqAS4NZLb9II2T9JZhguV7VetnxoWswPLx8bbTCcj
+ rMz5U5p7fmAoJQJBKCOqDC4zZSruWSqUtmjsVZiXNpWJeNE2ClR2sNuNuKkJq68YpE8o=;
+Received: from mailout4.samsung.com ([203.254.224.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uMPYG-0002WC-Bu for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jun 2025 11:11:29 +0000
-Received: by mail-il1-f197.google.com with SMTP id
- e9e14a558f8ab-3da6fe2a552so105813605ab.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uMRXo-0001xm-SO for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Jun 2025 13:19:10 +0000
+Received: from epcas5p2.samsung.com (unknown [182.195.41.40])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20250603131900epoutp04541c7894e080ebf70f4ec7562ed66177~FiuOuiy2M3172531725epoutp04E
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 03 Jun 2025 04:11:28 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748949082; x=1749553882;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MPvTW/GDXyB87H7GHZi01anQCBOqwa/W7+aatqdbldE=;
- b=xBNblTzR9Fm0LIXqd03ek9klHF54QHptcbbYW31Tn15A4wda5yfWFxXV9fDxVYzCIq
- AFkUTg2x+jOgZtqg56C/fTSI/2q5CnTiNdCByKxzErwx4/oitdLkMP4bciOuZea12zN9
- zExwf+tlKHJFW+2OwzXNXtu40D3sFv6YP2DQ1nYkcLm1exfxFlM6IurSW35VV+AMZ/JB
- +JkwIAxtizvyshQPKCsbLIhzXBKIBCTWMllVtqm9e2uIeGnPP2Dvfkleb1rQi5UwqxFa
- /iJ/3e5i2eAybrkIppFipZtY7HTr0pJXrO2V+m08LE3H/K5mFNNtxto5GYlgjWsZaxIi
- BVig==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUGVGXljp3u0MithZS/98NcBMQ/A9VaUzlGmmS/BgJfc5vw41NBpUDP3lSsSLDzTy6RZuiffode6wHHsAObi1bn@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzipZkf88NNqd5bMpBwenypv60Px6iXxqSxaGW9H+Ez5AhP1evp
- MPoBe426gojfyuWuzcBhH9DJgxQuaN6FSrH/2/LRODqgbN0AqV99yLcOFYwdY0rNEvMaEvQFePJ
- RSof1x/3T2VhMovbRT9y3mm6GaA/hnfkPFxTAg575910TK1QtNjQmCDGuC14=
-X-Google-Smtp-Source: AGHT+IG7Tvi3QKY5gAg4SwQGiBTh/690T41K815KYJQlCx3j/jEBGd2bwCUuW04k8bnZjuaP5T3eSsk6vIyScuGs4Ig+nocIuP8Y
+ Tue,  3 Jun 2025 13:19:00 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20250603131900epoutp04541c7894e080ebf70f4ec7562ed66177~FiuOuiy2M3172531725epoutp04E
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1748956740;
+ bh=lhg+yoxzmSUI95r9m4I7c09Wc8JZvBjC2Fu14XUQZiQ=;
+ h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+ b=WBSQ6lK9EWDgjnVk2UCtHoWdiBqZlqtb8XsrOvFf6dvZb1mPriE1FWBFdCTIU+Omt
+ sfXwfjHouTr1qc88PlriEG7dT8fdI458jv1zxM7KNQWgvhbWmx/vMIisreunoFO5cx
+ LXs0VIUkGSuE72lyDrDiyTlCYGseOg1a61E2t5IQ=
+Received: from epsnrtp01.localdomain (unknown [182.195.42.153]) by
+ epcas5p3.samsung.com (KnoxPortal) with ESMTPS id
+ 20250603131859epcas5p3adb125b08bbc9f901dde4353e77a8e0a~FiuNydMNP1272412724epcas5p3Q;
+ Tue,  3 Jun 2025 13:18:59 +0000 (GMT)
+Received: from epcas5p3.samsung.com (unknown [182.195.38.178]) by
+ epsnrtp01.localdomain (Postfix) with ESMTP id 4bBWWQ3Z6rz6B9m9; Tue,  3 Jun
+ 2025 13:18:58 +0000 (GMT)
+Received: from epsmtip1.samsung.com (unknown [182.195.34.30]) by
+ epcas5p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20250603091626epcas5p3c6680e3a112b654ee64a2a45ee05c29c~Ffab6u3oY3154931549epcas5p3V;
+ Tue,  3 Jun 2025 09:16:26 +0000 (GMT)
+Received: from [107.122.10.194] (unknown [107.122.10.194]) by
+ epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
+ 20250603091621epsmtip1b17ae68149000f4e610433391a5ab9c2~FfaXdde6I1152711527epsmtip1N;
+ Tue,  3 Jun 2025 09:16:21 +0000 (GMT)
+Message-ID: <c029d791-20ca-4f2e-926d-91856ba9d515@samsung.com>
+Date: Tue, 3 Jun 2025 14:46:20 +0530
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:2293:b0:3dd:9164:906f with SMTP id
- e9e14a558f8ab-3dda331b28emr126586965ab.7.1748949082749; Tue, 03 Jun 2025
- 04:11:22 -0700 (PDT)
-Date: Tue, 03 Jun 2025 04:11:22 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <683ed85a.050a0220.55ceb.000d.GAE@google.com>
-From: syzbot <syzbot+list64bdbbb0bb97345969ec@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Headers-End: 1uMPYG-0002WC-Bu
-Subject: [f2fs-dev] [syzbot] Monthly f2fs report (May 2025)
+User-Agent: Mozilla Thunderbird
+To: Christoph Hellwig <hch@lst.de>, Kundan Kumar <kundan.kumar@samsung.com>
+Content-Language: en-US
+From: Anuj Gupta/Anuj Gupta <anuj20.g@samsung.com>
+In-Reply-To: <20250602141904.GA21996@lst.de>
+X-CMS-MailID: 20250603091626epcas5p3c6680e3a112b654ee64a2a45ee05c29c
+X-Msg-Generator: CA
+X-Sendblock-Type: REQ_APPROVE
+CMS-TYPE: 105P
+cpgsPolicy: CPGSC10-542,Y
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20250529113215epcas5p2edd67e7b129621f386be005fdba53378
+References: <CGME20250529113215epcas5p2edd67e7b129621f386be005fdba53378@epcas5p2.samsung.com>
+ <20250529111504.89912-1-kundan.kumar@samsung.com>
+ <20250602141904.GA21996@lst.de>
+X-Headers-End: 1uMRXo-0001xm-SO
+Subject: Re: [f2fs-dev] [PATCH 00/13] Parallelizing filesystem writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,47 +108,99 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: ritesh.list@gmail.com, anuj1072538@gmail.com, jack@suse.cz,
+ djwong@kernel.org, amir73il@gmail.com, david@fromorbit.com,
+ gfs2@lists.linux.dev, linux-mm@kvack.org, clm@meta.com, dave@stgolabs.net,
+ agruenba@redhat.com, miklos@szeredi.hu, gost.dev@samsung.com,
+ willy@infradead.org, p.raghav@samsung.com, linux-nfs@vger.kernel.org,
+ da.gomez@samsung.com, viro@zeniv.linux.org.uk, kundanthebest@gmail.com,
+ jaegeuk@kernel.org, axboe@kernel.dk, brauner@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, mcgrof@kernel.org, anna@kernel.org,
+ linux-fsdevel@vger.kernel.org, akpm@linux-foundation.org, trondmy@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello f2fs maintainers/developers,
+On 6/2/2025 7:49 PM, Christoph Hellwig wrote:
+> On Thu, May 29, 2025 at 04:44:51PM +0530, Kundan Kumar wrote:
+> Well, the proper thing would be to figure out a good default and not
+> just keep things as-is, no?
 
-This is a 31-day syzbot report for the f2fs subsystem.
-All related reports/information can be found at:
-https://syzkaller.appspot.com/upstream/s/f2fs
+We observed that some filesystems, such as Btrfs, don't benefit from
+this infra due to their distinct writeback architecture. To preserve
+current behavior and avoid unintended changes for such filesystems,
+we have kept nr_wb_ctx=1 as the default. Filesystems that can take
+advantage of parallel writeback (xfs, ext4) can opt-in via a mount
+option. Also we wanted to reduce risk during initial integration and
+hence kept it as opt-in.
 
-During the period, 2 new issues were detected and 1 were fixed.
-In total, 13 issues are still open and 60 have already been fixed.
+> 
+>> IOPS and throughput
+>> ===================
+>> We see significant improvement in IOPS across several filesystem on both
+>> PMEM and NVMe devices.
+>>
+>> Performance gains:
+>>    - On PMEM:
+>> 	Base XFS		: 544 MiB/s
+>> 	Parallel Writeback XFS	: 1015 MiB/s  (+86%)
+>> 	Base EXT4		: 536 MiB/s
+>> 	Parallel Writeback EXT4	: 1047 MiB/s  (+95%)
+>>
+>>    - On NVMe:
+>> 	Base XFS		: 651 MiB/s
+>> 	Parallel Writeback XFS	: 808 MiB/s  (+24%)
+>> 	Base EXT4		: 494 MiB/s
+>> 	Parallel Writeback EXT4	: 797 MiB/s  (+61%)
+> 
+> What worksload was this?
 
-Some of the still happening issues:
+Number of CPUs = 12
+System RAM = 16G
+For XFS number of AGs = 4
+For EXT4 BG count = 28616
+Used PMEM of 6G and NVMe SSD of 3.84 TB
 
-Ref Crashes Repro Title
-<1> 1270    Yes   INFO: task hung in f2fs_balance_fs
-                  https://syzkaller.appspot.com/bug?extid=8b85865808c8908a0d8c
-<2> 703     Yes   kernel BUG in f2fs_evict_inode (4)
-                  https://syzkaller.appspot.com/bug?extid=5c81eb8c0a380fa578b5
-<3> 80      Yes   INFO: task hung in do_truncate (3)
-                  https://syzkaller.appspot.com/bug?extid=effe7da6578cd423f98f
-<4> 81      No    kernel BUG in folio_end_read
-                  https://syzkaller.appspot.com/bug?extid=92895fc54ccb69ca6fa9
-<5> 15      Yes   kernel BUG in f2fs_write_end_io
-                  https://syzkaller.appspot.com/bug?extid=803dd716c4310d16ff3a
-<6> 3       Yes   kernel BUG in f2fs_invalidate_blocks (2)
-                  https://syzkaller.appspot.com/bug?extid=240643026e8cd9ddfaf2
+fio command line :
+fio --directory=/mnt --name=test --bs=4k --iodepth=1024 --rw=randwrite 
+--ioengine=io_uring --time_based=1 -runtime=60 --numjobs=12 --size=450M 
+--direct=0  --eta-interval=1 --eta-newline=1 --group_reporting
 
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+Will measure the write-amp and share.
 
-To disable reminders for individual bugs, reply with the following command:
-#syz set <Ref> no-reminders
+> 
+> How many CPU cores did the system have, how many AGs/BGs did the file
+> systems have?   What SSD/Pmem was this?  Did this change the write
+> amp as measure by the media writes on the NVMe SSD?
+> 
+> Also I'd be really curious to see numbers on hard drives.
+> 
+>> We also see that there is no increase in filesystem fragmentation
+>> # of extents:
+>>    - On XFS (on PMEM):
+>> 	Base XFS		: 1964
+>> 	Parallel Writeback XFS	: 1384
+>>
+>>    - On EXT4 (on PMEM):
+>> 	Base EXT4		: 21
+>> 	Parallel Writeback EXT4	: 11
+> 
+> How were the number of extents counts given that they look so wildly
+> different?
+> 
+> 
 
-To change bug's subsystems, reply with:
-#syz set <Ref> subsystems: new-subsystem
+Issued random write of 1G using fio with fallocate=none and then
+measured the number of extents, after a delay of 30 secs :
+fio --filename=/mnt/testfile --name=test --bs=4k --iodepth=1024 
+--rw=randwrite --ioengine=io_uring  --fallocate=none --numjobs=1 
+--size=1G --direct=0 --eta-interval=1 --eta-newline=1 --group_reporting
 
-You may send multiple commands in a single email message.
+For xfs used this command:
+xfs_io -c "stat" /mnt/testfile
+
+And for ext4 used this:
+filefrag /mnt/testfile
 
 
 _______________________________________________
