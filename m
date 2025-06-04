@@ -2,99 +2,109 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 314AEACDCC8
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Jun 2025 13:38:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2BC4ACE36F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Jun 2025 19:24:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=o+IfHPN6xN6CzQ9iGaLNGCbXasTxef8Ywq0kIXoTUfI=; b=G7af/DDdrifxfqgOFGhvObI+hq
-	xnXCw4ukrxtuFUj3FdFvEY7vp1IEPt/JIqsgvokk3KL/V4tjQT5LlYhGLKwmZ6QQFLj+WOW6l0yfc
-	ttOGjTw45f0tck2Yi5/SJ1mWv1cbq4+AjWBNqz9xLZ2FUVXQKldARncAtgc/BqFvNg0A=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=h86P4P6w2sC/oIOuGnUd0pknyfEge/pQ7Ls+BNP/1Sk=; b=QaPW0TciSb+Cd4jJ21/z+r1i5E
+	e8dX+DzBMWg/UeZGNDxwiTK/5g0LoVe4Xs2Nfzdbm8fTcpWbh4qwqQzD+SquXofa/1lwL/q+8bCr5
+	z94zYoEhRTcyILU4+L/xZLVSRY/OnDki/dfTy+wLAiHg4pEQDG+bLJ3qNCQTVYJIuJio=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uMmS2-0004S8-Ht;
-	Wed, 04 Jun 2025 11:38:34 +0000
+	id 1uMrr6-0005tV-9f;
+	Wed, 04 Jun 2025 17:24:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1uMmRz-0004Rw-1w
+ (envelope-from <daeho43@gmail.com>) id 1uMrr5-0005tP-LP
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Jun 2025 11:38:31 +0000
+ Wed, 04 Jun 2025 17:24:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Me7EmrPXymdI7oJTShCJRrxQbIpMesRl5+YAGPehCLk=; b=moFZbsaZfSUWyzl3M0EnzXROUI
- Tey3yKAWyKEZ9JhtbdpiVt6YVe8caA/xusq6N5EkWIHQSei+Yw7E1w2gUGa7dvmrDvrTfmHCPNiee
- 2U+gh74GS8B6i8I+gFVeJTO6fjsOCaXxBsvHG8CC/oBSF63Tr1HCiUvRV/vTHsVt2rUQ=;
+ bh=zhG1JhoXZUo1f3yXWr0+fS3M+qXdVl1plAhbPO0kUgA=; b=C3h3N0HGFPDdhdFT00kaaJxLHd
+ JSpUjjcrA/28bt1PltbJIY1Ly6POyJGn0pCTd2GpLYPt8y96hRfSBrS5QHDn2xErPM+3DKoe4w/oX
+ biJPGzimdsAfcx3rzBXDpD/OE1g4OGKhebB+6DcJpKI1BAS88MLhlpreD1lCa04s45gk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Me7EmrPXymdI7oJTShCJRrxQbIpMesRl5+YAGPehCLk=; b=E
- 8KtgVr0LQggZolir0+Lh8Y82wxLzR8CWXYcSq2Mww/TmT7JKGtdrYfrYOLjM8MALXd+pTiVHkVhDT
- Yl9uBebIyV8eqr5gWT9N2YAKK4jWMMybG0D784fyVEzvO+Yn4j6YJRbUFlUyVHxUd4bqLabPvDg6Q
- 7Ik3pWT1DTKgmFOs=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
+ List-Owner:List-Archive; bh=zhG1JhoXZUo1f3yXWr0+fS3M+qXdVl1plAhbPO0kUgA=; b=g
+ /cNC7BRTs/ooh/EYIuWhMSL2iXdkm2mJYwRhpQLY727hjvNgWvedUnJmw4/oeDh1pua/Kc+iICfP5
+ 0rH7a0ESXuQ7kmas5ASJta275AsHkDUthTSO7QIAwqj2GjCqtNjofUF3F43WHr/NFzc23U+oQ7iBt
+ nxuoc+NxuUppupPU=;
+Received: from mail-pl1-f181.google.com ([209.85.214.181])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uMmRx-0007U5-PQ for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Jun 2025 11:38:30 +0000
-Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 554BbvWC063964;
- Wed, 4 Jun 2025 19:37:57 +0800 (+08)
- (envelope-from Zhiguo.Niu@unisoc.com)
-Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4bC59374gHz2NZDyW;
- Wed,  4 Jun 2025 19:35:03 +0800 (CST)
-Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.48; Wed, 4 Jun 2025 19:37:55 +0800
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Wed, 4 Jun 2025 19:37:39 +0800
-Message-ID: <1749037059-4243-1-git-send-email-zhiguo.niu@unisoc.com>
-X-Mailer: git-send-email 1.9.1
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1uMrr5-0003Gt-1e for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Jun 2025 17:24:47 +0000
+Received: by mail-pl1-f181.google.com with SMTP id
+ d9443c01a7336-2345c60507bso684235ad.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 04 Jun 2025 10:24:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749057876; x=1749662676; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=zhG1JhoXZUo1f3yXWr0+fS3M+qXdVl1plAhbPO0kUgA=;
+ b=kTXlWg1cDcUOXfkBQQOi9ludc/D3pC0DffaKxJWrQpovk7OaxyFeeMKop9+GzwFEm9
+ ItBrkRCTw1KztX2rWmKbHpRLFofPwzAQRsJ49pPIOOEXWH/7jnEDLp1wv3Vao8sp8+l8
+ A1VYu+dDcU4oSAJZqK6NMec86LgG132WISE0imnuOOiaW0Hj4avX9DvN463+45vE3xQQ
+ kMIXZY30ngizrs0VGAK9Tu6ZjO/+1V8mEc/7DACG6MJ05+mnYYAlboS5fGlzvRFtML41
+ xMzxpVELDSeMUwxCYxVR3sr3dRiBQOgbybG5Uh448wNSdrz7FSjNzn+wD/Gh5UtdTTlh
+ 3chw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749057876; x=1749662676;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zhG1JhoXZUo1f3yXWr0+fS3M+qXdVl1plAhbPO0kUgA=;
+ b=gSAWzmsE++B4zW+ngqNcWPyeIzMfoDLvNApbNaKKoq1Qg6W1LDVg3blRH+gkCM2fwz
+ 2sToWGMzp8eCACb1TXIW2YaI62AaBqJxx96Zbv/eIsjcEo6/JkkXODJox+IUKVq+lQNC
+ HkQxRJUFjJvLZ4XBi4uBVg+YQAiZ7IHjp4fBbihez99ZkyRH9mC3FmUf2+kT5rLwe3tW
+ 4m9Vw7h0ltmgHs8Oz6oZRu2M5+8fVoz9upfLPxjMhnfVhVJ606Dik3RxNxkE0S39E8hC
+ s3+L97yTcWRy9zrzim+EQ3HaB1UEjOKiySvwSLGTz/m/oUE6DiE0b9BHo1ztspElWhLc
+ yA1g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUWneAeLhqLuOIYZcsVTaAHSjeYWkWQ1ssh9Ev5SGov6IHdbFNu/ssBArwhHCM2SW8wIQPf6WX8DtuIDLx8QWmv@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YwkHdjvGoFkPBfh4hlJkiJ7iHZPisSU+/41lXhfPlox7DfrqCo2
+ NxbMVRz62+MSwoPbtPplJzmlEJldSXuJedSmrZVJFEAdFQhuX5KUqPOE
+X-Gm-Gg: ASbGnctAupLdEu10NH1odxRi2JCROhEVmb+E+prf2N3OoO1bxb8Y3H3FpFZS0vzm8yc
+ mO9aePrSG9Wp1RGSbo2ZQLp3K/ZeazcPGtLfqUikKkKzmYZEQoLQGfpa6dIMuZtIBSMtlekX6qX
+ N1gnqOM1gjR5stRj6wT0iWrDUXZr7S8PeGCpwvQ5s1f8dDexeYjZYUqOG7zG77n4qilmNIVTra3
+ mnAuT7gWEcX/Ts35otdpBXXJ5dSIKTFxmvv90GIGWF9bZy5hCs3dDRjfKO/Vr03NDh6ebTBoc16
+ EGHnx3e4eYT6M4gzFF0+BWKZQfG+Nxk/hPYoMKS3NyAnQHdytT+VDgf6REPyZIXpO5Fw4h3vfT+
+ Da5h8ZHMKUmoM2JGTowIgV8Natxj2XD2DOa23M2eQ+A==
+X-Google-Smtp-Source: AGHT+IFX+2C7dStz6l25B6CR114tcxl2LulaJZmZkforLWsc1A1k86t9Ufv4s0w9RWZANI/jnMPbPg==
+X-Received: by 2002:a17:903:22c5:b0:235:779:edfa with SMTP id
+ d9443c01a7336-235e11e3c77mr57450655ad.32.1749057876157; 
+ Wed, 04 Jun 2025 10:24:36 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2a00:79e0:2e14:7:5d7a:a6c3:97d2:ecd])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b2eceb9d33csm8944908a12.47.2025.06.04.10.24.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Jun 2025 10:24:35 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Wed,  4 Jun 2025 10:24:26 -0700
+Message-ID: <20250604172426.3683837-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.49.0.1266.g31b7d2e469-goog
 MIME-Version: 1.0
-X-Originating-IP: [10.0.73.87]
-X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 554BbvWC063964
-X-Spam-Score: 0.0 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  The decompress_io_ctx may be released asynchronously after
- I/O completion. If this file is deleted immediately after read, and the kworker
- of processing post_read_wq has not been executed yet due to h [...] 
- Content analysis details:   (0.0 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [222.66.158.135 listed in sa-accredit.habeas.com]
- 0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
- query to Validity was blocked.  See
- https://knowledge.validity.com/hc/en-us/articles/20961730681243
- for more information.
- [222.66.158.135 listed in bl.score.senderscore.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1uMmRx-0007U5-PQ
-Subject: [f2fs-dev] [PATCH v2] f2fs: compress: fix UAF of f2fs_inode_info in
- f2fs_free_dic
+X-Headers-End: 1uMrr5-0003Gt-1e
+Subject: [f2fs-dev] [PATCH] f2fs: turn off one_time when forcibly set to
+ foreground GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,118 +116,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Zhiguo Niu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Zhiguo Niu <zhiguo.niu@unisoc.com>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, zhiguo.niu@unisoc.com,
- baocong.liu@unisoc.com, Hao_hao.Wang@unisoc.com
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The decompress_io_ctx may be released asynchronously after
-I/O completion. If this file is deleted immediately after read,
-and the kworker of processing post_read_wq has not been executed yet
-due to high workloads, It is possible that the inode(f2fs_inode_info)
-is evicted and freed before it is used f2fs_free_dic.
+From: Daeho Jeong <daehojeong@google.com>
 
-    The UAF case as below:
-    Thread A                                      Thread B
-    - f2fs_decompress_end_io
-     - f2fs_put_dic
-      - queue_work
-        add free_dic work to post_read_wq
-                                                   - do_unlink
-                                                    - iput
-                                                     - evict
-                                                      - call_rcu
-    This file is deleted after read.
+one_time mode is only for background GC. So, we need to set it back to
+false when foreground GC is enforced.
 
-    Thread C                                 kworker to process post_read_wq
-    - rcu_do_batch
-     - f2fs_free_inode
-      - kmem_cache_free
-     inode is freed by rcu
-                                             - process_scheduled_works
-                                              - f2fs_late_free_dic
-                                               - f2fs_free_dic
-                                                - f2fs_release_decomp_mem
-                                      read (dic->inode)->i_compress_algorithm
-
-This patch use __iget before f2fs_free_dic and iput after free the dic.
-
-Cc: Daeho Jeong <daehojeong@google.com>
-Fixes: bff139b49d9f ("f2fs: handle decompress only post processing in softirq")
-Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
-Signed-off-by: Baocong Liu <baocong.liu@unisoc.com>
+Fixes: 9748c2ddea4a ("f2fs: do FG_GC when GC boosting is required for zoned devices")
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+Reviewed-by: Chao Yu <chao@kernel.org>
 ---
-v2: use __iget/iput function
----
- fs/f2fs/compress.c | 16 +++++++++++-----
- 1 file changed, 11 insertions(+), 5 deletions(-)
+ fs/f2fs/gc.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index b3c1df9..3f0c18d 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -1687,7 +1687,7 @@ static void f2fs_release_decomp_mem(struct decompress_io_ctx *dic,
- }
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 2b8f9239bede..f752dec71e45 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -1893,6 +1893,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+ 	/* Let's run FG_GC, if we don't have enough space. */
+ 	if (has_not_enough_free_secs(sbi, 0, 0)) {
+ 		gc_type = FG_GC;
++		gc_control->one_time = false;
  
- static void f2fs_free_dic(struct decompress_io_ctx *dic,
--		bool bypass_destroy_callback);
-+		bool bypass_destroy_callback, bool late_free);
- 
- struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
- {
-@@ -1743,12 +1743,12 @@ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
- 	return dic;
- 
- out_free:
--	f2fs_free_dic(dic, true);
-+	f2fs_free_dic(dic, true, false);
- 	return ERR_PTR(ret);
- }
- 
- static void f2fs_free_dic(struct decompress_io_ctx *dic,
--		bool bypass_destroy_callback)
-+		bool bypass_destroy_callback, bool late_free)
- {
- 	int i;
- 
-@@ -1775,6 +1775,8 @@ static void f2fs_free_dic(struct decompress_io_ctx *dic,
- 	}
- 
- 	page_array_free(dic->inode, dic->rpages, dic->nr_rpages);
-+	if (late_free)
-+		iput(dic->inode);
- 	kmem_cache_free(dic_entry_slab, dic);
- }
- 
-@@ -1783,16 +1785,20 @@ static void f2fs_late_free_dic(struct work_struct *work)
- 	struct decompress_io_ctx *dic =
- 		container_of(work, struct decompress_io_ctx, free_work);
- 
--	f2fs_free_dic(dic, false);
-+	f2fs_free_dic(dic, false, true);
- }
- 
- static void f2fs_put_dic(struct decompress_io_ctx *dic, bool in_task)
- {
- 	if (refcount_dec_and_test(&dic->refcnt)) {
- 		if (in_task) {
--			f2fs_free_dic(dic, false);
-+			f2fs_free_dic(dic, false, false);
- 		} else {
- 			INIT_WORK(&dic->free_work, f2fs_late_free_dic);
-+			/* to avoid inode is evicted simultaneously */
-+			spin_lock(&dic->inode->i_lock);
-+			__iget(dic->inode);
-+			spin_unlock(&dic->inode->i_lock);
- 			queue_work(F2FS_I_SB(dic->inode)->post_read_wq,
- 					&dic->free_work);
- 		}
+ 		/*
+ 		 * For example, if there are many prefree_segments below given
 -- 
-1.9.1
+2.49.0.1266.g31b7d2e469-goog
 
 
 
