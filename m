@@ -2,109 +2,109 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50DC5AD0889
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  6 Jun 2025 21:15:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3EF7AD0891
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  6 Jun 2025 21:20:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=KWTH2gZKKZocoi2qeBVYTvhZD3UaTzcdIKP/XwZWfPM=; b=c4httm/4ZWAA337HTq9hUbNBi6
-	8mpDFlecJSDeihK5nGFfVZo+gqlFP3SFgo7BUpfrjarrIf7G6KY5uhLg442TEREhgmmR/g6vy3sSY
-	yaCFDUbvoxFTjys/1QIMSwXjCIVD1SkUezhycNaHSZKEY/0OyaKobT0qxhCuEsrmjbsQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=2YA9cMiU56XmdcxQcevn6kiUlD3jCEHE5VUKf8cIviI=; b=WJT4gV3NKYVZtGgrAmDnJjqsOo
+	9i3oNN+4TiL5KYVHi+KeONQoFew7ZQjRmUXNnArXNrdh7b56UyNl8b8zJ0um5Om+FK9RCy8aUHHFJ
+	rMcZMUHh9PLQGnw3wL/ePIISDelM9MzBdwdwMLpYDt55TNxV36jEa5ztXLpLiZQ7xW9A=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uNcXh-0004eu-AB;
-	Fri, 06 Jun 2025 19:15:53 +0000
+	id 1uNccE-0005X3-Aq;
+	Fri, 06 Jun 2025 19:20:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1uNcXg-0004en-2V
+ (envelope-from <daeho43@gmail.com>) id 1uNccD-0005Wx-ED
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 06 Jun 2025 19:15:52 +0000
+ Fri, 06 Jun 2025 19:20:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wjMIOt/LXFQebzmgX0Ga8a/wOAlhCkmqYvTYDXKBEUY=; b=P9yt1q4X9LMC0LriTDS3xnNhyH
- 2Ngyr0k8cW2erd9Gd0aLrZ/3NEukrZ8Qfpj6o72KTi5lEgiPl4pweeF0H6J3j79TsyvY7DwBhUeyA
- pY1nkaJGfDVjVsCFsRZDb4lIhIcazNvMYq0EO7FFU8UqkBYLX0PmnP7M5td5+JSBWS10=;
+ bh=9UTDZ1/hHZs0bK8G0qVizEGkzLroiiZ6qFk6RdyLfRk=; b=kPd4dIUs+brgka4r/gnHWkmkZv
+ xGRQ02lBFQAJIFHw0E4BpIgkxceLLZf69HOLaHMTZ+0gxzLXOJ0/+xXEWM660a82/Xf/C9t+yzaD/
+ AX3J6WPnLCTWY81V1jvFBd6AH7hmx9jgoCz/bhSj3pahXyS3om4Fj1kGc58qFj3L8haA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=wjMIOt/LXFQebzmgX0Ga8a/wOAlhCkmqYvTYDXKBEUY=; b=F
- LUbIh43hopOMTYExHuAaYly8wGx/UQOBEW+BZI1+RVNKH594KkX4YuKJNYuBhivpgoB8zYYxfe8Bn
- PtIKRI9La6ChMIhcWuZUtkzJR6OuC5NeC0K4WcZ3i5+ffF45FM2e54g3OCai2XJjkjBWy/zFkPhVh
- xkVnCXPxwnUckMNg=;
-Received: from mail-pf1-f179.google.com ([209.85.210.179])
+ List-Owner:List-Archive; bh=9UTDZ1/hHZs0bK8G0qVizEGkzLroiiZ6qFk6RdyLfRk=; b=M
+ H0o2Mm1b9dsBSJKCZ5ev1jG3SPPSMnk6Ldsb07lT5S1O0Q9uEo+YxkRkgp/SYI/rYlk/5/jEkTS0A
+ vi+sp4W36RmviWi1tDIyU/8klyc1nX/VzHb35FHgVEivLwn3+P1SLE/O3y2qIIfxVKo7mCBZJfKtm
+ y8ZWJiGcNc/mVrfo=;
+Received: from mail-pl1-f175.google.com ([209.85.214.175])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uNcXf-0003py-LA for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 06 Jun 2025 19:15:51 +0000
-Received: by mail-pf1-f179.google.com with SMTP id
- d2e1a72fcca58-7425bd5a83aso2265523b3a.0
+ id 1uNccD-00045h-0M for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 06 Jun 2025 19:20:33 +0000
+Received: by mail-pl1-f175.google.com with SMTP id
+ d9443c01a7336-235f9ea8d08so17740715ad.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 06 Jun 2025 12:15:51 -0700 (PDT)
+ Fri, 06 Jun 2025 12:20:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749237341; x=1749842141; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1749237622; x=1749842422; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wjMIOt/LXFQebzmgX0Ga8a/wOAlhCkmqYvTYDXKBEUY=;
- b=CirDfvpvA1oraFojEZCDIn0Y1SUuIBzvAg/L9u84a0KHXeBB9UgyyIO3kuQ7oL25/D
- nuQUei8oyMNp6tomz2VWlsJqTjJ0wN2HKP9Jt4FatDUvU2a2sjKzziFbsq4aACMTsAuf
- uc/fwYGCii6UGOyIbKHNSjxm+n5zNZ239kcV19NEiDHFIXP0KSQajacKzD0GyTyxAoO2
- 2rr/zdgAaXfIfbtWJxcceS9kt27XYqxY016az/YxCxFqUxFSdtiw2fK5GC29UsWJkrQQ
- UoTPK7Bw6xpcraZQ97p5E/23fhNE3J+4Fd+y91NCmSOPNdalXwk4m8ejACwo+qE+jCe6
- nk6Q==
+ bh=9UTDZ1/hHZs0bK8G0qVizEGkzLroiiZ6qFk6RdyLfRk=;
+ b=DQn+DsGePR2W0+j7T5/Lc5UDH+3T5wBLEe0KCDroa6EzgD3eNmIu8MKCW9yI7szyWK
+ I/XDYwy7cxEf+p0c4okcsnBm9L83HF5DtXT5YTjhiid7QuVCGPH3mBK8qZadOmvbGmg5
+ wmrWaq/bY/J2kf5h+jf6+0UNt3P5DRS7eTDnMq80fhD4XvVUvccgjnVCHPP4CpQ92EBq
+ K/8YxorXKKw5pSQQSGYMfdiOrCPE6n39rJaEshLe4fYt5HB8uxqcFEjucPVDAm/2SBae
+ 32vymWpGCN591VhL8mc0jQ6gW1kYRD33JStWJjQVUZssEfW57Z0IxZG0++Na+uIUiDJ0
+ ltSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749237341; x=1749842141;
+ d=1e100.net; s=20230601; t=1749237622; x=1749842422;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wjMIOt/LXFQebzmgX0Ga8a/wOAlhCkmqYvTYDXKBEUY=;
- b=dDqdaYVghWRcILt7JrEPDrhW94ZTjraHH4mMIji7mTzCiOrbumWM8JrJMv0QNSnWRy
- GXF40ZMYVlFUA+sjAjehMLyqH1cQAQCPPWTach0jVegOO8VJ26jhXEjAeqlfepY3OIXm
- QlBmhsGrH17e48+p3Trs7M4ZQNZgsJveA86bc3FPXoOLmH6t2C4JO2bKHCrHcAElHF/3
- QbCxG4fhV3YXTjvCdnrf0HLHBjlKIwbvvxgZhxMT4W8cK2Q0ZW3aCpmxm/VIFGDpPqfU
- ksfIWPtOzzzI6iRRhwx2N1Xs9QNepkNC1rG1atpXvqU1YopnxIvisQtJ37bBr0RvIPnn
- fWeA==
+ bh=9UTDZ1/hHZs0bK8G0qVizEGkzLroiiZ6qFk6RdyLfRk=;
+ b=TVlmy20jyVNLbvNfW5ccRSzJRYFGqWaGKYmx5EsYDuuc1f4l9kjn6ecVRMNLCcMo0N
+ io4DOaB/9KCIc1o5qHUacnNl5yKNnz5G0hNYwDE+WXo6ixC4S8vR0Eepbsi2Z2MnMSS1
+ uA554EiZyuc9zMVfF4rroTbKVahI1OkrYGge3MoIYwBgSXMctvrTjTJ8+nhw0V+41Z0d
+ kq9sDjyE5Sux/BiW3aYUDbsqwaEPSl7EN/aXQmrQw4YhU9r4+vWbtI5K2tlTLtIK250F
+ 7RxzNuifl6kn/EdnNx6N9AKwGPSH3mb+q9DPS+KQhaNf/spR2NMzGFjkneVvKSVNOKnD
+ e9Mw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU6X+7tVYhIrWqbcjr6xpuHhtRJ/TwJ9Kfz5Qzz17LmLImOZqPacH+qGysRO31lfWbZatTbRhVbAubq7MKol0OM@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yy5JgtGLyilRu2YVsr0qKT3i5mpzh3e8isYwPyeyJL2RGR3hTJB
- V4XxQRd2PFWsnfdQACzCjTMdqrVM8GJjKK8P/tAUqkqudFfVTIbBBc80
-X-Gm-Gg: ASbGncunbOiN1RG+YECNS7p4RPtoQx9jHW0YzsWn1UWM+SMvNjxRudaWqNAd7J9Zs1n
- 0JguwxCRBCcKJ0oyYSNqEpSoqN55D6NxpN9iJke0Q10gTmBx71C5nVOElqohGpuY8m96KD+kEPj
- NsxT3mogBzXC3JAd3nKWr69sYZUhLrX6sU9/rmVMnPRupRwGuk6pAg6IIWRRA5bU9xhSx/Br87f
- KVDtKZJ9++vLqcAnwLiOoK0MMCGC1Kc9aQ6CsG7kgczRMxAgwhoLEUUCmPC52cWcmwla9systXL
- ze1RKwNcjEZ4f3nX5Nn3v5I42JNJ8N7t+qY4nLTOoZylyPXXv7JCkP+ZcsUm+SDa2cnEKjs/WfR
- AJtpjz88fMCm0RvWBHo5G1lPlUMkWe3WyP43RWgVt5dYwYlqQqKvf
-X-Google-Smtp-Source: AGHT+IHsnz+YKTH4F0OOvHcKBTY/iymvbEjaxdXetM6ww7FFyxe3sRF6r6KB+AZkKu0uhD4foJUewQ==
-X-Received: by 2002:a05:6a21:b8f:b0:218:bb70:bd23 with SMTP id
- adf61e73a8af0-21ee31c1655mr5218493637.42.1749237340835; 
- Fri, 06 Jun 2025 12:15:40 -0700 (PDT)
+ AJvYcCWdHP41UIBpigJ1baSbviJUScR2jGSN+u6HyQDkVG6040fi7+YSxQgiWAMjlMP25v4m21Q+MVTAViBkuWWZKlob@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YyaUbR44V91M09GDcTWOIu8DGiT7ZQjWXO1wMZ1/fjL1nwJ2EWi
+ 0a4jYwW8JXiDPgutdY5d+2077xXDGdkTfA7lROU6ahep8KAzaUdpanEr9CuT0w==
+X-Gm-Gg: ASbGncv5sQGB9zRNsMk5Y/tYcM9kX6WuGv+g0GXtEhpQVlgyh0Fipjky+mCEk9JmVKG
+ 8uqVJ48+FeVRbw2f1ebXI2dnyhVLsSWTs0kg44ZvHQXE7zoV2+9Bdl+k7YwHJGJSVhmIf33mbIH
+ SHf+//ziYOTb2yqyyWbe7X59ZFhNhc/2UJpJ7RcGkMX4T63mV4ffRf9CWCvoOCF1vzXKyFV32fG
+ +WD8WKnZzf0suaDzoO02ge+4uslQx9nOPlVRiIbRtHq+triKBgnNC2aDomd3Rbw0/qLz0k63bnh
+ SZs/BK+nrjePuhbDVh0Evgz5F5zCEv5AZ6OmKTudgSRMz12jYJfMwFdhm5mlIT24nBMpItv1KbJ
+ rjosOk9WL8UaG/0ekOKITBijVKxUhT8O34lzPwgYgew==
+X-Google-Smtp-Source: AGHT+IH5bV7+H+EmGUIjzHVg3caXPHPiAR5sjZ1TOPIyhwE5ycPXN4xBytDNmBZxOwGLuFBA5Haj8Q==
+X-Received: by 2002:a17:902:f603:b0:235:f298:cbbe with SMTP id
+ d9443c01a7336-23601e44b41mr70110995ad.12.1749237622054; 
+ Fri, 06 Jun 2025 12:20:22 -0700 (PDT)
 Received: from daehojeong-desktop.mtv.corp.google.com
  ([2a00:79e0:2e14:7:d02c:e22:e5a4:2f84])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7482af7b606sm1680804b3a.67.2025.06.06.12.15.40
+ 98e67ed59e1d1-3132ad9a4aasm2962217a91.1.2025.06.06.12.20.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jun 2025 12:15:40 -0700 (PDT)
+ Fri, 06 Jun 2025 12:20:21 -0700 (PDT)
 From: Daeho Jeong <daeho43@gmail.com>
 To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  kernel-team@android.com
-Date: Fri,  6 Jun 2025 12:15:34 -0700
-Message-ID: <20250606191534.438670-1-daeho43@gmail.com>
+Date: Fri,  6 Jun 2025 12:20:17 -0700
+Message-ID: <20250606192017.439733-1-daeho43@gmail.com>
 X-Mailer: git-send-email 2.50.0.rc0.604.gd4ff7b7c86-goog
 MIME-Version: 1.0
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -112,8 +112,8 @@ X-Spam-Report: Spam detection software,
  Content preview:  From: Daeho Jeong Add a sysfs knob to set a multiplier for
  the background GC migration window when F2FS Garbage Collection is boosted.
  Signed-off-by: Daeho Jeong --- Documentation/ABI/testing/sysfs-fs-f2fs |
- 7 +++++++ fs/f2fs/gc.c | 3 ++- fs/f2fs/gc.h | 1 + fs/f2fs/sysfs.c | 2 ++ 4
- files changed, 12 insertions(+), 1 deletion(-) 
+ 8 ++++++++ fs/f2fs/gc.c | 3 ++- fs/f2fs/gc.h | 1 + fs/f2fs/sysfs.c | 2 ++
+ 4 files changed, 13 insertions(+), 1 deletion(-) 
  Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -121,17 +121,16 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [daeho43(at)gmail.com]
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
  digit [daeho43(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.179 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1uNcXf-0003py-LA
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [daeho43(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.214.175 listed in wl.mailspike.net]
+X-Headers-End: 1uNccD-00045h-0M
 Subject: [f2fs-dev] [PATCH] f2fs: add gc_boost_gc_multiple sysfs node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -156,17 +155,17 @@ window when F2FS Garbage Collection is boosted.
 
 Signed-off-by: Daeho Jeong <daehojeong@google.com>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs | 7 +++++++
+ Documentation/ABI/testing/sysfs-fs-f2fs | 8 ++++++++
  fs/f2fs/gc.c                            | 3 ++-
  fs/f2fs/gc.h                            | 1 +
  fs/f2fs/sysfs.c                         | 2 ++
- 4 files changed, 12 insertions(+), 1 deletion(-)
+ 4 files changed, 13 insertions(+), 1 deletion(-)
 
 diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index bf03263b9f46..0f343cb5cc17 100644
+index bf03263b9f46..931c1f63aa2e 100644
 --- a/Documentation/ABI/testing/sysfs-fs-f2fs
 +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -861,3 +861,10 @@ Description:	This is a read-only entry to show the value of sb.s_encoding_flags,
+@@ -861,3 +861,11 @@ Description:	This is a read-only entry to show the value of sb.s_encoding_flags,
  		SB_ENC_STRICT_MODE_FL            0x00000001
  		SB_ENC_NO_COMPAT_FALLBACK_FL     0x00000002
  		============================     ==========
@@ -176,6 +175,7 @@ index bf03263b9f46..0f343cb5cc17 100644
 +Contact:	"Daeho Jeong" <daehojeong@google.com>
 +Description:	Set a multiplier for the background GC migration window when F2FS GC is
 +		boosted.
++		Default: 5
 +
 diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
 index 3cb5242f4ddf..de7e59bc0906 100644
