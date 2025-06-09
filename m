@@ -2,100 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D79FAD0D16
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  7 Jun 2025 13:24:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD37EAD1793
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Jun 2025 06:01:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=cETXrBIPCJZP1VXbt2y7Sf+WeYc/R2FgTl1UY/PYhRU=; b=HD6wNzaGh5ExmbfWk5GsiXQvM7
-	vuKpAEvgiqfdNjrmBpIXrFgP2Wzy85LqvuO1EbGCofpbZDqD8o9WkV+47YPVrj6BkaEMH0EY9nt0J
-	CQ9GpQavn1YlHUhTOCaYnkMHGD2dozOn2hD7pibrHCths6nCCwEBQmpjp1pJwVSZF+5M=;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=HnJ6p0TfCyzSbc0y7rvsMsmGTiCb4NfGex5zjuDhbE0=; b=iUUDobDS74rAfWTXCHikwguOD9
+	69oMv1oA8dm3yDTAmRciez6yu6CpBVZRCddgKVJEjADcrVLk7+Kje0xJv/WRg726SrUS0jCSfUsZv
+	k9jgYGBtymyLh1LT9S6JGtn7tdnBXx+dWv6Z8C/J1MfpJrNv/qwvDE1nAANR4It0Mdvk=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uNrfE-0001t1-0k;
-	Sat, 07 Jun 2025 11:24:40 +0000
+	id 1uOTh8-0003uX-08;
+	Mon, 09 Jun 2025 04:01:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uNrfC-0001sv-R0
+ (envelope-from <hch@lst.de>) id 1uOTh6-0003uQ-Dk
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 07 Jun 2025 11:24:38 +0000
+ Mon, 09 Jun 2025 04:01:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BOXW6Ajyk5opQtCtMkh79kFN/f5SBnksR5GZj8zNwpA=; b=aLfIEL8gwTypSicYSgfmsV0A77
- 4Si4VGPbq8qqE95O99vmjP0HhQnoTTl4IC0TsUAQFGeNQV/xamW6SoET/UypZhUfI/KFLnGks9lxn
- raSqBr88K4465t/0wL/VpOuG0rWt5MhZaF21zqWWrAPc6bMuW9IUk4jRnu6lIiAnWZbQ=;
+ bh=+OrUcEIJpkzIqPSaSMapcl8mkrvVwMc4GV6bBX9ZsrI=; b=hFV30pFUVHRvaYSKuehaJuZEO2
+ S0FHwVH/gKf3rzx94kyccHqO4u1T48AlpCpmEUvGQvE3yqErZAxNmxwdnpWeBoi10KtmID+c2xIUP
+ im8JhKlFKEM1LsPs9OMbxjLi31lO0vYiQSDwLYCFqegESzILDjHpiqjQ64hYtOnd3OS8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BOXW6Ajyk5opQtCtMkh79kFN/f5SBnksR5GZj8zNwpA=; b=M5AFBajpoplVAsqQTZ9Kwxg7Hv
- mWfgkyD7ACA8YYcPO3FxhIXu4fa6FoOAJry2L5TRHEysPEh78nAZQ9+Np5Jqcqn663mFQwueORhhz
- V+i4PBTKsqqN5DcyVShbTzk5lxUr+YP2b3JBMC3koC0XFPmUJnBWVScz8IapfyuuShas=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=+OrUcEIJpkzIqPSaSMapcl8mkrvVwMc4GV6bBX9ZsrI=; b=GjPU/aZehsuaEPEAjrSCN06TH2
+ D3AbbXyYZswj+iAI7CGiMK02SodPux6X+TPi1Ko67C23OyXCXHM8PbE17drvuv+asWQx9Aw5M21+r
+ UwrA1IEBBfgcfjvxVDR6Nus2rbzl3MxO8zXhcy6pZURO8L68RGgsRGRJBsDMHjbaAQtE=;
+Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uNrfC-0001oL-FE for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 07 Jun 2025 11:24:38 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id CD4FFA50577;
- Sat,  7 Jun 2025 11:24:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 42DB4C4CEE4;
- Sat,  7 Jun 2025 11:24:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749295472;
- bh=nuUPsTwBuGQIwTKkqwCC+8mAEXl6kp7AHsVvWhxw5F8=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=Tb+sNoMun6BAZt2rbPS/Qtg+fz85SmubVh+/sdWJlhV35bOtu47qQnTFXlv41Iahf
- 4FozRfiXbF+I4Tnvo4EfO/pqrtWZHpGCapwQej56S8ONsatBoGy/WVDYiNs7a8+rE1
- TD6J7l694AoTkWLnjOCrnSEdTnPkHExI29zSnBN7hojKx4sAZ7/99YUx1ksJ7Y5XyI
- EVwJK/M+RZkQOpTwzyg/mic8v278OOJTtxu1LAp3ElAs0SRQGj2NzA+lAlVdhfQGY9
- ZppYau99Hm/4+/fKoNK5oLN8LPTqrReZJ5kjLu7DanWge26lfkLJA0QL1Y/QX3kTa3
- KB08BJ/LdliPw==
-Message-ID: <b5781bc9-ed04-4e3f-bbc1-126e18620ff3@kernel.org>
-Date: Sat, 7 Jun 2025 19:24:29 +0800
+ id 1uOTh5-0007QY-R4 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 09 Jun 2025 04:01:08 +0000
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 4222168AFE; Mon,  9 Jun 2025 06:00:57 +0200 (CEST)
+Date: Mon, 9 Jun 2025 06:00:56 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Kundan Kumar <kundanthebest@gmail.com>
+Message-ID: <20250609040056.GA26101@lst.de>
+References: <CGME20250529113215epcas5p2edd67e7b129621f386be005fdba53378@epcas5p2.samsung.com>
+ <20250529111504.89912-1-kundan.kumar@samsung.com>
+ <20250602141904.GA21996@lst.de>
+ <c029d791-20ca-4f2e-926d-91856ba9d515@samsung.com>
+ <20250603132434.GA10865@lst.de>
+ <CACzX3AuBVsdEUy09W+L+xRAGLsUD0S9+J2AO8nSguA2nX5d8GQ@mail.gmail.com>
+ <20250603140445.GA14351@lst.de> <20250603140513.GB14351@lst.de>
+ <CALYkqXoAGHqGkX9WqEE+yiOftcWkap-ZGH3CSAeFk-cPg4q25A@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Sheng Yong <shengyong2021@gmail.com>, jaegeuk@kernel.org
-References: <20250607064116.2993239-1-shengyong1@xiaomi.com>
-Content-Language: en-US
-In-Reply-To: <20250607064116.2993239-1-shengyong1@xiaomi.com>
-X-Spam-Score: -0.3 (/)
-X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+Content-Disposition: inline
+In-Reply-To: <CALYkqXoAGHqGkX9WqEE+yiOftcWkap-ZGH3CSAeFk-cPg4q25A@mail.gmail.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Spam-Score: 0.0 (/)
+X-Spam-Report: Spam detection software, running on the system "sfi-spamd-2.hosts.colo.sdot.me",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2025/6/7 14:41,
- Sheng Yong wrote: > From: Sheng Yong <shengyong1@xiaomi.com>
- > > When committing new super block, bio is allocated but not freed, and
- > kmemleak complains: > > unreferenced object 0 [...] 
- Content analysis details:   (-0.3 points, 5.0 required)
- pts rule name              description
+ 
+ Content preview:  On Fri, Jun 06, 2025 at 10:34:42AM +0530, Kundan Kumar wrote:
+    > Thanks for the suggestion — I agree the default should come from a >
+   filesystem-level helper, not a mount option. > > I looked into th [...] 
+ 
+ Content analysis details:   (0.0 points, 5.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uNrfC-0001oL-FE
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix bio memleak when committing super
- block
+  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+                             was blocked.  See
+                             http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+                              for more information.
+                             [213.95.11.211 listed in list.dnswl.org]
+X-Headers-End: 1uOTh5-0007QY-R4
+Subject: Re: [f2fs-dev] [PATCH 00/13] Parallelizing filesystem writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,62 +99,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Sheng Yong <shengyong1@xiaomi.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: ritesh.list@gmail.com, Anuj gupta <anuj1072538@gmail.com>, jack@suse.cz,
+ djwong@kernel.org, amir73il@gmail.com, david@fromorbit.com,
+ gfs2@lists.linux.dev, linux-mm@kvack.org, clm@meta.com,
+ Christoph Hellwig <hch@lst.de>, dave@stgolabs.net, agruenba@redhat.com,
+ miklos@szeredi.hu, Kundan Kumar <kundan.kumar@samsung.com>,
+ willy@infradead.org, p.raghav@samsung.com,
+ Anuj Gupta/Anuj Gupta <anuj20.g@samsung.com>, linux-nfs@vger.kernel.org,
+ da.gomez@samsung.com, viro@zeniv.linux.org.uk, jaegeuk@kernel.org,
+ axboe@kernel.dk, brauner@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ mcgrof@kernel.org, anna@kernel.org, gost.dev@samsung.com,
+ linux-fsdevel@vger.kernel.org, akpm@linux-foundation.org, trondmy@kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2025/6/7 14:41, Sheng Yong wrote:
-> From: Sheng Yong <shengyong1@xiaomi.com>
-> 
-> When committing new super block, bio is allocated but not freed, and
-> kmemleak complains:
-> 
->    unreferenced object 0xffff88801d185600 (size 192):
->      comm "kworker/3:2", pid 128, jiffies 4298624992
->      hex dump (first 32 bytes):
->        00 00 00 00 00 00 00 00 80 67 c3 00 81 88 ff ff  .........g......
->        01 08 06 00 00 00 00 00 00 00 00 00 01 00 00 00  ................
->      backtrace (crc 650ecdb1):
->        kmem_cache_alloc_noprof+0x3a9/0x460
->        mempool_alloc_noprof+0x12f/0x310
->        bio_alloc_bioset+0x1e2/0x7e0
->        __f2fs_commit_super+0xe0/0x370
->        f2fs_commit_super+0x4ed/0x8c0
->        f2fs_record_error_work+0xc7/0x190
->        process_one_work+0x7db/0x1970
->        worker_thread+0x518/0xea0
->        kthread+0x359/0x690
->        ret_from_fork+0x34/0x70
->        ret_from_fork_asm+0x1a/0x30
-> 
-> The issue can be reproduced by:
-> 
->    mount /dev/vda /mnt
->    i=0
->    while :; do
->        echo '[h]abc' > /sys/fs/f2fs/vda/extension_list
->        echo '[h]!abc' > /sys/fs/f2fs/vda/extension_list
->        echo scan > /sys/kernel/debug/kmemleak
->        dmesg | grep "new suspected memory leaks"
->        [ $? -eq 0 ] && break
->        i=$((i + 1))
->        echo "$i"
->    done
->    umount /mnt
-> 
-> Fixes: 5bcde4557862 ("f2fs: get rid of buffer_head use")
-> Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
-
-Reviewed-by: Chao Yu <chao@kernel.org>
-
-Thanks,
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gRnJpLCBKdW4gMDYsIDIwMjUgYXQgMTA6MzQ6NDJBTSArMDUzMCwgS3VuZGFuIEt1bWFyIHdy
+b3RlOgo+IFRoYW5rcyBmb3IgdGhlIHN1Z2dlc3Rpb24g4oCUIEkgYWdyZWUgdGhlIGRlZmF1bHQg
+c2hvdWxkIGNvbWUgZnJvbSBhCj4gZmlsZXN5c3RlbS1sZXZlbCBoZWxwZXIsIG5vdCBhIG1vdW50
+IG9wdGlvbi4KPiAKPiBJIGxvb2tlZCBpbnRvIHRoZSBzeXNmcyBvdmVycmlkZSBpZGVhLCBidXQg
+b25lIGNoYWxsZW5nZSBpcyB0aGF0Cj4gbnJfd2JfY3R4IG11c3QgYmUgZmluYWxpemVkIGJlZm9y
+ZSBhbnkgd3JpdGVzIG9jY3VyLiBUaGF0IGxlYXZlcyBvbmx5Cj4gYSBuYXJyb3cgd2luZG93IOKA
+lCBhZnRlciB0aGUgYmRpIGlzIHJlZ2lzdGVyZWQgYnV0IGJlZm9yZSBhbnkgaW5vZGVzCj4gYXJl
+IGRpcnRpZWQg4oCUIHdoZXJlIGNoYW5naW5nIGl0IGlzIHNhZmUuCj4gCj4gVGhpcyBtYWtlcyB0
+aGUgc3lzZnMga25vYiBhIGJpdCBmcmFnaWxlIHVubGVzcyB3ZSB0aWdodGx5IGd1YXJkIGl0Cj4g
+KGUuZy4sIG1hcmsgaXQgcmVhZC1vbmx5IGFmdGVyIGluaXQpLiBBIG1vdW50IG9wdGlvbiwgZXZl
+biBqdXN0IGFzIGFuCj4gb3ZlcnJpZGUsIGZlZWxzIHNpbXBsZXIgYW5kIG1vcmUgcHJlZGljdGFi
+bGUsIHNpbmNlIGl04oCZcyBzZXQgYmVmb3JlCj4gdGhlIEZTIGJlY29tZXMgYWN0aXZlLgoKVGhl
+IG1vdW50IG9wdGlvbiBoYXMgYSBmZXcgaXNzdWVzOgoKIC0gdGhlIGNvbW1vbiBWRlMgY29kZSBv
+bmx5IHN1cHBvcnQgZmxhZ3MsIG5vdCB2YWx1ZSBvcHRpb25zLCBzbyB5b3UnZAogICBoYXZlIHRv
+IHdpcmUgdGhpcyB1cCBpbiBldmVyeSBmaWxlIHN5c3RlbQogLSBzb21lIGZpbGUgc3lzdGVtIG1p
+Z2h0IG5vdCB3YW50IHRvIGFsbG93IGNoYW5naW5nIGl0CiAtIGNoYW5naW5nIGl0IGF0IHJ1bnRp
+bWUgaXMgYWN0dWFsbHl0IHF1aXRlIHVzZWZ1bAoKU28geW91J2xsIG5lZWQgdG8gcXVpZXNjZSB3
+cml0ZWJhY2sgb3IgbWF5YmUgZXZlbiBkbyBhIGZ1bGwgZnMgZnJlZXplCndoZW4gY2hhbmdpbmcg
+aXQgYSBydW50aW1lLCBidXQgdGhhdCBzZWVtcyBvayBmb3IgYSBjaGFuZ2UgdGhpcyBpbnZhc2l2
+ZS4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51
+eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZv
+cmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51
+eC1mMmZzLWRldmVsCg==
