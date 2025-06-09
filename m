@@ -2,87 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12A4CAD2833
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Jun 2025 22:56:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 105D1AD2835
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Jun 2025 22:56:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=qtV+L0GOmzeyxc2aPk1oNwlpvJbfQAYo/0wI2S10Oe8=; b=BT4lu4c8oKRpCLmgD0twodHF6I
-	W6ENAax47sDu6/Snqbr2oOoiLyLxm1cn+3+RcxoLGTN7cvcmLwJF5wiJlpMlxs1qkcPOkNaPDjZ7d
-	T3zZ4fe8Buf+pE017CYyDm24FzY6lT5weLhNckhdZC8fiFdtDQFX8nRrOkQEN4+SZhX8=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=eKv2AwzHgMtzG9MIAmtkrMJlqtVhuLW7kLgNG3uaCP0=; b=XEGr04TLITRxEsLIXWH2ealsJ0
+	qVDQEsohJx2xqMtW4WdBrFZKd4Nxnkv6DmnTnlDYlTDU50w9a7nl4jvqzmn9omqFIcy2I84E85Jm2
+	kWTht5zy5yK6FfT9kXSJ78wdZP6I8++pA2DphR/i5hcHOS1Z68s58q08fAJr1TxAIWDM=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uOjXA-0005P7-G5;
-	Mon, 09 Jun 2025 20:55:56 +0000
+	id 1uOjXG-0003k4-Nk;
+	Mon, 09 Jun 2025 20:56:02 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uOjX9-0005P0-3R
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uOjXF-0003jn-Rh
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Jun 2025 20:55:55 +0000
+ Mon, 09 Jun 2025 20:56:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aT/8M79WUcK/Z0tOThqg0qmZonbVyo4Sh1eXNqYogUs=; b=iXDlOucorjrMqwjtzLoE4RMfSX
- p3RG8GEBoX0Va0u53wUrKj+mw6UnZVYEWV+hDhcBVCNgdSqejPBg4YyHcOmxHgAjqke4iqfKBGjKs
- sATosVMW/E3HZVYuxCkRGAwMDQwzoCy6G8vVkbMW0F5qByJjcD6ZgMKgFUhBqbgRIVo8=;
+ bh=6aUii8PFTq2fbXylsYk/SmATXiemVhUWzJIInA3rid4=; b=JwrEDcd9d0cY1ZpZEHevp7Lmxi
+ d/k485pk66KiKWFVEnwbXgpyHvqTFiaHXll4tia+09aGFU1unsq5oREV/EUw19no5e1Xft0zyEKy2
+ Rz5vQuIXk8pvJL+YNNz3OXzoMKeg7UUuW9aSp7mh9tJRyVJm7J3b744zGzlS6czDLQZM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aT/8M79WUcK/Z0tOThqg0qmZonbVyo4Sh1eXNqYogUs=; b=MaL+b39IEYU/aX2Yy2eRNvN6CT
- nDLgp11CgPvck+MhIlp3NPkiMZg/1tBpbxsC3SV6iGTaoCN1DJDjE/dwOamuDQgxfEkaiT+MHaxuX
- c14GfUlIau9FZpXgCLAxg806yNFp02mnWIg7DgpsyK1ZXPiCdtvW+K7etZ97AHbh+10I=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=6aUii8PFTq2fbXylsYk/SmATXiemVhUWzJIInA3rid4=; b=ED73EYtBB4MZ5zEt6SLdijdxQQ
+ vapFHp6OQPjN+c3sU/YA6ilAgXyIDlVsomLhrBqhoDj4AeNVza1U9toCvKRRK9Jm2Rj0EJZHwLwyx
+ sHcm3IZinr+sKmCpJjYAyYqDD5l7W6TOCzrzebAWosyzrlONkkR5iEYlx5lb2F/9JPGA=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uOjX8-0004oz-Kb for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Jun 2025 20:55:55 +0000
+ id 1uOjXF-0004pP-D8 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 09 Jun 2025 20:56:01 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6D0625C54AF;
- Mon,  9 Jun 2025 20:53:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD3A3C4CEF0;
- Mon,  9 Jun 2025 20:55:48 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A2D11629E2;
+ Mon,  9 Jun 2025 20:55:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B32DC4CEF0;
+ Mon,  9 Jun 2025 20:55:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749502548;
- bh=FY6gqqH9JmRV7d802KdcakpN34IqV+GwM9Cmr/5iyvE=;
+ s=k20201202; t=1749502550;
+ bh=cqTQa8rm+F++IDXEr692KrwmjAEZKagK+bHhQ+bzCU4=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=JA1BAvXslVN3D4i9BJ9vFhyyQvtsdmXX5tsinuV1jv4qY9rGrDYEpzQDsVqaJVIsn
- 13HrFO4Rh/PNzPxeR0LMCkjnsQwyQB/gqssKWC/RIV3rRGfSspplWpEn4s0GFrhOAJ
- 2dEc4+f5Y+aE8AEqJ9sr9DDqLu2uk0EjqEgQ2Aifp+9aZzZ3bY1H6fuY4L6wYaaIHQ
- 5l0AqEpjmNKk8PazIVzaKNh9VsZ5Du06a2HbcxF6YWP7l68FJ0YYCv2NK49v6XxfET
- Jedhvd0tEpjdCXPKwqwru8HwhG9vpNtyaCkX9j5Unj9W4QR1AcSHdMPhmne+9zZCNl
- 98S8DGEwi4YHQ==
+ b=u1EBetkk6hR9Qmt5jAU/OlotzWfZAXdel5V1WwcDhfWXEHt3KQrqjj8vgNXTxnVNP
+ wAa9BFAz7NskMhX7Q0uLI+hBmhEbZovh1maS1jFnKpFOHbID83GbbjB8jzS7k2z0S3
+ 6707+6vAjgriU7A8nTfRBWTWIPTyDalIpd9Y8xjh0cLwVfB4dY6SyIOvQyzCsYIpJx
+ v2muC4yJfkEh0YxKCczO0ZAYLvin2GFNe3DinFbbrfuI58SRDGmSk2b4ZmS61rkF/k
+ XW0WsBg8hLAc0dBolf3EjpMkqG8WMuXVcGs4xMDfUJfsrAff0qf7FPsreqy72rI12f
+ th91gtHZ47qdA==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- ADB8D3822D49; Mon,  9 Jun 2025 20:56:20 +0000 (UTC)
+ 33AE83822D49; Mon,  9 Jun 2025 20:56:22 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <174950257925.1531626.6267627182271643754.git-patchwork-notify@kernel.org>
-Date: Mon, 09 Jun 2025 20:56:19 +0000
-References: <20250429114949.41124-4-ryncsn@gmail.com>
-In-Reply-To: <20250429114949.41124-4-ryncsn@gmail.com>
+Message-Id: <174950258074.1531626.9419516015634434009.git-patchwork-notify@kernel.org>
+Date: Mon, 09 Jun 2025 20:56:20 +0000
+References: <20250430181052.55698-4-ryncsn@gmail.com>
+In-Reply-To: <20250430181052.55698-4-ryncsn@gmail.com>
 To: Kairui Song <ryncsn@gmail.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Andrew Morton <akpm@linux-foundation.org>: On Tue, 29 Apr 2025 19:49:46 +0800
+ Andrew Morton <akpm@linux-foundation.org>: On Thu, 1 May 2025 02:10:49 +0800
  you wrote: > From: Kairui Song <kasong@tencent.com> > > folio_index is only
  needed for mixed usage of page cache and swap > cache, for pure page cache
- usage, the cal [...] 
+ usage, the call [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,12 +90,12 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uOjX8-0004oz-Kb
-Subject: Re: [f2fs-dev] [PATCH v2 3/6] f2fs: drop usage of folio_index
+X-Headers-End: 1uOjXF-0004pP-D8
+Subject: Re: [f2fs-dev] [PATCH v3 3/6] f2fs: drop usage of folio_index
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,7 +124,7 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Andrew Morton <akpm@linux-foundation.org>:
 
-On Tue, 29 Apr 2025 19:49:46 +0800 you wrote:
+On Thu,  1 May 2025 02:10:49 +0800 you wrote:
 > From: Kairui Song <kasong@tencent.com>
 > 
 > folio_index is only needed for mixed usage of page cache and swap
@@ -137,7 +137,7 @@ On Tue, 29 Apr 2025 19:49:46 +0800 you wrote:
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v2,3/6] f2fs: drop usage of folio_index
+  - [f2fs-dev,v3,3/6] f2fs: drop usage of folio_index
     https://git.kernel.org/jaegeuk/f2fs/c/fe15ec046431
 
 You are awesome, thank you!
