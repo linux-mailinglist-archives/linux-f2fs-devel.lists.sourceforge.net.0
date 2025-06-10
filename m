@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA817AD3CD5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Jun 2025 17:24:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4696AD3D83
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Jun 2025 17:38:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=3svGxHo7pSQGKtdKZ7N9987biHAT5+UwnISDUMN8lDE=; b=dwnAhC3PyQDhHwoGfoeT4YvuiV
-	jUyIr/ZE6woYHGSxANsSz30wT/huy56lLrv0ZJ6HzeWks/XN+zgohJNgZofM4aXIM5ddbppJEuC5G
-	x5x6bJRuXO/GGxU/4tUqi8XodvQxce2pSTryX8Tu6QY4cR5ot7pLtFM19EyatOvR8TmQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=wBqNXmfgm8IXVVaoAZsLI7w/hf14MvBFOnR6RgYNtdc=; b=Kdk6qssOAHsP1CMVirGYcOPQ21
+	2ZIDZ0FkYx1YoIzcOhqVldR7tGNghJcx4H3t14z1P9XRBzMIjMbrBT3fsNeq+MYiqe+g8hzLlWNCK
+	1GRXzU9pPf6dvOaovocMjkvB5h0B4g/KUk4UOPTz8MUGlgIB49/DVvtYwraBn9UjhZ9M=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uP0px-00007O-Oj;
-	Tue, 10 Jun 2025 15:24:29 +0000
+	id 1uP13o-0004yr-PH;
+	Tue, 10 Jun 2025 15:38:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <shengyong2021@gmail.com>) id 1uP0pw-00007C-9G
+ (envelope-from <shengyong2021@gmail.com>) id 1uP13n-0004yf-Aj
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Jun 2025 15:24:28 +0000
+ Tue, 10 Jun 2025 15:38:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yj9vOGcmdPzxNfGj1IFrDLl+gZsDLM6h+ZKFW+8SRhk=; b=eChkdpEEQWMUjG1bWjmcti3Esm
- FyAL+T9c3Dm7l+NfUqhtftxEi5/K9FzdY1y4wz1wOmO5ggK1gTGXRwt5QvfJIDDOohLFn1MAhpHYt
- hJ+JJJq1rHOCCmQeJocy7zJHMDYZtdCtUsyiW8BrUdQpUajloFbMzpg+YddA8Ck9/+e8=;
+ bh=TatYBFF4EQY4FVsr1eUsJdTcW6iVGtz/p6vtXugeSW0=; b=g7eW5wzkte6zpvtmF/XoM1X5QH
+ rMzcOrky5Vw7BOWCA8huMn4hVj4STMUnp5TLotXp0QKZGySoX0NXxf2DwaJJR+vHx18tdo7W2w8FQ
+ 7aai9lschWcfctkkNMc4ZXgY0vo1Con0pGufrspNCyy6zJK2dMU7Hoc22S30C38gXvOM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,64 +40,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=yj9vOGcmdPzxNfGj1IFrDLl+gZsDLM6h+ZKFW+8SRhk=; b=P41yfTmV5XqIa3900KSqeyvaqX
- DCL1U6gkyKTvXcIiSsHNCUIFBrtU7SVyYWgvIrScJtN/aWy64vv5728QW3sHQieHFCTGh5hkZxBcO
- D8a2NM/7zgd1YIGj7demM3sINKC/bSNvr7bk5QMD3Uu6QMAU4iAUvLWzHKpUx3Mx4Ubw=;
-Received: from mail-qt1-f176.google.com ([209.85.160.176])
+ bh=TatYBFF4EQY4FVsr1eUsJdTcW6iVGtz/p6vtXugeSW0=; b=bN/vFDI8c/bCNfgKgEMI7A96rD
+ 0PmfB4iqhxeMMYknFDyE/rzJGBljbmEfzSfP5bowJP/lNObdTN7MMa8ZrhLcidyHLXBhZLca1AkaR
+ AXcwyp31t54RMg39VbhtXGbGWDm3IFzs1DFqqRZBXJ2LYhZex6c+j+JNQhilM12t/cjM=;
+Received: from mail-qv1-f42.google.com ([209.85.219.42])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uP0pv-0004VU-TM for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Jun 2025 15:24:28 +0000
-Received: by mail-qt1-f176.google.com with SMTP id
- d75a77b69052e-4a5851764e1so108418501cf.2
+ id 1uP13m-0006CS-Tx for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Jun 2025 15:38:47 +0000
+Received: by mail-qv1-f42.google.com with SMTP id
+ 6a1803df08f44-6fad79433bbso51259176d6.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 10 Jun 2025 08:24:27 -0700 (PDT)
+ Tue, 10 Jun 2025 08:38:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749569057; x=1750173857; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1749569916; x=1750174716; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yj9vOGcmdPzxNfGj1IFrDLl+gZsDLM6h+ZKFW+8SRhk=;
- b=aSDyOVFR07r6+0SxNIjxkZKDvj8mvAL41ZXyxs5LjY58Xqsxjclg4GGRQWu7mSNWnh
- ESsVuVlw0bt7x7NfKtvPQiBXLUNsriI+/f21Dp8wNYm2bSwSwRr9qa4B+7+sa7yZUqTL
- 66AZVZ1E2cEL8kxLD7JcHeC/sw3yOT7qle5WraoVnZWZ0i7FGC10/oZFnrmek4dkZJvG
- CFZv3F6tKrKrEemfnp0SpPDYMG/ptZjCuTqgMTF9jYxVRTl+IX33MZGzpa8rc386Mdh6
- XEnnfOkg1uFUGV2S2xfEek4jJiwFO5+AN9suWn5ZbFrPDGgw8g+UjRtajL6B4Wak+KpA
- c1/g==
+ bh=TatYBFF4EQY4FVsr1eUsJdTcW6iVGtz/p6vtXugeSW0=;
+ b=C4DdFVDHbb1CvTSFzkhQ+5BO7o+IbvRL4AM2sRG8650/0ixanLPhgFDK1LXda3EQaq
+ kWL93nDBpgOQfCeySLsJIMbADZNWMkJgDqwIASghwwh84LeqdZUnTP3ydHWuReS8vVO6
+ uoJalJLVBtDsdsfwEQaHI3LQYUqAU+F6ilERbQDtEDjlnNYydX6WC06YVZ2zMc7XXUVS
+ UKOh7z8ffhSraAs8Zs/wuUsPlD0SGM0gWduJs4G/+bFlIrLGjB93msat2HPYLAyUfSPn
+ CaoTpOWB4rsSKmgKy5pevc7clXP6+9W0kLYsFduvy5Z8d9kJxLm7rJ+ftXCyAcAcOBBw
+ E9Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749569057; x=1750173857;
+ d=1e100.net; s=20230601; t=1749569916; x=1750174716;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yj9vOGcmdPzxNfGj1IFrDLl+gZsDLM6h+ZKFW+8SRhk=;
- b=dUZVkBGOc4odkTUSxHE4RQUjKX9jm1+QQL9errspL0ui13xlr5pO0Gq4CLyawMuhLt
- coitVnjy6GuSm0Za3lGf9ybocn1wPS8qdX9p1WSBvGY9COyghPTQzJuYm7BZoDk3bH9A
- HHAAaAcoy6F1ZcnrlUlnlV4iK2J9XpsdRkfg1yPGJM21iw58c+HT+qBXxSk1pE+v54Aq
- tu78b+c1JcHbY4H0Viu6Dedeh8om9wwrOWB4+Cn/vd8cAWasnR3DAEe6TNppEvmg6XwK
- PMqA7U3aHdtMemAXB9ZGgdqprKI6ixfN8D763rVoreuXZJ+1jWLycrQCuy5zyy6BVTQP
- MJ/w==
-X-Gm-Message-State: AOJu0Ywudmv3wdZqj6arGgI65ZywbxRdH0tgQqhImPvl68kwnjm5o4Bw
- gpnFwoOvwzPUmiWUYQneu7Ix6enQx9Hl/jjYQv2svFwKiqt2wviW3SHbHd4XIQ==
-X-Gm-Gg: ASbGnctmT4bs1R9Y1Guxu14F2PmPlhJn4MyncmPEHp5LW7dro0DKUNC3A/nSK8Uwglw
- wqV4YIpb2lZXTjS7ZC1IqjYYwNQcb00ZEIMFXMtJh88LOQLauIbFk2/CGyUswGxEc7AIca/LRoA
- QbdDAlPTWwABvxLKRRRGsDRnq2+nuRWwv3wAdIxnQFYWaN2awo4vaj6cnpygCzhparTkuRxZQme
- JAiusZXAUb6OKuKYmJbjTAZh0hkNTVEC0GEi296duDsTtrZMaQRgMqhX0forhqLOfYtqQXqonRf
- jD5cprx+JFQHMnHNNEUkcfwvg0FFUVbc+wsXtT1mPOjloBo/i+pAZZ5HMd2p+oOKmyq/
-X-Google-Smtp-Source: AGHT+IHuochTA92cO7Wm5RBw+3pblnw8P2D+xhn7zvQOjmqG2nBbneWIOoj4wziQgH6GHhK9o+tOnA==
-X-Received: by 2002:a05:6a00:9a3:b0:747:b043:41e8 with SMTP id
- d2e1a72fcca58-74827f12808mr21242791b3a.15.1749559121959; 
- Tue, 10 Jun 2025 05:38:41 -0700 (PDT)
+ bh=TatYBFF4EQY4FVsr1eUsJdTcW6iVGtz/p6vtXugeSW0=;
+ b=LB6kyyHkjbD7z7qJHEhnCVZEI+Xw5Y5NWQUYoNpzFqeeDAQVK5+Z4jFftrC5P45rm6
+ 67QVQddb/fhbaupLkRuMTHhvjJPAkRwUHLytCkdieSe0O8C+wgIvqmPgkF7emsTpHpbc
+ 8PahtledluNGkr//PY5JRAU+WH4dMLXFcsW9DDv5xKx8oh1x3IhujxiC9njNCizwIUyC
+ MPfBn5hqw1KIOdeUaaSXGXfHMnfBt29M6HFHtE6D//aPFNcSSih3Ek0hKAO2mK+4X86p
+ RB3luxqlC4fR9Mfc4W4heo8h/UXx9ptFankwBeIniLWIJdGHMHA1DrAcmBhHhZM6GdMZ
+ 42Xw==
+X-Gm-Message-State: AOJu0YwSQLfSk29AEyapTZlNLjxqrBeMNnovUCdiRXVTALvCdgminW9E
+ u/coWK+oBId3UR3jCr77H35xnvSJxGmpMupBebGPQ8nCcqOgtCmttW3oz5aZpw==
+X-Gm-Gg: ASbGncv0CqlAJ77j+YFa7d0ldBXSJ3OjqKyOW9nJp74nGw7qXXhoHJ/XE2gVFal10Uk
+ nkyhb3pW0g7b6383nZLSxVzFelwlsIrIu8kML1wQwnGdfA9zRnWwiQ0Qs7pdTBZ6VlXq8E5XDXN
+ 83NOPHDr+Wtb6PCttt++lbjfUKCDbKe+BKHJbMT0xytfFuZ3ERfE5TQYOtjAqZL2ExbxQJdszvb
+ QLNvITtXa3PNocsADRDBbuStCsnoOzGjtsamp8TPky6/T1+hm3X4qv9KS7VvfWVIEndEkmGpAE7
+ VZYWFP4JgH5YMVV3Vp3gSMUF8UXJh1TfHf6W2UA7/hOYccpL43WQt0XjvDH+jAu6M3bZ
+X-Google-Smtp-Source: AGHT+IHep98VOv2OTCOyan37B6ziTa4xBJk0f62H9wPuieHSkZPNT+1s6ytj3Yp5ImCSFTboES3dDQ==
+X-Received: by 2002:a05:6a00:1882:b0:740:b5f8:ac15 with SMTP id
+ d2e1a72fcca58-74827e7b394mr20648701b3a.10.1749559123913; 
+ Tue, 10 Jun 2025 05:38:43 -0700 (PDT)
 Received: from PC.mioffice.cn ([43.224.245.249])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7482b0847aesm7539815b3a.105.2025.06.10.05.38.40
+ d2e1a72fcca58-7482b0847aesm7539815b3a.105.2025.06.10.05.38.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Jun 2025 05:38:41 -0700 (PDT)
+ Tue, 10 Jun 2025 05:38:43 -0700 (PDT)
 From: Sheng Yong <shengyong2021@gmail.com>
 X-Google-Original-From: Sheng Yong <shengyong1@xiaomi.com>
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Tue, 10 Jun 2025 20:37:30 +0800
-Message-ID: <20250610123743.667183-21-shengyong1@xiaomi.com>
+Date: Tue, 10 Jun 2025 20:37:31 +0800
+Message-ID: <20250610123743.667183-22-shengyong1@xiaomi.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250610123743.667183-1-shengyong1@xiaomi.com>
 References: <20250610123743.667183-1-shengyong1@xiaomi.com>
@@ -110,9 +110,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: From: Sheng Yong Signed-off-by: Sheng Yong ---
- tests/f_sit_bad_type/README
- | 5 +++++ tests/f_sit_bad_type/expect.in | 3 +++ tests/f_sit_bad_type/script
- | 38 ++++++++++++++++++++++++++++++++++ 3 files changed, 46 ins [...] 
+ tests/f_sit_bad_vblocks/README
+ | 5 ++++ tests/f_sit_bad_vblocks/expect.in | 3 +++
+ tests/f_sit_bad_vblocks/script
+ | 38 +++++++++++++++++++++++++++++++ 3 files changed, 4 [...] 
  Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -128,10 +129,10 @@ X-Spam-Report: Spam detection software,
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
  digit [shengyong2021(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.160.176 listed in wl.mailspike.net]
-X-Headers-End: 1uP0pv-0004VU-TM
-Subject: [f2fs-dev] [RFC PATCH v2 20/32] tests: add fsck testcase of fixing
- sit entry type
+ [209.85.219.42 listed in wl.mailspike.net]
+X-Headers-End: 1uP13m-0006CS-Tx
+Subject: [f2fs-dev] [RFC PATCH v2 21/32] tests: add fsck testcase of fixing
+ sit entry vblocks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -152,43 +153,43 @@ From: Sheng Yong <shengyong1@xiaomi.com>
 
 Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
 ---
- tests/f_sit_bad_type/README    |  5 +++++
- tests/f_sit_bad_type/expect.in |  3 +++
- tests/f_sit_bad_type/script    | 38 ++++++++++++++++++++++++++++++++++
+ tests/f_sit_bad_vblocks/README    |  5 ++++
+ tests/f_sit_bad_vblocks/expect.in |  3 +++
+ tests/f_sit_bad_vblocks/script    | 38 +++++++++++++++++++++++++++++++
  3 files changed, 46 insertions(+)
- create mode 100644 tests/f_sit_bad_type/README
- create mode 100644 tests/f_sit_bad_type/expect.in
- create mode 100644 tests/f_sit_bad_type/script
+ create mode 100644 tests/f_sit_bad_vblocks/README
+ create mode 100644 tests/f_sit_bad_vblocks/expect.in
+ create mode 100644 tests/f_sit_bad_vblocks/script
 
-diff --git a/tests/f_sit_bad_type/README b/tests/f_sit_bad_type/README
+diff --git a/tests/f_sit_bad_vblocks/README b/tests/f_sit_bad_vblocks/README
 new file mode 100644
-index 000000000000..e0a1726528c0
+index 000000000000..4ca21c766b2d
 --- /dev/null
-+++ b/tests/f_sit_bad_type/README
++++ b/tests/f_sit_bad_vblocks/README
 @@ -0,0 +1,5 @@
 +1. create f2fs image
 +2. mount f2fs and create a regular file and write data
 +3. get a block address by dumping the inode
-+4. inject type in the sit entry of the blkaddr and change its type to NODE
-+5. fsck fixes the type to DATA
-diff --git a/tests/f_sit_bad_type/expect.in b/tests/f_sit_bad_type/expect.in
++4. inject vblocks in the sit entry of the blkaddr by subtracting 1
++5. fsck fixes the vblocks
+diff --git a/tests/f_sit_bad_vblocks/expect.in b/tests/f_sit_bad_vblocks/expect.in
 new file mode 100644
-index 000000000000..b207ff7c6c22
+index 000000000000..9e31f38c458b
 --- /dev/null
-+++ b/tests/f_sit_bad_type/expect.in
++++ b/tests/f_sit_bad_vblocks/expect.in
 @@ -0,0 +1,3 @@
 +Info: Force to fix corruption
-+[FIX] (check_sit_types:x)  --> Wrong segment type [_SEGNO_] 3 -> 1
++[ASSERT] (check_block_count:x)  --> Wrong SIT valid blocks: segno=_SEGNO_, 511 vs. 512
 +Info: Force to fix corruption
-diff --git a/tests/f_sit_bad_type/script b/tests/f_sit_bad_type/script
+diff --git a/tests/f_sit_bad_vblocks/script b/tests/f_sit_bad_vblocks/script
 new file mode 100644
-index 000000000000..a1c7c402181d
+index 000000000000..6dd684555011
 --- /dev/null
-+++ b/tests/f_sit_bad_type/script
++++ b/tests/f_sit_bad_vblocks/script
 @@ -0,0 +1,38 @@
 +#!/bin/bash
 +
-+DESC="sit entry with invalid type"
++DESC="sit entry with invalid vblocks"
 +
 +. $TOPDIR/tests/helpers
 +
@@ -212,7 +213,7 @@ index 000000000000..a1c7c402181d
 +val=`$INJECT --dry-run --sit 0 --blk $blkaddr --mb vblocks $META | \
 +	grep "inject sit entry vblocks" | awk '{print $(NF-2)}'`
 +vblocks=$((val & SIT_VBLOCKS_MASK))
-+val=$((vblocks | (0x3 << SIT_VBLOCKS_SHIFT)))
++val=$(((val & ~SIT_VBLOCKS_MASK) | (vblocks - 1)))
 +
 +$INJECT --sit 0 --blk $blkaddr --mb vblocks --val $val $META >> $LOG
 +$FSCK $FSCK_OPTS -f $META > $OUT
