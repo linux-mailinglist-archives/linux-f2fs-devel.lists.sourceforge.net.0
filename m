@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99F1BAD3CAB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Jun 2025 17:21:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC74CAD3D2C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Jun 2025 17:31:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Dmw8agDG44Hm3dfDL06yukLFr3L6lo2HBoVZezubafA=; b=RibXYfJaEKOIdfabqwxRV7wMra
-	TyeL2+CVJjCvV1Q6xhV/SjI0LR1E910GXn575YkhOy497n6vj8bLGaFy5AOqi+y5qx111eMkH4tdw
-	kKQ4GOw6FEurnZODeMWf6NJI2NGd3g2VU0/sAZxAcTalQVXbrdR/oyazp5eacy1mP5J4=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=d5dw6yAlgt/j/98qNzqG6t6TtC/KnefqYKBfbQXzyV8=; b=I1rpDAsFclXFkdl4/MwDOCzcAY
+	20viPgJmtZKrLzKck/JHIitltPTXV8BjyOGlBPPJR0RZKUN3u5RQboIQrK6jbcr5kx623zZ23Kcfm
+	ugrfJh8dqa0F2Iru8FsCqdwVDZ3h4iIIH627uPcK4eAbvv2cmOp/aJkOcwvsSw37JT0g=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uP0mZ-0007qN-Ri;
-	Tue, 10 Jun 2025 15:20:59 +0000
+	id 1uP0wr-0006Xv-QN;
+	Tue, 10 Jun 2025 15:31:37 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <shengyong2021@gmail.com>) id 1uP0mY-0007qB-3g
+ (envelope-from <shengyong2021@gmail.com>) id 1uP0wr-0006Xp-Cb
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Jun 2025 15:20:58 +0000
+ Tue, 10 Jun 2025 15:31:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9QSikTGJPCNN+TYa621bI/6gjoqFqeD728gxzetz50M=; b=ltNlxs7QE0qTUeeTV6JBDMWuWL
- g8+92yapkrvhX8vjEigTegMVZcldX27IvhuMrUeGw331nn9YXxE4O3B6fYO0VP0zH7pRlRYhH8384
- jMoi579KcKhVWFDvJbUFaYjJGNFmEprae8wVEYuFtEVxJCb6LMjEu+5EdsCY8pEwsWbI=;
+ bh=TuM1yYVu3d4NCtavNOOJqvhWDJzeRxpGr7fulxKYB0Y=; b=Vw0f4nIi52hR18yI4ZAHiXwpsE
+ F/W6PA8mkH1UDmrbbvRGunIwgJGJSPpCq5v61In11D4MYx9ZWGgxMqmO8eMXOk3giLE0EIg0OYYRc
+ dcK/HpWftCY7mBbyQ5lxOR2jBRmS+Gk4t0bRohOwIXTN1BTP+GMY3X3h2kCLCPrYmBHc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,64 +40,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9QSikTGJPCNN+TYa621bI/6gjoqFqeD728gxzetz50M=; b=jcmUDmTOHp7wuzch3eh8+pryqz
- vqFhQISaG3DMM0z+cijCprt5H9AB+jV2sURI3fKXa3TTeNbqAyp13aKjd7U4CTBOvKaC9yTP13JZ3
- Uppaldd7/ZAG1f1BjL11eu5qi1JRh1P1pRrMEZWguzommPXrjpVNvlzj2P7yBw3z1llA=;
-Received: from mail-oa1-f47.google.com ([209.85.160.47])
+ bh=TuM1yYVu3d4NCtavNOOJqvhWDJzeRxpGr7fulxKYB0Y=; b=XDw3xTyaOsYgPTsvZlLW1V0NDE
+ KhCIQgqD4rJKSbBL7sqJiJJRWHvRBHp0F1WhN6Qypg30tuuSQ35GbZaG6CaMlB2sS/Y2QeKBtXVeR
+ Qmh2Be//zzxzdP/rMfpLeqf4tijR7P+xCpncXDONhZDClV8pSazVWm5a4oGNy+VKlRwY=;
+Received: from mail-oa1-f49.google.com ([209.85.160.49])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uP0mX-0003zZ-J0 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Jun 2025 15:20:58 +0000
-Received: by mail-oa1-f47.google.com with SMTP id
- 586e51a60fabf-2ea2fee5471so1689072fac.0
+ id 1uP0wq-0005H5-01 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Jun 2025 15:31:36 +0000
+Received: by mail-oa1-f49.google.com with SMTP id
+ 586e51a60fabf-2d0d25cebfeso4501907fac.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 10 Jun 2025 08:20:57 -0700 (PDT)
+ Tue, 10 Jun 2025 08:31:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749568847; x=1750173647; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1749569485; x=1750174285; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9QSikTGJPCNN+TYa621bI/6gjoqFqeD728gxzetz50M=;
- b=DkTResMGGkTxSA9bo+vrUpOyO/KSDhBMuegANvqtluZFeY1ruaUzRp2ZogH2z4Plj0
- Dy4pHgB9aMJfIetE6gH84AfxeH/7lzNmzUsQksbqPIhrUjOEqLfYkLXqmJKMr3PunstC
- Ze+7rzv6hkayWUatxAuw1JLkiMufwtCytwDQ7fx7q0WnwFZbCR/yvgj1Ox7XgJ7VMsHC
- HO1KDjXBQEWn6YA+y2tPEZlEurXL9VrRn73mRiaZukYc03CusyndewRmueR65avCgfju
- MNDjAqszTf5Fxwc/hiixdRj98g4M0lfL28jP/5B/xloirdOKz8XGzEhwxadK/8xrcC+i
- 6p+Q==
+ bh=TuM1yYVu3d4NCtavNOOJqvhWDJzeRxpGr7fulxKYB0Y=;
+ b=MjSJuStkooCPM/66vk19XR95HqOBDGk+RRkDwjoGlKTDrbVLYJM0BDUGliD3BI9fOh
+ qKeY+ZDBKntMRicVi0hlbOJhw6JQmzCkhCgKHRVlYi0ADArHXSJsZJsR6ML0VOw0Vlfx
+ Lx+K0iBgOALG3ABQQTCw4Y8IoMFKmNomkF5pLVHwaEb4ZahDn0n6QmsaXqLQ23SvHR/C
+ E9F3wjAJWLZ/OlNGq+7iece8Z0ItlsMvSSHuT4+JfDxEIFksSJl3uOvcSizbAHl7PHSz
+ vUTKr/Oib1UiahV5B13+pgWZ3q180Il0ZWVEJzz6cep3bDI3xIZF/PQolqPcyJOUgOaS
+ /vUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749568847; x=1750173647;
+ d=1e100.net; s=20230601; t=1749569485; x=1750174285;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9QSikTGJPCNN+TYa621bI/6gjoqFqeD728gxzetz50M=;
- b=d0qbY3m8EgnjYC/Dpew4nAVPhHgV2HSYKgogW3MGXm5Idxj8jnQ8TUfRyIaB388tNJ
- G7fFy2JohUOJVrulCEhmnByD6OOlDZDuewkcQegW/QWxqGFShBHFXQSZ+U8aV/LyrsZe
- 91drFacJyFvF5iZC4JHTALrvsTF5zYjABAlGaSiT04RoljLurykq0DFQ97/wY8+FxqCG
- ql3xPuZfktZUgKhbEWOo9vKJ/xDBUv5oISu3KSihpDW8CvmLkyNkxH8zbDxuDJ4KE5h7
- v7Fvz6ayhUmo7UVLfDDHhPygeWfuhF8I+JG5apBLDF4Evak8A2I9FC+oDNkpT7Dvj9Ki
- cr7Q==
-X-Gm-Message-State: AOJu0YwPrBdFXeIi2OVIcxoUmHavkImoBHLeHduhbRkKzygxH9Qp02V7
- ujCnuv9CFj4tgijWbiJAmNwJ34dNRFtaMTa2bRl7UYdzmmqKFu0UOXj2YxJZNQ==
-X-Gm-Gg: ASbGncuERwSqnqnTcFfvhrNWHRCMU9INaLBe0HzLvGwPVQ6sHjjC6cKisnDkkB1cUwt
- 0fGtShIrogDDFRn2np62LL43PvkI+CFIPHJcFoZI3mqY2VBFvZKzCEyl+Z9QEFEkVPXrpXlz+Ev
- E2+IouXZOt0bIxGDvvDdd86lU3AH7yvg6IJTnZtrhVRbnMHE/Sds8y4RV3DqzErtP0wjMENKVgU
- zg1iKFLhrRq83HCIO9rq9dSIN+KcW6a1TExEiUkp6MqdTUrhBBW94rPOrWFQD4XyTNeXvZkMazr
- xVfri3LyTHtnFmhjixoNMHbY5r10BFYHDoC3XMnHcDECBt/+W8Lnhekgbe76NJ+NJqU+
-X-Google-Smtp-Source: AGHT+IG9MrtVMRw/X7PvC0ZwleXQWZBPYqSRPKulKjB0hEcaHGrfoMW4d/QzhXxZl0mweM3jPniPUw==
-X-Received: by 2002:a05:6a00:1822:b0:736:5969:2b6f with SMTP id
- d2e1a72fcca58-7485ea624c9mr4216784b3a.6.1749559139476; 
- Tue, 10 Jun 2025 05:38:59 -0700 (PDT)
+ bh=TuM1yYVu3d4NCtavNOOJqvhWDJzeRxpGr7fulxKYB0Y=;
+ b=bXpVhHb+lmVZydpYc3zCYUSrPlidCKBXbnjVusgkKLDquLRGAvdO2Lo2vtTnRz+83z
+ QOZMaGEem/URyfc4wmS6HmhWqy2lzqC5WhHizYipi+19IhTGtWxLRQQNUWu2rCct2ivM
+ ty4MqiXRLdwnFzkPMi97a+kEFXQRDxyVS5MjIb64dZ0d4rwVwi05J7lFcd8/Y9LpZaXZ
+ wzdrdV4Puxj85ng3QKfOojgshzP8gLgm7ksbeTa3n8tY69hAOJmNi9dqF5CEnO3YXfcT
+ Mz+U9kSirjpA2MLQS6xFUGPcT7MCHr0nzg5BJJiGxSpUcYbVD8n8Jq31VwFOMyDyyLvA
+ ehtA==
+X-Gm-Message-State: AOJu0YxbttacVzjFOtbHpsqDWB670swVf+1pKFR1IjGjZrfJ54aM5dcY
+ TUP6Vfjsg3m994BAX46F+oczLSLI/l+b0bMOVMSNyIIrJZ8Jhxiy6o3aI5QXGg==
+X-Gm-Gg: ASbGncvEChtlvyV07ZtTPiORVRZ9dNWdMIC0slJdelHd06mqn/DH/yrMzI0JLi4TYXg
+ YiEZgmVy0i5ZwzvfqYbznVULX7PMTR9JgvVIxVY4JD+R6s1Ctq9xj4yi5M90+KQrBfDLzUJnipt
+ CfjHM5kx18+b5XTkv3zCk3MWRy0nFT4PD6UsxBSY9VVhIhI7JGQWpSgAlzkKD3DNo6i4GehQWWh
+ ofVmaCbPppz/SvQRIqvIV57byGLONhGt2Uj8+UcZyvrGhOyCR7I8YQueo2h4GoBU6IrkGu+U1cn
+ ijlYozSiwO+dSXiPPMclwSbNUB4tuNq0qHoUig2KQ2HvN+5lvMZ0HG4RC/AtwBLNa/q3
+X-Google-Smtp-Source: AGHT+IFdCKR0cTY/MPo4slEUvcYZL6qDwz8R7w7QHHvhnA7lP3iN1oG16cDEHCUQOrcbYjHUVtutIQ==
+X-Received: by 2002:a05:6a00:848:b0:73d:fa54:afb9 with SMTP id
+ d2e1a72fcca58-74827e7f02emr23053991b3a.7.1749559141515; 
+ Tue, 10 Jun 2025 05:39:01 -0700 (PDT)
 Received: from PC.mioffice.cn ([43.224.245.249])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7482b0847aesm7539815b3a.105.2025.06.10.05.38.57
+ d2e1a72fcca58-7482b0847aesm7539815b3a.105.2025.06.10.05.38.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Jun 2025 05:38:59 -0700 (PDT)
+ Tue, 10 Jun 2025 05:39:01 -0700 (PDT)
 From: Sheng Yong <shengyong2021@gmail.com>
 X-Google-Original-From: Sheng Yong <shengyong1@xiaomi.com>
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Tue, 10 Jun 2025 20:37:39 +0800
-Message-ID: <20250610123743.667183-30-shengyong1@xiaomi.com>
+Date: Tue, 10 Jun 2025 20:37:40 +0800
+Message-ID: <20250610123743.667183-31-shengyong1@xiaomi.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250610123743.667183-1-shengyong1@xiaomi.com>
 References: <20250610123743.667183-1-shengyong1@xiaomi.com>
@@ -110,10 +110,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: From: Sheng Yong Signed-off-by: Sheng Yong ---
- tests/f_dentry_dup_dots/README
- | 11 +++++++ tests/f_dentry_dup_dots/expect.in | 26 ++++++++++++++++
- tests/f_dentry_dup_dots/script
- | 49 +++++++++++++++++++++++++++++++ [...] 
+ tests/f_loop_fsync_dnodes/README
+ | 5 ++++ tests/f_loop_fsync_dnodes/expect.in | 6 ++++
+ tests/f_loop_fsync_dnodes/script
+ | 46 +++++++++++++++++++++++++++++ 3 files chang [...] 
  Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -123,16 +123,16 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
+ domain 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.160.49 listed in wl.mailspike.net]
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
  digit [shengyong2021(at)gmail.com]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [shengyong2021(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.160.47 listed in wl.mailspike.net]
-X-Headers-End: 1uP0mX-0003zZ-J0
-Subject: [f2fs-dev] [RFC PATCH v2 29/32] tests: add fsck testcase of fixing
- duplicated dots
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1uP0wq-0005H5-01
+Subject: [f2fs-dev] [RFC PATCH v2 30/32] tests: add fsck testcase of fixing
+ loop fsync dnodes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -153,74 +153,56 @@ From: Sheng Yong <shengyong1@xiaomi.com>
 
 Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
 ---
- tests/f_dentry_dup_dots/README    | 11 +++++++
- tests/f_dentry_dup_dots/expect.in | 26 ++++++++++++++++
- tests/f_dentry_dup_dots/script    | 49 +++++++++++++++++++++++++++++++
- 3 files changed, 86 insertions(+)
- create mode 100644 tests/f_dentry_dup_dots/README
- create mode 100644 tests/f_dentry_dup_dots/expect.in
- create mode 100644 tests/f_dentry_dup_dots/script
+ tests/f_loop_fsync_dnodes/README    |  5 ++++
+ tests/f_loop_fsync_dnodes/expect.in |  6 ++++
+ tests/f_loop_fsync_dnodes/script    | 46 +++++++++++++++++++++++++++++
+ 3 files changed, 57 insertions(+)
+ create mode 100644 tests/f_loop_fsync_dnodes/README
+ create mode 100644 tests/f_loop_fsync_dnodes/expect.in
+ create mode 100644 tests/f_loop_fsync_dnodes/script
 
-diff --git a/tests/f_dentry_dup_dots/README b/tests/f_dentry_dup_dots/README
+diff --git a/tests/f_loop_fsync_dnodes/README b/tests/f_loop_fsync_dnodes/README
 new file mode 100644
-index 000000000000..e36526625ca6
+index 000000000000..4e864fa8c874
 --- /dev/null
-+++ b/tests/f_dentry_dup_dots/README
-@@ -0,0 +1,11 @@
++++ b/tests/f_loop_fsync_dnodes/README
+@@ -0,0 +1,5 @@
 +1. create f2fs image
-+2. mount f2fs
-+3. create a directory, and create a file in it
-+4. inject dot dentry in the directory by changing its d_ino to the dotdot's ino
-+5. fsck fixes the dot's d_ino
-+6. inject dotdot dentry in the directory by changing its d_ino to the dot's ino
-+7. fsck fixes the dotdot's d_ino
-+8. inject dot dentry in the directory by changing its filename to ".."
-+9. fsck fixes it by deleting duplicated dotdot dentry and adding a new dot dentry
-+10. inject dotdot dentry in the directory by changing its filename to "."
-+11. fsck fixes it by deleting duplicated dot dentry and adding a new dotdot dentry
-diff --git a/tests/f_dentry_dup_dots/expect.in b/tests/f_dentry_dup_dots/expect.in
++2. mount f2fs and create 10 regular files with O_SYNC
++3. shutdown f2fs without writing checkpoint
++4. inject fsync dnodes to generate a loop
++5. fsck fixes fsync dnodes by breaking the loop
+diff --git a/tests/f_loop_fsync_dnodes/expect.in b/tests/f_loop_fsync_dnodes/expect.in
 new file mode 100644
-index 000000000000..5af443df7d12
+index 000000000000..23b7fbfc7e82
 --- /dev/null
-+++ b/tests/f_dentry_dup_dots/expect.in
-@@ -0,0 +1,26 @@
++++ b/tests/f_loop_fsync_dnodes/expect.in
+@@ -0,0 +1,6 @@
 +Info: Force to fix corruption
-+[ASSERT] (__chk_dots_dentries:x)  --> Bad inode number[_PINO_HEX_] for '.', parent_ino is [_INO_HEX_]
++Info: checkpoint stop reason: shutdown(1)
++[ASSERT] (sanity_check_node_chain:x)  --> 	detect looped node chain, blkaddr:_BLKADDR_
++[FIX] (loop_node_chain_fix:x)  --> Fix looped node chain on blkaddr _BLKADDR_
 +Info: Force to fix corruption
-+Info: Force to fix corruption
-+[ASSERT] (__chk_dots_dentries:x)  --> Bad inode number[_INO_HEX_] for '..', parent parent ino is [_PINO_HEX_]
-+Info: Force to fix corruption
-+Info: Force to fix corruption
-+[ASSERT] (__chk_dots_dentries:x)  --> Bad inode number[_INO_HEX_] for '..', parent parent ino is [_PINO_HEX_]
-+[ASSERT] (__chk_dentries:x)  --> More than one '..', should delete the extra one, i: 1, ino:_PINO_DEC_
-+[ASSERT] (fsck_chk_inode_blk:x)  --> ino: _INO_HEX_ has no '.' and/or '..' dirents, dot: 0, dotdot: 1
-+[FIX] (fsck_chk_inode_blk:x)  --> convert inline dentry ino: _INO_DEC_, pino: _PINO_DEC_, ret: 0
-+[FIX] (fsck_chk_inode_blk:x)  --> add missing '.' dirent in ino: _INO_DEC_, pino: _PINO_DEC_, ret:0
-+[fsck_chk_quota_files:x] Fixing Quota file ([  0] ino [0x4])
-+[FIX] (nullify_nat_entry:x)  --> Remove nid [0x4] in NAT
-+[fsck_chk_quota_files:x] Fixing Quota file ([  1] ino [0x5])
-+[FIX] (nullify_nat_entry:x)  --> Remove nid [0x5] in NAT
-+[fsck_chk_quota_files:x] Fixing Quota file ([  2] ino [0x6])
-+[FIX] (nullify_nat_entry:x)  --> Remove nid [0x6] in NAT
-+Info: Force to fix corruption
-+Info: Force to fix corruption
-+[ASSERT] (__chk_dots_dentries:x)  --> Bad inode number[_PINO_HEX_] for '.', parent_ino is [_INO_HEX_]
-+[ASSERT] (__chk_dentries:x)  --> More than one '.', should delete the extra one, i: 1, ino:_INO_DEC_
-+[ASSERT] (fsck_chk_inode_blk:x)  --> ino: _INO_HEX_ has no '.' and/or '..' dirents, dot: 1, dotdot: 0
-+[FIX] (fsck_chk_inode_blk:x)  --> convert inline dentry ino: _INO_DEC_, pino: _PINO_DEC_, ret: 0
-+[FIX] (fsck_chk_inode_blk:x)  --> add missing '..' dirent in ino: _INO_DEC_, pino: _PINO_DEC_, ret:0
-+Info: Force to fix corruption
-diff --git a/tests/f_dentry_dup_dots/script b/tests/f_dentry_dup_dots/script
++Info: checkpoint stop reason: shutdown(1)
+diff --git a/tests/f_loop_fsync_dnodes/script b/tests/f_loop_fsync_dnodes/script
 new file mode 100644
-index 000000000000..881bb50f8705
+index 000000000000..b6f64f384a0e
 --- /dev/null
-+++ b/tests/f_dentry_dup_dots/script
-@@ -0,0 +1,49 @@
++++ b/tests/f_loop_fsync_dnodes/script
+@@ -0,0 +1,46 @@
 +#!/bin/bash
 +
-+DESC="directory duplicated dot or dotdot"
++DESC="recover loop fsync dnodes"
 +
 +. $TOPDIR/tests/helpers
++
++# if device is a zoned device, this testcase should be skipped
++test_sb_feature blkzoned
++if [ $? -ne 0 ]; then
++	touch $TESTDIR/SKIP
++	check_result
++	return
++fi
 +
 +cleanup
 +make_f2fs > $LOG
@@ -229,40 +211,29 @@ index 000000000000..881bb50f8705
 +safe_mount $MNT_OPTS $META $TESTDIR/mntdir >> $LOG
 +mkdir $TESTDIR/mntdir/testdir
 +touch $TESTDIR/mntdir/testdir/testfile
-+ino=`stat -c "%i" $TESTDIR/mntdir/testdir`
-+pino=`stat -c "%i" $TESTDIR/mntdir/testdir/..`
++$F2FS_IO checkpoint $TESTDIR/mntdir/testdir/testfile >> $LOG
++i=0
++while [ $i -lt 10 ]; do
++	# write one all zero 4K chunk to file with O_SYNC
++	$F2FS_IO write 1 0 1 zero osync $TESTDIR/mntdir/testdir/testfile.$i >> $LOG
++	i=$((i + 1))
++done
++$F2FS_IO shutdown 2 $TESTDIR/mntdir/testdir/testfile >> $LOG
 +safe_umount $TESTDIR/mntdir >> $LOG
-+rm -rf  $TESTDIR/mntdir
++rm -rf $TESTDIR/mntdir
 +
-+echo "ino:$ino pino:$pino" >> $LOG
++addr1=`$INJECT --dry-run --cp 0 --mb next_blkaddr --idx 6 --val 0 $META | \
++	grep "\[.*1\] blkaddr:" | cut -d ":" -f 3`
++addr2=`$INJECT --dry-run --cp 0 --mb next_blkaddr --idx 6 --val 0 $META | \
++	grep "\[.*6\] blkaddr:" | cut -d ":" -f 3`
++echo "addr1:$addr1, addr2:$addr2" >> $LOG
++$INJECT --cp 0 --mb next_blkaddr --idx 6 --val $addr1 $META >> $LOG
 +
-+# inject dot's d_ino
-+$INJECT --dent --nid $ino --mb d_ino --dots 1 --val $pino $META >> $LOG
 +$FSCK $FSCK_OPTS -f $META > $OUT
-+$FSCK $FSCK_OPTS -f $META >> $OUT
-+
-+# inject dotdot's d_ino
-+$INJECT --dent --nid $ino --mb d_ino --dots 2 --val $ino $META >> $LOG
-+$FSCK $FSCK_OPTS -f $META >> $OUT
-+$FSCK $FSCK_OPTS -f $META >> $OUT
-+
-+# inject dot's filename
-+$INJECT --dent --nid $ino --mb filename --dots 1 --str ".." $META >> $LOG
-+$FSCK $FSCK_OPTS -f $META >> $OUT
-+$FSCK $FSCK_OPTS -f $META >> $OUT
-+
-+# inject dotdot's filename
-+$INJECT --dent --nid $ino --mb filename --dots 2 --str "." $META >> $LOG
-+$FSCK $FSCK_OPTS -f $META >> $OUT
 +$FSCK $FSCK_OPTS -f $META >> $OUT
 +cat $OUT >> $LOG
 +
-+INO_HEX=`printf "0x%x" $ino`
-+PINO_HEX=`printf "0x%x" $pino`
-+sed "s/_INO_DEC_/$ino/g" $TESTDIR/expect.in > $TESTDIR/expect
-+sed -i "s/_PINO_DEC_/$pino/g" $TESTDIR/expect
-+sed -i "s/_INO_HEX_/$INO_HEX/g" $TESTDIR/expect
-+sed -i "s/_PINO_HEX_/$PINO_HEX/g" $TESTDIR/expect
++sed "s/_BLKADDR_/$((addr2))/g" $TESTDIR/expect.in > $TESTDIR/expect
 +
 +check_result
 -- 
