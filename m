@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 323B1AD3C81
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Jun 2025 17:17:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E817AD3C8A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Jun 2025 17:18:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=T0JTKWHTq/+vrKVDUMMebm3Pd8stdxDfI+20h270Bl8=; b=HTxPWgU8lK+Qu4qd/yKbgOvZLC
-	IGEYUt76d59/MVvyzF//5AlQK6yhX4miSqUt+Bn6n41QmGy0F/XTzYZTqH+diRdkA/mNiuibtljOT
-	cAw/qCGcTA9JZbChhPTre4OYuQmDA3U2FuA9DaaMJe4v1yLkZI+ERXmLT1j032Qd4AU4=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=3O+fblS8NHK+t+LXrYhskTCkETJWAbnv5w60ffHueMA=; b=PmcDgtqDqwBR26U0u1dt5oxY+d
+	4gtOuLAtzJE9IVEkMuS/xhIRyj7KFFcD3fwu7FLGzBRxigkuI4cWpKVTie4aAXnotKnmUfbdL9fLT
+	T/zayueWap1HUTzGxDVO/ti05WHRawil4EabKcndcM7g4VXOFLX1z9HU+x2bTtTQg/0I=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uP0j4-0005zS-1n;
-	Tue, 10 Jun 2025 15:17:22 +0000
+	id 1uP0jt-0007g4-6w;
+	Tue, 10 Jun 2025 15:18:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <shengyong2021@gmail.com>) id 1uP0j2-0005zI-LJ
+ (envelope-from <shengyong2021@gmail.com>) id 1uP0js-0007fy-Ec
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Jun 2025 15:17:20 +0000
+ Tue, 10 Jun 2025 15:18:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qhiz3zikIrPHrDXZsvf7ap5bKuyfgTpux6qcahqxxAo=; b=BhkmYJSEHDTqtJwjKzBdRi2wuz
- qOfUOzCfk2Q8RH/RveXvGTkUOCf+LvEV/f1H7VxvJXkVMB5Ncm2kqwYZBPeysyNHd5ZFhwHtMG6V5
- 7SAy45/u0uOfghZSkp3eioH6RSWxs2ePJ/ThXiWlAgDtk7psonxGQPF3M0tyrzCXPiFs=;
+ bh=RjJQdiCPNX5Qw/32p0voEfGnyF3ncBUjYgBACXsb3ZI=; b=FhPzNdh1UjdWesNIx88DTHOLmL
+ O71fCsjnOIA0mIvpE8FDS0kXfbMztVHfSMqKrZcaoZYOIHrF5QMMVjCwuUitD9sw5kzDSYo3lqHmu
+ QWBG1kPgk2VoeZrkAj5arHHaGzBrEY+KEZ7x0U6IA2HnDJfDTODwIemVCY6NkWamjwGY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,64 +40,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qhiz3zikIrPHrDXZsvf7ap5bKuyfgTpux6qcahqxxAo=; b=awAcREH5J8dnMyv+fGQHiveSPw
- CJr5bb1orGKV1J35vStahftmCEUIG618sN4CWUj17DWUs2DtefquzyXjGxB3YR1qH/fBLrwkOWuLN
- Yn8zscUNERNPEBYQwnLBEx259aGmoJEcHpfcgBRnkmAV/J8eHFQ8+voZR7hoqONtmmXM=;
-Received: from mail-ot1-f51.google.com ([209.85.210.51])
+ bh=RjJQdiCPNX5Qw/32p0voEfGnyF3ncBUjYgBACXsb3ZI=; b=Fmc1qUb4mwltXR1c/Yd4WN9tTr
+ aP4bMKL2oOGpDI4qHWyBEFLdRg9ms4s3WOVz1XTcRfDnNNPPL3VeUi+C/x34/Sxp9j+s7aRv/j7aY
+ cFPuPHxEVsX/nAsCb5+dCCxzO6Mm9G377F9Jq6E8CGE6m5I68Jj/JcAALGosbnKpR+SQ=;
+Received: from mail-qv1-f48.google.com ([209.85.219.48])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uP0j2-0003OS-9b for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Jun 2025 15:17:20 +0000
-Received: by mail-ot1-f51.google.com with SMTP id
- 46e09a7af769-739dcdb012fso543962a34.2
+ id 1uP0jr-0003XI-Qz for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Jun 2025 15:18:12 +0000
+Received: by mail-qv1-f48.google.com with SMTP id
+ 6a1803df08f44-6facc3b9559so78929346d6.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 10 Jun 2025 08:17:20 -0700 (PDT)
+ Tue, 10 Jun 2025 08:18:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749568629; x=1750173429; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1749568681; x=1750173481; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qhiz3zikIrPHrDXZsvf7ap5bKuyfgTpux6qcahqxxAo=;
- b=SBCrtwr2CXPsG3+uTvGCLUBXAvcLXvMUGp/VBfwfx4wG4zQ83duC6bH5iqjtlX3bRL
- npGvFXULqpFx+SGSCCzaqe+IOOIWdMmw6fro60FuAQsE18CeVFQLO2HvItT2FlCVVKLx
- xL9gSi6ELOJ/d2wLEidx9DGFDcIFfC4nQpReQBJKFVAT6T1qHEDhzjmcPLsmmvQ9g8AI
- Dn2LnWaS+pgcOndEjsvAVvDZAhpoD8va80PVd8TYKRP5LJ05OmBH5MuV9oHNPDwCr6Xo
- GL9+zXePE3D/oI8BCv1ipkmFRAss/1G1Gf3xVxHo3/XpkIj28DpiEQrG9l/HXx0KmnTL
- poLw==
+ bh=RjJQdiCPNX5Qw/32p0voEfGnyF3ncBUjYgBACXsb3ZI=;
+ b=aSrRvjfw106dqS8SLVR2EpfVGZePixsY/BSd1L2e/zY4SGy3MUuxaLiPOb3NuEZaEH
+ VovuwXiJB+l4n74ubZGlgLki1322UqLn7RRLczrWPhlwRshkdOaMTQmSGtflAiM4ol8K
+ ozdGVfufBKTk6L/y9QeBMAlmBgD7q+KVKBAB3NeQIZ7fxVIi5dQAtWdYRcwPokkKyB/s
+ XUPzI9GKgHPrQhnqEXJcVQ+Kfhn3dknDr+X/6nv1OkbqTCMA0bo9/LUTn1ddjgHzUIH9
+ b/oEXfTc2uWOiujtAv4zjCyohbKVYKbuZsZ53XAq5XowSiNgdfEp0tyc/yWlG89U8AMU
+ GOkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749568629; x=1750173429;
+ d=1e100.net; s=20230601; t=1749568681; x=1750173481;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qhiz3zikIrPHrDXZsvf7ap5bKuyfgTpux6qcahqxxAo=;
- b=uKsO72qm3tXgUENedudyY1CuEu+A2Kven/V3ZrUvJpEMm10RLdgNzcyLelHTM96nRu
- Z8nuxWSNfsIdNb3NK1GPqjo7BHaJWNKBZR0ZWPjg/KfgQN6zg09iHVGLDXBaiP39D/2C
- WCCRtcBVA0rlCiI5bt3KaEFqQ6wI9XlM0doVHK48zTWraTjNvEhY1IcUHeVaEp/qFe7D
- uOYrziQu/kEohej5laDfjAGTHbSYAonMY60Q53jH0SwU9Z9HV7S4hOfbL+1flgA414N1
- 9A/Hd7qeNLSw+W0rE+EO6TM3UVpF4IUPQNuhTgoCwOdp0EiuDDlcLXW4L0RvPcm8slHN
- /2tw==
-X-Gm-Message-State: AOJu0YzLKyFG9cOlP73JKoW6L0cap7YlKly5RPHYODbZ7tLOk5Y9bqQn
- rqJKvDvqLCuqZH1lt2LKjde+F4intHcQGxaVxjIw5px703eOQG/eN8B6o3aXqg==
-X-Gm-Gg: ASbGncuo3d9EYdj0Vx+C0MPMgqKZ4sRKsLHaM9wnkY9CiYkEXlhzMLtWOBsnd23f6u6
- WB1/c8+h/Y1XJXukQFcxZT7dvroFW6QWch2bVZKTwDbaKwRUIRUqJP9IWXoo77hVMlwDKXFOmfw
- 396itm4tsOL7VLRc/y51W9/H4qCeA46iJgtqrhfXkGHmk/N/9Rs+l1XAgE02x9csUgsh7AzU3fM
- s0CC/+TOdY8L/Emxg0PZveOR3odsK7IfcBLumAh76yLzMra1xq9IL5uKtbbPwLsHeYQq85PO38x
- uf3lmgotU1NQmZWvfGPk1bsmisr1x6LF7YwXOuZwBag+/iD1vbAhvFVTIX909wlJwTbk
-X-Google-Smtp-Source: AGHT+IHkNOjKkCHwOuIcmI/WK0blscJCjYCz6Pxm4UgNKh7CnC1RC0xStBltf1VmMe6ORbw28wQfMw==
-X-Received: by 2002:a05:6a21:e85:b0:1f5:9330:29fe with SMTP id
- adf61e73a8af0-21ee68a45ffmr21206924637.17.1749559097618; 
- Tue, 10 Jun 2025 05:38:17 -0700 (PDT)
+ bh=RjJQdiCPNX5Qw/32p0voEfGnyF3ncBUjYgBACXsb3ZI=;
+ b=T4w2/lCdJLHbYu9/sk2KZ3F6tlcX0DPrnBO+fEAVEnmtY+JJxoTGp5mCgts/Z/G3HU
+ J1c/S05ioWGjvveVjjsDwuQ1JNIJQmj6cpfipXRDxgLKxsYz/TJY6Tesfa7OJZBjS4wj
+ B+sYGbSQXAMFq0lnwgG6d2J1Fyq7qP2A2iY+jhUPu6aXKINFGkE/QMI9OK+opxJQYbQn
+ VOV+yV9LPPrKUW/ZULZYqeJDr0GK3FBUjRaPnUllcPZv2qHn46idMj60nRzLA7T9lEMb
+ KSfLzO6HPOE76+CIBLN9BCl/swVZ+Ci4j82KyssLPRROZ9Wbprca1mvHGC5JSd1S9j5s
+ 1ufA==
+X-Gm-Message-State: AOJu0Yw5R5CfitHhVP2k7cmVRrnnQckouZ9jST2BXBXsuCwjJcwPCpFQ
+ 3UVkEllK6k+qFEo876RGNoJJVbRvkTXR7wzBkmw+wraIs4vtL10lMQXiBk3+wA==
+X-Gm-Gg: ASbGncu4FeiUVBXe4mhf+skFZp9c15Hn1u2dEpnqDc7uUeu3zSB2B2V8ARvZv+u17hI
+ 3Pi42xJIDV+OV1rbAabyhI+kEliGRuX2mwdvWw4tVJKcjIQ4Lafs3DacHx9dnv0CDU1EzNdZ3rg
+ mC5kOmArABCitbpMXj89zVo110yUPObKj+7f7ZDgqYU9nty/r6RC7B6qk2AC+Fpzq8QcvDvnDPJ
+ Fp1IIpYYbEln7vBHu+6z9kVLmHpGY92inu8P1syhpEV9vdc60be7rZjFvY23tdFh2k9006UPZSL
+ L6L54ZeY2y2EQxp9lSg3wv8PwEHcDLTmp4NwBg94q0F1w/NKm0y2zj7pKzCtrqigwbEW
+X-Google-Smtp-Source: AGHT+IFhHRzQ3Cl8kyJgcWrO6MowivIg/TLRM6m6BYTx6dm3sdI3r2YYRWG9O/hgUDMztmyfwADZUg==
+X-Received: by 2002:a05:6a21:a43:b0:1f5:9d5d:bcdd with SMTP id
+ adf61e73a8af0-21ee6851aeamr23296460637.1.1749559099682; 
+ Tue, 10 Jun 2025 05:38:19 -0700 (PDT)
 Received: from PC.mioffice.cn ([43.224.245.249])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7482b0847aesm7539815b3a.105.2025.06.10.05.38.15
+ d2e1a72fcca58-7482b0847aesm7539815b3a.105.2025.06.10.05.38.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Jun 2025 05:38:17 -0700 (PDT)
+ Tue, 10 Jun 2025 05:38:19 -0700 (PDT)
 From: Sheng Yong <shengyong2021@gmail.com>
 X-Google-Original-From: Sheng Yong <shengyong1@xiaomi.com>
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Tue, 10 Jun 2025 20:37:18 +0800
-Message-ID: <20250610123743.667183-9-shengyong1@xiaomi.com>
+Date: Tue, 10 Jun 2025 20:37:19 +0800
+Message-ID: <20250610123743.667183-10-shengyong1@xiaomi.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250610123743.667183-1-shengyong1@xiaomi.com>
 References: <20250610123743.667183-1-shengyong1@xiaomi.com>
@@ -109,10 +109,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Sheng Yong Because node and data blocks are updated
- out of place on zoned device, sit_area_bitmap and main_area_bitmap are required
- to record which blocks are allocated, sit should be flushed to reflect changes
- [...] Content analysis details:   (0.1 points, 5.0 required)
+ Content preview:  From: Sheng Yong This patch fixes: * parsing hex optarg of
+ --idx option * converting -1 to 0xff...ff of --val option and do a little
+ cleanup of converting string to a long integer. Signed-off-by: Sheng Yong
+ --- fsck/inject.c | 32 +++++++++++++++++ 1 file changed, 17 insertions(+),
+ 15 deletions(-) 
+ Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -126,12 +128,11 @@ X-Spam-Report: Spam detection software,
  digit [shengyong2021(at)gmail.com]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [shengyong2021(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.51 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1uP0j2-0003OS-9b
-Subject: [f2fs-dev] [RFC PATCH v2 08/32] inject.f2fs: fix injection on zoned
- device
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.48 listed in wl.mailspike.net]
+X-Headers-End: 1uP0jr-0003XI-Qz
+Subject: [f2fs-dev] [RFC PATCH v2 09/32] inject.f2fs: fix and cleanup
+ parsing numeric options
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -150,46 +151,89 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Sheng Yong <shengyong1@xiaomi.com>
 
-Because node and data blocks are updated out of place on zoned device,
-sit_area_bitmap and main_area_bitmap are required to record which
-blocks are allocated, sit should be flushed to reflect changes in
-block address, and checkpoint should be rewritten to update cursegs.
+This patch fixes:
+  * parsing hex optarg of --idx option
+  * converting -1 to 0xff...ff of --val option
+and do a little cleanup of converting string to a long integer.
 
 Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
 ---
- fsck/inject.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ fsck/inject.c | 32 +++++++++++++++++---------------
+ 1 file changed, 17 insertions(+), 15 deletions(-)
 
 diff --git a/fsck/inject.c b/fsck/inject.c
-index b3228621de48..96817a806f8f 100644
+index 96817a806f8f..c879ca99c0d8 100644
 --- a/fsck/inject.c
 +++ b/fsck/inject.c
-@@ -1172,6 +1172,9 @@ int do_inject(struct f2fs_sb_info *sbi)
- 	struct inject_option *opt = (struct inject_option *)c.private;
- 	int ret = -EINVAL;
+@@ -236,8 +236,9 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
  
-+	if (c.zoned_model == F2FS_ZONED_HM)
-+		fsck_init(sbi);
-+
- 	if (opt->sb >= 0)
- 		ret = inject_sb(sbi, opt);
- 	else if (opt->cp >= 0)
-@@ -1187,5 +1190,15 @@ int do_inject(struct f2fs_sb_info *sbi)
- 	else if (opt->dent)
- 		ret = inject_dentry(sbi, opt);
+ 	while ((o = getopt_long(argc, argv, option_string,
+ 				long_opt, NULL)) != EOF) {
+-		long nid, blk;
++		long long val;
  
-+	if (c.zoned_model == F2FS_ZONED_HM) {
-+		if (!ret && (opt->node || opt->dent)) {
-+			write_curseg_info(sbi);
-+			flush_journal_entries(sbi);
-+			flush_sit_entries(sbi);
-+			write_checkpoint(sbi);
-+		}
-+		fsck_free(sbi);
-+	}
-+
- 	return ret;
- }
++		errno = 0;
+ 		switch (o) {
+ 		case 1:
+ 			c.dry_run = 1;
+@@ -248,18 +249,19 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
+ 			MSG(0, "Info: inject member %s\n", optarg);
+ 			break;
+ 		case 3:
+-			if (!is_digits(optarg))
+-				return EWRONG_OPT;
+-			opt->idx = atoi(optarg);
+-			MSG(0, "Info: inject slot index %d\n", opt->idx);
++			val = strtoll(optarg, &endptr, 0);
++			if (errno != 0 || val >= UINT_MAX || val < 0 ||
++			    *endptr != '\0')
++				return -ERANGE;
++			opt->idx = (unsigned int)val;
++			MSG(0, "Info: inject slot index %u\n", opt->idx);
+ 			break;
+ 		case 4:
+-			opt->val = strtoll(optarg, &endptr, 0);
+-			if (opt->val == LLONG_MAX || opt->val == LLONG_MIN ||
+-			    *endptr != '\0')
++			opt->val = strtoull(optarg, &endptr, 0);
++			if (errno != 0 || *endptr != '\0')
+ 				return -ERANGE;
+ 			MSG(0, "Info: inject value %lld : 0x%llx\n", opt->val,
+-			    (unsigned long long)opt->val);
++			    opt->val);
+ 			break;
+ 		case 5:
+ 			opt->str = strdup(optarg);
+@@ -292,11 +294,11 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
+ 			MSG(0, "Info: inject nat pack %s\n", pack[opt->nat]);
+ 			break;
+ 		case 9:
+-			nid = strtol(optarg, &endptr, 0);
+-			if (nid >= UINT_MAX || nid < 0 ||
++			val = strtoll(optarg, &endptr, 0);
++			if (errno != 0 || val >= UINT_MAX || val < 0 ||
+ 			    *endptr != '\0')
+ 				return -ERANGE;
+-			opt->nid = nid;
++			opt->nid = (nid_t)val;
+ 			MSG(0, "Info: inject nid %u : 0x%x\n", opt->nid, opt->nid);
+ 			break;
+ 		case 10:
+@@ -308,11 +310,11 @@ int inject_parse_options(int argc, char *argv[], struct inject_option *opt)
+ 			MSG(0, "Info: inject sit pack %s\n", pack[opt->sit]);
+ 			break;
+ 		case 11:
+-			blk = strtol(optarg, &endptr, 0);
+-			if (blk >= UINT_MAX || blk < 0 ||
++			val = strtoll(optarg, &endptr, 0);
++			if (errno != 0 || val >= UINT_MAX || val < 0 ||
+ 			    *endptr != '\0')
+ 				return -ERANGE;
+-			opt->blk = blk;
++			opt->blk = (block_t)val;
+ 			MSG(0, "Info: inject blkaddr %u : 0x%x\n", opt->blk, opt->blk);
+ 			break;
+ 		case 12:
 -- 
 2.43.0
 
