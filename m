@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47DC1AD3D1D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Jun 2025 17:30:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4792AD3D25
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Jun 2025 17:30:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Zqfs9QtrkrdQnK40S5C5UBqW3TwT5dwMtJ2cXFf0Rr8=; b=LWVGbERcfK/3SAD+fA+902XJ+9
-	iwNftYD8rAzF6jzsUh66EHxUoUdY1UJmZSCouSekkolPDgxtmM91wENriBKlc/F6KrvRJEUYZAo0y
-	8Bt4rjuhHnlKm+3W3HRQ4uKBdaK4kul/QhYNPfOwROiQwS4H5LuEcXt7TgVL0qKqlizE=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=O0TSQySNK4V5nSnni3v0o7/7fSX/WC28v63k9i9JPO0=; b=XKcl5DSfkp/GS1YHanA50bfvwl
+	uVFKtl/xTbKcWAF2BdrMSi2gq7fCi8ZttZmi4cJFRgBmb1VVgz+zAAK6cgpsQ9BPDIcH6teZUHzLs
+	pasqnfPpweSneJJnMqQ8z6OV1Btravonvr7rfQzhP7rVBmhv98FT/b/8HEYu7qVz1YOk=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uP0va-0004Xe-Fn;
-	Tue, 10 Jun 2025 15:30:18 +0000
+	id 1uP0w6-0000L0-FL;
+	Tue, 10 Jun 2025 15:30:50 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <shengyong2021@gmail.com>) id 1uP0vQ-0004XL-5p
+ (envelope-from <shengyong2021@gmail.com>) id 1uP0w4-0000Ks-BV
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Jun 2025 15:30:08 +0000
+ Tue, 10 Jun 2025 15:30:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vlyqkARjRFzS7xVeONss8SgN+pa5WOxnIY8CyZDWUog=; b=CGmlakLA8+A9KdviQ8848B11P9
- PLbE9RCjx4Z2//IrO6YQtR2Y97qZtcjvYr/l9jWBEydGBbBNk0wcGIq05u9K6AYmz+BM0HnyDWW04
- +oHZcJj7JxPts0ywn6WtT88k/NJ0XHwezBuji5TX8CvubLTCdvFGWDr5YYL3WxDAFeHg=;
+ bh=KUVftHKR6DeD8bmWL1tMcDlBI42NuJKlFF8lwSZU4zM=; b=aVOUje4aPNY2dCcP2RSNlkGn20
+ Ik7O+Yr8u1SVd9zKp6LkqwetSDMozl4AE7gMJbAPxFIqU9VYHEqTw8oZmsS8SEXBO/V7+gErXTDWg
+ rHOGyLj/0gIBXJHzVd6zaUv7P68uR9SWKbcyLWITC+cWCtgRxRDtLwoK+fVqaOvlRVRI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,79 +40,80 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vlyqkARjRFzS7xVeONss8SgN+pa5WOxnIY8CyZDWUog=; b=IgghiukGBB/WNBnwmH8JMFCn26
- HYo0TNGyzpsR4776iCrwMpixhN3/F9hUi2CFWk14OHmtJiuSEuzjcRQvKS3nQi1L1SEewPgq46Ok9
- 3MkCCFP0sDvTKSmmGTr7ueY+0xWcZXRu5ow7XRuMBCVRq7q/P5PMdOBL+TUYj55d9zQ4=;
-Received: from mail-qk1-f172.google.com ([209.85.222.172])
+ bh=KUVftHKR6DeD8bmWL1tMcDlBI42NuJKlFF8lwSZU4zM=; b=G+uwVZu6A8U1MCJOeoaklFyHSR
+ VqX1RWpxwk6Z7RUR0xgWLRKgPJreX+RbrCJrJaq02WvTVUYLdP6yhd9Dc1pIsvKA3rnKN3nb5KFVR
+ ExmhfCyREfVVLgNY6cjbTKCpSK9dbifqxsb3Zhx3ki+4BHsYOALHdJXfGmovH8c9GMDg=;
+Received: from mail-ot1-f48.google.com ([209.85.210.48])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uP0vP-00056b-Qq for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Jun 2025 15:30:08 +0000
-Received: by mail-qk1-f172.google.com with SMTP id
- af79cd13be357-7d094d1fd7cso729376585a.3
+ id 1uP0w3-0005BH-Kf for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Jun 2025 15:30:48 +0000
+Received: by mail-ot1-f48.google.com with SMTP id
+ 46e09a7af769-72ecc0eeb8bso1898036a34.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 10 Jun 2025 08:30:07 -0700 (PDT)
+ Tue, 10 Jun 2025 08:30:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749569397; x=1750174197; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1749569442; x=1750174242; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vlyqkARjRFzS7xVeONss8SgN+pa5WOxnIY8CyZDWUog=;
- b=gMskkC+I0qIClBuKUnIvMv3IpmUcuQYkEQfWRn60jbAiJin+KAgXQt+6TnVz+4aBEB
- APQqyfOOrnfNyIfjgKF5+JB0oY2Kch1Oet7fhUIzOAxLZIvB0ADFiQpQ3HGm1SRw5k3z
- k0Je9JwFXy9I4El6qZb+RnaOfAvU7o4Bcws4KTi4qfnNV8TNSxYxRb3WorTrbvu6Oh3s
- vzHUUfXD8Vhc9ZVS/3mAlesOC91gA/NKm7tCxqnaZrL8vdA31vMxcQJwwYAeMe4LWR+m
- YbCQnKacE5WpRB//oSM+rF3+8Iy0Pltj/CAFlwrlTKGC1v5ByZBgQFR53dgXTzgPdCWY
- KTQw==
+ bh=KUVftHKR6DeD8bmWL1tMcDlBI42NuJKlFF8lwSZU4zM=;
+ b=l/e7Ng+Fh4NPMF/E+XhpQ6dM4Q7E1Pql5roBM/wfjsEAlP2ytWk7zzUpB/bngS2HB+
+ U+lWKed3eQaWA5HLeyazMap57qvRYGoh0J9AU7sOl5eQFWOOG8qGPCha9FLI4glzELEW
+ qrf/UxbglWsbu+3yqkN52oE+h3OvgrIo7FWzNVcX58aAvl3i3zOHKHFtrClbL91xx96f
+ 13EItJBE092dGJQr5fwdOwOZvgDAZqG9SbT4YWEEYqrv+kqki+Ivo8xTXYJ3xcUcgDvZ
+ P/WB8MyWEI+/35hJDaXywpW2dWAhR2G595JeJonf85sPj7EGdjIqKpe77BHDQXtdq5O2
+ SBcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749569397; x=1750174197;
+ d=1e100.net; s=20230601; t=1749569442; x=1750174242;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vlyqkARjRFzS7xVeONss8SgN+pa5WOxnIY8CyZDWUog=;
- b=Y5go+z//AFjfX5WgPjbNbh7N78q4YMJmnE5r+jkZDcZ6MRGLmiNWKOqd/bDNSAkcLW
- V8GCyscEB3sBlRUE8siI3xP8wGRXM2BApjv8/puKUlAUnMS62LWhSOPQU1MarP+M0A5p
- 0AT4973bWG3ldwhRdfyFdIWWG7BftAZIY6SKn+wviTagJIsPDcvZdO1VakI938B734Pl
- ieGhd7bBpjv7Afrhwi9adjGz56NL1T0JsUqRtmfWOakSiavTJhXb/G/iLhBx3SZG//SC
- uwcxFmki0vMasIOIhnLjHmPu9tc72aNVLAty63TUyiRvXYQDpmNy5KL3smnTxRXw0fSO
- /WiA==
-X-Gm-Message-State: AOJu0YyakrUyrmEEB1pt7f9kHlo3+e8OTZe10NiVIpHyO/dwti0eVr5H
- wq6rQyHoQqxDAIKyqEbfOCFOR4vymCfgqhQnO5e0Uk20TOEEOBzLMH+hOBPthQ==
-X-Gm-Gg: ASbGncs2cMLEeip8lAXW/EwO3LCVh+2i8uC1J3Z8Jit/QdPPS4IVfBGroVScuQuuhqZ
- fE6/bIeNSEbelwext1g3QgbwDCxyUZgA57BwaqoZe3jNQ2gwSgL+POyoVqC/TNMKKQOhP5xfm9m
- WjHBJKEyVkW0pXbjKdNlIML8UWjdTCtRLBLM5iCRRavJl2w0vLiGPSfAug/vX1fvUcuU6EwIkg1
- rKZa8hrR64THa91W+UdtY4ulgsME6SqgGKFYuQ9eGS4npW9LtOi2v6H8zupnR6uTskGcW2xoUTb
- EKQhkXsI3yqD4jc9R277WcrYUkHA4ywedpOrsXte4fJL+RLPX42kNApx90DpX5JCEco5
-X-Google-Smtp-Source: AGHT+IHA9rhnbNOrCxpTXVG2evO1Atajk+hgnj/GeCVadd44cQ91R8EbD36ES4G8LL0bxgYc1SMj7g==
-X-Received: by 2002:aa7:9306:0:b0:748:2ff7:5e22 with SMTP id
- d2e1a72fcca58-7482ff761d1mr18598011b3a.10.1749559113918; 
- Tue, 10 Jun 2025 05:38:33 -0700 (PDT)
+ bh=KUVftHKR6DeD8bmWL1tMcDlBI42NuJKlFF8lwSZU4zM=;
+ b=SKDja6cQXsa2qDJ5s2TNqeOslmZtQGV5FiVbWxj75hafJgwuEDG7DNb9+Z63gFeCHV
+ /XR5stuvvs3tRC8ZzKKZke24GSDot47Xd4eXa/Pnkx4TyyvsFKTagDElwUkBme/oCrKY
+ BR04hTtUFxhKGQ9zYlpiWgaRuUPu8O4bv/gJzeCQ8cGWG0g8oHfsuExmfsxOQD+j6BX4
+ SgaMRqpaO9L28eG+JSAj+h/IVGa2IIp0fKS6Opo6vJ3A5tJeJBTPs5ed0f6QH0kdbFhB
+ 1mEvObGcdU9cNBRhrqGeii2EEeef+pKTnYBSkBIn6TugbHijPnt6U6pE+t6/8SbBYxMX
+ ysqA==
+X-Gm-Message-State: AOJu0YwzVN2Y4dhpLDMLB/1sU/RMKuRTkwWVC3uSlaOpaSKGCUguofI9
+ 6u+mhVft35r8HNHSHP0mXXTmSK8UDnH96OnbCcSQtXSpa8Dcyfd1h5N6D+cb1Q==
+X-Gm-Gg: ASbGnctmQtCe23k6zrC81tdp94qQOlqvSfGL4eDtDF+OrJJq+flPew3UYLOsIZaGDNI
+ dcc7dmHoWyJvX4fWd+Hp2OVatCNFv9v9bM9zBIhDtwNzsT6mMxcnZN20sO39CkvAewwA3zer96f
+ +4jtdCiQ2h1sDPcSkVnf554wWv6KbhWjfM3utQyRDGhgDTtB3W62SYJz7a6DJmfKdEdn/0dnSsv
+ mw8218YsDj1m50TnamKO0O7o8jg2wIFb6FYQ2B9CiNApl61zfUsjMo4QiMA8u+NKOQexhdEFRTd
+ IHnASOvQqZEdvLH3OctRH/mQ8CajZQiA4QFlZ8eG18K5iJMGU3zKA40vr6otqtPAI1gNzdM1bmx
+ mc1k=
+X-Google-Smtp-Source: AGHT+IFC+Yhl1YwhiJ3GbLCxXghnMsGe+K/SIp3ifm8sucIsbPcwb03G+ri9EpcZdnVSvtARi01hWg==
+X-Received: by 2002:a05:6a00:ace:b0:73d:ff02:8d83 with SMTP id
+ d2e1a72fcca58-748617de51cmr3524599b3a.3.1749559115927; 
+ Tue, 10 Jun 2025 05:38:35 -0700 (PDT)
 Received: from PC.mioffice.cn ([43.224.245.249])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7482b0847aesm7539815b3a.105.2025.06.10.05.38.32
+ d2e1a72fcca58-7482b0847aesm7539815b3a.105.2025.06.10.05.38.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Jun 2025 05:38:33 -0700 (PDT)
+ Tue, 10 Jun 2025 05:38:35 -0700 (PDT)
 From: Sheng Yong <shengyong2021@gmail.com>
 X-Google-Original-From: Sheng Yong <shengyong1@xiaomi.com>
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Tue, 10 Jun 2025 20:37:26 +0800
-Message-ID: <20250610123743.667183-17-shengyong1@xiaomi.com>
+Date: Tue, 10 Jun 2025 20:37:27 +0800
+Message-ID: <20250610123743.667183-18-shengyong1@xiaomi.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250610123743.667183-1-shengyong1@xiaomi.com>
 References: <20250610123743.667183-1-shengyong1@xiaomi.com>
 MIME-Version: 1.0
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: From: Sheng Yong Signed-off-by: Sheng Yong ---
- tests/f_sb_errors/README
- | 5 +++++ tests/f_sb_errors/expect.in | 7 +++++++ tests/f_sb_errors/script
- | 22 ++++++++++++++++++++++ 3 files changed, 34 insertions(+) create [...]
+ tests/f_cp_bad_crc/README
+ | 5 +++++ tests/f_cp_bad_crc/expect.in | 4 ++++ tests/f_cp_bad_crc/script
+ | 38 ++++++++++++++++++++++++++++++++++++ 3 files changed, 47 insert [...]
  Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -120,18 +121,19 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [shengyong2021(at)gmail.com]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [shengyong2021(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.222.172 listed in wl.mailspike.net]
-X-Headers-End: 1uP0vP-00056b-Qq
-Subject: [f2fs-dev] [RFC PATCH v2 16/32] tests: add fsck testcase of fixing
- errors recorded in sb
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit [shengyong2021(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.48 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1uP0w3-0005BH-Kf
+Subject: [f2fs-dev] [RFC PATCH v2 17/32] tests: add fsck testcase of fixing
+ cp crc
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -152,64 +154,77 @@ From: Sheng Yong <shengyong1@xiaomi.com>
 
 Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
 ---
- tests/f_sb_errors/README    |  5 +++++
- tests/f_sb_errors/expect.in |  7 +++++++
- tests/f_sb_errors/script    | 22 ++++++++++++++++++++++
- 3 files changed, 34 insertions(+)
- create mode 100644 tests/f_sb_errors/README
- create mode 100644 tests/f_sb_errors/expect.in
- create mode 100644 tests/f_sb_errors/script
+ tests/f_cp_bad_crc/README    |  5 +++++
+ tests/f_cp_bad_crc/expect.in |  4 ++++
+ tests/f_cp_bad_crc/script    | 38 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 47 insertions(+)
+ create mode 100644 tests/f_cp_bad_crc/README
+ create mode 100644 tests/f_cp_bad_crc/expect.in
+ create mode 100644 tests/f_cp_bad_crc/script
 
-diff --git a/tests/f_sb_errors/README b/tests/f_sb_errors/README
+diff --git a/tests/f_cp_bad_crc/README b/tests/f_cp_bad_crc/README
 new file mode 100644
-index 000000000000..df118e825aac
+index 000000000000..250ece3f8b5a
 --- /dev/null
-+++ b/tests/f_sb_errors/README
++++ b/tests/f_cp_bad_crc/README
 @@ -0,0 +1,5 @@
 +1. create f2fs image
-+2. inject s_stop_reason in super block
-+3. fsck -a detects error and clear the error
-+4. inject s_errors in super block
-+5. fsck -a detects error and clear the error
-diff --git a/tests/f_sb_errors/expect.in b/tests/f_sb_errors/expect.in
++2. create a new file
++3. inject crc in current cp with value 0x12345
++4. fsck fixes bad cp by copying backup cp
++5. compare cp1 version with cp2 version, both cp should have the same version
+diff --git a/tests/f_cp_bad_crc/expect.in b/tests/f_cp_bad_crc/expect.in
 new file mode 100644
-index 000000000000..7985a28e59ab
+index 000000000000..d21fdab7304a
 --- /dev/null
-+++ b/tests/f_sb_errors/expect.in
-@@ -0,0 +1,7 @@
++++ b/tests/f_cp_bad_crc/expect.in
+@@ -0,0 +1,4 @@
 +Info: Automatic fix mode enabled.
-+Info: checkpoint stop reason: fault_inject(1)
-+Info: Automatic fix mode enabled.
-+Info: fs errors: fail_decompression
++	Invalid CP CRC: offset:_OFFS_, crc:0x12345, calc:_CRC_
 +Info: Automatic fix mode enabled.
 +Info: No error was reported
-+Info: Force to fix corruption
-diff --git a/tests/f_sb_errors/script b/tests/f_sb_errors/script
+diff --git a/tests/f_cp_bad_crc/script b/tests/f_cp_bad_crc/script
 new file mode 100644
-index 000000000000..d625900192ff
+index 000000000000..b5181614f537
 --- /dev/null
-+++ b/tests/f_sb_errors/script
-@@ -0,0 +1,22 @@
++++ b/tests/f_cp_bad_crc/script
+@@ -0,0 +1,38 @@
 +#!/bin/bash
 +
-+DESC="superblock[1] with s_stop_reason and s_errors"
++DESC="current cp with invalid crc"
 +
 +. $TOPDIR/tests/helpers
 +
 +cleanup
 +make_f2fs > $LOG
 +
-+$INJECT --sb 1 --mb s_stop_reason --idx 1 --val 1 $META >> $LOG
++mkdir $TESTDIR/mntdir
++safe_mount $MNT_OPTS $META $TESTDIR/mntdir >> $LOG
++touch $TESTDIR/mntdir/testfile
++safe_umount $TESTDIR/mntdir >> $LOG
++rm -rf $TESTDIR/mntdir
++
++cp=`get_cp $META`
++offs=`get_mb_val "$cp" checksum_offset`
++crc=`get_mb_val "$cp" '\<checksum\>'`
++
++echo "crc:$crc offs:$offs" >> $LOG
++
++$INJECT --cp 0 --mb crc --val 0x12345 $META >> $LOG
 +$FSCK $FSCK_OPTS -a $META > $OUT
-+
-+$INJECT --sb 1 --mb s_errors --idx 0 --val 2 $META >> $LOG
 +$FSCK $FSCK_OPTS -a $META >> $OUT
 +
-+# both -a and -f cannot detect errors
-+$FSCK $FSCK_OPTS -a $META >> $OUT
-+echo "" >> $OUT
-+$FSCK $FSCK_OPTS -f $META >> $OUT
++cp1_ver=`$INJECT --cp 1 --mb checkpoint_ver --val 0 --dry-run $META | grep "inject checkpoint_ver of cp" | awk '{print $(NF-2)}'`
++cp2_ver=`$INJECT --cp 2 --mb checkpoint_ver --val 0 --dry-run $META | grep "inject checkpoint_ver of cp" | awk '{print $(NF-2)}'`
++if [ $((cp1_ver)) -ne $((cp2_ver)) ]; then
++	echo "cp1_ver: $cp1_ver" >> $OUT
++	echo "cp2_ver: $cp2_ver" >> $OUT
++fi
 +cat $OUT >> $LOG
++
++CRC=`printf "0x%x" $crc`
++sed "s/_CRC_/$CRC/g" $TESTDIR/expect.in > $TESTDIR/expect
++sed -i "s/_OFFS_/$offs/g" $TESTDIR/expect
 +
 +check_result
 -- 
