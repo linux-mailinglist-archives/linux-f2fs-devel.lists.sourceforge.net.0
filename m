@@ -2,101 +2,130 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91328AD544A
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Jun 2025 13:43:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC89AAD5985
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Jun 2025 17:05:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	List-Unsubscribe:List-Id:Subject:To:Message-ID:Date:In-Reply-To:References:
+	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=4w0+sRhjgUQXOWOAJeLUDJIKDiyn2ExMset9LDTH1Xc=; b=dq21QYcENw4q3aoHLI3+wIc3J8
-	jms+jWJOoYfEfChTAYRguLYHnlqXrGm8DkCEt9TP1JI9/yzPZO7RQ1vVr72zHfSn4XYWYWbWdHTf7
-	+fQuEQNZY4Txf01MYJSOKP3FAS8SF7Ef7p9GUPZzvh+BzGQp44NiCikORWa89haI39oo=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=2d6DHHyGjopPZrm+eoMEGUt8GU7LJGL6i35wi/SiLSM=; b=mzvq8d7+xJ5Y/Ns3wfPsVkfHr2
+	3/HY1paNE60bSy2TWyU7lqFXE7dEXV7b0odL+8Bfa6yj6XqpbWoYOIBd4LbzM7jHJXY4sTOVW8r5h
+	wyANUu9HBahFwonwg/HqxNmHolatzHdnpZLcgz3M6/jtOmf3kkIa3boIkv09weJlmYMo=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uPJr3-0000OK-Rb;
-	Wed, 11 Jun 2025 11:42:53 +0000
+	id 1uPN0c-0007PE-Mn;
+	Wed, 11 Jun 2025 15:04:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uPJr1-0000OD-Lg
+ (envelope-from <nogikh@google.com>) id 1uPN0b-0007P6-3G
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Jun 2025 11:42:51 +0000
+ Wed, 11 Jun 2025 15:04:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=C9GIjb+NYDVPJR6A7/uUjHk01P6P/ieYqP3PHzY/H2g=; b=khgRUznOqXw29aXT/9IQo5CEPN
- Qs8ce9B/VHW1YG+QuVjFCeyTGjT1NKlYpsv4hdyuhpV5q6b/nRSehbbM477uh6IkQqsF7810X7PtT
- bGQ86tYvBpoNviUo6pAmC1M4b/lJiMAR45Ul3Iei/HWZwd3Fuw8czS0124MR00Bno2lQ=;
+ bh=eMCP5+i49Ei6OGx1t9OxUl2Teswzg233SMev8hs02gA=; b=D+4Zw6qK4bsYVATHj7tcLqW4M4
+ sl0vDQZ5bSV7jMGGli4FThbiw6h4I3mWnvBbD4IOTAMMbxEW4yhl+BAiDP3zHrc3h3NG4MRIE0w5G
+ tdyL70HhrKCIRNMQ35W9jAs6GuWq0mRvj1psGGOwphBsRSDWqrUA4IQMO0b8qa1kkbcw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=C9GIjb+NYDVPJR6A7/uUjHk01P6P/ieYqP3PHzY/H2g=; b=OFR9/Ic7pMP7ucx5+A8WK7aEGq
- rCes5a6C6Kd5jqKci6IOPHzc667ATUbTghQoLbQVk6PNy86ixu28vIEtGEOZk8tDHLx4TyPY2pxcg
- O/7xiwqt1mfU5y90uuRZ5YS/9Is0zhJZD8hNfdYWM5wN+3cfhopoT4+LwVmXt6g33sCE=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=eMCP5+i49Ei6OGx1t9OxUl2Teswzg233SMev8hs02gA=; b=Xc7iwh2w019Bb0bCdWvLiIlrRU
+ cZJTYs1uG64QR9glF2W/BmvjnP1eIFLkYcQa7M8L8YvO1JfD/WRVz0WlJ5j/ElxnBHdVD70aWAHyM
+ +1UDjWZ7SZJvkHCbpB5q/MUl7uuczArr4LNck0I1Y2pvhwD4A521pFopxRJMdnAvP1L0=;
+Received: from mail-yb1-f173.google.com ([209.85.219.173])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uPJr0-00029i-Tp for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Jun 2025 11:42:51 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id D638F5C464A;
- Wed, 11 Jun 2025 11:40:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28ABEC4CEF1;
- Wed, 11 Jun 2025 11:42:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749642165;
- bh=QoUf94qvO1VE6p9VZa/RcosEz6ZL2E3t4U2OvJ5KuPw=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=criMSsKnSR2aLFf/kasl2DEjMXDUrXgG2+AFut9u/bcmQbjyeHwZPeayGggHXlyeH
- gajPt2Rh4m27P6Ia3eQVlbdZeg2lrv3VIuvcueaiNmeDmdWvPHSEiSnOHH22n/l46w
- BiNd58aCXqZNjVrnS9ekC8iMrJbbYwWyU1oKRxeiZl0z7h2YYTsA/L1SxFW3m5x3Ub
- 0PcsztRDjX7qAGdQZ+NO9TF9dOQ95Qzkvh8yr0T6o1xaop3MYuaLbeZ7VREaxEhfuU
- vykdsF+74UzFk5zeDUu4ycNVs/hdRrrT/Y1z5JKiay6XbiM3zlIq9316XeRFAuEomO
- cdFJRNcHWfOTw==
-Message-ID: <e60e5264-3365-4a23-b8a6-968a3692c155@kernel.org>
-Date: Wed, 11 Jun 2025 19:42:42 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1uPN0a-0004ON-Jb for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 11 Jun 2025 15:04:57 +0000
+Received: by mail-yb1-f173.google.com with SMTP id
+ 3f1490d57ef6-e740a09eb00so5268639276.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 11 Jun 2025 08:04:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1749654286; x=1750259086;
+ darn=lists.sourceforge.net; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eMCP5+i49Ei6OGx1t9OxUl2Teswzg233SMev8hs02gA=;
+ b=YuY/3mYShkRdmcpKC0iwsPgjbVCuc/CyNLrfDXKLbF5Ar6X42DGRdMGtAbXi3A2SEr
+ 96BMlCVoSZwTbLT2r+wq0gx0WV/RjQYwKu5k3o5lbsGGsQQX/FCkZZNdd73O/NjE7Pfe
+ UiCOd5K/RLS6dI+hmMery964qR83VwiZXEQ8OXgP50w5Fc4X3XxAPEzV6reDFg5Vru8+
+ s5wdSXYfN4Ltx1hSyaJwrNIvkqwi/SYpE+KjYPLLqXRHu7tQoAztFhoEDaB9l1GGFXUF
+ XKCuZFOyynHclM6ABR5SlVqSjM5YMn8QWyFARaOJBXfTW5Kko6ITt8f3yJeJo7mH1g8h
+ JjQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749654286; x=1750259086;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eMCP5+i49Ei6OGx1t9OxUl2Teswzg233SMev8hs02gA=;
+ b=I278BOQOFW+7LwqwJx3XKRJzt5DdlSYngk5svqcriK1icGGzIkmonWziKOG43WQDUE
+ +Up0J/k9rZxSCcgVCn84RlP2IDXjLPeOMTIhAh1i06g3nJUfH6NxRDR3Pt3QMs9bn7NN
+ xGgKNtX9j6XVsHBahz3LkTJQIYymeOj3vYsFic2ZYmq2I/TLrMkkFRv3rlpL3SP77n95
+ 24t6290hSdGQxvckAudTAbBDhXZ8xqmnyPg2MfA8JQ5xdxyxFtlzuF4zjE9wudHQnaFu
+ A75u18nLfkMbq+v+zwdSGV/hN0av3pFOek6o8KHvVbrew5PphWw5o22BOpqLabvYZ7TO
+ Z3kg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV/IiF0IAdSmymDioYGu3Kw5bOH89MRI0KubaHOwljpo6rL1TNF0bk/qlkGm1iIcWoXE7XhD8LJiCIAwzKxoXzG@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YxofRgb0LyayL0QEmQCUOAwBycEMndekA4Nlww8+l4brg2H1EXN
+ PMsr3ModkDfFleAmXgBFKUhputWTfHG99S2G2cPATCNGKnqONct1lRr2SRMaA8LR82T9r78C0SF
+ LK6m44/TXxEj1f3OOBuc+SqPkbfDWA6eJb/zmmhOmHaAHl1tC42IT2V32Nw23Yg==
+X-Gm-Gg: ASbGncsAQvPOCompOo7cJtN8fEV4zGTBp13usXTftdfhCGN6o5bUp7AhL029EtBH8Jv
+ uG1c7K+Zxq+tx5dAtV79i9XT4JtT7ji/gwUoNXqVr48s5WEs0V9UYP6sF35xzM3oJNUlkbTiULj
+ rf5PBDKHvpQS0JuEF/9X2uyA14ZdKI+WlSvtzdG9KRRAYjQsCwcnvcrgKYKarujE//fynKGjFIW
+ Q==
+X-Google-Smtp-Source: AGHT+IE/zvALO/G36bMoEv9R3dBG9othx0hsbt6Wq2S7X1wCHNt0X1XpaAnFyLsBZjSEIc47LngfEr1Y5l2TxATtW/4=
+X-Received: by 2002:a17:90b:3c0b:b0:312:1dc9:9f64 with SMTP id
+ 98e67ed59e1d1-313af26720fmr4514767a91.31.1749650910565; Wed, 11 Jun 2025
+ 07:08:30 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Sheng Yong <shengyong2021@gmail.com>, jaegeuk@kernel.org
-References: <20250610123743.667183-1-shengyong1@xiaomi.com>
- <20250610123743.667183-8-shengyong1@xiaomi.com>
-Content-Language: en-US
-In-Reply-To: <20250610123743.667183-8-shengyong1@xiaomi.com>
-X-Spam-Score: -0.3 (/)
+References: <67b75198.050a0220.14d86d.02e2.GAE@google.com>
+ <683b8ea2.a00a0220.d8eae.0020.GAE@google.com>
+ <aDueHCMDLPs2UtY2@casper.infradead.org>
+In-Reply-To: <aDueHCMDLPs2UtY2@casper.infradead.org>
+Date: Wed, 11 Jun 2025 16:08:18 +0200
+X-Gm-Features: AX0GCFtUWXqinF3FxOk9yB1Et5-WWvCDPttaSsMJxKkZJmtGttcHC7lVof6yARE
+Message-ID: <CANp29Y5H3VTZAVZjde5bVRajDUESAnCX+6H1wD90ArpT=EiU3Q@mail.gmail.com>
+To: Matthew Wilcox <willy@infradead.org>
+X-Spam-Score: -7.8 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/10/25 20:37,
- Sheng Yong wrote: > From: Sheng Yong <shengyong1@xiaomi.com>
- > > Previously when injecting sit/nat entry, we only inject SIT/NAT pack.
- > If the valid target is in journal, the inject [...] 
- Content analysis details:   (-0.3 points, 5.0 required)
+ Content preview:  On Sun, Jun 1,
+ 2025 at 2:26 AM Matthew Wilcox <willy@infradead.org>
+ wrote: > > On Sat, May 31, 2025 at 04:20:02PM -0700, syzbot wrote: > > syzbot
+ has bisected this issue to: > > > > commit 80f31d2a7e5 [...] 
+ Content analysis details:   (-7.8 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -7.5 USER_IN_DEF_DKIM_WL From: address is in the default DKIM welcome-list
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uPJr0-00029i-Tp
-Subject: Re: [f2fs-dev] [RFC PATCH v2 07/32] inject.f2fs: fix injecting
- sit/nat in journal
+ -0.1 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.173 listed in wl.mailspike.net]
+X-Headers-End: 1uPN0a-0004ON-Jb
+Subject: Re: [f2fs-dev] [syzbot] [netfs?] kernel BUG in folio_unlock (3)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,316 +137,39 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: shengyong1@xiaomi.com, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+From: Aleksandr Nogikh via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Aleksandr Nogikh <nogikh@google.com>
+Cc: v9fs@lists.linux.dev, hdanton@sina.com, syzkaller-bugs@googlegroups.com,
+ asmadeus@codewreck.org, jlayton@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, dhowells@redhat.com,
+ syzbot <syzbot+c0dc46208750f063d0e0@syzkaller.appspotmail.com>,
+ netfs@lists.linux.dev, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+ hch@lst.de
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 6/10/25 20:37, Sheng Yong wrote:
-> From: Sheng Yong <shengyong1@xiaomi.com>
-> 
-> Previously when injecting sit/nat entry, we only inject SIT/NAT pack.
-> If the valid target is in journal, the injection has no effect. So we
-> have to check whether the valid target is in journal, and inject the
-> target at its valid position.
-> 
-> Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
-> ---
->  fsck/inject.c | 181 ++++++++++++++++++++++++++++++++++++--------------
->  1 file changed, 132 insertions(+), 49 deletions(-)
-> 
-> diff --git a/fsck/inject.c b/fsck/inject.c
-> index bd6ab8480972..b3228621de48 100644
-> --- a/fsck/inject.c
-> +++ b/fsck/inject.c
-> @@ -10,6 +10,7 @@
->   */
->  
->  #include <getopt.h>
-> +#include "f2fs.h"
->  #include "node.h"
->  #include "inject.h"
->  
-> @@ -533,6 +534,31 @@ out:
->  	return ret;
->  }
->  
-> +static void rewrite_nat_in_journal(struct f2fs_sb_info *sbi, u32 nid,
-> +				   struct f2fs_nat_entry *nat)
-> +{
-> +	struct f2fs_checkpoint *cp = F2FS_CKPT(sbi);
-> +	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
-> +	struct f2fs_journal *journal = F2FS_SUMMARY_BLOCK_JOURNAL(curseg->sum_blk);
-> +	block_t blkaddr;
-> +	int ret, i;
-> +
-> +	for (i = 0; i < nats_in_cursum(journal); i++) {
-> +		if (nid_in_journal(journal, i) == nid) {
-> +			memcpy(&nat_in_journal(journal, i), nat, sizeof(*nat));
-> +			break;
-> +		}
-> +	}
-> +
-> +	if (is_set_ckpt_flags(cp, CP_UMOUNT_FLAG))
-> +		blkaddr = sum_blk_addr(sbi, NR_CURSEG_TYPE, CURSEG_HOT_DATA);
-> +	else
-> +		blkaddr = sum_blk_addr(sbi, NR_CURSEG_DATA_TYPE, CURSEG_HOT_DATA);
-> +
-> +	ret = dev_write_block(curseg->sum_blk, blkaddr, WRITE_LIFE_NONE);
-> +	ASSERT(ret >= 0);
-> +}
-> +
->  static int inject_nat(struct f2fs_sb_info *sbi, struct inject_option *opt)
->  {
->  	struct f2fs_nm_info *nm_i = NM_I(sbi);
-> @@ -541,7 +567,7 @@ static int inject_nat(struct f2fs_sb_info *sbi, struct inject_option *opt)
->  	struct f2fs_nat_entry *ne;
->  	block_t blk_addr;
->  	unsigned int offs;
-> -	bool is_set;
-> +	bool is_set, in_journal = false;
->  	int ret;
->  
->  	if (!IS_VALID_NID(sbi, opt->nid)) {
-> @@ -555,38 +581,49 @@ static int inject_nat(struct f2fs_sb_info *sbi, struct inject_option *opt)
->  	nat_blk = calloc(F2FS_BLKSIZE, 1);
->  	ASSERT(nat_blk);
->  
-> -	/* change NAT version bitmap temporarily to select specified pack */
-> -	is_set = f2fs_test_bit(opt->nid, nm_i->nat_bitmap);
-> -	if (opt->nat == 0) {
-> -		opt->nat = is_set ? 2 : 1;
-> +	if (lookup_nat_in_journal(sbi, opt->nid, &nat_blk->entries[0]) >= 0) {
-
-Yong,
-
-If we found an existed nat entry in journal, what about getting log_type
-from return value of lookup_nat_in_journal, and then call
-rewrite_nat_in_journal(, log_type) to rewrite nat entry to original position?
-
-> +		offs = 0;
-> +		in_journal = true;
->  	} else {
-> -		if (opt->nat == 1)
-> -			f2fs_clear_bit(opt->nid, nm_i->nat_bitmap);
-> -		else
-> -			f2fs_set_bit(opt->nid, nm_i->nat_bitmap);
-> +		/*
-> +		 * read nat entry from NAT area, change NAT version bitmap
-> +		 * temporarily to select specified pack
-> +		 */
-> +		is_set = f2fs_test_bit(opt->nid, nm_i->nat_bitmap);
-> +		if (opt->nat == 0) {
-> +			opt->nat = is_set ? 2 : 1;
-> +		} else {
-> +			if (opt->nat == 1)
-> +				f2fs_clear_bit(opt->nid, nm_i->nat_bitmap);
-> +			else
-> +				f2fs_set_bit(opt->nid, nm_i->nat_bitmap);
-> +		}
-> +		blk_addr = current_nat_addr(sbi, opt->nid, NULL);
-> +		ret = dev_read_block(nat_blk, blk_addr);
-> +		ASSERT(ret >= 0);
-> +		offs = opt->nid % NAT_ENTRY_PER_BLOCK;
->  	}
-> -
-> -	blk_addr = current_nat_addr(sbi, opt->nid, NULL);
-> -
-> -	ret = dev_read_block(nat_blk, blk_addr);
-> -	ASSERT(ret >= 0);
-> -
-> -	offs = opt->nid % NAT_ENTRY_PER_BLOCK;
->  	ne = &nat_blk->entries[offs];
->  
->  	if (!strcmp(opt->mb, "version")) {
->  		MSG(0, "Info: inject nat entry version of nid %u "
-> -		    "in pack %d: %d -> %d\n", opt->nid, opt->nat,
-> +		    "in %s %d: %d -> %d\n", opt->nid,
-> +		    in_journal ? "journal" : "pack",
-> +		    in_journal ? 0 : opt->nat,
->  		    ne->version, (u8)opt->val);
->  		ne->version = (u8)opt->val;
->  	} else if (!strcmp(opt->mb, "ino")) {
->  		MSG(0, "Info: inject nat entry ino of nid %u "
-> -		    "in pack %d: %d -> %d\n", opt->nid, opt->nat,
-> +		    "in %s %d: %d -> %d\n", opt->nid,
-> +		    in_journal ? "journal" : "pack",
-> +		    in_journal ? 0 : opt->nat,
->  		    le32_to_cpu(ne->ino), (nid_t)opt->val);
->  		ne->ino = cpu_to_le32((nid_t)opt->val);
->  	} else if (!strcmp(opt->mb, "block_addr")) {
->  		MSG(0, "Info: inject nat entry block_addr of nid %u "
-> -		    "in pack %d: 0x%x -> 0x%x\n", opt->nid, opt->nat,
-> +		    "in %s %d: 0x%x -> 0x%x\n", opt->nid,
-> +		    in_journal ? "journal" : "pack",
-> +		    in_journal ? 0 : opt->nat,
->  		    le32_to_cpu(ne->block_addr), (block_t)opt->val);
->  		ne->block_addr = cpu_to_le32((block_t)opt->val);
->  	} else {
-> @@ -596,16 +633,45 @@ static int inject_nat(struct f2fs_sb_info *sbi, struct inject_option *opt)
->  	}
->  	print_raw_nat_entry_info(ne);
->  
-> -	ret = dev_write_block(nat_blk, blk_addr, WRITE_LIFE_NONE);
-> -	ASSERT(ret >= 0);
-> -	/* restore NAT version bitmap */
-> -	if (is_set)
-> -		f2fs_set_bit(opt->nid, nm_i->nat_bitmap);
-> -	else
-> -		f2fs_clear_bit(opt->nid, nm_i->nat_bitmap);
-> +	if (in_journal) {
-> +		rewrite_nat_in_journal(sbi, opt->nid, ne);
-> +	} else {
-> +		ret = dev_write_block(nat_blk, blk_addr, WRITE_LIFE_NONE);
-> +		ASSERT(ret >= 0);
-> +		/* restore NAT version bitmap */
-> +		if (is_set)
-> +			f2fs_set_bit(opt->nid, nm_i->nat_bitmap);
-> +		else
-> +			f2fs_clear_bit(opt->nid, nm_i->nat_bitmap);
-> +	}
->  
->  	free(nat_blk);
-> -	return ret;
-> +	return 0;
-> +}
-> +
-> +static void rewrite_sit_in_journal(struct f2fs_sb_info *sbi, unsigned int segno,
-> +				   struct f2fs_sit_entry *sit)
-> +{
-> +	struct f2fs_checkpoint *cp = F2FS_CKPT(sbi);
-> +	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_COLD_DATA);
-> +	struct f2fs_journal *journal = F2FS_SUMMARY_BLOCK_JOURNAL(curseg->sum_blk);
-> +	block_t blkaddr;
-> +	int ret, i;
-> +
-> +	for (i = 0; i < sits_in_cursum(journal); i++) {
-> +		if (segno_in_journal(journal, i) == segno) {
-> +			memcpy(&sit_in_journal(journal, i), sit, sizeof(*sit));
-> +			break;
-> +		}
-> +	}
-> +
-> +	if (is_set_ckpt_flags(cp, CP_UMOUNT_FLAG))
-> +		blkaddr = sum_blk_addr(sbi, NR_CURSEG_TYPE, CURSEG_COLD_DATA);
-> +	else
-> +		blkaddr = sum_blk_addr(sbi, NR_CURSEG_DATA_TYPE, CURSEG_COLD_DATA);
-> +
-> +	ret = dev_write_block(curseg->sum_blk, blkaddr, WRITE_LIFE_NONE);
-> +	ASSERT(ret >= 0);
->  }
->  
->  static int inject_sit(struct f2fs_sb_info *sbi, struct inject_option *opt)
-> @@ -614,7 +680,7 @@ static int inject_sit(struct f2fs_sb_info *sbi, struct inject_option *opt)
->  	struct f2fs_sit_block *sit_blk;
->  	struct f2fs_sit_entry *sit;
->  	unsigned int segno, offs;
-> -	bool is_set;
-> +	bool is_set, in_journal = false;
->  
->  	if (!f2fs_is_valid_blkaddr(sbi, opt->blk, DATA_GENERIC)) {
->  		ERR_MSG("Invalid blkaddr 0x%x (valid range [0x%x:0x%lx])\n",
-> @@ -627,29 +693,39 @@ static int inject_sit(struct f2fs_sb_info *sbi, struct inject_option *opt)
->  	ASSERT(sit_blk);
->  
->  	segno = GET_SEGNO(sbi, opt->blk);
-> -	/* change SIT version bitmap temporarily to select specified pack */
-> -	is_set = f2fs_test_bit(segno, sit_i->sit_bitmap);
-> -	if (opt->sit == 0) {
-> -		opt->sit = is_set ? 2 : 1;
-> +	if (lookup_sit_in_journal(sbi, segno, &sit_blk->entries[0]) >= 0) {
-
-Ditto,
-
-Thanks,
-
-> +		offs = 0;
-> +		in_journal = true;
->  	} else {
-> -		if (opt->sit == 1)
-> -			f2fs_clear_bit(segno, sit_i->sit_bitmap);
-> -		else
-> -			f2fs_set_bit(segno, sit_i->sit_bitmap);
-> +		/*
-> +		 * read sit entry from SIT area, change SIT version bitmap
-> +		 * temporarily to select specified pack
-> +		 */
-> +		is_set = f2fs_test_bit(segno, sit_i->sit_bitmap);
-> +		if (opt->sit == 0) {
-> +			opt->sit = is_set ? 2 : 1;
-> +		} else {
-> +			if (opt->sit == 1)
-> +				f2fs_clear_bit(segno, sit_i->sit_bitmap);
-> +			else
-> +				f2fs_set_bit(segno, sit_i->sit_bitmap);
-> +		}
-> +		get_current_sit_page(sbi, segno, sit_blk);
-> +		offs = SIT_ENTRY_OFFSET(sit_i, segno);
->  	}
-> -	get_current_sit_page(sbi, segno, sit_blk);
-> -	offs = SIT_ENTRY_OFFSET(sit_i, segno);
->  	sit = &sit_blk->entries[offs];
->  
->  	if (!strcmp(opt->mb, "vblocks")) {
->  		MSG(0, "Info: inject sit entry vblocks of block 0x%x "
-> -		    "in pack %d: %u -> %u\n", opt->blk, opt->sit,
-> +		    "in %s %d: %u -> %u\n", opt->blk,
-> +		    in_journal ? "journal" : "pack",
-> +		    in_journal ? 0 : opt->sit,
->  		    le16_to_cpu(sit->vblocks), (u16)opt->val);
->  		sit->vblocks = cpu_to_le16((u16)opt->val);
->  	} else if (!strcmp(opt->mb, "valid_map")) {
->  		if (opt->idx == -1) {
-> -			MSG(0, "Info: auto idx = %u\n", offs);
-> -			opt->idx = offs;
-> +			opt->idx = OFFSET_IN_SEG(sbi, opt->blk);
-> +			MSG(0, "Info: auto idx = %u\n", opt->idx);
->  		}
->  		if (opt->idx >= SIT_VBLOCK_MAP_SIZE) {
->  			ERR_MSG("invalid idx %u of valid_map[]\n", opt->idx);
-> @@ -657,8 +733,10 @@ static int inject_sit(struct f2fs_sb_info *sbi, struct inject_option *opt)
->  			return -ERANGE;
->  		}
->  		MSG(0, "Info: inject sit entry valid_map[%d] of block 0x%x "
-> -		    "in pack %d: 0x%02x -> 0x%02x\n", opt->idx, opt->blk,
-> -		    opt->sit, sit->valid_map[opt->idx], (u8)opt->val);
-> +		    "in %s %d: 0x%02x -> 0x%02x\n", opt->idx, opt->blk,
-> +		    in_journal ? "journal" : "pack",
-> +		    in_journal ? 0 : opt->sit,
-> +		    sit->valid_map[opt->idx], (u8)opt->val);
->  		sit->valid_map[opt->idx] = (u8)opt->val;
->  	} else if (!strcmp(opt->mb, "mtime")) {
->  		MSG(0, "Info: inject sit entry mtime of block 0x%x "
-> @@ -672,12 +750,17 @@ static int inject_sit(struct f2fs_sb_info *sbi, struct inject_option *opt)
->  	}
->  	print_raw_sit_entry_info(sit);
->  
-> -	rewrite_current_sit_page(sbi, segno, sit_blk);
-> -	/* restore SIT version bitmap */
-> -	if (is_set)
-> -		f2fs_set_bit(segno, sit_i->sit_bitmap);
-> -	else
-> -		f2fs_clear_bit(segno, sit_i->sit_bitmap);
-> +	if (in_journal) {
-> +		rewrite_sit_in_journal(sbi, segno, sit);
-> +	} else {
-> +		rewrite_current_sit_page(sbi, segno, sit_blk);
-> +
-> +		/* restore SIT version bitmap */
-> +		if (is_set)
-> +			f2fs_set_bit(segno, sit_i->sit_bitmap);
-> +		else
-> +			f2fs_clear_bit(segno, sit_i->sit_bitmap);
-> +	}
->  
->  	free(sit_blk);
->  	return 0;
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gU3VuLCBKdW4gMSwgMjAyNSBhdCAyOjI24oCvQU0gTWF0dGhldyBXaWxjb3ggPHdpbGx5QGlu
+ZnJhZGVhZC5vcmc+IHdyb3RlOgo+Cj4gT24gU2F0LCBNYXkgMzEsIDIwMjUgYXQgMDQ6MjA6MDJQ
+TSAtMDcwMCwgc3l6Ym90IHdyb3RlOgo+ID4gc3l6Ym90IGhhcyBiaXNlY3RlZCB0aGlzIGlzc3Vl
+IHRvOgo+ID4KPiA+IGNvbW1pdCA4MGYzMWQyYTdlNWY0ZWZhNzE1MGM5NTEyNjgyMzZjNjcwYmNi
+MDY4Cj4gPiBBdXRob3I6IENocmlzdG9waCBIZWxsd2lnIDxoY2hAbHN0LmRlPgo+ID4gRGF0ZTog
+ICBUaHUgTWF5IDggMDU6MTQ6MzIgMjAyNSArMDAwMAo+Cj4gVGhhdCdzIG5vdCBwb3NzaWJsZTsg
+dGhpcyBjb21taXQgaXMgYWZ0ZXIgdGhlIG9yaWdpbmFsIHJlcG9ydC4KPgo+IFRoYXQgc2FpZCwg
+dGhlcmUgX2lzXyBhIGRvdWJsZSBmb2xpb191bmxvY2soKSBpbiB0aGlzIHBhdGNoLCB3aGljaAo+
+IEknbSBhYm91dCB0byBzZW5kIGEgZml4IGZvci4gIEl0J3MganVzdCBub3QgZml4aW5nIHRoZSBv
+cmlnaW5hbCByZXBvcnQuCj4KClRoYW5rcyBmb3IgYnJpbmdpbmcgdGhpcyB1cCEKVGhlIHVuZGVy
+bHlpbmcgcHJvYmxlbSBpcyB0aGF0IHN5emJvdCBoYXMgbWVyZ2VkIHNldmVyYWwgdW5yZWxhdGVk
+Cmtlcm5lbCBjcmFzaGVzIGludG8gb25lIGJ1ZyByZXBvcnQgKGBrZXJuZWwgQlVHIGluIGZvbGlv
+X3VubG9ja2AgaXMKanVzdCBhIHRvbyBnZW5lcmljIHRpdGxlKS4gVGhlIHJlcG9ydGVkIGJpc2Vj
+dGlvbiByZXN1bHQgc2VlbXMgdG8gYmUKY29ycmVjdCwgYnV0IGl0IHJlZmVycyB0byBvbmx5IG9u
+ZSBvZiB0aG9zZSBpbmNvcnJlY3RseSBtZXJnZWQgYnVncy4KCkkndmUganVzdCBzZW50IGEgZml4
+IGZvciB0aGUgc3l6Ym90J3MgY3Jhc2ggcmVwb3J0IHBhcnNpbmcgY29kZSBbMV0uCkl0IHdvbid0
+IGFmZmVjdCB0aGlzIHNwZWNpZmljIGJ1ZyByZXBvcnQsIGJ1dCBvbmNlIHRoZSBuZXcgY29kZSBp
+cwpkZXBsb3llZCwgc3l6Ym90IHdpbGwgcmUtcmVwb3J0IHRoZSB0d28gdW5kZXJseWluZyBmaW5k
+aW5ncwpzZXBhcmF0ZWx5LgoKWzFdIGh0dHBzOi8vZ2l0aHViLmNvbS9nb29nbGUvc3l6a2FsbGVy
+L3B1bGwvNjA4MQoKLS0gCkFsZWtzYW5kcgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYy
+ZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2Uu
+bmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
