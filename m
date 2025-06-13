@@ -2,92 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CEC2AD853D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jun 2025 10:07:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73723AD855C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jun 2025 10:21:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=GCpF5drci0HmiWS8SEIv7VTTw1aZR+5LFnRU13qjd64=; b=jWayWl4qkb1mW+LKXvrPKRmk0Z
-	zDsRsy0uuGnZsiZsj6viD+RL6JezmnoH9CUesMR/z8G/4J9dn3dl1YM/iHxGfLvFuLYZlwwS5HW2u
-	3b0QHEMHGYGf2JZ11yp48IZOF6xAUmaptplgJlJbR5W4+XY4CDo6Cjrwlxy8BtQ4WVok=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=5derXKJes4pEQuIHnBum2rsH2ZBUOYVqpG1zDGZspPc=; b=IlBFGNB4asmzkyX2b9gfJzhTci
+	/idJ4y/l31y9hQx1IeUCY0A6vyUe5Ps6fZAEA5/3hGD5Z3lz1L2IS6zHYzNlcdxDC0dubhL8RujMg
+	xH8uneg6B6iGkmtSZr5UzVNGoqsX5ESmjzLSsAPlqYnpnVp6N7FoHKeNnH1T4FhlWc5s=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uPzRA-0001Ky-Ka;
-	Fri, 13 Jun 2025 08:06:56 +0000
+	id 1uPzey-00036X-NO;
+	Fri, 13 Jun 2025 08:21:12 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wangzijie1@honor.com>) id 1uPzR7-0001KO-MT
+ (envelope-from <chao@kernel.org>) id 1uPzex-00036Q-Cy
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jun 2025 08:06:53 +0000
+ Fri, 13 Jun 2025 08:21:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/kwt3DfyY/pQjcsJgeMbpbpD1FsmU1WIt4TumBjMH0U=; b=I06lUmWOmg3qSoD+ttNK2sHSfw
- OAeVh36S/pi4UDGjQkIobnOyneWoC5zl8u18xCsoZmWuiFqn3h/ZRP8O/gDLtz1dfNwDX5g1LY1UC
- r1I5HVJMAA44EWF9HAKyOYgmZFlWrKu4Qz08laAeJmXJJ/4DZunmTveUa8O78qV6tWFk=;
+ bh=UIdyRCEXDEi1QwUUBD9RDk6WFKAJz7fNwlo/nQK2Gx8=; b=I0vkTKWM4YVLfdSedzQdzb57G3
+ FSgvViC5ObW2Sr2rlQv4tyPAOKEo6StnF+oFvdPwxxbwmM1SeoAJoBOxEKZCgfNBVl93EeAE452mg
+ zHTU3egU3+bDoWFJ6t5Z2arKGMh6wzUF3RAluEdY+7YCN+QLhgOUXLDL3ejFlkRI3Iv4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/kwt3DfyY/pQjcsJgeMbpbpD1FsmU1WIt4TumBjMH0U=; b=MV7M1kWkfvcSlUtxNygl2rIjoQ
- KVtoxdT9eo4ZdwZJKD8VDrOMJrFqLO7hysTKwpfUQYQ1XJFxbwUQL3KkUDc+UlOKNOLCEaiz4aCvg
- W2wwqkn0rXnOMp194sfwPwVgOBdBVwpqH11pPF49FGHuhSGcjg75B01YXTSs1T8oJ0+I=;
-Received: from mta21.honor.com ([81.70.160.142] helo=mta21.hihonor.com)
+ bh=UIdyRCEXDEi1QwUUBD9RDk6WFKAJz7fNwlo/nQK2Gx8=; b=S2FnQN0nzpjQKzfyp8xSl0NEbW
+ Z9lh4O3TM380OXhc14RLVl6vX99WwY67Jk0ANUVVyiL7+yJPfeS9+0xScEuV90Ik4/iQ+Yesy/BlU
+ JOi0xqaP2i9yjIqLfvxxmmhEZiZi8DCfKJ1FkpEgMMVO4LJXN5xnjvyQPOnrWVtoN6sA=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uPzR6-0000Bp-On for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jun 2025 08:06:53 +0000
-Received: from w011.hihonor.com (unknown [10.68.20.122])
- by mta21.hihonor.com (SkyGuard) with ESMTPS id 4bJX3z4g0mzYl9Bg;
- Fri, 13 Jun 2025 16:04:31 +0800 (CST)
-Received: from a011.hihonor.com (10.68.31.243) by w011.hihonor.com
- (10.68.20.122) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 13 Jun
- 2025 16:06:40 +0800
-Received: from localhost.localdomain (10.144.23.14) by a011.hihonor.com
- (10.68.31.243) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 13 Jun
- 2025 16:06:40 +0800
-From: wangzijie <wangzijie1@honor.com>
-To: <linux-f2fs-devel@lists.sourceforge.net>
-Date: Fri, 13 Jun 2025 16:06:26 +0800
-Message-ID: <20250613080626.1879314-1-wangzijie1@honor.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250613055109.2335-1-chao@kernel.org>
-References: <20250613055109.2335-1-chao@kernel.org>
+ id 1uPzeu-0001YD-OP for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 13 Jun 2025 08:21:11 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 5E1304A607;
+ Fri, 13 Jun 2025 08:20:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A5E5C4CEE3;
+ Fri, 13 Jun 2025 08:20:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1749802858;
+ bh=I0MpPFoiuZ2ZR4SLV6UCr8XkunvMgg37+uEtCCEzrVI=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=u/PxGJ80Hf1rp6tDtF90pSDZsQAo/Yj3/zzyrljZ36LiU2sIdmqnntfGkP6iFx63s
+ uTtaMAOqo5hG7s+bMahRrkSgBf5XhN1RbHhkYIuZDhH6lspFsTkNYdk1KDoyjO2NDd
+ MRLuquPUtWJFKdrn9sorbN3wIRJ7R4V7VqAd4wq6OU+YGs4PjnpJGRC8kfc28jqSwx
+ ck0+zT0+IbazSuXjoH3LOiDwepz4rj9NwKxTqRBs4UWtQ3UlIE7l7RBJaQq9UyFL67
+ O0yEpSxakg5aEJ/8cgxZPwJenFGUQdnzCR9B4wvNC7SdcqpO0GVXJ3hlHxaCPUmdPF
+ r+GncAMx+/XRg==
+Message-ID: <815fa2db-0463-4a8b-86a4-dc5aefc16c0b@kernel.org>
+Date: Fri, 13 Jun 2025 16:21:04 +0800
 MIME-Version: 1.0
-X-Originating-IP: [10.144.23.14]
-X-ClientProxiedBy: w002.hihonor.com (10.68.28.120) To a011.hihonor.com
- (10.68.31.243)
-X-Spam-Score: 0.4 (/)
+User-Agent: Mozilla Thunderbird
+To: Daniel Lee <chullee@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20250613040231.170532-1-chullee@google.com>
+Content-Language: en-US
+In-Reply-To: <20250613040231.170532-1-chullee@google.com>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: > This patch introduces
- /sys/fs/f2fs/<dev>/reserved_pin_section
- for tuning > @needed parameter of has_not_enough_free_secs(), if we configure
- it w/ > zero, it can avoid f2fs_gc() as much as possible w [...] 
- Content analysis details:   (0.4 points, 5.0 required)
+ Content preview:  On 2025/6/13 12:02,
+ Daniel Lee wrote: > A new command 'create_speed', 
+ has been introduced to measure > the performance of creating and deleting
+ many files. > > Signed-off-by: Daniel Lee <chullee@googl [...] 
+ Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.4 KHOP_HELO_FCRDNS       Relay HELO differs from its IP's reverse DNS
-X-Headers-End: 1uPzR6-0000Bp-On
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: introduce reserved_pin_section
- sysfs entry
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uPzeu-0001YD-OP
+Subject: Re: [f2fs-dev] [PATCH] f2fs_io: add create_speed command
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,131 +106,159 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, wangzijie <wangzijie1@honor.com>,
- linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-> This patch introduces /sys/fs/f2fs/<dev>/reserved_pin_section for tuning
-> @needed parameter of has_not_enough_free_secs(), if we configure it w/
-> zero, it can avoid f2fs_gc() as much as possible while fallocating on
-> pinned file.
+On 2025/6/13 12:02, Daniel Lee wrote:
+> A new command 'create_speed', has been introduced to measure
+> the performance of creating and deleting many files.
 > 
-> Signed-off-by: Chao Yu <chao@kernel.org>
-
-Thanks for helping to introduce this sysfs entry.
-
-Reviewed-by: wangzijie <wangzijie1@honor.com>
-
+> Signed-off-by: Daniel Lee <chullee@google.com>
 > ---
-> v2:
-> - assign SM_I(sbi)->ovp_segments after f2fs_build_segment_manager()
->  Documentation/ABI/testing/sysfs-fs-f2fs | 9 +++++++++
->  fs/f2fs/f2fs.h                          | 3 +++
->  fs/f2fs/file.c                          | 5 ++---
->  fs/f2fs/super.c                         | 4 ++++
->  fs/f2fs/sysfs.c                         | 9 +++++++++
->  5 files changed, 27 insertions(+), 3 deletions(-)
+>   tools/f2fs_io/f2fs_io.c | 112 ++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 112 insertions(+)
 > 
-> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-> index bf03263b9f46..c2a233f2a085 100644
-> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
-> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-> @@ -861,3 +861,12 @@ Description:	This is a read-only entry to show the value of sb.s_encoding_flags,
->  		SB_ENC_STRICT_MODE_FL            0x00000001
->  		SB_ENC_NO_COMPAT_FALLBACK_FL     0x00000002
->  		============================     ==========
+> diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+> index 6531b55..ea6a3ff 100644
+> --- a/tools/f2fs_io/f2fs_io.c
+> +++ b/tools/f2fs_io/f2fs_io.c
+> @@ -2092,6 +2092,117 @@ static void do_ftruncate(int argc, char **argv, const struct cmd_desc *cmd)
+>   	exit(0);
+>   }
+>   
+> +#define create_speed_desc "create_speed a file"
+> +#define create_speed_help				\
+> +"f2fs_io create_speed [dir] [num_files] [size_kb]\n\n"	\
+> +"Measures file creation and deletion performance.\n"
 > +
-> +What:		/sys/fs/f2fs/<disk>/reserved_pin_section
-> +Date:		June 2025
-> +Contact:	"Chao Yu" <chao@kernel.org>
-> +Description:	This threshold is used to control triggering garbage collection while
-> +		fallocating on pinned file, so, it can guarantee there is enough free
-> +		reserved section before preallocating on pinned file.
-> +		By default, the value is ovp_sections, especially, for zoned ufs, the
-> +		value is 1.
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 9333a22b9a01..fa27498202a3 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1724,6 +1724,9 @@ struct f2fs_sb_info {
->  	/* for skip statistic */
->  	unsigned long long skipped_gc_rwsem;		/* FG_GC only */
->  
-> +	/* free sections reserved for pinned file */
-> +	unsigned int reserved_pin_section;
-> +
->  	/* threshold for gc trials on pinned files */
->  	unsigned short gc_pin_file_threshold;
->  	struct f2fs_rwsem pin_sem;
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 696131e655ed..a909f79db178 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -1887,9 +1887,8 @@ static int f2fs_expand_inode_data(struct inode *inode, loff_t offset,
->  			}
->  		}
->  
-> -		if (has_not_enough_free_secs(sbi, 0, f2fs_sb_has_blkzoned(sbi) ?
-> -			ZONED_PIN_SEC_REQUIRED_COUNT :
-> -			GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi)))) {
-> +		if (has_not_enough_free_secs(sbi, 0,
-> +				sbi->reserved_pin_section)) {
->  			f2fs_down_write(&sbi->gc_lock);
->  			stat_inc_gc_call_count(sbi, FOREGROUND);
->  			err = f2fs_gc(sbi, &gc_control);
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 57adeff5ef25..e0ecc341f1d3 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -5017,6 +5017,10 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
->  	/* get segno of first zoned block device */
->  	sbi->first_seq_zone_segno = get_first_seq_zone_segno(sbi);
->  
-> +	sbi->reserved_pin_section = f2fs_sb_has_blkzoned(sbi) ?
-> +			ZONED_PIN_SEC_REQUIRED_COUNT :
-> +			GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi));
-> +
->  	/* Read accumulated write IO statistics if exists */
->  	seg_i = CURSEG_I(sbi, CURSEG_HOT_NODE);
->  	if (__exist_node_summaries(sbi))
-> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> index 75134d69a0bd..51be7ffb38c5 100644
-> --- a/fs/f2fs/sysfs.c
-> +++ b/fs/f2fs/sysfs.c
-> @@ -824,6 +824,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
->  		return count;
->  	}
->  
-> +	if (!strcmp(a->attr.name, "reserved_pin_section")) {
-> +		if (t > GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi)))
-> +			return -EINVAL;
-> +		*ui = (unsigned int)t;
-> +		return count;
+> +static void do_create_speed(int argc, char **argv, const struct cmd_desc *cmd)
+> +{
+> +	if (argc != 4) {
+> +		fputs("Usage: f2fs_io create_latency <directory> <num_files> [size_kb]\n", stderr);
+> +	fputs(cmd->cmd_help, stderr);
+> +	exit(1);
 > +	}
 > +
->  	*ui = (unsigned int)t;
->  
->  	return count;
-> @@ -1130,6 +1137,7 @@ F2FS_SBI_GENERAL_RO_ATTR(unusable_blocks_per_sec);
->  F2FS_SBI_GENERAL_RW_ATTR(blkzone_alloc_policy);
->  #endif
->  F2FS_SBI_GENERAL_RW_ATTR(carve_out);
-> +F2FS_SBI_GENERAL_RW_ATTR(reserved_pin_section);
->  
->  /* STAT_INFO ATTR */
->  #ifdef CONFIG_F2FS_STAT_FS
-> @@ -1323,6 +1331,7 @@ static struct attribute *f2fs_attrs[] = {
->  	ATTR_LIST(last_age_weight),
->  	ATTR_LIST(max_read_extent_count),
->  	ATTR_LIST(carve_out),
-> +	ATTR_LIST(reserved_pin_section),
->  	NULL,
->  };
->  ATTRIBUTE_GROUPS(f2fs);
-> -- 
-> 2.40.1
+> +	const char *dir = argv[1];
+> +	int num_files = atoi(argv[2]);
+> +	int size_kb = atoi(argv[3]);
+> +	char *write_buffer = NULL;
+> +
+> +	if (num_files <= 0) {
+> +		fprintf(stderr, "Error: Number of files must be positive.\n");
+> +	exit(1);
+> +	}
+> +
+> +	if (size_kb > 0) {
+> +		write_buffer = malloc(size_kb * 1024);
+> +		if (!write_buffer) {
+> +			perror("Failed to allocate write buffer");
+> +			exit(1);
+> +		}
+> +		memset(write_buffer, 'a', size_kb * 1024);
+> +	}
+> +
+> +	// Creation Phase
+> +	printf("Starting test: Creating %d files of %dKB each in %s\n", num_files, size_kb, dir);
+> +
+> +	struct timespec create_start, create_end;
+> +
+> +	clock_gettime(CLOCK_MONOTONIC, &create_start);
+> +
+> +	for (int i = 0; i < num_files; i++) {
+> +		char path[1024];
+> +
+> +		snprintf(path, sizeof(path), "%s/test_file_%d", dir, i);
+> +
+> +		int fd = open(path, O_WRONLY | O_CREAT, 0644);
+> +
+> +		if (fd < 0) {
+> +			perror("Error opening file");
+> +			continue;
+> +		}
+> +		if (size_kb > 0) {
+> +			if (write(fd, write_buffer, size_kb * 1024) < 0)
+> +				perror("Error writing to file");
+> +		}
+> +		if (fsync(fd) < 0)
+
+Maybe we need to call fsync() optionally, as if we want to find and
+notice performance regression comes from create, we'd better avoid
+distraction from disk IO.
+
+Thanks,
+
+> +			perror("Error fsyncing file");
+> +
+> +		close(fd);
+> +	}
+> +
+> +	clock_gettime(CLOCK_MONOTONIC, &create_end);
+> +
+> +
+> +	// Deletion Phase
+> +	printf("Deleting %d created files...\n", num_files);
+> +
+> +	struct timespec del_start, del_end;
+> +
+> +	clock_gettime(CLOCK_MONOTONIC, &del_start);
+> +
+> +	for (int i = 0; i < num_files; i++) {
+> +		char path[1024];
+> +
+> +		snprintf(path, sizeof(path), "%s/test_file_%d", dir, i);
+> +		if (unlink(path) != 0)
+> +			perror("Error unlinking file");
+> +	}
+> +	sync();
+> +
+> +	clock_gettime(CLOCK_MONOTONIC, &del_end);
+> +
+> +	long create_seconds = create_end.tv_sec - create_start.tv_sec;
+> +	long create_ns = create_end.tv_nsec - create_start.tv_nsec;
+> +	double create_time_s = (double)create_seconds + (double)create_ns / 1000000000.0;
+> +	double create_throughput = (create_time_s > 0) ? (num_files / create_time_s) : 0;
+> +
+> +	long del_seconds = del_end.tv_sec - del_start.tv_sec;
+> +	long del_ns = del_end.tv_nsec - del_start.tv_nsec;
+> +	double del_time_s = (double)del_seconds + (double)del_ns / 1000000000.0;
+> +	double del_throughput = (del_time_s > 0) ? (num_files / del_time_s) : 0;
+> +
+> +	printf("Operation,total_files,file_size_kb,total_time_s,throughput_files_per_sec\n");
+> +
+> +	printf("CREATE,%d,%d,%.4f,%.2f\n",
+> +		   num_files,
+> +		   size_kb,
+> +		   create_time_s,
+> +		   create_throughput);
+> +
+> +	printf("DELETE,%d,%d,%.4f,%.2f\n",
+> +		   num_files,
+> +		   size_kb,
+> +		   del_time_s,
+> +		   del_throughput);
+> +
+> +	if (write_buffer)
+> +		free(write_buffer);
+> +
+> +	exit(0);
+> +}
+> +
+>   #define CMD_HIDDEN 	0x0001
+>   #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
+>   #define _CMD(name) { #name, do_##name, NULL, NULL, CMD_HIDDEN }
+> @@ -2140,6 +2251,7 @@ const struct cmd_desc cmd_list[] = {
+>   	CMD(get_advise),
+>   	CMD(ioprio),
+>   	CMD(ftruncate),
+> +	CMD(create_speed),
+>   	{ NULL, NULL, NULL, NULL, 0 }
+>   };
+>   
 
 
 
