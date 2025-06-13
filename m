@@ -2,76 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3E55AD7FB7
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jun 2025 02:48:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A6ACAD8043
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jun 2025 03:24:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=dllg3Mal45PHEvSV3521qC3kEy0v6nPkzGSYWnZA4Bs=; b=c9Lq+Z1YK2GFUIV8J0emC3ZvLZ
-	lazgedjurdSLq07x0uodwrot83kN2zHfVF/G7IcIwFEKnlCRA0NKA8kRp//EYbs1XbDpo858Lv/ul
-	26TfUs+rQvgzfi0YFdZBUgxx/y1dsYgpmRPjGiaJJGftNIGuWt/Hbk8zMkXt4pGrm00Y=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=SeGeHi+HZhoy8QUzzYkbbAaQw/cwTjojTeudObPL+5A=; b=VU5FtZ9JPPCL2QLay/zJmcntoq
+	QIC89VR1maEl/ilU19v5bn6/ggDTV/Cr+QnSfTH8SNbdcCct2mlPMKwSsuekut5eg7bx5/uD12m6T
+	xS54yRBP1MtaAt+QlY64JW2q1heF8Ngj76dz7hrFJHKYDHAWdxMcWqQsMDb6qKDyiXkM=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uPsaJ-0004Od-44;
-	Fri, 13 Jun 2025 00:47:55 +0000
+	id 1uPt9R-0005yc-Rc;
+	Fri, 13 Jun 2025 01:24:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uPsaH-0004OX-AE
+ (envelope-from <ebiggers@kernel.org>) id 1uPt9Q-0005yT-E9
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jun 2025 00:47:53 +0000
+ Fri, 13 Jun 2025 01:24:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hZa7TR2gLUi7Nh355mw1GrOzcQO6dxzrEO6YJrCh0PY=; b=hQGXK7yFepM/hvOPZY0xY+AcH0
- m4l8Qk/6aNL0qKMFCwvDLVOFoH6xTp/9RC0yOjvV5DT4xvE9UOg3Zhab+Emk+3fTxioo8ct7FFRsk
- DEWivpTgbWJAindZM9/UIioJxDq8305RV6jzu9R1b6SXQRgwBVyomtAxPkqPtzUeXlOc=;
+ bh=XK46kPvao1SrNg9qxW4E52djug2fTrwEfHR0OG8cZmI=; b=BtZf+IgDCd0CtISNkw6YrUJSm3
+ oS6TGgQ+iFx4X3rPWPupx1h31uZKUYbK9WurbpjLeB5mrVi5q47gvBKYDXgp2lqek+hGtzuhAYCqM
+ gayEPcpO09uDXGHgamFJQByEMZd4oTD2PbbTQad00rO7MkNGJ73lXcVW+++G/isLqEco=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hZa7TR2gLUi7Nh355mw1GrOzcQO6dxzrEO6YJrCh0PY=; b=VRAujCNEd/e4QsYnpGpO3rurGp
- Xt9LqMtHu2YfJXsjUqKBH8uSSzlE2oib4PY9rb67K3LfcYoqHLK4NfiPEwiItFTY8ZbGY4j2tGvJZ
- hqA3ku5Ei3da9oqHi0hlsgtvk1e8cTSI3SOjpv0lOHgDFfy+MWiqITRFSu3NlcRaYdZc=;
+ bh=XK46kPvao1SrNg9qxW4E52djug2fTrwEfHR0OG8cZmI=; b=fHIG0rWoqqIscAMmC+ntuayrCC
+ gOcLaqGaNyRg/rs7rQeBeovOL+POWQ24fUib9kyLflCk5ERGC1+DYJGvS3t0201uKYoeIbVECP0SF
+ JWDq44asN040Sn0rIDHhbSiA0x47MSgJWWmGY5voSTGyGKKh0/tZj8KSGlLKF2jzKi+c=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uPsaG-0006Cg-N7 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jun 2025 00:47:53 +0000
+ id 1uPt9P-0005vY-Fn for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 13 Jun 2025 01:24:12 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id D1ECA629D7;
- Fri, 13 Jun 2025 00:47:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 96CC8C4CEEA;
- Fri, 13 Jun 2025 00:47:40 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 857A56112C;
+ Fri, 13 Jun 2025 01:24:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB4CEC4CEEA;
+ Fri, 13 Jun 2025 01:23:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749775661;
- bh=FcwAaUnFzLm16huHjizGe95MQwCLo8XGRMUUruWoPVg=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=HWHdOwG5fGCvoZ49mhZwo4E9DXck8Oz8r0w31CBPt18AjO4MpfcIrFxRWBhve3lP9
- cmyVSDOLrvV5NbRPF2jP8b9fbEXnFecMlRvcDapqsejU8Bi/avxo0LipQUmFEymapS
- YD6V3mzWB5FvhN8C1Y/OzqLCNx+pgFcTlT81jHl73iYHMHkJDkfiw00+Zqstcpldkm
- sAqEBgKVy+zZ++1xyI77WmMgvA8BGYsEdJP+jex+u7ueRTHFjnHgX/58JtrwxraOUh
- spQFP35GxU6O8gfhey8/LwW+5aguAflbQAuF9RL4HxRqA6KX1YH2y+lvg9mNGIr6ub
- ighIGGihzzCYw==
-Message-ID: <b3ecfa66-31c4-435e-918b-097c385848bf@kernel.org>
-Date: Fri, 13 Jun 2025 08:47:47 +0800
+ s=k20201202; t=1749777840;
+ bh=d5rHizoOE6yeSiQobFd52hpxfVk2+AkiKtye4xkZZNQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=sopL9OVGaKkYBLoQ9K0Gx3mNqKCtmF6HeqAxRPeMFvJLOQNPGNCCbdfRxS2LlfLqu
+ C3Drs4Qu4cFQG2+79qNVN/2U+Mp5r2Ku8fHrvgJywco1pbYG6PtA3ImiR1O4x08klz
+ xDAF1Jfb3fKbHGBJ+46TYP3cVpNrl19/EEmKclh0GQCX86o255XF08PT4Rd7b6JjMQ
+ 0pZk7pLaqF1Q6YqyMWUL0yY5F1li1Q6ACzRmSrSgpQrt8hIvANSSWWinXiguz6euWJ
+ eocxM+zUeCV/S4k5Ycq56kPx+45/tXS3yhtnvX35hipDpMVHslTEwlPdsTCo0NKkoz
+ V/KcVAfBqnyXg==
+Date: Fri, 13 Jun 2025 01:23:57 +0000
+To: Giovanni Cabiddu <giovanni.cabiddu@intel.com>
+Message-ID: <20250613012357.GA3603104@google.com>
+References: <20250611205859.80819-1-ebiggers@kernel.org>
+ <7f63be76-289b-4a99-b802-afd72e0512b8@hogyros.de>
+ <20250612005914.GA546455@google.com> <20250612062521.GA1838@sol>
+ <aEqU0iU1tBrLEYUq@gcabiddu-mobl.ger.corp.intel.com>
+ <20250612155743.GA3529549@google.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Daniel Lee <chullee@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20250611233706.572784-1-chullee@google.com>
- <20250611233706.572784-3-chullee@google.com>
-Content-Language: en-US
-In-Reply-To: <20250611233706.572784-3-chullee@google.com>
+Content-Disposition: inline
+In-Reply-To: <20250612155743.GA3529549@google.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -79,10 +81,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2025/6/12 7:37,
- Daniel Lee wrote: > Apply the `ioprio_hint`
- to set `F2FS_IOPRIO_WRITE` priority > on files identified as "hot" at creation
- and on files that are > pinned via ioctl. > > Signed-off-b [...] 
+ Content preview:  On Thu, Jun 12, 2025 at 03:57:43PM +0000, Eric Biggers wrote:
+ > On Thu, Jun 12, 2025 at 09:50:26AM +0100, Giovanni Cabiddu wrote: > > On
+ Wed, Jun 11, 2025 at 11:25:21PM -0700, Eric Biggers wrote: > > [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +95,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uPsaG-0006Cg-N7
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: use ioprio hint for hot and pinned
- files
+X-Headers-End: 1uPt9P-0005vY-Fn
+Subject: Re: [f2fs-dev] [PATCH] fscrypt: don't use hardware offload Crypto
+ API drivers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,123 +109,104 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+From: Eric Biggers via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Eric Biggers <ebiggers@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fscrypt@vger.kernel.org, linux-mtd@lists.infradead.org,
+ linux-crypto@vger.kernel.org, Simon Richter <Simon.Richter@hogyros.de>,
+ ceph-devel@vger.kernel.org, linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2025/6/12 7:37, Daniel Lee wrote:
-> Apply the `ioprio_hint` to set `F2FS_IOPRIO_WRITE` priority
-> on files identified as "hot" at creation and on files that are
-> pinned via ioctl.
+On Thu, Jun 12, 2025 at 03:57:43PM +0000, Eric Biggers wrote:
+> On Thu, Jun 12, 2025 at 09:50:26AM +0100, Giovanni Cabiddu wrote:
+> > On Wed, Jun 11, 2025 at 11:25:21PM -0700, Eric Biggers wrote:
+> > 
+> > ...
+> > 
+> > > FWIW, here's what happens if you try to use the Intel QAT driver with dm-crypt:
+> > > https://lore.kernel.org/r/CACsaVZ+mt3CfdXV0_yJh7d50tRcGcRZ12j3n6-hoX2cz3+njsg@mail.gmail.com/
+> > 
+> > /s/happens/happened/
+> > 
+> > ... and it got fixed
+> > https://lore.kernel.org/all/20220506082327.21605-1-giovanni.cabiddu@intel.com/
 > 
-> Signed-off-by: Daniel Lee <chullee@google.com>
-> ---
->   fs/f2fs/f2fs.h  | 21 +++++++++++++++++++++
->   fs/f2fs/file.c  |  3 +++
->   fs/f2fs/namei.c | 11 +++++++----
->   3 files changed, 31 insertions(+), 4 deletions(-)
+> But it reached users in the first place, including stable kernels.  And
+> apparently the issues were going on for years and were known to the authors of
+> the driver
+> (https://lore.kernel.org/linux-crypto/91fe9f87-54d7-4140-4d1a-eac8e2081a7c@gmail.com/).
 > 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 162d79a3c1a5..0b05b3b6386b 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -3441,6 +3441,27 @@ static inline void set_file(struct inode *inode, int type)
->   	f2fs_mark_inode_dirty_sync(inode, true);
->   }
->   
-> +static inline int get_ioprio(struct inode *inode)
-> +{
-> +	return F2FS_I(inode)->ioprio_hint;
-> +}
-> +
-> +static inline void set_ioprio(struct inode *inode, int level)
-> +{
-> +	if (get_ioprio(inode) == level)
-> +		return;
-> +	F2FS_I(inode)->ioprio_hint = level;
-> +	f2fs_mark_inode_dirty_sync(inode, true);
+> We simply don't have issues like this with the AES-NI or VAES XTS code.
+> 
+> And separately, QAT was reported to be much slower than AES-NI for synchronous use
+> (https://lore.kernel.org/linux-crypto/0171515-7267-624-5a22-238af829698f@redhat.com/)
+> 
+> Later, I added VAES accelerated AES-XTS code which is over twice as fast as
+> AES-NI on the latest Intel CPUs, so that likely widened the gap even more.
+> 
+> Yet, the QAT driver registers its "xts(aes)" implementation with priority 4001,
+> compared to priority 800 for the VAES accelerated one.  So the QAT one is the
+> one that will be used by fscrypt!
+> 
+> That seems like a major issue even just from a performance perspective.
+> 
+> I expect this patch will significantly improve fscrypt performance on Intel
+> servers that have QAT.
 
-We don't need to mark inode dirty? IIRC, .ioprio_hint is just in-memory variable?
+I was curious, so I actually ran a benchmark on an Intel Emerald Rapids server.
+Specifically, I used a kernel module that repeatedly en/decrypted 4096-byte
+messages with AES-XTS using crypto_skcipher_en/decrypt().  That's basically what
+fscrypt's file contents encryption does, but here I just measured the raw crypto
+performance.  I tested both xts-aes-vaes-avx512 and qat_aes_xts.  For both, the
+difference between encryption and decryption was within the margin of error, so
+I'll give just one number for each.
 
-> +}
-> +
-> +static inline void clear_ioprio(struct inode *inode)
-> +{
-> +	if (get_ioprio(inode) == 0)
-> +		return;
-> +	F2FS_I(inode)->ioprio_hint = 0;
-> +	f2fs_mark_inode_dirty_sync(inode, true);
+Results:
 
-Ditto,
+    xts-aes-vaes-avx512: 16171 MB/s
+    qat_aes_xts: 289 MB/s
 
-> +}
-> +
->   static inline void clear_file(struct inode *inode, int type)
->   {
->   	if (!is_file(inode, type))
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 4fd45e94661a..95a3b4b59dd1 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -3496,6 +3496,7 @@ static int f2fs_ioc_set_pin_file(struct file *filp, unsigned long arg)
->   
->   	if (!pin) {
->   		clear_inode_flag(inode, FI_PIN_FILE);
-> +		clear_ioprio(inode);
->   		f2fs_i_gc_failures_write(inode, 0);
->   		goto done;
->   	} else if (f2fs_is_pinned_file(inode)) {
-> @@ -3529,6 +3530,8 @@ static int f2fs_ioc_set_pin_file(struct file *filp, unsigned long arg)
->   	}
->   
->   	set_inode_flag(inode, FI_PIN_FILE);
-> +	file_set_hot(inode);
-> +	set_ioprio(inode, F2FS_IOPRIO_WRITE);
->   	ret = F2FS_I(inode)->i_gc_failures;
->   done:
->   	f2fs_update_time(sbi, REQ_TIME);
-> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-> index 07e333ee21b7..0f96a0b86c40 100644
-> --- a/fs/f2fs/namei.c
-> +++ b/fs/f2fs/namei.c
-> @@ -191,9 +191,10 @@ static void set_compress_new_inode(struct f2fs_sb_info *sbi, struct inode *dir,
->   }
->   
->   /*
-> - * Set file's temperature for hot/cold data separation
-> + * Set file's temperature (for hot/cold data separation) and
-> + * I/O priority, based on filename extension
->    */
-> -static void set_file_temperature(struct f2fs_sb_info *sbi, struct inode *inode,
-> +static void set_file_temp_prio(struct f2fs_sb_info *sbi, struct inode *inode,
->   		const unsigned char *name)
->   {
->   	__u8 (*extlist)[F2FS_EXTENSION_LEN] = sbi->raw_super->extension_list;
-> @@ -212,8 +213,10 @@ static void set_file_temperature(struct f2fs_sb_info *sbi, struct inode *inode,
->   
->   	if (i < cold_count)
->   		file_set_cold(inode);
-> -	else
-> +	else {
->   		file_set_hot(inode);
-> +		set_ioprio(inode, F2FS_IOPRIO_WRITE);
-> +	}
->   }
->   
->   static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
-> @@ -317,7 +320,7 @@ static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
->   		set_inode_flag(inode, FI_INLINE_DATA);
->   
->   	if (name && !test_opt(sbi, DISABLE_EXT_IDENTIFY))
-> -		set_file_temperature(sbi, inode, name);
-> +		set_file_temp_prio(sbi, inode, name);
->   
->   	stat_inc_inline_xattr(inode);
->   	stat_inc_inline_inode(inode);
+So, QAT is 55 times slower than the VAES-optimized software code!
 
+It's even slower than the generic C code:
+     
+    xts(ecb(aes-generic)): 305 MB/s
+
+Now, it could be argued that this is user error -- I "should" have created lots
+of asynchronous crypto requests for 4K blocks, submitted them all at once, and
+waited for them to complete.  Thus allowing parallel processing by QAT.
+
+But, that's simply not what fscrypt does.  And even if it did, it could only
+plausibly help for large bios.  Short bios, for which latency is really
+important, would continue to be massively regressed by using QAT for them.
+
+Even for large bios, it would have to get over 55 times faster to be worth it,
+which seems (very?) tenuous.
+
+Also, as is known from dm-crypt which does do async processing, the code that's
+needed to do it is quite complex and error-prone.
+
+In any case, async processing would be a theoretical future improvement.  It's
+simply not what fscrypt does today, or has ever done.
+
+I also found that, even though I built the QAT driver as a loadable module, it
+was loaded automatically on the system and prioritized itself over the VAES-
+accelerated AES-XTS.  Thus, it would be what fscrypt uses on Intel servers where
+the QAT driver is enabled in kconfig, even just as 'm'.
+
+Even disregarding the historical data corruption issues with QAT, I think this
+makes it *very* clear that the QAT driver is harmful to fscrypt users.
+
+And I've seen similar results with the Qualcomm crypto engine
+(https://lore.kernel.org/r/20241203180553.16893-1-ebiggers@kernel.org/).
+So this isn't even unique to this particular accelerator either.
+
+This has gone on for long enough.
+
+- Eric
 
 
 _______________________________________________
