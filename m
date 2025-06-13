@@ -2,102 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A6ACAD8043
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jun 2025 03:24:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C13C9AD8087
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jun 2025 03:51:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=SeGeHi+HZhoy8QUzzYkbbAaQw/cwTjojTeudObPL+5A=; b=VU5FtZ9JPPCL2QLay/zJmcntoq
-	QIC89VR1maEl/ilU19v5bn6/ggDTV/Cr+QnSfTH8SNbdcCct2mlPMKwSsuekut5eg7bx5/uD12m6T
-	xS54yRBP1MtaAt+QlY64JW2q1heF8Ngj76dz7hrFJHKYDHAWdxMcWqQsMDb6qKDyiXkM=;
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=B/7Jo3KVbkavSloZ5ZJFtO1qku6YPn7B+YgfqFBAEMk=; b=mVv8be3FvFUwd0fs1NTBjJTHdr
+	Y2BXJNV+o7SAeCS5wYuVedHJ5TLk+HHT5HlVDcESIm9k7kOsSWEdFankv5gpm7aOeGw8vg7totpvo
+	yxSV2ftSTJwrSJjaXvnC6hjh9tOIsUKYe41vYNsQb2WJgl7ZgqiQpjZGbOzYXzqy3mk0=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uPt9R-0005yc-Rc;
-	Fri, 13 Jun 2025 01:24:13 +0000
+	id 1uPta0-0008Kt-PH;
+	Fri, 13 Jun 2025 01:51:40 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1uPt9Q-0005yT-E9
+ (envelope-from <Zhiguo.Niu@unisoc.com>) id 1uPtZz-0008Kn-7Z
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jun 2025 01:24:12 +0000
+ Fri, 13 Jun 2025 01:51:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XK46kPvao1SrNg9qxW4E52djug2fTrwEfHR0OG8cZmI=; b=BtZf+IgDCd0CtISNkw6YrUJSm3
- oS6TGgQ+iFx4X3rPWPupx1h31uZKUYbK9WurbpjLeB5mrVi5q47gvBKYDXgp2lqek+hGtzuhAYCqM
- gayEPcpO09uDXGHgamFJQByEMZd4oTD2PbbTQad00rO7MkNGJ73lXcVW+++G/isLqEco=;
+ bh=1GfT9Wp+WBs+6sOyC0kgJlj14msoIH5z7H0OgQ7+WqQ=; b=gNwPR4LwgQ0MlMFVwAhDiZfCuH
+ M9fbFnqH6q0AVcen2klIDkuDUY71AHm50XXPKZkmmXrjPkDAxQUc7tS5XqB5gZcs1eTMHrKYSBvBD
+ jU+yQeJo/G3CgBkFurhEWc9CLMSINr0TQRLclse2f+yxJFD2DNn4B+BooOb16OBnmIfY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=XK46kPvao1SrNg9qxW4E52djug2fTrwEfHR0OG8cZmI=; b=fHIG0rWoqqIscAMmC+ntuayrCC
- gOcLaqGaNyRg/rs7rQeBeovOL+POWQ24fUib9kyLflCk5ERGC1+DYJGvS3t0201uKYoeIbVECP0SF
- JWDq44asN040Sn0rIDHhbSiA0x47MSgJWWmGY5voSTGyGKKh0/tZj8KSGlLKF2jzKi+c=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=1GfT9Wp+WBs+6sOyC0kgJlj14msoIH5z7H0OgQ7+WqQ=; b=E
+ ZkGNOte1Ad/TpIUC33nTVygQ838LYyd+cTnTZBVYH/31AyVFLJOA4wgUp77UEYdxdmwvB1uPZ+jSg
+ 3NG6WVfAT8EihYFEfI89u6apiOLDxXaylRqoMrKcG/kQd2DkVRw2DofIzK1Wl0Iuay/CyrVEICf+Q
+ 8RY+MTI1OQMDWinw=;
+Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uPt9P-0005vY-Fn for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jun 2025 01:24:12 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 857A56112C;
- Fri, 13 Jun 2025 01:24:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB4CEC4CEEA;
- Fri, 13 Jun 2025 01:23:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749777840;
- bh=d5rHizoOE6yeSiQobFd52hpxfVk2+AkiKtye4xkZZNQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=sopL9OVGaKkYBLoQ9K0Gx3mNqKCtmF6HeqAxRPeMFvJLOQNPGNCCbdfRxS2LlfLqu
- C3Drs4Qu4cFQG2+79qNVN/2U+Mp5r2Ku8fHrvgJywco1pbYG6PtA3ImiR1O4x08klz
- xDAF1Jfb3fKbHGBJ+46TYP3cVpNrl19/EEmKclh0GQCX86o255XF08PT4Rd7b6JjMQ
- 0pZk7pLaqF1Q6YqyMWUL0yY5F1li1Q6ACzRmSrSgpQrt8hIvANSSWWinXiguz6euWJ
- eocxM+zUeCV/S4k5Ycq56kPx+45/tXS3yhtnvX35hipDpMVHslTEwlPdsTCo0NKkoz
- V/KcVAfBqnyXg==
-Date: Fri, 13 Jun 2025 01:23:57 +0000
-To: Giovanni Cabiddu <giovanni.cabiddu@intel.com>
-Message-ID: <20250613012357.GA3603104@google.com>
-References: <20250611205859.80819-1-ebiggers@kernel.org>
- <7f63be76-289b-4a99-b802-afd72e0512b8@hogyros.de>
- <20250612005914.GA546455@google.com> <20250612062521.GA1838@sol>
- <aEqU0iU1tBrLEYUq@gcabiddu-mobl.ger.corp.intel.com>
- <20250612155743.GA3529549@google.com>
+ id 1uPtZy-0003uv-4D for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 13 Jun 2025 01:51:39 +0000
+Received: from dlp.unisoc.com ([10.29.3.86])
+ by SHSQR01.spreadtrum.com with ESMTP id 55D1p0qG026367;
+ Fri, 13 Jun 2025 09:51:00 +0800 (+08)
+ (envelope-from Zhiguo.Niu@unisoc.com)
+Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
+ by dlp.unisoc.com (SkyGuard) with ESMTPS id 4bJMjK1876z2NtGrn;
+ Fri, 13 Jun 2025 09:47:49 +0800 (CST)
+Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
+ BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.48; Fri, 13 Jun 2025 09:50:57 +0800
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Fri, 13 Jun 2025 09:50:44 +0800
+Message-ID: <1749779445-29125-1-git-send-email-zhiguo.niu@unisoc.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250612155743.GA3529549@google.com>
-X-Spam-Score: -0.3 (/)
+X-Originating-IP: [10.0.73.87]
+X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
+ BJMBX02.spreadtrum.com (10.0.64.8)
+X-MAIL: SHSQR01.spreadtrum.com 55D1p0qG026367
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jun 12, 2025 at 03:57:43PM +0000, Eric Biggers wrote:
- > On Thu, Jun 12, 2025 at 09:50:26AM +0100, Giovanni Cabiddu wrote: > > On
- Wed, Jun 11, 2025 at 11:25:21PM -0700, Eric Biggers wrote: > > [...] 
- Content analysis details:   (-0.3 points, 5.0 required)
+ Content preview:  No logic changes, just cleanup and prepare for fixing the
+ UAF issue in f2fs_free_dic. Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+ Signed-off-by: Baocong Liu <baocong.liu@unisoc.com> --- fs/f2fs/compress.c
+ | 40 ++++++++++++++++++++ 1 file changed, 20 insertions [...] 
+ Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uPt9P-0005vY-Fn
-Subject: Re: [f2fs-dev] [PATCH] fscrypt: don't use hardware offload Crypto
- API drivers
+X-Headers-End: 1uPtZy-0003uv-4D
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: compress: change the first parameter
+ of page_array_{alloc, free} to sbi
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,104 +95,197 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Eric Biggers via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Eric Biggers <ebiggers@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-crypto@vger.kernel.org, Simon Richter <Simon.Richter@hogyros.de>,
- ceph-devel@vger.kernel.org, linux-ext4@vger.kernel.org
+From: Zhiguo Niu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Zhiguo Niu <zhiguo.niu@unisoc.com>
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, zhiguo.niu@unisoc.com,
+ baocong.liu@unisoc.com, Hao_hao.Wang@unisoc.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jun 12, 2025 at 03:57:43PM +0000, Eric Biggers wrote:
-> On Thu, Jun 12, 2025 at 09:50:26AM +0100, Giovanni Cabiddu wrote:
-> > On Wed, Jun 11, 2025 at 11:25:21PM -0700, Eric Biggers wrote:
-> > 
-> > ...
-> > 
-> > > FWIW, here's what happens if you try to use the Intel QAT driver with dm-crypt:
-> > > https://lore.kernel.org/r/CACsaVZ+mt3CfdXV0_yJh7d50tRcGcRZ12j3n6-hoX2cz3+njsg@mail.gmail.com/
-> > 
-> > /s/happens/happened/
-> > 
-> > ... and it got fixed
-> > https://lore.kernel.org/all/20220506082327.21605-1-giovanni.cabiddu@intel.com/
-> 
-> But it reached users in the first place, including stable kernels.  And
-> apparently the issues were going on for years and were known to the authors of
-> the driver
-> (https://lore.kernel.org/linux-crypto/91fe9f87-54d7-4140-4d1a-eac8e2081a7c@gmail.com/).
-> 
-> We simply don't have issues like this with the AES-NI or VAES XTS code.
-> 
-> And separately, QAT was reported to be much slower than AES-NI for synchronous use
-> (https://lore.kernel.org/linux-crypto/0171515-7267-624-5a22-238af829698f@redhat.com/)
-> 
-> Later, I added VAES accelerated AES-XTS code which is over twice as fast as
-> AES-NI on the latest Intel CPUs, so that likely widened the gap even more.
-> 
-> Yet, the QAT driver registers its "xts(aes)" implementation with priority 4001,
-> compared to priority 800 for the VAES accelerated one.  So the QAT one is the
-> one that will be used by fscrypt!
-> 
-> That seems like a major issue even just from a performance perspective.
-> 
-> I expect this patch will significantly improve fscrypt performance on Intel
-> servers that have QAT.
+No logic changes, just cleanup and prepare for fixing the UAF issue
+in f2fs_free_dic.
 
-I was curious, so I actually ran a benchmark on an Intel Emerald Rapids server.
-Specifically, I used a kernel module that repeatedly en/decrypted 4096-byte
-messages with AES-XTS using crypto_skcipher_en/decrypt().  That's basically what
-fscrypt's file contents encryption does, but here I just measured the raw crypto
-performance.  I tested both xts-aes-vaes-avx512 and qat_aes_xts.  For both, the
-difference between encryption and decryption was within the margin of error, so
-I'll give just one number for each.
+Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+Signed-off-by: Baocong Liu <baocong.liu@unisoc.com>
+---
+ fs/f2fs/compress.c | 40 ++++++++++++++++++++--------------------
+ 1 file changed, 20 insertions(+), 20 deletions(-)
 
-Results:
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index b3c1df9..832a484 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -23,20 +23,18 @@
+ static struct kmem_cache *cic_entry_slab;
+ static struct kmem_cache *dic_entry_slab;
+ 
+-static void *page_array_alloc(struct inode *inode, int nr)
++static void *page_array_alloc(struct f2fs_sb_info *sbi, int nr)
+ {
+-	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	unsigned int size = sizeof(struct page *) * nr;
+ 
+ 	if (likely(size <= sbi->page_array_slab_size))
+ 		return f2fs_kmem_cache_alloc(sbi->page_array_slab,
+-					GFP_F2FS_ZERO, false, F2FS_I_SB(inode));
++					GFP_F2FS_ZERO, false, sbi);
+ 	return f2fs_kzalloc(sbi, size, GFP_NOFS);
+ }
+ 
+-static void page_array_free(struct inode *inode, void *pages, int nr)
++static void page_array_free(struct f2fs_sb_info *sbi, void *pages, int nr)
+ {
+-	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	unsigned int size = sizeof(struct page *) * nr;
+ 
+ 	if (!pages)
+@@ -149,13 +147,13 @@ int f2fs_init_compress_ctx(struct compress_ctx *cc)
+ 	if (cc->rpages)
+ 		return 0;
+ 
+-	cc->rpages = page_array_alloc(cc->inode, cc->cluster_size);
++	cc->rpages = page_array_alloc(F2FS_I_SB(cc->inode), cc->cluster_size);
+ 	return cc->rpages ? 0 : -ENOMEM;
+ }
+ 
+ void f2fs_destroy_compress_ctx(struct compress_ctx *cc, bool reuse)
+ {
+-	page_array_free(cc->inode, cc->rpages, cc->cluster_size);
++	page_array_free(F2FS_I_SB(cc->inode), cc->rpages, cc->cluster_size);
+ 	cc->rpages = NULL;
+ 	cc->nr_rpages = 0;
+ 	cc->nr_cpages = 0;
+@@ -622,6 +620,7 @@ static void *f2fs_vmap(struct page **pages, unsigned int count)
+ 
+ static int f2fs_compress_pages(struct compress_ctx *cc)
+ {
++	struct f2fs_sb_info *sbi = F2FS_I_SB(cc->inode);
+ 	struct f2fs_inode_info *fi = F2FS_I(cc->inode);
+ 	const struct f2fs_compress_ops *cops =
+ 				f2fs_cops[fi->i_compress_algorithm];
+@@ -642,7 +641,7 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+ 	cc->nr_cpages = DIV_ROUND_UP(max_len, PAGE_SIZE);
+ 	cc->valid_nr_cpages = cc->nr_cpages;
+ 
+-	cc->cpages = page_array_alloc(cc->inode, cc->nr_cpages);
++	cc->cpages = page_array_alloc(sbi, cc->nr_cpages);
+ 	if (!cc->cpages) {
+ 		ret = -ENOMEM;
+ 		goto destroy_compress_ctx;
+@@ -716,7 +715,7 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+ 		if (cc->cpages[i])
+ 			f2fs_compress_free_page(cc->cpages[i]);
+ 	}
+-	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
++	page_array_free(sbi, cc->cpages, cc->nr_cpages);
+ 	cc->cpages = NULL;
+ destroy_compress_ctx:
+ 	if (cops->destroy_compress_ctx)
+@@ -1340,7 +1339,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 	cic->magic = F2FS_COMPRESSED_PAGE_MAGIC;
+ 	cic->inode = inode;
+ 	atomic_set(&cic->pending_pages, cc->valid_nr_cpages);
+-	cic->rpages = page_array_alloc(cc->inode, cc->cluster_size);
++	cic->rpages = page_array_alloc(sbi, cc->cluster_size);
+ 	if (!cic->rpages)
+ 		goto out_put_cic;
+ 
+@@ -1442,13 +1441,13 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 	spin_unlock(&fi->i_size_lock);
+ 
+ 	f2fs_put_rpages(cc);
+-	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
++	page_array_free(sbi, cc->cpages, cc->nr_cpages);
+ 	cc->cpages = NULL;
+ 	f2fs_destroy_compress_ctx(cc, false);
+ 	return 0;
+ 
+ out_destroy_crypt:
+-	page_array_free(cc->inode, cic->rpages, cc->cluster_size);
++	page_array_free(sbi, cic->rpages, cc->cluster_size);
+ 
+ 	for (--i; i >= 0; i--) {
+ 		if (!cc->cpages[i])
+@@ -1469,7 +1468,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 		f2fs_compress_free_page(cc->cpages[i]);
+ 		cc->cpages[i] = NULL;
+ 	}
+-	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
++	page_array_free(sbi, cc->cpages, cc->nr_cpages);
+ 	cc->cpages = NULL;
+ 	return -EAGAIN;
+ }
+@@ -1499,7 +1498,7 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page)
+ 		end_page_writeback(cic->rpages[i]);
+ 	}
+ 
+-	page_array_free(cic->inode, cic->rpages, cic->nr_rpages);
++	page_array_free(sbi, cic->rpages, cic->nr_rpages);
+ 	kmem_cache_free(cic_entry_slab, cic);
+ }
+ 
+@@ -1640,7 +1639,7 @@ static int f2fs_prepare_decomp_mem(struct decompress_io_ctx *dic,
+ 	if (!allow_memalloc_for_decomp(F2FS_I_SB(dic->inode), pre_alloc))
+ 		return 0;
+ 
+-	dic->tpages = page_array_alloc(dic->inode, dic->cluster_size);
++	dic->tpages = page_array_alloc(F2FS_I_SB(dic->inode), dic->cluster_size);
+ 	if (!dic->tpages)
+ 		return -ENOMEM;
+ 
+@@ -1700,7 +1699,7 @@ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
+ 	if (!dic)
+ 		return ERR_PTR(-ENOMEM);
+ 
+-	dic->rpages = page_array_alloc(cc->inode, cc->cluster_size);
++	dic->rpages = page_array_alloc(sbi, cc->cluster_size);
+ 	if (!dic->rpages) {
+ 		kmem_cache_free(dic_entry_slab, dic);
+ 		return ERR_PTR(-ENOMEM);
+@@ -1721,7 +1720,7 @@ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
+ 		dic->rpages[i] = cc->rpages[i];
+ 	dic->nr_rpages = cc->cluster_size;
+ 
+-	dic->cpages = page_array_alloc(dic->inode, dic->nr_cpages);
++	dic->cpages = page_array_alloc(sbi, dic->nr_cpages);
+ 	if (!dic->cpages) {
+ 		ret = -ENOMEM;
+ 		goto out_free;
+@@ -1751,6 +1750,7 @@ static void f2fs_free_dic(struct decompress_io_ctx *dic,
+ 		bool bypass_destroy_callback)
+ {
+ 	int i;
++	struct f2fs_sb_info *sbi = F2FS_I_SB(dic->inode);
+ 
+ 	f2fs_release_decomp_mem(dic, bypass_destroy_callback, true);
+ 
+@@ -1762,7 +1762,7 @@ static void f2fs_free_dic(struct decompress_io_ctx *dic,
+ 				continue;
+ 			f2fs_compress_free_page(dic->tpages[i]);
+ 		}
+-		page_array_free(dic->inode, dic->tpages, dic->cluster_size);
++		page_array_free(sbi, dic->tpages, dic->cluster_size);
+ 	}
+ 
+ 	if (dic->cpages) {
+@@ -1771,10 +1771,10 @@ static void f2fs_free_dic(struct decompress_io_ctx *dic,
+ 				continue;
+ 			f2fs_compress_free_page(dic->cpages[i]);
+ 		}
+-		page_array_free(dic->inode, dic->cpages, dic->nr_cpages);
++		page_array_free(sbi, dic->cpages, dic->nr_cpages);
+ 	}
+ 
+-	page_array_free(dic->inode, dic->rpages, dic->nr_rpages);
++	page_array_free(sbi, dic->rpages, dic->nr_rpages);
+ 	kmem_cache_free(dic_entry_slab, dic);
+ }
+ 
+-- 
+1.9.1
 
-    xts-aes-vaes-avx512: 16171 MB/s
-    qat_aes_xts: 289 MB/s
-
-So, QAT is 55 times slower than the VAES-optimized software code!
-
-It's even slower than the generic C code:
-     
-    xts(ecb(aes-generic)): 305 MB/s
-
-Now, it could be argued that this is user error -- I "should" have created lots
-of asynchronous crypto requests for 4K blocks, submitted them all at once, and
-waited for them to complete.  Thus allowing parallel processing by QAT.
-
-But, that's simply not what fscrypt does.  And even if it did, it could only
-plausibly help for large bios.  Short bios, for which latency is really
-important, would continue to be massively regressed by using QAT for them.
-
-Even for large bios, it would have to get over 55 times faster to be worth it,
-which seems (very?) tenuous.
-
-Also, as is known from dm-crypt which does do async processing, the code that's
-needed to do it is quite complex and error-prone.
-
-In any case, async processing would be a theoretical future improvement.  It's
-simply not what fscrypt does today, or has ever done.
-
-I also found that, even though I built the QAT driver as a loadable module, it
-was loaded automatically on the system and prioritized itself over the VAES-
-accelerated AES-XTS.  Thus, it would be what fscrypt uses on Intel servers where
-the QAT driver is enabled in kconfig, even just as 'm'.
-
-Even disregarding the historical data corruption issues with QAT, I think this
-makes it *very* clear that the QAT driver is harmful to fscrypt users.
-
-And I've seen similar results with the Qualcomm crypto engine
-(https://lore.kernel.org/r/20241203180553.16893-1-ebiggers@kernel.org/).
-So this isn't even unique to this particular accelerator either.
-
-This has gone on for long enough.
-
-- Eric
 
 
 _______________________________________________
