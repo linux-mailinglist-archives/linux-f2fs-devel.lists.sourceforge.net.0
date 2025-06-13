@@ -2,86 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B47C2AD82B4
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jun 2025 07:49:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B895AD82B9
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jun 2025 07:51:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=NQkrGeWMjHqQUpNiE9xcjL4+PQy8FKJ/gaU/nwtKYLQ=; b=bE3BuQORhgFT0/oE4xQNIg5xhJ
-	vqfBKu5FfYynDKynWiYTxKhsiiIxsGY5+zUMjNn/yDXsqOE4b0mEs3/zrqwWgxo7AU+fuiPfWhQoa
-	uqMwut2K+uE12LszqMh0tZ4oeeNZDdOpzYNPyVO0+esxWhQEJs7xsGciNDHOoAcIc6RM=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=Bj8Ctnk6YHikKZNFnidns81yNGEXyhEHR/NMudn4G0U=; b=ak5ChNQ6rBwXfFoYDkImdw6Rg0
+	ORhUOIGh+aGqZnrInGcm0Vc8n8BHLG30kruXRzpS9JaCLOQLtj54lQxv0CfC8ZTnPX7NFBaZdLPTu
+	gxp75oS1mGlfFU2EuvUa2sO1p7OF6iepTFae/9AqA4a77NrTCFHL8uf4cIAN8HCUjxWY=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uPxHh-00017E-UP;
-	Fri, 13 Jun 2025 05:49:01 +0000
+	id 1uPxKC-00028r-CP;
+	Fri, 13 Jun 2025 05:51:36 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uPxHg-00016x-HT
+ (envelope-from <chao@kernel.org>) id 1uPxK1-00028d-RT
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jun 2025 05:49:00 +0000
+ Fri, 13 Jun 2025 05:51:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=u0avzBjdXtua9jShjDLq5tALaHext5lV91IppW/GyD8=; b=bWBOglnHU/SbWUNbWUmmb99jc+
- PpMolKfGGFftcZbVasFwBmXmuZ5qMMu9ihueHHSdaAd3FERGBbPWBroj3Y6eEXpoTvwul3SmNCjHs
- U/5rjYO6EXCJXedQMtwfjb195blw0Sr1OUaEtFfYSoTC50qLKXXd6whiAb/EXezf+AAY=;
+ bh=P7OnObjbTyatAwcl9xi0jl8VZQKal+OhuXLFRzbdShA=; b=BLMclJ161JcoRdPvT2aN7xafU7
+ PUKTrUy2VNWiaeBAeFfTIuEfnPuVXd2F/PFYFN/Wj8wK6m4TcSZ7HBm2TCu8S+LzEfEYRDjReBwiS
+ RWBgbqi680FERL03CxFc/4ECkZYWip4p9pNkjo3O0XycT/FVnVYJIQu+keEUzk2xgqZ4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=u0avzBjdXtua9jShjDLq5tALaHext5lV91IppW/GyD8=; b=AMc6soISuZZBFZQ7TWDPoC6XsY
- ScroY1aZ1dxFB+kuAmewLHbCN3WWPzitlw8USYZywR/RXKMurofxE53Bcga9mZsPYP7h97LoRmO8M
- jGF8dokccNryXXXODYlAzmmfL9Ybdl+yAF+Pe5Sxt1xzGhTRYzHM4hO8k05Y6liqiDSU=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=P7OnObjbTyatAwcl9xi0jl8VZQKal+OhuXLFRzbdShA=; b=U
+ IzqsBku9JeT75TkzTmDnnrJ5QQi4fzGVHeeEmeHcOBhL7VOBZA5iam2d2nR3pIXNSVvAFrLCgs1MV
+ GI+Hnl0k1DEBZfKg8JQ/3JRYs005QgkDY3+efMZiUpzkIzseDPoEmyQfDQfN2AVPW83zgP/sGwq8e
+ 1Rklj78kVcXVcl5Q=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uPxHg-0001WX-0y for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jun 2025 05:49:00 +0000
+ id 1uPxK1-0001hA-Bc for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 13 Jun 2025 05:51:25 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 02726438E2;
- Fri, 13 Jun 2025 05:48:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECCD5C4CEE3;
- Fri, 13 Jun 2025 05:48:45 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 53E685C66DF
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 13 Jun 2025 05:48:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8720CC4CEE3;
+ Fri, 13 Jun 2025 05:51:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749793727;
- bh=EWx+9SzS20cv+g+xd65u2EnKXP1aEWhGwbzrFnYRDqE=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=gLCVFLBEp7olDJ97Ld/YWJva25IGy90KzUX4dX5TdEkS0wR1qv5RjFoqF2Nr7wh6l
- sRF/XVKJP+isQqCas0k/7iIXErLPFOaz+iIPF36bsPYoFIbPSmw6SCxqZpGtX9fFF3
- 4Dgfxleg0uN087MMsFpJ+67XC5G57bxYzSMKh77Svs4R+ezo/rZleqjY6IUE/e8hMq
- suKQbuM5QeDcUwRhwCTe4JhcNv1VXWSed2QJTnh0aBbjt4qQBD7+VokR0l4hcXubDU
- oRS3rgiG4+R/HlHtu/OhsmRotogjnuAUzQY9K2oAGBBvhS7degORQKq3YvlNDHX0zp
- wcG0e36RnovlA==
-Message-ID: <4c7c12d3-4305-4756-9623-0154d7cce6c8@kernel.org>
-Date: Fri, 13 Jun 2025 13:48:52 +0800
+ s=k20201202; t=1749793874;
+ bh=KRqlg4gXsASPE1ojCNZ9bKXs5qtVRlaikINe1tozUSM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=TweeflZXYV+3wWq9a1bm/ghWAbK31EjDAGur8bZZcdSbXVsfjCV8YQ9H+xcJwge16
+ hV7Nf7GR+zT9j3LZTk14gj7ZalL6/J2Uzf3KJv9LIu+AuCeGgL2z/tkBw7T+IkRj03
+ YWHV9aO6X/o15NEzi+nnPkEwiCYQhX8p2QdIYRcmfLMHtPJ1PwpzJICvK5uQ3gfbrJ
+ zVoLj1rrSX1j4deGYL2QfEdg2UE7vnZoCclXTj2g0R6YUga3/uLZOgAG8x4SRJ4J22
+ qndFn76Do3YcRdE04+UNCb+x2koZ8xIkLj4tf5VrmNV1HMWEXoO82KaB0DwTYI19Vi
+ B3LPanFOS/bRA==
+To: jaegeuk@kernel.org
+Date: Fri, 13 Jun 2025 13:51:09 +0800
+Message-Id: <20250613055109.2335-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
-References: <1749779445-29125-1-git-send-email-zhiguo.niu@unisoc.com>
- <1749779445-29125-2-git-send-email-zhiguo.niu@unisoc.com>
-Content-Language: en-US
-In-Reply-To: <1749779445-29125-2-git-send-email-zhiguo.niu@unisoc.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2025/6/13 9:50, Zhiguo Niu wrote: > The decompress_io_ctx
- may be released asynchronously after > I/O completion. If this file is deleted
- immediately after read, > and the kworker of processing post [...] 
+ Content preview: This patch introduces /sys/fs/f2fs/<dev>/reserved_pin_section
+ for tuning @needed parameter of has_not_enough_free_secs(), if we configure
+ it w/ zero, it can avoid f2fs_gc() as much as possible while f [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,13 +86,13 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uPxHg-0001WX-0y
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: compress: fix UAF of
- f2fs_inode_info in f2fs_free_dic
+X-Headers-End: 1uPxK1-0001hA-Bc
+Subject: [f2fs-dev] [PATCH v2] f2fs: introduce reserved_pin_section sysfs
+ entry
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,56 +106,126 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, baocong.liu@unisoc.com,
- Hao_hao.Wang@unisoc.com
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2025/6/13 9:50, Zhiguo Niu wrote:
-> The decompress_io_ctx may be released asynchronously after
-> I/O completion. If this file is deleted immediately after read,
-> and the kworker of processing post_read_wq has not been executed yet
-> due to high workloads, It is possible that the inode(f2fs_inode_info)
-> is evicted and freed before it is used f2fs_free_dic.
-> 
->      The UAF case as below:
->      Thread A                                      Thread B
->      - f2fs_decompress_end_io
->       - f2fs_put_dic
->        - queue_work
->          add free_dic work to post_read_wq
->                                                     - do_unlink
->                                                      - iput
->                                                       - evict
->                                                        - call_rcu
->      This file is deleted after read.
-> 
->      Thread C                                 kworker to process post_read_wq
->      - rcu_do_batch
->       - f2fs_free_inode
->        - kmem_cache_free
->       inode is freed by rcu
->                                               - process_scheduled_works
->                                                - f2fs_late_free_dic
->                                                 - f2fs_free_dic
->                                                  - f2fs_release_decomp_mem
->                                        read (dic->inode)->i_compress_algorithm
-> 
-> This patch store compress_algorithm and sbi in dic to avoid inode UAF.
-> 
-> In addition, the previous solution is deprecated in [1] may cause system hang.
-> [1] https://lore.kernel.org/all/c36ab955-c8db-4a8b-a9d0-f07b5f426c3f@kernel.org
-> 
-> Cc: Daeho Jeong <daehojeong@google.com>
-> Fixes: bff139b49d9f ("f2fs: handle decompress only post processing in softirq")
-> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
-> Signed-off-by: Baocong Liu <baocong.liu@unisoc.com>
+This patch introduces /sys/fs/f2fs/<dev>/reserved_pin_section for tuning
+@needed parameter of has_not_enough_free_secs(), if we configure it w/
+zero, it can avoid f2fs_gc() as much as possible while fallocating on
+pinned file.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v2:
+- assign SM_I(sbi)->ovp_segments after f2fs_build_segment_manager()
+ Documentation/ABI/testing/sysfs-fs-f2fs | 9 +++++++++
+ fs/f2fs/f2fs.h                          | 3 +++
+ fs/f2fs/file.c                          | 5 ++---
+ fs/f2fs/super.c                         | 4 ++++
+ fs/f2fs/sysfs.c                         | 9 +++++++++
+ 5 files changed, 27 insertions(+), 3 deletions(-)
 
-Thanks,
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index bf03263b9f46..c2a233f2a085 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -861,3 +861,12 @@ Description:	This is a read-only entry to show the value of sb.s_encoding_flags,
+ 		SB_ENC_STRICT_MODE_FL            0x00000001
+ 		SB_ENC_NO_COMPAT_FALLBACK_FL     0x00000002
+ 		============================     ==========
++
++What:		/sys/fs/f2fs/<disk>/reserved_pin_section
++Date:		June 2025
++Contact:	"Chao Yu" <chao@kernel.org>
++Description:	This threshold is used to control triggering garbage collection while
++		fallocating on pinned file, so, it can guarantee there is enough free
++		reserved section before preallocating on pinned file.
++		By default, the value is ovp_sections, especially, for zoned ufs, the
++		value is 1.
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 9333a22b9a01..fa27498202a3 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1724,6 +1724,9 @@ struct f2fs_sb_info {
+ 	/* for skip statistic */
+ 	unsigned long long skipped_gc_rwsem;		/* FG_GC only */
+ 
++	/* free sections reserved for pinned file */
++	unsigned int reserved_pin_section;
++
+ 	/* threshold for gc trials on pinned files */
+ 	unsigned short gc_pin_file_threshold;
+ 	struct f2fs_rwsem pin_sem;
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 696131e655ed..a909f79db178 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1887,9 +1887,8 @@ static int f2fs_expand_inode_data(struct inode *inode, loff_t offset,
+ 			}
+ 		}
+ 
+-		if (has_not_enough_free_secs(sbi, 0, f2fs_sb_has_blkzoned(sbi) ?
+-			ZONED_PIN_SEC_REQUIRED_COUNT :
+-			GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi)))) {
++		if (has_not_enough_free_secs(sbi, 0,
++				sbi->reserved_pin_section)) {
+ 			f2fs_down_write(&sbi->gc_lock);
+ 			stat_inc_gc_call_count(sbi, FOREGROUND);
+ 			err = f2fs_gc(sbi, &gc_control);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 57adeff5ef25..e0ecc341f1d3 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -5017,6 +5017,10 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
+ 	/* get segno of first zoned block device */
+ 	sbi->first_seq_zone_segno = get_first_seq_zone_segno(sbi);
+ 
++	sbi->reserved_pin_section = f2fs_sb_has_blkzoned(sbi) ?
++			ZONED_PIN_SEC_REQUIRED_COUNT :
++			GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi));
++
+ 	/* Read accumulated write IO statistics if exists */
+ 	seg_i = CURSEG_I(sbi, CURSEG_HOT_NODE);
+ 	if (__exist_node_summaries(sbi))
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 75134d69a0bd..51be7ffb38c5 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -824,6 +824,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 		return count;
+ 	}
+ 
++	if (!strcmp(a->attr.name, "reserved_pin_section")) {
++		if (t > GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi)))
++			return -EINVAL;
++		*ui = (unsigned int)t;
++		return count;
++	}
++
+ 	*ui = (unsigned int)t;
+ 
+ 	return count;
+@@ -1130,6 +1137,7 @@ F2FS_SBI_GENERAL_RO_ATTR(unusable_blocks_per_sec);
+ F2FS_SBI_GENERAL_RW_ATTR(blkzone_alloc_policy);
+ #endif
+ F2FS_SBI_GENERAL_RW_ATTR(carve_out);
++F2FS_SBI_GENERAL_RW_ATTR(reserved_pin_section);
+ 
+ /* STAT_INFO ATTR */
+ #ifdef CONFIG_F2FS_STAT_FS
+@@ -1323,6 +1331,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(last_age_weight),
+ 	ATTR_LIST(max_read_extent_count),
+ 	ATTR_LIST(carve_out),
++	ATTR_LIST(reserved_pin_section),
+ 	NULL,
+ };
+ ATTRIBUTE_GROUPS(f2fs);
+-- 
+2.40.1
+
 
 
 _______________________________________________
