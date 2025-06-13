@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E8F1AD82A2
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jun 2025 07:39:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B47C2AD82B4
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jun 2025 07:49:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=zIHHjey0U08vMdMOnEyZwKJZIsy5CteZQzZPWIPZpUU=; b=mH1V5MwoE2hJEMwGCPKVZAkdmh
-	JkYJQ1mqoVNbIWADlUsxM+Dr8Ur+AUUVNK3RijqbTh5tjNnxUKnvq+7gQ4EusjBZQWO+4ZUsftKCV
-	/XV1p8kTCiqlupKWPhPn9ElT+nmBxfbzRvE55a6x9snvacE/WzPpSXGqOSGFysdHj7iI=;
+	bh=NQkrGeWMjHqQUpNiE9xcjL4+PQy8FKJ/gaU/nwtKYLQ=; b=bE3BuQORhgFT0/oE4xQNIg5xhJ
+	vqfBKu5FfYynDKynWiYTxKhsiiIxsGY5+zUMjNn/yDXsqOE4b0mEs3/zrqwWgxo7AU+fuiPfWhQoa
+	uqMwut2K+uE12LszqMh0tZ4oeeNZDdOpzYNPyVO0+esxWhQEJs7xsGciNDHOoAcIc6RM=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uPx7y-00005z-3z;
-	Fri, 13 Jun 2025 05:38:58 +0000
+	id 1uPxHh-00017E-UP;
+	Fri, 13 Jun 2025 05:49:01 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uPx7w-00005i-Gz
+ (envelope-from <chao@kernel.org>) id 1uPxHg-00016x-HT
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jun 2025 05:38:56 +0000
+ Fri, 13 Jun 2025 05:49:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=g2YD6YkA2BPfWCASKq8A0+0o6zf2ITCgn5rZI4rO0O4=; b=GougI10BGJuSTUv/5epV071Azz
- kSRvViivYMD36K/9CxoVjcsj9kD+70WabOgj9dxi7oe3qx/JELFZXJl8S1MgNexhel9n/snNmMs+y
- DxfX6ezow4VW95FBc/UCo0AfhP2tI9DyK3FjioahW8kg3bDKMgGbLQob1PUHS5imOMq4=;
+ bh=u0avzBjdXtua9jShjDLq5tALaHext5lV91IppW/GyD8=; b=bWBOglnHU/SbWUNbWUmmb99jc+
+ PpMolKfGGFftcZbVasFwBmXmuZ5qMMu9ihueHHSdaAd3FERGBbPWBroj3Y6eEXpoTvwul3SmNCjHs
+ U/5rjYO6EXCJXedQMtwfjb195blw0Sr1OUaEtFfYSoTC50qLKXXd6whiAb/EXezf+AAY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,48 +40,48 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=g2YD6YkA2BPfWCASKq8A0+0o6zf2ITCgn5rZI4rO0O4=; b=XZrgApFv/eVckdsY9Xls16C3Eq
- rprBxm9l3hGm5GNFCmPKLFNno12EEsWvhV3I9dsmsjlj901NfUa/x9Mesxva07eIwkJMW5ixb51ED
- 4SHvDGVoPA8+PQIk3SE1kDNBMUUD609Tuu9NqaqaTyBuO+1ev4eiMwPq3gkmvtdnmT1U=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=u0avzBjdXtua9jShjDLq5tALaHext5lV91IppW/GyD8=; b=AMc6soISuZZBFZQ7TWDPoC6XsY
+ ScroY1aZ1dxFB+kuAmewLHbCN3WWPzitlw8USYZywR/RXKMurofxE53Bcga9mZsPYP7h97LoRmO8M
+ jGF8dokccNryXXXODYlAzmmfL9Ybdl+yAF+Pe5Sxt1xzGhTRYzHM4hO8k05Y6liqiDSU=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uPx7w-0000mi-53 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jun 2025 05:38:56 +0000
+ id 1uPxHg-0001WX-0y for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 13 Jun 2025 05:49:00 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 61B34629D7;
- Fri, 13 Jun 2025 05:38:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50AB4C4CEE3;
- Fri, 13 Jun 2025 05:38:48 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 02726438E2;
+ Fri, 13 Jun 2025 05:48:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECCD5C4CEE3;
+ Fri, 13 Jun 2025 05:48:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749793130;
- bh=rOd4/KK6J7m10xGotXb7C6crXWdrl9XLcSb1EYIPMkc=;
+ s=k20201202; t=1749793727;
+ bh=EWx+9SzS20cv+g+xd65u2EnKXP1aEWhGwbzrFnYRDqE=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=FRIS2iuapAF0JpPVJLBnt5y41GRTlixpKIpsY6wJ1oC7yyrdW+C7OVuYamnkd03bZ
- vawny/sqIj6TdjqsWiro9SExg3bxA3MMvqmP+jEpCIDNrmT0XIB5gK1qHjQf7aUDBx
- K3hAoMeIjRZCaQIDi0MimNZFbTWpm1BdRqaOCFJ7TnIo8+j19s1ESHP3pamY9uWqRy
- hPI23twkRqPnD/lzly+16hyRZaH3svgBlCyADAOTH23aRQ5JePMnjbC2UZ7nPFU6DN
- NuYrR/KN1YE3OaqeKNbOp3h03JQY8F4qMTWLzwbbCeZtpTRTFhl1OUuXS++MkArdwZ
- MDZ1TX+ZZdKHA==
-Message-ID: <a5ec2625-5ad4-4ffd-b8bb-00bb0e4e29b6@kernel.org>
-Date: Fri, 13 Jun 2025 13:38:55 +0800
+ b=gLCVFLBEp7olDJ97Ld/YWJva25IGy90KzUX4dX5TdEkS0wR1qv5RjFoqF2Nr7wh6l
+ sRF/XVKJP+isQqCas0k/7iIXErLPFOaz+iIPF36bsPYoFIbPSmw6SCxqZpGtX9fFF3
+ 4Dgfxleg0uN087MMsFpJ+67XC5G57bxYzSMKh77Svs4R+ezo/rZleqjY6IUE/e8hMq
+ suKQbuM5QeDcUwRhwCTe4JhcNv1VXWSed2QJTnh0aBbjt4qQBD7+VokR0l4hcXubDU
+ oRS3rgiG4+R/HlHtu/OhsmRotogjnuAUzQY9K2oAGBBvhS7degORQKq3YvlNDHX0zp
+ wcG0e36RnovlA==
+Message-ID: <4c7c12d3-4305-4756-9623-0154d7cce6c8@kernel.org>
+Date: Fri, 13 Jun 2025 13:48:52 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
 References: <1749779445-29125-1-git-send-email-zhiguo.niu@unisoc.com>
+ <1749779445-29125-2-git-send-email-zhiguo.niu@unisoc.com>
 Content-Language: en-US
-In-Reply-To: <1749779445-29125-1-git-send-email-zhiguo.niu@unisoc.com>
+In-Reply-To: <1749779445-29125-2-git-send-email-zhiguo.niu@unisoc.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2025/6/13 9:50, Zhiguo Niu wrote: > No logic changes, just
- cleanup and prepare for fixing the UAF issue > in f2fs_free_dic. > >
- Signed-off-by:
- Zhiguo Niu <zhiguo.niu@unisoc.com> > Signed-off-by: Ba [...] 
+ Content preview:  On 2025/6/13 9:50, Zhiguo Niu wrote: > The decompress_io_ctx
+ may be released asynchronously after > I/O completion. If this file is deleted
+ immediately after read, > and the kworker of processing post [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,13 +89,13 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uPx7w-0000mi-53
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: compress: change the first
- parameter of page_array_{alloc, free} to sbi
+X-Headers-End: 1uPxHg-0001WX-0y
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: compress: fix UAF of
+ f2fs_inode_info in f2fs_free_dic
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,9 +117,42 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2025/6/13 9:50, Zhiguo Niu wrote:
-> No logic changes, just cleanup and prepare for fixing the UAF issue
-> in f2fs_free_dic.
+> The decompress_io_ctx may be released asynchronously after
+> I/O completion. If this file is deleted immediately after read,
+> and the kworker of processing post_read_wq has not been executed yet
+> due to high workloads, It is possible that the inode(f2fs_inode_info)
+> is evicted and freed before it is used f2fs_free_dic.
 > 
+>      The UAF case as below:
+>      Thread A                                      Thread B
+>      - f2fs_decompress_end_io
+>       - f2fs_put_dic
+>        - queue_work
+>          add free_dic work to post_read_wq
+>                                                     - do_unlink
+>                                                      - iput
+>                                                       - evict
+>                                                        - call_rcu
+>      This file is deleted after read.
+> 
+>      Thread C                                 kworker to process post_read_wq
+>      - rcu_do_batch
+>       - f2fs_free_inode
+>        - kmem_cache_free
+>       inode is freed by rcu
+>                                               - process_scheduled_works
+>                                                - f2fs_late_free_dic
+>                                                 - f2fs_free_dic
+>                                                  - f2fs_release_decomp_mem
+>                                        read (dic->inode)->i_compress_algorithm
+> 
+> This patch store compress_algorithm and sbi in dic to avoid inode UAF.
+> 
+> In addition, the previous solution is deprecated in [1] may cause system hang.
+> [1] https://lore.kernel.org/all/c36ab955-c8db-4a8b-a9d0-f07b5f426c3f@kernel.org
+> 
+> Cc: Daeho Jeong <daehojeong@google.com>
+> Fixes: bff139b49d9f ("f2fs: handle decompress only post processing in softirq")
 > Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
 > Signed-off-by: Baocong Liu <baocong.liu@unisoc.com>
 
