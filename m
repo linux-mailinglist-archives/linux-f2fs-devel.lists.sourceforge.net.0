@@ -2,120 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 886E5AD9920
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Jun 2025 02:41:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C116ADA10E
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 Jun 2025 06:54:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Message-ID:Mime-Version:Date:Sender:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=w4ZPqKejkYPTxHXvKL4cgVyvq5pu1TaG2eyfIJhCpTk=; b=dcFqcG2tzKkj8oB1Ouc4F7MnPI
-	dQ6TPECpF647UsnHEu9kY8SwmqB24lm3SfOCLNVipAcdYZyAc6Ra2E5GknGuBM/5NuLGGuex0rU1X
-	FNncqOzCstwTiBkxPaE4FzE+UsoyXaYbdAt+LvhUFsFqmsOWAtALKWpZgcF07/t/itg0=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=X2qW72oZ/Ev6dxVY4XjpPYtmkfGWvRI6rXmh2mU2ydE=; b=IS8V3LZcxevz8SzZYnvC2bi2rN
+	gfBLgIWB/jyWWrtRLRU+JI0Q1+dVALLcnzrTWYaoZaJBPXF2xkAlgEcQDwYbx8QAZRZAAHQkQKD+2
+	0NKhVi1tC6CSwbEQVg2lxAKy/2QPyIMTgS2klq80OlJjv5sl7NqJJQnNMF6gPG0NXMPA=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uQExo-0007WV-FI;
-	Sat, 14 Jun 2025 00:41:40 +0000
+	id 1uQfNR-0000TF-1q;
+	Sun, 15 Jun 2025 04:53:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3tq5MaAcKAI8v0D44xxz77z4x.v75@flex--chullee.bounces.google.com>)
- id 1uQExn-0007WG-6F for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 14 Jun 2025 00:41:39 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <ebiggers@kernel.org>) id 1uQfNP-0000T9-TT
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 15 Jun 2025 04:53:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
- Mime-Version:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EDZ0GeGehA0Gll2nJsO8Q1m9PTkKCGGw9+fLLiuEewI=; b=MtSMLog2YtXYL6m8VeST1Fp4kY
- sFq3yGY2w1ixGFK5ux69gMMH6mBrCrI3+36XbNYaBlPYOzFW935tvcpgvTW0/LoSnqoBPcnk4VJOY
- BeujpZUZHBxikWnnyNeMBI3cAAokAGHiNdZz80LXDf8FM21g3p7zIKqosISANCu+K7C8=;
+ bh=ehat2ZSrQr1gCyGC8v7FJXXUICcQLrjl3bZgAk7qcwE=; b=K4pBJk1GAllg7dHOfUn6RVAR1Y
+ is32aEJgkJVSG6ZOSmbuL8zI/75nx37Yp5IessZRw5miXvomaJqSUeOrhXeHLVleK4ScJjvfSkK+j
+ y7eLnpayN5L1MpHDoosSoBzJWg2TJpEEfAZfX7Tq89bjnBotCCY95+Ww837ASmtuHWG8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=EDZ0GeGehA0Gll2nJsO8Q1m9PTkKCGGw9+fLLiuEewI=; b=b
- QKsTFGmvGJ2jy7RUGm63LLFfFo4TLiTrHWWKgqTsImBrwf39AC6YY5emAbuslhPZta4So6bksC00z
- smdAbN7PTtAd4RRqa4hMiJRdV+VOYB9DH6tQVdGxQgiBOEsCx57+E0amBS4oy73Q4TkMmgXjWHDPa
- Qn1SZuCz9+vgmO7s=;
-Received: from mail-vk1-f201.google.com ([209.85.221.201])
+ List-Owner:List-Archive; bh=ehat2ZSrQr1gCyGC8v7FJXXUICcQLrjl3bZgAk7qcwE=; b=X
+ 9pkPHw8/Z2OwlQsg7GdOdpvQsF6zxagStuEgBfDFjkfVToFwMH0vK7itO43x4rBsbI5of/qc2rdJK
+ IpcyrV/PBLPHiwZ1F1TqdWGqLjKMpcLD6u2BUw2fJxM9Dyl/tS1UtI86tXTjoSoZ2hJ3BR6AL43iM
+ r6ulp9Q2AG3JIAig=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uQExm-0000uF-K3 for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 14 Jun 2025 00:41:39 +0000
-Received: by mail-vk1-f201.google.com with SMTP id
- 71dfb90a1353d-5313d3a3cccso968833e0c.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 13 Jun 2025 17:41:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1749861692; x=1750466492;
- darn=lists.sourceforge.net; 
- h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=EDZ0GeGehA0Gll2nJsO8Q1m9PTkKCGGw9+fLLiuEewI=;
- b=X1Lfli/HYd2QAXlqVy7SGHsEAFhWVMTwuk1l80gwZf5Wft0BbH4gDyj77nIOkHie24
- YO22tx2z5oPBVllCW6fp8ziezkWOueeu60iSi/c+I249A69O/H4TnDKv3bmsCIzc6z+b
- h67XSMHsaLEtv12p4BG4Naq2BOcaZ6zmFfUM/SbxT1rOeZGyl6PrkTQ6COeNdyQAGGDu
- jlvQAHEnRB+e6nntsXdv1Zuc0Ua9WGAf3K7jrxylveKIGendUOSZ9HAYIffmL6Gt8YL0
- NUtv86JAsEWa4O5qAtqZhDUOTsuGn+n71g2+/tO1J7H/nRgz8M9ogE1+1RA3sFllrho4
- UOng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749861692; x=1750466492;
- h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=EDZ0GeGehA0Gll2nJsO8Q1m9PTkKCGGw9+fLLiuEewI=;
- b=UkZonIZv7Js7r4oKK3foTU1VEOf41vv0qyTVwqzhW7Up5O4ZnDBvqRNgl6J07JAsHn
- XVPDThCa0QOXTr4cqjEDhgvK0xj5jR/i7eYPC276hRRpsQ5Yy2hzbd+oot8gpC1MnFNQ
- MQwkJM42hEUlyIxfx1J5/VS6G3KCUgoLzIA0//PfGBP84fpHm9q8K4nA4FNet3UJPqKH
- xiOSQWHfvVh0Iw8+eb4LocbSiQPo90Vb9dXZGlqVQhs3s11ZpCXcaPqtbxUgOAy1eI2C
- qMsp2cvrhdqj9boNOVeTSJhWBVyUC7gQne/B4UWb2+sMecAI6OdxT0sWKf9DUpfwMW79
- PvLA==
-X-Gm-Message-State: AOJu0Yzq/YfEyq5d4/SbUnuxOF9eUDqln9GDZBGPB5zWHgu8eFQVwCcX
- hXpNUVX9FraSj00PWw+3YCdNx1rnXVMdTDa+ZFdLqMjxnZ5j35UXEAu/b49iyoRPxmtPbDwAI40
- PynNCLGq8MQ==
-X-Google-Smtp-Source: AGHT+IH6cHbeuVomBubEU/H5/k3iTI9tm1PNsNpEwLxJnwJmStbefK/4qTee7UH7cNA7cacHbL9vu2hmaOWg
-X-Received: from pfbdi6.prod.google.com ([2002:a05:6a00:4806:b0:747:cffb:bb21])
- (user=chullee job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6a00:2411:b0:73d:ff02:8d83
- with SMTP id d2e1a72fcca58-7489cdebf2dmr1430818b3a.3.1749855926367; Fri, 13
- Jun 2025 16:05:26 -0700 (PDT)
-Date: Fri, 13 Jun 2025 16:05:22 -0700
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.50.0.rc1.591.g9c95f17f64-goog
-Message-ID: <20250613230522.380370-1-chullee@google.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
-X-Spam-Score: -7.7 (-------)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uQfNP-0008D5-7l for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 15 Jun 2025 04:53:51 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id CAA0B4A7A8;
+ Sun, 15 Jun 2025 04:53:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 560C4C4CEE3;
+ Sun, 15 Jun 2025 04:53:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1749963225;
+ bh=jKskpqcoXOguF1H1TjZ0pWmBZVDnOT0/xNqcoD0cSAE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Ho4jYYIKxZ5jOqawvrhaEPBhEZPCrM8ChRozSncyaAqNV+riPwKkyanQnMEwAdbVm
+ /XRV6xyzV0raa/vd5Vhy6VpZ8GrTZtwKLpy7aNs7hKsQojtsMYvTe4DMgacX8pDInr
+ a0nfAZcxldXCif58iYfsInWiFqV6glddb5yOs9caUGyMCurbwn84kg4SOsvfVqmUGB
+ Wo3qxBpEPl9p0JEvf41ii0/lxxoogeSXHuFEhDZ2/SG3fUxUxujR9c7exo5bBPUZzE
+ GPlWpZSiPtJDcT+Br/m9zwgcOyyBKtPXd8G/lx6adWU0CoQnHdvVGNZu/NSTRtgW+q
+ /J7vgLI1jS06A==
+To: linux-fscrypt@vger.kernel.org
+Date: Sat, 14 Jun 2025 21:51:45 -0700
+Message-ID: <20250615045145.224567-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.49.0
+MIME-Version: 1.0
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  A new command 'test_create_perf',
- has been introduced to measure
- the performance of creating and deleting many files. Signed-off-by: Daniel
- Lee <chullee@google.com> --- v2: Rename command and make fsync optional ---
- tools/f2fs_io/f2fs_io.c | 139 ++++++++++++++++++++++++++++++++++++++++ 1
- file changed, 139 insertions( [...] 
- Content analysis details:   (-7.7 points, 5.0 required)
+ Content preview: From: Eric Biggers <ebiggers@google.com> Make fscrypt no
+ longer
+ use Crypto API drivers for non-inline crypto accelerators, even when the
+ Crypto API prioritizes them over CPU-based code (which unfortunately it often
+ does). These drivers tend [...] 
+ Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -7.5 USER_IN_DEF_DKIM_WL From: address is in the default DKIM welcome-list
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [172.234.252.31 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.221.201 listed in wl.mailspike.net]
- -0.1 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1uQExm-0000uF-K3
-Subject: [f2fs-dev] [PATCH v2] f2fs_io: add test_create_perf command
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uQfNP-0008D5-7l
+Subject: [f2fs-dev] [PATCH v2] fscrypt: don't use problematic non-inline
+ crypto accelerators
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,182 +109,197 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Daniel Lee via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Daniel Lee <chullee@google.com>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+From: Eric Biggers via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Eric Biggers <ebiggers@kernel.org>
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org,
+ linux-crypto@vger.kernel.org, ceph-devel@vger.kernel.org,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-A new command 'test_create_perf', has been introduced to measure
-the performance of creating and deleting many files.
+From: Eric Biggers <ebiggers@google.com>
 
-Signed-off-by: Daniel Lee <chullee@google.com>
----
-v2: Rename command and make fsync optional
----
- tools/f2fs_io/f2fs_io.c | 139 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 139 insertions(+)
+Make fscrypt no longer use Crypto API drivers for non-inline crypto
+accelerators, even when the Crypto API prioritizes them over CPU-based
+code (which unfortunately it often does).  These drivers tend to be
+really problematic, especially for fscrypt's synchronous workload.
 
-diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index 6531b55..6831e78 100644
---- a/tools/f2fs_io/f2fs_io.c
-+++ b/tools/f2fs_io/f2fs_io.c
-@@ -2092,6 +2092,144 @@ static void do_ftruncate(int argc, char **argv, const struct cmd_desc *cmd)
- 	exit(0);
- }
+Specifically, exclude drivers that have CRYPTO_ALG_KERN_DRIVER_ONLY or
+CRYPTO_ALG_ALLOCATES_MEMORY set.  (Later, CRYPTO_ALG_ASYNC should be
+excluded too.  That's omitted for now to keep this commit backportable,
+since until recently some CPU-based code had CRYPTO_ALG_ASYNC set.)
+
+There are two major issues with these drivers: bugs and performance.
+
+First, these drivers tend to be buggy.  They're fundamentally much more
+error-prone and harder to test than the CPU-based code, and they often
+don't get tested before kernel releases.  Released drivers have
+en/decrypted data incorrectly.  These bugs cause real issues for fscrypt
+users who often didn't even want to use these drivers, for example:
+
+- https://github.com/google/fscryptctl/issues/32
+- https://github.com/google/fscryptctl/issues/9
+- https://lore.kernel.org/r/PH0PR02MB731916ECDB6C613665863B6CFFAA2@PH0PR02MB7319.namprd02.prod.outlook.com
+
+These drivers have also caused issues for dm-crypt users, including data
+corruption and deadlocks.  Since Linux v5.10, dm-crypt has disabled most
+of these drivers by excluding CRYPTO_ALG_ALLOCATES_MEMORY.
+
+Second, the CPU-based crypto tends to be faster, often *much* faster.
+This may seem counterintuitive, but benchmarks clearly show it.  There's
+a *lot* of overhead associated with going to a hardware driver, off the
+CPU, and back again.  Measuring synchronous AES-256-XTS encryption of
+4096-byte messages (fscrypt's workload) on two platforms with non-inline
+crypto accelerators that I have access to:
+
+  Intel Emerald Rapids server:
+
+     xts-aes-vaes-avx512:  16171 MB/s  [CPU-based, Vector AES]
+     xts(ecb(aes-generic)):  305 MB/s  [CPU-based, generic C code]
+     qat_aes_xts:            289 MB/s  [Offload, Intel QuickAssist]
+
+  Qualcomm SM8650 HDK:
+
+     xts-aes-ce:            4301 MB/s  [CPU-based, ARMv8 Crypto Extensions]
+     xts(ecb(aes-generic)):  265 MB/s  [CPU-based, generic C code]
+     xts-aes-qce:             73 MB/s  [Offload, Qualcomm Crypto Engine]
+
+So, using the "accelerators" is over 50 times slower than just using the
+CPU.  Not only that, it's even slower than the generic C code, which
+suggests that even on platforms whose CPUs lack AES instructions the
+performance benefit of any accelerator would be marginal at best.
+
+The usefulness of the accelerators could be improved with a different
+software architecture that allows blocks to be efficiently en/decrypted
+in parallel.  But fscrypt does not do that today, and even the async
+support in the Crypto API isn't really all that efficient.  And even if
+the accelerator was used perfectly efficiently, it seems unlikely to
+help on small I/O requests, for which latency is really important.
+
+As of this writing, the Crypto API prioritizes qat_aes_xts over
+xts-aes-vaes-avx512.  Therefore, this commit greatly improves fscrypt
+performance on Intel servers that have QAT and the QAT driver enabled.
+qat_aes_xts is going to be deprioritized in the Crypto API (like I did
+for xts-aes-qce recently too).  But as this seems to be a common pattern
+with all the "accelerators", fscrypt should just disable all of them.
+
+An argument that has been given in favor of non-inline crypto
+accelerators is that they can protect keys in hardware.  But fscrypt
+does not take advantage of that, so it is irrelevant.  (Also, it would
+be quite difficult for fscrypt to do that.)
+
+Note that fscrypt does support inline encryption engines, using raw or
+hardware-wrapped keys.  These actually do work well and are widely used.
+These do not use the "Crypto API" and are unaffected by this commit.
+
+Fixes: b30ab0e03407 ("ext4 crypto: add ext4 encryption facilities")
+Cc: stable@vger.kernel.org
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+
+Changed in v2:
+- Improved commit message and comment
+- Dropped CRYPTO_ALG_ASYNC from the mask, to make this patch
+  backport-friendly
+- Added Fixes and Cc stable
+
+ fs/crypto/fscrypt_private.h | 16 ++++++++++++++++
+ fs/crypto/hkdf.c            |  2 +-
+ fs/crypto/keysetup.c        |  3 ++-
+ fs/crypto/keysetup_v1.c     |  3 ++-
+ 4 files changed, 21 insertions(+), 3 deletions(-)
+
+diff --git a/fs/crypto/fscrypt_private.h b/fs/crypto/fscrypt_private.h
+index c1d92074b65c5..0e95c7a095d49 100644
+--- a/fs/crypto/fscrypt_private.h
++++ b/fs/crypto/fscrypt_private.h
+@@ -43,10 +43,26 @@
+  * hardware-wrapped keys has made it misleading as it's only for raw keys.
+  * Don't use it in kernel code; use one of the above constants instead.
+  */
+ #undef FSCRYPT_MAX_KEY_SIZE
  
-+#define test_create_perf_desc "measure file creation speed"
-+#define test_create_perf_help						\
-+"f2fs_io test_create_perf [-s] <dir> <num_files> <size_kb>\n\n"		\
-+"Measures file creation and deletion performance.\n"			\
-+"  <dir>          The target directory where files will be created.\n"	\
-+"  <num_files>    The total number of files to create and delete.\n"	\
-+"  <size_kb>      The size of each file in kb.\n"			\
-+"  [-s]           Call fsync() after each file creation to measure\n"
++/*
++ * This mask is passed as the third argument to the crypto_alloc_*() functions
++ * to prevent fscrypt from using the Crypto API drivers for non-inline crypto
++ * accelerators.  Those drivers have been problematic for fscrypt.  fscrypt
++ * users have reported hangs and even incorrect en/decryption with these
++ * drivers.  Since going to the driver, off CPU, and back again is really slow,
++ * such drivers can be over 50 times slower than the CPU-based code for
++ * fscrypt's synchronous workload.  Even on platforms that lack AES instructions
++ * on the CPU, any performance benefit is likely to be marginal at best.
++ *
++ * Note that fscrypt also supports inline encryption engines.  Those don't use
++ * the Crypto API and work much better than non-inline accelerators.
++ */
++#define FSCRYPT_CRYPTOAPI_MASK \
++	(CRYPTO_ALG_ALLOCATES_MEMORY | CRYPTO_ALG_KERN_DRIVER_ONLY)
 +
-+static void do_test_create_perf(int argc, char **argv, const struct cmd_desc *cmd)
-+{
-+	bool do_fsync = false;
-+	int opt;
-+	char *dir;
-+	int num_files;
-+	int size_kb;
-+	char *write_buffer = NULL;
-+
-+	while ((opt = getopt(argc, argv, "s")) != -1) {
-+		switch (opt) {
-+		case 's':
-+			do_fsync = true;
-+			break;
-+		default:
-+			fputs(cmd->cmd_help, stderr);
-+			exit(1);
-+		}
-+	}
-+
-+	argc -= optind;
-+	argv += optind;
-+
-+	if (argc != 3) {
-+		fputs("Excess arguments\n\n", stderr);
-+		fputs(cmd->cmd_help, stderr);
-+		exit(1);
-+	}
-+
-+	dir = argv[0];
-+	num_files = atoi(argv[1]);
-+	size_kb = atoi(argv[2]);
-+
-+	if (num_files <= 0) {
-+		fprintf(stderr, "Error: Number of files must be positive.\n");
-+		exit(1);
-+	}
-+
-+	if (size_kb > 0) {
-+		write_buffer = malloc(size_kb * 1024);
-+		if (!write_buffer) {
-+			perror("Failed to allocate write buffer");
-+			exit(1);
-+		}
-+		memset(write_buffer, 'a', size_kb * 1024);
-+	}
-+
-+	// Creation Phase
-+	printf("Starting test: Creating %d files of %dKB each in %s (fsync: %s)\n",
-+		num_files, size_kb, dir,
-+		do_fsync ? "Enabled" : "Disabled");
-+
-+	struct timespec create_start, create_end;
-+
-+	clock_gettime(CLOCK_MONOTONIC, &create_start);
-+
-+	for (int i = 0; i < num_files; i++) {
-+		char path[1024];
-+
-+		snprintf(path, sizeof(path), "%s/test_file_%d", dir, i);
-+
-+		int fd = open(path, O_WRONLY | O_CREAT, 0644);
-+
-+		if (fd < 0) {
-+			perror("Error opening file");
-+			continue;
-+		}
-+		if (size_kb > 0) {
-+			if (write(fd, write_buffer, size_kb * 1024) < 0)
-+				perror("Error writing to file");
-+		}
-+
-+		if (do_fsync)
-+			fsync(fd);
-+
-+		close(fd);
-+	}
-+
-+	clock_gettime(CLOCK_MONOTONIC, &create_end);
-+
-+
-+	// Deletion Phase
-+	printf("Deleting %d created files...\n", num_files);
-+
-+	struct timespec del_start, del_end;
-+
-+	clock_gettime(CLOCK_MONOTONIC, &del_start);
-+
-+	for (int i = 0; i < num_files; i++) {
-+		char path[1024];
-+
-+		snprintf(path, sizeof(path), "%s/test_file_%d", dir, i);
-+		if (unlink(path) != 0)
-+			perror("Error unlinking file");
-+	}
-+	sync();
-+
-+	clock_gettime(CLOCK_MONOTONIC, &del_end);
-+
-+	long create_seconds = create_end.tv_sec - create_start.tv_sec;
-+	long create_ns = create_end.tv_nsec - create_start.tv_nsec;
-+	double create_time_s = (double)create_seconds + (double)create_ns / 1000000000.0;
-+	double create_throughput = (create_time_s > 0) ? (num_files / create_time_s) : 0;
-+
-+	long del_seconds = del_end.tv_sec - del_start.tv_sec;
-+	long del_ns = del_end.tv_nsec - del_start.tv_nsec;
-+	double del_time_s = (double)del_seconds + (double)del_ns / 1000000000.0;
-+	double del_throughput = (del_time_s > 0) ? (num_files / del_time_s) : 0;
-+
-+	printf("Operation,total_files,file_size_kb,total_time_s,throughput_files_per_sec\n");
-+
-+	printf("CREATE,%d,%d,%.4f,%.2f\n",
-+		   num_files,
-+		   size_kb,
-+		   create_time_s,
-+		   create_throughput);
-+
-+	printf("DELETE,%d,%d,%.4f,%.2f\n",
-+		   num_files,
-+		   size_kb,
-+		   del_time_s,
-+		   del_throughput);
-+
-+	if (write_buffer)
-+		free(write_buffer);
-+
-+	exit(0);
-+}
-+
- #define CMD_HIDDEN 	0x0001
- #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
- #define _CMD(name) { #name, do_##name, NULL, NULL, CMD_HIDDEN }
-@@ -2140,6 +2278,7 @@ const struct cmd_desc cmd_list[] = {
- 	CMD(get_advise),
- 	CMD(ioprio),
- 	CMD(ftruncate),
-+	CMD(test_create_perf),
- 	{ NULL, NULL, NULL, NULL, 0 }
- };
+ #define FSCRYPT_CONTEXT_V1	1
+ #define FSCRYPT_CONTEXT_V2	2
  
+ /* Keep this in sync with include/uapi/linux/fscrypt.h */
+ #define FSCRYPT_MODE_MAX	FSCRYPT_MODE_AES_256_HCTR2
+diff --git a/fs/crypto/hkdf.c b/fs/crypto/hkdf.c
+index 0f3028adc9c72..5b9c21cfe2b45 100644
+--- a/fs/crypto/hkdf.c
++++ b/fs/crypto/hkdf.c
+@@ -56,11 +56,11 @@ int fscrypt_init_hkdf(struct fscrypt_hkdf *hkdf, const u8 *master_key,
+ 	struct crypto_shash *hmac_tfm;
+ 	static const u8 default_salt[HKDF_HASHLEN];
+ 	u8 prk[HKDF_HASHLEN];
+ 	int err;
+ 
+-	hmac_tfm = crypto_alloc_shash(HKDF_HMAC_ALG, 0, 0);
++	hmac_tfm = crypto_alloc_shash(HKDF_HMAC_ALG, 0, FSCRYPT_CRYPTOAPI_MASK);
+ 	if (IS_ERR(hmac_tfm)) {
+ 		fscrypt_err(NULL, "Error allocating " HKDF_HMAC_ALG ": %ld",
+ 			    PTR_ERR(hmac_tfm));
+ 		return PTR_ERR(hmac_tfm);
+ 	}
+diff --git a/fs/crypto/keysetup.c b/fs/crypto/keysetup.c
+index 0d71843af9469..d8113a7196979 100644
+--- a/fs/crypto/keysetup.c
++++ b/fs/crypto/keysetup.c
+@@ -101,11 +101,12 @@ fscrypt_allocate_skcipher(struct fscrypt_mode *mode, const u8 *raw_key,
+ 			  const struct inode *inode)
+ {
+ 	struct crypto_skcipher *tfm;
+ 	int err;
+ 
+-	tfm = crypto_alloc_skcipher(mode->cipher_str, 0, 0);
++	tfm = crypto_alloc_skcipher(mode->cipher_str, 0,
++				    FSCRYPT_CRYPTOAPI_MASK);
+ 	if (IS_ERR(tfm)) {
+ 		if (PTR_ERR(tfm) == -ENOENT) {
+ 			fscrypt_warn(inode,
+ 				     "Missing crypto API support for %s (API name: \"%s\")",
+ 				     mode->friendly_name, mode->cipher_str);
+diff --git a/fs/crypto/keysetup_v1.c b/fs/crypto/keysetup_v1.c
+index b70521c55132b..158ceae8a5bce 100644
+--- a/fs/crypto/keysetup_v1.c
++++ b/fs/crypto/keysetup_v1.c
+@@ -50,11 +50,12 @@ static int derive_key_aes(const u8 *master_key,
+ {
+ 	int res = 0;
+ 	struct skcipher_request *req = NULL;
+ 	DECLARE_CRYPTO_WAIT(wait);
+ 	struct scatterlist src_sg, dst_sg;
+-	struct crypto_skcipher *tfm = crypto_alloc_skcipher("ecb(aes)", 0, 0);
++	struct crypto_skcipher *tfm =
++		crypto_alloc_skcipher("ecb(aes)", 0, FSCRYPT_CRYPTOAPI_MASK);
+ 
+ 	if (IS_ERR(tfm)) {
+ 		res = PTR_ERR(tfm);
+ 		tfm = NULL;
+ 		goto out;
+
+base-commit: 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
 -- 
-2.50.0.rc1.591.g9c95f17f64-goog
+2.49.0
 
 
 
