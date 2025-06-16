@@ -2,99 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6A1BADA758
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Jun 2025 07:05:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EBA7ADB026
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Jun 2025 14:26:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=5fk5IgA5z4rKX0VCdfp5bZatdalNtAuTJ8DxgpqLxsY=; b=WSz6pGrs0UmB3gFjKzz8ZSsyBM
-	cQVUAIVkFYrgPzz0KvL0x56D6mfo60DOdpVjyEhP8n1t+mGZXDGWpnzVnc5JKQXkqzYxzOii4O9ib
-	yH0Y1akVOWvoXwSPQPkepzP5Bc8j+TPj5QY9gNKEJhLC+CL6RsDz+7c8D96BZUX6i9uY=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=/xJs4yIWCHjZYa3EW/3vOtZALdRE/mCM5sF9NOQepAc=; b=SgN/L+xjIH+gINKRDD1AU1JqaR
+	e6QhtUb+2y9l0HZJTnGfLuI3H8YRbVn2OFzBNELvadNGUC87rJZuybNr/HqN/8b32Qe6EFAX58WSm
+	qX6yKUCjzsnfxYtimjLPMjjhigdZej6ypD6pgeUGDu44YZ/SlWzw+Ojvls+zRB3Cz9aw=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uR21p-0004CR-NT;
-	Mon, 16 Jun 2025 05:05:05 +0000
+	id 1uR8vK-0001Id-0a;
+	Mon, 16 Jun 2025 12:26:50 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yohan.joung@sk.com>) id 1uR21n-0004CG-Ob
+ (envelope-from <chao@kernel.org>) id 1uR8vH-0001IV-UJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 16 Jun 2025 05:05:03 +0000
+ Mon, 16 Jun 2025 12:26:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LJ9kQ4cxT1AC0HMVi9ljzPsXGfUmrbsoegcwE9I3S8Y=; b=JDvwl/Euk9EAVEc8LCCYNPfYud
- E/ao/0iZPbVauv8l9TK/ZmJ9KsL+3ZvDPnHIgz0VumW8X8UZCtBc3jQxfDL6OXJ2C+XQFpy8POpIp
- /3UHGxfy+c4xpw5c+UJQKz8umTazmRWpDADFgGkBzOKN5Z3qG3jfNwEtALhLS/Ruk1E8=;
+ bh=Pu3RFhJbx2nAddEWnamIa69bbWAKUYsUZme/uEgYJv0=; b=FtRk68RqDtzT9fJbuED4vmdlMQ
+ O7C0UiRnbSQgYKFIVGZE3/qr+xUoXizfynDTmnnwVhqoYGGm3T8fN8vR3w9LOEUjjPH/3JP+dCupi
+ +TlzvDe8NkXOtLRWJrIqfKat+VP9UkwD/aVhHmdbJqxJbgUPHbCmYTu9G3ejWCgre7vo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=LJ9kQ4cxT1AC0HMVi9ljzPsXGfUmrbsoegcwE9I3S8Y=; b=H
- qnkmRDZVqHYypbtDVgE/69JuIjroE9MUinTP0KY4LTcIq7ATYooQC/C9FfW86lRCRHbg5G50+5AtR
- uhj5XDArCIdh8MeJHqNoyWY/c6eSrRrsZm0eCdRtknngCqK5S4hDUVIVuvTRZY+oPaMWmsJTPKKkw
- g4mojkdbem/AFHtA=;
-Received: from exvmail3.skhynix.com ([166.125.252.90]
- helo=invmail3.skhynix.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1uR21n-0003e6-6R for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 16 Jun 2025 05:05:03 +0000
-X-AuditID: a67dfc59-03fff7000000aab6-65-684fa5f8c482
-From: "yohan.joung" <yohan.joung@sk.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Mon, 16 Jun 2025 14:04:44 +0900
-Message-ID: <20250616050445.1492-1-yohan.joung@sk.com>
-X-Mailer: git-send-email 2.49.0.windows.1
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Pu3RFhJbx2nAddEWnamIa69bbWAKUYsUZme/uEgYJv0=; b=SxgcdiwsbBYTr097wAnx8rmy8x
+ kCmTIObkQ4wI2gR4uLofisPOk8zJ6FtCLKg3eo4NYk0YNR/BnQCz+igfoyWmZLxTaErTMQ5exb7HO
+ uKkvdAeJkhwnD5NOKXnu9PiRVmiwqq8T1eXXKgh1VGzpTBosme24e76nKO6j3SnENJFQ=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uR8vH-0006NC-CF for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 16 Jun 2025 12:26:47 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id B23E3A4FF36;
+ Mon, 16 Jun 2025 12:26:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6E36C4CEEA;
+ Mon, 16 Jun 2025 12:26:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1750076796;
+ bh=LHjIh7SrrJj1vGEg4Leu2HdoHohXcjN1SjtuAPRoHH4=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=SGu2SV3mZqHA1ACNeN/A6uREmZaBGZT2KQtf7GU2Rk7lT9M7cM63XclRjIW8f50oN
+ ne+P2IVhVoPLFFX9hFdolAuXmCWzrLAbQTTjZBoCQIeobMtJTuyA2kwE/a5fqKXlIy
+ iMqhBXPr0sW/k42Bkg83vHkgK5DTxC/K0if45Ua4t4e/IL55Dbhljx5oTJIvkYweNB
+ ZFLLdvqqo6XQgB0vopDZNeSYSI6BJ1gLRcAV6+FeA1Uu85pp8jnly9vhzn/eLKBNKA
+ i9tGuyBLGis/z2ozbnqsXSNWXiNZhkbGXaseubjewDFEX93x/U7NJJNsd57zKxcSXA
+ SJPvyC+6RvD5g==
+Message-ID: <22d8f579-ed67-4c4f-9e62-5e32b8bd0a7d@kernel.org>
+Date: Mon, 16 Jun 2025 20:26:32 +0800
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprALMWRmVeSWpSXmKPExsXC9ZZnoe6Ppf4ZBlcOClicnnqWyeLJ+lnM
- FpcWuVtc3jWHzYHFY9OqTjaP3Qs+M3l83iQXwBzFZZOSmpNZllqkb5fAlbHrzzmWgp2cFavP
- 9rI0MH5i72Lk5JAQMJG4u6mZGcZu/fSaBcRmE9CQ+NPbCxYXEdCUONI5E6iei4NZoI1Rov1o
- EytIQljAW2LCulYmEJtFQFVi7pHNYM28AmYSC3YfYYEYqimx48t5Joi4oMTJmU/A4swC8hLN
- W2dDLb7LKtH82QDClpQ4uOIGywRG3llIWmYhaVnAyLSKUSQzryw3MTPHWK84O6MyL7NCLzk/
- dxMjMJyW1f6J3MH47ULwIUYBDkYlHt4DW/0yhFgTy4orcw8xSnAwK4nwLj4BFOJNSaysSi3K
- jy8qzUktPsQozcGiJM5r9K08RUggPbEkNTs1tSC1CCbLxMEp1cAYdugiN1/9r1/zmMzSfN9e
- P3s96Ni1HRs+rebrW6W9RqHbbvX5/YfmZU3Wu6NqsPym4LYfIgtS7vvK3zr2uEPleovalBnB
- N05kZIo7GCRw1S/U+Zn8/Na5J/elMt/eXyD9+t/Om9ZGMuEvebI/+cnPW/WdRUru9vtjPn1N
- VXsTfnxyCZPhW/j+uhJLcUaioRZzUXEiAOffXNIjAgAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrFJMWRmVeSWpSXmKPExsXCNUNlju6Ppf4ZBvceMVmcnnqWyeLJ+lnM
- FpcWuVtc3jWHzWLC3KtMFu+33mN0YPPYtKqTzWP3gs9MHt9ue3h83iQXwBLFZZOSmpNZllqk
- b5fAlbHrzzmWgp2cFavP9rI0MH5i72Lk5JAQMJFo/fSaBcRmE9CQ+NPbywxiiwhoShzpnAlU
- w8XBLNDGKNF+tIkVJCEs4C0xYV0rE4jNIqAqMffIZrBmXgEziQW7j7BADNWU2PHlPBNEXFDi
- 5MwnYHFmAXmJ5q2zmScwcs1CkpqFJLWAkWkVo0hmXlluYmaOmV5xdkZlXmaFXnJ+7iZGYIgs
- q/0zaQfjt8vuhxgFOBiVeHgPbPXLEGJNLCuuzD3EKMHBrCTCu/gEUIg3JbGyKrUoP76oNCe1
- +BCjNAeLkjivV3hqgpBAemJJanZqakFqEUyWiYNTqoFR4Og8/fAd5sfmBSguKPFb86La5dZZ
- SfG0hLUb3nlMKpp7yP/CPjd+6/amPyfieIXXcF5SKd/DzGbY+NLUdkF/z4M7z/0jV27WEptl
- dJL1k7S/Snucmo5HlRX3FuVso/91Jxbr1ucmnN7zKb90x+Z594oeqRqvOBhYJFrE5nR346qM
- FvbUwsNKLMUZiYZazEXFiQCNihNPDQIAAA==
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.4 (/)
+User-Agent: Mozilla Thunderbird
+To: wangzijie <wangzijie1@honor.com>, jaegeuk@kernel.org
+References: <20250613103829.1895191-1-wangzijie1@honor.com>
+Content-Language: en-US
+In-Reply-To: <20250613103829.1895191-1-wangzijie1@honor.com>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: to allow users to dynamically tune the boost_zoned_gc_percent
- parameter Signed-off-by: yohan.joung <yohan.joung@sk.com> --- fs/f2fs/gc.h
- | 3 ++- fs/f2fs/sysfs.c | 5 +++++ 2 files changed, 7 insertions(+),
- 1 deletion(-)
- Content analysis details:   (0.4 points, 5.0 required)
+ Content preview:  On 6/13/25 18:38,
+ wangzijie wrote: > To prevent non-section-aligned
+ size pinned file generated from truncation, > add check condition in setattr.
+ Meanwhile, clean up F2FS_I_SB. > > Signed-off-by: wang [...] 
+ Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.4 KHOP_HELO_FCRDNS       Relay HELO differs from its IP's reverse DNS
-X-Headers-End: 1uR21n-0003e6-6R
-Subject: [f2fs-dev] [PATCH v2] f2fs: enable tuning of boost_zoned_gc_percent
- via sysfs
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uR8vH-0006NC-CF
+Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid non-section-aligned size pinned
+ file generation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,52 +107,95 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: pilhyun.kim@sk.com, linux-kernel@vger.kernel.org,
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: feng.han@honor.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-to allow users to dynamically tune
-the boost_zoned_gc_percent parameter
+On 6/13/25 18:38, wangzijie wrote:
+> To prevent non-section-aligned size pinned file generated from truncation,
+> add check condition in setattr. Meanwhile, clean up F2FS_I_SB.
+> 
+> Signed-off-by: wangzijie <wangzijie1@honor.com>
+> ---
+>  fs/f2fs/file.c | 20 +++++++++++++-------
+>  1 file changed, 13 insertions(+), 7 deletions(-)
+> 
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 6bd3de64f..31ecf615b 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -1026,9 +1026,11 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+>  {
+>  	struct inode *inode = d_inode(dentry);
+>  	struct f2fs_inode_info *fi = F2FS_I(inode);
+> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> +	block_t sec_blks = CAP_BLKS_PER_SEC(sbi);
+>  	int err;
+>  
+> -	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
+> +	if (unlikely(f2fs_cp_error(sbi)))
+>  		return -EIO;
+>  
+>  	if (unlikely(IS_IMMUTABLE(inode)))
+> @@ -1047,6 +1049,11 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+>  			!IS_ALIGNED(attr->ia_size,
+>  			F2FS_BLK_TO_BYTES(fi->i_cluster_size)))
+>  			return -EINVAL;
+> +		if (f2fs_is_pinned_file(inode) &&
+> +			attr->ia_size < i_size_read(inode) &&
+> +			!IS_ALIGNED(attr->ia_size,
+> +			F2FS_BLK_TO_BYTES(sec_blks)))
 
-Signed-off-by: yohan.joung <yohan.joung@sk.com>
----
- fs/f2fs/gc.h    | 3 ++-
- fs/f2fs/sysfs.c | 5 +++++
- 2 files changed, 7 insertions(+), 1 deletion(-)
+F2FS_BLK_TO_BYTES(CAP_BLKS_PER_SEC(sbi))?
 
-diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
-index 5c1eaf55e127..11fba7636af7 100644
---- a/fs/f2fs/gc.h
-+++ b/fs/f2fs/gc.h
-@@ -194,6 +194,7 @@ static inline bool has_enough_invalid_blocks(struct f2fs_sb_info *sbi)
- static inline bool need_to_boost_gc(struct f2fs_sb_info *sbi)
- {
- 	if (f2fs_sb_has_blkzoned(sbi))
--		return !has_enough_free_blocks(sbi, LIMIT_BOOST_ZONED_GC);
-+		return !has_enough_free_blocks(sbi,
-+				sbi->gc_thread->boost_zoned_gc_percent);
- 	return has_enough_invalid_blocks(sbi);
- }
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 75134d69a0bd..6c26b5e10c8f 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -628,6 +628,11 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 		return count;
- 	}
- 
-+	if (!strcmp(a->attr.name, "gc_boost_zoned_gc_percent")) {
-+		if (t > 100)
-+			return -EINVAL;
-+	}
-+
- #ifdef CONFIG_F2FS_IOSTAT
- 	if (!strcmp(a->attr.name, "iostat_enable")) {
- 		sbi->iostat_enable = !!t;
--- 
-2.33.0
+as this is the only case we use sec_blks in f2fs_setattr().
+
+And can you please do cleanup on sbi in separated patch?
+
+Thanks,
+
+> +			return -EINVAL;
+>  	}
+>  
+>  	err = setattr_prepare(idmap, dentry, attr);
+> @@ -1068,12 +1075,11 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+>  	}
+>  	if (i_uid_needs_update(idmap, attr, inode) ||
+>  	    i_gid_needs_update(idmap, attr, inode)) {
+> -		f2fs_lock_op(F2FS_I_SB(inode));
+> +		f2fs_lock_op(sbi);
+>  		err = dquot_transfer(idmap, inode, attr);
+>  		if (err) {
+> -			set_sbi_flag(F2FS_I_SB(inode),
+> -					SBI_QUOTA_NEED_REPAIR);
+> -			f2fs_unlock_op(F2FS_I_SB(inode));
+> +			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+> +			f2fs_unlock_op(sbi);
+>  			return err;
+>  		}
+>  		/*
+> @@ -1083,7 +1089,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+>  		i_uid_update(idmap, attr, inode);
+>  		i_gid_update(idmap, attr, inode);
+>  		f2fs_mark_inode_dirty_sync(inode, true);
+> -		f2fs_unlock_op(F2FS_I_SB(inode));
+> +		f2fs_unlock_op(sbi);
+>  	}
+>  
+>  	if (attr->ia_valid & ATTR_SIZE) {
+> @@ -1144,7 +1150,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+>  	f2fs_mark_inode_dirty_sync(inode, true);
+>  
+>  	/* inode change will produce dirty node pages flushed by checkpoint */
+> -	f2fs_balance_fs(F2FS_I_SB(inode), true);
+> +	f2fs_balance_fs(sbi, true);
+>  
+>  	return err;
+>  }
 
 
 
