@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C89A9ADB06E
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Jun 2025 14:41:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE29BADB095
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Jun 2025 14:50:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=i7ZirstpmvDoc0CBTQlkFGPwrK+oDYkw9+ckpEuXDmc=; b=lPCcUv+7kcFLxCvZRaSuQWyJ7P
-	sGofr1QgXsw515LMyDI/Kf0SzMCYyg/jc1WDKixLTsFRydzl+h4o/E6cefKvQ/rt4Vn/KbCi1bzx6
-	FTlzcXyG0KBbMKfDt1BP4qj3eCB02RhUVL8X4D3vfOvYv0Qb9PB1ubDWdG5//se6k+/Y=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=F1DnQewn8hnN628ld/lIfpidsPUfO7jL1SgOCd6+/DE=; b=iWM3X4bd9Bz2DuT232B8MriaRk
+	y7OkRcmNHgkpitdyEPuIfQw4yiGwvtXHQsc+VAqgI6az+GrY09GWjzmYxQSmf7VKO2HBcUO9FUM2E
+	GnW4v/oFIbiKp8VJeYj82NR8fIw8jxgNArRg/ooNLmXSVpu7qL5qD+/Mppv+6MOU0Q2o=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uR99X-0005eH-Rx;
-	Mon, 16 Jun 2025 12:41:31 +0000
+	id 1uR9IE-0005g1-9w;
+	Mon, 16 Jun 2025 12:50:30 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uR99W-0005eB-Cq
+ (envelope-from <chao@kernel.org>) id 1uR9ID-0005ft-6t
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 16 Jun 2025 12:41:30 +0000
+ Mon, 16 Jun 2025 12:50:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nKTUHD0+y6cc0B4to/Q4pyw09q71d36uZg4yW+kYf7U=; b=Gfl4pufLOGmjqQh4R0FeGY/fVR
- 5hav02eVrfY3v5ERy5RYQvqsXh1B2Mhu3GsfjBecMbDSSh/ACRDoGoiPi1LIok9HLB9ILWg4k+Hfb
- mSKSO6YUr/IpI9k8zy6Y7sRdz9F+2tNTZXU2qBOW/9PMPgcy0TSaDmGYYbrXzHtIYoYQ=;
+ bh=uEadjVYSJGfPF6E9DflBqLdTmwiNcyfDmY6iOR3xzag=; b=Fmm2u4aKWYr/cdldtPAyp1W9Qg
+ 202h4tmKWABjxx+3NyjZt8yFny6KR7qCjokeI4qYT8cWUbuRb5hjfmLThpbQwwYwbG5vCPOUoXUge
+ eG69xs+r2NHoBkOnB+i+t7e+5RMe7MikHipXkQUrp3P8k1WX7qd/RhA3iHIKRfDB+YsY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,38 +40,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nKTUHD0+y6cc0B4to/Q4pyw09q71d36uZg4yW+kYf7U=; b=jQz8UDdCdq2ACC4fNv6MH/A4MJ
- doceJBpW7moNPsKyprBFL7O9rXqF+gz3tjkNhC6PD1bGfcKdSL9Yn93olMF5qIiVJei9W3EqZLiIP
- Gy5HGEP4xYagCyLUfmr0qg7UbhOSwcmn3u0fPnPmjQ2pvzdl8Goe43MOAt2/Vz8ERN1Q=;
+ bh=uEadjVYSJGfPF6E9DflBqLdTmwiNcyfDmY6iOR3xzag=; b=gURMLyBVVYd3gOoDXAyA8mR/d7
+ e2vmwl8VhNyyYfEF1dZjBxZjWQGOQuZtoo4qS0lrUG1E/UPL9yGIvXS1/znUtUHUA1McewDDKgmPI
+ PhYF4a6E3SCSBxebCSI4c3rkKQeEHa2xMy57ChszhKxdQGhCIMnPOrttloan5G6w9guQ=;
 Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uR99V-0007K1-Qh for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 16 Jun 2025 12:41:30 +0000
+ id 1uR9IC-0007uu-Kh for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 16 Jun 2025 12:50:29 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 303C6A50065;
- Mon, 16 Jun 2025 12:41:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A704AC4CEEA;
- Mon, 16 Jun 2025 12:41:22 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id ED0BEA50563;
+ Mon, 16 Jun 2025 12:50:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6142EC4CEEA;
+ Mon, 16 Jun 2025 12:50:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750077683;
- bh=s3XUC5ZWXM/K6AZRHhVnolJzEYw9WXvnLVdXiAdvz5Q=;
+ s=k20201202; t=1750078217;
+ bh=5B0GDypy6woAYzSY9aHY7htf77d3A3ENXwrDkuTjJK8=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=qabwE08bVJjjWSGMq50QBauJ7yF9knCpiuVPJfQkNdn2DDIpPu6GGcqG6NFwHQcSb
- GFElvnP1Wfcxj7q23tZUz12NVynchEbJOTUNFP58qWMYmSWWKAqrAHfi8kfMxroEyI
- a2x8gLRxea55N5aZYb+w0YgIV3PkK3BDKPVXnlXOnr1Nz6LwZOuL4GRLdHYInXJP5t
- +A9VUco1g4cexU21IIDpagAth45uTerO3v+hbL7EaLMiQG5OuLGnuMNuT4pq9kmd65
- sblvF13BMjWc/wp7gSKljb++1FHLGUKrtUla2OEJg8T2PAdbKKv41ywAGKtV8UuBqX
- NuIV7b5DtyXDQ==
-Message-ID: <0f09a845-fbaf-4ddf-b684-a1182f85a9ff@kernel.org>
-Date: Mon, 16 Jun 2025 20:41:20 +0800
+ b=Ao/+Im09ikS3XYNJif4IPzCZVPI1rLzBr2hkK5fQi5W+mQhbzAjuFoCmdVYUus5G5
+ iAsrj9MC5DiaqctCBweLZ9P0wrywMKO9w1CHFmM4gQoV2uSfqzAptfRc1AIAcUL6Am
+ zuKvJC4174ktQCdROvzMsSLvGQ5D/+FG6qNiTRRMRjCTTEBe9WR0hrf9mp5qgi0xNn
+ gYvmNk805qMhSUBPKNt7+uDd5FszJx+mmK+hWdE189GL2AUw722N7SYEpthsERw0R/
+ OgLPmJQ8j6iL7tVXud3Epilgoybkzl1tmYP/KqpPBZJb9LUNpiqmBuvLi/IZAsyVSs
+ myTmzPYTwBwlg==
+Message-ID: <c8389c1a-16d2-4de4-bc3f-7a5e4ccdbc34@kernel.org>
+Date: Mon, 16 Jun 2025 20:50:14 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Daniel Lee <chullee@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20250615144235.1836469-1-chullee@google.com>
- <20250615144235.1836469-2-chullee@google.com>
+ <20250615144235.1836469-3-chullee@google.com>
 Content-Language: en-US
-In-Reply-To: <20250615144235.1836469-2-chullee@google.com>
+In-Reply-To: <20250615144235.1836469-3-chullee@google.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -79,9 +79,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/15/25 22:42, Daniel Lee wrote: > Bio flags like REQ_PRIO,
- REQ_META, and REQ_FUA, determined by > f2fs_io_flags(), were not being applied
- to direct I/O (DIO) writes. > This meant that DIO writes w [...] 
+ Content preview:  On 6/15/25 22:42, Daniel Lee wrote: > Apply the `ioprio_hint`
+ to set `F2FS_IOPRIO_WRITE` priority > on files identified as "hot" at creation
+ and on files that are > pinned via ioctl. > > Signed-off-by [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,8 +93,9 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uR99V-0007K1-Qh
-Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: Apply bio flags to direct I/O
+X-Headers-End: 1uR9IC-0007uu-Kh
+Subject: Re: [f2fs-dev] [PATCH v2 2/2] f2fs: use ioprio hint for hot and
+ pinned files
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,103 +115,115 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 6/15/25 22:42, Daniel Lee wrote:
-> Bio flags like REQ_PRIO, REQ_META, and REQ_FUA, determined by
-> f2fs_io_flags(), were not being applied to direct I/O (DIO) writes.
-> This meant that DIO writes would not respect filesystem-level hints
-> (for REQ_META/FUA) or inode-level hints (like F2FS_IOPRIO_WRITE).
-> 
-> This patch refactors f2fs_io_flags() to use a direct inode pointer
-> instead of deriving it from a page. The function is then called from
-> the DIO write path, ensuring that bio flags are handled consistently
-> for both buffered and DIO writes.
+> Apply the `ioprio_hint` to set `F2FS_IOPRIO_WRITE` priority
+> on files identified as "hot" at creation and on files that are
+> pinned via ioctl.
 > 
 > Signed-off-by: Daniel Lee <chullee@google.com>
 > ---
->  fs/f2fs/data.c | 10 +++++-----
->  fs/f2fs/f2fs.h |  1 +
->  fs/f2fs/file.c | 11 +++++++++++
->  3 files changed, 17 insertions(+), 5 deletions(-)
+>  fs/f2fs/f2fs.h  | 19 +++++++++++++++++++
+>  fs/f2fs/file.c  |  3 +++
+>  fs/f2fs/namei.c | 11 +++++++----
+>  3 files changed, 29 insertions(+), 4 deletions(-)
 > 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 31e892842625..71dde494b892 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -416,10 +416,9 @@ int f2fs_target_device_index(struct f2fs_sb_info *sbi, block_t blkaddr)
->  	return 0;
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 3e02687c1b58..0c4f52892ff7 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -3440,6 +3440,25 @@ static inline void set_file(struct inode *inode, int type)
+>  	f2fs_mark_inode_dirty_sync(inode, true);
 >  }
 >  
-> -static blk_opf_t f2fs_io_flags(struct f2fs_io_info *fio)
-> +blk_opf_t f2fs_io_flags(struct f2fs_io_info *fio, struct inode *inode)
+> +static inline int get_ioprio(struct inode *inode)
+> +{
+> +	return F2FS_I(inode)->ioprio_hint;
+> +}
+> +
+> +static inline void set_ioprio(struct inode *inode, int level)
+> +{
+> +	if (get_ioprio(inode) == level)
+> +		return;
+> +	F2FS_I(inode)->ioprio_hint = level;
+> +}
+> +
+> +static inline void clear_ioprio(struct inode *inode)
+> +{
+> +	if (get_ioprio(inode) == 0)
+> +		return;
+> +	F2FS_I(inode)->ioprio_hint = 0;
+> +}
+> +
+>  static inline void clear_file(struct inode *inode, int type)
 >  {
->  	unsigned int temp_mask = GENMASK(NR_TEMP_TYPE - 1, 0);
-> -	struct folio *fio_folio = page_folio(fio->page);
->  	unsigned int fua_flag, meta_flag, io_flag;
->  	blk_opf_t op_flags = 0;
+>  	if (!is_file(inode, type))
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 3eb40d7bf602..a18fb7f3d019 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -3496,6 +3496,7 @@ static int f2fs_ioc_set_pin_file(struct file *filp, unsigned long arg)
 >  
-> @@ -446,8 +445,8 @@ static blk_opf_t f2fs_io_flags(struct f2fs_io_info *fio)
->  	if (BIT(fio->temp) & fua_flag)
->  		op_flags |= REQ_FUA;
->  
-> -	if (fio->type == DATA &&
-> -	    F2FS_I(fio_folio->mapping->host)->ioprio_hint == F2FS_IOPRIO_WRITE)
-> +	if (inode && fio->type == DATA &&
-> +	    F2FS_I(inode)->ioprio_hint == F2FS_IOPRIO_WRITE)
->  		op_flags |= REQ_PRIO;
->  
->  	return op_flags;
-> @@ -459,10 +458,11 @@ static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
->  	struct block_device *bdev;
->  	sector_t sector;
->  	struct bio *bio;
-> +	struct inode *inode = fio->page ? fio->page->mapping->host : NULL;
+>  	if (!pin) {
+>  		clear_inode_flag(inode, FI_PIN_FILE);
+> +		clear_ioprio(inode);
 
-fio->page will always be true now? We can pass fio->page->mapping->host to f2fs_io_flags()
-directly?
+I guess there are more places clearing FI_PIN_FILE? we need to cover
+them all?
+
+>  		f2fs_i_gc_failures_write(inode, 0);
+>  		goto done;
+>  	} else if (f2fs_is_pinned_file(inode)) {
+> @@ -3529,6 +3530,8 @@ static int f2fs_ioc_set_pin_file(struct file *filp, unsigned long arg)
+>  	}
+>  
+>  	set_inode_flag(inode, FI_PIN_FILE);
+> +	file_set_hot(inode);
+
+Unnecessary file_set_hot() invoking? Or am I missing anything?
 
 Thanks,
 
->  
->  	bdev = f2fs_target_device(sbi, fio->new_blkaddr, &sector);
->  	bio = bio_alloc_bioset(bdev, npages,
-> -				fio->op | fio->op_flags | f2fs_io_flags(fio),
-> +				fio->op | fio->op_flags | f2fs_io_flags(fio, inode),
->  				GFP_NOIO, &f2fs_bioset);
->  	bio->bi_iter.bi_sector = sector;
->  	if (is_read_io(fio->op)) {
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 9333a22b9a01..3e02687c1b58 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -3972,6 +3972,7 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio);
->  struct block_device *f2fs_target_device(struct f2fs_sb_info *sbi,
->  		block_t blk_addr, sector_t *sector);
->  int f2fs_target_device_index(struct f2fs_sb_info *sbi, block_t blkaddr);
-> +blk_opf_t f2fs_io_flags(struct f2fs_io_info *fio, struct inode *inode);
->  void f2fs_set_data_blkaddr(struct dnode_of_data *dn, block_t blkaddr);
->  void f2fs_update_data_blkaddr(struct dnode_of_data *dn, block_t blkaddr);
->  int f2fs_reserve_new_blocks(struct dnode_of_data *dn, blkcnt_t count);
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 696131e655ed..3eb40d7bf602 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -5015,6 +5015,17 @@ static void f2fs_dio_write_submit_io(const struct iomap_iter *iter,
->  	enum log_type type = f2fs_rw_hint_to_seg_type(sbi, inode->i_write_hint);
->  	enum temp_type temp = f2fs_get_segment_temp(sbi, type);
->  
-> +	/* if fadvise set to hot, override the temperature */
-> +	struct f2fs_io_info fio = {
-> +		.sbi = sbi,
-> +		.type = DATA,
-> +		.op = REQ_OP_WRITE,
-> +		.temp = file_is_hot(inode) ? HOT : temp,
-> +		.op_flags = bio->bi_opf,
-> +		.page = NULL,
-> +	};
-> +	bio->bi_opf |= f2fs_io_flags(&fio, inode);
-> +
->  	bio->bi_write_hint = f2fs_io_type_to_rw_hint(sbi, DATA, temp);
->  	submit_bio(bio);
+> +	set_ioprio(inode, F2FS_IOPRIO_WRITE);
+>  	ret = F2FS_I(inode)->i_gc_failures;
+>  done:
+>  	f2fs_update_time(sbi, REQ_TIME);
+> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> index 07e333ee21b7..0f96a0b86c40 100644
+> --- a/fs/f2fs/namei.c
+> +++ b/fs/f2fs/namei.c
+> @@ -191,9 +191,10 @@ static void set_compress_new_inode(struct f2fs_sb_info *sbi, struct inode *dir,
 >  }
+>  
+>  /*
+> - * Set file's temperature for hot/cold data separation
+> + * Set file's temperature (for hot/cold data separation) and
+> + * I/O priority, based on filename extension
+>   */
+> -static void set_file_temperature(struct f2fs_sb_info *sbi, struct inode *inode,
+> +static void set_file_temp_prio(struct f2fs_sb_info *sbi, struct inode *inode,
+>  		const unsigned char *name)
+>  {
+>  	__u8 (*extlist)[F2FS_EXTENSION_LEN] = sbi->raw_super->extension_list;
+> @@ -212,8 +213,10 @@ static void set_file_temperature(struct f2fs_sb_info *sbi, struct inode *inode,
+>  
+>  	if (i < cold_count)
+>  		file_set_cold(inode);
+> -	else
+> +	else {
+>  		file_set_hot(inode);
+> +		set_ioprio(inode, F2FS_IOPRIO_WRITE);
+> +	}
+>  }
+>  
+>  static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
+> @@ -317,7 +320,7 @@ static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
+>  		set_inode_flag(inode, FI_INLINE_DATA);
+>  
+>  	if (name && !test_opt(sbi, DISABLE_EXT_IDENTIFY))
+> -		set_file_temperature(sbi, inode, name);
+> +		set_file_temp_prio(sbi, inode, name);
+>  
+>  	stat_inc_inline_xattr(inode);
+>  	stat_inc_inline_inode(inode);
 
 
 
