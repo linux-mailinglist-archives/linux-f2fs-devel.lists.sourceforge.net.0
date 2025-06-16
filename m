@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C54D4ADB9BF
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Jun 2025 21:35:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 610E5ADB9B9
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Jun 2025 21:35:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=q+HVVhFvZkDqQfpowXVXxq2po5ZBIMJ4wquVb+v7K9E=; b=Ja8Vo0JaI+CI8VDmxmRkJWqsOG
-	MnC4CvRXcjR9YEAn//4KQ4V/KOewr1Cau5Wf61BCkiwERUtBRmhDh/kROa8E9gGYtjZXN2SVpog1z
-	qAw0vAnHrOv5ht+NT9qtPkVcyGeTtPPdr2UK7ej9pmi/RBuDAqVTIxgi/oc+eXoUyTsA=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=piVoqIbEYvwxeI2rRrY70boXpEEtf06jLD9jBAfEdhM=; b=hJsTfo5auMxuc7ZxqT600hvN6D
+	nizQ2YamTtedZiOGKrHKtut37aUKA6myxXBYi7SN4B2Ipf68fVf5vaaQM5+77c46QXXIQJL0+8K4+
+	5nydHv7BFc9aTjgbuMjKZBmFUTp3r0OxwRS+FIX9FcIbFcRiKvmJKT9l3qjygj4lJl5o=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uRFcG-00060U-KL;
-	Mon, 16 Jun 2025 19:35:36 +0000
+	id 1uRFc6-0002up-Ud;
+	Mon, 16 Jun 2025 19:35:26 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lorenzo.stoakes@oracle.com>) id 1uRFbk-0005xE-DJ;
- Mon, 16 Jun 2025 19:35:04 +0000
+ (envelope-from <lorenzo.stoakes@oracle.com>) id 1uRFbq-0002rX-7j;
+ Mon, 16 Jun 2025 19:35:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
  :References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IECQY2DGCTYVoaZ9Nff+4F98HwRdlz3tTEhISw1398c=; b=iKNLMnTgMPNpdZcZMgwVhUHwhU
- HmStaIT68yrDg5RxaAjdDt8oqXqS9c22MNm6Z1+KgrSS/i7DwuXzltjnUTvostXxsQxunqzR34Vpz
- MmsIJbMaluwyIApSgUwVTrr6AVZmdUzi0kj7zJjzpaSYcMdX8PBhOS1bOFYuFPW0IExo=;
+ bh=k+2aiYLoMA/bjfBM9WinJX4HBnMZDqACvqdy/S9xPiw=; b=SxMhbVL80UAgX8ZmMleou0P3nj
+ e7I+KkNVdIPz3wbHgobqpSvRfUHajmrsrV5EMhtkxqYIz21JIDu3D29fakvGEO5ZyzfiaJjo35Akf
+ LswOZkvvr1DLIc4g4T69cN5PK4jyZw6NF8gp1mbB6sCGT8btjVuEbFj9qatOP9qrnPsA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
@@ -39,149 +39,150 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=IECQY2DGCTYVoaZ9Nff+4F98HwRdlz3tTEhISw1398c=; b=iiYUp76Mf+1B/pHQ6U3dghuH1q
- /ElMUtPPvMF2TdU0Qcc+s8SKrFkx1F32RMiSR6n8DOJW6BZSS2RzV9e6GZymHKsAOvXEX/9qaeaQb
- jTO6paaMtXfNO6bb9gJ/LZVMLHcGU5/kinS2fu0vaWRWPdUmAeQW6wylEEeub+JW87xU=;
+ bh=k+2aiYLoMA/bjfBM9WinJX4HBnMZDqACvqdy/S9xPiw=; b=P5fx9RzD0vWiYS+zMzrqBEYnIH
+ lYd916xP/wGD2Zwjgr2zRok7/UcGPG5et+6qNYjYZHHswpREJmjQUJm862bASq/yypkhU6offTCPb
+ 5+Fd6m8mQeZ10io0f2GhoQcyKHSOkAFjSn+oaPL6RrPf8aEsbd9ms5rajblb7sdCyHkU=;
 Received: from mx0a-00069f02.pphosted.com ([205.220.165.32])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uRFbj-0008KG-6s; Mon, 16 Jun 2025 19:35:04 +0000
-Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55GHuUIf027738;
- Mon, 16 Jun 2025 19:34:15 GMT
+ id 1uRFbp-0008Ky-0K; Mon, 16 Jun 2025 19:35:10 +0000
+Received: from pps.filterd (m0333521.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55GHuXdE006694;
+ Mon, 16 Jun 2025 19:34:17 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=
- corp-2025-04-25; bh=IECQY2DGCTYVoaZ9Nff+4F98HwRdlz3tTEhISw1398c=; b=
- FmuPkxf7MRbhA+kSOmuphCx3gV3J8RalkLVsb/8HMC611lWEWiOaDBzILxHFU+w/
- BFLRZ/V3z79uKWwdr6xk0EDv/qRNAnMWU1brIvapf1xTXhpi4g6bt1s6UeoYMGDr
- 585yQL66Ydf39o854Yyl5vAbb7fxA0YI4aUf9+GwXgiCMhXpiVkamqtNuSrwmJtw
- eyc1ZQWlgae9RZRh+iEnsMmKww5EZptaK6IWZuyUOOYiWnzRhvccdCuCykbWWv3o
- AoxN9HwNU/Ibe2p3LWIk9DMUpwAFGevN1Xw4vfn/EX8+fSgXr4JBkFHyNThb/gSp
- +5hZ0gABHxZqqfFQmIT1Qw==
+ corp-2025-04-25; bh=k+2aiYLoMA/bjfBM9WinJX4HBnMZDqACvqdy/S9xPiw=; b=
+ MSmDAAoV+UCvPJaJwac/aIhB+3jBaoHjZo99NjuPtt3CKax4sTCGFm51EtheIOxs
+ I44nXTbo+dstCWkTSB0eh63HBerhnuPt6ul+Z9eLDnfaHctdSwsu3vCQ7g5zqhsp
+ wF4duWbIYJPvlHcnVAPa9Y7EAdCHgoi+YkBLPapDs7mMdIPfe6YMg2t6M7mf8S9K
+ aMGJSpgJ2ESEhDtZ8qmbrNKrT968JoCnbby3qaoXH1azHlRvQnhQX/Pahf0gooh1
+ vzIXSlBhb/6DisJI+xxVabwOTAbw35FGOyfVQZFWC2Z4Ydt9Bmnv0FnXYGdx1/Se
+ ckCwFKBS0RbHfpO/sgjnBg==
 Received: from iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com
  (iadpaimrmta03.appoci.oracle.com [130.35.103.27])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4791mxkphu-1
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 47900euq9b-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 16 Jun 2025 19:34:14 +0000 (GMT)
+ Mon, 16 Jun 2025 19:34:17 +0000 (GMT)
 Received: from pps.filterd
  (iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
  by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
- with ESMTP id 55GJ6DKU025950; Mon, 16 Jun 2025 19:34:13 GMT
+ with ESMTP id 55GJ6DKX025950; Mon, 16 Jun 2025 19:34:15 GMT
 Received: from ch5pr02cu005.outbound.protection.outlook.com
  (mail-northcentralusazon11012066.outbound.protection.outlook.com
  [40.107.200.66])
  by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
- 478yhekuqt-4
+ 478yhekuqt-5
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 16 Jun 2025 19:34:13 +0000
+ Mon, 16 Jun 2025 19:34:15 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QFNHz4hVc4hWK/LYsTkZmb44u0X3KGuBnANHM/nu9JXIfIHTyaJtBUlox9dFDvG9g8mrYgifmGX2Jx0R6nzQ9/foERG1FbmLnICc0PeIodNvt8MQwPIJPXNhSVA/B/w3jT/oCGO+qfm93K429kHNodcQL5Xe4uTcS194sQe0xQcpVFzAUWxbCp90WVeNlrw5KTAIrk6xm/lWcIPEzH5ns5lA/nOTSDSJfGR5vihABDcuqgm6tr5YjDLTGB15jyentVjktBOvfL1RMAuPf4tksmyLAkuENPlD4fXrHPJd+f0TUu019LEQlKarUCLgOirdNzVCfGbVbVTK4KzVVVfc8g==
+ b=y9OgYxA09RWwyalceN7hQHLgoyXhTXagI9ql+JOWPqp7ehkzphs4Co69Wa2OYN/kqjrs8ScFrWEjBwm3LDHRava5oGIMCs4r/SNh5W49M/M0C7gEWGkWuIp+/XcbTTDdJtydFiq8GNwhpQEwe/Kmn9+kk6FNhc8qtRRzdk4JLHzj03Vr/yHCX4VjjV84xgKGeNAfrBsdtCRkehvhjRNgLW2evbGHFIA0nAzn1pLEjx288wVClAzBPOCidjDieNMldPL5EQtJhC08ryb3OrzOPAbMlqSnnDaMTsvTOS5r5ABhYHhPP2Jfix/P58U0AU2t/zb0d2bbfxhnHyHQ6TXIZg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IECQY2DGCTYVoaZ9Nff+4F98HwRdlz3tTEhISw1398c=;
- b=fg9FqUVK8MVqIJcW7ew7Mx0c5YvUycMfXRoa10aPVzfw4QJ/Nh3+5M/5OQ/mdDXW0qw8czyQGHq2OQRnjLk3yJA58nh9/+2Rktaeni+w1dgj9hzsM8xcBWKEVDEu5Ivy0DOoKgE+DYVUx7E1NFrX6HR6RxNQGRZSEB5KLHsQOWPivorMu5RA062tY4WELMvft+EfisqlF6NeFoQnOaQsxJRd7WOUC4cmXEXn+PEDxvBH8dKBswJXzHaa+epOfA12i8zX+ZuabCWraztdNTxPEpd40+be/C2uph4NH92ANBGMMlg5GBDQWmp+F73XrlEjSf+4rTNjXW073nZnpZBWYg==
+ bh=k+2aiYLoMA/bjfBM9WinJX4HBnMZDqACvqdy/S9xPiw=;
+ b=Q/7D0BjGY2CGQ/qLo7+3txEF0cc6VBQFf/IK+ilJqhFGA/2ROFbALj0xWwIYQtfeZ/HIBEb4j+cGN4BsyMkAPN6ONtTYZuKLJB7qpPlMilTm5DuDrzfENy9e1L26QA2vHO8cNMQsmbAGdB/Tnh7mJgcdUxlN9ttzLUz34Br22jgQM45tER7380kg+QiqwFG8aowREWLuplkQV38ABbmyFdtPFnCUe5zA0hPUtNWmrLX86DJo09YxnLwm6fH9O3Poyem4id8SNysP7XDvQiO6e6OlNl2P1vXMfQN9ANaklVpJD47XwELUeQ4Clit+uuqgKhrDSTiWgG/+LI3Fec5OMw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
  dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IECQY2DGCTYVoaZ9Nff+4F98HwRdlz3tTEhISw1398c=;
- b=yGXZ9WEr4Ss9Ckc85O6KxBjk6KhKtgLE0iIXhjw+puAhXLNG+Ypzt8IGCJVpNqYKn/PhkTy2aVplE9krQWdFgzdvurvE15QsvaydCsKzIXrCfPkOhdNtF1uIeVRmsGuP8QNjFEz6gpKCbkeJ570BpD7CHkSIDKie/6gC/e5s0hQ=
+ bh=k+2aiYLoMA/bjfBM9WinJX4HBnMZDqACvqdy/S9xPiw=;
+ b=maCVS8h9iVS4skJnOgKq0sR70kfzyGAvHti21mNHliHFpaNeJlS4Axb7vfM+WA7w3WJCV9jtyjXGJK6h6awka6RsgvpH4a9XV92yN9pfxOB5C6MfH14mxe/p0bb5pODZ0j1i87mEW4lVteByHyw8IQ7d2cRirJiP/96Vd7IAq9A=
 Received: from DM4PR10MB8218.namprd10.prod.outlook.com (2603:10b6:8:1cc::16)
  by PH0PR10MB5563.namprd10.prod.outlook.com (2603:10b6:510:f2::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.29; Mon, 16 Jun
- 2025 19:34:08 +0000
+ 2025 19:34:11 +0000
 Received: from DM4PR10MB8218.namprd10.prod.outlook.com
  ([fe80::2650:55cf:2816:5f2]) by DM4PR10MB8218.namprd10.prod.outlook.com
  ([fe80::2650:55cf:2816:5f2%6]) with mapi id 15.20.8835.026; Mon, 16 Jun 2025
- 19:34:08 +0000
+ 19:34:11 +0000
 To: Andrew Morton <akpm@linux-foundation.org>
-Date: Mon, 16 Jun 2025 20:33:28 +0100
-Message-ID: <08db85970d89b17a995d2cffae96fb4cc462377f.1750099179.git.lorenzo.stoakes@oracle.com>
+Date: Mon, 16 Jun 2025 20:33:29 +0100
+Message-ID: <f528ac4f35b9378931bd800920fee53fc0c5c74d.1750099179.git.lorenzo.stoakes@oracle.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
 References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
-X-ClientProxiedBy: LO4P302CA0045.GBRP302.PROD.OUTLOOK.COM
- (2603:10a6:600:317::20) To DM4PR10MB8218.namprd10.prod.outlook.com
+X-ClientProxiedBy: LNXP123CA0009.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:d2::21) To DM4PR10MB8218.namprd10.prod.outlook.com
  (2603:10b6:8:1cc::16)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DM4PR10MB8218:EE_|PH0PR10MB5563:EE_
-X-MS-Office365-Filtering-Correlation-Id: 67dafbc6-9a06-418d-ac38-08ddad0cc31d
+X-MS-Office365-Filtering-Correlation-Id: 09d3187b-9492-498c-5afe-08ddad0cc4a8
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6NVYyHVtV7zplMQuhRFg5S8eLWn4oOxoUarQEe8INlpmtkO5iEWYy7qe3yux?=
- =?us-ascii?Q?mVwfPl/SWm/Z/4PwExpX+wjplyEAwjLGvDhyP1waighE/wT0jencpdtRdeAq?=
- =?us-ascii?Q?9CaV9i1YKe5R7kvYOuB6Y2sNJ1qs1ACv3uAmM8L/wPyfUAJN1xFro42mF3vf?=
- =?us-ascii?Q?94sGlOMq3MU17OPtx7A7UpkdshufOrhcJvtyyzlWO8RkkI03JJ5wWJJMwJzS?=
- =?us-ascii?Q?M/y2E6W5/Uc4okdsGM36iHEVUqC/4JAPwdaJKVqTlFGCiorxU/BGgO5Csh+a?=
- =?us-ascii?Q?zVRcfyLr6WzlvDPKmNDBFz+zZ3AkDHRzquijcwd+IjR7Yda52LQ1i9ckxn6F?=
- =?us-ascii?Q?Dscq2MU4JOCp60YyVEr7HlQtJQmRDllruMrhtvoP1Y1R9yoyE8jbAGkSCzvy?=
- =?us-ascii?Q?zTDi57JRGKYdwpmUBTm7ePkZbFdasDYLpnM06JVCbRnOgAuoPZa7V64w1okX?=
- =?us-ascii?Q?AmSnPlTRivCbXtqmHYBf8j8xESGaH4lAi3l8xFFU1RM3FQOdu4gFAPN9Iwwa?=
- =?us-ascii?Q?FzGhpQVmDtoptso+9nvhLNspJv14yFjqQ/THg6BE0ZC7o7pmBSb4BxFdrgk6?=
- =?us-ascii?Q?qI1/RERo6Xc2PKKzMAusP6LsfhuFJt4dbIkCgF75GXmx13dh+XBZODUpik2f?=
- =?us-ascii?Q?EMHhSYL2O53rJi84tKeM/gh7RVsktRmfch8nkK5CUPSxkUlQPEez1A48Vy2B?=
- =?us-ascii?Q?vE3a1jON9vd1MuhC6EjrvMiNQaeLudEGtzapi+TD2IJtyQP60OYqCWEYWKom?=
- =?us-ascii?Q?NQ0RgoTdVh7Q0Y8S03MeOgZc4b8+yBRqQreNQCW+2MWwbmTfdVUb9exorB2H?=
- =?us-ascii?Q?BAPeiV0pSijBRA1iLH9yE/9n81ABxqE8B2qyoJyzYRW4l5qQW8n7yElF4ST+?=
- =?us-ascii?Q?R3Ju/vtzRxHQsHtdHfIhfIAloZth2/xh72inYxIfq8RlS9dWtEsSU3NJtWjp?=
- =?us-ascii?Q?WXYX4RHxUiT37YxMkkLY9gy/7JBqaNUTphnw3KamkhnLWW0ElFRB4JTOrOmt?=
- =?us-ascii?Q?oSOIFbAHKYUlQFCzFX1EVBZIlM9Xgw7Vxa8lPsc23h7ED3IwJ6eweEaNIoGg?=
- =?us-ascii?Q?oSax547QQp00GL0tymX/Mob6X80VyUCSbBQ7eQ6Ls7IehQrbQcmDtbnxXEuF?=
- =?us-ascii?Q?pjVs3tMk7lX4OBkP3nyy+pTh+BhhMUM1zH/nf9kvGC421733HQFqb23VB7Pg?=
- =?us-ascii?Q?fbpM/megUpARo6C01U7EdBlLp5zELe0J4MEd6end013MhOnfCJbBk0iNsh+T?=
- =?us-ascii?Q?paTS21hgWCxs3GG/kiJzNoq2TBCqS0qoNul6pdfsyacfGWRDVDmheDI/hmaK?=
- =?us-ascii?Q?Yder5jg/U+zcWYFkREXdQVCzM8s0++AJbTmvaC13bNfYD7FsriXkfZVzfjlb?=
- =?us-ascii?Q?abDy4uWuLjzG0DAbJAYRotod86aoHb6i4T3EiC5jUgDwsakTHw=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Lq/JXuxcIUddMc3f3nfMDJYQRYuM/5OHW/aBCA2i4C3dIfvaaUsC7Iabcxzr?=
+ =?us-ascii?Q?IHbGfMnTteZa4Of7/LP6YvzrpfGYHjX7kG7MJ/pSnzZaYmcr8VjHKHasfW+h?=
+ =?us-ascii?Q?5Ce03+Io0/WSm7vJqoFnxsYiQgbbgPyR2/wnVVRDu17KyQJ9BrTsEzQd3Qiw?=
+ =?us-ascii?Q?bLQDUwLTw/Tc5B10tLhgELCcqqZwg1T1IEQMgWybZgbuuWKnl2o07fJbGKj1?=
+ =?us-ascii?Q?0tLSjUdrEiGXF4hksAryUBgWUjVcyfd6QnkJ93/nGIxJZvpkMmmkjvkGTr+2?=
+ =?us-ascii?Q?qV9ARagzMWfRzL/bV3JIETF1T1lMR1YUaqEKLUEMETmV78uMhnPInxCD8JKQ?=
+ =?us-ascii?Q?ub++xBgNSYKFdA8J3ctiqUQWzZuab1YwZ9nD+qvPGqNKIrCdGM9i1CVIcJby?=
+ =?us-ascii?Q?jenPzyPHJxpcfDli4XApFQxVnrTwqXITZ/Rq+Y6CzhujaX4DoCLqPXPp9jJ5?=
+ =?us-ascii?Q?k0mC9ZVul7toJxGb73CZsJ+48dwCOVnxvD6WH5QXO8diL6eaPol/cHxSsHBj?=
+ =?us-ascii?Q?R2dLn71ulR1P2ycv7kxCb1LDPce/iWojSIl83oFx3hAOld3jndY0q4w3d0R8?=
+ =?us-ascii?Q?7rVqJVAtdcLeNTsJpsKP/G2f81YhHblT89hcmkATEES3Mc5CfjxLkFwP6LWe?=
+ =?us-ascii?Q?N8u4qcNdQ+V3/skzdMRMEjEFbnlJqpk+ecRi37fxUP2obh1pZ/neUpP61HE+?=
+ =?us-ascii?Q?lhXbcHg3/1bUkL2Y34R9i55k1ku1KcXAC88XpfCd7CISk6FJZoM6wfE5Uhxy?=
+ =?us-ascii?Q?KD/RC1OjBlawjMLVrbRLc2Q4czfXRH6YrvbFbvvAlJvDDnIQp78LeeCwBiEZ?=
+ =?us-ascii?Q?9XZUJgPCdCuXa34EwfPAIiWMseKZGkNjnIUJmRhfujx3lUh9gltrbxb9jHjN?=
+ =?us-ascii?Q?eMT/Tit54oW5t+83LFNCKHNZDfr1klq4azrJF4GlO7X7t8/pV1aIiJMyCxjP?=
+ =?us-ascii?Q?WeIg1zx91hozlRaFgmc8jiAaVcTDHv7w6HTBPqrujt/PWC/fec5npy9X+Twy?=
+ =?us-ascii?Q?oqLYS1MuuXh0mBorpU3yKALyhpOvk3jbDv/ovPrX8IUlF3TI9hmmBaA6lpQw?=
+ =?us-ascii?Q?o1TW0CXD7EhzxaPdQQWvMkCAB1VwFT1cWlllVAEdZLy8SRCgssb8+sCzaJwf?=
+ =?us-ascii?Q?8Mx9bm0iJYrSLoJ9HO+orOW04QCMzTI0WbwAtHLRPLP5EEcziga19qUy6UKr?=
+ =?us-ascii?Q?fl9Iz36GrDTTRaiUvA3Io2xtTh2cx03olLhc/o+By62JsFQBStJZntJHjtow?=
+ =?us-ascii?Q?KrOcVpHIlg9t6ubBZ3LGzhRuZhgwlaMRCGs2RKjv6fHfBBrMjWyakpPTxxzy?=
+ =?us-ascii?Q?SX/DZO4o1Su4odh8OZJ/yLHC315tUOCtedrYLF0DIPO4d1wkkER2/tY4izKY?=
+ =?us-ascii?Q?uxrCwtfOq6OtoKWNkrXneKdIroclRzvxydhveqfU3HGP+kCexj+PAj7EiJt8?=
+ =?us-ascii?Q?PzM/YMEeH7I=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DM4PR10MB8218.namprd10.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Mjq+u95rqadhOgov6GggnrIs71hRIu3SxShCnnVNI4R56Mm9CJVSTn7Ie4T+?=
- =?us-ascii?Q?Yo8CdH64MeYTDAplgwdWtmgPLZ/c8RjUvheErv1GpFOryp/5F8yaGxXmvaJW?=
- =?us-ascii?Q?6zaADoDaaYlZ8bRNxf2lrzavbbivHUZURAI/YRYTdVvsr+qRy1mwizcLFWl3?=
- =?us-ascii?Q?sQ0HPubD8Zva7nOJiJEUaOFDZSbgvxtxHIqYVKzFqE+pVhY3RQ7Zhx+XPaJs?=
- =?us-ascii?Q?Xk6fjVgt7Aj/CJSNkvTDHqPI7crkvdEDRoDfMneUMD9dsRMISEt7rPtZpOLX?=
- =?us-ascii?Q?e1WsfPXMuYAvvRT8bWqa88fBIfj/UUoEGBEzDj/OTuw22BEqnKd1L36QcpXc?=
- =?us-ascii?Q?hPn1gl3zVWVOfLdSYS37e5ffkgJK5laCKgpqFzvTM3ZtV4XNJN1LQeAFF6B9?=
- =?us-ascii?Q?a1G5EKOuodKBCly/6BkYWoxpbdZ1iKI6hH/YH7ZCqji9GtIyj1VXm0LIsd4y?=
- =?us-ascii?Q?A5NMzMee84wZnWNFu0e4ZnWuxfzDzwesDVTQM+PJqKBXIPbW+bp3H9CXvtSo?=
- =?us-ascii?Q?ArbbYCNcVuVfBDBIH9J9lsnTniLUQdrNydtlGkNqilceQ2pzXL2jjymGkZVr?=
- =?us-ascii?Q?wjWUmBh65A+R2rJ1I8hMNvdhri1zEI5VNh1ucQXzv7rZxaazp88ZJYef9Bz4?=
- =?us-ascii?Q?UZuA7wjbzwzAzUQaISvaN7kMcX4NPb8x3nA8xVqRsZqfHRm9wiadX5wasqa1?=
- =?us-ascii?Q?ke2oKwifn/UEgsivdMFW5HUPqXxyPVVSvT8V5c12/rs3no34Ua64t1hDlHYV?=
- =?us-ascii?Q?cF184IADJl1iaRioSo9aWsb4vaRfV7CDsRidqjwUgs1y8BNrQSmaySED/Ojy?=
- =?us-ascii?Q?odL/dgq7gnr+rWc/uc096PcHDXVxiI4b9bgZnY6JL2JbrF0ARr/d2VPW5b40?=
- =?us-ascii?Q?CiVQKmZYjVdbDTZAOIs8pcIa/BAfSuQ/gMjBUluhU9uSBZAaHUyQCipfCo7n?=
- =?us-ascii?Q?xG3B6zjrkTK+Un6yD98Blkvu/svaI1kwrC3UiPa3Fyxak2p4roEuUSthi1mI?=
- =?us-ascii?Q?iK2iNMrJha8LUqf8RDgfDWHRNGG31lhrd1S3UldnN7mTHCgpFxe2NJ0GDSnc?=
- =?us-ascii?Q?nHREmxHy+nH3CgJ7AQ7NF8pg2XrXpDLV1axJKnB7nYuwnLzq1WEc8gtrgxNC?=
- =?us-ascii?Q?KKxbJ1Jlt1d8JMY183bonxGbdqDGr0LoWZkBwLM5BOLXUVderKnz/37mhXaL?=
- =?us-ascii?Q?yDZbrjpvLf9FDpR+ol3EZnjGuQ2ClLOAAt1//wzGGTLRBS7WPjACEn/Sf7ad?=
- =?us-ascii?Q?6tDUozUZJHncNyaRvyWvt2K5EQD99A0fLtmLK5xmZbGj0udEXhI/lDF+f6Au?=
- =?us-ascii?Q?1+p5IRi8X+IYtRBJ5wNCapZsJkGDAXLjoyPRYD4CwhjvD7Cnxjpve2OWSf92?=
- =?us-ascii?Q?ctWn8CF5XOm+8RlcSTgvb41f/Yqt8uOy8dNgkxTfizGV3+Ct2aF+Q05P3JO/?=
- =?us-ascii?Q?QjagO8WNNF0J3cLU7hlpzyqlJ4326n5Dl6QoJ5upAtLm41AIwiAbl5F26ptQ?=
- =?us-ascii?Q?Oku+FtJkJnRo3CS7YNiRYGp/GLjiqI3CgsjI3Cps1Vh2+t/qKbxHXxWtRCzg?=
- =?us-ascii?Q?p5kgLUTDdER5WD2G5BA7qtk93uNLIuzqS8Np80GtE0CXXdb9fmpP7CR0A+1C?=
- =?us-ascii?Q?dw=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kbRRHJVmGk1TU+JFgb2z8lLtiTkzeH329qdGqd0Sym9XDXemqcxFekJkYQyx?=
+ =?us-ascii?Q?i8C0wfhmmtH2rWZHKiGGDoHAk27dcLMC84nfNGrytgjztJ9eOyAFBFN19THy?=
+ =?us-ascii?Q?rCpfyq8m5ubHsYH6wcmOE5cuicIPffSPecdp51uFOjAtq+sM4MKAIII10m9i?=
+ =?us-ascii?Q?3Yuvbx9sSMAJaPMQyci/XGNKtqmgFdHKevtvFZgObsI4Sk30NFBwqi66Exo7?=
+ =?us-ascii?Q?U038mLzkH6JkDoUh5CrxjHwEW+I3O0UrNbjBLQAdsQwSsKH0K28rLfWiti7+?=
+ =?us-ascii?Q?sGt01BbPp4xqn8TnTbR02U6sz8ItVgtiunLxn5+l6plwZ8Hqz/5FonD/2JgK?=
+ =?us-ascii?Q?/qGsKCcE9uNjFxfYsacXroiDR9bXjc9jL1OMFqpD1B1E2UqKYiQMT2KS3YKj?=
+ =?us-ascii?Q?dQLmzKDeCzWo2TKsUCCvSt/B53+86MVlRQqs7ZA50YoN7zcUH9U0bjLGlD7u?=
+ =?us-ascii?Q?IYARcqQsnK1GAAkZol1EEkdXsvWllsMnISugA38bCmnqURzGCs6zxkt5Nu+H?=
+ =?us-ascii?Q?Cflh+5wYHJu4UFHFKoijaBRl/w03uL6MYTntw7uhWBXupJzQYApAJReGY57X?=
+ =?us-ascii?Q?fMAjxR5MTUK1oIA4TEfH7NCQVdIxhkgc0HoohDXZleLVZ+xLTr43tPhuTMZS?=
+ =?us-ascii?Q?h7HPzYcxw0ETiLCxmExFyjlPW/xPhvbHqGc1uv26UhL4YRhiTiJSlEjMUubq?=
+ =?us-ascii?Q?sfmw5z+rewtHRyu0fgPZSpEhLIUN2AcExkMttyrIc/4kPyf48m8jCb94wE6K?=
+ =?us-ascii?Q?0fxPALsXmNBxTNOqYTWG/TP+7XSKFNPAL+Te3ZhVwmNmgecp0hEX1I35hK18?=
+ =?us-ascii?Q?0FdrlWaWuzyeHrb6hhYy8ychJZ3yh+eWOhLtsvb3y2c9sHYC0jFfdcMcNv8L?=
+ =?us-ascii?Q?uR0T78b3KFpBQbB0l0PdQfaQL32tq9opd0r6hvXfNqe5eV/R/BhCTzJ4wxxQ?=
+ =?us-ascii?Q?n0E0RWtKvCfECgWc/fdPs9Yr1jwWFaoMfLIXF7CSxEY7didWFfNIr8Talxos?=
+ =?us-ascii?Q?aG9OOhbun8hfUUBvyp6oQmrtOA0GGRmMKx4RMF9yTR6Km/Qn++VbaTWv7BmU?=
+ =?us-ascii?Q?xxFOCpBp0CuDDc+BFizdf8vKg7tqNwX3N+TGafuXmG4H6Vtk/cMebF1p+Hzy?=
+ =?us-ascii?Q?T5cV26OSmMDkNrLXq/vGY2QmUXmWHCoq/Qhgopl/szST8OLqlJzb1UgymIcc?=
+ =?us-ascii?Q?3sSXI9nsf9TYTKRasFTQCaywNNg6jAnuH/cMUd4Sbd0uyvYBqyhx8jMwb5hC?=
+ =?us-ascii?Q?SH1Vf8JJzB5nGjuNmUl1qzfK98DsxS/mLNXM+EWvrehwmXysT+SRHutoWV1b?=
+ =?us-ascii?Q?ZcH4MGMkotZi4NCiDP51tTVmyydb7al/uXVZwddA7TfRYqU+Og2+e8I2Ypro?=
+ =?us-ascii?Q?hH3d2YBs4SA0O+fVVLrCU2u1lvntkuk/dQI9c2GgzX3scO1sv/Rx9RrfUySf?=
+ =?us-ascii?Q?CMaHW9+otdoY6jNWwVbCYnSr4SNs0YismOE4x5xaJKvGM3uctHnjQ+v9byf6?=
+ =?us-ascii?Q?nLMecCWRm1J0hGZRsCVRSR9U4M55rRC213/qRubSxDqgo28vOiW2QGkPRBqS?=
+ =?us-ascii?Q?gYcaMErpV2yQ1o3kkW4YeyrrG8/dW+6fG52IHfJOdJoy0ofQKDKCmUHOhgLf?=
+ =?us-ascii?Q?OA=3D=3D?=
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 82mOfjkYTvy5HizBZmNFzEI4RuVpwM50UiiOm+nAr1f1UFDUxTdLAAOhMmB+EUpsI3oIJrRb3OqDPBdOKbZwB+Op2eYRH2+5t540O9YVQ1VZwunN6cUWHrtgGGKDZUVCDnxPw71xgTA6vRbW4tb4oF4ulI9j/xYVrif+tLPmyjS9ttKRGMTv8CdeC/PgeDCKDgKOyzIvCYYGJeAbB3c9CydFKCuG4Yfy8IBtHIqCVbYBSoQ7DKaP/zg282PIlpBvcwqjCuJpo1vfeXZpnfrE9wMGwv2abtMXsjFiGFeU0/SHz+w60QsGxwVR1xa53P639Ib93EE/5E5vA4pw4Q5x0Qj8vYSQe7QqdJpUU6sjyYQFeZ5IDOz7sct/xt0mEJvKsWxhv7xsKI6h55Iqy7NFJ9R1O0jY1yEjEv1Tqz36DZUYYfIW9sr3p2+MNAzj32Lt5mNmAx188HGEPzSNmsA6LBVyeZYktAxtn5UfFoXfMDo8r80HG4STP+JLJxSj29WS7EnIVe+ngcn0inJsTPNkLOHslBc0B19/0aiulwOJQ2eGITgutg/ljhvxHBU45JiYR6ndVSNCIc2rEH/oGIvuZs4eq4jbZIhBu9nYmrKs/wE=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 0cKv79Ihlmo3Xy0CRCQfLEnMNyrg85/76pSxNshmR6emerNUE8pn2K10Zj0sGnRBMVSAZ9pq3qyU168HgnXupvlVnVxLTUp1Zltp3OuvBLdBV9h32PiauoHykVf/koBj0MpPm2fmMz5u2a9dhkeX2PEZAEmVl62BHwNjc1pbXLdfRpL1N+JqkLYRNeI5Mh3AjkzMoEuaz1NXi3oq1nmNwwPIyZHAZ+JvRUte2KhwdAUCb3uFhvbmO0JpqrMQD5PsSJUaaxkPJDMGh3m9feBydj7tom5DTOIxHH2+cCJrMzrNLrlEnQ17JUBm1m0kKWv3TitdU2Eh7CWkkmba93knOMEralmpmkUNShjfcwqaTgdqXqdXSpevPxDDeajgSq1sOaZvh7b8+oEVTebuhCpUpQ4PyKEorewq6+LGAGjFdc+ezbMt3naLm/BOMmygq5D7JvFl6gN3YgSJCGxthwJX/TxAC+0z5HoDUE+Kn+0iZvOmbYzuUcNpl5vsRZIeM1UsoMBPzF0ZBkdvt4Mh3A8shb7PC74xIjMA20FTPuFLcUVCt3LzU/CGMAMDB7RdnZAbcwOniWsbfYIJnoaRqjfI9Jfkf783Ojrt1+GVkWauav4=
 X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 67dafbc6-9a06-418d-ac38-08ddad0cc31d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 09d3187b-9492-498c-5afe-08ddad0cc4a8
 X-MS-Exchange-CrossTenant-AuthSource: DM4PR10MB8218.namprd10.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2025 19:34:08.3459 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2025 19:34:10.9629 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JQGRITd8FcWc10crX1cu8sa7JgaQWQhoCdLpjtXvmcOGQtJe2ZfoO1HaM93jtfTKfSwP8R+CcYb30akpLzgc00slGF43CsJcAQnogfG2IxY=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 47fkr0TaSvubZuUP/GrUap0CT9AGc2QfdPtolL12EpZCazESC+Vx3CG+udzLsy7vuGHgTSaSL25nf5Z1dWMbM/cyoEW+W9XIosAErD7F/rw=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB5563
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
@@ -191,22 +192,22 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
  adultscore=0 suspectscore=0 mlxscore=0 mlxlogscore=999 bulkscore=0
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2505160000
  definitions=main-2506160134
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjE2MDEzNCBTYWx0ZWRfX24wb5glWXip6
- 84PqEX5xjsaCyhJInUI2DD5DVlegstpeqh0eCLi8Apd0TBVmZmHCeeHI1OCTmGqbUSq5QyfzOk+
- GZLeKS82QTdT0EkULXxgcNYEtvRRjOs/kL+r/eZ8pLyqhmPmi+x3Wy84uv/S6IcJ4K+Yocxj5Bk
- xOyzrgjeRAIv+R5XCgrTFcfhHjuKbjfTunvkQ0Op6XFM68bZMvgKrRNjlwTlDCttKOEmca4+ErN
- y1Q1Tg12nq8yNI2SFNCi63VKAUyr/FZhvEu3BoSTgShSXwyIqB3KHmWRdCVOrfHZUyOIjUAO/7R
- KpacUwwm3SaRwHgm8xm7utMfxCB9Wya+rzQiynWE3DOxabBGLKqtYmrHWxqegFjcO1+9KI7VnE1
- Ozskbq2MOne0cJDRvQXE+3CJG99Icp8it9HO53YnoVVpH1sUzWm8Qg/F9N2146GYzsvET9rm
-X-Authority-Analysis: v=2.4 cv=HvR2G1TS c=1 sm=1 tr=0 ts=685071b6 b=1 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjE2MDEzNCBTYWx0ZWRfX3b5VMDvE1NZD
+ NB9W+4mfdO03hH8+gv2jxInx0CFwC9DA08tJc4R7RQwA3V+jT+krBfVn7GrFJnOWGX1N6PfFD/c
+ j2c36KPtIpp/mH07iJTWjMfjxvfGTu3HXnaUCCwUi6ggQHH724N5rcEJujSAXy9E8GeyCRvSfAs
+ UCEni1sKneIaeYg0m+dRXglluG1uw8uK4H52hGZds9e0wvpR6mY1zG47P2MTyn6LGuaNkHJibgW
+ hnaQNRzDILfa/OS/aBUGqyFrbVtasl/Ad3y4KrUCmVhOnLjVlVaMhtgSfzOaDmqBEk7TXQlabDG
+ oxkO+CG7rjUJjtrhnqMOrNP251s89/ZicLFUF3HEMoU9+8ZwqCdGQ6cJYXsCpoH3ZHuJXvLpKpR
+ wotWcURqLsMBWg+ZELzbVJQU4/eEQjZPKXVBCfqO3m4ifCRpvECecVJY4NzUVmAKmP1rRJcY
+X-Proofpoint-ORIG-GUID: TdGYHk6aJx7_ghJ_K5k9ksQM6Ndj98fx
+X-Authority-Analysis: v=2.4 cv=X/5SKHTe c=1 sm=1 tr=0 ts=685071b9 b=1 cx=c_pps
  a=qoll8+KPOyaMroiJ2sR5sw==:117 a=qoll8+KPOyaMroiJ2sR5sw==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
  a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
  a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=6IFa9wvqVegA:10
- a=GoEa3M9JfhUA:10 a=yPCof4ZbAAAA:8 a=N9YiVZMDQbCJ4-uU5HYA:9 cc=ntf
+ a=GoEa3M9JfhUA:10 a=yPCof4ZbAAAA:8 a=SMoXfSvzbREBZZtL5eoA:9 cc=ntf
  awl=host:13207
-X-Proofpoint-GUID: bTHHFIoYw1dtjVcd9xnxcmex_WbDbMJB
-X-Proofpoint-ORIG-GUID: bTHHFIoYw1dtjVcd9xnxcmex_WbDbMJB
+X-Proofpoint-GUID: TdGYHk6aJx7_ghJ_K5k9ksQM6Ndj98fx
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -214,12 +215,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Update nearly all generic_file_mmap() and
- generic_file_readonly_mmap()
- callers to use generic_file_mmap_prepare() and
- generic_file_readonly_mmap_prepare()
- respectively. We update blkdev, 9p, afs, erofs, ext2, nfs, ntfs3, smb, ubifs
- and vboxsf file systems this way. 
+ Content preview: Since commit c84bf6dd2b83 ("mm: introduce new .mmap_prepare()
+ file callback"),
+ the f_op->mmap() hook has been deprecated in favour of f_op->mmap_prepare().
+ This callback is invoked in the mmap() logic far earlier, so error handling
+ can be performed more safely without complicated and bug-prone state unwinding
+ required should an error arise. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -235,9 +236,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 ARC_SIGNED             Message has a ARC signature
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1uRFbj-0008KG-6s
-Subject: [f2fs-dev] [PATCH 09/10] fs: convert most other
- generic_file_*mmap() users to .mmap_prepare()
+X-Headers-End: 1uRFbp-0008Ky-0K
+Subject: [f2fs-dev] [PATCH 10/10] fs: replace mmap hook with .mmap_prepare
+ for simple mappings
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -317,539 +318,470 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Update nearly all generic_file_mmap() and generic_file_readonly_mmap()
-callers to use generic_file_mmap_prepare() and
-generic_file_readonly_mmap_prepare() respectively.
+Since commit c84bf6dd2b83 ("mm: introduce new .mmap_prepare() file
+callback"), the f_op->mmap() hook has been deprecated in favour of
+f_op->mmap_prepare().
 
-We update blkdev, 9p, afs, erofs, ext2, nfs, ntfs3, smb, ubifs and vboxsf
-file systems this way.
+This callback is invoked in the mmap() logic far earlier, so error handling
+can be performed more safely without complicated and bug-prone state
+unwinding required should an error arise.
 
-Remaining users we cannot yet update are ecryptfs, fuse and cramfs. The
-former two are nested file systems that must support any underlying file
-ssytem, and cramfs inserts a mixed mapping which currently requires a VMA.
+This hook also avoids passing a pointer to a not-yet-correctly-established
+VMA avoiding any issues with referencing this data structure.
 
-Once all file systems have been converted to mmap_prepare(), we can then
-update nested file systems.
+It rather provides a pointer to the new struct vm_area_desc descriptor type
+which contains all required state and allows easy setting of required
+parameters without any consideration needing to be paid to locking or
+reference counts.
+
+Note that nested filesystems like overlayfs are compatible with an
+.mmap_prepare() callback since commit bb666b7c2707 ("mm: add mmap_prepare()
+compatibility layer for nested file systems").
+
+In this patch we apply this change to file systems with relatively simple
+mmap() hook logic - exfat, ceph, f2fs, bcachefs, zonefs, btrfs, ocfs2,
+orangefs, nilfs2, romfs, ramfs and aio.
 
 Signed-off-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
 ---
- block/fops.c           |  9 +++++----
- fs/9p/vfs_file.c       | 11 ++++++-----
- fs/afs/file.c          | 11 ++++++-----
- fs/erofs/data.c        | 16 +++++++++-------
- fs/ext2/file.c         | 12 +++++++-----
- fs/nfs/file.c          | 13 +++++++------
- fs/nfs/internal.h      |  2 +-
- fs/nfs/nfs4file.c      |  2 +-
- fs/ntfs3/file.c        | 15 ++++++++-------
- fs/smb/client/cifsfs.c | 12 ++++++------
- fs/smb/client/cifsfs.h |  4 ++--
- fs/smb/client/file.c   | 14 ++++++++------
- fs/ubifs/file.c        |  8 ++++----
- fs/vboxsf/file.c       |  8 ++++----
- 14 files changed, 74 insertions(+), 63 deletions(-)
+ fs/aio.c              |  8 ++++----
+ fs/bcachefs/fs.c      |  8 ++++----
+ fs/btrfs/file.c       |  7 ++++---
+ fs/ceph/addr.c        |  5 +++--
+ fs/ceph/file.c        |  2 +-
+ fs/ceph/super.h       |  2 +-
+ fs/exfat/file.c       |  7 ++++---
+ fs/f2fs/file.c        |  7 ++++---
+ fs/nilfs2/file.c      |  8 ++++----
+ fs/ocfs2/file.c       |  4 ++--
+ fs/ocfs2/mmap.c       |  5 +++--
+ fs/ocfs2/mmap.h       |  2 +-
+ fs/orangefs/file.c    | 10 ++++++----
+ fs/ramfs/file-nommu.c | 12 ++++++------
+ fs/romfs/mmap-nommu.c |  6 +++---
+ fs/zonefs/file.c      | 10 ++++++----
+ 16 files changed, 56 insertions(+), 47 deletions(-)
 
-diff --git a/block/fops.c b/block/fops.c
-index 1309861d4c2c..5a0ebc81e489 100644
---- a/block/fops.c
-+++ b/block/fops.c
-@@ -911,14 +911,15 @@ static long blkdev_fallocate(struct file *file, int mode, loff_t start,
- 	return error;
- }
- 
--static int blkdev_mmap(struct file *file, struct vm_area_struct *vma)
-+static int blkdev_mmap_prepare(struct vm_area_desc *desc)
- {
-+	struct file *file = desc->file;
- 	struct inode *bd_inode = bdev_file_inode(file);
- 
- 	if (bdev_read_only(I_BDEV(bd_inode)))
--		return generic_file_readonly_mmap(file, vma);
-+		return generic_file_readonly_mmap_prepare(desc);
- 
--	return generic_file_mmap(file, vma);
-+	return generic_file_mmap_prepare(desc);
- }
- 
- const struct file_operations def_blk_fops = {
-@@ -928,7 +929,7 @@ const struct file_operations def_blk_fops = {
- 	.read_iter	= blkdev_read_iter,
- 	.write_iter	= blkdev_write_iter,
- 	.iopoll		= iocb_bio_iopoll,
--	.mmap		= blkdev_mmap,
-+	.mmap_prepare	= blkdev_mmap_prepare,
- 	.fsync		= blkdev_fsync,
- 	.unlocked_ioctl	= blkdev_ioctl,
- #ifdef CONFIG_COMPAT
-diff --git a/fs/9p/vfs_file.c b/fs/9p/vfs_file.c
-index 2ff3e0ac7266..eb0b083da269 100644
---- a/fs/9p/vfs_file.c
-+++ b/fs/9p/vfs_file.c
-@@ -454,9 +454,10 @@ int v9fs_file_fsync_dotl(struct file *filp, loff_t start, loff_t end,
- }
- 
- static int
--v9fs_file_mmap(struct file *filp, struct vm_area_struct *vma)
-+v9fs_file_mmap_prepare(struct vm_area_desc *desc)
- {
- 	int retval;
-+	struct file *filp = desc->file;
- 	struct inode *inode = file_inode(filp);
- 	struct v9fs_session_info *v9ses = v9fs_inode2v9ses(inode);
- 
-@@ -464,12 +465,12 @@ v9fs_file_mmap(struct file *filp, struct vm_area_struct *vma)
- 
- 	if (!(v9ses->cache & CACHE_WRITEBACK)) {
- 		p9_debug(P9_DEBUG_CACHE, "(read-only mmap mode)");
--		return generic_file_readonly_mmap(filp, vma);
-+		return generic_file_readonly_mmap_prepare(desc);
- 	}
- 
--	retval = generic_file_mmap(filp, vma);
-+	retval = generic_file_mmap_prepare(desc);
- 	if (!retval)
--		vma->vm_ops = &v9fs_mmap_file_vm_ops;
-+		desc->vm_ops = &v9fs_mmap_file_vm_ops;
- 
- 	return retval;
- }
-@@ -531,7 +532,7 @@ const struct file_operations v9fs_file_operations_dotl = {
- 	.release = v9fs_dir_release,
- 	.lock = v9fs_file_lock_dotl,
- 	.flock = v9fs_file_flock_dotl,
--	.mmap = v9fs_file_mmap,
-+	.mmap_prepare = v9fs_file_mmap_prepare,
- 	.splice_read = v9fs_file_splice_read,
- 	.splice_write = iter_file_splice_write,
- 	.fsync = v9fs_file_fsync_dotl,
-diff --git a/fs/afs/file.c b/fs/afs/file.c
-index fc15497608c6..aa899292979b 100644
---- a/fs/afs/file.c
-+++ b/fs/afs/file.c
-@@ -19,7 +19,7 @@
- #include <trace/events/netfs.h>
- #include "internal.h"
- 
--static int afs_file_mmap(struct file *file, struct vm_area_struct *vma);
-+static int afs_file_mmap_prepare(struct vm_area_desc *desc);
- 
- static ssize_t afs_file_read_iter(struct kiocb *iocb, struct iov_iter *iter);
- static ssize_t afs_file_splice_read(struct file *in, loff_t *ppos,
-@@ -35,7 +35,7 @@ const struct file_operations afs_file_operations = {
- 	.llseek		= generic_file_llseek,
- 	.read_iter	= afs_file_read_iter,
- 	.write_iter	= netfs_file_write_iter,
--	.mmap		= afs_file_mmap,
-+	.mmap_prepare	= afs_file_mmap_prepare,
- 	.splice_read	= afs_file_splice_read,
- 	.splice_write	= iter_file_splice_write,
- 	.fsync		= afs_fsync,
-@@ -492,16 +492,17 @@ static void afs_drop_open_mmap(struct afs_vnode *vnode)
- /*
-  * Handle setting up a memory mapping on an AFS file.
-  */
--static int afs_file_mmap(struct file *file, struct vm_area_struct *vma)
-+static int afs_file_mmap_prepare(struct vm_area_desc *desc)
- {
-+	struct file *file = desc->file;
- 	struct afs_vnode *vnode = AFS_FS_I(file_inode(file));
- 	int ret;
- 
- 	afs_add_open_mmap(vnode);
- 
--	ret = generic_file_mmap(file, vma);
-+	ret = generic_file_mmap_prepare(desc);
- 	if (ret == 0)
--		vma->vm_ops = &afs_vm_ops;
-+		desc->vm_ops = &afs_vm_ops;
- 	else
- 		afs_drop_open_mmap(vnode);
- 	return ret;
-diff --git a/fs/erofs/data.c b/fs/erofs/data.c
-index 6a329c329f43..52dfd1a44c43 100644
---- a/fs/erofs/data.c
-+++ b/fs/erofs/data.c
-@@ -409,20 +409,22 @@ static const struct vm_operations_struct erofs_dax_vm_ops = {
- 	.huge_fault	= erofs_dax_huge_fault,
+diff --git a/fs/aio.c b/fs/aio.c
+index 793b7b15ec4b..7fc7b6221312 100644
+--- a/fs/aio.c
++++ b/fs/aio.c
+@@ -392,15 +392,15 @@ static const struct vm_operations_struct aio_ring_vm_ops = {
+ #endif
  };
  
--static int erofs_file_mmap(struct file *file, struct vm_area_struct *vma)
-+static int erofs_file_mmap_prepare(struct vm_area_desc *desc)
+-static int aio_ring_mmap(struct file *file, struct vm_area_struct *vma)
++static int aio_ring_mmap_prepare(struct vm_area_desc *desc)
  {
-+	struct file *file = desc->file;
-+
- 	if (!IS_DAX(file_inode(file)))
--		return generic_file_readonly_mmap(file, vma);
-+		return generic_file_readonly_mmap_prepare(desc);
- 
--	if ((vma->vm_flags & VM_SHARED) && (vma->vm_flags & VM_MAYWRITE))
-+	if ((desc->vm_flags & VM_SHARED) && (desc->vm_flags & VM_MAYWRITE))
- 		return -EINVAL;
- 
--	vma->vm_ops = &erofs_dax_vm_ops;
--	vm_flags_set(vma, VM_HUGEPAGE);
-+	desc->vm_ops = &erofs_dax_vm_ops;
-+	desc->vm_flags |= VM_HUGEPAGE;
+-	vm_flags_set(vma, VM_DONTEXPAND);
+-	vma->vm_ops = &aio_ring_vm_ops;
++	desc->vm_flags |= VM_DONTEXPAND;
++	desc->vm_ops = &aio_ring_vm_ops;
  	return 0;
  }
- #else
--#define erofs_file_mmap	generic_file_readonly_mmap
-+#define erofs_file_mmap_prepare	generic_file_readonly_mmap_prepare
- #endif
  
- static loff_t erofs_file_llseek(struct file *file, loff_t offset, int whence)
-@@ -452,7 +454,7 @@ static loff_t erofs_file_llseek(struct file *file, loff_t offset, int whence)
- const struct file_operations erofs_file_fops = {
- 	.llseek		= erofs_file_llseek,
- 	.read_iter	= erofs_file_read_iter,
--	.mmap		= erofs_file_mmap,
-+	.mmap_prepare	= erofs_file_mmap_prepare,
+ static const struct file_operations aio_ring_fops = {
+-	.mmap = aio_ring_mmap,
++	.mmap_prepare = aio_ring_mmap_prepare,
+ };
+ 
+ #if IS_ENABLED(CONFIG_MIGRATION)
+diff --git a/fs/bcachefs/fs.c b/fs/bcachefs/fs.c
+index 3063a8ddc2df..9c2238edc0e3 100644
+--- a/fs/bcachefs/fs.c
++++ b/fs/bcachefs/fs.c
+@@ -1553,11 +1553,11 @@ static const struct vm_operations_struct bch_vm_ops = {
+ 	.page_mkwrite   = bch2_page_mkwrite,
+ };
+ 
+-static int bch2_mmap(struct file *file, struct vm_area_struct *vma)
++static int bch2_mmap_prepare(struct vm_area_desc *desc)
+ {
+-	file_accessed(file);
++	file_accessed(desc->file);
+ 
+-	vma->vm_ops = &bch_vm_ops;
++	desc->vm_ops = &bch_vm_ops;
+ 	return 0;
+ }
+ 
+@@ -1740,7 +1740,7 @@ static const struct file_operations bch_file_operations = {
+ 	.llseek		= bch2_llseek,
+ 	.read_iter	= bch2_read_iter,
+ 	.write_iter	= bch2_write_iter,
+-	.mmap		= bch2_mmap,
++	.mmap_prepare	= bch2_mmap_prepare,
  	.get_unmapped_area = thp_get_unmapped_area,
+ 	.fsync		= bch2_fsync,
  	.splice_read	= filemap_splice_read,
- };
-diff --git a/fs/ext2/file.c b/fs/ext2/file.c
-index 10b061ac5bc0..76bddce462fc 100644
---- a/fs/ext2/file.c
-+++ b/fs/ext2/file.c
-@@ -122,17 +122,19 @@ static const struct vm_operations_struct ext2_dax_vm_ops = {
- 	.pfn_mkwrite	= ext2_dax_fault,
+diff --git a/fs/btrfs/file.c b/fs/btrfs/file.c
+index 8ce6f45f45e0..06bd30b35b95 100644
+--- a/fs/btrfs/file.c
++++ b/fs/btrfs/file.c
+@@ -1978,15 +1978,16 @@ static const struct vm_operations_struct btrfs_file_vm_ops = {
+ 	.page_mkwrite	= btrfs_page_mkwrite,
  };
  
--static int ext2_file_mmap(struct file *file, struct vm_area_struct *vma)
-+static int ext2_file_mmap_prepare(struct vm_area_desc *desc)
+-static int btrfs_file_mmap(struct file	*filp, struct vm_area_struct *vma)
++static int btrfs_file_mmap_prepare(struct vm_area_desc *desc)
+ {
++	struct file *filp = desc->file;
+ 	struct address_space *mapping = filp->f_mapping;
+ 
+ 	if (!mapping->a_ops->read_folio)
+ 		return -ENOEXEC;
+ 
+ 	file_accessed(filp);
+-	vma->vm_ops = &btrfs_file_vm_ops;
++	desc->vm_ops = &btrfs_file_vm_ops;
+ 
+ 	return 0;
+ }
+@@ -3765,7 +3766,7 @@ const struct file_operations btrfs_file_operations = {
+ 	.splice_read	= filemap_splice_read,
+ 	.write_iter	= btrfs_file_write_iter,
+ 	.splice_write	= iter_file_splice_write,
+-	.mmap		= btrfs_file_mmap,
++	.mmap_prepare	= btrfs_file_mmap_prepare,
+ 	.open		= btrfs_file_open,
+ 	.release	= btrfs_release_file,
+ 	.get_unmapped_area = thp_get_unmapped_area,
+diff --git a/fs/ceph/addr.c b/fs/ceph/addr.c
+index 60a621b00c65..37522137c380 100644
+--- a/fs/ceph/addr.c
++++ b/fs/ceph/addr.c
+@@ -2330,13 +2330,14 @@ static const struct vm_operations_struct ceph_vmops = {
+ 	.page_mkwrite	= ceph_page_mkwrite,
+ };
+ 
+-int ceph_mmap(struct file *file, struct vm_area_struct *vma)
++int ceph_mmap_prepare(struct vm_area_desc *desc)
  {
 +	struct file *file = desc->file;
-+
- 	if (!IS_DAX(file_inode(file)))
--		return generic_file_mmap(file, vma);
-+		return generic_file_mmap_prepare(desc);
+ 	struct address_space *mapping = file->f_mapping;
+ 
+ 	if (!mapping->a_ops->read_folio)
+ 		return -ENOEXEC;
+-	vma->vm_ops = &ceph_vmops;
++	desc->vm_ops = &ceph_vmops;
+ 	return 0;
+ }
+ 
+diff --git a/fs/ceph/file.c b/fs/ceph/file.c
+index d5c674d2ba8a..41b8ec33e864 100644
+--- a/fs/ceph/file.c
++++ b/fs/ceph/file.c
+@@ -3170,7 +3170,7 @@ const struct file_operations ceph_file_fops = {
+ 	.llseek = ceph_llseek,
+ 	.read_iter = ceph_read_iter,
+ 	.write_iter = ceph_write_iter,
+-	.mmap = ceph_mmap,
++	.mmap_prepare = ceph_mmap_prepare,
+ 	.fsync = ceph_fsync,
+ 	.lock = ceph_lock,
+ 	.setlease = simple_nosetlease,
+diff --git a/fs/ceph/super.h b/fs/ceph/super.h
+index bb0db0cc8003..cf176aab0f82 100644
+--- a/fs/ceph/super.h
++++ b/fs/ceph/super.h
+@@ -1286,7 +1286,7 @@ extern void __ceph_touch_fmode(struct ceph_inode_info *ci,
+ /* addr.c */
+ extern const struct address_space_operations ceph_aops;
+ extern const struct netfs_request_ops ceph_netfs_ops;
+-extern int ceph_mmap(struct file *file, struct vm_area_struct *vma);
++int ceph_mmap_prepare(struct vm_area_desc *desc);
+ extern int ceph_uninline_data(struct file *file);
+ extern int ceph_pool_perm_check(struct inode *inode, int need);
+ extern void ceph_pool_perm_destroy(struct ceph_mds_client* mdsc);
+diff --git a/fs/exfat/file.c b/fs/exfat/file.c
+index 841a5b18e3df..d63213c8a823 100644
+--- a/fs/exfat/file.c
++++ b/fs/exfat/file.c
+@@ -683,13 +683,14 @@ static const struct vm_operations_struct exfat_file_vm_ops = {
+ 	.page_mkwrite	= exfat_page_mkwrite,
+ };
+ 
+-static int exfat_file_mmap(struct file *file, struct vm_area_struct *vma)
++static int exfat_file_mmap_prepare(struct vm_area_desc *desc)
+ {
++	struct file *file = desc->file;
+ 	if (unlikely(exfat_forced_shutdown(file_inode(file)->i_sb)))
+ 		return -EIO;
  
  	file_accessed(file);
--	vma->vm_ops = &ext2_dax_vm_ops;
-+	desc->vm_ops = &ext2_dax_vm_ops;
+-	vma->vm_ops = &exfat_file_vm_ops;
++	desc->vm_ops = &exfat_file_vm_ops;
  	return 0;
  }
- #else
--#define ext2_file_mmap	generic_file_mmap
-+#define ext2_file_mmap_prepare	generic_file_mmap_prepare
- #endif
  
- /*
-@@ -316,7 +318,7 @@ const struct file_operations ext2_file_operations = {
+@@ -710,7 +711,7 @@ const struct file_operations exfat_file_operations = {
  #ifdef CONFIG_COMPAT
- 	.compat_ioctl	= ext2_compat_ioctl,
+ 	.compat_ioctl = exfat_compat_ioctl,
  #endif
--	.mmap		= ext2_file_mmap,
-+	.mmap_prepare	= ext2_file_mmap_prepare,
- 	.open		= ext2_file_open,
- 	.release	= ext2_release_file,
- 	.fsync		= ext2_fsync,
-diff --git a/fs/nfs/file.c b/fs/nfs/file.c
-index 033feeab8c34..b51b75cf981d 100644
---- a/fs/nfs/file.c
-+++ b/fs/nfs/file.c
-@@ -207,24 +207,25 @@ nfs_file_splice_read(struct file *in, loff_t *ppos, struct pipe_inode_info *pipe
- EXPORT_SYMBOL_GPL(nfs_file_splice_read);
+-	.mmap		= exfat_file_mmap,
++	.mmap_prepare	= exfat_file_mmap_prepare,
+ 	.fsync		= exfat_file_fsync,
+ 	.splice_read	= exfat_splice_read,
+ 	.splice_write	= iter_file_splice_write,
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 6bd3de64f2a8..7af2b49b7e8a 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -532,8 +532,9 @@ static loff_t f2fs_llseek(struct file *file, loff_t offset, int whence)
+ 	return -EINVAL;
+ }
  
- int
--nfs_file_mmap(struct file *file, struct vm_area_struct *vma)
-+nfs_file_mmap_prepare(struct vm_area_desc *desc)
+-static int f2fs_file_mmap(struct file *file, struct vm_area_struct *vma)
++static int f2fs_file_mmap_prepare(struct vm_area_desc *desc)
  {
 +	struct file *file = desc->file;
  	struct inode *inode = file_inode(file);
- 	int	status;
  
- 	dprintk("NFS: mmap(%pD2)\n", file);
+ 	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
+@@ -543,7 +544,7 @@ static int f2fs_file_mmap(struct file *file, struct vm_area_struct *vma)
+ 		return -EOPNOTSUPP;
  
--	/* Note: generic_file_mmap() returns ENOSYS on nommu systems
-+	/* Note: generic_file_mmap_prepare() returns ENOSYS on nommu systems
- 	 *       so we call that before revalidating the mapping
- 	 */
--	status = generic_file_mmap(file, vma);
-+	status = generic_file_mmap_prepare(desc);
- 	if (!status) {
--		vma->vm_ops = &nfs_file_vm_ops;
-+		desc->vm_ops = &nfs_file_vm_ops;
- 		status = nfs_revalidate_mapping(inode, file->f_mapping);
- 	}
- 	return status;
- }
--EXPORT_SYMBOL_GPL(nfs_file_mmap);
-+EXPORT_SYMBOL_GPL(nfs_file_mmap_prepare);
+ 	file_accessed(file);
+-	vma->vm_ops = &f2fs_file_vm_ops;
++	desc->vm_ops = &f2fs_file_vm_ops;
  
- /*
-  * Flush any dirty pages for this process, and check for write errors.
-@@ -899,7 +900,7 @@ const struct file_operations nfs_file_operations = {
- 	.llseek		= nfs_file_llseek,
- 	.read_iter	= nfs_file_read,
- 	.write_iter	= nfs_file_write,
--	.mmap		= nfs_file_mmap,
-+	.mmap_prepare	= nfs_file_mmap_prepare,
- 	.open		= nfs_file_open,
- 	.flush		= nfs_file_flush,
- 	.release	= nfs_file_release,
-diff --git a/fs/nfs/internal.h b/fs/nfs/internal.h
-index 69c2c10ee658..26551ff09a52 100644
---- a/fs/nfs/internal.h
-+++ b/fs/nfs/internal.h
-@@ -432,7 +432,7 @@ loff_t nfs_file_llseek(struct file *, loff_t, int);
- ssize_t nfs_file_read(struct kiocb *, struct iov_iter *);
- ssize_t nfs_file_splice_read(struct file *in, loff_t *ppos, struct pipe_inode_info *pipe,
- 			     size_t len, unsigned int flags);
--int nfs_file_mmap(struct file *, struct vm_area_struct *);
-+int nfs_file_mmap_prepare(struct vm_area_desc *);
- ssize_t nfs_file_write(struct kiocb *, struct iov_iter *);
- int nfs_file_release(struct inode *, struct file *);
- int nfs_lock(struct file *, int, struct file_lock *);
-diff --git a/fs/nfs/nfs4file.c b/fs/nfs/nfs4file.c
-index 5e9d66f3466c..5c749b6117bb 100644
---- a/fs/nfs/nfs4file.c
-+++ b/fs/nfs/nfs4file.c
-@@ -456,7 +456,7 @@ static int nfs4_setlease(struct file *file, int arg, struct file_lease **lease,
- const struct file_operations nfs4_file_operations = {
- 	.read_iter	= nfs_file_read,
- 	.write_iter	= nfs_file_write,
--	.mmap		= nfs_file_mmap,
-+	.mmap_prepare	= nfs_file_mmap_prepare,
- 	.open		= nfs4_file_open,
- 	.flush		= nfs4_file_flush,
- 	.release	= nfs_file_release,
-diff --git a/fs/ntfs3/file.c b/fs/ntfs3/file.c
-index 1e99a35691cd..7f2ec1c7106c 100644
---- a/fs/ntfs3/file.c
-+++ b/fs/ntfs3/file.c
-@@ -261,14 +261,15 @@ static int ntfs_zero_range(struct inode *inode, u64 vbo, u64 vbo_to)
+ 	f2fs_down_read(&F2FS_I(inode)->i_sem);
+ 	set_inode_flag(inode, FI_MMAP_FILE);
+@@ -5376,7 +5377,7 @@ const struct file_operations f2fs_file_operations = {
+ 	.iopoll		= iocb_bio_iopoll,
+ 	.open		= f2fs_file_open,
+ 	.release	= f2fs_release_file,
+-	.mmap		= f2fs_file_mmap,
++	.mmap_prepare	= f2fs_file_mmap_prepare,
+ 	.flush		= f2fs_file_flush,
+ 	.fsync		= f2fs_sync_file,
+ 	.fallocate	= f2fs_fallocate,
+diff --git a/fs/nilfs2/file.c b/fs/nilfs2/file.c
+index 0e3fc5ba33c7..1b8d754db44d 100644
+--- a/fs/nilfs2/file.c
++++ b/fs/nilfs2/file.c
+@@ -125,10 +125,10 @@ static const struct vm_operations_struct nilfs_file_vm_ops = {
+ 	.page_mkwrite	= nilfs_page_mkwrite,
+ };
+ 
+-static int nilfs_file_mmap(struct file *file, struct vm_area_struct *vma)
++static int nilfs_file_mmap_prepare(struct vm_area_desc *desc)
+ {
+-	file_accessed(file);
+-	vma->vm_ops = &nilfs_file_vm_ops;
++	file_accessed(desc->file);
++	desc->vm_ops = &nilfs_file_vm_ops;
+ 	return 0;
  }
  
- /*
-- * ntfs_file_mmap - file_operations::mmap
-+ * ntfs_file_mmap_prepare - file_operations::mmap_prepare
+@@ -144,7 +144,7 @@ const struct file_operations nilfs_file_operations = {
+ #ifdef CONFIG_COMPAT
+ 	.compat_ioctl	= nilfs_compat_ioctl,
+ #endif	/* CONFIG_COMPAT */
+-	.mmap		= nilfs_file_mmap,
++	.mmap_prepare	= nilfs_file_mmap_prepare,
+ 	.open		= generic_file_open,
+ 	/* .release	= nilfs_release_file, */
+ 	.fsync		= nilfs_sync_file,
+diff --git a/fs/ocfs2/file.c b/fs/ocfs2/file.c
+index 2056cf08ac1e..21d797ccccd0 100644
+--- a/fs/ocfs2/file.c
++++ b/fs/ocfs2/file.c
+@@ -2800,7 +2800,7 @@ const struct inode_operations ocfs2_special_file_iops = {
   */
--static int ntfs_file_mmap(struct file *file, struct vm_area_struct *vma)
-+static int ntfs_file_mmap_prepare(struct vm_area_desc *desc)
+ const struct file_operations ocfs2_fops = {
+ 	.llseek		= ocfs2_file_llseek,
+-	.mmap		= ocfs2_mmap,
++	.mmap_prepare	= ocfs2_mmap_prepare,
+ 	.fsync		= ocfs2_sync_file,
+ 	.release	= ocfs2_file_release,
+ 	.open		= ocfs2_file_open,
+@@ -2850,7 +2850,7 @@ const struct file_operations ocfs2_dops = {
+  */
+ const struct file_operations ocfs2_fops_no_plocks = {
+ 	.llseek		= ocfs2_file_llseek,
+-	.mmap		= ocfs2_mmap,
++	.mmap_prepare	= ocfs2_mmap_prepare,
+ 	.fsync		= ocfs2_sync_file,
+ 	.release	= ocfs2_file_release,
+ 	.open		= ocfs2_file_open,
+diff --git a/fs/ocfs2/mmap.c b/fs/ocfs2/mmap.c
+index 6a314e9f2b49..50e2faf64c19 100644
+--- a/fs/ocfs2/mmap.c
++++ b/fs/ocfs2/mmap.c
+@@ -159,8 +159,9 @@ static const struct vm_operations_struct ocfs2_file_vm_ops = {
+ 	.page_mkwrite	= ocfs2_page_mkwrite,
+ };
+ 
+-int ocfs2_mmap(struct file *file, struct vm_area_struct *vma)
++int ocfs2_mmap_prepare(struct vm_area_desc *desc)
  {
 +	struct file *file = desc->file;
- 	struct inode *inode = file_inode(file);
- 	struct ntfs_inode *ni = ntfs_i(inode);
--	u64 from = ((u64)vma->vm_pgoff << PAGE_SHIFT);
--	bool rw = vma->vm_flags & VM_WRITE;
-+	u64 from = ((u64)desc->pgoff << PAGE_SHIFT);
-+	bool rw = desc->vm_flags & VM_WRITE;
- 	int err;
+ 	int ret = 0, lock_level = 0;
  
- 	if (unlikely(ntfs3_forced_shutdown(inode->i_sb)))
-@@ -291,7 +292,7 @@ static int ntfs_file_mmap(struct file *file, struct vm_area_struct *vma)
- 
- 	if (rw) {
- 		u64 to = min_t(loff_t, i_size_read(inode),
--			       from + vma->vm_end - vma->vm_start);
-+			       from + desc->end - desc->start);
- 
- 		if (is_sparsed(ni)) {
- 			/* Allocate clusters for rw map. */
-@@ -319,7 +320,7 @@ static int ntfs_file_mmap(struct file *file, struct vm_area_struct *vma)
- 		}
+ 	ret = ocfs2_inode_lock_atime(file_inode(file),
+@@ -171,7 +172,7 @@ int ocfs2_mmap(struct file *file, struct vm_area_struct *vma)
  	}
- 
--	err = generic_file_mmap(file, vma);
-+	err = generic_file_mmap_prepare(desc);
+ 	ocfs2_inode_unlock(file_inode(file), lock_level);
  out:
- 	return err;
- }
-@@ -1331,7 +1332,7 @@ const struct file_operations ntfs_file_operations = {
- #endif
- 	.splice_read	= ntfs_file_splice_read,
- 	.splice_write	= ntfs_file_splice_write,
--	.mmap		= ntfs_file_mmap,
-+	.mmap_prepare	= ntfs_file_mmap_prepare,
- 	.open		= ntfs_file_open,
- 	.fsync		= generic_file_fsync,
- 	.fallocate	= ntfs_fallocate,
-diff --git a/fs/smb/client/cifsfs.c b/fs/smb/client/cifsfs.c
-index 0a5266ecfd15..d1e6b5cf7d99 100644
---- a/fs/smb/client/cifsfs.c
-+++ b/fs/smb/client/cifsfs.c
-@@ -1525,7 +1525,7 @@ const struct file_operations cifs_file_ops = {
- 	.flock = cifs_flock,
- 	.fsync = cifs_fsync,
- 	.flush = cifs_flush,
--	.mmap  = cifs_file_mmap,
-+	.mmap_prepare = cifs_file_mmap_prepare,
- 	.splice_read = filemap_splice_read,
- 	.splice_write = iter_file_splice_write,
- 	.llseek = cifs_llseek,
-@@ -1545,7 +1545,7 @@ const struct file_operations cifs_file_strict_ops = {
- 	.flock = cifs_flock,
- 	.fsync = cifs_strict_fsync,
- 	.flush = cifs_flush,
--	.mmap = cifs_file_strict_mmap,
-+	.mmap_prepare = cifs_file_strict_mmap_prepare,
- 	.splice_read = filemap_splice_read,
- 	.splice_write = iter_file_splice_write,
- 	.llseek = cifs_llseek,
-@@ -1565,7 +1565,7 @@ const struct file_operations cifs_file_direct_ops = {
- 	.flock = cifs_flock,
- 	.fsync = cifs_fsync,
- 	.flush = cifs_flush,
--	.mmap = cifs_file_mmap,
-+	.mmap_prepare = cifs_file_mmap_prepare,
- 	.splice_read = copy_splice_read,
- 	.splice_write = iter_file_splice_write,
- 	.unlocked_ioctl  = cifs_ioctl,
-@@ -1583,7 +1583,7 @@ const struct file_operations cifs_file_nobrl_ops = {
- 	.release = cifs_close,
- 	.fsync = cifs_fsync,
- 	.flush = cifs_flush,
--	.mmap  = cifs_file_mmap,
-+	.mmap_prepare = cifs_file_mmap_prepare,
- 	.splice_read = filemap_splice_read,
- 	.splice_write = iter_file_splice_write,
- 	.llseek = cifs_llseek,
-@@ -1601,7 +1601,7 @@ const struct file_operations cifs_file_strict_nobrl_ops = {
- 	.release = cifs_close,
- 	.fsync = cifs_strict_fsync,
- 	.flush = cifs_flush,
--	.mmap = cifs_file_strict_mmap,
-+	.mmap_prepare = cifs_file_strict_mmap_prepare,
- 	.splice_read = filemap_splice_read,
- 	.splice_write = iter_file_splice_write,
- 	.llseek = cifs_llseek,
-@@ -1619,7 +1619,7 @@ const struct file_operations cifs_file_direct_nobrl_ops = {
- 	.release = cifs_close,
- 	.fsync = cifs_fsync,
- 	.flush = cifs_flush,
--	.mmap = cifs_file_mmap,
-+	.mmap_prepare = cifs_file_mmap_prepare,
- 	.splice_read = copy_splice_read,
- 	.splice_write = iter_file_splice_write,
- 	.unlocked_ioctl  = cifs_ioctl,
-diff --git a/fs/smb/client/cifsfs.h b/fs/smb/client/cifsfs.h
-index b9ec9fe16a98..487f39cff77e 100644
---- a/fs/smb/client/cifsfs.h
-+++ b/fs/smb/client/cifsfs.h
-@@ -103,8 +103,8 @@ extern int cifs_lock(struct file *, int, struct file_lock *);
- extern int cifs_fsync(struct file *, loff_t, loff_t, int);
- extern int cifs_strict_fsync(struct file *, loff_t, loff_t, int);
- extern int cifs_flush(struct file *, fl_owner_t id);
--extern int cifs_file_mmap(struct file *file, struct vm_area_struct *vma);
--extern int cifs_file_strict_mmap(struct file *file, struct vm_area_struct *vma);
-+int cifs_file_mmap_prepare(struct vm_area_desc *desc);
-+int cifs_file_strict_mmap_prepare(struct vm_area_desc *desc);
- extern const struct file_operations cifs_dir_ops;
- extern int cifs_readdir(struct file *file, struct dir_context *ctx);
- 
-diff --git a/fs/smb/client/file.c b/fs/smb/client/file.c
-index 9835672267d2..2ed5173cfa73 100644
---- a/fs/smb/client/file.c
-+++ b/fs/smb/client/file.c
-@@ -2995,8 +2995,9 @@ static const struct vm_operations_struct cifs_file_vm_ops = {
- 	.page_mkwrite = cifs_page_mkwrite,
- };
- 
--int cifs_file_strict_mmap(struct file *file, struct vm_area_struct *vma)
-+int cifs_file_strict_mmap_prepare(struct vm_area_desc *desc)
- {
-+	struct file *file = desc->file;
- 	int xid, rc = 0;
- 	struct inode *inode = file_inode(file);
- 
-@@ -3005,16 +3006,17 @@ int cifs_file_strict_mmap(struct file *file, struct vm_area_struct *vma)
- 	if (!CIFS_CACHE_READ(CIFS_I(inode)))
- 		rc = cifs_zap_mapping(inode);
- 	if (!rc)
--		rc = generic_file_mmap(file, vma);
-+		rc = generic_file_mmap_prepare(desc);
- 	if (!rc)
--		vma->vm_ops = &cifs_file_vm_ops;
-+		desc->vm_ops = &cifs_file_vm_ops;
- 
- 	free_xid(xid);
- 	return rc;
+-	vma->vm_ops = &ocfs2_file_vm_ops;
++	desc->vm_ops = &ocfs2_file_vm_ops;
+ 	return 0;
  }
  
--int cifs_file_mmap(struct file *file, struct vm_area_struct *vma)
-+int cifs_file_mmap_prepare(struct vm_area_desc *desc)
+diff --git a/fs/ocfs2/mmap.h b/fs/ocfs2/mmap.h
+index 1051507cc684..d21c30de6b8c 100644
+--- a/fs/ocfs2/mmap.h
++++ b/fs/ocfs2/mmap.h
+@@ -2,6 +2,6 @@
+ #ifndef OCFS2_MMAP_H
+ #define OCFS2_MMAP_H
+ 
+-int ocfs2_mmap(struct file *file, struct vm_area_struct *vma);
++int ocfs2_mmap_prepare(struct vm_area_desc *desc);
+ 
+ #endif  /* OCFS2_MMAP_H */
+diff --git a/fs/orangefs/file.c b/fs/orangefs/file.c
+index 90c49c0de243..919f99b16834 100644
+--- a/fs/orangefs/file.c
++++ b/fs/orangefs/file.c
+@@ -398,8 +398,9 @@ static const struct vm_operations_struct orangefs_file_vm_ops = {
+ /*
+  * Memory map a region of a file.
+  */
+-static int orangefs_file_mmap(struct file *file, struct vm_area_struct *vma)
++static int orangefs_file_mmap_prepare(struct vm_area_desc *desc)
  {
 +	struct file *file = desc->file;
- 	int rc, xid;
+ 	int ret;
  
- 	xid = get_xid();
-@@ -3024,9 +3026,9 @@ int cifs_file_mmap(struct file *file, struct vm_area_struct *vma)
- 		cifs_dbg(FYI, "Validation prior to mmap failed, error=%d\n",
- 			 rc);
- 	if (!rc)
--		rc = generic_file_mmap(file, vma);
-+		rc = generic_file_mmap_prepare(desc);
- 	if (!rc)
--		vma->vm_ops = &cifs_file_vm_ops;
-+		desc->vm_ops = &cifs_file_vm_ops;
+ 	ret = orangefs_revalidate_mapping(file_inode(file));
+@@ -410,10 +411,11 @@ static int orangefs_file_mmap(struct file *file, struct vm_area_struct *vma)
+ 		     "orangefs_file_mmap: called on %pD\n", file);
  
- 	free_xid(xid);
- 	return rc;
-diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
-index bf311c38d9a8..9dcb69fbf5c2 100644
---- a/fs/ubifs/file.c
-+++ b/fs/ubifs/file.c
-@@ -1579,17 +1579,17 @@ static const struct vm_operations_struct ubifs_file_vm_ops = {
- 	.page_mkwrite = ubifs_vm_page_mkwrite,
+ 	/* set the sequential readahead hint */
+-	vm_flags_mod(vma, VM_SEQ_READ, VM_RAND_READ);
++	desc->vm_flags |= VM_SEQ_READ;
++	desc->vm_flags &= ~VM_RAND_READ;
+ 
+ 	file_accessed(file);
+-	vma->vm_ops = &orangefs_file_vm_ops;
++	desc->vm_ops = &orangefs_file_vm_ops;
+ 	return 0;
+ }
+ 
+@@ -574,7 +576,7 @@ const struct file_operations orangefs_file_operations = {
+ 	.read_iter	= orangefs_file_read_iter,
+ 	.write_iter	= orangefs_file_write_iter,
+ 	.lock		= orangefs_lock,
+-	.mmap		= orangefs_file_mmap,
++	.mmap_prepare	= orangefs_file_mmap_prepare,
+ 	.open		= generic_file_open,
+ 	.splice_read    = orangefs_file_splice_read,
+ 	.splice_write   = iter_file_splice_write,
+diff --git a/fs/ramfs/file-nommu.c b/fs/ramfs/file-nommu.c
+index 7a6d980e614d..77b8ca2757e0 100644
+--- a/fs/ramfs/file-nommu.c
++++ b/fs/ramfs/file-nommu.c
+@@ -28,7 +28,7 @@ static unsigned long ramfs_nommu_get_unmapped_area(struct file *file,
+ 						   unsigned long len,
+ 						   unsigned long pgoff,
+ 						   unsigned long flags);
+-static int ramfs_nommu_mmap(struct file *file, struct vm_area_struct *vma);
++static int ramfs_nommu_mmap_prepare(struct vm_area_desc *desc);
+ 
+ static unsigned ramfs_mmap_capabilities(struct file *file)
+ {
+@@ -38,7 +38,7 @@ static unsigned ramfs_mmap_capabilities(struct file *file)
+ 
+ const struct file_operations ramfs_file_operations = {
+ 	.mmap_capabilities	= ramfs_mmap_capabilities,
+-	.mmap			= ramfs_nommu_mmap,
++	.mmap_prepare		= ramfs_nommu_mmap_prepare,
+ 	.get_unmapped_area	= ramfs_nommu_get_unmapped_area,
+ 	.read_iter		= generic_file_read_iter,
+ 	.write_iter		= generic_file_write_iter,
+@@ -262,12 +262,12 @@ static unsigned long ramfs_nommu_get_unmapped_area(struct file *file,
+ /*
+  * set up a mapping for shared memory segments
+  */
+-static int ramfs_nommu_mmap(struct file *file, struct vm_area_struct *vma)
++static int ramfs_nommu_mmap_prepare(struct vm_area_desc *desc)
+ {
+-	if (!is_nommu_shared_mapping(vma->vm_flags))
++	if (!is_nommu_shared_mapping(desc->vm_flags))
+ 		return -ENOSYS;
+ 
+-	file_accessed(file);
+-	vma->vm_ops = &generic_file_vm_ops;
++	file_accessed(desc->file);
++	desc->vm_ops = &generic_file_vm_ops;
+ 	return 0;
+ }
+diff --git a/fs/romfs/mmap-nommu.c b/fs/romfs/mmap-nommu.c
+index 4520ca413867..4b77c6dc4418 100644
+--- a/fs/romfs/mmap-nommu.c
++++ b/fs/romfs/mmap-nommu.c
+@@ -61,9 +61,9 @@ static unsigned long romfs_get_unmapped_area(struct file *file,
+  * permit a R/O mapping to be made directly through onto an MTD device if
+  * possible
+  */
+-static int romfs_mmap(struct file *file, struct vm_area_struct *vma)
++static int romfs_mmap_prepare(struct vm_area_desc *desc)
+ {
+-	return is_nommu_shared_mapping(vma->vm_flags) ? 0 : -ENOSYS;
++	return is_nommu_shared_mapping(desc->vm_flags) ? 0 : -ENOSYS;
+ }
+ 
+ static unsigned romfs_mmap_capabilities(struct file *file)
+@@ -79,7 +79,7 @@ const struct file_operations romfs_ro_fops = {
+ 	.llseek			= generic_file_llseek,
+ 	.read_iter		= generic_file_read_iter,
+ 	.splice_read		= filemap_splice_read,
+-	.mmap			= romfs_mmap,
++	.mmap_prepare		= romfs_mmap_prepare,
+ 	.get_unmapped_area	= romfs_get_unmapped_area,
+ 	.mmap_capabilities	= romfs_mmap_capabilities,
+ };
+diff --git a/fs/zonefs/file.c b/fs/zonefs/file.c
+index 42e2c0065bb3..c1848163b378 100644
+--- a/fs/zonefs/file.c
++++ b/fs/zonefs/file.c
+@@ -312,8 +312,10 @@ static const struct vm_operations_struct zonefs_file_vm_ops = {
+ 	.page_mkwrite	= zonefs_filemap_page_mkwrite,
  };
  
--static int ubifs_file_mmap(struct file *file, struct vm_area_struct *vma)
-+static int ubifs_file_mmap_prepare(struct vm_area_desc *desc)
+-static int zonefs_file_mmap(struct file *file, struct vm_area_struct *vma)
++static int zonefs_file_mmap_prepare(struct vm_area_desc *desc)
  {
- 	int err;
++	struct file *file = desc->file;
++
+ 	/*
+ 	 * Conventional zones accept random writes, so their files can support
+ 	 * shared writable mappings. For sequential zone files, only read
+@@ -321,11 +323,11 @@ static int zonefs_file_mmap(struct file *file, struct vm_area_struct *vma)
+ 	 * ordering between msync() and page cache writeback.
+ 	 */
+ 	if (zonefs_inode_is_seq(file_inode(file)) &&
+-	    (vma->vm_flags & VM_SHARED) && (vma->vm_flags & VM_MAYWRITE))
++	    (desc->vm_flags & VM_SHARED) && (desc->vm_flags & VM_MAYWRITE))
+ 		return -EINVAL;
  
--	err = generic_file_mmap(file, vma);
-+	err = generic_file_mmap_prepare(desc);
- 	if (err)
- 		return err;
- 	vma->vm_ops = &ubifs_file_vm_ops;
- 
- 	if (IS_ENABLED(CONFIG_UBIFS_ATIME_SUPPORT))
--		file_accessed(file);
-+		file_accessed(desc->file);
+ 	file_accessed(file);
+-	vma->vm_ops = &zonefs_file_vm_ops;
++	desc->vm_ops = &zonefs_file_vm_ops;
  
  	return 0;
  }
-@@ -1652,7 +1652,7 @@ const struct file_operations ubifs_file_operations = {
- 	.llseek         = generic_file_llseek,
- 	.read_iter      = generic_file_read_iter,
- 	.write_iter     = ubifs_write_iter,
--	.mmap           = ubifs_file_mmap,
-+	.mmap_prepare   = ubifs_file_mmap_prepare,
- 	.fsync          = ubifs_fsync,
- 	.unlocked_ioctl = ubifs_ioctl,
- 	.splice_read	= filemap_splice_read,
-diff --git a/fs/vboxsf/file.c b/fs/vboxsf/file.c
-index b492794f8e9a..82afb9430033 100644
---- a/fs/vboxsf/file.c
-+++ b/fs/vboxsf/file.c
-@@ -165,13 +165,13 @@ static const struct vm_operations_struct vboxsf_file_vm_ops = {
- 	.map_pages	= filemap_map_pages,
- };
- 
--static int vboxsf_file_mmap(struct file *file, struct vm_area_struct *vma)
-+static int vboxsf_file_mmap_prepare(struct vm_area_desc *desc)
- {
- 	int err;
- 
--	err = generic_file_mmap(file, vma);
-+	err = generic_file_mmap_prepare(desc);
- 	if (!err)
--		vma->vm_ops = &vboxsf_file_vm_ops;
-+		desc->vm_ops = &vboxsf_file_vm_ops;
- 
- 	return err;
- }
-@@ -213,7 +213,7 @@ const struct file_operations vboxsf_reg_fops = {
- 	.llseek = generic_file_llseek,
- 	.read_iter = generic_file_read_iter,
- 	.write_iter = generic_file_write_iter,
--	.mmap = vboxsf_file_mmap,
-+	.mmap_prepare = vboxsf_file_mmap_prepare,
- 	.open = vboxsf_file_open,
- 	.release = vboxsf_file_release,
- 	.fsync = noop_fsync,
+@@ -850,7 +852,7 @@ const struct file_operations zonefs_file_operations = {
+ 	.open		= zonefs_file_open,
+ 	.release	= zonefs_file_release,
+ 	.fsync		= zonefs_file_fsync,
+-	.mmap		= zonefs_file_mmap,
++	.mmap_prepare	= zonefs_file_mmap_prepare,
+ 	.llseek		= zonefs_file_llseek,
+ 	.read_iter	= zonefs_file_read_iter,
+ 	.write_iter	= zonefs_file_write_iter,
 -- 
 2.49.0
 
