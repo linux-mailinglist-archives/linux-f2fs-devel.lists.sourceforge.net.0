@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A192FADDBC5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Jun 2025 20:58:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33514ADDBCE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Jun 2025 20:58:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:From:References:To:MIME-Version:Date:Message-ID:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=2oH0WVxh3fiMEz2Ja+rgMT1ezRPdb9J9QYz74amqUk8=; b=bED7Zkbh64HMkNwZla1qYEfhRK
-	0s746Zu2NK6UHuxEcho5wSSt64InWJkSkv8Hv2cZ60aizz52UYlOJLXdDYtoqxVaOWWLMzE6eB96/
-	wOjE6haFHMsswy/2vlSrRaQ8MTj2YFYNLEObFrHrtrMqiAsfNVBc5fTlsqaa5oSokRSw=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=UBhQr4RwCY5ishkFbTx1Rvfe2b6E8exlfEXaXG4+oTY=; b=IjZ8CEjlDPuC5AAGxPk/qRduQo
+	C+K3Giq/ql4dTBge/D5aiMvoJLtpYr22o4GMJFUyw0HOtEjnn+a+dLhOggEpZhVulMxGkq5xNOuv8
+	sUMq5QXRWzk4EQl0vNmqQ0bRN/dULoxagsI9+4xY/6qu7kVQYMbNj21HlTFxu97k43GI=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uRbVZ-0007bH-C4;
-	Tue, 17 Jun 2025 18:58:09 +0000
+	id 1uRbVj-0004Vm-4X;
+	Tue, 17 Jun 2025 18:58:19 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <vbabka@suse.cz>) id 1uRbVX-0007b9-Qa
+ (envelope-from <vbabka@suse.cz>) id 1uRbVi-0004Vg-Fp
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 17 Jun 2025 18:58:07 +0000
+ Tue, 17 Jun 2025 18:58:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RgNDel3KBIdFRD20NWYscLXk0kRO4T4FPA8qn3r4sXM=; b=VEoTlQKF7wvqV0DfHeZcC1sEtN
- 3x8IvrxIMIOxTGhn6CIo7XCict8BZeqfiWtXQYopMU4XczCynqkAffeoVBAPTCeI2H6gQ/EJrsd8v
- hue05kecwLR/Rt/EJb4Lp4nIN2a2bqwbRlgM+LEL3ixE270zz/0YFDybGzZOj+020RpU=;
+ bh=xQIN6SGamOBSCPtNQTnN9qvUtYsIZ0wcOZBFq4Yrn10=; b=IBDKaV620A86XXA9oDsvwBjazd
+ luaDfyL/JZaulMxx37BrMf49OmYcR6zoxbMlFLoyjRl2ECofuOwu8dxVD6bppnvWZUToaZxCBy6lt
+ Tsi6Bthh7zEstUkZOeKD9pZApnfVzUQC8zsFryKoH3ZJtTzH94MSQX+zZwnWIULe8LEE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -40,78 +40,76 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RgNDel3KBIdFRD20NWYscLXk0kRO4T4FPA8qn3r4sXM=; b=FXR40xlAAYpyE7gLxLgV8HIdoR
- ztSiVzVgtdgvc1Ot/Htdn2nAm+Sr2PySd53SyVO2QrG+1EGnQpnYlNkTNl8dq39LnVux5NuUn9eAu
- XRhDnT5G4ENJ77OLoa5hZRRkm/D1emqGcfw275PNSgEHNgHOgSSCkmn9CyBqwD8afezM=;
+ bh=xQIN6SGamOBSCPtNQTnN9qvUtYsIZ0wcOZBFq4Yrn10=; b=FBLP9nEaHKw8uituWTr7peOLox
+ 9w14J7TnpMsAJPTq/HcJhvJkN1NkGkjpB21/dZksVNiscWqpgd8qhXH3vvH/irsk8yM62aejvSnQQ
+ 6CdEcmdObxpAhKYk5oRayqPY8jry9P10aUmFbt4eDLDHB5YSENipjXrTwBRUHcnlssHY=;
 Received: from smtp-out2.suse.de ([195.135.223.131])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uRbVW-0001QG-NZ for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 17 Jun 2025 18:58:07 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ id 1uRbVh-0001Qj-QM for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 17 Jun 2025 18:58:18 +0000
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 7242F1F7A8;
- Tue, 17 Jun 2025 18:57:59 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 851051F7B3;
+ Tue, 17 Jun 2025 18:58:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1750186679; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1750186691; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=RgNDel3KBIdFRD20NWYscLXk0kRO4T4FPA8qn3r4sXM=;
- b=ZVKFtgJxgU6rST6x9dHOvq53H+ZPhdDkqsTMNZ7d/0yKJ+jcnU1S6R0rBWo8a7kKqVmKDR
- ENZeVprBsNGqAloTMjfmaopwBrFh1v3JFCTUXrAM3nsjylqULQ91szWdRb3GulZRtVMafj
- G1fZdguD9n3huUX618MPIWVd8mTvJbs=
+ bh=xQIN6SGamOBSCPtNQTnN9qvUtYsIZ0wcOZBFq4Yrn10=;
+ b=tKtNSkr8RTlyOYCgUlHc1jFxTt1XfwcnpIwgMWTNfPVuDzXr+cN6gsT9sXcMEa7g5nWn6y
+ hSyfx4EzrZhKiYWCULyLuN8VVkf+TyHJPku8FAw21+7bf4dTWfXicv6u8gPRYV/6LOx0sh
+ I+2YM/eEtDGVW8mAgAHfxqRarsxDLvo=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1750186679;
+ s=susede2_ed25519; t=1750186691;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=RgNDel3KBIdFRD20NWYscLXk0kRO4T4FPA8qn3r4sXM=;
- b=5D1gAnpOzFQUDBJ63fx53UMHmj/Pinvy/HjB9v/V1oneL2XPt7iaxB1I7N+BFb4hFJ+WzO
- uMSoKL7nLRlBoMDg==
+ bh=xQIN6SGamOBSCPtNQTnN9qvUtYsIZ0wcOZBFq4Yrn10=;
+ b=0nXMkjcvOqwE/sE4iS+2RLR98yXcX0zauLgNZHeecfFMuNTAjJUxzZ4T9IceTonWPXDrvd
+ z5IW95JnDhJcHlDw==
 Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=ZVKFtgJx;
- dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=5D1gAnpO
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1750186679; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1750186691; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=RgNDel3KBIdFRD20NWYscLXk0kRO4T4FPA8qn3r4sXM=;
- b=ZVKFtgJxgU6rST6x9dHOvq53H+ZPhdDkqsTMNZ7d/0yKJ+jcnU1S6R0rBWo8a7kKqVmKDR
- ENZeVprBsNGqAloTMjfmaopwBrFh1v3JFCTUXrAM3nsjylqULQ91szWdRb3GulZRtVMafj
- G1fZdguD9n3huUX618MPIWVd8mTvJbs=
+ bh=xQIN6SGamOBSCPtNQTnN9qvUtYsIZ0wcOZBFq4Yrn10=;
+ b=tKtNSkr8RTlyOYCgUlHc1jFxTt1XfwcnpIwgMWTNfPVuDzXr+cN6gsT9sXcMEa7g5nWn6y
+ hSyfx4EzrZhKiYWCULyLuN8VVkf+TyHJPku8FAw21+7bf4dTWfXicv6u8gPRYV/6LOx0sh
+ I+2YM/eEtDGVW8mAgAHfxqRarsxDLvo=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1750186679;
+ s=susede2_ed25519; t=1750186691;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=RgNDel3KBIdFRD20NWYscLXk0kRO4T4FPA8qn3r4sXM=;
- b=5D1gAnpOzFQUDBJ63fx53UMHmj/Pinvy/HjB9v/V1oneL2XPt7iaxB1I7N+BFb4hFJ+WzO
- uMSoKL7nLRlBoMDg==
+ bh=xQIN6SGamOBSCPtNQTnN9qvUtYsIZ0wcOZBFq4Yrn10=;
+ b=0nXMkjcvOqwE/sE4iS+2RLR98yXcX0zauLgNZHeecfFMuNTAjJUxzZ4T9IceTonWPXDrvd
+ z5IW95JnDhJcHlDw==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 9AF47139E2;
- Tue, 17 Jun 2025 18:57:58 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id BEF73139E2;
+ Tue, 17 Jun 2025 18:58:10 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id niR8Jba6UWjwOAAAD6G6ig
- (envelope-from <vbabka@suse.cz>); Tue, 17 Jun 2025 18:57:58 +0000
-Message-ID: <be9523c7-d06e-4c5a-b040-94109420cfed@suse.cz>
-Date: Tue, 17 Jun 2025 20:57:58 +0200
+ by imap1.dmz-prg2.suse.org with ESMTPSA id AIVSLsK6UWgAOQAAD6G6ig
+ (envelope-from <vbabka@suse.cz>); Tue, 17 Jun 2025 18:58:10 +0000
+Message-ID: <896f522b-c055-442f-b6d6-82869bbe57e6@suse.cz>
+Date: Tue, 17 Jun 2025 20:58:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
  Andrew Morton <akpm@linux-foundation.org>
 References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
- <8d389f4994fa736aa8f9172bef8533c10a9e9011.1750099179.git.lorenzo.stoakes@oracle.com>
+ <5f120b644b5890d1b50202d0f0d4c9f0d6b62873.1750099179.git.lorenzo.stoakes@oracle.com>
 From: Vlastimil Babka <vbabka@suse.cz>
 Autocrypt: addr=vbabka@suse.cz; keydata=
  xsFNBFZdmxYBEADsw/SiUSjB0dM+vSh95UkgcHjzEVBlby/Fg+g42O7LAEkCYXi/vvq31JTB
@@ -152,12 +150,10 @@ Autocrypt: addr=vbabka@suse.cz; keydata=
  rywqgzTUhHFKKF6/9L/lYtrNcHU8Z6Y4Ju/MLUiNYkmtrGIMnkjKCiRqlRrZE/v5YFHbayRD
  dJKXobXTtCBYpLJM4ZYRpGZXne/FAtWNe4KbNJJqxMvrTOrnIatPj8NhBVI0RSJRsbilh6TE
  m6M14QORSWTLRg==
-In-Reply-To: <8d389f4994fa736aa8f9172bef8533c10a9e9011.1750099179.git.lorenzo.stoakes@oracle.com>
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: 7242F1F7A8
-X-Rspamd-Action: no action
+In-Reply-To: <5f120b644b5890d1b50202d0f0d4c9f0d6b62873.1750099179.git.lorenzo.stoakes@oracle.com>
 X-Spam-Flag: NO
-X-Spamd-Result: default: False [-1.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+X-Spam-Score: -0.80
+X-Spamd-Result: default: False [-0.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
  FORGED_RECIPIENTS(2.00)[m:akpm@linux-foundation.org, m:axboe@kernel.dk,
  m:rodrigo.vivi@intel.com, m:airlied@gmail.com, m:simona@ffwll.ch,
  m:ericvh@kernel.org, m:lucho@ionkov.net, m:asmadeus@codewreck.org,
@@ -176,52 +172,42 @@ X-Spamd-Result: default: False [-1.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
  m:dlemoal@kernel.or
  g,m:naohiro.aota@wdc.com,m:jth@kernel.org,m:dan.j.williams@intel.com,m:willy@infradead.org,m:jannh@google.com,m:linux-aio@kvack.org,m:linux-mm@kvack.org,m:codalist@coda.cs.cmu.edu,s:linux-mtd@lists.infradead.org,s:linux-um@lists.infradead.org,s:ntfs3@lists.linux.dev,s:nvdimm@lists.linux.dev,s:ocfs2-devel@lists.linux.dev,s:devel@lists.orangefs.org,s:samba-technical@lists.samba.org,s:jfs-discussion@lists.sourceforge.net,s:linux-karma-devel@lists.sourceforge.net];
  SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- NEURAL_HAM_SHORT(-0.20)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
- MIME_GOOD(-0.10)[text/plain]; MX_GOOD(-0.01)[];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_HAS_DN(0.00)[];
  DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
- FUZZY_BLOCKED(0.00)[rspamd.com]; ARC_NA(0.00)[];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- TO_DN_SOME(0.00)[]; MIME_TRACE(0.00)[0:+]; FROM_HAS_DN(0.00)[];
- RCVD_TLS_ALL(0.00)[];
- SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
- TO_MATCH_ENVRCPT_SOME(0.00)[]; RCPT_COUNT_GT_50(0.00)[112];
- RCVD_COUNT_TWO(0.00)[2]; FROM_EQ_ENVFROM(0.00)[];
  FREEMAIL_CC(0.00)[oracle.com,kernel.dk,linux.intel.com,intel.com,ursulin.net,gmail.com,ffwll.ch,kernel.org,ionkov.net,codewreck.org,crudebyte.com,suse.com,redhat.com,auristor.com,zeniv.linux.org.uk,suse.cz,kvack.org,szeredi.hu,linux.dev,fb.com,toxicpanda.com,cs.cmu.edu,tyhicks.com,linux.alibaba.com,google.com,huawei.com,samsung.com,sony.com,mit.edu,dilger.ca,mail.parknet.co.jp,dubeyko.com,physik.fu-berlin.de,vivo.com,nod.at,cambridgegreys.com,sipsolutions.net,artax.karlin.mff.cuni.cz,infradead.org,paragon-software.com,fasheh.com,evilplan.org,bobcopeland.com,omnibond.com,samba.org,manguebit.org,microsoft.com,talpey.com,wdc.com,suse.de,vger.kernel.org,lists.freedesktop.org,lists.linux.dev,lists.infradead.org,coda.cs.cmu.edu,lists.ozlabs.org,lists.sourceforge.net,lists.orangefs.org,lists.samba.org];
- MID_RHS_MATCH_FROM(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- TAGGED_RCPT(0.00)[]; DKIM_TRACE(0.00)[suse.cz:+];
- R_RATELIMIT(0.00)[to_ip_from(RLtt3oo4rjgrukgqu3o4a3j6w6)];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.cz:mid, suse.cz:dkim, suse.cz:email,
- oracle.com:email]
-X-Spam-Score: -1.01
+ MIME_TRACE(0.00)[0:+]; ARC_NA(0.00)[]; RCVD_TLS_ALL(0.00)[];
+ R_RATELIMIT(0.00)[to_ip_from(RLhdmq1yqo6msmksu19we7kgwn)];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
+ FROM_EQ_ENVFROM(0.00)[]; TO_DN_SOME(0.00)[];
+ TO_MATCH_ENVRCPT_SOME(0.00)[]; MID_RHS_MATCH_FROM(0.00)[];
+ RCPT_COUNT_GT_50(0.00)[112]; TAGGED_RCPT(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[oracle.com:email,suse.cz:mid,suse.cz:email]
 X-Spam-Level: 
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/16/25 21:33, Lorenzo Stoakes wrote: > The call_mmap()
- function violates the existing convention in > include/linux/fs.h whereby
- invocations of virtual file system hooks is > performed by function [...]
+ Content preview:  On 6/16/25 21:33,
+ Lorenzo Stoakes wrote: > Since commit c84bf6dd2b83
+ ("mm: introduce new .mmap_prepare() file > callback"), the f_op->mmap() hook
+ has been deprecated in favour of > f_op->mmap_prepare( [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [195.135.223.131 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1uRbVW-0001QG-NZ
-Subject: Re: [f2fs-dev] [PATCH 01/10] mm: rename call_mmap/mmap_prepare to
- vfs_mmap/mmap_prepare
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1uRbVh-0001Qj-QM
+Subject: Re: [f2fs-dev] [PATCH 02/10] mm/nommu: use
+ file_has_valid_mmap_hooks() helper
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -298,199 +284,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 6/16/25 21:33, Lorenzo Stoakes wrote:
-> The call_mmap() function violates the existing convention in
-> include/linux/fs.h whereby invocations of virtual file system hooks is
-> performed by functions prefixed with vfs_xxx().
+> Since commit c84bf6dd2b83 ("mm: introduce new .mmap_prepare() file
+> callback"), the f_op->mmap() hook has been deprecated in favour of
+> f_op->mmap_prepare().
 > 
-> Correct this by renaming call_mmap() to vfs_mmap(). This also avoids
-> confusion as to the fact that f_op->mmap_prepare may be invoked here.
-> 
-> Also rename __call_mmap_prepare() function to vfs_mmap_prepare() and adjust
-> to accept a file parameter, this is useful later for nested file systems.
-> 
-> Finally, fix up the VMA userland tests and ensure the mmap_prepare -> mmap
-> shim is implemented there.
+> Therefore, update the check for file operations supporting mmap() by using
+> the file_has_valid_mmap_hooks() helper function, which checks for either
+> f_op->mmap or f_op->mmap_prepare rather than checking only for f_op->mmap
+> directly.
 > 
 > Signed-off-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
 
 Acked-by: Vlastimil Babka <vbabka@suse.cz>
 
 > ---
->  drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c |  2 +-
->  fs/backing-file.c                          |  2 +-
->  fs/coda/file.c                             |  4 +--
->  include/linux/fs.h                         |  5 ++--
->  ipc/shm.c                                  |  2 +-
->  mm/internal.h                              |  2 +-
->  mm/vma.c                                   |  2 +-
->  tools/testing/vma/vma_internal.h           | 32 ++++++++++++++++++----
->  8 files changed, 35 insertions(+), 16 deletions(-)
+>  mm/nommu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c b/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
-> index 05e440643aa2..f4f1c979d1b9 100644
-> --- a/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
-> +++ b/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
-> @@ -105,7 +105,7 @@ static int i915_gem_dmabuf_mmap(struct dma_buf *dma_buf, struct vm_area_struct *
->  	if (!obj->base.filp)
->  		return -ENODEV;
+> diff --git a/mm/nommu.c b/mm/nommu.c
+> index b624acec6d2e..38c22ea0a95c 100644
+> --- a/mm/nommu.c
+> +++ b/mm/nommu.c
+> @@ -719,7 +719,7 @@ static int validate_mmap_request(struct file *file,
 >  
-> -	ret = call_mmap(obj->base.filp, vma);
-> +	ret = vfs_mmap(obj->base.filp, vma);
->  	if (ret)
->  		return ret;
+>  	if (file) {
+>  		/* files must support mmap */
+> -		if (!file->f_op->mmap)
+> +		if (!file_has_valid_mmap_hooks(file))
+>  			return -ENODEV;
 >  
-> diff --git a/fs/backing-file.c b/fs/backing-file.c
-> index 763fbe9b72b2..04018679bf69 100644
-> --- a/fs/backing-file.c
-> +++ b/fs/backing-file.c
-> @@ -339,7 +339,7 @@ int backing_file_mmap(struct file *file, struct vm_area_struct *vma,
->  	vma_set_file(vma, file);
->  
->  	old_cred = override_creds(ctx->cred);
-> -	ret = call_mmap(vma->vm_file, vma);
-> +	ret = vfs_mmap(vma->vm_file, vma);
->  	revert_creds(old_cred);
->  
->  	if (ctx->accessed)
-> diff --git a/fs/coda/file.c b/fs/coda/file.c
-> index 148856a582a9..2e6ea9319b35 100644
-> --- a/fs/coda/file.c
-> +++ b/fs/coda/file.c
-> @@ -199,10 +199,10 @@ coda_file_mmap(struct file *coda_file, struct vm_area_struct *vma)
->  	spin_unlock(&cii->c_lock);
->  
->  	vma->vm_file = get_file(host_file);
-> -	ret = call_mmap(vma->vm_file, vma);
-> +	ret = vfs_mmap(vma->vm_file, vma);
->  
->  	if (ret) {
-> -		/* if call_mmap fails, our caller will put host_file so we
-> +		/* if vfs_mmap fails, our caller will put host_file so we
->  		 * should drop the reference to the coda_file that we got.
->  		 */
->  		fput(coda_file);
-> diff --git a/include/linux/fs.h b/include/linux/fs.h
-> index 93ee0d2d6f1a..7120f80255b3 100644
-> --- a/include/linux/fs.h
-> +++ b/include/linux/fs.h
-> @@ -2278,7 +2278,7 @@ static inline bool file_has_valid_mmap_hooks(struct file *file)
->  
->  int compat_vma_mmap_prepare(struct file *file, struct vm_area_struct *vma);
->  
-> -static inline int call_mmap(struct file *file, struct vm_area_struct *vma)
-> +static inline int vfs_mmap(struct file *file, struct vm_area_struct *vma)
->  {
->  	if (file->f_op->mmap_prepare)
->  		return compat_vma_mmap_prepare(file, vma);
-> @@ -2286,8 +2286,7 @@ static inline int call_mmap(struct file *file, struct vm_area_struct *vma)
->  	return file->f_op->mmap(file, vma);
->  }
->  
-> -static inline int __call_mmap_prepare(struct file *file,
-> -		struct vm_area_desc *desc)
-> +static inline int vfs_mmap_prepare(struct file *file, struct vm_area_desc *desc)
->  {
->  	return file->f_op->mmap_prepare(desc);
->  }
-> diff --git a/ipc/shm.c b/ipc/shm.c
-> index 492fcc699985..a9310b6dbbc3 100644
-> --- a/ipc/shm.c
-> +++ b/ipc/shm.c
-> @@ -602,7 +602,7 @@ static int shm_mmap(struct file *file, struct vm_area_struct *vma)
->  	if (ret)
->  		return ret;
->  
-> -	ret = call_mmap(sfd->file, vma);
-> +	ret = vfs_mmap(sfd->file, vma);
->  	if (ret) {
->  		__shm_close(sfd);
->  		return ret;
-> diff --git a/mm/internal.h b/mm/internal.h
-> index 3823fb356d3b..a55c88afff6d 100644
-> --- a/mm/internal.h
-> +++ b/mm/internal.h
-> @@ -165,7 +165,7 @@ static inline void *folio_raw_mapping(const struct folio *folio)
->   */
->  static inline int mmap_file(struct file *file, struct vm_area_struct *vma)
->  {
-> -	int err = call_mmap(file, vma);
-> +	int err = vfs_mmap(file, vma);
->  
->  	if (likely(!err))
->  		return 0;
-> diff --git a/mm/vma.c b/mm/vma.c
-> index 5d35adadf2b5..f548bede3bbe 100644
-> --- a/mm/vma.c
-> +++ b/mm/vma.c
-> @@ -2582,7 +2582,7 @@ static int call_mmap_prepare(struct mmap_state *map)
->  	};
->  
->  	/* Invoke the hook. */
-> -	err = __call_mmap_prepare(map->file, &desc);
-> +	err = vfs_mmap_prepare(map->file, &desc);
->  	if (err)
->  		return err;
->  
-> diff --git a/tools/testing/vma/vma_internal.h b/tools/testing/vma/vma_internal.h
-> index d7fea56e3bb3..51dd122b8d50 100644
-> --- a/tools/testing/vma/vma_internal.h
-> +++ b/tools/testing/vma/vma_internal.h
-> @@ -1458,6 +1458,27 @@ static inline void free_anon_vma_name(struct vm_area_struct *vma)
->  	(void)vma;
->  }
->  
-> +/* Declared in vma.h. */
-> +static inline void set_vma_from_desc(struct vm_area_struct *vma,
-> +		struct vm_area_desc *desc);
-> +
-> +static inline struct vm_area_desc *vma_to_desc(struct vm_area_struct *vma,
-> +		struct vm_area_desc *desc);
-> +
-> +static int compat_vma_mmap_prepare(struct file *file,
-> +		struct vm_area_struct *vma)
-> +{
-> +	struct vm_area_desc desc;
-> +	int err;
-> +
-> +	err = file->f_op->mmap_prepare(vma_to_desc(vma, &desc));
-> +	if (err)
-> +		return err;
-> +	set_vma_from_desc(vma, &desc);
-> +
-> +	return 0;
-> +}
-> +
->  /* Did the driver provide valid mmap hook configuration? */
->  static inline bool file_has_valid_mmap_hooks(struct file *file)
->  {
-> @@ -1467,22 +1488,21 @@ static inline bool file_has_valid_mmap_hooks(struct file *file)
->  	/* Hooks are mutually exclusive. */
->  	if (WARN_ON_ONCE(has_mmap && has_mmap_prepare))
->  		return false;
-> -	if (WARN_ON_ONCE(!has_mmap && !has_mmap_prepare))
-> +	if (!has_mmap && !has_mmap_prepare)
->  		return false;
->  
->  	return true;
->  }
->  
-> -static inline int call_mmap(struct file *file, struct vm_area_struct *vma)
-> +static inline int vfs_mmap(struct file *file, struct vm_area_struct *vma)
->  {
-> -	if (WARN_ON_ONCE(file->f_op->mmap_prepare))
-> -		return -EINVAL;
-> +	if (file->f_op->mmap_prepare)
-> +		return compat_vma_mmap_prepare(file, vma);
->  
->  	return file->f_op->mmap(file, vma);
->  }
->  
-> -static inline int __call_mmap_prepare(struct file *file,
-> -		struct vm_area_desc *desc)
-> +static inline int vfs_mmap_prepare(struct file *file, struct vm_area_desc *desc)
->  {
->  	return file->f_op->mmap_prepare(desc);
->  }
+>  		/* work out if what we've got could possibly be shared
 
 
 
