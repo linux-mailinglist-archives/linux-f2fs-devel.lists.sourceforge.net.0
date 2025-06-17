@@ -2,86 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3529CADC989
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Jun 2025 13:37:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB487ADC9B8
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Jun 2025 13:44:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=RFOgWIlbkN820vFnzvn+TRLI07TG07XGl2/HRsv1fjE=; b=EgvN0pK7aqZebam2oHVI0eOf7I
-	FeCf+WNpF361u7qc/Xib7RxBxgLnIsvogjFbrIEjG+93QyV+E4Haf5QHx0a1+Z7SajkKc52/O6SsD
-	HNM4ju5XdsL7uac8ufCZ/K9sbjaQQCrrNXSEa6W8WMBsttM8t4c7BQwfrWc4wt+sETdg=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=b9RdGO4L+zk0WO7/0UXAktc4hfksko+V/xOcLWpErss=; b=iMk5gl5WE9d5SyXH4HB+3+Kw+3
+	YZNBfyptMaD8bl8zfc6U0TO7AwG9lgTz/LwFoo+vER25vQ2WQSHVNY8J2Zaui8UMNb8Ee6zqkx+6p
+	Exwb+ZxJAA34KcWz9/rW9/YQlDFEo0r7IQjTlSQz+20a3cD766ynvsAVrFt282Jb+gqU=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uRUdA-0005E0-M1;
-	Tue, 17 Jun 2025 11:37:32 +0000
+	id 1uRUjg-0004ZI-4b;
+	Tue, 17 Jun 2025 11:44:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uRUd9-0005Du-9q
- for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 17 Jun 2025 11:37:31 +0000
+ (envelope-from <brauner@kernel.org>) id 1uRUje-0004Ya-Kz;
+ Tue, 17 Jun 2025 11:44:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NadmgHuwBEcPJ3GKJVt/aU/pxG4yOpeVgpw43MwTE9c=; b=dJ7tljVggXlLT1CK7/rww9qC2E
- D1M6FgeRnPifT8rKcSHpJv0sd8gNM9i9gvfT48jPoOUwKttiryOPxqQ0z+nc+81DQz7GXoy4leoDQ
- MoJuBze927P6sa4NrbVyqNO7BIrdM+aaPziLOpT5esn8V/uUkhdviw/1imU5Qj3klmuA=;
+ bh=XaXveEeH10NyqmsZskThZ30oS/IooNFOsjao3u+MPWU=; b=YhwHahEX5qNOG31B0k76g5i6DP
+ 7y/XfruIv0KOpa5uBsDzIBiLc7k4sGxmMk0EmLb//4eujgBS/jfWDrFV7ITjwJVNn8R3Z4nO33OIh
+ ddrSJmKb5ayyl3SUP3MaqJqxlgM5yE2VySOKtiJsD8CDHR1i1mtu4nConRB2CxAolEVA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NadmgHuwBEcPJ3GKJVt/aU/pxG4yOpeVgpw43MwTE9c=; b=ULx3OZXKwYyP0nNSos7Z63pL2T
- vT4BPYuflBjFCnn9k0LyaFwwUefUZI89Qx1VNyy6ViaUj/BE0Q5dFGth0sbV5gKl2B+8NrKUMUXJ2
- M3I2ebaVz0ET8nm0O4rqCmaACq+rrW7dEHf9rsgBeRYfSfHypYm6gZjTHUpw26ud1F1M=;
+ bh=XaXveEeH10NyqmsZskThZ30oS/IooNFOsjao3u+MPWU=; b=mzvmohw4Naj0bKLeI/RwBdbPrZ
+ N55EDt0fU+yhs59wVM1vnG85qmRtjkk3+XGSuutgSQ0HhuDBxADMPJqeb2qEex5sJa3yjKjYK7F20
+ Hyy98RawrSrXGuGx041QbTTAqmCgqKfln4wuHSNQtz63j2cLpRwCn+hMmA4XVaYN3V6w=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uRUd8-0000sn-Nr for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 17 Jun 2025 11:37:31 +0000
+ id 1uRUje-0001LS-7T; Tue, 17 Jun 2025 11:44:14 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 150C3629F1;
- Tue, 17 Jun 2025 11:37:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B86F4C4CEE3;
- Tue, 17 Jun 2025 11:37:16 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 745E4629EF;
+ Tue, 17 Jun 2025 11:44:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CBABEC4CEE3;
+ Tue, 17 Jun 2025 11:43:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750160239;
- bh=1Zz4iwRt/J35TPtYB0xzkQXe4emuzR4SLbYYE3l+fYo=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=HJGRs7vfNzjFvL3Pt2sEZDE9nZWti/04p93uhwGwVnH2oYbwACCTMuIphdVmT5ll2
- q7LqMO4jbFcIuP85+8Jaf2oJ+9og/sGcsmGQTFl51aCwcgwhblh5TOWukhqKQetSKi
- 3sRyMRgIsnW4Yw7AUZpalKR7WjNx7nd1NIU1z1p4JLuauBect1UGzY1kQP8E4v3LwT
- It6j31Nku2JGv9Hxn1yc94YBCNwOfYJIHxDZhkcfFwiyW02KGLCcQ0P8bNEJXzT8KC
- GIPoyKaDjfUs3osQdJuL1Dz3OwqeJIwpMrnqqlJibLh6h8QFX5VQ4Hhgo6thlQbDa2
- PiWZZoKc+11kw==
-Message-ID: <c89b359f-da89-4285-98c2-a98470a5f959@kernel.org>
-Date: Tue, 17 Jun 2025 19:37:14 +0800
+ s=k20201202; t=1750160643;
+ bh=L4F/xAE2aK6xDa/QOHjQNfrbZ+ldwQ/xxyXW1QOlMqY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=pglRVmSgsr6zVPCbLUxJit1HENECqtF+VKUELSm7DDvJTAXtRKCT9IonBR+vy/Pv+
+ 0KOSaKv4o78/UPxS/8WAJnS8XTOzb25DdQPvidNigl04+KbSBnUNdwYpWyPtjwUao2
+ KVjU1eod47I9hfmAqu1HXs5NNkpj9ZmoKBDj9iEbYW+Iu4/Wq9ZnQvd/24RiYcCxU6
+ ehoC5iKuDLDPBM85gO0tJ3zg29crJnqV/BFPF36D01IwNlhquecGAcdQBOYi0SfMgr
+ iTlE7wC7JprLm5uHeq/OcqpnX3tE4351ouMdsYgL/8w6omsW5EvX+9RqdO82rtRfny
+ Z7wz58Ln84EiQ==
+Date: Tue, 17 Jun 2025 13:43:36 +0200
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <20250617-sehgewohnheiten-getagt-47e1ee917d4f@brauner>
+References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
+ <b09de1e8544384074165d92d048e80058d971286.1750099179.git.lorenzo.stoakes@oracle.com>
+ <aFB-Do9FE6H9SsGY@casper.infradead.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jianan Huang <huangjianan@xiaomi.com>,
- linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org
-References: <20250617055542.218681-1-huangjianan@xiaomi.com>
-Content-Language: en-US
-In-Reply-To: <20250617055542.218681-1-huangjianan@xiaomi.com>
+Content-Disposition: inline
+In-Reply-To: <aFB-Do9FE6H9SsGY@casper.infradead.org>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/17/25 13:55, Jianan Huang wrote: > When fewer pages are
- read, nr_pages may be smaller than nr_cpages. Due > to the nr_vecs limit,
- the compressed pages will be split into multiple > bios and then [...] 
+ Content preview:  On Mon, Jun 16, 2025 at 09:26:54PM +0100,
+ Matthew Wilcox wrote:
+ > On Mon, Jun 16, 2025 at 08:33:23PM +0100,
+ Lorenzo Stoakes wrote: > > fs/ext4/file.c
+ | 2 +- > > fs/xfs/xfs_file.c | 3 ++- > > Both of t [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,13 +89,13 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uRUd8-0000sn-Nr
-Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid splitting bio when reading
- multiple pages
+X-Headers-End: 1uRUje-0001LS-7T
+Subject: Re: [f2fs-dev] [PATCH 04/10] fs/dax: make it possible to check dev
+ dax support without a VMA
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,101 +107,97 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Sheng Yong <shengyong1@xiaomi.com>, wanghui33@xiaomi.com
+From: Christian Brauner via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Christian Brauner <brauner@kernel.org>
+Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
+ Paulo Alcantara <pc@manguebit.org>, dri-devel@lists.freedesktop.org,
+ ceph-devel@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
+ linux-xfs@vger.kernel.org, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ Tyler Hicks <code@tyhicks.com>, devel@lists.orangefs.org,
+ Shyam Prasad N <sprasad@microsoft.com>, Jan Harkes <jaharkes@cs.cmu.edu>,
+ linux-um@lists.infradead.org, Joel Becker <jlbec@evilplan.org>,
+ Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+ John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
+ Eric Van Hensbergen <ericvh@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Trond Myklebust <trondmy@kernel.org>, Dave Kleikamp <shaggy@kernel.org>,
+ Sandeep Dhavale <dhavale@google.com>, Simona Vetter <simona@ffwll.ch>,
+ linux-cifs@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ codalist@coda.cs.cmu.edu, Namjae Jeon <linkinjeon@kernel.org>,
+ ecryptfs@vger.kernel.org, Yangtao Li <frank.li@vivo.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, ocfs2-devel@lists.linux.dev,
+ Pedro Falcato <pfalcato@suse.de>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+ linux-block@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
+ linux-f2fs-devel@lists.sourceforge.net, Hongbo Li <lihongbo22@huawei.com>,
+ Anna Schumaker <anna@kernel.org>, Martin Brandenburg <martin@omnibond.com>,
+ Kees Cook <kees@kernel.org>, Yuezhang Mo <yuezhang.mo@sony.com>,
+ Carlos Maiolino <cem@kernel.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Chris Mason <clm@fb.com>,
+ linux-mtd@lists.infradead.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Marc Dionne <marc.dionne@auristor.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
+ linux-afs@lists.infradead.org, Naohiro Aota <naohiro.aota@wdc.com>,
+ Miklos Szeredi <miklos@szeredi.hu>, coda@cs.cmu.edu,
+ Viacheslav Dubeyko <slava@dubeyko.com>, Ilya Dryomov <idryomov@gmail.com>,
+ linux-ext4@vger.kernel.org, Amir Goldstein <amir73il@gmail.com>,
+ intel-gfx@lists.freedesktop.org, Damien Le Moal <dlemoal@kernel.org>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Dan Williams <dan.j.williams@intel.com>,
+ Gao Xiang <xiang@kernel.org>, David Howells <dhowells@redhat.com>,
+ linux-nfs@vger.kernel.org, linux-mm@kvack.org, samba-technical@lists.samba.org,
+ Steve French <sfrench@samba.org>, ntfs3@lists.linux.dev,
+ linux-erofs@lists.ozlabs.org, jfs-discussion@lists.sourceforge.net,
+ Jan Kara <jack@suse.cz>, linux-aio@kvack.org,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Christian Schoenebeck <linux_oss@crudebyte.com>,
+ Bob Copeland <me@bobcopeland.com>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>,
+ Andreas Dilger <adilger.kernel@dilger.ca>,
+ Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
+ David Airlie <airlied@gmail.com>,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>, Yue Hu <zbestahu@gmail.com>,
+ Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
+ linux-bcachefs@vger.kernel.org, Jann Horn <jannh@google.com>,
+ Josef Bacik <josef@toxicpanda.com>,
+ "Liam R . Howlett" <Liam.Howlett@oracle.com>, Tom Talpey <tom@talpey.com>,
+ Hans de Goede <hdegoede@redhat.com>, Bharath SM <bharathsm@microsoft.com>,
+ "Tigran A . Aivazian" <aivazian.tigran@gmail.com>,
+ David Sterba <dsterba@suse.com>, Xiubo Li <xiubli@redhat.com>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>, Vlastimil Babka <vbabka@suse.cz>,
+ Jens Axboe <axboe@kernel.dk>, Sungjong Seo <sj1557.seo@samsung.com>,
+ v9fs@lists.linux.dev, Kent Overstreet <kent.overstreet@linux.dev>,
+ linux-unionfs@vger.kernel.org, Benjamin LaHaise <bcrl@kvack.org>,
+ Jeffle Xu <jefflexu@linux.alibaba.com>,
+ Johannes Berg <johannes@sipsolutions.net>, Johannes Thumshirn <jth@kernel.org>,
+ David Woodhouse <dwmw2@infradead.org>, linux-karma-devel@lists.sourceforge.net,
+ linux-btrfs@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 6/17/25 13:55, Jianan Huang wrote:
-> When fewer pages are read, nr_pages may be smaller than nr_cpages. Due
-> to the nr_vecs limit, the compressed pages will be split into multiple
-> bios and then merged at the block level. In this case, nr_cpages should
-> be used to pre-allocate bvecs.
+On Mon, Jun 16, 2025 at 09:26:54PM +0100, Matthew Wilcox wrote:
+> On Mon, Jun 16, 2025 at 08:33:23PM +0100, Lorenzo Stoakes wrote:
+> >  fs/ext4/file.c      |  2 +-
+> >  fs/xfs/xfs_file.c   |  3 ++-
 > 
-> Signed-off-by: Jianan Huang <huangjianan@xiaomi.com>
-> Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
-> ---
->  fs/f2fs/data.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
+> Both of these already have the inode from the file ...
 > 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 31e892842625..c7773b09d83f 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -2303,7 +2303,8 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
->  		}
->  
->  		if (!bio) {
-> -			bio = f2fs_grab_read_bio(inode, blkaddr, nr_pages,
-> +			bio = f2fs_grab_read_bio(inode, blkaddr,
-> +					max(nr_pages, cc->nr_cpages) - i,
+> > +static inline bool daxdev_mapping_supported(vm_flags_t vm_flags,
+> > +					    struct file *file,
+> > +					    struct dax_device *dax_dev)
+> >  {
+> > -	if (!(vma->vm_flags & VM_SYNC))
+> > +	if (!(vm_flags & VM_SYNC))
+> >  		return true;
+> > -	if (!IS_DAX(file_inode(vma->vm_file)))
+> > +	if (!IS_DAX(file_inode(file)))
+> >  		return false;
+> >  	return dax_synchronous(dax_dev);
+> 
+> ... and the only thing this function uses from the file is the inode.
+> So maybe pass in the inode rather than the file?
 
-Hi Jianan,
-
-e.g.
-
-User wants to read page [1, 5],
-page #1,2,3,4 locates in compressed block #1000,1001,1003,
-page #5 locate in compressed block #1004,1005
-
-It submits first bio w/ block #1000,1001
-It allocates second bio w/ size of max(nr_pages=1, nr_cpages=3) - 2 = 1 ?
-However block #1003 and block #1004,1005 can be readed in one bio, we
-should allocate larger bio for last continuous blocks which cross clusters.
-
->  					f2fs_ra_op_flags(rac),
->  					folio->index, for_write);
->  			if (IS_ERR(bio)) {
-> @@ -2373,7 +2374,6 @@ static int f2fs_mpage_readpages(struct inode *inode,
->  	pgoff_t index;
->  #endif
->  	unsigned nr_pages = rac ? readahead_count(rac) : 1;
-> -	unsigned max_nr_pages = nr_pages;
-
-Maybe we can align both start and end of read range w/ cluster_size, and use
-start and end for max_nr_pages calculation, then pass it to
-f2fs_read_{multi,single}_pages(), something like this?
-
-max_nr_pages = round_up(end_idx, cluster_size) -
-		round_down(start_idx, cluster_size);
-
-Its size should always cover size of all cpage and/or rpage.
-
-Thanks,
-
->  	int ret = 0;
->  
->  	map.m_pblk = 0;
-> @@ -2400,7 +2400,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
->  		/* there are remained compressed pages, submit them */
->  		if (!f2fs_cluster_can_merge_page(&cc, index)) {
->  			ret = f2fs_read_multi_pages(&cc, &bio,
-> -						max_nr_pages,
-> +						nr_pages,
->  						&last_block_in_bio,
->  						rac, false);
->  			f2fs_destroy_compress_ctx(&cc, false);
-> @@ -2432,7 +2432,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
->  read_single_page:
->  #endif
->  
-> -		ret = f2fs_read_single_page(inode, folio, max_nr_pages, &map,
-> +		ret = f2fs_read_single_page(inode, folio, nr_pages, &map,
->  					&bio, &last_block_in_bio, rac);
->  		if (ret) {
->  #ifdef CONFIG_F2FS_FS_COMPRESSION
-> @@ -2450,7 +2450,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
->  			/* last page */
->  			if (nr_pages == 1 && !f2fs_cluster_is_empty(&cc)) {
->  				ret = f2fs_read_multi_pages(&cc, &bio,
-> -							max_nr_pages,
-> +							nr_pages,
->  							&last_block_in_bio,
->  							rac, false);
->  				f2fs_destroy_compress_ctx(&cc, false);
-
+Agreed. I've converted this to take const struct inode *.
 
 
 _______________________________________________
