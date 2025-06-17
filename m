@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94646ADC9DA
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Jun 2025 13:48:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6696ADC9FF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Jun 2025 13:54:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=TAZTeDQ5kmVZPi+SFWfejybrXwNJlZXVutk18QPWSGU=; b=Wb1C+2jrOeyMUDr/6R6E6wybcP
-	OeJUDyL95oW5XTM1JaA950HyzskvkwsEgfHk7lzuvFZ6u4G7JT48JM6nbu/3uSoAkbbzC1YeI+gIb
-	otqHyF+8Mz2KGbnVwqWTHJUMngTcZJ72uZ0fmxkHqJqxfbc8QR0h+89jCwx5FNpXz3Io=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=JaEvjrcAwvZbVxYbyo7qfirba3HoOfg9x+bcSMMZ3wU=; b=N9zZpKiph4bm/nawsbU2pzwjTC
+	n6DjUZ2CDSoGlnDgWpC+EaQ/SNDPp7wRKT8pnLV8v6pAv+Zsc0EvwdBaeySeO4p8Tt8BQ5sPfD1qP
+	3jnSSadnKld7hdqM8GnsAGEyvl4dvRw5vrJru+rIt/g4rYctFsDgBQ7Z26NGOrJZ+EHk=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uRUnv-00029v-JZ;
-	Tue, 17 Jun 2025 11:48:39 +0000
+	id 1uRUtz-0005XT-2n;
+	Tue, 17 Jun 2025 11:54:55 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1uRUnt-00029P-8Z;
- Tue, 17 Jun 2025 11:48:37 +0000
+ (envelope-from <brauner@kernel.org>) id 1uRUtx-0005XE-QS;
+ Tue, 17 Jun 2025 11:54:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lIpP5iOY84H59tRkmuJOo9CYvchrtq9t6gV5oxKPio4=; b=kPDtFjU/rv/SJeeQGTS7c3/dMu
- Z3nT3MO4PNHJfT9MvzINk44dH2Pk7rDGVlKxIocNSWpUDgWlMe5m8bVhyRldyJeYP0zwCJy/Ga+SB
- l4/iyrMrDQAapWXisygTVvwsDLMmClyKPwGoEdqMMSdXYOxxtZfAyYuGKb1oP05vmGLw=;
+ bh=M830G6MWsfr8Yer9Q+Whdt4JLPiVfTD/TS3CVpERxzY=; b=F/5/I9Jd1vGW1/9FGW7nYNXzlf
+ JUaLVZb27SwkOi5N0dd03wBJRypO3tQ2mSb6m/GgrgNZy8pYeFYEVzeWlAM3l4aPB+PzEfEix/7O1
+ x3qzdYbwjTJTFc1Of2mb0VIxwbpwPse58bTfinAGOf5UHj1x+wSsJfRbiWJaAHruwTJI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -39,39 +39,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lIpP5iOY84H59tRkmuJOo9CYvchrtq9t6gV5oxKPio4=; b=kzVjCHyw/aiLQug7RkMoTReTUD
- TalOvlxh6xc8KBP9Ih9rxYwBFBQ6FbBhCkm47FqWuU9R+j701siL1qFcqfYJb3vEVWzUflzvCjiuS
- osn59rTXrH8BDxg7DQRU8d3MahQQ7KK44/M3a0mFGUSqb/y7XeiT34qymqJLZj4FbnIg=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=M830G6MWsfr8Yer9Q+Whdt4JLPiVfTD/TS3CVpERxzY=; b=X9cVRwl/bGKU7lpAJILJMOKZFo
+ 9OuZcJWzo0uPQ5o226KWwomn2EMVm8rHCSgj/WaYTJanBdj+Ucmf68Ln6E5LRj8SCjY5Kr0I+SyBy
+ OYV3ptcWJSN4XhpBhm2Nik/wP5kw+DuKW9OVkQVrsW6eabWaiPQmJhA4tMNPdQD1mJxg=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uRUns-0001fE-QH; Tue, 17 Jun 2025 11:48:37 +0000
+ id 1uRUtx-00023H-Ai; Tue, 17 Jun 2025 11:54:53 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 202A8A5008C;
- Tue, 17 Jun 2025 11:48:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40C6FC4CEE3;
- Tue, 17 Jun 2025 11:48:07 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id E01744A5E1;
+ Tue, 17 Jun 2025 11:54:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5FE2BC4CEE3;
+ Tue, 17 Jun 2025 11:54:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750160910;
- bh=Vnr3kmvDQPz8s5uZNmSkWKP9XPj/+f6PNSLS1Tx/MzQ=;
+ s=k20201202; t=1750161287;
+ bh=FM4A89teoGTiVHD+mgfi0AiySK9n5DYBMecgMr0uDqg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=i76Wd947DS4XwAcDpAS8fpuf+Ela4lfUx5B4Zl+sE1WJ8kzwgrCbFciE3rigUUS/6
- wkwvrTbKDnBSYG4C5HYytRyvy7B3ZkCeJ/5F35ij31zEXxn65NXesNNhKSYHlLq/2D
- R33NY8eYZWteN9O+9G//EUF0UQxUiz+Y2C7gC+ejd2PqldQ355joR8oksRp/9Bu+B9
- HCJ+eqE2ygFdOjJuUuFVDO+rKmgk2g66UaZmVaAWhJlsobI+L+ldnr5kvasHnLLQtL
- 3ZDhNpWvRvvYFALgNe61XXKpKO8zT2d+3DmY+NeMp1GFEAHy45cWCYw7RMgE+f8kCe
- WOUfPvP6PlRuw==
-Date: Tue, 17 Jun 2025 13:48:04 +0200
+ b=tFaXplkY5nyo20ol4Egr1jKpFof+Bu6EVWj8rd7Q/XVflaJDEuUt2QBZbBOzt+ds9
+ QqRJ0416pNcF2gR1cOk/fhlCLM2NyYyFsqO7E+6LcmkPsrh7dOxbot5r+EPV6Mf/Eg
+ m8Y6DUqcdfGWwY+D64Xca2p2YAi1GLXZEZrvZUt4zBrfooL7qgslbeGTMTkIs72Kmi
+ ZyPQ8xq03VfK0FOehVNSaD+X4yl6DS92oWcHFB7su60iMijW1l2mzbjqhQKi8Q2XlY
+ I0aiDlWsnalkNnHvD2WZzlIylBsOw4cpNRmvr5us4RCENbN2fbk5X67yCW3LloR+n5
+ oLveA9uaTcrqQ==
+Date: Tue, 17 Jun 2025 13:54:21 +0200
 To: Jan Kara <jack@suse.cz>
-Message-ID: <20250617-mitstreiter-bewahren-455b96bd1d50@brauner>
+Message-ID: <20250617-allenfalls-brummen-3ce2da5794f8@brauner>
 References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
- <b68145b609532e62bab603dd9686faa6562046ec.1750099179.git.lorenzo.stoakes@oracle.com>
- <aFD5AP7B80np-Szz@infradead.org>
- <b91c387e-5226-4c5e-94c3-04e80409ed62@lucifer.local>
- <kzp4cei5qq6gbtzzng7hmqj5avzblopfzzrks4e2gahcdvr7ro@cwziankavxw4>
+ <08db85970d89b17a995d2cffae96fb4cc462377f.1750099179.git.lorenzo.stoakes@oracle.com>
+ <gexpfonlstqrggxbwxlorn7c6qvt42e2dof6lahipfyfecgfru@vexc23jbaxwc>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <kzp4cei5qq6gbtzzng7hmqj5avzblopfzzrks4e2gahcdvr7ro@cwziankavxw4>
+In-Reply-To: <gexpfonlstqrggxbwxlorn7c6qvt42e2dof6lahipfyfecgfru@vexc23jbaxwc>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -79,9 +77,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Jun 17, 2025 at 12:08:13PM +0200, Jan Kara wrote:
- > On Tue 17-06-25 06:25:34, Lorenzo Stoakes wrote: > > On Mon, Jun 16, 2025
- at 10:11:28PM -0700, Christoph Hellwig wrote: > > > On Mon, Jun 16 [...] 
+ Content preview:  On Tue, Jun 17, 2025 at 12:23:41PM +0200, Jan Kara wrote:
+ > On Mon 16-06-25 20:33:28,
+ Lorenzo Stoakes wrote: > > Update nearly all generic_file_mmap()
+ and generic_file_readonly_mmap() > > callers to u [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +92,9 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uRUns-0001fE-QH
-Subject: Re: [f2fs-dev] [PATCH 03/10] fs: consistently use
- file_has_valid_mmap_hooks() helper
+X-Headers-End: 1uRUtx-00023H-Ai
+Subject: Re: [f2fs-dev] [PATCH 09/10] fs: convert most other
+ generic_file_*mmap() users to .mmap_prepare()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,10 +113,10 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
  Paulo Alcantara <pc@manguebit.org>, dri-devel@lists.freedesktop.org,
  ceph-devel@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
  linux-xfs@vger.kernel.org, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Tyler Hicks <code@tyhicks.com>, Christoph Hellwig <hch@infradead.org>,
- devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
- Jan Harkes <jaharkes@cs.cmu.edu>, linux-um@lists.infradead.org,
- Joel Becker <jlbec@evilplan.org>, Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+ Tyler Hicks <code@tyhicks.com>, devel@lists.orangefs.org,
+ Shyam Prasad N <sprasad@microsoft.com>, Jan Harkes <jaharkes@cs.cmu.edu>,
+ linux-um@lists.infradead.org, Joel Becker <jlbec@evilplan.org>,
+ Ronnie Sahlberg <ronniesahlberg@gmail.com>,
  John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
  Eric Van Hensbergen <ericvh@kernel.org>, linux-kernel@vger.kernel.org,
  linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
@@ -175,35 +174,104 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jun 17, 2025 at 12:08:13PM +0200, Jan Kara wrote:
-> On Tue 17-06-25 06:25:34, Lorenzo Stoakes wrote:
-> > On Mon, Jun 16, 2025 at 10:11:28PM -0700, Christoph Hellwig wrote:
-> > > On Mon, Jun 16, 2025 at 08:33:22PM +0100, Lorenzo Stoakes wrote:
-> > > > Since commit c84bf6dd2b83 ("mm: introduce new .mmap_prepare() file
-> > > > callback"), the f_op->mmap() hook has been deprecated in favour of
-> > > > f_op->mmap_prepare().
-> > > >
-> > > > Additionally, commit bb666b7c2707 ("mm: add mmap_prepare() compatibility
-> > > > layer for nested file systems") permits the use of the .mmap_prepare() hook
-> > > > even in nested filesystems like overlayfs.
-> > > >
-> > > > There are a number of places where we check only for f_op->mmap - this is
-> > > > incorrect now mmap_prepare exists, so update all of these to use the
-> > > > general helper file_has_valid_mmap_hooks().
-> > > >
-> > > > Most notably, this updates the elf logic to allow for the ability to
-> > > > execute binaries on filesystems which have the .mmap_prepare hook, but
-> > > > additionally we update nested filesystems.
-> > >
-> > > Can you please give the function a better name before spreading it?
-> > > file operations aren't hooks by any classic definition.
-> > >
+On Tue, Jun 17, 2025 at 12:23:41PM +0200, Jan Kara wrote:
+> On Mon 16-06-25 20:33:28, Lorenzo Stoakes wrote:
+> > Update nearly all generic_file_mmap() and generic_file_readonly_mmap()
+> > callers to use generic_file_mmap_prepare() and
+> > generic_file_readonly_mmap_prepare() respectively.
 > > 
-> > can_mmap_file()?
+> > We update blkdev, 9p, afs, erofs, ext2, nfs, ntfs3, smb, ubifs and vboxsf
+> > file systems this way.
+> > 
+> > Remaining users we cannot yet update are ecryptfs, fuse and cramfs. The
+> > former two are nested file systems that must support any underlying file
+> > ssytem, and cramfs inserts a mixed mapping which currently requires a VMA.
+> > 
+> > Once all file systems have been converted to mmap_prepare(), we can then
+> > update nested file systems.
+> > 
+> > Signed-off-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
 > 
-> I like this name more as well :). With this patch looks good to me. Again a
+> Overall the patch looks good. Just a couple of notes regarding pointless
+> local variable being created...
+> 
+> > ---
+> >  block/fops.c           |  9 +++++----
+> >  fs/9p/vfs_file.c       | 11 ++++++-----
+> >  fs/afs/file.c          | 11 ++++++-----
+> >  fs/erofs/data.c        | 16 +++++++++-------
+> >  fs/ext2/file.c         | 12 +++++++-----
+> >  fs/nfs/file.c          | 13 +++++++------
+> >  fs/nfs/internal.h      |  2 +-
+> >  fs/nfs/nfs4file.c      |  2 +-
+> >  fs/ntfs3/file.c        | 15 ++++++++-------
+> >  fs/smb/client/cifsfs.c | 12 ++++++------
+> >  fs/smb/client/cifsfs.h |  4 ++--
+> >  fs/smb/client/file.c   | 14 ++++++++------
+> >  fs/ubifs/file.c        |  8 ++++----
+> >  fs/vboxsf/file.c       |  8 ++++----
+> >  14 files changed, 74 insertions(+), 63 deletions(-)
+> > 
+> > diff --git a/block/fops.c b/block/fops.c
+> > index 1309861d4c2c..5a0ebc81e489 100644
+> > --- a/block/fops.c
+> > +++ b/block/fops.c
+> > @@ -911,14 +911,15 @@ static long blkdev_fallocate(struct file *file, int mode, loff_t start,
+> >  	return error;
+> >  }
+> >  
+> > -static int blkdev_mmap(struct file *file, struct vm_area_struct *vma)
+> > +static int blkdev_mmap_prepare(struct vm_area_desc *desc)
+> >  {
+> > +	struct file *file = desc->file;
+> >  	struct inode *bd_inode = bdev_file_inode(file);
+> 
+> I guess no need to create 'file' variable here since it has only one use in
+> the line above...
 
-Fixed in-tree.
+Agreed, fixed in-tree.
+
+> > -static int afs_file_mmap(struct file *file, struct vm_area_struct *vma)
+> > +static int afs_file_mmap_prepare(struct vm_area_desc *desc)
+> >  {
+> > +	struct file *file = desc->file;
+> >  	struct afs_vnode *vnode = AFS_FS_I(file_inode(file));
+> 
+> Same comment about pointless local variable here as well.
+
+Same.
+
+> > -static int erofs_file_mmap(struct file *file, struct vm_area_struct *vma)
+> > +static int erofs_file_mmap_prepare(struct vm_area_desc *desc)
+> >  {
+> > +	struct file *file = desc->file;
+> > +
+> >  	if (!IS_DAX(file_inode(file)))
+> 
+> And here...
+
+Same.
+
+> > -int cifs_file_strict_mmap(struct file *file, struct vm_area_struct *vma)
+> > +int cifs_file_strict_mmap_prepare(struct vm_area_desc *desc)
+> >  {
+> > +	struct file *file = desc->file;
+> >  	int xid, rc = 0;
+> >  	struct inode *inode = file_inode(file);
+> 
+> Again pointless local variable 'file' here.
+
+Same.
+
+> > -int cifs_file_mmap(struct file *file, struct vm_area_struct *vma)
+> > +int cifs_file_mmap_prepare(struct vm_area_desc *desc)
+> >  {
+> > +	struct file *file = desc->file;
+> >  	int rc, xid;
+> 
+> And here (the only use is in cifs_revalidate_file(file)).
+
+Same.
 
 
 _______________________________________________
