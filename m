@@ -2,74 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E175BADCA23
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Jun 2025 13:57:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1452ADCA43
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Jun 2025 14:00:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=rlV0IPEi+j1wKkl+8BIDxAhLpWmrVLdMqpNzM5XqQ8E=; b=I2M5H3MY19V96yPHsUZ4V2+j3b
-	vp5xcG/spfLv81OlZy3QR7tuYc81gxGQJeEBlUJ/Z9w0K2Hd+8DukV1qP1NT1Lq7c/ExmI4cJy9uG
-	kltOUCjpfJnSoxZEHfqp8pOVCm7/iOqYGy+94MOJc4UCqhFIvpB1NPiEP3NbSNWG+d4U=;
+	bh=+N63QCpTYH+4v6mMquOk1o9ekHBtxaePA5BP46l4Cvw=; b=A9VG0kCTVH5RjeqCqmzAubYhNL
+	MoqkbYbbRaWIHo3niqvyyhT6YqhrFso/1vBbhk998J/0vjanACsXpMqxElrPtpNYFpfWaIDRqvE+c
+	8iVN4JpR/TJttz5YFHabh1wtqgyCB5RakjDparYWER+412j83mfLp+u5FB8wd9q96ges=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uRUws-0002P5-W2;
-	Tue, 17 Jun 2025 11:57:54 +0000
+	id 1uRUzF-0002UI-Vf;
+	Tue, 17 Jun 2025 12:00:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1uRUws-0002Ou-D2;
- Tue, 17 Jun 2025 11:57:54 +0000
+ (envelope-from <brauner@kernel.org>) id 1uRUzD-0002U7-OZ;
+ Tue, 17 Jun 2025 12:00:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=m/RRUe7oOlBQaMrRU0yW5gAkiYkQQmiPrVoU6uzcycQ=; b=hxHp5SDj/9d2uOoqDpxE8r4xiG
- zRHLuA1ln5sxc8G4q8vTEw/9G2lJ9xMhbnY9HSoZPZ8GJKPp94Wb3GveAK4166YU/9wcEQjC1B/Tm
- jP+mZUcRceolGTQ8O35aL7WH5JEPxOOvy8c4EiuiY0d7EcCBcD4BXDk7JKnxjjsEerm8=;
+ bh=VadYNfxPDS9mWpWiEQHS/5/7snz8zXTvd9oaZpSDKWQ=; b=R0q47IiohZuiX6iTLHZl1Y1yhS
+ z612ujn1baCFZJcic7vYC6TBWfYoJlGVWJAclyWV+8cDDWWyJ7aEY4dFPj35ScY+Eq6RmXGfZH6YJ
+ 7AOMh+IESRpnXLb1AZ1Q7V57PpCaDbPUUWLWflRxu08WZ4yBhrf740GL1wbw47qhlAwU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=m/RRUe7oOlBQaMrRU0yW5gAkiYkQQmiPrVoU6uzcycQ=; b=HIsyirZi8E2sd1YynRgVF8tMNt
- KmHna403NFwRGBBUtLl4vIC/6PoxZuBcGFAy4ZE868QNvUaAn7AcT7/ap8LN4dcCX13SsTPI/8MOV
- QilN4EsgocEe9OzhNAbRKzjUNcF4sOe6jrC1nz59mLmuCFoeEB8Qmvf+/a5kNkAKa8J0=;
+ bh=VadYNfxPDS9mWpWiEQHS/5/7snz8zXTvd9oaZpSDKWQ=; b=ScDTgIis38XeHOJ094hXb/6Dl1
+ UIAg17vsZMdo5PQRpaIFlYzciRvTMDnYfrkqhGHYH8svD3khIsuIz7eC2J+XJbl42fwQTQsggmNT8
+ OGGRxCc1uoEL6kaMF7r1KK1NvCSYI2fylF3qxHUVXOMzf8/r7llyWOcs+C+YD3Pg7kIg=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uRUwr-0002Dy-TZ; Tue, 17 Jun 2025 11:57:54 +0000
+ id 1uRUzD-0002Ml-6m; Tue, 17 Jun 2025 12:00:19 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 15ADE61136;
- Tue, 17 Jun 2025 11:57:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EC2DC4CEE3;
- Tue, 17 Jun 2025 11:57:19 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 783D2614BC;
+ Tue, 17 Jun 2025 12:00:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F729C4CEE3;
+ Tue, 17 Jun 2025 11:59:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750161462;
- bh=T+hj+yayJhfzqGA9kWHW1UQw8dsCOqK3Vx6p1g+lWhs=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ANNRMLSMbFJxF0/0JcpxGnRgNC2cM3iQk05j0kIN5dUOf6a+6FhzXEhCV9tljSO6h
- v2e3uV6HAxpTWa31kRKsnVAXQkLyFD1xYm1QZjMvIFL3ouF6AXeudY39YUcGZrolsh
- RyM2TZ/EQMyqQ6Y6s4GUWKP0gK9gINzD7L4jwsfBCJ1suak/ya3jB5me4TnYO/YFrF
- BrbHmvsabgMYM9Mbit9yWCy+NDOo9GjZfXkkWr9NdZCIoi7MIoTDvDFU7neHyJvL+Q
- sCBOLJVwQyL5L44PlP9UgERzG7VA2X0BjHsxmPcW0plFtm6qxZnaOBFYXof6KFwTQp
- Bv2/tmMRJtG5w==
-Date: Tue, 17 Jun 2025 13:57:17 +0200
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20250617-karibus-abgrenzen-e534b9acd4c7@brauner>
+ s=k20201202; t=1750161613;
+ bh=d7N8Br27sigUm6RwJ6QKDyuMIfLKb482gs0GJECdYqY=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=cbm6eSpOXnYTKVf24fD5wSecYeYAtaJSPLtzA/cg7YuA4PJRPYSNZqoHGrOB9vedO
+ xE+Kw4QDbA/4jdsP7oXbPhVrMP5XKHSj57b+LizHRuDadEPqGBM+ZxF2QhTJG4KKld
+ niMYuWEWwMHm5apCVpkqg1uA/sm57a3OJs6XP47Q03JuvcLdBMJ4BZLJME8mGFpquF
+ OAV54y1YNZFqwgygvgnolLyQkxdfAP1bT54VMRT4yd/LwvYOK0H78h2s/9FU+jHgJZ
+ /1P5yb/ScvLTgMkRASvu83CdtUFgXaGEFmmqSgC4JGFIOk41SmtzQEJEUL45wKXKIE
+ copUCuL9W6X/w==
+To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+Date: Tue, 17 Jun 2025 13:58:21 +0200
+Message-ID: <20250617-neugliederung-erarbeiten-58c2ad93db83@brauner>
+X-Mailer: git-send-email 2.47.2
+In-Reply-To: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
 References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
- <f528ac4f35b9378931bd800920fee53fc0c5c74d.1750099179.git.lorenzo.stoakes@oracle.com>
- <6nktgdc7ygt6hncfnl33d2jlwvlydspiiklwf6oxiqxxcjhzs2@j6f36ktyv774>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <6nktgdc7ygt6hncfnl33d2jlwvlydspiiklwf6oxiqxxcjhzs2@j6f36ktyv774>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2454; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=d7N8Br27sigUm6RwJ6QKDyuMIfLKb482gs0GJECdYqY=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWQERqz1Wd3by3g/duuF6rmP/N/MPRV+t8Tf5qpaV67t4
+ jKOJ7rXO0pZGMS4GGTFFFkc2k3C5ZbzVGw2ytSAmcPKBDKEgYtTACaysIiRYfKb1+w2vf8O/mdg
+ vPFO8PHqRzML+F0vTZYp4bqm1fwkeyXDP4PuJqblPl9UmcRtf/n65jge6ap97PLc+43T4+kid/k
+ fMgMA
+X-Developer-Key: i=brauner@kernel.org; a=openpgp;
+ fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -77,10 +83,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Jun 17, 2025 at 12:28:17PM +0200, Jan Kara wrote:
- > On Mon 16-06-25 20:33:29,
- Lorenzo Stoakes wrote: > > Since commit c84bf6dd2b83
- ("mm: introduce new .mmap_prepare() file > > callback"), the [...] 
+ Content preview:  On Mon, 16 Jun 2025 20:33:19 +0100, Lorenzo Stoakes wrote:
+ > REVIEWER'S NOTES > ================ > > I am basing this on the mm-new
+ branch in Andrew's tree, so let me know if I > should rebase anythin [...]
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,9 +97,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uRUwr-0002Dy-TZ
-Subject: Re: [f2fs-dev] [PATCH 10/10] fs: replace mmap hook with
- .mmap_prepare for simple mappings
+X-Headers-End: 1uRUzD-0002Ml-6m
+Subject: Re: [f2fs-dev] [PATCH 00/10] convert the majority of file systems
+ to mmap_prepare
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,13 +117,13 @@ Reply-To: Christian Brauner <brauner@kernel.org>
 Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
  Paulo Alcantara <pc@manguebit.org>, dri-devel@lists.freedesktop.org,
  ceph-devel@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
- linux-xfs@vger.kernel.org, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Tyler Hicks <code@tyhicks.com>, devel@lists.orangefs.org,
- Shyam Prasad N <sprasad@microsoft.com>, Jan Harkes <jaharkes@cs.cmu.edu>,
- linux-um@lists.infradead.org, Joel Becker <jlbec@evilplan.org>,
- Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+ linux-xfs@vger.kernel.org, Tyler Hicks <code@tyhicks.com>,
+ devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
+ Jan Harkes <jaharkes@cs.cmu.edu>, linux-um@lists.infradead.org,
+ Joel Becker <jlbec@evilplan.org>, Ronnie Sahlberg <ronniesahlberg@gmail.com>,
  John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
- Eric Van Hensbergen <ericvh@kernel.org>, linux-kernel@vger.kernel.org,
+ Eric Van Hensbergen <ericvh@kernel.org>,
+ Christian Brauner <brauner@kernel.org>, linux-kernel@vger.kernel.org,
  linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
  Trond Myklebust <trondmy@kernel.org>, Dave Kleikamp <shaggy@kernel.org>,
  Sandeep Dhavale <dhavale@google.com>, Simona Vetter <simona@ffwll.ch>,
@@ -146,7 +151,8 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
  linux-mm@kvack.org, samba-technical@lists.samba.org,
  Steve French <sfrench@samba.org>, ntfs3@lists.linux.dev,
  linux-erofs@lists.ozlabs.org, jfs-discussion@lists.sourceforge.net,
- linux-aio@kvack.org, Dominique Martinet <asmadeus@codewreck.org>,
+ Jan Kara <jack@suse.cz>, linux-aio@kvack.org,
+ Dominique Martinet <asmadeus@codewreck.org>,
  Christian Schoenebeck <linux_oss@crudebyte.com>,
  Bob Copeland <me@bobcopeland.com>,
  Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
@@ -174,64 +180,57 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jun 17, 2025 at 12:28:17PM +0200, Jan Kara wrote:
-> On Mon 16-06-25 20:33:29, Lorenzo Stoakes wrote:
-> > Since commit c84bf6dd2b83 ("mm: introduce new .mmap_prepare() file
-> > callback"), the f_op->mmap() hook has been deprecated in favour of
-> > f_op->mmap_prepare().
-> > 
-> > This callback is invoked in the mmap() logic far earlier, so error handling
-> > can be performed more safely without complicated and bug-prone state
-> > unwinding required should an error arise.
-> > 
-> > This hook also avoids passing a pointer to a not-yet-correctly-established
-> > VMA avoiding any issues with referencing this data structure.
-> > 
-> > It rather provides a pointer to the new struct vm_area_desc descriptor type
-> > which contains all required state and allows easy setting of required
-> > parameters without any consideration needing to be paid to locking or
-> > reference counts.
-> > 
-> > Note that nested filesystems like overlayfs are compatible with an
-> > .mmap_prepare() callback since commit bb666b7c2707 ("mm: add mmap_prepare()
-> > compatibility layer for nested file systems").
-> > 
-> > In this patch we apply this change to file systems with relatively simple
-> > mmap() hook logic - exfat, ceph, f2fs, bcachefs, zonefs, btrfs, ocfs2,
-> > orangefs, nilfs2, romfs, ramfs and aio.
-> > 
-> > Signed-off-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+On Mon, 16 Jun 2025 20:33:19 +0100, Lorenzo Stoakes wrote:
+> REVIEWER'S NOTES
+> ================
 > 
-> Two small nits below. Otherwise feel free to add:
+> I am basing this on the mm-new branch in Andrew's tree, so let me know if I
+> should rebase anything here. Given the mm bits touched I did think perhaps
+> we should take it through the mm tree, however it may be more sensible to
+> take it through an fs tree - let me know!
 > 
-> Reviewed-by: Jan Kara <jack@suse.cz>
-> 
-> > diff --git a/fs/ceph/addr.c b/fs/ceph/addr.c
-> > index 60a621b00c65..37522137c380 100644
-> > --- a/fs/ceph/addr.c
-> > +++ b/fs/ceph/addr.c
-> > @@ -2330,13 +2330,14 @@ static const struct vm_operations_struct ceph_vmops = {
-> >  	.page_mkwrite	= ceph_page_mkwrite,
-> >  };
-> >  
-> > -int ceph_mmap(struct file *file, struct vm_area_struct *vma)
-> > +int ceph_mmap_prepare(struct vm_area_desc *desc)
-> >  {
-> > +	struct file *file = desc->file;
-> >  	struct address_space *mapping = file->f_mapping;
-> 
-> Pointless local variable here...
+> [...]
 
-Agreed, fixed in-tree.
+This looks good. I fixed up the minor review comments.
+Looking forward to further cleanups in this area.
 
-> > -static int exfat_file_mmap(struct file *file, struct vm_area_struct *vma)
-> > +static int exfat_file_mmap_prepare(struct vm_area_desc *desc)
-> >  {
-> > +	struct file *file = desc->file;
-> 
-> Missing empty line here.
+---
 
-Fixed in-tree.
+Applied to the vfs-6.17.mmap_prepare branch of the vfs/vfs.git tree.
+Patches in the vfs-6.17.mmap_prepare branch should appear in linux-next soon.
+
+Please report any outstanding bugs that were missed during review in a
+new review to the original patch series allowing us to drop it.
+
+It's encouraged to provide Acked-bys and Reviewed-bys even though the
+patch has now been applied. If possible patch trailers will be updated.
+
+Note that commit hashes shown below are subject to change due to rebase,
+trailer updates or similar. If in doubt, please check the listed branch.
+
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
+branch: vfs-6.17.mmap_prepare
+
+[01/10] mm: rename call_mmap/mmap_prepare to vfs_mmap/mmap_prepare
+        https://git.kernel.org/vfs/vfs/c/20ca475d9860
+[02/10] mm/nommu: use file_has_valid_mmap_hooks() helper
+        https://git.kernel.org/vfs/vfs/c/c6900f227f89
+[03/10] fs: consistently use file_has_valid_mmap_hooks() helper
+        https://git.kernel.org/vfs/vfs/c/b013ed403197
+[04/10] fs/dax: make it possible to check dev dax support without a VMA
+        https://git.kernel.org/vfs/vfs/c/0335f6afd348
+[05/10] fs/ext4: transition from deprecated .mmap hook to .mmap_prepare
+        https://git.kernel.org/vfs/vfs/c/8c90ae8fe5e3
+[06/10] fs/xfs: transition from deprecated .mmap hook to .mmap_prepare
+        https://git.kernel.org/vfs/vfs/c/6528d29b46d8
+[07/10] mm/filemap: introduce generic_file_*_mmap_prepare() helpers
+        https://git.kernel.org/vfs/vfs/c/5b44297bcfa4
+[08/10] fs: convert simple use of generic_file_*_mmap() to .mmap_prepare()
+        https://git.kernel.org/vfs/vfs/c/951ea2f4844c
+[09/10] fs: convert most other generic_file_*mmap() users to .mmap_prepare()
+        https://git.kernel.org/vfs/vfs/c/a5ee9a82981d
+[10/10] fs: replace mmap hook with .mmap_prepare for simple mappings
+        https://git.kernel.org/vfs/vfs/c/a1e5b36c4034
 
 
 _______________________________________________
