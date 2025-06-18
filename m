@@ -2,68 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CA49ADE3E6
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Jun 2025 08:43:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 32A36ADE3EC
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Jun 2025 08:43:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=GRdl8EX8zF9PdweuPgwDLqQwz9RUqDHMrgzDuvgS3Ow=; b=AkWJ1XNtaC8z9e4oJOSdqTOaWl
-	q+k50gGopoFaBmWcnvyUVF0r+WBryhJEOujQ8isdncE20fv/OaJnGJKR691i2abHNrcNWnabAe0WN
-	HD4jmZp7O72rtO45r7HB/rcDBUkIDYPR/8ip2/DRofZ32MNDoAAgLkwFSxNknFYu6ZJo=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=mbHuN0TXdM4ZQ1YsvaJlgdE585Y/zMJ0emVmEk9Qfs0=; b=jDASPfd46mPcGdnXI9HkhVyjz9
+	JzxwzBW8SLjyZJoML/O/tz/teEth4iNupQnyFx9PkXc5TjLeVHWPuNluJdGyKgu53vU7dmJdQRLfm
+	p2V+UL62kIVsEJ1ObvjtBUcAu/XUwdvwpIDSeLn3L5eNWyCoLNK9LrFGBG555uBj+tRs=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uRmW0-0002gP-TR;
-	Wed, 18 Jun 2025 06:43:20 +0000
+	id 1uRmWQ-0002K2-F8;
+	Wed, 18 Jun 2025 06:43:46 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wangzijie1@honor.com>) id 1uRmVz-0002gH-Ey
+ (envelope-from <wangzijie1@honor.com>) id 1uRmWO-0002Jn-NH
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Jun 2025 06:43:19 +0000
+ Wed, 18 Jun 2025 06:43:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=O1Sy+ZOBmC3HrtjDDWcaLTiWL1b76XfhFybDd7lls28=; b=F3D1bSCad8nAe8PR8Pq1K4tYER
- M/ciLfW3xqdPyoD4RtXJNI/7WKjGfXZ4Sguhzd0XNGT/YyKoy6Wsb9gim92eQbS8u8v/nHYdYnJM6
- F7y63cbbUC5YDKsROPVqIyanusQdkZMNZfuZdifgU8lWGB93R+64dJWOXbLgJ3SOPiug=;
+ bh=HRB9fm4/TWkCzsTwmnERp07lVUluKpYeS6Fs43QrGps=; b=XDH8EK51gIaD5OeVNwQ2lmK+Ea
+ dKi1o7MxbXRPVZ9OMteRO6+vHLvhAfabZphWx7Hr/XZrjqn9Eq4Auy0XFE8oyqNhr9zm/QaTd3eHL
+ Zzg30HER5VWakRFCd98C4iiPdJR2AY5k3LIFp6rjPh74PQVmTjnnv51nk7KZRLDkOtCE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=O1Sy+ZOBmC3HrtjDDWcaLTiWL1b76XfhFybDd7lls28=; b=M
- bLK7Sg3PxWfUsKSbj0WaGsNV7F5ztILKPtbKARL4hmucEBk0ktUj5ZSGyu9tkBIkNMeRCcvo4QcuU
- xdGT+yKecxsx6NLPsCxa9ROc2V4EqkK+3ScsczRrjwfcsgrfuuI9ThHCtOYRw+7FLERFwKgKjSYJ2
- Hb2LfYOoy2t6iKAM=;
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=HRB9fm4/TWkCzsTwmnERp07lVUluKpYeS6Fs43QrGps=; b=bgXmY8kLSLoC0e+8hShzqxyS8v
+ FIixAr9n+IJTPkhSXuky7r3e1nzaCh85V5TKuS+QB5e8YqMeVgwD/PSMM9y1SyyH2qRg3awXl90GB
+ Qfy5Y0ErbSqDkCTMWqksK+XPPe2xUtZbqRSfLqzvOkvTe6HkJc+ygXUi2NmNAX6C1HKo=;
 Received: from mta21.hihonor.com ([81.70.160.142])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uRmVx-0006mz-P3 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Jun 2025 06:43:18 +0000
-Received: from w002.hihonor.com (unknown [10.68.28.120])
- by mta21.hihonor.com (SkyGuard) with ESMTPS id 4bMYz86s4DzYlqL6;
- Wed, 18 Jun 2025 14:40:52 +0800 (CST)
-Received: from a011.hihonor.com (10.68.31.243) by w002.hihonor.com
- (10.68.28.120) with Microsoft SMTP Server (version=TLS1_2,
+ id 1uRmWC-0006nf-Pa for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 18 Jun 2025 06:43:33 +0000
+Received: from w001.hihonor.com (unknown [10.68.25.235])
+ by mta21.hihonor.com (SkyGuard) with ESMTPS id 4bMYzS4NcpzYlqL6;
+ Wed, 18 Jun 2025 14:41:08 +0800 (CST)
+Received: from a011.hihonor.com (10.68.31.243) by w001.hihonor.com
+ (10.68.25.235) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 18 Jun
- 2025 14:43:05 +0800
+ 2025 14:43:21 +0800
 Received: from localhost.localdomain (10.144.23.14) by a011.hihonor.com
  (10.68.31.243) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 18 Jun
- 2025 14:43:05 +0800
+ 2025 14:43:20 +0800
 From: wangzijie <wangzijie1@honor.com>
 To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Wed, 18 Jun 2025 14:43:02 +0800
-Message-ID: <20250618064303.2477852-1-wangzijie1@honor.com>
+Date: Wed, 18 Jun 2025 14:43:03 +0800
+Message-ID: <20250618064303.2477852-2-wangzijie1@honor.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250618064303.2477852-1-wangzijie1@honor.com>
+References: <20250618064303.2477852-1-wangzijie1@honor.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.144.23.14]
 X-ClientProxiedBy: w002.hihonor.com (10.68.28.120) To a011.hihonor.com
@@ -75,16 +77,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  To prevent scattered pin block generation,
- don't allow non-section
- aligned truncation to smaller or equal size on pinned file. But for truncation
- to larger size, after commit 3fdd89b452c2("f2fs: preve [...] 
+ Content preview:  After introduce sbi in f2fs_setattr(), cleanup F2FS_I_SB.
+ No logic change. Signed-off-by: wangzijie <wangzijie1@honor.com> ---
+ fs/f2fs/file.c
+ | 13 ++++++------- 1 file changed, 6 insertions(+), 7 deletions(-) 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1uRmVx-0006mz-P3
-Subject: [f2fs-dev] [PATCH v3 1/2] f2fs: don't allow unaligned truncation to
- smaller/equal size on pinned file
+X-Headers-End: 1uRmWC-0006nf-Pa
+Subject: [f2fs-dev] [PATCH v3 2/2] f2fs: cleanup F2FS_I_SB in f2fs_setattr()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,52 +103,60 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-To prevent scattered pin block generation, don't allow non-section aligned truncation
-to smaller or equal size on pinned file. But for truncation to larger size, after
-commit 3fdd89b452c2("f2fs: prevent writing without fallocate() for pinned files"),
-we only support overwrite IO to pinned file, so we don't need to consider
-attr->ia_size > i_size case.
+After introduce sbi in f2fs_setattr(), cleanup F2FS_I_SB. No logic change.
 
 Signed-off-by: wangzijie <wangzijie1@honor.com>
 ---
-v3:
-- cover attr->ia_size == i_size case
-v2:
-- add comments and change a proper subject
----
- fs/f2fs/file.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ fs/f2fs/file.c | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
 
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 6bd3de64f..9e0f1c98f 100644
+index 9e0f1c98f..4809f0fd6 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -1026,6 +1026,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- {
- 	struct inode *inode = d_inode(dentry);
- 	struct f2fs_inode_info *fi = F2FS_I(inode);
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+@@ -1029,7 +1029,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
  	int err;
  
- 	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
-@@ -1047,6 +1048,17 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- 			!IS_ALIGNED(attr->ia_size,
- 			F2FS_BLK_TO_BYTES(fi->i_cluster_size)))
- 			return -EINVAL;
-+		/*
-+		 * To prevent scattered pin block generation, we don't allow
-+		 * smaller/equal size unaligned truncation for pinned file.
-+		 * We only support overwrite IO to pinned file, so don't
-+		 * care about larger size truncation.
-+		 */
-+		if (f2fs_is_pinned_file(inode) &&
-+			attr->ia_size <= i_size_read(inode) &&
-+			!IS_ALIGNED(attr->ia_size,
-+			F2FS_BLK_TO_BYTES(CAP_BLKS_PER_SEC(sbi))))
-+			return -EINVAL;
+-	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
++	if (unlikely(f2fs_cp_error(sbi)))
+ 		return -EIO;
+ 
+ 	if (unlikely(IS_IMMUTABLE(inode)))
+@@ -1080,12 +1080,11 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+ 	}
+ 	if (i_uid_needs_update(idmap, attr, inode) ||
+ 	    i_gid_needs_update(idmap, attr, inode)) {
+-		f2fs_lock_op(F2FS_I_SB(inode));
++		f2fs_lock_op(sbi);
+ 		err = dquot_transfer(idmap, inode, attr);
+ 		if (err) {
+-			set_sbi_flag(F2FS_I_SB(inode),
+-					SBI_QUOTA_NEED_REPAIR);
+-			f2fs_unlock_op(F2FS_I_SB(inode));
++			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
++			f2fs_unlock_op(sbi);
+ 			return err;
+ 		}
+ 		/*
+@@ -1095,7 +1094,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+ 		i_uid_update(idmap, attr, inode);
+ 		i_gid_update(idmap, attr, inode);
+ 		f2fs_mark_inode_dirty_sync(inode, true);
+-		f2fs_unlock_op(F2FS_I_SB(inode));
++		f2fs_unlock_op(sbi);
  	}
  
- 	err = setattr_prepare(idmap, dentry, attr);
+ 	if (attr->ia_valid & ATTR_SIZE) {
+@@ -1156,7 +1155,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+ 	f2fs_mark_inode_dirty_sync(inode, true);
+ 
+ 	/* inode change will produce dirty node pages flushed by checkpoint */
+-	f2fs_balance_fs(F2FS_I_SB(inode), true);
++	f2fs_balance_fs(sbi, true);
+ 
+ 	return err;
+ }
 -- 
 2.25.1
 
