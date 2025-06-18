@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32A36ADE3EC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Jun 2025 08:43:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09646ADE556
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Jun 2025 10:17:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=mbHuN0TXdM4ZQ1YsvaJlgdE585Y/zMJ0emVmEk9Qfs0=; b=jDASPfd46mPcGdnXI9HkhVyjz9
-	JzxwzBW8SLjyZJoML/O/tz/teEth4iNupQnyFx9PkXc5TjLeVHWPuNluJdGyKgu53vU7dmJdQRLfm
-	p2V+UL62kIVsEJ1ObvjtBUcAu/XUwdvwpIDSeLn3L5eNWyCoLNK9LrFGBG555uBj+tRs=;
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=5WPb2+8tt1TS0Jq9QI+uNNikQjOWGnmG1/dpjjbq9L4=; b=h/SplQied0UJc3Wtg1pDbCxGDQ
+	+KiAXGyqOcQkcbuoXXZJugsjmQRTwGgTQP+QrLlGnpN7ZAAyrkx3pDAnQTIhSFDWw4zdA2j8J/MRF
+	d1ga3uk8zZvC+PgCqMPbchnkMZTvkhXkey8cnf/0IeHxMBYf1FNXRFS8VHWm2NOkBvpU=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uRmWQ-0002K2-F8;
-	Wed, 18 Jun 2025 06:43:46 +0000
+	id 1uRnz3-000175-8G;
+	Wed, 18 Jun 2025 08:17:25 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wangzijie1@honor.com>) id 1uRmWO-0002Jn-NH
+ (envelope-from <huangjianan@xiaomi.com>) id 1uRnyz-00015u-2k
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Jun 2025 06:43:44 +0000
+ Wed, 18 Jun 2025 08:17:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
  :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HRB9fm4/TWkCzsTwmnERp07lVUluKpYeS6Fs43QrGps=; b=XDH8EK51gIaD5OeVNwQ2lmK+Ea
- dKi1o7MxbXRPVZ9OMteRO6+vHLvhAfabZphWx7Hr/XZrjqn9Eq4Auy0XFE8oyqNhr9zm/QaTd3eHL
- Zzg30HER5VWakRFCd98C4iiPdJR2AY5k3LIFp6rjPh74PQVmTjnnv51nk7KZRLDkOtCE=;
+ bh=ZV3h0Uy6Niu28f8mCB0jH0Uu2un/q6NsRFZRNE/I1Us=; b=liO7coqqDwdia+togMUKSwTbsU
+ cHekK9nky7zMHl6qCrprt/lPzWaS3NFnBiqbXL2JDLhyvjjAdnCwQ5xChQpfNVs7PvXAqSd7ZdhyQ
+ 9Xh+iVAZ3RmbcUUdyO10ThssuDNgKriOBTmpAK6ZsxlzNJ9wc34Vt8rx08OLr9qCDBEo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
@@ -40,52 +40,47 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=HRB9fm4/TWkCzsTwmnERp07lVUluKpYeS6Fs43QrGps=; b=bgXmY8kLSLoC0e+8hShzqxyS8v
- FIixAr9n+IJTPkhSXuky7r3e1nzaCh85V5TKuS+QB5e8YqMeVgwD/PSMM9y1SyyH2qRg3awXl90GB
- Qfy5Y0ErbSqDkCTMWqksK+XPPe2xUtZbqRSfLqzvOkvTe6HkJc+ygXUi2NmNAX6C1HKo=;
-Received: from mta21.hihonor.com ([81.70.160.142])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uRmWC-0006nf-Pa for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Jun 2025 06:43:33 +0000
-Received: from w001.hihonor.com (unknown [10.68.25.235])
- by mta21.hihonor.com (SkyGuard) with ESMTPS id 4bMYzS4NcpzYlqL6;
- Wed, 18 Jun 2025 14:41:08 +0800 (CST)
-Received: from a011.hihonor.com (10.68.31.243) by w001.hihonor.com
- (10.68.25.235) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 18 Jun
- 2025 14:43:21 +0800
-Received: from localhost.localdomain (10.144.23.14) by a011.hihonor.com
- (10.68.31.243) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 18 Jun
- 2025 14:43:20 +0800
-From: wangzijie <wangzijie1@honor.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Wed, 18 Jun 2025 14:43:03 +0800
-Message-ID: <20250618064303.2477852-2-wangzijie1@honor.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250618064303.2477852-1-wangzijie1@honor.com>
-References: <20250618064303.2477852-1-wangzijie1@honor.com>
+ bh=ZV3h0Uy6Niu28f8mCB0jH0Uu2un/q6NsRFZRNE/I1Us=; b=Hz9C1DwxpJ+FuWWUZXXKy85zGd
+ BIVXSZ2GAwcKKGCTjTwUbc/B44TUeWWQFlAWOw/uyp/EqPBjK+qfALFNnI3H+S3LJ3gdRtev/xX2b
+ JmloxnIeJgHMVcOrGGad0cO/nTRAPXWpULMJNm7KCxy1LUKvmEzpLtTBvxJbLeyy1/zk=;
+Received: from outboundhk.mxmail.xiaomi.com ([207.226.244.123])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1uRnyy-00046S-E1 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 18 Jun 2025 08:17:21 +0000
+X-CSE-ConnectionGUID: 4R/02tS0QtCl8GseCaL78w==
+X-CSE-MsgGUID: 5UFOyZgdShC6js6sQsxUPA==
+X-IronPort-AV: E=Sophos;i="6.16,245,1744041600"; d="scan'208";a="143507967"
+To: <linux-f2fs-devel@lists.sourceforge.net>, <chao@kernel.org>,
+ <jaegeuk@kernel.org>
+Date: Wed, 18 Jun 2025 16:17:05 +0800
+Message-ID: <20250618081705.260239-1-huangjianan@xiaomi.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250617055542.218681-1-huangjianan@xiaomi.com>
+References: <20250617055542.218681-1-huangjianan@xiaomi.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.144.23.14]
-X-ClientProxiedBy: w002.hihonor.com (10.68.28.120) To a011.hihonor.com
- (10.68.31.243)
+X-Originating-IP: [10.237.8.163]
+X-ClientProxiedBy: BJ-MBX06.mioffice.cn (10.237.8.126) To YZ-MBX05.mioffice.cn
+ (10.237.88.125)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  After introduce sbi in f2fs_setattr(), cleanup F2FS_I_SB.
- No logic change. Signed-off-by: wangzijie <wangzijie1@honor.com> ---
- fs/f2fs/file.c
- | 13 ++++++------- 1 file changed, 6 insertions(+), 7 deletions(-) 
+ Content preview:  When fewer pages are read,
+ nr_pages may be smaller than nr_cpages.
+ Due to the nr_vecs limit, the compressed pages will be split into multiple
+ bios and then merged at the block level. In this case, nr_ [...] 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1uRmWC-0006nf-Pa
-Subject: [f2fs-dev] [PATCH v3 2/2] f2fs: cleanup F2FS_I_SB in f2fs_setattr()
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [207.226.244.123 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1uRnyy-00046S-E1
+Subject: [f2fs-dev] [PATCH v2] f2fs: avoid splitting bio when reading
+ multiple pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,68 +92,75 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: feng.han@honor.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, wangzijie <wangzijie1@honor.com>
+From: Jianan Huang via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jianan Huang <huangjianan@xiaomi.com>
+Cc: Sheng Yong <shengyong1@xiaomi.com>, linux-kernel@vger.kernel.org,
+ wanghui33@xiaomi.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-After introduce sbi in f2fs_setattr(), cleanup F2FS_I_SB. No logic change.
+When fewer pages are read, nr_pages may be smaller than nr_cpages. Due
+to the nr_vecs limit, the compressed pages will be split into multiple
+bios and then merged at the block level. In this case, nr_cpages should
+be used to pre-allocate bvecs.
+To handle this case, align max_nr_pages to cluster_size, which should be
+enough for all compressed pages.
 
-Signed-off-by: wangzijie <wangzijie1@honor.com>
+Signed-off-by: Jianan Huang <huangjianan@xiaomi.com>
+Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
 ---
- fs/f2fs/file.c | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+Changes since v1:
+- Use aligned nr_pages instead of nr_cpages to pre-allocate bvecs.
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 9e0f1c98f..4809f0fd6 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -1029,7 +1029,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	int err;
- 
--	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
-+	if (unlikely(f2fs_cp_error(sbi)))
- 		return -EIO;
- 
- 	if (unlikely(IS_IMMUTABLE(inode)))
-@@ -1080,12 +1080,11 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- 	}
- 	if (i_uid_needs_update(idmap, attr, inode) ||
- 	    i_gid_needs_update(idmap, attr, inode)) {
--		f2fs_lock_op(F2FS_I_SB(inode));
-+		f2fs_lock_op(sbi);
- 		err = dquot_transfer(idmap, inode, attr);
- 		if (err) {
--			set_sbi_flag(F2FS_I_SB(inode),
--					SBI_QUOTA_NEED_REPAIR);
--			f2fs_unlock_op(F2FS_I_SB(inode));
-+			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
-+			f2fs_unlock_op(sbi);
- 			return err;
+ fs/f2fs/data.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 31e892842625..2d948586fea0 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2303,7 +2303,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
  		}
- 		/*
-@@ -1095,7 +1094,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- 		i_uid_update(idmap, attr, inode);
- 		i_gid_update(idmap, attr, inode);
- 		f2fs_mark_inode_dirty_sync(inode, true);
--		f2fs_unlock_op(F2FS_I_SB(inode));
-+		f2fs_unlock_op(sbi);
- 	}
  
- 	if (attr->ia_valid & ATTR_SIZE) {
-@@ -1156,7 +1155,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- 	f2fs_mark_inode_dirty_sync(inode, true);
+ 		if (!bio) {
+-			bio = f2fs_grab_read_bio(inode, blkaddr, nr_pages,
++			bio = f2fs_grab_read_bio(inode, blkaddr, nr_pages - i,
+ 					f2fs_ra_op_flags(rac),
+ 					folio->index, for_write);
+ 			if (IS_ERR(bio)) {
+@@ -2370,12 +2370,18 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ 		.nr_cpages = 0,
+ 	};
+ 	pgoff_t nc_cluster_idx = NULL_CLUSTER;
+-	pgoff_t index;
++	pgoff_t index = rac ? readahead_index(rac) : folio->index;
+ #endif
+ 	unsigned nr_pages = rac ? readahead_count(rac) : 1;
+ 	unsigned max_nr_pages = nr_pages;
+ 	int ret = 0;
  
- 	/* inode change will produce dirty node pages flushed by checkpoint */
--	f2fs_balance_fs(F2FS_I_SB(inode), true);
-+	f2fs_balance_fs(sbi, true);
++#ifdef CONFIG_F2FS_FS_COMPRESSION
++	if (f2fs_compressed_file(inode))
++		max_nr_pages = round_up(index + nr_pages, cc.cluster_size) -
++				round_down(index, cc.cluster_size);
++#endif
++
+ 	map.m_pblk = 0;
+ 	map.m_lblk = 0;
+ 	map.m_len = 0;
+@@ -2385,7 +2391,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ 	map.m_seg_type = NO_CHECK_TYPE;
+ 	map.m_may_create = false;
  
- 	return err;
- }
+-	for (; nr_pages; nr_pages--) {
++	for (; nr_pages; nr_pages--, max_nr_pages--) {
+ 		if (rac) {
+ 			folio = readahead_folio(rac);
+ 			prefetchw(&folio->flags);
 -- 
-2.25.1
+2.43.0
 
 
 
