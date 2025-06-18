@@ -2,7 +2,7 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 670C7ADF8DC
+	by mail.lfdr.de (Postfix) with ESMTPS id 53B1FADF8DA
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Jun 2025 23:39:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -10,68 +10,67 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=gbVKdkn2TAU8AL8b5+LtJZ6HifLgNDhu1UZ6RGUMNt4=; b=dtE9/SF0x0X7medZe/BGIRJZe9
-	Uh5/usS4AXEn94boxZHylAGcmQy+mK1MFVout262Sqk2xf1BuhHZ4phbOTjvumHIJwkhwaoqMZRsv
-	zMn4KPtnddWEjUQaCt3Ftyk6UR1asSe2IcFuXwHZxYQNzY7a66Zz2e7yjXK/nhpMEo/g=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=8Q/C+LFZi8/GGGCAsiCqnWchFYzy4lrmMRFbN2CjCoA=; b=T1hYTmWj+pkXR3do/owvRW5PrT
+	BHoI4JtJ3/+hQYOtKQ2fH6aK8G8s2i8AwYDPAsERLVtsAx4V4eVMgjlosGwUZxCRXTq5mltAp5ICZ
+	M8ecBzZsRxq1p15v44MPhx1jw0Ebauh/fNOP8+WudqszuioEeTpGKb+TIWjVZfD4lHIg=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uS0VU-0008Vo-9S;
-	Wed, 18 Jun 2025 21:39:44 +0000
+	id 1uS0VW-0000Lm-8Z;
+	Wed, 18 Jun 2025 21:39:46 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uS0VS-0008Vg-LO
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uS0VU-0000Le-98
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Jun 2025 21:39:42 +0000
+ Wed, 18 Jun 2025 21:39:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QeTtnF/ZRjsTdmIYNY3aN5cVl/gPFVGkDphFdlWRojQ=; b=HfiqB2qoMkLKCI/BdZZd7kmYR3
- YKzXrJqqq9yPzSkN4EgY5W+Wal8UOG5fdL6ZtNR1IDkqMVKX8w7GILFRGDee5F/gxZT7DXjMC4Ibi
- O7WaMrXsNZc9swrmrVP8TH2b1dqoQiHsSmSQ59+yaLKO5e4p2HzfQ1gf59eAqx+nIixI=;
+ bh=aFXW57g/TTbED1LLbm0xdIoZo24VXs6Ne5Xt+ESb1ZM=; b=Hkn13b2QB76mm0J5JU7h5pF2wp
+ kZq9FVLi6Yu6O1Y6GBxdhcJyAZOawXX4DZhku6K7bfgzC/0ky2odAFqIN2SBQlxppebnw75FjLA5m
+ iHVLbICJONZEkic9QCs8dM+l51y1DtARfwvP/27n8seNrNWx4rmsDN99stfPRizcYvvo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QeTtnF/ZRjsTdmIYNY3aN5cVl/gPFVGkDphFdlWRojQ=; b=X3GthaSsRuaUC+bq07hns0Dh1U
- 3HJJ9djewkxcXSRF4yZpNGMRQjwky8O8LlV+80MURwJtVKiALU6nezy8MLEeM1mI56TiXlHoYCAef
- DFQl5CQg1MvTKDI/eF0XDZ03y8jyTQSEK2B4mvPHhVL14kbjK17FBIn4kkvOQs1tLNGw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=aFXW57g/TTbED1LLbm0xdIoZo24VXs6Ne5Xt+ESb1ZM=; b=MVZMZeNAOjnWlVGmkD888k37Mz
+ ooP3skXyvVF+GDYQsos4zB4kdr/NvdDYmEg3c4fXE9xfonxSYM1hwqbjyI912MM/QlYsUtFyFyTEZ
+ BaZkI9tKCQkCRKBIroIiBue0KSySxhmlC6LZPy541y4hM7WIG9k0LCOSijKtFZmbqmIk=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uS0VS-0006BR-6h for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Jun 2025 21:39:42 +0000
+ id 1uS0VT-0006BT-Ox for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 18 Jun 2025 21:39:44 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 47C665C5841
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 18 Jun 2025 21:37:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E5FBC4CEE7;
- Wed, 18 Jun 2025 21:39:36 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 1F685A4DA8C;
+ Wed, 18 Jun 2025 21:39:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B182DC4CEE7;
+ Wed, 18 Jun 2025 21:39:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750282776;
- bh=HCAM12Fe5DXcRBQegk/n8DQ9rGaqr48kn3TlT7cARz0=;
+ s=k20201202; t=1750282777;
+ bh=hY/QMmnFyygQgDp6Hym88UYb9L8M8LHxSoMzGuUR88Q=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=pB6en+2cjScKzWpspCIDSmEsXTjk9ujyDZwq5Jjzrtmh2naZttLu+CitYTR5ROG4V
- 0Nj30en/CTs6Esojp9Aajfz/nK9BfJT4ZVfsf+Y7ZqhYZmpraKRkEFgeEZT17PY20U
- SOc1MIbnQNCsYLyK2gpBSZqzNVGMB8x+95ZfaqmDqrqIrzGEC+U40A6ILrfpJEH1Z1
- ElBIELDwSLbj7nyPl3kDb1WdgTXeUHh6ckzWDwmGYMj+FDjADvQKj29MRxPB2NhgMY
- Y5bzmxda77v04K4IJXPu8KMgxzgpPbzidMtdiA4W7TVciSj6w88Ios47KvK9mqHBaB
- SHUC0aqLf2TYQ==
+ b=EJhzb4XvKjDMpaOigxAtiMHwKC+kHZtGPgvRhkQcD+J05GiqY4OGb3CFNazA+mvai
+ Z43iAHg2Lkhf7QOEDG3W3DKAITpsKv1COPxVWIKqjExLrHvjZqlSi6ojC/G3qjnhep
+ k0ryuM2Bg2LQjIZN2GjW6/Wpq83457FbmqlkQiymAbOXKnWX5nHmQniAxABT/oNGpb
+ mhvVOK62csmQd/WjLiSvSF8/L9z6SMpomLsoN4+r7PhqVAEyW8zcDn5bwr2pI3YtDy
+ J17G0jY6UJ8vfT3q9tJ43Jdz90IIP0LcrzNnOm3uyct1Qflrw/6iE7JG5NTihMloxu
+ ACFRx0dBr76zQ==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- EAE503806649; Wed, 18 Jun 2025 21:40:05 +0000 (UTC)
+ 33AD93806649; Wed, 18 Jun 2025 21:40:07 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <175028280475.266369.5996296776480428957.git-patchwork-notify@kernel.org>
-Date: Wed, 18 Jun 2025 21:40:04 +0000
-References: <20250605032633.2744434-1-chao@kernel.org>
-In-Reply-To: <20250605032633.2744434-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+Message-Id: <175028280599.266369.3803881518609217106.git-patchwork-notify@kernel.org>
+Date: Wed, 18 Jun 2025 21:40:05 +0000
+References: <20250601002709.4094344-1-willy@infradead.org>
+In-Reply-To: <20250601002709.4094344-1-willy@infradead.org>
+To: Matthew Wilcox <willy@infradead.org>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -80,10 +79,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 5 Jun 2025 11:26:33 +0800 you wrote:
- > fstest reports a f2fs bug: > > generic/363 42s ... [failed, exit status
- 1]- output mismatch (see /share/git/fstests/results//generic/363.out.bad)
- > --- t [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Sun, 1 Jun 2025 01:26:54 +0100 you wrote:
+ > This conversion moved the folio_unlock() to inside __write_node_folio(),
+ > but missed one caller so we had a double-unlock on this path. > > Cc:
+ Christop [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,8 +94,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uS0VS-0006BR-6h
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix to zero post-eof page
+X-Headers-End: 1uS0VT-0006BT-Ox
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix __write_node_folio() conversion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,8 +110,9 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- stable@kernel.org, linux-kernel@vger.kernel.org
+Cc: linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+ syzbot+c0dc46208750f063d0e0@syzkaller.appspotmail.com, hch@lst.de,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -122,31 +122,22 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Thu,  5 Jun 2025 11:26:33 +0800 you wrote:
-> fstest reports a f2fs bug:
+On Sun,  1 Jun 2025 01:26:54 +0100 you wrote:
+> This conversion moved the folio_unlock() to inside __write_node_folio(),
+> but missed one caller so we had a double-unlock on this path.
 > 
-> generic/363 42s ... [failed, exit status 1]- output mismatch (see /share/git/fstests/results//generic/363.out.bad)
->     --- tests/generic/363.out   2025-01-12 21:57:40.271440542 +0800
->     +++ /share/git/fstests/results//generic/363.out.bad 2025-05-19 19:55:58.000000000 +0800
->     @@ -1,2 +1,78 @@
->      QA output created by 363
->      fsx -q -S 0 -e 1 -N 100000
->     +READ BAD DATA: offset = 0xd6fb, size = 0xf044, fname = /mnt/f2fs/junk
->     +OFFSET      GOOD    BAD     RANGE
->     +0x1540d     0x0000  0x2a25  0x0
->     +operation# (mod 256) for the bad data may be 37
->     +0x1540e     0x0000  0x2527  0x1
->     ...
->     (Run 'diff -u /share/git/fstests/tests/generic/363.out /share/git/fstests/results//generic/363.out.bad'  to see the entire diff)
-> Ran: generic/363
-> Failures: generic/363
-> Failed 1 of 1 tests
+> Cc: Christoph Hellwig <hch@lst.de>
+> Cc: Chao Yu <chao@kernel.org>
+> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> Reported-by: syzbot+c0dc46208750f063d0e0@syzkaller.appspotmail.com
+> Fixes: 80f31d2a7e5f (f2fs: return bool from __write_node_folio)
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v3] f2fs: fix to zero post-eof page
-    https://git.kernel.org/jaegeuk/f2fs/c/ba8dac350faf
+  - [f2fs-dev] f2fs: Fix __write_node_folio() conversion
+    https://git.kernel.org/jaegeuk/f2fs/c/6dea74e454c2
 
 You are awesome, thank you!
 -- 
