@@ -2,88 +2,118 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53B1FADF8DA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Jun 2025 23:39:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33DBBAE033E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Jun 2025 13:17:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
-	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=8Q/C+LFZi8/GGGCAsiCqnWchFYzy4lrmMRFbN2CjCoA=; b=T1hYTmWj+pkXR3do/owvRW5PrT
-	BHoI4JtJ3/+hQYOtKQ2fH6aK8G8s2i8AwYDPAsERLVtsAx4V4eVMgjlosGwUZxCRXTq5mltAp5ICZ
-	M8ecBzZsRxq1p15v44MPhx1jw0Ebauh/fNOP8+WudqszuioEeTpGKb+TIWjVZfD4lHIg=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=3OZ0aZ0o6CCJji8d+VymkvIpI3xDrena74g8QpHcAlk=; b=ezrB3DRkQYC3svt6DXYW8Jf06f
+	mpP1rqQlSStdUt+cm3HtJHQ6fjUacYGVsdYHbBI20FA8k7j3n+g5oZgKspms1lo3+fo8JUe4Od4ed
+	eixTrynLPu5hzLS9CHIxHT+WBg10PfJacrB5uQslCeF6YjTg0W3uG19bJgXpVPIChDSQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uS0VW-0000Lm-8Z;
-	Wed, 18 Jun 2025 21:39:46 +0000
+	id 1uSDGK-0000e1-5A;
+	Thu, 19 Jun 2025 11:16:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uS0VU-0000Le-98
+ (envelope-from <abinashlalotra@gmail.com>) id 1uSDGI-0000dv-3Y
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Jun 2025 21:39:44 +0000
+ Thu, 19 Jun 2025 11:16:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aFXW57g/TTbED1LLbm0xdIoZo24VXs6Ne5Xt+ESb1ZM=; b=Hkn13b2QB76mm0J5JU7h5pF2wp
- kZq9FVLi6Yu6O1Y6GBxdhcJyAZOawXX4DZhku6K7bfgzC/0ky2odAFqIN2SBQlxppebnw75FjLA5m
- iHVLbICJONZEkic9QCs8dM+l51y1DtARfwvP/27n8seNrNWx4rmsDN99stfPRizcYvvo=;
+ bh=GuFM1YbwpAAAQMd/gx8Z2BVa5dBU8bXNQwjwSquZUvk=; b=FvwQu1V1TR3wLHzPqLBHtn90+l
+ e3Q6thmtoxzpC0aIYZAxCgEKSMf5JUQGTi2AWVHWOHkYMq35uQFncaxuvkhkY/N3/Ln0Zo+dgUMAl
+ S50atkovXO8OedsTyIEH5Tk06RBVT3oYaKagLxAbSKBNINA045MSUc94HrTAC4LHn82Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aFXW57g/TTbED1LLbm0xdIoZo24VXs6Ne5Xt+ESb1ZM=; b=MVZMZeNAOjnWlVGmkD888k37Mz
- ooP3skXyvVF+GDYQsos4zB4kdr/NvdDYmEg3c4fXE9xfonxSYM1hwqbjyI912MM/QlYsUtFyFyTEZ
- BaZkI9tKCQkCRKBIroIiBue0KSySxhmlC6LZPy541y4hM7WIG9k0LCOSijKtFZmbqmIk=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=GuFM1YbwpAAAQMd/gx8Z2BVa5dBU8bXNQwjwSquZUvk=; b=j
+ Rh9/JQalSbKbpW7P+0sLGF74OhAjNZUII/1GIBMgRgrq2NysS9UwPCu/LCo0cOqSVPn0BZYt+/03j
+ Inf8hX0mweMkw3zQX4e+hJWz+dmr05uYOtkzyGbrtDwuQOgdgKS5kdYwwOZIA8mVr4C2qPswJaqRr
+ jEAU6osLYFrjcW5U=;
+Received: from mail-pl1-f178.google.com ([209.85.214.178])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uS0VT-0006BT-Ox for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Jun 2025 21:39:44 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 1F685A4DA8C;
- Wed, 18 Jun 2025 21:39:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B182DC4CEE7;
- Wed, 18 Jun 2025 21:39:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750282777;
- bh=hY/QMmnFyygQgDp6Hym88UYb9L8M8LHxSoMzGuUR88Q=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=EJhzb4XvKjDMpaOigxAtiMHwKC+kHZtGPgvRhkQcD+J05GiqY4OGb3CFNazA+mvai
- Z43iAHg2Lkhf7QOEDG3W3DKAITpsKv1COPxVWIKqjExLrHvjZqlSi6ojC/G3qjnhep
- k0ryuM2Bg2LQjIZN2GjW6/Wpq83457FbmqlkQiymAbOXKnWX5nHmQniAxABT/oNGpb
- mhvVOK62csmQd/WjLiSvSF8/L9z6SMpomLsoN4+r7PhqVAEyW8zcDn5bwr2pI3YtDy
- J17G0jY6UJ8vfT3q9tJ43Jdz90IIP0LcrzNnOm3uyct1Qflrw/6iE7JG5NTihMloxu
- ACFRx0dBr76zQ==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
- by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 33AD93806649; Wed, 18 Jun 2025 21:40:07 +0000 (UTC)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1uSDGH-0006xS-Q7 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 19 Jun 2025 11:16:54 +0000
+Received: by mail-pl1-f178.google.com with SMTP id
+ d9443c01a7336-236377f00a1so6059375ad.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 19 Jun 2025 04:16:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1750331803; x=1750936603; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GuFM1YbwpAAAQMd/gx8Z2BVa5dBU8bXNQwjwSquZUvk=;
+ b=LXjsbAJZbf7f9KLq1yaCzCLnMNVZkvW3eXm7mZapNNbLNI6v4SHQwGr30GJhaKqLI3
+ fUzVFSj+redQxqBQNfAyzt0uMp+uI8IjG2PIaLw/pyZnlYtRBmmRCNgsVGtmlE+uRqkV
+ ZoaBBak2vUcdseBCyN1Qdz6ls8EVEx02BDCRn6H3Ql8JFpWOECwt2OtEMN9Ed1t37SMP
+ TyNvbLl046t/x98/fYGnmBAWsWhzk/zL3Xsq/Dpfu72Tuaj77uuCVStHb238pcQ0V394
+ crBjjYdRbI9TOZgKGmHWeX3n53LrjWivAiQ+vkJo7mhGUxgaMH6T4hL5BA+n6K2WumZ5
+ wp4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750331803; x=1750936603;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GuFM1YbwpAAAQMd/gx8Z2BVa5dBU8bXNQwjwSquZUvk=;
+ b=MnNkXdlS0BtbsVnx594yj6MapxHs3yE6jtIpKFDCDUcG8CFRknB8YKQooQKDZ2x7Pz
+ Zn28JITyii95eu2AfFOXFkG2L+kKpGcvd4sgahTX4GXLZtxWpOXBZRO7h1iX/Oad4df7
+ 30EKeH32X25yuSgxyHkUz1pfCMER6pn2aArw60Q/z1gYpIiBiKvr1S+bG3Gp3UVF3Eg3
+ r1xjT+NyjdafsOME8qnr1aVPf3Yzqj2kHowBvpKT9oGhhKiUz5MNg5LYOLp8QlzF+1Mi
+ sm6amIgPswKEk2fTuQseTOlCq2yUZaKnmJMAYa4OFd513kuo8iIWfuFB1WKpfTxUhJ/Y
+ fCTA==
+X-Gm-Message-State: AOJu0Yxlm/rTT3+JY11pgV3QO0JUcuY34tHgUvcfD55SnLtxNFTMGnDc
+ tzfDhikNfZuee2swLyA+FysqL2w+jMaDhU4hlgXoOKYlJLnzOUePWlwEJfdpJCFo
+X-Gm-Gg: ASbGncu5gudUMnLVSeSRZEtNniIYGQw4CXHt5zoxXxNSVtFFUQzSYkUt1wadCKReRN3
+ AxER+hUPDq5oy4/5HC5TunxB9qG72tBQnPBCIWSanu3Eh/lzCYDzJzBBjQdJc4LjGD7HpnhlD2v
+ chY591yMZEKgIas1S0GqYwYWwobQkiF5Ihu/2KaXR8oHlN9WX9TSqBNKdpQkvIscl4jw09kUF/R
+ ILVZ6i/bJamsEJQNH4tn6OfPHKW1Y+KSZXNtXgBB/PhycFGEDba+llpBENyBcwJAdzjEn14KLub
+ LpPklA+Dh4IYCFXo/R+AO+vuQgfaPJRu2urIOR1VA5dcLIRBNz7l9g14CBHKz2gwE3VtJdPbxLJ
+ 0c0WM+IEIvixn+y/GMaVe
+X-Google-Smtp-Source: AGHT+IFr10DL/nrTOrnxO5gYYxx6P2P4jBT1kZ85cwerLt6/BLpP5KnnBr5Y4XQvn0r/OdAjaAEGwg==
+X-Received: by 2002:a17:903:40cf:b0:234:ba37:87a5 with SMTP id
+ d9443c01a7336-2366b1224b4mr319180945ad.25.1750331802869; 
+ Thu, 19 Jun 2025 04:16:42 -0700 (PDT)
+Received: from avinash-INBOOK-Y2-PLUS..
+ ([2401:4900:88e2:4433:2a7d:bb88:9d3c:be74])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2365e0d22edsm117422515ad.240.2025.06.19.04.16.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Jun 2025 04:16:42 -0700 (PDT)
+From: avinashlalotra <abinashlalotra@gmail.com>
+X-Google-Original-From: avinashlalotra <abinashsinghlalotra@gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 19 Jun 2025 16:44:07 +0530
+Message-ID: <20250619111407.113334-1-abinashsinghlalotra@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Message-Id: <175028280599.266369.3803881518609217106.git-patchwork-notify@kernel.org>
-Date: Wed, 18 Jun 2025 21:40:05 +0000
-References: <20250601002709.4094344-1-willy@infradead.org>
-In-Reply-To: <20250601002709.4094344-1-willy@infradead.org>
-To: Matthew Wilcox <willy@infradead.org>
-X-Spam-Score: -0.3 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Sun, 1 Jun 2025 01:26:54 +0100 you wrote:
- > This conversion moved the folio_unlock() to inside __write_node_folio(),
- > but missed one caller so we had a double-unlock on this path. > > Cc:
- Christop [...] 
- Content analysis details:   (-0.3 points, 5.0 required)
+ Content preview: KMSAN reported a use of uninitialized value in
+ `__is_extent_mergeable()`
+ and `__is_back_mergeable()` via the read extent tree path. The root cause
+ is that `get_read_extent_info()` only initializes three fields (`fofs`, `blk`, 
+ `len`) of `struct extent_info`, leaving the remaining fields uninitialized.
+ This leads to undefined behavi [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -93,9 +123,13 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uS0VT-0006BT-Ox
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix __write_node_folio() conversion
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [abinashlalotra(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.178 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1uSDGH-0006xS-Q7
+Subject: [f2fs-dev] [PATCH] f2fs: fix KMSAN uninit-value in extent_info usage
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,43 +141,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: patchwork-bot+f2fs--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- syzbot+c0dc46208750f063d0e0@syzkaller.appspotmail.com, hch@lst.de,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ avinashlalotra <abinashsinghlalotra@gmail.com>,
+ syzbot+b8c1d60e95df65e827d4@syzkaller.appspotmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello:
+KMSAN reported a use of uninitialized value in `__is_extent_mergeable()` and
+`__is_back_mergeable()` via the read extent tree path.
 
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
+The root cause is that `get_read_extent_info()` only initializes three fields
+(`fofs`, `blk`, `len`) of `struct extent_info`, leaving the remaining fields
+uninitialized. This leads to undefined behavior when those fields are accessed
+later, especially during extent merging.
 
-On Sun,  1 Jun 2025 01:26:54 +0100 you wrote:
-> This conversion moved the folio_unlock() to inside __write_node_folio(),
-> but missed one caller so we had a double-unlock on this path.
-> 
-> Cc: Christoph Hellwig <hch@lst.de>
-> Cc: Chao Yu <chao@kernel.org>
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-> Reported-by: syzbot+c0dc46208750f063d0e0@syzkaller.appspotmail.com
-> Fixes: 80f31d2a7e5f (f2fs: return bool from __write_node_folio)
-> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-> 
-> [...]
+Fix it by zero-initializing the `extent_info` struct before population.
 
-Here is the summary with links:
-  - [f2fs-dev] f2fs: Fix __write_node_folio() conversion
-    https://git.kernel.org/jaegeuk/f2fs/c/6dea74e454c2
+Reported-by: syzbot+b8c1d60e95df65e827d4@syzkaller.appspotmail.com
+Signed-off-by: avinashlalotra <abinashsinghlalotra@gmail.com>
+---
+ fs/f2fs/extent_cache.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-You are awesome, thank you!
+diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
+index cfe925a3d555..4ce19a310f38 100644
+--- a/fs/f2fs/extent_cache.c
++++ b/fs/f2fs/extent_cache.c
+@@ -414,7 +414,7 @@ void f2fs_init_read_extent_tree(struct inode *inode, struct folio *ifolio)
+ 	struct f2fs_extent *i_ext = &F2FS_INODE(&ifolio->page)->i_ext;
+ 	struct extent_tree *et;
+ 	struct extent_node *en;
+-	struct extent_info ei;
++	struct extent_info ei = {0};
+ 
+ 	if (!__may_extent_tree(inode, EX_READ)) {
+ 		/* drop largest read extent */
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+2.43.0
 
 
 
