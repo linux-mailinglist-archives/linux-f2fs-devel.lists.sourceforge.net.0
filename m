@@ -2,136 +2,144 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3235CAE1D42
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Jun 2025 16:26:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58FEBAE1D52
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Jun 2025 16:28:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=NzyijMt6cPCpjWmbpp3g0NAI1Gfv8huYj2cg9fmRlaw=; b=hCzrMNyPZQtEjxnKBXqlyrjyRp
-	U2qS1OpuK24awdhtAvvbYXyv1TXG1RFMhhxRmhHS/gUHxUx80LZOm1VmpUMo5zaQpBKmTtX0gHEeT
-	Zeh9+m8eywPgdySt0AEMOfLFde8DgETLbo7bqoHdDJBD1xEzd5ihq64KDSCkOaAS+46s=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=gXIvkvKoWVR25ehbEG9lDYrvBbjP99FZrHCmrdXtbok=; b=VTkNBCTa/6s3gpLnLcyTo+pt6v
+	CcBgm6hjn/MFMQm+gXVHMNTCszUu5TRprixX+eV6GtTWPnD8YMJogKi5VOBtZ6FhQOZIjQ9IkNqKH
+	cbsrWKOEiQGAYU0tJl634+MvUfRrEs0Fer7/U5Lj1hPIDiWAYWx9RFypZU54iUj6JSoM=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uScgo-00087A-9E;
-	Fri, 20 Jun 2025 14:25:58 +0000
+	id 1uScjX-0008F8-Bb;
+	Fri, 20 Jun 2025 14:28:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yuanye.ma20@gmail.com>) id 1uScgn-000874-Mc
+ (envelope-from <zlang@redhat.com>) id 1uScjV-0008Ez-La
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 20 Jun 2025 14:25:57 +0000
+ Fri, 20 Jun 2025 14:28:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mt0UxcsIQbrh7erVicbBBO1vqCNvobmzw4o72dRhMOc=; b=VLo0aH9ijCdmA+9BT7sNuM4nsn
- dQIoRmHMObnH04vftNMdEASUxbWwFTccNBrsULJLMHwAnX23lbVq2iqniF865mbub4ZeS0lY5Dkzw
- FXC1t3jLdqO9wWxq0fEfJ7xc57vFWouXkDi8klJhddRUyBW4EKVjiV1R8u5829w1fSjw=;
+ bh=0ucWMOo5W4QYO6Mg122vHo8guICWeoYajSNvWPSEp3M=; b=XFmeeGXZzcH4aFQIH4+s0qpm7q
+ gaUcCzFUu/fVM7KSZ6I1X7WLy5GQDaR+rJZyyH5tmPmK/6KwPTYcrz33BLtbzwn/EcOyo3uf//lKx
+ lK2bDjCv5Rhq2oNTL3UCyOZ6Cyo60nOlk2VLDxrgr3OEvEQDsZluGNysfHFxRB/vNhLs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=mt0UxcsIQbrh7erVicbBBO1vqCNvobmzw4o72dRhMOc=; b=R
- IWSCR7GzbaacvHj0/spwaOD117sEi1awA8ish0P9N7frVzHKuobY40L8DVOFU26bWDROu2nzxBbvS
- g/9UCqJOF1uaJNfnAgapaVZ7IaNu/6qho6fT7DY8y+yb7CYfv65Ty8rdNt8LT+9K9PB/BjsMqaGHz
- 2c/QBBkRkzFEA+Wc=;
-Received: from mail-pl1-f180.google.com ([209.85.214.180])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uScgn-0000fX-CA for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 20 Jun 2025 14:25:57 +0000
-Received: by mail-pl1-f180.google.com with SMTP id
- d9443c01a7336-235e1d710d8so27215775ad.1
+ h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=0ucWMOo5W4QYO6Mg122vHo8guICWeoYajSNvWPSEp3M=; b=QmtGJnC7Bah3EyFRuqlR+Z//Ay
+ mCMd88k/YByWHcmAGpflHlVr+v+/XsXkMRrpjOJrE6eFHoWaHP7Rk3aiX39/liwbI+k/xgLmU9k0g
+ ph6+ncrPMTe3tSpATbYtXii+YQRO8dhsg/yLoegE5QcHsw38vUS+mYMeexjbmNZeSiHI=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1uScjV-0000qc-8Y for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 20 Jun 2025 14:28:45 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1750429713;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=0ucWMOo5W4QYO6Mg122vHo8guICWeoYajSNvWPSEp3M=;
+ b=KP3Vsp0YU0loUqtCny6fEYEn6fk24KG9ZcOlltikLRhTHO3vQjSUdUaH6yRilMQ9A7tYrX
+ v6gxxyB1JEMXMpWhGFjlnMfviyGdQshawuTTPpXw8XtgpbTceudP8ZSOgtFnKvlp4GyE/D
+ orvc+yOo3ZRmw1gHh6FoL7aMncSO/os=
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
+ [209.85.210.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-664-hxZaVAbiOo2zkQgLaozUIA-1; Fri, 20 Jun 2025 10:28:32 -0400
+X-MC-Unique: hxZaVAbiOo2zkQgLaozUIA-1
+X-Mimecast-MFC-AGG-ID: hxZaVAbiOo2zkQgLaozUIA_1750429711
+Received: by mail-pf1-f199.google.com with SMTP id
+ d2e1a72fcca58-7394772635dso1518694b3a.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 20 Jun 2025 07:25:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750429547; x=1751034347; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mt0UxcsIQbrh7erVicbBBO1vqCNvobmzw4o72dRhMOc=;
- b=EKnN2ycdWtqWGIhjE/N6mqoH1eTBjVcdV+fgHKTZLAdgDtaoHEvwttmGud/VYGSiEq
- BYObxJLF8I6HVpMlNF0vLK8z2/YikmOgOi5gszHdVfxnvgCldzQQuQ/mfNiRaUtPVvCe
- FdDhvkviYWNEAcqIJ9WZgycJ+UQBVX8dX5kOQ+Nb5x7Jajho6CDqxuznNUIAfAyCpWwS
- 4rJKFyK/SxB4DJ6ExnZu5sA7q3WadHNw2MP22OTS/ELCgVVqyuHUdpuMUTkdDQ7nngiy
- +0emWTngHjFgNcUsPF5esk5E7oHxZYm03NaEkMxSVRwEAwF1JAdiAdzmaAFL5NZUVC79
- eMvg==
+ Fri, 20 Jun 2025 07:28:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750429547; x=1751034347;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mt0UxcsIQbrh7erVicbBBO1vqCNvobmzw4o72dRhMOc=;
- b=o1vEy8xUx4f9jllgDUhBrcFO6j8xWlW2q/Rdjjl8D+O+bxnV5BD5l/HqjTUpoK18sx
- MZ8FgWZSOyNg735MJX3TXTBXTPcYr9KpPCRLq7oP6WbN4aoyeu+Jwy9mfMWv3oSnCqEg
- SBUeAcNHXT2q4IIUNI3G19DkP93/ZmHU6rw94h8IB2VqfTdqP8oyBJRd9KTA63ftuVnN
- vxt/m20pZqMxMC2Bh+DUjHScDNCSgqcPZ7cB3uQraPXQL9obhVRD6Ri43WA1cC/8mg7F
- JosuyinQ7+P57eXIX7yXUu6KeTJu1jQ5hclz3i/GLOvMZUeeffWZnvqhTfX0+cQt9ydr
- 8Jww==
+ d=1e100.net; s=20230601; t=1750429711; x=1751034511;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0ucWMOo5W4QYO6Mg122vHo8guICWeoYajSNvWPSEp3M=;
+ b=ospq2R6IoopyELliyTDBsRZfLCsmnw0apRO4OewgzFvtbiWczagiUP6RXARtb2F7qE
+ +bsm2aQMAm7/KTsPE+TP1MrSBa9t9KRYQBNG+88AYVWVxzrWJGLbtPJBSEw2KlS/Uw/T
+ OcuhmS38vmZxgH2qFhAQQLmFv/Bk2GrdgpwSDjp8lP0eo4GQLWadNawa0C0u85tHEPkP
+ O16djmqGHCoLJJSJx8wU+ONi4M77oIm099j73h41ukbiw9XManozXKqfRgeD3Ig6bRYG
+ vK9MegVlG1FFQHnxe8EbZL1bwKraHqW+SfoFjftte4ZLRTj7nStL+InCIiCHsBtO/I7g
+ fzrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUA+uGDNdmNhp/YrK8ylTdTSZoZ4CpoWWDJ3kicohiwR7/wzKrwHlKdHSi6x8UQELrMXSLdAQj6aKgpeELuErAN@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzNjstZOhsatAGTHqtdv+zbqxK2eiR6aTee5CJshPMep/E32by4
- +lDVdKuYipEoko7S8qaW70pivznV0Xm+MKR6BtrC1Nk8crVBSCxU9aoT
-X-Gm-Gg: ASbGncssNRvL09gNhGT3NBdYbWE2hGaV0ClRpNCeEFc2c4X0JTIKxPxW0itwFdwST0o
- f90Ipm8Y4bteg5TmaNtZKsUgc+xxiQsiFPTQv+UObWQcrXGcZlJZ7qe1h0Tmn53DUxYn5tETaZM
- UHXHC6oyJlWJyGM/G8OEjeZVPlk7sybwnxUDqRq/8cHImATlE1Y4fXwSbrPqs0N6Kz1fDAbYDzF
- XTeGzw4iYfomku5oqqoqjkamuwyQrMgJnF03qdakBv+EbZFVESY5WvOrCLYew8zLlkxxFQgCL9q
- QxtvhILE9JZ+xNQ93IVDBjpNC/gD5Fljj6iYNMtHHtohamoFm0jIQ5kinMjRo/TH78d6+x3jliW
- 8
-X-Google-Smtp-Source: AGHT+IFll20vV4ynGEgWpnSAhVmzio10K+2+NYrQyup3kjW7y/aHFbbZ1VqDies/v11+K5p29Xl8nA==
-X-Received: by 2002:a17:903:1c6:b0:235:e9fe:83c0 with SMTP id
- d9443c01a7336-237d9852f68mr45071205ad.27.1750429546517; 
- Fri, 20 Jun 2025 07:25:46 -0700 (PDT)
-Received: from localhost.localdomain ([45.8.186.102])
+ AJvYcCXJAZFws9wU/yuFDDEPVheJxmqVYEmzNwZLuKsfKbtLwP5UwQYIaHd/fJbQd4YhC4daJ0sFWXBFVJHcZZ3mzXMs@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yz/JTNNp3dC0mnXj5lkNbks73dIU6EH3Yo84BPPzPPIZ8sKTWtf
+ cwoyQyZBiwH7db/66WKoNO56GR6H3FSu5ygfStU5vOxMgi803LVNVeAavSszHxTg//Z5qHdvbtF
+ 9bTUsD/SJ9LSsRA7xo/9hvzbjHoKJqNS0XBFNXg9voJj8f52D5NjisE6ImQjxnEXwHBIaxRnuC8
+ dDdVU=
+X-Gm-Gg: ASbGncvB0/LwtB1S970/iF4FDuVhSxz41TSqkXLLlUXdnTXNgMOBmPkXbLs7NVjq+li
+ vvqEsPX2nrnCe7w/csrfjD8P5hbFZ9NoUimFoMM+Y/z9AWDZItUwQH22Y26HqQss9fLcZAeqjzS
+ RF7ZwWg6aez8mS9LXenZQOYDU74S41spRSKVpIkertVMkVc248YEKdcni4vc4VrUTPOpsHNjWHV
+ w2LeHOKRWjRraLHv8C9QlWl/M74hjV2erZiMZ44Yws3vbd9YtX3EHuza5wAE4cIqBdkQs8doMOT
+ bXVJrTkl6czU7oGYrTAONeHnHDsIwA4Dcj8P9VzzFlv5spWpp+iCJ+EMoX4tYfo=
+X-Received: by 2002:aa7:88c3:0:b0:747:ab61:e4fa with SMTP id
+ d2e1a72fcca58-7490da4a743mr4521607b3a.14.1750429711234; 
+ Fri, 20 Jun 2025 07:28:31 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG8AqXLFkwz0QSfwU9gX6l+H/B9X20dgZVbMCYNNJ+6/zgR9Um4zjBr3hKxT+ilWXhOO5Gfqg==
+X-Received: by 2002:aa7:88c3:0:b0:747:ab61:e4fa with SMTP id
+ d2e1a72fcca58-7490da4a743mr4521582b3a.14.1750429710906; 
+ Fri, 20 Jun 2025 07:28:30 -0700 (PDT)
+Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([209.132.188.88])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-237d860aeacsm19272025ad.119.2025.06.20.07.25.42
+ d2e1a72fcca58-7490a621ceasm2262963b3a.97.2025.06.20.07.28.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jun 2025 07:25:46 -0700 (PDT)
-From: Yuanye Ma <yuanye.ma20@gmail.com>
-To: jaegeuk@kernel.org, chao@kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 19 Jun 2025 06:55:46 +0800
-Message-ID: <20250618225546.104949-1-yuanye.ma20@gmail.com>
-X-Mailer: git-send-email 2.48.1
+ Fri, 20 Jun 2025 07:28:30 -0700 (PDT)
+Date: Fri, 20 Jun 2025 22:28:25 +0800
+To: Jan Prusakowski <jprusakowski@google.com>
+Message-ID: <20250620142825.hczg4ldsk46delze@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+References: <20250620082906.2122560-1-jprusakowski@google.com>
 MIME-Version: 1.0
-X-Spam-Score: 0.5 (/)
-X-Spam-Report: Spam detection software, running on the system "sfi-spamd-1.hosts.colo.sdot.me",
+In-Reply-To: <20250620082906.2122560-1-jprusakowski@google.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: UoPr5vk7o6t5rXme8fmeiDRwecSIImpNCR3NLWVw18M_1750429711
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+X-Spam-Score: -0.3 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  This patch fixes two minor typos in Documentation/filesystems/f2fs.rst:
-    - "ramdom" → "random" - "reenable" → "re-enable" The changes improve
-   spelling and consistency in the documentation. 
- 
- Content analysis details:   (0.5 points, 5.0 required)
- 
-  pts rule name              description
+ Content preview:  On Fri, Jun 20, 2025 at 08:29:05AM +0000, Jan Prusakowski
+ wrote: > Hi, > > We're testing F2FS internally and when we use a compressed
+ file system we I saw you used _require_no_compress in your patch, but this
+ function only supports btrfs checking currently. How do you avoid your test
+ failure on F2FS? 
+ Content analysis details:   (-0.3 points, 5.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
-                             domain
-  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
-                             digit
-                             [yuanye.ma20(at)gmail.com]
-  0.5 DATE_IN_PAST_24_48     Date: is 24 to 48 hours before Received: date
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail provider
-                             [yuanye.ma20(at)gmail.com]
-  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
-                             [209.85.214.180 listed in wl.mailspike.net]
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1uScgn-0000fX-CA
-Subject: [f2fs-dev] [PATCH] docs: f2fs: fix typos in f2fs.rst
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [170.10.133.124 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uScjV-0000qc-8Y
+Subject: Re: [f2fs-dev] [PATCH v1 0/1] generic/018: do not run the test if a
+ compressed filesystem is used
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -143,46 +151,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yuanye Ma <yuanye.ma20@gmail.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, corbet@lwn.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Zorro Lang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Zorro Lang <zlang@redhat.com>
+Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-VGhpcyBwYXRjaCBmaXhlcyB0d28gbWlub3IgdHlwb3MgaW4gRG9jdW1lbnRhdGlvbi9maWxlc3lz
-dGVtcy9mMmZzLnJzdDoKCi0gInJhbWRvbSIg4oaSICJyYW5kb20iCi0gInJlZW5hYmxlIiDihpIg
-InJlLWVuYWJsZSIKClRoZSBjaGFuZ2VzIGltcHJvdmUgc3BlbGxpbmcgYW5kIGNvbnNpc3RlbmN5
-IGluIHRoZSBkb2N1bWVudGF0aW9uLgoKVGhlc2UgaXNzdWVzIHdlcmUgaWRlbnRpZmllZCB1c2lu
-ZyB0aGUgJ2NvZGVzcGVsbCcgdG9vbCB3aXRoIHRoZQpmb2xsb3dpbmcgY29tbWFuZDoKCiAgJCBm
-aW5kIERvY3VtZW50YXRpb24vIC1wYXRoIERvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zIC1wcnVu
-ZSAtbyBcCiAgICAtbmFtZSAnKi5yc3QnIC1wcmludCB8IHhhcmdzIGNvZGVzcGVsbAoKU2lnbmVk
-LW9mZi1ieTogWXVhbnllIE1hIDx5dWFueWUubWEyMEBnbWFpbC5jb20+Ci0tLQogRG9jdW1lbnRh
-dGlvbi9maWxlc3lzdGVtcy9mMmZzLnJzdCB8IDQgKystLQogMSBmaWxlIGNoYW5nZWQsIDIgaW5z
-ZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9uL2Zp
-bGVzeXN0ZW1zL2YyZnMucnN0IGIvRG9jdW1lbnRhdGlvbi9maWxlc3lzdGVtcy9mMmZzLnJzdApp
-bmRleCA0NDBlNGFlNzRlNDQuLjhlZWI3ZWExNGY2MSAxMDA2NDQKLS0tIGEvRG9jdW1lbnRhdGlv
-bi9maWxlc3lzdGVtcy9mMmZzLnJzdAorKysgYi9Eb2N1bWVudGF0aW9uL2ZpbGVzeXN0ZW1zL2Yy
-ZnMucnN0CkBAIC0yMTgsNyArMjE4LDcgQEAgbW9kZT0lcwkJCSBDb250cm9sIGJsb2NrIGFsbG9j
-YXRpb24gbW9kZSB3aGljaCBzdXBwb3J0cyAiYWRhcHRpdmUiCiAJCQkgZnJhZ21lbnRhdGlvbi9h
-ZnRlci1HQyBzaXR1YXRpb24gaXRzZWxmLiBUaGUgZGV2ZWxvcGVycyB1c2UgdGhlc2UKIAkJCSBt
-b2RlcyB0byB1bmRlcnN0YW5kIGZpbGVzeXN0ZW0gZnJhZ21lbnRhdGlvbi9hZnRlci1HQyBjb25k
-aXRpb24gd2VsbCwKIAkJCSBhbmQgZXZlbnR1YWxseSBnZXQgc29tZSBpbnNpZ2h0cyB0byBoYW5k
-bGUgdGhlbSBiZXR0ZXIuCi0JCQkgSW4gImZyYWdtZW50OnNlZ21lbnQiLCBmMmZzIGFsbG9jYXRl
-cyBhIG5ldyBzZWdtZW50IGluIHJhbWRvbQorCQkJIEluICJmcmFnbWVudDpzZWdtZW50IiwgZjJm
-cyBhbGxvY2F0ZXMgYSBuZXcgc2VnbWVudCBpbiByYW5kb20KIAkJCSBwb3NpdGlvbi4gV2l0aCB0
-aGlzLCB3ZSBjYW4gc2ltdWxhdGUgdGhlIGFmdGVyLUdDIGNvbmRpdGlvbi4KIAkJCSBJbiAiZnJh
-Z21lbnQ6YmxvY2siLCB3ZSBjYW4gc2NhdHRlciBibG9jayBhbGxvY2F0aW9uIHdpdGgKIAkJCSAi
-bWF4X2ZyYWdtZW50X2NodW5rIiBhbmQgIm1heF9mcmFnbWVudF9ob2xlIiBzeXNmcyBub2Rlcy4K
-QEAgLTI2MSw3ICsyNjEsNyBAQCB0ZXN0X2R1bW15X2VuY3J5cHRpb249JXMKIAkJCSBUaGUgYXJn
-dW1lbnQgbWF5IGJlIGVpdGhlciAidjEiIG9yICJ2MiIsIGluIG9yZGVyIHRvCiAJCQkgc2VsZWN0
-IHRoZSBjb3JyZXNwb25kaW5nIGZzY3J5cHQgcG9saWN5IHZlcnNpb24uCiBjaGVja3BvaW50PSVz
-WzoldVslXV0JIFNldCB0byAiZGlzYWJsZSIgdG8gdHVybiBvZmYgY2hlY2twb2ludGluZy4gU2V0
-IHRvICJlbmFibGUiCi0JCQkgdG8gcmVlbmFibGUgY2hlY2twb2ludGluZy4gSXMgZW5hYmxlZCBi
-eSBkZWZhdWx0LiBXaGlsZQorCQkJIHRvIHJlLWVuYWJsZSBjaGVja3BvaW50aW5nLiBJcyBlbmFi
-bGVkIGJ5IGRlZmF1bHQuIFdoaWxlCiAJCQkgZGlzYWJsZWQsIGFueSB1bm1vdW50aW5nIG9yIHVu
-ZXhwZWN0ZWQgc2h1dGRvd25zIHdpbGwgY2F1c2UKIAkJCSB0aGUgZmlsZXN5c3RlbSBjb250ZW50
-cyB0byBhcHBlYXIgYXMgdGhleSBkaWQgd2hlbiB0aGUKIAkJCSBmaWxlc3lzdGVtIHdhcyBtb3Vu
-dGVkIHdpdGggdGhhdCBvcHRpb24uCi0tIAoyLjQ4LjEKCgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QK
-TGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3Vy
-Y2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On Fri, Jun 20, 2025 at 08:29:05AM +0000, Jan Prusakowski wrote:
+> Hi,
+> 
+> We're testing F2FS internally and when we use a compressed file system we
+
+I saw you used _require_no_compress in your patch, but this function only supports
+btrfs checking currently. How do you avoid your test failure on F2FS?
+
+And there're many fiemap related test cases, will they all fail on compressed fs?
+
+Thanks,
+Zorro
+
+> see the test generic/018 fail consistently. It looks like this is due to
+> fiemap not supporting compressed extents correctly:
+> 
+>     [...]
+>     defrag /vdc/fragfile.9981 in region[0, 40960]
+>     /vdc/fragfile.9981:
+>         0: [0..31]: 2682968..2682999
+>         1: [32..63]: 2682976..2683007
+>         2: [64..79]: 2682984..2682999
+>     Failed to adequately defragment file
+> 
+> We'd like to disable the test when the file system uses compression. Please
+> check the following patch.
+> 
+> Please let me know your thoughts on this.
+> 
+> Kind regards,
+> Jan
+> 
+> 
+> Jan Prusakowski (1):
+>   generic/018: do not run the test if a compressed filesystem is used
+> 
+>  tests/generic/018 | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> -- 
+> 2.50.0.rc2.701.gf1e915cc24-goog
+> 
+> 
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
