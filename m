@@ -2,88 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 610A7AE58AF
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Jun 2025 02:40:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2854EAE58B7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Jun 2025 02:40:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=j69BH+inp2tAHfXoOSYZ4EFAmkWwydGR9QckUgD8Fm0=; b=SmIQc5JRJISAGGg7i+ryaIsHtT
-	/G2gt0nWEDy/PKxEM42feo/3zVSTNjbe0Lw2zqYHTonu0w2bF6Q6EXsfrHmSXrAZuetfD91vqQe01
-	4x59LI+K5g0Ajqxo3aXmRgkV+jUSzuIJ++0IH3HpvmHCAuAc7TKd79OFNGOcyYLaepXE=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=sIXXbOV0HFDLnpPqZVssJvfXByA401ubO3lEbfqA2O8=; b=JnWXDyCkhyJ2tc4vdfrRwPaGXh
+	B/0ekS+ziXP9adEwV224a5P7sncp0DxEtMcO+RUWe5LcMTwnmf8HqQb+rTBTG4VHWiLg2KYqYcOT1
+	5LwM6GpJTxsWIegHzyWw2jl6Rz28nAEwWUsibaKbLbSQX3dIkBn4r2yARDXk/rfSPCqs=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uTriX-0007kv-0c;
-	Tue, 24 Jun 2025 00:40:53 +0000
+	id 1uTriZ-0001e9-HS;
+	Tue, 24 Jun 2025 00:40:55 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uTriI-0007kZ-Jw
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uTriK-0001dM-Bo
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Jun 2025 00:40:38 +0000
+ Tue, 24 Jun 2025 00:40:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i8IyB11778uza5mg6LPy2j0XwxJ37VALof5BBGc2N68=; b=HlX4fjbOdXO14ALcKUuKaoHJS1
- Ms1jCu8ybG7ipH/qyxISCdZjudGSYqW3FwkgOUeUzCVwsKhhqpEZIiIukU+v/9/s4zk7R9w/2XC+Z
- RfQaY++4B6vcNleeQ9bWKSX73OcTOfejLkBxwnT7UO/YI4m5884NWKv/X7pf209S+paY=;
+ bh=0baj9GFHry9kdxVm6A/kvpTgDELdQpXfWpvcqMEqUvM=; b=Yn/cT6sxRHG41hwcfLIi53z++u
+ zUMAabsFHYLheYnuXefKOiVMgPGo7lI0JfgTVlzTnTyG4nBi/IVgALfXv0r9zatRVwUR4HBgxf8Er
+ 8sZ3GpmQVbb7Q8M1M8zipTvx29lxMdQ+GwDLHoZxDzLey8lKGUy6QUqIpyVWoMD47hDU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i8IyB11778uza5mg6LPy2j0XwxJ37VALof5BBGc2N68=; b=QnNeRm7bAQXcp64n/54aXZU0Et
- 6vU/QWIQaHwb5G4UW+943xOpziqpjyrL2hhZSmVWl43aQDiQpFj2lHV1U8o3xRefbSQRkGio4bRWz
- /d3UqHBsfweU/mxSp58hjR9Qerg1TOxV+LIzWPAYewEOQXZQaSITlRF9JvVe2aayNUvg=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=0baj9GFHry9kdxVm6A/kvpTgDELdQpXfWpvcqMEqUvM=; b=kduQ3hnILwc26cp2bkjsh6XroU
+ sdWXRjNlBru9qtYW5MbqJAy27z1ePg3Hn3+lB1ssj6nuwL4gqDuPBaeaBrawnTxqj1hn5u5d+iI+j
+ nanfnnZYSuatvn6q9Gf5Gkc6feVOzpbKUqMRHIWqIKgHZYEx/2TyZZFyUiUxehCpK8Wk=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uTriI-0006y4-4e for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Jun 2025 00:40:38 +0000
+ id 1uTriJ-0006yJ-TG for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 24 Jun 2025 00:40:40 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id CE9554A81A
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 24 Jun 2025 00:40:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AE5B9C4CEEF;
- Tue, 24 Jun 2025 00:40:27 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 0FFE95C3F5D;
+ Tue, 24 Jun 2025 00:38:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2BAE7C4CEEA;
+ Tue, 24 Jun 2025 00:40:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750725627;
- bh=Vw0rDlCFR3NyeAfHaqBbTRF/+72oWG6AmjXEOttkzGM=;
+ s=k20201202; t=1750725629;
+ bh=qKo0UmaPptGag6CyO9k3PD/eop53y1VYiyYvNlVqaIA=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=E/0uIP0yOarNjmFAQLyY1UR2Uvo1y+PI1Lwbs1XXTqlNL90/SJTMllm8WfnwvSvPh
- yoqt7HrPYmKUZ7isWKLlwl/KyMeMvIRXz21ddo9ioH8KqBjroPn52wWc4E709VKMQM
- OGeRWSkRtaw7oRUzEP1RcRBEcWwec93Q+jeNmcVv5yfJTI71dGSb1PzsvmKEYz5FKS
- zPx88dFJDHPOxUjZRPBoMxbZy9TxNC+iYtXM8Ploc5pQlN0zrwBbCHEYR2ElTfJWGE
- Uy7SuQIAgZ1NujwMxsY2ja62UClq/v9azzzUZ8Kzz/nToIeQE8MSUvvLbjQ+MJaV5w
- eagTtJRqLU75g==
+ b=osF9Bp2vZkhsl9BBLuDE1u3SgFdFNRqOK6ibcilEppgMciEZWA+2vZr9FpEQezfXE
+ 0r/eupRjKP87Ex2seyxZoQbXbd1xFIYKrbvDBk6k0p9Le7Ur27TwH1NNPxyql1N40Q
+ nTovHP3073Slx1GZgJsTNtjfnbNJt/8suI9Z/5y3W1l5GmAJSmPhfFxlVJC6DvS97Z
+ y99+i4n68MgvCD50anvipS60do9GONXHHOk9bKOxj//blnI9pv1NHVF+y9iPUgl8JL
+ 58pR0X89cxc2Dtrmy2+GxWe23QqIytN+D2rcN5oSuaG2iEsooHP3N9QRUtu0DqNvN5
+ L3m6ybcAa/QBw==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- EAEB539FEB7D; Tue, 24 Jun 2025 00:40:55 +0000 (UTC)
+ 70FDA39FEB7D; Tue, 24 Jun 2025 00:40:57 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <175072565474.3346761.5612358001909141915.git-patchwork-notify@kernel.org>
-Date: Tue, 24 Jun 2025 00:40:54 +0000
-References: <20250609072712.792834-1-chao@kernel.org>
-In-Reply-To: <20250609072712.792834-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+Message-Id: <175072565599.3346761.7520240849473534184.git-patchwork-notify@kernel.org>
+Date: Tue, 24 Jun 2025 00:40:55 +0000
+References: <20250607064116.2993239-1-shengyong1@xiaomi.com>
+In-Reply-To: <20250607064116.2993239-1-shengyong1@xiaomi.com>
+To: Sheng Yong <shengyong2021@gmail.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 9 Jun 2025 15:27:12 +0800 you wrote:
- > F2FS-fs (dm-55): access invalid blkaddr:972878540 > Call trace: >
- dump_backtrace+0xec/0x128
- > show_stack+0x18/0x28 > dump_stack_lvl+0x40/0x88 > dump_stac [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Sat, 7 Jun 2025 14:41:16 +0800 you wrote:
+ > From: Sheng Yong <shengyong1@xiaomi.com> > > When committing new super
+ block, bio is allocated but not freed,
+ and > kmemleak complains: > > unreferenced [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,13 +90,13 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uTriI-0006y4-4e
-Subject: Re: [f2fs-dev] [PATCH] f2fs: handle nat.blkaddr corruption in
- f2fs_get_node_info()
+X-Headers-End: 1uTriJ-0006yJ-TG
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix bio memleak when committing super
+ block
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,7 +111,7 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+Cc: jaegeuk@kernel.org, shengyong1@xiaomi.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -123,29 +122,35 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon,  9 Jun 2025 15:27:12 +0800 you wrote:
-> F2FS-fs (dm-55): access invalid blkaddr:972878540
-> Call trace:
->  dump_backtrace+0xec/0x128
->  show_stack+0x18/0x28
->  dump_stack_lvl+0x40/0x88
->  dump_stack+0x18/0x24
->  __f2fs_is_valid_blkaddr+0x360/0x3b4
->  f2fs_is_valid_blkaddr+0x10/0x20
->  f2fs_get_node_info+0x21c/0x60c
->  __write_node_page+0x15c/0x734
->  f2fs_sync_node_pages+0x4f8/0x700
->  f2fs_write_checkpoint+0x4a8/0x99c
->  __checkpoint_and_complete_reqs+0x7c/0x20c
->  issue_checkpoint_thread+0x4c/0xd8
->  kthread+0x11c/0x1b0
->  ret_from_fork+0x10/0x20
+On Sat,  7 Jun 2025 14:41:16 +0800 you wrote:
+> From: Sheng Yong <shengyong1@xiaomi.com>
+> 
+> When committing new super block, bio is allocated but not freed, and
+> kmemleak complains:
+> 
+>   unreferenced object 0xffff88801d185600 (size 192):
+>     comm "kworker/3:2", pid 128, jiffies 4298624992
+>     hex dump (first 32 bytes):
+>       00 00 00 00 00 00 00 00 80 67 c3 00 81 88 ff ff  .........g......
+>       01 08 06 00 00 00 00 00 00 00 00 00 01 00 00 00  ................
+>     backtrace (crc 650ecdb1):
+>       kmem_cache_alloc_noprof+0x3a9/0x460
+>       mempool_alloc_noprof+0x12f/0x310
+>       bio_alloc_bioset+0x1e2/0x7e0
+>       __f2fs_commit_super+0xe0/0x370
+>       f2fs_commit_super+0x4ed/0x8c0
+>       f2fs_record_error_work+0xc7/0x190
+>       process_one_work+0x7db/0x1970
+>       worker_thread+0x518/0xea0
+>       kthread+0x359/0x690
+>       ret_from_fork+0x34/0x70
+>       ret_from_fork_asm+0x1a/0x30
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: handle nat.blkaddr corruption in f2fs_get_node_info()
-    https://git.kernel.org/jaegeuk/f2fs/c/1773f63d108b
+  - [f2fs-dev] f2fs: fix bio memleak when committing super block
+    https://git.kernel.org/jaegeuk/f2fs/c/554d9b7242a7
 
 You are awesome, thank you!
 -- 
