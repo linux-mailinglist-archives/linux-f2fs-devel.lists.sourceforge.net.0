@@ -2,101 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05405AE8886
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Jun 2025 17:45:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C21B9AE89D3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Jun 2025 18:31:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+	Subject:In-Reply-To:From:References:To:MIME-Version:Date:Message-ID:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=/l34CY1ijBb2ZaxpWKcLn9PDX31dB7xv5+YLZrUfeGg=; b=C4O/9WZCiMyCRObfpokMg7sTk6
-	6YMauv3CJ71ktgYCpDrv74Xg/L+9WPW7neb6EpggkF8uhphxuLf6ryfe7Z5pwUrWINV7XH5Otl7l0
-	m4yiXipC9zNPSIoHPp8Gv1wyUZ73phXyc104yxg5luzJnhco2ugDgTbujcP2J9emZ6Ts=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=nlKesKWJ1GWCd/Wbp2olNUGVM1ofLtat3n1xvwBKukc=; b=WhgPeJbcz6HxaOsZZ6Vx3I8Xo2
+	UJuSH7z0wVIEzqti2gpyT17+wQDi9br6c7PLZv89DzfCEUfsMgeY2S8/v0Hr1VSh5XnUsqhbrI0VQ
+	s9ZkIEhiaEKB+Up8QoMEqufyUBp3fx/eLtIsoz5OufmqL7bKjJnMrLAZpYLly/NaGM0U=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uUSJC-0003yw-Eh;
-	Wed, 25 Jun 2025 15:45:10 +0000
+	id 1uUT1p-0006ji-GH;
+	Wed, 25 Jun 2025 16:31:17 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kundanthebest@gmail.com>) id 1uUSJA-0003yp-VM
- for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Jun 2025 15:45:08 +0000
+ (envelope-from <prvs=82719b5360=maxime.mere@foss.st.com>)
+ id 1uUT1n-0006jb-FG for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Jun 2025 16:31:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:CC:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iocf3xZEV33qVQt+76WbLL52e+K++YTQHmhfnQovIf0=; b=NPqdTF7tyLlgujz3U6JcseOyHQ
- QX57ZIN/NOdbj1+HUBcttHV/6uOVKESxfDSdgkG08AZ+V7Pbir4YlzttQl7G3O0KWg3vCz/Z9R+Mf
- YhUok39Ez7utBKrCizqsYdW4zVKBbXdM/lXb3VAn+2EB+P7X97LUB03hSbfq03ff+1X8=;
+ bh=Ar5cY3eqwri9AVFjIOQsbTDZ2wnQ244y0/ufHL/uq/A=; b=QqfQ26xPsCfXo55RWRiakwzStG
+ 9Ojxe2Lny/mxBjJusQc49mnyPCc4yNAaQESmDd+/krwzzRfxySVEDaRHFXJxLLWBiuwTzSz5ZIS4x
+ HtWsRyubirMgusn/7aqcmnoNrfk2uqwg7pTlMjWMOQYW8IngdrfOHFKw/S7lMju2M7oc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:CC:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iocf3xZEV33qVQt+76WbLL52e+K++YTQHmhfnQovIf0=; b=SF8lEhGyJAnJXDPFqNG7t5ZQrG
- BIRBD/vvyJezwrXgMjeLMKZhvdVPfVGvK8FR7XJUR6cCmAxSBCk0u1kV1wG4W/eCNSJkZJnZ6zbqn
- 6IEgZOkwa8hqccqttE5vbaeS/27wwWBWYCxwwyDCZYPoXadbHePOCdGOyOZdWjVRj4Yg=;
-Received: from mail-ej1-f46.google.com ([209.85.218.46])
+ bh=Ar5cY3eqwri9AVFjIOQsbTDZ2wnQ244y0/ufHL/uq/A=; b=jFvsL7is1JZQsVPJk6UsCmpDRt
+ 8vGvBiGfcM69dbl55j0f5yvTtL8Sa+WoYgdvS3aqw9acuVsj/EOQ44tpF1vNs+qS6Pny/pzVTEx+R
+ ZZOLzXTDl7vE3khMIerk7a6nzH/vfD2rd1h+0EHcNeZ0tQHc36y/02CC9GQVaxkNccMg=;
+Received: from mx08-00178001.pphosted.com ([91.207.212.93]
+ helo=mx07-00178001.pphosted.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uUSJA-0000Nu-LQ for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Jun 2025 15:45:08 +0000
-Received: by mail-ej1-f46.google.com with SMTP id
- a640c23a62f3a-ae0bc7aa21bso5595066b.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 25 Jun 2025 08:45:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750866302; x=1751471102; darn=lists.sourceforge.net;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=iocf3xZEV33qVQt+76WbLL52e+K++YTQHmhfnQovIf0=;
- b=OLVCJ5tPVmZnB4ICoYyatarVI4pEfw5DE9IF5ShQYC/GEeqHnGbzH+4KVvsyC/Prfs
- s6Imthqjn/N2YJpTeGbmlYs/1ZTveDmhtj8hc24gaWQCcPcRrDPrq2A6aCHSpuYO5fgE
- aqBgbc3I81XnMoz2UoIUtHfuD1mhLR41g4uCweh2gN9UP1GkhDv4t+8ONkaSgtiAaSDB
- 5PFRVthPTGH/QdGhEkGkx2uxxLrD3SQpWl0ZKDUp9gAoRpMID07EGByLEpIFefUwSPY9
- C84+gJStDiOBO8gGponUFZsg4ndJXxV/C0Og3kVL8zcBSyEQgrE3GJrtPnBiKRU9ePSM
- wLuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750866302; x=1751471102;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=iocf3xZEV33qVQt+76WbLL52e+K++YTQHmhfnQovIf0=;
- b=IwjoCPTaBQa0pIT4iT1NMkftIUTU0fShbluG5ER133CNmUTCQBoz4Wm1qKqFcrlA50
- +EpJxOW27kz+4iDiP1PAD7yzNP1xGwyCBnWkZFI0nMkMYCy0llEUHW9Q1lQGUoOvOTCP
- VFCigUxEMYrOxxPNm/Jb6DvErnaaGPHzcRl6jjAhQrZXTpMW+WM3CBM+mGAqfn76Ek1t
- dX3yrvoeeKgBGaGJxSfCdR9hmO5i4+SruifixrYx1wIL5dmfCu/BhFRhizbaIHO3Rj+B
- ii3OrpGEXr235baqhbHrnccUkKy9iqNovklHcT+VpRbtZo6xV+lV9MlvHsxAL9/NSB9B
- c3tQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV1xEb9LqJY4yAaZv3ynd9zDeR7ySrK4xHJ49lTuTqDaucps62jyjOYOK5Wd5J5F39t6kd4+bdV9+7elTEDZ+zE@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YyawRsUTAvd6GQ9lMHu2A/caXD30m/Q6JCzjxIdk9I2TbYE3OMj
- +o6DkEd2784NE6xwVnhZHmL3h4HV1H5/w0aDmILU0XwqN5knsfYoGyNZojce2YKguoadbMRc6KH
- AW+bI1u+ErsuRtpybCambpyFLkoy/rVs=
-X-Gm-Gg: ASbGncueSFL8/aw05Qlf4dfNiinODlA31OlmOPkOwwyWrmW/kOy1ijzpU1CWlYGEfRQ
- 17rnRpB2fe0645XGsNUgaPhjjFsrl6ptMmOFbR9U6gnslZ+/651zj0MRU07TNd7/i0+vNjm5AVL
- gWTHHVIvwvHHhAekT+GRM7KOxprqnjklrYpvPj9Zq2yIaV
-X-Google-Smtp-Source: AGHT+IFs+V/EDFHaGKcJwU9/xkWCRRHAYQqa7LBSGKtKl48ykcDE4Nb840e4+FWhpIDCiq8jKWE842faRWDZOh7ThxM=
-X-Received: by 2002:a17:907:97cd:b0:ad8:8529:4f9b with SMTP id
- a640c23a62f3a-ae0bed82d81mr354973966b.38.1750866301696; Wed, 25 Jun 2025
- 08:45:01 -0700 (PDT)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uUT1m-0001n5-Ki for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Jun 2025 16:31:15 +0000
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55PFvITO009480;
+ Wed, 25 Jun 2025 18:30:47 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ Ar5cY3eqwri9AVFjIOQsbTDZ2wnQ244y0/ufHL/uq/A=; b=snHTUn8v8zy4BnVf
+ bkKsMzALzX/hWB50aMj4MxIHi4bX+SsAYGY3Ta0qS9W+Qov86Hf3IFmC6wwbjXKe
+ z+7twjq4QjRMRhSZLUxgBzx2nUR3tozW2d6dCqKxErksVbCQU6VU/JiwQwzNDwcn
+ U/1p4bdqn33j4ByolMt6WwqjLdE3h61JA8R5yccQhLkGEskbTqOvCPUA7/8p3XmS
+ 3qkplYuF9MJHqCdFCqu0QAWkYnOvwX3wSSg4FJ6n+6+HrXVAi9jrPcnDQBoDD8cW
+ 6WJ6dlJDiRbtJNS8vh0xlq+UK3j8XGCWgrXg1kalJWT759R+wTleuCh44x8N8dF3
+ PYWGSA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 47dkmjtf7e-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 25 Jun 2025 18:30:47 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 5E1194002D;
+ Wed, 25 Jun 2025 18:29:58 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DD36CBF53B0;
+ Wed, 25 Jun 2025 18:29:23 +0200 (CEST)
+Received: from [10.48.86.103] (10.48.86.103) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 25 Jun
+ 2025 18:29:23 +0200
+Message-ID: <c1671c5e-d824-4131-861e-470d09371e05@foss.st.com>
+Date: Wed, 25 Jun 2025 18:29:17 +0200
 MIME-Version: 1.0
-References: <CGME20250529113215epcas5p2edd67e7b129621f386be005fdba53378@epcas5p2.samsung.com>
- <20250529111504.89912-1-kundan.kumar@samsung.com>
- <20250529203708.9afe27783b218ad2d2babb0c@linux-foundation.org>
-In-Reply-To: <20250529203708.9afe27783b218ad2d2babb0c@linux-foundation.org>
-From: Kundan Kumar <kundanthebest@gmail.com>
-Date: Wed, 25 Jun 2025 21:14:51 +0530
-X-Gm-Features: Ac12FXz-WfD7KDK7gS4t-j71iOt-puRRwIJfu8WaOkNNWXA_hJ1q0mugrvCoDS0
-Message-ID: <CALYkqXqs+mw3sqJg5X2K4wn8uo8dnr4uU0jcnnSTbKK9F4AiBA@mail.gmail.com>
-To: Andrew Morton <akpm@linux-foundation.org>
+User-Agent: Mozilla Thunderbird
+To: Eric Biggers <ebiggers@kernel.org>
+References: <20250611205859.80819-1-ebiggers@kernel.org>
+ <8f4c2f36-71af-4c84-bcee-2554cea991d0@foss.st.com>
+ <20250613144239.GA1287@sol>
+Content-Language: en-US
+From: Maxime MERE <maxime.mere@foss.st.com>
+In-Reply-To: <20250613144239.GA1287@sol>
+X-Originating-IP: [10.48.86.103]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
+ definitions=2025-06-25_05,2025-06-25_01,2025-03-28_01
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -104,10 +100,13 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: > > Makes sense. It would be good to test this on a non-SMP
- machine, if > you can find one ; ) > Tested with kernel cmdline with maxcpus=1.
- The parallel writeback falls back to 1 thread behavior, showing nochange
- in BW. Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On 6/13/25 16:42, Eric Biggers wrote: > Honestly,
+ the responses
+ to this thread so far have made it even more clear that > this patch is the
+ right decision. The chaining system I previously presented is just an example
+ intended to demonstrate the value of hardware drivers in the context of ST
+ platforms. 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -117,13 +116,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [kundanthebest(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.218.46 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1uUSJA-0000Nu-LQ
-Subject: Re: [f2fs-dev] [PATCH 00/13] Parallelizing filesystem writeback
+X-Headers-End: 1uUT1m-0001n5-Ki
+Subject: Re: [f2fs-dev] [PATCH] fscrypt: don't use hardware offload Crypto
+ API drivers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -135,69 +130,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ritesh.list@gmail.com, jack@suse.cz, djwong@kernel.org, amir73il@gmail.com,
- david@fromorbit.com, gfs2@lists.linux.dev, linux-mm@kvack.org, clm@meta.com,
- hch@lst.de, dave@stgolabs.net, agruenba@redhat.com, miklos@szeredi.hu,
- Kundan Kumar <kundan.kumar@samsung.com>, willy@infradead.org,
- p.raghav@samsung.com, linux-nfs@vger.kernel.org, da.gomez@samsung.com,
- viro@zeniv.linux.org.uk, jaegeuk@kernel.org, axboe@kernel.dk,
- brauner@kernel.org, linux-f2fs-devel@lists.sourceforge.net, mcgrof@kernel.org,
- anna@kernel.org, gost.dev@samsung.com, linux-fsdevel@vger.kernel.org,
- trondmy@kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fscrypt@vger.kernel.org, linux-mtd@lists.infradead.org,
+ linux-crypto@vger.kernel.org, ceph-devel@vger.kernel.org,
+ linux-ext4@vger.kernel.org
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
->
-> Makes sense.  It would be good to test this on a non-SMP machine, if
-> you can find one ;)
->
-
-Tested with kernel cmdline with maxcpus=1. The parallel writeback falls
-back to 1 thread behavior, showing nochange in BW.
-
-  - On PMEM:
-    Base XFS        : 70.7 MiB/s
-    Parallel Writeback XFS    : 70.5 MiB/s
-    Base EXT4        : 137 MiB/s
-    Parallel Writeback EXT4    : 138 MiB/s
-
-  - On NVMe:
-    Base XFS        : 45.2 MiB/s
-    Parallel Writeback XFS    : 44.5 MiB/s
-    Base EXT4        : 81.2 MiB/s
-    Parallel Writeback EXT4    : 80.1 MiB/s
-
->
-> Please test the performance on spinning disks, and with more filesystems?
->
-
-On a spinning disk, random IO bandwidth remains unchanged, while sequential
-IO performance declines. However, setting nr_wb_ctx = 1 via configurable
-writeback(planned in next version) eliminates the decline.
-
-echo 1 > /sys/class/bdi/8:16/nwritebacks
-
-We can fetch the device queue's rotational property and allocate BDI with
-nr_wb_ctx = 1 for rotational disks. Hope this is a viable solution for
-spinning disks?
-
-  - Random IO
-    Base XFS        : 22.6 MiB/s
-    Parallel Writeback XFS    : 22.9 MiB/s
-    Base EXT4        : 22.5 MiB/s
-    Parallel Writeback EXT4    : 20.9 MiB/s
-
-  - Sequential IO
-    Base XFS        : 156 MiB/s
-    Parallel Writeback XFS    : 133 MiB/s (-14.7%)
-    Base EXT4        : 147 MiB/s
-    Parallel Writeback EXT4    : 124 MiB/s (-15.6%)
-
--Kundan
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+CgpPbiA2LzEzLzI1IDE2OjQyLCBFcmljIEJpZ2dlcnMgd3JvdGU6Cj4gSG9uZXN0bHksIHRoZSBy
+ZXNwb25zZXMgdG8gdGhpcyB0aHJlYWQgc28gZmFyIGhhdmUgbWFkZSBpdCBldmVuIG1vcmUgY2xl
+YXIgdGhhdAo+IHRoaXMgcGF0Y2ggaXMgdGhlIHJpZ2h0IGRlY2lzaW9uLgoKVGhlIGNoYWluaW5n
+IHN5c3RlbSBJIHByZXZpb3VzbHkgcHJlc2VudGVkIGlzIGp1c3QgYW4gZXhhbXBsZSBpbnRlbmRl
+ZCAKdG8gZGVtb25zdHJhdGUgdGhlIHZhbHVlIG9mIGhhcmR3YXJlIGRyaXZlcnMgaW4gdGhlIGNv
+bnRleHQgb2YgU1QgcGxhdGZvcm1zLgoKVGhlIGtleSBwb2ludCBpcyB0aGF0IG91ciBoYXJkd2Fy
+ZSBJUCBhbGxvd3MgdXMgdG8gc2VjdXJlbHkgZW1iZWQgCmVuY3J5cHRpb24ga2V5cyBkaXJlY3Rs
+eSBpbiBoYXJkd2FyZSwgbWFraW5nIHN1cmUgdGhleSBhcmUgbmV2ZXIgdmlzaWJsZSAKb3IgYWNj
+ZXNzaWJsZSBmcm9tIExpbnV4LCB3aGljaCBydW5zIGluIGEgbm9uLXNlY3VyZSBlbnZpcm9ubWVu
+dC4gT3VyIApzb2Z0d2FyZSBhcmNoaXRlY3R1cmVzIHJlbHkgb24gYSBTZWN1cmUgT1MgcnVubmlu
+ZyBpbiBwYXJhbGxlbCB3aXRoIApMaW51eCwgc2ltaWxhciB0byB3aGF0IGlzIGRvbmUgb24gQW5k
+cm9pZC4gVGhpcyBTZWN1cmUgT1MgaXMgcmVzcG9uc2libGUgCmZvciBzZW5zaXRpdmUgY3J5cHRv
+Z3JhcGhpYyBvcGVyYXRpb25zLgoKVGhpcyBTZWN1cmUgT1MgY2FuIG1hbmFnZXMgdGhlIGtleXMg
+d2l0aCBhIGRlZGljYXRlZCBoYXJkd2FyZSBwZXJpcGhlcmFsIAooU0FFUykuIFRoZSBMaW51eCBz
+aWRlIG5ldmVyIHNlZXMgdGhlIGtleXMgZGlyZWN0bHkuIEluc3RlYWQsIHRoZSBTZWN1cmUgCk9T
+IHByZXBhcmVzIHRoZSBrZXlzIGFuZCBzaGFyZXMgdGhlbSBzZWN1cmVseSB3aXRoIHRoZSBjcnlw
+dG9ncmFwaGljIAplbmdpbmUgKENSWVApIHRocm91Z2ggYSBkZWRpY2F0ZWQgaGFyZHdhcmUgYnVz
+LgoKVGhpcyBhcmNoaXRlY3R1cmUgaW1wcm92ZXMgc2VjdXJpdHkgYm91bmRhcnk6IGtleXMgaXNv
+bGF0ZWQgZnJvbSB0aGUgCm5vbi1zZWN1cmUgTGludXggZW52aXJvbm1lbnQuIEJ1dCBkZWNyeXB0
+aW9uIGNhbiBiZSBwcm9jZXNzZWQgYnkgdGhlIApsaW51eCBrZXJuZWwuCgpJbiBhZGRpdGlvbiwg
+U1TigJlzIGhhcmR3YXJlIGNyeXB0byBwZXJpcGhlcmFscyBjb21lIHdpdGggYnVpbHQtaW4gCnBy
+b3RlY3Rpb25zIGFnYWluc3Qgc2lkZS1jaGFubmVsIGF0dGFja3MgYW5kIGhhdmUgYmVlbiBjZXJ0
+aWZpZWQgd2l0aCAKU0VTSVAgYW5kIFBTQSBsZXZlbCAzIHNlY3VyaXR5IGFzc3VyYW5jZSwgcHJv
+dmlkaW5nIGEgbGV2ZWwgb2Ygc2VjdXJpdHkgCmRpZmZpY3VsdCB0byBhY2hpZXZlIHdpdGggc29m
+dHdhcmUgYWxvbmUuCgpSZWdhcmRpbmcgcm9idXN0bmVzcyBhbmQgbWFpbnRlbmFuY2UsIFNUIGVu
+c3VyZXMgcmVndWxhciB1cGRhdGVzIG9mIGl0cyAKZHJpdmVycyBhbmQgY2FuIGZpeCBhbnkgcmVw
+b3J0ZWQgYnVncy4gV2UgaGF2ZSBjb25kdWN0ZWQgaW50ZXJuYWwgdGVzdHMgCndpdGggZG0tY3J5
+cHQgdGhhdCBkZW1vbnN0cmF0ZSB0aGUgcHJvcGVyIGZ1bmN0aW9uaW5nIG9mIHRoZXNlIGRyaXZl
+cnMgCmZvciB0aGlzIHR5cGUgb2YgYXBwbGljYXRpb24uCgpNYXhpbWUKCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxp
+bmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xp
+c3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
