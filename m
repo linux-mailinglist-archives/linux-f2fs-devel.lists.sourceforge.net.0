@@ -2,102 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C23C2AE73AC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Jun 2025 02:14:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE975AE74B9
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Jun 2025 04:20:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=tlNhWTsYNElt37T7kiT/WT3cRGhlHYrlbdysSgBydVg=; b=S8yZDpG7vuYnuD1D1UGbZkgqCj
-	VPGYqOFyWVRetYIvt1GaJOM8mbUxh+jehY6ZrQ+GC5/y5ZsdqTz+mULx+/1FPX+0/uSKlrIt1YOnY
-	ezKnPECfTfuKuZKNQh/uiJNv7+MfUsqfj7PfIiZm5Aj2duClGc/ghlxKW0LUlLSS/M/4=;
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=tCf5l8oGClUnVFZG2pYmLHmUkqfG4qfUMqqel9XM19Q=; b=HJHfMBJwkT2kORUPndTdLAHkO/
+	KIrjJbQ1W0rBCMYt3Xyzu3WIhqW2qdppVqYBTuMABs3oPSRXywkk4nigTaQcFFA2wLNz1BN8daX5J
+	zfhZ3Qx1PxOyRZe14kfmuCwmNntH1vTqazO6UeX5juatI3UeyQYQs4qiVJDi3g9v5pCU=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uUDmR-0004Wm-Dc;
-	Wed, 25 Jun 2025 00:14:23 +0000
+	id 1uUFkK-0004Zc-42;
+	Wed, 25 Jun 2025 02:20:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yohan.joung@sk.com>) id 1uUDmQ-0004Wg-8g
+ (envelope-from <chao@kernel.org>) id 1uUFje-0004Vu-7A
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Jun 2025 00:14:22 +0000
+ Wed, 25 Jun 2025 02:19:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lXvM6N9OKpKWE8xFzVnVjxE2Lxy9g/G6ZCVBY5y5oWI=; b=O6bSSwZ65HOeRQ6mWpXxoH9GiI
- aAwjkXzLCW8uxwbTK9azY1Yqkva/dXyoo+fvBk7lkEir9zo8ageFOlSmxFhMlYKetlYzA8GoAIhPv
- xZ0eBNQH+eDPhkke9DptdpVMTy764k9mqwe7zjUQQg03jq2A9oje/xb1+tFOMK/5MX1Y=;
+ bh=d4NYuXFDJX9D8gFK6d3Y7HIH7/1F6nQBMHASq0aDoK8=; b=Z9XM8V2PoVeMM/6OZRAEsi0Q8G
+ 0nNucBDz7VJ42KkNk/tg8VNK1iWcLkN7xkCAPAv+IuJwCt4n2DQwVmgT0Z0MPdAO/R+Fl03N0EgO8
+ KQJQ6XnS4GzpnVNu9RM/0vqFGGWKBPihsfarBb4Cy8usGxV00t7ZqhylxR5Kk2caO5cs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=lXvM6N9OKpKWE8xFzVnVjxE2Lxy9g/G6ZCVBY5y5oWI=; b=e
- hjDbs3jLJrHlV2jGf1mE1ElBFl2IYjtrJB3NS1DokrANDGSuIkyQyW+zHIkyPfLz/Yr+FhsnOncrg
- +1qfzrIV/J5zWLXQn6FjbY7zwXsx2mVoMBs8+fPb/C+koncbojjpoDON+f7fL+HclENS2qS2Qp8Iv
- O/6Tq5Qz3yglLvEE=;
-Received: from exvmail3.hynix.com ([166.125.252.90] helo=invmail3.skhynix.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1uUDmP-0007mO-RO for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Jun 2025 00:14:22 +0000
-X-AuditID: a67dfc59-057ff7000000aab6-9e-685b3f52cc9f
-From: "yohan.joung" <yohan.joung@sk.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Wed, 25 Jun 2025 09:14:07 +0900
-Message-ID: <20250625001408.1961-1-yohan.joung@sk.com>
-X-Mailer: git-send-email 2.49.0.windows.1
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=d4NYuXFDJX9D8gFK6d3Y7HIH7/1F6nQBMHASq0aDoK8=; b=VCTzNFf4d/xjHvcOWdKJup11sB
+ S62NF5NWqs4GrgvFMMMQ+goDTnM3mpwT0HSIRF/Liosuv3/6GI0TdV9cBUtFecgUFYOlrPiwzP7M9
+ k9qYYWtw64N66pG+iCeXSK4oka6MydEURB8TvPSQ7NpFIAZC8qZnF0JNpjliiI4QT5kE=;
+Received: from tor.source.kernel.org ([172.105.4.254])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uUFjc-0001rV-Tr for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Jun 2025 02:19:38 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 4568E60010;
+ Wed, 25 Jun 2025 02:19:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7076DC4CEE3;
+ Wed, 25 Jun 2025 02:19:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1750817966;
+ bh=eLSWsc8SCSNGTIFoRRKlzCezgqEA7Za59xcoybJc+TI=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=ZjY5qgZJVbM3eEGV4T3XRMR8Q9MJ+965a6ctIJYwxGTVtfCIEoNOu/X84Eqtfkw/F
+ J1I2yAym+j9Tb1c0NZ6YOaBbDnrUbt6ca46ykHLXyK3ofmAgYvolhVucHcRqxu3naI
+ aYwWq18A9F21lgRfzOGvx1+bZ+Dr0gyti9ALE7PcnqX2Vh15ZqbC1Rb4pW451v19b5
+ h9PmwkZ7MHbQKeX3GUKCKFnLs3HU6etNWwNMlWfFli59aiGjWGumeS/4p8rWLmvlz9
+ VYMHHxmVD1UTJMC/A7a3y2zm/d785Jy5LOsN+d+X6Fwqyxau/WJwXTeArkb6Z6AMHo
+ LwEWJbBSDkUCQ==
+Message-ID: <29dac4f4-3f46-49b6-8a9f-c26ffcde11d0@kernel.org>
+Date: Wed, 25 Jun 2025 10:19:22 +0800
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupjluLIzCtJLcpLzFFi42LhesuzUDfYPjrD4PUFZovTU88yWTxZP4vZ
- 4tIid4vLu+awObB4bFrVyeaxe8FnJo/Pm+QCmKO4bFJSczLLUov07RK4Mq6t3sNcsJ214s9K
- 9gbGLSxdjJwcEgImErd6HjDD2LP2NbGD2GwCGhJ/envB4iICmhJHOmcCxbk4mAXaGCXajzax
- djFycAgLREocfFgMUsMioCpxb+tSsJm8AmYSy/c9Z4eYqSmx48t5Joi4oMTJmU/AapgF5CWa
- t86G2nuXVeLkRU8IW1Li4IobLBMYeWchaZmFpGUBI9MqRpHMvLLcxMwcY73i7IzKvMwKveT8
- 3E2MwFBaVvsncgfjtwvBhxgFOBiVeHgNWqMyhFgTy4orcw8xSnAwK4nwTjMHCvGmJFZWpRbl
- xxeV5qQWH2KU5mBREuc1+laeIiSQnliSmp2aWpBaBJNl4uCUamAsnKga0Veye9JW61kFr2x3
- 5lvPaN3L4Lfo9pxi06Q5Jt0pGjpvi+0XpfUW7YhnCQs1nPJh45ciu4v6EgZ3/p253n6mNYLJ
- kdH+cKPr85DGI6uEGu3d1cusLCOZLDJS9czsamI/1Uw4FFnU5WGaPHVBvlv6Q5V75iomll1l
- S1LMrGq+8jbOUmIpzkg01GIuKk4EAAOOVCAhAgAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrBJMWRmVeSWpSXmKPExsXCNUNljm6QfXSGwaFpVhanp55lsniyfhaz
- xaVF7haXd81hs5gw9yqTxfut9xgd2Dw2repk89i94DOTx7fbHh6fN8kFsERx2aSk5mSWpRbp
- 2yVwZVxbvYe5YDtrxZ+V7A2MW1i6GDk5JARMJGbta2IHsdkENCT+9PYyg9giApoSRzpnAsW5
- OJgF2hgl2o82sXYxcnAIC0RKHHxYDFLDIqAqcW/rUrA5vAJmEsv3PWeHmKkpsePLeSaIuKDE
- yZlPwGqYBeQlmrfOZp7AyDULSWoWktQCRqZVjCKZeWW5iZk5ZnrF2RmVeZkVesn5uZsYgeGx
- rPbPpB2M3y67H2IU4GBU4uGNWBGVIcSaWFZcmXuIUYKDWUmEd5o5UIg3JbGyKrUoP76oNCe1
- +BCjNAeLkjivV3hqgpBAemJJanZqakFqEUyWiYNTChggN7J4FvqcjBWK2D+lP6wtSLfNf8Xu
- J6JGs2UOr1r2UmKr65uegzYVIWdyxO+p3l5RmsdkxrL/2QO3uYdL2msmH5i0Tej4g6niOsK3
- 7hRkb/4vxxuSPH9C8+ZjFutVXYXmGTtPmPTgV9Xn/f/fLY85KhRjVpiw75k569bpsxYZ3WtJ
- rU/+6H5SiaU4I9FQi7moOBEABodZnwsCAAA=
-X-CFilter-Loop: Reflected
-X-Spam-Score: 0.4 (/)
+User-Agent: Mozilla Thunderbird
+To: Abinash Singh <abinashlalotra@gmail.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <1669c05c-7468-4347-a924-cfc4145c8c75@kernel.org>
+ <20250624170948.59013-1-abinashsinghlalotra@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20250624170948.59013-1-abinashsinghlalotra@gmail.com>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: to check the upper boundary when setting
- gc_boost_zoned_gc_percent
- Signed-off-by: yohan.joung <yohan.joung@sk.com> --- fs/f2fs/sysfs.c | 7
- +++++++
- 1 file changed, 7 insertions(+) diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
- index 51be7ffb38c5..2b5c35ce7b8c 100644 --- a/fs/f2fs/sysfs.c +++
- b/fs/f2fs/sysfs.c
- @@ -628,6 +628,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a, [...]
- Content analysis details:   (0.4 points, 5.0 required)
+ Content preview:  On 6/25/25 01:09, Abinash Singh wrote: > KMSAN reported a
+ use of uninitialized value in `__is_extent_mergeable()` > and
+ `__is_back_mergeable()`
+ via the read extent tree path. > > The root cause is tha [...] 
+ Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.4 KHOP_HELO_FCRDNS       Relay HELO differs from its IP's reverse DNS
-X-Headers-End: 1uUDmP-0007mO-RO
-Subject: [f2fs-dev] [PATCH] f2fs: fix to check upper boundary for value of
- gc_boost_zoned_gc_percent
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uUFjc-0001rV-Tr
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix KMSAN uninit-value in
+ extent_info usage
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,39 +109,59 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: pilhyun.kim@sk.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ abinashsinghlalotra@gmail.com,
+ syzbot+b8c1d60e95df65e827d4@syzkaller.appspotmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-to check the upper boundary when setting gc_boost_zoned_gc_percent
+On 6/25/25 01:09, Abinash Singh wrote:
+> KMSAN reported a use of uninitialized value in `__is_extent_mergeable()`
+>  and `__is_back_mergeable()` via the read extent tree path.
+> 
+> The root cause is that `get_read_extent_info()` only initializes three
+> fields (`fofs`, `blk`, `len`) of `struct extent_info`, leaving the
+> remaining fields uninitialized. This leads to undefined behavior
+> when those fields are accessed later, especially during 
+> extent merging.
+> 
+> Fix it by zero-initializing the `extent_info` struct before population.
+> 
+> Reported-by: syzbot+b8c1d60e95df65e827d4@syzkaller.appspotmail.com
+> Closes: https://syzkaller.appspot.com/bug?extid=b8c1d60e95df65e827d4
+> Fixes: a28ef1f5aebe ("f2fs: maintain extent cache in separated file")
 
-Signed-off-by: yohan.joung <yohan.joung@sk.com>
----
- fs/f2fs/sysfs.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+Should use this instead?
 
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 51be7ffb38c5..2b5c35ce7b8c 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -628,6 +628,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 		return count;
- 	}
- 
-+	if (!strcmp(a->attr.name, "gc_boost_zoned_gc_percent")) {
-+		if (t > 100)
-+			return -EINVAL;
-+		*ui = (unsigned int)t;
-+		return count;
-+	}
-+
- #ifdef CONFIG_F2FS_IOSTAT
- 	if (!strcmp(a->attr.name, "iostat_enable")) {
- 		sbi->iostat_enable = !!t;
--- 
-2.33.0
+Fixes: 94afd6d6e525 ("f2fs: extent cache: support unaligned extent")
+
+Reviewed-by: Chao Yu <chao@kernel.org>
+
+Thanks,
+
+> Signed-off-by: Abinash Singh <abinashsinghlalotra@gmail.com>
+> ---
+> v3 : Added Fixes and Closes tags
+> ---
+>  fs/f2fs/extent_cache.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
+> index cfe925a3d555..4ce19a310f38 100644
+> --- a/fs/f2fs/extent_cache.c
+> +++ b/fs/f2fs/extent_cache.c
+> @@ -414,7 +414,7 @@ void f2fs_init_read_extent_tree(struct inode *inode, struct folio *ifolio)
+>  	struct f2fs_extent *i_ext = &F2FS_INODE(&ifolio->page)->i_ext;
+>  	struct extent_tree *et;
+>  	struct extent_node *en;
+> -	struct extent_info ei;
+> +	struct extent_info ei = {0};
+>  
+>  	if (!__may_extent_tree(inode, EX_READ)) {
+>  		/* drop largest read extent */
 
 
 
