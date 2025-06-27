@@ -2,77 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A4BAAE9416
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Jun 2025 04:37:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 310EAAEACDC
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 27 Jun 2025 04:39:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=q1mMG9Pr0bkXAOtPKWC6GsQfOYaliTuEYmvnVQBUpEU=; b=K5dzm3wUX6ogeTQJWblpglleSG
-	ELDu+I5lWeG2DR7Bnuf6neM9sY8Cv0uF1j9IIuKu0dV0Y3mK3/buBVvr7l56alixaheq8/oc1XCBN
-	v9M84DjX10MlVPx5x2P9Q7LeoclyMW4JYKmcDbeVdxTx7wNUVx554cAi/8mrdK+jZxs8=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=g7IvskDMKVGlqAE0HbAsN0THOvrs4gHZxD/XWjrVfn4=; b=BJzOenorWkyB3bQJlIetRjhoBH
+	aWHg6NPDy4cyaWlwQQIys58U7w4W88Ngkun/72RL4zqa3NloaPuvcU7FKi3N3Wim3zHBWVbSNKBg6
+	xEEc9eoGykXq6uEOWv/wzzxNzTS9eDRgLZHd1BXxI1OFqPVUfdMsa4y+BCEqLBT1GQ78=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uUcUD-0001sA-Am;
-	Thu, 26 Jun 2025 02:37:13 +0000
+	id 1uUyzI-00069Z-IX;
+	Fri, 27 Jun 2025 02:38:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1uUcUB-0001s3-3m
+ (envelope-from <chao@kernel.org>) id 1uUyzG-000685-In
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Jun 2025 02:37:11 +0000
+ Fri, 27 Jun 2025 02:38:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DrLHINBpiAXGVQZed2Xsu188kv2qWboB+CK2AmvHaew=; b=Cvidwh+RLge/ZN5TqoHqyWcnNC
- 4WF6zKIYQLvT7VGWDU3unUQLtOEvXsOOqbn11JKQfCQ0BzwDDxnynBjwLjp9qabHDkZeH+lz9KuW1
- 2YH5M19bl8v+K0+rpPeKkb7N7WMHLX0vDhG3xSuZbXFsec/TNy9aTjuZXgBcSDoaDZFc=;
+ bh=ViCc2+8lWQMG4h6wNVX60E3HkreaNQCgb9R9RkdMbm0=; b=hdK59D/637o7Cm+bxLNxLIYPNl
+ NthBcCmX6qOXBE0ZJx0V/VE4ZL5UwgJjvx8T8th5hdguTnRJf9be9Yauj0ZzGYugj34ZBDuHX35Nb
+ V0a54EZzvkPH4XajNsS8CG2LBz0/yh/5fMZjfyLhoqdKmJpeaIa0wkWsFth3HR2THrrc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=DrLHINBpiAXGVQZed2Xsu188kv2qWboB+CK2AmvHaew=; b=ixSRzDCQHFhkAg6rM1qeCQBlSZ
- TJ0U4NkIgb+qQc6aXFWHVy1tNKCKl0suk/GF1RhXHyopNX1hUQwCjssjG3rKEC3vpgnBooX7x7WyU
- deNDvasSu2pGjOj8rDPyJMdYQGRVSEu7bnfrGGpmPS6hqk3z1LzH0iImdC/typILouMo=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ViCc2+8lWQMG4h6wNVX60E3HkreaNQCgb9R9RkdMbm0=; b=P
+ s2wjFwCIExNW5duxjWWlTKeJyleYHrG1JGwbvYAlFAXrpeF8rH9Y3W+CihRoSiP+ABKefI0UbJy0C
+ VXo0uwk/8ZfHZw5ef5x6Ul0H1NjAq5+BAb2/l9IqTIp+UqYcjGqHNLTrspDFXDfew/3jQKCG1sHWU
+ sCf1m9/ekuSthW6Y=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uUcUA-0005Jg-JP for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Jun 2025 02:37:11 +0000
+ id 1uUyzF-0007Ge-Uy for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 27 Jun 2025 02:38:46 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id DBB4A617F2;
- Thu, 26 Jun 2025 02:37:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54BE1C4CEEA;
- Thu, 26 Jun 2025 02:37:04 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 95490443E5;
+ Fri, 27 Jun 2025 02:38:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48B03C4CEEB;
+ Fri, 27 Jun 2025 02:38:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750905424;
- bh=3JMG6iB8TJvIJcGTwj3LS7AOTxOpDIfMUVTPuJlJB1k=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Q5khl0MZs0YrWvdZchwUX1U8I1eBplhj+0tYpxr8rentRjTAoVs7bPlp+FAbfTRvL
- JhCVPANA5DFDFgLXppQGBuXsjHW7Xz7xWcK709Ocg2i1mh1rJyUgd601mvbHuidnOs
- J988JDLYvhXyk48jfkHfr9MRohCkHot3o8lP0zemiipe4KzF9cFFy42mBjU+DsGfHq
- O69fJjbacyWap17eWJ+Grp8TQ/miRrSE6LaMds95gGAynho5fbgUfqKzSvfhd6EExi
- uvpSKAP/X3v6eXj9pxZTQA2xDOoqO19oLIYkdNjy7/Ij3KwUmEdHlwUSHVxEc19mOf
- p7iABbX9Eblrw==
-Date: Wed, 25 Jun 2025 19:36:29 -0700
-To: Maxime MERE <maxime.mere@foss.st.com>
-Message-ID: <20250626023629.GA4797@sol>
-References: <20250611205859.80819-1-ebiggers@kernel.org>
- <8f4c2f36-71af-4c84-bcee-2554cea991d0@foss.st.com>
- <20250613144239.GA1287@sol>
- <c1671c5e-d824-4131-861e-470d09371e05@foss.st.com>
+ s=k20201202; t=1750991920;
+ bh=oMsLvDUkqKgim7HwPwGvDv4iUc8AjPZwg/gdL6qiTaY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=CUJZKxi7fIu66jBVxtJyVEK0n/7U/XDMJeZ2WWj2XtNqnPmMRbvSO2l3mJgEsBe1q
+ NaISllSVG1/M381wZ4x9fWeNoZKVj8KdOn8hnC7ZIZ38BCurFZqpTcIVj+37p9k44y
+ TmLgTuRnhGQoDn+QnElM67JFmoHHWgIPp/7X1rTyzeP1/fg6EXqJG4Iwz2gsSgGnd9
+ foz5aRdRJ/Gq06Fk4lDFpHGdOnyaady6jqxCRrpKe7aj1KKYls2FDBCGVYF9kmr4oN
+ Waob/Yng9EsRnWyq6+AnTxtF1OINVuLKyOprzhTOUm73J9lp+8ZB0Y/FUZGPJPTqKj
+ T73mm4TdFvpFg==
+To: jaegeuk@kernel.org
+Date: Fri, 27 Jun 2025 10:38:17 +0800
+Message-ID: <20250627023818.146534-1-chao@kernel.org>
+X-Mailer: git-send-email 2.50.0.727.gbf7dc18ff4-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <c1671c5e-d824-4131-861e-470d09371e05@foss.st.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -80,9 +75,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jun 25, 2025 at 06:29:17PM +0200, Maxime MERE wrote:
- > Regarding robustness and maintenance, ST ensures regular updates of its
- > drivers and can fix any reported bugs. We have conducted intern [...] 
+ Content preview:  This patch adds missing upper boundary check while setting
+ gc_valid_thresh_ratio via sysfs. Fixes: e791d00bd06c ("f2fs: add valid block
+ ratio not to do excessive GC for one time GC") Cc: Daeho Jeong
+ <daehojeong@google.com>
+ Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/sysfs.c | 7 ++++ [...]
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +91,9 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uUcUA-0005Jg-JP
-Subject: Re: [f2fs-dev] [PATCH] fscrypt: don't use hardware offload Crypto
- API drivers
+X-Headers-End: 1uUyzF-0007Ge-Uy
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: fix to check upper boundary for
+ gc_valid_thresh_ratio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,45 +105,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Eric Biggers via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Eric Biggers <ebiggers@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-crypto@vger.kernel.org, ceph-devel@vger.kernel.org,
- linux-ext4@vger.kernel.org
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jun 25, 2025 at 06:29:17PM +0200, Maxime MERE wrote:
-> Regarding robustness and maintenance, ST ensures regular updates of its
-> drivers and can fix any reported bugs. We have conducted internal tests with
-> dm-crypt that demonstrate the proper functioning of these drivers for this
-> type of application.
+This patch adds missing upper boundary check while setting
+gc_valid_thresh_ratio via sysfs.
 
-In addition to the bug I mentioned earlier where the STM32 crypto driver
-produced incorrect ciphertext (https://github.com/google/fscryptctl/issues/32),
-the following fix shows that the STM32 crypto driver computed incorrect hash
-values for years (2017 through 2023):
+Fixes: e791d00bd06c ("f2fs: add valid block ratio not to do excessive GC for one time GC")
+Cc: Daeho Jeong <daehojeong@google.com>
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/sysfs.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-    https://git.kernel.org/linus/e6af5c0c4d32a27e
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 2b5c35ce7b8c..d74472d96026 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -635,6 +635,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 		return count;
+ 	}
+ 
++	if (!strcmp(a->attr.name, "gc_valid_thresh_ratio")) {
++		if (t > 100)
++			return -EINVAL;
++		*ui = (unsigned int)t;
++		return count;
++	}
++
+ #ifdef CONFIG_F2FS_IOSTAT
+ 	if (!strcmp(a->attr.name, "iostat_enable")) {
+ 		sbi->iostat_enable = !!t;
+-- 
+2.49.0
 
-While these bugs may be fixed now, they show a serious lack of testing.  They
-also show that these sorts of drivers are really hard to get right.
-
-I absolutely do not want fscrypt using anything like this.  I want the crypto to
-be done correctly.
-
-(And also efficiently, which clearly these offloads don't actually do either.)
-
-BTW, it seems all the hardware offload crypto drivers have quality issues like
-this.  I gave other examples in the thread, for example the Intel QAT driver
-causing data corruption.  So my intent isn't to single out the STM32 driver per
-se.  (And of course this patch applies to all drivers.)  I'm just responding to
-STM32 because of the people pushing it in this thread for some reason.
-
-- Eric
 
 
 _______________________________________________
