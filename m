@@ -2,92 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 811E1AECACB
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 29 Jun 2025 01:55:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A61BAED250
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 30 Jun 2025 04:05:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=gdwOzj5VEaWQTmhnTdb27lUxQZ2h0DsdQvQmpZi6vPQ=; b=gJ+mWgchhbelrXltv1Jv9PmBQ1
-	HRW0fD80LiRZtSPjaWUbLxesWjWtaXBOHEE89BAU93N0sU+JQin7SOpbbjXsF/2zsqOqjHh7NUosR
-	ascYPHIcZuop1SBz5jCINeAi4pZl+gL4Je/dPoJ7x9pVGZ/3r0yC87Eu61rP9bo2xtzI=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=TNTZWaU5qvbRyQnFrFklTSt84Ly1eck8t8M9Yjq84EU=; b=KVgok0f1L7MLCwph4bFfz/2cL6
+	yMa/fUxL2VZA5ISoon9lpqpp5z20vW6ori4CsdsRQJv7dGz2mQXglUZ+kruuyc5yWulekGjVSwFtT
+	nl+yOV0XtSv2K9c6qvnCoio3zPKChz7gfmM9aPTozuzNets0uZd3wtBIR3xKQRSHIhek=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uVfNz-0007OA-Jw;
-	Sat, 28 Jun 2025 23:55:07 +0000
+	id 1uW3tx-0001Vi-8u;
+	Mon, 30 Jun 2025 02:05:45 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <info54@interactivemetronone.com>) id 1uVfNy-0007O2-7S
+ (envelope-from <chao@kernel.org>) id 1uW3tQ-0001Sc-4D
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 28 Jun 2025 23:55:06 +0000
+ Mon, 30 Jun 2025 02:05:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Date:Subject:To:From:Reply-To:Sender:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oybMTPdcoA0jAEx7nkNVtKmUJP43sYgSxQgqf7tkT6E=; b=nJVWGsgD8Bwx5kWDn3jHHLbbCv
- AvhKFKfJwLy1dIxKSpUZvRdh8v/klTBO8AyIvnnaXogwmT/mqqFPNDIbBfU5/GmXNUEIeM+eHQVB3
- YurdcCVov89UST9yuaINiSg8jtFoBQtz4ombhu5OKOBRNVq2ydqekhdHqFCj4AsIseN4=;
+ bh=Osnr0TWMD2QeZVjZbIrBXvnoEW4PNLrFfDC6Fgk0bw8=; b=i8BtQcacKjwbVKaHLDzoiAdkXD
+ iJtsZpjXF8Q7fVV/Ll+O0I4ZOkDJ4Y6Qk2XxPbC3vEyFZxltUOQf050CqcHwLEbljmqm4Kc3BGil/
+ twLWpji+ePayQQxjfen6aPYRV6w/dRXGBdalxDErQozsbM+5YpkPGz/yYvUe7AOHi5Sc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- Subject:To:From:Reply-To:Sender:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=oybMTPdcoA0jAEx7nkNVtKmUJP43sYgSxQgqf7tkT6E=; b=B
- 1zujt6OyocQbFiYivSodz/H/i2ixy3KYPrS0RujKR0BavYfwzyKoyB/XNuyldYkELEHcD17FKtGon
- VPax7jbjJC7+apunoSXFAus5qqJi8e1o+Cn4gaUQpjQ+0sdHftJodfcHoUI0H3lM2mSgyhHsNUhCx
- n9ykk9haNFGBj9uM=;
-Received: from mta0.interactivemetronone.com ([79.141.167.156])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Osnr0TWMD2QeZVjZbIrBXvnoEW4PNLrFfDC6Fgk0bw8=; b=KHmQxC8c1SBqzpXAp1I15Q73Zd
+ Drujz/+OJmAdKcq+0HCMaMxhppEHpWb9+Un4lnb5SwU/pRm4uR0RMevB3ZmoBKVob63Hnkis/8QMK
+ ftqfSMGcI5oDL6xMmt4m6Y6julNlyZqN/yL1jeEK1Rq7+Xk6ffGJRbWDDckulIXC613c=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uVfNx-0005lq-SI for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 28 Jun 2025 23:55:06 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=default;
- d=interactivemetronone.com; 
- h=Reply-To:From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:
- Content-Transfer-Encoding; i=info54@interactivemetronone.com;
- bh=oybMTPdcoA0jAEx7nkNVtKmUJP43sYgSxQgqf7tkT6E=;
- b=VdBXAxV+Y5XKf8LC+ZDp5C5shkWUfEbrasqSZiTU7h+wmsz9pQ04Lai3KTn4cjEaDtbTJPN6fqt0
- G2ovyuO4659HyXQJX8MPFFI5fOaBO+4KiATMwJ0tqtorCS2UY0QQkZyfqSX9y2snTj/bY0YrNfb6
- HkN3GSo9jm4lurpjnwQ=
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: 28 Jun 2025 16:54:54 -0700
-Message-ID: <20250628165454.22EE947D3AB53195@interactivemetronone.com>
+ id 1uW3tO-0005AE-MK for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 30 Jun 2025 02:05:12 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 47D8C5C5791;
+ Mon, 30 Jun 2025 02:05:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6906EC4CEEB;
+ Mon, 30 Jun 2025 02:04:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1751249100;
+ bh=LHkXBL7gK5HKdb3qamSQTHysQHLotgukhWQRR/PJUCU=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=YOyBkXPI2YSbDgty/YcnmQpQGdHHMmTxOW3ui3Eg5Am4BZw50Mz+WKkWwzY6fOobS
+ Jj4ZkC3xtNLzTZb3vLQBvw7psReWW4/EvDv2zm3DLbziHGTnA143l+wyTPLSY7hv9c
+ gVkDQITP9We0bJqYzRCIjQzX92l/U2Aqcd1TR48N+LHYsBHEAOVPUhlh60254J2sgx
+ GRVpAJMj+EEukevWli4WAd11Wzki0RHVFvHz8zcduKvsys8UX3P+XyoiC5MgI/k0tM
+ qME1Tz6ptgTMy4lCZE+wO4gDkvEklDffz9FqSqu66/H0fjX1iywuRn3o+B5q509sNC
+ MyjegCFfVeWXg==
+Message-ID: <4a227a94-6e8e-4ab3-a6f4-fdebc6419764@kernel.org>
+Date: Mon, 30 Jun 2025 10:04:56 +0800
 MIME-Version: 1.0
-X-Spam-Score: 2.6 (++)
-X-Spam-Report: Spam detection software, running on the system "sfi-spamd-2.hosts.colo.sdot.me",
+User-Agent: Mozilla Thunderbird
+To: wangzijie <wangzijie1@honor.com>, jaegeuk@kernel.org
+References: <20250624035938.3176350-1-wangzijie1@honor.com>
+ <20250624035938.3176350-2-wangzijie1@honor.com>
+Content-Language: en-US
+In-Reply-To: <20250624035938.3176350-2-wangzijie1@honor.com>
+X-Spam-Score: -0.3 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Dear linux-f2fs-devel@lists.sourceforge.net, I hope you're
-    doing well. This is a courteous reminder regarding Purchase Order #[PO-2025-
-    0421], which was sent on 13th of June 2025. We’re following up to confirm
-    receipt and inquire about the current status. 
- 
- Content analysis details:   (2.6 points, 5.0 required)
- 
-  pts rule name              description
+ Content preview:  On 6/24/25 11:59, wangzijie wrote: > To prevent scattered
+ pin block generation, don't allow non-section aligned truncation > to smaller
+ or equal size on pinned file. But for truncation to larger size, [...] 
+ Content analysis details:   (-0.3 points, 5.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
-                             domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in digit
-                             [saragraver005(at)gmail.com]
-  2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
-X-Headers-End: 1uVfNx-0005lq-SI
-Subject: [f2fs-dev] =?utf-8?q?Friendly_Reminder_=E2=80=93_Purchase_Order_?=
- =?utf-8?b?I1tQTy0yMDI1LTA0MjFd?=
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uW3tO-0005AE-MK
+Subject: Re: [f2fs-dev] [PATCH v4 2/2] f2fs: don't allow unaligned
+ truncation to smaller/equal size on pinned file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,25 +107,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: "Kathlene A. Ryan via Linux-f2fs-devel"
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: saragraver005@gmail.com
-Cc: "Kathlene A. Ryan" <info54@interactivemetronone.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: feng.han@honor.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-RGVhciBsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldCwKCkkgaG9wZSB5b3Un
-cmUgZG9pbmcgd2VsbC4KClRoaXMgaXMgYSBjb3VydGVvdXMgcmVtaW5kZXIgcmVnYXJkaW5nIFB1
-cmNoYXNlIE9yZGVyICNbUE8tMjAyNS0KMDQyMV0sIHdoaWNoIHdhcyBzZW50IG9uIDEzdGggb2Yg
-SnVuZSAyMDI1LiBXZeKAmXJlIGZvbGxvd2luZyB1cCB0byAKY29uZmlybSByZWNlaXB0IGFuZCBp
-bnF1aXJlIGFib3V0IHRoZSBjdXJyZW50IHN0YXR1cy4KCktpbmRseSBjb25maXJtIGlmIGV2ZXJ5
-dGhpbmcgaXMgb24gdHJhY2sgZm9yIHByb2Nlc3NpbmcgYW5kIApzaGlwbWVudCBhcyBwZXIgdGhl
-IGFncmVlZCB0aW1lbGluZS4gSWYgeW91IHJlcXVpcmUgYW55IAphZGRpdGlvbmFsIGluZm9ybWF0
-aW9uIG9yIGRvY3VtZW50cywgcGxlYXNlIGRvbuKAmXQgaGVzaXRhdGUgdG8gbGV0IAp1cyBrbm93
-LgoKVGhhbmsgeW91IGZvciB5b3VyIGF0dGVudGlvbiwgYW5kIHdlIGxvb2sgZm9yd2FyZCB0byB5
-b3VyIApjb25maXJtYXRpb24uCgpCZXN0IHJlZ2FyZHMsCkthdGhsZW5lIEEuIFJ5YW4KUHJvY3Vy
-ZW1lbnQgT2ZmaWNlcgpUUkMgQ29tcGFuaWVzCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgt
-ZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3Jn
-ZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On 6/24/25 11:59, wangzijie wrote:
+> To prevent scattered pin block generation, don't allow non-section aligned truncation
+> to smaller or equal size on pinned file. But for truncation to larger size, after
+> commit 3fdd89b452c2("f2fs: prevent writing without fallocate() for pinned files"),
+> we only support overwrite IO to pinned file, so we don't need to consider
+> attr->ia_size > i_size case.
+
+Zijie, can you take a look generic/494? suspect that it is caused by this change.
+
+generic/494 3s ... - output mismatch (see /share/git/fstests/results//generic/494.out.bad)
+    --- tests/generic/494.out   2025-01-12 21:57:40.279440664 +0800
+    +++ /share/git/fstests/results//generic/494.out.bad 2025-06-30 10:01:37.000000000 +0800
+    @@ -2,7 +2,7 @@
+     Format and mount
+     Initialize file
+     Try to truncate
+    -ftruncate: Text file busy
+    +ftruncate: Invalid argument
+     Try to punch hole
+     fallocate: Text file busy
+    ...
+    (Run 'diff -u /share/git/fstests/tests/generic/494.out /share/git/fstests/results//generic/494.out.bad'  to see the entire diff)
+Ran: generic/494
+Failures: generic/494
+Failed 1 of 1 tests
+
+Thanks,
+
+> 
+> Signed-off-by: wangzijie <wangzijie1@honor.com>
+> ---
+> v4:
+> - convert sbi first and apply change
+> ---
+>  fs/f2fs/file.c | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
+> 
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 209f43653..4809f0fd6 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -1048,6 +1048,17 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+>  			!IS_ALIGNED(attr->ia_size,
+>  			F2FS_BLK_TO_BYTES(fi->i_cluster_size)))
+>  			return -EINVAL;
+> +		/*
+> +		 * To prevent scattered pin block generation, we don't allow
+> +		 * smaller/equal size unaligned truncation for pinned file.
+> +		 * We only support overwrite IO to pinned file, so don't
+> +		 * care about larger size truncation.
+> +		 */
+> +		if (f2fs_is_pinned_file(inode) &&
+> +			attr->ia_size <= i_size_read(inode) &&
+> +			!IS_ALIGNED(attr->ia_size,
+> +			F2FS_BLK_TO_BYTES(CAP_BLKS_PER_SEC(sbi))))
+> +			return -EINVAL;
+>  	}
+>  
+>  	err = setattr_prepare(idmap, dentry, attr);
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
