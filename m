@@ -2,119 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7F57AF84F2
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Jul 2025 02:43:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C832AF85B8
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Jul 2025 04:44:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=wiLp8hc8QWZfHnmjopRXH4EgCi+lofdMuz3j7TBPq8s=; b=fSdOAp1GKG3++Bta57HYfNeg6O
-	zMlc2hPbCFIyvm6EN5RbxCbNlgVpsVWmg3V61YgWhdAtqSbizbBTSY02mh/8ImqdOpOoC8fPQSl+i
-	pE+aATOvguLiYUHpAjHQbkIQ8gTlPaEu61b8kEpzTGWh+K1TJbi/try7Cwe1OBgVhMS0=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:References:In-Reply-To:Date:To:From:Message-ID:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=w2z/ZkGBsQvl0KlZfbwmOqVkJaNfad7n4TaDlTBfZPw=; b=TZZk7C9zthzb/l1d3JysbxmcXs
+	Olwg//UKKL6B09FIT4dliVgbFMSNIwmgxoMYyTvd6/VMubRPKc+YjmG4ZbDTnAScV+of4eD3DyuVH
+	WOD29kdtKnpZXXx8bX3o8OY/SfBb4VqfoPHmdTeRrAvix+UPX7UzqpYfYCBTJ1IsfJ/c=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uXUWG-00054D-E3;
-	Fri, 04 Jul 2025 00:43:12 +0000
+	id 1uXWPW-0005aM-FN;
+	Fri, 04 Jul 2025 02:44:22 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wqu@suse.com>) id 1uXUW8-00053T-LD
+ (envelope-from <ywen.chen@foxmail.com>) id 1uXWPU-0005aD-M3
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Jul 2025 00:43:04 +0000
+ Fri, 04 Jul 2025 02:44:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ In-Reply-To:Date:Subject:Cc:To:From:Message-ID:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xgTteYEh6kB2TKiLCWX4vrJyGKCg0VwB8fCv2q9hnBA=; b=QmJxASABASkJa5lJ/ZDAIfw0CD
- NtTo7wNe7wHE/oQ/rX3j8Vr6cdA0BVGBGq4FoAdkEkE6YklNHQpk0q4FkoJ3bghi9OqrUXeCRV1R4
- LIsRNiS/rYPQcq9DWhGFlwO6Vs5GxvFnCsDe+pTb3Ljk1U2xsuMUDEUg9qJrJJlab1V0=;
+ bh=60C9crPrlso6i63AWM7qFupPHsU4T1ZcqF61uHig4r0=; b=IgRt9992crFC1GedXSaQIIJl3v
+ VE7PluCCm1JiiUIAdlH5hlWyGuFlmGmc4jK45dsqhVdxN6EvWbig7wIudRVn/cBn1fci7BU/YNpSx
+ DZJ0IZk2ksTWm2zkxb+I5CW9EYXvnzIE+zNGs0oC55io/oqKna0yeYqxYMJgzn1p26UM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Date:
+ Subject:Cc:To:From:Message-ID:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xgTteYEh6kB2TKiLCWX4vrJyGKCg0VwB8fCv2q9hnBA=; b=iIDhaoo8TqIcrtCPz5Gec7kqyl
- 6+fkJveQqZ/Z0rcV6V1TXj9ilzdLjlaJMQQNk1zW7+Pid4nLcpJBf5jLtC45oQpPrwStXc+PAw6b3
- dIcic//n7R5pyQawgF9ggd3Pzz8wZC8ev0gJNO7l/s0aU/GrgtNLFXvoSN/BnsP4pHT0=;
-Received: from smtp-out1.suse.de ([195.135.223.130])
+ bh=60C9crPrlso6i63AWM7qFupPHsU4T1ZcqF61uHig4r0=; b=aHXWxMT0SqwUTyBbT+9I3w6nBN
+ R9SJZEFRpFmth8OtuTzHG9ffnxWesHV4jzzJZ1noH4BNLme7vclYg7Wo2HaDk9/q00KAmpRJsrbL+
+ N+CpdtGOx0E1T7G/bmf1X1pStowuukSNWUUeR4Rc66qjKCXvpUCKWaKSoWzaYovgowaQ=;
+Received: from xmbghk7.mail.qq.com ([43.163.128.47])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uXUW7-0007ud-SC for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Jul 2025 00:43:04 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id D9DC72118F;
- Fri,  4 Jul 2025 00:42:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1751589777; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xgTteYEh6kB2TKiLCWX4vrJyGKCg0VwB8fCv2q9hnBA=;
- b=bN0V/etmV5iusKme7I1v63ZN3zDCJwf1v/oHT0WF8YG6UNyNRxhQ5c0FKh5u/ooKAf3yTm
- YrRWlUQr4NURKl3xNNl/4Vd1q/E+oxjS9v7XZWUwH4mWdWhLDe6CrrLzEO4YIV86liwEcq
- e6G9XVMwOhw6Ux2sMKdPOi9QxxSQgZI=
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.com header.s=susede1 header.b=XJoTsyyV
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1751589776; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xgTteYEh6kB2TKiLCWX4vrJyGKCg0VwB8fCv2q9hnBA=;
- b=XJoTsyyV44sylvxTh4AYeQO8uRcTPzuikmUlh6MekojbSQV7eIKmkrnk+F6ASuhiWg1DKn
- P47G30iuknoiSSfGKs1WePE7TUAusr+C+IrXxJja43dyWbUSy0E5A0WQoLdMqOjyyiQU8o
- e3GLAHT2fHq3JJX79PEO81UI/FMEYOw=
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 29C8213A66;
- Fri,  4 Jul 2025 00:42:53 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id EBYbN40jZ2hMEwAAD6G6ig
- (envelope-from <wqu@suse.com>); Fri, 04 Jul 2025 00:42:53 +0000
-To: linux-btrfs@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org
-Date: Fri,  4 Jul 2025 10:12:29 +0930
-Message-ID: <de25bbdb572c75df38b1002d3779bf19e3ad0ff6.1751589725.git.wqu@suse.com>
-X-Mailer: git-send-email 2.50.0
-In-Reply-To: <cover.1751589725.git.wqu@suse.com>
-References: <cover.1751589725.git.wqu@suse.com>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uXWPT-0008WC-Ic for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 04 Jul 2025 02:44:20 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
+ s=s201512; t=1751597052;
+ bh=60C9crPrlso6i63AWM7qFupPHsU4T1ZcqF61uHig4r0=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=s+rZaqLW9aMeHUtrZUFMo/lvomsT0TsfeLVcOsBsp6RPA+SU8JsVVsMo4HGPd6Xtl
+ NiU9PAInL1ECgQJyiJVkiwDP3g/ciBLOcajqiLEj03eZXHcyJRZGIxOzDK87Nj4ExY
+ zttXrx/2+GLTMmsexOku596DPDK+lf9jcoflbnX0=
+Received: from meizu-Precision-3660.meizu.com ([112.91.84.73])
+ by newxmesmtplogicsvrsza29-0.qq.com (NewEsmtp) with SMTP
+ id AFA99AEB; Fri, 04 Jul 2025 10:43:58 +0800
+X-QQ-mid: xmsmtpt1751597038tlheim36w
+Message-ID: <tencent_82716EB4F15F579C738C3CC3AFE62E822207@qq.com>
+X-QQ-XMAILINFO: MeRnHSrEJzCrXBD8vlUlbdOjZ64QGNMuOTs64HRplnflQ2Xw47I1asd051G1Fa
+ HkAZe+pG5Sbjn05hu2LVcp+KFz4uvh3/PquiaTE+gcX4JARoZoOB0OoJWMJTOolc6FOfBkx6n7XI
+ omAbVYjDagqD1/Gy1Ln/NNP+1N4UNXOc7/RsczR0Ii36+GXeRzMFw9qVFbxrIdh6h/6H4uI6wQsx
+ uoQmrzd/UY1LgUVPtHzLNd4V61Zb+11WUYcyfHsa1xFHTeTFvJ/uOjBSZ+4rub0Egmn4ZEpkXw0b
+ kzd67z5cntmZLn8wDvd3PtusABNFGV7Ba5vl1JcONR5N0HiqXBakTP8E17XujVxLxMn5QbqlHA7h
+ gFxrgWvnadL8Qz3UEv9J7oMglBfHDGEr2MgdUbdv+wPEO28zZPhszwtvpi4H5bsCzViJuzWYC4XQ
+ VHiW+RxZkEanaotTY2vkMHp6EuqjTl6ygz7QD58vizIvcIgEhobCM5FuRaz/YrfiuLgMYiXx+jlR
+ 6rK6TfCET9UKwxXsRPKe29bT0qD9FjmVi+3lSXoTR4i4rG7SNJdut6xPrY/6wfYNt1lrZ6kckqn7
+ Dqps4jlBb7Rtw4OeRRM4AfX28hUeCCRDcRQIrW/dFxoNmqLGc6DyDyq7Av/4wcBUKhx4U96NlGXt
+ CD4jcM2phCSMvg2sG79ynyCuT5zaHo1RBxHEHfzoO9UoJhbqnzbBpPf5jzLsrd7OZ7K2ge0hMQF/
+ DadpAYf7N1DyILLPIOxnxfdDRsv1vwjMo3GsjnBaaueRkVbPMsN1UgmspkATWLRFPOGg7E0dR2eN
+ HLBL690GC+96ltRvV0eJijs+uKtoFtMXsg3i+p6nwxhOUajs1LX9Ij6ffL3aDTWKI7iW3ik/v7AV
+ WfNdSxbou1CzZ4Dj9b5N2hNyTSpexQ1s+juAg4Lf/JwpxyFNcCtDheDAFlY0hcQlvZxEbcYNoV2f
+ +IwGVD0K1UrkN0HrkvYzsspuJb6R6euNA01rbt3nxe8aq6uGJf/7ZEC97TBzTopAkXQ1j8GvCA9H
+ Jon7WENY+5wnQJkfGHVv7K9bjLh3f6LSWRl86vJfWDgod5j3EfaYU7QRvWL6H7iY8bSIu/A0wm0Q
+ LyzxQylUT5qRMypuU=
+X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
+From: Yuwen Chen <ywen.chen@foxmail.com>
+To: hch@infradead.org
+Date: Fri,  4 Jul 2025 10:43:57 +0800
+X-OQ-MSGID: <20250704024357.4078753-1-ywen.chen@foxmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <aGZFtmIxHDLKL6mc@infradead.org>
+References: <aGZFtmIxHDLKL6mc@infradead.org>
 MIME-Version: 1.0
-X-Spam-Level: 
-X-Spam-Flag: NO
-X-Rspamd-Queue-Id: D9DC72118F
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-3.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- MID_CONTAINS_FROM(1.00)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- R_MISSING_CHARSET(0.50)[];
- R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; FUZZY_RATELIMITED(0.00)[rspamd.com];
- ARC_NA(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- MIME_TRACE(0.00)[0:+];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- RCPT_COUNT_SEVEN(0.00)[9];
- DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received,2a07:de40:b281:104:10:150:64:97:from];
- DKIM_SIGNED(0.00)[suse.com:s=susede1]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email,suse.com:dkim,suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo];
- RCVD_TLS_ALL(0.00)[]; TO_DN_NONE(0.00)[];
- RCVD_COUNT_TWO(0.00)[2]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- DKIM_TRACE(0.00)[suse.com:+]
-X-Spam-Score: -3.01
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -122,17 +92,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Currently all the filesystems implementing the
- super_opearations::shutdown()
- callback can not afford losing a device. Thus fs_bdev_mark_dead() will just
- call the shutdown() callback for the involved filesystem. 
+ Content preview:  During path traversal, the generic_ci_match function may be
+ called multiple times. The number of memory allocations and releases in it
+ accounts for a relatively high proportion in the flamegraph. This [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URI: suse.com]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
@@ -140,9 +105,11 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1uXUW7-0007ud-SC
-Subject: [f2fs-dev] [PATCH v4 1/6] fs: enhance and rename shutdown()
- callback to remove_bdev()
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [ywen.chen(at)foxmail.com]
+X-Headers-End: 1uXWPT-0008WC-Ic
+Subject: [f2fs-dev] [PATCH v3 1/2] libfs: reduce the number of memory
+ allocations in generic_ci_match
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -154,211 +121,150 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Qu Wenruo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Qu Wenruo <wqu@suse.com>
-Cc: brauner@kernel.org, linux-ext4@vger.kernel.org, jack@suse.cz,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- viro@zeniv.linux.org.uk, ntfs3@lists.linux.dev
+Cc: brauner@kernel.org, ywen.chen@foxmail.com, tytso@mit.edu,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ adilger.kernel@dilger.ca, viro@zeniv.linux.org.uk,
+ linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Currently all the filesystems implementing the
-super_opearations::shutdown() callback can not afford losing a device.
+During path traversal, the generic_ci_match function may be called
+multiple times. The number of memory allocations and releases
+in it accounts for a relatively high proportion in the flamegraph.
+This patch significantly reduces the number of memory allocations
+in generic_ci_match through pre - allocation.
 
-Thus fs_bdev_mark_dead() will just call the shutdown() callback for the
-involved filesystem.
-
-But it will no longer be the case, with multi-device filesystems like
-btrfs and bcachefs the filesystem can handle certain device loss without
-shutting down the whole filesystem.
-
-To allow those multi-device filesystems to be integrated to use
-fs_holder_ops:
-
-- Replace super_opearation::shutdown() with
-  super_opearations::remove_bdev()
-  To better describe when the callback is called.
-
-- Add a new @bdev parameter to remove_bdev() callback
-  To allow the fs to determine which device is missing, and do the
-  proper handling when needed.
-
-For the existing shutdown callback users, the change is minimal.
-They only need to follow the rename and the new parameter list.
-The new @bdev parameter can be ignored if the filesystem can not afford
-losing any device, and continue using the old shutdown behavior.
-
-Btrfs is going to implement the callback soon, which will either
-shutdown the fs or continue read-write operations.
-
-Cc: linux-fsdevel@vger.kernel.org
-Cc: linux-ext4@vger.kernel.org
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Cc: ntfs3@lists.linux.dev
-Cc: linux-xfs@vger.kernel.org
-Signed-off-by: Qu Wenruo <wqu@suse.com>
+Signed-off-by: Yuwen Chen <ywen.chen@foxmail.com>
 ---
- fs/exfat/super.c   | 4 ++--
- fs/ext4/super.c    | 4 ++--
- fs/f2fs/super.c    | 4 ++--
- fs/ntfs3/super.c   | 6 +++---
- fs/super.c         | 4 ++--
- fs/xfs/xfs_super.c | 7 ++++---
- include/linux/fs.h | 7 ++++++-
- 7 files changed, 21 insertions(+), 15 deletions(-)
+ fs/ext4/namei.c    |  2 +-
+ fs/f2fs/dir.c      |  2 +-
+ fs/libfs.c         | 33 ++++++++++++++++++++++++++++++---
+ include/linux/fs.h |  8 +++++++-
+ 4 files changed, 39 insertions(+), 6 deletions(-)
 
-diff --git a/fs/exfat/super.c b/fs/exfat/super.c
-index 7ed858937d45..a0e11166b194 100644
---- a/fs/exfat/super.c
-+++ b/fs/exfat/super.c
-@@ -172,7 +172,7 @@ int exfat_force_shutdown(struct super_block *sb, u32 flags)
- 	return 0;
- }
+diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
+index a178ac2294895..f235693bd71aa 100644
+--- a/fs/ext4/namei.c
++++ b/fs/ext4/namei.c
+@@ -1443,7 +1443,7 @@ static bool ext4_match(struct inode *parent,
  
--static void exfat_shutdown(struct super_block *sb)
-+static void exfat_remove_bdev(struct super_block *sb, struct block_device *bdev)
- {
- 	exfat_force_shutdown(sb, EXFAT_GOING_DOWN_NOSYNC);
- }
-@@ -202,7 +202,7 @@ static const struct super_operations exfat_sops = {
- 	.put_super	= exfat_put_super,
- 	.statfs		= exfat_statfs,
- 	.show_options	= exfat_show_options,
--	.shutdown	= exfat_shutdown,
-+	.remove_bdev	= exfat_remove_bdev,
+ 		return generic_ci_match(parent, fname->usr_fname,
+ 					&fname->cf_name, de->name,
+-					de->name_len) > 0;
++					de->name_len, NULL) > 0;
+ 	}
+ #endif
+ 
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index c36b3b22bfffd..4c6611fbd9574 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -197,7 +197,7 @@ static inline int f2fs_match_name(const struct inode *dir,
+ 	if (fname->cf_name.name)
+ 		return generic_ci_match(dir, fname->usr_fname,
+ 					&fname->cf_name,
+-					de_name, de_name_len);
++					de_name, de_name_len, NULL);
+ 
+ #endif
+ 	f.usr_fname = fname->usr_fname;
+diff --git a/fs/libfs.c b/fs/libfs.c
+index 9ea0ecc325a81..d2a6b2a4fe11c 100644
+--- a/fs/libfs.c
++++ b/fs/libfs.c
+@@ -1863,6 +1863,26 @@ static const struct dentry_operations generic_ci_dentry_ops = {
+ #endif
  };
  
- enum {
-diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-index c7d39da7e733..d75b416401ae 100644
---- a/fs/ext4/super.c
-+++ b/fs/ext4/super.c
-@@ -1456,7 +1456,7 @@ static void ext4_destroy_inode(struct inode *inode)
- 			 EXT4_I(inode)->i_reserved_data_blocks);
- }
- 
--static void ext4_shutdown(struct super_block *sb)
-+static void ext4_remove_bdev(struct super_block *sb, struct block_device *bdev)
++#define DECRYPTED_NAME_PREALLOC_MIN_LEN 64
++static inline char *decrypted_name_prealloc_resize(
++		struct decrypted_name_prealloc *prealloc,
++		size_t wantlen)
++{
++	char *retbuf = NULL;
++
++	if (prealloc->name && wantlen >= prealloc->namelen)
++		return prealloc->name;
++
++	retbuf = kmalloc(wantlen + DECRYPTED_NAME_PREALLOC_MIN_LEN, GFP_KERNEL);
++	if (!retbuf)
++		return NULL;
++
++	kfree(prealloc->name);
++	prealloc->name = retbuf;
++	prealloc->namelen = wantlen + DECRYPTED_NAME_PREALLOC_MIN_LEN;
++	return retbuf;
++}
++
+ /**
+  * generic_ci_match() - Match a name (case-insensitively) with a dirent.
+  * This is a filesystem helper for comparison with directory entries.
+@@ -1873,6 +1893,7 @@ static const struct dentry_operations generic_ci_dentry_ops = {
+  * @folded_name: Optional pre-folded name under lookup
+  * @de_name: Dirent name.
+  * @de_name_len: dirent name length.
++ * @prealloc: decrypted name memory buffer
+  *
+  * Test whether a case-insensitive directory entry matches the filename
+  * being searched.  If @folded_name is provided, it is used instead of
+@@ -1884,7 +1905,8 @@ static const struct dentry_operations generic_ci_dentry_ops = {
+ int generic_ci_match(const struct inode *parent,
+ 		     const struct qstr *name,
+ 		     const struct qstr *folded_name,
+-		     const u8 *de_name, u32 de_name_len)
++		     const u8 *de_name, u32 de_name_len,
++		     struct decrypted_name_prealloc *prealloc)
  {
-        ext4_force_shutdown(sb, EXT4_GOING_FLAGS_NOLOGFLUSH);
- }
-@@ -1620,7 +1620,7 @@ static const struct super_operations ext4_sops = {
- 	.unfreeze_fs	= ext4_unfreeze,
- 	.statfs		= ext4_statfs,
- 	.show_options	= ext4_show_options,
--	.shutdown	= ext4_shutdown,
-+	.remove_bdev	= ext4_remove_bdev,
- #ifdef CONFIG_QUOTA
- 	.quota_read	= ext4_quota_read,
- 	.quota_write	= ext4_quota_write,
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index bbf1dad6843f..8667af9f76e4 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -2640,7 +2640,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 	return err;
- }
+ 	const struct super_block *sb = parent->i_sb;
+ 	const struct unicode_map *um = sb->s_encoding;
+@@ -1899,7 +1921,11 @@ int generic_ci_match(const struct inode *parent,
+ 		if (WARN_ON_ONCE(!fscrypt_has_encryption_key(parent)))
+ 			return -EINVAL;
  
--static void f2fs_shutdown(struct super_block *sb)
-+static void f2fs_remove_bdev(struct super_block *sb, struct block_device *bdev)
- {
- 	f2fs_do_shutdown(F2FS_SB(sb), F2FS_GOING_DOWN_NOSYNC, false, false);
- }
-@@ -3264,7 +3264,7 @@ static const struct super_operations f2fs_sops = {
- 	.unfreeze_fs	= f2fs_unfreeze,
- 	.statfs		= f2fs_statfs,
- 	.remount_fs	= f2fs_remount,
--	.shutdown	= f2fs_shutdown,
-+	.remove_bdev	= f2fs_remove_bdev,
- };
+-		decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
++		if (!prealloc)
++			decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
++		else
++			decrypted_name.name = decrypted_name_prealloc_resize(
++					prealloc, de_name_len);
+ 		if (!decrypted_name.name)
+ 			return -ENOMEM;
+ 		res = fscrypt_fname_disk_to_usr(parent, 0, 0, &encrypted_name,
+@@ -1928,7 +1954,8 @@ int generic_ci_match(const struct inode *parent,
+ 		res = utf8_strncasecmp(um, name, &dirent);
  
- #ifdef CONFIG_FS_ENCRYPTION
-diff --git a/fs/ntfs3/super.c b/fs/ntfs3/super.c
-index 920a1ab47b63..3e69dc805e3a 100644
---- a/fs/ntfs3/super.c
-+++ b/fs/ntfs3/super.c
-@@ -762,9 +762,9 @@ static int ntfs_show_options(struct seq_file *m, struct dentry *root)
- }
- 
- /*
-- * ntfs_shutdown - super_operations::shutdown
-+ * ntfs_remove_bdev - super_operations::remove_bdev
-  */
--static void ntfs_shutdown(struct super_block *sb)
-+static void ntfs_remove_bdev(struct super_block *sb, struct block_device *bdev)
- {
- 	set_bit(NTFS_FLAGS_SHUTDOWN_BIT, &ntfs_sb(sb)->flags);
- }
-@@ -821,7 +821,7 @@ static const struct super_operations ntfs_sops = {
- 	.put_super = ntfs_put_super,
- 	.statfs = ntfs_statfs,
- 	.show_options = ntfs_show_options,
--	.shutdown = ntfs_shutdown,
-+	.remove_bdev = ntfs_remove_bdev,
- 	.sync_fs = ntfs_sync_fs,
- 	.write_inode = ntfs3_write_inode,
- };
-diff --git a/fs/super.c b/fs/super.c
-index 80418ca8e215..c972efb38f6a 100644
---- a/fs/super.c
-+++ b/fs/super.c
-@@ -1463,8 +1463,8 @@ static void fs_bdev_mark_dead(struct block_device *bdev, bool surprise)
- 		sync_filesystem(sb);
- 	shrink_dcache_sb(sb);
- 	evict_inodes(sb);
--	if (sb->s_op->shutdown)
--		sb->s_op->shutdown(sb);
-+	if (sb->s_op->remove_bdev)
-+		sb->s_op->remove_bdev(sb, bdev);
- 
- 	super_unlock_shared(sb);
- }
-diff --git a/fs/xfs/xfs_super.c b/fs/xfs/xfs_super.c
-index 0bc4b5489078..8e307b036133 100644
---- a/fs/xfs/xfs_super.c
-+++ b/fs/xfs/xfs_super.c
-@@ -1276,8 +1276,9 @@ xfs_fs_free_cached_objects(
- }
- 
- static void
--xfs_fs_shutdown(
--	struct super_block	*sb)
-+xfs_fs_remove_bdev(
-+	struct super_block	*sb,
-+	struct block_device	*bdev)
- {
- 	xfs_force_shutdown(XFS_M(sb), SHUTDOWN_DEVICE_REMOVED);
- }
-@@ -1308,7 +1309,7 @@ static const struct super_operations xfs_super_operations = {
- 	.show_options		= xfs_fs_show_options,
- 	.nr_cached_objects	= xfs_fs_nr_cached_objects,
- 	.free_cached_objects	= xfs_fs_free_cached_objects,
--	.shutdown		= xfs_fs_shutdown,
-+	.remove_bdev		= xfs_fs_remove_bdev,
- 	.show_stats		= xfs_fs_show_stats,
- };
- 
+ out:
+-	kfree(decrypted_name.name);
++	if (!prealloc)
++		kfree(decrypted_name.name);
+ 	if (res < 0 && sb_has_strict_encoding(sb)) {
+ 		pr_err_ratelimited("Directory contains filename that is invalid UTF-8");
+ 		return 0;
 diff --git a/include/linux/fs.h b/include/linux/fs.h
-index b085f161ed22..b08af63d2d4f 100644
+index 4ec77da65f144..65307c8c11485 100644
 --- a/include/linux/fs.h
 +++ b/include/linux/fs.h
-@@ -2367,7 +2367,12 @@ struct super_operations {
- 				  struct shrink_control *);
- 	long (*free_cached_objects)(struct super_block *,
- 				    struct shrink_control *);
--	void (*shutdown)(struct super_block *sb);
-+	/*
-+	 * Called when block device @bdev belonging to @sb is removed.
-+	 *
-+	 * If the fs can't afford the device loss, it should be shutdown.
-+	 */
-+	void (*remove_bdev)(struct super_block *sb, struct block_device *bdev);
- };
+@@ -3651,10 +3651,16 @@ extern int generic_file_fsync(struct file *, loff_t, loff_t, int);
+ extern int generic_check_addressable(unsigned, u64);
  
- /*
+ extern void generic_set_sb_d_ops(struct super_block *sb);
++
++struct decrypted_name_prealloc {
++	char *name;
++	size_t namelen;
++};
+ extern int generic_ci_match(const struct inode *parent,
+ 			    const struct qstr *name,
+ 			    const struct qstr *folded_name,
+-			    const u8 *de_name, u32 de_name_len);
++			    const u8 *de_name, u32 de_name_len,
++			    struct decrypted_name_prealloc *prealloc);
+ 
+ #if IS_ENABLED(CONFIG_UNICODE)
+ int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str);
 -- 
-2.50.0
+2.34.1
 
 
 
