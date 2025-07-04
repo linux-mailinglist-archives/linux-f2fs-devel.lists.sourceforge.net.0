@@ -2,108 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEA8CAF8F74
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Jul 2025 12:08:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3720BAF91D0
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Jul 2025 13:49:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:From:Message-ID:Date:MIME-Version:Sender:Reply-To:Cc:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=ksTECCHQl9aLqJz5vH1lqX2mKe26xBof2mP3O2znFBY=; b=b+FyHYSxLbQFNQQ+mpmw7U11Ck
-	ZwcXc5nAKl1vHukheCaYqJVkyTcSGZJReQJ1HauXV4Ds2C3xLP2RHiKMPRa264yUkgqhJOWbhNiuN
-	WWh/KCpMtNUDiVQ5fRhd7SyfpeHY2Z7Hjxcz9iEKVUv/tuyTWB3o0S9AYQPXYprl3v1g=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=gGYqnH6ZPz/tA/JFA2h3fP6tFsNdf/BUWN4i9gqdsCw=; b=lZkYSOIbGhqBorNJyN8+Qnutd3
+	99m3TK2HPlINgv+M9jV4wz5M6dCwTFlnKQwaFaHK3yIIHBWABleTsOV96w8aYmP9rDDKdcrrfCn/m
+	21zqPy04ACHHlTgmdaVgu2iwyr4zUUJUX9GNanAnZxLJHNG0DgQqR3vqDtvJxYnf59BM=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uXdKe-0006nA-9R;
-	Fri, 04 Jul 2025 10:07:48 +0000
+	id 1uXeua-000559-Bc;
+	Fri, 04 Jul 2025 11:49:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <35qdnaAkbAB8NTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1uXdKc-0006n3-2z for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Jul 2025 10:07:46 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <chao@kernel.org>) id 1uXeuZ-000552-CX
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 04 Jul 2025 11:48:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KMv5m+04peWmGOlb9xw+Y5TeBq2l+62yKhu0Uua0kXU=; b=lWedLwwXgoCFlgm9Bg7uGQHJoS
- 6lLEt1HB9/fG9YLOYJaXOQVab9e3wY1v8WVn/Tuc499Bt/tYOa6xfSJ6mj90oiUVz+DWJ8/QGNeTy
- MErLnTJ+mm5Y1TBdHnBNFxR+Ull24jmXorJwdUkxUOshd2Q9gPiM26uJ4mjb+ZNjxUIE=;
+ bh=yyzcKtZD2YyDgm56Ts7T9KUNTjnrYXziTSi8GQqSHq0=; b=TyxXvrpX1oje4jTgpzA0867I5d
+ 0J5ZDELn8mNHCKIvSUi/B+z3/o71YfLEHyMJO4sTdk3VlNqx1225/j87DfeT/629lMfVXOKXHyBoD
+ QwR4L3Aq5ZEvoyvxxwwWogJF1g2OhMIurdZiGOrOwhqsjC4xWeniP9pc9/iXthAP73IQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=KMv5m+04peWmGOlb9xw+Y5TeBq2l+62yKhu0Uua0kXU=; b=N
- F0hT72PyhoQRgU3G6FU31NqjjQsN8Z0XS5G841z49kj/+amMV9aPOtuSpli9ajkoI7f9D3Nlnouvf
- htF2Ll7W1cUsBtc7qw8f4YwaJZ2jHE7P0pBw/ufTj8rUBFXS3Pi5NVl20sW1L9uPXWYFgj4CdkLzf
- xcbvahkeNMm0CT54=;
-Received: from mail-il1-f205.google.com ([209.85.166.205])
+ List-Owner:List-Archive; bh=yyzcKtZD2YyDgm56Ts7T9KUNTjnrYXziTSi8GQqSHq0=; b=T
+ gAy1WpJao0UFxASUzQ7LWhYu1l0sIL288cBKkgrVkXvIXKVmiElhFDdOANvx0jDLJtqACronOFRpk
+ 5eG4LvsmnFARh7+ktP9lCiaisqkgniJrkjrMw3N5XPcCOq0xrF7mIgUAvBJyEYvUp4bBUIN/FeNix
+ C31wSUpC0C3cZZDg=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uXdKb-0001Op-Ei for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Jul 2025 10:07:46 +0000
-Received: by mail-il1-f205.google.com with SMTP id
- e9e14a558f8ab-3e0513ec553so17262355ab.3
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uXeuY-0001Ja-Ja for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 04 Jul 2025 11:48:59 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 348A75C56F7
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 04 Jul 2025 03:07:45 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751623655; x=1752228455;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=KMv5m+04peWmGOlb9xw+Y5TeBq2l+62yKhu0Uua0kXU=;
- b=dSGmBIiL6kpO8yNwozoaArAqfsDq1nbeNjMzULQSN29dassbgGmIQQic8d8gDaGZPt
- mJ4xNsBrkVgXqrgZfoi3VwKz77kEWkhVFs4Ylm9F2rl8Tfa8cfz6UoNWl/fx+/YCTnji
- PZWtbmuZLwFd160cOyizEBOfAJVW30KbGK/3Vrq0u9P7FFDRdXK8YEbxmbaqr81s2Be+
- Q89le2JzzjSM2INAAAVYgx1/BNiwWqKGFnun7o4xL3hjPbWrBrSjXOkb9rDRXBJy0vqB
- r8sOVkKwH+SO4Mbo3km2AfEmBauNOrIcy8vnZ51W86bSEn9qruHAPWD/qK1h0FS62boy
- xbag==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWWDulnD+cSpWL87BA+Yb6CTA/VRLjQM/BEfiIzN4Ivfp1iVetABn1PQo3TK+AC0SHHsga6Op8wtd14l/lIWG1L@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzxM9+0lLNmLms4iHyhT022buAkslOxcYzPV01ZBsI0MELT7542
- uPhqVifNbrE78RkyC0o8chSkMIxeCVMdM1cbOEnjgspLaBgbHF+S8h0vLiTd/gysU5RsiALx2oT
- tsKXMKmXEniU+1ZbWn2/j/6LWan7rmmw/cCPX9QeXPLHahr5hYolvTUF+940=
-X-Google-Smtp-Source: AGHT+IF11xHT/pqB9Y/nYKAHM6LlPwupuvXq9906vGmwFTfyHSeZlVRM9uzFA1dndUyqvbL92NL6NOE0o0ZmLkD8uZGn9nEmNF3+
+ Fri,  4 Jul 2025 11:48:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B7C9C4CEE3;
+ Fri,  4 Jul 2025 11:48:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1751629727;
+ bh=v8oYqlQcWgUn8VtLMsN9ZNS+mEN6ulsKMdnTfoWan6c=;
+ h=From:To:Cc:Subject:Date:From;
+ b=js2JgbdFd29ohx1Mgv/U/LCs4snntEdOIrZgIuDMdGBkCtgRzukqFt7+9oSUG9SBl
+ dD2tFN9raYGMvYlVq0VGZVituYQBvCc3gG9fFlIsPpniw65atCS00jCIS137A4kT0a
+ pyekR1kuZOb0EZ5SASgm6S3qy6D/zt37aTa20S4/6frRcoWMGNpNnQghCeI7Ih1BqK
+ 9XV4HNWLy8BEZf+1NH9Cm2G4g6CNdfwK30Eeg/t5mSojtF5gzXAS4LFbzWyBe2r+6H
+ XbfjJGB7gmEyhdo4yuAPvRgTDQS8N2ZxcVP5QJ+exHRSHxEfFVifvz2STwf0LcgqIM
+ Jp2mmwc8NIllg==
+To: Zorro Lang <zlang@kernel.org>,
+	fstests@vger.kernel.org
+Date: Fri,  4 Jul 2025 19:48:18 +0800
+Message-ID: <20250704114818.1878294-1-chao@kernel.org>
+X-Mailer: git-send-email 2.50.0.727.gbf7dc18ff4-goog
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:12c3:b0:3e0:4f66:3106 with SMTP id
- e9e14a558f8ab-3e13547ddf5mr17855765ab.2.1751623654592; Fri, 04 Jul 2025
- 03:07:34 -0700 (PDT)
-Date: Fri, 04 Jul 2025 03:07:34 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <6867a7e6.a00a0220.c7b3.001a.GAE@google.com>
-From: syzbot <syzbot+8a7eea50810efde15b0a@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.3 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 66701750d556
- Merge tag 'io_uring-6.16-20250630' of git://g.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=15e4388c580000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.3 points, 5.0 required)
+ Content preview:  As f2fs changes to use new mount APIs,
+ let's add a new testcase
+ to check mount result for all f2fs supported mount options and their
+ combinations, 
+ in order to detect any inconsistency during mount. Cc: Jaegeuk Kim
+ <jaegeuk@kernel.org>
+ Signed-off-by: Chao Yu <chao@kernel.org> --- v2: - allow to check mount
+ options w/ zoned device common/rc | 3 + tests/f2fs/015 | 159
+ ++++++++++++++++++++++++++++++ [...] 
+ Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.205 listed in wl.mailspike.net]
-X-Headers-End: 1uXdKb-0001Op-Ei
-Subject: [f2fs-dev] [syzbot] [f2fs?] INFO: task hung in
- f2fs_issue_checkpoint (2)
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uXeuY-0001Ja-Ja
+Subject: [f2fs-dev] [PATCH v2] f2fs/015: test mount options
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,169 +110,443 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+As f2fs changes to use new mount APIs, let's add a new testcase
+to check mount result for all f2fs supported mount options and
+their combinations, in order to detect any inconsistency during
+mount.
 
-syzbot found the following issue on:
-
-HEAD commit:    66701750d556 Merge tag 'io_uring-6.16-20250630' of git://g..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=15e4388c580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=e29b8115bf337f53
-dashboard link: https://syzkaller.appspot.com/bug?extid=8a7eea50810efde15b0a
-compiler:       Debian clang version 20.1.6 (++20250514063057+1e4d39e07757-1~exp1~20250514183223.118), Debian LLD 20.1.6
-
-Unfortunately, I don't have any reproducer for this issue yet.
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/523bba6cff2e/disk-66701750.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/0fcf3d9d70ad/vmlinux-66701750.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/8b9c399a35d9/bzImage-66701750.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+8a7eea50810efde15b0a@syzkaller.appspotmail.com
-
-INFO: task kworker/u8:8:5978 blocked for more than 143 seconds.
-      Not tainted 6.16.0-rc4-syzkaller-00013-g66701750d556 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:kworker/u8:8    state:D stack:21160 pid:5978  tgid:5978  ppid:2      task_flags:0x4208060 flags:0x00004000
-Workqueue: writeback wb_workfn (flush-7:5)
-Call Trace:
- <TASK>
- context_switch kernel/sched/core.c:5396 [inline]
- __schedule+0x16a2/0x4cb0 kernel/sched/core.c:6785
- __schedule_loop kernel/sched/core.c:6863 [inline]
- schedule+0x165/0x360 kernel/sched/core.c:6878
- schedule_preempt_disabled+0x13/0x30 kernel/sched/core.c:6935
- rwsem_down_write_slowpath+0xbec/0x1030 kernel/locking/rwsem.c:1176
- __down_write_common kernel/locking/rwsem.c:1304 [inline]
- __down_write kernel/locking/rwsem.c:1313 [inline]
- down_write+0x1ab/0x1f0 kernel/locking/rwsem.c:1578
- f2fs_down_write fs/f2fs/f2fs.h:2229 [inline]
- f2fs_issue_checkpoint+0x39c/0x570 fs/f2fs/checkpoint.c:1846
- f2fs_balance_fs_bg+0x54d/0x980 fs/f2fs/segment.c:543
- f2fs_write_node_pages+0x146/0x6e0 fs/f2fs/node.c:2161
- do_writepages+0x32e/0x550 mm/page-writeback.c:2636
- __writeback_single_inode+0x145/0xff0 fs/fs-writeback.c:1680
- writeback_sb_inodes+0x6b5/0x1000 fs/fs-writeback.c:1976
- __writeback_inodes_wb+0x111/0x240 fs/fs-writeback.c:2047
- wb_writeback+0x44f/0xaf0 fs/fs-writeback.c:2158
- wb_check_old_data_flush fs/fs-writeback.c:2262 [inline]
- wb_do_writeback fs/fs-writeback.c:2315 [inline]
- wb_workfn+0xaef/0xef0 fs/fs-writeback.c:2343
- process_one_work kernel/workqueue.c:3238 [inline]
- process_scheduled_works+0xae1/0x17b0 kernel/workqueue.c:3321
- worker_thread+0x8a0/0xda0 kernel/workqueue.c:3402
- kthread+0x711/0x8a0 kernel/kthread.c:464
- ret_from_fork+0x3fc/0x770 arch/x86/kernel/process.c:148
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
- </TASK>
-
-Showing all locks held in the system:
-1 lock held by khungtaskd/31:
- #0: ffffffff8e13ee20 (rcu_read_lock){....}-{1:3}, at: rcu_lock_acquire include/linux/rcupdate.h:331 [inline]
- #0: ffffffff8e13ee20 (rcu_read_lock){....}-{1:3}, at: rcu_read_lock include/linux/rcupdate.h:841 [inline]
- #0: ffffffff8e13ee20 (rcu_read_lock){....}-{1:3}, at: debug_show_all_locks+0x2e/0x180 kernel/locking/lockdep.c:6770
-2 locks held by getty/5577:
- #0: ffff8880343b20a0 (&tty->ldisc_sem){++++}-{0:0}, at: tty_ldisc_ref_wait+0x25/0x70 drivers/tty/tty_ldisc.c:243
- #1: ffffc9000332b2f0 (&ldata->atomic_read_lock){+.+.}-{4:4}, at: n_tty_read+0x43e/0x1400 drivers/tty/n_tty.c:2222
-4 locks held by kworker/u8:8/5978:
- #0: ffff888140a89948 ((wq_completion)writeback){+.+.}-{0:0}, at: process_one_work kernel/workqueue.c:3213 [inline]
- #0: ffff888140a89948 ((wq_completion)writeback){+.+.}-{0:0}, at: process_scheduled_works+0x9b4/0x17b0 kernel/workqueue.c:3321
- #1: ffffc900053efbc0 ((work_completion)(&(&wb->dwork)->work)){+.+.}-{0:0}, at: process_one_work kernel/workqueue.c:3214 [inline]
- #1: ffffc900053efbc0 ((work_completion)(&(&wb->dwork)->work)){+.+.}-{0:0}, at: process_scheduled_works+0x9ef/0x17b0 kernel/workqueue.c:3321
- #2: ffff88804c9700e0 (&type->s_umount_key#99){++++}-{4:4}, at: super_trylock_shared+0x20/0xf0 fs/super.c:563
- #3: ffff888077745410 (&sbi->gc_lock){+.+.}-{4:4}, at: f2fs_down_write fs/f2fs/f2fs.h:2229 [inline]
- #3: ffff888077745410 (&sbi->gc_lock){+.+.}-{4:4}, at: f2fs_issue_checkpoint+0x39c/0x570 fs/f2fs/checkpoint.c:1846
-6 locks held by syz.5.260/8622:
-
-=============================================
-
-NMI backtrace for cpu 0
-CPU: 0 UID: 0 PID: 31 Comm: khungtaskd Not tainted 6.16.0-rc4-syzkaller-00013-g66701750d556 #0 PREEMPT(full) 
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 05/07/2025
-Call Trace:
- <TASK>
- dump_stack_lvl+0x189/0x250 lib/dump_stack.c:120
- nmi_cpu_backtrace+0x39e/0x3d0 lib/nmi_backtrace.c:113
- nmi_trigger_cpumask_backtrace+0x17a/0x300 lib/nmi_backtrace.c:62
- trigger_all_cpu_backtrace include/linux/nmi.h:158 [inline]
- check_hung_uninterruptible_tasks kernel/hung_task.c:307 [inline]
- watchdog+0xfee/0x1030 kernel/hung_task.c:470
- kthread+0x711/0x8a0 kernel/kthread.c:464
- ret_from_fork+0x3fc/0x770 arch/x86/kernel/process.c:148
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
- </TASK>
-Sending NMI from CPU 0 to CPUs 1:
-NMI backtrace for cpu 1
-CPU: 1 UID: 0 PID: 78 Comm: kworker/u8:4 Not tainted 6.16.0-rc4-syzkaller-00013-g66701750d556 #0 PREEMPT(full) 
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 05/07/2025
-Workqueue: events_unbound nsim_dev_trap_report_work
-RIP: 0010:lockdep_enabled kernel/locking/lockdep.c:118 [inline]
-RIP: 0010:lock_acquire+0x8d/0x360 kernel/locking/lockdep.c:5847
-Code: f6 05 be ad eb 0d 01 0f 84 d7 01 00 00 83 3d 19 eb 01 0e 00 0f 84 f0 00 00 00 48 8b b4 24 90 00 00 00 4c 89 ef e8 43 5a 83 00 <83> 3d fc ea 01 0e 00 0f 84 fa 00 00 00 65 8b 05 ff de fb 10 85 c0
-RSP: 0018:ffffc9000210f3d8 EFLAGS: 00000202
-RAX: 0000000000000001 RBX: 0000000000000000 RCX: 5bd6d986281a0c00
-RDX: 0000000000000000 RSI: ffffffff81728b12 RDI: 1ffffffff1c27dc4
-RBP: ffffffff81728af5 R08: 0000000000000000 R09: 0000000000000000
-R10: ffffc9000210f5f8 R11: fffff52000421ec1 R12: 0000000000000002
-R13: ffffffff8e13ee20 R14: 0000000000000000 R15: 0000000000000000
-FS:  0000000000000000(0000) GS:ffff888125d84000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 0000563853e3a168 CR3: 0000000030b5e000 CR4: 00000000003526f0
-Call Trace:
- <TASK>
- rcu_lock_acquire include/linux/rcupdate.h:331 [inline]
- rcu_read_lock include/linux/rcupdate.h:841 [inline]
- class_rcu_constructor include/linux/rcupdate.h:1155 [inline]
- unwind_next_frame+0xc2/0x2390 arch/x86/kernel/unwind_orc.c:479
- __unwind_start+0x5b9/0x760 arch/x86/kernel/unwind_orc.c:758
- unwind_start arch/x86/include/asm/unwind.h:64 [inline]
- arch_stack_walk+0xe4/0x150 arch/x86/kernel/stacktrace.c:24
- stack_trace_save+0x9c/0xe0 kernel/stacktrace.c:122
- kasan_save_stack mm/kasan/common.c:47 [inline]
- kasan_save_track+0x3e/0x80 mm/kasan/common.c:68
- kasan_save_free_info+0x46/0x50 mm/kasan/generic.c:576
- poison_slab_object mm/kasan/common.c:247 [inline]
- __kasan_slab_free+0x62/0x70 mm/kasan/common.c:264
- kasan_slab_free include/linux/kasan.h:233 [inline]
- slab_free_hook mm/slub.c:2381 [inline]
- slab_free mm/slub.c:4643 [inline]
- kmem_cache_free+0x18f/0x400 mm/slub.c:4745
- nsim_dev_trap_report drivers/net/netdevsim/dev.c:821 [inline]
- nsim_dev_trap_report_work+0x7cf/0xb80 drivers/net/netdevsim/dev.c:851
- process_one_work kernel/workqueue.c:3238 [inline]
- process_scheduled_works+0xae1/0x17b0 kernel/workqueue.c:3321
- worker_thread+0x8a0/0xda0 kernel/workqueue.c:3402
- kthread+0x711/0x8a0 kernel/kthread.c:464
- ret_from_fork+0x3fc/0x770 arch/x86/kernel/process.c:148
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
- </TASK>
-
-
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Signed-off-by: Chao Yu <chao@kernel.org>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+v2:
+- allow to check mount options w/ zoned device
+ common/rc          |   3 +
+ tests/f2fs/015     | 159 ++++++++++++++++++++++++++++++++
+ tests/f2fs/015.out | 225 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 387 insertions(+)
+ create mode 100755 tests/f2fs/015
+ create mode 100644 tests/f2fs/015.out
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+diff --git a/common/rc b/common/rc
+index f71cc8f0..94fdce7e 100644
+--- a/common/rc
++++ b/common/rc
+@@ -844,6 +844,9 @@ _test_mkfs()
+     ext2|ext3|ext4)
+ 	$MKFS_PROG -t $FSTYP -- -F $MKFS_OPTIONS $* $TEST_DEV
+ 	;;
++    f2fs)
++	$MKFS_PROG -t $FSTYP -- -f $MKFS_OPTIONS $* $TEST_DEV
++	;;
+     xfs)
+ 	_test_options mkfs
+ 	$MKFS_PROG -t $FSTYP -- -f $TEST_OPTIONS $MKFS_OPTIONS $* $TEST_DEV
+diff --git a/tests/f2fs/015 b/tests/f2fs/015
+new file mode 100755
+index 00000000..746e79de
+--- /dev/null
++++ b/tests/f2fs/015
+@@ -0,0 +1,159 @@
++#! /bin/bash
++# SPDX-License-Identifier: GPL-2.0
++# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
++#
++# FS QA Test No. f2fs/015
++#
++# This testcase tries to check stability of mount result
++# w/ all f2fs supported mount option and their combination.
++#
++. ./common/preamble
++_begin_fstest auto quick
++_require_kernel_config CONFIG_F2FS_FS_XATTR
++_require_kernel_config CONFIG_F2FS_FS_POSIX_ACL
++_require_kernel_config CONFIG_F2FS_FAULT_INJECTION
++_require_kernel_config CONFIG_F2FS_FS_COMPRESSION
++_require_kernel_config CONFIG_F2FS_FS_LZO
++_require_kernel_config CONFIG_F2FS_FS_LZORLE
++_require_kernel_config CONFIG_F2FS_FS_LZ4
++_require_kernel_config CONFIG_F2FS_FS_LZ4HC
++_require_kernel_config CONFIG_F2FS_FS_ZSTD
++
++_require_zoned_device "$TEST_DEV"
++_test_unmount >> $seqres.full 2>&1
++
++options=(
++#	mount_option			mkfs_option
++	"background_gc=on"		""			\
++	"background_gc=off"		""			\
++	"background_gc=sync"		""			\
++	"background_gc=on"		"blkzone"		\
++	"background_gc=off"		"blkzone"		\
++	"background_gc=sync"		"blkzone"		\
++	"disable_roll_forward"		""			\
++	"norecovery"			""			\
++	"discard"			""			\
++	"nodiscard"			""			\
++	"no_heap"			""			\
++	"heap"				""			\
++	"user_xattr"			""			\
++	"nouser_xattr"			""			\
++	"acl"				""			\
++	"noacl"				""			\
++	"active_logs=2"			""			\
++	"active_logs=4"			""			\
++	"active_logs=6"			""			\
++	"disable_ext_identify"		""			\
++	"inline_xattr"			""			\
++	"noinline_xattr"		""			\
++	"inline_xattr_size=400"		"extra,flexible_inline_xattr"\
++	"inline_xattr_size=400"		""			\
++	"inline_data"			""			\
++	"noinline_dentry"		""			\
++	"inline_dentry"			""			\
++	"noinline_dentry"		""			\
++	"flush_merge"			""			\
++	"noflush_merge"			""			\
++	"barrier"			""			\
++	"nobarrier"			""			\
++	"fastboot"			""			\
++	"extent_cache"			""			\
++	"noextent_cache"		""			\
++	"data_flush"			""			\
++	"reserve_root=32768"		""			\
++	"resuid=1000"			""			\
++	"resgid=1000"			""			\
++	"fault_injection=100"		""			\
++	"fault_type=4095"		""			\
++	"mode=adaptive"			""			\
++	"mode=lfs"			""			\
++	"mode=fragment:segment"		""			\
++	"mode=fragment:block"		""			\
++	"mode=adaptive"			"blkzone"		\
++	"mode=lfs"			"blkzone"		\
++	"mode=fragment:segment"		"blkzone"		\
++	"mode=fragment:block"		"blkzone"		\
++	"usrquota"			""			\
++	"grpquota"			""			\
++	"prjquota"			""			\
++	"usrjquota=ausrquota"		""			\
++	"grpjquota=agrpquota"		""			\
++	"prjjquota=aprjquota"		""			\
++	"jqfmt=vfsold"			""			\
++	"jqfmt=vfsv0"			""			\
++	"jqfmt=vfsv1"			""			\
++	"usrjquota="			""			\
++	"grpjquota="			""			\
++	"prjjquota="			""			\
++	"quota"				""			\
++	"noquota"			""			\
++	"alloc_mode=reuse"		""			\
++	"alloc_mode=default"		""			\
++	"fsync_mode=posix"		""			\
++	"fsync_mode=strict"		""			\
++	"fsync_mode=nobarrier"		""			\
++	"test_dummy_encryption"		""			\
++	"test_dummy_encryption=v1"	""			\
++	"test_dummy_encryption=v2"	""			\
++	"checkpoint=enable"		""			\
++	"checkpoint=disable"		""			\
++	"checkpoint=disable:32768"	""			\
++	"checkpoint=disable:50%"	""			\
++	"checkpoint_merge"		""			\
++	"nocheckpoint_merge"		""			\
++	"compress_algorithm=lzo"	""			\
++	"compress_algorithm=lzo"	"extra,compression"	\
++	"compress_algorithm=lz4"	"extra,compression"	\
++	"compress_algorithm=zstd"	"extra,compression"	\
++	"compress_algorithm=lzo-rle"	"extra,compression"	\
++	"compress_algorithm=lz4:3"	"extra,compression"	\
++	"compress_algorithm=zstd:1"	"extra,compression"	\
++	"compress_log_size=8"		"extra,compression"	\
++	"compress_extension=so"		"extra,compression"	\
++	"nocompress_extension=so"	"extra,compression"	\
++	"nocompress_extension=*"	"extra,compression"	\
++	"compress_extension=so,nocompress_extension=so"		\
++					"extra,compression"	\
++	"compress_chksum"		"extra,compression"	\
++	"compress_mode=fs"		"extra,compression"	\
++	"compress_mode=user"		"extra,compression"	\
++	"compress_cache"		"extra,compression"	\
++	"inlinecrypt"			""			\
++	"atgc"				""			\
++	"discard_unit=block"		""			\
++	"discard_unit=segment"		""			\
++	"discard_unit=section"		""			\
++	"discard_unit=block"		"blkzone"		\
++	"discard_unit=segment"		"blkzone"		\
++	"discard_unit=section"		"blkzone"		\
++	"memory=normal"			""			\
++	"memory=low"			""			\
++	"age_extent_cache"		""			\
++	"errors=panic"			""			\
++	"errors=continue"		""			\
++	"errors=remount-ro"		""			\
++	"nat_bits"			""			\
++	"atgc,mode=lfs"			""			\
++	"ro,flush_merge"		""			\
++	"rw"				"ro"			\
++	"norecovery,ro"			""			\
++)
++
++for ((i=0;i<${#options[@]};i=i+2))
++do
++	echo "Option#$i: ${options[$i]} : ${options[$((i+1))]}"
++	if [ "${options[$((i+1))]}" == "blkzone" ]; then
++		_test_mkfs "-m" >> $seqres.full
++		_test_mount "-o ${options[$i]}" >> $seqres.full 2>&1
++		echo $?
++		_test_unmount >> $seqres.full 2>&1
++	else
++		_scratch_mkfs "-O ${options[$((i+1))]}" >> $seqres.full
++		_try_scratch_mount "-o ${options[$i]}" >> $seqres.full 2>&1
++		echo $?
++		_scratch_unmount >> $seqres.full 2>&1
++	fi
++done
++
++status=0
++exit
+diff --git a/tests/f2fs/015.out b/tests/f2fs/015.out
+new file mode 100644
+index 00000000..d7f4e62a
+--- /dev/null
++++ b/tests/f2fs/015.out
+@@ -0,0 +1,225 @@
++QA output created by 015
++Option#0: background_gc=on : 
++0
++Option#2: background_gc=off : 
++0
++Option#4: background_gc=sync : 
++0
++Option#6: background_gc=on : blkzone
++0
++Option#8: background_gc=off : blkzone
++32
++Option#10: background_gc=sync : blkzone
++0
++Option#12: disable_roll_forward : 
++0
++Option#14: norecovery : 
++32
++Option#16: discard : 
++0
++Option#18: nodiscard : 
++0
++Option#20: no_heap : 
++0
++Option#22: heap : 
++0
++Option#24: user_xattr : 
++0
++Option#26: nouser_xattr : 
++0
++Option#28: acl : 
++0
++Option#30: noacl : 
++0
++Option#32: active_logs=2 : 
++0
++Option#34: active_logs=4 : 
++0
++Option#36: active_logs=6 : 
++0
++Option#38: disable_ext_identify : 
++0
++Option#40: inline_xattr : 
++0
++Option#42: noinline_xattr : 
++0
++Option#44: inline_xattr_size=400 : extra,flexible_inline_xattr
++32
++Option#46: inline_xattr_size=400 : 
++32
++Option#48: inline_data : 
++0
++Option#50: noinline_dentry : 
++0
++Option#52: inline_dentry : 
++0
++Option#54: noinline_dentry : 
++0
++Option#56: flush_merge : 
++0
++Option#58: noflush_merge : 
++0
++Option#60: barrier : 
++0
++Option#62: nobarrier : 
++0
++Option#64: fastboot : 
++0
++Option#66: extent_cache : 
++0
++Option#68: noextent_cache : 
++0
++Option#70: data_flush : 
++0
++Option#72: reserve_root=32768 : 
++0
++Option#74: resuid=1000 : 
++0
++Option#76: resgid=1000 : 
++0
++Option#78: fault_injection=100 : 
++0
++Option#80: fault_type=4095 : 
++0
++Option#82: mode=adaptive : 
++0
++Option#84: mode=lfs : 
++0
++Option#86: mode=fragment:segment : 
++0
++Option#88: mode=fragment:block : 
++0
++Option#90: mode=adaptive : blkzone
++32
++Option#92: mode=lfs : blkzone
++0
++Option#94: mode=fragment:segment : blkzone
++32
++Option#96: mode=fragment:block : blkzone
++32
++Option#98: usrquota : 
++0
++Option#100: grpquota : 
++0
++Option#102: prjquota : 
++32
++Option#104: usrjquota=ausrquota : 
++32
++Option#106: grpjquota=agrpquota : 
++32
++Option#108: prjjquota=aprjquota : 
++32
++Option#110: jqfmt=vfsold : 
++0
++Option#112: jqfmt=vfsv0 : 
++0
++Option#114: jqfmt=vfsv1 : 
++0
++Option#116: usrjquota= : 
++0
++Option#118: grpjquota= : 
++0
++Option#120: prjjquota= : 
++0
++Option#122: quota : 
++0
++Option#124: noquota : 
++0
++Option#126: alloc_mode=reuse : 
++0
++Option#128: alloc_mode=default : 
++0
++Option#130: fsync_mode=posix : 
++0
++Option#132: fsync_mode=strict : 
++0
++Option#134: fsync_mode=nobarrier : 
++0
++Option#136: test_dummy_encryption : 
++32
++Option#138: test_dummy_encryption=v1 : 
++32
++Option#140: test_dummy_encryption=v2 : 
++32
++Option#142: checkpoint=enable : 
++0
++Option#144: checkpoint=disable : 
++0
++Option#146: checkpoint=disable:32768 : 
++0
++Option#148: checkpoint=disable:50% : 
++0
++Option#150: checkpoint_merge : 
++0
++Option#152: nocheckpoint_merge : 
++0
++Option#154: compress_algorithm=lzo : 
++0
++Option#156: compress_algorithm=lzo : extra,compression
++0
++Option#158: compress_algorithm=lz4 : extra,compression
++0
++Option#160: compress_algorithm=zstd : extra,compression
++0
++Option#162: compress_algorithm=lzo-rle : extra,compression
++0
++Option#164: compress_algorithm=lz4:3 : extra,compression
++0
++Option#166: compress_algorithm=zstd:1 : extra,compression
++0
++Option#168: compress_log_size=8 : extra,compression
++0
++Option#170: compress_extension=so : extra,compression
++0
++Option#172: nocompress_extension=so : extra,compression
++0
++Option#174: nocompress_extension=* : extra,compression
++0
++Option#176: compress_extension=so,nocompress_extension=so : extra,compression
++0
++Option#178: compress_chksum : extra,compression
++0
++Option#180: compress_mode=fs : extra,compression
++0
++Option#182: compress_mode=user : extra,compression
++0
++Option#184: compress_cache : extra,compression
++0
++Option#186: inlinecrypt : 
++0
++Option#188: atgc : 
++0
++Option#190: discard_unit=block : 
++0
++Option#192: discard_unit=segment : 
++0
++Option#194: discard_unit=section : 
++0
++Option#196: discard_unit=block : blkzone
++0
++Option#198: discard_unit=segment : blkzone
++0
++Option#200: discard_unit=section : blkzone
++0
++Option#202: memory=normal : 
++0
++Option#204: memory=low : 
++0
++Option#206: age_extent_cache : 
++0
++Option#208: errors=panic : 
++0
++Option#210: errors=continue : 
++0
++Option#212: errors=remount-ro : 
++0
++Option#214: nat_bits : 
++0
++Option#216: atgc,mode=lfs : 
++32
++Option#218: ro,flush_merge : 
++32
++Option#220: rw : ro
++0
++Option#222: norecovery,ro : 
++0
+-- 
+2.49.0
 
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
 
 
 _______________________________________________
