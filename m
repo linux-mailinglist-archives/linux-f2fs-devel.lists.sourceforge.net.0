@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 901D5AF8D27
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Jul 2025 11:02:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5206AF8D74
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Jul 2025 11:05:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=iHnSrF2yu5LRxrXX8XBVyIH3+ytU/PkXcrK0zF4BqRw=; b=ANxe6WXXOgksy/L5+CLDEFHLmj
-	cxYiU4MCZT1yItPujqe3S4D93fraU4lDOSgdqVB5PILDIRqnnobkrbiNS2/jppkj0S2OuthyvuQx8
-	rvn0tStfPzEiUuN5kX8O8onzfcfskk/2qr7yweu3nFRk06l9kwiz5dAqEbyc9WYyFgZ8=;
+	bh=+kdknKHkYBFKPKnzVdyiQwAOZEDrDqR3YcVMpxbPhEE=; b=kE8MkflFC3YwkWipjfz/xY+K95
+	9X6A3VI0AD4Zm3DHf+ZjHL4f4aJEWgrgnaqLzNQ+ALx2JoRFOnhmi5No8CBW4KxNasMwETuAOV84s
+	BrtvoPuv5AZQXRtrUTIM8InLpt51GCc/n5UQtsDwdGiiy8/PsmlUzxRFfNetwBy6njC0=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uXcIv-0003iq-40;
-	Fri, 04 Jul 2025 09:01:57 +0000
+	id 1uXcMV-0003rz-SO;
+	Fri, 04 Jul 2025 09:05:39 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jack@suse.cz>) id 1uXcIu-0003ii-Dk
+ (envelope-from <jack@suse.cz>) id 1uXcMU-0003rt-Je
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Jul 2025 09:01:56 +0000
+ Fri, 04 Jul 2025 09:05:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=klCPX8FEQ9bESH7wRiQJpDJDT+H9D/V7BJHBzZig22s=; b=Y27Aj1Y0dM/y1VyoVsaQdRbpux
- KE8c+N6WW9AB26snOReyVYRKUaWDSB7v6hxilvDrQfmTfbQwkLUB9oZj/N4IBRF3J1OFMOtE2WTFb
- hOXHgJ/ijtu6U1oqzalqR1hY1z9Z3W0PNHIm1YX5JUvgV+c3iI3onLot3KIvqS996FZE=;
+ bh=Om6I5tFyyfcVPangDfbiEU+nIPjPaTL8L4plfMPqXn8=; b=MikXtPAWs9HyDmKSRO4FncPnWJ
+ SGoAgbwLPZt+1XQqcN3CxIHluRCwsAui7k7DsZr6Feaf/UPXosR22m1vKeaFvilii/V5KmE7PXQOj
+ ONWEdt1UuqFn9x7ye99Jf3j3KFwYTS9CJXLdaHqid0a3xNthgGzvfmVqVTTLpB9uwKPc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -40,100 +40,89 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=klCPX8FEQ9bESH7wRiQJpDJDT+H9D/V7BJHBzZig22s=; b=Bxy5b+YkrJbFkpzfah0drQYGIb
- GmhM7Mluel0CqnjQCw2gciNdLJf0KfpNlXlNEC0VYgfx6lOeNAEsm3Ao7tHXMVOHSRxCPnwe/h0IK
- wHNeKdRelGd5ZAd5yw8GEs/XuIWb8omzJldcVDznamSXaS/yvv6qN5kmcmvlLfAEa3zc=;
-Received: from smtp-out2.suse.de ([195.135.223.131])
+ bh=Om6I5tFyyfcVPangDfbiEU+nIPjPaTL8L4plfMPqXn8=; b=JMsknVO4g3S96VDepF9Jewfvhj
+ +YkQPo4rTl6EhedmBEGlsv1BVQXG76iOx5DvOieW8p7w2D0JOgSCNIQQVUCodpMOWqgUlNbXqUN4S
+ bxcH5mcZU3ace5Mlahbg7I0UCdWfDfAUGUGdLNxRgLXBHesOlsCoTTOCrHA6JJJnY+LY=;
+Received: from smtp-out1.suse.de ([195.135.223.130])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uXcIr-0003l5-WA for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Jul 2025 09:01:55 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ id 1uXcMT-00047V-9d for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 04 Jul 2025 09:05:38 +0000
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 776331F45F;
- Fri,  4 Jul 2025 09:01:45 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id C048D21185;
+ Fri,  4 Jul 2025 09:05:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1751619707; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1751619931; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=klCPX8FEQ9bESH7wRiQJpDJDT+H9D/V7BJHBzZig22s=;
- b=JDEp9LarvbP3j8qTU+Ui2y9OnrA2t4axLIQGwAiB00TPeDq4xH3pGjHYWx5Er+Cc9QYVGE
- Slbf5jdgGMkc+z+V207yzcEbE5YDookhQqXPDri2/4JJjGF2c0MQrPP4sFEVljn9OiRZ8j
- qlKb/9WiP9IBvwP07pveq+ONrOSoa+A=
+ bh=Om6I5tFyyfcVPangDfbiEU+nIPjPaTL8L4plfMPqXn8=;
+ b=qfBb4+sHK9BfeeWcUjfD5mRPSdttXFRP64KYHtqu+d0Q472yOpgmCOkOrfJ1UgFQBGZHV5
+ OYusvWl+4kvunMmtGzU8NBtDoWEMYAFHmJdnazWbJ0FcpYGBiV30EznAdAyKxRyElrfMjD
+ 1Zqhd4b3zVLE67rnzr8Gue23N6nz4IM=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1751619707;
+ s=susede2_ed25519; t=1751619931;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=klCPX8FEQ9bESH7wRiQJpDJDT+H9D/V7BJHBzZig22s=;
- b=DIX/IeanBdqmsRfDI5lCQPoqCimaBwELp0Pm2Wi8YlKVhxv6fbD/tK3IuI8ji6NgJl07BS
- 7UqKPVlWIZO8C9Aw==
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=BK89fQ1K;
- dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=r0pU6kkZ
+ bh=Om6I5tFyyfcVPangDfbiEU+nIPjPaTL8L4plfMPqXn8=;
+ b=NM9DKMq5jHqAwl6hKHyll9FNBaFPMblKpdnWRn3dxhn/RQqvOGBnR42lfm3ngX91BzRweD
+ THSzZ6RUelehQfAQ==
+Authentication-Results: smtp-out1.suse.de;
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1751619705; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1751619929; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=klCPX8FEQ9bESH7wRiQJpDJDT+H9D/V7BJHBzZig22s=;
- b=BK89fQ1KKyn6VIooyqcv2NiR2kkmEa/pbXyajf29WEW6i3tGoKUsMESTjvpEi1Bzpedbl0
- FvffnEVq6G8HvTdiaF+pruCPqy4YHWfO85KJd0P7e5ACPDdIQ/zR9TXTZd36r0HCcia+f1
- JL680t2cBl5xD/BiaiYmdqZb3bKJDJ4=
+ bh=Om6I5tFyyfcVPangDfbiEU+nIPjPaTL8L4plfMPqXn8=;
+ b=vDHsu56aBWMos2GEDefWTDa1hJ4vdTD/vFFqfy0jbznRGu6ZxhpsLzK6J9A2RnlUC8+oci
+ +lFT4zi7SnLsFdVEHt6jVYYq5rD1F7/PyAn3Y8b66ojk14Ijjv8SAjSNwcAXi3D5hisHhH
+ hqj5gayWwu/9zGgCFuj6ATx8JXyrFC8=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1751619705;
+ s=susede2_ed25519; t=1751619929;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=klCPX8FEQ9bESH7wRiQJpDJDT+H9D/V7BJHBzZig22s=;
- b=r0pU6kkZWEyLCCvZgbSDa3IsUeo8ZYUS+vC5k16JswCczrnhvvEYIMIwt2aU7Eqs8R8Z/a
- LYglozYPOE6gNhDg==
+ bh=Om6I5tFyyfcVPangDfbiEU+nIPjPaTL8L4plfMPqXn8=;
+ b=jEFmAHHOjAnGAPIJL648yH8UYVIw7cG7M41c2+nXbcEkuLgbd3nrWV4Bcgq3KltDpPS/Vl
+ 7pA57YOx0PTfq5Bg==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 666A913757;
- Fri,  4 Jul 2025 09:01:45 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 9CCFB13757;
+ Fri,  4 Jul 2025 09:05:29 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id rJfxGHmYZ2jzHQAAD6G6ig
- (envelope-from <jack@suse.cz>); Fri, 04 Jul 2025 09:01:45 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id axZDJlmZZ2gGHwAAD6G6ig
+ (envelope-from <jack@suse.cz>); Fri, 04 Jul 2025 09:05:29 +0000
 Received: by quack3.suse.cz (Postfix, from userid 1000)
- id 12FA0A0A31; Fri,  4 Jul 2025 11:01:45 +0200 (CEST)
-Date: Fri, 4 Jul 2025 11:01:45 +0200
+ id 4770BA0A31; Fri,  4 Jul 2025 11:05:25 +0200 (CEST)
+Date: Fri, 4 Jul 2025 11:05:25 +0200
 From: Jan Kara <jack@suse.cz>
 To: Qu Wenruo <wqu@suse.com>
-Message-ID: <6iyypjlrkkmh77w2bxujl2j6jesbholmg42tuvxwu6kypssugb@qlfu4ci5zesa>
-References: <cover.1751577459.git.wqu@suse.com>
- <cbe06b06a2fe4c4e0c90fc86503efc06080e6bc8.1751577459.git.wqu@suse.com>
+Message-ID: <3koe4okqyngnl3djuj46xz5jk2hbwnsukmwn4wwpgf3nebn3uh@uxaot4z2wdgc>
+References: <cover.1751589725.git.wqu@suse.com>
+ <de25bbdb572c75df38b1002d3779bf19e3ad0ff6.1751589725.git.wqu@suse.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <cbe06b06a2fe4c4e0c90fc86503efc06080e6bc8.1751577459.git.wqu@suse.com>
-X-Spamd-Result: default: False [-4.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+In-Reply-To: <de25bbdb572c75df38b1002d3779bf19e3ad0ff6.1751589725.git.wqu@suse.com>
+X-Spamd-Result: default: False [-3.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
  NEURAL_HAM_LONG(-1.00)[-1.000]; MID_RHS_NOT_FQDN(0.50)[];
- R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; FUZZY_RATELIMITED(0.00)[rspamd.com];
- RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.cz:email,suse.cz:dkim,suse.com:email];
- MIME_TRACE(0.00)[0:+]; MISSING_XM_UA(0.00)[];
- TO_DN_SOME(0.00)[];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- RCVD_COUNT_THREE(0.00)[3];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ NEURAL_HAM_SHORT(-0.20)[-0.998]; MIME_GOOD(-0.10)[text/plain];
+ ARC_NA(0.00)[]; FROM_HAS_DN(0.00)[]; MISSING_XM_UA(0.00)[];
+ MIME_TRACE(0.00)[0:+]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ FUZZY_RATELIMITED(0.00)[rspamd.com]; RCVD_COUNT_THREE(0.00)[3];
+ TO_DN_SOME(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
  RCPT_COUNT_SEVEN(0.00)[10]; TO_MATCH_ENVRCPT_ALL(0.00)[];
  DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
  RCVD_TLS_LAST(0.00)[];
- DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from];
- DKIM_TRACE(0.00)[suse.cz:+]
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo, suse.com:email,
+ suse.cz:email]
 X-Spam-Flag: NO
 X-Spam-Level: 
-X-Rspamd-Queue-Id: 776331F45F
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Spam-Score: -4.01
+X-Spam-Score: -3.80
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -141,9 +130,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri 04-07-25 09:12:14, Qu Wenruo wrote: > Currently all
- the filesystems implementing the > super_opearations::shutdown() call back
- can not afford losing a device. > > Thus fs_bdev_mark_dead() will [...] 
+ Content preview:  OK, now that you've made me read the changelog :) : On Fri
+ 04-07-25 10:12:29,
+ Qu Wenruo wrote: > Currently all the filesystems implementing
+ the > super_opearations::shutdown() callback can not afford losing a device.
+ ^^^ operations 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -154,8 +145,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1uXcIr-0003l5-WA
-Subject: Re: [f2fs-dev] [PATCH v3 1/6] fs: enhance and rename shutdown()
+X-Headers-End: 1uXcMT-00047V-9d
+Subject: Re: [f2fs-dev] [PATCH v4 1/6] fs: enhance and rename shutdown()
  callback to remove_bdev()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -176,10 +167,13 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri 04-07-25 09:12:14, Qu Wenruo wrote:
+OK, now that you've made me read the changelog :) :
+
+On Fri 04-07-25 10:12:29, Qu Wenruo wrote:
 > Currently all the filesystems implementing the
-> super_opearations::shutdown() call back can not afford losing a device.
-> 
+> super_opearations::shutdown() callback can not afford losing a device.
+        ^^^ operations
+
 > Thus fs_bdev_mark_dead() will just call the shutdown() callback for the
 > involved filesystem.
 > 
@@ -190,22 +184,20 @@ On Fri 04-07-25 09:12:14, Qu Wenruo wrote:
 > To allow those multi-device filesystems to be integrated to use
 > fs_holder_ops:
 > 
-> - Rename shutdown() call back to remove_bdev()
->   To better describe when the call back is called.
+> - Replace super_opearation::shutdown() with
+>   super_opearations::remove_bdev()
+    ^^ again typos in work "operations"
+
+>   To better describe when the callback is called.
 > 
 > - Add a new @bdev parameter to remove_bdev() callback
 >   To allow the fs to determine which device is missing, and do the
 >   proper handling when needed.
 > 
 > For the existing shutdown callback users, the change is minimal.
-> 
 > They only need to follow the rename and the new parameter list.
-> Since the behavior is still to shutdown the fs, they shouldn't change
-> their function names.
-> 
-> This has a good side effect that, a single line like
-> ".remove_bdev = ext4_shutdown," will easily show the fs behavior and
-> indicate the fs will shutdown when a device went missing.
+> The new @bdev parameter can be ignored if the filesystem can not afford
+> losing any device, and continue using the old shutdown behavior.
 > 
 > Btrfs is going to implement the callback soon, which will either
 > shutdown the fs or continue read-write operations.
@@ -217,7 +209,7 @@ On Fri 04-07-25 09:12:14, Qu Wenruo wrote:
 > Cc: linux-xfs@vger.kernel.org
 > Signed-off-by: Qu Wenruo <wqu@suse.com>
 
-Looks good. Feel free to add:
+Still feel free to add:
 
 Reviewed-by: Jan Kara <jack@suse.cz>
 
