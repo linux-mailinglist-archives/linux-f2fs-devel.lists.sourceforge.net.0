@@ -2,107 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5339AFAD11
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Jul 2025 09:29:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B34E4AFAF14
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Jul 2025 11:01:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:Cc:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=vEvqBs1sKV8vT4ueG+CNaXrUeyG05IoVdaa/tPhAdN0=; b=nQbEs/AujnXZZRbAJFAeomKxQW
-	xbZzPsuyYSc3QxgG3jWusSQA7sHca9utvHgWHpvD9frfivJmUYCmc469nzzKIxufvsj2dAo2oHikw
-	9FqIj1F6Rrg8DJGYXGqFPlLco9AMjmo2FT1U6Ph2jBIFU9w3YurKWv3HyS5v5DHq5z4Q=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=6WCUpWxd9AIz7cPwF9srqKv60/Uj6eUu27jIIZeDz3Y=; b=CEPlLidZxlCiLTTOsLU2lA0+Yy
+	qZNFSfze1Jzi/nL9x4lp0EXOMrl6F3ofkOV+fc4M9xwusqSOQ1Zq25NMWd4pdhYnA29GBe98v2cCf
+	c1MjCdzb1RwySXLh7RQoAIXQ7E9TL+arX1ylKCuXX9BrmjMhN4tTAonIBo5sr3h7NAeQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uYgHs-0003lE-0G;
-	Mon, 07 Jul 2025 07:29:16 +0000
+	id 1uYhio-0007cw-8G;
+	Mon, 07 Jul 2025 09:01:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1uYgH0-0003kB-Qd
+ (envelope-from <chao@kernel.org>) id 1uYhil-0007cm-BD
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Jul 2025 07:28:22 +0000
+ Mon, 07 Jul 2025 09:01:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7MLBWyw9E58ilzdyJHyliEjyuYclflFuRmJhEAcspc0=; b=hUNdpvX6axn6eWVGJ4U2OOMW+l
- EkS8KRTPexlNjn+eW7xOEQnsM8pllZMiQzXbRFuB0RkQ9ZrLg4eiX9lhCxj3/MsxqeFAixF+o6p4X
- qC8yttbOwKpwsO4iHjaUYubq8XhkisG2qiSL05U7bBonshgnaPUOsaSQ3KrhWgjn4zws=;
+ bh=C/Js62h8Nfna2rujiHmku2MqMYVz6YwpLm4eLoCuy48=; b=YNSzFrr7NdMo0bMSr0PDBEhG9T
+ XWiNvzvJI4gPtYV1xQrJWcMAeF1DyrUfEeDOH/en5VXcEE14cz9qKXMSF/I81o7xcqqxUu0TuTBt0
+ 8+yX/gSDtN0s8UXWPI1ceVFhbpbWIGKLHLnDWZ7HzDRHqS8A8fl57oVI7wxcWE8UO7Ec=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
- Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=7MLBWyw9E58ilzdyJHyliEjyuYclflFuRmJhEAcspc0=; b=M
- NWI1kT+olTyrefzLeLx1Oa6C00hDmIlcZiRgr8vNoh7coNejOvJl4mLzMnihlh0p/dbt6Vf0DqYrk
- PZdBsHJq7MorfR0g129Nn+T5Gn7JqEFt2UvdgpprEDnYTWEYZdg1u6I7uGeMc5hwejYsbxVbYoGIO
- LkibXNLvjobMk33w=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=C/Js62h8Nfna2rujiHmku2MqMYVz6YwpLm4eLoCuy48=; b=RD4oK/5o7oT2rMa3z1QB98q9k5
+ J6Nwtxmtd6I37+ugfsmbPUYbjfHYwAJM00rXeppG+/H/7MnobXd6i+Jmx1GYmObF0RomdwV7nl+m1
+ UC81/zp9P1G9tBjFyravjOAy6e/LgxCr0BfGXC5DJktP6J4b/FoNFfUvBuJtkjCYCQVs=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uYgH0-0007lC-AH for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Jul 2025 07:28:22 +0000
+ id 1uYhih-0001nk-1r for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 07 Jul 2025 09:01:07 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id ECD2D4504A
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  7 Jul 2025 07:28:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id CE122C4CEE3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  7 Jul 2025 07:28:16 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 579D361130;
+ Mon,  7 Jul 2025 09:00:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5B20C4CEE3;
+ Mon,  7 Jul 2025 09:00:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1751873296;
- bh=VE2olt0Li8xoaPTEInpdTnvl+ThF5R2yOB8KGjzzObg=;
- h=From:To:Subject:Date:From;
- b=RXVT1mqPdMLfpg2SGnAoUSOnXzEHPgS4kUihy5/tv4WKxul3oKmaVlDbcjyGctMbR
- HptfScsyilPlmqK1Lgtfw8N+wo2yLv65gxtueZW0J3SvpnczkDEm4OR8xYiRUZlbJe
- MBQAkcJ944TN+IqLcI5KLyYGNAouJhsxQlpn5B/l7vmdzvkN6L0BvxCCU49EfMYGAl
- +B7KCzdUCMHT17Bp/WB5XQ3s2fXFLD/l/9ytrH6CwcphT4ATqwWSwYKHsiptJgIZRH
- 2vzg8n+dqhScMa/gY1bINcNsD25GKi+XEkEUTukJZgLLEdgvewYVEWPijeI/aUhBgG
- /uNji+HhXsdgg==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id BB4D6C4160E; Mon,  7 Jul 2025 07:28:16 +0000 (UTC)
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 07 Jul 2025 07:28:16 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: new
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: hy50.seo@samsung.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P3
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
- op_sys bug_status bug_severity priority component assigned_to reporter
- cf_regression
-Message-ID: <bug-220321-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1751878852;
+ bh=Xv2rJSzNJSj3ggO0CjQWx5YrkQKIOumkNOeWyfujl6U=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=Q7rvgb0ZDYxDs+MhJE5qQnxDygNIk7/Ew6loXJCOt6QIpguI9lAQU5LxE1gFbjQp4
+ U+qdYz2TZg/J2cENyL8d3leARO9h956rdYhiNFslCjWOSIHjzvFNilzg/TjcUzDCYR
+ Mg20CUm682MyeSGjUgcyQk5wHHrkRHANtsn8E5POVdS1ujmYNzfElo+LWsySD7G6dd
+ Gk0oVVGCoiU/DzLdEtIA+vLRkyeNZLDn93BP4Ob4tnLUd+HYEcMVP+8vEEpv3CHLB5
+ 0upVi+gr5CPpX9Pok5PJXYvxGx/lrTAl3SRmFekciWlY8O9pYfw8hoY3/280sp0ZfV
+ PgAuUAbXjAKGQ==
+Message-ID: <d7331a1b-cfa1-4689-8781-59d1ed12954f@kernel.org>
+Date: Mon, 7 Jul 2025 17:00:48 +0800
 MIME-Version: 1.0
-X-Spam-Score: -0.3 (/)
+User-Agent: Mozilla Thunderbird
+To: Zorro Lang <zlang@redhat.com>
+References: <20250702110204.1063796-1-chao@kernel.org>
+ <20250704181044.5v5a3xxv5dixd43a@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+Content-Language: en-US
+In-Reply-To: <20250704181044.5v5a3xxv5dixd43a@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=220321 Bug ID:
- 220321 Summary: F2FS: workqueue: WQ_MEM_RECLAIM writeback:wb_workfn is
- flushing
- !WQ_MEM_RECLAIM events_unbound:quota_release_workfn Product: File System
- Version: 2.5 Hardware: ARM OS: Linux S [...] 
- Content analysis details:   (-0.3 points, 5.0 required)
+ Content preview:  On 7/5/25 02:10, Zorro Lang wrote: > On Wed, Jul 02, 2025
+ at 07:02:04PM +0800, Chao Yu wrote: >> As f2fs changes to use new mount APIs, 
+ let's add a new testcase >> to check mount result for all f2fs s [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -112,11 +92,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uYgH0-0007lC-AH
-Subject: [f2fs-dev] [Bug 220321] New: F2FS: workqueue: WQ_MEM_RECLAIM
- writeback:wb_workfn is flushing !WQ_MEM_RECLAIM
- events_unbound:quota_release_workfn
+X-Headers-End: 1uYhih-0001nk-1r
+Subject: Re: [f2fs-dev] [PATCH] f2fs/015: test mount options
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -128,110 +105,426 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: bugzilla-daemon--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: bugzilla-daemon@kernel.org
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=220321
+On 7/5/25 02:10, Zorro Lang wrote:
+> On Wed, Jul 02, 2025 at 07:02:04PM +0800, Chao Yu wrote:
+>> As f2fs changes to use new mount APIs, let's add a new testcase
+>> to check mount result for all f2fs supported mount options and
+>> their combinations, in order to detect any inconsistency during
+>> mount.
+>>
+>> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>>  tests/f2fs/015     | 141 ++++++++++++++++++++++++++++++
+>>  tests/f2fs/015.out | 207 +++++++++++++++++++++++++++++++++++++++++++++
+>>  2 files changed, 348 insertions(+)
+>>  create mode 100755 tests/f2fs/015
+>>  create mode 100644 tests/f2fs/015.out
+>>
+>> diff --git a/tests/f2fs/015 b/tests/f2fs/015
+>> new file mode 100755
+>> index 00000000..86f0ef9e
+>> --- /dev/null
+>> +++ b/tests/f2fs/015
+>> @@ -0,0 +1,141 @@
+>> +#! /bin/bash
+>> +# SPDX-License-Identifier: GPL-2.0
+>> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
+>> +#
+>> +# FS QA Test No. f2fs/015
+>> +#
+>> +# This testcase tries to check stability of mount result
+>> +# w/ all f2fs supported mount option and their combination.
+>> +#
+>> +. ./common/preamble
+>> +_begin_fstest auto quick
+>                             ^^^^^
+> 			    mount
 
-            Bug ID: 220321
-           Summary: F2FS: workqueue: WQ_MEM_RECLAIM writeback:wb_workfn is
-                    flushing !WQ_MEM_RECLAIM
-                    events_unbound:quota_release_workfn
-           Product: File System
-           Version: 2.5
-          Hardware: ARM
-                OS: Linux
-            Status: NEW
-          Severity: normal
-          Priority: P3
-         Component: f2fs
-          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
-          Reporter: hy50.seo@samsung.com
-        Regression: No
+Will update.
 
-https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/fs/f2fs/super.c?h=v6.12.36
+> 
+>> +_require_kernel_config CONFIG_F2FS_FS_XATTR
+>> +_require_kernel_config CONFIG_F2FS_FS_POSIX_ACL
+>> +_require_kernel_config CONFIG_F2FS_FAULT_INJECTION
+>> +_require_kernel_config CONFIG_F2FS_FS_COMPRESSION
+>> +_require_kernel_config CONFIG_F2FS_FS_LZO
+>> +_require_kernel_config CONFIG_F2FS_FS_LZORLE
+>> +_require_kernel_config CONFIG_F2FS_FS_LZ4
+>> +_require_kernel_config CONFIG_F2FS_FS_LZ4HC
+>> +_require_kernel_config CONFIG_F2FS_FS_ZSTD
+> 
+> Hmm... I think these requirements might cause this test case be _notrun
+> from lots of Linux distributions, except the kernel is built for testing
+> manually :)
 
-The panic_on_warn occurred using UFS device test app with high probability.
+Yeah, but this testcase just relies on those options, and it will be
+too trivial to split them to separated testcases? :P
 
-Occurs when putting the 'quota_release_work' into the workqueue.
-The 'quota_release_work' uses 'system_unbound_wq', but WQ_MEM_RECLAIM flag is
-not used when creating.
+> 
+>> +_require_scratch
+>> +
+>> +options=(
+>> +#	mount_option			mkfs_option
+>> +	"background_gc=on"		""			\
+>> +	"background_gc=off"		""			\
+>> +	"background_gc=off"		""			\
+>> +	"background_gc=sync"		""			\
+>> +	"disable_roll_forward"		""			\
+>> +	"norecovery"			""			\
+>> +	"discard"			""			\
+>> +	"nodiscard"			""			\
+>> +	"no_heap"			""			\
+>> +	"heap"				""			\
+>> +	"user_xattr"			""			\
+>> +	"nouser_xattr"			""			\
+>> +	"acl"				""			\
+>> +	"noacl"				""			\
+>> +	"active_logs=2"			""			\
+>> +	"active_logs=4"			""			\
+>> +	"active_logs=6"			""			\
+>> +	"disable_ext_identify"		""			\
+>> +	"inline_xattr"			""			\
+>> +	"noinline_xattr"		""			\
+>> +	"inline_xattr_size=400"		"extra,flexible_inline_xattr"\
+>> +	"inline_xattr_size=400"		""			\
+>> +	"inline_data"			""			\
+>> +	"noinline_dentry"		""			\
+>> +	"inline_dentry"			""			\
+>> +	"noinline_dentry"		""			\
+>> +	"flush_merge"			""			\
+>> +	"noflush_merge"			""			\
+>> +	"barrier"			""			\
+>> +	"nobarrier"			""			\
+>> +	"fastboot"			""			\
+>> +	"extent_cache"			""			\
+>> +	"noextent_cache"		""			\
+>> +	"data_flush"			""			\
+>> +	"reserve_root=32768"		""			\
+>> +	"resuid=1000"			""			\
+>> +	"resgid=1000"			""			\
+>> +	"fault_injection=100"		""			\
+>> +	"fault_type=4095"		""			\
+>> +	"mode=adaptive"			""			\
+>> +	"mode=lfs"			""			\
+>> +	"mode=fragment:segment"		""			\
+>> +	"mode=fragment:block"		""			\
+>> +	"usrquota"			""			\
+>> +	"grpquota"			""			\
+>> +	"prjquota"			""			\
+>> +	"usrjquota=ausrquota"		""			\
+>> +	"grpjquota=agrpquota"		""			\
+>> +	"prjjquota=aprjquota"		""			\
+>> +	"jqfmt=vfsold"			""			\
+>> +	"jqfmt=vfsv0"			""			\
+>> +	"jqfmt=vfsv1"			""			\
+>> +	"usrjquota="			""			\
+>> +	"grpjquota="			""			\
+>> +	"prjjquota="			""			\
+>> +	"quota"				""			\
+>> +	"noquota"			""			\
+>> +	"alloc_mode=reuse"		""			\
+>> +	"alloc_mode=default"		""			\
+>> +	"fsync_mode=posix"		""			\
+>> +	"fsync_mode=strict"		""			\
+>> +	"fsync_mode=nobarrier"		""			\
+>> +	"test_dummy_encryption"		""			\
+>> +	"test_dummy_encryption=v1"	""			\
+>> +	"test_dummy_encryption=v2"	""			\
+>> +	"checkpoint=enable"		""			\
+>> +	"checkpoint=disable"		""			\
+>> +	"checkpoint=disable:32768"	""			\
+>> +	"checkpoint=disable:50%"	""			\
+>> +	"checkpoint_merge"		""			\
+>> +	"nocheckpoint_merge"		""			\
+>> +	"compress_algorithm=lzo"	""			\
+>> +	"compress_algorithm=lzo"	"extra,compression"	\
+>> +	"compress_algorithm=lz4"	"extra,compression"	\
+>> +	"compress_algorithm=zstd"	"extra,compression"	\
+>> +	"compress_algorithm=lzo-rle"	"extra,compression"	\
+>> +	"compress_algorithm=lz4:3"	"extra,compression"	\
+>> +	"compress_algorithm=ztsd:1"	"extra,compression"	\
+>> +	"compress_log_size=8"		"extra,compression"	\
+>> +	"compress_extension=so"		"extra,compression"	\
+>> +	"nocompress_extension=so"	"extra,compression"	\
+>> +	"nocompress_extension=*"	"extra,compression"	\
+>> +	"compress_extension=so,nocompress_extension=so"		\
+>> +					"extra,compression"	\
+>> +	"compress_chksum"		"extra,compression"	\
+>> +	"compress_mode=fs"		"extra,compression"	\
+>> +	"compress_mode=user"		"extra,compression"	\
+>> +	"compress_cache"		"extra,compression"	\
+>> +	"inlinecrypt"			""			\
+>> +	"atgc"				""			\
+>> +	"discard_unit=block"		""			\
+>> +	"discard_unit=segment"		""			\
+>> +	"discard_unit=section"		""			\
+>> +	"memory=normal"			""			\
+>> +	"memory=low"			""			\
+>> +	"age_extent_cache"		""			\
+>> +	"errors=panic"			""			\
+>> +	"errors=continue"		""			\
+>> +	"errors=remount-ro"		""			\
+>> +	"nat_bits"			""			\
+>> +	"atgc,mode=lfs"			""			\
+>> +	"ro,flush_merge"		""			\
+>> +	"rw"				"ro"			\
+>> +	"norecovery,ro"			""			\
+>> +)
+>> +
+>> +for ((i=0;i<${#options[@]};i=i+2))
+>> +do
+>> +	echo "Option#$i: ${options[$i]} : ${options[$((i+1))]}"
+>> +	_scratch_mkfs "-O ${options[$((i+1))]}" >> $seqres.full
+> 
+> _scratch_mkfs just return non-zero if it fails, so...
 
-Therefore, before adding the 'quota_release_work' to the work queue, check the
-previously operated work queue, which seems to have been created using the
-WQ_MEM_RECLAIM flag.
-Previouse work queue is 'writeback:wb_workfn'.
-So occurred below the problem.
+Oh, thanks for your reminder, I guess we need to stop here if mkfs
+fails.
 
-When using a work queue, it seems like you should use a work queue with
-'WQ_MEM_RECLAIM' instead of system_unbound_wq.
+Thanks,
+
+> 
+>> +	_try_scratch_mount "-o ${options[$i]}" >> $seqres.full 2>&1
+> 
+> ...do you still hope to try mount if mkfs fails?
+> 
+> Thanks,
+> Zorro
+> 
+>> +	echo $?
+>> +	_scratch_unmount
+>> +done
+>> +
+>> +status=0
+>> +exit
+>> diff --git a/tests/f2fs/015.out b/tests/f2fs/015.out
+>> new file mode 100644
+>> index 00000000..83e6ad51
+>> --- /dev/null
+>> +++ b/tests/f2fs/015.out
+>> @@ -0,0 +1,207 @@
+>> +QA output created by 015
+>> +Option#0: background_gc=on : 
+>> +0
+>> +Option#2: background_gc=off : 
+>> +0
+>> +Option#4: background_gc=off : 
+>> +0
+>> +Option#6: background_gc=sync : 
+>> +0
+>> +Option#8: disable_roll_forward : 
+>> +0
+>> +Option#10: norecovery : 
+>> +32
+>> +Option#12: discard : 
+>> +0
+>> +Option#14: nodiscard : 
+>> +0
+>> +Option#16: no_heap : 
+>> +0
+>> +Option#18: heap : 
+>> +0
+>> +Option#20: user_xattr : 
+>> +0
+>> +Option#22: nouser_xattr : 
+>> +0
+>> +Option#24: acl : 
+>> +0
+>> +Option#26: noacl : 
+>> +0
+>> +Option#28: active_logs=2 : 
+>> +0
+>> +Option#30: active_logs=4 : 
+>> +0
+>> +Option#32: active_logs=6 : 
+>> +0
+>> +Option#34: disable_ext_identify : 
+>> +0
+>> +Option#36: inline_xattr : 
+>> +0
+>> +Option#38: noinline_xattr : 
+>> +0
+>> +Option#40: inline_xattr_size=400 : extra,flexible_inline_xattr
+>> +0
+>> +Option#42: inline_xattr_size=400 : 
+>> +0
+>> +Option#44: inline_data : 
+>> +0
+>> +Option#46: noinline_dentry : 
+>> +0
+>> +Option#48: inline_dentry : 
+>> +0
+>> +Option#50: noinline_dentry : 
+>> +0
+>> +Option#52: flush_merge : 
+>> +0
+>> +Option#54: noflush_merge : 
+>> +0
+>> +Option#56: barrier : 
+>> +0
+>> +Option#58: nobarrier : 
+>> +0
+>> +Option#60: fastboot : 
+>> +0
+>> +Option#62: extent_cache : 
+>> +0
+>> +Option#64: noextent_cache : 
+>> +0
+>> +Option#66: data_flush : 
+>> +0
+>> +Option#68: reserve_root=32768 : 
+>> +0
+>> +Option#70: resuid=1000 : 
+>> +0
+>> +Option#72: resgid=1000 : 
+>> +0
+>> +Option#74: fault_injection=100 : 
+>> +0
+>> +Option#76: fault_type=4095 : 
+>> +0
+>> +Option#78: mode=adaptive : 
+>> +0
+>> +Option#80: mode=lfs : 
+>> +0
+>> +Option#82: mode=fragment:segment : 
+>> +0
+>> +Option#84: mode=fragment:block : 
+>> +0
+>> +Option#86: usrquota : 
+>> +0
+>> +Option#88: grpquota : 
+>> +0
+>> +Option#90: prjquota : 
+>> +32
+>> +Option#92: usrjquota=ausrquota : 
+>> +32
+>> +Option#94: grpjquota=agrpquota : 
+>> +32
+>> +Option#96: prjjquota=aprjquota : 
+>> +32
+>> +Option#98: jqfmt=vfsold : 
+>> +0
+>> +Option#100: jqfmt=vfsv0 : 
+>> +0
+>> +Option#102: jqfmt=vfsv1 : 
+>> +0
+>> +Option#104: usrjquota= : 
+>> +0
+>> +Option#106: grpjquota= : 
+>> +0
+>> +Option#108: prjjquota= : 
+>> +0
+>> +Option#110: quota : 
+>> +0
+>> +Option#112: noquota : 
+>> +0
+>> +Option#114: alloc_mode=reuse : 
+>> +0
+>> +Option#116: alloc_mode=default : 
+>> +0
+>> +Option#118: fsync_mode=posix : 
+>> +0
+>> +Option#120: fsync_mode=strict : 
+>> +0
+>> +Option#122: fsync_mode=nobarrier : 
+>> +0
+>> +Option#124: test_dummy_encryption : 
+>> +0
+>> +Option#126: test_dummy_encryption=v1 : 
+>> +0
+>> +Option#128: test_dummy_encryption=v2 : 
+>> +0
+>> +Option#130: checkpoint=enable : 
+>> +0
+>> +Option#132: checkpoint=disable : 
+>> +0
+>> +Option#134: checkpoint=disable:32768 : 
+>> +0
+>> +Option#136: checkpoint=disable:50% : 
+>> +0
+>> +Option#138: checkpoint_merge : 
+>> +0
+>> +Option#140: nocheckpoint_merge : 
+>> +0
+>> +Option#142: compress_algorithm=lzo : 
+>> +0
+>> +Option#144: compress_algorithm=lzo : extra,compression
+>> +0
+>> +Option#146: compress_algorithm=lz4 : extra,compression
+>> +0
+>> +Option#148: compress_algorithm=zstd : extra,compression
+>> +0
+>> +Option#150: compress_algorithm=lzo-rle : extra,compression
+>> +0
+>> +Option#152: compress_algorithm=lz4:3 : extra,compression
+>> +0
+>> +Option#154: compress_algorithm=ztsd:1 : extra,compression
+>> +32
+>> +Option#156: compress_log_size=8 : extra,compression
+>> +0
+>> +Option#158: compress_extension=so : extra,compression
+>> +0
+>> +Option#160: nocompress_extension=so : extra,compression
+>> +0
+>> +Option#162: nocompress_extension=* : extra,compression
+>> +32
+>> +Option#164: compress_extension=so,nocompress_extension=so : extra,compression
+>> +32
+>> +Option#166: compress_chksum : extra,compression
+>> +0
+>> +Option#168: compress_mode=fs : extra,compression
+>> +0
+>> +Option#170: compress_mode=user : extra,compression
+>> +0
+>> +Option#172: compress_cache : extra,compression
+>> +0
+>> +Option#174: inlinecrypt : 
+>> +0
+>> +Option#176: atgc : 
+>> +0
+>> +Option#178: discard_unit=block : 
+>> +0
+>> +Option#180: discard_unit=segment : 
+>> +0
+>> +Option#182: discard_unit=section : 
+>> +0
+>> +Option#184: memory=normal : 
+>> +0
+>> +Option#186: memory=low : 
+>> +0
+>> +Option#188: age_extent_cache : 
+>> +0
+>> +Option#190: errors=panic : 
+>> +0
+>> +Option#192: errors=continue : 
+>> +0
+>> +Option#194: errors=remount-ro : 
+>> +0
+>> +Option#196: nat_bits : 
+>> +0
+>> +Option#198: atgc,mode=lfs : 
+>> +32
+>> +Option#200: ro,flush_merge : 
+>> +32
+>> +Option#202: rw : ro
+>> +0
+>> +Option#204: norecovery,ro : 
+>> +0
+>> -- 
+>> 2.49.0
+>>
+> 
 
 
-[6:  kworker/u40:2: 7357] ------------[ cut here ]------------
-[6:  kworker/u40:2: 7357] workqueue: WQ_MEM_RECLAIM writeback:wb_workfn is
-flushing !WQ_MEM_RECLAIM events_unbound:quota_release_workfn
-[6:  kworker/u40:2: 7357] WARNING: CPU: 6 PID: 7357 at kernel/workqueue.c:3721
-check_flush_dependency+0x160/0x16c
-
-[6:  kworker/u40:2: 7357] Workqueue: writeback wb_workfn (flush-8:0)
-[6:  kworker/u40:2: 7357] pstate: 634020c5 (nZCv daIF +PAN -UAO +TCO +DIT -SSBS
-BTYPE=--)
-[6:  kworker/u40:2: 7357] pc : check_flush_dependency+0x160/0x16c
-[6:  kworker/u40:2: 7357] lr : check_flush_dependency+0x160/0x16c
-[6:  kworker/u40:2: 7357] sp : ffffffc0aa746b40
-[6:  kworker/u40:2: 7357] x29: ffffffc0aa746b40 x28: 18ffff882b081000 x27:
-0000000000000000
-[6:  kworker/u40:2: 7357] x26: caffff88280841a0 x25: 3bffff8801860900 x24:
-0000000000000000
-[6:  kworker/u40:2: 7357] x23: b7ffff880185a000 x22: 84ffff8805128400 x21:
-ffffffd01051b04c
-[6:  kworker/u40:2: 7357] x20: 83ffff8064571840 x19: beffff8800033400 x18:
-ffffffd012b19dc0
-[6:  kworker/u40:2: 7357] x17: 454d5f5157212067 x16: 6e696873756c6620 x15:
-51572120676e6968
-[6:  kworker/u40:2: 7357] x14: 73756c6620736920 x13: 65725f61746f7571 x12:
-3a646e756f626e75
-[6:  kworker/u40:2: 7357] x11: 000000000000009c x10: ffffffc0aa746ad0 x9 :
-9511e74e66c49200
-[6:  kworker/u40:2: 7357] x8 : 9511e74e66c49200 x7 : ffffffffffffffff x6 :
-ffffffd0117ee30c
-[6:  kworker/u40:2: 7357] x5 : 0000000000000000 x4 : 0000000000000001 x3 :
-0000000000000000
-[6:  kworker/u40:2: 7357] x2 : 0000000000000002 x1 : 00000000000000ff x0 :
-ffffffbc0aa746ab
-[6:  kworker/u40:2: 7357] Call trace:
-[6:  kworker/u40:2: 7357]  check_flush_dependency+0x160/0x16c
-[6:  kworker/u40:2: 7357]  __flush_work+0x168/0x738
-[6:  kworker/u40:2: 7357]  flush_delayed_work+0x58/0x70
-[6:  kworker/u40:2: 7357]  dquot_writeback_dquots+0x90/0x4bc
-[6:  kworker/u40:2: 7357]  f2fs_do_quota_sync+0x120/0x284
-[6:  kworker/u40:2: 7357]  f2fs_write_checkpoint+0x58c/0xe18
-[6:  kworker/u40:2: 7357]  f2fs_gc+0x3e8/0xd78
-[6:  kworker/u40:2: 7357]  f2fs_balance_fs+0x204/0x284
-[6:  kworker/u40:2: 7357]  f2fs_write_single_data_page+0x700/0xaf0
-[6:  kworker/u40:2: 7357]  f2fs_write_data_pages+0xe94/0x15bc
-[6:  kworker/u40:2: 7357]  do_writepages+0x170/0x3f8
-[6:  kworker/u40:2: 7357]  __writeback_single_inode+0xa0/0x8c4
-[6:  kworker/u40:2: 7357]  writeback_sb_inodes+0x2ac/0x708
-[6:  kworker/u40:2: 7357]  __writeback_inodes_wb+0xc0/0x118
-[6:  kworker/u40:2: 7357]  wb_writeback+0x1f4/0x664
-[6:  kworker/u40:2: 7357]  wb_workfn+0x62c/0x900
-[6:  kworker/u40:2: 7357]  process_one_work+0x3f8/0x968
-[6:  kworker/u40:2: 7357]  worker_thread+0x610/0x794
-[6:  kworker/u40:2: 7357]  kthread+0x1c4/0x1e4
-[6:  kworker/u40:2: 7357]  ret_from_fork+0x10/0x20
-[6:  kworker/u40:2: 7357] Kernel panic - not syncing: kernel: panic_on_warn set
-...
-
--- 
-You may reply to this email to add a comment.
-
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
