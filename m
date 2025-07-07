@@ -2,76 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58B6AAFAF33
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Jul 2025 11:06:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A09AAFB284
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Jul 2025 13:46:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=LLud2Tp7atiCqIG2IIN8jehctABiXAbgZncI6vffBZc=; b=M1g0k6xuXO7dNXKMNjERzgBN4B
-	NVvtsvC4cxjAwSGrpolVhVJaQpXE3Leh10ynY9+RT00RtX86YNqDXiDpa/ElVR1RAaJHqX6CWD0pa
-	qEhjpM7ceX/FEL0MSpGo202UB62NnyzacTOXeuCD8KBOpx21u48wtksfcRQqcYpveUT4=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=aO3hgbIapWzuaC+23lXiURb9BHoSAh4JbvPOhX3229M=; b=Lfl/mzS0i8bzpyW/NMBP1WUfrD
+	X9P0ngv1UDPHa7CppLX1IOBRGe/yOE5tbS+d13Zd10OBYqHKmroYVX5mGLGtP4OGBRbr6M48bRiKY
+	hB0ONuDIYqzptLHo997gsNY1ixzgmwogrikePU7Y5VzEL2UnvemthWidz6FQGjUtJonU=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uYhns-0000DR-4w;
-	Mon, 07 Jul 2025 09:06:24 +0000
+	id 1uYkIm-0007Uo-Rg;
+	Mon, 07 Jul 2025 11:46:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uYhnB-0000Cb-HZ
+ (envelope-from <chao@kernel.org>) id 1uYkIl-0007Ui-3S
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Jul 2025 09:05:41 +0000
+ Mon, 07 Jul 2025 11:46:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qXmURWSwDvb5YUpFLayln+ESL3l9au7j7/V5E5K+/BE=; b=gZ9R377H7kV1nYXmt7meyymx5c
- hSO4pRkiDZ2ek4E0bGUhNz+Pb+Ap1oXvf8hj0mjdeBKDv54x0dztINUsagYukc0FovjgmPkxC83Dc
- w0JtkT5e3Uhkc5xyiEFeZgi/k9piVLpUe0luuebqrrZrqFrCPMARHGNVfDkRS4TDaJAI=;
+ bh=LL7o5PXloUqZt0vwSmKftFKib1xfQ2/jF5QPDFltWCs=; b=cAdY2wVRsxGsK7+C05Uz4iyEXs
+ qBrnprnQvysyYCbkkMOuXkB/IPphOga8+03yNqS6q9TjQ9qlQTbiOxv4IaeiQFKJMkP/ZLQ9nwaS2
+ RVcGRNrOO5NYmzp5rpb8q9NZbrTqXLWYN4QYc2y9unWv5K75GL/q1YgI0ge6lL62XN8o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=qXmURWSwDvb5YUpFLayln+ESL3l9au7j7/V5E5K+/BE=; b=b/uLyEmj/XOuYf4VtQAjoNHzXi
- onoM35XbmtL/jXyg6twHMUlEV5XyAkuYkjdEyjJod/LMsPdU9PGkGFOuNissxVjDXtfhl0TR+5scE
- H1mNgzME/BGNgBDkEXPn8KSn3p9DoiM+JrzA0p2/K2eOgZMZlgWMDNA1XI+0ilJvaV1M=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=LL7o5PXloUqZt0vwSmKftFKib1xfQ2/jF5QPDFltWCs=; b=W
+ tx35d7obyiU5hmTjshZ7IpjA0nxTr2v1EJzQLzbcXyssWJeDUu9qtLOZWg/uxyQ5alwV6FWjpzeID
+ EQt+Tb0BATF1gVYxJqritTnBXA231L3zMyYk15i4/kT78wDxkGrnQJcl8G9zuvi1ICl3ZgAw8BEGk
+ tVvgXNMlomM5qwrU=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uYhnA-0002WT-75 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Jul 2025 09:05:41 +0000
+ id 1uYkIk-0005OQ-FD for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 07 Jul 2025 11:46:27 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id CBFCF434A5;
- Mon,  7 Jul 2025 09:05:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71D8FC4CEE3;
- Mon,  7 Jul 2025 09:05:33 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 2787346363
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  7 Jul 2025 11:46:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D381BC4CEE3;
+ Mon,  7 Jul 2025 11:46:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1751879134;
- bh=C+Lzbru5LF7v6HOZyD+YXLL+EGyiHDmq2tWeTZcdDsw=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=tBm99eSjceeOBBzTsV1Tg0HPFRJd+SSFxKhf4a2DnfyAratM2SN2PkfXtRBNLRlmf
- fedvMugO7hFZAKPGoMqQR1TT88o5UvRAl/dJzS4yr2x5s86HAKtvJM1zNQWvUbcTKH
- CwQFH0Yyq4nAbb3F+ncBfAFQmg+gvAG5qMLb0vRR5Pj+t9pfejlpf4pr3vsuuABW5Z
- QZ9Ox0nHjZ9E3jolOd9OYqCvOXCK/RD8BhY9J1UMeO4G4haXU62B1AXeKJKNOP+On1
- Kkeu7incf3/sDag6FKYZCdxsG7KjeShUxVDKjOXUDWPcyHOQj5DLLf+FoCQGHpWvnX
- 4daiLVyTauedw==
-Message-ID: <09aa0620-a2ab-4460-b511-3d4537237b5d@kernel.org>
-Date: Mon, 7 Jul 2025 17:05:31 +0800
+ s=k20201202; t=1751888781;
+ bh=vSpdhkUn9gPJJ6V9ECMgBURaaWe4k/H2/r+sHlnGl9E=;
+ h=From:To:Cc:Subject:Date:From;
+ b=trF6yRzLhzsOzkC6KU3yDfzydSNyi6XBGAgdo1gqGKGtqbdjYBVmO+Gso/tTi1q7p
+ mdTF5j/OEnI5ZInf9sOG9+ea1dkb01MM4Tx9CG2XJREWVn9gYqH+ut5UGnfPiDQY3A
+ FCFbkcZeez7P9s7yMR2R1jLl3TvYuNXTqPvzLrbY7v1Jzg1chGvjy/jZUL9TRM+FNF
+ PDrRaZmekzrWqQGLkATlpoZQDhfSWGu/PR84j3yKfAlBm4DjANSxQ5NzT0ymr53L7c
+ i2e1vi5kAdbn2E6bB/9egeUgQsNAifd64sNUDG00NJ8XbZgqhOCQBMNh3sKHe4G14R
+ 0c6XkTdVNycmg==
+To: jaegeuk@kernel.org
+Date: Mon,  7 Jul 2025 19:46:14 +0800
+Message-ID: <20250707114614.2769306-1-chao@kernel.org>
+X-Mailer: git-send-email 2.50.0.727.gbf7dc18ff4-goog
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Zorro Lang <zlang@redhat.com>
-References: <20250704114818.1878294-1-chao@kernel.org>
- <20250704181446.pum4b7zp2xqvotzx@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-Content-Language: en-US
-In-Reply-To: <20250704181446.pum4b7zp2xqvotzx@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -79,9 +76,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 7/5/25 02:14, Zorro Lang wrote: > On Fri, Jul 04, 2025
- at 07:48:18PM +0800, Chao Yu wrote: >> As f2fs changes to use new mount APIs, 
- let's add a new testcase >> to check mount result for all f2fs s [...] 
+ Content preview:  There are redundant codes in IS_CUR{SEG, SEC}() macros, let's
+ introduce inline is_cur{seg, sec}() functions,
+ and use a loop in it for cleanup.
+ Meanwhile, it enhances expansibility, as it doesn't need to change is_cur{seg,
+ sec}() when we add a new log header. 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,8 +92,8 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uYhnA-0002WT-75
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs/015: test mount options
+X-Headers-End: 1uYkIk-0005OQ-FD
+Subject: [f2fs-dev] [PATCH] f2fs: introduce is_cur{seg,sec}()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,461 +107,250 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 7/5/25 02:14, Zorro Lang wrote:
-> On Fri, Jul 04, 2025 at 07:48:18PM +0800, Chao Yu wrote:
->> As f2fs changes to use new mount APIs, let's add a new testcase
->> to check mount result for all f2fs supported mount options and
->> their combinations, in order to detect any inconsistency during
->> mount.
->>
->> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
->> Signed-off-by: Chao Yu <chao@kernel.org>
->> ---
->> v2:
->> - allow to check mount options w/ zoned device
->>  common/rc          |   3 +
->>  tests/f2fs/015     | 159 ++++++++++++++++++++++++++++++++
->>  tests/f2fs/015.out | 225 +++++++++++++++++++++++++++++++++++++++++++++
->>  3 files changed, 387 insertions(+)
->>  create mode 100755 tests/f2fs/015
->>  create mode 100644 tests/f2fs/015.out
->>
->> diff --git a/common/rc b/common/rc
->> index f71cc8f0..94fdce7e 100644
->> --- a/common/rc
->> +++ b/common/rc
->> @@ -844,6 +844,9 @@ _test_mkfs()
->>      ext2|ext3|ext4)
->>  	$MKFS_PROG -t $FSTYP -- -F $MKFS_OPTIONS $* $TEST_DEV
->>  	;;
->> +    f2fs)
->> +	$MKFS_PROG -t $FSTYP -- -f $MKFS_OPTIONS $* $TEST_DEV
->> +	;;
->>      xfs)
->>  	_test_options mkfs
->>  	$MKFS_PROG -t $FSTYP -- -f $TEST_OPTIONS $MKFS_OPTIONS $* $TEST_DEV
->> diff --git a/tests/f2fs/015 b/tests/f2fs/015
->> new file mode 100755
->> index 00000000..746e79de
->> --- /dev/null
->> +++ b/tests/f2fs/015
->> @@ -0,0 +1,159 @@
->> +#! /bin/bash
->> +# SPDX-License-Identifier: GPL-2.0
->> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
->> +#
->> +# FS QA Test No. f2fs/015
->> +#
->> +# This testcase tries to check stability of mount result
->> +# w/ all f2fs supported mount option and their combination.
->> +#
->> +. ./common/preamble
->> +_begin_fstest auto quick
->> +_require_kernel_config CONFIG_F2FS_FS_XATTR
->> +_require_kernel_config CONFIG_F2FS_FS_POSIX_ACL
->> +_require_kernel_config CONFIG_F2FS_FAULT_INJECTION
->> +_require_kernel_config CONFIG_F2FS_FS_COMPRESSION
->> +_require_kernel_config CONFIG_F2FS_FS_LZO
->> +_require_kernel_config CONFIG_F2FS_FS_LZORLE
->> +_require_kernel_config CONFIG_F2FS_FS_LZ4
->> +_require_kernel_config CONFIG_F2FS_FS_LZ4HC
->> +_require_kernel_config CONFIG_F2FS_FS_ZSTD
->> +
->> +_require_zoned_device "$TEST_DEV"
-> 
-> This requirement limit this test case only on zoned device...
-> Maybe you can slip this test case to 2~3 cases, let some common
-> mount options can be tested at first, some unimportant mount
-> options can be tested in another case, then zoned device related
-> mount options be tested in a seperated case ?
+There are redundant codes in IS_CUR{SEG,SEC}() macros, let's introduce
+inline is_cur{seg,sec}() functions, and use a loop in it for cleanup.
 
-Good idea, do you want to uplift common mount option testcase to
-generic/ directory? or is it fine to leave it in f2fs/ now?
+Meanwhile, it enhances expansibility, as it doesn't need to change
+is_cur{seg,sec}() when we add a new log header.
 
-Thanks,
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/debug.c   |  4 ++--
+ fs/f2fs/gc.c      |  2 +-
+ fs/f2fs/segment.c | 22 +++++++++----------
+ fs/f2fs/segment.h | 54 +++++++++++++++++++++--------------------------
+ 4 files changed, 38 insertions(+), 44 deletions(-)
 
-> 
-> Thanks,
-> Zorro
-> 
->> +_test_unmount >> $seqres.full 2>&1
->> +
->> +options=(
->> +#	mount_option			mkfs_option
->> +	"background_gc=on"		""			\
->> +	"background_gc=off"		""			\
->> +	"background_gc=sync"		""			\
->> +	"background_gc=on"		"blkzone"		\
->> +	"background_gc=off"		"blkzone"		\
->> +	"background_gc=sync"		"blkzone"		\
->> +	"disable_roll_forward"		""			\
->> +	"norecovery"			""			\
->> +	"discard"			""			\
->> +	"nodiscard"			""			\
->> +	"no_heap"			""			\
->> +	"heap"				""			\
->> +	"user_xattr"			""			\
->> +	"nouser_xattr"			""			\
->> +	"acl"				""			\
->> +	"noacl"				""			\
->> +	"active_logs=2"			""			\
->> +	"active_logs=4"			""			\
->> +	"active_logs=6"			""			\
->> +	"disable_ext_identify"		""			\
->> +	"inline_xattr"			""			\
->> +	"noinline_xattr"		""			\
->> +	"inline_xattr_size=400"		"extra,flexible_inline_xattr"\
->> +	"inline_xattr_size=400"		""			\
->> +	"inline_data"			""			\
->> +	"noinline_dentry"		""			\
->> +	"inline_dentry"			""			\
->> +	"noinline_dentry"		""			\
->> +	"flush_merge"			""			\
->> +	"noflush_merge"			""			\
->> +	"barrier"			""			\
->> +	"nobarrier"			""			\
->> +	"fastboot"			""			\
->> +	"extent_cache"			""			\
->> +	"noextent_cache"		""			\
->> +	"data_flush"			""			\
->> +	"reserve_root=32768"		""			\
->> +	"resuid=1000"			""			\
->> +	"resgid=1000"			""			\
->> +	"fault_injection=100"		""			\
->> +	"fault_type=4095"		""			\
->> +	"mode=adaptive"			""			\
->> +	"mode=lfs"			""			\
->> +	"mode=fragment:segment"		""			\
->> +	"mode=fragment:block"		""			\
->> +	"mode=adaptive"			"blkzone"		\
->> +	"mode=lfs"			"blkzone"		\
->> +	"mode=fragment:segment"		"blkzone"		\
->> +	"mode=fragment:block"		"blkzone"		\
->> +	"usrquota"			""			\
->> +	"grpquota"			""			\
->> +	"prjquota"			""			\
->> +	"usrjquota=ausrquota"		""			\
->> +	"grpjquota=agrpquota"		""			\
->> +	"prjjquota=aprjquota"		""			\
->> +	"jqfmt=vfsold"			""			\
->> +	"jqfmt=vfsv0"			""			\
->> +	"jqfmt=vfsv1"			""			\
->> +	"usrjquota="			""			\
->> +	"grpjquota="			""			\
->> +	"prjjquota="			""			\
->> +	"quota"				""			\
->> +	"noquota"			""			\
->> +	"alloc_mode=reuse"		""			\
->> +	"alloc_mode=default"		""			\
->> +	"fsync_mode=posix"		""			\
->> +	"fsync_mode=strict"		""			\
->> +	"fsync_mode=nobarrier"		""			\
->> +	"test_dummy_encryption"		""			\
->> +	"test_dummy_encryption=v1"	""			\
->> +	"test_dummy_encryption=v2"	""			\
->> +	"checkpoint=enable"		""			\
->> +	"checkpoint=disable"		""			\
->> +	"checkpoint=disable:32768"	""			\
->> +	"checkpoint=disable:50%"	""			\
->> +	"checkpoint_merge"		""			\
->> +	"nocheckpoint_merge"		""			\
->> +	"compress_algorithm=lzo"	""			\
->> +	"compress_algorithm=lzo"	"extra,compression"	\
->> +	"compress_algorithm=lz4"	"extra,compression"	\
->> +	"compress_algorithm=zstd"	"extra,compression"	\
->> +	"compress_algorithm=lzo-rle"	"extra,compression"	\
->> +	"compress_algorithm=lz4:3"	"extra,compression"	\
->> +	"compress_algorithm=zstd:1"	"extra,compression"	\
->> +	"compress_log_size=8"		"extra,compression"	\
->> +	"compress_extension=so"		"extra,compression"	\
->> +	"nocompress_extension=so"	"extra,compression"	\
->> +	"nocompress_extension=*"	"extra,compression"	\
->> +	"compress_extension=so,nocompress_extension=so"		\
->> +					"extra,compression"	\
->> +	"compress_chksum"		"extra,compression"	\
->> +	"compress_mode=fs"		"extra,compression"	\
->> +	"compress_mode=user"		"extra,compression"	\
->> +	"compress_cache"		"extra,compression"	\
->> +	"inlinecrypt"			""			\
->> +	"atgc"				""			\
->> +	"discard_unit=block"		""			\
->> +	"discard_unit=segment"		""			\
->> +	"discard_unit=section"		""			\
->> +	"discard_unit=block"		"blkzone"		\
->> +	"discard_unit=segment"		"blkzone"		\
->> +	"discard_unit=section"		"blkzone"		\
->> +	"memory=normal"			""			\
->> +	"memory=low"			""			\
->> +	"age_extent_cache"		""			\
->> +	"errors=panic"			""			\
->> +	"errors=continue"		""			\
->> +	"errors=remount-ro"		""			\
->> +	"nat_bits"			""			\
->> +	"atgc,mode=lfs"			""			\
->> +	"ro,flush_merge"		""			\
->> +	"rw"				"ro"			\
->> +	"norecovery,ro"			""			\
->> +)
->> +
->> +for ((i=0;i<${#options[@]};i=i+2))
->> +do
->> +	echo "Option#$i: ${options[$i]} : ${options[$((i+1))]}"
->> +	if [ "${options[$((i+1))]}" == "blkzone" ]; then
->> +		_test_mkfs "-m" >> $seqres.full
->> +		_test_mount "-o ${options[$i]}" >> $seqres.full 2>&1
->> +		echo $?
->> +		_test_unmount >> $seqres.full 2>&1
->> +	else
->> +		_scratch_mkfs "-O ${options[$((i+1))]}" >> $seqres.full
->> +		_try_scratch_mount "-o ${options[$i]}" >> $seqres.full 2>&1
->> +		echo $?
->> +		_scratch_unmount >> $seqres.full 2>&1
->> +	fi
->> +done
->> +
->> +status=0
->> +exit
->> diff --git a/tests/f2fs/015.out b/tests/f2fs/015.out
->> new file mode 100644
->> index 00000000..d7f4e62a
->> --- /dev/null
->> +++ b/tests/f2fs/015.out
->> @@ -0,0 +1,225 @@
->> +QA output created by 015
->> +Option#0: background_gc=on : 
->> +0
->> +Option#2: background_gc=off : 
->> +0
->> +Option#4: background_gc=sync : 
->> +0
->> +Option#6: background_gc=on : blkzone
->> +0
->> +Option#8: background_gc=off : blkzone
->> +32
->> +Option#10: background_gc=sync : blkzone
->> +0
->> +Option#12: disable_roll_forward : 
->> +0
->> +Option#14: norecovery : 
->> +32
->> +Option#16: discard : 
->> +0
->> +Option#18: nodiscard : 
->> +0
->> +Option#20: no_heap : 
->> +0
->> +Option#22: heap : 
->> +0
->> +Option#24: user_xattr : 
->> +0
->> +Option#26: nouser_xattr : 
->> +0
->> +Option#28: acl : 
->> +0
->> +Option#30: noacl : 
->> +0
->> +Option#32: active_logs=2 : 
->> +0
->> +Option#34: active_logs=4 : 
->> +0
->> +Option#36: active_logs=6 : 
->> +0
->> +Option#38: disable_ext_identify : 
->> +0
->> +Option#40: inline_xattr : 
->> +0
->> +Option#42: noinline_xattr : 
->> +0
->> +Option#44: inline_xattr_size=400 : extra,flexible_inline_xattr
->> +32
->> +Option#46: inline_xattr_size=400 : 
->> +32
->> +Option#48: inline_data : 
->> +0
->> +Option#50: noinline_dentry : 
->> +0
->> +Option#52: inline_dentry : 
->> +0
->> +Option#54: noinline_dentry : 
->> +0
->> +Option#56: flush_merge : 
->> +0
->> +Option#58: noflush_merge : 
->> +0
->> +Option#60: barrier : 
->> +0
->> +Option#62: nobarrier : 
->> +0
->> +Option#64: fastboot : 
->> +0
->> +Option#66: extent_cache : 
->> +0
->> +Option#68: noextent_cache : 
->> +0
->> +Option#70: data_flush : 
->> +0
->> +Option#72: reserve_root=32768 : 
->> +0
->> +Option#74: resuid=1000 : 
->> +0
->> +Option#76: resgid=1000 : 
->> +0
->> +Option#78: fault_injection=100 : 
->> +0
->> +Option#80: fault_type=4095 : 
->> +0
->> +Option#82: mode=adaptive : 
->> +0
->> +Option#84: mode=lfs : 
->> +0
->> +Option#86: mode=fragment:segment : 
->> +0
->> +Option#88: mode=fragment:block : 
->> +0
->> +Option#90: mode=adaptive : blkzone
->> +32
->> +Option#92: mode=lfs : blkzone
->> +0
->> +Option#94: mode=fragment:segment : blkzone
->> +32
->> +Option#96: mode=fragment:block : blkzone
->> +32
->> +Option#98: usrquota : 
->> +0
->> +Option#100: grpquota : 
->> +0
->> +Option#102: prjquota : 
->> +32
->> +Option#104: usrjquota=ausrquota : 
->> +32
->> +Option#106: grpjquota=agrpquota : 
->> +32
->> +Option#108: prjjquota=aprjquota : 
->> +32
->> +Option#110: jqfmt=vfsold : 
->> +0
->> +Option#112: jqfmt=vfsv0 : 
->> +0
->> +Option#114: jqfmt=vfsv1 : 
->> +0
->> +Option#116: usrjquota= : 
->> +0
->> +Option#118: grpjquota= : 
->> +0
->> +Option#120: prjjquota= : 
->> +0
->> +Option#122: quota : 
->> +0
->> +Option#124: noquota : 
->> +0
->> +Option#126: alloc_mode=reuse : 
->> +0
->> +Option#128: alloc_mode=default : 
->> +0
->> +Option#130: fsync_mode=posix : 
->> +0
->> +Option#132: fsync_mode=strict : 
->> +0
->> +Option#134: fsync_mode=nobarrier : 
->> +0
->> +Option#136: test_dummy_encryption : 
->> +32
->> +Option#138: test_dummy_encryption=v1 : 
->> +32
->> +Option#140: test_dummy_encryption=v2 : 
->> +32
->> +Option#142: checkpoint=enable : 
->> +0
->> +Option#144: checkpoint=disable : 
->> +0
->> +Option#146: checkpoint=disable:32768 : 
->> +0
->> +Option#148: checkpoint=disable:50% : 
->> +0
->> +Option#150: checkpoint_merge : 
->> +0
->> +Option#152: nocheckpoint_merge : 
->> +0
->> +Option#154: compress_algorithm=lzo : 
->> +0
->> +Option#156: compress_algorithm=lzo : extra,compression
->> +0
->> +Option#158: compress_algorithm=lz4 : extra,compression
->> +0
->> +Option#160: compress_algorithm=zstd : extra,compression
->> +0
->> +Option#162: compress_algorithm=lzo-rle : extra,compression
->> +0
->> +Option#164: compress_algorithm=lz4:3 : extra,compression
->> +0
->> +Option#166: compress_algorithm=zstd:1 : extra,compression
->> +0
->> +Option#168: compress_log_size=8 : extra,compression
->> +0
->> +Option#170: compress_extension=so : extra,compression
->> +0
->> +Option#172: nocompress_extension=so : extra,compression
->> +0
->> +Option#174: nocompress_extension=* : extra,compression
->> +0
->> +Option#176: compress_extension=so,nocompress_extension=so : extra,compression
->> +0
->> +Option#178: compress_chksum : extra,compression
->> +0
->> +Option#180: compress_mode=fs : extra,compression
->> +0
->> +Option#182: compress_mode=user : extra,compression
->> +0
->> +Option#184: compress_cache : extra,compression
->> +0
->> +Option#186: inlinecrypt : 
->> +0
->> +Option#188: atgc : 
->> +0
->> +Option#190: discard_unit=block : 
->> +0
->> +Option#192: discard_unit=segment : 
->> +0
->> +Option#194: discard_unit=section : 
->> +0
->> +Option#196: discard_unit=block : blkzone
->> +0
->> +Option#198: discard_unit=segment : blkzone
->> +0
->> +Option#200: discard_unit=section : blkzone
->> +0
->> +Option#202: memory=normal : 
->> +0
->> +Option#204: memory=low : 
->> +0
->> +Option#206: age_extent_cache : 
->> +0
->> +Option#208: errors=panic : 
->> +0
->> +Option#210: errors=continue : 
->> +0
->> +Option#212: errors=remount-ro : 
->> +0
->> +Option#214: nat_bits : 
->> +0
->> +Option#216: atgc,mode=lfs : 
->> +32
->> +Option#218: ro,flush_merge : 
->> +32
->> +Option#220: rw : ro
->> +0
->> +Option#222: norecovery,ro : 
->> +0
->> -- 
->> 2.49.0
->>
-> 
+diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
+index 3417e7e550b2..43a83bbd3bc5 100644
+--- a/fs/f2fs/debug.c
++++ b/fs/f2fs/debug.c
+@@ -91,7 +91,7 @@ static void update_multidevice_stats(struct f2fs_sb_info *sbi)
+ 			seg_blks = get_seg_entry(sbi, j)->valid_blocks;
+ 
+ 			/* update segment stats */
+-			if (IS_CURSEG(sbi, j))
++			if (is_curseg(sbi, j))
+ 				dev_stats[i].devstats[0][DEVSTAT_INUSE]++;
+ 			else if (seg_blks == BLKS_PER_SEG(sbi))
+ 				dev_stats[i].devstats[0][DEVSTAT_FULL]++;
+@@ -109,7 +109,7 @@ static void update_multidevice_stats(struct f2fs_sb_info *sbi)
+ 			sec_blks = get_sec_entry(sbi, j)->valid_blocks;
+ 
+ 			/* update section stats */
+-			if (IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi, j)))
++			if (is_cursec(sbi, GET_SEC_FROM_SEG(sbi, j)))
+ 				dev_stats[i].devstats[1][DEVSTAT_INUSE]++;
+ 			else if (sec_blks == BLKS_PER_SEC(sbi))
+ 				dev_stats[i].devstats[1][DEVSTAT_FULL]++;
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 30b95ebb4499..778f9ec40b70 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -2065,7 +2065,7 @@ int f2fs_gc_range(struct f2fs_sb_info *sbi,
+ 			.iroot = RADIX_TREE_INIT(gc_list.iroot, GFP_NOFS),
+ 		};
+ 
+-		if (IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi, segno)))
++		if (is_cursec(sbi, GET_SEC_FROM_SEG(sbi, segno)))
+ 			continue;
+ 
+ 		do_garbage_collect(sbi, segno, &gc_list, FG_GC, true, false);
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index b89bdb867508..5dd6eb8ccaae 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -773,7 +773,7 @@ static void __locate_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno,
+ 	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+ 
+ 	/* need not be added */
+-	if (IS_CURSEG(sbi, segno))
++	if (is_curseg(sbi, segno))
+ 		return;
+ 
+ 	if (!test_and_set_bit(segno, dirty_i->dirty_segmap[dirty_type]))
+@@ -800,7 +800,7 @@ static void __locate_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno,
+ 				!valid_blocks) ||
+ 				valid_blocks == CAP_BLKS_PER_SEC(sbi));
+ 
+-			if (!IS_CURSEC(sbi, secno))
++			if (!is_cursec(sbi, secno))
+ 				set_bit(secno, dirty_i->dirty_secmap);
+ 		}
+ 	}
+@@ -839,7 +839,7 @@ static void __remove_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno,
+ 				return;
+ 			}
+ 
+-			if (!IS_CURSEC(sbi, secno))
++			if (!is_cursec(sbi, secno))
+ 				set_bit(secno, dirty_i->dirty_secmap);
+ 		}
+ 	}
+@@ -856,7 +856,7 @@ static void locate_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno)
+ 	unsigned short valid_blocks, ckpt_valid_blocks;
+ 	unsigned int usable_blocks;
+ 
+-	if (segno == NULL_SEGNO || IS_CURSEG(sbi, segno))
++	if (segno == NULL_SEGNO || is_curseg(sbi, segno))
+ 		return;
+ 
+ 	usable_blocks = f2fs_usable_blks_in_seg(sbi, segno);
+@@ -889,7 +889,7 @@ void f2fs_dirty_to_prefree(struct f2fs_sb_info *sbi)
+ 	for_each_set_bit(segno, dirty_i->dirty_segmap[DIRTY], MAIN_SEGS(sbi)) {
+ 		if (get_valid_blocks(sbi, segno, false))
+ 			continue;
+-		if (IS_CURSEG(sbi, segno))
++		if (is_curseg(sbi, segno))
+ 			continue;
+ 		__locate_dirty_segment(sbi, segno, PRE);
+ 		__remove_dirty_segment(sbi, segno, DIRTY);
+@@ -2108,7 +2108,7 @@ static bool add_discard_addrs(struct f2fs_sb_info *sbi, struct cp_control *cpc,
+ 	if (!force) {
+ 		if (!f2fs_realtime_discard_enable(sbi) ||
+ 			(!se->valid_blocks &&
+-				!IS_CURSEG(sbi, cpc->trim_start)) ||
++				!is_curseg(sbi, cpc->trim_start)) ||
+ 			SM_I(sbi)->dcc_info->nr_discards >=
+ 				SM_I(sbi)->dcc_info->max_discards)
+ 			return false;
+@@ -2236,7 +2236,7 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
+ next:
+ 		secno = GET_SEC_FROM_SEG(sbi, start);
+ 		start_segno = GET_SEG_FROM_SEC(sbi, secno);
+-		if (!IS_CURSEC(sbi, secno) &&
++		if (!is_cursec(sbi, secno) &&
+ 			!get_valid_blocks(sbi, start, true))
+ 			f2fs_issue_discard(sbi, START_BLOCK(sbi, start_segno),
+ 						BLKS_PER_SEC(sbi));
+@@ -4107,14 +4107,14 @@ void f2fs_do_replace_block(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 
+ 	if (!recover_curseg) {
+ 		/* for recovery flow */
+-		if (se->valid_blocks == 0 && !IS_CURSEG(sbi, segno)) {
++		if (se->valid_blocks == 0 && !is_curseg(sbi, segno)) {
+ 			if (old_blkaddr == NULL_ADDR)
+ 				type = CURSEG_COLD_DATA;
+ 			else
+ 				type = CURSEG_WARM_DATA;
+ 		}
+ 	} else {
+-		if (IS_CURSEG(sbi, segno)) {
++		if (is_curseg(sbi, segno)) {
+ 			/* se->type is volatile as SSR allocation */
+ 			type = __f2fs_get_curseg(sbi, segno);
+ 			f2fs_bug_on(sbi, type == NO_CHECK_TYPE);
+@@ -5150,7 +5150,7 @@ static void init_dirty_segmap(struct f2fs_sb_info *sbi)
+ 
+ 		if (!valid_blocks || valid_blocks == CAP_BLKS_PER_SEC(sbi))
+ 			continue;
+-		if (IS_CURSEC(sbi, secno))
++		if (is_cursec(sbi, secno))
+ 			continue;
+ 		set_bit(secno, dirty_i->dirty_secmap);
+ 	}
+@@ -5286,7 +5286,7 @@ static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
+ 	 * Get # of valid block of the zone.
+ 	 */
+ 	valid_block_cnt = get_valid_blocks(sbi, zone_segno, true);
+-	if (IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi, zone_segno))) {
++	if (is_cursec(sbi, GET_SEC_FROM_SEG(sbi, zone_segno))) {
+ 		f2fs_notice(sbi, "Open zones: valid block[0x%x,0x%x] cond[%s]",
+ 				zone_segno, valid_block_cnt,
+ 				blk_zone_cond_str(zone->cond));
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index db619fd2f51a..d2c73f641134 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -34,34 +34,6 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
+ 	f2fs_bug_on(sbi, seg_type >= NR_PERSISTENT_LOG);
+ }
+ 
+-#define IS_CURSEG(sbi, seg)						\
+-	(((seg) == CURSEG_I(sbi, CURSEG_HOT_DATA)->segno) ||	\
+-	 ((seg) == CURSEG_I(sbi, CURSEG_WARM_DATA)->segno) ||	\
+-	 ((seg) == CURSEG_I(sbi, CURSEG_COLD_DATA)->segno) ||	\
+-	 ((seg) == CURSEG_I(sbi, CURSEG_HOT_NODE)->segno) ||	\
+-	 ((seg) == CURSEG_I(sbi, CURSEG_WARM_NODE)->segno) ||	\
+-	 ((seg) == CURSEG_I(sbi, CURSEG_COLD_NODE)->segno) ||	\
+-	 ((seg) == CURSEG_I(sbi, CURSEG_COLD_DATA_PINNED)->segno) ||	\
+-	 ((seg) == CURSEG_I(sbi, CURSEG_ALL_DATA_ATGC)->segno))
+-
+-#define IS_CURSEC(sbi, secno)						\
+-	(((secno) == CURSEG_I(sbi, CURSEG_HOT_DATA)->segno /		\
+-	  SEGS_PER_SEC(sbi)) ||	\
+-	 ((secno) == CURSEG_I(sbi, CURSEG_WARM_DATA)->segno /		\
+-	  SEGS_PER_SEC(sbi)) ||	\
+-	 ((secno) == CURSEG_I(sbi, CURSEG_COLD_DATA)->segno /		\
+-	  SEGS_PER_SEC(sbi)) ||	\
+-	 ((secno) == CURSEG_I(sbi, CURSEG_HOT_NODE)->segno /		\
+-	  SEGS_PER_SEC(sbi)) ||	\
+-	 ((secno) == CURSEG_I(sbi, CURSEG_WARM_NODE)->segno /		\
+-	  SEGS_PER_SEC(sbi)) ||	\
+-	 ((secno) == CURSEG_I(sbi, CURSEG_COLD_NODE)->segno /		\
+-	  SEGS_PER_SEC(sbi)) ||	\
+-	 ((secno) == CURSEG_I(sbi, CURSEG_COLD_DATA_PINNED)->segno /	\
+-	  SEGS_PER_SEC(sbi)) ||	\
+-	 ((secno) == CURSEG_I(sbi, CURSEG_ALL_DATA_ATGC)->segno /	\
+-	  SEGS_PER_SEC(sbi)))
+-
+ #define MAIN_BLKADDR(sbi)						\
+ 	(SM_I(sbi) ? SM_I(sbi)->main_blkaddr : 				\
+ 		le32_to_cpu(F2FS_RAW_SUPER(sbi)->main_blkaddr))
+@@ -318,6 +290,28 @@ static inline struct curseg_info *CURSEG_I(struct f2fs_sb_info *sbi, int type)
+ 	return (struct curseg_info *)(SM_I(sbi)->curseg_array + type);
+ }
+ 
++static inline bool is_curseg(struct f2fs_sb_info *sbi, unsigned int segno)
++{
++	int i;
++
++	for (i = CURSEG_HOT_DATA; i < NO_CHECK_TYPE; i++) {
++		if (segno == CURSEG_I(sbi, i)->segno)
++			return true;
++	}
++	return false;
++}
++
++static inline bool is_cursec(struct f2fs_sb_info *sbi, unsigned int secno)
++{
++	int i;
++
++	for (i = CURSEG_HOT_DATA; i < NO_CHECK_TYPE; i++) {
++		if (secno == GET_SEC_FROM_SEG(sbi, CURSEG_I(sbi, i)->segno))
++			return true;
++	}
++	return false;
++}
++
+ static inline struct seg_entry *get_seg_entry(struct f2fs_sb_info *sbi,
+ 						unsigned int segno)
+ {
+@@ -509,7 +503,7 @@ static inline void __set_test_and_free(struct f2fs_sb_info *sbi,
+ 
+ 	free_i->free_segments++;
+ 
+-	if (!inmem && IS_CURSEC(sbi, secno))
++	if (!inmem && is_cursec(sbi, secno))
+ 		goto unlock_out;
+ 
+ 	/* check large section */
+@@ -986,7 +980,7 @@ static inline block_t sum_blk_addr(struct f2fs_sb_info *sbi, int base, int type)
+ 
+ static inline bool sec_usage_check(struct f2fs_sb_info *sbi, unsigned int secno)
+ {
+-	if (IS_CURSEC(sbi, secno) || (sbi->cur_victim_sec == secno))
++	if (is_cursec(sbi, secno) || (sbi->cur_victim_sec == secno))
+ 		return true;
+ 	return false;
+ }
+-- 
+2.49.0
 
 
 
