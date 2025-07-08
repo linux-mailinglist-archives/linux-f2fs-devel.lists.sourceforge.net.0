@@ -2,88 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECC3DAFC312
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  8 Jul 2025 08:47:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 475B1AFC37F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  8 Jul 2025 09:00:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Date:To:From:Message-ID:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=5Nc+Bkn+3nKTIBDGcZ0a7x0z5fq08LGHki1i37FZIHg=; b=jtiN/GXiewnWKG5cB6coIs6O6r
-	jYwVxdi/J7fGqZFpBD/sAKF8l5vuyBdr/J+3fArwifNeqlCYoA6YonLfGKQplfyZnvZz2vQ7W09Ov
-	Sc7i1innD61BQDBaMGeBtL+04ZbPVrxSMRxexbUbRtbigULfeEMg+G8eb2S2/0IPBiwU=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:Message-ID:Date:Mime-Version:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=Ch90zgF8Z5IxrQNw+QW+Ak4b1cofFRAPWw+iDbVf4b8=; b=kQxRds1FnQndIcn54LPbLXFHXV
+	TU0DlF4Xi/0ZM7IZBWtX5VsRa3UyX7ElC0hEmMZGBVpV0f9ORHKezUqS2neKUx9pkAscVKIlPA80z
+	iGfp9NXo1i2F7BthXtIJjvw7LYzdEU9gtjOMKotGi+v8De/qA02gPTLJPgbMhHHBHhKo=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uZ26n-0003Qc-7x;
-	Tue, 08 Jul 2025 06:47:17 +0000
+	id 1uZ2Iw-00011C-Pd;
+	Tue, 08 Jul 2025 06:59:50 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ywen.chen@foxmail.com>) id 1uZ26k-0003QB-BA
+ (envelope-from <ywen.chen@foxmail.com>) id 1uZ2I6-00010E-4K
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 08 Jul 2025 06:47:14 +0000
+ Tue, 08 Jul 2025 06:58:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Date:Subject:Cc:To:From:Message-ID:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-ID:Date:Content-Transfer-Encoding:
+ Content-Type:Mime-Version:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vdIyDvJNm1JguBw4F+puzOvkcznPiEpm8HbrDr1/ue4=; b=dD1jgEqGFwyoy31QCFUGR5Orp1
- PVAUxOW6npur8BhGazzJQGnnMHqh8mu7AVZefrZCTB2KhMcKKJCYjWVzJdbXz7wgXWjfA9eqxue8n
- bkiqZlzJ07LqalpvdJJwCz07nBtwq/h8vN+8WnzL4q4xPVJYAaAhLVstogTVa27YTLe0=;
+ bh=OM6K+jZaBXAoTLY0N4NnW3rs077RdjL2OSQEQtpSYZc=; b=l/vTcQEfXxXAIr3vu3vQiqLa8V
+ X0gRrgWISdOej1YRMsttaoOOZaBD3bZn1C2NziVO2tT2K6Dlm4tkCWl1dBm/rEs/E43+mGMsqJ8to
+ OpfLt8SIK7YPC70HvsSd5NnozKo+7xgahIk6YqZiFtOH12w2IoU+6i2AUR1NAgk057nU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Date:
- Subject:Cc:To:From:Message-ID:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=vdIyDvJNm1JguBw4F+puzOvkcznPiEpm8HbrDr1/ue4=; b=aSKuA9fVjgBedVDXF1qZurW66W
- KHrBcY/pqiC+6riYq90g/VLCx+jZxM8N+IdlPr79TCi+b8oXB/BinNr7DSaMyVDTDUWYjzyvTiba/
- vM946Vn5WRdEn4UEKQVivgBwME7D68cZ0y5Sk0FMkM6xxjpHo0NpT7RmJ1Vk094f9nJA=;
-Received: from out162-62-57-49.mail.qq.com ([162.62.57.49])
+ h=Message-ID:Date:Content-Transfer-Encoding:Content-Type:Mime-Version:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=OM6K+jZaBXAoTLY0N4NnW3rs077RdjL2OSQEQtpSYZc=; b=O
+ U6jRQzUKyJoPfub8pOPj8E7bYkGSNHVRINoxrdchqXbrEOhbiPejF7mxCoU6dnGIO4yM1KpSFRtmq
+ DtUfk/7d7BjEANkIRWE9ul9MHnvkcJBxBg+AGzXHhkm7lhmSNOA5yIfdJGO+rk1dgNdzCgQKFqc6t
+ U2E0mEVSAphJXpHo=;
+Received: from out203-205-221-252.mail.qq.com ([203.205.221.252])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uZ26j-0006sZ-28 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 08 Jul 2025 06:47:14 +0000
+ id 1uZ2I5-0007ez-Bx for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 08 Jul 2025 06:58:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
- s=s201512; t=1751956903;
- bh=vdIyDvJNm1JguBw4F+puzOvkcznPiEpm8HbrDr1/ue4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=woXWoh5oZVgyZpvePuntb8Uuth84cVtA9PdRkPcmJkN2AmiG5jIZ2xqa6Vs2Hoegn
- gG+uZcZqrMRCJY0zb/ksv4/7k+TbXiU6QhjABkdMl5UBjuoayCLnKGxphUKB7afRxN
- pSPcKTvTDSYEVpln/aG91vSQc+UbqA2B+6Xcqmuk=
-Received: from meizu-Precision-3660.meizu.com ([112.91.84.73])
- by newxmesmtplogicsvrszc16-0.qq.com (NewEsmtp) with SMTP
- id A6890ACF; Tue, 08 Jul 2025 14:41:40 +0800
-X-QQ-mid: xmsmtpt1751956900tianq68yj
-Message-ID: <tencent_5A2FE78BA54BA148917B62FCC4B5E4FC2505@qq.com>
-X-QQ-XMAILINFO: Mm/8i8/T4yne9o+Gb8aezNKf5Psbb6m1VxRKSa2JVhARcEcyjV0y21AATnjgl7
- oizaZTfuyqmRXnTMmfneAkENDMc6Vu1RT/u8y9XIcloKbgBjkaXNPNPyOdWZTtKQRknWjxdHD2AW
- Sxgq2JvE7RtnIPYwfGSnNyH1mB1OwRZuGMtOQLvCqC8xovQ9tTe4k6GZOTarq55quNN9JBvAwcx7
- qOOrO8zFVVOtW8ByOD/9YbFHisQllOFlMfxdZfKTHY7kfUA5b3iNz7IH5iekXOfv05fNAUos0KO4
- hG4bRM9n5Y1MMg+BCnvNLaLAEfpZFdbe7LtFQ6PMmt8I+JlYm8wWKKmc44W15m8vwTX6/ajAxNoK
- pJ7x01omadan2ex1F6frWPgiNrQ0jtrISb2TecrhIYkIPne4VzgpS984JHYZ+BqkiEEXOM2wRVNW
- TziMC+RzIXO92IOj7DDAb2t23XrnZQVN4GfRybb168MKM9QMZprVF+2aDDn0qtZBsUkFz7qqOrZK
- Jhz0cP1tY3My2A+Vt4BFYCD6IeAeZamAMf/mngWvv6j3Ea7tT/d77Uam4W7nlPnDjTaj262LmeLx
- zSs8fWTrGFAPEabL7LEOgyla55q6+dUSE8/GRAwF7fbyTTxEn6YNA0q7FeJocUjtIvy3l+b33H3R
- +OZAyL3Zj1qn3xR9aOw8E7SNXqT8rnbqkvjY79yCyW0w/rNQNHRmiWXVWV9V/0u4JgtLWhnIjRhL
- AeVKW7P90HPwCCAzsjEISF5L1Voz8SYgIiX/vRxbnGNZzkiKMpdsjHavXPxgIav54NVD4WcDWAgu
- VlSobte6LbHPRN4QJEYUJOZKvlfPrOl8Xc2S9yoXvnv4omGu/+E2Vo/86vTKrUmh3aA83Fzhc0Gt
- JBDpm2iPOgnR2TB9x+3rTsAune/cMl1qz/rA1Oriqev5G5LbttRZCHsz0Kyas4SqSpRrkH2Exqap
- CGb4v1Y7Zz4kAt1OMWipz5zkHocBmrKjEOAIYte+QXcFDqtKzaerx4H+9mQ+iR7A5wMR8cIuW+i0
- u5Z93q4jO5MGvWsSKKw5qxS3dDfwHRVht2RKF/Dw==
-X-QQ-XMRINFO: MPJ6Tf5t3I/ycC2BItcBVIA=
-From: Yuwen Chen <ywen.chen@foxmail.com>
-To: ywen.chen@foxmail.com
-Date: Tue,  8 Jul 2025 14:41:35 +0800
-X-OQ-MSGID: <20250708064135.844552-1-ywen.chen@foxmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <tencent_0D8BB6ABAB0880DB7BFCCE35EDBC3DCFF505@qq.com>
-References: <tencent_0D8BB6ABAB0880DB7BFCCE35EDBC3DCFF505@qq.com>
-MIME-Version: 1.0
+ s=s201512; t=1751957925;
+ bh=OM6K+jZaBXAoTLY0N4NnW3rs077RdjL2OSQEQtpSYZc=;
+ h=From:To:Cc:Subject:Date;
+ b=A28G1LjoZ3HwbAgyXYEvP5rNEuaFQZGqHOmhNsGNpGA2MvIqkYXL3+Yeo8vTaN1+T
+ 4hB9cZ5wul0OC/kjW5F+gmKoVMpQ7gVExHcYJzXYQhCltKQsfSu9P2jSEFA02Q71r9
+ Dchj7N/pxnynDFj/dmMAjPYeuDKtnnwH/ga+AccE=
+X-QQ-FEAT: 3C1WcPM5lQ4i+tGOZHPx80amo8TvG3to
+X-QQ-SSF: 0000000000000010000000000000
+X-QQ-SPAM: true
+X-QQ-XMRINFO: Mp0Kj//9VHAxr69bL5MkOOs=
+X-QQ-XMAILINFO: M4kijGgdg8XvD6nB9qq3P51A2cCWZU8jZqnGM52RIwpXp1g0uc2MbUDM5iQFuM
+ 5RTLQjQiV/ny1SMNK6BiXkkbwONwK4byfFEUARK0XYXRx4aUON8oSwOfzVSXR9sk+IEY7DAK1wevk
+ ik4UzdFQrQdG+cRd3XzZ17I7tMPwMJ3ItGCE8tFguM6UB5W1EIOJvZIXtsSiJJba3LzLiVrPlqhnS
+ +uuW0FiWmXgKQgVeiGO4OOxQij4erJvlfzDgfZHK1uMEHn4VYCjfkz+xCgQG3I41KMuPclqGg3uyd
+ Y0P3AClqAjg3qEk12DGHKBUTaZr2ZCt4CJFNrEmPAWQEbjv+go51HUO8yGxt4e7Ezh1NF7sAAuFoK
+ 3WCWXuJj2poDKjBe5mHqvviGnZSVnqkfRK9D9hswqxk9vP0kDv4oA3EuuS2UNZB6/PUpceS4ZEGCK
+ vhhNMy8QQTbjJIZ2Uwyws3aKu3VQxchJpEcOFh+ey68Hs2FC8Ueg1K1i3t2OfDe+TS0NtPrJW1ixb
+ KNW26RYYr2mtTfAViOI8VV/g5T1DpJpVLpEgYIdgeg4eaiJI+NPeULdjo9wU1jscTJMDAYhyqqYvM
+ fRyIRbQT8NFxRcpacleYPGI68v6pRTH1GULo9kKlCDEe40Ac3KgOZY8ssl9SYtXlt6e7iLzJyqbw3
+ a4DJVjQLYq+6yImHIFikYkIAXFqoqlKdW0Nl/HCNprh84Lz2V8DQRunV/2K8EfvQO65OA0Lg7dtvh
+ qYcYBdQIMfvld5PK2ed9zfIRa8OvT1R8YGWRY9/bGOydjVcH8nLc35dRYlxjmDyjfayGc8OsWGBAk
+ fRmdmwonXrSlGEU0PFdngoIma4Z2oE0pNfof71n75llqVsWtX21y4awb+KJkGn0chpiC0kQQLZnGz
+ 7fXukotVuxcuubhYKpiEEOCiWzuQOVp76tZY52j0IviZK1VeeN/0qKnVVr9iZ1Ybid6zIn8TCABer
+ q8SXzxozxJtwXgielC7qSX3uwlJT8I8cqEPM1mJV/gpSt6tLQ+bh2Gvbafv803AzdVwqw0HBFGd5/
+ dPzp3OdXaLrx1tuaAUgW+DNhQBBR7H7fwJ6ogu0CeLtzKGcj10h99QO8EXSDyrOJDtWNtifqQvG7w
+ 7KDsg4Zi4BzIGuHix+TBEUMV8c+QidhFfio=
+X-HAS-ATTACH: no
+X-QQ-BUSINESS-ORIGIN: 2
+X-Originating-IP: 14.21.142.155
+X-QQ-STYLE: 
+X-QQ-mid: webmail632t1751957538t2012164
+From: "=?ISO-8859-1?B?eXdlbi5jaGVu?=" <ywen.chen@foxmail.com>
+To: "=?ISO-8859-1?B?Q2hyaXN0b3BoIEhlbGx3aWc=?=" <hch@infradead.org>,
+ "=?ISO-8859-1?B?RXJpYyBCaWdnZXJz?=" <ebiggers@kernel.org>
+Mime-Version: 1.0
+Date: Tue, 8 Jul 2025 14:52:17 +0800
+X-Priority: 3
+Message-ID: <tencent_FCCBB98BA5E88F7B6DFCDC55EC9C23CFF105@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
 X-Spam-Score: 3.4 (+++)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -91,9 +97,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  During path traversal, the generic_ci_match function may be
- called multiple times. The number of memory allocations and releases in it
- accounts for a relatively high proportion in the flamegraph. This [...] 
+ Content preview:  &gt; But I wonder why generic_ci_match is even called that
+ often. Both ext4 &gt; and f2fs support hashed lookups, so you should usually
+ only see it called &gt; for the main match, plus the occasional [...] 
  Content analysis details:   (3.4 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -109,9 +115,10 @@ X-Spam-Report: Spam detection software,
  0.4 RDNS_DYNAMIC           Delivered to internal network by host with
  dynamic-looking rDNS
  3.2 HELO_DYNAMIC_IPADDR    Relay HELO'd using suspicious hostname (IP addr
- 1)
-X-Headers-End: 1uZ26j-0006sZ-28
-Subject: [f2fs-dev] [PATCH v4 1/2] libfs: reduce the number of memory
+ 1) 0.0 FROM_EXCESS_BASE64     From: base64 encoded unnecessarily
+ 0.0 NO_FM_NAME_IP_HOSTN    No From name + hostname using IP address
+X-Headers-End: 1uZ2I5-0007ez-Bx
+Subject: Re: [f2fs-dev] [PATCH v3 1/2] libfs: reduce the number of memory
  allocations in generic_ci_match
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -124,153 +131,55 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: brauner@kernel.org, tytso@mit.edu, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, adilger.kernel@dilger.ca,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org
+Cc: =?ISO-8859-1?B?YnJhdW5lcg==?= <brauner@kernel.org>,
+ =?ISO-8859-1?B?dHl0c28=?= <tytso@mit.edu>,
+ =?ISO-8859-1?B?bGludXgta2VybmVs?= <linux-kernel@vger.kernel.org>,
+ =?ISO-8859-1?B?bGludXgtZjJmcy1kZXZlbA==?=
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ =?ISO-8859-1?B?Q2hyaXN0b3BoIEhlbGx3aWc=?= <hch@infradead.org>,
+ =?ISO-8859-1?B?YWRpbGdlci5rZXJuZWw=?= <adilger.kernel@dilger.ca>,
+ =?ISO-8859-1?B?dmlybw==?= <viro@zeniv.linux.org.uk>,
+ =?ISO-8859-1?B?bGludXgtZnNkZXZlbA==?= <linux-fsdevel@vger.kernel.org>,
+ =?ISO-8859-1?B?amFlZ2V1aw==?= <jaegeuk@kernel.org>,
+ =?ISO-8859-1?B?bGludXgtZXh0NA==?= <linux-ext4@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-During path traversal, the generic_ci_match function may be called
-multiple times. The number of memory allocations and releases
-in it accounts for a relatively high proportion in the flamegraph.
-This patch significantly reduces the number of memory allocations
-in generic_ci_match through pre - allocation.
-
-Signed-off-by: Yuwen Chen <ywen.chen@foxmail.com>
----
- fs/ext4/namei.c    |  2 +-
- fs/f2fs/dir.c      |  2 +-
- fs/libfs.c         | 33 ++++++++++++++++++++++++++++++---
- include/linux/fs.h |  8 +++++++-
- 4 files changed, 39 insertions(+), 6 deletions(-)
-
-diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
-index a178ac2294895..f235693bd71aa 100644
---- a/fs/ext4/namei.c
-+++ b/fs/ext4/namei.c
-@@ -1443,7 +1443,7 @@ static bool ext4_match(struct inode *parent,
- 
- 		return generic_ci_match(parent, fname->usr_fname,
- 					&fname->cf_name, de->name,
--					de->name_len) > 0;
-+					de->name_len, NULL) > 0;
- 	}
- #endif
- 
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index c36b3b22bfffd..4c6611fbd9574 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -197,7 +197,7 @@ static inline int f2fs_match_name(const struct inode *dir,
- 	if (fname->cf_name.name)
- 		return generic_ci_match(dir, fname->usr_fname,
- 					&fname->cf_name,
--					de_name, de_name_len);
-+					de_name, de_name_len, NULL);
- 
- #endif
- 	f.usr_fname = fname->usr_fname;
-diff --git a/fs/libfs.c b/fs/libfs.c
-index 9ea0ecc325a81..293b605971bbf 100644
---- a/fs/libfs.c
-+++ b/fs/libfs.c
-@@ -1863,6 +1863,26 @@ static const struct dentry_operations generic_ci_dentry_ops = {
- #endif
- };
- 
-+#define DECRYPTED_NAME_PREALLOC_MIN_LEN 64
-+static inline char *decrypted_name_prealloc_resize(
-+		struct decrypted_name_prealloc *prealloc,
-+		size_t wantlen)
-+{
-+	char *retbuf = NULL;
-+
-+	if (prealloc->name && wantlen <= prealloc->namelen)
-+		return prealloc->name;
-+
-+	retbuf = kmalloc(wantlen + DECRYPTED_NAME_PREALLOC_MIN_LEN, GFP_KERNEL);
-+	if (!retbuf)
-+		return NULL;
-+
-+	kfree(prealloc->name);
-+	prealloc->name = retbuf;
-+	prealloc->namelen = wantlen + DECRYPTED_NAME_PREALLOC_MIN_LEN;
-+	return retbuf;
-+}
-+
- /**
-  * generic_ci_match() - Match a name (case-insensitively) with a dirent.
-  * This is a filesystem helper for comparison with directory entries.
-@@ -1873,6 +1893,7 @@ static const struct dentry_operations generic_ci_dentry_ops = {
-  * @folded_name: Optional pre-folded name under lookup
-  * @de_name: Dirent name.
-  * @de_name_len: dirent name length.
-+ * @prealloc: decrypted name memory buffer
-  *
-  * Test whether a case-insensitive directory entry matches the filename
-  * being searched.  If @folded_name is provided, it is used instead of
-@@ -1884,7 +1905,8 @@ static const struct dentry_operations generic_ci_dentry_ops = {
- int generic_ci_match(const struct inode *parent,
- 		     const struct qstr *name,
- 		     const struct qstr *folded_name,
--		     const u8 *de_name, u32 de_name_len)
-+		     const u8 *de_name, u32 de_name_len,
-+		     struct decrypted_name_prealloc *prealloc)
- {
- 	const struct super_block *sb = parent->i_sb;
- 	const struct unicode_map *um = sb->s_encoding;
-@@ -1899,7 +1921,11 @@ int generic_ci_match(const struct inode *parent,
- 		if (WARN_ON_ONCE(!fscrypt_has_encryption_key(parent)))
- 			return -EINVAL;
- 
--		decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
-+		if (!prealloc)
-+			decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
-+		else
-+			decrypted_name.name = decrypted_name_prealloc_resize(
-+					prealloc, de_name_len);
- 		if (!decrypted_name.name)
- 			return -ENOMEM;
- 		res = fscrypt_fname_disk_to_usr(parent, 0, 0, &encrypted_name,
-@@ -1928,7 +1954,8 @@ int generic_ci_match(const struct inode *parent,
- 		res = utf8_strncasecmp(um, name, &dirent);
- 
- out:
--	kfree(decrypted_name.name);
-+	if (!prealloc)
-+		kfree(decrypted_name.name);
- 	if (res < 0 && sb_has_strict_encoding(sb)) {
- 		pr_err_ratelimited("Directory contains filename that is invalid UTF-8");
- 		return 0;
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 4ec77da65f144..65307c8c11485 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -3651,10 +3651,16 @@ extern int generic_file_fsync(struct file *, loff_t, loff_t, int);
- extern int generic_check_addressable(unsigned, u64);
- 
- extern void generic_set_sb_d_ops(struct super_block *sb);
-+
-+struct decrypted_name_prealloc {
-+	char *name;
-+	size_t namelen;
-+};
- extern int generic_ci_match(const struct inode *parent,
- 			    const struct qstr *name,
- 			    const struct qstr *folded_name,
--			    const u8 *de_name, u32 de_name_len);
-+			    const u8 *de_name, u32 de_name_len,
-+			    struct decrypted_name_prealloc *prealloc);
- 
- #if IS_ENABLED(CONFIG_UNICODE)
- int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str);
--- 
-2.34.1
+&gt; But I wonder why generic_ci_match is even called that often.  Both ext4
+&gt; and f2fs support hashed lookups, so you should usually only see it called
+&gt; for the main match, plus the occasional hash false positive, which should
+&gt; be rate if the hash works.
 
 
+At present, in the latest version of Linux, in some scenarios,
+f2fs still uses linear search.
 
+
+The logic of linear search was introduced by Commit 91b587ba79e1
+(f2fs: Introduce linear search for dentries). Commit 91b587ba79e1
+was designed to solve the problem of inconsistent hashes before
+and after the rollback of Commit 5c26d2f1d3f5
+("unicode: Don't special case ignorable code points"),
+which led to files being inaccessible.
+
+
+In order to reduce the impact of linear search, in relatively new
+versions, the logic of turning off linear search has also been
+introduced. However, the triggering conditions for this
+turn - off logic on f2fs are rather strict:
+
+
+1. Use the latest version of the fsck.f2fs tool to correct
+the file system.
+2. Use a relatively new version of the kernel. (For example,
+linear search cannot be turned off in v6.6)
+
+
+The performance gain of this commit is very obvious in scenarios
+where linear search is not turned off. In scenarios where linear
+search is turned off, no performance problems will be introduced
+either.<br>
 _______________________________________________
 Linux-f2fs-devel mailing list
 Linux-f2fs-devel@lists.sourceforge.net
