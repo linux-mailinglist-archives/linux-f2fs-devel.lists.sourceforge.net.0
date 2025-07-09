@@ -2,75 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3C4BAFF091
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Jul 2025 20:10:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B025AFF092
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Jul 2025 20:10:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=dUGkKMlehnfZFRNOWn60jHYtKyaYm6K05hWpbsWX3rw=; b=UgQB/dbgLHfz9oH5BonBq0szoo
-	4QqviDeJIn4fXTUTO3sFQL0cHhnIOQavru/hGXkopEks9wvz5vDtT1GUR03AqY8pgejcqloudnxz3
-	NRXVBgZUhVvyWcQ0UlS9JSA/3PFzzkzEsq9cG6UAAiLYFJrrEFoRNOTLvtyTWFumvhNA=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=TWKCDmHd1fY4JpqnKnXEajb9b17AlK4yMZDk5lQnEDU=; b=I+srSvz3D5lwrSTe0QfpdzcoxU
+	dLuIOjt7FbSSS6nGbAoYPEsWKwqRLZiTnnvMLtqmbaHVkV3R9t66EN9XbnsP8LfWf/FVnqKnnzl4K
+	BcjSWDxoShnzGRw25gstyosOhdRr5N2VM91OGLmFSr/PvNSbllId41Yvh9UKcxypY5oc=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uZZFJ-0003Gy-S6;
-	Wed, 09 Jul 2025 18:10:17 +0000
+	id 1uZZFM-0000Bo-Ax;
+	Wed, 09 Jul 2025 18:10:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uZZFI-0003Gf-Nr
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uZZFK-0000BH-D5
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Jul 2025 18:10:16 +0000
+ Wed, 09 Jul 2025 18:10:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Q0RXHZl7AtyrMDkczvc0yO1tlwLm4Tl0wk6LVT1mB/s=; b=CI5ExpfFyLS5E/gGbyL0wrusLS
- rd7/fdJKuqbfxnJcYfKDElcmCEhlYcivRWDDIS7MNDO3objfmsIw8/UffXxrcXTmP8+xsX2JXFIr2
- X728OvGAIb1VOLcKbQWYIrzoaB22q1BkiZMJehlCSqN9MkOy9oNugQXqrURrH2BSVr4o=;
+ bh=VqNKuQJDAyLSKCmRx1eZQR7iNamjwD93pAoxB0N4QlA=; b=R5HWsM1Ezpbz9ePBCiFNyZHmC2
+ Wk4XGIxGnTfqdN3BwAqmbAm/dKc8+9/4U59N1wUXLP6gi3J2NAd5gvJXmYMnBasptu1wG19LoKj7a
+ MLQD4lXBR78gisfm1UkZh/R69413+XwsGKNs8jQUE+c6OZXoB70wntHHw8Tz1s36uZP4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Q0RXHZl7AtyrMDkczvc0yO1tlwLm4Tl0wk6LVT1mB/s=; b=kuvvx2jUqP51zQx0SUAE6vDvzl
- amMi2ZXMf767qizEC2j50dn/53Jr8h0i4hmvkxQrTffaGHTIvybUMbpkpwkYtCJ3DjRHEhNI9+3sA
- Z+jI5CRn+w40EV3uH6KNFCrkjdUPya+SlACTqHl4XXkInPVmfsUTbmmhmy+ZHPdmuIbs=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=VqNKuQJDAyLSKCmRx1eZQR7iNamjwD93pAoxB0N4QlA=; b=ZzfNjT8ts9A1yqaSd4Pe2OqycJ
+ dxDewW3905Gnqxzma4K00ajYBVF09wHusWUdGgTCj25kWW+mNEKw00K+Q9GMAEiQ2ES3GJUrb+KnU
+ yr86b/5UtR00JrQxrbJp5zE7LKhzK4A5PxPuaVwxP4zgWO9pROxGIDzj4j8WTOqxjkU8=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uZZFI-00015h-7g for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Jul 2025 18:10:16 +0000
+ id 1uZZFJ-00015p-S5 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 09 Jul 2025 18:10:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id E07B046CFC
+ by dfw.source.kernel.org (Postfix) with ESMTP id 7F4D65C66A5
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  9 Jul 2025 18:10:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEF40C4CEF6;
- Wed,  9 Jul 2025 18:10:05 +0000 (UTC)
+ Wed,  9 Jul 2025 18:10:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 30D07C4CEEF;
+ Wed,  9 Jul 2025 18:10:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1752084605;
- bh=HpLA/csdIf4y0vi9CmCGy/+RR/+xZan3AAxP+nrDaec=;
+ s=k20201202; t=1752084607;
+ bh=PspK8ujFcaUDrWOGcERuvoq46KpPQ2Uf1F/VNnPDiJ0=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=i/4jmyRDuF9b2FHz0GcygnbXH1j72BbZ4HWWBf6OPM3ri3guL2pGHmfHdrGqkzb8B
- OVw1EjAi3pLr0EBkCzvjToXugOoFFUnmkBRXvbVYK7PD2H1LUZM38dJh2Lm0uLf6be
- hFyF09CZFpk/ZBNLxbYYxUNaGMXdO9bYU+r5MGyEQWXdooCBxb9Vr+kvgfJJeadSml
- /IyuUE6FrKz0GHrSpaxecqHMt4IGun3PZS0mfpoulJ9Wxokazcnbv74H/Mxu9VUWUD
- GMFMBfuMX+MhpmwfK4cfxwF2/MKSVm+2RO/24sloA8y6vKn1ncyAmneAmd0HjBOmU6
- C5PArQUTo2ZnA==
+ b=Q0JK2x9rhYDWwEQs9c9Vf6PQt2HTPvooCcxVS+KfzoqIsqAjmB+RkuTXpmV3uN1tQ
+ YgeBCIdDIW0hfzJnAKg/eGWcjaTAO7mYTZDCwgjeZ0OP+f5RIgTAS4gTWxaNC6PC6b
+ vseppHCscEuUj6tS3SsGyT7Sa2s+VRIigbazEHlhI4U3CgesxTcauU4jsPW2x+x8Qk
+ vE0LV/EQyQyOGMY0ioye/R4nj5zGILFO0VnM4jb71MQZX073eK40OHZgHBtWYCBr/K
+ tq57c9n6XOoyEC+DlQyCxEvhDJ2ZNN9sJFe12JWQdz9++G7xkrtCAvRfEDrZe6bCIu
+ brgogaI+/Yiog==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 70E4C380DBEE; Wed,  9 Jul 2025 18:10:29 +0000 (UTC)
+ EB004380DBEE; Wed,  9 Jul 2025 18:10:30 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <175208462800.806926.16263047137393300350.git-patchwork-notify@kernel.org>
-Date: Wed, 09 Jul 2025 18:10:28 +0000
-References: <20250707114614.2769306-1-chao@kernel.org>
-In-Reply-To: <20250707114614.2769306-1-chao@kernel.org>
+Message-Id: <175208462949.806926.13437251978499582441.git-patchwork-notify@kernel.org>
+Date: Wed, 09 Jul 2025 18:10:29 +0000
+References: <20250627025944.152334-1-chao@kernel.org>
+In-Reply-To: <20250627025944.152334-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
@@ -80,10 +80,11 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 7 Jul 2025 19:46:14 +0800 you wrote:
- > There are redundant codes in IS_CUR{SEG,SEC}() macros, let's introduce
- > inline is_cur{seg,sec}() functions, and use a loop in it for cleanup. >
- > Meanwh [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 27 Jun 2025 10:59:43 +0800 you
+ wrote: > F2FS-fs (vdc): f2fs_recover_fsync_data: recovery fsync data,
+ check_only:
+ 0 > F2FS-fs (vdc): do_recover_data: start to recover dnode > F2FS-fs (vdc):
+ rec [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,8 +96,9 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uZZFI-00015h-7g
-Subject: Re: [f2fs-dev] [PATCH] f2fs: introduce is_cur{seg,sec}()
+X-Headers-End: 1uZZFJ-00015p-S5
+Subject: Re: [f2fs-dev] [PATCH] f2fs: account and print more stats during
+ recovery
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,20 +124,20 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon,  7 Jul 2025 19:46:14 +0800 you wrote:
-> There are redundant codes in IS_CUR{SEG,SEC}() macros, let's introduce
-> inline is_cur{seg,sec}() functions, and use a loop in it for cleanup.
-> 
-> Meanwhile, it enhances expansibility, as it doesn't need to change
-> is_cur{seg,sec}() when we add a new log header.
+On Fri, 27 Jun 2025 10:59:43 +0800 you wrote:
+> F2FS-fs (vdc): f2fs_recover_fsync_data: recovery fsync data, check_only: 0
+> F2FS-fs (vdc): do_recover_data: start to recover dnode
+> F2FS-fs (vdc): recover_inode: ino = 5, name = testfile.t2, inline = 21
+> F2FS-fs (vdc): recover_data: ino = 5, nid = 5 (i_size: recover), range (0, 864), recovered = 1, err = 0
+> F2FS-fs (vdc): do_recover_data: dnode: (recoverable: 256, fsynced: 256, total: 256), recovered: (inode: 256, dentry: 1, dnode: 256), err: 0
 > 
 > Signed-off-by: Chao Yu <chao@kernel.org>
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: introduce is_cur{seg,sec}()
-    https://git.kernel.org/jaegeuk/f2fs/c/c1cfc87e4952
+  - [f2fs-dev] f2fs: account and print more stats during recovery
+    https://git.kernel.org/jaegeuk/f2fs/c/55fc364b430e
 
 You are awesome, thank you!
 -- 
