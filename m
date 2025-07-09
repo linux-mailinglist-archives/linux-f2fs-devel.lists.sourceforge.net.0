@@ -2,87 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D042AFF08A
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Jul 2025 20:10:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C5034AFF086
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Jul 2025 20:10:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Jwm7AWRPHTaoAWvMB9cPJEiuvmzKYiuByrWML8jJOoQ=; b=JxDU9xdqCyVnzORYothd8IoOdl
-	Lwbs+mylWvJGfMM+MQTf59sfXlTVxk1z07qydpUgR7ZxXesqxKqKe3Bi2RCp+MhgN4y6BLoanQEn3
-	6DOhV3nCpx5cmn5yAk/iMiLguvyRD8+HtLp5rmI67MNbZfCrXeN/R5QqdypxB781xnYE=;
+	bh=f7zjXJtboERAw/FQ8pzOfR8r4oD0g2Yyn2tsA/cWAjg=; b=Pw6GznAcApP7q+a4vyxsio7iBS
+	PSe0SpWsnKCpU5FIErM9pTIeG99JbEibeIU4e1kn6aCacyTlSFK7LZreDqjvQiahu+HxLWFNAzo/3
+	Qowsz6CAfRKYtQSLFFvgv0JNoxZf0NVDo0PG75vl/Aca7pbEQvgqqbeGm8rlU0CoGnIU=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uZZF8-0003Es-TP;
-	Wed, 09 Jul 2025 18:10:06 +0000
+	id 1uZZF5-0003EG-Iv;
+	Wed, 09 Jul 2025 18:10:03 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uZZF7-0003Ec-Dl
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uZZF3-0003Dz-UJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Jul 2025 18:10:05 +0000
+ Wed, 09 Jul 2025 18:10:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0DIs1Q4XlWRxX+wkfuf4qsi6K6EUqBjlUF/NpVuCoBI=; b=SAp3q+iRk1cXv8kaK7LCqXIP2e
- zA4dPaUqjW0efQ4/DA6K41FDWmIkV0Cu2PrW+UHddNdUtqaHgiHINzCFzBKeiSCkApcSc/WYQwY7U
- 3rSXG7JBKJlIELIXH8jkBArQY1ARYC+juaBk9zcMvuChkb5QAF7YFaKSIdvxhJFF3les=;
+ bh=N8iuvfEIVeRPnPBoI0T0WSTR/3Qn1rbEz++AQm74Bxk=; b=bMRacyOYhSMHSvrMi3aQWEAiSK
+ mHe0uOFGnsGsfg5Tq+/iT6NAiIshZ58I+v02qKfdgXGqLVd0pxwMHCbl6ZO5PigvN8SUeB83xTW4W
+ +sehkCMkm6//W7/UQgTdwKXYgnepdEADKht0Zbi87pW3mIz2ZPxSx6QKsLXq9aG3nKGI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0DIs1Q4XlWRxX+wkfuf4qsi6K6EUqBjlUF/NpVuCoBI=; b=S54/oejh7zN2oevoCesAGl0SX1
- jp4U3n6AmLuH/m+Y7YT3se6NaMK81fMAchv4ot7gaWse07G3vg6Cbt/D3aIIsuY3fRpuPG/iXPUQF
- nqcrs6obLSHF3VvlTm75l3WRV/1XXpvZFt5AlL+1OKKcUOq6cHhZT1n/dqn039Y7CkZ8=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=N8iuvfEIVeRPnPBoI0T0WSTR/3Qn1rbEz++AQm74Bxk=; b=Lak+DGWRGSoTfO0at8au1Kdc8M
+ UXEqpdwo+r2G2AeRWvO49svxu2TnEKAAFMb9zqdLlNCTmTjfqE+hP5NBqu0XMloe2sLkW7VEygCaJ
+ HDkykBQYb9KN4Wk/ZdkumiGOyZXtVz3egGHigmbvPM91ZgdpgZ0cLGI4DmXbS2Yu/2js=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uZZF6-00013y-TD for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Jul 2025 18:10:05 +0000
+ id 1uZZF3-00013h-A8 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 09 Jul 2025 18:10:01 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 4AE88A548C2;
- Wed,  9 Jul 2025 18:09:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7E1EC4CEF4;
- Wed,  9 Jul 2025 18:09:53 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id BA484613B2;
+ Wed,  9 Jul 2025 18:09:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C4C1C4CEF6;
+ Wed,  9 Jul 2025 18:09:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1752084593;
- bh=deWznCu+qIVvHco4q82pWqu7tD2dtpJCvTArIsFwwoo=;
+ s=k20201202; t=1752084595;
+ bh=SB5eGlc2moEaIco7oamQmt2dqEBMeVD1RaTZ695Ux3c=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=pcg89k/5aI50z22ZC0VOG+RaCBBRuG0I2Rxs0OESF+As77JBKssJToQQvS/UpzHuV
- wj00tFkwiG6JcbRm0hlzPIASIOzpyIGa3PHs43Vv+/l4egALWvnHvOkam2jbemkZAU
- mxk2u9qQzqMwtcyGhB+N2n+F0d4A332lXpQPgnAx97dTOw4ueVGP4TikyjwXZ/lMBN
- dfJQ3/gnxp2IorXT941oMpQyPod9pwWptUl5eXyF5xlvgOauilLqFnJOyr4snZncJw
- Vw9U1jVzELHWNTmPFovgBl0fIclSHSRoUBG5y4uDTFxqKvRks8D/2DkHqb4ZTidapc
- WpCMqN9s9ikfg==
+ b=DYmPdDBoNmwt4l6OVHUtKSm5T1xZIxE4IwuRARnvBD3ePi/8j6tU8YU5Ap7BoA9nI
+ 1W5Ykp0YnIqy+ILppNiwRPQzTurFnpfBE9fblqRrEHw8dzKSx//ZiBW/fTDiVSGRkG
+ CJ3GlphzdOWPSOJAo8px+1SuHUri0qv1qRLK2A0D97hCHUEwerBIYGQsw9OaSQuiJS
+ h7bjK9ImtSqXq1Qf4pBAIGs0RHrCD/grD9DYP7d9Mc6UZBbPaRNE7IsrQsNLbL6vP5
+ fiHWQqn0CJ2IZqxOdBme/F0TdiZ9Q1vAkkf9R+9Xh52b7+qAYmCGU9tcNtmI2n8Pai
+ rt3PBDoNhef+A==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- AE363380DBEE; Wed,  9 Jul 2025 18:10:17 +0000 (UTC)
+ 33E86380DBEE; Wed,  9 Jul 2025 18:10:19 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <175208461625.806926.1915540263699572760.git-patchwork-notify@kernel.org>
-Date: Wed, 09 Jul 2025 18:10:16 +0000
-References: <20250617174047.1511951-1-s.prabhu@samsung.com>
-In-Reply-To: <20250617174047.1511951-1-s.prabhu@samsung.com>
-To: Swarna Prabhu <sw.prabhu6@gmail.com>
+Message-Id: <175208461775.806926.5771206803640875026.git-patchwork-notify@kernel.org>
+Date: Wed, 09 Jul 2025 18:10:17 +0000
+References: <20250625110537.22806-1-abinashsinghlalotra@gmail.com>
+In-Reply-To: <20250625110537.22806-1-abinashsinghlalotra@gmail.com>
+To: Abinash Singh <abinashlalotra@gmail.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 17 Jun 2025 17:40:47 +0000 you
- wrote: > This patch fixes minor typos in comments in f2fs. > > Signed-off-by:
- Swarna Prabhu <s.prabhu@samsung.com> > --- > fs/f2fs/f2fs.h | 6 +++--- >
- fs/f2fs/no [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 25 Jun 2025 16:35:37 +0530 you
+ wrote: > KMSAN reported a use of uninitialized value in
+ `__is_extent_mergeable()`
+ > and `__is_back_mergeable()` via the read extent tree path. > > The root
+ cause [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,12 +91,13 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uZZF6-00013y-TD
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix the typos in comments
+X-Headers-End: 1uZZF3-00013h-A8
+Subject: Re: [f2fs-dev] [PATCH v4] f2fs: fix KMSAN uninit-value in
+ extent_info usage
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,8 +112,9 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- mcgrof@kernel.org, s.prabhu@samsung.com, jaegeuk@kernel.org
+Cc: syzbot+b8c1d60e95df65e827d4@syzkaller.appspotmail.com,
+ abinashsinghlalotra@gmail.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -121,19 +124,21 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Tue, 17 Jun 2025 17:40:47 +0000 you wrote:
-> This patch fixes minor typos in comments in f2fs.
+On Wed, 25 Jun 2025 16:35:37 +0530 you wrote:
+> KMSAN reported a use of uninitialized value in `__is_extent_mergeable()`
+>  and `__is_back_mergeable()` via the read extent tree path.
 > 
-> Signed-off-by: Swarna Prabhu <s.prabhu@samsung.com>
-> ---
->  fs/f2fs/f2fs.h  | 6 +++---
->  fs/f2fs/node.h  | 2 +-
->  fs/f2fs/super.c | 2 +-
->  3 files changed, 5 insertions(+), 5 deletions(-)
+> The root cause is that `get_read_extent_info()` only initializes three
+> fields (`fofs`, `blk`, `len`) of `struct extent_info`, leaving the
+> remaining fields uninitialized. This leads to undefined behavior
+> when those fields are accessed later, especially during
+> extent merging.
+> 
+> [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: Fix the typos in comments
-    https://git.kernel.org/jaegeuk/f2fs/c/1f136890263c
+  - [f2fs-dev,v4] f2fs: fix KMSAN uninit-value in extent_info usage
+    https://git.kernel.org/jaegeuk/f2fs/c/154467f4ad03
 
 You are awesome, thank you!
 -- 
