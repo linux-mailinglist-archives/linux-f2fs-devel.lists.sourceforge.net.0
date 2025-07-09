@@ -2,95 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0D73AFF01B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Jul 2025 19:49:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60CC0AFF081
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Jul 2025 20:09:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=AupaKM2Ik2Gzakxk0w0lEKBBFKx8b6mpyG77wf1CLHs=; b=V2gHboous4qf8LG7GYNIILgbQp
-	uvF3m5k5Qka1yNCRMyPMiq4TVgJ3dswFpO6+SHsj6T9+nS26CfNxdiTkxAXAeyI80xMTp8ypd0Tvt
-	KGI/gSpTNBpZEhSRCG3yVYfD0TO9fmSC5u63FjhyYVuisnamjTC1+ZeZtcWv5YhCsloc=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Date:Message-Id:MIME-Version:Sender:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=XWxW1DwxTKv6j1h4Yk/kxZeoxBOwMbKKMH2bwFFlhdw=; b=Iji4jQl/wcZa4YVqOUyi/rZ66P
+	wxrm7xfEZOrCKMguo7nJSJvouUBuoTqMh+S9E+39qGvXxFrl2RifX9B4YZcleKvSr1sEehciwJ8Yy
+	zOdvAeOzHvshFr3Z8roat5fw6TxFVQirEU7QqqxIVOkN+x3Y8jDhBjbInOfdHQALxM90=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uZYvM-0003g8-UI;
-	Wed, 09 Jul 2025 17:49:40 +0000
+	id 1uZZEv-0003CZ-7q;
+	Wed, 09 Jul 2025 18:09:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kent.overstreet@linux.dev>) id 1uZYvL-0003g2-Al
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uZZEu-0003CT-Cd
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Jul 2025 17:49:39 +0000
+ Wed, 09 Jul 2025 18:09:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hqDUS4BBDM+csIlPWx+TszLLC9bq/xJu9mUJf/EWg0s=; b=R9nFEDUlJqrq7SSfcGpLVNGRRQ
- GZRZwSQLUSQYvPTGB4bgfMTc8rIHLmpLinN0+dl16BQ1Mr+jLVTSpoj9jWUeMusKy9mVVZ4Wv7pXn
- x7JQkw2M0g9zWDZiIhBuHFyjvVS6Y2BS5RrVP9ccPUJIcZg46d6tfpDEiYR8ZAxH45Uc=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=21tx1HhE+tOhQ7JSU1DNZVLdwiBWJS/2JMaq3kSbKek=; b=c9s8+/MSyFjQD136R8qz5BKQWC
+ hN96B+gyFjGL+3ew9iMUEE0zCCFl8Qtp6OkX7TyJG2EcZbykUOi/t2TmNuwbp2wtB2C1l4KjzYU+V
+ vV2gbUlSSbPhlF1JSnavt2i5TcFD0QDFqpbvpA2biswBss+nZh1Jj0RsjcRRUNNF7tD4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=hqDUS4BBDM+csIlPWx+TszLLC9bq/xJu9mUJf/EWg0s=; b=QaV8AJ3ADKTOny5OqstlVGkTZC
- P/A0RJdSqEl9eqiNy6YrklHvLu+jZK/AyOJ881u5y7RKQLjDDN+/0VUzv2UEFx8HQMGgVRntulmYJ
- jcj2zi48NhcDMVXodSeToD8shmSqLQMTXrc8LxL2t6MGoqgy0H3rV9f7AJ3wEUDW7i4U=;
-Received: from out-171.mta0.migadu.com ([91.218.175.171])
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=21tx1HhE+tOhQ7JSU1DNZVLdwiBWJS/2JMaq3kSbKek=; b=Z
+ Tb3LMJq2/hlkZYiw8e+Idf4hRTBWlakH60kqyx0fyZd+u8zspImpD6uZFFXMmVv6C0QRxMcjskAQ4
+ KTlHyhNgG+Z3QPRfqnjYcgNp3CRQ/axrzAQNUPQ1ctUQdYQ96tCSEuJEmUSPaiAnjaijNStCaiYdW
+ Yq7Of2dYp4urpTC0=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uZYvK-0008HV-4G for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Jul 2025 17:49:39 +0000
-Date: Wed, 9 Jul 2025 13:49:12 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1752083364;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=hqDUS4BBDM+csIlPWx+TszLLC9bq/xJu9mUJf/EWg0s=;
- b=nxOYpGdfTMPJVXG5huvcmm3wX800iKwgvi9EibH7o8WPbGD0IbJnuT8Xfh49BzCs2NNRiI
- l7YWbWGNS8/XY+4jyd7qjYN5zK+VF2fi6LvcD3n2iQlxfIicgfoo+0Ab8aH3ZqPTI1/j4M
- /GaxGdzpYELaL0glMe+tv7VhZuKHsRo=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Kent Overstreet <kent.overstreet@linux.dev>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <y2rpp6u6pksjrzgxsn5rtcsl2vspffkcbtu6tfzgo7thn7g23p@7quhaixfx5yh>
-References: <343vlonfhw76mnbjnysejihoxsjyp2kzwvedhjjjml4ccaygbq@72m67s3e2ped>
+ id 1uZZEt-000135-Qq for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 09 Jul 2025 18:09:52 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 2DC3861152
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  9 Jul 2025 18:09:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D56DBC4CEEF
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  9 Jul 2025 18:09:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1752084585;
+ bh=zv0MLcJUUtQ89xH6gYQk6QD/dJLAf4ZnM812gO/xT0o=;
+ h=Subject:From:Date:To:From;
+ b=ZAL7pTleuDXhIR7TvFKNc9JcTxG9Jy65mn03zPLMN8gI+OKFtXXEejG2hx8MsNxFR
+ VFBsC03pkppJQwL9HRm0vWEV+XQV4C+HcBBrD+0i7yGT7SOIlMOnDNERu1ql+eKSSu
+ 6ZpzERMNAcBJ4muSWIW4lcxh/+zQ+BhUyclRXneKm3p5h3mi06tSaD5T71f+tJoUkh
+ MuTuiOnwS4Q7vyHRei4+CPEZhnIPYJDfe58+xsYtrmoXcKHDdEf3y8oelfigBn6n+6
+ mm78eM1SW/feRWO3r1ypksn1u7HQSmSPCyxhJttXfPKlnoNiYR1LL48YnSm2PWGTPC
+ JXnLEDhC7iK8Q==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+ by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
+ 760AB380DBEE for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  9 Jul 2025 18:10:09 +0000 (UTC)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <343vlonfhw76mnbjnysejihoxsjyp2kzwvedhjjjml4ccaygbq@72m67s3e2ped>
-X-Migadu-Flow: FLOW_OUT
-X-Spam-Score: -0.2 (/)
+Message-Id: <175208460812.806926.18079984227752717145.git-patchwork-summary@kernel.org>
+Date: Wed, 09 Jul 2025 18:10:08 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jul 09, 2025 at 07:23:07PM +0200, Jan Kara wrote:
- > On Wed 09-07-25 08:59:42, Dave Chinner wrote: > > This means that device
- removal processing can be performed > > without global filesystem/V [...]
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev, v4] f2fs: avoid
+ splitting bio when reading multiple pages Submitter: Huang Jianan
+ <huangjianan@xiaomi.com>
+ Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork: https://patchwork.ker
+ [...] Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1uZYvK-0008HV-4G
-Subject: Re: [f2fs-dev] [PATCH v4 1/6] fs: enhance and rename shutdown()
- callback to remove_bdev()
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uZZEt-000135-Qq
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,135 +109,119 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christian Brauner <brauner@kernel.org>, ntfs3@lists.linux.dev,
- "Darrick J. Wong" <djwong@kernel.org>, Dave Chinner <david@fromorbit.com>,
- Qu Wenruo <quwenruo.btrfs@gmx.com>, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-bcachefs@vger.kernel.org,
- Qu Wenruo <wqu@suse.com>, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org,
- viro@zeniv.linux.org.uk
+From: patchwork-bot+f2fs--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: patchwork-bot+f2fs@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jul 09, 2025 at 07:23:07PM +0200, Jan Kara wrote:
-> On Wed 09-07-25 08:59:42, Dave Chinner wrote:
-> > This means that device removal processing can be performed
-> > without global filesystem/VFS locks needing to be held. Hence issues
-> > like re-entrancy deadlocks when there are concurrent/cascading
-> > device failures (e.g. a HBA dies, taking out multiple devices
-> > simultaneously) are completely avoided...
-> 
-> Funnily enough how about:
-> 
-> bch2_fs_bdev_mark_dead()		umount()
->   bdev_get_fs()
->     bch2_ro_ref_tryget() -> grabs bch_fs->ro_ref
->     mutex_unlock(&bdev->bd_holder_lock);
-> 					deactivate_super()
-> 					  down_write(&sb->s_umount);
-> 					  deactivate_locked_super()
-> 					    bch2_kill_sb()
-> 					      generic_shutdown_super()
-> 					        bch2_put_super()
-> 						  __bch2_fs_stop()
-> 						    bch2_ro_ref_put()
-> 						    wait_event(c->ro_ref_wait, !refcount_read(&c->ro_ref));
->   sb = c->vfs_sb;
->   down_read(&sb->s_umount); -> deadlock
-> 
-> Which is a case in point why I would like to have a shared infrastructure
-> for bdev -> sb transition that's used as widely as possible. Because it
-> isn't easy to get the lock ordering right given all the constraints in the
-> VFS and block layer code paths for this transition that's going contrary to
-> the usual ordering sb -> bdev. And yes I do realize bcachefs grabs s_umount
-> not because it itself needs it but because it calls some VFS helpers
-> (sync_filesystem()) which expect it to be held so the pain is inflicted
-> by VFS here but that just demostrates the fact that VFS and FS locking are
-> deeply intertwined and you can hardly avoid dealing with VFS locking rules
-> in the filesystem itself.
+Hello:
 
-Getting rid of the s_umount use looks like the much saner and easier
-fix - like the comment notes, it's only taken to avoid the warning in
-sync_filesystem, we don't actually need it.
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-Locking gets easier when locks are private to individual subsystems,
-protecting specific data structures that are private to those
-subsystems.
+Patch: [f2fs-dev,v4] f2fs: avoid splitting bio when reading multiple pages
+  Submitter: Huang Jianan <huangjianan@xiaomi.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=977311
+  Lore link: https://lore.kernel.org/r/20250630125753.650630-1-huangjianan@xiaomi.com
 
-> > It also avoids the problem of ->mark_dead events being generated
-> > from a context that holds filesystem/vfs locks and then deadlocking
-> > waiting for those locks to be released.
-> > 
-> > IOWs, a multi-device filesystem should really be implementing
-> > ->mark_dead itself, and should not be depending on being able to
-> > lock the superblock to take an active reference to it.
-> > 
-> > It should be pretty clear that these are not issues that the generic
-> > filesystem ->mark_dead implementation should be trying to
-> > handle.....
-> 
-> Well, IMO every fs implementation needs to do the bdev -> sb transition and
-> make sb somehow stable. It may be that grabbing s_umount and active sb
-> reference is not what everybody wants but AFAIU btrfs as the second
-> multi-device filesystem would be fine with that and for bcachefs this
-> doesn't work only because they have special superblock instantiation
-> behavior on mount for independent reasons (i.e., not because active ref
-> + s_umount would be problematic for them) if I understand Kent right.
-> So I'm still not fully convinced each multi-device filesystem should be
-> shipping their special method to get from device to stable sb reference.
+Patch: [f2fs-dev] f2fs: fix to check upper boundary for value of gc_boost_zoned_gc_percent
+  Submitter: yohan.joung <yohan.joung@sk.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=975513
+  Lore link: https://lore.kernel.org/r/20250625001408.1961-1-yohan.joung@sk.com
 
-Honestly, the sync_filesystem() call seems bogus.
+Series: [f2fs-dev,v5,1/2] f2fs: convert F2FS_I_SB to sbi in f2fs_setattr()
+  Submitter: wangzijie <wangzijie1@honor.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=977251
+  Lore link: https://lore.kernel.org/r/20250630095454.3912441-1-wangzijie1@honor.com
+    Patches: [f2fs-dev,v5,1/2] f2fs: convert F2FS_I_SB to sbi in f2fs_setattr()
 
-If the block device is truly dead, what's it going to accomplish?
+Patch: [f2fs-dev] f2fs: use kfree() instead of kvfree() to free some memory
+  Submitter: Jiazi Li <jqqlijiazi@gmail.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=978475
+  Lore link: https://lore.kernel.org/r/20250703061358.13425-1-jqqlijiazi@gmail.com
 
-It's not like we get callbacks for "this device is going to be going
-away soon", we only get that in reaction to something that's already
-happened.
+Patch: [f2fs-dev,v4] f2fs: enable tuning of boost_zoned_gc_percent via sysfs
+  Submitter: yohan.joung <yohan.joung@sk.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=975512
+  Lore link: https://lore.kernel.org/r/20250625001336.1937-1-yohan.joung@sk.com
 
-> > > The shutdown method is implemented only by block-based filesystems and
-> > > arguably shutdown was always a misnomer because it assumed that the
-> > > filesystem needs to actually shut down when it is called.
-> > 
-> > Shutdown was not -assumed- as the operation that needed to be
-> > performed. That was the feature that was *required* to fix
-> > filesystem level problems that occur when the device underneath it
-> > disappears.
-> > 
-> > ->mark_dead() is the abstract filesystem notification from the block
-> > device, fs_bdfev_mark_dead() is the -generic implementation- of the
-> > functionality required by single block device filesystems. Part of
-> > that functionality is shutting down the filesystem because it can
-> > *no longer function without a backing device*.
-> > 
-> > multi-block device filesystems require compeltely different
-> > implementations, and we already have one that -does not use active
-> > superblock references-. IOWs, even if we add ->remove_bdev(sb)
-> > callout, bcachefs will continue to use ->mark_dead() because low
-> > level filesystem device management isn't (and shouldn't be!)
-> > dependent on high level VFS structure reference counting....
-> 
-> I have to admit I don't get why device management shouldn't be dependent on
-> VFS refcounts / locking. IMO it is often dependent although I agree with
-> multiple devices you likely have to do *additional* locking. And yes, I can
-> imagine VFS locking could get in your way but the only tangible example we
-> have is bcachefs and btrfs seems to be a counter example showing even multi
-> device filesystem can live with VFS locking. So I don't think the case is
-> as clear as you try to frame it.
+Patch: [f2fs-dev] f2fs: Fix the typos in comments
+  Submitter: Swarna Prabhu <sw.prabhu6@gmail.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=973077
+  Lore link: https://lore.kernel.org/r/20250617174047.1511951-1-s.prabhu@samsung.com
 
-Individual devices coming and going has nothing to do with the VFS. If a
-single device goes away and we're continuing in RW mode, _no_ VFS state
-is affected whatsoever.
+Patch: [f2fs-dev,v4] f2fs: fix KMSAN uninit-value in extent_info usage
+  Submitter: Abinash Singh <abinashlalotra@gmail.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=975731
+  Lore link: https://lore.kernel.org/r/20250625110537.22806-1-abinashsinghlalotra@gmail.com
 
-The only thing that's needed is a ref to prevent the filesystem from
-going away, not a lock. But again given that a bch_fs doesn't
-necessarily even have a VFS superblock it's not something we'd use
-directly in .mark_dead, that synchronization is handled directly via
-kill_sb -> generic_shutdown_super -> and all that...
+Patch: [f2fs-dev] f2fs: fix to use f2fs_is_valid_blkaddr_raw() in do_write_page()
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=977643
+  Lore link: https://lore.kernel.org/r/20250701092610.511964-1-chao@kernel.org
 
-We don't want bch_fs to outlive the VFS superblock if we do have a VFS
-sb, because asynchronous shutdown and releasing of resources causes very
-real problems (which already exist for other reasons...)
+Patch: [f2fs-dev] f2fs: check the generic conditions first
+  Submitter: Jaegeuk Kim <jaegeuk@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=977389
+  Lore link: https://lore.kernel.org/r/20250630160839.1142073-1-jaegeuk@kernel.org
+
+Patch: [f2fs-dev,v2] f2fs: fix to avoid UAF in f2fs_sync_inode_meta()
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=979979
+  Lore link: https://lore.kernel.org/r/20250708095339.3079788-1-chao@kernel.org
+
+Patch: [f2fs-dev] f2fs: doc: fix wrong quota mount option description
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=978047
+  Lore link: https://lore.kernel.org/r/20250702064925.1002176-1-chao@kernel.org
+
+Patch: [f2fs-dev,v2] f2fs: fix to avoid panic in f2fs_evict_inode
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=979982
+  Lore link: https://lore.kernel.org/r/20250708095657.3081188-1-chao@kernel.org
+
+Series: [f2fs-dev,1/2] f2fs: fix to check upper boundary for gc_valid_thresh_ratio
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=976428
+  Lore link: https://lore.kernel.org/r/20250627023818.146534-1-chao@kernel.org
+    Patches: [f2fs-dev,1/2] f2fs: fix to check upper boundary for gc_valid_thresh_ratio
+             [f2fs-dev,2/2] f2fs: fix to check upper boundary for gc_no_zoned_gc_percent
+
+Patch: [f2fs-dev] f2fs: introduce is_cur{seg,sec}()
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=979652
+  Lore link: https://lore.kernel.org/r/20250707114614.2769306-1-chao@kernel.org
+
+Patch: [f2fs-dev] f2fs: account and print more stats during recovery
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=976434
+  Lore link: https://lore.kernel.org/r/20250627025944.152334-1-chao@kernel.org
+
+
+Total patches: 16
+
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
 
 
 _______________________________________________
