@@ -2,107 +2,119 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E9ECAFDCCA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Jul 2025 03:13:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EF08AFDD99
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Jul 2025 04:42:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=0EuaJFNcDjdkhgU1eSrHm+nu66ZU0HsZ52g3gNUWeD0=; b=ji0tKs2BbVrNCGbTHXrAwV7PN2
-	UcVH97RMfsro0jPujhckmH6KShz7GoRlsmOIBpFOQum3/fh2J61RKnr/iH/mnnhJZqTXE7w6SWhqa
-	YhePUqDYsRCZhI6Ulrk8BxgDct5OxsCRv3M5wRyqinZ6IHynvbS2B+4Mb96c/Ixz7bpQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=B7zFXSoZbYuO+Cj2HqSYZcqS5yXHaJYcpE86lYL+Ij8=; b=N9YMVPm6SHW9NJxopfrAjG4nt7
+	M9ruJlXObzrc79rGJNyd2Gzwfo2efXPUN9vF+CVtJ6niwy8/N20q3Y0iplXp7IVzhCksWbj4qzp8F
+	sdbdSQA7sqwcPnaibgRCbkpv2uq73Q34bmJrTCgws+7T1v3vWxiJCDoNMRC/Wv1bQkEQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uZJNZ-0008Sx-Km;
-	Wed, 09 Jul 2025 01:13:45 +0000
+	id 1uZKlf-0000rG-HR;
+	Wed, 09 Jul 2025 02:42:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kent.overstreet@linux.dev>) id 1uZJNX-0008Sh-Sa
+ (envelope-from <lkp@intel.com>) id 1uZKld-0000r9-AH
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Jul 2025 01:13:44 +0000
+ Wed, 09 Jul 2025 02:42:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Cy2fv3s6ERO5d4cU+IzLOG038BuHbFit+Fwtwintg6A=; b=gcefmW/t74f5yGfzJWGyesWGSO
- 9VsCdM2eE+8VBKhrfUPYuF6uFMTI33dhprzwA3nJ6/bC6XM4xp2I6rYEnYSoL7Ox6IYJDZgrVfKMr
- rmGvEQUBIAmYykpyZnjX9o72IfdHOUFRQh/MrwE6SYuxUPQyG+f9qhRpcv/8ch4SqLqI=;
+ bh=Dddadjzc6vklg6TEvhfw4K2tSgz5pavYZvzo2vTvWtY=; b=KWUrGpiXjBVaHTZwsCm2DYezu+
+ Q/7eOvRa8IiMPBu4dqvF3DVFaYm1sFFFDd/z2f+p/D+4vT3Hw3qfeDrv+YX8oHvxsYc3KEABcc3H6
+ XEN97C1YjXAksEBC7By6HpYMbPj3pTXrxTskbPly3JWERIHYecGaksLmhIb/BW45V2ok=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Cy2fv3s6ERO5d4cU+IzLOG038BuHbFit+Fwtwintg6A=; b=NFXew97rc4LFAF6K0ZFA9PNKY2
- S7/ctsEL1WB0pV0oguA8IOItujOQlYeuDAt3zQCnMKhE5bcIktEM3mISokalMojsf4tkUy1xy8S77
- nkLLYneZ9/IueebPw/1ToVkUBxS3NCwOq2VOVb8i3d8pdVyWgex6M8/BbYysogyLG9QE=;
-Received: from out-183.mta0.migadu.com ([91.218.175.183])
+ bh=Dddadjzc6vklg6TEvhfw4K2tSgz5pavYZvzo2vTvWtY=; b=kUbj7s2tM/PiLNsMrnpBcMjS0B
+ nsTUsQOii/sjiW9MRevzNj5M+KBjCh/xgcl72g1JMv8izrXsVmtnOHdZcAE79Vs9LJd6dUyGqd6c7
+ TUVbvkoxdz2sZoT8loDeuNi7vOu0LrrgUUErpmE0C/drxe06HYESO3HUgCHW88xEBD2c=;
+Received: from mgamail.intel.com ([192.198.163.8])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uZJNW-00041k-Nr for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Jul 2025 01:13:43 +0000
-Date: Tue, 8 Jul 2025 21:13:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1752023610;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Cy2fv3s6ERO5d4cU+IzLOG038BuHbFit+Fwtwintg6A=;
- b=UhSl7kPeAE9NdrlN6dm0fuhSYJ+U/aw9XBq4CN7FGW9Phojz8I1CGRLbLw8wleVPz5RQHI
- 5HbOIc7YTA8sPAuR3KhNCRrnFyl/8xtzRiOj7LAuxJ4uH51PZVZdOGEAm0yLDs3pWF5hsV
- wcT3hxFix0OyWJnAqgDKJsCyzR7eNb8=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Kent Overstreet <kent.overstreet@linux.dev>
-To: Qu Wenruo <quwenruo.btrfs@gmx.com>
-Message-ID: <c6zp6k7ozn7idiyt4shxhwwe2hoprkgdzq66eau5w4jlgbuwta@od2atq4kexoj>
-References: <cover.1751589725.git.wqu@suse.com>
- <de25bbdb572c75df38b1002d3779bf19e3ad0ff6.1751589725.git.wqu@suse.com>
- <aGxSHKeyldrR1Q0T@dread.disaster.area>
- <dbd955f7-b9b4-402f-97bf-6b38f0c3237e@gmx.com>
- <20250708004532.GA2672018@frogsfrogsfrogs>
- <20250708-geahndet-rohmaterial-0419fd6a76b3@brauner>
- <aG2i3qP01m-vmFVE@dread.disaster.area>
- <00f5c2a2-4216-4eeb-b555-ef49f8cfd447@gmx.com>
- <lcbj2r4etktljckyv3q4mgryvwqsbl7pwe6sqdtyfwgmunhkov@4oinzvvnt44s>
- <eb7c3b1c-b5c0-4078-9a88-327f1220cae8@gmx.com>
+ id 1uZKlc-0007Nh-O5 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 09 Jul 2025 02:42:41 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1752028961; x=1783564961;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=xglNHnUKEdCNHWEZUbyP1kgYRLDTNgnIgCGRAbmV9TY=;
+ b=dw5T0honNgbcHSgVLhI5okurUN5hXKafCPqHzdJwJQxhD1YIXy0eVI2h
+ F1eUSBQxx1UQx4NR+u3gyO3I84XyXS3RJuNbbL7Y5Aqh8i9HeHk7qMYZg
+ 2Xpkrpn1e0kuOuRka00BUo8cDqzL8kJsj722v/w/I0VwVLVMP/7JxRZJo
+ acGtMIjnXKtskaBFstAaFWrrXePR8pE4fs+jLdevdFhvw+nF8J2a8yQML
+ 4CDJ/vZVn7X8HHZY4uLPp8G+x2QQNfmJMsJ+S5tWjpk9DBYiiL+lBZN8x
+ 3Tf+ssC1OVmXIgSjhcea6PGYD+PnflP/he9DWFtKEKvfIJoPF+JyfL9rC g==;
+X-CSE-ConnectionGUID: YeI5y3LbQH6PFCVXpGPtlg==
+X-CSE-MsgGUID: 2kf1HQczQPqCNaYVvVJ+jg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11487"; a="71861559"
+X-IronPort-AV: E=Sophos;i="6.16,298,1744095600"; d="scan'208";a="71861559"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 Jul 2025 19:42:30 -0700
+X-CSE-ConnectionGUID: tytLHidlQRG86rBxSg+7Kw==
+X-CSE-MsgGUID: TUVthDdhTX+U4YWnIEJPfw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.16,298,1744095600"; d="scan'208";a="161204389"
+Received: from lkp-server01.sh.intel.com (HELO 9ee84586c615) ([10.239.97.150])
+ by fmviesa004.fm.intel.com with ESMTP; 08 Jul 2025 19:42:27 -0700
+Received: from kbuild by 9ee84586c615 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1uZKlN-0002zX-0w;
+ Wed, 09 Jul 2025 02:42:25 +0000
+Date: Wed, 9 Jul 2025 10:42:13 +0800
+From: kernel test robot <lkp@intel.com>
+To: Yuwen Chen <ywen.chen@foxmail.com>, tytso@mit.edu,
+ adilger.kernel@dilger.ca, jaegeuk@kernel.org, chao@kernel.org,
+ viro@zeniv.linux.org.uk, brauner@kernel.org
+Message-ID: <202507091026.yb48YXt5-lkp@intel.com>
+References: <tencent_0D8BB6ABAB0880DB7BFCCE35EDBC3DCFF505@qq.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <eb7c3b1c-b5c0-4078-9a88-327f1220cae8@gmx.com>
-X-Migadu-Flow: FLOW_OUT
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "sfi-spamd-1.hosts.colo.sdot.me",
+In-Reply-To: <tencent_0D8BB6ABAB0880DB7BFCCE35EDBC3DCFF505@qq.com>
+X-Spam-Score: -0.3 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Wed, Jul 09, 2025 at 10:25:08AM +0930, Qu Wenruo wrote:
-    > 在 2025/7/9 10:05, Kent Overstreet 写道: > > Consider that the thing
-    that has a block device open might not even be a > > filesystem, or [...]
-    
- 
- Content analysis details:   (-0.2 points, 5.0 required)
- 
-  pts rule name              description
+ Content preview:  Hi Yuwen,
+ kernel test robot noticed the following build warnings:
+ [auto build test WARNING on jaegeuk-f2fs/dev-test] [also build test WARNING
+ on jaegeuk-f2fs/dev brauner-vfs/vfs.all linus/master v6.16-rc5 next-20250708]
+ [cannot apply to tytso-ext4/dev] [If your patc [...] 
+ Content analysis details:   (-0.3 points, 5.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [192.198.163.8 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
-                             domain
-X-Headers-End: 1uZJNW-00041k-Nr
-Subject: Re: [f2fs-dev] [PATCH v4 1/6] fs: enhance and rename shutdown()
- callback to remove_bdev()
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uZKlc-0007Nh-O5
+Subject: Re: [f2fs-dev] [PATCH] f2fs: improve the performance of f2fs_lookup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,59 +126,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christian Brauner <brauner@kernel.org>, ntfs3@lists.linux.dev, jack@suse.cz,
- "Darrick J. Wong" <djwong@kernel.org>, Dave Chinner <david@fromorbit.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- Qu Wenruo <wqu@suse.com>, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org,
- viro@zeniv.linux.org.uk
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Yuwen Chen <ywen.chen@foxmail.com>, oe-kbuild-all@lists.linux.dev,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gV2VkLCBKdWwgMDksIDIwMjUgYXQgMTA6MjU6MDhBTSArMDkzMCwgUXUgV2VucnVvIHdyb3Rl
-Ogo+IOWcqCAyMDI1LzcvOSAxMDowNSwgS2VudCBPdmVyc3RyZWV0IOWGmemBkzoKPiA+IENvbnNp
-ZGVyIHRoYXQgdGhlIHRoaW5nIHRoYXQgaGFzIGEgYmxvY2sgZGV2aWNlIG9wZW4gbWlnaHQgbm90
-IGV2ZW4gYmUgYQo+ID4gZmlsZXN5c3RlbSwgb3IgYXQgbGVhc3QgYSBWRlMgZmlsZXN5c3RlbS4K
-PiA+IAo+ID4gSXQgY291bGQgYmUgYSBzdGFja2luZyBibG9jayBkZXZpY2UgZHJpdmVyIC0gbWQg
-b3IgbWQgLSBhbmQgdGhvc2UKPiA+IGFic29sdXRlbHkgc2hvdWxkIGJlIGltcGxlbWVudGluZyAu
-bWFya19kZWFkKCkgKGxpa2VseSBwYXNzaW5nIGl0Cj4gPiB0aHJvdWdoIG9uIHVwIHRoZSBzdGFj
-ayksIG9yIHNvbWV0aGluZyBlbHNlIGVudGlyZWx5Lgo+ID4gCj4gPiBJbiBiY2FjaGVmcydzIGNh
-c2UsIHdlIG1pZ2h0IG5vdCBldmVuIGhhdmUgY3JlYXRlZCB0aGUgVkZTIHN1cGVyX2Jsb2NrCj4g
-PiB5ZXQ6IHdlIGRvbid0IGRvIHRoYXQgdW50aWwgYWZ0ZXIgcmVjb3ZlcnkgZmluaXNoZXMsIGFu
-ZCBpbmRlZWQgd2UgY2FuJ3QKPiA+IGJlY2F1c2UgY3JlYXRpbmcgYSBzdXBlcl9ibG9jayBhbmQg
-bGVhdmluZyBpdCBpbiAhU0JfQk9STiB3aWxsIGNhdXNlCj4gPiBzdWNoIGZ1biBhcyBzeW5jIGNh
-bGxzIHRvIGhhbmcgZm9yIHRoZSBlbnRpcmUgc3lzdGVtLi4uCj4gPiAKPiAKPiBOb3QgcmVsYXRl
-ZCB0byB0aGUgc2VyaWVzLCBidXQgSUlSQyBpZiBzX2ZsYWdzIGRvZXNuJ3QgaGF2ZSBTQl9BQ1RJ
-VkUgc2V0LAo+IHRoaW5ncyBsaWtlIGJkZXZfc3VwZXJfbG9jaygpIHdvbid0IGNob29zZSB0aGF0
-IHN1cGVyYmxvY2ssIHRodXMgd29uJ3QgY2FsbAo+IC0+c3luYygpIGNhbGxiYWNrIHRocm91Z2gg
-dGhlIGJkZXYgY2FsbGJhY2tzLgo+IAo+IEFuZCBidHJmcyBhbHNvIGZvbGxvd3MgdGhlIHNhbWUg
-c2NoZW1lLCBvbmx5IHNldHRpbmcgU0JfQUNUSVZFIGFmdGVyCj4gZXZlcnl0aGluZyBpcyBkb25l
-IChpbmNsdWRpbmcgcmVwbGF5aW5nIHRoZSBsb2cgZXRjKSwgYW5kIHNvIGZhciB3ZSBoYXZlbid0
-Cj4geWV0IGhpdCBzdWNoIHN5bmMgZHVyaW5nIG1vdW50LgoKV2VsbCwgaG93IGxvbmcgY2FuIHRo
-YXQgdGFrZT8gSGF2ZSBhIGxvb2sgYXQgaXRlcmF0ZV9zdXBlcnMoKSwgaXQncwpzb21ldGhpbmcg
-dG8gYmUgd2FyeSBvZi4KCkZpeGluZyB0aGUgZnMvc3VwZXIuYyBsb2NraW5nIGlzIHNvbWV0aGlu
-ZyBJIHdhcyBsb29raW5nIGF0LCBpdCdzIGRvYWJsZQpidXQgaXQnZCBiZSBhIGdpYW50IGhhc3Ns
-ZSAtIGZvciBiY2FjaGVmcyBpdCB3YXNuJ3Qgd29ydGggaXQsIGJjYWNoZWZzCmhhcyBwcmVleGlz
-dGluZyByZWFzb25zIGZvciB3YW50aW5nIHRvIGF2b2lkIHRoZSB2ZnMgc3VwZXJibG9jawpkZXBl
-bmRlbmN5LgoKQW55d2F5cyAtIHRoZSBWRlMgdHJ5aW5nIHRvIG93biAubWFya19kZWFkKCkgaXMg
-YSBsYXllcmluZyB2aW9sYXRpb24uCgogICAgICAgIFZGUwotLS0tLS0tLS0tLS0tLS0tLS0KICAg
-ICAgICBGUwotLS0tLS0tLS0tLS0tLS0tLS0KICAgICAgICBCTE9DSwoKQnkgZGVmYXVsdCwgdGhl
-ICJGUyIgbGF5ZXIgc2hvdWxkIGJlIGNvbnNpZGVyZWQgYSBibGFjayBib3ggYnkgYm90aCB0aGUK
-YmxvY2sgbGF5ZXIgYW5kIFZGUzsgcmVhY2hpbmcgYWNyb3NzIHRoYXQgYW5kIGFzc3VtaW5nIGZp
-bGVzeXN0ZW0KYmVoYXZpb3IgaXMgYSBnb29kIHdheSB0byBwYWludCB5b3Vyc2VsZiBpbnRvIGEg
-Y29ybmVyLgoKSXQncyBzZWR1Y3RpdmUgYmVjYXVzZSBtb3N0IGZpbGVzeXN0ZW1zIGFyZSBzaW5n
-bGUgZGV2aWNlIGZpbGVzeXN0ZW1zLAphbmQgZm9yIHRoYXQgY2FzZSBpdCBtYWtlcyB0b3RhbCBz
-ZW5zZSB0byBwcm92aWRlIGhlbHBlcnMgZm9yCmNvbnZlbmllbmNlLCBnaXZlbiB0aGF0IHRoZXJl
-J3Mgbm90IG11Y2ggcm9vbSBmb3IgYmVoYXZpb3VyIHRvIGRldmlhdGUKaW4gdGhlIHNpbmdsZSBk
-ZXZpY2UgY2FzZS4KCkJ1dCBpbiB0aGUgbXVsdGkgZGV2aWNlIGNhc2U6IHRoZSBiZWhhdmlvdXIg
-aXMgY29tcGxldGVseSB1cCB0byB0aGUKZmlsZXN5c3RlbSAtIGluIGdlbmVyYWwgd2UgZG9uJ3Qg
-c2h1dCBkb3duIHRoZSBlbnRpcmUgZmlsZXN5c3RlbSBpZiBhCnNpbmdsZSBibG9jayBkZXZpY2Ug
-Z29lcyBkZWFkLCBpZiB3ZSdyZSByZWR1bmRhbnQgd2UgY2FuIGp1c3QgZHJvcCB0aGF0CmRldmlj
-ZSBhbmQgY29udGludWUuCgpBbmQgaWYgeW91J3JlIHRoaW5raW5nIHlvdSB3YW50IHRvIG1ha2Ug
-dXNlIG9mIGxvY2tpbmcgcHJvdmlkZWQgYnkgdGhlClZGUyAtIEkgd291bGQgd2FybiBhd2F5IGZy
-b20gdGhhdCBsaW5lIG9mIHRoaW5raW5nIHRvbywgbWl4aW5nIHVwCmxvY2tpbmcgZnJvbSBkaWZm
-ZXJlbnQgbGF5ZXJzIGNyZWF0ZXMgYWxsIHNvcnRzIG9mIGZ1bi4uLgoKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGlu
-ZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlz
-dHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+Hi Yuwen,
+
+kernel test robot noticed the following build warnings:
+
+[auto build test WARNING on jaegeuk-f2fs/dev-test]
+[also build test WARNING on jaegeuk-f2fs/dev brauner-vfs/vfs.all linus/master v6.16-rc5 next-20250708]
+[cannot apply to tytso-ext4/dev]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Yuwen-Chen/f2fs-improve-the-performance-of-f2fs_lookup/20250708-184528
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
+patch link:    https://lore.kernel.org/r/tencent_0D8BB6ABAB0880DB7BFCCE35EDBC3DCFF505%40qq.com
+patch subject: [PATCH] f2fs: improve the performance of f2fs_lookup
+config: arc-randconfig-001-20250709 (https://download.01.org/0day-ci/archive/20250709/202507091026.yb48YXt5-lkp@intel.com/config)
+compiler: arc-linux-gcc (GCC) 8.5.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250709/202507091026.yb48YXt5-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202507091026.yb48YXt5-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> Warning: fs/libfs.c:1908 function parameter 'prealloc' not described in 'generic_ci_match'
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
