@@ -2,85 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D26DB00B8F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Jul 2025 20:41:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7ABFB0142A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Jul 2025 09:15:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=hmK5Abe7MwOM2NfrKU2s8mhcGfCUf2pg+wNc9UD3SC8=; b=drfIij5nRzNUun/dhqKqnhCg2v
-	obDPoWmvRKpq5zN2dr+TMoQKNQdytzRQY45grMhxF/m7D6Lwetufbq30v2Nqe2xV2gh5u9PPY3+wv
-	XaXi95TGUe8FfmgUDiH6EGbzIyWwa73iYb2D9uwPYZpzqXDpW2HAecge2waN4Zqktoqk=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=peirtaKpGuH33dtVRBM3TFUoeM5Ehknhd4lvmUKp7g8=; b=CwmFq3xzAKpypI2MlOh32ZWXp2
+	xl2S5CWM4IYeO8um+ofvRFlqIy10lyu/dhuL1mIkLOvOau0ML0nPZgxCpne8yhtKgDGQ0JeGzvJUm
+	cH6uKORkbCE575qUWg3vqbAvnEnkqWDLbxQL/FSuNashQNlr1LuTiFeIjGwhSWRsNId0=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uZwDB-0001tN-DX;
-	Thu, 10 Jul 2025 18:41:37 +0000
+	id 1ua7yY-0000PI-Tg;
+	Fri, 11 Jul 2025 07:15:18 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kent.overstreet@linux.dev>) id 1uZwD9-0001tG-P9
+ (envelope-from <chao@kernel.org>) id 1ua7yS-0000P7-BD
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Jul 2025 18:41:35 +0000
+ Fri, 11 Jul 2025 07:15:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4BIQ0YzbWgDLZuTNtQ8L6nBVEh6ENrzY2g79PLtP8UI=; b=hW1bXTyCONqayX0rH/t9h107WP
- CTeHhpTu7UEgyxhESsI6q8bGqW8uCsswG/RUa7IzrTqTHREL/g7ygG90FTpChojNZG2SsCAc6hhDx
- Xf0ZIk3uPmwVEs5ISc7zwpbrSj+wx91PIHHuJb8JlK6RXuPIpVBT3V1oLLN1OfdliHRs=;
+ bh=xiUCVPXofvnwebWdiJ2vVzIV+Xhht+zTWMQxCIFhVzs=; b=MDMIVlVMuiWm2Gq1flXZgqRtGP
+ viz72Ytpq+CaWuZNZJ3PqS7yuvBiuvPgYVwVSBgl0xNs9Va09pHBtuAAVwEVGJ8MRVVyZj+DTmYYw
+ bZJZa1wGrAlm155k+dTi++qFOEAKoYGrkcLAjMAM35ngEJWkgZgaiDt4io6m2IcPGJ5I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=4BIQ0YzbWgDLZuTNtQ8L6nBVEh6ENrzY2g79PLtP8UI=; b=XQoeU843sma7PT/tGoX1qtLaZq
- 18sQS4VrdbHohfXDB9j9sJ2yhZ5pSknTRVvtW9l9V36cyII+C+H9XwjGayX7OFnAedUCKHTVegk5m
- OUv1NzXbL1ePPKyV8K2WYM4IWak17JMUkr6FeEJDZXKwg0fdAe4Ay97IgkkqJhMQ8ric=;
-Received: from out-172.mta0.migadu.com ([91.218.175.172])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=xiUCVPXofvnwebWdiJ2vVzIV+Xhht+zTWMQxCIFhVzs=; b=i
+ FP87q46Ik54ppALIRlBx2R7XpM8JxLAMWOT3sBOH9XPswOSmxyHqQOo8JVFbm2TV232FchcggRZT7
+ 4FZR5oLhfELe+W+9NFdmUiYPx/KSbjj5rYU8eXW6UkYbRN2gUsVbmOiZI7c4rqTa+frR29mjSHI2P
+ B5fdiuCWKL33TlJI=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uZwD8-00072W-PL for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Jul 2025 18:41:35 +0000
-Date: Thu, 10 Jul 2025 14:41:18 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1752172882;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=4BIQ0YzbWgDLZuTNtQ8L6nBVEh6ENrzY2g79PLtP8UI=;
- b=YR3JBw0dNQxWT8gbfOrQApQA3Dr/mncyvyWlhdULFlpmatye4WQWSGg+jo14ol4mS36JHY
- HHEptsY8mnK7lMtHhlgU9ZWw06YTXudIOiL3YY7WVl8TqHFp7dZrbySpEs9bEUWoszkMXv
- xx0hqlX1kXJ+NYMyOY8UTChQdDIsxs0=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Kent Overstreet <kent.overstreet@linux.dev>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <5xno4s25lsd2sqq6judn7moorgy2h3konejgassnzlccfa6jsf@ez6ciofy3bwp>
-References: <343vlonfhw76mnbjnysejihoxsjyp2kzwvedhjjjml4ccaygbq@72m67s3e2ped>
- <y2rpp6u6pksjrzgxsn5rtcsl2vspffkcbtu6tfzgo7thn7g23p@7quhaixfx5yh>
- <kgolzhhd47x3iqkdrwyzh65ng4mm6cauxdjgiao2otztncyc3f@rskadwaph2l5>
+ id 1ua7yR-0000xc-U5 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 11 Jul 2025 07:15:12 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 0B5B9A54C81
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 11 Jul 2025 07:15:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99509C4CEED;
+ Fri, 11 Jul 2025 07:14:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1752218100;
+ bh=LYUnlcYQnWCTsg1aj82TguyO32RcRYUeONZaChGaCJY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=K1d2b/OGNdgkm5rLx5K8x5P4J0Hn5PcYJTz5zTjCkBFbNUuByIbBp7wJ2EqZAIm9k
+ K5kVO0rc+jtE4GJ7H6E0SvKV6fEphptwoQnZuDYON0wRR0HfygjvUCH7pcHvKZ7wzv
+ kyUT8BUap4aJElFn0y0N+SHOvxxDiDSTEyFnponRQK9SPELQKdrmoBIS/MEXnkZy5P
+ XFmj3rF7RPftLb4nHgchIcNPDPQqf18f+zsW3vW2ih0OE8D0EOg5Wq45Bekn87TKjD
+ PNKKMnGUsWhVrgGTv6u6trhB9PlfLOmgVKz1qc5ZGvv+uX3DovVYm+WMs8qWLawOAX
+ ravwo3h4x7Cmg==
+To: jaegeuk@kernel.org
+Date: Fri, 11 Jul 2025 15:14:50 +0800
+Message-ID: <20250711071450.207302-1-chao@kernel.org>
+X-Mailer: git-send-email 2.50.0.727.gbf7dc18ff4-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <kgolzhhd47x3iqkdrwyzh65ng4mm6cauxdjgiao2otztncyc3f@rskadwaph2l5>
-X-Migadu-Flow: FLOW_OUT
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jul 10, 2025 at 03:10:04PM +0200, Jan Kara wrote:
- > On Wed 09-07-25 13:49:12, Kent Overstreet wrote: > > On Wed, Jul 09, 2025
- at 07:23:07PM +0200, Jan Kara wrote: > > > > It also avoids the pr [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview: - touch
+ /mnt/f2fs/012345678901234567890123456789012345678901234567890123
+ - truncate -s $((1024*1024*1024)) \
+ /mnt/f2fs/012345678901234567890123456789012345678901234567890123
+ - touch /mnt/f2fs/file - t [...] 
+ Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -90,9 +91,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1uZwD8-00072W-PL
-Subject: Re: [f2fs-dev] [PATCH v4 1/6] fs: enhance and rename shutdown()
- callback to remove_bdev()
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ua7yR-0000xc-U5
+Subject: [f2fs-dev] [PATCH] f2fs: fix to avoid out-of-boundary access in
+ devs.path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,60 +106,62 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christian Brauner <brauner@kernel.org>, ntfs3@lists.linux.dev,
- "Darrick J. Wong" <djwong@kernel.org>, Dave Chinner <david@fromorbit.com>,
- Qu Wenruo <quwenruo.btrfs@gmx.com>, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-bcachefs@vger.kernel.org,
- Qu Wenruo <wqu@suse.com>, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org,
- viro@zeniv.linux.org.uk
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jul 10, 2025 at 03:10:04PM +0200, Jan Kara wrote:
-> On Wed 09-07-25 13:49:12, Kent Overstreet wrote:
-> > On Wed, Jul 09, 2025 at 07:23:07PM +0200, Jan Kara wrote:
-> > > > It also avoids the problem of ->mark_dead events being generated
-> > > > from a context that holds filesystem/vfs locks and then deadlocking
-> > > > waiting for those locks to be released.
-> > > > 
-> > > > IOWs, a multi-device filesystem should really be implementing
-> > > > ->mark_dead itself, and should not be depending on being able to
-> > > > lock the superblock to take an active reference to it.
-> > > > 
-> > > > It should be pretty clear that these are not issues that the generic
-> > > > filesystem ->mark_dead implementation should be trying to
-> > > > handle.....
-> > > 
-> > > Well, IMO every fs implementation needs to do the bdev -> sb transition and
-> > > make sb somehow stable. It may be that grabbing s_umount and active sb
-> > > reference is not what everybody wants but AFAIU btrfs as the second
-> > > multi-device filesystem would be fine with that and for bcachefs this
-> > > doesn't work only because they have special superblock instantiation
-> > > behavior on mount for independent reasons (i.e., not because active ref
-> > > + s_umount would be problematic for them) if I understand Kent right.
-> > > So I'm still not fully convinced each multi-device filesystem should be
-> > > shipping their special method to get from device to stable sb reference.
-> > 
-> > Honestly, the sync_filesystem() call seems bogus.
-> > 
-> > If the block device is truly dead, what's it going to accomplish?
-> 
-> Notice that fs_bdev_mark_dead() calls sync_filesystem() only in case
-> 'surprise' argument is false - meaning this is actually a notification
-> *before* the device is going away. I.e., graceful device hot unplug when
-> you can access the device to clean up as much as possible.
+- touch /mnt/f2fs/012345678901234567890123456789012345678901234567890123
+- truncate -s $((1024*1024*1024)) \
+  /mnt/f2fs/012345678901234567890123456789012345678901234567890123
+- touch /mnt/f2fs/file
+- truncate -s $((1024*1024*1024)) /mnt/f2fs/file
+- mkfs.f2fs /mnt/f2fs/012345678901234567890123456789012345678901234567890123 \
+  -c /mnt/f2fs/file
+- mount /mnt/f2fs/012345678901234567890123456789012345678901234567890123 \
+  /mnt/f2fs/loop
 
-That doesn't seem to be hooked up to anything?
+[16937.192225] F2FS-fs (loop0): Mount Device [ 0]: /mnt/f2fs/012345678901234567890123456789012345678901234567890123\xff\x01,      511,        0 -    3ffff
+[16937.192268] F2FS-fs (loop0): Failed to find devices
 
-blk_mark_disk_dead() -> blk_report_disk_dead(), surprise is always true
+If device path length equals to MAX_PATH_LEN, sbi->devs.path[] may
+not end up w/ null character due to path array is fully filled, So
+accidently, fields locate after path[] may be treated as part of
+device path, result in parsing wrong device path.
 
-disk_force_media_change(), same
+struct f2fs_dev_info {
+...
+	char path[MAX_PATH_LEN];
+...
+};
 
-The only call where it's falso is in s390 code. If we know that a disk
-is going away, that would be a userspace thing, and they can just
-unmount.
+Let's add one byte space for sbi->devs.path[] to store null
+character of device path string.
+
+Fixes: 3c62be17d4f5 ("f2fs: support multiple devices")
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/f2fs.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 8cded45cfbc7..64996153e4c8 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1289,7 +1289,7 @@ struct f2fs_bio_info {
+ struct f2fs_dev_info {
+ 	struct file *bdev_file;
+ 	struct block_device *bdev;
+-	char path[MAX_PATH_LEN];
++	char path[MAX_PATH_LEN + 1];
+ 	unsigned int total_segments;
+ 	block_t start_blk;
+ 	block_t end_blk;
+-- 
+2.49.0
+
 
 
 _______________________________________________
