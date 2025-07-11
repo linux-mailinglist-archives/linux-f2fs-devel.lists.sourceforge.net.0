@@ -2,97 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85A61B01512
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B435B0150F
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Jul 2025 09:46:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=4mNTw3vc9lxVLI7eGtb1jPy7C/fFUqlicHaHID6j2ws=; b=Few+/L57mrvKm7DUIHRPDSch0h
-	QIJsEsVUEmfJIglULWFkb7e67zCo6oKg55je+FO1fSj0ywSv86NQEdXiXxjeCEH/d1dXi5PpfQYOe
-	MwhpX6V+M1o/xhHhypscZFs4TuJYiZEnXhB3mtW/ECzHxjyn5yeuzGO7182sq1QZ79sc=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=5OGfkEEFXms6CdUZu0RdcdLZkLewIo3T1UN979epjh8=; b=jnzaxAyQdzjsOibUju3/Bv1+io
+	v4zlCQPVJ89F9nL5qePoNe6vmjAdiCoc0OIeyFBiZ9P3xvNHIlmej4hX2yfV055booPBPDAVft1D3
+	JBZqshN34dekGY10AUl5mNjULIFa9ZcZEUMcB+fpECFHWhzIdzF42bMulBFpEDXAx69E=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ua8SR-0001j3-NB;
-	Fri, 11 Jul 2025 07:46:11 +0000
+	id 1ua8SU-000849-FB;
+	Fri, 11 Jul 2025 07:46:14 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ua8SP-0001iw-Rt
+ (envelope-from <chao@kernel.org>) id 1ua8SS-00083s-KN
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Jul 2025 07:46:10 +0000
+ Fri, 11 Jul 2025 07:46:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3NSNVh/QFYSE6f+ShmYnUo4p5d0aRTuS0cW+PYQiDgw=; b=jmJEzc++sqT+Sjj/bLmNfpm8x3
- K6bjrIDETaGFg51wJzPvzdorgwSbCYeZJwj0pJP7wnKYHuqYIN28clAG/RFuNA9VMbRFwkKBpDfNb
- k6/aIds0r2s61I4amk9dokVgCopImDbS7IeawWUK+MsvlZyg4PW4POVDOoWlOjTaP41g=;
+ bh=Vyqm4H6icIZcBTy1THQNLUPfx0JcL9FYnmWVfz6IIM8=; b=RWsO5DPBiCZzUw3HG7MuzksVW0
+ UmnftL24Z8aPDCL7t4IXPmeEUiiYkqzW/OizD65jWOgrV5i1osqIODxASYp8aBx6P7tEQ8ifJqQOm
+ SeK8bwtUyQvI6G920myz2dwMS1e/czWCEEWaGosjqUJzHT5KXPZ2zZCT8QnQzp51liIM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=3NSNVh/QFYSE6f+ShmYnUo4p5d0aRTuS0cW+PYQiDgw=; b=Z
- ezMIBfGErdlb17XTL4gFp3xwV4jQaC4lDhT8umC0v29aIgKfFxz8h9KvMde9RNzuNW9lSgVE4MH+y
- dXuIRDsiJkMTgLCWaUuSk6go7TQYGYor8KPO6xDnuC/IndxkTqwXZppk4yMd4Vox6E77JuUG/HcKa
- 0l2ax8/DTRC4sb+E=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Vyqm4H6icIZcBTy1THQNLUPfx0JcL9FYnmWVfz6IIM8=; b=lPcLLZjsbVssTTOupWBIGud1zJ
+ aMN3ZgQApY2pWnkVcIp2BoqCiSbIksU2cOMKnb+0/y4kXwQnCYpM1Ru2g0WCSo2OnngMz7ukYmvan
+ KnIp0sVqsi+QcvOmnT7a0mtHZsURjqwgq/BGZDI5qmYr8W8f8vzwudFf3mZYUPvXQspQ=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ua8SL-0002WO-Ji for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Jul 2025 07:46:09 +0000
+ id 1ua8SS-0002Ww-7d for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 11 Jul 2025 07:46:12 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C79896115D
+ by nyc.source.kernel.org (Postfix) with ESMTP id 8CA9FA54CE5
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 11 Jul 2025 07:46:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE892C4CEEF;
  Fri, 11 Jul 2025 07:45:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FB93C4CEED;
- Fri, 11 Jul 2025 07:45:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1752219959;
- bh=921vVFRFTboXidfmunKqTGrsbzazjgFSQp95Mq3e5Zk=;
- h=From:To:Cc:Subject:Date:From;
- b=b5QD/kUg8fftP8gNf7GW9gEDiJxQIyGWdJnGqwQv3+lqQi/JaNDgzOFu4wjg43G82
- CVnovMky2mGzyISMVNwrQ4V1bKwRdxEoCUQ3MKZC0BEGQ2qkqw0yesRYxRxJ8lri0O
- /g6ax0xU7JjMbceyK8Fq83v9Fd7Xj4tSGXA9/6R/UOkJj+AIb+gwvpdhwxx3nLVNqd
- 0n1e2FTFHQifi2eMIpXKSXByEhFjGwHiS0S+EJvRoUrFsQvE4feZpkeaaOSoSxOYp0
- BmDdbMbr5ufsHQ3PUOzO9DFpVuMuCkN0qVtr+1fxLsacR/5pAk7rmwJPOU1rTYNSqj
- ZFP/YG6ng/ycQ==
+ s=k20201202; t=1752219961;
+ bh=j4+swoHX+DAtakgkxsV0G7jFsxIYg7EeRuEso0X+C1Y=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=e1smtlM+2yr8XImHNY5eCt1F9FjoO0AhOOVXTdz/i6sFc4z99ui1FT2GPfyrGSLZy
+ REEisYXPU+78HJ4E0npwURvXMb1D/KujzOzUG95u+sGnSuymx0CZ0iZuhwtXEu8Fni
+ f36xSS2bX5QsSP0/6HG+NMs1gcPs8cCn8mOkO+m2zFKTVhD9s3JKjoGS9Gb2vJpZJ/
+ c/agqCHBg07jbNsdY0gvZRtqZkGXn7MUKk4Km+iFqX/7xkoN41LZEO/geeRnLXsfan
+ QQKNrIh2OWilpbfO36YkscJocNEMJ6LShGHn8vjbzSFPp27eIMIrzXA/JmSMwfaAnc
+ XRUvyaRnDuFaA==
 To: jaegeuk@kernel.org
-Date: Fri, 11 Jul 2025 15:45:49 +0800
-Message-ID: <20250711074551.216069-1-chao@kernel.org>
+Date: Fri, 11 Jul 2025 15:45:50 +0800
+Message-ID: <20250711074551.216069-2-chao@kernel.org>
 X-Mailer: git-send-email 2.50.0.727.gbf7dc18ff4-goog
+In-Reply-To: <20250711074551.216069-1-chao@kernel.org>
+References: <20250711074551.216069-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: It allows to print more informations once assert() is
- triggered
- in init_sb_info(). Signed-off-by: Chao Yu <chao@kernel.org> --- fsck/mount.c
- | 9 +++++++-- 1 file changed, 7 insertions(+), 2 deletions(-) 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Otherwise,
+ mkfs.f2fs may persist truncated path of main device.
+ - mkfs.f2fs /mnt/f2fs/0123456789012345678901234567890123456789012345678901234
+ \ -c /mnt/f2fs/012345678901234567890123456789012345678901234567890123 -f
+ - mount /mnt/f2fs/0123456789012345678901234567890 [...] 
+ Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1ua8SL-0002WO-Ji
-Subject: [f2fs-dev] [PATCH 1/3] fsck.f2fs: allow to print more infos before
- assert() in init_sb_info()
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ua8SS-0002Ww-7d
+Subject: [f2fs-dev] [PATCH 2/3] mkfs.f2fs: fix to limit length of main
+ device path in f2fs_parse_options()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,34 +115,38 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-It allows to print more informations once assert() is triggered
-in init_sb_info().
+Otherwise, mkfs.f2fs may persist truncated path of main device.
+
+- mkfs.f2fs /mnt/f2fs/0123456789012345678901234567890123456789012345678901234 \
+  -c /mnt/f2fs/012345678901234567890123456789012345678901234567890123 -f
+- mount /mnt/f2fs/0123456789012345678901234567890123456789012345678901234
+  /mnt/f2fs/loop
+
+F2FS-fs (loop0): Mount Device [ 0]: /mnt/f2fs/012345678901234567890123456789012345678901234567890123,      511,        0 -    3ffff
+F2FS-fs (loop0): Failed to find devices
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fsck/mount.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ mkfs/f2fs_format_main.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/fsck/mount.c b/fsck/mount.c
-index a7f16e7..dbbeb56 100644
---- a/fsck/mount.c
-+++ b/fsck/mount.c
-@@ -1261,8 +1261,13 @@ int init_sb_info(struct f2fs_sb_info *sbi)
- 			if (get_device_info(i))
- 				ASSERT(0);
- 		} else if (c.func != INJECT) {
--			ASSERT(!strcmp((char *)sb->devs[i].path,
--						(char *)c.devices[i].path));
-+			if (strcmp((char *)sb->devs[i].path,
-+					(char *)c.devices[i].path)) {
-+				MSG(0, "paths mismatch: %s, %s\n",
-+					(char *)sb->devs[i].path,
-+					(char *)c.devices[i].path);
-+				ASSERT(0);
-+			}
- 		}
+diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+index 3a8fde0..f0bec4f 100644
+--- a/mkfs/f2fs_format_main.c
++++ b/mkfs/f2fs_format_main.c
+@@ -384,6 +384,12 @@ static void f2fs_parse_options(int argc, char *argv[])
+ 		mkfs_usage();
+ 	}
  
- 		c.devices[i].total_segments =
++	if (c.ndevs > 1 && strlen(argv[optind]) > MAX_PATH_LEN) {
++		MSG(0, "Error: main device path %s should be equal or "
++				"less than %d characters\n",
++				argv[optind], MAX_PATH_LEN);
++		mkfs_usage();
++	}
+ 	/* [0] : META, [1 to MAX_DEVICES - 1] : NODE/DATA */
+ 	c.devices[0].path = strdup(argv[optind]);
+ 
 -- 
 2.49.0
 
