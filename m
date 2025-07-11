@@ -2,142 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 491BDB02051
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Jul 2025 17:23:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B8CAB0218E
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Jul 2025 18:20:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=UQC3W9LfstaNnDZnd2TkzA+QtqiC3Ymny+3wegDo2Bk=; b=bDjbEI0+RzWZOYKf9TBUr7yG3T
-	w+UFc9G/D3WLzoch9IbygwKJP5maJOx9zW4f+th7dwPNxUbXPjW4VMR71j9cADa3teffkSET+yZ/z
-	pBwXuEq3PE/v7VqkyjEytfnKTVuaSq+Fq8gHUhgDgvhOhzMCAdIS8Urf9NFiGQZvKrqE=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Date:Message-Id:MIME-Version:Sender:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=+1qD8UyG4zfkpX6chCWn4uL+VK3f5aCZdcXwF7Ds1C8=; b=fM2d7iBhvdigGIIyjOo44NOECp
+	oB1AcDduqN/iXa+8SdelY8YB9jNo6AmcSFxpUiQdquXQKwCwnNXYsyC1ifravtl6j/WSfIdp4Xtp/
+	zKj6BydBuPSQhU5JmMtRbDt0B1Zp4YKhxKgeuPXdDXQXtZjZ4Orq7GWBt/2bDrcT6LwE=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uaFam-00036U-Md;
-	Fri, 11 Jul 2025 15:23:16 +0000
+	id 1uaGTq-00058W-1B;
+	Fri, 11 Jul 2025 16:20:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jack@suse.cz>) id 1uaFak-00036J-SV
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uaGTn-00058F-Ud
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Jul 2025 15:23:14 +0000
+ Fri, 11 Jul 2025 16:20:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=D/iUuBciPB10/GBE/cvyXk+fAHjQFIQzuLxCgcwiNTw=; b=E/0KUisfCDSLMvFA+xtCDJS2hJ
- vZjla80Ek6CL58idsgg1p6hO2kFYA+ajiqYeZFQz+xWrM/Tutv2mtF+mfHUmLs0eNKu3z189K8Oj3
- AdVi32xC9wdjqcV1H/BaJ0agjF3CEeiTiJNIoVms+J9OiuRdUVzzrQAsINo8nTDk/bQc=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=fmcDFlywWFIKA3eZVHBRDdFxk350vDZPxBrVnXsU6bg=; b=ZHm46MAZSpyZoMulBY+h+SCC/U
+ FRrUTPfK2s5Q/HE6E0re4I/53sGABqOuxidmPaaxy3q0MpD4I3hE3aQXmKT6gEObfQVrUWxLiWUyB
+ HO5pC2AGVh9EKm1Z6u2o3Ejw3SEcfwCzhrYq85YdlqXDQRaKzENqVWu8PTuckR9b75AM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=D/iUuBciPB10/GBE/cvyXk+fAHjQFIQzuLxCgcwiNTw=; b=loyaai4DlmUnNWtiRIgm6ctGKB
- woQjDDiQRV+k5vSENQk6vndRW0xJBkypEYgP2ylbB8hWm3Ihu5cKrtjHpiZolQXE/PivRw6LcWd93
- aD36z2B1Pr+HXlh5BW0s9ouQ7XshomaY91AQXnRlFy0CWPiihh8sfUF8uJ8ATq6pRQqA=;
-Received: from smtp-out2.suse.de ([195.135.223.131])
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=fmcDFlywWFIKA3eZVHBRDdFxk350vDZPxBrVnXsU6bg=; b=Q
+ oh4XAJXHxAc9OejthRpsNrcuRvxbVuNv21a1o4aIzgEfhb5x5HFY5rjS05ll4y9u2J9dU2BDx18+E
+ wgxHqyEuX+YE21LQgWQgFF0cVVVtR1ujuOWjQd21FzGeT+Aiq2bh6IcztNvdHrTERd++hIPaU2ekK
+ NQR4nvu1gHCAwVrY=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uaFak-0002HJ-3V for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Jul 2025 15:23:14 +0000
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id ED3021F451;
- Fri, 11 Jul 2025 14:20:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1752243630; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=D/iUuBciPB10/GBE/cvyXk+fAHjQFIQzuLxCgcwiNTw=;
- b=iX1o9G0tQdGrIsFeduAag1UKYp0cCjcMneL5vkrGGsPO92IZ2wxRp3jlmkahOOPG6WWUdv
- kphrQqTmuCs0hFXOYtVS/MTvH2l2OLesUm41gQ9wmp2cCzNfPFtwMVQvJjSqo+rsQgFnL2
- AMVwa6gD0pvN07DATLyiZYLUdKljBsQ=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1752243630;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=D/iUuBciPB10/GBE/cvyXk+fAHjQFIQzuLxCgcwiNTw=;
- b=ZczmLcnkQK5dNLlNTg8btwaNoh3cOk1Vp66mW8PYqJOkMEfNWn+8CqQJvQTp6bEmbseXU7
- uZsBkQaJmbIzZ5CQ==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1752243629; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=D/iUuBciPB10/GBE/cvyXk+fAHjQFIQzuLxCgcwiNTw=;
- b=0Q0gC33a1LGOhCbS2e7YuGBLzHB9x14F4WpfW+gopjwadYEbCJBLsXBX1lrlouwrAzrte8
- Ja2l7L3cX4rIo5fBm9TI3OIj2eDgYJhQcbpHguaCI/kUbudLCh5yRivfoo+5PhBxoWhjQZ
- cz2QUREuEnRdT0PPcT2EjFDPWJ86WlE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1752243629;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=D/iUuBciPB10/GBE/cvyXk+fAHjQFIQzuLxCgcwiNTw=;
- b=zb1CZyGS3J1toAy5quPu7DqexLZJc5vm8joEbFL90hWTmpTZCle3U5zFrK6F+5uIBXY376
- tOkCVn3qxUstlVCw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D9000138A5;
- Fri, 11 Jul 2025 14:20:29 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id qT+vNK0dcWjEUQAAD6G6ig
- (envelope-from <jack@suse.cz>); Fri, 11 Jul 2025 14:20:29 +0000
-Received: by quack3.suse.cz (Postfix, from userid 1000)
- id 57DE8A099A; Fri, 11 Jul 2025 16:20:24 +0200 (CEST)
-Date: Fri, 11 Jul 2025 16:20:24 +0200
-From: Jan Kara <jack@suse.cz>
-To: Kent Overstreet <kent.overstreet@linux.dev>
-Message-ID: <icnwgogkmgui2kzshst23dujkqdghiwpd62giipxyrbdkyf6bo@lf52wyqpnxn2>
-References: <343vlonfhw76mnbjnysejihoxsjyp2kzwvedhjjjml4ccaygbq@72m67s3e2ped>
- <y2rpp6u6pksjrzgxsn5rtcsl2vspffkcbtu6tfzgo7thn7g23p@7quhaixfx5yh>
- <kgolzhhd47x3iqkdrwyzh65ng4mm6cauxdjgiao2otztncyc3f@rskadwaph2l5>
- <5xno4s25lsd2sqq6judn7moorgy2h3konejgassnzlccfa6jsf@ez6ciofy3bwp>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uaGTl-0005rX-IT for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 11 Jul 2025 16:20:07 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 42942433AD
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 11 Jul 2025 16:19:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22C20C4CEED
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 11 Jul 2025 16:19:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1752250795;
+ bh=IxpkPGUaxuJwXd5C0Qxbhoizzhe3F5cyocDoRxOyDlU=;
+ h=Subject:From:Date:To:From;
+ b=aBKr3wgLWZVzkLH4XQBioV8rkh2+Oxf5Slhb2fbTazWKXbwPiSxuEfZvnLYXyz6Ge
+ +iqo3QB132iZIJeLLUHbssGhS40TKvTfHTxOkHM1KUPp9aUsXK6Qx7/z3+rmarP8uY
+ C0f8XtBzoiK1DkTN5C43upB8HCgMZd8NiAqrv8hhqDHDvHuG94bbHiy107UUvr/Jsa
+ UrD5H6me6f1U/9MbtXLkuIBf8110HU7U6i0reY4VbQgbutjz3h0bjyXmN7fiRmKM3K
+ wr+sbX+3XYxR8AgzW5BiOhjjWBeTecAeg651o67zXhm9TavKYC7JJ4PNYMOlcCL1jI
+ TN7/v6LHwiOFA==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+ by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
+ 37FF8383B275 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 11 Jul 2025 16:20:18 +0000 (UTC)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <5xno4s25lsd2sqq6judn7moorgy2h3konejgassnzlccfa6jsf@ez6ciofy3bwp>
-X-Spam-Level: 
-X-Spamd-Result: default: False [-3.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- NEURAL_HAM_LONG(-1.00)[-1.000]; MID_RHS_NOT_FQDN(0.50)[];
- NEURAL_HAM_SHORT(-0.20)[-0.999]; MIME_GOOD(-0.10)[text/plain];
- RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
- MISSING_XM_UA(0.00)[]; MIME_TRACE(0.00)[0:+];
- FUZZY_RATELIMITED(0.00)[rspamd.com];
- RCPT_COUNT_TWELVE(0.00)[15]; RCVD_COUNT_THREE(0.00)[3];
- FREEMAIL_ENVRCPT(0.00)[gmx.com];
- DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
- FROM_HAS_DN(0.00)[];
- FREEMAIL_CC(0.00)[suse.cz,fromorbit.com,kernel.org,gmx.com,suse.com,vger.kernel.org,zeniv.linux.org.uk,lists.sourceforge.net,lists.linux.dev];
- TO_DN_SOME(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
- RCVD_TLS_LAST(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:email]
-X-Spam-Flag: NO
-X-Spam-Score: -3.80
-X-Spam-Score: -0.2 (/)
+Message-Id: <175225081679.2325425.7816502983073372451.git-patchwork-summary@kernel.org>
+Date: Fri, 11 Jul 2025 16:20:16 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu 10-07-25 14:41:18, Kent Overstreet wrote: > On Thu,
- Jul 10, 2025 at 03:10:04PM +0200, Jan Kara wrote: > > On Wed 09-07-25 13:49:12,
- Kent Overstreet wrote: > > > On Wed, Jul 09, 2025 at 07:23:07 [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Series: f2fs folio conversions
+ for 6.17 Submitter: Matthew Wilcox <willy@infradead.org> Patchwork:
+ https://patchwork.kernel.org/project/f2fs/list/?series=980132
+ Lore link: https://lore.kernel.org/r/20 [...] 
+ Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -147,9 +95,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1uaFak-0002HJ-3V
-Subject: Re: [f2fs-dev] [PATCH v4 1/6] fs: enhance and rename shutdown()
- callback to remove_bdev()
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uaGTl-0005rX-IT
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -161,67 +109,93 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christian Brauner <brauner@kernel.org>, ntfs3@lists.linux.dev,
- Jan Kara <jack@suse.cz>, "Darrick J. Wong" <djwong@kernel.org>,
- Dave Chinner <david@fromorbit.com>, Qu Wenruo <quwenruo.btrfs@gmx.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-bcachefs@vger.kernel.org, linux-btrfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Qu Wenruo <wqu@suse.com>, viro@zeniv.linux.org.uk
+From: patchwork-bot+f2fs--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: patchwork-bot+f2fs@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu 10-07-25 14:41:18, Kent Overstreet wrote:
-> On Thu, Jul 10, 2025 at 03:10:04PM +0200, Jan Kara wrote:
-> > On Wed 09-07-25 13:49:12, Kent Overstreet wrote:
-> > > On Wed, Jul 09, 2025 at 07:23:07PM +0200, Jan Kara wrote:
-> > > > > It also avoids the problem of ->mark_dead events being generated
-> > > > > from a context that holds filesystem/vfs locks and then deadlocking
-> > > > > waiting for those locks to be released.
-> > > > > 
-> > > > > IOWs, a multi-device filesystem should really be implementing
-> > > > > ->mark_dead itself, and should not be depending on being able to
-> > > > > lock the superblock to take an active reference to it.
-> > > > > 
-> > > > > It should be pretty clear that these are not issues that the generic
-> > > > > filesystem ->mark_dead implementation should be trying to
-> > > > > handle.....
-> > > > 
-> > > > Well, IMO every fs implementation needs to do the bdev -> sb transition and
-> > > > make sb somehow stable. It may be that grabbing s_umount and active sb
-> > > > reference is not what everybody wants but AFAIU btrfs as the second
-> > > > multi-device filesystem would be fine with that and for bcachefs this
-> > > > doesn't work only because they have special superblock instantiation
-> > > > behavior on mount for independent reasons (i.e., not because active ref
-> > > > + s_umount would be problematic for them) if I understand Kent right.
-> > > > So I'm still not fully convinced each multi-device filesystem should be
-> > > > shipping their special method to get from device to stable sb reference.
-> > > 
-> > > Honestly, the sync_filesystem() call seems bogus.
-> > > 
-> > > If the block device is truly dead, what's it going to accomplish?
-> > 
-> > Notice that fs_bdev_mark_dead() calls sync_filesystem() only in case
-> > 'surprise' argument is false - meaning this is actually a notification
-> > *before* the device is going away. I.e., graceful device hot unplug when
-> > you can access the device to clean up as much as possible.
-> 
-> That doesn't seem to be hooked up to anything?
+Hello:
 
-__del_gendisk()
-  if (!test_bit(GD_DEAD, &disk->state))
-    blk_report_disk_dead(disk, false);
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-Is the path which results in "surprise" to be false. I have to admit I
-didn't check deeper into drivers whether this is hooked up properly but
-del_gendisk() is a standard call to tear down a disk so it would seem so
-from the first glance.
+Series: f2fs folio conversions for 6.17
+  Submitter: Matthew Wilcox <willy@infradead.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=980132
+  Lore link: https://lore.kernel.org/r/20250708170359.111653-1-willy@infradead.org
+    Patches: [f2fs-dev,01/60] f2fs: Pass a folio to recover_dentry()
+             [f2fs-dev,02/60] f2fs: Pass a folio to recover_inode()
+             [f2fs-dev,03/60] f2fs: Pass a folio to recover_quota_data()
+             [f2fs-dev,04/60] f2fs: Pass a folio to f2fs_recover_inode_page()
+             [f2fs-dev,05/60] f2fs: Pass a folio to sanity_check_extent_cache()
+             [f2fs-dev,06/60] f2fs: Pass a folio to sanity_check_inode()
+             [f2fs-dev,07/60] f2fs: Pass a folio to f2fs_sanity_check_inline_data()
+             [f2fs-dev,08/60] f2fs: Pass a folio to inode_has_blocks()
+             [f2fs-dev,12/60] f2fs: Pass a folio to is_recoverable_dnode()
+             [f2fs-dev,13/60] f2fs: Pass a folio to set_dentry_mark()
+             [f2fs-dev,14/60] f2fs: Pass a folio to set_fsync_mark()
+             [f2fs-dev,15/60] f2fs: Pass a folio to set_mark()
+             [f2fs-dev,16/60] f2fs: Pass a folio to f2fs_allocate_data_block()
+             [f2fs-dev,17/60] f2fs: Pass a folio to f2fs_inode_chksum_set()
+             [f2fs-dev,18/60] f2fs: Pass a folio to f2fs_enable_inode_chksum()
+             [f2fs-dev,19/60] f2fs: Pass a folio to f2fs_inode_chksum()
+             [f2fs-dev,20/60] f2fs: Pass a folio to fill_node_footer_blkaddr()
+             [f2fs-dev,21/60] f2fs: Pass a folio to get_nid()
+             [f2fs-dev,22/60] f2fs: Pass a folio to set_cold_node()
+             [f2fs-dev,23/60] f2fs: Pass folios to copy_node_footer()
+             [f2fs-dev,24/60] f2fs: Pass a folio to fill_node_footer()
+             [f2fs-dev,25/60] f2fs: Pass a folio to cpver_of_node()
+             [f2fs-dev,26/60] f2fs: Pass a folio to f2fs_recover_xattr_data()
+             [f2fs-dev,27/60] f2fs: Pass a folio to is_fsync_dnode()
+             [f2fs-dev,28/60] f2fs: Pass a folio to is_dent_dnode()
+             [f2fs-dev,29/60] f2fs: Add fio->folio
+             [f2fs-dev,30/60] f2fs: Use folio_unlock() in f2fs_write_compressed_pages()
+             [f2fs-dev,31/60] f2fs: Pass a folio to is_cold_node()
+             [f2fs-dev,32/60] f2fs: Pass a folio to is_node()
+             [f2fs-dev,33/60] f2fs: Pass a folio to IS_DNODE()
+             [f2fs-dev,34/60] f2fs: Pass a folio to ofs_of_node()
+             [f2fs-dev,35/60] f2fs: Pass a folio to get_dnode_base()
+             [f2fs-dev,36/60] f2fs: Pass a folio to ADDRS_PER_PAGE()
+             [f2fs-dev,37/60] f2fs: Pass a folio to IS_INODE()
+             [f2fs-dev,38/60] f2fs: Add folio counterparts to page_private_flags functions
+             [f2fs-dev,40/60] f2fs: Convert set_page_private_data() to folio_set_f2fs_data()
+             [f2fs-dev,41/60] f2fs: Convert get_page_private_data() to folio_get_f2fs_data()
+             [f2fs-dev,42/60] f2fs: Pass a folio to f2fs_compress_write_end_io()
+             [f2fs-dev,43/60] f2fs: Use a folio in f2fs_merge_page_bio()
+             [f2fs-dev,44/60] f2fs: Use a bio in f2fs_submit_page_write()
+             [f2fs-dev,45/60] f2fs: Pass a folio to WB_DATA_TYPE() and f2fs_is_cp_guaranteed()
+             [f2fs-dev,46/60] f2fs: Use a folio iterator in f2fs_handle_step_decompress()
+             [f2fs-dev,47/60] f2fs: Pass a folio to f2fs_end_read_compressed_page()
+             [f2fs-dev,48/60] f2fs: Use a folio iterator in f2fs_verify_bio()
+             [f2fs-dev,49/60] f2fs: Pass a folio to f2fs_is_compressed_page()
+             [f2fs-dev,50/60] f2fs: Convert get_next_nat_page() to get_next_nat_folio()
+             [f2fs-dev,51/60] f2fs: Pass the nat_blk to __update_nat_bits()
+             [f2fs-dev,52/60] f2fs: Pass a folio to F2FS_NODE()
+             [f2fs-dev,53/60] f2fs: Pass a folio to f2fs_cache_compressed_page()
+             [f2fs-dev,54/60] f2fs: Use a folio in f2fs_encrypted_get_link()
+             [f2fs-dev,55/60] f2fs: Use F2FS_F_SB() in f2fs_read_end_io()
+             [f2fs-dev,56/60] f2fs: Remove clear_page_private_all()
+             [f2fs-dev,57/60] f2fs: Remove use of page from f2fs_write_single_data_page()
+             [f2fs-dev,58/60] f2fs: Pass a folio to f2fs_submit_merged_write_cond()
+             [f2fs-dev,59/60] f2fs: Pass a folio to __has_merged_page()
+             [f2fs-dev,60/60] f2fs: Remove F2FS_P_SB()
 
-								Honza
+Patch: [f2fs-dev] f2fs: fix to avoid out-of-boundary access in devs.path
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=981365
+  Lore link: https://lore.kernel.org/r/20250711071450.207302-1-chao@kernel.org
+
+
+Total patches: 57
+
 -- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
 
 
 _______________________________________________
