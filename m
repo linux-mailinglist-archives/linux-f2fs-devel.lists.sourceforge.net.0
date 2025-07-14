@@ -2,129 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0017B03BB6
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Jul 2025 12:15:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7815AB03DC5
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Jul 2025 13:55:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=OejtI1ZCko6zqoaMd2TIqcRzrMXCD0Hwdly+d3ajljk=; b=gHcWmvlI4347rYk4mfsZ2S+8me
-	QNutwt+bI76/6d/unQc8BYUpzestcyUFe95dWFvC0dHVMzUnZdX6zGxKGx4wgjuupYqcgz2ySc8/u
-	INc7NBKatI93ih8kNZWBm55k/7x4yTqva3VQs7dylJLuf7nYHMsuDs/gjjtn/LB8oSko=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=Lqv9iQ7/aWcpBmaR7oqtcVc3uQ3i2URwC5Ptfi40b88=; b=jPN9OvnS8Cf1FyxeSqNWPC2/bi
+	93wD85vxLeM60VA6cOOGjO8bvtr9qMKqTbqsBSdRMqzEkVeoVlYfrAmWMgsKphoVPXA5xRk0DbdNm
+	x3I8L7WLrFEoexcE136dP4RhLy6Fc24eIvsu0b5UtjfyK1oUOD4TSMCwCi9cQOByuIrM=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ubGDX-0007iR-QD;
-	Mon, 14 Jul 2025 10:15:27 +0000
+	id 1ubHlk-0004x1-Jd;
+	Mon, 14 Jul 2025 11:54:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nzzhao.sigma@gmail.com>) id 1ubGDV-0007iK-T8
+ (envelope-from <chao@kernel.org>) id 1ubHlj-0004wo-8C
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 14 Jul 2025 10:15:25 +0000
+ Mon, 14 Jul 2025 11:54:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cDb5lQps4pqch8OzRG9JScmmuiHc/7OtB6DGSuBO7fc=; b=lHJcd3EUT9vM/T9UoGGxqGJy9n
- tKIsw5ZDjJ7oVyOWNmWdpmWK6SuEp0BIJfqSg32KK8OoC7yP37ZpIiqmhlcOQGtrxmm0ZJKZHToKe
- 1Z0aQpP3RKLBwuJzuAH/5CoALKHKII8s6axtRlIimeC7rdXM5wtkbYx+Jh2a2pO3nw28=;
+ bh=TVHgAJH//LntWg8WTVh445rDKUzigWv0SBwBUZ/lyrc=; b=SuyW/RsnbxmawigjWYzACf6vxU
+ k6tR8pjjthkGmi4IapxS5pdLwiEINF4ERBYvoWTVCXBYcjluOY9UgF+dHZyurVEpQqEk7bCzdHiV2
+ SPDwzc/9EqLmd8WxFm79jYp11ACOGkxR9+3xmoPgANNd7NQtNgyolGu7wwYOAM4JLb6Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=cDb5lQps4pqch8OzRG9JScmmuiHc/7OtB6DGSuBO7fc=; b=jPXUlVwTdyLrV45W1E1QSbWLwf
- bNRTbD/lPq2CmwJBCwy6EWN1x43AHjTVuO32KXzCYyGPXAPEniYsbXdqN4+DkSeBqzdRU7HjwmIsS
- KJ18Ik9NXuSrMoUXj+r0eUu9DsAAdfwHzQZVRvbGUJwKQkn3OS7HAO5aIUQtP1PF+2HY=;
-Received: from mail-oo1-f68.google.com ([209.85.161.68])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=TVHgAJH//LntWg8WTVh445rDKUzigWv0SBwBUZ/lyrc=; b=k
+ VyXAiOAeMwafiaw54Fc3cTsiLVhBPIbdeW24ttzaSypf7LPsoZ5IKVj7UAiKHFC4xRSUo8z8vOt1m
+ tFVXZFBF275x0WtcV4euAbN7A0zbu34MICWrZQEAhGq+S7JXOjuGykUPFYGVwg8wNtJzpcqIHUlZL
+ Qvf9RQAl3UrJutRQ=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ubGDV-0003I9-B6 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 14 Jul 2025 10:15:25 +0000
-Received: by mail-oo1-f68.google.com with SMTP id
- 006d021491bc7-613c7b65039so552055eaf.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1ubHli-00021V-LL for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 14 Jul 2025 11:54:51 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 0BA876141F
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 14 Jul 2025 03:15:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752488119; x=1753092919; darn=lists.sourceforge.net;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cDb5lQps4pqch8OzRG9JScmmuiHc/7OtB6DGSuBO7fc=;
- b=hZUtJ8531IVZlHR9iwQuKqLML55RgFs8Z6/lQtzhnQqAzpavYegqI+UL92UqpkYJ4v
- RaolTGMFzJOcKm/i5D/DKASLCRRc/lZOKBxE7eO447FoEGaV+d8yjo8rV4+t5jxAh5xX
- cYiZyOgIb/a2UigXYaYiAKdVQheeHpxRYBL8fHeCuqu1Op5kUqiDwbvy55Jol6BIGl5J
- HtHWSLz+fzeAYBFWAwMIpDKNmYeaQbdg2mS9tbqRB0g1dXT5Z8ewmCsG/NoO1gCIclJF
- Zo0onK4ZQQmH8rGtRnUlnW8siV/a4J0CSayyBsoiOcvLY4m5xvMTXyDj8KWNBtHg4fKR
- n+Fg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752488119; x=1753092919;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cDb5lQps4pqch8OzRG9JScmmuiHc/7OtB6DGSuBO7fc=;
- b=UoLZy4z/7Nwans21x8wmlnH/LNMMYkH5wq9E5EQ7EOpgJ5KKShFNSZRYZSi72Wz4OO
- K1NtY31bpTOrqV+4LQqoCBTAw4wD7Sogf2LDCNiViApqoC4+JPFKJD1gif1+UzwuqKUs
- u5V1odC8/ZMY/uY7dFTUDmBGKlcFctAHi4rg7lEA9mmB/HXhnodze4TKTUCmyjM5cZzS
- Pb/xr4FJfMwsgkjDZMyje5Acocg+tLUr4plBVKDttEPYL6NBe0mdiYmPai4Hn49ht+Rz
- vGUZ7xz2/a8EHL9VWhW7EyNyfycbbElby8ma1Dja/ZeTnHugYtGnXk3ZoKflgo518NpX
- tEow==
-X-Gm-Message-State: AOJu0YwwYJfa6LuNKxy+5XDisryL2V//cqfowdu8NwFwO5Q/+6O1XZxW
- XCnKix1BSY0u798wEhGZ6koPcyxe5haNc+TvN6kHiTL6nJEsPTB0xMoCdeUXwpRix1eNt+ZqpZr
- knNNxuOma6bMf6ytbCoER7CLizxyo9/BGZLjT1Tk=
-X-Gm-Gg: ASbGncsyKNI5GqtvOmGqLVlq/a7zdowPMqx0QtNfLKq8D8uayVQHZbuaN9XbzbIzRdD
- MUThD8+lLhWvUAZeLcpjbU+/7mEbPPkuL/D7Rm5yqS+fYmpSJu6MmkbGwaiGvvr1xVf6cAGqTzh
- aJX8j3+OqzrAlCSBIj5D9jcAAABZFKq0Kc9SKeDkzjLMJI89T/QHTIRbpdBWn3GFCnTBQIhLZjg
- vf69Q==
-X-Google-Smtp-Source: AGHT+IFHnCeSNbuxL4NvvibJbdsNDFb3RpsGW3yS1sNP1cD/rrwT/ZPRfbcQptgWsVRk/1D/TpHMe/QiLkIhyE+JH3c=
-X-Received: by 2002:a05:6808:228a:b0:409:f8e:727f with SMTP id
- 5614622812f47-4150d6482b9mr9013881b6e.3.1752488119499; Mon, 14 Jul 2025
- 03:15:19 -0700 (PDT)
+ Mon, 14 Jul 2025 11:54:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF557C4CEED;
+ Mon, 14 Jul 2025 11:54:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1752494084;
+ bh=hi0OfjX6jPvcAEmWoGcJfznxElSRWlMPzBvNJ5C4Zas=;
+ h=From:To:Cc:Subject:Date:From;
+ b=QeRNeUIuYQGW87X/ylGqwaH1WWA6lt3ZcDiDWoif9ItCSjduVuPymNsIszFmLXGOE
+ bdKVu8zFVaNAJEbBHHrRoGZzhldGe2Jh3QGcO+21RVrCD8nk8MY4StyRTRb1f8MZSu
+ v/BNveBvH8TSYb/GuiRZ/cB6kBCM529oBa3olTFTCZuAPSPh/Rqtb3u2S+AV+1YLj2
+ oXplyatOtF2zwlWW7/1sIv9SMbtECX0MRxf+1TrH7q9lxOpo+YTMO6UI6FFrIyuua4
+ 0S3wsog2VqeDYiX4eKIHgA1OfZbm3FzYBNICMi0P5NynJSkqsarccnVrnSv1RRl877
+ PhdIJSDVvXqww==
+To: jaegeuk@kernel.org
+Date: Mon, 14 Jul 2025 19:54:37 +0800
+Message-ID: <20250714115437.237151-1-chao@kernel.org>
+X-Mailer: git-send-email 2.50.0.727.gbf7dc18ff4-goog
 MIME-Version: 1.0
-References: <CAMLCH1GjsjgLDZdqFnRRxycoGoHH1Ayu0rUBHeusyQVhZfBopg@mail.gmail.com>
- <CAMLCH1FtQa48ryOeE3Nzeo-kiOcaB1W4Sic9CjCsQsLVL28ciA@mail.gmail.com>
-In-Reply-To: <CAMLCH1FtQa48ryOeE3Nzeo-kiOcaB1W4Sic9CjCsQsLVL28ciA@mail.gmail.com>
-From: Nanzhe Zhao <nzzhao.sigma@gmail.com>
-Date: Mon, 14 Jul 2025 18:15:07 +0800
-X-Gm-Features: Ac12FXy0_nZg1VQwipKvmqGYcFgIIyBeUrHzUuQ6q8i4zePqikUymaoSzyIuK0M
-Message-ID: <CAMLCH1EwN==C2nPKjYj2Bi4SnWr-yXR37piv5P8qu5KMxgDUtw@mail.gmail.com>
-To: Matthew Wilcox <willy@infradead.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Besides,
- I noticed now your convert fio->page to folio.I personally
- thought it's a bold (maybe too bold) decision. fio structure has a strong
- hypothesis that it performs write I/O in single page unit. [...] 
+ Content preview: - mkdir dir - f2fs_io test_lookup_perf -i /mnt/f2fs/dir 50000
+ - sync - echo 3 > /proc/sys/vm/drop_caches - f2fs_io test_lookup_perf
+ /mnt/f2fs/dir
+ Output: Measure readdir performance Measure stat performance Operation:
+ total_files, 
+ total_time_s, throughput_files_per_sec readdir: 50000, 1.7781, 28120.08 stat:
+ 50000, 2.1665, 23079.19 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [nzzhao.sigma(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.161.68 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1ubGDV-0003I9-B6
-Subject: Re: [f2fs-dev] [WIP] f2fs: Sharing progress and questions on large
- folios support
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ubHli-00021V-LL
+Subject: [f2fs-dev] [PATCH v3] f2fs_io: measure readdir/stat performance
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -136,80 +107,242 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "v-songbaohua@oppo.com" <v-songbaohua@oppo.com>,
- Zhang Yi <yi.zhang@huaweicloud.com>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-IEJlc2lkZXMsSSBub3RpY2VkIG5vdyB5b3VyIGNvbnZlcnQgZmlvLT5wYWdlIHRvIGZvbGlvLkkg
-cGVyc29uYWxseQp0aG91Z2h0IGl0J3MgYSBib2xkIChtYXliZSB0b28gYm9sZCkgZGVjaXNpb24u
-CmZpbyBzdHJ1Y3R1cmUgaGFzIGEgc3Ryb25nIGh5cG90aGVzaXMgdGhhdCBpdCBwZXJmb3JtcyB3
-cml0ZSBJL08gaW4Kc2luZ2xlIHBhZ2UgdW5pdC5JdCBvbmx5IHN0b3JlcyBvbmUgb2xkX2Jsa2Fk
-ZHIgYW5kCm9uZSBuZXdfYmxrYWRkciBhc3NvY2lhdGVkIHdpdGggdGhlIGZpby0+cGFnZSB3aXRo
-b3V0IGF3YXJlbmVzcyBvZiB0aGUKcGFnZSdzIGluZGV4IG9yIGZpbGUgcG9zaXRpb24uQW5kIGFs
-bCB0aGUgZjJmcydzCnN1Ym1pdCB3cml0ZSBsb2dpYyBkaXJlY3RseSB1c2UgYmlvX2FkZF9wYWdl
-IHRvIGFkZCBmaW8tPnBhZ2UgdG8KYmlvLklmIHdlIGNvbnZlcnQgZmlvLT5wYWdlIHRvIGZpby0+
-Zm9saW8sdGhlbiBob3cgZG8gd2Uga25vdyB0aGUKZXhhY3QgcGFydCBvZiB0aGUgZm9saW8gd2Ug
-YXJlIHBlcmZvcm1pbmcgd3JpdGUgYW5kIGFkZCB0byBiaW8/IE1heWJlCndlIHNob3VsZCBhbHNw
-IHN0b3JlIHRoZSBjb3JyZXNwb25kaW5nIGZvbGlvJ3Mgc3VicGFnZSdzIGluZGV4IGluCmZpbz9P
-ciBkaWQgSSBtaXNzIHNvbWV0aGluZyBpbiB5b3VyIG5ld2VzdCBwYXRjaD8KCgpOYW56aGUgWmhh
-byA8bnp6aGFvLnNpZ21hQGdtYWlsLmNvbT4g5LqOMjAyNeW5tDfmnIgxMuaXpeWRqOWFrSAyMTow
-MuWGmemBk++8mgo+Cj4gT2gsSSdtIHNvcnJ5LEkgZm9yZ290IHRvIHB1dCBteSBnaXRodWIgbGlu
-ayBpbiBsYXN0IGVtYWlsLkJ1dCBJIGhhdmVuJ3QgcHJlcGFyZWQgYW4gRW5nbGlzaCBkb2N1bWVu
-dCBmb3IgZGVzY3JpYmluZyBteSBjb2RlIGRlc2lnbi5Bbnl3YXksYXJlIHlvdSBpbnRlcmVzdGVk
-IGluIG15IHdvcms/Cj4KPgo+IE5hbnpoZSBaaGFvIDxuenpoYW8uc2lnbWFAZ21haWwuY29tPiDk
-uo4yMDI15bm0N+aciDEy5pel5ZGo5YWtIDE5OjM55YaZ6YGT77yaCj4+Cj4+IERlYXIgTXIgTWF0
-dGhldwo+PiBIaSEgSXQncyBiZWVuIGEgbG9uZyB0aW1lIHNpbmNlIHdlIGxhc3QgZGlzY3VzcyBh
-Ym91dCBmMmZzIHN1cHBvcnRpbmcKPj4gbGFyZ2UgZm9saW9zLiBJIGhvcGUgeW91J3JlIGRvaW5n
-IHdlbGwhCj4+IE92ZXIgdGhlIHBhc3QgdGhyZWUgbW9udGhzLCBJJ3ZlIGJlZW4gd29ya2luZyBv
-biBsYXJnZSBmb2xpb3Mgc3VwcG9ydAo+PiBpbiBteSBvd24gZm9yayBvZiB0aGUgZjJmcyB0cmVl
-LiBJJ3ZlIG1hZGUgc29tZSBzaWduaWZpY2FudCBwcm9ncmVzcwo+PiBhbmQgaGF2ZSBhIHdvcmtp
-bmcgaW1wbGVtZW50YXRpb24gZm9yOgo+PiAtIGYyZnMncyBvd24gcGVyIGZvbGlvIHN0cnVjdCBm
-MmZzX2lvbWFwX2ZvbGlvX3N0YXRlCj4+IC0gaW9tYXAtYmFzZWQgYnVmZmVyZWQgcmVhZCBhbmQg
-d3JpdGUuCj4+IC0gTGFyZ2UgZm9saW9zIHN1cHBvcnQgZm9yIGNvbXByZXNzZWQgZmlsZXMsIGlu
-Y2x1ZGluZyBib3RoIGJ1ZmZlcmVkCj4+IEkvTyBhbmQgcGFnZSB3cml0ZWJhY2suCj4+IE15IHdv
-cmsgaXMgYmFzZWQgb24gYSBzZXZlcmFsIGNvbW1pdHMganVzdCBhZnRlciB5b3VyICJmMmZzIGZv
-bGlvCj4+IGNvbnZlcnNpb25zIGZvciA2LjE2IiBzZXJpZXMgb24gZjJmcydzIGRldi10ZXN0IGJy
-YW5jaChOb3QgdGhlCj4+IG1haW5saW5lKSBJdCBjYW4gaGFuZGxlIHJ1biBvbiBzb21lIHNpbXBs
-ZSByZWFkL3dyaXRlIG9wZXJhdGlvbnMgZm9yCj4+IGJvdGggbm9ybWFsIGFuZCBjb21wcmVzc2Vk
-IGZpbGVzLCBidXQgaXQgaXMgc3RpbGwgbGFyZ2VseSB1bnRlc3RlZC4KPj4gWW91IGNhbiBmaW5k
-IG15IFdJUCBicmFuY2ggaGVyZToKPj4gSSBzYXcgeW91ciByZWNlbnQgc2VyaWVzIG9mIHBhdGNo
-ZXMgZm9yIGxhcmdlIGZvbGlvcyBzdXBwb3J0IGFuZCB3YXMKPj4gZXhjaXRlZCB0byBzZWUgdGhl
-IHByb2dyZXNzLiBJJ20gd3JpdGluZyB0byB5b3UgdG9kYXkgdG8gc2hhcmUgYW4KPj4gdXBkYXRl
-IGZyb20gbXkgc2lkZSBhbmQgYXNrIGZvciBzb21lIGd1aWRhbmNlLgo+PiBSZWdhcmRpbmcgb3Vy
-IHByZXZpb3VzIGRpc2N1c3Npb24gYWJvdXQgc3RvcmluZyBleHRyYSBmMmZzIGZsYWdzIGluCj4+
-IGZvbGlvLT5wcml2YXRlLCBJIGltcGxlbWVudGVkIGEgc29sdXRpb24gdXNpbmcgYSBuZXcKPj4g
-ZjJmc19pb21hcF9mb2xpb19zdGF0ZSBzdHJ1Y3QgYW5kIHJlbGF0ZWQgQVBJcywgd2hpY2ggSSBw
-bGFjZWQgaW4gbmV3Cj4+IGZpbGVzIChmMmZzX2lmcy5jLy5oKS4gTXkgZGVzaWduIG5vdCBvbmx5
-IHN1cHBvcnRzIGxhcmdlIGZvbGlvcyBidXQKPj4gYWxzbyBtYWludGFpbnMgY29tcGF0aWJpbGl0
-eSB3aXRoIG9yZGVyLTAgZGF0YSBhbmQgbWV0YWRhdGEgZm9saW9zCj4+IHdoaWNoIHN0b3Jpbmcg
-dGhlIGYyZnMgcHJpdmF0ZSBmbGFncyBkaXJlY3RseSBpbgo+PiBmb2xpby0+cHJpdmF0ZS5pb21h
-cF9mb2xpb19zdGF0ZSB3b24ndCBhbGxvY2F0ZSBmb3IgdGhlbS4gVGhlIG1lbW9yeQo+PiBsYXlv
-dXQgb2YgbXkgc3RydWN0IGlzIGFsc28gY29tcGF0aWJsZSB3aXRoIGlvbWFwJ3MgaGVscGVycy5O
-b3cgdGhpcwo+PiBwaWVjZSBvZiBjb2RlICBjb25mbGljdHMgd2l0aCB5b3VyIGxhdGVzdCBwYXRj
-aGVzIHRoYXQgaW50cm9kdWNlCj4+IGZvbGlvX3NldF9mMmZzX2RhdGEuIEkgYXNzdW1lIHRoZSBz
-dGFuZGFyZCBrZXJuZWwgZGV2ZWxvcG1lbnQgd29ya2Zsb3cKPj4gd291bGQgYmUgZm9yIG1lIHRv
-IHJlYmFzZSBteSBsb2NhbCBicmFuY2ggb250byB5b3VyIGxhdGVzdCBjb21taXQgYW5kCj4+IHRo
-ZW4gcmVmYWN0b3IgbXkgY29kZSB0byBhbGlnbiB3aXRoIHlvdXIgbmV3IEFQSS4gSXMgdGhhdCBj
-b3JyZWN0PyBJCj4+IGFtIG1vcmUgdGhhbiBoYXBweSB0byBkbyBzbyBhbmQgYWRhcHQgbXkgaW1w
-bGVtZW50YXRpb24uCj4+IE9uIGEgcmVsYXRlZCBub3RlLCBJIHJlY2VudGx5IGxlYXJuZWQgdGhh
-dCBzdG9yYWdlIGVuZ2luZWVycyBmcm9tIHZpdm8KPj4gYWxzbyBpbXBsZW1lbnRlZCBpb21hcCBi
-dWZmZXJlZCB3cml0ZSBhbmQgcGFnZSB3cml0ZWJhY2sgY29udmVyc2lvbnMKPj4gZm9yIGYyZnMg
-bGFzdCB5ZWFyLiAoVGhlIGxhdHRlciBzaG9ja3MgbWUsIGFuZCBJJ2xsIGV4cGxhaW4gdGhlIHJl
-YXNvbgo+PiBpbiBhIGZ1dHVyZSBjb252ZXJzYXRpb24pLiBUaGVpciB3b3JrIHNlZW1lZCBkb2Vz
-bid0IGluY2x1ZGUgc3VwcG9ydAo+PiBmb3IgY29tcHJlc3NlZCBmaWxlIGxhcmdlIGZvbGlvcy4g
-SXQgc2VlbXMgbmVjZXNzYXJ5IGZvciBtZSB0bwo+PiBjb29yZGluYXRlIHdpdGggdGhlbS4KPj4g
-TG9va2luZyBhaGVhZCwgSSB1bmRlcnN0YW5kIHRoYXQgYSBmZWF0dXJlIG9mIHRoaXMgc2l6ZSBz
-aG91bGQgYmUKPj4gc3VibWl0dGVkIGFzIGEgc2VyaWVzIG9mIHNtYWxsLCBsb2dpY2FsIHBhdGNo
-ZXMgdG8gbWFrZSB0aGUgcmV2aWV3Cj4+IHByb2Nlc3MgZWFzaWVyLiBJIHdvdWxkIGJlIGdyYXRl
-ZnVsIGZvciBhbnkgdGhvdWdodHMgeW91IG1pZ2h0IGhhdmUgb24KPj4gdGhpcyBhcHByb2FjaCBh
-cyB3ZWxsLgo+Pgo+PiBBbnkgZmVlZGJhY2sgb24gbXkgd29yayBvciBhZHZpY2Ugb24gaG93IHRv
-IHByb2NlZWQgd291bGQgYmUgZ3JlYXRseQo+PiBhcHByZWNpYXRlZC4KPj4KPj4gVGhhbmtzIGZv
-ciB5b3VyIHRpbWUuCj4+Cj4+IEJlc3QgcmVnYXJkcy4KCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApM
-aW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJj
-ZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+- mkdir dir
+- f2fs_io test_lookup_perf -i /mnt/f2fs/dir 50000
+- sync
+- echo 3 > /proc/sys/vm/drop_caches
+- f2fs_io test_lookup_perf /mnt/f2fs/dir
+
+Output:
+Measure readdir performance
+Measure stat performance
+Operation: total_files, total_time_s, throughput_files_per_sec
+readdir: 50000, 1.7781, 28120.08
+stat: 50000, 2.1665, 23079.19
+
+- f2fs_io test_lookup_perf -v /mnt/f2fs/dir 50000
+
+Output:
+inode    file type  d_reclen  d_off    d_name
+6176     directory  24        1        .
+3        directory  24        2        ..
+6276     regular    32        4        test_file_0
+6285     regular    32        6        test_file_1
+6291     regular    32        8        test_file_2
+6295     regular    32        10       test_file_3
+....
+
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v3:
+- add doc entry
+- fix parameter in usage description
+ man/f2fs_io.8           |   3 +
+ tools/f2fs_io/f2fs_io.c | 150 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 153 insertions(+)
+
+diff --git a/man/f2fs_io.8 b/man/f2fs_io.8
+index e0f659e..0d69b5f 100644
+--- a/man/f2fs_io.8
++++ b/man/f2fs_io.8
+@@ -184,6 +184,9 @@ Get i_advise value and info in file
+ .TP
+ \fBioprio\fR \fI[hint] [file]\fR
+ Set ioprio to the file. The ioprio can be ioprio_write.
++.TP
++\fBtest_lookup_perf\fR \fI[-i] [-v] <dir> <num_files>\fR
++Measure readdir/stat speed
+ .SH AUTHOR
+ This version of
+ .B f2fs_io
+diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+index f6649f1..f282190 100644
+--- a/tools/f2fs_io/f2fs_io.c
++++ b/tools/f2fs_io/f2fs_io.c
+@@ -36,6 +36,8 @@
+ #include <time.h>
+ #include <unistd.h>
+ #include <sys/xattr.h>
++#define _GNU_SOURCE
++#include <dirent.h>
+ 
+ #ifdef HAVE_CONFIG_H
+ #include <config.h>
+@@ -2237,6 +2239,153 @@ static void do_test_create_perf(int argc, char **argv, const struct cmd_desc *cm
+ 	exit(0);
+ }
+ 
++#define test_lookup_perf_desc "measure readdir/stat speed"
++#define test_lookup_perf_help						\
++"f2fs_io test_lookup_perf [-i] [-v] <dir> <num_files>\n\n"		\
++"Measures readdir/stat performance.\n"				\
++"  <dir>          The target directory in where it will test on.\n"	\
++"  <num_files>    The total number of files the test will initialize or test.\n"\
++"  [-i]           Initialized to create files only.\n"\
++"  [-v]           Verbose mode.\n"
++
++static void do_test_lookup_perf(int argc, char **argv, const struct cmd_desc *cmd)
++{
++	struct timespec readdir_start, readdir_end;
++	struct timespec stat_start, stat_end;
++	DIR *dirp;
++	struct dirent *dp;
++	int opt;
++	char *dir;
++	int num_files;
++	bool need_initialize = false;
++	bool verb = false;
++	int i;
++
++	while ((opt = getopt(argc, argv, "iv")) != -1) {
++		switch (opt) {
++		case 'i':
++			need_initialize = true;
++			break;
++		case 'v':
++			verb = true;
++			break;
++		default:
++			fputs(cmd->cmd_help, stderr);
++			exit(1);
++		}
++	}
++
++	argc -= optind;
++	argv += optind;
++
++	if (argc != 2) {
++		fputs("Excess arguments\n\n", stderr);
++		fputs(cmd->cmd_help, stderr);
++		exit(1);
++	}
++
++	dir = argv[0];
++	num_files = atoi(argv[1]);
++
++	if (num_files <= 0) {
++		fprintf(stderr, "Error: Number of files must be positive.\n");
++		exit(1);
++	}
++
++	if (need_initialize) {
++		int fd;
++
++		// Initialization Phase
++		printf("Starting test: Creating %d files in %s\n", num_files, dir);
++
++		for (i = 0; i < num_files; i++) {
++			char path[1024];
++
++			snprintf(path, sizeof(path), "%s/test_file_%d", dir, i);
++
++			fd = xopen(path, O_WRONLY | O_CREAT, 0644);
++			if (fd < 0)
++				exit(1);
++			close(fd);
++		}
++
++		exit(0);
++	}
++
++	// Measure readdir performance
++	printf("Measure readdir performance\n");
++	clock_gettime(CLOCK_MONOTONIC, &readdir_start);
++
++	dirp = opendir(dir);
++	if (dirp == NULL) {
++		perror("opendir failed");
++		exit(1);
++	}
++
++	if (verb)
++		printf("inode    file type  d_reclen  d_off    d_name\n");
++
++	while ((dp = readdir(dirp)) != NULL) {
++		if (!verb)
++			continue;
++
++		printf("%-8lu %-10s %-9d %-8jd %s\n",
++			dp->d_ino,
++			(dp->d_type == DT_REG) ?  "regular" :
++			(dp->d_type == DT_DIR) ?  "directory" :
++			(dp->d_type == DT_FIFO) ? "FIFO" :
++			(dp->d_type == DT_SOCK) ? "socket" :
++			(dp->d_type == DT_LNK) ?  "symlink" :
++			(dp->d_type == DT_BLK) ?  "block dev" :
++			(dp->d_type == DT_CHR) ?  "char dev" : "unknown",
++			dp->d_reclen, dp->d_off, dp->d_name);
++	}
++
++	closedir(dirp);
++
++	clock_gettime(CLOCK_MONOTONIC, &readdir_end);
++
++	// Measure stat performance
++	printf("Measure stat performance\n");
++
++	clock_gettime(CLOCK_MONOTONIC, &stat_start);
++
++	for (i = 0; i < num_files; i++) {
++		char path[1024];
++		struct stat st;
++
++		snprintf(path, sizeof(path), "%s/test_file_%d", dir, i);
++		if (stat(path, &st) != 0)
++			die_errno("stat failed");
++	}
++
++	clock_gettime(CLOCK_MONOTONIC, &stat_end);
++
++	long readdir_seconds = readdir_end.tv_sec - readdir_start.tv_sec;
++	long readdir_ns = readdir_end.tv_nsec - readdir_start.tv_nsec;
++	double readdir_time_s = (double)readdir_seconds + (double)readdir_ns / 1000000000.0;
++	double readdir_throughput = (readdir_time_s > 0) ? (num_files / readdir_time_s) : 0;
++
++	long stat_seconds = stat_end.tv_sec - stat_start.tv_sec;
++	long stat_ns = stat_end.tv_nsec - stat_start.tv_nsec;
++	double stat_time_s = (double)stat_seconds + (double)stat_ns / 1000000000.0;
++	double stat_throughput = (stat_time_s > 0) ? (num_files / stat_time_s) : 0;
++
++	printf("Operation: total_files, total_time_s, throughput_files_per_sec\n");
++
++	printf("readdir: %d, %.4f, %.2f\n",
++		   num_files,
++		   readdir_time_s,
++		   readdir_throughput);
++
++	printf("stat: %d, %.4f, %.2f\n",
++		   num_files,
++		   stat_time_s,
++		   stat_throughput);
++
++	exit(0);
++}
++
+ #define CMD_HIDDEN 	0x0001
+ #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
+ #define _CMD(name) { #name, do_##name, NULL, NULL, CMD_HIDDEN }
+@@ -2286,6 +2435,7 @@ const struct cmd_desc cmd_list[] = {
+ 	CMD(ioprio),
+ 	CMD(ftruncate),
+ 	CMD(test_create_perf),
++	CMD(test_lookup_perf),
+ 	{ NULL, NULL, NULL, NULL, 0 }
+ };
+ 
+-- 
+2.49.0
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
