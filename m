@@ -2,98 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AA1BB03474
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Jul 2025 04:28:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A42EEB03B64
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Jul 2025 11:53:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=qgvBQh5NyiK3//j2YO5+CQrkMCQfm6rcwSYroxQ9gaM=; b=FbGEC2Sbe4xceIxb3lExQq8Lzd
-	GIY2erseUcHCA3DYq7pb+tMIZTXpwzKr7v0CGG0yTZ6EYh5DcsGwjxb1VPZDNlqO2DIXd4bGmeEJb
-	0GqLi+kJ1aujMYZvBFQyMwtGTqwEvclrfIeEOLM1OaWDMbRqXozcXRTTb9AItv4QkXOc=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=A3oTVc/t0YGdJG5U/oRBfmD58KoHl8W7SCALi2+Up5w=; b=E+ulP4mIkN6Bo8skyD1d2mmoCT
+	Wlts4x8O9PiiogKWiWPzeWBZPnmlTvAJX/0KhI4+krsB4UsMJ3CMsj8BwC2+gUSZmSK95wfOJDSft
+	xjZOjlE83MDtMzNtPabrOOFLg9Y+vnt3Yg/iUaoFFF/93Xl+AOKKhfRPfpMQg5rRzGEE=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ub8v7-0000PP-W7;
-	Mon, 14 Jul 2025 02:27:58 +0000
+	id 1ubFsM-0005Wy-Dg;
+	Mon, 14 Jul 2025 09:53:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ub8uk-0000Ox-CY
+ (envelope-from <Zhiguo.Niu@unisoc.com>) id 1ubFro-0005UE-Az
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 14 Jul 2025 02:27:34 +0000
+ Mon, 14 Jul 2025 09:53:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=epMgS90GJAotY4hyjocKORGzG6VszoXTqCQBFnbpPKA=; b=ho3q9me/S17qZTgwWki4rjtFnt
- ZhfxQzjn3sBIklEQWNI4bVn3WQmu3pZAIysorb9zUkWTpTi53rDlIxrsPMolxAy8RdQ5X7PAM5wEp
- LF652framje0JEdFhaZnreynxUzB6RxDdBEvAcusRT1c5dZcwZ5Yll9nvCTSHIJv517Q=;
+ bh=e5DnEFm2eM8ToPuBwGU4cCVBwDFj8T7zbrEwE84cenw=; b=FU3Ffh7Z+5hdCUnwRRGN7yUhjr
+ tJTwzoj0GdERtf9UKwZTQzIjJ82m8DbVupmkd4+YP7DMQvCWwzHZYUd1Pr/TZLowS9TAtTmoilDcb
+ MxN2gJZCL6mQLniNTVug2DXuE2/Zsj0KG/AMHtKJ6L7dh0M7rvT9D+Gz17Be4zjJfNOo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=epMgS90GJAotY4hyjocKORGzG6VszoXTqCQBFnbpPKA=; b=VAd0vVbvl24Ag4Y0jvbZWxzOlK
- TcWhwY5aKp101Juj/0HibDnPcgDGYFv7JRt+CdAGrJ+fpxISmKgNOQieXu4m7aZWwU157JsWvFKtA
- /qikB28obdRxJjwBwsO91FEO3M8kyjkKMvk9tnguaHjz7DYO5+pKU9xoF9gTAMm0zVMM=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=e5DnEFm2eM8ToPuBwGU4cCVBwDFj8T7zbrEwE84cenw=; b=j
+ PpdDiCy/U4lIzLUBNq2qRDCFDBIEFjwa1AZDgNyE5LwNbG5CRXdCLDed/c0MCV7JVQprl5yvXVpkr
+ fULCSEa6rlMCklRE5i55F8WQZqAPu8Dv0Y4DislHEfvhD/qNPa4ZgGwWudr0ssM+/OuxEi07pN6gE
+ mDdzqN6g+fFXdBYw=;
+Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ub8uj-00029c-S2 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 14 Jul 2025 02:27:34 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 7CCFD436E4;
- Mon, 14 Jul 2025 02:27:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8016C4CEE3;
- Mon, 14 Jul 2025 02:27:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1752460048;
- bh=7Axe8joyugX6kQZ14NmROgtOmkdcODhNEvwCi5eQuUw=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=McCMGcjqjDqC9Qoqo15VRZ3U+4XZPPudj4x6AKoVdcPIfyJFrDRKDESZ0GnGv7Cec
- J6PeYfxTmPJK/l9RxQM3XUZPq21SPKrQKHktOpYjEl/bHM44hbU99mh5E1K/YddZNP
- dK/ULCyuwhv00tBB9LVp15c+4ztq/foLQBrFTbP3DsH5uZvwGr11m4Vu0aed1Px6lx
- KJoeys1Mo8Wv6y+SWrOlZW1t/fFU3yYa3591bNKdV2pgPzR+qRHYxMtOJdTkp0/DML
- jHb3RyjPFN+IkbkjcrxcY/VXZaQY2eJvTeBLP7BfjudZELyA+zYXxrfsVAOnZEau6S
- PYBQGO0so2GLA==
-Message-ID: <b12d791e-a9f6-4b9d-a299-858821ebc1b5@kernel.org>
-Date: Mon, 14 Jul 2025 10:27:24 +0800
+ id 1ubFrn-0001kK-AD for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 14 Jul 2025 09:53:00 +0000
+Received: from dlp.unisoc.com ([10.29.3.86])
+ by SHSQR01.spreadtrum.com with ESMTP id 56E9qJXt091864;
+ Mon, 14 Jul 2025 17:52:19 +0800 (+08)
+ (envelope-from Zhiguo.Niu@unisoc.com)
+Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
+ by dlp.unisoc.com (SkyGuard) with ESMTPS id 4bgcv93yF0z2Q79s5;
+ Mon, 14 Jul 2025 17:48:05 +0800 (CST)
+Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
+ BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.48; Mon, 14 Jul 2025 17:52:17 +0800
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Mon, 14 Jul 2025 17:51:45 +0800
+Message-ID: <1752486705-9498-1-git-send-email-zhiguo.niu@unisoc.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Hongbo Li <lihongbo22@huawei.com>, jaegeuk@kernel.org
-References: <20250710121415.628398-1-lihongbo22@huawei.com>
-Content-Language: en-US
-In-Reply-To: <20250710121415.628398-1-lihongbo22@huawei.com>
-X-Spam-Score: -0.2 (/)
+X-Originating-IP: [10.0.73.87]
+X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
+ BJMBX02.spreadtrum.com (10.0.64.8)
+X-MAIL: SHSQR01.spreadtrum.com 56E9qJXt091864
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 7/10/25 20:14, Hongbo Li wrote: > In this version, we have
- finished the issues pointed in v4. > First, I'd like to express my sincere
- thanks to Jaegeuk and Chao > for reviewing this patch series an [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview: Should check these after c.devices[1].start_blkaddr is
+ assigned
+ when c.ndevs > 1. Fixes: 316e128fe3dc ("mkfs.f2fs: adjust zone alignment
+ when using multi-partitions") Signed-off-by: Zhiguo Niu
+ <zhiguo.niu@unisoc.com>
+ --- mkfs/f2fs_format.c | 23 ++++++++++++ 1 file change [...] 
+ Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ub8uj-00029c-S2
-Subject: Re: [f2fs-dev] [PATCH v5 0/7] f2fs: new mount API conversion
+X-Headers-End: 1ubFrn-0001kK-AD
+Subject: [f2fs-dev] [PATCH] mkfs.f2fs: adjust zone alignment check to
+ correct position
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,103 +97,67 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-fsdevel@vger.kernel.org, sandeen@redhat.com,
- linux-f2fs-devel@lists.sourceforge.net
+From: Zhiguo Niu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Zhiguo Niu <zhiguo.niu@unisoc.com>
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, zhiguo.niu@unisoc.com,
+ Hao_hao.Wang@unisoc.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 7/10/25 20:14, Hongbo Li wrote:
-> In this version, we have finished the issues pointed in v4.
-> First, I'd like to express my sincere thanks to Jaegeuk and Chao
-> for reviewing this patch series and providing corrections. I also
-> appreciate Eric for rebasing the patches onto the latest branch to
-> ensure forward compatibility.
-> 
-> The latest patch series has addressed all the issues mentioned in
-> the previous set. For modified patches, I've re-added Signed-off-by
-> tags (SOB) and uniformly removed all Reviewed-by tags.
-> 
-> v5:
->   - Add check for bggc_mode(off) with sb blkzone case.
->   - Fix the 0day-ci robot reports.
+Should check these after c.devices[1].start_blkaddr is assigned
+when c.ndevs > 1.
 
-Looks good to me, feel free to add to all patches:
+Fixes: 316e128fe3dc ("mkfs.f2fs: adjust zone alignment when using multi-partitions")
+Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+---
+ mkfs/f2fs_format.c | 23 ++++++++++++-----------
+ 1 file changed, 12 insertions(+), 11 deletions(-)
 
-Reviewed-by: Chao Yu <chao@kernel.org>
-
-Thanks,
-
-> 
-> v4: https://lore.kernel.org/all/20250602090224.485077-1-lihongbo22@huawei.com/
->   - Change is_remount as bool type in patch 2.
->   - Remove the warning reported by Dan for patch 5.
->   - Enhance sanity check and fix some coding style suggested by
->     Jaegeuk in patch 5.
->   - Change the log info when compression option conflicts in patch 5.
->   - Fix the issues reported by code-reviewing in patch 5.
->   - Context modified in patch 7.
-> 
-> V3: https://lore.kernel.org/all/20250423170926.76007-1-sandeen@redhat.com/
-> - Rebase onto git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
->   dev branch
-> - Fix up some 0day robot warnings
-> 
-> (Here is the origianl cover letter:)
-> 
-> Since many filesystems have done the new mount API conversion,
-> we introduce the new mount API conversion in f2fs.
-> 
-> The series can be applied on top of the current mainline tree
-> and the work is based on the patches from Lukas Czerner (has
-> done this in ext4[1]). His patch give me a lot of ideas.
-> 
-> Here is a high level description of the patchset:
-> 
-> 1. Prepare the f2fs mount parameters required by the new mount
-> API and use it for parsing, while still using the old API to
-> get mount options string. Split the parameter parsing and
-> validation of the parse_options helper into two separate
-> helpers.
-> 
->   f2fs: Add fs parameter specifications for mount options
->   f2fs: move the option parser into handle_mount_opt
-> 
-> 2. Remove the use of sb/sbi structure of f2fs from all the
-> parsing code, because with the new mount API the parsing is
-> going to be done before we even get the super block. In this
-> part, we introduce f2fs_fs_context to hold the temporary
-> options when parsing. For the simple options check, it has
-> to be done during parsing by using f2fs_fs_context structure.
-> For the check which needs sb/sbi, we do this during super
-> block filling.
-> 
->   f2fs: Allow sbi to be NULL in f2fs_printk
->   f2fs: Add f2fs_fs_context to record the mount options
->   f2fs: separate the options parsing and options checking
-> 
-> 3. Switch the f2fs to use the new mount API for mount and
-> remount.
-> 
->   f2fs: introduce fs_context_operation structure
->   f2fs: switch to the new mount api
-> 
-> [1] https://lore.kernel.org/all/20211021114508.21407-1-lczerner@redhat.com/
-> 
-> Hongbo Li (7):
->   f2fs: Add fs parameter specifications for mount options
->   f2fs: move the option parser into handle_mount_opt
->   f2fs: Allow sbi to be NULL in f2fs_printk
->   f2fs: Add f2fs_fs_context to record the mount options
->   f2fs: separate the options parsing and options checking
->   f2fs: introduce fs_context_operation structure
->   f2fs: switch to the new mount api
-> 
->  fs/f2fs/super.c | 2101 +++++++++++++++++++++++++++--------------------
->  1 file changed, 1190 insertions(+), 911 deletions(-)
-> 
+diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+index 2680bd3..3a899e6 100644
+--- a/mkfs/f2fs_format.c
++++ b/mkfs/f2fs_format.c
+@@ -339,17 +339,6 @@ static int f2fs_prepare_super_block(void)
+ 	MSG(0, "Info: zone aligned segment0 blkaddr: %u\n",
+ 					get_sb(segment0_blkaddr));
+ 
+-	if (c.zoned_mode &&
+-		((c.ndevs == 1 &&
+-			(get_sb(segment0_blkaddr) + c.start_sector /
+-			DEFAULT_SECTORS_PER_BLOCK) % c.zone_blocks) ||
+-		(c.ndevs > 1 &&
+-			c.devices[1].start_blkaddr % c.zone_blocks))) {
+-		MSG(1, "\tError: Unaligned segment0 block address %u\n",
+-				get_sb(segment0_blkaddr));
+-		return -1;
+-	}
+-
+ 	for (i = 0; i < c.ndevs; i++) {
+ 		if (i == 0) {
+ 			c.devices[i].total_segments =
+@@ -390,6 +379,18 @@ static int f2fs_prepare_super_block(void)
+ 
+ 		c.total_segments += c.devices[i].total_segments;
+ 	}
++
++	if (c.zoned_mode &&
++		((c.ndevs == 1 &&
++			(get_sb(segment0_blkaddr) + c.start_sector /
++			DEFAULT_SECTORS_PER_BLOCK) % c.zone_blocks) ||
++		(c.ndevs > 1 &&
++			c.devices[1].start_blkaddr % c.zone_blocks))) {
++		MSG(1, "\tError: Unaligned segment0 block address %u\n",
++				get_sb(segment0_blkaddr));
++		return -1;
++	}
++
+ 	set_sb(segment_count, c.total_segments);
+ 	set_sb(segment_count_ckpt, F2FS_NUMBER_OF_CHECKPOINT_PACK);
+ 
+-- 
+1.9.1
 
 
 
