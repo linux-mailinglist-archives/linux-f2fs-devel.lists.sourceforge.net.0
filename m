@@ -2,129 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF39BB06446
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Jul 2025 18:24:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FC64B067DB
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Jul 2025 22:41:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:From:References:To:MIME-Version:Date:Message-ID:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=yKqewNZ7t07rdeLKKt0QoGBxvePMyNf9BjrdDTH0kVE=; b=gTlNAqMumfLuUz5lOgZD3ynF/W
-	uLoLIUkMERuDXjIDmupXc+3jB8hoicWNuc/9OwohbuxxFKyyRxPM6KEK4c1AVncG/jCFh8i1hZ0gZ
-	qfKeHYiGwVSUqrut2NfXd+1mGZTsYCcvVbbL389EOJJFv7q0m6uOA/PhQNuvmLYluG58=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:Message-ID:To:From:Date:Sender:Reply-To:Cc:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=7G0sAighjmCKuSGWXUOdWE5fil/ateaZv6QbPhj8TKU=; b=hTaTvbCdgPoQA2IMAXHwcekfAv
+	x5Qy0eCC4Lx98ENRlyvMnoWB3epBPK6sCBvw4BLUCgAAhmanLAvjywbXPKIG+zURUY75ljnj0ZVeJ
+	qUklowBztLYrRg46j2grAPcbjqZ+TACqt6cijEEuwahG+oAdqLvNMxx0C9rMEC3ZlVQU=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ubiS9-0007rE-0R;
-	Tue, 15 Jul 2025 16:24:25 +0000
+	id 1ubmSX-0005l9-SQ;
+	Tue, 15 Jul 2025 20:41:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <axboe@kernel.dk>) id 1ubiS7-0007r5-Am
+ (envelope-from <willy@infradead.org>) id 1ubmSW-0005kv-3m
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Jul 2025 16:24:23 +0000
+ Tue, 15 Jul 2025 20:41:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NxDCw3B8lz63zePAllCoEi8/Bv/yU3K9Rjnfd8keF3w=; b=K87VSX1sBinNY84Yqbc3YNC44u
- g8Mi+05ZV/tDrELTI++wTJYCHdzWwcCHSLEoKtDd/ofH4toOVKSAaCYxA39ASZU/GOSMW5239KHcQ
- yqJz/6ZR8O/jL4wMaqt1MMohywy0uPyFLdBdSpmzfmnwn8p939alvfh3/J5yjUQsTd2k=;
+ bh=SYy7+JhvSNYS+NgaNxt53BfDsD6DTcsBMQgVgtXAnMw=; b=EzB/5taxFZyu9ikZA7P2bb8YlD
+ DjtFmv99+iLoyXZdY1VLCqU+2rkwBhbrHRqVth84FAf6jeDSXAzMrv7teARIUKqAxvgzaL8dMUQnw
+ Y3f/H/M5vAzMC9ahBgq0cSnT5QhDrykK3M5u/f8Cn7H1ILcD3lAxGjg3DmRhwGQ1oc5E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=NxDCw3B8lz63zePAllCoEi8/Bv/yU3K9Rjnfd8keF3w=; b=kOBee0n54otw1huCXxEmQG86lB
- 8N9gT8ldhxk2BsVJs3dM8G3xwfEBcpKLkA9LQBBMrnp+KDxFxtrZMpWEJMOwKnb9C0ikiu8S57YVO
- +zV+oBjYMPsWwudOMSVRfycO13VqapFD8mUIQIsiqHax6ueocdK4RTcuI80335sXfC7M=;
-Received: from mail-qt1-f171.google.com ([209.85.160.171])
+ h=Content-Type:MIME-Version:Message-ID:Subject:To:From:Date:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=SYy7+JhvSNYS+NgaNxt53BfDsD6DTcsBMQgVgtXAnMw=; b=A
+ viB9oC5uD6lABrVI6v18RtMDnjtJa6gJdBr3/s6lp7KEq8DMrQXjJrOT3VUQwM/rZLVUkO6b7EmHH
+ vxkBadbUICVJzZoV7S3OgWNNQkNNognjlx81LX/exc/7kjlHaO5k2Cgi+lCR2TChK9zrqNHkMd0F8
+ 7XrS+VcD/hdfmZLE=;
+Received: from [90.155.50.34] (helo=casper.infradead.org)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ubiS6-0000rU-JU for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Jul 2025 16:24:23 +0000
-Received: by mail-qt1-f171.google.com with SMTP id
- d75a77b69052e-4ab5e2ae630so31069091cf.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 15 Jul 2025 09:24:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel-dk.20230601.gappssmtp.com; s=20230601; t=1752596656; x=1753201456;
- darn=lists.sourceforge.net; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=NxDCw3B8lz63zePAllCoEi8/Bv/yU3K9Rjnfd8keF3w=;
- b=bO7jbJIFy6mmDtXWxF3yJj1mbA+I6VidrUIhIKwGN2pA75L+pmpij+2NHv/1qO2YhA
- mI78DoOBw9omwJVXvKhspNAj2MeJ41OifvkmuOyYqLoV+wDaYJAlXMnSxD6ncxQAjypK
- t1nzRrChk95z93Yni0Qn5d1bPRSQa2TsrvMvfNMe5jukLNG16CKsnjsaBdzxQ1VsmBwf
- paybe55f48LMErg0jN4XCaEgNa8agT4lZqKtAq27HDuvhTFXgJFrky6u5RNkqUfhVSm8
- Hg0SsftkXicolsb613j/sIU7DqCRBFwY3PiN6/QWwI/mW7cJgc2GKUdLsC1Q2A8iZUu1
- DSnA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752596656; x=1753201456;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NxDCw3B8lz63zePAllCoEi8/Bv/yU3K9Rjnfd8keF3w=;
- b=fNAvpkcOGDdTPn1g2Kl5c87JSfVKw16uM3YGOCdQhbez75PHiRokLm6k+eABbtNbH5
- BE4wofihNl61VmfbjYp+zUJLZWGYbi4B9dAqB5TOIwRf/p3KVcL0ZEtdPOsiy2/KPtRf
- AmV/7TnmT3e1tRIkHm62qjYs1xbs1ksKBIJ9DHMy5t/WdAiYTfy7wd5+R+zpDI84T1bV
- w++LEL22Vt2+xiAhty7FwEoTguQdBItryPauH/4Cg0qH+TmasB7FfGF+9aKV22cd657g
- j9vLBQb1mbbR6Xvh59uttn7hfCor5N2PRk9RQf1Qsv8abztkKLpD7IbeRZJADvTHZ9tY
- qFUw==
-X-Gm-Message-State: AOJu0Yxp4W6f4dITkCbJyMyh4MY4pSCGTM4fkLtS4ndXuvAEz8blHk+1
- jcM7WS8f8zY8dwcrf+hBeuSz+itSllgwSZjveOxc8Hx4wTWgvWg+KPt0UGFDgkJ1+e4jKKkGNrY
- iT9DS
-X-Gm-Gg: ASbGncu4v5Z/nN6yhUHaQr/bq6yOVJkQZm2jC8v+6knHhDX4KZMby1j8Y7CDM7kplCL
- p9y0pHKTie9YULBEkgChXaEmj6DI89KPfPmgfU3LlSzWAx99IAy8OmyZMP5IxCNq5JIQ1lvmmtb
- Tvrnox9FMyI8REeRNUxc1Z5oMYHfVn4LgnOaHWQGnkmTrMSV5LBrBrlAeKWGoxdMimBl0i7I4KW
- mPn0Cb6eo7LOq9dkgoFCpRXrxRFp1sfzgOsmAOdKU6Y/jDNLlx/05hj00660vNOtwSrbC4+OR/L
- iubJGinDUnPGsZuc1W3z2gRjm9g1dUWSzKnJeZF8WHFHvvPLj48eiiBu/KRWRJnLudxS3fMZi0E
- iAq805Zjnl4+IXMDdWeg=
-X-Google-Smtp-Source: AGHT+IEX6DIBAok3abjxzf+yKdxGJWKxkOF53iju/PmUm/+4tk/eITPCBnbl9TA99RmWF6UUCIqzjw==
-X-Received: by 2002:a05:6e02:1c0c:b0:3df:3271:6aba with SMTP id
- e9e14a558f8ab-3e254327ac0mr149854285ab.15.1752589718545; 
- Tue, 15 Jul 2025 07:28:38 -0700 (PDT)
-Received: from [192.168.1.150] ([198.8.77.157])
- by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-5055697326asm2598255173.76.2025.07.15.07.28.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Jul 2025 07:28:38 -0700 (PDT)
-Message-ID: <056e083b-8e41-45a2-9b0f-2ec47d1a9f71@kernel.dk>
-Date: Tue, 15 Jul 2025 08:28:37 -0600
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1ubmSV-00012u-2b for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 15 Jul 2025 20:41:04 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:Message-ID:
+ Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:In-Reply-To:References;
+ bh=SYy7+JhvSNYS+NgaNxt53BfDsD6DTcsBMQgVgtXAnMw=; b=rkI+4BNOMXmHOlYzssTyZGMoyL
+ aI4+mtJLryNxKiCc4W+ld08C0+bphxREcY/dxe5wfC8vq1Jm/gkORw00fkrVN1wN9ZebXvUZdsASi
+ zm/TWcijb+f/QGxCr7JAj8hN/eD1ZF8y8US+BmVKcsXKcioWHpvbobjpz6cJAgAK7CUS1qNhk4uFL
+ tjWrM8+Ywd756Z75jpjjjhA98m3aZFKJrVLHToG44C24SvMEzbGkUiMb11sHEeqIF4vneMyjl5vwU
+ TzrTkImLRsy3P+dQk+EBbDZjxoBwbifTvRQpCJk58iDMe6EFuJx0uQ/0H2pK8Hk2W4Z21ZbGxiHf4
+ 6wuu3xaA==;
+Received: from willy by casper.infradead.org with local (Exim 4.98.2 #2 (Red
+ Hat Linux)) id 1ubmSA-0000000DkmQ-22ck;
+ Tue, 15 Jul 2025 20:40:42 +0000
+Date: Tue, 15 Jul 2025 21:40:42 +0100
+From: Matthew Wilcox <willy@infradead.org>
+To: Chris Mason <clm@fb.com>, Josef Bacik <josef@toxicpanda.com>,
+ David Sterba <dsterba@suse.com>, linux-btrfs@vger.kernel.org,
+ Nicolas Pitre <nico@fluxnic.net>, Gao Xiang <xiang@kernel.org>,
+ Chao Yu <chao@kernel.org>, linux-erofs@lists.ozlabs.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, Jan Kara <jack@suse.cz>,
+ linux-fsdevel@vger.kernel.org, David Woodhouse <dwmw2@infradead.org>,
+ Richard Weinberger <richard@nod.at>, linux-mtd@lists.infradead.org,
+ David Howells <dhowells@redhat.com>, netfs@lists.linux.dev,
+ Paulo Alcantara <pc@manguebit.org>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ ntfs3@lists.linux.dev, Steve French <sfrench@samba.org>,
+ linux-cifs@vger.kernel.org, Phillip Lougher <phillip@squashfs.org.uk>
+Message-ID: <aHa8ylTh0DGEQklt@casper.infradead.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Qi Han <hanqi@vivo.com>, jaegeuk@kernel.org, chao@kernel.org
-References: <20250715031054.14404-1-hanqi@vivo.com>
-Content-Language: en-US
-From: Jens Axboe <axboe@kernel.dk>
-In-Reply-To: <20250715031054.14404-1-hanqi@vivo.com>
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+X-Spam-Score: 1.1 (+)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 7/14/25 9:10 PM,
- Qi Han wrote: > Jens has already completed
- the development of uncached buffered I/O > in git [1], and in f2fs, the feature
- can be enabled simply by setting > the FOP_DONTCACHE flag [...] 
- Content analysis details:   (0.0 points, 5.0 required)
+ Content preview: I've started looking at how the page cache can help
+ filesystems
+ handle compressed data better. Feedback would be appreciated! I'll probably
+ say a few things which are obvious to anyone who knows how c [...] 
+ Content analysis details:   (1.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.160.171 listed in wl.mailspike.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1ubiS6-0000rU-JU
-Subject: Re: [f2fs-dev] [PATCH] f2fs: f2fs supports uncached buffered I/O
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
+X-Headers-End: 1ubmSV-00012u-2b
+Subject: [f2fs-dev] Compressed files & the page cache
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -136,37 +114,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 7/14/25 9:10 PM, Qi Han wrote:
-> Jens has already completed the development of uncached buffered I/O
-> in git [1], and in f2fs, the feature can be enabled simply by setting
-> the FOP_DONTCACHE flag in f2fs_file_operations.
+I've started looking at how the page cache can help filesystems handle
+compressed data better.  Feedback would be appreciated!  I'll probably
+say a few things which are obvious to anyone who knows how compressed
+files work, but I'm trying to be explicit about my assumptions.
 
-You need to ensure that for any DONTCACHE IO that the completion is
-routed via non-irq context, if applicable. I didn't verify that this is
-the case for f2fs. Generally you can deduce this as well through
-testing, I'd say the following cases would be interesting to test:
+First, I believe that all filesystems work by compressing fixed-size
+plaintext into variable-sized compressed blocks.  This would be a good
+point to stop reading and tell me about counterexamples.
 
-1) Normal DONTCACHE buffered read
-2) Overwrite DONTCACHE buffered write
-3) Append DONTCACHE buffered write
+From what I've been reading in all your filesystems is that you want to
+allocate extra pages in the page cache in order to store the excess data
+retrieved along with the page that you're actually trying to read.  That's
+because compressing in larger chunks leads to better compression.
 
-Test those with DEBUG_ATOMIC_SLEEP set in your config, and it that
-doesn't complain, that's a great start.
+There's some discrepancy between filesystems whether you need scratch
+space for decompression.  Some filesystems read the compressed data into
+the pagecache and decompress in-place, while other filesystems read the
+compressed data into scratch pages and decompress into the page cache.
 
-For the above test cases as well, verify that page cache doesn't grow as
-IO is performed. A bit is fine for things like meta data, but generally
-you want to see it remain basically flat in terms of page cache usage.
+There also seems to be some discrepancy between filesystems whether the
+decompression involves vmap() of all the memory allocated or whether the
+decompression routines can handle doing kmap_local() on individual pages.
 
-Maybe this is all fine, like I said I didn't verify. Just mentioning it
-for completeness sake.
+So, my proposal is that filesystems tell the page cache that their minimum
+folio size is the compression block size.  That seems to be around 64k,
+so not an unreasonable minimum allocation size.  That removes all the
+extra code in filesystems to allocate extra memory in the page cache.
+It means we don't attempt to track dirtiness at a sub-folio granularity
+(there's no point, we have to write back the entire compressed bock
+at once).  We also get a single virtually contiguous block ... if you're
+willing to ditch HIGHMEM support.  Or there's a proposal to introduce a
+vmap_file() which would give us a virtually contiguous chunk of memory
+(and could be trivially turned into a noop for the case of trying to
+vmap a single large folio).
 
--- 
-Jens Axboe
 
 
 _______________________________________________
