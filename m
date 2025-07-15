@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00A8AB05236
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Jul 2025 08:53:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1214AB0524A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Jul 2025 08:59:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=GAu+VP1hoXb7rG3kR8Rx9MSqOPz4FvLsGkLRSOb41Xo=; b=EvcINmuUJnZHHYPdvNOQgNqptB
-	JBPG1pljH63TJC2ddMklUMYRvPrZkDygm3dqtkeB2VNZGd9KcUhZXC1P/dm/yhGqE8ZetQPS8Zh0D
-	xg7Z1UeLKThnlCqmAundrks9cuO8Nw2EIxlOFgWg4lTWMppqNhZCUxI5ChFj09anrc00=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=bHLlErP+UvlMskY1X7ITkNJNMMbe1+Ik3FgBfbFEDbM=; b=Lxj639gSe5KcexTCpiNmAWyh14
+	KY8ViE19h7Bd6OxWIMyTStBw4OikgNSqbcEi+i60a5/10kitd5PaqM/nDfchqgrV8j3M19ddAFNWR
+	OtDe3s87m4CXQYNIf2lH/8aZWqkSbdlwKaHnM3snzOckRkrS69WOQdikLBOXgSPfxZ1I=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ubZXO-000853-7k;
-	Tue, 15 Jul 2025 06:53:15 +0000
+	id 1ubZd4-0008Mg-E4;
+	Tue, 15 Jul 2025 06:59:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ubZXN-00084r-EZ
+ (envelope-from <chao@kernel.org>) id 1ubZd3-0008MY-Cd
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Jul 2025 06:53:14 +0000
+ Tue, 15 Jul 2025 06:59:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=w0YDxMx5PfIWOapuM8BgoL0J++A+gFAXtSimmzieKtE=; b=B4Iq1BXHluhbi1mE2kV5QOJ5VM
- EnVAhQ0Gt8ndFVyAr7SEoSVmSrw5MhK5tiJ/OA4GFybM0zZBXDvOwUWEM+PmXhMWg8xi0HbHA2zjd
- 8AzelTEj2UsBdxkKx+9TxXW8KDAZDnGRA/BA8AZ2KzvYJn8gV76ahORRHAU8+a00xhwg=;
+ bh=zHi0UvMHVWbml4fL4f4hsykn6gZns8kB9v7BCNN+JZw=; b=gbsdPTlmkoxW6btqVdgGXpTfMv
+ oCSVC4pxdAjUDKck70bbGxOt/9RIRxTqRMGPiDV8wtR/WYPXvUBhXJ2DmaiXpu+5mF2cKIcMpnjoM
+ CxVOYv6jN+V9LKXEqiDkEX4mc3qBMiGLciPSxYKxeZdqOAXaxyYCiq1KJURoZhNcminA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,63 +40,60 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=w0YDxMx5PfIWOapuM8BgoL0J++A+gFAXtSimmzieKtE=; b=m8ZyvXXE6S7VtR4OPHHfDV4+BP
- z9VaahqdIiTNXU3g8w7mWmgc+Kn1C4FvbNRDdZy4LtZ/stUOeNdXnT94fs5muTG5Al5sMW+fQBlIF
- uDmNbBH0uHpzZbOFkAOfS9PdF2eelQ38Gf+TdHuvErEIRg1A/ggBsOfYzEwOpbuDWzMI=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=zHi0UvMHVWbml4fL4f4hsykn6gZns8kB9v7BCNN+JZw=; b=QD7wkpi2G6hr3qmjDXlV5Mu2GK
+ tUqZ0QTG8Dfu6L9nGlKEYgNJA/qS9yv4yQ0gUTwznS+ZQsb/pOiLuZvpi9kbcuF3o4PE3u7gzWSvx
+ fpj9pd0IdBm9oHAp/VQXkVtZ9xoR5cpGwf1VcjoI/N2wLCQIr+HujrnBx/HLWgIkWj68=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ubZXN-0008Mo-TZ for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Jul 2025 06:53:14 +0000
+ id 1ubZd2-0000G9-Rk for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 15 Jul 2025 06:59:05 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 945F544EEA;
- Tue, 15 Jul 2025 06:53:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91A62C4CEE3;
- Tue, 15 Jul 2025 06:53:01 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6B7575C5600;
+ Tue, 15 Jul 2025 06:58:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBE46C4CEE3;
+ Tue, 15 Jul 2025 06:58:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1752562383;
- bh=gctr3UrrZmHgV9GHXNCIpomEZVRjbpV9dPhmuF19aVk=;
+ s=k20201202; t=1752562739;
+ bh=mbfAD0hFlSTMolZq2J7TOzEpdHQycJi5YCq0IBF2A/8=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=Hj2czy5GCGio5UT1hG42ewYMU/KLvtTssahBpdxXWoOiKxfX2K3zLpLRv9H3mFlZF
- e0IWn4y/sn98HpemFMnaDh9g82DePoZ7ltfgdcRNvRd+2+47JSNlz7USxEdT7uk3oB
- tpn9fcAllaNJHvzKUgusxnASC3xOuPfIZiixyWAbXY44YyL7X/WB3DEkpw1hv4O+kx
- CQO5wt+goiilMybXlUd9Kz3m4bAnLaaSkVr9OOBGfE+s+fSwoxXprjyIEaOV7BswVa
- 2eDfRaSuqoVlqyjm1r7IHldTppGTRyxQVCYEwbD4ORp4ik35NoJ9c8c0nWLbyOaBwK
- 3FgZu+Ne382Gw==
-Message-ID: <5982c766-5170-4d0d-b49b-8f1adf6f506a@kernel.org>
-Date: Tue, 15 Jul 2025 14:52:58 +0800
+ b=O8PNAUDlkgOCGO6+fGwuv8CuHB7rLOROlx30Eb8pl4AIwW17YkCXE3mmGsl0Gemsv
+ vL8D8zy0qoE/LtPbsLHZ2KutU4BiuKTL2pigTiWwtr4Uq1qsFSTDbgdv2lzqvZzn0M
+ IS7RHwsc6dP3bAdpf/BJchRSOqOIP2HgbUUpShmDYIkZgFKXq8/bddkttu2MwG0eoQ
+ +9WGvdcY53XfE91dqwBm1LijPgSzs3MOY8LLQd3llu3KLFUC/xP/Tb9Ts8oC3ifovn
+ urLTJ+DI58tHbPPaOntX+FJ8Ui7ux+QyYMJcOtFzyelbrpj2vCzDSwkdBcgKHUt9mu
+ jo+N7FzT2LryA==
+Message-ID: <d822f21f-bfdb-443a-b639-66860a30ccbd@kernel.org>
+Date: Tue, 15 Jul 2025 14:58:55 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
-References: <1752486705-9498-1-git-send-email-zhiguo.niu@unisoc.com>
+To: Qi Han <hanqi@vivo.com>, jaegeuk@kernel.org
+References: <20250715031054.14404-1-hanqi@vivo.com>
 Content-Language: en-US
-In-Reply-To: <1752486705-9498-1-git-send-email-zhiguo.niu@unisoc.com>
+In-Reply-To: <20250715031054.14404-1-hanqi@vivo.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 7/14/25 17:51,
- Zhiguo Niu wrote: > Should check these after
- c.devices[1].start_blkaddr is assigned > when c.ndevs > 1. > > Fixes:
- 316e128fe3dc
- ("mkfs.f2fs: adjust zone alignment when using multi-pa [...] 
+ Content preview:  On 7/15/25 11:10, Qi Han wrote: > Jens has already completed
+ the development of uncached buffered I/O > in git [1], and in f2fs, the feature
+ can be enabled simply by setting > the FOP_DONTCACHE flag i [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ubZXN-0008Mo-TZ
-Subject: Re: [f2fs-dev] [PATCH] mkfs.f2fs: adjust zone alignment check to
- correct position
+X-Headers-End: 1ubZd2-0000G9-Rk
+Subject: Re: [f2fs-dev] [PATCH] f2fs: f2fs supports uncached buffered I/O
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,22 +107,43 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Hao_hao.Wang@unisoc.com
+Cc: axboe@kernel.dk, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 7/14/25 17:51, Zhiguo Niu wrote:
-> Should check these after c.devices[1].start_blkaddr is assigned
-> when c.ndevs > 1.
-> 
-> Fixes: 316e128fe3dc ("mkfs.f2fs: adjust zone alignment when using multi-partitions")
-> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+On 7/15/25 11:10, Qi Han wrote:
+> Jens has already completed the development of uncached buffered I/O
+> in git [1], and in f2fs, the feature can be enabled simply by setting
+> the FOP_DONTCACHE flag in f2fs_file_operations.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Hi Qi, do you have any numbers of f2fs before/after this change? though
+I'm not against supporting this feature in f2fs.
 
 Thanks,
+
+> 
+> [1]
+> https://lore.kernel.org/all/20241220154831.1086649-10-axboe@kernel.dk/T/#m58520a94b46f543d82db3711453dfc7bb594b2b0
+> 
+> Signed-off-by: Qi Han <hanqi@vivo.com>
+> ---
+>  fs/f2fs/file.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 696131e655ed..d8da1fc2febf 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -5425,5 +5425,5 @@ const struct file_operations f2fs_file_operations = {
+>  	.splice_read	= f2fs_file_splice_read,
+>  	.splice_write	= iter_file_splice_write,
+>  	.fadvise	= f2fs_file_fadvise,
+> -	.fop_flags	= FOP_BUFFER_RASYNC,
+> +	.fop_flags	= FOP_BUFFER_RASYNC | FOP_DONTCACHE,
+>  };
+
 
 
 _______________________________________________
