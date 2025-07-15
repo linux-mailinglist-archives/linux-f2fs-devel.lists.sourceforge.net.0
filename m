@@ -2,99 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56FC7B04F47
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Jul 2025 05:43:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED0D6B04F7A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Jul 2025 05:48:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=pmSlrdX5ZRacxG8pEIFRaJMm8DENam3bCOAkGjN4Apg=; b=c6zmgtG1WNY5YFubTUMbLBrTof
-	7wLfwMIu/648XSa7EIawsOQQ2fh/M0/7fuQZh1Cl6kv8WqjjeRzEzhn0Sh3690S1Q6Q0L+/WoqVMc
-	SOuPMdsi7UxPMebbjzQ5Bv0nnxSTvcuU10yVcMH+2f2Opl3AL/9QvjkN82FC6vyXkkYE=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=wxS08OvhCGQn6dIgqMEjyrt/9UUm3HBpeQewSW0/72c=; b=WoHirXA6Kt5JkRhN6MhfLjdlWH
+	ifUynFE+PvxU2JTrzbgpniFhHn7uWFuzorT26Q4BYkrw9ZhgGsKqIz9YC8HIvbAEGpMp9/+AqTR6H
+	jXQjKLS0/8Vr8t5BcTqy2SR8cgQLigxRx6t0hHvZqjPXIbJFxd3PACRgLQuWJMlWIXKY=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ubWZs-0006E0-Jq;
-	Tue, 15 Jul 2025 03:43:36 +0000
+	id 1ubWel-0004Q4-OL;
+	Tue, 15 Jul 2025 03:48:39 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ubWZr-0006Du-6t
+ (envelope-from <chao@kernel.org>) id 1ubWeh-0004Pv-3O
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Jul 2025 03:43:35 +0000
+ Tue, 15 Jul 2025 03:48:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZY2H4mg0F4A/+rZfeM0cchN5ctdNc2WvRLPG6mGoQAE=; b=iIVrMH6NjaMhvtTxnvcHw3SCYp
- /SI/QxORTh4aFJNx14IwG0UExVIUA8Yy82Cip/fyfwAsGQ78JZCtn2EgNUgzhKYpAbwyAZxkJFcGh
- zvDMN22z+9WK4XJoMpea5+gflnwGsJL/ScZHxR2ZmTs9MGGFrZqhhIpUJ0XFGkBLmPK4=;
+ bh=8ZsWC/xy6ivAVLgGoptxG17kDa5kqp7XduKtycp6Dj0=; b=iDxdRmhaA1cSJKuUsQUJNGdsFE
+ 1O04e+8cZqIqYdLca8WllWNGe7dLeiVtkgDxxurc5v+tdoplKUY9sNom27xxT1JbSd6vB813M5gRn
+ rGYz6ec9LQik+gIzHt88IMTED2PZCdgX2dfAL2NV9KMa6JMPxK+vsIz7E1YS4Ea1b1KQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ZY2H4mg0F4A/+rZfeM0cchN5ctdNc2WvRLPG6mGoQAE=; b=lP0c67JWzOFM4hrnR9Z7RuaQL4
- BzsOjonnXFOEcbYWhkcPm+mqqQqcBFkZmVPu+wCddsoWrxLTQ7DaTkUEQhRBqRAN+NwdBo+9u/LRQ
- FDiG5LJx88w+hW1lLwKOI1D+VgEwVmL6RNrHfSC5sTh7sEsUK3RPW6fr+9mznTOimsf0=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=8ZsWC/xy6ivAVLgGoptxG17kDa5kqp7XduKtycp6Dj0=; b=b
+ mgR7bqWYjx3sTWp8dHSjTPxQXRXzrKYiYgdLDJYSjmhJKURGh1zZqR7q7k/Xt0OkYKdoGudC2aMVz
+ eAE9ynDPAUBCcroRLyvdtSOxHoJt+Hxfjs/nkRAMuAxkN8DcwUjhcB3bZlTuDRjroQnoIN4BFHBzS
+ TAxjlpU3foHvCrLo=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ubWZq-0002Jn-R7 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Jul 2025 03:43:35 +0000
+ id 1ubWeg-00038p-Pg for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 15 Jul 2025 03:48:35 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 1BB77457BB;
- Tue, 15 Jul 2025 02:27:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E514C4CEF0;
- Tue, 15 Jul 2025 02:27:38 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id CCBE543767
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 15 Jul 2025 02:30:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AE822C4CEED;
+ Tue, 15 Jul 2025 02:30:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1752546460;
- bh=TzTh/P3Lp9jBCanCa+hsjUi7+ZwvfIkv/6TtgEsGlMw=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=vC2n/omoiMT0tzn2li8mwXYV+nyXys1HdBBiKKcaiJZ7fFdMNlfdSL6KqRaGXbgMM
- UlzhJuJDo1a7/6iyFtxm5rnXas2r6xaHg8hmteNaplZM3/W3m8sbPiR3knsIm1J4JT
- o5J/l2ifZeR6HY6WUyyyjBdNGMMeR9cwLsxR5xGFKIvpNAVdn3zrZSHW6f6J+G7zbH
- 2mhEa8zaIsX109Nei7Ex+rE55JYfO3Ap6FENPRaBH9LfHXf0pZyLq5OoU720pM9tzU
- 1CP4KAw86jIntsa0q2B6V8A8jjP+3e2+qZWi1kOGEWfsZoi+q/aG6C3pGTLIJhvkYB
- 7fcwy0GnlPWMg==
-Message-ID: <959d31dd-3a80-4cc3-ae0f-99de34d8b30b@kernel.org>
-Date: Tue, 15 Jul 2025 10:27:37 +0800
+ s=k20201202; t=1752546643;
+ bh=96GljATNHlwW+Ta+iLWZI2r2gbQnVj4VFyRi/hkx3vA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=SCOir/75NKgRfmOROV7oW92Rq7SVk9qXgDZMgoz5OrKJ7zti6Ap3c73fk6lqrY91D
+ eN8CFNX1GoeiJ2m62noJxY19CP/KLJ6tFehygSigJLzWXovNDkdmnSap9H3yBsqvkl
+ Ja8yrsa9ef4kMpjb3g2w7nFM5pJala6rCaP7XN8lbyV+aOdswCpfLh1xoB+zBdVnfT
+ CKZsTfhmOGhBQwQAS74tVp86aSBb7mhek9/z67JPi4BtylYgqM2C3OHIiYy/Fnq84x
+ j2hASHXb877wzinudC/i8wl4S2LLWuTGKrYmNzBkRfRpF4pGnV9h604nxUkBSgc50h
+ 5pIAHlGsZaJJw==
+To: jaegeuk@kernel.org
+Date: Tue, 15 Jul 2025 10:30:35 +0800
+Message-ID: <20250715023035.487742-1-chao@kernel.org>
+X-Mailer: git-send-email 2.50.0.727.gbf7dc18ff4-goog
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Daniel Lee <chullee@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20250714175103.61996-1-chullee@google.com>
-Content-Language: en-US
-In-Reply-To: <20250714175103.61996-1-chullee@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 7/15/25 01:51, Daniel Lee wrote: > Signed-off-by: Daniel
- Lee <chullee@google.com> Oh, just notice you help to update test_lookup_perf
- entry as well. Reviewed-by: Chao Yu <chao@kernel.org> 
+ Content preview: This patch fixes wrong parameter in usage of
+ test_lookup_perf.
+ Signed-off-by: Chao Yu <chao@kernel.org> --- v2: - drop change for f2fs_io
+ manual tools/f2fs_io/f2fs_io.c | 2 +- 1 file changed, 1 insertion(+),
+ 1 deletion(-)
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ubWZq-0002Jn-R7
-Subject: Re: [f2fs-dev] [PATCH] man: add doc for
- test_create_perf/test_lookup_perf
+X-Headers-End: 1ubWeg-00038p-Pg
+Subject: [f2fs-dev] [PATCH v2] f2fs_io: fix doc of test_lookup_perf
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,52 +112,30 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 7/15/25 01:51, Daniel Lee wrote:
-> Signed-off-by: Daniel Lee <chullee@google.com>
+This patch fixes wrong parameter in usage of test_lookup_perf.
 
-Oh, just notice you help to update test_lookup_perf entry as well.
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v2:
+- drop change for f2fs_io manual
+ tools/f2fs_io/f2fs_io.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Chao Yu <chao@kernel.org>
-
-Thanks,
-
-> ---
->  man/f2fs_io.8 | 22 ++++++++++++++++++++++
->  1 file changed, 22 insertions(+)
-> 
-> diff --git a/man/f2fs_io.8 b/man/f2fs_io.8
-> index e0f659e..6f3e11e 100644
-> --- a/man/f2fs_io.8
-> +++ b/man/f2fs_io.8
-> @@ -184,6 +184,28 @@ Get i_advise value and info in file
->  .TP
->  \fBioprio\fR \fI[hint] [file]\fR
->  Set ioprio to the file. The ioprio can be ioprio_write.
-> +.TP
-> +\fBtest_create_perf\fR \fI[-s] [-S] [dir] [num_files] [size_kb]\fR
-> +Measure file creation and deletion performance.
-> +.RS 1.2in
-> +.TP
-> +.B -s
-> +Call fsync() after each file creation.
-> +.TP
-> +.B -S
-> +Call sync() after deleting all files.
-> +.RE
-> +.TP
-> +\fBtest_lookup_perf\fR \fI[-i] [-v] [dir] [num_files]\fR
-> +Measure readdir/stat performance.
-> +.RS 1.2in
-> +.TP
-> +.B -i
-> +Initialized to create files only.
-> +.TP
-> +.B -v
-> +Verbose mode.
-> +.RE
->  .SH AUTHOR
->  This version of
->  .B f2fs_io
+diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+index 8e81ba9..f282190 100644
+--- a/tools/f2fs_io/f2fs_io.c
++++ b/tools/f2fs_io/f2fs_io.c
+@@ -2241,7 +2241,7 @@ static void do_test_create_perf(int argc, char **argv, const struct cmd_desc *cm
+ 
+ #define test_lookup_perf_desc "measure readdir/stat speed"
+ #define test_lookup_perf_help						\
+-"f2fs_io test_lookup_perf [-s] [-S] <dir> <num_files>\n\n"		\
++"f2fs_io test_lookup_perf [-i] [-v] <dir> <num_files>\n\n"		\
+ "Measures readdir/stat performance.\n"				\
+ "  <dir>          The target directory in where it will test on.\n"	\
+ "  <num_files>    The total number of files the test will initialize or test.\n"\
+-- 
+2.49.0
 
 
 
