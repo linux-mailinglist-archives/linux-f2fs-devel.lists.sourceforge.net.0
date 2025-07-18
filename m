@@ -2,139 +2,138 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCDF2B0ABB5
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 18 Jul 2025 23:40:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6EAAB0ABC0
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 18 Jul 2025 23:50:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=iwcl+nPbRzOjVJS+WI1nnyT/5e3T17s6GbgtOPG3JLk=; b=b4g3auc9l4Lrb51OxjAk4BSw2l
-	uNJf4wNYGX4wu0ziy3i0l4hwdJe5Ca3MZTFYg7JK/BeBu4co9HPf8A3Q68KQcNJ7fAhCG5FYeWQ7R
-	Ydu91aQaeTXWkiE5tJTvoU+y8kiuamz6ysWIZjiuuhUZsfdfuRxmgbK8kzRodFjBzdZA=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=8RjMQKEtevp9U2MExovyyakZsWPxMu8S7JEBQdBGPoI=; b=kr/swma39GxOi+ELNB6sq0ZOEL
+	/x83f0Jrn9/XSbOtl7kUhVyJ319H+B/85J35omj7Jq94XQzVQ/Fpla9Bc2qwE9aXBi7vAsViVTW9o
+	FMQOltd4eVeLIVJzjp3iC1pL4n3fV76ZHKEw/4IO6wfBlV4lGCEYS5KQl/2hN0Q33qbs=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ucsoj-0008Bq-LS;
-	Fri, 18 Jul 2025 21:40:34 +0000
+	id 1ucsy7-0008SC-90;
+	Fri, 18 Jul 2025 21:50:15 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1ucsoi-0008BY-01
+ (envelope-from <daeho43@gmail.com>) id 1ucsy6-0008S5-FW
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 18 Jul 2025 21:40:32 +0000
+ Fri, 18 Jul 2025 21:50:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DfoGAqDs0KEygckjNWNCfRbMYzpWUQukgt2WdbLvfmc=; b=XIKUmwSxdEoLKDFlk1JyDIj6gG
- J3D9+sb2EGNROXo2LPBDDFIkbh5MBOuZ6OAXVWI9+31E/a7zB3xQFbHPCbmfertPKMs8DnvTfO3iZ
- yDu5NXzn6Wwc6pEs2ci3DH8R0UUBu0RJOIcOz6sBnH0Y+m0nef4nueOHJfvMXPeEhNtE=;
+ bh=vkMUMoA1UivzBLhqZ+bzZIQ12HlKF5zuA3g0fn0IJSg=; b=QoGTCqkl3Wnd1SS7Uwf8/QQVlx
+ 7fWztPiIr15UUrhTFMzXjU8Wm0nryCDuJLlNv6cgjB/DBkLrlDMV0jMfvgWXP49xOVSVMKKHJGZDi
+ dlaOW/mh2jHbqfpUdj2A1ocuNKpvO/voNhNGlk3FeCxn9bbMNyyuo2OSmCJOsZXoFFts=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DfoGAqDs0KEygckjNWNCfRbMYzpWUQukgt2WdbLvfmc=; b=P
- DiVZWDLJpvsfjSYlPtE1zQ4JIxIJxPQPGuTEz541nmGCP0rOptupiD8eLVVoTrXI+pczsCLFFKW6t
- i17+/lzgFPXbgVcDZbYMwtxial4TTQ+OB3SAZSVr39lnfyKmr0+/H4zOh9TB7SO3Hn/64Z+D6QrpI
- 2hFtV+FtAgD9Kco4=;
-Received: from mail-pf1-f178.google.com ([209.85.210.178])
+ List-Owner:List-Archive; bh=vkMUMoA1UivzBLhqZ+bzZIQ12HlKF5zuA3g0fn0IJSg=; b=d
+ xlNB4Yui2fd6sQMbqd/lwQwNdibtO+4AZZEtKophMmqk0YOcrAcT6VYLx9CkBe9lT3b/aQWLxteVu
+ QpRAl3uGmTGDRnHZV1Ucq9a8+s1zcBLKZmFlMpNtZi7wLBC7dkXMFqZojBTxlgi1lDCkHrcLhjS+f
+ rKxX+M0/qKcIpoN0=;
+Received: from mail-pl1-f170.google.com ([209.85.214.170])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ucsoi-0005tN-Bj for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 18 Jul 2025 21:40:32 +0000
-Received: by mail-pf1-f178.google.com with SMTP id
- d2e1a72fcca58-742c7a52e97so2261472b3a.3
+ id 1ucsy6-0006S1-3C for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 18 Jul 2025 21:50:14 +0000
+Received: by mail-pl1-f170.google.com with SMTP id
+ d9443c01a7336-23649faf69fso22921855ad.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 18 Jul 2025 14:40:32 -0700 (PDT)
+ Fri, 18 Jul 2025 14:50:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752874822; x=1753479622; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1752875408; x=1753480208; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DfoGAqDs0KEygckjNWNCfRbMYzpWUQukgt2WdbLvfmc=;
- b=HnmkxsowNDVFft5f28NxMQfVt+tkjAQ0XdRt2FinaNFU0oOVdia6FuAjQQMRm24LRn
- g6rkzVBiRuJcL8TddxF8algsY3inIGhDo2ym5GfWAxN13elu8obHWVLzeTvsDAUjqFon
- Qn1p5DaAwrF045S58jIQbVj5jKKrVAbvx+Xj2AjQx3UKlPRLiifBKEYaGR0oO3m+ui3j
- uaZu3KAktlsj4Q3D2e+xOqiJ6X62Q37/9WsFNcYVcjIxQK+QqVHNA+iQMv70sbuw0AcQ
- ZrzDA9hmgVGMblVA/IdkYepTRQ+S41+65Ler00JkSUzPRAwoUUCKs1BjQrv9LovhmDXO
- OjnA==
+ bh=vkMUMoA1UivzBLhqZ+bzZIQ12HlKF5zuA3g0fn0IJSg=;
+ b=UzEReV9soKC7tY5wGMpcX+K17y2sAXCFVLMYykdpfPJ/vgny7XFjvbkVJI9gO0Y0HG
+ ip4cHZUmVtaW0JpK2mS3m19TVSax8kafexETI+9uwFw+U/rUJJ3L/xxULkZx5Ri1ETiH
+ 5TTnv6e2gg4i4rWu/7/H34Gb1qhwtfb3tZDb+Kbtg1voq9nm/dimP8RA9oc1bSWnvlmv
+ ipBczIyONq9WSlhyLBVTzgYOk0iORAsdsBGtOhnHmIl2Qpudpg5Zv9btz5SJ3c31AACP
+ iHTNZeMC7gRZOlCfJnVpYY8jLMSAbH6xsJHv0KlRfF6o02N0cZWgKcGrWqa5vxrHxxG/
+ 5miw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752874822; x=1753479622;
+ d=1e100.net; s=20230601; t=1752875408; x=1753480208;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DfoGAqDs0KEygckjNWNCfRbMYzpWUQukgt2WdbLvfmc=;
- b=wU3wAjFXXjzR2cR52ZcVUeKnuKulFfT21Sx8nzeUSPJzVXcAPRHHlorEIttvzTPYJ1
- E9oVl2INoHBJgBO1q6GjNa76WtJz1qGBf2uarh7C/whuOOOPAtar/bCMHbLmePqLG/nd
- mxhbaItP1t1vi9v5YM4wM+08mRxB0P0VAfsu+wIpBEi6/pr5WDYKtZqrzKbr3n+DAWup
- gHAoohDIInkjfKRMSnGW7zvIerh9eK2LmdQmX/XnJXfKsWGdbFZWysWdaRh0/gx9H1Bk
- b+o1e32CepsGTUAsmhLGcMI20Psp6gpuTHA7+GtmZJ2ti7gn8C+NAleL187U5ewFjz3g
- EABw==
+ bh=vkMUMoA1UivzBLhqZ+bzZIQ12HlKF5zuA3g0fn0IJSg=;
+ b=hMWrddwbEvM88dLnNRwV45sB1AhGTw9pYaDZ12/DbRTdiN1Mx1mG1y20uNMYXgMPKu
+ pJSYks8TZSVvWxK4zwHtxwl29HzbyT+QxsIpb1yVYHVr/PKGdnxdkNymeDrW3G/7F22B
+ IIEEtEGTs65aQMlUV5R5cdFIH7/JzZhpMU6k5nl1yPEe3Eh9o8fzM+UJbOkesE+yzvED
+ WvXj+iNxZFLuCFXymjJ/B77B2pPtFxhoajCxAn7SQyuomSqZP4GZ8hC+qjwjuhwO6hpE
+ lYw2pb1h1yb8CElY1I9JtYJe8uZDpHTR7EpvKeer1WLzUcUqcu7xnTf0sj3zK+ApIKsj
+ X3tA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXsAb+c4OIwOlc/+evenxCrdHLNJTLv6DZi/O1aGD1MRwAvNqcs2NbIu+6YuABEkLLs2dJ3VOENUNQTJwzqgi/u@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YxqzZ16iPWneDyu7SXksLG4MYQtK3twkLpN4ZfVjgJgAHE9fFtj
- y4OIBIxfIGsqS5ySsKvMi95Bk83wyZn3/DxNfrPbF0+FG12c3hUCdbVU
-X-Gm-Gg: ASbGncuX+OXrXTe+oY56ZWJ9NQCmMRV00oDXh1/gSLOzTl8DNrRzhXU3JIsqxr2enRj
- ivErsv/rNfDqxUWBbS3+kp5QiwBpT2Im/UeSbd8bxKdpCH5P0xQTUscZxCJSxbiRMzgoTzucplK
- usx2UR1zwDlLjqTpY9RoklWsoFo1K8/fQsBHRz3JJoBEyHOzV5cyruIenhBAZwGRD7r8GuF/j8y
- V3XZQU8saC5KfTpGBrcFm/9NhvyI8mR4kTBL+rPCJtZx2D+9pDLsT6h1lhR+NLusvaugyFTMsH0
- iaIwtLk1eMjb9AZ3bFwa5bZJTuO8tSk1+7ncWaVzAR0aMVzVgP75yw44vZAJM+2V5VA729LMHBb
- /6ir6ThGNacTxsO78aoC/1+b84xOIeZ8yWWktgCHeGMhl8tbteIkgyWalla6+lvKLlkkTCVG9cf
- YB4q7+v2+pe+yxaw==
-X-Google-Smtp-Source: AGHT+IHzFM56WdAtgwpgdQme2yI48O+6b8pHbsuA1cfjaaC6Z8I1MfrtI83Gnwa4bohZNLfR7gYHyQ==
-X-Received: by 2002:a05:6a00:4642:b0:747:ab61:e4fa with SMTP id
- d2e1a72fcca58-759ad4012efmr6197521b3a.14.1752874821444; 
- Fri, 18 Jul 2025 14:40:21 -0700 (PDT)
+ AJvYcCVWkIRFDStRZ9KmyPnZBHDEt+uzSCdFUFMQBLOROUo8We08525TdlkF3m7vUdQTEbB/Gyn5nsRKF5w+isXKK4tR@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YwfXiMsm11ahZhC8uVhMCnQsFFtgw8PegCzrmKPTgT5lht1brPT
+ XAnlzOmfP3FSn1R81fkQkPyLbgq3/eRLLTteqDi3IKyNRy40SrEMPmUk
+X-Gm-Gg: ASbGncs5ao/KZV8DqxnKqN17NmRWZmgIy3WHd/biXbBm+2GVal9fSvIvk4uEu98iQz/
+ FNXyA2Pqiw7U/kC5gGPhHt0fxxyn8Pj9FngFf1HRvdEcuQ1CPbkHdLNM0aWoyKktJ7hF7pH5OLu
+ kCH86TpgaceNzzo/fmTPz0+Via4Z9ohDXi1Kw2C9f3pDcW+V+YclkEnCrB2FVVClSqS99RqPHJU
+ fyqKQ2tv2LGRNS1JA/uuTn/vzcD5FmV86OCkeI40ipErpnPK+onoG+iYTI7ZLemy6Nx9Neq79GO
+ xU6Y4xSob0Y02coCMbSaAaXMGcHcc62N+IYhjWQQ3jkTS4GDCyRksviPdFxRCG/KF5dZXTr4oZM
+ uN/GZmfJBybP10CHmfoae/C83qOKlLMNTuqL7+ILfrYe0Y7MD1fyuXvKpt+UU9mXWDlqWX8ml6g
+ FGHljEL8OVW1tngQ==
+X-Google-Smtp-Source: AGHT+IFVZlkWS40fPv2xMRzPGNdRd58qU6Vif92LpMuLo3svyO4zJnooHC4ZMgfo8z7+w3Goti4Eaw==
+X-Received: by 2002:a17:902:ef49:b0:235:779:edfd with SMTP id
+ d9443c01a7336-23e25759752mr173198155ad.39.1752875408325; 
+ Fri, 18 Jul 2025 14:50:08 -0700 (PDT)
 Received: from daehojeong-desktop.mtv.corp.google.com
  ([2a00:79e0:2e14:7:902e:59ec:cd2a:fc00])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-759cb678fecsm1731070b3a.118.2025.07.18.14.40.20
+ d9443c01a7336-23e3b6d2dd6sm18156305ad.164.2025.07.18.14.50.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jul 2025 14:40:21 -0700 (PDT)
+ Fri, 18 Jul 2025 14:50:07 -0700 (PDT)
 From: Daeho Jeong <daeho43@gmail.com>
 To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  kernel-team@android.com
-Date: Fri, 18 Jul 2025 14:40:14 -0700
-Message-ID: <20250718214014.2277307-1-daeho43@gmail.com>
+Date: Fri, 18 Jul 2025 14:50:03 -0700
+Message-ID: <20250718215003.2283009-1-daeho43@gmail.com>
 X-Mailer: git-send-email 2.50.0.727.gbf7dc18ff4-goog
 MIME-Version: 1.0
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Daeho Jeong Add a sysfs knob to set a multiplier for
- the background GC migration window when F2FS Garbage Collection is boosted.
- Signed-off-by: Daeho Jeong --- v2: limit the available value range ---
+ Content preview: From: Daeho Jeong Add this to control GC algorithm for boost
+ GC. Signed-off-by: Daeho Jeong --- v2: use GC_GREEDY instead of 1 ---
  Documentation/ABI/testing/sysfs-fs-f2fs
- | 8 ++++++++ fs/f2fs/gc.c | 3 ++- fs/f2fs/gc.h | 1 + fs/f2fs/sysfs.c | 2
- ++ 4 files cha [...] 
+ | 8 +++++++- fs/f2fs/gc.c | 3 ++- fs/f2fs/gc.h | 1 + fs/f2fs/sysfs.c | 16
+ ++++++++++++++++ 4 [...] 
  Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [daeho43(at)gmail.com]
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
  digit [daeho43(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.178 listed in wl.mailspike.net]
+ [209.85.214.170 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1ucsoi-0005tN-Bj
-Subject: [f2fs-dev] [PATCH v2] f2fs: add gc_boost_gc_multiple sysfs node
+X-Headers-End: 1ucsy6-0006S1-3C
+Subject: [f2fs-dev] [PATCH v2] f2fs: add gc_boost_gc_greedy sysfs node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -153,85 +152,107 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Daeho Jeong <daehojeong@google.com>
 
-Add a sysfs knob to set a multiplier for the background GC migration
-window when F2FS Garbage Collection is boosted.
+Add this to control GC algorithm for boost GC.
 
 Signed-off-by: Daeho Jeong <daehojeong@google.com>
 ---
-v2: limit the available value range
+v2: use GC_GREEDY instead of 1
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs | 8 ++++++++
- fs/f2fs/gc.c                            | 3 ++-
- fs/f2fs/gc.h                            | 1 +
- fs/f2fs/sysfs.c                         | 2 ++
- 4 files changed, 13 insertions(+), 1 deletion(-)
+ Documentation/ABI/testing/sysfs-fs-f2fs |  8 +++++++-
+ fs/f2fs/gc.c                            |  3 ++-
+ fs/f2fs/gc.h                            |  1 +
+ fs/f2fs/sysfs.c                         | 16 ++++++++++++++++
+ 4 files changed, 26 insertions(+), 2 deletions(-)
 
 diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index bf03263b9f46..931c1f63aa2e 100644
+index 931c1f63aa2e..2158055cd9d1 100644
 --- a/Documentation/ABI/testing/sysfs-fs-f2fs
 +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -861,3 +861,11 @@ Description:	This is a read-only entry to show the value of sb.s_encoding_flags,
- 		SB_ENC_STRICT_MODE_FL            0x00000001
- 		SB_ENC_NO_COMPAT_FALLBACK_FL     0x00000002
- 		============================     ==========
-+
-+What:		/sys/fs/f2fs/<disk>/gc_boost_gc_multiple
+@@ -866,6 +866,12 @@ What:		/sys/fs/f2fs/<disk>/gc_boost_gc_multiple
+ Date:		June 2025
+ Contact:	"Daeho Jeong" <daehojeong@google.com>
+ Description:	Set a multiplier for the background GC migration window when F2FS GC is
+-		boosted.
++		boosted. the range should be from 1 to the segment count in a section.
+ 		Default: 5
+ 
++What:		/sys/fs/f2fs/<disk>/gc_boost_gc_greedy
 +Date:		June 2025
 +Contact:	"Daeho Jeong" <daehojeong@google.com>
-+Description:	Set a multiplier for the background GC migration window when F2FS GC is
-+		boosted.
-+		Default: 5
++Description:	Control GC algorithm for boost GC. 0: cost benefit, 1: greedy
++		Default: 1
 +
 diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 3cb5242f4ddf..de7e59bc0906 100644
+index de7e59bc0906..0d7703e7f9e0 100644
 --- a/fs/f2fs/gc.c
 +++ b/fs/f2fs/gc.c
-@@ -197,6 +197,7 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
+@@ -141,7 +141,7 @@ static int gc_thread_func(void *data)
+ 					FOREGROUND : BACKGROUND);
  
+ 		sync_mode = (F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_SYNC) ||
+-				gc_control.one_time;
++			(gc_control.one_time && gc_th->boost_gc_greedy);
+ 
+ 		/* foreground GC was been triggered via f2fs_balance_fs() */
+ 		if (foreground)
+@@ -198,6 +198,7 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
  	gc_th->urgent_sleep_time = DEF_GC_THREAD_URGENT_SLEEP_TIME;
  	gc_th->valid_thresh_ratio = DEF_GC_THREAD_VALID_THRESH_RATIO;
-+	gc_th->boost_gc_multiple = BOOST_GC_MULTIPLE;
+ 	gc_th->boost_gc_multiple = BOOST_GC_MULTIPLE;
++	gc_th->boost_gc_greedy = GC_GREEDY;
  
  	if (f2fs_sb_has_blkzoned(sbi)) {
  		gc_th->min_sleep_time = DEF_GC_THREAD_MIN_SLEEP_TIME_ZONED;
-@@ -1749,7 +1750,7 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
- 					!has_enough_free_blocks(sbi,
- 					sbi->gc_thread->boost_zoned_gc_percent))
- 				window_granularity *=
--					BOOST_GC_MULTIPLE;
-+					sbi->gc_thread->boost_gc_multiple;
- 
- 			end_segno = start_segno + window_granularity;
- 		}
 diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
-index 5c1eaf55e127..efa1968810a0 100644
+index efa1968810a0..1a2e7a84b59f 100644
 --- a/fs/f2fs/gc.h
 +++ b/fs/f2fs/gc.h
-@@ -68,6 +68,7 @@ struct f2fs_gc_kthread {
- 	unsigned int no_zoned_gc_percent;
+@@ -69,6 +69,7 @@ struct f2fs_gc_kthread {
  	unsigned int boost_zoned_gc_percent;
  	unsigned int valid_thresh_ratio;
-+	unsigned int boost_gc_multiple;
+ 	unsigned int boost_gc_multiple;
++	unsigned int boost_gc_greedy;
  };
  
  struct gc_inode_list {
 diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 75134d69a0bd..b0270b1c939c 100644
+index b0270b1c939c..3a52f51ee3c6 100644
 --- a/fs/f2fs/sysfs.c
 +++ b/fs/f2fs/sysfs.c
-@@ -1050,6 +1050,7 @@ GC_THREAD_RW_ATTR(gc_no_gc_sleep_time, no_gc_sleep_time);
- GC_THREAD_RW_ATTR(gc_no_zoned_gc_percent, no_zoned_gc_percent);
+@@ -824,6 +824,20 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 		return count;
+ 	}
+ 
++	if (!strcmp(a->attr.name, "gc_boost_gc_multiple")) {
++		if (t < 1 || t > SEGS_PER_SEC(sbi))
++			return -EINVAL;
++		sbi->gc_thread->boost_gc_multiple = (unsigned int)t;
++		return count;
++	}
++
++	if (!strcmp(a->attr.name, "gc_boost_gc_greedy")) {
++		if (t > GC_GREEDY)
++			return -EINVAL;
++		sbi->gc_thread->boost_gc_greedy = (unsigned int)t;
++		return count;
++	}
++
+ 	*ui = (unsigned int)t;
+ 
+ 	return count;
+@@ -1051,6 +1065,7 @@ GC_THREAD_RW_ATTR(gc_no_zoned_gc_percent, no_zoned_gc_percent);
  GC_THREAD_RW_ATTR(gc_boost_zoned_gc_percent, boost_zoned_gc_percent);
  GC_THREAD_RW_ATTR(gc_valid_thresh_ratio, valid_thresh_ratio);
-+GC_THREAD_RW_ATTR(gc_boost_gc_multiple, boost_gc_multiple);
+ GC_THREAD_RW_ATTR(gc_boost_gc_multiple, boost_gc_multiple);
++GC_THREAD_RW_ATTR(gc_boost_gc_greedy, boost_gc_greedy);
  
  /* SM_INFO ATTR */
  SM_INFO_RW_ATTR(reclaim_segments, rec_prefree_segments);
-@@ -1220,6 +1221,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(gc_no_zoned_gc_percent),
+@@ -1222,6 +1237,7 @@ static struct attribute *f2fs_attrs[] = {
  	ATTR_LIST(gc_boost_zoned_gc_percent),
  	ATTR_LIST(gc_valid_thresh_ratio),
-+	ATTR_LIST(gc_boost_gc_multiple),
+ 	ATTR_LIST(gc_boost_gc_multiple),
++	ATTR_LIST(gc_boost_gc_greedy),
  	ATTR_LIST(gc_idle),
  	ATTR_LIST(gc_urgent),
  	ATTR_LIST(reclaim_segments),
