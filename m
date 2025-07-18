@@ -2,107 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A7A3B0A055
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 18 Jul 2025 12:07:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 062C8B0AB07
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 18 Jul 2025 22:20:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=7j9LZPTZRdC8mXiz86TaTt570rwDCX8THXUiq3SVuZc=; b=J4RNkeyWnRNkVAwg/WIoenY3qw
-	u1hVGYFHyduXK4aSa57uYC94uK1wrrdZITIhGmKIvQPO+LYHFfCyPeDDhNtr9380s1R8bqF0Ewca9
-	G3J/6iPdyq+0Es9bjZaCFzWRrxejjPWpdlA2xy3ugMHTuQnpdhIFDx+Uio7m/IT8u4+o=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Date:Message-Id:MIME-Version:Sender:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=ehzUj41wOwiAuty6PUwI51eP1W5QUDp07fmKs1I6lPA=; b=ef+ZdWJ6WdKSbI7xtMhn0etyZT
+	jUrYsL2YbnviLeNqquINWoLWGJraGvjfe7LBji0RCoWdI1rw47goOa9lCMSiyYEGTAjq+40FfpWFY
+	ZIOoEkg/XtyZRID6P6jgDGgaigmknipPFZyYDOBQGqeVBxBgUHItaGyfaIlS3VAQXUic=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uchzz-0001v8-3Z;
-	Fri, 18 Jul 2025 10:07:27 +0000
+	id 1ucrYe-0007FK-I7;
+	Fri, 18 Jul 2025 20:19:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wangzijie1@honor.com>) id 1uchzx-0001v1-Vy
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1ucrYc-0007FB-DQ
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 18 Jul 2025 10:07:25 +0000
+ Fri, 18 Jul 2025 20:19:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yvLeAOiNbKySYVyV0FC3sYP4OCKXKTDAGgNoYT6pEfg=; b=Pgr2wYFHPjt/V1wcV6s/fpQ3hT
- KPtwYSk93/lfHWTBUovvqGyoFZ8pnLD9xWhIzT2i0wEakkccmGcdQ1bSkLVIlK6SnLyUluKC0YIhW
- 3bWk0PDehlhzDV0VwRoJ5A3M7aLVknNsJAEGp83uH4bu1esZay/dqyY2LA8SGwZBgbN4=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=EH2buXpxhOtqhZq3AcFEmXu8Dl6YiMBujNyBOKa4Ezg=; b=ENKNXCEdXuYJxOpAWoI1rngVOl
+ g7nPkHKJG4ks+KK59t7roN+BRuQYQfT3/nLqOsh8XwGuta6AUVADMOUDgJFCkOBpWtrvWNVCnyyfE
+ INyWkD6eLjS/vyjKQ9OQRynO8wA0Bg5y6LxLsQBrX2K8Bwy3CO+xBKc5XlRuCQLCGkyU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=yvLeAOiNbKySYVyV0FC3sYP4OCKXKTDAGgNoYT6pEfg=; b=dLAWQvXx+c6S2Lh1jzLVwVGKt0
- XXYr/872K663QuLoCsDThOyD5d7aYLKNWcM+ZO2D5dgARAgnjxwwNp+YT5rVq+xb2KyNqJ6NUwQuD
- nBWNqSlBDXsvttda4iMrBqeuMO+UAgbNnek5yHoD66TOHyGrGuRZLSXGlAuzWmgF9oTM=;
-Received: from mta22.hihonor.com ([81.70.192.198])
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=EH2buXpxhOtqhZq3AcFEmXu8Dl6YiMBujNyBOKa4Ezg=; b=P
+ rSmMZ6RLgwDWSk1TZqQzEB25cmjAE7HN2Io1o5m/z6frPP09xKmBmuTzycm8tIlQTm3qjr43EGYej
+ VBEea3LdYaZwENdkW0nnkQuQrZrnIlU7+AZ4fpDMY6scUCaV4mLnI8WLuB2t4YiOHeCymXkNlrUIb
+ AM5txMBtsbwsc82E=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uchzx-000085-5u for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 18 Jul 2025 10:07:25 +0000
-dkim-signature: v=1; a=rsa-sha256; d=honor.com; s=dkim;
- c=relaxed/relaxed; q=dns/txt; h=To:From;
- bh=yvLeAOiNbKySYVyV0FC3sYP4OCKXKTDAGgNoYT6pEfg=;
- b=ZFJ9UMKcNaCfGZd30a8yvbnOLiouQ6LfbdcYdteYbi3KvWMUHLGCpB/jNgU0VON6LdZcZfsy9
- h9w2ZGl+EE2x0DsCN06l4LWxaQ5J7Cz4jbpyZp4QTmoVQ1JYaHfxQOmTaMvKNZWlQpLXh8NspGZ
- EC4cRtkMZ7hGit9PF6jVkNY=
-Received: from w011.hihonor.com (unknown [10.68.20.122])
- by mta22.hihonor.com (SkyGuard) with ESMTPS id 4bk54q418DzYl1GD;
- Fri, 18 Jul 2025 18:04:59 +0800 (CST)
-Received: from a011.hihonor.com (10.68.31.243) by w011.hihonor.com
- (10.68.20.122) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 18 Jul
- 2025 18:07:13 +0800
-Received: from localhost.localdomain (10.144.23.14) by a011.hihonor.com
- (10.68.31.243) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 18 Jul
- 2025 18:07:12 +0800
-From: wangzijie <wangzijie1@honor.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Fri, 18 Jul 2025 18:07:06 +0800
-Message-ID: <20250718100706.3948806-2-wangzijie1@honor.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250718100706.3948806-1-wangzijie1@honor.com>
-References: <20250718100706.3948806-1-wangzijie1@honor.com>
+ id 1ucrYb-0000NI-HS for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 18 Jul 2025 20:19:49 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 18CDA450D5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 18 Jul 2025 20:19:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECC33C4CEEB
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 18 Jul 2025 20:19:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1752869984;
+ bh=t6FtGYb0QWjhIAHAasrXvGSoXf4vKoK/ABxKMZxZbIQ=;
+ h=Subject:From:Date:To:From;
+ b=fGKz6C6vfYM8GFartfa/hrzeNt0UPWWMQ1f8WdbkOyqkLtDmqrJG7kcYvLHvM7H48
+ 1+hjcmI1n796g8ZOqVX7ieA+rph+exT0sddVF9oyCMXyLuqc+ubOJPkGmcsMyUZtCG
+ hv8GNO9/YYRnFjsjmpd8LpqENDUG0ZMZedsEs/g+crKpKVoa8nMBVh/5QZa9EKYhvR
+ 0RlLZBE1bG7lyUkjYOwFYAAlJvuAAUX9Wx3pslIfFzKDgFNGXWJ54BCZ9Ya00bghXr
+ 5M0M1d5AAZXRXLMv1k9ZRLAtL6X64n9EAjdtb1QO9rCL35IhL2X78UqbuBTg3Ed5Ez
+ rl0Z7AgmSx3OA==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+ by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
+ B192B383BA3C for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 18 Jul 2025 20:20:04 +0000 (UTC)
 MIME-Version: 1.0
-X-Originating-IP: [10.144.23.14]
-X-ClientProxiedBy: w011.hihonor.com (10.68.20.122) To a011.hihonor.com
- (10.68.31.243)
+Message-Id: <175287000347.2782346.8699917268198176847.git-patchwork-summary@kernel.org>
+Date: Fri, 18 Jul 2025 20:20:03 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  When we need to alloc nat entry and set it dirty,
- we can directly
- add it to dirty set list(or initialize its list_head for new_ne) instead
- of adding it to clean list and make a move. Introduce init_di [...] 
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev] f2fs: fix
+ to avoid out-of-boundary access in dnode page Submitter: Chao Yu
+ <chao@kernel.org>
+ Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/proje [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [81.70.192.198 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1uchzx-000085-5u
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: directly add newly allocated pre-dirty
- nat entry to dirty set list
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ucrYb-0000NI-HS
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,143 +110,31 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: wangzijie <wangzijie1@honor.com>, linux-kernel@vger.kernel.org,
- feng.han@honor.com, linux-f2fs-devel@lists.sourceforge.net
+From: patchwork-bot+f2fs--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: patchwork-bot+f2fs@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When we need to alloc nat entry and set it dirty, we can directly add it to
-dirty set list(or initialize its list_head for new_ne) instead of adding it
-to clean list and make a move. Introduce init_dirty flag to do it.
+Hello:
 
-Signed-off-by: wangzijie <wangzijie1@honor.com>
----
- fs/f2fs/node.c | 37 ++++++++++++++++++++++++++++++-------
- 1 file changed, 30 insertions(+), 7 deletions(-)
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index b9fbc6bf7..b891be98b 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -185,7 +185,7 @@ static void __free_nat_entry(struct nat_entry *e)
- 
- /* must be locked by nat_tree_lock */
- static struct nat_entry *__init_nat_entry(struct f2fs_nm_info *nm_i,
--	struct nat_entry *ne, struct f2fs_nat_entry *raw_ne, bool no_fail)
-+	struct nat_entry *ne, struct f2fs_nat_entry *raw_ne, bool no_fail, bool init_dirty)
- {
- 	if (no_fail)
- 		f2fs_radix_tree_insert(&nm_i->nat_root, nat_get_nid(ne), ne);
-@@ -195,6 +195,11 @@ static struct nat_entry *__init_nat_entry(struct f2fs_nm_info *nm_i,
- 	if (raw_ne)
- 		node_info_from_raw_nat(&ne->ni, raw_ne);
- 
-+	if (init_dirty) {
-+		nm_i->nat_cnt[TOTAL_NAT]++;
-+		return ne;
-+	}
-+
- 	spin_lock(&nm_i->nat_list_lock);
- 	list_add_tail(&ne->list, &nm_i->nat_entries);
- 	spin_unlock(&nm_i->nat_list_lock);
-@@ -256,7 +261,7 @@ static struct nat_entry_set *__grab_nat_entry_set(struct f2fs_nm_info *nm_i,
- }
- 
- static void __set_nat_cache_dirty(struct f2fs_nm_info *nm_i,
--						struct nat_entry *ne)
-+					struct nat_entry *ne, bool init_dirty)
- {
- 	struct nat_entry_set *head;
- 	bool new_ne = nat_get_blkaddr(ne) == NEW_ADDR;
-@@ -275,6 +280,18 @@ static void __set_nat_cache_dirty(struct f2fs_nm_info *nm_i,
- 
- 	set_nat_flag(ne, IS_PREALLOC, new_ne);
- 
-+	if (init_dirty) {
-+		nm_i->nat_cnt[DIRTY_NAT]++;
-+		set_nat_flag(ne, IS_DIRTY, true);
-+		spin_lock(&nm_i->nat_list_lock);
-+		if (new_ne)
-+			INIT_LIST_HEAD(&ne->list);
-+		else
-+			list_add_tail(&ne->list, &head->entry_list);
-+		spin_unlock(&nm_i->nat_list_lock);
-+		return;
-+    }
-+
- 	if (get_nat_flag(ne, IS_DIRTY))
- 		goto refresh_list;
- 
-@@ -441,7 +458,7 @@ static void cache_nat_entry(struct f2fs_sb_info *sbi, nid_t nid,
- 	f2fs_down_write(&nm_i->nat_tree_lock);
- 	e = __lookup_nat_cache(nm_i, nid);
- 	if (!e)
--		e = __init_nat_entry(nm_i, new, ne, false);
-+		e = __init_nat_entry(nm_i, new, ne, false, false);
- 	else
- 		f2fs_bug_on(sbi, nat_get_ino(e) != le32_to_cpu(ne->ino) ||
- 				nat_get_blkaddr(e) !=
-@@ -458,11 +475,13 @@ static void set_node_addr(struct f2fs_sb_info *sbi, struct node_info *ni,
- 	struct f2fs_nm_info *nm_i = NM_I(sbi);
- 	struct nat_entry *e;
- 	struct nat_entry *new = __alloc_nat_entry(sbi, ni->nid, true);
-+	bool init_dirty = false;
- 
- 	f2fs_down_write(&nm_i->nat_tree_lock);
- 	e = radix_tree_lookup(&nm_i->nat_root, ni->nid);
- 	if (!e) {
--		e = __init_nat_entry(nm_i, new, NULL, true);
-+		init_dirty = true;
-+		e = __init_nat_entry(nm_i, new, NULL, true, true);
- 		copy_node_info(&e->ni, ni);
- 		f2fs_bug_on(sbi, ni->blk_addr == NEW_ADDR);
- 	} else if (new_blkaddr == NEW_ADDR) {
-@@ -498,7 +517,7 @@ static void set_node_addr(struct f2fs_sb_info *sbi, struct node_info *ni,
- 	nat_set_blkaddr(e, new_blkaddr);
- 	if (!__is_valid_data_blkaddr(new_blkaddr))
- 		set_nat_flag(e, IS_CHECKPOINTED, false);
--	__set_nat_cache_dirty(nm_i, e);
-+	__set_nat_cache_dirty(nm_i, e, init_dirty);
- 
- 	/* update fsync_mark if its inode nat entry is still alive */
- 	if (ni->nid != ni->ino)
-@@ -2914,6 +2933,7 @@ static void remove_nats_in_journal(struct f2fs_sb_info *sbi)
- 	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
- 	struct f2fs_journal *journal = curseg->journal;
- 	int i;
-+	bool init_dirty;
- 
- 	down_write(&curseg->journal_rwsem);
- 	for (i = 0; i < nats_in_cursum(journal); i++) {
-@@ -2924,12 +2944,15 @@ static void remove_nats_in_journal(struct f2fs_sb_info *sbi)
- 		if (f2fs_check_nid_range(sbi, nid))
- 			continue;
- 
-+		init_dirty = false;
-+
- 		raw_ne = nat_in_journal(journal, i);
- 
- 		ne = radix_tree_lookup(&nm_i->nat_root, nid);
- 		if (!ne) {
-+			init_dirty = true;
- 			ne = __alloc_nat_entry(sbi, nid, true);
--			__init_nat_entry(nm_i, ne, &raw_ne, true);
-+			__init_nat_entry(nm_i, ne, &raw_ne, true, true);
- 		}
- 
- 		/*
-@@ -2944,7 +2967,7 @@ static void remove_nats_in_journal(struct f2fs_sb_info *sbi)
- 			spin_unlock(&nm_i->nid_list_lock);
- 		}
- 
--		__set_nat_cache_dirty(nm_i, ne);
-+		__set_nat_cache_dirty(nm_i, ne, init_dirty);
- 	}
- 	update_nats_in_cursum(journal, -i);
- 	up_write(&curseg->journal_rwsem);
+Patch: [f2fs-dev] f2fs: fix to avoid out-of-boundary access in dnode page
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=983421
+  Lore link: https://lore.kernel.org/r/20250717132633.1339965-1-chao@kernel.org
+
+
+Total patches: 1
+
 -- 
-2.25.1
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
 
 
 
