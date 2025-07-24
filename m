@@ -2,119 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5E3AB10EC9
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Jul 2025 17:31:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B39E5B10F3B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Jul 2025 17:56:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Message-ID:Mime-Version:Date:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=OGyef95CTxAJEIHaF2M9ChwNfAukhecORwaSFWFGry8=; b=bNWQ0JEYtBgIch+ujQ6USR3YSH
-	7I1cNRC1ch4HQCb6pvGCIO/LdNTDEwLwV3zCIMwsODC0mFw2uCulauj7wP9EclWRPtST70kCwo0cq
-	uvnohrytVy9uLDFWhncpq02U4tCm781OaacFyLU0GKmhSQe+v+Wysr4ATW44Om/1a+gM=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=K2CrrDy7d1ov1gAvkCrDIzNxdsYKKk81ufkEBKBx2a0=; b=Aja3iTIp47YD2zX4Kk7OlmieU8
+	IT2527X6WONGzA16sIZigOZ57cUKbjlN9Jm7eBquKTg3ucn8FlPQX3JJUx1libcCLXqfw3ZuZi0ED
+	4+9KH9A++oISxsrbyzEHEgSInYEmKpPxfWF5MYd/whBJrT7FDOtrFctUbjg2zjRzoKro=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uexuu-0004Fd-BL;
-	Thu, 24 Jul 2025 15:31:33 +0000
+	id 1ueyIi-0006vX-TN;
+	Thu, 24 Jul 2025 15:56:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3zVGCaAwKAMQtz142kuy62usqyyqvo.myw@flex--jprusakowski.bounces.google.com>)
- id 1uexut-0004FV-DC for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Jul 2025 15:31:32 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <chao@kernel.org>) id 1ueyIZ-0006vB-4Y
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 24 Jul 2025 15:55:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
- Mime-Version:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SkEsdQ4L/pIchUqNG93CRYH8IJsJl5uVsGM6GRXeRvQ=; b=IMVtX5WMPYEYyI6TQF6lW43EYF
- wVmsKJNFuHB/VAlXfYgXTo6ctzhOz90poUKD5YkG7RxUBTZoIHTrspGzWVghH7YUJB+oF296rUUf7
- KYtN/WtyX8ueftoFN2hVpy4DbO//UtGDyHOG25GnXLWruZGOge5D9fPDBR5VRCiuqDww=;
+ bh=PIXg3pTrFiMgHy8BVrDsjSgZsU9C2X7mwU8cnLmehVM=; b=cIfepd7Du/3g3hIbHzyTsi/JqG
+ osJIwvbVKHGPFaR28w+Ddjxg/Va0Q1AcQ7AORZ64oAnd7z17fh93D/QaAjw39GdlgiQfDrmtpbMUs
+ RYa9upGRVo89uQfNSj2kUVS3KZJMWwlj2J4Ktm5sGqh06JLXSgyGxxE8A0/YZlY1/dUc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=SkEsdQ4L/pIchUqNG93CRYH8IJsJl5uVsGM6GRXeRvQ=; b=M
- 2rW2DYecglPFQAUXsYo/DRxNnofFduEiyUlp3hL242pYcllPsREn2hMe0+0+no5ylb+KyqvfsAroE
- nBRLbJQp6xsRWxtwyaaXVN5bp8jzcrKmvcgvYVcdnZhQO7OdfsVOfi8CgK9l6N62XYO/8hQ9BXrMv
- smnpnd4TlfgWCJ2k=;
-Received: from mail-ed1-f74.google.com ([209.85.208.74])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=PIXg3pTrFiMgHy8BVrDsjSgZsU9C2X7mwU8cnLmehVM=; b=IsJJ+fQuMAZ5VovyFPPC+pO24Y
+ PlMCTWAKJ66alFSzNGmYrvnbYKi5jMyCRgIuATuRY95s+CNnSw5LIMgszo1wcWWCP3XEJbWIWm6TP
+ IjOowDe3uHtmANsI6X1P94e9SxxVwjhwnAxSIS0r9gfvADAnXTf2qLgGEA5MuPGzwhB8=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uexut-0002eJ-PW for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Jul 2025 15:31:32 +0000
-Received: by mail-ed1-f74.google.com with SMTP id
- 4fb4d7f45d1cf-607c91a207dso1373620a12.2
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1ueyIY-0004IL-ME for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 24 Jul 2025 15:55:59 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4ED875C686C
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 24 Jul 2025 08:31:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1753371085; x=1753975885;
- darn=lists.sourceforge.net; 
- h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=SkEsdQ4L/pIchUqNG93CRYH8IJsJl5uVsGM6GRXeRvQ=;
- b=sIhOVL13QS+7riCP6VBUJWhqFrIlDeVj57nlPtQ/kiEz1VQWLrlnQS/oMVSkPq1vPQ
- uZX6+J1lUpTsKVBjAoUeTW8x+feZsp1CRpfiCAhzdsuhSvlV89aMZHBgTJ/tzFMnR7nb
- dyqJmIjuxRGUQYHCTr8Rj3tqu2VIzTVcM28vRAu0uotQVLbdHKpeK0zc7KjqGc1B74eh
- RZa8kJBi6RyGvvbyiWiENJQTLplscLqiHQFYbWezHiUWF/8HQNxacDdIJ14IdaNGHaXv
- 4cXTInGuz7CJoNlMaIaY8d73J/Z6baagvv4FFhn68jWNQOF/9NCPTBwfCkdPjR1wSSP5
- Jw8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753371085; x=1753975885;
- h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=SkEsdQ4L/pIchUqNG93CRYH8IJsJl5uVsGM6GRXeRvQ=;
- b=qCb58soq7wsip7H0l4tK++hMYehzLtnIbK+aU0Di8qOUXiNY14uUos+r5rHR18sC66
- q2eG7NcxAh2fQmZ2e8Scj9lO9oJ3A/8LSuhr6SBUjA4Lrv0NJb8hEp70tSMPEwibZmcV
- dHeIxzd1Qz2glL8y2Ex5T+RNC/f60ma1RKgSVRt6iXaBcti1L0are2wA5pMHLDCfvGUS
- 1vNKhCd3H9aCGuZ3J8EP4BcLDMONcy8CbCgxAVI9XA/9lA640tKaDZmHrIngeqDiOaLb
- ryfH0BM8K17Np/Wa1OHyuRH1oDhNz7k06pgHo2c3IWJWu2phvxB+NljcTNCesldmmHqB
- 8emQ==
-X-Gm-Message-State: AOJu0Yyc/UWISnQnXzKX7jCAC7wOkTE6A2hVd5PCrj6c79e8uloRZRW8
- B3gzKytKukOuQixYWeY6CXNt7P1O5q8tLBc5j819bs8o09wRNTDh5xthYAjl1RdigkAWCvXUs9t
- 6kzJ0/CCnWnaGrjDvt/FzrsK1JYjoCA==
-X-Google-Smtp-Source: AGHT+IGephgNH4LuU4bJdMk2LAYalDyAVdQFiFmvCHw7m4ai9Esg7UkatB3g3mrEK/1PSLN2IGMF2mT8tO5ci6gvMtA=
-X-Received: from edis29.prod.google.com ([2002:a50:d49d:0:b0:60e:414b:751d])
- (user=jprusakowski job=prod-delivery.src-stubby-dispatcher) by
- 2002:a50:a687:0:b0:602:1b8b:2925 with SMTP id
- 4fb4d7f45d1cf-6149b5a2ef6mr4796857a12.29.1753371085371; 
- Thu, 24 Jul 2025 08:31:25 -0700 (PDT)
-Date: Thu, 24 Jul 2025 17:31:15 +0200
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.50.1.487.gc89ff58d15-goog
-Message-ID: <20250724153115.125311-1-jprusakowski@google.com>
-To: jaegeuk@kernel.org
-X-Spam-Score: -7.6 (-------)
+ Thu, 24 Jul 2025 15:55:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C4CBC4CEED;
+ Thu, 24 Jul 2025 15:55:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1753372548;
+ bh=FjTsWn4FVztCX6T9anaJ4B08KE8vzSkMBCDtNngxVuA=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=Te7FaPn/2whiiw9CiQ7FEQDycvqqAfBBbo84avWvEj6bw0qCK242CXJnk3v9I7r7S
+ ttw8050P24edDYIR9YmAe+95jJVPyhBCRLRIgx/ITfSK+Ne2FVwNZasQmlV9EzLPMQ
+ s18YSY7cgVhHwbWOdE3buwUunwaguJeD+bOBpojtVLQSoqqQNdKbbWQDHnDGNdr60c
+ Z8U5Y/a/yg+/KYUfn+Ud/5PoVfRuyos32Hp69IyQkr/EJSW+mPTkoPUCAwiDDhuNov
+ 3R8qY9PMi3quf4y0nPKj92qGIMHkpNhBYx5okt7bDlfLKUM83aJbpibjXkisKUvSMr
+ kCAAMdgelUBCA==
+Message-ID: <c3991ef9-bb3a-4ac7-af1e-7d2d3a4511bf@kernel.org>
+Date: Thu, 24 Jul 2025 23:55:54 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20250724035654.3578627-1-chao@kernel.org>
+ <aIJL-sNFvNlcg3nT@google.com>
+Content-Language: en-US
+In-Reply-To: <aIJL-sNFvNlcg3nT@google.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: When testing F2FS with xfstests using UFS backed virtual
- disks
- the kernel complains sometimes that f2fs_release_decomp_mem() calls
- vm_unmap_ram()
- from an invalid context. Example trace from f2fs/007 t [...] 
- Content analysis details:   (-7.6 points, 5.0 required)
+ Content preview:  On 7/24/2025 11:06 PM, Jaegeuk Kim wrote: > Can we disable
+ linear lookup by default, but add an option to enable it? Sure. > > On 07/24, 
+ Chao Yu wrote: >> It provides a way to disable linear lookup fallback during
+ mkfs. >> >> Usage: >> >> 1. Disable linear lookup: >> mkfs.f2fs -f -O casefold
+ -C utf8:hashonly /dev/vdb >> d [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -7.5 USER_IN_DEF_DKIM_WL From: address is in the default DKIM welcome-list
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.74 listed in wl.mailspike.net]
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1uexut-0002eJ-PW
-Subject: [f2fs-dev] [PATCH v2] f2fs: vm_unmap_ram() may be called from an
- invalid context
+ domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ueyIY-0004IL-ME
+Subject: Re: [f2fs-dev] [PATCH] mkfs.f2fs: support -C [no]hashonly to
+ control linear lookup fallback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,83 +110,89 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jan Prusakowski via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jan Prusakowski <jprusakowski@google.com>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When testing F2FS with xfstests using UFS backed virtual disks the
-kernel complains sometimes that f2fs_release_decomp_mem() calls
-vm_unmap_ram() from an invalid context. Example trace from
-f2fs/007 test:
+On 7/24/2025 11:06 PM, Jaegeuk Kim wrote:
+> Can we disable linear lookup by default, but add an option to enable it?
 
-f2fs/007 5s ...  [12:59:38][    8.902525] run fstests f2fs/007
-[   11.468026] BUG: sleeping function called from invalid context at mm/vmalloc.c:2978
-[   11.471849] in_atomic(): 1, irqs_disabled(): 1, non_block: 0, pid: 68, name: irq/22-ufshcd
-[   11.475357] preempt_count: 1, expected: 0
-[   11.476970] RCU nest depth: 0, expected: 0
-[   11.478531] CPU: 0 UID: 0 PID: 68 Comm: irq/22-ufshcd Tainted: G        W           6.16.0-rc5-xfstests-ufs-g40f92e79b0aa #9 PREEMPT(none)
-[   11.478535] Tainted: [W]=WARN
-[   11.478536] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
-[   11.478537] Call Trace:
-[   11.478543]  <TASK>
-[   11.478545]  dump_stack_lvl+0x4e/0x70
-[   11.478554]  __might_resched.cold+0xaf/0xbe
-[   11.478557]  vm_unmap_ram+0x21/0xb0
-[   11.478560]  f2fs_release_decomp_mem+0x59/0x80
-[   11.478563]  f2fs_free_dic+0x18/0x1a0
-[   11.478565]  f2fs_finish_read_bio+0xd7/0x290
-[   11.478570]  blk_update_request+0xec/0x3b0
-[   11.478574]  ? sbitmap_queue_clear+0x3b/0x60
-[   11.478576]  scsi_end_request+0x27/0x1a0
-[   11.478582]  scsi_io_completion+0x40/0x300
-[   11.478583]  ufshcd_mcq_poll_cqe_lock+0xa3/0xe0
-[   11.478588]  ufshcd_sl_intr+0x194/0x1f0
-[   11.478592]  ufshcd_threaded_intr+0x68/0xb0
-[   11.478594]  ? __pfx_irq_thread_fn+0x10/0x10
-[   11.478599]  irq_thread_fn+0x20/0x60
-[   11.478602]  ? __pfx_irq_thread_fn+0x10/0x10
-[   11.478603]  irq_thread+0xb9/0x180
-[   11.478605]  ? __pfx_irq_thread_dtor+0x10/0x10
-[   11.478607]  ? __pfx_irq_thread+0x10/0x10
-[   11.478609]  kthread+0x10a/0x230
-[   11.478614]  ? __pfx_kthread+0x10/0x10
-[   11.478615]  ret_from_fork+0x7e/0xd0
-[   11.478619]  ? __pfx_kthread+0x10/0x10
-[   11.478621]  ret_from_fork_asm+0x1a/0x30
-[   11.478623]  </TASK>
+Sure.
 
-This patch modifies in_task() check inside f2fs_read_end_io() to also
-check if interrupts are disabled. This ensures that pages are unmapped
-asynchronously in an interrupt handler.
+> 
+> On 07/24, Chao Yu wrote:
+>> It provides a way to disable linear lookup fallback during mkfs.
+>>
+>> Usage:
+>>
+>> 1. Disable linear lookup:
+>> mkfs.f2fs -f -O casefold -C utf8:hashonly /dev/vdb
+>> dump.f2fs -d3 /dev/vdb |grep s_encoding_flags
+>> s_encoding_flags                        [0x       2 : 2]
+>>
+>> 2. Enable linear lookup:
+>> mkfs.f2fs -f -O casefold -C utf8:nohashonly /dev/vdb
+>> dump.f2fs -d3 /dev/vdb |grep s_encoding_flags
+>> s_encoding_flags                        [0x       0 : 0]
+>>
+>> mkfs.f2fs -f -O casefold -C utf8 /dev/vdb
+>> dump.f2fs -d3 /dev/vdb |grep s_encoding_flags
+>> s_encoding_flags                        [0x       0 : 0]
 
-Fixes: bff139b49d9f ("f2fs: handle decompress only post processing in softirq")
+Let me update the logic to disable linear lookup by default for case 2.2).
 
-Signed-off-by: Jan Prusakowski <jprusakowski@google.com>
+1)  mkfs.f2fs -f -O casefold -C utf8:hashonly /dev/vdb
+2.1) mkfs.f2fs -f -O casefold -C utf8:nohashonly /dev/vdb
+2.2) mkfs.f2fs -f -O casefold -C utf8 /dev/vdb
 
-Reviewed-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/data.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thanks,
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index d1a2616d41be..0acc25f996b3 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -280,7 +280,7 @@ static void f2fs_read_end_io(struct bio *bio)
- {
- 	struct f2fs_sb_info *sbi = F2FS_F_SB(bio_first_folio_all(bio));
- 	struct bio_post_read_ctx *ctx;
--	bool intask = in_task();
-+	bool intask = in_task() && !irqs_disabled();
- 
- 	iostat_update_and_unbind_ctx(bio);
- 	ctx = bio->bi_private;
--- 
-2.50.1.487.gc89ff58d15-goog
+>>
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>>   lib/libf2fs.c   | 1 +
+>>   man/mkfs.f2fs.8 | 8 +++++++-
+>>   2 files changed, 8 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+>> index 2f012c8..0e3e62a 100644
+>> --- a/lib/libf2fs.c
+>> +++ b/lib/libf2fs.c
+>> @@ -1424,6 +1424,7 @@ static const struct enc_flags {
+>>   	char *param;
+>>   } encoding_flags[] = {
+>>   	{ F2FS_ENC_STRICT_MODE_FL, "strict" },
+>> +	{ F2FS_ENC_NO_COMPAT_FALLBACK_FL, "hashonly"}
+>>   };
+>>   
+>>   /* Return a positive number < 0xff indicating the encoding magic number
+>> diff --git a/man/mkfs.f2fs.8 b/man/mkfs.f2fs.8
+>> index 8b3b0cc..b57f033 100644
+>> --- a/man/mkfs.f2fs.8
+>> +++ b/man/mkfs.f2fs.8
+>> @@ -232,10 +232,16 @@ Use UTF-8 for casefolding.
+>>   .I flags:
+>>   .RS 1.2i
+>>   .TP 1.2i
+>> -.B strict
+>> +.B [no]strict
+>>   This flag specifies that invalid strings should be rejected by the filesystem.
+>>   Default is disabled.
+>>   .RE
+>> +.RS 1.2i
+>> +.TP 1.2i
+>> +.B [no]hashonly
+>> +This flag specifies that there is no linear lookup fallback during lookup.
+>> +By default, linear lookup fallback is enabled.
+>> +.RE
+>>   .RE
+>>   .TP
+>>   .BI \-q
+>> -- 
+>> 2.49.0
 
 
 
