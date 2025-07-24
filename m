@@ -2,75 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B49B0B1125E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Jul 2025 22:30:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A7DBB1125A
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Jul 2025 22:30:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=/UyyP+0XjMyNX+sFSGymv4aO6XSnSEHheDoDN+3yLlc=; b=XEaabE1P8I7Jxa/L1gXYv/adZq
-	UCc+k4wPgKtruz+NSjzAv8cZLePSZlMLhMPnV/hNphC39egJnQhvKxvPJWrz4DhjXns0xlxFK2xuf
-	Nq8QYWtDzWDjeKpEiEJGEZ6fyiVEhnI9/UhCzwPX/4K8NXFs84eK2stKZbAoDxjcqxT4=;
+	bh=2prHgz285Izhui36Mr+CN8igR+hbniGzKMcGNKngWGY=; b=Tc4fbuVy4DXL/72aQIJX3CpCy3
+	Dg84csdx9Ncb/cyCflt3n3Gai3LVxOZPClEsBe3t31vAQ2Gjiwtjh5NF+4m9p0k2K+7iA4TwXJbqK
+	LhTvcbNqFURxsW+j0bPw5NY1A4pZpvLBtIpoLIRLTFKnw3QXNGYVl/67wb9px54t4lS4=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uf2Zn-0004tv-L0;
-	Thu, 24 Jul 2025 20:30:03 +0000
+	id 1uf2Zj-0004sT-01;
+	Thu, 24 Jul 2025 20:29:59 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uf2Zk-0004sh-Sl
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1uf2Zh-0004sN-Jz
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Jul 2025 20:30:00 +0000
+ Thu, 24 Jul 2025 20:29:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mBqFnNKUhvZ+LayJt3PGa/S4MBBxwiYOu01Kn4Sz+0U=; b=ICECyCYXRJ4KWWMlT0juQsxpNQ
- aG+tikKJSaOq+Ru9ZcseTUTIHmHhaVTaBAsPb9eLYtiQ1Qgjiyx3guJafBD6B5iYFZgZ6GuwgwCFE
- GO7UnYt1whJpz2bdHFjz2IeQU5LwZ3WZmVq48W/u9kJLF4XDbrTaqayJIGyxlCmflCCA=;
+ bh=Gl7CpfTCd5GUeOfECgdW/iptUw00V+mu5W9FWr+AR9U=; b=DgwNjr47qJ/CT7ShmKr6uT3LFE
+ QHm2nNIxSaW3yeGVmEdsh9qAxMAb16Ktkk4ouWB/fXBWv/KAxXYOSSiPKLazzODBs0dN5LVc3o1i3
+ MpapoZaUDeg5A7UWdzD1gLn8pkwVReC57oQbeRY+xwn/Ej66U5Iii8M6eau0ZWtNXJ2E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mBqFnNKUhvZ+LayJt3PGa/S4MBBxwiYOu01Kn4Sz+0U=; b=KITehmlDoSCE0MdUozLy56D+EZ
- SqK0C6K/pVBsz8y29Jnpj06lqn+IswZu5F9Vv9GluhzjWSgR/DvSx4QU+xM0EZNge//60bkI12FQ0
- 3nTq69a3qMKMCnITkmIkS3XCs0G54ilhMXiWLx5+UwFvSZ3LRGy9M0TCQ/GPf6uZBdnA=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=Gl7CpfTCd5GUeOfECgdW/iptUw00V+mu5W9FWr+AR9U=; b=SvhkUHCCHtoEws4DqLXCNiL9A7
+ 2aZjehMCcRAtImbDZajFVxqXuURVs3cmptfO2C99RCJcCJkbYWRZpbmFDQXRr7cAe7qMHFoY5HpeF
+ kpLSxPSzmJDu2nlYYMZL77gBg4ZncrjahTHnocVETlDxsGTkA2CrBBWYZPXruP3JzJw8=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uf2Zk-00012J-EG for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Jul 2025 20:30:00 +0000
+ id 1uf2Zh-00011L-2k for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 24 Jul 2025 20:29:57 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 13D5F5C6396;
- Thu, 24 Jul 2025 20:29:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ACE1FC4CEED;
- Thu, 24 Jul 2025 20:29:49 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 6B9CE6112C
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 24 Jul 2025 20:29:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22E76C4CEF6;
+ Thu, 24 Jul 2025 20:29:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1753388989;
- bh=RXhFM63F/0s+hjpp3fkwgqu+rmqBVdFqg8AZd8l2Vxg=;
+ s=k20201202; t=1753388991;
+ bh=8omJxnDmdLt4PCSaTRYHGUJhtLkmAWmpNQRwr/jaSUk=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=VIhh+KxDomNKFe9NHoCwgSGdg4FVROCbXJSwkequJkgB5+z4hpgnWiz054lpb1WPB
- 61/cJNA1EXqxaCahEiTWNVEZgpZPmLF2XYdTQmfxBs4pCq0m4Wg59y75XhWQa62kFd
- LZjxueOmilD9mSQbLjPm9eVHkSOPWeAUQwYAvggJiFOWo4x7R73PmZrYw/b++6ur5y
- x/c5CGzhlKFFlyBrbrPh2UkzhjMfKqZY5v/IfRGDLI8s5ax2v2J8t41pmZIi1r5JXH
- tuiSRcPx3PYKGB/KyIL3YN8LBfAXg8HHSYi0pPyOB2sFy125z3DVEnVFxJtkKWrWCZ
- RrMD1yKOrOgxg==
+ b=rH4563OUE1trZPVxlHrlpmqT0BnZY1P5WVADs/cjCaCSKUb9fjC1k2UXVTt0+ZPjn
+ 5lA25Phj8YS6Vw1ka0zF4+dk0xn8+BAmzwMoE4ioZwLQgPtgEdp+PvJ+lBkNoZcZKP
+ y0qNYOGROWQB3hCzMhKsmlS4Kpe5m+llPiZDKI6YDe/Ym059fUFhMVhJzSe5diXXD+
+ bqs/Y9JGtNawPjB2LZubkW6KneyHbKfyXXKx6BvdD/P5AwEwb28bdQcQLgtbPLNBje
+ 44/tbEP6jiy80wGLj015yAZ1JZcBmLR9G/jtfgFMIbxF620XIkjqSH0QrTCOQAkAuC
+ +oDZHpdvDcjrw==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- ADFF6383BF4E; Thu, 24 Jul 2025 20:30:08 +0000 (UTC)
+ 33AD5383BF4E; Thu, 24 Jul 2025 20:30:10 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <175338900751.2519964.9709355114500985822.git-patchwork-notify@kernel.org>
-Date: Thu, 24 Jul 2025 20:30:07 +0000
-References: <20250723142456.2328461-1-shengyong1@xiaomi.com>
-In-Reply-To: <20250723142456.2328461-1-shengyong1@xiaomi.com>
-To: Sheng Yong <shengyong2021@gmail.com>
+Message-Id: <175338900874.2519964.9616561185237270230.git-patchwork-notify@kernel.org>
+Date: Thu, 24 Jul 2025 20:30:08 +0000
+References: <20250721020231.2482090-1-chao@kernel.org>
+In-Reply-To: <20250721020231.2482090-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -79,10 +80,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 23 Jul 2025 22:24:56 +0800 you
- wrote: > From: Sheng Yong <shengyong1@xiaomi.com> > > There is no extra work
- before trace_f2fs_[dataread|datawrite]_end(), > so there is no need to check
- trace_< [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 21 Jul 2025 10:02:31 +0800 you
+ wrote: > Commit 0638a3197c19 ("f2fs: avoid unused block when dio write in
+ LFS > mode") has fixed unused block issue for dio write in lfs mode. > >
+ However, f2fs_ [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +95,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uf2Zk-00012J-EG
-Subject: Re: [f2fs-dev] [PATCH] f2fs: remove unnecessary tracepoint enabled
- check
+X-Headers-End: 1uf2Zh-00011L-2k
+Subject: Re: [f2fs-dev] [PATCH] f2fs: don't break allocation when crossing
+ contiguous sections
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,7 +112,7 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, shengyong1@xiaomi.com, linux-kernel@vger.kernel.org,
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -122,19 +123,19 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Wed, 23 Jul 2025 22:24:56 +0800 you wrote:
-> From: Sheng Yong <shengyong1@xiaomi.com>
+On Mon, 21 Jul 2025 10:02:31 +0800 you wrote:
+> Commit 0638a3197c19 ("f2fs: avoid unused block when dio write in LFS
+> mode") has fixed unused block issue for dio write in lfs mode.
 > 
-> There is no extra work before trace_f2fs_[dataread|datawrite]_end(),
-> so there is no need to check trace_<tracepoint>_enabled().
-> 
-> Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
+> However, f2fs_map_blocks() may break and return smaller extent when
+> last allocated block locates in the end of section, even allocator
+> can allocate contiguous blocks across sections.
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: remove unnecessary tracepoint enabled check
-    https://git.kernel.org/jaegeuk/f2fs/c/95d7c508b212
+  - [f2fs-dev] f2fs: don't break allocation when crossing contiguous sections
+    https://git.kernel.org/jaegeuk/f2fs/c/f0a7adfedcc8
 
 You are awesome, thank you!
 -- 
