@@ -2,102 +2,124 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABEFCB10794
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Jul 2025 12:18:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81FB4B107E2
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Jul 2025 12:38:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=QDSQr5S4VDgNkK0SYeo2SuYP8A1yW+0DLOOhVFaXLnk=; b=UkZY9ASzrL8MwnRiztZb7PVUxk
-	N12okVxCeAynwVHXf7bPXTcPyiPAzmZoZagfcwfxacg6AqHHUxxRLdJnjxoOo7Q8lbdQq6lh+Es0y
-	M6xQbYnwnHtZWkmFa18a04Wds2SFE99JDWxsNIZq1BL2NQPhBdI1rw65xD2AYLwkXyw4=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:To:Message-ID:Mime-Version:Date:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=6ikBNWSb0AaG56XRyEONG7HdiCer6b8mOH0wCU1tF6k=; b=HhhQjH2B/5W85GzMOaJC0qBGsX
+	TtdYNYTnLcs5tPU94KghMSa45fYZBjWfprMJozY66fyn3p4G0ed8BmPYNZjUFQalvrmAJpojL4AwO
+	22n4UgYKdR9SusV8GUj6xvCTsciTlNlCxf67rUa1iMf9SWWDwCxdu3VA2sN5gPapvaJc=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uet22-0007ik-7x;
-	Thu, 24 Jul 2025 10:18:34 +0000
+	id 1uetLO-0002Ah-VH;
+	Thu, 24 Jul 2025 10:38:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lee@kernel.org>) id 1uet20-0007id-Uw
- for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Jul 2025 10:18:32 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3SwuCaAwKALQdjlomUeiqmecaiiafY.Wig@flex--jprusakowski.bounces.google.com>)
+ id 1uetLN-0002AJ-67 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 24 Jul 2025 10:38:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
+ Mime-Version:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=L6uwJVRafW2h2JlYAxIMjWpRyT0FUZdPIIbrPy5Lnvw=; b=byJBjHC70DXD6TsLSIFn16gkUN
- Po+lkOwQl83HSQnC6qHqt4n9UlNfQqNFvipPtQUb9bH2s7ayeCKPQiP7FHNkFrB4X3p+BRZq7PtcV
- 60eQkAYTfSVcODK6pNcYRUplW93m/i1oWGoh7+2GLptQTOxZLUoUzd2DF0I97bi41GwM=;
+ bh=oP7cxGwm/mObhghxpyauLVJ+5M/Q63eusIkmXcjkDec=; b=hkxkDwVNfxTjOptQ54SXivCO3A
+ uSitizXZIXVokqzz8kGDYWcRcNZK3dzDGVq40uLeQ2Z3iYYCgY8PAdQt8BNZM/ssC0aUJHP4umEG/
+ 2sDTfsPpbsXNq3PkWj8NeDgputnRbLQ3kKhnOOrzhP3uxZnpp0oGqDWXzuX7YKurBtDs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=L6uwJVRafW2h2JlYAxIMjWpRyT0FUZdPIIbrPy5Lnvw=; b=FWKD/TOQH/xT3PICY3F3DMjhBB
- cMkLzgCiYfiDZcWL0RkRKTShmnLwLTR46CDP3CpeQHMh4/nFK2ls+a+GTCTfhJDsbZeSOmsNQ4+cG
- JE6c9jrNNeLYb9ipNWB5Znc2evHUnWoWY/Tn1KdUpKs63Loyx8I04cgVPQe7WFl9dE9I=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=oP7cxGwm/mObhghxpyauLVJ+5M/Q63eusIkmXcjkDec=; b=V
+ ZVT/Snp5zGttz4d2Tt2YxS4ZyZ8RyZBoUJ1MRLxojPvH1cFOivdPmZpPtN2Jj6d2byuW6XQ+yRmBv
+ Bo1bRzZM7FHvyM8qcT1UuM6FYYCiXSv6LsU5pcJZK5hFJiz4szGcOqfxpvQ8wU8hf245SkKtTK8KU
+ eHAUAKVZFHXejrl4=;
+Received: from mail-ej1-f73.google.com ([209.85.218.73])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uet20-0004VI-Fs for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Jul 2025 10:18:32 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 2092145405;
- Thu, 24 Jul 2025 10:18:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 738A8C4CEED;
- Thu, 24 Jul 2025 10:18:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1753352302;
- bh=kxNbWmvGgnDYGDeo1gboZY2VzKiJaS/yvAS02FMDsno=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=qhZT44thqgQVxJ9rRh0LLiA8wFQN8Uwt2NBlm3NvZilVQm7fyVM4foN38zUsSHMD/
- z9GO9ba57JpR+ZIWxolyviW9NFX+c/YauCU1Qw8LTlnHhGX0/ixPAO502tVQEK+bY/
- Rny13nIhUvKk4ISHPuJO0JNtgqMHROkqAgFWejWfKyzCqk5mYARBZx9iCQ0uObBB1u
- i9vb4XE6w+DiquOhNENj9cdKwE1R4TcIZIoULdxRexeQ9QECa78EO+mAKw8Gyloe8d
- ZEbl6+NigcGM5FkXjuQjExv0+cEgYXsGzK2qOvRruDKMJLjPFgfhM40QGy3xxgzco4
- xfY+uuWWKloZg==
-Date: Thu, 24 Jul 2025 11:18:17 +0100
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Message-ID: <20250724101817.GZ11056@google.com>
-References: <20250416054805.1416834-1-chao@kernel.org>
- <20250624100039.GA3680448@google.com>
- <2025070253-erased-armadillo-0984@gregkh>
- <20250723082639.GP11056@google.com>
- <2025072354-tricolor-annex-92fb@gregkh>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <2025072354-tricolor-annex-92fb@gregkh>
-X-Spam-Score: -0.2 (/)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1uetLM-000669-RU for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 24 Jul 2025 10:38:33 +0000
+Received: by mail-ej1-f73.google.com with SMTP id
+ a640c23a62f3a-ae3b2630529so84051966b.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 24 Jul 2025 03:38:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1753353506; x=1753958306;
+ darn=lists.sourceforge.net; 
+ h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=oP7cxGwm/mObhghxpyauLVJ+5M/Q63eusIkmXcjkDec=;
+ b=PJ8AqHpHpnTV5qIAAOnBgfA1V/riIWq1DhdCBMGwtE4F07T9MS32BaYA2GfAloipey
+ Kmj4v5Xi0l+8pFYLTg3yL57LJialTPqDxOVo7WwrKUDj04wDMbBh3r94J2YmscXTOygL
+ lhwdGUzM8ruiMIouYWMewI+BLkMNI5Dj0R644ntaZLfuG2e6wzzAfQEGJoo+rlhvyEsP
+ HWL5w+zXQhDN/BkD/U9HB/VV0AGkKuGswqJEkJczvMT9sXGpO5fzZ/v9pxgLbIZN2g3H
+ v5f5ynKC3EEkb62sjBeap2/+380M6yvtWNFAYNE4+1fKtZqZmKIQZspx8wl4ls44p1jJ
+ 2fFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753353506; x=1753958306;
+ h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=oP7cxGwm/mObhghxpyauLVJ+5M/Q63eusIkmXcjkDec=;
+ b=DAJimjwL5PpAAOjz8tGs/uPYw5ytmiNvFSSyH+ZalcndFKXzJfGqDuKVDee31660yE
+ wmcDRMvXkBay++A2bL81N9E/6NXFe6hiRKxaQGdKIaXmfB/49Shqkf4Maz17JBQDdtzr
+ Mw1ATNH4mp0SI/7HlqceTRzG/qX2Az4TLWPqYBM9GG/K0mXf7p4X6K89oQe8mM9ORksr
+ V/xUsaIyW1Qyais38mfwcV8MjUYNkB1VUIxsng5y9kEwYAsgLQ8GfpdY4pmUz8LtqbCw
+ qahopxo/la+9WA0q9RF+bsnpy47BZOJeiPhYL/STSH0DSauOFMrCsrvQ84bvEBfngpAt
+ v0UA==
+X-Gm-Message-State: AOJu0Yyd5uban9qLNQ3ae0F1c9OWhC90ETSe/bO4aL5Bm4Derz/gm+OO
+ oFTGi+3yPJOAVDDOMg0RERmptNHdN1dza3XVijsUs+MbT+B9aw5vDoSCJofk6usR69XjLu9R+IA
+ ZcV8gA3Mr+fnMG7oKuf+69HVRhVsY/g==
+X-Google-Smtp-Source: AGHT+IEW+Ka9VvSms6hDdZ18FHwhQB5dVK6OecnLWTKMyUjuUm/tV39mW4FcyUnZaaFb0VWGkqSjAPHaBgv3/9+78w4=
+X-Received: from edr13.prod.google.com ([2002:a05:6402:44cd:b0:614:d2e4:82d0])
+ (user=jprusakowski job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:6402:2743:b0:609:7ed1:c791 with SMTP id
+ 4fb4d7f45d1cf-6149b5a6cb9mr5507870a12.32.1753353035529; 
+ Thu, 24 Jul 2025 03:30:35 -0700 (PDT)
+Date: Thu, 24 Jul 2025 12:30:16 +0200
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.50.1.487.gc89ff58d15-goog
+Message-ID: <20250724103016.5164-1-jprusakowski@google.com>
+To: jaegeuk@kernel.org
+X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, 23 Jul 2025, Greg Kroah-Hartman wrote: > On Wed, Jul
- 23, 2025 at 09:26:39AM +0100, Lee Jones wrote: > > On Wed, 02 Jul 2025, Greg
- Kroah-Hartman wrote: > > > > > On Tue, Jun 24, 2025 at 11:00:39AM +0100,
- Lee Jones wrote: > > > > On Wed, 16 [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview: When testing F2FS with xfstests using UFS backed virtual
+ disks
+ the kernel complains sometimes that f2fs_release_decomp_mem() calls
+ vm_unmap_ram()
+ from an invalid context. This patch modifies in_task() check inside
+ f2fs_read_end_io()
+ to also check if interrupts are disabled. This ensures that pages are unmapped
+ asynchronously in an interrupt handler. 
+ Content analysis details:   (-7.6 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -7.5 USER_IN_DEF_DKIM_WL From: address is in the default DKIM welcome-list
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uet20-0004VI-Fs
-Subject: Re: [f2fs-dev] [STABLE 5.15+] f2fs: sysfs: add encoding_flags entry
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.73 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1uetLM-000669-RU
+Subject: [f2fs-dev] [PATCH] f2fs: vm_unmap_ram() may be called from an
+ invalid context
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,80 +131,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Lee Jones via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Lee Jones <lee@kernel.org>
-Cc: Sasha Levin <sashal@kernel.org>, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- jaegeuk@kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Jan Prusakowski via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jan Prusakowski <jprusakowski@google.com>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gV2VkLCAyMyBKdWwgMjAyNSwgR3JlZyBLcm9haC1IYXJ0bWFuIHdyb3RlOgoKPiBPbiBXZWQs
-IEp1bCAyMywgMjAyNSBhdCAwOToyNjozOUFNICswMTAwLCBMZWUgSm9uZXMgd3JvdGU6Cj4gPiBP
-biBXZWQsIDAyIEp1bCAyMDI1LCBHcmVnIEtyb2FoLUhhcnRtYW4gd3JvdGU6Cj4gPiAKPiA+ID4g
-T24gVHVlLCBKdW4gMjQsIDIwMjUgYXQgMTE6MDA6MzlBTSArMDEwMCwgTGVlIEpvbmVzIHdyb3Rl
-Ogo+ID4gPiA+IE9uIFdlZCwgMTYgQXByIDIwMjUsIENoYW8gWXUgd3JvdGU6Cj4gPiA+ID4gCj4g
-PiA+ID4gPiBUaGlzIHBhdGNoIGFkZHMgYSBuZXcgc3lzZnMgZW50cnkgL3N5cy9mcy9mMmZzLzxk
-aXNrPi9lbmNvZGluZ19mbGFncywKPiA+ID4gPiA+IGl0IGlzIGEgcmVhZC1vbmx5IGVudHJ5IHRv
-IHNob3cgdGhlIHZhbHVlIG9mIHNiLnNfZW5jb2RpbmdfZmxhZ3MsIHRoZQo+ID4gPiA+ID4gdmFs
-dWUgaXMgaGV4YWRlY2ltYWwuCj4gPiA+ID4gPiAKPiA+ID4gPiA+ID09PT09PT09PT09PT09PT09
-PT09PT09PT09PSAgICAgID09PT09PT09PT0KPiA+ID4gPiA+IEZsYWdfTmFtZSAgICAgICAgICAg
-ICAgICAgICAgICAgIEZsYWdfVmFsdWUKPiA+ID4gPiA+ID09PT09PT09PT09PT09PT09PT09PT09
-PT09PSAgICAgID09PT09PT09PT0KPiA+ID4gPiA+IFNCX0VOQ19TVFJJQ1RfTU9ERV9GTCAgICAg
-ICAgICAgIDB4MDAwMDAwMDEKPiA+ID4gPiA+IFNCX0VOQ19OT19DT01QQVRfRkFMTEJBQ0tfRkwg
-ICAgIDB4MDAwMDAwMDIKPiA+ID4gPiA+ID09PT09PT09PT09PT09PT09PT09PT09PT09PSAgICAg
-ID09PT09PT09PT0KPiA+ID4gPiA+IAo+ID4gPiA+ID4gY2FzZSMxCj4gPiA+ID4gPiBta2ZzLmYy
-ZnMgLWYgLU8gY2FzZWZvbGQgLUMgdXRmODpzdHJpY3QgL2Rldi92ZGEKPiA+ID4gPiA+IG1vdW50
-IC9kZXYvdmRhIC9tbnQvZjJmcwo+ID4gPiA+ID4gY2F0IC9zeXMvZnMvZjJmcy92ZGEvZW5jb2Rp
-bmdfZmxhZ3MKPiA+ID4gPiA+IDEKPiA+ID4gPiA+IAo+ID4gPiA+ID4gY2FzZSMyCj4gPiA+ID4g
-PiBta2ZzLmYyZnMgLWYgLU8gY2FzZWZvbGQgLUMgdXRmOCAvZGV2L3ZkYQo+ID4gPiA+ID4gZnNj
-ay5mMmZzIC0tbm9saW5lYXItbG9va3VwPTEgL2Rldi92ZGEKPiA+ID4gPiA+IG1vdW50IC9kZXYv
-dmRhIC9tbnQvZjJmcwo+ID4gPiA+ID4gY2F0IC9zeXMvZnMvZjJmcy92ZGEvZW5jb2RpbmdfZmxh
-Z3MKPiA+ID4gPiA+IDIKPiA+ID4gPiA+IAo+ID4gPiA+ID4gU2lnbmVkLW9mZi1ieTogQ2hhbyBZ
-dSA8Y2hhb0BrZXJuZWwub3JnPgo+ID4gPiA+ID4gLS0tCj4gPiA+ID4gPiAgRG9jdW1lbnRhdGlv
-bi9BQkkvdGVzdGluZy9zeXNmcy1mcy1mMmZzIHwgMTMgKysrKysrKysrKysrKwo+ID4gPiA+ID4g
-IGZzL2YyZnMvc3lzZnMuYyAgICAgICAgICAgICAgICAgICAgICAgICB8ICA5ICsrKysrKysrKwo+
-ID4gPiA+ID4gIDIgZmlsZXMgY2hhbmdlZCwgMjIgaW5zZXJ0aW9ucygrKQo+ID4gPiA+IAo+ID4g
-PiA+IFRoaXMgcGF0Y2gsIGNvbW1pdCA2MTdlMDQ5MWFiZTQgKCJmMmZzOiBzeXNmczogZXhwb3J0
-IGxpbmVhcl9sb29rdXAgaW4KPiA+ID4gPiBmZWF0dXJlcyBkaXJlY3RvcnkiKSB1cHN0cmVhbSwg
-bmVlZHMgdG8gZmluZCBpdHMgd2F5IGludG8gYWxsIFN0YWJsZQo+ID4gPiA+IGJyYW5jaGVzIGNv
-bnRhaW5pbmcgdXBzdHJlYW0gY29tbWl0IDkxYjU4N2JhNzllMSAoImYyZnM6IEludHJvZHVjZQo+
-ID4gPiA+IGxpbmVhciBzZWFyY2ggZm9yIGRlbnRyaWVzIiksIHdoaWNoIGlzIGVzc2VudGlhbGx5
-IGxpbnV4LTUuMTUueSBhbmQKPiA+ID4gPiBuZXdlci4KPiA+ID4gPiAKPiA+ID4gPiBzdGFibGUv
-bGludXgtNS40Lnk6Cj4gPiA+ID4gTUlTU0lORzogICAgIGYyZnM6IEludHJvZHVjZSBsaW5lYXIg
-c2VhcmNoIGZvciBkZW50cmllcwo+ID4gPiA+IE1JU1NJTkc6ICAgICBmMmZzOiBzeXNmczogZXhw
-b3J0IGxpbmVhcl9sb29rdXAgaW4gZmVhdHVyZXMgZGlyZWN0b3J5Cj4gPiA+ID4gCj4gPiA+ID4g
-c3RhYmxlL2xpbnV4LTUuMTAueToKPiA+ID4gPiBNSVNTSU5HOiAgICAgZjJmczogSW50cm9kdWNl
-IGxpbmVhciBzZWFyY2ggZm9yIGRlbnRyaWVzCj4gPiA+ID4gTUlTU0lORzogICAgIGYyZnM6IHN5
-c2ZzOiBleHBvcnQgbGluZWFyX2xvb2t1cCBpbiBmZWF0dXJlcyBkaXJlY3RvcnkKPiA+ID4gPiAK
-PiA+ID4gPiBzdGFibGUvbGludXgtNS4xNS55Ogo+ID4gPiA+IGIwOTM4ZmZkMzlhZSBmMmZzOiBJ
-bnRyb2R1Y2UgbGluZWFyIHNlYXJjaCBmb3IgZGVudHJpZXMgWzUuMTUuMTc5XQo+ID4gPiA+IE1J
-U1NJTkc6ICAgICBmMmZzOiBzeXNmczogZXhwb3J0IGxpbmVhcl9sb29rdXAgaW4gZmVhdHVyZXMg
-ZGlyZWN0b3J5Cj4gPiA+ID4gCj4gPiA+ID4gc3RhYmxlL2xpbnV4LTYuMS55Ogo+ID4gPiA+IGRl
-NjA1MDk3ZWIxNyBmMmZzOiBJbnRyb2R1Y2UgbGluZWFyIHNlYXJjaCBmb3IgZGVudHJpZXMgWzYu
-MS4xMjldCj4gPiA+ID4gTUlTU0lORzogICAgIGYyZnM6IHN5c2ZzOiBleHBvcnQgbGluZWFyX2xv
-b2t1cCBpbiBmZWF0dXJlcyBkaXJlY3RvcnkKPiA+ID4gPiAKPiA+ID4gPiBzdGFibGUvbGludXgt
-Ni42Lnk6Cj4gPiA+ID4gMGJmMmFkYWQwM2UxIGYyZnM6IEludHJvZHVjZSBsaW5lYXIgc2VhcmNo
-IGZvciBkZW50cmllcyBbNi42Ljc2XQo+ID4gPiA+IE1JU1NJTkc6ICAgICBmMmZzOiBzeXNmczog
-ZXhwb3J0IGxpbmVhcl9sb29rdXAgaW4gZmVhdHVyZXMgZGlyZWN0b3J5Cj4gPiA+ID4gCj4gPiA+
-ID4gc3RhYmxlL2xpbnV4LTYuMTIueToKPiA+ID4gPiAwMGQxOTQzZmU0NmQgZjJmczogSW50cm9k
-dWNlIGxpbmVhciBzZWFyY2ggZm9yIGRlbnRyaWVzIFs2LjEyLjEzXQo+ID4gPiA+IE1JU1NJTkc6
-ICAgICBmMmZzOiBzeXNmczogZXhwb3J0IGxpbmVhcl9sb29rdXAgaW4gZmVhdHVyZXMgZGlyZWN0
-b3J5Cj4gPiA+ID4gCj4gPiA+ID4gbWFpbmxpbmU6Cj4gPiA+ID4gOTFiNTg3YmE3OWUxIGYyZnM6
-IEludHJvZHVjZSBsaW5lYXIgc2VhcmNoIGZvciBkZW50cmllcwo+ID4gPiA+IDYxN2UwNDkxYWJl
-NCBmMmZzOiBzeXNmczogZXhwb3J0IGxpbmVhcl9sb29rdXAgaW4gZmVhdHVyZXMgZGlyZWN0b3J5
-Cj4gPiA+IAo+ID4gPiBHcmVhdCwgdGhlbiBjYW4gc29tZW9uZSBzdWJtaXQgdGhlc2UgaW4gYSBm
-b3JtYXQgd2UgY2FuIGFwcGx5IHRoZW0gaW4/Cj4gPiA+IG9yIGRvIGNsZWFuIGNoZXJyeS1waWNr
-cyB3b3JrIHByb3Blcmx5Pwo+ID4gCj4gPiBEb2VzIHRoaXMgd29yazoKPiA+IAo+ID4gUGxlYXNl
-IGJhY2twb3J0IHVwc3RyZWFtIGNvbW1pdDoKPiA+IAo+ID4gICA2MTdlMDQ5MWFiZTQgZjJmczog
-c3lzZnM6IGV4cG9ydCBsaW5lYXJfbG9va3VwIGluIGZlYXR1cmVzIGRpcmVjdG9yeQo+ID4gCj4g
-PiAuLi4gdG8gYWxsIHN0YWJsZSBicmFuY2hlcyB1cCB0byBhbmQgaW5jbHVkaW5nIGxpbnV4LTUu
-MTUueS4KPiA+IAo+ID4gSWYgdGhlcmUgYXJlIGNvbmZsaWN0cywgSSBjYW4gZG8gdGhlIGJhY2tw
-b3J0IG15c2VsZiBhbmQgc3VibWl0IGFzIHBhdGNoZXMuCj4gCj4gVGhlcmUgYXJlIGNvbmZsaWN0
-cywgaXQgZG9lc24ndCBhcHBseSB0byA2LjEueSBvciA1LjE1LnkgOigKCk9rYXksIHRoYW5rcyBm
-b3IgdHJ5aW5nLiAgTGVhdmUgaXQgd2l0aCBtZS4KCi0tIApMZWUgSm9uZXMgW+adjueQvOaWr10K
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1m
-MmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdl
-Lm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1m
-MmZzLWRldmVsCg==
+When testing F2FS with xfstests using UFS backed virtual disks the
+kernel complains sometimes that f2fs_release_decomp_mem() calls
+vm_unmap_ram() from an invalid context.
+
+This patch modifies in_task() check inside f2fs_read_end_io() to also
+check if interrupts are disabled. This ensures that pages are unmapped
+asynchronously in an interrupt handler.
+
+Fixes: bff139b (f2fs: handle decompress only post processing in softirq)
+
+Signed-off-by: Jan Prusakowski <jprusakowski@google.com>
+---
+ fs/f2fs/data.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index d1a2616d41be..0acc25f996b3 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -280,7 +280,7 @@ static void f2fs_read_end_io(struct bio *bio)
+ {
+ 	struct f2fs_sb_info *sbi = F2FS_F_SB(bio_first_folio_all(bio));
+ 	struct bio_post_read_ctx *ctx;
+-	bool intask = in_task();
++	bool intask = in_task() && !irqs_disabled();
+ 
+ 	iostat_update_and_unbind_ctx(bio);
+ 	ctx = bio->bi_private;
+-- 
+2.50.0.727.gbf7dc18ff4-goog
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
