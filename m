@@ -2,80 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C338FB133E2
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Jul 2025 07:03:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3311B135CA
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Jul 2025 09:38:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=mqxgp1Ot+sQcDXju8euYXUo1dCT/LpxcPXXhMWxp9J8=; b=J+7l5bsg5qI6thhGEO9AZZUUhX
-	LnlP49dvRq2XxMJh34OcPuoLf/V0SqfL0+bhoxYCMC0OHOIeiFT8EkiBsmc5hhRaSW+fW30ytuDvO
-	RcFaPiUBMc9bS1JIgFrQai9wYPMSmBJQuYsS1uebnBAruDxOGsqt/KUTWx35XrFfjNqE=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=N3/6DOxmE3h4pG3QrlaqdhxJBVQ82zsKZ6aYvIrvVRo=; b=Qnp56VKoLEgA4sNxr4d+XBrM0h
+	ygS+VUtRTsUQ/jA8lUdk5EnJRcadmgpw+IfjK9vRFF8AsYY0uQRlAIJFDNiTs67/eA0S/KktGnRrW
+	9FJR+HW8pbKvMyd6kgg9pmvvRpxOr6z+0bhbo6NXiou0ASfLqwmHOk2NF/0nyVs6lQKg=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ugG0j-0001Ce-Mq;
-	Mon, 28 Jul 2025 05:02:53 +0000
+	id 1ugIRP-0003TB-NV;
+	Mon, 28 Jul 2025 07:38:36 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wangzijie1@honor.com>) id 1ugG0i-0001CX-97
+ (envelope-from <chao@kernel.org>) id 1ugIRO-0003Su-2k
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Jul 2025 05:02:52 +0000
+ Mon, 28 Jul 2025 07:38:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nDdINhIjAkJL+7QCcUa96oSDnkdBKol2udnKvnllCiM=; b=Zo8uL6/4JQsH+GTEqpKsbFprss
- Uuv8zcSjmuomf59/R8bYanu38gIXvdlQz2fLTQrYJVOh6ojdxkDV4wQR3CNW5zzPjfjm4IFTiAgBJ
- P6z4TRJIWME2cpoVEBax6RtAiA7/Qamp15m7VCq3pkyzOW5+mYc8Ie3AWd2nemegokfs=;
+ bh=3QJdYrra0DbuwOXYAue7lqrBod6jgRxZzVJGY26b2Ds=; b=OMeVNkfsJvzZBuk6K2iMiHJbPd
+ kP7XKB8aU033fTQ35hmoSpqp531nPNpeUNVYRNguH3d46OTIrzZ0n0csgpdgGhrakWaPCtojlX7nG
+ JCCpl7uVVL6ElyvLItdqflVKgyPgTkCpvdb9stT3y0mF4v1vL2wb4v/BDBTC257iXhJ4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nDdINhIjAkJL+7QCcUa96oSDnkdBKol2udnKvnllCiM=; b=ac/JvrXCvz/s/IdgFyffLnXAZA
- GqTy34jQ9/RZGClfZfa/Q8RsK63RvnmiyPphxrog8c3653G9iSl+g80sqfuGGyBFY6C9rXHP0zPEi
- ipsWcqjaLcclHROKgohtPAl+HcmumuCvf5HYa5jLONFcVR25B37Sl2z/LehJ9uit8TgM=;
-Received: from mta22.hihonor.com ([81.70.192.198])
+ bh=3QJdYrra0DbuwOXYAue7lqrBod6jgRxZzVJGY26b2Ds=; b=gt+KdQ52n/4ELdgBLa7xdfiHoe
+ yRI1nbfpcALzm+9AFCY/Gt5+o6Mgkepgp3NCnQMut2K8vy514yzlENILZVYMi0t683DNyi3dhMtjL
+ cPxTJrRhU7J9xBNc3bJcxjPvUFCUeowiTy9ICgdLQvnFfEtz+nSim2nN+7SQ44FapS5U=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ugG0h-0002xq-8W for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Jul 2025 05:02:52 +0000
-dkim-signature: v=1; a=rsa-sha256; d=honor.com; s=dkim;
- c=relaxed/relaxed; q=dns/txt; h=To:From;
- bh=nDdINhIjAkJL+7QCcUa96oSDnkdBKol2udnKvnllCiM=;
- b=KBer5ip3GkmtSypJHJQC/3wr+GRAos/5n2Br5C9sNM4JGbl7BgXVQP6/CZGPPUt8/5n6kicir
- mEKKwr9+UAelfypbn29dFe9QB+IB3tQYEJ0xrevVwzt+4G8PvD9A7aNXzYzQxlbqTeNbpE1+qHj
- buvn26KMjO13hTIRdld33P8=
-Received: from w003.hihonor.com (unknown [10.68.17.88])
- by mta22.hihonor.com (SkyGuard) with ESMTPS id 4br5qX25VPzYl0VP;
- Mon, 28 Jul 2025 12:59:20 +0800 (CST)
-Received: from a011.hihonor.com (10.68.31.243) by w003.hihonor.com
- (10.68.17.88) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Mon, 28 Jul
- 2025 13:02:38 +0800
-Received: from localhost.localdomain (10.144.23.14) by a011.hihonor.com
- (10.68.31.243) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Mon, 28 Jul
- 2025 13:02:38 +0800
-From: wangzijie <wangzijie1@honor.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Mon, 28 Jul 2025 13:02:36 +0800
-Message-ID: <20250728050237.1563560-2-wangzijie1@honor.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250728050237.1563560-1-wangzijie1@honor.com>
-References: <20250728050237.1563560-1-wangzijie1@honor.com>
+ id 1ugIRO-0003fq-26 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Jul 2025 07:38:34 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id B39024439D;
+ Mon, 28 Jul 2025 07:38:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64899C4CEE7;
+ Mon, 28 Jul 2025 07:38:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1753688308;
+ bh=MXCtCH4Mr1jaHZuM+QGNycFJtdivRPqdSwiI9clW9h4=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=KvHF3H3gSLZ5/ut2pHq1z0zyhB/m8iWH3RoMKOocLzap1sk67LGY6BfdseQGJabqr
+ M78OLmkIt6gJXyUcZ3zkjhQCzV15RV3I05dq/MNqz7NmR7znHjxt+FRWIBjTqKFCT7
+ TG7kliGEGiPaUm+Ng3y3ZsUG3ERMijlX3hWs6QRNlXtHGDUjE/Vm6Tko6/Aut+DyUE
+ eCe2xi/1U/gJbemI6q25Oanx1Lvt3wJMcQGeNnW7r1XFOfqGUzUDbO/YK9QcEDPuwZ
+ gzHcJqT3/uzMZMKTVJX8QDg3kfeePelaFFQTqap3AqsqognwrIBUM602PejI4FWVGl
+ KGUEL0M7tg06Q==
+Message-ID: <d258ab6d-a97a-4232-bf90-5afedd5cccb2@kernel.org>
+Date: Mon, 28 Jul 2025 15:38:25 +0800
 MIME-Version: 1.0
-X-Originating-IP: [10.144.23.14]
-X-ClientProxiedBy: w012.hihonor.com (10.68.27.189) To a011.hihonor.com
- (10.68.31.243)
+User-Agent: Mozilla Thunderbird
+To: Qi Han <hanqi@vivo.com>, jaegeuk@kernel.org
+References: <20250725075310.1614614-1-hanqi@vivo.com>
+Content-Language: en-US
+In-Reply-To: <20250725075310.1614614-1-hanqi@vivo.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -83,10 +78,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  When we need to alloc nat entry and set it dirty,
- we can directly
- add it to dirty set list(or initialize its list_head for new_ne) instead
- of adding it to clean list and make a move. Introduce init_di [...] 
+ Content preview:  On 7/25/25 15:53, Qi Han wrote: > Jens has already completed
+ the development of uncached buffered I/O > in git [1], and in f2fs, uncached
+ buffered I/O read can be enabled > simply by setting the FOP_D [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -97,12 +91,10 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [81.70.192.198 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1ugG0h-0002xq-8W
-Subject: [f2fs-dev] [PATCH v3 2/2] f2fs: directly add newly allocated
- pre-dirty nat entry to dirty set list
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ugIRO-0003fq-26
+Subject: Re: [f2fs-dev] [PATCH] f2fs: f2fs supports uncached buffered I/O
+ read
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,138 +106,179 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: wangzijie <wangzijie1@honor.com>, linux-kernel@vger.kernel.org,
- feng.han@honor.com, linux-f2fs-devel@lists.sourceforge.net
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: axboe@kernel.dk, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When we need to alloc nat entry and set it dirty, we can directly add it to
-dirty set list(or initialize its list_head for new_ne) instead of adding it
-to clean list and make a move. Introduce init_dirty flag to do it.
+On 7/25/25 15:53, Qi Han wrote:
+> Jens has already completed the development of uncached buffered I/O
+> in git [1], and in f2fs, uncached buffered I/O read can be enabled
+> simply by setting the FOP_DONTCACHE flag in f2fs_file_operations.
 
-Signed-off-by: wangzijie <wangzijie1@honor.com>
----
-v3:
-- followed by Chao's suggestion to clean up code
----
- fs/f2fs/node.c | 29 +++++++++++++++++++++--------
- 1 file changed, 21 insertions(+), 8 deletions(-)
+IIUC, we may suffer lock issue when we call pwritev(.. ,RWF_DONTCACHE)?
+as Jen mentioned in below path, right?
 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 940b52d38..27743b93e 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -185,7 +185,7 @@ static void __free_nat_entry(struct nat_entry *e)
- 
- /* must be locked by nat_tree_lock */
- static struct nat_entry *__init_nat_entry(struct f2fs_nm_info *nm_i,
--	struct nat_entry *ne, struct f2fs_nat_entry *raw_ne, bool no_fail)
-+	struct nat_entry *ne, struct f2fs_nat_entry *raw_ne, bool no_fail, bool init_dirty)
- {
- 	if (no_fail)
- 		f2fs_radix_tree_insert(&nm_i->nat_root, nat_get_nid(ne), ne);
-@@ -195,6 +195,12 @@ static struct nat_entry *__init_nat_entry(struct f2fs_nm_info *nm_i,
- 	if (raw_ne)
- 		node_info_from_raw_nat(&ne->ni, raw_ne);
- 
-+	if (init_dirty) {
-+		INIT_LIST_HEAD(&ne->list);
-+		nm_i->nat_cnt[TOTAL_NAT]++;
-+		return ne;
-+	}
-+
- 	spin_lock(&nm_i->nat_list_lock);
- 	list_add_tail(&ne->list, &nm_i->nat_entries);
- 	spin_unlock(&nm_i->nat_list_lock);
-@@ -259,7 +265,7 @@ static struct nat_entry_set *__grab_nat_entry_set(struct f2fs_nm_info *nm_i,
- }
- 
- static void __set_nat_cache_dirty(struct f2fs_nm_info *nm_i,
--						struct nat_entry *ne)
-+		struct nat_entry *ne, bool init_dirty)
- {
- 	struct nat_entry_set *head;
- 	bool new_ne = nat_get_blkaddr(ne) == NEW_ADDR;
-@@ -282,7 +288,8 @@ static void __set_nat_cache_dirty(struct f2fs_nm_info *nm_i,
- 		goto refresh_list;
- 
- 	nm_i->nat_cnt[DIRTY_NAT]++;
--	nm_i->nat_cnt[RECLAIMABLE_NAT]--;
-+	if (!init_dirty)
-+		nm_i->nat_cnt[RECLAIMABLE_NAT]--;
- 	set_nat_flag(ne, IS_DIRTY, true);
- refresh_list:
- 	spin_lock(&nm_i->nat_list_lock);
-@@ -444,7 +451,7 @@ static void cache_nat_entry(struct f2fs_sb_info *sbi, nid_t nid,
- 	f2fs_down_write(&nm_i->nat_tree_lock);
- 	e = __lookup_nat_cache(nm_i, nid, false);
- 	if (!e)
--		e = __init_nat_entry(nm_i, new, ne, false);
-+		e = __init_nat_entry(nm_i, new, ne, false, false);
- 	else
- 		f2fs_bug_on(sbi, nat_get_ino(e) != le32_to_cpu(ne->ino) ||
- 				nat_get_blkaddr(e) !=
-@@ -461,11 +468,13 @@ static void set_node_addr(struct f2fs_sb_info *sbi, struct node_info *ni,
- 	struct f2fs_nm_info *nm_i = NM_I(sbi);
- 	struct nat_entry *e;
- 	struct nat_entry *new = __alloc_nat_entry(sbi, ni->nid, true);
-+	bool init_dirty = false;
- 
- 	f2fs_down_write(&nm_i->nat_tree_lock);
- 	e = __lookup_nat_cache(nm_i, ni->nid, true);
- 	if (!e) {
--		e = __init_nat_entry(nm_i, new, NULL, true);
-+		init_dirty = true;
-+		e = __init_nat_entry(nm_i, new, NULL, true, true);
- 		copy_node_info(&e->ni, ni);
- 		f2fs_bug_on(sbi, ni->blk_addr == NEW_ADDR);
- 	} else if (new_blkaddr == NEW_ADDR) {
-@@ -501,7 +510,7 @@ static void set_node_addr(struct f2fs_sb_info *sbi, struct node_info *ni,
- 	nat_set_blkaddr(e, new_blkaddr);
- 	if (!__is_valid_data_blkaddr(new_blkaddr))
- 		set_nat_flag(e, IS_CHECKPOINTED, false);
--	__set_nat_cache_dirty(nm_i, e);
-+	__set_nat_cache_dirty(nm_i, e, init_dirty);
- 
- 	/* update fsync_mark if its inode nat entry is still alive */
- 	if (ni->nid != ni->ino)
-@@ -2927,6 +2936,7 @@ static void remove_nats_in_journal(struct f2fs_sb_info *sbi)
- 	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
- 	struct f2fs_journal *journal = curseg->journal;
- 	int i;
-+	bool init_dirty;
- 
- 	down_write(&curseg->journal_rwsem);
- 	for (i = 0; i < nats_in_cursum(journal); i++) {
-@@ -2937,12 +2947,15 @@ static void remove_nats_in_journal(struct f2fs_sb_info *sbi)
- 		if (f2fs_check_nid_range(sbi, nid))
- 			continue;
- 
-+		init_dirty = false;
-+
- 		raw_ne = nat_in_journal(journal, i);
- 
- 		ne = __lookup_nat_cache(nm_i, nid, true);
- 		if (!ne) {
-+			init_dirty = true;
- 			ne = __alloc_nat_entry(sbi, nid, true);
--			__init_nat_entry(nm_i, ne, &raw_ne, true);
-+			__init_nat_entry(nm_i, ne, &raw_ne, true, true);
- 		}
- 
- 		/*
-@@ -2957,7 +2970,7 @@ static void remove_nats_in_journal(struct f2fs_sb_info *sbi)
- 			spin_unlock(&nm_i->nid_list_lock);
- 		}
- 
--		__set_nat_cache_dirty(nm_i, ne);
-+		__set_nat_cache_dirty(nm_i, ne, init_dirty);
- 	}
- 	update_nats_in_cursum(journal, -i);
- 	up_write(&curseg->journal_rwsem);
--- 
-2.25.1
+soft-irq
+- folio_end_writeback()
+ - filemap_end_dropbehind_write()
+  - filemap_end_dropbehind()
+   - folio_unmap_invalidate()
+    - lock i_lock
+
+Thanks,
+
+> 
+> I have been testing a use case locally, which aligns with Jens' test
+> case [2]. In the read scenario, using uncached buffer I/O results in
+> more stable read performance and a lower load on the background memory
+> reclaim thread (kswapd). So let's enable uncached buffer I/O reads on
+> F2FS.
+> 
+> Read test data without using uncached buffer I/O:
+> reading bs 32768, uncached 0
+>    1s: 1856MB/sec, MB=1856
+>    2s: 1907MB/sec, MB=3763
+>    3s: 1830MB/sec, MB=5594
+>    4s: 1745MB/sec, MB=7333
+>    5s: 1829MB/sec, MB=9162
+>    6s: 1903MB/sec, MB=11075
+>    7s: 1878MB/sec, MB=12942
+>    8s: 1763MB/sec, MB=14718
+>    9s: 1845MB/sec, MB=16549
+>   10s: 1915MB/sec, MB=18481
+>   11s: 1831MB/sec, MB=20295
+>   12s: 1750MB/sec, MB=22066
+>   13s: 1787MB/sec, MB=23832
+>   14s: 1913MB/sec, MB=25769
+>   15s: 1898MB/sec, MB=27668
+>   16s: 1795MB/sec, MB=29436
+>   17s: 1812MB/sec, MB=31248
+>   18s: 1890MB/sec, MB=33139
+>   19s: 1880MB/sec, MB=35020
+>   20s: 1754MB/sec, MB=36810
+> 
+> 08:36:26      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+> 08:36:27        0        93    0.00    0.00    0.00    0.00    0.00     7  kswapd0
+> 08:36:28        0        93    0.00    0.00    0.00    0.00    0.00     7  kswapd0
+> 08:36:29        0        93    0.00    0.00    0.00    0.00    0.00     7  kswapd0
+> 08:36:30        0        93    0.00   56.00    0.00    0.00   56.00     7  kswapd0
+> 08:36:31        0        93    0.00   73.00    0.00    0.00   73.00     7  kswapd0
+> 08:36:32        0        93    0.00   83.00    0.00    0.00   83.00     7  kswapd0
+> 08:36:33        0        93    0.00   75.00    0.00    0.00   75.00     7  kswapd0
+> 08:36:34        0        93    0.00   81.00    0.00    0.00   81.00     7  kswapd0
+> 08:36:35        0        93    0.00   54.00    0.00    1.00   54.00     2  kswapd0
+> 08:36:36        0        93    0.00   61.00    0.00    0.00   61.00     0  kswapd0
+> 08:36:37        0        93    0.00   68.00    0.00    0.00   68.00     7  kswapd0
+> 08:36:38        0        93    0.00   53.00    0.00    0.00   53.00     2  kswapd0
+> 08:36:39        0        93    0.00   82.00    0.00    0.00   82.00     7  kswapd0
+> 08:36:40        0        93    0.00   77.00    0.00    0.00   77.00     1  kswapd0
+> 08:36:41        0        93    0.00   74.00    0.00    1.00   74.00     7  kswapd0
+> 08:36:42        0        93    0.00   71.00    0.00    0.00   71.00     7  kswapd0
+> 08:36:43        0        93    0.00   78.00    0.00    0.00   78.00     7  kswapd0
+> 08:36:44        0        93    0.00   85.00    0.00    0.00   85.00     7  kswapd0
+> 08:36:45        0        93    0.00   83.00    0.00    0.00   83.00     7  kswapd0
+> 08:36:46        0        93    0.00   70.00    0.00    0.00   70.00     7  kswapd0
+> 08:36:47        0        93    0.00   78.00    0.00    1.00   78.00     2  kswapd0
+> 08:36:48        0        93    0.00   81.00    0.00    0.00   81.00     3  kswapd0
+> 08:36:49        0        93    0.00   54.00    0.00    0.00   54.00     7  kswapd0
+> 08:36:50        0        93    0.00   76.00    0.00    0.00   76.00     1  kswapd0
+> 08:36:51        0        93    0.00   75.00    0.00    0.00   75.00     0  kswapd0
+> 08:36:52        0        93    0.00   73.00    0.00    0.00   73.00     7  kswapd0
+> 08:36:53        0        93    0.00   61.00    0.00    1.00   61.00     7  kswapd0
+> 08:36:54        0        93    0.00   80.00    0.00    0.00   80.00     7  kswapd0
+> 08:36:55        0        93    0.00   64.00    0.00    0.00   64.00     7  kswapd0
+> 08:36:56        0        93    0.00   56.00    0.00    0.00   56.00     7  kswapd0
+> 08:36:57        0        93    0.00   26.00    0.00    0.00   26.00     2  kswapd0
+> 08:36:58        0        93    0.00   24.00    0.00    1.00   24.00     3  kswapd0
+> 08:36:59        0        93    0.00   22.00    0.00    1.00   22.00     3  kswapd0
+> 08:37:00        0        93    0.00   15.84    0.00    0.00   15.84     3  kswapd0
+> 08:37:01        0        93    0.00    0.00    0.00    0.00    0.00     3  kswapd0
+> 08:37:02        0        93    0.00    0.00    0.00    0.00    0.00     3  kswapd0
+> 
+> Read test data after using uncached buffer I/O:
+> reading bs 32768, uncached 1
+>    1s: 1863MB/sec, MB=1863
+>    2s: 1903MB/sec, MB=3766
+>    3s: 1860MB/sec, MB=5627
+>    4s: 1864MB/sec, MB=7491
+>    5s: 1860MB/sec, MB=9352
+>    6s: 1854MB/sec, MB=11206
+>    7s: 1874MB/sec, MB=13081
+>    8s: 1874MB/sec, MB=14943
+>    9s: 1840MB/sec, MB=16798
+>   10s: 1849MB/sec, MB=18647
+>   11s: 1863MB/sec, MB=20511
+>   12s: 1798MB/sec, MB=22310
+>   13s: 1897MB/sec, MB=24207
+>   14s: 1817MB/sec, MB=26025
+>   15s: 1893MB/sec, MB=27918
+>   16s: 1917MB/sec, MB=29836
+>   17s: 1863MB/sec, MB=31699
+>   18s: 1904MB/sec, MB=33604
+>   19s: 1894MB/sec, MB=35499
+>   20s: 1907MB/sec, MB=37407
+> 
+> 08:38:00      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+> 08:38:01        0        93    0.00    0.00    0.00    0.00    0.00     4  kswapd0
+> 08:38:02        0        93    0.00    0.00    0.00    0.00    0.00     4  kswapd0
+> 08:38:03        0        93    0.00    0.00    0.00    0.00    0.00     4  kswapd0
+> 08:38:04        0        93    0.00    0.00    0.00    0.00    0.00     4  kswapd0
+> 08:38:05        0        93    0.00    0.00    0.00    0.00    0.00     4  kswapd0
+> 08:38:06        0        93    0.00    1.00    0.00    1.00    1.00     0  kswapd0
+> 08:38:07        0        93    0.00    0.00    0.00    0.00    0.00     0  kswapd0
+> 08:38:08        0        93    0.00    0.00    0.00    0.00    0.00     0  kswapd0
+> 08:38:09        0        93    0.00    1.00    0.00    0.00    1.00     1  kswapd0
+> 08:38:10        0        93    0.00    0.00    0.00    0.00    0.00     1  kswapd0
+> 08:38:11        0        93    0.00    0.00    0.00    0.00    0.00     1  kswapd0
+> 08:38:12        0        93    0.00    0.00    0.00    0.00    0.00     1  kswapd0
+> 08:38:13        0        93    0.00    0.00    0.00    0.00    0.00     1  kswapd0
+> 08:38:14        0        93    0.00    0.00    0.00    0.00    0.00     1  kswapd0
+> 08:38:15        0        93    0.00    3.00    0.00    0.00    3.00     0  kswapd0
+> 08:38:16        0        93    0.00    0.00    0.00    0.00    0.00     0  kswapd0
+> 08:38:17        0        93    0.00    0.00    0.00    0.00    0.00     0  kswapd0
+> 08:38:18        0        93    0.00    0.00    0.00    0.00    0.00     0  kswapd0
+> 08:38:19        0        93    0.00    0.00    0.00    0.00    0.00     0  kswapd0
+> 08:38:20        0        93    0.00    0.00    0.00    0.00    0.00     0  kswapd0
+> 08:38:21        0        93    0.00    0.00    0.00    0.00    0.00     0  kswapd0
+> 08:38:22        0        93    0.00    0.00    0.00    0.00    0.00     0  kswapd0
+> 08:38:23        0        93    0.00    3.00    0.00    0.00    3.00     4  kswapd0
+> 08:38:24        0        93    0.00    0.00    0.00    0.00    0.00     4  kswapd0
+> 08:38:25        0        93    0.00    0.00    0.00    0.00    0.00     4  kswapd0
+> 08:38:26        0        93    0.00    4.00    0.00    0.00    4.00     3  kswapd0
+> 08:38:27        0        93    0.00    0.00    0.00    0.00    0.00     3  kswapd0
+> 08:38:28        0        93    0.00    0.00    0.00    0.00    0.00     3  kswapd0
+> 08:38:29        0        93    0.00    0.00    0.00    0.00    0.00     3  kswapd0
+> 08:38:30        0        93    0.00    0.00    0.00    0.00    0.00     3  kswapd0
+> 08:38:31        0        93    0.00    0.00    0.00    0.00    0.00     3  kswapd0
+> 08:38:32        0        93    0.00    0.00    0.00    0.00    0.00     3  kswapd0
+> 08:38:33        0        93    0.00    0.00    0.00    0.00    0.00     3  kswapd0
+> 
+> [1]
+> https://lore.kernel.org/all/20241220154831.1086649-10-axboe@kernel.dk/T/#m58520a94b46f543d82db3711453dfc7bb594b2b0
+> 
+> [2]
+> https://pastebin.com/u8eCBzB5
+> 
+> Signed-off-by: Qi Han <hanqi@vivo.com>
+> ---
+>  fs/f2fs/file.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 696131e655ed..d8da1fc2febf 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -5425,5 +5425,5 @@ const struct file_operations f2fs_file_operations = {
+>  	.splice_read	= f2fs_file_splice_read,
+>  	.splice_write	= iter_file_splice_write,
+>  	.fadvise	= f2fs_file_fadvise,
+> -	.fop_flags	= FOP_BUFFER_RASYNC,
+> +	.fop_flags	= FOP_BUFFER_RASYNC | FOP_DONTCACHE,
+>  };
 
 
 
