@@ -2,95 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89DD1B132E1
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Jul 2025 04:05:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DA8CB133E4
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Jul 2025 07:03:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=rvpzCInsIWofpAGTQA8ia2k2xAzag/YZeVhLigykFNs=; b=mlr/SSVuMJkH6rWOtzZ1emsCFK
-	KW7C/NLf2unnMVH3pDcSV1oUQtXfor9JY64N4nZ37ephgHC0hO7VW62aGIJ92rat0j8g1oNj48QhQ
-	hx+rSs2/Af4y4W6JXZXUL1YBqR8dQvrSLLDnlgJRYnnuxX/SR1ulBWOGOU/AH3w3ql80=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=18Q+BhuGR09pAIf0vBokxb+jOSeflg/dP9p/6gLvYOM=; b=DowJyaeD8cujcjBbU/4zMgNIGJ
+	OHkb30yWSIp/HHhQDkWoRrH1pPD1KkMQKqUqUeFNyf2dr3dmwTnhSEWat6EvsP0mYPeXFdyKwlaap
+	FXA73SFCHzbwmLip87K5dP9nZofk7ClvDz6CnT8Fot69l2yuemRmgoe1tFUOa8elShZI=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ugDFQ-0000W8-14;
-	Mon, 28 Jul 2025 02:05:52 +0000
+	id 1ugG0i-000276-NO;
+	Mon, 28 Jul 2025 05:02:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ugDFO-0000W2-QW
+ (envelope-from <wangzijie1@honor.com>) id 1ugG0h-00026z-Tm
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Jul 2025 02:05:50 +0000
+ Mon, 28 Jul 2025 05:02:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NuYbzcPWf6jBVKh1wozpuN9ADEmu3JGk4sr9YW+RzQI=; b=TTlkIC2a0FLFD2DdcSNENocai5
- +v2wMxLdnDaJodgSMzt0LoTdv6qHZ+tsr+nMv4ppn6vx41dMfx2V5OEomczAYSZOCYQvSV6CEONHV
- q7HNqMZSNlVKxl7HKQfn0m9MckFD6kMGM9u0A76eJqSxvgzKQasFegS8yk3QsL4SZWx0=;
+ bh=8BUUkNekTuxbLSKEx43RmUOxbhud7mrvevMmorcTt+g=; b=ajS1+OcO/K5yFRKcRx7Sv6ip/b
+ p2mNuajWpISYcKlTzcUjOapt063UNhUqa87uEhj/jAqsLzm/I271XazSFiGxReMN1W86uGVuKT5Pa
+ 5dNA30SxTmZe4ckDbeMjeVMxKGCkFsH2sBesGKFqzE6KuKu/0HfaaZjNhdl5YgYStw4k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=NuYbzcPWf6jBVKh1wozpuN9ADEmu3JGk4sr9YW+RzQI=; b=n
- JZTWKmbGjq5jef8spBPUUTD3EyNlxuP117gNR31XXWa4bPurWDMHYvYw4IJAVzXwkPmkjrd2k+8Hc
- 1KbIU/7lbMeV0dMocul7G8a12IayrbVes5jyCrMrVzu0CE4u9bDJp5TZfKxYW/Obo2sOTkE5dTwQ5
- +aSZnEGUB5AxsOLw=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ List-Owner:List-Archive; bh=8BUUkNekTuxbLSKEx43RmUOxbhud7mrvevMmorcTt+g=; b=F
+ dEoq8VLASxZbWL6o2JUoOs+UZkZAxIY0kJnz2/dC7BxOoC8UQQGt6TYKehc3YIi4KjlZyF6lEIzzO
+ Pa0gQmczDwlIZpw+ziBUdgY5wULVtPUsQ/inyiirpc9llJ8CTFdNUOu14IOoeeX+WoDrOsWW6sfN+
+ npNO/Nk4AHa3vExk=;
+Received: from mta20.honor.com ([81.70.206.69] helo=mta20.hihonor.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ugDFO-0008EM-8u for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Jul 2025 02:05:50 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id DB37844EDC;
- Mon, 28 Jul 2025 02:05:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6D8EC4CEEB;
- Mon, 28 Jul 2025 02:05:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1753668339;
- bh=XOUtxih2qIdcvV7KIZq4k66XGk5SPx1GPHIvo+sLfTQ=;
- h=From:To:Cc:Subject:Date:From;
- b=Liw0QvklhsS2hT19vV+wI+C9mkfjY4sjsDZLLLrc5JAxU8k023Jit+6x4B8bj2LJg
- bO8A1tDz6mw9NgVHrNCERCX/JwjF/Z3ytfBU8TRqFNM5LKHaQn/0JgND0L2ZSko/2W
- Ztb+kPSHpB8LUGqrKEVWdW/qBK5gwJiU8g/XpFwBInSdLLfQ83sQw5DZU/vRULOTa/
- pT6Rg7f6oxj19caTnSLf+ujbEnHndtvvosDC4v8qZBxxw/bxrZBJFZ3qfrnfJb4pi0
- PIX7VTysYC998lUE0p3wcdWl/tctG5A8r0PxGDz/1qIL+VSczs7KD1pG00kI+963Yv
- hejFaw+KNshFQ==
-To: jaegeuk@kernel.org
-Date: Mon, 28 Jul 2025 10:05:31 +0800
-Message-ID: <20250728020531.22736-1-chao@kernel.org>
-X-Mailer: git-send-email 2.50.1.470.g6ba607880d-goog
+ id 1ugG0g-0002xo-Qg for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Jul 2025 05:02:51 +0000
+Received: from w013.hihonor.com (unknown [10.68.26.19])
+ by mta20.hihonor.com (SkyGuard) with ESMTPS id 4br5qz0j8TzYl6X4;
+ Mon, 28 Jul 2025 12:59:43 +0800 (CST)
+Received: from a011.hihonor.com (10.68.31.243) by w013.hihonor.com
+ (10.68.26.19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Mon, 28 Jul
+ 2025 13:02:38 +0800
+Received: from localhost.localdomain (10.144.23.14) by a011.hihonor.com
+ (10.68.31.243) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Mon, 28 Jul
+ 2025 13:02:37 +0800
+From: wangzijie <wangzijie1@honor.com>
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Mon, 28 Jul 2025 13:02:35 +0800
+Message-ID: <20250728050237.1563560-1-wangzijie1@honor.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Originating-IP: [10.144.23.14]
+X-ClientProxiedBy: w012.hihonor.com (10.68.27.189) To a011.hihonor.com
+ (10.68.31.243)
+X-Spam-Score: 0.4 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  It provides a way to disable linear lookup fallback during
- mkfs. Behavior summary: Android Distro By default disabled enabled Android
- case: Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview: __lookup_nat_cache follows LRU manner to move clean nat entry,
+ when nat entries are going to be dirty, no need to move them to tail of lru
+ list. Introduce a parameter 'for_dirty' to avoid it. Signed-off-by: wangzijie
+ <wangzijie1@honor.com> --- v3: - followed by Chao's suggestion to update
+ comments v2: - followed by Jaegeuk's suggestion to add a parameter in
+ __lookup_nat_cache --- fs/f2fs/n [...] 
+ Content analysis details:   (0.4 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ugDFO-0008EM-8u
-Subject: [f2fs-dev] [PATCH v4] mkfs.f2fs: support -C [no]hashonly to control
- linear lookup fallback
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [81.70.206.69 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 0.4 KHOP_HELO_FCRDNS       Relay HELO differs from its IP's reverse DNS
+X-Headers-End: 1ugG0g-0002xo-Qg
+Subject: [f2fs-dev] [PATCH v3 1/2] f2fs: avoid redundant clean nat entry
+ move in lru list
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,165 +102,134 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Zhiguo Niu <zhiguo.niu@unisoc.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: wangzijie <wangzijie1@honor.com>, linux-kernel@vger.kernel.org,
+ feng.han@honor.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-It provides a way to disable linear lookup fallback during mkfs.
+__lookup_nat_cache follows LRU manner to move clean nat entry, when nat
+entries are going to be dirty, no need to move them to tail of lru list.
+Introduce a parameter 'for_dirty' to avoid it.
 
-Behavior summary:
-			Android		Distro
-By default		disabled	enabled
-
-Android case:
-
-1.1) Disable linear lookup:
-- mkfs.f2fs -f -g android -O casefold -C utf8:hashonly /dev/vdb
-- dump.f2fs -d3 /dev/vdb |grep s_encoding_flags
-s_encoding_flags                        [0x       2 : 2]
-
-1.2) Enable linear lookup:
-- mkfs.f2fs -f -g android -O casefold -C utf8:nohashonly /dev/vdb
-- dump.f2fs -d3 /dev/vdb |grep s_encoding_flags
-s_encoding_flags                        [0x       0 : 0]
-
-1.3) By default:
-- mkfs.f2fs -f -g android -O casefold -C utf8 /dev/vdb
-Info: set default linear_lookup option: disable
-- dump.f2fs -d3 /dev/vdb |grep s_encoding_flags
-s_encoding_flags                        [0x       2 : 2]
-
-Distro case:
-
-2.1) Disable linear lookup:
-- mkfs.f2fs -f -O casefold -C utf8:hashonly /dev/vdb
-- dump.f2fs -d3 /dev/vdb |grep s_encoding_flags
-s_encoding_flags                        [0x       2 : 2]
-
-2.2) Enable linear lookup:
-- mkfs.f2fs -f -O casefold -C utf8:nohashonly /dev/vdb
-- dump.f2fs -d3 /dev/vdb |grep s_encoding_flags
-s_encoding_flags                        [0x       0 : 0]
-
-2.3) By default:
-- mkfs.f2fs -f -O casefold -C utf8 /dev/vdb
-- dump.f2fs -d3 /dev/vdb |grep s_encoding_flags
-s_encoding_flags                        [0x       0 : 0]
-
-Reviewed-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
+Signed-off-by: wangzijie <wangzijie1@honor.com>
 ---
-v4:
-- fix typo in manual page
- include/f2fs_fs.h       |  3 ++-
- lib/libf2fs.c           |  6 ++++++
- man/mkfs.f2fs.8         |  9 ++++++++-
- mkfs/f2fs_format.c      | 11 +++++++++++
- mkfs/f2fs_format_main.c |  3 ++-
- 5 files changed, 29 insertions(+), 3 deletions(-)
+v3:
+- followed by Chao's suggestion to update comments
+v2:
+- followed by Jaegeuk's suggestion to add a parameter in __lookup_nat_cache
+---
+ fs/f2fs/node.c | 27 +++++++++++++++------------
+ 1 file changed, 15 insertions(+), 12 deletions(-)
 
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index f7268d1..a8da8fa 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -1478,7 +1478,8 @@ enum {
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 76aba1961..940b52d38 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -204,14 +204,17 @@ static struct nat_entry *__init_nat_entry(struct f2fs_nm_info *nm_i,
+ 	return ne;
+ }
  
- /* feature list in Android */
- enum {
--	F2FS_FEATURE_NAT_BITS = 0x0001,
-+	F2FS_FEATURE_NAT_BITS		= 0x0001,
-+	F2FS_FEATURE_LINEAR_LOOKUP	= 0x0002,
- };
+-static struct nat_entry *__lookup_nat_cache(struct f2fs_nm_info *nm_i, nid_t n)
++static struct nat_entry *__lookup_nat_cache(struct f2fs_nm_info *nm_i, nid_t n, bool for_dirty)
+ {
+ 	struct nat_entry *ne;
  
- /* nolinear lookup tune */
-diff --git a/lib/libf2fs.c b/lib/libf2fs.c
-index 2f012c8..1a496b7 100644
---- a/lib/libf2fs.c
-+++ b/lib/libf2fs.c
-@@ -1424,6 +1424,7 @@ static const struct enc_flags {
- 	char *param;
- } encoding_flags[] = {
- 	{ F2FS_ENC_STRICT_MODE_FL, "strict" },
-+	{ F2FS_ENC_NO_COMPAT_FALLBACK_FL, "hashonly"}
- };
+ 	ne = radix_tree_lookup(&nm_i->nat_root, n);
  
- /* Return a positive number < 0xff indicating the encoding magic number
-@@ -1485,6 +1486,11 @@ int f2fs_str2encoding_flags(char **param, __u16 *flags)
- 					*flags |= fl->flag;
- 				}
+-	/* for recent accessed nat entry, move it to tail of lru list */
+-	if (ne && !get_nat_flag(ne, IS_DIRTY)) {
++	/*
++	 * for recent accessed nat entry which will not be dirtied soon
++	 * later, move it to tail of lru list.
++	 */
++	if (ne && !get_nat_flag(ne, IS_DIRTY) && !for_dirty) {
+ 		spin_lock(&nm_i->nat_list_lock);
+ 		if (!list_empty(&ne->list))
+ 			list_move_tail(&ne->list, &nm_i->nat_entries);
+@@ -383,7 +386,7 @@ int f2fs_need_dentry_mark(struct f2fs_sb_info *sbi, nid_t nid)
+ 	bool need = false;
  
-+				if (fl->flag == F2FS_ENC_NO_COMPAT_FALLBACK_FL)
-+					c.nolinear_lookup = neg ?
-+						LINEAR_LOOKUP_ENABLE :
-+						LINEAR_LOOKUP_DISABLE;
-+
- 				goto next_flag;
- 			}
- 		}
-diff --git a/man/mkfs.f2fs.8 b/man/mkfs.f2fs.8
-index 8b3b0cc..9096646 100644
---- a/man/mkfs.f2fs.8
-+++ b/man/mkfs.f2fs.8
-@@ -232,10 +232,17 @@ Use UTF-8 for casefolding.
- .I flags:
- .RS 1.2i
- .TP 1.2i
--.B strict
-+.B [no]strict
- This flag specifies that invalid strings should be rejected by the filesystem.
- Default is disabled.
- .RE
-+.RS 1.2i
-+.TP 1.2i
-+.B [no]hashonly
-+This flag specifies that linear lookup fallback is off during lookup, to turn
-+on linear lookup fallback, use nohashonly flag.
-+For android case, it will disable linear lookup by default.
-+.RE
- .RE
- .TP
- .BI \-q
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index 2680bd3..04dfc20 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -671,6 +671,17 @@ static int f2fs_prepare_super_block(void)
- 	memcpy(sb->init_version, c.version, VERSION_LEN);
+ 	f2fs_down_read(&nm_i->nat_tree_lock);
+-	e = __lookup_nat_cache(nm_i, nid);
++	e = __lookup_nat_cache(nm_i, nid, false);
+ 	if (e) {
+ 		if (!get_nat_flag(e, IS_CHECKPOINTED) &&
+ 				!get_nat_flag(e, HAS_FSYNCED_INODE))
+@@ -400,7 +403,7 @@ bool f2fs_is_checkpointed_node(struct f2fs_sb_info *sbi, nid_t nid)
+ 	bool is_cp = true;
  
- 	if (c.feature & F2FS_FEATURE_CASEFOLD) {
-+		/*
-+		 * if [no]hashonly option is not assigned, let's disable
-+		 * linear lookup fallback by default for Android case.
-+		 */
-+		if ((c.nolinear_lookup == LINEAR_LOOKUP_DEFAULT) &&
-+			(c.disabled_feature & F2FS_FEATURE_LINEAR_LOOKUP)) {
-+			c.s_encoding_flags |= F2FS_ENC_NO_COMPAT_FALLBACK_FL;
-+			MSG(0, "Info: set default linear_lookup option: %s\n",
-+				c.s_encoding_flags & F2FS_ENC_NO_COMPAT_FALLBACK_FL ?
-+				"disable" : "enable");
-+		}
- 		set_sb(s_encoding, c.s_encoding);
- 		set_sb(s_encoding_flags, c.s_encoding_flags);
- 	}
-diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
-index f0bec4f..8f8e975 100644
---- a/mkfs/f2fs_format_main.c
-+++ b/mkfs/f2fs_format_main.c
-@@ -143,7 +143,8 @@ static void add_default_options(void)
- 		force_overwrite = 1;
- 		c.wanted_sector_size = F2FS_BLKSIZE;
- 		c.root_uid = c.root_gid = 0;
--		c.disabled_feature |= F2FS_FEATURE_NAT_BITS;
-+		c.disabled_feature |= F2FS_FEATURE_NAT_BITS |
-+					F2FS_FEATURE_LINEAR_LOOKUP;
+ 	f2fs_down_read(&nm_i->nat_tree_lock);
+-	e = __lookup_nat_cache(nm_i, nid);
++	e = __lookup_nat_cache(nm_i, nid, false);
+ 	if (e && !get_nat_flag(e, IS_CHECKPOINTED))
+ 		is_cp = false;
+ 	f2fs_up_read(&nm_i->nat_tree_lock);
+@@ -414,7 +417,7 @@ bool f2fs_need_inode_block_update(struct f2fs_sb_info *sbi, nid_t ino)
+ 	bool need_update = true;
  
- 		/* RO doesn't need any other features */
- 		if (c.feature & F2FS_FEATURE_RO)
+ 	f2fs_down_read(&nm_i->nat_tree_lock);
+-	e = __lookup_nat_cache(nm_i, ino);
++	e = __lookup_nat_cache(nm_i, ino, false);
+ 	if (e && get_nat_flag(e, HAS_LAST_FSYNC) &&
+ 			(get_nat_flag(e, IS_CHECKPOINTED) ||
+ 			 get_nat_flag(e, HAS_FSYNCED_INODE)))
+@@ -439,7 +442,7 @@ static void cache_nat_entry(struct f2fs_sb_info *sbi, nid_t nid,
+ 		return;
+ 
+ 	f2fs_down_write(&nm_i->nat_tree_lock);
+-	e = __lookup_nat_cache(nm_i, nid);
++	e = __lookup_nat_cache(nm_i, nid, false);
+ 	if (!e)
+ 		e = __init_nat_entry(nm_i, new, ne, false);
+ 	else
+@@ -460,7 +463,7 @@ static void set_node_addr(struct f2fs_sb_info *sbi, struct node_info *ni,
+ 	struct nat_entry *new = __alloc_nat_entry(sbi, ni->nid, true);
+ 
+ 	f2fs_down_write(&nm_i->nat_tree_lock);
+-	e = __lookup_nat_cache(nm_i, ni->nid);
++	e = __lookup_nat_cache(nm_i, ni->nid, true);
+ 	if (!e) {
+ 		e = __init_nat_entry(nm_i, new, NULL, true);
+ 		copy_node_info(&e->ni, ni);
+@@ -502,7 +505,7 @@ static void set_node_addr(struct f2fs_sb_info *sbi, struct node_info *ni,
+ 
+ 	/* update fsync_mark if its inode nat entry is still alive */
+ 	if (ni->nid != ni->ino)
+-		e = __lookup_nat_cache(nm_i, ni->ino);
++		e = __lookup_nat_cache(nm_i, ni->ino, false);
+ 	if (e) {
+ 		if (fsync_done && ni->nid == ni->ino)
+ 			set_nat_flag(e, HAS_FSYNCED_INODE, true);
+@@ -562,7 +565,7 @@ int f2fs_get_node_info(struct f2fs_sb_info *sbi, nid_t nid,
+ retry:
+ 	/* Check nat cache */
+ 	f2fs_down_read(&nm_i->nat_tree_lock);
+-	e = __lookup_nat_cache(nm_i, nid);
++	e = __lookup_nat_cache(nm_i, nid, false);
+ 	if (e) {
+ 		ni->ino = nat_get_ino(e);
+ 		ni->blk_addr = nat_get_blkaddr(e);
+@@ -2371,7 +2374,7 @@ static bool add_free_nid(struct f2fs_sb_info *sbi,
+ 		 *   - __remove_nid_from_list(PREALLOC_NID)
+ 		 *                         - __insert_nid_to_list(FREE_NID)
+ 		 */
+-		ne = __lookup_nat_cache(nm_i, nid);
++		ne = __lookup_nat_cache(nm_i, nid, false);
+ 		if (ne && (!get_nat_flag(ne, IS_CHECKPOINTED) ||
+ 				nat_get_blkaddr(ne) != NULL_ADDR))
+ 			goto err_out;
+@@ -2936,7 +2939,7 @@ static void remove_nats_in_journal(struct f2fs_sb_info *sbi)
+ 
+ 		raw_ne = nat_in_journal(journal, i);
+ 
+-		ne = __lookup_nat_cache(nm_i, nid);
++		ne = __lookup_nat_cache(nm_i, nid, true);
+ 		if (!ne) {
+ 			ne = __alloc_nat_entry(sbi, nid, true);
+ 			__init_nat_entry(nm_i, ne, &raw_ne, true);
 -- 
-2.49.0
+2.25.1
 
 
 
