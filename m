@@ -2,88 +2,120 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E45FEB14047
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Jul 2025 18:28:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B092B14069
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Jul 2025 18:36:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=vb8umvaPYp6UlvTjPdeSEDViLLNmWcVCBI7v9cV2HY4=; b=W/mep9oG8mRyL2eoUoiBuKB7nb
-	7mFr8NbXohQRL5UopmgfBNdpI7/HWrSukWLRKVtdibyNqqQONDqeRPkwkg1dIHWZ9HeLgVYKHg5eo
-	/5jQk1gFMF6pigQHKrNQV31REDrcSEeWHHVDJ77DpFlm+EE+eYHWChs/HR08nIehkaSI=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=HuB5W1OTnjBoni34EBvEjKWcuUBwqCPWlNP9lNu/nrE=; b=RlmR2Kb5OG7HcZybWDpL8v4zbX
+	oq4sNZbHC5/OZSlRM4TdebYFp+Qd/vTYk+GKfLDgVmOIjEgTkeCGRIAB79Qr4GmoGU0RzUoUJNnsN
+	DcDW+B7K08Nn0povN9TsEwf5jfCY/0mKlBfgyp04hBGR3J2DSnnC+UAIfC3ZaGD/pkPs=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ugQhu-0001l2-5B;
-	Mon, 28 Jul 2025 16:28:10 +0000
+	id 1ugQqJ-0008Mw-UZ;
+	Mon, 28 Jul 2025 16:36:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1ugQht-0001kt-07
+ (envelope-from <daeho43@gmail.com>) id 1ugQqJ-0008Mp-5r
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Jul 2025 16:28:09 +0000
+ Mon, 28 Jul 2025 16:36:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BZg+ApNcBOzJUMbbdleC5A9Q+2d4bkaiggYTcam4Qc0=; b=V1KBoNZMKD2ooMEApGI0dCLX8p
- kfYq0/o/HXmoO1FPU1aV9RD8uv86J4Us+yKGlcpDm/o5W1aJT44HSr0jQtF7a6aZJ1Y8DdIee2CPk
- +WayAzWOKB+aHZm3rjUTTr3IqV8G6/rItlXz7mG4jLv0g4L4V9e6uyBo0AMXczzJSI0U=;
+ bh=QJq2TaU8sjz2yL3Ynvf/1AA2Irm8dbMEWpqz4kWL01M=; b=K/kvvBi6U5qFNne8gsYLfuhqn6
+ eBNh+OxcRxn8FMr/uTJVSn6j5SS6bKWVomypGhxpmpY72SSPLH2AMbWdP60+lepQ3nYdG5YRmGtI+
+ EfHpQkf5//Vlw0FqE/ZGxRDEd3dTEQ/ScG8AGXrahz5zwXiJ53Npd6Fe9ZJxcoEm3/fY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=BZg+ApNcBOzJUMbbdleC5A9Q+2d4bkaiggYTcam4Qc0=; b=EQp0hhmBPjaFeW8sffM1i4PHEA
- J6TG+foGUNYTfcdyIokEPDU6SmdRLPoMgwTxRdUkEbn6aSqJJNmq6Gzn3xa/HUhFtnBK4/8Lb/ih9
- n3dxit0Jin6ia4MYoesk/go74umxRoXLaJbm5eM/95u4+qEMxmOeK44tfqJjnN8AEo5Q=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=QJq2TaU8sjz2yL3Ynvf/1AA2Irm8dbMEWpqz4kWL01M=; b=c
+ TXI+Z/cohVtn9y4gxj66zcxmnmfCAD4cd75y3/0ojmFMZygQtwbeLR7iwfrscKGYyBvG/V7VyfPCd
+ 2CL2VCpKU//lbmkswfejskUeZ9b5CaLLVt3xqPyc7z0SWMgRSISz73klyX9XirIEq9CaW+criPka2
+ 8xARxoWacJjRkdPA=;
+Received: from mail-pl1-f169.google.com ([209.85.214.169])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ugQhs-0006Yj-Ag for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Jul 2025 16:28:08 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id EF1045C6332;
- Mon, 28 Jul 2025 16:27:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67C00C4CEE7;
- Mon, 28 Jul 2025 16:27:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1753720077;
- bh=jaYdpvSZph5GN/uLRWaaBmC73dJtiUOC1QnK3SoCOv4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=V7+jYF8JA+4m49qo7TqKaDtoHNnU4AlELj4bsUwGS+XqBJJ5wJrOnV8/O1kN0OHjF
- MtMA75KOzWO9yTwDH/UxGt2sRDVX3r70KquzUAPbbhisgsSjP8igCCZnSSLGssw66x
- OK7TxGgpqIK18sJilR5KOLjPhQ1RoYInTAEfBUd6CTwAp3GnlSPocRIujOett/n1I3
- HuWu7SqNC48Jl++MdUYjqYiBE4251w2N58HIhvFbHG7jQr41e3SMzWA/KsqZly8fQx
- ehwNAfGyO555z/zPpOGdqtz2aBdnukq4fIU1ItCNC9wuKfcdSlZq4L3sU93oftzmTQ
- HIfDynnLN42/w==
-Date: Mon, 28 Jul 2025 16:27:55 +0000
-To: Liao Yuanhong <liaoyuanhong@vivo.com>
-Message-ID: <aIelC5HYSNEfV3Fx@google.com>
-References: <20250723084955.547901-1-liaoyuanhong@vivo.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1ugQqI-0007Rp-Mi for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Jul 2025 16:36:51 +0000
+Received: by mail-pl1-f169.google.com with SMTP id
+ d9443c01a7336-23fd3fe0d81so18652165ad.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 28 Jul 2025 09:36:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1753720600; x=1754325400; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QJq2TaU8sjz2yL3Ynvf/1AA2Irm8dbMEWpqz4kWL01M=;
+ b=OqhntLzvfxgCvYV+wnLPT5TAVUiOe04fXdgPcq1Tav9A7RIpgHr+UGHEaZmgZ7QeTT
+ w94pSIHTLWAb6ZgryAOjQqEWy4i4ov9Ld4hdVLBuHlei8SqdnBR8q1xZG+l/v0f9rzNk
+ ZbUHzVN5CvG2AOS07hOxtyK75UT4SufYOGkxkd6FXnXVrO8NzehuBWEqNtd2H0SUXdI0
+ dcd2CF+XjbE57DUpYkJeaJ74hKOTnfnAdMwWGWt1sPv9j+dVqGIjG7yEAt13tHxtFwUu
+ stejluNA+JmIkWyd4n2aYLN+S+T/GuH9ubVnUFWIRg3DWa2hijbVXPPE+HISo6l96jOY
+ BgwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1753720600; x=1754325400;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QJq2TaU8sjz2yL3Ynvf/1AA2Irm8dbMEWpqz4kWL01M=;
+ b=pQeAholvkhgqm9CKlAQSJhraDBA3XL20Dzusj1YcGQWZmHomWty6HHusXDCuWYJicX
+ pwB63d50d5ukeiTGQkJQVamzO0h6iz+RzlKavaHDDlA6FFMHA7nC7mjTXsxSytN0Lxk7
+ ErHVSp+uv6Yo7yYtXXpJjtA3MXsw1N/QFJ2FjIBNcvuD5qwB8mgHXTIxNjOwIdsROFkk
+ DGoslQ0qHQ/RZ8DCrCR/pW6M+U9KqnCogGMDOYAmWItAGuGKH3cJWbJmvkzwqrHyXa7l
+ Wex2FBj04gLlFB//z2EbWyz/oUE80EOBwE/De/FFrFrNoZOSFUcgBrjaeXwVZ9gBzgc1
+ B74w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVHIr46Ek1W9R4k5D8jGYWg4jtZfbBxJOtM24PnzEBwid5XrIceOWEldIpEprRTcrxPs1OPCrgdXfHDqevtZUlw@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YwVu7SVq4XvJ7O1+VaIQk1rWHDztdwHubW+PrgyzVdCC/nQ/xFf
+ N4UlTjD5tEzA0KnKGabknHaNkK3/bkqMRMQdZRbqN46n0zutpCabkMFLyv639w==
+X-Gm-Gg: ASbGncuIUxg3QA6KpAp2sKa6RnP42BFc55mxcIPeprcVoLB9XzWPy1oVfT+9CPS05ih
+ 5aHNlXOa0xUV8FJ0eYwC0MbVny+dcJ8uWvyukHtYIG+/wYfGT4ycl9utPrV99SPYstJ/L4C8Ge2
+ HDAuLy5KVFd4aZXQszw2wmDNOJ+CYhwsG3Ia5sygDELJ6qw4cOwfqzVg5n1pRPab8ESC+5DSeIU
+ btYER1h5dlj1YVfRFE/ET+fJGYnUiyugn4xjW6hthhQ2QW1xG72DeIvOD5anGw1+CHqWtazAXlp
+ drqbsBsi99dLDmdUKfgUglgO1IGfIONR/yn7xIUlQZcgc0iE3xC2CyEiT2wyeDshan6aHwt9/pq
+ nTKF3zeBtnQg+2fgmria+4pBtu1XtVJ8xvrcDZpSVfxtd+3dhIpssct279gd0UrrotwXAT6P933
+ 7WHLATKLHfkyAt8g==
+X-Google-Smtp-Source: AGHT+IEGAK3rQGPwuT5QeRAnpVEGq68xpiS2AvCZbpQqKo2cPrxtkwp+3EiiPpbFDALSAHI80JOEhw==
+X-Received: by 2002:a17:903:2451:b0:235:f70:fd39 with SMTP id
+ d9443c01a7336-23fb2fd7c27mr210492365ad.10.1753720599819; 
+ Mon, 28 Jul 2025 09:36:39 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2a00:79e0:2e14:7:b166:cd51:360c:c503])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-24008d8e9a2sm35086995ad.142.2025.07.28.09.36.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Jul 2025 09:36:39 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Mon, 28 Jul 2025 09:36:28 -0700
+Message-ID: <20250728163628.1043162-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.50.1.470.g6ba607880d-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250723084955.547901-1-liaoyuanhong@vivo.com>
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  I think this is a simple hack, so NAK. It seems the ask is
- to support storage tiering, and we need to design a better approach. Something
- like allocating a section per defined device priority. On 07/23, Liao Yuanhong
- wrote: > During the development process, we encounter the following two issues:
- > > 1.In a multi-device scenario, it's likely that two devices exhibit >
- inconsistent performanc [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  From: Daeho Jeong Add a sysfs knob to set a multiplier for
+ the background GC migration window when F2FS Garbage Collection is boosted.
+ Signed-off-by: Daeho Jeong --- v3: fix the range check condition v2: limit
+ the available value range --- Documentation/ABI/testing/sysfs-fs-f2fs | 8
+ ++++++++ fs/f2fs/gc.c | 3 ++- fs/f2fs/gc.h | 1 + [...] 
+ Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -93,10 +125,15 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ugQhs-0006Yj-Ag
-Subject: Re: [f2fs-dev] [PATCH] f2fs:Add adjustable write endpoints for
- multiple devices
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [daeho43(at)gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit [daeho43(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.169 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1ugQqI-0007Rp-Mi
+Subject: [f2fs-dev] [PATCH v3] f2fs: add gc_boost_gc_multiple sysfs node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,150 +145,113 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-I think this is a simple hack, so NAK.
+From: Daeho Jeong <daehojeong@google.com>
 
-It seems the ask is to support storage tiering, and we need to design a better
-approach. Something like allocating a section per defined device priority.
+Add a sysfs knob to set a multiplier for the background GC migration
+window when F2FS Garbage Collection is boosted.
 
-On 07/23, Liao Yuanhong wrote:
-> During the development process, we encounter the following two issues:
-> 
-> 1.In a multi-device scenario, it's likely that two devices exhibit
-> inconsistent performance, causing fluctuations in performance and making
-> usage and testing inconvenient. Under normal circumstances, we hope to
-> prioritize the use of the device with better performance and consider the
-> device with poorer performance when space is insufficient. Using reuse
-> mode can solve some of the issues, but tests reveal that the fragmentation
-> degree in reuse mode is significantly higher than in default mode, which
-> poses performance risks.
-> 
-> 2.We need to examine the differences in data placement for different sizes
-> of storage devices under specific write patterns. Currently, this
-> comparison can only be made by switching storage devices.
-> 
-> To address the above issues, I am considering adding a last_secno node. By
-> adjusting this node, we can change the end of the addressing in
-> get_new_segment so that it readdresses from 0 once the set value is
-> reached. The default value of the node is the maximum number of sections
-> for the current storage device, so making no modifications will not affect
-> the current logic. If the space before the set value is already filled with
-> valid data, it will normally write into the free area after the set value.
-> 
-> Signed-off-by: Liao Yuanhong <liaoyuanhong@vivo.com>
-> ---
->  Documentation/ABI/testing/sysfs-fs-f2fs | 8 ++++++++
->  fs/f2fs/f2fs.h                          | 1 +
->  fs/f2fs/segment.c                       | 4 ++--
->  fs/f2fs/super.c                         | 1 +
->  fs/f2fs/sysfs.c                         | 9 +++++++++
->  5 files changed, 21 insertions(+), 2 deletions(-)
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-> index c2a233f2a085..e5ad8dc70cb6 100644
-> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
-> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-> @@ -870,3 +870,11 @@ Description:	This threshold is used to control triggering garbage collection whi
->  		reserved section before preallocating on pinned file.
->  		By default, the value is ovp_sections, especially, for zoned ufs, the
->  		value is 1.
-> +
-> +What:		/sys/fs/f2fs/<disk>/last_secno
-> +Date:		July 2025
-> +Contact:	"Yuanhong Liao" <liaoyuanhong@vivo.com>
-> +Description:	This node is used to adjust the addressing end of f2fs when writing.
-> +		The default value is the maximum number of sections in the storage. If the
-> +		frontend space is full after adjusting the address, it will still address to
-> +		the back of the address until reaching the end of the memory.
-> \ No newline at end of file
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index e6dcd7e6f47c..7d93d8671033 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1802,6 +1802,7 @@ struct f2fs_sb_info {
->  	spinlock_t dev_lock;			/* protect dirty_device */
->  	bool aligned_blksize;			/* all devices has the same logical blksize */
->  	unsigned int first_seq_zone_segno;	/* first segno in sequential zone */
-> +	unsigned int last_secno;		/* for adjust the end of target device */
->  
->  	/* For write statistics */
->  	u64 sectors_written_start;
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index cc82d42ef14c..192619bb2034 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -2811,7 +2811,7 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
->  	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
->  
->  #ifdef CONFIG_BLK_DEV_ZONED
-> -	if (secno >= MAIN_SECS(sbi) && f2fs_sb_has_blkzoned(sbi)) {
-> +	if (secno >= sbi->last_secno && f2fs_sb_has_blkzoned(sbi)) {
->  		/* Write only to sequential zones */
->  		if (sbi->blkzone_alloc_policy == BLKZONE_ALLOC_ONLY_SEQ) {
->  			hint = GET_SEC_FROM_SEG(sbi, sbi->first_seq_zone_segno);
-> @@ -2827,7 +2827,7 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
->  	}
->  #endif
->  
-> -	if (secno >= MAIN_SECS(sbi)) {
-> +	if (secno >= sbi->last_secno) {
->  		secno = find_first_zero_bit(free_i->free_secmap,
->  							MAIN_SECS(sbi));
->  		if (secno >= MAIN_SECS(sbi)) {
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 30c038413040..5b7de0734da7 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -3859,6 +3859,7 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
->  	segs_per_sec = le32_to_cpu(raw_super->segs_per_sec);
->  	secs_per_zone = le32_to_cpu(raw_super->secs_per_zone);
->  	total_sections = le32_to_cpu(raw_super->section_count);
-> +	sbi->last_secno = total_sections;
->  
->  	/* blocks_per_seg should be 512, given the above check */
->  	blocks_per_seg = BIT(le32_to_cpu(raw_super->log_blocks_per_seg));
-> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> index bdef926b3377..a4ab5c38e883 100644
-> --- a/fs/f2fs/sysfs.c
-> +++ b/fs/f2fs/sysfs.c
-> @@ -649,6 +649,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
->  		return count;
->  	}
->  
-> +	if (!strcmp(a->attr.name, "last_secno")) {
-> +		if (t < 0 || t > MAIN_SECS(sbi))
-> +			return -EINVAL;
-> +		sbi->last_secno = t;
-> +		return count;
-> +	}
-> +
->  #ifdef CONFIG_F2FS_IOSTAT
->  	if (!strcmp(a->attr.name, "iostat_enable")) {
->  		sbi->iostat_enable = !!t;
-> @@ -1122,6 +1129,7 @@ F2FS_SBI_GENERAL_RW_ATTR(max_victim_search);
->  F2FS_SBI_GENERAL_RW_ATTR(migration_granularity);
->  F2FS_SBI_GENERAL_RW_ATTR(migration_window_granularity);
->  F2FS_SBI_GENERAL_RW_ATTR(dir_level);
-> +F2FS_SBI_GENERAL_RW_ATTR(last_secno);
->  #ifdef CONFIG_F2FS_IOSTAT
->  F2FS_SBI_GENERAL_RW_ATTR(iostat_enable);
->  F2FS_SBI_GENERAL_RW_ATTR(iostat_period_ms);
-> @@ -1285,6 +1293,7 @@ static struct attribute *f2fs_attrs[] = {
->  	ATTR_LIST(discard_idle_interval),
->  	ATTR_LIST(gc_idle_interval),
->  	ATTR_LIST(umount_discard_timeout),
-> +	ATTR_LIST(last_secno),
->  #ifdef CONFIG_F2FS_IOSTAT
->  	ATTR_LIST(iostat_enable),
->  	ATTR_LIST(iostat_period_ms),
-> -- 
-> 2.34.1
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+v3: fix the range check condition
+v2: limit the available value range
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 8 ++++++++
+ fs/f2fs/gc.c                            | 3 ++-
+ fs/f2fs/gc.h                            | 1 +
+ fs/f2fs/sysfs.c                         | 9 +++++++++
+ 4 files changed, 20 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index bf03263b9f46..931c1f63aa2e 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -861,3 +861,11 @@ Description:	This is a read-only entry to show the value of sb.s_encoding_flags,
+ 		SB_ENC_STRICT_MODE_FL            0x00000001
+ 		SB_ENC_NO_COMPAT_FALLBACK_FL     0x00000002
+ 		============================     ==========
++
++What:		/sys/fs/f2fs/<disk>/gc_boost_gc_multiple
++Date:		June 2025
++Contact:	"Daeho Jeong" <daehojeong@google.com>
++Description:	Set a multiplier for the background GC migration window when F2FS GC is
++		boosted.
++		Default: 5
++
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 3cb5242f4ddf..de7e59bc0906 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -197,6 +197,7 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
+ 
+ 	gc_th->urgent_sleep_time = DEF_GC_THREAD_URGENT_SLEEP_TIME;
+ 	gc_th->valid_thresh_ratio = DEF_GC_THREAD_VALID_THRESH_RATIO;
++	gc_th->boost_gc_multiple = BOOST_GC_MULTIPLE;
+ 
+ 	if (f2fs_sb_has_blkzoned(sbi)) {
+ 		gc_th->min_sleep_time = DEF_GC_THREAD_MIN_SLEEP_TIME_ZONED;
+@@ -1749,7 +1750,7 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
+ 					!has_enough_free_blocks(sbi,
+ 					sbi->gc_thread->boost_zoned_gc_percent))
+ 				window_granularity *=
+-					BOOST_GC_MULTIPLE;
++					sbi->gc_thread->boost_gc_multiple;
+ 
+ 			end_segno = start_segno + window_granularity;
+ 		}
+diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
+index 5c1eaf55e127..efa1968810a0 100644
+--- a/fs/f2fs/gc.h
++++ b/fs/f2fs/gc.h
+@@ -68,6 +68,7 @@ struct f2fs_gc_kthread {
+ 	unsigned int no_zoned_gc_percent;
+ 	unsigned int boost_zoned_gc_percent;
+ 	unsigned int valid_thresh_ratio;
++	unsigned int boost_gc_multiple;
+ };
+ 
+ struct gc_inode_list {
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 75134d69a0bd..b417b655d4e8 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -824,6 +824,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 		return count;
+ 	}
+ 
++	if (!strcmp(a->attr.name, "gc_boost_gc_multiple")) {
++		if (t < 1 || t > SEGS_PER_SEC(sbi))
++			return -EINVAL;
++		sbi->gc_thread->boost_gc_multiple = (unsigned int)t;
++		return count;
++	}
++
+ 	*ui = (unsigned int)t;
+ 
+ 	return count;
+@@ -1050,6 +1057,7 @@ GC_THREAD_RW_ATTR(gc_no_gc_sleep_time, no_gc_sleep_time);
+ GC_THREAD_RW_ATTR(gc_no_zoned_gc_percent, no_zoned_gc_percent);
+ GC_THREAD_RW_ATTR(gc_boost_zoned_gc_percent, boost_zoned_gc_percent);
+ GC_THREAD_RW_ATTR(gc_valid_thresh_ratio, valid_thresh_ratio);
++GC_THREAD_RW_ATTR(gc_boost_gc_multiple, boost_gc_multiple);
+ 
+ /* SM_INFO ATTR */
+ SM_INFO_RW_ATTR(reclaim_segments, rec_prefree_segments);
+@@ -1220,6 +1228,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(gc_no_zoned_gc_percent),
+ 	ATTR_LIST(gc_boost_zoned_gc_percent),
+ 	ATTR_LIST(gc_valid_thresh_ratio),
++	ATTR_LIST(gc_boost_gc_multiple),
+ 	ATTR_LIST(gc_idle),
+ 	ATTR_LIST(gc_urgent),
+ 	ATTR_LIST(reclaim_segments),
+-- 
+2.50.1.470.g6ba607880d-goog
+
 
 
 _______________________________________________
