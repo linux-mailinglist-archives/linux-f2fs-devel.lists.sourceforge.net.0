@@ -2,94 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76BD0B14608
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Jul 2025 03:57:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F202B1469A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Jul 2025 05:07:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Ev7fp/F0Z4xZ4lWE+fabgNL6Afy35dupW+u05+T513E=; b=gUMMFiclm5vJH1cUAym1P2jIRo
-	ZR9TcoZO7PYH7MK3+aDlETrTEnD993l54JfFsvrlF3vKLVrxe4oAMi0Vt+NdBhPXLoBFwUKHap5fj
-	aVHVUO3LvUTiz8lQBkzMrePQXr3pn1CuM9/sZZ7dc0/0Y77fmp8G+wswE1bsEPgNhvUc=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=jO5PDLNHOvW/eIFtzhEvgIZNb9gCY24pz9aFyhUy8IM=; b=PpjsxbnwUjHx5WOYRZQ8i+cqJN
+	wQ2oT0rrG/KTE2+BW9lT1kj8p02u8iUC6QXEcAq0E0W4HX6YT8VkMaqKLrPJ8dB2+jeyImC4wG2Uz
+	byNUngLCKxUoNzG7dARmJ5IHD8hYzTaWdRO6QLQZS+GQkEvOZbuxq37IoXQRI0L5t/gs=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ugZaq-0003bX-S2;
-	Tue, 29 Jul 2025 01:57:28 +0000
+	id 1ugagC-0003PK-Q1;
+	Tue, 29 Jul 2025 03:07:05 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1ugZaq-0003bR-0K
+ (envelope-from <chao@kernel.org>) id 1ugagB-0003P8-MW
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Jul 2025 01:57:28 +0000
+ Tue, 29 Jul 2025 03:07:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9GomTzObmvDV7VVJ7EeUxjxn8pw7UwzfTKE6jpmGFFg=; b=FLHzispMkAJ6L2CQ0dUBHG0mdj
- 33km+goNk4UOYoO4muiNoO2bszkJm6eToq7+aYl5SH42Vd99LJCJFIQaGRRR3GH/fT6PD2KiBRhp3
- hydv2mpbi5uEqGxs+PutUZ3YylvTcFTvat0w8piNfk6omq2sCJ3Ycaeb2lIY61IrUXxI=;
+ bh=ydHp55je5ipMaybGZ3PRgf1tTcAitqzPRnjs+Vt6rYA=; b=AGPfyDxfrAQ7nva12XyCjiD3zh
+ BtiRPNo/oiTpjRDFSPcrgGmRcJckIg10x1rzB/kAQBboo7GNNQu1zByw0OCDKv+35weAdIhHYMya2
+ xfoicmpAHDCfKcCyA+zVMj/sccuJW128SmsWC65mYdzoPIljDkmPjx4ge+CtY6A7hPh8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9GomTzObmvDV7VVJ7EeUxjxn8pw7UwzfTKE6jpmGFFg=; b=nLI7jYrFvQ+pSFKEgU0fliZL9X
- 15E5iv7QM/murvzm0nqse+K6W4p5I/IyfHQxq0zjET9voV3zs4C8qHn1PXci2AKVnRQEj0oSW0pO2
- q5zBZ49HXf3DjWMqaP0saHsclx/PIfgIyQR2ukiW00QvNtSIkKM7RCeYvrgb9cIlA/sw=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=ydHp55je5ipMaybGZ3PRgf1tTcAitqzPRnjs+Vt6rYA=; b=knbsmPRWllDIsJNmtuZ4DDntUt
+ kc2p/sDu82aCFR43MeEBmGEsJUgzCT6p5suuT88LnjbsYeuF3dA0YssvHkgdWMx9g0oJTBYCdu02M
+ GSt80529mWFzVKZ1ypnTDFvo7S98VlU4TsS5l4C/CrCRf0Ysp7DurWTEkUk1ANhPvB2o=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ugZap-0008B0-ET for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Jul 2025 01:57:27 +0000
+ id 1ugagB-0003NB-VF for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 29 Jul 2025 03:07:04 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 9A489601EC
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 29 Jul 2025 01:57:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4DD7BC4CEEF
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 29 Jul 2025 01:57:21 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 287935C57D4;
+ Tue, 29 Jul 2025 03:06:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C032C4CEE7;
+ Tue, 29 Jul 2025 03:06:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1753754241;
- bh=bYm3cRWq9wdnQ16EqCwWTvsdPEsfmHJeapFDZN5aXf4=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=Z9W4ITjcEMlCNOufADnovjtir2FNX7YzbNFVGaSHIakUa/JcUFL27e1N9aLng3quC
- /6CMZ0Z/SL4FATFX+RaTShgvyDWFqBFN+W2wykO8EVG9/HP6j0TuXFoehTdsUPZPzX
- Ukc3MBMk/QGf4CKF2titAF+rnC4PEWOew6OVKR8FxrvLsxuwOIEzj5smAT6yet2lwh
- vzkpFbHfHtZldoWcXnmnmLqzb2GiBkwDSsanZhMWzY6tERHhuFgKX0zrI9PSNcTdDp
- wOfQtqs9JMogIBI2DkthwKDTnjwWqRi0BLRVRJREh3ULh+FDlaHkWXBNDD6LDbV1Og
- 4m4UrbQ1ow5UQ==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 3F23DC3279F; Tue, 29 Jul 2025 01:57:21 +0000 (UTC)
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 29 Jul 2025 01:57:21 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: devfs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: hy50.seo@samsung.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P3
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: component
-Message-ID: <bug-220321-202145-4pfVgl07Jo@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-220321-202145@https.bugzilla.kernel.org/>
-References: <bug-220321-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1753758411;
+ bh=vckEhDztamPT2ztafM7NGX8lZ4VHy1pJroP6LRG6KAY=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=Rcq48nOXA5b5V0xPytSI8n3odO4x+m6f20jwEf8gi6Z7HMZDQueYQspaaT7YTA0oJ
+ hCplI+7ZwOBXhtSei7m8ZAg5bVF1IUGcxohOxMBNLcG90a7j6Xk3rllSkmHaLMOZ8X
+ jUc85DHiJLNuB7ltiGVFkF5/2WsIlI7vkBQEyZrNQA74prGqnthXDtg3xbTcLqwmUA
+ HvpnKuFJxFM8BLrdr7bBYxB1dE3E9NQhEouTeAPYV+g51H9/kUVQinEmO/QOXr99TH
+ G6GJFOnt39I+Gf+MJFdzxtlLQdtWmxPkT8rzTJw4HE4H3ujliBku0016dkoadu3zAA
+ YGtYal5f6ko/A==
+Message-ID: <b61fae81-ec51-4fb5-8974-76236e9eb858@kernel.org>
+Date: Tue, 29 Jul 2025 11:06:48 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20250728164544.1051653-1-daeho43@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20250728164544.1051653-1-daeho43@gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -97,9 +79,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=220321 SEO
- HOYOUNG
- (hy50.seo@samsung.com) changed: What |Removed |Added Component|f2fs |devfs
+ Content preview:  On 7/29/25 00:45,
+ Daeho Jeong wrote: > From: Daeho Jeong <daehojeong@google.com>
+ > > Add a sysfs knob to set a multiplier for the background GC migration
+ > window when F2FS Garbage Collection is boost [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -111,10 +94,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ugZap-0008B0-ET
-Subject: [f2fs-dev] [Bug 220321] F2FS: workqueue: WQ_MEM_RECLAIM
- writeback:wb_workfn is flushing !WQ_MEM_RECLAIM
- events_unbound:quota_release_workfn
+X-Headers-End: 1ugagB-0003NB-VF
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: add gc_boost_gc_multiple sysfs node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,26 +107,25 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: bugzilla-daemon--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: bugzilla-daemon@kernel.org
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=220321
+On 7/29/25 00:45, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> Add a sysfs knob to set a multiplier for the background GC migration
+> window when F2FS Garbage Collection is boosted.
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
-SEO HOYOUNG (hy50.seo@samsung.com) changed:
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-          Component|f2fs                        |devfs
+Thanks,
 
--- 
-You may reply to this email to add a comment.
-
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
