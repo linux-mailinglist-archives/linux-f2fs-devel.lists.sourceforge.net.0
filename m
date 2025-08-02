@@ -2,103 +2,134 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8643EB18A71
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  2 Aug 2025 04:38:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 187C4B18F37
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  2 Aug 2025 17:35:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=+kPbnowqFKOWY6N5auJkbNXht2PvWj1dpARGwUFsrPg=; b=m637+IW1Qv+k1y+Qq+dQvunp9p
-	oQn424hKyC/8vIw8sqLRyOsBjTNCA8fcU4h5slYwXjSCASPXLVCpn70vEZHgLnCzqKfKoox0As0Vw
-	gs/b3Va+tK7N1o0dkhWCZ3jobkjLQzT3MxzBo1RqMD60DBoQnMEA4jQhcv/peqzzhQZ8=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:In-Reply-To:From:References:To:MIME-Version:Date:Message-ID:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=FlD/hgmMSh2OKFg5/Y2D1CBQYYEreikkDehGxuhV4Y0=; b=biqjeu9SRjL0jUKOryJ8/3/rFo
+	exvhIsFAs7ro+bVqW4ZOPmFLRZv8bSdunNnHPCziljf0krqBBdsHCrhQ4DBThg+YmWBAb8456XsRv
+	gRGewlJi9CIzyYYQOznVZztsTy0R00cd5Z0UuCwLp07yTZcrzr3Ygvxu5ZtjOhM+gBUk=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ui28A-0000Cb-2B;
-	Sat, 02 Aug 2025 02:37:54 +0000
+	id 1uiEGZ-0008SI-Pf;
+	Sat, 02 Aug 2025 15:35:24 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ui288-0000CT-Te
+ (envelope-from <axboe@kernel.dk>) id 1uiEGY-0008SC-8d
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 02 Aug 2025 02:37:52 +0000
+ Sat, 02 Aug 2025 15:35:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=osM4hxE7Ep6v26ia6KeM1/OaarCJ5VPNY2ADqDdHkdo=; b=bVBSBVUuLaSXlB6Zvm+5IKFDff
- Lu0OT2WymBe/rXDl+ll3Q4drcTtIV+1Yy0O+Ruf5khpWEKVwTG4SvS6/1uYLSfdPIXYWhNwThPvhj
- ZtXasEZbUhrQ13eAs+hSKRpX2mfA6m4W1MNo+yshU5ODsj428EJAXVkvO7MJdD4xzzm8=;
+ bh=81Ijm86aL/7Eg8i2CREJKo2zaZRo19ClQ9+K+/XGJDY=; b=dFyFVNTWHbqMU1YThMAnceodBT
+ YjzAVlVGLoVDNjg48D7GSIjikdhoWRequlyQv3MWKK00qoU+nqAdbtSCwX8qfhLDAQ1OyDYrnv/uz
+ 8HheUaJ81fN4tSEVIkhJ8WNrB/Q8qtJc7Z/7LkLhFmMh5cTVgT3uSqaT6L1kfRzGYtQ8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=osM4hxE7Ep6v26ia6KeM1/OaarCJ5VPNY2ADqDdHkdo=; b=D
- 5Jxamef2fI9syKb9OwoPdIuac9M+6TijrC4oEkJFlWrFuf2zvKvM9MKO8dABtp/1s5U/pal+bC4ov
- ZfGOooWR4zleQWhUEHk4yBu5GkfkKNHfUsaA+Egmwc13Y5Qhqic+yZ5hMqpQzykQDLCCnmeZ0ZQQb
- s7AQ/ZzTqMDkhHkw=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=81Ijm86aL/7Eg8i2CREJKo2zaZRo19ClQ9+K+/XGJDY=; b=ga/sH2wzVJrWEsSWEJQv/iOMO3
+ pRpH6L9ULZiapYlco+uvqJ3Ky2kfCxBei+WA1T37I82Z2vvMf4FV9V9Nk92//QG3D3LFtmkauht0R
+ d6yxL0e55skOHbya/rAjXRnsNJX1SnMKZkX6XBnaZPDkAF0fZcsrJu5A1GWv2u0ohqBY=;
+Received: from mail-il1-f170.google.com ([209.85.166.170])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ui288-0004Ke-IR for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 02 Aug 2025 02:37:52 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id D4CEA600AE;
- Sat,  2 Aug 2025 02:37:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E105AC4CEE7;
- Sat,  2 Aug 2025 02:37:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754102261;
- bh=SnMGNBU0WevBcEDt0U0KrwRwiB+AubWXiRuNhkpiDR0=;
- h=From:To:Cc:Subject:Date:From;
- b=mXmhydbWdO5IiuKtmOjWtXxTEy6KJEAmvlSmKZ+6Pa7u1WtZT7IQ2cKpwK2k21484
- TZcTDbt8MzqhrRdexg9BNy6RinGzGdfcBOykVVLm19dfm1HqIIsOIceFHUHis9KQFu
- 2+pO66zmKttEODPoSosqRFD6WLYovB8yoeizU5ABg08/OaJmVVr6KZRca2SnB2tltZ
- TTLTj86P+p7wKc9PhOsNGjaZWaRIQlvQshADiltr40iIuyA4z7+dMpwUGDBLi0Oxl1
- 4nCqbgRNPOuHRWzt74vbKHWV1L/un0/bye/8p1kfioNky5+vDil334fPiCM7P3z4rv
- WWxa4id4mh1pg==
-To: jaegeuk@kernel.org
-Date: Sat,  2 Aug 2025 10:37:33 +0800
-Message-ID: <20250802023733.1890349-1-chao@kernel.org>
-X-Mailer: git-send-email 2.50.1.565.gc32cd1483b-goog
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1uiEGX-00038z-2W for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 02 Aug 2025 15:35:21 +0000
+Received: by mail-il1-f170.google.com with SMTP id
+ e9e14a558f8ab-3e40d006105so11729905ab.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sat, 02 Aug 2025 08:35:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kernel-dk.20230601.gappssmtp.com; s=20230601; t=1754148915; x=1754753715;
+ darn=lists.sourceforge.net; 
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=81Ijm86aL/7Eg8i2CREJKo2zaZRo19ClQ9+K+/XGJDY=;
+ b=bNqQXIOjpFu3Ng856MwGdIgQIeDSZaVf1hnmCT0f8oUwhmiH36KzAwTGrF0HwNjomi
+ nHWtplT23WLOXhRvdPGkw+B4tkd+Tl2T4TE/46v5I9ng0BKKdTHgFLIz+7gbxVlaLUJN
+ zMd3EjcD9ZFyKKKmJJJXgtre0xSAu9V5jiuWQ0favAeaZqxuMpV0DV3HIJp4a3J8FzVR
+ pU3RTWNAo04XKVjk9IqwChv2aX54NqSqdQ/VxNGWlQiBf14w5mHpskPYBKgNEFuh5RTX
+ a81dhuSwE7/fZWIdVSO3fM/cg1MbdA8t3IUt1WMOEAjH2J8kI+wgVixYnWBxbAippAJO
+ O+fQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754148915; x=1754753715;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=81Ijm86aL/7Eg8i2CREJKo2zaZRo19ClQ9+K+/XGJDY=;
+ b=By2zQZsbUOl0D6dk0oOS+U/3HuXxRpZdlH76TQYo8jDCNt2cGtkyt1B4duaEAt7pkR
+ CDLvnTKl5pt3xoFxIQAoDGEj9L1KYAL6dTdrRDSnGRG9D6zFNVxmMUkNl+riAw9fdHiC
+ 3m1BxlDe5/8QAkL07kW5ZP9xJTVcE4otzMNYG3xtFsE6ALBgQOXoQLiUo7KFkcuQA4dz
+ 7qD9WQNtF0c/bDLyJfgKG4ML+wOlazFhwpqfQv4oufth297nAVaB/9c7gxRF/8PQ0ha2
+ G0buBPTNuXabS+qL2Exhs7WTIOIYGiJln/ypXFw2ljfk/gpN0Oy4Wl0Y4fov9RswwnYN
+ u5Cw==
+X-Gm-Message-State: AOJu0YwJtet1b3S5arwYZVafDWpbo5fzuYR0Ef0T1t5TtinP6OoO8ahU
+ 2S3UEhY5zMNUCeqhdUq4q1LUxNcHuMmufSQXVbvXEQFWdFCgDVUElhNWOVADehaihfI=
+X-Gm-Gg: ASbGnctPwLv0ljw3ganVqaG+o0Et8NXcpkPtN2WRRZVYWuKA16PIk9wZKzTCpVv+cl/
+ s/XpFAuoQYX9HwUe9/8bm5CUjdKheQtriVGNzxoFEu+xUzG4hMoE0+z4NwndHcrjB0J0WBlmshH
+ ZN2rAPxbyc6c7iOwJwrcBlk8a0RF4/pGrqd03X42zuW82jbsi/UVuLoTExPTTg3F/GINrIhm7x5
+ yxgwWopaZax9WGZvKha490LU7pyxrQjhhaO9EZ2sox/pVJVVOrzwxHnb4DsiPYqb1Mk05UgeOHG
+ fYd2NWGEKK4LQvOmLllaNAKZO6I20e7I/uS9Aq+lEq7PXrprYuQAXp1eIikwhWmTFMT2vmZnLYg
+ +RkpP3SkKxEfO0iaQkBg=
+X-Google-Smtp-Source: AGHT+IEzDMvKKG3HQnc6KQVfE3Sm8RA9MnEePBGjgtGWT3ISbraLvGrtT7nk5K+qI0TfYNvWTAxGAA==
+X-Received: by 2002:a05:6e02:351e:b0:3e3:e4b2:8a5f with SMTP id
+ e9e14a558f8ab-3e416116edamr65460525ab.8.1754148915061; 
+ Sat, 02 Aug 2025 08:35:15 -0700 (PDT)
+Received: from [192.168.1.150] ([198.8.77.157])
+ by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3e40297c7dbsm25068145ab.7.2025.08.02.08.35.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 02 Aug 2025 08:35:14 -0700 (PDT)
+Message-ID: <e163bbcd-b4d7-4a76-a42f-950f3cb5a644@kernel.dk>
+Date: Sat, 2 Aug 2025 09:35:13 -0600
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+User-Agent: Mozilla Thunderbird
+To: Chao Yu <chao@kernel.org>, hanqi <hanqi@vivo.com>, jaegeuk@kernel.org
+References: <20250725075310.1614614-1-hanqi@vivo.com>
+ <d258ab6d-a97a-4232-bf90-5afedd5cccb2@kernel.org>
+ <e1a1dbfe-165f-4cb3-9d5b-8ac4ba61265e@vivo.com>
+ <087f7937-20b5-4151-8a3f-5b6b2b045b41@kernel.org>
+ <b1cf56a6-d23d-40ca-acaa-07944140b1b5@vivo.com>
+ <1b420389-d46b-48ef-aa49-585d84e2710f@kernel.dk>
+ <68c061ad-cbb7-44e8-a905-c13b9ec81c62@kernel.org>
+From: Jens Axboe <axboe@kernel.dk>
+Content-Language: en-US
+In-Reply-To: <68c061ad-cbb7-44e8-a905-c13b9ec81c62@kernel.org>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Qi Han <hanqi@vivo.com> f2fs doesn't support uncached
- write yet, for write() w/ IOCB_DONTCACHE flag, let's return -EOPNOTSUPP instead
- of ignoring IOCB_DONTCACHE flag and write w/o uncached IO. Cc: Jens Axboe
- <axboe@kernel.dk> Cc: Qi Han <hanqi@vivo.com> Signed-off-by: Chao Yu
- <chao@kernel.org>
- --- fs/f2fs/file.c | 5 +++++ 1 file changed, 5 insertions(+) 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On 7/30/25 8:35 PM, Chao Yu wrote: > On 7/30/25 23:20, Jens
+ Axboe wrote: >> On 7/28/25 2:28 AM, hanqi wrote: >>> ? 2025/7/28 16:07, Chao
+ Yu ??: >>>> On 7/28/25 16:03, hanqi wrote: >>>>> ? 2025/7/28 15 [...] 
+ Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.170 listed in wl.mailspike.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [172.105.4.254 listed in list.dnswl.org]
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ui288-0004Ke-IR
-Subject: [f2fs-dev] [PATCH] f2fs: fix to return -EOPNOTSUPP for uncached
- write
+X-Headers-End: 1uiEGX-00038z-2W
+Subject: Re: [f2fs-dev] [PATCH] f2fs: f2fs supports uncached buffered I/O
+ read
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,46 +141,82 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Jens Axboe <axboe@kernel.dk>, Qi Han <hanqi@vivo.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Qi Han <hanqi@vivo.com>
+On 7/30/25 8:35 PM, Chao Yu wrote:
+> On 7/30/25 23:20, Jens Axboe wrote:
+>> On 7/28/25 2:28 AM, hanqi wrote:
+>>> ? 2025/7/28 16:07, Chao Yu ??:
+>>>> On 7/28/25 16:03, hanqi wrote:
+>>>>> ? 2025/7/28 15:38, Chao Yu ??:
+>>>>>
+>>>>>> On 7/25/25 15:53, Qi Han wrote:
+>>>>>>> Jens has already completed the development of uncached buffered I/O
+>>>>>>> in git [1], and in f2fs, uncached buffered I/O read can be enabled
+>>>>>>> simply by setting the FOP_DONTCACHE flag in f2fs_file_operations.
+>>>>>> IIUC, we may suffer lock issue when we call pwritev(.. ,RWF_DONTCACHE)?
+>>>>>> as Jen mentioned in below path, right?
+>>>>>>
+>>>>>> soft-irq
+>>>>>> - folio_end_writeback()
+>>>>>>    - filemap_end_dropbehind_write()
+>>>>>>     - filemap_end_dropbehind()
+>>>>>>      - folio_unmap_invalidate()
+>>>>>>       - lock i_lock
+>>>>>>
+>>>>>> Thanks,
+>>>>> That's how I understand it.
+>>>> So I guess we need to wait for the support RWF_DONTCACHE on write path, unless
+>>>> you can walk around for write path in this patch.
+>>>>
+>>>> Thanks,
+>>>
+>>> I think the read and write paths can be submitted separately.
+>>> Currently, uncached buffered I/O write requires setting the
+>>> FGP_DONTCACHE flag when the filesystem allocates a folio. In
+>>> f2fs, this is done in the following path:
+>>>
+>>> - write_begin
+>>>  - f2fs_write_begin
+>>>   - __filemap_get_folio
+>>>   As I understand it, if we don't set the FGP_DONTCACHE flag here, this
+>>> issue shouldn't occur.
+>>
+>> It won't cause an issue, but it also won't work in the sense that the
+>> intent is that if the file system doesn't support DONTCACHE, it would
+>> get errored at submission time. Your approach would just ignore the flag
+>> for writes, rather than return -EOPNOTSUPP as would be expected.
+> 
+> Jens,
+> 
+> Do you mean like what we have done in kiocb_set_rw_flags()?
+> 
+> 	if (flags & RWF_DONTCACHE) {
+> 		/* file system must support it */
+> 		if (!(ki->ki_filp->f_op->fop_flags & FOP_DONTCACHE))
+> 			return -EOPNOTSUPP;
+> ...
+> 	}
+> 
+> IIUC, it's better to have this in original patch, let me know if I'm
+> missing something.
 
-f2fs doesn't support uncached write yet, for write() w/ IOCB_DONTCACHE
-flag, let's return -EOPNOTSUPP instead of ignoring IOCB_DONTCACHE flag
-and write w/o uncached IO.
+Right, that would certainly be required to have it functional on the
+read side but not yet on the write side. Still leaves a weirder gap
+where other file systems (like XFS and ext4) you can rely on if read or
+write support is there, then the other direction is supported too. f2fs
+would be the only one where the read side works, but you get -EOPNOTSUPP
+on the write side.
 
-Cc: Jens Axboe <axboe@kernel.dk>
-Cc: Qi Han <hanqi@vivo.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/file.c | 5 +++++
- 1 file changed, 5 insertions(+)
+Unless there's a rush on the read side for some reason, I think it'd be
+better to have with setting FOP_DONTCACHE until the write side has been
+completed too.
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 9b8d24097b7a..7f09cad6b6d7 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -5185,6 +5185,11 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
- 		goto out;
- 	}
- 
-+	if (iocb->ki_flags & IOCB_DONTCACHE) {
-+		ret = -EOPNOTSUPP;
-+		goto out;
-+	}
-+
- 	if (!f2fs_is_compress_backend_ready(inode)) {
- 		ret = -EOPNOTSUPP;
- 		goto out;
 -- 
-2.49.0
-
+Jens Axboe
 
 
 _______________________________________________
