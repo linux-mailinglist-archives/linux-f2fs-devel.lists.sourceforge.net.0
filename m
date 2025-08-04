@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA59CB1A0A5
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Aug 2025 13:40:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E0BCB1A0A4
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Aug 2025 13:40:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=hhH9KvTOe+FazoMOtgAuPTujnaquOnMGy8jVU15N+bg=; b=KozjHCOma/U3jjus/EeHThH3pI
-	7zTVbJevmP4DbRJrjlLS0Nob7XZSn2ugwbCDtKB5jP1XkMs83LVF3M2/tqv2BiQZbXZajQ8By3MjO
-	8YDKKyt4CtRFXo+w1G3eybTbAZVFl377qSR7V2AqUZMKkFjgANnntH9jP8E1l9g/5PcU=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=9lEsxWftIhUfbBrAIdf3gfA/xQt/bv102AkIcZein+s=; b=JDK0SvqN+yW/atk5IAF+HGR4VT
+	7IwALvhaKPAZv3PuLUeWAbyHPNU8klTgcG2Ovz56RSqgkc1U6i7INduBxJ9/9FC7YiqUw/h02YpAe
+	v38UtEz2FZAH4BNDxca2oVerh0Qh/qKcqjW5t+71SgyOJ2ECOiN3mKoZ20gI2xI8Igdg=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uitYV-0002mn-Ap;
-	Mon, 04 Aug 2025 11:40:39 +0000
+	id 1uitYW-0005Ey-GO;
+	Mon, 04 Aug 2025 11:40:40 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uitYT-0002md-BQ
+ (envelope-from <chao@kernel.org>) id 1uitYV-0005Em-5m
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Aug 2025 11:40:37 +0000
+ Mon, 04 Aug 2025 11:40:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=da08AHNCLrKivYZRIjfYVJCDAYtsRWB+xX38Y4lTL6w=; b=YsJwtt+3T0xhv7cUIHl3GcNaRx
- 8bO+rmRnLSRu3UtgTw3s9IsFLd+p+s7sj02PmDQJy4as3JYY9+XiDm0n/RbYTR3ayHHkjzaHwrTsi
- zXxpGAa7adeGkqoCGTQUJXJbQoL17W0t6m268Kdr5CdEVwiKu+LXzSU+GXk18xsoZcbw=;
+ bh=gzm4AQQ+FoHr1N0/i2gls9tvqoqnFALTGgmvz20xsac=; b=S6rABxVRj+kHkXhtdmq/8RDJdE
+ b+9HhJShD95ZIpHKZOkX4IPhXrYT8E07vNuyt5m4xAxDtWLrtarryV12J6uYoTfrzCUZaxZz73gAw
+ Q92vcZ41P1WbAT1j5JRiT3uKj1DBSbTqSMHB6q9MI3EQH8LiMIer25DRUyRMOCOfdvy8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,34 +40,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=da08AHNCLrKivYZRIjfYVJCDAYtsRWB+xX38Y4lTL6w=; b=am7rZVZ4D44IIV9fPAo4BuM3dq
- iX2J4lS5oTdUf81fs1BzCA+4hGMQobEWN7cxyIa5sjgVrslwASzLnOx5R1Q4PLkyi9x7UhPAJfep5
- iUF7R8Mr4Rkil4gIvgRxzx0gGqLg0r2xUsE4QW/XIwL1Go+UuuUvjrn1isiZsFE/AVC8=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=gzm4AQQ+FoHr1N0/i2gls9tvqoqnFALTGgmvz20xsac=; b=Di+lPZOxaaFAeDxxuf41w7/1LD
+ +X+1fd43GVYCgUaRArAfpRFmZrKMoT+TIvSxrPO7+Ph62Hod9upLEnRTM7DlrUcKcS98oF/m0uBkL
+ 79CX1ucEgqqUTLHc9tB7WMnObS9ACFyv0/lY3nFR7Q3mnpYJRRHZFyX62LhYA8cTiWzQ=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uitYS-0008GY-LY for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Aug 2025 11:40:37 +0000
+ id 1uitYU-0008Gt-M7 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 04 Aug 2025 11:40:39 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4CD9D5C55AB
+ by tor.source.kernel.org (Postfix) with ESMTP id 0B8A260008
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  4 Aug 2025 11:40:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C893C4CEE7;
  Mon,  4 Aug 2025 11:40:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A3CCDC4CEF0;
- Mon,  4 Aug 2025 11:40:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754307626;
- bh=x8xm9Hw27AwXkYqTrX/d1rvqsek/A2T33tvsNfwGJ64=;
+ s=k20201202; t=1754307627;
+ bh=hFks3NyqWVlUlptsrN8TMupvkN80DLByWlaShd7hXuQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=bI3ZE5u600tNyK4GU2VAclveALX/6epNqsQfU38M8iRWA/e/aCiVawuqBjqrXWpHj
- pxoI3pbt65T+KmHX9TuZ/gMHTQsHWYl1GcmkXRa2q1dO8vSEvKdiMwnWs11ooqIxEt
- B45T8T8PZPhUIFQ+vOm7cHPM0Yz1Ax0DXttg359wicBhSJuo+pT47kLuchw6ryIOz0
- Q3NQb8LAnker9Igs5mIl1963KTpr7zWpqcG7+Kv61Q7RDI9AEJ1ocqhXT6/pQEVTRI
- gnPn0wbpieLARdA8PdqizlcLqZbg2t0YecVn0zj5nmbMU1I285quPVVK8Rvxlwz2vs
- nH9C8i1eFVlVg==
+ b=PVIwDQxiRvRlC06gQ9gN3GVsDP/ursYqRo8/3qsgUH1rghI4WiGcCSm7pbpmwv7wW
+ N4aXHnxmkWZKAi/J4saC+d6hHAAv4dE4VJDbvXcYxcCqSNM1p7jEo20OnFjn3aXBwB
+ 9wiEDboKxk1XDDyvtgo51uvbjbq2a1JEF9CYkoaAKvarNIvfPIgA+H0UqH1qSvCXHE
+ ZMlFvX/l/cd+E0KhIUXh+oOkiNmbujPDMgXIPVXyq71Q3xFTBLGm4vsEiGMEghGT+y
+ NSWBZgtOzjvaskTPGGSS74H2LlPWaNy0Aw9QTteCtBxo9SI47OEUMECxyCWuFvbc9p
+ 08o5FxA9d7qkw==
 To: Zorro Lang <zlang@kernel.org>,
 	fstests@vger.kernel.org
-Date: Mon,  4 Aug 2025 19:40:15 +0800
-Message-ID: <20250804114016.2734919-2-chao@kernel.org>
+Date: Mon,  4 Aug 2025 19:40:16 +0800
+Message-ID: <20250804114016.2734919-3-chao@kernel.org>
 X-Mailer: git-send-email 2.50.1.565.gc32cd1483b-goog
 In-Reply-To: <20250804114016.2734919-1-chao@kernel.org>
 References: <20250804114016.2734919-1-chao@kernel.org>
@@ -81,8 +81,8 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview:  As f2fs changes to use new mount APIs,
  let's add a new testcase
- to check mount result for all f2fs supported special mount options and their
- combinations, in order to detect any inconsistency during m [...] 
+ to check mount result for special mount options for zoned device and their
+ combinations, in order to detect any inconsistency during mou [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,8 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uitYS-0008GY-LY
-Subject: [f2fs-dev] [PATCH v3 2/3] f2fs/016: test special mount options
+X-Headers-End: 1uitYU-0008Gt-M7
+Subject: [f2fs-dev] [PATCH v3 3/3] f2fs/017: test mount options for zoned
+ device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,113 +116,91 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 As f2fs changes to use new mount APIs, let's add a new testcase
-to check mount result for all f2fs supported special mount options
+to check mount result for special mount options for zoned device
 and their combinations, in order to detect any inconsistency during
 mount.
 
 Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- tests/f2fs/016     | 50 ++++++++++++++++++++++++++++++++++++++++++++++
- tests/f2fs/016.out | 33 ++++++++++++++++++++++++++++++
- 2 files changed, 83 insertions(+)
- create mode 100755 tests/f2fs/016
- create mode 100644 tests/f2fs/016.out
+ tests/f2fs/017     | 40 ++++++++++++++++++++++++++++++++++++++++
+ tests/f2fs/017.out | 21 +++++++++++++++++++++
+ 2 files changed, 61 insertions(+)
+ create mode 100755 tests/f2fs/017
+ create mode 100644 tests/f2fs/017.out
 
-diff --git a/tests/f2fs/016 b/tests/f2fs/016
+diff --git a/tests/f2fs/017 b/tests/f2fs/017
 new file mode 100755
-index 00000000..800f75fc
+index 00000000..cdf42fc8
 --- /dev/null
-+++ b/tests/f2fs/016
-@@ -0,0 +1,50 @@
++++ b/tests/f2fs/017
+@@ -0,0 +1,40 @@
 +#! /bin/bash
 +# SPDX-License-Identifier: GPL-2.0
 +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
 +#
-+# FS QA Test No. f2fs/016
++# FS QA Test No. f2fs/017
 +#
 +# This testcase tries to check stability of mount result
-+# w/ f2fs special mount options and their combination.
++# w/ mount options for zoned device and their combination.
 +#
 +. ./common/preamble
 +_begin_fstest auto quick mount
-+_require_kernel_config CONFIG_F2FS_FS_COMPRESSION
-+_require_kernel_config CONFIG_F2FS_FS_LZO
-+_require_kernel_config CONFIG_F2FS_FS_LZORLE
-+_require_kernel_config CONFIG_F2FS_FS_LZ4
-+_require_kernel_config CONFIG_F2FS_FS_LZ4HC
-+_require_kernel_config CONFIG_F2FS_FS_ZSTD
++
++_require_zoned_device "$TEST_DEV"
++_test_unmount >> $seqres.full 2>&1
 +
 +options=(
 +#	mount_option			mkfs_option
-+	"inline_xattr_size=400"		"extra_attr,flexible_inline_xattr"\
-+	"compress_algorithm=lzo"	"extra_attr,compression"	\
-+	"compress_algorithm=lz4"	"extra_attr,compression"	\
-+	"compress_algorithm=zstd"	"extra_attr,compression"	\
-+	"compress_algorithm=lzo-rle"	"extra_attr,compression"	\
-+	"compress_algorithm=lz4:3"	"extra_attr,compression"	\
-+	"compress_algorithm=zstd:1"	"extra_attr,compression"	\
-+	"compress_log_size=8"		"extra_attr,compression"	\
-+	"compress_extension=so"		"extra_attr,compression"	\
-+	"nocompress_extension=so"	"extra_attr,compression"	\
-+	"nocompress_extension=*"	"extra_attr,compression"	\
-+	"compress_extension=so,nocompress_extension=so"			\
-+					"extra_attr,compression"	\
-+	"compress_chksum"		"extra_attr,compression"	\
-+	"compress_mode=fs"		"extra_attr,compression"	\
-+	"compress_mode=user"		"extra_attr,compression"	\
-+	"compress_cache"		"extra_attr,compression"	\
++	"background_gc=on"		"blkzone"		\
++	"background_gc=off"		"blkzone"		\
++	"background_gc=sync"		"blkzone"		\
++	"mode=adaptive"			"blkzone"		\
++	"mode=lfs"			"blkzone"		\
++	"mode=fragment:segment"		"blkzone"		\
++	"mode=fragment:block"		"blkzone"		\
++	"discard_unit=block"		"blkzone"		\
++	"discard_unit=segment"		"blkzone"		\
++	"discard_unit=section"		"blkzone"		\
 +)
 +
 +for ((i=0;i<${#options[@]};i=i+2))
 +do
 +	echo "Option#$i: ${options[$i]} : ${options[$((i+1))]}"
-+	_scratch_mkfs "-O ${options[$((i+1))]}" >> $seqres.full || _fail "mkfs failed"
-+	_try_scratch_mount "-o ${options[$i]}" >> $seqres.full 2>&1
++	_test_mkfs "-m" >> $seqres.full || _fail "mkfs failed"
++	_test_mount "-o ${options[$i]}" >> $seqres.full 2>&1
 +	echo $?
-+	_scratch_unmount >> $seqres.full 2>&1
++	_test_unmount >> $seqres.full 2>&1
 +done
 +
 +status=0
 +exit
-diff --git a/tests/f2fs/016.out b/tests/f2fs/016.out
+diff --git a/tests/f2fs/017.out b/tests/f2fs/017.out
 new file mode 100644
-index 00000000..a8c96972
+index 00000000..c260e0b1
 --- /dev/null
-+++ b/tests/f2fs/016.out
-@@ -0,0 +1,33 @@
-+QA output created by 016
-+Option#0: inline_xattr_size=400 : extra_attr,flexible_inline_xattr
++++ b/tests/f2fs/017.out
+@@ -0,0 +1,21 @@
++QA output created by 017
++Option#0: background_gc=on : blkzone
 +0
-+Option#2: compress_algorithm=lzo : extra_attr,compression
-+0
-+Option#4: compress_algorithm=lz4 : extra_attr,compression
-+0
-+Option#6: compress_algorithm=zstd : extra_attr,compression
-+0
-+Option#8: compress_algorithm=lzo-rle : extra_attr,compression
-+0
-+Option#10: compress_algorithm=lz4:3 : extra_attr,compression
-+0
-+Option#12: compress_algorithm=zstd:1 : extra_attr,compression
-+0
-+Option#14: compress_log_size=8 : extra_attr,compression
-+0
-+Option#16: compress_extension=so : extra_attr,compression
-+0
-+Option#18: nocompress_extension=so : extra_attr,compression
-+0
-+Option#20: nocompress_extension=* : extra_attr,compression
++Option#2: background_gc=off : blkzone
 +32
-+Option#22: compress_extension=so,nocompress_extension=so : extra_attr,compression
++Option#4: background_gc=sync : blkzone
++0
++Option#6: mode=adaptive : blkzone
 +32
-+Option#24: compress_chksum : extra_attr,compression
++Option#8: mode=lfs : blkzone
 +0
-+Option#26: compress_mode=fs : extra_attr,compression
++Option#10: mode=fragment:segment : blkzone
++32
++Option#12: mode=fragment:block : blkzone
++32
++Option#14: discard_unit=block : blkzone
 +0
-+Option#28: compress_mode=user : extra_attr,compression
++Option#16: discard_unit=segment : blkzone
 +0
-+Option#30: compress_cache : extra_attr,compression
++Option#18: discard_unit=section : blkzone
 +0
 -- 
 2.49.0
