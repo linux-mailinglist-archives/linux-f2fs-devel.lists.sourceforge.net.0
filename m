@@ -2,122 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13424B19B97
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Aug 2025 08:29:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 92EA0B19B9F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Aug 2025 08:32:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Message-ID:References:Mime-Version:
-	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=VU/XIg2RLRbBasfc2Zng3jdH7VZMxkbl47tvL5uOo1I=; b=a/A9lOeL9UZQZjKjV2cX0N9iOy
-	IgMeZaq6zgGJJDdx3dElG3lQjxFH8VCyrnJ7Yih1abjOJ8RnMI2oH9Wrg9+5lREUD9Mu5IPUzUOtM
-	E56+R2paov78djoDII1uwF6uhzhOiMNtQSWZF7wOYWbyT95vyf8ZSjVxrNifj7zFq6l8=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=Hu42lSKrJI15CsnblnsVKBQ2UtTdKBp3Evyj7wahsEA=; b=HesYIkVVf5/XHry1gKIu4w3kzI
+	n+A5dpl/oZHywnVSYQK7tkNGEg8XkOwzE+QDtF1/GmPQPDzHesMJGfN6kOLsPYJg2qgVytbJQFiE2
+	wUBre9deD5vnECFD47cKb44wrvXULt3jz7nRHLpNR1ze/CLF8r5tm/5IB7gPA8VNZs4M=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uiohN-0003R8-TU;
-	Mon, 04 Aug 2025 06:29:29 +0000
+	id 1uiok5-0004zL-Sx;
+	Mon, 04 Aug 2025 06:32:18 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3OE2QaAcKAF89ERIIBBDLLDIB.9LJ@flex--chullee.bounces.google.com>)
- id 1uioh6-0003Qn-Da for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Aug 2025 06:29:12 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <chao@kernel.org>) id 1uiok4-0004z3-4m
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 04 Aug 2025 06:32:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
- References:Mime-Version:In-Reply-To:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kAR2Eoyeq+sNiEt+R/9Asn6gXMfLUzb3w+CS82HR2yQ=; b=ge5Qyq6nQRd+IJJrV/pq9sCF2I
- Unx9VteTdzfgSUPQqyVpAHmuiVG/n9bRm1acLg64decSGab4e39fjpWnL4STKVP8/B3oiUC5EXJgY
- 4NEUgqhc0b8/G0BEnFLmMnDuG9XCYVrFAViGJDFGr0s94V6tyyiJCtH230uCgPHmucSw=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=tV8mvnRoFdzg9WfCRGxrtAtmEkb9OD8jt+HlRZO4KVQ=; b=QUyzMhCo5gwsPhpoz4GKutU6uo
+ l2Cfro2I6la+JEV+3tsbunAF1LO0t2zB/X48sgZ1Qcudu2GNZPjnRn1Wpp5IISDJ6OpE2DpFFXZIY
+ kUwRqFdElwvWdX+pi9w4xl4/cMjY0mdEnjTBlZJ9zkuwxp1nEbwm9nTwRxY/AtekVyo0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:
- In-Reply-To:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kAR2Eoyeq+sNiEt+R/9Asn6gXMfLUzb3w+CS82HR2yQ=; b=SZfMgQ3u+0n4S6bTHhM7BgK+G5
- ABwZ2dy4MJWg6yElFGYQM1m4CrjhFAD+nzxS9IMwMYCfP/68QDi9Y04IaPzUu/tsc3DES9ogmITjb
- DT3DMZKCJ9T6wz5RvEDoQdBVNuXGPJC23fKYrp+xo0BNz78uc34/ZbIq6tJGJ/TsyK74=;
-Received: from mail-io1-f73.google.com ([209.85.166.73])
+ bh=tV8mvnRoFdzg9WfCRGxrtAtmEkb9OD8jt+HlRZO4KVQ=; b=CbqreLwivFiHeSZdcs/YLbfWmY
+ 20P1ydTmS37m6NTCF6YO3CxHO2UNgV0EnxB0TvJ1qdNv1uOMJCfH8jOXpLJwv85qv4PeR9bbZ22du
+ TRyHt4aNzkoOPeAvbfoByIczg5pBsddEk6WFPmIG/WECTRCBTBQMR9oIxf8GovxTCCdo=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uioh6-0000bj-0l for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Aug 2025 06:29:12 +0000
-Received: by mail-io1-f73.google.com with SMTP id
- ca18e2360f4ac-8649be94fa1so677342239f.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 03 Aug 2025 23:29:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1754288941; x=1754893741;
- darn=lists.sourceforge.net; 
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=kAR2Eoyeq+sNiEt+R/9Asn6gXMfLUzb3w+CS82HR2yQ=;
- b=tMA3C8bIF2nGB0Wqg+JaFX02XkLBvCT23B6a58y7X0X3GP+iAGk+AirJKeK0Z5NJRr
- bl5o807sbyA7+9UDFfQa3flExIIen2K0FxVp82PGpPGdDDHmbFD3rvLC5ldWQIq8rOUw
- ePc8gANAPfeEdfQSVs7xn9iUNmyKCmWAHW6fgV4p1XcMhqAzaZkyOQw/WtxRzcdWczXH
- z355FtOZwskZ5k/+t9ECQMuXIZ076dHmT/PvmyaRZezq/W6oPX1+70WRDFkF912hG+4e
- +SRY4tNc7iSjlnm12oapYfywooL+qWXyVkmcTZ2qM9yUhQIXW87GAyhvAd80BROJR5+L
- VyTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754288941; x=1754893741;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kAR2Eoyeq+sNiEt+R/9Asn6gXMfLUzb3w+CS82HR2yQ=;
- b=VlXFfKIC+lr0Mnc9fPQ41QI5/nxYNDEaCULS5sy1YwWY/sgGr903IDwzHaKU8hFpHV
- MPF+QnQh6Z5WtPoYevBbMlrUbpCfipF7jyu+p+juUHTtT9DTc9+4qKmDIdq9dnlP05Fp
- olyJ/K2ZSHmiVBJgQDj4wDQOR3DZ/uwDfmy4QIVwPLa5ziAOqdhOn1Zztwbbl+ituSWd
- jKNvTUhqPzGg1MMeabg3CvLYZ9yHcrunQVriLPfqyOx+3jJseYC2+BY7ywMEa/TrTMEj
- pANPEnKrUQG7yjh4L98IC4gajO08bvXr3cf6wGUkelyPYoHoYjFz+bLQVVDtHS9AC2ZJ
- X4Rw==
-X-Gm-Message-State: AOJu0YxpY1sAX+fs8TMeOz/yYuTSAOJmtyBjYyQT3fwi7l2EBry1d2uT
- KDutsjRV0XZtBA9dinMj+9yE72mSTZ9GjyagTmFobKpEoQnK0VX7NUbEVfk4NtEBbsWev2pczqm
- KNo/jaKDcaQ==
-X-Google-Smtp-Source: AGHT+IHaVYUjM46yLlegvpYFMhTlII2JZiMeD++blc9CSojygb7SUXbrQ7bZ57kYXtttV4dViYL7CrPDbXP2
-X-Received: from pfaw3.prod.google.com ([2002:a05:6a00:ab83:b0:746:2897:67e3])
- (user=chullee job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6a20:3d08:b0:23d:7b87:2c88
- with SMTP id adf61e73a8af0-23df8f6d4c8mr11124851637.9.1754287416301; Sun, 03
- Aug 2025 23:03:36 -0700 (PDT)
-Date: Sun,  3 Aug 2025 23:03:27 -0700
-In-Reply-To: <20250804060327.512247-1-chullee@google.com>
-Mime-Version: 1.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uiok4-0000vC-9R for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 04 Aug 2025 06:32:16 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id E840F445D0;
+ Mon,  4 Aug 2025 06:32:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C8AAC4CEE7;
+ Mon,  4 Aug 2025 06:32:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1754289125;
+ bh=j5kuF3O1uzJVXoLJgeS/lJyE6669v13Dm14D4a9vk0c=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=GivFIbK9Gv22nX3PqE8PSrPdNJjfS9tnagsTWgYu2u7vJ38mZGnpMxHXOpzGMaUov
+ XLlfdVGsrWspfrSQbh5fCLD35UoTlgCurkJxahsuk0AldXE7r6vD92w1TvWAtl/n+g
+ krJ0Q3FfRK5s77Mo14bFvYESHCuKNHON/7gDar90W8cf5RoomsCFdyTld7SlRH+7QZ
+ V+z0tqI2+WU5FVuK66RFS7Jj/8LwS4RJItWXA5uj/6+Gbenfrl/O1A9Zx9jbnSwlP5
+ /LqtvKF89chfLSmjoK1B5+5eOUFH3XKPG0RJzTTZwdzmd7ZG5dQDCtiIs1HlaXDYVn
+ B26CDbwMMffaA==
+Message-ID: <c1472e21-64b1-468e-a98c-ed8e0a5ae8b5@kernel.org>
+Date: Mon, 4 Aug 2025 14:32:02 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Daniel Lee <chullee@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20250804060327.512247-1-chullee@google.com>
-X-Mailer: git-send-email 2.50.1.565.gc32cd1483b-goog
-Message-ID: <20250804060327.512247-2-chullee@google.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
-X-Spam-Score: -7.6 (-------)
+Content-Language: en-US
+In-Reply-To: <20250804060327.512247-1-chullee@google.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This commit introduces a new read-only sysfs entry at
- /sys/fs/f2fs/<device>/effective_lookup_mode.
- This entry displays the actual directory lookup mode F2FS is currently using.
- This is needed for debugging and verification, as the behavior is determined
- by both on-disk flags and mount options. 
- Content analysis details:   (-7.6 points, 5.0 required)
+ Content preview:  Daniel, On 8/4/25 14:03, Daniel Lee wrote: > For casefolded
+ directories, f2fs may fall back to a linear search if > a hash-based lookup
+ fails. This can cause severe performance > regressions. > > While this b
+ [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -7.5 USER_IN_DEF_DKIM_WL From: address is in the default DKIM welcome-list
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.73 listed in wl.mailspike.net]
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1uioh6-0000bj-0l
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: add sysfs entry for effective lookup
- mode
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uiok4-0000vC-9R
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: add lookup_mode mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -129,94 +105,240 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Daniel Lee via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Daniel Lee <chullee@google.com>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This commit introduces a new read-only sysfs entry at
-/sys/fs/f2fs/<device>/effective_lookup_mode.
+Daniel,
 
-This entry displays the actual directory lookup mode F2FS is
-currently using. This is needed for debugging and verification,
-as the behavior is determined by both on-disk flags and mount
-options.
+On 8/4/25 14:03, Daniel Lee wrote:
+> For casefolded directories, f2fs may fall back to a linear search if
+> a hash-based lookup fails. This can cause severe performance
+> regressions.
+> 
+> While this behavior can be controlled by userspace tools (e.g. mkfs,
+> fsck) by setting an on-disk flag, a kernel-level solution is needed
+> to guarantee the lookup behavior regardless of the on-disk state.
+> 
+> This commit introduces the 'lookup_mode' mount option to provide this
+> kernel-side control.
+> 
+> The option accepts three values:
+> - perf: (Default) Enforces a hash-only lookup. The linear fallback
+>   is always disabled.
+> - compat: Enables the linear search fallback for compatibility with
+>   directory entries from older kernels.
+> - auto: Determines the mode based on the on-disk flag, preserving the
+>   userspace-based behavior.
+> 
+> Signed-off-by: Daniel Lee <chullee@google.com>
+> ---
+>  Documentation/filesystems/f2fs.rst | 19 ++++++++++++++
+>  fs/f2fs/dir.c                      | 17 ++++++++++++-
+>  fs/f2fs/f2fs.h                     | 41 ++++++++++++++++++++++++++++++
+>  fs/f2fs/super.c                    | 20 +++++++++++++++
+>  4 files changed, 96 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> index 440e4ae74e44..01c657ff7ae2 100644
+> --- a/Documentation/filesystems/f2fs.rst
+> +++ b/Documentation/filesystems/f2fs.rst
+> @@ -370,6 +370,25 @@ errors=%s		 Specify f2fs behavior on critical errors. This supports modes:
+>  			 ====================== =============== =============== ========
+>  nat_bits		 Enable nat_bits feature to enhance full/empty nat blocks access,
+>  			 by default it's disabled.
+> +lookup_mode=%s		 Control the directory lookup behavior for casefolded
+> +			 directories. This option has no effect on directories
+> +			 that do not have the casefold feature enabled.
+> +
+> +			 ================== ========================================
+> +			 Value		    Description
+> +			 ================== ========================================
+> +			 perf		    (Default) Enforces a hash-only lookup.
+> +					    The linear search fallback is always
+> +					    disabled, ignoring the on-disk flag.
+> +			 compat		    Enables the linear search fallback for
+> +					    compatibility with directory entries
+> +					    created by older kernel that used a
+> +					    different case-folding algorithm.
+> +					    This mode ignores the on-disk flag.
+> +			 auto		    F2FS determines the mode based on the
+> +					    on-disk `SB_ENC_NO_COMPAT_FALLBACK_FL`
+> +					    flag.
+> +			 ================== ========================================
+>  ======================== ============================================================
+>  
+>  Debugfs Entries
+> diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+> index c36b3b22bfff..ba032d21a997 100644
+> --- a/fs/f2fs/dir.c
+> +++ b/fs/f2fs/dir.c
+> @@ -16,6 +16,21 @@
+>  #include "xattr.h"
+>  #include <trace/events/f2fs.h>
+>  
+> +static inline bool f2fs_should_fallback_to_linear(struct inode *dir)
+> +{
+> +	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
+> +
+> +	switch (f2fs_get_lookup_mode(sbi)) {
+> +	case LOOKUP_PERF:
+> +		return false;
+> +	case LOOKUP_COMPAT:
+> +		return true;
+> +	case LOOKUP_AUTO:
+> +		return !sb_no_casefold_compat_fallback(sbi->sb);
+> +	}
+> +	return false;
+> +}
+> +
+>  #if IS_ENABLED(CONFIG_UNICODE)
+>  extern struct kmem_cache *f2fs_cf_name_slab;
+>  #endif
+> @@ -366,7 +381,7 @@ struct f2fs_dir_entry *__f2fs_find_entry(struct inode *dir,
+>  
+>  out:
+>  #if IS_ENABLED(CONFIG_UNICODE)
+> -	if (!sb_no_casefold_compat_fallback(dir->i_sb) &&
+> +	if (f2fs_should_fallback_to_linear(dir) &&
+>  		IS_CASEFOLDED(dir) && !de && use_hash) {
+>  		use_hash = false;
+>  		goto start_find_entry;
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 9333a22b9a01..fed588f4fa3d 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -132,6 +132,12 @@ extern const char *f2fs_fault_name[FAULT_MAX];
+>   */
+>  #define F2FS_MOUNT_LAZYTIME		0x40000000
+>  
+> +enum f2fs_lookup_mode {
+> +	LOOKUP_PERF,
+> +	LOOKUP_COMPAT,
+> +	LOOKUP_AUTO,
+> +};
 
-Signed-off-by: Daniel Lee <chullee@google.com>
----
- Documentation/ABI/testing/sysfs-fs-f2fs | 14 ++++++++++++++
- fs/f2fs/sysfs.c                         | 18 ++++++++++++++++++
- 2 files changed, 32 insertions(+)
+We're going to use new mount API, please check last code in dev-test branch,
+and it's better to adapt code based on that.
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index bf03263b9f46..e847a50e7403 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -861,3 +861,17 @@ Description:	This is a read-only entry to show the value of sb.s_encoding_flags,
- 		SB_ENC_STRICT_MODE_FL            0x00000001
- 		SB_ENC_NO_COMPAT_FALLBACK_FL     0x00000002
- 		============================     ==========
-+
-+What:		/sys/fs/f2fs/<disk>/effective_lookup_mode
-+Date:		August 2025
-+Contact:	"Daniel Lee" <chullee@google.com>
-+Description:
-+		This is a read-only entry to show the effective directory lookup mode
-+		F2FS is currently using for casefolded directories.
-+		This considers both the "lookup_mode" mount option and the on-disk
-+		encoding flag, SB_ENC_NO_COMPAT_FALLBACK_FL.
-+
-+		Possible values are:
-+		- "perf": Hash-only lookup.
-+		- "compat": Hash-based lookup with a linear search fallback enabled
-+		  for casefolded directories.
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 75134d69a0bd..9897dd8564e0 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -281,6 +281,22 @@ static ssize_t encoding_flags_show(struct f2fs_attr *a,
- 		le16_to_cpu(F2FS_RAW_SUPER(sbi)->s_encoding_flags));
- }
- 
-+static ssize_t effective_lookup_mode_show(struct f2fs_attr *a,
-+		struct f2fs_sb_info *sbi, char *buf)
-+{
-+	switch (f2fs_get_lookup_mode(sbi)) {
-+	case LOOKUP_PERF:
-+		return sysfs_emit(buf, "perf\n");
-+	case LOOKUP_COMPAT:
-+		return sysfs_emit(buf, "compat\n");
-+	case LOOKUP_AUTO:
-+		if (sb_no_casefold_compat_fallback(sbi->sb))
-+			return sysfs_emit(buf, "perf\n");
-+		return sysfs_emit(buf, "compat\n");
-+	}
-+	return 0;
-+}
-+
- static ssize_t mounted_time_sec_show(struct f2fs_attr *a,
- 		struct f2fs_sb_info *sbi, char *buf)
- {
-@@ -1166,6 +1182,7 @@ F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
- F2FS_GENERAL_RO_ATTR(unusable);
- F2FS_GENERAL_RO_ATTR(encoding);
- F2FS_GENERAL_RO_ATTR(encoding_flags);
-+F2FS_GENERAL_RO_ATTR(effective_lookup_mode);
- F2FS_GENERAL_RO_ATTR(mounted_time_sec);
- F2FS_GENERAL_RO_ATTR(main_blkaddr);
- F2FS_GENERAL_RO_ATTR(pending_discard);
-@@ -1282,6 +1299,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(current_reserved_blocks),
- 	ATTR_LIST(encoding),
- 	ATTR_LIST(encoding_flags),
-+	ATTR_LIST(effective_lookup_mode),
- 	ATTR_LIST(mounted_time_sec),
- #ifdef CONFIG_F2FS_STAT_FS
- 	ATTR_LIST(cp_foreground_calls),
--- 
-2.50.1.565.gc32cd1483b-goog
+> +
+>  #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
+>  #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
+>  #define set_opt(sbi, option)	(F2FS_OPTION(sbi).opt |= F2FS_MOUNT_##option)
+> @@ -1355,6 +1361,8 @@ enum {
+>  	SBI_IS_RESIZEFS,			/* resizefs is in process */
+>  	SBI_IS_FREEZING,			/* freezefs is in process */
+>  	SBI_IS_WRITABLE,			/* remove ro mountoption transiently */
+> +	SBI_LOOKUP_COMPAT,			/* enable compat/auto lookup modes */
+> +	SBI_LOOKUP_AUTO,			/* enable auto lookup mode */
+
+Could you please add lookup_mode field in struct f2fs_mount_info to record lookup_mode
+status like we did for other mount options? IIRC, in f2fs_remount(), we will record
+all old mount options in sbi.mount_opt for later recovery if necessary.
+
+>  	MAX_SBI_FLAG,
+>  };
+>  
+> @@ -4897,6 +4905,39 @@ static inline void f2fs_invalidate_internal_cache(struct f2fs_sb_info *sbi,
+>  	f2fs_invalidate_compress_pages_range(sbi, blkaddr, len);
+>  }
+>  
+> +/*
+> + * The lookup mode is stored in two bits within sbi->s_flag:
+> + *
+> + * SBI_LOOKUP_COMPAT | SBI_LOOKUP_AUTO | Mode
+> + * ------------------|-----------------|--------
+> + *          0        |         0       | perf
+> + *          1        |         0       | compat
+> + *          1        |         1       | auto
+> + *
+> + */
+> +static inline enum f2fs_lookup_mode f2fs_get_lookup_mode(struct f2fs_sb_info *sbi)
+> +{
+> +	if (!is_sbi_flag_set(sbi, SBI_LOOKUP_COMPAT))
+> +		return LOOKUP_PERF;
+> +	if (is_sbi_flag_set(sbi, SBI_LOOKUP_AUTO))
+> +		return LOOKUP_AUTO;
+> +	return LOOKUP_COMPAT;
+> +}
+> +
+> +static inline void f2fs_set_lookup_mode(struct f2fs_sb_info *sbi,
+> +						enum f2fs_lookup_mode mode)
+> +{
+> +	clear_sbi_flag(sbi, SBI_LOOKUP_COMPAT);
+> +	clear_sbi_flag(sbi, SBI_LOOKUP_AUTO);
+> +
+> +	if (mode == LOOKUP_COMPAT)
+> +		set_sbi_flag(sbi, SBI_LOOKUP_COMPAT);
+> +	else if (mode == LOOKUP_AUTO) {
+> +		set_sbi_flag(sbi, SBI_LOOKUP_COMPAT);
+> +		set_sbi_flag(sbi, SBI_LOOKUP_AUTO);
+> +	}
+> +}
+> +
+>  #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
+>  #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
+>  
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index bbf1dad6843f..09cdd4c22e58 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -196,6 +196,7 @@ enum {
+>  	Opt_age_extent_cache,
+>  	Opt_errors,
+>  	Opt_nat_bits,
+> +	Opt_lookup_mode,
+>  	Opt_err,
+>  };
+>  
+> @@ -276,6 +277,7 @@ static match_table_t f2fs_tokens = {
+>  	{Opt_age_extent_cache, "age_extent_cache"},
+>  	{Opt_errors, "errors=%s"},
+>  	{Opt_nat_bits, "nat_bits"},
+> +	{Opt_lookup_mode, "lookup_mode=%s"},
+>  	{Opt_err, NULL},
+>  };
+>  
+> @@ -1317,6 +1319,22 @@ static int parse_options(struct f2fs_sb_info *sbi, char *options, bool is_remoun
+>  		case Opt_nat_bits:
+>  			set_opt(sbi, NAT_BITS);
+>  			break;
+> +		case Opt_lookup_mode:
+> +			name = match_strdup(&args[0]);
+> +			if (!name)
+> +				return -ENOMEM;
+> +			if (!strcmp(name, "perf")) {
+> +				f2fs_set_lookup_mode(sbi, LOOKUP_PERF);
+> +			} else if (!strcmp(name, "compat")) {
+> +				f2fs_set_lookup_mode(sbi, LOOKUP_COMPAT);
+> +			} else if (!strcmp(name, "auto")) {
+> +				f2fs_set_lookup_mode(sbi, LOOKUP_AUTO);
+> +			} else {
+> +				kfree(name);
+> +				return -EINVAL;
+> +			}
+> +			kfree(name);
+> +			break;
+>  		default:
+>  			f2fs_err(sbi, "Unrecognized mount option \"%s\" or missing value",
+>  				 p);
+> @@ -2220,6 +2238,8 @@ static void default_options(struct f2fs_sb_info *sbi, bool remount)
+>  #endif
+>  
+>  	f2fs_build_fault_attr(sbi, 0, 0, FAULT_ALL);
+> +
+> +	f2fs_set_lookup_mode(sbi, LOOKUP_PERF);
+
+I guess we need to change f2fs_show_options() as well, right?
+
+Thanks,
+
+>  }
+>  
+>  #ifdef CONFIG_QUOTA
 
 
 
