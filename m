@@ -2,131 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97DCDB1C5E7
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 Aug 2025 14:33:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C857B1D06D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Aug 2025 03:49:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=ScvmmaaqabwPuapci2A48TVJW7jjnOzedSX1uQnCAss=; b=IMRo8HDYRKrrZP+5A+TbpffODA
-	+7sBD4XZ93X3xEtOwe6D/MhTeR71CtBJkJvlebGRaaGAiRrGu6ktHt4TTUwv7NlgXqYE/0hFA2pS+
-	gQpmhDX9+OxuabPRmzSrG6XA8fcA0+2v2FiNY+oVyOrGuRuJ8MCzFrM+vJbjPErtjtuM=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=4lIZNh5DlsGazeVuVCoX4p2kJo9D4T9PUI2byTjkQEc=; b=VnNUR2TYk88NdGTwh0prtGeZqg
+	VY/31mbCND6m9n07kWbBWfH1iX9CTDbfPLOMGh7qadkdgX0+slEQVYVYBJO0yRdB0XPCEFFkjyP7R
+	68pc6jff87tPiTbeMAJWitqFdUw/6u9JdImJOb8XT8KVozG1e/BTyosJxhaRs5FfhiZA=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ujdKP-0005PZ-4d;
-	Wed, 06 Aug 2025 12:33:09 +0000
+	id 1ujpkb-00042a-H9;
+	Thu, 07 Aug 2025 01:49:01 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <masonzhang.linuxer@gmail.com>) id 1ujdKJ-0005P2-Hv
+ (envelope-from <chao@kernel.org>) id 1ujpka-00042T-7Y
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 06 Aug 2025 12:33:04 +0000
+ Thu, 07 Aug 2025 01:49:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CHIu6G28Pk4SOSDxdrkK1OQmPtaJttmCNLhq9tiQ5Do=; b=mxDNyQGV0EC8Qa/zaq9DhGBADz
- l3dPeEAd/QIDo3G/icP2nUsG0W7UKOcgzuw3EL+82rjunuRVheLoVVKX3SWmG/v6DlyjBs4DqhKcO
- ngMKAh8WV/JwlxA2WbAjgJfASGiWAY/5ffB/qEVNkjFskl4zkbAjmhhMSj0pT3lgYid0=;
+ bh=O3vClsNkzFb5Phs2+gg9x/GGIlRep9a/PQ6Rm4TXFg4=; b=VHZC1hYI/2E9CHAHEJcPAXIj4q
+ znvfMLhb15FOlEQhjXRfWo/dUc3adnFq2tr55UzTTDM+x74t1s/QgmfKHQ3ed8wK/BKlGUXIrv3Qu
+ 2TQ93UxEUoThFkaDWq148z2xRl6XOQboUsN41B98DOWIx1c1MDBkRYiy16ACD0ZCKFu8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=CHIu6G28Pk4SOSDxdrkK1OQmPtaJttmCNLhq9tiQ5Do=; b=c
- WffRrVmAElLJEZQ3HytryP64s2ka58RAffTnUqNR330+Lj0Pd2pnm/XfD/zWXkdb4TKikOBUjQ++A
- tkgZIwqhWGcvYEVecKOXCwQq6g1ZwWU1Iw8di130DalU5Y+BmNkez1vNtdAir/AVZVZhoI22+tNSt
- 4zU5V5Gv0zPUjfhY=;
-Received: from mail-pf1-f171.google.com ([209.85.210.171])
+ List-Owner:List-Archive; bh=O3vClsNkzFb5Phs2+gg9x/GGIlRep9a/PQ6Rm4TXFg4=; b=K
+ PqAjxe861f58rYyhOhencM9a+4XxQBPAS5MJcWdfJ2tsa+kYiQdfesK2pImjdd+1xlsof6a8E4FEd
+ tX2xwti1jBlMmrPZu2ntwF4rLrqyGPjLm2PSvtk6XgQXYs0cBAF2VUZqpYUEnNJx0Dta/DC+FKjQf
+ VGvoxuZCcPXn7ksI=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ujdKK-0004HQ-1S for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 06 Aug 2025 12:33:04 +0000
-Received: by mail-pf1-f171.google.com with SMTP id
- d2e1a72fcca58-76bed310fa1so3388965b3a.2
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1ujpkZ-0006Z1-TN for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 07 Aug 2025 01:49:00 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 997CF45C51
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 06 Aug 2025 05:33:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754483573; x=1755088373; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CHIu6G28Pk4SOSDxdrkK1OQmPtaJttmCNLhq9tiQ5Do=;
- b=iF+AUbaKmYM4fpI9BszZ8Y1KW+vlR9bbGyijr+C+qI00A3PJonAO1SsLgQhuFAIpWy
- q/SytynaNI9RX5eW6Pwyy8U2Bdtm8PHpqcWUPyLlv+DFpoK2GpB/CKlwgFnmKVIrzzJs
- ARuuQM5KrZsSpn9L9dMOItItHytbpptOaZSa+i3WVGKvvKKNSqxmIPDb7wHZf2cXLYfn
- 1XMEwhVngZSoWm/inxyI2Y04NgL0buN9uZtySCbAMxwSUidIMm8+Uoxz/C/pf5u8ehdE
- wLuMuRDlWJ5xtH4KgaIdMSalDSmSSF0GsIo8N0H91/blkljeRo1bV4OGiKFSYdmUkJBw
- EUEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754483573; x=1755088373;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CHIu6G28Pk4SOSDxdrkK1OQmPtaJttmCNLhq9tiQ5Do=;
- b=XYd9WKdtg5F3Kh1VDvI2dlImBpuy3b+aZTSnby75Cod/TC9pvtuAv5/iu3TESk8B7v
- EkS0wtCd2sRzA/VHQwqMgsDR1ghkYTSpGsxSRdLOgh1joodSxZHATlERZhRzrMg8zpTa
- l4o/IIJ8EaU4VMaDqoCCWf+6p2IOeiHHbS6LocKCEeehN5yCWg5BXOOpyi46FAfG4dJe
- rQvuyvP5bdgVOLidcXUGuJkjX4mecTnQWg1tN5U9HgrzEupmoTnmr+WyRcLxFCL5XqEi
- E5qSZc8TIa3HO3rNS9mR0zWYd+gFTSeRxKIQKnVdYZcgiZD2HtPex3cacE83Jajny1CY
- 0j3Q==
-X-Gm-Message-State: AOJu0YxhRu/1TrDpJEReXeJ//+7UFbT0bPt2q6dFHy9PRtXGFpNRXshX
- YJuKlJp5yxC5qP7v5XbCFvPgF0acVqeqVVGPIeBrMeaXbsmWUdGrQUM9HKN2g8Zmwl0=
-X-Gm-Gg: ASbGncsUpErMZR6dUlaAFR0JAo2YC5veTPeYyDv3l8ny85q/NUK/bAV/lzajncB+uW5
- TsblvVJP+B3F1Te1atCttOzBbeEi5GKd1ebDQXU3zul5ofR5aw6WPuh+RQrAL86Menl69CBHILP
- 4MmLSzEzfFLwIPLKEqKYhFMqlCC7pNXhwzg2jBM/Vm6INRQSf0dmvNDvQ1BIPSPEJHd/L0S++2F
- dYUIDshpr9zgTEgCN06G+9u5qdfOllMBUtY3T6kEjGn+m3biHmhnwnxNchQP3R5h98qTvShXKAD
- tROb2Uv0EPhDNgR6oP7YFKSDRQjniDaiotzhHESk3a6990qnz8dnNRCMvwzbUYqo7tJkQhJdIuG
- BZW3cwCY0stgF61R7QPDvLlbzDWG3JXU=
-X-Google-Smtp-Source: AGHT+IEuyhH9Ap2y5cyWh/2VBI+sP2iOnNJmD/qT0hpDjCW5rg7drATMI2KtDBa5ttCnjW1bOkPpfA==
-X-Received: by 2002:a05:6a20:9392:b0:240:203d:42a with SMTP id
- adf61e73a8af0-240330c2bafmr3531003637.21.1754483573210; 
- Wed, 06 Aug 2025 05:32:53 -0700 (PDT)
-Received: from localhost ([61.152.201.176])
- by smtp.gmail.com with UTF8SMTPSA id
- 41be03b00d2f7-b422bb1133fsm13619878a12.56.2025.08.06.05.32.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Aug 2025 05:32:52 -0700 (PDT)
-From: "mason.zhang" <masonzhang.linuxer@gmail.com>
-To: chao@kernel.org
-Date: Wed,  6 Aug 2025 20:32:36 +0800
-Message-ID: <20250806123236.4389-1-masonzhang.linuxer@gmail.com>
-X-Mailer: git-send-email 2.48.1
+ Thu,  7 Aug 2025 01:48:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64CDAC4CEEB;
+ Thu,  7 Aug 2025 01:48:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1754531334;
+ bh=NwGyzV0uPsVPS98dCHheGmGxPIh3v1lpFVzgj9NHjQ8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=pwG8Fu7t+iYodC1k+T7Mxon11m2dralbZeg5KG5rJC0mDdnhhpBFFUs01nkvkNEQQ
+ oTKMHT9P121wlRScZ/4mudXUWrDU3hDQIjFUzxrzeNGSETz1Qx29M32asSHLUfgTTz
+ FM1dpN7w+jMo0fZ1CI0rMDTpVIdVtLW3Ma0k0QLeYcvSbSStjzSxZQozgRfqdAuvbk
+ 9t3+AGpD2a9z0xgBvFH/Ruys6lKUwBCymhDo52gSOnNID1Nbzywi9W+vJZZAW908LZ
+ Vrcgj7dVWMxrDIyS+EcKYzKmJpQczqSZ8wxOV9GFKaB+jesjO7Yj/cL0ViEwCvEUEd
+ NT7XtWXh/TTyg==
+To: jaegeuk@kernel.org
+Date: Thu,  7 Aug 2025 09:48:35 +0800
+Message-ID: <20250807014836.3780988-1-chao@kernel.org>
+X-Mailer: git-send-email 2.50.1.565.gc32cd1483b-goog
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This fix combines the space check for data_blocks and
- dent_blocks
- when verifying HOT_DATA segment capacity, preventing potential insufficient
- space issues during checkpoint. Fixes: bf34c93d2645 ("f2fs: check curseg
- space before foreground GC") Signed-off-by: mason.zhang --- fs/f2fs/segment.h
- | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) 
+ Content preview: mount -t f2fs -o checkpoint=disable:10% /dev/vdb /mnt/f2fs/
+ mount -t f2fs -o remount,checkpoint=enable /dev/vdb /mnt/f2fs/ kernel log:
+ F2FS-fs (vdb): Adjust unusable cap for checkpoint=disable = 204440 / 10% 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [masonzhang.linuxer(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.210.171 listed in wl.mailspike.net]
-X-Headers-End: 1ujdKK-0004HQ-1S
-Subject: [f2fs-dev] [PATCH v3] f2fs: fix CURSEG_HOT_DATA left space check
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ujpkZ-0006Z1-TN
+Subject: [f2fs-dev] [PATCH] f2fs: fix to clear unusable_cap for
+ checkpoint=enable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -138,36 +104,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This fix combines the space check for data_blocks and dent_blocks when
-verifying HOT_DATA segment capacity, preventing potential insufficient
-space issues during checkpoint.
+mount -t f2fs -o checkpoint=disable:10% /dev/vdb /mnt/f2fs/
+mount -t f2fs -o remount,checkpoint=enable /dev/vdb /mnt/f2fs/
 
-Fixes: bf34c93d2645 ("f2fs: check curseg space before foreground GC")
-Signed-off-by: mason.zhang <masonzhang.linuxer@gmail.com>
+kernel log:
+F2FS-fs (vdb): Adjust unusable cap for checkpoint=disable = 204440 / 10%
+
+If we has assigned checkpoint=enable mount option, unusable_cap{,_perc}
+parameters of checkpoint=disable should be reset, then calculation and
+log print could be avoid in adjust_unusable_cap_perc().
+
+Fixes: 1ae18f71cb52 ("f2fs: fix checkpoint=disable:%u%%")
+Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/segment.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/f2fs/super.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index db619fd2f51a..d8dae0049b6a 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -649,7 +649,7 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
- 				get_ckpt_valid_blocks(sbi, segno, true);
- 	}
- 
--	if (dent_blocks > left_blocks)
-+	if (dent_blocks + data_blocks > left_blocks)
- 		return false;
- 	return true;
- }
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index f37004780ce0..c1f45df9efec 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1014,6 +1014,10 @@ static int f2fs_parse_param(struct fs_context *fc, struct fs_parameter *param)
+ 			ctx_set_opt(ctx, F2FS_MOUNT_DISABLE_CHECKPOINT);
+ 			break;
+ 		case Opt_checkpoint_enable:
++			F2FS_CTX_INFO(ctx).unusable_cap_perc = 0;
++			ctx->spec_mask |= F2FS_SPEC_checkpoint_disable_cap_perc;
++			F2FS_CTX_INFO(ctx).unusable_cap = 0;
++			ctx->spec_mask |= F2FS_SPEC_checkpoint_disable_cap;
+ 			ctx_clear_opt(ctx, F2FS_MOUNT_DISABLE_CHECKPOINT);
+ 			break;
+ 		default:
 -- 
-2.48.1
+2.49.0
 
 
 
