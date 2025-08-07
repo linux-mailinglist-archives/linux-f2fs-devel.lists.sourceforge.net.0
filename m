@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2A9AB1D3EA
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Aug 2025 10:01:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C18AB1D43F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Aug 2025 10:26:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=sJyQJHJTWSZ7iWyHhJ2fScqmST3Td9VH3tYuT1eRWuU=; b=gSL5y/wkJcgzOSKOsM92v0zZj/
-	zE7JrU4V6ZaGlgEO+JSZGzQXFW8Dmwmhzdr8TRwOVPrXwyjqLAsBHId4HQNW1VBUNstNxuMbiO3U4
-	ZZ1I5pRxCssxGUUyK0m9HUDQocpwo9M5go0R0KfQ6d01k0kdDZE0n+N3KkzJcWDkU8xk=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=J+l/OySuqE6eZ6aGrWQe5ZpMnzAHrxU7z5lF8Oq08x4=; b=hlmD/d7xi6kLHjF0prSrqT8rsN
+	22sTY12T1wqPsiDgA/VGqYjXvO2q5FwaVmSuDy2ICZcSLyyx+OGTkjIHYGf6TEGrbQmiYdameggWd
+	1KdbY7MReyQlTNkBBCi/XK6Hhw2dvAKzeQadehYUYo/AGlwtWCHbjSyFjo4LAJb7QEb4=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ujvYj-0003hu-1q;
-	Thu, 07 Aug 2025 08:01:09 +0000
+	id 1ujvwi-00012G-FV;
+	Thu, 07 Aug 2025 08:25:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ujvYg-0003ho-H1
+ (envelope-from <chao@kernel.org>) id 1ujvwh-00011z-1k
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 07 Aug 2025 08:01:06 +0000
+ Thu, 07 Aug 2025 08:25:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NXrqzFw2dN7JI5rIFs+ANCJIqQx/GUomxzIRFKrY154=; b=c14KDM15sWm4u97Nwv5WbkusFx
- Yw8Ai37gEANYyBnVGMXsRw4nh/WYhmIvQOlb1KWOWvEsXS+kJZPcqdhc51qtluGasmNn9Bq7s6on2
- PScsENO6EGAiwS+4qujJDK6pai2doPzS0hOfoqeOswtYvM6ckG2li766PHeXTOWSu/sw=;
+ bh=OR9QHI00LT0ur9guZMJm8vRWMWcI+8YCYUJ015GwRDQ=; b=KenTUSD0mB6WhdYKQNGENFGzSY
+ p6pe403EMx3y0StHnRxNorEWIz4AXLHrN7TlGm1ezIIi10hl/tkqwxtF8JA/gsDaL7DuwmK9O77Sc
+ WXQ8LTKOWfxumFj5jBS2eIj9Y3JsQeAGHS3kir5AhN7Sl0PGQMfHxTh9mtvraQF6peR8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,60 +40,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NXrqzFw2dN7JI5rIFs+ANCJIqQx/GUomxzIRFKrY154=; b=BFfDmbknw2WcOX5KqtT3VgUgZ9
- mQx2N3c48WCk4UYmV9kgQ3TYIiBtwYFlZOp/jO+MRRq68WA+VvfGLhQio4gpJHHSHW0fGChZ9aIew
- WVqmCFRZn8NTrRqT/KRhYOTqAs3Na6spLipM75RN/dPFWvR1Oqy9LNiF31XU/h8I9hPk=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=OR9QHI00LT0ur9guZMJm8vRWMWcI+8YCYUJ015GwRDQ=; b=luHYYnYT0QaklDaBzdCF+LpeFv
+ MPytB/gNoFt9tjFxMEmhXdWyNFMuFgf6yMLkJN/JKKTOunvopln/gktvehP764UOW9mZRHoIzZCmF
+ H9zyUIhQp7LN6oNNmobtqvrWKwEMjsTWe7vj5DCEpQ9A453tzMa7mSKd/eLztbQG+Y6M=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ujvYg-000465-4M for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 07 Aug 2025 08:01:06 +0000
+ id 1ujvwh-0005tN-Fv for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 07 Aug 2025 08:25:55 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 7862661416;
- Thu,  7 Aug 2025 08:00:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 46835C4CEEB;
- Thu,  7 Aug 2025 08:00:54 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 2B4A3419A8;
+ Thu,  7 Aug 2025 08:25:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0338C4CEEB;
+ Thu,  7 Aug 2025 08:25:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754553655;
- bh=9hADTosUKOFNWZ5EYqpjsUWzyHnDqVR4ADC7eW1jO6A=;
+ s=k20201202; t=1754555150;
+ bh=Mn79SyilYTWcUb+3uimRZQL/uEQPnSniG2yXTYBSAKA=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=mbvX6hfH5Bld4lKBQl8GMpFGnfx65tkxSJC0WtoSH/TTWK06hY56oR3EYHWXxNzrf
- K0LCmvLTqN5ICXChSR1ZVn/m1cuOP8BUPZfU6oLLH7yY/m9aLggqQEIDSgZMIJ33ak
- lU9rQdj2lDT0Hw2dRmPSyFddeQkEOx2pnq87VpFeitVWUP+Jn1vuWtadt0mO+jtUcz
- nZ05kxcEq/70Kq4mBdNcGLrLua3E3Sqb74ybCNfJJ4hSMT5Q2O+++bdJHP+7WVLE0W
- OXqBL7nkE5fl9q4GN1Of9QEKRi/69UUzl/vVEnLvZ0/plFGJT8haGaKxEp0weUetKw
- LGeb3oWMGoC0w==
-Message-ID: <631b2bd2-f642-43ea-b3ad-423d19eeae32@kernel.org>
-Date: Thu, 7 Aug 2025 16:00:51 +0800
+ b=XxuStNyRcjp45qq/uEWQOjVSNgAXp9QDSPEOAnToeYRv0n/L8IBm9CuA/bwp28HZW
+ quLdVJbkHaltlZW+55V+RkYCTzU07iGle31+/OwHlCvFzyyDk0PGEALmqQV3wOlqfg
+ 0BcvQep2sOmQFFi3B8787hrz+OooqrMC+mIdgnDwxXzfRnTSB7/gHBP/38rqZTnTlI
+ lq0nvyB6tWqOur15Jistde4b1bmpNsg1RnsHCaGhNqRuQ4tWIkNgmgb980WlueSA+9
+ uO9rsNmza6ZkdzjodusaaNB/alVz/+Ko29mTRZNDMbcveN6xnbWQnjLa3ciBsCymN5
+ NB19gUzbiqyFg==
+Message-ID: <bc3f73b8-688a-4f1e-a0ce-abe3ce13f237@kernel.org>
+Date: Thu, 7 Aug 2025 16:25:46 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: "mason.zhang" <masonzhang.linuxer@gmail.com>
-References: <20250806123236.4389-1-masonzhang.linuxer@gmail.com>
+To: Chunhai Guo <guochunhai@vivo.com>, jaegeuk@kernel.org
+References: <20250806091954.180602-1-guochunhai@vivo.com>
 Content-Language: en-US
-In-Reply-To: <20250806123236.4389-1-masonzhang.linuxer@gmail.com>
+In-Reply-To: <20250806091954.180602-1-guochunhai@vivo.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 8/6/25 20:32, mason.zhang wrote: > This fix combines the
- space check for data_blocks and dent_blocks when > verifying HOT_DATA segment
- capacity, preventing potential insufficient > space issues dur [...] 
+ Content preview:  On 8/6/25 17:19,
+ Chunhai Guo wrote: > This patch allows privileged
+ users to reserve nodes via the > 'reserve_node' mount option, which is similar
+ to the existing > 'reserve_root' option. > > "-o reser [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ujvYg-000465-4M
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix CURSEG_HOT_DATA left space check
+X-Headers-End: 1ujvwh-0005tN-Fv
+Subject: Re: [f2fs-dev] [PATCH v5] f2fs: add reserved nodes for privileged
+ users
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,13 +114,15 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 8/6/25 20:32, mason.zhang wrote:
-> This fix combines the space check for data_blocks and dent_blocks when
-> verifying HOT_DATA segment capacity, preventing potential insufficient
-> space issues during checkpoint.
+On 8/6/25 17:19, Chunhai Guo wrote:
+> This patch allows privileged users to reserve nodes via the
+> 'reserve_node' mount option, which is similar to the existing
+> 'reserve_root' option.
 > 
-> Fixes: bf34c93d2645 ("f2fs: check curseg space before foreground GC")
-> Signed-off-by: mason.zhang <masonzhang.linuxer@gmail.com>
+> "-o reserve_node=<N>" means <N> nodes are reserved for privileged
+> users only.
+> 
+> Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
 
