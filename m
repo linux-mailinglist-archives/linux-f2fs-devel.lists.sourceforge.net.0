@@ -2,134 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C744B1E1C1
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Aug 2025 07:38:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 338EAB1E400
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Aug 2025 10:03:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=crMH/DBg51ztOpw8TWJVRuAfdBWDnNrmEp/CQB0G+B4=; b=hDF3UK+CaOu4aL2ngsKZHnv/QJ
-	fjzkeY49T9nDWqwKVwfdy7MSaYpOLjZB8Ge1sygwRcwMIdr1H4+ntSPf6WwMwh6KMygz53utTLhCw
-	CqYKNAQYWrv2Ga253wU/1i6fLcPMJGJsV8ir9JNMvPrXmI0wxjaUAZkpFU6z6axhs+A4=;
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=hpJz33eSvhyUMgcI5djXNRqHIQF3Cx63+pr/fXQ8hOI=; b=bO4JTx/6Xw58W+P3kGmH7M6rYX
+	uj74MvwP6Avvbkjom337OC3sc3rqxGDZv6oLm1Oogg6bZJW0yp/pdTHxc2dlrw7mlUL9sVAs6CU+5
+	zepCreV5OZZnFk0BEcCbJ+87zogvoJWVVCVhv9HVZrLdUFJjMdgiToUHstW2b9aWIysk=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ukFnl-0002Ah-W1;
-	Fri, 08 Aug 2025 05:38:02 +0000
+	id 1ukI3z-0001z1-91;
+	Fri, 08 Aug 2025 08:02:55 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <niuzhiguo84@gmail.com>) id 1ukFnl-0002AR-4q
+ (envelope-from <chao@kernel.org>) id 1ukI3x-0001yI-Nc
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 Aug 2025 05:38:01 +0000
+ Fri, 08 Aug 2025 08:02:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uzN4MoggtOmzsOzNgRPBqPhMD4mrevOZONgYLvGdZVw=; b=ix0ZpEy/rAcC6q170WcBcT8qbI
- MF6viQW0F7Na/EDbsw/RsdzmRmHvuK23eYzTi/tkSqx0ecQouTk4wAAht4yGQKPmYvdy6ZC3lzUvo
- lUpxxX+Da6/cNziMUDItKz4AeDXAKZAmJqo88ICFk3b0YwNxQSXWUZJ6IlCqSdCDHGBg=;
+ bh=CoDEKky8ymuLgngP18Mj2HHoF73gHq1SJxDEitpsEMw=; b=UcPQUSYaYIT5wHRqAYAcJANtFX
+ kbovWxV31uKgcoZF11FkRbiwnRU0MsRZlBLGrDCRoCLjIqplVcX6gVZX6sxr42ZnXmaCtbZZ6XpsW
+ U4ox4HDwXHloF4tvCKvRIqhiZJwYG+fzn49+WNoHf8p8tIo2pPZJlmxeHgOsWbH1ZkmM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=uzN4MoggtOmzsOzNgRPBqPhMD4mrevOZONgYLvGdZVw=; b=KbvOoNTOdgW+bGntBbOlvgj920
- uJKWaD4cX2SCIMqt7HOH53Uljl0XgcPW5Y6bvF5XPXC8MbTcHNhXK7F98xUqqHx6j4Prp+LhYRY9a
- YC+8TUt13+aelqeRX8jlQIBzXqlund25VCDPCMlCj5MABHKiKWnfZEwdgTqbPeIY8e2Q=;
-Received: from mail-wm1-f54.google.com ([209.85.128.54])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=CoDEKky8ymuLgngP18Mj2HHoF73gHq1SJxDEitpsEMw=; b=J
+ REOLIT+P7weVHPqjXbncMAqLWfGmsa3RrN7C5/exZn9vw2zBe79h6j8sQUfiOTt+SntLaBBzQf/EQ
+ 1M6pWAW8dkXrqDISRqKPM/qnCiQV5KWBwjzOy035Nx5KN0ARQ5yNbkCv0JD1eiFSV08n6G7k7drLt
+ uGWNKpjRKLExFzkE=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ukFnk-0000mr-Lv for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 Aug 2025 05:38:01 +0000
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-458be3ab6adso2422915e9.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 07 Aug 2025 22:38:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754631469; x=1755236269; darn=lists.sourceforge.net;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uzN4MoggtOmzsOzNgRPBqPhMD4mrevOZONgYLvGdZVw=;
- b=AiXrC5V1JXQqOiguG9tVWCY++1yp1YndfRQvnys5TKlMUr4naCCo+Vm99Q8cjVll9E
- SysmsvIIQU8Zh8FGxYRXXxEV5um0wzH+NwijzoyyjmyI1CYtWWSqptgmeVnMt7n1iWWO
- K0nlzWNjMRHWS9GAhZyqNgA3lTsZRoe/iLEgK0pec+hYlNh5Z7Olp6OW5zZ5P5Vls1kZ
- nbudlAd2WfevuR6Q7kWYgLQzE2pe9gCEga/5newcuFAz1YPCTHYAY84PZuA9qC2qf7AN
- htfiqlQ9wI6zJpeDHhkXqo7oI4wBPLStNgxmg4EQ0X4UN3xK/L5D+BnOvGx4uoL7/w80
- xhdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754631469; x=1755236269;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uzN4MoggtOmzsOzNgRPBqPhMD4mrevOZONgYLvGdZVw=;
- b=n6skmjm1V6G7hGwM/ymtwowPRw+e4xOPJ7+QU7sNrH86y6FjckMjmdHY49BUstA38O
- CnA5FBtBbUfOu7XMTNrGNF0fNb916wKlQ3iyY3I2zWrcbsgfLtrHpkpVrHPTXqkORVHQ
- HYpoXMRQwc/CnUACmq6OHhzgd2Lmhoh21o0wC6UorD4icRfd4RTI4SFhe4lHPVPoJJkk
- 8PO0uI53JuF6XCvIBL0cNFJWz9PbiBY68cniGX8C547w8ywzq8gQBaZTyOQZCkp5dG9T
- jfS33hQohwf68Pq+XOoSEtFEcJrQNBXPJxLXfuczV1urYNLZ3W9Cj+LiCjtyAJ+OJGPu
- yVYg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW2VY2ownkWzzoDDCd37jR5ZnMwzN/8Gu8f7GVacnP/W1DCGDcRuThTIqt2RF607HcJb+E0YKgmUSFnm25wgWe8@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzgjKyQL2Dz55R7/VVdqDIUjouTZikGxZNOykl7h3l6ldjzoopT
- sSWOO886aWVxmCdmt0hWiNVOU2RtMIjlQuo1ZgSOVjvATU9TFxkmSj+4i3Wq2lEdyD/KdKk84AH
- Q6sb7NQSMhcXEJej+IbUBSSWyW9EO4WA=
-X-Gm-Gg: ASbGncuqAWiwxd23A8GLneh0ujh99vfQLTFdG1tsQTjm2m73nemw/hEhLTEl1+c0pYg
- As3htlQc2dhh9G6eBUg47TcSZ/1s/Bm13MLWveUk4I1FsBA7CmlC3K6tHW8fFVY/C0EoMtarpq6
- PLC/yimKwJuKkxswPYqj9TWruSY7aDNazfgaVGi3ZTbtvWCEAN/pmxFHxkjUKHNjp8LC3yIMTj4
- +yJDY1r
-X-Google-Smtp-Source: AGHT+IFNjZl3lvP80wU26/7c7t5y/zunPh8F4UzbGKLRT2BnYPfyXNLnEyEVJMX2eO1B9GMhJRNCt5QybfrqFLqUwro=
-X-Received: by 2002:a05:6000:2313:b0:3b8:d7c8:ad88 with SMTP id
- ffacd0b85a97d-3b900b355afmr517174f8f.7.1754631468871; Thu, 07 Aug 2025
- 22:37:48 -0700 (PDT)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1ukI3x-0003LG-9U for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 08 Aug 2025 08:02:53 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id E0E8D5C5A5F;
+ Fri,  8 Aug 2025 08:02:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F295C4CEED;
+ Fri,  8 Aug 2025 08:02:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1754640167;
+ bh=wVvoXIsLPKZCemckHCxMR2iU0Y0WAvi6H54PITfVnvY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ufAJ/AnwGA7992KOKnCg9JdDYrt3IzChGn7yXZEWfM2FncRfLMq0VYHJhLBSPZ7nl
+ aGUER6ML8Iyqk7PfF/2JmYkLh7uI80eb8v1RTfOZeFdrdeLvg/c8p010MEzEi6oDYF
+ R7gz+6yusmTunqMIJ+wstI9H5HeS9j38OmGtebVLb4c47yxC+XOREWp2cG9LWfP4La
+ RFDyDUBbINM/WQkZFCRN5VY9JLsvo5uQqywVL6Ea5DVRKLAKDOwoIfJPALTXKOHigD
+ EXSgAyvsC/8BzuLdvbZavCkRkbRnxh1qnSknnT59oE3vxw6NzTWrglf1HuP+LmuY7x
+ IKfC9YtCEEv8A==
+To: Zorro Lang <zlang@kernel.org>,
+	fstests@vger.kernel.org
+Date: Fri,  8 Aug 2025 14:58:03 +0800
+Message-Id: <20250808065803.17298-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20250807014836.3780988-1-chao@kernel.org>
- <CAHJ8P3Krr4pCdOmnSJ6mp5bfGLLH4TJqd0FC7Qiw2V3iEL5VEw@mail.gmail.com>
- <b8470c47-4fc2-48da-b93d-cb469638fb43@kernel.org>
-In-Reply-To: <b8470c47-4fc2-48da-b93d-cb469638fb43@kernel.org>
-From: Zhiguo Niu <niuzhiguo84@gmail.com>
-Date: Fri, 8 Aug 2025 13:37:37 +0800
-X-Gm-Features: Ac12FXyO1t35YLRLfg-zoCYVRhywM-dIpKaua5hGLDGX21JmQ7uEm96uhdsbhck
-Message-ID: <CAHJ8P3KPzV9bcu4aYBrgxO-5=5p9xg-KwbYQw9o6SzSe4Za1iw@mail.gmail.com>
-To: Chao Yu <chao@kernel.org>
-X-Spam-Score: 0.1 (/)
-X-Spam-Report: Spam detection software, running on the system "sfi-spamd-1.hosts.colo.sdot.me",
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Chao Yu 于2025年8月8日周五 12:14写道： > > On 8/8/2025
-    9:07 AM, Zhiguo Niu wrote: > > Chao Yu via Linux-f2fs-devel > > 于2025年8月7日周四
-    09:52写道： > >> > >> mount -t f2fs -o c [...] 
- 
- Content analysis details:   (0.1 points, 5.0 required)
- 
-  pts rule name              description
+ Content preview:  w/ below change [1], f2fs will enable lookup_mode=perf by
+ default, it will change f2fs dirent lookup method from linear based lookup
+ to hash based lookup. So that, f2fs will ignore sb.s_encoding_flags by default,
+ which is not compatible w/ f2fs/012 testcase, in where it will control lookup
+ method by configuring this flag w/ fsck.f2fs. 
+ Content analysis details:   (-0.2 points, 5.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
-                             domain
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [139.178.84.217 listed in list.dnswl.org]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail provider
-                             [niuzhiguo84(at)gmail.com]
-  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
-                             digit
-                             [niuzhiguo84(at)gmail.com]
-  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.128.54 listed in wl.mailspike.net]
-X-Headers-End: 1ukFnk-0000mr-Lv
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to clear unusable_cap for
- checkpoint=enable
+ envelope-from domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ukI3x-0003LG-9U
+Subject: [f2fs-dev] [PATCH] f2fs/012: adapt lookup_mode=x mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -141,67 +109,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Q2hhbyBZdSA8Y2hhb0BrZXJuZWwub3JnPiDkuo4yMDI15bm0OOaciDjml6XlkajkupQgMTI6MTTl
-hpnpgZPvvJoKPgo+IE9uIDgvOC8yMDI1IDk6MDcgQU0sIFpoaWd1byBOaXUgd3JvdGU6Cj4gPiBD
-aGFvIFl1IHZpYSBMaW51eC1mMmZzLWRldmVsIDxsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJj
-ZWZvcmdlLm5ldD4KPiA+IOS6jjIwMjXlubQ45pyIN+aXpeWRqOWbmyAwOTo1MuWGmemBk++8mgo+
-ID4+Cj4gPj4gbW91bnQgLXQgZjJmcyAtbyBjaGVja3BvaW50PWRpc2FibGU6MTAlIC9kZXYvdmRi
-IC9tbnQvZjJmcy8KPiA+PiBtb3VudCAtdCBmMmZzIC1vIHJlbW91bnQsY2hlY2twb2ludD1lbmFi
-bGUgL2Rldi92ZGIgL21udC9mMmZzLwo+ID4+Cj4gPj4ga2VybmVsIGxvZzoKPiA+PiBGMkZTLWZz
-ICh2ZGIpOiBBZGp1c3QgdW51c2FibGUgY2FwIGZvciBjaGVja3BvaW50PWRpc2FibGUgPSAyMDQ0
-NDAgLyAxMCUKPiA+Pgo+ID4+IElmIHdlIGhhcyBhc3NpZ25lZCBjaGVja3BvaW50PWVuYWJsZSBt
-b3VudCBvcHRpb24sIHVudXNhYmxlX2NhcHssX3BlcmN9Cj4gPj4gcGFyYW1ldGVycyBvZiBjaGVj
-a3BvaW50PWRpc2FibGUgc2hvdWxkIGJlIHJlc2V0LCB0aGVuIGNhbGN1bGF0aW9uIGFuZAo+ID4+
-IGxvZyBwcmludCBjb3VsZCBiZSBhdm9pZCBpbiBhZGp1c3RfdW51c2FibGVfY2FwX3BlcmMoKS4K
-PiA+Pgo+ID4+IEZpeGVzOiAxYWUxOGY3MWNiNTIgKCJmMmZzOiBmaXggY2hlY2twb2ludD1kaXNh
-YmxlOiV1JSUiKQo+ID4+IFNpZ25lZC1vZmYtYnk6IENoYW8gWXUgPGNoYW9Aa2VybmVsLm9yZz4K
-PiA+PiAtLS0KPiA+PiAgIGZzL2YyZnMvc3VwZXIuYyB8IDQgKysrKwo+ID4+ICAgMSBmaWxlIGNo
-YW5nZWQsIDQgaW5zZXJ0aW9ucygrKQo+ID4+Cj4gPj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvc3Vw
-ZXIuYyBiL2ZzL2YyZnMvc3VwZXIuYwo+ID4+IGluZGV4IGYzNzAwNDc4MGNlMC4uYzFmNDVkZjll
-ZmVjIDEwMDY0NAo+ID4+IC0tLSBhL2ZzL2YyZnMvc3VwZXIuYwo+ID4+ICsrKyBiL2ZzL2YyZnMv
-c3VwZXIuYwo+ID4+IEBAIC0xMDE0LDYgKzEwMTQsMTAgQEAgc3RhdGljIGludCBmMmZzX3BhcnNl
-X3BhcmFtKHN0cnVjdCBmc19jb250ZXh0ICpmYywgc3RydWN0IGZzX3BhcmFtZXRlciAqcGFyYW0p
-Cj4gPj4gICAgICAgICAgICAgICAgICAgICAgICAgIGN0eF9zZXRfb3B0KGN0eCwgRjJGU19NT1VO
-VF9ESVNBQkxFX0NIRUNLUE9JTlQpOwo+ID4+ICAgICAgICAgICAgICAgICAgICAgICAgICBicmVh
-azsKPiA+PiAgICAgICAgICAgICAgICAgIGNhc2UgT3B0X2NoZWNrcG9pbnRfZW5hYmxlOgo+ID4+
-ICsgICAgICAgICAgICAgICAgICAgICAgIEYyRlNfQ1RYX0lORk8oY3R4KS51bnVzYWJsZV9jYXBf
-cGVyYyA9IDA7Cj4gPj4gKyAgICAgICAgICAgICAgICAgICAgICAgY3R4LT5zcGVjX21hc2sgfD0g
-RjJGU19TUEVDX2NoZWNrcG9pbnRfZGlzYWJsZV9jYXBfcGVyYzsKPiA+PiArICAgICAgICAgICAg
-ICAgICAgICAgICBGMkZTX0NUWF9JTkZPKGN0eCkudW51c2FibGVfY2FwID0gMDsKPiA+PiArICAg
-ICAgICAgICAgICAgICAgICAgICBjdHgtPnNwZWNfbWFzayB8PSBGMkZTX1NQRUNfY2hlY2twb2lu
-dF9kaXNhYmxlX2NhcDsKPiA+IEhpIENoYW8sCj4gPiB3aGVuIGVuYWJsZSBjaGVja3BvaW50LCBz
-aG91ZCBpdCBiZToKPiA+IGN0eC0+c3BlY19tYXNrICY9IH5GMkZTX1NQRUNfY2hlY2twb2ludF9k
-aXNhYmxlX2NhcF9wZXJjOwo+ID4gY3R4LT5zcGVjX21hc2sgJj0gfkYyRlNfU1BFQ19jaGVja3Bv
-aW50X2Rpc2FibGVfY2FwOwo+ID4gcGxlYXNlIGNvcnJlY3QgbWUgaWYgSSBtaXN1bmRlcnN0YW5k
-aW5nLgo+Cj4gWmhpZ3VvLAo+Cj4gSU1PLCBGMkZTX1NQRUNfY2hlY2twb2ludF9kaXNhYmxlX2Nh
-cF9wZXJjIG9yIEYyRlNfU1BFQ19jaGVja3BvaW50X2Rpc2FibGVfY2FwCj4gZmxhZ3MgY2FuIGJl
-IGFkZGVkIHRvIGN0eC0+c3BlY19tYXNrIHRvIGluZGljYXRlIGN0eC51bnVzYWJsZV9jYXBfcGVy
-YyBvcgo+IGN0eC51bnVzYWJsZV9jYXAgaGFzIGJlZW4gdXBkYXRlZCwgdGhlbiB3ZSBjYW4gc3Rv
-cmUgbGFzdCBwYXJhbWV0ZXIgdmFsdWUgZnJvbQo+IGN0eCB0byBzYmkgaW4gZjJmc19hcHBseV9v
-cHRpb25zKCkgYXMgYmVsb3c6Cj4KPiAgICAgICAgIGlmIChjdHgtPnNwZWNfbWFzayAmIEYyRlNf
-U1BFQ19jaGVja3BvaW50X2Rpc2FibGVfY2FwKQo+ICAgICAgICAgICAgICAgICBGMkZTX09QVElP
-TihzYmkpLnVudXNhYmxlX2NhcCA9IEYyRlNfQ1RYX0lORk8oY3R4KS51bnVzYWJsZV9jYXA7Cj4g
-ICAgICAgICBpZiAoY3R4LT5zcGVjX21hc2sgJiBGMkZTX1NQRUNfY2hlY2twb2ludF9kaXNhYmxl
-X2NhcF9wZXJjKQo+ICAgICAgICAgICAgICAgICBGMkZTX09QVElPTihzYmkpLnVudXNhYmxlX2Nh
-cF9wZXJjID0KPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgRjJGU19D
-VFhfSU5GTyhjdHgpLnVudXNhYmxlX2NhcF9wZXJjOwo+Cj4gT3IgYW0gSSBtaXNzaW5nIHNvbWV0
-aGluZyBoZXJlPwpIaSBDaGFvLAoKQWgsICB5ZXMgeW91IGFyZSByaWdodO+8gQpUaGVyZSdzIHNv
-bWV0aGluZyB3cm9uZyB3aXRoIG15IHRoaW5raW5nLgp0aGFuayB5b3UgZm9yIHlvdXIgZXhwbGFu
-YXRpb24sIHNvcnJ5IGZvciB0aGUgZGlzdHVyYmFuY2UuCnRoYW5rcyEKPgo+IFRoYW5rcywKPgo+
-ID4gdGhhbmtzIQo+ID4+ICAgICAgICAgICAgICAgICAgICAgICAgICBjdHhfY2xlYXJfb3B0KGN0
-eCwgRjJGU19NT1VOVF9ESVNBQkxFX0NIRUNLUE9JTlQpOwo+ID4+ICAgICAgICAgICAgICAgICAg
-ICAgICAgICBicmVhazsKPiA+PiAgICAgICAgICAgICAgICAgIGRlZmF1bHQ6Cj4gPj4gLS0KPiA+
-PiAyLjQ5LjAKPiA+Pgo+ID4+Cj4gPj4KPiA+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwo+ID4+IExpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0Cj4g
-Pj4gTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKPiA+PiBodHRwczovL2xp
-c3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCj4KCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZz
-LWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5l
-dApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZz
-LWRldmVsCg==
+w/ below change [1], f2fs will enable lookup_mode=perf by default, it
+will change f2fs dirent lookup method from linear based lookup to hash
+based lookup.
+
+So that, f2fs will ignore sb.s_encoding_flags by default, which is not
+compatible w/ f2fs/012 testcase, in where it will control lookup method
+by configuring this flag w/ fsck.f2fs.
+
+To avoid failure of f2fs/012, let's check whether f2fs has supported
+"lookup_mode=auto" mount option, mount w/ the option if it can,
+otherwise, don't.
+
+[1] https://lore.kernel.org/linux-f2fs-devel/20250805065228.1473089-1-chullee@google.com
+
+Cc: Daniel Lee <chullee@google.com>
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ tests/f2fs/012 | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
+
+diff --git a/tests/f2fs/012 b/tests/f2fs/012
+index b3df9a8f..15fc8f0c 100755
+--- a/tests/f2fs/012
++++ b/tests/f2fs/012
+@@ -22,6 +22,15 @@ _require_scratch_nocheck
+ _require_command "$F2FS_IO_PROG" f2fs_io
+ _require_command "$F2FS_INJECT_PROG" inject.f2fs
+ 
++#check whether f2fs supports "lookup_mode=x" mount option
++mntopt=""
++_scratch_mkfs -O casefold -C utf8 >> $seqres.full
++_try_scratch_mount "-o lookup_mode=auto"
++if [ $? == 0 ]; then
++	mntopt="-o lookup_mode=auto"
++	_scratch_unmount
++fi
++
+ check_lookup()
+ {
+ 	local nolinear_lookup=$1
+@@ -30,7 +39,7 @@ check_lookup()
+ 	local redheart=$dir/$'\u2764\ufe0f'
+ 
+ 	_scratch_mkfs -O casefold -C utf8 >> $seqres.full
+-	_scratch_mount
++	_scratch_mount $mntopt
+ 
+ 	mkdir $dir
+ 	$F2FS_IO_PROG setflags casefold $dir >> $seqres.full
+@@ -52,7 +61,7 @@ check_lookup()
+ 
+ 	$F2FS_INJECT_PROG --dent --mb d_hash --nid $ino --val 0x9a2ea068 $SCRATCH_DEV >> $seqres.full
+ 
+-	_scratch_mount
++	_scratch_mount $mntopt
+ 	if [ $nolinear_lookup == "1" ]; then
+ 		[ -f $redheart ] && _fail "red heart file should not exist"
+ 	else
+-- 
+2.40.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
