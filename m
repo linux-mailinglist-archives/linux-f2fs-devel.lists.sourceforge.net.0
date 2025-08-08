@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98480B1E12D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Aug 2025 06:15:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A02D3B1E134
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Aug 2025 06:16:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=4PTPP5Sphztc8EslRG6cOgG+IYbih2FF8R8hBvmXvBE=; b=fB689c0lYZBXsXIkyw9qL6tLGu
-	M/1f9fDR+49ai0nIX1jDRyUIK8OCJ3y8JPuWYsrqn10IMvgj3MqYS846alUJpxrPPpk8F4WxfgPb3
-	mkBHlRZmt5FIuuDEunXncDsA6R/S960cf/5ZEOXfwUFLMs9FvCXV0BoSjXOSVVNJ4r+E=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=x2MQJL9uR3iOZED8aSFte7QuSqPOlzAr8Yy64+/NQEo=; b=ces9vAGTXa/LycU0PfTP1P7wJr
+	D43ipNQ8OG0pb7z3p6OmG8x/2hZlujl97ofK3XZd52zdmShhZ5dj+YjDFeuOPgXbGWvmVako9ED6h
+	AI9UUfDZE3bS1/x43MdPNTti3guAW8/yFU5yjbM8g9tT1HNS4u4AbYHn8zsgKOkmbwXU=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ukEV1-0005tJ-Mf;
-	Fri, 08 Aug 2025 04:14:35 +0000
+	id 1ukEWt-0006Bw-5X;
+	Fri, 08 Aug 2025 04:16:31 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ukEUz-0005tA-Uo
+ (envelope-from <chao@kernel.org>) id 1ukEWr-0006Bk-Vt
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 Aug 2025 04:14:33 +0000
+ Fri, 08 Aug 2025 04:16:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5dBQ24sv926qfmCOYNRPYr5T9paG9I87s2kFmpFELnI=; b=JNDnK7K5Nf1xwu35nypBf+HsjZ
- Tcw47Bz4jY4SuPqASKr5BunCqIGYMPlvRpL4JSDsb+xYZCb0E10KT1woW5QKzpHGu6H2yi56LjcG8
- pUW8L1xjSThYj6tLi+U0fo+bcsu05q/33YuevkWbDgzM8qETLv+Yi+YDdQWzVYtsbPLU=;
+ bh=LVC0en1OKlIImmItYZPF+klGpBPrrd6R1PAnuEL5gbY=; b=fA5Q7Sx30GTRSdHWDkagerv60s
+ CubJHYurigXaI6xEWMH9ayGr8Ac12yaYLNmppNl8htn2UjDLKb8F0OZ6OEkUseH2v60sVaDQk3Zil
+ 1P72OTa20ZyiwXd8YAmaS5Wo2S0aZbK/kFRfe9Hf9W33sQ15BVcF9m0MiC/iE5QtYISw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,63 +40,60 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5dBQ24sv926qfmCOYNRPYr5T9paG9I87s2kFmpFELnI=; b=mmXybv40p6c0W2zDOeIQucZchQ
- /TdpdvbcmYzXZNqW7uXExhENEw38akBArp6nO7ddb30fHDGxjx/ENNZNin9sh1wR8Wru2+0A4Ks50
- 2bXDiUtOZadk1wwnAit5YE1NYZdqBJAmNdzUbMkR1ee2z9yX/stkoBf+xTIkpbXRQMQQ=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=LVC0en1OKlIImmItYZPF+klGpBPrrd6R1PAnuEL5gbY=; b=f4VuGXlTA7jn4FGo8O/UjxukAn
+ z+WovhTzDmIR3rb2lGcEAKQmewrT7QnzqN2p1NGBdoR14BmdJZ2sLvdyUA1fLVrHKGpMZ74XnX2EE
+ mdjyqtAtjYHx7yjxcpvmF9ezBxp06KiRlGTF3YDjqVQyEEmufrZytc4RM/TJndgoE7XY=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ukEUz-00028c-FE for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 Aug 2025 04:14:33 +0000
+ id 1ukEWs-0002Jk-7N for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 08 Aug 2025 04:16:30 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 1E0A344A5F;
- Fri,  8 Aug 2025 04:14:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4E66C4CEF0;
- Fri,  8 Aug 2025 04:14:21 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id CDB565C5744;
+ Fri,  8 Aug 2025 04:16:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0582C4CEF0;
+ Fri,  8 Aug 2025 04:16:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754626463;
- bh=qwItsFMa5Kny4Eyf0BZSWka4fDemBGqbeTxFKDyzF4g=;
+ s=k20201202; t=1754626584;
+ bh=N3Myb0MUVeTwDG746zCWbMQx9AeqizE7zCL+CawFEm4=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=cefhYgqvhjIpva0JgTGw439CdjsWRREGzopAdDBjKayN/+R+qMZlL65J+sZ5KDdH7
- EPFOgpKeIitMDBH9qsE88CuhcFz8BfmxpLuTlBLWaogA70iyWvxMYPNvRP25tpEAi9
- qP7clfynnZAj5WuPPwMFc/ruQ3F2ps7c+1yS7rQ/V/GTM/1k01mlUFsptC4vyyZ2md
- Dcoe2osedqi9VLULO6lpTRGF8pv5gebuGTvqfCWTylL97k2rNFyITti8rhfGk0ic/V
- pV8mdAuNE9Up1beOrVek80bqYIeBgGds2ZDrkdPftIHrHmKnTHrUdRRdjpYv/eN16q
- Mrd8dg87d+VoQ==
-Message-ID: <b8470c47-4fc2-48da-b93d-cb469638fb43@kernel.org>
-Date: Fri, 8 Aug 2025 12:14:33 +0800
+ b=ngfsvInL6yrB5czkl8WcME/ojzsobLgF8K5zq7Lb43hrQvqMBXy1cVd22ArNs5+P8
+ 3oHl/vHR+2TTWP9kMCLh5rjeEAsX7Mo8CFsJFw2uT6323wgQVeqU75YGRs2VIU7YV3
+ zFxR5IZCj6BW0GJu76DGKF+oLScOX/qPU3ww/lRoXQVww/N5xkou8AgZwME/Btm1Nz
+ zfmE3G0AiI/Pl+a9pKbNbEBnmat8jg4/xFCu0SRtO6OPr4ewAKuKNhFI4GnF24ewBH
+ 0/WaIG5w3ZscUMsVEOWguXmyTG0QBod/B4WvbqeUsn32x3J3b061jndj4yZupQWM48
+ +jTjTxR+awd2w==
+Message-ID: <7fbd778a-8676-4040-bb8f-f5417d458c7e@kernel.org>
+Date: Fri, 8 Aug 2025 12:16:36 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Zhiguo Niu <niuzhiguo84@gmail.com>
-References: <20250807014836.3780988-1-chao@kernel.org>
- <CAHJ8P3Krr4pCdOmnSJ6mp5bfGLLH4TJqd0FC7Qiw2V3iEL5VEw@mail.gmail.com>
+To: Wang Xiaojun <wangxiaojun@vivo.com>, jaegeuk@kernel.org
+References: <20250807084442.422751-1-wangxiaojun@vivo.com>
 Content-Language: en-US
-In-Reply-To: <CAHJ8P3Krr4pCdOmnSJ6mp5bfGLLH4TJqd0FC7Qiw2V3iEL5VEw@mail.gmail.com>
+In-Reply-To: <20250807084442.422751-1-wangxiaojun@vivo.com>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "sfi-spamd-2.hosts.colo.sdot.me",
+X-Spam-Report: Spam detection software,
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 8/8/2025 9:07 AM, Zhiguo Niu wrote: > Chao Yu via Linux-f2fs-devel
-    <linux-f2fs-devel@lists.sourceforge.net> > 于2025年8月7日周四 09:52写道：
-    >> >> mount -t f2fs -o checkpoint=disable:10% / [...] 
- 
+ Content preview:  Xiaojun, I just notice generic/483 will fail w/ this change, 
+ can you please take a look? Thanks, 
  Content analysis details:   (-0.2 points, 5.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
-                             domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ukEUz-00028c-FE
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to clear unusable_cap for
- checkpoint=enable
+X-Headers-End: 1ukEWs-0002Jk-7N
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs:fix missing space reclamation during
+ the recovery process
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,59 +107,109 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gOC84LzIwMjUgOTowNyBBTSwgWmhpZ3VvIE5pdSB3cm90ZToKPiBDaGFvIFl1IHZpYSBMaW51
-eC1mMmZzLWRldmVsIDxsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldD4KPiDk
-uo4yMDI15bm0OOaciDfml6Xlkajlm5sgMDk6NTLlhpnpgZPvvJoKPj4KPj4gbW91bnQgLXQgZjJm
-cyAtbyBjaGVja3BvaW50PWRpc2FibGU6MTAlIC9kZXYvdmRiIC9tbnQvZjJmcy8KPj4gbW91bnQg
-LXQgZjJmcyAtbyByZW1vdW50LGNoZWNrcG9pbnQ9ZW5hYmxlIC9kZXYvdmRiIC9tbnQvZjJmcy8K
-Pj4KPj4ga2VybmVsIGxvZzoKPj4gRjJGUy1mcyAodmRiKTogQWRqdXN0IHVudXNhYmxlIGNhcCBm
-b3IgY2hlY2twb2ludD1kaXNhYmxlID0gMjA0NDQwIC8gMTAlCj4+Cj4+IElmIHdlIGhhcyBhc3Np
-Z25lZCBjaGVja3BvaW50PWVuYWJsZSBtb3VudCBvcHRpb24sIHVudXNhYmxlX2NhcHssX3BlcmN9
-Cj4+IHBhcmFtZXRlcnMgb2YgY2hlY2twb2ludD1kaXNhYmxlIHNob3VsZCBiZSByZXNldCwgdGhl
-biBjYWxjdWxhdGlvbiBhbmQKPj4gbG9nIHByaW50IGNvdWxkIGJlIGF2b2lkIGluIGFkanVzdF91
-bnVzYWJsZV9jYXBfcGVyYygpLgo+Pgo+PiBGaXhlczogMWFlMThmNzFjYjUyICgiZjJmczogZml4
-IGNoZWNrcG9pbnQ9ZGlzYWJsZToldSUlIikKPj4gU2lnbmVkLW9mZi1ieTogQ2hhbyBZdSA8Y2hh
-b0BrZXJuZWwub3JnPgo+PiAtLS0KPj4gICBmcy9mMmZzL3N1cGVyLmMgfCA0ICsrKysKPj4gICAx
-IGZpbGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspCj4+Cj4+IGRpZmYgLS1naXQgYS9mcy9mMmZz
-L3N1cGVyLmMgYi9mcy9mMmZzL3N1cGVyLmMKPj4gaW5kZXggZjM3MDA0NzgwY2UwLi5jMWY0NWRm
-OWVmZWMgMTAwNjQ0Cj4+IC0tLSBhL2ZzL2YyZnMvc3VwZXIuYwo+PiArKysgYi9mcy9mMmZzL3N1
-cGVyLmMKPj4gQEAgLTEwMTQsNiArMTAxNCwxMCBAQCBzdGF0aWMgaW50IGYyZnNfcGFyc2VfcGFy
-YW0oc3RydWN0IGZzX2NvbnRleHQgKmZjLCBzdHJ1Y3QgZnNfcGFyYW1ldGVyICpwYXJhbSkKPj4g
-ICAgICAgICAgICAgICAgICAgICAgICAgIGN0eF9zZXRfb3B0KGN0eCwgRjJGU19NT1VOVF9ESVNB
-QkxFX0NIRUNLUE9JTlQpOwo+PiAgICAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7Cj4+ICAg
-ICAgICAgICAgICAgICAgY2FzZSBPcHRfY2hlY2twb2ludF9lbmFibGU6Cj4+ICsgICAgICAgICAg
-ICAgICAgICAgICAgIEYyRlNfQ1RYX0lORk8oY3R4KS51bnVzYWJsZV9jYXBfcGVyYyA9IDA7Cj4+
-ICsgICAgICAgICAgICAgICAgICAgICAgIGN0eC0+c3BlY19tYXNrIHw9IEYyRlNfU1BFQ19jaGVj
-a3BvaW50X2Rpc2FibGVfY2FwX3BlcmM7Cj4+ICsgICAgICAgICAgICAgICAgICAgICAgIEYyRlNf
-Q1RYX0lORk8oY3R4KS51bnVzYWJsZV9jYXAgPSAwOwo+PiArICAgICAgICAgICAgICAgICAgICAg
-ICBjdHgtPnNwZWNfbWFzayB8PSBGMkZTX1NQRUNfY2hlY2twb2ludF9kaXNhYmxlX2NhcDsKPiBI
-aSBDaGFvLAo+IHdoZW4gZW5hYmxlIGNoZWNrcG9pbnQsIHNob3VkIGl0IGJlOgo+IGN0eC0+c3Bl
-Y19tYXNrICY9IH5GMkZTX1NQRUNfY2hlY2twb2ludF9kaXNhYmxlX2NhcF9wZXJjOwo+IGN0eC0+
-c3BlY19tYXNrICY9IH5GMkZTX1NQRUNfY2hlY2twb2ludF9kaXNhYmxlX2NhcDsKPiBwbGVhc2Ug
-Y29ycmVjdCBtZSBpZiBJIG1pc3VuZGVyc3RhbmRpbmcuCgpaaGlndW8sCgpJTU8sIEYyRlNfU1BF
-Q19jaGVja3BvaW50X2Rpc2FibGVfY2FwX3BlcmMgb3IgRjJGU19TUEVDX2NoZWNrcG9pbnRfZGlz
-YWJsZV9jYXAKZmxhZ3MgY2FuIGJlIGFkZGVkIHRvIGN0eC0+c3BlY19tYXNrIHRvIGluZGljYXRl
-IGN0eC51bnVzYWJsZV9jYXBfcGVyYyBvcgpjdHgudW51c2FibGVfY2FwIGhhcyBiZWVuIHVwZGF0
-ZWQsIHRoZW4gd2UgY2FuIHN0b3JlIGxhc3QgcGFyYW1ldGVyIHZhbHVlIGZyb20KY3R4IHRvIHNi
-aSBpbiBmMmZzX2FwcGx5X29wdGlvbnMoKSBhcyBiZWxvdzoKCglpZiAoY3R4LT5zcGVjX21hc2sg
-JiBGMkZTX1NQRUNfY2hlY2twb2ludF9kaXNhYmxlX2NhcCkKCQlGMkZTX09QVElPTihzYmkpLnVu
-dXNhYmxlX2NhcCA9IEYyRlNfQ1RYX0lORk8oY3R4KS51bnVzYWJsZV9jYXA7CglpZiAoY3R4LT5z
-cGVjX21hc2sgJiBGMkZTX1NQRUNfY2hlY2twb2ludF9kaXNhYmxlX2NhcF9wZXJjKQoJCUYyRlNf
-T1BUSU9OKHNiaSkudW51c2FibGVfY2FwX3BlcmMgPQoJCQkJCUYyRlNfQ1RYX0lORk8oY3R4KS51
-bnVzYWJsZV9jYXBfcGVyYzsKCk9yIGFtIEkgbWlzc2luZyBzb21ldGhpbmcgaGVyZT8KClRoYW5r
-cywKCj4gdGhhbmtzIQo+PiAgICAgICAgICAgICAgICAgICAgICAgICAgY3R4X2NsZWFyX29wdChj
-dHgsIEYyRlNfTU9VTlRfRElTQUJMRV9DSEVDS1BPSU5UKTsKPj4gICAgICAgICAgICAgICAgICAg
-ICAgICAgIGJyZWFrOwo+PiAgICAgICAgICAgICAgICAgIGRlZmF1bHQ6Cj4+IC0tCj4+IDIuNDku
-MAo+Pgo+Pgo+Pgo+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwo+PiBMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdAo+PiBMaW51eC1mMmZzLWRldmVs
-QGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+PiBodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9s
-aXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCgoKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0Ckxp
-bnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNl
-Zm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+Xiaojun,
+
+I just notice generic/483 will fail w/ this change, can you please take a
+look?
+
+Thanks,
+
+On 8/7/2025 4:44 PM, Wang Xiaojun wrote:
+> This patch fixes missing space reclamation during the recovery process.
+> In the following scenarios, F2FS cannot reclaim truncated space.
+> case 1:
+> write file A, size is 1G | CP | truncate A to 1M | fsync A | SPO
+> 
+> case 2:
+> CP | write file A, size is 1G | fsync A | truncate A to 1M | fsync A |SPO
+> 
+> During the recovery process, F2FS will recover file A,
+> but the 1M-1G space cannot be reclaimed.
+> 
+> Fixes: d624c96fb3249 ("f2fs: add recovery routines for roll-forward")
+> 
+> Signed-off-by: Wang Xiaojun <wangxiaojun@vivo.com>
+> ---
+> v3: Add a Fixes line.
+> v2: Apply Chao's suggestion from v1. No logical changes.
+> v1: Fix missing space reclamation during the recovery process.
+> ---
+>   fs/f2fs/f2fs.h     |  1 +
+>   fs/f2fs/recovery.c | 18 +++++++++++++++++-
+>   2 files changed, 18 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 46be7560548c..28fce59198ce 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -459,6 +459,7 @@ struct fsync_inode_entry {
+>   	struct inode *inode;	/* vfs inode pointer */
+>   	block_t blkaddr;	/* block address locating the last fsync */
+>   	block_t last_dentry;	/* block address locating the last dentry */
+> +	loff_t max_i_size;	/* previous max file size for truncate */
+>   };
+>   
+>   #define nats_in_cursum(jnl)		(le16_to_cpu((jnl)->n_nats))
+> diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+> index 4cb3a91801b4..68b62c8a74d3 100644
+> --- a/fs/f2fs/recovery.c
+> +++ b/fs/f2fs/recovery.c
+> @@ -95,6 +95,7 @@ static struct fsync_inode_entry *add_fsync_inode(struct f2fs_sb_info *sbi,
+>   	entry = f2fs_kmem_cache_alloc(fsync_entry_slab,
+>   					GFP_F2FS_ZERO, true, NULL);
+>   	entry->inode = inode;
+> +	entry->max_i_size = i_size_read(inode);
+>   	list_add_tail(&entry->list, head);
+>   
+>   	return entry;
+> @@ -796,6 +797,7 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
+>   	while (1) {
+>   		struct fsync_inode_entry *entry;
+>   		struct folio *folio;
+> +		loff_t i_size;
+>   
+>   		if (!f2fs_is_valid_blkaddr(sbi, blkaddr, META_POR))
+>   			break;
+> @@ -828,6 +830,9 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
+>   				break;
+>   			}
+>   			recovered_inode++;
+> +			i_size = i_size_read(entry->inode);
+> +			if (entry->max_i_size < i_size)
+> +				entry->max_i_size = i_size;
+>   		}
+>   		if (entry->last_dentry == blkaddr) {
+>   			err = recover_dentry(entry->inode, folio, dir_list);
+> @@ -844,8 +849,19 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
+>   		}
+>   		recovered_dnode++;
+>   
+> -		if (entry->blkaddr == blkaddr)
+> +		if (entry->blkaddr == blkaddr) {
+> +			i_size = i_size_read(entry->inode);
+> +			if (entry->max_i_size > i_size) {
+> +				err = f2fs_truncate_blocks(entry->inode,
+> +							i_size, false);
+> +				if (err) {
+> +					f2fs_folio_put(folio, true);
+> +					break;
+> +				}
+> +				f2fs_mark_inode_dirty_sync(entry->inode, true);
+> +			}
+>   			list_move_tail(&entry->list, tmp_inode_list);
+> +		}
+>   next:
+>   		ra_blocks = adjust_por_ra_blocks(sbi, ra_blocks, blkaddr,
+>   					next_blkaddr_of_node(folio));
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
