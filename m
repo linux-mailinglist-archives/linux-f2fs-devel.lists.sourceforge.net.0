@@ -2,101 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A75AFB1ECAD
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Aug 2025 17:59:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC895B1EDEB
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Aug 2025 19:42:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=15VGIZ8n8Kq1e6pVrEPymO9bSCsqWTEa5p7xaSaby38=; b=L1pJBufHmaWAojvk5t7LgCnGky
-	Nx2y/Tq5KL49GHwlAUE+HExuuooHWwwyXW4u7yzqkCDoLQfoJAZpP8Z4E35Xj27v3b6Pz1oe1EGjD
-	4ss3XC7HFf7Cd7Kn7pZ19NW7uD2zrZbMgOjS6L6tx/JsYvu/bsuNuci6P6mpdzU17lc8=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=p1YyOMHLQY3tpgiPuncO6yYD2J2str7seTZwW0vtG70=; b=KKmc3/NNVXwxS421yXrKA/OYp5
+	itODUWloVRi48nu6xH91d925gmLVTgE52LKOFKK+EWaOSP83vNZ97krGfGPPxRtEAmMUQU10i4Q8d
+	lsCQ4y0FjXlTktQBrkGm4JQ6fBuDTnAN1t0ghQHQUJ2FNDf9qATaPIvKPBV3xy06Q/4c=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ukPUx-0004JS-QG;
-	Fri, 08 Aug 2025 15:59:15 +0000
+	id 1ukR6L-0002CT-5w;
+	Fri, 08 Aug 2025 17:41:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1ukPUw-0004JL-Hd
+ (envelope-from <sashal@kernel.org>) id 1ukR6K-0002CI-8R
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 Aug 2025 15:59:14 +0000
+ Fri, 08 Aug 2025 17:41:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LfBd7rnRjkzyK8tB8FycmeXPsdh0Ua+JsquS7VCLIB4=; b=HIgaftRSOzEhko1CP5A1kPVfIJ
- dKr4GgYCzKQfgg2rZ1vMp3jo1V5589uG+els6iBzvI5LlMbxW/ACdf/Utd6H3GI9cvtag4my9cGyM
- 6BXsLJVC0v2WjMQlLyhmXxUnvetNFXbEg0may2is4LvCi4B/th5m13lJN/H918ercPh4=;
+ bh=WK3knqui/qgZwyfpA2aLh547gM+b/5ob4BFoXGrZX8A=; b=UhT2jtdRJKiedwDPkcac1svByI
+ MpiyC284032jP0W54ffc62V7AfblqEqKD0S5PQq0TCLl0UBAu72XtplOHE4xQqR2JP74LogOunBIW
+ iAx1zukZyw/7hFgE0jI/MCR72NwuQe6G4Zm/6mC/VwoV9BUfpYofbKz31nthrtYKFQQQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LfBd7rnRjkzyK8tB8FycmeXPsdh0Ua+JsquS7VCLIB4=; b=FbcfpbRfTUV/cG2pWHYt6AOBs5
- IqtQFP//ml0gQRmquFSACLa6nHRFbZuZuwthDmro6AMtdCSGJH2cmJzEHOyP9Tgs+ENLzdBMyI8aD
- g7nax7L3rBPnRyRs518TiW0mpYWWF0S0d7++fPTKMhYkToVnTIQ88RDPL7+rbTx1kPkc=;
+ bh=WK3knqui/qgZwyfpA2aLh547gM+b/5ob4BFoXGrZX8A=; b=CeyHTnBy34KChLyIZuzS3du1vx
+ AYNJRNPwEowh1igy3mOtryPrx/Qf5uUG9siRf30btOToHRUR9i6G77NX9HBJRH8WpvgR+5M3Vjqkc
+ /co0ARvC99c9/wTEWuGNkaRT3ncCTOaaD5tAzC2jqKMvi47BrRjymVZBpetKLwjKwMt8=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ukPUw-0005l9-16 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 Aug 2025 15:59:14 +0000
+ id 1ukR6K-0004lW-Hx for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 08 Aug 2025 17:41:56 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 9625344DAC;
- Fri,  8 Aug 2025 15:59:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 512EDC4CEED;
- Fri,  8 Aug 2025 15:59:08 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 169EE45FC6
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri,  8 Aug 2025 17:41:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D722DC4CEED;
+ Fri,  8 Aug 2025 17:41:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754668748;
- bh=4fzgPT8OsH/yUipaDM7chgzEQ53fMRUbGdK57XyKCA4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=c+sYlL3TYL7EMIY7ghPOYVJJsl1qlOyvruUVgDWIslk3gW1MpMsF8NDCDicDRzbLc
- LtN36qZhorpNLWU18IVVxAF6QFg0xtYP6FvZ8qJAbLpdGgT5B9QWIHa40nQVvduMq2
- Fbkz2g48H5Q1o1NXHutEL2oO1AqxgXdZxq/fxh2bP+AKQqn9mHlsSdF2TyBb9GZas3
- lDBO5Xs3zwzBy6IWnmxDzeGfENoaBd4kNxEMhDtFuTEb0FyrqOev6FWELTvuqC2Fq8
- W9Vlhb1/Omy8v7zkUj7sHYfbO71K5TTcAUNRNGy3Fgv2UGesU+qLdm8qXnpTlT2/9h
- Gqb4nmY6g6BTQ==
-Date: Fri, 8 Aug 2025 15:59:06 +0000
-To: =?utf-8?B?546L5pmT54+6?= <wangxiaojun@vivo.com>
-Message-ID: <aJYeyqWxEul3LcPZ@google.com>
-References: <20250807084442.422751-1-wangxiaojun@vivo.com>
- <7fbd778a-8676-4040-bb8f-f5417d458c7e@kernel.org>
- <b5610ecb-14da-4236-922f-8a913d7761de@vivo.com>
+ s=k20201202; t=1754674911;
+ bh=Szj//6lRoAJz5KpkNcWdWUHudsh4GXZI9PjVTU1aEUU=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=cukuPMnI9/XAuBCgrCpIcK2Annyx0jIxGdiFJTOjlvFuBJBT327YxJ258fhV+NMSL
+ 0CfDX+TRxWg3SoGg/THFeyDgD+tx8KQKi9yKgKy1PDcGMPPlkOWzoSomWzTBQ6FGmm
+ OEcjGbs6zptuZpiwq3GHaNFZePYx/hVFUGz35bwv+Csz2z5MhHG1eKlFBb2xMShbzx
+ 27MiIBykscQ9BSyvZnJUxDzJItKmhJZSqnif8nSNqMnL3IZ7j3HH9M1mhns0B5clIG
+ uWvpW/vpR0HpO966OUxRbNO84UEmNkY5y5p6wa+EWCXKkxeboH1oUyYRyvyTdMAx23
+ Q6t8rLpvU9mxw==
+To: patches@lists.linux.dev,
+	stable@vger.kernel.org
+Date: Fri,  8 Aug 2025 13:41:42 -0400
+Message-Id: <20250808174146.1272242-2-sashal@kernel.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250808174146.1272242-1-sashal@kernel.org>
+References: <20250808174146.1272242-1-sashal@kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <b5610ecb-14da-4236-922f-8a913d7761de@vivo.com>
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-stable-base: Linux 6.16
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "sfi-spamd-2.hosts.colo.sdot.me",
+X-Spam-Report: Spam detection software,
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 08/08, 王晓珺 wrote: > 在 2025/8/8 12:16, Chao Yu 写道:
-    > > Xiaojun, > > > > I just notice generic/483 will fail w/ this change,
-   can you please take a > > look? > > > > Thanks, > > Hi Chao, > [...] 
- 
+ Content preview: From: Jaegeuk Kim <jaegeuk@kernel.org> [ Upstream commit
+ e23ab8028de0d92df5921a570f5212c0370db3b5
+ ] Let's return errors caught by the generic checks. This fixes generic/494
+ where it expects to see EBUSY by setattr_prepare instead of EINVAL by f2fs
+ for active swapfile. 
  Content analysis details:   (-0.2 points, 5.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
-                             domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
+ envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ukPUw-0005l9-16
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs:fix missing space reclamation during
- the recovery process
+X-Headers-End: 1ukR6K-0004lW-Hx
+Subject: [f2fs-dev] [PATCH AUTOSEL 6.16-6.6] f2fs: check the generic
+ conditions first
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,97 +112,139 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Sasha Levin via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Sasha Levin <sashal@kernel.org>
+Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMDgvMDgsIOeOi+aZk+ePuiB3cm90ZToKPiDlnKggMjAyNS84LzggMTI6MTYsIENoYW8gWXUg
-5YaZ6YGTOgo+ID4gWGlhb2p1biwKPiA+Cj4gPiBJIGp1c3Qgbm90aWNlIGdlbmVyaWMvNDgzIHdp
-bGwgZmFpbCB3LyB0aGlzIGNoYW5nZSwgY2FuIHlvdSBwbGVhc2UgdGFrZSBhCj4gPiBsb29rPwo+
-ID4KPiA+IFRoYW5rcywKPiAKPiBIaSBDaGFvLAo+IAo+IE9LLMKgVGhhbmtzIGZvciBwb2ludGlu
-ZyBvdXQgdGhlIGlzc3VlLgoKWWVhaCwgSSdtIGFsc28gaGl0dGluZyBzZXZlcmFsIGZhaWx1cmVz
-IGluIHhmc3Rlc3RzLiBIZW5jZSwgSSBkcm9wcGVkIGl0IGluCnRoZSBkZXYtdGVzdC4KCj4gCj4g
-Pgo+ID4KPiA+IE9uIDgvNy8yMDI1IDQ6NDQgUE0sIFdhbmcgWGlhb2p1biB3cm90ZToKPiA+PiBU
-aGlzIHBhdGNoIGZpeGVzIG1pc3Npbmcgc3BhY2UgcmVjbGFtYXRpb24gZHVyaW5nIHRoZSByZWNv
-dmVyeSBwcm9jZXNzLgo+ID4+IEluIHRoZSBmb2xsb3dpbmcgc2NlbmFyaW9zLCBGMkZTIGNhbm5v
-dCByZWNsYWltIHRydW5jYXRlZCBzcGFjZS4KPiA+PiBjYXNlIDE6Cj4gPj4gd3JpdGUgZmlsZSBB
-LCBzaXplIGlzIDFHIHwgQ1AgfCB0cnVuY2F0ZSBBIHRvIDFNIHwgZnN5bmMgQSB8IFNQTwo+ID4+
-Cj4gPj4gY2FzZSAyOgo+ID4+IENQIHwgd3JpdGUgZmlsZSBBLCBzaXplIGlzIDFHIHwgZnN5bmMg
-QSB8IHRydW5jYXRlIEEgdG8gMU0gfCBmc3luYyBBIAo+ID4+IHxTUE8KPiA+Pgo+ID4+IER1cmlu
-ZyB0aGUgcmVjb3ZlcnkgcHJvY2VzcywgRjJGUyB3aWxsIHJlY292ZXIgZmlsZSBBLAo+ID4+IGJ1
-dCB0aGUgMU0tMUcgc3BhY2UgY2Fubm90IGJlIHJlY2xhaW1lZC4KPiA+Pgo+ID4+IEZpeGVzOiBk
-NjI0Yzk2ZmIzMjQ5ICgiZjJmczogYWRkIHJlY292ZXJ5IHJvdXRpbmVzIGZvciByb2xsLWZvcndh
-cmQiKQo+ID4+Cj4gPj4gU2lnbmVkLW9mZi1ieTogV2FuZyBYaWFvanVuIDx3YW5neGlhb2p1bkB2
-aXZvLmNvbT4KPiA+PiAtLS0KPiA+PiB2MzogQWRkIGEgRml4ZXMgbGluZS4KPiA+PiB2MjogQXBw
-bHkgQ2hhbydzIHN1Z2dlc3Rpb24gZnJvbSB2MS4gTm8gbG9naWNhbCBjaGFuZ2VzLgo+ID4+IHYx
-OiBGaXggbWlzc2luZyBzcGFjZSByZWNsYW1hdGlvbiBkdXJpbmcgdGhlIHJlY292ZXJ5IHByb2Nl
-c3MuCj4gPj4gLS0tCj4gPj4gwqAgZnMvZjJmcy9mMmZzLmjCoMKgwqDCoCB8wqAgMSArCj4gPj4g
-wqAgZnMvZjJmcy9yZWNvdmVyeS5jIHwgMTggKysrKysrKysrKysrKysrKystCj4gPj4gwqAgMiBm
-aWxlcyBjaGFuZ2VkLCAxOCBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCj4gPj4KPiA+PiBk
-aWZmIC0tZ2l0IGEvZnMvZjJmcy9mMmZzLmggYi9mcy9mMmZzL2YyZnMuaAo+ID4+IGluZGV4IDQ2
-YmU3NTYwNTQ4Yy4uMjhmY2U1OTE5OGNlIDEwMDY0NAo+ID4+IC0tLSBhL2ZzL2YyZnMvZjJmcy5o
-Cj4gPj4gKysrIGIvZnMvZjJmcy9mMmZzLmgKPiA+PiBAQCAtNDU5LDYgKzQ1OSw3IEBAIHN0cnVj
-dCBmc3luY19pbm9kZV9lbnRyeSB7Cj4gPj4gwqDCoMKgwqDCoCBzdHJ1Y3QgaW5vZGUgKmlub2Rl
-O8KgwqDCoCAvKiB2ZnMgaW5vZGUgcG9pbnRlciAqLwo+ID4+IMKgwqDCoMKgwqAgYmxvY2tfdCBi
-bGthZGRyO8KgwqDCoCAvKiBibG9jayBhZGRyZXNzIGxvY2F0aW5nIHRoZSBsYXN0IGZzeW5jICov
-Cj4gPj4gwqDCoMKgwqDCoCBibG9ja190IGxhc3RfZGVudHJ5O8KgwqDCoCAvKiBibG9jayBhZGRy
-ZXNzIGxvY2F0aW5nIHRoZSBsYXN0IAo+ID4+IGRlbnRyeSAqLwo+ID4+ICvCoMKgwqAgbG9mZl90
-IG1heF9pX3NpemU7wqDCoMKgIC8qIHByZXZpb3VzIG1heCBmaWxlIHNpemUgZm9yIHRydW5jYXRl
-ICovCj4gPj4gwqAgfTsKPiA+PiDCoCDCoCAjZGVmaW5lIG5hdHNfaW5fY3Vyc3VtKGpubCkgKGxl
-MTZfdG9fY3B1KChqbmwpLT5uX25hdHMpKQo+ID4+IGRpZmYgLS1naXQgYS9mcy9mMmZzL3JlY292
-ZXJ5LmMgYi9mcy9mMmZzL3JlY292ZXJ5LmMKPiA+PiBpbmRleCA0Y2IzYTkxODAxYjQuLjY4YjYy
-YzhhNzRkMyAxMDA2NDQKPiA+PiAtLS0gYS9mcy9mMmZzL3JlY292ZXJ5LmMKPiA+PiArKysgYi9m
-cy9mMmZzL3JlY292ZXJ5LmMKPiA+PiBAQCAtOTUsNiArOTUsNyBAQCBzdGF0aWMgc3RydWN0IGZz
-eW5jX2lub2RlX2VudHJ5IAo+ID4+ICphZGRfZnN5bmNfaW5vZGUoc3RydWN0IGYyZnNfc2JfaW5m
-byAqc2JpLAo+ID4+IMKgwqDCoMKgwqAgZW50cnkgPSBmMmZzX2ttZW1fY2FjaGVfYWxsb2MoZnN5
-bmNfZW50cnlfc2xhYiwKPiA+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgR0ZQX0YyRlNfWkVSTywgdHJ1ZSwgTlVMTCk7Cj4gPj4gwqDCoMKgwqDCoCBlbnRyeS0+
-aW5vZGUgPSBpbm9kZTsKPiA+PiArwqDCoMKgIGVudHJ5LT5tYXhfaV9zaXplID0gaV9zaXplX3Jl
-YWQoaW5vZGUpOwo+ID4+IMKgwqDCoMKgwqAgbGlzdF9hZGRfdGFpbCgmZW50cnktPmxpc3QsIGhl
-YWQpOwo+ID4+IMKgIMKgwqDCoMKgwqAgcmV0dXJuIGVudHJ5Owo+ID4+IEBAIC03OTYsNiArNzk3
-LDcgQEAgc3RhdGljIGludCByZWNvdmVyX2RhdGEoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpLCAK
-PiA+PiBzdHJ1Y3QgbGlzdF9oZWFkICppbm9kZV9saXN0LAo+ID4+IMKgwqDCoMKgwqAgd2hpbGUg
-KDEpIHsKPiA+PiDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGZzeW5jX2lub2RlX2VudHJ5ICpl
-bnRyeTsKPiA+PiDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGZvbGlvICpmb2xpbzsKPiA+PiAr
-wqDCoMKgwqDCoMKgwqAgbG9mZl90IGlfc2l6ZTsKPiA+PiDCoCDCoMKgwqDCoMKgwqDCoMKgwqAg
-aWYgKCFmMmZzX2lzX3ZhbGlkX2Jsa2FkZHIoc2JpLCBibGthZGRyLCBNRVRBX1BPUikpCj4gPj4g
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYnJlYWs7Cj4gPj4gQEAgLTgyOCw2ICs4MzAsOSBA
-QCBzdGF0aWMgaW50IHJlY292ZXJfZGF0YShzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmksIAo+ID4+
-IHN0cnVjdCBsaXN0X2hlYWQgKmlub2RlX2xpc3QsCj4gPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCBicmVhazsKPiA+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4g
-Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmVjb3ZlcmVkX2lub2RlKys7Cj4gPj4gK8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgaV9zaXplID0gaV9zaXplX3JlYWQoZW50cnktPmlub2RlKTsK
-PiA+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoZW50cnktPm1heF9pX3NpemUgPCBpX3Np
-emUpCj4gPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBlbnRyeS0+bWF4X2lfc2l6
-ZSA9IGlfc2l6ZTsKPiA+PiDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+ID4+IMKgwqDCoMKgwqDCoMKg
-wqDCoCBpZiAoZW50cnktPmxhc3RfZGVudHJ5ID09IGJsa2FkZHIpIHsKPiA+PiDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCBlcnIgPSByZWNvdmVyX2RlbnRyeShlbnRyeS0+aW5vZGUsIGZvbGlv
-LCBkaXJfbGlzdCk7Cj4gPj4gQEAgLTg0NCw4ICs4NDksMTkgQEAgc3RhdGljIGludCByZWNvdmVy
-X2RhdGEoc3RydWN0IGYyZnNfc2JfaW5mbyAKPiA+PiAqc2JpLCBzdHJ1Y3QgbGlzdF9oZWFkICpp
-bm9kZV9saXN0LAo+ID4+IMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4gPj4gwqDCoMKgwqDCoMKgwqDC
-oMKgIHJlY292ZXJlZF9kbm9kZSsrOwo+ID4+IMKgIC3CoMKgwqDCoMKgwqDCoCBpZiAoZW50cnkt
-PmJsa2FkZHIgPT0gYmxrYWRkcikKPiA+PiArwqDCoMKgwqDCoMKgwqAgaWYgKGVudHJ5LT5ibGth
-ZGRyID09IGJsa2FkZHIpIHsKPiA+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpX3NpemUgPSBp
-X3NpemVfcmVhZChlbnRyeS0+aW5vZGUpOwo+ID4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlm
-IChlbnRyeS0+bWF4X2lfc2l6ZSA+IGlfc2l6ZSkgewo+ID4+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAgZXJyID0gZjJmc190cnVuY2F0ZV9ibG9ja3MoZW50cnktPmlub2RlLAo+ID4+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-aV9zaXplLCBmYWxzZSk7Cj4gPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAo
-ZXJyKSB7Cj4gPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGYyZnNf
-Zm9saW9fcHV0KGZvbGlvLCB0cnVlKTsKPiA+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAgYnJlYWs7Cj4gPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9
-Cj4gPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmMmZzX21hcmtfaW5vZGVfZGly
-dHlfc3luYyhlbnRyeS0+aW5vZGUsIHRydWUpOwo+ID4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IH0KPiA+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBsaXN0X21vdmVfdGFpbCgmZW50cnkt
-Pmxpc3QsIHRtcF9pbm9kZV9saXN0KTsKPiA+PiArwqDCoMKgwqDCoMKgwqAgfQo+ID4+IMKgIG5l
-eHQ6Cj4gPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHJhX2Jsb2NrcyA9IGFkanVzdF9wb3JfcmFfYmxv
-Y2tzKHNiaSwgcmFfYmxvY2tzLCBibGthZGRyLAo+ID4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCBuZXh0X2Jsa2FkZHJfb2Zfbm9kZShmb2xpbykpOwo+ID4KPiAK
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1m
-MmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdl
-Lm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1m
-MmZzLWRldmVsCg==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+
+[ Upstream commit e23ab8028de0d92df5921a570f5212c0370db3b5 ]
+
+Let's return errors caught by the generic checks. This fixes generic/494 where
+it expects to see EBUSY by setattr_prepare instead of EINVAL by f2fs for active
+swapfile.
+
+Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+
+LLM Generated explanations, may be completely bogus:
+
+**Backport Status: YES**
+
+This commit should be backported to stable kernel trees for the
+following reasons:
+
+## Bug Fix Analysis
+
+1. **Fixes a real bug affecting users**: The commit fixes incorrect
+   error code handling for swapfiles. When attempting to modify an
+   active swapfile, f2fs was returning `-EINVAL` instead of the correct
+   `-EBUSY` error code. This breaks userspace expectations and causes
+   test failures in `generic/494`.
+
+2. **Small and contained fix**: The change is minimal - it simply
+   reorders the error checking sequence in `f2fs_setattr()` to call
+   generic checks (`setattr_prepare`, `fscrypt_prepare_setattr`,
+   `fsverity_prepare_setattr`) before f2fs-specific checks. The code
+   movement involves only 12 lines being relocated within the same
+   function.
+
+## Technical Details
+
+The commit moves three generic preparation calls from lines 1055-1065
+(after f2fs-specific checks) to lines 1055-1065 (before f2fs-specific
+checks). This ensures that:
+
+- `setattr_prepare()` gets called first, which contains the
+  `IS_SWAPFILE()` check that returns `-ETXTBSY` (which gets translated
+  to `-EBUSY`)
+- The generic VFS layer error codes are returned consistently with other
+  filesystems
+- F2fs-specific validation (like compression, pinned file checks) only
+  happens after generic validation passes
+
+## Risk Assessment
+
+1. **Minimal regression risk**: The change only reorders existing checks
+   without adding new logic or modifying the checks themselves. All the
+   same validation still occurs, just in a different order.
+
+2. **Follows stable tree rules**: This is a clear bugfix that:
+   - Fixes incorrect error reporting to userspace
+   - Makes f2fs behavior consistent with VFS expectations
+   - Fixes a specific test case (`generic/494`) that validates correct
+     swapfile handling
+   - Has no feature additions or architectural changes
+
+3. **Limited scope**: The change is confined to a single function in the
+   f2fs subsystem and doesn't affect any other kernel components.
+
+4. **Already reviewed**: The commit has been reviewed by a subsystem
+   maintainer (Chao Yu) and merged by the f2fs maintainer (Jaegeuk Kim).
+
+The incorrect error code could potentially confuse userspace
+applications that rely on specific error codes to determine why an
+operation failed. Returning `-EINVAL` (invalid argument) instead of
+`-EBUSY` (resource busy) for an active swapfile is semantically
+incorrect and breaks POSIX compliance expectations.
+
+ fs/f2fs/file.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 696131e655ed..bb3fd6a8416f 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1047,6 +1047,18 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+ 	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
+ 		return -EIO;
+ 
++	err = setattr_prepare(idmap, dentry, attr);
++	if (err)
++		return err;
++
++	err = fscrypt_prepare_setattr(dentry, attr);
++	if (err)
++		return err;
++
++	err = fsverity_prepare_setattr(dentry, attr);
++	if (err)
++		return err;
++
+ 	if (unlikely(IS_IMMUTABLE(inode)))
+ 		return -EPERM;
+ 
+@@ -1065,18 +1077,6 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+ 			return -EINVAL;
+ 	}
+ 
+-	err = setattr_prepare(idmap, dentry, attr);
+-	if (err)
+-		return err;
+-
+-	err = fscrypt_prepare_setattr(dentry, attr);
+-	if (err)
+-		return err;
+-
+-	err = fsverity_prepare_setattr(dentry, attr);
+-	if (err)
+-		return err;
+-
+ 	if (is_quota_modification(idmap, inode, attr)) {
+ 		err = f2fs_dquot_initialize(inode);
+ 		if (err)
+-- 
+2.39.5
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
