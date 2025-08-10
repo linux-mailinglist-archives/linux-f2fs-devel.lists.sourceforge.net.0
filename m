@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10A50B1F904
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 10 Aug 2025 10:00:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C6E40B1F906
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 10 Aug 2025 10:00:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=xk/25hcVFBn+kLjqaGIakM8mhhp1V4LD5jtSxBXUE/I=; b=AmFabIOM6Qi1iOoggMFhonq6ND
-	60rVsT15lNLDsSlBv4HDvs0vhJDrWlPPy6BVJgrQzFftwGi++hYV6SUVqblUj0Dov+qg+n0NLd+6O
-	+3fmvSOA4rV2dKQQqAuRzRO7Mu5s6SwEcI3YYaARaOTcYJesYotWaVnmfD8AHMB5jS34=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=XcB+YUEY4CXuZKbNcnqN4cygt4D7aYuGR56KUyDGK04=; b=gRsFon2Io11dIR4EBxeQatoGqQ
+	rahxcrmKtEFy0tLIf7xoBrTKWAk70/D+U68tuTh44//L+1+c+1FEmYaUVP5lFhqPfPXd4201EM78D
+	CFLnbukXt6vraCdZg2kawEvtG1qHUyHJIRX/CndqYXFKmiDFr7JK2VYS3pujFfiOfwzk=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ul0yW-0003Tg-EI;
-	Sun, 10 Aug 2025 08:00:17 +0000
+	id 1ul0yc-0002YD-NR;
+	Sun, 10 Aug 2025 08:00:22 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1ul0yV-0003Ta-JM
+ (envelope-from <ebiggers@kernel.org>) id 1ul0yb-0002Xu-3V
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 10 Aug 2025 08:00:16 +0000
+ Sun, 10 Aug 2025 08:00:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kDS6Qm+ARvJ1Ux5PbS8NB1R1tfva1Nms5ie0IOsUZuA=; b=eVOtBesXu0b4SLYFv7M+ugj9t2
- +pGnqIW9/Jj5w/SBZ3+mg3j1yNy3+lXlQP1Y14GHwCwnktMY6fYH+D9IFV0tgG98hB3fXm5Vgp+Hh
- R/v4kp9QN/pEjQpMcNa8Y9P+GwaPOHWMkinJ1QQ/H4JzW7bHYrMpdcZIGY05GFyXieko=;
+ bh=TsQ9RUxC/P1M8vyR7p5WTzc9ZZaVmiCuBZOhmUzI2XA=; b=MyIYh5Dz4IzQbrpIJZ06L+bEtT
+ kdXcrDuYKYsfBDW8eYkY56DvYFX7LO7ZUsoqHGTACCwkwMa9tVkFivfyMl/sO0U3GYWwZ9lcFfPfw
+ NfU6JRCZajhml8xv3GvXVSAP7PQ9CcwofQzvTHefovMxAnKUkow1P598QW9IXQHIKPMA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,47 +40,47 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kDS6Qm+ARvJ1Ux5PbS8NB1R1tfva1Nms5ie0IOsUZuA=; b=S/QpEFJwawEgPIGA872QHpwHG3
- ZvglLR6vYslhtJJt8dlvDxJBR7wt8qfX/LzgTDaP/MRqlwkKVfAuNYPaQ5zFJfleogLqyPSuvDPli
- IupuZRxSrcgeAnxmfYAjoQNxnvFkySVGe3wsDK8w7aQC0KLFti6yONx/KULhXaAJYOGw=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=TsQ9RUxC/P1M8vyR7p5WTzc9ZZaVmiCuBZOhmUzI2XA=; b=hPHEJUmrIiEOMoQ4zbdUG4N9hf
+ mzvd9m1RliX8jSfvm7Y4K5mwex/yyvugNjF+kb4f6jvYOPUJ8S40BgnI9EpoHq914C5wvuJRa8Jgl
+ 4I9IZoFiOrKXaCLed/g1JyFWVgG7vKCHfCai4JJEMHFA4GSWqLMIWluicnCeY93ljRTM=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ul0yV-00010W-SV for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 10 Aug 2025 08:00:16 +0000
+ id 1ul0ya-00011H-N8 for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 10 Aug 2025 08:00:21 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 3C55EA55132;
+ by sea.source.kernel.org (Postfix) with ESMTP id 6880B45C5F;
  Sun, 10 Aug 2025 08:00:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D421C4CEEB;
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0353DC4CEFB;
  Sun, 10 Aug 2025 08:00:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754812809;
- bh=Qm1plsgVlmTBCpbZLW/xcJNpj1w2kpvFy1WqJ9hSAZw=;
+ s=k20201202; t=1754812810;
+ bh=bmB+BqOK47AQ74zOAlenVEXHIBC1qQuTYrDPLOSDJDw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=IBNeIHJ2heVgM/csrEC21oBuVod6FeprqFqd1W+zzBuMWSAFjawLCDuBK4bneu7ou
- 0AlF0wyE4wt//266UDH7gUEIzRcrV+jXb8aeubS8u1tpfdXci4muagNyNZfgTKW7z6
- jF+JQtHOfsQEB/S3jXe+F3X3rWlXyf4VbWi7aYpAxVSjgjSsDaWRFTSxEVW7ec7/Rc
- kHShVks2Ht5rGE4vyY02UuKKgzsrXLCZoQMGvSwhz/kAeIpVrCuHfxcKEFzFAG1/fr
- XCR8JpQGpS8e3uHh5SXlecIvhE6bSOWV5WiT27UJA8SYlbR+nXiMx3EeZEKqt1YvaB
- x54EA9wnkMuUw==
+ b=o3Ppu9lCK+UMIRCJ649FLlexF8zz+c5Fny3h+DogkpOBxxoTI+SD12otxBd4HJPGN
+ KrDlaO+YuVwOT5khIksO9p/0SHCSpmXkMAtaa9ZYhjNb+HopBdHl5Dgaq7wIamHvE4
+ Lx0RUvlNHg9683rs5qCfE6WCKJafDQIjyfimusDQPjsBQCFnURsh7M1PygjfbmsQsO
+ TcauGSZNJ/T+xRc3iJJaE+4/RX8mbkSg3olk0B9E8OMQ3IYEwZXXP7hfpdQCMrWXxi
+ v6M244Sk1mMSGGyYMPXvvqKBHDNMb/N2yOcxgbUKe/kBGuifA8XvEt1Ov4Sxny0gpD
+ tevQolZt9j7OA==
 To: linux-fscrypt@vger.kernel.org,
 	fsverity@lists.linux.dev
-Date: Sun, 10 Aug 2025 00:56:58 -0700
-Message-ID: <20250810075706.172910-6-ebiggers@kernel.org>
+Date: Sun, 10 Aug 2025 00:56:59 -0700
+Message-ID: <20250810075706.172910-7-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250810075706.172910-1-ebiggers@kernel.org>
 References: <20250810075706.172910-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: Move the fscrypt_inode_info pointer into the
  filesystem-specific
- part of the inode by adding the field ubifs_inode::i_crypt_info and
+ part of the inode by adding the field ceph_inode_info::i_crypt_info and
  configuring
  fscrypt_operations::inode_info_offs accordingly. This is a prerequisite for
  a later commit that removes inode::i_crypt_info, saving memory and improving
@@ -88,16 +88,16 @@ X-Spam-Report: Spam detection software,
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ul0yV-00010W-SV
-Subject: [f2fs-dev] [PATCH v5 05/13] ubifs: move crypt info pointer to
+X-Headers-End: 1ul0ya-00011H-N8
+Subject: [f2fs-dev] [PATCH v5 06/13] ceph: move crypt info pointer to
  fs-specific part of inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -123,71 +123,71 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Move the fscrypt_inode_info pointer into the filesystem-specific part of
-the inode by adding the field ubifs_inode::i_crypt_info and configuring
-fscrypt_operations::inode_info_offs accordingly.
+the inode by adding the field ceph_inode_info::i_crypt_info and
+configuring fscrypt_operations::inode_info_offs accordingly.
 
 This is a prerequisite for a later commit that removes
 inode::i_crypt_info, saving memory and improving cache efficiency with
 filesystems that don't support fscrypt.
 
-Note that the initialization of ubifs_inode::i_crypt_info to NULL on
-inode allocation is handled by the memset() in ubifs_alloc_inode().
-
 Co-developed-by: Christian Brauner <brauner@kernel.org>
 Signed-off-by: Christian Brauner <brauner@kernel.org>
 Signed-off-by: Eric Biggers <ebiggers@kernel.org>
 ---
- fs/ubifs/crypto.c | 2 ++
- fs/ubifs/ubifs.h  | 4 ++++
- 2 files changed, 6 insertions(+)
+ fs/ceph/crypto.c | 2 ++
+ fs/ceph/inode.c  | 1 +
+ fs/ceph/super.h  | 1 +
+ 3 files changed, 4 insertions(+)
 
-diff --git a/fs/ubifs/crypto.c b/fs/ubifs/crypto.c
-index fb5ac358077b1..0b14d004a095b 100644
---- a/fs/ubifs/crypto.c
-+++ b/fs/ubifs/crypto.c
-@@ -86,10 +86,12 @@ int ubifs_decrypt(const struct inode *inode, struct ubifs_data_node *dn,
- 
- 	return 0;
+diff --git a/fs/ceph/crypto.c b/fs/ceph/crypto.c
+index cab7226192073..7026e794813ca 100644
+--- a/fs/ceph/crypto.c
++++ b/fs/ceph/crypto.c
+@@ -131,10 +131,12 @@ static const union fscrypt_policy *ceph_get_dummy_policy(struct super_block *sb)
+ {
+ 	return ceph_sb_to_fs_client(sb)->fsc_dummy_enc_policy.policy;
  }
  
- const struct fscrypt_operations ubifs_crypt_operations = {
-+	.inode_info_offs	= (int)offsetof(struct ubifs_inode, i_crypt_info) -
-+				  (int)offsetof(struct ubifs_inode, vfs_inode),
- 	.legacy_key_prefix	= "ubifs:",
- 	.get_context		= ubifs_crypt_get_context,
- 	.set_context		= ubifs_crypt_set_context,
- 	.empty_dir		= ubifs_crypt_empty_dir,
- };
-diff --git a/fs/ubifs/ubifs.h b/fs/ubifs/ubifs.h
-index 5db45c9e26ee0..49e50431741cd 100644
---- a/fs/ubifs/ubifs.h
-+++ b/fs/ubifs/ubifs.h
-@@ -363,10 +363,11 @@ struct ubifs_gced_idx_leb {
-  * @compr_type: default compression type used for this inode
-  * @last_page_read: page number of last page read (for bulk read)
-  * @read_in_a_row: number of consecutive pages read in a row (for bulk read)
-  * @data_len: length of the data attached to the inode
-  * @data: inode's data
-+ * @i_crypt_info: inode's fscrypt information
-  *
-  * @ui_mutex exists for two main reasons. At first it prevents inodes from
-  * being written back while UBIFS changing them, being in the middle of an VFS
-  * operation. This way UBIFS makes sure the inode fields are consistent. For
-  * example, in 'ubifs_rename()' we change 4 inodes simultaneously, and
-@@ -414,10 +415,13 @@ struct ubifs_inode {
- 	int flags;
- 	pgoff_t last_page_read;
- 	pgoff_t read_in_a_row;
- 	int data_len;
- 	void *data;
-+#ifdef CONFIG_FS_ENCRYPTION
-+	struct fscrypt_inode_info *i_crypt_info;
-+#endif
- };
+ static struct fscrypt_operations ceph_fscrypt_ops = {
++	.inode_info_offs	= (int)offsetof(struct ceph_inode_info, i_crypt_info) -
++				  (int)offsetof(struct ceph_inode_info, netfs.inode),
+ 	.needs_bounce_pages	= 1,
+ 	.get_context		= ceph_crypt_get_context,
+ 	.set_context		= ceph_crypt_set_context,
+ 	.get_dummy_policy	= ceph_get_dummy_policy,
+ 	.empty_dir		= ceph_crypt_empty_dir,
+diff --git a/fs/ceph/inode.c b/fs/ceph/inode.c
+index fc543075b827a..480cb3a1d639a 100644
+--- a/fs/ceph/inode.c
++++ b/fs/ceph/inode.c
+@@ -663,10 +663,11 @@ struct inode *ceph_alloc_inode(struct super_block *sb)
  
- /**
-  * struct ubifs_unclean_leb - records a LEB recovered under read-only mode.
-  * @list: list
+ 	INIT_WORK(&ci->i_work, ceph_inode_work);
+ 	ci->i_work_mask = 0;
+ 	memset(&ci->i_btime, '\0', sizeof(ci->i_btime));
+ #ifdef CONFIG_FS_ENCRYPTION
++	ci->i_crypt_info = NULL;
+ 	ci->fscrypt_auth = NULL;
+ 	ci->fscrypt_auth_len = 0;
+ #endif
+ 	return &ci->netfs.inode;
+ }
+diff --git a/fs/ceph/super.h b/fs/ceph/super.h
+index cf176aab0f823..25d8bacbcf440 100644
+--- a/fs/ceph/super.h
++++ b/fs/ceph/super.h
+@@ -461,10 +461,11 @@ struct ceph_inode_info {
+ 
+ 	struct work_struct i_work;
+ 	unsigned long  i_work_mask;
+ 
+ #ifdef CONFIG_FS_ENCRYPTION
++	struct fscrypt_inode_info *i_crypt_info;
+ 	u32 fscrypt_auth_len;
+ 	u32 fscrypt_file_len;
+ 	u8 *fscrypt_auth;
+ 	u8 *fscrypt_file;
+ #endif
 -- 
 2.50.1
 
