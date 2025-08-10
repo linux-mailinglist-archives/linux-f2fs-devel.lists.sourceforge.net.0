@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BE2AB1F900
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 10 Aug 2025 10:00:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 231CFB1F90A
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 10 Aug 2025 10:00:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=5lD+5gZbBlgjiVt3x//QDM0u7RKf34VEVzllhv++ErE=; b=LmiPVt1SZut9wfRphodw6utPyo
-	XNxqm32mADq2JN7b7emvKpXZQJpJqHsf6WXMldL8DYbvNcQkMKjbFwkdr3CUKDG4tiIx6pR3moeYP
-	EkZ/nYuJjnnpN7qsKHuVXS+OjcelkJCYjTUYbysg3Qsk6IZeiMr16lxs6M7n8HIFs2aw=;
+	bh=vFwu7E6OnV8ASaSi53ny/oGTuKb9G/v9k0pX0KE+Wns=; b=fyM1lqYUh0WqQAtBG7iswYBk9M
+	UqLYhMohsDLlHRLTLwqs5eSCdhT1elq7l3QpNiIw9ZF5Ge6VEWVaN/pNIiESzv1G4W4AfFw59UkcZ
+	tVHGFrTS1UCLmPtnFBjTdbjs9zc3doGVWdESefT9IsUH2xeDZZA97OdNDlEIkWNfTnV4=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ul0ya-0002Xh-Bs;
-	Sun, 10 Aug 2025 08:00:20 +0000
+	id 1ul0yf-0002Yl-2V;
+	Sun, 10 Aug 2025 08:00:25 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1ul0yY-0002XV-Dh
+ (envelope-from <ebiggers@kernel.org>) id 1ul0yd-0002YQ-Rz
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 10 Aug 2025 08:00:18 +0000
+ Sun, 10 Aug 2025 08:00:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bCfUr9pWbmQD3yJvMtwetcY/5gPxduPf1schk1P7ZLw=; b=CufPpSBmT1AIvi8FrH5kVIHGPx
- FbkZxnXCSEeUBAG010i505x4M4JFHBrR0VdVhLlb/GNMd6zNbNOuckB4dOpqRU9RkcCOkA3dMHaXN
- Oq6E0oeGQkaCn+wal5uVFCf0WCMNiQJOwjWxVrXVAXv85KnGHHDYoqycbN6z2cTlDzWY=;
+ bh=72Hnh/btaerSpBlTsRZh4sRUxV5BbZ2/QfZGzkIwlT0=; b=EgAkdYnpSyiOAU/bmD1po7UmNj
+ YSaH/5mxvPnnQc/NzPuHQkQWlhk4qG1HwFPuFUBuEGBluEA8IzEj6XEFbx0E/YJz7x5d1lziCcEKN
+ Wcfyy2av97eXXFHf07ZgJmavPwHaYO4iD8zj5oE05xdBryiYsBt5Q/9ZxmcDszxZEAIg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,46 +40,46 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bCfUr9pWbmQD3yJvMtwetcY/5gPxduPf1schk1P7ZLw=; b=dksDaKwLQ5DjtNoQcOXvXqD+jq
- lXWZFNKQbVJX7T97YB490aCjXBXb0pc9oztm//V9Os3/5Tt2bzrEHa+fHA9aOwLGumAq2EbX1EJgh
- raVjG+9qf9nQkt3zslFt99qr/pBTSUzUD+Jic77zF1O0oMyYEBReEfuq9l1sm32zyGnU=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=72Hnh/btaerSpBlTsRZh4sRUxV5BbZ2/QfZGzkIwlT0=; b=W9pPZQ5LTyLJ5H29jkznGK+P66
+ XVhYZRsFq7qaNrgAB3JQyEq6Gw8nEJYCnIOX9qktT6gW/1/aQ6qAgn350x3lS2zzmwr/lfbQQgz5M
+ gm7xBV7S9NinSNi5z+EUelKCD+ZPiQBPobfnvZ0XMwoOkmjCGBo+4n1aaGSSh9vbxxdQ=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ul0yX-00010f-Ap for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 10 Aug 2025 08:00:18 +0000
+ id 1ul0yd-00011l-Cf for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 10 Aug 2025 08:00:23 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id EA4825C5721;
- Sun, 10 Aug 2025 08:00:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4FFA2C4CEF0;
+ by tor.source.kernel.org (Postfix) with ESMTP id A9B82613AE;
+ Sun, 10 Aug 2025 08:00:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA2C7C4CEF9;
  Sun, 10 Aug 2025 08:00:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754812811;
- bh=0W2QfxH3SEgQE9yRuqSbCQDiVKMNeIT6t0Ume6h8gTo=;
+ s=k20201202; t=1754812812;
+ bh=mAk2HuPLK15i8Ku+xAc7HePI/XnULAPP/YM3x9265tc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=nbO0fBqNeeMZN0WDI+kgBFdzKJGAGVEHnaPJxNqqowTDLniJGOt0j4uw17U+6FdFo
- H1Rc+/DvLZMsGO2D5fctgnRrjZXcK7So5ofrPTD2H2yqTs1twguCtFJ2JNW4cMPtPp
- TrBjF8WHO/Fqi8b5bl1QcFjUuAV1wELwTmlaoVQa+YVbKZI//49bHAJwmSo25dwBt1
- 9Velrja88wsmjHCfWt9uhUSDzFuUBb8Ukug6Giba73mFWBZs8MnCbze0Ch6npBgJ7e
- PSD9t23xAMkrpUHkqc+5V+32XM9Fgs/eeDPf3ADl5GWNi5DG2oJSS8jBlPWdvKu8/N
- WR+Wmk3zLpjvA==
+ b=rqdcDpAJoSITR9lcMi9rlgGgii+Fo12miTFMisZBALLfiW83XRzb99WcY11e9R1JD
+ WeC0crLpN370pkZOLTdGtu23gELfMSDcGRhPaANxbgwBfCOvNFm6D7ZsONCOCe3VOK
+ rUBV4j1Rp0yBAc5FpGToXFDIVEd3qeu0NRivNT+KOyxmLtdL5ZaRz38uzC/FfzYw7l
+ l2bhPafvNTlsflkyOGHdI20ETqliyQ6oOSmIxUcgCQ2DsVt4WpC6NCxQAMWZAgdtx2
+ 4YB1bMU10EdiocZzGg+uwT/kwQ64HeB5Mt7XSptyLK5vU9hctWLtl+zK0ag2BP1JLj
+ 93jGZQmovo8rQ==
 To: linux-fscrypt@vger.kernel.org,
 	fsverity@lists.linux.dev
-Date: Sun, 10 Aug 2025 00:57:02 -0700
-Message-ID: <20250810075706.172910-10-ebiggers@kernel.org>
+Date: Sun, 10 Aug 2025 00:57:03 -0700
+Message-ID: <20250810075706.172910-11-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250810075706.172910-1-ebiggers@kernel.org>
 References: <20250810075706.172910-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: Move the fsverity_info pointer into the filesystem-specific
- part of the inode by adding the field ext4_inode_info::i_verity_info and
+ part of the inode by adding the field f2fs_inode_info::i_verity_info and
  configuring fsverity_operations::inode_info_offs accordingly. This is a
  prerequisite
  for a later commit that removes inode::i_verity_info,
@@ -88,16 +88,16 @@ X-Spam-Report: Spam detection software,
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ul0yX-00010f-Ap
-Subject: [f2fs-dev] [PATCH v5 09/13] ext4: move verity info pointer to
+X-Headers-End: 1ul0yd-00011l-Cf
+Subject: [f2fs-dev] [PATCH v5 10/13] f2fs: move verity info pointer to
  fs-specific part of inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -123,7 +123,7 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Move the fsverity_info pointer into the filesystem-specific part of the
-inode by adding the field ext4_inode_info::i_verity_info and configuring
+inode by adding the field f2fs_inode_info::i_verity_info and configuring
 fsverity_operations::inode_info_offs accordingly.
 
 This is a prerequisite for a later commit that removes
@@ -134,65 +134,64 @@ Co-developed-by: Christian Brauner <brauner@kernel.org>
 Signed-off-by: Christian Brauner <brauner@kernel.org>
 Signed-off-by: Eric Biggers <ebiggers@kernel.org>
 ---
- fs/ext4/ext4.h   | 4 ++++
- fs/ext4/super.c  | 3 +++
- fs/ext4/verity.c | 2 ++
- 3 files changed, 9 insertions(+)
+ fs/f2fs/f2fs.h   | 3 +++
+ fs/f2fs/super.c  | 3 +++
+ fs/f2fs/verity.c | 2 ++
+ 3 files changed, 8 insertions(+)
 
-diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-index c897109dadb15..6cb784a56b3ba 100644
---- a/fs/ext4/ext4.h
-+++ b/fs/ext4/ext4.h
-@@ -1184,10 +1184,14 @@ struct ext4_inode_info {
- 	kprojid_t i_projid;
- 
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 2f5c30c069c3c..6e465bbc85ee5 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -908,10 +908,13 @@ struct f2fs_inode_info {
+ 	unsigned int atomic_write_cnt;
+ 	loff_t original_i_size;		/* original i_size before atomic write */
  #ifdef CONFIG_FS_ENCRYPTION
- 	struct fscrypt_inode_info *i_crypt_info;
+ 	struct fscrypt_inode_info *i_crypt_info; /* filesystem encryption info */
  #endif
-+
 +#ifdef CONFIG_FS_VERITY
-+	struct fsverity_info *i_verity_info;
++	struct fsverity_info *i_verity_info; /* filesystem verity info */
 +#endif
  };
  
- /*
-  * File system states
-  */
-diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-index 0c3059ecce37c..46138a6cb32a3 100644
---- a/fs/ext4/super.c
-+++ b/fs/ext4/super.c
-@@ -1471,10 +1471,13 @@ static void init_once(void *foo)
- 	inode_init_once(&ei->vfs_inode);
- 	ext4_fc_init_inode(&ei->vfs_inode);
+ static inline void get_read_extent_info(struct extent_info *ext,
+ 					struct f2fs_extent *i_ext)
+ {
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index b42b55280d9e3..1db024b20e29b 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -481,10 +481,13 @@ static void init_once(void *foo)
+ 
+ 	inode_init_once(&fi->vfs_inode);
  #ifdef CONFIG_FS_ENCRYPTION
- 	ei->i_crypt_info = NULL;
+ 	fi->i_crypt_info = NULL;
  #endif
 +#ifdef CONFIG_FS_VERITY
-+	ei->i_verity_info = NULL;
++	fi->i_verity_info = NULL;
 +#endif
  }
  
- static int __init init_inodecache(void)
- {
- 	ext4_inode_cachep = kmem_cache_create_usercopy("ext4_inode_cache",
-diff --git a/fs/ext4/verity.c b/fs/ext4/verity.c
-index d9203228ce979..b0acb0c503137 100644
---- a/fs/ext4/verity.c
-+++ b/fs/ext4/verity.c
-@@ -387,10 +387,12 @@ static int ext4_write_merkle_tree_block(struct inode *inode, const void *buf,
+ #ifdef CONFIG_QUOTA
+ static const char * const quotatypes[] = INITQFNAMES;
+ #define QTYPE2NAME(t) (quotatypes[t])
+diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
+index 2287f238ae09e..f0ab9a3c7a82b 100644
+--- a/fs/f2fs/verity.c
++++ b/fs/f2fs/verity.c
+@@ -285,10 +285,12 @@ static int f2fs_write_merkle_tree_block(struct inode *inode, const void *buf,
  
  	return pagecache_write(inode, buf, size, pos);
  }
  
- const struct fsverity_operations ext4_verityops = {
-+	.inode_info_offs	= (int)offsetof(struct ext4_inode_info, i_verity_info) -
-+				  (int)offsetof(struct ext4_inode_info, vfs_inode),
- 	.begin_enable_verity	= ext4_begin_enable_verity,
- 	.end_enable_verity	= ext4_end_enable_verity,
- 	.get_verity_descriptor	= ext4_get_verity_descriptor,
- 	.read_merkle_tree_page	= ext4_read_merkle_tree_page,
- 	.write_merkle_tree_block = ext4_write_merkle_tree_block,
+ const struct fsverity_operations f2fs_verityops = {
++	.inode_info_offs	= (int)offsetof(struct f2fs_inode_info, i_verity_info) -
++				  (int)offsetof(struct f2fs_inode_info, vfs_inode),
+ 	.begin_enable_verity	= f2fs_begin_enable_verity,
+ 	.end_enable_verity	= f2fs_end_enable_verity,
+ 	.get_verity_descriptor	= f2fs_get_verity_descriptor,
+ 	.read_merkle_tree_page	= f2fs_read_merkle_tree_page,
+ 	.write_merkle_tree_block = f2fs_write_merkle_tree_block,
 -- 
 2.50.1
 
