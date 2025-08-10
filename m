@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB209B1F908
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 10 Aug 2025 10:00:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19C76B1F8FF
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 10 Aug 2025 10:00:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=IlfReYFjXQjRVkTWOPCOfz/HivKwc75Bl7AFb2PFDCI=; b=YbJ5Qrpnir9Q7Xy6uEHLIkI5R0
-	HuPkm6263cw9VFkm3woa6cImY6oSwVrLfM/NFoSKF75VnnhBgZYQRUrHYGutdbrMqVvVixVQb7pck
-	2wLl9HoFAQ9ogeUBatODdmUk6GwAgSlV1XABCkjwmGQq2f7MMvh4M2H42qnmhKxJwefE=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=pUodJjRW5uzitVtiuijekiajvLlOKkkwWT106oV7BPI=; b=SFm55H+/CQ67b2yHlB+DWxxuaL
+	HoIftTLfl7pD8e2urn0Mz0enaxGB1R9cty2MK3331tx+nuwpCXbuK7JIba9F2kw9BrlEZTlO4Xd8+
+	Ktr+gpgC79msMeW9g8tIt3rsqDtR+vpOnISd1bk4MiE6u8P9Ed4qyOFMPop0UB8Ihns8=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ul0yd-0003Ui-9D;
-	Sun, 10 Aug 2025 08:00:24 +0000
+	id 1ul0ya-0008MT-Qc;
+	Sun, 10 Aug 2025 08:00:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1ul0yb-0003UR-IS
+ (envelope-from <ebiggers@kernel.org>) id 1ul0yY-0008MA-G9
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 10 Aug 2025 08:00:22 +0000
+ Sun, 10 Aug 2025 08:00:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=an/Nm0YyxhaeNBwQIVRjaENL/kJQbhVoPBR/IBOTgcs=; b=Oosk5MMVVPkzPBipNeOFxZnG0b
- TNSlQ3SjgCmPpUnOrm+gMNc7M7FI/wZwM/yvOYZylFUu0sZhCk6z+b7s1l8O5Ivy1vhw0balD9UX5
- KbBfR//h4+ZlmRIuic2NovQrBVZzZ1TdyY5GWhxQvlj+IxeNYthSp1SK19HunDGK3jnQ=;
+ bh=8HgLRvvz7lkRHE6HxhbRuzvX9PUUwWJEhEwI1Am/PlE=; b=LMueu9bERzFHA4D4TEo6ZaU9rf
+ 2cE9OZom9KsB1whboXjR6gDth87U9Hgc8JlEHn9+HNrUUANB0u+wrtnNlsT8zZhCynrBUGgqQBNj/
+ lkxRLA1NXXsNy3a/t6SaMKog3Y7RIlfnWQ/n33nlPa61JWCAEvF0eCHV+q/TRXvyxLvI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,33 +40,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=an/Nm0YyxhaeNBwQIVRjaENL/kJQbhVoPBR/IBOTgcs=; b=SGNxPxpSm1r8Lgi25/ztBe/z+j
- s5dz0EXxQ0OnJEH7pGfa7+GGxSQo/EckYiJzdiPq1GtB4mm/WUrTdwqRwoqzvRSAwQuVZW0m3rdna
- BwaQHVGKN6XLvupIKc2d9DkFHzTcaJOoqOP7tXjPyKdOQ7pz9VkFDSUSpwsVRJ+hbW1A=;
-Received: from nyc.source.kernel.org ([147.75.193.91])
+ bh=8HgLRvvz7lkRHE6HxhbRuzvX9PUUwWJEhEwI1Am/PlE=; b=Xx3GYeZNS20mlpdV5nMzByykFU
+ NsdbvaJRMUh6ixrthjFkm6OvDWMDEtLKA7NbUnfui0Yj9v1fvbkqKzGHpcHDWQJSb/FLigejZD4nA
+ WwsMLb+39YQ3bcghreG9DVfB8dmIkkXahk3CSNSrPGiQdFjMZdIAqap2YSJBdeGPKZOE=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ul0yb-00011T-Ok for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 10 Aug 2025 08:00:22 +0000
+ id 1ul0yW-00010b-So for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 10 Aug 2025 08:00:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 188EDA55134;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 7EB145C5724;
  Sun, 10 Aug 2025 08:00:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6FAB9C4CEEB;
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D9F5AC4CEF9;
  Sun, 10 Aug 2025 08:00:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754812810;
- bh=hTLksDqAG7iJZbJnGqd8JyQQhFVP3K3qP+WNZUyThvI=;
+ s=k20201202; t=1754812811;
+ bh=aFBs0ub8KvkLQDLXzsBfxcdo9ePKy2Sxh/BmZSzdr3k=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=SLFlFAFYjVyvx9ggNdb5bWTXUqjDAUbaAo7N9/6UnJmEJtn+vKgzQPSAsWKAsRRRL
- So3V9vSSaOSZ6Ds6ARu8XEUs1FVfS4QUCRq4ZHQrfPc+rBVQhL3v9wIQaxwh3+aQXB
- k2ubttllOoJvrh7zV/bz9kqO1TlYZEs1y0/O8Oyc1IkXRMPZ74rzJNYA4fyBXPEpMJ
- /brqN4ToKmH+IcQQqnwa6y3VbfRNfVQosWIZdaAiMRv8+lLvNNZA8f1nmW1uL0/aTx
- NURcg6NCqctDVHUqEvUCetLBqq3zGe3Ta/k9LE0yd/xaBpAv3jwBpD7nQrShG7pq1M
- V6O2XmUIE9Lsg==
+ b=aBd4VN/NsHldvGytvia9LjI4DOFoIj/3W84QCdRXMHhR9Huhb6Lkit8XPwTqXes6t
+ RENiaqoiFk6oAYVlQisQY8uebJ+jMkJhIEll4h9f4KZmHl31RxN/cxaQ6DblVE2x5l
+ y4I/IY2Nvosxgr+WbWtp6ypihVEQUgYR2GDrLxSeuPj+86MYT9js76aZK7VefTFY9R
+ dHbaWUdEqdGFu/xKYCyW9rU2klJM10itbwAvZct2wFqHgBlH6HY5UpbsSCTE8tCvDi
+ h8tvQ6+ATCF5vCqCmF5I7Hl6ceyV8aawVngBPBSz2GHAVviHzs908Ysg4pSium3I+o
+ sCW+oo04hjQEw==
 To: linux-fscrypt@vger.kernel.org,
 	fsverity@lists.linux.dev
-Date: Sun, 10 Aug 2025 00:57:00 -0700
-Message-ID: <20250810075706.172910-8-ebiggers@kernel.org>
+Date: Sun, 10 Aug 2025 00:57:01 -0700
+Message-ID: <20250810075706.172910-9-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250810075706.172910-1-ebiggers@kernel.org>
 References: <20250810075706.172910-1-ebiggers@kernel.org>
@@ -78,9 +78,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Now that all fscrypt-capable filesystems store the pointer
- to fscrypt_inode_info in the filesystem-specific part of the inode structure, 
- inode::i_crypt_info is no longer needed. Update fscrypt_inode_i [...] 
+ Content preview:  Add an inode_info_offs field to struct fsverity_operations, 
+ and update fs/verity/ to support it. When set to a nonzero value, it specifies
+ the offset to the fsverity_info pointer within the filesystem [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,8 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ul0yb-00011T-Ok
-Subject: [f2fs-dev] [PATCH v5 07/13] fs: remove inode::i_crypt_info
+X-Headers-End: 1ul0yW-00010b-So
+Subject: [f2fs-dev] [PATCH v5 08/13] fsverity: add support for info in
+ fs-specific part of inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,83 +118,268 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Now that all fscrypt-capable filesystems store the pointer to
-fscrypt_inode_info in the filesystem-specific part of the inode
-structure, inode::i_crypt_info is no longer needed.  Update
-fscrypt_inode_info_addr() to no longer support the fallback to
-inode::i_crypt_info.  Finally, remove inode::i_crypt_info itself along
-with the now-unnecessary forward declaration of fscrypt_inode_info.
+Add an inode_info_offs field to struct fsverity_operations, and update
+fs/verity/ to support it.  When set to a nonzero value, it specifies the
+offset to the fsverity_info pointer within the filesystem-specific part
+of the inode structure, to be used instead of inode::i_verity_info.
 
-The end result of the migration to the filesystem-specific pointer is
-memory savings on CONFIG_FS_ENCRYPTION=y kernels for all filesystems
-that don't support fscrypt.  Specifically, their in-memory inodes are
-now smaller by the size of a pointer: either 4 or 8 bytes.
+Since this makes inode::i_verity_info no longer necessarily used, update
+comments that mentioned it.
+
+This is a prerequisite for a later commit that removes
+inode::i_verity_info, saving memory and improving cache efficiency on
+filesystems that don't support fsverity.
 
 Co-developed-by: Christian Brauner <brauner@kernel.org>
 Signed-off-by: Christian Brauner <brauner@kernel.org>
 Signed-off-by: Eric Biggers <ebiggers@kernel.org>
 ---
- include/linux/fs.h      | 5 -----
- include/linux/fscrypt.h | 8 ++++++--
- 2 files changed, 6 insertions(+), 7 deletions(-)
+ fs/verity/enable.c           |  6 ++---
+ fs/verity/fsverity_private.h |  9 ++++----
+ fs/verity/open.c             | 23 ++++++++++---------
+ fs/verity/verify.c           |  2 +-
+ include/linux/fsverity.h     | 44 ++++++++++++++++++++++++++++--------
+ 5 files changed, 55 insertions(+), 29 deletions(-)
 
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index d7ab4f96d7051..1dafa18169be6 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -70,11 +70,10 @@ struct vfsmount;
- struct cred;
- struct swap_info_struct;
- struct seq_file;
- struct workqueue_struct;
- struct iov_iter;
--struct fscrypt_inode_info;
- struct fscrypt_operations;
- struct fsverity_info;
- struct fsverity_operations;
- struct fsnotify_mark_connector;
- struct fsnotify_sb_info;
-@@ -778,14 +777,10 @@ struct inode {
- 	__u32			i_fsnotify_mask; /* all events this inode cares about */
- 	/* 32-bit hole reserved for expanding i_fsnotify_mask */
- 	struct fsnotify_mark_connector __rcu	*i_fsnotify_marks;
- #endif
+diff --git a/fs/verity/enable.c b/fs/verity/enable.c
+index 503268cf42962..89eccc4becf90 100644
+--- a/fs/verity/enable.c
++++ b/fs/verity/enable.c
+@@ -282,13 +282,13 @@ static int enable_verity(struct file *filp,
+ 		fsverity_free_info(vi);
+ 	} else {
+ 		/* Successfully enabled verity */
  
--#ifdef CONFIG_FS_ENCRYPTION
--	struct fscrypt_inode_info	*i_crypt_info;
--#endif
--
- #ifdef CONFIG_FS_VERITY
- 	struct fsverity_info	*i_verity_info;
- #endif
- 
- 	void			*i_private; /* fs or device private pointer */
-diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index d7ff53accbfef..516aba5b858b5 100644
---- a/include/linux/fscrypt.h
-+++ b/include/linux/fscrypt.h
-@@ -199,15 +199,19 @@ struct fscrypt_operations {
- };
- 
- int fscrypt_d_revalidate(struct inode *dir, const struct qstr *name,
- 			 struct dentry *dentry, unsigned int flags);
- 
-+/*
-+ * Returns the address of the fscrypt info pointer within the
-+ * filesystem-specific part of the inode.  (To save memory on filesystems that
-+ * don't support fscrypt, a field in 'struct inode' itself is no longer used.)
-+ */
- static inline struct fscrypt_inode_info **
- fscrypt_inode_info_addr(const struct inode *inode)
- {
--	if (inode->i_sb->s_cop->inode_info_offs == 0)
--		return (struct fscrypt_inode_info **)&inode->i_crypt_info;
-+	VFS_WARN_ON_ONCE(inode->i_sb->s_cop->inode_info_offs == 0);
- 	return (void *)inode + inode->i_sb->s_cop->inode_info_offs;
- }
+ 		/*
+-		 * Readers can start using ->i_verity_info immediately, so it
+-		 * can't be rolled back once set.  So don't set it until just
+-		 * after the filesystem has successfully enabled verity.
++		 * Readers can start using the inode's verity info immediately,
++		 * so it can't be rolled back once set.  So don't set it until
++		 * just after the filesystem has successfully enabled verity.
+ 		 */
+ 		fsverity_set_info(inode, vi);
+ 	}
+ out:
+ 	kfree(params.hashstate);
+diff --git a/fs/verity/fsverity_private.h b/fs/verity/fsverity_private.h
+index 5fe854a5b9ad3..bc1d887c532e7 100644
+--- a/fs/verity/fsverity_private.h
++++ b/fs/verity/fsverity_private.h
+@@ -61,14 +61,15 @@ struct merkle_tree_params {
  
  /*
-  * Load the inode's fscrypt info pointer, using a raw dereference.  Since this
+  * fsverity_info - cached verity metadata for an inode
+  *
+  * When a verity file is first opened, an instance of this struct is allocated
+- * and stored in ->i_verity_info; it remains until the inode is evicted.  It
+- * caches information about the Merkle tree that's needed to efficiently verify
+- * data read from the file.  It also caches the file digest.  The Merkle tree
+- * pages themselves are not cached here, but the filesystem may cache them.
++ * and a pointer to it is stored in the file's in-memory inode.  It remains
++ * until the inode is evicted.  It caches information about the Merkle tree
++ * that's needed to efficiently verify data read from the file.  It also caches
++ * the file digest.  The Merkle tree pages themselves are not cached here, but
++ * the filesystem may cache them.
+  */
+ struct fsverity_info {
+ 	struct merkle_tree_params tree_params;
+ 	u8 root_hash[FS_VERITY_MAX_DIGEST_SIZE];
+ 	u8 file_digest[FS_VERITY_MAX_DIGEST_SIZE];
+diff --git a/fs/verity/open.c b/fs/verity/open.c
+index c561e130cd0c6..77b1c977af025 100644
+--- a/fs/verity/open.c
++++ b/fs/verity/open.c
+@@ -242,21 +242,21 @@ struct fsverity_info *fsverity_create_info(const struct inode *inode,
+ }
+ 
+ void fsverity_set_info(struct inode *inode, struct fsverity_info *vi)
+ {
+ 	/*
+-	 * Multiple tasks may race to set ->i_verity_info, so use
+-	 * cmpxchg_release().  This pairs with the smp_load_acquire() in
+-	 * fsverity_get_info().  I.e., here we publish ->i_verity_info with a
+-	 * RELEASE barrier so that other tasks can ACQUIRE it.
++	 * Multiple tasks may race to set the inode's verity info pointer, so
++	 * use cmpxchg_release().  This pairs with the smp_load_acquire() in
++	 * fsverity_get_info().  I.e., publish the pointer with a RELEASE
++	 * barrier so that other tasks can ACQUIRE it.
+ 	 */
+-	if (cmpxchg_release(&inode->i_verity_info, NULL, vi) != NULL) {
+-		/* Lost the race, so free the fsverity_info we allocated. */
++	if (cmpxchg_release(fsverity_info_addr(inode), NULL, vi) != NULL) {
++		/* Lost the race, so free the verity info we allocated. */
+ 		fsverity_free_info(vi);
+ 		/*
+-		 * Afterwards, the caller may access ->i_verity_info directly,
+-		 * so make sure to ACQUIRE the winning fsverity_info.
++		 * Afterwards, the caller may access the inode's verity info
++		 * directly, so make sure to ACQUIRE the winning verity info.
+ 		 */
+ 		(void)fsverity_get_info(inode);
+ 	}
+ }
+ 
+@@ -348,11 +348,10 @@ int fsverity_get_descriptor(struct inode *inode,
+ 
+ 	*desc_ret = desc;
+ 	return 0;
+ }
+ 
+-/* Ensure the inode has an ->i_verity_info */
+ static int ensure_verity_info(struct inode *inode)
+ {
+ 	struct fsverity_info *vi = fsverity_get_info(inode);
+ 	struct fsverity_descriptor *desc;
+ 	int err;
+@@ -393,12 +392,14 @@ int __fsverity_prepare_setattr(struct dentry *dentry, struct iattr *attr)
+ }
+ EXPORT_SYMBOL_GPL(__fsverity_prepare_setattr);
+ 
+ void __fsverity_cleanup_inode(struct inode *inode)
+ {
+-	fsverity_free_info(inode->i_verity_info);
+-	inode->i_verity_info = NULL;
++	struct fsverity_info **vi_addr = fsverity_info_addr(inode);
++
++	fsverity_free_info(*vi_addr);
++	*vi_addr = NULL;
+ }
+ EXPORT_SYMBOL_GPL(__fsverity_cleanup_inode);
+ 
+ void __init fsverity_init_info_cache(void)
+ {
+diff --git a/fs/verity/verify.c b/fs/verity/verify.c
+index a1f00c3fd3b27..affc307eb6a6b 100644
+--- a/fs/verity/verify.c
++++ b/fs/verity/verify.c
+@@ -243,11 +243,11 @@ verify_data_block(struct inode *inode, struct fsverity_info *vi,
+ static bool
+ verify_data_blocks(struct folio *data_folio, size_t len, size_t offset,
+ 		   unsigned long max_ra_pages)
+ {
+ 	struct inode *inode = data_folio->mapping->host;
+-	struct fsverity_info *vi = inode->i_verity_info;
++	struct fsverity_info *vi = *fsverity_info_addr(inode);
+ 	const unsigned int block_size = vi->tree_params.block_size;
+ 	u64 pos = (u64)data_folio->index << PAGE_SHIFT;
+ 
+ 	if (WARN_ON_ONCE(len <= 0 || !IS_ALIGNED(len | offset, block_size)))
+ 		return false;
+diff --git a/include/linux/fsverity.h b/include/linux/fsverity.h
+index 1eb7eae580be7..e0f132cb78393 100644
+--- a/include/linux/fsverity.h
++++ b/include/linux/fsverity.h
+@@ -26,10 +26,16 @@
+ /* Arbitrary limit to bound the kmalloc() size.  Can be changed. */
+ #define FS_VERITY_MAX_DESCRIPTOR_SIZE	16384
+ 
+ /* Verity operations for filesystems */
+ struct fsverity_operations {
++	/**
++	 * The offset of the pointer to struct fsverity_info in the
++	 * filesystem-specific part of the inode, relative to the beginning of
++	 * the common part of the inode (the 'struct inode').
++	 */
++	ptrdiff_t inode_info_offs;
+ 
+ 	/**
+ 	 * Begin enabling verity on the given file.
+ 	 *
+ 	 * @filp: a readonly file descriptor for the file
+@@ -122,19 +128,37 @@ struct fsverity_operations {
+ 				       u64 pos, unsigned int size);
+ };
+ 
+ #ifdef CONFIG_FS_VERITY
+ 
++static inline struct fsverity_info **
++fsverity_info_addr(const struct inode *inode)
++{
++	if (inode->i_sb->s_vop->inode_info_offs == 0)
++		return (struct fsverity_info **)&inode->i_verity_info;
++	return (void *)inode + inode->i_sb->s_vop->inode_info_offs;
++}
++
+ static inline struct fsverity_info *fsverity_get_info(const struct inode *inode)
+ {
+ 	/*
+-	 * Pairs with the cmpxchg_release() in fsverity_set_info().
+-	 * I.e., another task may publish ->i_verity_info concurrently,
+-	 * executing a RELEASE barrier.  We need to use smp_load_acquire() here
+-	 * to safely ACQUIRE the memory the other task published.
++	 * Since this function can be called on inodes belonging to filesystems
++	 * that don't support fsverity at all, and fsverity_info_addr() doesn't
++	 * work on such filesystems, we have to start with an IS_VERITY() check.
++	 * Checking IS_VERITY() here is also useful to minimize the overhead of
++	 * fsverity_active() on non-verity files.
++	 */
++	if (!IS_VERITY(inode))
++		return NULL;
++
++	/*
++	 * Pairs with the cmpxchg_release() in fsverity_set_info().  I.e.,
++	 * another task may publish the inode's verity info concurrently,
++	 * executing a RELEASE barrier.  Use smp_load_acquire() here to safely
++	 * ACQUIRE the memory the other task published.
+ 	 */
+-	return smp_load_acquire(&inode->i_verity_info);
++	return smp_load_acquire(fsverity_info_addr(inode));
+ }
+ 
+ /* enable.c */
+ 
+ int fsverity_ioctl_enable(struct file *filp, const void __user *arg);
+@@ -154,15 +178,15 @@ void __fsverity_cleanup_inode(struct inode *inode);
+ 
+ /**
+  * fsverity_cleanup_inode() - free the inode's verity info, if present
+  * @inode: an inode being evicted
+  *
+- * Filesystems must call this on inode eviction to free ->i_verity_info.
++ * Filesystems must call this on inode eviction to free the inode's verity info.
+  */
+ static inline void fsverity_cleanup_inode(struct inode *inode)
+ {
+-	if (inode->i_verity_info)
++	if (*fsverity_info_addr(inode))
+ 		__fsverity_cleanup_inode(inode);
+ }
+ 
+ /* read_metadata.c */
+ 
+@@ -265,16 +289,16 @@ static inline bool fsverity_verify_page(struct page *page)
+ 
+ /**
+  * fsverity_active() - do reads from the inode need to go through fs-verity?
+  * @inode: inode to check
+  *
+- * This checks whether ->i_verity_info has been set.
++ * This checks whether the inode's verity info has been set.
+  *
+  * Filesystems call this from ->readahead() to check whether the pages need to
+  * be verified or not.  Don't use IS_VERITY() for this purpose; it's subject to
+  * a race condition where the file is being read concurrently with
+- * FS_IOC_ENABLE_VERITY completing.  (S_VERITY is set before ->i_verity_info.)
++ * FS_IOC_ENABLE_VERITY completing.  (S_VERITY is set before the verity info.)
+  *
+  * Return: true if reads need to go through fs-verity, otherwise false
+  */
+ static inline bool fsverity_active(const struct inode *inode)
+ {
+@@ -285,11 +309,11 @@ static inline bool fsverity_active(const struct inode *inode)
+  * fsverity_file_open() - prepare to open a verity file
+  * @inode: the inode being opened
+  * @filp: the struct file being set up
+  *
+  * When opening a verity file, deny the open if it is for writing.  Otherwise,
+- * set up the inode's ->i_verity_info if not already done.
++ * set up the inode's verity info if not already done.
+  *
+  * When combined with fscrypt, this must be called after fscrypt_file_open().
+  * Otherwise, we won't have the key set up to decrypt the verity metadata.
+  *
+  * Return: 0 on success, -errno on failure
 -- 
 2.50.1
 
