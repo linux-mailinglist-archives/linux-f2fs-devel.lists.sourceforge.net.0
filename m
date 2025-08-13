@@ -2,7 +2,7 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9600AB2458F
+	by mail.lfdr.de (Postfix) with ESMTPS id D3DE3B24591
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Aug 2025 11:38:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -10,29 +10,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Subject:MIME-Version:References:In-Reply-To:Message-Id:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=a6OAXOaaWlcTyUx+xg5vSYe6Il0z+xWbiCcQZ3w9pCY=; b=lEgJ4n2ZXz4kGCHHWSvGVeyXXf
-	gyq8s26wJffF91dBaTCN0a2rYQds1s0+VIKmJWfhAfBJ6z6aF0hO1pWUfU70K5U/UgLA4aLucayXy
-	e0VjZqah0VTeCxZ1hPKKOZ89HhlIaGMvFqpvgxAIgFprDVT1aoGFrmHPU9t7cS+l9pgk=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=cHQWPVuvfUkzRB3PgCWzr8bbqb/36todTmW3bXJZEOw=; b=TXYPEQZE+ZJQlfp+jAVybUzPmY
+	4ZkLibI36vKaSfZ0wKTa14w0Um1JqnNOz9ORKP5HBBfl/BoHUK+5WiJ9KvrzbJD+2vg30tXLDl7+2
+	N7IBYsR+h1whbOihNYIEwRk1oGCUSWH/aL9YJ8kk44CAFsRJd9/7VNei51+8Boe2/Nk0=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1um7wa-00060I-BO;
-	Wed, 13 Aug 2025 09:38:52 +0000
+	id 1um7wZ-0000Xq-8I;
+	Wed, 13 Aug 2025 09:38:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nzzhao@126.com>) id 1um7wY-000606-0f
+ (envelope-from <nzzhao@126.com>) id 1um7wX-0000Xj-GE
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 13 Aug 2025 09:38:50 +0000
+ Wed, 13 Aug 2025 09:38:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QX1yHOS3iNusdtYkEEgfT0ZrvEnWSBmajEEebMi+mQI=; b=Xas72a1HPdybq2AijzhPfVVbMH
- eBH293jqJ2+YJ15HdQzXWmVmEipOyo15MfS4L+oAE/MVfuDCaHWeDtkZK6iaxwZq47w2Tc++aopnY
- p3veVHdyaC9qBhaMxz3DzPXVhglolwJj50NEYO07YK40GxKgzeA2I8jrd1bzEDj/XGsw=;
+ bh=bONKsUC7ZrwOatI+C3p8fv5cu28QuxUoAhI9QsXEo/Q=; b=m4zZD6Xm95bulcuMwTXiTA3Aws
+ vLNmUcjh2OXbOBIn5kxwnT2a/LY6HAqmsFlD3w8srxjRHtmArdsnQ3cN9YO3+KH89EdU5oj/XFQgb
+ Ymp1KRPwiI5uW/24m9yp5cSA+iqwW+hnt4D6K2/cfRJRr8Ybu6RPcvXfm+PfBCZp1Efw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -40,40 +40,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=QX1yHOS3iNusdtYkEEgfT0ZrvEnWSBmajEEebMi+mQI=; b=Ovj5yb2lqjF73p2qf1xXauxt8E
- K/jmcFXYUEHjJ9L3sTNXs/f1j8g2Xet30GwgKRAskPFalCi1stMakbnyZB28tRyxFDTud2WdBJWHl
- 5zaP1QcZIFzVvsDQvRiOfVBl4wDc4GKuM3RBQRvC2OMgrgdAB9di6NzZwiPL8cxt0Jck=;
-Received: from m16.mail.126.com ([117.135.210.9])
+ bh=bONKsUC7ZrwOatI+C3p8fv5cu28QuxUoAhI9QsXEo/Q=; b=Kg46jpwiBKUgZxzAdehzpY5Bui
+ pUyBObbo85mF0/EOYesphpCw2wqF6Ne9FMyQhOSfuAAyd7TNe7n65YQq4/5enPbgBMwmZMIOjSbz6
+ e7YzOijMi+uMG4gi2h2Be3vR1CpL7Nna9SPT4WNU9qWqCOmM8yLxhR3owrpVK2EIylE8=;
+Received: from m16.mail.126.com ([117.135.210.6])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1um7wU-0004Uh-Pt for linux-f2fs-devel@lists.sourceforge.net;
+ id 1um7wU-0004Uf-MC for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 13 Aug 2025 09:38:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
- s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=QX
- 1yHOS3iNusdtYkEEgfT0ZrvEnWSBmajEEebMi+mQI=; b=PHPNzeyVYjVUdGXKje
- I8r4tug1rzIF9/XGNqEfO5P/QvQRPLhDRv0syGQ14buPOxWFrmzfyw7Cr0JWOys/
- WRH90GEXU3x85nXVw54AdgcyjRkIoyRiWXMAZm2a+0MZ2VQGUMd0zFfwTR3F+Eu1
- lEfAjZch17mfoErOKIjvpQRQA=
+ s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=bO
+ NKsUC7ZrwOatI+C3p8fv5cu28QuxUoAhI9QsXEo/Q=; b=BKf0/QlOsu/D4kuwsc
+ 9H6ksDtavdGeTxPefWpcM7CL75Uql0QMB7cJ7e09jshJlEKTHaeOVffPtnelzHmt
+ D2VgSBFolHNNK1KzByOMoK6jW5rx7EZpz5aHEoq3TZokqyCQ6wv2l262hiQjFxq8
+ YmHhA9e94pznjDfUv9zUQFQro=
 Received: from YLLaptop.. (unknown [])
  by gzga-smtp-mtada-g1-1 (Coremail) with SMTP id
- _____wD3tyv8XJxo_MzyBQ--.54250S3; 
- Wed, 13 Aug 2025 17:38:19 +0800 (CST)
+ _____wD3tyv8XJxo_MzyBQ--.54250S4; 
+ Wed, 13 Aug 2025 17:38:22 +0800 (CST)
 From: Nanzhe Zhao <nzzhao@126.com>
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
  linux-fsdevel@vger.kernel.org
-Date: Wed, 13 Aug 2025 17:37:47 +0800
-Message-Id: <20250813093755.47599-2-nzzhao@126.com>
+Date: Wed, 13 Aug 2025 17:37:48 +0800
+Message-Id: <20250813093755.47599-3-nzzhao@126.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250813093755.47599-1-nzzhao@126.com>
 References: <20250813093755.47599-1-nzzhao@126.com>
 MIME-Version: 1.0
-X-CM-TRANSID: _____wD3tyv8XJxo_MzyBQ--.54250S3
-X-Coremail-Antispam: 1Uf129KBjvAXoW3Kr17Xr1DJFy3ZFW5ArWfuFg_yoW8JF1kGo
- WSgw4jqw48KrWUArWjkr17WFy7ua98Ca47JF4fCrs8uFnrXa4q9rW7KrsxJa4I9rn5JF12
- 939xJF47GFWfX3Wxn29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
- AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvj4RJvtCUUUUU
+X-CM-TRANSID: _____wD3tyv8XJxo_MzyBQ--.54250S4
+X-Coremail-Antispam: 1Uf129KBjvAXoW3KFWrKrW3GFW5Zw4fuF1Utrb_yoW8Jr4fto
+ WFgr42g3W8ur43JrW2kr1UXa4DZF1Yyr1xtF93ZF4kZFnrAasrWFW29r4DJa4xCr15GFy7
+ Zan7Xa12kFW3X3Wxn29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+ AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvjxUjWlkDUUUU
 X-Originating-IP: [58.240.165.118]
-X-CM-SenderInfo: xq22xtbr6rjloofrz/1tbiExioz2icVjthxgAAsS
+X-CM-SenderInfo: xq22xtbr6rjloofrz/1tbiEwOoz2icVjth3AAAsT
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -81,15 +81,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add f2fs's own per-folio structure to track per-block dirty
- state of a folio. The reason for introducing this structure is that f2fs's
- private flag would conflict with iomap_folio_state's use of the folio->private
- field. Thanks to Mr. Matthew for providing the idea. See for det [...] 
+ Content preview: Integrate f2fs_iomap_folio_state into the f2fs page private
+ helper functions. In these functions, we adopt a two-stage strategy to handle
+ the folio->private field, now supporting both direct bit flags and the new
+ f2fs_iomap_folio_state pointer. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [117.135.210.9 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [117.135.210.6 listed in wl.mailspike.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -101,8 +101,9 @@ X-Spam-Report: Spam detection software,
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [nzzhao(at)126.com]
  0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
-X-Headers-End: 1um7wU-0004Uh-Pt
-Subject: [f2fs-dev] [RFC PATCH 1/9] f2fs: Introduce f2fs_iomap_folio_state
+X-Headers-End: 1um7wU-0004Uf-MC
+Subject: [f2fs-dev] [RFC PATCH 2/9] f2fs: Integrate f2fs_iomap_folio_state
+ into f2fs page private helpers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,395 +121,342 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add f2fs's own per-folio structure to track
-per-block dirty state of a folio.
+Integrate f2fs_iomap_folio_state into the f2fs page private helper
+functions.
 
-The reason for introducing this structure is that f2fs's private flag
-would conflict with iomap_folio_state's use of the folio->private field.
-Thanks to Mr. Matthew for providing the idea. See for details:
-[https://lore.kernel.org/linux-f2fs-devel/Z-oPTUrF7kkhzJg_
-@casper.infradead.org/]
+In these functions, we adopt a two-stage strategy to handle the
+folio->private field, now supporting both direct bit flags and the
+new f2fs_iomap_folio_state pointer.
 
-The memory layout of this structure is the same as iomap_folio_state,
-except that we set read_bytes_pending to a magic number. This is because
-we need to be able to distinguish it from the original iomap_folio_state.
-We additionally allocate an unsigned long at the end of the state array
-to store f2fs-specific flags.
+Note that my implementation does not rely on checking the folio's
+order to distinguish whether the folio's private field stores
+a flag or an f2fs_iomap_folio_state.
+This is because in the folio_set_f2fs_xxx
+functions, we will forcibly allocate an f2fs_iomap_folio_state
+struct even for order-0 folios under certain conditions.
 
-This implementation is compatible with high-order folios, order-0 folios,
-and metadata folios.
-However, it does not support compressed data folios.
+The reason for doing this is that if an order-0 folio's private field
+is set to an f2fs private flag by a thread like gc, the generic
+iomap_folio_state helper functions used in iomap buffered write will
+mistakenly interpret it as an iomap_folio_state pointer.
+We cannot, or rather should not, modify fs/iomap to make it recognize
+f2fs's private flags.
+Therefore, for now, I have to uniformly allocate an
+f2fs_iomap_folio_state for all folios that will need to store an
+f2fs private flag to ensure correctness.
 
-Introduction to related functions:
-
-- f2fs_ifs_alloc: Allocates f2fs's own f2fs_iomap_folio_state. If it
-  detects that folio->private already has a value, we distinguish
-  whether it is f2fs's own flag value or an iomap_folio_state. If it is
-  the latter, we will copy its content to our f2fs_iomap_folio_state
-  and then free it.
-
-- folio_detach_f2fs_private: Serves as a unified interface to release
-  f2fs's private resources, no matter what it is.
-
-- f2fs_ifs_clear_range_uptodate && f2fs_ifs_set_range_dirty: Helper
-  functions copied and slightly modified from fs/iomap.
-
-- folio_get_f2fs_ifs: Specifically used to get f2fs_iomap_folio_state.
-  It cannot be used to get f2fs's own fields used on compressed folios.
-  For the former, we return a null pointer to indicate that the current
-  folio does not hold an f2fs_iomap_folio_state. For the latter, we
-  directly BUG_ON.
+I am also thinking about other ways to eliminate the extra memory
+overhead this approach introduces. Suggestions would be grateful.
 
 Signed-off-by: Nanzhe Zhao <nzzhao@126.com>
 ---
- fs/f2fs/Kconfig    |  10 ++
- fs/f2fs/Makefile   |   1 +
- fs/f2fs/f2fs_ifs.c | 221 +++++++++++++++++++++++++++++++++++++++++++++
- fs/f2fs/f2fs_ifs.h |  79 ++++++++++++++++
- 4 files changed, 311 insertions(+)
- create mode 100644 fs/f2fs/f2fs_ifs.c
- create mode 100644 fs/f2fs/f2fs_ifs.h
+ fs/f2fs/f2fs.h | 278 +++++++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 225 insertions(+), 53 deletions(-)
 
-diff --git a/fs/f2fs/Kconfig b/fs/f2fs/Kconfig
-index 5916a02fb46d..480b8536fa39 100644
---- a/fs/f2fs/Kconfig
-+++ b/fs/f2fs/Kconfig
-@@ -150,3 +150,13 @@ config F2FS_UNFAIR_RWSEM
- 	help
- 	  Use unfair rw_semaphore, if system configured IO priority by block
- 	  cgroup.
-+
-+config F2FS_IOMAP_FOLIO_STATE
-+	bool "F2FS folio per-block I/O state tracking"
-+	depends on F2FS_FS && FS_IOMAP
-+	help
-+	  Enable a custom F2FS structure for tracking the I/O state
-+	  (up-to-date, dirty) on a per-block basis within a memory folio.
-+	  This structure stores F2FS private flag in its state flexible
-+	  array while keeping compatibility with generic iomap_folio_state.
-+	  Must be enabled if using iomap large folios support in F2FS.
-\ No newline at end of file
-diff --git a/fs/f2fs/Makefile b/fs/f2fs/Makefile
-index 8a7322d229e4..3b9270d774e8 100644
---- a/fs/f2fs/Makefile
-+++ b/fs/f2fs/Makefile
-@@ -10,3 +10,4 @@ f2fs-$(CONFIG_F2FS_FS_POSIX_ACL) += acl.o
- f2fs-$(CONFIG_FS_VERITY) += verity.o
- f2fs-$(CONFIG_F2FS_FS_COMPRESSION) += compress.o
- f2fs-$(CONFIG_F2FS_IOSTAT) += iostat.o
-+f2fs-$(CONFIG_F2FS_IOMAP_FOLIO_STATE) += f2fs_ifs.o
-diff --git a/fs/f2fs/f2fs_ifs.c b/fs/f2fs/f2fs_ifs.c
-new file mode 100644
-index 000000000000..6b7503474580
---- /dev/null
-+++ b/fs/f2fs/f2fs_ifs.c
-@@ -0,0 +1,221 @@
-+// SPDX-License-Identifier: GPL-2.0
-+#include <linux/fs.h>
-+#include <linux/f2fs_fs.h>
-+
-+#include "f2fs.h"
-+#include "f2fs_ifs.h"
-+
-+/*
-+ * Have to set parameter ifs's type to void*
-+ * and have to interpret ifs as f2fs_ifs to access its fields because
-+ * we cannot see iomap_folio_state definition
-+ */
-+static void ifs_to_f2fs_ifs(void *ifs, struct f2fs_iomap_folio_state *fifs,
-+			    struct folio *folio)
-+{
-+	struct f2fs_iomap_folio_state *src_ifs =
-+		(struct f2fs_iomap_folio_state *)ifs;
-+	size_t iomap_longs = f2fs_ifs_iomap_longs(folio);
-+
-+	fifs->read_bytes_pending = READ_ONCE(src_ifs->read_bytes_pending);
-+	atomic_set(&fifs->write_bytes_pending,
-+		   atomic_read(&src_ifs->write_bytes_pending));
-+	memcpy(fifs->state, src_ifs->state,
-+	       iomap_longs * sizeof(unsigned long));
-+}
-+
-+static inline bool is_f2fs_ifs(struct folio *folio)
-+{
-+	struct f2fs_iomap_folio_state *fifs;
-+
-+	if (!folio_test_private(folio))
-+		return false;
-+
-+	// first directly test no pointer flag is set or not
-+	if (test_bit(PAGE_PRIVATE_NOT_POINTER,
-+		     (unsigned long *)&folio->private))
-+		return false;
-+
-+	fifs = (struct f2fs_iomap_folio_state *)folio->private;
-+	if (!fifs)
-+		return false;
-+
-+	if (READ_ONCE(fifs->read_bytes_pending) == F2FS_IFS_MAGIC)
-+		return true;
-+
-+	return false;
-+}
-+
-+struct f2fs_iomap_folio_state *f2fs_ifs_alloc(struct folio *folio, gfp_t gfp,
-+					      bool force_alloc)
-+{
-+	struct inode *inode = folio->mapping->host;
-+	size_t alloc_size = 0;
-+
-+	if (!folio_test_large(folio)) {
-+		if (!force_alloc) {
-+			WARN_ON_ONCE(1);
-+			return NULL;
-+		}
-+		/*
-+		 * GC can store private flag in 0 order folio's folio->private
-+		 * causes iomap buffered write mistakenly interpret as a pointer
-+		 * we add a bool force_alloc to deal with this case
-+		 */
-+		struct f2fs_iomap_folio_state *fifs;
-+
-+		alloc_size = sizeof(*fifs) + 2 * sizeof(unsigned long);
-+		fifs = kmalloc(alloc_size, gfp);
-+		if (!fifs)
-+			return NULL;
-+		spin_lock_init(&fifs->state_lock);
-+		WRITE_ONCE(fifs->read_bytes_pending, F2FS_IFS_MAGIC);
-+		atomic_set(&fifs->write_bytes_pending, 0);
-+		unsigned int nr_blocks =
-+			i_blocks_per_folio(inode, folio);
-+		if (folio_test_uptodate(folio))
-+			bitmap_set(fifs->state, 0, nr_blocks);
-+		if (folio_test_dirty(folio))
-+			bitmap_set(fifs->state, nr_blocks, nr_blocks);
-+		*f2fs_ifs_private_flags_ptr(fifs, folio) = 0;
-+		folio_attach_private(folio, fifs);
-+		return fifs;
-+	}
-+
-+	struct f2fs_iomap_folio_state *fifs;
-+	void *old_private;
-+	size_t iomap_longs;
-+	size_t total_longs;
-+
-+	WARN_ON_ONCE(!inode); // Should have an inode
-+
-+	old_private = folio_get_private(folio);
-+
-+	if (old_private) {
-+		// Check if it's already our type using the magic number directly
-+		if (READ_ONCE(((struct f2fs_iomap_folio_state *)old_private)
-+				      ->read_bytes_pending) == F2FS_IFS_MAGIC) {
-+			return (struct f2fs_iomap_folio_state *)
-+				old_private; // Already ours
-+		}
-+		// Non-NULL, not ours -> Allocate, Copy, Replace path
-+		total_longs = f2fs_ifs_total_longs(folio);
-+		alloc_size = sizeof(*fifs) +
-+				total_longs * sizeof(unsigned long);
-+
-+		fifs = kmalloc(alloc_size, gfp);
-+		if (!fifs)
-+			return NULL;
-+
-+		spin_lock_init(&fifs->state_lock);
-+		*f2fs_ifs_private_flags_ptr(fifs, folio) = 0;
-+		// Copy data from the presumed iomap_folio_state (old_private)
-+		ifs_to_f2fs_ifs(old_private, fifs, folio);
-+		WRITE_ONCE(fifs->read_bytes_pending, F2FS_IFS_MAGIC);
-+		folio_change_private(folio, fifs);
-+		kfree(old_private);
-+		return fifs;
-+	}
-+
-+	iomap_longs = f2fs_ifs_iomap_longs(folio);
-+	total_longs = iomap_longs + 1;
-+	alloc_size =
-+		sizeof(*fifs) + total_longs * sizeof(unsigned long);
-+
-+	fifs = kzalloc(alloc_size, gfp);
-+	if (!fifs)
-+		return NULL;
-+
-+	spin_lock_init(&fifs->state_lock);
-+
-+	unsigned int nr_blocks = i_blocks_per_folio(inode, folio);
-+
-+	if (folio_test_uptodate(folio))
-+		bitmap_set(fifs->state, 0, nr_blocks);
-+	if (folio_test_dirty(folio))
-+		bitmap_set(fifs->state, nr_blocks, nr_blocks);
-+	WRITE_ONCE(fifs->read_bytes_pending, F2FS_IFS_MAGIC);
-+	atomic_set(&fifs->write_bytes_pending, 0);
-+	folio_attach_private(folio, fifs);
-+	return fifs;
-+}
-+
-+void folio_detach_f2fs_private(struct folio *folio)
-+{
-+	struct f2fs_iomap_folio_state *fifs;
-+
-+	if (!folio_test_private(folio))
-+		return;
-+
-+	// Check if it's using direct flags
-+	if (test_bit(PAGE_PRIVATE_NOT_POINTER,
-+		     (unsigned long *)&folio->private)) {
-+		folio_detach_private(folio);
-+		return;
-+	}
-+
-+	fifs = folio_detach_private(folio);
-+	if (!fifs)
-+		return;
-+
-+	if (is_f2fs_ifs(folio)) {
-+		WARN_ON_ONCE(READ_ONCE(fifs->read_bytes_pending) !=
-+			     F2FS_IFS_MAGIC);
-+		WARN_ON_ONCE(atomic_read(&fifs->write_bytes_pending));
-+	} else {
-+		WARN_ON_ONCE(READ_ONCE(fifs->read_bytes_pending) != 0);
-+		WARN_ON_ONCE(atomic_read(&fifs->write_bytes_pending));
-+	}
-+
-+	kfree(fifs);
-+}
-+
-+struct f2fs_iomap_folio_state *folio_get_f2fs_ifs(struct folio *folio)
-+{
-+	if (!folio_test_private(folio))
-+		return NULL;
-+
-+	if (test_bit(PAGE_PRIVATE_NOT_POINTER,
-+		     (unsigned long *)&folio->private))
-+		return NULL;
-+	/*
-+	 * Note we assume folio->private can be either ifs or f2fs_ifs here.
-+	 * Compresssed folios should not call this function
-+	 */
-+	f2fs_bug_on(F2FS_F_SB(folio),
-+		    *((u32 *)folio->private) == F2FS_COMPRESSED_PAGE_MAGIC);
-+	return folio->private;
-+}
-+
-+void f2fs_ifs_clear_range_uptodate(struct folio *folio,
-+				   struct f2fs_iomap_folio_state *fifs,
-+				   size_t off, size_t len)
-+{
-+	struct inode *inode = folio->mapping->host;
-+	unsigned int first_blk = (off >> inode->i_blkbits);
-+	unsigned int last_blk = (off + len - 1) >> inode->i_blkbits;
-+	unsigned int nr_blks = last_blk - first_blk + 1;
-+	unsigned long flags;
-+
-+	spin_lock_irqsave(&fifs->state_lock, flags);
-+	bitmap_clear(fifs->state, first_blk, nr_blks);
-+	spin_unlock_irqrestore(&fifs->state_lock, flags);
-+}
-+
-+void f2fs_iomap_set_range_dirty(struct folio *folio, size_t off, size_t len)
-+{
-+	struct f2fs_iomap_folio_state *fifs = folio_get_f2fs_ifs(folio);
-+
-+	if (fifs) {
-+		struct inode *inode = folio->mapping->host;
-+		unsigned int blks_per_folio = i_blocks_per_folio(inode, folio);
-+		unsigned int first_blk = (off >> inode->i_blkbits);
-+		unsigned int last_blk = (off + len - 1) >> inode->i_blkbits;
-+		unsigned int nr_blks = last_blk - first_blk + 1;
-+		unsigned long flags;
-+
-+		spin_lock_irqsave(&fifs->state_lock, flags);
-+		bitmap_set(fifs->state, first_blk + blks_per_folio, nr_blks);
-+		spin_unlock_irqrestore(&fifs->state_lock, flags);
-+	}
-+}
-diff --git a/fs/f2fs/f2fs_ifs.h b/fs/f2fs/f2fs_ifs.h
-new file mode 100644
-index 000000000000..3b16deda8a1e
---- /dev/null
-+++ b/fs/f2fs/f2fs_ifs.h
-@@ -0,0 +1,79 @@
-+// SPDX-License-Identifier: GPL-2.0
-+#ifndef F2FS_IFS_H
-+#define F2FS_IFS_H
-+
-+#include <linux/fs.h>
-+#include <linux/bug.h>
-+#include <linux/f2fs_fs.h>
-+#include <linux/mm.h>
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 8df0443dd189..a14bef4dc394 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -27,7 +27,10 @@
+ 
+ #include <linux/fscrypt.h>
+ #include <linux/fsverity.h>
+-
 +#include <linux/iomap.h>
-+#include <linux/slab.h>
-+#include <linux/spinlock.h>
-+#include <linux/atomic.h>
++#ifdef CONFIG_F2FS_IOMAP_FOLIO_STATE
++#include "f2fs_ifs.h"
++#endif
+ struct pagevec;
+ 
+ #ifdef CONFIG_F2FS_CHECK_FS
+@@ -2509,58 +2512,227 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
+ 	return -ENOSPC;
+ }
+ 
+-#define PAGE_PRIVATE_GET_FUNC(name, flagname) \
+-static inline bool folio_test_f2fs_##name(const struct folio *folio)	\
+-{									\
+-	unsigned long priv = (unsigned long)folio->private;		\
+-	unsigned long v = (1UL << PAGE_PRIVATE_NOT_POINTER) |		\
+-			     (1UL << PAGE_PRIVATE_##flagname);		\
+-	return (priv & v) == v;						\
+-}									\
+-static inline bool page_private_##name(struct page *page) \
+-{ \
+-	return PagePrivate(page) && \
+-		test_bit(PAGE_PRIVATE_NOT_POINTER, &page_private(page)) && \
+-		test_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
+-}
+-
+-#define PAGE_PRIVATE_SET_FUNC(name, flagname) \
+-static inline void folio_set_f2fs_##name(struct folio *folio)		\
+-{									\
+-	unsigned long v = (1UL << PAGE_PRIVATE_NOT_POINTER) |		\
+-			     (1UL << PAGE_PRIVATE_##flagname);		\
+-	if (!folio->private)						\
+-		folio_attach_private(folio, (void *)v);			\
+-	else {								\
+-		v |= (unsigned long)folio->private;			\
+-		folio->private = (void *)v;				\
+-	}								\
+-}									\
+-static inline void set_page_private_##name(struct page *page) \
+-{ \
+-	if (!PagePrivate(page)) \
+-		attach_page_private(page, (void *)0); \
+-	set_bit(PAGE_PRIVATE_NOT_POINTER, &page_private(page)); \
+-	set_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
+-}
+-
+-#define PAGE_PRIVATE_CLEAR_FUNC(name, flagname) \
+-static inline void folio_clear_f2fs_##name(struct folio *folio)		\
+-{									\
+-	unsigned long v = (unsigned long)folio->private;		\
+-									\
+-	v &= ~(1UL << PAGE_PRIVATE_##flagname);				\
+-	if (v == (1UL << PAGE_PRIVATE_NOT_POINTER))			\
+-		folio_detach_private(folio);				\
+-	else								\
+-		folio->private = (void *)v;				\
+-}									\
+-static inline void clear_page_private_##name(struct page *page) \
+-{ \
+-	clear_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
+-	if (page_private(page) == BIT(PAGE_PRIVATE_NOT_POINTER)) \
+-		detach_page_private(page); \
++extern bool f2fs_should_use_buffered_iomap(struct inode *inode);
++#ifdef CONFIG_F2FS_IOMAP_FOLIO_STATE
++#define F2FS_FOLIO_PRIVATE_GET_FUNC(name, flagname)                            \
++	static inline bool folio_test_f2fs_##name(const struct folio *folio)   \
++	{                                                                      \
++		/* First try direct folio->private access for meta folio */    \
++		if (folio_test_private(folio) &&                               \
++		    test_bit(PAGE_PRIVATE_NOT_POINTER,                         \
++			     (unsigned long *)&folio->private)) {              \
++			return test_bit(PAGE_PRIVATE_##flagname,               \
++					(unsigned long *)&folio->private);     \
++		}                                                              \
++		/* For higher-order folios, use iomap folio state */           \
++		struct f2fs_iomap_folio_state *fifs =                          \
++			(struct f2fs_iomap_folio_state *)folio->private;       \
++		unsigned long *private_p;                                      \
++		if (unlikely(!fifs || !folio->mapping))                        \
++			return false;                                          \
++		/* Check magic number before accessing private data */         \
++		if (READ_ONCE(fifs->read_bytes_pending) != F2FS_IFS_MAGIC)     \
++			return false;                                          \
++		private_p = f2fs_ifs_private_flags_ptr(fifs, folio);           \
++		if (!private_p)                                                \
++			return false;                                          \
++		/* Test bits directly on the 'private' slot */                 \
++		return test_bit(PAGE_PRIVATE_##flagname, private_p);           \
++	}                                                                      \
++	static inline bool page_private_##name(struct page *page)              \
++	{                                                                      \
++		return PagePrivate(page) &&                                    \
++		       test_bit(PAGE_PRIVATE_NOT_POINTER,                      \
++				&page_private(page)) &&                        \
++		       test_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
++	}
++#define F2FS_FOLIO_PRIVATE_SET_FUNC(name, flagname)                              \
++	static inline int folio_set_f2fs_##name(struct folio *folio)             \
++	{                                                                        \
++		/* For higher-order folios, use iomap folio state */             \
++		if (unlikely(!folio->mapping))                                   \
++			return -ENOENT;                                          \
++		bool force_alloc =                                               \
++			f2fs_should_use_buffered_iomap(folio_inode(folio));      \
++		if (!force_alloc && !folio_test_private(folio)) {                \
++			folio_attach_private(folio, (void *)0);                  \
++			set_bit(PAGE_PRIVATE_NOT_POINTER,                        \
++				(unsigned long *)&folio->private);               \
++			set_bit(PAGE_PRIVATE_##flagname,                         \
++				(unsigned long *)&folio->private);               \
++			return 0;                                                \
++		}                                                                \
++		struct f2fs_iomap_folio_state *fifs =                            \
++			f2fs_ifs_alloc(folio, GFP_NOFS, true);                   \
++		if (unlikely(!fifs))                                             \
++			return -ENOMEM;                                          \
++		unsigned long *private_p;                                        \
++		WRITE_ONCE(fifs->read_bytes_pending, F2FS_IFS_MAGIC);            \
++		private_p = f2fs_ifs_private_flags_ptr(fifs, folio);             \
++		if (!private_p)                                                  \
++			return -EINVAL;                                          \
++		/* Set the bit atomically */                                     \
++		set_bit(PAGE_PRIVATE_##flagname, private_p);                     \
++		/* Ensure NOT_POINTER bit is also set if any F2FS flag is set */ \
++		if (PAGE_PRIVATE_##flagname != PAGE_PRIVATE_NOT_POINTER)         \
++			set_bit(PAGE_PRIVATE_NOT_POINTER, private_p);            \
++		return 0;                                                        \
++	}                                                                        \
++	static inline void set_page_private_##name(struct page *page)            \
++	{                                                                        \
++		if (!PagePrivate(page))                                          \
++			attach_page_private(page, (void *)0);                    \
++		set_bit(PAGE_PRIVATE_NOT_POINTER, &page_private(page));          \
++		set_bit(PAGE_PRIVATE_##flagname, &page_private(page));           \
++	}
 +
-+#include "f2fs.h"
++#define F2FS_FOLIO_PRIVATE_CLEAR_FUNC(name, flagname)                      \
++	static inline void folio_clear_f2fs_##name(struct folio *folio)    \
++	{                                                                  \
++		/* First try direct folio->private access */               \
++		if (folio_test_private(folio) &&                           \
++		    test_bit(PAGE_PRIVATE_NOT_POINTER,                     \
++			     (unsigned long *)&folio->private)) {          \
++			clear_bit(PAGE_PRIVATE_##flagname,                 \
++				  (unsigned long *)&folio->private);       \
++			folio_detach_private(folio);                       \
++			return;                                            \
++		}                                                          \
++		/* For higher-order folios, use iomap folio state */       \
++		struct f2fs_iomap_folio_state *fifs =                      \
++			(struct f2fs_iomap_folio_state *)folio->private;   \
++		unsigned long *private_p;                                  \
++		if (unlikely(!fifs || !folio->mapping))                    \
++			return;                                            \
++		/* Check magic number before clearing */                   \
++		if (READ_ONCE(fifs->read_bytes_pending) != F2FS_IFS_MAGIC) \
++			return; /* Not ours or state unclear */            \
++		private_p = f2fs_ifs_private_flags_ptr(fifs, folio);       \
++		if (!private_p)                                            \
++			return;                                            \
++		clear_bit(PAGE_PRIVATE_##flagname, private_p);             \
++	}                                                                  \
++	static inline void clear_page_private_##name(struct page *page)    \
++	{                                                                  \
++		clear_bit(PAGE_PRIVATE_##flagname, &page_private(page));   \
++		if (page_private(page) == BIT(PAGE_PRIVATE_NOT_POINTER))   \
++			detach_page_private(page);                         \
++	}
++// Generate the accessor functions using the macros
++F2FS_FOLIO_PRIVATE_GET_FUNC(nonpointer, NOT_POINTER);
++F2FS_FOLIO_PRIVATE_GET_FUNC(inline, INLINE_INODE);
++F2FS_FOLIO_PRIVATE_GET_FUNC(gcing, ONGOING_MIGRATION);
++F2FS_FOLIO_PRIVATE_GET_FUNC(atomic, ATOMIC_WRITE);
++F2FS_FOLIO_PRIVATE_GET_FUNC(reference, REF_RESOURCE);
 +
-+#define F2FS_IFS_MAGIC 0xf2f5
-+#define F2FS_IFS_PRIVATE_LONGS 1
++F2FS_FOLIO_PRIVATE_SET_FUNC(reference, REF_RESOURCE);
++F2FS_FOLIO_PRIVATE_SET_FUNC(inline, INLINE_INODE);
++F2FS_FOLIO_PRIVATE_SET_FUNC(gcing, ONGOING_MIGRATION);
++F2FS_FOLIO_PRIVATE_SET_FUNC(atomic, ATOMIC_WRITE);
 +
-+/*
-+ * F2FS structure for folio private data, mimicking iomap_folio_state layout.
-+ * F2FS private flags/data are stored in extra space allocated at the end
-+ */
-+struct f2fs_iomap_folio_state {
-+	spinlock_t state_lock;
-+	unsigned int read_bytes_pending;
-+	atomic_t write_bytes_pending;
-+	/*
-+	 * Flexible array member.
-+	 * Holds [0...iomap_longs-1] for iomap uptodate/dirty bits.
-+	 * Holds [iomap_longs] for F2FS private flags/data (unsigned long).
-+	 */
-+	unsigned long state[];
-+};
-+
-+static inline bool
-+f2fs_ifs_block_is_uptodate(struct f2fs_iomap_folio_state *ifs,
-+			   unsigned int block)
++F2FS_FOLIO_PRIVATE_CLEAR_FUNC(reference, REF_RESOURCE);
++F2FS_FOLIO_PRIVATE_CLEAR_FUNC(inline, INLINE_INODE);
++F2FS_FOLIO_PRIVATE_CLEAR_FUNC(gcing, ONGOING_MIGRATION);
++F2FS_FOLIO_PRIVATE_CLEAR_FUNC(atomic, ATOMIC_WRITE);
++static inline int folio_set_f2fs_data(struct folio *folio, unsigned long data)
 +{
-+	return test_bit(block, ifs->state);
-+}
++	if (unlikely(!folio->mapping))
++		return -ENOENT;
 +
-+static inline size_t f2fs_ifs_iomap_longs(const struct folio *folio)
++	struct f2fs_iomap_folio_state *fifs =
++		f2fs_ifs_alloc(folio, GFP_NOFS, true);
++	if (unlikely(!fifs))
++		return -ENOMEM;
++
++	unsigned long *private_p;
++
++	private_p = f2fs_ifs_private_flags_ptr(fifs, folio);
++	if (!private_p)
++		return -EINVAL;
++
++	*private_p &= GENMASK(PAGE_PRIVATE_MAX - 1, 0);
++	*private_p |= (data << PAGE_PRIVATE_MAX);
++	set_bit(PAGE_PRIVATE_NOT_POINTER, private_p);
++
++	return 0;
+ }
++static inline unsigned long folio_get_f2fs_data(struct folio *folio)
 +{
-+	struct inode *inode = folio->mapping->host;
++	struct f2fs_iomap_folio_state *fifs =
++		(struct f2fs_iomap_folio_state *)folio->private;
++	unsigned long *private_p;
++	unsigned long data_val;
 +
-+	WARN_ON_ONCE(!inode);
-+	unsigned int nr_blocks =
-+		i_blocks_per_folio(inode, (struct folio *)folio);
-+	return BITS_TO_LONGS(2 * nr_blocks);
++	if (!folio->mapping)
++		return 0;
++	f2fs_bug_on(F2FS_I_SB(folio_inode(folio)), !fifs);
++	if (READ_ONCE(fifs->read_bytes_pending) != F2FS_IFS_MAGIC)
++		return 0;
++
++	private_p = f2fs_ifs_private_flags_ptr(fifs, folio);
++	if (!private_p)
++		return 0;
++
++	data_val = READ_ONCE(*private_p);
++
++	if (!test_bit(PAGE_PRIVATE_NOT_POINTER, &data_val))
++		return 0;
++
++	return data_val >> PAGE_PRIVATE_MAX;
 +}
++#else
++#define PAGE_PRIVATE_GET_FUNC(name, flagname)                                  \
++	static inline bool folio_test_f2fs_##name(const struct folio *folio)   \
++	{                                                                      \
++		unsigned long priv = (unsigned long)folio->private;            \
++		unsigned long v = (1UL << PAGE_PRIVATE_NOT_POINTER) |          \
++				  (1UL << PAGE_PRIVATE_##flagname);            \
++		return (priv & v) == v;                                        \
++	}                                                                      \
++	static inline bool page_private_##name(struct page *page)              \
++	{                                                                      \
++		return PagePrivate(page) &&                                    \
++		       test_bit(PAGE_PRIVATE_NOT_POINTER,                      \
++				&page_private(page)) &&                        \
++		       test_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
++	}
 +
-+static inline size_t f2fs_ifs_total_longs(struct folio *folio)
-+{
-+	return f2fs_ifs_iomap_longs(folio) + F2FS_IFS_PRIVATE_LONGS;
-+}
++#define PAGE_PRIVATE_SET_FUNC(name, flagname)                           \
++	static inline void folio_set_f2fs_##name(struct folio *folio)   \
++	{                                                               \
++		unsigned long v = (1UL << PAGE_PRIVATE_NOT_POINTER) |   \
++				  (1UL << PAGE_PRIVATE_##flagname);     \
++		if (!folio->private)                                    \
++			folio_attach_private(folio, (void *)v);         \
++		else {                                                  \
++			v |= (unsigned long)folio->private;             \
++			folio->private = (void *)v;                     \
++		}                                                       \
++	}                                                               \
++	static inline void set_page_private_##name(struct page *page)   \
++	{                                                               \
++		if (!PagePrivate(page))                                 \
++			attach_page_private(page, (void *)0);           \
++		set_bit(PAGE_PRIVATE_NOT_POINTER, &page_private(page)); \
++		set_bit(PAGE_PRIVATE_##flagname, &page_private(page));  \
++	}
 +
-+static inline unsigned long *
-+f2fs_ifs_private_flags_ptr(struct f2fs_iomap_folio_state *fifs,
-+			   const struct folio *folio)
-+{
-+	return &fifs->state[f2fs_ifs_iomap_longs(folio)];
-+}
-+
-+struct f2fs_iomap_folio_state *f2fs_ifs_alloc(struct folio *folio, gfp_t gfp,
-+					      bool force_alloc);
-+void folio_detach_f2fs_private(struct folio *folio);
-+struct f2fs_iomap_folio_state *folio_get_f2fs_ifs(struct folio *folio);
-+
-+/*
-+ * 0-order and fully dirty folio has no fifs
-+ * they store private flag directly in their folio->private field
-+ * as original f2fs page private behaviour
-+ */
-+void f2fs_ifs_clear_range_uptodate(struct folio *folio,
-+				   struct f2fs_iomap_folio_state *fifs,
-+				   size_t off, size_t len);
-+void f2fs_iomap_set_range_dirty(struct folio *folio, size_t off, size_t len);
-+
-+#endif /* F2FS_IFS_H */
++#define PAGE_PRIVATE_CLEAR_FUNC(name, flagname)                          \
++	static inline void folio_clear_f2fs_##name(struct folio *folio)  \
++	{                                                                \
++		unsigned long v = (unsigned long)folio->private;         \
++		v &= ~(1UL << PAGE_PRIVATE_##flagname);                  \
++		if (v == (1UL << PAGE_PRIVATE_NOT_POINTER))              \
++			folio_detach_private(folio);                     \
++		else                                                     \
++			folio->private = (void *)v;                      \
++	}                                                                \
++	static inline void clear_page_private_##name(struct page *page)  \
++	{                                                                \
++		clear_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
++		if (page_private(page) == BIT(PAGE_PRIVATE_NOT_POINTER)) \
++			detach_page_private(page);                       \
++	}
+ 
+ PAGE_PRIVATE_GET_FUNC(nonpointer, NOT_POINTER);
+ PAGE_PRIVATE_GET_FUNC(inline, INLINE_INODE);
+@@ -2595,7 +2767,7 @@ static inline void folio_set_f2fs_data(struct folio *folio, unsigned long data)
+ 	else
+ 		folio->private = (void *)((unsigned long)folio->private | data);
+ }
+-
++#endif
+ static inline void dec_valid_block_count(struct f2fs_sb_info *sbi,
+ 						struct inode *inode,
+ 						block_t count)
 -- 
 2.34.1
 
