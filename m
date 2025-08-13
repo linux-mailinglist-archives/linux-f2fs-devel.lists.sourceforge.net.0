@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03433B24D35
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Aug 2025 17:22:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8ABCB24D7D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Aug 2025 17:34:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=4fZ70YGAfBPkdOvYOihBwN2B1gax4rWrlq0NTLxP8H4=; b=jBjWdyBVcTvGFdrGHYLu5HupNk
-	GU7AcrE/3yqV2m7ltOPae5B9YzR9hZAmJ1H7wePLsV64/doxCPkusYQd4yDHXQ9JXKayxCb6TJVkA
-	NIj/9Z80mV2z/8orqSwMKmB1wzWyEMZrgBV91dLSTDbGQSkXV2wfM2lvUdUUewLZNdGA=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=UHjmGM9jv67lQxm6c3cRryQr9VIDQfJMuDL6ES/5iCo=; b=QA2dwk+75w+dsCNLWAB+EG4XAT
+	YefkkuTrqkE3t2x8/7U4vLYaNvsn34yD/pXoDkUbJmxK1P2o0Oi5kOJ+0seCwiOufSw+EKYeDeVj+
+	kmVftnduFImPdygU1oG7mLrmEFH4Xl/HSY5J7lTToCSfLSmKmY7wztc5BkOaHwXcafsc=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1umDIe-0002jn-9K;
-	Wed, 13 Aug 2025 15:22:00 +0000
+	id 1umDUc-0007Ly-Su;
+	Wed, 13 Aug 2025 15:34:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1umDIc-0002jh-QW
+ (envelope-from <zlang@redhat.com>) id 1umDUb-0007Lk-CB
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 13 Aug 2025 15:21:58 +0000
+ Wed, 13 Aug 2025 15:34:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vppSvXKLvw9+Ui4UoKYJG/JyrX8LaLt0vJFChiD34HM=; b=Eqizf2m+0Q4tXz1VhlBX59abiZ
- Cu7WLwy7uQ2vAz6w63idbhD/wZ8jwahHeOGe1duN2/hU0IASidHymvRWBZu28Bd49BrFeHiu3usIL
- tSV3liSvHsS1HR6G2BjrsoXMRg7ipoAf5bb5fXfuIyjtumatoNF9Sp3rTMvtxikLoSf0=;
+ bh=pag5QE+HiCvWX75OLxAtakXCKsO90brfj8/L9hsgDYY=; b=Xh8bWTwMvqTZpGk+oEKhryqBEM
+ QO0C0xRc6r/c2gqxwQEPHoMgy/AJ8jmxdjiocRkjJeWz+5udCgpdq5u/IwaNzpqxiMuu2vOZ3NQIu
+ vRgMb1mn1m72YHjR4faRiEP1BiJ3kdyDX3+MIoVxdzdwkfd+k3v52QXI4Eh3Yi8Qx+Eo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -40,78 +40,78 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vppSvXKLvw9+Ui4UoKYJG/JyrX8LaLt0vJFChiD34HM=; b=WSQOE5GRHIngCkbtnIDTrjyvtV
- DSVx/jk5MYrcTTULUkBP/jJa11aDhLJdAn9jAfasdwwwX5+ZFSwDlQRONJkkvgo3VOuy2+5FLjv7M
- 1b/q1/yZRHayrHfvcQFRpvA89QdENfKXgW54tIh1IW/TnQ11LlFGq39y1hUb5JLhesio=;
+ bh=pag5QE+HiCvWX75OLxAtakXCKsO90brfj8/L9hsgDYY=; b=JmCGbKKZBiJ4aAS1OY1+RdSAsI
+ 4wOYu7vf3pSL5LLd+7DaFMDTgGHd8yImFwAEU00omsosyeXRJQZeaMoQ3HX0WMQf+4koATjgZ2NDg
+ ZRsvczk5hZzlVApcKQzF5eK8TtQNu7C+fTNa/BYWg29b4CPmqubcA95pCEU7u+SmZj7s=;
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1umDIc-0006Bb-B1 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 13 Aug 2025 15:21:58 +0000
+ id 1umDUb-0006ij-MK for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 13 Aug 2025 15:34:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1755098512;
+ s=mimecast20190719; t=1755099255;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=vppSvXKLvw9+Ui4UoKYJG/JyrX8LaLt0vJFChiD34HM=;
- b=e69auS+JnfSOV7xG7YU39jOubzUm4tAHCfZymDLVaigB/0YxgSo8b/DrAF6KSVol4zhsky
- X7RMQs1ESz5oArNHLU5FGQM0ANT/eQ3HNnMjfcWMBRf1OwqSh1Fkrpmj/hpGSY/msLPv0Q
- EVj0OB7ijVDOeCszkdonb/N1zIjj2cM=
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=pag5QE+HiCvWX75OLxAtakXCKsO90brfj8/L9hsgDYY=;
+ b=Vp4OJyJMrG5f7JU+45aqTBtqJCuV41sJdawEP6gRlNfW4nJ0/Jj+pnOjKal2xQ8TK6ScLb
+ hh5RKq8DtifqjAngV1+DMbf/o4v8NaHmZhWFQAR50uy20KVd9guZL/4lEjAoOi682qcWlz
+ dMlBfw6M30B/XjtFgAB3ZadQIeqcExc=
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
+ [209.85.215.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-62-ld2ydjDANwikOnCGA1QI6A-1; Wed, 13 Aug 2025 11:21:50 -0400
-X-MC-Unique: ld2ydjDANwikOnCGA1QI6A-1
-X-Mimecast-MFC-AGG-ID: ld2ydjDANwikOnCGA1QI6A_1755098510
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-23fed1492f6so96861745ad.2
+ us-mta-256-A4g209GqOGWHx4SLfskouQ-1; Wed, 13 Aug 2025 11:34:14 -0400
+X-MC-Unique: A4g209GqOGWHx4SLfskouQ-1
+X-Mimecast-MFC-AGG-ID: A4g209GqOGWHx4SLfskouQ_1755099253
+Received: by mail-pg1-f198.google.com with SMTP id
+ 41be03b00d2f7-b4293085605so6408719a12.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 13 Aug 2025 08:21:50 -0700 (PDT)
+ Wed, 13 Aug 2025 08:34:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755098510; x=1755703310;
+ d=1e100.net; s=20230601; t=1755099253; x=1755704053;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vppSvXKLvw9+Ui4UoKYJG/JyrX8LaLt0vJFChiD34HM=;
- b=Ap1y33tGZ7dzRcC04An805oT/JcSpD0PI2Q1Yi/bEHX0PDxjGsX3rK/nByDXohQDSJ
- iEJ3uuj+FKjFQFm9HOqvFj1m72pLnUg/bFdWxHwm1TPI6nooZI3f8UjG/v3xkzBtnSfl
- cL46LBLMv2dpeJ7P1u05f+vazlsXgmSIyaTbhSqzcS8TI98ClYoThUnBZTGpr7FDRr1J
- 1jPYBdPm1aKtJQed3O4/AKdyLKp2zR/IpqSEWlNXf9ZLWj+9KFOY+pAgZkubMx5mWbVG
- 5wnH1cwTYk4Q2IwyUSwK0+NlinR0yQQLIVn0vWP6QImd2LVDkrY7roZtKHZIRdmZXQ4u
- lpRA==
+ bh=pag5QE+HiCvWX75OLxAtakXCKsO90brfj8/L9hsgDYY=;
+ b=lk+Ok0P9KtlJ1nNRnrX45NUKMXIOpS4brlMm8rwbM1n82PQkqqaHKiF0HD4tfLGqkA
+ L5C4pcWSjQFwvq0onySMCsnhyGqp0W/K20OJTxEpPooKNjdUpyLHfwzWMSzG5UZ1aLEs
+ 8T5HQpA40pxtUHskp8cSVUR5UNAFFOo5xNcZLXbrJSx8yZ/coO/z18c4eP/XkOxlIMl0
+ r9r+jskem1naAoNY3Vl5TzEAy1eKdTX7oIBOJmMkVD5di6xKEVNkMgFb6lnUJZbxFt88
+ QQwYk9EIRPg3n9/OcMat1tjtnHwZ3+Caqoac2352tDGb/oHhQchjvvHkY7D6y2XTno5w
+ o/2A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUVFMVIaaCTNfjeMSSydNeO1R6yM7LFbbZZLJ0MiHc6Ppg7VPC+Gt+yUuBq310uiUW9bchK3yaFXp0Z8PiQ0KxR@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzSFPeigI+gLjSzrKFuw63RbDP0JRH5Upbcvpd3pjcpAvnSCPQd
- WmZQ4CKKzrEQPZpyY63N9p5rlY5qlnIxZuQDTMqPoOJgJ3g00kzZl+fc6XmVvXslpXIXWR8PJzh
- SLQldy/vdMfyc2PizcYemj3vxC7GboNXOW8aw8fqG4GoXE2QlqPh1a1+edUpg0QnjG5MmVrPjXy
- aTHhY=
-X-Gm-Gg: ASbGnct+SJtf6Ce2jC3TdBaREPB0dfkyG/0rb8oAdM9dcBq598oEzVX5avL14zSFczc
- V6Ws5YMsFJPVScXl6/hIEVhF7HJ7VWvgiu2Qsww7JM8y1U3ZvcLL586slZ0+x/kiyYIWKI2LtFK
- WwEtPSqlhHoFOGc/eQn9CPB/KjH/8YZWPhkI4UE26WFgUfAPsIj6zXPhpf/GVn+FDHvzNBejkvZ
- dBYfEkVzm1PuUV7C5L6xmHBYrW85BOGZjWCAWT6bY5B7QaSi6Rlyw20ooGQh70DowxZGXW+CJ+F
- +Zy5+FyJbOXfHjk8iVM2n/32XerqBMjA+PVgsV6DIN5rwGvVYhQeBQk17gPZD8gBhKMheLjgT8p
- OyCLE
-X-Received: by 2002:a17:902:f788:b0:240:8c85:4299 with SMTP id
- d9443c01a7336-2430d0ecd34mr54666485ad.17.1755098509691; 
- Wed, 13 Aug 2025 08:21:49 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGpiUgwY9i2kjNs5657ydUZHd9xLVsxNt5lmXGywsZPtuMbOEjG4FvW3Bxcvc6ijxBkZqf0AA==
-X-Received: by 2002:a17:902:f788:b0:240:8c85:4299 with SMTP id
- d9443c01a7336-2430d0ecd34mr54665775ad.17.1755098509141; 
- Wed, 13 Aug 2025 08:21:49 -0700 (PDT)
+ AJvYcCV+9VURg0KGGnPMlfeuUzsPIOTKJxsm5uM+mHFA1D9Wu3P5FmpIkHNAsRTIZT7ehmedlIjhSa21nQbI+4qt41la@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yz3uLQRAtRdIfvioi/7uHrKPtvSzuiVo0Wg79BzJVi7ZUpjkrIC
+ UFtP8+yOPuYuPGyu1wzTzOUkg8m0bfjzUhx9bRwzBPF98IbE8VrF5f8VIbYMzcINbTOhn0z2tiZ
+ c2G3AvgBy3l5BJPbBskwjd79yyu28G/BS7m0W6TVPo0nW05Bcf2rACJswN271YfnLQTZx0otl29
+ LbEClSwesNQmw=
+X-Gm-Gg: ASbGncufiiNGuoDgcnBQ6JVGgVXb4FBHfYS762HedRyE5Ec9Sgq3H288MIC/E79gRiO
+ fGtgqhHsUx6A485cvbONPt0PBsotn0LvEe4jCyeh18BWmml+FJXgEEFh9WwYhC6IkXqvvLJ/j27
+ DYGADH6ki9AS9vsoBj6lBW3ZrQWByMPAMzxeQaRFpyQ/ZPejmLoF1G+xQWNogwbSubSiWURxvw3
+ mvGW7QFpPPAMR9yJapE6vNPcyeRBP7SV17SOuoX0s4lnmfT1DUegYzoZUh2TX49lRaDyHYRDxmE
+ TqiaLvq+87BdetPmXAFFMpMK3DvzR0rKGqiohzEVQBEdS3Zebwv36uC3Nx0QdrwWkbkMwf3lAoL
+ GAIpD
+X-Received: by 2002:a05:6a20:5491:b0:23d:ac50:3339 with SMTP id
+ adf61e73a8af0-240a8b501b9mr6527624637.29.1755099253045; 
+ Wed, 13 Aug 2025 08:34:13 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEWhZ+vun122BU6gTYyKkDtgHjV7RxtoofcOawSJj065vUnyH6vWTSz4pE7zBE/XIQ1Jd1Lkw==
+X-Received: by 2002:a05:6a20:5491:b0:23d:ac50:3339 with SMTP id
+ adf61e73a8af0-240a8b501b9mr6527568637.29.1755099252612; 
+ Wed, 13 Aug 2025 08:34:12 -0700 (PDT)
 Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([209.132.188.88])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-241e8977345sm327474455ad.108.2025.08.13.08.21.46
+ d2e1a72fcca58-76bccfcf523sm32268158b3a.90.2025.08.13.08.34.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Aug 2025 08:21:48 -0700 (PDT)
-Date: Wed, 13 Aug 2025 23:21:44 +0800
+ Wed, 13 Aug 2025 08:34:12 -0700 (PDT)
+Date: Wed, 13 Aug 2025 23:34:07 +0800
 To: Chao Yu <chao@kernel.org>
-Message-ID: <20250813152144.usxshpwpy2pqlovi@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+Message-ID: <20250813153407.b2ldb3u3zuw4ckbs@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 References: <20250811094415.1053545-1-chao@kernel.org>
- <20250811094415.1053545-2-chao@kernel.org>
+ <20250811094415.1053545-3-chao@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20250811094415.1053545-2-chao@kernel.org>
+In-Reply-To: <20250811094415.1053545-3-chao@kernel.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: sXswJ5OEWdtnnLC3MA9e29IyEOZkKjHSkKkVMs9KXV4_1755098510
+X-Mimecast-MFC-PROC-ID: b7U-PmVhUBJ1OlOntmUPmx_IlcFLKkuBGVFYUY7Qyic_1755099253
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
 X-Spam-Score: -0.2 (/)
@@ -121,9 +121,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Aug 11, 2025 at 05:44:14PM +0800, Chao Yu wrote: >
- This is a regression test: > 1. create a file > 2. write file to create a
- direct node at special offset > 3. use inject.f2fs to inject nid of [...]
+ Content preview:  On Mon, Aug 11, 2025 at 05:44:15PM +0800, Chao Yu wrote: >
+ This is a regression test: > 1. create directory > 2. add a new xattr entry
+ to create xattr node > 3. use inject.f2fs to inject nid of xattr [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -138,9 +138,8 @@ X-Spam-Report: Spam detection software,
  [170.10.133.124 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1umDIc-0006Bb-B1
-Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs/019: do sanity check on mapping
- table
+X-Headers-End: 1umDUb-0006ij-MK
+Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs/020: do sanity check on i_xattr_nid
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -160,97 +159,98 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Aug 11, 2025 at 05:44:14PM +0800, Chao Yu wrote:
+On Mon, Aug 11, 2025 at 05:44:15PM +0800, Chao Yu wrote:
 > This is a regression test:
-> 1. create a file
-> 2. write file to create a direct node at special offset
-> 3. use inject.f2fs to inject nid of direct node w/ ino of the inode
+> 1. create directory
+> 2. add a new xattr entry to create xattr node
+> 3. use inject.f2fs to inject nid of xattr node w/ ino in a file
 > 4. check whether f2fs kernel module will detect and report such
->    corruption in the fil
+>    corruption in the file
 > 
 > Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
->  tests/f2fs/019     | 45 +++++++++++++++++++++++++++++++++++++++++++++
->  tests/f2fs/019.out |  2 ++
->  2 files changed, 47 insertions(+)
->  create mode 100755 tests/f2fs/019
->  create mode 100644 tests/f2fs/019.out
+>  tests/f2fs/020     | 50 ++++++++++++++++++++++++++++++++++++++++++++++
+>  tests/f2fs/020.out |  2 ++
+>  2 files changed, 52 insertions(+)
+>  create mode 100755 tests/f2fs/020
+>  create mode 100644 tests/f2fs/020.out
 > 
-> diff --git a/tests/f2fs/019 b/tests/f2fs/019
+> diff --git a/tests/f2fs/020 b/tests/f2fs/020
 > new file mode 100755
-> index 00000000..0a02eb2f
+> index 00000000..a6a08c8f
 > --- /dev/null
-> +++ b/tests/f2fs/019
-> @@ -0,0 +1,45 @@
+> +++ b/tests/f2fs/020
+> @@ -0,0 +1,50 @@
 > +#! /bin/bash
 > +# SPDX-License-Identifier: GPL-2.0
 > +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
 > +#
-> +# FS QA Test No. f2fs/019
+> +# FS QA Test No. f2fs/020
 > +#
 > +# This is a regression test:
-> +# 1. create a file
-> +# 2. write file to create a direct node at special offset
-> +# 3. use inject.f2fs to inject nid of direct node w/ ino of the inode
+> +# 1. create directory
+> +# 2. add a new xattr entry to create xattr node
+> +# 3. use inject.f2fs to inject nid of xattr node w/ ino in a file
 > +# 4. check whether f2fs kernel module will detect and report such
 > +#    corruption in the file
 > +#
 > +. ./common/preamble
-> +_begin_fstest auto quick rw compress
+> +_begin_fstest auto quick rw
 > +
 > +_cleanup()
 > +{
 > +	_scratch_mkfs >> $seqres.full
-
-Why mkfs SCRATCH_DEV in _cleanup ?
-
 > +}
 > +
-> +_fixed_by_kernel_commit 77de19b6867f \
-> +	"f2fs: fix to avoid out-of-boundary access in dnode page"
+> +_fixed_by_kernel_commit 061cf3a84bde \
+> +	"f2fs: fix to do sanity check on ino and xnid"
 > +
 > +export MKFS_OPTIONS=""
-
-Can you give it a comment about why we need to clean mkfs option at here?
-
 > +_require_scratch
 
-Oh, if this case tends to have a corrupted SCRATCH_DEV, you can use
-_require_scratch_nocheck at here, don't need to mkfs in _cleanup.
+Same review points with patch 2/3, 
 
 > +_require_command "$F2FS_INJECT_PROG" inject.f2fs
 > +
-> +testfile=$SCRATCH_MNT/testfile
+> +testdir=$SCRATCH_MNT/testdir
 > +
 > +_scratch_mkfs >> $seqres.full
-> +_scratch_mount
+> +_scratch_mount "-o user_xattr,noinline_xattr"
 > +
-> +xfs_io -f -c "pwrite 3738M 1M" -c "fsync" $testfile >> $seqres.full
-   ^^^^^^
-$XFS_IO_PROG
+> +mkdir $testdir
+> +# add a new xattr entry to create xattr node
+> +setfattr -n user.abc -v 123 $testdir
+
+You can call `_require_attrs user` at first, then use "$SETFATTR_PROG"
 
 > +
 > +_scratch_unmount
 > +
-> +$F2FS_INJECT_PROG --node --mb addr --nid 5 --idx 937 --val 4 $SCRATCH_DEV >> $seqres.full
+> +# inject i_xattr_nid w/ nid of inode node
+> +$F2FS_INJECT_PROG --node --mb i_xattr_nid --nid 4 --val 4 $SCRATCH_DEV >> $seqres.full
 > +
 > +_scratch_mount
-> +xfs_io -c "pread 3700M 40M" $testfile
-   ^^^^^^
-$XFS_IO_PROG
+> +mkdir $testdir/dir >> $seqres.full 2>&1
+
+May I ask what kind of failure will this case hit, if there's the bug?
+
+Thanks,
+Zorro
 
 > +_scratch_unmount
+> +
+> +echo "Silence is golden"
 > +
 > +status=0
 > +exit
-> diff --git a/tests/f2fs/019.out b/tests/f2fs/019.out
+> diff --git a/tests/f2fs/020.out b/tests/f2fs/020.out
 > new file mode 100644
-> index 00000000..2f7469e2
+> index 00000000..20d7944e
 > --- /dev/null
-> +++ b/tests/f2fs/019.out
+> +++ b/tests/f2fs/020.out
 > @@ -0,0 +1,2 @@
-> +QA output created by 019
-> +pread: Structure needs cleaning
+> +QA output created by 020
+> +Silence is golden
 > -- 
 > 2.49.0
 > 
