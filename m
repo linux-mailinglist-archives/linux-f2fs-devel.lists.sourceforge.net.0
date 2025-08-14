@@ -2,78 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDBB9B25876
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Aug 2025 02:40:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D810AB2597B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 14 Aug 2025 04:23:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:Message-ID:MIME-Version:References:In-Reply-To:To:From:Date:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=kjMkssTGAE7noPhQJcm7H93KybZ/aTJvYV0YB2e2Rxw=; b=O4Fxu9gwfdvfbPkBgFJKcTGDcG
-	EvUysj/JiMNDT7pIzrC91WV6pPeTJxvxdOnVC+0VEkNahnLCyUehvTa7koAykaCHvnzdhF9H5q8Jr
-	O93XgKhQNus7QR/LF93kTsO2VXQ7CGXXMCXVZL4P5FCaTvMuJW1paFRULFwL/Cy188/k=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=0GMR2Z0ah4O70+2Y6l2SnvXC0BNMHvJcl1fGjNNsaUc=; b=Oh3xoqEyAFM5JCynlutG64HyVk
+	riU0JrVDTYztuwTMjgPZm0Ktv2MF/9qTYDG5RspViHWcPF/C73JaUb8VaRE20A5ba3UjGtMuAZvqZ
+	vACpUXnuNI8LGrvHPZLoeig4NZu25S9+1HP8XTiTrVHLDH88FK9SF6P6hqK0VSpaBLdo=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1umM0k-00012Q-T9;
-	Thu, 14 Aug 2025 00:40:06 +0000
+	id 1umNcF-00079A-Od;
+	Thu, 14 Aug 2025 02:22:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nzzhao@126.com>) id 1umM0j-00012K-2Q
+ (envelope-from <chao@kernel.org>) id 1umNcF-00078y-27
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 14 Aug 2025 00:40:05 +0000
+ Thu, 14 Aug 2025 02:22:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-ID:MIME-Version:Content-Type:
- Content-Transfer-Encoding:References:In-Reply-To:Subject:Cc:To:From:Date:
- Sender:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=S2F1KYFdj08kbSGD3imelw94uIcPpeMQDGDSL0wXGKc=; b=AOX+jbrkalHERpq+7GYJeukFHl
- iV9LS1xT5zPtWSw3k+lSjWFvkj135R3O/f1IDnuhT6gXe86QAhj1qWwgT/M3aLuZanWcDDRCrGSky
- HvwQzB+bE6dyelr9/cGVfSyLUG5RHjrmOtmwqFEvM6RynrT6O9jVQpz6iLzd+5A5MRaE=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=zMwYrDJZhBjUj4bgMLx2iCozJTiZBa/c9OyCZ6ZrWKY=; b=iHGeYqPaUK0NCmLwLrPDl9GFSE
+ FIA6RUE5b9BCw7pyH9Yk/eSLSowNrSjq2h7+rwbF4Ip5tHZpKnCLdo/GWD32e2aGYJWpr8hPUGUCw
+ iRHxWRgmtyaJmjvN3RDmeIZQLmPEhNITH8Z5M+BzbGQaZbq82Sy7hN+wOUEiOhO81yZc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:References
- :In-Reply-To:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=S2F1KYFdj08kbSGD3imelw94uIcPpeMQDGDSL0wXGKc=; b=kATbDO1NjQqqwDwz7ZdwUarc5b
- DVIEdAyYKxHHpEyPOLNz015Vzube0WGSWLMM4T9yEXFuvMgsy5LK6fHasin9Z0RyKYitCkTxTQolV
- N7FCIAh6RSm8WPl1ldRHnJYCtlYakG5ksAIcsjlUyYNd38rTVouVUFQ6gaKNW+SudxNU=;
-Received: from m16.mail.126.com ([117.135.210.7])
+ bh=zMwYrDJZhBjUj4bgMLx2iCozJTiZBa/c9OyCZ6ZrWKY=; b=TNPuGADrZ933Zn6KVUm22o4Auw
+ uqVeE1Tw0UWHou+u7ujTzYv+w6Pitk0bg6iG/sRUFM/dqRZdFS23z0eXJ6fZNqABg/q1hbHNo21Yq
+ 5JJFTW7MZOQd5LxCwTZOSQuzu0d8b+BE8vZJNCBY0CcmllOQVPZO1dqjes9zyu37l1kg=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1umM0h-00084K-V9 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 14 Aug 2025 00:40:05 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
- s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
- Message-ID; bh=S2F1KYFdj08kbSGD3imelw94uIcPpeMQDGDSL0wXGKc=; b=O
- b4yuPz99DZ29Sfb9Yp/DMQgWkAO2v0QzaFvlRxFrvu1P7xd57/SsPsdU+NDLoe+b
- QQFLSrbikwcBbnqlARHjCL8HlTI6GL4pJsjG/hAKUmOvMnJ20KgglCsj4FbIsIhQ
- +pAIoR36p/gZ/vL1cKTL61mYTdEUeeLdgXBwOvWTRI=
-Received: from nzzhao$126.com ( [112.86.116.50] ) by
- ajax-webmail-wmsvr-41-116 (Coremail) ; Thu, 14 Aug 2025 08:39:31 +0800
- (CST)
-X-Originating-IP: [112.86.116.50]
-Date: Thu, 14 Aug 2025 08:39:31 +0800 (CST)
-From: =?GBK?B?1dTEz9XcIA==?= <nzzhao@126.com>
-To: "Christoph Hellwig" <hch@infradead.org>
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20250723(a044bf12) Copyright (c) 2002-2025 www.mailtech.cn 126com
-In-Reply-To: <aJytvfsMcR2hzWKI@infradead.org>
-References: <20250813092131.44762-1-nzzhao@126.com>
- <aJytvfsMcR2hzWKI@infradead.org>
-X-NTES-SC: AL_Qu2eB/2YvkEs5yKYbOkfmUgRgOw3XMSyu/oi2o9UO5FwjA3j9SoPcGJeMmTT3OSSIi+qiiq1dj9e8PZgd6hBdqgZCTA8v9ofc8iQhGls/sROAA==
+ id 1umNcF-0004Rg-A9 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 14 Aug 2025 02:22:55 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id E13695C55B5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 14 Aug 2025 02:22:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C8A22C4CEEB;
+ Thu, 14 Aug 2025 02:22:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1755138164;
+ bh=34ypJRRpRao6a54n/Veipk1DcAh+opWEwlZ2ccnwB08=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=cTb3lHnX4tO8kB9f2UhEvrlUpG0kyT0CGAWQI8GOOpAS1/BNOiR4vH4m4PG7Nshg6
+ LbpgUtoG3wmbG44k0G7yUYxEdURMpMf4+tWf/mYzB4eOTsfTetNmlB8dekKhY9l21U
+ PPpUUoAOUXCG4fGMgiQFqwV7EKZPNND/hNh1ePOvQOE5fHxRiunn5K49Ise7kICXKJ
+ lQyVc2R+7SgabJaYN3TA+q6UDfjb9NbbDEoycBTZAAZh5sZvJn5nA/OmuhkjdaPBMW
+ J3nCLo9JC7Sg2v3zAnk7+HKWbFbQa9eHJDkw19FGDZiEnx0F+fur19xnv/M+A5fdxb
+ 54fqJtUcRY5hQ==
+Message-ID: <c7b8c81e-c0fe-4edf-8ad0-e10df5d80bd5@kernel.org>
+Date: Thu, 14 Aug 2025 10:22:41 +0800
 MIME-Version: 1.0
-Message-ID: <e81c31e.56a.198a604868e.Coremail.nzzhao@126.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: dCkvCgDn1y9DMJ1oOMAZAA--.15410W
-X-CM-SenderInfo: xq22xtbr6rjloofrz/1tbiEwWoz2icl9vu0AAGsx
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+User-Agent: Mozilla Thunderbird
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20250812235814.960924-1-jaegeuk@kernel.org>
+ <aJy8KS3fLQ452d2r@google.com>
+Content-Language: en-US
+In-Reply-To: <aJy8KS3fLQ452d2r@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -81,9 +81,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Mr.Christoph,
- Thanks for the quick feedback! > That's pretty
- ugly. What additional flags do you need? 
+ Content preview:  On 8/14/25 00:24, Jaegeuk Kim via Linux-f2fs-devel wrote:
+ > This patch introduces a proc entry to show the currently enrolled donation
+ > files. > > - "File path" indicates a file. > - "Status" > a. "D [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,14 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [nzzhao(at)126.com]
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [117.135.210.7 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1umM0h-00084K-V9
-Subject: Re: [f2fs-dev] [RFC PATCH 0/9] f2fs: Enable buffered read/write
- large folios support with extended iomap
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1umNcF-0004Rg-A9
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: show the list of donation files
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,68 +108,133 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yi Zhang <yi.zhang@huawei.com>, "Darrick J. Wong" <djwong@kernel.org>,
- Barry Song <21cnbao@gmail.com>, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Mr.Christoph,
+On 8/14/25 00:24, Jaegeuk Kim via Linux-f2fs-devel wrote:
+> This patch introduces a proc entry to show the currently enrolled donation
+> files.
+> 
+> - "File path" indicates a file.
+> - "Status"
+>  a. "Donated" means the file is registed in the donation list by
+>     fadvise(offset, length, POSIX_FADV_NOREUSE)
+>  b. "Evicted" means the donated pages were reclaimed.
+> - "Offset (kb)" and "Length (kb) show the registered donation range.
+> - "Cached pages (kb)" shows the amount of cached pages in the inode page cache.
+> 
+> For example,
+> 
+> Donation List
+>  # of files  : 2
+>  File path                                              Status     Offset (kb)     Length (kb)    Cached pages (kb)
+> ---
+>  /local/tmp/test2                                      Donated               0         1048576              2097152
+>  /local/tmp/test                                       Evicted               0         1048576              1048576
+> 
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>  v2: use inode_lock|unlock_shared
+>  
+>  fs/f2fs/sysfs.c | 64 +++++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 64 insertions(+)
+> 
+> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> index 1ffaf9e74ce9..9f90d1878ec6 100644
+> --- a/fs/f2fs/sysfs.c
+> +++ b/fs/f2fs/sysfs.c
+> @@ -1769,6 +1769,68 @@ static int __maybe_unused disk_map_seq_show(struct seq_file *seq,
+>  	return 0;
+>  }
+>  
+> +static int __maybe_unused donation_list_seq_show(struct seq_file *seq,
+> +						void *offset)
+> +{
+> +	struct super_block *sb = seq->private;
+> +	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+> +	struct inode *inode;
+> +	struct f2fs_inode_info *fi;
+> +	struct dentry *dentry;
+> +	char *buf, *path;
+> +	int i;
+> +
+> +	buf = f2fs_getname(sbi);
+> +	if (!buf)
+> +		return 0;
+> +
+> +	seq_printf(seq, "Donation List\n");
+> +	seq_printf(seq, " # of files  : %u\n", sbi->donate_files);
+> +	seq_printf(seq, " %-50s %10s %15s %15s %20s\n",
+> +			"File path", "Status", "Offset (kb)",
+> +			"Length (kb)", "Cached pages (kb)");
+> +	seq_printf(seq, "---\n");
+> +
+> +	for (i = 0; i < sbi->donate_files; i++) {
+> +		spin_lock(&sbi->inode_lock[DONATE_INODE]);
+> +		if (list_empty(&sbi->inode_list[DONATE_INODE])) {
+> +			spin_unlock(&sbi->inode_lock[DONATE_INODE]);
+> +			break;
+> +		}
+> +		fi = list_first_entry(&sbi->inode_list[DONATE_INODE],
+> +					struct f2fs_inode_info, gdonate_list);
+> +		list_move_tail(&fi->gdonate_list, &sbi->inode_list[DONATE_INODE]);
+> +		inode = igrab(&fi->vfs_inode);
+> +		spin_unlock(&sbi->inode_lock[DONATE_INODE]);
+> +
+> +		if (!inode)
+> +			continue;
+> +
+> +		inode_lock_shared(inode);
+> +
+> +		dentry = d_find_alias(inode);
+> +		if (!dentry) {
+> +			path = NULL;
+> +		} else {
+> +			path = dentry_path_raw(dentry, buf, PATH_MAX);
+> +			if (IS_ERR(path))
+> +				goto next;
+> +		}
+> +		seq_printf(seq, " %-50s %10s %15lu %15lu %20lu\n",
+> +				path ? path : "<unlinked>",
+> +				is_inode_flag_set(inode, FI_DONATE_FINISHED) ?
+> +				"Evicted" : "Donated",
+> +				fi->donate_start << (PAGE_SHIFT - 10),
 
-Thanks for the quick feedback!
+It needs to avoid overflow while left shift?
 
-> That's pretty ugly.  What additional flags do you need?  
+(loff_t)fi->donate_start << (PAGE_SHIFT - 10)
+(loff_t)(fi->donate_end + 1) << (PAGE_SHIFT - 10)
+(loff_t)inode->i_mapping->nrpages << (PAGE_SHIFT - 10))
 
-F2FS can utilize the folio's private field in a non-pointer mode to store its extra flags, which indicate the folio's additional status. 
-Please take a look at the f2fs.h file from PAGE_PRIVATE_GET_FUNC to the end of clear_page_private_all().
+Thanks,
 
-These flags persist throughout the entire lifetime of a folio, which conflicts with the iomap_folio_state pointer.
-Currently, the private fields of iomap's existing data structures,namely struct iomap's private, struct iomap_iter's private, 
-and struct iomap_ioend's io_private,are either allocated locally on the stack or have a lifecycle on the heap that only exists 
-for the duration of the I/O routine. This cannot meet F2FS's requirements.
+> +				(fi->donate_end + 1) << (PAGE_SHIFT - 10),
+> +				inode->i_mapping->nrpages << (PAGE_SHIFT - 10));
+> +next:
+> +		inode_unlock_shared(inode);
+> +		iput(inode);
+> +	}
+> +	f2fs_putname(buf);
+> +	return 0;
+> +}
+> +
+>  #ifdef CONFIG_F2FS_FAULT_INJECTION
+>  static int __maybe_unused inject_stats_seq_show(struct seq_file *seq,
+>  						void *offset)
+> @@ -1878,6 +1940,8 @@ int f2fs_register_sysfs(struct f2fs_sb_info *sbi)
+>  				discard_plist_seq_show, sb);
+>  	proc_create_single_data("disk_map", 0444, sbi->s_proc,
+>  				disk_map_seq_show, sb);
+> +	proc_create_single_data("donation_list", 0444, sbi->s_proc,
+> +				donation_list_seq_show, sb);
+>  #ifdef CONFIG_F2FS_FAULT_INJECTION
+>  	proc_create_single_data("inject_stats", 0444, sbi->s_proc,
+>  				inject_stats_seq_show, sb);
 
-> We should  try to figure out if there is a sensible way to support the needs
-> with a single codebase and data structure.
 
-As far as I know, only F2FS has this requirement, while other file systems do not. 
-Therefore, my initial thought was to avoid directly modifying the generic logic in fs/iomap. Instead, I propose designing 
-a wrapper structure for iomap_folio_state specifically for F2FS to satisfy both iomap's and F2FS's own needs.
-
-Another issue is the handling of order-0 folios. Since the iomap framework does not allocate an iomap_folio_state for these folios, 
-F2FS will always stores its private flags in the folio->private field. Then iomap framework would mistakenly interpret these flags as a pointer. 
-
-If we are to solve this issue in generic iomap layer, a minimal changes method to iomap framework I suppose is to let iomap logic can
-both distinguish pointer and non pointer mode of folio->private. We should also add a private field to iomap_folio_state , or extend he state 
-flexible array to store the extra infomation. If iomap detects a order>0 folio's folio->private is used in non pointer mode, then it store the flags in a newly 
-allocted iomap_folio_state first , clear the private field and then store's its address in it.
-
-P.S.  I just noticed you didn't reply via my resend patch. I misspelled f2fs's subsytem mail address in the original patch and I sincerely apologize for that.
-I already re-sent the series as  
- "[f2fs-dev] [RESEND RFC PATCH 0/9] f2fs: Enable buffered read/write large folios support with extended iomap"
-Could we continue the discussion on that thread so the right list gets the
-full context?  Thanks!
-
-Best regards,
-Nanzhe Zhao
-
-At 2025-08-13 23:22:37, "Christoph Hellwig" <hch@infradead.org> wrote:
->On Wed, Aug 13, 2025 at 05:21:22PM +0800, Nanzhe Zhao wrote:
->> * **Why extends iomap**
->>   * F2FS stores its flags in the folio's private field,
->>     which conflicts with iomap_folio_state.
->>   * To resolve this, we designed f2fs_iomap_folio_state,
->>     compatible with iomap_folio_state's layout while extending
->>     its flexible state array for F2FS private flags.
->>   * We store a magic number in read_bytes_pending to distinguish
->>     whether a folio uses the original or F2FS's iomap_folio_state.
->>     It's chosen because it remains 0 after readahead completes.
->
->That's pretty ugly.  What additionals flags do you need?  We should
->try to figure out if there is a sensible way to support the needs
->with a single codebase and data structure if that the requirements
->are sensible.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
