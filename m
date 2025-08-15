@@ -2,145 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D1E3B28377
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Aug 2025 18:02:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5BA9DB283BD
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Aug 2025 18:20:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Message-ID:To:Date:Sender:Cc:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=CFdDQVuhv6aKM1FIb3PsI5W/9P9miww35KTbJWAWwvg=; b=BQP8R0Rsrwm+m8OjFE40FhXv1j
-	9u7VXBgrObyShsGsUrCs+WB5D03MWRTmN12CA0mQgC8osJJ6Wi5Qv3WN/j1Ao0DXo+vxX7/DgwRzo
-	SMho5fQYBZZ/NJEmgkztk+rYIYg3kcXusdZHbnmYRX0RaKYGF/WJbR9Tn1h7/qKMyyt0=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=DE6ZwSAtZwzPcuot4Yb+O4EBQ/wF92C5TRn6BbnajEU=; b=jQhPY4gm7OoqRcoSBwO3xbEl1d
+	373kYICeBK8gSnse+YWHPQodm4G63Zqff7Bhg25IgFJdPFlkiLeNvlXYoNs/Opyi4HRQNcMm0Z1FJ
+	u2weQTXWQcZ+/VzzQRdpKQgaQNmmXGPXbCmFKcROAqhZPMLYBfAmkFnAomGdRP5RNRfE=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1umwst-0005SK-HX;
-	Fri, 15 Aug 2025 16:02:27 +0000
+	id 1umxAa-0000uS-CH;
+	Fri, 15 Aug 2025 16:20:45 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1umwsr-0005SD-LI
+ (envelope-from <jaegeuk@kernel.org>) id 1umxAY-0000uA-Cv
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 15 Aug 2025 16:02:25 +0000
+ Fri, 15 Aug 2025 16:20:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=x7trs0stmb5KqYgODGI7WyrTJCu0r4CTNIU7M/XCXio=; b=Kv3+PS0SVH+z1AUhOayhPudOlF
- nUPdZqAv4iPG5YP6+NMbELNZl2Jn9peEjCwzq0+HIoKKStnlQBtF4ikht34lynsBUM2hfeMr8emmY
- +OREIPHkgg9q7fOe1XpGqjPWrvDea9JEIHv6Q+Pj0e+QhGBTBWru+fueKKYJ2r6HAHQg=;
+ bh=nYMony5sC8GAVbMQBrOINfD/pMK1q6qsHPU0yHRs9Jw=; b=GLqVMvc45wdmIQA7tjqpBHvs+f
+ CN2u5Nnb09WGuYa5ItHfLhwg3MNCZzZqB0L3vmHh3oMOJGe0zlVfwcteToPj/JkSluGUeDkCbK1no
+ 4TEam/mmIVZTchjKhnhk8XazoNoXKpFsbuiT4s/nRWQBSOBoSoXJGUA55xrUOwTO+VPg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=x7trs0stmb5KqYgODGI7WyrTJCu0r4CTNIU7M/XCXio=; b=UjmbZdy/E6XC7cJxlbHOTVlNfT
- feMoPjPnyJNkL05jnjP++YXCrrdncrX0wixcOA0QMHskphjL0w4ZvzXoT/Y8Z9jL3O+XvGAKxc0eJ
- mMnaKAAw39ROyRL0A5coHtSM+R5oSrTAd7efaCRoG+lBYTTRUilB7kMXHRtHXPRbCJyY=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ bh=nYMony5sC8GAVbMQBrOINfD/pMK1q6qsHPU0yHRs9Jw=; b=gP/P5MIew/KF+4LZmjD6nRx1ht
+ AtCDWRwIsqi7man1pH3fovPvpnFK363eqzSuijv4bPGCIVuN4er4RzFPv02YAbrK3QXSBI6uhxoon
+ iIFvxZ4TfedG1KPjfNj/Svz+kwA08AVa3VGzJcOkMeiSv/yNhU2BOs7mv1Mu8wqp3Q5I=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1umwsr-0007W8-6e for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 15 Aug 2025 16:02:25 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1755273734;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=x7trs0stmb5KqYgODGI7WyrTJCu0r4CTNIU7M/XCXio=;
- b=GUTcIeXkA0YmRLkzMwl8QqmL3fvpV5QNGR+z4IhSDHD/081LCxNvrAsp9YP8F9q2bD+iAn
- xO2PHeNxPuzNrUaj65YYTpySbT4gHjo5sgOIm+TJZn5TPASxdvzEw9vKYcbdgUc1QvWdc+
- rlB4UchC3aXmQJnQ822CNE7+L8+LpVM=
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-263-wN25vnxBMRKQo6Qe7UP0nQ-1; Fri, 15 Aug 2025 12:02:12 -0400
-X-MC-Unique: wN25vnxBMRKQo6Qe7UP0nQ-1
-X-Mimecast-MFC-AGG-ID: wN25vnxBMRKQo6Qe7UP0nQ_1755273732
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-24458297be0so43763415ad.3
+ id 1umxAY-0008PN-KN for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 15 Aug 2025 16:20:43 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 0CF4AA58309
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 15 Aug 2025 09:02:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755273731; x=1755878531;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=x7trs0stmb5KqYgODGI7WyrTJCu0r4CTNIU7M/XCXio=;
- b=apQIpL9C8QlUhsGnDFe3ml/0nURKb0Zdird75l9KAjlRRm2623neFg2UP/S6YaDllx
- BLyWFjqr1litjQunhBMB4jIMNwACJCHov1TJIVXFh4vY4bCO+SDVWfOBVHXd6QTfFVX9
- DI0puMscJt/ZIb/L903hiBL3CPrHVty/N55qDaW6TEnOlDJHcvHFAiYlpyr0sJeI93vN
- LT2eN/SDKcsKWCNgWWoia3QWr4gEaJlRqz9AujrkKZ96WRXJ3UkN+JduOPf2nyo2xfnL
- fl2stk0Gn2ZaV13EsolMM9kOXfz82KmLin2MHuy3zieRW7w8zE4Uu1joijRXbV3H1lbo
- vNaw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCViXFhr17kz5/u/CSK+R/G3xq1RHST9SMZ3/O25Tflp8q1ZBBSASh1+LpHvipqT8r9uFhmMWvk8st2A8FeLwyem@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzsQYq2TXJzs4phTNUWK61XqYYChY1ohgi9naRn6txmO78cZW6P
- nklQcM5XaWT1uA7zVEX16IIbDcS/ki4zoapXv0vVeYyqjQTFq7OVjWbL5zpx4k5slZrP5R9Jo8T
- GGGXPrNW+9AQOlSgGL4Tx2UPHKhAYi80HiC0mEh0glI/RPPwQfHTAp6oT3GaVvglaHU3VzMnolm
- fneU0=
-X-Gm-Gg: ASbGnctgaAtVtQvJX7kVaCfF8FobS4e+XeH9pweNw623GaMp1e0v2SrR/3Uuttdx5J3
- 26q/ix0kiHhpOis2nVMdO8QH2LphscZ63B9FG0A0pXyzgdDlUf5cL6mZuTG1sb+9A59JNb1vIRq
- jhcDwjmPdfzOKNi39i959xymbrnOZLyVNmoGASTrvp+ePDxpamwgqBUZHAwmNGgFqxGG4pbt8tO
- FVc4WEUFSiCTumA8gJ/URd1WEaZ1yCyn9KqYv+Ty0F2PW5tHKeDoU7eF4aCUUwVQNpaxdix8LC6
- 7U5Zy3g2jAo+a0zU4PedQfq91gtV9m3uRHWEJweiC57IfTfV1xdFpnktmq2sp6kHRq7EqRXdrBj
- LKxe2
-X-Received: by 2002:a17:903:3546:b0:244:6b46:287b with SMTP id
- d9443c01a7336-2446d7a5b6fmr33199395ad.20.1755273731479; 
- Fri, 15 Aug 2025 09:02:11 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGWeB8r38bxKL+3gG+wc/E7BAZULHmVH4TEvNnC6Tj8Mxi0vNbgzc0GGqMf6qiNZnTgEnLfDQ==
-X-Received: by 2002:a17:903:3546:b0:244:6b46:287b with SMTP id
- d9443c01a7336-2446d7a5b6fmr33198945ad.20.1755273730935; 
- Fri, 15 Aug 2025 09:02:10 -0700 (PDT)
-Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([209.132.188.88])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2446cae02e7sm17248085ad.39.2025.08.15.09.02.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Aug 2025 09:02:10 -0700 (PDT)
-Date: Sat, 16 Aug 2025 00:02:06 +0800
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20250815160206.ncfua6yvrwopk4hg@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-References: <20250804114016.2734919-1-chao@kernel.org>
- <20250804114016.2734919-3-chao@kernel.org>
+ Fri, 15 Aug 2025 16:20:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 934CAC4CEEB;
+ Fri, 15 Aug 2025 16:20:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1755274831;
+ bh=LiYEkGe4+vvYPDOoShkAaz5e8Puzmaj0zK3r3FwaX08=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=JOEkffsNYbw9wt45dnlbQnrTH4QXworbfNo7bhVRiOkP8BzbMfFBqRw81ApCIbWE9
+ HvUfJU53KhVz0nIhe1PRmf5NbBTXuA2F1EHz3A+VEHYr99NPYjvoVWdhvLja2SE2rm
+ GiR3xoY5y0bO8T0ICkz9fEVaD7o++QzRj/iIB9OY5daxn+nJvHfzetur3P8nUuDb2f
+ tROUIhKpYgiXyJRKSRPCebrKJ4oKvjDvZXVB3uJzE1/AG0oK+Kyc3T6zCWPbMyuKGg
+ yeM9OB7MZ+LkJqWi5CqsV2OaZTcboVMAoGMxNcqD7B8GOnykg56uQopapPi4tXQ6dK
+ Yz5Z3dV3TlVuQ==
+Date: Fri, 15 Aug 2025 16:20:29 +0000
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <aJ9eTaqNwkQZtA8E@google.com>
+References: <20250812235814.960924-1-jaegeuk@kernel.org>
+ <aJy8KS3fLQ452d2r@google.com>
 MIME-Version: 1.0
-In-Reply-To: <20250804114016.2734919-3-chao@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: QL5QDfQm0kWTbdwCYeBPekURSReyrqgSOtNqu2yAj2k_1755273732
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
+In-Reply-To: <aJy8KS3fLQ452d2r@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Aug 04, 2025 at 07:40:16PM +0800, Chao Yu wrote: >
- As f2fs changes to use new mount APIs, let's add a new testcase > to check
- mount result for special mount options for zoned device > and thei [...] 
+ Content preview: This patch introduces a proc entry to show the currently
+ enrolled
+ donation files. - "File path" indicates a file. - "Status" a. "Donated" means
+ the file is registed in the donation list by fadvise(offset, length,
+ POSIX_FADV_NOREUSE)
+ b. "Evicted" means the donated pages were reclaim [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [170.10.129.124 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1umwsr-0007W8-6e
-Subject: Re: [f2fs-dev] [PATCH v3 3/3] f2fs/017: test mount options for
- zoned device
+X-Headers-End: 1umxAY-0008PN-KN
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: show the list of donation files
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -152,110 +109,124 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Zorro Lang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Zorro Lang <zlang@redhat.com>
-Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Aug 04, 2025 at 07:40:16PM +0800, Chao Yu wrote:
-> As f2fs changes to use new mount APIs, let's add a new testcase
-> to check mount result for special mount options for zoned device
-> and their combinations, in order to detect any inconsistency during
-> mount.
-> 
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
+This patch introduces a proc entry to show the currently enrolled donation
+files.
 
-This version is good to me,
+- "File path" indicates a file.
+- "Status"
+ a. "Donated" means the file is registed in the donation list by
+    fadvise(offset, length, POSIX_FADV_NOREUSE)
+ b. "Evicted" means the donated pages were reclaimed.
+- "Offset (kb)" and "Length (kb) show the registered donation range.
+- "Cached pages (kb)" shows the amount of cached pages in the inode page cache.
 
-Reviewed-by: Zorro Lang <zlang@redhat.com>
+For example,
 
->  tests/f2fs/017     | 40 ++++++++++++++++++++++++++++++++++++++++
->  tests/f2fs/017.out | 21 +++++++++++++++++++++
->  2 files changed, 61 insertions(+)
->  create mode 100755 tests/f2fs/017
->  create mode 100644 tests/f2fs/017.out
-> 
-> diff --git a/tests/f2fs/017 b/tests/f2fs/017
-> new file mode 100755
-> index 00000000..cdf42fc8
-> --- /dev/null
-> +++ b/tests/f2fs/017
-> @@ -0,0 +1,40 @@
-> +#! /bin/bash
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
-> +#
-> +# FS QA Test No. f2fs/017
-> +#
-> +# This testcase tries to check stability of mount result
-> +# w/ mount options for zoned device and their combination.
-> +#
-> +. ./common/preamble
-> +_begin_fstest auto quick mount
-> +
-> +_require_zoned_device "$TEST_DEV"
-> +_test_unmount >> $seqres.full 2>&1
-> +
-> +options=(
-> +#	mount_option			mkfs_option
-> +	"background_gc=on"		"blkzone"		\
-> +	"background_gc=off"		"blkzone"		\
-> +	"background_gc=sync"		"blkzone"		\
-> +	"mode=adaptive"			"blkzone"		\
-> +	"mode=lfs"			"blkzone"		\
-> +	"mode=fragment:segment"		"blkzone"		\
-> +	"mode=fragment:block"		"blkzone"		\
-> +	"discard_unit=block"		"blkzone"		\
-> +	"discard_unit=segment"		"blkzone"		\
-> +	"discard_unit=section"		"blkzone"		\
-> +)
-> +
-> +for ((i=0;i<${#options[@]};i=i+2))
-> +do
-> +	echo "Option#$i: ${options[$i]} : ${options[$((i+1))]}"
-> +	_test_mkfs "-m" >> $seqres.full || _fail "mkfs failed"
-> +	_test_mount "-o ${options[$i]}" >> $seqres.full 2>&1
-> +	echo $?
-> +	_test_unmount >> $seqres.full 2>&1
-> +done
-> +
-> +status=0
-> +exit
-> diff --git a/tests/f2fs/017.out b/tests/f2fs/017.out
-> new file mode 100644
-> index 00000000..c260e0b1
-> --- /dev/null
-> +++ b/tests/f2fs/017.out
-> @@ -0,0 +1,21 @@
-> +QA output created by 017
-> +Option#0: background_gc=on : blkzone
-> +0
-> +Option#2: background_gc=off : blkzone
-> +32
-> +Option#4: background_gc=sync : blkzone
-> +0
-> +Option#6: mode=adaptive : blkzone
-> +32
-> +Option#8: mode=lfs : blkzone
-> +0
-> +Option#10: mode=fragment:segment : blkzone
-> +32
-> +Option#12: mode=fragment:block : blkzone
-> +32
-> +Option#14: discard_unit=block : blkzone
-> +0
-> +Option#16: discard_unit=segment : blkzone
-> +0
-> +Option#18: discard_unit=section : blkzone
-> +0
-> -- 
-> 2.49.0
-> 
+Donation List
+ # of files  : 2
+ File path                                              Status     Offset (kb)     Length (kb)    Cached pages (kb)
+---
+ /local/tmp/test2                                      Donated               0         1048576              2097152
+ /local/tmp/test                                       Evicted               0         1048576              1048576
+
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+
+ v3 - use loff_t
+
+ fs/f2fs/sysfs.c | 64 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 64 insertions(+)
+
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 1ffaf9e74ce9..5d0f7364dbb8 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -1769,6 +1769,68 @@ static int __maybe_unused disk_map_seq_show(struct seq_file *seq,
+ 	return 0;
+ }
+ 
++static int __maybe_unused donation_list_seq_show(struct seq_file *seq,
++						void *offset)
++{
++	struct super_block *sb = seq->private;
++	struct f2fs_sb_info *sbi = F2FS_SB(sb);
++	struct inode *inode;
++	struct f2fs_inode_info *fi;
++	struct dentry *dentry;
++	char *buf, *path;
++	int i;
++
++	buf = f2fs_getname(sbi);
++	if (!buf)
++		return 0;
++
++	seq_printf(seq, "Donation List\n");
++	seq_printf(seq, " # of files  : %u\n", sbi->donate_files);
++	seq_printf(seq, " %-50s %10s %15s %15s %20s\n",
++			"File path", "Status", "Offset (kb)",
++			"Length (kb)", "Cached pages (kb)");
++	seq_printf(seq, "---\n");
++
++	for (i = 0; i < sbi->donate_files; i++) {
++		spin_lock(&sbi->inode_lock[DONATE_INODE]);
++		if (list_empty(&sbi->inode_list[DONATE_INODE])) {
++			spin_unlock(&sbi->inode_lock[DONATE_INODE]);
++			break;
++		}
++		fi = list_first_entry(&sbi->inode_list[DONATE_INODE],
++					struct f2fs_inode_info, gdonate_list);
++		list_move_tail(&fi->gdonate_list, &sbi->inode_list[DONATE_INODE]);
++		inode = igrab(&fi->vfs_inode);
++		spin_unlock(&sbi->inode_lock[DONATE_INODE]);
++
++		if (!inode)
++			continue;
++
++		inode_lock_shared(inode);
++
++		dentry = d_find_alias(inode);
++		if (!dentry) {
++			path = NULL;
++		} else {
++			path = dentry_path_raw(dentry, buf, PATH_MAX);
++			if (IS_ERR(path))
++				goto next;
++		}
++		seq_printf(seq, " %-50s %10s %15llu %15llu %20llu\n",
++				path ? path : "<unlinked>",
++				is_inode_flag_set(inode, FI_DONATE_FINISHED) ?
++				"Evicted" : "Donated",
++				(loff_t)fi->donate_start << (PAGE_SHIFT - 10),
++				(loff_t)(fi->donate_end + 1) << (PAGE_SHIFT - 10),
++				(loff_t)inode->i_mapping->nrpages << (PAGE_SHIFT - 10));
++next:
++		inode_unlock_shared(inode);
++		iput(inode);
++	}
++	f2fs_putname(buf);
++	return 0;
++}
++
+ #ifdef CONFIG_F2FS_FAULT_INJECTION
+ static int __maybe_unused inject_stats_seq_show(struct seq_file *seq,
+ 						void *offset)
+@@ -1878,6 +1940,8 @@ int f2fs_register_sysfs(struct f2fs_sb_info *sbi)
+ 				discard_plist_seq_show, sb);
+ 	proc_create_single_data("disk_map", 0444, sbi->s_proc,
+ 				disk_map_seq_show, sb);
++	proc_create_single_data("donation_list", 0444, sbi->s_proc,
++				donation_list_seq_show, sb);
+ #ifdef CONFIG_F2FS_FAULT_INJECTION
+ 	proc_create_single_data("inject_stats", 0444, sbi->s_proc,
+ 				inject_stats_seq_show, sb);
+-- 
+2.51.0.rc1.163.g2494970778-goog
 
 
 
