@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3960EB27A08
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Aug 2025 09:24:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BC9FB27A80
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Aug 2025 10:02:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=S+k3eqv3KnUm6AiUtZBXfHlUQACmixjZamr+BC7DxgU=; b=lTdU4DOP96D0GbjsT00JrTvLmN
-	mMP3xYSd7xhc2akSFpEgUgLQyU7GTAS1jZoogTTRQWS8lJh40GnjPVt+hpyNvmU8K6E+BTVPmOCJr
-	q8qaflTpF7/psrmTwecg99/6PIsOjl8MliCQO1JztmWyyEEwbmCzzgYtUkTB8Mt3PAl0=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=eR5nCvHDWA60JY2ptkPHbA3B/6Fe7qFFMWWxrMI2Mjs=; b=KVLNG7SIU6uQWHTjXK5i38n+lb
+	7MG9mFvMy9NAbAZfVguS/V9jgPuRqv89SCePX9uvJcCfssK5SXQ8oxdB4zlh99yJnTwCIQ/t15g7F
+	0UW+9rgXwc2rNHQCKDu7ZwbvxNbQg6hJPIb1zXp1a+sMvWAAkcAwRK/MuKS4QCLA2ycI=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1umonl-00067b-3b;
-	Fri, 15 Aug 2025 07:24:37 +0000
+	id 1umpOO-0005FI-1j;
+	Fri, 15 Aug 2025 08:02:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1umonk-00067V-An
+ (envelope-from <chao@kernel.org>) id 1umpOM-0005FB-Sk
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 15 Aug 2025 07:24:36 +0000
+ Fri, 15 Aug 2025 08:02:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HMH6nQGcGME/DJjDH4eLG9NzyxYlGd5QgoqwbaHVdl8=; b=FMg/uyG2sf9U8jE52b3Efumytk
- 2DnEBoTpBxJ+umoc9hZnGYLvKCu9/YZIH8h3X8JL57FpTa4z+33C8Eduf3xz6lvdEegrNv79avdgj
- SPM7mI2oKfGGbFVo46t+GN3UshEOFhg70YfwNg+lvjUKZrTIZldRVdEDyABYD5mOq7iA=;
+ bh=ZgVTCOQv5MQBuMoojY7WP2Wvds4jJp95n2Bn5QmuhMg=; b=C8O5hbRvsC4p5LPMnMmZYpLthy
+ ADLhHnoGwez0/UNkTpkKfZErMlt64zCjYCADGgMHKHNGUu0PA1f0YVX52jDvOfD18N5BdgQPiHzQT
+ JxD67qbIHbN5sidFQcOPRRmX4fyEydTaua7NBpHjTYbbIp1XzYRYzFEmy1+DAerH0G7k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,62 +40,67 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=HMH6nQGcGME/DJjDH4eLG9NzyxYlGd5QgoqwbaHVdl8=; b=a7rR5NCecagyPHJw/NSpV8AqZE
- ECUl/fJ9YgXIxFViAD6OnMSd9VmndSxy4w9YcyUk+/TEyU9WA2U/Hrb+ogZniw8u3yUuzSo8GkpY4
- jSdH5q6NLAuThBacVxBG+eLNRUVrRzQ68iHTNwS1l0YqAIOtUIIiKN19hOUT+qnzJDX4=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=ZgVTCOQv5MQBuMoojY7WP2Wvds4jJp95n2Bn5QmuhMg=; b=DZghA7fmfX2hbjGwsFXZDAfprb
+ dZP0uQjTiRsKGZR3hKjJRG8YSdpe7gp7spWiExasnrcF9rwP+0GLsg9Ov+1mkHHGuEPO0InDzU0a0
+ Jxb2DqaYtcCjTjbwHk0vxHfNGj1y467K++v/9IGsnRDQPR/H8mzVqdR4As6aZw+yxSjk=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1umonj-0003gA-NB for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 15 Aug 2025 07:24:36 +0000
+ id 1umpOM-0005dZ-BY for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 15 Aug 2025 08:02:26 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id EF4546116E;
- Fri, 15 Aug 2025 07:24:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 163A2C4CEEB;
- Fri, 15 Aug 2025 07:24:27 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id EB9F85C39D4;
+ Fri, 15 Aug 2025 08:02:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88187C4CEEB;
+ Fri, 15 Aug 2025 08:02:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1755242669;
- bh=FmbOj40jrFapiXTbimXsVNU3tIo0ZnAjE9hXb0fbSSY=;
+ s=k20201202; t=1755244935;
+ bh=UqMlmB6aIlDbiFKHI3lMYWxu0bnYqjVX62W5hnkci3M=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=CwKGYmhcQRPT0NxEnmjEn2J+Qo/RXbH586M3R++R0bA34MwBPdruyV3dyzaV22bca
- DYuGcy61loKr0XovQMs5btNuhl2XC/F5WGP2MSYECeDcn2tUkpr4J+12Gr3M676HZG
- dFXwTxX4Gagnz6F3oze+7/MClLThhnmlvcYSEBYtfZYsxK2xfTKSXd03QJ/Dl6OyCS
- PrDm6/Bb5QVrX1Yr4m3yKm8FPGlbVHmN12X8JYSvjUfuOWXpxjld3kdvQN/5aKSLCH
- BwM8tgWcg5Wu84v5gj4ccFwvaG/woW/Q8/gFgfIYiKAdohk3yiAPRAbusDMDLyQQFN
- ZA1NgMNbAYxuw==
-Message-ID: <fd2ecc04-5958-49e4-8c01-a30420a204a5@kernel.org>
-Date: Fri, 15 Aug 2025 15:24:26 +0800
+ b=Is2lKH6rISoJW5rHQ3qyMjwO+boP8zmQwf5O66nHIuxwy9fHzjoHKm2Gs460xCwaQ
+ iBCXvmgXqauAWcx+AqiXMTL2RHULBulqRcdYvWIg6nnHYk3os82XVqmoY9pkO28U5S
+ LfTSNe/XlSpz4o81a7aoE1B3jxMTBSHHH/CqPTjZQfDE2dezKb5Ov3tt3DfqFIdzEy
+ +r2lUwyqQ4htEj20WBW+l8rPC/EzOXXeMXo5eZAJONDQgTf7KA7UFh9QvI/lOPPm33
+ Ig8xZw8raE4e3PT7GEYDT7aOwood21FnGFCvuYLHfQqJpry3cundVc0KTWdw6LUpMK
+ LQREPeZO7goRA==
+Message-ID: <40587d4a-44a2-4d82-9f9f-2934c52aba87@kernel.org>
+Date: Fri, 15 Aug 2025 16:02:12 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Zorro Lang <zlang@redhat.com>
 References: <20250814090712.2119455-1-chao@kernel.org>
- <20250814205334.obe6tmyhphngntdv@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+ <20250814090712.2119455-3-chao@kernel.org>
+ <20250814211838.64o3q3jurbxvwp3a@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 Content-Language: en-US
-In-Reply-To: <20250814205334.obe6tmyhphngntdv@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+In-Reply-To: <20250814211838.64o3q3jurbxvwp3a@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 8/15/25 04:53, Zorro Lang wrote: > On Thu, Aug 14, 2025
- at 05:07:10PM +0800, Chao Yu wrote: >> This is a regression testcase, it
- is added to check below case >> and its variants: >> - write 16k dat [...]
+ Content preview:  On 8/15/25 05:18, Zorro Lang wrote: > On Thu, Aug 14, 2025
+ at 05:07:12PM +0800, Chao Yu wrote: >> This is a regression test: >> 1. create
+ directory >> 2. add a new xattr entry to create xattr node >> [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
+ See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URI: user.abc]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1umonj-0003gA-NB
-Subject: Re: [f2fs-dev] [PATCH v2 1/3] f2fs/018: check data eof after
- partial truncation on compressed cluster
+X-Headers-End: 1umpOM-0005dZ-BY
+Subject: Re: [f2fs-dev] [PATCH v2 3/3] f2fs/020: do sanity check on
+ i_xattr_nid
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,178 +120,99 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 8/15/25 04:53, Zorro Lang wrote:
-> On Thu, Aug 14, 2025 at 05:07:10PM +0800, Chao Yu wrote:
->> This is a regression testcase, it is added to check below case
->> and its variants:
->> - write 16k data into compressed file (data will be compressed)
->> - truncate file to 12k (truncate partial data in compressed cluster)
->> - truncate file to 20k
->> - verify data in range of [12k, 16k] to see whether data is all zero
->> or not
+On 8/15/25 05:18, Zorro Lang wrote:
+> On Thu, Aug 14, 2025 at 05:07:12PM +0800, Chao Yu wrote:
+>> This is a regression test:
+>> 1. create directory
+>> 2. add a new xattr entry to create xattr node
+>> 3. use inject.f2fs to inject nid of xattr node w/ ino in a file
+>> 4. check whether f2fs kernel module will detect and report such
+>>    corruption in the file
 >>
 >> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 >> Signed-off-by: Chao Yu <chao@kernel.org>
 >> ---
->> v2:
->> - add missing _require_xfs_io_command "truncate"
->> - add missing _require_fio $fio_config
->> - use $XFS_IO_PROG instead of xfs_io
->> - avoid mkfs&mount .. umount for each round test
->>  tests/f2fs/018     | 77 ++++++++++++++++++++++++++++++++++++++++++++++
->>  tests/f2fs/018.out |  2 ++
->>  2 files changed, 79 insertions(+)
->>  create mode 100755 tests/f2fs/018
->>  create mode 100644 tests/f2fs/018.out
+>> v3:
+>> - use _require_scratch_nocheck instead of _require_scratch
+>> - add missing _require_attrs user
+>> - add comments for why exporting MKFS_OPTIONS=""
+>>  tests/f2fs/020     | 51 ++++++++++++++++++++++++++++++++++++++++++++++
+>>  tests/f2fs/020.out |  2 ++
+>>  2 files changed, 53 insertions(+)
+>>  create mode 100755 tests/f2fs/020
+>>  create mode 100644 tests/f2fs/020.out
 >>
->> diff --git a/tests/f2fs/018 b/tests/f2fs/018
+>> diff --git a/tests/f2fs/020 b/tests/f2fs/020
 >> new file mode 100755
->> index 00000000..e1047f78
+>> index 00000000..7ce1f92f
 >> --- /dev/null
->> +++ b/tests/f2fs/018
->> @@ -0,0 +1,77 @@
+>> +++ b/tests/f2fs/020
+>> @@ -0,0 +1,51 @@
 >> +#! /bin/bash
 >> +# SPDX-License-Identifier: GPL-2.0
 >> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
 >> +#
->> +# FS QA Test No. f2fs/018
+>> +# FS QA Test No. f2fs/020
 >> +#
->> +# This is a regression test to check whether page eof will be
->> +# zero or not after we truncate partial data in compressed
->> +# cluster.
+>> +# This is a regression test:
+>> +# 1. create directory
+>> +# 2. add a new xattr entry to create xattr node
+>> +# 3. use inject.f2fs to inject nid of xattr node w/ ino in a file
+>> +# 4. check whether f2fs kernel module will detect and report such
+>> +#    corruption in the file
 >> +#
 >> +. ./common/preamble
->> +_begin_fstest auto quick rw compress
+>> +_begin_fstest auto quick rw
 >> +
->> +_fixed_by_kernel_commit ba8dac350faf \
->> +	"f2fs: fix to zero post-eof page"
->> +_fixed_by_kernel_commit xxxxxxxxxxxx \
->> +	"f2fs: fix to zero data after EOF for compressed file correctly"
+>> +. ./common/attr
 >> +
->> +_require_xfs_io_command "truncate"
->> +_require_scratch
+>> +_fixed_by_kernel_commit 061cf3a84bde \
+>> +	"f2fs: fix to do sanity check on ino and xnid"
 >> +
->> +testfile=$SCRATCH_MNT/testfile
->> +fio_config=$tmp.fio
+>> +_require_scratch_nocheck
+>> +_require_command "$F2FS_INJECT_PROG" inject.f2fs
+>> +_require_attrs user
 >> +
->> +cat >$fio_config <<EOF
->> +[global]
-
-I updated task name from global to verify-data to avoid
-"No job(s) defined" error from fio.
-
->> +filename=$testfile
->> +rw=read
->> +verify=pattern
->> +verify_pattern=0x00
->> +do_verify=1
->> +verify_only
->> +offset=0
->> +size=4k
->> +numjobs=1
->> +EOF
->> +_require_fio $fio_config
-> 
-> Hmm... that looks strange if you create fio config file but don't use it later :-D
-> 
-> How about:
-> 
-> build_fio_config()
-> {
-> 	local offset=$1
-> 	local size=$2
-> 
-> 	cat >$fio_config <<EOF
-> [global]
-> filename=$testfile
-> rw=read
-> verify=pattern
-> verify_pattern=0x00
-> do_verify=1
-> verify_only
-> offset=$offset
-> size=$size
-> numjobs=1
-> EOF
-
-cat $fio_config >> $seqres.full
-
-To record fio config in seqres.full
-
-> }
-> 
-> build_fio_config 0 4k
-> _require_fio $fio_config
-
-Add _cleanup() to remove $testfile created in last testcase.
-
-> 
+>> +# remove all mkfs options to avoid layout change of on-disk inode
+>> +export MKFS_OPTIONS=""
 >> +
->> +_scratch_mkfs "-O extra_attr,compression" >> $seqres.full || _fail "mkfs failed"
->> +_scratch_mount "-o compress_extension=*" >> $seqres.full
+>> +testdir=$SCRATCH_MNT/testdir
 >> +
->> +check_data_eof()
->> +{
->> +	local eof_start=$1
->> +	local eof_size=$2
->> +	local filesize=$3
->> +	local offset1=$4
->> +	local offset2=$5
->> +	local offset3=$6
+>> +_scratch_mkfs >> $seqres.full
+>> +_scratch_mount "-o user_xattr,noinline_xattr"
 >> +
->> +
-> 
-> rm -f $testfile
-> 
->> +	$XFS_IO_PROG -f -c "pwrite 0 $filesize" -c "fsync" $testfile >> $seqres.full
->> +	$XFS_IO_PROG -c "truncate $offset1" $testfile
->> +	$XFS_IO_PROG -c "truncate $offset2" $testfile
->> +
->> +	if [ "$offset3" ]; then
->> +		xfs_io -c "truncate $offset3" $testfile
->                 ^^^^^^
->        $XFS_IO_PROG
-> 
->> +	fi
->> +
->> +	$FIO_PROG --name=verify-data --filename=$testfile --rw=read --verify=pattern \
->> +		--verify_pattern=0x00 --do_verify=1 --verify_only --offset=$eof_start \
->> +		--size=$eof_size >> $seqres.full 2>&1 || _fail "eof data is not zero"
-> 
-> build_fio_config $eof_start $eof_size
-> $FIO_PROG $fio_config >> $seqres.full 2>&1
-> 
->> +
->> +	rm -f $testfile
-> 
-> Move this line to above, then
-> 
-> return $?
-> 
->> +}
->> +
->> +check_data_eof 12k 4k 16k 12k 20k
->> +check_data_eof 10k 6k 16k 10k 20k
->> +check_data_eof 12k 4k 16k 8k 12k 20k
->> +check_data_eof 10k 6k 16k 8k 10k 20k
-> 
-> run_check check_data_eof 12k 4k 16k 12k 20k
-> run_check check_data_eof 10k 6k 16k 10k 20k
-> run_check check_data_eof 12k 4k 16k 8k 12k 20k
-> run_check check_data_eof 10k 6k 16k 8k 10k 20k
-> 
-> This can help you to know which line fails if one of them is failed. Or you
-> always get "eof data is not zero", no matter which line fails :)
-
-Looks nice!
-
-> 
+>> +mkdir $testdir
+>> +# add a new xattr entry to create xattr node
+>> +$SETFATTR_PROG -n user.abc -v 123 $testdir
 >> +
 >> +_scratch_unmount
-> 
-> This unmount looks useless, due to SCRATCH_DEV is always unmounted after a test done.
+>> +
+>> +# inject i_xattr_nid w/ nid of inode node
+>> +$F2FS_INJECT_PROG --node --mb i_xattr_nid --nid 4 --val 4 $SCRATCH_DEV >> $seqres.full
 
-Thanks for all your suggestion, will update v3.
+Zorro, I missed one thing, this testcase relies on a f2fs-tools patch, please apply
+this before running the testcase.
+
+https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git/commit/?h=dev-test&id=2174461cdd0a22edc5e7d172605bff4740582438
+
+Do I need to create a _require_* function for f2fs to verify whether f2fs-tools
+support the required feature or not?
+
+>> +
+>> +_scratch_mount
+
+Oh, I may missed to add "-o acl,user_xattr" here.
+
+>> +# may potentially trigger a deadlock w/ double inode_lock on parent's inode
+>> +mkdir $testdir/dir >> $seqres.full 2>&1
+>> +_scratch_unmount
+> 
+> Can you provide a test result to prove this test case trigger a failure
+> on general kernel (not debug kernel). If it can, then this version is good
+> to me :)
+
+Well, expectation is it will hang kernel, so that the f2fs/020 will stop here
+once we encounter the issue.
 
 Thanks,
 
@@ -299,13 +225,13 @@ Thanks,
 >> +
 >> +status=0
 >> +exit
->> diff --git a/tests/f2fs/018.out b/tests/f2fs/018.out
+>> diff --git a/tests/f2fs/020.out b/tests/f2fs/020.out
 >> new file mode 100644
->> index 00000000..8849e303
+>> index 00000000..20d7944e
 >> --- /dev/null
->> +++ b/tests/f2fs/018.out
+>> +++ b/tests/f2fs/020.out
 >> @@ -0,0 +1,2 @@
->> +QA output created by 018
+>> +QA output created by 020
 >> +Silence is golden
 >> -- 
 >> 2.49.0
