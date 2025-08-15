@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83533B28317
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Aug 2025 17:40:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CDB6CB28353
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Aug 2025 17:54:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=++insLNaNBoZLB5M7qk+kkoPupzFif2KVa4NC/7B/8o=; b=BmdEItDjG0B7QxIUFlCNZfxlVg
-	p2NH05syhqj0SwHJbAVxnE0ANlm2sugUT+v5cDON6TegvJKu512wz93JYpR3MZKtFkupXla3sO/Do
-	n0bLw/vNP6veS3SnKncT9VnmpzNh1HKZljJ1h+w/m/oKeUkdF7zI7kH6sIcj04vuPeXY=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=DXkxNNJWM7RPy77DRIYldQ9HXjJHgFfNjQ9xDH/306o=; b=bEt7r0YFapUu49XrOTiEykyTOf
+	OBGIwl/IRNN1UeKtxJ0FDChYXkTna6jrJ4MAnYwD3lzO7H/7sPh0tgKoYWDFdFoEjxHOMUx+n+MPf
+	aCS6HQhDQONqN6DubyippZcE3ipg27c8zBgFvT3AsBo4KGqBTFtZjAGn06OO0W7sF6Xg=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1umwXp-00042q-6Q;
-	Fri, 15 Aug 2025 15:40:41 +0000
+	id 1umwlA-0007An-HN;
+	Fri, 15 Aug 2025 15:54:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1umwXn-00042j-NO
+ (envelope-from <zlang@redhat.com>) id 1umwl9-0007Ag-It
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 15 Aug 2025 15:40:39 +0000
+ Fri, 15 Aug 2025 15:54:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=h2shLWe0BUVvsKwtzCIiYcr9t5BEPaphZXfmxyJe3R0=; b=RDbqbVhyto3AleSH6nrNGLUrxe
- CT99aIq5Lr2xua+DfW4HxcxhHQdNM38Hq9WJbu+qIrFIe/OMgoMmyZtS6qiLFp9jIK0AFsM9gqMCk
- KgO5Nyt89z4jGawSH+uo1H0+iy/eRqjjrkxsx+D59rrG1gVJM3r5Jf3VXzxb+beSmFvE=;
+ bh=NRaMgkMEgLgN4mQUMby7xLO7l22leF6759j8hvQ68v0=; b=lTZ8kYNhlAyX2fX4mfg5pTmn/u
+ vNYiBQkLYOgLHfNqNHqIF/xrQ9F15zca2pjyJUFFxZv+dcIGPSoFtCznBYDXjIqVCzdeVJdwUm6jP
+ 4gcN+uTuX8VNvJchXAPO9PNv6vUpGyCdniMyEYj13AP0ORgZn5Eq/GN9BdjZT1VOGn0Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -40,107 +40,105 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=h2shLWe0BUVvsKwtzCIiYcr9t5BEPaphZXfmxyJe3R0=; b=ipbTppqB/hlZc0fSiqLts1w+18
- kbjn1i119i8+Wyz48KejDty5zX7kMjXiNe8FeE5vHIQec9GVS3bh2AM2uXlLLlAuF+Arjtmho9eBc
- ocrhPniAgRWsaG65bNm4zfef5qZdnfpZBZf9OT7RNL+D6sUuVZKBKKsIHCYdzvZ2K2/0=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ bh=NRaMgkMEgLgN4mQUMby7xLO7l22leF6759j8hvQ68v0=; b=G7JnQwdZSRQ/0PniLuc0YNWuGw
+ kBXJdaxY3tlcSdqtKmTcw5aRMpJ2X+licr2l08+tbnoHIOVfwECnhbOjwNl+YxcMzfEyKy03SYW9f
+ Xq+8GZ2tNiTcQ37mPH5oZ1DoJQiJu2ivVBhJWhFli4skq4N4fll7hUkoRiL3JXaELM8g=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1umwXn-0006De-8a for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 15 Aug 2025 15:40:39 +0000
+ id 1umwl8-0006vN-Ve for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 15 Aug 2025 15:54:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1755272433;
+ s=mimecast20190719; t=1755273255;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=h2shLWe0BUVvsKwtzCIiYcr9t5BEPaphZXfmxyJe3R0=;
- b=JkNgejY4FtbcQi5Km2lwyfzjkLKAf3R6vdWlv+XaFnsgMlt3JsT/hfwzmbnq1oFpACng8X
- dR1xEQl1hMZBnzQ/qWzb+hwkhfJcKDpisNQbHsRF5ggnZ2nBwa8pVvqT4yTyOkw85Xa1no
- v7L//lzjp6NsIuOmtCTYErkA3mtGSXQ=
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=NRaMgkMEgLgN4mQUMby7xLO7l22leF6759j8hvQ68v0=;
+ b=LKuikM8CH8dZ3g92fKiz9XFu73NHsLVGsg3RDiD8Yig5Q1L0NU72E9s3GNip2CDXQJc8dO
+ Sdpumf/OsJSoQ0ee6Sg0hLgbGxk1GOdjOteUa/pY9AgGs3QBE+vTJHwL+grQS06LLuG4a5
+ vfelkHaVmLZR4QbJ9jamwp4TN4dLlyE=
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-434-PPQgCCwmOL-FxfOAhJBU8g-1; Fri, 15 Aug 2025 11:40:31 -0400
-X-MC-Unique: PPQgCCwmOL-FxfOAhJBU8g-1
-X-Mimecast-MFC-AGG-ID: PPQgCCwmOL-FxfOAhJBU8g_1755272430
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-244581187c6so23871735ad.1
+ us-mta-33-kbB_YE-xOvSX6PIFRyjlFQ-1; Fri, 15 Aug 2025 11:54:14 -0400
+X-MC-Unique: kbB_YE-xOvSX6PIFRyjlFQ-1
+X-Mimecast-MFC-AGG-ID: kbB_YE-xOvSX6PIFRyjlFQ_1755273253
+Received: by mail-pf1-f198.google.com with SMTP id
+ d2e1a72fcca58-76e1fc66de5so2697041b3a.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 15 Aug 2025 08:40:30 -0700 (PDT)
+ Fri, 15 Aug 2025 08:54:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755272430; x=1755877230;
+ d=1e100.net; s=20230601; t=1755273253; x=1755878053;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=h2shLWe0BUVvsKwtzCIiYcr9t5BEPaphZXfmxyJe3R0=;
- b=HdVtmlN46SZ1wdo3i4b2F3NMTOZX0z8S54uXNkqLWqjPHYsaNE/na5WnEb7KHKXNuS
- dLy9Eob597cgz4hl60hIjz9GOiuo932+qMaEsTRk3Xka4azhpUfmKee2ti6q992qLtLv
- 14gYUlGlXXDh4wXzS060a4RnvcDMtWJ3KpxBGiw1fVmQWehTQS5YHlX2CfbH9+iYXTeV
- 6/sUTN0QGCUxw2e1eBCpwshZWH9Zt4n3R4eK2IvLfWt6kvjm7k7t/ThOrdODQ4FuH+Vd
- wprZMtb1DjHtSjC7IV/K5NHwhpTV4JAXV8k7ajZCnhOY+FK1gtEKrTVV38E628egLLuq
- uSRQ==
+ bh=NRaMgkMEgLgN4mQUMby7xLO7l22leF6759j8hvQ68v0=;
+ b=i6+0M0X8cG3aYl3sEkKDzwIlyzthqtyrrtglPDzENuVch7brz1imYVlx+fp0u2hNU3
+ d3ULwV4egzeIbBuiN87pnhrGFTUE3iK/aWhRXklsPKfkt9oEZ5aIe51fEWL8TCEN+3Pe
+ p6rpFlGvLbehvD3Iw3ykTkKwoJdCmPUKMBCDjj8CqkcXSv1XtH/7JhN1dMQ9iQbGCN9E
+ /PJ8oc3FYTVHUXw0oJH++dSDghZrAIA12WSc1oGZX38JAjTUsbWoikGGYAcd5m2eqSL4
+ pPysKFgg5v3g2MajQmsu2DqMqxRM2N/kjwE+WZH2WErPfFEDYbBwfp7S6LOrRC4jV7Pb
+ hjLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZlYtpomV3G9TJXN+zJSdsG8PlEDdI3pVT49RREsSUcNwOYl1OHqzXpo2WaUhAXGF6yJpkjnMR/As5G4zVrUu3@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YxAP02xxk18CwqahylT2U16iqSeNQV+0YX7768lQ032uCI/caG5
- QZCAaTSBI98RCPPUkddUMHb9LiqGdCBHFDvBgBhp4qZvK+ZmpPCaH/2lJd+h+s7TBnT7lYwr5E7
- ZeMDzMJeYQyN3I0mLenlyWbC7RXT2Xt4bqMFA/OlBILZHqWqeLyKhBYYRkPa8HNH07YOhCNhWqt
- UJyFk=
-X-Gm-Gg: ASbGncuo80tNKSVTp6Ve8sO9iRYCo+wiL0yN5TVV5wNP7HA1nQxehNjHo5Ynk/NCFNC
- oaSm1Mhofljs5qK+tF73QmDq7hsg1Hkvhh1Wq32e2r1NTahGlUdKI4y2xmInE3UYIKfZ5l2mjpy
- q3xHOxM6ORsf4es8LrpcU3TN+zM8qUNv8x7LXKW20Nh0t++RduXCfFUpOiqBcP2gutDdxC5QLd+
- 4jAZUxAGcABGAt6CHN41GueI6q2GQ6odUfLeNdqusXgQJkT9ytyXEAACp8eN9j8mKAvRAyM8SZs
- WG4F4sO+/fZf1cEcvpgRFtUeH+EHdZXY0rJnaUhNeyHBxyokSLN3u7w19AaX31B0ojoL1uGXbIa
- 2RwuT
-X-Received: by 2002:a17:903:46cb:b0:242:accd:bbe8 with SMTP id
- d9443c01a7336-2446d86b233mr36533005ad.36.1755272429991; 
- Fri, 15 Aug 2025 08:40:29 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFpG2P8TCPc/yq2zXXGVka9uGeMsSuVQPEBzLFlufmsjARUsak3MTv6Hk5VgKCF9aqaahyycA==
-X-Received: by 2002:a17:903:46cb:b0:242:accd:bbe8 with SMTP id
- d9443c01a7336-2446d86b233mr36532615ad.36.1755272429565; 
- Fri, 15 Aug 2025 08:40:29 -0700 (PDT)
+ AJvYcCUdrEc5WGxRJG5SCK1T68OZdGDEqXXcOcvJ8yFjyLtCAZKexprl9oSQEyDTNouqOI2vxLzzYV3ZGnHDA8R6EF3e@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yybg+txVTkHDF5d13hxwnwSa+sQsXi84ZIYC6AhLd5IWjc6k1y8
+ JsSWZtP2AZrS4yI4+j5Qirq9qOvvKfIDXl9Ak0QCMRmC6z/BRBPHyYgvygJuApOSdhsc7HE4qBl
+ t79uW7yywkl2GnDQFkET+WleL0vjUOjbehGOQfromY8Qe4QzVvCL2NJexGLctP/HEqiL0yK7RKs
+ cTpfQ=
+X-Gm-Gg: ASbGncsh1aGve0qcS7TnqL8zBuXf23zGTGLcUZ2EdykjqJAKlE/35sRPz/5InmtVodZ
+ 57hkG+SkNySxHpjdlhpE7lVx9p7V/15FW1gK62b79QNPPP6XRQIcXDvd79piwwHaQHLgCHRTHZv
+ qK3WYHku4aDhcTX0ei28/v+MN40wlErnMEC/mZSIbdlOUl9jAOZ8QG6N7l6QEdiTHjd4/DWvccr
+ urxkW2CeZTnRfp/ZfdkWmAVKyO1NaHe4FWSk9ikJTii7gz0DGYIZ2a1BijvcLM51h8Nb5BSO/cJ
+ 20mKak2MK4aI8QGrtEBWpGD9b3lqCu7JGOXk520UCln6NiUpFNkBqFzQjkhB6HFnKPB3F6XLVgH
+ pGJRI
+X-Received: by 2002:a05:6a00:2344:b0:76b:cc37:d4c5 with SMTP id
+ d2e1a72fcca58-76e43830aebmr4116952b3a.5.1755273253372; 
+ Fri, 15 Aug 2025 08:54:13 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHVyz6fnoqKB51muPU4YuSBCAeUdAuoOcJyxwicsXPL6yhVmU/S9648a/DV3cU8AIDA8Bd9Uw==
+X-Received: by 2002:a05:6a00:2344:b0:76b:cc37:d4c5 with SMTP id
+ d2e1a72fcca58-76e43830aebmr4116930b3a.5.1755273252964; 
+ Fri, 15 Aug 2025 08:54:12 -0700 (PDT)
 Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([209.132.188.88])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2446ca9ef62sm16642255ad.6.2025.08.15.08.40.27
+ d2e1a72fcca58-76e45292dc1sm1394626b3a.50.2025.08.15.08.54.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Aug 2025 08:40:28 -0700 (PDT)
-Date: Fri, 15 Aug 2025 23:40:24 +0800
+ Fri, 15 Aug 2025 08:54:12 -0700 (PDT)
+Date: Fri, 15 Aug 2025 23:54:08 +0800
 To: Chao Yu <chao@kernel.org>
-Message-ID: <20250815154024.kwpudb7uz4mt2nhr@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-References: <20250815081405.2523015-1-chao@kernel.org>
- <20250815081405.2523015-3-chao@kernel.org>
+Message-ID: <20250815155408.ja527chpfrjtcuau@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+References: <20250808065803.17298-1-chao@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20250815081405.2523015-3-chao@kernel.org>
+In-Reply-To: <20250808065803.17298-1-chao@kernel.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: Wqwv0T432mPz4B6h4irMSZ2lSeboaaTGTNbn5Y8RpzU_1755272430
+X-Mimecast-MFC-PROC-ID: rEKsw_5fS1D7q_invOGN18HptEqtwwDtmMl89VkHUvw_1755273253
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Aug 15, 2025 at 04:14:05PM +0800, Chao Yu wrote: >
- This is a regression test: > 1. create directory > 2. add a new xattr entry
- to create xattr node > 3. use inject.f2fs to inject nid of xattr [...] 
+ Content preview:  On Fri, Aug 08, 2025 at 02:58:03PM +0800, Chao Yu wrote: >
+ w/ below change [1], f2fs will enable lookup_mode=perf by default, it > will
+ change f2fs dirent lookup method from linear based lookup to has [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [170.10.133.124 listed in wl.mailspike.net]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [170.10.129.124 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1umwXn-0006De-8a
-Subject: Re: [f2fs-dev] [PATCH v3 3/3] f2fs/020: do sanity check on
- i_xattr_nid
+X-Headers-End: 1umwl8-0006vN-Ve
+Subject: Re: [f2fs-dev] [PATCH] f2fs/012: adapt lookup_mode=x mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -160,99 +158,88 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Aug 15, 2025 at 04:14:05PM +0800, Chao Yu wrote:
-> This is a regression test:
-> 1. create directory
-> 2. add a new xattr entry to create xattr node
-> 3. use inject.f2fs to inject nid of xattr node w/ ino in a file
-> 4. check whether f2fs kernel module will detect and report such
->    corruption in the file
+On Fri, Aug 08, 2025 at 02:58:03PM +0800, Chao Yu wrote:
+> w/ below change [1], f2fs will enable lookup_mode=perf by default, it
+> will change f2fs dirent lookup method from linear based lookup to hash
+> based lookup.
 > 
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> So that, f2fs will ignore sb.s_encoding_flags by default, which is not
+> compatible w/ f2fs/012 testcase, in where it will control lookup method
+> by configuring this flag w/ fsck.f2fs.
+> 
+> To avoid failure of f2fs/012, let's check whether f2fs has supported
+> "lookup_mode=auto" mount option, mount w/ the option if it can,
+> otherwise, don't.
+> 
+> [1] https://lore.kernel.org/linux-f2fs-devel/20250805065228.1473089-1-chullee@google.com
+> 
+> Cc: Daniel Lee <chullee@google.com>
 > Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
-> v3:
-> - fix mount option
-> - check return value of inject.f2fs
->  tests/f2fs/020     | 51 ++++++++++++++++++++++++++++++++++++++++++++++
->  tests/f2fs/020.out |  2 ++
->  2 files changed, 53 insertions(+)
->  create mode 100755 tests/f2fs/020
->  create mode 100644 tests/f2fs/020.out
+
+With this patch, I always get below error:
+
+f2fs/012 2s ... - output mismatch (see /root/git/xfstests/results//f2fs/012.out.bad)
+    --- tests/f2fs/012.out      2025-07-21 13:33:12.379585206 +0800
+    +++ /root/git/xfstests/results//f2fs/012.out.bad    2025-08-15 23:51:54.156835560 +0800
+    @@ -1,2 +1,4 @@
+     QA output created by 012
+    +mount: /mnt/scratch: wrong fs type, bad option, bad superblock on /dev/sda6, missing codepage or helper program, or other error.
+    +       dmesg(1) may have more information after failed mount system call.
+     Silence is golden
+    ...
+    (Run 'diff -u /root/git/xfstests/tests/f2fs/012.out /root/git/xfstests/results//f2fs/012.out.bad'  to see the entire diff)
+
+Then test passed without this patch:
+
+f2fs/012 2s ...  3s
+Ran: f2fs/012
+Passed all 1 tests
+
+
+>  tests/f2fs/012 | 13 +++++++++++--
+>  1 file changed, 11 insertions(+), 2 deletions(-)
 > 
-> diff --git a/tests/f2fs/020 b/tests/f2fs/020
-> new file mode 100755
-> index 00000000..38bc6582
-> --- /dev/null
-> +++ b/tests/f2fs/020
-> @@ -0,0 +1,51 @@
-> +#! /bin/bash
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
-> +#
-> +# FS QA Test No. f2fs/020
-> +#
-> +# This is a regression test:
-> +# 1. create directory
-> +# 2. add a new xattr entry to create xattr node
-> +# 3. use inject.f2fs to inject nid of xattr node w/ ino in a file
-> +# 4. check whether f2fs kernel module will detect and report such
-> +#    corruption in the file
-> +#
-> +. ./common/preamble
-> +_begin_fstest auto quick rw
+> diff --git a/tests/f2fs/012 b/tests/f2fs/012
+> index b3df9a8f..15fc8f0c 100755
+> --- a/tests/f2fs/012
+> +++ b/tests/f2fs/012
+> @@ -22,6 +22,15 @@ _require_scratch_nocheck
+>  _require_command "$F2FS_IO_PROG" f2fs_io
+>  _require_command "$F2FS_INJECT_PROG" inject.f2fs
+>  
+> +#check whether f2fs supports "lookup_mode=x" mount option
+> +mntopt=""
+> +_scratch_mkfs -O casefold -C utf8 >> $seqres.full
+> +_try_scratch_mount "-o lookup_mode=auto"
+> +if [ $? == 0 ]; then
+> +	mntopt="-o lookup_mode=auto"
+> +	_scratch_unmount
+> +fi
 > +
-> +. ./common/attr
-> +
-> +_fixed_by_kernel_commit 061cf3a84bde \
-> +	"f2fs: fix to do sanity check on ino and xnid"
-> +
-> +_require_scratch_nocheck
-> +_require_command "$F2FS_INJECT_PROG" inject.f2fs
-> +_require_attrs user
-> +
-> +# remove all mkfs options to avoid layout change of on-disk inode
-> +export MKFS_OPTIONS=""
-> +
-> +testdir=$SCRATCH_MNT/testdir
-> +
-> +_scratch_mkfs >> $seqres.full
-> +_scratch_mount "-o user_xattr,noinline_xattr"
-> +
-> +mkdir $testdir
-> +# add a new xattr entry to create xattr node
-> +$SETFATTR_PROG -n user.abc -v 123 $testdir
-> +
-> +_scratch_unmount
-> +
-> +# inject i_xattr_nid w/ nid of inode node
-> +$F2FS_INJECT_PROG --node --mb i_xattr_nid --nid 4 --val 4 $SCRATCH_DEV >> $seqres.full || _fail "failed to inject"
-
-If you'd like to deal with that _require_inject_f2fs_command (what ever name) things
-in another separated patchset, this patch is good to me.
-
-Reviewed-by: Zorro Lang <zlang@redhat.com>
-
-> +
-> +_scratch_mount "-o acl,user_xattr"
-> +# may potentially trigger a deadlock w/ double inode_lock on parent's inode
-> +mkdir $testdir/dir >> $seqres.full 2>&1
-> +_scratch_unmount
-> +
-> +echo "Silence is golden"
-> +
-> +status=0
-> +exit
-> diff --git a/tests/f2fs/020.out b/tests/f2fs/020.out
-> new file mode 100644
-> index 00000000..20d7944e
-> --- /dev/null
-> +++ b/tests/f2fs/020.out
-> @@ -0,0 +1,2 @@
-> +QA output created by 020
-> +Silence is golden
+>  check_lookup()
+>  {
+>  	local nolinear_lookup=$1
+> @@ -30,7 +39,7 @@ check_lookup()
+>  	local redheart=$dir/$'\u2764\ufe0f'
+>  
+>  	_scratch_mkfs -O casefold -C utf8 >> $seqres.full
+> -	_scratch_mount
+> +	_scratch_mount $mntopt
+>  
+>  	mkdir $dir
+>  	$F2FS_IO_PROG setflags casefold $dir >> $seqres.full
+> @@ -52,7 +61,7 @@ check_lookup()
+>  
+>  	$F2FS_INJECT_PROG --dent --mb d_hash --nid $ino --val 0x9a2ea068 $SCRATCH_DEV >> $seqres.full
+>  
+> -	_scratch_mount
+> +	_scratch_mount $mntopt
+>  	if [ $nolinear_lookup == "1" ]; then
+>  		[ -f $redheart ] && _fail "red heart file should not exist"
+>  	else
 > -- 
-> 2.49.0
+> 2.40.1
 > 
 
 
