@@ -2,102 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB178B283FC
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Aug 2025 18:40:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 913EBB283F8
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Aug 2025 18:40:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=xq0Uc4vDi/UFESCG/WXA/zmZi89DUNyZfUfz7tZ/Ud0=; b=edMHCKDnmmhoAGM/24Mkah0MAp
-	QcdWqpWhJompgQlcVkVfENVYeHjt7g6XTotttFZOYcolBho2DIJgpapmET/CBxdI4xH2lyPrLWpdc
-	Tr93zNqBmibAcUv1BFMKgMve2C8cld2cdU0Scm4wGwPx3hEk7G/3BFp2M1wJsZyF+euw=;
+	bh=sL7MJu6i5am3KQoq0XHn0WZbsF3AQInvCEd0jBMplTs=; b=fMusQliGpBbhuA5ykX2fKVlpd0
+	fmqlYQEieVXHAEMGFcN1LFChP0aXeHxGPKh8LFoRtrEpfhx9iFgZbsg4wHBldiXfmlwBq6c284xXZ
+	Gk5rroa2iv9TCdLAEGdvow7njWnvJk6u162xBttLxGao7RZv20qaPaAt4mewsUQN9f4Y=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1umxTW-00013f-00;
-	Fri, 15 Aug 2025 16:40:18 +0000
+	id 1umxTU-00013B-ET;
+	Fri, 15 Aug 2025 16:40:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1umxTU-00013N-Tw
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1umxTR-00012s-9q
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 15 Aug 2025 16:40:16 +0000
+ Fri, 15 Aug 2025 16:40:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9v704Ke7+lC7jKZhRS8JgUh/27Rl8HiPmJz6HVJROFg=; b=Daa+8nG9b3UVs4DUqPKlWWcWwM
- NmgIHI/UJUF+7DsV6vp/+e3/zGjlDJaLFCbxyW8G25y5t2qamkTof4V3PQPKF7nCWxIMR4CSeRdDe
- EpuWs9puESV3qU8TBMvuJm3v1DV3JNqzZ8bNlpPRwlzc5oFjySNvD9+rulM4jMwGGKG4=;
+ bh=lBDlBcfPqNki14Lps0Emau/GRFX9Ae8gXHoofyf5LNQ=; b=jPiGtDE5xvLCCdXPavShTi6w89
+ gWjNzyxf1cbPckm3skfBYkp7YnPpWMrgBet4StrGKUERTYkw7SFy7W0q0jo+19es2eL83g5xMA5Zf
+ Tr14YtS63fFdk2Ln1S6ZpiuR0cL2FvHH5bCU4hFBuaefEJHgtufnkWz8RZ8D77UV1IfQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9v704Ke7+lC7jKZhRS8JgUh/27Rl8HiPmJz6HVJROFg=; b=QW0Ma430NJSXw6mpmZo0iqQewk
- DqOTLNlWIPmDSNtKXhGiXNqEmp4rT7tjQA7o/iFjNImDarvE0BWe7nHYGdY05OzEvrr90Vs0FplRl
- GZZigRLLyq7iijKaa5i1dePZqZz0Mt1XJqZEqeagBJYBEuro631eY4PGIhoTfXUeqxtE=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=lBDlBcfPqNki14Lps0Emau/GRFX9Ae8gXHoofyf5LNQ=; b=Qy+q9u5XU56LxIMIa6xSHDGqat
+ PdEJoDirrtpnAXMClBqrlqva7BU8JvhDcVOkPkQi0vU56vTxk2HNubIHaPKSBbkRu0HReQn3us/q0
+ AOlyk5dgG5VM0AFznsFEdc7zV57jLabaEVTqIibs0POqMMSZrYfgstlObCfyXg8A9GxU=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1umxTU-00018f-Bk for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 15 Aug 2025 16:40:16 +0000
+ id 1umxTQ-00018Q-NL for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 15 Aug 2025 16:40:13 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 130B541889
+ by dfw.source.kernel.org (Postfix) with ESMTP id 584BD5C5496
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 15 Aug 2025 16:40:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EB160C4CEEB;
- Fri, 15 Aug 2025 16:40:05 +0000 (UTC)
+ Fri, 15 Aug 2025 16:40:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26736C4CEF7;
+ Fri, 15 Aug 2025 16:40:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1755276006;
- bh=a95RvXhj76wg4j8/YlXy+Y3TsKNaDGJmw+oSsJ8lrVs=;
+ s=k20201202; t=1755276007;
+ bh=S1ZmvEXjwv258ofLF72c0v+Zz594gSNk95FiMJ1gzP8=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=XUPh+IHfb/68GPiml32CuObsiWqtPV8V7wlrrCqcAoChJTi4Z8/94TEvm60VpOnfD
- YU6i/ab9wLgm1mt69FaOvPXeDXcPQoSxqZBDwH1srpNx8wzwgfhdjaErv+dM3qXOZU
- MJhxKrh9Lf4g5sRetifcG9SSUSfq0FgaMha3mEzcv+PxTpvKq0bvHiRWIRo0zbaKI5
- WmkZDSnoHUKgSbhNY6JEkDRMlsckfQtiLU4YFVuTT9+d/ghxHPexHyd1IgWiOmfedR
- fpG63pfUlNJ/PQsIRE1vL6sdj8/gnBKyN6TvTc2I0bs2GJx4GCM87g9d5YTjM8Nack
- s/KddtQVkA+4w==
+ b=oVHlx27YHSwXBrpYAcHK3BykupW5vDbkDkVI7BNOc3OCslrC9cKrVlYc29Sh2bpqi
+ oG1k4W0a8eFbGaOFXHCJjPCDZChSWVpgw4urY9sBPhwPjzUDpGlaZYl8sWRNAquf8u
+ 5ZutAqcPRz7yxN4ju5rCABm+2Lh3oaHH/b4I/aN2K5nKhNueqkP8Kr2wSw5F+ZSWdS
+ OtidMx9DtTIsV/czyU3SAxMXiDJK56rnbcGQDz4cAIVg9XO+MyObcwYYkHdFVZY87R
+ i5xG1fGW4EVNK9PXCQDJqH60tmBAXqL6lf2CX1eAX98RybwPELT8QhAhb929d47x7u
+ x4AEX9+eMV92w==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 33A2139D0C3D; Fri, 15 Aug 2025 16:40:18 +0000 (UTC)
+ 70B9439D0C3D; Fri, 15 Aug 2025 16:40:19 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <175527601673.1161945.11812358458954256363.git-patchwork-notify@kernel.org>
-Date: Fri, 15 Aug 2025 16:40:16 +0000
-References: <20250806061106.3445717-1-chao@kernel.org>
-In-Reply-To: <20250806061106.3445717-1-chao@kernel.org>
+Message-Id: <175527601823.1161945.11181817879105775454.git-patchwork-notify@kernel.org>
+Date: Fri, 15 Aug 2025 16:40:18 +0000
+References: <20250731060338.1136086-1-chao@kernel.org>
+In-Reply-To: <20250731060338.1136086-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 6 Aug 2025 14:11:06 +0800 you wrote:
- > generic/091 may fail, then it bisects to the bad commit ba8dac350faf >
- ("f2fs: fix to zero post-eof page"). > > What will cause generic/091 to fail
- is so [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 31 Jul 2025 14:03:38 +0800 you
+ wrote: > If reserve_root mount option is not assigned,
+ __allow_reserved_blocks()
+ > will return false, it's not correct, fix it. > > Fixes: 7e65be49ed94 ("f2fs:
+ a [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1umxTU-00018f-Bk
-Subject: Re: [f2fs-dev] [PATCH v4 2/3] f2fs: fix to zero data after EOF for
- compressed file correctly
+X-Headers-End: 1umxTQ-00018Q-NL
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix condition in
+ __allow_reserved_blocks()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,22 +123,19 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Wed,  6 Aug 2025 14:11:06 +0800 you wrote:
-> generic/091 may fail, then it bisects to the bad commit ba8dac350faf
-> ("f2fs: fix to zero post-eof page").
+On Thu, 31 Jul 2025 14:03:38 +0800 you wrote:
+> If reserve_root mount option is not assigned, __allow_reserved_blocks()
+> will return false, it's not correct, fix it.
 > 
-> What will cause generic/091 to fail is something like below Testcase #1:
-> 1. write 16k as compressed blocks
-> 2. truncate to 12k
-> 3. truncate to 20k
-> 4. verify data in range of [12k, 16k], however data is not zero as
-> expected
-> 
-> [...]
+> Fixes: 7e65be49ed94 ("f2fs: add reserved blocks for root user")
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>  fs/f2fs/f2fs.h | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
 
 Here is the summary with links:
-  - [f2fs-dev,v4,2/3] f2fs: fix to zero data after EOF for compressed file correctly
-    https://git.kernel.org/jaegeuk/f2fs/c/0b2cd5092139
+  - [f2fs-dev] f2fs: fix condition in __allow_reserved_blocks()
+    https://git.kernel.org/jaegeuk/f2fs/c/e75ce117905d
 
 You are awesome, thank you!
 -- 
