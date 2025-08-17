@@ -2,98 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F794B28B6C
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 16 Aug 2025 09:29:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FE51B29149
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 17 Aug 2025 05:35:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=u1y742DuwS+biIRbQNg9n1yyc7pxxLawWVyMzJztbgo=; b=XefbPN5nk6Okosk3CyiDJYlqNT
-	L556KkCXeMcncmaXckQauOTzAD0XTuu3/D80raTKr83r4eYvYB0pJ2RwNuqYmBEUJxIXoTsCGreOr
-	3ds8ileK3WNr50/tUeVcC3YDCRSBgjQy1UWrX8XQ06LawfTKk2HDpTFQq+FJu/OpN4HI=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=xz8+u5QKEh19rVQf/q5zCS7s9UoMF90fGIOE6WfFHdQ=; b=I4j3wqFeST+kWQjBqTFiHZ6lPB
+	+/rlr1JuKaB+dVNxVMP04Y+TwXTEfNmVvSz4cgBvCV3H+R7GCT+qrRseF2SfyjqQFkY5lE1cOmj13
+	Pb/q4X1yBgKBdYLrsDQqRMm8dqyCpaptDejuX1zNcpHr1RLt+fITiwglBDNG/LkBzpyU=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1unBMG-0001Iv-SA;
-	Sat, 16 Aug 2025 07:29:44 +0000
+	id 1unUAx-0003jh-Hk;
+	Sun, 17 Aug 2025 03:35:19 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1unBMF-0001Il-Vw
+ (envelope-from <chao@kernel.org>) id 1unUAv-0003jb-RM
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 16 Aug 2025 07:29:43 +0000
+ Sun, 17 Aug 2025 03:35:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eVEpXUGGMLI+Lrq6c1gO6y9cpLIdxrULw4O4qN1tRnA=; b=DVWrNSko/FJY48UG5TJ2+RpcX5
- 7OkJc3t75TB/YhqdWWjFMx4Q3iPSbHUXsPSZ6zTKQzEg57u1Y6B88LXES2s2Geox7SCwe/wh7J8AR
- CD7t00XpP+VB4xye1d28lI/HPAG2yqZbtTrjkjAve/jDn6CK8SMXM4D0u6JDTTE/zFTY=;
+ bh=HeLIfjma4ssfPDKae/m4lAna93VOg1uWIREqoFao3S8=; b=VVjCvZQDQ3OFJzfRIMeeH599H/
+ Eegku9Yw++4ph+gmKct98gOcZmUF4v58FdO4MQxsPBNXxCFVREQURHB9wyhzJJ5OzAkzZBHOs1AR1
+ 65/f5tMsZdE/e3Qye/HX4FBA0/pjiSgNIm+hkppCnXnr7mm49PPqCZCZH1rkfnZ4cG8Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=eVEpXUGGMLI+Lrq6c1gO6y9cpLIdxrULw4O4qN1tRnA=; b=E
- qG63zdkhCQYqBENisCq0TAI0K+OD3ApcVRd8WSgt+NkXGDrGVex/IjRuEMepq7VgavX4jkx9+BTWB
- DE3xTB46iCXYzxhpXRUC/xozac68KQkh6c7WxtWW5jyM+x1nykWYK1XGUzdefMNfO6DxtullGHb8r
- Y+aRZiisj4WumsEw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=HeLIfjma4ssfPDKae/m4lAna93VOg1uWIREqoFao3S8=; b=Se87ktL1YehNBummemHlyntXlP
+ Qo8kXrp1od94FTqSSEMRXkfozulXa4F7kP/0lnlpBpDPLK/S1JEZR31HnYaOMvcIPGL4Fqd2D9hNB
+ 3FZt+YoSJ4Tk2060uT5+nalJH8atEiEJ4vK6H8FsjLOyD4Ob91tSv5+djA9JgokN8Djw=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1unBMF-0003pR-GC for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 16 Aug 2025 07:29:43 +0000
+ id 1unUAu-0007qz-BF for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 17 Aug 2025 03:35:17 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 269E55C33B2;
- Sat, 16 Aug 2025 07:29:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83543C4CEEF;
- Sat, 16 Aug 2025 07:29:36 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 8D2E3601E7;
+ Sun, 17 Aug 2025 03:35:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F32AFC4CEEB;
+ Sun, 17 Aug 2025 03:35:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1755329377;
- bh=GxtuMTwBofj1WPDmtFWNrME/+hUfY/PdUIy66GYMHjE=;
- h=From:To:Cc:Subject:Date:From;
- b=sNo+UWz7VVp1l8Ia7d1g/t/2otoYQbXVGhrwVi0HPzYLvCPQdgnJJOzh6N9LwDM4c
- rkLpW2lAH6xaroj5ErUZIRXsJGzTnvxaVao4SrkLQayD4LCaQagwaVEZZhAvbqy2Bz
- QRNkIPdCe+uEVLVlXU7DHFrcx74lON42jVZNbmW94TCPRnMk4jRwA06peut48Lt0DY
- 9bB434wckRPMoH59t7eUb3aL1UXJz3m0IbKJ0icp04mE38Reu/+lZG6x4MmSWmvfTp
- QDxbNUorZBLJoSO39E38/KkLFIp4o5t0C5wHjUZ6Bm7wpuBoxdgjrWR7R6k0oUB2WV
- fy2Rzz2EBRecg==
-To: Zorro Lang <zlang@kernel.org>,
-	fstests@vger.kernel.org
-Date: Sat, 16 Aug 2025 15:29:09 +0800
-Message-ID: <20250816072909.2844349-1-chao@kernel.org>
-X-Mailer: git-send-email 2.51.0.rc1.163.g2494970778-goog
+ s=k20201202; t=1755401705;
+ bh=QGvQfmyGBskI2a4bjL3wF4QdFXH43utm1OZ204H3S+c=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=NsoIKoRhMYbefJud78V7JQfGJb3lvcsAVq7mHUqzxoNkOCBhnSfGsvY68Fd1HOJjD
+ BUxboW6YmR2zerzFIPPsZp3hiWfzpkz49FfUwp9qshKxypqaNllemyQh70GIw3zal4
+ md3Nk7TPU5vZ3G8sbf06EMuiOvBoJj08qBwYKzAR9a1pnzCrLSw77HoDyq3xOH92hL
+ sVFLa1ZSFUDE4KVnnUX/QHb2cM7ymj2jvd9fayJ04tFQ9lbkOemRYz71VRCRvHIk2D
+ U7K1313ovnPUB/0NzAX5TvdVC9PX0YeI/Z0sPtdIfBUvhg6r9cJWpOSwGhOWJzueFU
+ gfi/a+za9kZng==
+Message-ID: <e5ee313b-8770-446c-9dfd-472740f01bc1@kernel.org>
+Date: Sun, 17 Aug 2025 11:34:59 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: syzbot <syzbot+d371efea57d5aeab877b@syzkaller.appspotmail.com>,
+ jaegeuk@kernel.org, lihongbo22@huawei.com,
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ sandeen@redhat.com, syzkaller-bugs@googlegroups.com
+References: <689ff889.050a0220.e29e5.0037.GAE@google.com>
+Content-Language: en-US
+In-Reply-To: <689ff889.050a0220.e29e5.0037.GAE@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  w/ below change [1], f2fs will enable lookup_mode=perf by
- default, it will change f2fs dirent lookup method from linear based lookup
- to hash based lookup. So that, f2fs will ignore sb.s_encoding_flags by default,
- which is not compatible w/ f2fs/012 testcase, in where it will control lookup
- method by configuring this flag w/ fsck.f2fs. 
+ Content preview: #syz test:
+ https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git
+ bugfix/syzbot On 2025/8/16 11:18, syzbot wrote: > Hello, > > syzbot found
+ the following issue on: > > HEAD commit: 0e39a731820a Merge tag
+ 'for-6.17-rc1-tag'
+ of git://git.ker.. > git tree: upstream > console+strace: [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1unBMF-0003pR-GC
-Subject: [f2fs-dev] [PATCH v2] f2fs/012: adapt lookup_mode=x mount option
+X-Headers-End: 1unUAu-0007qz-BF
+Subject: Re: [f2fs-dev] [syzbot] [f2fs?] general protection fault in
+ f2fs_check_opt_consistency
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,74 +114,152 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-w/ below change [1], f2fs will enable lookup_mode=perf by default, it
-will change f2fs dirent lookup method from linear based lookup to hash
-based lookup.
+#syz test: https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git bugfix/syzbot
 
-So that, f2fs will ignore sb.s_encoding_flags by default, which is not
-compatible w/ f2fs/012 testcase, in where it will control lookup method
-by configuring this flag w/ fsck.f2fs.
-
-To avoid failure of f2fs/012, let's check whether f2fs has supported
-"lookup_mode=auto" mount option, mount w/ the option if it can,
-otherwise, don't.
-
-[1] https://lore.kernel.org/linux-f2fs-devel/20250805065228.1473089-1-chullee@google.com
-
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Daniel Lee <chullee@google.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-v2:
-- ignore error from _try_scratch_mount "-o lookup_mode=auto"
- tests/f2fs/012 | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
-
-diff --git a/tests/f2fs/012 b/tests/f2fs/012
-index b3df9a8f..7438d9ce 100755
---- a/tests/f2fs/012
-+++ b/tests/f2fs/012
-@@ -22,6 +22,15 @@ _require_scratch_nocheck
- _require_command "$F2FS_IO_PROG" f2fs_io
- _require_command "$F2FS_INJECT_PROG" inject.f2fs
- 
-+#check whether f2fs supports "lookup_mode=x" mount option
-+mntopt=""
-+_scratch_mkfs -O casefold -C utf8 >> $seqres.full
-+_try_scratch_mount "-o lookup_mode=auto" >> $seqres.full 2>&1
-+if [ $? == 0 ]; then
-+	mntopt="-o lookup_mode=auto"
-+	_scratch_unmount
-+fi
-+
- check_lookup()
- {
- 	local nolinear_lookup=$1
-@@ -30,7 +39,7 @@ check_lookup()
- 	local redheart=$dir/$'\u2764\ufe0f'
- 
- 	_scratch_mkfs -O casefold -C utf8 >> $seqres.full
--	_scratch_mount
-+	_scratch_mount $mntopt
- 
- 	mkdir $dir
- 	$F2FS_IO_PROG setflags casefold $dir >> $seqres.full
-@@ -52,7 +61,7 @@ check_lookup()
- 
- 	$F2FS_INJECT_PROG --dent --mb d_hash --nid $ino --val 0x9a2ea068 $SCRATCH_DEV >> $seqres.full
- 
--	_scratch_mount
-+	_scratch_mount $mntopt
- 	if [ $nolinear_lookup == "1" ]; then
- 		[ -f $redheart ] && _fail "red heart file should not exist"
- 	else
--- 
-2.49.0
+On 2025/8/16 11:18, syzbot wrote:
+> Hello,
+> 
+> syzbot found the following issue on:
+> 
+> HEAD commit:    0e39a731820a Merge tag 'for-6.17-rc1-tag' of git://git.ker..
+> git tree:       upstream
+> console+strace: https://syzkaller.appspot.com/x/log.txt?x=13344da2580000
+> kernel config:  https://syzkaller.appspot.com/x/.config?x=13f39c6a0380a209
+> dashboard link: https://syzkaller.appspot.com/bug?extid=d371efea57d5aeab877b
+> compiler:       Debian clang version 20.1.7 (++20250616065708+6146a88f6049-1~exp1~20250616065826.132), Debian LLD 20.1.7
+> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=12c22c34580000
+> C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=15a125a2580000
+> 
+> Downloadable assets:
+> disk image: https://storage.googleapis.com/syzbot-assets/e0297ec5b8e1/disk-0e39a731.raw.xz
+> vmlinux: https://storage.googleapis.com/syzbot-assets/0396bfd57e65/vmlinux-0e39a731.xz
+> kernel image: https://storage.googleapis.com/syzbot-assets/68482d381f43/bzImage-0e39a731.xz
+> mounted in repro: https://storage.googleapis.com/syzbot-assets/f909676ebee0/mount_0.gz
+>    fsck result: failed (log: https://syzkaller.appspot.com/x/fsck.log?x=15344da2580000)
+> 
+> The issue was bisected to:
+> 
+> commit d185351325237da688de006a2c579e82ea97bdfe
+> Author: Hongbo Li <lihongbo22@huawei.com>
+> Date:   Thu Jul 10 12:14:13 2025 +0000
+> 
+>      f2fs: separate the options parsing and options checking
+> 
+> bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=137ca5a2580000
+> final oops:     https://syzkaller.appspot.com/x/report.txt?x=10fca5a2580000
+> console output: https://syzkaller.appspot.com/x/log.txt?x=177ca5a2580000
+> 
+> IMPORTANT: if you fix the issue, please add the following tag to the commit:
+> Reported-by: syzbot+d371efea57d5aeab877b@syzkaller.appspotmail.com
+> Fixes: d18535132523 ("f2fs: separate the options parsing and options checking")
+> 
+> F2FS-fs (loop0): f2fs_recover_fsync_data: recovery fsync data, check_only: 0
+> F2FS-fs (loop0): Mounted with checkpoint version = 48b305e4
+> Oops: gen[  107.736417][ T5848] Oops: general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#1] SMP KASAN PTI
+> KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+> CPU: 1 UID: 0 PID: 5848 Comm: syz-executor263 Tainted: G        W           6.17.0-rc1-syzkaller-00014-g0e39a731820a #0 PREEMPT_{RT,(full)}
+> Tainted: [W]=WARN
+> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/12/2025
+> RIP: 0010:strcmp+0x3c/0xc0 lib/string.c:284
+> Code: 00 fc ff df 45 31 f6 4a 8d 04 37 48 89 c1 48 c1 e9 03 0f b6 0c 19 84 c9 75 2c 42 0f b6 2c 37 4a 8d 04 36 48 89 c1 48 c1 e9 03 <0f> b6 0c 19 84 c9 75 33 42 0f b6 0c 36 40 38 cd 75 48 49 ff c6 40
+> RSP: 0018:ffffc90004adf8f8 EFLAGS: 00010246
+> RAX: 0000000000000000 RBX: dffffc0000000000 RCX: 0000000000000000
+> RDX: 0000000021ec2c00 RSI: 0000000000000000 RDI: ffff888021ec2c80
+> RBP: 0000000000000066 R08: 0000000000000000 R09: 0000000000000000
+> R10: ffff88803d2c9768 R11: ffffed1007a592fb R12: 1ffff1100611a891
+> R13: 0000000000000000 R14: 0000000000000000 R15: ffff888021ec2c80
+> FS:  0000555575c20480(0000) GS:ffff8881269c5000(0000) knlGS:0000000000000000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: 0000200000001000 CR3: 000000003d342000 CR4: 00000000003526f0
+> Call Trace:
+>   <TASK>
+>   f2fs_check_quota_consistency fs/f2fs/super.c:1188 [inline]
+>   f2fs_check_opt_consistency+0x1378/0x2c10 fs/f2fs/super.c:1436
+>   __f2fs_remount fs/f2fs/super.c:2653 [inline]
+>   f2fs_reconfigure+0x482/0x1770 fs/f2fs/super.c:5297
+>   reconfigure_super+0x224/0x890 fs/super.c:1077
+>   do_remount fs/namespace.c:3314 [inline]
+>   path_mount+0xd18/0xfe0 fs/namespace.c:4112
+>   do_mount fs/namespace.c:4133 [inline]
+>   __do_sys_mount fs/namespace.c:4344 [inline]
+>   __se_sys_mount+0x317/0x410 fs/namespace.c:4321
+>   do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+>   do_syscall_64+0xfa/0x3b0 arch/x86/entry/syscall_64.c:94
+>   entry_SYSCALL_64_after_hwframe+0x77/0x7f
+> RIP: 0033:0x7f13267ca259
+> Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 f1 17 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+> RSP: 002b:00007fff3d15d4a8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
+> RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f13267ca259
+> RDX: 0000000000000000 RSI: 0000200000000040 RDI: 0000000000000000
+> RBP: 0000000000000000 R08: 0000200000000140 R09: 00007fff3d15d4e0
+> R10: 0000000000000020 R11: 0000000000000246 R12: 00007fff3d15d4e0
+> R13: 00007fff3d15d768 R14: 431bde82d7b634db R15: 00007f132681303b
+>   </TASK>
+> Modules linked in:
+> ---[ end trace 0000000000000000 ]---
+> RIP: 0010:strcmp+0x3c/0xc0 lib/string.c:284
+> Code: 00 fc ff df 45 31 f6 4a 8d 04 37 48 89 c1 48 c1 e9 03 0f b6 0c 19 84 c9 75 2c 42 0f b6 2c 37 4a 8d 04 36 48 89 c1 48 c1 e9 03 <0f> b6 0c 19 84 c9 75 33 42 0f b6 0c 36 40 38 cd 75 48 49 ff c6 40
+> RSP: 0018:ffffc90004adf8f8 EFLAGS: 00010246
+> RAX: 0000000000000000 RBX: dffffc0000000000 RCX: 0000000000000000
+> RDX: 0000000021ec2c00 RSI: 0000000000000000 RDI: ffff888021ec2c80
+> RBP: 0000000000000066 R08: 0000000000000000 R09: 0000000000000000
+> R10: ffff88803d2c9768 R11: ffffed1007a592fb R12: 1ffff1100611a891
+> R13: 0000000000000000 R14: 0000000000000000 R15: ffff888021ec2c80
+> FS:  0000555575c20480(0000) GS:ffff8881268c5000(0000) knlGS:0000000000000000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: 0000000000000000 CR3: 000000003d342000 CR4: 00000000003526f0
+> ----------------
+> Code disassembly (best guess), 4 bytes skipped:
+>     0:	45 31 f6             	xor    %r14d,%r14d
+>     3:	4a 8d 04 37          	lea    (%rdi,%r14,1),%rax
+>     7:	48 89 c1             	mov    %rax,%rcx
+>     a:	48 c1 e9 03          	shr    $0x3,%rcx
+>     e:	0f b6 0c 19          	movzbl (%rcx,%rbx,1),%ecx
+>    12:	84 c9                	test   %cl,%cl
+>    14:	75 2c                	jne    0x42
+>    16:	42 0f b6 2c 37       	movzbl (%rdi,%r14,1),%ebp
+>    1b:	4a 8d 04 36          	lea    (%rsi,%r14,1),%rax
+>    1f:	48 89 c1             	mov    %rax,%rcx
+>    22:	48 c1 e9 03          	shr    $0x3,%rcx
+> * 26:	0f b6 0c 19          	movzbl (%rcx,%rbx,1),%ecx <-- trapping instruction
+>    2a:	84 c9                	test   %cl,%cl
+>    2c:	75 33                	jne    0x61
+>    2e:	42 0f b6 0c 36       	movzbl (%rsi,%r14,1),%ecx
+>    33:	40 38 cd             	cmp    %cl,%bpl
+>    36:	75 48                	jne    0x80
+>    38:	49 ff c6             	inc    %r14
+>    3b:	40                   	rex
+> 
+> 
+> ---
+> This report is generated by a bot. It may contain errors.
+> See https://goo.gl/tpsmEJ for more information about syzbot.
+> syzbot engineers can be reached at syzkaller@googlegroups.com.
+> 
+> syzbot will keep track of this issue. See:
+> https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+> For information about bisection process see: https://goo.gl/tpsmEJ#bisection
+> 
+> If the report is already addressed, let syzbot know by replying with:
+> #syz fix: exact-commit-title
+> 
+> If you want syzbot to run the reproducer, reply with:
+> #syz test: git://repo/address.git branch-or-commit-hash
+> If you attach or paste a git patch, syzbot will apply it before testing.
+> 
+> If you want to overwrite report's subsystems, reply with:
+> #syz set subsystems: new-subsystem
+> (See the list of subsystem names on the web dashboard)
+> 
+> If the report is a duplicate of another one, reply with:
+> #syz dup: exact-subject-of-another-report
+> 
+> If you want to undo deduplication, reply with:
+> #syz undup
 
 
 
