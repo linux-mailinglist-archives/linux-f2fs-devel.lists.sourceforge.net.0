@@ -2,100 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42E61B2CCBF
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 19 Aug 2025 21:07:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F32D7B2CDE1
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 19 Aug 2025 22:31:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Message-ID:To:Date:Sender:Cc:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=aqEm0i8vkkcrWiN+VQPczxUXn4629ppX2gv3Eys9raI=; b=MNz06PzeEAwx2UGFC3WK6ROAjp
-	0Tlrb+iFkHcRg4Pa+POb+wvuDzxh7nVZvnuLFAD/dfIWPM2JGJsn98hqli85KIVqKMLbVabp2JHMC
-	iIymKUkNTVBY3J3cnyqOQH7c3DfQVj6xJed/tws9wb+desBXdkHJ3Q9jetzgTWFbYVg8=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=j9HUOpge0jDQalHDhNpjGyqRrYfPvBj7bnySDg3MIpA=; b=kJWkvXVnYyGngXlVHyCMeLQJri
+	k73CqfKFekkQUieQXEqBSHoJehRt8aZiABMoZsgiojbE7gfTD9m18Gn6DkF2R1Dn8jY3LePfHfNIj
+	7bgdNtXiQb6s5bme62E2E2hDaFW8Q47Noib8gv6a8weu1cUc2JdZ2t4sovc8leJVYGCw=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uoRgB-0003du-NH;
-	Tue, 19 Aug 2025 19:07:31 +0000
+	id 1uoSyw-0003Ri-53;
+	Tue, 19 Aug 2025 20:30:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1uoRg9-0003dn-Ib
+ (envelope-from <jaegeuk@kernel.org>) id 1uoSyt-0003RX-W7
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 19 Aug 2025 19:07:29 +0000
+ Tue, 19 Aug 2025 20:30:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ccE2TOAx+By8FIKUj55ihn+xqxHZwjaAv7CF3S2OS9c=; b=RhI/S6InVcMnL//U06vz5nCyjW
- /vJC8Q6icAZIQpywQnSkeSLb9UQyCuyqt7rNgfCjca75Y0Gq8FkOfulq0uAQ19NDok0wfzgDY41lx
- Ei7Ha8gzXMBAFL3uMCSeW6viU4GzhCmAgajBZH5ZRligjgj/BpvPrVn340A4VtyMSXrI=;
+ bh=GSv05L8Lw44JXaTEeqyEEHhy4wS3K6Dr9KlYz/jEtoM=; b=OhrSWdmQArVRJsetkWOlOdpow3
+ TtmSaZgWM4IFQWTBHaZVDIKTYgFHcwdJMwrknJ/OX2yWWjoLSZljRXjAExNmxkWLzOs5u5488/Ne2
+ 9rJhK0prLeZbTVWiL1aktVOJL8OdOiUhdVI4jrxHoeEl0Ig/r/+fBXgAdMHgszopXRK8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ccE2TOAx+By8FIKUj55ihn+xqxHZwjaAv7CF3S2OS9c=; b=EaUZ0tW1/xzbiJJXccuMJ40DkW
- V+mQuBmmP0VRMu2oHwWrEf6rRLALQNsq1e1FC/WJuuzE3SEbgW6XYrvTKmwFKAuTuuU8It1voN7LS
- 5FV22f/hU+KktUzsvey+a+cFIDsx0brvnQB4SZ2+HvsTMgXmb4pM9Wop+mGCaDJk90wI=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=GSv05L8Lw44JXaTEeqyEEHhy4wS3K6Dr9KlYz/jEtoM=; b=eRMU/QAvz35OqbND5R0aXLP3aa
+ 14zyEtlDpfz6bYct3XXuE1wLnQQq/ld4hfV54Xlw/Sd0ps2GiSql36AyrxL66f2hAuRT9Ldmu5G15
+ xRwvelCE6XIdpe7hmosSWIgzwyXLRyhvFZwdJjSlvrMzIGL0/Gj8tVSAyg1U2YokUqAE=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uoRg8-0003wg-P5 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 19 Aug 2025 19:07:29 +0000
+ id 1uoSyt-0003zC-E0 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 19 Aug 2025 20:30:55 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 545C95C63EC;
- Tue, 19 Aug 2025 19:07:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7EECEC4CEF1;
- Tue, 19 Aug 2025 19:07:17 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id B9740613EF
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 19 Aug 2025 20:30:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 58525C4CEF1;
+ Tue, 19 Aug 2025 20:30:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1755630437;
- bh=eSkivWrkug3GfONjQDmW1TAbCR9f3GcfgkKWx1/ROGs=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=tlyDEHvBA2ytL57kOy5X+U/yxVdE9BgpRq2I7Vqo4IZH6dgW11ylOlB4se9g1NGkl
- XqI+0KnDFllq+AZC3GuyVqif5PLz/QS0SSKPMQGt56/N7w6vRXakDVd0tQHChGjFZl
- FDuZWdtsax2hyfSRhzNGJk2qK76qLmF/YVXaDqoe1ggFb3JWqJSWwSZnUJZiU+jJQV
- wyuCSuGMlSpJl/MNYZjOf1MdD4O9fV7s4ppj7Hcq4IeAZVoWH20ClSIX++k4E55cee
- czGnoFbETO5+AVY4a2YiVRgH4c0zxyiOaRUO3/vyRlh1Q6/Rphj1tN6U2CHg/QzP3/
- Z/KZ6WeSJNZSw==
-Date: Tue, 19 Aug 2025 19:07:15 +0000
-To: Liao Yuanhong <liaoyuanhong@vivo.com>
-Message-ID: <aKTLY_wnV4gJlcuS@google.com>
-References: <20250815124226.391583-1-liaoyuanhong@vivo.com>
+ s=k20201202; t=1755635449;
+ bh=h1YbTQt6HVs1TaYX60E9hKi0mAlx5C9IOGf1jGLtX/0=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=ipH53ll4bEMEQKfg77op231qTnwVvsfuMiAuah0lWFe9zVrJihsOxx+rgkBX0lgiV
+ 7vJ/zXzeaRVmbNo7LfI10tykZ6lHgYIUICVxffkUZS6N1Vs1nE9nwaQ8HzoXD0YIZT
+ iBeJjl8juCO/knIsui7x5JFPigIbPDecHbeWtXwwc4DnmVPUxB8TtmMWb+st4Th1wy
+ +Nu3AadxbXX7os0evHLxC8PTHexlfq1qMpn7j7XSBu0qqCKpqleQQghC/aCTCXrZ6p
+ uqzuAMFh/1uttZK1hF0f8tRABcm04yaI0TA7ZYNd/Mpqed9ChBRek08/tR7vZTimwj
+ c6IjUtxzYFqjQ==
+Date: Tue, 19 Aug 2025 20:30:47 +0000
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <aKTe9xi8rv1VUSIj@google.com>
+References: <20250812235814.960924-1-jaegeuk@kernel.org>
+ <aJy8KS3fLQ452d2r@google.com> <aJ9eTaqNwkQZtA8E@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20250815124226.391583-1-liaoyuanhong@vivo.com>
+In-Reply-To: <aJ9eTaqNwkQZtA8E@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 08/15,
- Liao Yuanhong wrote: > Introduces two new sys nodes:
- device_border_line and device_alloc_policy. > The device_border_line
- identifies
- the boundary between devices, measured > in sections; it [...] 
+ Content preview: This patch introduces a proc entry to show the currently
+ enrolled
+ donation files. - "File path" indicates a file. - "Status" a. "Donated" means
+ the file is registed in the donation list by fadvise(offset, length,
+ POSIX_FADV_NOREUSE)
+ b. "Evicted" means the donated pages were reclaim [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uoRg8-0003wg-P5
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Use device_alloc_policy to control
- write priority in multi-device setups
+X-Headers-End: 1uoSyt-0003zC-E0
+Subject: Re: [f2fs-dev] [PATCH v4] f2fs: show the list of donation files
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,267 +111,123 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: open list <linux-kernel@vger.kernel.org>,
- "open list:F2FS FILE SYSTEM" <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 08/15, Liao Yuanhong wrote:
-> Introduces two new sys nodes: device_border_line and device_alloc_policy.
-> The device_border_line identifies the boundary between devices, measured
-> in sections; it defaults to the end of the device for single storage
-> setups, and the end of the first device for multiple storage setups. The
-> device_alloc_policy determines the write strategy, with a default value of
-> 0 for normal sequential write strategy. A value of 1 prioritizes writes
-> before the device_border_line, while a value of 2 prioritizes writes after
-> it.
+This patch introduces a proc entry to show the currently enrolled donation
+files.
 
-I think this allocation policy is independent of the partition layout. Instead,
-it prioritizes allocating blocks immediately preceding or following a given
-logical block address, defined as device_border_line.
+- "File path" indicates a file.
+- "Status"
+ a. "Donated" means the file is registed in the donation list by
+    fadvise(offset, length, POSIX_FADV_NOREUSE)
+ b. "Evicted" means the donated pages were reclaimed.
+- "Offset (kb)" and "Length (kb) show the registered donation range.
+- "Cached pages (kb)" shows the amount of cached pages in the inode page cache.
 
-As such, can you generalize the terms here like "sysfs/allocate_section_hint"
-with "sysfs/allocate_section_policy" having one of the belows?
-  ALLOCATE_FORWARD_NOHINT = 0 by default,
-  ALLOCATE_FORWARD_WITHIN_HINT,
-  ALLOCATE_FORWARD_FROM_HINT
+For example,
 
-And, some comments below as well.
+ # of files  : 2
+ File path                                              Status Donation offset (kb)   Donation size (kb)  File cached size (kb)
+---
+ /local/test2                                          Donated                    0              1048576                2097152
+ /local/test                                           Evicted                    0              1048576                1048576
 
-> 
-> This strategy addresses the issue where, despite F2FS supporting multiple
-> devices, SOC vendors lack multi-device support (currently only supporting
-> zoned devices). As a workaround, multiple storage devices are mapped to a
-> single dm device. Both this workaround and the F2FS multi-device solution
-> may require prioritizing writing to certain devices, such as a device with
-> better performance or when switching is needed due to performance
-> degradation near a device's end. For scenarios with more than two devices,
-> sort them at mount time to utilize this feature.
-> 
-> This patch covers both the F2FS multi-device solution and the single dm
-> device mapping for multiple devices. Additionally, there is functional
-> overlap with blkzone_alloc_policy. Future consideration might involve
-> integrating blkzone_alloc_policy into device_alloc_policy, as zoned devices
-> are a special case of multi-device setups.
-> 
-> Signed-off-by: Liao Yuanhong <liaoyuanhong@vivo.com>
-> ---
->  Documentation/ABI/testing/sysfs-fs-f2fs | 22 ++++++++++++++++++++++
->  fs/f2fs/f2fs.h                          |  8 ++++++++
->  fs/f2fs/gc.c                            |  5 +++++
->  fs/f2fs/segment.c                       | 17 ++++++++++++++++-
->  fs/f2fs/super.c                         |  4 ++++
->  fs/f2fs/sysfs.c                         | 18 ++++++++++++++++++
->  6 files changed, 73 insertions(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-> index bc0e7fefc39d..2ef3ba36a775 100644
-> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
-> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-> @@ -883,3 +883,25 @@ Date:		June 2025
->  Contact:	"Daeho Jeong" <daehojeong@google.com>
->  Description:	Control GC algorithm for boost GC. 0: cost benefit, 1: greedy
->  		Default: 1
-> +
-> +What:		/sys/fs/f2fs/<disk>/device_border_line
-> +Date:		August 2025
-> +Contact:	"Liao Yuanhong" <liaoyuanhong@vivo.com>
-> +Description:	Indicates the border line between the first device and others in amulti-devices
+Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ v4:
+  - change the entry names clearly
 
-Typo: amulti-devices
+ fs/f2fs/sysfs.c | 64 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 64 insertions(+)
 
-> +		setup. It defaults to the end of the first device in sections. For a single storage
-> +		device, it defaults to the total number of sections. It can be manually set to match
-> +		scenarios where multi-devices are mapped to the same dm device.
-> +
-> +What:		/sys/fs/f2fs/<disk>/device_alloc_policy
-> +Date:		August 2025
-> +Contact:	"Liao Yuanhong" <liaoyuanhong@vivo.com>
-> +Description:	Controls write priority in multi-device setups. A value of 0 means normal writing.
-> +		A value of 1 prioritizes writing to devices before the device_border_line. A value of 2
-> +		prioritizes writing to devices after the device_border_line. The default is 0.
-> +
-> +		=======================  ======================================================
-> +		value					 description
-> +		device_alloc_policy = 0  Normal writing
-> +		device_alloc_policy = 1  Prioritize writing to device before device_border_line
-> +		device_alloc_policy = 2  Prioritize writing to device after device_border_line
-> +		======================== ======================================================
-> \ No newline at end of file
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 46be7560548c..4af5f2ad0b2b 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -155,6 +155,12 @@ enum blkzone_allocation_policy {
->  	BLKZONE_ALLOC_PRIOR_CONV,	/* Prioritize writing to conventional zones */
->  };
->  
-> +enum device_allocation_policy {
-> +	DEVICE_ALLOC_PRIOR_NORMAL,
-> +	DEVICE_ALLOC_PRIOR_FRONT,
-> +	DEVICE_ALLOC_PRIOR_BACK,
-> +};
-> +
->  /*
->   * An implementation of an rwsem that is explicitly unfair to readers. This
->   * prevents priority inversion when a low-priority reader acquires the read lock
-> @@ -1804,6 +1810,8 @@ struct f2fs_sb_info {
->  	spinlock_t dev_lock;			/* protect dirty_device */
->  	bool aligned_blksize;			/* all devices has the same logical blksize */
->  	unsigned int first_seq_zone_segno;	/* first segno in sequential zone */
-> +	unsigned int device_border_line;	/* the boundary position between devices */
-> +	unsigned int device_alloc_policy;	/* determine the device writing priority */
->  
->  	/* For write statistics */
->  	u64 sectors_written_start;
-> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> index 098e9f71421e..5fd5cc3c70b3 100644
-> --- a/fs/f2fs/gc.c
-> +++ b/fs/f2fs/gc.c
-> @@ -2182,6 +2182,8 @@ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
->  	SM_I(sbi)->segment_count = (int)SM_I(sbi)->segment_count + segs;
->  	MAIN_SEGS(sbi) = (int)MAIN_SEGS(sbi) + segs;
->  	MAIN_SECS(sbi) += secs;
-> +	if (sbi->device_border_line > MAIN_SECS(sbi))
-> +		sbi->device_border_line = MAIN_SECS(sbi);
->  	FREE_I(sbi)->free_sections = (int)FREE_I(sbi)->free_sections + secs;
->  	FREE_I(sbi)->free_segments = (int)FREE_I(sbi)->free_segments + segs;
->  	F2FS_CKPT(sbi)->user_block_count = cpu_to_le64(user_block_count + blks);
-> @@ -2189,6 +2191,9 @@ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
->  	if (f2fs_is_multi_device(sbi)) {
->  		int last_dev = sbi->s_ndevs - 1;
->  
-> +		sbi->device_border_line = FDEV(0).total_segments /
-> +					SEGS_PER_SEC(sbi);
-> +
->  		FDEV(last_dev).total_segments =
->  				(int)FDEV(last_dev).total_segments + segs;
->  		FDEV(last_dev).end_blk =
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index cc82d42ef14c..0b0427c7995a 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -2807,6 +2807,10 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
->  	}
->  #endif
->  
-> +	if (sbi->device_alloc_policy == DEVICE_ALLOC_PRIOR_BACK &&
-> +		hint < sbi->device_border_line)
-> +		hint = sbi->device_border_line;
-> +
->  find_other_zone:
->  	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
->  
-> @@ -2828,13 +2832,24 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
->  #endif
->  
->  	if (secno >= MAIN_SECS(sbi)) {
-> -		secno = find_first_zero_bit(free_i->free_secmap,
-> +		if (sbi->device_alloc_policy == DEVICE_ALLOC_PRIOR_BACK) {
-> +			secno = find_next_zero_bit(free_i->free_secmap,
-> +							MAIN_SECS(sbi), sbi->device_border_line);
-> +			if (secno >= MAIN_SECS(sbi))
-> +				secno = find_first_zero_bit(free_i->free_secmap,
-> +								MAIN_SECS(sbi));
-> +		} else
-> +			secno = find_first_zero_bit(free_i->free_secmap,
->  							MAIN_SECS(sbi));
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 1ffaf9e74ce9..86ebe97c256d 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -1769,6 +1769,68 @@ static int __maybe_unused disk_map_seq_show(struct seq_file *seq,
+ 	return 0;
+ }
+ 
++static int __maybe_unused donation_list_seq_show(struct seq_file *seq,
++						void *offset)
++{
++	struct super_block *sb = seq->private;
++	struct f2fs_sb_info *sbi = F2FS_SB(sb);
++	struct inode *inode;
++	struct f2fs_inode_info *fi;
++	struct dentry *dentry;
++	char *buf, *path;
++	int i;
++
++	buf = f2fs_getname(sbi);
++	if (!buf)
++		return 0;
++
++	seq_printf(seq, "Donation List\n");
++	seq_printf(seq, " # of files  : %u\n", sbi->donate_files);
++	seq_printf(seq, " %-50s %10s %20s %20s %22s\n",
++			"File path", "Status", "Donation offset (kb)",
++			"Donation size (kb)", "File cached size (kb)");
++	seq_printf(seq, "---\n");
++
++	for (i = 0; i < sbi->donate_files; i++) {
++		spin_lock(&sbi->inode_lock[DONATE_INODE]);
++		if (list_empty(&sbi->inode_list[DONATE_INODE])) {
++			spin_unlock(&sbi->inode_lock[DONATE_INODE]);
++			break;
++		}
++		fi = list_first_entry(&sbi->inode_list[DONATE_INODE],
++					struct f2fs_inode_info, gdonate_list);
++		list_move_tail(&fi->gdonate_list, &sbi->inode_list[DONATE_INODE]);
++		inode = igrab(&fi->vfs_inode);
++		spin_unlock(&sbi->inode_lock[DONATE_INODE]);
++
++		if (!inode)
++			continue;
++
++		inode_lock_shared(inode);
++
++		dentry = d_find_alias(inode);
++		if (!dentry) {
++			path = NULL;
++		} else {
++			path = dentry_path_raw(dentry, buf, PATH_MAX);
++			if (IS_ERR(path))
++				goto next;
++		}
++		seq_printf(seq, " %-50s %10s %20llu %20llu %22llu\n",
++				path ? path : "<unlinked>",
++				is_inode_flag_set(inode, FI_DONATE_FINISHED) ?
++				"Evicted" : "Donated",
++				(loff_t)fi->donate_start << (PAGE_SHIFT - 10),
++				(loff_t)(fi->donate_end + 1) << (PAGE_SHIFT - 10),
++				(loff_t)inode->i_mapping->nrpages << (PAGE_SHIFT - 10));
++next:
++		inode_unlock_shared(inode);
++		iput(inode);
++	}
++	f2fs_putname(buf);
++	return 0;
++}
++
+ #ifdef CONFIG_F2FS_FAULT_INJECTION
+ static int __maybe_unused inject_stats_seq_show(struct seq_file *seq,
+ 						void *offset)
+@@ -1878,6 +1940,8 @@ int f2fs_register_sysfs(struct f2fs_sb_info *sbi)
+ 				discard_plist_seq_show, sb);
+ 	proc_create_single_data("disk_map", 0444, sbi->s_proc,
+ 				disk_map_seq_show, sb);
++	proc_create_single_data("donation_list", 0444, sbi->s_proc,
++				donation_list_seq_show, sb);
+ #ifdef CONFIG_F2FS_FAULT_INJECTION
+ 	proc_create_single_data("inject_stats", 0444, sbi->s_proc,
+ 				inject_stats_seq_show, sb);
+-- 
+2.51.0.rc2.233.g662b1ed5c5-goog
 
-Coding style:
-  if () {
-  } else {
-  }
-
->  		if (secno >= MAIN_SECS(sbi)) {
->  			ret = -ENOSPC;
->  			f2fs_bug_on(sbi, !pinning);
->  			goto out_unlock;
->  		}
-> +	} else if (sbi->device_alloc_policy == DEVICE_ALLOC_PRIOR_FRONT &&
-> +				secno >= sbi->device_border_line) {
-> +		secno = find_first_zero_bit(free_i->free_secmap,
-> +							MAIN_SECS(sbi));
->  	}
->  	segno = GET_SEG_FROM_SEC(sbi, secno);
->  	zoneno = GET_ZONE_FROM_SEC(sbi, secno);
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index e16c4e2830c2..d3de907d8aaa 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -3860,6 +3860,7 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
->  	segs_per_sec = le32_to_cpu(raw_super->segs_per_sec);
->  	secs_per_zone = le32_to_cpu(raw_super->secs_per_zone);
->  	total_sections = le32_to_cpu(raw_super->section_count);
-> +	sbi->device_border_line = total_sections;
->  
->  	/* blocks_per_seg should be 512, given the above check */
->  	blocks_per_seg = BIT(le32_to_cpu(raw_super->log_blocks_per_seg));
-> @@ -4629,6 +4630,7 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
->  
->  	logical_blksize = bdev_logical_block_size(sbi->sb->s_bdev);
->  	sbi->aligned_blksize = true;
-> +	sbi->device_alloc_policy = DEVICE_ALLOC_PRIOR_NORMAL;
->  #ifdef CONFIG_BLK_DEV_ZONED
->  	sbi->max_open_zones = UINT_MAX;
->  	sbi->blkzone_alloc_policy = BLKZONE_ALLOC_PRIOR_SEQ;
-> @@ -4659,6 +4661,8 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
->  					SEGS_TO_BLKS(sbi,
->  					FDEV(i).total_segments) - 1 +
->  					le32_to_cpu(raw_super->segment0_blkaddr);
-> +				sbi->device_border_line = FDEV(i).total_segments /
-> +							SEGS_PER_SEC(sbi);
->  			} else {
->  				FDEV(i).start_blk = FDEV(i - 1).end_blk + 1;
->  				FDEV(i).end_blk = FDEV(i).start_blk +
-> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> index f736052dea50..3af77f37fb64 100644
-> --- a/fs/f2fs/sysfs.c
-> +++ b/fs/f2fs/sysfs.c
-> @@ -866,6 +866,20 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
->  		return count;
->  	}
->  
-> +	if (!strcmp(a->attr.name, "device_border_line")) {
-> +		if (t < 0 || t > MAIN_SECS(sbi))
-> +			return -EINVAL;
-> +		sbi->device_border_line = t;
-> +		return count;
-> +	}
-> +
-> +	if (!strcmp(a->attr.name, "device_alloc_policy")) {
-> +		if (t < DEVICE_ALLOC_PRIOR_NORMAL || t > DEVICE_ALLOC_PRIOR_BACK)
-> +			return -EINVAL;
-> +		sbi->device_alloc_policy = t;
-> +		return count;
-> +	}
-
-Doesn't it need to check some assumption like the single device case?
-
-> +
->  	*ui = (unsigned int)t;
->  
->  	return count;
-> @@ -1138,6 +1152,8 @@ F2FS_SBI_GENERAL_RW_ATTR(max_victim_search);
->  F2FS_SBI_GENERAL_RW_ATTR(migration_granularity);
->  F2FS_SBI_GENERAL_RW_ATTR(migration_window_granularity);
->  F2FS_SBI_GENERAL_RW_ATTR(dir_level);
-> +F2FS_SBI_GENERAL_RW_ATTR(device_border_line);
-> +F2FS_SBI_GENERAL_RW_ATTR(device_alloc_policy);
->  #ifdef CONFIG_F2FS_IOSTAT
->  F2FS_SBI_GENERAL_RW_ATTR(iostat_enable);
->  F2FS_SBI_GENERAL_RW_ATTR(iostat_period_ms);
-> @@ -1371,6 +1387,8 @@ static struct attribute *f2fs_attrs[] = {
->  	ATTR_LIST(max_read_extent_count),
->  	ATTR_LIST(carve_out),
->  	ATTR_LIST(reserved_pin_section),
-> +	ATTR_LIST(device_border_line),
-> +	ATTR_LIST(device_alloc_policy),
->  	NULL,
->  };
->  ATTRIBUTE_GROUPS(f2fs);
-> -- 
-> 2.34.1
 
 
 _______________________________________________
