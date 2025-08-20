@@ -2,174 +2,174 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52E5DB2D53B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Aug 2025 09:55:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 581CCB2D620
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Aug 2025 10:22:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=XiGL7+4Hxu0IfYUG9/BnCY20Qa5c6ao8Nwt0iTJZaEs=; b=kXg/E6Yt1d69aDJkHQc8L5OAqe
-	6lyTbfwUaKvLKgXNt33wHfNq7Mzp5K2lWHi0LlhizH67e4KV63bQ8E6MTEqHb0OUn+9MUBqiBaHUk
-	fWIBinBYUidTaDTfagfPyCJNGRLWwQd/xSwIR9Sw2qze5sUiqpP1lrHVm18kXZhSMtYY=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=Bq1Tw8fRnSXDylL046FJshQm+m4Ub25hEfYHZCW7AXo=; b=VLEgeQ5xM3wghSk5fxp49UbblD
+	OwAMRNOyPokbsYjZEzEkV7k+g4iOzsDpdmkCZbjrc2rVVJ/8VlU6CI0PcraQQcdufkMkj1ZVit29T
+	8IXUUq47iAjkyQsPeJfJy7Y0UjvjAs89ka7fqBhKEl1FVnQMVOJU0pI1p+vEuiwDDwiE=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uodf4-0002Jk-LG;
-	Wed, 20 Aug 2025 07:55:10 +0000
+	id 1uoe5F-0003t5-EK;
+	Wed, 20 Aug 2025 08:22:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wangxiaojun@vivo.com>) id 1uodf0-0002JZ-EV
+ (envelope-from <liaoyuanhong@vivo.com>) id 1uoe5A-0003rc-Qa
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Aug 2025 07:55:06 +0000
+ Wed, 20 Aug 2025 08:22:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
  :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CQmSL6H2PbwDuncL/3vw/Ta0HW3JCpzMNkeY2oXCC1s=; b=mYaAq1vCrd0XH1xyZ5PhDdOF0I
- Hff4DGbcu/p6Aj2IBlop4BGFCDPqvMAQwNeseg4RpkaJtsitzz/PfzHPbHXCvjT1bo4ji+pTr/NlN
- m4XFVRqfWw+LxjS10V0qbxxnymcIvCLqNXknyaDdWMLwmDh3C22QZm3eB8bUzWBZUgYI=;
+ bh=cpfUdXSIGI8pUTfZ9/F2e9aFyu6/vAMmN+j0/cjbsP0=; b=Km/xfxHGSzOT2FjQOgf7JsJdZA
+ K46CH28GJjqGQPDZG95bxE9kaq2UTC/OdPUgLqwxHxPPAnDu00+Jbx/p+OKyOtpA24ZutxiQMDf6b
+ VPFfxDIzpDmxxce3v73646SexYNG8Vs4N2HTtIzGLn8EJ1a54ssTeBs5DBe+2zWMMgTM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
  Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=CQmSL6H2PbwDuncL/3vw/Ta0HW3JCpzMNkeY2oXCC1s=; b=X
- sRaTvwV9SAO3B+yGDWTmRLFN8GyW+jGye4/tLK1jbrLTVdwROa1P0XRN6/8o+knGRyi/GaMBpjvUQ
- 8wfaqK1DnH1bib9OurjGtAX8LCIYjcrLe7Y5oyQvw3ziTN9gLz948SARGU3EnIwCSU4xFAEbD1kJ3
- CQjezGvTFym/ZC9Q=;
-Received: from mail-japaneastazon11012064.outbound.protection.outlook.com
- ([52.101.126.64] helo=TYPPR03CU001.outbound.protection.outlook.com)
+ List-Owner:List-Archive; bh=cpfUdXSIGI8pUTfZ9/F2e9aFyu6/vAMmN+j0/cjbsP0=; b=J
+ ulw/tIIj9JcFGdZkwFjgMUOilFZDzPVSWejAVCTS8ZsFlzM3fu8q0fo1cYyjtvNlOLgm+Twok3dD4
+ vhKf7J4U6A4uc1ZLGGVOidct/hJ7GyO+OnBpjMaVDS2ZURHTyI0jKQdecTuNgwrk20YwtZP+CG/Pf
+ RPthUH8pwsnxcBhQ=;
+Received: from mail-japanwestazon11012034.outbound.protection.outlook.com
+ ([40.107.75.34] helo=OS8PR02CU002.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uodez-0007tJ-1u for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Aug 2025 07:55:06 +0000
+ id 1uoe59-0001fi-UM for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 20 Aug 2025 08:22:08 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vUidHyT6vu9LmD2Pb7gy1wFCOFT5ojz+Jc5g+OxdCti4L45rODpkwUVUN3rSpMnJeNHaRaQS1RcNCTfdD5K+ruiWv0IkZvF4pnsXyzXqESIowlnXTRkAf5OxTMBgZ/+06OMFyd00B4q9hHZ0bEwOoYPxAdLj10HvuS+sRj23Fv8ZqY5sdsMUW7M7dFVeoERYywOf9Y7fnV+xPD7mk3429XNMVNesZ17ZofztKa2HYvA6AhJmo7zp3bIaOMMXttqhdo4vX0jO+WCE7AM6iAweAyXKsoNj672/PL1bsijB5dCMn4U/lUMDI08f9HqJ/rdpAxijMZU8D+TeM0K9PLg8ZQ==
+ b=lQfIiu8eQXiusjP/ahfubHwywB7uB5yir1NmxTMuKBgbwLu27jYNc36OuYNTbFiSsRJSbcMJdHyiCk7nY+NTgk5HnA11WMNgCNlnps+pCL1N3ohcnq/Md1yqrGwOoFYdvx+3960vmlCn1KERIiBr8kd1LkgTo8KZqSGSA5JJQQCWMXorUCnhbj8E7WRdNbQpOgw28wJLgD1uKva5+MSjPhvKMVQu0O89dDPLl4M9jLryJUB+bjSenxmP3hrH5mYtv+WH7W9o/R09Qqfl5EerwfdbapVbwjtqxSPC5CsD+4x5DthlfyetVl6Yu8SwUvaJFUFyQPeqedR0/KakD55zsA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CQmSL6H2PbwDuncL/3vw/Ta0HW3JCpzMNkeY2oXCC1s=;
- b=pfmNJKGEg9lcaRWpxmTRFjQfqoTYmCYyerYXWCDwq+qsnEt9anuQmwVF1udobtPzpP9uyfj26QMaSftJAw6rjestOovcY2PUCGvAtKLOn5Y2Ja4paKM37FxsQRboGYN3EXwKjnjhP0E53QYVPZM4wK6i2+F/Tjk0YEv1yGh2uuhdZ/ZIbNlwcVVNAGxhixSfSaO1gl7ZGFKko0zRBiXzHXUONsvQ3Ba7NIsziMvhI7FhIXFvQjEBSkRxro2fZuoFs8bYz/ffgRRSRI0gg+/sKow4dNnmURdrgtw6rOqyLjon6SpZoFV7NVfWHwalYz0qsdV24FfSyBD3iplkrgHHRg==
+ bh=cpfUdXSIGI8pUTfZ9/F2e9aFyu6/vAMmN+j0/cjbsP0=;
+ b=G7aDC9hmQWgSBFSBhk7AOL55a53Sox5q2VGb6aBzKJyAXSURguNSJZ6VkAHjCE1P9jr5gHcWTKeJL7AFRWcg9NbHNhtOqw63KjBFeY+LYmg02tkGwaW4BZxVbFTE5Z2lChMlY+3MaNYxEV57d1DPuR/svGLfAETPJICfo37s8AAPIeA2t4SXHVaCkuBFTgS4bp1eOU2gjz+jQLlt0AGmm59lxFmlKGue7zNHW6+XpSbXeYQCa3Qi7EMsIpSwrkXdk/i1aEJDHbOgmrZu1HdOQ7ReF7auYkLLgTKNQ8Fg7d+GASMTxX9WHPSVtlF+ds2zgNn0ewss/LqEgVMyCtd7Zg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CQmSL6H2PbwDuncL/3vw/Ta0HW3JCpzMNkeY2oXCC1s=;
- b=h0h4Or6EKsD7MasazS49vjdmQjem6e8kioPXt6I400JBWFWW8r7Ib7G8EnPVFeL6o4McjEIIJmyYrdbGaRn6ziz1C7U2uvb7aiAXfpwhD2LO19TZmxJwSgqeyXrwgA6Xi6g0Tm3w9e2UNCIBsMoHXAiAQv7Rpno5gz/JFxDAkGzrCHbRRAsZNIo5IdStdDi0PQTXDX15fDd23YLVIjqUG0SShnU8YcLVh7cSi6KZBk5YvWhvJpIRdS2t76uzL6yREooSCcRggbfjsTgkixPttcCWQ+mIyaE0MIrysiLZBiKEUh/49tvVQDk8x1OuFwM5/W74/tV22dnS64K7dskqqA==
+ bh=cpfUdXSIGI8pUTfZ9/F2e9aFyu6/vAMmN+j0/cjbsP0=;
+ b=NJqXD+FHWMbEmbXGP/oZfFiITEhKK+som6QZ2XFyxV5IiVVahXyM17Ovg7P1S56Kas+7cRoeMNMJDs40DPvaxpMvCkKS4CaVUzXJURuSlL41lqQ48eyamQao/FEGI+QnIofUbia/VcMqnOB6eZeqa31s9AYPwrGDuhodAjhJFN91ycxgos4RojyIGrXr/52sdhom4/l2aWe4XQ8kwweokug7LZ7iCMhVs005t7sKBZdHQnfX88/9QQafDLBkD8zRG9WQlkF2C49W6+dIjFWD68BEowD+3WAGodsa9l3RmT5kQ5js0q2zO7LfMw4AaHxNiUaVkgVp9IeIPaVdPCcWjg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from KL1PR06MB6845.apcprd06.prod.outlook.com (2603:1096:820:10d::10)
- by KUZPR06MB7985.apcprd06.prod.outlook.com (2603:1096:d10:27::12)
+Received: from TY0PR06MB5579.apcprd06.prod.outlook.com (2603:1096:400:32f::14)
+ by SEYPR06MB5985.apcprd06.prod.outlook.com (2603:1096:101:de::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.13; Wed, 20 Aug
- 2025 07:54:56 +0000
-Received: from KL1PR06MB6845.apcprd06.prod.outlook.com
- ([fe80::a919:58bb:f4e3:b054]) by KL1PR06MB6845.apcprd06.prod.outlook.com
- ([fe80::a919:58bb:f4e3:b054%4]) with mapi id 15.20.9052.012; Wed, 20 Aug 2025
- 07:54:56 +0000
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Wed, 20 Aug 2025 15:54:44 +0800
-Message-Id: <20250820075444.378907-1-wangxiaojun@vivo.com>
+ 2025 08:21:57 +0000
+Received: from TY0PR06MB5579.apcprd06.prod.outlook.com
+ ([fe80::4f2:e048:7c93:f263]) by TY0PR06MB5579.apcprd06.prod.outlook.com
+ ([fe80::4f2:e048:7c93:f263%5]) with mapi id 15.20.9031.023; Wed, 20 Aug 2025
+ 08:21:57 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net (open list:F2FS FILE SYSTEM),
+ linux-kernel@vger.kernel.org (open list)
+Date: Wed, 20 Aug 2025 16:21:40 +0800
+Message-Id: <20250820082142.388237-1-liaoyuanhong@vivo.com>
 X-Mailer: git-send-email 2.34.1
-X-ClientProxiedBy: SG2PR01CA0195.apcprd01.prod.exchangelabs.com
- (2603:1096:4:189::17) To KL1PR06MB6845.apcprd06.prod.outlook.com
- (2603:1096:820:10d::10)
+X-ClientProxiedBy: TYCP286CA0207.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:385::20) To TY0PR06MB5579.apcprd06.prod.outlook.com
+ (2603:1096:400:32f::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: KL1PR06MB6845:EE_|KUZPR06MB7985:EE_
-X-MS-Office365-Filtering-Correlation-Id: b7de6cd7-ee28-47da-d97d-08dddfbedabe
+X-MS-TrafficTypeDiagnostic: TY0PR06MB5579:EE_|SEYPR06MB5985:EE_
+X-MS-Office365-Filtering-Correlation-Id: 96f6e33c-060f-43aa-ada5-08dddfc2a07c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Dnnsj3Wumq7HTKiP7nukvk90Gq1SM97Dp6wQW3Ju9SQjXJ2syLzmIEMkOh69?=
- =?us-ascii?Q?cv71Hwzu8Vm8zW1aPusmaFNOYIlLq0NJHHiH2EK0nYB8anzbWWt5he+BhoXE?=
- =?us-ascii?Q?/VV4lbF4XigYlf1iXJB6RpwH7IzIP8HvqsyspX2BY3jUTSMw2UDpcXKxFOP5?=
- =?us-ascii?Q?TMSszuvFjoXBJNDGepeTwih6HDyDNmGtDWfGvVJbsSkoglW1FIx6p+3jvGJX?=
- =?us-ascii?Q?N1ickiOxjcYqhP6RAOskg35hiROGk2Lt5uHR55mrB1N2nS+GrZwi5QWx1We7?=
- =?us-ascii?Q?6EvnkYjBOHJwz0cAaStWOxz+zr3wWWiRgjiPM9d1M/QQfj6eB0KrYXJbjIkv?=
- =?us-ascii?Q?PbGh2hiRsdx0Rv+VNLiJbv6SZ6UkiqPu0U5USRcFAeLSWz4uxIzQxlmjeu9Z?=
- =?us-ascii?Q?LoA/FicMUmYNzQeHj1w01tSBe6WmTJRkGS1nSkvihopQLcgl4Wlhx/6+AJ4H?=
- =?us-ascii?Q?Ilis/KqNx6AhJlF0oIpko3IPFZ5k1N8+X2BHVbPST3cDmV7FCYBWh/x1GGWI?=
- =?us-ascii?Q?ahPDm/qItqgkVLvy3lfRVQMLNG029RTqMJWJd437c0Bu0oVxPdJT78EWtHi4?=
- =?us-ascii?Q?URmkzwxlEBUbHKaaoI9IYMZOp6SD/lT7a3Xb26W8eCDBPRlaibNnnzrU2/pR?=
- =?us-ascii?Q?JMUVDpNYOmytohr4FpBIEjp0e5kl9FzW43sP5px66lQm5E5Y/R2/QAWCLQ+b?=
- =?us-ascii?Q?IpZJv5rdXSYmeC62b3iijsDr5Nka9AgZGgUxHC6hqNuDj5kHRux1IgCVt6f9?=
- =?us-ascii?Q?dL1ZCGJTbBe6jVAlu9/uBpLyA4V+PreWGgVcpwr1PrjF/i0B6d9FOFPJh4IP?=
- =?us-ascii?Q?GlR9+dtm4VXrWOYadAesKoL12W1mea6WaLIB/0y7kPpsBORCTgnEC2EN6i2Y?=
- =?us-ascii?Q?btXm7x2n6B/D3XRwjki0VJTFJlteMfdlHFl9ymh+dwnN7DKqHSMmj1x6GOsJ?=
- =?us-ascii?Q?QGhNBrjtma8diQBHJBvGrvmjWMiX5DO84zeTV7W0vXcWnB98A2+J6rOhjzY6?=
- =?us-ascii?Q?/BvEj+aQY9K03ivWVHZQLy40nfVX3QnfQZGsnqkRnvIW12HONTAWQNtbP0JY?=
- =?us-ascii?Q?ZKzweD4JTrQ68z953ql2lggDaB1/wWXNpMm1SkCQCImXGNF6Ka3IpCHN/Dcv?=
- =?us-ascii?Q?4JBOSyK/ubg7kPi1lmywUAjOi9OZHqxyI7NpW4zIoSKThtMYizqcVfdwN7rg?=
- =?us-ascii?Q?x8EMFZF9C8/2DDk/oiHn90UC1/OLAztTMcWonLkjbalp6NT1r8hTUNoU8cTR?=
- =?us-ascii?Q?HmWO2aff0taocqoC+DRHs2KKJowgmKy9KwVAcAipRkham6Y+R1Eg2PBtQjYi?=
- =?us-ascii?Q?KlvEKdeujnBpv8HTW+HOkM0oX3MIPhpE0DOa1g++7yKhf2fjZGbXHsoiQ8az?=
- =?us-ascii?Q?fSapKCgHrbX8IRF6s5qTWtuJQx0creb9TOziA5ddQ2MAeqapyWhcacKOPLsn?=
- =?us-ascii?Q?N87eapkS71ke+Ce9gIWUKeOHOkvCz3SG56ybFhkUrlsrW4bwshzIybIa2vyl?=
- =?us-ascii?Q?PomvG4L4y+imi4w=3D?=
+ ARA:13230040|366016|1800799024|52116014|376014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?SyKDQEzbJvOhyusbkUwDNLCx/YN6872p8fU58Xohcga+32diMaR5H7xunVPq?=
+ =?us-ascii?Q?ADQqTedOrsLLYvXy/etfLhALpWxuMUSKX3Z9Wb6g8FR5DiFm3fIHwhJ7QaKy?=
+ =?us-ascii?Q?Db8smNsIUV4KrysIQHOXCZkpT/Y31e6/UX3eDAZ5dGPWohCUyYAOdqjb3mDT?=
+ =?us-ascii?Q?e4rY0CF++Y4OJ5YIQcyqeliO3IRpBaAP/wjtoMX+cYJixcvaWKo7baNGT0Zo?=
+ =?us-ascii?Q?o3+Gb/uiqqbn9JzxQGC13c+zZ0xrIX09U0vkWKSTcLaLkkGWCUqHCFRenqG0?=
+ =?us-ascii?Q?ytGp2i5zVwec66XeIVmVoCGod5Rj835YX9NqRG7f7rqt7vhPv5plDbpLfv7q?=
+ =?us-ascii?Q?CUVccP2zBKkQFxnAv7TWYpnbaGLprRGy9yspnxKFHPBdrXlp/0A6LtN3wYub?=
+ =?us-ascii?Q?Iif5FkvXTKNvDFebJgeShRxGj8ij6GDGzhwAh3sY+gFSqucDDyklHE4Jq77w?=
+ =?us-ascii?Q?yBSoE3IG/IWwVKqP7Cg7EsN3AX9tqrk82KJFNgvrmkh6rLuo59db7fhldAym?=
+ =?us-ascii?Q?SC6aZIDT/uEjkZqfHfYAI5/Q7gObo+7+Z0k/cJZ+7o3xlweN1BVxxk2chS9A?=
+ =?us-ascii?Q?v2UK/vr/g1cbglgMNeT4GsFHT6mI2T5+5PlFGih8vqO4p1+x9wxnSUmfKIXV?=
+ =?us-ascii?Q?X7TUPqCouLqSnnv3lP1hN8dRAMKVAi7puaNIOuDSRPakTqk9uDbrizcKpzbV?=
+ =?us-ascii?Q?H7Qd8BjXCAc55mn2e8HaqTJtCjmDPooCHJt7PsfPTQx48KYIo9QL2YDL6yen?=
+ =?us-ascii?Q?jcrO6vcsY9bckCQ+fdhO3Fx+P9W2IQn/5bIZRcqBLgxgCwNie0STzqwYmCZt?=
+ =?us-ascii?Q?NpWPW9Z5TrMxGcB2D3pp5b3782AbVa8oFnl0LJEzGNKp/SE4wMqYKn30rPUQ?=
+ =?us-ascii?Q?F0ejbcyoGc9G3HrdSM+ew2H6naksAWQMRTKo3rAnn3YytPGCBfN3duCdbxVE?=
+ =?us-ascii?Q?GKSOTr70Jy6tBHkaKdqcsqj/T+uE3mqhZ+OSMAjS0HLfwMZRGJ0Yaz1+gjbM?=
+ =?us-ascii?Q?0x3PzL4aglxi/XiSOMYaWl1JNqhj3GbPaWeT9YRzgRugW/WvzbWISZOzqC3B?=
+ =?us-ascii?Q?mTi/5P4ZVhkZ6EYLD1VsIGBArSFaNUVPHv0A2/JdKxRKeqkvTsjnPJOkIqDo?=
+ =?us-ascii?Q?Jxh2idujuQBv2dDcsaOhLMIsD7dOC/NkZcP9RMXf88KwDzgoCSxD2eT8EkMC?=
+ =?us-ascii?Q?BN8sFWtZA6LEeyEGz1Ctdjk0ce5YaJdnLkI6VtjUXAk7+hcSMdETFrozdcbg?=
+ =?us-ascii?Q?9Mnu6D1kwJeE55UE9vi7PBrLSF0Jt6ClapL6xlZgHnWbs23nfC1P05D6bFqn?=
+ =?us-ascii?Q?xi5fKvT5GdztqLYtCninIWHWPTIYFAvEUjNMSsfRxBgzXDvzrgdUG+TY29ST?=
+ =?us-ascii?Q?21Jr6mjr4BN2QcKbgW+itfkby0dbjIR5sLO0K09vfBsK8TbsYD/4UsPT+G5B?=
+ =?us-ascii?Q?TS30EupwVkV1jPIh8g7YaCBKXf+5UOF67yLdQpW0guloMHhIpv/ytQ=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:KL1PR06MB6845.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(52116014)(38350700014); DIR:OUT;
+ IPV:NLI; SFV:NSPM; H:TY0PR06MB5579.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Bn2LJjbEtG6WbQHKxXRRBnm9DtiyrXokAZleZJRG4xdoYfsGIEGk72DdzvtP?=
- =?us-ascii?Q?Bfce/dB295o+X9XYnen5HjD13eIzxP3wfH+c247Rv68wp0S9NN83+LWa9JSo?=
- =?us-ascii?Q?JkWZazbUombHNgj+qm3pTqyI1tLy42KylnUyJcH+ZXVFVbFQAVqEvcVNOPfT?=
- =?us-ascii?Q?Qy0tFzgt/J3Hy3o1FtyPgJlxjA9ggzPfZdY01Z/75e6WKkxakoaXTahx+AD2?=
- =?us-ascii?Q?1BiZmgPGNFHYxid2tO8N86aLRDt9bOgSeqg93LUswbd88A6VfeI9Nb60cIgb?=
- =?us-ascii?Q?EPUOcRST96zNRHYW3Vpv5jAd+EHr7VIGeNbXO92RjWi1I5RVgeHu6ngT+X88?=
- =?us-ascii?Q?xf+r7s27SWIgOW2R6YvA0u/YJ3GcFLLB50cDR0PynzSSi86ObxWMl8/xpNH3?=
- =?us-ascii?Q?q80BFW0tRPT1b7x4RF5ssewF7H7qOz9ZyyF8zNsJq9eeSG9G29pl9bEC8nxp?=
- =?us-ascii?Q?3miahHmL2mf4gWjqx4TdRYwrNMjvL3OJC1vCUpP4+LbZ25xMfjU8QQvAqcsY?=
- =?us-ascii?Q?7+uf8i3ErApktCBrfJ/9zTUZz/wWreIu2GBp8V6z0iAb8NmCLlW9R1hJpY93?=
- =?us-ascii?Q?rr4ASPm/LQZ/f+yPwXXNEasetUMw/xl2uC0Ne8hA9ynSmaMGv++vLAvZlgkF?=
- =?us-ascii?Q?0aTRDFbuMkAd2voXAqbeIsu7MkjfhZntCR26FyPf0W9hBQg3E8Q2D+WWYgAv?=
- =?us-ascii?Q?93tMp5g0YHTHQGHl+OlXJVK6HMmdq1Pt6LDJlmqJmOurlx7NXFqYvkgq7PJD?=
- =?us-ascii?Q?+yudyiRM0phQ3puDF53BmcrbTNzMctuMnzUJX8i/zE2gZKSXQJGKV0ioxWhs?=
- =?us-ascii?Q?Lo2huQAtAubfnUTNsboyCq2yo/nQ+XqMz4KPWl/FtLKsNOyuirX79fhtsPLN?=
- =?us-ascii?Q?xFrWbxzJ/KQ9xx8BRBz+LjT88n8vLV2c+Kgpew+Ht3C5dPBQoMzKLpAZc8E0?=
- =?us-ascii?Q?85lA7zLl0ws+OIB/RV9F4wzicIObLLa2OBn1a/Ie555fmw7mmf8B6xLLYL6k?=
- =?us-ascii?Q?Cph+HNG8fNxCrG8zLmP23hELwbI3juIGquj7E0MbksKeFlanA/4pE9qTrrnh?=
- =?us-ascii?Q?tKw/3irY7mCj3WNKRBYo67/IYajnpWk2deJvpQe3A+MMbG3BSzOAZA5m4+n3?=
- =?us-ascii?Q?JuhegzS1AG92YU1kfPLk238tEiUuOZLAoRt4gISFG1WeoLli0FjItz2uFgzm?=
- =?us-ascii?Q?oyRhB65Rgo5Pumh6rC0ME5zM2Bhs8/k0y7pfEn4nB0piEHgN0BaGtivjAa98?=
- =?us-ascii?Q?/EgMEIQiJe69uoFJ7aUd9Cv3yE7KFUzmYKFPxoJ0Oge6TACTEFzJ00m05kIZ?=
- =?us-ascii?Q?xF+6tuydus4WAhWwZyuYdVCHOdpqOgLb3ifjqCB2I03PfmRpFneex8+nBqcl?=
- =?us-ascii?Q?fKi47Q8h7HpLHAXzT7OQUlXpDMA5XS7wc/QyRLombDg5v1TkH5MVDyRQHxHd?=
- =?us-ascii?Q?aYOil8TpwY0Gh9xi2C9HBA2gMUvUAn5MA7tOIwNDSzlY8Zfc4OJKPeijT8+c?=
- =?us-ascii?Q?Rb++kC0+FNntgQ12diudhFmZy8vFEiI9vksVH1JCscM3NfbpEkZD0nCtwAcY?=
- =?us-ascii?Q?vHy10Lv0zlGJ/TKilFiyoCXhjKB43kRhY2H/PA9s?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?JBYwnhBBMe1/lILijUt/VHnKrbJpmTHazxEwUAZUyghaaV1HAVkshl6WU3AG?=
+ =?us-ascii?Q?X7siB+qngVTUiXhPmlTDwo69ZlchpN0PeaT6By6DNG66edQ1RyE291PYpc0h?=
+ =?us-ascii?Q?Pnl+eXrU8cHCv7d+HS0Fj5VV/anj22GDMtMAWX9NwAtomQDpVd7lp8Pc45aj?=
+ =?us-ascii?Q?DN6V4BDzTP9I3YNbHsT8cE5TKkSGXW1QPU43cN8u33AmRZoom/5ZZ/n5csfU?=
+ =?us-ascii?Q?D+PC/TPi8Jo3aQPbB3/1dIdKfXMDyQHI/FVM+aXrM6vyCQK2mBwmWAJBrjL9?=
+ =?us-ascii?Q?YSd2y6yYbHqu3gbmrbrfX66l+sts4ob6xeHhDn5ZwzSw25Rfnwnb3hlr8dJm?=
+ =?us-ascii?Q?oC1qMtvbAn4QJZHFBUt8fSJuPwdtOoSudptZ4AyQMjRfIstQYSq5QExPBjum?=
+ =?us-ascii?Q?ZacZShMe6mJ324E7uPAuoFDEjAAWZeFDQEDtRDJ1m+6IH5MC8xBoolEbYPXX?=
+ =?us-ascii?Q?S4pnb5adoJrg7+ZQiOFVaEmO+VZkHyT8/de2b6TUTa4U0qegoK3K8YGyoqGu?=
+ =?us-ascii?Q?xYLyAugykAsvFdcD4s2afaupASku54RPe8p9MBAqVLdP36wBGh4kcoyepkGL?=
+ =?us-ascii?Q?dzDXdasGibhcOP48L6fqN/caS7/dUB9aOeprRrwZNb/LOe3NVuzNhk3e5jPB?=
+ =?us-ascii?Q?ENbT3PxGAC2PUo2wowlW7ZzFUdJ2z9H7Ay1hGOOjBEzVP9mAdoB+1cAAaYF3?=
+ =?us-ascii?Q?cd/dnuhShYcMccpUXalg6urdBRIa5ovR54kclowyiZXX/aOcNf2D19j3rRs6?=
+ =?us-ascii?Q?ajmimRpdUcJySu9dn157j2MjGQJVtVQRH8IaCUJCZT+daDj/B++30kS9se6U?=
+ =?us-ascii?Q?Ajif+X9k6pUaUpke1zl8LQbswShTAN3dMAoxxS2xE7SxR/2x/rrg9gcWmptn?=
+ =?us-ascii?Q?UNlS9cWK/sF+T83rrR7AYCQqrffHo4c6b57dhTUmxdtAFEkJqN9Dt0JKz6jt?=
+ =?us-ascii?Q?5H0T98ifRjSZLcTR7DneGKV8ZK3e/8/h4pOo8lPBI8zeEXC+X137Hfj+tllJ?=
+ =?us-ascii?Q?tLl0PlHt+LIIHIRXM3hl9UW6jajaBpw6bHRBzYByszJTh5MxW+3a9PrOLV/M?=
+ =?us-ascii?Q?bMggJhfL+PRM9/obLjZp0jo66HLWunVJnmm8A33tcC2s4uvOtGctGleCK0KW?=
+ =?us-ascii?Q?4os4tx/sD+Tigyo4kknF2LQbBEY7cW3HYPX/podukQu5NI0k09jPdSGHrgQV?=
+ =?us-ascii?Q?SFsU0MnHAaQLN1lUrNbNiWVrtV3IXXRxjG3Uw2FqYkZ7qGb0c7empils6qoR?=
+ =?us-ascii?Q?GiCCn+Mqk2due355e3Dg8DQPIZlNbBLZLZSZ+3SHcVdzUW7XX7Zm6Zo67pP7?=
+ =?us-ascii?Q?UAQw5hbEy42e32b2FRB8Uaqn7+sHR9Na/HACsDAl8JKp7QKjTZn0jgMmLjWy?=
+ =?us-ascii?Q?P+LiEmwNpgi1vNLme5vOBjl8x44+NFK7q0/m3ozAlbomq4GdQe/rUQCoKc/i?=
+ =?us-ascii?Q?0/qCGNSheuuqH83QIag+27aqAhTMzfsc8K1Joijk27SeWMLYjtPsChHCbEWZ?=
+ =?us-ascii?Q?8zb13EeSZZ2TcoJi7mwFHx3zUzICAfElwXb7qbv/ZPI1dF2Yzb6EcLGaue+8?=
+ =?us-ascii?Q?I1aEVNV4i5wEAmv79ExhIFrsLB4kA+Ui3DyoE74w?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b7de6cd7-ee28-47da-d97d-08dddfbedabe
-X-MS-Exchange-CrossTenant-AuthSource: KL1PR06MB6845.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 96f6e33c-060f-43aa-ada5-08dddfc2a07c
+X-MS-Exchange-CrossTenant-AuthSource: TY0PR06MB5579.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2025 07:54:56.5382 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2025 08:21:56.8500 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: X6a/ZgD+NUuidaOdAG0cbPyfCd8WDQ7NMeN22m+ClFwCstBmn1NsbYLFENixKsa+heXgY9cdNKSd7gFZe/LbMw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KUZPR06MB7985
-X-Spam-Score: -0.2 (/)
+X-MS-Exchange-CrossTenant-UserPrincipalName: SmsxkL+2F23fH0C4jaMfwPiIj56iseUSaY5zZpab7SJ9nPrI7Qnkac/KVf7iP4aEyWnP3MC56cnm+2aZ+Y+eng==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB5985
+X-Spam-Score: 0.8 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch fixes missing space reclamation during the
- recovery
- process. In the following scenarios, F2FS cannot reclaim truncated space.
- case 1: write file A, size is 1G | CP | truncate A to 1M | fsync A | SPO 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview: Introduces two new sys nodes: allocate_section_hint and
+ allocate_section_policy.
+ The allocate_section_hint identifies the boundary between devices, measured
+ in sections; it defaults to the end of the [...] 
+ Content analysis details:   (0.8 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
@@ -180,11 +180,13 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.0 ARC_VALID              Message has a valid ARC signature
+ 1.0 HK_RANDOM_FROM         From username looks random
+ 0.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [52.101.126.64 listed in wl.mailspike.net]
-X-Headers-End: 1uodez-0007tJ-1u
-Subject: [f2fs-dev] [PATCH v4] f2fs:fix missing space reclamation during the
- recovery process
+ [40.107.75.34 listed in wl.mailspike.net]
+X-Headers-End: 1uoe59-0001fi-UM
+Subject: [f2fs-dev] [PATCH v2] f2fs: Use allocate_section_policy to control
+ write priority in multi-devices setups
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -196,178 +198,248 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Wang Xiaojun via Linux-f2fs-devel
+From: Liao Yuanhong via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Wang Xiaojun <wangxiaojun@vivo.com>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Reply-To: Liao Yuanhong <liaoyuanhong@vivo.com>
+Cc: Liao Yuanhong <liaoyuanhong@vivo.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch fixes missing space reclamation during the recovery process.
+Introduces two new sys nodes: allocate_section_hint and
+allocate_section_policy. The allocate_section_hint identifies the boundary
+between devices, measured in sections; it defaults to the end of the device
+for single storage setups, and the end of the first device for multiple
+storage setups. The allocate_section_policy determines the write strategy,
+with a default value of 0 for normal sequential write strategy. A value of
+1 prioritizes writes before the allocate_section_hint, while a value of 2
+prioritizes writes after it.
 
-In the following scenarios, F2FS cannot reclaim truncated space.
-case 1:
-write file A, size is 1G | CP | truncate A to 1M | fsync A | SPO
+This strategy addresses the issue where, despite F2FS supporting multiple
+devices, SOC vendors lack multi-devices support (currently only supporting
+zoned devices). As a workaround, multiple storage devices are mapped to a
+single dm device. Both this workaround and the F2FS multi-devices solution
+may require prioritizing writing to certain devices, such as a device with
+better performance or when switching is needed due to performance
+degradation near a device's end. For scenarios with more than two devices,
+sort them at mount time to utilize this feature.
 
-case 2:
-CP | write file A, size is 1G | fsync A | truncate A to 1M | fsync A |SPO
+When using this feature with a single storage device, it has almost no
+impact. However, for configurations where multiple storage devices are
+mapped to the same dm device using F2FS, utilizing this feature can provide
+some optimization benefits. Therefore, I believe it should not be limited
+to just multi-devices usage.
 
-During the recovery process, F2FS will recover file A,
-but the 1M-1G space cannot be reclaimed.
-
-But the combination of truncate and falloc complicates the recovery
-process.
-For example, in the following scenario:
-write fileA 2M | fsync | truncate 256K | falloc -k 256K 1M | fsync A | SPO
-The falloc (256K, 1M) need to be recovered as pre-allocated space.
-
-However in the following scenarios, the situation is the opposite.
-write fileA 2M | fsync | falloc -k 2M 10M | fsync A | truncate 256K |
-fsync A | SPO
-In this scenario, the space allocated by falloc needs to be truncated.
-
-During the recovery process, it is difficult to distinguish
-between the above two types of falloc.
-
-So in this case of falloc -k we need to trigger a checkpoint for fsync.
-
-Fixes: d624c96fb3249 ("f2fs: add recovery routines for roll-forward")
-
-Signed-off-by: Wang Xiaojun <wangxiaojun@vivo.com>
+Signed-off-by: Liao Yuanhong <liaoyuanhong@vivo.com>
 ---
-v4: Trigger checkpoint for fsync after falloc -k
-v3: Add a Fixes line.
-v2: Apply Chao's suggestion from v1. No logical changes.
-v1: Fix missing space reclamation during the recovery process.
+Changes in v2:
+	- Updated the feature naming to better reflect its actual functionality.
+	- Appended patch description to clarify whether the usage should be
+	limited to multi-devices.
+	- Improved the code style.
+	- Fixed typo.
 ---
- fs/f2fs/checkpoint.c |  3 +++
- fs/f2fs/f2fs.h       |  3 +++
- fs/f2fs/file.c       |  8 ++++++--
- fs/f2fs/recovery.c   | 18 +++++++++++++++++-
- 4 files changed, 29 insertions(+), 3 deletions(-)
+ Documentation/ABI/testing/sysfs-fs-f2fs | 22 ++++++++++++++++++++++
+ fs/f2fs/f2fs.h                          |  8 ++++++++
+ fs/f2fs/gc.c                            |  5 +++++
+ fs/f2fs/segment.c                       | 18 +++++++++++++++++-
+ fs/f2fs/super.c                         |  4 ++++
+ fs/f2fs/sysfs.c                         | 18 ++++++++++++++++++
+ 6 files changed, 74 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index db3831f7f2f5..775e3333097e 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1151,6 +1151,9 @@ static int f2fs_sync_inode_meta(struct f2fs_sb_info *sbi)
- 		if (inode) {
- 			sync_inode_metadata(inode, 0);
- 
-+			if (is_inode_flag_set(inode, FI_FALLOC_KEEP_SIZE))
-+				clear_inode_flag(inode, FI_FALLOC_KEEP_SIZE);
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index ee3acc8c2cb8..b590809869ca 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -911,3 +911,25 @@ Description:	Used to adjust the BG_GC priority when pending IO, with a default v
+ 		bggc_io_aware = 1   skip background GC if there is pending read IO
+ 		bggc_io_aware = 2   don't aware IO for background GC
+ 		==================  ======================================================
 +
- 			/* it's on eviction */
- 			if (is_inode_flag_set(inode, FI_DIRTY_INODE))
- 				f2fs_update_inode_page(inode);
++What:		/sys/fs/f2fs/<disk>/allocate_section_hint
++Date:		August 2025
++Contact:	"Liao Yuanhong" <liaoyuanhong@vivo.com>
++Description:	Indicates the hint section between the first device and others in multi-devices
++		setup. It defaults to the end of the first device in sections. For a single storage
++		device, it defaults to the total number of sections. It can be manually set to match
++		scenarios where multi-devices are mapped to the same dm device.
++
++What:		/sys/fs/f2fs/<disk>/allocate_section_policy
++Date:		August 2025
++Contact:	"Liao Yuanhong" <liaoyuanhong@vivo.com>
++Description:	Controls write priority in multi-devices setups. A value of 0 means normal writing.
++		A value of 1 prioritizes writing to devices before the allocate_section_hint. A value of 2
++		prioritizes writing to devices after the allocate_section_hint. The default is 0.
++
++		===========================  ==========================================================
++		value					     description
++		allocate_section_policy = 0  Normal writing
++		allocate_section_policy = 1  Prioritize writing to section before allocate_section_hint
++		allocate_section_policy = 2  Prioritize writing to section after allocate_section_hint
++		===========================  ==========================================================
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 46be7560548c..f5a54bc848d5 100644
+index d6a49de1b7e9..5ce9bf6be462 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -459,6 +459,7 @@ struct fsync_inode_entry {
- 	struct inode *inode;	/* vfs inode pointer */
- 	block_t blkaddr;	/* block address locating the last fsync */
- 	block_t last_dentry;	/* block address locating the last dentry */
-+	loff_t max_i_size;	/* previous max file size for truncate */
+@@ -162,6 +162,12 @@ enum bggc_io_aware_policy {
+ 	AWARE_NONE,			/* don't aware IO for background GC */
  };
  
- #define nats_in_cursum(jnl)		(le16_to_cpu((jnl)->n_nats))
-@@ -835,6 +836,7 @@ enum {
- 	FI_ATOMIC_REPLACE,	/* indicate atomic replace */
- 	FI_OPENED_FILE,		/* indicate file has been opened */
- 	FI_DONATE_FINISHED,	/* indicate page donation of file has been finished */
-+	FI_FALLOC_KEEP_SIZE,	/* file allocate reserved space and keep size */
- 	FI_MAX,			/* max flag, never be used */
- };
++enum device_allocation_policy {
++	ALLOCATE_FORWARD_NOHINT,
++	ALLOCATE_FORWARD_WITHIN_HINT,
++	ALLOCATE_FORWARD_FROM_HINT,
++};
++
+ /*
+  * An implementation of an rwsem that is explicitly unfair to readers. This
+  * prevents priority inversion when a low-priority reader acquires the read lock
+@@ -1850,6 +1856,8 @@ struct f2fs_sb_info {
+ 	bool aligned_blksize;			/* all devices has the same logical blksize */
+ 	unsigned int first_seq_zone_segno;	/* first segno in sequential zone */
+ 	unsigned int bggc_io_aware;		/* For adjust the BG_GC priority when pending IO */
++	unsigned int allocate_section_hint;	/* the boundary position between devices */
++	unsigned int allocate_section_policy;	/* determine the section writing priority */
  
-@@ -1193,6 +1195,7 @@ enum cp_reason_type {
- 	CP_SPEC_LOG_NUM,
- 	CP_RECOVER_DIR,
- 	CP_XATTR_DIR,
-+	CP_FALLOC_FILE,
- };
+ 	/* For write statistics */
+ 	u64 sectors_written_start;
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 098e9f71421e..b57b8fd64747 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -2182,6 +2182,8 @@ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
+ 	SM_I(sbi)->segment_count = (int)SM_I(sbi)->segment_count + segs;
+ 	MAIN_SEGS(sbi) = (int)MAIN_SEGS(sbi) + segs;
+ 	MAIN_SECS(sbi) += secs;
++	if (sbi->allocate_section_hint > MAIN_SECS(sbi))
++		sbi->allocate_section_hint = MAIN_SECS(sbi);
+ 	FREE_I(sbi)->free_sections = (int)FREE_I(sbi)->free_sections + secs;
+ 	FREE_I(sbi)->free_segments = (int)FREE_I(sbi)->free_segments + segs;
+ 	F2FS_CKPT(sbi)->user_block_count = cpu_to_le64(user_block_count + blks);
+@@ -2189,6 +2191,9 @@ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
+ 	if (f2fs_is_multi_device(sbi)) {
+ 		int last_dev = sbi->s_ndevs - 1;
  
- enum iostat_type {
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 42faaed6a02d..f0820f817824 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -236,6 +236,8 @@ static inline enum cp_reason_type need_do_checkpoint(struct inode *inode)
- 	else if (f2fs_exist_written_data(sbi, F2FS_I(inode)->i_pino,
- 							XATTR_DIR_INO))
- 		cp_reason = CP_XATTR_DIR;
-+	else if (is_inode_flag_set(inode, FI_FALLOC_KEEP_SIZE))
-+		cp_reason = CP_FALLOC_FILE;
- 
- 	return cp_reason;
- }
-@@ -1953,10 +1955,12 @@ static int f2fs_expand_inode_data(struct inode *inode, loff_t offset,
++		sbi->allocate_section_hint = FDEV(0).total_segments /
++					SEGS_PER_SEC(sbi);
++
+ 		FDEV(last_dev).total_segments =
+ 				(int)FDEV(last_dev).total_segments + segs;
+ 		FDEV(last_dev).end_blk =
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 04b0a3c1804d..e0f6589c6a1c 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -2807,6 +2807,10 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
  	}
+ #endif
  
- 	if (new_size > i_size_read(inode)) {
--		if (mode & FALLOC_FL_KEEP_SIZE)
-+		if (mode & FALLOC_FL_KEEP_SIZE) {
-+			set_inode_flag(inode, FI_FALLOC_KEEP_SIZE);
- 			file_set_keep_isize(inode);
--		else
++	if (sbi->allocate_section_policy == ALLOCATE_FORWARD_FROM_HINT &&
++		hint < sbi->allocate_section_hint)
++		hint = sbi->allocate_section_hint;
++
+ find_other_zone:
+ 	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
+ 
+@@ -2828,13 +2832,25 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
+ #endif
+ 
+ 	if (secno >= MAIN_SECS(sbi)) {
+-		secno = find_first_zero_bit(free_i->free_secmap,
++		if (sbi->allocate_section_policy == ALLOCATE_FORWARD_FROM_HINT) {
++			secno = find_next_zero_bit(free_i->free_secmap,
++							MAIN_SECS(sbi), sbi->allocate_section_hint);
++			if (secno >= MAIN_SECS(sbi))
++				secno = find_first_zero_bit(free_i->free_secmap,
++								MAIN_SECS(sbi));
 +		} else {
- 			f2fs_i_size_write(inode, new_size);
++			secno = find_first_zero_bit(free_i->free_secmap,
+ 							MAIN_SECS(sbi));
 +		}
+ 		if (secno >= MAIN_SECS(sbi)) {
+ 			ret = -ENOSPC;
+ 			f2fs_bug_on(sbi, !pinning);
+ 			goto out_unlock;
+ 		}
++	} else if (sbi->allocate_section_policy == ALLOCATE_FORWARD_WITHIN_HINT &&
++				secno >= sbi->allocate_section_hint) {
++		secno = find_first_zero_bit(free_i->free_secmap,
++							MAIN_SECS(sbi));
+ 	}
+ 	segno = GET_SEG_FROM_SEC(sbi, secno);
+ 	zoneno = GET_ZONE_FROM_SEC(sbi, secno);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 5aa9d650512d..fa38a3e6b9cd 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -3942,6 +3942,7 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
+ 	segs_per_sec = le32_to_cpu(raw_super->segs_per_sec);
+ 	secs_per_zone = le32_to_cpu(raw_super->secs_per_zone);
+ 	total_sections = le32_to_cpu(raw_super->section_count);
++	sbi->allocate_section_hint = total_sections;
+ 
+ 	/* blocks_per_seg should be 512, given the above check */
+ 	blocks_per_seg = BIT(le32_to_cpu(raw_super->log_blocks_per_seg));
+@@ -4713,6 +4714,7 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+ 	logical_blksize = bdev_logical_block_size(sbi->sb->s_bdev);
+ 	sbi->aligned_blksize = true;
+ 	sbi->bggc_io_aware = AWARE_ALL_IO;
++	sbi->allocate_section_policy = ALLOCATE_FORWARD_NOHINT;
+ #ifdef CONFIG_BLK_DEV_ZONED
+ 	sbi->max_open_zones = UINT_MAX;
+ 	sbi->blkzone_alloc_policy = BLKZONE_ALLOC_PRIOR_SEQ;
+@@ -4744,6 +4746,8 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+ 					SEGS_TO_BLKS(sbi,
+ 					FDEV(i).total_segments) - 1 +
+ 					le32_to_cpu(raw_super->segment0_blkaddr);
++				sbi->allocate_section_hint = FDEV(i).total_segments /
++							SEGS_PER_SEC(sbi);
+ 			} else {
+ 				FDEV(i).start_blk = FDEV(i - 1).end_blk + 1;
+ 				FDEV(i).end_blk = FDEV(i).start_blk +
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 1ffaf9e74ce9..81b99c2a02a9 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -889,6 +889,20 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 		return count;
  	}
  
- 	return err;
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 4cb3a91801b4..68b62c8a74d3 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -95,6 +95,7 @@ static struct fsync_inode_entry *add_fsync_inode(struct f2fs_sb_info *sbi,
- 	entry = f2fs_kmem_cache_alloc(fsync_entry_slab,
- 					GFP_F2FS_ZERO, true, NULL);
- 	entry->inode = inode;
-+	entry->max_i_size = i_size_read(inode);
- 	list_add_tail(&entry->list, head);
++	if (!strcmp(a->attr.name, "allocate_section_hint")) {
++		if (t < 0 || t > MAIN_SECS(sbi))
++			return -EINVAL;
++		sbi->allocate_section_hint = t;
++		return count;
++	}
++
++	if (!strcmp(a->attr.name, "allocate_section_policy")) {
++		if (t < ALLOCATE_FORWARD_NOHINT || t > ALLOCATE_FORWARD_FROM_HINT)
++			return -EINVAL;
++		sbi->allocate_section_policy = t;
++		return count;
++	}
++
+ 	*ui = (unsigned int)t;
  
- 	return entry;
-@@ -796,6 +797,7 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
- 	while (1) {
- 		struct fsync_inode_entry *entry;
- 		struct folio *folio;
-+		loff_t i_size;
- 
- 		if (!f2fs_is_valid_blkaddr(sbi, blkaddr, META_POR))
- 			break;
-@@ -828,6 +830,9 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
- 				break;
- 			}
- 			recovered_inode++;
-+			i_size = i_size_read(entry->inode);
-+			if (entry->max_i_size < i_size)
-+				entry->max_i_size = i_size;
- 		}
- 		if (entry->last_dentry == blkaddr) {
- 			err = recover_dentry(entry->inode, folio, dir_list);
-@@ -844,8 +849,19 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
- 		}
- 		recovered_dnode++;
- 
--		if (entry->blkaddr == blkaddr)
-+		if (entry->blkaddr == blkaddr) {
-+			i_size = i_size_read(entry->inode);
-+			if (entry->max_i_size > i_size) {
-+				err = f2fs_truncate_blocks(entry->inode,
-+							i_size, false);
-+				if (err) {
-+					f2fs_folio_put(folio, true);
-+					break;
-+				}
-+				f2fs_mark_inode_dirty_sync(entry->inode, true);
-+			}
- 			list_move_tail(&entry->list, tmp_inode_list);
-+		}
- next:
- 		ra_blocks = adjust_por_ra_blocks(sbi, ra_blocks, blkaddr,
- 					next_blkaddr_of_node(folio));
+ 	return count;
+@@ -1161,6 +1175,8 @@ F2FS_SBI_GENERAL_RW_ATTR(max_victim_search);
+ F2FS_SBI_GENERAL_RW_ATTR(migration_granularity);
+ F2FS_SBI_GENERAL_RW_ATTR(migration_window_granularity);
+ F2FS_SBI_GENERAL_RW_ATTR(dir_level);
++F2FS_SBI_GENERAL_RW_ATTR(allocate_section_hint);
++F2FS_SBI_GENERAL_RW_ATTR(allocate_section_policy);
+ #ifdef CONFIG_F2FS_IOSTAT
+ F2FS_SBI_GENERAL_RW_ATTR(iostat_enable);
+ F2FS_SBI_GENERAL_RW_ATTR(iostat_period_ms);
+@@ -1398,6 +1414,8 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(max_read_extent_count),
+ 	ATTR_LIST(carve_out),
+ 	ATTR_LIST(reserved_pin_section),
++	ATTR_LIST(allocate_section_hint),
++	ATTR_LIST(allocate_section_policy),
+ 	NULL,
+ };
+ ATTRIBUTE_GROUPS(f2fs);
 -- 
 2.34.1
 
