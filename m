@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 631EFB2D30C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Aug 2025 06:35:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDACDB2D30A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Aug 2025 06:34:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=yf1U57aWl1soB1/loYp0Xr7VDNW+6BJr/G/CbE2Lryo=; b=WYI7dTVtlpKodsitBMHpc7qpYX
-	sqFP0MOfrJpVHXeCE+wRQNM+Lhn1egbeqNz0KI69lndP8OR0DKbFwC2kOUBg+V5eHqjVhifqQP4kR
-	J+Pl4U07CnuFCIA80XK2U3u4XfbcyYufq1EgqZA5xNQxjivlPXs0/VJ+wfke0neWDLBs=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=og8FILklSuHnixX/CNLF+QStZGByyxV6UeCf+2N5LyA=; b=V7FCzSptu+/l2ColhNSRnR/2nx
+	LynfT1F/eDKINjmd5Bb0DjrlpjT++fuLqQVtw+3yjP3ym97xTdmSPsR0IKWiBix3CA6EmZh7fyQw7
+	kZbmMeWiEsqjoalnXxp9bZv+BieyM3kUZH2Mwe2XAsnE0K9B9M1sAeffoYu94sqa0g9U=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uoaXH-0006ja-8Y;
-	Wed, 20 Aug 2025 04:34:55 +0000
+	id 1uoaXI-0003zv-IS;
+	Wed, 20 Aug 2025 04:34:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bagasdotme@gmail.com>) id 1uoaXG-0006jR-MA
+ (envelope-from <bagasdotme@gmail.com>) id 1uoaXH-0003zl-43
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Aug 2025 04:34:54 +0000
+ Wed, 20 Aug 2025 04:34:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yrt9mzNv9i8GrCA0dPeMmmg1/H4rSndrElHUIj4D/t4=; b=SagZjRtl8cGbkmdOQHlCYKzvlN
- vmB+aQidtqn+C5jUyO/SYpvQk3x7hI8jX6RCau0DCY7ZQb9UIl2iilFoCtY8x/1FkbQLOqy1XQ1Zd
- uCt6JR0VJyI4UbyeH6e29izkSN89LuExKprzTAgjzpVj4XAys6wOLkaBwOBjIEwuoIl0=;
+ bh=r2IA2P+n6dJDRzMxIzjKYVRIxsfdKmslhVEOaLQ+T/Q=; b=fPTR7eWjckdx9/Zc+POrJzF2UE
+ SkR67HcoVVs+hibFrsdSS0Q6B1EpSyvmJ81AcREfVLnEi68w20Qgw59jee9p8nWKu7Q+qiW7eMQer
+ qLMsCRGEwCpncmFiG3wyzt39kk2+SbO3hF3Ld+pkQMyQxH5pQqYhxYf5WimTawDHvNx4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,16 +40,16 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=yrt9mzNv9i8GrCA0dPeMmmg1/H4rSndrElHUIj4D/t4=; b=fVbT+XVaS+DJjfK5qCkkPXOlxx
- Ij2w2HuH44wncWsXA26TkLzMtHb0UJ4HtPowuQAwUC/4a9YvhYREu6Uv9oYI+7BrzS3V4197EhKz7
- XS1TZLpvHgkhzopMPiK0fOB8sxRnVlHZiHRu8TWVmxP1tMNYe2bnD7AA63LXAnGbnTYk=;
-Received: from mail-pg1-f181.google.com ([209.85.215.181])
+ bh=r2IA2P+n6dJDRzMxIzjKYVRIxsfdKmslhVEOaLQ+T/Q=; b=PemTiVsIQuZMQsZOjl2O0xXdfi
+ n+u6+Onawno30uyu4aXwbx6aYlRRzYbFjMJg7XyLqeOuqGBpRZb0HInexJPsZh0nHfkQDfrSmgr6B
+ s0KyeOfozKSyC0DQkdZFTsNOmkiAW1uv+tB9znOl+1oI7ygs6to+Ihhwqd8Rpc92AKYM=;
+Received: from mail-pg1-f170.google.com ([209.85.215.170])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uoaXG-0006WK-BO for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Aug 2025 04:34:54 +0000
-Received: by mail-pg1-f181.google.com with SMTP id
- 41be03b00d2f7-b4761f281a7so660413a12.1
+ id 1uoaXG-0006WL-Pr for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 20 Aug 2025 04:34:55 +0000
+Received: by mail-pg1-f170.google.com with SMTP id
+ 41be03b00d2f7-b4761f281a7so660417a12.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
  Tue, 19 Aug 2025 21:34:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
@@ -57,61 +57,61 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yrt9mzNv9i8GrCA0dPeMmmg1/H4rSndrElHUIj4D/t4=;
- b=jzc4bYMX3okrhvXVehDXYUypgE7FJvHh1ee5S57JCK1CfLD49c7jS9EMPkSIsfva1V
- 2Mnui6nFpbKxxT8LV9s7+w3SvNTxSCb764OsGl9rSt/BVcVxd6+U5KvegJBDd9ybbinu
- bMKkOrDxOnrEypowifKdTycXI930+2nNUjAuX9TSDCb2HgxR1mK7D/0hP3LmqHHWxU1u
- k1Suw9RIHHFqUm3t5opS2IGD223kX6CVW95zCTUH0RZJBZ40jQkWONff+RSDUsYQGBut
- 9Nxxt47RVwbqCWDH3DcdnvMAAAVYL5Lc6iayyrtRhGQgL/s+Y3qWh2BlvNiaWvuuh76s
- DWSA==
+ bh=r2IA2P+n6dJDRzMxIzjKYVRIxsfdKmslhVEOaLQ+T/Q=;
+ b=HIwZL9g9Czw5CCKeoBQ0AxF1gHSxX2ERdEzznSGxzW3FtkobYzCk6mJ/fDIV4fKLSm
+ zoWlwLioFuH5MYnhJPuYO8OG1N1IZ8+8bKP5aGgR8GKc9NixAVCEeNy/ET4l5PlPnHRQ
+ XhyS++oCpr40waDSpTSMNsYpB7GNkz2N2Sc0A8GnkE5HvqeJ45rEN6EiFsU4327KZvWY
+ SQ3nw9wqQbTSjPPQ4IVsxJpKrsOE0Cwgki1Fxu6clUyM/fCB6Z+p4/s1z2gDbalXgAYc
+ zsZJDvbAZmamiw1523wEgVycx0PhDuFXT6tlo5frpusVJ/2EX3NfEl+Ub9/qkycgt/CE
+ Ulvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1755664484; x=1756269284;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yrt9mzNv9i8GrCA0dPeMmmg1/H4rSndrElHUIj4D/t4=;
- b=T8DaqjvovS5lBdcAzkaLY6A3712rGv0SIRE+SGNUErDHstLVqQcYYsLON8gwSzhd8L
- Vm/6W2dYwOY1lAqPqwWS2ZvUSDY5823fw1ahFoe9Ste6lytYiEg3Km/gCeJc5QUgIErT
- a6tC5OXVXz7TVoTufsQiqBYx3DCZ6IUOonI49qSEXX8wyYxNwmW63qixYN+ldTCCboU8
- Kas4TKiWOxiC/FiepghH9n0RPWlpF2gO9kg9eIBewIzv8BG0lfn2k1HwCLL3A5OTOLKp
- mIr1sc2b1VD5+pi3K6Qf15o2ZxGWPBG6SXUECJ8kYXzyIrP3f9hHhSrwgu2HEhaXP9uQ
- g3oQ==
+ bh=r2IA2P+n6dJDRzMxIzjKYVRIxsfdKmslhVEOaLQ+T/Q=;
+ b=ZolLKai/tymksdQYim4UPhLDNjOWHw36sq1nHj312OzkAmjDYxbvq7Vq40s1M5fhNU
+ pMWveDHW+C2/X4bjhtz/MO42CFaACfa4Cov+U0OmLNlDeTBbpY5yh8J/ApSEpXnNNmhg
+ q8RNXfuyUv1MH7IRbtG5p+bhI9/uxW6JTePteNRnz3QdkqFKP0xPsV0tZ6OTc2EHH8bh
+ AHkLbEpwCY3zm8Z1goeOTtoFGLwEfIYMrEHRW/+nX97to+3q3v58p9XMIhU4tQgYGqmJ
+ ZaWOTSKPhLWBHzKseeXhrriMiw5dhjyiLykvr6W7cVbkovsvJbxjjseHJAgzDpBz1ZZO
+ txGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmuSLpapmT+M6I/MGJkpAdNj/oRCdCgf0+sHqaj7pI88T5A6+KCN1a6yrRBboDEd+nnL8p4SClA90wOoFyPXwS@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzQKp0jYwBgGWsWTbkaJ+xSsCnVKUCYoo/5v7irU0VxQYE3VK2t
- ufw8Kt2/Lh9ebkGg2WheqsHFxdDEUEDWyM0NI1T2Em1P0LWpAf/oj+zbsGlRk/4Z
-X-Gm-Gg: ASbGncv1IkwyxKUMOqwRbMF8/bOI1XovMbQT9JGAK+s4RivvJQTSz70VjgzckjiKfvk
- LGDQubCxfm3Gx9gdgsgawFycFIm8NzrM6xTit0PfwidDlEQ6vRY+nNQtruf9QGc9TqLD4TX6Hct
- i94b0+i/Sq8y3Pv7LvQ8yVQfIFRxIswEVv7yQOk5l0lsrF52Sa+L1q6jlEfyoXQtJhnoeASWNOH
- P0Iu90pBfOiA/YcxRahl3NlAvXids1e6k0KgVxfGtEf2N7cKb5+ApQDl9pmLSUAnJyovY15JUdq
- KxN38tBwQDmeT/nhXw9fa3f6thMWDXXnoo14Q65tI9Ip0hg5K0loftjeikMvCPIdKHQJxttOYjR
- JmUkL4zpw6CBD3Y6ViQcxzQ==
-X-Google-Smtp-Source: AGHT+IHmG2KaV5A2aZ+HZ0hd/iIQlBfy8Y7PhJWbQKKu/KBlbqqPeeGfMzIvzJzs95XaL9C1UF7FwA==
-X-Received: by 2002:a17:902:e888:b0:240:48f4:40f7 with SMTP id
- d9443c01a7336-245ef25c5d0mr21276695ad.39.1755664483587; 
+ AJvYcCXOrAK10oD3sWCI//zNs148+Lp5TVum03/FvsT81/Mt7fl78iPFbe2kpXUWPe3fGS5nlwtlxbbX1ewwwc4/AS+B@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yy14ynWbWJiGeaAxIb2GC4xWQCSDYz7VPTFyLwjaeC4HXjEzH+j
+ Y8wuj7x/OLZ7slMMNoTifqCRdFB4m+wPhpB4HqaFmjDHfy18/s5sn9ij
+X-Gm-Gg: ASbGncsg2Ku8cDTdrdQzT1wOp+mgJp/gbnB+yd6+a1miTxtFC17MoK6hn4vAicIJ1cP
+ b7wzz5r6j2AJsZtmz7wfhu6SQ4ddNO8r/5kEp9u4jN0qkeC1WbcZPxyWeND+gw22pPFEjdmqUb/
+ WoIt25P5onOtpXuesWgbaipiwXbl8e11GME6pgkJB8e7oS0BK2c4JROZA14ccjRj8nbGA3XwdP5
+ Im1fTXDzxMMvJr37/ON07/yopUgScSBQQUWxZPIwPUaybt+A1mtpEl+rJWOdFwW7+nZKUvHShAj
+ oOnyotRm5i72B70z6a8aP2DGd6mc92Or8havLMjviQnMsQtQE2sxIw61jWnPCCzihDF9ZLYRodu
+ 5fslFQ62+emNfrlX4qHokWw==
+X-Google-Smtp-Source: AGHT+IFG0K6eJJ/ikjKEya3Hr6JFvroPTkyOpwyDpaD3ZIA3UUuA5xAdu4TqJAiZpI+4uf/BR4ZPCQ==
+X-Received: by 2002:a17:902:dac7:b0:243:11e3:a760 with SMTP id
+ d9443c01a7336-245ef14bf85mr15494885ad.16.1755664483956; 
  Tue, 19 Aug 2025 21:34:43 -0700 (PDT)
 Received: from archie.me ([103.124.138.155]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-245ed35d511sm13326175ad.50.2025.08.19.21.34.40
+ d9443c01a7336-245ed35abfdsm13342545ad.41.2025.08.19.21.34.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 19 Aug 2025 21:34:42 -0700 (PDT)
 Received: by archie.me (Postfix, from userid 1000)
- id C031F401648F; Wed, 20 Aug 2025 11:34:35 +0700 (WIB)
+ id D87434401D41; Wed, 20 Aug 2025 11:34:35 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  Linux Documentation <linux-doc@vger.kernel.org>,
  Linux F2FS <linux-f2fs-devel@lists.sourceforge.net>
-Date: Wed, 20 Aug 2025 11:34:31 +0700
-Message-ID: <20250820043432.22509-6-bagasdotme@gmail.com>
+Date: Wed, 20 Aug 2025 11:34:32 +0700
+Message-ID: <20250820043432.22509-7-bagasdotme@gmail.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250820043432.22509-1-bagasdotme@gmail.com>
 References: <20250820043432.22509-1-bagasdotme@gmail.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1604; i=bagasdotme@gmail.com;
- h=from:subject; bh=ibncyX6wSsvhMtT2VwbkV775dioY/Q+yZ3LZy0Dg3GY=;
- b=owGbwMvMwCX2bWenZ2ig32LG02pJDBlL/bcVvJ8Sftu1OEZAMV79w8GUjQ/V/ff2bdFmzHgQf
- /hbe+KFjlIWBjEuBlkxRZZJiXxNp3cZiVxoX+sIM4eVCWQIAxenAExEh5nhf35QhtqrOO49DkWM
- c2U2uYjePVz5o2fFluL19jGLj528KMbwvzJnWuLKsDv8Mm4crYF3b3t+ci1V/xXZk7GcvdKW07O
- eFQA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1215; i=bagasdotme@gmail.com;
+ h=from:subject; bh=yQk+lQK1CQWqJS13FZep4quP8Zh4Ybk1JXSluoOwpDo=;
+ b=owGbwMvMwCX2bWenZ2ig32LG02pJDBlL/bf1cOctSpnyQUfGsUBlxRuuGQEtwlr2hWfS7hz8s
+ Tbd/dG/jlIWBjEuBlkxRZZJiXxNp3cZiVxoX+sIM4eVCWQIAxenAEyEv5eRYSnDavfFO+xu57M9
+ sNTz8TPqZTlWliqw/MNH3uD3gtcvKTMyrDE+l8t34u9LC4tJ50vmr1rZrNUo+2dilU2C+lW175a
+ sXAA=
 X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp;
  fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 X-Spam-Score: -0.2 (/)
@@ -121,10 +121,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Indent description text so that compression_mode numbered
- list gets rendered as such in htmldocs output. Signed-off-by: Bagas Sanjaya
- --- Documentation/filesystems/f2fs.rst | 14 ++++++++------ 1 file changed,
- 8 insertions(+), 6 deletions(-) 
+ Content preview:  "What is F2FS" is rather a mistitle for the whole f2fs docs, 
+ as it implies the overview section (before "Background and design issues"
+ section) and the docs covers beyond that: from mount options to f [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -138,11 +137,10 @@ X-Spam-Report: Spam detection software,
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [bagasdotme(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.181 listed in wl.mailspike.net]
+ [209.85.215.170 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1uoaXG-0006WK-BO
-Subject: [f2fs-dev] [PATCH 5/6] Documentation: f2fs: Indent compression_mode
- option list
+X-Headers-End: 1uoaXG-0006WL-Pr
+Subject: [f2fs-dev] [PATCH 6/6] Documentation: f2fs: Reword title
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -161,41 +159,37 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Indent description text so that compression_mode numbered list gets
-rendered as such in htmldocs output.
+"What is F2FS" is rather a mistitle for the whole f2fs docs, as it
+implies the overview section (before "Background and design issues"
+section) and the docs covers beyond that: from mount options to
+filesystem implementation details.
+
+Retitle and add explicit overview section.
 
 Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- Documentation/filesystems/f2fs.rst | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ Documentation/filesystems/f2fs.rst | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index 0f9472ae62f2cb..146511d63b684e 100644
+index 146511d63b684e..10504f774e1dff 100644
 --- a/Documentation/filesystems/f2fs.rst
 +++ b/Documentation/filesystems/f2fs.rst
-@@ -922,14 +922,16 @@ compression enabled files (refer to "Compression implementation" section for how
- enable compression on a regular inode).
+@@ -1,8 +1,11 @@
+ .. SPDX-License-Identifier: GPL-2.0
  
- 1) compress_mode=fs
--This is the default option. f2fs does automatic compression in the writeback of the
--compression enabled files.
+-==========================================
+-WHAT IS Flash-Friendly File System (F2FS)?
+-==========================================
++=================================
++Flash-Friendly File System (F2FS)
++=================================
 +
-+   This is the default option. f2fs does automatic compression in the writeback of the
-+   compression enabled files.
++Overview
++========
  
- 2) compress_mode=user
--This disables the automatic compression and gives the user discretion of choosing the
--target file and the timing. The user can do manual compression/decompression on the
--compression enabled files using F2FS_IOC_DECOMPRESS_FILE and F2FS_IOC_COMPRESS_FILE
--ioctls like the below.
-+
-+   This disables the automatic compression and gives the user discretion of choosing the
-+   target file and the timing. The user can do manual compression/decompression on the
-+   compression enabled files using F2FS_IOC_DECOMPRESS_FILE and F2FS_IOC_COMPRESS_FILE
-+   ioctls like the below.
- 
- To decompress a file::
- 
+ NAND flash memory-based storage devices, such as SSD, eMMC, and SD cards, have
+ been equipped on a variety systems ranging from mobile to server systems. Since
 -- 
 An old man doll... just what I always wanted! - Clara
 
