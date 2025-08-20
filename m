@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F4A6B2DCD0
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Aug 2025 14:43:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B0A1B2DCD4
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Aug 2025 14:43:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=nqNYIhy+7GTGZq3C9xQZqh2mhd27LyHwc9BV41CLvls=; b=ffS49q28Oo7NyvJtFhY5XZEYHn
-	HMMwaebzL+2k7D7exlaTvoNV++MyWgxKGkIoDJW9uemhZe0K6ntUeCJRgI/1me0SpFr/hpxqmVoyX
-	5AzHM8z2tQ3jyVbFUwzLc7ZLzVWMpdZIm+NUoL1odINrhzmRhjeudofOY849fuxSDKXs=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=eJ9HnzNr1gp5NGT4LfcB2RqzvMrE0C/92CB2P3xEhpU=; b=moExNxcXU7tOrdnrGLqfDPUwHB
+	zYIgwePf8MhmNsdsihYaJyxI5THfC6YWDudmaj86iObf98pKDCYlFLBtcAhRDXDGvmMq33xeWhtJx
+	NOteVYEkijRZFOWxE9fU/z6bNu2RqrtYyV8kda6OL4kXwxWyLad9Yscgg1u8P4yg6sUc=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uoi9w-0006Ef-1J;
+	id 1uoi9w-0008Rb-OH;
 	Wed, 20 Aug 2025 12:43:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <shengyong2021@gmail.com>) id 1uoi9t-0006EV-Ka
+ (envelope-from <shengyong2021@gmail.com>) id 1uoi9w-0008RT-2R
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Aug 2025 12:43:17 +0000
+ Wed, 20 Aug 2025 12:43:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CwItgL9De2ErlmuRD00j/kHAGeGL21RGhXCER8YT7Ro=; b=K8eZXqRQClq03P0fifeYdS4er9
- h+rGFYc875p2Cdp7x5HG6dH/zoZPSyypiM7OFtxEJk++sFBHIUlN3FEsKJZT/hiy9VHNxUC1DJ7OK
- OXB4R9LujFS6o9Ks0UJY6u4JH4H4KDC5Fdsu6nubNW11+W4XjrJ6vgURYJEBlPm48uGU=;
+ bh=EAb8oZnCF32xuOImVSoD7G6BFLhOj6lwjbQtH1giaF4=; b=DMUU5ErErDEV7VmS2zsHQDbypj
+ WYjn2BVlHUIamdlUcybHim+0nD5GjRTGEjROG73yLKWxwueLqz6qbJM1MtL1d8Kuk1WsNM2Zx1ABB
+ PZM0NmFixd/KkMQnlnqTtOxsWAgnuk/ibAS0HmVNEQHry9jIzYxXAuoTtHk+aJRx+WK0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,65 +40,65 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CwItgL9De2ErlmuRD00j/kHAGeGL21RGhXCER8YT7Ro=; b=Un41rJGZgj1PNersDcRCRvUT0w
- 3KW37UytmTMrLovSoASTS0gtXTp+2QpXX5bKIGonAyAYLiRCkyDkSfxKJ5CUm61q9puonhd8nwZwY
- S3lowUmKZZe1DXchppjXlN389IsC7hZlkpHaQIcg1EMLxezF2yQ68oy5meQSD3eSgfsM=;
-Received: from mail-pg1-f181.google.com ([209.85.215.181])
+ bh=EAb8oZnCF32xuOImVSoD7G6BFLhOj6lwjbQtH1giaF4=; b=CzyHWGtSc3qe143rk6pxnG97U5
+ +vQCLsSnBQk8WT0GzQZxOdn76kwQgb654vv2Gr/vlwpNpS7T7ZnSA+8ovIJ8mFhFKDhU9zDIeNeAd
+ 3kZhdtd8U5bm/un9Fo/S9RR07yPS5i+f9YPfhp3GfzRIR6hg/dNeQrqHycZIy+NuRCJg=;
+Received: from mail-pg1-f176.google.com ([209.85.215.176])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uoi9t-0003mD-AS for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Aug 2025 12:43:17 +0000
-Received: by mail-pg1-f181.google.com with SMTP id
- 41be03b00d2f7-b472fd93b4aso4147620a12.0
+ id 1uoi9v-0003mL-NB for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 20 Aug 2025 12:43:20 +0000
+Received: by mail-pg1-f176.google.com with SMTP id
+ 41be03b00d2f7-b47174beb13so4624699a12.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 20 Aug 2025 05:43:17 -0700 (PDT)
+ Wed, 20 Aug 2025 05:43:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755693787; x=1756298587; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1755693789; x=1756298589; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CwItgL9De2ErlmuRD00j/kHAGeGL21RGhXCER8YT7Ro=;
- b=A0SHx+635bPlK5AA/ksof7dTMEhvxkPJ/7kTZ1oYv85JAEuVREpvBdKkEOq06/SKp+
- K1zCuJLcgJg+owjF67cUQbHAVWchPxu3rwYDtRFkTReMZM5GYJQob6ECfV9TI23M/psN
- ho0J2VsNyc+0+KKNgdy/CPvk7W6oS6+k8qhUBowMJ+n786P8vNfhdhsSYfGBVmOLdpLB
- 7eS5ufXpudok9C6ShJP8Jhq59aBP+AGnRHJBVBqQIoj5TuRwJyaiMWP5pT+quI5yjUfJ
- UEgamj9WJrkNhEx04Mqb/hWy7CvmKay7ChCkLbtNcIO0GZ5tKRYlXgJtPBM/YXigPHib
- hfBw==
+ bh=EAb8oZnCF32xuOImVSoD7G6BFLhOj6lwjbQtH1giaF4=;
+ b=Cp3sjZnQaSq3/mgif0yd1wc0Le0WgW/+c3ja2t29zUdmP50GodQgvt8LIk4CTtUruW
+ yRqNt3o6PPFKVSMh6laZNV1hyY4w1O4hfJkvigqZ1aYchXmoJKM/tEl1AUeoaRG3al4d
+ JgPjKOF6YZDQZwGMT1DG+iSpjCTUVSSA/6FYH0yBENRofrC7SIMAa6SzRW27qEskecB9
+ mDjdaqmACEees7lFLYlu+TNckO6KIW468T/672o0MD9riIy3YeB1uTGfSV+wsPm2plHl
+ sUl43j7eEjvP3mnehITuhWQEQypOwYvgU4NzdQABredJUKjVdDogn5RxYStvockLnhH1
+ 5/7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755693787; x=1756298587;
+ d=1e100.net; s=20230601; t=1755693789; x=1756298589;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CwItgL9De2ErlmuRD00j/kHAGeGL21RGhXCER8YT7Ro=;
- b=B24gigrtiu8uHboGslMV3Db/giYOJ7dkTONlttNsJwgV/3c7Pp/AseS70od0oqn8et
- f3snUaY3jmAkLmdMGNamdKsOq1crzCvLxUoGk3b8RZhQvzYwlBcwru5w/7FnjJHU/WzW
- 1EHNKW55rTVR3PscSg4CDk+ms06vc/P8m/ORwT1ii/AE9+vUj7+N0Sv71AJEEuWit4WI
- eheASt5XplKSRcAvzGmfhT/UItyQG0Zkfucr1TGxZbaQW1+3AdTN1nb6e//6mC18QTfq
- lWlfnyh0NArpbdqmWgtpqNNJj7Df46KlrUVpYPwjAv8EXEPL8V6kAs0+cMWTWjTQmlA5
- 9kjg==
-X-Gm-Message-State: AOJu0YyC/etLJlZBkm0fGrkZd+SP2noPS2Is5kNr7fhZ4c72DNOuWZ7G
- E5GmUbj9DJXwnjenPnM/j/UsY9+A0G7jiBdrBfXFr+aexEnCb9eZ1eqR
-X-Gm-Gg: ASbGncsTaaajLkdhpCn4VMSstpQNyuLP8YwT4p/qEMo6m/jsbUEgWFY9k2ZQJzXZ8Kr
- O7J4eJWhKxGq5PSWAOAu2+6vtyNgbwSGQnb4SC6SuN0+NIrmBReXwDCQ9MLYod52kG34EQONPqE
- 7TZwmT3yDwPIy4YuK+g5hhjYdSpfgg2LEC+/QXLxqT0Mb4zwnvlfXtI+RVo/VpLKpaVLhi7U8Aa
- HXJhQRcpJmMmTR0maKcdA7lrxdNMrEjix1HOmRoCsnx/P/hax92Z+tt7I9rD/LjmX8nMWooItmz
- R32sUN+bTZe2Dp/Ul7SbNfPpctxZut4XqDWfk6nThiqHEB0jA2GoxSmdhOlAjgFTd4ppW6aw+HC
- jIA1q9N62VHiL00vNQQJdLx2iZAOL
-X-Google-Smtp-Source: AGHT+IGlEHWE4XuvUD0uGQoDMi2mVHLxHroa9jzzOzK5c+p6QGQAdSAGzpyxqWHfuQnGcOZV69a+6w==
-X-Received: by 2002:a17:902:d547:b0:245:f2c2:650c with SMTP id
- d9443c01a7336-245f2c270b1mr20162765ad.18.1755693786440; 
- Wed, 20 Aug 2025 05:43:06 -0700 (PDT)
+ bh=EAb8oZnCF32xuOImVSoD7G6BFLhOj6lwjbQtH1giaF4=;
+ b=gcaRGyJ/XskzORL7k+auZBUPRV0sokN8h6JcLrlE3HFVWjAV6SR7jFQDgR8Hrqwt6y
+ 5rmTzDjQ7zb3rcxLrgCeI1vyH2sD7R5oli/y/fHyvR20Dm5L9P6Z5+LA+aZnav076N9D
+ ju44u5pXKVHDtTfEqhSbzI/42t2LKlnPTSVMOlnyqq2uEo9jw0/gxpSiLQRJ6O6F1ZIS
+ GexT0ItKQTAJfPXGmctJKp+9g3sz6qRiB1LLndY+4jTbJVlFcCg0xhYPfoNFSpg9E79H
+ FJQmHJv73PkcWmbPDgMHDQOHHG95Mk2/cYf8Jvgsk/LYVghUt2uHbXrixjAMmB7KeeNt
+ P9DA==
+X-Gm-Message-State: AOJu0YxNIh9LbmUoNsN2+GEMfIFlI78fV2cFwnS5gWaYvc0mbrAb6KDo
+ H4Vz9bZG+1ZPVxjCFX2LAbNIFduLdjJ7h46cOBlQbNcXL9jQ/OLuhGax
+X-Gm-Gg: ASbGnctV0a23QeCzPsiwLOWrRkunFmwm1V1IhbnvQALiRwtFsaUeC4u5oAD/z6Svbgq
+ rrv6JVhpTRMkQ9DQObACAV482zAsmBqQxT8Yz8khQhoDcTbpqHBZnXrBCDqdXjP0lKlUltPq+Iq
+ u8pLe1Nzff4mzgpEcj6RrZJ5aAQNq5Fqa/S3jclJSiikPsN5aH0qAyGIUT53aCBrXXmNKkmHnPK
+ f6UuHAaozbzde7DJ0ujM9+FO4tR0dyGP9d0/Ei2o/JVQfI0fYCVByWLyIW4obkfhhk+ki7LwlrF
+ OK2NSaVon461dKC6ETsz44DH4tAIFlawJPxSQjFuKZpBZmXPa/hsDJj5x4Pd8qEKkd7ML42OBel
+ HYowM/rNzDaPGetuKDyFoMTrHRY0F
+X-Google-Smtp-Source: AGHT+IEIR4PRUfVXfXhlQLCgiviZRGHnPWLI9ELAjPPhY1DSQAw5IW7/yKqCqkxpv64mMvWZ17f0dA==
+X-Received: by 2002:a17:903:124f:b0:242:9aaa:1351 with SMTP id
+ d9443c01a7336-245ef141014mr29815245ad.13.1755693788959; 
+ Wed, 20 Aug 2025 05:43:08 -0700 (PDT)
 Received: from PC.mioffice.cn ([43.224.245.249])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-245ed51b3dfsm25962545ad.142.2025.08.20.05.43.04
+ d9443c01a7336-245ed51b3dfsm25962545ad.142.2025.08.20.05.43.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Aug 2025 05:43:06 -0700 (PDT)
+ Wed, 20 Aug 2025 05:43:08 -0700 (PDT)
 From: Sheng Yong <shengyong2021@gmail.com>
 X-Google-Original-From: Sheng Yong <shengyong1@xiaomi.com>
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Wed, 20 Aug 2025 20:42:30 +0800
-Message-ID: <20250820124238.3785621-6-shengyong1@xiaomi.com>
+Date: Wed, 20 Aug 2025 20:42:31 +0800
+Message-ID: <20250820124238.3785621-7-shengyong1@xiaomi.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250820124238.3785621-1-shengyong1@xiaomi.com>
 References: <20250820124238.3785621-1-shengyong1@xiaomi.com>
@@ -110,10 +110,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Sheng Yong dump.f2fs shows more info: * nat entry
- version
- * sit entry mtime Signed-off-by: Sheng Yong --- fsck/dump.c | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-) 
+ Content preview: From: Sheng Yong Add lookup_sit_in_journal() which is similar
+ to lookup_nat_in_journal() to get the raw sit entry from journal if exist.
+ Signed-off-by: Sheng Yong --- fsck/f2fs.h | 2 ++ fsck/mount.c | 18
+ ++++++++++++++++++ 2 files changed, 20 insertions(+) 
  Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -128,11 +128,11 @@ X-Spam-Report: Spam detection software,
  [shengyong2021(at)gmail.com]
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
  digit [shengyong2021(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.181 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1uoi9t-0003mD-AS
-Subject: [f2fs-dev] [PATCH v3 05/13] dump.f2fs: print more info
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.215.176 listed in wl.mailspike.net]
+X-Headers-End: 1uoi9v-0003mL-NB
+Subject: [f2fs-dev] [PATCH v3 06/13] f2fs-tools: add and export
+ lookup_sit_in_journal
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -151,57 +151,57 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Sheng Yong <shengyong1@xiaomi.com>
 
-dump.f2fs shows more info:
- * nat entry version
- * sit entry mtime
+Add lookup_sit_in_journal() which is similar to lookup_nat_in_journal()
+to get the raw sit entry from journal if exist.
 
 Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
 ---
- fsck/dump.c | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ fsck/f2fs.h  |  2 ++
+ fsck/mount.c | 18 ++++++++++++++++++
+ 2 files changed, 20 insertions(+)
 
-diff --git a/fsck/dump.c b/fsck/dump.c
-index 10df7e593bfe..21de2acf80b5 100644
---- a/fsck/dump.c
-+++ b/fsck/dump.c
-@@ -70,10 +70,10 @@ void nat_dump(struct f2fs_sb_info *sbi, nid_t start_nat, nid_t end_nat)
- 			ASSERT(ret >= 0);
- 			if (ni.blk_addr != 0x0) {
- 				len = snprintf(buf, BUF_SZ,
--					"nid:%5u\tino:%5u\toffset:%5u"
-+					"nid:%5u\tino:%5u\tver:%3d\toffset:%5u"
- 					"\tblkaddr:%10u\tpack:%d"
- 					"\tcp_ver:0x%" PRIx64 "\n",
--					ni.nid, ni.ino,
-+					ni.nid, ni.ino, ni.version,
- 					le32_to_cpu(footer->flag) >> OFFSET_BIT_SHIFT,
- 					ni.blk_addr, pack,
- 					le64_to_cpu(footer->cp_ver));
-@@ -91,10 +91,10 @@ void nat_dump(struct f2fs_sb_info *sbi, nid_t start_nat, nid_t end_nat)
- 			ret = dev_read_block(node_block, ni.blk_addr);
- 			ASSERT(ret >= 0);
- 			len = snprintf(buf, BUF_SZ,
--				"nid:%5u\tino:%5u\toffset:%5u"
-+				"nid:%5u\tino:%5u\tver:%3d\toffset:%5u"
- 				"\tblkaddr:%10u\tpack:%d"
- 				"\tcp_ver:0x%" PRIx64 "\n",
--				ni.nid, ni.ino,
-+				ni.nid, ni.ino, ni.version,
- 				le32_to_cpu(footer->flag) >> OFFSET_BIT_SHIFT,
- 				ni.blk_addr, pack,
- 				le64_to_cpu(footer->cp_ver));
-@@ -135,8 +135,10 @@ void sit_dump(struct f2fs_sb_info *sbi, unsigned int start_sit,
- 		offset = SIT_BLOCK_OFFSET(sit_i, segno);
- 		memset(buf, 0, BUF_SZ);
- 		snprintf(buf, BUF_SZ,
--		"\nsegno:%8u\tvblocks:%3u\tseg_type:%d\tsit_pack:%d\n\n",
-+		"\nsegno:%8u\tvblocks:%3u\tseg_type:%d\tmtime:%llu\t"
-+		"sit_pack:%d\n\n",
- 			segno, se->valid_blocks, se->type,
-+			(unsigned long long)se->mtime,
- 			f2fs_test_bit(offset, sit_i->sit_bitmap) ? 2 : 1);
+diff --git a/fsck/f2fs.h b/fsck/f2fs.h
+index a4888a817284..60e3a2ebb0ee 100644
+--- a/fsck/f2fs.h
++++ b/fsck/f2fs.h
+@@ -613,6 +613,8 @@ static inline int inline_xattr_size(struct f2fs_inode *inode)
+ }
  
- 		ret = write(fd, buf, strlen(buf));
+ extern int lookup_nat_in_journal(struct f2fs_sb_info *sbi, u32 nid, struct f2fs_nat_entry *ne);
++extern int lookup_sit_in_journal(struct f2fs_sb_info *sbi, unsigned int segno,
++				 struct f2fs_sit_entry *raw_sit);
+ #define IS_SUM_NODE_SEG(sum)		(F2FS_SUMMARY_BLOCK_FOOTER(sum)->entry_type == SUM_TYPE_NODE)
+ #define IS_SUM_DATA_SEG(sum)		(F2FS_SUMMARY_BLOCK_FOOTER(sum)->entry_type == SUM_TYPE_DATA)
+ 
+diff --git a/fsck/mount.c b/fsck/mount.c
+index c671811941ad..f9f780d4aff6 100644
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -3297,6 +3297,24 @@ int lookup_nat_in_journal(struct f2fs_sb_info *sbi, u32 nid,
+ 	return -1;
+ }
+ 
++int lookup_sit_in_journal(struct f2fs_sb_info *sbi, unsigned int segno,
++					struct f2fs_sit_entry *raw_sit)
++{
++	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_COLD_DATA);
++	struct f2fs_journal *journal = F2FS_SUMMARY_BLOCK_JOURNAL(curseg->sum_blk);
++	int i;
++
++	for (i = 0; i < sits_in_cursum(journal); i++) {
++		if (segno_in_journal(journal, i) == segno) {
++			memcpy(raw_sit, &sit_in_journal(journal, i),
++						sizeof(struct f2fs_sit_entry));
++			DBG(3, "==> Found sit [0x%x] in sit cache\n", segno);
++			return i;
++		}
++	}
++	return -1;
++}
++
+ void nullify_nat_entry(struct f2fs_sb_info *sbi, u32 nid)
+ {
+ 	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
 -- 
 2.43.0
 
