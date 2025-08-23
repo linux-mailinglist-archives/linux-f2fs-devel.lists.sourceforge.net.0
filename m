@@ -2,101 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83C52B3251A
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 23 Aug 2025 00:39:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 92F9DB327AB
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 23 Aug 2025 10:37:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=FY/yZrHRqHT6h/HcXRql4k3qE0GS/LxwVMTZfItF6Is=; b=UXxBA2xcoHGTNjgXK4O7HfFjVC
-	xReRAksznHz/i6PB3FdhOLv3T+aob3YsojXppJifk/dhAHExrJM49/si3M8iRWoYmwDoXmEghoUWY
-	ug3RPgyOjWk40dpNUPOaxPtN6BbCY7dO+bqffbNxhUMbwHMBJA1eX3IMTAoDXFpHmmFQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=deUvebcCVo6kJpu/29gRiTsk8g3GzTzKHSrn7Ehg6/Q=; b=JbT93m02BXCY/Ymti3ApSSF8tQ
+	NdiUetE9XU9TKB/0dm6JYC1EM2Nye7Cn0h6tlSPuGzYIWBgNCFisLpHGgK7vfcys2RWJArsn2HFG/
+	yl1IwIsFaXR1jqsV9OEa3WTTLcEihH0GYy2LGRzj4Be9yBEkBaBN95cc8N1IGLcBuszM=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1upaPh-00052R-Tu;
-	Fri, 22 Aug 2025 22:39:13 +0000
+	id 1upjkL-0005nk-Cn;
+	Sat, 23 Aug 2025 08:37:09 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hdanton@sina.com>) id 1upaPf-00052I-Oc
+ (envelope-from <chao@kernel.org>) id 1upjkJ-0005nV-Qq
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 Aug 2025 22:39:12 +0000
+ Sat, 23 Aug 2025 08:37:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xOdS66SCcN0JdxkrGeAwvRm0Sza843iOzyTOuNvFpH4=; b=bdEI66HRYZ1M65hNwacSyCKYW4
- THv5cGAr3vxAXnAMMyKkd84kGw8Q5rndjFoMo2HjpdXPOcLp1VfxnDBXMws/t55GXXYQr9M8q2dQC
- jTtvLSrRijPcD67TWRjy/oVjp7oP05qN+0cUlHQMCB6OcwEyqy46B1anWNaSbr9kVXm4=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=xOdS66SCcN0JdxkrGeAwvRm0Sza843iOzyTOuNvFpH4=; b=S2JnPPQXnW73IlBTJEzdNCXNBf
- ylD/61hc374Liya5mfIOyOaq2UvGm/zUgIpgOBDnxWn5FnHiZZB1ozK/G/XLl1tcDG/YRLS5qbv6Z
- IPFO6sf5+UDPTR9UZSdQmKA52zc5JeXHxwotzmnkGaRsng7Lh0ym5dyN0jLtS2bQNJ+8=;
-Received: from r3-24.sinamail.sina.com.cn ([202.108.3.24])
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=cRLE+83IYW2xhH/6y4p6XhRmKZRGNvvBkGPL/G7ZfSI=; b=hjeMwbe70sKzir0jQLauL+C5qC
+ QHX71wFSURtsvflrfbNJT7TBluDWGlrAQ/bWT/Gy+pjW3J/yC8G9zcuC8qAA0PIsOHtHdw72tuh3N
+ eheUdPmdhQJAE4ncswm3HUGLKyzZo6lHvTnIT4OIidotNh2igK1PMgrOA9cjB0HtEKrM=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=cRLE+83IYW2xhH/6y4p6XhRmKZRGNvvBkGPL/G7ZfSI=; b=K
+ A9rDyR5qydfrC1yUsghs32Sk862E1cGXLc/bic8cqtfpsb1+6Mk6NZlz8/GuWEDlvCrr8Jl1LjFly
+ pP11hWeaBorQE1P4OMY6o6eONRG68dELETmVfIE96qHEkOPO7d5LlWu+Gceoyl1FTATQPeTVPLRVo
+ NbnsafUB6YGGUnz4=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1upaPe-0005cE-Bd for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 Aug 2025 22:39:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
- t=1755902350; bh=xOdS66SCcN0JdxkrGeAwvRm0Sza843iOzyTOuNvFpH4=;
- h=From:Subject:Date:Message-ID;
- b=eLLuqrmOoIzgeSO11AUL1Oy+B5AzzxbqvBrewRyPM13XSSI9B1hTA1R3t7LyIG/0L
- Baoca5UmPXox0GHiAbjubvXHKisuwcrMqrzcGuxHRPvpwN+/+E1Otq7vvdyxIzDUzc
- 7azDm8b7k89RQmrz+l5bojthmhpNWaXZT/NSzDdg=
-X-SMAIL-HELO: localhost.localdomain
-Received: from unknown (HELO localhost.localdomain)([114.249.58.236])
- by sina.com (10.54.253.31) with ESMTP
- id 68A8EDFB000004C9; Fri, 23 Aug 2025 06:23:57 +0800 (CST)
-X-Sender: hdanton@sina.com
-X-Auth-ID: hdanton@sina.com
-Authentication-Results: sina.com; spf=none smtp.mailfrom=hdanton@sina.com;
- dkim=none header.i=none;
- dmarc=none action=none header.from=hdanton@sina.com
-X-SMAIL-MID: 4221746816311
-X-SMAIL-UIID: 907608D5001B44E89DD36BDBAA03B020-20250823-062357-1
-From: Hillf Danton <hdanton@sina.com>
-To: chao@kernel.org
-Date: Sat, 23 Aug 2025 06:23:44 +0800
-Message-ID: <20250822222346.5267-1-hdanton@sina.com>
-In-Reply-To: <68a8bd5b.050a0220.37038e.005b.GAE@google.com>
-References: 
+ id 1upjkJ-0000FL-2I for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 23 Aug 2025 08:37:07 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 68DE460243;
+ Sat, 23 Aug 2025 08:36:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B9BAC4CEE7;
+ Sat, 23 Aug 2025 08:36:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1755938216;
+ bh=pEXIJRsKWMgfwe7mP0cGm5NGO0n6J1mDZ42J7yTw1Ws=;
+ h=From:To:Cc:Subject:Date:From;
+ b=npLmb3i0i0FmfVbQPF/fTAqDUSJLcEWU2RNp+rO3wBIQuZoNGehjPjlkqCXCS5NaV
+ G+CXcAM0b98eriPXWSO+TZolMsJZLmt1W+1hDDAmGj8u5iPodoUI99voqLYspunXnl
+ m6hBY0M1ajBVl5+3/a/FF6W5XFOku0xs8A7+kC8AD2P7u9lKn8K0LlL6HXNNrXUsA9
+ yN7zsi6RhSz4NIS//tvj61uoJLXY8KKRg6pud3oZrKNfS9AHQ6j7f2tMVwA4bRclj0
+ +ks0cW1U/3GbvtOf/DRV/DhL/XiO0lnqwqj+Y+ycCFhLWVXIUDkLzRjmKP9Am8h8WJ
+ +SzY+tHMGyzOw==
+To: jaegeuk@kernel.org
+Date: Sat, 23 Aug 2025 13:45:34 +0800
+Message-Id: <20250823054534.41037-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  > Date: Fri, 22 Aug 2025 11:56:27 -0700 > Hello, > > syzbot
- found the following issue on: > > HEAD commit: 3957a5720157 Merge tag
- 'cgroup-for-6.17-rc2-fixes'
- of git:.. > git tree: upstream > console o [...] 
+ Content preview: As syzbot reported below: [ cut here ] kernel BUG at
+ fs/f2fs/file.c:1243!
+ Oops: invalid opcode: 0000 [#1] SMP KASAN NOPTI CPU: 0 UID: 0 PID: 5354 Comm:
+ syz.0.0 Not tainted 6.17.0-rc1-syzkaller-00211-g90 [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [hdanton(at)sina.com]
-X-Headers-End: 1upaPe-0005cE-Bd
-Subject: Re: [f2fs-dev] [syzbot] [f2fs?] INFO: task hung in f2fs_llseek
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1upjkJ-0000FL-2I
+Subject: [f2fs-dev] [PATCH] f2fs: fix to do sanity check on node footer for
+ non inode dnode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,140 +104,253 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: syzkaller-bugs@googlegroups.com,
- syzbot <syzbot+942fb6ce3ac2843a1420@syzkaller.appspotmail.com>,
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: syzbot+b9c7ffd609c3f09416ab@syzkaller.appspotmail.com, stable@kernel.org,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-> Date: Fri, 22 Aug 2025 11:56:27 -0700
-> Hello,
-> 
-> syzbot found the following issue on:
-> 
-> HEAD commit:    3957a5720157 Merge tag 'cgroup-for-6.17-rc2-fixes' of git:..
-> git tree:       upstream
-> console output: https://syzkaller.appspot.com/x/log.txt?x=13e20c42580000
-> kernel config:  https://syzkaller.appspot.com/x/.config?x=e1e1566c7726877e
-> dashboard link: https://syzkaller.appspot.com/bug?extid=942fb6ce3ac2843a1420
-> compiler:       Debian clang version 20.1.7 (++20250616065708+6146a88f6049-1~exp1~20250616065826.132), Debian LLD 20.1.7
-> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=17db07bc580000
-> C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=12f62a34580000
-> 
-> Downloadable assets:
-> disk image: https://storage.googleapis.com/syzbot-assets/c5cbe8650b9a/disk-3957a572.raw.xz
-> vmlinux: https://storage.googleapis.com/syzbot-assets/51911bea9855/vmlinux-3957a572.xz
-> kernel image: https://storage.googleapis.com/syzbot-assets/b07279b5fcc2/bzImage-3957a572.xz
-> mounted in repro: https://storage.googleapis.com/syzbot-assets/f35e0e9a079a/mount_0.gz
->   fsck result: failed (log: https://syzkaller.appspot.com/x/fsck.log?x=10a5dfa2580000)
-> 
-> IMPORTANT: if you fix the issue, please add the following tag to the commit:
-> Reported-by: syzbot+942fb6ce3ac2843a1420@syzkaller.appspotmail.com
-> 
-> INFO: task syz.1.23:6086 blocked for more than 143 seconds.
->       Tainted: G        W           syzkaller #0
-> "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-> task:syz.1.23        state:D stack:29352 pid:6086  tgid:6081  ppid:6062   task_flags:0x400040 flags:0x00004004
-> Call Trace:
->  <TASK>
->  context_switch kernel/sched/core.c:5357 [inline]
->  __schedule+0x16f3/0x4c20 kernel/sched/core.c:6961
->  __schedule_loop kernel/sched/core.c:7043 [inline]
->  rt_mutex_schedule+0x77/0xf0 kernel/sched/core.c:7339
->  rt_mutex_slowlock_block kernel/locking/rtmutex.c:1647 [inline]
->  __rt_mutex_slowlock kernel/locking/rtmutex.c:1721 [inline]
->  __rt_mutex_slowlock_locked+0x1e04/0x25e0 kernel/locking/rtmutex.c:1760
->  __rwbase_read_lock+0xbc/0x180 kernel/locking/rwbase_rt.c:114
->  rwbase_read_lock kernel/locking/rwbase_rt.c:147 [inline]
->  __down_read kernel/locking/rwsem.c:1466 [inline]
->  down_read+0x127/0x1f0 kernel/locking/rwsem.c:1539
->  inode_lock_shared include/linux/fs.h:884 [inline]
->  f2fs_seek_block fs/f2fs/file.c:458 [inline]
->  f2fs_llseek+0x1e5/0x1840 fs/f2fs/file.c:545
->  vfs_llseek fs/read_write.c:389 [inline]
->  ksys_lseek fs/read_write.c:402 [inline]
->  __do_sys_lseek fs/read_write.c:412 [inline]
->  __se_sys_lseek fs/read_write.c:410 [inline]
->  __x64_sys_lseek+0x155/0x1f0 fs/read_write.c:410
->  do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
->  do_syscall_64+0xfa/0x3b0 arch/x86/entry/syscall_64.c:94
->  entry_SYSCALL_64_after_hwframe+0x77/0x7f
-> RIP: 0033:0x7f7c9077ebe9
-> RSP: 002b:00007f7c8fdcd038 EFLAGS: 00000246 ORIG_RAX: 0000000000000008
-> RAX: ffffffffffffffda RBX: 00007f7c909a6090 RCX: 00007f7c9077ebe9
-> RDX: 0000000000000004 RSI: 0000000000000008 RDI: 0000000000000004
-> RBP: 00007f7c90801e19 R08: 0000000000000000 R09: 0000000000000000
-> R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
-> R13: 00007f7c909a6128 R14: 00007f7c909a6090 R15: 00007fffeb5fe138
->  </TASK>
-> INFO: lockdep is turned off.
-> NMI backtrace for cpu 1
-> CPU: 1 UID: 0 PID: 39 Comm: khungtaskd Tainted: G        W           syzkaller #0 PREEMPT_{RT,(full)} 
-> Tainted: [W]=WARN
-> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/12/2025
-> Call Trace:
->  <TASK>
->  dump_stack_lvl+0x189/0x250 lib/dump_stack.c:120
->  nmi_cpu_backtrace+0x39e/0x3d0 lib/nmi_backtrace.c:113
->  nmi_trigger_cpumask_backtrace+0x17a/0x300 lib/nmi_backtrace.c:62
->  trigger_all_cpu_backtrace include/linux/nmi.h:160 [inline]
->  check_hung_uninterruptible_tasks kernel/hung_task.c:328 [inline]
->  watchdog+0xf93/0xfe0 kernel/hung_task.c:491
->  kthread+0x70e/0x8a0 kernel/kthread.c:463
->  ret_from_fork+0x3fc/0x770 arch/x86/kernel/process.c:148
->  ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
->  </TASK>
-> Sending NMI from CPU 1 to CPUs 0:
-> NMI backtrace for cpu 0
-> CPU: 0 UID: 0 PID: 6274 Comm: syz.3.43 Tainted: G        W           syzkaller #0 PREEMPT_{RT,(full)} 
-> Tainted: [W]=WARN
-> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/12/2025
-> RIP: 0010:unwind_next_frame+0x175d/0x2390 arch/x86/kernel/unwind_orc.c:648
-> Code: 28 84 c0 0f 85 19 0b 00 00 48 89 d0 48 c1 e8 03 0f b6 04 28 84 c0 0f 85 2b 0b 00 00 48 0f bf 03 49 01 c4 49 8d 56 40 4c 89 f7 <4c> 89 e6 eb 5d 49 8d 5e 40 48 89 d8 48 c1 e8 03 80 3c 28 00 74 08
-> RSP: 0018:ffffc90003b06438 EFLAGS: 00000283
-> RAX: fffffffffffffff0 RBX: ffffffff8fd32106 RCX: 0000000000000000
-> RDX: ffffc90003b06548 RSI: 0000000000000001 RDI: ffffc90003b06508
-> RBP: dffffc0000000000 R08: ffffc90003b06567 R09: 0000000000000000
-> R10: ffffc90003b06558 R11: fffff52000760cad R12: ffffc90003b069d0
-> R13: ffffc90003b06558 R14: ffffc90003b06508 R15: 1ffffffff1fa6421
-> FS:  00007f0008c3c6c0(0000) GS:ffff8881268c4000(0000) knlGS:0000000000000000
-> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> CR2: 00007f8cae82bf98 CR3: 000000005b1bc000 CR4: 00000000003526f0
-> Call Trace:
->  <TASK>
->  arch_stack_walk+0x11c/0x150 arch/x86/kernel/stacktrace.c:25
->  stack_trace_save+0x9c/0xe0 kernel/stacktrace.c:122
->  kasan_save_stack+0x3e/0x60 mm/kasan/common.c:47
->  kasan_record_aux_stack+0xbd/0xd0 mm/kasan/generic.c:548
->  slab_free_hook mm/slub.c:2378 [inline]
->  slab_free mm/slub.c:4680 [inline]
->  kmem_cache_free+0x3ef/0x510 mm/slub.c:4782
->  f2fs_read_end_io+0x398/0x9d0 fs/f2fs/data.c:-1
->  f2fs_submit_page_read+0x116/0x190 fs/f2fs/data.c:1110
->  f2fs_get_read_data_folio+0x4a4/0x7d0 fs/f2fs/data.c:1268
->  gc_data_segment fs/f2fs/gc.c:1641 [inline]
->  do_garbage_collect+0x3898/0x6410 fs/f2fs/gc.c:1826
->  f2fs_gc+0xca9/0x2580 fs/f2fs/gc.c:1931
->  f2fs_balance_fs+0x5fb/0x7f0 fs/f2fs/segment.c:466
->  f2fs_map_blocks+0x345f/0x4130 fs/f2fs/data.c:1792
->  f2fs_expand_inode_data+0x5b1/0xa60 fs/f2fs/file.c:1923
->  f2fs_fallocate+0x4f8/0x990 fs/f2fs/file.c:2026
+As syzbot reported below:
 
-This report complains that it took more than 100s for f2fs_fallocate() to
-complete after locking inode [1], right?
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/file.c:1243!
+Oops: invalid opcode: 0000 [#1] SMP KASAN NOPTI
+CPU: 0 UID: 0 PID: 5354 Comm: syz.0.0 Not tainted 6.17.0-rc1-syzkaller-00211-g90d970cade8e #0 PREEMPT(full)
+RIP: 0010:f2fs_truncate_hole+0x69e/0x6c0 fs/f2fs/file.c:1243
+Call Trace:
+ <TASK>
+ f2fs_punch_hole+0x2db/0x330 fs/f2fs/file.c:1306
+ f2fs_fallocate+0x546/0x990 fs/f2fs/file.c:2018
+ vfs_fallocate+0x666/0x7e0 fs/open.c:342
+ ksys_fallocate fs/open.c:366 [inline]
+ __do_sys_fallocate fs/open.c:371 [inline]
+ __se_sys_fallocate fs/open.c:369 [inline]
+ __x64_sys_fallocate+0xc0/0x110 fs/open.c:369
+ do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+ do_syscall_64+0xfa/0x3b0 arch/x86/entry/syscall_64.c:94
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f1e65f8ebe9
 
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/f2fs/file.c#n1991
+w/ a fuzzed image, f2fs may encounter panic due to it detects inconsistent
+truncation range in direct node in f2fs_truncate_hole().
 
->  vfs_fallocate+0x672/0x7f0 fs/open.c:342
->  ioctl_preallocate fs/ioctl.c:290 [inline]
->  file_ioctl+0x61d/0x780 fs/ioctl.c:-1
->  do_vfs_ioctl+0xb36/0x1440 fs/ioctl.c:577
->  __do_sys_ioctl fs/ioctl.c:596 [inline]
->  __se_sys_ioctl+0x82/0x170 fs/ioctl.c:584
->  do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
->  do_syscall_64+0xfa/0x3b0 arch/x86/entry/syscall_64.c:94
->  entry_SYSCALL_64_after_hwframe+0x77/0x7f
+The root cause is: a non-inode dnode may has the same footer.ino and
+footer.nid, so the dnode will be parsed as an inode, then ADDRS_PER_PAGE()
+may return wrong blkaddr count which may be 923 typically, by chance,
+dn.ofs_in_node is equal to 923, then count can be calculated to 0 in below
+statement, later it will trigger panic w/ f2fs_bug_on(, count == 0 || ...).
+
+	count = min(end_offset - dn.ofs_in_node, pg_end - pg_start);
+
+This patch introduces a new node_type NODE_TYPE_NON_INODE, then allowing
+passing the new_type to sanity_check_node_footer in f2fs_get_node_folio()
+to detect corruption that a non-inode dnode has the same footer.ino and
+footer.nid.
+
+Scripts to reproduce:
+mkfs.f2fs -f /dev/vdb
+mount /dev/vdb /mnt/f2fs
+touch /mnt/f2fs/foo
+touch /mnt/f2fs/bar
+dd if=/dev/zero of=/mnt/f2fs/foo bs=1M count=8
+umount /mnt/f2fs
+inject.f2fs --node --mb i_nid --nid 4 --idx 0 --val 5 /dev/vdb
+mount /dev/vdb /mnt/f2fs
+xfs_io /mnt/f2fs/foo -c "fpunch 6984k 4k"
+
+Cc: stable@kernel.org
+Reported-by: syzbot+b9c7ffd609c3f09416ab@syzkaller.appspotmail.com
+Closes: https://lore.kernel.org/linux-f2fs-devel/68a68e27.050a0220.1a3988.0002.GAE@google.com
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/f2fs.h     |  4 +++-
+ fs/f2fs/gc.c       |  4 ++--
+ fs/f2fs/node.c     | 58 +++++++++++++++++++++++++++++++---------------
+ fs/f2fs/node.h     |  1 +
+ fs/f2fs/recovery.c |  2 +-
+ 5 files changed, 46 insertions(+), 23 deletions(-)
+
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 1e3d0f6d1d4c..bba9ff617ea6 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3817,6 +3817,7 @@ void f2fs_hash_filename(const struct inode *dir, struct f2fs_filename *fname);
+  * node.c
+  */
+ struct node_info;
++enum node_type;
+ 
+ int f2fs_check_nid_range(struct f2fs_sb_info *sbi, nid_t nid);
+ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type);
+@@ -3839,7 +3840,8 @@ int f2fs_remove_inode_page(struct inode *inode);
+ struct folio *f2fs_new_inode_folio(struct inode *inode);
+ struct folio *f2fs_new_node_folio(struct dnode_of_data *dn, unsigned int ofs);
+ void f2fs_ra_node_page(struct f2fs_sb_info *sbi, nid_t nid);
+-struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid);
++struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
++						enum node_type node_type);
+ struct folio *f2fs_get_inode_folio(struct f2fs_sb_info *sbi, pgoff_t ino);
+ struct folio *f2fs_get_xnode_folio(struct f2fs_sb_info *sbi, pgoff_t xnid);
+ int f2fs_move_node_folio(struct folio *node_folio, int gc_type);
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index b57b8fd64747..ed3acbfc83ca 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -1071,7 +1071,7 @@ static int gc_node_segment(struct f2fs_sb_info *sbi,
+ 		}
+ 
+ 		/* phase == 2 */
+-		node_folio = f2fs_get_node_folio(sbi, nid);
++		node_folio = f2fs_get_node_folio(sbi, nid, NODE_TYPE_REGULAR);
+ 		if (IS_ERR(node_folio))
+ 			continue;
+ 
+@@ -1145,7 +1145,7 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 	nid = le32_to_cpu(sum->nid);
+ 	ofs_in_node = le16_to_cpu(sum->ofs_in_node);
+ 
+-	node_folio = f2fs_get_node_folio(sbi, nid);
++	node_folio = f2fs_get_node_folio(sbi, nid, NODE_TYPE_REGULAR);
+ 	if (IS_ERR(node_folio))
+ 		return false;
+ 
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 109bc8898bc6..68d210f7798a 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -876,7 +876,8 @@ int f2fs_get_dnode_of_data(struct dnode_of_data *dn, pgoff_t index, int mode)
+ 		}
+ 
+ 		if (!done) {
+-			nfolio[i] = f2fs_get_node_folio(sbi, nids[i]);
++			nfolio[i] = f2fs_get_node_folio(sbi, nids[i],
++						NODE_TYPE_NON_INODE);
+ 			if (IS_ERR(nfolio[i])) {
+ 				err = PTR_ERR(nfolio[i]);
+ 				f2fs_folio_put(nfolio[0], false);
+@@ -994,7 +995,7 @@ static int truncate_dnode(struct dnode_of_data *dn)
+ 		return 1;
+ 
+ 	/* get direct node */
+-	folio = f2fs_get_node_folio(sbi, dn->nid);
++	folio = f2fs_get_node_folio(sbi, dn->nid, NODE_TYPE_NON_INODE);
+ 	if (PTR_ERR(folio) == -ENOENT)
+ 		return 1;
+ 	else if (IS_ERR(folio))
+@@ -1038,7 +1039,8 @@ static int truncate_nodes(struct dnode_of_data *dn, unsigned int nofs,
+ 
+ 	trace_f2fs_truncate_nodes_enter(dn->inode, dn->nid, dn->data_blkaddr);
+ 
+-	folio = f2fs_get_node_folio(F2FS_I_SB(dn->inode), dn->nid);
++	folio = f2fs_get_node_folio(F2FS_I_SB(dn->inode), dn->nid,
++						NODE_TYPE_NON_INODE);
+ 	if (IS_ERR(folio)) {
+ 		trace_f2fs_truncate_nodes_exit(dn->inode, PTR_ERR(folio));
+ 		return PTR_ERR(folio);
+@@ -1116,7 +1118,8 @@ static int truncate_partial_nodes(struct dnode_of_data *dn,
+ 	/* get indirect nodes in the path */
+ 	for (i = 0; i < idx + 1; i++) {
+ 		/* reference count'll be increased */
+-		folios[i] = f2fs_get_node_folio(F2FS_I_SB(dn->inode), nid[i]);
++		folios[i] = f2fs_get_node_folio(F2FS_I_SB(dn->inode), nid[i],
++							NODE_TYPE_NON_INODE);
+ 		if (IS_ERR(folios[i])) {
+ 			err = PTR_ERR(folios[i]);
+ 			idx = i - 1;
+@@ -1501,21 +1504,37 @@ static int sanity_check_node_footer(struct f2fs_sb_info *sbi,
+ 					struct folio *folio, pgoff_t nid,
+ 					enum node_type ntype)
+ {
+-	if (unlikely(nid != nid_of_node(folio) ||
+-		(ntype == NODE_TYPE_INODE && !IS_INODE(folio)) ||
+-		(ntype == NODE_TYPE_XATTR &&
+-		!f2fs_has_xattr_block(ofs_of_node(folio))) ||
+-		time_to_inject(sbi, FAULT_INCONSISTENT_FOOTER))) {
+-		f2fs_warn(sbi, "inconsistent node block, node_type:%d, nid:%lu, "
+-			  "node_footer[nid:%u,ino:%u,ofs:%u,cpver:%llu,blkaddr:%u]",
+-			  ntype, nid, nid_of_node(folio), ino_of_node(folio),
+-			  ofs_of_node(folio), cpver_of_node(folio),
+-			  next_blkaddr_of_node(folio));
+-		set_sbi_flag(sbi, SBI_NEED_FSCK);
+-		f2fs_handle_error(sbi, ERROR_INCONSISTENT_FOOTER);
+-		return -EFSCORRUPTED;
++	if (unlikely(nid != nid_of_node(folio)))
++		goto out_err;
++
++	switch (ntype) {
++	case NODE_TYPE_INODE:
++		if (!IS_INODE(folio))
++			goto out_err;
++		break;
++	case NODE_TYPE_XATTR:
++		if (!f2fs_has_xattr_block(ofs_of_node(folio)))
++			goto out_err;
++		break;
++	case NODE_TYPE_NON_INODE:
++		if (IS_INODE(folio))
++			goto out_err;
++		break;
++	default:
++		break;
+ 	}
++	if (time_to_inject(sbi, FAULT_INCONSISTENT_FOOTER))
++		goto out_err;
+ 	return 0;
++out_err:
++	f2fs_warn(sbi, "inconsistent node block, node_type:%d, nid:%lu, "
++		  "node_footer[nid:%u,ino:%u,ofs:%u,cpver:%llu,blkaddr:%u]",
++		  ntype, nid, nid_of_node(folio), ino_of_node(folio),
++		  ofs_of_node(folio), cpver_of_node(folio),
++		  next_blkaddr_of_node(folio));
++	set_sbi_flag(sbi, SBI_NEED_FSCK);
++	f2fs_handle_error(sbi, ERROR_INCONSISTENT_FOOTER);
++	return -EFSCORRUPTED;
+ }
+ 
+ static struct folio *__get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
+@@ -1572,9 +1591,10 @@ static struct folio *__get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
+ 	return ERR_PTR(err);
+ }
+ 
+-struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid)
++struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
++						enum node_type node_type)
+ {
+-	return __get_node_folio(sbi, nid, NULL, 0, NODE_TYPE_REGULAR);
++	return __get_node_folio(sbi, nid, NULL, 0, node_type);
+ }
+ 
+ struct folio *f2fs_get_inode_folio(struct f2fs_sb_info *sbi, pgoff_t ino)
+diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
+index 030390543b54..9cb8dcf8d417 100644
+--- a/fs/f2fs/node.h
++++ b/fs/f2fs/node.h
+@@ -57,6 +57,7 @@ enum node_type {
+ 	NODE_TYPE_REGULAR,
+ 	NODE_TYPE_INODE,
+ 	NODE_TYPE_XATTR,
++	NODE_TYPE_NON_INODE,
+ };
+ 
+ /*
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index 842b2daffa85..870b68c2c032 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -548,7 +548,7 @@ static int check_index_in_prev_nodes(struct f2fs_sb_info *sbi,
+ 	}
+ 
+ 	/* Get the node page */
+-	node_folio = f2fs_get_node_folio(sbi, nid);
++	node_folio = f2fs_get_node_folio(sbi, nid, NODE_TYPE_REGULAR);
+ 	if (IS_ERR(node_folio))
+ 		return PTR_ERR(node_folio);
+ 
+-- 
+2.40.1
+
 
 
 _______________________________________________
