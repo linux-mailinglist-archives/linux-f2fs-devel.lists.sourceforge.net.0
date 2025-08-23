@@ -2,72 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92F9DB327AB
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 23 Aug 2025 10:37:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D3200B3279E
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 23 Aug 2025 10:28:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=deUvebcCVo6kJpu/29gRiTsk8g3GzTzKHSrn7Ehg6/Q=; b=JbT93m02BXCY/Ymti3ApSSF8tQ
-	NdiUetE9XU9TKB/0dm6JYC1EM2Nye7Cn0h6tlSPuGzYIWBgNCFisLpHGgK7vfcys2RWJArsn2HFG/
-	yl1IwIsFaXR1jqsV9OEa3WTTLcEihH0GYy2LGRzj4Be9yBEkBaBN95cc8N1IGLcBuszM=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=AcPDmARFsYAV1F71E3MawnhvHBdfcmGi4JyshfZdkqs=; b=TarGvl/j3GCcwniWvQH7zNSDOf
+	g9o1sqD8p2ZyDb120F13u/mjII+jQ+SOgcTmKB+gLtTHDYdcwEpMaV/ukkguS2Vx5HXM55jbNHfkD
+	tOZYEi7lpbFtLeWxqRB53sBFMGoCpo23lAYUFk6US2xg/hGz+PrGBGOIEWuV6n+ScXKo=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1upjkL-0005nk-Cn;
-	Sat, 23 Aug 2025 08:37:09 +0000
+	id 1upjcC-0000me-Si;
+	Sat, 23 Aug 2025 08:28:45 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1upjkJ-0005nV-Qq
+ (envelope-from <chao@kernel.org>) id 1upjc7-0000mR-Ll
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 23 Aug 2025 08:37:07 +0000
+ Sat, 23 Aug 2025 08:28:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cRLE+83IYW2xhH/6y4p6XhRmKZRGNvvBkGPL/G7ZfSI=; b=hjeMwbe70sKzir0jQLauL+C5qC
- QHX71wFSURtsvflrfbNJT7TBluDWGlrAQ/bWT/Gy+pjW3J/yC8G9zcuC8qAA0PIsOHtHdw72tuh3N
- eheUdPmdhQJAE4ncswm3HUGLKyzZo6lHvTnIT4OIidotNh2igK1PMgrOA9cjB0HtEKrM=;
+ bh=GVjpO8vKnBUiZ/BPXcNveC4AiQrSSZSfdoyOm1U3UN8=; b=h/rzvgcjxptuq5sGJtIPJpv1Pb
+ RVI3prf+lHn14ps/1Huk20C89og4NwrqCy6gKgVQ49DFLGbT8D2UfpzGgerqrm3t1CqhilDhhUiYp
+ x7jtOtvdrYeV0Xzjb92Ev4Re6Nv1iSAXHmsdXUmFO8ivkvUTszq/uy8O42w8wMYJVjZc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=cRLE+83IYW2xhH/6y4p6XhRmKZRGNvvBkGPL/G7ZfSI=; b=K
- A9rDyR5qydfrC1yUsghs32Sk862E1cGXLc/bic8cqtfpsb1+6Mk6NZlz8/GuWEDlvCrr8Jl1LjFly
- pP11hWeaBorQE1P4OMY6o6eONRG68dELETmVfIE96qHEkOPO7d5LlWu+Gceoyl1FTATQPeTVPLRVo
- NbnsafUB6YGGUnz4=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=GVjpO8vKnBUiZ/BPXcNveC4AiQrSSZSfdoyOm1U3UN8=; b=Lq8D4NFoqNRVerCp2pTxkS3dcG
+ fjvtKVV212+C/2b5kV4Qv/W6nP5bEPOEsEKPtOLcNycLT1DV2xxKAS/SRPrWyUF7C7CMPwO+RdI01
+ u4JIevhHzZMa5pZPRYu2pkdAyMsVx/Q0/YWtK8jQQ7D72oK+DRbWqyAxk9Pvh8cQBD9o=;
+Received: from nyc.source.kernel.org ([147.75.193.91])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1upjkJ-0000FL-2I for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 23 Aug 2025 08:37:07 +0000
+ id 1upjc5-0007xH-OV for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 23 Aug 2025 08:28:38 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 68DE460243;
- Sat, 23 Aug 2025 08:36:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B9BAC4CEE7;
- Sat, 23 Aug 2025 08:36:54 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 24C02A58BC6;
+ Sat, 23 Aug 2025 08:28:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7170FC4CEE7;
+ Sat, 23 Aug 2025 08:28:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1755938216;
- bh=pEXIJRsKWMgfwe7mP0cGm5NGO0n6J1mDZ42J7yTw1Ws=;
- h=From:To:Cc:Subject:Date:From;
- b=npLmb3i0i0FmfVbQPF/fTAqDUSJLcEWU2RNp+rO3wBIQuZoNGehjPjlkqCXCS5NaV
- G+CXcAM0b98eriPXWSO+TZolMsJZLmt1W+1hDDAmGj8u5iPodoUI99voqLYspunXnl
- m6hBY0M1ajBVl5+3/a/FF6W5XFOku0xs8A7+kC8AD2P7u9lKn8K0LlL6HXNNrXUsA9
- yN7zsi6RhSz4NIS//tvj61uoJLXY8KKRg6pud3oZrKNfS9AHQ6j7f2tMVwA4bRclj0
- +ks0cW1U/3GbvtOf/DRV/DhL/XiO0lnqwqj+Y+ycCFhLWVXIUDkLzRjmKP9Am8h8WJ
- +SzY+tHMGyzOw==
-To: jaegeuk@kernel.org
-Date: Sat, 23 Aug 2025 13:45:34 +0800
-Message-Id: <20250823054534.41037-1-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
+ s=k20201202; t=1755937706;
+ bh=996SurDcbUXCCjxdISDE5LrvQQDDtS4PNGYhV53nlno=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=p65KVYfSdiR77Oa8isM0hLDHgZ2oOooVMJA4C38JjYdnqzg2fkW8z2Aq4MmHnK5hd
+ 4VSp7niCoGCT7CKVPlXdlzOExaAAQTnDjPw2/qfS4RMCkNW3jK+JxvnN54Oj+k2u2E
+ ek4qsklkA7979mE4Fh4sA9i6i0q6JDCbRscLTsUQGfLFEkUW/R5Nxkg8jTRT71BVjG
+ sMD2WLmo7HV6lYiEfKskib/mBCOsGRFgZxGIPcULw3IccQyPFhJ1hdK4xwnmDkTW6L
+ PrST72Y5Wxavtf1ATD0YK69fqwr9N4YewM90BBou1XfX2zKoHZNOGww5aIybM5BKgA
+ iEtU80v1vZipA==
+Message-ID: <0521479a-4173-4bf8-b0a8-47de61982d44@kernel.org>
+Date: Sat, 23 Aug 2025 16:28:23 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Sheng Yong <shengyong2021@gmail.com>, jaegeuk@kernel.org
+References: <20250820124238.3785621-1-shengyong1@xiaomi.com>
+ <20250820124238.3785621-11-shengyong1@xiaomi.com>
+Content-Language: en-US
+In-Reply-To: <20250820124238.3785621-11-shengyong1@xiaomi.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -75,10 +79,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: As syzbot reported below: [ cut here ] kernel BUG at
- fs/f2fs/file.c:1243!
- Oops: invalid opcode: 0000 [#1] SMP KASAN NOPTI CPU: 0 UID: 0 PID: 5354 Comm:
- syz.0.0 Not tainted 6.17.0-rc1-syzkaller-00211-g90 [...] 
+ Content preview:  On 8/20/2025 8:42 PM, Sheng Yong wrote: > From: Sheng Yong
+ <shengyong1@xiaomi.com> > > The following members are added to inject more
+ fields in cp: > > * next_blkaddr: inject fsync dnodes > > An error [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,9 +93,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1upjkJ-0000FL-2I
-Subject: [f2fs-dev] [PATCH] f2fs: fix to do sanity check on node footer for
- non inode dnode
+X-Headers-End: 1upjc5-0007xH-OV
+Subject: Re: [f2fs-dev] [PATCH v3 10/13] inject.f2fs: add members in
+ inject_cp
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,250 +109,294 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: syzbot+b9c7ffd609c3f09416ab@syzkaller.appspotmail.com, stable@kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: shengyong1@xiaomi.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-As syzbot reported below:
+On 8/20/2025 8:42 PM, Sheng Yong wrote:
+> From: Sheng Yong <shengyong1@xiaomi.com>
+> 
+> The following members are added to inject more fields in cp:
+> 
+> * next_blkaddr: inject fsync dnodes
+> 
+>    An error is returned if no fsync dnode is found.
+>    Furthermore, the injection is not supported on a zoned device. This
+>    is because fsync dnodes must remains at the end of current warm node
+>    segment, any dnode change causes all previous dnodes in the chain to
+>    be updated out-of-place, and there may not have enough space left in
+>    the curseg. To simplify the injection, it returns an error on the
+>    zoned device.
+>    An example of dnode chain shows:
+>      [inject_cp: 608] [   0] blkaddr:0x1204
+>      [inject_cp: 608] [   1] blkaddr:0x1205
+>      [inject_cp: 608] [   2] blkaddr:0x1206
+>      [inject_cp: 608] [   3] blkaddr:0x1207
+>      [inject_cp: 608] [   4] blkaddr:0x1208
+>      [inject_cp: 608] [   5] blkaddr:0x1209
+>      [inject_cp: 608] [   6] blkaddr:0x120a
+>      [inject_cp: 608] [   7] blkaddr:0x120b
+>      [inject_cp: 608] [   8] blkaddr:0x120c
+>      [inject_cp: 608] [   9] blkaddr:0x120d
+>    where `0' indicates next free blkaddr of warm node curseg, thus
+>    start blkaddr + next_blkoff of warm node curseg, which cannot be
+>    injected. `1~9` indicate next_blkaddr in node_footer of dnodes in
+>    the chain, which can be injected.
+> 
+> * alloc_type: inject curseg's alloc type
+> * crc: inject cp's checksum
+> * elapsed_time: inject cp's mount elapsed time
+> 
+> Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
+> ---
+> v3: * update commit message to show dnode chain and the injectable range
+>      * free(node) before return
+> ---
+>   fsck/fsck.h       |  4 ++-
+>   fsck/inject.c     | 86 ++++++++++++++++++++++++++++++++++++++++++++++-
+>   fsck/mount.c      | 18 +++++-----
+>   man/inject.f2fs.8 | 11 +++++-
+>   4 files changed, 108 insertions(+), 11 deletions(-)
+> 
+> diff --git a/fsck/fsck.h b/fsck/fsck.h
+> index 40cb6d9a6417..05daa2de9531 100644
+> --- a/fsck/fsck.h
+> +++ b/fsck/fsck.h
+> @@ -223,6 +223,8 @@ extern int f2fs_ra_meta_pages(struct f2fs_sb_info *, block_t, int, int);
+>   extern int f2fs_do_mount(struct f2fs_sb_info *);
+>   extern void f2fs_do_umount(struct f2fs_sb_info *);
+>   extern int f2fs_sparse_initialize_meta(struct f2fs_sb_info *);
+> +extern int f2fs_find_fsync_inode(struct f2fs_sb_info *, struct list_head *);
+> +extern void f2fs_destroy_fsync_dnodes(struct list_head *);
+>   
+>   extern void flush_journal_entries(struct f2fs_sb_info *);
+>   extern void update_curseg_info(struct f2fs_sb_info *, int);
+> @@ -239,7 +241,7 @@ extern void duplicate_checkpoint(struct f2fs_sb_info *);
+>   extern void write_checkpoint(struct f2fs_sb_info *);
+>   extern void write_checkpoints(struct f2fs_sb_info *);
+>   extern void write_raw_cp_blocks(struct f2fs_sb_info *sbi,
+> -			struct f2fs_checkpoint *cp, int which);
+> +			struct f2fs_checkpoint *cp, int which, bool update_crc);
+>   extern void update_superblock(struct f2fs_super_block *, int);
+>   extern void update_data_blkaddr(struct f2fs_sb_info *, nid_t, u16, block_t,
+>   			struct f2fs_node *);
+> diff --git a/fsck/inject.c b/fsck/inject.c
+> index 5ca105b60f8e..272a4a64dc05 100644
+> --- a/fsck/inject.c
+> +++ b/fsck/inject.c
+> @@ -151,6 +151,10 @@ static void inject_cp_usage(void)
+>   	MSG(0, "  cur_node_blkoff: inject cur_node_blkoff array selected by --idx <index>\n");
+>   	MSG(0, "  cur_data_segno: inject cur_data_segno array selected by --idx <index>\n");
+>   	MSG(0, "  cur_data_blkoff: inject cur_data_blkoff array selected by --idx <index>\n");
+> +	MSG(0, "  alloc_type: inject alloc_type array selected by --idx <index>\n");
+> +	MSG(0, "  next_blkaddr: inject next_blkaddr of fsync dnodes selected by --idx <index>\n");
+> +	MSG(0, "  crc: inject crc checksum\n");
+> +	MSG(0, "  elapsed_time: inject elapsed_time\n");
+>   }
+>   
+>   static void inject_nat_usage(void)
+> @@ -456,6 +460,7 @@ out:
+>   static int inject_cp(struct f2fs_sb_info *sbi, struct inject_option *opt)
+>   {
+>   	struct f2fs_checkpoint *cp, *cur_cp = F2FS_CKPT(sbi);
+> +	bool update_crc = true;
+>   	char *buf = NULL;
+>   	int ret = 0;
+>   
+> @@ -534,6 +539,85 @@ static int inject_cp(struct f2fs_sb_info *sbi, struct inject_option *opt)
+>   		    opt->idx, opt->cp, get_cp(cur_data_blkoff[opt->idx]),
+>   		    (u16)opt->val);
+>   		set_cp(cur_data_blkoff[opt->idx], (u16)opt->val);
+> +	} else if (!strcmp(opt->mb, "alloc_type")) {
+> +		if (opt->idx >= MAX_ACTIVE_LOGS) {
+> +			ERR_MSG("invalid index %u of cp->alloc_type[]\n",
+> +				opt->idx);
+> +			ret = -EINVAL;
+> +			goto out;
+> +		}
+> +		MSG(0, "Info: inject alloc_type[%d] of cp %d: 0x%x -> 0x%x\n",
+> +		    opt->idx, opt->cp, cp->alloc_type[opt->idx],
+> +		    (unsigned char)opt->val);
+> +		cp->alloc_type[opt->idx] = (unsigned char)opt->val;
+> +	} else if (!strcmp(opt->mb, "next_blkaddr")) {
+> +		struct fsync_inode_entry *entry;
+> +		struct list_head inode_list = LIST_HEAD_INIT(inode_list);
+> +		struct f2fs_node *node;
+> +		block_t blkaddr;
+> +		int i = 0;
+> +
+> +		if (c.zoned_model == F2FS_ZONED_HM) {
+> +			ERR_MSG("inject fsync dnodes not supported in "
+> +				"zoned device\n");
+> +			ret = -EOPNOTSUPP;
+> +			goto out;
+> +		}
+> +
+> +		if (!need_fsync_data_record(sbi)) {
+> +			ERR_MSG("no need to recover fsync dnodes\n");
+> +			ret = -EINVAL;
+> +			goto out;
+> +		}
+> +
+> +		ret = f2fs_find_fsync_inode(sbi, &inode_list);
+> +		if (ret) {
+> +			ERR_MSG("failed to find fsync inodes: %d\n", ret);
+> +			goto out;
+> +		}
+> +
+> +		list_for_each_entry(entry, &inode_list, list) {
+> +			if (i == opt->idx)
+> +				blkaddr = entry->blkaddr;
+> +			DBG(0, "[%4d] blkaddr:0x%x\n", i++, entry->blkaddr);
+> +		}
+> +
+> +		f2fs_destroy_fsync_dnodes(&inode_list);
+> +
+> +		if (opt->idx == 0 || opt->idx >= i) {
+> +			ERR_MSG("invalid index %u of fsync dnodes range [1, %u]\n",
+> +				opt->idx, i);
+> +			ret = -EINVAL;
+> +			goto out;
+> +		}
+> +
+> +		MSG(0, "Info: inject next_blkaddr[%d] of cp %d: 0x%x -> 0x%x\n",
+> +		    opt->idx, opt->cp, blkaddr, (u32)opt->val);
+> +
+> +		node = malloc(F2FS_BLKSIZE);
+> +		ASSERT(node);
+> +		ret = dev_read_block(node, blkaddr);
+> +		ASSERT(ret >= 0);
+> +		F2FS_NODE_FOOTER(node)->next_blkaddr = cpu_to_le32((u32)opt->val);
+> +		if (IS_INODE(node))
+> +			ret = update_inode(sbi, node, &blkaddr);
+> +		else
+> +			ret = update_block(sbi, node, &blkaddr, NULL);
+> +		free(node);
+> +		ASSERT(ret >= 0);
+> +		goto out;
+> +	} else if (!strcmp(opt->mb, "crc")) {
+> +		__le32 *crc = (__le32 *)((unsigned char *)cp +
+> +						get_cp(checksum_offset));
+> +
+> +		MSG(0, "Info: inject crc of cp %d: 0x%x -> 0x%x\n",
+> +		    opt->cp, le32_to_cpu(*crc), (u32)opt->val);
+> +		*crc = cpu_to_le32((u32)opt->val);
+> +		update_crc = false;
+> +	} else if (!strcmp(opt->mb, "elapsed_time")) {
+> +		MSG(0, "Info: inject elapsed_time of cp %d: %llu -> %"PRIu64"\n",
+> +		    opt->cp, get_cp(elapsed_time), (u64)opt->val);
+> +		set_cp(elapsed_time, (u64)opt->val);
+>   	} else {
+>   		ERR_MSG("unknown or unsupported member \"%s\"\n", opt->mb);
+>   		ret = -EINVAL;
+> @@ -541,7 +625,7 @@ static int inject_cp(struct f2fs_sb_info *sbi, struct inject_option *opt)
+>   	}
+>   
+>   	print_ckpt_info(sbi);
+> -	write_raw_cp_blocks(sbi, cp, opt->cp);
+> +	write_raw_cp_blocks(sbi, cp, opt->cp, update_crc);
+>   
+>   out:
+>   	free(buf);
+> diff --git a/fsck/mount.c b/fsck/mount.c
+> index f9f780d4aff6..f03fa2d6861a 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -3510,17 +3510,19 @@ void write_checkpoints(struct f2fs_sb_info *sbi)
+>   	write_checkpoint(sbi);
+>   }
+>   
+> -void write_raw_cp_blocks(struct f2fs_sb_info *sbi,
+> -			 struct f2fs_checkpoint *cp, int which)
+> +void write_raw_cp_blocks(struct f2fs_sb_info *sbi, struct f2fs_checkpoint *cp,
+> +			 int which, bool update_crc)
+>   {
+>   	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
+>   	uint32_t crc;
+>   	block_t cp_blkaddr;
+>   	int ret;
+>   
+> -	crc = f2fs_checkpoint_chksum(cp);
+> -	*((__le32 *)((unsigned char *)cp + get_cp(checksum_offset))) =
+> +	if (update_crc) {
+> +		crc = f2fs_checkpoint_chksum(cp);
+> +		*((__le32 *)((unsigned char *)cp + get_cp(checksum_offset))) =
+>   							cpu_to_le32(crc);
+> +	}
+>   
+>   	cp_blkaddr = get_sb(cp_blkaddr);
+>   	if (which == 2)
+> @@ -3754,7 +3756,7 @@ static void del_fsync_inode(struct fsync_inode_entry *entry)
+>   	free(entry);
+>   }
+>   
+> -static void destroy_fsync_dnodes(struct list_head *head)
+> +void f2fs_destroy_fsync_dnodes(struct list_head *head)
+>   {
+>   	struct fsync_inode_entry *entry, *tmp;
+>   
+> @@ -3860,7 +3862,7 @@ static int sanity_check_node_chain(struct f2fs_sb_info *sbi,
+>   	return 0;
+>   }
+>   
+> -static int find_fsync_inode(struct f2fs_sb_info *sbi, struct list_head *head)
+> +int f2fs_find_fsync_inode(struct f2fs_sb_info *sbi, struct list_head *head)
+>   {
+>   	struct curseg_info *curseg;
+>   	struct f2fs_node *node_blk, *node_blk_fast;
+> @@ -4056,7 +4058,7 @@ static int record_fsync_data(struct f2fs_sb_info *sbi)
+>   	if (!need_fsync_data_record(sbi))
+>   		return 0;
+>   
+> -	ret = find_fsync_inode(sbi, &inode_list);
+> +	ret = f2fs_find_fsync_inode(sbi, &inode_list);
+>   	if (ret)
+>   		goto out;
+>   
+> @@ -4071,7 +4073,7 @@ static int record_fsync_data(struct f2fs_sb_info *sbi)
+>   
+>   	ret = traverse_dnodes(sbi, &inode_list);
+>   out:
+> -	destroy_fsync_dnodes(&inode_list);
+> +	f2fs_destroy_fsync_dnodes(&inode_list);
+>   	return ret;
+>   }
+>   
+> diff --git a/man/inject.f2fs.8 b/man/inject.f2fs.8
+> index 65ac658a129b..0e7cd5065a15 100644
+> --- a/man/inject.f2fs.8
+> +++ b/man/inject.f2fs.8
+> @@ -45,7 +45,7 @@ The available \fImb\fP of \fIsb\fP are:
+>   .RS 1.2i
+>   .TP
+>   .BI magic
+> -magic numbe.
+> +magic number.
+>   .TP
+>   .BI s_stop_reason
+>   s_stop_reason array.
+> @@ -79,6 +79,15 @@ cur_data_segno array.
+>   .TP
+>   .BI cur_data_blkoff
+>   cur_data_blkoff array.
 
-------------[ cut here ]------------
-kernel BUG at fs/f2fs/file.c:1243!
-Oops: invalid opcode: 0000 [#1] SMP KASAN NOPTI
-CPU: 0 UID: 0 PID: 5354 Comm: syz.0.0 Not tainted 6.17.0-rc1-syzkaller-00211-g90d970cade8e #0 PREEMPT(full)
-RIP: 0010:f2fs_truncate_hole+0x69e/0x6c0 fs/f2fs/file.c:1243
-Call Trace:
- <TASK>
- f2fs_punch_hole+0x2db/0x330 fs/f2fs/file.c:1306
- f2fs_fallocate+0x546/0x990 fs/f2fs/file.c:2018
- vfs_fallocate+0x666/0x7e0 fs/open.c:342
- ksys_fallocate fs/open.c:366 [inline]
- __do_sys_fallocate fs/open.c:371 [inline]
- __se_sys_fallocate fs/open.c:369 [inline]
- __x64_sys_fallocate+0xc0/0x110 fs/open.c:369
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0xfa/0x3b0 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7f1e65f8ebe9
+alloc_type entry.
 
-w/ a fuzzed image, f2fs may encounter panic due to it detects inconsistent
-truncation range in direct node in f2fs_truncate_hole().
+Thanks,
 
-The root cause is: a non-inode dnode may has the same footer.ino and
-footer.nid, so the dnode will be parsed as an inode, then ADDRS_PER_PAGE()
-may return wrong blkaddr count which may be 923 typically, by chance,
-dn.ofs_in_node is equal to 923, then count can be calculated to 0 in below
-statement, later it will trigger panic w/ f2fs_bug_on(, count == 0 || ...).
-
-	count = min(end_offset - dn.ofs_in_node, pg_end - pg_start);
-
-This patch introduces a new node_type NODE_TYPE_NON_INODE, then allowing
-passing the new_type to sanity_check_node_footer in f2fs_get_node_folio()
-to detect corruption that a non-inode dnode has the same footer.ino and
-footer.nid.
-
-Scripts to reproduce:
-mkfs.f2fs -f /dev/vdb
-mount /dev/vdb /mnt/f2fs
-touch /mnt/f2fs/foo
-touch /mnt/f2fs/bar
-dd if=/dev/zero of=/mnt/f2fs/foo bs=1M count=8
-umount /mnt/f2fs
-inject.f2fs --node --mb i_nid --nid 4 --idx 0 --val 5 /dev/vdb
-mount /dev/vdb /mnt/f2fs
-xfs_io /mnt/f2fs/foo -c "fpunch 6984k 4k"
-
-Cc: stable@kernel.org
-Reported-by: syzbot+b9c7ffd609c3f09416ab@syzkaller.appspotmail.com
-Closes: https://lore.kernel.org/linux-f2fs-devel/68a68e27.050a0220.1a3988.0002.GAE@google.com
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/f2fs.h     |  4 +++-
- fs/f2fs/gc.c       |  4 ++--
- fs/f2fs/node.c     | 58 +++++++++++++++++++++++++++++++---------------
- fs/f2fs/node.h     |  1 +
- fs/f2fs/recovery.c |  2 +-
- 5 files changed, 46 insertions(+), 23 deletions(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 1e3d0f6d1d4c..bba9ff617ea6 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3817,6 +3817,7 @@ void f2fs_hash_filename(const struct inode *dir, struct f2fs_filename *fname);
-  * node.c
-  */
- struct node_info;
-+enum node_type;
- 
- int f2fs_check_nid_range(struct f2fs_sb_info *sbi, nid_t nid);
- bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type);
-@@ -3839,7 +3840,8 @@ int f2fs_remove_inode_page(struct inode *inode);
- struct folio *f2fs_new_inode_folio(struct inode *inode);
- struct folio *f2fs_new_node_folio(struct dnode_of_data *dn, unsigned int ofs);
- void f2fs_ra_node_page(struct f2fs_sb_info *sbi, nid_t nid);
--struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid);
-+struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
-+						enum node_type node_type);
- struct folio *f2fs_get_inode_folio(struct f2fs_sb_info *sbi, pgoff_t ino);
- struct folio *f2fs_get_xnode_folio(struct f2fs_sb_info *sbi, pgoff_t xnid);
- int f2fs_move_node_folio(struct folio *node_folio, int gc_type);
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index b57b8fd64747..ed3acbfc83ca 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1071,7 +1071,7 @@ static int gc_node_segment(struct f2fs_sb_info *sbi,
- 		}
- 
- 		/* phase == 2 */
--		node_folio = f2fs_get_node_folio(sbi, nid);
-+		node_folio = f2fs_get_node_folio(sbi, nid, NODE_TYPE_REGULAR);
- 		if (IS_ERR(node_folio))
- 			continue;
- 
-@@ -1145,7 +1145,7 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
- 	nid = le32_to_cpu(sum->nid);
- 	ofs_in_node = le16_to_cpu(sum->ofs_in_node);
- 
--	node_folio = f2fs_get_node_folio(sbi, nid);
-+	node_folio = f2fs_get_node_folio(sbi, nid, NODE_TYPE_REGULAR);
- 	if (IS_ERR(node_folio))
- 		return false;
- 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 109bc8898bc6..68d210f7798a 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -876,7 +876,8 @@ int f2fs_get_dnode_of_data(struct dnode_of_data *dn, pgoff_t index, int mode)
- 		}
- 
- 		if (!done) {
--			nfolio[i] = f2fs_get_node_folio(sbi, nids[i]);
-+			nfolio[i] = f2fs_get_node_folio(sbi, nids[i],
-+						NODE_TYPE_NON_INODE);
- 			if (IS_ERR(nfolio[i])) {
- 				err = PTR_ERR(nfolio[i]);
- 				f2fs_folio_put(nfolio[0], false);
-@@ -994,7 +995,7 @@ static int truncate_dnode(struct dnode_of_data *dn)
- 		return 1;
- 
- 	/* get direct node */
--	folio = f2fs_get_node_folio(sbi, dn->nid);
-+	folio = f2fs_get_node_folio(sbi, dn->nid, NODE_TYPE_NON_INODE);
- 	if (PTR_ERR(folio) == -ENOENT)
- 		return 1;
- 	else if (IS_ERR(folio))
-@@ -1038,7 +1039,8 @@ static int truncate_nodes(struct dnode_of_data *dn, unsigned int nofs,
- 
- 	trace_f2fs_truncate_nodes_enter(dn->inode, dn->nid, dn->data_blkaddr);
- 
--	folio = f2fs_get_node_folio(F2FS_I_SB(dn->inode), dn->nid);
-+	folio = f2fs_get_node_folio(F2FS_I_SB(dn->inode), dn->nid,
-+						NODE_TYPE_NON_INODE);
- 	if (IS_ERR(folio)) {
- 		trace_f2fs_truncate_nodes_exit(dn->inode, PTR_ERR(folio));
- 		return PTR_ERR(folio);
-@@ -1116,7 +1118,8 @@ static int truncate_partial_nodes(struct dnode_of_data *dn,
- 	/* get indirect nodes in the path */
- 	for (i = 0; i < idx + 1; i++) {
- 		/* reference count'll be increased */
--		folios[i] = f2fs_get_node_folio(F2FS_I_SB(dn->inode), nid[i]);
-+		folios[i] = f2fs_get_node_folio(F2FS_I_SB(dn->inode), nid[i],
-+							NODE_TYPE_NON_INODE);
- 		if (IS_ERR(folios[i])) {
- 			err = PTR_ERR(folios[i]);
- 			idx = i - 1;
-@@ -1501,21 +1504,37 @@ static int sanity_check_node_footer(struct f2fs_sb_info *sbi,
- 					struct folio *folio, pgoff_t nid,
- 					enum node_type ntype)
- {
--	if (unlikely(nid != nid_of_node(folio) ||
--		(ntype == NODE_TYPE_INODE && !IS_INODE(folio)) ||
--		(ntype == NODE_TYPE_XATTR &&
--		!f2fs_has_xattr_block(ofs_of_node(folio))) ||
--		time_to_inject(sbi, FAULT_INCONSISTENT_FOOTER))) {
--		f2fs_warn(sbi, "inconsistent node block, node_type:%d, nid:%lu, "
--			  "node_footer[nid:%u,ino:%u,ofs:%u,cpver:%llu,blkaddr:%u]",
--			  ntype, nid, nid_of_node(folio), ino_of_node(folio),
--			  ofs_of_node(folio), cpver_of_node(folio),
--			  next_blkaddr_of_node(folio));
--		set_sbi_flag(sbi, SBI_NEED_FSCK);
--		f2fs_handle_error(sbi, ERROR_INCONSISTENT_FOOTER);
--		return -EFSCORRUPTED;
-+	if (unlikely(nid != nid_of_node(folio)))
-+		goto out_err;
-+
-+	switch (ntype) {
-+	case NODE_TYPE_INODE:
-+		if (!IS_INODE(folio))
-+			goto out_err;
-+		break;
-+	case NODE_TYPE_XATTR:
-+		if (!f2fs_has_xattr_block(ofs_of_node(folio)))
-+			goto out_err;
-+		break;
-+	case NODE_TYPE_NON_INODE:
-+		if (IS_INODE(folio))
-+			goto out_err;
-+		break;
-+	default:
-+		break;
- 	}
-+	if (time_to_inject(sbi, FAULT_INCONSISTENT_FOOTER))
-+		goto out_err;
- 	return 0;
-+out_err:
-+	f2fs_warn(sbi, "inconsistent node block, node_type:%d, nid:%lu, "
-+		  "node_footer[nid:%u,ino:%u,ofs:%u,cpver:%llu,blkaddr:%u]",
-+		  ntype, nid, nid_of_node(folio), ino_of_node(folio),
-+		  ofs_of_node(folio), cpver_of_node(folio),
-+		  next_blkaddr_of_node(folio));
-+	set_sbi_flag(sbi, SBI_NEED_FSCK);
-+	f2fs_handle_error(sbi, ERROR_INCONSISTENT_FOOTER);
-+	return -EFSCORRUPTED;
- }
- 
- static struct folio *__get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
-@@ -1572,9 +1591,10 @@ static struct folio *__get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
- 	return ERR_PTR(err);
- }
- 
--struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid)
-+struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
-+						enum node_type node_type)
- {
--	return __get_node_folio(sbi, nid, NULL, 0, NODE_TYPE_REGULAR);
-+	return __get_node_folio(sbi, nid, NULL, 0, node_type);
- }
- 
- struct folio *f2fs_get_inode_folio(struct f2fs_sb_info *sbi, pgoff_t ino)
-diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
-index 030390543b54..9cb8dcf8d417 100644
---- a/fs/f2fs/node.h
-+++ b/fs/f2fs/node.h
-@@ -57,6 +57,7 @@ enum node_type {
- 	NODE_TYPE_REGULAR,
- 	NODE_TYPE_INODE,
- 	NODE_TYPE_XATTR,
-+	NODE_TYPE_NON_INODE,
- };
- 
- /*
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 842b2daffa85..870b68c2c032 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -548,7 +548,7 @@ static int check_index_in_prev_nodes(struct f2fs_sb_info *sbi,
- 	}
- 
- 	/* Get the node page */
--	node_folio = f2fs_get_node_folio(sbi, nid);
-+	node_folio = f2fs_get_node_folio(sbi, nid, NODE_TYPE_REGULAR);
- 	if (IS_ERR(node_folio))
- 		return PTR_ERR(node_folio);
- 
--- 
-2.40.1
+> +.TP
+> +.BI next_blkaddr
+> +fsync dnodes.
+> +.TP
+> +.BI crc
+> +crc checksum.
+> +.TP
+> +.BI elapsed_time
+> +elapsed mount time.
+>   .RE
+>   .TP
+>   .BI \-\-nat " 0 or 1 or 2"
 
 
 
