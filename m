@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56228B33418
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 25 Aug 2025 04:52:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88709B3346D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 25 Aug 2025 05:10:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=N6f7xIsLUyA1mFUug7de0/GgMPbqrrPlMcWM6+uSMMM=; b=HfGGxVuLqEcT1gho8IjOfET3v+
-	zgbmfd8vA+SmxsY9BjnhvVImoNp9FI2ubMcvQeUz4WiBAApCgvZgcqmTCFST8zIcmfQak3/preEkJ
-	Pn5k/+IgPScASvXz3bM1W6Y48Zr3kEHK08njPUHfcTRqU1mNWpIpTkcTFOIjp8FEsdhw=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=NUx0I6MegiIuysfSxio4XjZqWczstueL8eL/cCKCxE0=; b=V6o4w4pUcGv62CWuCL8FpEkqEG
+	1Ep2n64F0gHKcTNRibsQAJK3SNSuNnfFl87RfVBFxLHBPMt0EX1Rc8GXMYHoXQ67QLrG5k8yyoa1p
+	PFxOliHWoxrnKS3NdzzsZHn/5rcbYjrJ1Hf2GCxmmvY9cRdEVPlb+RztAvv+gksNSgzE=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uqNJQ-0000nq-Ow;
-	Mon, 25 Aug 2025 02:52:01 +0000
+	id 1uqNb9-0000h3-PM;
+	Mon, 25 Aug 2025 03:10:19 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uqNJN-0000nW-Dr
+ (envelope-from <chao@kernel.org>) id 1uqNb8-0000gx-JH
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 25 Aug 2025 02:51:58 +0000
+ Mon, 25 Aug 2025 03:10:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lpoX+EEF6Efwdg8fOA3B/9R1Rl07A/cQm0gu5UNCUmQ=; b=YMEH3b7jTiYmm6KRW00WpZNcEd
- s2jSjXz0kcYgQLW5CsL6pZ/fR1jHXh3EInGi9A13oIiVqF4ZLJg7CjZQ/K8Qj8MFXdv0DTSCdtGmI
- uBWopdechJCzFU/aM697FSdnJYto98nq0RfIXi5gpupR2Jhcb5c7h/WhoMwZ40SRrMq4=;
+ bh=Qq1D6tQfPaz2PWG0IlLBLnyVgySAN7LVJazWC+BkdZw=; b=aZOei5Dgqrut6khrhyYK3SPvkr
+ 6ZGXk791DgsfMnF5NsshcYXatfBcirYvc4swDcJLh7w2sYASa/Q9LVEumo5XGTuTTjy13uSTEy4de
+ jhIRx7oZaMYQ3eyjTbMtLF+Xb8odEiqNTf0zJXXsbiRb4Ula+dyxh3ArDF2y9eEz1P/A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,62 +40,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lpoX+EEF6Efwdg8fOA3B/9R1Rl07A/cQm0gu5UNCUmQ=; b=etnCU1SWYLdkUPVeYflu6VhZAJ
- tdWKGEpFl1tYAhqZ7qZGKJ8pP32qS7DOEO0NJT8+O2NPmLC/cKjTU93hIxAEDDH735kI6StfZBOWi
- 3LwtDtqa8nHjqde5yQCZMtXz6hg2W7X76bhkmPW/a17XR9MznxFiQlPMyjL2qjSO1bWw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=Qq1D6tQfPaz2PWG0IlLBLnyVgySAN7LVJazWC+BkdZw=; b=mqfRJNbbiB661j3QFbURYDQ938
+ 6dEumqNoY05a2ofPh/ZdYas/6LtqIY+pjrJ70v1bHqUmucz4iakB9d/tBkGdcxogLVhEJjpBDn0e7
+ lKQoOkV0lAqgraQbvVpwRaJg0SMfUsKB0WpI8UCVGBbNNGnqxXG9/S6jtK+y+rBD0wII=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uqNJM-0005NJ-7y for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 25 Aug 2025 02:51:58 +0000
+ id 1uqNb7-00064C-OB for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 25 Aug 2025 03:10:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5514C5C06C1;
- Mon, 25 Aug 2025 02:51:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 92F81C4CEEB;
- Mon, 25 Aug 2025 02:51:40 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 003BC601CF;
+ Mon, 25 Aug 2025 03:10:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84DB2C4CEEB;
+ Mon, 25 Aug 2025 03:10:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756090302;
- bh=gs1lIouFKDtX2U9/1swxynxqEfsI77CRziNGYJWpxD8=;
+ s=k20201202; t=1756091406;
+ bh=xgYZb6MqiGc9kxakR/3/dqiFmpLsxmBTVGAfZiZrENQ=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=f2egZNsOG0l7DwAg6KmBrz4j4OaeMFehQrgtPrCgJmb8OOIGfuniX0xgU9UnFh9gA
- vvX8NZG6hEK0X8Ku/xFlONtyVg94r0li/8vWlQ5DxUUViUJSGHv2wNDYsCboKC5QNV
- zazEFsH1sQjo3ENbq+8Dbh/rQpknYdrj2LcVcKoWf3UEN5STBxajnoQx2IUTgd3+BL
- Tafz99At3OVxbX2GKoW9x8APAKS6SGpMPAECIeIEzedc2htrujxj+AKk6QMODwAnW+
- j6uwG74eWNVpy7NU1I6HV93cLgKZC2VuQnNL694ys7jNTGLleSDbMqmkT3F1QpB3Iv
- p5fhJNC4FdJPg==
-Message-ID: <894561d6-c0eb-4f58-ad3e-96797135e89b@kernel.org>
-Date: Mon, 25 Aug 2025 10:51:38 +0800
+ b=M7mFhpoIp6OcBmoFtnoIIiLR66f11mEEH1JUaZIhquJtRtoRxtI49L0uZwk83Nocf
+ UiaX/ueuOxw10sy0nLFzcNnpfbWpEZYhDCanP9X8MrRbpCyZjuyTAHdSzfpjk/gpGS
+ dmokWf172Cb7kW+JLjaYsPfZbQuwtOTYtpR/5pflja7+hOqRt4D4AFz1qLfy/7mAtF
+ aBxluG4Jtp+DBFB5MMBCZjoeGb7uT6SnIpCyZd+OtgxWqZ6Rv+gNpNJ67G+cTA1s7U
+ nPuphmrrh+OVfknQP34cv4S25xkVnjgR6TVNR6USTqo1FzvanNC8R+8XwEN3zZc9Qd
+ +dTAnFZoBBf/w==
+Message-ID: <8bda5b71-e7b9-47af-956b-22b95c957d56@kernel.org>
+Date: Mon, 25 Aug 2025 11:10:03 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: wangzijie <wangzijie1@honor.com>, jaegeuk@kernel.org
-References: <20250813040455.3900073-1-wangzijie1@honor.com>
+To: Liao Yuanhong <liaoyuanhong@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ "open list:F2FS FILE SYSTEM" <linux-f2fs-devel@lists.sourceforge.net>,
+ open list <linux-kernel@vger.kernel.org>
+References: <20250820082142.388237-1-liaoyuanhong@vivo.com>
 Content-Language: en-US
-In-Reply-To: <20250813040455.3900073-1-wangzijie1@honor.com>
+In-Reply-To: <20250820082142.388237-1-liaoyuanhong@vivo.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 8/13/25 12:04, wangzijie wrote: > Sometimes I suffered
- the nat_tree_lock contention between f2fs_write_checkpoint > and
- f2fs_get_node_info.
- Commit a9419b6("f2fs: do not bother checkpoint by > f2fs_ [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Yuanhong, On 8/20/25 16:21, Liao Yuanhong wrote: > Introduces
+ two new sys nodes: allocate_section_hint and > allocate_section_policy. The
+ allocate_section_hint identifies the boundary > between devices, measure
+ [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uqNJM-0005NJ-7y
-Subject: Re: [f2fs-dev] [PATCH] f2fs: reduce nat_tree_lock hold time when
- flush nat entries
+X-Headers-End: 1uqNb7-00064C-OB
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Use allocate_section_policy to
+ control write priority in multi-devices setups
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,229 +110,259 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, feng.han@honor.com,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 8/13/25 12:04, wangzijie wrote:
-> Sometimes I suffered the nat_tree_lock contention between f2fs_write_checkpoint
-> and f2fs_get_node_info. Commit a9419b6("f2fs: do not bother checkpoint by
-> f2fs_get_node_info") also mentioned that situation.
+Yuanhong,
+
+On 8/20/25 16:21, Liao Yuanhong wrote:
+> Introduces two new sys nodes: allocate_section_hint and
+> allocate_section_policy. The allocate_section_hint identifies the boundary
+> between devices, measured in sections; it defaults to the end of the device
+> for single storage setups, and the end of the first device for multiple
+> storage setups. The allocate_section_policy determines the write strategy,
+> with a default value of 0 for normal sequential write strategy. A value of
+> 1 prioritizes writes before the allocate_section_hint, while a value of 2
+> prioritizes writes after it.
 > 
-> My idea is, when flush nat entries, we can use some structures to record nat
-> pages we may read, and readahead them before hold nat_tree_lock. Before
-> impletement code, I did some survey and found a submittion in community.
+> This strategy addresses the issue where, despite F2FS supporting multiple
+> devices, SOC vendors lack multi-devices support (currently only supporting
+> zoned devices). As a workaround, multiple storage devices are mapped to a
+> single dm device. Both this workaround and the F2FS multi-devices solution
+> may require prioritizing writing to certain devices, such as a device with
+> better performance or when switching is needed due to performance
+> degradation near a device's end. For scenarios with more than two devices,
+> sort them at mount time to utilize this feature.
 > 
-> Subject: f2fs: use bucket sort to avoid tree lookup and list sort when nat flushing
-> Link: https://lore.kernel.org/linux-f2fs-devel/20170520122435.17574-2-houpengyang@huawei.com/
-> This patch aims to improve nat entry set sort by using bucket.
-> I steal that structure and readahead nat pages contain nat entry set which cannot be moved
-> to journal according to dirty nat entry set bucket.
+> When using this feature with a single storage device, it has almost no
+> impact. However, for configurations where multiple storage devices are
+> mapped to the same dm device using F2FS, utilizing this feature can provide
+> some optimization benefits. Therefore, I believe it should not be limited
+> to just multi-devices usage.
 > 
-> By doing this, I think there are two benefits to reducing nat_tree_lock hold time when
-> when flush nat entries.
+> Signed-off-by: Liao Yuanhong <liaoyuanhong@vivo.com>
+> ---
+> Changes in v2:
+> 	- Updated the feature naming to better reflect its actual functionality.
+> 	- Appended patch description to clarify whether the usage should be
+> 	limited to multi-devices.
+> 	- Improved the code style.
+> 	- Fixed typo.
+> ---
+>  Documentation/ABI/testing/sysfs-fs-f2fs | 22 ++++++++++++++++++++++
+>  fs/f2fs/f2fs.h                          |  8 ++++++++
+>  fs/f2fs/gc.c                            |  5 +++++
+>  fs/f2fs/segment.c                       | 18 +++++++++++++++++-
+>  fs/f2fs/super.c                         |  4 ++++
+>  fs/f2fs/sysfs.c                         | 18 ++++++++++++++++++
+>  6 files changed, 74 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+> index ee3acc8c2cb8..b590809869ca 100644
+> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+> @@ -911,3 +911,25 @@ Description:	Used to adjust the BG_GC priority when pending IO, with a default v
+>  		bggc_io_aware = 1   skip background GC if there is pending read IO
+>  		bggc_io_aware = 2   don't aware IO for background GC
+>  		==================  ======================================================
+> +
+> +What:		/sys/fs/f2fs/<disk>/allocate_section_hint
+> +Date:		August 2025
+> +Contact:	"Liao Yuanhong" <liaoyuanhong@vivo.com>
+> +Description:	Indicates the hint section between the first device and others in multi-devices
+> +		setup. It defaults to the end of the first device in sections. For a single storage
+> +		device, it defaults to the total number of sections. It can be manually set to match
+> +		scenarios where multi-devices are mapped to the same dm device.
+> +
+> +What:		/sys/fs/f2fs/<disk>/allocate_section_policy
+> +Date:		August 2025
+> +Contact:	"Liao Yuanhong" <liaoyuanhong@vivo.com>
+> +Description:	Controls write priority in multi-devices setups. A value of 0 means normal writing.
+> +		A value of 1 prioritizes writing to devices before the allocate_section_hint. A value of 2
+> +		prioritizes writing to devices after the allocate_section_hint. The default is 0.
+> +
+> +		===========================  ==========================================================
+> +		value					     description
+> +		allocate_section_policy = 0  Normal writing
+> +		allocate_section_policy = 1  Prioritize writing to section before allocate_section_hint
+> +		allocate_section_policy = 2  Prioritize writing to section after allocate_section_hint
+> +		===========================  ==========================================================
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index d6a49de1b7e9..5ce9bf6be462 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -162,6 +162,12 @@ enum bggc_io_aware_policy {
+>  	AWARE_NONE,			/* don't aware IO for background GC */
+>  };
+>  
+> +enum device_allocation_policy {
+> +	ALLOCATE_FORWARD_NOHINT,
+> +	ALLOCATE_FORWARD_WITHIN_HINT,
+> +	ALLOCATE_FORWARD_FROM_HINT,
+> +};
+> +
+>  /*
+>   * An implementation of an rwsem that is explicitly unfair to readers. This
+>   * prevents priority inversion when a low-priority reader acquires the read lock
+> @@ -1850,6 +1856,8 @@ struct f2fs_sb_info {
+>  	bool aligned_blksize;			/* all devices has the same logical blksize */
+>  	unsigned int first_seq_zone_segno;	/* first segno in sequential zone */
+>  	unsigned int bggc_io_aware;		/* For adjust the BG_GC priority when pending IO */
+> +	unsigned int allocate_section_hint;	/* the boundary position between devices */
+> +	unsigned int allocate_section_policy;	/* determine the section writing priority */
+>  
+>  	/* For write statistics */
+>  	u64 sectors_written_start;
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 098e9f71421e..b57b8fd64747 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -2182,6 +2182,8 @@ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
+>  	SM_I(sbi)->segment_count = (int)SM_I(sbi)->segment_count + segs;
+>  	MAIN_SEGS(sbi) = (int)MAIN_SEGS(sbi) + segs;
+>  	MAIN_SECS(sbi) += secs;
+> +	if (sbi->allocate_section_hint > MAIN_SECS(sbi))
+> +		sbi->allocate_section_hint = MAIN_SECS(sbi);
+>  	FREE_I(sbi)->free_sections = (int)FREE_I(sbi)->free_sections + secs;
+>  	FREE_I(sbi)->free_segments = (int)FREE_I(sbi)->free_segments + segs;
+>  	F2FS_CKPT(sbi)->user_block_count = cpu_to_le64(user_block_count + blks);
+> @@ -2189,6 +2191,9 @@ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
+>  	if (f2fs_is_multi_device(sbi)) {
+>  		int last_dev = sbi->s_ndevs - 1;
+>  
+> +		sbi->allocate_section_hint = FDEV(0).total_segments /
+> +					SEGS_PER_SEC(sbi);
+> +
+>  		FDEV(last_dev).total_segments =
+>  				(int)FDEV(last_dev).total_segments + segs;
+>  		FDEV(last_dev).end_blk =
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 04b0a3c1804d..e0f6589c6a1c 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -2807,6 +2807,10 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
+>  	}
+>  #endif
+>  
+> +	if (sbi->allocate_section_policy == ALLOCATE_FORWARD_FROM_HINT &&
+> +		hint < sbi->allocate_section_hint)
+> +		hint = sbi->allocate_section_hint;
+> +
+>  find_other_zone:
+>  	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
+>  
+> @@ -2828,13 +2832,25 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
+>  #endif
+>  
+>  	if (secno >= MAIN_SECS(sbi)) {
+> -		secno = find_first_zero_bit(free_i->free_secmap,
+> +		if (sbi->allocate_section_policy == ALLOCATE_FORWARD_FROM_HINT) {
+> +			secno = find_next_zero_bit(free_i->free_secmap,
+> +							MAIN_SECS(sbi), sbi->allocate_section_hint);
+> +			if (secno >= MAIN_SECS(sbi))
+> +				secno = find_first_zero_bit(free_i->free_secmap,
+> +								MAIN_SECS(sbi));
+> +		} else {
+> +			secno = find_first_zero_bit(free_i->free_secmap,
+>  							MAIN_SECS(sbi));
+> +		}
+>  		if (secno >= MAIN_SECS(sbi)) {
+>  			ret = -ENOSPC;
+>  			f2fs_bug_on(sbi, !pinning);
+>  			goto out_unlock;
+>  		}
+> +	} else if (sbi->allocate_section_policy == ALLOCATE_FORWARD_WITHIN_HINT &&
+> +				secno >= sbi->allocate_section_hint) {
+> +		secno = find_first_zero_bit(free_i->free_secmap,
+> +							MAIN_SECS(sbi));
 
-Zijie,
+Will we hit "secno >= MAIN_SECS(sbi)" case here?
 
-Can you please figure out some numbers for this patch? something like
-checkpoint latency or average or extreme time to grab nat_tree_lock...?
+>  	}
+>  	segno = GET_SEG_FROM_SEC(sbi, secno);
+>  	zoneno = GET_ZONE_FROM_SEC(sbi, secno);
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 5aa9d650512d..fa38a3e6b9cd 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -3942,6 +3942,7 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
+>  	segs_per_sec = le32_to_cpu(raw_super->segs_per_sec);
+>  	secs_per_zone = le32_to_cpu(raw_super->secs_per_zone);
+>  	total_sections = le32_to_cpu(raw_super->section_count);
+> +	sbi->allocate_section_hint = total_sections;
 
-> 1. avoid nat set tree lookup and sort
-> 2. readahead nat pages before holding nat_tree_lock
+What about assigning sbi->allocate_section_hint in anywhere else rather than
+in sanity_check_raw_super()?
 
-It may cause performance regression if it races w/ drop_caches?
+>  
+>  	/* blocks_per_seg should be 512, given the above check */
+>  	blocks_per_seg = BIT(le32_to_cpu(raw_super->log_blocks_per_seg));
+> @@ -4713,6 +4714,7 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+>  	logical_blksize = bdev_logical_block_size(sbi->sb->s_bdev);
+>  	sbi->aligned_blksize = true;
+>  	sbi->bggc_io_aware = AWARE_ALL_IO;
+> +	sbi->allocate_section_policy = ALLOCATE_FORWARD_NOHINT;
+>  #ifdef CONFIG_BLK_DEV_ZONED
+>  	sbi->max_open_zones = UINT_MAX;
+>  	sbi->blkzone_alloc_policy = BLKZONE_ALLOC_PRIOR_SEQ;
+> @@ -4744,6 +4746,8 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+>  					SEGS_TO_BLKS(sbi,
+>  					FDEV(i).total_segments) - 1 +
+>  					le32_to_cpu(raw_super->segment0_blkaddr);
+> +				sbi->allocate_section_hint = FDEV(i).total_segments /
+> +							SEGS_PER_SEC(sbi);
+>  			} else {
+>  				FDEV(i).start_blk = FDEV(i - 1).end_blk + 1;
+>  				FDEV(i).end_blk = FDEV(i).start_blk +
+> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> index 1ffaf9e74ce9..81b99c2a02a9 100644
+> --- a/fs/f2fs/sysfs.c
+> +++ b/fs/f2fs/sysfs.c
+> @@ -889,6 +889,20 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+>  		return count;
+>  	}
+>  
+> +	if (!strcmp(a->attr.name, "allocate_section_hint")) {
+> +		if (t < 0 || t > MAIN_SECS(sbi))
+> +			return -EINVAL;
+> +		sbi->allocate_section_hint = t;
+
+Will it race w/ resize_fs ioctl?
 
 Thanks,
 
-> 
-> Signed-off-by: wangzijie <wangzijie1@honor.com>
-> ---
->  fs/f2fs/f2fs.h |  1 +
->  fs/f2fs/node.c | 70 ++++++++++++++++++++++++--------------------------
->  fs/f2fs/node.h |  2 +-
->  3 files changed, 35 insertions(+), 38 deletions(-)
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 46be75605..b27cc059f 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -975,6 +975,7 @@ struct f2fs_nm_info {
->  	struct radix_tree_root nat_set_root;/* root of the nat set cache */
->  	struct f2fs_rwsem nat_tree_lock;	/* protect nat entry tree */
->  	struct list_head nat_entries;	/* cached nat entry list (clean) */
-> +	struct list_head nat_dirty_set[NAT_ENTRY_PER_BLOCK + 1];	/* store dirty nat set */
->  	spinlock_t nat_list_lock;	/* protect clean nat entry list */
->  	unsigned int nat_cnt[MAX_NAT_STATE]; /* the # of cached nat entries */
->  	unsigned int nat_blocks;	/* # of nat blocks */
-> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> index 27743b93e..87c975ee8 100644
-> --- a/fs/f2fs/node.c
-> +++ b/fs/f2fs/node.c
-> @@ -244,6 +244,12 @@ static void __del_from_nat_cache(struct f2fs_nm_info *nm_i, struct nat_entry *e)
->  	__free_nat_entry(e);
->  }
->  
-> +static void __relocate_nat_entry_set(struct f2fs_nm_info *nm_i,
-> +							struct nat_entry_set *set)
-> +{
-> +	list_move_tail(&set->set_list, &nm_i->nat_dirty_set[set->entry_cnt]);
-> +}
-> +
->  static struct nat_entry_set *__grab_nat_entry_set(struct f2fs_nm_info *nm_i,
->  							struct nat_entry *ne)
->  {
-> @@ -260,6 +266,7 @@ static struct nat_entry_set *__grab_nat_entry_set(struct f2fs_nm_info *nm_i,
->  		head->set = set;
->  		head->entry_cnt = 0;
->  		f2fs_radix_tree_insert(&nm_i->nat_set_root, set, head);
-> +		__relocate_nat_entry_set(nm_i, head);
->  	}
->  	return head;
->  }
-> @@ -279,8 +286,10 @@ static void __set_nat_cache_dirty(struct f2fs_nm_info *nm_i,
->  	 * 2. update old block address to new one;
->  	 */
->  	if (!new_ne && (get_nat_flag(ne, IS_PREALLOC) ||
-> -				!get_nat_flag(ne, IS_DIRTY)))
-> +				!get_nat_flag(ne, IS_DIRTY))) {
->  		head->entry_cnt++;
-> +		__relocate_nat_entry_set(nm_i, head);
-> +	}
->  
->  	set_nat_flag(ne, IS_PREALLOC, new_ne);
->  
-> @@ -309,6 +318,7 @@ static void __clear_nat_cache_dirty(struct f2fs_nm_info *nm_i,
->  
->  	set_nat_flag(ne, IS_DIRTY, false);
->  	set->entry_cnt--;
-> +	__relocate_nat_entry_set(nm_i, set);
->  	nm_i->nat_cnt[DIRTY_NAT]--;
->  	nm_i->nat_cnt[RECLAIMABLE_NAT]++;
->  }
-> @@ -2976,24 +2986,6 @@ static void remove_nats_in_journal(struct f2fs_sb_info *sbi)
->  	up_write(&curseg->journal_rwsem);
->  }
->  
-> -static void __adjust_nat_entry_set(struct nat_entry_set *nes,
-> -						struct list_head *head, int max)
-> -{
-> -	struct nat_entry_set *cur;
-> -
-> -	if (nes->entry_cnt >= max)
-> -		goto add_out;
-> -
-> -	list_for_each_entry(cur, head, set_list) {
-> -		if (cur->entry_cnt >= nes->entry_cnt) {
-> -			list_add(&nes->set_list, cur->set_list.prev);
-> -			return;
-> -		}
-> -	}
-> -add_out:
-> -	list_add_tail(&nes->set_list, head);
-> -}
-> -
->  static void __update_nat_bits(struct f2fs_sb_info *sbi, nid_t start_nid,
->  		const struct f2fs_nat_block *nat_blk)
->  {
-> @@ -3095,6 +3087,7 @@ static int __flush_nat_entry_set(struct f2fs_sb_info *sbi,
->  
->  	/* Allow dirty nats by node block allocation in write_begin */
->  	if (!set->entry_cnt) {
-> +		list_del(&set->set_list);
->  		radix_tree_delete(&NM_I(sbi)->nat_set_root, set->set);
->  		kmem_cache_free(nat_entry_set_slab, set);
->  	}
-> @@ -3109,11 +3102,8 @@ int f2fs_flush_nat_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->  	struct f2fs_nm_info *nm_i = NM_I(sbi);
->  	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
->  	struct f2fs_journal *journal = curseg->journal;
-> -	struct nat_entry_set *setvec[NAT_VEC_SIZE];
->  	struct nat_entry_set *set, *tmp;
-> -	unsigned int found;
-> -	nid_t set_idx = 0;
-> -	LIST_HEAD(sets);
-> +	int i;
->  	int err = 0;
->  
->  	/*
-> @@ -3129,6 +3119,16 @@ int f2fs_flush_nat_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->  	if (!nm_i->nat_cnt[DIRTY_NAT])
->  		return 0;
->  
-> +	/* readahead sets which cannot be moved to journal */
-> +	if (!__has_cursum_space(journal, nm_i->nat_cnt[DIRTY_NAT], NAT_JOURNAL)) {
-> +		for (i = MAX_NAT_JENTRIES(journal); i <= NAT_ENTRY_PER_BLOCK; i++) {
-> +			list_for_each_entry_safe(set, tmp, &nm_i->nat_dirty_set[i], set_list) {
-> +				f2fs_ra_meta_pages(sbi, set->set, 1,
-> +								META_NAT, true);
-> +			}
-> +		}
+> +		return count;
 > +	}
 > +
->  	f2fs_down_write(&nm_i->nat_tree_lock);
->  
->  	/*
-> @@ -3141,21 +3141,13 @@ int f2fs_flush_nat_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->  			nm_i->nat_cnt[DIRTY_NAT], NAT_JOURNAL))
->  		remove_nats_in_journal(sbi);
->  
-> -	while ((found = __gang_lookup_nat_set(nm_i,
-> -					set_idx, NAT_VEC_SIZE, setvec))) {
-> -		unsigned idx;
-> -
-> -		set_idx = setvec[found - 1]->set + 1;
-> -		for (idx = 0; idx < found; idx++)
-> -			__adjust_nat_entry_set(setvec[idx], &sets,
-> -						MAX_NAT_JENTRIES(journal));
-> -	}
-> -
->  	/* flush dirty nats in nat entry set */
-> -	list_for_each_entry_safe(set, tmp, &sets, set_list) {
-> -		err = __flush_nat_entry_set(sbi, set, cpc);
-> -		if (err)
-> -			break;
-> +	for (i = 0; i <= NAT_ENTRY_PER_BLOCK; i++) {
-> +		list_for_each_entry_safe(set, tmp, &nm_i->nat_dirty_set[i], set_list) {
-> +			err = __flush_nat_entry_set(sbi, set, cpc);
-> +			if (err)
-> +				break;
-> +		}
->  	}
->  
->  	f2fs_up_write(&nm_i->nat_tree_lock);
-> @@ -3249,6 +3241,7 @@ static int init_node_manager(struct f2fs_sb_info *sbi)
->  	struct f2fs_nm_info *nm_i = NM_I(sbi);
->  	unsigned char *version_bitmap;
->  	unsigned int nat_segs;
-> +	int i;
->  	int err;
->  
->  	nm_i->nat_blkaddr = le32_to_cpu(sb_raw->nat_blkaddr);
-> @@ -3275,6 +3268,9 @@ static int init_node_manager(struct f2fs_sb_info *sbi)
->  	INIT_LIST_HEAD(&nm_i->nat_entries);
->  	spin_lock_init(&nm_i->nat_list_lock);
->  
-> +	for (i = 0; i <= NAT_ENTRY_PER_BLOCK; i++)
-> +		INIT_LIST_HEAD(&nm_i->nat_dirty_set[i]);
+> +	if (!strcmp(a->attr.name, "allocate_section_policy")) {
+> +		if (t < ALLOCATE_FORWARD_NOHINT || t > ALLOCATE_FORWARD_FROM_HINT)
+> +			return -EINVAL;
+> +		sbi->allocate_section_policy = t;
+> +		return count;
+> +	}
 > +
->  	mutex_init(&nm_i->build_lock);
->  	spin_lock_init(&nm_i->nid_list_lock);
->  	init_f2fs_rwsem(&nm_i->nat_tree_lock);
-> diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
-> index 030390543..d805d4ce7 100644
-> --- a/fs/f2fs/node.h
-> +++ b/fs/f2fs/node.h
-> @@ -158,7 +158,7 @@ enum mem_type {
+>  	*ui = (unsigned int)t;
+>  
+>  	return count;
+> @@ -1161,6 +1175,8 @@ F2FS_SBI_GENERAL_RW_ATTR(max_victim_search);
+>  F2FS_SBI_GENERAL_RW_ATTR(migration_granularity);
+>  F2FS_SBI_GENERAL_RW_ATTR(migration_window_granularity);
+>  F2FS_SBI_GENERAL_RW_ATTR(dir_level);
+> +F2FS_SBI_GENERAL_RW_ATTR(allocate_section_hint);
+> +F2FS_SBI_GENERAL_RW_ATTR(allocate_section_policy);
+>  #ifdef CONFIG_F2FS_IOSTAT
+>  F2FS_SBI_GENERAL_RW_ATTR(iostat_enable);
+>  F2FS_SBI_GENERAL_RW_ATTR(iostat_period_ms);
+> @@ -1398,6 +1414,8 @@ static struct attribute *f2fs_attrs[] = {
+>  	ATTR_LIST(max_read_extent_count),
+>  	ATTR_LIST(carve_out),
+>  	ATTR_LIST(reserved_pin_section),
+> +	ATTR_LIST(allocate_section_hint),
+> +	ATTR_LIST(allocate_section_policy),
+>  	NULL,
 >  };
->  
->  struct nat_entry_set {
-> -	struct list_head set_list;	/* link with other nat sets */
-> +	struct list_head set_list;	/* link with nat sets which have same entry_cnt */
->  	struct list_head entry_list;	/* link with dirty nat entries */
->  	nid_t set;			/* set number*/
->  	unsigned int entry_cnt;		/* the # of nat entries in set */
+>  ATTRIBUTE_GROUPS(f2fs);
 
 
 
