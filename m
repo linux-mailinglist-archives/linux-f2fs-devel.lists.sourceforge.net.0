@@ -2,211 +2,191 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FEC1B35136
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Aug 2025 03:49:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13D4AB36772
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Aug 2025 16:06:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Content-ID:In-Reply-To:
-	References:Message-ID:Date:To:Sender:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=9Dw3Jq2MfynP9HfYAeCPsGAal5H1cuCROpAqr5dTF6Y=; b=B9GHJSwtcqeV1Mhfzcz69BiTCY
-	ZrGPV7LxHCvWfUQEpY/I/Bd55KvNql+UoEBPfLxvkTvXkayfrorrgPm3SeZyHhvjzz6fl7MrFPAYX
-	/NBRYEd1ItGu86raJ+WVIlkTtVwK5LIgKIGplGk1q58MZ/m1Fd1tGJnUXk/gKSqfsbXk=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=Q5IZD370bto75yDUk8W0t51+ifsxnNORZw/I0u2uNEE=; b=YdPPSexNdbDRJk3L3n1z06F3LO
+	rtHgQFenXs4t8CLjlZfKJbv2FJMK5Zg65skvKXR3LHDbEuRZbRYs03kc8/fjUxVlunZEjyUu7/wuQ
+	XeX+3snGyvgnYiBuxw0Ahxod1zhUHkBJzK9dclz7Dwc5wY8O5aRLwo6/A+CnkCyI2eJU=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uqinv-0003Wx-3a;
-	Tue, 26 Aug 2025 01:48:55 +0000
+	id 1uquJX-0006Bs-PD;
+	Tue, 26 Aug 2025 14:06:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wangxiaojun@vivo.com>) id 1uqins-0003Wo-QK
+ (envelope-from <liaoyuanhong@vivo.com>) id 1uquJV-0006BZ-Hn
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 26 Aug 2025 01:48:53 +0000
+ Tue, 26 Aug 2025 14:06:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
- Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
- :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
- :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WCGHJ1piPACh1qps1cWSwMy8IJkIgGRnXC05ajEzAuk=; b=heIEECGMeuqY4Sh934RiUUNu1U
- uADH9RckGBnH23973lfZH16jFZaERqd3+yzDpqNTne8rbR9Plqc3Yenhi/YToUjBefVSPHqPmp9tp
- vhTTpA0/bo8jxBsAvfQZlwJpofRRpnJk4EAaSkvWth+aPnyTOrkVni3kUqwgzk1JFC54=;
+ bh=jcj6jaM3YJs/R7kGn8136swHuvh2bYkKL4YJtbcO42U=; b=MApgztQdkuQMxuh6E7ml4RghNb
+ D7xRlxsO22PmHuv2wYhrIjf6kx1KJYrfBZar6V/WLz5v9UjV0v2OqXQ9DyRuROey2rKrtu/L1b3rs
+ silQcS4lw3XBm0n1fJdWg8kbQtvgxASsB0tFhGmWxvofRV6yAx4oJu6GkNw7M+LyKKjI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
- In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=WCGHJ1piPACh1qps1cWSwMy8IJkIgGRnXC05ajEzAuk=; b=NgfcTHon2hRPAUmFW5sIFoyhmg
- g3j6v1nr6UX1A0gXSDYrF03tXjR4kZCF5fIuRNjRpKwQn3I3QbO3QHUDTr4TorR4ea0tu2Php+MPD
- SS+T2olxVRVSKT3A/7dKE+d0y2NSEt/f2265ES3wl9SbnoPvde5+FJ83O3zNiFFhTByQ=;
-Received: from mail-japaneastazon11012000.outbound.protection.outlook.com
- ([52.101.126.0] helo=TYPPR03CU001.outbound.protection.outlook.com)
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=jcj6jaM3YJs/R7kGn8136swHuvh2bYkKL4YJtbcO42U=; b=S
+ 0SjIo6vBD7S/7+RGqBpd9+a79qmhc9Bnk5za5QPKL5+7kF3jdG75DMH7y8FO4S88RFqD3BpAjLMHL
+ hHTVmpNz5tGCwaxw4kV9nXCWaUKSydx8fRIYWS2CgK3otIHUYjKq4mKbNRzemQySL2281wxgSSElK
+ Rn/MusDJtv7EjySE=;
+Received: from mail-japanwestazon11012008.outbound.protection.outlook.com
+ ([40.107.75.8] helo=OS8PR02CU002.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uqinr-0001Kc-S1 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 26 Aug 2025 01:48:52 +0000
+ id 1uquJU-0007Mo-M7 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 26 Aug 2025 14:06:18 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=shDuiNFxhEiEgy2gavl0lY5m4DZAzJWLf+FoXc1Dgzw0y5ZkOh1GG00Ib7rTfprZgmEUnihBoG3sqrfqvfDb6cmBO2oY4AGUonUDLI3Muq88hb8Uhb4iI+Pib8gKTVzgN9ScAob0F12tk4xTwlSJzG8hBmNxE1TLU6QEwA115QFaE2akiJU4L5Y78IIBBVJfdQb0KVcF3q31DczjaDc6OSAYXPCxxsAqxxD1g+9LeS8luQerpzXlZgiW3YCP37fQbGrQyOvGRXbA/7ij1F8kzI46IM+ne12CFhYd8E0mMEsG9FHt4IC6ixtuCpg9/d9r7yqWqjw4QW3arr/sPymGOA==
+ b=au1SoteOnG85VyUSKQ+68Pi+ITvOV0eqvacNVbcc0Q9nZweT5wQva2nCx3U9OTaR7c6qnmVMEA3ddQ1+Bf/l7a3USsJvx3BZ6TKbvzJqIYktSN/qMZbufhVf2ElIWSnb8EHdo4Y6pPMYkTy4IuKdJvV3QNNsHNfnVMFtiKEseqHxNg3MxzJJ00olEVX7bwuoTr5i/Sky+VDa4itxhLThzWdhtnCf3CAocd4GNbuh2KPszF7RIntj9YZEur2HTxBuFcMsJBtHiOBZSO061VqnVSuyMWQucGOQRzX5Z42AV3bYxmqqVsp6c8eaL+31fSPbq1xW1hiGFKAmvxMZ2aIExg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WCGHJ1piPACh1qps1cWSwMy8IJkIgGRnXC05ajEzAuk=;
- b=njH7gh5jD2RvVhdIFOXIBPBKy3F+AiT9V5GU+e+259GsWlJx7kMOulTq/8iFMjAzIw1Bo/LgTX7UPlTDHlzNmZke+3SKE9IvKW1V1chfPJk9wmyWwFcDVMD2g21YEGR3iLcRcs3YMBz8j/5C6bUz7FD+xYBJN7RG6Hk1jUm4DuxZTMJD3p67a3TH9F7R4TYTFU+UvKn0Aa1kyTtdIZ35uL5Vy3lylAniNq/iSP6m/njeOask5wbxs57azChs5WDEaRsteIL3Fiaaz3xd7ZuW9It9TMOrklCASWxpt57dnqNOhX/jXMjAFuTrc3oafl9pxkhjJYdaTNm/wt+opSS2aw==
+ bh=jcj6jaM3YJs/R7kGn8136swHuvh2bYkKL4YJtbcO42U=;
+ b=ess3m7MixLVs+Zx/o9yQrf+ykwvFE9Z67lAc1BGYZiSyVP+jWFj09aiZTb1AKGoW3cBSQoBCG68whb2JwYXwrdhl2g2wxY2JH8KAvXipXb5QFZJ6QwqR/5KuYEK9go3pPAJrfYTTqLOxBKYMV+nhQZ/xWXoIeE5gKbx3ONi3PVeiItfOx1dfvaAuA4zD0zGAkT5tEShp7X+BTHn9vFxLl5h96Pdi6UPUHWyH7IW2XqMvcctX5A/2pU/SlkfWPn4rsfPr+t2l0Hiz1OvZfIuQBvVaql/fPM4yI1kONotUVExSBUyfN7AGvLuqbC+laV6pVXPfhMjsuHPcjrafWS9weA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WCGHJ1piPACh1qps1cWSwMy8IJkIgGRnXC05ajEzAuk=;
- b=n39dms0i1e3gB7WBSOWKPQWIUeG94AiD5eu4kx+sjhFVe8fghpKGpXSsf/dEYVlntPz2/jLGVXBFTGu3KCTbe9IDiKEhJgVIQ12DbIGqcJvoLjLenK0JT6Pi8CWWXDYKN7d8Zys/a0u0zFOrI/jXKDDjrOKsXEtJXu1uew2r3E7CYj3t3bKMkJS6d/YJWZcVeSbEYLC2avAwfSbuX5TEm8gi3aclDOs+uMhQnUuVkBp5ImDZFUqc5hQmRt/hnoirayKfZpnG2HnkMC9TVxzb02/vY5o4zuHIANwOrsIBWsGlMkyMkfT9bdN744nAuyWZ4rg6e/aLB+RRChducR4JqA==
-Received: from KL1PR06MB6845.apcprd06.prod.outlook.com (2603:1096:820:10d::10)
- by SEYPR06MB5400.apcprd06.prod.outlook.com (2603:1096:101:8d::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.20; Tue, 26 Aug
- 2025 01:48:35 +0000
-Received: from KL1PR06MB6845.apcprd06.prod.outlook.com
- ([fe80::a919:58bb:f4e3:b054]) by KL1PR06MB6845.apcprd06.prod.outlook.com
- ([fe80::a919:58bb:f4e3:b054%4]) with mapi id 15.20.9052.019; Tue, 26 Aug 2025
- 01:48:34 +0000
-To: Chao Yu <chao@kernel.org>, "jaegeuk@kernel.org" <jaegeuk@kernel.org>
-Thread-Topic: [f2fs-dev] [PATCH v4] f2fs:fix missing space reclamation during
- the recovery process
-Thread-Index: AQHcEae4/QBW+zQuskmLaGzt9Idjh7RypxMAgAGMrgA=
-Date: Tue, 26 Aug 2025 01:48:34 +0000
-Message-ID: <234d4f23-5ce4-426e-9b3c-5f2b28d86a3f@vivo.com>
-References: <20250820075444.378907-1-wangxiaojun@vivo.com>
- <d0a1e0a3-bde1-485c-bee0-70c04ab3846d@kernel.org>
-In-Reply-To: <d0a1e0a3-bde1-485c-bee0-70c04ab3846d@kernel.org>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
+ bh=jcj6jaM3YJs/R7kGn8136swHuvh2bYkKL4YJtbcO42U=;
+ b=Gt93NBrwnZRcZzqFhWyuJdw7aKIwQarQ+uok9cZoSj8+yDvUsGs6/SvW3Cicjx7hjJZF4o/iTeAS96NjBFnmP8dokbpOfWMBYHK2mtbjtGJT79KDhhSRbHXdEkAAYmBJjhIdbMiQOBr/lJS2lA2HCTu6FkPU1Qd976HU8iFquvyL6vYoRndGdSW/Qx3/4MPDOsvE9oLofgrPAFJLgoJ+X35LSLz4aL8j8YYdVkVP9VZJbbDpfGTfmwJgHbMSrsb8Jr/5TF0WLBA9DgcWkaUNlMMclJMfiD8/nT7QOKXAXQOwkx2n8Pl7SpRCo8MJPTQpj/DcYgPYDR2B/FlZZi+PXQ==
+Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: KL1PR06MB6845:EE_|SEYPR06MB5400:EE_
-x-ms-office365-filtering-correlation-id: 982af885-884b-4ca9-a67f-08dde442ab4b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|42112799006|366016|1800799024|38070700018; 
-x-microsoft-antispam-message-info: =?utf-8?B?S0I2aVRhVW1uNllyZjA2NHBiYkswenpXRkt3ZUVmRWQ4RlBURys0cTNzbjhy?=
- =?utf-8?B?bXFxQWpTWHVUZ1BuQ3ArUGpnT3cxVUdBMGdTVnVSTEJHcVRVQ0Iwd3Q1Nkdj?=
- =?utf-8?B?MkRvbU9NQzQ5NHYwTThVdzkvTDhZeTFEVk1zTzFDQTlpd2ZRVkJvSWlyeUM1?=
- =?utf-8?B?eGNNUTNsV3pIR01DOE8rTEUxemdVUjFHOFY3SGhQenV1enN5dHhTRXR2YkU5?=
- =?utf-8?B?WU5MSisvNUY3cXNrNEZGenZSSVYreHhhditFZ0FIdGdkZGxVdEF6NFlVOWVz?=
- =?utf-8?B?dDEyR3JoWDlvaW5xbUtxM2FLOEFscDdBYVVCZHUwTk5odERvUG9Ubmc2WnBt?=
- =?utf-8?B?T0c5eXAxcWFhNmJqbGtGSEdWZmh4OEhIWWoxcmZHRWo3Zi9jeWFPLzk1VDgy?=
- =?utf-8?B?MW1LUUw2b2pldldZTkVXSzVWYmszVWRXbVBnN1VxNlFVc0xCV0sxa2lpZExH?=
- =?utf-8?B?UW40S29HS3pDdnQ1NE5VZXBEQzZuakt3aFlMUFZVM3JoL0x1UmV3TDRwUmNk?=
- =?utf-8?B?cXlHQm9mcENDN2F0V0QrMTdrckFPeXBpRW5yWE9rZ2NpMUo2NU8rQkFTZDd0?=
- =?utf-8?B?RFlpblo2Sm5KTHdZWG9PK2xwbm9raHFNYjgrYXI0QjRsbFY3dWNpcGpPblBo?=
- =?utf-8?B?bXpQcGRIZkhETFMrSUloZHpKQzE5bU93SWlZcEo5UnU3S0tnL0hmNnd0b2JS?=
- =?utf-8?B?eG9aMU84N1IzaG5pcDBhcXRuQ0N4NG9JU3BxNlliVm00VyswR0dYWitaRlZa?=
- =?utf-8?B?MnlaeENqVWlrdlZQSUtuR1RuZXZYT3h2MTluSDN5OGcwQ2xPaVZueFNKYjNH?=
- =?utf-8?B?ZEtNdjl2bHlOZ0l5WlN0YVloOGsyQkJUekxWWlRwL3ZSWjEycStrMFU3Q0lt?=
- =?utf-8?B?UXJmVXF5M3lKSllJTjZDUTh2R1lVQTM4ZUQwQTdjdk1SZTl3QlJrK2lEWGZB?=
- =?utf-8?B?TkR1a3pWL1M2K254TE5rQjBDRStFdnJNR1lOTkt5VDZ2MGpMYjBMK21vakN1?=
- =?utf-8?B?QkdRTUV1cWhSUGZTd0lhN3lSMXFyRDNnS1Z3dFNac1dXb0R1b0ZqYkhDUGxl?=
- =?utf-8?B?cVZUZW5Qb2pyWmZJYXZ0SHVxeDYrMWE3SUkyS0NkZExTM2dId1pEOFpVSHc1?=
- =?utf-8?B?SXlzUG5KOW1WODRaMVlIUDdLcmpvUjhyYjMrR2o4VEhWeEVLM2V6SDQ5Q2lm?=
- =?utf-8?B?dkpjT3I4VXdLclJuWGVVRTRtWVF0WFlGb21WRW9lMFhoVysvdFFUM1p4UDhs?=
- =?utf-8?B?Tm90ZDgwODliY2xJblV1SHNFVExod2lFdDF1SjNUOGhFdkFvTnFMSG4zWmNv?=
- =?utf-8?B?c2xIZUMzTVRZZUJRVVhIVDE2SDlQQitTTElxejk5SnIwN2xkbVp2NG14NmJ1?=
- =?utf-8?B?QmMvNjAyOFFJalJxd1JsRTMxWmlHUEhaTncxRVo3QU80YXlWbk1WTnlFTTMw?=
- =?utf-8?B?VC91Ujg1WU5HbWJjZ3RhMUV4MXBndU5SZTgvZVJibUMyWVFnSVBsSlBNVnpU?=
- =?utf-8?B?bmFGNjRDdVRiSzlHcFZ5ZGxaUnBaTnVTaGhhcXkxTEZWeHl3aUY4YWJkakpB?=
- =?utf-8?B?eXM1S1AvOU9HQ21NeUpweklOOUQxdWtEb2o4bytIbFRodVZWT3dhVXljQmhN?=
- =?utf-8?B?djlVYWg2a0t2NUFPYXd4UGViS2pFSVgzc21sQnNtbURiN0htczZMQ0F0M0Zi?=
- =?utf-8?B?QUxHM2cwbzNONk9MdGZVc1VodnBMSStqNHI2b29VbHlCZTg0VWxwdUlUVkh3?=
- =?utf-8?B?VmUvZk0yN1FseWFnaHllRlZPRVR6akZxRk10VVlXalk0bEE1Rno2Zy9EUExK?=
- =?utf-8?B?RGNjczdMaXJaeWtVWFFOR1puU2N6RkNJRjRDcCtPMlB4QXJMenE1bytoMVh0?=
- =?utf-8?B?cmxsV0cxMlFSL0NNU2dQY0JiQTlpWnZ1cUZjQ2tqRkx4YjV2NWs4cE1oZ1h2?=
- =?utf-8?B?Y0kyM3AxMUM4djM0MDdWR2NXaERXSDhEQi9zQzZjREw4Y0V4NTgvUVg5VzRx?=
- =?utf-8?Q?001FI8tSXbduN8xMM5Rj1g4R6WwnPM=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:KL1PR06MB6845.apcprd06.prod.outlook.com; PTR:;
- CAT:NONE; SFS:(13230040)(376014)(42112799006)(366016)(1800799024)(38070700018);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?KzhXY1lRcG1ISmZMNGNvcW1CRmgrcS9mOWJRMmo1ZmYvQVQ2dk43NHR3U1Bj?=
- =?utf-8?B?TjZ2WDl1U0RWTDhBTk03TUlqc3lUM3J4dWJaWUlNK3NRZEo0TnhVZktFSWNT?=
- =?utf-8?B?clNYSzcxb2VqbFVWcGZLU0JWQmd3bjFGMkxuZDZnd2E5MGxCTStOcGFRWkha?=
- =?utf-8?B?c2pOd3BGa09YQXhvVDdUUmEzcDR0ek1CbncrbHZZd0hrMzcydlJBNUxGbm54?=
- =?utf-8?B?Q0RRZ1JaWFdaL3NUQ2hLWVl1MzNKQzZxYmJveVl0TDlsM3M4NGV6RkRaWHZI?=
- =?utf-8?B?TWpDUnZqc3pkSTJBdjVrem5IU0ovZlVrcUVzSXQ3RTNhV3BwVk5XczdqRXdI?=
- =?utf-8?B?dGJkZUNvRWl2ejJSVGN3MUFsbE9mWm1PeTJmSzMrWUx0TVJCd2M0eDBZenB4?=
- =?utf-8?B?R0g1SmpqY2UzWVNtZUdJdFkyNUdOYjVBR1ZyL0FnQnFTb1BvY1pQYjVVUHUv?=
- =?utf-8?B?bUJkZXFjNFhPbWZxVnpjNHV1RDMyTEI5MTlrU1grNUNyUE5hMHJ5T3ZkdWZN?=
- =?utf-8?B?d1J2ajBZdUZ4dkdMRCthb3F0dTBiSHVTR3NRWmVpQU9iNTRzcldycks4ZUls?=
- =?utf-8?B?ZjliQzkwNlVzWkgvSkdVWDlnMGgrR0hGV2xxbnZ4VitDbzI4NjR0YmU4Y3py?=
- =?utf-8?B?ZzZSVisyZVpZTVVuYmo0ZklwaTcxakZCdm9talZKVndxMG5OemZhT3EwbjRp?=
- =?utf-8?B?R201RU13NWxobnpxWjVselRXa0M1UWQyS3dubzNtMUIwL3hGVlZYTXhDZjEy?=
- =?utf-8?B?N3FBVVVSNzBTNGwvYytUN05zYjh3MHhwY1dUQVZDTWczaEsrS3ZoRVV1NVRi?=
- =?utf-8?B?ZnM1ME93NXdTZmo4WC9tMG1aMjhmZzBiRXFHV3V4WlFXYkRtVER2TG9iczNM?=
- =?utf-8?B?ZWNUZ0x1VHQ4MHJqZ0VLTGZTM0xlWDB5c205QVVwNVhqTVlNSlVBbnFEaU1K?=
- =?utf-8?B?cm5mOEZwSE5nTSt3WDNwRjhMdE9GdVJheURvdHRNZHFGbzI4L3JVMDhmOSsz?=
- =?utf-8?B?azhDWnQrbDQybGthdktWOHBSWlZjSTlGSzVxdG92MWJUazNBdlhqREdndVA4?=
- =?utf-8?B?bXVlNzNSbTVSb253dFFGdEJzSjdqL3Z2dFpJMERHelZRSHdHRllDeWJhQ2Vq?=
- =?utf-8?B?RWlHMDE1azlWcDdzUzQ5dkdHSWcwL1NtSnpyZXMzR0lVOWgrN1dJTjFrYjdi?=
- =?utf-8?B?WDZmRUVNRFBOKzVabERYaVc4VzFrNW9JQUR0c3QyYUpQQUIvUXFmZGNYZTVs?=
- =?utf-8?B?WUVML2FnazBJUmk0c3J4NGZqcXVVK3hSOE1MUnZjNTJxVEhERnBKVWFNZDZN?=
- =?utf-8?B?UHZKbDdVTnorS2l6alFnRGxKMjBscm56MUl3Uk9Nc05OUkEzMGxXK0g1TTBJ?=
- =?utf-8?B?aW5aY3h1eng4KytjVzUzNU9XTnZEN0s3czVla0QyZ0NiUGt4em1xSEFzOU43?=
- =?utf-8?B?bFZXcmdtWmI1dUVkcmtVUXdMSGJFZDlyV3BhZSsvb2Y2UENkUHlGSjNBWmhs?=
- =?utf-8?B?NGdMMXZmYWNBdnZVRUxaS3VFdDlZV1ZLUjdXTmtoTHMrNnREQ2Q5aFRkOVhW?=
- =?utf-8?B?dlhPdkIrYUZqZnVKdnRESGdmcHZZSzlsY3hZNnBDQkdRRXdETzdqLzFEVnls?=
- =?utf-8?B?V296TXRTMVVmdHdkK2g0c3JCMDUxcThVb2p0Y2hOM3hPQW1LVU9LdlBzU2JF?=
- =?utf-8?B?ampWeGNvdUs4dTlHNzhvTS92RERzcGxtSnFadlhSR0UxVWRiRDcvcnJhMEdM?=
- =?utf-8?B?QmRHcG5NOFZFbDdjM2JLMWVqMWdHYWV0d1VnODYxbnRrNjluQzFmVEQ4dFRr?=
- =?utf-8?B?Qkp4RDFyajFuYUxTbzlweTBXeWJkWm9ORmtlMmJHVHRKWTNnNEFpeitoQUhU?=
- =?utf-8?B?N1BGdHRucjN0eldWUnNxaklIamhRQWgvRzVURU93RU4xYVo4YmNtUDZ3Vklj?=
- =?utf-8?B?UnRDV1VUNzhJbEZVVTl3NzRmaXpVOUFvekN3QXFTeG04dTlNNGQ4ZWNLZ284?=
- =?utf-8?B?ZE5LNWJUaEdOYW9Gb3VsMVpjLzB4emQ0azFGQUl2K2ZYWDYyRjhqcFpLUEda?=
- =?utf-8?B?TC9KVUpUNFJPU3NMRHQ4VzhlbUJtQlNiMGNtR0Ftd21xTzRQRkxjNW9leDhQ?=
- =?utf-8?Q?CEqE=3D?=
-Content-ID: <2A848BBA02FA3F4AA29CAAA5DA8FB98B@apcprd06.prod.outlook.com>
+Received: from SEZPR06MB5576.apcprd06.prod.outlook.com (2603:1096:101:c9::14)
+ by TY0PR06MB6801.apcprd06.prod.outlook.com (2603:1096:405:12::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.21; Tue, 26 Aug
+ 2025 14:06:01 +0000
+Received: from SEZPR06MB5576.apcprd06.prod.outlook.com
+ ([fe80::5c0a:2748:6a72:99b6]) by SEZPR06MB5576.apcprd06.prod.outlook.com
+ ([fe80::5c0a:2748:6a72:99b6%7]) with mapi id 15.20.9052.019; Tue, 26 Aug 2025
+ 14:06:00 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net (open list:F2FS FILE SYSTEM),
+ linux-kernel@vger.kernel.org (open list)
+Date: Tue, 26 Aug 2025 22:05:38 +0800
+Message-Id: <20250826140539.521074-1-liaoyuanhong@vivo.com>
+X-Mailer: git-send-email 2.34.1
+X-ClientProxiedBy: TYCP286CA0085.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:2b3::8) To SEZPR06MB5576.apcprd06.prod.outlook.com
+ (2603:1096:101:c9::14)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5576:EE_|TY0PR06MB6801:EE_
+X-MS-Office365-Filtering-Correlation-Id: 13696bb4-face-446e-e7ff-08dde4a9afb2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|52116014|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?kCKeJDv9+7MZn9z8hXCS6mpeiNAa49QeJ0CTkk3PiS10yY3couWCObUenMAl?=
+ =?us-ascii?Q?fT1j9LCrEgamyGFOj50IwbhnfdBcMv2FxIKpaqe2o9idVusi7yk+eHEL+AMA?=
+ =?us-ascii?Q?HOKmpPzqUG+nZlDdkOSVNCf3KKbJfEJML9JilBV86FcW8bKirGH/eirQlGBN?=
+ =?us-ascii?Q?VBTs4cyh/7LHWgXJl4fFX3sEW7ekNrra790L0lW6oJEERHQciSTvHjQMrD5I?=
+ =?us-ascii?Q?KnUNRDmKGMrT3TY+J5xriHWfuA/YcFHtREvR/8eoROp4IsIruqsCDojI2z03?=
+ =?us-ascii?Q?3I124lzSO8DnXql8oUkOobgG5Uc5auXGAHQHh3saPbCL2YtIA9my/E3SKran?=
+ =?us-ascii?Q?2U/SKMg65UVgusB6JpJ9+sVz8mhNr3MBz1013VuqcAe7Rb/4BYtIZDEs/Iur?=
+ =?us-ascii?Q?BWe58KxM8apllqhXNL54g8DfQ9PBxTsmNsh7l9fuPPnj0TH5qja7AVVsVVUs?=
+ =?us-ascii?Q?2tBQvXnQHtI1NhCrr8pERCypVGXRcbDw65ch5EPa4fpm5Vepfhmeo+wDaMSR?=
+ =?us-ascii?Q?qoJZbB13LGr5xJl4oFOmVfO0TwTXs5pGPGAhpbCEhfmQyAXNz1VIgaDupt4J?=
+ =?us-ascii?Q?6JtvaOkvr/6C7pHUf3ctymA8SHdY4ahEdrJ1cMzCXTCjMpaXzeKFB4jrkucj?=
+ =?us-ascii?Q?4FmvbnqJCihKZz8dKk6uxoAdTBP8WZHFUFSSwy8VeXNqhO3ETC0xzgn0WRH2?=
+ =?us-ascii?Q?tOwylw2a1OclddbqGOxnWYtCZofdvLpfzBlOLMwLgwofetDknInOUWZudnbh?=
+ =?us-ascii?Q?z1wk4k5Lm2qGSOpvZQsosn35b4bBzQepEnzFlarnokO7kPXh/KJbj6hNButh?=
+ =?us-ascii?Q?lSpW3liv+Q13+Kp997oXBkLZr/W8Gm0qd6oTcxNcFt3Ie6GTEOphfuF/QHNZ?=
+ =?us-ascii?Q?fJzn+gAh+gk5ptaQekQvDwFE2k4Wj5DNWL1wRi/PHBHxhDy0rwIXd+IL5gLr?=
+ =?us-ascii?Q?/x9H2dAVrKNikz6IrZpnFtOwC4ayryzQxLMFWPHzEWUsQb114BW04hbVjQQ3?=
+ =?us-ascii?Q?QK7qdesvHXIk+UluKU1nax+po+PbcrkLoDuEhwnbGNL2Mv4AXA9RcAP3x48S?=
+ =?us-ascii?Q?Sl74aTyXMzmNmdRUvHAuii+orqUC/4xjCKTNNGRa4rhUvAUHa//EPJHVSfoa?=
+ =?us-ascii?Q?owzdGK1T28MFk3oavhri13e4gbaBQr1SYGHtnekzCbEPIGPIy9MNgy+I4f56?=
+ =?us-ascii?Q?tvJ14H+ERS8Z4MQL4Y92d7dJ9YNp2gSEcresAX2L8mXY1vAh1DxhfNBUejvW?=
+ =?us-ascii?Q?Rn/a/hl5UcjboheLE6z7MmIHTILLMnqL5dLu8MG7wmxNb/VYFh0pEzLi806j?=
+ =?us-ascii?Q?ODvYnWWjnUT14XREYENp8Yj2FopO0P5iO69TfIs5k3sYNOTxs6YephI3fGMd?=
+ =?us-ascii?Q?v/DrQcXq0DiRGvOoitINEZ0DJ9CsEGflfNedwaH+ESRMoANoe09Ixj6CF5rm?=
+ =?us-ascii?Q?b031ro6P5iR3ibVwCpXMb1IZjF4voOYRzEdOHmOY48cfzVOkhLNOtg=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SEZPR06MB5576.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CC4ieE11PDy6hxnZyPONncW5xY9rURWmyIdmJgHPGJD4QioVIlmX0jJHywu0?=
+ =?us-ascii?Q?ZL/CKLBkuxcHW6yu1afVAEChLIkncGmHU1BtiWAZni3A4ewldFMSzIgHhQY8?=
+ =?us-ascii?Q?roydI/beriQyspClT4f/JYf9R+M9tHJ4twBG3gaoLlppjfMvxy0Y86QKMOza?=
+ =?us-ascii?Q?tqFJ4gY4LJvIxHqDmumAbaDn/gG66E0SmHeg1ysossEIRJmLUyaHK6pZ695N?=
+ =?us-ascii?Q?x228SdcO7u4jNBRSEEua/SxLDRk2B/RmBgZJ3XJpI9l1hjGghHI6LO85UGQx?=
+ =?us-ascii?Q?4eEzhyb8x0HX/wCbJ1M+JXrj9OivNuCDqjDiUukCfwa7Ho1vcz0B7r5GZqkc?=
+ =?us-ascii?Q?cXNcIyBx+NsOprRUNA9GMD55UbTzCRzM/DGhxbHQt0msf/cgjJfxsiEgmaW3?=
+ =?us-ascii?Q?y2YrDDtYRokGFPqp3cRKXu6SLVqdg6RQ3i1asYFTcA63alaCDl7G2xdn7TUl?=
+ =?us-ascii?Q?qh/1qhAH5wqEZol+SfenTstaDpqLNw5fYSeR7ClQGnDZtH8kMXalZ68phdQF?=
+ =?us-ascii?Q?lCBLY8sg+GnyE2WViOwdMDn/uusRkP5Mfp8izxPACiTbGcUb37ZnWqFGOcRW?=
+ =?us-ascii?Q?hPzg0vhhOkJup7eJwqn2/MbdfEC8Ql5KOG3rdkGCCGVVvscu4SIdHOu+5dgd?=
+ =?us-ascii?Q?h7metpSUFfa22zy72q+R9Mf3LzZtbOUmphpInBn2HFPKaS2zS32SXBC29dIH?=
+ =?us-ascii?Q?rT3VsYLZv7Lx0ZUh2A/5wck5gM+jnf3BsUx/srVhJh8aOc4RSkGYxlsblVur?=
+ =?us-ascii?Q?fILAE2dRmMgLGX0AEe7ICHP9c0jfqrk8q8/l/uPnqzVOaMSSVxs+0ioA5waA?=
+ =?us-ascii?Q?FkCV9WiPcT417bgSKSLFWJ8tUk1Xhv0qm0V/214ZBv9DpJYYp3vDtz/8+jyM?=
+ =?us-ascii?Q?fy89pK8GJ5x/0hZmsO22KvNgvirJWX6SvfH6PoHB/3zDpKQBKaYnFS56aVUe?=
+ =?us-ascii?Q?dF7Xz1s/ljyrSe08vM6/Mr11Nuao5dpQmSIXGvisSopEEoeTbwNDPhultlxU?=
+ =?us-ascii?Q?UvES7IehemGU0mdeJathvCtAn/ssuN52XWme4tmqydGJOimp8jiW0C2vD+cc?=
+ =?us-ascii?Q?65lWzQPlP5kjTsfRJFaOhFAxp3ZHUNUWaiYBclSqp1fckQV0KElvT4B66tpu?=
+ =?us-ascii?Q?sbXXGsquyN63KApB4qgq1u8yHUTRxsaezVRWC9oSOpCzHePc9d9jjJ6UVpbv?=
+ =?us-ascii?Q?X44kLnm/ED8cmvbeGzCaSlv3RF0MM9MDHlsL20Fllj/RvtdL2CuO5OHaViae?=
+ =?us-ascii?Q?JECPZImP+f0kFNeNLsoBvB7Ru2G8GR2tqU0vUOSNBDIeNCeHNFlk5NRO9bn6?=
+ =?us-ascii?Q?SQMN2FNXN6EpUCzmjJO8k9oXqo2tamCFIEoY24ccqoQY6uYhlWgG4Ckd13+u?=
+ =?us-ascii?Q?kaJmS36WEofr+Hz+6DEJJMkFskJEYrFFwFk5JcJrDXrB3T/NiOlgU480lefF?=
+ =?us-ascii?Q?ZZ34o8oDZV3Ea8aQmCB3U3+bAizhAZE+qgXZDqynh93SiL+dULw4of+D3nSz?=
+ =?us-ascii?Q?gqB7Il5j4ciM1QSU18ROpr1XzIPyQMmzdJ+0G8TzMJo5iug+ZxoMdR5jR0eH?=
+ =?us-ascii?Q?ZUEcdrcN25+sTN73Do9yYFpKJ/PGwbwjuHbOa+pB?=
 X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 13696bb4-face-446e-e7ff-08dde4a9afb2
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5576.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: KL1PR06MB6845.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 982af885-884b-4ca9-a67f-08dde442ab4b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Aug 2025 01:48:34.8793 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: CH+jg+Dr5sW5iceLHOrKDBLr7lcPP/nfnAJiOzbKvwNpb5Ap/8iBRualeqQMEX4q7Edv8Bya9oPj4Va0Ay063A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB5400
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "sfi-spamd-1.hosts.colo.sdot.me",
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2025 14:06:00.6441 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ysXiTD/Xf/oAkJLNNUXEI2S4Q6gT7HZwBx0Drwuk1p3nBx5vKh4T1/mpW8RI3Ed7zateIoFeSTEuBksGlZPV/g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR06MB6801
+X-Spam-Score: 0.8 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  在 8/25/2025 10:08 AM, Chao Yu 写道: > On 8/20/25 15:54,
-    Wang Xiaojun wrote: >> This patch fixes missing space reclamation during
-   the recovery process. >> >> In the following scenarios, F2FS cannot [...] 
- 
- Content analysis details:   (-0.2 points, 5.0 required)
- 
-  pts rule name              description
+ Content preview: Introduces two new sys nodes: allocate_section_hint and
+ allocate_section_policy.
+ The allocate_section_hint identifies the boundary between devices, measured
+ in sections; it defaults to the end of the [...] 
+ Content analysis details:   (0.8 points, 5.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
-                             domain
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.75.8 listed in wl.mailspike.net]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain 0.0 ARC_SIGNED             Message has a ARC signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.0 ARC_VALID              Message has a valid ARC signature
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.0 ARC_SIGNED             Message has a ARC signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
-X-Headers-End: 1uqinr-0001Kc-S1
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs:fix missing space reclamation during
- the recovery process
+ envelope-from domain
+ 0.0 ARC_VALID              Message has a valid ARC signature
+ 1.0 HK_RANDOM_FROM         From username looks random
+ 0.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
+X-Headers-End: 1uquJU-0007Mo-M7
+Subject: [f2fs-dev] [PATCH v3] f2fs: Use allocate_section_policy to control
+ write priority in multi-devices setups
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -218,133 +198,247 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: =?utf-8?B?546L5pmT54+6?= via Linux-f2fs-devel
+From: Liao Yuanhong via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: =?utf-8?B?546L5pmT54+6?= <wangxiaojun@vivo.com>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Reply-To: Liao Yuanhong <liaoyuanhong@vivo.com>
+Cc: Liao Yuanhong <liaoyuanhong@vivo.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-5ZyoIDgvMjUvMjAyNSAxMDowOCBBTSwgQ2hhbyBZdSDlhpnpgZM6DQo+IE9uIDgvMjAvMjUgMTU6
-NTQsIFdhbmcgWGlhb2p1biB3cm90ZToNCj4+IFRoaXMgcGF0Y2ggZml4ZXMgbWlzc2luZyBzcGFj
-ZSByZWNsYW1hdGlvbiBkdXJpbmcgdGhlIHJlY292ZXJ5IHByb2Nlc3MuDQo+Pg0KPj4gSW4gdGhl
-IGZvbGxvd2luZyBzY2VuYXJpb3MsIEYyRlMgY2Fubm90IHJlY2xhaW0gdHJ1bmNhdGVkIHNwYWNl
-Lg0KPj4gY2FzZSAxOg0KPj4gd3JpdGUgZmlsZSBBLCBzaXplIGlzIDFHIHwgQ1AgfCB0cnVuY2F0
-ZSBBIHRvIDFNIHwgZnN5bmMgQSB8IFNQTw0KPj4NCj4+IGNhc2UgMjoNCj4+IENQIHwgd3JpdGUg
-ZmlsZSBBLCBzaXplIGlzIDFHIHwgZnN5bmMgQSB8IHRydW5jYXRlIEEgdG8gMU0gfCBmc3luYyBB
-IHxTUE8NCj4+DQo+PiBEdXJpbmcgdGhlIHJlY292ZXJ5IHByb2Nlc3MsIEYyRlMgd2lsbCByZWNv
-dmVyIGZpbGUgQSwNCj4+IGJ1dCB0aGUgMU0tMUcgc3BhY2UgY2Fubm90IGJlIHJlY2xhaW1lZC4N
-Cj4+DQo+PiBCdXQgdGhlIGNvbWJpbmF0aW9uIG9mIHRydW5jYXRlIGFuZCBmYWxsb2MgY29tcGxp
-Y2F0ZXMgdGhlIHJlY292ZXJ5DQo+PiBwcm9jZXNzLg0KPj4gRm9yIGV4YW1wbGUsIGluIHRoZSBm
-b2xsb3dpbmcgc2NlbmFyaW86DQo+PiB3cml0ZSBmaWxlQSAyTSB8IGZzeW5jIHwgdHJ1bmNhdGUg
-MjU2SyB8IGZhbGxvYyAtayAyNTZLIDFNIHwgZnN5bmMgQSB8IFNQTw0KPj4gVGhlIGZhbGxvYyAo
-MjU2SywgMU0pIG5lZWQgdG8gYmUgcmVjb3ZlcmVkIGFzIHByZS1hbGxvY2F0ZWQgc3BhY2UuDQo+
-Pg0KPj4gSG93ZXZlciBpbiB0aGUgZm9sbG93aW5nIHNjZW5hcmlvcywgdGhlIHNpdHVhdGlvbiBp
-cyB0aGUgb3Bwb3NpdGUuDQo+PiB3cml0ZSBmaWxlQSAyTSB8IGZzeW5jIHwgZmFsbG9jIC1rIDJN
-IDEwTSB8IGZzeW5jIEEgfCB0cnVuY2F0ZSAyNTZLIHwNCj4+IGZzeW5jIEEgfCBTUE8NCj4+IElu
-IHRoaXMgc2NlbmFyaW8sIHRoZSBzcGFjZSBhbGxvY2F0ZWQgYnkgZmFsbG9jIG5lZWRzIHRvIGJl
-IHRydW5jYXRlZC4NCj4+DQo+PiBEdXJpbmcgdGhlIHJlY292ZXJ5IHByb2Nlc3MsIGl0IGlzIGRp
-ZmZpY3VsdCB0byBkaXN0aW5ndWlzaA0KPj4gYmV0d2VlbiB0aGUgYWJvdmUgdHdvIHR5cGVzIG9m
-IGZhbGxvYy4NCj4+DQo+PiBTbyBpbiB0aGlzIGNhc2Ugb2YgZmFsbG9jIC1rIHdlIG5lZWQgdG8g
-dHJpZ2dlciBhIGNoZWNrcG9pbnQgZm9yIGZzeW5jLg0KPj4NCj4+IEZpeGVzOiBkNjI0Yzk2ZmIz
-MjQ5ICgiZjJmczogYWRkIHJlY292ZXJ5IHJvdXRpbmVzIGZvciByb2xsLWZvcndhcmQiKQ0KPj4N
-Cj4+IFNpZ25lZC1vZmYtYnk6IFdhbmcgWGlhb2p1biA8d2FuZ3hpYW9qdW5Adml2by5jb20+DQo+
-PiAtLS0NCj4+IHY0OiBUcmlnZ2VyIGNoZWNrcG9pbnQgZm9yIGZzeW5jIGFmdGVyIGZhbGxvYyAt
-aw0KPj4gdjM6IEFkZCBhIEZpeGVzIGxpbmUuDQo+PiB2MjogQXBwbHkgQ2hhbydzIHN1Z2dlc3Rp
-b24gZnJvbSB2MS4gTm8gbG9naWNhbCBjaGFuZ2VzLg0KPj4gdjE6IEZpeCBtaXNzaW5nIHNwYWNl
-IHJlY2xhbWF0aW9uIGR1cmluZyB0aGUgcmVjb3ZlcnkgcHJvY2Vzcy4NCj4+IC0tLQ0KPj4gICBm
-cy9mMmZzL2NoZWNrcG9pbnQuYyB8ICAzICsrKw0KPj4gICBmcy9mMmZzL2YyZnMuaCAgICAgICB8
-ICAzICsrKw0KPj4gICBmcy9mMmZzL2ZpbGUuYyAgICAgICB8ICA4ICsrKysrKy0tDQo+PiAgIGZz
-L2YyZnMvcmVjb3ZlcnkuYyAgIHwgMTggKysrKysrKysrKysrKysrKystDQo+PiAgIDQgZmlsZXMg
-Y2hhbmdlZCwgMjkgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkNCj4+DQo+PiBkaWZmIC0t
-Z2l0IGEvZnMvZjJmcy9jaGVja3BvaW50LmMgYi9mcy9mMmZzL2NoZWNrcG9pbnQuYw0KPj4gaW5k
-ZXggZGIzODMxZjdmMmY1Li43NzVlMzMzMzA5N2UgMTAwNjQ0DQo+PiAtLS0gYS9mcy9mMmZzL2No
-ZWNrcG9pbnQuYw0KPj4gKysrIGIvZnMvZjJmcy9jaGVja3BvaW50LmMNCj4+IEBAIC0xMTUxLDYg
-KzExNTEsOSBAQCBzdGF0aWMgaW50IGYyZnNfc3luY19pbm9kZV9tZXRhKHN0cnVjdCBmMmZzX3Ni
-X2luZm8gKnNiaSkNCj4+ICAgCQlpZiAoaW5vZGUpIHsNCj4+ICAgCQkJc3luY19pbm9kZV9tZXRh
-ZGF0YShpbm9kZSwgMCk7DQo+PiAgIA0KPj4gKwkJCWlmIChpc19pbm9kZV9mbGFnX3NldChpbm9k
-ZSwgRklfRkFMTE9DX0tFRVBfU0laRSkpDQo+PiArCQkJCWNsZWFyX2lub2RlX2ZsYWcoaW5vZGUs
-IEZJX0ZBTExPQ19LRUVQX1NJWkUpOw0KPj4gKw0KPj4gICAJCQkvKiBpdCdzIG9uIGV2aWN0aW9u
-ICovDQo+PiAgIAkJCWlmIChpc19pbm9kZV9mbGFnX3NldChpbm9kZSwgRklfRElSVFlfSU5PREUp
-KQ0KPj4gICAJCQkJZjJmc191cGRhdGVfaW5vZGVfcGFnZShpbm9kZSk7DQo+PiBkaWZmIC0tZ2l0
-IGEvZnMvZjJmcy9mMmZzLmggYi9mcy9mMmZzL2YyZnMuaA0KPj4gaW5kZXggNDZiZTc1NjA1NDhj
-Li5mNWE1NGJjODQ4ZDUgMTAwNjQ0DQo+PiAtLS0gYS9mcy9mMmZzL2YyZnMuaA0KPj4gKysrIGIv
-ZnMvZjJmcy9mMmZzLmgNCj4+IEBAIC00NTksNiArNDU5LDcgQEAgc3RydWN0IGZzeW5jX2lub2Rl
-X2VudHJ5IHsNCj4+ICAgCXN0cnVjdCBpbm9kZSAqaW5vZGU7CS8qIHZmcyBpbm9kZSBwb2ludGVy
-ICovDQo+PiAgIAlibG9ja190IGJsa2FkZHI7CS8qIGJsb2NrIGFkZHJlc3MgbG9jYXRpbmcgdGhl
-IGxhc3QgZnN5bmMgKi8NCj4+ICAgCWJsb2NrX3QgbGFzdF9kZW50cnk7CS8qIGJsb2NrIGFkZHJl
-c3MgbG9jYXRpbmcgdGhlIGxhc3QgZGVudHJ5ICovDQo+PiArCWxvZmZfdCBtYXhfaV9zaXplOwkv
-KiBwcmV2aW91cyBtYXggZmlsZSBzaXplIGZvciB0cnVuY2F0ZSAqLw0KPj4gICB9Ow0KPj4gICAN
-Cj4+ICAgI2RlZmluZSBuYXRzX2luX2N1cnN1bShqbmwpCQkobGUxNl90b19jcHUoKGpubCktPm5f
-bmF0cykpDQo+PiBAQCAtODM1LDYgKzgzNiw3IEBAIGVudW0gew0KPj4gICAJRklfQVRPTUlDX1JF
-UExBQ0UsCS8qIGluZGljYXRlIGF0b21pYyByZXBsYWNlICovDQo+PiAgIAlGSV9PUEVORURfRklM
-RSwJCS8qIGluZGljYXRlIGZpbGUgaGFzIGJlZW4gb3BlbmVkICovDQo+PiAgIAlGSV9ET05BVEVf
-RklOSVNIRUQsCS8qIGluZGljYXRlIHBhZ2UgZG9uYXRpb24gb2YgZmlsZSBoYXMgYmVlbiBmaW5p
-c2hlZCAqLw0KPj4gKwlGSV9GQUxMT0NfS0VFUF9TSVpFLAkvKiBmaWxlIGFsbG9jYXRlIHJlc2Vy
-dmVkIHNwYWNlIGFuZCBrZWVwIHNpemUgKi8NCj4+ICAgCUZJX01BWCwJCQkvKiBtYXggZmxhZywg
-bmV2ZXIgYmUgdXNlZCAqLw0KPj4gICB9Ow0KPj4gICANCj4+IEBAIC0xMTkzLDYgKzExOTUsNyBA
-QCBlbnVtIGNwX3JlYXNvbl90eXBlIHsNCj4+ICAgCUNQX1NQRUNfTE9HX05VTSwNCj4+ICAgCUNQ
-X1JFQ09WRVJfRElSLA0KPj4gICAJQ1BfWEFUVFJfRElSLA0KPj4gKwlDUF9GQUxMT0NfRklMRSwN
-Cj4+ICAgfTsNCj4+ICAgDQo+PiAgIGVudW0gaW9zdGF0X3R5cGUgew0KPj4gZGlmZiAtLWdpdCBh
-L2ZzL2YyZnMvZmlsZS5jIGIvZnMvZjJmcy9maWxlLmMNCj4+IGluZGV4IDQyZmFhZWQ2YTAyZC4u
-ZjA4MjBmODE3ODI0IDEwMDY0NA0KPj4gLS0tIGEvZnMvZjJmcy9maWxlLmMNCj4+ICsrKyBiL2Zz
-L2YyZnMvZmlsZS5jDQo+PiBAQCAtMjM2LDYgKzIzNiw4IEBAIHN0YXRpYyBpbmxpbmUgZW51bSBj
-cF9yZWFzb25fdHlwZSBuZWVkX2RvX2NoZWNrcG9pbnQoc3RydWN0IGlub2RlICppbm9kZSkNCj4+
-ICAgCWVsc2UgaWYgKGYyZnNfZXhpc3Rfd3JpdHRlbl9kYXRhKHNiaSwgRjJGU19JKGlub2RlKS0+
-aV9waW5vLA0KPj4gICAJCQkJCQkJWEFUVFJfRElSX0lOTykpDQo+PiAgIAkJY3BfcmVhc29uID0g
-Q1BfWEFUVFJfRElSOw0KPj4gKwllbHNlIGlmIChpc19pbm9kZV9mbGFnX3NldChpbm9kZSwgRklf
-RkFMTE9DX0tFRVBfU0laRSkpDQo+PiArCQljcF9yZWFzb24gPSBDUF9GQUxMT0NfRklMRTsNCj4+
-ICAgDQo+PiAgIAlyZXR1cm4gY3BfcmVhc29uOw0KPj4gICB9DQo+PiBAQCAtMTk1MywxMCArMTk1
-NSwxMiBAQCBzdGF0aWMgaW50IGYyZnNfZXhwYW5kX2lub2RlX2RhdGEoc3RydWN0IGlub2RlICpp
-bm9kZSwgbG9mZl90IG9mZnNldCwNCj4+ICAgCX0NCj4+ICAgDQo+PiAgIAlpZiAobmV3X3NpemUg
-PiBpX3NpemVfcmVhZChpbm9kZSkpIHsNCj4+IC0JCWlmIChtb2RlICYgRkFMTE9DX0ZMX0tFRVBf
-U0laRSkNCj4+ICsJCWlmIChtb2RlICYgRkFMTE9DX0ZMX0tFRVBfU0laRSkgew0KPj4gKwkJCXNl
-dF9pbm9kZV9mbGFnKGlub2RlLCBGSV9GQUxMT0NfS0VFUF9TSVpFKTsNCj4gWGlhb2p1biwNCj4N
-Cj4gV2VsbCwgd2hhdCBhYm91dCB0aGlzIGNhc2U/DQo+DQo+IGZhbGxvYyAtayBvZnMgc2l6ZSBm
-aWxlDQo+IGZsdXNoIGFsbCBkYXRhIGFuZCBtZXRhZGF0YSBvZiBmaWxlDQoNCkhpIENoYW8sDQpG
-bHVzaCBhbGwgZGF0YSBhbmQgbWV0YWRhdGEgb2YgZmlsZSwgYnV0IHdpdGhvdXQgdXNpbmcgZnN5
-bmMgb3IgQ1A/DQoNClRoYW5rcywNCg0KPiBldmljdCBpbm9kZQ0KPiB3cml0ZSBmaWxlICYgZnN5
-bmMgZmlsZSB3b24ndCB0cmlnZ2VyIGEgY2hlY2twb2ludD8NCj4NCj4gT3IgYW0gSSBtaXNzaW5n
-IHNvbWV0aGluZz8NCj4NCj4gVGhhbmtzLA0KPg0KPj4gICAJCQlmaWxlX3NldF9rZWVwX2lzaXpl
-KGlub2RlKTsNCj4+IC0JCWVsc2UNCj4+ICsJCX0gZWxzZSB7DQo+PiAgIAkJCWYyZnNfaV9zaXpl
-X3dyaXRlKGlub2RlLCBuZXdfc2l6ZSk7DQo+PiArCQl9DQo+PiAgIAl9DQo+PiAgIA0KPj4gICAJ
-cmV0dXJuIGVycjsNCj4+IGRpZmYgLS1naXQgYS9mcy9mMmZzL3JlY292ZXJ5LmMgYi9mcy9mMmZz
-L3JlY292ZXJ5LmMNCj4+IGluZGV4IDRjYjNhOTE4MDFiNC4uNjhiNjJjOGE3NGQzIDEwMDY0NA0K
-Pj4gLS0tIGEvZnMvZjJmcy9yZWNvdmVyeS5jDQo+PiArKysgYi9mcy9mMmZzL3JlY292ZXJ5LmMN
-Cj4+IEBAIC05NSw2ICs5NSw3IEBAIHN0YXRpYyBzdHJ1Y3QgZnN5bmNfaW5vZGVfZW50cnkgKmFk
-ZF9mc3luY19pbm9kZShzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmksDQo+PiAgIAllbnRyeSA9IGYy
-ZnNfa21lbV9jYWNoZV9hbGxvYyhmc3luY19lbnRyeV9zbGFiLA0KPj4gICAJCQkJCUdGUF9GMkZT
-X1pFUk8sIHRydWUsIE5VTEwpOw0KPj4gICAJZW50cnktPmlub2RlID0gaW5vZGU7DQo+PiArCWVu
-dHJ5LT5tYXhfaV9zaXplID0gaV9zaXplX3JlYWQoaW5vZGUpOw0KPj4gICAJbGlzdF9hZGRfdGFp
-bCgmZW50cnktPmxpc3QsIGhlYWQpOw0KPj4gICANCj4+ICAgCXJldHVybiBlbnRyeTsNCj4+IEBA
-IC03OTYsNiArNzk3LDcgQEAgc3RhdGljIGludCByZWNvdmVyX2RhdGEoc3RydWN0IGYyZnNfc2Jf
-aW5mbyAqc2JpLCBzdHJ1Y3QgbGlzdF9oZWFkICppbm9kZV9saXN0LA0KPj4gICAJd2hpbGUgKDEp
-IHsNCj4+ICAgCQlzdHJ1Y3QgZnN5bmNfaW5vZGVfZW50cnkgKmVudHJ5Ow0KPj4gICAJCXN0cnVj
-dCBmb2xpbyAqZm9saW87DQo+PiArCQlsb2ZmX3QgaV9zaXplOw0KPj4gICANCj4+ICAgCQlpZiAo
-IWYyZnNfaXNfdmFsaWRfYmxrYWRkcihzYmksIGJsa2FkZHIsIE1FVEFfUE9SKSkNCj4+ICAgCQkJ
-YnJlYWs7DQo+PiBAQCAtODI4LDYgKzgzMCw5IEBAIHN0YXRpYyBpbnQgcmVjb3Zlcl9kYXRhKHN0
-cnVjdCBmMmZzX3NiX2luZm8gKnNiaSwgc3RydWN0IGxpc3RfaGVhZCAqaW5vZGVfbGlzdCwNCj4+
-ICAgCQkJCWJyZWFrOw0KPj4gICAJCQl9DQo+PiAgIAkJCXJlY292ZXJlZF9pbm9kZSsrOw0KPj4g
-KwkJCWlfc2l6ZSA9IGlfc2l6ZV9yZWFkKGVudHJ5LT5pbm9kZSk7DQo+PiArCQkJaWYgKGVudHJ5
-LT5tYXhfaV9zaXplIDwgaV9zaXplKQ0KPj4gKwkJCQllbnRyeS0+bWF4X2lfc2l6ZSA9IGlfc2l6
-ZTsNCj4+ICAgCQl9DQo+PiAgIAkJaWYgKGVudHJ5LT5sYXN0X2RlbnRyeSA9PSBibGthZGRyKSB7
-DQo+PiAgIAkJCWVyciA9IHJlY292ZXJfZGVudHJ5KGVudHJ5LT5pbm9kZSwgZm9saW8sIGRpcl9s
-aXN0KTsNCj4+IEBAIC04NDQsOCArODQ5LDE5IEBAIHN0YXRpYyBpbnQgcmVjb3Zlcl9kYXRhKHN0
-cnVjdCBmMmZzX3NiX2luZm8gKnNiaSwgc3RydWN0IGxpc3RfaGVhZCAqaW5vZGVfbGlzdCwNCj4+
-ICAgCQl9DQo+PiAgIAkJcmVjb3ZlcmVkX2Rub2RlKys7DQo+PiAgIA0KPj4gLQkJaWYgKGVudHJ5
-LT5ibGthZGRyID09IGJsa2FkZHIpDQo+PiArCQlpZiAoZW50cnktPmJsa2FkZHIgPT0gYmxrYWRk
-cikgew0KPj4gKwkJCWlfc2l6ZSA9IGlfc2l6ZV9yZWFkKGVudHJ5LT5pbm9kZSk7DQo+PiArCQkJ
-aWYgKGVudHJ5LT5tYXhfaV9zaXplID4gaV9zaXplKSB7DQo+PiArCQkJCWVyciA9IGYyZnNfdHJ1
-bmNhdGVfYmxvY2tzKGVudHJ5LT5pbm9kZSwNCj4+ICsJCQkJCQkJaV9zaXplLCBmYWxzZSk7DQo+
-PiArCQkJCWlmIChlcnIpIHsNCj4+ICsJCQkJCWYyZnNfZm9saW9fcHV0KGZvbGlvLCB0cnVlKTsN
-Cj4+ICsJCQkJCWJyZWFrOw0KPj4gKwkJCQl9DQo+PiArCQkJCWYyZnNfbWFya19pbm9kZV9kaXJ0
-eV9zeW5jKGVudHJ5LT5pbm9kZSwgdHJ1ZSk7DQo+PiArCQkJfQ0KPj4gICAJCQlsaXN0X21vdmVf
-dGFpbCgmZW50cnktPmxpc3QsIHRtcF9pbm9kZV9saXN0KTsNCj4+ICsJCX0NCj4+ICAgbmV4dDoN
-Cj4+ICAgCQlyYV9ibG9ja3MgPSBhZGp1c3RfcG9yX3JhX2Jsb2NrcyhzYmksIHJhX2Jsb2Nrcywg
-YmxrYWRkciwNCj4+ICAgCQkJCQluZXh0X2Jsa2FkZHJfb2Zfbm9kZShmb2xpbykpOw0KDQoNCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZz
-LWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5l
-dApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZz
-LWRldmVsCg==
+Introduces two new sys nodes: allocate_section_hint and
+allocate_section_policy. The allocate_section_hint identifies the boundary
+between devices, measured in sections; it defaults to the end of the device
+for single storage setups, and the end of the first device for multiple
+storage setups. The allocate_section_policy determines the write strategy,
+with a default value of 0 for normal sequential write strategy. A value of
+1 prioritizes writes before the allocate_section_hint, while a value of 2
+prioritizes writes after it.
+
+This strategy addresses the issue where, despite F2FS supporting multiple
+devices, SOC vendors lack multi-devices support (currently only supporting
+zoned devices). As a workaround, multiple storage devices are mapped to a
+single dm device. Both this workaround and the F2FS multi-devices solution
+may require prioritizing writing to certain devices, such as a device with
+better performance or when switching is needed due to performance
+degradation near a device's end. For scenarios with more than two devices,
+sort them at mount time to utilize this feature.
+
+When using this feature with a single storage device, it has almost no
+impact. However, for configurations where multiple storage devices are
+mapped to the same dm device using F2FS, utilizing this feature can provide
+some optimization benefits. Therefore, I believe it should not be limited
+to just multi-devices usage.
+
+Signed-off-by: Liao Yuanhong <liaoyuanhong@vivo.com>
+---
+Changes in v3:
+	- Refactored the implementation logic of allocate_section_policy in
+	get_new_segment(). The current version has a more coherent and readable
+	logic while maintaining nearly the same functionality.
+	- Added a validity check for allocate_section_hint in get_new_segment()
+	to prevent potential conflicts that MAIN_SECS() might cause.
+	- Adjusted the initialization position of allocate_section_hint, now
+	initialized in init_sb_info().
+
+Changes in v2:
+	- Updated the feature naming to better reflect its actual functionality.
+	- Appended patch description to clarify whether the usage should be
+	limited to multi-devices.
+	- Improved the code style.
+	- Fixed typo.
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 22 ++++++++++++++++++++++
+ fs/f2fs/f2fs.h                          |  8 ++++++++
+ fs/f2fs/gc.c                            |  5 +++++
+ fs/f2fs/segment.c                       | 15 +++++++++++++++
+ fs/f2fs/super.c                         |  4 ++++
+ fs/f2fs/sysfs.c                         | 18 ++++++++++++++++++
+ 6 files changed, 72 insertions(+)
+
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index ee3acc8c2cb8..b590809869ca 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -911,3 +911,25 @@ Description:	Used to adjust the BG_GC priority when pending IO, with a default v
+ 		bggc_io_aware = 1   skip background GC if there is pending read IO
+ 		bggc_io_aware = 2   don't aware IO for background GC
+ 		==================  ======================================================
++
++What:		/sys/fs/f2fs/<disk>/allocate_section_hint
++Date:		August 2025
++Contact:	"Liao Yuanhong" <liaoyuanhong@vivo.com>
++Description:	Indicates the hint section between the first device and others in multi-devices
++		setup. It defaults to the end of the first device in sections. For a single storage
++		device, it defaults to the total number of sections. It can be manually set to match
++		scenarios where multi-devices are mapped to the same dm device.
++
++What:		/sys/fs/f2fs/<disk>/allocate_section_policy
++Date:		August 2025
++Contact:	"Liao Yuanhong" <liaoyuanhong@vivo.com>
++Description:	Controls write priority in multi-devices setups. A value of 0 means normal writing.
++		A value of 1 prioritizes writing to devices before the allocate_section_hint. A value of 2
++		prioritizes writing to devices after the allocate_section_hint. The default is 0.
++
++		===========================  ==========================================================
++		value					     description
++		allocate_section_policy = 0  Normal writing
++		allocate_section_policy = 1  Prioritize writing to section before allocate_section_hint
++		allocate_section_policy = 2  Prioritize writing to section after allocate_section_hint
++		===========================  ==========================================================
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 6cde72fce74e..7c6bfee81c61 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -162,6 +162,12 @@ enum bggc_io_aware_policy {
+ 	AWARE_NONE,			/* don't aware IO for background GC */
+ };
+ 
++enum device_allocation_policy {
++	ALLOCATE_FORWARD_NOHINT,
++	ALLOCATE_FORWARD_WITHIN_HINT,
++	ALLOCATE_FORWARD_FROM_HINT,
++};
++
+ /*
+  * An implementation of an rwsem that is explicitly unfair to readers. This
+  * prevents priority inversion when a low-priority reader acquires the read lock
+@@ -1856,6 +1862,8 @@ struct f2fs_sb_info {
+ 	bool aligned_blksize;			/* all devices has the same logical blksize */
+ 	unsigned int first_seq_zone_segno;	/* first segno in sequential zone */
+ 	unsigned int bggc_io_aware;		/* For adjust the BG_GC priority when pending IO */
++	unsigned int allocate_section_hint;	/* the boundary position between devices */
++	unsigned int allocate_section_policy;	/* determine the section writing priority */
+ 
+ 	/* For write statistics */
+ 	u64 sectors_written_start;
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 098e9f71421e..b57b8fd64747 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -2182,6 +2182,8 @@ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
+ 	SM_I(sbi)->segment_count = (int)SM_I(sbi)->segment_count + segs;
+ 	MAIN_SEGS(sbi) = (int)MAIN_SEGS(sbi) + segs;
+ 	MAIN_SECS(sbi) += secs;
++	if (sbi->allocate_section_hint > MAIN_SECS(sbi))
++		sbi->allocate_section_hint = MAIN_SECS(sbi);
+ 	FREE_I(sbi)->free_sections = (int)FREE_I(sbi)->free_sections + secs;
+ 	FREE_I(sbi)->free_segments = (int)FREE_I(sbi)->free_segments + segs;
+ 	F2FS_CKPT(sbi)->user_block_count = cpu_to_le64(user_block_count + blks);
+@@ -2189,6 +2191,9 @@ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
+ 	if (f2fs_is_multi_device(sbi)) {
+ 		int last_dev = sbi->s_ndevs - 1;
+ 
++		sbi->allocate_section_hint = FDEV(0).total_segments /
++					SEGS_PER_SEC(sbi);
++
+ 		FDEV(last_dev).total_segments =
+ 				(int)FDEV(last_dev).total_segments + segs;
+ 		FDEV(last_dev).end_blk =
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 04b0a3c1804d..e86b78111444 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -2807,6 +2807,21 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
+ 	}
+ #endif
+ 
++	/*
++	 * Prevent allocate_section_hint from exceeding MAIN_SECS()
++	 * due to desynchronization.
++	 */
++	if (sbi->allocate_section_policy != ALLOCATE_FORWARD_NOHINT &&
++		sbi->allocate_section_hint > MAIN_SECS(sbi))
++		sbi->allocate_section_hint = MAIN_SECS(sbi);
++
++	if (sbi->allocate_section_policy == ALLOCATE_FORWARD_FROM_HINT &&
++		hint < sbi->allocate_section_hint)
++		hint = sbi->allocate_section_hint;
++	else if (sbi->allocate_section_policy == ALLOCATE_FORWARD_WITHIN_HINT &&
++			hint >= sbi->allocate_section_hint)
++		hint = 0;
++
+ find_other_zone:
+ 	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
+ 
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index e288b7be3131..924ad2216f67 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4238,6 +4238,7 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
+ 	sbi->total_node_count = SEGS_TO_BLKS(sbi,
+ 			((le32_to_cpu(raw_super->segment_count_nat) / 2) *
+ 			NAT_ENTRY_PER_BLOCK));
++	sbi->allocate_section_hint = le32_to_cpu(raw_super->section_count);
+ 	F2FS_ROOT_INO(sbi) = le32_to_cpu(raw_super->root_ino);
+ 	F2FS_NODE_INO(sbi) = le32_to_cpu(raw_super->node_ino);
+ 	F2FS_META_INO(sbi) = le32_to_cpu(raw_super->meta_ino);
+@@ -4721,6 +4722,7 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+ 	logical_blksize = bdev_logical_block_size(sbi->sb->s_bdev);
+ 	sbi->aligned_blksize = true;
+ 	sbi->bggc_io_aware = AWARE_ALL_IO;
++	sbi->allocate_section_policy = ALLOCATE_FORWARD_NOHINT;
+ #ifdef CONFIG_BLK_DEV_ZONED
+ 	sbi->max_open_zones = UINT_MAX;
+ 	sbi->blkzone_alloc_policy = BLKZONE_ALLOC_PRIOR_SEQ;
+@@ -4752,6 +4754,8 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+ 					SEGS_TO_BLKS(sbi,
+ 					FDEV(i).total_segments) - 1 +
+ 					le32_to_cpu(raw_super->segment0_blkaddr);
++				sbi->allocate_section_hint = FDEV(i).total_segments /
++							SEGS_PER_SEC(sbi);
+ 			} else {
+ 				FDEV(i).start_blk = FDEV(i - 1).end_blk + 1;
+ 				FDEV(i).end_blk = FDEV(i).start_blk +
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 1ffaf9e74ce9..81b99c2a02a9 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -889,6 +889,20 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 		return count;
+ 	}
+ 
++	if (!strcmp(a->attr.name, "allocate_section_hint")) {
++		if (t < 0 || t > MAIN_SECS(sbi))
++			return -EINVAL;
++		sbi->allocate_section_hint = t;
++		return count;
++	}
++
++	if (!strcmp(a->attr.name, "allocate_section_policy")) {
++		if (t < ALLOCATE_FORWARD_NOHINT || t > ALLOCATE_FORWARD_FROM_HINT)
++			return -EINVAL;
++		sbi->allocate_section_policy = t;
++		return count;
++	}
++
+ 	*ui = (unsigned int)t;
+ 
+ 	return count;
+@@ -1161,6 +1175,8 @@ F2FS_SBI_GENERAL_RW_ATTR(max_victim_search);
+ F2FS_SBI_GENERAL_RW_ATTR(migration_granularity);
+ F2FS_SBI_GENERAL_RW_ATTR(migration_window_granularity);
+ F2FS_SBI_GENERAL_RW_ATTR(dir_level);
++F2FS_SBI_GENERAL_RW_ATTR(allocate_section_hint);
++F2FS_SBI_GENERAL_RW_ATTR(allocate_section_policy);
+ #ifdef CONFIG_F2FS_IOSTAT
+ F2FS_SBI_GENERAL_RW_ATTR(iostat_enable);
+ F2FS_SBI_GENERAL_RW_ATTR(iostat_period_ms);
+@@ -1398,6 +1414,8 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(max_read_extent_count),
+ 	ATTR_LIST(carve_out),
+ 	ATTR_LIST(reserved_pin_section),
++	ATTR_LIST(allocate_section_hint),
++	ATTR_LIST(allocate_section_policy),
+ 	NULL,
+ };
+ ATTRIBUTE_GROUPS(f2fs);
+-- 
+2.34.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
