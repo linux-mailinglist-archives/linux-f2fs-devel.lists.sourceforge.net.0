@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 233A7B3898B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Aug 2025 20:29:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4D0DB3898D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Aug 2025 20:29:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=oxu5c13V8l9Q5rv8xH7/Wr1NEV0V+MXkAgvmCzQNx64=; b=KrINI+hYVQdWgKeKvvJSzYZSMg
-	WR8GsqTHcSNYDFNVWZyq7y+z3ggo5xQme3dQ65HAc1n7ubVYHaPICDm2IDLnZhYpHYnW4rv8pntES
-	L3bDsve78+1aseInU/MkcMlyBKTUpcj3+Ld5tplI42NpSwDnx2P+G8xBAIRp0mrm0NGY=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=Yt/qLrm3D0erd7EHj0fmBlrGKcYFi4Sa1AlD+YqTD9s=; b=HAfhaqTN92QV0agoLhoe2CCGRC
+	7h/sWSJJQ3jJTHJdSPdPlmVVwXU1ZXCquAcZ8cPFiVRgOaKzeqO56OpFQq51H9bV3YIvT8tpWjvcH
+	AMxgczPTxGJzn5oMzZ9tLoQTLPoL5/clMYh/q5pH799i+QZOKMdCLL6gyTost4Emdt2E=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1urKtV-0001CC-L7;
-	Wed, 27 Aug 2025 18:29:13 +0000
+	id 1urKuD-0002YW-GE;
+	Wed, 27 Aug 2025 18:29:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <shivankg@amd.com>) id 1urKtU-0001C5-D4
+ (envelope-from <shivankg@amd.com>) id 1urKuC-0002YQ-Ic
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 27 Aug 2025 18:29:12 +0000
+ Wed, 27 Aug 2025 18:29:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
  :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=A0nnKIa3fB80RQGX3kJyww6wM0HfvupvypZK8/xUXow=; b=PiMwZ4cEeNSejDrm7MzhUMG8h1
- lZmr4GNccghNs1Nq4Jby66+cTgnRBpfMMJh/CWF44Ld9CsVCukdLZPK0wQAy+gcINeZTG5eWtjiep
- o1Ya/1JWKVOCEDZm/61+GcWQLAFmH39AoeNu+VxUUEQViio6HExgEo6alCAnE+qeYE1A=;
+ bh=Mh45BlQRd8lKAcWzWmeHjSQU39/827vrG2yxSJSUH2s=; b=OrfjjBclWw0MmxYIUs2ZY/uVbD
+ +wNceunn+lofBEPn8sdFBLm1yQkzHwX0DbVg4Yoexa96INvDfV66Yq6qdG2PX9assvLcv5wHfqju8
+ UDo9ofMbOSz67MISu1r4aeZqqaXj5Fmh+xv+QY7EYNpWPkcUVFoxkt00tFZIL+Ri/Two=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
@@ -40,40 +40,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=A0nnKIa3fB80RQGX3kJyww6wM0HfvupvypZK8/xUXow=; b=fAzqDhJ/eZNgtiYZ9/WXuWUbrx
- YtL8tarSs0ec33rF+L2z/EUo0hV3/5IXBgQvizJ6P1pJpiXWaP4uq7Y3+yQCnplyIG0iPVxqy5NIV
- Akz93pSholY3aOMRfgN8V2owm9AZmOHvNbX7rrINW/pVmLuaDNeFw9DbVloIPRNZSbnA=;
-Received: from mail-bn8nam12on2052.outbound.protection.outlook.com
- ([40.107.237.52] helo=NAM12-BN8-obe.outbound.protection.outlook.com)
+ bh=Mh45BlQRd8lKAcWzWmeHjSQU39/827vrG2yxSJSUH2s=; b=foKx9x5oqenwbzbfe74bywxjVz
+ /JXbNhVYbSYz9Sl04fBGxvu6rx5FuAetSYQnub7A7zmCmPfc0uoMpSWNFg5+bKlbnvkR5AZJA46jG
+ li5QwjlM9i6wi573H9cjNPq5uoi18dNcY+wQh1guBJ2eYL2ydE0j2yJPByd9j6yuj6pQ=;
+Received: from mail-bn8nam12on2077.outbound.protection.outlook.com
+ ([40.107.237.77] helo=NAM12-BN8-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1urKtS-0005di-MH for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 27 Aug 2025 18:29:11 +0000
+ id 1urKuC-0005h0-3c for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 27 Aug 2025 18:29:56 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UXnTPHKyv1nDXQJWMhwrKz/nt0iolhGyAvEbYXVEZKyV+/0jyqwdK+jWU6zxpOOZg0idn4dAnlQ+NuX4mUQKaYyTdBnFpgHHJcgUZSJVC2P7UoFnUsQaCYFezIfhk0Cuc4WHd6ykUo+7Stms7f0H3fGeX2jdvnxvqw9kd0VNsEK7be79jpUmWWvJK6lcswrQmYrJYD8ZqqYbn3vM+p3oGWvfTkoBLpc6iFkPV/xi3FAJSysXPnwWaqcwaUrCAnjLCo5Nk9T4w97rwAWmhaLk8E0oxWuHXCNOjfuj6mgnaDdVbFVcFgASWMbmWYVMWksUW+72Irq5EdX5WAEZk+v8yg==
+ b=Crbxdl7vQNLQxLfHFuTNfAYDotXG4cZausWBd2QQ12uhsZkpSPC0Olnn6ln6p1BtwIcSsqQBpvYVIl041iZNoWI8NP6vdfwNaSKBCngNYxHvr3WmtL5lbsFgjE38Sq8OTuuOyRnkejKPFumQERjVzYkk19Iwn+hcgBzlHLHjKoK7v8t4FVuyE0W+A22tbrwUOvNla9cxy34O+PmAU6oD2kXACB9B/ZdJbL0XiIcNJZLCAA+4AAoDvtmaB1sffnq/mcl6Qu3WHnELrXvhzidkIU5yGfmAHqsY7T3xDPn6jQdM70rHoXz9Qz11ViXOYB8dLJcijU8tY0wh1tn8WrpmPA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A0nnKIa3fB80RQGX3kJyww6wM0HfvupvypZK8/xUXow=;
- b=PEIk1eLLtCTBadu41JU7RySTbFXBaJ4YINdFMpczQyu18k7SuqHe5jOtcmsdRe9x6UHWOrmdHRJbJCZWu5PHq592IiO46oP7Wz25iuB1yDET7uThyT6yB2qtv2rLOx66t0qx/6nnPcmvRoVRj+pAVCmOvoOKVPyZoKvNGL2dbW4SKXuiS+j8wgbxmF0sGef6hWl3bsoUR6K+p5zWZBtv+uLxI7AN5vQ5LI5gybdFAj+ClQwcT/NQd5UnVfKmzgiz0VJI41bMVJQH5ThJYoiODbwoV3QISKNYkr58fGppV93f895aEJcwByk39Dm8i50GINnLiUbq7z9+/2MEpD3WDQ==
+ bh=Mh45BlQRd8lKAcWzWmeHjSQU39/827vrG2yxSJSUH2s=;
+ b=XxAwEoG34XHdDgaZ7XhQHRf/JblZjgxVDV8T0eTY4P5NvOy4+LQYaNf0S18f8mIRhPbISTPhs8K02yPCBsZ9TKOzxk/nwyrO1DSe43H/b4Yr1b7ooFwSGmcVlBop35z6B+Fj+nNlctU/0VZsJDeWmKXfLaKzjb+pYa6lJwVzlACwFgH0ePXfwMB2s3OvLr/2be+ilGnhQLOa0Sq30UDdAeDhWI9DY6MBJjkv/eCbXzhWgcRN4DhFizWFl/7THXJ79vG7fpM87QXdSwP1+q40THciv+t485x3mjglmDQxvIJAGZlIwmAw80jWUiLNWs+LKoqeqagz7vA4H0vm8K78pw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=infradead.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A0nnKIa3fB80RQGX3kJyww6wM0HfvupvypZK8/xUXow=;
- b=oDdokA9vj1qBq0EWgL/ag7syWpLz0scUptC18KROxSdRSpMvkwdjYk7zMEg1vlfWt/MqibgJ3Wk4rA6kT9DLrJMFcM4cSxswApW94Gtzv8Z4oDYeEuKT3Yf38SeqIu+X95eR/al+KrlfqMCCeNtryFk5iczBzUPGmU9cMwMBC6w=
-Received: from SJ0PR05CA0176.namprd05.prod.outlook.com (2603:10b6:a03:339::31)
- by IA1PR12MB7638.namprd12.prod.outlook.com (2603:10b6:208:426::9)
+ bh=Mh45BlQRd8lKAcWzWmeHjSQU39/827vrG2yxSJSUH2s=;
+ b=saqCQBEKniu2NdXJ0fKOFA32ETu+Ouz/ptHQgvAj9A6g2SvdgGJeUHYj6NTyOmx0O4G/4lHrGA0jhYQCi7i/2R+4hKq4az0EFlXiFT1tYWQfj1ae6tbDYx/aATKbnVpLelPV+yYbkQrXJdTjh+7CsnI/vBm6jzAvAnSDO6xX66A=
+Received: from SJ0PR13CA0149.namprd13.prod.outlook.com (2603:10b6:a03:2c6::34)
+ by CH3PR12MB8233.namprd12.prod.outlook.com (2603:10b6:610:129::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.20; Wed, 27 Aug
- 2025 17:56:52 +0000
-Received: from SJ1PEPF000023D1.namprd02.prod.outlook.com
- (2603:10b6:a03:339:cafe::f0) by SJ0PR05CA0176.outlook.office365.com
- (2603:10b6:a03:339::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9073.12 via Frontend Transport; Wed,
- 27 Aug 2025 17:56:51 +0000
+ 2025 17:57:11 +0000
+Received: from SJ1PEPF000023CD.namprd02.prod.outlook.com
+ (2603:10b6:a03:2c6:cafe::e0) by SJ0PR13CA0149.outlook.office365.com
+ (2603:10b6:a03:2c6::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9094.6 via Frontend Transport; Wed,
+ 27 Aug 2025 17:57:11 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -81,18 +81,18 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF000023D1.mail.protection.outlook.com (10.167.244.7) with Microsoft
+ SJ1PEPF000023CD.mail.protection.outlook.com (10.167.244.8) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9052.8 via Frontend Transport; Wed, 27 Aug 2025 17:56:51 +0000
+ 15.20.9052.8 via Frontend Transport; Wed, 27 Aug 2025 17:57:11 +0000
 Received: from kaveri.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 27 Aug
- 2025 12:56:32 -0500
+ 2025 12:56:50 -0500
 To: <willy@infradead.org>, <akpm@linux-foundation.org>, <david@redhat.com>,
  <pbonzini@redhat.com>, <shuah@kernel.org>, <seanjc@google.com>,
  <vbabka@suse.cz>
-Date: Wed, 27 Aug 2025 17:52:46 +0000
-Message-ID: <20250827175247.83322-7-shivankg@amd.com>
+Date: Wed, 27 Aug 2025 17:52:47 +0000
+Message-ID: <20250827175247.83322-8-shivankg@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250827175247.83322-2-shivankg@amd.com>
 References: <20250827175247.83322-2-shivankg@amd.com>
@@ -102,84 +102,81 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D1:EE_|IA1PR12MB7638:EE_
-X-MS-Office365-Filtering-Correlation-Id: 95a29057-cc32-4698-c021-08dde5931a1a
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CD:EE_|CH3PR12MB8233:EE_
+X-MS-Office365-Filtering-Correlation-Id: df7a1307-3632-461b-0cd8-08dde59325fa
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|1800799024|7416014|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?i3KQ0j7McdOxYOFPFL0m8TPaMCgp8xeFB6O+KjyWPp9F6MD001Up1p0cDH4Q?=
- =?us-ascii?Q?RT0W5PyI7le/R/yJkINzgwvud+MlyoTwEaNohEdqS53rfvQGmAPIcxMZ6jHX?=
- =?us-ascii?Q?uxKbc1x8FKN9obvIEFa/Tm2I1Sr3KDay9KzMEAJVsDZVEnoD5pnkv+hbiJ+j?=
- =?us-ascii?Q?1H/VdB/1NJxR5FwsE1RKJ9A9IGO91zrlIXea0uHhr1IvNotJGs9AH/XdH8or?=
- =?us-ascii?Q?Q4znvbYGoZUYFd6bMXu5TML8lDL2fM0PeIwniRMfv2e1glQmIlrpHQ4uUUvk?=
- =?us-ascii?Q?M8opoyXxaK9gLfFgkKsyVClmFb8kdwu9gsp7kllR7JyLYwV1Yn1R4VLZEHPA?=
- =?us-ascii?Q?8yPJxSGjsszAqzaJh55XUnrVgVtkqRuVGfyzGz1XE5WSZkrbAiu5XmTJeT94?=
- =?us-ascii?Q?GMKSTpJZTAufEb+LmjhpFxLCouihhtT/BmNDs+1NG9+zj4mN9yGbYxr841EC?=
- =?us-ascii?Q?FdsDbihUXd/fwJybhmBqdsNosKishcE71erYYOkhMGRNOYdrQtXii0jSoX3s?=
- =?us-ascii?Q?Kk4LJi8lRnkiqlr4vJDvKxWR+MV+UwTDczN68Shcobc2vS/RPBKEUk4BU4ot?=
- =?us-ascii?Q?hkLsrt7kjYbJ6ZXz9tXzA4ojul8+oF8ftmVrzcoJpnwcPl8kpN2AcbXuiBh+?=
- =?us-ascii?Q?ihZPBD38jIZUmlxkcpMUQLDe70te3YLsCuYjkSxO/2EN6I2CDwAHmpxFc2L5?=
- =?us-ascii?Q?JCxHMGU3Xga2K8JobPG+A1UAQ4g91vZxYeJET+7E64QOkCEW0rgI3QBt4rtF?=
- =?us-ascii?Q?Ok1Fo+06vqqUY9lzJdHMGxtwHFXeVciOAzxqTpbWEvgquOIAv1dC4naUwmu4?=
- =?us-ascii?Q?5/2vf4KK0Z61FS0zQM3ywhGaPtXEJWszzWjpka58z+QY6CPI4+ICf0pmGLL4?=
- =?us-ascii?Q?AVtL2MvX9pqVBwbP2ftJqzzreFVaMyAjh1IbQfnxlNYG8TmmDHR0YO2LO2ZB?=
- =?us-ascii?Q?CxdWeL55q+C9hrOSU+QmZEqmcAGDis7XDHROlISJpBgimvl93hYWfLXNn6+k?=
- =?us-ascii?Q?nHBcAFDsupl5gJozNEl3XrL6lf1VqFvgLHZRGiNMp/BUFULjML/4bDV1WSkU?=
- =?us-ascii?Q?UokBon3QtoMjPF7j6f1WSjN/se17UByr/rglClycZ1HguQCVov+xmIJxebC/?=
- =?us-ascii?Q?kaxiYpqsRbNnsRz8SLCWYyHTQpCDX3H3zzhFDC4h+dvXvyrc69LCf6lJpKas?=
- =?us-ascii?Q?x/Y2jFmYIsejbAFY8KoKfB8UhHZMO+O2jd35wdFLY27Q+13BsByhynbmuMoJ?=
- =?us-ascii?Q?JjiBSw78k4nVk/YSBkmqK4hskiZ0xcj5is32WKEus56cvfZU3J0Am9WN/kya?=
- =?us-ascii?Q?98bIN1Bch/spIXt8R54G3irZElzOutaJRY58ScildLHF8iD44CW3lm5jHODd?=
- =?us-ascii?Q?qS8FgVn/aTVoqK0jmp31M0zJU2svmtk1ZoaFJYxrawU0DNSICKLjlua1GaJh?=
- =?us-ascii?Q?anLGy1GozUzHFiY6fwjN3NWaelPlTz8SJs+4pdd+1SBF3jN2i9u3Qhj9zNZv?=
- =?us-ascii?Q?xHB46yWP81j/qLt2vJlcRu+NEOEObScWCPgp?=
+ ARA:13230040|7416014|376014|82310400026|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?IrCqZiqASNJkr8Bzps5Md5zNXQTaaQPHmuCU5wucKi7dGsruYQeAD5qsMHUv?=
+ =?us-ascii?Q?roDslivbOLCdj2GVZnKw2s1MkXKf3Fw4k7iKNNZUettCfVFr4vZcmwfD2Bb8?=
+ =?us-ascii?Q?XYFkwo3Jiw8YFfr0VElE8pntEtoANb8CHcO38Iwvmmb3iCFNP0HPi+s4ZoLo?=
+ =?us-ascii?Q?L52T+wJ7nKZ6onP1ad+WD6b/7zFCreWepCAVlYAxioAPcTqpSnWUoo7iWbTo?=
+ =?us-ascii?Q?TNMIHUWLFCYfo5BifYKe3bQB8de+b226750KwgFrcumeM4vJSKUd4wqZA/t0?=
+ =?us-ascii?Q?0eRDzH89kiBiUOfx6Vca4eeCz+K5CdnmPfpkYThBY1KJB97g9/NvW9Utbixo?=
+ =?us-ascii?Q?3fSLsZECxYspI0hJf5WiBgh3qyfTVaKwf41z7EBcgMsBSW4PIyUQOqDN6JO1?=
+ =?us-ascii?Q?EgDPKXvRp0WuLXbF9gNv2Cyog+NuiYcYEvAEylSQXqpSZyN3F4wp8TAdX3sA?=
+ =?us-ascii?Q?IpdB1S67xW1w/gmO0I036w+dI5JnWHssgyPBDWlX8ib3jz1wcxHWmBBBJArP?=
+ =?us-ascii?Q?EobxRz0FxaRfZ2z4ioPkLwuVRyAceBTT9rHCYLc0PN6g57L4T982WJnULy04?=
+ =?us-ascii?Q?lpmnXJq31FKkOTGyKqJWy31Pu+4kGtsfvrj7NsVrB53qaUJbTU2cq4iegbXy?=
+ =?us-ascii?Q?iqkyQYonJ9jQaqPJHKwBgqyaevt6+V04jkCtvNDeH863NjFVC39OLzrMNJ0A?=
+ =?us-ascii?Q?X06t7tqTBiLm69WEMzat559QoFgQKHkxQvIh8txi9JhNaZN8e+ihFreMHsm5?=
+ =?us-ascii?Q?mALpbGVAYN1TmvYAYxwGgkc9yEXnEGK1s1Cp8Y/3u9nBmnwiSjWfzjjOF0hK?=
+ =?us-ascii?Q?QmsjJrz9hlienBq1lyqEJ30IdzRX0K6u8KyXhl7r0QR59DMHPnwfxB8Mf+vJ?=
+ =?us-ascii?Q?0PH09DxFzuyKvnT1kNurWVJ2u0ncW9prm6//kHwIWHbixkWs9EpdA/h4yh15?=
+ =?us-ascii?Q?PR1JZ/cJr+3lIgxMpNiYoOEvgn+nuwrcuBSf8KeAfzYYEV4Xo3oJoKszMSzX?=
+ =?us-ascii?Q?8r24y3WETpnsmLvjYPvMubBpGVapx/p66x2N5bR7a4FiTPb0CEqVswcdQuYx?=
+ =?us-ascii?Q?yAnmiYavvw2dW36vALopCn3mIQD/s7QByX0616/DyBlyX+zUlncrOt/BS2mY?=
+ =?us-ascii?Q?XTMsR8kA7MXyzPgIOOSQhbI1CLrVxD7AvDb28K9EiFQOQt16iD3mB89yRK9p?=
+ =?us-ascii?Q?f++p3y47uoftQDKar/+NV8u0wNxmIcXpY4r6s5iVhiVuEQf1ktAlH9208w5f?=
+ =?us-ascii?Q?U8ciDte7GN6vMoKEbtNs3CLc+yKUqLjGr7Ih1FJciWZAs/EMYYhUXByYG2my?=
+ =?us-ascii?Q?qOUUGBlEpnngqUZ+0mGbZtJvbsjd3iA92cSUeaHgc6sTjF9YIoln+s+/282Q?=
+ =?us-ascii?Q?zUu7ig8yJgKNokmcbGnkOJqtuKkesJJYarkPtundAHwe/ie/OhPq6jqhOvFx?=
+ =?us-ascii?Q?2GVScC5n+G+X6Spa35WzO/iZsDD5F1Qn+4RM9iKIzbAkECTba4+bl9+bGwfU?=
+ =?us-ascii?Q?T/INWH/efkKV3Whtvplue8hv6FTO0UG9PB+C?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(1800799024)(7416014)(376014); DIR:OUT;
+ SFS:(13230040)(7416014)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2025 17:56:51.6050 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 95a29057-cc32-4698-c021-08dde5931a1a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2025 17:57:11.5234 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: df7a1307-3632-461b-0cd8-08dde59325fa
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023D1.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023CD.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7638
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8233
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Ackerley Tng <ackerleytng@google.com> guest_memfd's
- inode represents memory the guest_memfd is providing. guest_memfd's file
- represents
- a struct kvm's view of that memory. Using a custom inode allows customization
- of the inode teardown process via callbacks. For example, ->evict_inode()
- allows customization of the truncation process on file close,
- and ->destroy_inode() [...] 
+ Content preview: Add dedicated inode structure (kvm_gmem_inode_info) and
+ slab-allocated
+ inode cache for guest memory backing, similar to how shmem handles inodes.
+ This adds the necessary allocation/destruction functions and prepares for
+ upcoming guest_memfd NUMA policy support changes. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
+ domain 0.0 ARC_SIGNED             Message has a ARC signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.0 ARC_VALID              Message has a valid ARC signature
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 ARC_SIGNED             Message has a ARC signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.237.52 listed in wl.mailspike.net]
+ [40.107.237.77 listed in wl.mailspike.net]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1urKtS-0005di-MH
-Subject: [f2fs-dev] [PATCH kvm-next V11 4/7] KVM: guest_memfd: Use guest mem
- inodes instead of anonymous inodes
+X-Headers-End: 1urKuC-0005h0-3c
+Subject: [f2fs-dev] [PATCH kvm-next V11 5/7] KVM: guest_memfd: Add
+ slab-allocated inode cache
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -222,287 +219,128 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Ackerley Tng <ackerleytng@google.com>
+Add dedicated inode structure (kvm_gmem_inode_info) and slab-allocated
+inode cache for guest memory backing, similar to how shmem handles inodes.
 
-guest_memfd's inode represents memory the guest_memfd is
-providing. guest_memfd's file represents a struct kvm's view of that
-memory.
+This adds the necessary allocation/destruction functions and prepares
+for upcoming guest_memfd NUMA policy support changes.
 
-Using a custom inode allows customization of the inode teardown
-process via callbacks. For example, ->evict_inode() allows
-customization of the truncation process on file close, and
-->destroy_inode() and ->free_inode() allow customization of the inode
-freeing process.
-
-Customizing the truncation process allows flexibility in management of
-guest_memfd memory and customization of the inode freeing process
-allows proper cleanup of memory metadata stored on the inode.
-
-Memory metadata is more appropriately stored on the inode (as opposed
-to the file), since the metadata is for the memory and is not unique
-to a specific binding and struct kvm.
-
-Acked-by: David Hildenbrand <david@redhat.com>
-Co-developed-by: Fuad Tabba <tabba@google.com>
-Signed-off-by: Fuad Tabba <tabba@google.com>
-Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 Signed-off-by: Shivank Garg <shivankg@amd.com>
 ---
- include/uapi/linux/magic.h |   1 +
- virt/kvm/guest_memfd.c     | 129 ++++++++++++++++++++++++++++++-------
- virt/kvm/kvm_main.c        |   7 +-
- virt/kvm/kvm_mm.h          |   9 +--
- 4 files changed, 119 insertions(+), 27 deletions(-)
+ virt/kvm/guest_memfd.c | 70 ++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 68 insertions(+), 2 deletions(-)
 
-diff --git a/include/uapi/linux/magic.h b/include/uapi/linux/magic.h
-index bb575f3ab45e..638ca21b7a90 100644
---- a/include/uapi/linux/magic.h
-+++ b/include/uapi/linux/magic.h
-@@ -103,5 +103,6 @@
- #define DEVMEM_MAGIC		0x454d444d	/* "DMEM" */
- #define SECRETMEM_MAGIC		0x5345434d	/* "SECM" */
- #define PID_FS_MAGIC		0x50494446	/* "PIDF" */
-+#define GUEST_MEMFD_MAGIC	0x474d454d	/* "GMEM" */
- 
- #endif /* __LINUX_MAGIC_H__ */
 diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
-index 08a6bc7d25b6..6c66a0974055 100644
+index 6c66a0974055..356947d36a47 100644
 --- a/virt/kvm/guest_memfd.c
 +++ b/virt/kvm/guest_memfd.c
-@@ -1,12 +1,16 @@
- // SPDX-License-Identifier: GPL-2.0
-+#include <linux/anon_inodes.h>
- #include <linux/backing-dev.h>
- #include <linux/falloc.h>
-+#include <linux/fs.h>
- #include <linux/kvm_host.h>
-+#include <linux/pseudo_fs.h>
- #include <linux/pagemap.h>
--#include <linux/anon_inodes.h>
+@@ -17,6 +17,15 @@ struct kvm_gmem {
+ 	struct list_head entry;
+ };
  
- #include "kvm_mm.h"
- 
-+static struct vfsmount *kvm_gmem_mnt;
++struct kvm_gmem_inode_info {
++	struct inode vfs_inode;
++};
 +
- struct kvm_gmem {
- 	struct kvm *kvm;
- 	struct xarray bindings;
-@@ -385,9 +389,45 @@ static struct file_operations kvm_gmem_fops = {
++static inline struct kvm_gmem_inode_info *KVM_GMEM_I(struct inode *inode)
++{
++	return container_of(inode, struct kvm_gmem_inode_info, vfs_inode);
++}
++
+ /**
+  * folio_file_pfn - like folio_file_page, but return a pfn.
+  * @folio: The folio which contains this index.
+@@ -389,13 +398,46 @@ static struct file_operations kvm_gmem_fops = {
  	.fallocate	= kvm_gmem_fallocate,
  };
  
--void kvm_gmem_init(struct module *module)
-+static int kvm_gmem_init_fs_context(struct fs_context *fc)
++static struct kmem_cache *kvm_gmem_inode_cachep;
++
++static struct inode *kvm_gmem_alloc_inode(struct super_block *sb)
 +{
-+	if (!init_pseudo(fc, GUEST_MEMFD_MAGIC))
-+		return -ENOMEM;
++	struct kvm_gmem_inode_info *info;
 +
-+	fc->s_iflags |= SB_I_NOEXEC;
-+	fc->s_iflags |= SB_I_NODEV;
++	info = alloc_inode_sb(sb, kvm_gmem_inode_cachep, GFP_KERNEL);
++	if (!info)
++		return NULL;
 +
-+	return 0;
++	return &info->vfs_inode;
 +}
 +
-+static struct file_system_type kvm_gmem_fs = {
-+	.name		 = "guest_memfd",
-+	.init_fs_context = kvm_gmem_init_fs_context,
-+	.kill_sb	 = kill_anon_super,
++static void kvm_gmem_destroy_inode(struct inode *inode)
++{
++}
++
++static void kvm_gmem_free_inode(struct inode *inode)
++{
++	kmem_cache_free(kvm_gmem_inode_cachep, KVM_GMEM_I(inode));
++}
++
++static const struct super_operations kvm_gmem_super_operations = {
++	.statfs		= simple_statfs,
++	.alloc_inode	= kvm_gmem_alloc_inode,
++	.destroy_inode	= kvm_gmem_destroy_inode,
++	.free_inode	= kvm_gmem_free_inode,
 +};
 +
-+static int kvm_gmem_init_mount(void)
-+{
-+	kvm_gmem_mnt = kern_mount(&kvm_gmem_fs);
-+
-+	if (IS_ERR(kvm_gmem_mnt))
-+		return PTR_ERR(kvm_gmem_mnt);
-+
-+	kvm_gmem_mnt->mnt_flags |= MNT_NOEXEC;
-+	return 0;
-+}
-+
-+int kvm_gmem_init(struct module *module)
+ static int kvm_gmem_init_fs_context(struct fs_context *fc)
  {
- 	kvm_gmem_fops.owner = module;
++	struct pseudo_fs_context *ctx;
 +
-+	return kvm_gmem_init_mount();
+ 	if (!init_pseudo(fc, GUEST_MEMFD_MAGIC))
+ 		return -ENOMEM;
+ 
+ 	fc->s_iflags |= SB_I_NOEXEC;
+ 	fc->s_iflags |= SB_I_NODEV;
++	ctx = fc->fs_private;
++	ctx->ops = &kvm_gmem_super_operations;
+ 
+ 	return 0;
+ }
+@@ -417,17 +459,41 @@ static int kvm_gmem_init_mount(void)
+ 	return 0;
+ }
+ 
++static void kvm_gmem_init_inode(void *foo)
++{
++	struct kvm_gmem_inode_info *info = foo;
++
++	inode_init_once(&info->vfs_inode);
 +}
 +
-+void kvm_gmem_exit(void)
-+{
-+	kern_unmount(kvm_gmem_mnt);
-+	kvm_gmem_mnt = NULL;
+ int kvm_gmem_init(struct module *module)
+ {
+-	kvm_gmem_fops.owner = module;
++	int ret;
++	struct kmem_cache_args args = {
++		.align = 0,
++		.ctor = kvm_gmem_init_inode,
++	};
+ 
+-	return kvm_gmem_init_mount();
++	kvm_gmem_fops.owner = module;
++	kvm_gmem_inode_cachep = kmem_cache_create("kvm_gmem_inode_cache",
++						  sizeof(struct kvm_gmem_inode_info),
++						  &args, SLAB_ACCOUNT);
++	if (!kvm_gmem_inode_cachep)
++		return -ENOMEM;
++	ret = kvm_gmem_init_mount();
++	if (ret) {
++		kmem_cache_destroy(kvm_gmem_inode_cachep);
++		return ret;
++	}
++	return 0;
+ }
+ 
+ void kvm_gmem_exit(void)
+ {
+ 	kern_unmount(kvm_gmem_mnt);
+ 	kvm_gmem_mnt = NULL;
++	rcu_barrier();
++	kmem_cache_destroy(kvm_gmem_inode_cachep);
  }
  
  static int kvm_gmem_migrate_folio(struct address_space *mapping,
-@@ -463,11 +503,72 @@ bool __weak kvm_arch_supports_gmem_mmap(struct kvm *kvm)
- 	return true;
- }
- 
-+static struct inode *kvm_gmem_inode_make_secure_inode(const char *name,
-+						      loff_t size, u64 flags)
-+{
-+	struct inode *inode;
-+
-+	inode = anon_inode_make_secure_inode(kvm_gmem_mnt->mnt_sb, name, NULL);
-+	if (IS_ERR(inode))
-+		return inode;
-+
-+	inode->i_private = (void *)(unsigned long)flags;
-+	inode->i_op = &kvm_gmem_iops;
-+	inode->i_mapping->a_ops = &kvm_gmem_aops;
-+	inode->i_mode |= S_IFREG;
-+	inode->i_size = size;
-+	mapping_set_gfp_mask(inode->i_mapping, GFP_HIGHUSER);
-+	mapping_set_inaccessible(inode->i_mapping);
-+	/* Unmovable mappings are supposed to be marked unevictable as well. */
-+	WARN_ON_ONCE(!mapping_unevictable(inode->i_mapping));
-+
-+	return inode;
-+}
-+
-+static struct file *kvm_gmem_inode_create_getfile(void *priv, loff_t size,
-+						  u64 flags)
-+{
-+	static const char *name = "[kvm-gmem]";
-+	struct inode *inode;
-+	struct file *file;
-+	int err;
-+
-+	err = -ENOENT;
-+	/* __fput() will take care of fops_put(). */
-+	if (!fops_get(&kvm_gmem_fops))
-+		goto err;
-+
-+	inode = kvm_gmem_inode_make_secure_inode(name, size, flags);
-+	if (IS_ERR(inode)) {
-+		err = PTR_ERR(inode);
-+		goto err_fops_put;
-+	}
-+
-+	file = alloc_file_pseudo(inode, kvm_gmem_mnt, name, O_RDWR,
-+				 &kvm_gmem_fops);
-+	if (IS_ERR(file)) {
-+		err = PTR_ERR(file);
-+		goto err_put_inode;
-+	}
-+
-+	file->f_flags |= O_LARGEFILE;
-+	file->private_data = priv;
-+
-+out:
-+	return file;
-+
-+err_put_inode:
-+	iput(inode);
-+err_fops_put:
-+	fops_put(&kvm_gmem_fops);
-+err:
-+	file = ERR_PTR(err);
-+	goto out;
-+}
-+
- static int __kvm_gmem_create(struct kvm *kvm, loff_t size, u64 flags)
- {
--	const char *anon_name = "[kvm-gmem]";
- 	struct kvm_gmem *gmem;
--	struct inode *inode;
- 	struct file *file;
- 	int fd, err;
- 
-@@ -481,32 +582,16 @@ static int __kvm_gmem_create(struct kvm *kvm, loff_t size, u64 flags)
- 		goto err_fd;
- 	}
- 
--	file = anon_inode_create_getfile(anon_name, &kvm_gmem_fops, gmem,
--					 O_RDWR, NULL);
-+	file = kvm_gmem_inode_create_getfile(gmem, size, flags);
- 	if (IS_ERR(file)) {
- 		err = PTR_ERR(file);
- 		goto err_gmem;
- 	}
- 
--	file->f_flags |= O_LARGEFILE;
--
--	inode = file->f_inode;
--	WARN_ON(file->f_mapping != inode->i_mapping);
--
--	inode->i_private = (void *)(unsigned long)flags;
--	inode->i_op = &kvm_gmem_iops;
--	inode->i_mapping->a_ops = &kvm_gmem_aops;
--	inode->i_mode |= S_IFREG;
--	inode->i_size = size;
--	mapping_set_gfp_mask(inode->i_mapping, GFP_HIGHUSER);
--	mapping_set_inaccessible(inode->i_mapping);
--	/* Unmovable mappings are supposed to be marked unevictable as well. */
--	WARN_ON_ONCE(!mapping_unevictable(inode->i_mapping));
--
- 	kvm_get_kvm(kvm);
- 	gmem->kvm = kvm;
- 	xa_init(&gmem->bindings);
--	list_add(&gmem->entry, &inode->i_mapping->i_private_list);
-+	list_add(&gmem->entry, &file_inode(file)->i_mapping->i_private_list);
- 
- 	fd_install(fd, file);
- 	return fd;
-diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
-index 18f29ef93543..301d48d6e00d 100644
---- a/virt/kvm/kvm_main.c
-+++ b/virt/kvm/kvm_main.c
-@@ -6489,7 +6489,9 @@ int kvm_init(unsigned vcpu_size, unsigned vcpu_align, struct module *module)
- 	if (WARN_ON_ONCE(r))
- 		goto err_vfio;
- 
--	kvm_gmem_init(module);
-+	r = kvm_gmem_init(module);
-+	if (r)
-+		goto err_gmem;
- 
- 	r = kvm_init_virtualization();
- 	if (r)
-@@ -6510,6 +6512,8 @@ int kvm_init(unsigned vcpu_size, unsigned vcpu_align, struct module *module)
- err_register:
- 	kvm_uninit_virtualization();
- err_virt:
-+	kvm_gmem_exit();
-+err_gmem:
- 	kvm_vfio_ops_exit();
- err_vfio:
- 	kvm_async_pf_deinit();
-@@ -6541,6 +6545,7 @@ void kvm_exit(void)
- 	for_each_possible_cpu(cpu)
- 		free_cpumask_var(per_cpu(cpu_kick_mask, cpu));
- 	kmem_cache_destroy(kvm_vcpu_cache);
-+	kvm_gmem_exit();
- 	kvm_vfio_ops_exit();
- 	kvm_async_pf_deinit();
- 	kvm_irqfd_exit();
-diff --git a/virt/kvm/kvm_mm.h b/virt/kvm/kvm_mm.h
-index 31defb08ccba..9fcc5d5b7f8d 100644
---- a/virt/kvm/kvm_mm.h
-+++ b/virt/kvm/kvm_mm.h
-@@ -68,17 +68,18 @@ static inline void gfn_to_pfn_cache_invalidate_start(struct kvm *kvm,
- #endif /* HAVE_KVM_PFNCACHE */
- 
- #ifdef CONFIG_KVM_GUEST_MEMFD
--void kvm_gmem_init(struct module *module);
-+int kvm_gmem_init(struct module *module);
-+void kvm_gmem_exit(void);
- int kvm_gmem_create(struct kvm *kvm, struct kvm_create_guest_memfd *args);
- int kvm_gmem_bind(struct kvm *kvm, struct kvm_memory_slot *slot,
- 		  unsigned int fd, loff_t offset);
- void kvm_gmem_unbind(struct kvm_memory_slot *slot);
- #else
--static inline void kvm_gmem_init(struct module *module)
-+static inline int kvm_gmem_init(struct module *module)
- {
--
-+	return 0;
- }
--
-+static inline void kvm_gmem_exit(void) {};
- static inline int kvm_gmem_bind(struct kvm *kvm,
- 					 struct kvm_memory_slot *slot,
- 					 unsigned int fd, loff_t offset)
 -- 
 2.43.0
 
