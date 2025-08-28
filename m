@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56D49B39132
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Aug 2025 03:44:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 641C1B39184
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Aug 2025 04:11:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=8zycJWbiB8Y9LZkcJhHPf0U/mxkyfk97xblZwLr8lPo=; b=BB0nW7skamuDnjfBXynPDVmdG3
-	Ve85b82P21BCKKFZHSwY6m9DM+ZUL+UdxbHXwx4Pu36zMjiacvbjaXDK0Uxp7gYzbw5IKH6PyHYe/
-	P4lKC1xFMhtwK5a+FKUJH1jtjEvcN0wRHeQyNUsXKk7VUABd+lxHJB9EC8RAuMMZmBT4=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=m1uS296YWAGZ9Mne4oOd2hcNFjsh0KCSv3/nWanG0k4=; b=RZtcC60Uz1CU+yNkl3y1NSjq/H
+	q01wkMcx7uOU8r3Nppdo06HznBs3JGCSPRRXHoELMJqIGbWHMIxOy5e3ctxBG5qOkFMk34l/ZIEpD
+	OUM/5rtnniGSlwb2C5/DjvLTVNspRBzI/rvujUgeD33olw8BXt5GlSr38mxe9pfUYl7Y=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1urRgg-0002tx-Lx;
-	Thu, 28 Aug 2025 01:44:26 +0000
+	id 1urS6c-0003on-BO;
+	Thu, 28 Aug 2025 02:11:14 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1urRgf-0002tp-Ak
+ (envelope-from <chao@kernel.org>) id 1urS6W-0003od-CI
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 28 Aug 2025 01:44:25 +0000
+ Thu, 28 Aug 2025 02:11:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UcO3MG2REtj4zx4QNqADkGNzwNOpnBJoV9wkDs8D5u8=; b=CfuzMCfXDec6Kf3rnlDg5NFzh1
- EsqgiiNrjD5TuhPpF6cWyNY9xVs8yuA6rpD0lFUVutrr2cU2xQzYKyRUp9o1g9GqO9guIBoys4aoy
- YzqKmYC+jat84qP0jnYypGE1LumBRUufOGdzwCKfXzhCZjNPvSKoV6Sbyie47F7cA6yw=;
+ bh=oKuCrqJ9tSNF2iyXfqNMIWg2j+ny8n07CzA021o8wVI=; b=ISh4TA8XFoYpp0HaFuy+1Xxi1d
+ fieGcan28VoyaQAQbFWsL5WaNiCANXgOqQKoooHTyY6uzegQ1ErSWN2Ef95KyiiWvwho9H1FyCIEh
+ DV3UXA5ZLAWWrCaWQkNbNqj97D6m9+eA2Sa1+zp8xmhXQfMzDWBiM3jpBVy9ob3hdIUE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,65 +40,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=UcO3MG2REtj4zx4QNqADkGNzwNOpnBJoV9wkDs8D5u8=; b=QrALsHnXAx7DfNiFIvZa9kQLlk
- K0R80ZVc2UU/bFjLdUiYKi/WrhnKFQvrkt/l8p06hb6jpR6UWq/wluLQ3K3Ah24LTb5AhImQ7sQVU
- 356Ge7e+UpweWmUzAu7oQUS4GhIhwtizzwhUWBOkEIDbwnR5mxDF/G5/zQh3ET/RjTf4=;
+ bh=oKuCrqJ9tSNF2iyXfqNMIWg2j+ny8n07CzA021o8wVI=; b=ZtKCPMIbv5spd+luQnKRsNvjQm
+ RPrdK83z3BpUnMAJdBxw5cVsqdzkpH36ywJszGfqOglfuImYO9rRHkE0Ot66Koqfu6b5CLHfnqn/2
+ fRw7fIBn81gD5SGGRApZSw4xFb10zBlzY1G/mtCDvsTB92heiDb6ZagkNhRu3beZKf3g=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1urRge-0006Sp-Ln for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 28 Aug 2025 01:44:25 +0000
+ id 1urS6Q-0008PJ-Vw for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 28 Aug 2025 02:11:08 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 503F243924;
- Thu, 28 Aug 2025 01:44:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5ADEAC4CEEB;
- Thu, 28 Aug 2025 01:44:13 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 8F46C441D9;
+ Thu, 28 Aug 2025 02:10:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 69DC9C4CEEB;
+ Thu, 28 Aug 2025 02:10:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756345454;
- bh=gs2oMu8qJ3MMVZ6FArfeWdyzLtenZzWXZNadoP3xh2g=;
+ s=k20201202; t=1756347052;
+ bh=I/jl3JBbmddIpRaZhOPv+LLmwGKvtpC48Rl8iE1wL5I=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=jE6cGzISIJvMuiyc4G4sRdt90vTsxVdOiQkMJLU4Nw8hS6ZYCDuAMwAp+aBabrDhm
- eBt0FdLB6xKpXqyRQM6dIi1IsheSTXOR9eQ0XO/xZvPBI7xcgaXBJhIGc8c10KsB3P
- Fm6dVso8d0i2t+5IDkWHvTEQmDc8lyajuCqRHKig+Xm7OPV9BDhLHRdf8lVuHIm4Il
- +zH8wQVHcxvS0z6SlLgBH2vT+5xANKTZ0sBnFsST19X0EYsVAObVfJ6sR3FgjH0RhC
- ozGiOT0TfMtS4a/47+Ls4vm0y3hakn6ppBMCOikZx0O4g+7SrzIEROQOftaogeEK9V
- roV1C3IMNiClg==
-Message-ID: <066cd125-7db8-4b97-b6e3-20e10023a14f@kernel.org>
-Date: Thu, 28 Aug 2025 09:44:11 +0800
+ b=Qx4Yf2ayhbLNmu1ywuXTM7R3eoyIMlMoz0RVOUG22nSBkc4xI9XudZ3ko/Ii/ufUV
+ oiqWh//nf+5nwgLWXv8GQoFRLvXLnXCHcQNvC5fJLGNf7TWsqnoM8OKW7c5KehL3N1
+ xN8WDjS09/vSRSLrDryB6ebXFeJYTnTwuvL/LmFnYwsaKZDvdCk030Nf5opCginnwo
+ bU6oS4Ifvx7EWg8VN9qPkU29MG4GUWZoX1946EYIG7YbcKJQ+2tRJBz6hXx7aIOUC7
+ mnp4ttqKXjs84+qQF4MCRFJ+Gx7xc8DfXg/fG3mg7aHGINJ/gO7mQDX1Pil0rIrwce
+ LWB2YG36va+Aw==
+Message-ID: <5c955a76-8a12-4001-b89a-8e1b84b36564@kernel.org>
+Date: Thu, 28 Aug 2025 10:10:49 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: =?UTF-8?B?546L5pmT54+6?= <wangxiaojun@vivo.com>,
- "jaegeuk@kernel.org" <jaegeuk@kernel.org>
-References: <20250820075444.378907-1-wangxiaojun@vivo.com>
- <d0a1e0a3-bde1-485c-bee0-70c04ab3846d@kernel.org>
- <234d4f23-5ce4-426e-9b3c-5f2b28d86a3f@vivo.com>
+To: Liao Yuanhong <liaoyuanhong@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ "open list:F2FS FILE SYSTEM" <linux-f2fs-devel@lists.sourceforge.net>,
+ open list <linux-kernel@vger.kernel.org>
+References: <20250826140539.521074-1-liaoyuanhong@vivo.com>
 Content-Language: en-US
-In-Reply-To: <234d4f23-5ce4-426e-9b3c-5f2b28d86a3f@vivo.com>
+In-Reply-To: <20250826140539.521074-1-liaoyuanhong@vivo.com>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "sfi-spamd-2.hosts.colo.sdot.me",
+X-Spam-Report: Spam detection software,
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 8/26/25 09:48, 王晓珺 wrote: > 在 8/25/2025 10:08 AM,
-    Chao Yu 写道: >> On 8/20/25 15:54, Wang Xiaojun wrote: >>> This patch fixes
-    missing space reclamation during the recovery process. >>> >> [...] 
- 
+ Content preview:  On 8/26/25 22:05, Liao Yuanhong wrote: > Introduces two new
+ sys nodes: allocate_section_hint and > allocate_section_policy. The
+ allocate_section_hint
+ identifies the boundary > between devices, measure [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
-                             domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
+ envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1urRge-0006Sp-Ln
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs:fix missing space reclamation during
- the recovery process
+X-Headers-End: 1urS6Q-0008PJ-Vw
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: Use allocate_section_policy to
+ control write priority in multi-devices setups
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,131 +111,260 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gOC8yNi8yNSAwOTo0OCwg546L5pmT54+6IHdyb3RlOgo+IOWcqCA4LzI1LzIwMjUgMTA6MDgg
-QU0sIENoYW8gWXUg5YaZ6YGTOgo+PiBPbiA4LzIwLzI1IDE1OjU0LCBXYW5nIFhpYW9qdW4gd3Jv
-dGU6Cj4+PiBUaGlzIHBhdGNoIGZpeGVzIG1pc3Npbmcgc3BhY2UgcmVjbGFtYXRpb24gZHVyaW5n
-IHRoZSByZWNvdmVyeSBwcm9jZXNzLgo+Pj4KPj4+IEluIHRoZSBmb2xsb3dpbmcgc2NlbmFyaW9z
-LCBGMkZTIGNhbm5vdCByZWNsYWltIHRydW5jYXRlZCBzcGFjZS4KPj4+IGNhc2UgMToKPj4+IHdy
-aXRlIGZpbGUgQSwgc2l6ZSBpcyAxRyB8IENQIHwgdHJ1bmNhdGUgQSB0byAxTSB8IGZzeW5jIEEg
-fCBTUE8KPj4+Cj4+PiBjYXNlIDI6Cj4+PiBDUCB8IHdyaXRlIGZpbGUgQSwgc2l6ZSBpcyAxRyB8
-IGZzeW5jIEEgfCB0cnVuY2F0ZSBBIHRvIDFNIHwgZnN5bmMgQSB8U1BPCj4+Pgo+Pj4gRHVyaW5n
-IHRoZSByZWNvdmVyeSBwcm9jZXNzLCBGMkZTIHdpbGwgcmVjb3ZlciBmaWxlIEEsCj4+PiBidXQg
-dGhlIDFNLTFHIHNwYWNlIGNhbm5vdCBiZSByZWNsYWltZWQuCj4+Pgo+Pj4gQnV0IHRoZSBjb21i
-aW5hdGlvbiBvZiB0cnVuY2F0ZSBhbmQgZmFsbG9jIGNvbXBsaWNhdGVzIHRoZSByZWNvdmVyeQo+
-Pj4gcHJvY2Vzcy4KPj4+IEZvciBleGFtcGxlLCBpbiB0aGUgZm9sbG93aW5nIHNjZW5hcmlvOgo+
-Pj4gd3JpdGUgZmlsZUEgMk0gfCBmc3luYyB8IHRydW5jYXRlIDI1NksgfCBmYWxsb2MgLWsgMjU2
-SyAxTSB8IGZzeW5jIEEgfCBTUE8KPj4+IFRoZSBmYWxsb2MgKDI1NkssIDFNKSBuZWVkIHRvIGJl
-IHJlY292ZXJlZCBhcyBwcmUtYWxsb2NhdGVkIHNwYWNlLgo+Pj4KPj4+IEhvd2V2ZXIgaW4gdGhl
-IGZvbGxvd2luZyBzY2VuYXJpb3MsIHRoZSBzaXR1YXRpb24gaXMgdGhlIG9wcG9zaXRlLgo+Pj4g
-d3JpdGUgZmlsZUEgMk0gfCBmc3luYyB8IGZhbGxvYyAtayAyTSAxME0gfCBmc3luYyBBIHwgdHJ1
-bmNhdGUgMjU2SyB8Cj4+PiBmc3luYyBBIHwgU1BPCj4+PiBJbiB0aGlzIHNjZW5hcmlvLCB0aGUg
-c3BhY2UgYWxsb2NhdGVkIGJ5IGZhbGxvYyBuZWVkcyB0byBiZSB0cnVuY2F0ZWQuCj4+Pgo+Pj4g
-RHVyaW5nIHRoZSByZWNvdmVyeSBwcm9jZXNzLCBpdCBpcyBkaWZmaWN1bHQgdG8gZGlzdGluZ3Vp
-c2gKPj4+IGJldHdlZW4gdGhlIGFib3ZlIHR3byB0eXBlcyBvZiBmYWxsb2MuCj4+Pgo+Pj4gU28g
-aW4gdGhpcyBjYXNlIG9mIGZhbGxvYyAtayB3ZSBuZWVkIHRvIHRyaWdnZXIgYSBjaGVja3BvaW50
-IGZvciBmc3luYy4KPj4+Cj4+PiBGaXhlczogZDYyNGM5NmZiMzI0OSAoImYyZnM6IGFkZCByZWNv
-dmVyeSByb3V0aW5lcyBmb3Igcm9sbC1mb3J3YXJkIikKPj4+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBX
-YW5nIFhpYW9qdW4gPHdhbmd4aWFvanVuQHZpdm8uY29tPgo+Pj4gLS0tCj4+PiB2NDogVHJpZ2dl
-ciBjaGVja3BvaW50IGZvciBmc3luYyBhZnRlciBmYWxsb2MgLWsKPj4+IHYzOiBBZGQgYSBGaXhl
-cyBsaW5lLgo+Pj4gdjI6IEFwcGx5IENoYW8ncyBzdWdnZXN0aW9uIGZyb20gdjEuIE5vIGxvZ2lj
-YWwgY2hhbmdlcy4KPj4+IHYxOiBGaXggbWlzc2luZyBzcGFjZSByZWNsYW1hdGlvbiBkdXJpbmcg
-dGhlIHJlY292ZXJ5IHByb2Nlc3MuCj4+PiAtLS0KPj4+ICAgZnMvZjJmcy9jaGVja3BvaW50LmMg
-fCAgMyArKysKPj4+ICAgZnMvZjJmcy9mMmZzLmggICAgICAgfCAgMyArKysKPj4+ICAgZnMvZjJm
-cy9maWxlLmMgICAgICAgfCAgOCArKysrKystLQo+Pj4gICBmcy9mMmZzL3JlY292ZXJ5LmMgICB8
-IDE4ICsrKysrKysrKysrKysrKysrLQo+Pj4gICA0IGZpbGVzIGNoYW5nZWQsIDI5IGluc2VydGlv
-bnMoKyksIDMgZGVsZXRpb25zKC0pCj4+Pgo+Pj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvY2hlY2tw
-b2ludC5jIGIvZnMvZjJmcy9jaGVja3BvaW50LmMKPj4+IGluZGV4IGRiMzgzMWY3ZjJmNS4uNzc1
-ZTMzMzMwOTdlIDEwMDY0NAo+Pj4gLS0tIGEvZnMvZjJmcy9jaGVja3BvaW50LmMKPj4+ICsrKyBi
-L2ZzL2YyZnMvY2hlY2twb2ludC5jCj4+PiBAQCAtMTE1MSw2ICsxMTUxLDkgQEAgc3RhdGljIGlu
-dCBmMmZzX3N5bmNfaW5vZGVfbWV0YShzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4+PiAgIAkJ
-aWYgKGlub2RlKSB7Cj4+PiAgIAkJCXN5bmNfaW5vZGVfbWV0YWRhdGEoaW5vZGUsIDApOwo+Pj4g
-ICAKPj4+ICsJCQlpZiAoaXNfaW5vZGVfZmxhZ19zZXQoaW5vZGUsIEZJX0ZBTExPQ19LRUVQX1NJ
-WkUpKQo+Pj4gKwkJCQljbGVhcl9pbm9kZV9mbGFnKGlub2RlLCBGSV9GQUxMT0NfS0VFUF9TSVpF
-KTsKPj4+ICsKPj4+ICAgCQkJLyogaXQncyBvbiBldmljdGlvbiAqLwo+Pj4gICAJCQlpZiAoaXNf
-aW5vZGVfZmxhZ19zZXQoaW5vZGUsIEZJX0RJUlRZX0lOT0RFKSkKPj4+ICAgCQkJCWYyZnNfdXBk
-YXRlX2lub2RlX3BhZ2UoaW5vZGUpOwo+Pj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZjJmcy5oIGIv
-ZnMvZjJmcy9mMmZzLmgKPj4+IGluZGV4IDQ2YmU3NTYwNTQ4Yy4uZjVhNTRiYzg0OGQ1IDEwMDY0
-NAo+Pj4gLS0tIGEvZnMvZjJmcy9mMmZzLmgKPj4+ICsrKyBiL2ZzL2YyZnMvZjJmcy5oCj4+PiBA
-QCAtNDU5LDYgKzQ1OSw3IEBAIHN0cnVjdCBmc3luY19pbm9kZV9lbnRyeSB7Cj4+PiAgIAlzdHJ1
-Y3QgaW5vZGUgKmlub2RlOwkvKiB2ZnMgaW5vZGUgcG9pbnRlciAqLwo+Pj4gICAJYmxvY2tfdCBi
-bGthZGRyOwkvKiBibG9jayBhZGRyZXNzIGxvY2F0aW5nIHRoZSBsYXN0IGZzeW5jICovCj4+PiAg
-IAlibG9ja190IGxhc3RfZGVudHJ5OwkvKiBibG9jayBhZGRyZXNzIGxvY2F0aW5nIHRoZSBsYXN0
-IGRlbnRyeSAqLwo+Pj4gKwlsb2ZmX3QgbWF4X2lfc2l6ZTsJLyogcHJldmlvdXMgbWF4IGZpbGUg
-c2l6ZSBmb3IgdHJ1bmNhdGUgKi8KPj4+ICAgfTsKPj4+ICAgCj4+PiAgICNkZWZpbmUgbmF0c19p
-bl9jdXJzdW0oam5sKQkJKGxlMTZfdG9fY3B1KChqbmwpLT5uX25hdHMpKQo+Pj4gQEAgLTgzNSw2
-ICs4MzYsNyBAQCBlbnVtIHsKPj4+ICAgCUZJX0FUT01JQ19SRVBMQUNFLAkvKiBpbmRpY2F0ZSBh
-dG9taWMgcmVwbGFjZSAqLwo+Pj4gICAJRklfT1BFTkVEX0ZJTEUsCQkvKiBpbmRpY2F0ZSBmaWxl
-IGhhcyBiZWVuIG9wZW5lZCAqLwo+Pj4gICAJRklfRE9OQVRFX0ZJTklTSEVELAkvKiBpbmRpY2F0
-ZSBwYWdlIGRvbmF0aW9uIG9mIGZpbGUgaGFzIGJlZW4gZmluaXNoZWQgKi8KPj4+ICsJRklfRkFM
-TE9DX0tFRVBfU0laRSwJLyogZmlsZSBhbGxvY2F0ZSByZXNlcnZlZCBzcGFjZSBhbmQga2VlcCBz
-aXplICovCj4+PiAgIAlGSV9NQVgsCQkJLyogbWF4IGZsYWcsIG5ldmVyIGJlIHVzZWQgKi8KPj4+
-ICAgfTsKPj4+ICAgCj4+PiBAQCAtMTE5Myw2ICsxMTk1LDcgQEAgZW51bSBjcF9yZWFzb25fdHlw
-ZSB7Cj4+PiAgIAlDUF9TUEVDX0xPR19OVU0sCj4+PiAgIAlDUF9SRUNPVkVSX0RJUiwKPj4+ICAg
-CUNQX1hBVFRSX0RJUiwKPj4+ICsJQ1BfRkFMTE9DX0ZJTEUsCj4+PiAgIH07Cj4+PiAgIAo+Pj4g
-ICBlbnVtIGlvc3RhdF90eXBlIHsKPj4+IGRpZmYgLS1naXQgYS9mcy9mMmZzL2ZpbGUuYyBiL2Zz
-L2YyZnMvZmlsZS5jCj4+PiBpbmRleCA0MmZhYWVkNmEwMmQuLmYwODIwZjgxNzgyNCAxMDA2NDQK
-Pj4+IC0tLSBhL2ZzL2YyZnMvZmlsZS5jCj4+PiArKysgYi9mcy9mMmZzL2ZpbGUuYwo+Pj4gQEAg
-LTIzNiw2ICsyMzYsOCBAQCBzdGF0aWMgaW5saW5lIGVudW0gY3BfcmVhc29uX3R5cGUgbmVlZF9k
-b19jaGVja3BvaW50KHN0cnVjdCBpbm9kZSAqaW5vZGUpCj4+PiAgIAllbHNlIGlmIChmMmZzX2V4
-aXN0X3dyaXR0ZW5fZGF0YShzYmksIEYyRlNfSShpbm9kZSktPmlfcGlubywKPj4+ICAgCQkJCQkJ
-CVhBVFRSX0RJUl9JTk8pKQo+Pj4gICAJCWNwX3JlYXNvbiA9IENQX1hBVFRSX0RJUjsKPj4+ICsJ
-ZWxzZSBpZiAoaXNfaW5vZGVfZmxhZ19zZXQoaW5vZGUsIEZJX0ZBTExPQ19LRUVQX1NJWkUpKQo+
-Pj4gKwkJY3BfcmVhc29uID0gQ1BfRkFMTE9DX0ZJTEU7Cj4+PiAgIAo+Pj4gICAJcmV0dXJuIGNw
-X3JlYXNvbjsKPj4+ICAgfQo+Pj4gQEAgLTE5NTMsMTAgKzE5NTUsMTIgQEAgc3RhdGljIGludCBm
-MmZzX2V4cGFuZF9pbm9kZV9kYXRhKHN0cnVjdCBpbm9kZSAqaW5vZGUsIGxvZmZfdCBvZmZzZXQs
-Cj4+PiAgIAl9Cj4+PiAgIAo+Pj4gICAJaWYgKG5ld19zaXplID4gaV9zaXplX3JlYWQoaW5vZGUp
-KSB7Cj4+PiAtCQlpZiAobW9kZSAmIEZBTExPQ19GTF9LRUVQX1NJWkUpCj4+PiArCQlpZiAobW9k
-ZSAmIEZBTExPQ19GTF9LRUVQX1NJWkUpIHsKPj4+ICsJCQlzZXRfaW5vZGVfZmxhZyhpbm9kZSwg
-RklfRkFMTE9DX0tFRVBfU0laRSk7Cj4+IFhpYW9qdW4sCj4+Cj4+IFdlbGwsIHdoYXQgYWJvdXQg
-dGhpcyBjYXNlPwo+Pgo+PiBmYWxsb2MgLWsgb2ZzIHNpemUgZmlsZQo+PiBmbHVzaCBhbGwgZGF0
-YSBhbmQgbWV0YWRhdGEgb2YgZmlsZQo+IAo+IEhpIENoYW8sCj4gRmx1c2ggYWxsIGRhdGEgYW5k
-IG1ldGFkYXRhIG9mIGZpbGUsIGJ1dCB3aXRob3V0IHVzaW5nIGZzeW5jIG9yIENQPwoKWGlhb2p1
-biwKCkkgdGhpbmsgc28sIG9yIGFtIEkgbWlzc2luZyBzb21ldGluZz8KClRoYW5rcywKCj4gCj4g
-VGhhbmtzLAo+IAo+PiBldmljdCBpbm9kZQo+PiB3cml0ZSBmaWxlICYgZnN5bmMgZmlsZSB3b24n
-dCB0cmlnZ2VyIGEgY2hlY2twb2ludD8KPj4KPj4gT3IgYW0gSSBtaXNzaW5nIHNvbWV0aGluZz8K
-Pj4KPj4gVGhhbmtzLAo+Pgo+Pj4gICAJCQlmaWxlX3NldF9rZWVwX2lzaXplKGlub2RlKTsKPj4+
-IC0JCWVsc2UKPj4+ICsJCX0gZWxzZSB7Cj4+PiAgIAkJCWYyZnNfaV9zaXplX3dyaXRlKGlub2Rl
-LCBuZXdfc2l6ZSk7Cj4+PiArCQl9Cj4+PiAgIAl9Cj4+PiAgIAo+Pj4gICAJcmV0dXJuIGVycjsK
-Pj4+IGRpZmYgLS1naXQgYS9mcy9mMmZzL3JlY292ZXJ5LmMgYi9mcy9mMmZzL3JlY292ZXJ5LmMK
-Pj4+IGluZGV4IDRjYjNhOTE4MDFiNC4uNjhiNjJjOGE3NGQzIDEwMDY0NAo+Pj4gLS0tIGEvZnMv
-ZjJmcy9yZWNvdmVyeS5jCj4+PiArKysgYi9mcy9mMmZzL3JlY292ZXJ5LmMKPj4+IEBAIC05NSw2
-ICs5NSw3IEBAIHN0YXRpYyBzdHJ1Y3QgZnN5bmNfaW5vZGVfZW50cnkgKmFkZF9mc3luY19pbm9k
-ZShzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmksCj4+PiAgIAllbnRyeSA9IGYyZnNfa21lbV9jYWNo
-ZV9hbGxvYyhmc3luY19lbnRyeV9zbGFiLAo+Pj4gICAJCQkJCUdGUF9GMkZTX1pFUk8sIHRydWUs
-IE5VTEwpOwo+Pj4gICAJZW50cnktPmlub2RlID0gaW5vZGU7Cj4+PiArCWVudHJ5LT5tYXhfaV9z
-aXplID0gaV9zaXplX3JlYWQoaW5vZGUpOwo+Pj4gICAJbGlzdF9hZGRfdGFpbCgmZW50cnktPmxp
-c3QsIGhlYWQpOwo+Pj4gICAKPj4+ICAgCXJldHVybiBlbnRyeTsKPj4+IEBAIC03OTYsNiArNzk3
-LDcgQEAgc3RhdGljIGludCByZWNvdmVyX2RhdGEoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpLCBz
-dHJ1Y3QgbGlzdF9oZWFkICppbm9kZV9saXN0LAo+Pj4gICAJd2hpbGUgKDEpIHsKPj4+ICAgCQlz
-dHJ1Y3QgZnN5bmNfaW5vZGVfZW50cnkgKmVudHJ5Owo+Pj4gICAJCXN0cnVjdCBmb2xpbyAqZm9s
-aW87Cj4+PiArCQlsb2ZmX3QgaV9zaXplOwo+Pj4gICAKPj4+ICAgCQlpZiAoIWYyZnNfaXNfdmFs
-aWRfYmxrYWRkcihzYmksIGJsa2FkZHIsIE1FVEFfUE9SKSkKPj4+ICAgCQkJYnJlYWs7Cj4+PiBA
-QCAtODI4LDYgKzgzMCw5IEBAIHN0YXRpYyBpbnQgcmVjb3Zlcl9kYXRhKHN0cnVjdCBmMmZzX3Ni
-X2luZm8gKnNiaSwgc3RydWN0IGxpc3RfaGVhZCAqaW5vZGVfbGlzdCwKPj4+ICAgCQkJCWJyZWFr
-Owo+Pj4gICAJCQl9Cj4+PiAgIAkJCXJlY292ZXJlZF9pbm9kZSsrOwo+Pj4gKwkJCWlfc2l6ZSA9
-IGlfc2l6ZV9yZWFkKGVudHJ5LT5pbm9kZSk7Cj4+PiArCQkJaWYgKGVudHJ5LT5tYXhfaV9zaXpl
-IDwgaV9zaXplKQo+Pj4gKwkJCQllbnRyeS0+bWF4X2lfc2l6ZSA9IGlfc2l6ZTsKPj4+ICAgCQl9
-Cj4+PiAgIAkJaWYgKGVudHJ5LT5sYXN0X2RlbnRyeSA9PSBibGthZGRyKSB7Cj4+PiAgIAkJCWVy
-ciA9IHJlY292ZXJfZGVudHJ5KGVudHJ5LT5pbm9kZSwgZm9saW8sIGRpcl9saXN0KTsKPj4+IEBA
-IC04NDQsOCArODQ5LDE5IEBAIHN0YXRpYyBpbnQgcmVjb3Zlcl9kYXRhKHN0cnVjdCBmMmZzX3Ni
-X2luZm8gKnNiaSwgc3RydWN0IGxpc3RfaGVhZCAqaW5vZGVfbGlzdCwKPj4+ICAgCQl9Cj4+PiAg
-IAkJcmVjb3ZlcmVkX2Rub2RlKys7Cj4+PiAgIAo+Pj4gLQkJaWYgKGVudHJ5LT5ibGthZGRyID09
-IGJsa2FkZHIpCj4+PiArCQlpZiAoZW50cnktPmJsa2FkZHIgPT0gYmxrYWRkcikgewo+Pj4gKwkJ
-CWlfc2l6ZSA9IGlfc2l6ZV9yZWFkKGVudHJ5LT5pbm9kZSk7Cj4+PiArCQkJaWYgKGVudHJ5LT5t
-YXhfaV9zaXplID4gaV9zaXplKSB7Cj4+PiArCQkJCWVyciA9IGYyZnNfdHJ1bmNhdGVfYmxvY2tz
-KGVudHJ5LT5pbm9kZSwKPj4+ICsJCQkJCQkJaV9zaXplLCBmYWxzZSk7Cj4+PiArCQkJCWlmIChl
-cnIpIHsKPj4+ICsJCQkJCWYyZnNfZm9saW9fcHV0KGZvbGlvLCB0cnVlKTsKPj4+ICsJCQkJCWJy
-ZWFrOwo+Pj4gKwkJCQl9Cj4+PiArCQkJCWYyZnNfbWFya19pbm9kZV9kaXJ0eV9zeW5jKGVudHJ5
-LT5pbm9kZSwgdHJ1ZSk7Cj4+PiArCQkJfQo+Pj4gICAJCQlsaXN0X21vdmVfdGFpbCgmZW50cnkt
-Pmxpc3QsIHRtcF9pbm9kZV9saXN0KTsKPj4+ICsJCX0KPj4+ICAgbmV4dDoKPj4+ICAgCQlyYV9i
-bG9ja3MgPSBhZGp1c3RfcG9yX3JhX2Jsb2NrcyhzYmksIHJhX2Jsb2NrcywgYmxrYWRkciwKPj4+
-ICAgCQkJCQluZXh0X2Jsa2FkZHJfb2Zfbm9kZShmb2xpbykpOwo+IAo+IAoKCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1h
-aWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczov
-L2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+On 8/26/25 22:05, Liao Yuanhong wrote:
+> Introduces two new sys nodes: allocate_section_hint and
+> allocate_section_policy. The allocate_section_hint identifies the boundary
+> between devices, measured in sections; it defaults to the end of the device
+> for single storage setups, and the end of the first device for multiple
+> storage setups. The allocate_section_policy determines the write strategy,
+> with a default value of 0 for normal sequential write strategy. A value of
+> 1 prioritizes writes before the allocate_section_hint, while a value of 2
+> prioritizes writes after it.
+> 
+> This strategy addresses the issue where, despite F2FS supporting multiple
+> devices, SOC vendors lack multi-devices support (currently only supporting
+> zoned devices). As a workaround, multiple storage devices are mapped to a
+> single dm device. Both this workaround and the F2FS multi-devices solution
+> may require prioritizing writing to certain devices, such as a device with
+> better performance or when switching is needed due to performance
+> degradation near a device's end. For scenarios with more than two devices,
+> sort them at mount time to utilize this feature.
+> 
+> When using this feature with a single storage device, it has almost no
+> impact. However, for configurations where multiple storage devices are
+> mapped to the same dm device using F2FS, utilizing this feature can provide
+> some optimization benefits. Therefore, I believe it should not be limited
+> to just multi-devices usage.
+> 
+> Signed-off-by: Liao Yuanhong <liaoyuanhong@vivo.com>
+> ---
+> Changes in v3:
+> 	- Refactored the implementation logic of allocate_section_policy in
+> 	get_new_segment(). The current version has a more coherent and readable
+> 	logic while maintaining nearly the same functionality.
+> 	- Added a validity check for allocate_section_hint in get_new_segment()
+> 	to prevent potential conflicts that MAIN_SECS() might cause.
+> 	- Adjusted the initialization position of allocate_section_hint, now
+> 	initialized in init_sb_info().
+> 
+> Changes in v2:
+> 	- Updated the feature naming to better reflect its actual functionality.
+> 	- Appended patch description to clarify whether the usage should be
+> 	limited to multi-devices.
+> 	- Improved the code style.
+> 	- Fixed typo.
+> ---
+>  Documentation/ABI/testing/sysfs-fs-f2fs | 22 ++++++++++++++++++++++
+>  fs/f2fs/f2fs.h                          |  8 ++++++++
+>  fs/f2fs/gc.c                            |  5 +++++
+>  fs/f2fs/segment.c                       | 15 +++++++++++++++
+>  fs/f2fs/super.c                         |  4 ++++
+>  fs/f2fs/sysfs.c                         | 18 ++++++++++++++++++
+>  6 files changed, 72 insertions(+)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+> index ee3acc8c2cb8..b590809869ca 100644
+> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+> @@ -911,3 +911,25 @@ Description:	Used to adjust the BG_GC priority when pending IO, with a default v
+>  		bggc_io_aware = 1   skip background GC if there is pending read IO
+>  		bggc_io_aware = 2   don't aware IO for background GC
+>  		==================  ======================================================
+> +
+> +What:		/sys/fs/f2fs/<disk>/allocate_section_hint
+> +Date:		August 2025
+> +Contact:	"Liao Yuanhong" <liaoyuanhong@vivo.com>
+> +Description:	Indicates the hint section between the first device and others in multi-devices
+> +		setup. It defaults to the end of the first device in sections. For a single storage
+> +		device, it defaults to the total number of sections. It can be manually set to match
+> +		scenarios where multi-devices are mapped to the same dm device.
+> +
+> +What:		/sys/fs/f2fs/<disk>/allocate_section_policy
+> +Date:		August 2025
+> +Contact:	"Liao Yuanhong" <liaoyuanhong@vivo.com>
+> +Description:	Controls write priority in multi-devices setups. A value of 0 means normal writing.
+> +		A value of 1 prioritizes writing to devices before the allocate_section_hint. A value of 2
+> +		prioritizes writing to devices after the allocate_section_hint. The default is 0.
+> +
+> +		===========================  ==========================================================
+> +		value					     description
+> +		allocate_section_policy = 0  Normal writing
+> +		allocate_section_policy = 1  Prioritize writing to section before allocate_section_hint
+> +		allocate_section_policy = 2  Prioritize writing to section after allocate_section_hint
+> +		===========================  ==========================================================
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 6cde72fce74e..7c6bfee81c61 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -162,6 +162,12 @@ enum bggc_io_aware_policy {
+>  	AWARE_NONE,			/* don't aware IO for background GC */
+>  };
+>  
+> +enum device_allocation_policy {
+> +	ALLOCATE_FORWARD_NOHINT,
+> +	ALLOCATE_FORWARD_WITHIN_HINT,
+> +	ALLOCATE_FORWARD_FROM_HINT,
+> +};
+> +
+>  /*
+>   * An implementation of an rwsem that is explicitly unfair to readers. This
+>   * prevents priority inversion when a low-priority reader acquires the read lock
+> @@ -1856,6 +1862,8 @@ struct f2fs_sb_info {
+>  	bool aligned_blksize;			/* all devices has the same logical blksize */
+>  	unsigned int first_seq_zone_segno;	/* first segno in sequential zone */
+>  	unsigned int bggc_io_aware;		/* For adjust the BG_GC priority when pending IO */
+> +	unsigned int allocate_section_hint;	/* the boundary position between devices */
+> +	unsigned int allocate_section_policy;	/* determine the section writing priority */
+>  
+>  	/* For write statistics */
+>  	u64 sectors_written_start;
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 098e9f71421e..b57b8fd64747 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -2182,6 +2182,8 @@ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
+>  	SM_I(sbi)->segment_count = (int)SM_I(sbi)->segment_count + segs;
+>  	MAIN_SEGS(sbi) = (int)MAIN_SEGS(sbi) + segs;
+>  	MAIN_SECS(sbi) += secs;
+> +	if (sbi->allocate_section_hint > MAIN_SECS(sbi))
+> +		sbi->allocate_section_hint = MAIN_SECS(sbi);
+>  	FREE_I(sbi)->free_sections = (int)FREE_I(sbi)->free_sections + secs;
+>  	FREE_I(sbi)->free_segments = (int)FREE_I(sbi)->free_segments + segs;
+>  	F2FS_CKPT(sbi)->user_block_count = cpu_to_le64(user_block_count + blks);
+> @@ -2189,6 +2191,9 @@ static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
+>  	if (f2fs_is_multi_device(sbi)) {
+>  		int last_dev = sbi->s_ndevs - 1;
+>  
+> +		sbi->allocate_section_hint = FDEV(0).total_segments /
+> +					SEGS_PER_SEC(sbi);
+> +
+>  		FDEV(last_dev).total_segments =
+>  				(int)FDEV(last_dev).total_segments + segs;
+>  		FDEV(last_dev).end_blk =
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 04b0a3c1804d..e86b78111444 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -2807,6 +2807,21 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
+>  	}
+>  #endif
+>  
+> +	/*
+> +	 * Prevent allocate_section_hint from exceeding MAIN_SECS()
+> +	 * due to desynchronization.
+> +	 */
+> +	if (sbi->allocate_section_policy != ALLOCATE_FORWARD_NOHINT &&
+> +		sbi->allocate_section_hint > MAIN_SECS(sbi))
+> +		sbi->allocate_section_hint = MAIN_SECS(sbi);
+> +
+> +	if (sbi->allocate_section_policy == ALLOCATE_FORWARD_FROM_HINT &&
+> +		hint < sbi->allocate_section_hint)
+> +		hint = sbi->allocate_section_hint;
+> +	else if (sbi->allocate_section_policy == ALLOCATE_FORWARD_WITHIN_HINT &&
+> +			hint >= sbi->allocate_section_hint)
+> +		hint = 0;
+
+I suspect use of sbi->allocate_section_hint and sbi->allocate_section_policy may
+race w/ their update via sysfs node.
+
+What about this?
+
+unsigned int alloc_policy = sbi->allocate_section_hint;
+unsigned int alloc_hint = sbi->allocate_section_hint;
+
+if (alloc_policy != ALLOCATE_FORWARD_NOHINT &&
+		alloc_hint > MAIN_SECS(sbi))
+	alloc_hint = MAIN_SECS(sbi);
+
+if (alloc_policy == ALLOCATE_FORWARD_FROM_HINT &&
+...
+
+Thanks,
+
+> +
+>  find_other_zone:
+>  	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
+>  
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index e288b7be3131..924ad2216f67 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -4238,6 +4238,7 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
+>  	sbi->total_node_count = SEGS_TO_BLKS(sbi,
+>  			((le32_to_cpu(raw_super->segment_count_nat) / 2) *
+>  			NAT_ENTRY_PER_BLOCK));
+> +	sbi->allocate_section_hint = le32_to_cpu(raw_super->section_count);
+>  	F2FS_ROOT_INO(sbi) = le32_to_cpu(raw_super->root_ino);
+>  	F2FS_NODE_INO(sbi) = le32_to_cpu(raw_super->node_ino);
+>  	F2FS_META_INO(sbi) = le32_to_cpu(raw_super->meta_ino);
+> @@ -4721,6 +4722,7 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+>  	logical_blksize = bdev_logical_block_size(sbi->sb->s_bdev);
+>  	sbi->aligned_blksize = true;
+>  	sbi->bggc_io_aware = AWARE_ALL_IO;
+> +	sbi->allocate_section_policy = ALLOCATE_FORWARD_NOHINT;
+>  #ifdef CONFIG_BLK_DEV_ZONED
+>  	sbi->max_open_zones = UINT_MAX;
+>  	sbi->blkzone_alloc_policy = BLKZONE_ALLOC_PRIOR_SEQ;
+> @@ -4752,6 +4754,8 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+>  					SEGS_TO_BLKS(sbi,
+>  					FDEV(i).total_segments) - 1 +
+>  					le32_to_cpu(raw_super->segment0_blkaddr);
+> +				sbi->allocate_section_hint = FDEV(i).total_segments /
+> +							SEGS_PER_SEC(sbi);
+>  			} else {
+>  				FDEV(i).start_blk = FDEV(i - 1).end_blk + 1;
+>  				FDEV(i).end_blk = FDEV(i).start_blk +
+> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> index 1ffaf9e74ce9..81b99c2a02a9 100644
+> --- a/fs/f2fs/sysfs.c
+> +++ b/fs/f2fs/sysfs.c
+> @@ -889,6 +889,20 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+>  		return count;
+>  	}
+>  
+> +	if (!strcmp(a->attr.name, "allocate_section_hint")) {
+> +		if (t < 0 || t > MAIN_SECS(sbi))
+> +			return -EINVAL;
+> +		sbi->allocate_section_hint = t;
+> +		return count;
+> +	}
+> +
+> +	if (!strcmp(a->attr.name, "allocate_section_policy")) {
+> +		if (t < ALLOCATE_FORWARD_NOHINT || t > ALLOCATE_FORWARD_FROM_HINT)
+> +			return -EINVAL;
+> +		sbi->allocate_section_policy = t;
+> +		return count;
+> +	}
+> +
+>  	*ui = (unsigned int)t;
+>  
+>  	return count;
+> @@ -1161,6 +1175,8 @@ F2FS_SBI_GENERAL_RW_ATTR(max_victim_search);
+>  F2FS_SBI_GENERAL_RW_ATTR(migration_granularity);
+>  F2FS_SBI_GENERAL_RW_ATTR(migration_window_granularity);
+>  F2FS_SBI_GENERAL_RW_ATTR(dir_level);
+> +F2FS_SBI_GENERAL_RW_ATTR(allocate_section_hint);
+> +F2FS_SBI_GENERAL_RW_ATTR(allocate_section_policy);
+>  #ifdef CONFIG_F2FS_IOSTAT
+>  F2FS_SBI_GENERAL_RW_ATTR(iostat_enable);
+>  F2FS_SBI_GENERAL_RW_ATTR(iostat_period_ms);
+> @@ -1398,6 +1414,8 @@ static struct attribute *f2fs_attrs[] = {
+>  	ATTR_LIST(max_read_extent_count),
+>  	ATTR_LIST(carve_out),
+>  	ATTR_LIST(reserved_pin_section),
+> +	ATTR_LIST(allocate_section_hint),
+> +	ATTR_LIST(allocate_section_policy),
+>  	NULL,
+>  };
+>  ATTRIBUTE_GROUPS(f2fs);
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
