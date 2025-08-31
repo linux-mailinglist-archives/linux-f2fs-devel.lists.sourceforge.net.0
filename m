@@ -2,107 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E2FBB3D147
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 31 Aug 2025 10:04:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5F60B3D51C
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 31 Aug 2025 22:12:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:From:Message-ID:Date:MIME-Version:Sender:Reply-To:Cc:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=CAV9pLPSTp+Ug3jDYpbh6IVqhOPYuJe5RZLfIdKy/Uw=; b=leHaWsoobdL/3/WWFvP+umDLLu
-	t9JZ5a7+imLnLGn5iLBxU4ufhnUCKSaYndZlEDPOyHswMYUPmh6LHSzjYsCo/6qlsVKjru+eY3Lqq
-	WoUqMU+TrU7jLL4v8HgNJEUPYT+FlAOL/fcGQ+FIX6aFZQU3iCsYHqwA9sDi9zO+355w=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:Message-ID:Date:References:In-Reply-To:To:From:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=pEl5Qu9XkKdJNArHdRN1BcEv5UlknIwXwbk/2pAPCLM=; b=bIiGYMtFmW0E8cfeMrRaR4bjOl
+	07v3r0ddRYnQoJHqLDgQqNaKmsZdmY83ChO4R1nrxExYkDHUWpDjAmaZGuvSizB5aZn/b0Maxi7DP
+	GwvFMlYqwHZZULI7jnnuLg8mzU6619rd+HHo0xMPpEFHSmFRlhVBP6AFAO7btt5tPDSY=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1usd2j-0002KD-0A;
-	Sun, 31 Aug 2025 08:04:05 +0000
+	id 1usoPd-0004M7-MA;
+	Sun, 31 Aug 2025 20:12:29 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <31wG0aAkbAPYqwxiYjjcpYnngb.emmejcsqcpamlrclr.amk@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1usd2Q-0002Jj-Vd for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 31 Aug 2025 08:03:46 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <corbet@lwn.net>) id 1usoPb-0004Lz-BO
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 31 Aug 2025 20:12:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VFx4RHsZpPKOi6j9JvrbO6GmWcfK8WFdE3b5KFAfu0M=; b=Jb+2G/hV3MGzDrtZsdKgeo4GP0
- hUb/HfS1OQAV2oggW3WT+RMoXps9aDh+hwQtmVQIwZK2m+qTS6tDuQg0zUaIZ3qHmiZJaHfMYelHR
- kfNbtuN0x722WM9omHQshe1u44AXYscbGlE/cG0DUAUhBgIHcntbyBxiqXOLaRkPFnF4=;
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
+ References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=jeNn2yqsZkFs7KvKwIK46ykzytj6cKlzLAe6/krfRos=; b=YCSYPJhcsWX6QW7f/1qDoiLPCW
+ UbyOrlaPBQMYKr0xQUKs424OOyjuotIQAGNZeRK48SPGBc57fUGw7fFNLHMTUmq5hVY0tUZCM8iSz
+ 9zRWQqGzd14w9q/q/2xEXUgbDWXeOUQ8MZqvU5Nx+IyoNWQ/aRwUHUQSPfriGUBL4zhs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=VFx4RHsZpPKOi6j9JvrbO6GmWcfK8WFdE3b5KFAfu0M=; b=W
- Oq6GL1QszEIY+NZVnA1WoxOMehCUNKecTdbNEdeT0OmwVWv16Mp66scLPB2vB/P4RswJKzWT4KIKh
- NvVBfZs1df7Xysn3n9pW54tLKYOkJsuqbVA/mKi5xd3+N3rrMhmkezm5/UZKI3xj/hGicDpe5qoi4
- XPn7nYwVGk9byGZc=;
-Received: from mail-il1-f205.google.com ([209.85.166.205])
+ h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=jeNn2yqsZkFs7KvKwIK46ykzytj6cKlzLAe6/krfRos=; b=KC+GcqQcdCT8BiOx6/WfIV+L9C
+ gAVuCmvJj9ikDCMvnA+wRyWALOsSwmO+ldYyfTKG+LVY/ak2HMWdplJC0D80mQPZO05KMl9Srmb/J
+ JPr0XniTTE7zGDRcbmZEHSgJT3tQ5QX2WV/t+1ZgJBg/rUEsTaf3RhBiNraRuBLoFfH0=;
+Received: from ms.lwn.net ([45.79.88.28])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1usd2Q-00086o-Bw for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 31 Aug 2025 08:03:46 +0000
-Received: by mail-il1-f205.google.com with SMTP id
- e9e14a558f8ab-3f05a805d9bso92404865ab.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 31 Aug 2025 01:03:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756627415; x=1757232215;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VFx4RHsZpPKOi6j9JvrbO6GmWcfK8WFdE3b5KFAfu0M=;
- b=ba9fyK+l0LSya5yMkDCKQQM6SRJBMDrjI1ieuEro9NxH2KAddz+aH3BfWBTdwmbEbC
- y+6FXj0d1/6HZy1VuO8JziIv1xpzb5Z8kSgh7dfsCr2eFlQvE9pC/TljL4U3a3Uou1WQ
- hbomAqqDc7gfQeEbALGTorQUZ00JYWm3qs6iqOqL0DcPV0P2Ro7htPAbmGxeFDwYpFQY
- a5jzQsu9M5dTM9JRll5Umvqzrj24AS4yiImR4pZKbMSyj/NJqo+P4ygW33/dD0eBHolq
- 8TD7CtJV+9frRH9oNkqHn/rKRVpdQkoJur92FK6PTWDFdmAL0tyxif19nOvr3JReV3bR
- hBwA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVf8TO+vVJvoRNlN1aXcnXU71P/cScj2Mlc2Ki93k1305npXMIIM9F5YM0dh2nktz9YcdwENNkAS5FMUobFhG7c@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yx2tCiYT1GZamkWjtgg4yO7gx6vb8SCtb9Ctpu6GCaAWOozfmIi
- atvgUKJ3ldspvyYO+u8x8n6MMh8IAyfKbw4hH/RvFcu7ymGZ7PVijm4Crys2T1rBbJHSUoaUPDE
- zf4ckEhiWzaJRHAq86eby1aTdgoWhCCuVJZT7cw7A26ylpRjtzZioqbJ6bRo=
-X-Google-Smtp-Source: AGHT+IFOMPYqbusZKfCaCax85hfhBNOHdlVthWhDIu+EXr2ccRdGQMldqZJ6d9KgYylWT7oKT7xZBWdeAdVM4dzNxo7tSqEb6xFU
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1usoPa-0007nO-Uj for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 31 Aug 2025 20:12:27 +0000
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 5980440B03
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+ t=1756671136; bh=jeNn2yqsZkFs7KvKwIK46ykzytj6cKlzLAe6/krfRos=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=hQ0QL777blvzeEno3CoTZVUU6Ee7DIHX9tJzvFR1RXz04L8I3nX7aEMSGhF3T3jk9
+ KG+vJv37GVhjs7wcS+IBFqW54pMjunZNBttfGw+HZRzIB7Exgq52B3P5pDBTc8dqh3
+ NFJ7965aDNXw71y9rubHd7ELxRMbdNEUovruhx3MBCf897LuxrktR84JbxdmX1ndkd
+ h/ILhvTfG5oo9+OjsIQTrgVbeRdlFfDuxFNswYwl/KN2FxfgY30GYnAZ5uUGFe9tsb
+ +4p4Yxb+80IQXQ2Hzx1t5k8X8iDwX418wqfV3xLR+F/4PWd9gdXZaU3S4cNmRtufNt
+ 2WiwyRjJKzAew==
+Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by ms.lwn.net (Postfix) with ESMTPSA id 5980440B03;
+ Sun, 31 Aug 2025 20:12:16 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+In-Reply-To: <aLOPq_zLap9PuMrW@google.com>
+References: <20250820043432.22509-1-bagasdotme@gmail.com>
+ <87qzwt3glo.fsf@trenco.lwn.net> <aLOPq_zLap9PuMrW@google.com>
+Date: Sun, 31 Aug 2025 14:12:15 -0600
+Message-ID: <874itn1c9s.fsf@trenco.lwn.net>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:1a6a:b0:3f2:1ba1:1caf with SMTP id
- e9e14a558f8ab-3f4006758e8mr97305025ab.14.1756627415725; Sun, 31 Aug 2025
- 01:03:35 -0700 (PDT)
-Date: Sun, 31 Aug 2025 01:03:35 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <68b401d7.a00a0220.1337b0.0031.GAE@google.com>
-From: syzbot <syzbot+1867a378155795cb1680@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.3 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: fab1beda7597
- Merge tag 'devicetree-fixes-for-6.17-1' of gi.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=14b6c634580000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.3 points, 5.0 required)
+ Content preview:  Jaegeuk Kim <jaegeuk@kernel.org> writes: > On 08/29, Jonathan
+ Corbet wrote: >> Bagas Sanjaya <bagasdotme@gmail.com> writes: >> >> > Hi,
+ >> > >> > Here are documentation formatting cleanup for f2fs. This also
+ includes >> > docs retitle at the [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.205 listed in wl.mailspike.net]
-X-Headers-End: 1usd2Q-00086o-Bw
-Subject: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_do_truncate_blocks
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+X-Headers-End: 1usoPa-0007nO-Uj
+Subject: Re: [f2fs-dev] [PATCH 0/6] f2fs: documentation formatting cleanup
+ and improvements
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,118 +107,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Daeho Jeong <daehojeong@google.com>,
+ Linux Documentation <linux-doc@vger.kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Yangtao Li <frank.li@vivo.com>,
+ Linux F2FS <linux-f2fs-devel@lists.sourceforge.net>,
+ Bagas Sanjaya <bagasdotme@gmail.com>, Yuanye Ma <yuanye.ma20@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+Jaegeuk Kim <jaegeuk@kernel.org> writes:
 
-syzbot found the following issue on:
+> On 08/29, Jonathan Corbet wrote:
+>> Bagas Sanjaya <bagasdotme@gmail.com> writes:
+>> 
+>> > Hi,
+>> >
+>> > Here are documentation formatting cleanup for f2fs. This also includes
+>> > docs retitle at the end of series ([6/6]) as a bonus.
+>> >
+>> > This series is based on docs-next tree.
+>> >
+>> > Enjoy!
+>> >
+>> > Bagas Sanjaya (6):
+>> >   Documentation: f2fs: Separate errors mode subtable
+>> >   Documentation: f2fs: Format compression level subtable
+>> >   Documentation: f2fs: Span write hint table section rows
+>> >   Documentation: f2fs: Wrap snippets in literal code blocks
+>> >   Documentation: f2fs: Indent compression_mode option list
+>> >   Documentation: f2fs: Reword title
+>> >
+>> >  Documentation/filesystems/f2fs.rst | 88 +++++++++++++++++-------------
+>> >  1 file changed, 50 insertions(+), 38 deletions(-)
+>> 
+>> Jaegeuk, are you going to pick this up, or would you like me to?
+>
+> Hi, I applied them in the f2fs tree, if you don't mind.
 
-HEAD commit:    fab1beda7597 Merge tag 'devicetree-fixes-for-6.17-1' of gi..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=14b6c634580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=a7016efe6aaa498c
-dashboard link: https://syzkaller.appspot.com/bug?extid=1867a378155795cb1680
-compiler:       Debian clang version 20.1.7 (++20250616065708+6146a88f6049-1~exp1~20250616065826.132), Debian LLD 20.1.7
+Not at all - thanks for letting me know!
 
-Unfortunately, I don't have any reproducer for this issue yet.
-
-Downloadable assets:
-disk image (non-bootable): https://storage.googleapis.com/syzbot-assets/d900f083ada3/non_bootable_disk-fab1beda.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/07d60c58352f/vmlinux-fab1beda.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/b6d2b98f110e/bzImage-fab1beda.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+1867a378155795cb1680@syzkaller.appspotmail.com
-
-loop0: detected capacity change from 0 to 131072
-F2FS-fs (loop0): QUOTA feature is enabled, so ignore qf_name
-F2FS-fs (loop0): build fault injection rate: 7
-F2FS-fs (loop0): build fault injection type: 0x40004
-F2FS-fs (loop0): invalid crc value
-F2FS-fs (loop0): inject page alloc in f2fs_grab_cache_folio of __get_meta_folio+0x157/0x4f0 fs/f2fs/checkpoint.c:77
-F2FS-fs (loop0): inject page alloc in f2fs_grab_cache_folio of f2fs_ra_meta_pages+0x615/0x970 fs/f2fs/checkpoint.c:303
-F2FS-fs (loop0): inject page alloc in f2fs_grab_cache_folio of f2fs_ra_meta_pages+0x615/0x970 fs/f2fs/checkpoint.c:303
-F2FS-fs (loop0): inject invalid blkaddr in f2fs_is_valid_blkaddr of f2fs_ra_meta_pages+0x1cb/0x970 fs/f2fs/checkpoint.c:275
-F2FS-fs (loop0): inject page alloc in f2fs_grab_cache_folio of __get_meta_folio+0x157/0x4f0 fs/f2fs/checkpoint.c:77
-F2FS-fs (loop0): inject page alloc in f2fs_grab_cache_folio of __get_meta_folio+0x157/0x4f0 fs/f2fs/checkpoint.c:77
-------------[ cut here ]------------
-kernel BUG at fs/f2fs/file.c:824!
-Oops: invalid opcode: 0000 [#1] SMP KASAN NOPTI
-CPU: 0 UID: 0 PID: 5364 Comm: syz.0.0 Not tainted syzkaller #0 PREEMPT(full) 
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2~bpo12+1 04/01/2014
-RIP: 0010:f2fs_do_truncate_blocks+0x1075/0x10c0 fs/f2fs/file.c:824
-Code: 27 fd 90 0f 0b e8 bb 30 bf fd 90 0f 0b e8 b3 30 bf fd 48 89 df 48 c7 c6 00 8c d1 8b e8 e4 71 27 fd 90 0f 0b e8 9c 30 bf fd 90 <0f> 0b e8 94 30 bf fd 90 0f 0b 90 e9 dd fd ff ff e8 86 30 bf fd 90
-RSP: 0018:ffffc9000d387620 EFLAGS: 00010287
-RAX: ffffffff84008aa4 RBX: 0000000000000003 RCX: 0000000000100000
-RDX: ffffc9000e2d2000 RSI: 00000000000385b6 RDI: 00000000000385b7
-RBP: ffffc9000d387740 R08: ffff888000714880 R09: 0000000000000002
-R10: 00000000fffffffe R11: 0000000000000002 R12: 0000000000000000
-R13: 0000000000000000 R14: 0000000000000001 R15: 00000000ffff039c
-FS:  00007f95562866c0(0000) GS:ffff88808d210000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f38293909c0 CR3: 0000000042d26000 CR4: 0000000000352ef0
-Call Trace:
- <TASK>
- f2fs_truncate_blocks+0x10a/0x300 fs/f2fs/file.c:861
- f2fs_truncate+0x452/0x780 fs/f2fs/file.c:911
- f2fs_evict_inode+0x9aa/0x19c0 fs/f2fs/inode.c:897
- evict+0x501/0x9c0 fs/inode.c:810
- f2fs_fill_super+0x563c/0x6ff0 fs/f2fs/super.c:5047
- get_tree_bdev_flags+0x40b/0x4d0 fs/super.c:1692
- vfs_get_tree+0x92/0x2b0 fs/super.c:1815
- do_new_mount+0x2a2/0x9e0 fs/namespace.c:3808
- do_mount fs/namespace.c:4136 [inline]
- __do_sys_mount fs/namespace.c:4347 [inline]
- __se_sys_mount+0x317/0x410 fs/namespace.c:4324
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0xfa/0x3b0 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7f955539038a
-Code: d8 64 89 02 48 c7 c0 ff ff ff ff eb a6 e8 de 1a 00 00 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007f9556285e68 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
-RAX: ffffffffffffffda RBX: 00007f9556285ef0 RCX: 00007f955539038a
-RDX: 0000200000010580 RSI: 00002000000105c0 RDI: 00007f9556285eb0
-RBP: 0000200000010580 R08: 00007f9556285ef0 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000246 R12: 00002000000105c0
-R13: 00007f9556285eb0 R14: 0000000000010595 R15: 0000200000000100
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:f2fs_do_truncate_blocks+0x1075/0x10c0 fs/f2fs/file.c:824
-Code: 27 fd 90 0f 0b e8 bb 30 bf fd 90 0f 0b e8 b3 30 bf fd 48 89 df 48 c7 c6 00 8c d1 8b e8 e4 71 27 fd 90 0f 0b e8 9c 30 bf fd 90 <0f> 0b e8 94 30 bf fd 90 0f 0b 90 e9 dd fd ff ff e8 86 30 bf fd 90
-RSP: 0018:ffffc9000d387620 EFLAGS: 00010287
-RAX: ffffffff84008aa4 RBX: 0000000000000003 RCX: 0000000000100000
-RDX: ffffc9000e2d2000 RSI: 00000000000385b6 RDI: 00000000000385b7
-RBP: ffffc9000d387740 R08: ffff888000714880 R09: 0000000000000002
-R10: 00000000fffffffe R11: 0000000000000002 R12: 0000000000000000
-R13: 0000000000000000 R14: 0000000000000001 R15: 00000000ffff039c
-FS:  00007f95562866c0(0000) GS:ffff88808d210000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f38293909c0 CR3: 0000000042d26000 CR4: 0000000000352ef0
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
+jon
 
 
 _______________________________________________
