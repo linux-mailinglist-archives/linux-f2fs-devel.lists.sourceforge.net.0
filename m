@@ -2,73 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F3C7B3D683
+	by mail.lfdr.de (Postfix) with ESMTPS id 21841B3D684
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Sep 2025 04:04:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=Idr/TSOfGU0oiwz1/r4aOlRxU95b2ZEwvqtgS/gmErM=; b=RYwU2Bt4wih3fNGhqQUSXP9v4k
-	oAouVOS1FCEjEDX4JqNuzWIlxF35fGmIqFhwWtjexSf6aSM58ZpPDXG34zF6mvkYvZ/pOjrhGAkLb
-	MuT+uEFS3rYKP+PyblX4u/X3X2wkgFilBLH/mtRQOCGRc28Pay1IQyJEOQPbafYiSdJw=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=YoTAfQfTtHa8OwdWp6JE8jT86Oio6B5rYWgFBIsxouw=; b=diZwkmg+fyTQUJeoi4oAu3actY
+	84SQ7Sv2xtVmd1mF331WdTryPn3zHphsDvKuUaVEwqGj5cb3spjuJifzPwP26HQeHuKe2SIZ109ve
+	X6wNdYBGETrMZv9C5oKYAcq71YbL4o5PQ9HYa9GRPiLu3Hvlz+ITNymXu4FEaOoC5goI=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ustth-0007qj-EA;
-	Mon, 01 Sep 2025 02:03:53 +0000
+	id 1usttj-0002iD-AM;
+	Mon, 01 Sep 2025 02:03:55 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1usttg-0007qb-EP
+ (envelope-from <chao@kernel.org>) id 1ustti-0002i6-3L
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Sep 2025 02:03:52 +0000
+ Mon, 01 Sep 2025 02:03:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7wUeL/vMhL7uYsqLM7oG8iDjxF4P2h4qdasmsBF1/w8=; b=NjCESC3HqNyf0OmITSUxfHStb5
- Fl1/Y1JMQGd/UbAE0JVEMgqLy7tYXfqoiE9EuNhLZpXwMoAbe2eJYKZVBILrRhhHoPDKZyOccKN2x
- WlF9mlY/x5a8kMSE50gAArJmf51KMDuuFIGPyKrkyL/V/zgoY9es8n0CR+JFQlEFFQAw=;
+ bh=0tf2AOG8h9+PguPubUlZ5ran6QLtp2335yBUKXD0W4k=; b=CTmQ8i9j+1388dOHqFd2aLwFLu
+ hDaEPvwZhIQuosDCOMJbGIkltfGDToUAEBjGOrtrBGtW9Da051XDabM9lgdWidyRKUTZf9sj2jTrU
+ z4514vYvLKUDZjFjqqiqjD0Yo0omkaneNVWkgZDzx/ZUm6Q+UuMe1I3GrYkFzFOdwbho=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=7wUeL/vMhL7uYsqLM7oG8iDjxF4P2h4qdasmsBF1/w8=; b=h
- QdLJNDsD0HL+MdYsz/zRdlSleieseeqdy8gw2KGJyknvS2c6mg9YXbJBgWv3juvvpFPeJUnkErv5Q
- ZnEh/Gz3FWkBL/FoMFIpsaF+yRPQrv4wqGdeSVvPR0E1qp7gHKRiMYF9afjcqGZXIfylBDlHoCBsu
- fLaKiGfDfigzp+TM=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=0tf2AOG8h9+PguPubUlZ5ran6QLtp2335yBUKXD0W4k=; b=ezqk23ImEhtpU7NgKP2tAjOq53
+ RwDlAt4rdkY/kMK5S0pYDSJxpgB8sZUA+VVk2JQUtr9uDWbwcacz1VW77iBHDelHkbD9FHlOd78UF
+ eRwJnmv/Ye1D0KzkmrnBU/JkuNrRyVpQs1sQlyKDRndnJO0HJ7Rwzq8EMwe3RFKC9afI=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1usttg-0004rv-1g for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Sep 2025 02:03:52 +0000
+ id 1ustth-0004ry-K8 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 01 Sep 2025 02:03:54 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 6BEA0601DF
+ by tor.source.kernel.org (Postfix) with ESMTP id 15B3B601E5
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  1 Sep 2025 02:03:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FFBEC4CEF6;
  Mon,  1 Sep 2025 02:03:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4F2FC4CEED;
- Mon,  1 Sep 2025 02:03:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756692221;
- bh=iLG451+50P0EKs0JV6qN5ndqwtac3Z7TuRAjBMlTWo0=;
- h=From:To:Cc:Subject:Date:From;
- b=gfT01AdPjt+T6zSrdukdX7IBclha5JM5dCRVM2zGdzkPUEXK8AaNtxFSTgPWIlLPx
- w628vmZeyZh0tOGf3zOjvyfmZ8Ss07SuTs+TwYz6Vq9c61Y/ZiD0t66FP2taqzQ71a
- L6+xqluuuZ9RvCe5eSpbdY8iFTCFEln+Wae0GMXn1OTVGhN5LB7OaFso27TBJU/L1K
- iFNK0vWFcnFBVqPZjKYyf4+VpDcnJZyPJ3bUREqw3BYID/BTLEXweFixAz3NwAffsc
- APcwcQqp6r6Q2ZWebS1j/2B34NgU+XdIIee8mSBn2oCiRGGffHrEVUw2OptjzsLRYT
- Uc3fXyJvS9k4w==
+ s=k20201202; t=1756692222;
+ bh=PTR9olxR+6Cv0v/ngn9kPVgymR2ombpHO6ievh61MH4=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=YGddBssWWAimjHdH4jnAkHd72XGEkdSP/98dCqxbUjV9+0btGK2cldnWqbI2qenl2
+ EZBaJSR5dR4A4DUkucubgWfSiQy4Goq/upg161vULmG4gRaBwXpXl1KadvFpakg2Zv
+ oZqzAMxyfJhFynkR3+VEsVdlCRsXUfb8JdTLK9K5eqaNBAd6a1Lg+9LBGz709ySj4i
+ i2YTiOSGP3vZ4HbSTN119oZBSgnHNw9dmilA2cYj2nZfmWzGa+k2F5oqIszijozus5
+ TMPmuJjmXbkeuWOuaxrT2hAB0zCFKR6mCbbQcASKQf5Stp48qZXmnNXE+KDzRx60wm
+ qI3XwJDZFIFAQ==
 To: Zorro Lang <zlang@kernel.org>,
 	fstests@vger.kernel.org
-Date: Mon,  1 Sep 2025 10:03:30 +0800
-Message-ID: <20250901020331.2171502-1-chao@kernel.org>
+Date: Mon,  1 Sep 2025 10:03:31 +0800
+Message-ID: <20250901020331.2171502-2-chao@kernel.org>
 X-Mailer: git-send-email 2.51.0.338.gd7d06c2dae-goog
+In-Reply-To: <20250901020331.2171502-1-chao@kernel.org>
+References: <20250901020331.2171502-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -77,10 +79,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This testcase tries to check whether f2fs can handle
- "usrjquota=" during remount correctly,
- it expects kernel will encounter NULL pointer dereference
- bug w/o the fix ("f2fs: fix to avoid NULL pointer [...] 
+ Content preview:  This is a regression test: 1. create foo & bar 2. write 8M
+ data to foo 3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar 4.
+ fpunch in foo w/ specified range If we haven't applied kernel patch ("f2fs:
+ fix to do sanity check on node footer for non inode dnode"), f2fs may missed
+ to do sanity check on corrupted dnode, result in panic in step 4). 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,8 +95,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1usttg-0004rv-1g
-Subject: [f2fs-dev] [PATCH 1/2] f2fs/021: test quota mount option
+X-Headers-End: 1ustth-0004ry-K8
+Subject: [f2fs-dev] [PATCH 2/2] f2fs/022: do sanity check on footer of non
+ inode dnode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,64 +116,91 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This testcase tries to check whether f2fs can handle "usrjquota="
-during remount correctly, it expects kernel will encounter NULL
-pointer dereference bug w/o the fix ("f2fs: fix to avoid NULL pointer
-dereference in f2fs_check_quota_consistency()").
+This is a regression test:
+1. create foo & bar
+2. write 8M data to foo
+3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar
+4. fpunch in foo w/ specified range
+
+If we haven't applied kernel patch ("f2fs: fix to do sanity check on
+node footer for non inode dnode"), f2fs may missed to do sanity check
+on corrupted dnode, result in panic in step 4).
 
 Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- tests/f2fs/021     | 30 ++++++++++++++++++++++++++++++
- tests/f2fs/021.out |  2 ++
- 2 files changed, 32 insertions(+)
- create mode 100755 tests/f2fs/021
- create mode 100644 tests/f2fs/021.out
+ tests/f2fs/022     | 52 ++++++++++++++++++++++++++++++++++++++++++++++
+ tests/f2fs/022.out |  2 ++
+ 2 files changed, 54 insertions(+)
+ create mode 100755 tests/f2fs/022
+ create mode 100644 tests/f2fs/022.out
 
-diff --git a/tests/f2fs/021 b/tests/f2fs/021
+diff --git a/tests/f2fs/022 b/tests/f2fs/022
 new file mode 100755
-index 00000000..c41760fc
+index 00000000..a5e19a71
 --- /dev/null
-+++ b/tests/f2fs/021
-@@ -0,0 +1,30 @@
++++ b/tests/f2fs/022
+@@ -0,0 +1,52 @@
 +#! /bin/bash
 +# SPDX-License-Identifier: GPL-2.0
 +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
 +#
-+# FS QA Test No. f2fs/021
++# FS QA Test No. f2fs/022
 +#
-+# This testcase tries to check whether f2fs can handle "usrjquota="
-+# during remount correctly
++# This is a regression test:
++# 1. create foo & bar
++# 2. write 8M data to foo
++# 3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar
++# 4. fpunch in foo w/ specified range
 +#
 +. ./common/preamble
-+_begin_fstest auto quick mount
++_begin_fstest auto quick rw
++
++. ./common/attr
 +
 +_fixed_by_kernel_commit xxxxxxxxxxxx \
-+	"f2fs: fix to avoid NULL pointer dereference in f2fs_check_quota_consistency()"
++	"f2fs: fix to do sanity check on node footer for non inode dnode"
 +
-+_require_scratch
++_require_scratch_nocheck
++_require_command "$F2FS_INJECT_PROG" inject.f2fs
++_require_xfs_io_command "fpunch"
++_require_kernel_config CONFIG_F2FS_CHECK_FS
++
++# remove all mkfs options to avoid layout change of on-disk inode
++export MKFS_OPTIONS=""
++
++foo_path=$SCRATCH_MNT/foo
++bar_path=$SCRATCH_MNT/bar
 +
 +_scratch_mkfs >> $seqres.full
-+_scratch_mount "-o usrquota"
-+quotacheck -uc $SCRATCH_MNT
++_scratch_mount
++
++touch $foo_path
++touch $bar_path
++$XFS_IO_PROG $foo_path -c "pwrite 0 8M" >> $seqres.full
++sync
++foo_ino=`stat -c '%i' $foo_path`
++bar_ino=`stat -c '%i' $bar_path`
 +_scratch_unmount
 +
-+_scratch_mount "-o usrjquota=aquota.user,jqfmt=vfsold"
-+_scratch_mount "-o remount,usrjquota=,jqfmt=vfsold"
-+_scratch_unmount
++# inject foo inode to replace i_nid[0] w/ to bar ino
++$F2FS_INJECT_PROG --node --mb i_nid --nid $foo_ino --idx 0 --val $bar_ino $SCRATCH_DEV >> $seqres.full || _fail "failed to inject"
 +
-+echo "Silence is golden"
++_scratch_mount
++# expect to trigger panic
++$XFS_IO_PROG $foo_path -c "fpunch 6984k 4k"
++_scratch_unmount
 +
 +status=0
 +exit
-diff --git a/tests/f2fs/021.out b/tests/f2fs/021.out
+diff --git a/tests/f2fs/022.out b/tests/f2fs/022.out
 new file mode 100644
-index 00000000..09f4062d
+index 00000000..5307e3d7
 --- /dev/null
-+++ b/tests/f2fs/021.out
++++ b/tests/f2fs/022.out
 @@ -0,0 +1,2 @@
-+QA output created by 021
-+Silence is golden
++QA output created by 022
++fallocate: Structure needs cleaning
 -- 
 2.49.0
 
