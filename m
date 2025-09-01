@@ -2,99 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B65FB3D686
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Sep 2025 04:04:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E94FCB3D694
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Sep 2025 04:15:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=SEOXFg8qUU+57VlzCprUxyk18vvZzIVeUa8u/pQRB9Q=; b=Qk+q6HpLIbaez6veWN1TdFN6BD
-	eMDGZM1OPdY3aCGAaPLUkfo/4OKwiCnOTpWpKfEK46dnSL49KIt+oH9Ay0dfVZ4xscTN92TRplh6c
-	qxNMFNbClDsR/QxJDJvYq+QDId6Oo5HqtZM1xNkiv2Fcsj0z887r9wX3AMPjdnYmoFnc=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=paH/G0kfsh3/MfeM/ohUHqe+twTo6zP2v6aKL5klZQI=; b=BSEpj3URTupA+teSRsQYn6OE//
+	FbTR44zMCUasmt8L9RvY6ArwgBy5u1uBjIx+iqlRUVRuq1SGbU0Xt9yBHKUA+e5oBRHsc3yav5D/R
+	sD8uGc14uueIQCxcVY3kWEpgbvJl9+mtr62gtmLmxSdQi2VzSr8cYsdadDted2wvL5QQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ustuK-00047Z-3o;
-	Mon, 01 Sep 2025 02:04:32 +0000
+	id 1usu50-00080e-CG;
+	Mon, 01 Sep 2025 02:15:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ustuJ-00047O-2u
+ (envelope-from <chao@kernel.org>) id 1usu4z-00080V-1T
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Sep 2025 02:04:31 +0000
+ Mon, 01 Sep 2025 02:15:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5qXlD/q23ZgY/eIVdpXKbP+qtuauIJ2rNluuBJI8QDo=; b=CQuYf0VZLq4+9ceqYmLfplbCeo
- yNNYpoiHTSKz9A7n6YsY1ynyXRvk83/bUOgfc1OTxZqOTxoscOmR/QK0J1bgdBYF+o+lwk7/6Sck7
- QBr2CjzGJCYBEJAa0wbmRCtYbHkEhLngrVsiQYFm2wAO8XYOI/bjM6gL63x4arlG9nHQ=;
+ bh=YeU4nxw6rTsKOWRN+TFAzD0qHOGBBfxiVT4K2uHcqb4=; b=C2MsYh+XmzySxL1B4Mjndsri0G
+ 38URcj1plvpolW3HmcJJG/JFPlAvFkaraYBdrIvUXjsZY1AADCI5bopaPwxf2lreXD1boDv7U3Nqo
+ LgyllV/nTu7kRGhVZhLLbFqRAhSLXUidCJ9lHKXdSKvFDUNtGCALHXOqC4/qc+WIU9rs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=5qXlD/q23ZgY/eIVdpXKbP+qtuauIJ2rNluuBJI8QDo=; b=D
- CoenDifPa/VZILWQuTP37pNEdUeF41cIrMYIgJ7ka2TATu0JtZrIbIkcveTxjV57d8v5HZSQ/HT3l
- J62etmcBI7zn9vZmJUBkm5Oyr9BI127aFfoXVLMjUVj47y24Cht6QK/tuiLqaTtjpYu3eULA1ZLN0
- rIBjpGOys/sr624Q=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=YeU4nxw6rTsKOWRN+TFAzD0qHOGBBfxiVT4K2uHcqb4=; b=ZXv2wHdtXt07G26ijQkg2LEFCb
+ sGhChMWg9ai1O8qijV8dyJOTvwlavi9ur81XaizAtxcMmHIvNbBCWRgxqpKOMgsQWH+Nxa55DqPKm
+ p0nfIVXcYxwfdaBDHtzMuwwYgQIrdzWnXBXU0VgJfgebg5W0Kkp35fO+WhlL5SQc8Yos=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ustuJ-0004tU-AY for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Sep 2025 02:04:31 +0000
+ id 1usu4y-0005NJ-Lq for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 01 Sep 2025 02:15:32 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id BFC28601BC;
- Mon,  1 Sep 2025 02:04:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 42CE3C4CEED;
- Mon,  1 Sep 2025 02:04:19 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 48D854383D
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  1 Sep 2025 02:15:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 653D8C4CEED;
+ Mon,  1 Sep 2025 02:15:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756692260;
- bh=ausF7AVg0t1Vf+HSZjrDosL4uEuyprEfDFeCeFJ4G2o=;
- h=From:To:Cc:Subject:Date:From;
- b=g6r5rwrVnOoPscDz45G0jlVqx6GCrUkDBXO3/9amBMoMwmLhLRLc3DMcNTXlASmV6
- t5Riq2j3Km5b2zf65klx7F+5AXLZZAKtrC0VMM5D3tKMhfWLjz4X3bpw0+gXBcO4ui
- jf+yzHWPK1Cv89sIrcL8Wcn9OGq3l9RXwLXNWII2UYeBdPnNOKnPFZQajJ62iLxcOE
- +TtkgL3asfD6p4zysQPjKp8bMAwxxy7SXFM+Qd7v8URKga1v+M78Z/7U4sL3+Iukf8
- 88+ZQ122u9Nqvu/YYgDKy5sSgE0sCb/Qg9tEJa8JjXtC5Zc+ZhI0Mvo38HpC2IQQZE
- Ogeb1NynZDlsg==
-To: jaegeuk@kernel.org
-Date: Mon,  1 Sep 2025 10:04:15 +0800
-Message-ID: <20250901020416.2172182-1-chao@kernel.org>
-X-Mailer: git-send-email 2.51.0.338.gd7d06c2dae-goog
+ s=k20201202; t=1756692927;
+ bh=XO+FH4L46snPbiIleHTk7JE9h89KztDGTl+m6r5W5nw=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=mX//IuTxF22YSaGeKcAgIaJaBlL5eM8DglNPukYlc4M5IYozCEtLtYY7gvuyMiT/7
+ vsIccJ8jN4JsKnGCRaleNqacj5OGZvgBPx5Hrvta3RxkWQJtCbMIFLf0VplK6MC7BX
+ Cnaics/y4UK+8I4BQ2hd2iiD/D0BOo/ypdQ0vzZdVtgB+0vFpPMRMNk0j9rhY7ruP5
+ ac1WzNYNEIalMQAT6pNjK+ui79cdnGkJk/m93H1y9gSbjD3bfZO3Kbw7aEkn2BztZ5
+ wSLbm7ymsyawnLR+nGOJdOUTB8PAZeIq0173JxWVwve8vUoFXUuf1iBHaCRBnq/3UB
+ Ycd0W/4T3JW1A==
+Message-ID: <887d9b30-0069-4f4d-8107-48662379fd30@kernel.org>
+Date: Mon, 1 Sep 2025 10:15:24 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20250827215222.1615844-1-jaegeuk@kernel.org>
+ <bfbd5db4-c103-4a08-8568-1d27c8eba676@kernel.org>
+ <aLB0XeQh_tm2tXIA@google.com>
+ <c7a0afdc-3f33-4de7-b36d-b0d5f55216e2@kernel.org>
+ <aLIR7BaaAizkdzgl@google.com>
+ <d0357cd2-5435-4d99-af31-cc56fc05ce9a@kernel.org>
+ <aLOPPQFJEqoYQg24@google.com>
+Content-Language: en-US
+In-Reply-To: <aLOPPQFJEqoYQg24@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: It reports a bug from device w/ zufs: F2FS-fs (dm-64):
- Inconsistent
- segment (173822) type [1, 0] in SSA and SIT F2FS-fs (dm-64): Stopped filesystem
- due to reason: 4 Thread A Thread B - f2fs_expand_inode_data -
- f2fs_allocate_pinning_section
- - f2fs_gc_range - do_garbage_collect w/ segno #x - writepage -
- f2fs_allocate_data_block - new_curseg - allocate segno #x 
+ Content preview:  On 8/31/25 07:54, Jaegeuk Kim wrote: > On 08/30,
+ Chao Yu wrote:
+ >> On 8/30/2025 4:47 AM, Jaegeuk Kim wrote: >>> On 08/29, Chao Yu wrote:
+ >>>> On 8/28/2025 11:23 PM, Jaegeuk Kim wrote: >>>>> On 08/28, [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ustuJ-0004tU-AY
-Subject: [f2fs-dev] [PATCH] f2fs: fix to avoid migrating empty section
+X-Headers-End: 1usu4y-0005NJ-Lq
+Subject: Re: [f2fs-dev] [PATCH] f2fs: allocate HOT_DATA for IPU writes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,94 +115,74 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-It reports a bug from device w/ zufs:
+On 8/31/25 07:54, Jaegeuk Kim wrote:
+> On 08/30, Chao Yu wrote:
+>> On 8/30/2025 4:47 AM, Jaegeuk Kim wrote:
+>>> On 08/29, Chao Yu wrote:
+>>>> On 8/28/2025 11:23 PM, Jaegeuk Kim wrote:
+>>>>> On 08/28, Chao Yu wrote:
+>>>>>> On 8/28/25 05:52, Jaegeuk Kim via Linux-f2fs-devel wrote:
+>>>>>>> Let's split IPU writes in hot data area to improve the GC efficiency.
+>>>>>>
+>>>>>> I didn't get it, IPU may be not friendly for migrating data along w/ write in
+>>>>>> hot area?
+>>>>>
+>>>>> This deals with IPU in the LFS mode.
+>>>>
+>>>> Okay, so, we missed to add f2fs_lfs_mode() condition, right?
+>>>
+>>> Why do we need that?
+>>
+>> As you mentioned above, this deals w/ IPU in the LFS mode. Am I missing
+>> something?
+> 
+> The IPU flag indicates the data is hot. In lfs_mode, we missed to allocate
+> it into HOT_DATA. In normal mode, IPU will update the data in place, which
+> doesn't affect anything, while newly create data is also good to store in
+> HOT_DATA as well. So, I think we don't need other condition here.
 
-F2FS-fs (dm-64): Inconsistent segment (173822) type [1, 0] in SSA and SIT
-F2FS-fs (dm-64): Stopped filesystem due to reason: 4
+It makes sense, thanks for the explanation.
 
-Thread A				Thread B
-- f2fs_expand_inode_data
- - f2fs_allocate_pinning_section
-  - f2fs_gc_range
-   - do_garbage_collect w/ segno #x
-					- writepage
-					 - f2fs_allocate_data_block
-					  - new_curseg
-					   - allocate segno #x
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-The root cause is: fallocate on pinning file may race w/ block allocation
-as above, result in do_garbage_collect() from fallocate() may migrate
-segment which is just allocated by a log, the log will update segment type
-in its in-memory structure, however GC will get segment type from on-disk
-SSA block, once segment type changes by log, we can detect such
-inconsistency, then shutdown filesystem.
+Thanks,
 
-In this case, on-disk SSA shows type of segno #173822 is 1 (SUM_TYPE_NODE),
-however segno #173822 was just allocated as data type segment, so in-memory
-SIT shows type of segno #173822 is 0 (SUM_TYPE_DATA).
-
-Change as below to fix this issue:
-- check whether current section is empty before gc
-- add sanity checks on do_garbage_collect() to avoid any race case, result
-in migrating segment used by log.
-- btw, it fixes misc issue in printed logs: "SSA and SIT" -> "SIT and SSA".
-
-Fixes: 9703d69d9d15 ("f2fs: support file pinning for zoned devices")
-Cc: Daeho Jeong <daehojeong@google.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/gc.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
-
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index ed3acbfc83ca..a7708cf80c04 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1794,6 +1794,13 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
- 		struct folio *sum_folio = filemap_get_folio(META_MAPPING(sbi),
- 					GET_SUM_BLOCK(sbi, segno));
- 
-+		if (is_cursec(sbi, GET_SEC_FROM_SEG(sbi, segno))) {
-+			f2fs_err(sbi, "%s: segment %u is used by log",
-+							__func__, segno);
-+			f2fs_bug_on(sbi, 1);
-+			goto skip;
-+		}
-+
- 		if (get_valid_blocks(sbi, segno, false) == 0)
- 			goto freed;
- 		if (gc_type == BG_GC && __is_large_section(sbi) &&
-@@ -1805,7 +1812,7 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
- 
- 		sum = folio_address(sum_folio);
- 		if (type != GET_SUM_TYPE((&sum->footer))) {
--			f2fs_err(sbi, "Inconsistent segment (%u) type [%d, %d] in SSA and SIT",
-+			f2fs_err(sbi, "Inconsistent segment (%u) type [%d, %d] in SIT and SSA",
- 				 segno, type, GET_SUM_TYPE((&sum->footer)));
- 			f2fs_stop_checkpoint(sbi, false,
- 				STOP_CP_REASON_CORRUPTED_SUMMARY);
-@@ -2068,6 +2075,13 @@ int f2fs_gc_range(struct f2fs_sb_info *sbi,
- 			.iroot = RADIX_TREE_INIT(gc_list.iroot, GFP_NOFS),
- 		};
- 
-+		/*
-+		 * avoid migrating empty section, as it can be allocated by
-+		 * log in parallel.
-+		 */
-+		if (!get_valid_blocks(sbi, segno, true))
-+			continue;
-+
- 		if (is_cursec(sbi, GET_SEC_FROM_SEG(sbi, segno)))
- 			continue;
- 
--- 
-2.49.0
+> 
+>>
+>> Thanks,
+>>
+>>>
+>>>>
+>>>> Thanks,
+>>>>
+>>>>>
+>>>>>>
+>>>>>> Thanks,
+>>>>>>
+>>>>>>>
+>>>>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>>>>>> ---
+>>>>>>>    fs/f2fs/segment.c | 3 ++-
+>>>>>>>    1 file changed, 2 insertions(+), 1 deletion(-)
+>>>>>>>
+>>>>>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+>>>>>>> index e0f6589c6a1c..bb79dad55ac9 100644
+>>>>>>> --- a/fs/f2fs/segment.c
+>>>>>>> +++ b/fs/f2fs/segment.c
+>>>>>>> @@ -3688,7 +3688,8 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
+>>>>>>>    		if (file_is_hot(inode) ||
+>>>>>>>    				is_inode_flag_set(inode, FI_HOT_DATA) ||
+>>>>>>> -				f2fs_is_cow_file(inode))
+>>>>>>> +				f2fs_is_cow_file(inode) ||
+>>>>>>> +				is_inode_flag_set(inode, FI_NEED_IPU))
+>>>>>>>    			return CURSEG_HOT_DATA;
+>>>>>>>    		return f2fs_rw_hint_to_seg_type(F2FS_I_SB(inode),
+>>>>>>>    						inode->i_write_hint);
 
 
 
