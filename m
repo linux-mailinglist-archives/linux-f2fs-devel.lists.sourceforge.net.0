@@ -2,75 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAFD0B40E7E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Sep 2025 22:20:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E1D5B40E80
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Sep 2025 22:20:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=aupur+hN/T1LOwa9bu2oI/rIM38LEBTy/q6emykEtbI=; b=YBfZlfo0vMHcXisjV+p+5WdAEh
-	aROOOkPxxWLpzUQ6nEtcuzcPGlYkRzqEmTnlnuJc+rscgHozEqsz2ofs7EAw/lNw/zpiU6tM9KmWr
-	9+MILGiyd4ylt4b8JjxHwuvF3lVA0ogv3vhk+j55yAKdWQ9QQmJXHo3+HCACqetlNRVg=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=Z3rOIQ96T3DdBVJhs1m0cHUED8TrxB43m/LYMtSY0zs=; b=JdFPC0PzkVc/SKe7UnpDKLhjyk
+	H6EqVz+Tr8K+5TufWujZN6MQy9lTEPY2XqgnZ00tCimVuZQBrWks2jsN627oals4p9ziabIlR4hT4
+	uu5g/KNtmhNArodYezsQnOSs23JWW0UN1pkJYTcL3i9I0s1PYaGhQu1ZRZTLbG12tvIw=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1utXUI-0003aD-MX;
-	Tue, 02 Sep 2025 20:20:18 +0000
+	id 1utXUK-0006bR-IJ;
+	Tue, 02 Sep 2025 20:20:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1utXUG-0003a4-OY
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1utXUI-0006bG-Am
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 02 Sep 2025 20:20:16 +0000
+ Tue, 02 Sep 2025 20:20:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wA2VhuySUKdAvnvNMNxdiJx9ISXDlpmTHfBmHwHdNA4=; b=YHVM6S5lE4LO7hqyDao6TROWor
- VrxjCY2cHpZAOlm+WG2Im0TKROLOuNatbc+08Jfs/mn1WZmlwcvDXkBidMUaGvA3WkY3NSXtlPxJu
- Sj858VVriuEyvsIPR8f1DwrQpWzvBlr2FtRWMnkpcuK41IzdNGaWPYMxovy/8Lp2QV9o=;
+ bh=6qYRMuuIY6GmHzjGyY5yjPdMru4bSDrs/BK1//N4D64=; b=FvubFAT28e7g6KldDhGogc8r39
+ n3eJyN17qJa5L7bUVjhRmSkb8DAB9/LdI68xAVhyraVqnLT6w2ZdLZea39ntlgtum4vVvuI2WO/qv
+ g+FKHQse7DuVFEVURYdg2jhIteGv2THcVEPi/L1cdPl4YTKoJxjA6EVXiV4J+FBw6MD0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wA2VhuySUKdAvnvNMNxdiJx9ISXDlpmTHfBmHwHdNA4=; b=a++PuOrGCoH8ffrlS8ozv8a6wP
- guUbwnWfK/RK4fKWUht+zRbxu2JnrdIRiTbE29g4cvGok2cxYRMaEZYghEkd5Minz82v3X4ZEwK7C
- yPpK+fgx5d5Fvj5Igsd5XJmlHxe4Yn7a5vfV/y9BhVy3rE4K9M+u93irUBlgZVF6h7S0=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=6qYRMuuIY6GmHzjGyY5yjPdMru4bSDrs/BK1//N4D64=; b=GUUJIa09aRDAUU0wpDFA5kEt3N
+ 414CyEuD0ORVXkbiZeZ8RUtd6aY+Di1cXU7u7O9Qv+y7CdroDdFOS6vJqSzZmY7T2ztjnw6njshnq
+ zKfVTb/V7sDfB5GlLAqKVGVLmyE2p/sjFhbnL2D/Fw24beqVsaJy6ud0BsxdkdYZy9e4=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1utXUG-0004B6-9i for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 02 Sep 2025 20:20:16 +0000
+ id 1utXUH-0004B9-Pr for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 02 Sep 2025 20:20:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id F403544BCD;
- Tue,  2 Sep 2025 20:20:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D333CC4CEF7;
- Tue,  2 Sep 2025 20:20:05 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 3B7A16022A;
+ Tue,  2 Sep 2025 20:20:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C849C4CEF8;
+ Tue,  2 Sep 2025 20:20:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756844405;
- bh=a5xpJDyI0ZmkMroZh29UOG676SY5u7SLb7dCmmTu9+k=;
+ s=k20201202; t=1756844407;
+ bh=dYWMczR//YCOS9zBgbUp4tAMn84V2mawXfAbvifUB2o=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=NmiWcB3IHJz772F5DpEGAcas6VNa8+Fkz0cWwJYTpPsFHcdGm9LSKNHOT3E6sljHG
- 9Zw3hiTzj1Sa7/U21AivFGIehnF5jo6I2tg7sAr45YzdSWJHKJ2mHivBuMk5bM523X
- ne69b7UTaXNzWbop7uiYb+ia3Wk06CpVW9Tbgmss9bLhpVdnw7XSebvlVcWNKT2vGr
- 5AVcI7xZUBTQex40S6s2qga/6M4+cRW4bTjZveK9lRoCn2Xm4onDs46f7EqUIqoQXI
- Xg9rdM8gt20ZNilLuhvmUCTSTBZ58wLAFi12s1CNuAHHIwqyXa5HShINl8+pKtmN8O
- 9AbSPRBAERtGw==
+ b=BfA3IKiuAEuc9Xn/ecePZhyebbRQmKblTLutQv0AFSKAYqZHwnC5xPkva9szEW4lu
+ rmDHQ9NZxpZn5vkszZXSlCQvNOeIXSOAcgq8Dl5yyTPqxhsytn4UaFCdJnbonWoM9w
+ FfowdKTUvL8IB+oK2WSr0b4Spd1QPbVBpJEzhg/sidKLCFpbkaSf5SkU//VADDalMs
+ 5PSucvbazQRG/5sgl1yzBaKdlXUfI2xIVkNOkgX2dcFhdmW0+5opkePXa17eKUYytT
+ J9iyeoR23ITRvfkFy4eiwgrPkLgK8USrXv+5DnSJTthxJL6pHqG0SBDomyldCBERTU
+ jCEb8KM532ofA==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 72A5A383BF64; Tue,  2 Sep 2025 20:20:12 +0000 (UTC)
+ ADE05383BF64; Tue,  2 Sep 2025 20:20:13 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <175684441099.425353.9345467792269228265.git-patchwork-notify@kernel.org>
-Date: Tue, 02 Sep 2025 20:20:10 +0000
-References: <20250828081130.392736-1-liaoyuanhong@vivo.com>
-In-Reply-To: <20250828081130.392736-1-liaoyuanhong@vivo.com>
-To: Liao Yuanhong <liaoyuanhong@vivo.com>
+Message-Id: <175684441250.425353.3302301690844852179.git-patchwork-notify@kernel.org>
+Date: Tue, 02 Sep 2025 20:20:12 +0000
+References: <20250818020939.3529802-1-chao@kernel.org>
+In-Reply-To: <20250818020939.3529802-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -78,11 +78,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 28 Aug 2025 16:11:30 +0800 you
- wrote: > Introduces two new sys nodes: allocate_section_hint and >
- allocate_section_policy.
- The allocate_section_hint identifies the boundary > between devices, [...]
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 18 Aug 2025 10:09:38 +0800 you
+ wrote: > syzbot reported a f2fs bug as below: > > Oops: gen[ 107.736417][
+ T5848] Oops: general protection fault, probably for non-canonical address
+ 0xdffffc00000 [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +94,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1utXUG-0004B6-9i
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: Use allocate_section_policy to
- control write priority in multi-devices setups
+X-Headers-End: 1utXUH-0004B9-Pr
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: fix to avoid NULL pointer
+ dereference in f2fs_check_quota_consistency()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,32 +111,48 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ lihongbo22@huawei.com, linux-kernel@vger.kernel.org,
+ syzbot+d371efea57d5aeab877b@syzkaller.appspotmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This patch was applied to jaegeuk/f2fs.git (dev)
+This series was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Thu, 28 Aug 2025 16:11:30 +0800 you wrote:
-> Introduces two new sys nodes: allocate_section_hint and
-> allocate_section_policy. The allocate_section_hint identifies the boundary
-> between devices, measured in sections; it defaults to the end of the device
-> for single storage setups, and the end of the first device for multiple
-> storage setups. The allocate_section_policy determines the write strategy,
-> with a default value of 0 for normal sequential write strategy. A value of
-> 1 prioritizes writes before the allocate_section_hint, while a value of 2
-> prioritizes writes after it.
+On Mon, 18 Aug 2025 10:09:38 +0800 you wrote:
+> syzbot reported a f2fs bug as below:
+> 
+> Oops: gen[  107.736417][ T5848] Oops: general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#1] SMP KASAN PTI
+> KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+> CPU: 1 UID: 0 PID: 5848 Comm: syz-executor263 Tainted: G        W           6.17.0-rc1-syzkaller-00014-g0e39a731820a #0 PREEMPT_{RT,(full)}
+> RIP: 0010:strcmp+0x3c/0xc0 lib/string.c:284
+> Call Trace:
+>  <TASK>
+>  f2fs_check_quota_consistency fs/f2fs/super.c:1188 [inline]
+>  f2fs_check_opt_consistency+0x1378/0x2c10 fs/f2fs/super.c:1436
+>  __f2fs_remount fs/f2fs/super.c:2653 [inline]
+>  f2fs_reconfigure+0x482/0x1770 fs/f2fs/super.c:5297
+>  reconfigure_super+0x224/0x890 fs/super.c:1077
+>  do_remount fs/namespace.c:3314 [inline]
+>  path_mount+0xd18/0xfe0 fs/namespace.c:4112
+>  do_mount fs/namespace.c:4133 [inline]
+>  __do_sys_mount fs/namespace.c:4344 [inline]
+>  __se_sys_mount+0x317/0x410 fs/namespace.c:4321
+>  do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+>  do_syscall_64+0xfa/0x3b0 arch/x86/entry/syscall_64.c:94
+>  entry_SYSCALL_64_after_hwframe+0x77/0x7f
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v4] f2fs: Use allocate_section_policy to control write priority in multi-devices setups
-    https://git.kernel.org/jaegeuk/f2fs/c/b639c20e748c
+  - [f2fs-dev,1/2] f2fs: fix to avoid NULL pointer dereference in f2fs_check_quota_consistency()
+    https://git.kernel.org/jaegeuk/f2fs/c/930a9a6ee8e7
+  - [f2fs-dev,2/2] f2fs: fix to allow removing qf_name
+    https://git.kernel.org/jaegeuk/f2fs/c/ff11d8701b77
 
 You are awesome, thank you!
 -- 
