@@ -2,98 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 553A5B44490
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 Sep 2025 19:39:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C6E0BB4452B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 Sep 2025 20:16:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=zA5jKYqB9W9jg3aRvUadohNcB7cqoAcU91mgr7vVXrI=; b=QmFD77rcRhoeTlWIuKzM94VxMd
-	CVDYlZEGGD0+oIDSyoil4/WirvsHTk1uEFfyu4x2bfb6+id8z+yDqqIt3z86LoZPQX351qbiqPaq+
-	tJZ1HgjcTzwTv9gJdC5A3507evW8JUnosJigsIGa9UnJp3YQAi9gLqK58WGJ1o6AhuPY=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=d/azuRwklvsNl3QmhlgwemX+D6MkaeMXB6W/RfljXCg=; b=m4QRU1Nn5T01XpWAylqIIp55IB
+	9doM6lLA1apnSQ7/+yCjzSS/KKa4ZcxpTI7KKF8rBvjznIHj3H6Q+Og0WbcCXncWaLEAUab9IAqLk
+	iKoTfUY7fJTkjyKuu8rW/hrBxPVqxxlMvdBZ9gp0na8tpqHEKo/d3dxMyFjbxPWrmF6M=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uuDvn-0008BC-9N;
-	Thu, 04 Sep 2025 17:39:31 +0000
+	id 1uuEVw-0002lK-OC;
+	Thu, 04 Sep 2025 18:16:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1uuDvm-0008B6-Js
+ (envelope-from <jaegeuk@kernel.org>) id 1uuEVu-0002lC-PT
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 Sep 2025 17:39:30 +0000
+ Thu, 04 Sep 2025 18:16:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VmCY9U4df+c3Y7iv+zxeOnIJBH8FQGRA4dO1F0hP2WU=; b=UwLq3eK7rr2LUaDPX/mGZ1pV51
- SRlwr9ABlq3D6m1WJHIk2WMNnW2xLLW3QzAiroKfyoG5YJB3PgNP2TkOkIf2TP7OQR/2F1/c+ucJy
- e/casoQ93/3H+LWJ1tg+I0PvRVRKmMjs6Sp5pNyIzvPJvntC5A8npIOVJsyrR2yBtJZM=;
+ bh=AM104adXWVysSIwVTNy8BM4qRpBxhId7/jsIiExpOIM=; b=VKnRf2jyshlTp4FzjtoiDvsD8V
+ UhT9Zsir5LHbWKruk46iJ1AgXHoGAav53RP91E57o17XQ3nLNcMjDqV9I+wBxjKUlnAnj8lY+QbfF
+ oE5NoIBzbGlATRYG0uVbQZ7dB0FilK02KVB4ICIAikEUizlKFLKla/qzNRvtUk8k8khk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=VmCY9U4df+c3Y7iv+zxeOnIJBH8FQGRA4dO1F0hP2WU=; b=DsNcgxaRSv3zxV22+Wu3maKG0y
- KuqDI5IB1WRUIIuzOYd13Wx3yxo7d0Vo8tccOWHYulKKlmzIj7wQ+TEc9oWFVY6aOqnsoBmbraz0v
- Uaj2/t8+lxgMyLTgfjXfyQ9j8J2vgCYRpKVhheX8vE67UmuuWQpL17gOct40KWLRXUDk=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=AM104adXWVysSIwVTNy8BM4qRpBxhId7/jsIiExpOIM=; b=k
+ HE2kM5S059OlvZFrL0CU2QfjN0mCuScPEc1oiK9L6Qt57c+7GAQEkacUGGKIlQRzLherbQga6xZ/f
+ INGx1Lv2MxPnb3EG+rm0hjMTin0BeAlhj604cHbHhtjcS5ysPhBFSlq1OszTwCU7tnkfYNw5zf6n/
+ +YAp97MzzyOdyhN8=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uuDvm-0002Wf-7C for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 Sep 2025 17:39:30 +0000
+ id 1uuEVu-0006Pi-EC for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 04 Sep 2025 18:16:50 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 86A4160247;
- Thu,  4 Sep 2025 17:39:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA160C4CEF0;
- Thu,  4 Sep 2025 17:39:18 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id BE11B60247
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  4 Sep 2025 18:16:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64209C4CEF0;
+ Thu,  4 Sep 2025 18:16:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1757007559;
- bh=0TFVItmf9nXUHxwT077yaL+fpDSVSKq3dUyp0d4NDEk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=J83wFC/TCNlaLnUUOjMjVjrGL0c+vX3rbfHdQIxMpQ30ar9MaHUgG9JXETzwc07GF
- Gtfdjs1f5xJHVKdDz3nr3/SU7eNsqppEEDM7e845VK8E/yeQhLuJI4I/SQa+Pjpzei
- vEKqE7UdaZVN4l+9JJD4hbSJYftwEkjyIh6VR7GjBFQmB+1RmWpxbTlkkoSNixI2Pn
- qXRuPlboqpK0v839jhpubw6c7WhDmfErLOhJ2CSmJKMb51W/EE4YFhsNLL+AGi45WS
- 2Ga99FLHB72JueCRjmTnkgj0l6xjtywX4Wwr0kdzhYJ2PSFnjloGDXRh22rrIZs6tO
- mxoQXeyX17N9Q==
-Date: Thu, 4 Sep 2025 17:39:17 +0000
-To: Jan Prusakowski <jprusakowski@google.com>
-Message-ID: <20250904173917.GB854551@google.com>
-References: <20250904085449.290354-1-jprusakowski@google.com>
+ s=k20201202; t=1757009804;
+ bh=QKt4HUZt3Xzmmkzkk5AcnkXfi7gRQ+D2WMregxN1t+I=;
+ h=From:To:Cc:Subject:Date:From;
+ b=lvrz0CiIPp64pem1tmSx3BDWIMCftEu3EiJ1VdFvDjVDNFO8LNF1sX5mKQ1iLc9Ea
+ cb7ytPVt7DVNFpLSEnA3ifpChNEvE9t/ABGE60diJQAH/X4LeP9/lK2xRe0JE+aTkg
+ +UPz1M+kkjcS7b6emWZHDNJ+PZE8c7Nox3xeKrgWCJBbFZSa4Gtu8mw7u5t1ZbLiSw
+ qDYs50hPMEH/yBbjbjZXzxLOtF1vRV07TBl689o+hw5pYjFPG6wEgntIcxcSFYA9sY
+ vEcjJFmveC8H2vP5ytXdsO9vG7un7P8/nxhOUvH/skQOzvI5457Q+GmAyOr7HRg318
+ rXDbSAZv946UA==
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Thu,  4 Sep 2025 18:16:42 +0000
+Message-ID: <20250904181642.3879283-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.51.0.355.g5224444f11-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250904085449.290354-1-jprusakowski@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Sep 04, 2025 at 10:54:49AM +0200, Jan Prusakowski
- wrote: > _verify_ciphertext_for_encryption_policy() checks if encryption works
- > correctly by reading encrypted file's contents directly from [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview: FUA writes can be merged to the existing write IOs.
+ Signed-off-by:
+ Jaegeuk Kim <jaegeuk@kernel.org> --- fs/f2fs/data.c | 4 +++- 1 file changed,
+ 3 insertions(+), 1 deletion(-) diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+ index 7961e0ddfca3..30cb2f230690 100644 --- a/fs/f2fs/data.c +++
+ b/fs/f2fs/data.c
+ @@ -733,9 +733,11 @@ static bool page_is_mergeable(struct f2fs_sb_info *s
+ [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uuDvm-0002Wf-7C
-Subject: Re: [f2fs-dev] [PATCH v1] common/encrypt: Do not run
- _verify_ciphertext_for_encryption_policy on compressed FS
+X-Headers-End: 1uuEVu-0006Pi-EC
+Subject: [f2fs-dev] [PATCH] f2fs: merge FUA command with the existing writes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,54 +108,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Eric Biggers via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Eric Biggers <ebiggers@kernel.org>
-Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Sep 04, 2025 at 10:54:49AM +0200, Jan Prusakowski wrote:
-> _verify_ciphertext_for_encryption_policy() checks if encryption works
-> correctly by reading encrypted file's contents directly from a block device and
-> comparing it to a known good ciphertext.
-> 
-> This, however, won't work if the file systems is also compressed. So this patch
-> disables tests using this function when a compressed FS is used.
+FUA writes can be merged to the existing write IOs.
 
-Apparently this is for f2fs.  There isn't really any such thing as a
-"compressed filesystem" for f2fs.  Rather, f2fs supports compression on
-a per-file basis: the filesystem can contain a mix of compressed and
-uncompressed files.  Probably you used 'compression_extension=*', which
-caused f2fs to automatically enable compression on the files that
-xfstests created, which caused the test failure.  But that behavior is
-specific to 'compress_extension=*', not to compression support per se.
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/data.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-> diff --git a/common/f2fs b/common/f2fs
-> index 1b39d8ce..c46e2aa2 100644
-> --- a/common/f2fs
-> +++ b/common/f2fs
-> @@ -25,3 +25,10 @@ _require_scratch_f2fs_compression()
->  		_scratch_unmount
->  	fi
->  }
-> +
-> +_require_f2fs_no_compress()
-> +{
-> +	if _normalize_mount_options "$MOUNT_OPTIONS" | grep -q "compress"; then
-> +		_notrun "This test requires no compression enabled"
-> +	fi
-> +}
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 7961e0ddfca3..30cb2f230690 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -733,9 +733,11 @@ static bool page_is_mergeable(struct f2fs_sb_info *sbi, struct bio *bio,
+ static bool io_type_is_mergeable(struct f2fs_bio_info *io,
+ 						struct f2fs_io_info *fio)
+ {
++	blk_opf_t mask = ~(REQ_PREFLUSH | REQ_FUA);
++
+ 	if (io->fio.op != fio->op)
+ 		return false;
+-	return io->fio.op_flags == fio->op_flags;
++	return (io->fio.op_flags & mask) == (fio->op_flags & mask);
+ }
+ 
+ static bool io_is_mergeable(struct f2fs_sb_info *sbi, struct bio *bio,
+-- 
+2.51.0.355.g5224444f11-goog
 
-That just checks for compression support, not whether the test file is
-actually compressed.
-
-But also, we don't really need to skip these tests.  Instead, how about
-using 'chattr +m' to explicitly set the test file to uncompressed?
-
-- Eric
 
 
 _______________________________________________
