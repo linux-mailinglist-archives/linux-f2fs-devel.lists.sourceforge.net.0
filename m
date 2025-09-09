@@ -2,195 +2,194 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC040B4FDB8
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  9 Sep 2025 15:44:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D2377B4FDBE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  9 Sep 2025 15:45:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=G8nTdoYnePCwVjHywAEhPzkizxXDR1bZOaQW1n2n8MY=; b=V43OFbX6rtOgcLXtFaa2nWXIUA
-	VwJ+Pp+To37rF5v0TSohnHrt/DNY5EHX3CqGKDsCSEOFjKUCgoTUN4yQoJ5TUcih/t9o58NAhnn9g
-	eA+6OP/B8gTfuli83o0nfolYjnIv6ozt9Z3w7FDJ9mZ/GrejL9jchsX7hD7BBAsaVmj4=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=XBxhXtGTGSwZtk20WUSUxnmQqXgwFGgUT5TzKLZIlbQ=; b=T+nRJca+RMyl5Nuzwxdu431NzG
+	qKO96Ihg5WYOoG4XvYoe6CjozF4AAPA9dXFgr6PI0AVR3lhd8NHn4KMXFdwQDG+zUvYGjVVew1yQl
+	sPa3PEa4yGeMS66GVJJD99vGqHu7s+c2NaUsjC0UyquaxQxByYjdpDetZoW95+GISndg=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uvyeL-00032E-US;
-	Tue, 09 Sep 2025 13:44:45 +0000
+	id 1uvyee-0001gh-Ja;
+	Tue, 09 Sep 2025 13:45:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <liaoyuanhong@vivo.com>) id 1uvyeK-000325-Cp
+ (envelope-from <liaoyuanhong@vivo.com>) id 1uvyec-0001fj-Pr
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 09 Sep 2025 13:44:44 +0000
+ Tue, 09 Sep 2025 13:45:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HgV+3Dxpl7yVMjEq7POCBJUJ8/SOaOp5wzlbkfMD+WM=; b=gisf617elQaJPttE2NFyKPVDu2
- 34keA5CmXHr37UIwQWv+xwsXpcjE0qFx6Cjy+Uzq3c0RsLOct6WCoihlJP77tp2BDVvRSr9JPNEtF
- b7sc6xHWm0px+grIlE81rlKd0Uf21jFIHbmGSBJmfWrN8brGG0pu/QEvepzTv6kpPPzc=;
+ bh=e15+Cs0XeK9ZHF4DbscTdLbxo1CU7bfQaqAb0lwTg6s=; b=UgrFgFPVXKHJQps32KN8cKOhHL
+ phF6TOsoIYTXIS7hMHhpF98sQchs+cn5gkYWNcZSXCBvxEyUwkeSFj6FCqIFQjgmEoCgVbqLe84iJ
+ 4r7UYcp8iOckpNWzaq6ccyGG0J83POuKQ4DqGx46kbN+aVHNWeCpcTaz3IJELesmxNaA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=HgV+3Dxpl7yVMjEq7POCBJUJ8/SOaOp5wzlbkfMD+WM=; b=e
- vshRcY+leNYBNkDLMiTqAA3t7FK7ytt59Jf1CjToJ7H21LB7TqeJhAw/rM42muzeNwnlBBhpFQ147
- zcIUzSK3l3ZXYBSOmpkqzM/4ur5ey6QQXko/PoQaQj5PKsokjnL7tAmkkxipGzNG4ki1LzObrMlMj
- +wsuEQT4ANZ5jE3c=;
-Received: from mail-japanwestazon11012047.outbound.protection.outlook.com
- ([40.107.75.47] helo=OS8PR02CU002.outbound.protection.outlook.com)
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=e15+Cs0XeK9ZHF4DbscTdLbxo1CU7bfQaqAb0lwTg6s=; b=KKsOeI2ORWmugYTP9KOga2ib/y
+ eA4F51FiHN7SC01QRH6HIGCgDQPikFME2KTVoBS+Uz/7q/O8Rxn/6k7ngPwOgQcAyF1DBuCCmySaM
+ bxewZXQsF36K2h2v1abPWExa4CJQF791Wi3+mzu+wYAfQ6gR/HQBW851j4+M2hWUvze0=;
+Received: from mail-japaneastazon11012061.outbound.protection.outlook.com
+ ([52.101.126.61] helo=TYPPR03CU001.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uvyeI-0000wG-QC for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 09 Sep 2025 13:44:43 +0000
+ id 1uvyeN-0000wM-MF for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 09 Sep 2025 13:44:48 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=j0QoLl+R7EB9CLM+7FV5Jkp7KNwRHfD5+FmK0YwclEc/Cft6/mtjXWAWQxtB/A+5vNrtxMxkNnODQPVXlL3UgHMSUTjzj9LJnRkS78iDtGo47vIucelz5en/ySeNN4a5wqHW3LTMeCwzGCXZHSUUynu6BwxOwzSNt2uFhfpkfiehP6ev9hm+0+HPQ53fz/l9DDyZnjZ6RBO/uxL49ufVwchTzKI8JY3SoSCdPzRJ7xkR88ky/dWvCXFOcApibdK8iwmVBrsQhJFk2SDbCAaSfJY9gDPhzLoOFLEQcFrOXvN+sS1X68v80atcANELhUzxg+4Egv6kqq6p18GgNavB6Q==
+ b=UOEFiqq0BJCYiMoZNzjYi/Tyz6W+qQDKmLFAigEpbrlLzALfyOEJEcIvR6LiZriPba3Jq9IbnRvo3Jb2OubtJT3MhEx6AuBPGO7eOduwBVM7pVUzWlK0TJhqewWbUqz+EkyRYfMkzWzYG9DCFdH/1o6f0o/pe3gULKpcDJCJOegcQAoJ04E9UmKnYA55PJSmuZr7XrbPz8rjaxucHJmxyaGgPXwfevo9KLQOI9qS4jh898EHxxT/F87mdfYIro8V+wWjeEYMnacop8meE2GCqVuHbAsVanrl6UHtMlZ35ewASdVzolnhgUjm/cZE2luxsdUGuBhjPqRpMFPZtRlEUQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HgV+3Dxpl7yVMjEq7POCBJUJ8/SOaOp5wzlbkfMD+WM=;
- b=wMAK9JNnt5XE3iYwT12IkZ3BY9w/YVwHOgcyGpeBtuqxpN3kogJziSM1cnyMKxOzaaiF2OxCYQZDtY/dt6eG6wd518wdb02JHoTy3728ixAFuEZBgA0rmKeBiUdmocyEwNwX9J+DbsNOs4fMAZZy50ectAOZJqm9cZSVxxXy2qQrAiJn8F7Kg7ACBVX6PjRQA2Rq2glKxZOBQ4Z3JU4N/Aj6JdrR4alZwLc7Dv+krnXMOogiEdYk+aBaO72Jxh4GzDNA3UeIhu5Vk4S1SVDVf+hYkCe5zH4uYLa+NshRv5TdbRuTz7TtA30s6NTfspK19aIBNT0gzLbep6eFuaFE+Q==
+ bh=e15+Cs0XeK9ZHF4DbscTdLbxo1CU7bfQaqAb0lwTg6s=;
+ b=YZFxXcqM9cdvKBTQgTAT2u0P0qIwbIqb1bb2otmkeQnWNTLxSPphEWbdAtGL8sEhXYTVRaNi+jk+4r788im72xo6K0Rk47/XbVf7nCEl5cUqv0wACN80kTVIf3fUq4ZiklBI1L50sAmaHLQpFhkhG0xki9am4UV4evVN2e2DPx7B2O0DfYt4DerrVOFJ/IIfvZv+sqGvVpe3+7gBUELJyURiouMV3WDVKiv4ucnUigSUFQSwVoGPNGKMHal6BMNxaE+QqZ1mGBpSM87sBW42YdguhEAq1gzMvkvtnhsgmXB1CFAkTRQoK6E7DY9Ky+Gujnp7O8nsIEK+CP1dkNWLUQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HgV+3Dxpl7yVMjEq7POCBJUJ8/SOaOp5wzlbkfMD+WM=;
- b=okJJAWAx73BavWboL+39Y3gWnJ4YgG/xuDkHOECPNWfdAWNUfXjbUjcPRkbDhN8tKHK2H5yxnJzlde6jRvZgB9oF9nLxebfOOn1W9L2bPGxF8RojzrXA9Qu1ByrGYbOOFIEezvpqsvZAUwKtJ650rycyQcydg1m/zs0XyjfD7hEfR4DcmzD+bMOy8FVazz2YEFetPr0BO0NhuyLDs/0RLFsfZKQvAkrWzZaGlEcaB8SpcTOK7A7FPpYiPo9V79q3KlfhUtJPO22Io7pVMfRNtvIYW/2XvHstdWDrHRI3YJJlGUVUZKaqn/n/9ZZaG3VP2q64pLAu4Xg1OhE+XcpJ0Q==
+ bh=e15+Cs0XeK9ZHF4DbscTdLbxo1CU7bfQaqAb0lwTg6s=;
+ b=nh6vP8uq11UEVoVNkIw+F3YZdOi8T72+eQeDlPr4Q4LPj+1dZDB5Z80VJL+8QdpISzSu3FqHenjjU5C8seJ6SYKTri6MjcRfgRHlsqHteayVIQZHrNPV8wfIw1QWe2/1HR/AE1GgNVZ4DtCtFs/0lm1xCmD7cLzZhn5a9Yctgu/VepGb53711KZrbww2bQnvrUHCVq/qPk4WPxnMohiPWdNo8ljmrxDj8L6XkHQPFMMtImPdIEgYt8XjBqht2N+4fuEo72Y8xyU384sjWz21YDoblbPo6vve/9/tsBOloyDcDiWtaQQLSWGWgRpSUsczkoIocleoQBcQLZkjnAJVCA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from SEZPR06MB5576.apcprd06.prod.outlook.com (2603:1096:101:c9::14)
- by SEYPR06MB5376.apcprd06.prod.outlook.com (2603:1096:101:8f::13)
+ by TYUPR06MB6025.apcprd06.prod.outlook.com (2603:1096:400:359::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Tue, 9 Sep
- 2025 13:44:29 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.19; Tue, 9 Sep
+ 2025 13:44:32 +0000
 Received: from SEZPR06MB5576.apcprd06.prod.outlook.com
  ([fe80::5c0a:2748:6a72:99b6]) by SEZPR06MB5576.apcprd06.prod.outlook.com
  ([fe80::5c0a:2748:6a72:99b6%4]) with mapi id 15.20.9094.021; Tue, 9 Sep 2025
- 13:44:29 +0000
+ 13:44:32 +0000
 To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
  linux-f2fs-devel@lists.sourceforge.net (open list:F2FS FILE SYSTEM),
  linux-kernel@vger.kernel.org (open list)
-Date: Tue,  9 Sep 2025 21:44:15 +0800
-Message-Id: <20250909134418.502922-1-liaoyuanhong@vivo.com>
+Date: Tue,  9 Sep 2025 21:44:16 +0800
+Message-Id: <20250909134418.502922-2-liaoyuanhong@vivo.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250909134418.502922-1-liaoyuanhong@vivo.com>
+References: <20250909134418.502922-1-liaoyuanhong@vivo.com>
 X-ClientProxiedBy: SI2P153CA0012.APCP153.PROD.OUTLOOK.COM
  (2603:1096:4:140::15) To SEZPR06MB5576.apcprd06.prod.outlook.com
  (2603:1096:101:c9::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5576:EE_|SEYPR06MB5376:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9d573562-6716-41f5-1b23-08ddefa6ffa2
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5576:EE_|TYUPR06MB6025:EE_
+X-MS-Office365-Filtering-Correlation-Id: e226fe6c-183b-4f67-6080-08ddefa70152
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|52116014|376014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KQ59yHEuEDaKAbrtN/vTA8HOTFNQFxU5ypy9Z00HwPOUbuRUh9lB/f9KUhBA?=
- =?us-ascii?Q?SQNl8iiybwjtoBy24Kq8+/0pMiZyrQrV81LKdLJPToYsa33TtMYsV4YvWQuJ?=
- =?us-ascii?Q?ZMp7jdmFaJnoqOdWRVdUWbaJBob8eUYGPBB5TmAkv/Z8tzDUDcVkbMVcpdnO?=
- =?us-ascii?Q?obrJjuTSlKr9skgPXjQfsu3+C1OozTNmeGSA8cc3D4KjbHPHTrQwaWosZFYe?=
- =?us-ascii?Q?gfzVY9bkVwgw481HyqN4/l9LLH0NwX8WzPFIFQKxT4PJTqL+C8mRXNCqTYfE?=
- =?us-ascii?Q?qr914GyClkoNhZ5WAiLdCwLLQYT0cCWyh4Ma7VfqJ2PgUaZUzdLyoMTaLuXP?=
- =?us-ascii?Q?CxeKg0Nq1yhpfF1ETwpqlmfjde4Orfy3Z0pK1HSuwCL0Wh6LlrT5AOyT4n4/?=
- =?us-ascii?Q?A9ZHQjE2C5YCtibSrPA4KYHYmi0L2B4tf0HakEksIgMDJyENqf6rAHMKCYjD?=
- =?us-ascii?Q?n7XBoutfNqqHk2tdugK1lwCsSh94uB60Ie8b0RowHgiIXLUvc3ioc0J2TXjr?=
- =?us-ascii?Q?8knYG0OWSuwf/087t2BHNyBc6QFPay4wXOP2SqpbVI9km0YSYWkhB5oyBucO?=
- =?us-ascii?Q?jNeAvAIZTVdDxKWQjKmWmgGDXoVDOYu+aoaOQE1hUrEyK4+/0mE+0VbKogth?=
- =?us-ascii?Q?yvSQgtmSd33v+Itcyq+b4c4y249dDuzLUj3LlkeNWKbTskYYWozcpCDj9xh2?=
- =?us-ascii?Q?NZI5CY7xU8ckZJn/M+p6/UnIRXN4nb+YHxZTUEM+6DZ9wRqaGBI7mQ7o6FtS?=
- =?us-ascii?Q?K6lG4KPShzXHMzoNKz/ChMxoUZurOvQxJehYWTufGeIcMFwiEMy+5W03oMq/?=
- =?us-ascii?Q?6S2gudB4GcFPNMcnIsO7rvc/uDJAWBv5hlJxifPwYJuqwQUC9Apezre2xVMX?=
- =?us-ascii?Q?DTqjCTD6RAEuVCCQ10s4v+G+gpuO7ti9vhSyw4L8XnzOIAEYP9RLacGgzqSM?=
- =?us-ascii?Q?o0UI3ne+fZuAMnakli3NU9A5Gfyx8m4AoyvX6xEWBRZa8XDq+Y77jC3+AwLy?=
- =?us-ascii?Q?Y2JIwK39UAHDbHcKZMx3RmEhe+vMJcRAYA06GvY5a6LKEHXz6745j8YEVY8G?=
- =?us-ascii?Q?0In7y5L/Gi15+krsDyYSf4xLOdICb77SM/l/dqHEkPm4amyzzafjh3p03yDQ?=
- =?us-ascii?Q?ifWs6t0ic72uFg8DBuTLHYHfGr6FLZaJ+MA6BFttAbvXSehBTxwkNTQqbac9?=
- =?us-ascii?Q?xyMLGUwR/D49gYwPkpde3Aml54IF0krHq1bmX+IdBetzwhuBe5Hh/ct6OQlt?=
- =?us-ascii?Q?p34nytTyWka2f7STg/VOjcDt/dnwk1/yWzbYv5IGUmvXgh502C7w9yzRfnY5?=
- =?us-ascii?Q?oqIboW2FFsdoHtXhwKEXRfYkWHIl55RanYWNAXbgjPk1zj/LEZO1TSPDrgta?=
- =?us-ascii?Q?e/C+bBHXLHXXiA8IJxxAN8YnbobwSeKyDh4FC3s0t6Mq4IQzX20EACrjpLJP?=
- =?us-ascii?Q?RPxuD3T8I4M75QMpCDiVdJHVP984taCqlHoTiLKwMvQL46o5Ke3LioHVVhFb?=
- =?us-ascii?Q?VQvQZbh4FMEZ7bU=3D?=
+ ARA:13230040|366016|1800799024|52116014|376014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?qrWFqL/D2BTHPyJhx++S8XMO07cOEFHgVkH0b4ovU+Z6M2aRx3mlASaRjm3v?=
+ =?us-ascii?Q?N54atOcRbujoxZdA0zh3XRaw93Fep9WkJ0crE5EsZgInkKXhH0D8clhh2sFo?=
+ =?us-ascii?Q?qrL0cerJQzhtXXHRIMXX0Hq+bhcMSCMnWDRHECV9Dn4D6H4x9u7FJHL3iX+V?=
+ =?us-ascii?Q?ZhSno5RjzZcCoB/pNdU7LQg0i7TIJKKHKrccB5o4gdVwQv26/l06XKz2Xxqg?=
+ =?us-ascii?Q?kUWI2TJUCCaCK9lA33dq9ELLXcWN1814PRwCsK9PJ2l08hD6g8RBmDZEz+2I?=
+ =?us-ascii?Q?sivI+ecJ7qq5Z/pNulEmXYlEdNIakDTD3oFmELLJoOK2KYTaNGuSOcG/DEOy?=
+ =?us-ascii?Q?sBPLPXtkUa4SRWCeM5yHYUfk+fsiX9YW1bg6g8SIDgYp33IiQqaumwAoyic1?=
+ =?us-ascii?Q?/65OqTMKttNADheBJUw+EVZOfDrpRJ/zp/4fCZtR5YNr5UC0zU3M9Q8hBXrW?=
+ =?us-ascii?Q?YP3JoFoBC+07V/uE3sUKtrycJ4MLPqdCQOmsDEJP9ySnR32CbQBrkxqdE5HE?=
+ =?us-ascii?Q?kgp3D7oQseztT6PIzsnR4aqkscasEZ/VmvNSxTqW52gCdfGo7XWmnhjSqQQ4?=
+ =?us-ascii?Q?J3DwB30fkTVJ5g6ujbAcDisOWHfIhr4KijQVN6p/49AcIoUUBCwGHQ+9vV8E?=
+ =?us-ascii?Q?dZKrZWw91DpVY2tgXePdcT9mjl3klbJp3l+oWo5V6M+Cqggeh3mKQ0fKjS32?=
+ =?us-ascii?Q?AJnC5C1fNyidJsNDatcFE46DXdX3nXnGr5vGGw7QLqLHQ8u7cZ21bTtdoZkD?=
+ =?us-ascii?Q?PXH9gl93D0JaZlWamtrsQXBiagBR57PqAq3MhXWWxzl3/lfaLxsbiqYhX5ms?=
+ =?us-ascii?Q?yqA0mmkiF2FNWjSRbSPn34H31Q7xvn89LIvD438I3qXnAGIVImJP9P5oRK6k?=
+ =?us-ascii?Q?RovoN9QcH0iSWjwgnSI0qMo6YWwpkVImLO9rsWDh2V/8/ojuKX7w6tik+GJv?=
+ =?us-ascii?Q?y4hLLb7ZFaX6QSuQAv2uzX9iBZLblUxNvIO0Sa7ii27EEuJzUMt/B+1h/cC3?=
+ =?us-ascii?Q?y6h3R6AAFwWWr8AKqJLAeVMvscFA1S25tOm3201R7giazkIXCndEmzneJj5U?=
+ =?us-ascii?Q?wlxEKvmC+CILrNS2MJl/tTYXQMvtijP00FPZnQJ+8SyfsImsBUpFyNYhSGuL?=
+ =?us-ascii?Q?0Aurp3Bl1mQOykqVl0dfvTjfvDC1Iw+r36pLfe7ztnWlmVtYXcH8NNN1i3LG?=
+ =?us-ascii?Q?B0urqwrRUKANAU3TwHbpR+HJ6m3oChkYEOfO5jBQUmpP1B0eQLagUvgol0/O?=
+ =?us-ascii?Q?FeUg6f1gfBIaPPOTUh0duWbgzdo7o42gOEg8dqy8QUuAFHW+EissBAwiJdQd?=
+ =?us-ascii?Q?7eBq7/1hZVpM6AAbIpDyQk4S7VvosvRZfGa8EsDzjVdbSjdqReHDm8oi2VaH?=
+ =?us-ascii?Q?+PXpjDvHsK8vh2VaEfUcZaVD5cBU58jjuTEZsKFRualTCkbywuB/mlFL0cM2?=
+ =?us-ascii?Q?1b8Kl/BLnnVzaWTp9eY6CxZU73wtGA0kePXqN2lECRdQmwxvWvfTEQ=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SEZPR06MB5576.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014); DIR:OUT;
+ SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?3QXLEKyvTK+mQ3zHAGcrcrBhNUKCK17rLRTLrGZrdPDsOx5L4KeFHKeK5OdS?=
- =?us-ascii?Q?nn+5xQTrnPgTvt8jkxML3oliWQHAaL3rOdBT3IXOTswvejr9SaSGrl5jpxvl?=
- =?us-ascii?Q?fQqLCu9iyt7adads+hBdQDFPXIuckQwjWjIl3rJdfxBS3uBrox9bL/KwzGx5?=
- =?us-ascii?Q?b484BhWH+t4WwGoMJ5CHtfcdq6xntWzol1Ld4b0J0u3Y0nLyLapIe90XKi2M?=
- =?us-ascii?Q?EK0/aU29oZ52sV7J/eFhck+0NNQl6zXEj9VuxhpCOW3Z/3ErdANh8MllqtfW?=
- =?us-ascii?Q?V9mv4d36VsnrXeYGk19uI26rGiz+/c2gr48DlIAiNpTf79i02k8hkK3JtvBE?=
- =?us-ascii?Q?1LmUqpubxzKcR5XY5GkqCfufdLyzzbP799iEirEdrfOenPE/A7lKslaKqgfn?=
- =?us-ascii?Q?wyYJ0MtnqatFzBJEm9JNXnnaU1iThoYFfr7cgdgldVKawMjz1dfgEx7n+fBI?=
- =?us-ascii?Q?kFMWz3kiQUpMcPtJoCjVfcsAVwuI+j9GV0MsCRu/lU5GwN/7ZiMJJu7o5Njg?=
- =?us-ascii?Q?/MX8dOvP7MswOvn25yXF33gLocLP9UzeGqmUVGTVNlXsAydf5mvEhgkY7p1S?=
- =?us-ascii?Q?1beVhRijrMxJih2Za2bOlh59ARsmil62QZnwC8fcKIuanSSnZZfPFyOgPeFQ?=
- =?us-ascii?Q?ULGoMmFeSik/7cXKeThY3Ugjsu3uzA6mYFy8SvEJtVsKad1eXs00fGR0u95D?=
- =?us-ascii?Q?j35eMKKT4a2IXK0amlcT3IQGpxw5KijzfP1H4mCyTy2YXaqTdvI/RyN1h/XM?=
- =?us-ascii?Q?MxFTJQR3kVJ8X6df/uaRrsI2l76+IrvRbWLC+eiGpyhM4zxK9AFHrjY6WrB/?=
- =?us-ascii?Q?QvbWQdMA3uHLabEcQKjnJQXXvK4LAArxjJ6fW75qnoa+dZFNk4Hojz4P03VG?=
- =?us-ascii?Q?UP4Y94ygC6xxwe1yGEXTqqLaIlYahrBO5haBlysWY136g9TpZrKOmC0TNcR+?=
- =?us-ascii?Q?QOtchfkb1Yf8Z/yd58ZyzsSvXNBd22n0OhyMvkResU2E7pBAZD2b6KGNaimS?=
- =?us-ascii?Q?jTjJmKKT9Kqo84Lid/g7Pmq935bqpNMQswItW9wKX6rCHlTmnIY76sv1px2B?=
- =?us-ascii?Q?+NpH51EVUsmIawX7lsIkVfmMGFUmoFUmqg79ohCGBoa4ehCyomqhYpbby/8m?=
- =?us-ascii?Q?JQzcVvXAMBslsL3oN9UgsHaBw7EQjNPL9pQlRazt0DlAirI8xhE/6b+Lmt75?=
- =?us-ascii?Q?YLtV7qRzuOgs7NISMbRVYs8yqvMmlSLSMl4OG8VBBM8YKfSvw7goHjndMXM1?=
- =?us-ascii?Q?PARnrI/yDmAjDrD+lShf7B8M2N9pKH/BsAM56tjvDg+GpSuBsRXMeRO6z3SF?=
- =?us-ascii?Q?VsdZmcP9JJL4KSpXdetgVzqLFsa2uCZhmSQFfd+mSEgknPOUEjULcWQtu2H6?=
- =?us-ascii?Q?Pcthi4GXRwz69uB8LPnlpG4f9zal5u4ftyyBktMQvfg3mk64ePQjupG1Qc/O?=
- =?us-ascii?Q?EJDuvrpR5znLonJRTyXyxvtlr7yFCfC37P51nXv3Ew+6An/WRssk0QqkKY4y?=
- =?us-ascii?Q?lQicOFZ3Zg5vswPo4Vf0nT6TNSnz/odko4XZLdjhv/mOab3Onjqk37aiqZEZ?=
- =?us-ascii?Q?mLQqjjC2HERdDPNlDPlsTLrZ+sEacsf4q68KEb1a?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PcFCUDP+b+nOLVLtTMSO3ksqWCQFY17TXUbMZgXq2haVzs6BLJ72/yUOUvB7?=
+ =?us-ascii?Q?C5Nb+RZia4sVLaLUdf6ARxMeF+g6LN1AutJ4ZDGAWlRfqapeX9uq4HslMw7D?=
+ =?us-ascii?Q?xaiZaW5sSg+MsOmHWRLnwfsGX71Dnhmsb5qHbEGLRTc93F3af/EDgxiXU7wK?=
+ =?us-ascii?Q?Fy2FfxOWN0fYbHKk6zXedkKCyzLvz5nYoVE+ZkF/nOjG1kZ8y1rKrwx+Ywf9?=
+ =?us-ascii?Q?J2+f9847RH1CEqgnaFDn8K8l//l6l5OU09ZeHAalagGCkJBvd6a89s4+mdYI?=
+ =?us-ascii?Q?Cj1NDBIXiBjoMNOhCLqa4MILnALwQFs63y85xhB49+G28na9TVIRQcfY3o01?=
+ =?us-ascii?Q?MQjhFEcB5v68ea8b7eAYAjzGGYjm+uK6biRuLnW75oyoxm3fYjgvlsbRqlRZ?=
+ =?us-ascii?Q?lYa94ggaReO46pnED0UT45sIA1kCT6LlvbkflaHsWa9l7bo08viJWLUsa4iN?=
+ =?us-ascii?Q?SDNwOADuSSGPw1xIsZ/3aSpD82LNnD3P7iRnwHIJG7GLF1e4Z7184Oi3OYUf?=
+ =?us-ascii?Q?y+DURIGTaKyYv0qOwlJbRbLl0eYMW1VKLtLNIUgo62WTNpKDd9Rf0nj2jF7j?=
+ =?us-ascii?Q?gl2LJXYOPu8Y4pBkJfEJs2wJC1+DfaRVbXNOy6SUyTMWCfLbOHJn5olJsOew?=
+ =?us-ascii?Q?8+8QxDip+yQuv35MlMMNl3XDReCvvC882R1JC2K1hUMcewxOS4VKFTHrFFz8?=
+ =?us-ascii?Q?T0U4in/fXpZr9zi3h4OeMYWs3dtzNsfdsAWiNNbcdhC20mUsnC/XPz+8TgN7?=
+ =?us-ascii?Q?teU7LTrWP4D0lWpC24XhRbYgHnmGniQ6hVFtYZhRLkgLgRHYZvlkYcuurylD?=
+ =?us-ascii?Q?5Nqs2YYNAJFwLzmL+x7hPRZyoOPyTzEGJnDPxSF8QSnMAtSKZ/XxHfly5H3V?=
+ =?us-ascii?Q?dm6ce8wkp3RRCOGFeJa7+UbysvcNAn8f/DyAlSEgLfeTZj0+KmZsNXcHobEl?=
+ =?us-ascii?Q?of4uAyyEScDhCdKCVKAP/21sxGXXY7A4D8lREVNGTtqjhIFFs2vrHlCsg6Ah?=
+ =?us-ascii?Q?UM7b+kK9+V/r8OYrwKQYaLa4sNcBeXp5wEFNVItGttr1YJXM9YnsEW/3MDtv?=
+ =?us-ascii?Q?z4pU6MOGRFny9HAb2u6wOJ1YwpK/2MjS7BDzQA8mGEtswEkKtpWr1dUTYwSO?=
+ =?us-ascii?Q?Hj9omBk2dRypxK+Of/vduAfp8JHjn48MAD+LB+gWyUyzzIJ5k9Dk/ca5YV7H?=
+ =?us-ascii?Q?SJLPxCb2dShDX9M4ymbD0wi6motqDLhJHrc6we31PPySzAgfmrth66QiNgAs?=
+ =?us-ascii?Q?H3xEAKLmnETmupcEBB12Qj7iKJkkfBJ3mEHz7u6vGFigZNrxjYkatcCsheEj?=
+ =?us-ascii?Q?HoA2vGXkHRwUWmXJGL/HfmVhVYVUBI0aidVgAvU2RfupgU3p12mlsRUxRL5r?=
+ =?us-ascii?Q?ivSic7WeWo6o1+IKZJ9Bijws+WO/Cc3M+93BQUo9PxgqavsPCgf+rPD7szC4?=
+ =?us-ascii?Q?rlIxcqeqTUTH3KXJee+i5bbSMiL/BxoJGw+qMHAvGFkTdVKSRfNZigq/i68b?=
+ =?us-ascii?Q?8vfCJmpa4Ndwu7ltWOvhAT5iXy0QKbdNo/1Z9+A57QbmUkitbE9r+E0lG7bu?=
+ =?us-ascii?Q?dSSN+luZhz0/S1zxr7b0kxtFoW7UIDwEfP3Wwtse?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d573562-6716-41f5-1b23-08ddefa6ffa2
+X-MS-Exchange-CrossTenant-Network-Message-Id: e226fe6c-183b-4f67-6080-08ddefa70152
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5576.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2025 13:44:29.0038 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2025 13:44:31.9663 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aWnXVqLED0tm77tFXvTC/hZRHqJclN2N6djhkPios14yN+4tVQLlwZSKODuYBavPuzSDyZ1tAQeEuBgp/edKsA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB5376
+X-MS-Exchange-CrossTenant-UserPrincipalName: QdD3Z3pf24yv7lWqyc7K7zhgVNIYxmTq2ctVMfxHGidFyS2bs5IKpHh766SI22iIxSLl65iHv3wpBCphtvhzuw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYUPR06MB6025
 X-Spam-Score: 0.8 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  While testing Zoned UFS, I discovered that the background
- GC results in excessive write operations. I wrote a script to capture the
- data,
- as shown below: Timestamp Free_Sections BG_GC_Calls Dirty_Segment 2025/9/8
- 19:04 433 0 935 <-- begin ... 2025/9/8 20:17 224 14533 27734 <-- stop ...
- 2025/9/8 22:07 244 78722 728 2025/9/8 22:07 243 78968 755 2025/9/8 [...] 
+ Content preview: Incorporate a check using has_enough_dirty_blocks() to
+ prevent
+ redundant background GC in Zoned UFS. When there are insufficient dirty
+ segments, 
+ continuous execution of background GC should be avoided [...] 
  Content analysis details:   (0.8 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.75.47 listed in wl.mailspike.net]
+ [52.101.126.61 listed in wl.mailspike.net]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
+ domain 0.0 ARC_SIGNED             Message has a ARC signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.0 ARC_VALID              Message has a valid ARC signature
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 ARC_SIGNED             Message has a ARC signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  1.0 HK_RANDOM_FROM         From username looks random
  0.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
-X-Headers-End: 1uvyeI-0000wG-QC
-Subject: [f2fs-dev] [PATCH 0/2] f2fs: Some optimizations for background GC
- in Zoned UFS.
+X-Headers-End: 1uvyeN-0000wM-MF
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: Optimize excessive write operations
+ caused by continuous background garbage collection in Zoned UFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -210,66 +209,79 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-While testing Zoned UFS, I discovered that the background GC results in
-excessive write operations. I wrote a script to capture the data, as shown
-below:
+Incorporate a check using has_enough_dirty_blocks() to prevent redundant
+background GC in Zoned UFS. When there are insufficient dirty segments,
+continuous execution of background GC should be avoided, as it results in
+unnecessary write operations and impacts device lifespan. The initial
+threshold is set to 3 * section size (since f2fs data uses three write
+pointers).
 
-Timestamp        Free_Sections        BG_GC_Calls        Dirty_Segment
-2025/9/8 19:04   433                  0                  935  <-- begin
-...
-2025/9/8 20:17   224                  14533              27734  <-- stop
-...
-2025/9/8 22:07   244                  78722              728
-2025/9/8 22:07   243                  78968              755
-2025/9/8 22:08   243                  79201              706
-...
-2025/9/9 9:46    244                  273763             797
-2025/9/9 9:47    244                  273930             791
-2025/9/9 9:47    244                  274097             796
-2025/9/9 9:48    243                  274265             791
+Signed-off-by: Liao Yuanhong <liaoyuanhong@vivo.com>
+---
+ fs/f2fs/gc.c |  8 ++++++--
+ fs/f2fs/gc.h | 10 +++++++++-
+ 2 files changed, 15 insertions(+), 3 deletions(-)
 
-Currently, in Zoned UFS, when free space is between 25% and 60%, background
-GC is triggered without boosting. If the free space does not recover to
-more than 60%, the background GC does not stop. This leads to excessive
-redundant GC writes, as there are not enough dirty segments to release. I
-suggest adding a has_enough_dirty_blocks() function to determine if there
-are enough dirty segments that can be freed. If there aren't enough dirty
-segments available, the background GC should be halted. After applying this
-patch, the captured data is as follows:
-
-Timestamp        Free_Sections        BG_GC_Calls        Dirty_Segment
-2025/9/9 12:04   444                  0                  529  <-- begin
-...
-2025/9/9 16:54   227                  14339              29854  <-- stop
-...
-2025/9/9 20:31   242                  55842              1583
-2025/9/9 20:32   242                  55842              1583
-2025/9/9 20:32   242                  55842              1584
-2025/9/9 20:33   242                  55842              1585
-2025/9/9 20:34   242                  55843              1583
-2025/9/9 20:34   242                  55843              1583
-2025/9/9 20:35   242                  55843              1583
-2025/9/9 20:35   242                  55843              1583
-2025/9/9 20:36   242                  55843              1584
-
-This patch currently only optimizes background GC. Similar issues seem to
-be present for foreground GC, requiring further investigation.
-
-Additionally, I implemented a modification to the valid_thresh_ratio to
-prevent the execution of background GC when the proportion of dirty
-segments in all sections within the range exceeds the valid_thresh_ratio.
-This also helps to avoid unnecessary excessive write operations.
-
-Liao Yuanhong (2):
-  f2fs: Optimize excessive write operations caused by continuous
-    background garbage collection in Zoned UFS
-  f2fs: Enhance the subsequent logic of valid_thresh_ratio to prevent
-    unnecessary background GC
-
- fs/f2fs/gc.c | 13 +++++++++++--
- fs/f2fs/gc.h |  9 ++++++++-
- 2 files changed, 19 insertions(+), 3 deletions(-)
-
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index ed3acbfc83ca..4a8c08f970e3 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -120,7 +120,9 @@ static int gc_thread_func(void *data)
+ 
+ 		if (f2fs_sb_has_blkzoned(sbi)) {
+ 			if (has_enough_free_blocks(sbi,
+-				gc_th->no_zoned_gc_percent)) {
++				gc_th->no_zoned_gc_percent) ||
++				!has_enough_dirty_blocks(sbi,
++				LIMIT_GC_DIRTY_SECTION_NUM)) {
+ 				wait_ms = gc_th->no_gc_sleep_time;
+ 				f2fs_up_write(&sbi->gc_lock);
+ 				goto next;
+@@ -1750,7 +1752,9 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
+ 
+ 			if (f2fs_sb_has_blkzoned(sbi) &&
+ 					!has_enough_free_blocks(sbi,
+-					sbi->gc_thread->boost_zoned_gc_percent))
++					sbi->gc_thread->boost_zoned_gc_percent) &&
++					has_enough_dirty_blocks(sbi,
++					LIMIT_GC_DIRTY_SECTION_NUM))
+ 				window_granularity *=
+ 					sbi->gc_thread->boost_gc_multiple;
+ 
+diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
+index 24e8b1c27acc..1ef234c2702b 100644
+--- a/fs/f2fs/gc.h
++++ b/fs/f2fs/gc.h
+@@ -36,6 +36,7 @@
+ #define DEF_MIGRATION_WINDOW_GRANULARITY_ZONED	3
+ #define BOOST_GC_MULTIPLE	5
+ #define ZONED_PIN_SEC_REQUIRED_COUNT	1
++#define LIMIT_GC_DIRTY_SECTION_NUM	3
+ 
+ #define DEF_GC_FAILED_PINNED_FILES	2048
+ #define MAX_GC_FAILED_PINNED_FILES	USHRT_MAX
+@@ -177,6 +178,12 @@ static inline bool has_enough_free_blocks(struct f2fs_sb_info *sbi,
+ 	return free_sections(sbi) > ((sbi->total_sections * limit_perc) / 100);
+ }
+ 
++static inline bool has_enough_dirty_blocks(struct f2fs_sb_info *sbi,
++						unsigned int limit_num)
++{
++	return dirty_segments(sbi) > limit_num * SEGS_PER_SEC(sbi);
++}
++
+ static inline bool has_enough_invalid_blocks(struct f2fs_sb_info *sbi)
+ {
+ 	block_t user_block_count = sbi->user_block_count;
+@@ -197,6 +204,7 @@ static inline bool need_to_boost_gc(struct f2fs_sb_info *sbi)
+ {
+ 	if (f2fs_sb_has_blkzoned(sbi))
+ 		return !has_enough_free_blocks(sbi,
+-				sbi->gc_thread->boost_zoned_gc_percent);
++				sbi->gc_thread->boost_zoned_gc_percent) &&
++				has_enough_dirty_blocks(sbi, LIMIT_GC_DIRTY_SECTION_NUM);
+ 	return has_enough_invalid_blocks(sbi);
+ }
 -- 
 2.34.1
 
