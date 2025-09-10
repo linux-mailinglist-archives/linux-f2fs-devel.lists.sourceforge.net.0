@@ -2,98 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C8B7B511A3
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Sep 2025 10:40:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44345B51887
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Sep 2025 15:58:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=FL8y99VeD+iHRFKTjqP9QMNMnWTlPIA67cNiOGOwpgc=; b=IpuMGWmtdZcD26KA1YdCnIXfve
-	90eTR7d+XEQLsyTCIfGh+fvBQq7almHHHimmfitt2yCk0mnmyuH0ttKEvLdEbnJUaRfcpbqdY0+ux
-	pjObdSeBhT41DKtwNBF6LKTFlKSNfSw44sx02sr0QhnsjAiPQTkT/62SnLb6v846QDl0=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=bmE203GXmh8zG7OS3qixrO3FkRr/dMwTXpq8ftIZvEo=; b=MsFhIvBPG/A1xFTMezturj9k1D
+	Peb7PH0Va+aXfIPQw3RtyPtOQkP8n4RrJtWlBf16Jv1LavBpAIlqFR3d8xpnkWjmcwWWhomamA2ZS
+	EqIox6cZnO+BbYSwWz3R2k0WZgOGIWEWCGJIIw8rDIrw+RAnamVF4HFBDHdWigkKy8tE=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uwGNg-0007g4-GL;
-	Wed, 10 Sep 2025 08:40:45 +0000
+	id 1uwLLX-0005U9-Qp;
+	Wed, 10 Sep 2025 13:58:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1uwGNe-0007fy-OD
+ (envelope-from <wangzijie1@honor.com>) id 1uwLLV-0005U2-Uq
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 10 Sep 2025 08:40:43 +0000
+ Wed, 10 Sep 2025 13:58:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eAfW8GgjApNvy9TjGR8PDI7BWpA7zopMpXtxvk9GSAE=; b=EPOetUkiKwuaNQ00xaoGhmoHMO
- V1nijthk2Bo4AAPe2ESQbuXYts2/FMLq13WxU037zswklDJhihsNYl7+f6GXRHq49FS4trrqg09mH
- /Zz75YUchNfEPU58A1Gyttvtk3HttF9hVRThZwrWRjcaheQtPio1IMXUVG9F+mmPglTg=;
+ bh=wvUQTcG3SbdHjADFcOIBR5Wv7dKb3YuZTkVfGMjxCjE=; b=iy8Mydj6+AHKQiEiKW0UjSl7nE
+ aciimD9Udcr8Dt+rwkk9dW0gbOuh+L/hc3GVLqENZ+GspnO/l5Cvk5dtQR+IRCt7ysRWWD8itXIQu
+ VSC8MpV+INoeZ5mXpmlHwyXu4cXqN4LVDdGk5+oM30K3D25TQhnNx66qSOVJLz48SYq4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=eAfW8GgjApNvy9TjGR8PDI7BWpA7zopMpXtxvk9GSAE=; b=K
- Zbdm357Mrxn0mu4k4KE6+5DgO7Y+WT4+7I9XeWbjwB/UeU0auOjwajXom+GbTAvjStlQ1IUCQMWX/
- YLT5kzwUcxyQQzfAcNwPVcRjxka+twqvfQxYrboEw9mVtdWT0FVsTAoII1z2+5JT5XNueUZpCIYFi
- ujld9CZN2oO1p5g0=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ List-Owner:List-Archive; bh=wvUQTcG3SbdHjADFcOIBR5Wv7dKb3YuZTkVfGMjxCjE=; b=C
+ H86ShyjE6AFpTuqzqTJ5Z6it+ssmxzDi+KPab8JE7Nk7XyxB/Cl5VdT/pYevqOwBgBYuv7gV5bbfq
+ FHXqf5MiGk5zUY5iNutu18cVjWure0yv946iRjP7F0P/rEQA2Kx6kwDxoWO3uHYy5Zct8KJ7tHwBr
+ 0HWvwYDiikVyJHNk=;
+Received: from mta20.hihonor.com ([81.70.206.69])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uwGNf-0000N7-1Q for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 10 Sep 2025 08:40:43 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 999E940B44;
- Wed, 10 Sep 2025 08:40:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 592A3C4CEFA;
- Wed, 10 Sep 2025 08:40:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1757493632;
- bh=GPDaP11QrembyBGG0diAjU9KLEUd1GQl7AIT0DvpbQE=;
- h=From:To:Cc:Subject:Date:From;
- b=kQdZ+NyVUhBogJAYXdPGo+VWUjQne8Ir5gG8JfDRnff6xNlkjbxgoKDIEDVa8WAI4
- e//oUTN/W437niexorIoyMa2Ykp/WY8GLo/+EIxCSKiEGzOXCdb8GgCtOMVt+YnD+5
- UCHzHpohkAmRh4WlYJi79lcWRTNaJa5lTgx2YCwJwKWm6tNfIfIU1JaVSoT8QnQWYl
- ADgPo1jlMPV5cVN0QWJ4netH4SCigWg9JyCUzPifTGgqwvg7s32WuAFo9DezFPuZKb
- 2KJS77qTxECcsvF/QASe0E7/ddNgx4/i25TvKnqS6mYa1L6YNs3NhHvlBSGEvWeOBI
- i2jJKax5CjDGQ==
-To: jaegeuk@kernel.org
-Date: Wed, 10 Sep 2025 16:40:24 +0800
-Message-ID: <20250910084024.1722790-1-chao@kernel.org>
-X-Mailer: git-send-email 2.51.0.384.g4c02a37b29-goog
+ id 1uwLLV-0002Yg-E6 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 10 Sep 2025 13:58:49 +0000
+Received: from w013.hihonor.com (unknown [10.68.26.19])
+ by mta20.hihonor.com (SkyGuard) with ESMTPS id 4cMMhy5mjNzYkxhK;
+ Wed, 10 Sep 2025 21:58:10 +0800 (CST)
+Received: from a011.hihonor.com (10.68.31.243) by w013.hihonor.com
+ (10.68.26.19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 10 Sep
+ 2025 21:58:37 +0800
+Received: from localhost.localdomain (10.144.23.14) by a011.hihonor.com
+ (10.68.31.243) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 10 Sep
+ 2025 21:58:36 +0800
+From: wangzijie <wangzijie1@honor.com>
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Wed, 10 Sep 2025 21:58:34 +0800
+Message-ID: <20250910135835.2751574-1-wangzijie1@honor.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Originating-IP: [10.144.23.14]
+X-ClientProxiedBy: w001.hihonor.com (10.68.25.235) To a011.hihonor.com
+ (10.68.31.243)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: syzbot reports a bug as below: loop0: detected capacity
- change
- from 0 to 40427 F2FS-fs (loop0): Wrong SSA boundary, start(3584) end(4096)
- blocks(3072) F2FS-fs (loop0): Can't find valid F2FS filesystem in 1th
- superblock F2FS-fs (loo [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview: When the data layout is like this: dnode1: dnode2: [0] A [0]
+ NEW_ADDR [1] A+1 [1] 0x0 ... .... [1016] A+1016 [1017] B (B!=A+1017) [1017]
+ 0x0 We can build this kind of layout by following steps(with
+ i_extra_isize:36):
+ ./f2fs_io write 1 0 1881 rand dsync testfile ./f2fs_io write 1 1881 1 rand
+ buffered testfile ./f2fs_io fallocate 0 7708672 4 [...] 
+ Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uwGNf-0000N7-1Q
-Subject: [f2fs-dev] [PATCH] f2fs: fix to truncate first page in error path
- of f2fs_truncate()
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [81.70.206.69 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1uwLLV-0002Yg-E6
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: fix wrong extent_info data for
+ precache extents
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,85 +101,55 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: syzbot+90266696fe5daacebd35@syzkaller.appspotmail.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: wangzijie <wangzijie1@honor.com>, linux-kernel@vger.kernel.org,
+ feng.han@honor.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-syzbot reports a bug as below:
+When the data layout is like this:
+dnode1:                     dnode2:
+[0]      A                  [0]    NEW_ADDR
+[1]      A+1                [1]    0x0
+...                         ....
+[1016]   A+1016
+[1017]   B (B!=A+1017)      [1017] 0x0
 
-loop0: detected capacity change from 0 to 40427
-F2FS-fs (loop0): Wrong SSA boundary, start(3584) end(4096) blocks(3072)
-F2FS-fs (loop0): Can't find valid F2FS filesystem in 1th superblock
-F2FS-fs (loop0): invalid crc value
-F2FS-fs (loop0): f2fs_convert_inline_folio: corrupted inline inode ino=3, i_addr[0]:0x1601, run fsck to fix.
-------------[ cut here ]------------
-kernel BUG at fs/inode.c:753!
-RIP: 0010:clear_inode+0x169/0x190 fs/inode.c:753
-Call Trace:
- <TASK>
- evict+0x504/0x9c0 fs/inode.c:810
- f2fs_fill_super+0x5612/0x6fa0 fs/f2fs/super.c:5047
- get_tree_bdev_flags+0x40e/0x4d0 fs/super.c:1692
- vfs_get_tree+0x8f/0x2b0 fs/super.c:1815
- do_new_mount+0x2a2/0x9e0 fs/namespace.c:3808
- do_mount fs/namespace.c:4136 [inline]
- __do_sys_mount fs/namespace.c:4347 [inline]
- __se_sys_mount+0x317/0x410 fs/namespace.c:4324
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0xfa/0x3b0 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
+We can build this kind of layout by following steps(with i_extra_isize:36):
+./f2fs_io write 1 0 1881 rand dsync testfile
+./f2fs_io write 1 1881 1 rand buffered testfile
+./f2fs_io fallocate 0 7708672 4096 testfile
 
-During f2fs_evict_inode(), clear_inode() detects that we missed to truncate
-all page cache before destorying inode, that is because in below path, we
-will create page #0 in cache, but missed to drop it in error path, let's fix
-it.
+And when we map first data block in dnode2, we will get wrong extent_info data:
+map->m_len = 1
+ofs = start_pgofs - map->m_lblk = 1882 - 1881 = 1
 
-- evict
- - f2fs_evict_inode
-  - f2fs_truncate
-   - f2fs_convert_inline_inode
-    - f2fs_grab_cache_folio
-    : create page #0 in cache
-    - f2fs_convert_inline_folio
-    : sanity check failed, return -EFSCORRUPTED
-  - clear_inode detects that inode->i_data.nrpages is not zero
+ei.fofs = start_pgofs = 1882
+ei.len = map->m_len - ofs = 1 - 1 = 0
 
-Fixes: 92dffd01790a ("f2fs: convert inline_data when i_size becomes large")
-Reported-by: syzbot+90266696fe5daacebd35@syzkaller.appspotmail.com
-Closes: https://lore.kernel.org/linux-f2fs-devel/68c09802.050a0220.3c6139.000e.GAE@google.com
-Signed-off-by: Chao Yu <chao@kernel.org>
+Fix it by skipping updating this kind of extent info.
+
+Signed-off-by: wangzijie <wangzijie1@honor.com>
 ---
- fs/f2fs/file.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ fs/f2fs/data.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 42faaed6a02d..1aae4361d0a8 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -904,8 +904,16 @@ int f2fs_truncate(struct inode *inode)
- 	/* we should check inline_data size */
- 	if (!f2fs_may_inline_data(inode)) {
- 		err = f2fs_convert_inline_inode(inode);
--		if (err)
-+		if (err) {
-+			/*
-+			 * Always truncate page #0 to avoid page cache
-+			 * leak in evict() path.
-+			 */
-+			truncate_inode_pages_range(inode->i_mapping,
-+					F2FS_BLK_TO_BYTES(0),
-+					F2FS_BLK_END_BYTES(0));
- 			return err;
-+		}
- 	}
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 7961e0ddf..b8bb71852 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1649,6 +1649,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
  
- 	err = f2fs_truncate_blocks(inode, i_size_read(inode), true);
+ 		switch (flag) {
+ 		case F2FS_GET_BLOCK_PRECACHE:
++			if (__is_valid_data_blkaddr(map->m_pblk) &&
++				start_pgofs - map->m_lblk == map->m_len)
++				map->m_flags &= ~F2FS_MAP_MAPPED;
+ 			goto sync_out;
+ 		case F2FS_GET_BLOCK_BMAP:
+ 			map->m_pblk = 0;
 -- 
-2.49.0
+2.25.1
 
 
 
