@@ -2,94 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5316B5757C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Sep 2025 12:05:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82D74B5769D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Sep 2025 12:36:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Message-ID:Mime-Version:Date:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=Z9cK+uR3aryt0q9tfv0mpBDGgabsTJtg38u5uIWj6fs=; b=YwIhf43bvIvIMpazGtjce155aQ
-	sOty+pCmVpzs42fJTrZlJK9BoLCTAL4L5QjowznKh9GnjJFFqM862wvuGNrAzgi/kEeY9Z8sux4k9
-	YybP++4fhBTkrITAdvBLf3/eiFDtNeB+Ig6e4IbDmakdywHhkyrzGZh+1CZbgv5Zhnb8=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:To:Message-ID:References:Mime-Version:
+	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=YcXP4Dz60JLEK1jjq9BrE721gzs08Pco/2sP0klhZQ8=; b=D4yZV3TpaB2QR9mNzu8OxlrZuv
+	90fiWf8VqwheUVYwuahh2LQrc4FDxE3+ve7z+K5OGhLc94J1wNB0ic7NNbGhaPnnEvkkZLt8SFoyN
+	1E8oOdEzqdmZTjedhCS+7EHqIsvGjpTPyr0Swu4IA052gF6L4l0q+iI5geyelp3+y7oU=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uy65A-0000gD-2W;
-	Mon, 15 Sep 2025 10:05:12 +0000
+	id 1uy6Zl-0008Cn-J3;
+	Mon, 15 Sep 2025 10:36:50 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3yuTHaAwKAAEkqsvtblpxtljhpphmf.dpn@flex--jprusakowski.bounces.google.com>)
- id 1uy658-0000g5-Iv for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Sep 2025 10:05:10 +0000
+ <3zeTHaAwKAAQntvyweos0womksskpi.gsq@flex--jprusakowski.bounces.google.com>)
+ id 1uy6Zk-0008Cd-Hk for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 15 Sep 2025 10:36:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
- Mime-Version:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DvfUW+7ZBYUS2Y3if1wlcE68XU5a59WQYlTWSUQ9KYU=; b=Tf8dyioDzBtdaiCXlOy+4pKzNr
- TrxCBEKoNnvQsnqW6nNS3/kw8nsWwoemrrxj0sd0Vsw8+9c+Pus4kJnBrYYe1//F9twxxVv/tKo52
- 1GWq2BD1hWZJe2uHJ++Dg7OeIwJ2+V+h9eaTkiDnHRa+Zvnrgk0mEQ4euENry3r14OEQ=;
+ References:Mime-Version:In-Reply-To:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=RhOb+fXoz/JynstoF4uW9k/iZuOaeZSzWY+DYBWeboA=; b=DftS1XbhG+uqW+aGu2eOXcrSem
+ APeAjvb7+kX6JOd/X4varAl4kB8GnFTyeOdWjzc0Gw9pcjcExnZeF4eOXGPPWpA7ojZwORp2aMDuj
+ KywKfZUA/+CAk9+IjQ1+Pqp5igTXXVyM0i11UNxvQ0NqCunfy1U4cBvFqbMgFs9yubZs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DvfUW+7ZBYUS2Y3if1wlcE68XU5a59WQYlTWSUQ9KYU=; b=h
- ciDvrdGBLr2Fe4rGN4xZXqWn2pxSUPkCCY770r5559R+2dC1iPqzebk3VhYSzPICCmAZf4ro6IGi0
- Kbl3lA+bTOaOT91ltTWYjV3YxkIPoJs2FDxKaza4ivVG4yaNFYuPbWmzt1kt3IYt2C8esGrdJAjW1
- 1iLiPz9FvEx2rO88=;
-Received: from mail-ed1-f73.google.com ([209.85.208.73])
+ h=Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:
+ In-Reply-To:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=RhOb+fXoz/JynstoF4uW9k/iZuOaeZSzWY+DYBWeboA=; b=fFMVsBwVSSXEVBlAkScD3XwQ8r
+ XzOosyUm06eiWHuaLWRQy8KxS+cEOgsWMk0bM9eASn/v/wb4SaJBOnfyRPhlrq4+1d7gmBiFncv7C
+ SngcnFdJL4axzn2ocBccEcMD/I1zJES61fB4CgIUza1ML2OXC+138ARybyklW+zTy1Qc=;
+Received: from mail-ej1-f74.google.com ([209.85.218.74])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uy658-00070D-7v for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Sep 2025 10:05:10 +0000
-Received: by mail-ed1-f73.google.com with SMTP id
- 4fb4d7f45d1cf-62f2cb465f8so1198774a12.2
+ id 1uy6Zl-0000R2-07 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 15 Sep 2025 10:36:49 +0000
+Received: by mail-ej1-f74.google.com with SMTP id
+ a640c23a62f3a-b078ab1c992so491360766b.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 15 Sep 2025 03:05:10 -0700 (PDT)
+ Mon, 15 Sep 2025 03:36:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1757930699; x=1758535499;
+ d=google.com; s=20230601; t=1757932597; x=1758537397;
  darn=lists.sourceforge.net; 
- h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=DvfUW+7ZBYUS2Y3if1wlcE68XU5a59WQYlTWSUQ9KYU=;
- b=b6g5+W/ntZwu4Zn5zmcY+DVeIxEa9QgeyjzE9yip23M+KhPeUC8eFEe0Ad54xDcA1k
- t4isEIZ5B96dFCBfObXxfw35k/zw8AY8fjNy06yZWm57aJZx2/O6CZIazV/XxwIM7ADx
- t9BUa1OAlXap39bw1vjAFOVc+3K7KV6EOP0iD8MMmEz5dIJ8QTRfKWyLIaJtLJiCLduh
- LsZB+4Pc0akYuQVg1QocIvrDHPO913U2aTBq1pggzNEvgnHarN9XB0mBZKSLEXa8xbbU
- nqJOLW+ww9H0h+bV5qoQS4iihxjOR/v9ld3bEo0AklfrvAsM7D1IVQpXaUz2OAf0PGfu
- 7xUA==
+ h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+ :date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RhOb+fXoz/JynstoF4uW9k/iZuOaeZSzWY+DYBWeboA=;
+ b=EBlWihLB144ypqyZE6mgbWDikmINXO8/+/YKrKm5egPoKWQ0SxQ75m87nTx1SROkST
+ arPsbNkYKjBiCExrjh451cEpAPa0jAKsKVkcAmRJA6lVi48dHI1gIslr00I7oyPJ/ssS
+ uvcXu23Z/4Cgp5djlaqzPsCDOJYe0o1gH0h0l1x1xEYIL/PZjFNEJ6pn0nvp4kVtSxve
+ MLe/ahd6fqvTIykKNLzQL6vUXNrtHX5PkoZoDbG3v87rBjRCRPhk9KwYeQyArAt2xO7P
+ R04lHsp2RzU6zZYw/VR6GwDg9PISXgEViTKPbBvFYXMRiYzyqu1C6hrWNgQZ4kcFSxwz
+ Hk6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757930699; x=1758535499;
- h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DvfUW+7ZBYUS2Y3if1wlcE68XU5a59WQYlTWSUQ9KYU=;
- b=CewnYh6P1Jj33ViVuWtmLGzIAzuVJloLg3d5MOe31d51c8J+3dgwgXVlAajojByfQD
- LoplZg2wavyhOxlFG8ZNAUj64vOnpXQs7vhyC439/NHD/G96nBoyRpFaycXRi/d/Dq4m
- RNfyhzkKcMmh8yTvFrHPuMKJIxtaPHkDZFwpYqWjESE8SwLuzrnX6Lwv9OlqHNCVZ75B
- Dyy9hkf23AZO3I3rQQButkJPw93aWsq2Ydczs9stjWb5f8o6NMsQEbghu1W/0pcbbXIS
- DMb6ioip8MVivlZJ3O17wPTwb9kB1vaVfpg6eNLYiLdxAAQsEXD6MO4LMpLuX0xBo6z/
- UMBw==
+ d=1e100.net; s=20230601; t=1757932597; x=1758537397;
+ h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+ :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=RhOb+fXoz/JynstoF4uW9k/iZuOaeZSzWY+DYBWeboA=;
+ b=hDUjj719qHHKrkru9IPfcHlfyqSHJCWjtqrB2h3pxdBs2qVqpfu/pasaUQ9hHJe5HN
+ q6BsdSv72FTYPlmZWvSNv+DOiHDelEuqOOycLM3xH1DoDNsp87YvyPepcHy5TOeDpj2+
+ ysWNAT0YwwH84BFuIHRDGHECl8fLS872Axh2AYLsoQOgOO+ZYe4ByINbdaqIFUmmBw8K
+ Ux+4a+xncY3A5KTgSsZIBE0B8bMwUom8NlKuybK3YAet5xyk+5LksD8QEU9shxdY/+cw
+ XkVwaTgC0z+eHo+UjDH1AUoTDS3YFCGxAsvPtc0GJgWz29b2uAd3efWgPix41KYVr7J7
+ MqmA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWtTxIZnifKFr90XDzdJ6TbxXd2yqnnym1xtcnAMkRXJmtfgUJQKrLSdniMcLCOMb5KSe1SSBhcJZdTEypBAAy@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YyJhpWK4aZAmJEdjkabyErOn4pgAi6ZG20XeyVR0WB07Cf4LeQU
- Lsh4f/xl/9IrYW+ppJdCTMyYhoXLDsnKhj6LHw2xvIPCER7yg+oy3A4E2QI1ynT79506I48U2X7
- 1bAyklnBfFn15ir4a9kqWw9zgmQ9ESg==
-X-Google-Smtp-Source: AGHT+IFFtovcE+hpCdmo0WK6KIxOmWxwnFMcROyx7lU+m1pPt7HBZEJ6WYvb3h1UGWc888U5BmO9y2Fh9j56p74N860=
-X-Received: from edaa19.prod.google.com ([2002:a05:6402:24d3:b0:62f:5354:86ae])
+ AJvYcCUweN2vus7DkdSKXjQEWFQC4/+IxHm7VNA8YfacS/MDu6iUKuOr2xaEzk5l0wjxCAN0rKGQIuGDlj8NaZ8fyXRr@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YyNzrt9UQpzn9sEcRku7f16rilL/V/HOT8RPbuJDjOh1ool/VaI
+ IlAzvHO2vVhg7vTCnYnEA+7JyL5CsHqG/gMfYpg1V3eYPBR1Cq30JX9KXAe9Zjca/pibQHjHoqs
+ RdRdVi4xbRIcSnSrItGX9VWFRQyuRbg==
+X-Google-Smtp-Source: AGHT+IEJoLywW7u172IwfK9/WZbn/vWDjB5heLqpeIZl1R5HWLwd/Sp6g2o2dBQVVVgodrM3OmdmACuDrPXNTYNgOsU=
+X-Received: from ejdcw6.prod.google.com ([2002:a17:907:1606:b0:b07:e174:152a])
  (user=jprusakowski job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6402:278f:b0:62f:26f8:fea0 with SMTP id
- 4fb4d7f45d1cf-62f26f91103mr4556197a12.33.1757930698573; 
- Mon, 15 Sep 2025 03:04:58 -0700 (PDT)
-Date: Mon, 15 Sep 2025 12:04:50 +0200
+ 2002:a17:907:7b8d:b0:b04:aadd:b8d7 with SMTP id
+ a640c23a62f3a-b07c3540759mr1152316466b.13.1757930701187; 
+ Mon, 15 Sep 2025 03:05:01 -0700 (PDT)
+Date: Mon, 15 Sep 2025 12:04:51 +0200
+In-Reply-To: <20250915100451.810719-1-jprusakowski@google.com>
 Mime-Version: 1.0
+References: <20250915100451.810719-1-jprusakowski@google.com>
 X-Mailer: git-send-email 2.51.0.384.g4c02a37b29-goog
-Message-ID: <20250915100451.810719-1-jprusakowski@google.com>
+Message-ID: <20250915100451.810719-2-jprusakowski@google.com>
 To: Zorro Lang <zlang@kernel.org>, Chao Yu <chao@kernel.org>,
  fstests@vger.kernel.org
 X-Spam-Score: -7.6 (-------)
@@ -99,10 +101,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Changes in v2: (Thanks to Eric for the review) - Instead of
- disabling the test entirely when file compression is used we now ensure that
- compression of the test file is disabled. Jan Prusakowski (1): common/encrypt:
- Do not run _verify_ciphertext_for_encryption_policy on compressed FS 
+ Content preview: verify_ciphertext_for_encryption_policy() checks if
+ encryption
+ works correctly by reading encrypted file's contents directly from a block
+ device and comparing it to a known good ciphertext. This, however, won't
+ work if the test file is also compressed. So this patch adds a check if a
+ test file is compressed and disables compression in this case. 
  Content analysis details:   (-7.6 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -112,11 +116,12 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.73 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.74 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1uy658-00070D-7v
-Subject: [f2fs-dev] [PATCH v2 0/1] Do not run
+X-Headers-End: 1uy6Zl-0000R2-07
+Subject: [f2fs-dev] [PATCH v2 1/1] common/encrypt: Do not run
  _verify_ciphertext_for_encryption_policy on compressed FS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -138,17 +143,36 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Changes in v2: (Thanks to Eric for the review)
-- Instead of disabling the test entirely when file compression is used
-  we now ensure that compression of the test file is disabled.
+verify_ciphertext_for_encryption_policy() checks if encryption works
+correctly by reading encrypted file's contents directly from a block device and
+comparing it to a known good ciphertext.
 
-Jan Prusakowski (1):
-  common/encrypt: Do not run _verify_ciphertext_for_encryption_policy on
-    compressed FS
+This, however, won't work if the test file is also compressed. So this patch
+adds a check if a test file is compressed and disables compression in this case.
 
+Signed-off-by: Jan Prusakowski <jprusakowski@google.com>
+---
  common/encrypt | 7 +++++++
  1 file changed, 7 insertions(+)
 
+diff --git a/common/encrypt b/common/encrypt
+index d4f6e3dc..c25ff5a4 100644
+--- a/common/encrypt
++++ b/common/encrypt
+@@ -790,6 +790,13 @@ _do_verify_ciphertext_for_encryption_policy()
+ 	_set_encpolicy $dir $keyspec $set_encpolicy_args -f $policy_flags
+ 	for src in $tmp.testfile_*; do
+ 		dst=$dir/${src##*.}
++		# To make sure the test file is not compressed we create an empty one
++		# and disable compression first (F2FS won't allow resetting the
++		# compression flag if the file has data already in it).
++		touch $dst
++		if lsattr $dst | grep -qE ".+c.+ $dst" ; then
++			chattr -c $dst
++		fi
+ 		cp $src $dst
+ 		inode=$(stat -c %i $dst)
+ 		blocklist=$(_get_ciphertext_block_list $dst)
 -- 
 2.51.0.384.g4c02a37b29-goog
 
