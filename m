@@ -2,127 +2,117 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82D74B5769D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Sep 2025 12:36:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 043BFB57AE3
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Sep 2025 14:27:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Message-ID:References:Mime-Version:
-	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=YcXP4Dz60JLEK1jjq9BrE721gzs08Pco/2sP0klhZQ8=; b=D4yZV3TpaB2QR9mNzu8OxlrZuv
-	90fiWf8VqwheUVYwuahh2LQrc4FDxE3+ve7z+K5OGhLc94J1wNB0ic7NNbGhaPnnEvkkZLt8SFoyN
-	1E8oOdEzqdmZTjedhCS+7EHqIsvGjpTPyr0Swu4IA052gF6L4l0q+iI5geyelp3+y7oU=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=dlJ4K8eGT64WbBHPqnNCx2Y2QUs/9CFi29H0vkN7G7c=; b=S6nxyqpH1ugPv4nK2QM6a+SOcL
+	OEmz3TjpXapZgo2ARL0dCwzYNP4DOd3azXXKSeZPI755yDFLw///643Az7CdpgnUa5TxziZ35JxUN
+	cSOzpqZrEs16IR+JN8Das6fAriFcrQ+uJdEX9PkuERD3aWv0WF1jVWPA6PstzrVitRV0=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uy6Zl-0008Cn-J3;
-	Mon, 15 Sep 2025 10:36:50 +0000
+	id 1uy8Ix-0002XS-PX;
+	Mon, 15 Sep 2025 12:27:35 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3zeTHaAwKAAQntvyweos0womksskpi.gsq@flex--jprusakowski.bounces.google.com>)
- id 1uy6Zk-0008Cd-Hk for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Sep 2025 10:36:49 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1uy8Iw-0002XM-PM
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 15 Sep 2025 12:27:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
- References:Mime-Version:In-Reply-To:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RhOb+fXoz/JynstoF4uW9k/iZuOaeZSzWY+DYBWeboA=; b=DftS1XbhG+uqW+aGu2eOXcrSem
- APeAjvb7+kX6JOd/X4varAl4kB8GnFTyeOdWjzc0Gw9pcjcExnZeF4eOXGPPWpA7ojZwORp2aMDuj
- KywKfZUA/+CAk9+IjQ1+Pqp5igTXXVyM0i11UNxvQ0NqCunfy1U4cBvFqbMgFs9yubZs=;
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=vJyMGC1PDPKujtEaLzZObvIYE4I3AMXkM8Q79hLVGGQ=; b=NSmUj8zBm/We+jj5xdvgfA87Bk
+ ZRSQM6on4N3LrsdR2utdbLCEY8FwF5jlnucs0wZHBV1DwqcJM91UOWNIm1MINkq6Xkj3ADtI8Tg/u
+ iguRLlzNU1x4WwOvFPW1Tig5oIasJTcuzclE0ELU6IIofgNevcPg7VPUnPnIYO7qCpek=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:
- In-Reply-To:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RhOb+fXoz/JynstoF4uW9k/iZuOaeZSzWY+DYBWeboA=; b=fFMVsBwVSSXEVBlAkScD3XwQ8r
- XzOosyUm06eiWHuaLWRQy8KxS+cEOgsWMk0bM9eASn/v/wb4SaJBOnfyRPhlrq4+1d7gmBiFncv7C
- SngcnFdJL4axzn2ocBccEcMD/I1zJES61fB4CgIUza1ML2OXC+138ARybyklW+zTy1Qc=;
-Received: from mail-ej1-f74.google.com ([209.85.218.74])
+ bh=vJyMGC1PDPKujtEaLzZObvIYE4I3AMXkM8Q79hLVGGQ=; b=lnaNs/nqdNCtVRcChNUqLsMf8X
+ vMWWV+3t3vQJjuTIh0fMzOdeXlewzFb+4VV9QlMVfDrWHb9AInyVWl03SrW4OtAi+W6pIVZxo1IM1
+ bFBD6b5I7xdnjFMy69cP0bw3tbO61ThBPLvwMKv6zkbJtnXB1VWYUy7wZ7oO7yz0IOeY=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1uy6Zl-0000R2-07 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Sep 2025 10:36:49 +0000
-Received: by mail-ej1-f74.google.com with SMTP id
- a640c23a62f3a-b078ab1c992so491360766b.3
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1uy8Iw-0006W4-5i for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 15 Sep 2025 12:27:34 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id CD87244931
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 15 Sep 2025 03:36:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1757932597; x=1758537397;
- darn=lists.sourceforge.net; 
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=RhOb+fXoz/JynstoF4uW9k/iZuOaeZSzWY+DYBWeboA=;
- b=EBlWihLB144ypqyZE6mgbWDikmINXO8/+/YKrKm5egPoKWQ0SxQ75m87nTx1SROkST
- arPsbNkYKjBiCExrjh451cEpAPa0jAKsKVkcAmRJA6lVi48dHI1gIslr00I7oyPJ/ssS
- uvcXu23Z/4Cgp5djlaqzPsCDOJYe0o1gH0h0l1x1xEYIL/PZjFNEJ6pn0nvp4kVtSxve
- MLe/ahd6fqvTIykKNLzQL6vUXNrtHX5PkoZoDbG3v87rBjRCRPhk9KwYeQyArAt2xO7P
- R04lHsp2RzU6zZYw/VR6GwDg9PISXgEViTKPbBvFYXMRiYzyqu1C6hrWNgQZ4kcFSxwz
- Hk6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757932597; x=1758537397;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RhOb+fXoz/JynstoF4uW9k/iZuOaeZSzWY+DYBWeboA=;
- b=hDUjj719qHHKrkru9IPfcHlfyqSHJCWjtqrB2h3pxdBs2qVqpfu/pasaUQ9hHJe5HN
- q6BsdSv72FTYPlmZWvSNv+DOiHDelEuqOOycLM3xH1DoDNsp87YvyPepcHy5TOeDpj2+
- ysWNAT0YwwH84BFuIHRDGHECl8fLS872Axh2AYLsoQOgOO+ZYe4ByINbdaqIFUmmBw8K
- Ux+4a+xncY3A5KTgSsZIBE0B8bMwUom8NlKuybK3YAet5xyk+5LksD8QEU9shxdY/+cw
- XkVwaTgC0z+eHo+UjDH1AUoTDS3YFCGxAsvPtc0GJgWz29b2uAd3efWgPix41KYVr7J7
- MqmA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUweN2vus7DkdSKXjQEWFQC4/+IxHm7VNA8YfacS/MDu6iUKuOr2xaEzk5l0wjxCAN0rKGQIuGDlj8NaZ8fyXRr@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YyNzrt9UQpzn9sEcRku7f16rilL/V/HOT8RPbuJDjOh1ool/VaI
- IlAzvHO2vVhg7vTCnYnEA+7JyL5CsHqG/gMfYpg1V3eYPBR1Cq30JX9KXAe9Zjca/pibQHjHoqs
- RdRdVi4xbRIcSnSrItGX9VWFRQyuRbg==
-X-Google-Smtp-Source: AGHT+IEJoLywW7u172IwfK9/WZbn/vWDjB5heLqpeIZl1R5HWLwd/Sp6g2o2dBQVVVgodrM3OmdmACuDrPXNTYNgOsU=
-X-Received: from ejdcw6.prod.google.com ([2002:a17:907:1606:b0:b07:e174:152a])
- (user=jprusakowski job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:907:7b8d:b0:b04:aadd:b8d7 with SMTP id
- a640c23a62f3a-b07c3540759mr1152316466b.13.1757930701187; 
- Mon, 15 Sep 2025 03:05:01 -0700 (PDT)
-Date: Mon, 15 Sep 2025 12:04:51 +0200
-In-Reply-To: <20250915100451.810719-1-jprusakowski@google.com>
-Mime-Version: 1.0
-References: <20250915100451.810719-1-jprusakowski@google.com>
-X-Mailer: git-send-email 2.51.0.384.g4c02a37b29-goog
-Message-ID: <20250915100451.810719-2-jprusakowski@google.com>
-To: Zorro Lang <zlang@kernel.org>, Chao Yu <chao@kernel.org>,
- fstests@vger.kernel.org
-X-Spam-Score: -7.6 (-------)
+ Mon, 15 Sep 2025 12:27:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id AF8D2C4CEFD
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 15 Sep 2025 12:27:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1757939248;
+ bh=EIafdC2D195NuVysFAkcU2KrvBFRXUmV0IYUidKpQC4=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=u4G3nRyXN8sej+YTkOTj+1kYhGotmkWLKhfhh5QcZP6Vxtx7qbBIBPnLyHTeev3bE
+ pgJazaXqaD4tIg76+sWYQJfJXwsSl9TpoxZXmWCsZlYBnA9UaoKc6uQM8ojJw18xHA
+ jMACBboqGyYBUL5WNeZShYkX1AzqDlvzwXbm80qUUUh+fdnh6a8Y29ZgEyHZzRmxxe
+ GpWWxhoUdQt/pD5EqGcQo8W9X5/GBuQEVqg1orYILkDjnegPkVZ7EXD5mLgimTj9A1
+ G6xcZs760Bx6XGf46AaJJmLhn+oDNURaVbR33X4xMTNdRJexuWJGt3htQonoNuQjMd
+ z4gqm2Xv5ydPA==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 93CAAC41613; Mon, 15 Sep 2025 12:27:28 +0000 (UTC)
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 15 Sep 2025 12:27:28 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P3
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: cc
+Message-ID: <bug-220575-202145-KhjWjghrrF@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-220575-202145@https.bugzilla.kernel.org/>
+References: <bug-220575-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: verify_ciphertext_for_encryption_policy() checks if
- encryption
- works correctly by reading encrypted file's contents directly from a block
- device and comparing it to a known good ciphertext. This, however, won't
- work if the test file is also compressed. So this patch adds a check if a
- test file is compressed and disables compression in this case. 
- Content analysis details:   (-7.6 points, 5.0 required)
+ Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=220575 Chao Yu
+ (chao@kernel.org) changed: What |Removed |Added CC| |chao@kernel.org 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -7.5 USER_IN_DEF_DKIM_WL From: address is in the default DKIM welcome-list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.218.74 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1uy6Zl-0000R2-07
-Subject: [f2fs-dev] [PATCH v2 1/1] common/encrypt: Do not run
- _verify_ciphertext_for_encryption_policy on compressed FS
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1uy8Iw-0006W4-5i
+Subject: [f2fs-dev] [Bug 220575] Unable to handle kernel NULL pointer
+ dereference at virtual address 0000000000000000
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -134,49 +124,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jan Prusakowski via Linux-f2fs-devel
+From: bugzilla-daemon--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jan Prusakowski <jprusakowski@google.com>
-Cc: jaegeuk@kernel.org, Eric Biggers <ebiggers@google.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Reply-To: bugzilla-daemon@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-verify_ciphertext_for_encryption_policy() checks if encryption works
-correctly by reading encrypted file's contents directly from a block device and
-comparing it to a known good ciphertext.
+https://bugzilla.kernel.org/show_bug.cgi?id=220575
 
-This, however, won't work if the test file is also compressed. So this patch
-adds a check if a test file is compressed and disables compression in this case.
+Chao Yu (chao@kernel.org) changed:
 
-Signed-off-by: Jan Prusakowski <jprusakowski@google.com>
----
- common/encrypt | 7 +++++++
- 1 file changed, 7 insertions(+)
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+                 CC|                            |chao@kernel.org
 
-diff --git a/common/encrypt b/common/encrypt
-index d4f6e3dc..c25ff5a4 100644
---- a/common/encrypt
-+++ b/common/encrypt
-@@ -790,6 +790,13 @@ _do_verify_ciphertext_for_encryption_policy()
- 	_set_encpolicy $dir $keyspec $set_encpolicy_args -f $policy_flags
- 	for src in $tmp.testfile_*; do
- 		dst=$dir/${src##*.}
-+		# To make sure the test file is not compressed we create an empty one
-+		# and disable compression first (F2FS won't allow resetting the
-+		# compression flag if the file has data already in it).
-+		touch $dst
-+		if lsattr $dst | grep -qE ".+c.+ $dst" ; then
-+			chattr -c $dst
-+		fi
- 		cp $src $dst
- 		inode=$(stat -c %i $dst)
- 		blocklist=$(_get_ciphertext_block_list $dst)
+--- Comment #1 from Chao Yu (chao@kernel.org) ---
+Hi,
+
+Do you have a ramdump about this issue, if there is, can you please provide
+more information about the corrupted page?
+
+Thanks,
+
 -- 
-2.51.0.384.g4c02a37b29-goog
+You may reply to this email to add a comment.
 
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
