@@ -2,74 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD09CB810F3
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Sep 2025 18:41:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7AED8B829ED
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Sep 2025 04:10:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=ao9JGkPzoRWPyZERI9Q6zh7x0RND+NzdDlBvPD5hhvw=; b=PgZ6TgEyhRRISr6za/WPVOQhP5
-	GLszW5YQy6x7TuO20UQASsO+IoOkKRK8yeRnqRWvSNuZhj4YwxGvMpDv1DjkepNcu3/N52t4n6LRz
-	/QsJMLzGwGxwnn2mdoEcMs9vEcwZzd7z8x6/h9oMpVkLqMV0Qim2wEJhDkQyfX1mHBZs=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=UqOv6MWy/PK1mu0BeZUHqoUdZNOZb8nbcDhneVZ4Nyk=; b=Ud+OOCQeojzLvp7OmkUnnptTKy
+	o+GWPZsoL/lhUXz+Q+K8A525VKzsLRn4UX9WKgzNa8yy0X0aM75OI8G1PfdmVWhhTYI2XlQKAjZUf
+	ujrYr8NhqgTgugTr8ZpX92NJyucY4Cbp8OZgzCvguUj3UM+IFBixIDwUvWr5S2fFOgBo=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1uyvDH-0007e9-Rv;
-	Wed, 17 Sep 2025 16:41:00 +0000
+	id 1uz460-0004Nj-7x;
+	Thu, 18 Sep 2025 02:10:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1uyvDF-0007dt-Q6
+ (envelope-from <chao@kernel.org>) id 1uz45y-0004Nd-JU
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Sep 2025 16:40:58 +0000
+ Thu, 18 Sep 2025 02:10:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rF0BGPW4EgBlY6h86GReU1aE0ZfJo6GhquXvke9cY9k=; b=BYb7DEHIjiAXGqkcSU+HWWZzeg
- b8UYtlz6IafajN/CWNgcfjW736d0ZkB1rDOFwNdc0sGK5G/rxgNOipYaT/JRLB1ka1iIltW4xz23k
- LcXYTWGyxS7/acsXHCnmqhOQaObQTH8QDY4c5SPzQXpZnquDH/m13K08p8fqEzLYTXQM=;
+ bh=K5Tw813gpg4VV/F0Nd2QusqcWphHvWBdvTzN6KWy+pM=; b=RSLvI2GK7l/v+w8aqnXQ6CJfK/
+ gabJ0yhzGMH9t/OY8J3jPGve6UN45AyGtJFHoYp9w4CVi95WnJ0oEkfcBmpZcUFh6YUNA3R5/l6t9
+ mewpdLu+c5s89ePD6MmUZCmWSdJi90PTpwN/I2sD56qO7fAojZRvG4XfdfXrWf1VCN/g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=rF0BGPW4EgBlY6h86GReU1aE0ZfJo6GhquXvke9cY9k=; b=iR+WO4K11B5MbI8jnNz82/Etpw
- 6i4PBCk4hdctw/S0WzJpRuP53QTpY2VZH03wwrXnuLvCvrRWP3R7tUlLKCYdHgbKHyAPX/7s9bgS0
- mU9A5zqU3Oea/E7hZLVd5D411UpuAwLHdkWzDbuN6ktjIGNQOM/KGbfvR0AEB4w/d5DM=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=K5Tw813gpg4VV/F0Nd2QusqcWphHvWBdvTzN6KWy+pM=; b=CLfSBFwbP1R8ztwZPJLDx/VAA/
+ NR5uPxQUwKCOtME4OOmTm4KjJKTpb0AxBVv45hPZMwh4hR3lHPHiCJ/sufui7n9PmA03Q421dWiRv
+ o8x/9A+qFg3neZBEngrWkfzvZ5zKyw2CVersDwa/vFmMauHhM42Bqsb24MATCbVqz+P0=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1uyvDG-0003NB-7B for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Sep 2025 16:40:58 +0000
+ id 1uz45x-00066f-SU for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 18 Sep 2025 02:10:02 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id E259040716;
- Wed, 17 Sep 2025 16:40:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A759C4CEE7;
- Wed, 17 Sep 2025 16:40:47 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 302A360010;
+ Thu, 18 Sep 2025 02:09:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C7ECC4CEE7;
+ Thu, 18 Sep 2025 02:09:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1758127247;
- bh=t265j7wNSfpNgOBxQuSzDaR6dcQPQOBwaaoIlTZ29HE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=XHjgSOP0ShEtUf2XQIGYxRFK7jVnslydi9EFONQnBN9uirIzJDxAbujHSZpEPoiL+
- KxY/cnu8MsY0ss/w082BsG5l+gF64oF4ypnkmt4ghjgQKXjxFv3xloMQFeqx+3waGV
- N3JRrEs2Enm2qAjJTo8nQKLjBAtFomW1oQ4Prnih2fLjwe/J1d9D5m8OYiF6KM1X2c
- d+DeSqIISmfKze88Dh2u8u481fqgm/O9qoCr30L+Y3ZelIUkIm4zN3oEpOpfFgh3Y8
- hgQN2WRaQtjAkjk1xuYBRCBWDXIsRCFwExcNLjEXfhCKRY0hBkJ3eBwf1NZaHr5vtU
- +VB+MXb5ziTjA==
-Date: Wed, 17 Sep 2025 16:40:45 +0000
-To: Chao Yu <chao@kernel.org>
-Message-ID: <aMrkjSRJ0yyEfvfl@google.com>
-References: <20250916085243.4165099-1-chao@kernel.org>
+ s=k20201202; t=1758161395;
+ bh=2Gl5VQpe3Kr+g9GDcpIm9On2t4jBVt6mmEX/BU/mrAQ=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=R2NuQrgG+QMzce/tITsqLa0Na5y4kjZ33KcJWmNYXIVY2FUAGfWMv9leQVENng3w/
+ odID7xGRQNs63cwejiO4nbEczpaNN7KMh0b/oz8fZwOKntzpRPuMEbga16J9gwHngj
+ 4KKKLj+9YJaS1FTcORm91f+cfHW2DGGNsRr5MzmR8JR+GGVQKQubJwXuTkkkiYOmzK
+ oRVakjICOEwmmVUpMEFGxroAk23EHoMMf+Nn6EE5wkoSfM3XyQnzVAUH2yU1M/7M9i
+ k/cWfoyh22+k1RGC9VuGIYhwfihItEfPN6eZnxHoePXyPC28g7dXSV5qBbmTqYbZcY
+ fakeP8kGfxlOQ==
+Message-ID: <de32bc26-6424-4750-83f7-17956e6727cd@kernel.org>
+Date: Thu, 18 Sep 2025 10:09:48 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250916085243.4165099-1-chao@kernel.org>
+User-Agent: Mozilla Thunderbird
+To: Yunji Kang <yunji0.kang@samsung.com>, jaegeuk@kernel.org
+References: <CGME20250917055237epcas1p2faa1b3d6555ffc5179c700e7a2afd448@epcas1p2.samsung.com>
+ <20250917055217.39960-1-yunji0.kang@samsung.com>
+Content-Language: en-US
+In-Reply-To: <20250917055217.39960-1-yunji0.kang@samsung.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -77,11 +79,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Do we need this? On 09/16,
- Chao Yu wrote: > Add a sanity check
- in __update_extent_tree_range() to detect any > zero-sized extent update.
- > > Signed-off-by: wangzijie <wangzijie1@honor.com> > Signed-off-by: Chao
- Yu <ch [...] 
+ Content preview:  On 9/17/25 13:52,
+ Yunji Kang wrote: > In f2fs_precache_extents(), 
+ For large files, It requires reading many > node blocks. Instead of reading
+ each node block with synchronous I/O, > this patch applies [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +94,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1uyvDG-0003NB-7B
-Subject: Re: [f2fs-dev] [PATCH] f2fs: add sanity check on ei.len in
- __update_extent_tree_range()
+X-Headers-End: 1uz45x-00066f-SU
+Subject: Re: [f2fs-dev] [PATCH] f2fs: readahead node block in
+ F2FS_GET_BLOCK_PRECACHE mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,48 +108,113 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: wangzijie <wangzijie1@honor.com>, linux-kernel@vger.kernel.org,
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-kernel@vger.kernel.org, Sungjong Seo <sj1557.seo@samsung.com>,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Do we need this?
-
-On 09/16, Chao Yu wrote:
-> Add a sanity check in __update_extent_tree_range() to detect any
-> zero-sized extent update.
+On 9/17/25 13:52, Yunji Kang wrote:
+> In f2fs_precache_extents(), For large files, It requires reading many
+> node blocks. Instead of reading each node block with synchronous I/O,
+> this patch applies readahead so that node blocks can be fetched in
+> advance.
 > 
-> Signed-off-by: wangzijie <wangzijie1@honor.com>
-> Signed-off-by: Chao Yu <chao@kernel.org>
+> It reduces the overhead of repeated sync reads and improves efficiency
+> when precaching extents of large files.
+> 
+> I created a file with the same largest extent and executed the test.
+> For this experiment, I set the file's largest extent with an offset of 0
+> and a size of 1GB. I configured the remaining area with 100MB extents.
+> 
+> 5GB test file:
+> dd if=/dev/urandom of=test1 bs=1m count=5120
+> cp test1 test2
+> fsync test1
+> dd if=test1 of=test2 bs=1m skip=1024 seek=1024 count=100 conv=notrunc
+> dd if=test1 of=test2 bs=1m skip=1224 seek=1224 count=100 conv=notrunc
+> ...
+> dd if=test1 of=test2 bs=1m skip=5024 seek=5024 count=100 conv=notrunc
+> reboot
+> 
+> I also created 10GB and 20GB files with large extents using the same
+> method.
+> 
+> ioctl(F2FS_IOC_PRECACHE_EXTENTS) test results are as follows:
+>   +-----------+---------+---------+-----------+
+>   | File size | Before  | After   | Reduction |
+>   +-----------+---------+---------+-----------+
+>   | 5GB       | 101.8ms | 72.1ms  | 29.2%     |
+>   | 10GB      | 222.9ms | 149.5ms | 32.9%     |
+>   | 20GB      | 446.2ms | 276.3ms | 38.1%     |
+>   +-----------+---------+---------+-----------+
+> Tested on a 256GB mobile device with an SM8750 chipset.
+> 
+> Reviewed-by: Sungjong Seo <sj1557.seo@samsung.com>
+> Reviewed-by: Sunmin Jeong <s_min.jeong@samsung.com>
+> Signed-off-by: Yunji Kang <yunji0.kang@samsung.com>
 > ---
->  fs/f2fs/extent_cache.c | 9 +++++++++
->  1 file changed, 9 insertions(+)
+>  fs/f2fs/data.c | 3 +++
+>  fs/f2fs/f2fs.h | 1 +
+>  fs/f2fs/node.c | 4 +++-
+>  3 files changed, 7 insertions(+), 1 deletion(-)
 > 
-> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-> index 199c1e7a83ef..3070d1cb0676 100644
-> --- a/fs/f2fs/extent_cache.c
-> +++ b/fs/f2fs/extent_cache.c
-> @@ -664,6 +664,15 @@ static void __update_extent_tree_range(struct inode *inode,
->  	if (!et)
->  		return;
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 7961e0ddfca3..ab3117e3b24a 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -1572,6 +1572,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
+>  	pgofs =	(pgoff_t)map->m_lblk;
+>  	end = pgofs + maxblocks;
 >  
-> +	if (unlikely(len == 0)) {
-> +		f2fs_err_ratelimited(sbi, "%s: extent len is zero, type: %d, "
-> +			"extent [%u, %u, %u], age [%llu, %llu]",
-> +			__func__, type, tei->fofs, tei->blk, tei->len,
-> +			tei->age, tei->last_blocks);
-> +		f2fs_bug_on(sbi, 1);
-> +		return;
-> +	}
+> +	if (flag == F2FS_GET_BLOCK_PRECACHE)
+> +		mode = LOOKUP_NODE_PRECACHE;
 > +
->  	if (type == EX_READ)
->  		trace_f2fs_update_read_extent_tree_range(inode, fofs, len,
->  						tei->blk, 0);
-> -- 
-> 2.49.0
+>  next_dnode:
+>  	if (map->m_may_create) {
+>  		if (f2fs_lfs_mode(sbi))
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 9d3bc9633c1d..3ce41528d48e 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -651,6 +651,7 @@ enum {
+>  					 * look up a node with readahead called
+>  					 * by get_data_block.
+>  					 */
+> +	LOOKUP_NODE_PRECACHE,		/* look up a node for F2FS_GET_BLOCK_PRECACHE */
+>  };
+>  
+>  #define DEFAULT_RETRY_IO_COUNT	8	/* maximum retry read IO or flush count */
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index 4254db453b2d..50be167e5c59 100644
+> --- a/fs/f2fs/node.c
+> +++ b/fs/f2fs/node.c
+> @@ -860,7 +860,9 @@ int f2fs_get_dnode_of_data(struct dnode_of_data *dn, pgoff_t index, int mode)
+>  			set_nid(parent, offset[i - 1], nids[i], i == 1);
+>  			f2fs_alloc_nid_done(sbi, nids[i]);
+>  			done = true;
+> -		} else if (mode == LOOKUP_NODE_RA && i == level && level > 1) {
+> +		} else if ((mode == LOOKUP_NODE_RA ||
+
+Does this change the logic for mode = LOOKUP_NODE_RA?
+
+Not sure, do you mean this?
+
+	if ((i == level && level > 1) &&
+		(mode == LOOKUP_NODE_RA ||
+		(mode == LOOKUP_NODE_PRECACHE &&
+		offset[i - 1] % MAX_RA_NODE == 0)))
+
+Thanks,
+
+> +				(mode == LOOKUP_NODE_PRECACHE && offset[i - 1] % MAX_RA_NODE == 0))
+> +				&& i == level && level > 1) {
+>  			nfolio[i] = f2fs_get_node_folio_ra(parent, offset[i - 1]);
+>  			if (IS_ERR(nfolio[i])) {
+>  				err = PTR_ERR(nfolio[i]);
+
 
 
 _______________________________________________
