@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 087CEB9548A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Sep 2025 11:39:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B07B9B954A8
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Sep 2025 11:41:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=JQnmdp/Df5j3kShLCZq86DVgNY1tqbqbzCuCh47b+HE=; b=Hp6lSxdcZoPAl92GpwUl/6ptVg
-	Sho8ykQdkE3b/YdkvBZQl7ryp0meRZeTgKIpydhQl0lZd91PXHvv7U4hVAvswl4amxnnvDWG0gyId
-	JNAuLk+BPOBYeDe9zDt1P8Jz2LK3+pjup8Betoyyx95sckLPSfHzMoLdICbn4XgsSwrk=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=NC3+UdZvEJG7Bm6xhHAGI+iFdm451Ry8MQd40zggLdA=; b=CCgqbleaA9t41jnOOmL56ZYFN2
+	xWauMDnt6UtORuIngoGwSe2CaP2GKE5+xsPf7rezuZoIvO5yqWhyP9RgNy514pfTshj8ypIvMvHak
+	p7CimdePs9R6nNMwd+ec00THfFZNBhrHzdkHnY6GMfpcWTnTecb7iGR9zI26rKIw7DJg=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v0zUD-0002Bx-NC;
-	Tue, 23 Sep 2025 09:39:01 +0000
+	id 1v0zWq-0002SR-EF;
+	Tue, 23 Sep 2025 09:41:45 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v0zUC-0002Bp-F2
+ (envelope-from <chao@kernel.org>) id 1v0zWo-0002S7-J0
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 Sep 2025 09:39:00 +0000
+ Tue, 23 Sep 2025 09:41:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wrg/5BGgQoMEYXM2I2keBTHl0wSnl8aWPQbKHfKmhn0=; b=jFMAAJwYnadAd1t+bbI4efyacl
- rKG5aT2JNmkydk0NUZIP61f2FpF0nAVjUjqvFMh8egFPgoG5/RAIO9T5QF429Xp0zI8n9V0hxBNUk
- 4zhLVrhHUvUIYaZG/3/pjpE916zQjXlcZF/NjVHz/sfX2+Q34p8NYuL6vpUA3TGr8IBE=;
+ bh=10myFbY4UZuYJNu1sR3h4kpIXOiW40ip2OyyCEcLlpI=; b=UsiBQ3UUElWYicpg0z+ot/Xmhl
+ c7UgilAhX4kMGruafH+lBNYaJD/WbZ+LsV+wjLR4+1Vs+sc3fEgj+k9uscokleQhs4RVKXTc+8O7y
+ G1aDi8ZjJVs2ALaMqaKTmVIL9lxXXYMgkacNWWDDYFVleH43my4ekIDpT7UurMU3wFhk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,39 +40,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wrg/5BGgQoMEYXM2I2keBTHl0wSnl8aWPQbKHfKmhn0=; b=kMzIpI5PRYK7pBtpeTwg0BgD19
- dXlto3OhP2axwmpPmKYYbQTSpcFm+QLUeAy2NkoFkdSQ7YYtnlGIaOUrc0BciwOhQFRpy1MERd158
- Daw0kizp+VbkXC9IITxpRNT/QWwoBKCpHocELl0GVDwfMZRwjwffc16l4kAdeG7kmlhk=;
+ bh=10myFbY4UZuYJNu1sR3h4kpIXOiW40ip2OyyCEcLlpI=; b=QTR1S11ZauTT9DgP0xdt6nxaem
+ a0hISW1QcIYpbEIDz59xsSndMQAlBLSBgAcc9+GJRo7a9BNvDBe6dwTSW057hXTVzlURhxA4lxQat
+ 7Xp+H2zPB2U8doXl7ainzilkl5oTl4rngj+zKEfX02q9Mw1Rm8IZY1K0ySDUCtQl+NqI=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v0zUB-0005xq-VZ for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 Sep 2025 09:39:00 +0000
+ id 1v0zWo-0006BN-NS for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 23 Sep 2025 09:41:43 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 4AE3660279
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 23 Sep 2025 09:38:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32910C4CEF5;
- Tue, 23 Sep 2025 09:38:47 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 1E2CC60007;
+ Tue, 23 Sep 2025 09:41:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00595C4CEF5;
+ Tue, 23 Sep 2025 09:41:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1758620329;
- bh=3FeqftSrQMUxqcu/NNd7GoM30PywgKTik2tMOWT+5r4=;
+ s=k20201202; t=1758620491;
+ bh=aXnJ9yMEsmKQf91ECghEClhJ9CbD+oIXioQZK8Gx3Io=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=pHxexnTV65CS9AgcJ1WdGWT/myp4xsAt/HQMGh4FbqZr5aJDIS9ePGQmDmcgEVPMC
- MYpszmuH7pUEj2ZhFKoqE9LvGowabXWIzW/1O3KxVx27ZScVbOfvzgwZ+wtO4nsp3U
- qLDxf1N3He5vWoE9fHEPG5z4op+QRSmALCsR5dolF0ce3SwAeDhQ9iDN/SJKMoKLcO
- H6i/y3glj4gUHxyZvvSUsPHIx4b60zAlaGvemk6Bo0I+bEPfRYb8/8YO+BU5fkFjok
- UQ6prYWrPmz+EoOms2ejbabuXZm8S8qi/GM1/yqOPEal0jZGkkK0zS6Oxs+06SEhV4
- yivU26bI8P99w==
-Message-ID: <590ad519-d6a4-4eff-9bca-3d6b96eb89bb@kernel.org>
-Date: Tue, 23 Sep 2025 17:38:45 +0800
+ b=q8PLeJRU97fsCnscXdjgdqTuqrDM6PZaKwOwbFpq1INyr6tj18f9gDcqegZ1IongA
+ 8iMOrOPt+ybbV1RElRaa97FYCM1JDImsfvq0f7CHSrVesAd0pE3cFSrlF/mM9FvJN9
+ XeKZ4BkU8hUKKCUeYNBe5RdJXMXGwZWsxg89eOll5fZeC5qLHMPA7q6b96NoOvnXIe
+ YLUe6EDrCeXcWOHpY/GROz2dleRHvX3K0oujnJCsh+GkIrj3HG9AJoJzHMEXqGBDA0
+ X+K8Uj+p8sWa9C4nQn/nld1oOeQncmxfcTimXXuZm7vCmlehWNZzqB7FfcpUWeSYUS
+ +PxbwfxR3/u9w==
+Message-ID: <89f237cd-3f86-405a-8f8f-d9cad250ef00@kernel.org>
+Date: Tue, 23 Sep 2025 17:41:27 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
-References: <20250918045316.714102-1-jaegeuk@kernel.org>
- <20250918045316.714102-2-jaegeuk@kernel.org>
+To: Yunji Kang <yunji0.kang@samsung.com>, jaegeuk@kernel.org
+References: <CGME20250918082037epcas1p1eb201d3b6d5780c0bff3ba32740ccdcf@epcas1p1.samsung.com>
+ <20250918082023.57381-1-yunji0.kang@samsung.com>
 Content-Language: en-US
-In-Reply-To: <20250918045316.714102-2-jaegeuk@kernel.org>
+In-Reply-To: <20250918082023.57381-1-yunji0.kang@samsung.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -80,10 +79,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Ditto, need to manual entry. On 9/18/25 12:53, Jaegeuk Kim
- via Linux-f2fs-devel wrote: > It only measures the read performance. > >
- Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> > --- >
- tools/f2fs_io/f2fs_io.c | 13 ++++++++++++ [...] 
+ Content preview:  On 9/18/25 16:20,
+ Yunji Kang wrote: > In f2fs_precache_extents(), 
+ For large files, It requires reading many > node blocks. Instead of reading
+ each node block with synchronous I/O, > this patch applies [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,9 +94,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v0zUB-0005xq-VZ
-Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs_io: add dontcache to measure
- RWF_DONTCACHE speed
+X-Headers-End: 1v0zWo-0006BN-NS
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: readahead node blocks in
+ F2FS_GET_BLOCK_PRECACHE mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,72 +110,112 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-kernel@vger.kernel.org, Sungjong Seo <sj1557.seo@samsung.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Ditto, need to manual entry.
+On 9/18/25 16:20, Yunji Kang wrote:
+> In f2fs_precache_extents(), For large files, It requires reading many
+> node blocks. Instead of reading each node block with synchronous I/O,
+> this patch applies readahead so that node blocks can be fetched in
+> advance.
+> 
+> It reduces the overhead of repeated sync reads and improves efficiency
+> when precaching extents of large files.
+> 
+> I created a file with the same largest extent and executed the test.
+> For this experiment, I set the file's largest extent with an offset of 0
+> and a size of 1GB. I configured the remaining area with 100MB extents.
+> 
+> 5GB test file:
+> dd if=/dev/urandom of=test1 bs=1m count=5120
+> cp test1 test2
+> fsync test1
+> dd if=test1 of=test2 bs=1m skip=1024 seek=1024 count=100 conv=notrunc
+> dd if=test1 of=test2 bs=1m skip=1224 seek=1224 count=100 conv=notrunc
+> ...
+> dd if=test1 of=test2 bs=1m skip=5024 seek=5024 count=100 conv=notrunc
+> reboot
+> 
+> I also created 10GB and 20GB files with large extents using the same
+> method.
+> 
+> ioctl(F2FS_IOC_PRECACHE_EXTENTS) test results are as follows:
+>   +-----------+---------+---------+-----------+
+>   | File size | Before  | After   | Reduction |
+>   +-----------+---------+---------+-----------+
+>   | 5GB       | 101.8ms | 72.1ms  | 29.2%     |
+>   | 10GB      | 222.9ms | 149.5ms | 32.9%     |
+>   | 20GB      | 446.2ms | 276.3ms | 38.1%     |
+>   +-----------+---------+---------+-----------+
 
-On 9/18/25 12:53, Jaegeuk Kim via Linux-f2fs-devel wrote:
-> It only measures the read performance.
+Yunji,
+
+Will we gain better performance if we readahead more node pages w/
+sychronous request for precache extent case? Have you tried that?
+
+Thanks,
+
+> Tested on a 256GB mobile device with an SM8750 chipset.
 > 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> Reviewed-by: Sungjong Seo <sj1557.seo@samsung.com>
+> Reviewed-by: Sunmin Jeong <s_min.jeong@samsung.com>
+> Signed-off-by: Yunji Kang <yunji0.kang@samsung.com>
 > ---
->  tools/f2fs_io/f2fs_io.c | 13 ++++++++++++-
->  1 file changed, 12 insertions(+), 1 deletion(-)
+> v2:
+>  - Modify the readahead condition check routine for better code
+> readability.
+>  - Update the title from 'node block' to 'node blocks'.
 > 
-> diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-> index 2d64eda81706..2ed9cb4184b8 100644
-> --- a/tools/f2fs_io/f2fs_io.c
-> +++ b/tools/f2fs_io/f2fs_io.c
-> @@ -24,6 +24,8 @@
->  #include <linux/fs.h>
->  #include <signal.h>
->  #include <stdarg.h>
-> +#include <sys/uio.h>
-> +#include <stdarg.h>
->  #include <stdbool.h>
->  #include <stdio.h>
->  #include <stdlib.h>
-> @@ -929,6 +931,7 @@ static void do_write_advice(int argc, char **argv, const struct cmd_desc *cmd)
->  "Read data in file_path and print nbytes\n"		\
->  "IO can be\n"						\
->  "  buffered : buffered IO\n"				\
-> +"  dontcache: buffered IO + dontcache\n"		\
->  "  dio      : direct IO\n"				\
->  "  mmap     : mmap IO\n"				\
->  "  mlock    : mmap + mlock\n"				\
-> @@ -948,6 +951,7 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
->  	int flags = 0;
->  	int do_mmap = 0;
->  	int do_mlock = 0;
-> +	int do_dontcache = 0;
->  	int fd, advice;
+>  fs/f2fs/data.c | 3 +++
+>  fs/f2fs/f2fs.h | 1 +
+>  fs/f2fs/node.c | 5 ++++-
+>  3 files changed, 8 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 7961e0ddfca3..ab3117e3b24a 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -1572,6 +1572,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
+>  	pgofs =	(pgoff_t)map->m_lblk;
+>  	end = pgofs + maxblocks;
 >  
->  	if (argc != 8) {
-> @@ -972,6 +976,8 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
->  		do_mmap = 1;
->  	else if (!strcmp(argv[4], "mlock"))
->  		do_mlock = 1;
-> +	else if (!strcmp(argv[4], "dontcache"))
-> +		do_dontcache = 1;
->  	else if (strcmp(argv[4], "buffered"))
->  		die("Wrong IO type");
+> +	if (flag == F2FS_GET_BLOCK_PRECACHE)
+> +		mode = LOOKUP_NODE_PRECACHE;
+> +
+>  next_dnode:
+>  	if (map->m_may_create) {
+>  		if (f2fs_lfs_mode(sbi))
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 9d3bc9633c1d..3ce41528d48e 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -651,6 +651,7 @@ enum {
+>  					 * look up a node with readahead called
+>  					 * by get_data_block.
+>  					 */
+> +	LOOKUP_NODE_PRECACHE,		/* look up a node for F2FS_GET_BLOCK_PRECACHE */
+>  };
 >  
-> @@ -1016,7 +1022,12 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
->  		read_cnt = count * buf_size;
->  	} else {
->  		for (i = 0; i < count; i++) {
-> -			ret = pread(fd, buf, buf_size, offset + buf_size * i);
-> +			if (!do_dontcache) {
-> +				ret = pread(fd, buf, buf_size, offset + buf_size * i);
-> +			} else {
-> +				struct iovec iov = { .iov_base = buf, .iov_len = buf_size };
-> +				ret = preadv2(fd, &iov, 1, offset + buf_size * i, RWF_DONTCACHE);
-> +			}
->  			if (ret != buf_size) {
->  				printf("pread expected: %"PRIu64", readed: %"PRIu64"\n",
->  						buf_size, ret);
+>  #define DEFAULT_RETRY_IO_COUNT	8	/* maximum retry read IO or flush count */
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index 4254db453b2d..d4bf3ce715c5 100644
+> --- a/fs/f2fs/node.c
+> +++ b/fs/f2fs/node.c
+> @@ -860,7 +860,10 @@ int f2fs_get_dnode_of_data(struct dnode_of_data *dn, pgoff_t index, int mode)
+>  			set_nid(parent, offset[i - 1], nids[i], i == 1);
+>  			f2fs_alloc_nid_done(sbi, nids[i]);
+>  			done = true;
+> -		} else if (mode == LOOKUP_NODE_RA && i == level && level > 1) {
+> +		} else if ((i == level && level > 1) &&
+> +				(mode == LOOKUP_NODE_RA ||
+> +				(mode == LOOKUP_NODE_PRECACHE &&
+> +				offset[i - 1] % MAX_RA_NODE == 0))) {
+>  			nfolio[i] = f2fs_get_node_folio_ra(parent, offset[i - 1]);
+>  			if (IS_ERR(nfolio[i])) {
+>  				err = PTR_ERR(nfolio[i]);
 
 
 
