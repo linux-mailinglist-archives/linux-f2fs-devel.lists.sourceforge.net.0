@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C340B993F8
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Sep 2025 11:51:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1BA8B9A050
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Sep 2025 15:22:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=TPY3J+/AWHDNSWoSUUhf/d7Z7pBnJYT3PuAMqBiXTQE=; b=E1SahCvS2l2JgZzVME3roqukKy
-	vNGdT7hxsjrgS2bBqeZ234zTP8sAk+yflfYARIHv1vz36sJtCJbb0VuFIJLuMZPK7m+NE7lQlc0j+
-	zieBxPFe/ZSl2q8dBjKY4VuoxuYfI36DLndT5dLv85n3X+tPZFPPlbOQ47WxiLHhQtHU=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=rZZpyimegvfzzJUCK9vO9sCerVBokE0zURsI31Ka+Kk=; b=iCY6Shs5BU8fxWhT/3p8LEqSoL
+	ad2LEvZqN4uPE0djvF9nnXz8e2V8MSXuYDWNjNhSJpAYr27CwU9SDb5ihEoW5oBRXmv4Wk6ebi5av
+	/PQM/Ed9rd6JGRh/qMl7Xxgy/yQwO7po6CJt1Ko+lMmCBRS714IfodAcNpv8Kk+wPflE=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v1M9b-0007kI-Vl;
-	Wed, 24 Sep 2025 09:51:15 +0000
+	id 1v1PS6-0007gH-07;
+	Wed, 24 Sep 2025 13:22:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1v1M9a-0007kA-Cq
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1v1PS4-0007gB-Jx
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Sep 2025 09:51:14 +0000
+ Wed, 24 Sep 2025 13:22:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kO2mHsING2Fj/ljQbIpf6ddTNH+gjn6aHcN2X6j1+MU=; b=dR+S/wulPRIF5lwNBcRAAgnzAY
- jbWdBv+xxl8AnfMg0xnW09rv8YP5IoqVDjaCL1P4sK38OB8B8GxQ8xN9rJhT65EMyWLDzVCt8kYPv
- y9qyxa0CU3WfCxZJJCfIFMfLFGPB5GXREzSrR2LECdGcIdCb87ItUQ9EdrHBR8WjivOk=;
+ bh=3IKCXCoZP5+L2HlFHb6TIvP3cSS5kNB+s4qEEoqHV+M=; b=c7UbaZ0jx97I9MKyoomWdBWjXe
+ hxn89p56+NYLsU4jW9AA4hBimUCmjh2I6GEhIYqjsnxRYv7VU/O/+/3rhh5PpY/jRgSh5jZCsG79u
+ X3afsa0HxfY9soLQon4wcTdA1B+dO8yweTAQ9v+EOAWDiNBib3PwpPAFcm7IPGgE1TAg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -40,35 +40,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kO2mHsING2Fj/ljQbIpf6ddTNH+gjn6aHcN2X6j1+MU=; b=IWvh73Z6qN4lkiS3+2Gs3YWT38
- gKlceZ/Qm3PY+/hyZDZ7DyQkD7fU8Be/vIZnRKzBkpFlZ2E+Ct+Z2SdjmlOIEf53rUnfLfXltFy2E
- mytoIM/HdvN2OzWpF6IFSydFqI9ublROrWnmV6WHZoYRO7gxMzv+gi1yJhLIvhPuKsp4=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=3IKCXCoZP5+L2HlFHb6TIvP3cSS5kNB+s4qEEoqHV+M=; b=gXjRrw8+pOF/tCOyYx6lhmZI7B
+ IYCBvKTP3vRBdS/Qj9iQed9Tlb40bwc54wFd8Mw8VAlX0ZfauPm1TmVNzQaI34HUh5F1sg3OTwj1d
+ KnU/O5n6bu6HsdA8TbiDwRcbuhHCQg03jw8zMJlm1tbaN4ydiUEtjpYew6OL2xSWntqk=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v1M9Z-000678-1y for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Sep 2025 09:51:14 +0000
+ id 1v1PS4-0003fc-1j for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 24 Sep 2025 13:22:32 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id AA1E54010C
+ by tor.source.kernel.org (Postfix) with ESMTP id 5821060097
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 24 Sep 2025 09:51:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 89397C113CF
+ Wed, 24 Sep 2025 13:22:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 0A6D8C116C6
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 24 Sep 2025 09:51:02 +0000 (UTC)
+ Wed, 24 Sep 2025 13:22:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1758707462;
- bh=VMgOv5soGecJ0GlfOvCFJ/dm0d5YuVmPH6UDoKdGtAY=;
+ s=k20201202; t=1758720146;
+ bh=6nVpiagir5w/q/p9i7KXX0VguNWBRlgMHm54g0Lq1W4=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=jmpZOjr9KNy2sPYWBWv7JZWIijXDQ/ljuus4zw/T6XFawMjMHmDaLzDLypD3DdeQW
- wnQ2mTSWX9F5+qkoMBSLggjvwxcFMRWm+As3xlfaEzno7nzJnwPBLBz3H05bBEHkxR
- 7YvMGuhtmQ4xi5jdhgQJElynY3X/LPT7qBoMQDN6ofhAfPDq3yA6j2RHEu49L8OFGE
- Ewx+f6qrY0rpuVo2fYzICiBNPB3d5rcrsTO+IiQd93LQpjp+pCl9TZkT1AkQGwkdJE
- Ee0caf8oWfMCA2DOIWRTj1siF9jY5mPgcz4ivxGQugFKhZwUYSF/3n9McHAPFSHBRR
- CW0rNagUsRAkA==
+ b=diRWlao4/Imcerh4Dd3LlQmORqrsAxrKQizo8TN3qclEX9oJaxIiqo005vrvR8FBA
+ NEVYQ4LHUwOfVsCD01ZPQQTCUzp6iiK2rg/CNUJCfcdtg+8ASGGw87v5DCcJAUtyb6
+ SQ2Oa/rF3z4KvD7403y8xYkiTW3b/eCMODAHx5qOrzFUND+rYzfqrwKeuzQrXn4Eqp
+ 7vxjeUnE8iwOsIh2sZrnFYWmKV8664lGDqjDSrQ0SVpfoqUyyocKXdVX808d8jM3Jf
+ FjAnJH4Vl1dZxqTnMoWfRK4rl1xBCgUitG9ET95cUBQP1In2UlAOWcAPYFdBQ54SaT
+ r87fFUSqVSE2Q==
 Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 77B10C3279F; Wed, 24 Sep 2025 09:51:02 +0000 (UTC)
+ from userid 48) id E8E50C433E1; Wed, 24 Sep 2025 13:22:25 +0000 (UTC)
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 24 Sep 2025 09:51:02 +0000
+Date: Wed, 24 Sep 2025 13:22:25 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -77,14 +77,14 @@ X-Bugzilla-Component: f2fs
 X-Bugzilla-Version: 2.5
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: JY.Ho@mediatek.com
+X-Bugzilla-Who: chao@kernel.org
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: P3
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-220575-202145-QegXOqzmkm@https.bugzilla.kernel.org/>
+Message-ID: <bug-220575-202145-7jx7lfjqex@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-220575-202145@https.bugzilla.kernel.org/>
 References: <bug-220575-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
@@ -99,9 +99,9 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=220575 ---
  Comment
- #6 from JY (JY.Ho@mediatek.com) --- (In reply to Chao Yu from comment #5)
- > If this is reproducible, could you check whether we're suffer panic in
- > f2fs_submit_page_bio()? if it is, could [...] 
+ #7 from Chao Yu (chao@kernel.org) --- Can you please hook
+ fscrypt_free_bounce_page()
+ to set page private w/ special value, something as below: 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -113,7 +113,7 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v1M9Z-000678-1y
+X-Headers-End: 1v1PS4-0003fc-1j
 Subject: [f2fs-dev] [Bug 220575] Unable to handle kernel NULL pointer
  dereference at virtual address 0000000000000000
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -136,32 +136,21 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=220575
 
---- Comment #6 from JY (JY.Ho@mediatek.com) ---
-(In reply to Chao Yu from comment #5)
-> If this is reproducible, could you check whether we're suffer panic in
-> f2fs_submit_page_bio()? if it is, could you please have a try w/ below fix:
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 82ae31b8ecc4..959614de878f 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -716,7 +716,7 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
->                 wbc_account_cgroup_owner(fio->io_wbc, fio_folio, PAGE_SIZE);
->  
->         inc_page_count(fio->sbi, is_read_io(fio->op) ?
-> -                       __read_io_type(data_folio) :
-> WB_DATA_TYPE(fio->folio, false));
-> +                       __read_io_type(data_folio) :
-> WB_DATA_TYPE(data_folio, false));
->  
->         if (is_read_io(bio_op(bio)))
->                 f2fs_submit_read_bio(fio->sbi, bio, fio->type);
+--- Comment #7 from Chao Yu (chao@kernel.org) ---
+Can you please hook fscrypt_free_bounce_page() to set page private w/ special
+value, something as below:
 
+void fscrypt_free_bounce_page(struct page *bounce_page)
+{
+        if (!bounce_page)
+                return;
+        set_page_private(bounce_page, (unsigned long)0xF2F52011);
+        ClearPagePrivate(bounce_page);
+        mempool_free(bounce_page, fscrypt_bounce_page_pool);
+}
 
-It's reproducible after maybe one day of stress testing, and it panics in 
-inc_page_count(fio->sbi, WB_DATA_TYPE(page, false));
-
-https://github.com/torvalds/linux/blob/b8fcb8423053adaa27723010260aea90474b431a/fs/f2fs/data.c#L917
+And add some check conditions in f2fs_is_cp_guaranteed() to see whether the
+page has been freed before inc_page_count().
 
 -- 
 You may reply to this email to add a comment.
