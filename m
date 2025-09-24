@@ -2,76 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7DFCB98B6F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Sep 2025 09:59:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5BEAB98F73
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Sep 2025 10:47:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=+kvtFY91fCInqS8UrZy3TsYXpdTZEPeLoZWQi+avPt0=; b=mWKxZMWF8J9jW0AFgkp8BLkR+1
-	bpNH50ztngILS9MjbMWI7yGrliyxptPO7Fv/fKN+cBuTl00jbuVUSUNsXNZSFP1fC09DIFfmt7GSn
-	iRcdCz4akXx368h8bLsslNrUQ0xKJ920lS3MQIBIBh3hBfaNPxA0lrp9MRkeTqPoWJ7E=;
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=NocJGoCtSaPkuSLyuLXq2g4SeHM4QbC+eU7pfA+9EJU=; b=WPdnRMN8G46wu1fK35GAGpX0cp
+	gV8NTC5T1sB3DqMEPjBeiDd3/sw89efnu52Wo8UGSzlDDXN0dwwIl7qV4glWestcbjmsAy5fYbVEE
+	V089iW4+uGgNGkjPTJjthWO1ElROk2uW3+NwkLLj8RB68ZN+9MmWQMgWmdtZxq/09AN8=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v1KP9-0004UP-Td;
-	Wed, 24 Sep 2025 07:59:11 +0000
+	id 1v1LA3-0005oq-Sp;
+	Wed, 24 Sep 2025 08:47:39 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v1KP8-0004UE-QW
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1v1LA0-0005og-CC
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Sep 2025 07:59:10 +0000
+ Wed, 24 Sep 2025 08:47:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XjuicUFl7lrkfnVt1/5y5F6NT8VeWu/JliGKotBg63U=; b=Lte2zuMq8P8PXl52yQa/oxZz+x
- ymFFepSLoLX/YCbiZYI0cL362LUGF4VFG3W886lXCr7rVJZ2c1tMNmAzKh/L9TR4oplIEqz5udM2z
- 07fkNQXTwhDAopi2AqZUym59k+A4ziSL/ZKV3GgZh5xLSyhQq+CaRTM2AgwjvcpxXk7I=;
+ bh=olcolpqAiN8qZPZtP/mPsyQcj6Zg71M/+3wpCRsR8tA=; b=H4hzlBOae/cWqa6kojftvaxekP
+ l6P9NIiBdYP0bd2TXrlwaK2/yhlyqL7LqPbdKB0NlrYbLzHilf7TRcwAk7tRcUm/ziQBaqjnB7tOZ
+ YLL5J6YA+2IwgqPR4Oo1r1hRa+qq3oOkQeheTcBExev4MsRn79hQDA7Gqa15SSP2NY7k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=XjuicUFl7lrkfnVt1/5y5F6NT8VeWu/JliGKotBg63U=; b=EypENefk/QWdBL6ldw2/fE9bo+
- FevOI7bo2INNdGoJ2k+UscYf6eXk+9xFSWKqQenHR+s6GOTVSNVfMn1+/EFLjxX/YSpIrQkxN0fJw
- JjvGWayV9JFfqs3ehV7DcG6MbBwuCdjZW/OkFaBDjxznEShc5KT80yyoGf7yiL6B6MWQ=;
+ bh=olcolpqAiN8qZPZtP/mPsyQcj6Zg71M/+3wpCRsR8tA=; b=WlnZDOAIy0DlheO6ByiD6EeP1A
+ 0/M+lrBXgW13pw5fVykHtEja9s3Axkv0kk35DCxCx2CcLQ7XXbTr5eCSG5YUXB5VERtb+p22Y+lBP
+ lyn+P+wjsty7DJ9wUSm/5kkiKCXcqcTnAX/Np3c2kNzQI33YiGEu76PIiQibpeT8CBpo=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v1KP6-00050z-MW for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Sep 2025 07:59:09 +0000
+ id 1v1L9z-0001dC-Qi for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 24 Sep 2025 08:47:36 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 22D5E601B6;
- Wed, 24 Sep 2025 07:59:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9BB21C4CEE7;
- Wed, 24 Sep 2025 07:59:00 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 23B8360007
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 24 Sep 2025 08:47:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id CB23AC4CEE7
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 24 Sep 2025 08:47:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1758700742;
- bh=ebGmTogsoiIyNshxuoFonK4bfNHzVNAVFWeWw4P6UXs=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=LPQ8XGB7T0yQzn+lDE3chKsbahiJJmvuFHgieF8/se7iVnfHY32swQwMLjw6jDL8X
- njuN9dNeSNJoqDHMS11aZ0VFj+J2NO8wMdkjFepFgc7FthNiP+HkpNQv13ANedFr4f
- NlkMU1Zb3TlocBBQk+l7Gs6ptIr4I45hBHRY3N/wWrEojhM/mm7V4abUGain9Vnf7H
- 4mckGpU2v5XwHat794wQH3jhNB1vQv8SxjoSONKaJMM8hf0/cZ5QNZKG6QGev/ytQc
- LvTpK8xkpns7fEdTIUt+hUn0nw4yFwFfmgE1yueM7lJSpunxfOncjpecexy9BA9JW1
- OSTbjZ3xT6uzQ==
-Message-ID: <6529ffee-d2ee-41ff-97d0-bf483fd0530a@kernel.org>
-Date: Wed, 24 Sep 2025 15:58:58 +0800
+ s=k20201202; t=1758703644;
+ bh=8B9Ckag/Z185TLVMZaRAa6qAYGM0YiWqVzrwNjLGPCU=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=MXxOc0rcFtT3CE3m8BcB7S/caWK2aRg/ks+AiQpMb6RLV22pXho0/wejUHJfvn1cI
+ A2AmCxkCvySHBGdzMu1Yuw91GMLSwtUaEKWHjWNxXz3kTG87Vz6bQC04odsHFM60fE
+ /ljW/A11jgeP7dfJVdyZneaoUK1byrW7bgdctuszAjsU5gdRsGdyzZooA5nqkrzpM6
+ tEbvovwz0cE83EruhCHFNp+zboej+n3hB1w7n5CaAju1erA8M8xMqhTpO+xUdY0eMo
+ d+Zrb6WyEDX0TX9qov9LJrCG7zQMT8rE47YdQtolHMXbyV17js7iJw+7mvaaKQOYbT
+ A5l6n8Yg2RS0w==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id B84A4C3279F; Wed, 24 Sep 2025 08:47:24 +0000 (UTC)
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Wed, 24 Sep 2025 08:47:24 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P3
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-220575-202145-WNjU8jHkhC@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-220575-202145@https.bugzilla.kernel.org/>
+References: <bug-220575-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Yunji Kang <yunji0.kang@samsung.com>, jaegeuk@kernel.org
-References: <CGME20250924074405epcas1p3a116daa0efa4a22d1741437b0cf59f8d@epcas1p3.samsung.com>
- <20250924074358.253759-1-yunji0.kang@samsung.com>
-Content-Language: en-US
-In-Reply-To: <20250924074358.253759-1-yunji0.kang@samsung.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -79,10 +97,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 9/24/25 15:43,
- Yunji Kang wrote: > In f2fs_precache_extents(), 
- For large files, It requires reading many > node blocks. Instead of reading
- each node block with synchronous I/O, > this patch applies [...] 
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=220575 ---
+ Comment
+ #5 from Chao Yu (chao@kernel.org) --- If this is reproducible, could you
+ check whether we're suffer panic in f2fs_submit_page_bio()? if it is, could
+ you please have a try w/ below fix: 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +113,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v1KP6-00050z-MW
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: readahead node blocks in
- F2FS_GET_BLOCK_PRECACHE mode
+X-Headers-End: 1v1L9z-0001dC-Qi
+Subject: [f2fs-dev] [Bug 220575] Unable to handle kernel NULL pointer
+ dereference at virtual address 0000000000000000
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,58 +127,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, Sungjong Seo <sj1557.seo@samsung.com>,
- linux-f2fs-devel@lists.sourceforge.net
+From: bugzilla-daemon--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: bugzilla-daemon@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 9/24/25 15:43, Yunji Kang wrote:
-> In f2fs_precache_extents(), For large files, It requires reading many
-> node blocks. Instead of reading each node block with synchronous I/O,
-> this patch applies readahead so that node blocks can be fetched in
-> advance.
-> 
-> It reduces the overhead of repeated sync reads and improves efficiency
-> when precaching extents of large files.
-> 
-> I created a file with the same largest extent and executed the test.
-> For this experiment, I set the file's largest extent with an offset of 0
-> and a size of 1GB. I configured the remaining area with 100MB extents.
-> 
-> 5GB test file:
-> dd if=/dev/urandom of=test1 bs=1m count=5120
-> cp test1 test2
-> fsync test1
-> dd if=test1 of=test2 bs=1m skip=1024 seek=1024 count=100 conv=notrunc
-> dd if=test1 of=test2 bs=1m skip=1224 seek=1224 count=100 conv=notrunc
-> ...
-> dd if=test1 of=test2 bs=1m skip=5024 seek=5024 count=100 conv=notrunc
-> reboot
-> 
-> I also created 10GB and 20GB files with large extents using the same
-> method.
-> 
-> ioctl(F2FS_IOC_PRECACHE_EXTENTS) test results are as follows:
->   +-----------+---------+---------+-----------+
->   | File size | Before  | After   | Reduction |
->   +-----------+---------+---------+-----------+
->   | 5GB       | 101.8ms | 37.0ms  | 72.1%     |
->   | 10GB      | 222.9ms | 56.0ms  | 74.9%     |
->   | 20GB      | 446.2ms | 116.4ms | 73.9%     |
->   +-----------+---------+---------+-----------+
-> Tested on a 256GB mobile device with an SM8750 chipset.
-> 
-> Reviewed-by: Sungjong Seo <sj1557.seo@samsung.com>
-> Reviewed-by: Sunmin Jeong <s_min.jeong@samsung.com>
-> Signed-off-by: Yunji Kang <yunji0.kang@samsung.com>
+https://bugzilla.kernel.org/show_bug.cgi?id=220575
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+--- Comment #5 from Chao Yu (chao@kernel.org) ---
+If this is reproducible, could you check whether we're suffer panic in
+f2fs_submit_page_bio()? if it is, could you please have a try w/ below fix:
 
-Thanks,
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 82ae31b8ecc4..959614de878f 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -716,7 +716,7 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
+                wbc_account_cgroup_owner(fio->io_wbc, fio_folio, PAGE_SIZE);
 
+        inc_page_count(fio->sbi, is_read_io(fio->op) ?
+-                       __read_io_type(data_folio) : WB_DATA_TYPE(fio->folio,
+false));
++                       __read_io_type(data_folio) : WB_DATA_TYPE(data_folio,
+false));
+
+        if (is_read_io(bio_op(bio)))
+                f2fs_submit_read_bio(fio->sbi, bio, fio->type);
+
+-- 
+You may reply to this email to add a comment.
+
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
