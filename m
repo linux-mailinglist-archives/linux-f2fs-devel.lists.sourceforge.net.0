@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DA02B98667
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Sep 2025 08:34:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F227B986D7
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Sep 2025 08:43:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=G6+a97x8pwGhq2qCldoUlY0A3l40X/1Bk0ktDxY0Zb4=; b=he4d5RfgOrMIF0DCJAHnYPB0di
-	H4unh24yAAgisBDwwPgX5LE6wUMc1MEGk1sHryosDgnuvfWYWJLHPwySx/Q8agO8D7TisVeMeMYwQ
-	RYGRc7Hm53x2d32DJAWFnIQpQPJK039K0uGvFuDVDF43hmdX+kf3oRJPmLLnMRdxsMnw=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=dVGl6znhiJ3tSVaSRnCWIrj5hNxdhJk97UWny3YPU2g=; b=M6ZiVfwkQIv8G0QJzAAjXB4VbU
+	AfEMNSnWOUF4NuxxYZJ5m66wpl3pPIynqXhyKND1ksLasi/D5S66x4veKoScQqZTuJK3Nvx59UGmL
+	y5mXU+AtLHC3H0WLXtoBiMSajoS2yvAgEJayb0eSdRl2PQWv8+VOAkZlsmh3w0g/OMuk=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v1J5G-0002ED-KG;
-	Wed, 24 Sep 2025 06:34:34 +0000
+	id 1v1JEH-0005p7-8B;
+	Wed, 24 Sep 2025 06:43:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v1J5D-0002E4-3U
+ (envelope-from <chao@kernel.org>) id 1v1JEF-0005p1-KJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Sep 2025 06:34:31 +0000
+ Wed, 24 Sep 2025 06:43:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uPm8ZJJEOKmuyCKte1qXzajtjNdeCswzdSqkwMiIH2w=; b=QUoCHkUTeYvUWy+9tDYZvqjF1E
- dm2PeWd62Ml/ot1mBFekMVF3DSax1WMj2CwlfIyn1yZXJoeX6wO5ysdCJO37gdIBopbihXxGWhRCn
- FA20U3Kf6DEilcnkL8R5cWx8uWaMgG0YWL5EmIHLsm4NP0M9uJ/3GuWm4zh1MEzNaCLU=;
+ bh=dNHfSoIVpFwuM1Rn3NBdwCp/yR1js3GjKKhzYVZ/jyk=; b=AA0e3mXFPL2J6WT9XvcMDvHwQ2
+ OXXNtOwDUA+IirAgoQK4wdj+ROZDsPQZzYDGsf/fVLl5kq84vNPl8YgyW5QJTqT6JMHmCRsEWO+9A
+ 1VJ9F4Opu/q+Y0tYMvt9pZkIRlz5q0tlrvFWanzMj67rhG05X1cr7ElB7oactt8WcSbE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,38 +40,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uPm8ZJJEOKmuyCKte1qXzajtjNdeCswzdSqkwMiIH2w=; b=ZFX5f7cp9zsGUqxgasQu/n3idA
- W9ziq4zLdgWuvp864r7xWEUAyXeLJrog+dxXzq+zEhp3VS8it2S0ujQX1UZzryOtm1TYkUwXyKckb
- NisXlwgAiPumLiDF9jSIr8OGtwwZ22wRXgwJmY79KNHeI6sld+PyUUIxY7kxpfKp/fRU=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=dNHfSoIVpFwuM1Rn3NBdwCp/yR1js3GjKKhzYVZ/jyk=; b=B05A2YKK+l8tfBWDKv55k/yiak
+ zjhPiLW6iM7RsE4X4NXuoJvTuwMQKbefaCDyXbZ8dP9G5V04J8D7E2Oobr5m8nqieCCtaiNfDBc94
+ W5FTRw7HI35a4BqSPKuGohQx0zJ6ogfOCFSNShV2hJ3a+J+p1Mq4Zyy0oqTjIKrtch7U=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v1J5C-0000VS-Gc for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Sep 2025 06:34:31 +0000
+ id 1v1JEE-00012y-JZ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 24 Sep 2025 06:43:51 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id EBDD344703;
- Wed, 24 Sep 2025 06:34:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2EE91C4CEE7;
- Wed, 24 Sep 2025 06:34:17 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id EA68D60051;
+ Wed, 24 Sep 2025 06:43:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3CD93C4CEE7;
+ Wed, 24 Sep 2025 06:43:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1758695659;
- bh=n+fob0a/KleEhL3/yk1pmNFL67AabGNBDwLx7nDdKXg=;
+ s=k20201202; t=1758696219;
+ bh=8DK3jW+UQGE9APyR7Iu45j5l71ebl6KdPy8ALRX1Ows=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=Jh3ptc5MDKfNd29lg4+XyQtcDxf3MKkosBFwUtADKV4ALckS1TQ1GtMXLS53JX+2d
- sRv4KWLGQEIRuGzZueURU6rSw+w7aJDAM1eKgFKdrQLcpKI5zcah+6jeYYvSzWFakH
- kMwfBAIeInZeVAVaZHU+4IvnZP8i1SlJaQCKwjWR61cRxDrcF18Ciz+Zs7I2LmAGN2
- PF6T3A9WYsLm4T6BuTMdHu5dbcFRlCtlPH+mD85mKSaYWOROkKDrc5YL40nTGAxlcc
- nqyrIga+WoLJq1Ul7np72mydkFTDRT5KOGegMu3ggxyOYLQp6Z8RhiFPjHnNCEJ6Wq
- k4UXmPXt60ipA==
-Message-ID: <dfc68656-1794-4e69-a222-9ba9c8bf3a20@kernel.org>
-Date: Wed, 24 Sep 2025 14:34:15 +0800
+ b=rGD6gfpEQH97FilLSBIZqOpG2kbsAW2mhWqfj/K/dWqLip4nIn5CDRS67u3DjbRkc
+ 8m4FS9Ag012jcUlpDJ2H895+D4Va5p0ATjMwZNa3fW127EPlpVBND1leEtl1iGzBdt
+ LrEhrsSUJMnRmH2E2SE+qea6zDKDNkTHsp6oUhvlH4lkEfwtiRqh8GB39wd8cm89Ey
+ gXECtox/g3TYK/UVP5be7Fe/BhvCVzxc9XMIkyFkD/eBEz64ZUpRvqKETf9MStoBKM
+ CCXwQCB6VJZBMddrSdI6qdmwgSRgDf1UhnQ1iR+bgpcBBCHsa8g5VkDQQ/MoyYKRcp
+ oTDSphdaIjHJQ==
+Message-ID: <84d65c75-7ab7-4c0c-9085-9423effb8632@kernel.org>
+Date: Wed, 24 Sep 2025 14:43:33 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Yunji Kang <yunji0.kang@samsung.com>, jaegeuk@kernel.org
-References: <CGME20250924055837epcas1p460d67d7f1c900f5cc25c865cb636e950@epcas1p4.samsung.com>
- <20250924055831.250805-1-yunji0.kang@samsung.com>
+References: <CGME20250918082037epcas1p1eb201d3b6d5780c0bff3ba32740ccdcf@epcas1p1.samsung.com>
+ <20250918082023.57381-1-yunji0.kang@samsung.com>
+ <89f237cd-3f86-405a-8f8f-d9cad250ef00@kernel.org>
+ <00d401dc2d0a$18100c20$48302460$@samsung.com>
 Content-Language: en-US
-In-Reply-To: <20250924055831.250805-1-yunji0.kang@samsung.com>
+In-Reply-To: <00d401dc2d0a$18100c20$48302460$@samsung.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -79,10 +81,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 9/24/25 13:58,
- Yunji Kang wrote: > In f2fs_precache_extents(), 
- For large files, It requires reading many > node blocks. Instead of reading
- each node block with synchronous I/O, > this patch applies [...] 
+ Content preview:  On 9/24/25 12:17,
+ Yunji Kang wrote: >>> In f2fs_precache_extents(), 
+ For large files, It requires reading many >>> node blocks. Instead of reading
+ each node block with synchronous I/O, >>> this patch a [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,8 +96,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v1J5C-0000VS-Gc
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: readahead node blocks in
+X-Headers-End: 1v1JEE-00012y-JZ
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: readahead node blocks in
  F2FS_GET_BLOCK_PRECACHE mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -110,120 +112,95 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, Sungjong Seo <sj1557.seo@samsung.com>,
+Cc: linux-kernel@vger.kernel.org, 'Sungjong Seo' <sj1557.seo@samsung.com>,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 9/24/25 13:58, Yunji Kang wrote:
-> In f2fs_precache_extents(), For large files, It requires reading many
-> node blocks. Instead of reading each node block with synchronous I/O,
-> this patch applies readahead so that node blocks can be fetched in
-> advance.
-> 
-> It reduces the overhead of repeated sync reads and improves efficiency
-> when precaching extents of large files.
-> 
-> I created a file with the same largest extent and executed the test.
-> For this experiment, I set the file's largest extent with an offset of 0
-> and a size of 1GB. I configured the remaining area with 100MB extents.
-> 
-> 5GB test file:
-> dd if=/dev/urandom of=test1 bs=1m count=5120
-> cp test1 test2
-> fsync test1
-> dd if=test1 of=test2 bs=1m skip=1024 seek=1024 count=100 conv=notrunc
-> dd if=test1 of=test2 bs=1m skip=1224 seek=1224 count=100 conv=notrunc
-> ...
-> dd if=test1 of=test2 bs=1m skip=5024 seek=5024 count=100 conv=notrunc
-> reboot
-> 
-> I also created 10GB and 20GB files with large extents using the same
-> method.
-> 
-> ioctl(F2FS_IOC_PRECACHE_EXTENTS) test results are as follows:
->   +-----------+---------+---------+-----------+
->   | File size | Before  | After   | Reduction |
->   +-----------+---------+---------+-----------+
->   | 5GB       | 101.8ms | 37.0ms  | 72.1%     |
->   | 10GB      | 222.9ms | 56.0ms  | 74.9%     |
->   | 20GB      | 446.2ms | 116.4ms | 73.9%     |
->   +-----------+---------+---------+-----------+
-> Tested on a 256GB mobile device with an SM8750 chipset.
-> 
-> Reviewed-by: Sungjong Seo <sj1557.seo@samsung.com>
-> Reviewed-by: Sunmin Jeong <s_min.jeong@samsung.com>
-> Signed-off-by: Yunji Kang <yunji0.kang@samsung.com>
-> ---
-> v2:
->  - Modify the readahead condition check routine for better code
-> readability.
->  - Update the title from 'node block' to 'node blocks'.
-> 
-> v3:
->  - Bug fix to allow more node pages to be readahead.
->  - Updated with test results.
-> 
->  fs/f2fs/data.c | 3 +++
->  fs/f2fs/f2fs.h | 1 +
->  fs/f2fs/node.c | 4 +++-
->  3 files changed, 7 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 7961e0ddfca3..ab3117e3b24a 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -1572,6 +1572,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
->  	pgofs =	(pgoff_t)map->m_lblk;
->  	end = pgofs + maxblocks;
->  
-> +	if (flag == F2FS_GET_BLOCK_PRECACHE)
-> +		mode = LOOKUP_NODE_PRECACHE;
-
-If trigger condition of LOOKUP_NODE_RA and LOOKUP_NODE_PRECACHE is the same,
-What about?
-
-	if (flag == F2FS_GET_BLOCK_PRECACHE)
-		mode = LOOKUP_NODE_RA;
-
-Thanks,
-
-> +
->  next_dnode:
->  	if (map->m_may_create) {
->  		if (f2fs_lfs_mode(sbi))
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 9d3bc9633c1d..3ce41528d48e 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -651,6 +651,7 @@ enum {
->  					 * look up a node with readahead called
->  					 * by get_data_block.
->  					 */
-> +	LOOKUP_NODE_PRECACHE,		/* look up a node for F2FS_GET_BLOCK_PRECACHE */
->  };
->  
->  #define DEFAULT_RETRY_IO_COUNT	8	/* maximum retry read IO or flush count */
-> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> index 4254db453b2d..63e9ee7ab911 100644
-> --- a/fs/f2fs/node.c
-> +++ b/fs/f2fs/node.c
-> @@ -860,7 +860,9 @@ int f2fs_get_dnode_of_data(struct dnode_of_data *dn, pgoff_t index, int mode)
->  			set_nid(parent, offset[i - 1], nids[i], i == 1);
->  			f2fs_alloc_nid_done(sbi, nids[i]);
->  			done = true;
-> -		} else if (mode == LOOKUP_NODE_RA && i == level && level > 1) {
-> +		} else if ((mode == LOOKUP_NODE_RA ||
-> +                (mode == LOOKUP_NODE_PRECACHE))
-> +                && i == level && level > 1) {
->  			nfolio[i] = f2fs_get_node_folio_ra(parent, offset[i - 1]);
->  			if (IS_ERR(nfolio[i])) {
->  				err = PTR_ERR(nfolio[i]);
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gOS8yNC8yNSAxMjoxNywgWXVuamkgS2FuZyB3cm90ZToKPj4+IEluIGYyZnNfcHJlY2FjaGVf
+ZXh0ZW50cygpLCBGb3IgbGFyZ2UgZmlsZXMsIEl0IHJlcXVpcmVzIHJlYWRpbmcgbWFueQo+Pj4g
+bm9kZSBibG9ja3MuIEluc3RlYWQgb2YgcmVhZGluZyBlYWNoIG5vZGUgYmxvY2sgd2l0aCBzeW5j
+aHJvbm91cyBJL08sCj4+PiB0aGlzIHBhdGNoIGFwcGxpZXMgcmVhZGFoZWFkIHNvIHRoYXQgbm9k
+ZSBibG9ja3MgY2FuIGJlIGZldGNoZWQgaW4KPj4+IGFkdmFuY2UuCj4+Pgo+Pj4gSXQgcmVkdWNl
+cyB0aGUgb3ZlcmhlYWQgb2YgcmVwZWF0ZWQgc3luYyByZWFkcyBhbmQgaW1wcm92ZXMgZWZmaWNp
+ZW5jeQo+Pj4gd2hlbiBwcmVjYWNoaW5nIGV4dGVudHMgb2YgbGFyZ2UgZmlsZXMuCj4+Pgo+Pj4g
+SSBjcmVhdGVkIGEgZmlsZSB3aXRoIHRoZSBzYW1lIGxhcmdlc3QgZXh0ZW50IGFuZCBleGVjdXRl
+ZCB0aGUgdGVzdC4KPj4+IEZvciB0aGlzIGV4cGVyaW1lbnQsIEkgc2V0IHRoZSBmaWxlJ3MgbGFy
+Z2VzdCBleHRlbnQgd2l0aCBhbiBvZmZzZXQgb2YKPj4+IDAgYW5kIGEgc2l6ZSBvZiAxR0IuIEkg
+Y29uZmlndXJlZCB0aGUgcmVtYWluaW5nIGFyZWEgd2l0aCAxMDBNQiBleHRlbnRzLgo+Pj4KPj4+
+IDVHQiB0ZXN0IGZpbGU6Cj4+PiBkZCBpZj0vZGV2L3VyYW5kb20gb2Y9dGVzdDEgYnM9MW0gY291
+bnQ9NTEyMCBjcCB0ZXN0MSB0ZXN0MiBmc3luYwo+Pj4gdGVzdDEgZGQgaWY9dGVzdDEgb2Y9dGVz
+dDIgYnM9MW0gc2tpcD0xMDI0IHNlZWs9MTAyNCBjb3VudD0xMDAKPj4+IGNvbnY9bm90cnVuYyBk
+ZCBpZj10ZXN0MSBvZj10ZXN0MiBicz0xbSBza2lwPTEyMjQgc2Vlaz0xMjI0IGNvdW50PTEwMAo+
+Pj4gY29udj1ub3RydW5jIC4uLgo+Pj4gZGQgaWY9dGVzdDEgb2Y9dGVzdDIgYnM9MW0gc2tpcD01
+MDI0IHNlZWs9NTAyNCBjb3VudD0xMDAgY29udj1ub3RydW5jCj4+PiByZWJvb3QKPj4+Cj4+PiBJ
+IGFsc28gY3JlYXRlZCAxMEdCIGFuZCAyMEdCIGZpbGVzIHdpdGggbGFyZ2UgZXh0ZW50cyB1c2lu
+ZyB0aGUgc2FtZQo+Pj4gbWV0aG9kLgo+Pj4KPj4+IGlvY3RsKEYyRlNfSU9DX1BSRUNBQ0hFX0VY
+VEVOVFMpIHRlc3QgcmVzdWx0cyBhcmUgYXMgZm9sbG93czoKPj4+ICAgKy0tLS0tLS0tLS0tKy0t
+LS0tLS0tLSstLS0tLS0tLS0rLS0tLS0tLS0tLS0rCj4+PiAgIHwgRmlsZSBzaXplIHwgQmVmb3Jl
+ICB8IEFmdGVyICAgfCBSZWR1Y3Rpb24gfAo+Pj4gICArLS0tLS0tLS0tLS0rLS0tLS0tLS0tKy0t
+LS0tLS0tLSstLS0tLS0tLS0tLSsKPj4+ICAgfCA1R0IgICAgICAgfCAxMDEuOG1zIHwgNzIuMW1z
+ICB8IDI5LjIlICAgICB8Cj4+PiAgIHwgMTBHQiAgICAgIHwgMjIyLjltcyB8IDE0OS41bXMgfCAz
+Mi45JSAgICAgfAo+Pj4gICB8IDIwR0IgICAgICB8IDQ0Ni4ybXMgfCAyNzYuM21zIHwgMzguMSUg
+ICAgIHwKPj4+ICAgKy0tLS0tLS0tLS0tKy0tLS0tLS0tLSstLS0tLS0tLS0rLS0tLS0tLS0tLS0r
+Cj4+Cj4+IFl1bmppLAo+Pgo+PiBXaWxsIHdlIGdhaW4gYmV0dGVyIHBlcmZvcm1hbmNlIGlmIHdl
+IHJlYWRhaGVhZCBtb3JlIG5vZGUgcGFnZXMgdy8KPj4gc3ljaHJvbm91cyByZXF1ZXN0IGZvciBw
+cmVjYWNoZSBleHRlbnQgY2FzZT8gSGF2ZSB5b3UgdHJpZWQgdGhhdD8KPj4KPj4gVGhhbmtzLAo+
+Pgo+IAo+IERvZXMg4oCccmVhZGFoZWFkIG1vcmUgbm9kZSBwYWdlc+KAnSBtZWFuIHJlbW92aW5n
+IHRoaXMgY29uZGl0aW9uPwo+ICIgb2Zmc2V0W2kgLSAxXSAlIE1BWF9SQV9OT0RFID09IDAgIgoK
+QWN0dWFsbHksIEkgbWVhbnQgYSkgcmVtb3ZlICJvZmZzZXRbaSAtIDFdICUgTUFYX1JBX05PREUg
+PT0gMCIgb3IgYikKaW5jcmVhc2UgTUFYX1JBX05PREUuCgpBbHNvLCBtYXliZSB3ZSBjYW4gdHJ5
+IGFzIGJlbG93IHRvIHRyaWdnZXIgc3luY2hyb25vdXMgSU8gZm9yIHN1Y2ggaGlnaApkZXRlcm1p
+bmFjeSByZWFkLgoKdm9pZCBkZjJmc19yYV9ub2RlX3BhZ2UoKQp7Ci4uLgoJZXJyID0gcmVhZF9u
+b2RlX2ZvbGlvKGFmb2xpbywgMCk7Ci4uLgp9Cgo+IAo+IEkgb3JpZ2luYWxseSBhZGRlZCB0aGUg
+Y29uZGl0aW9uIHRvIHByZXZlbnQgdW5uZWNlc3NhcnkgcmVhZGFoZWFkIHJlcXVlc3RzLCAKPiBi
+dXQgaXQgc2VlbXMgdGhpcyBjb25kaXRpb24gd2FzIGFjdHVhbGx5IGJsb2NraW5nIHZhbGlkIHJl
+YWRhaGVhZCBhcyB3ZWxsLgo+IAo+IEFmdGVyIHJlbW92aW5nIHRoZSBjb25kaXRpb24gYW5kIHJ1
+bm5pbmcgdGVzdHMsIAo+IEkgY29uZmlybWVkIHRoYXQgbW9yZSByZWFkYWhlYWQgbm9kZSBwYWdl
+cyBhcmUgYmVpbmcgaXNzdWVkLgo+IAo+IEnigJlsbCBzaGFyZSB0aGUgdGVzdCByZXN1bHRzIGFs
+b25nIHdpdGggdGhlIGltcHJvdmVkIHBhdGNoLgoKSXQgbWFrZXMgc2Vuc2UsIHRoYW5rcyBmb3Ig
+Y2hlY2tpbmcgdGhpcyBhbmQgc2hhcmluZyB0aGUgcmVzdWx0LgoKVGhhbmtzLAoKPiAKPiBUaGFu
+a3MsCj4gCj4+PiBUZXN0ZWQgb24gYSAyNTZHQiBtb2JpbGUgZGV2aWNlIHdpdGggYW4gU004NzUw
+IGNoaXBzZXQuCj4+Pgo+Pj4gUmV2aWV3ZWQtYnk6IFN1bmdqb25nIFNlbyA8c2oxNTU3LnNlb0Bz
+YW1zdW5nLmNvbT4KPj4+IFJldmlld2VkLWJ5OiBTdW5taW4gSmVvbmcgPHNfbWluLmplb25nQHNh
+bXN1bmcuY29tPgo+Pj4gU2lnbmVkLW9mZi1ieTogWXVuamkgS2FuZyA8eXVuamkwLmthbmdAc2Ft
+c3VuZy5jb20+Cj4+PiAtLS0KPj4+IHYyOgo+Pj4gIC0gTW9kaWZ5IHRoZSByZWFkYWhlYWQgY29u
+ZGl0aW9uIGNoZWNrIHJvdXRpbmUgZm9yIGJldHRlciBjb2RlCj4+PiByZWFkYWJpbGl0eS4KPj4+
+ICAtIFVwZGF0ZSB0aGUgdGl0bGUgZnJvbSAnbm9kZSBibG9jaycgdG8gJ25vZGUgYmxvY2tzJy4K
+Pj4+Cj4+PiAgZnMvZjJmcy9kYXRhLmMgfCAzICsrKwo+Pj4gIGZzL2YyZnMvZjJmcy5oIHwgMSAr
+Cj4+PiAgZnMvZjJmcy9ub2RlLmMgfCA1ICsrKystCj4+PiAgMyBmaWxlcyBjaGFuZ2VkLCA4IGlu
+c2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKPj4+Cj4+PiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9k
+YXRhLmMgYi9mcy9mMmZzL2RhdGEuYyBpbmRleAo+Pj4gNzk2MWUwZGRmY2EzLi5hYjMxMTdlM2Iy
+NGEgMTAwNjQ0Cj4+PiAtLS0gYS9mcy9mMmZzL2RhdGEuYwo+Pj4gKysrIGIvZnMvZjJmcy9kYXRh
+LmMKPj4+IEBAIC0xNTcyLDYgKzE1NzIsOSBAQCBpbnQgZjJmc19tYXBfYmxvY2tzKHN0cnVjdCBp
+bm9kZSAqaW5vZGUsIHN0cnVjdAo+PiBmMmZzX21hcF9ibG9ja3MgKm1hcCwgaW50IGZsYWcpCj4+
+PiAgCXBnb2ZzID0JKHBnb2ZmX3QpbWFwLT5tX2xibGs7Cj4+PiAgCWVuZCA9IHBnb2ZzICsgbWF4
+YmxvY2tzOwo+Pj4KPj4+ICsJaWYgKGZsYWcgPT0gRjJGU19HRVRfQkxPQ0tfUFJFQ0FDSEUpCj4+
+PiArCQltb2RlID0gTE9PS1VQX05PREVfUFJFQ0FDSEU7Cj4+PiArCj4+PiAgbmV4dF9kbm9kZToK
+Pj4+ICAJaWYgKG1hcC0+bV9tYXlfY3JlYXRlKSB7Cj4+PiAgCQlpZiAoZjJmc19sZnNfbW9kZShz
+YmkpKQo+Pj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZjJmcy5oIGIvZnMvZjJmcy9mMmZzLmggaW5k
+ZXgKPj4+IDlkM2JjOTYzM2MxZC4uM2NlNDE1MjhkNDhlIDEwMDY0NAo+Pj4gLS0tIGEvZnMvZjJm
+cy9mMmZzLmgKPj4+ICsrKyBiL2ZzL2YyZnMvZjJmcy5oCj4+PiBAQCAtNjUxLDYgKzY1MSw3IEBA
+IGVudW0gewo+Pj4gIAkJCQkJICogbG9vayB1cCBhIG5vZGUgd2l0aCByZWFkYWhlYWQgY2FsbGVk
+Cj4+PiAgCQkJCQkgKiBieSBnZXRfZGF0YV9ibG9jay4KPj4+ICAJCQkJCSAqLwo+Pj4gKwlMT09L
+VVBfTk9ERV9QUkVDQUNIRSwJCS8qIGxvb2sgdXAgYSBub2RlIGZvcgo+PiBGMkZTX0dFVF9CTE9D
+S19QUkVDQUNIRSAqLwo+Pj4gIH07Cj4+Pgo+Pj4gICNkZWZpbmUgREVGQVVMVF9SRVRSWV9JT19D
+T1VOVAk4CS8qIG1heGltdW0gcmV0cnkgcmVhZCBJTyBvciBmbHVzaAo+PiBjb3VudCAqLwo+Pj4g
+ZGlmZiAtLWdpdCBhL2ZzL2YyZnMvbm9kZS5jIGIvZnMvZjJmcy9ub2RlLmMgaW5kZXgKPj4+IDQy
+NTRkYjQ1M2IyZC4uZDRiZjNjZTcxNWM1IDEwMDY0NAo+Pj4gLS0tIGEvZnMvZjJmcy9ub2RlLmMK
+Pj4+ICsrKyBiL2ZzL2YyZnMvbm9kZS5jCj4+PiBAQCAtODYwLDcgKzg2MCwxMCBAQCBpbnQgZjJm
+c19nZXRfZG5vZGVfb2ZfZGF0YShzdHJ1Y3QgZG5vZGVfb2ZfZGF0YSAqZG4sCj4+IHBnb2ZmX3Qg
+aW5kZXgsIGludCBtb2RlKQo+Pj4gIAkJCXNldF9uaWQocGFyZW50LCBvZmZzZXRbaSAtIDFdLCBu
+aWRzW2ldLCBpID09IDEpOwo+Pj4gIAkJCWYyZnNfYWxsb2NfbmlkX2RvbmUoc2JpLCBuaWRzW2ld
+KTsKPj4+ICAJCQlkb25lID0gdHJ1ZTsKPj4+IC0JCX0gZWxzZSBpZiAobW9kZSA9PSBMT09LVVBf
+Tk9ERV9SQSAmJiBpID09IGxldmVsICYmIGxldmVsID4gMSkKPj4gewo+Pj4gKwkJfSBlbHNlIGlm
+ICgoaSA9PSBsZXZlbCAmJiBsZXZlbCA+IDEpICYmCj4+PiArCQkJCShtb2RlID09IExPT0tVUF9O
+T0RFX1JBIHx8Cj4+PiArCQkJCShtb2RlID09IExPT0tVUF9OT0RFX1BSRUNBQ0hFICYmCj4+PiAr
+CQkJCW9mZnNldFtpIC0gMV0gJSBNQVhfUkFfTk9ERSA9PSAwKSkpIHsKPj4+ICAJCQluZm9saW9b
+aV0gPSBmMmZzX2dldF9ub2RlX2ZvbGlvX3JhKHBhcmVudCwgb2Zmc2V0W2kgLQo+PiAxXSk7Cj4+
+PiAgCQkJaWYgKElTX0VSUihuZm9saW9baV0pKSB7Cj4+PiAgCQkJCWVyciA9IFBUUl9FUlIobmZv
+bGlvW2ldKTsKPiAKPiAKPiAKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZl
+bEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlz
+dHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
