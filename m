@@ -2,145 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EF21BA4F52
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Sep 2025 21:23:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71A5ABA4FB2
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Sep 2025 21:36:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	List-Unsubscribe:List-Id:Subject:To:Message-ID:References:Mime-Version:
+	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=AUtmOExyuj6P3p/Tj3KKOKKErZ9rOwxVrGah/nlBVVc=; b=VpBliITOAI2fwBh82TrvJvs+Tn
-	nVCOoURoH5q/2odNsT8/LrHG8g804o6eS5EBcYqOu+1ownCiHFhTbK3cDYAzPbYhLqt6jm8jgJ0L1
-	SkCRMGupnMA2+pdVRDfu5UHHUyME06MZrSD7HAt7KC4AO10xwYVqihY0wCYQCKoSTtXc=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=NA9xvRFKqHJKSL+oO3ai4Vxay5djc+RWBmENStqcA1c=; b=Px7WLH33KNpHvRIzHv7n+2748m
+	tXDLzr7sQhD2P084m5DY+ReyLKPL2Hzhq4pSgIrsgJRexgVnPxzvar7Eg2+zQpIIGrPzFTyxgb/jc
+	SClriOUqWw1/pogcwN70PLJTVq7p+mHxZMp2EaOJEJQBmO/SQHQMz9LuuUQe04kHZ0fs=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v2E2I-0000m5-8g;
-	Fri, 26 Sep 2025 19:23:18 +0000
+	id 1v2EFH-0003I9-A4;
+	Fri, 26 Sep 2025 19:36:44 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1v2E2E-0000ly-1N
- for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Sep 2025 19:23:14 +0000
+ (envelope-from <3POvWaAYKALstfbokdhpphmf.dpn@flex--seanjc.bounces.google.com>)
+ id 1v2EFD-0003Ho-Nw for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Sep 2025 19:36:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IQl5M6mAfM0DP6T6mNMjMr+kt77iQkZGSlvQMLNUDwI=; b=TYZxOit+UycjwHPcrrUMeesqrJ
- T7niq+zCZMC010jVB09Lcec1kwZo1aCsHb/H4DyPYzGPXmLGowXjzCqklkRGNAqzF/YX5kLgIMfPQ
- ELubn54Lj9MMB1hAHn98x0byGBVPe00NKSCbLDW9h4pEvnXujM9mDlFOGxIhk7Yh0yks=;
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
+ References:Mime-Version:In-Reply-To:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Ob/iOTJHVtIxulD10+qfYKaLq05XmILMIQZZtCe3LNU=; b=RfLGZLDcCZC3OkpIVoWEa+acVO
+ PbeFQQwXfmq+zLghy4hrSwplTky6SEMNEH+VT+8I8AN1zQCz0LMcH5MlAYK2qfmjZ3SzuKsW+6l8i
+ XP33lI5O0b6JO5F2z7aJz/oXaILZeIADhSQQ7fGgSMHEN3DOXYUmzAWevSjBQxl+9HLQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:
+ In-Reply-To:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=IQl5M6mAfM0DP6T6mNMjMr+kt77iQkZGSlvQMLNUDwI=; b=R/FLIkyawFP/Oj+2e33PFdFH/D
- 18szGcpAAQZtwV/tvUxdzsh+Mm0XTdVXeRIp5nWcdhKkxtxjnu/2PV9Zz2DefvPPwOhvLcln97Lil
- vW6cO/UchArY3lbAmcNF2uMZq2B/boa2u72LKssmteWMwRAkPJbknr3mK2DzY3x6YG4k=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ bh=Ob/iOTJHVtIxulD10+qfYKaLq05XmILMIQZZtCe3LNU=; b=RtnkXc47Hu0A2rOCpuxF1OriIw
+ tHOfJOuBvXF20XaAIXIvZUnjYJHN/nDcb1xAikZud56mqcGqALreJxnXxUlNI/BkKXm38j70hO3/I
+ +X0nSm0LhfX18jU9VSraXdGZlAnjIk7QSja83pzuly/BY8qxQaS6rNNdUk1Z+poxcI2s=;
+Received: from mail-pj1-f73.google.com ([209.85.216.73])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v2E2D-0000I6-G4 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Sep 2025 19:23:13 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1758914582;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=IQl5M6mAfM0DP6T6mNMjMr+kt77iQkZGSlvQMLNUDwI=;
- b=GejJcXRvpdyMUOm4/QnNkQAuPl3ATelbF2XocG94LHyckXPMil8sFHs9Hsx0RdbKTmAvRG
- i7u1pe8GA7kpiDY3uxj793h/iuz10IVIgXqQwT+XgAFWAkN11iIFDRsvb3vNXpdNhGuMvN
- lyHR+/X11FzvPxrNo0MDGxSlZYa7xBs=
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-57-mSci8hM9Ok-73Lp4GaXTLw-1; Fri, 26 Sep 2025 15:23:00 -0400
-X-MC-Unique: mSci8hM9Ok-73Lp4GaXTLw-1
-X-Mimecast-MFC-AGG-ID: mSci8hM9Ok-73Lp4GaXTLw_1758914580
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2699ed6d43dso26989425ad.1
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1v2EFD-0000xX-Tl for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Sep 2025 19:36:40 +0000
+Received: by mail-pj1-f73.google.com with SMTP id
+ 98e67ed59e1d1-32edda89a37so2319886a91.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 26 Sep 2025 12:23:00 -0700 (PDT)
+ Fri, 26 Sep 2025 12:36:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1758915389; x=1759520189;
+ darn=lists.sourceforge.net; 
+ h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+ :date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ob/iOTJHVtIxulD10+qfYKaLq05XmILMIQZZtCe3LNU=;
+ b=t2lOS1e+t//rEMBE+iWmPKuIUJBxqaliS8JDC/sEy9LK1hfojR1rcPMOVbmRXVSdEv
+ WgoiRGiTHhEcRoxfVYCtVSTgEFAdAjLuz970Ampf4fwKFv2SRUOCHTORvlyx362btA+y
+ /+aoTJ/6fi9UES9OnXmYKDu+njqCQ9ch2O4YksdbGa/derFz5JkCO8CU0EXou2fWkba1
+ vqKxWzTcqxPgHoQdjk4VgNxjRZ/9wu3+BVA39VQeptZMIqOWI3PvDNimILG5Qkta71pS
+ 4jWwRQUvnnUl0pB77DeiAtujwBIac4X4lYCiUT2KbM60TfgKDymTjhZ82UvDeIs8+wWc
+ vbMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758914579; x=1759519379;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IQl5M6mAfM0DP6T6mNMjMr+kt77iQkZGSlvQMLNUDwI=;
- b=gthKDvF79AYjS89fL8Qr1n6De2hXjuoxytTB8gzRPoHtQL96m48JRcfnTngRMFOcyn
- CnUfI+AdilfLL84q+MYdY7uhZumETKJzdLIxQ46fhLEz8+qVta5zBSpy+OIM+9KdvcPh
- LXfdGM0PjCpx81eA39oo4RCNRL1KgHZVgY6hGpq7TNPExF6yhNPU/NqgWRReeCzjxEja
- 8kSSe5kUAmeuZPzfMZAYyXYcnatNKBs7IksOEgIjXk5bUXRQUr/5MsCctn+YIS8zPJLY
- iyQCB+FP/r5G8vREOsjM09FKdXFDj3qcJzKi7I3hXFENbyUUPsfyMED3MIqXCs9DGiYj
- eEyg==
+ d=1e100.net; s=20230601; t=1758915389; x=1759520189;
+ h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+ :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ob/iOTJHVtIxulD10+qfYKaLq05XmILMIQZZtCe3LNU=;
+ b=TmRDIzYA06YlgcHe+aRNrm28ElL4fyU1X4u6c8iobfhfFu69hPxf7aj3YMF0PRihQU
+ YqJPpv4VWq3v/TN4JHaEPLrHNRo2SjZwPgqdHbMIY/YPBNOcHT8WH8/6IqDQAQKUD21i
+ 3gNvS3Cbz9WmKUB6sVgIGR4JZ3xPIA5FpLoLc2MpX3/OQOSb5crJQMuH7sMzfxwhL492
+ uA2Yr/Aw3pMoFP0m0XilJ+RVeGvFb9hk6cJYqyilxvCAlsKR1Esq4FqdGLgp2zP9g8ae
+ Mudv1OQQlo8KTbWDX1bM6l70kusoSnQed/LESmEl7c2KueKJSuFNvBYBRNfSfFk4I5Cd
+ ULgA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW3RFRI8tGKfO/0I0aPhbkEdpsPiGmNgVKKAk5kuSpZb9pIrDXX06SDpQIlgrI7GwHlFbD38i5Ttyt/ZlI3Z4jb@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwZjcYS6IcK1BlO98HTEbPpTyaPklm8BMqfJe0z0bBSCdyy9KwP
- 8QENeV5n/A3Y8OQUuSS2UuRaWVh/eLJfba5H0mY9lnIfMPSFv/HoMQFnhurfsl3KMxSdGqskU9Z
- VPw715t5l/dX8I65+9lBAWed7O0+McYO3js4dbWGdKcC1AlF4Yqi1I+p07oH4Jao/z+2iz+w9DO
- wfpMA=
-X-Gm-Gg: ASbGncuk5iewE2NoCqZ6xAWmSXaMP9veymg59K0mZLEfMsm+dxKBXX4QMLW4sbyCWam
- XyHoYD0go+BgnMRdfa8uxwfZeilAqqaNT3Wyi3lMK+I6jmh+bcJrBmuA95uC9mMHg6B8lz9NOuy
- ELD1yKueOI/f7JZQD4ZOlDwO80NDUfIZRdkokx4Hz4VdE9EzDPcd+gCNSV+1s/0ll/I+gxdol/I
- ZotbdSh7dJarisEWiUB3oq5c3HsxBuSILlWIQUOYBoT1c7BHG+zdxSs+6V++N5ZIfAwtEnyWdzP
- UyXuVrNyij6ky4M7tIwW9nsWWoJYdw/p9sWtfmJEkTmfljp9RmRXmiWGcm8o1Zd/SPu/oHOs+/3
- qxWVm
-X-Received: by 2002:a17:903:46c3:b0:246:7a43:3f84 with SMTP id
- d9443c01a7336-27ed4d882d9mr97777165ad.5.1758914579590; 
- Fri, 26 Sep 2025 12:22:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHkbt1BdFZV77XbMIioAMBObBqcjsfxvcRi9OG3sFQqZUyXS2psw6BsWhbO7Mp/MA7b8DW0sw==
-X-Received: by 2002:a17:903:46c3:b0:246:7a43:3f84 with SMTP id
- d9443c01a7336-27ed4d882d9mr97776985ad.5.1758914579227; 
- Fri, 26 Sep 2025 12:22:59 -0700 (PDT)
-Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([209.132.188.88])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-27ed6997ae3sm62325585ad.106.2025.09.26.12.22.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Sep 2025 12:22:58 -0700 (PDT)
-Date: Sat, 27 Sep 2025 03:22:54 +0800
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20250926192254.djrwx55itz422yft@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-References: <20250901020331.2171502-1-chao@kernel.org>
- <20250901020331.2171502-2-chao@kernel.org>
-MIME-Version: 1.0
-In-Reply-To: <20250901020331.2171502-2-chao@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: -3f3qr2Fun4H6-JRhHv-YoX7GLWeQNn8o_jFp5rk2gE_1758914580
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-X-Spam-Score: -0.2 (/)
+ AJvYcCU+1JijFkxBntr1aVnAkJuknFCmPowM0ed5wnaRH6KKHyBtbU+Uv+sE+FpZZGW6swKQ4KaMF8/3PTjKU4Ty3qVA@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YwpGkAM+z5W/rnvJQq14eux5hZWWFTdfaO5ognVGirSHnvASW4L
+ s3O7cnUnnwxUO74qTDjWzATH0jjOJkmGVeZ7f9vxhN1ESZkxix1jFt8gOvxdFfosPJ5Qew6ThxZ
+ //wBo3Q==
+X-Google-Smtp-Source: AGHT+IFDksLZfiXKr/BILK4eWMYTpySqi06A6DOxX2zeNKzHO6pmJyAGRZ48y/vvPgWC6WRjoIw3qUZ+1+0=
+X-Received: from pjbaz14.prod.google.com ([2002:a17:90b:28e:b0:32d:e264:a78e])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a17:90b:1808:b0:32b:d8bf:c785
+ with SMTP id 98e67ed59e1d1-3342a2c3979mr8949944a91.20.1758915388771; Fri, 26
+ Sep 2025 12:36:28 -0700 (PDT)
+Date: Fri, 26 Sep 2025 12:36:27 -0700
+In-Reply-To: <aNVQJqYLX17v-fsf@google.com>
+Mime-Version: 1.0
+References: <20250827175247.83322-2-shivankg@amd.com>
+ <20250827175247.83322-9-shivankg@amd.com>
+ <aNVQJqYLX17v-fsf@google.com>
+Message-ID: <aNbrO7A7fSjb4W84@google.com>
+To: Shivank Garg <shivankg@amd.com>
+X-Spam-Score: -4.9 (----)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Sep 01, 2025 at 10:03:31AM +0800, Chao Yu wrote: >
- This is a regression test: > 1. create foo & bar > 2. write 8M data to foo
- > 3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar > 4. [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On Thu, Sep 25, 2025, Sean Christopherson wrote: > On Wed,
+ Aug 27, 2025, Shivank Garg wrote: > > @@ -26,6 +28,9 @@ static inline struct
+ kvm_gmem_inode_info *KVM_GMEM_I(struct inode *inode) > > return [...] 
+ Content analysis details:   (-4.9 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 2.7 RCVD_IN_PSBL           RBL: Received via a relay in PSBL
+ [209.85.216.73 listed in psbl.surriel.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
+ trust [209.85.216.73 listed in list.dnswl.org]
+ -7.5 USER_IN_DEF_DKIM_WL From: address is in the default DKIM welcome-list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [170.10.129.124 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.73 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v2E2D-0000I6-G4
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs/022: do sanity check on footer of
- non inode dnode
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1v2EFD-0000xX-Tl
+Subject: Re: [f2fs-dev] [PATCH kvm-next V11 6/7] KVM: guest_memfd: Enforce
+ NUMA mempolicy using shared policy
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -152,109 +135,181 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Zorro Lang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Zorro Lang <zlang@redhat.com>
-Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Sean Christopherson via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Sean Christopherson <seanjc@google.com>
+Cc: jgowans@amazon.com, mhocko@suse.com, jack@suse.cz, kvm@vger.kernel.org,
+ david@redhat.com, linux-btrfs@vger.kernel.org, aik@amd.com, papaluri@amd.com,
+ kalyazin@amazon.com, peterx@redhat.com, linux-mm@kvack.org, clm@fb.com,
+ ddutile@redhat.com, linux-kselftest@vger.kernel.org, shdhiman@amd.com,
+ gshan@redhat.com, ying.huang@linux.alibaba.com, shuah@kernel.org,
+ roypat@amazon.co.uk, matthew.brost@intel.com, linux-coco@lists.linux.dev,
+ zbestahu@gmail.com, lorenzo.stoakes@oracle.com, linux-bcachefs@vger.kernel.org,
+ ira.weiny@intel.com, dhavale@google.com, jmorris@namei.org,
+ willy@infradead.org, hch@infradead.org, chao.gao@intel.com, tabba@google.com,
+ ziy@nvidia.com, rientjes@google.com, yuzhao@google.com, xiang@kernel.org,
+ nikunj@amd.com, gourry@gourry.net, serge@hallyn.com, amit@infradead.org,
+ thomas.lendacky@amd.com, ashish.kalra@amd.com, chao.p.peng@intel.com,
+ yan.y.zhao@intel.com, byungchul@sk.com, michael.day@amd.com,
+ Neeraj.Upadhyay@amd.com, michael.roth@amd.com, bfoster@redhat.com,
+ bharata@amd.com, josef@toxicpanda.com, Liam.Howlett@oracle.com,
+ ackerleytng@google.com, dsterba@suse.com, viro@zeniv.linux.org.uk,
+ jefflexu@linux.alibaba.com, jaegeuk@kernel.org, dan.j.williams@intel.com,
+ surenb@google.com, vbabka@suse.cz, paul@paul-moore.com,
+ joshua.hahnjy@gmail.com, apopple@nvidia.com, brauner@kernel.org,
+ quic_eberman@quicinc.com, rakie.kim@sk.com, cgzones@googlemail.com,
+ pvorel@suse.cz, linux-erofs@lists.ozlabs.org, kent.overstreet@linux.dev,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ pankaj.gupta@amd.com, linux-security-module@vger.kernel.org,
+ lihongbo22@huawei.com, linux-fsdevel@vger.kernel.org, pbonzini@redhat.com,
+ akpm@linux-foundation.org, vannapurve@google.com, suzuki.poulose@arm.com,
+ rppt@kernel.org, jgg@nvidia.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Sep 01, 2025 at 10:03:31AM +0800, Chao Yu wrote:
-> This is a regression test:
-> 1. create foo & bar
-> 2. write 8M data to foo
-> 3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar
-> 4. fpunch in foo w/ specified range
+On Thu, Sep 25, 2025, Sean Christopherson wrote:
+> On Wed, Aug 27, 2025, Shivank Garg wrote:
+> > @@ -26,6 +28,9 @@ static inline struct kvm_gmem_inode_info *KVM_GMEM_I(struct inode *inode)
+> >  	return container_of(inode, struct kvm_gmem_inode_info, vfs_inode);
+> >  }
+> >  
+> > +static struct mempolicy *kvm_gmem_get_pgoff_policy(struct kvm_gmem_inode_info *info,
+> > +						   pgoff_t index);
+> > +
+> >  /**
+> >   * folio_file_pfn - like folio_file_page, but return a pfn.
+> >   * @folio: The folio which contains this index.
+> > @@ -112,7 +117,25 @@ static int kvm_gmem_prepare_folio(struct kvm *kvm, struct kvm_memory_slot *slot,
+> >  static struct folio *kvm_gmem_get_folio(struct inode *inode, pgoff_t index)
+> >  {
+> >  	/* TODO: Support huge pages. */
+> > -	return filemap_grab_folio(inode->i_mapping, index);
+> > +	struct mempolicy *policy;
+> > +	struct folio *folio;
+> > +
+> > +	/*
+> > +	 * Fast-path: See if folio is already present in mapping to avoid
+> > +	 * policy_lookup.
+> > +	 */
+> > +	folio = __filemap_get_folio(inode->i_mapping, index,
+> > +				    FGP_LOCK | FGP_ACCESSED, 0);
+> > +	if (!IS_ERR(folio))
+> > +		return folio;
+> > +
+> > +	policy = kvm_gmem_get_pgoff_policy(KVM_GMEM_I(inode), index);
+> > +	folio = __filemap_get_folio_mpol(inode->i_mapping, index,
+> > +					 FGP_LOCK | FGP_ACCESSED | FGP_CREAT,
+> > +					 mapping_gfp_mask(inode->i_mapping), policy);
+> > +	mpol_cond_put(policy);
+> > +
+> > +	return folio;
+> >  }
+> >  
+> >  static void kvm_gmem_invalidate_begin(struct kvm_gmem *gmem, pgoff_t start,
+> > @@ -372,8 +395,45 @@ static vm_fault_t kvm_gmem_fault_user_mapping(struct vm_fault *vmf)
+> >  	return ret;
+> >  }
+> >  
+> > +#ifdef CONFIG_NUMA
+> > +static int kvm_gmem_set_policy(struct vm_area_struct *vma, struct mempolicy *mpol)
+> > +{
+> > +	struct inode *inode = file_inode(vma->vm_file);
+> > +
+> > +	return mpol_set_shared_policy(&KVM_GMEM_I(inode)->policy, vma, mpol);
+> > +}
+> > +
+> > +static struct mempolicy *kvm_gmem_get_policy(struct vm_area_struct *vma,
+> > +					     unsigned long addr, pgoff_t *pgoff)
+> > +{
+> > +	struct inode *inode = file_inode(vma->vm_file);
+> > +
+> > +	*pgoff = vma->vm_pgoff + ((addr - vma->vm_start) >> PAGE_SHIFT);
+> > +	return mpol_shared_policy_lookup(&KVM_GMEM_I(inode)->policy, *pgoff);
+> > +}
+> > +
+> > +static struct mempolicy *kvm_gmem_get_pgoff_policy(struct kvm_gmem_inode_info *info,
+> > +						   pgoff_t index)
 > 
-> If we haven't applied kernel patch ("f2fs: fix to do sanity check on
-> node footer for non inode dnode"), f2fs may missed to do sanity check
-> on corrupted dnode, result in panic in step 4).
+> I keep reading this is "page offset policy", as opposed to "policy given a page
+> offset".  Another oddity that is confusing is that this helper explicitly does
+> get_task_policy(current), while kvm_gmem_get_policy() lets the caller do that.
+> The end result is the same, but I think it would be helpful for gmem to be
+> internally consistent.
 > 
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  tests/f2fs/022     | 52 ++++++++++++++++++++++++++++++++++++++++++++++
->  tests/f2fs/022.out |  2 ++
->  2 files changed, 54 insertions(+)
->  create mode 100755 tests/f2fs/022
->  create mode 100644 tests/f2fs/022.out
+> If we have kvm_gmem_get_policy() use this helper, then we can kill two birds with
+> one stone:
 > 
-> diff --git a/tests/f2fs/022 b/tests/f2fs/022
-> new file mode 100755
-> index 00000000..a5e19a71
-> --- /dev/null
-> +++ b/tests/f2fs/022
-> @@ -0,0 +1,52 @@
-> +#! /bin/bash
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
-> +#
-> +# FS QA Test No. f2fs/022
-> +#
-> +# This is a regression test:
-> +# 1. create foo & bar
-> +# 2. write 8M data to foo
-> +# 3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar
-> +# 4. fpunch in foo w/ specified range
-> +#
-> +. ./common/preamble
-> +_begin_fstest auto quick rw
-> +
-> +. ./common/attr
-> +
-> +_fixed_by_kernel_commit xxxxxxxxxxxx \
-> +	"f2fs: fix to do sanity check on node footer for non inode dnode"
-> +
-> +_require_scratch_nocheck
-> +_require_command "$F2FS_INJECT_PROG" inject.f2fs
-> +_require_xfs_io_command "fpunch"
-> +_require_kernel_config CONFIG_F2FS_CHECK_FS
+> static struct mempolicy *__kvm_gmem_get_policy(struct gmem_inode *gi,
+> 					       pgoff_t index)
+> {
+> 	struct mempolicy *mpol;
+> 
+> 	mpol = mpol_shared_policy_lookup(&gi->policy, index);
+> 	return mpol ? mpol : get_task_policy(current);
+> }
+> 
+> static struct mempolicy *kvm_gmem_get_policy(struct vm_area_struct *vma,
+> 					     unsigned long addr, pgoff_t *pgoff)
+> {
+> 	*pgoff = vma->vm_pgoff + ((addr - vma->vm_start) >> PAGE_SHIFT);
+> 
+> 	return __kvm_gmem_get_policy(GMEM_I(file_inode(vma->vm_file)), *pgoff);
 
-Looks like the CONFIG_F2FS_CHECK_FS is a necessary condition to reproduce
-that bug, right? I'm wondering is there a better way to check if CONFIG_F2FS_CHECK_FS
-is enabled, likes reading someone file in /sys or what ever else? Checking kernel config
-isn't always a recommended way, except no better idea :)
+Argh!!!!!  This breaks the selftest because do_get_mempolicy() very specifically
+falls back to the default_policy, NOT to the current task's policy.  That is
+*exactly* the type of subtle detail that needs to be commented, because there's
+no way some random KVM developer is going to know that returning NULL here is
+important with respect to get_mempolicy() ABI.
 
-> +
-> +# remove all mkfs options to avoid layout change of on-disk inode
-> +export MKFS_OPTIONS=""
-> +
-> +foo_path=$SCRATCH_MNT/foo
-> +bar_path=$SCRATCH_MNT/bar
-> +
-> +_scratch_mkfs >> $seqres.full
-> +_scratch_mount
-> +
-> +touch $foo_path
-> +touch $bar_path
-> +$XFS_IO_PROG $foo_path -c "pwrite 0 8M" >> $seqres.full
-> +sync
-> +foo_ino=`stat -c '%i' $foo_path`
-> +bar_ino=`stat -c '%i' $bar_path`
-> +_scratch_unmount
-> +
-> +# inject foo inode to replace i_nid[0] w/ to bar ino
-> +$F2FS_INJECT_PROG --node --mb i_nid --nid $foo_ino --idx 0 --val $bar_ino $SCRATCH_DEV >> $seqres.full || _fail "failed to inject"
-> +
-> +_scratch_mount
-> +# expect to trigger panic
-> +$XFS_IO_PROG $foo_path -c "fpunch 6984k 4k"
-> +_scratch_unmount
-> +
-> +status=0
-> +exit
-> diff --git a/tests/f2fs/022.out b/tests/f2fs/022.out
-> new file mode 100644
-> index 00000000..5307e3d7
-> --- /dev/null
-> +++ b/tests/f2fs/022.out
-> @@ -0,0 +1,2 @@
-> +QA output created by 022
-> +fallocate: Structure needs cleaning
-> -- 
-> 2.49.0
-> 
+On a happier note, I'm very glad you wrote a testcase :-)
+
+I've got this as fixup-to-the-fixup:
+
+diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
+index e796cc552a96..61130a52553f 100644
+--- a/virt/kvm/guest_memfd.c
++++ b/virt/kvm/guest_memfd.c
+@@ -114,8 +114,8 @@ static int kvm_gmem_prepare_folio(struct kvm *kvm, struct kvm_memory_slot *slot,
+        return r;
+ }
+ 
+-static struct mempolicy *__kvm_gmem_get_policy(struct gmem_inode *gi,
+-                                              pgoff_t index)
++static struct mempolicy *kvm_gmem_get_folio_policy(struct gmem_inode *gi,
++                                                  pgoff_t index)
+ {
+ #ifdef CONFIG_NUMA
+        struct mempolicy *mpol;
+@@ -151,7 +151,7 @@ static struct folio *kvm_gmem_get_folio(struct inode *inode, pgoff_t index)
+        if (!IS_ERR(folio))
+                return folio;
+ 
+-       policy = __kvm_gmem_get_policy(GMEM_I(inode), index);
++       policy = kvm_gmem_get_folio_policy(GMEM_I(inode), index);
+        folio = __filemap_get_folio_mpol(inode->i_mapping, index,
+                                         FGP_LOCK | FGP_ACCESSED | FGP_CREAT,
+                                         mapping_gfp_mask(inode->i_mapping), policy);
+@@ -431,9 +431,18 @@ static int kvm_gmem_set_policy(struct vm_area_struct *vma, struct mempolicy *mpo
+ static struct mempolicy *kvm_gmem_get_policy(struct vm_area_struct *vma,
+                                              unsigned long addr, pgoff_t *pgoff)
+ {
++       struct inode *inode = file_inode(vma->vm_file);
++
+         *pgoff = vma->vm_pgoff + ((addr - vma->vm_start) >> PAGE_SHIFT);
+ 
+-        return __kvm_gmem_get_policy(GMEM_I(file_inode(vma->vm_file)), *pgoff);
++       /*
++        * Note!  Directly return whatever the lookup returns, do NOT return
++        * the current task's policy as is done when looking up the policy for
++        * a specific folio.  Kernel ABI for get_mempolicy() is to return
++        * MPOL_DEFAULT when there is no defined policy, not whatever the
++        * default policy resolves to.
++        */
++        return mpol_shared_policy_lookup(&GMEM_I(inode)->policy, *pgoff);
+ }
+ #endif /* CONFIG_NUMA */
+ 
 
 
 
