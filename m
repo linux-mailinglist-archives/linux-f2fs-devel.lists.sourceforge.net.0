@@ -2,98 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DB70BA6D0C
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Sep 2025 11:21:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBE4FBA6D9F
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Sep 2025 11:30:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=5tpDUCEReMDJS5jCqLwfaSLIPdkVNs3yftRh7KbwJzA=; b=kJYxC6Vd0lk+XxwyCUKyOLsxDr
-	4gKzTAbpqhuoBMmrO+Je5Xu4TzrlfpYOcZ591fYbHxrmhYz28z2KAZBThO86fUOTDI+6GHzFpOInH
-	Um3RfnxhYEK3vnAZgS3OoYauuLo5ApXsByS/FI36RWnEGLXtFMoQ1aAiiNNXXInXxG1c=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=5QM4QDJL8Cw5zZcJHpVpHqhhaytT9u0ZL03bNS471qY=; b=T6w8roJ1uRigAWmQYYar+PFsk7
+	B0CQzfns482Md8NFfsXNR/PY72vs7Xm+Xsq152JNv4rA9vbntomA25tapSdhgYIlwmVBCwJz/TmC7
+	SrYs0S+oW69ALNfBpbDX9x/qEtimrOCt1LUKUHHv+7s9B9jwMhWKwaVztW0FL1mVKTa4=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v2naj-0001jF-P1;
-	Sun, 28 Sep 2025 09:21:13 +0000
+	id 1v2nk8-00024i-Gz;
+	Sun, 28 Sep 2025 09:30:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v2nai-0001j9-FX
+ (envelope-from <chao@kernel.org>) id 1v2nju-00024R-IT
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 28 Sep 2025 09:21:12 +0000
+ Sun, 28 Sep 2025 09:30:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=auCqVl/CmKDG3UYDmaPFONYkfxZQmzNFH6SYuQlvXNI=; b=ZS41U/iMd5NpWoJDxkDvI5ZFmJ
- QeptJjXVC3ctH23h2dBXET0oo8e/LiXqoDyyinyWi8DIHiZ0Iw2t7rWtw95bZgvBi5L6ud+4I4cmf
- 8IrwXbOHseSyO6AO5Qp5MpbNvuv+r0XDHTCIUY3fHmIZhO0bNZ8sI8fifuDhWGbb0ME4=;
+ bh=Jm4lpcGHH6QufM46bZuQqCTq5oZuUOQh3Q+OzEHATwM=; b=bZoh3e/L8XxvJAaQl8p0WqizrV
+ YB4gaQX/P/SgPz6hWC2MVy3bY7deSKXtB+shgGwAyoG8qLPnOXNC5xq3l3N/eSKPkdXfqmPBN5qpJ
+ 5wrXJwMnHQXoff23Q6Vo7LbaI8/+/ZUnBEMxiTibhuSin1CuQq28nHgn+y6x8rnyQBhI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=auCqVl/CmKDG3UYDmaPFONYkfxZQmzNFH6SYuQlvXNI=; b=d
- LhQk5ZE9naEEeVlzyCvq1oLu53OpK/oO9O1y+0S26fX892e0YbZOHAyawVsWr5Nrqkgkqtf6Rny2G
- jeCK/5AoEooqgkzbIEylqJOGAJeai+SmHR/WoRIN+3ZIx3kHGs+3sZP5GbesnjjEpp8zI3TNKOLfO
- 6JVLElWE7VX8Yfe8=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Jm4lpcGHH6QufM46bZuQqCTq5oZuUOQh3Q+OzEHATwM=; b=agriZuxtSIYgpbOpj7UXe34ZXs
+ k8lRmjEgAlZ2G5ff7vdk7PDbf+gxnZvSv2lQ8+vFiPYcBpZDY+8JGiqCNt20Zz3OoK7GdVhieJriK
+ /OdX1CIYnTcYDZOJ3fUr1beOBmiSx1rCCP7sEIv7kxusLgJsqmQhGFnRxoSwkGO/3Ojg=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v2naf-000626-Th for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 28 Sep 2025 09:21:12 +0000
+ id 1v2nju-0006Nx-5c for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 28 Sep 2025 09:30:42 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 22BB06024F
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 28 Sep 2025 09:20:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9EA1C4CEF0;
- Sun, 28 Sep 2025 09:20:57 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 72D586212A;
+ Sun, 28 Sep 2025 09:30:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E74DC116B1;
+ Sun, 28 Sep 2025 09:30:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759051258;
- bh=HGSCBqF0nvehYR+QitbLZiNNu/TWckHchcmeVXOC/Nc=;
- h=From:To:Cc:Subject:Date:From;
- b=VaxlDwFTKd+5LjXs2erIuWRg6NXFgMX4ZNe8FXYTjGgpFIH/D3iSzGg3tQDYCuFgL
- pXijOmFW9YAkfAXXDhSbaviAgxnhVbbq4YkCBe/IXkaXyziIIcpLFgLzT7i+ms6XuB
- /7QeihPc8qd4QVb8J9RsE5cTMAOY9Iu3mqtdNWVaGiIvi/IcAFY8HMszwlzAwUhrza
- 8dbZ6q3sb55+nJ8mGcmMST6DssfwK70eF2bn9IsoZjszOZEA6NbTMFx4iKveuo5BGL
- RaUtkAcKLsPMm3kS3P62M1duPnSJpo2Vpr/y02gbulA6zPA04YcapHqujdz+E0Mw3L
- fysAUVdZC3HHA==
-To: jaegeuk@kernel.org
-Date: Sun, 28 Sep 2025 17:20:50 +0800
-Message-ID: <20250928092050.287779-1-chao@kernel.org>
-X-Mailer: git-send-email 2.51.0.536.g15c5d4f767-goog
+ s=k20201202; t=1759051836;
+ bh=Azl5SLDOTEZ7t3KEBMBXasVPE/4KvOxX1+sg5HSVNMU=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=vC3eo0/pn7J9kdVw/Dcs59pXs6c/8W+0fuS1sKaFu4TFTpX/OW5zI7x4gZ9B3SSIm
+ ib4e8hYM3KWl8ow+0K/ZzB1wOF/P61RdvEMSbIN1PjwBEGNAHXPmTHLpV71hJvzrF0
+ wxcn1BvZtpBVUVv15/4fSRcA7DCoYmQTF8ORzKQs2JXnm9BzKCAmgj7qWbW0GO1NTK
+ 2yi/p0dB1NdMYt8/EsbGZeGckcw06RPwefYfPjXsxa8EwqmJCv9y5HMd3kt4uQOkGg
+ ZtgI68hnXDTEiox3K29RYxDWv4nx+hfIwn5eUYWFtgppwEWScuvH9Hms7GXJOdIeUD
+ USjgVuywpFWZw==
+Message-ID: <1a931cfa-0846-488b-ab1a-f3dee33e1d21@kernel.org>
+Date: Sun, 28 Sep 2025 17:30:34 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Akiyoshi Kurita <weibu@redadmin.org>, jaegeuk@kernel.org
+References: <20250926180134.35329-1-weibu@redadmin.org>
+Content-Language: en-US
+In-Reply-To: <20250926180134.35329-1-weibu@redadmin.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: If there are too many background IOs during
- f2fs_enable_checkpoint(), 
- sync_inodes_sb() may be blocked for long time due to it will loop to write
- dirty datas which are generated by in parallel write() [...] 
+ Content preview:  On 9/27/2025 2:01 AM,
+ Akiyoshi Kurita wrote: > Fix two spelling
+ mistakes in the f2fs sysfs ABI documentation: > - deivces -> devices > -
+ substracting -> subtracting > > Signed-off-by: Akiyoshi Kurita [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v2naf-000626-Th
-Subject: [f2fs-dev] [PATCH RFC] f2fs: freeze fs operations during
- f2fs_enable_checkpoint()
+X-Headers-End: 1v2nju-0006Nx-5c
+Subject: Re: [f2fs-dev] [PATCH] Documentation: f2fs: Fix typos in
+ sysfs-fs-f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,143 +110,20 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If there are too many background IOs during f2fs_enable_checkpoint(),
-sync_inodes_sb() may be blocked for long time due to it will loop to
-write dirty datas which are generated by in parallel write()
-continuously.
+On 9/27/2025 2:01 AM, Akiyoshi Kurita wrote:
+> Fix two spelling mistakes in the f2fs sysfs ABI documentation:
+> - deivces -> devices
+> - substracting -> subtracting
+> 
+> Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
 
-Let's change as below to resolve this issue:
-- freeze fs operations to avoid race condition
-- decrease DEF_ENABLE_INTERVAL from 16 to 5
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-In addition, dump more logs during f2fs_enable_checkpoint().
-
-Testcase:
-1. fill data to dirty filesystem
-2. mount -o remount,checkpoint=disable:10% /data
-3. fio --rw=randwrite  --bs=4kb  --size=1GB  --numjobs=10  \
---iodepth=64  --ioengine=psync  --time_based  --runtime=600 &
-4. mount -o remount,checkpoint=enable /data
-
-Before:
-F2FS-fs (dm-51): f2fs_enable_checkpoint() finishes, writeback:7232, sync:39793, cp:457
-
-After:
-F2FS-fs (dm-51): f2fs_enable_checkpoint() finishes, writeback:5945, lock:28, sync:9289, cp:0, 434, 0
-
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/f2fs.h  |  2 +-
- fs/f2fs/super.c | 49 +++++++++++++++++++++++++++++++++++++++++--------
- 2 files changed, 42 insertions(+), 9 deletions(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index c4a197c4d804..060a4603a779 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -281,7 +281,7 @@ enum {
- #define DEF_CP_INTERVAL			60	/* 60 secs */
- #define DEF_IDLE_INTERVAL		5	/* 5 secs */
- #define DEF_DISABLE_INTERVAL		5	/* 5 secs */
--#define DEF_ENABLE_INTERVAL		16	/* 16 secs */
-+#define DEF_ENABLE_INTERVAL		5	/* 5 secs */
- #define DEF_DISABLE_QUICK_INTERVAL	1	/* 1 secs */
- #define DEF_UMOUNT_DISCARD_TIMEOUT	5	/* 5 secs */
- 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 1e0678e37a30..dfdd3c3795a2 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -2626,12 +2626,25 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
- 	return err;
- }
- 
-+static void f2fs_freeze_operations(struct super_block *sb)
-+{
-+	percpu_down_write(sb->s_writers.rw_sem + SB_FREEZE_WRITE - 1);
-+	percpu_down_write(sb->s_writers.rw_sem + SB_FREEZE_PAGEFAULT - 1);
-+}
-+
-+static void f2fs_unfreeze_operations(struct super_block *sb)
-+{
-+	percpu_up_write(sb->s_writers.rw_sem + SB_FREEZE_PAGEFAULT - 1);
-+	percpu_up_write(sb->s_writers.rw_sem + SB_FREEZE_WRITE - 1);
-+}
-+
- static void f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
- {
- 	unsigned int nr_pages = get_pages(sbi, F2FS_DIRTY_DATA) / 16;
--	long long start, writeback, end;
-+	long long start, writeback, lock, sync_inode, end;
- 
--	f2fs_info(sbi, "f2fs_enable_checkpoint() starts, meta: %lld, node: %lld, data: %lld",
-+	f2fs_info(sbi, "%s start, meta: %lld, node: %lld, data: %lld",
-+					__func__,
- 					get_pages(sbi, F2FS_DIRTY_META),
- 					get_pages(sbi, F2FS_DIRTY_NODES),
- 					get_pages(sbi, F2FS_DIRTY_DATA));
-@@ -2650,11 +2663,18 @@ static void f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
- 	}
- 	writeback = ktime_get();
- 
--	sync_inodes_sb(sbi->sb);
-+	f2fs_freeze_operations(sbi->sb);
-+
-+	lock = ktime_get();
-+
-+	if (get_pages(sbi, F2FS_DIRTY_DATA))
-+		sync_inodes_sb(sbi->sb);
- 
- 	if (unlikely(get_pages(sbi, F2FS_DIRTY_DATA)))
--		f2fs_warn(sbi, "checkpoint=enable has some unwritten data: %lld",
--					get_pages(sbi, F2FS_DIRTY_DATA));
-+		f2fs_warn(sbi, "%s: has some unwritten data: %lld",
-+			__func__, get_pages(sbi, F2FS_DIRTY_DATA));
-+
-+	sync_inode = ktime_get();
- 
- 	f2fs_down_write(&sbi->gc_lock);
- 	f2fs_dirty_to_prefree(sbi);
-@@ -2663,16 +2683,29 @@ static void f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
- 	set_sbi_flag(sbi, SBI_IS_DIRTY);
- 	f2fs_up_write(&sbi->gc_lock);
- 
-+	f2fs_info(sbi, "%s sync_fs, meta: %lld, imeta: %lld, node: %lld, dents: %lld, qdata: %lld",
-+					__func__,
-+					get_pages(sbi, F2FS_DIRTY_META),
-+					get_pages(sbi, F2FS_DIRTY_IMETA),
-+					get_pages(sbi, F2FS_DIRTY_NODES),
-+					get_pages(sbi, F2FS_DIRTY_DENTS),
-+					get_pages(sbi, F2FS_DIRTY_QDATA));
- 	f2fs_sync_fs(sbi->sb, 1);
- 
- 	/* Let's ensure there's no pending checkpoint anymore */
- 	f2fs_flush_ckpt_thread(sbi);
- 
-+	f2fs_unfreeze_operations(sbi->sb);
-+
- 	end = ktime_get();
- 
--	f2fs_info(sbi, "f2fs_enable_checkpoint() finishes, writeback:%llu, sync:%llu",
--					ktime_ms_delta(writeback, start),
--					ktime_ms_delta(end, writeback));
-+	f2fs_info(sbi, "%s end, writeback:%llu, "
-+				"lock:%llu, sync_inode:%llu, sync_fs:%llu",
-+				__func__,
-+				ktime_ms_delta(writeback, start),
-+				ktime_ms_delta(lock, writeback),
-+				ktime_ms_delta(sync_inode, lock),
-+				ktime_ms_delta(end, sync_inode));
- }
- 
- static int __f2fs_remount(struct fs_context *fc, struct super_block *sb)
--- 
-2.49.0
-
+Thanks,
 
 
 _______________________________________________
