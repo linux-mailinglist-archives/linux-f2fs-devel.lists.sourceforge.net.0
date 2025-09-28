@@ -2,118 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64FF2BA7141
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Sep 2025 15:51:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CEF4BA7150
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Sep 2025 15:55:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=3F80f+sH/fUXC8lu0fv65woPDcFeQ0fBQexJAOPk5rc=; b=OT0i/lRju7P/ONKhf04eq2nVJj
-	iAsMkW8aaUZVAtmsZd4TQL37kHPqwo/Jan1OyF9pGQ23eHaohBB/H3dmhnRD+DxsDA/qxlYIg44R3
-	SCjAYaRcchVKpSwL4H5buZWfoBuVxxKPj+bBQEzod9rRBXk77WJrGLnUlEXHXIJnwKEM=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=3FGqWmhaegY5hK+rgACIbhPuzV1FcTPyr+wy7te1kPI=; b=Ch/A6GQsjji0yFcuD1MFa/sKhd
+	pgm+SsCc30xltcna4Xc9YVUfCsxqzFTp/Lz/D4nB34cqNbrtSHjWXUPN5wANSDJI+fkNpHHlSTnEd
+	/MTnMDR1DxR2Gd9l70pERhBpwQXNa84k/xFwO6JB/2KAIFnksKlOK71IojeVAOLwEJf8=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v2rob-0007Z2-GM;
-	Sun, 28 Sep 2025 13:51:49 +0000
+	id 1v2rsM-0007ZE-Uw;
+	Sun, 28 Sep 2025 13:55:42 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1v2roZ-0007Yt-Ru
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1v2rsL-0007Z2-1V
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 28 Sep 2025 13:51:47 +0000
+ Sun, 28 Sep 2025 13:55:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=j9JpqdLLT9z1M051j1qXRqMQ5SMaqtTYMmpk/UjNV5Q=; b=GH59sFtiBvDRLtyeeZY3lxi42R
- jl46wni/7hJ14dlN/lfepUi3SEFKpzyMvoRpdxVh+UPJyeuyamifQYsFWZwyuD0attQwelgFnktWo
- cU3mqNWKU7fgakZSpUppxn5h6AaMiSt1eGyIRcTi4dF4Tda+A5nu1LztS+WBXgbzRbuw=;
+ bh=Bblf351qLtwjEXogx9V0dlZLo74JLMC5KOh2jk4Sj8Y=; b=iXM3th2hgkfX9DBET8Pt3fPiOk
+ faRbvzvSGnym4i3zj/QbhPOYqwpFYIJQ9muL0neItYUhix8fxNlE0E0zMTdd8i8IdyKfzTeGn6ILX
+ vUJ9bK/Q7ZwVHCMuvN2X+6RWfzGwGm+jyCr8YDhQ/vlqQmCRzftxpj2wggLo+jMiQ4wY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=j9JpqdLLT9z1M051j1qXRqMQ5SMaqtTYMmpk/UjNV5Q=; b=OWUCZb6PjKlZQ+Oys5txIeAWhE
- GWrELuPJ7j+MsuI4B7YgKOcX8SMNP94+oi9Z3iwokLMM90GT8TNslo8CIDKwcBPlsM5yPMK1NMatX
- TSQjv0BsPFcQjN9JCrlR4fiSH1JdiOCZDvuRksRqb76E07RrT6HihAtvW/OA7vA7+MC0=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ bh=Bblf351qLtwjEXogx9V0dlZLo74JLMC5KOh2jk4Sj8Y=; b=CPY98dhIrPzmb/R8G/gdX9itDf
+ av8WGy1qzKAHkpdmftnuJ5DlOYZH/Kx6HIWMFVOg/Y8wqP6ETCN9UqxEvTM/CT4shr4Uue5v9DKRm
+ j39t1yOqAoO7orT1AGf7LTQEfyaFT8l5tcDT77XOYJS6pavsvnqj7B58JPpjW4OoR+gE=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v2roZ-0005QB-9i for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 28 Sep 2025 13:51:47 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1759067496;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=j9JpqdLLT9z1M051j1qXRqMQ5SMaqtTYMmpk/UjNV5Q=;
- b=eY2eB71TfvvHleCBYqcDsNRcAkEeUJlscC4V9RJ+HgKllVuNE5YAp8nVpMX8q/n35rfgWj
- pdRZi4PxemZmZ3aOZUhMX4zXHj0wtKGyFC1Lzd0zt/aJ6pruTlij8ZfEnqVbuTIdk37f5V
- ftLSYxPhhD503saOvpkYoL6fOd2gz+w=
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
- [209.85.215.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-588-rNwDF1f3PguerjAfY-XHPw-1; Sun, 28 Sep 2025 09:51:35 -0400
-X-MC-Unique: rNwDF1f3PguerjAfY-XHPw-1
-X-Mimecast-MFC-AGG-ID: rNwDF1f3PguerjAfY-XHPw_1759067494
-Received: by mail-pg1-f199.google.com with SMTP id
- 41be03b00d2f7-b4f86568434so2722096a12.2
+ id 1v2rsK-0005ZT-JN for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 28 Sep 2025 13:55:40 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 3AFF6437FB
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 28 Sep 2025 06:51:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759067494; x=1759672294;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=j9JpqdLLT9z1M051j1qXRqMQ5SMaqtTYMmpk/UjNV5Q=;
- b=HmZKgyioEW1QwQbUfeE6PdAWEWnGpt7X/YVAUyKqpcASd5VKGLnBpEtCCG/V+F7D6E
- GVM5Lv0kLIfdy79wjM9K1qc+eKhBkCWnfKzvzYPT0NQIWen5a1Ojv1ZaKGLsI9zwNeuk
- xqTgHYZtyfVlanWAejf1u5h2+kem7yMXxKFNnqCKsc2kAgKufJxugPrF3K8h0NqvXZ9F
- o03Eb5NtnKxwxFxdw6VOlQ52a2jO9BpLwKEL57xv6kPJUreyx86/13/IvFac81UQ0CDO
- KyA8Ganv47oAiq2+0AR2iqO9uw82hFsSEXATFNdWkNa1/7LN/AbvHtpiTHJWDEAjJG9m
- VOaQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWCLqTs/w/o6YhCzYISRMFy+IxGYJBUv17fmsnQoFPWJifUf5Mv7olq346xJKi1VsbvqLQGPSRHxMxhAARiy5wf@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yzfj40QXTNYRxUfo59fLTANBQmLa2VgSnpfjeeLfF6QJoxf461R
- FPfor3R/kU220LzRfFV8ZF1UhutwhJjunOpo2qL3Rc785NDPrPxxjegE7zUbPXSPOFo8xldEDQ8
- TkyU0UyCt/zsN36c4gQ4XuDuAN/9kWsBVm3Y84i+FITmRC8wEKermSIqY9ObOzNA9fO0zZ/D5Ze
- KqpYQ=
-X-Gm-Gg: ASbGncsnDX75cVTRStmJgJkgV3u9MXR8Iq5Tv8u4gMcizxmnLSvxnzHSKgYOmOKEra4
- dSxBFReOGbTVHsSFu0b3F0BQq7tzsFiFFzCqfdqnxrP+BocbXKiQTrk2BrG7vZHrewHvEtaKiOk
- R0FaEWGF8n/tyMrhf3HWEWptypuijhkAoyEy6CRPs68ipLA9z8nmV+H+g7eZ+k0Ngy6DpjKB26M
- aVi3UbVB3/tnNYXbk5SQwplnMbH5iivPW7Oq5A59/7+kVrNWFetjIoAPFQaJpzc3U/qX4t21PQq
- MZX+WKQedd2f0fZhjy9aW+tDJ6ElXDO1WzpVkrPx1nRIicMicg90hNFGS9B9N0FsS63z04nVoLN
- 4A4Th
-X-Received: by 2002:a05:6a21:e098:b0:24d:38c:26bd with SMTP id
- adf61e73a8af0-2e7d1ff0a57mr18099760637.43.1759067493889; 
- Sun, 28 Sep 2025 06:51:33 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGg04/G4NfqhTpCpCPdtRAQV4uvWVXc/77oQZV+4Ld5cvDuBuQgZe2sLsXaxO5UGEano05WVA==
-X-Received: by 2002:a05:6a21:e098:b0:24d:38c:26bd with SMTP id
- adf61e73a8af0-2e7d1ff0a57mr18099734637.43.1759067493381; 
- Sun, 28 Sep 2025 06:51:33 -0700 (PDT)
-Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([209.132.188.88])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-78102c279f8sm8916171b3a.98.2025.09.28.06.51.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Sep 2025 06:51:33 -0700 (PDT)
-Date: Sun, 28 Sep 2025 21:51:28 +0800
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20250928135128.s57p4hj6y223gvf7@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-References: <20250928083442.7955-1-chao@kernel.org>
- <20250928083442.7955-2-chao@kernel.org>
+ Sun, 28 Sep 2025 13:55:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 1935CC4CEF0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 28 Sep 2025 13:55:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1759067730;
+ bh=Bblf351qLtwjEXogx9V0dlZLo74JLMC5KOh2jk4Sj8Y=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=GTdUFdB4/BeZXAI5e1uLJJOCgRQ1u+Iegfo7uID0FbKimgLHvzrxiv8/hLyQfCow7
+ Yner54JyD9UgB7ZK6cUl6FgHDCt4VJKxrPcEVneNLpyYrpp2Tuj0F0rhcUit3yLfmZ
+ 7lyrwYhUP5dQJcVx3zfQlcbitUZt+QEJhm3J70a2af8A0Ap2KE/+d7DtvApaHK6mS2
+ LMzWGltHWkrraqODBTN4C7DJ8cjqNk0apPnvK+Hf6efa9RDLf44hJF6nP1yXh015TE
+ VYZ35Sjl1x7fH3iFhqi3zF2dng8uX7fhjoyEbyPiKx9rnO6Vgwubba3FtIN4AoIH9f
+ xWPDQzpI0G0hg==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 10A93C3279F; Sun, 28 Sep 2025 13:55:30 +0000 (UTC)
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Sun, 28 Sep 2025 13:55:29 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: JY.Ho@mediatek.com
+X-Bugzilla-Status: ASSIGNED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P3
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-220575-202145-HlRCkpgPLg@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-220575-202145@https.bugzilla.kernel.org/>
+References: <bug-220575-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-In-Reply-To: <20250928083442.7955-2-chao@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: cipCfPythIEZRp6W7OlgIOm7R0TsQUjllPMyhn_PD9g_1759067494
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -121,9 +97,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sun, Sep 28, 2025 at 04:34:42PM +0800, Chao Yu wrote: >
- This is a regression test: > 1. create foo & bar > 2. write 8M data to foo
- > 3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar > 4. [...] 
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=220575 ---
+ Comment
+ #13 from JY (JY.Ho@mediatek.com) --- Good news! Thank you :) -- You may reply
+ to this email to add a comment. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -134,13 +111,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [170.10.133.124 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v2roZ-0005QB-9i
-Subject: Re: [f2fs-dev] [PATCH v2 2/2] f2fs/022: do sanity check on footer
- of non inode dnode
+X-Headers-End: 1v2rsK-0005ZT-JN
+Subject: [f2fs-dev] [Bug 220575] Unable to handle kernel NULL pointer
+ dereference at virtual address 0000000000000000
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -152,115 +126,23 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Zorro Lang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Zorro Lang <zlang@redhat.com>
-Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: bugzilla-daemon--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: bugzilla-daemon@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sun, Sep 28, 2025 at 04:34:42PM +0800, Chao Yu wrote:
-> This is a regression test:
-> 1. create foo & bar
-> 2. write 8M data to foo
-> 3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar
-> 4. fpunch in foo w/ specified range
-> 
-> If we haven't applied kernel patch ("f2fs: fix to do sanity check on
-> node footer for non inode dnode"), f2fs may missed to do sanity check
-> on corrupted dnode, result in panic or deadloop in step 4).
-> 
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
-> v2:
-> - remove "_require_kernel_config CONFIG_F2FS_CHECK_FS"
-> - update comments a bit
+https://bugzilla.kernel.org/show_bug.cgi?id=220575
 
-This version looks good to me,
+--- Comment #13 from JY (JY.Ho@mediatek.com) ---
+Good news! Thank you :)
 
-Reviewed-by: Zorro Lang <zlang@redhat.com>
+-- 
+You may reply to this email to add a comment.
 
->  tests/f2fs/022     | 54 ++++++++++++++++++++++++++++++++++++++++++++++
->  tests/f2fs/022.out |  2 ++
->  2 files changed, 56 insertions(+)
->  create mode 100755 tests/f2fs/022
->  create mode 100644 tests/f2fs/022.out
-> 
-> diff --git a/tests/f2fs/022 b/tests/f2fs/022
-> new file mode 100755
-> index 00000000..ed3b4f2b
-> --- /dev/null
-> +++ b/tests/f2fs/022
-> @@ -0,0 +1,54 @@
-> +#! /bin/bash
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
-> +#
-> +# FS QA Test No. f2fs/022
-> +#
-> +# This is a regression test:
-> +# 1. create foo & bar
-> +# 2. write 8M data to foo
-> +# 3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar
-> +# 4. fpunch in foo w/ specified range
-> +#
-> +. ./common/preamble
-> +_begin_fstest auto quick rw
-> +
-> +. ./common/attr
-> +
-> +_fixed_by_kernel_commit xxxxxxxxxxxx \
-> +	"f2fs: fix to do sanity check on node footer for non inode dnode"
-> +
-> +_require_scratch_nocheck
-> +_require_command "$F2FS_INJECT_PROG" inject.f2fs
-> +
-> +# remove all mkfs options to avoid layout change of on-disk inode
-> +export MKFS_OPTIONS=""
-> +
-> +foo_path=$SCARTCH_MNT/foo
-> +bar_path=$SCARTCH_MNT/bar
-> +
-> +_scratch_mkfs >> $seqres.full
-> +_scratch_mount
-> +
-> +touch $foo_path
-> +touch $bar_path
-> +$XFS_IO_PROG $foo_path -c "pwrite 0 8M"
-> +sync
-> +foo_ino=`stat -c '%i' $foo_path`
-> +bar_ino=`stat -c '%i' $bar_path`
-> +_scratch_unmount
-> +
-> +# inject foo inode to replace i_nid[0] w/ to bar ino
-> +$F2FS_INJECT_PROG --node --mb i_nid --nid $foo_ino --idx 0 --val $bar_ino $SCRATCH_DEV >> $seqres.full || _fail "failed to inject"
-> +
-> +_scratch_mount
-> +
-> +# if CONFIG_F2FS_CHECK_FS is enabled, it will trigger a kernel panic,
-> +# otherwise, it will enter a deadloop.
-> +$XFS_IO_PROG $foo_path -c "fpunch 6984k 4k"
-> +_scratch_unmount
-> +
-> +echo "Silence is golden"
-> +
-> +status=0
-> +exit
-> diff --git a/tests/f2fs/022.out b/tests/f2fs/022.out
-> new file mode 100644
-> index 00000000..394c6a7c
-> --- /dev/null
-> +++ b/tests/f2fs/022.out
-> @@ -0,0 +1,2 @@
-> +QA output created by 022
-> +Silence is golden
-> -- 
-> 2.40.1
-> 
-
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
