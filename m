@@ -2,94 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CEF4BA7150
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Sep 2025 15:55:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EC3CBA7739
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 28 Sep 2025 21:36:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=3FGqWmhaegY5hK+rgACIbhPuzV1FcTPyr+wy7te1kPI=; b=Ch/A6GQsjji0yFcuD1MFa/sKhd
-	pgm+SsCc30xltcna4Xc9YVUfCsxqzFTp/Lz/D4nB34cqNbrtSHjWXUPN5wANSDJI+fkNpHHlSTnEd
-	/MTnMDR1DxR2Gd9l70pERhBpwQXNa84k/xFwO6JB/2KAIFnksKlOK71IojeVAOLwEJf8=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:To:MIME-Version:Date:Message-ID:Sender:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=pdWUIt19GlHAchWWZp73NsrlxTv3fBIIhUYooCOATKc=; b=EjSbYYoyYLOBw7X1HdKiRdpIkB
+	UC5mVuMm1xS8ZMmd/tfXbMtifWIRz2a1+YMTiq08iumoYzoWZ2GU+FiUq7Y5fQ37FJ96ILFcSepWT
+	SD1sUZ/w5L5sr3xX9LNe6IpFcL90OchoanwwRb/drw04Fx8tTyzpApWaHsvDIpvWsaew=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v2rsM-0007ZE-Uw;
-	Sun, 28 Sep 2025 13:55:42 +0000
+	id 1v2xCA-0002eZ-02;
+	Sun, 28 Sep 2025 19:36:30 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1v2rsL-0007Z2-1V
+ (envelope-from <user3mila@disroot.org>) id 1v2xBo-0002dx-M2
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 28 Sep 2025 13:55:41 +0000
+ Sun, 28 Sep 2025 19:36:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Subject:From
+ :To:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Bblf351qLtwjEXogx9V0dlZLo74JLMC5KOh2jk4Sj8Y=; b=iXM3th2hgkfX9DBET8Pt3fPiOk
- faRbvzvSGnym4i3zj/QbhPOYqwpFYIJQ9muL0neItYUhix8fxNlE0E0zMTdd8i8IdyKfzTeGn6ILX
- vUJ9bK/Q7ZwVHCMuvN2X+6RWfzGwGm+jyCr8YDhQ/vlqQmCRzftxpj2wggLo+jMiQ4wY=;
+ bh=EME5MpB5QqD3r0H4NUzUaZNe8BHDulavmT1XQMA2kWg=; b=a8JO3oGNa6oU6a4URWyideMwvq
+ 56qW3XMrzF1lryKbO77YF5P0C86vpnLTzedeTkbAVXIWu5IPGNopTLQItr1JuPVDMRiC1xsJD5Siq
+ t6iIJMCqJ9eMc1/8k2BOBVVgmLuT4BMaTpdXFPnnG7i+yOQEzheii1znIxZo8eDauE4w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Bblf351qLtwjEXogx9V0dlZLo74JLMC5KOh2jk4Sj8Y=; b=CPY98dhIrPzmb/R8G/gdX9itDf
- av8WGy1qzKAHkpdmftnuJ5DlOYZH/Kx6HIWMFVOg/Y8wqP6ETCN9UqxEvTM/CT4shr4Uue5v9DKRm
- j39t1yOqAoO7orT1AGf7LTQEfyaFT8l5tcDT77XOYJS6pavsvnqj7B58JPpjW4OoR+gE=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Transfer-Encoding:Content-Type:Subject:From:To:MIME-Version:Date:
+ Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=EME5MpB5QqD3r0H4NUzUaZNe8BHDulavmT1XQMA2kWg=; b=M
+ R6GUsiGiGt9bBONOO9jKVZfRNRui+PNIVjri6WNOKusdYiPRevTa7JcWeDSOgLyyVh1x08+3cT0he
+ 2VPx6L+87SAdVNtTiRZV2gQZSeEjSmftsPOVGWstEerexgd6johLRYVjb/S0Ef2bF4+zIYjPo+bMF
+ 4Ib3SWkJ8c7hdjwg=;
+Received: from layka.disroot.org ([178.21.23.139])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v2rsK-0005ZT-JN for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 28 Sep 2025 13:55:40 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 3AFF6437FB
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1v2xBn-00063U-DM for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 28 Sep 2025 19:36:08 +0000
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id B8875260CA
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 28 Sep 2025 13:55:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 1935CC4CEF0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 28 Sep 2025 13:55:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759067730;
- bh=Bblf351qLtwjEXogx9V0dlZLo74JLMC5KOh2jk4Sj8Y=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=GTdUFdB4/BeZXAI5e1uLJJOCgRQ1u+Iegfo7uID0FbKimgLHvzrxiv8/hLyQfCow7
- Yner54JyD9UgB7ZK6cUl6FgHDCt4VJKxrPcEVneNLpyYrpp2Tuj0F0rhcUit3yLfmZ
- 7lyrwYhUP5dQJcVx3zfQlcbitUZt+QEJhm3J70a2af8A0Ap2KE/+d7DtvApaHK6mS2
- LMzWGltHWkrraqODBTN4C7DJ8cjqNk0apPnvK+Hf6efa9RDLf44hJF6nP1yXh015TE
- VYZ35Sjl1x7fH3iFhqi3zF2dng8uX7fhjoyEbyPiKx9rnO6Vgwubba3FtIN4AoIH9f
- xWPDQzpI0G0hg==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 10A93C3279F; Sun, 28 Sep 2025 13:55:30 +0000 (UTC)
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Sun, 28 Sep 2025 13:55:29 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: JY.Ho@mediatek.com
-X-Bugzilla-Status: ASSIGNED
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P3
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-220575-202145-HlRCkpgPLg@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-220575-202145@https.bugzilla.kernel.org/>
-References: <bug-220575-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ Sun, 28 Sep 2025 21:36:00 +0200 (CEST)
+X-Virus-Scanned: SPAM Filter at disroot.org
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Qz87xf33tHO5 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 28 Sep 2025 21:35:59 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1759088159; bh=39xIQ9puduXS2vcM8mT//ydAik9VFTmYwOmfjTzv8h0=;
+ h=Date:To:From:Subject;
+ b=f5A9PnhWBRtihn0+GKvrg1fQzgToLWtFvgcjCkZX+pQKr7B3VztRGROrcZqR5N/zG
+ k9+pK2nzIl1mDSCyrBDMg9TQMxppo/HPalI22eEt4nZDf5TkWsTvo1plloVTrePVfH
+ YxO9mfIxAK7xJsdwVaYX5xRacSR3EOtfUlXHIzCA+FoV12XSKeAWA+sEklsEo4xQtA
+ AeHLOEzXoTdGyTrEKiBP6IQraAmiJmPckYJcJlRrvDBQP+FDnRAyUgK5VCIpjMVZgR
+ I0Dl/rODC8f0g4XvYy64Taccz5J0rCoUbRt8CFuJHJRi5oNnpCobPUyBinhRvLxtGa
+ JP5JMSQGxTb7g==
+Message-ID: <12530fac-afec-46f9-89cc-a51f1dda71b2@disroot.org>
+Date: Sun, 28 Sep 2025 21:35:59 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: f2fs <linux-f2fs-devel@lists.sourceforge.net>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -97,10 +79,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=220575 ---
- Comment
- #13 from JY (JY.Ho@mediatek.com) --- Good news! Thank you :) -- You may reply
- to this email to add a comment. 
+ Content preview:  Hello, I am experiencing this bug
+ https://gitlab.alpinelinux.org/alpine/aports/-/issues/17543.
+ I wanted to try the latest commit but it will fail to compile. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -111,10 +92,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v2rsK-0005ZT-JN
-Subject: [f2fs-dev] [Bug 220575] Unable to handle kernel NULL pointer
- dereference at virtual address 0000000000000000
+X-Headers-End: 1v2xBn-00063U-DM
+Subject: [f2fs-dev] fsck service "Error: In use by the system!"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,25 +105,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: bugzilla-daemon--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: bugzilla-daemon@kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+From: realroot via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: realroot <user3mila@disroot.org>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=220575
-
---- Comment #13 from JY (JY.Ho@mediatek.com) ---
-Good news! Thank you :)
-
--- 
-You may reply to this email to add a comment.
-
-You are receiving this mail because:
-You are watching the assignee of the bug.
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+SGVsbG8sCgoKSSBhbSBleHBlcmllbmNpbmcgdGhpcyBidWcgCmh0dHBzOi8vZ2l0bGFiLmFscGlu
+ZWxpbnV4Lm9yZy9hbHBpbmUvYXBvcnRzLy0vaXNzdWVzLzE3NTQzLgoKSSB3YW50ZWQgdG8gdHJ5
+IHRoZSBsYXRlc3QgY29tbWl0IGJ1dCBpdCB3aWxsIGZhaWwgdG8gY29tcGlsZS4KCkdjYzoKCm1h
+a2VbM106IEVudGVyaW5nIGRpcmVjdG9yeSAKJy8uLi4vZjJmcy10b29scy9zcmMvM2JkNDkxNDlk
+YWU3MjM3YjkzMWIwOWQ4N2QwMGIyYWVmOGY3YWY5My90b29scy9mMmZzX2lvJwogwqAgQ0PCoCDC
+oCDCoCDCoGYyZnNfaW8ubwpmMmZzX2lvLmM6IEluIGZ1bmN0aW9uICdkb19mYWxsb2NhdGUnOgpm
+MmZzX2lvLmM6NjEzOjMzOiBlcnJvcjogJ0ZBTExPQ19GTF9DT0xMQVBTRV9SQU5HRScgdW5kZWNs
+YXJlZCAoZmlyc3QgCnVzZSBpbiB0aGlzIGZ1bmN0aW9uKQogwqAgNjEzIHzCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoG1vZGUgfD0gRkFMTE9DX0ZMX0NPTExBUFNFX1JBTkdF
+OwogwqAgwqAgwqAgfMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+CmYyZnNfaW8uYzo2MTM6MzM6IG5vdGU6IGVh
+Y2ggdW5kZWNsYXJlZCBpZGVudGlmaWVyIGlzIHJlcG9ydGVkIG9ubHkgb25jZSAKZm9yIGVhY2gg
+ZnVuY3Rpb24gaXQgYXBwZWFycyBpbgpmMmZzX2lvLmM6NjE2OjMzOiBlcnJvcjogJ0ZBTExPQ19G
+TF9JTlNFUlRfUkFOR0UnIHVuZGVjbGFyZWQgKGZpcnN0IHVzZSAKaW4gdGhpcyBmdW5jdGlvbikK
+IMKgIDYxNiB8wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBtb2RlIHw9IEZB
+TExPQ19GTF9JTlNFUlRfUkFOR0U7CiDCoCDCoCDCoCB8wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBefn5+fn5+fn5+fn5+fn5+fn5+fn5+CmYyZnNfaW8u
+Yzo2MjI6MzM6IGVycm9yOiAnRkFMTE9DX0ZMX1pFUk9fUkFOR0UnIHVuZGVjbGFyZWQgKGZpcnN0
+IHVzZSBpbiAKdGhpcyBmdW5jdGlvbikKIMKgIDYyMiB8wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqBtb2RlIHw9IEZBTExPQ19GTF9aRVJPX1JBTkdFOwogwqAgwqAgwqAgfMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgXn5+fn5+fn5+
+fn5+fn5+fn5+fn4KbWFrZVszXTogKioqIFtNYWtlZmlsZTo0MTE6IGYyZnNfaW8ub10gRXJyb3Ig
+MQoKCkNsYW5nOgoKbWFrZVsyXTogRW50ZXJpbmcgZGlyZWN0b3J5IAonLy4uLi9mMmZzLXRvb2xz
+L3NyYy8zYmQ0OTE0OWRhZTcyMzdiOTMxYjA5ZDg3ZDAwYjJhZWY4ZjdhZjkzL21rZnMnCiDCoCBD
+Q8KgIMKgIMKgIMKgZjJmc19mb3JtYXRfbWFpbi5vCiDCoCBDQ8KgIMKgIMKgIMKgZjJmc19mb3Jt
+YXQubwogwqAgQ0PCoCDCoCDCoCDCoGYyZnNfZm9ybWF0X3V0aWxzLm8KIMKgIENDwqAgwqAgwqAg
+wqBsaWJmMmZzX2Zvcm1hdF9sYS1mMmZzX2Zvcm1hdF9tYWluLmxvCiDCoCBDQ8KgIMKgIMKgIMKg
+bGliZjJmc19mb3JtYXRfbGEtZjJmc19mb3JtYXQubG8KIMKgIENDwqAgwqAgwqAgwqBsaWJmMmZz
+X2Zvcm1hdF9sYS1mMmZzX2Zvcm1hdF91dGlscy5sbwogwqAgQ0NMRMKgIMKgIMKgbWtmcy5mMmZz
+CmNsYW5nOiBlcnJvcjogbm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9yeTogJy4uL2xpYi8ubGlicy9s
+aWJmMmZzLnNvJwptYWtlWzJdOiAqKiogW01ha2VmaWxlOjQ4NzogbWtmcy5mMmZzXSBFcnJvciAx
+Cm1ha2VbMl06ICoqKiBXYWl0aW5nIGZvciB1bmZpbmlzaGVkIGpvYnMuLi4uCgpCZXN0IHJlZ2Fy
+ZHMsCgpSZWFscm9vdAoKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBs
+aXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMv
+bGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
