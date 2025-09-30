@@ -2,7 +2,7 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0E1EBAB06F
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EB5ABAB069
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Sep 2025 04:37:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -10,29 +10,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=PUZfNkQEu97UnPZfoLyB3RJuDRtqgbJOwKRv658s+lY=; b=ZF00WBNIwJT6pECvUY+IK4AP48
-	DyjQqTQWdMDF8gMNKo+4pYauhsGBMJnibr7XRsQBW2gHxZjtXTBxN1bFLKucl7IB3IQOKrPEIeb7y
-	6WrMxo3N293DnDTgbgJ9kx7zkJ2TN3WJdl4HTcy/g0iTn3EJ6mXBoGEmm3XPojBJ6KeA=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=cy3eMGc7ntFPEu2NN/04XXDp5f4U+AW7iVSHfYkwPZs=; b=WaxMQBteReTDP4iEuyjGXsmqzG
+	nW9FLKQ7feqaJvACdcCxwAD+3VNeh54zoKegq6nceWaXYSC+zZPDXK+kp6ZCqGyoJZWYrt+ZPHx9A
+	eKV/YBEE2yP9qoiUQWda6UEUO0RUlIJaImC+CoE0pDESGlkRHTKLzetic9BHLaiQ0O5s=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v3QF2-0005JO-RL;
-	Tue, 30 Sep 2025 02:37:24 +0000
+	id 1v3QEw-0004ka-VU;
+	Tue, 30 Sep 2025 02:37:18 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1v3QEz-0005JG-N3
+ (envelope-from <jaegeuk@kernel.org>) id 1v3QEw-0004kU-HO
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 Sep 2025 02:37:21 +0000
+ Tue, 30 Sep 2025 02:37:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VJIRto2wfEplTCqpvHZh+vd/5+qoX8bnz6uer0PAGx4=; b=kkSpZwphpR3p7KEh/HyaoPo1Yd
- 9Jzg0QQCqHVvLvmurkN+N+pmL8xeYXurFfnVP1JBTLnjz4EL49dmxBCqFtv2lrdnCvR9cMBhjffyn
- t1uaddRFwgPcOlxdyW1kAgrlKMIp0M0Wy0Qei7VTjB9S+KUoFgK0FGimSyF3XdTSXZLs=;
+ bh=qv7YaSup9Hulu19lcLJNimECYVS5T1RBsI6LpiH11Cw=; b=bGygyUT1iqSd8W/cCd8k/jWWa1
+ AOBY3eObb6qrjRr+zNEdfqJXt7IPZOMpF4MOJPPkb08a9OFbXlAbVkPy6Gh0S6k0A19dVKzfLgC9z
+ okuoimcEBl9rYzp5CEPo2uOU/ms7NkqoTLO6uh8GXRp0FTQjbBfD2gDEtVxwzuGtjyIM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,62 +40,61 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=VJIRto2wfEplTCqpvHZh+vd/5+qoX8bnz6uer0PAGx4=; b=GPxfL8N6MP4ElAz8p6Dgk8PTbR
- FAPXp9n5uGTIDJwA0DNy+pTREAy1SyXkIVf26b4S1t6oRjpzF6TCQIUR41gz8zCp74YKVMUQmuA98
- Zq65N4CQZNS26B6Cv0/xQia74psuoG71aVAtbDrC609+j6N/uAJ38r1VFU9pDHIkye/s=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=qv7YaSup9Hulu19lcLJNimECYVS5T1RBsI6LpiH11Cw=; b=Fll615t7BtvxnKPlYt1qHyTlue
+ kCdQvLPaP17oLkXwD5Cg27Rwb4drDKaacnun8FtkirXSP8VNB3UWF/3b1vSltO4rKdizRsmWSUca1
+ sKzufGidMXrs+ctJ1LMmJcs4sq0ktEBHHMiIyWerPKB5aT5TfzAMdvNDVEjbu7KkwE9o=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v3QEz-0004Sy-8o for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 Sep 2025 02:37:21 +0000
+ id 1v3QEv-0004Si-SS for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 30 Sep 2025 02:37:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id E91D645B3D
+ by tor.source.kernel.org (Postfix) with ESMTP id 131C560334
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 30 Sep 2025 02:37:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7634C116C6;
- Tue, 30 Sep 2025 02:37:10 +0000 (UTC)
+ Tue, 30 Sep 2025 02:37:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8105C116B1;
+ Tue, 30 Sep 2025 02:37:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759199830;
- bh=B8+dSZWGnM31jtS6BLhtWnr7abeLIk24WnGIpnF9JCo=;
+ s=k20201202; t=1759199831;
+ bh=yMng9dMYvfLmnxdsrXSdqrFDGeOWgX9dyvH+/0zYrDo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=D8SUE22fLpZVahbvQZoneOgnqoPkJyhqT7PUGfegbZ9pgxepWLRTPWTEsNLhWJ7xr
- DipZFhD/bJxhX6hp2beVLAWoRp9yMATACVpHgQELfRhwfnQrwjX6C4k0/nwemy5Glv
- dpkZSOQEQBytElCjncT99W+WMqfaHpJHzc5NP3N291iGt4SFX28mEsWrkrjdyRxQYK
- lPiemOKpunn0WUCHICfmQGSokO4PVtzHIXVSrgdIMC49h66yU7QaPKKnSA2JIXdOOt
- lH347+x431c8FhR55onp/1ipqOO6jt5/dD04/l4gAtxHh1aWj8jj58xbGlJb44L3OB
- 3dpY8hdveI7pQ==
+ b=WVYThWjTEdYg0/h8dGUtc23CPcRLYsEkSeyl9CdTSoM1nGSC4Bpr8zp4KygJOonLi
+ HTqSyz9e2c66t9CLUPOlcZYQca/D+I9G5v7nGhjuAcJqbalsFSUeZnKBp/5sMqFZrl
+ o2uWxqY4GR8giPmtQ3Ob0zOKBojKQAD5ziG2TocNcHMaUsDJ4vOVn+1tUkCjAXUM5d
+ 13NW1Xyeif2uIw08NxdggRK4YZijLFGFb+OrqufXUNmo1bfDEBsctHTuSkPS8DIXGd
+ 0cGvf2XTLOE5P9qGkfUZ0D6MnFgG5yotOoiUqPPXZgEkAo/icOC731x6ol42vVn5z8
+ TfWX6WqrOHS0w==
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 30 Sep 2025 02:37:01 +0000
-Message-ID: <20250930023704.3019074-2-jaegeuk@kernel.org>
+Date: Tue, 30 Sep 2025 02:37:02 +0000
+Message-ID: <20250930023704.3019074-3-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.51.0.618.g983fd99d29-goog
 In-Reply-To: <20250930023704.3019074-1-jaegeuk@kernel.org>
 References: <20250930023704.3019074-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  If we give a negative offset,
- let's do random writes. > f2fs_io
- write 1 -400 10 rand atomic_commit ./test conducts 10 random writes by picking
- addresses between 0 and 400 * 4KB. 
+ Content preview:  Add missing mmap mode in man page. Signed-off-by: Jaegeuk
+ Kim <jaegeuk@kernel.org> --- man/f2fs_io.8 | 6 ++++++ tools/f2fs_io/f2fs_io.c
+ | 34 +++++++++++++++++++++++++++------- 2 files changed, 33 insertions(+),
+ 7 deletions(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v3QEz-0004Sy-8o
-Subject: [f2fs-dev] [PATCH 2/5] f2fs_io: measure atomic operation latency
- with random write
+X-Headers-End: 1v3QEv-0004Si-SS
+Subject: [f2fs-dev] [PATCH 3/5] f2fs_io: add mlock to measure the read speed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,79 +113,118 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If we give a negative offset, let's do random writes.
-
-> f2fs_io write 1 -400 10 rand atomic_commit ./test
-
-conducts 10 random writes by picking addresses between 0 and
-400 * 4KB.
+Add missing mmap mode in man page.
 
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- tools/f2fs_io/f2fs_io.c | 19 +++++++++++++++----
- 1 file changed, 15 insertions(+), 4 deletions(-)
+ man/f2fs_io.8           |  6 ++++++
+ tools/f2fs_io/f2fs_io.c | 34 +++++++++++++++++++++++++++-------
+ 2 files changed, 33 insertions(+), 7 deletions(-)
 
+diff --git a/man/f2fs_io.8 b/man/f2fs_io.8
+index 6f3e11e96ed6..8e54aa644a00 100644
+--- a/man/f2fs_io.8
++++ b/man/f2fs_io.8
+@@ -127,6 +127,12 @@ buffered I/O
+ .TP
+ .B dio
+ direct I/O
++.TP
++.B mmap
++mmap(MAP_POPULATE)
++.TP
++.B mlock
++mmap() + mlock()
+ .RE
+ .TP
+ \fBfiemap\fR \fI[offset in 4kb] [count] [file_path]\fR
 diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index 1f6bfcfff556..b9bf9bc5f797 100644
+index b9bf9bc5f797..028ffe59d0c7 100644
 --- a/tools/f2fs_io/f2fs_io.c
 +++ b/tools/f2fs_io/f2fs_io.c
-@@ -710,7 +710,8 @@ static void do_write_with_advice(int argc, char **argv,
- 			const struct cmd_desc *cmd, bool with_advice)
- {
- 	u64 buf_size = 0, inc_num = 0, written = 0;
--	u64 offset;
-+	u64 offset, offset_byte;
-+	bool random_offset = false;
+@@ -931,6 +931,7 @@ static void do_write_advice(int argc, char **argv, const struct cmd_desc *cmd)
+ "  buffered : buffered IO\n"				\
+ "  dio      : direct IO\n"				\
+ "  mmap     : mmap IO\n"				\
++"  mlock    : mmap + mlock\n"				\
+ "advice can be\n"					\
+ " 1 : set sequential|willneed\n"			\
+ " 0 : none\n"						\
+@@ -940,12 +941,13 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
+ 	u64 buf_size = 0, ret = 0, read_cnt = 0;
+ 	u64 offset;
  	char *buf = NULL;
- 	unsigned bs, count, i;
+-	char *data;
++	char *data = NULL;
+ 	char *print_buf = NULL;
+ 	unsigned bs, count, i, print_bytes;
+ 	u64 total_time = 0;
  	int flags = 0;
-@@ -727,7 +728,11 @@ static void do_write_with_advice(int argc, char **argv,
+ 	int do_mmap = 0;
++	int do_mlock = 0;
+ 	int fd, advice;
  
- 	buf_size = bs * F2FS_DEFAULT_BLKSIZE;
+ 	if (argc != 8) {
+@@ -968,6 +970,8 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
+ 		flags |= O_DIRECT;
+ 	else if (!strcmp(argv[4], "mmap"))
+ 		do_mmap = 1;
++	else if (!strcmp(argv[4], "mlock"))
++		do_mlock = 1;
+ 	else if (strcmp(argv[4], "buffered"))
+ 		die("Wrong IO type");
  
--	offset = atoi(argv[2]) * buf_size;
-+	offset = atoi(argv[2]);
-+	if (atoi(argv[2]) < 0) {
-+		random_offset = true;
-+		offset = -offset;
-+	}
- 
- 	buf = aligned_xalloc(F2FS_DEFAULT_BLKSIZE, buf_size);
- 	count = atoi(argv[3]);
-@@ -812,10 +817,14 @@ static void do_write_with_advice(int argc, char **argv,
- 		else if (!strcmp(argv[4], "rand"))
- 			*(int *)buf = rand();
- 
-+		offset_byte = (random_offset ? rand() % offset :
-+				offset + i) * buf_size;
+@@ -993,11 +997,24 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
+ 	total_time = get_current_us();
+ 	if (do_mmap) {
+ 		data = mmap(NULL, count * buf_size, PROT_READ,
+-						MAP_SHARED | MAP_POPULATE, fd, offset);
++				MAP_SHARED | MAP_POPULATE, fd, offset);
+ 		if (data == MAP_FAILED)
+ 			die("Mmap failed");
+-	}
+-	if (!do_mmap) {
 +
- 		/* write data */
- 		max_time_t = get_current_us();
--		ret = pwrite(fd, buf, buf_size, offset + buf_size * i);
-+		ret = pwrite(fd, buf, buf_size, offset_byte);
- 		max_time_t = get_current_us() - max_time_t;
-+
- 		if (max_time < max_time_t)
- 			max_time = max_time_t;
- 		if (ret != buf_size)
-@@ -844,7 +853,7 @@ static void do_write_with_advice(int argc, char **argv,
++		read_cnt = count * buf_size;
++		memcpy(print_buf, data, print_bytes);
++	} else if (do_mlock) {
++		data = mmap(NULL, count * buf_size, PROT_READ,
++				MAP_SHARED, fd, offset);
++		if (data == MAP_FAILED)
++			die("Mmap failed");
++		if (posix_fadvise(fd, offset, count * buf_size,
++					POSIX_FADV_WILLNEED) != 0)
++			die_errno("fadvise failed");
++		if (mlock(data, count * buf_size))
++			die_errno("mlock failed");
++		read_cnt = count * buf_size;
++	} else {
+ 		for (i = 0; i < count; i++) {
+ 			ret = pread(fd, buf, buf_size, offset + buf_size * i);
+ 			if (ret != buf_size) {
+@@ -1014,9 +1031,6 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
+ 			if (i == 0)
+ 				memcpy(print_buf, buf, print_bytes);
  		}
+-	} else {
+-		read_cnt = count * buf_size;
+-		memcpy(print_buf, data, print_bytes);
  	}
- 
--	printf("Written %"PRIu64" bytes with pattern=%s, total_time=%"PRIu64" us, max_latency=%"PRIu64" us\n",
-+	printf("Written %"PRIu64" bytes with pattern = %s, total_time = %"PRIu64" us, max_latency = %"PRIu64" us\n",
- 				written, argv[4],
- 				get_current_us() - total_time,
- 				max_time);
-@@ -855,6 +864,8 @@ static void do_write_with_advice(int argc, char **argv,
- #define write_help					\
- "f2fs_io write [chunk_size in 4kb] [offset in chunk_size] [count] [pattern] [IO] [file_path] {delay}\n\n"	\
- "Write given patten data in file_path\n"		\
-+"Offset can be a negative number which\n"		\
-+"  indicates random write range for atomic operations.\n" \
- "pattern can be\n"					\
- "  zero          : zeros\n"				\
- "  inc_num       : incrementing numbers\n"		\
+ 	printf("Read %"PRIu64" bytes total_time = %"PRIu64" us, BW = %.Lf MB/s print %u bytes:\n",
+ 		read_cnt, get_current_us() - total_time,
+@@ -1029,6 +1043,12 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
+ 		else if (i % 2 == 0)
+ 			printf(" ");
+ 	}
++	if (do_mmap) {
++		munmap(data, count * buf_size);
++	} else if (do_mlock) {
++		munlock(data, count * buf_size);
++		munmap(data, count * buf_size);
++	}
+ 	printf("\n");
+ 	exit(0);
+ }
 -- 
 2.51.0.618.g983fd99d29-goog
 
