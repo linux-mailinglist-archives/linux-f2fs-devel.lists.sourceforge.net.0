@@ -2,100 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C490BAB06A
+	by mail.lfdr.de (Postfix) with ESMTPS id F0E1EBAB06F
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Sep 2025 04:37:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=Ewu51n+29Zxboscv5R3dU3j+BhnkQRQNLQkrCq6J+H0=; b=EdMz6LfHZiLWoNcyp+Zd2/b3Dp
-	f9rvFaD/mxIYtv9G77jS8hY4V/IUBD1IJCw5TnGSECcXFk4DhlCGksBOJAf1otRDjQeJYNsvABDc2
-	vsQ+DajebGt9ThNV6T5uyj84MUY5h3AX7TR1mfAxHYsgI2pUoIxbgGTUb/b6wmX9ZBVw=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=PUZfNkQEu97UnPZfoLyB3RJuDRtqgbJOwKRv658s+lY=; b=ZF00WBNIwJT6pECvUY+IK4AP48
+	DyjQqTQWdMDF8gMNKo+4pYauhsGBMJnibr7XRsQBW2gHxZjtXTBxN1bFLKucl7IB3IQOKrPEIeb7y
+	6WrMxo3N293DnDTgbgJ9kx7zkJ2TN3WJdl4HTcy/g0iTn3EJ6mXBoGEmm3XPojBJ6KeA=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v3QF0-00031p-9y;
-	Tue, 30 Sep 2025 02:37:23 +0000
+	id 1v3QF2-0005JO-RL;
+	Tue, 30 Sep 2025 02:37:24 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1v3QEy-00031Y-Cz
+ (envelope-from <jaegeuk@kernel.org>) id 1v3QEz-0005JG-N3
  for linux-f2fs-devel@lists.sourceforge.net;
  Tue, 30 Sep 2025 02:37:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sAdIw1E8Fnisp+SraOebvpd+dbpoQWz2gU/NsGjWric=; b=F3C6dg7NFEQuJdawpPBrkayEhK
- t7O4erFCUb3tIV1ZBikgojOZ+heHeLWWyA8RnTKFJHnLYM4FLPSzJkwYDUjlfAyIaer5YVJH5arSv
- NUwZqBsAxYf30MZ91ppTO2IED/Gsi3vqtcnjeTvQrl9x1Duuvz9bfq15NLpt0PYsx/uQ=;
+ bh=VJIRto2wfEplTCqpvHZh+vd/5+qoX8bnz6uer0PAGx4=; b=kkSpZwphpR3p7KEh/HyaoPo1Yd
+ 9Jzg0QQCqHVvLvmurkN+N+pmL8xeYXurFfnVP1JBTLnjz4EL49dmxBCqFtv2lrdnCvR9cMBhjffyn
+ t1uaddRFwgPcOlxdyW1kAgrlKMIp0M0Wy0Qei7VTjB9S+KUoFgK0FGimSyF3XdTSXZLs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=sAdIw1E8Fnisp+SraOebvpd+dbpoQWz2gU/NsGjWric=; b=g
- FVpGQ42rJvgJRtW3oQtrXfEUGQZmWA+czIkO0UA9P/gNzublgxfXb7ZI7h9xqEVIjJd54nSpXaNTh
- deSKvo5wkmP5dTVbLC5j+lN407K/o3mZQZjSbLNOlOn/yaPYx0kIZ61ay8UWHDFBlW8ADb92FbToA
- 3nZ+9n7bMcqZin7U=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=VJIRto2wfEplTCqpvHZh+vd/5+qoX8bnz6uer0PAGx4=; b=GPxfL8N6MP4ElAz8p6Dgk8PTbR
+ FAPXp9n5uGTIDJwA0DNy+pTREAy1SyXkIVf26b4S1t6oRjpzF6TCQIUR41gz8zCp74YKVMUQmuA98
+ Zq65N4CQZNS26B6Cv0/xQia74psuoG71aVAtbDrC609+j6N/uAJ38r1VFU9pDHIkye/s=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v3QEy-0004Sx-R4 for linux-f2fs-devel@lists.sourceforge.net;
+ id 1v3QEz-0004Sy-8o for linux-f2fs-devel@lists.sourceforge.net;
  Tue, 30 Sep 2025 02:37:21 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 344F860324
+ by sea.source.kernel.org (Postfix) with ESMTP id E91D645B3D
  for <linux-f2fs-devel@lists.sourceforge.net>;
  Tue, 30 Sep 2025 02:37:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF415C4CEF4;
- Tue, 30 Sep 2025 02:37:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7634C116C6;
+ Tue, 30 Sep 2025 02:37:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759199829;
- bh=cesNJVP4/rITPlUKirhyJV1JzmDLylcIBDXxNfH/qxc=;
- h=From:To:Cc:Subject:Date:From;
- b=G1xb+l1qzt1ushTTNQPuxF+N0bx1f+2RlWSdQGdIdXMBvK5ark80BPQ8+t7yGl8s9
- dumF+43l7u6ZPtuHKxdBnVdtBazYzxYub1Amsoaf7vos9C1jTPCmeTugvxeU92E9vn
- nI3bs7JASpSrgkcFAg+JMUpWNCQ2YR6rCQLN853TOakJFKrq+Aq+MsntKw5ZmcE/dv
- 81QU0fMLXOXfLxZPs2bMANNLAWMAOxyUbb9rsQo81tRG/mJR1RHFoe5g+h0NWYqct+
- tPgLp5yeGzXdD0bgzbfl8U17tdbxklrn5qiLatDuqHIojTTjw6knBuZ+ZDRMqLqDBG
- zzl7wXgbLdH1w==
+ s=k20201202; t=1759199830;
+ bh=B8+dSZWGnM31jtS6BLhtWnr7abeLIk24WnGIpnF9JCo=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=D8SUE22fLpZVahbvQZoneOgnqoPkJyhqT7PUGfegbZ9pgxepWLRTPWTEsNLhWJ7xr
+ DipZFhD/bJxhX6hp2beVLAWoRp9yMATACVpHgQELfRhwfnQrwjX6C4k0/nwemy5Glv
+ dpkZSOQEQBytElCjncT99W+WMqfaHpJHzc5NP3N291iGt4SFX28mEsWrkrjdyRxQYK
+ lPiemOKpunn0WUCHICfmQGSokO4PVtzHIXVSrgdIMC49h66yU7QaPKKnSA2JIXdOOt
+ lH347+x431c8FhR55onp/1ipqOO6jt5/dD04/l4gAtxHh1aWj8jj58xbGlJb44L3OB
+ 3dpY8hdveI7pQ==
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 30 Sep 2025 02:37:00 +0000
-Message-ID: <20250930023704.3019074-1-jaegeuk@kernel.org>
+Date: Tue, 30 Sep 2025 02:37:01 +0000
+Message-ID: <20250930023704.3019074-2-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.51.0.618.g983fd99d29-goog
+In-Reply-To: <20250930023704.3019074-1-jaegeuk@kernel.org>
+References: <20250930023704.3019074-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> ---
- tools/f2fs_io/f2fs_io.c
- | 5 ++++- 1 file changed, 4 insertions(+),
- 1 deletion(-) diff --git a/tools/f2fs_io/f2fs_io.c
- b/tools/f2fs_io/f2fs_io.c index 2bd5fd001b82..1f6bfcfff556 100644 ---
- a/tools/f2fs_io/f2fs_io.c
- +++ b/tools/f2fs_io/f2fs_io.c @@ -160,6 +160,7 @@ static u64 get_cu [...]
+ Content preview:  If we give a negative offset,
+ let's do random writes. > f2fs_io
+ write 1 -400 10 rand atomic_commit ./test conducts 10 random writes by picking
+ addresses between 0 and 400 * 4KB. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v3QEy-0004Sx-R4
-Subject: [f2fs-dev] [PATCH 1/5] f2fs_io: measure a fsync latency
+X-Headers-End: 1v3QEz-0004Sy-8o
+Subject: [f2fs-dev] [PATCH 2/5] f2fs_io: measure atomic operation latency
+ with random write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,37 +114,79 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+If we give a negative offset, let's do random writes.
+
+> f2fs_io write 1 -400 10 rand atomic_commit ./test
+
+conducts 10 random writes by picking addresses between 0 and
+400 * 4KB.
+
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- tools/f2fs_io/f2fs_io.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ tools/f2fs_io/f2fs_io.c | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
 
 diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index 2bd5fd001b82..1f6bfcfff556 100644
+index 1f6bfcfff556..b9bf9bc5f797 100644
 --- a/tools/f2fs_io/f2fs_io.c
 +++ b/tools/f2fs_io/f2fs_io.c
-@@ -160,6 +160,7 @@ static u64 get_current_us()
- static void do_fsync(int argc, char **argv, const struct cmd_desc *cmd)
+@@ -710,7 +710,8 @@ static void do_write_with_advice(int argc, char **argv,
+ 			const struct cmd_desc *cmd, bool with_advice)
  {
- 	int fd;
-+	u64 total_time;
+ 	u64 buf_size = 0, inc_num = 0, written = 0;
+-	u64 offset;
++	u64 offset, offset_byte;
++	bool random_offset = false;
+ 	char *buf = NULL;
+ 	unsigned bs, count, i;
+ 	int flags = 0;
+@@ -727,7 +728,11 @@ static void do_write_with_advice(int argc, char **argv,
  
- 	if (argc != 2) {
- 		fputs("Excess arguments\n\n", stderr);
-@@ -169,10 +170,12 @@ static void do_fsync(int argc, char **argv, const struct cmd_desc *cmd)
+ 	buf_size = bs * F2FS_DEFAULT_BLKSIZE;
  
- 	fd = xopen(argv[1], O_WRONLY, 0);
+-	offset = atoi(argv[2]) * buf_size;
++	offset = atoi(argv[2]);
++	if (atoi(argv[2]) < 0) {
++		random_offset = true;
++		offset = -offset;
++	}
  
-+	total_time = get_current_us();
- 	if (fsync(fd) != 0)
- 		die_errno("fsync failed");
+ 	buf = aligned_xalloc(F2FS_DEFAULT_BLKSIZE, buf_size);
+ 	count = atoi(argv[3]);
+@@ -812,10 +817,14 @@ static void do_write_with_advice(int argc, char **argv,
+ 		else if (!strcmp(argv[4], "rand"))
+ 			*(int *)buf = rand();
  
--	printf("fsync a file\n");
-+	printf("fsync total_time = %"PRIu64" us\n",
-+			get_current_us() - total_time);
- 	exit(0);
- }
++		offset_byte = (random_offset ? rand() % offset :
++				offset + i) * buf_size;
++
+ 		/* write data */
+ 		max_time_t = get_current_us();
+-		ret = pwrite(fd, buf, buf_size, offset + buf_size * i);
++		ret = pwrite(fd, buf, buf_size, offset_byte);
+ 		max_time_t = get_current_us() - max_time_t;
++
+ 		if (max_time < max_time_t)
+ 			max_time = max_time_t;
+ 		if (ret != buf_size)
+@@ -844,7 +853,7 @@ static void do_write_with_advice(int argc, char **argv,
+ 		}
+ 	}
  
+-	printf("Written %"PRIu64" bytes with pattern=%s, total_time=%"PRIu64" us, max_latency=%"PRIu64" us\n",
++	printf("Written %"PRIu64" bytes with pattern = %s, total_time = %"PRIu64" us, max_latency = %"PRIu64" us\n",
+ 				written, argv[4],
+ 				get_current_us() - total_time,
+ 				max_time);
+@@ -855,6 +864,8 @@ static void do_write_with_advice(int argc, char **argv,
+ #define write_help					\
+ "f2fs_io write [chunk_size in 4kb] [offset in chunk_size] [count] [pattern] [IO] [file_path] {delay}\n\n"	\
+ "Write given patten data in file_path\n"		\
++"Offset can be a negative number which\n"		\
++"  indicates random write range for atomic operations.\n" \
+ "pattern can be\n"					\
+ "  zero          : zeros\n"				\
+ "  inc_num       : incrementing numbers\n"		\
 -- 
 2.51.0.618.g983fd99d29-goog
 
