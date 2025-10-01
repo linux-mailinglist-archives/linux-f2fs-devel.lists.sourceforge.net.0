@@ -2,117 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0D2ABAF3B4
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 01 Oct 2025 08:25:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 08EBBBAF7DA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 01 Oct 2025 09:51:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=uJFj5FHIrWrw0m9QrAqltj3Tc034oH2dk1dolfKBckI=; b=mbtWPnHXg3w1cbEeRmHKmHCdiP
-	72EDgdJAEr1d2+geIy1HBCcHczsInzQL1UJz2zXl5QcZaEBnE8yC+yfMlJRZsxyVWpXvi/VRNV67J
-	eQSajjNypMnzax3o25m376lBp810/0drbj5pwdRZlyx69PaKOS3OZdF9XJPeY3ApuujU=;
+	bh=pBdFc8vs22CJWM2ga62611lxzCfK16q6Gnm9Mgr5lKI=; b=avb9YizYxjj2ayJpZYZscmVdS8
+	ysZUYNEHjt/EvHam/2tX1Dlx5rSx94TMeKlVGp7DxjV70pyM+3bhmWuAOfeF1ewGC50ZNdCWnnz+b
+	qBWYOMt3ZQEfMqThcohMNJqub+FJ4sckf0Ho0csv4spkLBOkylOs7T9yul/XOlT3QLEA=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v3qGo-00074o-7e;
-	Wed, 01 Oct 2025 06:24:58 +0000
+	id 1v3rcF-0002c6-Hx;
+	Wed, 01 Oct 2025 07:51:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1v3qGm-00074h-7e
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1v3rcE-0002by-H3
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Oct 2025 06:24:56 +0000
+ Wed, 01 Oct 2025 07:51:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=A+0i3l0iDuYL4y4gHFhoKOCgirARm5a/sSYRjGIchxs=; b=AaVz7cUp5ZoY0ckUWz4SMRZjJo
- Zy/0OcDb5eejcNBN2THuqc0SHHEIyBQqwmxiNUyxkDgpUT/vwcm0IgevhouP+WRmr9LJVz0qExaC0
- fjsxYMkJG03CyQvqv7NNFgzPGYzjFh+9T6soLRWeF9HVMyEUifqeo7pFnRkagehYvkmM=;
+ bh=m7oArbh/KqkkiBYx3RkMxwj14YueE+wZ0ZLFIghQ11o=; b=BzmwJkwXmFEgWff9mfNKq0/S0q
+ 5/LGX7HrIVuVcLOTrX5qbkUq6p3rTBj/MUwT1EQXmPBwedX/d7C/jTkElzTMl7qzn8IUYQF/xCvVR
+ 3jikcBSW3w4NF8HjtryYJN0Tr5hdWb7g5LEvZUSpTVa/KkLoQgT02ETBoLkY0jeV//Bw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=A+0i3l0iDuYL4y4gHFhoKOCgirARm5a/sSYRjGIchxs=; b=Aj7e4E2G4W09r4+R3QW1aQAfNF
- UxkTpYzw64jUxtYY9M3kSmB7wVE6maE8S8T2/5Qgyjdc+GVJslMaC/Tlff9xugEAlzFEu6jwAyT9+
- pMmSfkHK2Fm2QN+/m9xromA2UXWuj/l2dSjS6BvWJoMs5m/3EqaHtkuNmkv1dD3DqgRA=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ bh=m7oArbh/KqkkiBYx3RkMxwj14YueE+wZ0ZLFIghQ11o=; b=Z26JFDVdgj0ULzRwW72JqHB45+
+ +B+dEytV4lk0jHLrOCzxfsLG9pD8wcRtEQiSqAmNkJ8Xnh67v5v8/TEyuf9Zv0b6SCRoz+/ThW+Z4
+ lARdlGAzZRUAsMUVIUAjhyvCL6GNhmOdB5OXK3StEWvdaALWcSNoXTNHkav2EXxxIyfg=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v3qGl-0006ki-Jo for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Oct 2025 06:24:56 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1759299889;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=A+0i3l0iDuYL4y4gHFhoKOCgirARm5a/sSYRjGIchxs=;
- b=CfHbaQTr1RR9gMM2lFG9BpCMZmiR9gvp8G8I/neo8vh8l9y3t1sopsMJwJG8mR30SADmnW
- lZ0zm6AV6k9zUg3sK6GnqauCOMNibNrhOm68v/NQPZKz1qDeGMPgyfTgYX/WKOKq0FbmRQ
- ERV4/JaO3xd0PwpMimAIt428fYbxBqw=
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
- [209.85.210.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-663-MYwf-FXrMSOmsc52ME08Xw-1; Wed, 01 Oct 2025 02:24:48 -0400
-X-MC-Unique: MYwf-FXrMSOmsc52ME08Xw-1
-X-Mimecast-MFC-AGG-ID: MYwf-FXrMSOmsc52ME08Xw_1759299887
-Received: by mail-pf1-f199.google.com with SMTP id
- d2e1a72fcca58-7821487d16bso7894194b3a.1
+ id 1v3rcC-0002p7-UA for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 01 Oct 2025 07:51:10 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 3CAF540A54
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 30 Sep 2025 23:24:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759299887; x=1759904687;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=A+0i3l0iDuYL4y4gHFhoKOCgirARm5a/sSYRjGIchxs=;
- b=tY1i5RteGUJraHjfr0Ep2yxWq+rZ6TqIoR2AUE4GhjakP0CIGy3X+ofAsDKcb333KK
- B0nTgsjd0paNjBBz0Ew8Gkut9gUG0RIhlk29QGuVvPGsa+cfO15DNtIOsJSQS6/Lvhki
- w/eS7RZvLc0qQpSksRCrjAiScN6c+C2+vfFMzN/RFWdH25ynA9rVPhqUJa0lFpHxRgy0
- QqM3Fd2DcLvR2480E9/bTYZ7Bmc4eUpXm+ZcJUVDAFtOMtXe4p1tqRN0GNLFVEUymgJv
- 7EeYXsYCbGzxpRTVTwRhOUEp5uDVfKGAK0ixSyeRoSk6HAXJ/5xA87aDZGPeOS86jdKD
- YqeA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVp7uEgEx7AdrGhkVBeF9glfZ1QdPT/YD7nO/stXD+s/MYux3okdSlih3uX6sgs9Y9FjjucI7qjQGATXtGqN7xO@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yx0itMmd00HtYgJbwuhzNsLE556shk4JmFRYQPQNeZJzGzw1V4P
- XQlt9iHjL/Yvkj06WE6Qsv70LsOF7bd6ypCQC7ms3NM7wt6m9LkjO9CwwMbMGR1qghs8kWfxPGM
- qYYtHS3RirYQDgDsmXLg7bvrCoq07BTjInwq2d9mDiuEopkA2shQiZJ0T1LvpEg/s/InM86BC12
- odc/4=
-X-Gm-Gg: ASbGncthEvj+zvMD6fjO8b5xqXlMJ679SDt5jesAedMfixsqIEshgy7kTyi66phNux7
- CGOsiY0zCGkxetY/n+88sZoKAnr/XEYEW0yyfzxP0JeGFRkeG0wpVPvyECM5TBozmuiDZ5dbAru
- BJ7RFh55o/Y0O8ZV7We9fGNem4qlqpRxmuKPX3VAigt3oXl2awBK4H1mecGPiVqs5+4Xe+oa3za
- PiMSehhw4shQxqZP+iCQy/iA7bHyXSQ0SNniSsslHx6ko8qFTVeWJA+I+2HuEGgw8zbou0z2/1D
- 240tPPCUREarThlPMf9FwrK7cxDbeZGM1FjJnU04cja6r67t+ScuH/av16nsUTmw1iy+7jOK220
- AOBaCg+U1qA==
-X-Received: by 2002:a05:6a00:3d4b:b0:781:2177:1c9b with SMTP id
- d2e1a72fcca58-78af4160670mr2964932b3a.17.1759299886920; 
- Tue, 30 Sep 2025 23:24:46 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG/f+ttRWlC8JRPXV++DICR2wJGnZzlG+koVtdjKREiAEJg2hgZ8DtqqRlJ3eaT4Ep40zg/Dg==
-X-Received: by 2002:a05:6a00:3d4b:b0:781:2177:1c9b with SMTP id
- d2e1a72fcca58-78af4160670mr2964896b3a.17.1759299886360; 
- Tue, 30 Sep 2025 23:24:46 -0700 (PDT)
-Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([209.132.188.88])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7810238cdd1sm15241810b3a.3.2025.09.30.23.24.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Sep 2025 23:24:45 -0700 (PDT)
-Date: Wed, 1 Oct 2025 14:24:41 +0800
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20251001062441.cjh2wd7uleduehey@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
-References: <20250928185240.57862-1-chao@kernel.org>
+ Wed,  1 Oct 2025 07:51:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 19F68C4CEF4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  1 Oct 2025 07:51:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1759305063;
+ bh=F21BWHxQ0VuA2aIKHt0XioDukSDnPMtaiCe2atVbVcA=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=SNOEFWJnktU7wfRFE5o9bpdhkTZNKKENxbqoab4gY9aCP3tfqX6y7pLfUxpxDW5Ex
+ 4ysVxshcVSXWpNi4XJvxx5cfesCi/dh2K6rQYOi5vrAmpcERPkZeCYpMVbaU45RAxL
+ QMDIinQ05+rl50dN4JI83lub9JQ5UYWoPQXwOZM52mY5MdnI43u+7yWV74XKe7A00X
+ KO/uY9Zh9206odk2aWQdKOlCGBlvVKpnZX09spLw7/15ln34NF9q3dWySanvn33vUu
+ tZgVlvgXOWpKj13Cg274TIAZHakpwd2m0TtTf1LGTkGSfJrE0ytnPYTy3Yt6RlWh4z
+ iBcUdM7F9tWJg==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 070D6C433E1; Wed,  1 Oct 2025 07:51:02 +0000 (UTC)
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Wed, 01 Oct 2025 07:51:02 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: JY.Ho@mediatek.com
+X-Bugzilla-Status: ASSIGNED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P3
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-220575-202145-BmcTjO5Gc1@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-220575-202145@https.bugzilla.kernel.org/>
+References: <bug-220575-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-In-Reply-To: <20250928185240.57862-1-chao@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: uxnKoCvxua-1qCpI6wGrhHUFpgplYlwwC1N0JkeGs24_1759299887
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -120,10 +97,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Sep 29, 2025 at 02:52:40AM +0800, Chao Yu wrote: >
- Introduce _require_inject_f2fs_command() to check whether inject.f2fs >
- supports
- specific metaarea and member parameters. > > Cc: Jaegeuk Kim [...] 
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=220575 ---
+ Comment
+ #15 from JY (JY.Ho@mediatek.com) --- (In reply to Chao Yu from comment #7)
+ > Can you please hook fscrypt_free_bounce_page() to set page private w/ >
+ special value, something as below: > > [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -134,13 +112,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [170.10.129.124 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v3qGl-0006ki-Jo
-Subject: Re: [f2fs-dev] [PATCH] common/f2fs: introduce
- _require_inject_f2fs_command()
+X-Headers-End: 1v3rcC-0002p7-UA
+Subject: [f2fs-dev] [Bug 220575] Unable to handle kernel NULL pointer
+ dereference at virtual address 0000000000000000
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -152,184 +127,202 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Zorro Lang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Zorro Lang <zlang@redhat.com>
-Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: bugzilla-daemon--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: bugzilla-daemon@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Sep 29, 2025 at 02:52:40AM +0800, Chao Yu wrote:
-> Introduce _require_inject_f2fs_command() to check whether inject.f2fs
-> supports specific metaarea and member parameters.
+https://bugzilla.kernel.org/show_bug.cgi?id=220575
+
+--- Comment #15 from JY (JY.Ho@mediatek.com) ---
+(In reply to Chao Yu from comment #7)
+> Can you please hook fscrypt_free_bounce_page() to set page private w/
+> special value, something as below:
 > 
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  common/f2fs    | 25 +++++++++++++++++++++++++
->  tests/f2fs/009 |  2 ++
->  tests/f2fs/012 |  2 ++
->  tests/f2fs/019 |  2 ++
->  tests/f2fs/020 |  2 ++
->  tests/f2fs/022 |  2 ++
->  6 files changed, 35 insertions(+)
+> void fscrypt_free_bounce_page(struct page *bounce_page)
+> {
+>       if (!bounce_page)
+>               return;
+>       set_page_private(bounce_page, (unsigned long)0xF2F52011);
+>       ClearPagePrivate(bounce_page);
+>       mempool_free(bounce_page, fscrypt_bounce_page_pool);
+> }
 > 
-> diff --git a/common/f2fs b/common/f2fs
+> And add some check conditions in f2fs_is_cp_guaranteed() to see whether the
+> page has been freed before inc_page_count().
 
-You remind me that there's a common/f2fs file, you can move f2fs specific
-functions to common/f2fs (e.g. _check_f2fs_filesystem) later :)
+By the way, this is my test result. Is that another issue?
 
-> index 1b39d8ce..4b01e032 100644
-> --- a/common/f2fs
-> +++ b/common/f2fs
-> @@ -25,3 +25,28 @@ _require_scratch_f2fs_compression()
->  		_scratch_unmount
->  	fi
->  }
-> +
-> +# check that inject.f2fs supports to inject specific field in specific meta area
-> +_require_inject_f2fs_command()
-> +{
-> +	if [ $# -ne 2 ]; then
-> +		echo "Usage: _require_inject_f2fs_command metaarea member" 1>&2
-> +		_exit 1
-> +	fi
-> +	metaarea=$1
-> +	member=$2
-> +
-> +	case $metaarea in
-> +	sb|cp|nat|sit)
-> +		val=0
-> +		;;
-> +	ssa|node|dent)
-> +		;;
-> +	*)
-> +		_notrun "unsupport metaarea: $metaarea"
-> +		;;
-> +	esac
-> +
-> +	$F2FS_INJECT_PROG "--$metaarea" "$val" "-h" | grep "$member:" > /dev/null || \
-> +		_notrun "--$metaarea --mb $member support is missing"
-> +}
-> diff --git a/tests/f2fs/009 b/tests/f2fs/009
-> index 7333d484..465be874 100755
-> --- a/tests/f2fs/009
-> +++ b/tests/f2fs/009
-> @@ -9,10 +9,12 @@
->  # and expects fsck.f2fs can detect such corruption and do the repair.
->  #
->  . ./common/preamble
-> +. ./common/f2fs
+[27024.604851] JY f2fs_is_cp_guaranteed 65 bounced_page:0xfffffffe81338410,
+_private:0xfffffffe813c54f0, fscrypt_pagecache_page(page):0x000000005566f2f5
 
-The common/f2fs can be imported by common/config:_source_specific_fs()
-automatically, so we don't need this line at here.
+[27024.620405] JYJY :fffffffe813c54f0 is the PAGE
 
-(Same below)
+[27024.626388] page: refcount:4 mapcount:1 mapping:000000008cdd016b index:0x1d
+pfn:0x3f443
 
->  _begin_fstest auto quick
->  
->  _require_scratch
->  _require_command "$F2FS_INJECT_PROG" inject.f2fs
-> +_require_inject_f2fs_command node i_links
+[27024.636025] memcg:ffffff8031bd0000
 
-If the "_require_command $F2FS_INJECT_PROG inject.f2fs" is always required
-before _require_inject_f2fs_command, how about call it at the beginning
-of _require_inject_f2fs_command ?
+[27024.641269] flags:
+0x1000000000009029(locked|uptodate|lru|owner_2|private|zone=0)
 
-(same below)
+[27024.650060] raw: 1000000000009029 fffffffe813c54a8 fffffffe813bc588
+ffffff806b096f68
 
-Thanks,
-Zorro
+[27024.660600] raw: 000000000000001d 0000000000000009 0000000400000000
+ffffff8031bd0000
 
->  _require_command "$(type -P socket)" socket
->  
->  _fixed_by_git_commit f2fs-tools 958cd6e \
-> diff --git a/tests/f2fs/012 b/tests/f2fs/012
-> index 7438d9ce..8e156772 100755
-> --- a/tests/f2fs/012
-> +++ b/tests/f2fs/012
-> @@ -12,6 +12,7 @@
->  # 4.enable linear lookup, expect lookup succeed
->  #
->  . ./common/preamble
-> +. ./common/f2fs
->  _begin_fstest auto quick casefold
->  
->  _fixed_by_kernel_commit 91b587ba79e1 \
-> @@ -21,6 +22,7 @@ export LC_ALL=C.UTF-8
->  _require_scratch_nocheck
->  _require_command "$F2FS_IO_PROG" f2fs_io
->  _require_command "$F2FS_INJECT_PROG" inject.f2fs
-> +_require_inject_f2fs_command dent d_hash
->  
->  #check whether f2fs supports "lookup_mode=x" mount option
->  mntopt=""
-> diff --git a/tests/f2fs/019 b/tests/f2fs/019
-> index 2307bd96..f6bb0b52 100755
-> --- a/tests/f2fs/019
-> +++ b/tests/f2fs/019
-> @@ -12,6 +12,7 @@
->  #    corruption in the file
->  #
->  . ./common/preamble
-> +. ./common/f2fs
->  _begin_fstest auto quick rw
->  
->  _fixed_by_kernel_commit 77de19b6867f \
-> @@ -19,6 +20,7 @@ _fixed_by_kernel_commit 77de19b6867f \
->  
->  _require_scratch_nocheck
->  _require_command "$F2FS_INJECT_PROG" inject.f2fs
-> +_require_inject_f2fs_command node addr
->  
->  # remove all mkfs options to avoid layout change of on-disk inode
->  export MKFS_OPTIONS=""
-> diff --git a/tests/f2fs/020 b/tests/f2fs/020
-> index 38bc6582..332848d0 100755
-> --- a/tests/f2fs/020
-> +++ b/tests/f2fs/020
-> @@ -12,6 +12,7 @@
->  #    corruption in the file
->  #
->  . ./common/preamble
-> +. ./common/f2fs
->  _begin_fstest auto quick rw
->  
->  . ./common/attr
-> @@ -21,6 +22,7 @@ _fixed_by_kernel_commit 061cf3a84bde \
->  
->  _require_scratch_nocheck
->  _require_command "$F2FS_INJECT_PROG" inject.f2fs
-> +_require_inject_f2fs_command node i_xattr_nid
->  _require_attrs user
->  
->  # remove all mkfs options to avoid layout change of on-disk inode
-> diff --git a/tests/f2fs/022 b/tests/f2fs/022
-> index ed3b4f2b..f81180e8 100755
-> --- a/tests/f2fs/022
-> +++ b/tests/f2fs/022
-> @@ -11,6 +11,7 @@
->  # 4. fpunch in foo w/ specified range
->  #
->  . ./common/preamble
-> +. ./common/f2fs
->  _begin_fstest auto quick rw
->  
->  . ./common/attr
-> @@ -20,6 +21,7 @@ _fixed_by_kernel_commit xxxxxxxxxxxx \
->  
->  _require_scratch_nocheck
->  _require_command "$F2FS_INJECT_PROG" inject.f2fs
-> +_require_inject_f2fs_command node i_nid
->  
->  # remove all mkfs options to avoid layout change of on-disk inode
->  export MKFS_OPTIONS=""
-> -- 
-> 2.40.1
-> 
+[27024.669271] raw: 000000003f443000 0000000000000000
 
+[27024.675745] page dumped because: JY got the BUG!
 
+[27024.683789] page_owner tracks the page as allocated
+
+[27024.690777] page last allocated via order 0, migratetype Movable, gfp_mask
+0x152c4a(GFP_NOFS|__GFP_HIGHMEM|__GFP_NOWARN|__GFP_NORETRY|__GFP_COMP|__GFP_HARDWALL|__GFP_MOVABLE),
+pid 30372, tgid 30372 (android.vending), ts 27014734256272, free_ts
+27002686350166
+
+[27024.724435]  post_alloc_hook+0x1d0/0x1e8
+
+[27024.730550]  prep_new_page+0x30/0x150
+
+[27024.735185]  get_page_from_freelist+0x11e8/0x127c
+
+[27024.744799]  __alloc_pages_noprof+0x1b0/0x448
+
+[27024.753649]  __folio_alloc_noprof+0x1c/0x64
+
+[27024.759063]  page_cache_ra_unbounded+0x1a4/0x36c
+
+[27024.767626]  page_cache_ra_order+0x358/0x434
+
+[27024.774150]  do_sync_mmap_readahead+0x20c/0x280
+
+[27024.780541]  filemap_fault+0x1e0/0x868
+
+[27024.785950]  f2fs_filemap_fault+0x34/0xec
+
+[27024.792392]  __do_fault+0x70/0x110
+
+[27024.797172]  do_pte_missing+0x300/0x12f0
+
+[27024.802556]  handle_mm_fault+0x4d4/0x818
+
+[27024.808201]  do_page_fault+0x210/0x640
+
+[27024.813143]  do_translation_fault+0x48/0x11c
+
+[27024.818658]  do_mem_abort+0x5c/0x108
+
+[27024.824631] page last free pid 55 tgid 55 stack trace:
+
+[27024.831407]  free_unref_page+0x828/0x978
+
+[27024.837039]  __folio_put+0xac/0xdc
+
+[27024.842449]  migrate_pages_batch+0x127c/0x1894
+
+[27024.849239]  migrate_pages+0x3f0/0x798
+
+[27024.856057]  compact_zone+0xca8/0x12ec
+
+[27024.861241]  compact_node+0xc0/0x190
+
+[27024.865955]  kcompactd+0x3b8/0x978
+
+[27024.872656]  kthread+0x118/0x1ac
+
+[27024.878257]  ret_from_fork+0x10/0x20[27024.604851] JY f2fs_is_cp_guaranteed
+65 bounced_page:0xfffffffe81338410, _private:0xfffffffe813c54f0,
+fscrypt_pagecache_page(page):0x000000005566f2f5
+
+[27024.620405] JYJY :fffffffe813c54f0 is the PAGE
+
+[27024.626388] page: refcount:4 mapcount:1 mapping:000000008cdd016b index:0x1d
+pfn:0x3f443
+
+[27024.636025] memcg:ffffff8031bd0000
+
+[27024.641269] flags:
+0x1000000000009029(locked|uptodate|lru|owner_2|private|zone=0)
+
+[27024.650060] raw: 1000000000009029 fffffffe813c54a8 fffffffe813bc588
+ffffff806b096f68
+
+[27024.660600] raw: 000000000000001d 0000000000000009 0000000400000000
+ffffff8031bd0000
+
+[27024.669271] raw: 000000003f443000 0000000000000000
+
+[27024.675745] page dumped because: JY got the BUG!
+
+[27024.683789] page_owner tracks the page as allocated
+
+[27024.690777] page last allocated via order 0, migratetype Movable, gfp_mask
+0x152c4a(GFP_NOFS|__GFP_HIGHMEM|__GFP_NOWARN|__GFP_NORETRY|__GFP_COMP|__GFP_HARDWALL|__GFP_MOVABLE),
+pid 30372, tgid 30372 (android.vending), ts 27014734256272, free_ts
+27002686350166
+
+[27024.724435]  post_alloc_hook+0x1d0/0x1e8
+
+[27024.730550]  prep_new_page+0x30/0x150
+
+[27024.735185]  get_page_from_freelist+0x11e8/0x127c
+
+[27024.744799]  __alloc_pages_noprof+0x1b0/0x448
+
+[27024.753649]  __folio_alloc_noprof+0x1c/0x64
+
+[27024.759063]  page_cache_ra_unbounded+0x1a4/0x36c
+
+[27024.767626]  page_cache_ra_order+0x358/0x434
+
+[27024.774150]  do_sync_mmap_readahead+0x20c/0x280
+
+[27024.780541]  filemap_fault+0x1e0/0x868
+
+[27024.785950]  f2fs_filemap_fault+0x34/0xec
+
+[27024.792392]  __do_fault+0x70/0x110
+
+[27024.797172]  do_pte_missing+0x300/0x12f0
+
+[27024.802556]  handle_mm_fault+0x4d4/0x818
+
+[27024.808201]  do_page_fault+0x210/0x640
+
+[27024.813143]  do_translation_fault+0x48/0x11c
+
+[27024.818658]  do_mem_abort+0x5c/0x108
+
+[27024.824631] page last free pid 55 tgid 55 stack trace:
+
+[27024.831407]  free_unref_page+0x828/0x978
+
+[27024.837039]  __folio_put+0xac/0xdc
+
+[27024.842449]  migrate_pages_batch+0x127c/0x1894
+
+[27024.849239]  migrate_pages+0x3f0/0x798
+
+[27024.856057]  compact_zone+0xca8/0x12ec
+
+[27024.861241]  compact_node+0xc0/0x190
+
+[27024.865955]  kcompactd+0x3b8/0x978
+
+[27024.872656]  kthread+0x118/0x1ac
+
+[27024.878257]  ret_from_fork+0x10/0x20
+
+-- 
+You may reply to this email to add a comment.
+
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
