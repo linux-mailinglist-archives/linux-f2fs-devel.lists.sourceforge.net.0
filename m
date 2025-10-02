@@ -2,75 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34082BB15BB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 01 Oct 2025 19:25:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2083EBB24E1
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 02 Oct 2025 03:57:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=aYGH3uHmweAaICHT/ICrBbZdXiR2JSRiueNVmR2eYkI=; b=VgBUhjTYjlEWVNQ6Pso3kIL6ZR
-	CspCu6Z9vjsSY8FOgBkfyGriullqTHGa3XuLPM8BuId7RsQEUSkPH6r4NFYFKLbq7Ak/I3qVO0ej+
-	fqdC8fE4bFgLB78FDjrvcKdaBiz7TuBSSwmG2/j56pY6xheUIUdvtQzF79BN9KJzrDZM=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=o3/seysWyWQf0sDQO2Bc/O9ICZKcKE10Albh64Xg3rA=; b=VwyYII1yBR4iEPwLDK7dSY4gR/
+	h4rrg5lrQDsl3yAW1kkHUGaR3jB1A8jNh9Eb2kAFw7D7Cj1TXIfrrY6zpoHzOMb12ztCeVizurIp8
+	ig0qATt3zSIsnu/j3YPaOdYuUzLZmMm0BNWuQw2/ZpDn0Uo3vy1sKdeRkM6SiuwWK5Yg=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v40a3-0005cX-0B;
-	Wed, 01 Oct 2025 17:25:31 +0000
+	id 1v48Yx-0003OP-7T;
+	Thu, 02 Oct 2025 01:56:55 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1v40Zw-0005cM-HD
+ (envelope-from <jaegeuk@kernel.org>) id 1v48Yv-0003OJ-MY
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Oct 2025 17:25:24 +0000
+ Thu, 02 Oct 2025 01:56:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1yt1l6FpY5WayQ1yBJ7w4+8mgjpmCXMoKaJpCMFLDik=; b=S5nov7XD8E8ihOVrapZ4WiJ12X
- XA9WJ6uj4fuo1upQdL3Hfwab6P0yy02v2D06morxoKovov/ZxY48c/4UdtPhdFsm350RLTtSpzv6l
- jLhr/wuTriX2OiTX5PPCV95PJm4Yt7Tm886ierZmfHjtvFzU/ZGwDX9Iyk5JOkpswYCU=;
+ bh=b3P25xc+xiOTiwTL4AbrmjQbIbDqmBDxgeqTRQhOW94=; b=Nnp5pDubB9ddho3tP8SDOcGTVz
+ G5tJJr8pgYSiVuyJqWWXeR1CFU2wyFgELdqWX8fGAxLYt3HWo3VvhLlyX7O/ptS9z2mwUA7wLVhgV
+ G145ZoQhVMNKEQ10kzoFweYsoiLF/zmX/CVCX5XGyH14yEti2ohcaHrGiUoVHW0QJC10=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=1yt1l6FpY5WayQ1yBJ7w4+8mgjpmCXMoKaJpCMFLDik=; b=mRzJyFItn6GrA9bTCZ2jPabqAi
- F9mUsCdkHGdUKE31ImMXbiuvmiGuU9izFhV/AtJBIZWfk6AVRDq+hlB6jkuhnZbY34stoEXiFSJdV
- BLdCJ/VRYw41ru0+Yoo75rFDr+H2kD9zOzk7FIBzMRM2+guWSwc1E4rKK23QbDWjsAQI=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=b3P25xc+xiOTiwTL4AbrmjQbIbDqmBDxgeqTRQhOW94=; b=B
+ 1ssOhQvw6PdWRW7+wVVcCHsbv+eJ08zUvd6WUFRM40RmK2tQTeQazj0jqMyezejYZHLL0YIvpbv91
+ V4XrKv6jLYPmq77tLtPL+SSwUwgZR0vs3fSG9uSGYiWAHIKocHxgzZGp4W/34YKr1g19qJKZH62H+
+ sxW55r23ntRPQrd4=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v40Zv-0005Qa-VI for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Oct 2025 17:25:24 +0000
+ id 1v48Yv-00029F-Aj for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 02 Oct 2025 01:56:53 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 4AFD6605A5;
- Wed,  1 Oct 2025 17:25:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6F47C4CEF1;
- Wed,  1 Oct 2025 17:25:17 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id C983543A0A
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  2 Oct 2025 01:56:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94086C4CEF1;
+ Thu,  2 Oct 2025 01:56:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759339518;
- bh=sRW95YIBG18A2cf8IDstaGyspNAd2rL2HIltY7BriT4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=an9IQYQzdsBU+sOeaWfiZQVXgZm5Q2h2VeSMOCDzlL0s8JZPAKa9BoyVsUBRe3RJD
- FNAdSwKMbaB02iQ8bKQHCgDsLVaCsx2c214kEfCJJ18SL4cPFk5FBUNFCeEG76BLFs
- 3dpA6y1ityYCzmz0EguFMPKBoZKHS61hY3lTe8htme/oQ4zh1Z5JyecMFm3jrGqwVj
- B0JiIR2MENFKUoZctExAIKq/X6JojGIerDWKrH1HUVFvRRlfH+rQCYpt/h13aviUX6
- p+xDot+3ZtkBn8O5RHhcaNkp1FnKa69+7zb40qOjP3KblP86Xe1Zj7u/uOHEE4WrBl
- +FdgXpdKhybiA==
-Date: Wed, 1 Oct 2025 17:25:16 +0000
-To: Juhyung Park <qkrwngud825@gmail.com>
-Message-ID: <aN1j_Kapop-6B46V@google.com>
-References: <20250930170952.3188971-1-jaegeuk@kernel.org>
- <CAD14+f0JGoNeEbN=duPeiKhBmQK9EBZ4h-BE0ShwmckzoQ47PQ@mail.gmail.com>
+ s=k20201202; t=1759370207;
+ bh=01fYEaXX5bM/2w1XwUy+dhIFMUhIo7WDFLeTNVXFsrE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=AkruCSmMOw8vqDIFrHAsV3BOcQ1PF+iWbhRcGgzyocDxnOCEJJ/5fxWzbi3c5OQKv
+ ak7j7Hn5xyUZcY6jM3lG//UohIYrwRAAp+XMh2c35K+svtDbj5B/CsiRxadq7WX1a3
+ E6X59Lod4eYIuQTwPrWmzs2hFR7eQ313NySUNIgDPZitikdAA6rL5/l6jNFPYfEKwF
+ CAmTxkomPaMsMkIoJCFJaECyuRWevIpKzOSvCJRTjxKS12WoXSuL5PDeM1V/cc1fFG
+ jVQA4ijrTwZTQgwslFC96OTDd1BvRwvuEDXzdmXnJDcqCZOZFAbbBCxHphqWe0cGYZ
+ M+sXttM/C/ivQ==
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Thu,  2 Oct 2025 01:56:45 +0000
+Message-ID: <20251002015645.3588322-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.51.0.618.g983fd99d29-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAD14+f0JGoNeEbN=duPeiKhBmQK9EBZ4h-BE0ShwmckzoQ47PQ@mail.gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -78,11 +77,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 09/30, Juhyung Park wrote: > I recall being told by Chao
- that the ext is checked with .startsWith()-like > semantics,
- hence "mp" covering
- both mp3/mp4. > > Was this not the case for hot list? Thanks, Juhyung. Yeah,
- it seems the code looks like that. Let me drop this patch. 
+ Content preview: We missed to call dput() on the grabbed dentry. Fixes:
+ f1a49c1b112b
+ ("f2fs: show the list of donation files") Signed-off-by: Jaegeuk Kim
+ <jaegeuk@kernel.org>
+ --- fs/f2fs/sysfs.c | 1 + 1 file changed, 1 insertion(+) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +93,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v40Zv-0005Qa-VI
-Subject: Re: [f2fs-dev] [PATCH] mkfs.f2fs: set SQLite journal files to hot
- extensions
+X-Headers-End: 1v48Yv-00029F-Aj
+Subject: [f2fs-dev] [PATCH] f2fs: add missing dput() when printing the
+ donation list
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,35 +109,37 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMDkvMzAsIEp1aHl1bmcgUGFyayB3cm90ZToKPiBJIHJlY2FsbCBiZWluZyB0b2xkIGJ5IENo
-YW8gdGhhdCB0aGUgZXh0IGlzIGNoZWNrZWQgd2l0aCAuc3RhcnRzV2l0aCgpLWxpa2UKPiBzZW1h
-bnRpY3MsIGhlbmNlICJtcCIgY292ZXJpbmcgYm90aCBtcDMvbXA0Lgo+IAo+IFdhcyB0aGlzIG5v
-dCB0aGUgY2FzZSBmb3IgaG90IGxpc3Q/CgpUaGFua3MsIEp1aHl1bmcuIFllYWgsIGl0IHNlZW1z
-IHRoZSBjb2RlIGxvb2tzIGxpa2UgdGhhdC4gTGV0IG1lIGRyb3AgdGhpcwpwYXRjaC4KCj4gCj4g
-T24gVHVlLCBTZXAgMzAsIDIwMjUgYXQgMTA6MTPigK9BTSBKYWVnZXVrIEtpbSB2aWEgTGludXgt
-ZjJmcy1kZXZlbCA8Cj4gbGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQ+IHdy
-b3RlOgo+IAo+ID4gSm91cm5hbCBmaWxlcyB3aWxsIGJlIGNyZWF0ZWQgYW5kIGRlbGV0ZWQgd2l0
-aCByYW5kb20gdXBkYXRlcy4gTGV0J3MgcHV0Cj4gPiB0aGUgZGF0YSBpbiBIT1QgbG9nIHRvIG1p
-dGlnYXRlIHRoZSBlbnRpcmUgZnJhZ21lbnRhdGlvbi4KPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBK
-YWVnZXVrIEtpbSA8amFlZ2V1a0BrZXJuZWwub3JnPgo+ID4gLS0tCj4gPiAgbWtmcy9mMmZzX2Zv
-cm1hdC5jIHwgMyArKysKPiA+ICAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspCj4gPgo+
-ID4gZGlmZiAtLWdpdCBhL21rZnMvZjJmc19mb3JtYXQuYyBiL21rZnMvZjJmc19mb3JtYXQuYwo+
-ID4gaW5kZXggYjk4OTc2YzZmZmE4Li41M2UxZjk4Mjk0NWQgMTAwNjQ0Cj4gPiAtLS0gYS9ta2Zz
-L2YyZnNfZm9ybWF0LmMKPiA+ICsrKyBiL21rZnMvZjJmc19mb3JtYXQuYwo+ID4gQEAgLTE1Nyw2
-ICsxNTcsOSBAQCBjb25zdCBjaGFyICptZWRpYV9leHRfbGlzdHNbXSA9IHsKPiA+Cj4gPiAgY29u
-c3QgY2hhciAqaG90X2V4dF9saXN0c1tdID0gewo+ID4gICAgICAgICAiZGIiLAo+ID4gKyAgICAg
-ICAiZGItam91cm5hbCIsCj4gPiArICAgICAgICJkYi13YWwiLAo+ID4gKyAgICAgICAiZGItc2ht
-IiwKPiA+Cj4gPiAgI2lmbmRlZiBXSVRIX0FORFJPSUQKPiA+ICAgICAgICAgLyogVmlydHVhbCBt
-YWNoaW5lcyAqLwo+ID4gLS0KPiA+IDIuNTEuMC42MTguZzk4M2ZkOTlkMjktZ29vZwo+ID4KPiA+
-Cj4gPgo+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-PiA+IExpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0Cj4gPiBMaW51eC1mMmZzLWRldmVsQGxp
-c3RzLnNvdXJjZWZvcmdlLm5ldAo+ID4gaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlz
-dHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo+ID4KCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApM
-aW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJj
-ZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+We missed to call dput() on the grabbed dentry.
+
+Fixes: f1a49c1b112b ("f2fs: show the list of donation files")
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/sysfs.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 7992386fb9e6..6d2a4fba68a2 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -1845,6 +1845,7 @@ static int __maybe_unused donation_list_seq_show(struct seq_file *seq,
+ 				(loff_t)(fi->donate_end + 1) << (PAGE_SHIFT - 10),
+ 				(loff_t)inode->i_mapping->nrpages << (PAGE_SHIFT - 10));
+ next:
++		dput(dentry);
+ 		inode_unlock_shared(inode);
+ 		iput(inode);
+ 	}
+-- 
+2.51.0.618.g983fd99d29-goog
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
