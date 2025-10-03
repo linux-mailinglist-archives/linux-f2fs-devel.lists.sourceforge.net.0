@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD9A3BB5D4A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 03 Oct 2025 04:45:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CE10BB5D7C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 03 Oct 2025 05:13:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=QU9YGJsSXJRGI1YXq1d6qt7/09zee0+YphAI4t7X+Q0=; b=PiysNbbwnpBnJCjlp/7ssTblV4
-	bpPIfuWU2GBDc24wIm4yS3z3tpQy/uxtxC7DXzG1c4UTrdkQpOEK66RcO8imwHkcyI4FcKTAyfLdY
-	CcfEQWfnFZxO1qFUQF8nCTTbZ2lhDAL52No2FDgTCtjOcrrHwFVG1ophN+hgEXVWJjtY=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=HojHF0vRDXmcNOfxci0cvaWyMlhKtjCOj4PDoT1d514=; b=cYrCKcO0+0z8QC6vuhCLbo1t0i
+	OZb1ROE20pLb+DPIshI3igwyUMaiByuCc4Ks/nNXJ1MtpK7jf87XydO+qSmXW9ChsbnMLObck20sE
+	OGSvwzwK9gMoTal08i3py4PbLtnsdVYDX3fyMFV626VXqJqAJiSuLKcw3ajla58m/fho=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v4Vn1-0007Or-6Z;
-	Fri, 03 Oct 2025 02:44:59 +0000
+	id 1v4WEx-0003tv-QO;
+	Fri, 03 Oct 2025 03:13:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1v4Vn0-0007Ol-10
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1v4WEv-0003tp-Qx
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Oct 2025 02:44:58 +0000
+ Fri, 03 Oct 2025 03:13:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ib1AeoQ+ItWol3LzxiyYEzZ7LYdAzBRCVGAGLtI9KYc=; b=g46s9aOvaq7kWiYMUOvkCmpHVR
- H7QA41uGZ1E8tHjEwH54+SyeyNZSV95gTe/swEWiAUItOmrhGUeklXpaBzlREt5ujJwyY2Sb6DTZ7
- dBhxJrf0xnsU8IFGxvj/c3hOxwvctcJ1YcDb0QRljepLnfWfhJOUOesVG+v1mN3bnzzo=;
+ bh=Ik2xJfQUZrMzG+Ys8Tf6OH602Usx1Pmf6PNrS6XE8gI=; b=AARA4JNi26u+pxAZ27bHpINR37
+ Uovty5wzZGYCwJSfxS31r6sIWWWMLQqzT1XO6ZTgiXskFAQ98PmFK2lq0HxHFkrLiIxCptV3kgnU8
+ P414EZzH52tMHa+cNFqRIKEjL4iyRVZ+Ct3LXPFKhHVRcTFEJNXOIBDmTbi1CKMvQKgM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -40,35 +40,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ib1AeoQ+ItWol3LzxiyYEzZ7LYdAzBRCVGAGLtI9KYc=; b=jcnDqzRwsxIvHNkfOYMxA8CbHp
- EEHqTWPRnnWqKTOrqAlSgyRAMKce5FBgnPh1mOTWJBQtnN6vDZnS9/XjHkUACJFCzpbx5o1latA/j
- fY0EvKqysjEPl79eVTcx9BvcLXTm6F04vgLHaNaIExikjjQskYo0DIK1ab/IM9tK00fc=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=Ik2xJfQUZrMzG+Ys8Tf6OH602Usx1Pmf6PNrS6XE8gI=; b=NvD5sYTC6ErSk1BfFNa8J+zplW
+ TqJ4CUumPriFDRW5ARmEDsq1b5GhvhSxaSq4riW5sHR8ZpBOOFiTKnYw3cuSxSFDsil2R4fZ5C8Yv
+ W7C2Gv8kRA7sM5+rnlXxSvAwKxF4qq02M2WwAV8kyUBF5eME302C6PEE8d8ZZpMQPg8w=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v4Vn0-0007m3-AP for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Oct 2025 02:44:58 +0000
+ id 1v4WEv-0001jq-Aj for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 03 Oct 2025 03:13:49 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 0502C41A66
+ by tor.source.kernel.org (Postfix) with ESMTP id 66A3160572
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  3 Oct 2025 02:44:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D271BC4CEFD
+ Fri,  3 Oct 2025 03:13:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 78988C4CEF4
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  3 Oct 2025 02:44:22 +0000 (UTC)
+ Fri,  3 Oct 2025 03:13:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759459462;
- bh=Ib1AeoQ+ItWol3LzxiyYEzZ7LYdAzBRCVGAGLtI9KYc=;
+ s=k20201202; t=1759461215;
+ bh=Ik2xJfQUZrMzG+Ys8Tf6OH602Usx1Pmf6PNrS6XE8gI=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=S6Su9NiPd1eyXOtcUYRC8jw79RzP2MY5NBGLaxHPVtlPy3wM2m1+5gtcZ42SkkrVY
- lqNgA8X3sBtCDxWI05EJ7eg7lg7ZOPMrIGa9YXWACX1QraVweI4ecODYZA89V9l5Xj
- zdF/NDmwXiMLTpZfO6AHLhE3gv9hYCvVfJqPZCF2+AmfLB2FMo5Weo6VuOaGfoC33Q
- WyOQ6ufrMyNXUiGYLJocHJe9K4MLHnmkkZZBlUur5km/s3u6axrQ893GD35MCCzLIL
- ucQWuSMr1+Ia5Rs4+yDkMeGwIkqg6opcrEQdrMkE4JcYCROEBolmeKg9HF/1MRDaIS
- WwiL/1E7f13DQ==
+ b=lkxan/DzyinUo4eSGbrQc2LlIvTkosE2rhu8TySdxxeDxEQ65qbotKxF1LQwbn/S6
+ zzOo4Fw1bIVWre66WUSn9onXkWgynuP+dr3aB19oozzDWlAcfYdmfXAqdixKyTwnt3
+ Ckbov6uT2BP+FnLsXHqO2zR/hrm9NsC5Yws/oMCFi/m4gGyRTrRiXOUgCX5ObkKwAv
+ lZPW/az4yxcKMZ3f2rT6gZscM9EQFGCd0R+ivnRuKRYhuPRC3Q57jN4ZHJg/z7Ueul
+ czpTOFF809zb1zIgS6ERFyHMoOBuOArg2Aog9rAWcZbnmD5Hd+Ow1C7gJbLJpRtgbC
+ uN/aL0XyA70RA==
 Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id C07ACC3279F; Fri,  3 Oct 2025 02:44:22 +0000 (UTC)
+ from userid 48) id 63F7FC3279F; Fri,  3 Oct 2025 03:13:35 +0000 (UTC)
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 03 Oct 2025 02:44:22 +0000
+Date: Fri, 03 Oct 2025 03:13:35 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -77,14 +77,14 @@ X-Bugzilla-Component: f2fs
 X-Bugzilla-Version: 2.5
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Who: JY.Ho@mediatek.com
 X-Bugzilla-Status: ASSIGNED
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: P3
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-220575-202145-6ovkY8oQa1@https.bugzilla.kernel.org/>
+Message-ID: <bug-220575-202145-F4YLhjie7C@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-220575-202145@https.bugzilla.kernel.org/>
 References: <bug-220575-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
@@ -99,9 +99,9 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=220575 ---
  Comment
- #18 from Chao Yu (chao@kernel.org) --- (In reply to JY from comment #16)
- > I tried to modified: > + set_page_private(bounce_page, (unsigned
- long)0x5566F2F5); > > But I got two results from [...] 
+ #19 from JY (JY.Ho@mediatek.com) --- (In reply to Chao Yu from comment #18)
+ > (In reply to JY from comment #16) > > I tried to modified: > > +
+ set_page_private(bounce_page, (unsigned long) [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -112,8 +112,12 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [172.105.4.254 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v4Vn0-0007m3-AP
+X-Headers-End: 1v4WEv-0001jq-Aj
 Subject: [f2fs-dev] [Bug 220575] Unable to handle kernel NULL pointer
  dereference at virtual address 0000000000000000
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -136,22 +140,25 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=220575
 
---- Comment #18 from Chao Yu (chao@kernel.org) ---
-(In reply to JY from comment #16)
-> I tried to modified:
-> + set_page_private(bounce_page, (unsigned long)0x5566F2F5);
+--- Comment #19 from JY (JY.Ho@mediatek.com) ---
+(In reply to Chao Yu from comment #18)
+> (In reply to JY from comment #16)
+> > I tried to modified:
+> > + set_page_private(bounce_page, (unsigned long)0x5566F2F5);
+> > 
+> > But I got two results from different panics. 
+> > fscrypt_pagecache_page(page):0x000000005566f2f5 and 
+> > 
+> > fscrypt_pagecache_page(page):0x0000000000000000 (As shown below)
 > 
-> But I got two results from different panics. 
-> fscrypt_pagecache_page(page):0x000000005566f2f5 and 
+> I think this is the same issue, actually, value of page->private should be
+> unpredictable, because this is a UAF issue, we don't know how system changes
+> the page after we freed it.
 > 
-> fscrypt_pagecache_page(page):0x0000000000000000 (As shown below)
+> So, can you please test the fix to check whether it can solve your problem
+> or not? Thanks a lot. :)
 
-I think this is the same issue, actually, value of page->private should be
-unpredictable, because this is a UAF issue, we don't know how system changes
-the page after we freed it.
-
-So, can you please test the fix to check whether it can solve your problem or
-not? Thanks a lot. :)
+No problem, it's my pleasure. :)
 
 -- 
 You may reply to this email to add a comment.
