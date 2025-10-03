@@ -2,101 +2,135 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27C94BB634E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 03 Oct 2025 10:03:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58515BB7129
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 03 Oct 2025 15:48:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:To:Date:Message-ID:Sender:Cc:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=/fvGw+HukmNa+zishKEIMQQHBesd3rQT4sKL+Qgx/uw=; b=YURok7QVHNKRFasHnZhdW+BuLP
-	Ytq6/LZyMLotax1meiFe39k/y9FZZEK9LRLctSVg6he+eFX5CFtZAKhzWNZQiEIHcIyw5pR6GO4eM
-	cyLUXUU4H7Y8E/Bv9XY0KlWuIQOzSoiuI5JjjzpKCwoU7vQ93R1VjKZd1v4EXabwQEz8=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=ZdN6aN6FY+nWTtXtqTqJf5dZ/vpcSVE+PdQYF4YK3cQ=; b=T99SSPe0/RvOZXE9epctfV8p4f
+	2r6iJXiIIdbxacDMYcMHDHYSqztoWW4vBO7G7wsL2f5E3QDLb/K65yz9bff8twkgjRfMW0h1uxdUE
+	ZLLQTKIf74vb9ijEe8YMdWCtJMkLfzvVFLAHhZSkwfZBAnJR/+Ay30to3WVBR9FEDWj8=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v4al6-0001j7-Sb;
-	Fri, 03 Oct 2025 08:03:20 +0000
+	id 1v4g8X-0006UA-RB;
+	Fri, 03 Oct 2025 13:47:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <adrian.liszka@proventix.pl>) id 1v4al5-0001j1-LI
+ (envelope-from <zlatistiv@gmail.com>) id 1v4g8W-0006U3-CE
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Oct 2025 08:03:19 +0000
+ Fri, 03 Oct 2025 13:47:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Subject:To:From:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jxb0oDMobd7GaIcoqojTSF8ZoNcoVg4kM8ohJkoHKb8=; b=DdAPblEGcqsDyNO93njfEZtVxX
- HIv9IgbiG21OLoM7KO+AyFEKAeS8qfot8Kjkn/Paa/JlNEht4Bb/6rPKOks9spwed3Vrl0/KiCYcl
- yhnQEZZqr/leO9xf5hHTkcuNdQHudnvsD732X2rPhd7A3lxncrxqsuzhaC5nZuPs+XI0=;
+ bh=SXz1taGyCnsjIOklnSCeHrVpWlskjbKzfy7PmtERQsU=; b=BFZXn01YdFE7ujbUQd0fQrR41z
+ hxoG1SkUyo5fDmvTqOPL8Jwqz+q9QrAs75TZFgG4qM6kQycflWlzKxIW5T6aIIjWOkUj7eA4zIAOG
+ +ll+a1YuLqsD67QH9N1IUtnlvyUuwm9uMhHZPZyKaASHlw1m1PISBafVPA0XdAYcxrWw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:To:From:Date:
- Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=jxb0oDMobd7GaIcoqojTSF8ZoNcoVg4kM8ohJkoHKb8=; b=I
- vJMmzBCdbnIU21/MNmd3VzVjkXBZmM0mT95tvz3s/mHO6IoVGAtXkEQfCxADF74ZR8ERhKlotm/JF
- Eyo22sccH2ABLO+ObDhrkT7TsCLIhNjJ70bi3hEuOcINzjKp2ubfVy0RQwVoaEgHQEXRAwxoFHvBn
- f+aMYYh2e7K2CA84=;
-Received: from mail.proventix.pl ([51.195.118.1])
+ List-Owner:List-Archive; bh=SXz1taGyCnsjIOklnSCeHrVpWlskjbKzfy7PmtERQsU=; b=B
+ qeqRPX92XNi0qZHaLaabCJVKj6xNo4r6Bb0gnCHm1URjfwGz/tsQXHT1dIs42s0pasuguEdWv8Zyz
+ lA0R5luOiPCwFZqYsX/aB0mO8qt9Mp1/bFdtW5E/eaO5z1ZzqPHb9nF41OMilVj14B35Zbx/DwZbi
+ 41pLSUAREOiczBX4=;
+Received: from mail-ed1-f53.google.com ([209.85.208.53])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v4al4-0005zB-0V for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Oct 2025 08:03:19 +0000
-Received: by mail.proventix.pl (Postfix, from userid 1002)
- id BF904A584B; Fri,  3 Oct 2025 10:01:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=proventix.pl; s=mail;
- t=1759478586; bh=jxb0oDMobd7GaIcoqojTSF8ZoNcoVg4kM8ohJkoHKb8=;
- h=Date:From:To:Subject:From;
- b=DBWx79ZjUCIXV72lTJu4gwbgbH/xFnu4Y+q+dntEzm/K6xFNwBYNhR3FIM0667SNw
- EkjLz90geB0E/m14X7y04qjEz44lsEZ2qj0KmZBGcsuvSBxHkE+o/6VzzlHrk4/rup
- 74FOCdsI5+fUf9FOiHFdKS+sqfDf4iyjIV+MOY37t2DqXuwpMQ+wvm9FW7uMQy9hIM
- VQmdZ2bElbuSrb4EphbBUKTmlHzTBoaWyy5T3TBWoFbQFbL5WTlozxvIA9Xw2+Zo+R
- iMwEIYHjSu1ZfWlHromVv4VbbM4erntXMry0iRG6cZTjUkSiReR1DmIXR8QSjl1kxm
- kYz2VA9QmVKUg==
-Received: by mail.proventix.pl for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  3 Oct 2025 08:01:27 GMT
-Message-ID: <20251003084500-0.1.oa.3cwun.0.uhegw2do4i@proventix.pl>
-Date: Fri,  3 Oct 2025 08:01:27 GMT
-To: <linux-f2fs-devel@lists.sourceforge.net>
-X-Mailer: mail.proventix.pl
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1v4g8V-0000GZ-Rj for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 03 Oct 2025 13:47:52 +0000
+Received: by mail-ed1-f53.google.com with SMTP id
+ 4fb4d7f45d1cf-6228de280a4so4593369a12.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 03 Oct 2025 06:47:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1759499260; x=1760104060; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SXz1taGyCnsjIOklnSCeHrVpWlskjbKzfy7PmtERQsU=;
+ b=fQLA7soSgINj6aFz825bHUskoigkZeMYPs9IuZbkvVEtzzuEEauxqFDDeOMWjYEpQF
+ qGjmPHFPR/a6UdS+PK2+Gt3hBic38/0BiG8ovmX1S6K/0/0mESv7mGG6sd3JoK2+igio
+ CAJRBtQYuhazBR3N9eNkTwsYx8V/r25RsNJ6N1DKQi8HU54XXjGKAbfGcz66ROTM2qe/
+ 27dQ1Kdalz0wk5kvLGyXuJJuUTYdPkMjiplKsZXKygSFvYsBfCliqGZVjr/Q/16eeNfe
+ Gp1xZumK5nWh9dNNJeHCh77KGyJIClg5bUDusJYcooJBkVcJaYy1q4IyxGWaXJMwXer3
+ AYUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759499260; x=1760104060;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SXz1taGyCnsjIOklnSCeHrVpWlskjbKzfy7PmtERQsU=;
+ b=jHfSzUQuKE6ZwNjM9KLuCNHCTx+LP41CM+BcNNQYd5FP43ixQG/Ru01knEwYSj62mW
+ IsjcAOjHvd0DM1taTXxt9/p1U861p1ExXaMq5DH2yEieaAuf7FSrxOca9Ts4uMPgiC3W
+ dGS8QBtEa6jPfFlRhqOQoUA1lhnk8CqfMQcUc7My+ZJ+s7NPRSVBlqd8HnuA84xXASyp
+ GahBeS22GSSgH2WQ4JeUBgWOucRqiwKNpn29vvPpGKg2eqHFVjRau07+bKBvXYuhj5pU
+ DDEW2iWuJ7rcopV1JFiC+zQiO4S2/VWlkYdxAzrMLAY12JTWfNhFetNVyBQJIna0meF1
+ +L+w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWh78HIcDnpi7XA4i0rrxj4C+eitYrltU/kufkoHrZyrnS9kRl91KRyExb8G6d8n8waDjDOii8okg52W4DMIfrK@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YxpYs63w6t8u0U2L2YlmgrTdjhec2BaeU5r9TFvGw6+Q8WOWHKo
+ J5MgBPoXUT/hfRD43AMvQoD0D3iu8J0x75rQTzR7QHAifJWgA2mNZzuH
+X-Gm-Gg: ASbGncvbqMPQl+NTmI1L3JTgxnI934Yu0V3q0WaGeZ7NaLexqrsyRU64qtGNqpvuRS9
+ rtjd7A+jtg5t6szPp+8MjUKX7vGzdGPWtsSWbHujGZnEqnHKhcBEvYqvl0tP5+t544vDMNKtLsN
+ DMRhoAppYLIXRr2PfxoVXKAsxzH1oIP8BBfdZjwgco7wjINffevjH6pA8E9v3pezFhC4+68KZUz
+ 3VxeM9sv8LfLFBO2X7inmyjbpyfRuB72VBpNTOmXbLST/sHNJCZP9qNvbB6tp6MjTovpF0KQ2Zb
+ faP55eevopc4fnXUUOsMh+dFwGqS3F7XrER7ZblkUI930fl4sC05mWi8RN5FYzWnvJKOYWMDWMZ
+ p2vd3rcfJjSMBJPAvti0ulhCPlL3CmJRxLRs41hsOl3tZUGUP+wzKqJhIbRL//0c08Ujv7olBBQ
+ SQRlMhu/OYICaHow==
+X-Google-Smtp-Source: AGHT+IGT22rMOS7zpkVXCQktJ+CXsz5d60nlco16amfiTaRrE8PNlBBx+BmcaTn1+GNMGJdxBxc5Uw==
+X-Received: by 2002:a05:6402:5250:b0:62f:2afa:60e6 with SMTP id
+ 4fb4d7f45d1cf-639346c8b7dmr3139059a12.7.1759499259990; 
+ Fri, 03 Oct 2025 06:47:39 -0700 (PDT)
+Received: from localhost.localdomain ([46.10.223.24])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-637881011e9sm4009560a12.25.2025.10.03.06.47.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Oct 2025 06:47:39 -0700 (PDT)
+From: "Nikola Z. Ivanov" <zlatistiv@gmail.com>
+To: jaegeuk@kernel.org, chao@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Date: Fri,  3 Oct 2025 16:47:31 +0300
+Message-ID: <20251003134731.470392-1-zlatistiv@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-X-Spam-Score: 4.1 (++++)
-X-Spam-Report: Spam detection software, running on the system "sfi-spamd-1.hosts.colo.sdot.me",
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Dzień dobry, Czy jest możliwość nawiązania współpracy
-    z Państwem? Z chęcią porozmawiam z osobą zajmującą się działaniami
-    związanymi ze sprzedażą. 
- 
- Content analysis details:   (4.1 points, 5.0 required)
- 
-  pts rule name              description
+ Content preview: Current i_nlink corruption check does not take into account
+ directory inodes which have one additional i_nlink for their "." entry. Add
+ additional check and a common corruption path. Reported-by:
+ https://syzkaller.appspot.com/bug?extid=c07d47c7bc68f47b9083
+ Fixes: 81edb983b3f5 ("f2fs: add check for deleted inode") Signed-off-by:
+ Nikola Z. Ivanov --- fs/f2fs/namei.c | 28 +++++++ [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.3 RCVD_IN_MSPIKE_L3      RBL: Low reputation (-3)
-                             [51.195.118.1 listed in bl.mailspike.net]
-  0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
-                             was blocked.  See
-                             http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
-                              for more information.
-                             [51.195.118.1 listed in list.dnswl.org]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
-                             domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
-  4.0 RCVD_IN_MSPIKE_BL      Mailspike blocklisted
-X-Headers-End: 1v4al4-0005zB-0V
-Subject: [f2fs-dev] =?utf-8?q?Prosz=C4=99_o_kontakt?=
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [zlatistiv(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.53 listed in wl.mailspike.net]
+X-Headers-End: 1v4g8V-0000GZ-Rj
+Subject: [f2fs-dev] [PATCH] f2fs: Perform sanity check before unlinking
+ directory inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,18 +142,96 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Adrian Liszka via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Adrian Liszka <adrian.liszka@proventix.pl>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: david.hunter.linux@gmail.com,
+ syzbot+c07d47c7bc68f47b9083@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, khalid@kernel.org, skhan@linuxfoundation.org,
+ linux-kernel-mentees@lists.linuxfoundation.org,
+ "Nikola Z. Ivanov" <zlatistiv@gmail.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-RHppZcWEIGRvYnJ5LAoKQ3p5IGplc3QgbW/FvGxpd2/Fm8SHIG5hd2nEhXphbmlhIHdzcMOzxYJw
-cmFjeSB6IFBhxYRzdHdlbT8KClogY2jEmWNpxIUgcG9yb3ptYXdpYW0geiBvc29ixIUgemFqbXVq
-xIVjxIUgc2nEmSBkemlhxYJhbmlhbWkgendpxIV6YW55bWkgemUgc3ByemVkYcW8xIUuCgpQb21h
-Z2FteSBza3V0ZWN6bmllIHBvenlza2l3YcSHIG5vd3ljaCBrbGllbnTDs3cuCgpaYXByYXN6YW0g
-ZG8ga29udGFrdHUuCgoKWiBwb3pkcm93aWVuaWFtaQpBZHJpYW4gTGlzemthCgoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBt
-YWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6
-Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+Current i_nlink corruption check does not take into account
+directory inodes which have one additional i_nlink for their "." entry.
+
+Add additional check and a common corruption path.
+
+Reported-by: syzbot+c07d47c7bc68f47b9083@syzkaller.appspotmail.com
+Closes: https://syzkaller.appspot.com/bug?extid=c07d47c7bc68f47b9083
+Fixes: 81edb983b3f5 ("f2fs: add check for deleted inode")
+Signed-off-by: Nikola Z. Ivanov <zlatistiv@gmail.com>
+---
+ fs/f2fs/namei.c | 28 ++++++++++++++++++++--------
+ 1 file changed, 20 insertions(+), 8 deletions(-)
+
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index b882771e4699..68b33e8089b0 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -502,12 +502,14 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
+ 		goto out;
+ 	}
+ 
+-	if (inode->i_nlink == 0) {
++	if (unlikely(inode->i_nlink == 0)) {
+ 		f2fs_warn(F2FS_I_SB(inode), "%s: inode (ino=%lx) has zero i_nlink",
+ 			  __func__, inode->i_ino);
+-		err = -EFSCORRUPTED;
+-		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+-		goto out_iput;
++		goto corrupted;
++	} else if (unlikely(S_ISDIR(inode->i_mode) && inode->i_nlink == 1)) {
++		f2fs_warn(F2FS_I_SB(inode), "%s: directory inode (ino=%lx) has a single i_nlink",
++			  __func__, inode->i_ino);
++		goto corrupted;
+ 	}
+ 
+ 	if (IS_ENCRYPTED(dir) &&
+@@ -533,6 +535,9 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
+ 	trace_f2fs_lookup_end(dir, !IS_ERR_OR_NULL(new) ? new : dentry,
+ 				ino, IS_ERR(new) ? PTR_ERR(new) : err);
+ 	return new;
++corrupted:
++	err = -EFSCORRUPTED;
++	set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+ out_iput:
+ 	iput(inode);
+ out:
+@@ -572,10 +577,11 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
+ 	if (unlikely(inode->i_nlink == 0)) {
+ 		f2fs_warn(F2FS_I_SB(inode), "%s: inode (ino=%lx) has zero i_nlink",
+ 			  __func__, inode->i_ino);
+-		err = -EFSCORRUPTED;
+-		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+-		f2fs_folio_put(folio, false);
+-		goto fail;
++		goto corrupted;
++	} else if (unlikely(S_ISDIR(inode->i_mode) && inode->i_nlink == 1)) {
++		f2fs_warn(F2FS_I_SB(inode), "%s: directory inode (ino=%lx) has a single i_nlink",
++			  __func__, inode->i_ino);
++		goto corrupted;
+ 	}
+ 
+ 	f2fs_balance_fs(sbi, true);
+@@ -601,6 +607,12 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
+ 
+ 	if (IS_DIRSYNC(dir))
+ 		f2fs_sync_fs(sbi->sb, 1);
++
++	goto fail;
++corrupted:
++	err = -EFSCORRUPTED;
++	set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
++	f2fs_folio_put(folio, false);
+ fail:
+ 	trace_f2fs_unlink_exit(inode, err);
+ 	return err;
+-- 
+2.51.0
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
