@@ -2,121 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECD59BB8588
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 04 Oct 2025 00:49:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D969BB88D8
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 04 Oct 2025 05:19:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Subject:MIME-Version:Message-Id:Date:To:From:Sender:Reply-To:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=rPWTfVyIkGZbyYytdYfYIKQCPcD1Y/WhLsjNmvcdGQ8=; b=irx9mExAmWhfzTa6nidxpVuqkQ
-	hPMbdg5A7ZLpe4L5GyogOpgtTTmLU3O9FcL/GL7Nn/tniMivAqrmI8fmdWLX5GL8PGyaovI1tDrrB
-	/hJ5QiXW7RsAZzXopkd3HpTLKI+mV+IuKKKar9s8j4FzMKmyoF/KEXyOOjbWcsYBkiaE=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=SXbbaUupL6Yp3f0n7UBqjZP/tfTB0EJZtyZJxBki+ng=; b=bRPeSCjOx2EJEUHzeH/c7O8vUD
+	oVnNqpXx3sDH79LMZJer0rRCBSSytIpwaxIhslKx4Jccyw7jzN1bhU4r9AeVnd3EKmLZQw8hDjaUm
+	84tEq9eKHUysJ/i+ZCKZsKEyo3llyojvF5F59bZlS+vKpBU1cRIvngB2k+XuV8jfeMxw=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v4oae-0000JO-Sm;
-	Fri, 03 Oct 2025 22:49:29 +0000
+	id 1v4snj-0000W3-LG;
+	Sat, 04 Oct 2025 03:19:15 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1v4oad-0000JG-B4
+ (envelope-from <pedrodemargomes@gmail.com>) id 1v4snh-0000Vv-Po
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Oct 2025 22:49:28 +0000
+ Sat, 04 Oct 2025 03:19:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oeG9oeMq3V/BRy9XfGgniPTDeM9j7ii3LAYxjxadWNg=; b=nBVpEmjlYYtwsT23922Xrnhane
- RpLBV/XFs/DUaIvHZpolhRQ++QsiPCl06p2axBimv49GgUpU1W1HtKzG+pFkNPTgToCLVPtBfN6tE
- 7RJON5MvpYISKVa5fJaMV1YC1b64A5bF7AfV23bDTOvlesU/uu7omC8hLac4a4MMvXh0=;
+ bh=/0f0fZbuAlYt0xeXxD/vlMHdXsuSwiOqxloUzhTU7h0=; b=coeQMYenIp4yMBYePF+sNOjdyU
+ WYKASr15+zkxQ9O7nSCQqN1le+a7PHNFSzC0r2h9CaYvSsPStFUf0IbJCxYI82tG0m8p11f2KW+ZC
+ o6sv/0lwoHwdRvmDmgcc5vwoT8nbgiXCB6s+2KCLZe8RQOJI27Eg9Mgl94b7U1xgO0d0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=oeG9oeMq3V/BRy9XfGgniPTDeM9j7ii3LAYxjxadWNg=; b=c
- JsWw9JBOFL7k1KA5zOOhvfCw5DCRUEmYUn+tXtpfPhoHvPBgxPjW15UbDVdnX0bDH7OTIk/MdmS6m
- 7yhguJcVF8sNWzJJfM51E4mkg7dG5J1HNx2qGuQ8PHnUj7qzN6Ki/bXB+aLrDz5iaoIqqKaR0QP3f
- nLSTYaOiPrNtB8bc=;
-Received: from mail-pf1-f181.google.com ([209.85.210.181])
+ List-Owner:List-Archive; bh=/0f0fZbuAlYt0xeXxD/vlMHdXsuSwiOqxloUzhTU7h0=; b=i
+ Jp5jcrIh8fNSqbnaTTS/hnNMeMQR14BWpCAssx5mF0rJ7Z7au2fBtUid/bf5jEneeLbH69EZsuzAm
+ MuM5UNMi4NSc3FbQ3cGQkRWDDHwQdVWw2ry6LcPmomDh9UlnEb3rIn8RotsI3D0R7YK8qCMnGWaw6
+ Ai4lnHM5vStgIcVY=;
+Received: from mail-pj1-f52.google.com ([209.85.216.52])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1v4oad-0003Mp-Py for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Oct 2025 22:49:28 +0000
-Received: by mail-pf1-f181.google.com with SMTP id
- d2e1a72fcca58-76e4fc419a9so2754359b3a.0
+ id 1v4snh-0007B9-DB for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 04 Oct 2025 03:19:13 +0000
+Received: by mail-pj1-f52.google.com with SMTP id
+ 98e67ed59e1d1-3383ac4d130so2835684a91.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 03 Oct 2025 15:49:27 -0700 (PDT)
+ Fri, 03 Oct 2025 20:19:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759531762; x=1760136562; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1759547948; x=1760152748; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=oeG9oeMq3V/BRy9XfGgniPTDeM9j7ii3LAYxjxadWNg=;
- b=dfCuCC2i9zSGmTTGeHqDFgkgXg1jdRKivLnfFWLOIMTV4rhRJSyTwwBbkNpY5XN609
- Zpj/fjvxQPzwxYBFlyxBmE8+1OIcSZPxEAR0V2Q6QINEcWksLyRGhAqw7MoHc73WMt8k
- biX8XzV8WGu21d6/VbKxcoti/ww3IZBNmfIA3/lUuxAwvmJvDNoqDCPnR4oAcO0qc2sw
- m5ZeOWYLHF0T08/1lUdHTUUR62OY8FRQnLwuRbgT/SOdgOdyiCr43FY+ENp6PMeLIgBE
- wqwMoSlXtJyQs9QAD2F6rBrNRY3h32fxlEpYRTJZm4lBCCWXB9nOZlzuZ+8oXXe9mnup
- rWUA==
+ bh=/0f0fZbuAlYt0xeXxD/vlMHdXsuSwiOqxloUzhTU7h0=;
+ b=I+WZEeLDMzorPpwlG5M0duFD9IQo0RCZO7WxSCFWhrqGp38JOm/GlOXVcpnH2ctDLL
+ vQyGiMxQP6Tf2c2B9mfMonHNf5VqiPwb5AECRCw52Bre5vWufVcReK5W30UnkJx0WsYb
+ RTskKwfueAuxuNYKcvONwvkfTaVHKlLUwTleypNk2+VtJ/G3Uj4eWmSpuFbUDuxufchV
+ onRjuRGOVp0HS1LzN7B58Or9HaAobOXHTld9bpm9MbfgkqeqW+/yQontVNULpCqbt/Q6
+ 4F+csfvSs/FcLPjWwQt0znM2F/HjjzzNQ4LwCkiW81R2L7lRDTbD1/uKu2E0lE3rohRs
+ 01ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759531762; x=1760136562;
+ d=1e100.net; s=20230601; t=1759547948; x=1760152748;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oeG9oeMq3V/BRy9XfGgniPTDeM9j7ii3LAYxjxadWNg=;
- b=sWf1CXfAnVYUrlHALl9sxo3spELgI+ANWH5nvcagJibbprjKD4yd3CVZsevP6rPpyr
- voERe6EIFL4baF13MO//MvG7gl2IKGx/If7JbnkEz6t5qbcDdNMppMM5McdKxVlKkWlD
- oEqIJDnPeW0KxFmyX+msFmuamA4x4JD6GY9YiXuFq603kYYiXQP0ahduE9j6EMNT/UaN
- VIYJ4D0LAAOgOPL04T7Je8Dl/ivzTNNWXr9uiDYxDrTgERQ7z5+HnayylEO3HFqtHA7h
- U1bWHnjJGtUvuiven9L0eUsN9OeiulEYTjr2vaoRoymhlXcRsAJwaCMENFzTlSiG9qjt
- gxCg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUAmfK40wjwxEG239Lo2VngranVH3G+yXtCL+xw8UCRx+TpFHwx2m7YgwbX4s2YtrHzvL7ESXK4g/8lexptgYJE@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yz1J2kkoU/CJ/N+n27SKsszd4vbx6kTVhcnet2b4GUvbuo321F+
- EAvhaIcAJQUxrP4yNfvrY0IoCBOcM7vbk3TeGKbAkWxa8OSHc6cQPHhz
-X-Gm-Gg: ASbGncuxMRsf0RsujD/+/a5yzygp+plj/of5u/kdQJdjLTDOg5WHiOCISTAx0bqCTrJ
- S077/oNlle/sUuRHZONyXzR6vYr3HOLwdTKrKW2ae1zTUGZ7y7jCDbSMUDrNndX8ZhHFXcjrs9n
- dN1z4CR4mycrSDofBSym3JY8ICNAd4DyrecODz3/30d7mXhwG28ys+ka2afuTqRRof9K1iqoJUF
- cPFVdAuqxTBUwIdQeLo0wWrb+pk63IsJAJkWZFGSr3fJI3apQszMdeX0bY1bB4GHv0Gp2N98nTV
- 0GSZy8gWSGj13zmQHmtH619ZC8SLg/EfB40gbjqPzMHyMee7sCy1QfjZ7dhaeiALIVzdodPpTbz
- hrKwsCmMv7TlQxjkVdSZnQeDHP3QMqY+WxVEDvDT9NLbVEzcpu/VQ4O/5PX0XAudtV57J/qdOaV
- 0frEf/RCOowHwmnQvFwRHdn/FQ/1O1M38MKivgag==
-X-Google-Smtp-Source: AGHT+IEY5vwkWiLQpFdBP/OKiL2TG1owypYb10cyIeolmsHdvVP9kUkUY22iwpY5kr68lwo8OufYEw==
-X-Received: by 2002:a05:6a20:7f8b:b0:2e3:a914:aacd with SMTP id
- adf61e73a8af0-32b61deea03mr6012279637.2.1759531762075; 
- Fri, 03 Oct 2025 15:49:22 -0700 (PDT)
-Received: from daehojeong-desktop.mtv.corp.google.com
- ([2a00:79e0:2e7c:8:5098:8942:78be:db30])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-78b0204edf0sm5959882b3a.44.2025.10.03.15.49.21
+ bh=/0f0fZbuAlYt0xeXxD/vlMHdXsuSwiOqxloUzhTU7h0=;
+ b=uvYs8H9zQ5016t2L7LUjPbkyksG0hnbJeo11FMbCZCfOvjgo6A6hHD3EopZQm15vTA
+ Bj43/huAnoso/d45qFb8dQDQ5w/T4uJ9pYuaIA96Q8IPC0EBNoKhCQ8vfvja1FUckM39
+ lcdIFhgxcY+rNJDm8wqKZjBR7O+Ufg0qNI9u/08BCaiHkK8sTmxuEoHKAvYMw0CIHdAC
+ bgsMZNPC441uxNd2q+wxCLAQSQKqs3U3Cb0KVxz30L8L3E0nzYiCb3Fuh1lZdehv6fX9
+ Z5OPhzQWS/cplTszP4TxE/KIAXTIJHXH5TaB4EyjiaaoeDHAaZMUy7w1vIEGUPTe2HQg
+ f8pQ==
+X-Gm-Message-State: AOJu0Yx7UgIi5QV+Tu1JffXFKgMfZy0pmTqTNoYwopadG9iEDe6F3R+5
+ oKxduFIyvMthal1chCKG3R1mlNFVlc8TGPjmfNRV9PO0sntjrsuTSgt0
+X-Gm-Gg: ASbGncv6TgPA0zo41pZ4eiLChEKQRyckq/zVo7PSa+3WZTZbqCg3vZloDV/FCMxTnoe
+ uvtGofcq67siWcg4+Kvade8qcoBOTLBBvS/uVCO9LFNY7XqZxyOr6gTrKml6CiuQM4HoSp5/Kwo
+ cUjivFzzgQyHOX4wD33kYGC3/FpI1fi2d6zw/tr9Ji0Tgutsa3/poelly/rxQ4XqzEphWfG/iGD
+ Olw4YyIyqjFU9QqFWIaIWF42+igK+Af5LBCqaqNPCE5lBNyEJXqhDSLQ6TE4gPuErAREycajaoX
+ ZrixQWjj8op6YxMv5/mnJmvhT4/TjSUdsSZqxJwaOceaeRiE/0f68qFQACjwPeak1Pbmkb0jczS
+ hQy+AqjM5fnMw8sRZ+NLU4nrjSXSref5NGBXdClPJZxGyWdCp24/MinWNs7cLHg==
+X-Google-Smtp-Source: AGHT+IFHpHALD1sa8acPWIspep4hCEYuuObgcuOhGvCURHwQmbAKZkGTZZw7wpWCSvK4aIHv97bBPw==
+X-Received: by 2002:a17:90b:4b06:b0:32e:a60d:93e2 with SMTP id
+ 98e67ed59e1d1-339c275afafmr5941447a91.11.1759547947698; 
+ Fri, 03 Oct 2025 20:19:07 -0700 (PDT)
+Received: from ryzoh.. ([2804:14c:5fc8:8033:c5aa:36f3:14cd:8995])
+ by smtp.googlemail.com with ESMTPSA id
+ d2e1a72fcca58-78b02073d00sm6282924b3a.77.2025.10.03.20.19.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 15:49:21 -0700 (PDT)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Fri,  3 Oct 2025 15:49:17 -0700
-Message-ID: <20251003224917.1950708-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.51.0.618.g983fd99d29-goog
+ Fri, 03 Oct 2025 20:19:07 -0700 (PDT)
+From: Pedro Demarchi Gomes <pedrodemargomes@gmail.com>
+To: Chao Yu <chao@kernel.org>,
+	Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Sat,  4 Oct 2025 00:12:17 -0300
+Message-Id: <20251004031217.50242-1-pedrodemargomes@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Daeho Jeong Zoned storage devices provide marginal
- over-capacity
- space, typically around 10%, for filesystem level storage control. By utilizing
- this extra capacity, we can safely reduce the default 'valid_thresh_ratio'
- to 80. This action helps to significantly prevent excessive garbage collection
- (GC) and the resulting power cons [...] 
- Content analysis details:   (0.1 points, 5.0 required)
+ Content preview: folio_nr_pages() is a faster helper function to get the
+ number
+ of pages when NR_PAGES_IN_LARGE_FOLIO is enabled. Signed-off-by: Pedro
+ Demarchi
+ Gomes --- fs/f2fs/f2fs.h | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
@@ -127,15 +122,13 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [daeho43(at)gmail.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [daeho43(at)gmail.com]
+ [pedrodemargomes(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.181 listed in wl.mailspike.net]
+ [209.85.216.52 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1v4oad-0003Mp-Py
-Subject: [f2fs-dev] [PATCH] f2fs: set default valid_thresh_ratio to 80 for
- zoned devices
+X-Headers-End: 1v4snh-0007B9-DB
+Subject: [f2fs-dev] [PATCH] f2fs: use folio_nr_pages() instead of shift
+ operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -147,42 +140,36 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+Cc: linux-kernel@vger.kernel.org,
+ Pedro Demarchi Gomes <pedrodemargomes@gmail.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+folio_nr_pages() is a faster helper function to get the number of pages when
+NR_PAGES_IN_LARGE_FOLIO is enabled.
 
-Zoned storage devices provide marginal over-capacity space, typically
-around 10%, for filesystem level storage control.
-
-By utilizing this extra capacity, we can safely reduce the default
-'valid_thresh_ratio' to 80. This action helps to significantly prevent
-excessive garbage collection (GC) and the resulting power consumption,
-as the filesystem becomes less aggressive about cleaning segments
-that still hold a high percentage of valid data.
-
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
+Signed-off-by: Pedro Demarchi Gomes <pedrodemargomes@gmail.com>
 ---
- fs/f2fs/gc.h | 2 +-
+ fs/f2fs/f2fs.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
-index 24e8b1c27acc..6c4d4567571e 100644
---- a/fs/f2fs/gc.h
-+++ b/fs/f2fs/gc.h
-@@ -25,7 +25,7 @@
- #define DEF_GC_THREAD_CANDIDATE_RATIO		20	/* select 20% oldest sections as candidates */
- #define DEF_GC_THREAD_MAX_CANDIDATE_COUNT	10	/* select at most 10 sections as candidates */
- #define DEF_GC_THREAD_AGE_WEIGHT		60	/* age weight */
--#define DEF_GC_THREAD_VALID_THRESH_RATIO	95	/* do not GC over 95% valid block ratio for one time GC */
-+#define DEF_GC_THREAD_VALID_THRESH_RATIO	80	/* do not GC over 80% valid block ratio for one time GC */
- #define DEFAULT_ACCURACY_CLASS			10000	/* accuracy class */
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 46be7560548c..4467a6e7471c 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -2036,7 +2036,7 @@ static inline struct f2fs_super_block *F2FS_RAW_SUPER(struct f2fs_sb_info *sbi)
+ static inline struct f2fs_super_block *F2FS_SUPER_BLOCK(struct folio *folio,
+ 								pgoff_t index)
+ {
+-	pgoff_t idx_in_folio = index % (1 << folio_order(folio));
++	pgoff_t idx_in_folio = index % folio_nr_pages(folio);
  
- #define LIMIT_INVALID_BLOCK	40 /* percentage over total user space */
+ 	return (struct f2fs_super_block *)
+ 		(page_address(folio_page(folio, idx_in_folio)) +
 -- 
-2.51.0.618.g983fd99d29-goog
+2.39.5
 
 
 
