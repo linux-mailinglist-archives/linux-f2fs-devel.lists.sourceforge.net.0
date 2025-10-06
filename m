@@ -2,93 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12B91BBD614
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 06 Oct 2025 10:46:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 427B5BBD8CC
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 06 Oct 2025 11:58:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:Message-ID:Mime-Version:Date:Sender:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=h2/aeDrOxaA2SfUZcJO9w+6csGJar6DqZsd4xCv4QXs=; b=iPfY1vxJNoAMn1SLXASl/vi/gT
-	xBlFYAxVh//TbU5Gy9M97nrGi17j0yu/yI8IwIR2TpDA4GanWcPR95rDXOwdTauimfk2MhvKZXeuQ
-	UPds/ornoLEyuywcsFJ4DacywDMvIgPor+JtwEFMwfnRa7ke7G7u5vmxZKVHe843E7YI=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=0Fw2OCuooiUjUEI3vdpzJVH0jgh7s7SHQvuGJlOMCOU=; b=LbJK04IHNQXxmahMlkZJBpJ5EI
+	q3DO2mG/WPl2iOkIQOJHG5Wm0DvLgm1r22JdrHZ9Z48eZt6VYfYVWSOFThj12Yl4PBk7wunTQteEt
+	59xbSnAFfAEQ71M4iIoAh7/FGsZhC2A8WQ7uOoItHJx9lIgotBYPWIEf25tm+YXslhnI=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v5grl-0000Fr-Qm;
-	Mon, 06 Oct 2025 08:46:46 +0000
+	id 1v5hzT-00007D-SR;
+	Mon, 06 Oct 2025 09:58:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <36IHjaAwKAMcw2475nx195xvt11tyr.p1z@flex--jprusakowski.bounces.google.com>)
- id 1v5grk-0000Fg-RY for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 06 Oct 2025 08:46:45 +0000
+ <3ypLjaAwKAMs068B9r15D91zx55x2v.t53@flex--jprusakowski.bounces.google.com>)
+ id 1v5hzS-000076-BE for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 06 Oct 2025 09:58:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
  Mime-Version:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CJXxaJbkSA/3Xb5uNqWTj3oIOQXZmPEn5IRJe3cfIGg=; b=gX1tYhfacGqXyJ+Sw3/b/fekZn
- fHyHeZ5Scjc/AbPtCT773STzkcE+gXpIYf1XYTUm/QmX7m0g1cK3mZHuYT3nhJpnH0Wj/Qjaq1lS+
- dqM3DUe0uSAF/7iS2XwI5p6jm9a4YROiftSj57YnnaT28C87TKc/I2WXxMCzbhDm7Gxc=;
+ bh=Sc4vGQFYPIBaWztyvb1x80Wmo5m+eEeS575TWEadZus=; b=BYTMvtdq3dbudcfiDMHJxb78ks
+ tapatollOICaogXOr3CVsR74wVv+ZUR7N57C4dscsiDn22A+Ej2swDAOuwLayH9ViMamqFGBvPuGt
+ 6bWZCLDQTFPGCcj3BtEn0g+Wzbo2Gc1k281dsONDUuhbhQRHDQun5d6iq9PKmI4Ma/z0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Sender:
  Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=CJXxaJbkSA/3Xb5uNqWTj3oIOQXZmPEn5IRJe3cfIGg=; b=O
- HNwEVP8sYrja5sijLfbEJ5OKwWfqkqmEGt8J+16p/t4B1xXe7ZHgJg9dRicKbSD40CuZ7iTee5q8i
- yx779ba+oJrpG8IEtwsF2h9tHOb9ojejnL4qDvrYSr6Al0VgcOy2ZUOMW25bOfMGNurT/qtpu9sLA
- K0AQnjJuEBwPbs3o=;
+ List-Owner:List-Archive; bh=Sc4vGQFYPIBaWztyvb1x80Wmo5m+eEeS575TWEadZus=; b=A
+ WjoNjr1A6vQtq650zxp/p3HNdMkkiw8tGGLmcXaOnBv47KVHogglF2nI/fUGlPUfGVICRL7xuweqg
+ /LCYjyZymhtNblGJAnuWbZqCgtYfkx7gpOJG1cAtQ5qNhTCK2FcG+iQS25pEqvcembDvHs1VstJrm
+ ApBFo41zrm5RXm3E=;
 Received: from mail-ej1-f73.google.com ([209.85.218.73])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1v5grk-0007Y3-B9 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 06 Oct 2025 08:46:45 +0000
+ id 1v5hzR-0003tc-TH for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 06 Oct 2025 09:58:46 +0000
 Received: by mail-ej1-f73.google.com with SMTP id
- a640c23a62f3a-afcb7338319so508455466b.0
+ a640c23a62f3a-b3f2cfc26edso441314466b.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 06 Oct 2025 01:46:44 -0700 (PDT)
+ Mon, 06 Oct 2025 02:58:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1759740393; x=1760345193;
+ d=google.com; s=20230601; t=1759744714; x=1760349514;
  darn=lists.sourceforge.net; 
  h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
  :date:message-id:reply-to;
- bh=CJXxaJbkSA/3Xb5uNqWTj3oIOQXZmPEn5IRJe3cfIGg=;
- b=28eNF4AChgXob/XCtOwUVt8/8n/KiwI0wCHoUPy0HARTydeUwq6OMJDCviVsv3I6JQ
- q/lcbA2PYzXDUouisviD0IuZLn5xLMcw1IL8BP3+x0nOnHyG1REkeFw2o8h7N5AP0E8g
- Fc6eT6gjwhZwL5V9YKMbA3s0F7XRdupDLhCYFl/aHVj9tVw5kPX/ns9KdbiJuvnQaDM9
- AbcRg0CuGKztz+OrBd1mgYEnG2rnGlnxzIAb6FBp//pVuRZa5JsibCBdYlliHNXm/Y8T
- /DyKSRr5D6tFWuvYN4ocnyCvXM84geHKR6tQCYOSKTKwbNA1mfPdgK6qpn9l10JVJyO8
- /CGw==
+ bh=Sc4vGQFYPIBaWztyvb1x80Wmo5m+eEeS575TWEadZus=;
+ b=mESUS3YgXWlz3mcfH7KQV3NJX1Hq08PQbssE1TTqGtu+OEtgjPVvGhy7pFIpxQgogX
+ PIZn0lpGPjU1QDPtQgKgJaBQ4uhPR7/aVG7T9E9+iQlXRCOvxyIPDyijqpNLXe/Ka7bC
+ /PdAyYbxkFPC3UnVgjFvZ/EgCkhOMICgbjRKU52lb9hTRKj9uhRU/EsDPyQXgJdQxVmd
+ qodXCO+qoX7o/9c/KlP20Dv1gCZ8cJGyMRYfTze/oQ/4sRGfzC/SdBfo4CfaWkwztWeZ
+ kDBbxrj47guj1IogkuoPNgkbbT9nhWYDxwRs05m4u/wfUjaEe0d6ez13iQ1LaVXU3DMu
+ EvgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759740393; x=1760345193;
+ d=1e100.net; s=20230601; t=1759744714; x=1760349514;
  h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=CJXxaJbkSA/3Xb5uNqWTj3oIOQXZmPEn5IRJe3cfIGg=;
- b=gG2nxDmcMSMsUt149awnKX7e8iphgou3COu1YmSFDaJXLwY0TrYmSdoV2lqcvWAXL8
- Z2XEG4PyLIpo22BnIbJo9SvV1lXKYJ8/HtSJe+lJUImgM2RWCocPzJqmPaQOQ2E/qs2T
- 4itDshdr2ijsQtwn7PhsLJf+owJf4kPaIKDbvmBceP+qmZ795lNZPwCSxViKFKhoV68y
- 5tZZO9CD0YDUkvgCwDGYOYHc0229LRGJLC4/E7ljluDghdfXFQcP5wawmc1BB6WCvAXi
- lytaQSPvyWU+eJd+ML/URWRAMyfBvvjkZdupvFO4Ot8UddeX3gWUZlIl+Nbs4Eh5sMyy
- lf9A==
-X-Gm-Message-State: AOJu0Yzgog67nDtwZVnbUyPotSI9nzU9xAvRzXFy/HZ4lR+Bw3aQw+eV
- X8VB/bHjPRxCICi9UAyJnCMkTQ7kLVmdsFlj1FzkuEsDIN1TCmcSMVvn0MDHFJ3HHBFPd2Xf+dh
- Qr2dexeMaryXpSPjB/mpFOPRLU17mJQ==
-X-Google-Smtp-Source: AGHT+IG3L0nTzCEE3SV4kT0ZjhvKBhiX0rWparm4WD7kJhXXQ2yTr43Zwy/HZZQHhpAowp7zp90/DyaNjwbO2AKpPho=
-X-Received: from ejdbw9.prod.google.com ([2002:a17:907:fd89:b0:b3f:de21:e9ef])
+ bh=Sc4vGQFYPIBaWztyvb1x80Wmo5m+eEeS575TWEadZus=;
+ b=FkuQ43ex7V7n72HIzLKf3zIs8wSKJFxll9MvZss/dCAaBcBaUqOg6Jexgnnd9w8Iy5
+ ivvdpjt2/PQtUBngahqecHIg19u+FXEXddXkcNvGPPG5pGxWWk8EoIcqPgka0d//c2wv
+ oDcfwRIfO03lgwIJwxfFcbov4Y17pErxjeIJMSbfHmNIR3Za8LxNzbXgCGtaf/UpcY+V
+ vEcC99sV0zyErQ7akM+p30707DKgC+tKggN6ayfczxolwC3LSkM3oWRba/rdHP/p1z0A
+ cVPVjdnD5kNSA7ogoi4Rgo3cUrX8Nm96UJdr/j/8pbFl34HOJOGNRoBTvAN+Jab8rDek
+ uTaw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW2DSH7+AduObtsuLuQXXwAv8gfCqjp6ESnT+1O+lGcRes3c1ZPLPvsfEhZsYaOXikysPckopJZXluueR+OQ3bk@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YyHR2iHFev5XbX3pb6DhI1g1Qn7Zb0wvYvPtVKi18Ircq/Oi/Or
+ vhkX/lrjCjJkmBew1fcZIauQDNBAJrDAB500qnp+8Rqt7ewAvmXeAUQFrjV07HzBpz/dHInLXqk
+ XGjXVP8OM3LrvM/WOKhXY5llY96UvWA==
+X-Google-Smtp-Source: AGHT+IH38hWGPvZTjm7gSlYootDowCEylUmuxNHmWeR8Ovsb7/fEr161qyR4TF7YXSyDwiHegDbvcDrCXNF/znzR6Eo=
+X-Received: from ejbci9.prod.google.com ([2002:a17:906:c349:b0:b3d:d79a:5f98])
  (user=jprusakowski job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:907:3e93:b0:b45:c0cc:2fe9 with SMTP id
- a640c23a62f3a-b49c393a5eemr1610665866b.46.1759740392721; 
- Mon, 06 Oct 2025 01:46:32 -0700 (PDT)
-Date: Mon,  6 Oct 2025 10:46:15 +0200
+ 2002:a17:907:3f21:b0:b38:6689:b9fe with SMTP id
+ a640c23a62f3a-b49c2a576ebmr1293699966b.7.1759744714330; 
+ Mon, 06 Oct 2025 02:58:34 -0700 (PDT)
+Date: Mon,  6 Oct 2025 11:58:13 +0200
 Mime-Version: 1.0
 X-Mailer: git-send-email 2.51.0.618.g983fd99d29-goog
-Message-ID: <20251006084615.2585252-1-jprusakowski@google.com>
-To: jaegeuk@kernel.org
+Message-ID: <20251006095813.3497619-1-jprusakowski@google.com>
+To: Zorro Lang <zlang@kernel.org>, Eric Biggers <ebiggers@google.com>,
+ fstests@vger.kernel.org
 X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -96,14 +99,19 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Xfstests generic/335, generic/336 sometimes crash with the
- following message: F2FS-fs (dm-0): detect filesystem reference count leak
- during umount, type: 9,
- count: 1 [ cut here ] kernel BUG at fs/f2fs/super.c:1939!
- Oops: invalid opcode: 0000 [#1] SMP NOP [...] 
+ Content preview: verify_ciphertext_for_encryption_policy() checks if
+ encryption
+ works correctly by reading encrypted file's contents directly from a block
+ device and comparing it to a known good ciphertext. This, however, won't
+ work if the test file is also compressed. So this patch adds a check if a
+ test file is compressed and disables its compression in this case. 
  Content analysis details:   (-7.6 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [209.85.218.73 listed in list.dnswl.org]
  -7.5 USER_IN_DEF_DKIM_WL From: address is in the default DKIM welcome-list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
@@ -114,9 +122,9 @@ X-Spam-Report: Spam detection software,
  [209.85.218.73 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1v5grk-0007Y3-B9
-Subject: [f2fs-dev] [PATCH] f2fs: ensure node page reads complete before
- f2fs_put_super() finishes
+X-Headers-End: 1v5hzR-0003tc-TH
+Subject: [f2fs-dev] [PATCH v3] common/encrypt: Explicitly set the test file
+ to uncompressed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,58 +139,51 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: Jan Prusakowski via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Jan Prusakowski <jprusakowski@google.com>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Xfstests generic/335, generic/336 sometimes crash with the following message:
+verify_ciphertext_for_encryption_policy() checks if encryption works
+correctly by reading encrypted file's contents directly from a block device and
+comparing it to a known good ciphertext.
 
-F2FS-fs (dm-0): detect filesystem reference count leak during umount, type: 9, count: 1
-------------[ cut here ]------------
-kernel BUG at fs/f2fs/super.c:1939!
-Oops: invalid opcode: 0000 [#1] SMP NOPTI
-CPU: 1 UID: 0 PID: 609351 Comm: umount Tainted: G        W           6.17.0-rc5-xfstests-g9dd1835ecda5 #1 PREEMPT(none)
-Tainted: [W]=WARN
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
-RIP: 0010:f2fs_put_super+0x3b3/0x3c0
-Call Trace:
- <TASK>
- generic_shutdown_super+0x7e/0x190
- kill_block_super+0x1a/0x40
- kill_f2fs_super+0x9d/0x190
- deactivate_locked_super+0x30/0xb0
- cleanup_mnt+0xba/0x150
- task_work_run+0x5c/0xa0
- exit_to_user_mode_loop+0xb7/0xc0
- do_syscall_64+0x1ae/0x1c0
- entry_SYSCALL_64_after_hwframe+0x76/0x7e
- </TASK>
----[ end trace 0000000000000000 ]---
-
-It appears that sometimes it is possible that f2fs_put_super() is called before
-all node page reads are completed.
-Adding a call to f2fs_wait_on_all_pages() for F2FS_RD_NODE fixes the problem.
-
-Fixes: bf22c3cc8ce7 ("f2fs: fix the panic in do_checkpoint()")
+This, however, won't work if the test file is also compressed. So this patch
+adds a check if a test file is compressed and disables its compression in this
+case.
 
 Signed-off-by: Jan Prusakowski <jprusakowski@google.com>
----
- fs/f2fs/super.c | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 1e0678e37a30..5c94bc42b8a1 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1976,6 +1976,7 @@ static void f2fs_put_super(struct super_block *sb)
- 	f2fs_flush_merged_writes(sbi);
- 
- 	f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
-+	f2fs_wait_on_all_pages(sbi, F2FS_RD_NODE);
- 
- 	if (err || f2fs_cp_error(sbi)) {
- 		truncate_inode_pages_final(NODE_MAPPING(sbi));
+---
+Changes in v2:
+The test file is now created empty first, followed by resetting the
+FS_COMP_FL attribute, and then copying the test data.
+
+Changes in v3:
+Added explicit FS_NOCOMP_FL attribute to the test file.
+
+---
+ common/encrypt | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/common/encrypt b/common/encrypt
+index d4f6e3dc..f2687631 100644
+--- a/common/encrypt
++++ b/common/encrypt
+@@ -790,6 +790,13 @@ _do_verify_ciphertext_for_encryption_policy()
+ 	_set_encpolicy $dir $keyspec $set_encpolicy_args -f $policy_flags
+ 	for src in $tmp.testfile_*; do
+ 		dst=$dir/${src##*.}
++		# To make sure the test file is not compressed we create an empty one
++		# and disable compression first (F2FS won't allow resetting the
++		# compression flag if the file has data already in it).
++		touch $dst
++		if lsattr $dst | grep -qE ".+c.+ $dst" ; then
++			chattr -c +m $dst
++		fi
+ 		cp $src $dst
+ 		inode=$(stat -c %i $dst)
+ 		blocklist=$(_get_ciphertext_block_list $dst)
 -- 
 2.51.0.618.g983fd99d29-goog
 
