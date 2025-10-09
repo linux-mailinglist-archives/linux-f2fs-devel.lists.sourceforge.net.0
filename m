@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4BCDBC73AB
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 09 Oct 2025 04:41:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D9A1BC73BC
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 09 Oct 2025 04:44:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Mr6BK2P0421v4nU6x6mOG7zGmwmpJOkwzBrGEKw9Hns=; b=OVkaKl9rBTDwJqYziQ1hVU07/u
-	5TUEIs5I/jQ9nbzJLAVaSB9W6jBGGGvCgHN4siDsZg5uLF+httMeJgfgPiIDmC10bnXXR0xm68s9w
-	84Bv9YbSpElh7uk8DQ7nhA1JjsVuNwhF5B/e89Vtk1mKCNaqclMeDCqliG6n2PtmW5NU=;
+	bh=1SjjMOZMnbTpeZ2SKJ/4+QdoyAB9sMkZCZYb9pRjfSU=; b=Ebj43UefLIPsaHSu/2AWh536DJ
+	otJDpIYVlvnPFGorIozu5rAzjvi9QwZZi4DKdMUpGys9cVBQ/L91WtqE3C8Z9StFNDbV0zXq6yUFj
+	ZtVToxVz0pMZlZ0qqNUpP111hUlgkyjOYx1FuDIoBtgd8sNTXxZZKR/IRuAFK73B/QGM=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v6gb5-0005br-Kn;
-	Thu, 09 Oct 2025 02:41:39 +0000
+	id 1v6gdt-0005gc-6d;
+	Thu, 09 Oct 2025 02:44:33 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v6gb4-0005bl-QF
+ (envelope-from <chao@kernel.org>) id 1v6gdr-0005gW-Um
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Oct 2025 02:41:38 +0000
+ Thu, 09 Oct 2025 02:44:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZqoWb4mhjaUDzGpf8auG9dpMlLQqhGRVpYmMd+oWGj4=; b=KO/zjFxFFyE+Ny1hfzfhKbubDm
- k1FeXgApI1r3h3cM1viY3eB8Wfkkgt1Ne1S6QO/l0ATpXuZlrQjwrZQwCFtI58vJ8Ic5nAJ0CLx6v
- tYOyJ542a6qRSJstZRFdkfy5Kh62Ti1fAqamKKxhXlmoYVxtp18SrZgrBECDZR2TUl00=;
+ bh=M8GRhlMxPbI8+Ivpxt4d+0OrdLjwnw49dR9z0XPHq9w=; b=l0ZJM94V4M8idpZoyYOeMd/iEE
+ TXccNcSUPlH04uGYQlH5d4v2fTkLSHsumnML4JXLc3EFDODo6weI3LJTLSuKJf8ImyBbmUoO3eFP4
+ Las1ZiSmI+ft5ENtlgB20pJ0isFtQdNWCyMEVuwDZBvXvz5BmdsSF67y+/dC22v3LRVo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,39 +40,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZqoWb4mhjaUDzGpf8auG9dpMlLQqhGRVpYmMd+oWGj4=; b=fumLz+4TfONjtsqcRJilNSFUrZ
- QJ1tJDPpCphKnBV7z0a084yJjcBqnKOFg100yxrC5t0t5oCq5el349aaPGJkiOCoa5u4KxHQ1BVjI
- IHmykime7MnWAm4pdM0c25Y6AwCtOtDXGF77BcywbIgpGds/5LFcQYm1hN4ZVRthrZBU=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=M8GRhlMxPbI8+Ivpxt4d+0OrdLjwnw49dR9z0XPHq9w=; b=gS7mSi8YcbMX3RI1yeBucF/+Gc
+ yTW+Eg2WjhzIP5NRLA9xQgF6d3mBqZFvViCtu30tfHSltvxtyfGCFFhBiW6rALk/q5nCbgkqUWp/y
+ Uf3e+A4gcnwU0+ta0ux3zo5uOzOjqIDYvwL2A2gyMHUpEKt56K93OthOrwthCbejMEPs=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v6gb4-000499-Ew for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Oct 2025 02:41:38 +0000
+ id 1v6gdr-0004Ju-Jb for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 09 Oct 2025 02:44:31 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 1B15340B77
+ by tor.source.kernel.org (Postfix) with ESMTP id F02256215F
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  9 Oct 2025 02:41:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CCEEAC4CEE7;
- Thu,  9 Oct 2025 02:41:31 +0000 (UTC)
+ Thu,  9 Oct 2025 02:44:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E89E2C4CEE7;
+ Thu,  9 Oct 2025 02:44:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759977693;
- bh=tyPTsKvXP7E0qtQnoDjMT6ypnIzqmMqIdHBE/yhIktE=;
+ s=k20201202; t=1759977860;
+ bh=M8GRhlMxPbI8+Ivpxt4d+0OrdLjwnw49dR9z0XPHq9w=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=PcY+hRGuktB/2TcXw6M1LN0anU3ECMMlpKtHmSo3BybrI8rA1vDLnZY35Qb7lUHLs
- rSQrS1NDVUpgq2yjR8/Y4QCzIVnkHgp7PpsOQhUdyt4ypnaxedhJDUKlkxlenRgMX1
- W1WiNMduD/FWAOUseb17VUSlfsxWkQ5X79Xpnq4wgI5TG9U8l62AMbXFjcASscKelY
- Ah5lbeDrBLcE2MlZIOuqvHy+UJsVmLF7sMSV+Iwg9AXjl9lHDsjv4dVE1kgwZj73NQ
- KEyrgpzZE/ZPyE+WB8FNXi5qmVm8ALHR7hkQe2UL7NiBMlnjyWVogEcFswgvwB2Hh5
- Sd6IBr5Nle3qA==
-Message-ID: <2d6e8984-9533-46cc-a4d3-875aadef5e5f@kernel.org>
-Date: Thu, 9 Oct 2025 10:41:33 +0800
+ b=qwS9+UMSF0e/iCcw6oGoSZuvMZmSSixgnlCLBrebzL5IYh6B877V2HDHXxmGDV3Dj
+ Wb90InCxU1Vq1G64yCYQdAQCxZvLCizPBigI0Rd2OCl4qBPZyhIqpYr1t0L7hChaae
+ gFBZZVvL8Ng8K8tpYA50qTDRxjCKJsfvFjB3qHpPPWOVLpCPp+0EsaTKEoMsqZ8Lre
+ WohPjyIiy177a0rRsCzhCPb5FUiLcd8LTb+XKzaljdSB+lBRWyjdpG6x8viCOXVCQp
+ cw9/xJ7/pykLoCXa4H95unBw7JYDFedL7jQ+hTPMWFdQ68tsfOn4tgEq3DAwjA81AW
+ AD58t4kbmHfxw==
+Message-ID: <6b1025cb-e3ba-40f6-9ac0-21a8a7f8ebd9@kernel.org>
+Date: Thu, 9 Oct 2025 10:44:22 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 References: <20250930023704.3019074-1-jaegeuk@kernel.org>
- <20250930023704.3019074-4-jaegeuk@kernel.org>
+ <20250930023704.3019074-5-jaegeuk@kernel.org>
 Content-Language: en-US
-In-Reply-To: <20250930023704.3019074-4-jaegeuk@kernel.org>
+In-Reply-To: <20250930023704.3019074-5-jaegeuk@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -82,9 +82,8 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview:  On 9/30/2025 10:37 AM,
  Jaegeuk Kim via Linux-f2fs-devel wrote:
- > It only measures the read performance. > > Signed-off-by: Jaegeuk Kim
- <jaegeuk@kernel.org>
- Reviewed-by: Chao Yu <chao@kernel.org> Thanks, 
+ > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> Reviewed-by: Chao Yu
+ <chao@kernel.org> Thanks, 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,14 +94,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [172.234.252.31 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v6gb4-000499-Ew
-Subject: Re: [f2fs-dev] [PATCH 4/5] f2fs_io: add dontcache to measure
- RWF_DONTCACHE speed
+X-Headers-End: 1v6gdr-0004Ju-Jb
+Subject: Re: [f2fs-dev] [PATCH 5/5] f2fs_io: let's try to get contigous
+ memory if possible
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,8 +116,6 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 9/30/2025 10:37 AM, Jaegeuk Kim via Linux-f2fs-devel wrote:
-> It only measures the read performance.
-> 
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
