@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71A81BC7495
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 09 Oct 2025 05:23:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88F4BBC74E0
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 09 Oct 2025 05:34:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=lG7dS/IKf5jX6X9YSzXQ9LG4aS/1MPKORNwQORph/9U=; b=EF1XFrmI9TUWzQ1hutGIHWaxCx
-	TFFtd+YPpIyboYZ06hPX7MlpFLkHB2hpUT1HjL8o1LZ7ird/cx1Vw7XkS/q5D+FUtV5Sryp+T2oEU
-	VpDgDIrwAjwpw7DYVrP/B7RHGY9byCuV9jpgVr7O8Yq55AaH09SHTt0RX5SoEZpy9fbA=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=cP/m5r5rFSJxYq7LICz0URa5Zo7qPZfL17OK3Ns6uLA=; b=inw+T6YAXC1bUrYwzFsNMSu8S4
+	pplFjh6E6dZ5OucCTzeLcAvt/RL4TxXzpwXb+gie8q9FVlPpbBfKdV6OkxB9fY4VW609mgzjFEyMa
+	cyiJFI/RAWjQVezgHAWHMzslEuSjVRMHvQRgE79H+cyF2kweIW3IwonAEP79ZJo6gqOA=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v6hFY-0006bO-AK;
-	Thu, 09 Oct 2025 03:23:29 +0000
+	id 1v6hPv-0006dl-TC;
+	Thu, 09 Oct 2025 03:34:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v6hFW-0006b8-F2
+ (envelope-from <chao@kernel.org>) id 1v6hPu-0006df-UM
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Oct 2025 03:23:27 +0000
+ Thu, 09 Oct 2025 03:34:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OHdaBrpMPhFE+uK34tzvYVpLqEwP08tbyF1QXwTcu1o=; b=lDeVRYOWtgVPYFYnJqqWKfl2Sg
- lhHNlFLVZEWHsIzTcpAgpfOXWL8vUjSdzkTUCSkTu4oiXu6qsgbTWVy9MFzCB2YggS3ZjrUxKmZYr
- vR7ZpxYevmjLLF5osu/G5hqWRw5y4hKUK8FAA4jj02bVV1vi/Tlz7ZoCQMGRqtJWUY5M=;
+ bh=ya39Rk2KQwQNSUUDCpE0EymI+dlzbEjdxyGLzqUFybM=; b=dCNWfA3OsTboc0zDdNg+2AFFZi
+ CjqhWiI5E88ITar/H1VUmGAjcKPf9mRNnoX4o2JaToow2f2ZDUeM55+e/BmlDz1GEvbc93LskSiew
+ X1MWmLIgbE/bZVmEb5INc2Xri7eh4tJM4/7fQ+WwoJL+g3hVUetfbBu45/37dGE9Sz1Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,38 +40,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OHdaBrpMPhFE+uK34tzvYVpLqEwP08tbyF1QXwTcu1o=; b=QJNFfISi1NM1kwxw3aHt94p+7b
- jJd1Szw0ikyLiCSc2ND5KmH5Rpqdp03aCI2qR2+ORbZscCJ+Sh5X2xIycmjw3ikpGEg5QxA0jm1mI
- VHciyUlzRvvRAdSX7v7L7dzpefRUCS3aj20tr4PP1ONyEvex9pqJvndryjPD3z1SBYlA=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=ya39Rk2KQwQNSUUDCpE0EymI+dlzbEjdxyGLzqUFybM=; b=nC8drYQD2CJ0RpPFNZb/iCGCZd
+ IuIRsDqaNGWTQkkjLNyu0TDEWorC8SRTqhMxH0enOY5cqRxDoFnFxaKNlpOaUI4/TtYAbJqIuw5m8
+ ZCkK9ztYcQcIpK5/PRdbCbiAjW5dge43urYl2DSmsGgtHtEx5gMUT//tq0tF6h8vRua4=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v6hFW-0005np-TZ for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Oct 2025 03:23:27 +0000
+ id 1v6hPu-00066H-Gq for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 09 Oct 2025 03:34:10 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 8C74F43228;
- Thu,  9 Oct 2025 03:23:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 51F8EC4CEE7;
- Thu,  9 Oct 2025 03:23:20 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id BE1B9611E9;
+ Thu,  9 Oct 2025 03:33:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D0CFC4CEE7;
+ Thu,  9 Oct 2025 03:33:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759980201;
- bh=7YP1TE8V5KIYpHRIn3iOxTAomS3iNv19gWr2R/JsuzI=;
+ s=k20201202; t=1759980839;
+ bh=xN41ZGE5H76e94Bp2o1lO5iAeArBWDxLBZZo+8wL+BI=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=tcfq93gdNXbbRkXqzTD1VKV0xpOQW4CULFttCvq/6SBSGWHc2ooKFWhXQXhswf4bG
- UxU2GBFUmp68OKaaTTwzOoO58DIJkfcHjkZLDdVcnY6AcvvlQqICOfHXjRQCNQRCHs
- US9lDkcemRroRWsLgf8wPrZW+00WLgVWnFAaVxVE8+Golo+upW2nGwzh6UUFc4Je1O
- jCM9so6N+REY4Fsk+fA84T6A0ip8PDQUipOPQQPB5Oo5uQHqDtFCXr/9/U2vzxiYPA
- BZkDhNQZbAGqIZ0YEDHrkDoC+pZIibBU2xoL4jy2DEUsUSUGZbF0zqOK7TXspI+8Ei
- WHm5xG22kZaLA==
-Message-ID: <94f6a9af-e768-4380-bec6-096fca5e94fa@kernel.org>
-Date: Thu, 9 Oct 2025 11:23:18 +0800
+ b=Oy2Gxc11qxZN8TPQ/bTmqRRG6Av8DqQO6KKDUYdRmFKU+FDFEuWXB7VJbJ+57MF9Z
+ cgU0GQOS3534jfvW/Xq3a9vjie1nMxoK9VOzCCt0v9zwQp+pD7nUswWnL+Af8xP6qm
+ NSLKS5WF97Q29v1U2aKTcgZyjUzBGTAARKKE6mOXJLwTCDgDLNKrYyW449FEm+KMkA
+ lcOz5YVFlx4RbZERt6UbmB1iv1jCUcDlBXw0VFOpOyZQg675jvmtWlZg3S3ndIImQg
+ qi7n7g4C4bAbzdFvpz5jx7KqJee0Z60BQJO6SjkbEzSnT6HuRf5jD1jGRBdZ0VeTs9
+ TE9v4Hen7xu9Q==
+Message-ID: <c4643bb6-882a-4229-b938-e94398294905@kernel.org>
+Date: Thu, 9 Oct 2025 11:33:56 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Pedro Demarchi Gomes <pedrodemargomes@gmail.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20251004031217.50242-1-pedrodemargomes@gmail.com>
+To: Jan Prusakowski <jprusakowski@google.com>, jaegeuk@kernel.org
+References: <20251006084615.2585252-1-jprusakowski@google.com>
 Content-Language: en-US
-In-Reply-To: <20251004031217.50242-1-pedrodemargomes@gmail.com>
+In-Reply-To: <20251006084615.2585252-1-jprusakowski@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -79,11 +78,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 10/4/2025 11:12 AM,
- Pedro Demarchi Gomes wrote: > folio_nr_pages()
- is a faster helper function to get the number of pages when >
- NR_PAGES_IN_LARGE_FOLIO
- is enabled. > > Signed-off-by: Pedro Demarch [...] 
+ Content preview:  On 10/6/2025 4:46 PM, Jan Prusakowski via Linux-f2fs-devel
+ wrote: > Xfstests generic/335, generic/336 sometimes crash with the following
+ message: > > F2FS-fs (dm-0): detect filesystem reference count [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v6hFW-0005np-TZ
-Subject: Re: [f2fs-dev] [PATCH] f2fs: use folio_nr_pages() instead of shift
- operation
+X-Headers-End: 1v6hPu-00066H-Gq
+Subject: Re: [f2fs-dev] [PATCH] f2fs: ensure node page reads complete before
+ f2fs_put_super() finishes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,15 +113,64 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 10/4/2025 11:12 AM, Pedro Demarchi Gomes wrote:
-> folio_nr_pages() is a faster helper function to get the number of pages when
-> NR_PAGES_IN_LARGE_FOLIO is enabled.
+On 10/6/2025 4:46 PM, Jan Prusakowski via Linux-f2fs-devel wrote:
+> Xfstests generic/335, generic/336 sometimes crash with the following message:
 > 
-> Signed-off-by: Pedro Demarchi Gomes <pedrodemargomes@gmail.com>
+> F2FS-fs (dm-0): detect filesystem reference count leak during umount, type: 9, count: 1
+> ------------[ cut here ]------------
+> kernel BUG at fs/f2fs/super.c:1939!
+> Oops: invalid opcode: 0000 [#1] SMP NOPTI
+> CPU: 1 UID: 0 PID: 609351 Comm: umount Tainted: G        W           6.17.0-rc5-xfstests-g9dd1835ecda5 #1 PREEMPT(none)
+> Tainted: [W]=WARN
+> Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+> RIP: 0010:f2fs_put_super+0x3b3/0x3c0
+> Call Trace:
+>   <TASK>
+>   generic_shutdown_super+0x7e/0x190
+>   kill_block_super+0x1a/0x40
+>   kill_f2fs_super+0x9d/0x190
+>   deactivate_locked_super+0x30/0xb0
+>   cleanup_mnt+0xba/0x150
+>   task_work_run+0x5c/0xa0
+>   exit_to_user_mode_loop+0xb7/0xc0
+>   do_syscall_64+0x1ae/0x1c0
+>   entry_SYSCALL_64_after_hwframe+0x76/0x7e
+>   </TASK>
+> ---[ end trace 0000000000000000 ]---
+> 
+> It appears that sometimes it is possible that f2fs_put_super() is called before
+> all node page reads are completed.
+> Adding a call to f2fs_wait_on_all_pages() for F2FS_RD_NODE fixes the problem.
+> 
+> Fixes: bf22c3cc8ce7 ("f2fs: fix the panic in do_checkpoint()")
+> 
+> Signed-off-by: Jan Prusakowski <jprusakowski@google.com>
+> ---
+>   fs/f2fs/super.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 1e0678e37a30..5c94bc42b8a1 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -1976,6 +1976,7 @@ static void f2fs_put_super(struct super_block *sb)
+>   	f2fs_flush_merged_writes(sbi);
+>   
+>   	f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
+> +	f2fs_wait_on_all_pages(sbi, F2FS_RD_NODE);
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Jan,
+
+At this stage, GC and checkpoint are both stopped, why there is still read
+IOs on node page? Who is reading node page? Can you please dig more details
+for this issue?
 
 Thanks,
+
+>   
+>   	if (err || f2fs_cp_error(sbi)) {
+>   		truncate_inode_pages_final(NODE_MAPPING(sbi));
+
 
 
 _______________________________________________
