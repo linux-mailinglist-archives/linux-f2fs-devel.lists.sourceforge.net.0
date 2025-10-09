@@ -2,7 +2,7 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BD38BC832E
+	by mail.lfdr.de (Postfix) with ESMTPS id CA37EBC8332
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 09 Oct 2025 11:09:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -10,29 +10,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-Id:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=7mT0cUKMd2A3dMgQZbthN3GL9caBvvYPDwZuKIOE9mk=; b=fApujWZZbm7iNu7IMzBZYorI3Z
-	OijFIkjqRNQ2IclR5uzerqUJPgpGWHbtOX5BfR1gaS5L3Wl2qCdyv+/59bjYvfn1sKe5bL/MVHShJ
-	8ZMVHhyYYutfyQWN9Y0tn+N+uEydmF/Mu64sweM1HS2DQZEaqdLSZZ5nTT/hVbi0lfVA=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=4dLUZIXO/CKPq7oY6y2bwuThUAB2vpTQPoyRdxViK78=; b=a6FMLJtvyYM4/b+DggsTECnf+e
+	v/PYcLF1GN+dNzUEJYg0JDTnqYJJdfVm5xEMPSwfd5Lu7HPx8NEsmFdiUSf+o8/EOaxoAc1chaIbT
+	qjmFC6BISqurUyGlYEpsd7CdGoG1CanpeY+dJjC+uXYlQMa0CR0LglE546AAXSr2hI2c=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v6me9-0006Ly-Iu;
-	Thu, 09 Oct 2025 09:09:14 +0000
+	id 1v6me9-0006X1-06;
+	Thu, 09 Oct 2025 09:09:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v6me0-0006LM-8c
+ (envelope-from <chao@kernel.org>) id 1v6me2-0006Wq-Ib
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Oct 2025 09:09:05 +0000
+ Thu, 09 Oct 2025 09:09:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i+fIgJTsbU5A5j9BLGd5/yHHkKgzK4Bwh50zzj7Gawo=; b=GLss3hGydRzC9/dqcU1iWzWuY2
- LZfQYm2JS4EWll8c9rcWpsMF665Eo2agm1DhH3DttaYyCR6XoCLHEn318wm7gDx0/xbW1VFVV1oE2
- xD92fkcx55twY3pWNDGSGgWSBUOTxcLqrAFUXbFaHJSeauwU0s38DYMbfau6aimWEUdc=;
+ bh=CSgD+9+aQAwz/DjysHKRXOk3FriccGBhKvK/xLT3d2s=; b=FjgR2RCom1Sl4T++cbo3Ts5bxO
+ 58D92f/VAcsRHnudRAsjAH54gSNmlp7Rhzwqt7MGl65C9K3ZsV8qO2orXZuD4VtZm6bn5bsr6TTHS
+ JJ0rdvaw7a+knxLoV90uxgUopB0xgxocblamTnWfQCs+j13F4s8S+1yoP7V4P0TQxJdM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -40,34 +40,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=i+fIgJTsbU5A5j9BLGd5/yHHkKgzK4Bwh50zzj7Gawo=; b=lHMFLV/yMVtbR32cHLaQUwFqF4
- 1tSmCuxYF9CrJSaeFqzGJOSdYSVMA1x9pwGyj+//pnvrA+JijJiUTWdV1aXZ6VgtcFcillQXh9+D/
- 9P0f3yH+YU3s6LNUdNEOjf1FLxNKBMjR5xhd+pJ+DBRLq+JYQJbINaXKhEYrajYLlaDM=;
+ bh=CSgD+9+aQAwz/DjysHKRXOk3FriccGBhKvK/xLT3d2s=; b=MA2skSafbnTjrcVeWBnviW43uI
+ LLH+sAjCVvXEtgJ28vZxSbdQxx5JwOjUTT2JW+ROdQ1yiXxpmoP6OiPq/+HyRw79qfpG7RpWBQNK2
+ 7qce1tbrzWpUR2hB3wJRjDcKXp6OWzSD67M3kkwe15q7wLhWH9rbb2JoildXYf90CBJI=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v6me0-0006G2-H2 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Oct 2025 09:09:04 +0000
+ id 1v6me2-0006GJ-0b for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 09 Oct 2025 09:09:06 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id D8C356224C
+ by tor.source.kernel.org (Postfix) with ESMTP id 6C371602BA
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  9 Oct 2025 09:08:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 098EEC4CEE7;
  Thu,  9 Oct 2025 09:08:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15633C113D0;
- Thu,  9 Oct 2025 09:08:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1760000933;
- bh=7qX7dSyEVqUMvvtMzL7YjED76he7BdxUoYprgSlpf9Y=;
+ s=k20201202; t=1760000935;
+ bh=rafZBb+BEGY7+V0BVWM7lcH+DPHEnQbVHTH/W0YjSso=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=o7ehBCcI9x2GyzJeYX8iDpERFl/6bOwZJ/WqEsN2ORa+kPGudRDmZpWgyESSafqzx
- u8NcItMtmH8vDASt39/hOQ4Ge25S24XvVxH5MbgsjNQLi3wRgAY8Ib99FxErpuE94p
- O00XY9pkz82QeAyRc2ppobj2CvBvjLxQ1Sd9Oidd/vMvRuwXtp802kPdltugqVMFkN
- kCYLw/TGyoSCzUcoZ0ScuUMtvx/vo5/WGKi97KWChf4yS2ad6LNdiZsYfRu01gwpvI
- a6KI/zosBE0zJgIfH5CMVdzIGFDduTVrHcESQzcfQFWwz/JnRqIbSpV5ep+Y6GOE1U
- rybByh3Xr+WIQ==
+ b=iDTogICeHrWrW6XWrY/ZcJyC39NGqE8RfRAnZzTN3aOg0jpDnmCdH/rSHPxKS+y5L
+ /N+F3OjHSEFeHyfiF+exNeHHILbLKNcdmZV/KwBg0OadLKNcxfeybTJXUaKG9ggPSU
+ TA00VzmGvOcE1Bt2nijfuqVhkuSoNwEcbGIWLN35S/Z1O1FE2VwxMsR1fyBiVeHLk5
+ JDgBNneGscFKu2MO2Q2kGK/Cyb3gtD5MAHBsLBWrftTeFuhZIVV+JHDnJ4QpOcVKRz
+ 1HsFQ9Rh0E0xNlr/q/CZ4tOFwe08AGSC+KV+VIOCxBPzvt9vkG4PoAH6Xoh3xdAEX7
+ YKGTy4GOiP2iw==
 To: Zorro Lang <zlang@kernel.org>,
 	fstests@vger.kernel.org
-Date: Thu,  9 Oct 2025 16:50:42 +0800
-Message-Id: <20251009085043.16910-2-chao@kernel.org>
+Date: Thu,  9 Oct 2025 16:50:43 +0800
+Message-Id: <20251009085043.16910-3-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20251009085043.16910-1-chao@kernel.org>
 References: <20251009085043.16910-1-chao@kernel.org>
@@ -79,12 +79,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  _check_f2fs_filesystem() is f2fs specific, it's better to
- move it to common/f2fs. Cc: Jaegeuk Kim <jaegeuk@kernel.org> Signed-off-by:
- Chao Yu <chao@kernel.org> --- common/f2fs | 44
- ++++++++++++++++++++++++++++++++++++++++++++
- common/rc | 44 [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Introduce _require_inject_f2fs_command() to check whether
+ inject.f2fs supports specific metaarea and member parameters. Meanwhile, let's
+ check inject.f2fs requirement inside _require_inject_f2fs_command() for
+ cleanup. Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
@@ -95,9 +93,9 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v6me0-0006G2-H2
-Subject: [f2fs-dev] [PATCH 2/3] common/rc: move _check_f2fs_filesystem() to
- common/f2fs
+X-Headers-End: 1v6me2-0006GJ-0b
+Subject: [f2fs-dev] [PATCH 3/3] common/f2fs: introduce
+ _require_inject_f2fs_command()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,123 +114,123 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-_check_f2fs_filesystem() is f2fs specific, it's better to move it to
-common/f2fs.
+Introduce _require_inject_f2fs_command() to check whether inject.f2fs
+supports specific metaarea and member parameters.
+
+Meanwhile, let's check inject.f2fs requirement inside
+_require_inject_f2fs_command() for cleanup.
 
 Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- common/f2fs | 44 ++++++++++++++++++++++++++++++++++++++++++++
- common/rc   | 44 --------------------------------------------
- 2 files changed, 44 insertions(+), 44 deletions(-)
+ common/f2fs    | 27 +++++++++++++++++++++++++++
+ tests/f2fs/009 |  2 +-
+ tests/f2fs/012 |  2 +-
+ tests/f2fs/019 |  2 +-
+ tests/f2fs/020 |  2 +-
+ tests/f2fs/022 |  2 +-
+ 6 files changed, 32 insertions(+), 5 deletions(-)
 
 diff --git a/common/f2fs b/common/f2fs
-index 1b39d8ce..4d0d688b 100644
+index 4d0d688b..82d3102e 100644
 --- a/common/f2fs
 +++ b/common/f2fs
-@@ -25,3 +25,47 @@ _require_scratch_f2fs_compression()
- 		_scratch_unmount
- 	fi
- }
-+
-+_check_f2fs_filesystem()
-+{
-+    local device=$1
-+
-+    # If type is set, we're mounted
-+    local type=`_fs_type $device`
-+    local ok=1
-+
-+    if [ "$type" = "f2fs" ]
-+    then
-+        # mounted ...
-+        local mountpoint=`_umount_or_remount_ro $device`
-+    fi
-+
-+    $F2FS_FSCK_PROG --dry-run $device >$tmp.fsck.f2fs 2>&1
-+    if [ $? -ne 0 ];then
-+        _log_err "_check_f2fs_filesystem: filesystem on $device is inconsistent"
-+        echo "*** fsck.f2fs output ***" >>$seqres.full
-+        cat $tmp.fsck.f2fs              >>$seqres.full
-+        echo "*** end fsck.f2fs output" >>$seqres.full
-+
-+    ok=0
-+    fi
-+    rm -f $tmp.fsck.f2fs
-+
-+    if [ $ok -eq 0 ]
-+    then
-+        echo "*** mount output ***"		>>$seqres.full
-+        _mount					>>$seqres.full
-+        echo "*** end mount output"		>>$seqres.full
-+    elif [ "$type" = "f2fs" ]
-+    then
-+	# was mounted ...
-+	_mount_or_remount_rw "$MOUNT_OPTIONS" $device $mountpoint
-+	ok=$?
-+    fi
-+
-+    if [ $ok -eq 0 ]; then
-+	return 1
-+    fi
-+
-+    return 0
-+}
-diff --git a/common/rc b/common/rc
-index 1ec84263..4d121a1b 100644
---- a/common/rc
-+++ b/common/rc
-@@ -3566,50 +3566,6 @@ _check_generic_filesystem()
+@@ -69,3 +69,30 @@ _check_f2fs_filesystem()
+ 
      return 0
  }
++
++# check that inject.f2fs supports to inject specific field in specific meta area
++_require_inject_f2fs_command()
++{
++	_require_command "$F2FS_INJECT_PROG" inject.f2fs
++
++	if [ $# -ne 2 ]; then
++		echo "Usage: _require_inject_f2fs_command metaarea member" 1>&2
++		_exit 1
++	fi
++	metaarea=$1
++	member=$2
++
++	case $metaarea in
++	sb|cp|nat|sit)
++		val=0
++		;;
++	ssa|node|dent)
++		;;
++	*)
++		_notrun "unsupport metaarea: $metaarea"
++		;;
++	esac
++
++	$F2FS_INJECT_PROG "--$metaarea" "$val" "-h" | grep "$member:" > /dev/null || \
++		_notrun "--$metaarea --mb $member support is missing"
++}
+diff --git a/tests/f2fs/009 b/tests/f2fs/009
+index 7333d484..4c179f2d 100755
+--- a/tests/f2fs/009
++++ b/tests/f2fs/009
+@@ -12,7 +12,7 @@
+ _begin_fstest auto quick
  
--_check_f2fs_filesystem()
--{
--    local device=$1
--
--    # If type is set, we're mounted
--    local type=`_fs_type $device`
--    local ok=1
--
--    if [ "$type" = "f2fs" ]
--    then
--        # mounted ...
--        local mountpoint=`_umount_or_remount_ro $device`
--    fi
--
--    $F2FS_FSCK_PROG --dry-run $device >$tmp.fsck.f2fs 2>&1
--    if [ $? -ne 0 ];then
--        _log_err "_check_f2fs_filesystem: filesystem on $device is inconsistent"
--        echo "*** fsck.f2fs output ***" >>$seqres.full
--        cat $tmp.fsck.f2fs              >>$seqres.full
--        echo "*** end fsck.f2fs output" >>$seqres.full
--
--    ok=0
--    fi
--    rm -f $tmp.fsck.f2fs
--
--    if [ $ok -eq 0 ]
--    then
--        echo "*** mount output ***"		>>$seqres.full
--        _mount					>>$seqres.full
--        echo "*** end mount output"		>>$seqres.full
--    elif [ "$type" = "f2fs" ]
--    then
--	# was mounted ...
--	_mount_or_remount_rw "$MOUNT_OPTIONS" $device $mountpoint
--	ok=$?
--    fi
--
--    if [ $ok -eq 0 ]; then
--	return 1
--    fi
--
--    return 0
--}
--
- # Filter the knowen errors the UDF Verifier reports.
- _udf_test_known_error_filter()
- {
+ _require_scratch
+-_require_command "$F2FS_INJECT_PROG" inject.f2fs
++_require_inject_f2fs_command node i_links
+ _require_command "$(type -P socket)" socket
+ 
+ _fixed_by_git_commit f2fs-tools 958cd6e \
+diff --git a/tests/f2fs/012 b/tests/f2fs/012
+index 7438d9ce..53d54bf6 100755
+--- a/tests/f2fs/012
++++ b/tests/f2fs/012
+@@ -20,7 +20,7 @@ _fixed_by_kernel_commit 91b587ba79e1 \
+ export LC_ALL=C.UTF-8
+ _require_scratch_nocheck
+ _require_command "$F2FS_IO_PROG" f2fs_io
+-_require_command "$F2FS_INJECT_PROG" inject.f2fs
++_require_inject_f2fs_command dent d_hash
+ 
+ #check whether f2fs supports "lookup_mode=x" mount option
+ mntopt=""
+diff --git a/tests/f2fs/019 b/tests/f2fs/019
+index 2307bd96..a6e6e38c 100755
+--- a/tests/f2fs/019
++++ b/tests/f2fs/019
+@@ -18,7 +18,7 @@ _fixed_by_kernel_commit 77de19b6867f \
+ 	"f2fs: fix to avoid out-of-boundary access in dnode page"
+ 
+ _require_scratch_nocheck
+-_require_command "$F2FS_INJECT_PROG" inject.f2fs
++_require_inject_f2fs_command node addr
+ 
+ # remove all mkfs options to avoid layout change of on-disk inode
+ export MKFS_OPTIONS=""
+diff --git a/tests/f2fs/020 b/tests/f2fs/020
+index 38bc6582..a6933134 100755
+--- a/tests/f2fs/020
++++ b/tests/f2fs/020
+@@ -20,7 +20,7 @@ _fixed_by_kernel_commit 061cf3a84bde \
+ 	"f2fs: fix to do sanity check on ino and xnid"
+ 
+ _require_scratch_nocheck
+-_require_command "$F2FS_INJECT_PROG" inject.f2fs
++_require_inject_f2fs_command node i_xattr_nid
+ _require_attrs user
+ 
+ # remove all mkfs options to avoid layout change of on-disk inode
+diff --git a/tests/f2fs/022 b/tests/f2fs/022
+index ed3b4f2b..48a8386b 100755
+--- a/tests/f2fs/022
++++ b/tests/f2fs/022
+@@ -19,7 +19,7 @@ _fixed_by_kernel_commit xxxxxxxxxxxx \
+ 	"f2fs: fix to do sanity check on node footer for non inode dnode"
+ 
+ _require_scratch_nocheck
+-_require_command "$F2FS_INJECT_PROG" inject.f2fs
++_require_inject_f2fs_command node i_nid
+ 
+ # remove all mkfs options to avoid layout change of on-disk inode
+ export MKFS_OPTIONS=""
 -- 
 2.40.1
 
