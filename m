@@ -2,76 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99500BCBE45
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Oct 2025 09:17:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CDF3ABCC972
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Oct 2025 12:46:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=ds4vt39IfxuWIzPr9LRB12SAM32f4E50AqNSeR4xlqM=; b=aOC7tQCyae1SZIMaKsMWef7m51
-	CeY1pixDeNHpCC1NpO5V2rVpzOl5npoAOi7aViv4yz0ZFBhr6AKO1RrNZmHKUVTIUWX4mCsUZcAQ+
-	3K+thG3HdBa7eMDI7NzVNabmF59c7CUSvEU4IhjFB7s+ZYaybRi6/PHMSTSpxWrhiLdQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:To:Message-Id:MIME-Version:Date:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=RGbmHMIYMoJd5W1dDt/iPMA3Ez0PVG0RYHEIFPDUVfo=; b=hWC2UIDT6nuYn0neDQq+dEA4D1
+	M3krJyafcdmreLIkSn/7jPuIqLRkbDfCi4zG+0oSZpHEMnsB4r2bO5UrcIZJpOTvk4RwOwpKUJBQy
+	q6xk5Yi3aURkbrvQnNU9go7mFrx4rg2K2D9NbVpzUQ991NpPMa3gr4ik4ZHzAbrOIzjk=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v77NC-0000XT-MS;
-	Fri, 10 Oct 2025 07:17:06 +0000
+	id 1v7Adk-0003Yf-3C;
+	Fri, 10 Oct 2025 10:46:24 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v77NC-0000XM-2k
- for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Oct 2025 07:17:06 +0000
+ (envelope-from <devnull+jiucheng.xu.amlogic.com@kernel.org>)
+ id 1v7Adj-0003YZ-7b for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 10 Oct 2025 10:46:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Reply-To:Cc:To:Message-Id:Content-Transfer-Encoding
+ :Content-Type:MIME-Version:Subject:Date:From:Sender:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1r+bYr3Nh5+AN3kLHq80oceJReMazDKa9XPiU5ZvphM=; b=IsE8qngY2O3ljobE+9yh8NS4al
- nTkMX3YPeaBPOF1E9bbmUqbbKSMlh4F/vCV3ZzoLq8RNJn3ozXy/v65Qt9anUgU0W/nycPNquENJn
- QsHiu6AI7NiZzlI6iKW1b/V7nhJgzb/gVnFt8nSYsigbiGNVl1yT3qVQaOzdvBZSPC9I=;
+ bh=kZpyK/Nwz7HVKJr8lfGtW5Lep1AG1J4MNqr+H5E9/z8=; b=X9EzUQ+Rk6M6M4FCe8Vtnr16Op
+ cOS9wA/Taely8U/xU57fYf39SMSuP49fmBItCT50FeVyDAQFrjqGsDvGO23AqcjiUUEYLdA6SUyVT
+ uz05phGeDc2xfGZaATlPLbrCQrTK6NA1WPXfRGAqPJYZSsxglztjMZZZq5zw10hj51KY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Reply-To:Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:Subject:Date:From:Sender:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1r+bYr3Nh5+AN3kLHq80oceJReMazDKa9XPiU5ZvphM=; b=GlHYaBU6x+rG/KURPkY6OtsbDu
- AM7DXomDHE5sBsQGNVOoNuIwk4QUO56xzgkgtv0vWVndU95C5COrsB5HZDEQ0xm7yO6phneRg67s8
- qsf3V1CzPOuS7Tr3/L/9Lt2JLI/m5mbwCmqWvuiB3gzc1AaI0SZPThCwWjrj9JvlafT8=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=kZpyK/Nwz7HVKJr8lfGtW5Lep1AG1J4MNqr+H5E9/z8=; b=GStHrEo1P8WQhUDer9BtH447PV
+ LQoFVP+/m5Gq8qDQwJvUbjq1ZRDOLltID2aXfVc0G/KKqtNspeVWNIQ6Hx2GZglp97cMhCJ83es93
+ IP6XWAA3vpCexh1p3a/ueajDeN9/RdXVK6NCG85HcbAb0oW0C9f9lED54bTHa84sRq24=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v77NB-0002DH-HD for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Oct 2025 07:17:06 +0000
+ id 1v7Adi-0007Yl-P4 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 10 Oct 2025 10:46:23 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id D49F1624ED;
- Fri, 10 Oct 2025 07:16:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5740C4CEF1;
- Fri, 10 Oct 2025 07:16:57 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 5C3674370C;
+ Fri, 10 Oct 2025 10:46:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 3420CC4CEF1;
+ Fri, 10 Oct 2025 10:46:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1760080619;
- bh=24BbNjNVutb9XroUJnO513uTN9EY6uyhqOlpfNkxgs4=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=sC/eSXYB7kb3NMGJwEbSJbdLv9+sz7xUfd2SmQvfw1CIcGw/6XTBkvDmNnOFHvlub
- QiB3/1UxnAJm7gWje46w/Sv+sLG/bZh4FEmpo601ewl8/kIMRNaaTIdgcvzFiMu31C
- /gocLTo/BtPsLRmpQWSq1unGMJDqeAAejgbRYLnl29f/32deMzbVMe0L4DHYajYORw
- azgAQPrCEmor7ApXRXSIjf+EQ4XV4/g2u7gYxqB9qPTLmDkNVaXtelkN6C6B7PuAMi
- vZc5DIs+ClRBOkDvBZbBAukMCnXfr2orGbnL0OfI/5MYk8e5aqBpJL2KwGvOQLorS/
- sUv67sGOjPZQA==
-Message-ID: <1d8031b5-34c5-4d2f-8a70-b5055621380a@kernel.org>
-Date: Fri, 10 Oct 2025 15:16:54 +0800
+ s=k20201202; t=1760093172;
+ bh=tu/3YXWndspnmW1FhqUQCHSgsgn+D8yeWmdhNr94be0=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=P1dbetcxC7JH6TiV0CYv7t7Hz7X+nYXsccRgu4vFt0+W3c/SYSaXQkSRBOOMiejgZ
+ Qyl11SDtdEptqVsbFRxej1C2gAfgZKQ4mMw5MTpo6P21gFZd0N49xveVnRWfq1q7m6
+ TndqzwPj137LadyPNN/cgLE3IChtjPaSEDZjPKrGF+On426L4Q3R4OuHa0l9cEL4E6
+ vR/XrDF6ipbsH289YVitAlzsuJ6V9hq/VVeA2pLHW2PWEQMVhdqqEv6KGeZdiYVv2C
+ B620MtLb5szFkSvbwvCMiqP+m8kLUhnlXbYvSa9D2QpIeKIB2JQsbeVdfkXvFbIehs
+ 3s3gDfVv/AYag==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 212B3CCD185;
+ Fri, 10 Oct 2025 10:46:12 +0000 (UTC)
+Date: Fri, 10 Oct 2025 10:45:50 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: "HONG, Yun" <yhong@link.cuhk.edu.hk>,
- "jaegeuk@kernel.org" <jaegeuk@kernel.org>
-References: <TYCP286MB3686D500C8AF350E0BE8B4F2C11BA@TYCP286MB3686.JPNP286.PROD.OUTLOOK.COM>
-Content-Language: en-US
-In-Reply-To: <TYCP286MB3686D500C8AF350E0BE8B4F2C11BA@TYCP286MB3686.JPNP286.PROD.OUTLOOK.COM>
+Message-Id: <20251010-origin-dev-v2-1-952a3c98cd9c@amlogic.com>
+X-B4-Tracking: v=1; b=H4sIAN3j6GgC/03MwQoCIRSF4VcZ7jpDhUlt1XvELEyvzoVmDA0pB
+ t89Gwha/gfOt0HBTFjgPGyQsVKhtPaQhwHcbNeIjHxvkFyO3AjOUqZIK/NYmbZjCKcboggS+uG
+ RMdBrx65T75nKM+X3blfxXX+M/meqYIJpb7RSPhhU6mKXe4rkji4tMLXWPrgQj7OmAAAA
+X-Change-ID: 20250910-origin-dev-8a5ff6bee1f2
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1760093171; l=1482;
+ i=jiucheng.xu@amlogic.com; s=20250821; h=from:subject:message-id;
+ bh=ys2NNWUvMRWSNrqqE75d/Agpj0X5GunxR0O5cIjS0+s=;
+ b=zBpqK6IpjtdrVtovPKjZFXMscyFRS/aovVGopagjDr07kHZ2g+Rn8Bz2l8yn850QC/rwg1Z2W
+ 5EdQvlweuoxAm5ybl4mHETIzsjc2dHIS0i4oIw3YzP9HmnTx/8heVz7
+X-Developer-Key: i=jiucheng.xu@amlogic.com; a=ed25519;
+ pk=Q18IjkdWCCuncSplyu+dYqIrm+n42glvoLFJTQqpb2o=
+X-Endpoint-Received: by B4 Relay for jiucheng.xu@amlogic.com/20250821 with
+ auth_id=498
+X-Original-From: Jiucheng Xu <jiucheng.xu@amlogic.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -79,10 +93,13 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Hong, On 9/29/25 19:43, HONG, Yun wrote: > Hi, > > I would
- like to kindly report a crash I encountered,
- identified as "WARNING in f2fs_init_xattr_caches".
- This issue can be reproduced with a Syzlang reprodu [...] 
+ Content preview: From: Jiucheng Xu <jiucheng.xu@amlogic.com> On 32-bit
+ architectures, 
+ when GFP_NOFS is used, the file cache for write operations cannot be allocated
+ from the highmem and CMA. Since mapping->gfp_mask is set to
+ GFP_HIGHUSER_MOVABLE
+ during inode allocation, using mapping_gfp_mask(mapping) as the GFP flag
+ of getting file cache for writing is more efficient for 32-bit architect [...]
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,8 +111,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v77NB-0002DH-HD
-Subject: Re: [f2fs-dev] [Crash Report] WARNING in f2fs_init_xattr_caches
+X-Headers-End: 1v7Adi-0007Yl-P4
+Subject: [f2fs-dev] [PATCH v2] f2fs: Use mapping->gfp_mask to get file cache
+ for writing
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,63 +125,62 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
+From: Jiucheng Xu via B4 Relay via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: jiucheng.xu@amlogic.com
+Cc: Jiucheng Xu via B4 Relay <devnull+jiucheng.xu.amlogic.com@kernel.org>,
+ tuan.zhang@amlogic.com, Jiucheng Xu <jiucheng.xu@amlogic.com>,
+ linux-kernel@vger.kernel.org, jianxin.pan@amlogic.com,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Hong,
+From: Jiucheng Xu <jiucheng.xu@amlogic.com>
 
-On 9/29/25 19:43, HONG, Yun wrote:
-> Hi,
-> 
-> I would like to kindly report a crash I encountered, identified as "WARNING in f2fs_init_xattr_caches". This issue can be reproduced with a Syzlang reproducer on the mainline version downloaded from https://www.kernel.org/
-> For your convenience, I have included a sample crash report, the configuration file, and a reproduction program as attachments.
+On 32-bit architectures, when GFP_NOFS is used, the file cache for write
+operations cannot be allocated from the highmem and CMA.
 
-Thank you for the report!
+Since mapping->gfp_mask is set to GFP_HIGHUSER_MOVABLE during inode
+allocation, using mapping_gfp_mask(mapping) as the GFP flag of getting file
+cache for writing is more efficient for 32-bit architectures.
 
-I tried attached repro.syz & config.txt, however, I can not reproduce the bug.
+Additionally, use FGP_NOFS to avoid potential deadlock issues caused by
+GFP_FS in GFP_HIGHUSER_MOVABLE
 
-If you can reproduce this bug, could you please help to reproduce w/ debug
-patch as below? and dump full log once it reproduces.
+Signed-off-by: Jiucheng Xu <jiucheng.xu@amlogic.com>
+---
+Changes in v2:
+- Add FGP_NOFS to keep original GFP_NOFS flag.
+- Link to v1: https://lore.kernel.org/r/20250918-origin-dev-v1-1-8d9877df9e77@amlogic.com
+---
+ fs/f2fs/data.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-From: Chao Yu <chao@kernel.org>
-Subject: [PATCH] f2fs: add debug log
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 7961e0ddfca3aaa332b7dbd4985ae7766551834f..b449edb519d9069f58572685d607a2502e4c9473 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -3587,7 +3587,8 @@ static int f2fs_write_begin(const struct kiocb *iocb,
+ 	 * Will wait that below with our IO control.
+ 	 */
+ 	folio = __filemap_get_folio(mapping, index,
+-				FGP_LOCK | FGP_WRITE | FGP_CREAT, GFP_NOFS);
++				FGP_LOCK | FGP_WRITE | FGP_CREAT | FGP_NOFS,
++				mapping_gfp_mask(mapping));
+ 	if (IS_ERR(folio)) {
+ 		err = PTR_ERR(folio);
+ 		goto fail;
 
 ---
- fs/f2fs/xattr.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+base-commit: c872b6279cd26762339ff02513e2a3f16149a6f1
+change-id: 20250910-origin-dev-8a5ff6bee1f2
 
-diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index 58632a2b6613..81f591a45b41 100644
---- a/fs/f2fs/xattr.c
-+++ b/fs/f2fs/xattr.c
-@@ -845,10 +845,18 @@ int f2fs_init_xattr_caches(struct f2fs_sb_info *sbi)
- 	if (!sbi->inline_xattr_slab)
- 		return -ENOMEM;
-
-+	printk("%s: slab_name: %s, %u:%u, %p\n", __func__, slab_name,
-+				MAJOR(dev), MINOR(dev), sbi->inline_xattr_slab);
-+
- 	return 0;
- }
-
- void f2fs_destroy_xattr_caches(struct f2fs_sb_info *sbi)
- {
-+	dev_t dev = sbi->sb->s_bdev->bd_dev;
-+
-+	printk("%s: %u:%u %p\n", __func__, MAJOR(dev), MINOR(dev),
-+						sbi->inline_xattr_slab);
-+
- 	kmem_cache_destroy(sbi->inline_xattr_slab);
- }
+Best regards,
 -- 
-2.49.0
+Jiucheng Xu <jiucheng.xu@amlogic.com>
 
-Thanks,
+
 
 
 _______________________________________________
