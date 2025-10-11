@@ -2,101 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8AC9BCF290
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Oct 2025 10:48:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E611DBCF2A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Oct 2025 10:56:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=uOWQ4WugaH5NPeeayENzqA3D8VD7SzsBepiMDWXxnp4=; b=G4LJWYoOFvHW/PLysiGFsIoV8o
-	eHgBlBhzckorLz5u0tCaAkUCAIEgtSgwKLwmVh57J27SlHU4h4FzLNsUycwGRK6BCOOpcMoYC46o1
-	6jcQ5/HWJlR+dsbsvKnAwg+mU3i17MlxTaoBVpTftGJwKpw/MF/iJ+T43s8UhnkL/SOk=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=whEshhw9uJJq8h9a96Je0YUkG+9U0kT0ZHAxYn0QRPc=; b=COO0XFf+BsdMCFYsELNkbtcQWQ
+	iEzCOlqQSJSlnnpSOHe5FgLcA/lMrcFtUfl/SYUtQqX3/dr7r3grfeflv+0Its33tW42FhHhqG+Qf
+	+fO/CqF2YWyeUfQ8q1n/nsbdKaipFB00tMo3G5r1Qyx6uM+8f8yeiFaiq81tRM1SeESY=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v7VGg-0006RL-Ch;
-	Sat, 11 Oct 2025 08:47:59 +0000
+	id 1v7VOd-000757-QL;
+	Sat, 11 Oct 2025 08:56:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v7VGf-0006RB-GP
+ (envelope-from <chao@kernel.org>) id 1v7VOc-00074y-BK
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 11 Oct 2025 08:47:58 +0000
+ Sat, 11 Oct 2025 08:56:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JZnX6MMApb6QcbHVcs29/I6X3Zy1xjTuF3iDemgCOS8=; b=Rw9SGLxLPrjuwYmOg8TwESIQDf
- b4JoNAjKjAa62Y00UHtNU3Wlo56eqHDM4DrP4DZNvzVLiOdLTbh7YSZ9NK0b/UW46T2iGWVGcqnki
- 386UpOVFBXabNPQmILmmlFERuSe8xLtOdFmzfntmWE3oV9LH18RPSuWXujtfakAZp6Hw=;
+ bh=ErNxcMZ7E+LedeOpLde+l96985Eg+N98xwY1sV31XkY=; b=AFZBGZXW9BFcbS+4OjOKKPs02C
+ Q5mrmteDokpZKljOwTbjo5LONJKxROG3lu7QRHYDxtUZm7LIttFEsNnkGyso4IZFbN61LgXQXoLde
+ ss60TrbKIGPdidfKegSbS58qsES6X6Te+326gqR8t+DfY9BLlIwHonqYi7Gxvozc66eU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JZnX6MMApb6QcbHVcs29/I6X3Zy1xjTuF3iDemgCOS8=; b=c6XlGqdPc6VoAoEoHOOjIYBcct
- Iz8Fc8yBWb8EaIY8x9VkQUCC0Y8nPVeP5FYOI1TTJQBarFg9zKV8KwB/18VDJN3BJPgwANmACwqeJ
- v3M9/nTYjcatQPUSJJjGbw9G7NuSxY+iciOG1qTZ0C+Tu1BIDb3j0fMS0gtdEvPvT6Kw=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=ErNxcMZ7E+LedeOpLde+l96985Eg+N98xwY1sV31XkY=; b=b2Uxz3tIjcwWk+vKgtRoat6xyK
+ jsjU1RRKEJvJr2NwjDmbO0q/SkUGh6UbaaI51x3YjnAQdDDFmO1RzxZq2TWjXyns7xzB2+DtnpPFL
+ vieKnba+ycJfUoGLhvLyB9xqCN92RfAZ/yC+gJhkWp8a+BpLHMy7RN/ieGFjXAsOePt0=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v7VGf-0004op-QL for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 11 Oct 2025 08:47:58 +0000
+ id 1v7VOb-0005fS-P4 for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 11 Oct 2025 08:56:10 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 879FA48AA5;
- Sat, 11 Oct 2025 08:47:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16739C113D0;
- Sat, 11 Oct 2025 08:47:45 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 019FD603AB;
+ Sat, 11 Oct 2025 08:55:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B14EC4CEF4;
+ Sat, 11 Oct 2025 08:55:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1760172467;
- bh=ICK2QtCKRm4PbgXspSFQYE73re2fxQXKto45NArjRVQ=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=YQddnMhfbM7yUO5D/23J2itcNHIYcoirDPlT3n2lg39AiDJQDu6MytOKCzcpEjTcv
- ahdaN0G8Gq+/k4SrwKIzJU2ChpILNX26yN2HuOkzwJprsvwp2kIcXn7EI2Xwr38H12
- 6LmiSCAZkEYJRjtekbaizcDpFtOe5pLvveFenfam46e2B2UdEOQ2OKACGuyuT/2Q0M
- RiIdcTSN+4uLXMR3Kvc6Hub+HTc18zqjtotdqTRSZboqys+gyzBXSe5USCXkDDBJ6V
- YgYVuQJoJHNLoNX/+g5mOjB8aAp93hUQ6Snv0tiAM8TcLWnJdWcKlVSpjG+TKGZg2R
- DYK7sRkeOE6zw==
-To: Zorro Lang <zlang@kernel.org>,
-	fstests@vger.kernel.org
-Date: Sat, 11 Oct 2025 16:47:15 +0800
-Message-ID: <20251011084715.608562-2-chao@kernel.org>
-X-Mailer: git-send-email 2.51.0.740.g6adb054d12-goog
-In-Reply-To: <20251011084715.608562-1-chao@kernel.org>
-References: <20251011084715.608562-1-chao@kernel.org>
+ s=k20201202; t=1760172958;
+ bh=fLYnOhy30DZWeHYLaHtHGNFxE3G/vpcQ8+keFi5zBxA=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=PJjEPlvkadUtIuyTmWlzC+t/CvfJIIWz6Cwoh0am1ln4py5i0+28WUQ5CGmZtRn6E
+ JP1cPhTlqW7XyERg1IaZ2J0ZL4je/IOvKB3QNL85TEGM2haW5yN+vU0f3CG+4KtgLr
+ a8Gz7vLYVEnihhc1uoTGasDc8w6PdFEV00Yu69eO17v1PXTd3R+/1gRvEsibQXbERo
+ DoE4IDKb5vMVWm72Knz+IMS2s34mAxh4MI4EzuLvY3c7L5c3w2mYsk5R/MwbYLT7f5
+ OoDZxBklRm6da+nBLjeyETrzW/aHBxV62N7jOeJZyscChoyZGSKjUqpAuLTUdbcY3c
+ kG9CtmU3/tvvQ==
+Message-ID: <abf317f1-0b7d-4ef6-8a85-6f8b15e15ce4@kernel.org>
+Date: Sat, 11 Oct 2025 16:55:55 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: jaegeuk@kernel.org
+References: <20250825015455.3826644-1-shengyong1@xiaomi.com>
+Content-Language: en-US
+In-Reply-To: <20250825015455.3826644-1-shengyong1@xiaomi.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This is a regression test: 1. create foo & bar 2. write 8M
- data to foo 3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar 4.
- fpunch in foo w/ specified range If we haven't applied kernel patch ("f2fs:
- fix to do sanity check on node footer for non inode dnode"), f2fs may missed
- to do sanity check on corrupted dnode, result in panic or deadloop in step
- 4). Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Hi Jaegeuk, Could you please consider merging this patchset?
+ Some testcases may rely on these new injection functionality. On 8/25/25
+ 09:54, Sheng Yong wrote: > Hi, all, > > Since we have not yet determined how
+ to check the test result properly, > I split patchset v2 into two parts on
+ Chao's suggestion. This is the > firs [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v7VGf-0004op-QL
-Subject: [f2fs-dev] [PATCH v3 2/2] f2fs/022: do sanity check on footer of
- non inode dnode
+X-Headers-End: 1v7VOb-0005fS-P4
+Subject: Re: [f2fs-dev] [PATCH v4 00/13] f2fs-tools & inject.f2fs: bugfix
+ and new injections
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,104 +110,69 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, Zorro Lang <zlang@redhat.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: shengyong1@xiaomi.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This is a regression test:
-1. create foo & bar
-2. write 8M data to foo
-3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar
-4. fpunch in foo w/ specified range
+Hi Jaegeuk,
 
-If we haven't applied kernel patch ("f2fs: fix to do sanity check on
-node footer for non inode dnode"), f2fs may missed to do sanity check
-on corrupted dnode, result in panic or deadloop in step 4).
+Could you please consider merging this patchset? Some testcases may rely on these
+new injection functionality.
 
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Signed-off-by: Chao Yu <chao@kernel.org>
-Reviewed-by: Zorro Lang <zlang@redhat.com>
----
-v3:
-- update commit id in _fixed_by_kernel_commit line
-- fix to update output to "fallocate: Structure needs cleaning"
-- fix typo for foo_path & bar_path
- tests/f2fs/022     | 52 ++++++++++++++++++++++++++++++++++++++++++++++
- tests/f2fs/022.out |  2 ++
- 2 files changed, 54 insertions(+)
- create mode 100755 tests/f2fs/022
- create mode 100644 tests/f2fs/022.out
-
-diff --git a/tests/f2fs/022 b/tests/f2fs/022
-new file mode 100755
-index 00000000..e5dd3077
---- /dev/null
-+++ b/tests/f2fs/022
-@@ -0,0 +1,52 @@
-+#! /bin/bash
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
-+#
-+# FS QA Test No. f2fs/022
-+#
-+# This is a regression test:
-+# 1. create foo & bar
-+# 2. write 8M data to foo
-+# 3. use inject.f2fs to inject i_nid[0] of foo w/ ino of bar
-+# 4. fpunch in foo w/ specified range
-+#
-+. ./common/preamble
-+_begin_fstest auto quick rw
-+
-+. ./common/attr
-+
-+_fixed_by_kernel_commit c18ecd99e0c7 \
-+	"f2fs: fix to do sanity check on node footer for non inode dnode"
-+
-+_require_scratch_nocheck
-+_require_command "$F2FS_INJECT_PROG" inject.f2fs
-+
-+# remove all mkfs options to avoid layout change of on-disk inode
-+export MKFS_OPTIONS=""
-+
-+foo_path=$SCRATCH_MNT/foo
-+bar_path=$SCRATCH_MNT/bar
-+
-+_scratch_mkfs >> $seqres.full
-+_scratch_mount
-+
-+touch $foo_path
-+touch $bar_path
-+$XFS_IO_PROG $foo_path -c "pwrite 0 8M" >> $seqres.full
-+sync
-+foo_ino=`stat -c '%i' $foo_path`
-+bar_ino=`stat -c '%i' $bar_path`
-+_scratch_unmount
-+
-+# inject foo inode to replace i_nid[0] w/ to bar ino
-+$F2FS_INJECT_PROG --node --mb i_nid --nid $foo_ino --idx 0 --val $bar_ino $SCRATCH_DEV >> $seqres.full || _fail "failed to inject"
-+
-+_scratch_mount
-+
-+# if CONFIG_F2FS_CHECK_FS is enabled, it will trigger a kernel panic,
-+# otherwise, it will enter a deadloop.
-+$XFS_IO_PROG $foo_path -c "fpunch 6984k 4k"
-+_scratch_unmount
-+
-+status=0
-+exit
-diff --git a/tests/f2fs/022.out b/tests/f2fs/022.out
-new file mode 100644
-index 00000000..5307e3d7
---- /dev/null
-+++ b/tests/f2fs/022.out
-@@ -0,0 +1,2 @@
-+QA output created by 022
-+fallocate: Structure needs cleaning
--- 
-2.49.0
+On 8/25/25 09:54, Sheng Yong wrote:
+> Hi, all,
+> 
+> Since we have not yet determined how to check the test result properly,
+> I split patchset v2 into two parts on Chao's suggestion. This is the
+> first part which contains some fixes/cleanups for f2fs-tools, and adds
+> new injections for inject.f2fs.
+> 
+> Changes from v3 are also updated in individual patch.
+> 
+> v4: * update manual page of injecting cp
+> v3: * split original patchset into two parts
+>     * update manual
+>     * refactor inject sit/nat in journal
+>     * fix memleak
+>     https://lore.kernel.org/linux-f2fs-devel/08ec4cbe-b140-4dc7-94a4-85d6044f4643@kernel.org
+> v2: * add some fix and cleanup
+>     * remove img.tar.gz from testcases
+>     * add testcases for injection
+>     * cleanup helpers script and simplify filter.sed and expected.in
+>     https://lore.kernel.org/linux-f2fs-devel/20250610123743.667183-1-shengyong1@xiaomi.com/
+> v1: https://lore.kernel.org/linux-f2fs-devel/20241029120956.4186731-1-shengyong@oppo.com/
+> 
+> Sheng Yong (13):
+>   fsck.f2fs: do not finish/reset zone if dry-run is true
+>   f2fs-tools: add option N to answer no for all questions
+>   f2fs-tools: cleanup {nid|segno}_in_journal
+>   fsck.f2fs: fix invalidate checkpoint
+>   dump.f2fs: print more info
+>   f2fs-tools: add and export lookup_sit_in_journal
+>   inject.f2fs: fix injecting sit/nat in journal
+>   inject.f2fs: fix injection on zoned device
+>   inject.f2fs: fix and cleanup parsing numeric options
+>   inject.f2fs: add members in inject_cp
+>   inject.f2fs: add member `feature' in inject_sb
+>   inject.f2fs: add members in inject_node
+>   inject.f2fs: add member `filename' in inject_dentry
+> 
+>  fsck/dump.c         |  15 +-
+>  fsck/f2fs.h         |  12 +-
+>  fsck/fsck.c         |   2 +-
+>  fsck/fsck.h         |   4 +-
+>  fsck/inject.c       | 515 ++++++++++++++++++++++++++++++++++++--------
+>  fsck/inject.h       |   1 +
+>  fsck/main.c         |  14 +-
+>  fsck/mount.c        |  61 ++++--
+>  include/f2fs_fs.h   |   1 +
+>  lib/libf2fs_zoned.c |   6 +-
+>  man/dump.f2fs.8     |   3 +
+>  man/fsck.f2fs.8     |   3 +
+>  man/inject.f2fs.8   |  46 +++-
+>  13 files changed, 555 insertions(+), 128 deletions(-)
+> 
 
 
 
