@@ -2,73 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51DE5BCF548
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Oct 2025 14:31:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 625A8BCFA28
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Oct 2025 19:24:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=DpsBB1D/ayDaI8WAhSGnp2N9keajdgvBwSqvlwBMQ24=; b=RVaQX7gPnGLNbgN17fpNoBvXgW
-	VzufoW+N/+NjZERGCw1rhoLHSrSd5iK4SqR/67+wrwKyW7AIGrIO5RPG5SQjVf+p6TrbTLAy+obBm
-	z+Ul1uR0a1AGzDhquQf9L/IlkHM+UEo+LGpQJSsqoZdrAsshW353FpO+wfywSpi82w0E=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=8QfPyEwAOIyrqrPsRTr7mRJY63oQzrkTnXCTsgEF3BU=; b=NdVv1utX8yJHQFDJBwC9mtV/6C
+	eP3SQEIn2DxtbBY+9LZDvEeWuPS3eFo+g2t7sDNmlWHgVeHTNjf+iV5Wu9q2Ewy6MwhSNs8E50rAf
+	99r5C9BdgGLnj+AREdoy8dS4fmBSr8P4LQLZatrrIGK99qtSMS+Dm6spp1WbLxJxwz1Q=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v7YkU-00037T-FD;
-	Sat, 11 Oct 2025 12:30:58 +0000
+	id 1v7dKi-0008Vq-Jg;
+	Sat, 11 Oct 2025 17:24:40 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v7Yk9-000376-QC
+ (envelope-from <nogunix@gmail.com>) id 1v7dKZ-0008Vc-6K
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 11 Oct 2025 12:30:37 +0000
+ Sat, 11 Oct 2025 17:24:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0xhKDj9Cx+7ofhX/nPkkB5ooDTx7TfzOu+PlnLTeKoU=; b=jAv1OXiz0s6Kx5kNdk5khymZiy
- Ev/48xixNUyYsuwmMD4eUxdQfmPHSUEwSAFasg7ZieZxLRtCIP6bPP7DWWyriYACKnVSAqxPn3SJH
- vRpImDkDfnrlFPGXxMplZ7IOXH7+JtqSZxsQc58nYfAduLcyZS877OYUWiLWA8enAyRU=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=0xhKDj9Cx+7ofhX/nPkkB5ooDTx7TfzOu+PlnLTeKoU=; b=msl5XYOalXEi/F0E7ycRPcADS4
- L6ffSw0+VZ8HJQzZxmB/9VqPYVhLItTCv1jYzTcNTlsTL7v9L68ni5wUjWbZEIaou6M1AwhWJiYLK
- YqYZ4it6g2GnUQkRAwsfQlwsaEQT8SLPNHLYGQLEei0b3iilLQy3eU9redrzlrTEp/38=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=nr75ZFbZ4/qx4rlwkOcGtUvCvFckrNfl3ESmCUVAzBQ=; b=Nj71JHtr1qA6jcjMebqXou60KB
+ CpftBGEj7lrR6dvp6cdFlsMNvyW4hZ/yO6Lk7L+LtykzR/ATHIod0MWr7tdRjuYoT3oh2ppR7Uuv2
+ 28boy+yuHEMiWCX9DorB3qzdpkqoKxjjeJYG6P+QJhDScezTOVsJa8OVGrArj4rhKcmw=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=nr75ZFbZ4/qx4rlwkOcGtUvCvFckrNfl3ESmCUVAzBQ=; b=m
+ 41DZSArxYy5Huru6GPju9ep4e8adzlZBdY+EQ+zlDbwuqGonDALLFLpwl+NkEWW7SsDygjIPi7ldK
+ k+joYaSOk7bfeeTIbiLlhM+TzvxoWeIlie4N5zPoGt91PslLEFmWwa8FaIBldpOVGZbbS8ygGMR6m
+ 4aJCtrMB7TJniBJw=;
+Received: from mail-pl1-f178.google.com ([209.85.214.178])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v7Yk8-0000fS-Pk for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 11 Oct 2025 12:30:37 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 5867043DEF;
- Sat, 11 Oct 2025 12:30:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0702AC4CEF8;
- Sat, 11 Oct 2025 12:30:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1760185826;
- bh=j5Do0yEYWFVVwdRlND6Cw+nMvx36/xJMFo/q2e6EW4M=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=qr2Xk3SYbF/shCekw1NrIZgU01io5am9C34ipibY6blC++skZIKsKk+MpBJJFqA8x
- fvM8njFPXx/rFR0IPMJIXH5W+6vRU/tmFNi6hrAUAJ4TSxt26UMwvUUmyt89q2iayJ
- +iH1yxEFZvK62RTF44KH7WGq3DQb0xdKoDa9JWILq5eDBm4V7AlFR9+l805tWR7lDl
- XQe0y2dNoWGe+eZxMCZFe8IeU6TaMyRrzM6Cy5f9dWE/wl7UAaB86uBqCAhS+pmQxr
- +suhOphl7vVgCUg75OwNfQfWU2rR2e9dhbIN+juXwG7VvK0WpTHyt8+U2yFPF5ZZII
- RFuY/7jC4K1pQ==
-To: jaegeuk@kernel.org
-Date: Sat, 11 Oct 2025 20:30:16 +0800
-Message-ID: <20251011123016.715964-2-chao@kernel.org>
-X-Mailer: git-send-email 2.51.0.740.g6adb054d12-goog
-In-Reply-To: <20251011123016.715964-1-chao@kernel.org>
-References: <20251011123016.715964-1-chao@kernel.org>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1v7dKY-0004tf-EU for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 11 Oct 2025 17:24:31 +0000
+Received: by mail-pl1-f178.google.com with SMTP id
+ d9443c01a7336-26e81c17d60so6233665ad.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sat, 11 Oct 2025 10:24:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760203465; x=1760808265; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nr75ZFbZ4/qx4rlwkOcGtUvCvFckrNfl3ESmCUVAzBQ=;
+ b=bC6whphuO63wjKEI1rJyuVBj7Y9FL34KgK40eZOoYjKhW1mOOLNNBxkoVOcm07+Bsr
+ 62u+kqR+R44ghRDjjbssGHqgRMtNAdSsj8KewxxkhmDVSs5wtney+WLqatejKvJMutNL
+ rFF4RRnhHUtUs5TeEZ3sIxnLi9XJ2I+U7JmGdtpXA6jLs3JHAsiRk3vquS5CE0VOnojp
+ iMdTs4+UnlAPXGiH978Nc4N2qCgEXNiCdEAGG3BCRntgrlFQTCz2BTVnWRpTHPvamtvy
+ Z/bb2gIsxaDO2+1IHv4wHEwPs9KCQN//mUd3Euv6cCWEuKU3pfX3HZG8cOQjqO7pp71e
+ iqhg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760203465; x=1760808265;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nr75ZFbZ4/qx4rlwkOcGtUvCvFckrNfl3ESmCUVAzBQ=;
+ b=ixF8ADRBCy4r5N9DZOqIeTUOkR0Uslck7dv3HRwEgnXGQsEmv0KWsc84xx4Al9QC+w
+ 6k9gkaaFoJuv0sQppQ8MmK4QF8O9kXcWFAXxxXDlWv5G2e3aXwR+bAtkTQL2uqc+6car
+ MWAhntqBWrE3kxTtDgqIXY8n7dI4bsKsxdV0dh6lPj+5EOEpe/Geg1RV+dIgbS47deE1
+ WxdIS4bgMhoPtc2nuHgglNJqTIKVIZ4nEFS94Etfem1AIo9ODhk1Y/ZOWUQjuCwGjp+4
+ 4OsD/7VggU3u/jOkgNKSLwYRcRffvbxl9CeWjRBKWIHDnvaEsUETHQ0wUkeLA9hEGH/A
+ oD+Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXpklbPr4QRs8LFqC/r8xptHe5zT9+WGmfzMkmpRI6Xzt4+bvwpDUv+7gOUu+HNjP/ImSAqzA/XUMPluOP/9WoH@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yz4cokJsF2z9vVWehoobdKzbOOU8BbQLEpP+ruEWJ3jrExwWOj+
+ OwjbxoeZueUiMTwcQhtnDutxoSWkhyCrF0ud+o/d/nDc1ngF/XwFHc43BiAHo2BR
+X-Gm-Gg: ASbGncuvCAa+k2uRJT6KmJAiUInfIYUGD/cx0kajCiZGIESPY+NiOk/aZMssJ4Dr/XK
+ khITjsdlmwa21N1+33IC6ObJ3FSZj9k2O5Bo0i25rz6eiJqq1QW1suhu8ET6IsgjOgWejrgwphV
+ 1bF4Z8BgcdUXlO2C4I9HoBPKuPRSU3irZJpxhqqTLhacUyPwiui2C5jyOOpCUOhcdVB5e7jqKHy
+ yGXZgJnJRdHBv1D6nkjgKonaPnVvpwES5DrNKWMABbaNIyQG624L3iNNoDg6opiJyWskW/cIwRG
+ hRJFioHP/KI8KmdwTiXq+MZmgLUEFRTf9y8MNixzJ7Y1Mp+i+huW119c153zgUga8jme3n1hN7U
+ bXZlG2M2naIhwgq6QWrQRKA3tTYbILOrOeVj463B6CCXGvx/Fm6i3wWwjUY8=
+X-Google-Smtp-Source: AGHT+IHDS/1rGu/qMTg3HP/g+EzjHB0vBFkMKwHWzTIyGYYPbY2si4NNPBadPtSI7F369JWGXkWS7w==
+X-Received: by 2002:a17:902:c950:b0:26a:3c75:5241 with SMTP id
+ d9443c01a7336-2902744bc67mr119102425ad.9.1760203464660; 
+ Sat, 11 Oct 2025 10:24:24 -0700 (PDT)
+Received: from elitemini.flets-east.jp
+ ([2400:4050:d860:9700:ff1c:3f53:c7ab:f611])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-29034dea083sm89355075ad.24.2025.10.11.10.24.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 11 Oct 2025 10:24:24 -0700 (PDT)
+From: Masaharu Noguchi <nogunix@gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>,
+ linux-f2fs-devel@lists.sourceforge.net (open list:F2FS FILE SYSTEM),
+ linux-doc@vger.kernel.org (open list:DOCUMENTATION),
+ linux-kernel@vger.kernel.org (open list)
+Date: Sun, 12 Oct 2025 02:24:15 +0900
+Message-ID: <20251011172415.114599-1-nogunix@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -77,10 +112,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  [ cut here ] kernel BUG at fs/f2fs/data.c:358! Call Trace:
- <IRQ> blk_update_request+0x5eb/0xe70 block/blk-mq.c:987
- blk_mq_end_request+0x3e/0x70
- block/blk-mq.c:1149 blk_complete_ [...] 
+ Content preview: Sphinx LaTeX builder fails with the following error: Markup
+ is unsupported in LaTeX: filesystems/f2fs:: longtable does not support nesting
+ a table. Wrap the ASCII tables in literal code blocks so that they are
+ rendered
+ as code instead of interpreted as tables. This fixes pdfdocs build failure.
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,14 +127,14 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URI: syzkaller.appspot.com]
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v7Yk8-0000fS-Pk
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix to do sanity check on node footer
- in {read, write}_end_io
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [nogunix(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.178 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1v7dKY-0004tf-EU
+Subject: [f2fs-dev] [PATCH] Documentation: f2fs: wrap tables in literal code
+ blocks to fix LaTeX build
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,189 +146,175 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: stable@kernel.org, syzbot+803dd716c4310d16ff3a@syzkaller.appspotmail.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Masaharu Noguchi <nogunix@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
------------[ cut here ]------------
-kernel BUG at fs/f2fs/data.c:358!
-Call Trace:
- <IRQ>
- blk_update_request+0x5eb/0xe70 block/blk-mq.c:987
- blk_mq_end_request+0x3e/0x70 block/blk-mq.c:1149
- blk_complete_reqs block/blk-mq.c:1224 [inline]
- blk_done_softirq+0x107/0x160 block/blk-mq.c:1229
- handle_softirqs+0x283/0x870 kernel/softirq.c:579
- __do_softirq kernel/softirq.c:613 [inline]
- invoke_softirq kernel/softirq.c:453 [inline]
- __irq_exit_rcu+0xca/0x1f0 kernel/softirq.c:680
- irq_exit_rcu+0x9/0x30 kernel/softirq.c:696
- instr_sysvec_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1050 [inline]
- sysvec_apic_timer_interrupt+0xa6/0xc0 arch/x86/kernel/apic/apic.c:1050
- </IRQ>
+Sphinx LaTeX builder fails with the following error:
 
-In f2fs_write_end_io(), it detects there is inconsistency in between
-node page index (nid) and footer.nid of node page.
+  Markup is unsupported in LaTeX:
+  filesystems/f2fs:: longtable does not support nesting a table.
 
-If footer of node page is corrupted in fuzzed image, then we load corrupted
-node page w/ async method, e.g. f2fs_ra_node_pages() or f2fs_ra_node_page(),
-in where we won't do sanity check on node footer, once node page becomes
-dirty, we will encounter this bug after node page writeback.
+Wrap the ASCII tables in literal code blocks so that they are rendered
+as code instead of interpreted as tables. This fixes pdfdocs build
+failure.
 
-Cc: stable@kernel.org
-Reported-by: syzbot+803dd716c4310d16ff3a@syzkaller.appspotmail.com
-Closes: https://syzkaller.appspot.com/bug?extid=803dd716c4310d16ff3a
-Signed-off-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Masaharu Noguchi <nogunix@gmail.com>
 ---
- fs/f2fs/data.c | 13 +++++++++++--
- fs/f2fs/f2fs.h | 11 +++++++++++
- fs/f2fs/node.c | 24 ++++++++++++++----------
- fs/f2fs/node.h |  8 --------
- 4 files changed, 36 insertions(+), 20 deletions(-)
+ Documentation/filesystems/f2fs.rst | 106 ++++++++++++++++-------------
+ 1 file changed, 57 insertions(+), 49 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 775aa4f63aa3..07dcc0211824 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -150,6 +150,12 @@ static void f2fs_finish_read_bio(struct bio *bio, bool in_task)
- 			continue;
- 		}
+diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+index a8d02fe5be83..80f94f309cea 100644
+--- a/Documentation/filesystems/f2fs.rst
++++ b/Documentation/filesystems/f2fs.rst
+@@ -188,34 +188,36 @@ fault_type=%d		 Support configuring fault injection type, should be
+ 			 enabled with fault_injection option, fault type value
+ 			 is shown below, it supports single or combined type.
  
-+		if (F2FS_F_SB(folio)->node_inode && is_node_folio(folio)) {
-+			if (f2fs_sanity_check_node_footer(F2FS_F_SB(folio),
-+				folio, folio->index, NODE_TYPE_REGULAR, true))
-+				bio->bi_status = BLK_STS_IOERR;
-+		}
+-			 ===========================      ==========
+-			 Type_Name                        Type_Value
+-			 ===========================      ==========
+-			 FAULT_KMALLOC                    0x00000001
+-			 FAULT_KVMALLOC                   0x00000002
+-			 FAULT_PAGE_ALLOC                 0x00000004
+-			 FAULT_PAGE_GET                   0x00000008
+-			 FAULT_ALLOC_BIO                  0x00000010 (obsolete)
+-			 FAULT_ALLOC_NID                  0x00000020
+-			 FAULT_ORPHAN                     0x00000040
+-			 FAULT_BLOCK                      0x00000080
+-			 FAULT_DIR_DEPTH                  0x00000100
+-			 FAULT_EVICT_INODE                0x00000200
+-			 FAULT_TRUNCATE                   0x00000400
+-			 FAULT_READ_IO                    0x00000800
+-			 FAULT_CHECKPOINT                 0x00001000
+-			 FAULT_DISCARD                    0x00002000
+-			 FAULT_WRITE_IO                   0x00004000
+-			 FAULT_SLAB_ALLOC                 0x00008000
+-			 FAULT_DQUOT_INIT                 0x00010000
+-			 FAULT_LOCK_OP                    0x00020000
+-			 FAULT_BLKADDR_VALIDITY           0x00040000
+-			 FAULT_BLKADDR_CONSISTENCE        0x00080000
+-			 FAULT_NO_SEGMENT                 0x00100000
+-			 FAULT_INCONSISTENT_FOOTER        0x00200000
+-			 FAULT_TIMEOUT                    0x00400000 (1000ms)
+-			 FAULT_VMALLOC                    0x00800000
+-			 ===========================      ==========
++			 .. code-block:: none
 +
- 		dec_page_count(F2FS_F_SB(folio), __read_io_type(folio));
- 		folio_end_read(folio, bio->bi_status == BLK_STS_OK);
- 	}
-@@ -352,8 +358,11 @@ static void f2fs_write_end_io(struct bio *bio)
- 						STOP_CP_REASON_WRITE_FAIL);
- 		}
++			     ===========================      ==========
++			     Type_Name                        Type_Value
++			     ===========================      ==========
++			     FAULT_KMALLOC                    0x00000001
++			     FAULT_KVMALLOC                   0x00000002
++			     FAULT_PAGE_ALLOC                 0x00000004
++			     FAULT_PAGE_GET                   0x00000008
++			     FAULT_ALLOC_BIO                  0x00000010 (obsolete)
++			     FAULT_ALLOC_NID                  0x00000020
++			     FAULT_ORPHAN                     0x00000040
++			     FAULT_BLOCK                      0x00000080
++			     FAULT_DIR_DEPTH                  0x00000100
++			     FAULT_EVICT_INODE                0x00000200
++			     FAULT_TRUNCATE                   0x00000400
++			     FAULT_READ_IO                    0x00000800
++			     FAULT_CHECKPOINT                 0x00001000
++			     FAULT_DISCARD                    0x00002000
++			     FAULT_WRITE_IO                   0x00004000
++			     FAULT_SLAB_ALLOC                 0x00008000
++			     FAULT_DQUOT_INIT                 0x00010000
++			     FAULT_LOCK_OP                    0x00020000
++			     FAULT_BLKADDR_VALIDITY           0x00040000
++			     FAULT_BLKADDR_CONSISTENCE        0x00080000
++			     FAULT_NO_SEGMENT                 0x00100000
++			     FAULT_INCONSISTENT_FOOTER        0x00200000
++			     FAULT_TIMEOUT                    0x00400000 (1000ms)
++			     FAULT_VMALLOC                    0x00800000
++			     ===========================      ==========
+ mode=%s			 Control block allocation mode which supports "adaptive"
+ 			 and "lfs". In "lfs" mode, there should be no random
+ 			 writes towards main area.
+@@ -298,12 +300,14 @@ compress_algorithm=%s	 Control compress algorithm, currently f2fs supports "lzo"
+ compress_algorithm=%s:%d Control compress algorithm and its compress level, now, only
+ 			 "lz4" and "zstd" support compress level config.
  
--		f2fs_bug_on(sbi, is_node_folio(folio) &&
--				folio->index != nid_of_node(folio));
-+		if (is_node_folio(folio)) {
-+			f2fs_sanity_check_node_footer(sbi, folio,
-+				folio->index, NODE_TYPE_REGULAR, true);
-+			f2fs_bug_on(sbi, folio->index != nid_of_node(folio));
-+		}
- 
- 		dec_page_count(sbi, type);
- 		if (f2fs_in_warm_node_list(sbi, folio))
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index b6e35fdd5fd3..839032a4da39 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1504,6 +1504,14 @@ enum f2fs_lookup_mode {
- 	LOOKUP_AUTO,
- };
- 
-+/* For node type in __get_node_folio() */
-+enum node_type {
-+	NODE_TYPE_REGULAR,
-+	NODE_TYPE_INODE,
-+	NODE_TYPE_XATTR,
-+	NODE_TYPE_NON_INODE,
-+};
+-                         =========      ===========
++			 .. code-block:: none
 +
- static inline int f2fs_test_bit(unsigned int nr, char *addr);
- static inline void f2fs_set_bit(unsigned int nr, char *addr);
- static inline void f2fs_clear_bit(unsigned int nr, char *addr);
-@@ -3849,6 +3857,9 @@ struct folio *f2fs_new_node_folio(struct dnode_of_data *dn, unsigned int ofs);
- void f2fs_ra_node_page(struct f2fs_sb_info *sbi, nid_t nid);
- struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
- 						enum node_type node_type);
-+int f2fs_sanity_check_node_footer(struct f2fs_sb_info *sbi,
-+					struct folio *folio, pgoff_t nid,
-+					enum node_type ntype, bool in_irq);
- struct folio *f2fs_get_inode_folio(struct f2fs_sb_info *sbi, pgoff_t ino);
- struct folio *f2fs_get_xnode_folio(struct f2fs_sb_info *sbi, pgoff_t xnid);
- int f2fs_move_node_folio(struct folio *node_folio, int gc_type);
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 2bb9e6d35080..e70c970a3047 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -1500,9 +1500,9 @@ void f2fs_ra_node_page(struct f2fs_sb_info *sbi, nid_t nid)
- 	f2fs_folio_put(afolio, err ? true : false);
- }
++			     =========      ===========
+ 			 algorithm	level range
+-                         =========      ===========
++			     =========      ===========
+ 			 lz4		3 - 16
+ 			 zstd		1 - 22
+-                         =========      ===========
++			     =========      ===========
+ compress_log_size=%u	 Support configuring compress cluster size. The size will
+ 			 be 4KB * (1 << %u). The default and minimum sizes are 16KB.
+ compress_extension=%s	 Support adding specified extension, so that f2fs can enable
+@@ -368,38 +372,42 @@ errors=%s		 Specify f2fs behavior on critical errors. This supports modes:
+ 			 the partition in read-only mode. By default it uses "continue"
+ 			 mode.
  
--static int sanity_check_node_footer(struct f2fs_sb_info *sbi,
-+int f2fs_sanity_check_node_footer(struct f2fs_sb_info *sbi,
- 					struct folio *folio, pgoff_t nid,
--					enum node_type ntype)
-+					enum node_type ntype, bool in_irq)
- {
- 	bool is_inode;
+-			 ====================== =============== =============== ========
+-			 mode			continue	remount-ro	panic
+-			 ====================== =============== =============== ========
+-			 access ops		normal		normal		N/A
+-			 syscall errors		-EIO		-EROFS		N/A
+-			 mount option		rw		ro		N/A
+-			 pending dir write	keep		keep		N/A
+-			 pending non-dir write	drop		keep		N/A
+-			 pending node write	drop		keep		N/A
+-			 pending meta write	keep		keep		N/A
+-			 ====================== =============== =============== ========
++			 .. code-block:: none
++
++			     ====================== =============== =============== ========
++			     mode			continue	remount-ro	panic
++			     ====================== =============== =============== ========
++			     access ops		normal		normal		N/A
++			     syscall errors		-EIO		-EROFS		N/A
++			     mount option		rw		ro		N/A
++			     pending dir write	keep		keep		N/A
++			     pending non-dir write	drop		keep		N/A
++			     pending node write	drop		keep		N/A
++			     pending meta write	keep		keep		N/A
++			     ====================== =============== =============== ========
+ nat_bits		 Enable nat_bits feature to enhance full/empty nat blocks access,
+ 			 by default it's disabled.
+ lookup_mode=%s		 Control the directory lookup behavior for casefolded
+ 			 directories. This option has no effect on directories
+ 			 that do not have the casefold feature enabled.
  
-@@ -1544,13 +1544,16 @@ static int sanity_check_node_footer(struct f2fs_sb_info *sbi,
- 		goto out_err;
- 	return 0;
- out_err:
--	f2fs_warn(sbi, "inconsistent node block, node_type:%d, nid:%lu, "
--		  "node_footer[nid:%u,ino:%u,ofs:%u,cpver:%llu,blkaddr:%u]",
--		  ntype, nid, nid_of_node(folio), ino_of_node(folio),
--		  ofs_of_node(folio), cpver_of_node(folio),
--		  next_blkaddr_of_node(folio));
- 	set_sbi_flag(sbi, SBI_NEED_FSCK);
--	f2fs_handle_error(sbi, ERROR_INCONSISTENT_FOOTER);
-+	f2fs_warn_ratelimited(sbi, "inconsistent node block, node_type:%d, nid:%lu, "
-+		"node_footer[nid:%u,ino:%u,ofs:%u,cpver:%llu,blkaddr:%u]",
-+		ntype, nid, nid_of_node(folio), ino_of_node(folio),
-+		ofs_of_node(folio), cpver_of_node(folio),
-+		next_blkaddr_of_node(folio));
-+	if (in_irq)
-+		f2fs_handle_error_async(sbi, ERROR_INCONSISTENT_FOOTER);
-+	else
-+		f2fs_handle_error(sbi, ERROR_INCONSISTENT_FOOTER);
- 	return -EFSCORRUPTED;
- }
+-			 ================== ========================================
+-			 Value		    Description
+-			 ================== ========================================
+-			 perf		    (Default) Enforces a hash-only lookup.
++			 .. code-block:: none
++
++			     ================== ========================================
++			     Value		    Description
++			     ================== ========================================
++			     perf		    (Default) Enforces a hash-only lookup.
+ 					    The linear search fallback is always
+ 					    disabled, ignoring the on-disk flag.
+-			 compat		    Enables the linear search fallback for
++			     compat		    Enables the linear search fallback for
+ 					    compatibility with directory entries
+ 					    created by older kernel that used a
+ 					    different case-folding algorithm.
+ 					    This mode ignores the on-disk flag.
+-			 auto		    F2FS determines the mode based on the
++			     auto		    F2FS determines the mode based on the
+ 					    on-disk `SB_ENC_NO_COMPAT_FALLBACK_FL`
+ 					    flag.
+-			 ================== ========================================
++			     ================== ========================================
+ ======================== ============================================================
  
-@@ -1595,7 +1598,7 @@ static struct folio *__get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
- 		goto out_err;
- 	}
- page_hit:
--	err = sanity_check_node_footer(sbi, folio, nid, ntype);
-+	err = f2fs_sanity_check_node_footer(sbi, folio, nid, ntype, false);
- 	if (!err)
- 		return folio;
- out_err:
-@@ -1769,7 +1772,8 @@ static bool __write_node_folio(struct folio *folio, bool atomic, bool *submitted
- 	/* get old block addr of this node page */
- 	nid = nid_of_node(folio);
- 
--	if (sanity_check_node_footer(sbi, folio, nid, NODE_TYPE_REGULAR)) {
-+	if (f2fs_sanity_check_node_footer(sbi, folio, nid,
-+					NODE_TYPE_REGULAR, false)) {
- 		f2fs_handle_critical_error(sbi, STOP_CP_REASON_CORRUPTED_NID);
- 		goto redirty_out;
- 	}
-diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
-index 9cb8dcf8d417..824ac9f0e6e4 100644
---- a/fs/f2fs/node.h
-+++ b/fs/f2fs/node.h
-@@ -52,14 +52,6 @@ enum {
- 	IS_PREALLOC,		/* nat entry is preallocated */
- };
- 
--/* For node type in __get_node_folio() */
--enum node_type {
--	NODE_TYPE_REGULAR,
--	NODE_TYPE_INODE,
--	NODE_TYPE_XATTR,
--	NODE_TYPE_NON_INODE,
--};
--
- /*
-  * For node information
-  */
+ Debugfs Entries
 -- 
-2.49.0
+2.51.0
 
 
 
