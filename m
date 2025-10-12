@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A4A6BCFF7F
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 12 Oct 2025 07:31:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FAF2BD0C9B
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 12 Oct 2025 23:19:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=12dWD5JBCIvwf/VX96Je87OAX/rfZ7Im1doKOAu3mAQ=; b=VK3C03a7+e66JKFcKAPKO+hRXu
-	aLl4hBld+BtmCmEkzbIymjxIKB5iV0kPOHnuDlV7L0ddCXZD5Td9Ud/qv+Ib0/ZLH9steo7zcRcIW
-	DhKPXMsAEonFIUzUzvdUSZj9tu9A8izNhiVm4zACR+51zS5kVu+UY+qWRt+/HVCz9dRg=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=oZ4NAjPp+MKdSMhnARqTWUsxxw3W68B8Bz+1AtPlbjQ=; b=DWCxyGRSZViicaFHoUySvS3jG1
+	uNm8aLZcKg4Dx9YqYkosu4fR/XEoAcZZfeeVTB9Wxjw/i1r3dooarxbnPZwt7iqtXk6V2s/o2N5F7
+	VbsnviprVPBd6ABWpWBxCChkCtoVXiASXW0R7/n2MkR3H3S72E+PvrCZGtIRgxOW2lc8=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v7ogR-0004hv-8c;
-	Sun, 12 Oct 2025 05:31:52 +0000
+	id 1v83TN-0001R5-Qb;
+	Sun, 12 Oct 2025 21:19:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nogunix@gmail.com>) id 1v7ogP-0004hh-2Q
+ (envelope-from <zlatistiv@gmail.com>) id 1v83TL-0001Qv-0W
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 12 Oct 2025 05:31:49 +0000
+ Sun, 12 Oct 2025 21:19:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=V315Oz2UwZma7KgfzSEN+KehYy049Dd9a5YOBN+/BjE=; b=d2bA7Bkd+AOXAHvAkxB3n1k29F
- brgrQojLGOVlHl8V7SutQutyF0H7mnnsGg7CwSqN5CAIaCTOdmCoS1guY45vq0FwuVWn2eY3u3OaU
- Ww1QMfc9TixKf9Ku83ePO0fGqORVczPN6sU0DhdTctk7dzfG8fx3X62JaUr/X47Tg4A4=;
+ bh=Adu93qTTKDS0Ch74HcJDA+rP49HUSyI6PQ01hbqUFWo=; b=UVGGICJhUh+zyOPsgta/Gab8Bn
+ 27z1HTx9ZcKnJD2og7GJSDIijA1rbmrLXEO0AXsvX5DKSXNEuzu9SYJrMJ4r5Sof1V8bIPKCNYvaU
+ O+0mylk1miEr5xVqxWXMhYnf5BXo9l2VwyHmAHttBFwQXtAO5R/973NhQ5g0Affvp/ek=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -40,80 +40,81 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=V315Oz2UwZma7KgfzSEN+KehYy049Dd9a5YOBN+/BjE=; b=RDWLTug0P3yMjtlgKijQxkk2s/
- vosYe3qYrPyghzzW42GBDdx9Wc/etXobqiGrqn572ZOwx2X2ubrZ3bWPJ/Q78OZwjrj2skr5eBzQ9
- KSYZ6Yx5DLaRgslT6mUj41pPVqYrGs6Rt8j3c0nXVQrUK/STO1HuMxxX05O6VD4HKNDI=;
-Received: from mail-pj1-f42.google.com ([209.85.216.42])
+ bh=Adu93qTTKDS0Ch74HcJDA+rP49HUSyI6PQ01hbqUFWo=; b=XhiLetifzNFXNxGudx9JbDQu98
+ RiLVmIJjtFWPS9zOHmsUR5FvdrH/GWDif6Dwf5XJpIbThk0Y5bSIDrupQNN51CqK4ge52BfHlwzhG
+ 5EMAx3VbVrEF0WKR5f4hHUR/w1IITNnZQsUFhv9GrYvMGPqub5zFgbkMJ6pMJq2dZd7Y=;
+Received: from mail-wr1-f52.google.com ([209.85.221.52])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1v7ogP-0002kf-Ho for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 12 Oct 2025 05:31:49 +0000
-Received: by mail-pj1-f42.google.com with SMTP id
- 98e67ed59e1d1-32ecc60c9e6so584470a91.0
+ id 1v83TK-0003gF-H1 for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 12 Oct 2025 21:19:18 +0000
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-3ee130237a8so2807874f8f.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 11 Oct 2025 22:31:49 -0700 (PDT)
+ Sun, 12 Oct 2025 14:19:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760247099; x=1760851899; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1760303947; x=1760908747; darn=lists.sourceforge.net;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=V315Oz2UwZma7KgfzSEN+KehYy049Dd9a5YOBN+/BjE=;
- b=bX66siEifjoJ2Vbc7CnSwOdKpwN2TN4x3whHS0MCS15vRDHepI9V82FO1f+vtFG3Bd
- sg2giSb/kX6m3dGIYVoYsB2/3eYWXXA/Kd2RG01Hb3+0nsfs3UC0xlIsng5/dQe9cnvk
- LvUTto+5YAPkvVYnoCu8HHs6+o4SCDtiixc8SaDR2Dmx6TjJck5SwQ5+iFuxw4LWfRN6
- i4p4lGUhQ2+6KxGsFX50Y8kXwJab8kmWFCaBeVNMqyFq6kNlmOTKxHaBKy+buA6cdaIv
- obfcefqpCpLCYcOk/1f6CjhWwh9/fZK3OM8PSs1l7/FhFUI5oW8hbrE/NhO8jT4JshTK
- R7pQ==
+ bh=Adu93qTTKDS0Ch74HcJDA+rP49HUSyI6PQ01hbqUFWo=;
+ b=hboKV2L07o7AsR0vTZdlpNdZRfpCaKbNuHTNL60p6Bq0rjvQa/wwidd5stgJBVboXJ
+ 8O2aTPGC99GXd0Dh/xI4AKG2vOl5Qp/Pj/GKo8FPrC/+HQODFfD6bN3u0xPX/tEDb40U
+ +T9OaXbGYOtrBnhv1kywlpbRQJEt1XH0lQiLAF65P8WGC2h10gN5peA8cIJdOU5nhu+M
+ MSZm/dlEkywJOzGtY1K8JC/FlQ6gKXf8wJ8G3N5FyV+NtettBWFpBpbzZrggBihxonXY
+ 0YTQQzzUZUWQaPLoYHpVgNvRD8etWR9otmQrbWz4/Lj7aNW52Qt/o0fauxx30Zv4bxcI
+ NNyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760247099; x=1760851899;
+ d=1e100.net; s=20230601; t=1760303947; x=1760908747;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V315Oz2UwZma7KgfzSEN+KehYy049Dd9a5YOBN+/BjE=;
- b=Ypi9vnxDR3iVZrj6dFURJQLrmA8dyJ5b3NVC17aaDOq2BDExyNqkpB/lAaSURCWce/
- fRCmF86S5ym7Z2RPIfRpDbFMGT/weAOocVEbvCuHPDq+C/Z/bhNNepBTDmR1fgCFcu/D
- rG8/9+WLI5durxb5XQQjlQWvDGSbwdENeIaob4EW4MHtWFptK0oX8/yo3MeYX4W02H1y
- TS2X6kikiS2u5EXTXHC3KCtvbW6kHtx68ckpcycPbCqb46KfIWT0rAdkXUZUaiZGjX0B
- Ey6l8cC+Q33o2NkJVKvyRNNa9pF1PqbMrSnc32l0ElotKcYAQ0WyEZjrqJTvf3g3ez5s
- isEA==
+ bh=Adu93qTTKDS0Ch74HcJDA+rP49HUSyI6PQ01hbqUFWo=;
+ b=Zg8lFmDdPFEWfR0XTSlGv2uzv22ABF8T7VNkk18QWcPLRhNp+AW0GigBNqg+l6e1q6
+ okZHjo+Hb7aYQfU0LSrSXNR+rtE85SugbWDgiPb6LXEsV+iHbAmZwrK0FYldvjj7aCS9
+ MEKrWJP7gjnf8ghNH5whKaz1wzbmjpuvC7NrXX0mgzggE/YodpVsq/lwyb/BF1CEihVT
+ nGNrIiVDuyQb2Q2uU+E968D7aJsHyeXI0v3j6GOFDKl3ngK+EzIKsnXQaUV5rNiAfO6E
+ lH/amACp1WJhG8+nYxNkzY/icFm0bS41k7sW6HkQl7kBp59D0Se8hFuCsGvGFN/h19n/
+ EoZg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWULSve3JwCF4Sg7/sUV/NyvrQpyO12PwPhsrsTOPeNCBhi3wqd3CB9QZ/U6+VfU6phPflIGtIi2IUpeSneB34a@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yy5vEfvESpydWeLN/DjaDJtECX2ywR3wQHutF00iC0tbCgqab5/
- 5gobOWtnDrQNtNluvlz9b7W2s5jbL2IX4newsDPLk3EY1qMfq44kI300
-X-Gm-Gg: ASbGncvM2LCiEkYeIn3NBqF7v8nvhC4ar4IY7hJp7Ps6DrW8Roygs2LOn84gLPsOAzz
- 4/2UxqKDBrA0gcjYj/dphg/3IyPyDvcCUAORG/rNCawCfbrD+j08fXlA5GLVWuwm3QJpb4Sd/kK
- 5085c1ABdRv623dS97w99MAe7n0CQvKi6/gU31/i257QV0tvkAKvsJMq+5BOzx2t4GQQn4k9swN
- BqkhtgENjWgGU1AE7S/nxzHYVaOAuGwLSiSGmsbyDy76B0GE9x5XYRymhaKKfvKxvL0WJ8/TmWR
- ReSJUqv33dPwmTkON4kEpzr+gJSrmYJQZbES5R5lJGdvywScXf8yuOQaNGCfIoknsBdHcV4kPmp
- SCDfuh7ZECzuHZOsljC3acMyXJzWiUuu4wiqDcmc0NiWDi4lR7Zo=
-X-Google-Smtp-Source: AGHT+IGdgMMmNCve6hIXzVGxikslohoV+pMEGgcopaw46XiTYHSuaq6+3cVVsGeG9CQvShDrq4immg==
-X-Received: by 2002:a17:90b:1b42:b0:32e:64ca:e849 with SMTP id
- 98e67ed59e1d1-33b513990d5mr12118698a91.8.1760247098812; 
- Sat, 11 Oct 2025 22:31:38 -0700 (PDT)
-Received: from elitemini ([2400:4050:d860:9700:ff1c:3f53:c7ab:f611])
+ AJvYcCXb45aldccCTIK5MlJZQALR50D9kuTq6t+m+jCaw1/jDa1MPTXRDypfJJ/u+EAW6k0gtEXr/TsEpktX3TDwsn3q@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yz/nAjZZvJCLmNk5eFBfYVjT4R2wum4V0O9TuMjCdyiz2LqMp2V
+ p9J2NXvG2Yf5Hn8Xx/vWMso0mxq4gZZ+gy0P5rGTlqSDyO/vF25DBGqI
+X-Gm-Gg: ASbGncuY9VLaTOH4PX0K3uLAx7Vt9338W6cARRbPESMqrxyS3Q4EVOa10CbRFYjQ4Gc
+ Wf+CxH1M7o/MK3oQTHCNqhcnesZ/4snjNhzQc+7tTg9iHL5GaU/F3EQNPHXziTHR5TLqXJClQ+Y
+ paXbkk+bcVEmC8oDu6lm9FKqBjSk7TIG7pt+F7CcRGq1DsbkyGB2cYHtXYYEQi2V80V4+mrLuUd
+ BS4rifEtnnoZodvQMT0ctcLMSuMMUTYmRQ043GTtbvG8OL8IBMraqwq0L3gguQxrTg66+vQNxA8
+ SFUwpwwY4n/yMWqsl9hiqj0qcnvs9SN6IuD36R1WSF5vXxRKp3af0O7FQrCH0+O2IbJYOka8PaI
+ bv/J0SyXt/IIRMQJyoRt76xOiugaiZmrVVGQJ2yx9Yw/xH/T4k5uYLd/XanCHUPILrqAzbHNDwO
+ uZh80+eimoXR7KjGfyHRk=
+X-Google-Smtp-Source: AGHT+IGjHlzwxTlSwDIo8bVlsq+pwRAcXzYI1RxLsxjm8COk+bFjmzs7HwuYQVnOLc3GhJHNohSXJA==
+X-Received: by 2002:a05:6000:2c11:b0:3ec:dd16:fc16 with SMTP id
+ ffacd0b85a97d-4266e7df779mr12010154f8f.43.1760303946775; 
+ Sun, 12 Oct 2025 14:19:06 -0700 (PDT)
+Received: from localhost.localdomain ([46.10.223.24])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-33b61b12756sm8028789a91.25.2025.10.11.22.31.36
+ ffacd0b85a97d-426ce5e0987sm14723783f8f.38.2025.10.12.14.19.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Oct 2025 22:31:38 -0700 (PDT)
-Date: Sun, 12 Oct 2025 14:31:34 +0900
-From: Masaharu Noguchi <nogunix@gmail.com>
-To: Akira Yokosawa <akiyks@gmail.com>
-Message-ID: <aOs9NiaXVrcO83dz@elitemini>
-References: <20251011172415.114599-1-nogunix@gmail.com>
- <12aa7858-b05b-415f-a76b-c18848a9a784@gmail.com>
+ Sun, 12 Oct 2025 14:19:06 -0700 (PDT)
+Date: Mon, 13 Oct 2025 00:19:04 +0300
+From: "Nikola Z. Ivanov" <zlatistiv@gmail.com>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <gupgic53ouhmdwrglwdviw2mzeaqfjsvyr47u3ebu2ztayswy4@4oxvnu252rdb>
+References: <20251003134731.470392-1-zlatistiv@gmail.com>
+ <839306c1-5f7a-4e89-b2cf-7534d279a03c@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <12aa7858-b05b-415f-a76b-c18848a9a784@gmail.com>
-X-Spam-Score: 2.3 (++)
+In-Reply-To: <839306c1-5f7a-4e89-b2cf-7534d279a03c@kernel.org>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello, Thank you for your detailed feedback regarding the
- f2fs.rst issue. I have tested the current mainline (without my patch) using
- Sphinx 8.3.0+ (commit ab8303f4bb13) and Docutils 0.21.2 on Python 3.13.7.
- Content analysis details:   (2.3 points, 5.0 required)
+ Content preview:  On Thu, Oct 09, 2025 at 10:54:40AM +0800, Chao Yu wrote: >
+ On 10/3/2025 9:47 PM, Nikola Z. Ivanov wrote: > > Current i_nlink corruption
+ check does not take into account > > directory inodes which have [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
@@ -123,15 +124,13 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 2.5 SORTED_RECIPS          Recipient list is sorted by address
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [nogunix(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.42 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1v7ogP-0002kf-Ho
-Subject: Re: [f2fs-dev] [PATCH] Documentation: f2fs: wrap tables in literal
- code blocks to fix LaTeX build
+ [zlatistiv(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.52 listed in wl.mailspike.net]
+X-Headers-End: 1v83TK-0003gF-H1
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Perform sanity check before unlinking
+ directory inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -143,30 +142,106 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: corbet@lwn.net, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org
+Cc: david.hunter.linux@gmail.com,
+ syzbot+c07d47c7bc68f47b9083@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ khalid@kernel.org, skhan@linuxfoundation.org, jaegeuk@kernel.org,
+ linux-kernel-mentees@lists.linuxfoundation.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+On Thu, Oct 09, 2025 at 10:54:40AM +0800, Chao Yu wrote:
+> On 10/3/2025 9:47 PM, Nikola Z. Ivanov wrote:
+> > Current i_nlink corruption check does not take into account
+> > directory inodes which have one additional i_nlink for their "." entry.
+> > 
+> > Add additional check and a common corruption path.
+> > 
+> > Reported-by: syzbot+c07d47c7bc68f47b9083@syzkaller.appspotmail.com
+> > Closes: https://syzkaller.appspot.com/bug?extid=c07d47c7bc68f47b9083
+> > Fixes: 81edb983b3f5 ("f2fs: add check for deleted inode")
+> > Signed-off-by: Nikola Z. Ivanov <zlatistiv@gmail.com>
+> > ---
+> >   fs/f2fs/namei.c | 28 ++++++++++++++++++++--------
+> >   1 file changed, 20 insertions(+), 8 deletions(-)
+> > 
+> > diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> > index b882771e4699..68b33e8089b0 100644
+> > --- a/fs/f2fs/namei.c
+> > +++ b/fs/f2fs/namei.c
+> > @@ -502,12 +502,14 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
+> >   		goto out;
+> >   	}
+> > -	if (inode->i_nlink == 0) {
+> > +	if (unlikely(inode->i_nlink == 0)) {
+> >   		f2fs_warn(F2FS_I_SB(inode), "%s: inode (ino=%lx) has zero i_nlink",
+> >   			  __func__, inode->i_ino);
+> > -		err = -EFSCORRUPTED;
+> > -		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+> > -		goto out_iput;
+> > +		goto corrupted;
+> > +	} else if (unlikely(S_ISDIR(inode->i_mode) && inode->i_nlink == 1)) {
+> > +		f2fs_warn(F2FS_I_SB(inode), "%s: directory inode (ino=%lx) has a single i_nlink",
+> > +			  __func__, inode->i_ino);
+> > +		goto corrupted;
+> 
+> Can we detect such corruption in sanity_check_inode() as well? So that if
+> f2fs internal flow calls f2fs_iget() on corrupted inode, we can set SBI_NEED_FSCK
+> flag and then triggering fsck repairment later.
+> 
+> Thanks,
+> 
+> >   	}
+> >   	if (IS_ENCRYPTED(dir) &&
+> > @@ -533,6 +535,9 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
+> >   	trace_f2fs_lookup_end(dir, !IS_ERR_OR_NULL(new) ? new : dentry,
+> >   				ino, IS_ERR(new) ? PTR_ERR(new) : err);
+> >   	return new;
+> > +corrupted:
+> > +	err = -EFSCORRUPTED;
+> > +	set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+> >   out_iput:
+> >   	iput(inode);
+> >   out:
+> > @@ -572,10 +577,11 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
+> >   	if (unlikely(inode->i_nlink == 0)) {
+> >   		f2fs_warn(F2FS_I_SB(inode), "%s: inode (ino=%lx) has zero i_nlink",
+> >   			  __func__, inode->i_ino);
+> > -		err = -EFSCORRUPTED;
+> > -		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+> > -		f2fs_folio_put(folio, false);
+> > -		goto fail;
+> > +		goto corrupted;
+> > +	} else if (unlikely(S_ISDIR(inode->i_mode) && inode->i_nlink == 1)) {
+> > +		f2fs_warn(F2FS_I_SB(inode), "%s: directory inode (ino=%lx) has a single i_nlink",
+> > +			  __func__, inode->i_ino);
+> > +		goto corrupted;
+> >   	}
+> >   	f2fs_balance_fs(sbi, true);
+> > @@ -601,6 +607,12 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
+> >   	if (IS_DIRSYNC(dir))
+> >   		f2fs_sync_fs(sbi->sb, 1);
+> > +
+> > +	goto fail;
+> > +corrupted:
+> > +	err = -EFSCORRUPTED;
+> > +	set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+> > +	f2fs_folio_put(folio, false);
+> >   fail:
+> >   	trace_f2fs_unlink_exit(inode, err);
+> >   	return err;
+> 
 
-Thank you for your detailed feedback regarding the f2fs.rst issue.
+Hi Chao,
 
-I have tested the current mainline (without my patch) using
-Sphinx 8.3.0+ (commit ab8303f4bb13) and Docutils 0.21.2
-on Python 3.13.7.
+Thank you for the suggestion.
+I will add this to sanity_check_inode and remove it
+from f2fs_lookup as it becomes redundant since f2fs_lookup
+obtains the inode through f2fs_iget. For f2fs_unlink I will
+move the i_nlink == 1 check to f2fs_rmdir.
 
-The pdfdocs build now completes successfully, and the nested
-tables in f2fs.rst no longer cause any LaTeX errors.
-
-It seems that the problem has been resolved in the upcoming
-Sphinx 8.3 release, as you mentioned.
-
-Thanks again for your kind guidance.
-
-Best regards,  
-Masaharu Noguchi
+I will send v2 as soon as I do some more testing.
 
 
 _______________________________________________
