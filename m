@@ -2,7 +2,7 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A798ABD78FF
+	by mail.lfdr.de (Postfix) with ESMTPS id A304ABD78FE
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Oct 2025 08:27:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -10,29 +10,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=059mDo2/uGBl9e/IBTatWMN/bPBCbNQRRuxfIfsiGPU=; b=g075DyF0pror+goELhMVO8CDB0
-	re/g5+jttLhKDe+YxaR7+qr7p5CExzoPRtZQywKgMDm3WGiAoMoR/exxrMAeqXRxge7I8TAcvuVD/
-	qR91zYxb053DUQfjR9yYlLD1sMqC7b9Wu9uh67mt9js1sEozJjU0acnqG9xtbRurNEes=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=vJtkFRRsvHk7OJZpWtUyc5KB7ogP5jEbyglNuIxGldg=; b=GGT0WV8ETMPC4WDGfjvK9grQqB
+	oqJAmTwY3JP/YQfKi2EeIXpAODe92KterBtEMD4ojgvqM9JcZiavPzUl0pAGHoy03tjiqGgP/jiJj
+	4J2LzhmmD4CyOR0E9Weni/hmZ2Wo7b0b/OkpvhgiHtvLZemn+X6oX/zMHmIX8RBatl6A=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v8YVJ-0001C2-AD;
+	id 1v8YVI-00073j-RD;
 	Tue, 14 Oct 2025 06:27:25 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v8YVH-0001Bv-DP
+ (envelope-from <chao@kernel.org>) id 1v8YVI-00073Y-0x
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 14 Oct 2025 06:27:23 +0000
+ Tue, 14 Oct 2025 06:27:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jROt6FLfEl5DX1GFidaAE/uuDumML805o3kVisMLOvs=; b=gv4seK2Hc0i9oXY7qi6KZQ1y7s
- Xvij1lgPk6z6lHYEWQsW2db+mpIYfYz9AGCt6mrcC1jc+wX1xUVygaWsJqy9iC6XUNmfvvunIG60I
- yKCrJTX6MBBI9IRq+ZlrrW2E15v2GrgK1cftRfDvOCre8vr44aivRygN0ELwL9pi+dj4=;
+ bh=r3RsWBV8kgTVyUle6m8vjHFDOgFxQ0VKgGZN1KwAalM=; b=Z+LaJZ49SIFxMkt3MoWFc0rOVU
+ EscXWRh43/Y49xBECGvPsbHCjO2FVzqPak8+r2QjDw+a3pxMvGXBlimR6ssek1sZtYd/tT1AoBQH9
+ 5OWyxmwaNSAcHocnpM++ivGvxzHWluEuN6M5G+ZKogA2abwzp8YqDU/Qe7rQw211ZBaw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,33 +40,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jROt6FLfEl5DX1GFidaAE/uuDumML805o3kVisMLOvs=; b=KlgAPy9rAxfjcQfOg/D+XoezUY
- ZgQwDg7AznZnrkLhVe3l7B2LcTeUHYMxEvqBcJHPod+1Qm1uPY/DmU5PCdLxI0YsujQc5C0fw4Usd
- bG/nCyj834RfqzH0k1OCvIs7uX0VrEIh6awoE4QSkjYWgSus8wvD3OKVwi7yrdXMecAU=;
+ bh=r3RsWBV8kgTVyUle6m8vjHFDOgFxQ0VKgGZN1KwAalM=; b=jUTN//YmOfdbJ1rFXN3Nvq3KfT
+ YWHExzKB06uAWtMjRABMymf9ufESKAxNB4+yDgdyY1uQNjkBz9SwbrbQatxBXInx+Ul4vQrw4+QmT
+ KUoCxfInPKg5PuZSyELZ6szvrHaKe75ViFBQVzLSPS52qYZJ5ILyVnCzkMLzJtmuKwGo=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v8YVG-0001i4-T4 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 14 Oct 2025 06:27:23 +0000
+ id 1v8YVI-0001iD-EF for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 14 Oct 2025 06:27:24 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 7BAFC45933
+ by sea.source.kernel.org (Postfix) with ESMTP id 2B24F4889B
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 14 Oct 2025 06:27:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C2F3AC4CEE7;
  Tue, 14 Oct 2025 06:27:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7656DC4CEE7;
- Tue, 14 Oct 2025 06:27:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1760423232;
- bh=FKeXO7u7xjtZC8nA3BNJBVR9SkDTyf5HtbxaG86K0r4=;
+ s=k20201202; t=1760423234;
+ bh=PNTKEmXKtFVp+YUrykXB7+qvHmZ2GbnocnQ5aHbHOFo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=KaZ6TgJuTxtTogKbk/smzJmxCkIsq3XoxrF8WBgvZgjmf8aK+VUmnPTUEzUS+V3QJ
- 9AJYg48JwTtrar5fydC/ZebVt86Sl0fAZeYnIxR9JHLxhU7LCDqMBV7LkmTA0FzHH8
- JexTQEe0D2E9D2utBRlKUawEjYj33omFYqk2IKNZPiv+FdBmjp7Bz46qM5/UOcEakz
- otFfl0J1zWm5lvHo30IyuKlrSATq1r7LaRKH5mN+qdspIjJoZDqpFpmEfHCZfo2sPQ
- 6OA/ykZZR3mYKC+ExUua4o7MVxRT8vv03FTZ6AeSbyznCWa3xxdB3zGNIHYfP/cEf5
- GQIACdMci0vhg==
+ b=lMBrqawULRzvYy0wurRKyyANwKU0YOvBSGJ2zy40SVWKz4mRmwYIRlBJ47cMDgggp
+ hwo3RASu8FI70WBUgEJ/78paOSgtC44iIGy44VWTGeXLO/bvBsHz+FIMaM/UrSZBmH
+ TcooA1nviR3eWioycxFliXC0gDmYV+aNQ0+QnWMrjzxsh7MoyEaSnSyPeOFWy4VVFD
+ 4C+VTDkXfO9y6DgVxH3f15+ySCUimEJ1yW7aZLgpvRgNM0Sj5WvRvFta+z0S/FKl72
+ d31LFFIOoLNub/DMtJ9dAynQepqgskp7f5WNo4eMiPEsGrt7Z2547HPNzSfXVjbWYE
+ NJNW8RyLUgTJw==
 To: jaegeuk@kernel.org
-Date: Tue, 14 Oct 2025 14:27:03 +0800
-Message-ID: <20251014062704.1734984-3-chao@kernel.org>
+Date: Tue, 14 Oct 2025 14:27:04 +0800
+Message-ID: <20251014062704.1734984-4-chao@kernel.org>
 X-Mailer: git-send-email 2.51.0.760.g7b8bcc2412-goog
 In-Reply-To: <20251014062704.1734984-1-chao@kernel.org>
 References: <20251014062704.1734984-1-chao@kernel.org>
@@ -78,13 +78,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Let's use f2fs_filemap_get_folio() instead of
- f2fs_pagecache_get_page()
- in ra_data_block() and move_data_block(), then remove f2fs_pagecache_get_page()
- since it has no user. Signed-off-by: Chao Yu <chao@kernel.org> ---
- fs/f2fs/f2fs.h
- | 10 fs/f2fs/gc.c | 23 +++++++++++++ 2 files changed, 13 insertions(+), 20
- deletions(-) 
+ Content preview: Use f2fs_filemap_get_folio() instead of __filemap_get_folio()
+ in: - f2fs_find_data_folio - f2fs_write_begin - f2fs_read_merkle_tree_page
+ So that, we can trigger fault injection in those places. Signed-off-by: Chao
+ Yu <chao@kernel.org> --- fs/f2fs/data.c | 4 ++-- fs/f2fs/verity.c | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -96,9 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v8YVG-0001i4-T4
-Subject: [f2fs-dev] [PATCH 3/4] f2fs: use f2fs_filemap_get_folio() instead
- of f2fs_pagecache_get_page()
+X-Headers-End: 1v8YVI-0001iD-EF
+Subject: [f2fs-dev] [PATCH 4/4] f2fs: use f2fs_filemap_get_folio() to
+ support fault injection
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,100 +115,54 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Let's use f2fs_filemap_get_folio() instead of f2fs_pagecache_get_page() in
-ra_data_block() and move_data_block(), then remove f2fs_pagecache_get_page()
-since it has no user.
+Use f2fs_filemap_get_folio() instead of __filemap_get_folio() in:
+- f2fs_find_data_folio
+- f2fs_write_begin
+- f2fs_read_merkle_tree_page
+
+So that, we can trigger fault injection in those places.
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/f2fs.h | 10 ----------
- fs/f2fs/gc.c   | 23 +++++++++++++----------
- 2 files changed, 13 insertions(+), 20 deletions(-)
+ fs/f2fs/data.c   | 4 ++--
+ fs/f2fs/verity.c | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index b6e35fdd5fd3..9cc3b83b8d10 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -2961,16 +2961,6 @@ static inline struct folio *f2fs_filemap_get_folio(
- 	return __filemap_get_folio(mapping, index, fgp_flags, gfp_mask);
- }
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 0279340336be..f993ffed89df 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1273,7 +1273,7 @@ struct folio *f2fs_find_data_folio(struct inode *inode, pgoff_t index,
+ 	struct address_space *mapping = inode->i_mapping;
+ 	struct folio *folio;
  
--static inline struct page *f2fs_pagecache_get_page(
--				struct address_space *mapping, pgoff_t index,
--				fgf_t fgp_flags, gfp_t gfp_mask)
--{
--	if (time_to_inject(F2FS_M_SB(mapping), FAULT_PAGE_GET))
--		return NULL;
--
--	return pagecache_get_page(mapping, index, fgp_flags, gfp_mask);
--}
--
- static inline void f2fs_folio_put(struct folio *folio, bool unlock)
- {
- 	if (IS_ERR_OR_NULL(folio))
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 8abf521530ff..22fe6e2c6d5c 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1211,7 +1211,7 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
- 	struct address_space *mapping = f2fs_is_cow_file(inode) ?
- 				F2FS_I(inode)->atomic_inode->i_mapping : inode->i_mapping;
- 	struct dnode_of_data dn;
--	struct folio *folio;
-+	struct folio *folio, *efolio;
- 	struct f2fs_io_info fio = {
- 		.sbi = sbi,
- 		.ino = inode->i_ino,
-@@ -1266,14 +1266,15 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
+-	folio = __filemap_get_folio(mapping, index, FGP_ACCESSED, 0);
++	folio = f2fs_filemap_get_folio(mapping, index, FGP_ACCESSED, 0);
+ 	if (IS_ERR(folio))
+ 		goto read;
+ 	if (folio_test_uptodate(folio))
+@@ -3567,7 +3567,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
+ 	 * Do not use FGP_STABLE to avoid deadlock.
+ 	 * Will wait that below with our IO control.
+ 	 */
+-	folio = __filemap_get_folio(mapping, index,
++	folio = f2fs_filemap_get_folio(mapping, index,
+ 				FGP_LOCK | FGP_WRITE | FGP_CREAT, GFP_NOFS);
+ 	if (IS_ERR(folio)) {
+ 		err = PTR_ERR(folio);
+diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
+index f0ab9a3c7a82..05b935b55216 100644
+--- a/fs/f2fs/verity.c
++++ b/fs/f2fs/verity.c
+@@ -263,7 +263,7 @@ static struct page *f2fs_read_merkle_tree_page(struct inode *inode,
  
- 	f2fs_wait_on_block_writeback(inode, dn.data_blkaddr);
+ 	index += f2fs_verity_metadata_pos(inode) >> PAGE_SHIFT;
  
--	fio.encrypted_page = f2fs_pagecache_get_page(META_MAPPING(sbi),
--					dn.data_blkaddr,
-+	efolio = f2fs_filemap_get_folio(META_MAPPING(sbi), dn.data_blkaddr,
- 					FGP_LOCK | FGP_CREAT, GFP_NOFS);
--	if (!fio.encrypted_page) {
--		err = -ENOMEM;
-+	if (IS_ERR(efolio)) {
-+		err = PTR_ERR(efolio);
- 		goto put_folio;
- 	}
+-	folio = __filemap_get_folio(inode->i_mapping, index, FGP_ACCESSED, 0);
++	folio = f2fs_filemap_get_folio(inode->i_mapping, index, FGP_ACCESSED, 0);
+ 	if (IS_ERR(folio) || !folio_test_uptodate(folio)) {
+ 		DEFINE_READAHEAD(ractl, NULL, NULL, inode->i_mapping, index);
  
-+	fio.encrypted_page = &efolio->page;
-+
- 	err = f2fs_submit_page_bio(&fio);
- 	if (err)
- 		goto put_encrypted_page;
-@@ -1313,7 +1314,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
- 	struct dnode_of_data dn;
- 	struct f2fs_summary sum;
- 	struct node_info ni;
--	struct folio *folio, *mfolio;
-+	struct folio *folio, *mfolio, *efolio;
- 	block_t newaddr;
- 	int err = 0;
- 	bool lfs_mode = f2fs_lfs_mode(fio.sbi);
-@@ -1407,14 +1408,16 @@ static int move_data_block(struct inode *inode, block_t bidx,
- 		goto up_out;
- 	}
- 
--	fio.encrypted_page = f2fs_pagecache_get_page(META_MAPPING(fio.sbi),
--				newaddr, FGP_LOCK | FGP_CREAT, GFP_NOFS);
--	if (!fio.encrypted_page) {
--		err = -ENOMEM;
-+	efolio = f2fs_filemap_get_folio(META_MAPPING(fio.sbi), newaddr,
-+					FGP_LOCK | FGP_CREAT, GFP_NOFS);
-+	if (IS_ERR(efolio)) {
-+		err = PTR_ERR(efolio);
- 		f2fs_folio_put(mfolio, true);
- 		goto recover_block;
- 	}
- 
-+	fio.encrypted_page = &efolio->page;
-+
- 	/* write target block */
- 	f2fs_wait_on_page_writeback(fio.encrypted_page, DATA, true, true);
- 	memcpy(page_address(fio.encrypted_page),
 -- 
 2.49.0
 
