@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1330BDC1C4
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Oct 2025 04:08:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3527BDCC5E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Oct 2025 08:42:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=kqKACew/1/Ao0YgJ5Hnl2KmKqSziPK3efJKlW6qsdz8=; b=d3CifEqFmYemZwpRcJlkz7OWIG
-	B4qtfF4EakfHJd22mKHeLJmP1NR6wm4pp/qLdosfX5WIbOxKkTejWNuSIUpch7dP9dRW5Qsw0hipo
-	uQBT8SzQgNI2oj2a2YpZi+GH5fgFNUJKkcPoDzGWneUEfjIMMbGYffotNHFO1S2wQewI=;
+	bh=663GmBVySfhicGK2nVYEivcxWILqL1n0B2eglus7kG0=; b=VEiT3rESYcwWGXP2kS0RaxjRGc
+	ch5gIOX2MQANDhE4s+y8vzA8q3VuJ7EAcwm142To9C3bcivmteXrj/aNpNVkoKXK/meA4bBm6xKdE
+	lLkjxwqSf+zORsp7PpkN66fI+kmUslCiDVpYhhO19u+OaS+Vj/x3DcGpovO+b/BljlV0=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v8qvd-0002AT-QF;
-	Wed, 15 Oct 2025 02:07:49 +0000
+	id 1v8vDA-00047Q-Lw;
+	Wed, 15 Oct 2025 06:42:12 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1v8qvc-0002AL-RI
+ (envelope-from <chao@kernel.org>) id 1v8vD9-00047H-2Z
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Oct 2025 02:07:48 +0000
+ Wed, 15 Oct 2025 06:42:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=92/H+g6r+R7W4z4MWsEYBGkk9uyptg/Unr6Uj77tQWc=; b=LDnRdWhLoKrNNmwgh1BlyKPFem
- PpUVh8jgd+zBrqkW2H/D32BgnuctDsia7h61Fey/JhB7XOL2+rnNIUn40DAfUxKcuH4K/vJP6tssc
- twufFlXyNn+1BOw9sLolsg1xvFJ6OLi9FsrUstB8q4LeOYPtJXw7a2rddutz++MKGgY8=;
+ bh=DLoYlzftJyt3wiUWIYq/HeS21c/KNS9NSV+0e/xXprM=; b=OCdKIzrIHpup/PPHqA0FabBlrS
+ unDeQVT4yir2n22vos+0Z19Wdw8mqFwT1DzZOCZexFzojd4Z6C6dwwrRWRsq9SWQwjk2bn6Q3CR13
+ 0reD/Nf3sGNyDIoP01Pcj58CKW7Cpvap48k+SYEQ85OCDUshNU09gDdEnEC1S2QuMrO4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,65 +40,65 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=92/H+g6r+R7W4z4MWsEYBGkk9uyptg/Unr6Uj77tQWc=; b=czg3onrXLjHFcyeEAeZJgHdVPJ
- bBaDezd8j11pdWz04iv6P3QQHxHjzgYhovFBM1nDVCx2zs66bZs3GpFD4uYC0dTQI1+YQ0AOqTIhA
- oUNZHfLu8+sKL/VQRoKmapjX5XWxI3V8N7f/l7J9GoQ2Vpjyek1YvubaWiVg+dFmfBhY=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=DLoYlzftJyt3wiUWIYq/HeS21c/KNS9NSV+0e/xXprM=; b=WNJoJN3WMtOqCzpTH0emd9N8gW
+ GuScxVhQoQ5zzj71023P2KKjkSPxvfXTJgD7neSmJ+t0mCQ5/58+UP3dSWmd+PDCSSY54OWqrCwk6
+ nIbMPv/o0H/Y/iBOFzUkDBFvLZloYFg9daiLHaWMZ3Ic+zxjLaU5DQDuCXxaneE2zub4=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v8qvc-00089d-4Q for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Oct 2025 02:07:48 +0000
+ id 1v8vD8-00028S-DE for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 15 Oct 2025 06:42:11 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C3A9C49265;
- Wed, 15 Oct 2025 02:07:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D753C4CEE7;
- Wed, 15 Oct 2025 02:07:36 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id AEF8E6298A;
+ Wed, 15 Oct 2025 06:41:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A379BC4CEF8;
+ Wed, 15 Oct 2025 06:41:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1760494057;
- bh=r3s5KOElWYCtsVlPj4Q5QwfyWIzkNBr1wmVAWFj+rxM=;
+ s=k20201202; t=1760510519;
+ bh=7ueWLGthCRnKiKyK3au2L4WjMFYE/UlGA7PZ+YmJV/s=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=OtoZfxpeQA2SGg/3tQX9WUA6cKe4uqBbhD6UywF7ROQfYzBB941ASvaKnruH2RgdI
- K77uMvv2Pod4cWK3rVY5516QfW4YOGvuonZzDfLcvbGsbQguEymKq8xMYOTSDhmiV5
- 2scBzF9U77ea1oQjWocTshj3CQpXv0W4xPgTfb90kTjXd5hZR3j+0ooJebkA8RVa9+
- tMJDL+qcgOaxJvEp9dhGOz56R1B9wXmvl1f+sH0Hwls9mJblbAZsRdRrICdo5l43Sc
- 3UevGMTxRGo91hRqSsxZMtMVWRoCvFNMgqh0ReNKNC5/hlOgqFjBHa3z02ptf2e5FR
- casU3zy3X+djw==
-Message-ID: <741474df-149b-4a41-8487-a88509edfe5d@kernel.org>
-Date: Wed, 15 Oct 2025 10:07:34 +0800
+ b=Yv8q55XvvArrOpwOBYMqk5hpoKouIC/IPOpP3MD52LD0MW9IUufWtKcqXjTGU8/Bs
+ alIlAbR6oQp0MSVgD0F29NogUp8RgWz8tKJwTVj24DZkQ9myEY1/W0Z9TEyK6qD0V1
+ OPLEgM8EwmHTftNdefy5SISCqRlDub1MQZKS59Usv8BozeZgG3JiT6HTBagw6rBSvT
+ da8gWj4aiVzxdcFwFT55fjvKDQ6PwPL7tNEQJ0YPUcmsmz8RGuIY2JoMsv8/1TI6DA
+ 3z7rt+05fI0DiqPgrtPbLq5AW6ZMcJHg9osnOEqSZYvDpbzExJiCUJuOUb0srFVpLr
+ 1zfTILTjGWpAQ==
+Message-ID: <235adbae-cc45-4b84-b712-1ba9e5a48dce@kernel.org>
+Date: Wed, 15 Oct 2025 14:41:53 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: "Bai, Shuangpeng" <sjb7183@psu.edu>
-References: <44D8F7B3-68AD-425F-9915-65D27591F93F@psu.edu>
- <61a3acc4-d541-41a4-b675-67b20f125117@kernel.org>
- <6E931354-7EF6-45B3-99A9-6E632FE98D03@psu.edu>
- <13833d95-cb78-49ce-9a29-1bee30dc6a38@kernel.org>
- <442A9745-DC2E-41E3-8CD6-9B5E2B55D9F3@psu.edu>
+To: "Nikola Z. Ivanov" <zlatistiv@gmail.com>
+References: <20251003134731.470392-1-zlatistiv@gmail.com>
+ <839306c1-5f7a-4e89-b2cf-7534d279a03c@kernel.org>
+ <gupgic53ouhmdwrglwdviw2mzeaqfjsvyr47u3ebu2ztayswy4@4oxvnu252rdb>
+ <9d0fef9d-4093-4a80-af3f-6dc45ffe886c@kernel.org>
+ <zomib7dzvmnggqqy6aqlwij3zihbvzkzrnfvzhk7tcp2mdgh34@tjjugevo4q4a>
 Content-Language: en-US
-In-Reply-To: <442A9745-DC2E-41E3-8CD6-9B5E2B55D9F3@psu.edu>
+In-Reply-To: <zomib7dzvmnggqqy6aqlwij3zihbvzkzrnfvzhk7tcp2mdgh34@tjjugevo4q4a>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 10/15/25 04:46, Bai, Shuangpeng wrote: > > >> On Oct 14, 
- 2025, at 02:18, Chao Yu <chao@kernel.org> wrote: >> >> On 10/14/25 01:56,
- Bai, Shuangpeng wrote: >>> >>> >>>> On Oct 13, 2025, at 08:41, Cha [...] 
+ Content preview:  On 10/14/25 20:17, Nikola Z. Ivanov wrote: > On Mon, Oct 13, 
+ 2025 at 08:53:04PM +0800, Chao Yu wrote: >> On 10/13/25 05:19, Nikola Z.
+ Ivanov wrote: >>> On Thu, Oct 09, 2025 at 10:54:40AM +0800, Chao Y [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1v8qvc-00089d-4Q
-Subject: Re: [f2fs-dev] [BUG] f2fs: divide error in
- f2fs_all_cluster_page_ready on v6.17
+X-Headers-End: 1v8vD8-00028S-DE
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Perform sanity check before unlinking
+ directory inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,138 +112,148 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "syzkaller@googlegroups.com" <syzkaller@googlegroups.com>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: david.hunter.linux@gmail.com,
+ syzbot+c07d47c7bc68f47b9083@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ khalid@kernel.org, skhan@linuxfoundation.org, jaegeuk@kernel.org,
+ linux-kernel-mentees@lists.linuxfoundation.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMTAvMTUvMjUgMDQ6NDYsIEJhaSwgU2h1YW5ncGVuZyB3cm90ZToKPiAKPiAKPj4gT24gT2N0
-IDE0LCAyMDI1LCBhdCAwMjoxOCwgQ2hhbyBZdSA8Y2hhb0BrZXJuZWwub3JnPiB3cm90ZToKPj4K
-Pj4gT24gMTAvMTQvMjUgMDE6NTYsIEJhaSwgU2h1YW5ncGVuZyB3cm90ZToKPj4+Cj4+Pgo+Pj4+
-IE9uIE9jdCAxMywgMjAyNSwgYXQgMDg6NDEsIENoYW8gWXUgPGNoYW9Aa2VybmVsLm9yZz4gd3Jv
-dGU6Cj4+Pj4KPj4+PiBPbiAxMC8xMy8yNSAwNzo0OSwgQmFpLCBTaHVhbmdwZW5nIHdyb3RlOgo+
-Pj4+PiBIaSBLZXJuZWwgTWFpbnRhaW5lcnMsCj4+Pj4+Cj4+Pj4+IE91ciB0b29sIGZvdW5kIGEg
-bmV3IGtlcm5lbCBidWcgImRpdmlkZSBlcnJvciBpbiBmMmZzX2FsbF9jbHVzdGVyX3BhZ2VfcmVh
-ZHkiLiBQbGVhc2Ugc2VlIHRoZSBkZXRhaWxzIGJlbG93Lgo+Pj4+Pgo+Pj4+PiBLZXJuZWwgY29t
-bWl0OiA2LjE3Cj4+Pj4+IEtlcm5lbCBjb25maWc6IGF0dGFjaG1lbnQKPj4+Pj4gUmVwcm9kdWNl
-cjogYXR0YWNobWVudAo+Pj4+Pgo+Pj4+PiBUaGUgcmVwcm9kdWNlciB0cmlnZ2VycyB0aGUgY3Jh
-c2ggcmVsaWFibHkgaW4gfjUwMCBzZWNvbmRzIG9uIGEgUUVNVSB4ODZfNjQgVk0uCj4+Pj4+Cj4+
-Pj4+IEnigJltIGhhcHB5IHRvIHRlc3QgZGVidWcgcGF0Y2hlcyBvciBwcm92aWRlIGFkZGl0aW9u
-YWwgaW5mb3JtYXRpb24uCj4+Pj4KPj4+PiBIaSBCYWksCj4+Pj4KPj4+PiBUaGFua3MgZm9yIHlv
-dXIgcmVwb3J0IQo+Pj4+Cj4+Pj4gQ291bGQgeW91IHBsZWFzZSBzaGFyZSBzY3JpcHRzIGFuZCBp
-bWFnZXMgZm9yIHRoaXMgaXNzdWU/IGFzIEkgY2FuIG5vdCByZXByb2R1Y2UKPj4+PiB3LyByZXBy
-by5jLgo+Pj4+Cj4+Pgo+Pj4gVGhhbmtzIGZvciB5b3VyIHJlcGx5IQo+Pj4KPj4+IEkgdXNlZCBj
-bGFuZy0xNSB0byBjb21waWxlIHRoZSBrZXJuZWwgdjYuMTcgd2l0aCB0aGUgLmNvbmZpZyBpbiB0
-aGUgYXR0YWNobWVudC4KPj4+Cj4+PiBUaGUgaW1hZ2UgSSB1c2VkIGlzIGJ1bGxzZXllLmltZyAo
-aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xa3JMOU1jLXMwN2FBNm0tMFZqdXVPNzY3
-U3RhY3ZaUVYvdmlldz91c3A9c2hhcmVfbGluaykuCj4+Pgo+Pj4gVGhlIGltYWdlIGlzIGNyZWF0
-ZWQgYnkgaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2dvb2dsZS9zeXprYWxsZXIv
-bWFzdGVyL3Rvb2xzL2NyZWF0ZS1pbWFnZS5zaC4KPj4+Cj4+PiBJIHdpbGwgYWxzbyBzZW5kIHRo
-ZSBib290IHNjcmlwdCBhcyBhdHRhY2htZW50cy4KPj4+Cj4+PiBUaGlzIGJ1ZyB0YWtlcyBhYm91
-dCA1MDAgc2Vjb25kcyB0byB0cmlnZ2VyIHRoZSBidWcgaW4gb3VyIHRlc3RpbmcgZW52aXJvbm1l
-bnQuCj4+Pgo+Pj4gUGxlYXNlIGxldCBtZSBrbm93IGlmIGFueXRoaW5nIG5lZWRlZC4gVGhhbmtz
-IQo+Pgo+PiBUaGFua3MgZm9yIHByb3ZpZGluZyB0aGUgaW5mb3JtYXRpb24sIGhvd2V2ZXIgSSBz
-dGlsbCBjYW4gbm90IHJlcHJvZHVjZSB0aGlzIGJ1ZyB3Lwo+PiBhYm92ZSBpbWFnZXMgYW5kIHNj
-cmlwdHMuCj4+Cj4+IENvdWxkIHlvdSBwbGVhc2UgdXBsb2FkIHlvdXIga2VybmVsIGltYWdlIGFz
-IHdlbGw/IGxldCBtZSBoYXZlIGEgdHJ5IHcvIHlvdXIgaW1hZ2UsCj4+IG5vdCBzdXJlIGl0J3Mg
-cmVsYXRlZCB0byBjbGFuZy0xNSBvciBub3QuCj4+Cj4gCj4gVGhlIHZtbGludXg6IGh0dHBzOi8v
-ZHJpdmUuZ29vZ2xlLmNvbS9maWxlL2QvMXVkakV0OHNTVjFkX2tJRjNFNUlabWhPVGhHOU1EaDFz
-L3ZpZXc/dXNwPXNoYXJpbmcKCk9oLCBjb3VsZCB5b3UgcGxlYXNlIHVwbG9hZCBiekltYWdlIGFz
-IHdlbGw/IFRoYW5rcyBhIGxvdC4KClRoYW5rcywKCj4gCj4gUGxlYXNlIGxldCBtZSBrbm93IGZv
-ciBhbnkgZnVydGhlciBxdWVzdGlvbnMuCj4gCj4gVGhhbmtzLAo+IAo+IAo+IAo+PiBUaGFua3Ms
-Cj4+Cj4+Pgo+Pj4KPj4+Cj4+Pgo+Pj4KPj4+Cj4+Pj4gVGhhbmtzLAo+Pj4+Cj4+Pj4+Cj4+Pj4+
-Cj4+Pj4+IE9vcHM6IGRpdmlkZSBlcnJvcjogMDAwMCBbIzFdIFNNUCBLQVNBTiBQVEkKPj4+Pj4g
-Q1BVOiAwIFVJRDogMCBQSUQ6IDExNDQxIENvbW06IHN5ei4wLjQ2IE5vdCB0YWludGVkIDYuMTcu
-MCAjMSBQUkVFTVBUKGZ1bGwpCj4+Pj4+IEhhcmR3YXJlIG5hbWU6IFFFTVUgU3RhbmRhcmQgUEMg
-KGk0NDBGWCArIFBJSVgsIDE5OTYpLCBCSU9TIDEuMTUuMC0xIDA0LzAxLzIwMTQKPj4+Pj4gUklQ
-OiAwMDEwOmYyZnNfYWxsX2NsdXN0ZXJfcGFnZV9yZWFkeSsweDEwNi8weDU1MCBmcy9mMmZzL2Nv
-bXByZXNzLmM6ODU3Cj4+Pj4+IENvZGU6IDAwIDhiIDRkIDAwIDQ4IDg5IGQ4IDQ4IGMxIGU4IDIw
-IDc0IDE5IDQ4IDg5IGQ4IDMxIGQyIDQ4IGY3IGYxIDQ4IDg5IGQ1IGViIDE0IDQ4IDg5IDVjIDI0
-IDEwIGU4IDQwIGE0IDZkIGZkIGViIDJkIDg5IGQ4IDMxIGQyIDxmNz4gZjEgODkgZDUgMzEgZmYg
-NDggODkgZWUgZTggMGMgYTkgNmQgZmQgNDggODUgZWQgNzQgMGMgZTggMjIgYTQKPj4+Pj4gUlNQ
-OiAwMDE4OmZmZmZjOTAwMDY2MTZlNjAgRUZMQUdTOiAwMDAxMDI0Ngo+Pj4+PiBSQVg6IDAwMDAw
-MDAwMDAwMDAwMDMgUkJYOiAwMDAwMDAwMDAwMDAwMDAzIFJDWDogMDAwMDAwMDAwMDAwMDAwMAo+
-Pj4+PiBSRFg6IDAwMDAwMDAwMDAwMDAwMDAgUlNJOiAwMDAwMDAwMDAwMDAwMDAwIFJESTogMDAw
-MDAwMDAwMDAwMDAwMAo+Pj4+PiBSQlA6IGZmZmZjOTAwMDY2MTcyNzAgUjA4OiBmZmZmZmZmZjg0
-NTUyZDI2IFIwOTogMDAwMDAwMDAwMDAwMDAwMAo+Pj4+PiBSMTA6IGZmZmY4ODgxNTVhZDIwMDAg
-UjExOiBmZmZmZmZmZjgxZDJhYTI2IFIxMjogMDAwMDAwMDAwMDAwMDAwMQo+Pj4+PiBSMTM6IGRm
-ZmZmYzAwMDAwMDAwMDAgUjE0OiAwMDAwMDAwMDAwMDAwMDEwIFIxNTogZmZmZmM5MDAwNjYxNzI2
-MAo+Pj4+PiBGUzogIDAwMDA3ZjhiYWM1YjU2NDAoMDAwMCkgR1M6ZmZmZjg4ODIyMGYwMjAwMCgw
-MDAwKSBrbmxHUzowMDAwMDAwMDAwMDAwMDAwCj4+Pj4+IENTOiAgMDAxMCBEUzogMDAwMCBFUzog
-MDAwMCBDUjA6IDAwMDAwMDAwODAwNTAwMzMKPj4+Pj4gQ1IyOiAwMDAwNTY1MDhhMzI2MDAwIENS
-MzogMDAwMDAwMDExN2JlYzAwMCBDUjQ6IDAwMDAwMDAwMDAwMDA2ZjAKPj4+Pj4gQ2FsbCBUcmFj
-ZToKPj4+Pj4gPFRBU0s+Cj4+Pj4+IGYyZnNfd3JpdGVfY2FjaGVfcGFnZXMgZnMvZjJmcy9kYXRh
-LmM6MzA3OCBbaW5saW5lXQo+Pj4+PiBfX2YyZnNfd3JpdGVfZGF0YV9wYWdlcyBmcy9mMmZzL2Rh
-dGEuYzozMjkwIFtpbmxpbmVdCj4+Pj4+IGYyZnNfd3JpdGVfZGF0YV9wYWdlcysweDFjMTkvMHgz
-NjAwIGZzL2YyZnMvZGF0YS5jOjMzMTcKPj4+Pj4gZG9fd3JpdGVwYWdlcysweDM4ZS8weDY0MCBt
-bS9wYWdlLXdyaXRlYmFjay5jOjI2MzQKPj4+Pj4gZmlsZW1hcF9mZGF0YXdyaXRlX3diYyBtbS9m
-aWxlbWFwLmM6Mzg2IFtpbmxpbmVdCj4+Pj4+IF9fZmlsZW1hcF9mZGF0YXdyaXRlX3JhbmdlIG1t
-L2ZpbGVtYXAuYzo0MTkgW2lubGluZV0KPj4+Pj4gZmlsZV93cml0ZV9hbmRfd2FpdF9yYW5nZSsw
-eDJiYS8weDNlMCBtbS9maWxlbWFwLmM6Nzk0Cj4+Pj4+IGYyZnNfZG9fc3luY19maWxlKzB4NmU2
-LzB4MWIwMCBmcy9mMmZzL2ZpbGUuYzoyOTQKPj4+Pj4gZ2VuZXJpY193cml0ZV9zeW5jIGluY2x1
-ZGUvbGludXgvZnMuaDozMDQzIFtpbmxpbmVdCj4+Pj4+IGYyZnNfZmlsZV93cml0ZV9pdGVyKzB4
-NzZlLzB4MjcwMCBmcy9mMmZzL2ZpbGUuYzo1MjU5Cj4+Pj4+IG5ld19zeW5jX3dyaXRlIGZzL3Jl
-YWRfd3JpdGUuYzo1OTMgW2lubGluZV0KPj4+Pj4gdmZzX3dyaXRlKzB4N2U5LzB4ZTAwIGZzL3Jl
-YWRfd3JpdGUuYzo2ODYKPj4+Pj4ga3N5c193cml0ZSsweDE5ZC8weDJkMCBmcy9yZWFkX3dyaXRl
-LmM6NzM4Cj4+Pj4+IGRvX3N5c2NhbGxfeDY0IGFyY2gveDg2L2VudHJ5L3N5c2NhbGxfNjQuYzo2
-MyBbaW5saW5lXQo+Pj4+PiBkb19zeXNjYWxsXzY0KzB4ZjcvMHg0NzAgYXJjaC94ODYvZW50cnkv
-c3lzY2FsbF82NC5jOjk0Cj4+Pj4+IGVudHJ5X1NZU0NBTExfNjRfYWZ0ZXJfaHdmcmFtZSsweDc3
-LzB4N2YKPj4+Pj4gUklQOiAwMDMzOjB4N2Y4YmFiN2FlNDlkCj4+Pj4+IENvZGU6IDAyIGI4IGZm
-IGZmIGZmIGZmIGMzIDY2IDBmIDFmIDQ0IDAwIDAwIGYzIDBmIDFlIGZhIDQ4IDg5IGY4IDQ4IDg5
-IGY3IDQ4IDg5IGQ2IDQ4IDg5IGNhIDRkIDg5IGMyIDRkIDg5IGM4IDRjIDhiIDRjIDI0IDA4IDBm
-IDA1IDw0OD4gM2QgMDEgZjAgZmYgZmYgNzMgMDEgYzMgNDggYzcgYzEgYTggZmYgZmYgZmYgZjcg
-ZDggNjQgODkgMDEgNDgKPj4+Pj4gUlNQOiAwMDJiOjAwMDA3ZjhiYWM1YjRmOTggRUZMQUdTOiAw
-MDAwMDI0NiBPUklHX1JBWDogMDAwMDAwMDAwMDAwMDAwMQo+Pj4+PiBSQVg6IGZmZmZmZmZmZmZm
-ZmZmZGEgUkJYOiAwMDAwN2Y4YmFiYTI2MTgwIFJDWDogMDAwMDdmOGJhYjdhZTQ5ZAo+Pj4+PiBS
-RFg6IDAwMDAwMDAwMDAwMGZmYmQgUlNJOiAwMDAwMjAwMDAwMDAwMjQwIFJESTogMDAwMDAwMDAw
-MDAwMDAwNwo+Pj4+PiBSQlA6IDAwMDA3ZjhiYWI4NDgyNjggUjA4OiAwMDAwMDAwMDAwMDAwMDAw
-IFIwOTogMDAwMDAwMDAwMDAwMDAwMAo+Pj4+PiBSMTA6IDAwMDAwMDAwMDAwMDAwMDAgUjExOiAw
-MDAwMDAwMDAwMDAwMjQ2IFIxMjogMDAwMDAwMDAwMDAwMDAwMAo+Pj4+PiBSMTM6IDAwMDA3Zjhi
-YWJhMjYyMTggUjE0OiAwMDAwN2Y4YmFiYTI2MTgwIFIxNTogMDAwMDdmOGJhYzU5NTAwMAo+Pj4+
-PiA8L1RBU0s+Cj4+Pj4+IE1vZHVsZXMgbGlua2VkIGluOgo+Pj4+PiAtLS1bIGVuZCB0cmFjZSAw
-MDAwMDAwMDAwMDAwMDAwIF0tLS0KPj4+Pj4gUklQOiAwMDEwOmYyZnNfYWxsX2NsdXN0ZXJfcGFn
-ZV9yZWFkeSsweDEwNi8weDU1MCBmcy9mMmZzL2NvbXByZXNzLmM6ODU3Cj4+Pj4+IENvZGU6IDAw
-IDhiIDRkIDAwIDQ4IDg5IGQ4IDQ4IGMxIGU4IDIwIDc0IDE5IDQ4IDg5IGQ4IDMxIGQyIDQ4IGY3
-IGYxIDQ4IDg5IGQ1IGViIDE0IDQ4IDg5IDVjIDI0IDEwIGU4IDQwIGE0IDZkIGZkIGViIDJkIDg5
-IGQ4IDMxIGQyIDxmNz4gZjEgODkgZDUgMzEgZmYgNDggODkgZWUgZTggMGMgYTkgNmQgZmQgNDgg
-ODUgZWQgNzQgMGMgZTggMjIgYTQKPj4+Pj4gUlNQOiAwMDE4OmZmZmZjOTAwMDY2MTZlNjAgRUZM
-QUdTOiAwMDAxMDI0Ngo+Pj4+PiBSQVg6IDAwMDAwMDAwMDAwMDAwMDMgUkJYOiAwMDAwMDAwMDAw
-MDAwMDAzIFJDWDogMDAwMDAwMDAwMDAwMDAwMAo+Pj4+PiBSRFg6IDAwMDAwMDAwMDAwMDAwMDAg
-UlNJOiAwMDAwMDAwMDAwMDAwMDAwIFJESTogMDAwMDAwMDAwMDAwMDAwMAo+Pj4+PiBSQlA6IGZm
-ZmZjOTAwMDY2MTcyNzAgUjA4OiBmZmZmZmZmZjg0NTUyZDI2IFIwOTogMDAwMDAwMDAwMDAwMDAw
-MAo+Pj4+PiBSMTA6IGZmZmY4ODgxNTVhZDIwMDAgUjExOiBmZmZmZmZmZjgxZDJhYTI2IFIxMjog
-MDAwMDAwMDAwMDAwMDAwMQo+Pj4+PiBSMTM6IGRmZmZmYzAwMDAwMDAwMDAgUjE0OiAwMDAwMDAw
-MDAwMDAwMDEwIFIxNTogZmZmZmM5MDAwNjYxNzI2MAo+Pj4+PiBGUzogIDAwMDA3ZjhiYWM1YjU2
-NDAoMDAwMCkgR1M6ZmZmZjg4ODIyMGYwMjAwMCgwMDAwKSBrbmxHUzowMDAwMDAwMDAwMDAwMDAw
-Cj4+Pj4+IENTOiAgMDAxMCBEUzogMDAwMCBFUzogMDAwMCBDUjA6IDAwMDAwMDAwODAwNTAwMzMK
-Pj4+Pj4gQ1IyOiAwMDAwNTY1MDhhMzI2MDAwIENSMzogMDAwMDAwMDExN2JlYzAwMCBDUjQ6IDAw
-MDAwMDAwMDAwMDA2ZjAKPj4+Pj4gLS0tLS0tLS0tLS0tLS0tLQo+Pj4+PiBDb2RlIGRpc2Fzc2Vt
-Ymx5IChiZXN0IGd1ZXNzKToKPj4+Pj4gIDA6IDAwIDhiIDRkIDAwIDQ4IDg5ICAgICBhZGQgICAg
-JWNsLC0weDc2YjdmZmIzKCVyYngpCj4+Pj4+ICA2OiBkOCA0OCBjMSAgICAgICAgICAgICAgZm11
-bHMgIC0weDNmKCVyYXgpCj4+Pj4+ICA5OiBlOCAyMCA3NCAxOSA0OCAgICAgICAgY2FsbCAgIDB4
-NDgxOTc0MmUKPj4+Pj4gIGU6IDg5IGQ4ICAgICAgICAgICAgICAgICBtb3YgICAgJWVieCwlZWF4
-Cj4+Pj4+IDEwOiAzMSBkMiAgICAgICAgICAgICAgICAgeG9yICAgICVlZHgsJWVkeAo+Pj4+PiAx
-MjogNDggZjcgZjEgICAgICAgICAgICAgIGRpdiAgICAlcmN4Cj4+Pj4+IDE1OiA0OCA4OSBkNSAg
-ICAgICAgICAgICAgbW92ICAgICVyZHgsJXJicAo+Pj4+PiAxODogZWIgMTQgICAgICAgICAgICAg
-ICAgIGptcCAgICAweDJlCj4+Pj4+IDFhOiA0OCA4OSA1YyAyNCAxMCAgICAgICAgbW92ICAgICVy
-YngsMHgxMCglcnNwKQo+Pj4+PiAxZjogZTggNDAgYTQgNmQgZmQgICAgICAgIGNhbGwgICAweGZk
-NmRhNDY0Cj4+Pj4+IDI0OiBlYiAyZCAgICAgICAgICAgICAgICAgam1wICAgIDB4NTMKPj4+Pj4g
-MjY6IDg5IGQ4ICAgICAgICAgICAgICAgICBtb3YgICAgJWVieCwlZWF4Cj4+Pj4+IDI4OiAzMSBk
-MiAgICAgICAgICAgICAgICAgeG9yICAgICVlZHgsJWVkeAo+Pj4+PiAqIDJhOiBmNyBmMSAgICAg
-ICAgICAgICAgICAgZGl2ICAgICVlY3ggPC0tIHRyYXBwaW5nIGluc3RydWN0aW9uCj4+Pj4+IDJj
-OiA4OSBkNSAgICAgICAgICAgICAgICAgbW92ICAgICVlZHgsJWVicAo+Pj4+PiAyZTogMzEgZmYg
-ICAgICAgICAgICAgICAgIHhvciAgICAlZWRpLCVlZGkKPj4+Pj4gMzA6IDQ4IDg5IGVlICAgICAg
-ICAgICAgICBtb3YgICAgJXJicCwlcnNpCj4+Pj4+IDMzOiBlOCAwYyBhOSA2ZCBmZCAgICAgICAg
-Y2FsbCAgIDB4ZmQ2ZGE5NDQKPj4+Pj4gMzg6IDQ4IDg1IGVkICAgICAgICAgICAgICB0ZXN0ICAg
-JXJicCwlcmJwCj4+Pj4+IDNiOiA3NCAwYyAgICAgICAgICAgICAgICAgamUgICAgIDB4NDkKPj4+
-Pj4gM2Q6IGU4ICAgICAgICAgICAgICAgICAgICAuYnl0ZSAweGU4Cj4+Pj4+IDNlOiAyMiAgICAg
-ICAgICAgICAgICAgICAgLmJ5dGUgMHgyMgo+Pj4+PiAzZjogYTQgICAgICAgICAgICAgICAgICAg
-IG1vdnNiICAlZHM6KCVyc2kpLCVlczooJXJkaSkKPj4+Pj4KPj4+Pj4gQmVzdCwKPj4+Pj4gU2h1
-YW5ncGVuZwo+IAo+IAoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxp
-c3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9s
-aXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+On 10/14/25 20:17, Nikola Z. Ivanov wrote:
+> On Mon, Oct 13, 2025 at 08:53:04PM +0800, Chao Yu wrote:
+>> On 10/13/25 05:19, Nikola Z. Ivanov wrote:
+>>> On Thu, Oct 09, 2025 at 10:54:40AM +0800, Chao Yu wrote:
+>>>> On 10/3/2025 9:47 PM, Nikola Z. Ivanov wrote:
+>>>>> Current i_nlink corruption check does not take into account
+>>>>> directory inodes which have one additional i_nlink for their "." entry.
+>>>>>
+>>>>> Add additional check and a common corruption path.
+>>>>>
+>>>>> Reported-by: syzbot+c07d47c7bc68f47b9083@syzkaller.appspotmail.com
+>>>>> Closes: https://syzkaller.appspot.com/bug?extid=c07d47c7bc68f47b9083
+>>>>> Fixes: 81edb983b3f5 ("f2fs: add check for deleted inode")
+>>>>> Signed-off-by: Nikola Z. Ivanov <zlatistiv@gmail.com>
+>>>>> ---
+>>>>>   fs/f2fs/namei.c | 28 ++++++++++++++++++++--------
+>>>>>   1 file changed, 20 insertions(+), 8 deletions(-)
+>>>>>
+>>>>> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+>>>>> index b882771e4699..68b33e8089b0 100644
+>>>>> --- a/fs/f2fs/namei.c
+>>>>> +++ b/fs/f2fs/namei.c
+>>>>> @@ -502,12 +502,14 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
+>>>>>   		goto out;
+>>>>>   	}
+>>>>> -	if (inode->i_nlink == 0) {
+>>>>> +	if (unlikely(inode->i_nlink == 0)) {
+>>>>>   		f2fs_warn(F2FS_I_SB(inode), "%s: inode (ino=%lx) has zero i_nlink",
+>>>>>   			  __func__, inode->i_ino);
+>>>>> -		err = -EFSCORRUPTED;
+>>>>> -		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+>>>>> -		goto out_iput;
+>>>>> +		goto corrupted;
+>>>>> +	} else if (unlikely(S_ISDIR(inode->i_mode) && inode->i_nlink == 1)) {
+>>>>> +		f2fs_warn(F2FS_I_SB(inode), "%s: directory inode (ino=%lx) has a single i_nlink",
+>>>>> +			  __func__, inode->i_ino);
+>>>>> +		goto corrupted;
+>>>>
+>>>> Can we detect such corruption in sanity_check_inode() as well? So that if
+>>>> f2fs internal flow calls f2fs_iget() on corrupted inode, we can set SBI_NEED_FSCK
+>>>> flag and then triggering fsck repairment later.
+>>>>
+>>>> Thanks,
+>>>>
+>>>>>   	}
+>>>>>   	if (IS_ENCRYPTED(dir) &&
+>>>>> @@ -533,6 +535,9 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
+>>>>>   	trace_f2fs_lookup_end(dir, !IS_ERR_OR_NULL(new) ? new : dentry,
+>>>>>   				ino, IS_ERR(new) ? PTR_ERR(new) : err);
+>>>>>   	return new;
+>>>>> +corrupted:
+>>>>> +	err = -EFSCORRUPTED;
+>>>>> +	set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+>>>>>   out_iput:
+>>>>>   	iput(inode);
+>>>>>   out:
+>>>>> @@ -572,10 +577,11 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
+>>>>>   	if (unlikely(inode->i_nlink == 0)) {
+>>>>>   		f2fs_warn(F2FS_I_SB(inode), "%s: inode (ino=%lx) has zero i_nlink",
+>>>>>   			  __func__, inode->i_ino);
+>>>>> -		err = -EFSCORRUPTED;
+>>>>> -		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+>>>>> -		f2fs_folio_put(folio, false);
+>>>>> -		goto fail;
+>>>>> +		goto corrupted;
+>>>>> +	} else if (unlikely(S_ISDIR(inode->i_mode) && inode->i_nlink == 1)) {
+>>>>> +		f2fs_warn(F2FS_I_SB(inode), "%s: directory inode (ino=%lx) has a single i_nlink",
+>>>>> +			  __func__, inode->i_ino);
+>>>>> +		goto corrupted;
+>>>>>   	}
+>>>>>   	f2fs_balance_fs(sbi, true);
+>>>>> @@ -601,6 +607,12 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
+>>>>>   	if (IS_DIRSYNC(dir))
+>>>>>   		f2fs_sync_fs(sbi->sb, 1);
+>>>>> +
+>>>>> +	goto fail;
+>>>>> +corrupted:
+>>>>> +	err = -EFSCORRUPTED;
+>>>>> +	set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+>>>>> +	f2fs_folio_put(folio, false);
+>>>>>   fail:
+>>>>>   	trace_f2fs_unlink_exit(inode, err);
+>>>>>   	return err;
+>>>>
+>>>
+>>> Hi Chao,
+>>>
+>>> Thank you for the suggestion.
+>>> I will add this to sanity_check_inode and remove it
+>>> from f2fs_lookup as it becomes redundant since f2fs_lookup
+>>> obtains the inode through f2fs_iget. For f2fs_unlink I will
+>>> move the i_nlink == 1 check to f2fs_rmdir.
+>>
+>> Hi Nikola,
+>>
+>> I meant we can move the i_nlink == 1 check from both f2fs_lookup() and
+>> f2fs_unlink() to sanity_check_inode(), because before we create in-memory
+>> inode, we will always call sanity_check_inode().
+>>
+>> Let me know if you have other concerns.
+>>
+>> Thanks,
+>>
+> 
+> The issue here is that sanity_check_inode will be called only when 
+> we initially read the inode off disk, not when it's already in the cache
+> 
+> The syzkaller repro does something like this:
+> Creates a directory structure /dir1/dir2 where dir1 has
+> i_nlink == 2, which is one less than it should. It then does
+> rmdir(/dir1/dir2) followed by rmdir(/dir1) which leads to the warning.
+
+Oh, I missed this case.
+
+> 
+> In such case what would you say should happen, should the second rmdir
+> fail and report the corruption, or do we close our eyes and just drop
+> i_nlink to 0 and possibly log a message that something isn't quite right?
+
+I agreed that we should keep i_nlink == 1 check in f2fs_unlink().
+
+Thanks,
+
+> 
+> Thank you,
+> 
+>>>
+>>> I will send v2 as soon as I do some more testing.
+>>
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
