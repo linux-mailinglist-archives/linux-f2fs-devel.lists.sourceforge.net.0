@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39215BDD0B5
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Oct 2025 09:30:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3808BBDD11E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Oct 2025 09:32:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=NwDINWtJmuVQrWmmS3nfDrL1tyEfzXLFQioltpK6cdA=; b=jzUV1J29pn1bakU8YdKvLhcq9j
-	V85S00IMSMuuZ1+TiqR3Z2GmIagJNRmlnqYFTrssbJcgCgFreB5q+XfDKOvWO0dot9PJFqaLYt5cr
-	aAeW96P21asrvOUWszz8+TYii1maCFTLb1HFVBXvA4kmLc7nxsJDW2j0nZI2/cAl6ofo=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=19jgZ//oU15bjuq/+r7//K+cQycfWMED1ASI1AcL+Dc=; b=RCFs7sAn8e2L1NsSv4dy5rsLko
+	nB6HSOGgd3Er8noaEaeMU1LFRs9ZGf4sIopckRHgFlxckg5TU8mapCH50+TZbprcstJUkSg0C0X21
+	n7cp+0PK5qaYZu1AOWVw96B92ZFEMIlS/ToMWPi9CUuhRvO0uvCinFXVvHeIZjKXtXmQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v8vxy-0007Dz-Nk;
-	Wed, 15 Oct 2025 07:30:34 +0000
+	id 1v8vzT-0002Vj-VY;
+	Wed, 15 Oct 2025 07:32:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1v8vxs-0007Do-FC
+ (envelope-from <hch@lst.de>) id 1v8vzR-0002VT-Km
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Oct 2025 07:30:28 +0000
+ Wed, 15 Oct 2025 07:32:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wwsMcO8kxKDe39xAaR0wfWWvJXHr4ArjIXG9EGSFt8A=; b=LraGG5gvkBDZaMOEd0NxKguzuz
- k8bge/1ObhuGnhiSe/tCrOrgyPPOjM2Nd64O891Z1BcLGUDHroZ5IjQTDQIfYkBVz9htsWmQsU2HU
- I2JuUGq61GkVAHaEbPiKrF6mNk65/9RBkkLP+e2aeavjOWyBsMnoHN6UOeSwG9ClUNr0=;
+ bh=9Ye/2Sg9yKFeISLBWd8NKQZoDy/029G1tfPVlfBjgMo=; b=Xs3I73NHqJbwfBv6C6JiqCDiva
+ R9brBfzuzv8Jjx9pXaEGUaBjPRiZZf4zgtnUQvXi484+M/mbO9KlT8JoBgYko732rW+lGtJaYdJZl
+ uIWNOtFN2LWMX8E2gOPqObM9vKtcl+TfKSycVixSHYy/9AzEUvM2Xw+BKVYb6rM9+WbM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -40,43 +40,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wwsMcO8kxKDe39xAaR0wfWWvJXHr4ArjIXG9EGSFt8A=; b=Ml2VUsrrgTc8f97fiMWhnbiDlE
- ZYafi9VtEASsuw65TIYGwa/9oXty5jN9mS1KCY3qx0gGrvMIPZXWbBro6Yb/ZlJar6hG8JpoCQrWN
- krK8Ts479OvIybnDJAnsqCHcBukLLvI583ZKDkY9F35vDGqNebE1d6PkR5tSnwzyuIRU=;
+ bh=9Ye/2Sg9yKFeISLBWd8NKQZoDy/029G1tfPVlfBjgMo=; b=dpT7ns/2mnsoMtnWJPbcQtsIjy
+ 3EahgNwIuHvRxLZ5P+wwQ+8Dd6UtBAP+gI91hG0OG5QQo1k0Vsj521IX/zz8nNZEllSvFrxwbzC3Q
+ XAgZHsoQN7DnQYs6EpXrGFFdhqhynyRIxask9+xNHg4ynbZxdhmforaspfNq5C/w84UE=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1v8vxr-0004LD-0q for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Oct 2025 07:30:27 +0000
+ id 1v8vzR-0004Qe-O1 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 15 Oct 2025 07:32:06 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 7A8E9227A8E; Wed, 15 Oct 2025 09:30:18 +0200 (CEST)
-Date: Wed, 15 Oct 2025 09:30:17 +0200
+ id E48B7227AA8; Wed, 15 Oct 2025 09:31:51 +0200 (CEST)
+Date: Wed, 15 Oct 2025 09:31:51 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Kundan Kumar <kundan.kumar@samsung.com>
-Message-ID: <20251015073017.GB11294@lst.de>
-References: <20251014120845.2361-1-kundan.kumar@samsung.com>
- <CGME20251014121135epcas5p2aa801677c0561db10291c51d669873e2@epcas5p2.samsung.com>
- <20251014120845.2361-17-kundan.kumar@samsung.com>
+Message-ID: <20251015073151.GC11294@lst.de>
+References: <CGME20251014120958epcas5p267c3c9f9dbe6ffc53c25755327de89f9@epcas5p2.samsung.com>
+ <20251014120845.2361-1-kundan.kumar@samsung.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20251014120845.2361-17-kundan.kumar@samsung.com>
+In-Reply-To: <20251014120845.2361-1-kundan.kumar@samsung.com>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Please split this into the writeback infrastructure and an
- XFS patch. Adding infrastructure and the user in the same patch is really
- annoying for bisecting, reverting or even just reading commit logs. [...]
+ Content preview: This still allows the file system to override a bdi paramter
+ while the bdi is shared by all file systems on a single block device. As
+ said before that really needs untangling first. 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1v8vxr-0004LD-0q
-Subject: Re: [f2fs-dev] [PATCH v2 16/16] writeback: added XFS support for
- matching writeback count to allocation group count
+X-Headers-End: 1v8vzR-0004Qe-O1
+Subject: Re: [f2fs-dev] [PATCH v2 00/16] Parallelizing filesystem writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,9 +99,10 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Please split this into the writeback infrastructure and an XFS patch.
-Adding infrastructure and the user in the same patch is really annoying
-for bisecting, reverting or even just reading commit logs.
+This still allows the file system to override a bdi paramter while
+the bdi is shared by all file systems on a single block device.  As
+said before that really needs untangling first.
+
 
 
 _______________________________________________
