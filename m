@@ -2,125 +2,132 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 316E6BE0F9A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Oct 2025 00:48:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73F2FBE17F9
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Oct 2025 07:17:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Message-ID:References:Mime-Version:
-	In-Reply-To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=m19Q3DM9NhM3T5Vubybsd6bCOfwKJ2fNllM2AE0bh60=; b=GfDuAKFjr0Zt3WUFmHSxDWHKNR
-	yab/zASbquXi2NNT42lZuVVbLCtqcLDKn39i+XDv6IAFXfXcd0se8tFaUc4/Tq/vLpuiex5lRxtER
-	N5eHz/GxoSJ5wNhktMeL9KTg3Tud79TWarhv+B2XCtzHMJL16duR85AN81TMbaN5vxB0=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=ac5jLbmqsZ+bFu0s2LTf972b6UrhWire+pBXHAauLEE=; b=H64RvyDRQluQWMdOhw+zJaTi86
+	aNidDwG8k4LBalBvIoq3SIi0AYvzjlAzhToetZbQR1b2kLPYN7c96puHS9ZxE9FON1+Ng9zf8tP+C
+	+3zFyWG6heMlUGCTWjlvaTimZ9NzPBW3O19Hrsem9bB0XmoSsnO2LuwFCvIQ/mPShEps=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1v9AIe-00014j-S6;
-	Wed, 15 Oct 2025 22:48:52 +0000
+	id 1v9GM9-0008LI-10;
+	Thu, 16 Oct 2025 05:16:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <3xyTwaAYKACAOA6JF8CKKCHA.8KI@flex--seanjc.bounces.google.com>)
- id 1v9AId-00014c-62 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Oct 2025 22:48:51 +0000
+ (envelope-from <jeuk20.kim@gmail.com>) id 1v9GM6-0008Kw-SL
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 16 Oct 2025 05:16:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
- References:Mime-Version:In-Reply-To:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VfHhobHRKUrZuY035WUhQS9GUM0Uyoej5h99Za9ASAY=; b=ixAVdo+Edrn1CdCZ0+jAJDeXD9
- rC8QHC5oQeOCkQTMQTTNsrxaFsTVKdZe3YyRCBxRtnvihRmFc/ryBuMSzPQgs8q5MmZ5XSE6aLi0M
- Mfz0Y3HRI8lkK9gx/bTGekYJgCg4yHV3cJ15faZqhDtuq1We+xteoOjI/az/0ehPCm9E=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=pigqJGC+B272ixDTo1WsT4TFwZwGZ84ntnAlQQ1cee8=; b=JUbO9bJhYbBcI+MSISGWjHrgIF
+ AUCA8d+Ol/4O2AfckQIFMMWteYSvYqz3mlbOpRKM5lpbBOtm68e7BEloFToK47BJ4ypMfg22oh9y5
+ yq/xCMQPGQCQ72MSF2gtH8/Ky9//9i9vBQyrGe2YXZ2RjqCrF9hVusVG9o4eI7WxOBik=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:
- In-Reply-To:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=VfHhobHRKUrZuY035WUhQS9GUM0Uyoej5h99Za9ASAY=; b=l0MGD03P9U8sMQMD4f2SpqUqoH
- bj8XrvzeUbgFuglcKzJAvBNynMpcFO1efHmyze4tN53PMyWus7+bORbPVNCyIlZkDgJygspt53lvF
- sBJozX5ChX9fKOwhm29JTU6cy5Dl+K+AeS5wultSFn0KI8QUMHsenYg+Dk4Scn4MvzVc=;
-Received: from mail-pg1-f202.google.com ([209.85.215.202])
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=pigqJGC+B272ixDTo1WsT4TFwZwGZ84ntnAlQQ1cee8=; b=Y
+ DiGDvHh9Wa+WCEZsVgpbRK7gbmFLj5cy6m520J6sgisymLFe4ZbwXxmRq9S7a4bTtzohLX2vz2O+N
+ lFaCbJ+3WGGFaiKZa5WR+DGaKNgvuLiGu2vriJHFgxELtaNv3sP5J2o4B/C/7EEjez6hY3sEyMUnH
+ 0xNBNRjOMp8Yxt/Y=;
+Received: from mail-pj1-f54.google.com ([209.85.216.54])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1v9AIc-0007Gp-Mr for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Oct 2025 22:48:51 +0000
-Received: by mail-pg1-f202.google.com with SMTP id
- 41be03b00d2f7-b630753cc38so81641a12.1
+ id 1v9GM7-0003sO-9Y for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 16 Oct 2025 05:16:51 +0000
+Received: by mail-pj1-f54.google.com with SMTP id
+ 98e67ed59e1d1-33b5a3e8ae2so1231680a91.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 15 Oct 2025 15:48:50 -0700 (PDT)
+ Wed, 15 Oct 2025 22:16:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1760568520; x=1761173320;
- darn=lists.sourceforge.net; 
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=VfHhobHRKUrZuY035WUhQS9GUM0Uyoej5h99Za9ASAY=;
- b=IfLqNrSAyf2jil955Xv/aUOQDOrWUCxB4H+vaJj7dAvDJb8IQXjY5qUebPWsYgE52k
- 11HhyTpywC+oZdXSSlunrUGgkXOenG8q+GOpO+FB/eANN+/5akhfftUz5PmgxxC7Ni/T
- nhnDZLFKR/2oiSfcbxMmLUqFTi9acz4kpbffAIMjZG4dJyJLQkvTAPAX1d2aLWCBr42m
- JhKKD0R6Kttp5QmjUZiOeRUsYwUHGm2IpDQk4/Knoog5ebC1YMCnSkHEAly0RGWVCw3d
- VYQVruB5rmRdGEykuX3MKP/7Fr0TEmk7JVBuAbexMRoJqW38ITpsgDqYCk3+FCJgLSIT
- GHZw==
+ d=gmail.com; s=20230601; t=1760591801; x=1761196601; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pigqJGC+B272ixDTo1WsT4TFwZwGZ84ntnAlQQ1cee8=;
+ b=GIyN1Wm5zFZ3iW73RN+3sWsuptiChO3X12BnO5TgcGX6D7dO9HcsjEpRnMs9Ze3Avz
+ fnaqKwzUpZ1rSRn5ls3Lx6EIV6BsYaswkvG+4ToJO1Cen74wT3UsYde5TAluVoElZEM+
+ QJjWtV5ZJ/7cN1UnVjcofXqB10CHR0QFFmpgEQ33+mSbhBGRJgoAIbezVHSTGLTrTNK9
+ Bx2SehI9zwtoeIdj36SKxV5kN+281Xw11EDahh/dCUMqU5kGztkhTyaIZ2NH1l5ZqR8Y
+ CFShWpVwS6ohu5LWFdNZXm5DT+GPQYmX45sgKoBK/vvR5YUQpHSETumbcCcGXgbT/lb+
+ Chuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760568520; x=1761173320;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VfHhobHRKUrZuY035WUhQS9GUM0Uyoej5h99Za9ASAY=;
- b=G89QYguPdy8bOIZE8S03Jbb01k6i/2RBm/6TWyS8mC99tMvcPaBQQ1RjBj4QzL+wxU
- nzLeSFjTi9mZLimbqxr+JvtVikvRvwCH8GTVtJNuJHiqnVSwL+VkTGkDAux1DYpsZ0Vf
- EF4pZ/GFfhj2j7cUhtW48Ef2WCq5N7eWwsN9VIHrfKdmkRb6FruHiMTU5FXQKB2cAgYb
- RhjoL5c1eXAYNckhQFCPzwhdTGapEQkC788UxAhaZQhM1tANNWxtITqSqf/PLZqNN2Sc
- ASiH1Y+/Po8aqtrQZqRLCwDUJ5vbxoewhIjaLWNngk+y3qoiswRLYude1r9RRbYnVlLp
- MaGA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXxGNFB+M3mWhdQ8dE98jdUG8qgWFc2OIprL7JCD4pe09zAN6Xiyr7+3o0DfOF2o6xt7+SUHugPw4fGqIa5/cbW@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzLC90KiGMHLgd1FhoCoxeAf2Y/FtZeuikWkETRrJ84t0uToHgV
- DbBoiSTBAODec2CTYAhm4y1I12YJJNZG+L+/DE+OUxoBfRP7zTYz+DRHP5aufBvcbHcpyjsFkjb
- ogvrt+w==
-X-Google-Smtp-Source: AGHT+IEyb34/gE6QWzF0uzhcKPL3N9PV8BEpaNWr9b3Rp3K51ypbe1jmOBzkgqmwgOny3WdOfUFKvL+VZBw=
-X-Received: from pjz11.prod.google.com ([2002:a17:90b:56cb:b0:33b:a35b:861])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6a20:7351:b0:251:c33d:2783
- with SMTP id adf61e73a8af0-32da813ce42mr40108259637.23.1760568519460; Wed, 15
- Oct 2025 15:48:39 -0700 (PDT)
-Date: Wed, 15 Oct 2025 15:48:38 -0700
-In-Reply-To: <aPAWFQyFLK4EKWVK@gourry-fedora-PF4VCD3F>
-Mime-Version: 1.0
-References: <20250827175247.83322-2-shivankg@amd.com>
- <20250827175247.83322-9-shivankg@amd.com>
- <aNVQJqYLX17v-fsf@google.com> <aNbrO7A7fSjb4W84@google.com>
- <aPAWFQyFLK4EKWVK@gourry-fedora-PF4VCD3F>
-Message-ID: <aPAkxp67-R9aQ8oN@google.com>
-To: Gregory Price <gourry@gourry.net>
-X-Spam-Score: -7.6 (-------)
+ d=1e100.net; s=20230601; t=1760591801; x=1761196601;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pigqJGC+B272ixDTo1WsT4TFwZwGZ84ntnAlQQ1cee8=;
+ b=qM0i5SeEWg/sG2sMHPfaZ93ibB3ymkJWpjjjV+s298A+UHxBBv+A6PNZSXLhSb+ILz
+ EzXsveNJkIL8huM4JX5wtZ0Yp4Cr2+6+feeGkWlvnhbdCCdcD6XzvYMvguL5PuTOUVLy
+ Lyls0SYLAwKueaQ5UgCCbFFxRce9qgt6q0NVWsrvRZ3FSj0KfEK5ujhR07D8eECkD9K6
+ r7tuLrxw2xw68I/ZnS09iYeDo5ZpeqIoVyt+74HRkAPqOzaJfzUr1eAF3G1EIAKp7WZj
+ xfRT6oHbpSwdsVXlUl4Fh/d7E4Rv29AL82lSXr0HX6sDvqUunuW0p71U/uN9W7UtGqYm
+ 122w==
+X-Gm-Message-State: AOJu0YyCh5NlkW0eddf+1zEnMTUt/QMdD7U7p9PLdak0v4pYiGNyES6S
+ 5dJThL5t9cbdSLHeG+Bz3qg+OHcoAOfPssf4j7FvbZ+sGcbvMfTvUMMq
+X-Gm-Gg: ASbGncuhXThxioteGB19Iklkrss6T3peOdv51h/EG8uATI526bhrmIV5a1kF/Lgd+5g
+ ogvnCE0FMGTtYhaXs9k2+I4jtMTOWPtAOKUZf47EUjJDYFlHrtKGLh9tfZYg7Wg2zgvS2BtZthA
+ 1V8tzPbDdTMgYZfgRp1fBP6JcAHmt2LoVKRlYTgWGmKksR+2obozx59JapphEqOTO4rBvoTmDrb
+ xiOtIWhCR6iBfh8oYFAoiY75i3As0Gy0f2+pT38AyB9iR38q9IcntQ/69Bj1XDYOViONPgRU21w
+ hLkzZDXT+njAKyd4UWl5Ul6Q/8aq1bWYj29cECFZi08Lgi1YmLSRJX575WCRjE7qdqp8Z/kgTkI
+ hCX/3deCCAu0FvgR6vwIQqJT3EKOTPqxThhAWaztfcQuoivIRF0DTc94i2nzbr0nUfjjLzA2phs
+ Wjud53TQRo/Yik2w==
+X-Google-Smtp-Source: AGHT+IF0/K4q2jQn9UOtDGAHunWEgJG1TbfokjhDoIk1ay6EYVQXYRPGachSbGMLIS9aV8kVIq+UWw==
+X-Received: by 2002:a17:90b:268e:b0:330:55de:8c20 with SMTP id
+ 98e67ed59e1d1-33b9e09006bmr3258974a91.2.1760591800552; 
+ Wed, 15 Oct 2025 22:16:40 -0700 (PDT)
+Received: from jeuk-MS-7D42.. ([175.119.5.143])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7992b0606f0sm21261497b3a.15.2025.10.15.22.16.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Oct 2025 22:16:39 -0700 (PDT)
+From: Jeuk Kim <jeuk20.kim@gmail.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Thu, 16 Oct 2025 14:16:21 +0900
+Message-ID: <20251016051621.7425-1-jeuk20.kim@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Oct 15, 2025, Gregory Price wrote: > On Fri, Sep 26, 
- 2025 at 12:36:27PM -0700, Sean Christopherson via Linux-f2fs-devel wrote:
- > > > > > > static struct mempolicy *kvm_gmem_get_policy(struct v [...] 
- Content analysis details:   (-7.6 points, 5.0 required)
+ Content preview:  From: Jeuk Kim Inline encryption derives DUN from <inode,
+ file offset>, so bios from different inodes can't merge. With multi-threaded
+ buffered O_SYNC writes where each thread writes to its own file, 4KiB-per-page
+ L [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -7.5 USER_IN_DEF_DKIM_WL From: address is in the default DKIM welcome-list
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [jeuk20.kim(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.202 listed in wl.mailspike.net]
+ [209.85.216.54 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1v9AIc-0007Gp-Mr
-Subject: Re: [f2fs-dev] [PATCH kvm-next V11 6/7] KVM: guest_memfd: Enforce
- NUMA mempolicy using shared policy
+X-Headers-End: 1v9GM7-0003sO-9Y
+Subject: [f2fs-dev] [PATCH] f2fs: serialize writeback for inline-crypto
+ inodes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -132,125 +139,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Sean Christopherson via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Sean Christopherson <seanjc@google.com>
-Cc: jgowans@amazon.com, mhocko@suse.com, gshan@redhat.com, jgg@nvidia.com,
- kvm@vger.kernel.org, david@redhat.com, kalyazin@amazon.com, peterx@redhat.com,
- clm@fb.com, rppt@kernel.org, ddutile@redhat.com,
- linux-kselftest@vger.kernel.org, papaluri@amd.com, jack@suse.cz,
- ying.huang@linux.alibaba.com, shuah@kernel.org, dan.j.williams@intel.com,
- matthew.brost@intel.com, zbestahu@gmail.com, lorenzo.stoakes@oracle.com,
- pvorel@suse.cz, ira.weiny@intel.com, dhavale@google.com, jmorris@namei.org,
- willy@infradead.org, hch@infradead.org, linux-bcachefs@vger.kernel.org,
- vbabka@suse.cz, ziy@nvidia.com, rientjes@google.com, brauner@kernel.org,
- xiang@kernel.org, roypat@amazon.co.uk, chao.gao@intel.com,
- Shivank Garg <shivankg@amd.com>, thomas.lendacky@amd.com, ashish.kalra@amd.com,
- chao.p.peng@intel.com, yan.y.zhao@intel.com, byungchul@sk.com,
- michael.day@amd.com, Neeraj.Upadhyay@amd.com, michael.roth@amd.com,
- bfoster@redhat.com, bharata@amd.com, josef@toxicpanda.com,
- Liam.Howlett@oracle.com, surenb@google.com, ackerleytng@google.com,
- suzuki.poulose@arm.com, linux-coco@lists.linux.dev, dsterba@suse.com,
- shdhiman@amd.com, jaegeuk@kernel.org, amit@infradead.org, tabba@google.com,
- yuzhao@google.com, joshua.hahnjy@gmail.com, apopple@nvidia.com, nikunj@amd.com,
- vannapurve@google.com, quic_eberman@quicinc.com, paul@paul-moore.com,
- cgzones@googlemail.com, linux-mm@kvack.org, kent.overstreet@linux.dev,
- rakie.kim@sk.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, pankaj.gupta@amd.com,
- linux-security-module@vger.kernel.org, lihongbo22@huawei.com,
- jefflexu@linux.alibaba.com, aik@amd.com, linux-fsdevel@vger.kernel.org,
- pbonzini@redhat.com, akpm@linux-foundation.org, serge@hallyn.com,
- linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org,
- viro@zeniv.linux.org.uk
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: hyenc.jeong@samsung.com, jieon.seol@samsung.com, gyusun.lee@samsung.com,
+ wone.jung@samsung.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, d_hyun.kwon@samsung.com,
+ jeuk20.kim@samsung.com, jaemyung.lee@samsung.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Oct 15, 2025, Gregory Price wrote:
-> On Fri, Sep 26, 2025 at 12:36:27PM -0700, Sean Christopherson via Linux-f2fs-devel wrote:
-> > > 
-> > > static struct mempolicy *kvm_gmem_get_policy(struct vm_area_struct *vma,
-> > > 					     unsigned long addr, pgoff_t *pgoff)
-> > > {
-> > > 	*pgoff = vma->vm_pgoff + ((addr - vma->vm_start) >> PAGE_SHIFT);
-> > > 
-> > > 	return __kvm_gmem_get_policy(GMEM_I(file_inode(vma->vm_file)), *pgoff);
-> > 
-> > Argh!!!!!  This breaks the selftest because do_get_mempolicy() very specifically
-> > falls back to the default_policy, NOT to the current task's policy.  That is
-> > *exactly* the type of subtle detail that needs to be commented, because there's
-> > no way some random KVM developer is going to know that returning NULL here is
-> > important with respect to get_mempolicy() ABI.
-> > 
-> 
-> Do_get_mempolicy was designed to be accessed by the syscall, not as an
-> in-kernel ABI.
-
-Ya, by "get_mempolicy() ABI" I meant the uABI for the get_mempolicy syscall.
-
-> get_task_policy also returns the default policy if there's nothing
-> there, because that's what applies.
-> 
-> I have dangerous questions:
-
-Not dangerous at all, I find them very helpful!
-
-> why is __kvm_gmem_get_policy using
-> 	mpol_shared_policy_lookup()
-> instead of
-> 	get_vma_policy()
-
-With the disclaimer that I haven't followed the gory details of this series super
-closely, my understanding is...
-
-Because the VMA is a means to an end, and we want the policy to persist even if
-the VMA goes away.
-
-With guest_memfd, KVM effectively inverts the standard MMU model.  Instead of mm/
-being the primary MMU and KVM being a secondary MMU, guest_memfd is the primary
-MMU and any VMAs are secondary (mostly; it's probably more like 1a and 1b).  This
-allows KVM to map guest_memfd memory into a guest without a VMA, or with more
-permissions than are granted to host userspace, e.g. guest_memfd memory could be
-writable by the guest, but read-only for userspace.
-
-But we still want to support things like mbind() so that userspace can ensure
-guest_memfd allocations align with the vNUMA topology presented to the guest,
-or are bound to the NUMA node where the VM will run.  We considered adding equivalent
-file-based syscalls, e.g. fbind(), but IIRC the consensus was that doing so was
-unnecessary (and potentially messy?) since we were planning on eventually adding
-mmap() support to guest_memfd anyways.
-
-> get_vma_policy does this all for you
-
-I assume that doesn't work if the intent is for new VMAs to pick up the existing
-policy from guest_memfd?  And more importantly, guest_memfd needs to hook
-->set_policy so that changes through e.g. mbind() persist beyond the lifetime of
-the VMA.
-
-> struct mempolicy *get_vma_policy(struct vm_area_struct *vma,
->                                  unsigned long addr, int order, pgoff_t *ilx)
-> {
->         struct mempolicy *pol;
-> 
->         pol = __get_vma_policy(vma, addr, ilx);
->         if (!pol)
->                 pol = get_task_policy(current);
->         if (pol->mode == MPOL_INTERLEAVE ||
->             pol->mode == MPOL_WEIGHTED_INTERLEAVE) {
->                 *ilx += vma->vm_pgoff >> order;
->                 *ilx += (addr - vma->vm_start) >> (PAGE_SHIFT + order);
->         }
->         return pol;
-> }
-> 
-> Of course you still have the same issue: get_task_policy will return the
-> default, because that's what applies.
-> 
-> do_get_mempolicy just seems like the completely incorrect interface to
-> be using here.
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+RnJvbTogSmV1ayBLaW0gPGpldWsyMC5raW1Ac2Ftc3VuZy5jb20+CgpJbmxpbmUgZW5jcnlwdGlv
+biBkZXJpdmVzIERVTiBmcm9tIDxpbm9kZSwgZmlsZSBvZmZzZXQ+LApzbyBiaW9zIGZyb20gZGlm
+ZmVyZW50IGlub2RlcyBjYW4ndCBtZXJnZS4gV2l0aCBtdWx0aS10aHJlYWRlZApidWZmZXJlZCBP
+X1NZTkMgd3JpdGVzIHdoZXJlIGVhY2ggdGhyZWFkIHdyaXRlcyB0byBpdHMgb3duIGZpbGUsCjRL
+aUItcGVyLXBhZ2UgTEJBIGFsbG9jYXRpb24gaW50ZXJsZWF2ZXMgYWNyb3NzIGlub2RlcyBhbmQK
+Y2F1c2VzIGJpbyBzcGxpdC4gU2VyaWFsaXplIHdyaXRlYmFjayBmb3IgZnNjcnlwdCBpbmxpbmUt
+Y3J5cHRvCmlub2RlcyB2aWEgX19zaG91bGRfc2VyaWFsaXplX2lvKCkgdG8ga2VlcCBmb3JlZ3Jv
+dW5kIHdyaXRlYmFjawpmb2N1c2VkIG9uIG9uZSBpbm9kZSBhbmQgYXZvaWQgc3BsaXQuCgpUZXN0
+OiBmaW8gLS1uYW1lPXdiX29zeW5jIC0tcnc9d3JpdGUgLS1icz0xTSBcCiAgICAgIC0tdGltZV9i
+YXNlZD0xIC0tcnVudGltZT02MHMgLS1zaXplPTJHIFwKICAgICAgLS1pb2VuZ2luZT1wc3luYyAt
+LWRpcmVjdD0wIC0tc3luYz0xIFwKICAgICAgLS1udW1qb2JzPTggLS10aHJlYWQ9MSAtLW5yZmls
+ZXM9MSBcCiAgICAgIC0tZmlsZW5hbWVfZm9ybWF0PSd3Yl9vc3luYy4kam9ibnVtJwoKZGV2aWNl
+OiBVRlMKCkJlZm9yZSAtCiAgd3JpdGUgdGhyb3VnaHB1dDogNjc1TWlCL3MKICBkZXZpY2UgSS9P
+IHNpemUgZGlzdHJpYnV0aW9uIChieSBjb3VudCwgdG90YWwgMTAyNzQxNCk6CiAgICA0IEtpQjog
+IDkyMzEzOSAoODkuOSUpCiAgICA4IEtpQjogIDg0Nzk4ICg4LjMlKQogICAg4omlNTEyIEtpQjog
+NDUzICgwLjAlKQoKQWZ0ZXIgLQogIHdyaXRlIHRocm91Z2hwdXQ6IDE3NjBNaUIvcwogIGRldmlj
+ZSBJL08gc2l6ZSBkaXN0cmlidXRpb24gKGJ5IGNvdW50LCB0b3RhbCAyMzE3NTApOgogICAgNCBL
+aUI6ICAxNjkwNCAoNy4zJSkKICAgIDggS2lCOiAgNzIxMjggKDMxLjElKQogICAg4omlNTEyIEtp
+QjogMTE4OTAwICg1MS4zJSkKClNpZ25lZC1vZmYtYnk6IEpldWsgS2ltIDxqZXVrMjAua2ltQHNh
+bXN1bmcuY29tPgotLS0KIGZzL2YyZnMvZGF0YS5jIHwgMiArKwogMSBmaWxlIGNoYW5nZWQsIDIg
+aW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZGF0YS5jIGIvZnMvZjJmcy9kYXRh
+LmMKaW5kZXggZWYzOGU2MmNkYThmLi5hZTZmYjQzNWQ1NzYgMTAwNjQ0Ci0tLSBhL2ZzL2YyZnMv
+ZGF0YS5jCisrKyBiL2ZzL2YyZnMvZGF0YS5jCkBAIC0zMjE3LDYgKzMyMTcsOCBAQCBzdGF0aWMg
+aW5saW5lIGJvb2wgX19zaG91bGRfc2VyaWFsaXplX2lvKHN0cnVjdCBpbm9kZSAqaW5vZGUsCiAK
+IAlpZiAoZjJmc19uZWVkX2NvbXByZXNzX2RhdGEoaW5vZGUpKQogCQlyZXR1cm4gdHJ1ZTsKKwlp
+ZiAoZnNjcnlwdF9pbm9kZV91c2VzX2lubGluZV9jcnlwdG8oaW5vZGUpKQorCQlyZXR1cm4gdHJ1
+ZTsKIAlpZiAod2JjLT5zeW5jX21vZGUgIT0gV0JfU1lOQ19BTEwpCiAJCXJldHVybiB0cnVlOwog
+CWlmIChnZXRfZGlydHlfcGFnZXMoaW5vZGUpID49IFNNX0koRjJGU19JX1NCKGlub2RlKSktPm1p
+bl9zZXFfYmxvY2tzKQotLSAKMi40My4wCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYy
+ZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2Uu
+bmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
