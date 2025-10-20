@@ -2,101 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F2ACBEF1D3
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Oct 2025 04:42:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C0C6BEF22D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Oct 2025 04:58:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=r5RmL7M6PSpc+Ve9IynHurQRBYhsO51IaEpdCki6uB4=; b=kw8YIofgwmJJpkuMfY18mEtFT/
-	aG0yuCluP2wSNCQ1RuCWe5bMPN0rgp64SSyB8V1rvWVfmV2LQ//uU6pmxJ5vEc9r0I3qO7mgYUOCH
-	v3yuC1AZ2EZNEBwE2gBvv8wuW8943OXmDdEgvql28+dUpB/+YIfrtwKI9XBDUl3CyTqw=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=nK9WkyTjmcUE11RFgOHNQXZ08OhwSlXBhMW7WIFSlAE=; b=Z1HqDmpbByRJi2B3iZbp9QAMm6
+	Ui6/f/RbJSMDH5qL/qxd6n5rPMGzU/urBTeqdhNBqLdGnw5Cg49P60MmyKUi+BajjrSUbjHOEsRI1
+	M95BgBf3fqVaTTEg2emh7Y3bP3YCgm5FzLWC7a00wChtD+S7Z+59Pftk4boWUkDRINEc=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vAfqt-0007Ij-Fn;
-	Mon, 20 Oct 2025 02:42:27 +0000
+	id 1vAg6E-0001BW-W9;
+	Mon, 20 Oct 2025 02:58:19 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vAfqs-0007Ic-4z
+ (envelope-from <chao@kernel.org>) id 1vAg6D-0001BG-9Q
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Oct 2025 02:42:26 +0000
+ Mon, 20 Oct 2025 02:58:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HGhHW+k5rP1i/FZO6my/pryypVioaJ4zeq3XduLLKEU=; b=DK32OkEKpD1nUBa5eiTlhbelZp
- vpcx3dAm6Y/m8SnidthaA8BSc03EcdwKEzEGmmdc8xYD3EwOLuZxbpJlVyGxvfdm5eMe3rYG6nRwu
- d+rF4qxpQnql/AGgwveBty3EUK6L5Q9q6hBRQbmkgBCh3Ejh5Ov9FSaG7Mswk7Rd9OjQ=;
+ bh=BEltI1S3tmY6YZY5JOMucSAS6S9aEFuoYCFENjIVNu0=; b=J36C38+tkQjk6xSc51sxkdYF3O
+ +XDFIF+miLx1DczQk/poX0VB0/WeILMCUNBvvztG4gNYs2IbvzKApNBait4OkKipK9gcVFXULpieR
+ ynP1OqUmD7IJO3cxjQHLhXO0mfXM1ctjWcDVvBwmDGjFFqvx7+CRZ1KWTpoTCdyMPagU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=HGhHW+k5rP1i/FZO6my/pryypVioaJ4zeq3XduLLKEU=; b=c
- piHaWlrbpxYLYisMPWPazsLiK9yP+n39CFNBHGf+NLDXf52nQzBzSNWpTTe+mfoZ4ATAv5BKUcTLo
- fqQttwmr/Nehl9wXo6xcjgTJBTL8Ug922DI5lFy5czdTgEYpAPR5dO6XIjW+hup7WBrnq7DwbUObl
- VNucn3a15K8mvgBU=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=BEltI1S3tmY6YZY5JOMucSAS6S9aEFuoYCFENjIVNu0=; b=E0kdjLePz06FLxHgKtf6YzriiI
+ 1jqQBPRy5szxQXo5/STnvMzZO+9v3nA0HN3KKTI55t7SHJU9SAbn6cZYwqL3Htci0RKKdynPNvvIn
+ UUXkCHdXn+AOaT3qIKhcvChuhlWDWtTUQL1JILcglC3qegocWgXKhSf7MkLdHNMKqnbQ=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vAfqr-0007O9-MY for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Oct 2025 02:42:26 +0000
+ id 1vAg6D-0007qC-Je for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 Oct 2025 02:58:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id D7A3660212;
- Mon, 20 Oct 2025 02:42:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C1BEC4CEE7;
- Mon, 20 Oct 2025 02:42:17 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id D9925612CD;
+ Mon, 20 Oct 2025 02:58:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99427C4CEF1;
+ Mon, 20 Oct 2025 02:58:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1760928139;
- bh=2Dvy7Pqb4UHZzIXbGPiDVAGI8fjvHm+1MTOwiicyTL8=;
- h=From:To:Cc:Subject:Date:From;
- b=NMBKhNlVk5Zim2UFv+s4FQaBUw5GVafaNWWvsZUl2hbu2zZjlEbVCsKTJ/Y62QhZN
- 9wGTtyidFB2iX4Ehk72ZKM1OfvR9rLkSkoW3x6l/5igElJoZYl32t7oKoVNb45EVJN
- 8JKQXtwerxyYUEPKNm1kVC8/X1qtHADR87YLoZjn9LXwKrrP2rnmxxqecHXWn+88og
- BYYXpGOnyyV/Lnr7hG1B2vKSZ4amqkBpQxNbd58bnBDjz+GRJMkJyhGmj13Je9DUdP
- jtgQ30X9qPi1WovnQSWDZRHi/g8+tINvKFnO6ilk3Qd7gJRq6Dwu7k0RMyEJPKWyEf
- 0OzG53iSSKErg==
-To: jaegeuk@kernel.org
-Date: Mon, 20 Oct 2025 10:42:12 +0800
-Message-ID: <20251020024213.332873-1-chao@kernel.org>
-X-Mailer: git-send-email 2.51.0.858.gf9c4a03a3a-goog
+ s=k20201202; t=1760929086;
+ bh=cI3/ias/+4HcFAyVUAilSQLc+xhAr0wOuznULvflJg8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=m3GC42CGW3UVJ/ZsGW2Gfbrqgm8gdw9RJ1cLY+1tkcDki4A0Z9FeRSn9ZP1Rj/3yA
+ KH8HU5hbJED3CgyBXtseRmC5UXy+OB9cG+ZbTs8sWNhFPf3p6Djsp1opKR/P6RY35k
+ QgwRb+RuoB6bagMg37FkGXRmROs/08f87PK2dqSGCCbKlLVN36hbmXtFpbV/FEV8V6
+ Yd9j39XewgGuO1bN15syMD2DGMW00n6MVi344VF7vZcFa7GHHYbyC+I5SwSf9G0pVu
+ wNcMIFCliiChZLs0Gl6PbwWsYKaQHYcdMfhqm/2AtLOen/g4fluZFyxpOOs0309FSY
+ YY5eZwEAdne4A==
+Message-ID: <9e724171-eaec-4156-8a3c-210f292ad84d@kernel.org>
+Date: Mon, 20 Oct 2025 02:57:24 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Zorro Lang <zlang@redhat.com>
+References: <20251011084715.608562-1-chao@kernel.org>
+ <20251017193013.ykrwjftkvhaug76z@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+Content-Language: en-US
+In-Reply-To: <20251017193013.ykrwjftkvhaug76z@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: As syzbot reported: F2FS-fs (loop0):
- __update_extent_tree_range:
- extent len is zero, type: 0, extent [0, 0, 0], age [0, 0] [ cut here ] kernel
- BUG at fs/f2fs/extent_cache.c:678! Oops: invalid opco [...] 
+ Content preview:  On 10/17/25 19:30, Zorro Lang wrote: > On Sat, Oct 11, 2025
+ at 04:47:14PM +0800, Chao Yu wrote: >> This testcase tries to check whether
+ f2fs can handle "usrjquota=" >> during remount correctly, it exp [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [172.105.4.254 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vAfqr-0007O9-MY
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix to avoid updating zero-sized extent
- in extent cache
+X-Headers-End: 1vAg6D-0007qC-Je
+Subject: Re: [f2fs-dev] [PATCH v3 1/2] f2fs/021: test quota mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,73 +108,95 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: stable@kernel.org, linux-kernel@vger.kernel.org,
- syzbot+24124df3170c3638b35f@syzkaller.appspotmail.com,
+Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-As syzbot reported:
+On 10/17/25 19:30, Zorro Lang wrote:
+> On Sat, Oct 11, 2025 at 04:47:14PM +0800, Chao Yu wrote:
+>> This testcase tries to check whether f2fs can handle "usrjquota="
+>> during remount correctly, it expects kernel will encounter NULL
+>> pointer dereference bug w/o the fix ("f2fs: fix to avoid NULL pointer
+>> dereference in f2fs_check_quota_consistency()").
+>>
+>> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+>> Reviewed-by: Zorro Lang <zlang@redhat.com>
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+> 
+> Hi Chao,
+> 
+> This patchset has been merged, you can send a seperated patch to update the
+> commit id of _fixed_by_kernel_commit :)
 
-F2FS-fs (loop0): __update_extent_tree_range: extent len is zero, type: 0, extent [0, 0, 0], age [0, 0]
-------------[ cut here ]------------
-kernel BUG at fs/f2fs/extent_cache.c:678!
-Oops: invalid opcode: 0000 [#1] SMP KASAN NOPTI
-CPU: 0 UID: 0 PID: 5336 Comm: syz.0.0 Not tainted syzkaller #0 PREEMPT(full)
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2~bpo12+1 04/01/2014
-RIP: 0010:__update_extent_tree_range+0x13bc/0x1500 fs/f2fs/extent_cache.c:678
-Call Trace:
- <TASK>
- f2fs_update_read_extent_cache_range+0x192/0x3e0 fs/f2fs/extent_cache.c:1085
- f2fs_do_zero_range fs/f2fs/file.c:1657 [inline]
- f2fs_zero_range+0x10c1/0x1580 fs/f2fs/file.c:1737
- f2fs_fallocate+0x583/0x990 fs/f2fs/file.c:2030
- vfs_fallocate+0x669/0x7e0 fs/open.c:342
- ioctl_preallocate fs/ioctl.c:289 [inline]
- file_ioctl+0x611/0x780 fs/ioctl.c:-1
- do_vfs_ioctl+0xb33/0x1430 fs/ioctl.c:576
- __do_sys_ioctl fs/ioctl.c:595 [inline]
- __se_sys_ioctl+0x82/0x170 fs/ioctl.c:583
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0xfa/0x3b0 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7f07bc58eec9
+Hi Zorro,
 
-In error path of f2fs_zero_range(), it may add a zero-sized extent
-into extent cache, it should be avoided.
+I have sent a seperated patch to update commit id, please take a look, thanks. :)
 
-Fixes: 6e9619499f53 ("f2fs: support in batch fzero in dnode page")
-Cc: stable@kernel.org
-Reported-by: syzbot+24124df3170c3638b35f@syzkaller.appspotmail.com
-Closes: https://lore.kernel.org/linux-f2fs-devel/68e5d698.050a0220.256323.0032.GAE@google.com
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-v2:
-- add missing "Cc: stable" flag
- fs/f2fs/file.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+Thanks,
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index ffa045b39c01..c045e38e60ee 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -1654,8 +1654,11 @@ static int f2fs_do_zero_range(struct dnode_of_data *dn, pgoff_t start,
- 		f2fs_set_data_blkaddr(dn, NEW_ADDR);
- 	}
- 
--	f2fs_update_read_extent_cache_range(dn, start, 0, index - start);
--	f2fs_update_age_extent_cache_range(dn, start, index - start);
-+	if (index > start) {
-+		f2fs_update_read_extent_cache_range(dn, start, 0,
-+							index - start);
-+		f2fs_update_age_extent_cache_range(dn, start, index - start);
-+	}
- 
- 	return ret;
- }
--- 
-2.49.0
+> 
+> Thanks,
+> Zorro
+> 
+>> v3:
+>> - update commit id in _fixed_by_kernel_commit line
+>>   tests/f2fs/021     | 30 ++++++++++++++++++++++++++++++
+>>   tests/f2fs/021.out |  2 ++
+>>   2 files changed, 32 insertions(+)
+>>   create mode 100755 tests/f2fs/021
+>>   create mode 100644 tests/f2fs/021.out
+>>
+>> diff --git a/tests/f2fs/021 b/tests/f2fs/021
+>> new file mode 100755
+>> index 00000000..0cacb138
+>> --- /dev/null
+>> +++ b/tests/f2fs/021
+>> @@ -0,0 +1,30 @@
+>> +#! /bin/bash
+>> +# SPDX-License-Identifier: GPL-2.0
+>> +# Copyright (c) 2025 Chao Yu.  All Rights Reserved.
+>> +#
+>> +# FS QA Test No. f2fs/021
+>> +#
+>> +# This testcase tries to check whether f2fs can handle "usrjquota="
+>> +# during remount correctly
+>> +#
+>> +. ./common/preamble
+>> +_begin_fstest auto quick mount quota remount
+>> +
+>> +_fixed_by_kernel_commit 930a9a6ee8e7 \
+>> +	"f2fs: fix to avoid NULL pointer dereference in f2fs_check_quota_consistency()"
+>> +
+>> +_require_scratch
+>> +
+>> +_scratch_mkfs >> $seqres.full
+>> +_scratch_mount "-o usrquota"
+>> +quotacheck -uc $SCRATCH_MNT
+>> +_scratch_unmount
+>> +
+>> +_scratch_mount "-o usrjquota=aquota.user,jqfmt=vfsold"
+>> +_scratch_mount "-o remount,usrjquota=,jqfmt=vfsold"
+>> +_scratch_unmount
+>> +
+>> +echo "Silence is golden"
+>> +
+>> +status=0
+>> +exit
+>> diff --git a/tests/f2fs/021.out b/tests/f2fs/021.out
+>> new file mode 100644
+>> index 00000000..09f4062d
+>> --- /dev/null
+>> +++ b/tests/f2fs/021.out
+>> @@ -0,0 +1,2 @@
+>> +QA output created by 021
+>> +Silence is golden
+>> -- 
+>> 2.49.0
+>>
+> 
 
 
 
