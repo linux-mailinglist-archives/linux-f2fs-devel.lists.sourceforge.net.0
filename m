@@ -2,98 +2,144 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 429E6BF5CCF
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Oct 2025 12:36:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E03ECBF6332
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Oct 2025 13:53:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:References:In-Reply-To:From:To:MIME-Version:Date:Message-ID:Sender:
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=NllTix+tWEzzA5zd5cxNEPVsTE+VxFwutPyuznmGN3s=; b=V9/svwwyPSloIT43MAPCfrwrIK
-	sk1Zm5uDsYnatJjJlNmwPYosC4OeEdXI2xBiL08xO//V7vpTzfZ/REJ1x3laIDbrOy2GIDad83mcy
-	Xxdi1rlPGT5QDIg009uyQ70F0UmsFAbWS6/5+NFR+aVP/3bMo5an7MURAVlI+wtd8DIY=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=d912uL18X4Lw+mjYv3ODODyRPLdjzzsE07THBxGvA8M=; b=J+rHhpBfqrxXsyDRhFC0bcTkxH
+	xZHlzXPUHrO6ToTibBL9TkljiNIaBLla2Pkjt9PPmz0+seYl0F3eTw6WU63N5WoJF9RkP54xykxoE
+	GSoStUJqp3KH6+Y4HHUSNpH4GkA6+lWkubM8Hqz10tnIQ/f84zASZLvPt/XIwCDV7BH0=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vB9jO-0006tA-3z;
-	Tue, 21 Oct 2025 10:36:42 +0000
+	id 1vBAva-0007lc-Mn;
+	Tue, 21 Oct 2025 11:53:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kundan.kumar@samsung.com>) id 1vB9jM-0006t3-Kk
+ (envelope-from <jack@suse.cz>) id 1vBAvY-0007lH-9M
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Oct 2025 10:36:40 +0000
+ Tue, 21 Oct 2025 11:53:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- In-Reply-To:From:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HsQCI8iew+pHyZGlqcgByv/CbFDTHT7k4bxRlb4DRbo=; b=d+F68PV3X7//DdJtY1a2vXQhI+
- ZBTWCxf8wDjUsu9YyXg0Dk4Yi+9LIsAB+ItjvtEwdhJUauKDOh5BKwLqe8A+MGeOqlmoEVgUqHJFf
- DAyduq9ElnL6Me/kaGw/rIb5xIySd/vfWQe3QQaYDnjfUe5HW8ojPVaqglmLYPDG4rno=;
+ bh=+uorp+kk4hmsZbpZpm5Gun01lSMtY2PtNzIQ7LvYx/w=; b=ZgEVPBfsbDSJPENO9Q7z/7vafZ
+ QnpHsrfy1YvdjsA3vaLSWqC8O+ZTmKEXe/CQWhuGw2+KyNLw442clv3Gmx1ZGGtuFLk4+CHpGR3du
+ 3ZKFV2vTUF38oT2/YVuacxpt6I6nRMEcm2fKxMeWe4RRfFQMMYRcHodH21tdrhBkHms0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:In-Reply-To:From:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=HsQCI8iew+pHyZGlqcgByv/CbFDTHT7k4bxRlb4DRbo=; b=MGGIZaR+d26+njkUv8BIhz6TXJ
- CRMpBvIAuaX7yjynjWKYc2IFXSlqRDZDsRFYXLR8wCpsDkqkzQH7OBDu5tpwrhk25bsdwOT1fd8Jm
- 5QuiJINwvx0raHPA5zTwkC/2A4GO0IeYO1O66UFEnxQPNEQlXMvFotuLZUH9n8FCNrgc=;
-Received: from mailout2.samsung.com ([203.254.224.25])
+ bh=+uorp+kk4hmsZbpZpm5Gun01lSMtY2PtNzIQ7LvYx/w=; b=AHgxjYx0FoQ/Pcc7TD9ljKmGi3
+ ONoGHINGHBDGmerXQtb5/grwpRG+fX4xsYJi1Nn0WQuAMLZj7eNRherk5EFW5W7nLPbiL0HO8X7P1
+ IDSfJsYQyomoVvdGiIcwG6JIQt9bQcDNMibYjsbV9baBG0P8eCNciTzT4MOcqvw6TAgc=;
+Received: from smtp-out2.suse.de ([195.135.223.131])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vB9jL-0007pN-01 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Oct 2025 10:36:40 +0000
-Received: from epcas5p2.samsung.com (unknown [182.195.41.40])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20251021103631epoutp02c0753c9ddf384abcdaf930045d5c314c~we0UzhpWv2934929349epoutp02d
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 21 Oct 2025 10:36:31 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20251021103631epoutp02c0753c9ddf384abcdaf930045d5c314c~we0UzhpWv2934929349epoutp02d
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1761042991;
- bh=HsQCI8iew+pHyZGlqcgByv/CbFDTHT7k4bxRlb4DRbo=;
- h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=lqVTJzjiViwLvtPEinPu/Xjuq/K9X0k8qNsAWIo0X0IBiUFYLsSClONg3/gM5D7eB
- UvdqM5ywKtjfZfUzKdqaaOkEXaKVNl85+7TelDN5CE+TOP+mioideD3b04/1hfy+mg
- KW7BTGGy19cfbK0DtBSrmoropHMgbDFIea4xhdDU=
-Received: from epsnrtp04.localdomain (unknown [182.195.42.156]) by
- epcas5p4.samsung.com (KnoxPortal) with ESMTPS id
- 20251021103630epcas5p435dae0ee9578598211e7066cedc621c2~we0TrEpWD0288102881epcas5p47;
- Tue, 21 Oct 2025 10:36:30 +0000 (GMT)
-Received: from epcas5p3.samsung.com (unknown [182.195.38.89]) by
- epsnrtp04.localdomain (Postfix) with ESMTP id 4crTHK1zMHz6B9m7; Tue, 21 Oct
- 2025 10:36:29 +0000 (GMT)
-Received: from epsmtip1.samsung.com (unknown [182.195.34.30]) by
- epcas5p1.samsung.com (KnoxPortal) with ESMTPA id
- 20251021103628epcas5p1b7baecd88baf9cf66127e17613f268e4~we0RnAWVC2779827798epcas5p1e;
- Tue, 21 Oct 2025 10:36:28 +0000 (GMT)
-Received: from [107.111.86.57] (unknown [107.111.86.57]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20251021103622epsmtip11f8ba67056c7c576fea39dc357410495~we0M5IZcp2042120421epsmtip1P;
- Tue, 21 Oct 2025 10:36:22 +0000 (GMT)
-Message-ID: <6fe26b74-beb9-4a6a-93af-86edcbde7b68@samsung.com>
-Date: Tue, 21 Oct 2025 16:06:22 +0530
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1vBAvX-00046Z-IL for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 21 Oct 2025 11:53:21 +0000
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 6BECE1F7BD;
+ Tue, 21 Oct 2025 11:52:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1761047583; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=+uorp+kk4hmsZbpZpm5Gun01lSMtY2PtNzIQ7LvYx/w=;
+ b=1TTkiGPkzFlXtwxDEYw356BP9xhGDO5Phqb57mvhJKszoz9QmdQb2A5TTN5MKGjBdS/Kh/
+ fFs3OwV4J2tE7J0ZuzUu1QJr1atyBrylovTHFzBh0STAXYpC96e5fQjr7IVcuJkXm1o8+0
+ KyIOCBaz43F8+NRSIIQ+WzrM7em2uZw=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1761047583;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=+uorp+kk4hmsZbpZpm5Gun01lSMtY2PtNzIQ7LvYx/w=;
+ b=BuV2xgvQE2Iib51rzP7AyujX1mAs98KsVZJJic6827wuj/OWy49BLKF8TZWsof8P1/vm6u
+ qkZH7vIfBLrWrRBQ==
+Authentication-Results: smtp-out2.suse.de;
+ dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=mPcYAdGf;
+ dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=1+8SUplI
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1761047579; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=+uorp+kk4hmsZbpZpm5Gun01lSMtY2PtNzIQ7LvYx/w=;
+ b=mPcYAdGf2omVYbSV3sB9WE0ve2pyTWILXTwCYQDE+iEmiku2Zdi9/XhapA5CIYIHUzepBh
+ cLHBgu8ROr3vkCN0eEvdTXKn8ppe5SB+NsOmxch3UBGDPpy9fdfTr6tuMxL42kst71l3oY
+ oZwgaFdhYv2leSdox7oD3tPYj9jt/OU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1761047579;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=+uorp+kk4hmsZbpZpm5Gun01lSMtY2PtNzIQ7LvYx/w=;
+ b=1+8SUplIr545q5gZVapwStOD5xK3D4DwPy15AmyIF1656N/dDWe5pYkDp+rqjMfjaMn6It
+ 1vBH3ehUKa/BPOCg==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 59B92139B1;
+ Tue, 21 Oct 2025 11:52:59 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id etngFRt092ibVgAAD6G6ig
+ (envelope-from <jack@suse.cz>); Tue, 21 Oct 2025 11:52:59 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id E705AA0990; Tue, 21 Oct 2025 13:52:54 +0200 (CEST)
+Date: Tue, 21 Oct 2025 13:52:54 +0200
+From: Jan Kara <jack@suse.cz>
+To: Kundan Kumar <kundan.kumar@samsung.com>
+Message-ID: <25h6rdu2pweg6wwrfvw3n5bu34vnknqqfpotpfm47uxg267hp5@wo637wyeaxvh>
+References: <20251014120845.2361-1-kundan.kumar@samsung.com>
+ <CGME20251014121014epcas5p11d254fd09fcc157ea69c39bd9c5984ed@epcas5p1.samsung.com>
+ <20251014120845.2361-2-kundan.kumar@samsung.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Dave Chinner <david@fromorbit.com>
-From: Kundan Kumar <kundan.kumar@samsung.com>
-In-Reply-To: <aPa7xozr7YbZX0W4@dread.disaster.area>
-X-CMS-MailID: 20251021103628epcas5p1b7baecd88baf9cf66127e17613f268e4
-X-Msg-Generator: CA
-CMS-TYPE: 105P
-cpgsPolicy: CPGSC10-542,Y
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20251014120958epcas5p267c3c9f9dbe6ffc53c25755327de89f9
-References: <CGME20251014120958epcas5p267c3c9f9dbe6ffc53c25755327de89f9@epcas5p2.samsung.com>
- <20251014120845.2361-1-kundan.kumar@samsung.com>
- <aPa7xozr7YbZX0W4@dread.disaster.area>
+Content-Disposition: inline
+In-Reply-To: <20251014120845.2361-2-kundan.kumar@samsung.com>
+X-Spam-Level: 
+X-Spam-Flag: NO
+X-Rspamd-Queue-Id: 6BECE1F7BD
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-2.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ MID_RHS_NOT_FQDN(0.50)[];
+ R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ MX_GOOD(-0.01)[];
+ DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+ RCVD_COUNT_THREE(0.00)[3];
+ RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
+ SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+ ARC_NA(0.00)[]; RCPT_COUNT_TWELVE(0.00)[31];
+ MIME_TRACE(0.00)[0:+]; RCVD_TLS_LAST(0.00)[];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com]; TO_DN_SOME(0.00)[];
+ RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+ TAGGED_RCPT(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
+ FROM_HAS_DN(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[];
+ R_RATELIMIT(0.00)[to_ip_from(RLhzk8m8dynxu9bgo74bfqqdh9)];
+ MISSING_XM_UA(0.00)[];
+ FREEMAIL_CC(0.00)[kernel.org,zeniv.linux.org.uk,suse.cz,szeredi.hu,redhat.com,linux-foundation.org,infradead.org,meta.com,fromorbit.com,gmail.com,kernel.dk,lst.de,stgolabs.net,vivo.com,lists.sourceforge.net,vger.kernel.org,lists.linux.dev,kvack.org,samsung.com];
+ DKIM_TRACE(0.00)[suse.cz:+];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,
+ imap1.dmz-prg2.suse.org:helo, suse.com:email, suse.cz:dkim, suse.cz:email]
+X-Spam-Score: -2.51
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -101,11 +147,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 10/21/2025 4:16 AM, Dave Chinner wrote: Thanks Dave for
- the detailed feedback. > On Tue, Oct 14, 2025 at 05:38:29PM +0530, Kundan
- Kumar wrote: >> Number of writeback contexts >> ============================
- >> We've implemented two interfaces to manage the number of writeback >>
- [...] Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On Tue 14-10-25 17:38:30, Kundan Kumar wrote: > This is a
+ prep patch which introduces a new bdi_writeback_ctx structure > that enables
+ us to have multiple writeback contexts for parallel > writeback. [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -115,12 +160,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [203.254.224.25 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vB9jL-0007pN-01
-Subject: Re: [f2fs-dev] [PATCH v2 00/16] Parallelizing filesystem writeback
+X-Headers-End: 1vBAvX-00046Z-IL
+Subject: Re: [f2fs-dev] [PATCH v2 01/16] writeback: add infra for parallel
+ writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,322 +175,436 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: ritesh.list@gmail.com, vishak.g@samsung.com, jack@suse.cz,
- djwong@kernel.org, amir73il@gmail.com, gfs2@lists.linux.dev,
- linux-mm@kvack.org, clm@meta.com, hch@lst.de, dave@stgolabs.net,
- agruenba@redhat.com, miklos@szeredi.hu, gost.dev@samsung.com,
- willy@infradead.org, anuj20.g@samsung.com, linux-nfs@vger.kernel.org,
- viro@zeniv.linux.org.uk, jaegeuk@kernel.org, axboe@kernel.dk,
- brauner@kernel.org, linux-f2fs-devel@lists.sourceforge.net, mcgrof@kernel.org,
- anna@kernel.org, linux-fsdevel@vger.kernel.org, akpm@linux-foundation.org,
- trondmy@kernel.org
+ djwong@kernel.org, amir73il@gmail.com, david@fromorbit.com,
+ gfs2@lists.linux.dev, linux-mm@kvack.org, clm@meta.com, hch@lst.de,
+ dave@stgolabs.net, agruenba@redhat.com, miklos@szeredi.hu,
+ gost.dev@samsung.com, willy@infradead.org, anuj20.g@samsung.com,
+ linux-nfs@vger.kernel.org, viro@zeniv.linux.org.uk, jaegeuk@kernel.org,
+ axboe@kernel.dk, brauner@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ mcgrof@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
+ akpm@linux-foundation.org, trondmy@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 10/21/2025 4:16 AM, Dave Chinner wrote:
-
-Thanks Dave for the detailed feedback.
-
-> On Tue, Oct 14, 2025 at 05:38:29PM +0530, Kundan Kumar wrote:
->> Number of writeback contexts
->> ============================
->> We've implemented two interfaces to manage the number of writeback
->> contexts:
->> 1) Sysfs Interface: As suggested by Christoph, we've added a sysfs
->>     interface to allow users to adjust the number of writeback contexts
->>     dynamically.
->> 2) Filesystem Superblock Interface: We've also introduced a filesystem
->>     superblock interface to retrieve the filesystem-specific number of
->>     writeback contexts. For XFS, this count is set equal to the
->>     allocation group count. When mounting a filesystem, we automatically
->>     increase the number of writeback threads to match this count.
+On Tue 14-10-25 17:38:30, Kundan Kumar wrote:
+> This is a prep patch which introduces a new bdi_writeback_ctx structure
+> that enables us to have multiple writeback contexts for parallel
+> writeback. Each bdi now can have multiple writeback contexts, with each
+> writeback context having has its own cgwb tree.
 > 
-> This is dangerous. What happens when we mount a filesystem with
-> millions of AGs?
+> Modify all the functions/places that operate on bdi's wb, wb_list,
+> cgwb_tree, wb_switch_rwsem, wb_waitq as these fields have now been moved
+> to bdi_writeback_ctx.
 > 
-
-Good point. How about adding an upper bound e.g. limiting the number
-of writeback contexts to something like nr_cpus * k and mapping AGs
-dynamically to that bounded pool.
-
+> This patch mechanically replaces bdi->wb to bdi->wb_ctx[0]->wb and there
+> is no functional change.
 > 
->> Resolving the Issue with Multiple Writebacks
->> ============================================
->> For XFS, affining inodes to writeback threads resulted in a decline
->> in IOPS for certain devices. The issue was caused by AG lock contention
->> in xfs_end_io, where multiple writeback threads competed for the same
->> AG lock.
->> To address this, we now affine writeback threads to the allocation
->> group, resolving the contention issue. In best case allocation happens
->> from the same AG where inode metadata resides, avoiding lock contention.
+> Suggested-by: Jan Kara <jack@suse.cz>
+> Signed-off-by: Anuj Gupta <anuj20.g@samsung.com>
+> Signed-off-by: Kundan Kumar <kundan.kumar@samsung.com>
+> ---
+>  fs/f2fs/node.c                   |   4 +-
+>  fs/f2fs/segment.h                |   2 +-
+>  fs/fs-writeback.c                |  78 +++++++++++++--------
+>  fs/fuse/file.c                   |   6 +-
+>  fs/gfs2/super.c                  |   2 +-
+>  fs/nfs/internal.h                |   3 +-
+>  fs/nfs/write.c                   |   3 +-
+>  include/linux/backing-dev-defs.h |  32 +++++----
+>  include/linux/backing-dev.h      |  41 +++++++----
+>  include/linux/fs.h               |   1 -
+>  mm/backing-dev.c                 | 113 +++++++++++++++++++------------
+>  mm/page-writeback.c              |   5 +-
+>  12 files changed, 179 insertions(+), 111 deletions(-)
 > 
-> Not necessarily. The allocator can (and will) select different AGs
-> for an inode as the file grows and the AGs run low on space. Once
-> they select a different AG for an inode, they don't tend to return
-> to the original AG because allocation targets are based on
-> contiguous allocation w.r.t. existing adjacent extents, not the AG
-> the inode is located in.
-> 
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index 27743b93e186..1693da9417f9 100644
+> --- a/fs/f2fs/node.c
+> +++ b/fs/f2fs/node.c
+> @@ -73,7 +73,7 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
+>  		if (excess_cached_nats(sbi))
+>  			res = false;
+>  	} else if (type == DIRTY_DENTS) {
+> -		if (sbi->sb->s_bdi->wb.dirty_exceeded)
+> +		if (sbi->sb->s_bdi->wb_ctx[0]->wb.dirty_exceeded)
 
-The tests were conducted under ideal conditions, where the Allocation
-Groups (AGs) had sufficient space. The design for affining writeback
-threads to AGs is based on the assumption that allocations typically
-occur within the same AG, unless it's low on space. To predict the AG
-from which the allocation will happen, additional logic would be
-required. This enhancement can be considered for a future phase, with
-the get_inode_wb_ctx() function being the suitable location for
-implementation.
-
-> Indeed, if a user selects the inode32 mount option, there is
-> absolutely no relationship between the AG the inode is located in
-> and the AG it's data extents are allocated in. In these cases,
-> using the inode resident AG is guaranteed to end up with a random
-> mix of target AGs for the inodes queued in that AG.  Worse yet,
-> there may only be one AG that can have inodes allocated in it, so
-> all the writeback contexts for the other hundreds of AGs in the
-> filesystem go completely unused...
-> 
-For inode32 mounts, does it make sense to restricting to single-threaded
-writeback, or you have other thoughts for same ?
-
->> Similar IOPS decline was observed with other filesystems under different
->> workloads. To avoid similar issues, we have decided to limit
->> parallelism to XFS only. Other filesystems can introduce parallelism
->> and distribute inodes as per their geometry.
-> 
-> I suspect that the issues with XFS lock contention are related to
-> the fragmentation behaviour observed (see below) massively
-> increasing the frequency of allocation work for a given amount of
-> data being written rather than increasing writeback concurrency...
-> 
->>
->> IOPS and throughput
->> ===================
->> With the affinity to allocation group we see significant improvement in
->> XFS when we write to multiple files in different directories(AGs).
->>
->> Performance gains:
->>    A) Workload 12 files each of 1G in 12 directories(AGs) - numjobs = 12
->>      - NVMe device BM1743 SSD
-> 
-> So, 80-100k random 4kB write IOPS, ~2GB/s write bandwidth.
-> 
->>          Base XFS                : 243 MiB/s
->>          Parallel Writeback XFS  : 759 MiB/s  (+212%)
-> 
-> As such, the baseline result doesn't feel right - it doesn't match
-> my experience with concurrent sequential buffered write workloads on
-> SSDs. My expectation is that they'd get close to device bandwidth or
-> run out of copy-in CPU at somewhere over 3GB/s.
-> 
-> So what are you actually doing to get these numbers? What is the
-> benchmark (CLI and conf files details, please!), what is the
-> mkfs.xfs output, and how many CPUs/RAM do you have on the machines
-> you are testing?  i.e. please document them sufficiently so that
-> other people can verify your results.
-> 
-
-All tests were done with random writes. I am sharing complete test
-script and config details.
-
-mkfs output
-===========
-meta-data=/dev/nvme2n1           isize=512    agcount=128, 
-agsize=117188604 blks
-          =                       sectsz=4096  attr=2, projid32bit=1
-          =                       crc=1        finobt=1, sparse=1, rmapbt=1
-          =                       reflink=1    bigtime=1 inobtcount=1 
-nrext64=1
-          =                       exchange=0   metadir=0
-data     =                       bsize=4096   blocks=15000141312, imaxpct=1
-          =                       sunit=4      swidth=32 blks
-naming   =version 2              bsize=4096   ascii-ci=0, ftype=1, parent=0
-log      =internal log           bsize=4096   blocks=521728, version=2
-          =                       sectsz=4096  sunit=1 blks, lazy-count=1
-realtime =none                   extsz=4096   blocks=0, rtextents=0
-          =                       rgcount=0    rgsize=0 extents
-          =                       zoned=0      start=0 reserved=0
-
-Script to issue the IO
-======================
-mkfs.xfs -f /dev/nvme2n1
-mount /dev/nvme2n1 /mnt
-
-sync
-echo 3 > /proc/sys/vm/drop_caches
-
-for i in {1..12}; do
-         mkdir -p /mnt/dir$i
-done
-
-fio job_nvme.fio
-
-umount /mnt
-echo 3 > /proc/sys/vm/drop_caches
-sync
-
-File job_nvme.fio
-=================
-[global]
-bs=4k
-iodepth=32
-rw=randwrite
-ioengine=io_uring
-nrfiles=12
-numjobs=1                # Each job writes to a different file
-size=12g
-direct=0                 # Buffered I/O to trigger writeback
-group_reporting=1
-create_on_open=1
-name=test
-
-[job1]
-directory=/mnt/dir1
-
-[job2]
-directory=/mnt/dir2
+I think this needs to be abstracted to proper helper like
+bdi_dirty_exceeded() as a preparatory patch. We don't want filesystems to
+mess with wb internals like this...
 
 ...
-...
 
-[job12]
-directory=/mnt/dir12
+> @@ -994,18 +1003,19 @@ static long wb_split_bdi_pages(struct bdi_writeback *wb, long nr_pages)
+>   * total active write bandwidth of @bdi.
+>   */
+>  static void bdi_split_work_to_wbs(struct backing_dev_info *bdi,
+> +				  struct bdi_writeback_ctx *bdi_wb_ctx,
+>  				  struct wb_writeback_work *base_work,
+>  				  bool skip_if_busy)
+>  {
+>  	struct bdi_writeback *last_wb = NULL;
+> -	struct bdi_writeback *wb = list_entry(&bdi->wb_list,
+> +	struct bdi_writeback *wb = list_entry(&bdi_wb_ctx->wb_list,
+>  					      struct bdi_writeback, bdi_node);
+>  
+>  	might_sleep();
+>  restart:
+>  	rcu_read_lock();
+> -	list_for_each_entry_continue_rcu(wb, &bdi->wb_list, bdi_node) {
+> -		DEFINE_WB_COMPLETION(fallback_work_done, bdi);
+> +	list_for_each_entry_continue_rcu(wb, &bdi_wb_ctx->wb_list, bdi_node) {
+> +		DEFINE_WB_COMPLETION(fallback_work_done, bdi_wb_ctx);
+>  		struct wb_writeback_work fallback_work;
+>  		struct wb_writeback_work *work;
+>  		long nr_pages;
 
-Number of CPUs = 128
-System RAM = 128G
+I think bdi_split_work_to_wbs() should stay as is (i.e., no additional
+bdi_writeback_ctx) and instead it should iterate over all writeback
+contexts and split work among them as well.
 
-> Also, what is the raw device performance and how close to that are
-> we getting through the filesystem?
+> @@ -2371,7 +2387,7 @@ static void __wakeup_flusher_threads_bdi(struct backing_dev_info *bdi,
+>  	if (!bdi_has_dirty_io(bdi))
+>  		return;
+>  
+> -	list_for_each_entry_rcu(wb, &bdi->wb_list, bdi_node)
+> +	list_for_each_entry_rcu(wb, &bdi->wb_ctx[0]->wb_list, bdi_node)
+>  		wb_start_writeback(wb, reason);
+>  }
+>  
+> @@ -2427,7 +2443,8 @@ static void wakeup_dirtytime_writeback(struct work_struct *w)
+>  	list_for_each_entry_rcu(bdi, &bdi_list, bdi_list) {
+>  		struct bdi_writeback *wb;
+>  
+> -		list_for_each_entry_rcu(wb, &bdi->wb_list, bdi_node)
+> +		list_for_each_entry_rcu(wb, &bdi->wb_ctx[0]->wb_list,
+> +					bdi_node)
+>  			if (!list_empty(&wb->b_dirty_time))
+>  				wb_wakeup(wb);
+>  	}
+> @@ -2730,7 +2747,7 @@ static void __writeback_inodes_sb_nr(struct super_block *sb, unsigned long nr,
+>  				     enum wb_reason reason, bool skip_if_busy)
+>  {
+>  	struct backing_dev_info *bdi = sb->s_bdi;
+> -	DEFINE_WB_COMPLETION(done, bdi);
+> +	DEFINE_WB_COMPLETION(done, bdi->wb_ctx[0]);
+>  	struct wb_writeback_work work = {
+>  		.sb			= sb,
+>  		.sync_mode		= WB_SYNC_NONE,
+> @@ -2744,7 +2761,8 @@ static void __writeback_inodes_sb_nr(struct super_block *sb, unsigned long nr,
+>  		return;
+>  	WARN_ON(!rwsem_is_locked(&sb->s_umount));
+>  
+> -	bdi_split_work_to_wbs(sb->s_bdi, &work, skip_if_busy);
+> +	bdi_split_work_to_wbs(sb->s_bdi, bdi->wb_ctx[0], &work,
+> +			      skip_if_busy);
+>  	wb_wait_for_completion(&done);
+>  }
+>  
+> @@ -2808,7 +2826,7 @@ EXPORT_SYMBOL(try_to_writeback_inodes_sb);
+>  void sync_inodes_sb(struct super_block *sb)
+>  {
+>  	struct backing_dev_info *bdi = sb->s_bdi;
+> -	DEFINE_WB_COMPLETION(done, bdi);
+> +	DEFINE_WB_COMPLETION(done, bdi->wb_ctx[0]);
+>  	struct wb_writeback_work work = {
+>  		.sb		= sb,
+>  		.sync_mode	= WB_SYNC_ALL,
+
+Above places will clearly need more adaptation to work with multiple
+writeback contexts (and several places below as well). That can happen in
+later patches but it would be good to have some FIXME comments before them
+to make it easy to verify we don't miss some place. In fact, I think it
+might be easier to review if you just introduced for_each_bdi_wb_context()
+macro with trivial implementation in this patch and used it where
+appropriate instead of hardcoding wb_ctx[0] in places where we actually
+need to iterate over all contexts. At least in the places where we don't
+really need anything fancier than "call this for all writeback contexts in
+the bdi" which seems to be a vast majority of cases. The complex cases can
+be handled with FIXME comments and dealt with in later patches.
+
+> diff --git a/fs/fuse/file.c b/fs/fuse/file.c
+> index 4adcf09d4b01..8c823a661139 100644
+> --- a/fs/fuse/file.c
+> +++ b/fs/fuse/file.c
+> @@ -1833,8 +1833,8 @@ static void fuse_writepage_finish(struct fuse_writepage_args *wpa)
+>  		 * contention and noticeably improves performance.
+>  		 */
+>  		iomap_finish_folio_write(inode, ap->folios[i], 1);
+> -		dec_wb_stat(&bdi->wb, WB_WRITEBACK);
+> -		wb_writeout_inc(&bdi->wb);
+> +		dec_wb_stat(&bdi->wb_ctx[0]->wb, WB_WRITEBACK);
+> +		wb_writeout_inc(&bdi->wb_ctx[0]->wb);
+>  	}
+>  
+>  	wake_up(&fi->page_waitq);
+> @@ -2017,7 +2017,7 @@ static void fuse_writepage_args_page_fill(struct fuse_writepage_args *wpa, struc
+>  	ap->descs[folio_index].offset = offset;
+>  	ap->descs[folio_index].length = len;
+>  
+> -	inc_wb_stat(&inode_to_bdi(inode)->wb, WB_WRITEBACK);
+> +	inc_wb_stat(&inode_to_bdi(inode)->wb_ctx[0]->wb, WB_WRITEBACK);
+>  }
+>  
+
+These seem to be gone in current upstream kernel.
+
+> diff --git a/fs/nfs/internal.h b/fs/nfs/internal.h
+> index c0a44f389f8f..5b3c84104b5b 100644
+> --- a/fs/nfs/internal.h
+> +++ b/fs/nfs/internal.h
+> @@ -857,7 +857,8 @@ static inline void nfs_folio_mark_unstable(struct folio *folio,
+>  		 * writeback is happening on the server now.
+>  		 */
+>  		node_stat_mod_folio(folio, NR_WRITEBACK, nr);
+> -		wb_stat_mod(&inode_to_bdi(inode)->wb, WB_WRITEBACK, nr);
+> +		wb_stat_mod(&inode_to_bdi(inode)->wb_ctx[0]->wb,
+> +			    WB_WRITEBACK, nr);
+>  		__mark_inode_dirty(inode, I_DIRTY_DATASYNC);
+>  	}
+>  }
+> diff --git a/fs/nfs/write.c b/fs/nfs/write.c
+> index 647c53d1418a..4317b93bc2af 100644
+> --- a/fs/nfs/write.c
+> +++ b/fs/nfs/write.c
+> @@ -865,9 +865,10 @@ static void nfs_folio_clear_commit(struct folio *folio)
+>  {
+>  	if (folio) {
+>  		long nr = folio_nr_pages(folio);
+> +		struct inode *inode = folio->mapping->host;
+>  
+>  		node_stat_mod_folio(folio, NR_WRITEBACK, -nr);
+> -		wb_stat_mod(&inode_to_bdi(folio->mapping->host)->wb,
+> +		wb_stat_mod(&inode_to_bdi(inode)->wb_ctx[0]->wb,
+>  			    WB_WRITEBACK, -nr);
+>  	}
+>  }
+
+Above two hunks need some helper as well so that we don't leak internal wb
+details into filesystems. I think you should use fetch_bdi_writeback_ctx()
+here?
+
+> @@ -104,6 +105,7 @@ struct wb_completion {
+>   */
+>  struct bdi_writeback {
+>  	struct backing_dev_info *bdi;	/* our parent bdi */
+> +	struct bdi_writeback_ctx *bdi_wb_ctx;
+>  
+>  	unsigned long state;		/* Always use atomic bitops on this */
+>  	unsigned long last_old_flush;	/* last old data flush */
+> @@ -160,6 +162,16 @@ struct bdi_writeback {
+>  #endif
+>  };
+>  
+> +struct bdi_writeback_ctx {
+> +	struct bdi_writeback wb;  /* the root writeback info for this bdi */
+> +	struct list_head wb_list; /* list of all wbs */
+> +#ifdef CONFIG_CGROUP_WRITEBACK
+> +	struct radix_tree_root cgwb_tree; /* radix tree of active cgroup wbs */
+> +	struct rw_semaphore wb_switch_rwsem; /* no cgwb switch while syncing */
+> +#endif
+> +	wait_queue_head_t wb_waitq;
+> +};
+> +
 >
+>  struct backing_dev_info {
+>  	u64 id;
+>  	struct rb_node rb_node; /* keyed by ->id */
+> @@ -183,15 +195,11 @@ struct backing_dev_info {
+>  	 */
+>  	unsigned long last_bdp_sleep;
+>  
+> -	struct bdi_writeback wb;  /* the root writeback info for this bdi */
+> -	struct list_head wb_list; /* list of all wbs */
+> +	int nr_wb_ctx;
+> +	struct bdi_writeback_ctx **wb_ctx;
+>  #ifdef CONFIG_CGROUP_WRITEBACK
+> -	struct radix_tree_root cgwb_tree; /* radix tree of active cgroup wbs */
+>  	struct mutex cgwb_release_mutex;  /* protect shutdown of wb structs */
+> -	struct rw_semaphore wb_switch_rwsem; /* no cgwb switch while syncing */
+>  #endif
+> -	wait_queue_head_t wb_waitq;
+> -
+>  	struct device *dev;
+>  	char dev_name[64];
+>  	struct device *owner;
+...
+> diff --git a/include/linux/backing-dev.h b/include/linux/backing-dev.h
+> index e721148c95d0..92674543ac8a 100644
+> --- a/include/linux/backing-dev.h
+> +++ b/include/linux/backing-dev.h
+> @@ -148,11 +148,20 @@ static inline bool mapping_can_writeback(struct address_space *mapping)
+>  	return inode_to_bdi(mapping->host)->capabilities & BDI_CAP_WRITEBACK;
+>  }
+>  
+> +static inline struct bdi_writeback_ctx *
+> +fetch_bdi_writeback_ctx(struct inode *inode)
+> +{
+> +	struct backing_dev_info *bdi = inode_to_bdi(inode);
+> +
+> +	return bdi->wb_ctx[0];
+> +}
 
-Raw IO performance BM1743 SSD
-fio -iodepth=32 --rw=randwrite -direct=1 -ioengine=io_uring -bs=4K 
--numjobs=1 -size=100G -group_reporting -filename=/dev/nvme2n1 
--name=direct_test
-write: IOPS=117k, BW=457MiB/s (479MB/s)(100GiB/224303msec)
+I think a better name for this function would be inode_writeback_ctx().
 
-Raw IO performance PM9A3 SSD
-write: IOPS=546k, BW=2132MiB/s (2235MB/s)(100GiB/48036msec)
+> @@ -187,16 +196,18 @@ static inline bool inode_cgwb_enabled(struct inode *inode)
+>   * Must be called under rcu_read_lock() which protects the returend wb.
+>   * NULL if not found.
+>   */
+> -static inline struct bdi_writeback *wb_find_current(struct backing_dev_info *bdi)
+> +static inline struct bdi_writeback *
+> +wb_find_current(struct backing_dev_info *bdi,
+> +		struct bdi_writeback_ctx *bdi_wb_ctx)
 
->>      - NVMe device PM9A3 SSD
-> 
-> 130-180k random 4kB write IOPS, ~4GB/s write bandwidth. So roughly
-> double the physical throughput of the BM1743, and ....
-> 
->>          Base XFS                : 368 MiB/s
->>          Parallel Writeback XFS  : 1634 MiB/s  (+344%)
-> 
-> .... it gets roughly double the physical throughput of the BM1743.
-> 
+This function doesn't need bdi anymore so why do you keep passing it?
 
-BM1743 is a large IU device with a 16K IU size, which is not optimized
-for my 4K IO operations, resulting in lower throughput. In contrast,
-PM9A3 is a faster device that handles IO operations more efficiently.
+>  {
+>  	struct cgroup_subsys_state *memcg_css;
+>  	struct bdi_writeback *wb;
+>  
+>  	memcg_css = task_css(current, memory_cgrp_id);
+>  	if (!memcg_css->parent)
+> -		return &bdi->wb;
+> +		return &bdi_wb_ctx->wb;
+>  
+> -	wb = radix_tree_lookup(&bdi->cgwb_tree, memcg_css->id);
+> +	wb = radix_tree_lookup(&bdi_wb_ctx->cgwb_tree, memcg_css->id);
+>  
+>  	/*
+>  	 * %current's blkcg equals the effective blkcg of its memcg.  No
+> @@ -217,12 +228,13 @@ static inline struct bdi_writeback *wb_find_current(struct backing_dev_info *bdi
+>   * wb_find_current().
+>   */
+>  static inline struct bdi_writeback *
+> -wb_get_create_current(struct backing_dev_info *bdi, gfp_t gfp)
+> +wb_get_create_current(struct backing_dev_info *bdi,
+> +		      struct bdi_writeback_ctx *bdi_wb_ctx, gfp_t gfp)
 
-> This doesn't feel like a writeback concurrency limited workload -
-> this feels more like a device IOPS and IO depth limited workload.
-> 
->>    B) Workload 6 files each of 20G in 6 directories(AGs)  - numjobs = 6
->>      - NVMe device BM1743 SSD
->>          Base XFS                : 305 MiB/s
->>          Parallel Writeback XFS  : 706 MiB/s  (+131%)
->>
->>      - NVMe device PM9A3 SSD
->>          Base XFS                : 315 MiB/s
->>          Parallel Writeback XFS  : 990 MiB/s  (+214%)
->>
->> Filesystem fragmentation
->> ========================
->> We also see that there is no increase in filesystem fragmentation
->> Number of extents per file:
-> 
-> Are these from running the workload on a freshly made (i.e. just run
-> mkfs.xfs, mount and run benchmark) filesystem, or do you reuse the
-> same fs for all tests?
+I think functions like wb_get_create_current(), wb_get_create() etc. should
+all be getting just struct bdi_writeback_ctx as argument because that
+really specifies where we want the wb to be created. In some cases we do
+need to get up to the struct backing_dev_info so you'll need to add struct
+backing_dev_info pointer to bdi_writeback_ctx but I think that's fine.
 
-I create a new file system for each test run.
+> diff --git a/mm/backing-dev.c b/mm/backing-dev.c
+> index 783904d8c5ef..8b7125349f6c 100644
+> --- a/mm/backing-dev.c
+> +++ b/mm/backing-dev.c
+> @@ -84,13 +84,14 @@ static void collect_wb_stats(struct wb_stats *stats,
+>  }
+>  
+>  #ifdef CONFIG_CGROUP_WRITEBACK
+> +
+>  static void bdi_collect_stats(struct backing_dev_info *bdi,
+>  			      struct wb_stats *stats)
+>  {
+>  	struct bdi_writeback *wb;
+>  
+>  	rcu_read_lock();
+> -	list_for_each_entry_rcu(wb, &bdi->wb_list, bdi_node) {
+> +	list_for_each_entry_rcu(wb, &bdi->wb_ctx[0]->wb_list, bdi_node) {
+>  		if (!wb_tryget(wb))
+>  			continue;
+>  
+> @@ -103,7 +104,7 @@ static void bdi_collect_stats(struct backing_dev_info *bdi,
+>  static void bdi_collect_stats(struct backing_dev_info *bdi,
+>  			      struct wb_stats *stats)
+>  {
+> -	collect_wb_stats(stats, &bdi->wb);
+> +	collect_wb_stats(stats, &bdi->wb_ctx[0]->wb);
+>  }
+>  #endif
+>  
+> @@ -149,7 +150,7 @@ static int bdi_debug_stats_show(struct seq_file *m, void *v)
+>  		   stats.nr_io,
+>  		   stats.nr_more_io,
+>  		   stats.nr_dirty_time,
+> -		   !list_empty(&bdi->bdi_list), bdi->wb.state);
+> +		   !list_empty(&bdi->bdi_list), bdi->wb_ctx[0]->wb.state);
+>  
+>  	return 0;
+>  }
+> @@ -193,14 +194,14 @@ static void wb_stats_show(struct seq_file *m, struct bdi_writeback *wb,
+>  static int cgwb_debug_stats_show(struct seq_file *m, void *v)
+>  {
+>  	struct backing_dev_info *bdi = m->private;
+> +	struct bdi_writeback *wb;
+>  	unsigned long background_thresh;
+>  	unsigned long dirty_thresh;
+> -	struct bdi_writeback *wb;
+>  
+>  	global_dirty_limits(&background_thresh, &dirty_thresh);
+>  
+>  	rcu_read_lock();
+> -	list_for_each_entry_rcu(wb, &bdi->wb_list, bdi_node) {
+> +	list_for_each_entry_rcu(wb, &bdi->wb_ctx[0]->wb_list, bdi_node) {
+>  		struct wb_stats stats = { .dirty_thresh = dirty_thresh };
+>  
+>  		if (!wb_tryget(wb))
+> @@ -520,6 +521,7 @@ static int wb_init(struct bdi_writeback *wb, struct backing_dev_info *bdi,
+>  	memset(wb, 0, sizeof(*wb));
+>  
+>  	wb->bdi = bdi;
+> +	wb->bdi_wb_ctx = bdi->wb_ctx[0];
+>  	wb->last_old_flush = jiffies;
+>  	INIT_LIST_HEAD(&wb->b_dirty);
+>  	INIT_LIST_HEAD(&wb->b_io);
+> @@ -643,11 +645,12 @@ static void cgwb_release(struct percpu_ref *refcnt)
+>  	queue_work(cgwb_release_wq, &wb->release_work);
+>  }
+>  
+> -static void cgwb_kill(struct bdi_writeback *wb)
+> +static void cgwb_kill(struct bdi_writeback *wb,
+> +		      struct bdi_writeback_ctx *bdi_wb_ctx)
+>  {
+>  	lockdep_assert_held(&cgwb_lock);
+>  
+> -	WARN_ON(!radix_tree_delete(&wb->bdi->cgwb_tree, wb->memcg_css->id));
+> +	WARN_ON(!radix_tree_delete(&bdi_wb_ctx->cgwb_tree, wb->memcg_css->id));
 
-> 
->>    A) Workload 6 files each 1G in single directory(AG)   - numjobs = 1
->>          Base XFS                : 17
->>          Parallel Writeback XFS  : 17
-> 
-> Yup, this implies a sequential write workload....
-> 
+Why don't you use wb->bdi_wb_ctx instead of passing bdi_wb_ctx as a
+function argument?
 
-This is random IO. As the workload is small the extents merge more.
+> @@ -662,6 +665,7 @@ static void cgwb_remove_from_bdi_list(struct bdi_writeback *wb)
+>  }
+>  
+>  static int cgwb_create(struct backing_dev_info *bdi,
+> +		       struct bdi_writeback_ctx *bdi_wb_ctx,
+>  		       struct cgroup_subsys_state *memcg_css, gfp_t gfp)
+>  {
 
->>    B) Workload 12 files each of 1G to 12 directories(AGs)- numjobs = 12
->>          Base XFS                : 166593
->>          Parallel Writeback XFS  : 161554
-> 
-> which implies 144 files, and so over 1000 extents per file. Which
-> means about 1MB per extent and is way, way worse than it should be
-> for sequential write workloads.
-> 
+I'd pass *only* bdi_writeback_ctx here.
 
-Previous results of fragmentation were taken with randwrite. I took
-fresh data for sequential IO and here are the results.
-number of extents reduces a lot for seq IO:
-   A) Workload 6 files each 1G in single directory(AG)   - numjobs = 1
-         Base XFS                : 1
-         Parallel Writeback XFS  : 1
+> @@ -813,6 +818,7 @@ struct bdi_writeback *wb_get_lookup(struct backing_dev_info *bdi,
+>   * create one.  See wb_get_lookup() for more details.
+>   */
+>  struct bdi_writeback *wb_get_create(struct backing_dev_info *bdi,
+> +				    struct bdi_writeback_ctx *bdi_wb_ctx,
+>  				    struct cgroup_subsys_state *memcg_css,
+>  				    gfp_t gfp)
+>  {
 
-   B) Workload 12 files each of 1G to 12 directories(AGs)- numjobs = 12
-         Base XFS                : 4
-         Parallel Writeback XFS  : 3
+And here as well.
 
-   C) Workload 6 files each of 20G to 6 directories(AGs) - numjobs = 6
-         Base XFS                : 4
-         Parallel Writeback XFS  : 4
+> -static void cgwb_bdi_register(struct backing_dev_info *bdi)
+> +static void cgwb_bdi_register(struct backing_dev_info *bdi,
+> +		struct bdi_writeback_ctx *bdi_wb_ctx)
 
->>
->>    C) Workload 6 files each of 20G to 6 directories(AGs) - numjobs = 6
->>          Base XFS                : 3173716
->>          Parallel Writeback XFS  : 3364984
-> 
-> 36 files, 720GB and 3.3m extents, which is about 100k extents per
-> file for an average extent size of 200kB. That would explain why it
-> performed roughly the same on both devices - they both have similar
-> random 128kB write IO performance...
-> 
-> But that fragmentation pattern is bad and shouldn't be occurring fro
-> sequential writes. Speculative EOF preallocation should be almost
-> entirely preventing this sort of fragmentation for concurrent
-> sequential write IO and so we should be seeing extent sizes of at
-> least hundreds of MBs for these file sizes.
-> 
-> i.e. this feels to me like you test is triggering some underlying
-> delayed allocation defeat mechanism that is causing physical
-> writeback IO sizes to collapse. This turns what should be a
-> bandwitdh limited workload running at full device bandwidth into an
-> IOPS and IO depth limited workload.
-> 
-> In adding writeback concurrency to this situation, it enables
-> writeback to drive deeper IO queues and so extract more small IO
-> performance from the device, thereby showing better performance for
-> the wrokload. The issue is that baseline writeback performance is
-> way below where I think it should be for the given IO workload (IIUC
-> the workload being run, hence questions about benchmarks, filesystem
-> configs and test hardware).
-> 
+Again no need for bdi here...
 
-I have tried to share config, benchmarking script and data,
-if you feel some details are missing please let me know.
+>  {
+>  	spin_lock_irq(&cgwb_lock);
+> -	list_add_tail_rcu(&bdi->wb.bdi_node, &bdi->wb_list);
+> +	list_add_tail_rcu(&bdi_wb_ctx->wb.bdi_node, &bdi_wb_ctx->wb_list);
+>  	spin_unlock_irq(&cgwb_lock);
+>  }
+>  
 
-> Hence while I certainly agree that writeback concurrency is
-> definitely needed, I think that the results you are getting here are
-> a result of some other issue that writeback concurrency is
-> mitigating. The underlying fragmentation issue needs to be
-> understood (and probably solved) before we can draw any conclusions
-> about the performance gains that concurrent writeback actually
-> provides on these workloads and devices...
-> 
+								Honza
 
-In these tests we've observed that fragmentation remains consistent 
-across sequential and random IO workloads. Your feedback on this would 
-be valuable.
-
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
 
 _______________________________________________
