@@ -2,137 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1ED95BFE945
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Oct 2025 01:34:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC052BFF0C0
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Oct 2025 05:55:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Subject:MIME-Version:Message-Id:Date:To:From:Sender:Reply-To:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=FB3BCs8SJn1jxsKrzaI2PnXY1J4nHE+fkk7dHcAEnXw=; b=EaB2/TA74UBRFmYWGtgCNR6Jmg
-	10n6sG5VxZuPdRQEJFumMcIrmc3U3rneAennWCJt+B1eARHNdBDU6W/W39sWZNysO3cSgw42V8XLu
-	+oDUfqqt9FK61eISe1hsAXBwQIXa7InUowrqIlbxhLXJ0NcJoqXLMEDTaPQr64sqloUM=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=l5DAI/jKfNKX3Ps+YO3nRvdHRpJXvQE7AvoaD6X8gdY=; b=D68+hwzVQY3mTVMBL8hSLtthQd
+	m5KvuPkBGQQ0Qfr9u3VNPBvsD50PNhvi7tFohv1AMeEYVoRELXhZ0O9sAoibCwxJqtVaJrT2pJBB1
+	THbpfG4YNxjOQqjtpTtkrO7o+O3fa4tmOg6IMiMKQsF9Fvc5L7XiKGFLeD3YaArCtCYU=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vBiLE-0002eD-As;
-	Wed, 22 Oct 2025 23:34:05 +0000
+	id 1vBmPc-0001Tp-8m;
+	Thu, 23 Oct 2025 03:54:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kartikey406@gmail.com>) id 1vBiLC-0002dz-IC
+ (envelope-from <hexiaole1994@126.com>) id 1vBmPZ-0001Ti-US
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 22 Oct 2025 23:34:03 +0000
+ Thu, 23 Oct 2025 03:54:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1mHGULrbhrQZXqL21jsyCNIXz//QNSU5dqpIYMZ4CNA=; b=lXtZVsyG5Gqzn8sgwbkOAVlwxd
- OMZXbKBjQ7Oi5sJnYyGWofbzgTtoAmHQztkiEz3WwTMpJLanhFswQFATAFHRtgTPrZLf0c9/9BRh6
- O7SkPo9Bkp6qyehYeF6CWTGwS+mqc2xo05Z9iyrOCe7izE7i/t9GlVtTfbv52Bx1RaHw=;
+ bh=4DpwYpAE5ORP/RxAnKvHkfWEtGn9A0e6aZr4NNOu3Tw=; b=TNPTNcQUtzoBJ9iXioHdeTgECw
+ FN8du9dGQi/zRC0dL1h8BHHQM+a8ZdXulTdC6jaQaUBlEXP897xbV6FYBtmJHqvJvSswBgusn7FcI
+ MqwtRubjQUd23Hm1iqBzoPiiCsgH9ImPMU2hjjwbe5iJjnAx7/PqfBFIggpuzmYF2HBc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=1mHGULrbhrQZXqL21jsyCNIXz//QNSU5dqpIYMZ4CNA=; b=j
- vTeJ4+KGlW2uVHkfZZknAhwXXOXoOhSAvbjRe+e3IKl0AoS/D9zDth5hIy5QNvc09CqsEFt5b6gNx
- ygZ5t6Jn+taQMd04vlXyPBWf03IUabAtaRd9MPwtACn7g1Xotqhl0wnTP1Pxk2Fv34Gpnd21/L/tH
- M7TBSnpNbW9pT/hc=;
-Received: from mail-pj1-f43.google.com ([209.85.216.43])
+ List-Owner:List-Archive; bh=4DpwYpAE5ORP/RxAnKvHkfWEtGn9A0e6aZr4NNOu3Tw=; b=Z
+ wv6nJLo6/jKYHk/unAZU/Sg9Tr8j8ATt4+4F4FCoX7OA9d8LapyLMl7bko0Ec6HokmUduzmAmBlWj
+ HuFhHKVlN2iKQoG4J64umDN5Y4cvpBBeCFtThrH8wYiUONKI9cCU3LwPT7JLybROXycEynAwnoPms
+ tTa9yyuWJy3RPCSE=;
+Received: from m16.mail.126.com ([117.135.210.9])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vBiLC-0006EZ-Rl for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 22 Oct 2025 23:34:03 +0000
-Received: by mail-pj1-f43.google.com with SMTP id
- 98e67ed59e1d1-33b9dc8d517so239850a91.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 22 Oct 2025 16:34:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761176037; x=1761780837; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1mHGULrbhrQZXqL21jsyCNIXz//QNSU5dqpIYMZ4CNA=;
- b=LzioXNnSoAOcdztT+H07kNOHFyptqjmW4NUkQ0Npkz9J4y6nIBAbeSE/E2J521k0DM
- 4ci0dutwCoGh5xiPezV4+vmjbvGPAP9/EMrX7laXU082QDHWFz0Xwqvgdbr0it6aZoTS
- 5DLQy1zSPM9JXeyvol4sT5nvVe6baAGje5kgZP8shjqeDy8ZJeJzJO2C6XNQsN2mEfPi
- DZzV0NYDwhW5rKcxuaPaVqVMXafyICbuyO0NSAnlBqnp//iZ0eToPx9XyIiyQ2tlNxy8
- hdJPXQns5MnD9G/ncdU7r96d9xoJpMUJeusAgUl5dfLz2zwfqycJsJHbqf6586+Wkp8+
- mSvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761176037; x=1761780837;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1mHGULrbhrQZXqL21jsyCNIXz//QNSU5dqpIYMZ4CNA=;
- b=KKrDubyeqAeVw2m79GrbxWucVCnGPXzPN17LeAedqgoIHxVlEa6bUIf48MSn2renKb
- miSHCV/+ItSxzbg4MqKBZO9TpbQ1GUL/SxJns6+E/yiSg+UPIVcdxNct+qoDV5JGRpFa
- wfINpQx1DJN+246/9KEBQc/lzdZlY+e9r2Bf2XasJu2D/m2oKrXbi2xZxVy7FpGABzEY
- BhA9FL1+EGhYj5j/e/QwQQk7N7yBuA25A1AyxTRcL6R1fkcgpq2sF846Z/aj0qiMattt
- cKdEt8Zrr/LnKcvjzqq9dKYy/6tJU67jT5Q32kGWQc3dHquhO0jiRh5BI4XuwPr6qlTo
- d2Tg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXtgX51YrSZjG9s+cVbZsdNLBH9tnd8bAeUBL4L840WZZaIvKY0tOlX5uhmzNr8oGNNiWTMbLEM5/kJVQEETQE3@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YxhmWJyGBajM95+pMeXaeFFGZjy8bf2tx1e/E14WsgPTXQXKqy6
- vyu4n0Q1xXIj0bwXxyElOrHOSNXMXqu9mUnpxsWWRFLc5bluwwTO6LXxckfQbXL7
-X-Gm-Gg: ASbGncsTJz8vg6QGk0/S1x+l3TS9Ea9Sv4LyjRY1Cu5+niQpUr3vRPm544bycdD0J8g
- tMAHsFAc8AxkFV4aPfHO7nijL9aC/Be4+N9a026ICkMCOqbqqRvKT6cvIFQYKffSNh/a8mo0qcM
- ncNAYAqqhsuNdI17vG/5tHgNARB+uw9OQC0pbPduVPhxlq3YvP7SMFIWeNXdyxGhY1EMavpujWY
- uh2VO+NMCvck9KmJaZSaGLRaZOsH8mK0KXP6XKv47xMhrA1Yr21JdhZi4a+yFEwfPeIHqevTkMc
- OU03uWh22AvlbHJo1LofradbGr+bCoukBc1Q8GGV2AlK2KKchNOPIOTtIM8CX/hmX0hQZ8NmRet
- 8BCU87ObNsT/RDtzTPNOshot1ge/n5ek04y7JXPqw9uAhty+1IZc9eT0MPKGMR2ldlhZf8MHH/q
- V2ePMO2sGPlliHWtYBTV9h36PDRLSoLKUtLp8=
-X-Google-Smtp-Source: AGHT+IEpDb5bUgRrfuih7BhbijCAQcSf9aUmP/xnPQr+15ne4Jw27HzUw1UD5BeHNG7z0+PEo93KNw==
-X-Received: by 2002:a17:90b:2412:b0:33e:1ed8:334d with SMTP id
- 98e67ed59e1d1-33e1ed835a8mr5313886a91.16.1761176036922; 
- Wed, 22 Oct 2025 16:33:56 -0700 (PDT)
-Received: from deepanshu-kernel-hacker..
- ([2405:201:682f:389d:9293:1f1b:ba8e:b77d])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-33e2d19d364sm3023608a91.10.2025.10.22.16.33.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Oct 2025 16:33:56 -0700 (PDT)
-From: Deepanshu Kartikey <kartikey406@gmail.com>
-To: jaegeuk@kernel.org, chao@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
-Date: Thu, 23 Oct 2025 05:03:47 +0530
-Message-ID: <20251022233349.102728-1-kartikey406@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1vBmPZ-0007nS-2A for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 23 Oct 2025 03:54:49 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
+ s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=4D
+ pwYpAE5ORP/RxAnKvHkfWEtGn9A0e6aZr4NNOu3Tw=; b=C6+sWVJEVzvM2PIF9M
+ t9svG50KJF/E+zkic8YawjtpYjcYWQI2hXHJwo+rlLJWceaRoVfIO20iyBBEwwKv
+ hdG0iFkwExEP/X5S1lSEoAWgQCK4d3bGxAvnSXAJy95JBKvwYbpv2fkEY/dDzCkW
+ zLI6xP8t5Bp6SautiW9fX0xYU=
+Received: from gt-ubuntu22-04-cmd-v3-0-64gb-25m.. (unknown [])
+ by gzga-smtp-mtada-g1-2 (Coremail) with SMTP id
+ _____wDnb5v1pvloVjSrAQ--.57365S2; 
+ Thu, 23 Oct 2025 11:54:30 +0800 (CST)
+From: Xiaole He <hexiaole1994@126.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Thu, 23 Oct 2025 11:54:16 +0800
+Message-Id: <20251023035416.7943-1-hexiaole1994@126.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+X-CM-TRANSID: _____wDnb5v1pvloVjSrAQ--.57365S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW3Gr43CFWDXrW7ur4fCw4Durg_yoW7WF4Up3
+ yxCF15Kw45Zw48Xa92vr1kCF1S9w48JFWxGrsFy34jvay5X34fWF1kt345ZrWvqF4rJF1D
+ ZF4Y9a4UJw15GaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0ziK0PfUUUUU=
+X-Originating-IP: [36.103.199.50]
+X-CM-SenderInfo: 5kh0xt5rohimizu6ij2wof0z/1tbijgDvBmj5ov08bwAAs6
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  F2FS can mount filesystems with corrupted directory depth
- values that get runtime-clamped to MAX_DIR_HASH_DEPTH. When RENAME_WHITEOUT
- operations are performed on such directories, f2fs_rename performs [...] 
+ Content preview: The age extent cache uses last_blocks (derived from
+ allocated_data_blocks)
+ to determine data age. However, there's a conflict between the deletion marker
+ (last_blocks=0) and legitimate last_blocks=0 c [...] 
  Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [kartikey406(at)gmail.com]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [kartikey406(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.43 listed in wl.mailspike.net]
+ [hexiaole1994(at)126.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit [hexiaole1994(at)126.com]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [117.135.210.9 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vBiLC-0006EZ-Rl
-Subject: [f2fs-dev] [PATCH] f2fs: invalidate dentry cache on failed whiteout
- creation
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+X-Headers-End: 1vBmPZ-0007nS-2A
+Subject: [f2fs-dev] [PATCH v1] f2fs: fix age extent cache insertion skip on
+ counter overflow
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -144,60 +115,153 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Deepanshu Kartikey <kartikey406@gmail.com>,
- syzbot+632cf32276a9a564188d@syzkaller.appspotmail.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Xiaole He <hexiaole1994@126.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-RjJGUyBjYW4gbW91bnQgZmlsZXN5c3RlbXMgd2l0aCBjb3JydXB0ZWQgZGlyZWN0b3J5IGRlcHRo
-IHZhbHVlcyB0aGF0CmdldCBydW50aW1lLWNsYW1wZWQgdG8gTUFYX0RJUl9IQVNIX0RFUFRILiBX
-aGVuIFJFTkFNRV9XSElURU9VVApvcGVyYXRpb25zIGFyZSBwZXJmb3JtZWQgb24gc3VjaCBkaXJl
-Y3RvcmllcywgZjJmc19yZW5hbWUgcGVyZm9ybXMKZGlyZWN0b3J5IG1vZGlmaWNhdGlvbnMgKHVw
-ZGF0aW5nIHRhcmdldCBlbnRyeSBhbmQgZGVsZXRpbmcgc291cmNlCmVudHJ5KSBiZWZvcmUgYXR0
-ZW1wdGluZyB0byBhZGQgdGhlIHdoaXRlb3V0IGVudHJ5IHZpYSBmMmZzX2FkZF9saW5rLgoKSWYg
-ZjJmc19hZGRfbGluayBmYWlscyBkdWUgdG8gdGhlIGNvcnJ1cHRlZCBkaXJlY3Rvcnkgc3RydWN0
-dXJlLCB0aGUKZnVuY3Rpb24gcmV0dXJucyBhbiBlcnJvciB0byBWRlMsIGJ1dCB0aGUgcGFydGlh
-bCBkaXJlY3RvcnkKbW9kaWZpY2F0aW9ucyBoYXZlIGFscmVhZHkgYmVlbiBjb21taXR0ZWQgdG8g
-ZGlzay4gVkZTIGFzc3VtZXMgdGhlCmVudGlyZSByZW5hbWUgb3BlcmF0aW9uIGZhaWxlZCBhbmQg
-ZG9lcyBub3QgdXBkYXRlIHRoZSBkZW50cnkgY2FjaGUsCmxlYXZpbmcgc3RhbGUgbWFwcGluZ3Mu
-CgpUaGlzIGNhdXNlcyBzdWJzZXF1ZW50IG9wZXJhdGlvbnMgdG8gdXNlIGNhY2hlZCBkZW50cnkg
-aW5mb3JtYXRpb24gdGhhdApubyBsb25nZXIgbWF0Y2hlcyB0aGUgb24tZGlzayBzdGF0ZS4gV2hl
-biBhIHNlY29uZCByZW5hbWUgdGFyZ2V0cyB0aGUKc2FtZSBlbnRyeSwgVkZTIGF0dGVtcHRzIHRv
-IGRlY3JlbWVudCBpX25saW5rIG9uIHRoZSBzdGFsZSBpbm9kZSwgd2hpY2gKbWF5IGFscmVhZHkg
-aGF2ZSBpX25saW5rPTAsIHRyaWdnZXJpbmcgYSBXQVJOSU5HIGluIGRyb3BfbmxpbmsoKS4KCkV4
-YW1wbGUgc2VxdWVuY2U6CjEuIEZpcnN0IHJlbmFtZSAoUkVOQU1FX1dISVRFT1VUKTogZmlsZTIg
-4oaSIGZpbGUxCiAgIC0gZjJmcyB1cGRhdGVzIGZpbGUxIGVudHJ5IG9uIGRpc2sgKHBvaW50cyB0
-byBpbm9kZSA4KQogICAtIGYyZnMgZGVsZXRlcyBmaWxlMiBlbnRyeSBvbiBkaXNrCiAgIC0gZjJm
-c19hZGRfbGluayh3aGl0ZW91dCkgZmFpbHMgKGNvcnJ1cHRlZCBkaXJlY3RvcnkpCiAgIC0gUmV0
-dXJucyBlcnJvciB0byBWRlMKICAgLSBWRlMgY2FjaGUgc3RpbGwgaGFzOiBmaWxlMSDihpIgaW5v
-ZGUgNyAoc3RhbGUhKQoKMi4gU2Vjb25kIHJlbmFtZTogZmlsZTMg4oaSIGZpbGUxCiAgIC0gVkZT
-IHVzZXMgc3RhbGUgY2FjaGU6IGZpbGUxIOKGkiBpbm9kZSA3CiAgIC0gVHJpZXMgdG8gZHJvcF9u
-bGluayBvbiBpbm9kZSA3IChpX25saW5rIGFscmVhZHkgMCkKICAgLSBXQVJOSU5HIGluIGRyb3Bf
-bmxpbmsoKQoKRml4IHRoaXMgYnkgZXhwbGljaXRseSBpbnZhbGlkYXRpbmcgb2xkX2RlbnRyeSBh
-bmQgbmV3X2RlbnRyeSB3aGVuCmYyZnNfYWRkX2xpbmsgZmFpbHMgZHVyaW5nIHdoaXRlb3V0IGNy
-ZWF0aW9uLiBUaGlzIGZvcmNlcyBWRlMgdG8KcmVmcmVzaCBmcm9tIGRpc2sgb24gc3Vic2VxdWVu
-dCBvcGVyYXRpb25zLCBlbnN1cmluZyBjYWNoZSBjb25zaXN0ZW5jeQpldmVuIHdoZW4gdGhlIHJl
-bmFtZSBwYXJ0aWFsbHkgc3VjY2VlZHMuCgpSZXByb2R1Y2VyOgoxLiBNb3VudCBGMkZTIGltYWdl
-IHdpdGggY29ycnVwdGVkIGlfY3VycmVudF9kZXB0aAoyLiByZW5hbWVhdDIoZmlsZTIsIGZpbGUx
-LCBSRU5BTUVfV0hJVEVPVVQpCjMuIHJlbmFtZWF0MihmaWxlMywgZmlsZTEsIDApCjQuIFN5c3Rl
-bSB0cmlnZ2VycyBXQVJOSU5HIGluIGRyb3BfbmxpbmsoKQoKUmVwb3J0ZWQtYnk6IHN5emJvdCs2
-MzJjZjMyMjc2YTlhNTY0MTg4ZEBzeXprYWxsZXIuYXBwc3BvdG1haWwuY29tClRlc3RlZC1ieTog
-c3l6Ym90KzYzMmNmMzIyNzZhOWE1NjQxODhkQHN5emthbGxlci5hcHBzcG90bWFpbC5jb20KQ2xv
-c2VzOiBodHRwczovL3N5emthbGxlci5hcHBzcG90LmNvbS9idWc/ZXh0aWQ9NjMyY2YzMjI3NmE5
-YTU2NDE4OGQKU2lnbmVkLW9mZi1ieTogRGVlcGFuc2h1IEthcnRpa2V5IDxrYXJ0aWtleTQwNkBn
-bWFpbC5jb20+Ci0tLQogZnMvZjJmcy9uYW1laS5jIHwgNiArKysrLS0KIDEgZmlsZSBjaGFuZ2Vk
-LCA0IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZnMvZjJmcy9u
-YW1laS5jIGIvZnMvZjJmcy9uYW1laS5jCmluZGV4IGI4ODI3NzFlNDY5OS4uNzEyNDc5YjdiOTNk
-IDEwMDY0NAotLS0gYS9mcy9mMmZzL25hbWVpLmMKKysrIGIvZnMvZjJmcy9uYW1laS5jCkBAIC0x
-MDUzLDkgKzEwNTMsMTEgQEAgc3RhdGljIGludCBmMmZzX3JlbmFtZShzdHJ1Y3QgbW50X2lkbWFw
-ICppZG1hcCwgc3RydWN0IGlub2RlICpvbGRfZGlyLAogCWlmICh3aGl0ZW91dCkgewogCQlzZXRf
-aW5vZGVfZmxhZyh3aGl0ZW91dCwgRklfSU5DX0xJTkspOwogCQllcnIgPSBmMmZzX2FkZF9saW5r
-KG9sZF9kZW50cnksIHdoaXRlb3V0KTsKLQkJaWYgKGVycikKKwkJaWYgKGVycikgeworCQkJZF9p
-bnZhbGlkYXRlKG9sZF9kZW50cnkpOworCQkJZF9pbnZhbGlkYXRlKG5ld19kZW50cnkpOwogCQkJ
-Z290byBwdXRfb3V0X2RpcjsKLQorCQl9CiAJCXNwaW5fbG9jaygmd2hpdGVvdXQtPmlfbG9jayk7
-CiAJCXdoaXRlb3V0LT5pX3N0YXRlICY9IH5JX0xJTktBQkxFOwogCQlzcGluX3VubG9jaygmd2hp
-dGVvdXQtPmlfbG9jayk7Ci0tIAoyLjQzLjAKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgt
-ZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3Jn
-ZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+The age extent cache uses last_blocks (derived from
+allocated_data_blocks) to determine data age. However, there's a
+conflict between the deletion
+marker (last_blocks=0) and legitimate last_blocks=0 cases when
+allocated_data_blocks overflows to 0 after reaching ULLONG_MAX.
+
+In this case, valid extents are incorrectly skipped due to the
+"if (!tei->last_blocks)" check in __update_extent_tree_range().
+
+This patch fixes the issue by:
+1. Reserving ULLONG_MAX as an invalid/deletion marker
+2. Limiting allocated_data_blocks to range [0, ULLONG_MAX-1]
+3. Using F2FS_EXTENT_AGE_INVALID for deletion scenarios
+4. Adjusting overflow age calculation from ULLONG_MAX to (ULLONG_MAX-1)
+
+Reproducer (using a patched kernel with allocated_data_blocks
+initialized to ULLONG_MAX - 3 for quick testing):
+
+Step 1: Mount and check initial state
+  # dd if=/dev/zero of=/tmp/test.img bs=1M count=100
+  # mkfs.f2fs -f /tmp/test.img
+  # mkdir -p /mnt/f2fs_test
+  # mount -t f2fs -o loop,age_extent_cache /tmp/test.img /mnt/f2fs_test
+  # cat /sys/kernel/debug/f2fs/status | grep "Block Age"
+  Allocated Data Blocks: 18446744073709551612 # ULLONG_MAX - 3
+  Inner Struct Count: tree: 1(0), node: 0
+
+Step 2: Create files and write data to trigger overflow
+  # touch /mnt/f2fs_test/{1,2,3,4}.txt; sync
+  # cat /sys/kernel/debug/f2fs/status | grep "Block Age"
+  Allocated Data Blocks: 18446744073709551613 # ULLONG_MAX - 2
+  Inner Struct Count: tree: 5(0), node: 1
+
+  # dd if=/dev/urandom of=/mnt/f2fs_test/1.txt bs=4K count=1; sync
+  # cat /sys/kernel/debug/f2fs/status | grep "Block Age"
+  Allocated Data Blocks: 18446744073709551614 # ULLONG_MAX - 1
+  Inner Struct Count: tree: 5(0), node: 2
+
+  # dd if=/dev/urandom of=/mnt/f2fs_test/2.txt bs=4K count=1; sync
+  # cat /sys/kernel/debug/f2fs/status | grep "Block Age"
+  Allocated Data Blocks: 18446744073709551615 # ULLONG_MAX
+  Inner Struct Count: tree: 5(0), node: 3
+
+  # dd if=/dev/urandom of=/mnt/f2fs_test/3.txt bs=4K count=1; sync
+  # cat /sys/kernel/debug/f2fs/status | grep "Block Age"
+  Allocated Data Blocks: 0 # Counter overflowed!
+  Inner Struct Count: tree: 5(0), node: 4
+
+Step 3: Trigger the bug - next write should create node but gets skipped
+  # dd if=/dev/urandom of=/mnt/f2fs_test/4.txt bs=4K count=1; sync
+  # cat /sys/kernel/debug/f2fs/status | grep "Block Age"
+  Allocated Data Blocks: 1
+  Inner Struct Count: tree: 5(0), node: 4
+
+  Expected: node: 5 (new extent node for 4.txt)
+  Actual: node: 4 (extent insertion was incorrectly skipped due to
+  last_blocks = allocated_data_blocks = 0 in __get_new_block_age)
+
+After this fix, the extent node is correctly inserted and node count
+becomes 5 as expected.
+
+Signed-off-by: Xiaole He <hexiaole1994@126.com>
+---
+ fs/f2fs/extent_cache.c | 5 +++--
+ fs/f2fs/f2fs.h         | 6 ++++++
+ fs/f2fs/segment.c      | 9 +++++++--
+ 3 files changed, 16 insertions(+), 4 deletions(-)
+
+diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
+index 33e09c453c70..0ed84cc065a7 100644
+--- a/fs/f2fs/extent_cache.c
++++ b/fs/f2fs/extent_cache.c
+@@ -808,7 +808,7 @@ static void __update_extent_tree_range(struct inode *inode,
+ 	}
+ 	goto out_read_extent_cache;
+ update_age_extent_cache:
+-	if (!tei->last_blocks)
++	if (tei->last_blocks == F2FS_EXTENT_AGE_INVALID)
+ 		goto out_read_extent_cache;
+ 
+ 	__set_extent_info(&ei, fofs, len, 0, false,
+@@ -912,7 +912,7 @@ static int __get_new_block_age(struct inode *inode, struct extent_info *ei,
+ 			cur_age = cur_blocks - tei.last_blocks;
+ 		else
+ 			/* allocated_data_blocks overflow */
+-			cur_age = ULLONG_MAX - tei.last_blocks + cur_blocks;
++			cur_age = (ULLONG_MAX - 1) - tei.last_blocks + cur_blocks;
+ 
+ 		if (tei.age)
+ 			ei->age = __calculate_block_age(sbi, cur_age, tei.age);
+@@ -1114,6 +1114,7 @@ void f2fs_update_age_extent_cache_range(struct dnode_of_data *dn,
+ 	struct extent_info ei = {
+ 		.fofs = fofs,
+ 		.len = len,
++		.last_blocks = F2FS_EXTENT_AGE_INVALID,
+ 	};
+ 
+ 	if (!__may_extent_tree(dn->inode, EX_BLOCK_AGE))
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 5b4e9548a231..fa3c676adc30 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -707,6 +707,12 @@ enum extent_type {
+ 	NR_EXTENT_CACHES,
+ };
+ 
++/*
++ * Reserved value to mark invalid age extents, hence valid block range
++ * from 0 to ULLONG_MAX-1
++ */
++#define F2FS_EXTENT_AGE_INVALID	ULLONG_MAX
++
+ struct extent_info {
+ 	unsigned int fofs;		/* start offset in a file */
+ 	unsigned int len;		/* length of the extent */
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index b45eace879d7..a473cd1fb37d 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -3863,8 +3863,13 @@ int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct folio *folio,
+ 	locate_dirty_segment(sbi, GET_SEGNO(sbi, old_blkaddr));
+ 	locate_dirty_segment(sbi, GET_SEGNO(sbi, *new_blkaddr));
+ 
+-	if (IS_DATASEG(curseg->seg_type))
+-		atomic64_inc(&sbi->allocated_data_blocks);
++	if (IS_DATASEG(curseg->seg_type)) {
++		unsigned long long new_val;
++
++		new_val = atomic64_inc_return(&sbi->allocated_data_blocks);
++		if (unlikely(new_val == ULLONG_MAX))
++			atomic64_set(&sbi->allocated_data_blocks, 0);
++	}
+ 
+ 	up_write(&sit_i->sentry_lock);
+ 
+-- 
+2.34.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
