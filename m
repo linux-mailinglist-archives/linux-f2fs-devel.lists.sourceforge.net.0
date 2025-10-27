@@ -2,99 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C93CBC0BF7D
+	by mail.lfdr.de (Postfix) with ESMTPS id C2278C0BF7C
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Oct 2025 07:36:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=O+wUjtaQIamSNNz6P8eqPCa/83j5GD3jemLDNjfRaAQ=; b=WOTzj5FHV8ymVnCOvA5hV7V+/3
-	3hnkcEAhfWc8etN7PtyKfzI+iiHlQdn6Teqoo/ooHILAUNRDorzyqN/fMd71ycsOJD5mLXLO1FZsG
-	jhtf7FlYz/KanzHOmnNfG3aJptPVGeCQx5MzE2EtaONozn92SW8UPpxJdn4gII5cfGBo=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=zQVHrUZqoyLuO4s2joAihgdx+59wrVd2u5VlJSd2PMA=; b=mBy7fvkc9jKFJsGK+u/2H7gfJc
+	Cyoa6InnDXwmV6ltP33MBKA+Ur9dRbxBwzFjUb63MTMiz6iijZxpc30sMKIBzSZ9QJduxC5cmemzG
+	XewY5LHLruZ90UpjNvosx78klwCjt4fJEq2SjY1T0VrRAdoQ69y1rT9e63o3Dmc7X7EU=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vDGpy-00059h-94;
-	Mon, 27 Oct 2025 06:36:15 +0000
+	id 1vDGq1-0003Eu-4u;
+	Mon, 27 Oct 2025 06:36:17 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vDGpc-00057P-VM
+ (envelope-from <chao@kernel.org>) id 1vDGpz-0003EK-0s
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 27 Oct 2025 06:35:53 +0000
+ Mon, 27 Oct 2025 06:36:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=35QzzXroFb3YJDQucwBsUqRZI8s6sIAjc5bWG5CG1X4=; b=KG1i3paLkP8QA++QbSkK20S0iZ
- fTWp15EAq3nyzOcHztKN1andAe1Rzsjqvi/vIVntGcsDOrMCiVVUGU+66N+e3YvIuavPpPCIfYOb5
- 2t6iRAE3QGxB7rupNwO8yhUCDCyo6rwfUfLYJFBOSFElGDr+hoKoBSKbhwFJPjk0e5zU=;
+ bh=ZMHj9YF6zBzIkkeKXSHBWjpugxWUkOgQxsJptEWeq8E=; b=hpX6lVSElbLkknrnkY9iitUB3u
+ pR1xwqH6m5nefWaR/IBMGfgybot28zYqOpVwk1UZjSG81uzK38e9kMnpsOqcFlYbRpSfSkjvYPFvT
+ eihKETW4wrhXJyBzpVdpdxt/S6w5DAnT2f629Nvy5wW6k2Q30HcDqetHmxdi+av71lI4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=35QzzXroFb3YJDQucwBsUqRZI8s6sIAjc5bWG5CG1X4=; b=d
- MEnR8bH7AANuCbC9K1Et+ipiiaLCshWIqFdvSevAm7phLTwYvT8W3kUPFTslOAwwCyTqQzB8BAq/i
- Ep7HACNo1EpI7+p6yZseeMrC9f3j9tCWXQCPZq1asUt04Sl0q+asmWknTZRw24+NGMjlSMdnO4BTi
- 1+HfuU20WCXBG0+c=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=ZMHj9YF6zBzIkkeKXSHBWjpugxWUkOgQxsJptEWeq8E=; b=kZIHr7zm1L6CakMb+Qie1lajUD
+ CSLPh8PmB5USj1fSp0pZaQFNrWJl7wu/Dmr3LSuXdHq5acxXhVDuBG6f7xzgn+Z4WMhnj8PgxTQY3
+ g+3+UE1hnhhijmhsJGbjE7xaJbNOsUSQg45RxubxGkvTpwgsgPScC5TyJVvdhtZiIbGg=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vDGpc-00063e-Df for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 27 Oct 2025 06:35:53 +0000
+ id 1vDGpd-00063m-S5 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 27 Oct 2025 06:35:54 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C5BE760231
+ by tor.source.kernel.org (Postfix) with ESMTP id 5023760358
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 27 Oct 2025 06:35:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9DF4C113D0;
  Mon, 27 Oct 2025 06:35:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F8DFC4CEF1;
- Mon, 27 Oct 2025 06:35:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761546941;
- bh=cnBqocTIBv8pGbbaja/xhKcMkS3FBNsTkcmNkQBJ9wo=;
- h=From:To:Cc:Subject:Date:From;
- b=qSk+gYhFG82ig+uHN6equxn0vON1oq5UwEol69lKu85esFFMCbEPfaGf8bK/uL68h
- /5R23loauus+AfHU/d8aNaUGl/nQ/W2OoQioWCrpqsE0K7RLPaLebjhSgV36J0L27C
- EjOBO6ivOiI1q0hrD7n6Zy22pIJ1gtJZdoujtlpQuvO1+fWyfPtaVDLIzx+6fZ/7+m
- FVmcgnYeBpsadN057saAUWyf7KVQZgw6JjWuPFLzO95h8gJO7Yc0OpJzmnc8p4ZCVA
- alm3vRVwLvsAU69N3wZqUdW3U+6lM6H7oNdUgr/XCQ0vogUYMdMa0hoAbsm/w3hC60
- UQD1xwjTI/XKA==
+ s=k20201202; t=1761546943;
+ bh=+tAe+bHgdNbXBdgCC8ZWTMJK/tLYIxHk1DHE7uqS8HU=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=OyYJvykqk43zqqeH1TApWgPTH3Jh3Rby5iUwHEjoyULfSyJq/a3kqDqcwYhdgimDK
+ BLNN5XgopQ9obcS3MqU69f6cZcyLULWKVvqPREUJe2ay8gy5mxflIK2klOwvruwGeZ
+ 2NNgJCRwvaRh+YVRUG5Ee4+LjUyVH4kvzc1XlkRsMh6K9NYhTCFi/lPmkj7Itx+q3S
+ zuzNMqxTKe2CrAC0dkQoGP32w7WOejU3e0henT6b0mh7+PG3wnHOfgtkeoEjT2uMW5
+ 9fVRIOzaDvUgOabjlK7rb++0mM36K5TU033wy7qRIVXgy3YzHs/Nr9pejxbMwGX/3J
+ H/53Vs7D/DL2Q==
 To: jaegeuk@kernel.org
-Date: Mon, 27 Oct 2025 14:35:33 +0800
-Message-ID: <20251027063534.103963-1-chao@kernel.org>
+Date: Mon, 27 Oct 2025 14:35:34 +0800
+Message-ID: <20251027063534.103963-2-chao@kernel.org>
 X-Mailer: git-send-email 2.51.1.821.gb6fe4d2222-goog
+In-Reply-To: <20251027063534.103963-1-chao@kernel.org>
+References: <20251027063534.103963-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: In order to let userspace detect such error rather than
- suffering
- silent failure. Fixes: 4354994f097d ("f2fs: checkpoint disabling") Cc:
- stable@kernel.org
- Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/super.c | 26
- ++++++++++++++++ 1 file changed, 16 insertions(+), [...] 
+ Content preview: If there are too many background IOs during
+ f2fs_enable_checkpoint(), 
+ sync_inodes_sb() may be blocked for long time due to it will loop to write
+ dirty datas which are generated by in parallel write() [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vDGpc-00063e-Df
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: fix to propagate error from
+X-Headers-End: 1vDGpd-00063m-S5
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: block cache/dio write during
  f2fs_enable_checkpoint()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -109,98 +109,167 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: stable@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In order to let userspace detect such error rather than suffering
-silent failure.
+If there are too many background IOs during f2fs_enable_checkpoint(),
+sync_inodes_sb() may be blocked for long time due to it will loop to
+write dirty datas which are generated by in parallel write()
+continuously.
 
-Fixes: 4354994f097d ("f2fs: checkpoint disabling")
-Cc: stable@kernel.org
+Let's change as below to resolve this issue:
+- hold cp_enable_rwsem write lock to block any cache/dio write
+- decrease DEF_ENABLE_INTERVAL from 16 to 5
+
+In addition, dump more logs during f2fs_enable_checkpoint().
+
+Testcase:
+1. fill data into filesystem until 90% usage.
+2. mount -o remount,checkpoint=disable:10% /data
+3. fio --rw=randwrite  --bs=4kb  --size=1GB  --numjobs=10  \
+--iodepth=64  --ioengine=psync  --time_based  --runtime=600 \
+--directory=/data/fio_dir/ &
+4. mount -o remount,checkpoint=enable /data
+
+Before:
+F2FS-fs (dm-51): f2fs_enable_checkpoint() finishes, writeback:7232, sync:39793, cp:457
+
+After:
+F2FS-fs (dm-51): f2fs_enable_checkpoint end, writeback:5032, lock:0, sync_inode:5552, sync_fs:84
+
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/super.c | 26 ++++++++++++++++----------
- 1 file changed, 16 insertions(+), 10 deletions(-)
+ fs/f2fs/data.c  |  2 ++
+ fs/f2fs/f2fs.h  |  3 ++-
+ fs/f2fs/super.c | 38 ++++++++++++++++++++++++++++++--------
+ 3 files changed, 34 insertions(+), 9 deletions(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 6e52e36c1f1a..65b6269ca1dc 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -2633,10 +2633,11 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
- 	return err;
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index ecfc96c6a240..b8ee05098591 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1424,6 +1424,7 @@ static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
+ 
+ static void f2fs_map_lock(struct f2fs_sb_info *sbi, int flag)
+ {
++	f2fs_down_read(&sbi->cp_enable_rwsem);
+ 	if (flag == F2FS_GET_BLOCK_PRE_AIO)
+ 		f2fs_down_read(&sbi->node_change);
+ 	else
+@@ -1436,6 +1437,7 @@ static void f2fs_map_unlock(struct f2fs_sb_info *sbi, int flag)
+ 		f2fs_up_read(&sbi->node_change);
+ 	else
+ 		f2fs_unlock_op(sbi);
++	f2fs_up_read(&sbi->cp_enable_rwsem);
  }
  
--static void f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
-+static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
+ int f2fs_get_block_locked(struct dnode_of_data *dn, pgoff_t index)
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index b6e35fdd5fd3..a4e1e5bd2cec 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -281,7 +281,7 @@ enum {
+ #define DEF_CP_INTERVAL			60	/* 60 secs */
+ #define DEF_IDLE_INTERVAL		5	/* 5 secs */
+ #define DEF_DISABLE_INTERVAL		5	/* 5 secs */
+-#define DEF_ENABLE_INTERVAL		16	/* 16 secs */
++#define DEF_ENABLE_INTERVAL		5	/* 5 secs */
+ #define DEF_DISABLE_QUICK_INTERVAL	1	/* 1 secs */
+ #define DEF_UMOUNT_DISCARD_TIMEOUT	5	/* 5 secs */
+ 
+@@ -1694,6 +1694,7 @@ struct f2fs_sb_info {
+ 	long interval_time[MAX_TIME];		/* to store thresholds */
+ 	struct ckpt_req_control cprc_info;	/* for checkpoint request control */
+ 	struct cp_stats cp_stats;		/* for time stat of checkpoint */
++	struct f2fs_rwsem cp_enable_rwsem;	/* block cache/dio write */
+ 
+ 	struct inode_management im[MAX_INO_ENTRY];	/* manage inode cache */
+ 
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 65b6269ca1dc..5b24dbb809fe 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2636,10 +2636,11 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
+ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
  {
  	unsigned int nr_pages = get_pages(sbi, F2FS_DIRTY_DATA) / 16;
- 	long long start, writeback, end;
-+	int ret;
+-	long long start, writeback, end;
++	long long start, writeback, lock, sync_inode, end;
+ 	int ret;
  
- 	f2fs_info(sbi, "f2fs_enable_checkpoint() starts, meta: %lld, node: %lld, data: %lld",
+-	f2fs_info(sbi, "f2fs_enable_checkpoint() starts, meta: %lld, node: %lld, data: %lld",
++	f2fs_info(sbi, "%s start, meta: %lld, node: %lld, data: %lld",
++					__func__,
  					get_pages(sbi, F2FS_DIRTY_META),
-@@ -2670,7 +2671,9 @@ static void f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
+ 					get_pages(sbi, F2FS_DIRTY_NODES),
+ 					get_pages(sbi, F2FS_DIRTY_DATA));
+@@ -2658,11 +2659,18 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
+ 	}
+ 	writeback = ktime_get();
+ 
+-	sync_inodes_sb(sbi->sb);
++	f2fs_down_write(&sbi->cp_enable_rwsem);
++
++	lock = ktime_get();
++
++	if (get_pages(sbi, F2FS_DIRTY_DATA))
++		sync_inodes_sb(sbi->sb);
+ 
+ 	if (unlikely(get_pages(sbi, F2FS_DIRTY_DATA)))
+-		f2fs_warn(sbi, "checkpoint=enable has some unwritten data: %lld",
+-					get_pages(sbi, F2FS_DIRTY_DATA));
++		f2fs_warn(sbi, "%s: has some unwritten data: %lld",
++			__func__, get_pages(sbi, F2FS_DIRTY_DATA));
++
++	sync_inode = ktime_get();
+ 
+ 	f2fs_down_write(&sbi->gc_lock);
+ 	f2fs_dirty_to_prefree(sbi);
+@@ -2671,6 +2679,13 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
  	set_sbi_flag(sbi, SBI_IS_DIRTY);
  	f2fs_up_write(&sbi->gc_lock);
  
--	f2fs_sync_fs(sbi->sb, 1);
-+	ret = f2fs_sync_fs(sbi->sb, 1);
-+	if (ret)
-+		f2fs_err(sbi, "%s sync_fs failed, ret: %d", __func__, ret);
- 
++	f2fs_info(sbi, "%s sync_fs, meta: %lld, imeta: %lld, node: %lld, dents: %lld, qdata: %lld",
++					__func__,
++					get_pages(sbi, F2FS_DIRTY_META),
++					get_pages(sbi, F2FS_DIRTY_IMETA),
++					get_pages(sbi, F2FS_DIRTY_NODES),
++					get_pages(sbi, F2FS_DIRTY_DENTS),
++					get_pages(sbi, F2FS_DIRTY_QDATA));
+ 	ret = f2fs_sync_fs(sbi->sb, 1);
+ 	if (ret)
+ 		f2fs_err(sbi, "%s sync_fs failed, ret: %d", __func__, ret);
+@@ -2678,11 +2693,17 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
  	/* Let's ensure there's no pending checkpoint anymore */
  	f2fs_flush_ckpt_thread(sbi);
-@@ -2680,6 +2683,7 @@ static void f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
- 	f2fs_info(sbi, "f2fs_enable_checkpoint() finishes, writeback:%llu, sync:%llu",
- 					ktime_ms_delta(writeback, start),
- 					ktime_ms_delta(end, writeback));
-+	return ret;
+ 
++	f2fs_up_write(&sbi->cp_enable_rwsem);
++
+ 	end = ktime_get();
+ 
+-	f2fs_info(sbi, "f2fs_enable_checkpoint() finishes, writeback:%llu, sync:%llu",
+-					ktime_ms_delta(writeback, start),
+-					ktime_ms_delta(end, writeback));
++	f2fs_info(sbi, "%s end, writeback:%llu, "
++				"lock:%llu, sync_inode:%llu, sync_fs:%llu",
++				__func__,
++				ktime_ms_delta(writeback, start),
++				ktime_ms_delta(lock, writeback),
++				ktime_ms_delta(sync_inode, lock),
++				ktime_ms_delta(end, sync_inode));
+ 	return ret;
  }
  
- static int __f2fs_remount(struct fs_context *fc, struct super_block *sb)
-@@ -2893,7 +2897,9 @@ static int __f2fs_remount(struct fs_context *fc, struct super_block *sb)
- 				goto restore_discard;
- 			need_enable_checkpoint = true;
- 		} else {
--			f2fs_enable_checkpoint(sbi);
-+			err = f2fs_enable_checkpoint(sbi);
-+			if (err)
-+				goto restore_discard;
- 			need_disable_checkpoint = true;
- 		}
- 	}
-@@ -2936,7 +2942,8 @@ static int __f2fs_remount(struct fs_context *fc, struct super_block *sb)
- 	return 0;
- restore_checkpoint:
- 	if (need_enable_checkpoint) {
--		f2fs_enable_checkpoint(sbi);
-+		if (f2fs_enable_checkpoint(sbi))
-+			f2fs_warn(sbi, "checkpoint has not been enabled");
- 	} else if (need_disable_checkpoint) {
- 		if (f2fs_disable_checkpoint(sbi))
- 			f2fs_warn(sbi, "checkpoint has not been disabled");
-@@ -5258,13 +5265,12 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
- 	if (err)
- 		goto sync_free_meta;
- 
--	if (test_opt(sbi, DISABLE_CHECKPOINT)) {
-+	if (test_opt(sbi, DISABLE_CHECKPOINT))
- 		err = f2fs_disable_checkpoint(sbi);
--		if (err)
--			goto sync_free_meta;
--	} else if (is_set_ckpt_flags(sbi, CP_DISABLED_FLAG)) {
--		f2fs_enable_checkpoint(sbi);
--	}
-+	else if (is_set_ckpt_flags(sbi, CP_DISABLED_FLAG))
-+		err = f2fs_enable_checkpoint(sbi);
-+	if (err)
-+		goto sync_free_meta;
- 
- 	/*
- 	 * If filesystem is not mounted as read-only then
+@@ -4912,6 +4933,7 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
+ 	init_f2fs_rwsem(&sbi->node_change);
+ 	spin_lock_init(&sbi->stat_lock);
+ 	init_f2fs_rwsem(&sbi->cp_rwsem);
++	init_f2fs_rwsem(&sbi->cp_enable_rwsem);
+ 	init_f2fs_rwsem(&sbi->quota_sem);
+ 	init_waitqueue_head(&sbi->cp_wait);
+ 	spin_lock_init(&sbi->error_lock);
 -- 
 2.49.0
 
