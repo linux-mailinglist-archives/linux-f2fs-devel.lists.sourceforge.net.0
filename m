@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 010ECC0C3FC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Oct 2025 09:12:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7998C0C46C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Oct 2025 09:21:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=d/kOPoljrZgme/6WzFqfoW1rtoWc8qU/aBBoM97wAVM=; b=XZL7J5B5F3O/tYElaVH5C/o/og
-	K7yTVbvEBzYWSnD//WffObbkH2HVpS8Cyb7xwJLlbP6eF0+ZyO0iJN49pbTvLnodG8wmEnATkitil
-	HK4ad0/xg/kUbYawzHJvbdgsURzVVomzt11Kan+h/ByXQf6JmMiQuYo+4OHztUN+Va+Y=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=SCXRkS1WjW+30bEd4311ggRr+dJ3zRbJvETz8FE371w=; b=JJyl1CCQFvMg11Sw1vGFj+Sv05
+	fLjJNeunrVgYB8xhKr/QAWM6M049JHT5nipGArDLjBc5+i1PrBfhGNKorJDL8jEQulN9+7izo1BTf
+	erDwL2JQ6X88D6C7VLTQz2/4dXySe+59suSB2OYXImGYYDzVrHPDj8OxiG1cy1LLno64=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vDIL7-0002Pm-M6;
-	Mon, 27 Oct 2025 08:12:29 +0000
+	id 1vDITT-0005OQ-0i;
+	Mon, 27 Oct 2025 08:21:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vDIL7-0002Pg-1I
+ (envelope-from <chao@kernel.org>) id 1vDITR-0005OK-Tv
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 27 Oct 2025 08:12:29 +0000
+ Mon, 27 Oct 2025 08:21:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iimiM+MQU30jvxIEtJEo9RItbVDMJuLsHPGBXSd0RPY=; b=hdfdq8QMYbvfho+O9pKi9AMpRk
- zXVYOG+0lz88QFEmS0tfp/5SVz1mqRU/PNkyQQI++cu/Px7t/uAKEcfewN3Hx94kLsLsNhI0ZP/dN
- RHOxLt6AiUDHWDvWl6eQo1RcUnD+H5xrsYEzSQeGt1ywlNhohl8Wu+CZ1hmGM5udoNZQ=;
+ bh=OS6TD8PsEzfnPxEob+PL2Yk/RxxgI7UjT/GqsIkn1fQ=; b=JffU67Lv4mRVQE5jIp9NPjaTZ0
+ n7wEMJHhwINgaYCzZ0j1Bx1NB2odhnTSJB3El1GASIx6UJh3ADXTrv7ArpVtS1JhFAiwZcMS9OwMl
+ D78b8VLMqkkEZ9wZN272ECWJjUHc6YLxVvm5nu1kHs+/6TcYbDN8BUw/P9QJZTi97eTg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,68 +40,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iimiM+MQU30jvxIEtJEo9RItbVDMJuLsHPGBXSd0RPY=; b=XIZB8OtBuziRJVl7VOaC/ikMu9
- 8N5g4A5k1dmOxixY+Xc3lVyqtpPfiZYzn4Rzip249PMtWDs7qg+VtomGNZlM+8PI3o962fKmGw4OO
- 6bBydgOS25OtNK74qggNRvp/U7yGdTL5k6i6DZAHoLA4sCz+q9+jsTPV5zA6bltihEVE=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=OS6TD8PsEzfnPxEob+PL2Yk/RxxgI7UjT/GqsIkn1fQ=; b=AmnirqtpxMBruxbZk2Q+4ibRxi
+ p9afqsVMG8ypsxDeqYMmDYNDclekmPKMTVBn0aBuKZq7wvhTja4VQMUqUEsV+91sv2vPuO0hCkxcA
+ azg11uXaCdVk9TPTHQJeNrNVY8mWC88Yg1a94Ut7R0HQFHx7L+6wlWEivN5f0D78o+IU=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vDIL6-0001YN-Au for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 27 Oct 2025 08:12:28 +0000
+ id 1vDITR-00027L-AI for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 27 Oct 2025 08:21:05 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id B197C6029B;
- Mon, 27 Oct 2025 08:12:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 520FFC4CEF1;
- Mon, 27 Oct 2025 08:12:15 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id E83B640401;
+ Mon, 27 Oct 2025 08:20:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77456C4CEF1;
+ Mon, 27 Oct 2025 08:20:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761552737;
- bh=FySKsm5NndJRTBwhanRGHNyN4FODpGjVnPcCLMTbqB8=;
+ s=k20201202; t=1761553254;
+ bh=kZEWpxSlMsmolTkD6bSUizlONiaovvY4kPkzPXEi7hE=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=V8nVGwg43KqgpGiSjvcOdbp2gwBVPmH3YlbChUN/2fN8JiUwxc8043Vl0AvMnC669
- gR8MSy8GeO/9W3IDhox4KBrsFWD6xwpHrPVVCFhGMCalr/QpAr+zuBZUQvnWOmh6t+
- +dBgh0GIpP7RYtwBW6U4eJCjUdBY8fVLAqFKs6keYQZVf8q9gTLfQpCC5q7NiDKdRW
- 5KcWV0ZCafcApm3r/3OjBCW1UVK6rfnWB1mtVMblZVieH7yXnbwcbWhWdQ02HPu9uc
- 5ihU7B3VPZSebKotQjDuqW1xij3z1QQEohzTMjYxxRp1w9oHe6kQbbi59R0dX6Z2Nr
- O32R2shmsdqjA==
-Message-ID: <d4b7c03c-6554-4407-b823-aecfcdf7dc3f@kernel.org>
-Date: Mon, 27 Oct 2025 16:12:13 +0800
+ b=RYzMOsn85iVgjJ3iChJB2ZUiI9Yna2yiIDycBc9amOk3MmceOTtH0RaNe38GKznPe
+ UtE/nkjXdB0ytUa+GthGKIP7/XaVJNAOmmwMDfxR40M/63zD9Ld7FU76H7zsOgsJv1
+ Tbma4IozPOX1eojb437p2zn+PGwyAzbEMDkZj2TCW13tq0BXYv6sjxnV4huYo4G8s6
+ huqA64a/enk1nSg7DEzj3PmKM/DR76rh58E9McgYxRxhwMjHeveUOCScRJWC220YAM
+ ddkF4sTY9V5v9PCkHvBzqtjPrVZiLASDoYJnLIBugkGqQC6wBlmUJT//7DmzjIU2ln
+ LJ+aprpWGQgnw==
+Message-ID: <2170f364-b48a-47ef-a8b8-f6e72027999a@kernel.org>
+Date: Mon, 27 Oct 2025 16:20:51 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: "Nikola Z. Ivanov" <zlatistiv@gmail.com>
-References: <20251003134731.470392-1-zlatistiv@gmail.com>
- <839306c1-5f7a-4e89-b2cf-7534d279a03c@kernel.org>
- <gupgic53ouhmdwrglwdviw2mzeaqfjsvyr47u3ebu2ztayswy4@4oxvnu252rdb>
- <9d0fef9d-4093-4a80-af3f-6dc45ffe886c@kernel.org>
- <zomib7dzvmnggqqy6aqlwij3zihbvzkzrnfvzhk7tcp2mdgh34@tjjugevo4q4a>
- <235adbae-cc45-4b84-b712-1ba9e5a48dce@kernel.org>
- <wtrkydtrovhsw6azexwq576aoq36ut62y2elhzvsq3ansk477y@2rzc56l46pka>
- <2pro6x6xdvfhaypqhddzlmitx2vo6h7ro5mcqcf5tc7ssvzdls@cge4oegdkf5t>
+To: Yongpeng Yang <yangyongpeng.storage@gmail.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20251024131344.144972-1-yangyongpeng.storage@gmail.com>
 Content-Language: en-US
-In-Reply-To: <2pro6x6xdvfhaypqhddzlmitx2vo6h7ro5mcqcf5tc7ssvzdls@cge4oegdkf5t>
+In-Reply-To: <20251024131344.144972-1-yangyongpeng.storage@gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 10/24/25 03:15, Nikola Z. Ivanov wrote: > On Wed, Oct 15, 
- 2025 at 03:55:40PM +0300, Nikola Z. Ivanov wrote: >> On Wed, Oct 15, 2025
- at 02:41:53PM +0800, Chao Yu wrote: >>> On 10/14/25 20:17, Nikola [...] 
+ Content preview:  On 10/24/25 21:13, Yongpeng Yang wrote: > From: Yongpeng Yang
+ <yangyongpeng@xiaomi.com> > > Change the type of the unlock parameter of
+ f2fs_put_page to bool. > All callers should consistently pass tru [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vDIL6-0001YN-Au
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Perform sanity check before unlinking
- directory inode
+X-Headers-End: 1vDITR-00027L-AI
+Subject: Re: [f2fs-dev] [PATCH] f2fs: change the unlock parameter of
+ f2fs_put_page to bool
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,173 +109,208 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: david.hunter.linux@gmail.com,
- syzbot+c07d47c7bc68f47b9083@syzkaller.appspotmail.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- khalid@kernel.org, skhan@linuxfoundation.org, jaegeuk@kernel.org,
- linux-kernel-mentees@lists.linuxfoundation.org
+Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 10/24/25 03:15, Nikola Z. Ivanov wrote:
-> On Wed, Oct 15, 2025 at 03:55:40PM +0300, Nikola Z. Ivanov wrote:
->> On Wed, Oct 15, 2025 at 02:41:53PM +0800, Chao Yu wrote:
->>> On 10/14/25 20:17, Nikola Z. Ivanov wrote:
->>>> On Mon, Oct 13, 2025 at 08:53:04PM +0800, Chao Yu wrote:
->>>>> On 10/13/25 05:19, Nikola Z. Ivanov wrote:
->>>>>> On Thu, Oct 09, 2025 at 10:54:40AM +0800, Chao Yu wrote:
->>>>>>> On 10/3/2025 9:47 PM, Nikola Z. Ivanov wrote:
->>>>>>>> Current i_nlink corruption check does not take into account
->>>>>>>> directory inodes which have one additional i_nlink for their "." entry.
->>>>>>>>
->>>>>>>> Add additional check and a common corruption path.
->>>>>>>>
->>>>>>>> Reported-by: syzbot+c07d47c7bc68f47b9083@syzkaller.appspotmail.com
->>>>>>>> Closes: https://syzkaller.appspot.com/bug?extid=c07d47c7bc68f47b9083
->>>>>>>> Fixes: 81edb983b3f5 ("f2fs: add check for deleted inode")
->>>>>>>> Signed-off-by: Nikola Z. Ivanov <zlatistiv@gmail.com>
->>>>>>>> ---
->>>>>>>>   fs/f2fs/namei.c | 28 ++++++++++++++++++++--------
->>>>>>>>   1 file changed, 20 insertions(+), 8 deletions(-)
->>>>>>>>
->>>>>>>> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
->>>>>>>> index b882771e4699..68b33e8089b0 100644
->>>>>>>> --- a/fs/f2fs/namei.c
->>>>>>>> +++ b/fs/f2fs/namei.c
->>>>>>>> @@ -502,12 +502,14 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
->>>>>>>>   		goto out;
->>>>>>>>   	}
->>>>>>>> -	if (inode->i_nlink == 0) {
->>>>>>>> +	if (unlikely(inode->i_nlink == 0)) {
->>>>>>>>   		f2fs_warn(F2FS_I_SB(inode), "%s: inode (ino=%lx) has zero i_nlink",
->>>>>>>>   			  __func__, inode->i_ino);
->>>>>>>> -		err = -EFSCORRUPTED;
->>>>>>>> -		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
->>>>>>>> -		goto out_iput;
->>>>>>>> +		goto corrupted;
->>>>>>>> +	} else if (unlikely(S_ISDIR(inode->i_mode) && inode->i_nlink == 1)) {
->>>>>>>> +		f2fs_warn(F2FS_I_SB(inode), "%s: directory inode (ino=%lx) has a single i_nlink",
->>>>>>>> +			  __func__, inode->i_ino);
->>>>>>>> +		goto corrupted;
->>>>>>>
->>>>>>> Can we detect such corruption in sanity_check_inode() as well? So that if
->>>>>>> f2fs internal flow calls f2fs_iget() on corrupted inode, we can set SBI_NEED_FSCK
->>>>>>> flag and then triggering fsck repairment later.
->>>>>>>
->>>>>>> Thanks,
->>>>>>>
->>>>>>>>   	}
->>>>>>>>   	if (IS_ENCRYPTED(dir) &&
->>>>>>>> @@ -533,6 +535,9 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
->>>>>>>>   	trace_f2fs_lookup_end(dir, !IS_ERR_OR_NULL(new) ? new : dentry,
->>>>>>>>   				ino, IS_ERR(new) ? PTR_ERR(new) : err);
->>>>>>>>   	return new;
->>>>>>>> +corrupted:
->>>>>>>> +	err = -EFSCORRUPTED;
->>>>>>>> +	set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
->>>>>>>>   out_iput:
->>>>>>>>   	iput(inode);
->>>>>>>>   out:
->>>>>>>> @@ -572,10 +577,11 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
->>>>>>>>   	if (unlikely(inode->i_nlink == 0)) {
->>>>>>>>   		f2fs_warn(F2FS_I_SB(inode), "%s: inode (ino=%lx) has zero i_nlink",
->>>>>>>>   			  __func__, inode->i_ino);
->>>>>>>> -		err = -EFSCORRUPTED;
->>>>>>>> -		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
->>>>>>>> -		f2fs_folio_put(folio, false);
->>>>>>>> -		goto fail;
->>>>>>>> +		goto corrupted;
->>>>>>>> +	} else if (unlikely(S_ISDIR(inode->i_mode) && inode->i_nlink == 1)) {
->>>>>>>> +		f2fs_warn(F2FS_I_SB(inode), "%s: directory inode (ino=%lx) has a single i_nlink",
->>>>>>>> +			  __func__, inode->i_ino);
->>>>>>>> +		goto corrupted;
->>>>>>>>   	}
->>>>>>>>   	f2fs_balance_fs(sbi, true);
->>>>>>>> @@ -601,6 +607,12 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
->>>>>>>>   	if (IS_DIRSYNC(dir))
->>>>>>>>   		f2fs_sync_fs(sbi->sb, 1);
->>>>>>>> +
->>>>>>>> +	goto fail;
->>>>>>>> +corrupted:
->>>>>>>> +	err = -EFSCORRUPTED;
->>>>>>>> +	set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
->>>>>>>> +	f2fs_folio_put(folio, false);
->>>>>>>>   fail:
->>>>>>>>   	trace_f2fs_unlink_exit(inode, err);
->>>>>>>>   	return err;
->>>>>>>
->>>>>>
->>>>>> Hi Chao,
->>>>>>
->>>>>> Thank you for the suggestion.
->>>>>> I will add this to sanity_check_inode and remove it
->>>>>> from f2fs_lookup as it becomes redundant since f2fs_lookup
->>>>>> obtains the inode through f2fs_iget. For f2fs_unlink I will
->>>>>> move the i_nlink == 1 check to f2fs_rmdir.
->>>>>
->>>>> Hi Nikola,
->>>>>
->>>>> I meant we can move the i_nlink == 1 check from both f2fs_lookup() and
->>>>> f2fs_unlink() to sanity_check_inode(), because before we create in-memory
->>>>> inode, we will always call sanity_check_inode().
->>>>>
->>>>> Let me know if you have other concerns.
->>>>>
->>>>> Thanks,
->>>>>
->>>>
->>>> The issue here is that sanity_check_inode will be called only when 
->>>> we initially read the inode off disk, not when it's already in the cache
->>>>
->>>> The syzkaller repro does something like this:
->>>> Creates a directory structure /dir1/dir2 where dir1 has
->>>> i_nlink == 2, which is one less than it should. It then does
->>>> rmdir(/dir1/dir2) followed by rmdir(/dir1) which leads to the warning.
->>>
->>> Oh, I missed this case.
->>>
->>>>
->>>> In such case what would you say should happen, should the second rmdir
->>>> fail and report the corruption, or do we close our eyes and just drop
->>>> i_nlink to 0 and possibly log a message that something isn't quite right?
->>>
->>> I agreed that we should keep i_nlink == 1 check in f2fs_unlink().
->>>
->>> Thanks,
->>>
->>
->> Hi Chao,
->>
->> Just to make sure we're on the same page, do you mean to keep the check 
->> in f2fs_unlink as well as sanity_check_inode, or only do it in f2fs_unlink?
->>
+On 10/24/25 21:13, Yongpeng Yang wrote:
+> From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 > 
-> Hello,
+> Change the type of the unlock parameter of f2fs_put_page to bool.
+> All callers should consistently pass true or false. No logical change.
 > 
-> Kindly sending a reminder here, could you please
-> provide input when you have the chance?
+> Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
+> ---
+>  fs/f2fs/compress.c |  8 ++++----
+>  fs/f2fs/data.c     | 12 ++++--------
+>  fs/f2fs/f2fs.h     |  2 +-
+>  fs/f2fs/gc.c       |  6 +++---
+>  fs/f2fs/inline.c   |  4 ++--
+>  fs/f2fs/namei.c    |  4 ++--
+>  6 files changed, 16 insertions(+), 20 deletions(-)
+> 
+> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> index 811bfe38e5c0..716004ba44dc 100644
+> --- a/fs/f2fs/compress.c
+> +++ b/fs/f2fs/compress.c
+> @@ -120,7 +120,7 @@ static void f2fs_unlock_rpages(struct compress_ctx *cc, int len)
+>  }
+>  
+>  static void f2fs_put_rpages_wbc(struct compress_ctx *cc,
+> -		struct writeback_control *wbc, bool redirty, int unlock)
+> +		struct writeback_control *wbc, bool redirty, bool unlock)
+>  {
+>  	unsigned int i;
+>  
+> @@ -1202,7 +1202,7 @@ bool f2fs_compress_write_end(struct inode *inode, void *fsdata,
+>  	if (copied)
+>  		set_cluster_dirty(&cc);
+>  
+> -	f2fs_put_rpages_wbc(&cc, NULL, false, 1);
+> +	f2fs_put_rpages_wbc(&cc, NULL, false, true);
+>  	f2fs_destroy_compress_ctx(&cc, false);
+>  
+>  	return first_index;
+> @@ -1605,7 +1605,7 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
+>  			add_compr_block_stat(cc->inode, cc->cluster_size);
+>  			goto write;
+>  		} else if (err) {
+> -			f2fs_put_rpages_wbc(cc, wbc, true, 1);
+> +			f2fs_put_rpages_wbc(cc, wbc, true, true);
+>  			goto destroy_out;
+>  		}
+>  
+> @@ -1619,7 +1619,7 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
+>  	f2fs_bug_on(F2FS_I_SB(cc->inode), *submitted);
+>  
+>  	err = f2fs_write_raw_pages(cc, submitted, wbc, io_type);
+> -	f2fs_put_rpages_wbc(cc, wbc, false, 0);
+> +	f2fs_put_rpages_wbc(cc, wbc, false, false);
+>  destroy_out:
+>  	f2fs_destroy_compress_ctx(cc, false);
+>  	return err;
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 1f090c018f1b..daca2a42b20c 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -3621,8 +3621,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
+>  		folio_lock(folio);
+>  		if (folio->mapping != mapping) {
+>  			/* The folio got truncated from under us */
+> -			folio_unlock(folio);
+> -			folio_put(folio);
+> +			f2fs_folio_put(folio, true);
 
-Hi Nikola,
+Yongpeng,
 
-Sorry for the delay, I missed to reply.
+I prefer to not use f2fs_folio_put() here, to avoid potential null-ptr dereference
+on folio->mapping via f2fs_folio_put() -> F2FS_F_SB(), as folio->mapping could be
+NULL due to race w/ truncation.
 
-I meant that we can add sanity check (i_nlink == 1) for directory in:
-- f2fs_unlink(), so that, we can detect runtime i_nlink inconsistency.
-- sanity_check_inode(), then, we can detect on-disk i_nlink inconsistency.
+>  			goto repeat;
+>  		}
+>  	}
+> @@ -3653,8 +3652,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
+>  
+>  		folio_lock(folio);
+>  		if (unlikely(folio->mapping != mapping)) {
+> -			folio_unlock(folio);
+> -			folio_put(folio);
+> +			f2fs_folio_put(folio, true);
+
+Ditto,
 
 Thanks,
 
-> 
-> Thank you!
-> 
->>>>
->>>> Thank you,
->>>>
->>>>>>
->>>>>> I will send v2 as soon as I do some more testing.
->>>>>
->>>
+>  			goto repeat;
+>  		}
+>  		if (unlikely(!folio_test_uptodate(folio))) {
+> @@ -3665,8 +3663,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
+>  	return 0;
+>  
+>  put_folio:
+> -	folio_unlock(folio);
+> -	folio_put(folio);
+> +	f2fs_folio_put(folio, true);
+>  fail:
+>  	f2fs_write_failed(inode, pos + len);
+>  	return err;
+> @@ -3722,8 +3719,7 @@ static int f2fs_write_end(const struct kiocb *iocb,
+>  					pos + copied);
+>  	}
+>  unlock_out:
+> -	folio_unlock(folio);
+> -	folio_put(folio);
+> +	f2fs_folio_put(folio, true);
+>  	f2fs_update_time(F2FS_I_SB(inode), REQ_TIME);
+>  	return copied;
+>  }
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 94eb9a2d3a73..32fb2e7338b7 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -2979,7 +2979,7 @@ static inline void f2fs_folio_put(struct folio *folio, bool unlock)
+>  	folio_put(folio);
+>  }
+>  
+> -static inline void f2fs_put_page(struct page *page, int unlock)
+> +static inline void f2fs_put_page(struct page *page, bool unlock)
+>  {
+>  	if (!page)
+>  		return;
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 22fe6e2c6d5c..fd8bb0424bf3 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -1278,7 +1278,7 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
+>  	err = f2fs_submit_page_bio(&fio);
+>  	if (err)
+>  		goto put_encrypted_page;
+> -	f2fs_put_page(fio.encrypted_page, 0);
+> +	f2fs_put_page(fio.encrypted_page, false);
+>  	f2fs_folio_put(folio, true);
+>  
+>  	f2fs_update_iostat(sbi, inode, FS_DATA_READ_IO, F2FS_BLKSIZE);
+> @@ -1286,7 +1286,7 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
+>  
+>  	return 0;
+>  put_encrypted_page:
+> -	f2fs_put_page(fio.encrypted_page, 1);
+> +	f2fs_put_page(fio.encrypted_page, true);
+>  put_folio:
+>  	f2fs_folio_put(folio, true);
+>  	return err;
+> @@ -1442,7 +1442,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>  	f2fs_update_data_blkaddr(&dn, newaddr);
+>  	set_inode_flag(inode, FI_APPEND_WRITE);
+>  
+> -	f2fs_put_page(fio.encrypted_page, 1);
+> +	f2fs_put_page(fio.encrypted_page, true);
+>  recover_block:
+>  	if (err)
+>  		f2fs_do_replace_block(fio.sbi, &sum, newaddr, fio.old_blkaddr,
+> diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+> index 58ac831ef704..e5c6a08b7e4f 100644
+> --- a/fs/f2fs/inline.c
+> +++ b/fs/f2fs/inline.c
+> @@ -287,7 +287,7 @@ int f2fs_write_inline_data(struct inode *inode, struct folio *folio)
+>  	set_inode_flag(inode, FI_DATA_EXIST);
+>  
+>  	folio_clear_f2fs_inline(ifolio);
+> -	f2fs_folio_put(ifolio, 1);
+> +	f2fs_folio_put(ifolio, true);
+>  	return 0;
+>  }
+>  
+> @@ -577,7 +577,7 @@ static int f2fs_move_rehashed_dirents(struct inode *dir, struct folio *ifolio,
+>  	f2fs_i_depth_write(dir, 0);
+>  	f2fs_i_size_write(dir, MAX_INLINE_DATA(dir));
+>  	folio_mark_dirty(ifolio);
+> -	f2fs_folio_put(ifolio, 1);
+> +	f2fs_folio_put(ifolio, true);
+>  
+>  	kfree(backup_dentry);
+>  	return err;
+> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> index 68b33e8089b0..07ceed173ffe 100644
+> --- a/fs/f2fs/namei.c
+> +++ b/fs/f2fs/namei.c
+> @@ -1259,11 +1259,11 @@ static int f2fs_cross_rename(struct inode *old_dir, struct dentry *old_dentry,
+>  	return 0;
+>  out_new_dir:
+>  	if (new_dir_entry) {
+> -		f2fs_folio_put(new_dir_folio, 0);
+> +		f2fs_folio_put(new_dir_folio, false);
+>  	}
+>  out_old_dir:
+>  	if (old_dir_entry) {
+> -		f2fs_folio_put(old_dir_folio, 0);
+> +		f2fs_folio_put(old_dir_folio, false);
+>  	}
+>  out_new:
+>  	f2fs_folio_put(new_folio, false);
 
 
 
