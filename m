@@ -2,110 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5684FC1115C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Oct 2025 20:33:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AF00C11162
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Oct 2025 20:33:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=o9dCb7BDfgJXBXBKzMgQurD1LyyxjeTYf6ncpclw82o=; b=iLV0M9MgQDBTlR9GyOASWXekyZ
-	ccNEXDPcjX+CEeQM7cJo9eR/DhgkYMoaxspgsa+y8X5ags/d4cN2OEOWNSAQi9HLtzO6i2EWWznA/
-	vuwNBNU7eVO67gG10/A+plNMSRTZVngVnrZPkiM/uERWTFjn7buJgJK2PJ6mKyW6EK+w=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=Q0JSNvRCV8otEMMjeLtgUywCKkQGJfhxHBU5+aP8Pis=; b=IafN4DQx2HXaNL7mqP48tnKBLE
+	a23L0EEpJcitC3gxW9StVT2G75tqBeev0wBqfRg4MZT0iGRTUi5BERB6Iu/NOrTzoiloKC8DTGNwR
+	UiXK3oDSGI1mzb9SUXZBKboCPEaFZdVp+8IEtF0vxc2EjYcHerg8oe4ZpXsN2aFlZdhk=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vDSy8-00011P-Kv;
-	Mon, 27 Oct 2025 19:33:28 +0000
+	id 1vDSyO-0007WM-Lt;
+	Mon, 27 Oct 2025 19:33:45 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1vDSy7-00011I-1U
+ (envelope-from <daeho43@gmail.com>) id 1vDSyM-0007WD-TU
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 27 Oct 2025 19:33:27 +0000
+ Mon, 27 Oct 2025 19:33:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lyWBKb2yoIkgrJJnWPjOXQXuOlsGIe2mgRFoQvJyvnM=; b=TKbp5yK2/yr22ARdw0KseFtjJ5
- QSinGfGVmvqtE7HyvGkx7r2sc6eHG60r5wO6XkannSdXadYi8+R1PDcOVD2NgOAXv6x+Cofoup/ch
- YVBWpJDHbEl1/xO+zmzc+aXVek476BYm/0nYRWFUh9JbLBWRMpXskyva4EJw4QM+rUNE=;
+ bh=pvE7FF5MXoVNg+VTUl5ivSwC+cLoiidyzvHipccT4Tk=; b=JYragW2mZgNic+bq/UF5lUseSg
+ piyDR9entShFch4rfPLMl7t9T2/z3D4Lo6wLh5/UU/tFf/OPn9rFRBz/elRJzxLeKcjl0xROg07Rf
+ kzWaMAbl57NOe+MUTwdDiRM45ohk0hN4xc8PdnjYpfmTPDnSe8+5NL+BS0EyAmzNcqvM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=lyWBKb2yoIkgrJJnWPjOXQXuOlsGIe2mgRFoQvJyvnM=; b=h
- Wv0Ulb7aXMtR2dstjy1UkMW3r366aAMNof6GOwc4xqfm75dsZrIi0Hh8wDOJm01DpdsN1+FVOLAxJ
- 2uQMp0Zuzg2PTxO24nxRxqOy4qecNat8C5CGh2i9nXUT2CilknNQZQYQr2uM8YFmWNuvNw1dCCBUj
- fG9HiCyy33i/gBgQ=;
-Received: from mail-pl1-f169.google.com ([209.85.214.169])
+ List-Owner:List-Archive; bh=pvE7FF5MXoVNg+VTUl5ivSwC+cLoiidyzvHipccT4Tk=; b=V
+ 2vt7/486d4ZIcz/BLwzJBlbiNIehy+EOGr7ZSKgnOjH/jvveFZhhyFw7v/VO5uG9kkxiN/NC3wwkH
+ orV7BYym0JjJVfMJopkxa268sKUMEUftlydQtAgWxbeKur1nES1mwi5xhy+0Zi/KZCRUs3UxNYTNb
+ TioyycWMJpt6UBCo=;
+Received: from mail-pg1-f169.google.com ([209.85.215.169])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vDSy5-00010i-QG for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 27 Oct 2025 19:33:26 +0000
-Received: by mail-pl1-f169.google.com with SMTP id
- d9443c01a7336-2907948c1d2so53092325ad.3
+ id 1vDSyM-00011R-Gv for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 27 Oct 2025 19:33:43 +0000
+Received: by mail-pg1-f169.google.com with SMTP id
+ 41be03b00d2f7-b4755f37c3eso4201399a12.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 27 Oct 2025 12:33:25 -0700 (PDT)
+ Mon, 27 Oct 2025 12:33:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761593595; x=1762198395; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1761593615; x=1762198415; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lyWBKb2yoIkgrJJnWPjOXQXuOlsGIe2mgRFoQvJyvnM=;
- b=hV52wh2LIcuXeubfEXjZ0m5ctRtFTRpB2ZsGCRQ7siyUvKlwApeqHLoMmUOCgG6F++
- DvIkcg9lneuC+FEsYpEfRvSmWuut1s1yU5euMQrg4gcpNObbf4QQrdwrqFIUkKOWYjvj
- Oes0nrwYnIrmj06iNQmqjA1/zZorTA0xFNLj1vDQfYexr7MkrQ4VY4Z6WNLqMhPxHyz2
- IJ+zO61FyrCbJj5sxqoJ+XZXFp7BXzaAXERm4tCfm8bGCVPOK7qnzbFGiYwicrz8P1Bb
- mLckU/G3vW7WlXm6U45MON573GHguWBsBZX8p/lrPTzgqy/9qHdBTByDmDds2X2gVXdE
- 7HnQ==
+ bh=pvE7FF5MXoVNg+VTUl5ivSwC+cLoiidyzvHipccT4Tk=;
+ b=GcRUCbCVNENKag3G4y2v73pLcMx1XJQ0G4hvHETbi5UqfV3CSZWT3fWptz51daVOR3
+ vsb4qHCDB4cgh24d5Xaw+znUsYJp1533CrkoPlkrEm+k55z+NNEV3bgGGi3xhXBAzS1n
+ ha7WcwnMiAB51s4cciyxqijseHrRi8DD7dLNx9che+R2DwF8UAuP7t7fK92cWgTcoK4v
+ s+xKOr7mhmOAXK/E6f7TDJKjsTGJvKLiFwjaSyCxGaK9wOBo5lOU/Sq49S3GN12Ez+o7
+ E9OI4GHv+DOlHfPEg73uo1kCze0BPdkvAY9YL2kMiCBAQGJFE9gf8Rvcf2x6DoXuF20Y
+ US0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761593595; x=1762198395;
+ d=1e100.net; s=20230601; t=1761593615; x=1762198415;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=lyWBKb2yoIkgrJJnWPjOXQXuOlsGIe2mgRFoQvJyvnM=;
- b=YAnFi7M1bYWvWc3kWR2DXpOlSDEW6egSlyM3qfSNqmxinp5tc+Y5Idvdr/xST5izKQ
- 6aongl95JV4EmUS9v+Nsml6u0m3toyslDCPllHJBE4Sh+B9mjlMC+ZHcIF8QZvYFTN4O
- JY90I+7MeSogKkWq+UMJmqPyCwwvnExgFawjQpd4vdLOfW1bwcv2ocYh9sLF32D34YDd
- VmXih4Q99vhZikvNZ1QpAOHV/wwyj5UwniyYSymVrpzQ0ckHeiH6/pnpz7FccwpBi6FG
- JNJ+BZ03fwnl2D6s1nvKiIIWrq6tp+XLpDLj7mvUVBvqkSbOyp8a0HVurITuRB5mQCRg
- rXBw==
+ bh=pvE7FF5MXoVNg+VTUl5ivSwC+cLoiidyzvHipccT4Tk=;
+ b=IcSGzSNtTfilwvbDG82tdFd2NPk6I44+w/NCe5bmrPpHR4IhVkc9tZhFmb7QWIWnVw
+ P/i4/WM8jHY36+eRZfYjbHIIoDOvN85n8/Gr+SDIktruNudN/fpn6HpG4hhLVYYn8ue9
+ WiYAMwi0Z/mbnXexmcDm8hQueHOQGHTFMI/ALjTatIg8p8ZAB3WaWH4qEFe/lTQ7lF6E
+ GMm0Vg3iHlg/oHIETcI9zIVjXYLkSE2Zdi5ARhKWsCtksSnJDPCmXnkQ07+bVFWvF2f7
+ 5uWknW0nsPrcA5oWIKH53+KkauNLbmQ4NgPWOt7oAWC5R32XLJ7Xd71AIA8gBFJ1dB6i
+ DulA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVpm8YZSlbQGVNgVOcOfBJgzQPLpZB5D5IJSRxbiNcMkFwUCDOjB5UU0Q84DIwFW7u44szUYs1eHLrtN57VJ4DH@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YxrrqnRyQ0IOVRvu+fDJdRGBFAEwyN3fY2hGer06O9pElSU/3Jc
- GqYsd9IW/Tk+2TCZqcxMZprVsNiCTFEDdh4Sx4GmPL6vvul/bnQZNgNE
-X-Gm-Gg: ASbGncvaO6b8CZIl9KoNao42nLZxcOD/fg5A15GWcsdloLmf6i9c2vzLZscHbgGN/6/
- RbdZYd87iC5BEZHsQgOamzrrhB943NQPQzvrkl2MVPKpaH0S7D2rHriMbaEY/VvCbXyzrwU6NY3
- WvY/XJbm6I7D7HFnFVLBZYR28/zWZ7s7D7I8DvRQjLm+m/M3+agvogkR+3+lmuA6pf0jIQTrfO9
- s46pB38FB+KJmObA+A/p3+iQSeaIj3GkNxZJdvpGbhfviIanHlYFuRVGftGcfQH8oeFs0BNhi0+
- 9H+Y4gR2SgfWzMlM0o9GSjNwQuLP8QwFgHb0M5BZLrri+GsSny0zRfehPlWAmN4I9eyi2jONmG/
- UkGzCKIZfK8p3zltRKFPiOxSmyAvriDH/URiP/QUE7qDNxRZsS74BHun4vIqRzn0sDVr3BE2dWr
- MKdSpC1cyfgZfouCLYZckhdF/L39WjuzVJLYZuZ2PkwE0sK/iizda/CEQMbjhvDIWUNbU=
-X-Google-Smtp-Source: AGHT+IHsMTbrToOgSfw/axpEq5aA945OrTH9TJkjiHeMvhP5+IJdja0uMyNVev6oemCHmeiLlKtHlw==
-X-Received: by 2002:a17:902:d4c3:b0:264:ee2:c3f5 with SMTP id
- d9443c01a7336-294cb39d89cmr11771875ad.19.1761593594807; 
- Mon, 27 Oct 2025 12:33:14 -0700 (PDT)
+ AJvYcCWWo12Sq47btUlyaLyUJzpnBMP3Z5+q/gH8vC+B/In4FDYbmQAq6+708UK5VGctenPGrG9MLaKpl3cYTrrQHc4U@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzBrFjMjCv37cnHeWAVddSv6Y8wxn1aNu7A1JMiYAdgE+BI7m2J
+ YPzbfPD0LaLSDWpPur6m8ScOy62ph3rntkQZvAXDCLLlcZKLJuzT1HXfO6bwsQ==
+X-Gm-Gg: ASbGncshQVY5nA9hsSKriasg5cDteyl/GF4xSdKPsoW6Pbk0mmhc2lIPBiOcaUAuME6
+ psfKI+GXCxhuXgswHJKWJUjQqKDkqboCfgJL1p7dYKVKCCQqPzXaMLxW55902oJXx5kNmExThkE
+ m8FQGtJlcSR+x6aZG9Zbjq3TjeT15qT036InEs74tKfj9NsddsL2OerI5G9UwkRtjW+tOq9bEKC
+ XYHWeybfhj3MD/H4T8CCwOnYrAK3cGS968x6DoREUNk7Y5W5LeX9OIkepKrimALVpR9+kRLvl3t
+ x7DKQQbqpcmuwBShhFyh3b45XNMio4y6JZkRU1SYtxdn7dEhJnxaSgv6/RDAQI074I0NKyabKIF
+ 9COHigPNkZqgI4ccCRkeNj3FBquabEsQjTYdhRaI/jHDCw3SOi8rvjxVAIwnfE+EJqmJCL3kU8A
+ iYu6s59lFzNVQ2tkuRlVRXvbcUPqjvUS4FcYFMsWkJhaNlyc4R2LyzIvHGw1eyGUdbbos=
+X-Google-Smtp-Source: AGHT+IFRAncZTfCK5aEae9gbn/tVNxk7+QXIVkHDuFsJyFlQAQZrlpMU9lSsdt6MTHFJxj4+HAxtAA==
+X-Received: by 2002:a17:902:fc84:b0:267:ed5e:c902 with SMTP id
+ d9443c01a7336-294cb392202mr14292355ad.20.1761593615313; 
+ Mon, 27 Oct 2025 12:33:35 -0700 (PDT)
 Received: from daehojeong-desktop.mtv.corp.google.com
  ([2a00:79e0:2e7c:8:88a3:d9a1:52ff:2597])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29498cf358fsm89857025ad.20.2025.10.27.12.33.14
+ d9443c01a7336-29498cf33f9sm89611445ad.22.2025.10.27.12.33.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Oct 2025 12:33:14 -0700 (PDT)
+ Mon, 27 Oct 2025 12:33:34 -0700 (PDT)
 From: Daeho Jeong <daeho43@gmail.com>
 To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  kernel-team@android.com
-Date: Mon, 27 Oct 2025 12:33:08 -0700
-Message-ID: <20251027193308.4013974-1-daeho43@gmail.com>
+Date: Mon, 27 Oct 2025 12:33:32 -0700
+Message-ID: <20251027193332.4016328-1-daeho43@gmail.com>
 X-Mailer: git-send-email 2.51.1.838.g19442a804e-goog
 MIME-Version: 1.0
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -118,20 +118,20 @@ X-Spam-Report: Spam detection software,
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.169 listed in wl.mailspike.net]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ [209.85.215.169 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [daeho43(at)gmail.com]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [daeho43(at)gmail.com]
-X-Headers-End: 1vDSy5-00010i-QG
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit [daeho43(at)gmail.com]
+X-Headers-End: 1vDSyM-00011R-Gv
 Subject: [f2fs-dev] [PATCH v3] f2fs-tools: revert summary entry count from
  2048 to 512 in 16kb block support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -168,16 +168,17 @@ v3: add a feature to prevent from mounting deprecated format
 v2: detect legacy layout and prevent mount.
     fix ssa block calculation bug in resize tool.
 ---
- fsck/f2fs.h        | 18 ++++++++++-
- fsck/fsck.c        | 16 +++-------
- fsck/fsck.h        |  5 +++
- fsck/inject.c      |  4 +--
- fsck/mount.c       | 80 +++++++++++++++++++++++++++++++---------------
- fsck/resize.c      | 62 +++++++++++++++++++----------------
- include/f2fs_fs.h  | 15 +++++----
- lib/libf2fs_io.c   | 12 +++++++
- mkfs/f2fs_format.c |  6 +++-
- 9 files changed, 143 insertions(+), 75 deletions(-)
+ fsck/f2fs.h             | 18 +++++++++++-
+ fsck/fsck.c             | 16 ++++-------
+ fsck/fsck.h             |  5 ++++
+ fsck/inject.c           |  4 +--
+ fsck/mount.c            | 60 ++++++++++++++++++++++-----------------
+ fsck/resize.c           | 62 +++++++++++++++++++++++------------------
+ include/f2fs_fs.h       | 17 +++++++----
+ lib/libf2fs_io.c        | 12 ++++++++
+ mkfs/f2fs_format.c      |  6 +++-
+ mkfs/f2fs_format_main.c |  2 ++
+ 10 files changed, 127 insertions(+), 75 deletions(-)
 
 diff --git a/fsck/f2fs.h b/fsck/f2fs.h
 index 187e73c..538c99e 100644
@@ -303,10 +304,10 @@ index bd6ab84..fe5c293 100644
  
  out:
 diff --git a/fsck/mount.c b/fsck/mount.c
-index a1c4cbb..4959721 100644
+index a1c4cbb..40159ce 100644
 --- a/fsck/mount.c
 +++ b/fsck/mount.c
-@@ -1170,6 +1170,40 @@ int sanity_check_raw_super(struct f2fs_super_block *sb, enum SB_ADDR sb_addr)
+@@ -1170,6 +1170,20 @@ int sanity_check_raw_super(struct f2fs_super_block *sb, enum SB_ADDR sb_addr)
  		return -1;
  	}
  
@@ -316,38 +317,18 @@ index a1c4cbb..4959721 100644
 +	 * whereas legacy versions used one block per summary, leading
 +	 * to a much larger SSA.
 +	 */
-+	if (blocksize != F2FS_MIN_BLKSIZE) {
-+		unsigned int required_ssa_blocks;
-+		unsigned int expected_ssa_segs;
-+		uint64_t total_meta_segments, diff;
-+
-+		required_ssa_blocks = round_up(get_sb(segment_count_main),
-+						SUMS_PER_BLOCK);
-+		expected_ssa_segs = round_up(required_ssa_blocks,
-+						blocks_per_seg);
-+		total_meta_segments = get_sb(segment_count_ckpt) +
-+			get_sb(segment_count_sit) +
-+			get_sb(segment_count_nat) +
-+			expected_ssa_segs;
-+		diff = total_meta_segments % segs_per_zone;
-+		if (diff)
-+			expected_ssa_segs += segs_per_zone - diff;
-+
-+		if (get_sb(segment_count_ssa) > expected_ssa_segs) {
-+			MSG(0, "Error: Device formatted with a legacy version. "
-+					"Please reformat.\n");
-+			MSG(0, "\tSSA segment count (%u) is larger than "
-+					"expected (%u) for block size (%u).\n",
-+				get_sb(segment_count_ssa), expected_ssa_segs,
-+				blocksize);
-+			return -1;
-+		}
++	if (blocksize != F2FS_SUM_BLKSIZE  &&
++			!(get_sb(feature) & F2FS_FEATURE_PACKED_SSA)) {
++		MSG(0, "Error: Device formatted with a legacy version. "
++			"Please reformat with a tool supporting the packed ssa "
++			"feature for block sizes larger than 4kb.\n");
++		return -1;
 +	}
 +
  	if (sanity_check_area_boundary(sb, sb_addr))
  		return -1;
  	return 0;
-@@ -2144,6 +2178,7 @@ static void read_normal_summaries(struct f2fs_sb_info *sbi, int type)
+@@ -2144,6 +2158,7 @@ static void read_normal_summaries(struct f2fs_sb_info *sbi, int type)
  	struct curseg_info *curseg;
  	unsigned int segno = 0;
  	block_t blk_addr = 0;
@@ -355,7 +336,7 @@ index a1c4cbb..4959721 100644
  	int ret;
  
  	if (IS_DATASEG(type)) {
-@@ -2154,24 +2189,26 @@ static void read_normal_summaries(struct f2fs_sb_info *sbi, int type)
+@@ -2154,24 +2169,26 @@ static void read_normal_summaries(struct f2fs_sb_info *sbi, int type)
  			blk_addr = sum_blk_addr(sbi, NR_CURSEG_DATA_TYPE, type);
  	} else {
  		segno = get_cp(cur_node_segno[type - CURSEG_HOT_NODE]);
@@ -387,7 +368,7 @@ index a1c4cbb..4959721 100644
  	reset_curseg(sbi, type);
  	free(sum_blk);
  }
-@@ -2199,8 +2236,7 @@ void update_sum_entry(struct f2fs_sb_info *sbi, block_t blk_addr,
+@@ -2199,8 +2216,7 @@ void update_sum_entry(struct f2fs_sb_info *sbi, block_t blk_addr,
  							SUM_TYPE_DATA;
  
  	/* write SSA all the time */
@@ -397,7 +378,7 @@ index a1c4cbb..4959721 100644
  	ASSERT(ret >= 0);
  
  	if (type == SEG_TYPE_NODE || type == SEG_TYPE_DATA ||
-@@ -2399,11 +2435,9 @@ struct f2fs_summary_block *get_sum_block(struct f2fs_sb_info *sbi,
+@@ -2399,11 +2415,9 @@ struct f2fs_summary_block *get_sum_block(struct f2fs_sb_info *sbi,
  	struct f2fs_summary_block *sum_blk;
  	struct curseg_info *curseg;
  	int type, ret;
@@ -409,7 +390,7 @@ index a1c4cbb..4959721 100644
  	for (type = 0; type < NR_CURSEG_NODE_TYPE; type++) {
  		curseg = CURSEG_I(sbi, CURSEG_HOT_NODE + type);
  		if (segno == curseg->segno) {
-@@ -2434,10 +2468,10 @@ struct f2fs_summary_block *get_sum_block(struct f2fs_sb_info *sbi,
+@@ -2434,10 +2448,10 @@ struct f2fs_summary_block *get_sum_block(struct f2fs_sb_info *sbi,
  		}
  	}
  
@@ -422,7 +403,7 @@ index a1c4cbb..4959721 100644
  	ASSERT(ret >= 0);
  
  	if (IS_SUM_NODE_SEG(sum_blk))
-@@ -3054,7 +3088,6 @@ int find_next_free_block(struct f2fs_sb_info *sbi, u64 *to, int left,
+@@ -3054,7 +3068,6 @@ int find_next_free_block(struct f2fs_sb_info *sbi, u64 *to, int left,
  		struct curseg_info *curseg = CURSEG_I(sbi, want_type);
  		unsigned int segs_per_zone = sbi->segs_per_sec * sbi->secs_per_zone;
  		char buf[F2FS_BLKSIZE];
@@ -430,7 +411,7 @@ index a1c4cbb..4959721 100644
  		int ret;
  
  		*to = NEXT_FREE_BLKADDR(sbi, curseg);
-@@ -3072,17 +3105,15 @@ int find_next_free_block(struct f2fs_sb_info *sbi, u64 *to, int left,
+@@ -3072,17 +3085,15 @@ int find_next_free_block(struct f2fs_sb_info *sbi, u64 *to, int left,
  				segno = GET_SEGNO(sbi, new_blkaddr);
  			}
  
@@ -451,7 +432,7 @@ index a1c4cbb..4959721 100644
  			ASSERT(ret >= 0);
  
  			memcpy(curseg->sum_blk, &buf, SUM_ENTRIES_SIZE);
-@@ -3160,7 +3191,7 @@ void move_one_curseg_info(struct f2fs_sb_info *sbi, u64 from, int left,
+@@ -3160,7 +3171,7 @@ void move_one_curseg_info(struct f2fs_sb_info *sbi, u64 from, int left,
  	struct curseg_info *curseg = CURSEG_I(sbi, i);
  	char buf[F2FS_BLKSIZE];
  	u32 old_segno;
@@ -460,7 +441,7 @@ index a1c4cbb..4959721 100644
  	int ret;
  
  	if ((get_sb(feature) & F2FS_FEATURE_RO)) {
-@@ -3178,8 +3209,8 @@ void move_one_curseg_info(struct f2fs_sb_info *sbi, u64 from, int left,
+@@ -3178,8 +3189,8 @@ void move_one_curseg_info(struct f2fs_sb_info *sbi, u64 from, int left,
  	}
  
  	/* update original SSA too */
@@ -471,7 +452,7 @@ index a1c4cbb..4959721 100644
  	ASSERT(ret >= 0);
  bypass_ssa:
  	to = from;
-@@ -3193,8 +3224,7 @@ bypass_ssa:
+@@ -3193,8 +3204,7 @@ bypass_ssa:
  	curseg->alloc_type = c.zoned_model == F2FS_ZONED_HM ? LFS : SSR;
  
  	/* update new segno */
@@ -481,7 +462,7 @@ index a1c4cbb..4959721 100644
  	ASSERT(ret >= 0);
  
  	memcpy(curseg->sum_blk, buf, SUM_ENTRIES_SIZE);
-@@ -3440,7 +3470,6 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
+@@ -3440,7 +3450,6 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
  	/* update summary blocks having nullified journal entries */
  	for (i = 0; i < NO_CHECK_TYPE; i++) {
  		struct curseg_info *curseg = CURSEG_I(sbi, i);
@@ -489,7 +470,7 @@ index a1c4cbb..4959721 100644
  
  		if (!(flags & CP_UMOUNT_FLAG) && IS_NODESEG(i))
  			continue;
-@@ -3451,9 +3480,8 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
+@@ -3451,9 +3460,8 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
  
  		if (!(get_sb(feature) & F2FS_FEATURE_RO)) {
  			/* update original SSA too */
@@ -610,7 +591,7 @@ index 58914ec..f71290a 100644
  	}
  
 diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index bd75dbb..88a854a 100644
+index bd75dbb..e1427f7 100644
 --- a/include/f2fs_fs.h
 +++ b/include/f2fs_fs.h
 @@ -655,6 +655,7 @@ enum {
@@ -621,7 +602,15 @@ index bd75dbb..88a854a 100644
  #define F2FS_MAX_EXTENSION		64	/* # of extension entries */
  #define F2FS_EXTENSION_LEN		8	/* max size of extension */
  #define F2FS_BLK_ALIGN(x)	(((x) + F2FS_BLKSIZE - 1) / F2FS_BLKSIZE)
-@@ -1218,7 +1219,7 @@ struct f2fs_sit_block {
+@@ -715,6 +716,7 @@ enum {
+ #define F2FS_FEATURE_COMPRESSION	0x2000
+ #define F2FS_FEATURE_RO			0x4000
+ #define F2FS_FEATURE_DEVICE_ALIAS	0x8000
++#define F2FS_FEATURE_PACKED_SSA		0x10000
+ 
+ #define MAX_NR_FEATURE			32
+ 
+@@ -1218,7 +1220,7 @@ struct f2fs_sit_block {
   * from node's page's beginning to get a data block address.
   * ex) data_blkaddr = (block_t)(nodepage_start_address + ofs_in_node)
   */
@@ -630,7 +619,7 @@ index bd75dbb..88a854a 100644
  #define	SUMMARY_SIZE		(7)	/* sizeof(struct summary) */
  #define	SUM_FOOTER_SIZE		(5)	/* sizeof(struct summary_footer) */
  #define SUM_ENTRIES_SIZE	(SUMMARY_SIZE * ENTRIES_IN_SUM)
-@@ -1248,7 +1249,7 @@ struct summary_footer {
+@@ -1248,7 +1250,7 @@ struct summary_footer {
  
  static_assert(sizeof(struct summary_footer) == 5, "");
  
@@ -639,7 +628,7 @@ index bd75dbb..88a854a 100644
  				SUM_ENTRIES_SIZE)
  #define NAT_JOURNAL_ENTRIES	((SUM_JOURNAL_SIZE - 2) /\
  				sizeof(struct nat_journal_entry))
-@@ -1347,7 +1348,7 @@ struct f2fs_summary_block {
+@@ -1347,7 +1349,7 @@ struct f2fs_summary_block {
  };
  #define F2FS_SUMMARY_BLOCK_JOURNAL(blk) ((struct f2fs_journal *)(&(blk)->entries[ENTRIES_IN_SUM]))
  #define F2FS_SUMMARY_BLOCK_FOOTER(blk) ((struct summary_footer *)&((char *)\
@@ -648,7 +637,7 @@ index bd75dbb..88a854a 100644
  
  /*
   * For directory operations
-@@ -1709,6 +1710,8 @@ extern int dev_fill_block(void *, __u64, enum rw_hint);
+@@ -1709,6 +1711,8 @@ extern int dev_fill_block(void *, __u64, enum rw_hint);
  
  extern int dev_read_block(void *, __u64);
  extern int dev_reada_block(__u64);
@@ -657,7 +646,15 @@ index bd75dbb..88a854a 100644
  
  extern int dev_read_version(void *, __u64, size_t);
  extern void get_kernel_version(__u8 *);
-@@ -2159,18 +2162,18 @@ static inline void check_block_struct_sizes(void)
+@@ -2020,6 +2024,7 @@ struct feature feature_table[] = {					\
+ 	{ "compression",		F2FS_FEATURE_COMPRESSION,	1}, \
+ 	{ "ro",				F2FS_FEATURE_RO,		1}, \
+ 	{ "device_alias",		F2FS_FEATURE_DEVICE_ALIAS,	0}, \
++	{ "packed_ssa",			F2FS_FEATURE_PACKED_SSA,	0}, \
+ 	{ NULL,				0x0,				0}, \
+ };
+ 
+@@ -2159,18 +2164,18 @@ static inline void check_block_struct_sizes(void)
  	assert(sizeof(struct f2fs_summary) * ENTRIES_IN_SUM
  			+ offsetof(struct f2fs_journal, nat_j)
  			+ NAT_JOURNAL_ENTRIES * sizeof(struct nat_journal_entry)
@@ -720,6 +717,19 @@ index 6deb671..6efad45 100644
  	}
  
  	set_sb(segment_count_ssa, SEG_ALIGN(blocks_for_ssa));
+diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+index 8f8e975..5e509c8 100644
+--- a/mkfs/f2fs_format_main.c
++++ b/mkfs/f2fs_format_main.c
+@@ -209,6 +209,8 @@ static void f2fs_parse_options(int argc, char *argv[])
+ 				MSG(0, "Error: Block size must be power of 2");
+ 				mkfs_usage();
+ 			}
++			if (c.blksize != F2FS_SUM_BLKSIZE)
++				c.feature |= F2FS_FEATURE_PACKED_SSA;
+ 			break;
+ 		case 'c':
+ 			dev_num = c.ndevs;
 -- 
 2.51.1.838.g19442a804e-goog
 
