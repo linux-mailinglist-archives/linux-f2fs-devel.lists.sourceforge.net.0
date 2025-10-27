@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7998C0C46C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Oct 2025 09:21:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 988DDC0C537
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 27 Oct 2025 09:35:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=SCXRkS1WjW+30bEd4311ggRr+dJ3zRbJvETz8FE371w=; b=JJyl1CCQFvMg11Sw1vGFj+Sv05
-	fLjJNeunrVgYB8xhKr/QAWM6M049JHT5nipGArDLjBc5+i1PrBfhGNKorJDL8jEQulN9+7izo1BTf
-	erDwL2JQ6X88D6C7VLTQz2/4dXySe+59suSB2OYXImGYYDzVrHPDj8OxiG1cy1LLno64=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=tAvD8yBS5BfU37mx+FN/xnOmRf1Yathhx85DjYV0JJo=; b=VI+rsJy0r/vePzSiw7mhKqnUE/
+	Tyj5+fxydcfgL682AdRz5PbNKpFCTzxaFJ6ojYxhvzyu0cuhd0ny3kt9IqTY36lRk+lbAyoQFSvec
+	1c5o9FK11UHPa4bXWpRomF/4pmfCTQz7pImrtjXSfxgSJ5ED0UVfazgwgtn6Pjyw3e7M=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vDITT-0005OQ-0i;
-	Mon, 27 Oct 2025 08:21:07 +0000
+	id 1vDIh8-0002uY-QV;
+	Mon, 27 Oct 2025 08:35:14 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vDITR-0005OK-Tv
+ (envelope-from <chao@kernel.org>) id 1vDIh6-0002uS-SQ
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 27 Oct 2025 08:21:05 +0000
+ Mon, 27 Oct 2025 08:35:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OS6TD8PsEzfnPxEob+PL2Yk/RxxgI7UjT/GqsIkn1fQ=; b=JffU67Lv4mRVQE5jIp9NPjaTZ0
- n7wEMJHhwINgaYCzZ0j1Bx1NB2odhnTSJB3El1GASIx6UJh3ADXTrv7ArpVtS1JhFAiwZcMS9OwMl
- D78b8VLMqkkEZ9wZN272ECWJjUHc6YLxVvm5nu1kHs+/6TcYbDN8BUw/P9QJZTi97eTg=;
+ bh=hKQUE2JEMAdOera+qJOP9JhHnU0UbHSf0mUNBION7gQ=; b=QmNSQ+PGWaUCagNnO/m5ubIEn8
+ hiOpaguM4AvRMN0dW1OAzZBXygThcrtKnh9SELtjrT1kyQpZiRCcsaFWjn8cbRPfjsmKObn5jRlJu
+ Y1dlxfXqpcmw5yIqIT6eGjALZvNjQ+U/dGgn80BaVhoUksXH97VoMoHXP5ZxFGZkCZkE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,38 +40,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OS6TD8PsEzfnPxEob+PL2Yk/RxxgI7UjT/GqsIkn1fQ=; b=AmnirqtpxMBruxbZk2Q+4ibRxi
- p9afqsVMG8ypsxDeqYMmDYNDclekmPKMTVBn0aBuKZq7wvhTja4VQMUqUEsV+91sv2vPuO0hCkxcA
- azg11uXaCdVk9TPTHQJeNrNVY8mWC88Yg1a94Ut7R0HQFHx7L+6wlWEivN5f0D78o+IU=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=hKQUE2JEMAdOera+qJOP9JhHnU0UbHSf0mUNBION7gQ=; b=iRrlbldMZxRzTxc05DcjNl7NQP
+ w/zDtiWeTpa7IH8TKVYtfBZ0mRCbCKSKbpwbyUHJI8RvOyKrxLYGwlpyQfFrjFJboQXD5RQmcgB/g
+ dbKGsTkMptyUOOVlIe4ullfQ8kChmSW+EqJWUJtIxd56SQLzToXpCoVUOYLQ5YPXQIz8=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vDITR-00027L-AI for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 27 Oct 2025 08:21:05 +0000
+ id 1vDIh6-0002kB-9O for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 27 Oct 2025 08:35:12 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id E83B640401;
- Mon, 27 Oct 2025 08:20:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77456C4CEF1;
- Mon, 27 Oct 2025 08:20:53 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A24296029B;
+ Mon, 27 Oct 2025 08:35:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B1FDC4CEFB;
+ Mon, 27 Oct 2025 08:35:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761553254;
- bh=kZEWpxSlMsmolTkD6bSUizlONiaovvY4kPkzPXEi7hE=;
+ s=k20201202; t=1761554106;
+ bh=nBL/Arnr+v0xQihy1CE1YgQgbw7rsr5Z2nF82BJ6fsc=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=RYzMOsn85iVgjJ3iChJB2ZUiI9Yna2yiIDycBc9amOk3MmceOTtH0RaNe38GKznPe
- UtE/nkjXdB0ytUa+GthGKIP7/XaVJNAOmmwMDfxR40M/63zD9Ld7FU76H7zsOgsJv1
- Tbma4IozPOX1eojb437p2zn+PGwyAzbEMDkZj2TCW13tq0BXYv6sjxnV4huYo4G8s6
- huqA64a/enk1nSg7DEzj3PmKM/DR76rh58E9McgYxRxhwMjHeveUOCScRJWC220YAM
- ddkF4sTY9V5v9PCkHvBzqtjPrVZiLASDoYJnLIBugkGqQC6wBlmUJT//7DmzjIU2ln
- LJ+aprpWGQgnw==
-Message-ID: <2170f364-b48a-47ef-a8b8-f6e72027999a@kernel.org>
-Date: Mon, 27 Oct 2025 16:20:51 +0800
+ b=HSRC0p4ClyaQU4oJGVswmB4Zj6VKbLGbDlSuEybNUMPC2WXj1h356ifpK+TWahVLx
+ ESVFmRg2G88AyMtKXxzxkgL8gnuAK35Xuuu8SkYhiabfBThi47M/ghqgXmz06bKAQS
+ 2zNU5ycWw0VF2jZ6HFF6WIbFz/rTObcbK7Isrl17cc2+DdLLtD5JfSl05wU7eTOcXJ
+ fMvwrSF9sXyxU19vopDfcgGmoMGQG4z9aovR38Z1AiMIwXED5YwV7JkEuCoeDmROn7
+ yxgKvW4u2mteqRmzKNPbt3gbPDmGXEnPDQCYX2zJsFqjx49uF4gwZAMqu7ou2X4XQk
+ 0TYAxgCXsCToA==
+Message-ID: <c0689523-a265-47ce-b443-b4fe4ae7d823@kernel.org>
+Date: Mon, 27 Oct 2025 16:35:03 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Yongpeng Yang <yangyongpeng.storage@gmail.com>,
  Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20251024131344.144972-1-yangyongpeng.storage@gmail.com>
+References: <20251024143746.187140-1-yangyongpeng.storage@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20251024131344.144972-1-yangyongpeng.storage@gmail.com>
+In-Reply-To: <20251024143746.187140-1-yangyongpeng.storage@gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -79,9 +79,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 10/24/25 21:13, Yongpeng Yang wrote: > From: Yongpeng Yang
- <yangyongpeng@xiaomi.com> > > Change the type of the unlock parameter of
- f2fs_put_page to bool. > All callers should consistently pass tru [...] 
+ Content preview:  On 10/24/25 22:37, Yongpeng Yang wrote: > From: Yongpeng Yang
+ <yangyongpeng@xiaomi.com> > > When F2FS uses multiple block devices, each
+ device may have a > different discard granularity. The minimum t [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +93,9 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vDITR-00027L-AI
-Subject: Re: [f2fs-dev] [PATCH] f2fs: change the unlock parameter of
- f2fs_put_page to bool
+X-Headers-End: 1vDIh6-0002kB-9O
+Subject: Re: [f2fs-dev] [PATCH] f2fs: ensure minimum trim granularity
+ accounts for all devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,202 +115,97 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 10/24/25 21:13, Yongpeng Yang wrote:
+On 10/24/25 22:37, Yongpeng Yang wrote:
 > From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 > 
-> Change the type of the unlock parameter of f2fs_put_page to bool.
-> All callers should consistently pass true or false. No logical change.
+> When F2FS uses multiple block devices, each device may have a
+> different discard granularity. The minimum trim granularity must be
+> at least the maximum discard granularity of all devices, excluding
+> zoned devices. Use max_t instead of the max() macro to compute the
+> maximum value.
 > 
 > Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
 > ---
->  fs/f2fs/compress.c |  8 ++++----
->  fs/f2fs/data.c     | 12 ++++--------
->  fs/f2fs/f2fs.h     |  2 +-
->  fs/f2fs/gc.c       |  6 +++---
->  fs/f2fs/inline.c   |  4 ++--
->  fs/f2fs/namei.c    |  4 ++--
->  6 files changed, 16 insertions(+), 20 deletions(-)
+>  fs/f2fs/f2fs.h | 12 ++++++++++++
+>  fs/f2fs/file.c | 12 ++++++------
+>  2 files changed, 18 insertions(+), 6 deletions(-)
 > 
-> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> index 811bfe38e5c0..716004ba44dc 100644
-> --- a/fs/f2fs/compress.c
-> +++ b/fs/f2fs/compress.c
-> @@ -120,7 +120,7 @@ static void f2fs_unlock_rpages(struct compress_ctx *cc, int len)
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 32fb2e7338b7..064bdbf463f7 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -4762,6 +4762,18 @@ static inline bool f2fs_hw_support_discard(struct f2fs_sb_info *sbi)
+>  	return false;
 >  }
 >  
->  static void f2fs_put_rpages_wbc(struct compress_ctx *cc,
-> -		struct writeback_control *wbc, bool redirty, int unlock)
-> +		struct writeback_control *wbc, bool redirty, bool unlock)
->  {
->  	unsigned int i;
->  
-> @@ -1202,7 +1202,7 @@ bool f2fs_compress_write_end(struct inode *inode, void *fsdata,
->  	if (copied)
->  		set_cluster_dirty(&cc);
->  
-> -	f2fs_put_rpages_wbc(&cc, NULL, false, 1);
-> +	f2fs_put_rpages_wbc(&cc, NULL, false, true);
->  	f2fs_destroy_compress_ctx(&cc, false);
->  
->  	return first_index;
-> @@ -1605,7 +1605,7 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
->  			add_compr_block_stat(cc->inode, cc->cluster_size);
->  			goto write;
->  		} else if (err) {
-> -			f2fs_put_rpages_wbc(cc, wbc, true, 1);
-> +			f2fs_put_rpages_wbc(cc, wbc, true, true);
->  			goto destroy_out;
->  		}
->  
-> @@ -1619,7 +1619,7 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
->  	f2fs_bug_on(F2FS_I_SB(cc->inode), *submitted);
->  
->  	err = f2fs_write_raw_pages(cc, submitted, wbc, io_type);
-> -	f2fs_put_rpages_wbc(cc, wbc, false, 0);
-> +	f2fs_put_rpages_wbc(cc, wbc, false, false);
->  destroy_out:
->  	f2fs_destroy_compress_ctx(cc, false);
->  	return err;
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 1f090c018f1b..daca2a42b20c 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -3621,8 +3621,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
->  		folio_lock(folio);
->  		if (folio->mapping != mapping) {
->  			/* The folio got truncated from under us */
-> -			folio_unlock(folio);
-> -			folio_put(folio);
-> +			f2fs_folio_put(folio, true);
+> +static inline unsigned int f2fs_hw_discard_granularity(struct f2fs_sb_info *sbi)
+> +{
+> +	int i = 1;
+> +	unsigned int discard_granularity = bdev_discard_granularity(sbi->sb->s_bdev);
 
 Yongpeng,
 
-I prefer to not use f2fs_folio_put() here, to avoid potential null-ptr dereference
-on folio->mapping via f2fs_folio_put() -> F2FS_F_SB(), as folio->mapping could be
-NULL due to race w/ truncation.
+The patch makes sense to me.
 
->  			goto repeat;
->  		}
->  	}
-> @@ -3653,8 +3652,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
->  
->  		folio_lock(folio);
->  		if (unlikely(folio->mapping != mapping)) {
-> -			folio_unlock(folio);
-> -			folio_put(folio);
-> +			f2fs_folio_put(folio, true);
-
-Ditto,
+One extra question, if a zoned device contains both conventional zones and
+sequential zones, what discard granularity will it exposes?
 
 Thanks,
 
->  			goto repeat;
->  		}
->  		if (unlikely(!folio_test_uptodate(folio))) {
-> @@ -3665,8 +3663,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
->  	return 0;
->  
->  put_folio:
-> -	folio_unlock(folio);
-> -	folio_put(folio);
-> +	f2fs_folio_put(folio, true);
->  fail:
->  	f2fs_write_failed(inode, pos + len);
->  	return err;
-> @@ -3722,8 +3719,7 @@ static int f2fs_write_end(const struct kiocb *iocb,
->  					pos + copied);
->  	}
->  unlock_out:
-> -	folio_unlock(folio);
-> -	folio_put(folio);
-> +	f2fs_folio_put(folio, true);
->  	f2fs_update_time(F2FS_I_SB(inode), REQ_TIME);
->  	return copied;
->  }
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 94eb9a2d3a73..32fb2e7338b7 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -2979,7 +2979,7 @@ static inline void f2fs_folio_put(struct folio *folio, bool unlock)
->  	folio_put(folio);
->  }
->  
-> -static inline void f2fs_put_page(struct page *page, int unlock)
-> +static inline void f2fs_put_page(struct page *page, bool unlock)
+> +
+> +	if (f2fs_is_multi_device(sbi))
+> +		for (; i < sbi->s_ndevs && !bdev_is_zoned(FDEV(i).bdev); i++)
+> +			discard_granularity = max_t(unsigned int, discard_granularity,
+> +						bdev_discard_granularity(FDEV(i).bdev));
+> +	return discard_granularity;
+> +}
+> +
+>  static inline bool f2fs_realtime_discard_enable(struct f2fs_sb_info *sbi)
 >  {
->  	if (!page)
->  		return;
-> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> index 22fe6e2c6d5c..fd8bb0424bf3 100644
-> --- a/fs/f2fs/gc.c
-> +++ b/fs/f2fs/gc.c
-> @@ -1278,7 +1278,7 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
->  	err = f2fs_submit_page_bio(&fio);
->  	if (err)
->  		goto put_encrypted_page;
-> -	f2fs_put_page(fio.encrypted_page, 0);
-> +	f2fs_put_page(fio.encrypted_page, false);
->  	f2fs_folio_put(folio, true);
+>  	return (test_opt(sbi, DISCARD) && f2fs_hw_support_discard(sbi)) ||
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 6d42e2d28861..ced0f78532c9 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -2588,14 +2588,14 @@ static int f2fs_keep_noreuse_range(struct inode *inode,
+>  static int f2fs_ioc_fitrim(struct file *filp, unsigned long arg)
+>  {
+>  	struct inode *inode = file_inode(filp);
+> -	struct super_block *sb = inode->i_sb;
+> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>  	struct fstrim_range range;
+>  	int ret;
 >  
->  	f2fs_update_iostat(sbi, inode, FS_DATA_READ_IO, F2FS_BLKSIZE);
-> @@ -1286,7 +1286,7 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
+>  	if (!capable(CAP_SYS_ADMIN))
+>  		return -EPERM;
 >  
->  	return 0;
->  put_encrypted_page:
-> -	f2fs_put_page(fio.encrypted_page, 1);
-> +	f2fs_put_page(fio.encrypted_page, true);
->  put_folio:
->  	f2fs_folio_put(folio, true);
->  	return err;
-> @@ -1442,7 +1442,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
->  	f2fs_update_data_blkaddr(&dn, newaddr);
->  	set_inode_flag(inode, FI_APPEND_WRITE);
+> -	if (!f2fs_hw_support_discard(F2FS_SB(sb)))
+> +	if (!f2fs_hw_support_discard(sbi))
+>  		return -EOPNOTSUPP;
 >  
-> -	f2fs_put_page(fio.encrypted_page, 1);
-> +	f2fs_put_page(fio.encrypted_page, true);
->  recover_block:
->  	if (err)
->  		f2fs_do_replace_block(fio.sbi, &sum, newaddr, fio.old_blkaddr,
-> diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-> index 58ac831ef704..e5c6a08b7e4f 100644
-> --- a/fs/f2fs/inline.c
-> +++ b/fs/f2fs/inline.c
-> @@ -287,7 +287,7 @@ int f2fs_write_inline_data(struct inode *inode, struct folio *folio)
->  	set_inode_flag(inode, FI_DATA_EXIST);
+>  	if (copy_from_user(&range, (struct fstrim_range __user *)arg,
+> @@ -2606,9 +2606,9 @@ static int f2fs_ioc_fitrim(struct file *filp, unsigned long arg)
+>  	if (ret)
+>  		return ret;
 >  
->  	folio_clear_f2fs_inline(ifolio);
-> -	f2fs_folio_put(ifolio, 1);
-> +	f2fs_folio_put(ifolio, true);
+> -	range.minlen = max((unsigned int)range.minlen,
+> -			   bdev_discard_granularity(sb->s_bdev));
+> -	ret = f2fs_trim_fs(F2FS_SB(sb), &range);
+> +	range.minlen = max_t(unsigned int, range.minlen,
+> +			f2fs_hw_discard_granularity(sbi));
+> +	ret = f2fs_trim_fs(sbi, &range);
+>  	mnt_drop_write_file(filp);
+>  	if (ret < 0)
+>  		return ret;
+> @@ -2616,7 +2616,7 @@ static int f2fs_ioc_fitrim(struct file *filp, unsigned long arg)
+>  	if (copy_to_user((struct fstrim_range __user *)arg, &range,
+>  				sizeof(range)))
+>  		return -EFAULT;
+> -	f2fs_update_time(F2FS_I_SB(inode), REQ_TIME);
+> +	f2fs_update_time(sbi, REQ_TIME);
 >  	return 0;
 >  }
 >  
-> @@ -577,7 +577,7 @@ static int f2fs_move_rehashed_dirents(struct inode *dir, struct folio *ifolio,
->  	f2fs_i_depth_write(dir, 0);
->  	f2fs_i_size_write(dir, MAX_INLINE_DATA(dir));
->  	folio_mark_dirty(ifolio);
-> -	f2fs_folio_put(ifolio, 1);
-> +	f2fs_folio_put(ifolio, true);
->  
->  	kfree(backup_dentry);
->  	return err;
-> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-> index 68b33e8089b0..07ceed173ffe 100644
-> --- a/fs/f2fs/namei.c
-> +++ b/fs/f2fs/namei.c
-> @@ -1259,11 +1259,11 @@ static int f2fs_cross_rename(struct inode *old_dir, struct dentry *old_dentry,
->  	return 0;
->  out_new_dir:
->  	if (new_dir_entry) {
-> -		f2fs_folio_put(new_dir_folio, 0);
-> +		f2fs_folio_put(new_dir_folio, false);
->  	}
->  out_old_dir:
->  	if (old_dir_entry) {
-> -		f2fs_folio_put(old_dir_folio, 0);
-> +		f2fs_folio_put(old_dir_folio, false);
->  	}
->  out_new:
->  	f2fs_folio_put(new_folio, false);
 
 
 
