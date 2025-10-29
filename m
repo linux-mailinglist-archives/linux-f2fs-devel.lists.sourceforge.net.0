@@ -2,99 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F188C1A1FB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Oct 2025 12:54:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EE6BC1A211
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Oct 2025 13:02:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=zALkY81XX3YqSqs8BdddvJBiNzzkFD170XppIy5WJSk=; b=OHkaS6BxKTXhzCu2E17sHhJ40Q
-	9od33sQfBnowOYG0zpflx0ylJz3fg1e9uaTuEzLbJgLmXxwbMouV+b8WDE5SLx6pv5RUE50vFT/T1
-	RQmQmU45GuaG8YmFa1oRCpm2cORSzsCwDm+L+onyMF9r6VoWmXAcWDFebvwhRkDE09fk=;
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=/eaAHdrw+MVi+vH7M+2Ju3esJwy9V4QTCn6HdaI0Lt8=; b=m2RzxmOq7h64eh/CsiR+Reg8Dz
+	UG71pAbtCr1VlTPa4rsgFAxn4KFhotwZJj8I4hc5Usi9k4nubEg8jcr3a2GGOw9L5MgafDQuVsh+M
+	GleZafQESEhIP43SU1YOS6p8RYDNZ03z+zkTiMN++jdCDFWk1KX2X2ojaXl7OdNdx3aA=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vE4l2-0004gX-Th;
-	Wed, 29 Oct 2025 11:54:29 +0000
+	id 1vE4t5-000511-Re;
+	Wed, 29 Oct 2025 12:02:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vE4l1-0004gL-MH
+ (envelope-from <chao@kernel.org>) id 1vE4t5-00050v-Ak
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 29 Oct 2025 11:54:28 +0000
+ Wed, 29 Oct 2025 12:02:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IJDuAVGpi0Gi8TxzDOaYkBhvqfd2exxF26PzAR4YwHE=; b=frQawNLYx1uJCqtH/O9fzBsGmC
- yElnBfUEGjPVpllMycjqyzxNkIqdCysYr2eFNc8u8/N4G/Ta++3OjuDdkoY7v5ZMl6npjciROiMnr
- aoMNr712HIJUNDkZJ2NSRGjLUmSaCs9eSnK7ZLjCDnXlvn/cQ96NWQe5or/I3rfwAQgE=;
+ bh=3WSgrb6eBdX/42rOwlLlHXug5/B3ydakVgbfvpO3eqw=; b=f6g0corpGqcYj0VB28aNtFqtiY
+ glqwGqSFzkDES8XqXfnwYP+wP/zlNt15GoEA08nCJtmMrAa19uWst31cF7qCPMPS9ns9g2d6q7efw
+ tBTE6uq2oD7VDcbMvPq4Aztq7CE6q4JM2XZ43azpruGzNSe6BsjCJrZ0Wdfa4Ly5Wo30=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=IJDuAVGpi0Gi8TxzDOaYkBhvqfd2exxF26PzAR4YwHE=; b=A
- 8uF7pxSP+r+nEkpDpWnr1DeNn3ezbEgr7JR5hP7wQ3MjxplzP+I3ItolrqQLBej99DFETlXntlcwA
- xhpZTvGieazFyx1SIO0jNtjlDQGMPRpE1a+FpaNMNV8eP0XzpDtNO6gVCR/AM9/KRC7DpG5byBYD7
- bCXg/TiM4HrrGbP4=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=3WSgrb6eBdX/42rOwlLlHXug5/B3ydakVgbfvpO3eqw=; b=KH6tDxJWF8UPIvc4X1wRRqMgwe
+ 64wAduZfEoVQmUSgNDJK09DWlk7p734GM67x5KVUGkm+q7bF5oGZjoqEczjQF3JTdjq0yslrRHaeR
+ QVl45npoh6TUvZD6jqqxi7rluFQQTNbgd6tUgs0Uj2TSgcfevxkAvHnHUC0SmPOSwSBw=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vE4l2-0000U6-2O for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 29 Oct 2025 11:54:28 +0000
+ id 1vE4t5-0000tj-H5 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 29 Oct 2025 12:02:48 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id BC19143270
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 29 Oct 2025 11:54:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EA8EC4CEF7;
- Wed, 29 Oct 2025 11:54:21 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 0984840A31;
+ Wed, 29 Oct 2025 12:02:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B1E8C4CEF7;
+ Wed, 29 Oct 2025 12:02:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761738862;
- bh=QYWNcLUo1Xo3vHpwv4dqRFJ8Nq83iubr9cMZzymfZkg=;
- h=From:To:Cc:Subject:Date:From;
- b=PQUWMLGeW9qxxL5p8urexuWi7vtflz7CHm83HfSJeXr7Ur1TBquTPW8oGwv7nqr9e
- niojTbZzHamkt07AMUT3kvliHLszdn4HUwhpaxNL8saZXUEtvXUs11nz+jcav5+UGv
- I8jvbm4JmrxhEzSbd+HdNjg1L8e1l+fBTf1Nk2kopzgFMDr2+La9USjKrBRuIWBOhD
- 12bZFPOUVUesE+HvgUvHOiWcTSQWBG/Ybgv2+vezHHWgJijrnhFbbR3PFfQW7TmvMy
- FDAGm4/rPTsuVrjppAHd6fM7udDf3sGH49qxPeQ3PNbhkjRrBpvfNGHJmMgY5r3Tz+
- Yadj345HoB/Yw==
-To: Zorro Lang <zlang@kernel.org>,
-	fstests@vger.kernel.org
-Date: Wed, 29 Oct 2025 19:54:13 +0800
-Message-ID: <20251029115413.1085987-1-chao@kernel.org>
-X-Mailer: git-send-email 2.51.1.851.g4ebd6896fd-goog
+ s=k20201202; t=1761739356;
+ bh=FnowuDxDevMD9mwxtf2kNZdUxIQHi9dzh6ou8P39uIk=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=ctQ82c1pR6v5IOaKMWnF5Zoi83j1Lq4iLMqUndjC8XcxGYLeVnA/ObbfJAMKMKb9z
+ K3II5fnXvLGBeTI1sZ+x1qAWERTERwL/YZS6MYYZXHpxZ9pxdk2wOJiXJfQwjY+NQd
+ OjxgtLMwbM2+M2J/tKhy+FdamHdHMiysbhmBofSQv5MBEqlas7497FYuQyrMAeppzi
+ GnOrxUMBKBhR5udK6TGwzn3uMjpw4GSM+46Yaj6Ev/VZVT3jBJFJ5A98RQIZ7VfYct
+ aPiIup7aCMUOXWXnksZMdB1pAJcrvCbOPQElMUFjR9caUl2tWJVKME4cfvxJBcjeWj
+ b/+OwV1+7yUVg==
+Message-ID: <1a26766d-311c-460b-b5c3-309750b3f0a1@kernel.org>
+Date: Wed, 29 Oct 2025 20:02:33 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Joanne Chang <joannechien@google.com>, Zorro Lang <zlang@kernel.org>,
+ fstests@vger.kernel.org
+References: <20251029093457.183578-1-joannechien@google.com>
+Content-Language: en-US
+In-Reply-To: <20251029093457.183578-1-joannechien@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: After commit 5c1768b67250 ("f2fs: fix to do sanity check
- correctly
- on i_inline_xattr_size"), f2fs should handle corrupted i_inline_xattr_size
- correctly, let's add this regression testcase to check tha [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Joanne, On 10/29/25 17:34, Joanne Chang wrote: > Currently, 
+ the created files are filled with 0. When filesystem level > compression
+ is used, they take up much less space than expected. So > the final falloca
+ [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vE4l2-0000U6-2O
-Subject: [f2fs-dev] [PATCH] f2fs/023: test sanity check condition w/ error
- injection
+X-Headers-End: 1vE4t5-0000tj-H5
+Subject: Re: [f2fs-dev] [PATCH v1] f2fs/011: use random data to avoid file
+ compression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,84 +109,54 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-After commit 5c1768b67250 ("f2fs: fix to do sanity check correctly on
-i_inline_xattr_size"), f2fs should handle corrupted i_inline_xattr_size
-correctly, let's add this regression testcase to check that.
+Joanne,
 
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- tests/f2fs/023     | 44 ++++++++++++++++++++++++++++++++++++++++++++
- tests/f2fs/023.out |  2 ++
- 2 files changed, 46 insertions(+)
- create mode 100755 tests/f2fs/023
- create mode 100644 tests/f2fs/023.out
+On 10/29/25 17:34, Joanne Chang wrote:
+> Currently, the created files are filled with 0. When filesystem level
+> compression is used, they take up much less space than expected. So
+> the final fallocate does not show an error.
+> 
+> The created files are filled by /dev/urandom instead to ensure they
+> are not compressed. This way the files take up the same space whether
+> compression is used or not.
+> 
+> Signed-off-by: Joanne Chang <joannechien@google.com>
+> ---
+>  tests/f2fs/011 | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/tests/f2fs/011 b/tests/f2fs/011
+> index c21cb586..75679b36 100755
+> --- a/tests/f2fs/011
+> +++ b/tests/f2fs/011
+> @@ -35,8 +35,9 @@ _scratch_mount -o checkpoint=disable:10%
+>  pinfile=$SCRATCH_MNT/file
+>  
+>  # simulate fragment status in f2fs
+> -for ((i=0;i<256;i++)) do
+> -	$XFS_IO_PROG -f -c "pwrite 0 1m" $SCRATCH_MNT/$i >>$seqres.full
+> +dd if=/dev/urandom of=$SCRATCH_MNT/0 bs=1M count=1 2> /dev/null
 
-diff --git a/tests/f2fs/023 b/tests/f2fs/023
-new file mode 100755
-index 00000000..d1b7df32
---- /dev/null
-+++ b/tests/f2fs/023
-@@ -0,0 +1,44 @@
-+#! /bin/bash
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright (c) 2025 Chao Yu <chao@kernel.org>
-+#
-+# FS QA Test No. f2fs/023
-+#
-+# This testcase tries to inject fault into inode.i_inline_xattr_size,
-+# and check whether sanity check of f2fs can handle fault correctly.
-+#
-+
-+. ./common/preamble
-+_begin_fstest auto quick rw
-+
-+_fixed_by_kernel_commit 5c1768b67250 \
-+        "f2fs: fix to do sanity check correctly on i_inline_xattr_size"
-+
-+_require_scratch_nocheck
-+_require_inject_f2fs_command node i_inline
-+_require_inject_f2fs_command node i_inline_xattr_size
-+
-+testfile=$SCRATCH_MNT/testfile
-+
-+# remove all mkfs options to avoid layout change of on-disk inode
-+export MKFS_OPTIONS=""
-+
-+_scratch_mkfs "-O extra_attr,flexible_inline_xattr" >> $seqres.full
-+_scratch_mount "-o inline_xattr_size=512" >>$seqres.full 2>&1
-+touch $testfile
-+_scratch_unmount
-+
-+# inject .i_inline field: clear F2FS_EXTRA_ATTR bit
-+$F2FS_INJECT_PROG --node --mb i_inline --nid 4 --val 0x1 $SCRATCH_DEV \
-+		>>$seqres.full || _fail "failed to inject i_inline"
-+
-+# inject .i_inline_xattr_size field from 512 to 2048
-+$F2FS_INJECT_PROG --node --mb i_inline_xattr_size --nid 4 --val 2048 $SCRATCH_DEV \
-+		>>$seqres.full || _fail "failed to inject i_inline_xattr_size"
-+
-+_scratch_mount
-+
-+getfattr -n user.test "$testfile" 2>&1 | awk -F ': ' '/Structure needs cleaning/ { print $NF }'
-+
-+status=0
-+exit
-diff --git a/tests/f2fs/023.out b/tests/f2fs/023.out
-new file mode 100644
-index 00000000..7f16f33f
---- /dev/null
-+++ b/tests/f2fs/023.out
-@@ -0,0 +1,2 @@
-+QA output created by 023
-+Structure needs cleaning
--- 
-2.49.0
+IIRC, $XFS_IO_PROG is preferred in xfstests [1]
+
+[1] https://lore.kernel.org/fstests/20250326140938.6ll7yeez6iwabvgi@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com
+
+So, what do you think of this?
+
+for ((i=0;i<256;i++)) do
+	$XFS_IO_PROG -f -c "pwrite -i /dev/urandom 0 1m" $SCRATCH_MNT/$i >>$seqres.full
+done
+
+> +for ((i=1;i<256;i++)) do
+> +	cp $SCRATCH_MNT/0 $SCRATCH_MNT/$i
+>  done
+>  sync
+>  
 
 
 
