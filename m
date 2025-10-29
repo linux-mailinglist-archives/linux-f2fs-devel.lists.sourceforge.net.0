@@ -2,88 +2,109 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4B5CC18477
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Oct 2025 06:18:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABE98C1860D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Oct 2025 07:06:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-Id:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=OBJCRrxEkOqHNegewWl5M5wnQzztKTDE8iu7cVn7FqM=; b=BY7ecbbNci7MtUqkivS1vjll4I
-	HjgLZJIAMpI3O+j3Fbc49VY1jlx5Z/Qfgp5Hro+gMdnv+cV27hwT8k8c1RmcTeac51DMC5gfupaJ5
-	r+/E9OmjANMyOQcdlLRgjizULBg3ghhqTg+fkMmQwU3JHQn0rmf60mmwdxWw4n163fEE=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:References:In-Reply-To:From:To:MIME-Version:Date:Message-ID:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=fxs2P61fx28g/rchKqebO/1Ffk2xtl0s64BUfd4ZPTc=; b=ajpyXPMn5DqU6SFyKDdJKM4kAp
+	awHMK7fJw2pK1v2xtv1cQVECpakphwjeWba9W7hZBHjER62kETC+YLLDOq/Ztl9MH3rC+aJ8xjE1m
+	YIPsBOhhnz7Dvbw0Qxvx2hYVnST3KqP/3i+ovmg70lRokC+/ouQa6ovWBHEmWhieyxSw=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vDya6-000096-9R;
-	Wed, 29 Oct 2025 05:18:46 +0000
+	id 1vDzJs-0003JB-3b;
+	Wed, 29 Oct 2025 06:06:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hexiaole1994@126.com>) id 1vDya4-000090-EM
+ (envelope-from <kundan.kumar@samsung.com>) id 1vDzJq-0003Ix-5R
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 29 Oct 2025 05:18:45 +0000
+ Wed, 29 Oct 2025 06:06:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ In-Reply-To:From:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ahBDHQILa49HMxw2JVQIr3vlbvr0IPNaE4CDQOjDzdM=; b=f/Q7Gx6d3YyD/Nn30qkZwHVT6S
- Ilb/SHPOoLU+ewHWG7HN33O1/7V2Yf05mHuIey9s8DdpxgFyc7tNiwVghD86DQfoPJRKaIS64cdmW
- TQzgFhcmPDMuyLp9hXaNrCVo90/bAjC51NEbfK1d9akOTteskeW6xLx+Fvqu7boXys0o=;
+ bh=bBJQp7PbGMd1XdhUFl5A/6fLfmccB/IWy8yXpsj4CGc=; b=Usa850ploZp2s38na19hkNgvZD
+ yYgyY/UU/uviHaa7eSdNX97ZrYGgYo7xl6hhk/cWwnPRCHX7TUCHGVoNJEXQ4rsM0PsdhbdbsUXqT
+ Df0kfNqpR85tTeMdnGoO5fI9bU55DVBWvF1heK0L8QXlqbZCsD/lZCofFosLdpDIMNwU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ahBDHQILa49HMxw2JVQIr3vlbvr0IPNaE4CDQOjDzdM=; b=M
- L+0yiMYpGVqY5wfe7QhbyDDnS2WsGByZnN0LmFuUAG7UFUjoXaXuZrUwR1gHInb65reR9y4dAAnOH
- EjtvUKTSNbWegCaMyVxdhpM1XMXgNGtjM3UQD1+MseM3U4zn8AoLKQTA/Prk/L/0waRBAGdvMGnKT
- jAIHnDWs6PRf8wnQ=;
-Received: from m16.mail.126.com ([117.135.210.8])
+ h=References:Content-Type:Content-Transfer-Encoding:In-Reply-To:From:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=bBJQp7PbGMd1XdhUFl5A/6fLfmccB/IWy8yXpsj4CGc=; b=HApTu3vSs53h6bTn/Ye98V8uXc
+ 0jvXMnaMRLpaWbB30oFJX+aaTm9lqeN+Hj175VmeQ8DBmzD9JquJw5CFV9InTwXt+iQuqeBT0k0TH
+ PJhfVydfGji36ioXhEaIp8SiCqcOdaSUsWAEBBqp6PrHPB8td9Hg+LyfIM04kVeLIM+c=;
+Received: from mailout3.samsung.com ([203.254.224.33])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vDya3-0002pW-Ds for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 29 Oct 2025 05:18:44 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
- s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=ah
- BDHQILa49HMxw2JVQIr3vlbvr0IPNaE4CDQOjDzdM=; b=PqYOGQ/9a97Dbun4gb
- /xbyIQLX9q97D4B0gn3vjllOKgJMkOK06BQ1xvLP8/n4jm6VHh2j1s0uL66BKEXo
- fdw4ESGdwv4s81Lt8Nokrr3E/m7bqrD33o1gG6a1jrKnS4P3SB0ZH1Fsnma1Hzi5
- Zr2zlBJ7AfdIHBbjFqgoQFxlw=
-Received: from gt-ubuntu22-04-cmd-v3-0-32gb-25m.. (unknown [])
- by gzsmtp1 (Coremail) with SMTP id PCkvCgC3n4CRowFppQEJAg--.44871S2;
- Wed, 29 Oct 2025 13:18:10 +0800 (CST)
-From: Xiaole He <hexiaole1994@126.com>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 29 Oct 2025 13:18:07 +0800
-Message-Id: <20251029051807.3804-1-hexiaole1994@126.com>
-X-Mailer: git-send-email 2.34.1
+ id 1vDzJo-0004TL-Sz for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 29 Oct 2025 06:06:02 +0000
+Received: from epcas5p3.samsung.com (unknown [182.195.41.41])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20251029060548epoutp03ad9b4f527f4cbecaf388c9c2e5445078~y4SPlwiBV2873628736epoutp03b
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 29 Oct 2025 06:05:48 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20251029060548epoutp03ad9b4f527f4cbecaf388c9c2e5445078~y4SPlwiBV2873628736epoutp03b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1761717948;
+ bh=bBJQp7PbGMd1XdhUFl5A/6fLfmccB/IWy8yXpsj4CGc=;
+ h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+ b=vbuEe17mTF2terd1TQ+gi3mkaNQ+gSv01pyxt704vlOpbeMh20OJKRtvhq38wKJpB
+ EhIkFmb17+oJbYcYDLRELStbMI/9A8fc5xYMpoyix3uXeCtTFBV9Z8hbDh4jiRgzsx
+ fbXRyG0udW3HlL/1jfZBTSVcOwcrY1cBEG0kndv0=
+Received: from epsnrtp03.localdomain (unknown [182.195.42.155]) by
+ epcas5p3.samsung.com (KnoxPortal) with ESMTPS id
+ 20251029060547epcas5p3b81b402ebdb14361658a0a9d1625f9a1~y4SPBxYRj0475104751epcas5p3j;
+ Wed, 29 Oct 2025 06:05:47 +0000 (GMT)
+Received: from epcas5p2.samsung.com (unknown [182.195.38.88]) by
+ epsnrtp03.localdomain (Postfix) with ESMTP id 4cxGvG5lFcz3hhT3; Wed, 29 Oct
+ 2025 06:05:46 +0000 (GMT)
+Received: from epsmtip1.samsung.com (unknown [182.195.34.30]) by
+ epcas5p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20251029060545epcas5p491529ef7b75758f4d8bc82f4da1b9976~y4SM_VznG0334003340epcas5p4Y;
+ Wed, 29 Oct 2025 06:05:45 +0000 (GMT)
+Received: from [107.111.86.57] (unknown [107.111.86.57]) by
+ epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
+ 20251029060524epsmtip1c2db16f0f541ef4f1bd12a548aa4a54d~y4R5nnv-B1497914979epsmtip18;
+ Wed, 29 Oct 2025 06:05:24 +0000 (GMT)
+Message-ID: <e51e4fb9-01f7-4273-a363-fc1c2c61954b@samsung.com>
+Date: Wed, 29 Oct 2025 11:35:21 +0530
 MIME-Version: 1.0
-X-CM-TRANSID: PCkvCgC3n4CRowFppQEJAg--.44871S2
-X-Coremail-Antispam: 1Uf129KBjvJXoWxGF17uFW8XrWUtr4xJr1kXwb_yoW5ZF1fpF
- W5K3ZxAr9rZryj9rW8t3WkGr1Fka9rCrn7JrZ3Cw429w4kGwnYqF1vka4xZF1xCFWkCw15
- JFyjgr4Yqws0yFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0z_OzVkUUUUU=
-X-Originating-IP: [36.103.203.208]
-X-CM-SenderInfo: 5kh0xt5rohimizu6ij2wof0z/1tbiexT1BmkBn51aMwAAsf
-X-Spam-Score: 0.1 (/)
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Christoph Hellwig <hch@lst.de>, Dave Chinner <david@fromorbit.com>
+From: Kundan Kumar <kundan.kumar@samsung.com>
+In-Reply-To: <20251022043930.GC2371@lst.de>
+X-CMS-MailID: 20251029060545epcas5p491529ef7b75758f4d8bc82f4da1b9976
+X-Msg-Generator: CA
+CMS-TYPE: 105P
+cpgsPolicy: CPGSC10-542,Y
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20251014120958epcas5p267c3c9f9dbe6ffc53c25755327de89f9
+References: <CGME20251014120958epcas5p267c3c9f9dbe6ffc53c25755327de89f9@epcas5p2.samsung.com>
+ <20251014120845.2361-1-kundan.kumar@samsung.com>
+ <aPa7xozr7YbZX0W4@dread.disaster.area> <20251022043930.GC2371@lst.de>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: The one_time_gc field in struct victim_sel_policy is
- conditionally
- initialized but unconditionally read, leading to undefined behavior that
- triggers UBSAN warnings. In f2fs_get_victim() at fs/f2fs/gc.c:774,
- the victim_sel_policy
- structure is declared without initialization: 
- Content analysis details:   (0.1 points, 5.0 required)
+ Content preview:  On 10/22/2025 10:09 AM, Christoph Hellwig wrote: > On Tue,
+ Oct 21, 2025 at 09:46:30AM +1100, Dave Chinner wrote: >> Not necessarily.
+ The allocator can (and will) select different AGs >> for an inode a [...]
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -93,17 +114,12 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [hexiaole1994(at)126.com]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [hexiaole1994(at)126.com]
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [117.135.210.8 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.33 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
-X-Headers-End: 1vDya3-0002pW-Ds
-Subject: [f2fs-dev] [PATCH v1] f2fs: fix uninitialized one_time_gc in
- victim_sel_policy
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1vDzJo-0004TL-Sz
+Subject: Re: [f2fs-dev] [PATCH v2 00/16] Parallelizing filesystem writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,111 +131,36 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Xiaole He <hexiaole1994@126.com>, daehojeong@google.com,
- linux-kernel@vger.kernel.org, jaegeuk@kernel.org, stable@kernel.org
+Cc: ritesh.list@gmail.com, vishak.g@samsung.com, jack@suse.cz,
+ djwong@kernel.org, amir73il@gmail.com, gfs2@lists.linux.dev,
+ linux-mm@kvack.org, clm@meta.com, dave@stgolabs.net, agruenba@redhat.com,
+ miklos@szeredi.hu, gost.dev@samsung.com, willy@infradead.org,
+ anuj20.g@samsung.com, linux-nfs@vger.kernel.org, viro@zeniv.linux.org.uk,
+ jaegeuk@kernel.org, axboe@kernel.dk, brauner@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, mcgrof@kernel.org, anna@kernel.org,
+ linux-fsdevel@vger.kernel.org, akpm@linux-foundation.org, trondmy@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The one_time_gc field in struct victim_sel_policy is conditionally
-initialized but unconditionally read, leading to undefined behavior
-that triggers UBSAN warnings.
-
-In f2fs_get_victim() at fs/f2fs/gc.c:774, the victim_sel_policy
-structure is declared without initialization:
-
-    struct victim_sel_policy p;
-
-The field p.one_time_gc is only assigned when the 'one_time' parameter
-is true (line 789):
-
-    if (one_time) {
-        p.one_time_gc = one_time;
-        ...
-    }
-
-However, this field is unconditionally read in subsequent get_gc_cost()
-at line 395:
-
-    if (p->one_time_gc && (valid_thresh_ratio < 100) && ...)
-
-When one_time is false, p.one_time_gc contains uninitialized stack
-memory. Hence p.one_time_gc is an invalid bool value.
-
-UBSAN detects this invalid bool value:
-
-    UBSAN: invalid-load in fs/f2fs/gc.c:395:7
-    load of value 77 is not a valid value for type '_Bool'
-    CPU: 3 UID: 0 PID: 1297 Comm: f2fs_gc-252:16 Not tainted 6.18.0-rc3
-    #5 PREEMPT(voluntary)
-    Hardware name: OpenStack Foundation OpenStack Nova,
-    BIOS 1.13.0-1ubuntu1.1 04/01/2014
-    Call Trace:
-     <TASK>
-     dump_stack_lvl+0x70/0x90
-     dump_stack+0x14/0x20
-     __ubsan_handle_load_invalid_value+0xb3/0xf0
-     ? dl_server_update+0x2e/0x40
-     ? update_curr+0x147/0x170
-     f2fs_get_victim.cold+0x66/0x134 [f2fs]
-     ? sched_balance_newidle+0x2ca/0x470
-     ? finish_task_switch.isra.0+0x8d/0x2a0
-     f2fs_gc+0x2ba/0x8e0 [f2fs]
-     ? _raw_spin_unlock_irqrestore+0x12/0x40
-     ? __timer_delete_sync+0x80/0xe0
-     ? timer_delete_sync+0x14/0x20
-     ? schedule_timeout+0x82/0x100
-     gc_thread_func+0x38b/0x860 [f2fs]
-     ? gc_thread_func+0x38b/0x860 [f2fs]
-     ? __pfx_autoremove_wake_function+0x10/0x10
-     kthread+0x10b/0x220
-     ? __pfx_gc_thread_func+0x10/0x10 [f2fs]
-     ? _raw_spin_unlock_irq+0x12/0x40
-     ? __pfx_kthread+0x10/0x10
-     ret_from_fork+0x11a/0x160
-     ? __pfx_kthread+0x10/0x10
-     ret_from_fork_asm+0x1a/0x30
-     </TASK>
-
-This issue is reliably reproducible with the following steps on a
-100GB SSD /dev/vdb:
-
-    mkfs.f2fs -f /dev/vdb
-    mount /dev/vdb /mnt/f2fs_test
-    fio --name=gc --directory=/mnt/f2fs_test --rw=randwrite \
-        --bs=4k --size=8G --numjobs=12 --fsync=4 --runtime=10 \
-        --time_based
-    echo 1 > /sys/fs/f2fs/vdb/gc_urgent
-
-The uninitialized value causes incorrect GC victim selection, leading
-to unpredictable garbage collection behavior.
-
-Fix by zero-initializing the entire victim_sel_policy structure to
-ensure all fields have defined values.
-
-Fixes: e791d00bd06c ("f2fs: add valid block ratio not to do excessive GC for one time GC")
-Cc: stable@kernel.org
-Signed-off-by: Xiaole He <hexiaole1994@126.com>
----
- fs/f2fs/gc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index a7708cf80c04..56e372c23a78 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -771,7 +771,7 @@ int f2fs_get_victim(struct f2fs_sb_info *sbi, unsigned int *result,
- {
- 	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
- 	struct sit_info *sm = SIT_I(sbi);
--	struct victim_sel_policy p;
-+	struct victim_sel_policy p = {0};
- 	unsigned int secno, last_victim;
- 	unsigned int last_segment;
- 	unsigned int nsearched;
--- 
-2.34.1
-
+On 10/22/2025 10:09 AM, Christoph Hellwig wrote:
+> On Tue, Oct 21, 2025 at 09:46:30AM +1100, Dave Chinner wrote:
+>> Not necessarily. The allocator can (and will) select different AGs
+>> for an inode as the file grows and the AGs run low on space. Once
+>> they select a different AG for an inode, they don't tend to return
+>> to the original AG because allocation targets are based on
+>> contiguous allocation w.r.t. existing adjacent extents, not the AG
+>> the inode is located in.
+> 
+> Also, as pointed out in the last discussion of this for the RT
+> subvolume there is zero relation between the AG the inode is in
+> and the data placement.
+> 
+> 
+I evaluated the effect of parallel writeback on realtime inodes and
+observed no improvement in IOPS. We can limit writes for realtime
+inodes to utilize a single default (0) writeback context. Do you
+see it differently?
 
 
 _______________________________________________
