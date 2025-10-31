@@ -2,101 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB55AC1EA0C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Oct 2025 07:50:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0F2DC270E1
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 31 Oct 2025 22:36:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=JMIDrrQDHs0YAoclmtxlb+9zOZXDtcWG28pgAWhAuSU=; b=HkN7U11G2yWOTNZWfUtrB07dMh
-	cZxNrcZMYnDVX75TgJ+aju8RcsTqk6hU9WmGQ1TpFM9BNxX1G9DvckGVUeDGQUpuNe0tjGdG5gdgl
-	76g/EcrJYfbt39v6LRv3gPlF+rYv1J/dEgddbMUujsVvXNH48GRvnH2/OvOU+QxCENw0=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Cc:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=6smb2VF0/yXsKBasKcWfxfXMknGW47fNvRRL5CwpXYw=; b=BZxwilyrix0qgR5aJaw2n83u53
+	/gzTM7b7DcCIwg0Hevwep+Mk2b6C9rrhpiPxrwJacLPwLNrfAOaNykBYyBuNuwiP8/Bp3ckOtsHyF
+	0cccd1VIZPueOd0uN4o/h6+eRAXBiiN2I5MpDxL8oXJ1BNEDKSb5qlBatFyJ+IFBJeOg=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vEMUY-0001sG-MN;
-	Thu, 30 Oct 2025 06:50:38 +0000
+	id 1vEwmt-0004pP-Tb;
+	Fri, 31 Oct 2025 21:35:59 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vEMUW-0001s8-MW
+ (envelope-from <jaegeuk@kernel.org>) id 1vEwms-0004pG-Dl
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 30 Oct 2025 06:50:36 +0000
+ Fri, 31 Oct 2025 21:35:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=E1eJr/HufGAUVOkyLTaded9w5xBldiIJltEx5C+xM6U=; b=Q5PWy8s1LxKJPMivqRjtrirtCL
- oguYIvS5xHxYmMWwoShLS0o2M6zeWwQSoJMw4Hy/8ObKy29DADmJCQAmUR5ahv5RNWOva3xoK23i+
- 7Ie1pPL8EvFWp7a6Dn990AQREDZYll7LQRdqgCUXUmHFVKG8xyZjm27iC0gAZbk4ljfc=;
+ bh=TBC+gm9pXQW2HFcImxHUjk2Ct12z09HpzEI43YymQss=; b=fFKl5txw/0YExobptWNdgJZ6Tl
+ Oydlzpz3N4QhAtUZec94K1r0IfTDF9E9kottKqFICTBgN8mCBEJws3GWj6XAlD+eTt856aUrxHdBp
+ eas10W0M5gykIPlysqLi1bPTJ6sg8r52VFIrWyLG6dNW6lO3V7zEYiG2wlD6WQO6I16w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=E1eJr/HufGAUVOkyLTaded9w5xBldiIJltEx5C+xM6U=; b=IGgDR2lldov3/xq0jF7yakl+lo
- K8eBc5cldiKTDlcqfFxYDh4SNXaS1p4+tZoTQBJ5b7Qx25atQzNTcI6d9ux+SM+hkdYdR0zQfpLGa
- EN+CBtf+Xia9dFLt85wAXSJWcL8oQPbM3gw5Rt+mwR3D5VU3TkfQntawCcOhDzqsDK+0=;
+ bh=TBC+gm9pXQW2HFcImxHUjk2Ct12z09HpzEI43YymQss=; b=lsupAQJjNglTmQ86sEG9U3bBsv
+ 75F75gRfIFtZl6Cxnf3K4sifQUrCWoTfafMktSAnep/sfwwgcC09Ms582kCoiQaedpIVv4VUFBo3u
+ SNfkLaBm21VlS2EmLhegrq1snu8QyBAdd/tagLgJzGk5n0jDZwYgFXNsnCDEOUscURhM=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vEMUW-0001FO-7W for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 30 Oct 2025 06:50:36 +0000
+ id 1vEwmr-0000nU-VB for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 31 Oct 2025 21:35:58 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 4C89C6036A;
- Thu, 30 Oct 2025 06:50:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D74A9C4CEF1;
- Thu, 30 Oct 2025 06:50:23 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id F34D0601FD
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 31 Oct 2025 21:35:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AB70C4CEE7;
+ Fri, 31 Oct 2025 21:35:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761807025;
- bh=ZDSDO4xje51D+u1Yg+tz6FNILft6gTJ2PTEcBB+My8k=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=VrmPvf6Ksyp1U2rcKmNNDYTgxhfPDAsSEunNr7LzehBIafrn4mTSUdkI6RxIy9Es3
- tdKIrg0RdgTUlQSM11muiarrBKYKBu4d0dreP01ctE+Sta7K1dQrwv24MSDrL9zSeL
- orbAaBeRFhb/l1DqkfdH+Egf/GGFQKJxF5d1EGNj+sH2YQG0tuq4w7a+0ZuAhB+Soq
- yOclCTTszwVoxnk66VZPRCUe/L/nmMmrnXZgXcmz3/sqtPmoYHsGEkwuOgOXgF96rP
- ETb8CbHoJ8rN4ZRB9ivT/VSYZ28/mzfv2pqHZJk4G/DU8fJ/GJrU65CAJ33XVY/kdB
- Hc/7XCNkYfBAA==
-Message-ID: <010cc7fc-4d51-49b3-929a-06b1e408580c@kernel.org>
-Date: Thu, 30 Oct 2025 14:50:21 +0800
+ s=k20201202; t=1761946551;
+ bh=x6L31CG0svo1i4rtHQe15pm7gZjhLeWBH7Dz36e3EoI=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=c+RVo2RcNbmb7uPQsgrPpFbqrLlRW6C2f25hvUJqpBUr6jXCvlzNSo4HOCu1gRyyu
+ O2zzKs416AeA2yAYwl8FZSzkSd5dtGnwIUwJAG4P2Y73ArbPI2cBjUBb9Dok7+1oyt
+ cKqivWnwFsQ+QpwPWAYdJLLIlWitXq2P3LRXNRIYeRxCIS/Ovv2kxZ0DAZZtO0Auyt
+ DiVTOR3d0+4fxk/5CFjWfwbB7wbLRCNuIy8NsYDAv64vZVx5uIgoEw3/+kh08jePn4
+ khlz9KVAqrddSZNoqLecb98wiG1fSaxXteeFBi2iP3sKIs6+ZbPAAnAc2JKJTviWc8
+ 7IfEYeUb19nOw==
+Date: Fri, 31 Oct 2025 21:35:49 +0000
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <aQUrtSAXWtHtLhtm@google.com>
+References: <20251028195444.3181203-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Joanne Chang <joannechien@google.com>, Zorro Lang <zlang@kernel.org>,
- fstests@vger.kernel.org
-References: <20251030054540.278518-1-joannechien@google.com>
-Content-Language: en-US
-In-Reply-To: <20251030054540.278518-1-joannechien@google.com>
+Content-Disposition: inline
+In-Reply-To: <20251028195444.3181203-1-jaegeuk@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 10/30/25 13:45, Joanne Chang wrote: > Currently,
- the created
- files are filled with 0. When filesystem level > compression is used, they
- take up much less space than expected. So > the final falloca [...] 
+ Content preview: This adds a tracepoint in the fadvise call path.
+ Signed-off-by:
+ Jaegeuk Kim <jaegeuk@kernel.org> --- v2 from v1: - use i_size_read() 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [172.105.4.254 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vEMUW-0001FO-7W
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs/011: use random data to avoid file
- compression
+X-Headers-End: 1vEwmr-0000nU-VB
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: add fadvise tracepoint
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,27 +109,83 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 10/30/25 13:45, Joanne Chang wrote:
-> Currently, the created files are filled with 0. When filesystem level
-> compression is used, they take up much less space than expected. So
-> the final fallocate does not show an error.
-> 
-> The created files are filled by /dev/urandom instead to ensure they
-> are not compressed. This way the files take up the same space whether
-> compression is used or not.
-> 
-> Signed-off-by: Joanne Chang <joannechien@google.com>
+This adds a tracepoint in the fadvise call path.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
 
-Thanks,
+ v2 from v1:
+  - use i_size_read()
+
+ fs/f2fs/file.c              |  2 ++
+ include/trace/events/f2fs.h | 32 ++++++++++++++++++++++++++++++++
+ 2 files changed, 34 insertions(+)
+
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 7b966f6d40d2..d7047ca6b98d 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -5288,6 +5288,8 @@ static int f2fs_file_fadvise(struct file *filp, loff_t offset, loff_t len,
+ 	struct inode *inode = file_inode(filp);
+ 	int err;
+ 
++	trace_f2fs_fadvise(inode, offset, len, advice);
++
+ 	if (advice == POSIX_FADV_SEQUENTIAL) {
+ 		if (S_ISFIFO(inode->i_mode))
+ 			return -ESPIPE;
+diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+index e1fae78d64a5..e00611ead024 100644
+--- a/include/trace/events/f2fs.h
++++ b/include/trace/events/f2fs.h
+@@ -586,6 +586,38 @@ TRACE_EVENT(f2fs_file_write_iter,
+ 		__entry->ret)
+ );
+ 
++TRACE_EVENT(f2fs_fadvise,
++
++	TP_PROTO(struct inode *inode, loff_t offset, loff_t len, int advice),
++
++	TP_ARGS(inode, offset, len, advice),
++
++	TP_STRUCT__entry(
++		__field(dev_t,	dev)
++		__field(ino_t,	ino)
++		__field(loff_t, size)
++		__field(loff_t,	offset)
++		__field(loff_t,	len)
++		__field(int,	advice)
++	),
++
++	TP_fast_assign(
++		__entry->dev	= inode->i_sb->s_dev;
++		__entry->ino	= inode->i_ino;
++		__entry->size	= i_size_read(inode);
++		__entry->offset	= offset;
++		__entry->len	= len;
++		__entry->advice	= advice;
++	),
++
++	TP_printk("dev = (%d,%d), ino = %lu, i_size = %lld offset:%llu, len:%llu, advise:%d",
++		show_dev_ino(__entry),
++		(unsigned long long)__entry->size,
++		__entry->offset,
++		__entry->len,
++		__entry->advice)
++);
++
+ TRACE_EVENT(f2fs_map_blocks,
+ 	TP_PROTO(struct inode *inode, struct f2fs_map_blocks *map, int flag,
+ 		 int ret),
+-- 
+2.51.2.997.g839fc31de9-goog
+
 
 
 _______________________________________________
