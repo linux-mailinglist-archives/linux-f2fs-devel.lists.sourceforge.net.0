@@ -2,113 +2,144 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13ABFC275C4
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 01 Nov 2025 03:11:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DFB8C27CDD
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 01 Nov 2025 12:41:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:From:Message-ID:In-Reply-To:Date:MIME-Version:Sender:Reply-To:Cc:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:References:List-Owner;
-	bh=IKd90zyUqVAtt3+8Bt0w3ce3a9oWlDHHj2MSgw0mvKg=; b=HisErSG1fRfgECmo5Jtm9RFe29
-	amIm7FwOWdW+4xKJirFJJyRp0wiBUpJsmW+EhwI8w3XBAcY9UfctXuXcbKM1bA9FxfPkWn7TDlB/S
-	Fzg9ruaYY6WQAHSjjH0LAI4jpkBj0JIpGcrmY7zna3nxiZj3W9rM8+92h6cCCdgo9HF0=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=kQ9Zz8vsPpitujtqsY9Q6SUc59qLzXTx2HIijEOdZgE=; b=GVK/hve8YIvjZsxWbJL+cnEkJD
+	9VQA2mIpCLyHxaLQo3NgKMxeZOgHUveSMiZxzgjnJl76qmyC0To9xQi9S0hO7mFKNRwvrEY63DM8N
+	u5Tapec+n/Zr14M8Vu0/L3P115UTj8vlO9jQw9Cqhvapu3QwOYOTPVliMGx5+jwEE/iE=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vF15b-0008QE-UC;
-	Sat, 01 Nov 2025 02:11:35 +0000
+	id 1vF9yX-0004y7-3Q;
+	Sat, 01 Nov 2025 11:40:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3UGwFaQkbAI09FG1r22v8r66zu.x55x2vB9v8t54Av4A.t53@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1vF15b-0008Q6-2J for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 01 Nov 2025 02:11:35 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <zlang@redhat.com>) id 1vF9yV-0004xu-B1
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 01 Nov 2025 11:40:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y8wH2JlkS8rwz4h7Dq6s8besfCrkPbJyaWFvQHAG38c=; b=gD/xzYvbPwanzFgc+Ac7C5S01r
- wfCU+5e6lMBY3EtOdcwDaiUayeGLeBV6bqn4gw9ooGeADBE64HZOPG9D79pW7aVsH3e4Qe72iBf0+
- cZitKAQbgyCo5MHqyESB+rJor73ERbwgJaCduutRZE0Sx/wwMH/EPUhQsadT3MaVVbe0=;
+ bh=gRPzHhBnGQKZg8AlnPA2nk5Y2FBH4BbPy+XMSkasbro=; b=KktM4EzvgBWeVGIytXuvXG9q/p
+ rcf6WxXNc2Pd/0fM40/BImS9V7w0thQ01rskhFxkYSX+ygbjKjYYEkQE8A93sCun3LuTeOxTl91c6
+ o8R8u1P96t9hTFkwUaeYzgIjUX0UWWX0t3uM36zDeuPjRPruwsJ0qVyR0q5v81NKdhWI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Y8wH2JlkS8rwz4h7Dq6s8besfCrkPbJyaWFvQHAG38c=; b=j
- BHQe0/zxo8BM/JpQtFHC4TykO7dO/hdVW57bEkAooqUeWfe51dEn3cQxRHKaejo/a5G1/sKT4XnZE
- TIXeDzq2nbpHukZaO4vnn4uU8bUbR8hRJilEDRusEodcQju4Idmc/6eOY+wbgdwdf9mXqpzt5gnVs
- oQiJSd7AZZL5LfW0=;
-Received: from mail-io1-f77.google.com ([209.85.166.77])
+ h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=gRPzHhBnGQKZg8AlnPA2nk5Y2FBH4BbPy+XMSkasbro=; b=WM+lxHd4x0mp9Q2rENpU3ErXlZ
+ eFopwMmKjBmFvoj98IfSljTunoh9s3thrNzex+NoJ2PqDsj4f4HZqgqOuHMUxbh459Lt2Y0aplUi3
+ XskHRVWC7m0F8Qsb2Tex14szSuh0wN+vqg4tBmfej0fpIkACYNSrJsFL5+0P8O2aV7zk=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vF15a-0003iO-Gc for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 01 Nov 2025 02:11:35 +0000
-Received: by mail-io1-f77.google.com with SMTP id
- ca18e2360f4ac-9374627bb7eso455281639f.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1vF9yV-0005eO-MK for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 01 Nov 2025 11:40:52 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1761997245;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=gRPzHhBnGQKZg8AlnPA2nk5Y2FBH4BbPy+XMSkasbro=;
+ b=A0zR/nWrmDqe/ddDseg1wC9E9BcKlu2DUvfs+VtZjXhbG8b0NJL50XUbyLCEVe67rqnQN3
+ 8aVBWZGeR6l2tVN3Jgz+Z1mkwvHHidAmlR7RzUNBxmDV+yFRDtnbHlnlwm61HC9nlzR0Rl
+ Wdu92++L0CW2L99rd2KOLBrfFlHCfEI=
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
+ [209.85.216.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-179-6Do72c3AMtmc2nIDBeYANA-1; Sat, 01 Nov 2025 07:40:42 -0400
+X-MC-Unique: 6Do72c3AMtmc2nIDBeYANA-1
+X-Mimecast-MFC-AGG-ID: 6Do72c3AMtmc2nIDBeYANA_1761997242
+Received: by mail-pj1-f71.google.com with SMTP id
+ 98e67ed59e1d1-340bc4ef67fso810698a91.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 31 Oct 2025 19:11:34 -0700 (PDT)
+ Sat, 01 Nov 2025 04:40:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761963089; x=1762567889;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Y8wH2JlkS8rwz4h7Dq6s8besfCrkPbJyaWFvQHAG38c=;
- b=omBg4jmUGbjZ7q4LevCpUa/3dS5Ze+rr+gTQlhTSKN4XMa4ejZl9JBKQmtEI33kYT4
- bHSfHDOyYeZl49242goiHPxycqSijSxLoOvVbQHaWnMnBSksgKyKZ7eJ9CSoHAkauGDW
- wTmqAtuVj/GjBZmwbnzYxjsbaAgEdzCnMgNPtVru5CPLP8I3URLRY4vnppFgjo3JbrsO
- /jqUFCR54MY7W4EsSexbBp1/35XPOQm8rG5PsWCAB06B0BttEOpJC4TaedQZMvhZkeS0
- dMfUUPjn49/0r0OLeVJmFwjmbFhOk1B+FJsW1g58Sn3eevOFbR1Qh11xux303f62oBuK
- F9pA==
+ d=1e100.net; s=20230601; t=1761997242; x=1762602042;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gRPzHhBnGQKZg8AlnPA2nk5Y2FBH4BbPy+XMSkasbro=;
+ b=Ztt87iB/OUPZHSqRU/e622xG0Wg9juGzFa891iosE2MX4Hwze9V8mrQlZZQGg8GWvP
+ 9o4XE6xCgMXp125Dz6HHA/aMCQdKVfvEiVqR2MirTsh8puPEnwKs5VvZnOnhWuDBIctf
+ ZXiNA7uEFP0nFVQ0Q5ZgVmV3zRdz8G2o/6+IEJPc7xShqlo6/QCTkSyZSNnWTXGFAA+g
+ /q/LasaWW+4BwZVs+uWgvNhPFVootakxZ49r1W+L+umAha2UWZNhRrRDDRxe73KOctAB
+ moOCGeP/aW3sQrcq+80fX8uzYmgHFRCHh5wlQUw+MxaNmQttN4R9e09GTL4ZqKdFq8DB
+ Co0Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWYB7HZ2lkpFRTo62AcHbQcJh6NvDFFv96e92pvRJGduS5Bm0+klE8kFBr9NjTyB3yxO+3YQrz8rytjnQTM6Pzd@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yws+Sx+nrTkx8lbQIQ11EeJp/R5ZwCTLyf0BGGRwR6ADJwn1Fma
- TDz0HrwLD43LipwzqjJLuuMSEWpHjjg3MY3A5Ath6fIKiIvzHSibauYjXOswClIM+K7ntD8Oxw8
- RAXCzjhfK6Df6J6kXNrQjoetkL7tT9c6Z3WfJnZAyWakrP17ma2R6i0PHJzw=
-X-Google-Smtp-Source: AGHT+IEzesGSsLWX/EFccy4sTErr4FvPtAfe/c1E2omwJKxtrILDrP3iAzGkXHjWDghJqUY1wFYh1OAqdHkvq30NnOikP4OVaNgf
+ AJvYcCXUyeXRFZzdgTCFyfWWU9Tx/m1UuclGsJbD2KZoe/6lT/Ail2gaZuxP+af9aIVUJb+Lq1VvBkpmg2Fj2UExdVBT@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YyaDaLe4GOudmHSx9t5msJXAcCUbvMg+EUStR4Z5zhssu6O2ATF
+ bPWms/3y4pqStYD4nxNLGOI2s/qMWptrMJVT2MPLjGl/QcILYyFnNtQCy9ikh4NQ9v1u9h+I378
+ 5YmEbGxFvuJMRcyHxN0IswtoP3wMFSDTheVqpUUgXO/c4zCmWwc0EPx7gKojsP3Zce+adhhlttM
+ ld5LE=
+X-Gm-Gg: ASbGncsntyEyBuKFHfP2XQiJUA6I76i/CLxqyMfezzLAts6ECsLJ+0YDiF5woleO/G/
+ VP+ICRFx2QCy58SVagv6TsWIjbVj+vlpTa5zLBaYUgsBfgMzTuMkPOmfYjenyDVrFD9qSFmdMFB
+ 5QA4xCEwBt5xdlMlAFD6jVchLMX1futIcgd09B9qH264PDp0rHyn/bNu6xEW0Tc4SRiB3eCtMab
+ W3SJMJnRVyYSKdvK87Ey4vs/bOjyMvULqIVgskpkZ77VSS16vs3HFiW+35y9/iVjwqqxac6AF+I
+ x2uUEYTjThLMt3C5vthVDwnch3vLulmAgz2nPbkdap+ZLMinQTzRqERom3av+iWUmlI3ok/cFrW
+ 1kBrbbN5cz1+l+ovy0ZNdVajqd0c770wMK0n0MAQ=
+X-Received: by 2002:a17:90b:17c2:b0:32b:a2b9:b200 with SMTP id
+ 98e67ed59e1d1-34082fdaa04mr7826976a91.13.1761997241724; 
+ Sat, 01 Nov 2025 04:40:41 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHGqKIGEb6+Us34rq8MtYPffmKqhLlbsN8qhKbPlV8qfPWJA9jiCJfThCl3/qBYWgtcgB4n4A==
+X-Received: by 2002:a17:90b:17c2:b0:32b:a2b9:b200 with SMTP id
+ 98e67ed59e1d1-34082fdaa04mr7826963a91.13.1761997241239; 
+ Sat, 01 Nov 2025 04:40:41 -0700 (PDT)
+Received: from dell-per750-06-vm-08.rhts.eng.pek2.redhat.com ([209.132.188.88])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b93bf265180sm4910840a12.33.2025.11.01.04.40.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 01 Nov 2025 04:40:40 -0700 (PDT)
+Date: Sat, 1 Nov 2025 19:40:35 +0800
+To: Chao Yu <chao@kernel.org>
+Message-ID: <20251101114035.zk6vy5z7mrxmtnys@dell-per750-06-vm-08.rhts.eng.pek2.redhat.com>
+References: <20251020023108.327728-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:1a4a:b0:422:a9aa:7ff4 with SMTP id
- e9e14a558f8ab-4330cf069bdmr81980165ab.11.1761963088808; Fri, 31 Oct 2025
- 19:11:28 -0700 (PDT)
-Date: Fri, 31 Oct 2025 19:11:28 -0700
-In-Reply-To: <68cc0578.050a0220.28a605.0006.GAE@google.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <69056c50.a70a0220.1e08cc.006c.GAE@google.com>
-From: syzbot <syzbot+3686758660f980b402dc@syzkaller.appspotmail.com>
-To: brauner@kernel.org, chao@kernel.org, djwong@kernel.org, jaegeuk@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-xfs@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 2.8 (++)
+In-Reply-To: <20251020023108.327728-1-chao@kernel.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: FxT9NidG1ZCugX0_mEN5heplX6--TR2FOj-Wjy5bC18_1761997242
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  syzbot has found a reproducer for the following issue on:
- HEAD commit: 98bd8b16ae57 Add linux-next specific files for 20251031 git tree:
- linux-next console output:
- https://syzkaller.appspot.com/x/log.txt?x=163b2bcd980000
- kernel config: https://syzkaller.apps [...] 
- Content analysis details:   (2.8 points, 5.0 required)
+ Content preview:  On Mon, Oct 20, 2025 at 10:31:07AM +0800, Chao Yu wrote: >
+ The bugs related to f2fs/02[1-2] regression testcases have been fixed > by
+ below commits: > > - 930a9a6ee8e7 ("f2fs: fix to avoid NULL pointe [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URI: storage.googleapis.com]
- [URI: syzkaller.appspot.com]
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
- 2.5 SORTED_RECIPS          Recipient list is sorted by address
-X-Headers-End: 1vF15a-0003iO-Gc
-Subject: Re: [f2fs-dev] [syzbot] [iomap?] kernel BUG in folio_end_read (2)
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [170.10.129.124 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1vF9yV-0005eO-MK
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: add commit id to
+ _fixed_by_kernel_commit for f2fs/02[1-2]
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,115 +151,68 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Zorro Lang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Zorro Lang <zlang@redhat.com>
+Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-syzbot has found a reproducer for the following issue on:
+On Mon, Oct 20, 2025 at 10:31:07AM +0800, Chao Yu wrote:
+> The bugs related to f2fs/02[1-2] regression testcases have been fixed
+> by below commits:
+> 
+> - 930a9a6ee8e7 ("f2fs: fix to avoid NULL pointer dereference in
+> f2fs_check_quota_consistency()")
+> 
+> - c18ecd99e0c7 ("f2fs: fix to do sanity check on node footer for non
+> inode dnode")
+> 
+> Let's add commit id to _fixed_by_kernel_commit in f2fs/02[1-2].
+> 
+> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
 
-HEAD commit:    98bd8b16ae57 Add linux-next specific files for 20251031
-git tree:       linux-next
-console output: https://syzkaller.appspot.com/x/log.txt?x=163b2bcd980000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=63d09725c93bcc1c
-dashboard link: https://syzkaller.appspot.com/bug?extid=3686758660f980b402dc
-compiler:       Debian clang version 20.1.8 (++20250708063551+0c9f909b7976-1~exp1~20250708183702.136), Debian LLD 20.1.8
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=176fc342580000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=10403f34580000
+Good to me,
 
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/975261746f29/disk-98bd8b16.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/ad565c6cf272/vmlinux-98bd8b16.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/1816a55a8d5f/bzImage-98bd8b16.xz
-mounted in repro: https://storage.googleapis.com/syzbot-assets/d6d9eee31fdb/mount_0.gz
-  fsck result: failed (log: https://syzkaller.appspot.com/x/fsck.log?x=17803f34580000)
+Reviewed-by: Zorro Lang <zlang@redhat.com>
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+3686758660f980b402dc@syzkaller.appspotmail.com
+>  tests/f2fs/021 | 2 +-
+>  tests/f2fs/022 | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/tests/f2fs/021 b/tests/f2fs/021
+> index 96fc97c4..0cacb138 100755
+> --- a/tests/f2fs/021
+> +++ b/tests/f2fs/021
+> @@ -10,7 +10,7 @@
+>  . ./common/preamble
+>  _begin_fstest auto quick mount quota remount
+>  
+> -_fixed_by_kernel_commit xxxxxxxxxxxx \
+> +_fixed_by_kernel_commit 930a9a6ee8e7 \
+>  	"f2fs: fix to avoid NULL pointer dereference in f2fs_check_quota_consistency()"
+>  
+>  _require_scratch
+> diff --git a/tests/f2fs/022 b/tests/f2fs/022
+> index 48a8386b..f6d77c96 100755
+> --- a/tests/f2fs/022
+> +++ b/tests/f2fs/022
+> @@ -15,7 +15,7 @@ _begin_fstest auto quick rw
+>  
+>  . ./common/attr
+>  
+> -_fixed_by_kernel_commit xxxxxxxxxxxx \
+> +_fixed_by_kernel_commit c18ecd99e0c7 \
+>  	"f2fs: fix to do sanity check on node footer for non inode dnode"
+>  
+>  _require_scratch_nocheck
+> -- 
+> 2.49.0
+> 
 
- vms_complete_munmap_vmas+0x206/0x8a0 mm/vma.c:1279
- do_vmi_align_munmap+0x364/0x440 mm/vma.c:1538
- do_vmi_munmap+0x253/0x2e0 mm/vma.c:1586
- __vm_munmap+0x207/0x380 mm/vma.c:3196
- __do_sys_munmap mm/mmap.c:1077 [inline]
- __se_sys_munmap mm/mmap.c:1074 [inline]
- __x64_sys_munmap+0x60/0x70 mm/mmap.c:1074
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0xfa/0xfa0 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-------------[ cut here ]------------
-kernel BUG at mm/filemap.c:1530!
-Oops: invalid opcode: 0000 [#1] SMP KASAN PTI
-CPU: 1 UID: 0 PID: 5989 Comm: syz.0.17 Not tainted syzkaller #0 PREEMPT(full) 
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/02/2025
-RIP: 0010:folio_end_read+0x1e9/0x230 mm/filemap.c:1530
-Code: 79 c7 ff 48 89 df 48 c7 c6 20 6d 74 8b e8 9f df 2e ff 90 0f 0b e8 d7 79 c7 ff 48 89 df 48 c7 c6 40 63 74 8b e8 88 df 2e ff 90 <0f> 0b e8 c0 79 c7 ff 48 89 df 48 c7 c6 20 6d 74 8b e8 71 df 2e ff
-RSP: 0018:ffffc90003f8e268 EFLAGS: 00010246
-RAX: c6904ff3387db700 RBX: ffffea0001b5ef00 RCX: 0000000000000000
-RDX: 0000000000000007 RSI: ffffffff8d780a1b RDI: 00000000ffffffff
-RBP: 0000000000000000 R08: ffffffff8f7d7477 R09: 1ffffffff1efae8e
-R10: dffffc0000000000 R11: fffffbfff1efae8f R12: 1ffffd400036bde1
-R13: 1ffffd400036bde0 R14: ffffea0001b5ef08 R15: 00fff20000004060
-FS:  0000555572333500(0000) GS:ffff888125fe2000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f57d6844000 CR3: 0000000075586000 CR4: 00000000003526f0
-Call Trace:
- <TASK>
- iomap_readahead+0x96a/0xbc0 fs/iomap/buffered-io.c:547
- iomap_bio_readahead include/linux/iomap.h:608 [inline]
- erofs_readahead+0x1c3/0x3c0 fs/erofs/data.c:383
- read_pages+0x17a/0x580 mm/readahead.c:163
- page_cache_ra_order+0x924/0xe70 mm/readahead.c:518
- filemap_readahead mm/filemap.c:2658 [inline]
- filemap_get_pages+0x7ff/0x1df0 mm/filemap.c:2704
- filemap_read+0x3f6/0x11a0 mm/filemap.c:2800
- __kernel_read+0x4cf/0x960 fs/read_write.c:530
- integrity_kernel_read+0x89/0xd0 security/integrity/iint.c:28
- ima_calc_file_hash_tfm security/integrity/ima/ima_crypto.c:480 [inline]
- ima_calc_file_shash security/integrity/ima/ima_crypto.c:511 [inline]
- ima_calc_file_hash+0x85e/0x16f0 security/integrity/ima/ima_crypto.c:568
- ima_collect_measurement+0x428/0x8f0 security/integrity/ima/ima_api.c:293
- process_measurement+0x1121/0x1a40 security/integrity/ima/ima_main.c:405
- ima_file_check+0xd7/0x120 security/integrity/ima/ima_main.c:656
- security_file_post_open+0xbb/0x290 security/security.c:2652
- do_open fs/namei.c:3977 [inline]
- path_openat+0x2f26/0x3830 fs/namei.c:4134
- do_filp_open+0x1fa/0x410 fs/namei.c:4161
- do_sys_openat2+0x121/0x1c0 fs/open.c:1437
- do_sys_open fs/open.c:1452 [inline]
- __do_sys_openat fs/open.c:1468 [inline]
- __se_sys_openat fs/open.c:1463 [inline]
- __x64_sys_openat+0x138/0x170 fs/open.c:1463
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0xfa/0xfa0 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7f0b08d8efc9
-Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007ffec6a5d268 EFLAGS: 00000246 ORIG_RAX: 0000000000000101
-RAX: ffffffffffffffda RBX: 00007f0b08fe5fa0 RCX: 00007f0b08d8efc9
-RDX: 0000000000121140 RSI: 0000200000000000 RDI: ffffffffffffff9c
-RBP: 00007f0b08e11f91 R08: 0000000000000000 R09: 0000000000000000
-R10: 000000000000013d R11: 0000000000000246 R12: 0000000000000000
-R13: 00007f0b08fe5fa0 R14: 00007f0b08fe5fa0 R15: 0000000000000004
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:folio_end_read+0x1e9/0x230 mm/filemap.c:1530
-Code: 79 c7 ff 48 89 df 48 c7 c6 20 6d 74 8b e8 9f df 2e ff 90 0f 0b e8 d7 79 c7 ff 48 89 df 48 c7 c6 40 63 74 8b e8 88 df 2e ff 90 <0f> 0b e8 c0 79 c7 ff 48 89 df 48 c7 c6 20 6d 74 8b e8 71 df 2e ff
-RSP: 0018:ffffc90003f8e268 EFLAGS: 00010246
-RAX: c6904ff3387db700 RBX: ffffea0001b5ef00 RCX: 0000000000000000
-RDX: 0000000000000007 RSI: ffffffff8d780a1b RDI: 00000000ffffffff
-RBP: 0000000000000000 R08: ffffffff8f7d7477 R09: 1ffffffff1efae8e
-R10: dffffc0000000000 R11: fffffbfff1efae8f R12: 1ffffd400036bde1
-R13: 1ffffd400036bde0 R14: ffffea0001b5ef08 R15: 00fff20000004060
-FS:  0000555572333500(0000) GS:ffff888125ee2000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 0000001b30063fff CR3: 0000000075586000 CR4: 00000000003526f0
-
-
----
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
 
 
 _______________________________________________
