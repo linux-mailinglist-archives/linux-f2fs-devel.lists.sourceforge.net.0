@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F2B2C29CE8
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 03 Nov 2025 02:49:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E8CCC29CF4
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 03 Nov 2025 02:49:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:Message-ID:In-Reply-To:Date:From:To:Sender:Reply-To:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:References:List-Owner;
-	bh=uK5p4g98XTNWsWUL/h46CL9hfhxQ7czIkNtUb/dczYg=; b=LBaRj2BXviKaxyiB55zaPlea1u
-	r/YcUCtPQ6TNf13ZlfLhylCsy5fSRROzeuH9YMqKZvg8q+lsx0LHKHjfIs5UBmEntdeEN88s6CHbK
-	scThMkCdaJUZhdrjrsz/GccoUrz5MKTd+B8b/Qe7dY5gCZYaya3/1fWbN6OmezJYamJg=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=tZCt6KeMW4paLJeAWQZrq3khQbsAPLXFiI+7fmSfuqs=; b=GD3jk3Hrf95xUkDh+TFzkukTy6
+	pqp6P9mUibzjA1xwdyANMBy9mBMnrN+MlyZBoCldmzviq8tFMbSNfIC6mEBJAyk0o8txdO+Wh4/GI
+	RmgvuIMQ0PH9TWKCnzn3llAE1zrYQ5OxgyFPxiUqhr3OB3jet7YIvbBtvASw2T4aMVo0=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vFjgu-0001cN-0v;
-	Mon, 03 Nov 2025 01:49:04 +0000
+	id 1vFjh1-0004A3-3E;
+	Mon, 03 Nov 2025 01:49:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <gregkh@linuxfoundation.org>) id 1vFjgs-0001cH-Ey
+ (envelope-from <gregkh@linuxfoundation.org>) id 1vFjgy-00049h-G2
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Nov 2025 01:49:02 +0000
+ Mon, 03 Nov 2025 01:49:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
  :Message-ID:In-Reply-To:Date:From:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LdxYvJPwRA4Ep/k/nBODjc430Es3F6j3UNp/gg1LTdI=; b=BGSwnbcsG1R4L65BHzCvVke/Ze
- KgMQJfnoU9so6Li2SlYP5CvPJNDvDUqBCNXp1+BRVH9QT/EfavK/MHjimqYcmW5IGKjFuCmGx86mK
- XZEXcWObRqNHDIghXujkhWkHxhNh5TyRR7PypYj1RC73zvgT2bh/UoL6LXG3gWk8HYTQ=;
+ bh=ng1L4mgaMfjyUoixnhV1UePdLKnKRGbfTBsi3P0YK14=; b=DwNSQGw6iz78PgTuEO7NU5JWcx
+ N7W+xAuMC0uTB7t3VDQYoJVVnxFujxuDSDs+jyBirelLR+7th+Sl13GWvUkA9j6eT7HteERS8OrAs
+ 7zVFqiQTyPQq+mOPS9j9YmEwxFJf3OjiwAIFtDf7PCV5GLt7RJwGtBLHqzkCNfBaA+nw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:
@@ -40,38 +40,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LdxYvJPwRA4Ep/k/nBODjc430Es3F6j3UNp/gg1LTdI=; b=L8G99VSZfVRmr2NyB4gHiS4Cy0
- akKDZtdBTFWisNHQZaBoLKd20Pg010KQOn7kHGhj/GTDNESe0b0cz550vk/jQm+m6zFwdBH9R/P4H
- tNI1ME73b4GqIE16fFPX7Z2HYExEMJVD//gcHX/zhnEaQ/KCI3paiaejNTyTY0FYSldo=;
+ bh=ng1L4mgaMfjyUoixnhV1UePdLKnKRGbfTBsi3P0YK14=; b=VvNMnT+LiQreC5VtO/bsn9oo0h
+ 0Tyc7s2tfMZq6DdfcUPT/pspEVRgYF/UzFCNL5TOagO/Sl+DipMPIlavAF+iusbjgU4XFX3N+bBSj
+ Yaf3YUYLBjMkXPXjjOUXl9H6MH6Fcsb2t74S1jAy7ZHiTElwux5Cb6Px11tgvFyffPc8=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vFjgr-0007LO-PJ for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Nov 2025 01:49:02 +0000
+ id 1vFjgy-0007Lc-Ea for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 03 Nov 2025 01:49:09 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 56372419F8;
- Mon,  3 Nov 2025 01:48:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C7DF1C116C6;
- Mon,  3 Nov 2025 01:48:50 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 2A28040590;
+ Mon,  3 Nov 2025 01:48:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C27AC4CEFB;
+ Mon,  3 Nov 2025 01:48:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1762134531;
- bh=BQ+0lxQkpcXa/tD37ekUWLzbNim2icgZVv3J5UVRVrg=;
+ s=korg; t=1762134538;
+ bh=zmE4vYPhLsLlNZClDX7jMxJnkyssWUT8qSU9Q8+p7ag=;
  h=Subject:To:Cc:From:Date:In-Reply-To:From;
- b=NKCIS4nUJJRTzUf4zGcO36QcbhNBLyPrRYww5MJcr80mpPufA97nf0gKTvB0IktoS
- qRe38UqFhM4KN94IYa+9fi14ACTmNO5pIDKxmmCoEFpOTMaj86QxIclwzEgRYonYms
- J01tx+EqT5YO3ZE5gjywbQBqynkwRgJHWO6gw3Bo=
+ b=xPitT/Na85xDwv2HMLA4Egk9QxDKIa95C+3IASHiprddm75cMGFSNVjt6YsX9FPTZ
+ JyOpvuQAIlaQuOEBCn0JAp0ZH6IF6GCV2q2FHW+VJ0Yeq72GRLyuUCE2JFyJVSVh2w
+ ynhticRcUerSZwNOIZG0hrrkHQSBxCVnO8BeTPiM=
 To: adilger.kernel@dilger.ca, akpm@linux-foundation.org, anna@kernel.org,
- axboe@kernel.dk, brauner@kernel.org, chao@kernel.org, djwong@kernel.org,
- dlemoal@kernel.org, gregkh@linuxfoundation.org, hare@suse.de,
- hch@infradead.org, hch@lst.de, idryomov@gmail.com, jaegeuk@kernel.org,
- jlayton@kernel.org, johannes.thumshirn@wdc.com, konishi.ryusuke@gmail.com,
- linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org, mcgrof@kernel.org,
- mngyadam@amazon.de, nagy@khwaternagy.com, trond.myklebust@hammerspace.com,
- tytso@mit.edu, viro@zeniv.linux.org.uk, willy@infradead.org, xiubli@redhat.com
+ axboe@kernel.dk, chao@kernel.org, djwong@kernel.org, dlemoal@kernel.org,
+ gregkh@linuxfoundation.org, hare@suse.de, hch@infradead.org, hch@lst.de,
+ idryomov@gmail.com, jaegeuk@kernel.org, jlayton@kernel.org,
+ konishi.ryusuke@gmail.com, linux-f2fs-devel@lists.sourceforge.net,
+ linux-mm@kvack.org, mcgrof@kernel.org, mngyadam@amazon.de,
+ nagy@khwaternagy.com, shinichiro.kawasaki@wdc.com,
+ trond.myklebust@hammerspace.com, tytso@mit.edu, viro@zeniv.linux.org.uk,
+ willy@infradead.org, xiubli@redhat.com
 From: <gregkh@linuxfoundation.org>
 Date: Mon, 03 Nov 2025 10:46:56 +0900
-In-Reply-To: <20251021070353.96705-8-mngyadam@amazon.de>
-Message-ID: <2025110356-pushiness-kangaroo-bfbf@gregkh>
+In-Reply-To: <20251021070353.96705-9-mngyadam@amazon.de>
+Message-ID: <2025110356-shrapnel-squash-a5dc@gregkh>
 MIME-Version: 1.0
 X-stable: commit
 X-Patchwork-Hint: ignore
@@ -83,8 +84,8 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: This is a note to let you know that I've just added the patch
- titled block: open code __generic_file_write_iter for blkdev writes to the
- 6.1-stable tree which can be found at:
+ titled block: fix race between set_blocksize and read paths to the 6.1-stable
+ tree which can be found at:
  http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;
  a=summary Content analysis details:   (0.2 points, 5.0 required)
  pts rule name              description
@@ -92,9 +93,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
-X-Headers-End: 1vFjgr-0007LO-PJ
-Subject: [f2fs-dev] Patch "block: open code __generic_file_write_iter for
- blkdev writes" has been added to the 6.1-stable tree
+X-Headers-End: 1vFjgy-0007Lc-Ea
+Subject: [f2fs-dev] Patch "block: fix race between set_blocksize and read
+ paths" has been added to the 6.1-stable tree
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,117 +115,230 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 This is a note to let you know that I've just added the patch titled
 
-    block: open code __generic_file_write_iter for blkdev writes
+    block: fix race between set_blocksize and read paths
 
 to the 6.1-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
-     block-open-code-__generic_file_write_iter-for-blkdev-writes.patch
+     block-fix-race-between-set_blocksize-and-read-paths.patch
 and it can be found in the queue-6.1 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
 
 
-From stable+bounces-188301-greg=kroah.com@vger.kernel.org Tue Oct 21 16:18:34 2025
+From stable+bounces-188302-greg=kroah.com@vger.kernel.org Tue Oct 21 16:13:58 2025
 From: Mahmoud Adam <mngyadam@amazon.de>
-Date: Tue, 21 Oct 2025 09:03:41 +0200
-Subject: block: open code __generic_file_write_iter for blkdev writes
+Date: Tue, 21 Oct 2025 09:03:42 +0200
+Subject: block: fix race between set_blocksize and read paths
 To: <stable@vger.kernel.org>
-Cc: <gregkh@linuxfoundation.org>, <nagy@khwaternagy.com>, Christoph Hellwig <hch@lst.de>, Johannes Thumshirn <johannes.thumshirn@wdc.com>, "Christian Brauner" <brauner@kernel.org>, Hannes Reinecke <hare@suse.de>, "Luis Chamberlain" <mcgrof@kernel.org>, Jens Axboe <axboe@kernel.dk>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Jeff Layton <jlayton@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>, Theodore Ts'o <tytso@mit.edu>, Andreas Dilger <adilger.kernel@dilger.ca>, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, Christoph Hellwig <hch@infradead.org>, "Darrick J. Wong" <djwong@kernel.org>, Trond Myklebust <trond.myklebust@hammerspace.com>, Anna Schumaker <anna@kernel.org>, "Ryusuke Konishi" <konishi.ryusuke@gmail.com>, "Matthew Wilcox (Oracle)" <willy@infradead.org>, Andrew Morton <akpm@linux-foundation.org>, "Damien Le Moal" <dlemoal@kernel.org>, <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>, <ceph-devel@vger.kernel.org>, <linu
- x-fsdevel@vger.kernel.org>, <linux-ext4@vger.kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>, <linux-xfs@vger.kernel.org>, <linux-nfs@vger.kernel.org>, <linux-nilfs@vger.kernel.org>, <linux-mm@kvack.org>
-Message-ID: <20251021070353.96705-8-mngyadam@amazon.de>
+Cc: <gregkh@linuxfoundation.org>, <nagy@khwaternagy.com>, "Darrick J. Wong" <djwong@kernel.org>, Christoph Hellwig <hch@lst.de>, Luis Chamberlain <mcgrof@kernel.org>, Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>, "Jens Axboe" <axboe@kernel.dk>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Jeff Layton <jlayton@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>, Theodore Ts'o <tytso@mit.edu>, Andreas Dilger <adilger.kernel@dilger.ca>, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, Christoph Hellwig <hch@infradead.org>, Trond Myklebust <trond.myklebust@hammerspace.com>, Anna Schumaker <anna@kernel.org>, "Ryusuke Konishi" <konishi.ryusuke@gmail.com>, "Matthew Wilcox (Oracle)" <willy@infradead.org>, Andrew Morton <akpm@linux-foundation.org>, "Hannes Reinecke" <hare@suse.de>, Damien Le Moal <dlemoal@kernel.org>, <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>, <ceph-devel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>, <linux-ext4
+ @vger.kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>, <linux-xfs@vger.kernel.org>, <linux-nfs@vger.kernel.org>, <linux-nilfs@vger.kernel.org>, <linux-mm@kvack.org>
+Message-ID: <20251021070353.96705-9-mngyadam@amazon.de>
 
-From: Christoph Hellwig <hch@lst.de>
+From: "Darrick J. Wong" <djwong@kernel.org>
 
-commit 727cfe976758b79f8d2f8051c75a5ccb14539a56 upstream.
+commit c0e473a0d226479e8e925d5ba93f751d8df628e9 upstream.
 
-Open code __generic_file_write_iter to remove the indirect call into
-->direct_IO and to prepare using the iomap based write code.
+With the new large sector size support, it's now the case that
+set_blocksize can change i_blksize and the folio order in a manner that
+conflicts with a concurrent reader and causes a kernel crash.
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
-Reviewed-by: Christian Brauner <brauner@kernel.org>
-Reviewed-by: Hannes Reinecke <hare@suse.de>
+Specifically, let's say that udev-worker calls libblkid to detect the
+labels on a block device.  The read call can create an order-0 folio to
+read the first 4096 bytes from the disk.  But then udev is preempted.
+
+Next, someone tries to mount an 8k-sectorsize filesystem from the same
+block device.  The filesystem calls set_blksize, which sets i_blksize to
+8192 and the minimum folio order to 1.
+
+Now udev resumes, still holding the order-0 folio it allocated.  It then
+tries to schedule a read bio and do_mpage_readahead tries to create
+bufferheads for the folio.  Unfortunately, blocks_per_folio == 0 because
+the page size is 4096 but the blocksize is 8192 so no bufferheads are
+attached and the bh walk never sets bdev.  We then submit the bio with a
+NULL block device and crash.
+
+Therefore, truncate the page cache after flushing but before updating
+i_blksize.  However, that's not enough -- we also need to lock out file
+IO and page faults during the update.  Take both the i_rwsem and the
+invalidate_lock in exclusive mode for invalidations, and in shared mode
+for read/write operations.
+
+I don't know if this is the correct fix, but xfs/259 found it.
+
+Signed-off-by: Darrick J. Wong <djwong@kernel.org>
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Luis Chamberlain <mcgrof@kernel.org>
-Link: https://lore.kernel.org/r/20230801172201.1923299-4-hch@lst.de
+Tested-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+Link: https://lore.kernel.org/r/174543795699.4139148.2086129139322431423.stgit@frogsfrogsfrogs
 Signed-off-by: Jens Axboe <axboe@kernel.dk>
-[fix contextual changes]
+[use bdev->bd_inode instead & fix small contextual changes]
 Signed-off-by: Mahmoud Adam <mngyadam@amazon.de>
 Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 ---
- block/fops.c |   45 +++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 43 insertions(+), 2 deletions(-)
+ block/bdev.c      |   17 +++++++++++++++++
+ block/blk-zoned.c |    5 ++++-
+ block/fops.c      |   16 ++++++++++++++++
+ block/ioctl.c     |    6 ++++++
+ 4 files changed, 43 insertions(+), 1 deletion(-)
 
---- a/block/fops.c
-+++ b/block/fops.c
-@@ -515,6 +515,30 @@ static int blkdev_close(struct inode *in
+--- a/block/bdev.c
++++ b/block/bdev.c
+@@ -147,9 +147,26 @@ int set_blocksize(struct block_device *b
+ 
+ 	/* Don't change the size if it is same as current */
+ 	if (bdev->bd_inode->i_blkbits != blksize_bits(size)) {
++		/*
++		 * Flush and truncate the pagecache before we reconfigure the
++		 * mapping geometry because folio sizes are variable now.  If a
++		 * reader has already allocated a folio whose size is smaller
++		 * than the new min_order but invokes readahead after the new
++		 * min_order becomes visible, readahead will think there are
++		 * "zero" blocks per folio and crash.  Take the inode and
++		 * invalidation locks to avoid racing with
++		 * read/write/fallocate.
++		 */
++		inode_lock(bdev->bd_inode);
++		filemap_invalidate_lock(bdev->bd_inode->i_mapping);
++
+ 		sync_blockdev(bdev);
++		kill_bdev(bdev);
++
+ 		bdev->bd_inode->i_blkbits = blksize_bits(size);
+ 		kill_bdev(bdev);
++		filemap_invalidate_unlock(bdev->bd_inode->i_mapping);
++		inode_unlock(bdev->bd_inode);
+ 	}
  	return 0;
  }
+--- a/block/blk-zoned.c
++++ b/block/blk-zoned.c
+@@ -417,6 +417,7 @@ int blkdev_zone_mgmt_ioctl(struct block_
+ 		op = REQ_OP_ZONE_RESET;
  
-+static ssize_t
-+blkdev_direct_write(struct kiocb *iocb, struct iov_iter *from)
-+{
-+	size_t count = iov_iter_count(from);
-+	ssize_t written;
-+
-+	written = kiocb_invalidate_pages(iocb, count);
-+	if (written) {
-+		if (written == -EBUSY)
-+			return 0;
-+		return written;
+ 		/* Invalidate the page cache, including dirty pages. */
++		inode_lock(bdev->bd_inode);
+ 		filemap_invalidate_lock(bdev->bd_inode->i_mapping);
+ 		ret = blkdev_truncate_zone_range(bdev, mode, &zrange);
+ 		if (ret)
+@@ -439,8 +440,10 @@ int blkdev_zone_mgmt_ioctl(struct block_
+ 			       GFP_KERNEL);
+ 
+ fail:
+-	if (cmd == BLKRESETZONE)
++	if (cmd == BLKRESETZONE) {
+ 		filemap_invalidate_unlock(bdev->bd_inode->i_mapping);
++		inode_unlock(bdev->bd_inode);
 +	}
-+
-+	written = blkdev_direct_IO(iocb, from);
-+	if (written > 0) {
-+		kiocb_invalidate_post_direct_write(iocb, count);
-+		iocb->ki_pos += written;
-+		count -= written;
-+	}
-+	if (written != -EIOCBQUEUED)
-+		iov_iter_revert(from, count - iov_iter_count(from));
-+	return written;
-+}
-+
- /*
-  * Write data to the block device.  Only intended for the block device itself
-  * and the raw driver which basically is a fake block device.
-@@ -524,7 +548,8 @@ static int blkdev_close(struct inode *in
-  */
- static ssize_t blkdev_write_iter(struct kiocb *iocb, struct iov_iter *from)
- {
--	struct block_device *bdev = iocb->ki_filp->private_data;
-+	struct file *file = iocb->ki_filp;
-+	struct block_device *bdev = file->private_data;
- 	struct inode *bd_inode = bdev->bd_inode;
- 	loff_t size = bdev_nr_bytes(bdev);
- 	struct blk_plug plug;
-@@ -553,7 +578,23 @@ static ssize_t blkdev_write_iter(struct
+ 
+ 	return ret;
+ }
+--- a/block/fops.c
++++ b/block/fops.c
+@@ -592,7 +592,14 @@ static ssize_t blkdev_write_iter(struct
+ 			ret = direct_write_fallback(iocb, from, ret,
+ 					generic_perform_write(iocb, from));
+ 	} else {
++		/*
++		 * Take i_rwsem and invalidate_lock to avoid racing with
++		 * set_blocksize changing i_blkbits/folio order and punching
++		 * out the pagecache.
++		 */
++		inode_lock_shared(bd_inode);
+ 		ret = generic_perform_write(iocb, from);
++		inode_unlock_shared(bd_inode);
  	}
  
- 	blk_start_plug(&plug);
--	ret = __generic_file_write_iter(iocb, from);
-+	ret = file_remove_privs(file);
-+	if (ret)
-+		return ret;
-+
-+	ret = file_update_time(file);
-+	if (ret)
-+		return ret;
-+
-+	if (iocb->ki_flags & IOCB_DIRECT) {
-+		ret = blkdev_direct_write(iocb, from);
-+		if (ret >= 0 && iov_iter_count(from))
-+			ret = direct_write_fallback(iocb, from, ret,
-+					generic_perform_write(iocb, from));
-+	} else {
-+		ret = generic_perform_write(iocb, from);
-+	}
-+
  	if (ret > 0)
- 		ret = generic_write_sync(iocb, ret);
- 	iov_iter_reexpand(from, iov_iter_count(from) + shorted);
+@@ -605,6 +612,7 @@ static ssize_t blkdev_write_iter(struct
+ static ssize_t blkdev_read_iter(struct kiocb *iocb, struct iov_iter *to)
+ {
+ 	struct block_device *bdev = iocb->ki_filp->private_data;
++	struct inode *bd_inode = bdev->bd_inode;
+ 	loff_t size = bdev_nr_bytes(bdev);
+ 	loff_t pos = iocb->ki_pos;
+ 	size_t shorted = 0;
+@@ -652,7 +660,13 @@ static ssize_t blkdev_read_iter(struct k
+ 			goto reexpand;
+ 	}
+ 
++	/*
++	 * Take i_rwsem and invalidate_lock to avoid racing with set_blocksize
++	 * changing i_blkbits/folio order and punching out the pagecache.
++	 */
++	inode_lock_shared(bd_inode);
+ 	ret = filemap_read(iocb, to, ret);
++	inode_unlock_shared(bd_inode);
+ 
+ reexpand:
+ 	if (unlikely(shorted))
+@@ -695,6 +709,7 @@ static long blkdev_fallocate(struct file
+ 	if ((start | len) & (bdev_logical_block_size(bdev) - 1))
+ 		return -EINVAL;
+ 
++	inode_lock(inode);
+ 	filemap_invalidate_lock(inode->i_mapping);
+ 
+ 	/*
+@@ -735,6 +750,7 @@ static long blkdev_fallocate(struct file
+ 
+  fail:
+ 	filemap_invalidate_unlock(inode->i_mapping);
++	inode_unlock(inode);
+ 	return error;
+ }
+ 
+--- a/block/ioctl.c
++++ b/block/ioctl.c
+@@ -114,6 +114,7 @@ static int blk_ioctl_discard(struct bloc
+ 	    end > bdev_nr_bytes(bdev))
+ 		return -EINVAL;
+ 
++	inode_lock(inode);
+ 	filemap_invalidate_lock(inode->i_mapping);
+ 	err = truncate_bdev_range(bdev, mode, start, end - 1);
+ 	if (err)
+@@ -121,6 +122,7 @@ static int blk_ioctl_discard(struct bloc
+ 	err = blkdev_issue_discard(bdev, start >> 9, len >> 9, GFP_KERNEL);
+ fail:
+ 	filemap_invalidate_unlock(inode->i_mapping);
++	inode_unlock(inode);
+ 	return err;
+ }
+ 
+@@ -146,12 +148,14 @@ static int blk_ioctl_secure_erase(struct
+ 	    end > bdev_nr_bytes(bdev))
+ 		return -EINVAL;
+ 
++	inode_lock(bdev->bd_inode);
+ 	filemap_invalidate_lock(bdev->bd_inode->i_mapping);
+ 	err = truncate_bdev_range(bdev, mode, start, end - 1);
+ 	if (!err)
+ 		err = blkdev_issue_secure_erase(bdev, start >> 9, len >> 9,
+ 						GFP_KERNEL);
+ 	filemap_invalidate_unlock(bdev->bd_inode->i_mapping);
++	inode_unlock(bdev->bd_inode);
+ 	return err;
+ }
+ 
+@@ -184,6 +188,7 @@ static int blk_ioctl_zeroout(struct bloc
+ 		return -EINVAL;
+ 
+ 	/* Invalidate the page cache, including dirty pages */
++	inode_lock(inode);
+ 	filemap_invalidate_lock(inode->i_mapping);
+ 	err = truncate_bdev_range(bdev, mode, start, end);
+ 	if (err)
+@@ -194,6 +199,7 @@ static int blk_ioctl_zeroout(struct bloc
+ 
+ fail:
+ 	filemap_invalidate_unlock(inode->i_mapping);
++	inode_unlock(inode);
+ 	return err;
+ }
+ 
 
 
 Patches currently in stable-queue which might be from mngyadam@amazon.de are
