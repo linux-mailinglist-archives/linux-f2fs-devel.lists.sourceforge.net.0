@@ -2,71 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5019DC2A2BF
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 03 Nov 2025 07:24:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC1E1C2A34C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 03 Nov 2025 07:39:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=nVJzlKkLfSG3C0v0iNSdwKrk4LUq2Z8z6uGCJfwqQEk=; b=UvkP3ANrFfavjDLkf+/Ktr8AiQ
-	pqh1De3kxYWH8ENsmoWLovjUyTKZt1CN/KYvb3sc8IYPnlnYTnBVjNtTDf/fpJUTqpNeQQ6zTjOV1
-	FklJs5hLe4jRkrCWiZtyPSEZUgDyvbo375aXtpSiKcxznfCK5oEd0M98plrGeAPYYmg4=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=T1MP9qu2b4ynJAw/g4T7cAbtf+PSXNj5niX87iN9nI0=; b=aU72ltDt7QzRA/gaSAo5UsMovH
+	t0G7zklGbZ1DmmvNq7tVzNn3ZvMJXFkbuaIbqp6feTHrlL8r9UsEbh4WZE+YEVuNsquQ06l4z2TnX
+	hdtJZxaew+63mKfr4UQfRDxhVdYRwtxBwqXkxpyQcuatrw8RyFi++/hbmyVyL9eCHRWk=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vFnzq-0001HO-AS;
-	Mon, 03 Nov 2025 06:24:55 +0000
+	id 1vFoEF-00067n-Hd;
+	Mon, 03 Nov 2025 06:39:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vFnzo-0001HA-Vg
+ (envelope-from <chao@kernel.org>) id 1vFoEE-00067h-Hu
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Nov 2025 06:24:53 +0000
+ Mon, 03 Nov 2025 06:39:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=y9pL3sr9wEO+U8XXpmsWSLDBxeJgNhfr+QOIcf23zSw=; b=k9sQJkq0qLa0vOeU1J3Nv2E9SU
- M+bDYmE4soXJUhg+oWi4c7qWOcy11kPSTG5ecScSzxgvF0K5ow5eRSF3VGXc5gSQD7ebBsLHD5au/
- t7qpp8HJST3BVqvu55FbNhr5SpP7bx+NvY9/0msULYfF4yZyh1CcgKtiXMZMlAAaXlT0=;
+ bh=PGaKq3eJu9ULEQrpBnyzOY3OHUm/rIQb6aEdASqd8n0=; b=IqvLvfqdH23578OEE0wiDF24in
+ qQcpRT1re1zAaTOoBp7WmB9ELrKIb1bCwG1AuR8jPQaYrEicEPUaPW8XJmD3KM6SlsueqRn6aSod8
+ BTt6Wk+tMWQcoyMXyjHGDhoHju6xRyBR8AIj3FRE8K3+W+Xi+CWDWPFnZF+ZYI32uOvU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=y9pL3sr9wEO+U8XXpmsWSLDBxeJgNhfr+QOIcf23zSw=; b=d
- gGYd2rGq+AKaYugl71I3SIDIqPh3rMIFq7avbFbfpnfN32iXqFFSOkBQkdjvdLzyYt4PXeJaN4mnj
- 05QiBE4bt2l35a1athMdWGm4EefN2dJ7GEZVKqglgvfkb8Fiho+l7a0SNkyy+oS17j5PZj3oM+kj/
- SAk+SHxYk5VYju18=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ List-Owner:List-Archive; bh=PGaKq3eJu9ULEQrpBnyzOY3OHUm/rIQb6aEdASqd8n0=; b=K
+ qton/C/nw8JxbkA6ouYEhDFpa3OaflBqZ1p7SzjBP9kHjV/Zpb8KsK9ug1OwmkyOj6ywZeFYRffeK
+ frGNGY+UJjYKB5gtbFOAlzmJ6969Cw9QsflFtwBPOV/cTr3LNALLtGAYlwIs4gZzJxTosN6wdfQIM
+ hzcRunEZdTM6gpgg=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vFnzp-0007TF-B9 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Nov 2025 06:24:53 +0000
+ id 1vFoEE-0000VB-5o for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 03 Nov 2025 06:39:46 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id A744860234
+ by sea.source.kernel.org (Postfix) with ESMTP id BEAF64485D
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  3 Nov 2025 06:24:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73ABFC4CEE7;
- Mon,  3 Nov 2025 06:24:41 +0000 (UTC)
+ Mon,  3 Nov 2025 06:39:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 704E1C4CEE7;
+ Mon,  3 Nov 2025 06:39:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762151082;
- bh=+H7uwdUUAo7JOSeNKZN3IHapyZpHxcs2ON2Dsh2UtDw=;
+ s=k20201202; t=1762151980;
+ bh=VBij2mITexCO1TcPruw5+kHPYC8QobFazbd9hyFugx8=;
  h=From:To:Cc:Subject:Date:From;
- b=OPuZZ1QFTF7vzCR4B1R7hRZYgTWcmjaTH4sSpVCWzAwHndBd5aYdWKWWaal3yNunu
- yvG+8aIkpzuUVFdIS2G91WjNOlVyxpTrh0a3mh/Mf2AtwnxGgQeHh6JqJQX5L4q5+2
- 29SBHDlCrYpaLlppX4wE1zRbVSi2IaV74V7v4rzCQZRKEU61FpvDHdBdQ0t7gWicKt
- eKXX+gAWrSyFHF2Ra/xUq4RgKp8AtPEFVFexsLc66i8328NJUqxugjQL8PtV0OVG4B
- p0d1ZoFS9b4f6QetjNhr0aZ6Oj74sdrSW8xT84otq2miGIVFhzSLvlbt3ztLu7R7v9
- pDe+4fVb3hFFQ==
+ b=IQfMPIxsWV3tv9AA88RIlz8NpXd/kdLLqy9gjUbqit3z55kKoM8oFksAgcdQOGuWm
+ RL2RnHH22yaKvIWy0CXDvFrgBAC8D3GeLBk5hJu/JG9rMMFQHAECDKgoBhe9gDQzXY
+ 0xqSG6DatkPz+7RrW91UO9S4nItYhCbk7a/rn81/W+2uTdwqrr/dlT5lyfDyxp3fSP
+ Z0swz5eBgoG6Rx4IY1iz6o6CFgkynj2iX89FAxp0K5y/KREu1VQez6sVAopiqM/3w9
+ +0kLOBkdgaQ+QbYpvjWZDBb3IzCYNegK7UzTy8j2dgj+wI2c1brPrEcCwSRB8ZeQ6s
+ Q6xGbAyuzzofQ==
 To: jaegeuk@kernel.org
-Date: Mon,  3 Nov 2025 14:22:56 +0800
-Message-ID: <20251103062256.2657698-1-chao@kernel.org>
+Date: Mon,  3 Nov 2025 14:39:31 +0800
+Message-ID: <20251103063931.2663358-1-chao@kernel.org>
 X-Mailer: git-send-email 2.51.2.997.g839fc31de9-goog
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
@@ -76,10 +76,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Support to freeze and thaw filesystem. Signed-off-by: Chao
- Yu <chao@kernel.org> --- man/f2fs_io.8 | 6 ++++++ tools/f2fs_io/f2fs_io.c
- | 48 +++++++++++++++++++++++++++++++++++++++++ 2 files changed,
- 54 insertions(+)
+ Content preview:  Otherwise, f2fs_io randread will fail due to i_size of block
+ device inode is zero. - f2fs_io randread 1 1000 buffered 1 /dev/vdc fadvise
+ RANDOM|WILLNEED to a file: /dev/vdc File is too small to random read 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,8 +90,8 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vFnzp-0007TF-B9
-Subject: [f2fs-dev] [PATCH] f2fs_io: support freeze/thaw
+X-Headers-End: 1vFoEE-0000VB-5o
+Subject: [f2fs-dev] [PATCH] f2fs_io: ranndread: support block device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,97 +110,49 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Support to freeze and thaw filesystem.
+Otherwise, f2fs_io randread will fail due to i_size of block device
+inode is zero.
+
+- f2fs_io randread 1 1000 buffered 1 /dev/vdc
+fadvise RANDOM|WILLNEED to a file: /dev/vdc
+File is too small to random read
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- man/f2fs_io.8           |  6 ++++++
- tools/f2fs_io/f2fs_io.c | 48 +++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 54 insertions(+)
+ tools/f2fs_io/f2fs_io.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/man/f2fs_io.8 b/man/f2fs_io.8
-index 708a583..5c3d204 100644
---- a/man/f2fs_io.8
-+++ b/man/f2fs_io.8
-@@ -215,6 +215,12 @@ Initialized to create files only.
- .B -v
- Verbose mode.
- .RE
-+.TP
-+\fBfreeze\fR \fI[directory]\fR
-+Freeze filesystem that directory belongs to.
-+.TP
-+\fBthaw\fR \fI[directory]\fR
-+Thaw filesystem that directory belongs to.
- .SH AUTHOR
- This version of
- .B f2fs_io
 diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index 9baea2b..1f26c7c 100644
+index 1f26c7c..231da47 100644
 --- a/tools/f2fs_io/f2fs_io.c
 +++ b/tools/f2fs_io/f2fs_io.c
-@@ -2454,6 +2454,52 @@ static void do_test_lookup_perf(int argc, char **argv, const struct cmd_desc *cm
- 	exit(0);
- }
+@@ -1225,6 +1225,7 @@ static void do_randread(int argc, char **argv, const struct cmd_desc *cmd)
+ 	int fd, advice;
+ 	time_t t;
+ 	struct stat stbuf;
++	u64 size;
  
-+#define freeze_desc "freeze filesystem"
-+#define freeze_help "f2fs_io freeze [directory_path]\n\n"
+ 	if (argc != 6) {
+ 		fputs("Excess arguments\n\n", stderr);
+@@ -1261,7 +1262,17 @@ static void do_randread(int argc, char **argv, const struct cmd_desc *cmd)
+ 	if (fstat(fd, &stbuf) != 0)
+ 		die_errno("fstat of source file failed");
+ 
+-	aligned_size = (u64)stbuf.st_size & ~((u64)(F2FS_DEFAULT_BLKSIZE - 1));
++	if (S_ISBLK(stbuf.st_mode)) {
++		u64 devsize;
 +
-+static void do_freeze(int argc, char **argv, const struct cmd_desc *cmd)
-+{
-+	int ret, fd;
-+
-+	if (argc != 2) {
-+		fputs("Excess arguments\n\n", stderr);
-+		fputs(cmd->cmd_help, stderr);
-+		exit(1);
++		if (ioctl(fd, BLKGETSIZE64, &devsize) < 0)
++			die_errno("BLKGETSIZE64 failed");
++		size = devsize;
++	} else {
++		size = (u64)stbuf.st_size;
 +	}
 +
-+	fd = xopen(argv[1], O_DIRECTORY, 0);
-+
-+	ret = ioctl(fd, FIFREEZE);
-+	if (ret < 0)
-+		die_errno("FIFREEZE failed");
-+
-+	printf("freeze filesystem ret=%d\n", ret);
-+	exit(0);
-+}
-+
-+#define thaw_desc "thaw filesystem"
-+#define thaw_help "f2fs_io thaw [directory_path]\n\n"
-+
-+static void do_thaw(int argc, char **argv, const struct cmd_desc *cmd)
-+{
-+	int ret, fd;
-+
-+	if (argc != 2) {
-+		fputs("Excess arguments\n\n", stderr);
-+		fputs(cmd->cmd_help, stderr);
-+		exit(1);
-+	}
-+
-+	fd = xopen(argv[1], O_DIRECTORY, 0);
-+
-+	ret = ioctl(fd, FITHAW);
-+	if (ret < 0)
-+		die_errno("FITHAW failed");
-+
-+	printf("thaw filesystem ret=%d\n", ret);
-+	exit(0);
-+}
-+
- #define CMD_HIDDEN 	0x0001
- #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
- #define _CMD(name) { #name, do_##name, NULL, NULL, CMD_HIDDEN }
-@@ -2504,6 +2550,8 @@ const struct cmd_desc cmd_list[] = {
- 	CMD(ftruncate),
- 	CMD(test_create_perf),
- 	CMD(test_lookup_perf),
-+	CMD(freeze),
-+	CMD(thaw),
- 	{ NULL, NULL, NULL, NULL, 0 }
- };
- 
++	aligned_size = (u64)size & ~((u64)(F2FS_DEFAULT_BLKSIZE - 1));
+ 	if (aligned_size < buf_size)
+ 		die("File is too small to random read");
+ 	end_idx = (u64)(aligned_size - buf_size) / (u64)F2FS_DEFAULT_BLKSIZE + 1;
 -- 
 2.49.0
 
