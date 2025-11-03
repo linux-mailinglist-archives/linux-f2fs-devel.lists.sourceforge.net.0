@@ -2,76 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 603B8C29CEA
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F2B2C29CE8
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 03 Nov 2025 02:49:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:Cc:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:Message-Id:In-Reply-To:Date:From:To:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:References:List-Owner;
-	bh=sq4elCTtCG1xF9f92Rdgz42n1d5k4WZh1kAIqoMoXl0=; b=b/wk5TVOco5k7M8Xr3pbtIEoNz
-	/OcGr9fHk6x/XhTerNSeX6Ljm+aiJI12ipXRQ/2AVEGboj3iF1oOS2latSBSqkFT+Xooz92KzDYVk
-	ww5Z5bzAnDa2CoWltAAnka75kq1OYovpmtLsMXDix7nmaxlucK5pg1Wo4oQeaAqt5ZBE=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:In-Reply-To:Date:From:To:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:References:List-Owner;
+	bh=uK5p4g98XTNWsWUL/h46CL9hfhxQ7czIkNtUb/dczYg=; b=LBaRj2BXviKaxyiB55zaPlea1u
+	r/YcUCtPQ6TNf13ZlfLhylCsy5fSRROzeuH9YMqKZvg8q+lsx0LHKHjfIs5UBmEntdeEN88s6CHbK
+	scThMkCdaJUZhdrjrsz/GccoUrz5MKTd+B8b/Qe7dY5gCZYaya3/1fWbN6OmezJYamJg=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vFjgx-0007Hd-H4;
-	Mon, 03 Nov 2025 01:49:07 +0000
+	id 1vFjgu-0001cN-0v;
+	Mon, 03 Nov 2025 01:49:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <gregkh@linuxfoundation.org>) id 1vFjgv-0007HV-AO
+ (envelope-from <gregkh@linuxfoundation.org>) id 1vFjgs-0001cH-Ey
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Nov 2025 01:49:05 +0000
+ Mon, 03 Nov 2025 01:49:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Message-Id:In-Reply-To:Date:From:Cc:To:Subject:
- Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:References:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=818PaUGUBLk3ZcROrqVnDDvy+icOHZOEUYmGeQN9ScA=; b=Jl4OQlBMrGtb+tgRe9EyPAvjLo
- 3SeEk2o1SqNm0gnbusdFu+pMqLfwBdgjoq42sPvhDLPLZfn6MVT2mJL8YT6YgR4D65yDBCYqZXwnl
- yMV09NEQhBbdMR4kFbhKF6JkKL0jW9VD8ncVNZwDeYK33yl6kMEkY9vLEv0CDuiQ0A+A=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Message-Id:In-Reply-To:Date:From:Cc:To:Subject:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:In-Reply-To:Date:From:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=818PaUGUBLk3ZcROrqVnDDvy+icOHZOEUYmGeQN9ScA=; b=L4aG4YkHf05lhm7FsWGaAbJn6r
- I304pwzutsn6OVz98TcKW8+Wb4TWAnrvJbl7Wyp8clbgsTKqLbWJDUhtGJDOAelH+Tmwv647L143D
- nQB9FE0bcJG1qtnXqcC5w7ChvqKE4RWk7M4SFxqiceWyykJLgOoW2su0LYVc5FMtBIdU=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=LdxYvJPwRA4Ep/k/nBODjc430Es3F6j3UNp/gg1LTdI=; b=BGSwnbcsG1R4L65BHzCvVke/Ze
+ KgMQJfnoU9so6Li2SlYP5CvPJNDvDUqBCNXp1+BRVH9QT/EfavK/MHjimqYcmW5IGKjFuCmGx86mK
+ XZEXcWObRqNHDIghXujkhWkHxhNh5TyRR7PypYj1RC73zvgT2bh/UoL6LXG3gWk8HYTQ=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:
+ In-Reply-To:Date:From:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=LdxYvJPwRA4Ep/k/nBODjc430Es3F6j3UNp/gg1LTdI=; b=L8G99VSZfVRmr2NyB4gHiS4Cy0
+ akKDZtdBTFWisNHQZaBoLKd20Pg010KQOn7kHGhj/GTDNESe0b0cz550vk/jQm+m6zFwdBH9R/P4H
+ tNI1ME73b4GqIE16fFPX7Z2HYExEMJVD//gcHX/zhnEaQ/KCI3paiaejNTyTY0FYSldo=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vFjgu-0007LR-K0 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Nov 2025 01:49:05 +0000
+ id 1vFjgr-0007LO-PJ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 03 Nov 2025 01:49:02 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id DAFED60284;
- Mon,  3 Nov 2025 01:48:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 455F5C4CEFB;
- Mon,  3 Nov 2025 01:48:53 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 56372419F8;
+ Mon,  3 Nov 2025 01:48:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C7DF1C116C6;
+ Mon,  3 Nov 2025 01:48:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1762134533;
- bh=VzvbnXysMs+hPXBAqPduVuWyElJXSDfW/ZKbFExsF/g=;
+ s=korg; t=1762134531;
+ bh=BQ+0lxQkpcXa/tD37ekUWLzbNim2icgZVv3J5UVRVrg=;
  h=Subject:To:Cc:From:Date:In-Reply-To:From;
- b=yReFW9gBO54JeNjTBde3SV80321WrjASHp+In1jbqSzNCIejQv34o5HtFBhHUHLKw
- txjxZxFL2pxKLl9yhR/1uOoAkxhuMTtCxJXkhfdTVXezqntOpDmEX9IvSLZx2n0LJi
- DDdTSNQXbpb2OU8u2dJH79GPULbkFncty5NDovow=
+ b=NKCIS4nUJJRTzUf4zGcO36QcbhNBLyPrRYww5MJcr80mpPufA97nf0gKTvB0IktoS
+ qRe38UqFhM4KN94IYa+9fi14ACTmNO5pIDKxmmCoEFpOTMaj86QxIclwzEgRYonYms
+ J01tx+EqT5YO3ZE5gjywbQBqynkwRgJHWO6gw3Bo=
 To: adilger.kernel@dilger.ca, akpm@linux-foundation.org, anna@kernel.org,
  axboe@kernel.dk, brauner@kernel.org, chao@kernel.org, djwong@kernel.org,
  dlemoal@kernel.org, gregkh@linuxfoundation.org, hare@suse.de,
- hch@infradead.org, idryomov@gmail.com, jaegeuk@kernel.org, jlayton@kernel.org,
- konishi.ryusuke@gmail.com, linux-f2fs-devel@lists.sourceforge.net,
- linux-mm@kvack.org, mcgrof@kernel.org, mngyadam@amazon.de,
- nagy@khwaternagy.com, trond.myklebust@hammerspace.com, tytso@mit.edu,
- viro@zeniv.linux.org.uk, willy@infradead.org, xiubli@redhat.com
+ hch@infradead.org, hch@lst.de, idryomov@gmail.com, jaegeuk@kernel.org,
+ jlayton@kernel.org, johannes.thumshirn@wdc.com, konishi.ryusuke@gmail.com,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org, mcgrof@kernel.org,
+ mngyadam@amazon.de, nagy@khwaternagy.com, trond.myklebust@hammerspace.com,
+ tytso@mit.edu, viro@zeniv.linux.org.uk, willy@infradead.org, xiubli@redhat.com
 From: <gregkh@linuxfoundation.org>
 Date: Mon, 03 Nov 2025 10:46:56 +0900
-In-Reply-To: <20251021070353.96705-7-mngyadam@amazon.de
-Message-Id: <20251103014853.455F5C4CEFB@smtp.kernel.org>
+In-Reply-To: <20251021070353.96705-8-mngyadam@amazon.de>
+Message-ID: <2025110356-pushiness-kangaroo-bfbf@gregkh>
+MIME-Version: 1.0
+X-stable: commit
+X-Patchwork-Hint: ignore
 X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -79,20 +82,19 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: 20230827214518.GU3390869@ZenIV> Message-ID:
- <2025110356-extending-goal-0e9a@gregkh>
- MIME-Version: 1.0 Content-Type: text/plain;
- charset=ANSI_X3.4-1968 Content-Transfer-Encoding:
- 8bit X-stable: commit [...] 
- Content analysis details:   (0.2 points, 5.0 required)
+ Content preview: This is a note to let you know that I've just added the patch
+ titled block: open code __generic_file_write_iter for blkdev writes to the
+ 6.1-stable tree which can be found at:
+ http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;
+ a=summary Content analysis details:   (0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
-X-Headers-End: 1vFjgu-0007LR-K0
-Subject: [f2fs-dev] Patch "direct_write_fallback(): on error revert the
- ->ki_pos update from buffered write" has been added to the 6.1-stable tree
+X-Headers-End: 1vFjgr-0007LO-PJ
+Subject: [f2fs-dev] Patch "block: open code __generic_file_write_iter for
+ blkdev writes" has been added to the 6.1-stable tree
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,74 +107,124 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: stable-commits@vger.kernel.org
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-20230827214518.GU3390869@ZenIV>
-Message-ID: <2025110356-extending-goal-0e9a@gregkh>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=ANSI_X3.4-1968
-Content-Transfer-Encoding: 8bit
-X-stable: commit
-X-Patchwork-Hint: ignore
-
 
 This is a note to let you know that I've just added the patch titled
 
-    direct_write_fallback(): on error revert the ->ki_pos update from buffered write
+    block: open code __generic_file_write_iter for blkdev writes
 
 to the 6.1-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
-     direct_write_fallback-on-error-revert-the-ki_pos-update-from-buffered-write.patch
+     block-open-code-__generic_file_write_iter-for-blkdev-writes.patch
 and it can be found in the queue-6.1 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
 
 
-From stable+bounces-188300-greg=kroah.com@vger.kernel.org Tue Oct 21 16:13:26 2025
+From stable+bounces-188301-greg=kroah.com@vger.kernel.org Tue Oct 21 16:18:34 2025
 From: Mahmoud Adam <mngyadam@amazon.de>
-Date: Tue, 21 Oct 2025 09:03:40 +0200
-Subject: direct_write_fallback(): on error revert the ->ki_pos update from buffered write
+Date: Tue, 21 Oct 2025 09:03:41 +0200
+Subject: block: open code __generic_file_write_iter for blkdev writes
 To: <stable@vger.kernel.org>
-Cc: <gregkh@linuxfoundation.org>, <nagy@khwaternagy.com>, Al Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jens Axboe <axboe@kernel.dk>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Jeff Layton <jlayton@kernel.org>, Theodore Ts'o <tytso@mit.edu>, Andreas Dilger <adilger.kernel@dilger.ca>, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, Christoph Hellwig <hch@infradead.org>, "Darrick J. Wong" <djwong@kernel.org>, Trond Myklebust <trond.myklebust@hammerspace.com>, Anna Schumaker <anna@kernel.org>, "Ryusuke Konishi" <konishi.ryusuke@gmail.com>, "Matthew Wilcox (Oracle)" <willy@infradead.org>, Andrew Morton <akpm@linux-foundation.org>, "Hannes Reinecke" <hare@suse.de>, Damien Le Moal <dlemoal@kernel.org>, "Luis Chamberlain" <mcgrof@kernel.org>, <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>, <ceph-devel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>, <linux-ext4@vger.kernel.org>, <linux-f2fs-devel@lists.sourcefo
- rge.net>, <linux-xfs@vger.kernel.org>, <linux-nfs@vger.kernel.org>, <linux-nilfs@vger.kernel.org>, <linux-mm@kvack.org>
-Message-ID: <20251021070353.96705-7-mngyadam@amazon.de>
+Cc: <gregkh@linuxfoundation.org>, <nagy@khwaternagy.com>, Christoph Hellwig <hch@lst.de>, Johannes Thumshirn <johannes.thumshirn@wdc.com>, "Christian Brauner" <brauner@kernel.org>, Hannes Reinecke <hare@suse.de>, "Luis Chamberlain" <mcgrof@kernel.org>, Jens Axboe <axboe@kernel.dk>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Jeff Layton <jlayton@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>, Theodore Ts'o <tytso@mit.edu>, Andreas Dilger <adilger.kernel@dilger.ca>, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, Christoph Hellwig <hch@infradead.org>, "Darrick J. Wong" <djwong@kernel.org>, Trond Myklebust <trond.myklebust@hammerspace.com>, Anna Schumaker <anna@kernel.org>, "Ryusuke Konishi" <konishi.ryusuke@gmail.com>, "Matthew Wilcox (Oracle)" <willy@infradead.org>, Andrew Morton <akpm@linux-foundation.org>, "Damien Le Moal" <dlemoal@kernel.org>, <linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>, <ceph-devel@vger.kernel.org>, <linu
+ x-fsdevel@vger.kernel.org>, <linux-ext4@vger.kernel.org>, <linux-f2fs-devel@lists.sourceforge.net>, <linux-xfs@vger.kernel.org>, <linux-nfs@vger.kernel.org>, <linux-nilfs@vger.kernel.org>, <linux-mm@kvack.org>
+Message-ID: <20251021070353.96705-8-mngyadam@amazon.de>
 
-From: Al Viro <viro@zeniv.linux.org.uk>
+From: Christoph Hellwig <hch@lst.de>
 
-commit 8287474aa5ffb41df52552c4ae4748e791d2faf2 upstream.
+commit 727cfe976758b79f8d2f8051c75a5ccb14539a56 upstream.
 
-If we fail filemap_write_and_wait_range() on the range the buffered write went
-into, we only report the "number of bytes which we direct-written", to quote
-the comment in there.  Which is fine, but buffered write has already advanced
-iocb->ki_pos, so we need to roll that back.  Otherwise we end up with e.g.
-write(2) advancing position by more than the amount it reports having written.
+Open code __generic_file_write_iter to remove the indirect call into
+->direct_IO and to prepare using the iomap based write code.
 
-Fixes: 182c25e9c157 "filemap: update ki_pos in generic_perform_write"
-Signed-off-by: Al Viro <viro@zeniv.linux.org.uk>
-Message-Id: <20230827214518.GU3390869@ZenIV>
-Signed-off-by: Christian Brauner <brauner@kernel.org>
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
+Reviewed-by: Christian Brauner <brauner@kernel.org>
+Reviewed-by: Hannes Reinecke <hare@suse.de>
+Reviewed-by: Luis Chamberlain <mcgrof@kernel.org>
+Link: https://lore.kernel.org/r/20230801172201.1923299-4-hch@lst.de
+Signed-off-by: Jens Axboe <axboe@kernel.dk>
+[fix contextual changes]
 Signed-off-by: Mahmoud Adam <mngyadam@amazon.de>
 Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 ---
- fs/libfs.c |    1 +
- 1 file changed, 1 insertion(+)
+ block/fops.c |   45 +++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 43 insertions(+), 2 deletions(-)
 
---- a/fs/libfs.c
-+++ b/fs/libfs.c
-@@ -1615,6 +1615,7 @@ ssize_t direct_write_fallback(struct kio
- 		 * We don't know how much we wrote, so just return the number of
- 		 * bytes which were direct-written
- 		 */
-+		iocb->ki_pos -= buffered_written;
- 		if (direct_written)
- 			return direct_written;
- 		return err;
+--- a/block/fops.c
++++ b/block/fops.c
+@@ -515,6 +515,30 @@ static int blkdev_close(struct inode *in
+ 	return 0;
+ }
+ 
++static ssize_t
++blkdev_direct_write(struct kiocb *iocb, struct iov_iter *from)
++{
++	size_t count = iov_iter_count(from);
++	ssize_t written;
++
++	written = kiocb_invalidate_pages(iocb, count);
++	if (written) {
++		if (written == -EBUSY)
++			return 0;
++		return written;
++	}
++
++	written = blkdev_direct_IO(iocb, from);
++	if (written > 0) {
++		kiocb_invalidate_post_direct_write(iocb, count);
++		iocb->ki_pos += written;
++		count -= written;
++	}
++	if (written != -EIOCBQUEUED)
++		iov_iter_revert(from, count - iov_iter_count(from));
++	return written;
++}
++
+ /*
+  * Write data to the block device.  Only intended for the block device itself
+  * and the raw driver which basically is a fake block device.
+@@ -524,7 +548,8 @@ static int blkdev_close(struct inode *in
+  */
+ static ssize_t blkdev_write_iter(struct kiocb *iocb, struct iov_iter *from)
+ {
+-	struct block_device *bdev = iocb->ki_filp->private_data;
++	struct file *file = iocb->ki_filp;
++	struct block_device *bdev = file->private_data;
+ 	struct inode *bd_inode = bdev->bd_inode;
+ 	loff_t size = bdev_nr_bytes(bdev);
+ 	struct blk_plug plug;
+@@ -553,7 +578,23 @@ static ssize_t blkdev_write_iter(struct
+ 	}
+ 
+ 	blk_start_plug(&plug);
+-	ret = __generic_file_write_iter(iocb, from);
++	ret = file_remove_privs(file);
++	if (ret)
++		return ret;
++
++	ret = file_update_time(file);
++	if (ret)
++		return ret;
++
++	if (iocb->ki_flags & IOCB_DIRECT) {
++		ret = blkdev_direct_write(iocb, from);
++		if (ret >= 0 && iov_iter_count(from))
++			ret = direct_write_fallback(iocb, from, ret,
++					generic_perform_write(iocb, from));
++	} else {
++		ret = generic_perform_write(iocb, from);
++	}
++
+ 	if (ret > 0)
+ 		ret = generic_write_sync(iocb, ret);
+ 	iov_iter_reexpand(from, iov_iter_count(from) + shorted);
 
 
 Patches currently in stable-queue which might be from mngyadam@amazon.de are
