@@ -2,120 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0C1DC3208C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 04 Nov 2025 17:24:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13299C326A6
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 04 Nov 2025 18:46:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=+KyiCak6fXSzvjkxsA9xWUSMxWg2vlEBJg5VPK9wr+o=; b=NrXr3nBFSZ+32t4jgEXC7zfpOi
-	o67H+cIBp9+2EIkbOubplAxkWBrKUKkPXdyYBrtVBGy0JfwcmmEgFEpn+6ylCXZRB59rMaHRH4B1S
-	dW7xE/bI5Psgn9Zf8sSfTyb+evhbvPGMjmjKcwf2bdOurMuO4SshACWfHxlXnijUTqFI=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:To:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=oBLLokDvOdjQtCsD+OlpugNHfOf6r+KIH9+EZxJRB4Q=; b=bpmIguiwnrKuseJzhfzlhWSIIK
+	4FgTv7B8/L+fEO2MEJ7+aA+dpRCWyp/tXdWOn4XdI4Ay4RSo3U/iddN7nE7DXxDf6EmdWELpBIZuy
+	k4E07R69YeE4z53iUlpCy1Z8/oT/Kpk38jNgiD25mj4gSCGV+dgus2YcGUyO/7AR3rAs=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vGJpT-0003MX-SW;
-	Tue, 04 Nov 2025 16:24:20 +0000
+	id 1vGL6l-0000Id-Kv;
+	Tue, 04 Nov 2025 17:46:24 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1vGJpS-0003MJ-Dp
+ (envelope-from <joannelkoong@gmail.com>) id 1vGL6P-0000IH-DA
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Nov 2025 16:24:19 +0000
+ Tue, 04 Nov 2025 17:45:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=t+aFUuc/PhUUnMvNqeA3BrrNlM4VlPvW3HgAoMoPy9c=; b=N4OtFxVDW0cyBk5TqikI70o0SZ
- rq84ikeB28P8D10hp2yJQvjYvQgL9HiaKNfS5tBNaQc0xrQFHLVuZG/YSSqyln5ECwqz6dW2YtSLr
- ZKdx5nUyen39i9g4FaWG/exAH+hWGh0nMqN3vlL/rOsgYShYQYR+jESv90UuT+MlfaDM=;
+ bh=M6x1mMEr1ViK/4UEn7s/n9KiNBM26zd4bqgPz4hzX20=; b=N3P4CbWvYnvD0qFVkfZOzJtQUv
+ s2hxmqGRkSFs6Ug4HTFoOO+JY4kOppqccHk1q6x/r86b58HwCtEXb8oE/UOcMFsulyZJxumBGJ0RV
+ eLXUxL1BNW/YCIawwR4ddpUySw0oveLBvknHN79UpVGN58F9wG6D/hWTySZXR+tTlHC8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=t+aFUuc/PhUUnMvNqeA3BrrNlM4VlPvW3HgAoMoPy9c=; b=f
- PhscIFM1J8TxdMK4WTuUfA3lo9WhhJr7stOpu0TTMA1sVVQfCUwt9TBsE46R4lDUzy5URZdh8k9S6
- ftEfxwFbedAHfG3SMlugCfOyzcgBgDiBjXG6C0hYJ93ff/VJnueI4jEo8F6jv7UkK4LIdCuOFRZhz
- P6nRay/vOAECYE2s=;
-Received: from mail-pl1-f170.google.com ([209.85.214.170])
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=M6x1mMEr1ViK/4UEn7s/n9KiNBM26zd4bqgPz4hzX20=; b=mC0M4+tqnxfwf83lFshgJ/ZQd8
+ Y/EOywrxgWDynEhJW3+OxwG5IKrwJyvlZTr255LEvWxwO0dsdsoGlxGRD92/aohcMzgtLV0T2j3rb
+ Bamx2nq1JZcl1vl72mKliLNAiVOiRqF6RSTT+92CZWWfjMXVTCE1EkRdMEcuiqMKcH3U=;
+Received: from mail-qk1-f171.google.com ([209.85.222.171])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vGJpR-00074s-VG for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Nov 2025 16:24:19 +0000
-Received: by mail-pl1-f170.google.com with SMTP id
- d9443c01a7336-26d0fbe238bso45783095ad.3
+ id 1vGL6N-0003DH-Kf for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 04 Nov 2025 17:45:53 +0000
+Received: by mail-qk1-f171.google.com with SMTP id
+ af79cd13be357-88f2b29b651so565674885a.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 04 Nov 2025 08:24:17 -0800 (PST)
+ Tue, 04 Nov 2025 09:45:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762273447; x=1762878247; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=t+aFUuc/PhUUnMvNqeA3BrrNlM4VlPvW3HgAoMoPy9c=;
- b=BL/5sWEboieXslYohP6PeAseyrUeVG3L4x0Oo0tegNBdXZjzj5StMH4eprfPc6EXRL
- lK1KNkISwOlpLi5VFo/iQZQXWJdZgy0diUaLFQRD21m/tqkKdi5orzhSXhbOzY4Nlyji
- 5SizqveuoWGzD8T4c1zjERZCWgdLPQZPKcbKEc9BHSzHWu7FaM5d0NXOvYstNMO952rj
- so/MxqNMPGHYe/AzAKz34NsZN3L367zzLGQCA8OuK+5CI3CfkgOiviC5uNXC09UArW5J
- 1hOTgtRmtmSglgLO+ic1dkrBSgsG5SIRCyF38iuKjari4m/qAHLsMAl6tnV4ebrqmGrn
- w7Fw==
+ d=gmail.com; s=20230601; t=1762278338; x=1762883138; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=M6x1mMEr1ViK/4UEn7s/n9KiNBM26zd4bqgPz4hzX20=;
+ b=h66JZT1mmbh3wd8EUxiC191m7uVRhEP6JSkMyMoaraV9Rd98Y9IYUYhRWmcTLRIuZQ
+ rl4pqRt+JBfeRokPUydofRIISt7zU56aYmINRweRbhhINgshRMi1LjLStKUVMNRWMFB+
+ /4m9MbwZCxZyIX6qAZ7N2NQ6otSruMfTqdCLVxrA5u0zcsH1fO7tYgz2QtrPg1yjT9Xq
+ gkop1pZwmgashuRFGOu85k/DJW70H+2RCLSWA673DsexMJH7aZALO+c3HDAJy6x3gmq9
+ 3KHK9F0MdQ0fai9OeJzsTAURpCm5iWllvSuegcrIddKq1/AnqglH9sSzPlgbM1n8LYp0
+ r1+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762273447; x=1762878247;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t+aFUuc/PhUUnMvNqeA3BrrNlM4VlPvW3HgAoMoPy9c=;
- b=Zma9BPFHHkTjiIYs8dtkNhKtnnGcpGmWprNwUgnKXvgqtHNt2X9lcjhLacqlhtOOmz
- zAZiK3ljSuWU/ms8FJXZvx8RRjflqVyidKFkz1tSNq+J7LxPLKN+qFlkOW44CyrWip9Q
- jVy0W/eQT1AKHaT/WdsHho2u36JVagbAWz/PpEJTIxlDkG3xbPV2aps18ftSLWkktcSC
- mdDjoxceB1aHI3kHpsAkzI1qzbDnmwjML2hENqDxfuiWqYxUdMHunxEB00uEu+qghrS8
- 8A9ZV3gV/eJ9ehUaeeoOkUbaE+QcX044Z7hfsGaKGmLzX/G501jB7MQvHl3F/OlkDleI
- oCbw==
+ d=1e100.net; s=20230601; t=1762278338; x=1762883138;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=M6x1mMEr1ViK/4UEn7s/n9KiNBM26zd4bqgPz4hzX20=;
+ b=BCZYZ9+hGznoMDsiqxGdGZDKb1NaCr6cjE8Hkzf8lv2QcgvAKr8SznhJpuTakstZQ3
+ xslC93vcHzsPu+rpyNJorXyXQtTHoXzvzcIxZO6Ho/WhqHBjQMS9LZIeJieTEVzY7TS3
+ ntuE+y3nAdMifXSSPtSqxL46XD+v9eVB/LyafhLvPDc5uFN/2Of7s6RZcTjkHB1hjh9F
+ PN5Hyplby5vknT2WqNkYQbNXuw39AzPHIPBsHZifdd5vKdq6gznk/A2MfCZ9QjnntjJ7
+ dlek2e7lCBC8HvNKn2Z1yRxNpo123ek8arnY8/OwwkMbOdhXXy14wNp94DRiXchdE/Bl
+ BKiw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWcwU7Vf6vwmh/KQ3BNLb4DmVh5QZXDCGtfh2u0SD80ONPpTRch/Ph8OgrZwx6uo1cidRaMtrsRQ6dAvRDofeS+@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YxjE+PENUWQXEKXojt2/qz14yfa3URBE2rUenMH6EWIb2mwrAtn
- dKqvqeDdT+P1pWcEBNe52xeZQY/IYYi1lEzDtLTd9PQ6TZf0IYpYc1BS
-X-Gm-Gg: ASbGncvzA4obwh6pt3dXCuMrTp2xwaHzylobQA9XfhY3sdqwtIR51Xo1vDBGpLwTDpK
- +aeH9YBSkbiZ8WPkIOi8vCPK/7smTpxHIEPJSs06Da/ioXw9Vbjuqym7grUGk697EVSB8ePuDQC
- AGMBYdmx0ug9F2hBgV9pwt5CBfpoOLHHT3hp2r9K5QoENnVKYE30Cv3phSLcC2fKSQKbtihFgKb
- WzpB0lCPFj2MqZgZEmkIDkUPn6Q+vIrSAPgcbDKH1NdVjAjqgIzxwJE1vZaftK2eEfQKO63HDLc
- tA4cj9hRvp2F9scatQGWjHg7c8WGtajFoNcECEzKM6Tc+GgWl07ST46XUUrKZ5DAV9RgTWDIVW2
- cpD6pYK0auUARe3yF/3GnVWxOFbskDpfwvG/ZzZ42YtUwI7dZirXHEC8dC4PzjTR1stryXDpAFC
- 1DVGRmTaFJZhpvwHOgYe27xR7Ky3yrfiD6TgxRa8W5uyQ98dLkhXOHEa1imPGmsNS0ZX3GwdwNB
- 5IZfw==
-X-Google-Smtp-Source: AGHT+IFuzIb6zSN3gQZI02V0lX7o0v3C33Kxsq7XtI3FJQniceg4vQzXN1auk5zlHOqXKiuALsXuUw==
-X-Received: by 2002:a17:902:f602:b0:274:5030:2906 with SMTP id
- d9443c01a7336-2962adb40a5mr2387535ad.46.1762273447115; 
- Tue, 04 Nov 2025 08:24:07 -0800 (PST)
-Received: from daehojeong-desktop.mtv.corp.google.com
- ([2a00:79e0:2e7c:8:7b63:d7ee:4b43:91a7])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29601998ff7sm31939145ad.44.2025.11.04.08.24.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Nov 2025 08:24:06 -0800 (PST)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Tue,  4 Nov 2025 08:24:02 -0800
-Message-ID: <20251104162402.928582-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.51.2.1026.g39e6a42477-goog
+ AJvYcCUIjBEjpH08DHiGEZzJ5S6sRz5DQXBjkpL+MmsqF/xhoFUTzsYbzSeh5iAgKugtmpYL0CF4eNPnVJHD4NdrF64M@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YwrXlXl+ydcXlCxeYXCN/Avh0YNWenqaDQT7Zq8Z7O6OB2BTYp3
+ 7znU3vzHRApcI1GBr+lXUS7i8OrwaUoB+4Gvjln3JVnilLtPsPCXlaSdFdTY8moRMVWesC2K5Ut
+ 0GqR0a+QezVz6LR9kIsVWNa7d7g1FGwE=
+X-Gm-Gg: ASbGncsCNkvUd/+V6nY+8U5HSFtitbB1mM6Vb8HX+ZdDWSTAIkw9CPpKiQyCIhZXIWo
+ IUuwBE+cTa0uZJJ93dF4AHMEYIXloYpDdnXGBANGNRipbgUx8VVcCMaDn7/497dZfOuXFXvR0PZ
+ /Is5Lxnm7t0oXvTzb4EZ9iKr/ariad45CN9+DuG5eYP16PwifhBOSEHUmBPLU3LWxQlUA/lINy4
+ R7JziEt62+9N6vPguCZiMKcRnvmnZnIjrf1KmntwesNLNFKw3C/57Lgjwkb5JKqoAZi/jR5O/3f
+ 2g398ZAMk2hA98TgEnDMHOCI/Wc49SEl
+X-Google-Smtp-Source: AGHT+IHIemEGumbWMvCLAES8ZvcTesT/uJ+/JeVAzhULJ3mU86DKceJjKHvDWF4VbBI6aTt9xr2jHTuPM+nQhLeXf3k=
+X-Received: by 2002:a05:620a:44d1:b0:80d:9993:889d with SMTP id
+ af79cd13be357-8b22083861fmr71066585a.20.1762278338264; Tue, 04 Nov 2025
+ 09:45:38 -0800 (PST)
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+References: <CAJnrk1bF8sLU6tG2MGkt_KR4BoTd_k01CMVZJ9js2-eyh80tbw@mail.gmail.com>
+ <69096836.a70a0220.88fb8.0006.GAE@google.com>
+In-Reply-To: <69096836.a70a0220.88fb8.0006.GAE@google.com>
+From: Joanne Koong <joannelkoong@gmail.com>
+Date: Tue, 4 Nov 2025 09:45:27 -0800
+X-Gm-Features: AWmQ_bmsZ0FX7daxSTx60bXg7avbovxZmS1g2DtoGMxWSn0aBtqMvbz1O5rliIw
+Message-ID: <CAJnrk1Yo4dRVSaPCaAGkHc+in03KaTXJ+KxckhLoSrRxbEdDBg@mail.gmail.com>
+To: syzbot <syzbot+3686758660f980b402dc@syzkaller.appspotmail.com>, 
+ "pmladek@suse.com" <pmladek@suse.com>, 
+ "amurray@thegoodpenguin.co.uk" <amurray@thegoodpenguin.co.uk>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Daeho Jeong The recent increase in the number of
- Segment
- Summary Area (SSA) entries from 512 to 2048 was an unintentional change in
- logic of 16kb block support. This commit corrects the issue. 
- Content analysis details:   (0.1 points, 5.0 required)
+ Content preview:  On Mon, Nov 3, 2025 at 6:43 PM syzbot wrote: > > Hello, >
+ > syzbot has tested the proposed patch but the reproducer is still triggering
+ an issue: > WARNING in get_data > > loop0: detected capacity c [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -125,16 +121,12 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [daeho43(at)gmail.com]
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [daeho43(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.170 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vGJpR-00074s-VG
-Subject: [f2fs-dev] [PATCH] f2fs: revert summary entry count from 2048 to
- 512 in 16kb block support
+ [joannelkoong(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.222.171 listed in wl.mailspike.net]
+X-Headers-End: 1vGL6N-0003DH-Kf
+Subject: Re: [f2fs-dev] [syzbot] [iomap?] kernel BUG in folio_end_read (2)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -146,455 +138,95 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: brauner@kernel.org, djwong@kernel.org, syzkaller-bugs@googlegroups.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
-
-The recent increase in the number of Segment Summary Area (SSA) entries
-from 512 to 2048 was an unintentional change in logic of 16kb block
-support. This commit corrects the issue.
-
-To better utilize the space available from the erroneous 2048-entry
-calculation, we are implementing a solution to share the currently
-unused SSA space with neighboring segments. This enhances overall
-SSA utilization without impacting the established 8MB segment size.
-
-Fixes: d7e9a9037de2 ("f2fs: Support Block Size == Page Size")
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
----
-v5: add the feature to sysfs feature and feature_list
-v4: add a feature to prevent from mounting deprecated format
-v3: error handling for a failure of f2fs_get_meta_folio().
-v2: detect legacy layout and prevent mount.
----
- fs/f2fs/f2fs.h          |   2 +
- fs/f2fs/gc.c            | 117 +++++++++++++++++++++++-----------------
- fs/f2fs/recovery.c      |   2 +-
- fs/f2fs/segment.c       |  29 ++++++----
- fs/f2fs/segment.h       |   8 ++-
- fs/f2fs/super.c         |  14 +++++
- fs/f2fs/sysfs.c         |   7 +++
- include/linux/f2fs_fs.h |   5 +-
- 8 files changed, 121 insertions(+), 63 deletions(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index b6e35fdd5fd3..c851364de529 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -245,6 +245,7 @@ struct f2fs_mount_info {
- #define F2FS_FEATURE_COMPRESSION		0x00002000
- #define F2FS_FEATURE_RO				0x00004000
- #define F2FS_FEATURE_DEVICE_ALIAS		0x00008000
-+#define F2FS_FEATURE_PACKED_SSA			0x00010000
- 
- #define __F2FS_HAS_FEATURE(raw_super, mask)				\
- 	((raw_super->feature & cpu_to_le32(mask)) != 0)
-@@ -4710,6 +4711,7 @@ F2FS_FEATURE_FUNCS(casefold, CASEFOLD);
- F2FS_FEATURE_FUNCS(compression, COMPRESSION);
- F2FS_FEATURE_FUNCS(readonly, RO);
- F2FS_FEATURE_FUNCS(device_alias, DEVICE_ALIAS);
-+F2FS_FEATURE_FUNCS(packed_ssa, PACKED_SSA);
- 
- #ifdef CONFIG_BLK_DEV_ZONED
- static inline bool f2fs_zone_is_seq(struct f2fs_sb_info *sbi, int devi,
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 8abf521530ff..af2f4d28462c 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1732,7 +1732,7 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
- 	unsigned char type = IS_DATASEG(get_seg_entry(sbi, segno)->type) ?
- 						SUM_TYPE_DATA : SUM_TYPE_NODE;
- 	unsigned char data_type = (type == SUM_TYPE_DATA) ? DATA : NODE;
--	int submitted = 0;
-+	int submitted = 0, sum_blk_cnt;
- 
- 	if (__is_large_section(sbi)) {
- 		sec_end_segno = rounddown(end_segno, SEGS_PER_SEC(sbi));
-@@ -1766,22 +1766,28 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
- 
- 	sanity_check_seg_type(sbi, get_seg_entry(sbi, segno)->type);
- 
-+	segno = rounddown(segno, SUMS_PER_BLOCK);
-+	sum_blk_cnt = DIV_ROUND_UP(end_segno - segno, SUMS_PER_BLOCK);
- 	/* readahead multi ssa blocks those have contiguous address */
- 	if (__is_large_section(sbi))
- 		f2fs_ra_meta_pages(sbi, GET_SUM_BLOCK(sbi, segno),
--					end_segno - segno, META_SSA, true);
-+					sum_blk_cnt, META_SSA, true);
- 
- 	/* reference all summary page */
- 	while (segno < end_segno) {
--		struct folio *sum_folio = f2fs_get_sum_folio(sbi, segno++);
-+		struct folio *sum_folio = f2fs_get_sum_folio(sbi, segno);
-+
-+		segno += SUMS_PER_BLOCK;
- 		if (IS_ERR(sum_folio)) {
- 			int err = PTR_ERR(sum_folio);
- 
--			end_segno = segno - 1;
--			for (segno = start_segno; segno < end_segno; segno++) {
-+			end_segno = segno - SUMS_PER_BLOCK;
-+			segno = rounddown(start_segno, SUMS_PER_BLOCK);
-+			while (segno < end_segno) {
- 				sum_folio = filemap_get_folio(META_MAPPING(sbi),
- 						GET_SUM_BLOCK(sbi, segno));
- 				folio_put_refs(sum_folio, 2);
-+				segno += SUMS_PER_BLOCK;
- 			}
- 			return err;
- 		}
-@@ -1790,68 +1796,83 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
- 
- 	blk_start_plug(&plug);
- 
--	for (segno = start_segno; segno < end_segno; segno++) {
--		struct f2fs_summary_block *sum;
-+	segno = start_segno;
-+	while (segno < end_segno) {
-+		unsigned int cur_segno;
- 
- 		/* find segment summary of victim */
- 		struct folio *sum_folio = filemap_get_folio(META_MAPPING(sbi),
- 					GET_SUM_BLOCK(sbi, segno));
-+		unsigned int block_end_segno = rounddown(segno, SUMS_PER_BLOCK)
-+					+ SUMS_PER_BLOCK;
-+
-+		if (block_end_segno > end_segno)
-+			block_end_segno = end_segno;
- 
- 		if (is_cursec(sbi, GET_SEC_FROM_SEG(sbi, segno))) {
- 			f2fs_err(sbi, "%s: segment %u is used by log",
- 							__func__, segno);
- 			f2fs_bug_on(sbi, 1);
--			goto skip;
-+			goto next_block;
- 		}
- 
--		if (get_valid_blocks(sbi, segno, false) == 0)
--			goto freed;
--		if (gc_type == BG_GC && __is_large_section(sbi) &&
--				migrated >= sbi->migration_granularity)
--			goto skip;
- 		if (!folio_test_uptodate(sum_folio) ||
- 		    unlikely(f2fs_cp_error(sbi)))
--			goto skip;
-+			goto next_block;
- 
--		sum = folio_address(sum_folio);
--		if (type != GET_SUM_TYPE((&sum->footer))) {
--			f2fs_err(sbi, "Inconsistent segment (%u) type [%d, %d] in SIT and SSA",
--				 segno, type, GET_SUM_TYPE((&sum->footer)));
--			f2fs_stop_checkpoint(sbi, false,
--				STOP_CP_REASON_CORRUPTED_SUMMARY);
--			goto skip;
--		}
-+		for (cur_segno = segno; cur_segno < block_end_segno;
-+				cur_segno++) {
-+			struct f2fs_summary_block *sum;
- 
--		/*
--		 * this is to avoid deadlock:
--		 * - lock_page(sum_page)         - f2fs_replace_block
--		 *  - check_valid_map()            - down_write(sentry_lock)
--		 *   - down_read(sentry_lock)     - change_curseg()
--		 *                                  - lock_page(sum_page)
--		 */
--		if (type == SUM_TYPE_NODE)
--			submitted += gc_node_segment(sbi, sum->entries, segno,
--								gc_type);
--		else
--			submitted += gc_data_segment(sbi, sum->entries, gc_list,
--							segno, gc_type,
--							force_migrate);
-+			if (get_valid_blocks(sbi, cur_segno, false) == 0)
-+				goto freed;
-+			if (gc_type == BG_GC && __is_large_section(sbi) &&
-+					migrated >= sbi->migration_granularity)
-+				continue;
- 
--		stat_inc_gc_seg_count(sbi, data_type, gc_type);
--		sbi->gc_reclaimed_segs[sbi->gc_mode]++;
--		migrated++;
-+			sum = SUM_BLK_PAGE_ADDR(sum_folio, cur_segno);
-+			if (type != GET_SUM_TYPE((&sum->footer))) {
-+				f2fs_err(sbi, "Inconsistent segment (%u) type "
-+						"[%d, %d] in SSA and SIT",
-+						cur_segno, type,
-+						GET_SUM_TYPE((&sum->footer)));
-+				f2fs_stop_checkpoint(sbi, false,
-+						STOP_CP_REASON_CORRUPTED_SUMMARY);
-+				continue;
-+			}
- 
--freed:
--		if (gc_type == FG_GC &&
--				get_valid_blocks(sbi, segno, false) == 0)
--			seg_freed++;
-+			/*
-+			 * this is to avoid deadlock:
-+			 *  - lock_page(sum_page)     - f2fs_replace_block
-+			 *   - check_valid_map()        - down_write(sentry_lock)
-+			 *    - down_read(sentry_lock) - change_curseg()
-+			 *                               - lock_page(sum_page)
-+			 */
-+			if (type == SUM_TYPE_NODE)
-+				submitted += gc_node_segment(sbi, sum->entries,
-+						cur_segno, gc_type);
-+			else
-+				submitted += gc_data_segment(sbi, sum->entries,
-+						gc_list, cur_segno,
-+						gc_type, force_migrate);
- 
--		if (__is_large_section(sbi))
--			sbi->next_victim_seg[gc_type] =
--				(segno + 1 < sec_end_segno) ?
--					segno + 1 : NULL_SEGNO;
--skip:
-+			stat_inc_gc_seg_count(sbi, data_type, gc_type);
-+			sbi->gc_reclaimed_segs[sbi->gc_mode]++;
-+			migrated++;
-+
-+freed:
-+			if (gc_type == FG_GC &&
-+					get_valid_blocks(sbi, cur_segno, false) == 0)
-+				seg_freed++;
-+
-+			if (__is_large_section(sbi))
-+				sbi->next_victim_seg[gc_type] =
-+					(cur_segno + 1 < sec_end_segno) ?
-+					cur_segno + 1 : NULL_SEGNO;
-+		}
-+next_block:
- 		folio_put_refs(sum_folio, 2);
-+		segno = block_end_segno;
- 	}
- 
- 	if (submitted)
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 215e442db72c..af72309b9bfc 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -519,7 +519,7 @@ static int check_index_in_prev_nodes(struct f2fs_sb_info *sbi,
- 	sum_folio = f2fs_get_sum_folio(sbi, segno);
- 	if (IS_ERR(sum_folio))
- 		return PTR_ERR(sum_folio);
--	sum_node = folio_address(sum_folio);
-+	sum_node = SUM_BLK_PAGE_ADDR(sum_folio, segno);
- 	sum = sum_node->entries[blkoff];
- 	f2fs_folio_put(sum_folio, true);
- got_it:
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index b45eace879d7..77aa2125b8ca 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -2712,7 +2712,10 @@ struct folio *f2fs_get_sum_folio(struct f2fs_sb_info *sbi, unsigned int segno)
- void f2fs_update_meta_page(struct f2fs_sb_info *sbi,
- 					void *src, block_t blk_addr)
- {
--	struct folio *folio = f2fs_grab_meta_folio(sbi, blk_addr);
-+	struct folio *folio = f2fs_get_meta_folio_retry(sbi, blk_addr);
-+
-+	if (IS_ERR(folio))
-+		return;
- 
- 	memcpy(folio_address(folio), src, PAGE_SIZE);
- 	folio_mark_dirty(folio);
-@@ -2720,9 +2723,17 @@ void f2fs_update_meta_page(struct f2fs_sb_info *sbi,
- }
- 
- static void write_sum_page(struct f2fs_sb_info *sbi,
--			struct f2fs_summary_block *sum_blk, block_t blk_addr)
-+		struct f2fs_summary_block *sum_blk, unsigned int segno)
- {
--	f2fs_update_meta_page(sbi, (void *)sum_blk, blk_addr);
-+	struct folio *folio;
-+
-+	folio = f2fs_get_sum_folio(sbi, segno);
-+	if (IS_ERR(folio))
-+		return;
-+
-+	memcpy(SUM_BLK_PAGE_ADDR(folio, segno), sum_blk, sizeof(*sum_blk));
-+	folio_mark_dirty(folio);
-+	f2fs_folio_put(folio, true);
- }
- 
- static void write_current_sum_page(struct f2fs_sb_info *sbi,
-@@ -2987,7 +2998,7 @@ static int new_curseg(struct f2fs_sb_info *sbi, int type, bool new_sec)
- 	int ret;
- 
- 	if (curseg->inited)
--		write_sum_page(sbi, curseg->sum_blk, GET_SUM_BLOCK(sbi, segno));
-+		write_sum_page(sbi, curseg->sum_blk, segno);
- 
- 	segno = __get_next_segno(sbi, type);
- 	ret = get_new_segment(sbi, &segno, new_sec, pinning);
-@@ -3046,7 +3057,7 @@ static int change_curseg(struct f2fs_sb_info *sbi, int type)
- 	struct folio *sum_folio;
- 
- 	if (curseg->inited)
--		write_sum_page(sbi, curseg->sum_blk, GET_SUM_BLOCK(sbi, curseg->segno));
-+		write_sum_page(sbi, curseg->sum_blk, curseg->segno);
- 
- 	__set_test_and_inuse(sbi, new_segno);
- 
-@@ -3065,7 +3076,7 @@ static int change_curseg(struct f2fs_sb_info *sbi, int type)
- 		memset(curseg->sum_blk, 0, SUM_ENTRY_SIZE);
- 		return PTR_ERR(sum_folio);
- 	}
--	sum_node = folio_address(sum_folio);
-+	sum_node = SUM_BLK_PAGE_ADDR(sum_folio, new_segno);
- 	memcpy(curseg->sum_blk, sum_node, SUM_ENTRY_SIZE);
- 	f2fs_folio_put(sum_folio, true);
- 	return 0;
-@@ -3154,8 +3165,7 @@ static void __f2fs_save_inmem_curseg(struct f2fs_sb_info *sbi, int type)
- 		goto out;
- 
- 	if (get_valid_blocks(sbi, curseg->segno, false)) {
--		write_sum_page(sbi, curseg->sum_blk,
--				GET_SUM_BLOCK(sbi, curseg->segno));
-+		write_sum_page(sbi, curseg->sum_blk, curseg->segno);
- 	} else {
- 		mutex_lock(&DIRTY_I(sbi)->seglist_lock);
- 		__set_test_and_free(sbi, curseg->segno, true);
-@@ -3833,8 +3843,7 @@ int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct folio *folio,
- 	if (segment_full) {
- 		if (type == CURSEG_COLD_DATA_PINNED &&
- 		    !((curseg->segno + 1) % sbi->segs_per_sec)) {
--			write_sum_page(sbi, curseg->sum_blk,
--					GET_SUM_BLOCK(sbi, curseg->segno));
-+			write_sum_page(sbi, curseg->sum_blk, curseg->segno);
- 			reset_curseg_fields(curseg);
- 			goto skip_new_segment;
- 		}
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 1ce2c8abaf48..e883f14c228f 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -85,8 +85,12 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
- #define GET_ZONE_FROM_SEG(sbi, segno)				\
- 	GET_ZONE_FROM_SEC(sbi, GET_SEC_FROM_SEG(sbi, segno))
- 
--#define GET_SUM_BLOCK(sbi, segno)				\
--	((sbi)->sm_info->ssa_blkaddr + (segno))
-+#define SUMS_PER_BLOCK (F2FS_BLKSIZE / F2FS_SUM_BLKSIZE)
-+#define GET_SUM_BLOCK(sbi, segno)	\
-+	(SM_I(sbi)->ssa_blkaddr + (segno / SUMS_PER_BLOCK))
-+#define GET_SUM_BLKOFF(segno) (segno % SUMS_PER_BLOCK)
-+#define SUM_BLK_PAGE_ADDR(folio, segno)	\
-+	(folio_address(folio) + GET_SUM_BLKOFF(segno) * F2FS_SUM_BLKSIZE)
- 
- #define GET_SUM_TYPE(footer) ((footer)->entry_type)
- #define SET_SUM_TYPE(footer, type) ((footer)->entry_type = (type))
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 6e52e36c1f1a..707e24551fdd 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -4052,6 +4052,20 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
- 	if (sanity_check_area_boundary(sbi, folio, index))
- 		return -EFSCORRUPTED;
- 
-+	/*
-+	 * Check for legacy summary layout on 16KB+ block devices.
-+	 * Modern f2fs-tools packs multiple 4KB summary areas into one block,
-+	 * whereas legacy versions used one block per summary, leading
-+	 * to a much larger SSA.
-+	 */
-+	if (SUMS_PER_BLOCK > 1 &&
-+		    !(__F2FS_HAS_FEATURE(raw_super, F2FS_FEATURE_PACKED_SSA))) {
-+		f2fs_info(sbi, "Error: Device formatted with a legacy version. "
-+			"Please reformat with a tool supporting the packed ssa "
-+			"feature for block sizes larger than 4kb.");
-+		return -EOPNOTSUPP;
-+	}
-+
- 	return 0;
- }
- 
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 6d2a4fba68a2..5685b454bfd1 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -235,6 +235,9 @@ static ssize_t features_show(struct f2fs_attr *a,
- 	if (f2fs_sb_has_compression(sbi))
- 		len += sysfs_emit_at(buf, len, "%s%s",
- 				len ? ", " : "", "compression");
-+	if (f2fs_sb_has_packed_ssa(sbi))
-+		len += sysfs_emit_at(buf, len, "%s%s",
-+				len ? ", " : "", "packed_ssa");
- 	len += sysfs_emit_at(buf, len, "%s%s",
- 				len ? ", " : "", "pin_file");
- 	len += sysfs_emit_at(buf, len, "\n");
-@@ -1296,6 +1299,7 @@ F2FS_FEATURE_RO_ATTR(pin_file);
- #ifdef CONFIG_UNICODE
- F2FS_FEATURE_RO_ATTR(linear_lookup);
- #endif
-+F2FS_FEATURE_RO_ATTR(packed_ssa);
- 
- #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
- static struct attribute *f2fs_attrs[] = {
-@@ -1455,6 +1459,7 @@ static struct attribute *f2fs_feat_attrs[] = {
- #ifdef CONFIG_UNICODE
- 	BASE_ATTR_LIST(linear_lookup),
- #endif
-+	BASE_ATTR_LIST(packed_ssa),
- 	NULL,
- };
- ATTRIBUTE_GROUPS(f2fs_feat);
-@@ -1490,6 +1495,7 @@ F2FS_SB_FEATURE_RO_ATTR(casefold, CASEFOLD);
- F2FS_SB_FEATURE_RO_ATTR(compression, COMPRESSION);
- F2FS_SB_FEATURE_RO_ATTR(readonly, RO);
- F2FS_SB_FEATURE_RO_ATTR(device_alias, DEVICE_ALIAS);
-+F2FS_SB_FEATURE_RO_ATTR(packed_ssa, PACKED_SSA);
- 
- static struct attribute *f2fs_sb_feat_attrs[] = {
- 	ATTR_LIST(sb_encryption),
-@@ -1507,6 +1513,7 @@ static struct attribute *f2fs_sb_feat_attrs[] = {
- 	ATTR_LIST(sb_compression),
- 	ATTR_LIST(sb_readonly),
- 	ATTR_LIST(sb_device_alias),
-+	ATTR_LIST(sb_packed_ssa),
- 	NULL,
- };
- ATTRIBUTE_GROUPS(f2fs_sb_feat);
-diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
-index 6afb4a13b81d..a7880787cad3 100644
---- a/include/linux/f2fs_fs.h
-+++ b/include/linux/f2fs_fs.h
-@@ -17,6 +17,7 @@
- #define F2FS_LOG_SECTORS_PER_BLOCK	(PAGE_SHIFT - 9) /* log number for sector/blk */
- #define F2FS_BLKSIZE			PAGE_SIZE /* support only block == page */
- #define F2FS_BLKSIZE_BITS		PAGE_SHIFT /* bits for F2FS_BLKSIZE */
-+#define F2FS_SUM_BLKSIZE		4096	/* only support 4096 byte sum block */
- #define F2FS_MAX_EXTENSION		64	/* # of extension entries */
- #define F2FS_EXTENSION_LEN		8	/* max size of extension */
- 
-@@ -441,7 +442,7 @@ struct f2fs_sit_block {
-  * from node's page's beginning to get a data block address.
-  * ex) data_blkaddr = (block_t)(nodepage_start_address + ofs_in_node)
-  */
--#define ENTRIES_IN_SUM		(F2FS_BLKSIZE / 8)
-+#define ENTRIES_IN_SUM		(F2FS_SUM_BLKSIZE / 8)
- #define	SUMMARY_SIZE		(7)	/* sizeof(struct f2fs_summary) */
- #define	SUM_FOOTER_SIZE		(5)	/* sizeof(struct summary_footer) */
- #define SUM_ENTRY_SIZE		(SUMMARY_SIZE * ENTRIES_IN_SUM)
-@@ -467,7 +468,7 @@ struct summary_footer {
- 	__le32 check_sum;		/* summary checksum */
- } __packed;
- 
--#define SUM_JOURNAL_SIZE	(F2FS_BLKSIZE - SUM_FOOTER_SIZE -\
-+#define SUM_JOURNAL_SIZE	(F2FS_SUM_BLKSIZE - SUM_FOOTER_SIZE -\
- 				SUM_ENTRY_SIZE)
- #define NAT_JOURNAL_ENTRIES	((SUM_JOURNAL_SIZE - 2) /\
- 				sizeof(struct nat_journal_entry))
--- 
-2.51.2.1026.g39e6a42477-goog
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gTW9uLCBOb3YgMywgMjAyNSBhdCA2OjQz4oCvUE0gc3l6Ym90CjxzeXpib3QrMzY4Njc1ODY2
+MGY5ODBiNDAyZGNAc3l6a2FsbGVyLmFwcHNwb3RtYWlsLmNvbT4gd3JvdGU6Cj4KPiBIZWxsbywK
+Pgo+IHN5emJvdCBoYXMgdGVzdGVkIHRoZSBwcm9wb3NlZCBwYXRjaCBidXQgdGhlIHJlcHJvZHVj
+ZXIgaXMgc3RpbGwgdHJpZ2dlcmluZyBhbiBpc3N1ZToKPiBXQVJOSU5HIGluIGdldF9kYXRhCj4K
+PiBsb29wMDogZGV0ZWN0ZWQgY2FwYWNpdHkgY2hhbmdlIGZyb20gMCB0byAxNgo+IC0tLS0tLS0t
+LS0tLVsgY3V0IGhlcmUgXS0tLS0tLS0tLS0tLQo+IFdBUk5JTkc6IGtlcm5lbC9wcmludGsvcHJp
+bnRrX3JpbmdidWZmZXIuYzoxMjc4IGF0IGdldF9kYXRhKzB4NDhhLzB4ODQwIGtlcm5lbC9wcmlu
+dGsvcHJpbnRrX3JpbmdidWZmZXIuYzoxMjc4LCBDUFUjMTogc3l6LjAuNTg1Lzc2NTIKPiBNb2R1
+bGVzIGxpbmtlZCBpbjoKPiBDUFU6IDEgVUlEOiAwIFBJRDogNzY1MiBDb21tOiBzeXouMC41ODUg
+Tm90IHRhaW50ZWQgc3l6a2FsbGVyICMwIFBSRUVNUFQoZnVsbCkKPiBIYXJkd2FyZSBuYW1lOiBH
+b29nbGUgR29vZ2xlIENvbXB1dGUgRW5naW5lL0dvb2dsZSBDb21wdXRlIEVuZ2luZSwgQklPUyBH
+b29nbGUgMTAvMDIvMjAyNQo+IFJJUDogMDAxMDpnZXRfZGF0YSsweDQ4YS8weDg0MCBrZXJuZWwv
+cHJpbnRrL3ByaW50a19yaW5nYnVmZmVyLmM6MTI3OAo+IENvZGU6IDgzIGM0IGY4IDQ4IGI4IDAw
+IDAwIDAwIDAwIDAwIGZjIGZmIGRmIDQxIDBmIGI2IDA0IDA3IDg0IGMwIDBmIDg1IGVlIDAxIDAw
+IDAwIDQ0IDg5IDY1IDAwIDQ5IDgzIGM1IDA4IGViIDEzIGU4IGE3IDE5IDFmIDAwIDkwIDwwZj4g
+MGIgOTAgZWIgMDUgZTggOWMgMTkgMWYgMDAgNDUgMzEgZWQgNGMgODkgZTggNDggODMgYzQgMjgg
+NWIgNDEKPiBSU1A6IDAwMTg6ZmZmZmM5MDAwMzUxNzBlMCBFRkxBR1M6IDAwMDEwMjkzCj4gUkFY
+OiBmZmZmZmZmZjgxYTFlZWU5IFJCWDogMDAwMDNmZmZmZmZmZmZmZiBSQ1g6IGZmZmY4ODgwMzMy
+NTViODAKPiBSRFg6IDAwMDAwMDAwMDAwMDAwMDAgUlNJOiAwMDAwM2ZmZmZmZmZmZmZmIFJESTog
+MDAwMDAwMDAwMDAwMDAwMAo+IFJCUDogMDAwMDAwMDAwMDAwMDAxMiBSMDg6IDAwMDAwMDAwMDAw
+MDBlNTUgUjA5OiAwMDAwMDAzMjVlMjEzY2M3Cj4gUjEwOiAwMDAwMDAzMjVlMjEzY2M3IFIxMTog
+MDAwMDFkZTRjMjAwMDAzNyBSMTI6IDAwMDAwMDAwMDAwMDAwMTIKPiBSMTM6IDAwMDAwMDAwMDAw
+MDAwMDAgUjE0OiBmZmZmYzkwMDAzNTE3MjI4IFIxNTogMWZmZmZmZmZmMWJjYTY0Ngo+IEZTOiAg
+MDAwMDdmNDRlYjhkYTZjMCgwMDAwKSBHUzpmZmZmODg4MTI1ZmRhMDAwKDAwMDApIGtubEdTOjAw
+MDAwMDAwMDAwMDAwMDAKPiBDUzogIDAwMTAgRFM6IDAwMDAgRVM6IDAwMDAgQ1IwOiAwMDAwMDAw
+MDgwMDUwMDMzCj4gQ1IyOiAwMDAwN2Y0NGVhOTcyMmUwIENSMzogMDAwMDAwMDA2NjM0NDAwMCBD
+UjQ6IDAwMDAwMDAwMDAzNTI2ZjAKPiBDYWxsIFRyYWNlOgo+ICA8VEFTSz4KPiAgY29weV9kYXRh
+IGtlcm5lbC9wcmludGsvcHJpbnRrX3JpbmdidWZmZXIuYzoxODU3IFtpbmxpbmVdCj4gIHByYl9y
+ZWFkIGtlcm5lbC9wcmludGsvcHJpbnRrX3JpbmdidWZmZXIuYzoxOTY2IFtpbmxpbmVdCj4gIF9w
+cmJfcmVhZF92YWxpZCsweDY3Mi8weGE5MCBrZXJuZWwvcHJpbnRrL3ByaW50a19yaW5nYnVmZmVy
+LmM6MjE0Mwo+ICBwcmJfcmVhZF92YWxpZCsweDNjLzB4NjAga2VybmVsL3ByaW50ay9wcmludGtf
+cmluZ2J1ZmZlci5jOjIyMTUKPiAgcHJpbnRrX2dldF9uZXh0X21lc3NhZ2UrMHgxNWMvMHg3YjAg
+a2VybmVsL3ByaW50ay9wcmludGsuYzoyOTc4Cj4gIGNvbnNvbGVfZW1pdF9uZXh0X3JlY29yZCBr
+ZXJuZWwvcHJpbnRrL3ByaW50ay5jOjMwNjIgW2lubGluZV0KPiAgY29uc29sZV9mbHVzaF9vbmVf
+cmVjb3JkIGtlcm5lbC9wcmludGsvcHJpbnRrLmM6MzE5NCBbaW5saW5lXQo+ICBjb25zb2xlX2Zs
+dXNoX2FsbCsweDRjYy8weGIxMCBrZXJuZWwvcHJpbnRrL3ByaW50ay5jOjMyNjgKPiAgX19jb25z
+b2xlX2ZsdXNoX2FuZF91bmxvY2sga2VybmVsL3ByaW50ay9wcmludGsuYzozMjk4IFtpbmxpbmVd
+Cj4gIGNvbnNvbGVfdW5sb2NrKzB4YmIvMHgxOTAga2VybmVsL3ByaW50ay9wcmludGsuYzozMzM4
+Cj4gIHZwcmludGtfZW1pdCsweDRjNS8weDU5MCBrZXJuZWwvcHJpbnRrL3ByaW50ay5jOjI0MjMK
+PiAgX3ByaW50aysweGNmLzB4MTIwIGtlcm5lbC9wcmludGsvcHJpbnRrLmM6MjQ0OAo+ICBfZXJv
+ZnNfcHJpbnRrKzB4MzQ5LzB4NDEwIGZzL2Vyb2ZzL3N1cGVyLmM6MzMKPiAgZXJvZnNfZmNfZmls
+bF9zdXBlcisweDE1OTEvMHgxYjIwIGZzL2Vyb2ZzL3N1cGVyLmM6NzQ2Cj4gIGdldF90cmVlX2Jk
+ZXZfZmxhZ3MrMHg0MGUvMHg0ZDAgZnMvc3VwZXIuYzoxNjkyCj4gIHZmc19nZXRfdHJlZSsweDky
+LzB4MmIwIGZzL3N1cGVyLmM6MTc1Mgo+ICBmY19tb3VudCBmcy9uYW1lc3BhY2UuYzoxMTk4IFtp
+bmxpbmVdCj4gIGRvX25ld19tb3VudF9mYyBmcy9uYW1lc3BhY2UuYzozNjQxIFtpbmxpbmVdCj4g
+IGRvX25ld19tb3VudCsweDMwMi8weGExMCBmcy9uYW1lc3BhY2UuYzozNzE3Cj4gIGRvX21vdW50
+IGZzL25hbWVzcGFjZS5jOjQwNDAgW2lubGluZV0KPiAgX19kb19zeXNfbW91bnQgZnMvbmFtZXNw
+YWNlLmM6NDIyOCBbaW5saW5lXQo+ICBfX3NlX3N5c19tb3VudCsweDMxMy8weDQxMCBmcy9uYW1l
+c3BhY2UuYzo0MjA1Cj4gIGRvX3N5c2NhbGxfeDY0IGFyY2gveDg2L2VudHJ5L3N5c2NhbGxfNjQu
+Yzo2MyBbaW5saW5lXQo+ICBkb19zeXNjYWxsXzY0KzB4ZmEvMHhmYTAgYXJjaC94ODYvZW50cnkv
+c3lzY2FsbF82NC5jOjk0Cj4gIGVudHJ5X1NZU0NBTExfNjRfYWZ0ZXJfaHdmcmFtZSsweDc3LzB4
+N2YKPiBSSVA6IDAwMzM6MHg3ZjQ0ZWE5OTA3NmEKPiBDb2RlOiBkOCA2NCA4OSAwMiA0OCBjNyBj
+MCBmZiBmZiBmZiBmZiBlYiBhNiBlOCBkZSAxYSAwMCAwMCA2NiAyZSAwZiAxZiA4NCAwMCAwMCAw
+MCAwMCAwMCAwZiAxZiA0MCAwMCA0OSA4OSBjYSBiOCBhNSAwMCAwMCAwMCAwZiAwNSA8NDg+IDNk
+IDAxIGYwIGZmIGZmIDczIDAxIGMzIDQ4IGM3IGMxIGE4IGZmIGZmIGZmIGY3IGQ4IDY0IDg5IDAx
+IDQ4Cj4gUlNQOiAwMDJiOjAwMDA3ZjQ0ZWI4ZDllNjggRUZMQUdTOiAwMDAwMDI0NiBPUklHX1JB
+WDogMDAwMDAwMDAwMDAwMDBhNQo+IFJBWDogZmZmZmZmZmZmZmZmZmZkYSBSQlg6IDAwMDA3ZjQ0
+ZWI4ZDllZjAgUkNYOiAwMDAwN2Y0NGVhOTkwNzZhCj4gUkRYOiAwMDAwMjAwMDAwMDAwMTgwIFJT
+STogMDAwMDIwMDAwMDAwMDFjMCBSREk6IDAwMDA3ZjQ0ZWI4ZDllYjAKPiBSQlA6IDAwMDAyMDAw
+MDAwMDAxODAgUjA4OiAwMDAwN2Y0NGViOGQ5ZWYwIFIwOTogMDAwMDAwMDAwMDAwMDAwMAo+IFIx
+MDogMDAwMDAwMDAwMDAwMDAwMCBSMTE6IDAwMDAwMDAwMDAwMDAyNDYgUjEyOiAwMDAwMjAwMDAw
+MDAwMWMwCj4gUjEzOiAwMDAwN2Y0NGViOGQ5ZWIwIFIxNDogMDAwMDAwMDAwMDAwMDFhMSBSMTU6
+IDAwMDAyMDAwMDAwMDAwODAKPiAgPC9UQVNLPgo+CgpUaGlzIGxvb2tzIHVucmVsYXRlZCB0byB0
+aGUgaW9tYXAgY2hhbmdlcyBhbmQgc2VlbXMgdGllZCB0byB0aGUgcmVjZW50CnByaW50ayBjb25z
+b2xlIGZsdXNoaW5nIGNoYW5nZXMuIEhtbSwgbWF5YmUgb25lIG9mIHRoZXNlIGNoYW5nZXMKWzEs
+MiwzXT8KCmNjaW5nIEFuZHJldyBhbmQgUGV0ciwgd2hvIHdvdWxkIGtub3cgbW9yZQoKWzFdIGh0
+dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC8yMDI1MTAyMC1wcmludGtfbGVnYWN5X3RocmVhZF9j
+b25zb2xlX2xvY2stdjMtMS0wMGYxZjBhYzA1NWFAdGhlZ29vZHBlbmd1aW4uY28udWsvClsyXSBo
+dHRwczovL2xvcmUua2VybmVsLm9yZy9hbGwvMjAyNTEwMjAtcHJpbnRrX2xlZ2FjeV90aHJlYWRf
+Y29uc29sZV9sb2NrLXYzLTItMDBmMWYwYWMwNTVhQHRoZWdvb2RwZW5ndWluLmNvLnVrLwpbM10g
+aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvYWxsLzIwMjUxMDIwLXByaW50a19sZWdhY3lfdGhyZWFk
+X2NvbnNvbGVfbG9jay12My0zLTAwZjFmMGFjMDU1YUB0aGVnb29kcGVuZ3Vpbi5jby51ay8KClRo
+YW5rcywKSm9hbm5lCgo+Cj4gVGVzdGVkIG9uOgo+Cj4gY29tbWl0OiAgICAgICAgIDk4MjMxMjA5
+IEFkZCBsaW51eC1uZXh0IHNwZWNpZmljIGZpbGVzIGZvciAyMDI1MTEwMwo+IGdpdCB0cmVlOiAg
+ICAgICBsaW51eC1uZXh0Cj4gY29uc29sZSBvdXRwdXQ6IGh0dHBzOi8vc3l6a2FsbGVyLmFwcHNw
+b3QuY29tL3gvbG9nLnR4dD94PTEzNzBhMjkyNTgwMDAwCj4ga2VybmVsIGNvbmZpZzogIGh0dHBz
+Oi8vc3l6a2FsbGVyLmFwcHNwb3QuY29tL3gvLmNvbmZpZz94PTQzY2MwZTMxNTU4Y2I1MjcKPiBk
+YXNoYm9hcmQgbGluazogaHR0cHM6Ly9zeXprYWxsZXIuYXBwc3BvdC5jb20vYnVnP2V4dGlkPTM2
+ODY3NTg2NjBmOTgwYjQwMmRjCj4gY29tcGlsZXI6ICAgICAgIERlYmlhbiBjbGFuZyB2ZXJzaW9u
+IDIwLjEuOCAoKysyMDI1MDcwODA2MzU1MSswYzlmOTA5Yjc5NzYtMX5leHAxfjIwMjUwNzA4MTgz
+NzAyLjEzNiksIERlYmlhbiBMTEQgMjAuMS44Cj4KPiBOb3RlOiBubyBwYXRjaGVzIHdlcmUgYXBw
+bGllZC4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpM
+aW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJj
+ZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9s
+aW51eC1mMmZzLWRldmVsCg==
