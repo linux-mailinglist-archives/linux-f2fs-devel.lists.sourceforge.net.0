@@ -2,75 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD0D4C34188
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 05 Nov 2025 07:50:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AABC7C34392
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 05 Nov 2025 08:28:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=5x2j7/Lb1xcmrqmjoy8+DQC4ZFCuu6glh9EWg0YmDJA=; b=Zi8Q8g5kWJDxd99TOG42ychdk7
-	+yJ8Vkk/85UyS+tsHEhgT1fKps5EahHTTSh5bslXG1LCMWsNJgHNpYuJX0FpN4UMhyADBzX6CSAD0
-	pLEyAQ1laZZnlu2D1/LK5SHNN8PEBy7SUzvEBI4i6Ca0hr+xeDFFVU3GddNtwqhx1TV0=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=sCyyJpvMOTKDsNWM+eAkMIjBZEHZJh3mtQyTa2mVA2M=; b=KCfetHRw3tPgGSGevqek+Aqo4q
+	cX293rtkVDXi6wzfQsk9/ESsRvNk7k4ViaX0HJ5cqfpbXiK3tO0I3iluv41jXR2VaUCneFPWili9O
+	K7NIytqjpola2dM7J2fvVrwXA/q0Iexiwe8VEdw9Phvy/Yslp5rOURSx+0Vj6OswV7SA=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vGXLr-0000tY-TT;
-	Wed, 05 Nov 2025 06:50:39 +0000
+	id 1vGXwI-0008F2-An;
+	Wed, 05 Nov 2025 07:28:18 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vGXLq-0000tQ-GN
+ (envelope-from <chao@kernel.org>) id 1vGXw4-0008Eo-KO
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Nov 2025 06:50:38 +0000
+ Wed, 05 Nov 2025 07:28:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aXFUveTZ2md1F41Q6u/UY0UukU0pheB7klJYZSf2L4g=; b=RhrFnGEAtO6w4Vcrs2L1vAhN8r
- A0GCn5PyIdjkNS4nMptdGmv6ZV8oBlNrP/jp59B04s3NCeWpRRbT15rVOg3pAtBLnRpNb+QYGPkSn
- Rk/cSx+8ozXAqHbw3OGNRMPKjb6VanvIs83Sod4BuI6zxUGIKJjgP6DKh2YdXPWJpiO8=;
+ bh=BreZaN33PZ598yGnZg7QsvDIJF1kUGpCYcH++rzYwDI=; b=UrL7n1z9EIc/F2DD6DjFVKd4uX
+ HgHXnnScDIQNBXteVzoG53WjQhc2Oi14X2sv230ZQrNKh7IunPqa8mbI/GPFDfetXmyuL7YCcNEyr
+ hinfXsA4P3I2ygT10IZVr6ByMBjJe6cv/3kJJTC13vsk8F4UC82FlE3dsJEm+gqqJfMc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=aXFUveTZ2md1F41Q6u/UY0UukU0pheB7klJYZSf2L4g=; b=AlZJbc/YqJBqLy5Oq6DrB/61Lo
- V7SoPzEpdgrv+zP8VnqYZE/KW8DlF/ubu2mTGydPIpt67UcvSoJHXDHzPFzZPhRqQ8O6P94f35y7M
- enDkOSjDNFrOO2IGI7s0q52Ksk+h8V/G6xou1BxEtxD15GQgIj1IDXHuwN2GECiPV1As=;
+ bh=BreZaN33PZ598yGnZg7QsvDIJF1kUGpCYcH++rzYwDI=; b=ENwY5bQlUcET2/6Hp4ZZLWabFX
+ fFP19tZyDAgxYUI9XGs3ifym36jWT7n4AzJEzeK/LdgOHs8vRD/gWJI9HWnpIlHeVsYvcwCcSLnH9
+ zRdrXF8XALzRsbD+wLGEWBP8kJ7OwunOejxLnxSxRo+wQZSrIqEOfrWN8wlGWpPYk6ww=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vGXLq-0006iR-0Y for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Nov 2025 06:50:38 +0000
+ id 1vGXw4-0007sz-1n for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 05 Nov 2025 07:28:04 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id B58214473B
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  5 Nov 2025 06:50:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D8E9C116B1;
- Wed,  5 Nov 2025 06:50:31 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 7BEA5441F6;
+ Wed,  5 Nov 2025 07:27:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4709CC4CEF8;
+ Wed,  5 Nov 2025 07:27:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762325432;
- bh=NaK4PXfltxCANI2HClt3ILDvtjo1EaevjW47jUDeLsk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=b+1oKU3d+/yxXpoB9UvL9E3obpa54VqjQF72OvWc00+js1KygAmCU1Q+EF6GnIJk7
- j5d9OB9wGryaoPybwEm4hS00hi5s3aKBIbWipAJq24NlvKguiyALHniNyDhlnaPZfA
- yfCuw6TkX85c5iBE9QwnBRP6foRlhqL56j6avr1XtiVZfGfCJ9uzNeVHXb9HzmtJ5P
- I1+8UGSWK2uSCZYMSNimHrYOlG5+JVfsbONu6GcyMu/r6c9Eu9eVtoMtGSwsvE0GNu
- k2+Ggx43GhnDtQjXDCtq5bINL7VVFE+z11Ac0GXJdF0CWEeFZ/cRHunUqfKBPjC1XA
- Crdmu5qeg7rdQ==
-To: jaegeuk@kernel.org
-Date: Wed,  5 Nov 2025 14:50:23 +0800
-Message-ID: <20251105065023.3656975-2-chao@kernel.org>
-X-Mailer: git-send-email 2.51.2.1006.ga50a493c49-goog
-In-Reply-To: <20251105065023.3656975-1-chao@kernel.org>
-References: <20251105065023.3656975-1-chao@kernel.org>
+ s=k20201202; t=1762327673;
+ bh=EhjlRgr0Zz3gYIc8lUoq4HU98swwwkkjz5E00lxldWk=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=EDwZRhO1fIvJOYYFu75knuac2cdZexAfjfMIpqAoj12aYTS5E121G2z5axjjFqYC4
+ I95IuKH9Af8ea9W5yVQlY8J376LJMoe8jBQ8VGRAD577bbni1QaSGZY8eq0rnirZjv
+ rxawhV8/DwUTtZLFfVlYbtlU/t3k8pso3s7NKn4eB0XNBrkM4JjN5VPYaul617iVHM
+ XalUcxnbIkEdgBTMBZP3nCmfFaJiQSTNOq0nq3UAeMTlP4KcBdM6/au/XlMfD8vPQR
+ YXRaQRnCibxr4Liy+88hZAzTNBRslXUXChgTh/3D5CWppXdWFeO8/UHVoLxn3XqRFw
+ u+2GGOzeNnYgQ==
+Message-ID: <4de88613-54a2-4ef3-9b56-7963cd3e42e6@kernel.org>
+Date: Wed, 5 Nov 2025 15:27:49 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: "Nikola Z. Ivanov" <zlatistiv@gmail.com>, jaegeuk@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <cover.1762184787.git.zlatistiv@gmail.com>
+ <ef5cfc5cee26e34586e7415de41d865a360e0d98.1762184787.git.zlatistiv@gmail.com>
+Content-Language: en-US
+In-Reply-To: <ef5cfc5cee26e34586e7415de41d865a360e0d98.1762184787.git.zlatistiv@gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -78,11 +80,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: mkfs.f2fs -f /dev/vdd mount /dev/vdd /mnt/f2fs touch
- /mnt/f2fs/foo
- sync # avoid CP_UMOUNT_FLAG in last f2fs_checkpoint.ckpt_flags touch
- /mnt/f2fs/bar
- f2fs_io fsync /mnt/f2fs/bar f2fs_io shutdown 2 /mn [...] 
+ Content preview:  On 11/4/25 16:46, Nikola Z. Ivanov wrote: > Add check for
+ inode->i_nlink == 1 for directories during unlink,
+ > as their value is decremented
+ twice, which can trigger a warning in > drop_nlink. In such [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +95,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vGXLq-0006iR-0Y
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix to detect recoverable inode during
- dryrun of find_fsync_dnodes()
+X-Headers-End: 1vGXw4-0007sz-1n
+Subject: Re: [f2fs-dev] [PATCH v3 2/2] f2fs: Add sanity checks before
+ unlinking and loading inodes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,109 +111,96 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: stable@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: david.hunter.linux@gmail.com,
+ syzbot+c07d47c7bc68f47b9083@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, khalid@kernel.org, skhan@linuxfoundation.org,
+ linux-kernel-mentees@lists.linuxfoundation.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-mkfs.f2fs -f /dev/vdd
-mount /dev/vdd /mnt/f2fs
-touch /mnt/f2fs/foo
-sync		# avoid CP_UMOUNT_FLAG in last f2fs_checkpoint.ckpt_flags
-touch /mnt/f2fs/bar
-f2fs_io fsync /mnt/f2fs/bar
-f2fs_io shutdown 2 /mnt/f2fs
-umount /mnt/f2fs
-blockdev --setro /dev/vdd
-mount /dev/vdd /mnt/f2fs
-mount: /mnt/f2fs: WARNING: source write-protected, mounted read-only.
-
-For the case if we create and fsync a new inode before sudden power-cut,
-without norecovery or disable_roll_forward mount option, the following
-mount will succeed w/o recovering last fsynced inode.
-
-The problem here is that we only check inode_list list after
-find_fsync_dnodes() in f2fs_recover_fsync_data() to find out whether
-there is recoverable data in the iamge, but there is a missed case, if
-last fsynced inode is not existing in last checkpoint, then, we will
-fail to get its inode due to nat of inode node is not existing in last
-checkpoint, so the inode won't be linked in inode_list.
-
-Let's detect such case in dyrun mode to fix this issue.
-
-After this change, mount will fail as expected below:
-mount: /mnt/f2fs: cannot mount /dev/vdd read-only.
-       dmesg(1) may have more information after failed mount system call.
-demsg:
-F2FS-fs (vdd): Need to recover fsync data, but write access unavailable, please try mount w/ disable_roll_forward or norecovery
+On 11/4/25 16:46, Nikola Z. Ivanov wrote:
+> Add check for inode->i_nlink == 1 for directories during unlink,
+> as their value is decremented twice, which can trigger a warning in
+> drop_nlink. In such case mark the filesystem as corrupted and return
+> from the function call with the relevant failure return value.
+> 
+> Additionally add the check for i_nlink == 1 in
+> sanity_check_inode in order to detect on-disk corruption early.
+> 
 
 Cc: stable@kernel.org
-Fixes: 6781eabba1bd ("f2fs: give -EINVAL for norecovery and rw mount")
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/recovery.c | 20 ++++++++++++--------
- 1 file changed, 12 insertions(+), 8 deletions(-)
 
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 215e442db72c..d7faebaa3c6b 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -399,7 +399,7 @@ static int sanity_check_node_chain(struct f2fs_sb_info *sbi, block_t blkaddr,
- }
- 
- static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
--				bool check_only)
-+				bool check_only, bool *new_inode)
- {
- 	struct curseg_info *curseg;
- 	block_t blkaddr, blkaddr_fast;
-@@ -447,16 +447,19 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
- 				quota_inode = true;
- 			}
- 
--			/*
--			 * CP | dnode(F) | inode(DF)
--			 * For this case, we should not give up now.
--			 */
- 			entry = add_fsync_inode(sbi, head, ino_of_node(folio),
- 								quota_inode);
- 			if (IS_ERR(entry)) {
- 				err = PTR_ERR(entry);
--				if (err == -ENOENT)
-+				/*
-+				 * CP | dnode(F) | inode(DF)
-+				 * For this case, we should not give up now.
-+				 */
-+				if (err == -ENOENT) {
-+					if (check_only)
-+						*new_inode = true;
- 					goto next;
-+				}
- 				f2fs_folio_put(folio, true);
- 				break;
- 			}
-@@ -875,6 +878,7 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
- 	int ret = 0;
- 	unsigned long s_flags = sbi->sb->s_flags;
- 	bool need_writecp = false;
-+	bool new_inode = false;
- 
- 	f2fs_notice(sbi, "f2fs_recover_fsync_data: recovery fsync data, "
- 					"check_only: %d", check_only);
-@@ -890,8 +894,8 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
- 	f2fs_down_write(&sbi->cp_global_sem);
- 
- 	/* step #1: find fsynced inode numbers */
--	err = find_fsync_dnodes(sbi, &inode_list, check_only);
--	if (err || list_empty(&inode_list))
-+	err = find_fsync_dnodes(sbi, &inode_list, check_only, &new_inode);
-+	if (err < 0 || (list_empty(&inode_list) && (!check_only || !new_inode)))
- 		goto skip;
- 
- 	if (check_only) {
--- 
-2.49.0
+> Reported-by: syzbot+c07d47c7bc68f47b9083@syzkaller.appspotmail.com
+> Closes: https://syzkaller.appspot.com/bug?extid=c07d47c7bc68f47b9083
+> Tested-by: syzbot+c07d47c7bc68f47b9083@syzkaller.appspotmail.com
+> Signed-off-by: Nikola Z. Ivanov <zlatistiv@gmail.com>
+> ---
+>  fs/f2fs/inode.c |  6 ++++++
+>  fs/f2fs/namei.c | 15 +++++++++++----
+>  2 files changed, 17 insertions(+), 4 deletions(-)
+> 
+> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> index 8c4eafe9ffac..b808e1dc2ae7 100644
+> --- a/fs/f2fs/inode.c
+> +++ b/fs/f2fs/inode.c
+> @@ -294,6 +294,12 @@ static bool sanity_check_inode(struct inode *inode, struct folio *node_folio)
+>  		return false;
+>  	}
+>  
+> +	if (S_ISDIR(inode->i_mode) && unlikely(inode->i_nlink == 1)) {
+> +		f2fs_warn(F2FS_I_SB(inode), "%s: directory inode (ino=%lx) has a single i_nlink",
+
+s/F2FS_I_SB(inode)/sbi
+
+> +			  __func__, inode->i_ino);
+> +		return false;
+> +	}
+> +
+>  	if (f2fs_has_extra_attr(inode)) {
+>  		if (!f2fs_sb_has_extra_attr(sbi)) {
+>  			f2fs_warn(sbi, "%s: inode (ino=%lx) is with extra_attr, but extra_attr feature is off",
+> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> index 40cf80fd9d9a..65af1d56a99e 100644
+> --- a/fs/f2fs/namei.c
+> +++ b/fs/f2fs/namei.c
+> @@ -572,10 +572,11 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
+>  	if (unlikely(inode->i_nlink == 0)) {
+>  		f2fs_warn(F2FS_I_SB(inode), "%s: inode (ino=%lx) has zero i_nlink",
+>  			  __func__, inode->i_ino);
+> -		err = -EFSCORRUPTED;
+> -		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+> -		f2fs_folio_put(folio, false);
+> -		goto out;
+> +		goto corrupted;
+> +	} else if (S_ISDIR(inode->i_mode) && unlikely(inode->i_nlink == 1)) {
+> +		f2fs_warn(F2FS_I_SB(inode), "%s: directory inode (ino=%lx) has a single i_nlink",
+
+Ditto,
+
+> +			  __func__, inode->i_ino);
+> +		goto corrupted;
+>  	}
+>  
+>  	f2fs_balance_fs(sbi, true);
+> @@ -601,6 +602,12 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
+>  
+>  	if (IS_DIRSYNC(dir))
+>  		f2fs_sync_fs(sbi->sb, 1);
+> +
+> +	goto out;
+> +corrupted:
+> +	err = -EFSCORRUPTED;
+> +	set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+
+Ditto,
+
+Thanks,
+
+> +	f2fs_folio_put(folio, false);
+>  out:
+>  	trace_f2fs_unlink_exit(inode, err);
+>  	return err;
 
 
 
