@@ -2,120 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7ED4BC39C6B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 06 Nov 2025 10:16:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 61D2EC3A9B5
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 06 Nov 2025 12:36:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
+	Subject:MIME-Version:Message-ID:Date:References:In-Reply-To:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=gWvQXdk6MYRwg+Cu2iv5gt1ngoLpumaNWvg+TxRxO8w=; b=hXkG5iqH4Lyqx/NMNeOmncw7+k
-	uhJpx4znHPF80zAdmG+69fmLZ7ddkVMSE6ZyzvXzXdL886QBMdExFKhEJqOmfAL5jbrK+aktkcjFe
-	21A7jqVGAraBHRdykZb1Ya0kaZHLHo2x7eJeife0ikAIbU2sDvPWICLET5JwviXKdWkY=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=hkRMYrjCTd+j4hDr7rD4BA/+g9FeGhBZUCJrVmRkG38=; b=eBc505PhtUDxROBR+R7apqRI0k
+	NYlaEf8Kc30OdVa6n+qJDaWODLP8u3MzNP4KjsMa1uyMR/hSsrG2UJ6AAT1BNcEHNGZGIvqyyAAkG
+	YySKwqem0BS17DxSpCHMzOqmV4lvyATEPNpTLM6Gd8f7Ny6l8N+aqR6ucQRm+W02+56E=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vGw62-0008Cp-RM;
-	Thu, 06 Nov 2025 09:15:58 +0000
+	id 1vGyI3-00014G-TX;
+	Thu, 06 Nov 2025 11:36:31 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yangyongpeng.storage@gmail.com>) id 1vGw61-0008Cj-Ky
+ (envelope-from <john.ogness@linutronix.de>) id 1vGyI1-000149-V5
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Nov 2025 09:15:57 +0000
+ Thu, 06 Nov 2025 11:36:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=t9GWlxsWeB+hFDBkPLxLJDI3qJnfzhaJ+9iovcthGMQ=; b=f/pcFG4eaBEFBLNUsc13rSPUiL
- X3BGgzmk7Fse75f8JEy3Oz0H5Pnvm3oc2MHVK3TlExJzXoxWZoTU4mfcX2Z3WQua8KZH3UNQcXDns
- uPEwVKS8c4/mYsnlUaU3baVBVo2D+2/amubNGvojdQfpQDzvx389L0Op8WLc5SeHSZqo=;
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
+ References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=3OFVSDhbG36SsIf5lzC388elLqvaZZTmYLAdGi/UGDg=; b=MsQzoMHBa5rY3V50s9oRRAzcq6
+ ySyumfzkosILr3yHqhTf0kD0lY+9z1V/8syWsTcjppvdzeGyM4HxiWHrykeZJibdN9p6MCvpgbi5O
+ xSlZDnR6LZ1S8LLUJMRTSbk5D8Dqc2TPmTuehpTu7WdmKQHiQlxOH5m7gz1z/IcH2+OA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=t9GWlxsWeB+hFDBkPLxLJDI3qJnfzhaJ+9iovcthGMQ=; b=Cb5XMkFqpJKS9A9BI+ux/L4yz+
- t7VTykq4nfMqEFtDmc4WgLil2H8PCojdkYtwjzSX39qk2i7PJtmELwyk1lJgjOqLFasdfgNwN/hEv
- 2Lwgo+ua3jkErHOnBykb41PTSWiKqF1BQtOT9Vayqw38NFo7tnz898MwNUShaAye4YpY=;
-Received: from mail-pj1-f42.google.com ([209.85.216.42])
+ bh=3OFVSDhbG36SsIf5lzC388elLqvaZZTmYLAdGi/UGDg=; b=Y52LippC8ySKJhGQEQ2vJyT2qH
+ inYOwLwXB0BDq5wR+KG6pSTncNs/VMFF+BbWT6QV5WWhiu9aTg6/9zB0nMS5tkj830lMvsNRPNTTm
+ 9eF64iI5b6vL6AWX4iTP1QtrrpxRZ6NR+p80TNyePWe7oMEfsgxWu7jYyfyTOtCqK9p0=;
+Received: from galois.linutronix.de ([193.142.43.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vGw61-0004Cn-4c for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Nov 2025 09:15:57 +0000
-Received: by mail-pj1-f42.google.com with SMTP id
- 98e67ed59e1d1-339d7c403b6so870906a91.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 06 Nov 2025 01:15:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762420551; x=1763025351; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=t9GWlxsWeB+hFDBkPLxLJDI3qJnfzhaJ+9iovcthGMQ=;
- b=dyc2IfOKlCA2doUKgg9LbZwcjccpPa2nuDEPQ3OelaQINOYxBfsd3Y0DTR82KpWRIe
- 0hNM70VoazZKAdPuI1CovDBEYn3/iaFzx1VJmXBU+TUA71nPSfvr9Aq8ayGw0HX50dn0
- 6C6qIisduYGP9S/j6jk1ETXu1zOvdaLmwVE8zOzrUJj6NujK3VW6+hJJEl2thbnsQYrw
- w17/Cvw2i4VRvbHBEHlrLmeq31lqWGxkuRkmpn3nRVQTuFM9f8osrIfuHbzC7BYmubZA
- m47qEID5RjQ/3RpuE7ZUT29m49Uf5nhmYvCxVurpT/hACglM0F4QQNttrm5cOlueqEoX
- w3jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762420551; x=1763025351;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=t9GWlxsWeB+hFDBkPLxLJDI3qJnfzhaJ+9iovcthGMQ=;
- b=HqtfdmIm7eB0Dg4hdvJ+UySYoUGPZ71vprpYT8nDA1jN0krq9m8OqXP0i1c2LbC82a
- N+chs8iCEuEH354tR5SuANMBP92ODJc9GK+E5QNUCS+8TzlY0jxbkoLCEPenSPxSID7p
- 3y0nk1qDkApSzoz8XmEwtEMFi0JTaU52Q348ytBxssRrfhqhSfbWAwb6oL2lT0fZcdNb
- lRFJWHrzut4FlNIysMSWu53jow0er+RzEvUKXuuXG2CcDC8ZU9fHGd0fftVGGoLt0eU+
- 11bQODKlJgb0PEJuJacOI2yROViJtggEVI/iRU0t8xNG42QBh9Tw1f49WDbYShLvtaEF
- ZnTw==
-X-Gm-Message-State: AOJu0YxZ1EDeADvzetd9Pz0Rs4IRRLzcIPqKNuS5tDefdWQEKg5HgD+P
- T8OFr2HPA4x+aXW6u36vaJVygE2W7eCK5nTLW/fVolzG1PF6lbMJBUMr
-X-Gm-Gg: ASbGncud+2Jrcvye+cAmEyWaXSIIneAGszxv/oSfhApVq3mjb1ciVLz6RzteTVyVHgo
- iN61fxai83JWl6qeELVbeKRmRstHoh2H4F+mW7KbaX+HMIGUEaaBE0aqN3ZFK34UfakV+HJS+Qw
- n4LPnwuUt/PWD0KNyt6ck+zSezKVNwVu8uxYysnGVxXCVMxhMJZf0dCsUmwXCGXrMdWaTv9CyvH
- +gqO/K8lTOQ7BDHI6ZL33ggoZDWgcmF1iv48uDyQ4tygZ8W26/Z00MROBTseINLJbx2/JrwRI0n
- VqCIS7BbBq6kppxHaXr0TQG77BpCNDK9npTFSsucRjTAN7ZwJOtPaaeDabi7bNl5FHWz2pjnuOY
- WOgLrrACaC4K2NBr6rLTz4JVBM89xh+hqNpU0FmsZnTHjv4tSArkxYT+enyVRMNmnKSgvwRT+YV
- 3FKVbtMXNZgrl2TC2X8lAgQgmjWr/gPbm3Jbq4SDa1GrqXgiLRteQ=
-X-Google-Smtp-Source: AGHT+IGlqZkMr8jknNMz8GqWEqFyesRLeAfPWwukWN+1xuEdVbvVmZQUxg1Uj88yZXqrIvbbzI3XuQ==
-X-Received: by 2002:a17:90b:574f:b0:340:d569:d29b with SMTP id
- 98e67ed59e1d1-341a6dd9a3emr7597579a91.19.1762420551432; 
- Thu, 06 Nov 2025 01:15:51 -0800 (PST)
-Received: from xiaomi-ThinkCentre-M760t.mioffice.cn ([43.224.245.241])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-341d1258262sm672051a91.13.2025.11.06.01.15.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Nov 2025 01:15:51 -0800 (PST)
-From: Yongpeng Yang <yangyongpeng.storage@gmail.com>
-To: Chao Yu <chao@kernel.org>,
-	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Thu,  6 Nov 2025 17:15:37 +0800
-Message-ID: <20251106091537.3063566-2-yangyongpeng.storage@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251106091537.3063566-1-yangyongpeng.storage@gmail.com>
-References: <20251106091537.3063566-1-yangyongpeng.storage@gmail.com>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1vGyI1-00030a-BI for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 06 Nov 2025 11:36:29 +0000
+From: John Ogness <john.ogness@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1762428982;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=3OFVSDhbG36SsIf5lzC388elLqvaZZTmYLAdGi/UGDg=;
+ b=VfHVcgmpJH3uTfDhchkD4wuvXiCeO6Y0cgIqWhodPDv0n2WVyYSiJgJJpsP+TuMeWHGFhk
+ awrfiT1E4sgpQl/J9FkfBBes3xk5bIN19ceahwVKoZUp77RiupUePOYXKRjfWcOOZNzJyI
+ nEGwsjZJXoedyhMd+JsaSo0915zq3oA0kUISJHkpjhjfUhWqF7la7YqWpyki7iPmNWmakE
+ 1xhtxvITVT9bFAfdxm0ZQDDm4fTBoi6xT7qZeJDMw7135L0MoVUU7nVX9ZV0r7kk20V5Hd
+ 8BnaSJ/s1Q5JnQT8KCr/Flgxrv/goYiQYt5i7ji3eoWtF4DinD6WOF+xYK6ieQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1762428982;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=3OFVSDhbG36SsIf5lzC388elLqvaZZTmYLAdGi/UGDg=;
+ b=o1GL4jP2YCiTuyko5Z4t0WrMdYgexNYHQsUuVxE4kxErQm/WLMPqalMwDn0asv1C6ScxeV
+ 1J3sSKVoaU//4sBA==
+To: Petr Mladek <pmladek@suse.com>
+In-Reply-To: <87bjlgqmk5.fsf@jogness.linutronix.de>
+References: <CAJnrk1bF8sLU6tG2MGkt_KR4BoTd_k01CMVZJ9js2-eyh80tbw@mail.gmail.com>
+ <69096836.a70a0220.88fb8.0006.GAE@google.com>
+ <CAJnrk1Yo4dRVSaPCaAGkHc+in03KaTXJ+KxckhLoSrRxbEdDBg@mail.gmail.com>
+ <aQpFLJM96uRpO4S-@pathway.suse.cz> <87ldkk34yj.fsf@jogness.linutronix.de>
+ <aQuABK25fdBVTGZc@pathway.suse.cz> <87bjlgqmk5.fsf@jogness.linutronix.de>
+Date: Thu, 06 Nov 2025 12:42:21 +0106
+Message-ID: <87tsz7iea2.fsf@jogness.linutronix.de>
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 0.4 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Yongpeng Yang When the block device reports
- max_open_zones
- == 0, sbi->max_open_zones is initialized to UINT_MAX. In such cases, F2FS
- can still be mounted successfully (as tested under qemu). However, for SSDs,
- a de [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On 2025-11-05, John Ogness <john.ogness@linutronix.de> wrote:
+ >> Another question is whether this is the only problem caused the patch.
+ > > This comparison is quite special. It caught my attention whi [...] 
+ Content analysis details:   (0.4 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -125,14 +98,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [yangyongpeng.storage(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.42 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vGw61-0004Cn-4c
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: fix handling of block devices with
- max_open_zones == 0
+ 0.6 INVALID_DATE_TZ_ABSURD Invalid Date: header (timezone does not exist)
+X-Headers-End: 1vGyI1-00030a-BI
+Subject: Re: [f2fs-dev] [syzbot] [iomap?] kernel BUG in folio_end_read (2)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -144,109 +112,93 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: brauner@kernel.org, djwong@kernel.org, syzkaller-bugs@googlegroups.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ syzbot <syzbot+3686758660f980b402dc@syzkaller.appspotmail.com>,
+ jaegeuk@kernel.org, Joanne Koong <joannelkoong@gmail.com>,
+ "amurray@thegoodpenguin.co.uk" <amurray@thegoodpenguin.co.uk>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Yongpeng Yang <yangyongpeng@xiaomi.com>
+On 2025-11-05, John Ogness <john.ogness@linutronix.de> wrote:
+>> Another question is whether this is the only problem caused the patch.
+>
+> This comparison is quite special. It caught my attention while combing
+> through the code.
 
-When the block device reports max_open_zones == 0, sbi->max_open_zones
-is initialized to UINT_MAX. In such cases, F2FS can still be mounted
-successfully (as tested under qemu).
-However, for SSDs, a device reporting max_open_zones == 0 should not be
-mountable, while for SMR HDDs this is acceptable.
-Fix this issue by handling max_open_zones == 0 properly:
-- Disallow mounting on SSDs when max_open_zones == 0.
-- For SMR HDDs, set max_open_zones to the total number of zones.
-- Remove redundant zoned device checks.
-- Add a sysfs entry to expose max_open_zones.
+The reason that this comparison is special is because it is the only one
+that does not take wrapping into account. I did it that way originally
+because it is AND with a wrap check. But this is an ugly special
+case. It should use the same wrap check as the other 3 cases in
+nbcon.c. If it had, the bug would not have happened.
 
-Fixes: 0f9b12142be1af("f2fs: fix zoned block device information initialization")
-Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
----
- fs/f2fs/super.c | 36 +++++++++++++++++++++---------------
- fs/f2fs/sysfs.c |  2 ++
- 2 files changed, 23 insertions(+), 15 deletions(-)
+I always considered these wrap checks to be non-obvious and
+error-prone. So what if we create a nice helper function to simplify and
+unify the wrap checks? Something like this:
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index c055032593b7..7349d9cd901b 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -4353,21 +4353,6 @@ static int init_blkz_info(struct f2fs_sb_info *sbi, int devi)
- 	unsigned int max_open_zones;
- 	int ret;
+diff --git a/kernel/printk/printk_ringbuffer.c b/kernel/printk/printk_ringbuffer.c
+index 839f504db6d30..8499ee642c31d 100644
+--- a/kernel/printk/printk_ringbuffer.c
++++ b/kernel/printk/printk_ringbuffer.c
+@@ -390,6 +390,17 @@ static unsigned int to_blk_size(unsigned int size)
+ 	return size;
+ }
  
--	if (!f2fs_sb_has_blkzoned(sbi))
--		return 0;
--
--	if (bdev_is_zoned(FDEV(devi).bdev)) {
--		max_open_zones = bdev_max_open_zones(bdev);
--		if (max_open_zones && (max_open_zones < sbi->max_open_zones))
--			sbi->max_open_zones = max_open_zones;
--		if (sbi->max_open_zones < F2FS_OPTION(sbi).active_logs) {
--			f2fs_err(sbi,
--				"zoned: max open zones %u is too small, need at least %u open zones",
--				sbi->max_open_zones, F2FS_OPTION(sbi).active_logs);
--			return -EINVAL;
--		}
--	}
--
- 	zone_sectors = bdev_zone_sectors(bdev);
- 	if (sbi->blocks_per_blkz && sbi->blocks_per_blkz !=
- 				SECTOR_TO_BLOCK(zone_sectors))
-@@ -4378,6 +4363,27 @@ static int init_blkz_info(struct f2fs_sb_info *sbi, int devi)
- 	if (nr_sectors & (zone_sectors - 1))
- 		FDEV(devi).nr_blkz++;
- 
-+	max_open_zones = bdev_max_open_zones(bdev);
-+	if (!max_open_zones) {
-+		/*
-+		 * SSDs require max_open_zones > 0 to be mountable.
-+		 * For HDDs, if max_open_zones is reported as 0, it doesn't matter,
-+		 * set it to FDEV(devi).nr_blkz.
-+		 */
-+		if (bdev_nonrot(bdev)) {
-+			f2fs_err(sbi, "zoned: SSD device %s without open zones", FDEV(devi).path);
-+			return -EINVAL;
-+		}
-+		max_open_zones = FDEV(devi).nr_blkz;
-+	}
-+	sbi->max_open_zones = min_t(unsigned int, max_open_zones, sbi->max_open_zones);
-+	if (sbi->max_open_zones < F2FS_OPTION(sbi).active_logs) {
-+		f2fs_err(sbi,
-+			"zoned: max open zones %u is too small, need at least %u open zones",
-+			sbi->max_open_zones, F2FS_OPTION(sbi).active_logs);
-+		return -EINVAL;
-+	}
++/*
++ * Check if @lpos1 is before @lpos2. This takes ringbuffer wrapping
++ * into account. If @lpos1 is more than a full wrap before @lpos2,
++ * it is considered to be after @lpos2.
++ */
++static bool lpos1_before_lpos2(struct prb_data_ring *data_ring,
++			       unsigned long lpos1, unsigned long lpos2)
++{
++	return lpos2 - lpos1 - 1 < DATA_SIZE(data_ring);
++}
 +
- 	FDEV(devi).blkz_seq = f2fs_kvzalloc(sbi,
- 					BITS_TO_LONGS(FDEV(devi).nr_blkz)
- 					* sizeof(unsigned long),
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 98d2cb60e806..d3d268c707a9 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -1210,6 +1210,7 @@ F2FS_SBI_GENERAL_RW_ATTR(last_age_weight);
- F2FS_SBI_GENERAL_RW_ATTR(max_read_extent_count);
- #ifdef CONFIG_BLK_DEV_ZONED
- F2FS_SBI_GENERAL_RO_ATTR(unusable_blocks_per_blkz);
-+F2FS_SBI_GENERAL_RO_ATTR(max_open_zones);
- F2FS_SBI_GENERAL_RW_ATTR(blkzone_alloc_policy);
- #endif
- F2FS_SBI_GENERAL_RW_ATTR(carve_out);
-@@ -1384,6 +1385,7 @@ static struct attribute *f2fs_attrs[] = {
- #endif
- #ifdef CONFIG_BLK_DEV_ZONED
- 	ATTR_LIST(unusable_blocks_per_blkz),
-+	ATTR_LIST(max_open_zones),
- 	ATTR_LIST(blkzone_alloc_policy),
- #endif
- #ifdef CONFIG_F2FS_FS_COMPRESSION
--- 
-2.43.0
+ /*
+  * Sanity checker for reserve size. The ringbuffer code assumes that a data
+  * block does not exceed the maximum possible size that could fit within the
+@@ -577,7 +588,7 @@ static bool data_make_reusable(struct printk_ringbuffer *rb,
+ 	unsigned long id;
+ 
+ 	/* Loop until @lpos_begin has advanced to or beyond @lpos_end. */
+-	while ((lpos_end - lpos_begin) - 1 < DATA_SIZE(data_ring)) {
++	while (lpos1_before_lpos2(data_ring, lpos_begin, lpos_end)) {
+ 		blk = to_block(data_ring, lpos_begin);
+ 
+ 		/*
+@@ -668,7 +679,7 @@ static bool data_push_tail(struct printk_ringbuffer *rb, unsigned long lpos)
+ 	 * sees the new tail lpos, any descriptor states that transitioned to
+ 	 * the reusable state must already be visible.
+ 	 */
+-	while ((lpos - tail_lpos) - 1 < DATA_SIZE(data_ring)) {
++	while (lpos1_before_lpos2(data_ring, tail_lpos, lpos)) {
+ 		/*
+ 		 * Make all descriptors reusable that are associated with
+ 		 * data blocks before @lpos.
+@@ -1149,7 +1160,7 @@ static char *data_realloc(struct printk_ringbuffer *rb, unsigned int size,
+ 	next_lpos = get_next_lpos(data_ring, blk_lpos->begin, size);
+ 
+ 	/* If the data block does not increase, there is nothing to do. */
+-	if (head_lpos - next_lpos < DATA_SIZE(data_ring)) {
++	if (!lpos1_before_lpos2(data_ring, head_lpos, next_lpos)) {
+ 		if (wrapped)
+ 			blk = to_block(data_ring, 0);
+ 		else
+@@ -1262,7 +1273,7 @@ static const char *get_data(struct prb_data_ring *data_ring,
+ 
+ 	/* Regular data block: @begin less than @next and in same wrap. */
+ 	if (!is_blk_wrapped(data_ring, blk_lpos->begin, blk_lpos->next) &&
+-	    blk_lpos->begin < blk_lpos->next) {
++	    lpos1_before_lpos2(data_ring, blk_lpos->begin, blk_lpos->next)) {
+ 		db = to_block(data_ring, blk_lpos->begin);
+ 		*data_size = blk_lpos->next - blk_lpos->begin;
+ 
+This change also fixes the issue. Thoughts?
 
+John
 
 
 _______________________________________________
