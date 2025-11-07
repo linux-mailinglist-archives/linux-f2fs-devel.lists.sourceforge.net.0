@@ -2,118 +2,115 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66DE4C3E9EF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 07 Nov 2025 07:29:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 121F6C3F254
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 07 Nov 2025 10:25:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-Id:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=zDAaZTaMNODs+wJ5dq9Q2xYPju3R/SRxgEwGrErT6oY=; b=PeQWJ/Uxv1CN/uaK3Fg4xHjbuC
-	0krxrWBcbX0fknjLndzTRDsfynRQPuQ9KBwtQqOCrCByUcVTtK2bdkFZ54qOUE0fiB6CRXLPITO+C
-	XLfmqNgeFK6/xv36WJOkG0wgRqIbx+hBKz1gkJuFkRLbXsdb6wH9KQDTD6E9syVO9xb8=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:References:In-Reply-To:From:To:MIME-Version:Date:Message-ID:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=rCqA4yXN5TE8I2olUffOHIWGlGK+7cvgayPnSZ4BhJI=; b=bEWX+f9crNyyZ5xAkLY1tgqvBr
+	i+QVJWuhNKtwJwRqgtdAJZyhSF/4qxn3oKuciVv3Vclvm1y8dlFqEU49YjLCm3dLvyp7wMKANEAw6
+	kDrs5ayMMip8tMWF4XFOLD2D3upkJxrJy405V3zOQ9dFHrinFKjZB+RWN+ZkCsY7Tm1g=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vHFyd-0007RT-NQ;
-	Fri, 07 Nov 2025 06:29:39 +0000
+	id 1vHIik-0005kq-Qt;
+	Fri, 07 Nov 2025 09:25:26 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <heyunlei1988@gmail.com>) id 1vHFyb-0007RM-Pq
+ (envelope-from <kundan.kumar@samsung.com>) id 1vHIih-0005kg-At
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Nov 2025 06:29:37 +0000
+ Fri, 07 Nov 2025 09:25:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ In-Reply-To:From:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VaZVCcu/DH5DjU7IbkhLAgXsTKbn9scp6rRNZBq3dzE=; b=ULOHD4OsZg07F9GArvnS2pVbgD
- xnpxhsxUopF8Vjpl9TcIaIu1IaN0/CKyWBrTl84OpKniP/4tSGVc95aEtpNhe2s4X4kqHWq5Syf0B
- q+veDg7yQGwYngxAHN7sss9x9mD3V0AVWakrwsJ0ni4HnhngWxyRNukyjIRmM/CkiFAc=;
+ bh=u8uZZ4eKtfeKdhCl1Q4zHBINNzxY5n31tzDb1+D2ZUs=; b=DC8lvVw4auk5P1DouFuGQeu/3X
+ 7eEKQIVr9unFvX0yhgBNSUqkw55NDQzlpzpRC+EBtNsN23ho6s/gI4+frg0oJtN1bxaKF4mTi+OE3
+ FoQ7Y2GkxJsCh6XbDnz5yE8PiAUPKTvuvSDiF5jT7/n6ibKCeKizs4+uf2Sv09MbfKqw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=VaZVCcu/DH5DjU7IbkhLAgXsTKbn9scp6rRNZBq3dzE=; b=Q
- 0wfzImeHB10hIugMAKlNDNSett78XF71FtRUy6fZswdS7FsHL85bChVPbyvFI+xzr5QcsfHmEIPLy
- d3i43AMgoabYnuCFQMlLBMaFYCH9X1dKCSfbnb0iWsvWW2Qc87HCv4x54hHt2gFwtfTzngyhlQeFE
- rWLl01FrNC5dgpY0=;
-Received: from mail-pf1-f176.google.com ([209.85.210.176])
+ h=References:Content-Type:Content-Transfer-Encoding:In-Reply-To:From:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=u8uZZ4eKtfeKdhCl1Q4zHBINNzxY5n31tzDb1+D2ZUs=; b=hGWs08retD7r8spxN738YoPaU/
+ YpWgF86bQRoCyjNIkYdKgJUvDj/OKTXe6ZugWN6GKd/r0M5iJBL+kEgtRCavJ6B7Ge14qywss3uPY
+ p4IBEW/5y4erf31TxSmyP9IhsLYokN7I6hEyzeW0YE+x+51aDVlSm3277mN9AIOzFBag=;
+Received: from mailout4.samsung.com ([203.254.224.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vHFyb-0000mm-Au for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Nov 2025 06:29:37 +0000
-Received: by mail-pf1-f176.google.com with SMTP id
- d2e1a72fcca58-7afc154e411so290226b3a.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1vHIig-0002MN-7E for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 07 Nov 2025 09:25:23 +0000
+Received: from epcas5p1.samsung.com (unknown [182.195.41.39])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20251107092510epoutp04df0e680abe965f565fafc7848fa9d994~1rz4Bx2sR0793507935epoutp04G
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 06 Nov 2025 22:29:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762496966; x=1763101766; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=VaZVCcu/DH5DjU7IbkhLAgXsTKbn9scp6rRNZBq3dzE=;
- b=aGQUiWOAaSvDAdhcuSdjwrgqds2zOehZ3SUNZ+4SsTkaKHXJCXr7SBZSO6iEaCdrOe
- y2Ensbxzzan/eaPoTQPD4YoTmk4QBbq0L1TxxJ6nZM2SSp05rFZb1NfpWD/XzVfoZk/e
- VVoaKUP2eVf130udVqy5FqlKG+8jeJoMZ66zEruFEWaFQv0VGIAeTwyeFTQuAVXPVqxb
- +eoj1Qu81rdW5TJwnm6rY4eslXpXsapA0qxlUTlm+u6NpQkUwvzyQz6klgCGKvx/6Ip9
- yIiy9GbE2GdKsJLs2dDwG0yL3VFum8FNeiA0enel1xpJtmBqWBzBQ/FeVqUj+Fa+f8Ft
- 2/Xg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762496966; x=1763101766;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VaZVCcu/DH5DjU7IbkhLAgXsTKbn9scp6rRNZBq3dzE=;
- b=sHpmOq8DX4QpuCKKe/Bg5fZHQDlbg9CsVR1fNv63GXWkFc9GhPKLhRl3Yfnr/ROwpl
- hWMdL1QtjDeU+lIogrY8fOQ576DSYI8Ef/pOVILAo5G051cgLlALSuOW5bD72lvN7NKM
- aPwMxeo2Ndk/K2QYQSFp1oGvnZGi7ABntJyjP4P7SEWN4Cc93ho7+J35CCufOhLdaCDc
- hv8GNG7SvyM1uObmxpfIF5U9dcOMdcfnBOh5ge395ZevsHDb5AGso7tncVfgScLRc4Sy
- swbpLlr6ODwwxaBfVZQFcbEh8fH8HXFH8k5gYMMsBKx947hYAalDBFI3mGuxJGSXZep/
- FDqw==
-X-Gm-Message-State: AOJu0YyDjxyaSSp3XzM6ZYisBtCzAckauc6xdp+R9wrFjFIrPfH2GZtn
- NKozyJGA+ckekSLA4qKWDq7/hDGworbtxFIpEFGiz3+64F4eP/C3hJPa
-X-Gm-Gg: ASbGnctUpv41rOpI1mf9OOjhWgGo0CridiohHsK3qMq6636Gb7b9Hx62mrYCJW1vom/
- /6wuJ/ozEGkFo7+DXbUskFwQwQJcj1fLF78dcNF1YASrK8Lzww75q2cNOx7RVJbZAmuHoMotjyS
- bjRodCQFUlZDFrxQSRjaifByj+MJ4sVd97lDxggM9C3rY4QOz5j9IvYL21OZIEoGfnACXHXBviw
- 3B64mBpl3iior5lx6PoEXQkbcN+9FU6WF8A/gWPUlaOrNPXirCW8UxlvVgzfvmwCxu/6UDWNjcv
- 2Dw1Ut8+58vGdmOT0Enc5xZK0v52s+SSjdIifgvZc2M8vuY0gm3IwezZI7Z34vLUivfmC5tIQir
- 7A9RnwTW4YZ17p3BDLgpnO10y3xPldwx+XJaozST8rkNpVL2YFEVKGs4FtzqMu4opLFoo1q58d5
- DWNFMlJ92nyBkvk0sri1AElAiWoswAcMU=
-X-Google-Smtp-Source: AGHT+IGg0UahMMmtvoyKBU3l9GHQkkP6satkAEprAOf0G1QuMz6m3Afi73H4K7G7+6/ma2QNnzUP9g==
-X-Received: by 2002:a05:6a00:2316:b0:7ac:9d93:3efa with SMTP id
- d2e1a72fcca58-7b0bb44198bmr3171285b3a.7.1762496966625; 
- Thu, 06 Nov 2025 22:29:26 -0800 (PST)
-Received: from sunsj-ThinkStation-K.mioffice.cn ([43.224.245.226])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7b0cc866319sm1677801b3a.54.2025.11.06.22.29.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Nov 2025 22:29:26 -0800 (PST)
-From: Yunlei He <heyunlei1988@gmail.com>
-To: Chao Yu <chao@kernel.org>,
-	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Fri,  7 Nov 2025 14:29:07 +0800
-Message-Id: <20251107062907.384287-1-heyunlei1988@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Fri,  7 Nov 2025 09:25:10 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20251107092510epoutp04df0e680abe965f565fafc7848fa9d994~1rz4Bx2sR0793507935epoutp04G
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1762507510;
+ bh=u8uZZ4eKtfeKdhCl1Q4zHBINNzxY5n31tzDb1+D2ZUs=;
+ h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+ b=nNuFq4JnvaalPuw3XSCF+FmfhR4hroJIdPSDaHbSmmalxbF06Dg/9xIUKs6+9KzFz
+ +mAELlYpPRLM/VRb9troicO5aYquOMj5KfMMzbcDgQdZ0rmuNl5y5iIwuarLma8XZW
+ tCVt9qc3o0mDZEE2QeTmo6c4tZqQQITd/PUA9KvM=
+Received: from epsnrtp02.localdomain (unknown [182.195.42.154]) by
+ epcas5p3.samsung.com (KnoxPortal) with ESMTPS id
+ 20251107092509epcas5p39521b5623906275347b3ec7177eac680~1rz3UXgnn2572925729epcas5p39;
+ Fri,  7 Nov 2025 09:25:09 +0000 (GMT)
+Received: from epcas5p3.samsung.com (unknown [182.195.38.91]) by
+ epsnrtp02.localdomain (Postfix) with ESMTP id 4d2tv81KkDz2SSKY; Fri,  7 Nov
+ 2025 09:25:08 +0000 (GMT)
+Received: from epsmtip2.samsung.com (unknown [182.195.34.31]) by
+ epcas5p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20251107092507epcas5p3041edfe682f64c59ac3fe0fab4b9384b~1rz1O74AD2299222992epcas5p3F;
+ Fri,  7 Nov 2025 09:25:07 +0000 (GMT)
+Received: from [107.111.86.57] (unknown [107.111.86.57]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20251107092447epsmtip2e07f9528cf570ebdd336a8a4571fc676~1rzi_2xUI0827208272epsmtip2i;
+ Fri,  7 Nov 2025 09:24:46 +0000 (GMT)
+Message-ID: <91367b76-e48b-46b4-b10b-43dfdd8472fa@samsung.com>
+Date: Fri, 7 Nov 2025 14:54:42 +0530
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Christoph Hellwig <hch@lst.de>, "Darrick J. Wong" <djwong@kernel.org>
+From: Kundan Kumar <kundan.kumar@samsung.com>
+In-Reply-To: <20251029085526.GA32407@lst.de>
+X-CMS-MailID: 20251107092507epcas5p3041edfe682f64c59ac3fe0fab4b9384b
+X-Msg-Generator: CA
+CMS-TYPE: 105P
+cpgsPolicy: CPGSC10-542,Y
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20251014120958epcas5p267c3c9f9dbe6ffc53c25755327de89f9
+References: <CGME20251014120958epcas5p267c3c9f9dbe6ffc53c25755327de89f9@epcas5p2.samsung.com>
+ <20251014120845.2361-1-kundan.kumar@samsung.com>
+ <aPa7xozr7YbZX0W4@dread.disaster.area> <20251022043930.GC2371@lst.de>
+ <e51e4fb9-01f7-4273-a363-fc1c2c61954b@samsung.com>
+ <20251029060932.GS4015566@frogsfrogsfrogs> <20251029085526.GA32407@lst.de>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Yunlei He GC move fbe data block will add some non
- uptodate page,
- we'd better release it at the end. Signed-off-by: Yunlei He Signed-off-by:
- Yongpeng Yang --- fs/f2fs/gc.c | 5 +++++ 1 file changed, 5 insertions(+) 
- Content analysis details:   (0.1 points, 5.0 required)
+ Content preview:  On 10/29/2025 2:25 PM, Christoph Hellwig wrote: > On Tue,
+ Oct 28, 2025 at 11:09:32PM -0700, Darrick J. Wong wrote: >> Was that with
+ or without rtgroups? metadir/rtgroups aren't enabled by >> default y [...]
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.34 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -121,14 +118,10 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [heyunlei1988(at)gmail.com]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [heyunlei1988(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.210.176 listed in wl.mailspike.net]
-X-Headers-End: 1vHFyb-0000mm-Au
-Subject: [f2fs-dev] [PATCH] f2fs: drop non uptodata page during GC
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1vHIig-0002MN-7E
+Subject: Re: [f2fs-dev] [PATCH v2 00/16] Parallelizing filesystem writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -140,49 +133,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: ritesh.list@gmail.com, vishak.g@samsung.com, jack@suse.cz,
+ amir73il@gmail.com, Dave Chinner <david@fromorbit.com>, gfs2@lists.linux.dev,
+ linux-mm@kvack.org, clm@meta.com, dave@stgolabs.net, agruenba@redhat.com,
+ miklos@szeredi.hu, gost.dev@samsung.com, willy@infradead.org,
+ anuj20.g@samsung.com, linux-nfs@vger.kernel.org, viro@zeniv.linux.org.uk,
+ jaegeuk@kernel.org, axboe@kernel.dk, brauner@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, mcgrof@kernel.org, anna@kernel.org,
+ linux-fsdevel@vger.kernel.org, akpm@linux-foundation.org, trondmy@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Yunlei He <heyunlei@xiaomi.com>
+On 10/29/2025 2:25 PM, Christoph Hellwig wrote:
+> On Tue, Oct 28, 2025 at 11:09:32PM -0700, Darrick J. Wong wrote:
+>> Was that with or without rtgroups?  metadir/rtgroups aren't enabled by
+>> default yet so you'd have to select that manually with mkfs.xfs -m
+>> metadir=1.
+>>
+>> (and you might still not see much change because of what hch said)
+> 
+> The real problem here is that even the inode number to AG association
+> is just a hint, and will often go wrong on an aged file system.
+> 
+> Now for the zoned RT device we could probably do a thread per open
+> zone, as that is a very logical association.  The problem with that
+> right now is that we only pick the zone to write to once doing
+> writeback, but there might be ways to lift it up.  Then again
+> zoned writeback is so little code that I can't see how it would
+> saturate a single thread.
+> 
 
-GC move fbe data block will add some non uptodate page, we'd
-better release it at the end.
+Predicting the Allocation Group (AG) for aged filesystems and passing
+this information to per-AG writeback threads appears to be a complex
+task.
 
-Signed-off-by: Yunlei He <heyunlei@xiaomi.com>
-Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
----
- fs/f2fs/gc.c | 5 +++++
- 1 file changed, 5 insertions(+)
+For write operations without pre-allocated data blocks (fallocate=none,
+resulting in DELALLOC), the next available AG is selected, and the
+XFS hook can be used to predict the AG that will be allocated.
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 8abf521530ff..09b65e6ea853 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1315,6 +1315,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
- 	struct node_info ni;
- 	struct folio *folio, *mfolio;
- 	block_t newaddr;
-+	bool need_invalidate = true;
- 	int err = 0;
- 	bool lfs_mode = f2fs_lfs_mode(fio.sbi);
- 	int type = fio.sbi->am.atgc_enabled && (gc_type == BG_GC) &&
-@@ -1450,7 +1451,11 @@ static int move_data_block(struct inode *inode, block_t bidx,
- put_out:
- 	f2fs_put_dnode(&dn);
- out:
-+	if (folio_test_uptodate(folio))
-+		need_invalidate = false;
- 	f2fs_folio_put(folio, true);
-+	if (need_invalidate)
-+		invalidate_mapping_pages(mapping, bidx, bidx);
- 	return err;
- }
- 
--- 
-2.34.1
+In contrast, when writing to a previously allocated data block
+(fallocate default, resulting in UNWRITTEN), the AG containing the data
+block is chosen. Large files that span multiple AGs can lead to a mix
+of random I/O operations (DELALLOC, UNWRITTEN, MAPPED) being directed
+to different AGs, while still being cached in the same page cache.
+
+To segregate these I/O requests by AG, it is necessary to associate
+AG-specific information with the pages/folios in the page cache. Two
+possible approaches are:
+(1) storing AG information in the folio->private field, or
+(2) introducing new markers in the xarray to track AG-specific data.
+
+The AG-affined writeback thread processes specific pages from the page 
+cache marked for its AG. Is this a viable approach, or are there 
+alternative solutions that could be more effective?
+
+>>
+>> --D
+> ---end quoted text---
+> 
 
 
 
