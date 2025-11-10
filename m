@@ -2,133 +2,140 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C44C0C455C0
+	by mail.lfdr.de (Postfix) with ESMTPS id B7346C455BF
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Nov 2025 09:22:50 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=KoFM+ZlioucTtY/CGgehIbqT4o2JCEmvef++MdgF4/c=; b=O4Ys3IkFvmdHQgYwNIyrfCIcDk
-	1C2azlXpd+501wCpgIp8eaV9tdoa8AmIbxQeYIIDyt/MmU7/iJbLR/i53lpgMsROVb2adKbEgELd+
-	jS/uaHWxcYvcwPZzPr8CBkI//VjlJ6IWjm3tgA7Nq/RPFmySAOSvnAnoheWADJpUC2UI=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=4kbfWwT5kwu2y8GCErb+EZo2qTsk5fYGa40Wy7IMVjY=; b=BUUJx9xF38XoopsKspmybulZYM
+	WZB6rgM1oUEGzirI73jxQul+POVhswuyokTQX6IgW2a7scUBqDGe98gPdZDrJ1HiPAZORHEtF1MqI
+	sx12ALHe1jOJ6YbAfJbCahI/BffL5CETVwtU+Av6GocO1NkG+orv36+VA4kP++HW1wNk=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vINAf-0007Kc-Cm;
-	Mon, 10 Nov 2025 08:22:42 +0000
+	id 1vINAh-0004Mr-Vi;
+	Mon, 10 Nov 2025 08:22:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yangyongpeng.storage@gmail.com>) id 1vINAe-0007KO-GM
+ (envelope-from <yangyongpeng.storage@gmail.com>) id 1vINAg-0004Mk-Gn
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Nov 2025 08:22:41 +0000
+ Mon, 10 Nov 2025 08:22:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Pk5desxvVlgFwB887i7EWePNrU1qCGwJNJBbJbR3S/o=; b=PF+hT9LhGFA6bR4grVRwMaONpw
- ezY41uK5Ksu01KT8OXl/BPzyBBeCr2Jop56U6dA2nUTLmbL/m0b6djwgiw7WjUFUpTrEcT0DV/ZFF
- XfqUT75WQ9IxGUxLqYGPuVa2vU7bJ3TvrPbRRtMCrjRQZe6IQCd51kJNH+KBesyJcrbA=;
+ bh=BNYaiNshCudm1f6Y5X+arfRdIqrNvZ4wOD5o4kMjNNM=; b=SrMm2o/9U+XHGrJwzeLXRNIi+U
+ Bl7q5xJjFcwIxaIk+Rfjal2/zvD/Bn03TZSwmc+fXdjyNrq2Y+2RFDzjapDLZevcpvLhvPpzLQhhl
+ sQPArQqNsC84FQsS6bWl46aVzFbYV8fbpKly231Q22apJq/rWkQ536d0CPat9ccgixw0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Pk5desxvVlgFwB887i7EWePNrU1qCGwJNJBbJbR3S/o=; b=W
- 30UhMAeTPcnLWYd5VWI45V8fGVOICC51MKAQoztZuXEmGwTyBAv/IlB43AnN4Pmo+cpEeKWXKe/TM
- aFXfW5CZmAln6AG5W8BLtQFR4O9dwBv5tWznVOUaOf2lSjfmZ2SWDNhiTR93AJLT/+Om2U7ng3hXi
- ti/ZXLezI3PJkAVE=;
-Received: from mail-pj1-f51.google.com ([209.85.216.51])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=BNYaiNshCudm1f6Y5X+arfRdIqrNvZ4wOD5o4kMjNNM=; b=Yvcw22rfXv14MG6IB8gnxbpupM
+ RAjH4QycoowNsUcLbIopssmCNDtROdZ1nVSM91E3fuX6k/OnqscnbgjBf+N4WHpPb4+JFZ6Nbmnmv
+ 4dpl2i7vvdjkZCMef2w/eH5lJ0tc9KmSp9O1NonzJqGiwh2/gYyNBk8kO35m5DmK8j8c=;
+Received: from mail-pg1-f170.google.com ([209.85.215.170])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vINAe-0007Yz-TB for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Nov 2025 08:22:41 +0000
-Received: by mail-pj1-f51.google.com with SMTP id
- 98e67ed59e1d1-343684a06b2so1662117a91.1
+ id 1vINAg-0007Z7-4O for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Nov 2025 08:22:42 +0000
+Received: by mail-pg1-f170.google.com with SMTP id
+ 41be03b00d2f7-b55517e74e3so2343485a12.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 10 Nov 2025 00:22:40 -0800 (PST)
+ Mon, 10 Nov 2025 00:22:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762762950; x=1763367750; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Pk5desxvVlgFwB887i7EWePNrU1qCGwJNJBbJbR3S/o=;
- b=gx8/59Vv4MDxsYdueBDP7XLN2yjGRd1Cy2DiX5kkP72ioVW72PvY5CNJauxiYeqxs3
- JurD0JbwFneE+lfxR8ihgl08pT2gci2OrfjfV6yYhUg+WTjr1tIZwkw+MMFLKSN6HJxQ
- EC8TzPWSAIYWcbI4uHuT+82jNZyVnwbi4DWwGW94JmO/8LkRtknJDxXnqUJP2KznKViS
- yMIGbjp0msSGmQIo/IhXOkHdJCQJ5LlJWk+vkCsew041mlvNIMHGmpHPRbSNVMIP6ayN
- hn/bOYDap0DHFNwc/km1rHnw4hghLGD8mRicm2Q4/tdW6yHtcDhN8DkcQhgOxEmOnoGQ
- G32g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762762950; x=1763367750;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1762762956; x=1763367756; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pk5desxvVlgFwB887i7EWePNrU1qCGwJNJBbJbR3S/o=;
- b=MgQZQKaXrxMWooH8obRv/aqAr+tDB721E5TV/4YNBTqfBlYUc7/XAGsRt0g7jF6jgq
- CzFbz1tlzCpGhm3Q6J0YExdWfXNccgC9tG7HdNHVTt6v96OuzZNPSAg4arYKPU8+ZdCw
- IYofTZVBuaTCUWzZkvf+IyYZM5/1wQuE9vNuiriBaip11/1tJWCJmyx6mI9h8wBx4/+P
- JBg9LNPqD4AVV+TUD8TdSSBRyCegB2s9CjnarCsNdUHfqYgt98Mez6nuejYzQIUgq7bt
- qDGHVjujpkvFMoIWZOWFg5wJEeX1KFXvx40d8gHCUtu/gFLCRtT9I+ghTYnnFjTfvo1G
- IzUQ==
-X-Gm-Message-State: AOJu0YzzQ/Oz6Ew3wteePXUR8fjctorKJe0iU0kZiBQh8nFO3V/izDKq
- lBl+TjNG+tzm1ZzbmJtRgNxTSPdKwCnXgfaCgi5Lb/mSLkESE27QBHibbmPs4cYhQxA=
-X-Gm-Gg: ASbGncuRmvjHTJ2cHPPbDIaiZHcgyE+UWlrF6MSf2Ap5AKvJL3N7a8Ehexp/+D+uJp0
- /2HfaCCwvZDF0AKT9ZsGN6lqFpxbVwnLbh8dL0Fra7YrM/NOKGDoH2eluA8mSrFa8E0IQajfeob
- QZO62C2MyLR2hH5Xg+ZErPRDp3U/UGA9TOBfMK6n0MenlNrKEIfJ5lbJ/Vlc/zocNdC9aWWqBOy
- 2CXOMxWW96BGABwYwoPj83lRq1gw40fGpGFcusiy8IKFOWkallBCEUq/ChRtyX2UnQKbtK9jIdE
- 1NbAmGXzg/KYtRr1zHA+tav60TbBlQrKkkQwlxQN+sEoPQiJXK+kKQlc1yK+dlwKQozR9JlzQrZ
- 8ke8WckTzNd+WQGBXmNZOF/YRBs2VNntkrXxeJFHcEBCtjvaj+YO1W38/QkR4TzIw1zupc9m4Dm
- oJhx9g/0m0StjBnnSFbDNTIrDXNGBQKBN0KO4W1Cj+rsI4MPeSRTyBc0r8DcyvzA==
-X-Google-Smtp-Source: AGHT+IFC6RslupaHKfIBc3O0XhoUB0wnYfUX1t27q8I0iei2dwQbVlIghY+zMGZs9kBRVgZ54RFlIQ==
-X-Received: by 2002:a17:90b:350d:b0:340:c261:f9f3 with SMTP id
- 98e67ed59e1d1-3436cb8a0bdmr9271197a91.14.1762762950041; 
- Mon, 10 Nov 2025 00:22:30 -0800 (PST)
+ bh=BNYaiNshCudm1f6Y5X+arfRdIqrNvZ4wOD5o4kMjNNM=;
+ b=l4DcfuvtSVAODMgdc3l6eQjEETwcH9Bf2ZJ9LthsccMrfImS9Hksr/9xRWjrTvg0+N
+ SLfsY2vJKNrKYNDRaqayFOjn1GHims4TSTQ1W0IWKOIHtsPaMUabUCzYu30fkwGoG6PH
+ 7/5/XJF7ZRULYNwGn6Zcq54Opodmu6aLMNBPotDSeWEwhbsTM4tQSjoEfpmt3F30i3nk
+ 1EJS3KefqazL7i6lhYX29BHZAEhqinPGWUs3Dqn4U+UFg9uskqbLN0bCpSYz04LZKeIx
+ r8o3jp/YbN4nKeQ0mSCNuFv6lJJI8Ydqg49ILrWVBkzfSmgXPf0hVAq6S0CgNYhjR2Js
+ bsVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762762956; x=1763367756;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=BNYaiNshCudm1f6Y5X+arfRdIqrNvZ4wOD5o4kMjNNM=;
+ b=qF0f8M6janGOidyGBunJsyGPqrS0VAXi4qZk3DcfhZNgjGjLaoERjOw87mjWTnNvl/
+ 8hD0R4YtcOKkqGf54VcFl+jA91+VgJao0kkNYwDZfVT0dXJ+LOZo3ooWEX98337hhcv8
+ 5DzxY4kVFrPw0xsm41EP5Ve/91rodieNoh7NLrOBLTZoSXuZFOriBMjemXYG9LsaQL18
+ f+sqLQPpDFufyIxNX+xy6MacW7zlruJV+9wu26yoyN0Ue7QS1uU/91NRcdQO06is6g1S
+ KoA3OtFnDhd0tBMLTPLpLKuYbcfe+fKGMmLUXjqkg7S9kf6BRD9eHZtI9ilrRQ91gRau
+ BRZA==
+X-Gm-Message-State: AOJu0Yxx2vQ08A+8Vygn3nJ6h4vN8Z6owTSEiWYS1hjaTX1Vg9kmlps3
+ 4ot6Mp2ODdPd/aGKmC8rftabiSpWTt4TU8zeCB7oBGkcm9S1iinFz67Fctal0jgx5ag=
+X-Gm-Gg: ASbGncsS1v2eEN6OxW/pWMsnEfykNTX/xEvXPivTwdrb2SzUgElv4xeq/yEGR56e1Fc
+ z1l/qah9uE96koh6ElR3ckissO9VqlZwURugvOdCzwjqCj800riaQQA5/R3B7BnjFu20FMz4c/u
+ 0eVoN7sse5JLvI7MTz9n86P0w5JA3BKAAN4BFe+r09RC99UDtcx+FILoqWExTfek9wnwQsrZIpJ
+ d73idIUbm52mRIU1SWKZKRcB4HxH9xCGP5ci+4xESJJ55iCBz0cksv/bctWsUKiBs9dcVYghFOn
+ ybl9KWZfA8vqsii4br/yJbSTN+sBjt6DOWSO9CKaXrho9uyLibGMmgoUZ8II6i+OgeQH2gettTI
+ nzQSoFCz0bIn6X19uUKdA2wTaIm6DaoJfpZMo6HSSEgO1xccIxhaswGALRKWsgwo87k2LuQgGTU
+ JC0mBqLOWGac+x7dizRvralJ69NiNrWNxSGk8tRTj9J5vIJpO1MkzdOwVTt4Lmgg==
+X-Google-Smtp-Source: AGHT+IE+XtkPbqv1K5X0PFvhNyK5mktF98gkxoj5IfQW1wZ5v1v53wcPiu6RgiXH1davnKlJCr6Ozg==
+X-Received: by 2002:a05:6a20:3d84:b0:32b:721e:ced1 with SMTP id
+ adf61e73a8af0-353a3562582mr11730010637.36.1762762956386; 
+ Mon, 10 Nov 2025 00:22:36 -0800 (PST)
 Received: from xiaomi-ThinkCentre-M760t.mioffice.cn ([43.224.245.241])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-ba8f0d16483sm11590059a12.0.2025.11.10.00.22.28
+ 41be03b00d2f7-ba8f0d16483sm11590059a12.0.2025.11.10.00.22.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Nov 2025 00:22:29 -0800 (PST)
+ Mon, 10 Nov 2025 00:22:36 -0800 (PST)
 From: Yongpeng Yang <yangyongpeng.storage@gmail.com>
 To: Chao Yu <chao@kernel.org>,
 	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Mon, 10 Nov 2025 16:22:21 +0800
-Message-ID: <20251110082223.902207-1-yangyongpeng.storage@gmail.com>
+Date: Mon, 10 Nov 2025 16:22:22 +0800
+Message-ID: <20251110082223.902207-2-yangyongpeng.storage@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251110082223.902207-1-yangyongpeng.storage@gmail.com>
+References: <20251110082223.902207-1-yangyongpeng.storage@gmail.com>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Yongpeng Yang The usage of unusable_blocks_per_sec is
- already wrapped by CONFIG_BLK_DEV_ZONED, except for its declaration and the
- definitions of CAP_BLKS_PER_SEC and CAP_SEGS_PER_SEC. This patch ensures
- that all co [...] 
+ Content preview:  From: Yongpeng Yang This patch adds a sysfs entry showing
+ the max zones that F2FS can write concurrently. Signed-off-by: Yongpeng Yang
+ --- Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++ fs/f2fs/sysfs.c |
+ 2 ++ 2 files changed, 8 insertions(+) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [209.85.215.170 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [yangyongpeng.storage(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.51 listed in wl.mailspike.net]
+ [209.85.215.170 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vINAe-0007Yz-TB
-Subject: [f2fs-dev] [PATCH v2 1/3] f2fs: wrap all unusable_blocks_per_sec
- code in CONFIG_BLK_DEV_ZONED
+X-Headers-End: 1vINAg-0007Z7-4O
+Subject: [f2fs-dev] [PATCH v2 2/3] f2fs: add a sysfs entry to show max open
+ zones
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -148,66 +155,52 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 
-The usage of unusable_blocks_per_sec is already wrapped by
-CONFIG_BLK_DEV_ZONED, except for its declaration and the definitions of
-CAP_BLKS_PER_SEC and CAP_SEGS_PER_SEC. This patch ensures that all code
-related to unusable_blocks_per_sec is properly wrapped under the
-CONFIG_BLK_DEV_ZONED option.
+This patch adds a sysfs entry showing the max zones that F2FS can write
+concurrently.
 
 Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
 ---
-v2:
-- Revert the renaming of unusable_blocks_per_sec.
-- Separate the sysfs node addition for max_open_zones into a separate
-patch.
-- Add more explanation for the case that zoned block device's
-max_open_zones == 0.
----
- fs/f2fs/f2fs.h    | 2 +-
- fs/f2fs/segment.h | 5 +++++
- 2 files changed, 6 insertions(+), 1 deletion(-)
+ Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++
+ fs/f2fs/sysfs.c                         | 2 ++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 5b4e9548a231..238ef4bcab6d 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1661,6 +1661,7 @@ struct f2fs_sb_info {
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index b590809869ca..770470e0598b 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -643,6 +643,12 @@ Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
+ Description:	Shows the number of unusable blocks in a section which was defined by
+ 		the zone capacity reported by underlying zoned device.
  
++What:		/sys/fs/f2fs/<disk>/max_open_zones
++Date:		November 2025
++Contact:	"Yongpeng Yang" <yangyongpeng@xiaomi.com>
++Description:	Shows the max number of zones that F2FS can write concurrently when a zoned
++		device is mounted.
++
+ What:		/sys/fs/f2fs/<disk>/current_atomic_write
+ Date:		July 2022
+ Contact:	"Daeho Jeong" <daehojeong@google.com>
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 6d2a4fba68a2..1072cfdaeb69 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -1210,6 +1210,7 @@ F2FS_SBI_GENERAL_RW_ATTR(last_age_weight);
+ F2FS_SBI_GENERAL_RW_ATTR(max_read_extent_count);
  #ifdef CONFIG_BLK_DEV_ZONED
- 	unsigned int blocks_per_blkz;		/* F2FS blocks per zone */
-+	unsigned int unusable_blocks_per_sec;   /* unusable blocks per section */
- 	unsigned int max_open_zones;		/* max open zone resources of the zoned device */
- 	/* For adjust the priority writing position of data in zone UFS */
- 	unsigned int blkzone_alloc_policy;
-@@ -1732,7 +1733,6 @@ struct f2fs_sb_info {
- 	unsigned int meta_ino_num;		/* meta inode number*/
- 	unsigned int log_blocks_per_seg;	/* log2 blocks per segment */
- 	unsigned int blocks_per_seg;		/* blocks per segment */
--	unsigned int unusable_blocks_per_sec;	/* unusable blocks per section */
- 	unsigned int segs_per_sec;		/* segments per section */
- 	unsigned int secs_per_zone;		/* sections per zone */
- 	unsigned int total_sections;		/* total section count */
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 1ce2c8abaf48..e9134f66ab1f 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -69,11 +69,16 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
- 	((!__is_valid_data_blkaddr(blk_addr)) ?			\
- 	NULL_SEGNO : GET_L2R_SEGNO(FREE_I(sbi),			\
- 		GET_SEGNO_FROM_SEG0(sbi, blk_addr)))
-+#ifdef CONFIG_BLK_DEV_ZONED
- #define CAP_BLKS_PER_SEC(sbi)					\
- 	(BLKS_PER_SEC(sbi) - (sbi)->unusable_blocks_per_sec)
- #define CAP_SEGS_PER_SEC(sbi)					\
- 	(SEGS_PER_SEC(sbi) -					\
- 	BLKS_TO_SEGS(sbi, (sbi)->unusable_blocks_per_sec))
-+#else
-+#define CAP_BLKS_PER_SEC(sbi) BLKS_PER_SEC(sbi)
-+#define CAP_SEGS_PER_SEC(sbi) SEGS_PER_SEC(sbi)
-+#endif
- #define GET_START_SEG_FROM_SEC(sbi, segno)			\
- 	(rounddown(segno, SEGS_PER_SEC(sbi)))
- #define GET_SEC_FROM_SEG(sbi, segno)				\
+ F2FS_SBI_GENERAL_RO_ATTR(unusable_blocks_per_sec);
++F2FS_SBI_GENERAL_RO_ATTR(max_open_zones);
+ F2FS_SBI_GENERAL_RW_ATTR(blkzone_alloc_policy);
+ #endif
+ F2FS_SBI_GENERAL_RW_ATTR(carve_out);
+@@ -1384,6 +1385,7 @@ static struct attribute *f2fs_attrs[] = {
+ #endif
+ #ifdef CONFIG_BLK_DEV_ZONED
+ 	ATTR_LIST(unusable_blocks_per_sec),
++	ATTR_LIST(max_open_zones),
+ 	ATTR_LIST(blkzone_alloc_policy),
+ #endif
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
 -- 
 2.43.0
 
