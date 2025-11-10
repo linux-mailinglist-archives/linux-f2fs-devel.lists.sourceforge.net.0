@@ -2,139 +2,133 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F74DC461C7
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Nov 2025 12:06:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFF31C46940
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Nov 2025 13:25:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:From:References:To:MIME-Version:Date:Message-ID:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=vJgNbONAJZ1P3WRtp60BfscqAtFfj0GH4p6rgDPt0AE=; b=i389OpIjS4nyfvWe7Pd0OYWTAF
-	2leoXxjge3kBLU6/Sy/eMoDHOron9+mH3SF0by8d9F4EacvhWSrl2A/Tfnv9UF8+ZidlolyIyamwN
-	ulgiMrz/5vpCG6z+379hKGcdeIdcGE7FYArt2lNXdlGYfWWD2L65eBulT6aKC59vREAo=;
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=mbCVvzZUO41wx5FBU/BmoFoS8k/7qzZdgavO61YakBk=; b=A+Jee2UmRwMJYw0y5Yl0aWGLDC
+	hUBXD+KmQu+kXABzSQC90V2uFQtQdBOODTxTfmUtMX1QpU3cI+bpkLqgGkxAR6Qw/ZK9UJitv8K3k
+	0ujL/wlFJ1U3XQcrTFbjK2UkF8YT1sr/9SDREbB91eUI0CfpaIC8WcAbcSssNu5ii4VI=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vIPir-0000yJ-S1;
-	Mon, 10 Nov 2025 11:06:10 +0000
+	id 1vIQxc-0004FB-7j;
+	Mon, 10 Nov 2025 12:25:29 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <akiyks@gmail.com>) id 1vIPip-0000y6-Sx
+ (envelope-from <pmladek@suse.com>) id 1vIQxa-0004F3-VM
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Nov 2025 11:06:08 +0000
+ Mon, 10 Nov 2025 12:25:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Xfmy4AOcEcUwtIeGJKyCn0Gi0Omh2sLDXhDiyPjpnMY=; b=e8eLoY/l1yC+fSFUtrbcugocor
- JJ2K7tkLeaXjQ1RrLET4uIpTlTLYfArTts182R/5pOO22G8eJ+rCM1lkEVYMTATQrMuCgqTrpRLXk
- L3acko7yrGu8UZg9r5QI04Ik1cTRW5jo2N4W9sOtXh8cZ84EIozYlTcw4am//60P+FgA=;
+ bh=AdI7IxF7cmaOwwPz2uPN9pz51vkfzTah0Iexytj/exg=; b=mB6Nk3I1Xqk9Evx0/AhQqHa8hC
+ mrXKFunFcUI70PEIIHSZkA23AlSXQH6NyvBTT/LO+dzhOxJCS73oKQpMtmDXD8N7X6ZYZOv700Pog
+ ZaDXMpEsH7JoSyx++bvbs8febSYTBZc6bWGCAOFPexRgnYSu2zRlF0AF7yYgCuWaRxzA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Xfmy4AOcEcUwtIeGJKyCn0Gi0Omh2sLDXhDiyPjpnMY=; b=JWizQnG5NoKghAL1LLkVO4WGSj
- t0EYWbrNY3KbRGnJPBCxK1tRaCfFUVuUrtIQGtF+gnYizpa9U7CwmCQzfaOKeLOcCDwZKl266lgjw
- 8OPUCQTA1Mt6ArtWluJ+HwrmdrASEQcTc4FcdZBAZHFpsos2yjIV2n4ppIrsj95fV5sg=;
-Received: from mail-pl1-f169.google.com ([209.85.214.169])
+ bh=AdI7IxF7cmaOwwPz2uPN9pz51vkfzTah0Iexytj/exg=; b=NiqGgmSuNRKl9LxRGP0x9UvY5m
+ JmJ64J5Hx7OQqiugAtZc0OLUErQHzrZm07JFyv9w10LGWARn58sBPdYjZHud6U5/jQY1o4tjyFUT4
+ zDZWhYERuUefhqmdrQw2wSj+x4Q6dyz74E+HmumRz71U869JveEWnoMsm71uBGPMOvzI=;
+Received: from mail-ed1-f54.google.com ([209.85.208.54])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vIPiq-0002iX-2e for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Nov 2025 11:06:08 +0000
-Received: by mail-pl1-f169.google.com with SMTP id
- d9443c01a7336-297eca3d0a3so19618065ad.0
+ id 1vIQxb-0006lF-95 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Nov 2025 12:25:27 +0000
+Received: by mail-ed1-f54.google.com with SMTP id
+ 4fb4d7f45d1cf-640bd9039fbso5970519a12.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 10 Nov 2025 03:06:08 -0800 (PST)
+ Mon, 10 Nov 2025 04:25:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762772762; x=1763377562; darn=lists.sourceforge.net;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Xfmy4AOcEcUwtIeGJKyCn0Gi0Omh2sLDXhDiyPjpnMY=;
- b=G1ni5bJyDYaVipzrldzzaWLvTbd33xPOZeGe3GJRCInvGuky82Izw7eXT9c8AQxLjZ
- RK0UNYLLy3mBxYycVKQOaHbLKDaHuhRBNvLl5sTHYAaQ9A+q4nq+Kl522LlwaE6G/Q7F
- sT1iG/7J35dLf3F+PGv19YfUPvBEnRw4qB7k+3rJzCwKBD/PIR+fRMEscsOP6RTdSFrP
- KYnFmWyMyAQHLnCLv9LSZFM7K5QWJrFHTa2XPKlT/Uf4nyJau1pLoJAmBkxob01I8Ruz
- WoBoOw5d9qIj0c7XObW2OiUni4CqA+ZRvXruQuy1BPUmoJAcWTtIXE+GT3HVucoOTr5D
- ybkA==
+ d=suse.com; s=google; t=1762777521; x=1763382321; darn=lists.sourceforge.net; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=AdI7IxF7cmaOwwPz2uPN9pz51vkfzTah0Iexytj/exg=;
+ b=WCt+cTe0EbzYVueVDgsdLgop+fFU57aFx/kGGntROe/303Bqail97PTsrX+Kv0IrFm
+ 7DnJsF0OeVmIpLCWZQuzc+ypZEWa7pncQg2dDntya4VBBcLQzlKhE4b3dEMRwhn4j1ch
+ JIcrzvqb2k1JNmEemFeBTuiZufmmn16/khBdhIhcdWHW4ct1kkrgGD/kkNxcrkLE+gCM
+ DTn2/Rt6Cr6rxpExl+spIRxC2+chAU08enwfKQL2ZMWSQJBkn5B+WbthTmL7aAYHVgZf
+ W3sE4KjHObAFYO02hFKOasQgApUUpv5qxDer5kCP9V6oPv58/p/jRKp1fT/QG0rtntog
+ o0sA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762772762; x=1763377562;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Xfmy4AOcEcUwtIeGJKyCn0Gi0Omh2sLDXhDiyPjpnMY=;
- b=oqmzWl9gpA0r1vbyVHzsGOqmSx9D0dOXRlv7pfhtdAggmeypxjqi/MP4a0WwtEBQCV
- kF2KzzghwyB++kPB3sluVF8X60B5cpzfxmMc3vf8FLGJ5DhVipNH3oC3QF2zC9APPN4b
- UO1bMbr17gFIsGlWfAb5lIVRVO+abfleMqoA2yiSg+eNClPAYj7739Xf+XfynTyJNjJv
- jTvyzdx1C1xdq7E+01c/4IK1nv/suHtjRb+Yjcnt13Gny6wwLB8ELTu2Vo2bdkfnUwsi
- PaZRPNaUgmOuu0KV+gh6h2c8QTCnVF8BW1/iJHuUEeKsgEK6uAiIWnECQkI8zpZT3uCJ
- g6NQ==
+ d=1e100.net; s=20230601; t=1762777521; x=1763382321;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AdI7IxF7cmaOwwPz2uPN9pz51vkfzTah0Iexytj/exg=;
+ b=YbzYoY9kCQ5bYjHWt10D2nfz/aw53TMa9Oxn93ifY13S3fNn7hxtZaR5QGkQp4J4ed
+ rjZT7PBEVIVC8bHbQ0lJB5s9N1TyxWmc0cqlE6fvbMjo/J1D/3UNZmYYQFvJs1ZEeLiQ
+ zxEbQLv18Y3UohkT2cB6O7UEYvBcZETB+YEQ+V5LucZugxX0PEDb11x/1xDLketKmRmR
+ pzljwjMj1mBG0ZNW0CBjfzdPKMOo2sFJjAE0d2IBAEfDIVscce6GxNwaPWNUBRTtYoYe
+ dV6CO4IJV48aicJiOedK9L3Nk38vYzIMuTTwmKDOYEkk5AljABTGMTk8yjKaOlwzdbjM
+ 1L1Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV/aG+qDuTfgoh1XrALBi9HjhwOW8gIdvcyP6k7URHMLXDlxLg1Y2vmyUluA6TlOvb70qy6GCAcFtQZgz9BAr2L@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YyYH/mTgG8bISygoz3iEW2jXtjkUlWDLvtyUVw+nfagN6r1IRtx
- aL2vBvqM7A1xO5NOQQMwQlUjgJuzRpMAsDlgwUbHXkWPAcpKE5opyCUE
-X-Gm-Gg: ASbGncvYB8PYsYYB9d8mYGSwXmEga4lWW48UT9lEgamEjY6r1zsGIZNF0vPTbUBp1sS
- GUzATi+4tY/0T7dCEXdxb4BQ+28GQsY8bP1pTRRbebpOcIDoRvHh2u0F/rMMJ1TC77gLRRx3Nnr
- C0jEBOrLYy/AkfnPHzHxDgQ2jMrxzZ1gj7AlSxXnQziJVIYZiq/y1549Xpgi/qXPGC8nZbk1I/p
- vSgHRkyvhkzkOtSgnPtT2hXvUZJsCOccc1llxihC91RJ04762R8Ny0ll+7T05AVObGMGVaMbW9P
- MUL3iLUwz31gvQDgJ1ohJD4w8ft/sH7b8laMad7yi1QFLThoXAvQRhlC3srcI5Ftpfe4+2aXyxc
- lgwwrlG3OV3L9rmrJ79vNJSc9oAl0TRoX4smuPHNRFbsO3cwO3thHlEOImCQeqEc4BlfRSAncTf
- kt1vncb1JHGMVkyTf5AmcuchE4vZraJhDvEWWA3K9KxUg6ZiMy74peueGX
-X-Google-Smtp-Source: AGHT+IETPwSFvBF+h3mhcNuk9Nh0peDzqVVkcPzV5KFTzK6WG3YF7+uplP0h/hnB4Bk+hLoz7SyK6A==
-X-Received: by 2002:a17:902:f683:b0:297:e69d:86ac with SMTP id
- d9443c01a7336-297e69d86cemr114937165ad.39.1762772762130; 
- Mon, 10 Nov 2025 03:06:02 -0800 (PST)
-Received: from [10.0.2.15] (KD106167137155.ppp-bb.dion.ne.jp.
- [106.167.137.155]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29651c6f797sm142617225ad.56.2025.11.10.03.06.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Nov 2025 03:06:01 -0800 (PST)
-Message-ID: <bf2cb310-5546-46f9-b77f-0603f0cafe04@gmail.com>
-Date: Mon, 10 Nov 2025 20:05:58 +0900
+ AJvYcCWr81JExhXg63VbSSRfYApP01dUcWZnlEcXJoJpXsFc2tvtt8SlE1cpJbxkNWSyJHrjWYPhZPriXV/shbl/JsdI@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yx6SCbxZOy+XWIbyKhPRdXjloa86c3YP5VABQs8O9gT4zzBTAlg
+ UvdmiGKEpuYQbaxCjE8Q56mFFyIF7j+quDwtAxGrvTCJqp9aHb9Vt8hZDovlFOO581Q=
+X-Gm-Gg: ASbGncv46I5abhnG2kLX0YgewckKnLoe9p0dghXJtg0bfh+MHQIJI52NiECxkq8KA+V
+ vcBmt5WHRZzuYrY/wA9Il/kCSzlQs+m6uGTUp71F1uYYy4UWKYL0z4EZJ3VVyZr/fqGcG8/v8Ih
+ vD3YHcBKw2KHrBUDjKsq1E9e2zOiIM9VnPs0D8q64bji069KGlAONSgLoW3lngHWEjRLbe/impF
+ FwpVDItMfHJYaZDqY+hUvclYanF/s4fR4SazqLTSFNLAnO6L9pE9vnb34Nl1qkmeMXMGhK870UR
+ z5mukdJQ5+XPOkR5qDANiNktPjwBHxK0y9aKUuiHh7TAQyCkArlg3n+hOf3GQ0ui1pcapHavYGy
+ Ov4ahvJpMafMbbgY96XmS/FmWRbTWsxVjdVKqwcP7zkZOfxi2tl9xWT+YN024gq8AlOHV6N9FDx
+ 37nGs=
+X-Google-Smtp-Source: AGHT+IH45M4martpu1ZV9EapqxF5z1Rmn3ab4L1EkLdaCAIViHu2tcBKPEF2r4oHemmDEAtCuQt94g==
+X-Received: by 2002:a05:6402:27cf:b0:640:825e:ae82 with SMTP id
+ 4fb4d7f45d1cf-6415e80a83bmr5792863a12.29.1762777520696; 
+ Mon, 10 Nov 2025 04:25:20 -0800 (PST)
+Received: from pathway.suse.cz ([176.114.240.130])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6411f813bedsm11054476a12.10.2025.11.10.04.25.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Nov 2025 04:25:20 -0800 (PST)
+Date: Mon, 10 Nov 2025 13:25:18 +0100
+To: John Ogness <john.ogness@linutronix.de>
+Message-ID: <aRHZrgMXUeMMY_gf@pathway.suse.cz>
+References: <20251107194720.1231457-1-pmladek@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Masaharu Noguchi <nogunix@gmail.com>, jaegeuk@kernel.org, chao@kernel.org
-References: <20251109095416.2428351-1-nogunix@gmail.com>
-Content-Language: en-US
-From: Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <20251109095416.2428351-1-nogunix@gmail.com>
+Content-Disposition: inline
+In-Reply-To: <20251107194720.1231457-1-pmladek@suse.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi, On Sun, 9 Nov 2025 18:54:16 +0900,
- Masaharu Noguchi wrote:
- > Sphinx LaTeX builder fails with the following error when it tries to >
- turn the ASCII tables in f2fs.rst into nested longtables: > > Markup [...]
+ Content preview:  On Fri 2025-11-07 20:47:18,
+ Petr Mladek wrote: > This is outcome
+ of the long discussion about the regression caused > by 67e1b0052f6bb82
+ ("printk_ringbuffer:
+ don't needlessly wrap data blocks around") [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [akiyks(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.169 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vIPiq-0002iX-2e
-Subject: Re: [f2fs-dev] [PATCH v2] Documentation: f2fs: wrap tables in
- literal code blocks
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.54 listed in wl.mailspike.net]
+X-Headers-End: 1vIQxb-0006lF-95
+Subject: Re: [f2fs-dev] [PATCH 0/2] printk_ringbuffer: Fix regression in
+ get_data() and clean up data size checks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -146,57 +140,59 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, corbet@lwn.net
+From: Petr Mladek via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Petr Mladek <pmladek@suse.com>
+Cc: brauner@kernel.org, djwong@kernel.org, syzkaller-bugs@googlegroups.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+ Joanne Koong <joannelkoong@gmail.com>,
+ "amurray @ thegoodpenguin . co . uk" <amurray@thegoodpenguin.co.uk>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
-
-On Sun,  9 Nov 2025 18:54:16 +0900, Masaharu Noguchi wrote:
-> Sphinx LaTeX builder fails with the following error when it tries to
-> turn the ASCII tables in f2fs.rst into nested longtables:
+On Fri 2025-11-07 20:47:18, Petr Mladek wrote:
+> This is outcome of the long discussion about the regression caused
+> by 67e1b0052f6bb82 ("printk_ringbuffer: don't needlessly wrap data blocks around"),
+> see https://lore.kernel.org/all/69096836.a70a0220.88fb8.0006.GAE@google.com/
 > 
->   Markup is unsupported in LaTeX:
->   filesystems/f2fs:: longtable does not support nesting a table.
+> The 1st patch fixes the regression as agreed, see
+> https://lore.kernel.org/all/87ecqb3qd0.fsf@jogness.linutronix.de/
 > 
-> Wrap the tables in literal code blocks so that Sphinx renders them as
-> verbatim text instead. This prevents the LaTeX builder from attempting
-> unsupported table nesting and fixes the pdfdocs build.
+> The 2nd patch adds a helper function to unify the checks whether
+> a more space is needed. I did my best to address all the concerns
+> about various proposed variants.
 > 
-> Akira Yokosawa pointed out that the in-development Sphinx 8.3 latex
-> builder already handles these nested tables. I still want to fix the
-> current documentation because Sphinx 8.3 is not released yet, and the
-> LaTeX build on the stable 8.2.x series (which also requires
-> "docutils<0.22" for now) remains broken without this change.
-
-I expected 8.3.0 would be released soon ...
-
-With this change applied, in PDF output, due to the limited column width
-available there, most of the nested literal tables are wrapped around
-and hard to read.
-
-But fixing latex builder's fatal error is much more important. So,
-
-Reviewed-by: Akira Yokosawa <akiyks@gmail.com>
-
+> Note that I called the new helper function "need_more_space()" in the end.
+> It avoids all the problems with "before" vs. "lt" vs "le",
+> and "_safe" vs. "_sane" vs. "_bounded".
 > 
-> Link: https://lore.kernel.org/lkml/20251011172415.114599-1-nogunix@gmail.com/
-> Changes in v2:
->  - wrap the compression level table in a literal block and add the
->    missing blank lines so docutils no longer warns about malformed
->    tables
->  - consistently use ``.. code-block:: none`` for the other ASCII tables
->    that previously triggered the LaTeX error
+> IMHO, the name "need_more_space()" fits very well in all three
+> locations, surprisingly even in data_realloc(). But it is possible
+> that you disagree. Let me know if you hate it ;-)
 > 
-> Signed-off-by: Masaharu Noguchi <nogunix@gmail.com>
-> ---
->  Documentation/filesystems/f2fs.rst | 115 +++++++++++++++--------------
->  1 file changed, 61 insertions(+), 54 deletions(-)
 > 
-[...]
+> The patchset applies on top of printk/linux.git, branch for-6.19.
+> It should apply on top of linux-next as well.
+> 
+> Petr Mladek (2):
+>   printk_ringbuffer: Fix check of valid data size when blk_lpos
+>     overflows
+>   printk_ringbuffer: Create a helper function to decide whether a more
+>     space is needed
+> 
+>  kernel/printk/printk_ringbuffer.c | 40 +++++++++++++++++++++++++------
+>  1 file changed, 33 insertions(+), 7 deletions(-)
 
+JFYI, the patchset has been comitted into printk/linux.git,
+branch for-6.19.
+
+Note that I have updated the Subject and a comment in the 2nd patch
+as suggested by John, see
+https://git.kernel.org/pub/scm/linux/kernel/git/printk/linux.git/commit/?h=for-6.19&id=394aa576c0b783ae728d87ed98fe4f1831dfd720
+
+Best Regards,
+Petr
 
 
 _______________________________________________
