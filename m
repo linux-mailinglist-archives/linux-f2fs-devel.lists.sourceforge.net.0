@@ -2,77 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D646C50003
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AE6BC4FFFF
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Nov 2025 23:50:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:Date:Message-Id:MIME-Version:Sender:Cc:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=KdQtW2HwUfDSww7L7JxVK3UU47fU7oo/iYZeiqEx5Ts=; b=VMuhy7I57HsFd3YkfYFcjT02WS
-	PkwsTsyerfxRly8gdh178eO3Wc4moHS1DNGWJEZXRDbcHo/+yOSgRWryRk1nGo9H2a9GhMbEBrHWC
-	9KooS4O8h7CHU1Cn+J0nYnHM5D4lBZvVdxIh8JMEwObXV3BWkiETN2sHh1I3mnpUsyU0=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
+	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=iU1ESy0Wi8XX8vNrKqLoMAQO+wIWrC4FidOls/qimLY=; b=iI2ky3LWdjBi+pMsoKe5342eIm
+	CmhU6NIKfITN/l4MtsjXFPxHPhRiqJWNcaV7D0bJMQF1YmPqOhDQO+4RT3i0TocJyk+rpD7//fZun
+	ZvH+vMRyTHj1dfQX0nNQxCFQIJcZEA2ny32HIA5XCCHm8se2y2cSWu3rNQnm7Q4Ootmk=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vIxCN-0008P9-Rf;
+	id 1vIxCO-0002xw-UY;
 	Tue, 11 Nov 2025 22:50:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vIxCL-0008Op-AX
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vIxCM-0002xn-Qs
  for linux-f2fs-devel@lists.sourceforge.net;
  Tue, 11 Nov 2025 22:50:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
+ Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1a/SW32EdRr0FLatR2O4RYtGbgCHE4aO8LiAk/FvMZE=; b=dIi7WVo5GKtuRO+G+uy5IiWl6p
- GwnO4KSQTO7LMQ/s17J6zfbpgDpjvwhsHl+GnkGonVoWRFzWOSZXM1BV6xP7aHIQcFv44+W1nvmNB
- /bURUaMuss1juWKOmhTCeiUXZ9PIN2cGyouamOA1QuwPgwWsEUeF4yO8jNq0hSRey/tA=;
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=rx+dvginFlj5DZSiNb71fwfTl8Swo1FB+CWoVb38L1E=; b=AA+tnFzNbzGNcmy3B5vf5bQnMR
+ YRLPdUvPFJDQAKofm5qdND57YfIHKl1jFwO4SK0/YRQkMkiaVCqm32ysy9iGWv8SV8nJ3meWpeLng
+ 4amSyJZY1gi94eduKSvpIfviJvQAr9oUx3UqyBNOmUypeBskSLo3rhnJn4arjhYdup8g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
- Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=1a/SW32EdRr0FLatR2O4RYtGbgCHE4aO8LiAk/FvMZE=; b=S
- xw6v+PW/VR13B2dM2XsgA4mDYWavx3+hvPO7kIM10fbb43jPO8tfOqnnOKsTluGIwx2NtE7zWkItU
- dSbZveCeg0SGSFdOlOHe/OPppyIcWsPwta1aA4LiW7dN7+gVMRm3FtJ804f1dhA4Dg0DR9kcJeKt/
- TDboaZHaOh/y8NrU=;
+ ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=rx+dvginFlj5DZSiNb71fwfTl8Swo1FB+CWoVb38L1E=; b=VSmBb/VEc+m5Jd7GQ7KkJ50llM
+ eSDQi6ljb25kFIx5fKH52fj5aT5ZZHoX/QdWYi1lO3bxz9L6rd3xyfwFjcv5suDpZltSnC1IeVudT
+ dpuBMdaYy1s3NbbFuJJr41zI0ofh8hrgsuN00BZAVj4nG10ZrrjFoFreIDacUbgAkS1c=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vIxCL-00045q-D3 for linux-f2fs-devel@lists.sourceforge.net;
+ id 1vIxCM-00045w-BD for linux-f2fs-devel@lists.sourceforge.net;
  Tue, 11 Nov 2025 22:50:50 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id ABFAA60055
+ by tor.source.kernel.org (Postfix) with ESMTP id BEA8460051
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 11 Nov 2025 22:50:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50F6AC19422
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 11 Nov 2025 22:50:38 +0000 (UTC)
+ Tue, 11 Nov 2025 22:50:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F5FCC4CEF5;
+ Tue, 11 Nov 2025 22:50:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762901438;
- bh=gs/Kcin0qihTJDtmFs0cxgUJuS94JCeV/GIPuqRHOek=;
- h=Subject:From:Date:To:From;
- b=d2beQkvRiced2vXb5cN20nspl/L0Qy60VqoTd6Hv35ndrCV9oNBo8OM2JhG+YBXH/
- 1fGyZwLa2K4ZHpulPcfBxZQCOm29Hg5YYd/1UWNMm4A4yUPFHrnlR+DKgqyxfVxG5W
- FZG3HYveX18ckwYjU6ZqymIBEQO1Jme+7HXxUYXsQKFGxx1sCVlpWeZVRFisPTL+Ou
- w5Jrnd8DEq0fr0pmB+5HY7Qp9RbMiQb6CX5malbAhKb5ygfh+yzmNEa5zf8yO2c173
- amSkDwhInScMFES23eUJoxia0+Zbj8VZ+Is6eOHWl3SRMXsBwxaq7snfxJwZfXblH8
- IANou6KRJPKUA==
+ s=k20201202; t=1762901439;
+ bh=1ov07mNSftJLyOcTGRzd2+/xjBpaoTdrC/6uDOIJ6C4=;
+ h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+ b=nTqCUJEBnB/kJM6DIxpCXcnLEzfIBFKBjE35fey9snTIp0XAxARzxjN6kmZXkz0wD
+ FhGiMpPd/McVoERSpNXymTEoLBMYZ+dQpIdZGldTSGMtP5Ix1AF2zYX7ySZ1SM8ZMd
+ y30iWH1SuQ8aK8uASueWJ8qPsT4PYyONdHXdiwJzPlM0QvHY7dDbwfIQlq5XvdCoUe
+ 5obg/qkvgsqf4V8NGnyBQVWM1A9h2DYGgRcFr5T/8ZQs3mfz15ske7T7DqvjfHS50d
+ ykSQgjzed7lHoNVsxBLiAO6QWXGdgK5wVMyzIqbRgtpfW879RgvbiaWySpnleuIc3B
+ MmFYWhtuh3oWA==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 74D04380DBCD for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 11 Nov 2025 22:50:09 +0000 (UTC)
+ ADDF3380DBCD; Tue, 11 Nov 2025 22:50:10 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <176290140793.3596344.9537141552084831690.git-patchwork-summary@kernel.org>
-Date: Tue, 11 Nov 2025 22:50:07 +0000
-To: linux-f2fs-devel@lists.sourceforge.net
+Message-Id: <176290140950.3596344.12262707920968053977.git-patchwork-notify@kernel.org>
+Date: Tue, 11 Nov 2025 22:50:09 +0000
+References: <20251029063105.989253-1-chao@kernel.org>
+In-Reply-To: <20251029063105.989253-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -80,11 +79,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: The following patches were marked "accepted", because
- they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev] f2fs: fix
- to access i_size w/ i_size_read() Submitter: Chao Yu <chao@kernel.org>
- Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
- https://patchwork.kernel.org/project/f2fs/list [...] 
+ Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 29 Oct 2025 14:31:04 +0800 you
+ wrote: > It recommends to use i_size_{read,
+ write}() to access and update i_size, 
+ > otherwise, we may get wrong tearing value due to high 32-bits value > and
+ low [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -96,8 +96,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vIxCL-00045q-D3
-Subject: [f2fs-dev] Patchwork summary for: f2fs
+X-Headers-End: 1vIxCM-00045w-BD
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to access i_size w/ i_size_read()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,125 +112,32 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-The following patches were marked "accepted", because they were applied to
-jaegeuk/f2fs.git (dev):
+This patch was applied to jaegeuk/f2fs.git (dev)
+by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-Patch: [f2fs-dev] f2fs: fix to access i_size w/ i_size_read()
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1017047
-  Lore link: https://lore.kernel.org/r/20251029063105.989253-1-chao@kernel.org
+On Wed, 29 Oct 2025 14:31:04 +0800 you wrote:
+> It recommends to use i_size_{read,write}() to access and update i_size,
+> otherwise, we may get wrong tearing value due to high 32-bits value
+> and low 32-bits value of i_size field are not updated atomically in
+> 32-bits archicture machine.
+> 
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> 
+> [...]
 
-Series: [f2fs-dev,1/4] f2fs: clean up w/ bio_add_folio_nofail()
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1011103
-  Lore link: https://lore.kernel.org/r/20251014062704.1734984-1-chao@kernel.org
-    Patches: [f2fs-dev,1/4] f2fs: clean up w/ bio_add_folio_nofail()
-             [f2fs-dev,2/4] f2fs: convert add_ipu_page() to use folio
-             [f2fs-dev,3/4] f2fs: use f2fs_filemap_get_folio() instead of f2fs_pagecache_get_page()
+Here is the summary with links:
+  - [f2fs-dev] f2fs: fix to access i_size w/ i_size_read()
+    https://git.kernel.org/jaegeuk/f2fs/c/1797093bfc96
 
-Patch: [f2fs-dev] f2fs: ensure minimum trim granularity accounts for all devices
-  Submitter: Yongpeng Yang <yangyongpeng.storage@gmail.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1015521
-  Lore link: https://lore.kernel.org/r/20251024143746.187140-1-yangyongpeng.storage@gmail.com
-
-Patch: [f2fs-dev,v2] f2fs: use global inline_xattr_slab instead of per-sb slab cache
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1013825
-  Lore link: https://lore.kernel.org/r/20251021034856.739272-1-chao@kernel.org
-
-Series: [f2fs-dev,1/2] f2fs: fix to propagate error from f2fs_enable_checkpoint()
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1016060
-  Lore link: https://lore.kernel.org/r/20251027063534.103963-1-chao@kernel.org
-    Patches: [f2fs-dev,1/2] f2fs: fix to propagate error from f2fs_enable_checkpoint()
-             [f2fs-dev,2/2] f2fs: block cache/dio write during f2fs_enable_checkpoint()
-
-Series: [f2fs-dev,1/2] f2fs: fix to do sanity check on node folio during its writeback
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1010312
-  Lore link: https://lore.kernel.org/r/20251011123016.715964-1-chao@kernel.org
-    Patches: [f2fs-dev,1/2] f2fs: fix to do sanity check on node folio during its writeback
-             [f2fs-dev,2/2] f2fs: fix to do sanity check on node footer in {read, write}_end_io
-
-Patch: [f2fs-dev,v2] f2fs: fix to avoid updating zero-sized extent in extent cache
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1013360
-  Lore link: https://lore.kernel.org/r/20251020024213.332873-1-chao@kernel.org
-
-Patch: [f2fs-dev,v1] f2fs: fix uninitialized one_time_gc in victim_sel_policy
-  Submitter: Xiaole He <hexiaole1994@126.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1017027
-  Lore link: https://lore.kernel.org/r/20251029051807.3804-1-hexiaole1994@126.com
-
-Patch: [f2fs-dev,v2] f2fs: invalidate dentry cache on failed whiteout creation
-  Submitter: Deepanshu Kartikey <kartikey406@gmail.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1016265
-  Lore link: https://lore.kernel.org/r/20251027130635.13739-1-kartikey406@gmail.com
-
-Series: [f2fs-dev,1/2] f2fs: fix return value of f2fs_recover_fsync_data()
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1019730
-  Lore link: https://lore.kernel.org/r/20251105065023.3656975-1-chao@kernel.org
-    Patches: [f2fs-dev,1/2] f2fs: fix return value of f2fs_recover_fsync_data()
-             [f2fs-dev,2/2] f2fs: fix to detect recoverable inode during dryrun of find_fsync_dnodes()
-
-Series: f2fs: Add sanity checks before unlinking and loading inodes
-  Submitter: Nikola Z. Ivanov <zlatistiv@gmail.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1019834
-  Lore link: https://lore.kernel.org/r/cover.1762339963.git.zlatistiv@gmail.com
-    Patches: [f2fs-dev,v4,1/2] f2fs: Rename f2fs_unlink exit label
-             [f2fs-dev,v4,2/2] f2fs: Add sanity checks before unlinking and loading inodes
-
-Patch: [f2fs-dev] f2fs: fix to avoid potential deadlock
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1011256
-  Lore link: https://lore.kernel.org/r/20251014114735.1840965-1-chao@kernel.org
-
-Patch: [f2fs-dev,v2] f2fs: fix to avoid updating compression context during writeback
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1014288
-  Lore link: https://lore.kernel.org/r/20251022030636.1194244-1-chao@kernel.org
-
-Patch: [f2fs-dev,v2] f2fs: fix age extent cache insertion skip on counter overflow
-  Submitter: Xiaole He <hexiaole1994@126.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1016126
-  Lore link: https://lore.kernel.org/r/20251027092341.5011-1-hexiaole1994@126.com
-
-Patch: [f2fs-dev,v2] f2fs: change the unlock parameter of f2fs_put_page to bool
-  Submitter: Yongpeng Yang <yangyongpeng.storage@gmail.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1016260
-  Lore link: https://lore.kernel.org/r/20251027125543.633506-1-yangyongpeng.storage@gmail.com
-
-Patch: [f2fs-dev,v2] f2fs: Use mapping->gfp_mask to get file cache for writing
-  Submitter: Jiucheng Xu <jiucheng.xu@amlogic.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1010058
-  Lore link: https://lore.kernel.org/r/20251010-origin-dev-v2-1-952a3c98cd9c@amlogic.com
-
-
-Total patches: 22
-
+You are awesome, thank you!
 -- 
 Deet-doot-dot, I am a bot.
 https://korg.docs.kernel.org/patchwork/pwbot.html
