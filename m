@@ -2,75 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2AF69C5000E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Nov 2025 23:51:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C5B9C50008
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Nov 2025 23:51:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=EYwBYJ4ftRnG5o9ymnOKLLNKPzU12R9Ei/p3qZVN1ws=; b=MZWbIVjLuiJgUN83LacpIdGOMc
-	6eUfneg5w4wtYkmziRrqjRu7Qn7WnNvbE0QCn1MquLqv3TfpMMI2sWZiEsQVtSqWVrWgFGfCTXBgX
-	LKj69ZbLVQB5BqS6twrHa9qEfR59osOqd9UTz18ZQKHA3zeqbZWIdaKo50EStBEs/l9g=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=/YZbt54dP7+n38sqdPpGWHobjPBHSK65GcL7PP6N2Ok=; b=b7mcCEdnzbboypKp5DF+Im2XMu
+	GGY0CQTrGW+XoAOV50xL9z1a7eCABkDowlNzq4wD/c4686tYrtphYvtsFqYcKoJ+dkCNT9i4CvxZQ
+	9PXzHarhfgo0OO6piMSJf25Z7GELK5ZHL1PZqcYAaRVgsAh+4yurgLwxr3QpiLW3BElw=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vIxCX-0004c2-IL;
-	Tue, 11 Nov 2025 22:51:01 +0000
+	id 1vIxCW-0002Vr-KQ;
+	Tue, 11 Nov 2025 22:51:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vIxCW-0004bj-GD
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vIxCS-0002VT-V6
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Nov 2025 22:51:00 +0000
+ Tue, 11 Nov 2025 22:50:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bqQPl0oM3ccsPJ3OWoo6oHQtcvOoGs4L3YwPkcFGxKo=; b=DCKjenbvxdBGq2zK9jOf4+ZXHE
- Yofir5Em5Fv/V8A5D5i4uPLRp0TZzTjI8Fvwzaj1H9hlAZWXCZT/UavsdS6TSQnJn0uYsnkL8Gf8u
- 1DOgs0RIcVsX/GwsLkrodYkv5Hde8XnjuxGw/8FRMw03foCcPILtyT57PAyne9ctkZ/s=;
+ bh=AULfrnAyOFjhQbbKqc0K7v+YoEuIvgQd1DEDVZGGJUg=; b=A2yHQH72LjnqVQfz62O6oyDp24
+ NqNJeEcTXtS2CDcPUT6hUFGG8IgjI9ZYmUFIWmyXxlN1uBV17UaeyIdtX7hpHfSlqO8rQ61pIQmxf
+ g0NywG8mD2zkHbFDZSuUVnWXxyKZiMXlWbd5ngVjhFOsYUcEilBbTVSdj2CgENztnQos=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bqQPl0oM3ccsPJ3OWoo6oHQtcvOoGs4L3YwPkcFGxKo=; b=QIsgMTsq35HIhBwTcdzlPBMGGj
- eq5TduSfflEveKh00LgQJYqzEEPXRpKBW+JMQphleknF+9DWZPVZzjn77tQlY4Rxo0ABLXkD7Mvlb
- ihnmILQXK7gz1S9r/3sMiTfwpIDbrveApq0K0WGwVfXkvIP1C+Gsb+bOh+jYxaEyOU30=;
+ bh=AULfrnAyOFjhQbbKqc0K7v+YoEuIvgQd1DEDVZGGJUg=; b=OaGs6IGgXmAyJkUKpgXbEJcsac
+ BCVmqlC3fGeYvKwkLh+cGTGvOb3cJwZ95Jne6eRiAQK5fTaih7bNUzKuo+m5NbYCYFH1teZSmCa3/
+ gQo10M9B3I2cwYLASZbyaUEzWB+1I+374uKCrWB7vUu4bqXwthC+W5/IP023qwnCFo+g=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vIxCV-000471-Tu for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Nov 2025 22:51:00 +0000
+ id 1vIxCS-00046V-1U for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Nov 2025 22:50:56 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 506A560209;
- Tue, 11 Nov 2025 22:50:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF25AC19423;
- Tue, 11 Nov 2025 22:50:48 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 750A16020B;
+ Tue, 11 Nov 2025 22:50:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2495DC113D0;
+ Tue, 11 Nov 2025 22:50:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762901449;
- bh=MapFwYBdepkknCvD5b+KZQlwR4RcWHE5HPDQANoxlM0=;
+ s=k20201202; t=1762901450;
+ bh=vn2gL6MOI11wVy8RMceFUcCj5h0SeTBKfJ0/P0DfPKg=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=Y4Oo8UR4frGw7wi0FYMB2URgXmhKhMYNj84PU8hpt/gqeywOG6OQGBCSFeKcNXstw
- vB06erkPXVLw/ALd1llveQEneUAGk2xxd11axDtpHq9GqaH7tq2p8zkV8MJIWc4wBU
- jL3xi5Qw0nPj2dPKnfWm4+Iv2Q2JMMFflDwKNeuKV8k4rCvpvz/aoAmWSgklNPTSSq
- 4cAkfEUGRyqiP0wQZ9uSTh8CYCPvMRyC2CbKcIOvwSBxM36vovsCy9/PvXhahC5xsh
- I8Iji9hJUf2AdeP53YryqJBwCVmLT6ClHNNM1F2p0h5mtqXCUSe0c8vYXvrEm9huWr
- n566hi/Bp1KrQ==
+ b=cosvdhqLr34OeP8XAUE3+1jUYM8RTNQxEYagv9YUqbW70wGIiaLcN8vvqahXsyAhY
+ 10IWJsh3jKoOvclBo3p7a4U7hW9+HIvNbjCtUN9HNzMqJ8BbMU3VutWn6ChWY/tAzO
+ Q8u48QbL8j/iyzPAAChTxtLLL/FzLEOCsKsRzfRkqAhyuiT5/aQE7V5kTgUwjLD2q1
+ L5I8Rka3tu1fg2AT6DbXD6tFnzSa8k9tthj4Cm4UVlCO6LA9k2B3TOkqpp8NBIi3OP
+ u5tjbskCR2/TU/EdiYmoTZvXmgrA/FJ+PR2Q93Ui+xFB4stBoGaZofyV1l3pNlwSr/
+ efBLis0aQfk3A==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 33BFB380DBCD; Tue, 11 Nov 2025 22:50:20 +0000 (UTC)
+ 70D3F380DBCD; Tue, 11 Nov 2025 22:50:21 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <176290141874.3596344.13380399502745715174.git-patchwork-notify@kernel.org>
-Date: Tue, 11 Nov 2025 22:50:18 +0000
-References: <20251029051807.3804-1-hexiaole1994@126.com>
-In-Reply-To: <20251029051807.3804-1-hexiaole1994@126.com>
-To: Xiaole He <hexiaole1994@126.com>
+Message-Id: <176290142024.3596344.13243926252945264194.git-patchwork-notify@kernel.org>
+Date: Tue, 11 Nov 2025 22:50:20 +0000
+References: <20251027130635.13739-1-kartikey406@gmail.com>
+In-Reply-To: <20251027130635.13739-1-kartikey406@gmail.com>
+To: Deepanshu Kartikey <kartikey406@gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -79,10 +79,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 29 Oct 2025 13:18:07 +0800 you
- wrote: > The one_time_gc field in struct victim_sel_policy is conditionally
- > initialized but unconditionally read, leading to undefined behavior > that
- triggers [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 27 Oct 2025 18:36:34 +0530 you
+ wrote: > F2FS can mount filesystems with corrupted directory depth values
+ that > get runtime-clamped to MAX_DIR_HASH_DEPTH. When RENAME_WHITEOUT >
+ operations are [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vIxCV-000471-Tu
-Subject: Re: [f2fs-dev] [PATCH v1] f2fs: fix uninitialized one_time_gc in
- victim_sel_policy
+X-Headers-End: 1vIxCS-00046V-1U
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: invalidate dentry cache on failed
+ whiteout creation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,8 +111,9 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: linux-kernel@vger.kernel.org, jaegeuk@kernel.org, daehojeong@google.com,
- stable@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: syzbot+632cf32276a9a564188d@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -122,19 +123,24 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Wed, 29 Oct 2025 13:18:07 +0800 you wrote:
-> The one_time_gc field in struct victim_sel_policy is conditionally
-> initialized but unconditionally read, leading to undefined behavior
-> that triggers UBSAN warnings.
+On Mon, 27 Oct 2025 18:36:34 +0530 you wrote:
+> F2FS can mount filesystems with corrupted directory depth values that
+> get runtime-clamped to MAX_DIR_HASH_DEPTH. When RENAME_WHITEOUT
+> operations are performed on such directories, f2fs_rename performs
+> directory modifications (updating target entry and deleting source
+> entry) before attempting to add the whiteout entry via f2fs_add_link.
 > 
-> In f2fs_get_victim() at fs/f2fs/gc.c:774, the victim_sel_policy
-> structure is declared without initialization:
+> If f2fs_add_link fails due to the corrupted directory structure, the
+> function returns an error to VFS, but the partial directory
+> modifications have already been committed to disk. VFS assumes the
+> entire rename operation failed and does not update the dentry cache,
+> leaving stale mappings.
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v1] f2fs: fix uninitialized one_time_gc in victim_sel_policy
-    https://git.kernel.org/jaegeuk/f2fs/c/f10e76889502
+  - [f2fs-dev,v2] f2fs: invalidate dentry cache on failed whiteout creation
+    https://git.kernel.org/jaegeuk/f2fs/c/5e8c6aae36ad
 
 You are awesome, thank you!
 -- 
