@@ -2,75 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68AEBC50026
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Nov 2025 23:51:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17988C50029
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Nov 2025 23:51:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=V5PQYG59/+zsvl/e7Ipoa6Z1nYg8dORY0P/Xrxjl8lk=; b=hLNr4XbdQo28PO1wNMBiGOvcNM
-	6iZdyf6NPPeXUgQyOw/HYp7WIXeIdl+vNOEglnNqph/jwnc2L93BJmEBkq752ANQp6P9oIDr7mfQW
-	ea53mIOMLgT+Cy+fA6BDAVcLDlKGZB1xVpbPhB8N8ojFrwQnLl+f1MwobUV4DiLLfUS4=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=n4rGWRazCFrdKHyAFndh7LoMEupgaYsbcBpBXOef5HI=; b=UOsBDzJAWvOGKhYFo1NSAcRmyF
+	NkVjmsI8iagCneGGkeqbxc5Jv3UkdvKbuxEA1z7lP8acTWHxMaOtcNQqkdNxrKdI5NYiSdkeZ95PN
+	SXAx1bgupQuH/+JTYrk/RfbvpKhLCPFweNqhWmJ1U516jvsFNI/A1mNY8YPECGCdK5KA=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vIxCc-000306-3r;
-	Tue, 11 Nov 2025 22:51:06 +0000
+	id 1vIxCd-0002XW-JO;
+	Tue, 11 Nov 2025 22:51:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vIxCa-0002zr-MN
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vIxCb-0002XF-GG
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Nov 2025 22:51:04 +0000
+ Tue, 11 Nov 2025 22:51:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lpk33tyqt2+jpTFRHIMfVqSAVRgluSrRuXSbdbgbxgM=; b=ZV4omtRKw017W3+yV1O/nntUBx
- PZlkRHYJEugrgxzAL7IySgP/S6YSb9mZSrWnA1qf991EaFQw9VSGAM/dVGr5o19jd5QPeEDQw4qcX
- pYQnGTnGN030n7nANNNtPNMuO/kq9lva5dLiLqsn7vQaD3Ws3IQjT2i7yQeBxkjVbdW0=;
+ bh=kzFEqmHHao4yag6MBZ1jPsxBj0gNoMxcBQvzsDDOVvA=; b=SsjnQ5eXbKNTp4ZKaEuWVmCl5n
+ H2CH2YX1d2hEoPSZOzx1uj7U8NRNbKMt+lxqjIYuZ6aQbsTPvK1WVjMqPRUaG2VbbxAWzvhdhl/JP
+ O/G65wbYblUHxsHyeuHqOpA5YVnzIWbb2N/OpQO40AHSOfNZbbXEJaKR32cEf0OnYzyM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lpk33tyqt2+jpTFRHIMfVqSAVRgluSrRuXSbdbgbxgM=; b=RJ+bTyalg6j5nlC5Y2abmSmAHK
- 6g2KotN0EzqPmZs+jz5/7EY82eJB9Occ5rW+Z4/3gJ1K0AKbIisfhsLiukbt8lfY1oRyLNq5dtcXY
- tyFWFhFJXe4XYwn6yrbaTzTeHTfPQUUI38EvEe7unvg2ggVSLy8s25b+HjOeByErOv9w=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=kzFEqmHHao4yag6MBZ1jPsxBj0gNoMxcBQvzsDDOVvA=; b=DvFZPG/Xb9eyiudMT1o6HivJSB
+ 5M7RCKkgYxYQy7hLihGzU8ec8PHSrXy05yzGbvH/jYbw03aJbgHLQlhE3rWh0UMPzOjPupZ/vWTlR
+ KF04WlH1pDqJ4AKZAhta3f9GH2DdlJ2BTdgql6iEsn4p5dYXpRG+2+LrPK6ifIOF0US0=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vIxCZ-00047l-W5 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Nov 2025 22:51:04 +0000
+ id 1vIxCb-00047q-1A for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Nov 2025 22:51:05 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 6C3FB600AD;
- Tue, 11 Nov 2025 22:50:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BB9FC113D0;
- Tue, 11 Nov 2025 22:50:53 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id B6962439E4;
+ Tue, 11 Nov 2025 22:50:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9ADB2C116D0;
+ Tue, 11 Nov 2025 22:50:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762901453;
- bh=pnYPgV1/kV0KNl2wqSooNI4BldWEB/mQ+fVGd1Z+pwc=;
+ s=k20201202; t=1762901454;
+ bh=+ki5olCxPHtVL97ACk4grcpZP3cvZifs8mdZYMe7rRA=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=VYscEzPvG9y+04A1wO6HrUv/TkufhJXBvfcN5mnQ0t0xkf08ulS9RRuNXTh+6OMZj
- LNC+uGlf7r+cKwcTK6orQlO1UN0/vdjRnaegQPuCC6vncmUFU8iKpTickky4QAlZMA
- BP/TkJy0Y8XZh8wiGjlW1zM4febmOCEKSB4V8BIDN8HqaV/lTd1k+kWpmaS9pxjOsQ
- 45BdVeo78b5GtS6y9LfmZL2U4lUzGYDGY1UbMwiXlDohhP3Je24WpsrJpoyUcXDnLI
- JRkc1BjFvEdkQrK86NL+f/IqfoKujp27b1nCW1BMU+hVCq0YVMZtGLK5OyCBFXMB9D
- m6NeT8Tbgl5yA==
+ b=dElx1JKswnyuBs+3p+5BAWqARZTtjn9r/ua21RH5hZdVx8VHWITe/YMiEbft5kPzw
+ 98Uf7tjAMqyyp99Ox3hP6uDojzFVVFBmZx8jqNXE8/HQmuNgMNBafy3S+Vmg3zMd+i
+ d6WIMixYDHIQpXlfiTO7hkEIOal9MQtmDuWj6RUSijrFlOIyrzW1zw8DSm8q7yJeyJ
+ 7ifWIQbmyYoKDSjDMdZaXf1K+vLVrvGxPYpxNfmrHV5mRPsqFJoIcZTEqEE861wg5X
+ uUNVE3Wsi41SmugNVTXpZGSTupLf+YPDKMSRemHePySFJfzJ9cC0/9YZV7B+2F+uxu
+ egVYY3c/z/eew==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 70EE4380DBCD; Tue, 11 Nov 2025 22:50:24 +0000 (UTC)
+ EAFC3380DBCD; Tue, 11 Nov 2025 22:50:25 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <176290142299.3596344.2753827119628915512.git-patchwork-notify@kernel.org>
-Date: Tue, 11 Nov 2025 22:50:22 +0000
-References: <cover.1762339963.git.zlatistiv@gmail.com>
-In-Reply-To: <cover.1762339963.git.zlatistiv@gmail.com>
-To: Nikola Z. Ivanov <zlatistiv@gmail.com>
+Message-Id: <176290142449.3596344.13635086090138758618.git-patchwork-notify@kernel.org>
+Date: Tue, 11 Nov 2025 22:50:24 +0000
+References: <20251014114735.1840965-1-chao@kernel.org>
+In-Reply-To: <20251014114735.1840965-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -78,11 +78,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 5 Nov 2025 13:09:41 +0200 you wrote:
- > This series is provoked by syzbot warnings caused by corrupted directory
- > inode with i_nlink == 1 that passes the initial sanity check which will
- > only [...] 
+ Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 14 Oct 2025 19:47:35 +0800 you
+ wrote: > As Jiaming Zhang and syzbot reported, there is potential deadlock
+ in > f2fs as below: > > Chain exists of: > &sbi->cp_rwsem --> fs_reclaim
+ --> sb_intern [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +94,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vIxCZ-00047l-W5
-Subject: Re: [f2fs-dev] [PATCH v4 0/2] f2fs: Add sanity checks before
- unlinking and loading inodes
+X-Headers-End: 1vIxCb-00047q-1A
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid potential deadlock
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,35 +110,32 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: david.hunter.linux@gmail.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, khalid@kernel.org,
- skhan@linuxfoundation.org, jaegeuk@kernel.org,
- linux-kernel-mentees@lists.linuxfoundation.org, stable@kernel.org
+Cc: syzbot+14b90e1156b9f6fc1266@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ r772577952@gmail.com, jaegeuk@kernel.org, stable@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This series was applied to jaegeuk/f2fs.git (dev)
+This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Wed,  5 Nov 2025 13:09:41 +0200 you wrote:
-> This series is provoked by syzbot warnings caused by corrupted directory
-> inode with i_nlink == 1 that passes the initial sanity check which will
-> only mark the filesystem as corrupted in case i_nlink == 0.
+On Tue, 14 Oct 2025 19:47:35 +0800 you wrote:
+> As Jiaming Zhang and syzbot reported, there is potential deadlock in
+> f2fs as below:
 > 
-> Tests:
-> - fio/fsmark parallel create/unlink on VM with f2fs root filesystem.
-> - syzbot
+> Chain exists of:
+>   &sbi->cp_rwsem --> fs_reclaim --> sb_internal#2
+> 
+>  Possible unsafe locking scenario:
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v4,1/2] f2fs: Rename f2fs_unlink exit label
-    https://git.kernel.org/jaegeuk/f2fs/c/7b4827ce2d2a
-  - [f2fs-dev,v4,2/2] f2fs: Add sanity checks before unlinking and loading inodes
-    https://git.kernel.org/jaegeuk/f2fs/c/d43f8de77d6c
+  - [f2fs-dev] f2fs: fix to avoid potential deadlock
+    https://git.kernel.org/jaegeuk/f2fs/c/7976ef973cab
 
 You are awesome, thank you!
 -- 
