@@ -2,7 +2,7 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BC1CC4FFFC
+	by mail.lfdr.de (Postfix) with ESMTPS id 61238C50000
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Nov 2025 23:50:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -10,68 +10,67 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=0juxGkXU9bRn+SXA2SJPbCxEAHdjfF7VRKeEZgZKDz0=; b=L2rmQ3dVGjciWJRpJ6t3tsQP+h
-	wZDSget9+tg1Ch9zdamuJWqoGAyhhvF7Q1MVAGfzx3oFNY2zoE7h9AU39+pFhFyGD1FeEwJB9WAS6
-	LbHbXUpLCMV2GbI9Z4uI9DZ482z2021pOlkO8B674p+YzMZ+Sz1zNEeWie91W0mFTPvY=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=atDFGb3Ex+s/PP+W13mVA4OwWniqx3xdfLZUo8A71Is=; b=nCLHwUSRR9BZdzzGdi35TZXyS1
+	F3Hl+qUK94ylwN20ixScZZhRiTi6Y9gQu7VvHwQAfpJBSs/ijpXN3VBgoYoy8FFD51tgBeMcr+aLl
+	bg5F+zh56gA7ktySu2m8OHA3RJP7CbOi/ofBAuwMC5zyXYGz72k8ryv14z7vkUk7sNy0=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vIxCO-0002V7-Pk;
-	Tue, 11 Nov 2025 22:50:52 +0000
+	id 1vIxCT-0004b8-Dx;
+	Tue, 11 Nov 2025 22:50:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vIxCN-0002Uy-IX
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vIxCP-0004au-5o
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Nov 2025 22:50:51 +0000
+ Tue, 11 Nov 2025 22:50:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=n1aJHFunhyeu1HD7hYAHURyeWpnbmsmZ+WmOz+w55HE=; b=LT/ia7RRgxfvlGk5dwcFQJaW3q
- JwkPgYO65I933cX8YSHbrR+CdqS9kG9253cZZ42tO0zBKTrHfoCtSHXLmH6h4igkWw7a9DtBipdiX
- I+Baeqv7yUgm22ypkE661Gd2VdL2ztDtAnP4+zuUuYA381h0BEwV9Z1Exe0QZ2+ZUvYY=;
+ bh=jkUisRGrOYRfKmnyO3uhG28xxtG08HmE3ivrN+hfvNc=; b=fNEP/Ywvnz835Bh7dLTsLUSgHu
+ MRPlumNpV7fHCMhS5CZC7mpSIS+yYuFN4fvkEvZmAnKiDgKaVYU3UzdEb48Qc//8xxCE7/9V0uIiN
+ L8wGar2IxFnLHmyLfNVH7l7NZHgsgCaOxVpxYCWHPKFP4Ycd8tXAfe0NzXJLfYLdBpU8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=n1aJHFunhyeu1HD7hYAHURyeWpnbmsmZ+WmOz+w55HE=; b=gJb1Sc3+PYLv/yJTc6TWV4KYJF
- mmIHShsgr3qAudALi56biUvrZ9MLUmntPBcZt4KfC4o0q2LQyNr1F6CumFnk6XOwkjS72rbyO4qF+
- +F+q+HoPAB5b2gMNcjV9gITPOrBIf+52drUeuW6KStYNNAt5panG/MNJuS6cQbV2Hlrw=;
+ bh=jkUisRGrOYRfKmnyO3uhG28xxtG08HmE3ivrN+hfvNc=; b=JcnPP1QooBeN0/G90p2es1pe8v
+ rjuji2bIt8MvcgTZ74WKT/g/pkWVMUiArqnwBKssv+aqVH1zK1w5oVL8cNYX/iuUpKHbxTd/aBuyP
+ Da4Rz77Odkcn8EodULEzk+Nn8jV0xHsYUtLoJF++C0OoDEn53Q/sG/rsbrhpaSw746BQ=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vIxCN-000462-2I for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Nov 2025 22:50:51 +0000
+ id 1vIxCO-00046A-Ns for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Nov 2025 22:50:53 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id BA62340472
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 11 Nov 2025 22:50:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9CA77C19425;
- Tue, 11 Nov 2025 22:50:40 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 7479243734;
+ Tue, 11 Nov 2025 22:50:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5752BC116B1;
+ Tue, 11 Nov 2025 22:50:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762901440;
- bh=aRhgIOpemWJXGYEkieS9N5M2153rOKFOn0HPq3DvZYg=;
+ s=k20201202; t=1762901442;
+ bh=k7EjqMDIXZOmAEX20bRumuCAP0u89RkyCZoaXm+jFug=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=Gu5GZk2sdFoujBrlMh92KOXCBbvEy5Tf3IWjECLW2jTblHitx357XoGzIIdNWW3Fo
- Gw/C4USFhzkubdyK2toU/DWXq/5VTRPiXSnb9ZNDAV/fh5XMXLW4UvG4eYo/2qbxj8
- Kg/eJCw7aZAI6+zFQveH3piuyntqnBflEUe2vbmtLH4wWV28BWGKLudaU79zLBzjbg
- eiioUOZgeoZXB3X/PNkuZTHRa2Nf/UsGT5AZJwN9VNSD7cfp2zPm09nGwGgWoJJP7s
- veCfB1Tze+bhcKI96SI0zht8R1Lc0+ZdtcCF8MwzyJn++ToH5nfni6ffugsKAXzWgV
- uWzhe1Eliwkwg==
+ b=Eau7k2KHVnHTTROVeAzCv4PVFCDlX/6akmpwuIvNALZI81Isw6M/afwH1L2m4PdNp
+ T864nvv49XxgjAoQDks6DQ3le387FFxbEWDl99F1LNWLQreBU6LvUPlmT/53a/ab2N
+ GboVE+uuxH+Bz1EXP9RbGkHvRh2HikQRIS8lb5HKpUWLkVJ/ySU4F+YyFszSb6s38L
+ tY1RAjv1k1thd/hZvJZvkbZ6JHeeW44IgvxGE4E58sBaZQhQ0n+MQCby6zrIhFw20/
+ x9a2/AV6nBH84gNqcbTHA5rUa0ivBjvVe4ObVnKxmO0D3FIxocVdDgC/mYL1s1VbLe
+ tv7pWOU0b23Kw==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- EAC8F380DBCD; Tue, 11 Nov 2025 22:50:11 +0000 (UTC)
+ ADCEB380DBCD; Tue, 11 Nov 2025 22:50:13 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <176290141074.3596344.11323424525560613552.git-patchwork-notify@kernel.org>
-Date: Tue, 11 Nov 2025 22:50:10 +0000
-References: <20251014062704.1734984-1-chao@kernel.org>
-In-Reply-To: <20251014062704.1734984-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+Message-Id: <176290141215.3596344.6840868487944552761.git-patchwork-notify@kernel.org>
+Date: Tue, 11 Nov 2025 22:50:12 +0000
+References: <20251024143746.187140-1-yangyongpeng.storage@gmail.com>
+In-Reply-To: <20251024143746.187140-1-yangyongpeng.storage@gmail.com>
+To: Yongpeng Yang <yangyongpeng.storage@gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -79,12 +78,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 14 Oct 2025 14:27:01 +0800 you
- wrote: > In add_bio_entry(), adding a page to newly allocated bio should never
- fail,
- > let's use bio_add_folio_nofail() instead of bio_add_page() & unnecessary
- > [...] Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 24 Oct 2025 22:37:46 +0800 you
+ wrote: > From: Yongpeng Yang <yangyongpeng@xiaomi.com> > > When F2FS uses
+ multiple block devices, each device may have a > different discard granularity.
+ The min [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -95,8 +94,9 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vIxCN-000462-2I
-Subject: Re: [f2fs-dev] [PATCH 1/4] f2fs: clean up w/ bio_add_folio_nofail()
+X-Headers-End: 1vIxCO-00046A-Ns
+Subject: Re: [f2fs-dev] [PATCH] f2fs: ensure minimum trim granularity
+ accounts for all devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,7 +111,7 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+Cc: jaegeuk@kernel.org, yangyongpeng@xiaomi.com,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -119,28 +119,23 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This series was applied to jaegeuk/f2fs.git (dev)
+This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Tue, 14 Oct 2025 14:27:01 +0800 you wrote:
-> In add_bio_entry(), adding a page to newly allocated bio should never fail,
-> let's use bio_add_folio_nofail() instead of bio_add_page() & unnecessary
-> error handling for cleanup.
+On Fri, 24 Oct 2025 22:37:46 +0800 you wrote:
+> From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 > 
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  fs/f2fs/data.c | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
+> When F2FS uses multiple block devices, each device may have a
+> different discard granularity. The minimum trim granularity must be
+> at least the maximum discard granularity of all devices, excluding
+> zoned devices. Use max_t instead of the max() macro to compute the
+> maximum value.
+> 
+> [...]
 
 Here is the summary with links:
-  - [f2fs-dev,1/4] f2fs: clean up w/ bio_add_folio_nofail()
-    https://git.kernel.org/jaegeuk/f2fs/c/6862f6948aa3
-  - [f2fs-dev,2/4] f2fs: convert add_ipu_page() to use folio
-    https://git.kernel.org/jaegeuk/f2fs/c/22de407ee7fd
-  - [f2fs-dev,3/4] f2fs: use f2fs_filemap_get_folio() instead of f2fs_pagecache_get_page()
-    https://git.kernel.org/jaegeuk/f2fs/c/10005e36127b
-  - [f2fs-dev,4/4] f2fs: use f2fs_filemap_get_folio() to support fault injection
-    (no matching commit)
+  - [f2fs-dev] f2fs: ensure minimum trim granularity accounts for all devices
+    https://git.kernel.org/jaegeuk/f2fs/c/5dc50bdb96e1
 
 You are awesome, thank you!
 -- 
