@@ -2,89 +2,91 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8A85C4D84B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Nov 2025 12:53:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48AC2C4D9F8
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Nov 2025 13:18:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=I4UFuMlMMbTn52nW+0W5JWeQbZqRz9dRLQ6jSA81iig=; b=INx/lUxO1UimPryTG66BiaGpLk
-	wZApW+hcki7miMBT/0p+pdH3B11I8kuIZStreRwz3P5adT7tvUfVFgxzEHD2/BSNrBT9keKGnMOMA
-	EfcIS0aoYYlhPMOabRs634CnyvqRwE3BLnIiNzcCAgsaLtIk4v+YU1EIf2V0mt9Jsaq0=;
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-Id:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=kK2QEnEByGu/GxXZssdpvQV3hy3yyDwhwGt450FlkTk=; b=IjYTHdh2MrQFz8xgOiADFMfnDL
+	jVS8EvV4tn56ixg9/j81OFFrq4BnOt4PUZ7BI9q3oLtVJq6pB0bUJeL+d3wiGiQ6COJtYSK0tMctT
+	zSGVaYz88g0dhNRLnzpeeFuGYDUHfSFkHwlD0PHANQO7nwN1vjW1xHb2uJqoA7703i4k=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vImve-0003IC-CA;
-	Tue, 11 Nov 2025 11:52:55 +0000
+	id 1vInJz-0004nA-0t;
+	Tue, 11 Nov 2025 12:18:03 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vImvc-0003I6-EX
+ (envelope-from <liubaolin12138@163.com>) id 1vInJv-0004ml-56
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Nov 2025 11:52:53 +0000
+ Tue, 11 Nov 2025 12:18:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bDfJvTiBrV1cX5SER4iva7CEHccFDmLJ27uFVLUwRMA=; b=DSiOdtP9qJvYceQmvHDuHFosGZ
- 00zta16uJD5GKSlS3UI2aGJMlJTUnzsSmHFNKtaGK+sIuFjtMDuc2byiwSi9jn60bB6eK+XbMynS+
- fBurkWQA2vhIoORAKNnhpanL23P3m7yS08sUvi8yzTs33UILqfLHOskT9iPles8D3ekQ=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=bDfJvTiBrV1cX5SER4iva7CEHccFDmLJ27uFVLUwRMA=; b=UQUhzG0PjGDHQbu5llYIUYCLQu
- Ujw3eXV+wgxO0WTEyk9bd83k7E4TLanbD8sDwRd9sh2mRUIPRCIHCHDTAC0FdADm/GWsItSsKh67B
- JzoIH2jRpQ8y51kWn0BYprltOl7hqgH8iKzlKd5DLp/SGMjystckJh3zxIMRcr1057cM=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=gfANCpYyQtu2FJq3xTseeaI1UO6gnRjQwEJ6h27gj5c=; b=KAX7Vd7I8RE25Ha6pO16Mko0xQ
+ LtQpbWTvTypRhfBieoOIvs5FORfPUF4JjQ4+Z1maB4bIUlhRK6jKRViaWq5iQ2HsmZP46QPmZs4S7
+ xdg/d5XRi+7JXDnaZ9kg2VtDudLimsjM1S2+/ZXw4G0XJ/CWLSh/UsTrz4WKT11ouw40=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=gfANCpYyQtu2FJq3xTseeaI1UO6gnRjQwEJ6h27gj5c=; b=m
+ GReww364t0YY3sWmUef6SXfdrTCrZKZE3BFjiZEN6jl9LrmUj1vKE66tctzmPEKykpJ28djGqK72u
+ V+38XbUPIs7GSEe566U7YIh83x8ZN8IGsV81ts+juhXKWoT9W0AYlnNjPxGntrgNuqzKjNo2T3xRD
+ 2BFNmyiBwW91mn/w=;
+Received: from m16.mail.163.com ([220.197.31.2])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vImvc-0003Ht-R1 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Nov 2025 11:52:53 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 87FCE43DAE
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 11 Nov 2025 11:52:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 56582C19423;
- Tue, 11 Nov 2025 11:52:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762861962;
- bh=f6RcoELmzojj6s6Tg/noSowPetDGuPHU0f5LoaPLD7g=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=XsIlg9URmd5Z32DmwfJllCOqoT4FFNMrnIOQpTunvJgHxOGWaXwm4UYd8PztkT1Jz
- v2iD7wCWOpWjrVTXF/DFIdRztCnzfRBUZGuuEr8Gplt6vGjjm8oQ7K2mR2zbCBTXce
- YA5HSI7jin3x1KD7XZLRuEIQxLV5FiZwFtZ3oM1UdeUp837MXeVqHccA4PlpO3rifq
- dmIokR5pPUYGaOcMLobqGpbDpR4J5xUHpKYy1VjgTTvIMOE0URKvwwd7AmGfVxsWQ/
- C02M6HnS1QB/20qc6aX88xvSqCToNklNa9H2xpg7RBPnnLg/Fxi3P73bqU0r2oGY5i
- VQ/jyIzkFvD7A==
-To: jaegeuk@kernel.org
-Date: Tue, 11 Nov 2025 19:52:29 +0800
-Message-ID: <20251111115229.1729729-2-chao@kernel.org>
-X-Mailer: git-send-email 2.51.2.1041.gc1ab5b90ca-goog
-In-Reply-To: <20251111115229.1729729-1-chao@kernel.org>
-References: <20251111115229.1729729-1-chao@kernel.org>
+ id 1vInJv-0004bk-4O for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Nov 2025 12:17:59 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=gf
+ ANCpYyQtu2FJq3xTseeaI1UO6gnRjQwEJ6h27gj5c=; b=Y+W9Co0N1od1BE3IoA
+ b0g2sOOT20rNm3KOj3xlnP9vsv7uiu+3Gt5SQqYjl3OaStwUy2/n4cWC61wLKdkk
+ BkjdefiKRM/BKQ9mSgtZpMomAn6/dDqzfdHckrzjKR1aHkLM0QbGcM5/z+hpvnps
+ wDPCrm80jlGlLZCixSkrSc0e8=
+Received: from liubaolin-VMware-Virtual-Platform.localdomain (unknown [])
+ by gzsmtp5 (Coremail) with SMTP id QCgvCgD3P4RcKRNpN6BPDg--.37327S2;
+ Tue, 11 Nov 2025 20:17:33 +0800 (CST)
+From: Baolin Liu <liubaolin12138@163.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Tue, 11 Nov 2025 20:17:28 +0800
+Message-Id: <20251111121728.29433-1-liubaolin12138@163.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-CM-TRANSID: QCgvCgD3P4RcKRNpN6BPDg--.37327S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7AF45KFWUJF1kXF4Uuw4UArb_yoW8Gr1Upr
+ 98JF4kKr4UCr18WFWktF45CrZ5ta4UZ3sFy39akan3G3ZxtrsYgF93tFyUXF15J348u3ZF
+ qF4vkF15ZF17Cr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UpUDAUUUUU=
+X-Originating-IP: [183.242.174.23]
+X-CM-SenderInfo: xolxutxrol0iasrtmqqrwthudrp/xtbCwR2AS2kTKV0JIAAA3w
+X-Spam-Score: 1.1 (+)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch changes default schedule timeout value from 20ms
- to 1ms, in order to give caller more chances to check whether IO or non-IO
- congestion condition has already been mitigable. In addition, default interval
- of periodical discard submission is kept to 20ms. 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  From: Baolin Liu In f2fs_recover_fsync_data(),
+ use LIST_HEAD()
+ to declare and initialize the list_head in one step instead of using
+ INIT_LIST_HEAD() separately. No functional change. 
+ Content analysis details:   (1.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
+ [183.242.174.23 listed in dnsbl-2.uceprotect.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -92,9 +94,17 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vImvc-0003Ht-R1
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: change default schedule timeout value
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit [liubaolin12138(at)163.com]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [liubaolin12138(at)163.com]
+ 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [220.197.31.2 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1vInJv-0004bk-4O
+Subject: [f2fs-dev] [PATCH v1] f2fs: simplify list initialization in
+ f2fs_recover_fsync_data()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,65 +116,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Baolin Liu <liubaolin@kylinos.cn>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch changes default schedule timeout value from 20ms to 1ms,
-in order to give caller more chances to check whether IO or non-IO
-congestion condition has already been mitigable.
+From: Baolin Liu <liubaolin@kylinos.cn>
 
-In addition, default interval of periodical discard submission is
-kept to 20ms.
+In f2fs_recover_fsync_data(),use LIST_HEAD() to declare and
+initialize the list_head in one step instead of using
+INIT_LIST_HEAD() separately.
 
-Signed-off-by: Chao Yu <chao@kernel.org>
+No functional change.
+
+Signed-off-by: Baolin Liu <liubaolin@kylinos.cn>
 ---
- fs/f2fs/f2fs.h    | 6 ++++--
- fs/f2fs/segment.c | 2 +-
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ fs/f2fs/recovery.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 0d0e0a01a659..74cbbd84f39b 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -407,6 +407,8 @@ struct discard_entry {
- #define DEFAULT_DISCARD_GRANULARITY		16
- /* default maximum discard granularity of ordered discard, unit: block count */
- #define DEFAULT_MAX_ORDERED_DISCARD_GRANULARITY	16
-+/* default interval of periodical discard submission */
-+#define DEFAULT_DISCARD_INTERVAL	(msecs_to_jiffies(20))
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index 215e442db72c..3d85d15a4f8b 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -869,8 +869,9 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
  
- /* max discard pend list number */
- #define MAX_PLIST_NUM		512
-@@ -656,8 +658,8 @@ enum {
+ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+ {
+-	struct list_head inode_list, tmp_inode_list;
+-	struct list_head dir_list;
++	LIST_HEAD(inode_list);
++	LIST_HEAD(tmp_inode_list);
++	LIST_HEAD(dir_list);
+ 	int err;
+ 	int ret = 0;
+ 	unsigned long s_flags = sbi->sb->s_flags;
+@@ -882,10 +883,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+ 	if (is_sbi_flag_set(sbi, SBI_IS_WRITABLE))
+ 		f2fs_info(sbi, "recover fsync data on readonly fs");
  
- #define DEFAULT_RETRY_IO_COUNT	8	/* maximum retry read IO or flush count */
+-	INIT_LIST_HEAD(&inode_list);
+-	INIT_LIST_HEAD(&tmp_inode_list);
+-	INIT_LIST_HEAD(&dir_list);
+-
+ 	/* prevent checkpoint */
+ 	f2fs_down_write(&sbi->cp_global_sem);
  
--/* IO/non-IO congestion wait timeout value, default: 20ms */
--#define	DEFAULT_SCHEDULE_TIMEOUT	(msecs_to_jiffies(20))
-+/* IO/non-IO congestion wait timeout value, default: 1ms */
-+#define	DEFAULT_SCHEDULE_TIMEOUT	(msecs_to_jiffies(1))
- 
- /* timeout value injected, default: 1000ms */
- #define DEFAULT_FAULT_TIMEOUT	(msecs_to_jiffies(1000))
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 58a5d6bc675f..d146c5816912 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -3462,7 +3462,7 @@ static unsigned int __issue_discard_cmd_range(struct f2fs_sb_info *sbi,
- 			blk_finish_plug(&plug);
- 			mutex_unlock(&dcc->cmd_lock);
- 			trimmed += __wait_all_discard_cmd(sbi, NULL);
--			f2fs_schedule_timeout(DEFAULT_SCHEDULE_TIMEOUT);
-+			f2fs_schedule_timeout(DEFAULT_DISCARD_INTERVAL);
- 			goto next;
- 		}
- skip:
 -- 
-2.49.0
+2.39.2
 
 
 
