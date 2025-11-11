@@ -2,75 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32E5BC5002F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Nov 2025 23:51:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE330C50032
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Nov 2025 23:51:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Nl3LzE13VFECZthwbJgcoL89xoLL7oOKPMr1kKDRHrs=; b=mLiBsPpmmZA7ih/oNjZQ5IB/Se
-	YumPsHgAb+S7ZCQSLXZQ/JYHstnKjaybGGFyjsJBdXVHaXwdoAHCHZAfqz4zRbHZbuk4eSR97iPJ4
-	tN9yEEcobWD9Uu40Gvd05iAtFQuelnGZWck8gFtJfUB+7mRzcNH8mFeXrpg6pggEndRk=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=ZrxJRHhlNxbxKXItN8weeClK8c+hg8tizGfnEgNCoEA=; b=E4jbYt1FrI04TZ2IB2nbkXD7ei
+	2DJWEmZ4BvIgCgspJcNAtLZZnhcb0xQYwHIq6EVXj56K3VBuZkzglD33/c6AV8dPe9qAvxfQZS1dh
+	Ekxfgj463ztVEz9W00eRVeFTs/ET5ld3kKEo6fb8o0kXe/pKxRtSLhPiSWvpqQQ3a1Ak=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vIxCj-0004eN-TX;
-	Tue, 11 Nov 2025 22:51:13 +0000
+	id 1vIxCk-0008UW-Se;
+	Tue, 11 Nov 2025 22:51:15 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vIxCf-0004dy-P2
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vIxCh-0008To-0Y
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Nov 2025 22:51:09 +0000
+ Tue, 11 Nov 2025 22:51:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=63LLY5nJKUWRoxLjKyV/YVRNj/QyS2ZNMecTGrQ18qI=; b=YfXc2sgkbX4yi6aRz3uxucd4GW
- flHkNAXUo/1i0QagzKvpMGv27shWlKYB0l8/lRUfKipYBBfwAUDLYfXOHnRsXWpgrxY/Av/mxzA80
- atropK5noHFQzzZzw/nA/tLWmdz5o4ph7T1BcJxPFTtek7FFi1KueNlQUV9hD4WWxJQs=;
+ bh=E+lhYZ65D5rS51OljvZt496ol2qV3x8VzqDGXCM/R1U=; b=Ah1qlm+ddiyKcaQF7w5kI/+Zod
+ 2CQHn7tqjyvzJrrSXcScv9khmZ5PZFbjV3e4+RZWmtYlrcWNtLWagseT8Ogf7AP5qJmCQkOMYmqSI
+ dw18yGO3uhmA8ms3x5tY1Q1MPSj0XDBVLUHN05PuQe9trV/ISSXMv45Mzzy3wrAyPagY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=63LLY5nJKUWRoxLjKyV/YVRNj/QyS2ZNMecTGrQ18qI=; b=OMWZLESWDBU5XQoQNTnJDC1sg/
- J6SJWRqoECdbSY0BgTHkP7qlXXMM8Ly9Wbvdj0st6DUmKxmHp5W/abK1YUxupzdd4jrFRE5wDw6co
- JONYhHrctysG2jirXVFFvMvUkbpuwA681d193JlC8Pl1t7E3ph+YL8RLaYXI1/46TCGQ=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=E+lhYZ65D5rS51OljvZt496ol2qV3x8VzqDGXCM/R1U=; b=auEOVGN+L7XK1OIwVne9AnofgR
+ xkWa4WIkbBY7AWKo7n/cYHV3Yy2SmdCvC8BWGyICbMV4L43XOhCBVqb2PYDU9QF0MBGeWFmwJAA/d
+ OjdB7SihHbZBzRBEvEljHwTsxTxZaPrWeeaWrB8qz0byDVsxW2NNCG03MUMq6h25zepk=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vIxCf-00048Q-A1 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Nov 2025 22:51:09 +0000
+ id 1vIxCh-00048b-B3 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Nov 2025 22:51:11 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 0610F40472;
- Tue, 11 Nov 2025 22:50:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6FBBC19425;
- Tue, 11 Nov 2025 22:50:58 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id BE4E560051;
+ Tue, 11 Nov 2025 22:51:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C4D2C116D0;
+ Tue, 11 Nov 2025 22:51:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762901458;
- bh=nD71wI0XDv1kv2m82/Iq4eGjVSvOsCDAGUPZWot8Yus=;
+ s=k20201202; t=1762901460;
+ bh=u51U8yVkwn+sqh38JGcORAerkrd9IH4FeT/eOeCwWMs=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=ny9fwatzQJizAzvfCE0J5IWJhtliyWffvA+iL5AuHxiq16h46NWVoPjk3nn+pFnhm
- FyHMcekOXkTjqmfpBz2FL4nK5YctqIsEItLfKlIrYN4PVJTxXuYD3sxW9PVlodQdPt
- nXi08oOOuCK3MuLBZN4SyR14jSi9IC3f3XJiBUYMZBgTYxGU8BqZIoVwqDbAaXM4cJ
- ww+DNjPXupugpGk9feOH73Eh9BKDrciBFIRp5u2fKMShdPRDOf7ZQrpSujoXt+hv51
- msP4qldA0iEEnrNSp0jdM/UHkdotTF5mwDK1sv/wqSThU3ESn8+ppD1q3O+GVeYXws
- 1zwcJXc6T80tA==
+ b=cFL9lVU8P8B2/FgWp6hFLkhO91Fq6rOeAvHISsN9tQvyuIL1WuHHXdaARX7v1qBwM
+ a4bhiVaTySMFg8DbTTYtU99hX46T1hopgYn4zgJW0ry6mn/o+tTnbA7t9BJdafAlij
+ vWW1bPNlDftqWyPCycJPe+LknhgWuRYb/p7mMxbqq+v3Mh7PUPlyiGHF3DZxcvRRZQ
+ +E/7G5TZkF0au7h4Ycl7StFz/UNwRUi5iLDsB7tLzTVN7NcUDxZiO4f0wjBLibAfIK
+ lUSbxNm+MXHlJUhx9TQuAq2NQynjgywcgOqPDBamufXfitqoi2Xvj/pIEQNAOLHwhi
+ /13YQ0BIrQ7Sg==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 33AFC380DBCD; Tue, 11 Nov 2025 22:50:30 +0000 (UTC)
+ ADDA8380DBCD; Tue, 11 Nov 2025 22:50:31 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <176290142873.3596344.6498894062602696343.git-patchwork-notify@kernel.org>
-Date: Tue, 11 Nov 2025 22:50:28 +0000
-References: <20251027125543.633506-1-yangyongpeng.storage@gmail.com>
-In-Reply-To: <20251027125543.633506-1-yangyongpeng.storage@gmail.com>
-To: Yongpeng Yang <yangyongpeng.storage@gmail.com>
+Message-Id: <176290143023.3596344.4932276486991628363.git-patchwork-notify@kernel.org>
+Date: Tue, 11 Nov 2025 22:50:30 +0000
+References: <20251010-origin-dev-v2-1-952a3c98cd9c@amlogic.com>
+In-Reply-To: <20251010-origin-dev-v2-1-952a3c98cd9c@amlogic.com>
+To: Jiucheng Xu <jiucheng.xu@amlogic.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -79,11 +79,11 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 27 Oct 2025 20:55:43 +0800 you
- wrote: > From: Yongpeng Yang <yangyongpeng@xiaomi.com> > > Change the type
- of the unlock parameter of f2fs_put_page to bool. > All callers should
- consistently pa [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 10 Oct 2025 10:45:50 +0000 you
+ wrote: > From: Jiucheng Xu <jiucheng.xu@amlogic.com> > > On 32-bit
+ architectures, 
+ when GFP_NOFS is used, the file cache for write > operations cannot be allocate
+ [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -94,9 +94,9 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vIxCf-00048Q-A1
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: change the unlock parameter of
- f2fs_put_page to bool
+X-Headers-End: 1vIxCh-00048b-B3
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Use mapping->gfp_mask to get file
+ cache for writing
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,8 +111,9 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, yangyongpeng@xiaomi.com,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: devnull+jiucheng.xu.amlogic.com@kernel.org, jianxin.pan@amlogic.com,
+ tuan.zhang@amlogic.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -122,19 +123,21 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon, 27 Oct 2025 20:55:43 +0800 you wrote:
-> From: Yongpeng Yang <yangyongpeng@xiaomi.com>
+On Fri, 10 Oct 2025 10:45:50 +0000 you wrote:
+> From: Jiucheng Xu <jiucheng.xu@amlogic.com>
 > 
-> Change the type of the unlock parameter of f2fs_put_page to bool.
-> All callers should consistently pass true or false. No logical change.
+> On 32-bit architectures, when GFP_NOFS is used, the file cache for write
+> operations cannot be allocated from the highmem and CMA.
 > 
-> Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
+> Since mapping->gfp_mask is set to GFP_HIGHUSER_MOVABLE during inode
+> allocation, using mapping_gfp_mask(mapping) as the GFP flag of getting file
+> cache for writing is more efficient for 32-bit architectures.
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v2] f2fs: change the unlock parameter of f2fs_put_page to bool
-    https://git.kernel.org/jaegeuk/f2fs/c/096c6cf89318
+  - [f2fs-dev,v2] f2fs: Use mapping->gfp_mask to get file cache for writing
+    https://git.kernel.org/jaegeuk/f2fs/c/2308de27c03d
 
 You are awesome, thank you!
 -- 
