@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62010C5B42B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Nov 2025 05:02:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 345A3C5B42E
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Nov 2025 05:02:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Y6NSb+KomNI7k1LwQ2107iY3rjC0ExQIo9+7LnpYNBE=; b=kg1nzfiIwgVxXvozFAB9XmTXLa
-	2wBFpz9PB3ln3CbuTJTKm3an6PY3dUBDswVf+PN29I7gMUJ0aIzIhgNCYQAgTfzIZH4awjiCurnfJ
-	fGH+olNYNaaG7gi+V+0aYmLSFm3kHtbJRDBKq+yW2lIJc1HOS0Sh2hbEVwSBV0DNc3xM=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=l8mCDdoULlIcEfgxhPF3tniZDOribTeM5DPML3HcCFY=; b=jBnGK9RBaixe7ADYauU+a01nTp
+	fEU/US1NwUniZ4F+JBfFMH2NafUE3hiRMhPELS+EzF03KvBE3ZjhMFMdwjWti13Vl+6Xi0jc48Wue
+	fSnpNvc/PKEtdBmRWWcvrrQgqx0Fo0KWxmDrToalrGkxNyMVr00gbcGn1C5fPheBgRb8=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vJl15-0002fv-Js;
-	Fri, 14 Nov 2025 04:02:31 +0000
+	id 1vJl19-00044C-Js;
+	Fri, 14 Nov 2025 04:02:36 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vJl13-0002fp-Uw
+ (envelope-from <chao@kernel.org>) id 1vJl18-000443-9V
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 14 Nov 2025 04:02:29 +0000
+ Fri, 14 Nov 2025 04:02:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/usiQON3pYCi8ggklaXbmAhXFnX55Fplsby2rUNVYNs=; b=eV0YfzoXl33+Hgg5MwkSBNVGfi
- sl5XNFA1S8/lAP2BniOWROF+qVOatYW6YYzIf8GsaouxfJqdR0EJ9/e7mKf/ohmBdPswzC8Eqwicn
- xslXU79hkoONOeYMX2ap3JjP5OJSzf4gmGsErgA57nqehzltWCOhisrjHLW4GfAbKygM=;
+ bh=UponDoh0NmWvgcZt5aIKQ0WmFzfPH83AloKxYvrfBVc=; b=dB53dpw/h6So8u405G0Yg7dvTW
+ 8Umz75JANMkRmoqdoU1/7e+C/nQg8rIDV12kJYnCFaKjepHpW3pr2kkA8mVGxTxYtL68Q6jiyAI6K
+ EPOgnGRNBe7g5lr0pkbF/9f/p5r3xHGtwq1YGcAhzGl2lodkGMNzBIzXS37cgfR/OaFw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,39 +40,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/usiQON3pYCi8ggklaXbmAhXFnX55Fplsby2rUNVYNs=; b=Q8oODYWAv7ODkTi7tXzkHUmBRl
- 1jKbdbGUdxkUSz/31/TghiH0jD3JuNSHFpqd/nRlp68TrLGhAn6P8Rl83fOQKaGuxln8ki39F8b1P
- 9SovRY/q/IRvTmQ8uJx5RFNgDbcMnE9dN5GQVy8lFxFu16gMfm1FySvFLis8N+nWLXQk=;
+ bh=UponDoh0NmWvgcZt5aIKQ0WmFzfPH83AloKxYvrfBVc=; b=R3MDQNW4iVqEeZlcg/EAJM4huk
+ jDuGxVUc+ASXIZo0Ki7IZBor0LyZo8ZUFZPMU0wjCRocFmg8eNkXlFeBEmIMACUXNpAEkAmyF5TWv
+ znRbNdRIUHzEq6tPxbslcIq4Dkj101WhEiPDjFJl+xxz4LqD88gYooE78NSPTHLvnLuo=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vJl13-0007Xq-Jq for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 14 Nov 2025 04:02:29 +0000
+ id 1vJl18-0007Y1-JC for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 14 Nov 2025 04:02:34 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 9482060128;
- Fri, 14 Nov 2025 01:33:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 293F6C113D0;
- Fri, 14 Nov 2025 01:33:56 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id C5E2A60127;
+ Fri, 14 Nov 2025 01:34:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1FFC1C4CEF7;
+ Fri, 14 Nov 2025 01:34:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1763084038;
- bh=exd2h08pVhf0aUPP9p+4zI9UBcu8vPVvEmGm5+1BvDM=;
+ s=k20201202; t=1763084092;
+ bh=YjMII5HUntbbCppXh7SUcDPnKk/b0aE0AtCer6ea34U=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=U/BYxSr0qJBjIzslnpNC8OzZLZc/dKzCVzlVHejsfPg1qDHBGKaUO8PKqFle1yigh
- G5w8Kbt82z58SfqG4xbBksiKPBkofUXC4C0ScXTyqwo9nfN1uwuZey24JqVggGfKsE
- H+BraAUDtBFqVHhxzU5B4xwdGpU5i+BOArmPeY4Vz/jv3ih2axaHwX1uq7N1ORaMnz
- 3a0me02xa7RQZJgjWNJLVai3Qxv91eQh5sOY9DA7GHFeRSRKbfGbTT0y3ihqSpK5wU
- bLM1MqbnHIQ23EOJvnmicTwBYMfz2qMFFaHLiHUd7i3qxHn2iTt6FCbF6Tx05OEZzn
- b3VfDfcxknetw==
-Message-ID: <98034c77-5e47-43ea-9c45-335e2cd51b68@kernel.org>
-Date: Fri, 14 Nov 2025 09:33:58 +0800
+ b=VyI0VutKKjAWkR0w6kJ+wDT16FkTSWUaXs9T5hfV49BU4bqQFFzdcKqqzpvPSbNHh
+ atK2gAVi9FcNvWA1PP8fMHemyVievlz6y8L+10VNqgm5Bq31w/wtTRKTf7H3eBvSQV
+ Eorft36TTM52oFVSYUrdOtQTXi8H0z2ns7I4Xa3hV7wXCwR39rNEaaNpACsK4aMOh2
+ f+cXjVydxDrR0BqUIO6iH4LupL3w5lyPgHJjI+vK3FFFxHvSAjSjzPwd7oadzPm22n
+ CWPGfUXimLnFsWz7DFwaDChj3iZLYNqt4z/BPSHx+vCE49kUguJCrCO6nsDN2Ytxnd
+ 0w6AQjL7dZVaQ==
+Message-ID: <a9500c33-b259-4ff5-8411-997399a47358@kernel.org>
+Date: Fri, 14 Nov 2025 09:34:51 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
- Joanne Chang <joannechien@google.com>
+To: Joanne Chang <joannechien@google.com>, Zorro Lang <zlang@kernel.org>,
+ fstests@vger.kernel.org
 References: <20251112135223.3467852-1-joannechien@google.com>
- <20251112135223.3467852-2-joannechien@google.com>
+ <20251112135223.3467852-3-joannechien@google.com>
 Content-Language: en-US
-In-Reply-To: <20251112135223.3467852-2-joannechien@google.com>
+In-Reply-To: <20251112135223.3467852-3-joannechien@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -80,10 +80,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 11/12/2025 9:52 PM, Joanne Chang wrote: > Add test cases
- to verify f2fs's support for different versions of the >
- "test_dummy_encryption"
- mount option. > > To ensure test robustness, the MKFS_OPTIO [...] 
+ Content preview:  On 11/12/2025 9:52 PM, Joanne Chang wrote: > Currently,
+ f2fs/019
+ and f2fs/020 only clears MKFS_OPTIONS. This causes > the tests to fail when
+ leftover MOUNT_OPTIONS depend on unapplied > MKFS_OPTIONS. [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,9 +95,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vJl13-0007Xq-Jq
-Subject: Re: [f2fs-dev] [PATCH v1 2/3] f2fs/016: add test cases for
- test_dummy_encryption mount option
+X-Headers-End: 1vJl18-0007Y1-JC
+Subject: Re: [f2fs-dev] [PATCH v1 3/3] f2fs/{019,
+ 020}: clear MOUNT_OPTIONS alongside MKFS_OPTIONS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,19 +117,14 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 11/12/2025 9:52 PM, Joanne Chang wrote:
-> Add test cases to verify f2fs's support for different versions of the
-> "test_dummy_encryption" mount option.
-> 
-> To ensure test robustness, the MKFS_OPTIONS and MOUNT_OPTIONS are
-> cleared. This prevents additional options from interfereing with the
-> test results.
+> Currently, f2fs/019 and f2fs/020 only clears MKFS_OPTIONS. This causes
+> the tests to fail when leftover MOUNT_OPTIONS depend on unapplied
+> MKFS_OPTIONS. So MOUNT_OPTIONS should also be cleared to ensure reliable
+> mounting.
 > 
 > Signed-off-by: Joanne Chang <joannechien@google.com>
 
-To Zorro,
-
-The changes look good to me, though, still I want to confirm that whether
-it is recommended or not to add new cases in old testcase.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
 
