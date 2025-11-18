@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A84F1C67B33
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Nov 2025 07:23:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4902AC67B45
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Nov 2025 07:23:11 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=nrfYfD2vCpQvBEFpm9TYMrPjD8SXm+Rts6XDyxXqsb8=; b=SVg12RE17qhhdCj7PSfTcJXREd
-	GvYAr2KbkSMu7FzQdQT5nynBhuT9ZsGJqOUiQ38J3PbYHUEEF6LgjeRoy02CszprahBDaao00xaRC
-	FYZbYXtfe2rswOiMA0gqs1GMnxLqSR/rN1n2gRzGWwa0Co7WxP7b1I1MKvpvwS/xyv3I=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=D3R/9OdHHeIppCrDKiC+43a9yYiO+6vLmGM7nFLO2WY=; b=kSGn1XrlJHql4WNYuB0E3jmQDo
+	GzZAMY+xHrMAjjUks+qreL4O1JBlNWxBf9Eg6poNl0vJAw9e/9Vwwe3ZIdVBGupEeQAjitPwM79kQ
+	qAiJdcjA2MNoLsAlx3vaxnf4L5hvK8tnghmYEATx2KFN39rq61KGsWtAUB4hYOGeft80=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vLF72-0005je-Hy;
-	Tue, 18 Nov 2025 06:22:49 +0000
+	id 1vLF7E-0003v5-NS;
+	Tue, 18 Nov 2025 06:23:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+0812c32a4ab075f64334+8122+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vLF71-0005jP-F5 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Nov 2025 06:22:48 +0000
+ id 1vLF7D-0003ux-DN for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Nov 2025 06:22:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VVOYWQ13oNwsCNhff4f/rJsJFg+2FBZoVLj8q2JKV1E=; b=JUrMUAdawu78Zw5WGAzr7cxpbX
- h4zM3Bf5GsYhHM8bnMQbXlS+0Zs2z8dG+EU978L32wlUr+GBTasBunKN0riw0Iaf+my/iYVulCrzu
- nqrDnicb+kDhEhvGMl3pARO9yeV8LHDGz0PoEp1Cse/NG8vz6rBcz+zwny4/2eeBUIVo=;
+ bh=riklaYaC8o2tdvy7FpPnqNZFcL07vFEnM3jtWWsAF2U=; b=UGw8Hk3BbJuBYvhKWmsIqQt+3l
+ T70IX46DdV9zetwyNUDsiugfxDRu8THWkeY1v0fE3KEH1ipAT85PCfivrDzrtK3691hiry+ACrnT4
+ 99vrYDgoPZ3vsKC8lUOWd3S4DQ4rgkXxvrtDnLWC4aBHamR8wbblmhByLMTZjbZkK3G0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,33 +40,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=VVOYWQ13oNwsCNhff4f/rJsJFg+2FBZoVLj8q2JKV1E=; b=VVfPTC7RFtRi0SK3UaCC0tAIay
- z5n4p1JZAJOuOJx/lioDJWyfTtLQwLz0/u4HbgBB8ziRSb0hsGU4FdfhDSKoV5qWHtFxUWK6ivuLW
- JXe1itFagQxMyUMXixlPO3oUelBmRiIM2Au4kBPs56+S/jMMM/8MEkujFP98zqtr6KFc=;
+ bh=riklaYaC8o2tdvy7FpPnqNZFcL07vFEnM3jtWWsAF2U=; b=Q/XA1qYH8CGsyxXt8SoQWOXOKn
+ UTjd4bZeGRW/Wp2HFD+oMIIBnDF5cRHVMIk7QsHthO6+pkPTbNRKU4Ckp8wrJvyPnmG99Vqn1v8+r
+ DlMqskk0GFShoNatwoNKyHzSKNhLZWUY3zbAUnxcUDpAZ7a9zYw5COP2P11e3TMnXGNw=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vLF71-0007Ev-Sd for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Nov 2025 06:22:48 +0000
+ id 1vLF7C-0007FY-WA for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Nov 2025 06:22:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=VVOYWQ13oNwsCNhff4f/rJsJFg+2FBZoVLj8q2JKV1E=; b=EM0kw/ZouZuxOhyR7S6g19ABHp
- 9z1jNHEAKfQud2JK/NZhuhZSBg26k/YVt9MEQwkF2dylE0Zg77iOpZDYgf+5vQhXmWSpr8vhF28ll
- hLaQns+d0OP/LfeZJJbkKUvCJK13wi+taeys9wLhh4+rhSczZ2ZhHhAJyJ4r0VdDrGv6x79mqItH4
- noM6NPRe7d8gnpRFfgSWTeaXG6PTH+VWB+PyriUdMZb5C7j/dRgfhvE3LE23uy/C/p39e/z+lWT9b
- Sx3C4CmZSqJ88bDu6MzRLpxO+S28GzAYS6yyN39E1mc1LJN/izjjApkwB1YLflh4oZaL26s0M+pZq
- AhCRPekQ==;
+ bh=riklaYaC8o2tdvy7FpPnqNZFcL07vFEnM3jtWWsAF2U=; b=wqeu3qz3TvBGdOaSMIBRfmhDMu
+ RX+u60EalaYpNmlrPNdXsZcJcyIQhlrzhzbIL4FNB30wnw7UMid+vUzpBDPnPdjY8RbOkka3BviRk
+ Y/bHNf7/i2Nio4PZt2WvimHNjXBQdZv8mME9rGQV1A2ZMmdu7kicmeUUYLRqB1s9k4IJev5cVZimw
+ YNci+UHOm1j0T9BWojmEF7Yg0h4yhhwa4Mjewb6t7g8Xq1o2/vgVEF6P5gXc1aHHc4BGYC99MXh6f
+ 2A0lyP1lNR+E4EFZTj6lnqYzKqSmeGN2KYKzeBddgwrGHs5EozsNg1MYIAqZzAsnAyxzMNIco6LKV
+ cH7oaCQg==;
 Received: from
  2a02-8389-2341-5b80-d601-7564-c2e0-491c.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:d601:7564:c2e0:491c] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vLF6v-0000000HUQ9-37bb; Tue, 18 Nov 2025 06:22:42 +0000
+ id 1vLF70-0000000HUQo-0nDu; Tue, 18 Nov 2025 06:22:48 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Date: Tue, 18 Nov 2025 07:21:50 +0100
-Message-ID: <20251118062159.2358085-8-hch@lst.de>
+Date: Tue, 18 Nov 2025 07:21:51 +0100
+Message-ID: <20251118062159.2358085-9-hch@lst.de>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251118062159.2358085-1-hch@lst.de>
 References: <20251118062159.2358085-1-hch@lst.de>
@@ -80,12 +80,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Range lengths are usually expressed as bytes in the VFS,
- switch
- fscrypt_zeroout_range_inline_crypt to this convention. Signed-off-by:
- Christoph
- Hellwig <hch@lst.de> --- fs/crypto/bio.c | 10 +++------- 1 file changed,
- 3 insertions(+), 7 deletions(-) 
+ Content preview:  All the callers now want a byte offset into the inode, so
+ return that from bh_get_inode_and_lblk_num. Signed-off-by: Christoph Hellwig
+ <hch@lst.de> --- fs/crypto/inline_crypt.c | 18 ++++++++ 1 file changed, 8
+ insertions(+), 10 deletions(-) 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1vLF71-0007Ev-Sd
-Subject: [f2fs-dev] [PATCH 07/11] fscrypt: pass a byte length to
- fscrypt_zeroout_range_inline_crypt
+X-Headers-End: 1vLF7C-0007FY-WA
+Subject: [f2fs-dev] [PATCH 08/11] fscrypt: return a byte offset from
+ bh_get_inode_and_lblk_num
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,51 +115,68 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Range lengths are usually expressed as bytes in the VFS, switch
-fscrypt_zeroout_range_inline_crypt to this convention.
+All the callers now want a byte offset into the inode, so return
+that from bh_get_inode_and_lblk_num.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/crypto/bio.c | 10 +++-------
- 1 file changed, 3 insertions(+), 7 deletions(-)
+ fs/crypto/inline_crypt.c | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
-diff --git a/fs/crypto/bio.c b/fs/crypto/bio.c
-index 07d757d2777e..be751bcd2976 100644
---- a/fs/crypto/bio.c
-+++ b/fs/crypto/bio.c
-@@ -73,8 +73,6 @@ static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
- 					      loff_t pos, sector_t sector,
- 					      unsigned int len)
+diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
+index c069958c4819..128268adf960 100644
+--- a/fs/crypto/inline_crypt.c
++++ b/fs/crypto/inline_crypt.c
+@@ -315,7 +315,7 @@ EXPORT_SYMBOL_GPL(fscrypt_set_bio_crypt_ctx);
+ /* Extract the inode and logical block number from a buffer_head. */
+ static bool bh_get_inode_and_lblk_num(const struct buffer_head *bh,
+ 				      const struct inode **inode_ret,
+-				      u64 *lblk_num_ret)
++				      loff_t *pos_ret)
  {
--	const unsigned int blockbits = inode->i_blkbits;
--	const unsigned int blocks_per_page = 1 << (PAGE_SHIFT - blockbits);
- 	struct fscrypt_zero_done done = {
- 		.pending	= ATOMIC_INIT(1),
- 		.done		= COMPLETION_INITIALIZER_ONSTACK(done.done),
-@@ -92,12 +90,10 @@ static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
- 		fscrypt_set_bio_crypt_ctx(bio, inode, pos, GFP_NOFS);
+ 	struct folio *folio = bh->b_folio;
+ 	const struct address_space *mapping;
+@@ -331,7 +331,7 @@ static bool bh_get_inode_and_lblk_num(const struct buffer_head *bh,
+ 	inode = mapping->host;
  
- 		for (n = 0; n < BIO_MAX_VECS; n++) {
--			unsigned int blocks_this_page =
--				min(len, blocks_per_page);
--			unsigned int bytes_this_page = blocks_this_page << blockbits;
-+			unsigned int bytes_this_page = min(len, PAGE_SIZE);
+ 	*inode_ret = inode;
+-	*lblk_num_ret = (folio_pos(folio) + bh_offset(bh)) >> inode->i_blkbits;
++	*pos_ret = folio_pos(folio) + bh_offset(bh);
+ 	return true;
+ }
  
- 			__bio_add_page(bio, ZERO_PAGE(0), bytes_this_page, 0);
--			len -= blocks_this_page;
-+			len -= bytes_this_page;
- 			pos += bytes_this_page;
- 			sector += (bytes_this_page >> SECTOR_SHIFT);
- 			if (!len || !fscrypt_mergeable_bio(bio, inode, pos))
-@@ -155,7 +151,7 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
+@@ -350,11 +350,10 @@ void fscrypt_set_bio_crypt_ctx_bh(struct bio *bio,
+ 				  gfp_t gfp_mask)
+ {
+ 	const struct inode *inode;
+-	u64 first_lblk;
++	loff_t pos;
  
- 	if (fscrypt_inode_uses_inline_crypto(inode))
- 		return fscrypt_zeroout_range_inline_crypt(inode, pos, sector,
--							  len);
-+				len << inode->i_blkbits);
+-	if (bh_get_inode_and_lblk_num(first_bh, &inode, &first_lblk))
+-		fscrypt_set_bio_crypt_ctx(bio, inode,
+-			first_lblk << inode->i_blkbits, gfp_mask);
++	if (bh_get_inode_and_lblk_num(first_bh, &inode, &pos))
++		fscrypt_set_bio_crypt_ctx(bio, inode, pos, gfp_mask);
+ }
+ EXPORT_SYMBOL_GPL(fscrypt_set_bio_crypt_ctx_bh);
  
- 	BUILD_BUG_ON(ARRAY_SIZE(pages) > BIO_MAX_VECS);
- 	nr_pages = min_t(u64, ARRAY_SIZE(pages),
+@@ -419,13 +418,12 @@ bool fscrypt_mergeable_bio_bh(struct bio *bio,
+ 			      const struct buffer_head *next_bh)
+ {
+ 	const struct inode *inode;
+-	u64 next_lblk;
++	loff_t pos;
+ 
+-	if (!bh_get_inode_and_lblk_num(next_bh, &inode, &next_lblk))
++	if (!bh_get_inode_and_lblk_num(next_bh, &inode, &pos))
+ 		return !bio->bi_crypt_context;
+ 
+-	return fscrypt_mergeable_bio(bio, inode,
+-		(loff_t)next_lblk << inode->i_blkbits);
++	return fscrypt_mergeable_bio(bio, inode, pos);
+ }
+ EXPORT_SYMBOL_GPL(fscrypt_mergeable_bio_bh);
+ 
 -- 
 2.47.3
 
