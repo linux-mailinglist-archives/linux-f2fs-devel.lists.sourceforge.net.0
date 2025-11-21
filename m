@@ -2,134 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 192EFC77970
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Nov 2025 07:36:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 725D0C779AD
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Nov 2025 07:49:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=3tIcwKpe1J6fw2WKjV1CK4p9uzuOk2vN3jLcNcczJWQ=; b=AXx+DBo2iEa9JwHhfN9g4T78Sr
-	SxWzvOpxHb53ugNmcJuRXaZ2Mf8tc4fh260s+AvbEnv+tpGcYDG7Tosflm9E2QNYjVaWsk1W/rAwB
-	VKalcNmC6h6q/uUdyXxKSQlZc2dQbPGlQNcWpNbwbRMcTqXAgIRurh8i10z2WEPGx3yA=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=N8BFOouPyk4VeRmzTJ69XPAFf3To4aVGzi98teX8cLc=; b=M+B2C8IvX1DtErCE0TzOmIhMQ8
+	6QvsiBYjGGeJyMuqKIJ8r3ARYyF9VV4w7pD3Ly6ejR7Z+FAeS3mmt6bQAds8a9m/Z0ZL5qTpjAYxe
+	PHOo7BSbX5506367qUqTPIQ4pYEh4t3uCsNVmj3kKYy23jyL6+IQde6OuMFZx2sJAf1A=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vMKko-0004qf-P8;
-	Fri, 21 Nov 2025 06:36:22 +0000
+	id 1vMKxo-0004ZJ-4H;
+	Fri, 21 Nov 2025 06:49:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zangyangyang66@gmail.com>) id 1vMKkn-0004qY-01
- for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Nov 2025 06:36:21 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <BATV+8a242fb3b4bb83c2bb93+8125+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1vMKxl-0004Yw-Jc for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Nov 2025 06:49:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/h/Ui1vMtNGt/3MUTX3psBfOkIprmfyRK8mmZSO6XhM=; b=mUAhCAT8O7KpI9afq/H0MVzL81
- PXAHWgxxixa2Y1ljnvsJWyAGg0kXwN8YAqeepW3AuYgfmrPqbWQIeY2IkQF7+M85hNInwRKa6Ae3x
- dLQ/2R5z5GiNbehnaTTvt8KtOvyriRKWK1p2kz+/tmYP+X88vxYkHrdFRfJ5LGsN13nY=;
+ bh=6Z2wSgy2zyNNpnV1+nFigOTTA+9f/wicUJMD/M0cv00=; b=Bqotq05xWPyFr+LiO1iF/xnZBi
+ 8NmKVK1SkKb5/Y5zEaDffinvBExMUMT2h1B8+zgurwbnnOwHYwNRajo4SjtV69zBKeeWWecsJRC7Z
+ /GT+50S3UMbCGRU1FqqQo+kt4EzeTTqteamALWMTM1vr2qgj6V7sFFVSc2u3+NVMS2j0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=/h/Ui1vMtNGt/3MUTX3psBfOkIprmfyRK8mmZSO6XhM=; b=V
- oWRw+FxZthmXaERVQ6Dt5FpGwtekthLHxIcYCJITrTHYD130JFh1jVP614uO3ns07RGUlnukXHDX4
- GVM7iIWf9eKTQG2lCcoY7D0EDEpGjM6VgeJHiipd6FgbV/h8RpWsYoE0qOO8eU5rHsKAXOISK6H+m
- OwsiWumUoRX6b8JM=;
-Received: from mail-pl1-f174.google.com ([209.85.214.174])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=6Z2wSgy2zyNNpnV1+nFigOTTA+9f/wicUJMD/M0cv00=; b=Pe+CkT2r2wQlQ/EI8UPPtBI02h
+ QjTqnPOATE4uEd6ymF2TzPgS6VT0yZxjPRI+jTda1LXt+cybhyR58oXq8X7KnQYCwcNA8h954Kavc
+ 8Hm3OPglpEWyrC1WXSnyiKyNw6V84i5ixdOBgpBKhKVESuojXn2nRPkzkgYWFFHqfaro=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vMKkm-0007BD-J0 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Nov 2025 06:36:20 +0000
-Received: by mail-pl1-f174.google.com with SMTP id
- d9443c01a7336-29853ec5b8cso20495755ad.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 20 Nov 2025 22:36:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763706970; x=1764311770; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/h/Ui1vMtNGt/3MUTX3psBfOkIprmfyRK8mmZSO6XhM=;
- b=Tdn4xi8duzzPsNaAHi/59NNRW1iwxr6ELDIOmJRQGvI/cFUZ0rDGxYG8+I8uzLN5tH
- RMHDaubLq8oOWP2wNr2CXV18CQohCwxar+Vmu5l6ckuhmrIqmYdrc+HXhrXcjrPyeJLy
- tZ+UZZvsiF9/s/Pzx8R/nXR9ECNcSkSg7BdElkHun0ileQb/LePEtOhL8iZ4XIN9UI2x
- bFBXcq964u6N4ylqdJ7DxBBO7qFm/Qpa/wgZ6zyUso8EBIepCM2pn5D7HUPE57pEyemM
- 7QlxZFyA/UaId//pHCWcAYDNuc1Q9QRx5bvrC9bDD2mYGDwfj+2CNsgLDK4q/lKkCdUQ
- AutQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763706970; x=1764311770;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/h/Ui1vMtNGt/3MUTX3psBfOkIprmfyRK8mmZSO6XhM=;
- b=S5qHQGInvMYXwq5worz30003Q2dwXQxR8YA1v+eon2pplh7Jg2fYty54JBxlYl0cT2
- y1hLmDvlf88Y2cCNVH3bZcv4mCD4edHxdUD2rXmFLvUnKw1ZBofu1fAC1TP046vrhNIW
- 0UlJYVBBT1E31ByTTwbCPg6zmiT/LYg8q2C0drDVsfzuzgj3fkKWISna3QmOqj+KDkcE
- H+DUOqhylaY2Qwtl0QntrB7ePHs69JwepPlS4JCECoorG0tNhY1G9+fAQQ+yA2nj6z4w
- uWrNW7JVYeIA+svsRZO3DbG+YjtX9pQxYL/ZFcbNlHrHvvTOmU2PnvKdaqFNLw7SO2gl
- jX/g==
-X-Gm-Message-State: AOJu0YwQGe8ceyhpDHeM6WvcWGmvyRGZLJj73zO/Xd0l9f9tkb9WgLRg
- VfiBkMsUhKdgqAigZpc8qI0urLvn77uzGoz1FscJuNimOY+lUDKRY6sn
-X-Gm-Gg: ASbGncunEcN2v13l8MNGF+8ChnzXkK7UTYOThxZlUAdaLVyVTsgj02N0ieyn8f4K82i
- k4SVEEMM5nyjgRNq2zn+Goh6jzgN5LwSvDhe91FNskSLi0qvl07SzBvjHFdOyx5KhgE7cKg/K3o
- qbKTBrshWag5UVZAwD/rfKGUF0Ko5u0ajXNQ8vZz27usF28I1DatCKwdspbaEB21kjGTgpYvp0v
- mV/yogkZ2hCKL8Iqb+q3Im8fB3sZQJqW7Y53zdHEypBwxLdz4w3qCLAreqvffQcJL9aeEtHbE5W
- zcYDHOerE4TPE6zqF1C+PQC0f4yviq8Z6IbVN916mShMxVCkElvkxCYbNAUjXvoUaXxQd4ZN2Xq
- u8vCZ3PCxgwNnn2oJJR3Dx1TygewmnKhSh0RKl90Io0LGIEgCntqP4pDzCgwvn+B/Pt19v68Jes
- tD//5IXJr+wNjbw6a0k7OxDw==
-X-Google-Smtp-Source: AGHT+IEBjZfkzYJ7/RdcIWF4tPy5OfOLAzfS105V6f9qU0au5VmH9MENOFXSb8kSNfsycY+SgD/HZA==
-X-Received: by 2002:a17:902:e744:b0:295:8a21:1559 with SMTP id
- d9443c01a7336-29b6c685522mr17497125ad.35.1763706969865; 
- Thu, 20 Nov 2025 22:36:09 -0800 (PST)
-Received: from zyy.mioffice.cn ([43.224.245.240])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29b5b13e7e6sm45056385ad.40.2025.11.20.22.36.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Nov 2025 22:36:08 -0800 (PST)
-From: Yangyang Zang <zangyangyang66@gmail.com>
-X-Google-Original-From: Yangyang Zang <zangyangyang1@xiaomi.com>
-To: chao@kernel.org,
-	jaegeuk@kernel.org
-Date: Fri, 21 Nov 2025 14:34:42 +0800
-Message-ID: <20251121063442.3312116-1-zangyangyang1@xiaomi.com>
-X-Mailer: git-send-email 2.43.2
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1vMKxl-00080I-Oy for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Nov 2025 06:49:46 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=6Z2wSgy2zyNNpnV1+nFigOTTA+9f/wicUJMD/M0cv00=; b=LfFscgXAyljwTAzbKdofiwBSIr
+ YWYUsofssn/tG0skiwGrltv9b8ePvZePS7jNfK4RiziTFvUhkQwfCVX/Lhj34YMREUQNJtx3cnCgo
+ 7h6LtpoUjQ/SHzly93tP7y0XPAcX+U9M/upev6JqoLrk4y1DP9fa1XHxIggGAPOwcKCENGyKgCkoS
+ l7IE7EycCTEb4p1yAlk1+4qtFZu0vsjCOPrWRmB2Rfq+uRivgN5cuIFXfFhaRUGjJTorUn1WlZCXR
+ MePwiN9IDZ21Z1yUzef3f1Kaz1xYhy1CXVJqw8KHuyYeBDZBIBIgusRaoCC+kZf163AJiYgRPDfEr
+ QKnUeDaw==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
+ Hat Linux)) id 1vMKxa-00000007wJZ-1QWX;
+ Fri, 21 Nov 2025 06:49:34 +0000
+Date: Thu, 20 Nov 2025 22:49:34 -0800
+From: Christoph Hellwig <hch@infradead.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <aSALfvLUObUGSx-e@infradead.org>
+References: <20251121014202.1969909-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <20251121014202.1969909-1-jaegeuk@kernel.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch adds -g option to set default options for specific
- environment, especially the Android. When using "-g android" in Android,
- forced resize is enabled by default, which can solve the problem [...] 
- Content analysis details:   (0.1 points, 5.0 required)
+ Content preview:  On Fri, Nov 21, 2025 at 01:42:01AM +0000, Jaegeuk Kim wrote:
+ > This patch boosts readahead for POSIX_FADV_WILLNEED. How? That's not a
+ good changelog. Also open coding the read-ahead logic is not a good idea.
+ The only f2fs-specific bits are the compression check,
+ and the extent precaching, 
+ but you surely should be able to share a read-ahead helper w [...] 
+ Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [zangyangyang66(at)gmail.com]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [zangyangyang66(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.174 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vMKkm-0007BD-J0
-Subject: [f2fs-dev] [PATCH] resize.f2fs: add -g to give default options
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+X-Headers-End: 1vMKxl-00080I-Oy
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: improve readahead for
+ POSIX_FADV_WILLNEED
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -141,62 +106,140 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yangyang Zang <zangyangyang1@xiaomi.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch adds -g option to set default options for specific
-environment, especially the Android.
-When using "-g android" in Android, forced resize is enabled
-by default, which can solve the problem of resize failure.
+On Fri, Nov 21, 2025 at 01:42:01AM +0000, Jaegeuk Kim wrote:
+> This patch boosts readahead for POSIX_FADV_WILLNEED.
 
-Fixes: 42482e81248f ("resize.f2fs: add caution message for resize")
-Signed-off-by: Yangyang Zang <zangyangyang1@xiaomi.com>
----
- fsck/main.c | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+How?  That's not a good changelog.
 
-diff --git a/fsck/main.c b/fsck/main.c
-index f7ef092..08d38d8 100644
---- a/fsck/main.c
-+++ b/fsck/main.c
-@@ -145,6 +145,9 @@ void resize_usage()
- 	MSG(0, "[options]:\n");
- 	MSG(0, "  -d debug level [default:0]\n");
- 	MSG(0, "  -H support write hint\n");
-+	MSG(0, "  -f ignore errors during resize\n");
-+	MSG(0, "  -F force to resize\n");
-+	MSG(0, "  -g add default options\n");
- 	MSG(0, "  -o overprovision percentage [default:auto]\n");
- 	MSG(0, "  -s safe resize (Does not resize metadata)\n");
- 	MSG(0, "  -t target sectors [default: device size]\n");
-@@ -640,7 +643,7 @@ void f2fs_parse_options(int argc, char *argv[])
- #endif
- 	} else if (!strcmp("resize.f2fs", prog)) {
- #ifdef WITH_RESIZE
--		const char *option_string = "d:fFHst:o:V";
-+		const char *option_string = "d:fFg:Hst:o:V";
- 
- 		c.func = RESIZE;
- 		while ((option = getopt(argc, argv, option_string)) != EOF) {
-@@ -664,6 +667,12 @@ void f2fs_parse_options(int argc, char *argv[])
- 				c.force = 1;
- 				MSG(0, "Info: Force to resize\n");
- 				break;
-+                        case 'g':
-+                                if (!strcmp(optarg, "android")) {
-+                                        c.defset = CONF_ANDROID;
-+                                        MSG(0, "Info: Set conf for android\n");
-+                                }
-+                                break;
- 			case 'H':
- 				c.need_whint = true;
- 				c.whint = WRITE_LIFE_NOT_SET;
--- 
-2.43.2
+Also open coding the read-ahead logic is not a good idea.  The only
+f2fs-specific bits are the compression check, and the extent precaching,
+but you surely should be able to share a read-ahead helper with common
+code instead of duplicating the logic.
 
+> 
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>  fs/f2fs/data.c | 61 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>  fs/f2fs/f2fs.h |  1 +
+>  fs/f2fs/file.c |  9 +++++---
+>  3 files changed, 68 insertions(+), 3 deletions(-)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index a0433c8a4d84..d95974d79fb3 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -2710,6 +2710,67 @@ static void f2fs_readahead(struct readahead_control *rac)
+>  	f2fs_mpage_readpages(inode, rac, NULL);
+>  }
+>  
+> +int f2fs_readahead_pages(struct file *file, loff_t offset, loff_t len)
+> +{
+> +	struct inode *inode = file_inode(file);
+> +	struct address_space *mapping = file->f_mapping;
+> +	pgoff_t start_index = offset >> PAGE_SHIFT;
+> +	loff_t endbyte = offset + len;
+> +	pgoff_t end_index;
+> +	unsigned long nrpages;
+> +	unsigned long ra_pages = (16 * 1024 * 1024) / PAGE_SIZE;
+> +	DEFINE_READAHEAD(ractl, NULL, &file->f_ra, mapping, start_index);
+> +
+> +	if (!S_ISREG(inode->i_mode))
+> +		return -EOPNOTSUPP;
+> +
+> +	/* Should be read only. */
+> +	if (!(file->f_mode & FMODE_READ))
+> +		return -EBADF;
+> +
+> +	/* Do not support compressed file for large folio. */
+> +	if (f2fs_compressed_file(inode))
+> +		return -EINVAL;
+> +
+> +	if (!mapping || len < 0)
+> +		return -EINVAL;
+> +
+> +	if (unlikely(!mapping->a_ops->read_folio && !mapping->a_ops->readahead))
+> +		return -EINVAL;
+> +
+> +	/* Load extent cache at the first readahead. */
+> +	f2fs_precache_extents(inode);
+> +
+> +	/*
+> +	 * Careful about overflows. Len == 0 means "as much as possible".  Use
+> +	 * unsigned math because signed overflows are undefined and UBSan
+> +	 * complains.
+> +	 */
+> +	if (!len || endbyte > i_size_read(inode) || endbyte < len)
+> +		endbyte = i_size_read(inode) - 1;
+> +	else
+> +		endbyte--;		/* inclusive */
+> +
+> +	/* First and last PARTIAL page! */
+> +	end_index = endbyte >> PAGE_SHIFT;
+> +
+> +	if (start_index > end_index)
+> +		return 0;
+> +
+> +	nrpages = end_index - start_index + 1;
+> +
+> +	while (nrpages) {
+> +		unsigned long this_chunk = min(nrpages, ra_pages);
+> +
+> +		ractl.ra->ra_pages = this_chunk;
+> +
+> +		page_cache_sync_ra(&ractl, this_chunk << 1);
+> +
+> +		nrpages -= this_chunk;
+> +	}
+> +	return 0;
+> +}
+> +
+>  int f2fs_encrypt_one_page(struct f2fs_io_info *fio)
+>  {
+>  	struct inode *inode = fio_inode(fio);
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 3340db04a7c2..934287cc5624 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -4047,6 +4047,7 @@ int f2fs_init_bio_entry_cache(void);
+>  void f2fs_destroy_bio_entry_cache(void);
+>  void f2fs_submit_read_bio(struct f2fs_sb_info *sbi, struct bio *bio,
+>  			  enum page_type type);
+> +int f2fs_readahead_pages(struct file *file, loff_t offset, loff_t len);
+>  int f2fs_init_write_merge_io(struct f2fs_sb_info *sbi);
+>  void f2fs_submit_merged_write(struct f2fs_sb_info *sbi, enum page_type type);
+>  void f2fs_submit_merged_write_cond(struct f2fs_sb_info *sbi,
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index d7047ca6b98d..b6f71efd6d2a 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -5305,9 +5305,12 @@ static int f2fs_file_fadvise(struct file *filp, loff_t offset, loff_t len,
+>  		filp->f_mode &= ~FMODE_RANDOM;
+>  		spin_unlock(&filp->f_lock);
+>  		return 0;
+> -	} else if (advice == POSIX_FADV_WILLNEED && offset == 0) {
+> -		/* Load extent cache at the first readahead. */
+> -		f2fs_precache_extents(inode);
+> +	} else if (advice == POSIX_FADV_WILLNEED) {
+> +		if (offset == 0 && len == -1) {
+> +			f2fs_precache_extents(inode);
+> +			return 0;
+> +		}
+> +		return f2fs_readahead_pages(filp, offset, len);
+>  	}
+>  
+>  	err = generic_fadvise(filp, offset, len, advice);
+> -- 
+> 2.52.0.487.g5c8c507ade-goog
+> 
+> 
+---end quoted text---
 
 
 _______________________________________________
