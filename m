@@ -2,100 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8A7EC7B853
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Nov 2025 20:32:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A586AC7B978
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Nov 2025 20:52:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:References:In-Reply-To:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=pntmux7wT3Hf5KUgf1PYEkUrAQuTg02lO6yqLoILtTU=; b=dSsbe7s2EnFrPImXXgr1cQzTAE
-	IZC1iOj1Lz7scF7Ez+8LXhehT7RAmgUr2rlZB90wDMcBOcZsytbnhBPBXPhFRk6csiiIKfFvAT0Vf
-	L1BGNfM1/ccsYZSR+031IRaSLbJ6ne/1jhsrYq2WStz9JkmQ8WaLr+P1l9oST8IOlZNQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=MxF59WmVC94ekHWWfmOvhaVMM4faP7EzRMfmAqFTuMg=; b=JEFZA1wZWbLpI8zalozEc3LkYW
+	IZ0np494b3qRVHXGc8QROHtctyOCfxg885oUMjy3dP0yYPz+lu+kcYNeyfzhuGJtaNjkMUR1EpQO5
+	E/uWfPKPjj41tjd22LQjZYZPQ9V1zxLHQ8I7JUvtI+lyOYBfaKVmVxCnXI8FVjeY8rrY=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vMWrS-00060A-O7;
-	Fri, 21 Nov 2025 19:32:02 +0000
+	id 1vMXB2-0004qi-MC;
+	Fri, 21 Nov 2025 19:52:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <corbet@lwn.net>) id 1vMWrR-0005zt-Ps
+ (envelope-from <jaegeuk@kernel.org>) id 1vMXB1-0004qb-IO
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Nov 2025 19:32:01 +0000
+ Fri, 21 Nov 2025 19:52:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SJYM9YHbTxQg/kXaHLW6rjUvf7Ew9PIh+L7t/LeEqjY=; b=lAucIBI9V1N1Hw0Ku+5nDTgckc
- 6azf+fvmjywFR9Mt+Jhd/NqExYvpnl0EukDyHoZoWkchDey56gQqaWsRrUA719mDoxX/C4gdioM3m
- IpWr0pUl0yQGGHb9HfarRTyeBdfiYyX5GizR3+xNv54mk+wO2jq8fF224HtQFjqeuRuI=;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=P/rZyNC4jIKdyCIN0gURHOpJAFoyFBeumXWclaPygqA=; b=HbKWg2dF1ZFeYpPVb/CdAiYUKe
+ z7aaQsyFoHd8UhBuJ2Y8OnvmJAC+bDnFlbuIx4C1MKxGDthCd6PGhzzhk6fKQeQujnDtsgrdGyE0Q
+ IGEdo0mMZAUdWWI4aWcwVsfID5Z8Mk3HHVCtBJa8krP0HZUvZVopH+yLeTvICUPegJsY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SJYM9YHbTxQg/kXaHLW6rjUvf7Ew9PIh+L7t/LeEqjY=; b=kPF6G5YL+e+ezLFUJbqpekymxJ
- 09og4JfsIZGpQ+5+94SDRvPbVjQPLrSlsWLE8cBRHlimlXtgtTDB2lCF+eSQcFYkDT/qFctOf5E7h
- CvxXPOwGoNGU5POphR9Wne2AtFzH8rUwwG5rw8mLS2vXeHjePUvuGP+z8qy2KzfadL/I=;
-Received: from ms.lwn.net ([45.79.88.28])
+ bh=P/rZyNC4jIKdyCIN0gURHOpJAFoyFBeumXWclaPygqA=; b=SJYTF27DAOBwnFqDGrcd/xQeJt
+ js2lID1/F5LtAxtQIUX1Mmp9OCH1lgsFzq4W9SNftWNg58ecFyOsQHTzKMrsSBLL+NN9GZyNM+VWT
+ 0PeNlrzTTmgikbCGS1XA4QFUvuXiV6FzPOTWJvKvymlkHitRcssGqsNGAjdmvYvN0KjA=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vMWrR-0006wT-8q for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Nov 2025 19:32:01 +0000
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 6F60240AD1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
- t=1763753515; bh=SJYM9YHbTxQg/kXaHLW6rjUvf7Ew9PIh+L7t/LeEqjY=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=mUaqTuCmO5nrIjzu1hQG4zRQJx0bGHTnlVaalT62oINeUMCUfVr5VhSbxnc0pK1B8
- o/Yv/IwrwXrLu2oI55HAGP7JsVBUqm7P+9qBsH+xtRZ7BkPPZhGctIiS1BexFURvQv
- 1R5VtmaaYXZiKrvZhQUN5EriOoQ/pS2+OBGkVz/FvHmb1+4A/RDHEU+lJpgvjlktYC
- o0S1/2CyCfjjRWLOevig0/o2ER2YQ99974WkzRIaCgNIDUTvmQjlQgco0X39q3ceTv
- yclOidm5f3emPHLkqv0s2IwzvNlhmeOsqbZ96WvQkSclT+8U4azPkVEm6vN14QGh6o
- 8Q1vQB9G6UTDg==
-Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by ms.lwn.net (Postfix) with ESMTPSA id 6F60240AD1;
- Fri, 21 Nov 2025 19:31:55 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-In-Reply-To: <aSCoe_0bMTaqQ6tD@google.com>
-References: <20251117122754.297742-1-nogunix@gmail.com>
- <87fra7tgyk.fsf@trenco.lwn.net> <aSCoe_0bMTaqQ6tD@google.com>
-Date: Fri, 21 Nov 2025 12:31:52 -0700
-Message-ID: <87y0nzrxlj.fsf@trenco.lwn.net>
+ id 1vMXB1-0008Ri-5E for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Nov 2025 19:52:15 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 76D2C60145;
+ Fri, 21 Nov 2025 19:52:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E6357C4CEF1;
+ Fri, 21 Nov 2025 19:52:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1763754724;
+ bh=xfWX1MWedHrZ+OmxiBiUepfssMh2KX6vp847cJtltI0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=aubBZ50KhxASUsH9f7p2KYtdywmckKytFFSSMWN+M5kMVpFoQmf3P4Ll2z6Ii6ahD
+ jG2YRwfA3fQkhEJbTys06AsOkQrHf74rUejklOCu09/ZdYUehGJjUhCqugC2yKWJSN
+ r07RDzlrwhVteEJ4/URMg+cbxlywBcP2lQBX0HphCs1Rkkn6j9niIQzKe+qY8iJT1l
+ xywqK7xYvLZj/JqUhjCAnmxcJADcEfFobBHy1Yl4dt0mLRE01rmnRjqjNm+WYFG7bV
+ Wlhx0osTVfe080ht8Bgj+FbxpSeombfsqFW9P4kffbHMO1Z3sBoAvuKiqoS4HxlDdp
+ NIX1jQ3UkAK4Q==
+Date: Fri, 21 Nov 2025 19:52:02 +0000
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <aSDC4jlaKSaKgbvc@google.com>
+References: <20251121032718.1993528-1-jaegeuk@kernel.org>
+ <aR_pCGtcc7ASeA77@casper.infradead.org>
+ <aR_ultJzXh1rmOKs@google.com>
+ <aSB25FFkLaJkbVfT@casper.infradead.org>
+ <aSCpKx9ITAJfoSlw@google.com>
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <aSCpKx9ITAJfoSlw@google.com>
+X-Spam-Score: 0.8 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Jaegeuk Kim <jaegeuk@kernel.org> writes: >> Jaegeuk, are you
- planning to pick this up, or should I take it through >> docs? > > Let me
- queue this in f2fs.git. May I get your SOB? Acked-by: Jonathan Corbet
- <corbet@lwn.net>
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On 11/21, Jaegeuk Kim wrote: > On 11/21,
+ Matthew Wilcox wrote:
+ > > On Fri, Nov 21, 2025 at 04:46:14AM +0000, Jaegeuk Kim wrote: > > > On
+ 11/21, Matthew Wilcox wrote: > > > > On Fri, Nov 21, 2025 at 03 [...] 
+ Content analysis details:   (0.8 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
+ [172.105.4.254 listed in dnsbl-2.uceprotect.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1vMWrR-0006wT-8q
-Subject: Re: [f2fs-dev] [PATCH v5] docs: f2fs: wrap ASCII tables in literal
- blocks to fix LaTeX build
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1vMXB1-0008Ri-5E
+Subject: Re: [f2fs-dev] [PATCH] [RFC] mm/fadvise: introduce POSIX_FADV_MLOCK
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,25 +111,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: akiyks@gmail.com, Masaharu Noguchi <nogunix@gmail.com>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, bagasdotme@gmail.com
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Christian Brauner <brauner@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Jaegeuk Kim <jaegeuk@kernel.org> writes:
+On 11/21, Jaegeuk Kim wrote:
+> On 11/21, Matthew Wilcox wrote:
+> > On Fri, Nov 21, 2025 at 04:46:14AM +0000, Jaegeuk Kim wrote:
+> > > On 11/21, Matthew Wilcox wrote:
+> > > > On Fri, Nov 21, 2025 at 03:27:18AM +0000, Jaegeuk Kim wrote:
+> > > > > This patch introduces a new POSIX_FADV_MLOCK which 1) invalidates the range of
+> > > > > cached pages, 2) sets the mapping as inaccessible, 3) POSIX_FADV_WILLNEED loads
+> > > > > pages directly to the inaccessible mapping.
+> > > > 
+> > > > ... what?
+> > > > 
+> > > > This seems like something which is completely different from mlock().
+> > > > So it needs a different name.
+> > > > 
+> > > > But I don't understand the point of this, whatever it's called.  Need
+> > > > more information.
+> > > 
+> > > So, the sequence that I'd like to optimize is mmap(MAP_POPULATE) followed
+> > > by  mlock(). For example, mmap() takes 1 second to load 4GB data, and mlock()
+> > > takes 330ms additionally in order to migrate all the pages into inaccessible
+> > > map, IIUC.
+> > 
+> > Oh, so the MLOCK part is right, but the inaccessible() part is wrong.
+> > Inaccessible is special weird guest_memfd crap that has all kinds of
+> > side-effects that you don't want.
+> > 
+> > Wouldn't you get the same effect by calling mlock2(MLOCK_ONFAULT) and
+> > then calling readahead() for the desired range?
+> 
+> Oh, thank you. Let me try.
 
->> Jaegeuk, are you planning to pick this up, or should I take it through
->> docs?
->
-> Let me queue this in f2fs.git. May I get your SOB?
-
-Acked-by: Jonathan Corbet <corbet@lwn.net>
-
-Thanks,
-
-jon
+After checking the code and experiment, I don't think that gives what we need.
+That flag skips populate_vma_page_range only, but we need to allocate pages
+in the inaccessible mapping and fill the pages afterwards.
 
 
 _______________________________________________
