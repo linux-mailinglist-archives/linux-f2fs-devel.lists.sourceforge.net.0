@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEDB4C7B28F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Nov 2025 18:59:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E505C7B2CE
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Nov 2025 19:02:35 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=oFWF0SlnAyeutgYbXNG8S/gbHnTD6nDMsjUz1PsnCOs=; b=H+W461msu2z84bZrmqr2EZeAy3
-	7ajpaSfJKZITcFQ6RYQ3gmqsR92dWF8rWXoY5Spx/XKey5zojKxBd93pfu8PzPfGz0MEOHu3EEXf4
-	wnxbTy9eha1rnhBkjwrY5aXeULzbFR1H6XKLYM3o0mTuB2HOdkIN+wUIMPAPXJT6qoXY=;
+	bh=huuawjAbczwIq8wvGgeUO4lTZYCESJtW4UlqTnQW/Ws=; b=AMvoNWuJF3cQrY+uFzLGJ3NQ56
+	DPTAqKkxSnSFlOzBtfdgWdp0Pyphwa8cRDA5PAq1zCI0Z9Ex+smyWJ/arKGfydnCLfNq5z/n/jySc
+	vO/dRajvN7rNZec/8Wg/Y135dbSNS/ONGsBXbmS26oxLjmHbw7k7vgeo4PVCX/8bvIeo=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vMVQ2-0006Jg-V5;
-	Fri, 21 Nov 2025 17:59:38 +0000
+	id 1vMVSm-0006QU-NJ;
+	Fri, 21 Nov 2025 18:02:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1vMVQ1-0006Ja-2W
+ (envelope-from <jaegeuk@kernel.org>) id 1vMVSl-0006QO-RQ
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Nov 2025 17:59:37 +0000
+ Fri, 21 Nov 2025 18:02:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i9RJHXei8D0a8HmCAuzDkZPXzdHEI8z34ECclW7GXg4=; b=hvkCXuuTXAdG2kK9TjIMUNtpbj
- a7CeK6pGz4pDFTzbErfcUOfrLvRm43ThKARGV03K1+Ms+E5sbC/+pKgfbOJWooKZiFgZDrAhXRReI
- 9VFjaOrn7J5+aGTX/THJGjCTwp/WS1/T8rKh/aVsXQ+k7P6IYCofbrdzBU8xAl1EvJHE=;
+ bh=QQvdXsUFsSgmgdlK4Hqgea3i/WHKlDRKsaXkhpCZRwQ=; b=R9gZlPc7y9Ywao/05jHFXSmXsw
+ sXY4fryMqhbvVa1D1Nntgf08QJ1lPBaVmz+8V8x4ol1rrQ+IBqP1lL84V4sMBb+/7D6bwb4+fFMt6
+ Y533NRfOOGLww9dKP3yoDWrwg63UMBmN9Hify9WGbNQS0zlzJI9pusQDVIXRQ5+5X4bM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -40,64 +40,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=i9RJHXei8D0a8HmCAuzDkZPXzdHEI8z34ECclW7GXg4=; b=XUszuqwOowur+y0cbxpl348QZ9
- vcpwXIGeChCCLEsc2BYy8T7/rkQMPrOQhNUcshzbbIWiz8nSbKT7CYO8usm+iF5Y66KuwVSyRvp+g
- ltYF2mOf5eTm3b7XHsjg6LjlS3Riq3JBxooX4FoNRVyWap8Q24MRs/hE/WQh4+pHY+1M=;
+ bh=QQvdXsUFsSgmgdlK4Hqgea3i/WHKlDRKsaXkhpCZRwQ=; b=PXRqI7iV2Y56kmdx2jkGNe0dpq
+ okhRp5xv3RKcYeUi5rkQHxwZ3IGZKD2Iogp54K/XRcMGH42b1/Ph404XCOXUtzBJcMTrQEERvbpcW
+ SzQ7iCK3taIvjXhXijmdkX4wM/favZ6mSCz5ivhEtz6MklHSalN/23y/wOh/wLqHBMy8=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vMVQ0-0007a4-MT for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Nov 2025 17:59:37 +0000
+ id 1vMVSl-0007po-Dg for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Nov 2025 18:02:27 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 10F5960139;
- Fri, 21 Nov 2025 17:59:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 680B9C116C6;
- Fri, 21 Nov 2025 17:59:25 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id C1F1B605D1;
+ Fri, 21 Nov 2025 18:02:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43C91C4CEF1;
+ Fri, 21 Nov 2025 18:02:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1763747965;
- bh=qw8xtHsNX2lkUcj9Nrr20MMZRduTEzBJEup2i4clE4I=;
+ s=k20201202; t=1763748141;
+ bh=m2bA12FIv0pEMyLCbJ3EVa7rHjBb0FPrihVbgFol0Zk=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=EYf5he1ouY16pWpPbCphnFCzi5qQppitk3XAQL3OY93xCeJU0xoNdsNRFgvS/NnhH
- 0YpasOAZ0HhuSfTByCa0ss1U24klpZ3aM/XAbOET3iT4hfbZGg/FAwR5wEpS0IAAbi
- RZCYTMPR2WHkACmI+AQB7vrdWndqsLBf13OpjNUSJeL5epvNfWZfhFJNmpWOvHhxdR
- HwMJNUMl1yVsSflLSvxfTLwdCn3UVAqczwuB4J4yJ6IRqXvHLj4SdxVhKIB+1oR6DQ
- JfTuWW8ivxMI3IK3MhTtBxcpf7wefHmM/3gXH67nGuMw1kp1VoXChjpULq/rposUlv
- HKY+3OMpDXcUw==
-Date: Fri, 21 Nov 2025 17:59:23 +0000
-To: Jonathan Corbet <corbet@lwn.net>
-Message-ID: <aSCoe_0bMTaqQ6tD@google.com>
-References: <20251117122754.297742-1-nogunix@gmail.com>
- <87fra7tgyk.fsf@trenco.lwn.net>
+ b=Ca83LyS2vXxHRwBX+pCIwfKeT5FOSeHOTW/Sb73MAOCujAHk/T3geekVlESRsenjK
+ EABFED85pOzrFnKQj+oZOr9J8osuT8zlIM+VMe323bJGMyd1SWhyeyjmFhf0t3JH3A
+ Ln6hXC1a2hPMkKXfow+Driqe5a/eiY4w8TpnhXwHqMrWTTAMEm8SWTbrfmkg6iDNNA
+ Tf7K1938rTJHsU/4uMPgEENdk6qQVMLngkVWPk6N4aU8ereVIOOgtqMrJC2fqZlcsO
+ tIM1eLiVvNMRqrn0cVbtpmpzF78rr8FdfpW3jiDOLTW28Ny5lqAqpEKOlxagZNE+Eq
+ ESYaH9e+nvsow==
+Date: Fri, 21 Nov 2025 18:02:19 +0000
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <aSCpKx9ITAJfoSlw@google.com>
+References: <20251121032718.1993528-1-jaegeuk@kernel.org>
+ <aR_pCGtcc7ASeA77@casper.infradead.org>
+ <aR_ultJzXh1rmOKs@google.com>
+ <aSB25FFkLaJkbVfT@casper.infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <87fra7tgyk.fsf@trenco.lwn.net>
+In-Reply-To: <aSB25FFkLaJkbVfT@casper.infradead.org>
 X-Spam-Score: 0.8 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 11/21,
- Jonathan Corbet wrote: > Masaharu Noguchi <nogunix@gmail.com>
- writes: > > > Sphinx's LaTeX builder fails when converting the nested ASCII
- tables in > > f2fs.rst, producing the following erro [...] 
+ Content preview:  On 11/21, Matthew Wilcox wrote: > On Fri, Nov 21, 2025 at
+ 04:46:14AM +0000, Jaegeuk Kim wrote: > > On 11/21, Matthew Wilcox wrote: >
+ > > On Fri, Nov 21, 2025 at 03:27:18AM +0000, Jaegeuk Kim wrote: > [...] 
  Content analysis details:   (0.8 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
+ [172.105.4.254 listed in dnsbl-2.uceprotect.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
- [172.105.4.254 listed in dnsbl-2.uceprotect.net]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vMVQ0-0007a4-MT
-Subject: Re: [f2fs-dev] [PATCH v5] docs: f2fs: wrap ASCII tables in literal
- blocks to fix LaTeX build
+X-Headers-End: 1vMVSl-0007po-Dg
+Subject: Re: [f2fs-dev] [PATCH] [RFC] mm/fadvise: introduce POSIX_FADV_MLOCK
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,38 +111,41 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: akiyks@gmail.com, Masaharu Noguchi <nogunix@gmail.com>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, bagasdotme@gmail.com
+Cc: Christian Brauner <brauner@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 11/21, Jonathan Corbet wrote:
-> Masaharu Noguchi <nogunix@gmail.com> writes:
+On 11/21, Matthew Wilcox wrote:
+> On Fri, Nov 21, 2025 at 04:46:14AM +0000, Jaegeuk Kim wrote:
+> > On 11/21, Matthew Wilcox wrote:
+> > > On Fri, Nov 21, 2025 at 03:27:18AM +0000, Jaegeuk Kim wrote:
+> > > > This patch introduces a new POSIX_FADV_MLOCK which 1) invalidates the range of
+> > > > cached pages, 2) sets the mapping as inaccessible, 3) POSIX_FADV_WILLNEED loads
+> > > > pages directly to the inaccessible mapping.
+> > > 
+> > > ... what?
+> > > 
+> > > This seems like something which is completely different from mlock().
+> > > So it needs a different name.
+> > > 
+> > > But I don't understand the point of this, whatever it's called.  Need
+> > > more information.
+> > 
+> > So, the sequence that I'd like to optimize is mmap(MAP_POPULATE) followed
+> > by  mlock(). For example, mmap() takes 1 second to load 4GB data, and mlock()
+> > takes 330ms additionally in order to migrate all the pages into inaccessible
+> > map, IIUC.
 > 
-> > Sphinx's LaTeX builder fails when converting the nested ASCII tables in
-> > f2fs.rst, producing the following error:
-> >
-> >   "Markup is unsupported in LaTeX: longtable does not support nesting a table."
-> >
-> > Wrap the affected ASCII tables in literal code blocks to force Sphinx to
-> > render them verbatim. This prevents nested longtables and fixes the PDF
-> > build failure on Sphinx 8.2.x.
-> >
-> > Acked-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> > Reviewed-by: Akira Yokosawa <akiyks@gmail.com>
-> > Signed-off-by: Masaharu Noguchi <nogunix@gmail.com>
+> Oh, so the MLOCK part is right, but the inaccessible() part is wrong.
+> Inaccessible is special weird guest_memfd crap that has all kinds of
+> side-effects that you don't want.
 > 
-> Jaegeuk, are you planning to pick this up, or should I take it through
-> docs?
+> Wouldn't you get the same effect by calling mlock2(MLOCK_ONFAULT) and
+> then calling readahead() for the desired range?
 
-Let me queue this in f2fs.git. May I get your SOB?
-
-> 
-> Thanks,
-> 
-> jon
+Oh, thank you. Let me try.
 
 
 _______________________________________________
