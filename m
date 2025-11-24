@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25F7BC80F38
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Nov 2025 15:16:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25A25C80F60
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Nov 2025 15:18:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Gny3NbRoEMTr11pchSgHCdWlPRUjCZC7yd6D6Hh8kvo=; b=RqFY0myE0bZjGZoKtVIegsXU6X
-	mN4cs+0ACTNvNk+2M/w7F5tPZ1qmBkH/6ZVytTKJWyWvYJf5qOnKF4NXy7a73YlPm6k4qJFU5GbWc
-	GT8sBbLUklYmEymIuPdHy5m/SsQmPYDRlQaczHWhqlZ/kJHh7Sk742oYgw610hB1p0u8=;
+	bh=BzyeqG5Y3pHJZq3SVPQFK+YC8zMQWa7h1P/ZkwxZxEc=; b=kUtpMRq7qY7uT7fIfAPbqz7Xsd
+	UGAMqS12zPU5WZARwr1J3wjDqexrMxHMBXx9lkn0MdTTgLEFR2r9+ls0frqKlGQXpQz3P4uH8RozL
+	kseTxSO7Y8NaeIytZaflCq2a0k8aaTKzvbB2HkWg4yFj7O4CEpMHvk4n5IpYshA3FWVU=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vNXMl-0004Mq-W4;
-	Mon, 24 Nov 2025 14:16:32 +0000
+	id 1vNXOI-0004Wo-DZ;
+	Mon, 24 Nov 2025 14:18:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1vNXMk-0004Ma-D7
+ (envelope-from <hch@lst.de>) id 1vNXOG-0004Wa-Gn
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Nov 2025 14:16:31 +0000
+ Mon, 24 Nov 2025 14:18:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fdA2FhyYdi8hZTZFvKBurmQdMwX5PNBD1lO8r3J2lVM=; b=dPwnl4ZZG1JSkL3qaWxcQWeMUj
- wtEaLMvq8NgsmWVtvi6PZHuhC/ca95TIRnOuXtioMItF11kExNH4XxA/JGWIlzcNlxLA9U8fiKvU4
- TH3WYnjzI6AKhGh0R/8H41nj7JfQWW3JjuJL29jOvgECe2AAtkOwNDspAmq8bvp7/A8M=;
+ bh=b3f4UnZO+WkXzK87bQ+9CQkFbBQ2PX20TL6+zXEz0xk=; b=CBoRJsKX40tJLuZzVDe+dAPKXN
+ RdikbLLSBzCKG2kopVnKkvEC1S6+0iYOZdL5QS37+6y53wcO6snVuEceoIDgsHdtS7WA7Y41Qrpyj
+ Vjg8+opKyISynY9pmb1rrvqb5b4ODPEz6S2Ed87fImjQYiCvpNU+RBQV+O9Z82T4sUfc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -40,42 +40,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=fdA2FhyYdi8hZTZFvKBurmQdMwX5PNBD1lO8r3J2lVM=; b=L6LurqjltI9TzDfXCtKxuFwHSe
- pQBZPrhhzn2/S6VBUPN80WS8xUk+p025s5ALpldt38pBYXDjvr4QckGRAuMTYi9YWwhgyMoLmNBhy
- 5oAyPJJxSWL0ThqdQSSfgeW81LgbibOmg4frSjTzEaL0QCY/2KYOr44q78t0ac2LxZVA=;
+ bh=b3f4UnZO+WkXzK87bQ+9CQkFbBQ2PX20TL6+zXEz0xk=; b=MhgdLcB4E95M6qJEOAK5pnHMLy
+ +qZhFPOuLviIFZOObx6b46gVQFnoCSnKkjR0iko9dgqPuceYOq0tdF/eazUoGV0cOzpYfrqxHWYYW
+ WqzIJXDnui1OQ1T6Z9LKQUVwOPaiVYYSxvHHIl1GwknX8pY7JhowWcnbzYVU17k+watw=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vNXMk-0003Zk-Lh for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Nov 2025 14:16:31 +0000
+ id 1vNXOG-0003h2-Kp for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Nov 2025 14:18:05 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 0436768B05; Mon, 24 Nov 2025 15:16:21 +0100 (CET)
-Date: Mon, 24 Nov 2025 15:16:21 +0100
+ id E7D8168C4E; Mon, 24 Nov 2025 15:17:51 +0100 (CET)
+Date: Mon, 24 Nov 2025 15:17:50 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20251124141621.GC14417@lst.de>
+Message-ID: <20251124141750.GD14417@lst.de>
 References: <20251118062159.2358085-1-hch@lst.de>
- <20251118062159.2358085-5-hch@lst.de> <20251122181717.GA1626@quark>
+ <20251118062159.2358085-11-hch@lst.de> <20251122182926.GC1626@quark>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20251122181717.GA1626@quark>
+In-Reply-To: <20251122182926.GC1626@quark>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sat, Nov 22, 2025 at 10:17:17AM -0800, Eric Biggers wrote:
- > On Tue, Nov 18, 2025 at 07:21:47AM +0100, Christoph Hellwig wrote: > >
- diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c [...] 
+ Content preview:  On Sat, Nov 22, 2025 at 10:29:26AM -0800, Eric Biggers wrote:
+ > The type of 'len' is still unsigned int, so this reduces the maximum >
+ length accepted by fscrypt_zeroout_range() from UINT32_MAX blocks [...] 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1vNXMk-0003Zk-Lh
-Subject: Re: [f2fs-dev] [PATCH 04/11] fscrypt: pass a byte offset to
- fscrypt_mergeable_bio
+X-Headers-End: 1vNXOG-0003h2-Kp
+Subject: Re: [f2fs-dev] [PATCH 10/11] fscrypt: pass a byte length to
+ fscrypt_zeroout_range
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,26 +96,15 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sat, Nov 22, 2025 at 10:17:17AM -0800, Eric Biggers wrote:
-> On Tue, Nov 18, 2025 at 07:21:47AM +0100, Christoph Hellwig wrote:
-> > diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
-> > index 1773dd7ea7cf..aba830e0827d 100644
-> > --- a/fs/crypto/inline_crypt.c
-> > +++ b/fs/crypto/inline_crypt.c
-> > @@ -361,7 +361,7 @@ EXPORT_SYMBOL_GPL(fscrypt_set_bio_crypt_ctx_bh);
-> >   * fscrypt_mergeable_bio() - test whether data can be added to a bio
-> >   * @bio: the bio being built up
-> >   * @inode: the inode for the next part of the I/O
-> > - * @next_lblk: the next file logical block number in the I/O
-> > + * @pos: the next file logical offset (in bytes) in the I/O
-> 
-> In comments, maybe call it a "file position" instead of "file logical
-> offset" to match the variable name?
+On Sat, Nov 22, 2025 at 10:29:26AM -0800, Eric Biggers wrote:
+> The type of 'len' is still unsigned int, so this reduces the maximum
+> length accepted by fscrypt_zeroout_range() from UINT32_MAX blocks to
+> UINT32_MAX bytes.  Is that really okay?
 
-Doing a quick grep, "file offset" seems to be a bit more than twice
-as common as "file position" in the kernel.  Logical offset, even
-without file is barely used.  So I think "file offset' might be best
-here, but if you prefer "file position" I can switch to that as well.
+Linus has limited Linux's read/write I/O sizes to a signed integer,
+even if size_t/ssize_t could be larger.  We have internal support
+to do a few things larger, so there would be precedence to support a
+64-bit value and I'd be happy siwtch over to that.
 
 
 
