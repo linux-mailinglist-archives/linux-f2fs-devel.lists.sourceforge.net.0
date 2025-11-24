@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EB63C7F0E2
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Nov 2025 07:29:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50941C7F103
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Nov 2025 07:30:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=SA2j34aXlwk0cG0Bp+o9VzyFaNNGp4qrxQajVx4Yt7I=; b=ZARk6beDd9SrPGyBcA/n8ir+i8
-	C6Uy9tJUP3ifK6om0osyrVcL8YhISF7+KmN3jHjvZLaigsfNw+vecqLlayh+IGgF+8qzNLe3XdAVD
-	BOsvvjrpucb6VVTME6VfyZPqj8rgkbwKWvO6df8mGtjfdgwf15aeqrFCsbu1OLzGubmY=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=TnhI37av0wxROuzWPn2VUKyIQ1PlD5usZS4qwkaFbds=; b=XiicX98nZIDCNtDRu8nr0XymSM
+	QYfEQMBqBqAfOTJbwufdpY0KkFuIect0NnDIVVC9b0pkFSvakZhQaS6ec1VexAlY0a8mjVTftBKYL
+	hNVROP8xLdW8h+2DNv1+stvEpDKXzhhvZ/yifGNWB3V1mWpInyb7jA2si7Jp8h33xUmg=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vNQ4V-0006SH-SM;
-	Mon, 24 Nov 2025 06:29:11 +0000
+	id 1vNQ5v-0006ww-CY;
+	Mon, 24 Nov 2025 06:30:39 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1vNQ4U-0006S8-2z
+ (envelope-from <hch@lst.de>) id 1vNQ5h-0006wf-SM
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Nov 2025 06:29:10 +0000
+ Mon, 24 Nov 2025 06:30:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qfhWGUq06KJLXqW/n3kz0UhTOrfBK9Bhsf1cCUsicW4=; b=FvZHQNn2KbIt3SL7HoinH8a9b7
- hVbetdK1z9QBITEA6e4e8BU/JueczCKOCN4ct4cFLVVS9nCzFCLmSV0qLOGDXNDoYQfEkFqoyR+wK
- zJRwTOWQeXO6q20SwsBUHNJNkmPNyMLe4Wi2Ta1BIwIdfOLfaxDOY3Mggi37ZAgXqN4A=;
+ bh=Q35Uzhw2kUdUnX+0WJUFRb4cV3+/l9MC0GtyEz30cco=; b=PB1JEBiG25HVhw6p+IIQIqC5dx
+ T5H/qJB3MDZCMf8VWMvQKhBBlhPTtZYgTVB52oZDAze4Gur6ZiRRqgu3Plhkq6pAdn4LjCiUhdYp0
+ 0l1pUWv1nJfrQdmP5IM/btyf3ENB8kLNUqb2WCg4XmiZ0fSpZGimJ2lgfP1mOQhhjbgY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -40,42 +40,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qfhWGUq06KJLXqW/n3kz0UhTOrfBK9Bhsf1cCUsicW4=; b=NajNArrxhpp0yLRwRG2xs4pv1h
- 21Efm9zjEhdtxtPakQYxqHpqide6xUfCC7AXX2cezdxXuROZJc+9OeaFCWjl4Wg0L5TqBp10WGJoU
- /7m18FqnY/a6vZBoqJ4hdRdvoWlQlLk71G1xLxs6/zbNGsMXfb+gIUEdXHEaHtQrSmPc=;
+ bh=Q35Uzhw2kUdUnX+0WJUFRb4cV3+/l9MC0GtyEz30cco=; b=DqdEm1pUdV4IO4VNH0rCo5LpCH
+ /tvnPlsopaIV0Wf+i7qynBtAjoyR50X/ig6ipy8krELQMeu5YQ/dFBTnf9z7CoXZJKPzBkiA0tXvI
+ 8QVyVxJKU9cxYc4nohoemhg6r0zNqNj4ff7DdiXKkfp1eKTYibplgMt0GHTxGZlNXpoM=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vNQ4T-00075d-Kz for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Nov 2025 06:29:10 +0000
+ id 1vNQ5h-0007EM-6m for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Nov 2025 06:30:25 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 3976468B05; Mon, 24 Nov 2025 07:28:56 +0100 (CET)
-Date: Mon, 24 Nov 2025 07:28:55 +0100
+ id B44AD68B05; Mon, 24 Nov 2025 07:30:11 +0100 (CET)
+Date: Mon, 24 Nov 2025 07:30:11 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Chaitanya Kulkarni <ckulkarnilinux@gmail.com>
-Message-ID: <20251124062855.GA16765@lst.de>
+Message-ID: <20251124063011.GA16808@lst.de>
 References: <20251124025737.203571-1-ckulkarnilinux@gmail.com>
- <20251124025737.203571-4-ckulkarnilinux@gmail.com>
+ <20251124025737.203571-5-ckulkarnilinux@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20251124025737.203571-4-ckulkarnilinux@gmail.com>
+In-Reply-To: <20251124025737.203571-5-ckulkarnilinux@gmail.com>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  > + nvmet_lba_to_sect(ns, range.slba), > + nr_sects,
- > + GFP_KERNEL, 
- &bio); This can be condensed a bit to: nvmet_lba_to_sect(ns, range.slba),
- nr_sects, GFP_KERNEL, &bio); 
- Content analysis details:   (0.0 points, 5.0 required)
+ Content preview:  On Sun, Nov 23, 2025 at 06:57:36PM -0800, Chaitanya Kulkarni
+ wrote: > + __blkdev_issue_discard(bdev, > + SECTOR_FROM_BLOCK(start), > +
+ SECTOR_FROM_BLOCK(len), > + GFP_NOFS, &bio); This can be shortened a bit
+ as well: Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1vNQ4T-00075d-Kz
-Subject: Re: [f2fs-dev] [PATCH V2 3/5] nvmet: ignore discard return value
+X-Headers-End: 1vNQ5h-0007EM-6m
+Subject: Re: [f2fs-dev] [PATCH V2 4/5] f2fs: ignore discard return value
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,14 +97,16 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-> +				nvmet_lba_to_sect(ns, range.slba),
-> +				nr_sects,
-> +				GFP_KERNEL, &bio);
+On Sun, Nov 23, 2025 at 06:57:36PM -0800, Chaitanya Kulkarni wrote:
+> +		__blkdev_issue_discard(bdev,
+> +				SECTOR_FROM_BLOCK(start),
+> +				SECTOR_FROM_BLOCK(len),
+> +				GFP_NOFS, &bio);
 
-This can be condensed a bit to:
+This can be shortened a bit as well:
 
-				nvmet_lba_to_sect(ns, range.slba), nr_sects,
-				GFP_KERNEL, &bio);
+		__blkdev_issue_discard(bdev, SECTOR_FROM_BLOCK(start),
+				SECTOR_FROM_BLOCK(len), GFP_NOFS, &bio);
 
 Otherwise looks good:
 
