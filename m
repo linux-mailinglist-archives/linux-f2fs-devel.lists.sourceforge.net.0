@@ -2,132 +2,137 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22D15C86C48
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Nov 2025 20:20:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C3D88C8778D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Nov 2025 00:34:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Date:Message-Id:References:In-Reply-To:To:From:Sender:
+	Subject:MIME-Version:References:In-Reply-To:Date:To:From:Message-ID:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=ebyFkcz+ooR1RlK4RwUUHqpksmLRY8XtYwtV/rUQ+5U=; b=ULUE5bqNBnWVu6jLpLhXn0fMsM
-	JMkFG0mWHuRH1EJdSnpps+y9hr87NwViyt4x+u0D0YSDZaML9oz/3cXnaVGLdP1UJjptGj6c4/fnz
-	977nueNjvH3zg6Q175ShmlTpEXYaF5gf1cRIt+IKyeOtk5GGy5+lfREWRwDybEc5Sgek=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=gzsA5ZUabLZRD0vEUtVKuIIeYwC9EXCCNwfN811Cb+A=; b=Z0zJhec7Lv6R9nzMfa/1IbLGOO
+	w+ZzlWcN93Qm87il5S2PSDZnx6KN3Hj3jHSgLJWrG4+K+uxNcXKVnGB2I2g/pvBqS7ihDvF52BZKm
+	2xU2hb9o5N1+vuvpbaJlYYfYSzPfDYu1IwlN565fY0nDdLQb0dSjZVZy5Ex1hsPP0WFs=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vNyaE-0007o1-9W;
-	Tue, 25 Nov 2025 19:20:14 +0000
+	id 1vO2Xt-0000d3-Pt;
+	Tue, 25 Nov 2025 23:34:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <axboe@kernel.dk>) id 1vNyaC-0007nu-MM
+ (envelope-from <wilfred.opensource@gmail.com>) id 1vO2Xa-0000ax-GE
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Nov 2025 19:20:12 +0000
+ Tue, 25 Nov 2025 23:33:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Date:Message-Id:Subject:References:In-Reply-To:Cc:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Wynpj+E5fG2Oh1abG+WZEscR5HBvHm5298AKLCuUClg=; b=EjyvgcU/s2H91P6B+vXkuxLqQU
- I2VM/xi5vxyD9marbLQ5Xigvu1zNXqJd3hy0ha3/oje+TQGDso6+hw93hl/pehHzHIHI0q3AaBeXs
- NImnOUOqgaGhq0X2HGx+zYDLd8T6WmdybY+xLln85chb/XFaCapGOPAxU9aeuVw+C33k=;
+ bh=3rkC5tVLIYNbT+NJhSO0xtU9bfDYrwdByb9M2iU+wBw=; b=Y+kdyuiDO6uiNgv6CR5bWRrHRe
+ ofijAfsqXLKqfxO9U9Oa62dcF6RHQzj2Gh+h+3u759fp3TAGPUIfg7LtrZUjlfJCbztyGivsw3VpE
+ Z6beGKUzRQsE1cMenJEgKgSAe1Dt4zNkVa76xQRKPhLz1TL14Zl/gn+6UpJyRqKkYl4M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-Id:
- Subject:References:In-Reply-To:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Wynpj+E5fG2Oh1abG+WZEscR5HBvHm5298AKLCuUClg=; b=GwmQB2L4h4e5QDoY3nGqLZKpWu
- /iFQL68QTSBvC4wr89LIJZLqReFjRbzHi/2/RjKxDpp4N8WAMpOWGyKfwXoI8TrBTQxgbwsCxF1iG
- TCAQJgGmC+AKSIMjuAvNRqL1jb/iVmCrM358BzrFw8oko+BjsmdpJljlFyXzVmtxU/uM=;
-Received: from mail-io1-f42.google.com ([209.85.166.42])
+ bh=3rkC5tVLIYNbT+NJhSO0xtU9bfDYrwdByb9M2iU+wBw=; b=Yv2NO8v6IvhSueHL0bhznJwZYT
+ 1cFXV3sVZNDKPnEp4BTJjlYD84372OeIjQUF0xLuprTeLVtaztuP+FKvZYblkVveYOhj0XQDVARpk
+ VE8iYm6iXH5o7tf3xN9lU/DgdIDlB3pvT35Nr7k/uncuZwadSMcHDWuqRisILyIY4Bdo=;
+Received: from mail-pj1-f49.google.com ([209.85.216.49])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vNyaC-0003X5-9y for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Nov 2025 19:20:12 +0000
-Received: by mail-io1-f42.google.com with SMTP id
- ca18e2360f4ac-948f8fa9451so172127939f.3
+ id 1vO2Xa-0003gZ-P1 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Nov 2025 23:33:47 +0000
+Received: by mail-pj1-f49.google.com with SMTP id
+ 98e67ed59e1d1-3434700be69so8638321a91.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 25 Nov 2025 11:20:12 -0800 (PST)
+ Tue, 25 Nov 2025 15:33:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel-dk.20230601.gappssmtp.com; s=20230601; t=1764098406; x=1764703206;
- darn=lists.sourceforge.net; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Wynpj+E5fG2Oh1abG+WZEscR5HBvHm5298AKLCuUClg=;
- b=K+LU7dahlW4iMPq/V/qXixrNJbl9CwUDfXdr2l02Xu2P44YtXDz5UP04mBrzfyFab6
- ra6FpFNwHKm8+N7OoNPt/G33+NA79Q2uedu60JlLTsKqtsMNaHz9T/43LwKL3rozxV27
- KqhvPff9VuBkXenx2rvOUJH7+PKW4FNkhNmb0zEd8YJ2+h37SUocgv7ww/PrzoKGwchU
- iUgZFupGd4CDWX51SMYeM8sr59Qu5Ncbhn4YOHYbWo+xvcyi4UtV/oyAI+ZJZ69Dns3j
- BJXXt//oezjZOXQfAeD5raTiGbBxG8csUvN44SPew8fufGFBtZP96oStA0Z+MCW2uJzN
- E9jw==
+ d=gmail.com; s=20230601; t=1764113616; x=1764718416; darn=lists.sourceforge.net;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=3rkC5tVLIYNbT+NJhSO0xtU9bfDYrwdByb9M2iU+wBw=;
+ b=BLQN7shcR3Hq5tYywABtJIhVYWc+E+VAqVT4T3OJUbcxf25yH0BLz0d4uyMA7JncIU
+ sBLedhXSKBsn2oQJ8D46NSV3hCGZM4NKZNQkvpGW1+1gk2RQphRhQUdsZqiqQrOSkuXQ
+ fO3s5EaUnnSy8plyfrwgqzMbeVpiR5hyr0FXRREhyKC/nvCJDJ+HA66cdSZczhvvO/sl
+ x2HdekrC7TIY+QYOrwISeobu9lYgWaQReEBHd0J8xRVYUeCoeMEIQoBksr9iriGUWTnq
+ 2s+fNOsncjIiVcJIOzhpQCCKAa9eD/XUrGWoAKkAf6Mk4FAi2ipldGCb+wnfmuFoVJRL
+ sKvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764098406; x=1764703206;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Wynpj+E5fG2Oh1abG+WZEscR5HBvHm5298AKLCuUClg=;
- b=W7EOfXrgT29qWKCvk2fiTAXUab45oPYd/DahISKWbTamkcVOKofgV1sWxzoduKhdaH
- mdy1gLDk1Tpx233fNMy8iOUPwDLU6ZDByma4VwUw+dUzofLZIGtvgvWA8PBWeGDe8RJ+
- 7sGZJ7jM8MgiPZVoMesKennTYacH0p2tziENYqsUaeAE1SiB6dMPEgi/eRkUL2VRJfqg
- Kys5a//Oi2cfwidmtZZOKzvBSHiJGeFxkQVwv69SYIssJWhB1NdQxfbqbXvbeW7nCKZU
- FntDUghQOXw4onjtUZP+/cX8G2CCXUTbIrw8SMI8VAmLxpy69u4wsnzMnro+0GdgHOCi
- tdsg==
+ d=1e100.net; s=20230601; t=1764113616; x=1764718416;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=3rkC5tVLIYNbT+NJhSO0xtU9bfDYrwdByb9M2iU+wBw=;
+ b=OnjmDwwXqJeFLDFzJlWSKDyii9Doe5jMXqToeXUW3vJ7TMm2WRCEVM1qAdyz2lGUKM
+ qoTX+CQ+Bq4OWgjIS8iR+Ez23VDaduDDHbX3MbRepGkcH7m5CQwxoTySf3fL7PFENB3k
+ ddLz8onZ3h2iauWzoDSbwrCg0HlBvkOt+Co9OWzi5hndwf+YcqvhZ1FxoyMyA0dHciPE
+ XaWPmu1A5fuFoCBiNrkrPY7au++38v+sLAU65uxLS7XGQqzn8TJEiwABLi7LyYHLHjtf
+ mA/e0Q27iIfbub2qQKw8zEcDIElWWEz+LGD6tbRwrJj70qx6GhdlDqKg9p26DbzEy+rg
+ nUsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/uAvgrMs38EGqq9YIJgjuTzV/iX1Grlh1gFVGcBpAPEIyO0wdlBKPRoT9aKNsRecnj2byOgSWulZq8SYeKn/9@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzA4+qOwbASrOKLKIOCb/PTExU8va1UAiIl6nxvQOR8shja+yO+
- yS+m8fPW9OY43exeCLmVJ1qjitoXCSVPGJSc7JukIL3bF2XpRKGwpBLEzrJsolqaaU0=
-X-Gm-Gg: ASbGncugkCRPQTRpsonc57o5yJTeaW5QvBYl6IYbTXFgp6pQPr0Cxf0FRLgZKWye76c
- o22p0z4QluvawDpDIz/IGoqc6g1+YV83KPnmRIYrCGOVHqY+eqqwZT/Vb0pD8AQLDDwKoS6thOq
- RGYdQ29WpoU94qj/KB/vVgfUTUaH4J1YApNgbbjFKAxLAuSIXwu4Tp79aZfaYvwyBzKnp+2/t+N
- 7pQ+H+Sl8P7IplKT84sGCipHuxHGDoaoFOhD+RVuUBn2VxU4wEcTKf7vthsDbtu+qCJ7F01GVU7
- xvlSmnJVDz54kLjhWoxBbql4NXmbLYlGTMYh/N8+y6J+SlX6bePui5HL5NYeOwbVmoanUmoUsv3
- SLaRjQ5/FKdog80wB4F+EKH6RKwLMmwBcU+bTW0V3ZejcAfArvRnYh8+tIw8SlydXVsU15sS4Gz
- nJdw==
-X-Google-Smtp-Source: AGHT+IEoSNUPWsr6TkiMj1VyTgtSM+H2mYKN8PQqct0sy21hTM0OQb7u5ZARk6n0QLi/CE7kBBB/xg==
-X-Received: by 2002:a05:6602:690d:b0:948:a32b:b6c4 with SMTP id
- ca18e2360f4ac-949473eb047mr1023076839f.3.1764098406436; 
- Tue, 25 Nov 2025 11:20:06 -0800 (PST)
-Received: from [127.0.0.1] ([96.43.243.2]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-949385c2405sm668551239f.6.2025.11.25.11.20.04
+ AJvYcCU6TOtl/yOUxr0SQEg68l7SRbARWQVSQtmL5hfhONqOF31Se6WMhWpBUQCHF3/cZiy0V4AoPT+vDlf+WtV3Wdrg@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzW3sBRK6tNnSDum9XdVRSZGYASWlxR963cLfcoBYV6Je/kZ4NQ
+ Y3IwW6KIKhVw9hvXeKnKl0C0N1MO+b53miR9s3HWPsqEYAzr6s1MpYzK
+X-Gm-Gg: ASbGncvFkZONlfTDXStzuQ9flo7q+L4UW8x0R84ubzK/YYIey5vXOT7YB3hl4N+WFgM
+ eJk+RIDBbjmlPgGPeOxUCAyuR6kWhrHVnOMMHov6oAtE8CExtSFz6yseq3iD01lCOM6ous/bZUt
+ 1ijC7BGpW9KT/uUp6GfIxdz2vImgFpDpFv10RoC6aMsM1NplNyNDfisnb6PIwfXSElQzE3yNDv4
+ BxuSkWKHmHwjtUt+aK1Dm46abbq4Ef4eugfV5LTOc5QthzXqSYjinE3cPBVe44gNeZ8+8Di1rVz
+ /q/IOfYNFYUUHBf0z2x1d1F7PrKwBXO36RiEOBdR2T5CvN+DBgRR7EEpVuei94sH6X9baZ4RuIk
+ YRW5rV0kgFAKQDPS3vME2MAHxziSYR85EevCAFWtb1kkX+7gWqnUaMVUuXNHfIelbeW94dVHNrG
+ uyc1CJu8rnRmoZq0VhhamD0KFuJsQ=
+X-Google-Smtp-Source: AGHT+IGN2yQvKPDnQSI+rfi8GFgwmIi2Dp/WjRDvh8wa+7M3RBmYm0POoYwrQhejduq1ue9sQHFv6Q==
+X-Received: by 2002:a17:90b:3a4e:b0:33f:ebc2:645 with SMTP id
+ 98e67ed59e1d1-3475ed448a0mr4374100a91.20.1764113616140; 
+ Tue, 25 Nov 2025 15:33:36 -0800 (PST)
+Received: from [192.168.0.233] ([159.196.5.243])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3475ff0eae4sm1654152a91.4.2025.11.25.15.33.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Nov 2025 11:20:05 -0800 (PST)
-From: Jens Axboe <axboe@kernel.dk>
-To: agk@redhat.com, snitzer@kernel.org, mpatocka@redhat.com, 
- song@kernel.org, yukuai@fnnas.com, hch@lst.de, sagi@grimberg.me, 
- kch@nvidia.com, jaegeuk@kernel.org, chao@kernel.org, cem@kernel.org, 
- Chaitanya Kulkarni <ckulkarnilinux@gmail.com>
-In-Reply-To: <20251124234806.75216-1-ckulkarnilinux@gmail.com>
-References: <20251124234806.75216-1-ckulkarnilinux@gmail.com>
-Message-Id: <176409840493.40095.8097031483064544929.b4-ty@kernel.dk>
-Date: Tue, 25 Nov 2025 12:20:04 -0700
+ Tue, 25 Nov 2025 15:33:35 -0800 (PST)
+Message-ID: <2146e663be965ee0d7ef446c7c716d1c77a8a416.camel@gmail.com>
+From: Wilfred Mallawa <wilfred.opensource@gmail.com>
+To: Chaitanya Kulkarni <ckulkarnilinux@gmail.com>, axboe@kernel.dk, 
+ agk@redhat.com, snitzer@kernel.org, mpatocka@redhat.com, song@kernel.org, 
+ yukuai@fnnas.com, hch@lst.de, sagi@grimberg.me, kch@nvidia.com,
+ jaegeuk@kernel.org, 	chao@kernel.org, cem@kernel.org
+Date: Wed, 26 Nov 2025 09:33:26 +1000
+In-Reply-To: <20251124025737.203571-2-ckulkarnilinux@gmail.com>
+References: <20251124025737.203571-1-ckulkarnilinux@gmail.com>
+ <20251124025737.203571-2-ckulkarnilinux@gmail.com>
+User-Agent: Evolution 3.58.1 (3.58.1-1.fc43) 
 MIME-Version: 1.0
-X-Mailer: b4 0.14.3
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, 24 Nov 2025 15:48:00 -0800, Chaitanya Kulkarni wrote:
- > __blkdev_issue_discard() only returns value 0, that makes post call > error
- checking code dead. This patch series revmoes this dead cod [...] 
- Content analysis details:   (0.0 points, 5.0 required)
+ Content preview:  Reviewed-by: Wilfred Mallawa Regards, Wilfred 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.42 listed in wl.mailspike.net]
-X-Headers-End: 1vNyaC-0003X5-9y
-Subject: Re: [f2fs-dev] (subset) [PATCH V3 0/6] block: ignore
- __blkdev_issue_discard() ret value
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [wilfred.opensource(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.49 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1vO2Xa-0003gZ-P1
+Subject: Re: [f2fs-dev] [PATCH V2 1/5] block: ignore discard return value
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -147,29 +152,10 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 
-On Mon, 24 Nov 2025 15:48:00 -0800, Chaitanya Kulkarni wrote:
-> __blkdev_issue_discard() only returns value 0, that makes post call
-> error checking code dead. This patch series revmoes this dead code at
-> all the call sites and adjust the callers.
-> 
-> Please note that it doesn't change the return type of the function from
-> int to void in this series, it will be done once this series gets merged
-> smoothly.
-> 
-> [...]
-
-Applied, thanks!
-
-[1/6] block: ignore discard return value
-      (no commit info)
-
-Best regards,
--- 
-Jens Axboe
-
-
-
+Regards,
+Wilfred
 
 
 _______________________________________________
