@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37694C90C45
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Nov 2025 04:34:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7B36C90CCD
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Nov 2025 04:50:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Yc6b8yIKkEvAFNt3RXrUpcOp93XvfnamDaC1K96539U=; b=MiGYrNWFKDaFYS+gLtS+f6jEb4
-	m+RNDYbOFF2pl6Wu77RevI0d+7+l3sFhTtbJ3wOpECKtGAKZ191uM96qdZ4jgt+d3xg2CrCut65YP
-	nEpIeedu+2Mot/1mc5POCimolsHtGPZEpwJmHpBjcML84wPTBVPWFzWzscYx99+ZYF2A=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=BnfKiRpbwFK3H2iaEyPdVc6VRzt2P+Yzwf+svdotGlA=; b=Y91npkxclr7zkWndqO7GWMTARc
+	Wv2wYUY/NPdN/61EEAxm0XrgFJNBHdfGXu4dTDkZ/2VrI3kLFW3hFbU5xlF7fVXu2KBCEuYTg0+u9
+	x1lTsm5kheqf4gkkcyL8vyKJSRO0w33yhxJIG0I09wHjn1BX0e8IpzyLqfF+J+4Pr+w0=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vOpFk-0008Lg-Rc;
-	Fri, 28 Nov 2025 03:34:36 +0000
+	id 1vOpVF-0004pi-Ai;
+	Fri, 28 Nov 2025 03:50:37 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vOpFj-0008La-EI
+ (envelope-from <chao@kernel.org>) id 1vOpVD-0004pZ-Na
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Nov 2025 03:34:35 +0000
+ Fri, 28 Nov 2025 03:50:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=S2tWEmUExidGd3GPYxN5Tuv/4VFNcNNoXm7ZsTopx1o=; b=BWhjw2bGJrQJUBBNWlODUN8kFJ
- Xrlr+v5oItzfghD2pRCThnaP9C8o+34LtOkWr8aXWU+POPnbdfd2USD492Pm5Kr5iCnHmyN1yo6K4
- 6Hewb6SSP81kvK5DKL2tHmyV9vNWAzPKK2FdXWM5JlIPaJ8QAr695VAq29DgulSpLbdk=;
+ bh=RACFBxwR6j3Fv8rdvrCwxpEiMj77YoVgVOBhkk1n3eU=; b=eD95I4hsT8N4NRO0jbw0uwz3Be
+ 0/qEjvlmKJDZGYQNhAC9yesiE9fiM3wu5E29Pi9zz7S9VCyDsz2c9rayAq2n0TFDnZ7jYQwDlZG0t
+ oPczhRXl4CUaEBDWL3yG6B6g4P+vubq+VuayvvDCRagPbLaEqQTBWsE+UCZaNlJy+M9E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,48 +40,47 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=S2tWEmUExidGd3GPYxN5Tuv/4VFNcNNoXm7ZsTopx1o=; b=UHv8lAnwQDiWlWjGGwhJ+C1dDL
- 5c1GYIWkfK5eyIizeS/yRTpaNZtmtJHK65efAi640eKekC/rv9a7T9nwFF7ZqEWA4hXghYOSzkk7k
- UnuIGe/lQRoxsgZ0Th+Do74oEXhI2kKng5iCAfpLej76UfB37sfsVV2ScoADj/FXuDbc=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=RACFBxwR6j3Fv8rdvrCwxpEiMj77YoVgVOBhkk1n3eU=; b=ZvMZIiW1nItGyizSPIcWdbtFVa
+ j+jNT5qUv49XJyGwGsDWb5VTCvRKJ8OiPsOvqKYqS77Z79yntzoOVUkl/Xts5COER3hC2ghpbsvDF
+ 2x0SBWTSvcIlj0FqaULar7qoIX47cIN7NFjGwk8IEMProEGdsAQbbHp3H/Mq3A1QJDrM=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vOpFj-000894-2W for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Nov 2025 03:34:35 +0000
+ id 1vOpVD-0000SN-2y for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 28 Nov 2025 03:50:35 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id AB96E43B6D;
- Fri, 28 Nov 2025 03:34:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61461C116B1;
- Fri, 28 Nov 2025 03:34:28 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 764C76013C;
+ Fri, 28 Nov 2025 03:50:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4B55C4CEF1;
+ Fri, 28 Nov 2025 03:50:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1764300869;
- bh=yAAwbLdNBs4YIvLQRMeyqSnLX/Fe4ol7FBJAHqTjRq0=;
+ s=k20201202; t=1764301829;
+ bh=aoFib6Uz9Kr8raRi942VeTsQtGNE5GmzKR0u+9HdGN8=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=P7qkuRAxl1PzCoqJ2K+ATE/Dtivso7yl/BqICRso5hJGwcxfppKBKo0kZAo2THtFL
- jkl+J/jka/8nT5wHQ2ZhcVCMEhL+G+cQtlwWYEPzv47xEYe6GDYYQYR3I17wXbrLLl
- 0KKM4DzuJfqYyRLVoiKRs5M7ZLA40nx1clucPqX5qV4cAz1sg7cUYnpzONa4Mqtn0c
- fsFx9IssAPQKE6bWRvdHpvGeyMjceWGXvEIFcd72LzvAdTdNAzxhEANB4SCldqoMI9
- Sm/E7f8s7GxWXVkD8LU+c8CGxgfS6b4x8ZTjLNPnQl3mUsAf4bfNrTDmVqCA//mKE9
- tsQpsxQXRfsgg==
-Message-ID: <25a50204-73c0-4426-8680-f7f87599ac05@kernel.org>
-Date: Fri, 28 Nov 2025 11:34:26 +0800
+ b=PXQlKjMSuNTbjN70MqmyMtJqkAuuWC3JMt848anEFG7aR0uDcv2T0OJPTzxK7Jxcs
+ yP3CGPDs3+fy4x2KMB9SDa93ULmvZM8ufggX9s4Fk+qpdbryyhjrBzqrwc0dYejUIG
+ NgZ9WoLLx57W60zMqmxDj8oLwopGd/01h7elytPx+38y5PJgH/8NCQg1+gx42R6kgQ
+ Zp93ujiR2z6Bp4qAzDQM9A8ZssMv5YV0mJMCLlb73MxvnzNhVRc13SoDJ2EXHzlulD
+ xnV0wEcc9GfEq48BWAms7urYirAEkWLQV819Y7rbFUmw0ghCkzLS/wF3rKpQpp3LKy
+ gs2tsbSmrugqw==
+Message-ID: <e12f45f5-f4d2-45cb-b281-8cb1371fa966@kernel.org>
+Date: Fri, 28 Nov 2025 11:50:25 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Christoph Hellwig <hch@infradead.org>
-References: <20251126061437.658896-1-chao@kernel.org>
- <aSahEs04brIrBcue@infradead.org>
+To: YH Lin <yhli@google.com>
+References: <no> <20251128032509.825003-1-yhli@google.com>
 Content-Language: en-US
-In-Reply-To: <aSahEs04brIrBcue@infradead.org>
+In-Reply-To: <20251128032509.825003-1-yhli@google.com>
 X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 11/26/25 14:41, Christoph Hellwig wrote: > It can only
- return blk_alloc_discard_bio if the the gfp_mask doesn't > allow sleeping
- (which isn't the case here), or nr_sect is zero, > which I hope is a [...]
+ Content preview:  On 11/28/25 11:23, YH Lin wrote: > This patch optimizes the
+ tracepoint by replacing these hardcoded strings > with a new enumeration
+ f2fs_cp_phase. > > 1.Defines enum f2fs_cp_phase with values for eac [...] 
  Content analysis details:   (-0.4 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,13 +88,13 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vOpFj-000894-2W
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to check bio after
- __blkdev_issue_discard()
+X-Headers-End: 1vOpVD-0000SN-2y
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: optimize
+ trace_f2fs_write_checkpoint with enums
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,23 +108,29 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, stable@kernel.org, linux-kernel@vger.kernel.org,
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 11/26/25 14:41, Christoph Hellwig wrote:
-> It can only return blk_alloc_discard_bio if the the gfp_mask doesn't
-> allow sleeping (which isn't the case here), or nr_sect is zero,
-> which I hope is also not the case as __submit_discard_cmd would
-> run into various other problems.  So no, I don't think this is
-> patch makes any sense.
+On 11/28/25 11:23, YH Lin wrote:
+> This patch optimizes the tracepoint by replacing these hardcoded strings
+> with a new enumeration f2fs_cp_phase.
+> 
+> 1.Defines enum f2fs_cp_phase with values for each checkpoint phase.
+> 2.Updates trace_f2fs_write_checkpoint to accept a u16 phase argument
+> instead of a string pointer.
+> 3.Uses __print_symbolic in TP_printk to convert the enum values
+> back to their corresponding strings for human-readable trace output.
+> 
+> This change reduces the storage overhead for each trace event
+> by replacing a variable-length string with a 2-byte integer,
+> while maintaining the same readable output in ftrace.
+> 
+> Signed-off-by: YH Lin <yhli@google.com>
 
-Oh, I checked details in bio_alloc_bioset() again, it seems I missed
-something for mempool_alloc(), as you mentioned, it may only fail due
-to caller is in non-sleep context passing gfp w/ GFP_ATOMIC or
-GFP_NOWAIT, which is not the case for f2fs discard.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
 
