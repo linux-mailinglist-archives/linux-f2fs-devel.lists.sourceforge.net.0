@@ -2,112 +2,164 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25E84C96E4E
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 01 Dec 2025 12:25:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EDB67C9782B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 01 Dec 2025 14:12:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=HPmYGo0Q/Ld7YXeq/yHC67KZKlLjin3L/GE+rk5lzbU=; b=QydS/Yl8LYw5EnC5YTBUlTLtgI
-	yI76uLQ3YzrV1m5OEpwkk2h1wyarxAsnIkKDwGw0A4yeiYF0ghZQL5aCWsqn812C+EEuamxy1Xvjy
-	Bw3LEn5F7+GK3y+FGZSCSn9DToDt7BiGAECeyAPkXNayqnRVqnNINrpqutI4WnnSZZNM=;
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:Message-Id:MIME-Version:Date:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=kaZ7O6aAa4v/4OblkyXsQeN5O3e8mI611lh4atTQNu8=; b=aRIzVkEi82k/HELIxujq5MS+Qp
+	gI0kEfLq6cQNV+uws2DNJ9DfQZy+RByLXuQwwcbFW1CxMLaxfSe3gGYne/5ctyLMQDYf4/bIulgqI
+	IndNPb54QteiQWkHAg22AZ8aK+RQBetaRK0CXaHpT3/LosW1Dkfm2ULQvEPlGJcPBU/A=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vQ22C-0002LT-3I;
-	Mon, 01 Dec 2025 11:25:36 +0000
+	id 1vQ3hQ-00011N-1k;
+	Mon, 01 Dec 2025 13:12:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hexiaole1994@126.com>) id 1vQ22A-0002LL-36
- for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Dec 2025 11:25:35 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vQ3hO-00010v-23;
+ Mon, 01 Dec 2025 13:12:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Cc:To:Message-Id:Content-Transfer-Encoding:
+ Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=C7/ZSUXiFeENMDjkdCGP9m1gwQDjJgGQ88Q3qBmtE00=; b=NupqGim+Ku+xAWUxa/6GxfPo/6
- Lfts4CTJ+8RygwVzK/NIYFatPGs+nNO2FT0k0DzGs6/4+Md3m/3umPju92AByHyZAba/+AmASzsp0
- zb+W5UmlCSdLUXhamASBgcl18dpeeYspypcJscpUxcqWIURYyOEQxEy869UB4bmPUDJQ=;
+ bh=1oUMvhuqUSHZEkJwC+npa3kkqkmqNZsvM+WADBlCnmA=; b=iaZnN076ZCGZh3LVRneofz8N2L
+ c4QG1L7yo/9EH0OSz9m5CAA4ZIIjzRdQb5zIyowXpUfnKiiIl5vRGGv0D8DWgjthjd9GDiGnMDJvv
+ 0Z4kO2oQWelSydrfvW+ymdsqY6/kv8gKSaVbsVDNj6L2utVB4XHTYOg3ajDX/W+yBvEA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=C7/ZSUXiFeENMDjkdCGP9m1gwQDjJgGQ88Q3qBmtE00=; b=XUizzz78Zacu1ox6zdzZKXRFmJ
- 6d5s6tU3CKjBG+xyOZJp18Hns4mSAndh+HPtGNSKIfWmB2ncucw3wEJrO8rvGMDU1csK6LyNH/R9a
- R0ytkxj+8/rBlMoYZeo4lQgkxylI5Iw/3PUzQmfypWd7G19zimlI84yL1xIt0KAd98K4=;
-Received: from m16.mail.126.com ([117.135.210.8])
+ h=Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ Subject:Date:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=1oUMvhuqUSHZEkJwC+npa3kkqkmqNZsvM+WADBlCnmA=; b=a
+ hD9M71fEy76j4QucZfwkhzboA0TnFWCzXsoL0tDmC3SJYGWEY8IlK2YYrQFHTXt2FuRpa/tEAdocw
+ o1jl1LulDGjxhTG9tNdE+j2mDQff09GA3x4mWtT/M71vz3jAjprutLG5VOl/j7ObI/swUQN/MUCbf
+ 5Ps9r1jbmbDy9hAk=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vQ227-0006lK-Kl for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Dec 2025 11:25:34 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version:
- Content-Type; bh=C7/ZSUXiFeENMDjkdCGP9m1gwQDjJgGQ88Q3qBmtE00=;
- b=kL7I5DESd6JG/nqBDGeuLr132GOIU2oeUL1ViJdZjm5qPWg9XV+lZCrA6UoTQ6
- r6GxpUZJHd4uQ8LjKA5ZfozrdbN+2zceTZhioEg7V0m+RZ2YfuBJKU+sh/5vMwSs
- R0S1KPOMyQfqq6GDRrx6pZT3XkvwwgMeOmmg3Wg58oVr4=
-Received: from hpz640.. (unknown [])
- by gzsmtp3 (Coremail) with SMTP id PikvCgBHGE0Ney1p8t4YCg--.3985S2;
- Mon, 01 Dec 2025 19:25:02 +0800 (CST)
-From: Xiaole He <hexiaole1994@126.com>
-To: shengyong2021@gmail.com,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Mon,  1 Dec 2025 19:24:57 +0800
-Message-ID: <20251201112458.2875-1-hexiaole1994@126.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <4078376a-606e-463d-a44d-62ed6c92254c@gmail.com>
-References: <4078376a-606e-463d-a44d-62ed6c92254c@gmail.com>
+ id 1vQ3hN-0004Ud-18; Mon, 01 Dec 2025 13:12:14 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id C10AB60184;
+ Mon,  1 Dec 2025 13:12:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0BE30C4CEF1;
+ Mon,  1 Dec 2025 13:11:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1764594726;
+ bh=MbVJ0Hx2lowAMszc5+/lsHnVObwJ5jSd85/oD1dspLU=;
+ h=From:Date:Subject:To:Cc:From;
+ b=t5ofGuMzPFVzl+z2WWAioIJVr3EtKoO+2LQnqtLJ+MhTG9X9t8DQB9+Yq6Od4415N
+ dK6J1DkGtl1kXh/zLrFzs6lsm/cGIlRq8uZbv6LcOHtWcZYekNcXUFGvmEt41sdGlu
+ FnLikDoDaafi6heTtbgbhpmpCptAYK7pOHCONKiyVYHSTasK7Q4yr7z5b888qFqHx1
+ aoM3NunZwotTrNSAMB13OUGmGyfyyb+M6zfasIjbhmZUyzM5y4CMkRtygSk5CK1Qc1
+ W6NPCeAXmgjGiQzawMhLGc06fTxRaVKlTxXCqkgnzAp8FKgAiLAaC3eS5ZbKiI6qrx
+ 0VTLO7d/llSww==
+Date: Mon, 01 Dec 2025 08:11:42 -0500
 MIME-Version: 1.0
-X-CM-TRANSID: PikvCgBHGE0Ney1p8t4YCg--.3985S2
-X-Coremail-Antispam: 1Uf129KBjvAXoWftFWDCF1ktw1UtF13Jr43Jrb_yoW5Kryxto
- WUW3W2vws5WrnrGa13J39rK3Z3Wws8ta4xX345t3y5Ca9rKr4j9a48J3WDJ3y3trWFgr18
- tas0yay8KF4xtan3n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
- AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvj4R7UUUDUUUU
-X-Originating-IP: [202.110.209.182]
-X-CM-SenderInfo: 5kh0xt5rohimizu6ij2wof0z/1tbijh0XBmktJwJTGwABsq
-X-Spam-Score: 0.1 (/)
+Message-Id: <20251201-create-excl-v3-1-8933a444b046@kernel.org>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/23NMQ+CMBAF4L9iOlvTa2lBJwdZHXQ0DrRcoZGAK
+ aTBEP67DRNEx/cu37uJ9Ogd9uS0m4jH4HrXtTGI/Y6YumgrpK6MmXDGJQCT1HgsBqQ4moZyLZQ
+ qj9oKrUkUb4/Wjcvag9zye369kGfsa9cPnf8sTwIs1797ASjQIjEGmZDGSHl+oW+xOXS+WoYCX
+ +N0i3nEVqUZKFmmVtgfLFYY2BaLiDOhCgUlJFazDZ7n+QuXniaYKQEAAA==
+X-Change-ID: 20251105-create-excl-2b366d9bf3bb
+To: Alexander Viro <viro@zeniv.linux.org.uk>, 
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
+ Eric Van Hensbergen <ericvh@kernel.org>, 
+ Latchesar Ionkov <lucho@ionkov.net>, 
+ Dominique Martinet <asmadeus@codewreck.org>, 
+ Christian Schoenebeck <linux_oss@crudebyte.com>, 
+ David Sterba <dsterba@suse.com>, David Howells <dhowells@redhat.com>, 
+ Marc Dionne <marc.dionne@auristor.com>, 
+ "Tigran A. Aivazian" <aivazian.tigran@gmail.com>, Chris Mason <clm@fb.com>, 
+ Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, 
+ Jan Harkes <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu, 
+ Tyler Hicks <code@tyhicks.com>, Jeremy Kerr <jk@ozlabs.org>, 
+ Ard Biesheuvel <ardb@kernel.org>, Namjae Jeon <linkinjeon@kernel.org>, 
+ Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, 
+ Theodore Ts'o <tytso@mit.edu>, Andreas Dilger <adilger.kernel@dilger.ca>, 
+ Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, 
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, 
+ Miklos Szeredi <miklos@szeredi.hu>, 
+ Andreas Gruenbacher <agruenba@redhat.com>, 
+ Viacheslav Dubeyko <slava@dubeyko.com>, 
+ John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>, 
+ Yangtao Li <frank.li@vivo.com>, Richard Weinberger <richard@nod.at>, 
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>, 
+ Johannes Berg <johannes@sipsolutions.net>, 
+ Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>, 
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
+ David Woodhouse <dwmw2@infradead.org>, Dave Kleikamp <shaggy@kernel.org>, 
+ Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>, 
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>, 
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, 
+ Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>, 
+ Joseph Qi <joseph.qi@linux.alibaba.com>, Bob Copeland <me@bobcopeland.com>, 
+ Mike Marshall <hubcap@omnibond.com>, 
+ Martin Brandenburg <martin@omnibond.com>, 
+ Amir Goldstein <amir73il@gmail.com>, Steve French <sfrench@samba.org>, 
+ Paulo Alcantara <pc@manguebit.org>, 
+ Ronnie Sahlberg <ronniesahlberg@gmail.com>, 
+ Shyam Prasad N <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>, 
+ Bharath SM <bharathsm@microsoft.com>, 
+ Zhihao Cheng <chengzhihao1@huawei.com>, Hans de Goede <hansg@kernel.org>, 
+ Carlos Maiolino <cem@kernel.org>, Hugh Dickins <hughd@google.com>, 
+ Baolin Wang <baolin.wang@linux.alibaba.com>, 
+ Andrew Morton <akpm@linux-foundation.org>, Kees Cook <kees@kernel.org>, 
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
+ Jonathan Corbet <corbet@lwn.net>, 
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>, 
+ David Hildenbrand <david@kernel.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=35605; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=MbVJ0Hx2lowAMszc5+/lsHnVObwJ5jSd85/oD1dspLU=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpLZQeGRhiVF1cwnFN+QVd+QgQ8GMts01zpx98y
+ +9J2cUs+RqJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaS2UHgAKCRAADmhBGVaC
+ FRT7EACFxEMp8BI96DhmWNVn3aLTNpvVCElxcB9DHiTbiFuy5d62z7o6ThH++Fy00auLYBHbEkb
+ TbNPe9lQLIXIUQ5RAvYxk8FlKl86fPW6M42eGQFV0Q98/Rh7F3Ue2czK6eJArcHF39PjUNp0FkN
+ QRiId3gnS7Z/HeEYIkVLl3D/XUd/hfGHMgFZRiNawJNnGJae0mNcaEFr6ISIIjqehMI9lt8pg2e
+ E4lGg1eA1zpboO0KCkYDPGfEAjLkMLOibpuPYUgAIfv1C+welUlQldZBmjqC3Pjw5j/6ijAmgGE
+ aAiJHFSMkGqFL5aEFR5RpptkkYnm1+I+hwb1AJ86w0M5DsxmjSx70Q+RE+2fu5GBOFQtcmwLrlZ
+ HB3aWHTwmZ9QHvyfEAn2JEcqEzbzlMc9uGcpzugESEtoqOarmKh4rZxVmfV6kqTBqPXDehbPF2w
+ rwOl1kBa7uEKDQtc5Nn8AMWRXl7QGinRnEn870/4JHATC0YTTP3hB4gKQVocxbtt5YfTI+F0gKM
+ F9Kv8wkfJ9K1mnVsSRbHmVuXEQPIX0wnAzVXV5/1DRPNSbge/eSRJzLIltgcFvc2r2yi/fJ0Qhm
+ q5+2fe5WJUi2nSlzjVmyvY1xOBH5fzwu+6ryUiQtp5uPwNmHjzpyun9YvAUcQAF0WHQTbfFb7/e
+ CuKwKhXWsFs+4cQ==
+X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
+ fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Shengyong, Hi Jinbao, Thank you for providing the patch.
- I have tested the patch and found a critical regression that can lead to
- data loss or unexpected failure during a no-op resize. The issue arises
- because
- the fixed HDIO_GETGEO calculation, when applied to a legacy image created
- with start_sector=4097s, causes the segment_count to unexpectedly shrink
- due to the new alignment cal [...] 
- Content analysis details:   (0.1 points, 5.0 required)
+ Content preview:  With three exceptions,
+ ->create() methods provided by filesystems
+ ignore the "excl" flag. Those exception are NFS, GFS2 and vboxsf which all
+ also provide ->atomic_open. Since ce8644fcadc5 ("lookup_open(): expand the
+ call of vfs_create()"), the "excl" argument to the ->create() inode_operation
+ is always set to true in vfs_create(). The ->create() call in lookup_open()
+ [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [117.135.210.8 listed in wl.mailspike.net]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [hexiaole1994(at)126.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [hexiaole1994(at)126.com]
- 0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
-X-Headers-End: 1vQ227-0006lK-Kl
-Subject: Re: [f2fs-dev] [RFT PATCH] resize.f2fs: fix start_sector not
- starting from 0
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1vQ3hN-0004Ud-18
+Subject: [f2fs-dev] [PATCH RESEND v3] vfs: remove the excl argument from the
+ ->create() inode_operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,678 +171,869 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, shengyong1@xiaomi.com, hexiaole1994@126.com,
- daehojeong@google.com, liujinbao1@xiaomi.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Jeff Layton via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jeff Layton <jlayton@kernel.org>
+Cc: jfs-discussion@lists.sourceforge.net, linux-efi@vger.kernel.org,
+ linux-doc@vger.kernel.org, Jeff Layton <jlayton@kernel.org>,
+ linux-unionfs@vger.kernel.org, gfs2@lists.linux.dev, linux-mm@kvack.org,
+ linux-mtd@lists.infradead.org, linux-hardening@vger.kernel.org,
+ linux-afs@lists.infradead.org, linux-cifs@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, NeilBrown <neilb@ownmail.net>,
+ codalist@coda.cs.cmu.edu, NeilBrown <neil@brown.name>,
+ linux-ext4@vger.kernel.org, devel@lists.orangefs.org, ecryptfs@vger.kernel.org,
+ linux-um@lists.infradead.org, ocfs2-devel@lists.linux.dev,
+ ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org, v9fs@lists.linux.dev,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, ntfs3@lists.linux.dev,
+ linux-karma-devel@lists.sourceforge.net, linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-SGkgU2hlbmd5b25nLCBIaSBKaW5iYW8sCgpUaGFuayB5b3UgZm9yIHByb3ZpZGluZyB0aGUgcGF0
-Y2guIEkgaGF2ZSB0ZXN0ZWQgdGhlIHBhdGNoIGFuZCBmb3VuZCBhIGNyaXRpY2FsIHJlZ3Jlc3Np
-b24gdGhhdCBjYW4gbGVhZCB0byBkYXRhIGxvc3Mgb3IgdW5leHBlY3RlZCBmYWlsdXJlIGR1cmlu
-ZyBhIG5vLW9wIHJlc2l6ZS4KClRoZSBpc3N1ZSBhcmlzZXMgYmVjYXVzZSB0aGUgZml4ZWQgSERJ
-T19HRVRHRU8gY2FsY3VsYXRpb24sIHdoZW4gYXBwbGllZCB0byBhIGxlZ2FjeSBpbWFnZSBjcmVh
-dGVkIHdpdGggc3RhcnRfc2VjdG9yPTQwOTdzLCBjYXVzZXMgdGhlIHNlZ21lbnRfY291bnQgdG8g
-dW5leHBlY3RlZGx5IHNocmluayBkdWUgdG8gdGhlIG5ldyBhbGlnbm1lbnQgY2FsY3VsYXRpb24u
-CgoxLiBSZWdyZXNzaW9uIFJlcHJvZHVjdGlvbiBTdGVwcyAoVGhlIFZvbHVtZSBTaHJpbmsgQnVn
-KQpUaGUgaXNzdWUgaGFwcGVucyB3aGVuIHJlc2l6aW5nIGFuIGltYWdlIGNyZWF0ZWQgd2l0aCBh
-IGxlZ2FjeSBta2ZzLmYyZnMgdG9vbCAod2hpY2ggYXNzdW1lZCBzdGFydF9zZWN0b3I9MCkgbG9j
-YXRlZCBhdCBhIHBoeXNpY2FsIG9mZnNldCB0aGF0IGNhdXNlcyBhIG5ldyBhbGlnbm1lbnQgc2hp
-ZnQgKGUuZy4sIHNlY3RvciA0MDk3KS4KCkEuIFJlcHJvZHVjdGlvbiBvZiBTZWdtZW50IENvdW50
-IFJlZHVjdGlvbgoKVGhpcyBkZW1vbnN0cmF0ZXMgdGhlIHN1YnRsZSBjaGFuZ2UgaW4gZ2VvbWV0
-cnkgcmVzdWx0aW5nIGluIGEgcmVkdWN0aW9uIG9mIHRvdGFsIHNlZ21lbnRzIGZyb20gMzI3Njcg
-dG8gMzI3NjYgZHVlIHRvIGJlbG93IGNvZGU6CndoaWxlIChuZXdfc2VnMF9ibGthZGRyIDwgb2xk
-X3NlZzBfYmxrYWRkcikKICAgICAgICBuZXdfc2VnMF9ibGthZGRyICs9IGJsa3NfcGVyX3NlZzsK
-CiMgSW5pdGlhbGl6ZSBHUFQgYW5kIGNyZWF0ZSBhIDY0R0IgcGFydGl0aW9uIHN0YXJ0aW5nIGF0
-IHNlY3RvciA0MDk3CnBhcnRlZCAtcyAvZGV2L3NkYiBta2xhYmVsIGdwdApwYXJ0ZWQgLXMgL2Rl
-di9zZGIgbWtwYXJ0IHByaW1hcnkgNDA5N3MgMTM0MjIxODI0cwoKIyBDcmVhdGUgRjJGUyB1c2lu
-ZyB0aGUgYnVnZ3ksIHByZS1maXggbWtmcyAoYXNzdW1pbmcgc3RhcnRfc2VjdG9yPTApCm1rZnMu
-ZjJmcyAtZiAvZGV2L3NkYjEKCiMgUnVuIHRoZSBwYXRjaGVkIHJlc2l6ZS5mMmZzICh3aGljaCBj
-b3JyZWN0bHkgaWRlbnRpZmllcyBzdGFydF9zZWN0b3I9NDA5NykKIyBUaGlzIHdpbGwgc2hvdyBz
-ZWdtZW50IGNvdW50IHJlZHVjaW5nIGZyb20gMzI3NjcgdG8gMzI3NjYgaW4gdGhlIG5ldyBTQi4K
-cmVzaXplLmYyZnMgLUYgLWYgLWQxIC9kZXYvc2RiMQoKQi4gUmVwcm9kdWN0aW9uIG9mIFJlc2l6
-ZSBDaGVjayBGYWlsdXJlIChEYXRhIExvc3MgUmlzaykKClRoaXMgZGVtb25zdHJhdGVzIHRoYXQg
-d2hlbiB0aGUgRlMgaXMgZnVsbCwgdGhlIHNlZ21lbnQgcmVkdWN0aW9uIGNhdXNlcyB2YWxpZF9i
-bG9ja19jb3VudCA+IHVzZXJfYmxvY2tfY291bnQsIG1ha2luZyByZXNpemUuZjJmcyBmYWlsIHBy
-ZW1hdHVyZWx5LgoKIyBJbml0aWFsaXplIHBhcnRpdGlvbgpwYXJ0ZWQgLXMgL2Rldi9zZGIgbWts
-YWJlbCBncHQKcGFydGVkIC1zIC9kZXYvc2RiIG1rcGFydCBwcmltYXJ5IDQwOTdzIDEzNDIyMTgy
-NHMKCiMgQ3JlYXRlIEYyRlMgdXNpbmcgdGhlIGJ1Z2d5LCBwcmUtZml4IG1rZnMgKGFzc3VtaW5n
-IHN0YXJ0X3NlY3Rvcj0wKQpta2ZzLmYyZnMgLWYgL2Rldi9zZGIxCm1vdW50IC9kZXYvc2RiMSAv
-bW50L2YyZnMtdGVzdAoKIyBGaWxsIHRoZSBmaWxlc3lzdGVtIHRvIGNhcGFjaXR5CiMgKFVzZSB0
-aGUgcHJvdmlkZWQgZGQgY29tbWFuZHMgdG8gZmlsbCB0aGUgdm9sdW1lKQpkZCBpZj0vZGV2L3Vy
-YW5kb20gb2Y9L21udC9mMmZzLXRlc3QvZmlsbF8zNDM1OTczODM2OC5kYXQgYnM9NDA5NiBjb3Vu
-dD04Mzg4NjA4IG9mbGFnPWRpcmVjdApkZCBpZj0vZGV2L3VyYW5kb20gb2Y9L21udC9mMmZzLXRl
-c3QvZmlsbF8xNzE3OTg2OTE4NC5kYXQgYnM9NDA5NiBjb3VudD00MTk0MzA0IG9mbGFnPWRpcmVj
-dApkZCBpZj0vZGV2L3VyYW5kb20gb2Y9L21udC9mMmZzLXRlc3QvZmlsbF84NTg5OTM0NTkyLmRh
-dCBicz00MDk2IGNvdW50PTIwOTcxNTIgb2ZsYWc9ZGlyZWN0CmRkIGlmPS9kZXYvdXJhbmRvbSBv
-Zj0vbW50L2YyZnMtdGVzdC9maWxsXzQyOTQ5NjcyOTYuZGF0IGJzPTQwOTYgY291bnQ9MTA0ODU3
-NiBvZmxhZz1kaXJlY3QKZGQgaWY9L2Rldi91cmFuZG9tIG9mPS9tbnQvZjJmcy10ZXN0L2ZpbGxf
-MjE0NzQ4MzY0OC5kYXQgYnM9NDA5NiBjb3VudD01MjQyODggb2ZsYWc9ZGlyZWN0CmRkIGlmPS9k
-ZXYvdXJhbmRvbSBvZj0vbW50L2YyZnMtdGVzdC9maWxsXzEwNzM3NDE4MjQuZGF0IGJzPTQwOTYg
-Y291bnQ9MjYyMTQ0IG9mbGFnPWRpcmVjdApkZCBpZj0vZGV2L3VyYW5kb20gb2Y9L21udC9mMmZz
-LXRlc3QvZmlsbF8xMzQyMTc3MjguZGF0IGJzPTQwOTYgY291bnQ9MzI3Njggb2ZsYWc9ZGlyZWN0
-CmRkIGlmPS9kZXYvdXJhbmRvbSBvZj0vbW50L2YyZnMtdGVzdC9maWxsXzY3MTA4ODY0LmRhdCBi
-cz00MDk2IGNvdW50PTE2Mzg0IG9mbGFnPWRpcmVjdApkZCBpZj0vZGV2L3VyYW5kb20gb2Y9L21u
-dC9mMmZzLXRlc3QvZmlsbF8xNjc3NzIxNi5kYXQgYnM9NDA5NiBjb3VudD00MDk2IG9mbGFnPWRp
-cmVjdApkZCBpZj0vZGV2L3VyYW5kb20gb2Y9L21udC9mMmZzLXRlc3QvZmlsbF80MTk0MzA0LmRh
-dCBicz00MDk2IGNvdW50PTEwMjQgb2ZsYWc9ZGlyZWN0CmRkIGlmPS9kZXYvdXJhbmRvbSBvZj0v
-bW50L2YyZnMtdGVzdC9maWxsXzIwOTcxNTIuZGF0IGJzPTQwOTYgY291bnQ9NTEyIG9mbGFnPWRp
-cmVjdAoKIyBSdW4gdGhlIHBhdGNoZWQgcmVzaXplLmYyZnMKIyBUaGlzIHdpbGwgZmFpbCB0aGUg
-Y2hlY2sgZjJmc19yZXNpemVfY2hlY2soKSBhbmQgaW1tZWRpYXRlbHkgYWJvcnQuCnJlc2l6ZS5m
-MmZzIC1GIC1mIC1kMSAvZGV2L3NkYjEKCjIuIEFuYWx5c2lzIGFuZCBQcm9wb3NlZCBTb2x1dGlv
-bgpUaGlzIGlzc3VlIGNvbmZpcm1zIHRoYXQgdGhlIGNvcnJlY3RlZCBnZW9tZXRyeSBjYWxjdWxh
-dGlvbiBjYW4gbGVhZCB0byB1bmRlc2lyYWJsZSBvdXRjb21lcyBmb3IgbGVnYWN5IGltYWdlcy4g
-V2hlbiB0aGUgbmV3IGNvcnJlY3QgYWxpZ25tZW50IHJlcXVpcmVzIGEgbGFyZ2VyIG9mZnNldCAo
-em9uZV9hbGlnbl9zdGFydF9vZmZzZXQpLCBpdCBjYXVzZXMgYSByZWR1Y3Rpb24gaW4gdGhlIHNw
-YWNlIGFsbG9jYXRlZCBmb3IgdGhlIG1haW5fYXJlYS4KCkkgb2JzZXJ2ZSB0aGF0IHRoaXMgdm9s
-dW1lIHNocmluayBhbmQgc3Vic2VxdWVudCBmYWlsdXJlIHByaW1hcmlseSBvY2N1ciBkdXJpbmcg
-YSBuby1vcCByZXNpemUgKHJlc2l6ZS5mMmZzIGF0dGVtcHRpbmcgdG8gcmVzaXplIHRvIHRoZSBz
-YW1lIHNpemUpIHdoZW4gdGhlIGZpbGVzeXN0ZW0gaXMgbmVhciBmdWxsIGNhcGFjaXR5LiBXaGVu
-IG5vcm1hbGx5IGdyb3dpbmcgdGhlIHBhcnRpdGlvbiBzaXplLCB0aGlzIGlzc3VlIGNhbiB0eXBp
-Y2FsbHkgYmUgYXZvaWRlZC4KCkNvdWxkIHlvdSBwbGVhc2UgY29uZmlybSBpZiB0aGlzIGZhaWx1
-cmUgZHVyaW5nIGEgbm8tb3AgcmVzaXplIHNjZW5hcmlvIGlzIGNvbnNpZGVyZWQgYWNjZXB0YWJs
-ZSBiZWhhdmlvciBmb3IgcmVzaXplLmYyZnM/CgpJZiB0aGlzIGJlaGF2aW9yIGlzIGNvbnNpZGVy
-ZWQgYW4gaXNzdWUgdGhhdCBuZWVkcyB0byBiZSBhZGRyZXNzZWQsIEkgaGF2ZSB0d28gcHJvcG9z
-YWxzIHJlZ2FyZGluZyB0aGUgZ2VvbWV0cmljIGNhbGN1bGF0aW9uIGZvciBsZWdhY3kgaW1hZ2Vz
-OgoKQS4gUHJvYWN0aXZlIEdlb21ldHJ5IE92ZXJyaWRlIChQcmVmZXJyZWQgQXBwcm9hY2gpOgpX
-ZSBzaG91bGQgYXR0ZW1wdCB0byBkZWR1Y2UgdGhlIG9yaWdpbmFsIHN0YXJ0X3NlY3RvciBmcm9t
-IHRoZSBleGlzdGluZyBTdXBlcmJsb2NrIChzcGVjaWZpY2FsbHkgYnkgcmVmZXJlbmNpbmcgb2xk
-X3NiLT5zZWdtZW50MF9ibGthZGRyKS4gSWYgdGhlIGRlZHVjZWQgbGVnYWN5IHN0YXJ0X3NlY3Rv
-ciBpcyBpbmNvbnNpc3RlbnQgd2l0aCB0aGUgc2VjdG9yIHJlcG9ydGVkIGJ5IEhESU9fR0VUR0VP
-IChlLmcuLCBpZiB0aGUgaW1hZ2Ugd2FzIGNyZWF0ZWQgdXNpbmcgdGhlIG9sZCBidWdneSBsb2dp
-YyksIHdlIHNob3VsZCB1c2UgdGhlIGRlZHVjZWQvbGVnYWN5IHN0YXJ0X3NlY3RvciB0byBvdmVy
-cmlkZSB0aGUgSERJT19HRVRHRU8gcmVzdWx0IGZvciB0aGUgZHVyYXRpb24gb2YgdGhlIHJlc2l6
-ZSBjYWxjdWxhdGlvbi4gVGhpcyBlbnN1cmVzIHRoZSBnZW9tZXRyaWMgY2FsY3VsYXRpb24gbWF0
-Y2hlcyB0aGUgZXhpc3Rpbmcgb24tZGlzayBsYXlvdXQsIHByZXZlbnRpbmcgdGhlIHVuZXhwZWN0
-ZWQgc2hyaW5rIGFuZCBmYWlsdXJlLgoKQi4gTWFpbnRhaW4gTGVnYWN5IEJ1ZyAoSWYgZGVkdWN0
-aW9uIGlzIHRvbyBjb21wbGV4KToKSWYgaW1wbGVtZW50aW5nIHRoZSByZWxpYWJsZSBkZWR1Y3Rp
-b24gbG9naWMgKFByb3Bvc2FsIEEpIHByb3ZlcyB0byBiZSBvdmVybHkgY29tcGxleCBvciByaXNr
-eSwgd291bGQgaXQgYmUgYmV0dGVyIHRvIG1haW50YWluIHRoZSBvcmlnaW5hbCwgaW5jb3JyZWN0
-IEhESU9fR0VUR0VPIGJlaGF2aW9yIGZvciByZXNpemUuZjJmcyB0byBwcmlvcml0aXplIGNvbXBh
-dGliaWxpdHkgd2l0aCBleGlzdGluZyBpbWFnZXMgb3ZlciBnZW9tZXRyaWMgY29ycmVjdG5lc3M/
-CgozLiBSZXNvdXJjZSBDb25zdHJhaW50cyAmIFRlc3QgQ292ZXJhZ2UKVGhlIHJvb3QgY2F1c2Ug
-b2YgdGhpcyBpc3N1ZSBpcyB0aGF0IGFmdGVyIHRoZSBidWcgaW4gSERJT19HRVRHRU8gd2FzIGZp
-eGVkLCB0aGUgb2J0YWluZWQgdmFsdWUgZm9yIHN0YXJ0X3NlY3RvciBkaWZmZXJzIGZyb20gaXRz
-IHByZXZpb3VzIHZhbHVlICh3aGljaCB3YXMgaW1wbGljaXRseSAwKS4gQ29uc2VxdWVudGx5LCB0
-aGUgem9uZV9hbGlnbl9zdGFydF9vZmZzZXQgY2FsY3VsYXRpb24sIHdoaWNoIGRlcGVuZHMgb24g
-c3RhcnRfc2VjdG9yLCBjaGFuZ2VkLiBNYW55IGNydWNpYWwgZmllbGRzIHdpdGhpbiB0aGUgc3Vw
-ZXJibG9jaywgaW4gdHVybiwgZGVwZW5kIG9uIHpvbmVfYWxpZ25fc3RhcnRfb2Zmc2V0LgoKRnVy
-dGhlciBhbmFseXNpcyByZXZlYWxzIHRoYXQgdGhlIHpvbmVfYWxpZ25fc3RhcnRfb2Zmc2V0IGV4
-aGliaXRzIGEgcGVyaW9kaWMgY2hhbmdlIHJlbGF0aXZlIHRvIHN0YXJ0X3NlY3Rvci4gRm9yIGlu
-c3RhbmNlLCB0aGUgem9uZV9hbGlnbl9zdGFydF9vZmZzZXQgZ2VuZXJhdGVkIHdoZW4gc3RhcnRf
-c2VjdG9yIGlzIGluIHRoZSByYW5nZSBvZiAwIHRvIDQwOTUgaXMgaWRlbnRpY2FsIHRvIHRoZSBv
-bmUgZ2VuZXJhdGVkIHdoZW4gc3RhcnRfc2VjdG9yIGlzIGluIHRoZSByYW5nZSBvZiA0MDk2IHRv
-IDgxOTEuCgpCYXNlZCBvbiB0aGlzIGFuYWx5c2lzLCBJIGhhdmUgZGV2ZWxvcGVkIGEgdGVzdCBz
-Y3JpcHQgdGhhdCBpdGVyYXRlcyB0aHJvdWdoIHN0YXJ0X3NlY3RvciB2YWx1ZXMgZnJvbSA0MDk2
-IHRvIDgxOTEgdG8gb2JzZXJ2ZSB0aGUgYmVoYXZpb3IgcHJvZHVjZWQgYnkgcmVzaXplLmYyZnMu
-IFRoZSBzY3JpcHQgaXMgYXMgZm9sbG93czoKCiMhL2Jpbi9iYXNoCgojIFRlc3Qgc2NyaXB0IGZv
-ciByZXNpemUuZjJmcyB2YWxpZGF0aW9uCgojIHNldCAtZQoKU09VUkNFX0RJUj0iLi9kYXRhIgpN
-T1VOVF9QT0lOVD0iL21udC9mMmZzLXRtcCIKU1NEX0RFVklDRT0iL2Rldi9zZGIiCk9MRF9NS0ZT
-PSJta2ZzLmYyZnMiCk5FV19SRVNJWkU9Ii9wYXRoL3RvL2ZpeGVkL3Jlc2l6ZS5mMmZzIgojIFNp
-emUgb2YgZWFjaCB0ZXN0IHBhcnRpdGlvbiBpbiBHQgpQQVJUSVRJT05fU0laRV9HQj02NAojIExv
-ZyBmaWxlIGZvciBhbGwgb3V0cHV0CkxPR19GSUxFPSIuL3Rlc3RfcmVzaXplLmxvZyIKIyBTdGF0
-aXN0aWNzIGZpbGUgZm9yIHN1cGVyYmxvY2sgaW5jb25zaXN0ZW5jaWVzClNUQVRTX0ZJTEU9Ii4v
-c2JfaW5jb25zaXN0ZW5jaWVzLnR4dCIKCiMgT3V0cHV0IGZ1bmN0aW9ucyAob3V0cHV0IGlzIGF1
-dG9tYXRpY2FsbHkgbG9nZ2VkIHZpYSBleGVjIHJlZGlyZWN0KQplcnJvcigpIHsKwqAgwqAgZWNo
-byAiRVJST1I6ICQxIiA+JjIKwqAgwqAgZXhpdCAxCn0KCmluZm8oKSB7CsKgIMKgIGVjaG8gIklO
-Rk86ICQxIgp9Cgp3YXJuKCkgewrCoCDCoCBlY2hvICJXQVJOOiAkMSIKfQoKIyBQYXJzZSBzdXBl
-cmJsb2NrIGluZm8gZnJvbSBwcmludF9yYXdfc2JfaW5mbyBvdXRwdXQKcGFyc2Vfc2JfaW5mbygp
-IHsKwqAgwqAgbG9jYWwgc2JfZmlsZT0iJDEiCsKgIMKgCsKgIMKgICMgRXh0cmFjdCB2YWx1ZXMg
-dXNpbmcgYXdrCsKgIMKgICMgTm90ZTogRm9ybWF0IGlzICJmaWVsZF9uYW1lIMKgIMKgIMKgIMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIFsweCDCoCDCoGhleCA6IGRlY2ltYWxdIgrCoCDC
-oCAjIFRoZSBoZXggdmFsdWUgbWF5IGhhdmUgbGVhZGluZyBzcGFjZXMsIHNvIHdlIG1hdGNoIG1v
-cmUgZmxleGlibHkKwqAgwqAgYXdrICcKwqAgwqAgL15zZWdtZW50X2NvdW50W1s6c3BhY2U6XV0r
-XFsweFtbOnNwYWNlOl1dKltbOnhkaWdpdDpdXStbWzpzcGFjZTpdXSo6W1s6c3BhY2U6XV0qW1s6
-ZGlnaXQ6XV0rXF0vIHsKwqAgwqAgwqAgwqAgbWF0Y2goJDAsIC9cWzB4W1s6c3BhY2U6XV0qKFtb
-OnhkaWdpdDpdXSspW1s6c3BhY2U6XV0qOltbOnNwYWNlOl1dKihbWzpkaWdpdDpdXSspXF0vLCBh
-cnIpCsKgIMKgIMKgIMKgIHByaW50ICJzZWdtZW50X2NvdW50PSIgYXJyWzJdCsKgIMKgIH0KwqAg
-wqAgL15zZWdtZW50X2NvdW50X2NrcHRbWzpzcGFjZTpdXStcWzB4W1s6c3BhY2U6XV0qW1s6eGRp
-Z2l0Ol1dK1tbOnNwYWNlOl1dKjpbWzpzcGFjZTpdXSpbWzpkaWdpdDpdXStcXS8gewrCoCDCoCDC
-oCDCoCBtYXRjaCgkMCwgL1xbMHhbWzpzcGFjZTpdXSooW1s6eGRpZ2l0Ol1dKylbWzpzcGFjZTpd
-XSo6W1s6c3BhY2U6XV0qKFtbOmRpZ2l0Ol1dKylcXS8sIGFycikKwqAgwqAgwqAgwqAgcHJpbnQg
-InNlZ21lbnRfY291bnRfY2twdD0iIGFyclsyXQrCoCDCoCB9CsKgIMKgIC9ec2VnbWVudF9jb3Vu
-dF9zaXRbWzpzcGFjZTpdXStcWzB4W1s6c3BhY2U6XV0qW1s6eGRpZ2l0Ol1dK1tbOnNwYWNlOl1d
-KjpbWzpzcGFjZTpdXSpbWzpkaWdpdDpdXStcXS8gewrCoCDCoCDCoCDCoCBtYXRjaCgkMCwgL1xb
-MHhbWzpzcGFjZTpdXSooW1s6eGRpZ2l0Ol1dKylbWzpzcGFjZTpdXSo6W1s6c3BhY2U6XV0qKFtb
-OmRpZ2l0Ol1dKylcXS8sIGFycikKwqAgwqAgwqAgwqAgcHJpbnQgInNlZ21lbnRfY291bnRfc2l0
-PSIgYXJyWzJdCsKgIMKgIH0KwqAgwqAgL15zZWdtZW50X2NvdW50X25hdFtbOnNwYWNlOl1dK1xb
-MHhbWzpzcGFjZTpdXSpbWzp4ZGlnaXQ6XV0rW1s6c3BhY2U6XV0qOltbOnNwYWNlOl1dKltbOmRp
-Z2l0Ol1dK1xdLyB7CsKgIMKgIMKgIMKgIG1hdGNoKCQwLCAvXFsweFtbOnNwYWNlOl1dKihbWzp4
-ZGlnaXQ6XV0rKVtbOnNwYWNlOl1dKjpbWzpzcGFjZTpdXSooW1s6ZGlnaXQ6XV0rKVxdLywgYXJy
-KQrCoCDCoCDCoCDCoCBwcmludCAic2VnbWVudF9jb3VudF9uYXQ9IiBhcnJbMl0KwqAgwqAgfQrC
-oCDCoCAvXnNlZ21lbnRfY291bnRfc3NhW1s6c3BhY2U6XV0rXFsweFtbOnNwYWNlOl1dKltbOnhk
-aWdpdDpdXStbWzpzcGFjZTpdXSo6W1s6c3BhY2U6XV0qW1s6ZGlnaXQ6XV0rXF0vIHsKwqAgwqAg
-wqAgwqAgbWF0Y2goJDAsIC9cWzB4W1s6c3BhY2U6XV0qKFtbOnhkaWdpdDpdXSspW1s6c3BhY2U6
-XV0qOltbOnNwYWNlOl1dKihbWzpkaWdpdDpdXSspXF0vLCBhcnIpCsKgIMKgIMKgIMKgIHByaW50
-ICJzZWdtZW50X2NvdW50X3NzYT0iIGFyclsyXQrCoCDCoCB9CsKgIMKgIC9ec2VnbWVudF9jb3Vu
-dF9tYWluW1s6c3BhY2U6XV0rXFsweFtbOnNwYWNlOl1dKltbOnhkaWdpdDpdXStbWzpzcGFjZTpd
-XSo6W1s6c3BhY2U6XV0qW1s6ZGlnaXQ6XV0rXF0vIHsKwqAgwqAgwqAgwqAgbWF0Y2goJDAsIC9c
-WzB4W1s6c3BhY2U6XV0qKFtbOnhkaWdpdDpdXSspW1s6c3BhY2U6XV0qOltbOnNwYWNlOl1dKihb
-WzpkaWdpdDpdXSspXF0vLCBhcnIpCsKgIMKgIMKgIMKgIHByaW50ICJzZWdtZW50X2NvdW50X21h
-aW49IiBhcnJbMl0KwqAgwqAgfQrCoCDCoCAvXnNlY3Rpb25fY291bnRbWzpzcGFjZTpdXStcWzB4
-W1s6c3BhY2U6XV0qW1s6eGRpZ2l0Ol1dK1tbOnNwYWNlOl1dKjpbWzpzcGFjZTpdXSpbWzpkaWdp
-dDpdXStcXS8gewrCoCDCoCDCoCDCoCBtYXRjaCgkMCwgL1xbMHhbWzpzcGFjZTpdXSooW1s6eGRp
-Z2l0Ol1dKylbWzpzcGFjZTpdXSo6W1s6c3BhY2U6XV0qKFtbOmRpZ2l0Ol1dKylcXS8sIGFycikK
-wqAgwqAgwqAgwqAgcHJpbnQgInNlY3Rpb25fY291bnQ9IiBhcnJbMl0KwqAgwqAgfQrCoCDCoCAv
-XmNwX3BheWxvYWRbWzpzcGFjZTpdXStcWzB4W1s6c3BhY2U6XV0qW1s6eGRpZ2l0Ol1dK1tbOnNw
-YWNlOl1dKjpbWzpzcGFjZTpdXSpbWzpkaWdpdDpdXStcXS8gewrCoCDCoCDCoCDCoCBtYXRjaCgk
-MCwgL1xbMHhbWzpzcGFjZTpdXSooW1s6eGRpZ2l0Ol1dKylbWzpzcGFjZTpdXSo6W1s6c3BhY2U6
-XV0qKFtbOmRpZ2l0Ol1dKylcXS8sIGFycikKwqAgwqAgwqAgwqAgcHJpbnQgImNwX3BheWxvYWQ9
-IiBhcnJbMl0KwqAgwqAgfQrCoCDCoCAvXnNlZ21lbnQwX2Jsa2FkZHJbWzpzcGFjZTpdXStcWzB4
-W1s6c3BhY2U6XV0qW1s6eGRpZ2l0Ol1dK1tbOnNwYWNlOl1dKjpbWzpzcGFjZTpdXSpbWzpkaWdp
-dDpdXStcXS8gewrCoCDCoCDCoCDCoCBtYXRjaCgkMCwgL1xbMHhbWzpzcGFjZTpdXSooW1s6eGRp
-Z2l0Ol1dKylbWzpzcGFjZTpdXSo6W1s6c3BhY2U6XV0qKFtbOmRpZ2l0Ol1dKylcXS8sIGFycikK
-wqAgwqAgwqAgwqAgcHJpbnQgInNlZ21lbnQwX2Jsa2FkZHI9IiBhcnJbMl0KwqAgwqAgfQrCoCDC
-oCAvXmNwX2Jsa2FkZHJbWzpzcGFjZTpdXStcWzB4W1s6c3BhY2U6XV0qW1s6eGRpZ2l0Ol1dK1tb
-OnNwYWNlOl1dKjpbWzpzcGFjZTpdXSpbWzpkaWdpdDpdXStcXS8gewrCoCDCoCDCoCDCoCBtYXRj
-aCgkMCwgL1xbMHhbWzpzcGFjZTpdXSooW1s6eGRpZ2l0Ol1dKylbWzpzcGFjZTpdXSo6W1s6c3Bh
-Y2U6XV0qKFtbOmRpZ2l0Ol1dKylcXS8sIGFycikKwqAgwqAgwqAgwqAgcHJpbnQgImNwX2Jsa2Fk
-ZHI9IiBhcnJbMl0KwqAgwqAgfQrCoCDCoCAvXnNpdF9ibGthZGRyW1s6c3BhY2U6XV0rXFsweFtb
-OnNwYWNlOl1dKltbOnhkaWdpdDpdXStbWzpzcGFjZTpdXSo6W1s6c3BhY2U6XV0qW1s6ZGlnaXQ6
-XV0rXF0vIHsKwqAgwqAgwqAgwqAgbWF0Y2goJDAsIC9cWzB4W1s6c3BhY2U6XV0qKFtbOnhkaWdp
-dDpdXSspW1s6c3BhY2U6XV0qOltbOnNwYWNlOl1dKihbWzpkaWdpdDpdXSspXF0vLCBhcnIpCsKg
-IMKgIMKgIMKgIHByaW50ICJzaXRfYmxrYWRkcj0iIGFyclsyXQrCoCDCoCB9CsKgIMKgIC9ebmF0
-X2Jsa2FkZHJbWzpzcGFjZTpdXStcWzB4W1s6c3BhY2U6XV0qW1s6eGRpZ2l0Ol1dK1tbOnNwYWNl
-Ol1dKjpbWzpzcGFjZTpdXSpbWzpkaWdpdDpdXStcXS8gewrCoCDCoCDCoCDCoCBtYXRjaCgkMCwg
-L1xbMHhbWzpzcGFjZTpdXSooW1s6eGRpZ2l0Ol1dKylbWzpzcGFjZTpdXSo6W1s6c3BhY2U6XV0q
-KFtbOmRpZ2l0Ol1dKylcXS8sIGFycikKwqAgwqAgwqAgwqAgcHJpbnQgIm5hdF9ibGthZGRyPSIg
-YXJyWzJdCsKgIMKgIH0KwqAgwqAgL15zc2FfYmxrYWRkcltbOnNwYWNlOl1dK1xbMHhbWzpzcGFj
-ZTpdXSpbWzp4ZGlnaXQ6XV0rW1s6c3BhY2U6XV0qOltbOnNwYWNlOl1dKltbOmRpZ2l0Ol1dK1xd
-LyB7CsKgIMKgIMKgIMKgIG1hdGNoKCQwLCAvXFsweFtbOnNwYWNlOl1dKihbWzp4ZGlnaXQ6XV0r
-KVtbOnNwYWNlOl1dKjpbWzpzcGFjZTpdXSooW1s6ZGlnaXQ6XV0rKVxdLywgYXJyKQrCoCDCoCDC
-oCDCoCBwcmludCAic3NhX2Jsa2FkZHI9IiBhcnJbMl0KwqAgwqAgfQrCoCDCoCAvXm1haW5fYmxr
-YWRkcltbOnNwYWNlOl1dK1xbMHhbWzpzcGFjZTpdXSpbWzp4ZGlnaXQ6XV0rW1s6c3BhY2U6XV0q
-OltbOnNwYWNlOl1dKltbOmRpZ2l0Ol1dK1xdLyB7CsKgIMKgIMKgIMKgIG1hdGNoKCQwLCAvXFsw
-eFtbOnNwYWNlOl1dKihbWzp4ZGlnaXQ6XV0rKVtbOnNwYWNlOl1dKjpbWzpzcGFjZTpdXSooW1s6
-ZGlnaXQ6XV0rKVxdLywgYXJyKQrCoCDCoCDCoCDCoCBwcmludCAibWFpbl9ibGthZGRyPSIgYXJy
-WzJdCsKgIMKgIH0KwqAgwqAgL15sb2dfYmxvY2tzX3Blcl9zZWdbWzpzcGFjZTpdXStcWzB4W1s6
-c3BhY2U6XV0qW1s6eGRpZ2l0Ol1dK1tbOnNwYWNlOl1dKjpbWzpzcGFjZTpdXSpbWzpkaWdpdDpd
-XStcXS8gewrCoCDCoCDCoCDCoCBtYXRjaCgkMCwgL1xbMHhbWzpzcGFjZTpdXSooW1s6eGRpZ2l0
-Ol1dKylbWzpzcGFjZTpdXSo6W1s6c3BhY2U6XV0qKFtbOmRpZ2l0Ol1dKylcXS8sIGFycikKwqAg
-wqAgwqAgwqAgcHJpbnQgImxvZ19ibG9ja3NfcGVyX3NlZz0iIGFyclsyXQrCoCDCoCB9CsKgIMKg
-ICcgIiRzYl9maWxlIgp9CgojIEZpbGwgcGFydGl0aW9uIHdpdGggZmlsZXMgdXNpbmcgbGFyZ2Vz
-dCBwb3NzaWJsZSAyXm4gc2l6ZXMKZmlsbF9wYXJ0aXRpb24oKSB7CsKgIMKgIGxvY2FsIG1vdW50
-X3BvaW50PSIkMSIKwqAgwqAgaW5mbyAiRmlsbGluZyBwYXJ0aXRpb24gYXQgJG1vdW50X3BvaW50
-IgrCoCDCoArCoCDCoCAjIEdldCBhdmFpbGFibGUgc3BhY2UgaW4gYnl0ZXMKwqAgwqAgbG9jYWwg
-YXZhaWxhYmxlX2J5dGVzCsKgIMKgIGF2YWlsYWJsZV9ieXRlcz0kKGRmIC1CMSAiJG1vdW50X3Bv
-aW50IiB8IHRhaWwgLTEgfCBhd2sgJ3twcmludCAkNH0nKQrCoCDCoArCoCDCoCBpZiBbIC16ICIk
-YXZhaWxhYmxlX2J5dGVzIiBdIHx8IFsgIiRhdmFpbGFibGVfYnl0ZXMiIC1sZSAwIF07IHRoZW4K
-wqAgwqAgwqAgwqAgZXJyb3IgIkZhaWxlZCB0byBnZXQgYXZhaWxhYmxlIHNwYWNlIG9yIG5vIHNw
-YWNlIGF2YWlsYWJsZSIKwqAgwqAgZmkKwqAgwqAKwqAgwqAgaW5mbyAiQXZhaWxhYmxlIHNwYWNl
-OiAkKChhdmFpbGFibGVfYnl0ZXMgLyAxMDI0IC8gMTAyNCAvIDEwMjQpKUdCICgkYXZhaWxhYmxl
-X2J5dGVzIGJ5dGVzKSIKwqAgwqAKwqAgwqAgIyBGaW5kIHRoZSBsYXJnZXN0IDJebiB0aGF0IGlz
-IDw9IGF2YWlsYWJsZSBzcGFjZQrCoCDCoCAjIFN0YXJ0IGZyb20gMSBieXRlIGFuZCBtdWx0aXBs
-eSBieSAyIHVudGlsIHdlIGV4Y2VlZCBhdmFpbGFibGUgc3BhY2UsIHRoZW4gZ28gYmFjayBvbmUg
-c3RlcArCoCDCoCBsb2NhbCBzdGFydF9zaXplX2J5dGVzPTEgwqAjIFN0YXJ0IGZyb20gMSBieXRl
-CsKgIMKgCsKgIMKgICMgRmluZCB0aGUgbGFyZ2VzdCAyXm4gdGhhdCBmaXRzICgxLCAyLCA0LCA4
-LCAxNiwgMzIsIDY0LCAxMjgsIDI1NiwgNTEyLCAxSywgMkssIDRLLCA4SywgLi4uKQrCoCDCoCB3
-aGlsZSBbICQoKHN0YXJ0X3NpemVfYnl0ZXMgKiAyKSkgLWxlICRhdmFpbGFibGVfYnl0ZXMgXTsg
-ZG8KwqAgwqAgwqAgwqAgc3RhcnRfc2l6ZV9ieXRlcz0kKChzdGFydF9zaXplX2J5dGVzICogMikp
-CsKgIMKgIGRvbmUKwqAgwqAKwqAgwqAgIyBEaXNwbGF5IHRoZSBzdGFydGluZyBzaXplIGluIGFw
-cHJvcHJpYXRlIHVuaXRzCsKgIMKgIGlmIFsgJHN0YXJ0X3NpemVfYnl0ZXMgLWdlICQoKDEwMjQg
-KiAxMDI0ICogMTAyNCkpIF07IHRoZW4KwqAgwqAgwqAgwqAgbG9jYWwgc3RhcnRfc2l6ZV9nYj0k
-KChzdGFydF9zaXplX2J5dGVzIC8gMTAyNCAvIDEwMjQgLyAxMDI0KSkKwqAgwqAgwqAgwqAgaW5m
-byAiU3RhcnRpbmcgd2l0aCAke3N0YXJ0X3NpemVfZ2J9R0IgKGxhcmdlc3QgMl5uIHRoYXQgZml0
-cykiCsKgIMKgIGVsaWYgWyAkc3RhcnRfc2l6ZV9ieXRlcyAtZ2UgJCgoMTAyNCAqIDEwMjQpKSBd
-OyB0aGVuCsKgIMKgIMKgIMKgIGxvY2FsIHN0YXJ0X3NpemVfbWI9JCgoc3RhcnRfc2l6ZV9ieXRl
-cyAvIDEwMjQgLyAxMDI0KSkKwqAgwqAgwqAgwqAgaW5mbyAiU3RhcnRpbmcgd2l0aCAke3N0YXJ0
-X3NpemVfbWJ9TUIgKGxhcmdlc3QgMl5uIHRoYXQgZml0cykiCsKgIMKgIGVsaWYgWyAkc3RhcnRf
-c2l6ZV9ieXRlcyAtZ2UgMTAyNCBdOyB0aGVuCsKgIMKgIMKgIMKgIGxvY2FsIHN0YXJ0X3NpemVf
-a2I9JCgoc3RhcnRfc2l6ZV9ieXRlcyAvIDEwMjQpKQrCoCDCoCDCoCDCoCBpbmZvICJTdGFydGlu
-ZyB3aXRoICR7c3RhcnRfc2l6ZV9rYn1LQiAobGFyZ2VzdCAyXm4gdGhhdCBmaXRzKSIKwqAgwqAg
-ZWxzZQrCoCDCoCDCoCDCoCBpbmZvICJTdGFydGluZyB3aXRoICR7c3RhcnRfc2l6ZV9ieXRlc30g
-Ynl0ZXMgKGxhcmdlc3QgMl5uIHRoYXQgZml0cykiCsKgIMKgIGZpCsKgIMKgCsKgIMKgICMgTm93
-IGZpbGwgd2l0aCBmaWxlczogc3RhcnQgZnJvbSB0aGUgY2FsY3VsYXRlZCBzdGFydF9zaXplX2J5
-dGVzIGFuZCBnbyBkb3duCsKgIMKgICMgRm9yIGVhY2ggc2l6ZSwgdHJ5IG9uY2UuIElmIHNwYWNl
-IGlzIG5vdCBlbm91Z2ggb3IgY3JlYXRpb24gZmFpbHMsIHNraXAgdG8gbmV4dCBzbWFsbGVyIHNp
-emUKwqAgwqAgbG9jYWwgZmlsZV9pbmRleD0wCsKgIMKgIGxvY2FsIHNpemVfYnl0ZXM9JHN0YXJ0
-X3NpemVfYnl0ZXMgwqAjIFN0YXJ0IGZyb20gZHluYW1pY2FsbHkgY2FsY3VsYXRlZCBzaXplCsKg
-IMKgIGxvY2FsIG1pbl9zaXplPSQoKDEwMjQgKiA1MTIpKQrCoCDCoArCoCDCoCB3aGlsZSBbICRz
-aXplX2J5dGVzIC1ndCAkbWluX3NpemUgXTsgZG8KwqAgwqAgwqAgwqAgIyBDaGVjayBpZiB3ZSBo
-YXZlIGVub3VnaCBzcGFjZQrCoCDCoCDCoCDCoCBsb2NhbCBjdXJyZW50X2F2YWlsYWJsZQrCoCDC
-oCDCoCDCoCBjdXJyZW50X2F2YWlsYWJsZT0kKGRmIC1CMSAiJG1vdW50X3BvaW50IiB8IHRhaWwg
-LTEgfCBhd2sgJ3twcmludCAkNH0nKQrCoCDCoCDCoCDCoArCoCDCoCDCoCDCoCBpZiBbICIkY3Vy
-cmVudF9hdmFpbGFibGUiIC1sdCAiJHNpemVfYnl0ZXMiIF07IHRoZW4KwqAgwqAgwqAgwqAgwqAg
-wqAgIyBOb3QgZW5vdWdoIHNwYWNlLCBza2lwIHRoaXMgc2l6ZSBhbmQgdHJ5IG5leHQgc21hbGxl
-ciBzaXplCsKgIMKgIMKgIMKgIMKgIMKgIGluZm8gIlNraXBwaW5nICR7c2l6ZV9ieXRlc30gYnl0
-ZXMgKG5vdCBlbm91Z2ggc3BhY2U6ICRjdXJyZW50X2F2YWlsYWJsZSBhdmFpbGFibGUpIgrCoCDC
-oCDCoCDCoCDCoCDCoCBzaXplX2J5dGVzPSQoKHNpemVfYnl0ZXMgLyAyKSkKwqAgwqAgwqAgwqAg
-wqAgwqAgY29udGludWUKwqAgwqAgwqAgwqAgZmkKwqAgwqAgwqAgwqAKwqAgwqAgwqAgwqAgIyBU
-cnkgdG8gY3JlYXRlIGZpbGUgdXNpbmcgZGQgd2l0aCA0S0IgYmxvY2sgc2l6ZQrCoCDCoCDCoCDC
-oCBsb2NhbCBmaWxlX3BhdGg9IiRtb3VudF9wb2ludC9maWxsXyR7ZmlsZV9pbmRleH1fJHtzaXpl
-X2J5dGVzfS5kYXQiCsKgIMKgIMKgIMKgIGxvY2FsIHNpemVfZ2I9JCgoc2l6ZV9ieXRlcyAvIDEw
-MjQgLyAxMDI0IC8gMTAyNCkpCsKgIMKgIMKgIMKgIGxvY2FsIHNpemVfbWI9JCgoc2l6ZV9ieXRl
-cyAvIDEwMjQgLyAxMDI0KSkKwqAgwqAgwqAgwqAgbG9jYWwgYmxvY2tfY291bnQ9JCgoc2l6ZV9i
-eXRlcyAvIDQwOTYpKSDCoCMgNEtCIGJsb2NrcwrCoCDCoCDCoCDCoArCoCDCoCDCoCDCoCAjIFVz
-ZSBkZCB3aXRoIDRLQiBibG9jayBzaXplIGFuZCBkaXJlY3QgSS9PIHRvIGJ5cGFzcyBwYWdlIGNh
-Y2hlCsKgIMKgIMKgIMKgICMgb2ZsYWc9ZGlyZWN0OiB1c2UgZGlyZWN0IEkvTyBmb3Igb3V0cHV0
-LCBieXBhc3NpbmcgcGFnZSBjYWNoZQrCoCDCoCDCoCDCoCBpZiBzdWRvIGRkIGlmPS9kZXYvdXJh
-bmRvbSBvZj0iJGZpbGVfcGF0aCIgYnM9NDA5NiBjb3VudD0kYmxvY2tfY291bnQgb2ZsYWc9ZGly
-ZWN0IDI+L2Rldi9udWxsOyB0aGVuCsKgIMKgIMKgIMKgIMKgIMKgIGlmIFsgJHNpemVfZ2IgLWd0
-IDAgXTsgdGhlbgrCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBpbmZvICJDcmVhdGVkIGZpbGU6IGZp
-bGxfJHtmaWxlX2luZGV4fV8ke3NpemVfYnl0ZXN9LmRhdCAoJHtzaXplX2difUdCKSIKwqAgwqAg
-wqAgwqAgwqAgwqAgZWxzZQrCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBpbmZvICJDcmVhdGVkIGZp
-bGU6IGZpbGxfJHtmaWxlX2luZGV4fV8ke3NpemVfYnl0ZXN9LmRhdCAoJHtzaXplX21ifU1CKSIK
-wqAgwqAgwqAgwqAgwqAgwqAgZmkKwqAgwqAgwqAgwqAgwqAgwqAgIyBTeW5jIHRvIGZsdXNoIGRp
-cnR5IHBhZ2VzIGFuZCBmcmVlIHBhZ2UgY2FjaGUgdG8gcmVkdWNlIG1lbW9yeSBwcmVzc3VyZQrC
-oCDCoCDCoCDCoCDCoCDCoCBzeW5jCsKgIMKgIMKgIMKgIMKgIMKgIGluZm8gIlN5bmNlZCBmaWxl
-OiBmaWxsXyR7ZmlsZV9pbmRleH1fJHtzaXplX2J5dGVzfS5kYXQiCsKgIMKgIMKgIMKgIMKgIMKg
-IGZpbGVfaW5kZXg9JCgoZmlsZV9pbmRleCArIDEpKQrCoCDCoCDCoCDCoCDCoCDCoCAjIENvbnRp
-bnVlIHdpdGggbmV4dCBzbWFsbGVyIHNpemUKwqAgwqAgwqAgwqAgwqAgwqAgc2l6ZV9ieXRlcz0k
-KChzaXplX2J5dGVzIC8gMikpCsKgIMKgIMKgIMKgIGVsc2UKwqAgwqAgwqAgwqAgwqAgwqAgIyBG
-YWlsZWQgdG8gY3JlYXRlIChsaWtlbHkgb3V0IG9mIHNwYWNlKSwgc2tpcCB0aGlzIHNpemUgYW5k
-IHRyeSBuZXh0IHNtYWxsZXIKwqAgwqAgwqAgwqAgwqAgwqAgc3VkbyBybSAtZiAiJGZpbGVfcGF0
-aCIgMj4vZGV2L251bGwKwqAgwqAgwqAgwqAgwqAgwqAgaW5mbyAiRmFpbGVkIHRvIGNyZWF0ZSAk
-e3NpemVfYnl0ZXN9IGJ5dGVzIGZpbGUsIHRyeWluZyBuZXh0IHNtYWxsZXIgc2l6ZSIKwqAgwqAg
-wqAgwqAgwqAgwqAgc2l6ZV9ieXRlcz0kKChzaXplX2J5dGVzIC8gMikpCsKgIMKgIMKgIMKgIGZp
-CsKgIMKgIGRvbmUKwqAgwqAKwqAgwqAgaW5mbyAiUGFydGl0aW9uIGZpbGxlZC4gQ3JlYXRlZCAk
-ZmlsZV9pbmRleCBmaWxlcy4iCn0KCiMgVmVyaWZ5IGRhdGEgaW50ZWdyaXR5CnZlcmlmeV9kYXRh
-KCkgewrCoCDCoCBpbmZvICJWZXJpZnlpbmcgZGF0YSBpbnRlZ3JpdHkgaW4gJE1PVU5UX1BPSU5U
-IgrCoCDCoArCoCDCoCAjIENoZWNrIGlmIGJvdGggZGlyZWN0b3JpZXMgZXhpc3QKwqAgwqAgaWYg
-WyAhIC1kICIkU09VUkNFX0RJUiIgXTsgdGhlbgrCoCDCoCDCoCDCoCBlcnJvciAiU291cmNlIGRp
-cmVjdG9yeSAkU09VUkNFX0RJUiBkb2VzIG5vdCBleGlzdCIKwqAgwqAgZmkKwqAgwqAKwqAgwqAg
-aWYgWyAhIC1kICIkTU9VTlRfUE9JTlQiIF07IHRoZW4KwqAgwqAgwqAgwqAgZXJyb3IgIk1vdW50
-IHBvaW50ICRNT1VOVF9QT0lOVCBpcyBub3QgYWNjZXNzaWJsZSIKwqAgwqAgZmkKwqAgwqAKwqAg
-wqAgIyBVc2UgZGlmZiAtcnEgdG8gcXVpY2tseSBjb21wYXJlIGVudGlyZSBkaXJlY3RvcnkgdHJl
-ZXMKwqAgwqAgIyBUaGlzIGlzIG11Y2ggZmFzdGVyIHRoYW4gY29tcGFyaW5nIGZpbGVzIG9uZSBi
-eSBvbmUKwqAgwqAgIyAtcjogcmVjdXJzaXZlLCAtcTogcXVpZXQgKG9ubHkgcmVwb3J0IGlmIGZp
-bGVzIGRpZmZlcikKwqAgwqAgbG9jYWwgZGlmZl9vdXRwdXQKwqAgwqAgaWYgISBkaWZmX291dHB1
-dD0kKGRpZmYgLXJxICIkU09VUkNFX0RJUiIgIiRNT1VOVF9QT0lOVCIgMj4mMSk7IHRoZW4KwqAg
-wqAgwqAgwqAgZXJyb3IgIkRhdGEgaW50ZWdyaXR5IGNoZWNrIGZhaWxlZC4gRGlmZmVyZW5jZXMg
-Zm91bmQ6XG4kZGlmZl9vdXRwdXQiCsKgIMKgIGZpCsKgIMKgCsKgIMKgIGluZm8gIkRhdGEgaW50
-ZWdyaXR5IHZlcmlmaWVkOiBhbGwgZmlsZXMgbWF0Y2ggYmV0d2VlbiAkU09VUkNFX0RJUiBhbmQg
-JE1PVU5UX1BPSU5UIgp9CgojIENhbGN1bGF0ZSBleHBlY3RlZCB2YWx1ZXMgZm9yIHZhcmlhYmxl
-IGZpZWxkcwpjYWxjdWxhdGVfZXhwZWN0ZWRfdmFsdWVzKCkgewrCoCDCoCBsb2NhbCBvbGRfc2I9
-IiQxIgrCoCDCoCBsb2NhbCBzdGFydF9zZWN0b3I9IiQyIgrCoCDCoArCoCDCoCAjIExvYWQgb2xk
-IFNCIHZhbHVlcwrCoCDCoCBldmFsICQocGFyc2Vfc2JfaW5mbyAiJG9sZF9zYiIpCsKgIMKgCsKg
-IMKgICMgQ2hlY2sgaWYgcGFyc2luZyBzdWNjZWVkZWQgLSBhbGwgcmVxdWlyZWQgZmllbGRzIG11
-c3QgYmUgcHJlc2VudArCoCDCoCBpZiBbIC16ICIkc2VnbWVudDBfYmxrYWRkciIgXSB8fCBbIC16
-ICIkbG9nX2Jsb2Nrc19wZXJfc2VnIiBdIHx8IFsgLXogIiRzZWdtZW50X2NvdW50X2NrcHQiIF0g
-fHwgXArCoCDCoCDCoCDCoFsgLXogIiRzZWdtZW50X2NvdW50X3NpdCIgXSB8fCBbIC16ICIkc2Vn
-bWVudF9jb3VudF9uYXQiIF0gfHwgWyAteiAiJHNlZ21lbnRfY291bnRfc3NhIiBdOyB0aGVuCsKg
-IMKgIMKgIMKgIGVycm9yICJGYWlsZWQgdG8gcGFyc2Ugc3VwZXJibG9jayBmcm9tICRvbGRfc2Iu
-IEZpbGUgY29udGVudHM6XG4kKGhlYWQgLTIwICIkb2xkX3NiIikiCsKgIMKgIGZpCsKgIMKgCsKg
-IMKgIGxvY2FsIG9sZF9zZWdtZW50MF9ibGthZGRyPSRzZWdtZW50MF9ibGthZGRyCsKgIMKgIGxv
-Y2FsIGJsa3NfcGVyX3NlZz0kKCgyKipsb2dfYmxvY2tzX3Blcl9zZWcpKQrCoCDCoArCoCDCoCAj
-IFByaW50IHBhcnNlZCB2YWx1ZXMgdGhhdCBhcmUgYWN0dWFsbHkgdXNlZCAodG8gc3RkZXJyIHRv
-IGF2b2lkIGJlaW5nIGNhcHR1cmVkIGJ5IGV2YWwpCsKgIMKgIGVjaG8gIklORk86IGNhbGN1bGF0
-ZV9leHBlY3RlZF92YWx1ZXM6IG9sZF9zZWdtZW50MF9ibGthZGRyPSRvbGRfc2VnbWVudDBfYmxr
-YWRkciwgc2VnbWVudF9jb3VudF9ja3B0PSRzZWdtZW50X2NvdW50X2NrcHQsIHNlZ21lbnRfY291
-bnRfc2l0PSRzZWdtZW50X2NvdW50X3NpdCwgc2VnbWVudF9jb3VudF9uYXQ9JHNlZ21lbnRfY291
-bnRfbmF0LCBzZWdtZW50X2NvdW50X3NzYT0kc2VnbWVudF9jb3VudF9zc2EsIGxvZ19ibG9ja3Nf
-cGVyX3NlZz0kbG9nX2Jsb2Nrc19wZXJfc2VnLCBibGtzX3Blcl9zZWc9JGJsa3NfcGVyX3NlZyIg
-PiYyCsKgIMKgCsKgIMKgICMgQ2FsY3VsYXRlIGFsaWdubWVudF9ieXRlcyBhbmQgem9uZV9hbGln
-bl9zdGFydF9vZmZzZXQKwqAgwqAgbG9jYWwgYWxpZ25tZW50X2J5dGVzPSQoKDQwOTYgKiA1MTIp
-KQrCoCDCoCBsb2NhbCB6b25lX2FsaWduX3N0YXJ0X29mZnNldD0kKCggKHN0YXJ0X3NlY3RvciAq
-IDUxMiArIDIgKiA0MDk2ICsgYWxpZ25tZW50X2J5dGVzIC0gMSkgLyBhbGlnbm1lbnRfYnl0ZXMg
-KiBhbGlnbm1lbnRfYnl0ZXMgLSBzdGFydF9zZWN0b3IgKiA1MTIgKSkKwqAgwqAKwqAgwqAgIyBD
-YWxjdWxhdGUgbmV3IHNlZ21lbnQwX2Jsa2FkZHIKwqAgwqAgIyBzZWdtZW50MF9ibGthZGRyID0g
-em9uZV9hbGlnbl9zdGFydF9vZmZzZXQgLyA0MDk2LCB0aGVuIHJvdW5kIHVwIHRvID49IG9sZF9z
-ZWdtZW50MF9ibGthZGRyCsKgIMKgIGxvY2FsIG5ld19zZWdtZW50MF9ibGthZGRyPSQoKHpvbmVf
-YWxpZ25fc3RhcnRfb2Zmc2V0IC8gNDA5NikpCsKgIMKgIHdoaWxlIFsgIiRuZXdfc2VnbWVudDBf
-YmxrYWRkciIgLWx0ICIkb2xkX3NlZ21lbnQwX2Jsa2FkZHIiIF07IGRvCsKgIMKgIMKgIMKgIG5l
-d19zZWdtZW50MF9ibGthZGRyPSQoKG5ld19zZWdtZW50MF9ibGthZGRyICsgNTEyKSkKwqAgwqAg
-ZG9uZQrCoCDCoArCoCDCoCAjIENhbGN1bGF0ZSBvdGhlciBhZGRyZXNzZXMgYmFzZWQgb24gbmV3
-X3NlZ21lbnQwX2Jsa2FkZHIKwqAgwqAgbG9jYWwgbmV3X2NwX2Jsa2FkZHI9JG5ld19zZWdtZW50
-MF9ibGthZGRyCsKgIMKgIGxvY2FsIG5ld19zaXRfYmxrYWRkcj0kKChuZXdfY3BfYmxrYWRkciAr
-IHNlZ21lbnRfY291bnRfY2twdCAqIGJsa3NfcGVyX3NlZykpCsKgIMKgIGxvY2FsIG5ld19uYXRf
-YmxrYWRkcj0kKChuZXdfc2l0X2Jsa2FkZHIgKyBzZWdtZW50X2NvdW50X3NpdCAqIGJsa3NfcGVy
-X3NlZykpCsKgIMKgIGxvY2FsIG5ld19zc2FfYmxrYWRkcj0kKChuZXdfbmF0X2Jsa2FkZHIgKyBz
-ZWdtZW50X2NvdW50X25hdCAqIGJsa3NfcGVyX3NlZykpCsKgIMKgIGxvY2FsIG5ld19tYWluX2Js
-a2FkZHI9JCgobmV3X3NzYV9ibGthZGRyICsgc2VnbWVudF9jb3VudF9zc2EgKiBibGtzX3Blcl9z
-ZWcpKQrCoCDCoArCoCDCoCBlY2hvICJleHBlY3RlZF9zZWdtZW50MF9ibGthZGRyPSRuZXdfc2Vn
-bWVudDBfYmxrYWRkciIKwqAgwqAgZWNobyAiZXhwZWN0ZWRfY3BfYmxrYWRkcj0kbmV3X2NwX2Js
-a2FkZHIiCsKgIMKgIGVjaG8gImV4cGVjdGVkX3NpdF9ibGthZGRyPSRuZXdfc2l0X2Jsa2FkZHIi
-CsKgIMKgIGVjaG8gImV4cGVjdGVkX25hdF9ibGthZGRyPSRuZXdfbmF0X2Jsa2FkZHIiCsKgIMKg
-IGVjaG8gImV4cGVjdGVkX3NzYV9ibGthZGRyPSRuZXdfc3NhX2Jsa2FkZHIiCsKgIMKgIGVjaG8g
-ImV4cGVjdGVkX21haW5fYmxrYWRkcj0kbmV3X21haW5fYmxrYWRkciIKfQoKIyBSZWNvcmQgaW5j
-b25zaXN0ZW5jeSB0byBzdGF0cyBmaWxlCnJlY29yZF9pbmNvbnNpc3RlbmN5KCkgewrCoCDCoCBs
-b2NhbCBzdGFydF9zZWN0b3I9IiQxIgrCoCDCoCBsb2NhbCBmaWVsZD0iJDIiCsKgIMKgIGxvY2Fs
-IG9sZF92YWx1ZT0iJDMiCsKgIMKgIGxvY2FsIG5ld192YWx1ZT0iJDQiCsKgIMKgIGVjaG8gIltz
-dGFydF9zZWN0b3I9JHN0YXJ0X3NlY3Rvcl0gJGZpZWxkOiBvbGQ9JG9sZF92YWx1ZSwgbmV3PSRu
-ZXdfdmFsdWUiID4+ICIkU1RBVFNfRklMRSIKwqAgwqAgd2FybiAiSW5jb25zaXN0ZW5jeSBkZXRl
-Y3RlZDogJGZpZWxkIGNoYW5nZWQgZnJvbSAkb2xkX3ZhbHVlIHRvICRuZXdfdmFsdWUgKHN0YXJ0
-X3NlY3Rvcj0kc3RhcnRfc2VjdG9yKSIKfQoKIyBWZXJpZnkgc3VwZXJibG9jayBjb25zaXN0ZW5j
-eQp2ZXJpZnlfc2JfY29uc2lzdGVuY3koKSB7CsKgIMKgIGxvY2FsIG9sZF9zYl9maWxlPSIkMSIK
-wqAgwqAgbG9jYWwgbmV3X3NiX2ZpbGU9IiQyIgrCoCDCoCBsb2NhbCBzdGFydF9zZWN0b3I9IiQz
-IgrCoCDCoArCoCDCoCBpbmZvICJWZXJpZnlpbmcgc3VwZXJibG9jayBjb25zaXN0ZW5jeSIKwqAg
-wqAKwqAgwqAgIyBQYXJzZSBib3RoIHN1cGVyYmxvY2tzCsKgIMKgIGV2YWwgJChwYXJzZV9zYl9p
-bmZvICIkb2xkX3NiX2ZpbGUiKQrCoCDCoArCoCDCoCAjIENoZWNrIGlmIHBhcnNpbmcgc3VjY2Vl
-ZGVkIC0gYWxsIHJlcXVpcmVkIGZpZWxkcyBtdXN0IGJlIHByZXNlbnQKwqAgwqAgaWYgWyAteiAi
-JHNlZ21lbnRfY291bnQiIF0gfHwgWyAteiAiJHNlZ21lbnRfY291bnRfY2twdCIgXSB8fCBbIC16
-ICIkc2VnbWVudF9jb3VudF9zaXQiIF0gfHwgXArCoCDCoCDCoCDCoFsgLXogIiRzZWdtZW50X2Nv
-dW50X25hdCIgXSB8fCBbIC16ICIkc2VnbWVudF9jb3VudF9zc2EiIF0gfHwgWyAteiAiJHNlZ21l
-bnRfY291bnRfbWFpbiIgXSB8fCBcCsKgIMKgIMKgIMKgWyAteiAiJHNlY3Rpb25fY291bnQiIF0g
-fHwgWyAteiAiJGNwX3BheWxvYWQiIF07IHRoZW4KwqAgwqAgwqAgwqAgZXJyb3IgIkZhaWxlZCB0
-byBwYXJzZSBvbGQgc3VwZXJibG9jayBmcm9tICRvbGRfc2JfZmlsZS4gRmlsZSBjb250ZW50czpc
-biQoaGVhZCAtMjAgIiRvbGRfc2JfZmlsZSIpIgrCoCDCoCBmaQrCoCDCoArCoCDCoCBsb2NhbCBv
-bGRfc2VnbWVudF9jb3VudD0kc2VnbWVudF9jb3VudArCoCDCoCBsb2NhbCBvbGRfc2VnbWVudF9j
-b3VudF9zaXQ9JHNlZ21lbnRfY291bnRfc2l0CsKgIMKgIGxvY2FsIG9sZF9zZWdtZW50X2NvdW50
-X25hdD0kc2VnbWVudF9jb3VudF9uYXQKwqAgwqAgbG9jYWwgb2xkX3NlZ21lbnRfY291bnRfc3Nh
-PSRzZWdtZW50X2NvdW50X3NzYQrCoCDCoCBsb2NhbCBvbGRfc2VnbWVudF9jb3VudF9tYWluPSRz
-ZWdtZW50X2NvdW50X21haW4KwqAgwqAgbG9jYWwgb2xkX3NlY3Rpb25fY291bnQ9JHNlY3Rpb25f
-Y291bnQKwqAgwqAgbG9jYWwgb2xkX2NwX3BheWxvYWQ9JGNwX3BheWxvYWQKwqAgwqAgbG9jYWwg
-b2xkX3NlZ21lbnRfY291bnRfY2twdD0kc2VnbWVudF9jb3VudF9ja3B0CsKgIMKgCsKgIMKgIGV2
-YWwgJChwYXJzZV9zYl9pbmZvICIkbmV3X3NiX2ZpbGUiKQrCoCDCoArCoCDCoCAjIENoZWNrIGlm
-IHBhcnNpbmcgc3VjY2VlZGVkIC0gYWxsIHJlcXVpcmVkIGZpZWxkcyBtdXN0IGJlIHByZXNlbnQK
-wqAgwqAgaWYgWyAteiAiJHNlZ21lbnRfY291bnQiIF0gfHwgWyAteiAiJHNlZ21lbnRfY291bnRf
-Y2twdCIgXSB8fCBbIC16ICIkc2VnbWVudF9jb3VudF9zaXQiIF0gfHwgXArCoCDCoCDCoCDCoFsg
-LXogIiRzZWdtZW50X2NvdW50X25hdCIgXSB8fCBbIC16ICIkc2VnbWVudF9jb3VudF9zc2EiIF0g
-fHwgWyAteiAiJHNlZ21lbnRfY291bnRfbWFpbiIgXSB8fCBcCsKgIMKgIMKgIMKgWyAteiAiJHNl
-Y3Rpb25fY291bnQiIF0gfHwgWyAteiAiJGNwX3BheWxvYWQiIF07IHRoZW4KwqAgwqAgwqAgwqAg
-ZXJyb3IgIkZhaWxlZCB0byBwYXJzZSBuZXcgc3VwZXJibG9jayBmcm9tICRuZXdfc2JfZmlsZS4g
-RmlsZSBjb250ZW50czpcbiQoaGVhZCAtMjAgIiRuZXdfc2JfZmlsZSIpIgrCoCDCoCBmaQrCoCDC
-oCBsb2NhbCBuZXdfc2VnbWVudF9jb3VudD0kc2VnbWVudF9jb3VudArCoCDCoCBsb2NhbCBuZXdf
-c2VnbWVudF9jb3VudF9zaXQ9JHNlZ21lbnRfY291bnRfc2l0CsKgIMKgIGxvY2FsIG5ld19zZWdt
-ZW50X2NvdW50X25hdD0kc2VnbWVudF9jb3VudF9uYXQKwqAgwqAgbG9jYWwgbmV3X3NlZ21lbnRf
-Y291bnRfc3NhPSRzZWdtZW50X2NvdW50X3NzYQrCoCDCoCBsb2NhbCBuZXdfc2VnbWVudF9jb3Vu
-dF9tYWluPSRzZWdtZW50X2NvdW50X21haW4KwqAgwqAgbG9jYWwgbmV3X3NlY3Rpb25fY291bnQ9
-JHNlY3Rpb25fY291bnQKwqAgwqAgbG9jYWwgbmV3X2NwX3BheWxvYWQ9JGNwX3BheWxvYWQKwqAg
-wqAgbG9jYWwgbmV3X3NlZ21lbnRfY291bnRfY2twdD0kc2VnbWVudF9jb3VudF9ja3B0CsKgIMKg
-CsKgIMKgICMgUHJpbnQgcGFyc2VkIHZhbHVlcyBmb3IgZGVidWdnaW5nCsKgIMKgIGluZm8gIlBh
-cnNlZCBvbGQgU0I6IHNlZ21lbnRfY291bnQ9JG9sZF9zZWdtZW50X2NvdW50LCBzZWdtZW50X2Nv
-dW50X3NpdD0kb2xkX3NlZ21lbnRfY291bnRfc2l0LCBzZWdtZW50X2NvdW50X25hdD0kb2xkX3Nl
-Z21lbnRfY291bnRfbmF0LCBzZWdtZW50X2NvdW50X3NzYT0kb2xkX3NlZ21lbnRfY291bnRfc3Nh
-LCBzZWdtZW50X2NvdW50X21haW49JG9sZF9zZWdtZW50X2NvdW50X21haW4sIHNlY3Rpb25fY291
-bnQ9JG9sZF9zZWN0aW9uX2NvdW50LCBjcF9wYXlsb2FkPSRvbGRfY3BfcGF5bG9hZCwgc2VnbWVu
-dF9jb3VudF9ja3B0PSRvbGRfc2VnbWVudF9jb3VudF9ja3B0IgrCoCDCoCBpbmZvICJQYXJzZWQg
-bmV3IFNCOiBzZWdtZW50X2NvdW50PSRuZXdfc2VnbWVudF9jb3VudCwgc2VnbWVudF9jb3VudF9z
-aXQ9JG5ld19zZWdtZW50X2NvdW50X3NpdCwgc2VnbWVudF9jb3VudF9uYXQ9JG5ld19zZWdtZW50
-X2NvdW50X25hdCwgc2VnbWVudF9jb3VudF9zc2E9JG5ld19zZWdtZW50X2NvdW50X3NzYSwgc2Vn
-bWVudF9jb3VudF9tYWluPSRuZXdfc2VnbWVudF9jb3VudF9tYWluLCBzZWN0aW9uX2NvdW50PSRu
-ZXdfc2VjdGlvbl9jb3VudCwgY3BfcGF5bG9hZD0kbmV3X2NwX3BheWxvYWQsIHNlZ21lbnRfY291
-bnRfY2twdD0kbmV3X3NlZ21lbnRfY291bnRfY2twdCIKwqAgwqAKwqAgwqAgIyBWZXJpZnkgdW5j
-aGFuZ2VkIGZpZWxkcyAocmVjb3JkIGluY29uc2lzdGVuY2llcyBpbnN0ZWFkIG9mIGV4aXRpbmcp
-CsKgIMKgIGlmIFsgIiRvbGRfc2VnbWVudF9jb3VudCIgIT0gIiRuZXdfc2VnbWVudF9jb3VudCIg
-XTsgdGhlbgrCoCDCoCDCoCDCoCByZWNvcmRfaW5jb25zaXN0ZW5jeSAiJHN0YXJ0X3NlY3RvciIg
-InNlZ21lbnRfY291bnQiICIkb2xkX3NlZ21lbnRfY291bnQiICIkbmV3X3NlZ21lbnRfY291bnQi
-CsKgIMKgIGZpCsKgIMKgCsKgIMKgIGlmIFsgIiRvbGRfc2VnbWVudF9jb3VudF9zaXQiICE9ICIk
-bmV3X3NlZ21lbnRfY291bnRfc2l0IiBdOyB0aGVuCsKgIMKgIMKgIMKgIHJlY29yZF9pbmNvbnNp
-c3RlbmN5ICIkc3RhcnRfc2VjdG9yIiAic2VnbWVudF9jb3VudF9zaXQiICIkb2xkX3NlZ21lbnRf
-Y291bnRfc2l0IiAiJG5ld19zZWdtZW50X2NvdW50X3NpdCIKwqAgwqAgZmkKwqAgwqAKwqAgwqAg
-aWYgWyAiJG9sZF9zZWdtZW50X2NvdW50X25hdCIgIT0gIiRuZXdfc2VnbWVudF9jb3VudF9uYXQi
-IF07IHRoZW4KwqAgwqAgwqAgwqAgcmVjb3JkX2luY29uc2lzdGVuY3kgIiRzdGFydF9zZWN0b3Ii
-ICJzZWdtZW50X2NvdW50X25hdCIgIiRvbGRfc2VnbWVudF9jb3VudF9uYXQiICIkbmV3X3NlZ21l
-bnRfY291bnRfbmF0IgrCoCDCoCBmaQrCoCDCoArCoCDCoCBpZiBbICIkb2xkX3NlZ21lbnRfY291
-bnRfc3NhIiAhPSAiJG5ld19zZWdtZW50X2NvdW50X3NzYSIgXTsgdGhlbgrCoCDCoCDCoCDCoCBy
-ZWNvcmRfaW5jb25zaXN0ZW5jeSAiJHN0YXJ0X3NlY3RvciIgInNlZ21lbnRfY291bnRfc3NhIiAi
-JG9sZF9zZWdtZW50X2NvdW50X3NzYSIgIiRuZXdfc2VnbWVudF9jb3VudF9zc2EiCsKgIMKgIGZp
-CsKgIMKgCsKgIMKgIGlmIFsgIiRvbGRfc2VnbWVudF9jb3VudF9tYWluIiAhPSAiJG5ld19zZWdt
-ZW50X2NvdW50X21haW4iIF07IHRoZW4KwqAgwqAgwqAgwqAgcmVjb3JkX2luY29uc2lzdGVuY3kg
-IiRzdGFydF9zZWN0b3IiICJzZWdtZW50X2NvdW50X21haW4iICIkb2xkX3NlZ21lbnRfY291bnRf
-bWFpbiIgIiRuZXdfc2VnbWVudF9jb3VudF9tYWluIgrCoCDCoCBmaQrCoCDCoArCoCDCoCBpZiBb
-ICIkb2xkX3NlY3Rpb25fY291bnQiICE9ICIkbmV3X3NlY3Rpb25fY291bnQiIF07IHRoZW4KwqAg
-wqAgwqAgwqAgcmVjb3JkX2luY29uc2lzdGVuY3kgIiRzdGFydF9zZWN0b3IiICJzZWN0aW9uX2Nv
-dW50IiAiJG9sZF9zZWN0aW9uX2NvdW50IiAiJG5ld19zZWN0aW9uX2NvdW50IgrCoCDCoCBmaQrC
-oCDCoArCoCDCoCBpZiBbICIkb2xkX2NwX3BheWxvYWQiICE9ICIkbmV3X2NwX3BheWxvYWQiIF07
-IHRoZW4KwqAgwqAgwqAgwqAgcmVjb3JkX2luY29uc2lzdGVuY3kgIiRzdGFydF9zZWN0b3IiICJj
-cF9wYXlsb2FkIiAiJG9sZF9jcF9wYXlsb2FkIiAiJG5ld19jcF9wYXlsb2FkIgrCoCDCoCBmaQrC
-oCDCoArCoCDCoCBpZiBbICIkb2xkX3NlZ21lbnRfY291bnRfY2twdCIgIT0gIiRuZXdfc2VnbWVu
-dF9jb3VudF9ja3B0IiBdOyB0aGVuCsKgIMKgIMKgIMKgIHJlY29yZF9pbmNvbnNpc3RlbmN5ICIk
-c3RhcnRfc2VjdG9yIiAic2VnbWVudF9jb3VudF9ja3B0IiAiJG9sZF9zZWdtZW50X2NvdW50X2Nr
-cHQiICIkbmV3X3NlZ21lbnRfY291bnRfY2twdCIKwqAgwqAgZmkKwqAgwqAKwqAgwqAgaW5mbyAi
-VW5jaGFuZ2VkIGZpZWxkcyB2ZXJpZmllZCIKfQoKIyBWZXJpZnkgdmFyaWFibGUgZmllbGRzCnZl
-cmlmeV92YXJpYWJsZV9maWVsZHMoKSB7CsKgIMKgIGxvY2FsIG9sZF9zYl9maWxlPSIkMSIKwqAg
-wqAgbG9jYWwgbmV3X3NiX2ZpbGU9IiQyIgrCoCDCoCBsb2NhbCBzdGFydF9zZWN0b3I9IiQzIgrC
-oCDCoArCoCDCoCBpbmZvICJWZXJpZnlpbmcgdmFyaWFibGUgZmllbGRzIgrCoCDCoArCoCDCoCAj
-IFBhcnNlIG5ldyBTQiB2YWx1ZXMKwqAgwqAgZXZhbCAkKHBhcnNlX3NiX2luZm8gIiRuZXdfc2Jf
-ZmlsZSIpCsKgIMKgCsKgIMKgICMgQ2hlY2sgaWYgcGFyc2luZyBzdWNjZWVkZWQgLSBhbGwgcmVx
-dWlyZWQgZmllbGRzIG11c3QgYmUgcHJlc2VudArCoCDCoCBpZiBbIC16ICIkc2VnbWVudDBfYmxr
-YWRkciIgXSB8fCBbIC16ICIkY3BfYmxrYWRkciIgXSB8fCBbIC16ICIkc2l0X2Jsa2FkZHIiIF0g
-fHwgXArCoCDCoCDCoCDCoFsgLXogIiRuYXRfYmxrYWRkciIgXSB8fCBbIC16ICIkc3NhX2Jsa2Fk
-ZHIiIF0gfHwgWyAteiAiJG1haW5fYmxrYWRkciIgXTsgdGhlbgrCoCDCoCDCoCDCoCBlcnJvciAi
-RmFpbGVkIHRvIHBhcnNlIG5ldyBzdXBlcmJsb2NrIGZyb20gJG5ld19zYl9maWxlLiBGaWxlIGNv
-bnRlbnRzOlxuJChoZWFkIC0yMCAiJG5ld19zYl9maWxlIikiCsKgIMKgIGZpCsKgIMKgCsKgIMKg
-IGxvY2FsIG5ld19zZWdtZW50MF9ibGthZGRyPSRzZWdtZW50MF9ibGthZGRyCsKgIMKgIGxvY2Fs
-IG5ld19jcF9ibGthZGRyPSRjcF9ibGthZGRyCsKgIMKgIGxvY2FsIG5ld19zaXRfYmxrYWRkcj0k
-c2l0X2Jsa2FkZHIKwqAgwqAgbG9jYWwgbmV3X25hdF9ibGthZGRyPSRuYXRfYmxrYWRkcgrCoCDC
-oCBsb2NhbCBuZXdfc3NhX2Jsa2FkZHI9JHNzYV9ibGthZGRyCsKgIMKgIGxvY2FsIG5ld19tYWlu
-X2Jsa2FkZHI9JG1haW5fYmxrYWRkcgrCoCDCoArCoCDCoCAjIENhbGN1bGF0ZSBleHBlY3RlZCB2
-YWx1ZXMgKHN0ZG91dCBmb3IgZXZhbCwgc3RkZXJyIGZvciBpbmZvIG1lc3NhZ2VzKQrCoCDCoCBl
-dmFsICQoY2FsY3VsYXRlX2V4cGVjdGVkX3ZhbHVlcyAiJG9sZF9zYl9maWxlIiAiJHN0YXJ0X3Nl
-Y3RvciIpCsKgIMKgCsKgIMKgICMgUHJpbnQgcGFyc2VkIGFuZCBleHBlY3RlZCB2YWx1ZXMgZm9y
-IGRlYnVnZ2luZwrCoCDCoCBpbmZvICJQYXJzZWQgbmV3IFNCIHZhcmlhYmxlIGZpZWxkczogc2Vn
-bWVudDBfYmxrYWRkcj0kbmV3X3NlZ21lbnQwX2Jsa2FkZHIsIGNwX2Jsa2FkZHI9JG5ld19jcF9i
-bGthZGRyLCBzaXRfYmxrYWRkcj0kbmV3X3NpdF9ibGthZGRyLCBuYXRfYmxrYWRkcj0kbmV3X25h
-dF9ibGthZGRyLCBzc2FfYmxrYWRkcj0kbmV3X3NzYV9ibGthZGRyLCBtYWluX2Jsa2FkZHI9JG5l
-d19tYWluX2Jsa2FkZHIiCsKgIMKgIGluZm8gIkV4cGVjdGVkIHZhcmlhYmxlIGZpZWxkcyDCoCDC
-oCA6IHNlZ21lbnQwX2Jsa2FkZHI9JGV4cGVjdGVkX3NlZ21lbnQwX2Jsa2FkZHIsIGNwX2Jsa2Fk
-ZHI9JGV4cGVjdGVkX2NwX2Jsa2FkZHIsIHNpdF9ibGthZGRyPSRleHBlY3RlZF9zaXRfYmxrYWRk
-ciwgbmF0X2Jsa2FkZHI9JGV4cGVjdGVkX25hdF9ibGthZGRyLCBzc2FfYmxrYWRkcj0kZXhwZWN0
-ZWRfc3NhX2Jsa2FkZHIsIG1haW5fYmxrYWRkcj0kZXhwZWN0ZWRfbWFpbl9ibGthZGRyIgrCoCDC
-oArCoCDCoCAjIFJlY29yZCBpbmNvbnNpc3RlbmNpZXMgaW5zdGVhZCBvZiBleGl0aW5nCsKgIMKg
-IGlmIFsgIiRuZXdfc2VnbWVudDBfYmxrYWRkciIgIT0gIiRleHBlY3RlZF9zZWdtZW50MF9ibGth
-ZGRyIiBdOyB0aGVuCsKgIMKgIMKgIMKgIHJlY29yZF9pbmNvbnNpc3RlbmN5ICIkc3RhcnRfc2Vj
-dG9yIiAic2VnbWVudDBfYmxrYWRkciIgIiRleHBlY3RlZF9zZWdtZW50MF9ibGthZGRyIiAiJG5l
-d19zZWdtZW50MF9ibGthZGRyIgrCoCDCoCBmaQrCoCDCoArCoCDCoCBpZiBbICIkbmV3X2NwX2Js
-a2FkZHIiICE9ICIkZXhwZWN0ZWRfY3BfYmxrYWRkciIgXTsgdGhlbgrCoCDCoCDCoCDCoCByZWNv
-cmRfaW5jb25zaXN0ZW5jeSAiJHN0YXJ0X3NlY3RvciIgImNwX2Jsa2FkZHIiICIkZXhwZWN0ZWRf
-Y3BfYmxrYWRkciIgIiRuZXdfY3BfYmxrYWRkciIKwqAgwqAgZmkKwqAgwqAKwqAgwqAgaWYgWyAi
-JG5ld19zaXRfYmxrYWRkciIgIT0gIiRleHBlY3RlZF9zaXRfYmxrYWRkciIgXTsgdGhlbgrCoCDC
-oCDCoCDCoCByZWNvcmRfaW5jb25zaXN0ZW5jeSAiJHN0YXJ0X3NlY3RvciIgInNpdF9ibGthZGRy
-IiAiJGV4cGVjdGVkX3NpdF9ibGthZGRyIiAiJG5ld19zaXRfYmxrYWRkciIKwqAgwqAgZmkKwqAg
-wqAKwqAgwqAgaWYgWyAiJG5ld19uYXRfYmxrYWRkciIgIT0gIiRleHBlY3RlZF9uYXRfYmxrYWRk
-ciIgXTsgdGhlbgrCoCDCoCDCoCDCoCByZWNvcmRfaW5jb25zaXN0ZW5jeSAiJHN0YXJ0X3NlY3Rv
-ciIgIm5hdF9ibGthZGRyIiAiJGV4cGVjdGVkX25hdF9ibGthZGRyIiAiJG5ld19uYXRfYmxrYWRk
-ciIKwqAgwqAgZmkKwqAgwqAKwqAgwqAgaWYgWyAiJG5ld19zc2FfYmxrYWRkciIgIT0gIiRleHBl
-Y3RlZF9zc2FfYmxrYWRkciIgXTsgdGhlbgrCoCDCoCDCoCDCoCByZWNvcmRfaW5jb25zaXN0ZW5j
-eSAiJHN0YXJ0X3NlY3RvciIgInNzYV9ibGthZGRyIiAiJGV4cGVjdGVkX3NzYV9ibGthZGRyIiAi
-JG5ld19zc2FfYmxrYWRkciIKwqAgwqAgZmkKwqAgwqAKwqAgwqAgaWYgWyAiJG5ld19tYWluX2Js
-a2FkZHIiICE9ICIkZXhwZWN0ZWRfbWFpbl9ibGthZGRyIiBdOyB0aGVuCsKgIMKgIMKgIMKgIHJl
-Y29yZF9pbmNvbnNpc3RlbmN5ICIkc3RhcnRfc2VjdG9yIiAibWFpbl9ibGthZGRyIiAiJGV4cGVj
-dGVkX21haW5fYmxrYWRkciIgIiRuZXdfbWFpbl9ibGthZGRyIgrCoCDCoCBmaQrCoCDCoArCoCDC
-oCBpbmZvICJWYXJpYWJsZSBmaWVsZHMgdmVyaWZpZWQiCn0KCiMgQ2xlYW51cCBmdW5jdGlvbgpj
-bGVhbnVwKCkgewrCoCDCoCBzdWRvIHVtb3VudCAiJE1PVU5UX1BPSU5UIiAyPi9kZXYvbnVsbCB8
-fCB0cnVlCn0KCiMgTWFpbiB0ZXN0IGZ1bmN0aW9uIGZvciBhIHNpbmdsZSBwYXJ0aXRpb24KdGVz
-dF9wYXJ0aXRpb24oKSB7CsKgIMKgIGxvY2FsIHN0YXJ0X3NlY3Rvcj0iJDEiCsKgIMKgIGxvY2Fs
-IHBhcnRpdGlvbl9kZXY9IiR7U1NEX0RFVklDRX0xIiDCoCMgQWx3YXlzIHVzZSBwYXJ0aXRpb24g
-MQrCoCDCoCBsb2NhbCBvbGRfc2JfZmlsZT0ib2xkX3NiXyR7c3RhcnRfc2VjdG9yfS50eHQiCsKg
-IMKgIGxvY2FsIG5ld19zYl9maWxlPSJuZXdfc2JfJHtzdGFydF9zZWN0b3J9LnR4dCIKwqAgwqAK
-wqAgwqAgIyBTZXR1cCBjbGVhbnVwIHRyYXAKwqAgwqAgdHJhcCAiY2xlYW51cCIgRVhJVCBJTlQg
-VEVSTQrCoCDCoArCoCDCoCBpbmZvICJUZXN0aW5nIHBhcnRpdGlvbiBzdGFydGluZyBhdCBzZWN0
-b3IgJHN0YXJ0X3NlY3RvciAocGFydGl0aW9uOiAkcGFydGl0aW9uX2RldikiCsKgIMKgCsKgIMKg
-ICMgQ2FsY3VsYXRlIHBhcnRpdGlvbiBlbmQgc2VjdG9yIChHQiB0byBzZWN0b3JzOiBHQiAqIDEw
-MjQgKiAxMDI0ICogMTAyNCAvIDUxMikKwqAgwqAgIyBlbmRfc2VjdG9yIGlzIGluY2x1c2l2ZSwg
-c28gd2UgbmVlZCB0byBzdWJ0cmFjdCAxCsKgIMKgIGxvY2FsIGVuZF9zZWN0b3I9JCgoc3RhcnRf
-c2VjdG9yICsgUEFSVElUSU9OX1NJWkVfR0IgKiAxMDI0ICogMTAyNCAqIDEwMjQgLyA1MTIgLSAx
-KSkKwqAgwqAKwqAgwqAgIyBDaGVjayBpZiBwYXJ0aXRpb24gd291bGQgZXhjZWVkIGRldmljZSBz
-aXplCsKgIMKgIGxvY2FsIGRldmljZV9zaXplX3NlY3RvcnM9JChzdWRvIGJsb2NrZGV2IC0tZ2V0
-c3ogIiRTU0RfREVWSUNFIiAyPi9kZXYvbnVsbCB8fCBlY2hvICIwIikKwqAgwqAgaWYgWyAiJGRl
-dmljZV9zaXplX3NlY3RvcnMiIC1ndCAwIF0gJiYgWyAiJGVuZF9zZWN0b3IiIC1nZSAiJGRldmlj
-ZV9zaXplX3NlY3RvcnMiIF07IHRoZW4KwqAgwqAgwqAgwqAgZXJyb3IgIlBhcnRpdGlvbiBlbmQg
-c2VjdG9yICRlbmRfc2VjdG9yIGV4Y2VlZHMgZGV2aWNlIHNpemUgJGRldmljZV9zaXplX3NlY3Rv
-cnMiCsKgIMKgIGZpCsKgIMKgCsKgIMKgICMgRGVsZXRlIGV4aXN0aW5nIHBhcnRpdGlvbiBpZiBp
-dCBleGlzdHMgKHdlJ2xsIGFsd2F5cyB1c2UgcGFydGl0aW9uIDEpCsKgIMKgIHN1ZG8gcGFydGVk
-IC1zICIkU1NEX0RFVklDRSIgcm0gMSAyPi9kZXYvbnVsbCB8fCB0cnVlCsKgIMKgCsKgIMKgICMg
-Q3JlYXRlIG5ldyBwYXJ0aXRpb24gc3RhcnRpbmcgYXQgc3RhcnRfc2VjdG9yIChhbHdheXMgYXMg
-cGFydGl0aW9uIDEpCsKgIMKgIGluZm8gIkNyZWF0aW5nIHBhcnRpdGlvbjogc3RhcnQ9JHtzdGFy
-dF9zZWN0b3J9cywgZW5kPSR7ZW5kX3NlY3Rvcn1zIgrCoCDCoCBsb2NhbCBwYXJ0ZWRfb3V0cHV0
-CsKgIMKgIHBhcnRlZF9vdXRwdXQ9JChzdWRvIHBhcnRlZCAtcyAiJFNTRF9ERVZJQ0UiIG1rcGFy
-dCBwcmltYXJ5ICR7c3RhcnRfc2VjdG9yfXMgJHtlbmRfc2VjdG9yfXMgMj4mMSkKwqAgwqAgbG9j
-YWwgcGFydGVkX3N0YXR1cz0kPwrCoCDCoCBpZiBbICRwYXJ0ZWRfc3RhdHVzIC1uZSAwIF07IHRo
-ZW4KwqAgwqAgwqAgwqAgZXJyb3IgIkZhaWxlZCB0byBjcmVhdGUgcGFydGl0aW9uIChzdGFydD0k
-e3N0YXJ0X3NlY3Rvcn1zLCBlbmQ9JHtlbmRfc2VjdG9yfXMpOiAkcGFydGVkX291dHB1dCIKwqAg
-wqAgZmkKwqAgwqAKwqAgwqAgIyBXYWl0IGZvciBrZXJuZWwgdG8gcmVjb2duaXplIHRoZSBuZXcg
-cGFydGl0aW9uCsKgIMKgIHN1ZG8gcGFydHByb2JlICIkU1NEX0RFVklDRSIgMj4vZGV2L251bGwg
-fHwgdHJ1ZQrCoCDCoArCoCDCoCAjIFZlcmlmeSBwYXJ0aXRpb24gZXhpc3RzIChhbHdheXMgcGFy
-dGl0aW9uIDEpCsKgIMKgIHBhcnRpdGlvbl9kZXY9IiR7U1NEX0RFVklDRX0xIgrCoCDCoCBpZiBb
-ICEgLWIgIiRwYXJ0aXRpb25fZGV2IiBdOyB0aGVuCsKgIMKgIMKgIMKgIGVycm9yICJQYXJ0aXRp
-b24gJHBhcnRpdGlvbl9kZXYgZG9lcyBub3QgZXhpc3QgYWZ0ZXIgY3JlYXRpb24iCsKgIMKgIGZp
-CsKgIMKgCsKgIMKgICMgVmVyaWZ5IHBhcnRpdGlvbiBzdGFydCBhbmQgZW5kIHNlY3RvcnMgbWF0
-Y2ggb3VyIGNvbmZpZ3VyYXRpb24KwqAgwqAgIyBVc2UgcGFydGVkIC1tIGZvciBtYWNoaW5lLXJl
-YWRhYmxlIG91dHB1dArCoCDCoCBsb2NhbCBhY3R1YWxfaW5mbz0kKHN1ZG8gcGFydGVkIC1zIC1t
-ICIkU1NEX0RFVklDRSIgdW5pdCBzIHByaW50IHwgZ3JlcCAiXjE6IiB8fCBlcnJvciAiRmFpbGVk
-IHRvIGdldCBwYXJ0aXRpb24gaW5mbyIpCsKgIMKgIGxvY2FsIGFjdHVhbF9zdGFydD0kKGVjaG8g
-IiRhY3R1YWxfaW5mbyIgfCBjdXQgLWQ6IC1mMiB8IHNlZCAncy9zJC8vJykKwqAgwqAgbG9jYWwg
-YWN0dWFsX2VuZD0kKGVjaG8gIiRhY3R1YWxfaW5mbyIgfCBjdXQgLWQ6IC1mMyB8IHNlZCAncy9z
-JC8vJykKwqAgwqAKwqAgwqAgaWYgWyAteiAiJGFjdHVhbF9zdGFydCIgXSB8fCBbIC16ICIkYWN0
-dWFsX2VuZCIgXTsgdGhlbgrCoCDCoCDCoCDCoCBlcnJvciAiRmFpbGVkIHRvIHBhcnNlIHBhcnRp
-dGlvbiBzdGFydC9lbmQgc2VjdG9ycyIKwqAgwqAgZmkKwqAgwqAKwqAgwqAgaWYgWyAiJGFjdHVh
-bF9zdGFydCIgIT0gIiRzdGFydF9zZWN0b3IiIF07IHRoZW4KwqAgwqAgwqAgwqAgZXJyb3IgIlBh
-cnRpdGlvbiBzdGFydCBzZWN0b3IgbWlzbWF0Y2g6IGV4cGVjdGVkICRzdGFydF9zZWN0b3IsIGdv
-dCAkYWN0dWFsX3N0YXJ0IgrCoCDCoCBmaQrCoCDCoArCoCDCoCBpZiBbICIkYWN0dWFsX2VuZCIg
-IT0gIiRlbmRfc2VjdG9yIiBdOyB0aGVuCsKgIMKgIMKgIMKgIGVycm9yICJQYXJ0aXRpb24gZW5k
-IHNlY3RvciBtaXNtYXRjaDogZXhwZWN0ZWQgJGVuZF9zZWN0b3IsIGdvdCAkYWN0dWFsX2VuZCIK
-wqAgwqAgZmkKwqAgwqAKwqAgwqAgaW5mbyAiUGFydGl0aW9uIHZlcmlmaWVkOiBzdGFydD0kYWN0
-dWFsX3N0YXJ0LCBlbmQ9JGFjdHVhbF9lbmQiCsKgIMKgCsKgIMKgICMgQ3JlYXRlIGZpbGVzeXN0
-ZW0gd2l0aCBvbGQgbWtmcwrCoCDCoCBpbmZvICJDcmVhdGluZyBmaWxlc3lzdGVtIG9uICRwYXJ0
-aXRpb25fZGV2IgrCoCDCoCBsb2NhbCBta2ZzX291dHB1dArCoCDCoCBta2ZzX291dHB1dD0kKHN1
-ZG8gIiRPTERfTUtGUyIgLWYgIiRwYXJ0aXRpb25fZGV2IiAyPiYxKQrCoCDCoCBsb2NhbCBta2Zz
-X3N0YXR1cz0kPwrCoCDCoCBpZiBbICRta2ZzX3N0YXR1cyAtbmUgMCBdOyB0aGVuCsKgIMKgIMKg
-IMKgIGVycm9yICJGYWlsZWQgdG8gY3JlYXRlIGZpbGVzeXN0ZW0gb24gJHBhcnRpdGlvbl9kZXY6
-ICRta2ZzX291dHB1dCIKwqAgwqAgZmkKwqAgwqAgaW5mbyAiRmlsZXN5c3RlbSBjcmVhdGVkIHN1
-Y2Nlc3NmdWxseSIKwqAgwqAKwqAgwqAgIyBNb3VudCBhbmQgZmlsbCBwYXJ0aXRpb24gd2l0aCBk
-YXRhCsKgIMKgIHN1ZG8gbWtkaXIgLXAgIiRNT1VOVF9QT0lOVCIKwqAgwqAgc3VkbyBtb3VudCAt
-dCBmMmZzICIkcGFydGl0aW9uX2RldiIgIiRNT1VOVF9QT0lOVCIgfHwgZXJyb3IgIkZhaWxlZCB0
-byBtb3VudCIKwqAgwqAKwqAgwqAgIyBDaGVjayBpZiBTT1VSQ0VfRElSIGFscmVhZHkgZXhpc3Rz
-IChmcm9tIHByZXZpb3VzIHRlc3QpCsKgIMKgIGlmIFsgLWQgIiRTT1VSQ0VfRElSIiBdICYmIFsg
-LW4gIiQobHMgLUEgIiRTT1VSQ0VfRElSIiAyPi9kZXYvbnVsbCkiIF07IHRoZW4KwqAgwqAgwqAg
-wqAgIyBTT1VSQ0VfRElSIGV4aXN0cyBhbmQgaGFzIGZpbGVzLCBjb3B5IGZyb20gU09VUkNFX0RJ
-UiB0byBtb3VudCBwb2ludArCoCDCoCDCoCDCoCBpbmZvICJTT1VSQ0VfRElSIGFscmVhZHkgZXhp
-c3RzLCBjb3B5aW5nIGZpbGVzIGZyb20gJFNPVVJDRV9ESVIgdG8gJE1PVU5UX1BPSU5UIgrCoCDC
-oCDCoCDCoCBzdWRvIGNwIC1yICIkU09VUkNFX0RJUiIvKiAiJE1PVU5UX1BPSU5ULyIgfHwgZXJy
-b3IgIkZhaWxlZCB0byBjb3B5IGZpbGVzIGZyb20gJFNPVVJDRV9ESVIgdG8gJE1PVU5UX1BPSU5U
-IgrCoCDCoCBlbHNlCsKgIMKgIMKgIMKgICMgU09VUkNFX0RJUiBkb2Vzbid0IGV4aXN0LCBmaWxs
-IHBhcnRpdGlvbiBhbmQgY29weSB0byBTT1VSQ0VfRElSCsKgIMKgIMKgIMKgIGZpbGxfcGFydGl0
-aW9uICIkTU9VTlRfUE9JTlQiCsKgIMKgIMKgIMKgCsKgIMKgIMKgIMKgICMgQ29weSBmaWxsZWQg
-ZmlsZXMgdG8gU09VUkNFX0RJUiBhcyBiYWNrdXAgZm9yIHZlcmlmaWNhdGlvbgrCoCDCoCDCoCDC
-oCBpbmZvICJDb3B5aW5nIGZpbGxlZCBmaWxlcyB0byAkU09VUkNFX0RJUiBmb3IgdmVyaWZpY2F0
-aW9uIgrCoCDCoCDCoCDCoCBybSAtcmYgIiRTT1VSQ0VfRElSIgrCoCDCoCDCoCDCoCBta2RpciAt
-cCAiJFNPVVJDRV9ESVIiCsKgIMKgIMKgIMKgIHN1ZG8gY3AgLXIgIiRNT1VOVF9QT0lOVCIvKiAi
-JFNPVVJDRV9ESVIvIiB8fCBlcnJvciAiRmFpbGVkIHRvIGNvcHkgZmlsZXMgdG8gJFNPVVJDRV9E
-SVIiCsKgIMKgIMKgIMKgIHN1ZG8gY2hvd24gLVIgJCh3aG9hbWkpICIkU09VUkNFX0RJUiIgfHwg
-dHJ1ZSDCoCMgQ2hhbmdlIG93bmVyc2hpcCBzbyB3ZSBjYW4gYWNjZXNzIGxhdGVyCsKgIMKgIGZp
-CsKgIMKgCsKgIMKgIHN1ZG8gdW1vdW50ICIkTU9VTlRfUE9JTlQiIHx8IGVycm9yICJGYWlsZWQg
-dG8gdW1vdW50IgrCoCDCoArCoCDCoCAjIFJ1biByZXNpemUgYW5kIGNhcHR1cmUgb3V0cHV0CsKg
-IMKgICMgLUY6IHNraXAgaW50ZXJhY3RpdmUgaW5wdXQsIC1mOiBmb3JjZSwgLWQxOiBkZWJ1ZyBs
-ZXZlbCAxCsKgIMKgICMgT3V0cHV0IGlzIGF1dG9tYXRpY2FsbHkgbG9nZ2VkIHZpYSBleGVjIHJl
-ZGlyZWN0LCBidXQgd2UgYWxzbyBzYXZlIHRvIGZpbGUgZm9yIHBhcnNpbmcKwqAgwqAgaW5mbyAi
-UnVubmluZyByZXNpemUgZm9yIHBhcnRpdGlvbiBzdGFydGluZyBhdCBzZWN0b3IgJHN0YXJ0X3Nl
-Y3RvciIKwqAgwqAgc3VkbyAiJE5FV19SRVNJWkUiIC1GIC1mIC1kMSAiJHBhcnRpdGlvbl9kZXYi
-IDI+JjEgfCB0ZWUgInJlc2l6ZV9vdXRwdXRfJHtzdGFydF9zZWN0b3J9LnR4dCIgfHwgZXJyb3Ig
-IkZhaWxlZCB0byByZXNpemUiCgrCoCDCoCAjIEVuc3VyZSByZXNpemUgb3V0cHV0IGNvbnRhaW5z
-IHRocmVlIHN1cGVyYmxvY2tzIChtb3VudCArIG9sZCArIG5ldykKwqAgwqAgbG9jYWwgc2JfdG90
-YWwKwqAgwqAgc2JfdG90YWw9JChncmVwIC1jICdeXHwgU3VwZXIgYmxvY2snICJyZXNpemVfb3V0
-cHV0XyR7c3RhcnRfc2VjdG9yfS50eHQiIHx8IGVjaG8gMCkKwqAgwqAgaWYgWyAiJHNiX3RvdGFs
-IiAtbHQgMyBdOyB0aGVuCsKgIMKgIMKgIMKgIGVycm9yICJyZXNpemUgb3V0cHV0IGluY29tcGxl
-dGUgZm9yIHNlY3RvciAkc3RhcnRfc2VjdG9yOiBleHBlY3RlZCBhdCBsZWFzdCAzIHN1cGVyIGJs
-b2NrcywgZ290ICRzYl90b3RhbCIKwqAgwqAgZmkKwqAgwqAKwqAgwqAgIyBFeHRyYWN0IHN1cGVy
-YmxvY2sgaW5mbyBmcm9tIG91dHB1dArCoCDCoCAjIFVzZSAifCBTdXBlciBibG9jayIgYXMgdW5p
-cXVlIGlkZW50aWZpZXIgdG8gYXZvaWQgY29uZmxpY3RzIHdpdGggb3RoZXIgb3V0cHV0CsKgIMKg
-ICMgU2tpcCB0aGUgZmlyc3Qgc3VwZXJibG9jayAoZnJvbSBtb3VudCksIGV4dHJhY3QgdGhlIDJu
-ZCAob2xkKSBhbmQgM3JkIChuZXcpIG9uZXMKwqAgwqAgYXdrICcKwqAgwqAgQkVHSU4gewrCoCDC
-oCDCoCDCoCBzYl9jb3VudD0wCsKgIMKgIMKgIMKgIGluX3NiPTAKwqAgwqAgwqAgwqAgcHJldl9s
-aW5lPSIiCsKgIMKgIH0KwqAgwqAgL15cfCBTdXBlciBibG9jay8gewrCoCDCoCDCoCDCoCAjIFN0
-YXJ0IG9mIG5ldyBzdXBlcmJsb2NrIHNlY3Rpb24KwqAgwqAgwqAgwqAgc2JfY291bnQrKwrCoCDC
-oCDCoCDCoCAjIFNraXAgdGhlIGZpcnN0IHN1cGVyYmxvY2sgKGZyb20gbW91bnQpLCBvbmx5IHBy
-b2Nlc3MgMm5kIGFuZCAzcmQKwqAgwqAgwqAgwqAgaWYgKHNiX2NvdW50ID09IDEpIHsKwqAgwqAg
-wqAgwqAgwqAgwqAgaW5fc2I9MArCoCDCoCDCoCDCoCDCoCDCoCBwcmV2X2xpbmUgPSAkMArCoCDC
-oCDCoCDCoCDCoCDCoCBuZXh0CsKgIMKgIMKgIMKgIH0KwqAgwqAgwqAgwqAgIyBQcm9jZXNzIDJu
-ZCAob2xkKSBhbmQgM3JkIChuZXcpIHN1cGVyYmxvY2tzCsKgIMKgIMKgIMKgIGluX3NiPTEKwqAg
-wqAgwqAgwqAgIyBJbmNsdWRlIHRoZSBzZXBhcmF0b3IgbGluZSBiZWZvcmUgInwgU3VwZXIgYmxv
-Y2siCsKgIMKgIMKgIMKgIGlmIChwcmV2X2xpbmUgfiAvXlwrLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cKy8pIHsKwqAgwqAgwqAgwqAgwqAg
-wqAgcHJpbnQgcHJldl9saW5lID4gKHNiX2NvdW50ID09IDIgPyAiJyIkb2xkX3NiX2ZpbGUiJyIg
-OiAiJyIkbmV3X3NiX2ZpbGUiJyIpCsKgIMKgIMKgIMKgIH0KwqAgwqAgwqAgwqAgcHJpbnQgPiAo
-c2JfY291bnQgPT0gMiA/ICInIiRvbGRfc2JfZmlsZSInIiA6ICInIiRuZXdfc2JfZmlsZSInIikK
-wqAgwqAgwqAgwqAgcHJldl9saW5lID0gJDAKwqAgwqAgwqAgwqAgbmV4dArCoCDCoCB9CsKgIMKg
-IGluX3NiICYmIHNiX2NvdW50ID49IDIgewrCoCDCoCDCoCDCoCAjIENvbGxlY3QgYWxsIGxpbmVz
-IHVudGlsIG5leHQgInwgU3VwZXIgYmxvY2siIG9yIGVuZCBvZiBmaWxlCsKgIMKgIMKgIMKgIHBy
-aW50ID4gKHNiX2NvdW50ID09IDIgPyAiJyIkb2xkX3NiX2ZpbGUiJyIgOiAiJyIkbmV3X3NiX2Zp
-bGUiJyIpCsKgIMKgIMKgIMKgIHByZXZfbGluZSA9ICQwCsKgIMKgIMKgIMKgIG5leHQKwqAgwqAg
-fQrCoCDCoCB7CsKgIMKgIMKgIMKgIHByZXZfbGluZSA9ICQwCsKgIMKgIH0KwqAgwqAgJyAicmVz
-aXplX291dHB1dF8ke3N0YXJ0X3NlY3Rvcn0udHh0IgrCoCDCoArCoCDCoCAjIENoZWNrIGlmIGZp
-bGVzIHdlcmUgY3JlYXRlZCBhbmQgaGF2ZSBjb250ZW50CsKgIMKgIGlmIFsgISAtcyAiJG9sZF9z
-Yl9maWxlIiBdOyB0aGVuCsKgIMKgIMKgIMKgIGVycm9yICJGYWlsZWQgdG8gZXh0cmFjdCBvbGQg
-c3VwZXJibG9jay4gT3V0cHV0IGZpbGUgc2l6ZTogJCh3YyAtbCA8ICIkb2xkX3NiX2ZpbGUiIDI+
-L2Rldi9udWxsIHx8IGVjaG8gMCkgbGluZXMuIEZpcnN0IDIwIGxpbmVzIG9mIHJlc2l6ZSBvdXRw
-dXQ6XG4kKGhlYWQgLTIwICJyZXNpemVfb3V0cHV0XyR7c3RhcnRfc2VjdG9yfS50eHQiKSIKwqAg
-wqAgZmkKwqAgwqAgaWYgWyAhIC1zICIkbmV3X3NiX2ZpbGUiIF07IHRoZW4KwqAgwqAgwqAgwqAg
-ZXJyb3IgIkZhaWxlZCB0byBleHRyYWN0IG5ldyBzdXBlcmJsb2NrLiBPdXRwdXQgZmlsZSBzaXpl
-OiAkKHdjIC1sIDwgIiRuZXdfc2JfZmlsZSIgMj4vZGV2L251bGwgfHwgZWNobyAwKSBsaW5lcyIK
-wqAgwqAgZmkKwqAgwqAKwqAgwqAgIyBWZXJpZnkgc3VwZXJibG9jayBjb25zaXN0ZW5jeQrCoCDC
-oCB2ZXJpZnlfc2JfY29uc2lzdGVuY3kgIiRvbGRfc2JfZmlsZSIgIiRuZXdfc2JfZmlsZSIgIiRz
-dGFydF9zZWN0b3IiCsKgIMKgCsKgIMKgICMgVmVyaWZ5IHZhcmlhYmxlIGZpZWxkcwrCoCDCoCB2
-ZXJpZnlfdmFyaWFibGVfZmllbGRzICIkb2xkX3NiX2ZpbGUiICIkbmV3X3NiX2ZpbGUiICIkc3Rh
-cnRfc2VjdG9yIgrCoCDCoArCoCDCoCAjIE1vdW50IGFuZCB2ZXJpZnkgZGF0YQrCoCDCoCBzdWRv
-IG1vdW50IC10IGYyZnMgIiRwYXJ0aXRpb25fZGV2IiAiJE1PVU5UX1BPSU5UIiB8fCBlcnJvciAi
-RmFpbGVkIHRvIG1vdW50IGFmdGVyIHJlc2l6ZSIKwqAgwqAgdmVyaWZ5X2RhdGEKwqAgwqAgc3Vk
-byB1bW91bnQgIiRNT1VOVF9QT0lOVCIgfHwgZXJyb3IgIkZhaWxlZCB0byB1bW91bnQgYWZ0ZXIg
-cmVzaXplIgrCoCDCoArCoCDCoCAjIENsZWFudXAgZmlsZXMgKHBhcnRpdGlvbiBjbGVhbnVwIGhh
-bmRsZWQgYnkgdHJhcCkKwqAgwqAgIyBybSAtZiAiJG9sZF9zYl9maWxlIiAiJG5ld19zYl9maWxl
-IiAicmVzaXplX291dHB1dF8ke3N0YXJ0X3NlY3Rvcn0udHh0IgrCoCDCoArCoCDCoCAjIFJlbW92
-ZSB0cmFwCsKgIMKgIHRyYXAgLSBFWElUIElOVCBURVJNCsKgIMKgCsKgIMKgIGluZm8gIlBhcnRp
-dGlvbiB0ZXN0ICRzdGFydF9zZWN0b3IgY29tcGxldGVkIHN1Y2Nlc3NmdWxseSIKfQoKIyBNYWlu
-IGV4ZWN1dGlvbgptYWluKCkgewrCoCDCoCAjIFJlZGlyZWN0IGFsbCBvdXRwdXQgdG8gYm90aCB0
-ZXJtaW5hbCBhbmQgbG9nIGZpbGUKwqAgwqAgZXhlYyA+ID4odGVlICIkTE9HX0ZJTEUiKSAyPiYx
-CsKgIMKgCsKgIMKgIGVjaG8gIj09PSBUZXN0IHN0YXJ0ZWQgYXQgJChkYXRlKSA9PT0iCsKgIMKg
-IGVjaG8gIiIKwqAgwqAgZWNobyAiPT09IENvbmZpZ3VyYXRpb24gPT09IgrCoCDCoCBlY2hvICJT
-T1VSQ0VfRElSOiAkU09VUkNFX0RJUiIKwqAgwqAgZWNobyAiTU9VTlRfUE9JTlQ6ICRNT1VOVF9Q
-T0lOVCIKwqAgwqAgZWNobyAiU1NEX0RFVklDRTogJFNTRF9ERVZJQ0UiCsKgIMKgIGVjaG8gIk9M
-RF9NS0ZTOiAkT0xEX01LRlMiCsKgIMKgIGVjaG8gIk5FV19SRVNJWkU6ICRORVdfUkVTSVpFIgrC
-oCDCoCBlY2hvICJQQVJUSVRJT05fU0laRV9HQjogJFBBUlRJVElPTl9TSVpFX0dCIgrCoCDCoCBl
-Y2hvICJMT0dfRklMRTogJExPR19GSUxFIgrCoCDCoCBlY2hvICJTVEFUU19GSUxFOiAkU1RBVFNf
-RklMRSIKwqAgwqAgZWNobyAiIgrCoCDCoArCoCDCoCAjIENoZWNrIHByZXJlcXVpc2l0ZXMKwqAg
-wqAgY29tbWFuZCAtdiAiJE9MRF9NS0ZTIiA+L2Rldi9udWxsIDI+JjEgfHwgZXJyb3IgIm1rZnMu
-ZjJmcyBjb21tYW5kIG5vdCBmb3VuZDogJE9MRF9NS0ZTIgrCoCDCoCBbIC1mICIkTkVXX1JFU0la
-RSIgXSB8fCBlcnJvciAiTmV3IHJlc2l6ZS5mMmZzIG5vdCBmb3VuZDogJE5FV19SRVNJWkUiCsKg
-IMKgCsKgIMKgICMgQ2hlY2sgaWYgU1NEX0RFVklDRSBpcyBzZXQKwqAgwqAgaWYgWyAteiAiJFNT
-RF9ERVZJQ0UiIF07IHRoZW4KwqAgwqAgwqAgwqAgZXJyb3IgIlNTRF9ERVZJQ0UgaXMgbm90IHNl
-dC4gUGxlYXNlIHNldCBpdCB0byB5b3VyIFNTRCBkZXZpY2UgKGUuZy4sIC9kZXYvc2RiKSIKwqAg
-wqAgwqAgwqAgZXJyb3IgIlVzYWdlOiBTU0RfREVWSUNFPS9kZXYvc2RiICQwIgrCoCDCoCDCoCDC
-oCBleGl0IDEKwqAgwqAgZmkKwqAgwqAKwqAgwqAgIyBWZXJpZnkgU1NEIGRldmljZSBleGlzdHMK
-wqAgwqAgaWYgWyAhIC1iICIkU1NEX0RFVklDRSIgXTsgdGhlbgrCoCDCoCDCoCDCoCBlcnJvciAi
-U1NEIGRldmljZSAkU1NEX0RFVklDRSBkb2VzIG5vdCBleGlzdCBvciBpcyBub3QgYSBibG9jayBk
-ZXZpY2UiCsKgIMKgIGZpCsKgIMKgCsKgIMKgICMgV2FybiB1c2VyIGFib3V0IGRhdGEgZGVzdHJ1
-Y3Rpb24KwqAgwqAgd2FybiAiV0FSTklORzogVGhpcyBzY3JpcHQgd2lsbCBjcmVhdGUgYW5kIGRl
-c3Ryb3kgcGFydGl0aW9ucyBvbiAkU1NEX0RFVklDRSIKwqAgwqAgd2FybiAiQWxsIGV4aXN0aW5n
-IGRhdGEgb24gJFNTRF9ERVZJQ0Ugd2lsbCBiZSBsb3N0ISIKwqAgwqAgZWNobyAiIgrCoCDCoCBy
-ZWFkIC1wICJQcmVzcyBFbnRlciB0byBjb250aW51ZSBvciBDdHJsK0MgdG8gYWJvcnQuLi4iCsKg
-IMKgCsKgIMKgIGluZm8gIlN0YXJ0aW5nIHJlc2l6ZS5mMmZzIHRlc3Qgc3VpdGUiCsKgIMKgCsKg
-IMKgICMgSW5pdGlhbGl6ZSBzdGF0aXN0aWNzIGZpbGUKwqAgwqAgZWNobyAiPT09IFN1cGVyYmxv
-Y2sgSW5jb25zaXN0ZW5jaWVzID09PSIgPiAiJFNUQVRTX0ZJTEUiCsKgIMKgIGVjaG8gIkZvcm1h
-dDogW3N0YXJ0X3NlY3Rvcj1YXSBmaWVsZDogb2xkPXZhbHVlLCBuZXc9dmFsdWUiID4+ICIkU1RB
-VFNfRklMRSIKwqAgwqAgZWNobyAiIiA+PiAiJFNUQVRTX0ZJTEUiCsKgIMKgCsKgIMKgICMgSW5p
-dGlhbGl6ZSBwYXJ0aXRpb24gdGFibGUgKG9ubHkgb25jZSkKwqAgwqAgd2FybiAiSW5pdGlhbGl6
-aW5nIHBhcnRpdGlvbiB0YWJsZSBvbiAkU1NEX0RFVklDRSIKwqAgwqAgc3VkbyBwYXJ0ZWQgLXMg
-IiRTU0RfREVWSUNFIiBta2xhYmVsIGdwdCAyPi9kZXYvbnVsbCB8fCBlcnJvciAiRmFpbGVkIHRv
-IGNyZWF0ZSBwYXJ0aXRpb24gdGFibGUiCsKgIMKgCsKgIMKgICMgVGVzdCBlYWNoIHBhcnRpdGlv
-biAoc3RhcnQgZnJvbSBzZWN0b3IgNDA5NiwgYXMgR1BUIHJlcXVpcmVzIHBhcnRpdGlvbnMgdG8g
-c3RhcnQgYWZ0ZXIgc2VjdG9yIDM0KQrCoCDCoCBsb2NhbCB0b3RhbF90ZXN0cz00MDk2CsKgIMKg
-IGxvY2FsIGN1cnJlbnRfdGVzdD0wCsKgIMKgIGZvciBzdGFydF9zZWN0b3IgaW4gezQwOTYuLjgx
-OTF9OyBkbwrCoCDCoCDCoCDCoCBjdXJyZW50X3Rlc3Q9JCgoY3VycmVudF90ZXN0ICsgMSkpCsKg
-IMKgIMKgIMKgIGluZm8gIlByb2dyZXNzOiAkY3VycmVudF90ZXN0LyR0b3RhbF90ZXN0cyAoc2Vj
-dG9yICRzdGFydF9zZWN0b3IpIgrCoCDCoCDCoCDCoCB0ZXN0X3BhcnRpdGlvbiAiJHN0YXJ0X3Nl
-Y3RvciIKwqAgwqAgZG9uZQrCoCDCoArCoCDCoCBpbmZvICJBbGwgdGVzdHMgY29tcGxldGVkIHN1
-Y2Nlc3NmdWxseSIKfQoKIyBSdW4gbWFpbiBmdW5jdGlvbgptYWluICIkQCIKCkJ1dCBhcyBhbiBp
-bmRpdmlkdWFsIHJlc2VhcmNoZXIgd2l0aCBsaW1pdGVkIGhhcmR3YXJlLCBteSB0ZXN0aW5nIGVu
-dmlyb25tZW50IGlzIGN1cnJlbnRseSBjb25zdHJhaW5lZCBieSBteSBhY2FkZW1pYyB3b3JrLgoK
-UGxlYXNlIG5vdGUgdGhhdCBJIG9ubHkgaGF2ZSBhY2Nlc3MgdG8gYSBzaW5nbGUgU1NEIGFyb3Vu
-ZCAxMDBHQiBmb3IgbXkgdGVzdGluZywgd2hpY2ggbGltaXRzIHRoZSBzY29wZSBvZiBteSByZWdy
-ZXNzaW9uIHZhbGlkYXRpb24gKGVzcGVjaWFsbHkgZm9yIGxhcmdlLXNjYWxlIHBlcmZvcm1hbmNl
-IG9yIGNhcGFjaXR5IGNoZWNrcykuIEdpdmVuIHlvdXIgY29ycG9yYXRlIGVudmlyb25tZW50LCB5
-b3VyIHRlYW0gd291bGQgYmUgbXVjaCBiZXR0ZXIgcG9zaXRpb25lZCB0byBydW4gZXh0ZW5zaXZl
-LCBsYXJnZS1zY2FsZSByZWdyZXNzaW9uIHRlc3RzIG9uIHRoZSBmaW5hbCBmaXguIE9mIGNvdXJz
-ZSwgd2hlbmV2ZXIgSSBoYXZlIHNwYXJlIHRpbWUsIEkgd2lsbCBhbHNvIGNvbnRpbnVlIHJ1bm5p
-bmcgdGhpcyBzY3JpcHQgZm9yIGZ1cnRoZXIgdGVzdGluZy4KCkkga2luZGx5IHJlcXVlc3QgdGhh
-dCB5b3UgdXNlIHRoZXNlIHJlcHJvZHVjZXJzIGFuZCB0aGUgdGVzdCBzY3JpcHQgdG8gdmFsaWRh
-dGUgdGhlIGZpeCBvbiB5b3VyIGVuZCBvbmNlIGltcGxlbWVudGVkLiBJZiB0aGVyZSBpcyBhbnl0
-aGluZyBmdXJ0aGVyIEkgY2FuIGRvIHRvIGFzc2lzdCB3aXRoIHRoZSBhbmFseXNpcyBvciBpbXBs
-ZW1lbnRhdGlvbiwgcGxlYXNlIGRvIG5vdCBoZXNpdGF0ZSB0byByZWFjaCBvdXQuCgpOb3RlIG9u
-IFNjcmlwdCBWYWxpZGF0aW9uIExvZ2ljOgoKVGhlIHZhbGlkYXRpb24gbG9naWMgd2l0aGluIHRo
-aXMgc2NyaXB0IGZvciBjaGVja2luZyBuZXcgdnMuIG9sZCBzdXBlcmJsb2NrIGZpZWxkcyAoc3Bl
-Y2lmaWNhbGx5IHRoZSBkaWZmZXJlbmNlIGluIGZpZWxkIHZhbHVlcykgbWF5IG5vdCBiZSBwZXJm
-ZWN0bHkgYWNjdXJhdGUgb3IgY29tcHJlaGVuc2l2ZS4gSG93ZXZlciwgdGhpcyBpcyBhY2NlcHRh
-YmxlLCBhcyB0aGVzZSBjaGVja3MgYXJlIHByaW1hcmlseSBmb3IgaW5mb3JtYXRpb25hbCBwdXJw
-b3NlcyBhbmQgd2lsbCBub3QgYmUgdXNlZCBhcyB0aGUgZGVmaW5pdGl2ZSBjcml0ZXJpYSBmb3Ig
-anVkZ2luZyB0aGUgYnVnLgoKVGhlIHRydWUgY3JpdGVyaWEgZm9yIGJ1ZyBqdWRnbWVudCByZW1h
-aW46CjEuICBXaGV0aGVyIHJlc2l6ZS5mMmZzIGV4ZWN1dGVzIHN1Y2Nlc3NmdWxseSB3aXRob3V0
-IGZhaWx1cmUuCjIuICBNb3JlIGltcG9ydGFudGx5LCB3aGV0aGVyIHRoZSBvcmlnaW5hbCBjcmVh
-dGVkIGZpbGVzIHJlbWFpbnMgZnVsbHkgY29uc2lzdGVudCBhZnRlciB0aGUgZXhlY3V0aW9uIG9m
-IHJlc2l6ZS5mMmZzLgoKUGxlYXNlIGZlZWwgZnJlZSB0byByZWFjaCBvdXQgdG8gbWUgaWYgeW91
-IGhhdmUgYW55IHF1ZXN0aW9ucyBvciByZXF1aXJlIGNsYXJpZmljYXRpb24gcmVnYXJkaW5nIHRo
-ZSBzY3JpcHQgb3IgdGhlIGV4cGVjdGVkIG91dGNvbWVzLgoKVGhhbmtzLApYaWFvbGUgSGUKCgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJm
-cy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5u
-ZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJm
-cy1kZXZlbAo=
+With three exceptions, ->create() methods provided by filesystems ignore
+the "excl" flag.  Those exception are NFS, GFS2 and vboxsf which all also
+provide ->atomic_open.
+
+Since ce8644fcadc5 ("lookup_open(): expand the call of vfs_create()"),
+the "excl" argument to the ->create() inode_operation is always set to
+true in vfs_create(). The ->create() call in lookup_open() sets it
+according to the O_EXCL open flag, but is never called if the filesystem
+provides ->atomic_open().
+
+The excl flag is therefore always either ignored or true.  Remove it,
+and change NFS, GFS2 and vboxsf to act as if it were always true.
+
+Reviewed-by: Dominique Martinet <asmadeus@codewreck.org>
+Reviewed-by: NeilBrown <neil@brown.name>
+Signed-off-by: Jeff Layton <jlayton@kernel.org>
+---
+I sent this a couple of weeks ago and never got a response from
+Christian, Al or Jan. This seems like it should be a no-brainer cleanup,
+and I think the Documentation/ updates will be helpful, so I'm guessing
+it just slipped through the cracks.
+
+A little late at this point for v6.19, so consider for v7.0 ?
+---
+Changes in v3:
+- fix use of excl in vboxsf_dir_mkfile()
+- fix tab prefixes in Documentation/filesystems/vfs.rst
+- Link to v2: https://lore.kernel.org/r/20251107-create-excl-v2-1-f678165d7f3f@kernel.org
+
+Changes in v2:
+- better describe why the argument isn't needed in the changelog
+- updates do Documentation/
+- Link to v1: https://lore.kernel.org/r/20251105-create-excl-v1-1-a4cce035cc55@kernel.org
+---
+ Documentation/filesystems/porting.rst | 12 ++++++++++++
+ Documentation/filesystems/vfs.rst     | 13 ++++++++++---
+ fs/9p/vfs_inode.c                     |  2 +-
+ fs/9p/vfs_inode_dotl.c                |  2 +-
+ fs/affs/affs.h                        |  2 +-
+ fs/affs/namei.c                       |  2 +-
+ fs/afs/dir.c                          |  4 ++--
+ fs/bad_inode.c                        |  2 +-
+ fs/bfs/dir.c                          |  2 +-
+ fs/btrfs/inode.c                      |  2 +-
+ fs/ceph/dir.c                         |  2 +-
+ fs/coda/dir.c                         |  2 +-
+ fs/ecryptfs/inode.c                   |  2 +-
+ fs/efivarfs/inode.c                   |  2 +-
+ fs/exfat/namei.c                      |  2 +-
+ fs/ext2/namei.c                       |  2 +-
+ fs/ext4/namei.c                       |  2 +-
+ fs/f2fs/namei.c                       |  2 +-
+ fs/fat/namei_msdos.c                  |  2 +-
+ fs/fat/namei_vfat.c                   |  2 +-
+ fs/fuse/dir.c                         |  2 +-
+ fs/gfs2/inode.c                       |  5 ++---
+ fs/hfs/dir.c                          |  2 +-
+ fs/hfsplus/dir.c                      |  2 +-
+ fs/hostfs/hostfs_kern.c               |  2 +-
+ fs/hpfs/namei.c                       |  2 +-
+ fs/hugetlbfs/inode.c                  |  2 +-
+ fs/jffs2/dir.c                        |  4 ++--
+ fs/jfs/namei.c                        |  2 +-
+ fs/minix/namei.c                      |  2 +-
+ fs/namei.c                            |  4 ++--
+ fs/nfs/dir.c                          |  4 ++--
+ fs/nfs/internal.h                     |  2 +-
+ fs/nilfs2/namei.c                     |  2 +-
+ fs/ntfs3/namei.c                      |  2 +-
+ fs/ocfs2/dlmfs/dlmfs.c                |  3 +--
+ fs/ocfs2/namei.c                      |  3 +--
+ fs/omfs/dir.c                         |  2 +-
+ fs/orangefs/namei.c                   |  3 +--
+ fs/overlayfs/dir.c                    |  2 +-
+ fs/ramfs/inode.c                      |  2 +-
+ fs/smb/client/cifsfs.h                |  2 +-
+ fs/smb/client/dir.c                   |  2 +-
+ fs/ubifs/dir.c                        |  2 +-
+ fs/udf/namei.c                        |  2 +-
+ fs/ufs/namei.c                        |  3 +--
+ fs/vboxsf/dir.c                       |  4 ++--
+ fs/xfs/xfs_iops.c                     |  3 +--
+ include/linux/fs.h                    |  4 ++--
+ ipc/mqueue.c                          |  2 +-
+ mm/shmem.c                            |  2 +-
+ 51 files changed, 78 insertions(+), 65 deletions(-)
+
+diff --git a/Documentation/filesystems/porting.rst b/Documentation/filesystems/porting.rst
+index d33429294252b244e344432e4ef8f5fe07d68f2f..6e6ae5a7a387520968f3c7426acfe44196d60bbe 100644
+--- a/Documentation/filesystems/porting.rst
++++ b/Documentation/filesystems/porting.rst
+@@ -1322,3 +1322,15 @@ When vfs_mkdir() returns an error, and so both dputs() the original
+ dentry and doesn't provide a replacement, it also unlocks the parent.
+ Consequently the return value from vfs_mkdir() can be passed to
+ end_creating() and the parent will be unlocked precisely when necessary.
++
++---
++
++**mandatory**
++
++The ->create() operation has dropped the bool "excl" argument. This operation
++should now always provide O_EXCL semantics (i.e. fail with -EEXIST if the file
++exists). If the filesystem needs to handle the case where another entity could
++create the file on the backing store after a negative lookup or revalidate
++(e.g. it's a network filesystem and another client could create the file after
++a negative lookup), then it will require ->atomic_open() in addition to
++->create().
+diff --git a/Documentation/filesystems/vfs.rst b/Documentation/filesystems/vfs.rst
+index 4f13b01e42eb5e2ad9d60cbbce7e47d09ad831e6..0752ed2b6475ab2b42482fde6dff870110a33eac 100644
+--- a/Documentation/filesystems/vfs.rst
++++ b/Documentation/filesystems/vfs.rst
+@@ -467,7 +467,7 @@ As of kernel 2.6.22, the following members are defined:
+ .. code-block:: c
+ 
+ 	struct inode_operations {
+-		int (*create) (struct mnt_idmap *, struct inode *,struct dentry *, umode_t, bool);
++		int (*create) (struct mnt_idmap *, struct inode *,struct dentry *, umode_t);
+ 		struct dentry * (*lookup) (struct inode *,struct dentry *, unsigned int);
+ 		int (*link) (struct dentry *,struct inode *,struct dentry *);
+ 		int (*unlink) (struct inode *,struct dentry *);
+@@ -505,7 +505,10 @@ otherwise noted.
+ 	if you want to support regular files.  The dentry you get should
+ 	not have an inode (i.e. it should be a negative dentry).  Here
+ 	you will probably call d_instantiate() with the dentry and the
+-	newly created inode
++	newly created inode. This operation should always provide O_EXCL
++	semantics (i.e. it should fail with -EEXIST if the file exists).
++	If the filesystem needs to mediate non-exclusive creation,
++	then the filesystem must also provide an ->atomic_open() operation.
+ 
+ ``lookup``
+ 	called when the VFS needs to look up an inode in a parent
+@@ -654,7 +657,11 @@ otherwise noted.
+ 	handled by f_op->open().  If the file was created, FMODE_CREATED
+ 	flag should be set in file->f_mode.  In case of O_EXCL the
+ 	method must only succeed if the file didn't exist and hence
+-	FMODE_CREATED shall always be set on success.
++	FMODE_CREATED shall always be set on success. This method is
++	usually needed on filesystems where the dentry to be created could
++	unexpectedly become positive after the kernel has looked it up or
++	revalidated it. (e.g. another host racing in and creating the file
++	on an NFS server).
+ 
+ ``tmpfile``
+ 	called in the end of O_TMPFILE open().  Optional, equivalent to
+diff --git a/fs/9p/vfs_inode.c b/fs/9p/vfs_inode.c
+index 8666c9c622584f018ba314954a871e2eb8f35edf..fe4f76cb0db1a5f8f71a90aa619861088f8dfabc 100644
+--- a/fs/9p/vfs_inode.c
++++ b/fs/9p/vfs_inode.c
+@@ -643,7 +643,7 @@ v9fs_create(struct v9fs_session_info *v9ses, struct inode *dir,
+ 
+ static int
+ v9fs_vfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-		struct dentry *dentry, umode_t mode, bool excl)
++		struct dentry *dentry, umode_t mode)
+ {
+ 	struct v9fs_session_info *v9ses = v9fs_inode2v9ses(dir);
+ 	u32 perm = unixmode2p9mode(v9ses, mode);
+diff --git a/fs/9p/vfs_inode_dotl.c b/fs/9p/vfs_inode_dotl.c
+index 1661a25f277256075790ed49c3a55fbe93bc986e..565fa8096a0b5e4bd161596f39e306b93dba4b6e 100644
+--- a/fs/9p/vfs_inode_dotl.c
++++ b/fs/9p/vfs_inode_dotl.c
+@@ -218,7 +218,7 @@ int v9fs_open_to_dotl_flags(int flags)
+  */
+ static int
+ v9fs_vfs_create_dotl(struct mnt_idmap *idmap, struct inode *dir,
+-		     struct dentry *dentry, umode_t omode, bool excl)
++		     struct dentry *dentry, umode_t omode)
+ {
+ 	return v9fs_vfs_mknod_dotl(idmap, dir, dentry, omode, 0);
+ }
+diff --git a/fs/affs/affs.h b/fs/affs/affs.h
+index ac4e9a02910b72d63c8ec5291347b54518e67f4b..665be23c42cfa206dc0a2c9ffa119b7c3c747389 100644
+--- a/fs/affs/affs.h
++++ b/fs/affs/affs.h
+@@ -167,7 +167,7 @@ extern int	affs_hash_name(struct super_block *sb, const u8 *name, unsigned int l
+ extern struct dentry *affs_lookup(struct inode *dir, struct dentry *dentry, unsigned int);
+ extern int	affs_unlink(struct inode *dir, struct dentry *dentry);
+ extern int	affs_create(struct mnt_idmap *idmap, struct inode *dir,
+-			struct dentry *dentry, umode_t mode, bool);
++			struct dentry *dentry, umode_t mode);
+ extern struct dentry *affs_mkdir(struct mnt_idmap *idmap, struct inode *dir,
+ 			struct dentry *dentry, umode_t mode);
+ extern int	affs_rmdir(struct inode *dir, struct dentry *dentry);
+diff --git a/fs/affs/namei.c b/fs/affs/namei.c
+index f883be50db122d3b09f0ae4d24618bd49b55186b..5591e1b5a2f68fc7600115e241f01f81d3aac010 100644
+--- a/fs/affs/namei.c
++++ b/fs/affs/namei.c
+@@ -243,7 +243,7 @@ affs_unlink(struct inode *dir, struct dentry *dentry)
+ 
+ int
+ affs_create(struct mnt_idmap *idmap, struct inode *dir,
+-	    struct dentry *dentry, umode_t mode, bool excl)
++	    struct dentry *dentry, umode_t mode)
+ {
+ 	struct super_block *sb = dir->i_sb;
+ 	struct inode	*inode;
+diff --git a/fs/afs/dir.c b/fs/afs/dir.c
+index f4e9e12373ac10b0230a9a6d6b7e1cb465f470d5..04702fe4e3d9befbb2176859be7c7ac7fd9623a1 100644
+--- a/fs/afs/dir.c
++++ b/fs/afs/dir.c
+@@ -32,7 +32,7 @@ static bool afs_lookup_one_filldir(struct dir_context *ctx, const char *name, in
+ static bool afs_lookup_filldir(struct dir_context *ctx, const char *name, int nlen,
+ 			      loff_t fpos, u64 ino, unsigned dtype);
+ static int afs_create(struct mnt_idmap *idmap, struct inode *dir,
+-		      struct dentry *dentry, umode_t mode, bool excl);
++		      struct dentry *dentry, umode_t mode);
+ static struct dentry *afs_mkdir(struct mnt_idmap *idmap, struct inode *dir,
+ 				struct dentry *dentry, umode_t mode);
+ static int afs_rmdir(struct inode *dir, struct dentry *dentry);
+@@ -1637,7 +1637,7 @@ static const struct afs_operation_ops afs_create_operation = {
+  * create a regular file on an AFS filesystem
+  */
+ static int afs_create(struct mnt_idmap *idmap, struct inode *dir,
+-		      struct dentry *dentry, umode_t mode, bool excl)
++		      struct dentry *dentry, umode_t mode)
+ {
+ 	struct afs_operation *op;
+ 	struct afs_vnode *dvnode = AFS_FS_I(dir);
+diff --git a/fs/bad_inode.c b/fs/bad_inode.c
+index 0ef9bcb744dd620bf47caa024d97a1316ff7bc89..5701361cf98155a61cb75a4ec602e8fc615eb3ae 100644
+--- a/fs/bad_inode.c
++++ b/fs/bad_inode.c
+@@ -29,7 +29,7 @@ static const struct file_operations bad_file_ops =
+ 
+ static int bad_inode_create(struct mnt_idmap *idmap,
+ 			    struct inode *dir, struct dentry *dentry,
+-			    umode_t mode, bool excl)
++			    umode_t mode)
+ {
+ 	return -EIO;
+ }
+diff --git a/fs/bfs/dir.c b/fs/bfs/dir.c
+index c375e22c4c0c15ba27307d266adfe3f093b90ab8..6beb8605c523cc2c7250d7b1a61508e103f0f3fd 100644
+--- a/fs/bfs/dir.c
++++ b/fs/bfs/dir.c
+@@ -76,7 +76,7 @@ const struct file_operations bfs_dir_operations = {
+ };
+ 
+ static int bfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-		      struct dentry *dentry, umode_t mode, bool excl)
++		      struct dentry *dentry, umode_t mode)
+ {
+ 	int err;
+ 	struct inode *inode;
+diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+index 9c6ca87b3d567bcd591eb65c1b786d264cb672e8..5f452e587109a64531077d70930221fb43616651 100644
+--- a/fs/btrfs/inode.c
++++ b/fs/btrfs/inode.c
+@@ -6825,7 +6825,7 @@ static int btrfs_mknod(struct mnt_idmap *idmap, struct inode *dir,
+ }
+ 
+ static int btrfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-			struct dentry *dentry, umode_t mode, bool excl)
++			struct dentry *dentry, umode_t mode)
+ {
+ 	struct inode *inode;
+ 
+diff --git a/fs/ceph/dir.c b/fs/ceph/dir.c
+index d18c0eaef9b7e7be7eb517c701d6c4af08fd78ac..308903dc0780dbed2382228005d0221f185c61ee 100644
+--- a/fs/ceph/dir.c
++++ b/fs/ceph/dir.c
+@@ -976,7 +976,7 @@ static int ceph_mknod(struct mnt_idmap *idmap, struct inode *dir,
+ }
+ 
+ static int ceph_create(struct mnt_idmap *idmap, struct inode *dir,
+-		       struct dentry *dentry, umode_t mode, bool excl)
++		       struct dentry *dentry, umode_t mode)
+ {
+ 	return ceph_mknod(idmap, dir, dentry, mode, 0);
+ }
+diff --git a/fs/coda/dir.c b/fs/coda/dir.c
+index ca99900172657d80a479b2eb27f50effdf834995..554e7fd44e5df1aae6da2c41a492a02ae9e0d616 100644
+--- a/fs/coda/dir.c
++++ b/fs/coda/dir.c
+@@ -134,7 +134,7 @@ static inline void coda_dir_drop_nlink(struct inode *dir)
+ 
+ /* creation routines: create, mknod, mkdir, link, symlink */
+ static int coda_create(struct mnt_idmap *idmap, struct inode *dir,
+-		       struct dentry *de, umode_t mode, bool excl)
++		       struct dentry *de, umode_t mode)
+ {
+ 	int error;
+ 	const char *name=de->d_name.name;
+diff --git a/fs/ecryptfs/inode.c b/fs/ecryptfs/inode.c
+index 3978248247dc2197b4441957a331c9711a6190bb..96197e6c7656ecc92355a7a2e9c9a8f693c303fe 100644
+--- a/fs/ecryptfs/inode.c
++++ b/fs/ecryptfs/inode.c
+@@ -268,7 +268,7 @@ int ecryptfs_initialize_file(struct dentry *ecryptfs_dentry,
+ static int
+ ecryptfs_create(struct mnt_idmap *idmap,
+ 		struct inode *directory_inode, struct dentry *ecryptfs_dentry,
+-		umode_t mode, bool excl)
++		umode_t mode)
+ {
+ 	struct inode *ecryptfs_inode;
+ 	int rc;
+diff --git a/fs/efivarfs/inode.c b/fs/efivarfs/inode.c
+index 2891614abf8d554f563319187b6d54c2bc006a91..043b3e3a4f0adefe27855f8156b946c1dc4bd184 100644
+--- a/fs/efivarfs/inode.c
++++ b/fs/efivarfs/inode.c
+@@ -75,7 +75,7 @@ static bool efivarfs_valid_name(const char *str, int len)
+ }
+ 
+ static int efivarfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-			   struct dentry *dentry, umode_t mode, bool excl)
++			   struct dentry *dentry, umode_t mode)
+ {
+ 	struct inode *inode = NULL;
+ 	struct efivar_entry *var;
+diff --git a/fs/exfat/namei.c b/fs/exfat/namei.c
+index 745dce29ddb532f7f4ca6d9aad5ddc8943aab4b5..083602c1fed0a78cf1c587783b62bc4552125a81 100644
+--- a/fs/exfat/namei.c
++++ b/fs/exfat/namei.c
+@@ -543,7 +543,7 @@ static int exfat_add_entry(struct inode *inode, const char *path,
+ }
+ 
+ static int exfat_create(struct mnt_idmap *idmap, struct inode *dir,
+-			struct dentry *dentry, umode_t mode, bool excl)
++			struct dentry *dentry, umode_t mode)
+ {
+ 	struct super_block *sb = dir->i_sb;
+ 	struct inode *inode;
+diff --git a/fs/ext2/namei.c b/fs/ext2/namei.c
+index bde617a66cecd4a2bf12a713a2297bb4fee45916..edea7784ad39acd4afffc7f5ae6e50a20c04999d 100644
+--- a/fs/ext2/namei.c
++++ b/fs/ext2/namei.c
+@@ -101,7 +101,7 @@ struct dentry *ext2_get_parent(struct dentry *child)
+  */
+ static int ext2_create (struct mnt_idmap * idmap,
+ 			struct inode * dir, struct dentry * dentry,
+-			umode_t mode, bool excl)
++			umode_t mode)
+ {
+ 	struct inode *inode;
+ 	int err;
+diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
+index 2cd36f59c9e363124ee949f742adccd88447295a..a1e77390a7ce300db02db9af90e45d69efabfea5 100644
+--- a/fs/ext4/namei.c
++++ b/fs/ext4/namei.c
+@@ -2806,7 +2806,7 @@ static int ext4_add_nondir(handle_t *handle,
+  * with d_instantiate().
+  */
+ static int ext4_create(struct mnt_idmap *idmap, struct inode *dir,
+-		       struct dentry *dentry, umode_t mode, bool excl)
++		       struct dentry *dentry, umode_t mode)
+ {
+ 	handle_t *handle;
+ 	struct inode *inode;
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index af40282a6948e5b7b9001ca5964993064417fd0a..5f99950529da22812085f4a8c3962b7d7821740c 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -351,7 +351,7 @@ static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
+ }
+ 
+ static int f2fs_create(struct mnt_idmap *idmap, struct inode *dir,
+-		       struct dentry *dentry, umode_t mode, bool excl)
++		       struct dentry *dentry, umode_t mode)
+ {
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
+ 	struct inode *inode;
+diff --git a/fs/fat/namei_msdos.c b/fs/fat/namei_msdos.c
+index 0b920ee40a7f9fe3c57af5d939d3efedf001a3d9..905ffa9e5b99f1507734d99b7c16dcad21d7b5b5 100644
+--- a/fs/fat/namei_msdos.c
++++ b/fs/fat/namei_msdos.c
+@@ -262,7 +262,7 @@ static int msdos_add_entry(struct inode *dir, const unsigned char *name,
+ 
+ /***** Create a file */
+ static int msdos_create(struct mnt_idmap *idmap, struct inode *dir,
+-			struct dentry *dentry, umode_t mode, bool excl)
++			struct dentry *dentry, umode_t mode)
+ {
+ 	struct super_block *sb = dir->i_sb;
+ 	struct inode *inode = NULL;
+diff --git a/fs/fat/namei_vfat.c b/fs/fat/namei_vfat.c
+index 5dbc4cbb8fce3d9b891cbc597f876c2c7b8d6aa0..8396b1ec4ec582fcdfadbcb12b04694ef0b8c5fc 100644
+--- a/fs/fat/namei_vfat.c
++++ b/fs/fat/namei_vfat.c
+@@ -754,7 +754,7 @@ static struct dentry *vfat_lookup(struct inode *dir, struct dentry *dentry,
+ }
+ 
+ static int vfat_create(struct mnt_idmap *idmap, struct inode *dir,
+-		       struct dentry *dentry, umode_t mode, bool excl)
++		       struct dentry *dentry, umode_t mode)
+ {
+ 	struct super_block *sb = dir->i_sb;
+ 	struct inode *inode;
+diff --git a/fs/fuse/dir.c b/fs/fuse/dir.c
+index 87a63ae93a456f27cf61d7fdc590dc140b2fbfc1..ca46859e99b198417acaa194a7ed5f24a241f385 100644
+--- a/fs/fuse/dir.c
++++ b/fs/fuse/dir.c
+@@ -889,7 +889,7 @@ static int fuse_mknod(struct mnt_idmap *idmap, struct inode *dir,
+ }
+ 
+ static int fuse_create(struct mnt_idmap *idmap, struct inode *dir,
+-		       struct dentry *entry, umode_t mode, bool excl)
++		       struct dentry *entry, umode_t mode)
+ {
+ 	return fuse_mknod(idmap, dir, entry, mode, 0);
+ }
+diff --git a/fs/gfs2/inode.c b/fs/gfs2/inode.c
+index 890c87e3e3658be95f8eb5ac169b1a6e96c5abc1..7132a268bba049b6947f52aa1d10bd481feb7bab 100644
+--- a/fs/gfs2/inode.c
++++ b/fs/gfs2/inode.c
+@@ -942,15 +942,14 @@ static int gfs2_create_inode(struct inode *dir, struct dentry *dentry,
+  * @dir: The directory in which to create the file
+  * @dentry: The dentry of the new file
+  * @mode: The mode of the new file
+- * @excl: Force fail if inode exists
+  *
+  * Returns: errno
+  */
+ 
+ static int gfs2_create(struct mnt_idmap *idmap, struct inode *dir,
+-		       struct dentry *dentry, umode_t mode, bool excl)
++		       struct dentry *dentry, umode_t mode)
+ {
+-	return gfs2_create_inode(dir, dentry, NULL, S_IFREG | mode, 0, NULL, 0, excl);
++	return gfs2_create_inode(dir, dentry, NULL, S_IFREG | mode, 0, NULL, 0, 1);
+ }
+ 
+ /**
+diff --git a/fs/hfs/dir.c b/fs/hfs/dir.c
+index 86a6b317b474a95f283f6a0908582efadde80892..c585942aa985686ca428d2d17f4401aa845a0eb8 100644
+--- a/fs/hfs/dir.c
++++ b/fs/hfs/dir.c
+@@ -190,7 +190,7 @@ static int hfs_dir_release(struct inode *inode, struct file *file)
+  * the directory and the name (and its length) of the new file.
+  */
+ static int hfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-		      struct dentry *dentry, umode_t mode, bool excl)
++		      struct dentry *dentry, umode_t mode)
+ {
+ 	struct inode *inode;
+ 	int res;
+diff --git a/fs/hfsplus/dir.c b/fs/hfsplus/dir.c
+index 1b3e27a0d5e038b559bd19b37d769078b2996d1b..c5ea04e078340a91b992095e189e978a3345f03c 100644
+--- a/fs/hfsplus/dir.c
++++ b/fs/hfsplus/dir.c
+@@ -518,7 +518,7 @@ static int hfsplus_mknod(struct mnt_idmap *idmap, struct inode *dir,
+ }
+ 
+ static int hfsplus_create(struct mnt_idmap *idmap, struct inode *dir,
+-			  struct dentry *dentry, umode_t mode, bool excl)
++			  struct dentry *dentry, umode_t mode)
+ {
+ 	return hfsplus_mknod(&nop_mnt_idmap, dir, dentry, mode, 0);
+ }
+diff --git a/fs/hostfs/hostfs_kern.c b/fs/hostfs/hostfs_kern.c
+index 51d26aa2b93e0955134cfb901619b513a64427ed..f62590281f9f27343a104f879bb43670026de2d5 100644
+--- a/fs/hostfs/hostfs_kern.c
++++ b/fs/hostfs/hostfs_kern.c
+@@ -593,7 +593,7 @@ static struct inode *hostfs_iget(struct super_block *sb, char *name)
+ }
+ 
+ static int hostfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-			 struct dentry *dentry, umode_t mode, bool excl)
++			 struct dentry *dentry, umode_t mode)
+ {
+ 	struct inode *inode;
+ 	char *name;
+diff --git a/fs/hpfs/namei.c b/fs/hpfs/namei.c
+index 353e13a615f56664638f08a3408f90a727f5458b..809113d8248d50c0eaa57047b6c4bd87b9a5c6be 100644
+--- a/fs/hpfs/namei.c
++++ b/fs/hpfs/namei.c
+@@ -129,7 +129,7 @@ static struct dentry *hpfs_mkdir(struct mnt_idmap *idmap, struct inode *dir,
+ }
+ 
+ static int hpfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-		       struct dentry *dentry, umode_t mode, bool excl)
++		       struct dentry *dentry, umode_t mode)
+ {
+ 	const unsigned char *name = dentry->d_name.name;
+ 	unsigned len = dentry->d_name.len;
+diff --git a/fs/hugetlbfs/inode.c b/fs/hugetlbfs/inode.c
+index f42548ee9083c6bf4b20f9a75e069e5f69fdfc3a..0ebac5c318017edeab79d1d311796926a440bf6e 100644
+--- a/fs/hugetlbfs/inode.c
++++ b/fs/hugetlbfs/inode.c
+@@ -992,7 +992,7 @@ static struct dentry *hugetlbfs_mkdir(struct mnt_idmap *idmap, struct inode *dir
+ 
+ static int hugetlbfs_create(struct mnt_idmap *idmap,
+ 			    struct inode *dir, struct dentry *dentry,
+-			    umode_t mode, bool excl)
++			    umode_t mode)
+ {
+ 	return hugetlbfs_mknod(idmap, dir, dentry, mode | S_IFREG, 0);
+ }
+diff --git a/fs/jffs2/dir.c b/fs/jffs2/dir.c
+index dd91f725ded69ccb3a240aafd72a4b552f21bcd9..e77c84e43621a8c53e9852843f18cc3514315650 100644
+--- a/fs/jffs2/dir.c
++++ b/fs/jffs2/dir.c
+@@ -25,7 +25,7 @@
+ static int jffs2_readdir (struct file *, struct dir_context *);
+ 
+ static int jffs2_create (struct mnt_idmap *, struct inode *,
+-		         struct dentry *, umode_t, bool);
++			 struct dentry *, umode_t);
+ static struct dentry *jffs2_lookup (struct inode *,struct dentry *,
+ 				    unsigned int);
+ static int jffs2_link (struct dentry *,struct inode *,struct dentry *);
+@@ -161,7 +161,7 @@ static int jffs2_readdir(struct file *file, struct dir_context *ctx)
+ 
+ 
+ static int jffs2_create(struct mnt_idmap *idmap, struct inode *dir_i,
+-			struct dentry *dentry, umode_t mode, bool excl)
++			struct dentry *dentry, umode_t mode)
+ {
+ 	struct jffs2_raw_inode *ri;
+ 	struct jffs2_inode_info *f, *dir_f;
+diff --git a/fs/jfs/namei.c b/fs/jfs/namei.c
+index 65a218eba8faf9508f5727515b812f6de2661618..48111f8d3efe40becadd857c56c84ed09de867ef 100644
+--- a/fs/jfs/namei.c
++++ b/fs/jfs/namei.c
+@@ -60,7 +60,7 @@ static inline void free_ea_wmap(struct inode *inode)
+  *
+  */
+ static int jfs_create(struct mnt_idmap *idmap, struct inode *dip,
+-		      struct dentry *dentry, umode_t mode, bool excl)
++		      struct dentry *dentry, umode_t mode)
+ {
+ 	int rc = 0;
+ 	tid_t tid;		/* transaction id */
+diff --git a/fs/minix/namei.c b/fs/minix/namei.c
+index 263e4ba8b1c822c388070a9ed3e123f272fcbe61..79e591bdfdc10de9719ae107e71daca28305b7f9 100644
+--- a/fs/minix/namei.c
++++ b/fs/minix/namei.c
+@@ -64,7 +64,7 @@ static int minix_tmpfile(struct mnt_idmap *idmap, struct inode *dir,
+ }
+ 
+ static int minix_create(struct mnt_idmap *idmap, struct inode *dir,
+-			struct dentry *dentry, umode_t mode, bool excl)
++			struct dentry *dentry, umode_t mode)
+ {
+ 	return minix_mknod(&nop_mnt_idmap, dir, dentry, mode, 0);
+ }
+diff --git a/fs/namei.c b/fs/namei.c
+index 2c83f894f2764c4c40b3790a9dddd4fde5066d53..9439beabfef6e5d6bc08665284d155aba2deab48 100644
+--- a/fs/namei.c
++++ b/fs/namei.c
+@@ -4129,7 +4129,7 @@ int vfs_create(struct mnt_idmap *idmap, struct dentry *dentry, umode_t mode,
+ 	error = try_break_deleg(dir, di);
+ 	if (error)
+ 		return error;
+-	error = dir->i_op->create(idmap, dir, dentry, mode, true);
++	error = dir->i_op->create(idmap, dir, dentry, mode);
+ 	if (!error)
+ 		fsnotify_create(dir, dentry);
+ 	return error;
+@@ -4438,7 +4438,7 @@ static struct dentry *lookup_open(struct nameidata *nd, struct file *file,
+ 		}
+ 
+ 		error = dir_inode->i_op->create(idmap, dir_inode, dentry,
+-						mode, open_flag & O_EXCL);
++						mode);
+ 		if (error)
+ 			goto out_dput;
+ 	}
+diff --git a/fs/nfs/dir.c b/fs/nfs/dir.c
+index ea9f6ca8f30fa250425921b403d67d05fcf13b61..d7f072ca0a77056bd851ad3bbc981883dc3bf08b 100644
+--- a/fs/nfs/dir.c
++++ b/fs/nfs/dir.c
+@@ -2378,9 +2378,9 @@ static int nfs_do_create(struct inode *dir, struct dentry *dentry,
+ }
+ 
+ int nfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-	       struct dentry *dentry, umode_t mode, bool excl)
++	       struct dentry *dentry, umode_t mode)
+ {
+-	return nfs_do_create(dir, dentry, mode, excl ? O_EXCL : 0);
++	return nfs_do_create(dir, dentry, mode, O_EXCL);
+ }
+ EXPORT_SYMBOL_GPL(nfs_create);
+ 
+diff --git a/fs/nfs/internal.h b/fs/nfs/internal.h
+index 2ecd38e1d17a8053a9134702588d57efc35f49e9..b122c4f34f7b53c5102a8b5138efe269af433c81 100644
+--- a/fs/nfs/internal.h
++++ b/fs/nfs/internal.h
+@@ -398,7 +398,7 @@ extern unsigned long nfs_access_cache_scan(struct shrinker *shrink,
+ struct dentry *nfs_lookup(struct inode *, struct dentry *, unsigned int);
+ void nfs_d_prune_case_insensitive_aliases(struct inode *inode);
+ int nfs_create(struct mnt_idmap *, struct inode *, struct dentry *,
+-	       umode_t, bool);
++	       umode_t);
+ struct dentry *nfs_mkdir(struct mnt_idmap *, struct inode *, struct dentry *,
+ 			 umode_t);
+ int nfs_rmdir(struct inode *, struct dentry *);
+diff --git a/fs/nilfs2/namei.c b/fs/nilfs2/namei.c
+index 40f4b1a28705b6e0eb8f0978cf3ac18b43aa1331..31d1d466c03048aaaab23f64c3f413c095939770 100644
+--- a/fs/nilfs2/namei.c
++++ b/fs/nilfs2/namei.c
+@@ -86,7 +86,7 @@ nilfs_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
+  * with d_instantiate().
+  */
+ static int nilfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-			struct dentry *dentry, umode_t mode, bool excl)
++			struct dentry *dentry, umode_t mode)
+ {
+ 	struct inode *inode;
+ 	struct nilfs_transaction_info ti;
+diff --git a/fs/ntfs3/namei.c b/fs/ntfs3/namei.c
+index 82c8ae56beee6d79046dd6c8f02ff0f35e9a1ad3..49fe635b550d3f51f81138649b47c9c831a73e3b 100644
+--- a/fs/ntfs3/namei.c
++++ b/fs/ntfs3/namei.c
+@@ -105,7 +105,7 @@ static struct dentry *ntfs_lookup(struct inode *dir, struct dentry *dentry,
+  * ntfs_create - inode_operations::create
+  */
+ static int ntfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-		       struct dentry *dentry, umode_t mode, bool excl)
++		       struct dentry *dentry, umode_t mode)
+ {
+ 	return ntfs_create_inode(idmap, dir, dentry, NULL, S_IFREG | mode, 0,
+ 				 NULL, 0, NULL);
+diff --git a/fs/ocfs2/dlmfs/dlmfs.c b/fs/ocfs2/dlmfs/dlmfs.c
+index cccaa1d6fbbac13ebcaf14a9183277890708e643..bd4b2269598b49c6f88dd8d201e246ee5ed855a6 100644
+--- a/fs/ocfs2/dlmfs/dlmfs.c
++++ b/fs/ocfs2/dlmfs/dlmfs.c
+@@ -454,8 +454,7 @@ static struct dentry *dlmfs_mkdir(struct mnt_idmap * idmap,
+ static int dlmfs_create(struct mnt_idmap *idmap,
+ 			struct inode *dir,
+ 			struct dentry *dentry,
+-			umode_t mode,
+-			bool excl)
++			umode_t mode)
+ {
+ 	int status = 0;
+ 	struct inode *inode;
+diff --git a/fs/ocfs2/namei.c b/fs/ocfs2/namei.c
+index c90b254da75eb5b90d2af5e37d41e781efe8b836..7443f468f45657cf68779a02e4edf4e38fb70f59 100644
+--- a/fs/ocfs2/namei.c
++++ b/fs/ocfs2/namei.c
+@@ -666,8 +666,7 @@ static struct dentry *ocfs2_mkdir(struct mnt_idmap *idmap,
+ static int ocfs2_create(struct mnt_idmap *idmap,
+ 			struct inode *dir,
+ 			struct dentry *dentry,
+-			umode_t mode,
+-			bool excl)
++			umode_t mode)
+ {
+ 	int ret;
+ 
+diff --git a/fs/omfs/dir.c b/fs/omfs/dir.c
+index 2ed541fccf331d796805dd1594fbf05c1f7f3b9a..a09a98f7e30bc66deca60725f9462d081b5e4784 100644
+--- a/fs/omfs/dir.c
++++ b/fs/omfs/dir.c
+@@ -286,7 +286,7 @@ static struct dentry *omfs_mkdir(struct mnt_idmap *idmap, struct inode *dir,
+ }
+ 
+ static int omfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-		       struct dentry *dentry, umode_t mode, bool excl)
++		       struct dentry *dentry, umode_t mode)
+ {
+ 	return omfs_add_node(dir, dentry, mode | S_IFREG);
+ }
+diff --git a/fs/orangefs/namei.c b/fs/orangefs/namei.c
+index bec5475de094dada6bb29eaf8520a875880f3bab..0ebaa7f000f26f1c1ecffd22cfe4272f20a783ed 100644
+--- a/fs/orangefs/namei.c
++++ b/fs/orangefs/namei.c
+@@ -18,8 +18,7 @@
+ static int orangefs_create(struct mnt_idmap *idmap,
+ 			struct inode *dir,
+ 			struct dentry *dentry,
+-			umode_t mode,
+-			bool exclusive)
++			umode_t mode)
+ {
+ 	struct orangefs_inode_s *parent = ORANGEFS_I(dir);
+ 	struct orangefs_kernel_op_s *new_op;
+diff --git a/fs/overlayfs/dir.c b/fs/overlayfs/dir.c
+index 06b860b9ded6b25ed9762a46f7e26e98e97a8dea..2dfb269a18a89095d56d33d11ca9b7a831832b6d 100644
+--- a/fs/overlayfs/dir.c
++++ b/fs/overlayfs/dir.c
+@@ -713,7 +713,7 @@ static int ovl_create_object(struct dentry *dentry, int mode, dev_t rdev,
+ }
+ 
+ static int ovl_create(struct mnt_idmap *idmap, struct inode *dir,
+-		      struct dentry *dentry, umode_t mode, bool excl)
++		      struct dentry *dentry, umode_t mode)
+ {
+ 	return ovl_create_object(dentry, (mode & 07777) | S_IFREG, 0, NULL);
+ }
+diff --git a/fs/ramfs/inode.c b/fs/ramfs/inode.c
+index 41f9995da7cab0d11395cb40a98fb4936d52597f..b6502aaa4fb44d27c939da9fae4449af7edd28d4 100644
+--- a/fs/ramfs/inode.c
++++ b/fs/ramfs/inode.c
+@@ -129,7 +129,7 @@ static struct dentry *ramfs_mkdir(struct mnt_idmap *idmap, struct inode *dir,
+ }
+ 
+ static int ramfs_create(struct mnt_idmap *idmap, struct inode *dir,
+-			struct dentry *dentry, umode_t mode, bool excl)
++			struct dentry *dentry, umode_t mode)
+ {
+ 	return ramfs_mknod(&nop_mnt_idmap, dir, dentry, mode | S_IFREG, 0);
+ }
+diff --git a/fs/smb/client/cifsfs.h b/fs/smb/client/cifsfs.h
+index e9534258d1efd0bb34f36bf2c725c64d0a8ca8f4..294c66cea2eca3344e09cd77619761e9cb79a807 100644
+--- a/fs/smb/client/cifsfs.h
++++ b/fs/smb/client/cifsfs.h
+@@ -50,7 +50,7 @@ extern void cifs_sb_deactive(struct super_block *sb);
+ extern const struct inode_operations cifs_dir_inode_ops;
+ extern struct inode *cifs_root_iget(struct super_block *);
+ extern int cifs_create(struct mnt_idmap *, struct inode *,
+-		       struct dentry *, umode_t, bool excl);
++		       struct dentry *, umode_t);
+ extern int cifs_atomic_open(struct inode *, struct dentry *,
+ 			    struct file *, unsigned, umode_t);
+ extern struct dentry *cifs_lookup(struct inode *, struct dentry *,
+diff --git a/fs/smb/client/dir.c b/fs/smb/client/dir.c
+index da5597dbf5b9f140c6801158ac2357fa911c52ab..b00bc214db9f0e9533f481f41ac99ac8937610ac 100644
+--- a/fs/smb/client/dir.c
++++ b/fs/smb/client/dir.c
+@@ -566,7 +566,7 @@ cifs_atomic_open(struct inode *inode, struct dentry *direntry,
+ }
+ 
+ int cifs_create(struct mnt_idmap *idmap, struct inode *inode,
+-		struct dentry *direntry, umode_t mode, bool excl)
++		struct dentry *direntry, umode_t mode)
+ {
+ 	int rc;
+ 	unsigned int xid = get_xid();
+diff --git a/fs/ubifs/dir.c b/fs/ubifs/dir.c
+index 3c3d3ad4fa6cb719e9ec08fa2164c55371c017c1..4840a6f7974e254eba4ca249357e968764e326e0 100644
+--- a/fs/ubifs/dir.c
++++ b/fs/ubifs/dir.c
+@@ -303,7 +303,7 @@ static int ubifs_prepare_create(struct inode *dir, struct dentry *dentry,
+ }
+ 
+ static int ubifs_create(struct mnt_idmap *idmap, struct inode *dir,
+-			struct dentry *dentry, umode_t mode, bool excl)
++			struct dentry *dentry, umode_t mode)
+ {
+ 	struct inode *inode;
+ 	struct ubifs_info *c = dir->i_sb->s_fs_info;
+diff --git a/fs/udf/namei.c b/fs/udf/namei.c
+index 5f2e9a892bffa9579143cedf71d80efa7ad6e9fb..f83b5564cbc4c68c02c07bb3ab2109bfabdc799d 100644
+--- a/fs/udf/namei.c
++++ b/fs/udf/namei.c
+@@ -371,7 +371,7 @@ static int udf_add_nondir(struct dentry *dentry, struct inode *inode)
+ }
+ 
+ static int udf_create(struct mnt_idmap *idmap, struct inode *dir,
+-		      struct dentry *dentry, umode_t mode, bool excl)
++		      struct dentry *dentry, umode_t mode)
+ {
+ 	struct inode *inode = udf_new_inode(dir, mode);
+ 
+diff --git a/fs/ufs/namei.c b/fs/ufs/namei.c
+index 5b3c85c9324298f4ff6aa3d4feeb962ce5ede539..5012e056200aca671364d34a7faf647e6747e1d2 100644
+--- a/fs/ufs/namei.c
++++ b/fs/ufs/namei.c
+@@ -70,8 +70,7 @@ static struct dentry *ufs_lookup(struct inode * dir, struct dentry *dentry, unsi
+  * with d_instantiate(). 
+  */
+ static int ufs_create (struct mnt_idmap * idmap,
+-		struct inode * dir, struct dentry * dentry, umode_t mode,
+-		bool excl)
++		struct inode * dir, struct dentry * dentry, umode_t mode)
+ {
+ 	struct inode *inode;
+ 
+diff --git a/fs/vboxsf/dir.c b/fs/vboxsf/dir.c
+index 42bedc4ec7af7709c564a7174805d185ce86f854..330dade582d081e965c0e365bd2f96ae31d92ccc 100644
+--- a/fs/vboxsf/dir.c
++++ b/fs/vboxsf/dir.c
+@@ -298,9 +298,9 @@ static int vboxsf_dir_create(struct inode *parent, struct dentry *dentry,
+ 
+ static int vboxsf_dir_mkfile(struct mnt_idmap *idmap,
+ 			     struct inode *parent, struct dentry *dentry,
+-			     umode_t mode, bool excl)
++			     umode_t mode)
+ {
+-	return vboxsf_dir_create(parent, dentry, mode, false, excl, NULL);
++	return vboxsf_dir_create(parent, dentry, mode, false, true, NULL);
+ }
+ 
+ static struct dentry *vboxsf_dir_mkdir(struct mnt_idmap *idmap,
+diff --git a/fs/xfs/xfs_iops.c b/fs/xfs/xfs_iops.c
+index ad94fbf55014c637ab93d38bf4569c6a75b0236e..b39c44285863596a98e5cb73686ea5fc17382392 100644
+--- a/fs/xfs/xfs_iops.c
++++ b/fs/xfs/xfs_iops.c
+@@ -293,8 +293,7 @@ xfs_vn_create(
+ 	struct mnt_idmap	*idmap,
+ 	struct inode		*dir,
+ 	struct dentry		*dentry,
+-	umode_t			mode,
+-	bool			flags)
++	umode_t			mode)
+ {
+ 	return xfs_generic_create(idmap, dir, dentry, mode, 0, NULL);
+ }
+diff --git a/include/linux/fs.h b/include/linux/fs.h
+index ce25feb06727db58f7ddae2c578856311a3fb0ee..47039f3cc6125b70787cc3ec992917e56fb7560c 100644
+--- a/include/linux/fs.h
++++ b/include/linux/fs.h
+@@ -1991,8 +1991,8 @@ struct inode_operations {
+ 
+ 	int (*readlink) (struct dentry *, char __user *,int);
+ 
+-	int (*create) (struct mnt_idmap *, struct inode *,struct dentry *,
+-		       umode_t, bool);
++	int (*create) (struct mnt_idmap *, struct inode *, struct dentry *,
++		       umode_t);
+ 	int (*link) (struct dentry *,struct inode *,struct dentry *);
+ 	int (*unlink) (struct inode *,struct dentry *);
+ 	int (*symlink) (struct mnt_idmap *, struct inode *,struct dentry *,
+diff --git a/ipc/mqueue.c b/ipc/mqueue.c
+index c118ca2c377a7ba4deab2da49fbb1aab3a3057af..54c91e401d2d172099ebb6e3bf9b9c8ff396607d 100644
+--- a/ipc/mqueue.c
++++ b/ipc/mqueue.c
+@@ -610,7 +610,7 @@ static int mqueue_create_attr(struct dentry *dentry, umode_t mode, void *arg)
+ }
+ 
+ static int mqueue_create(struct mnt_idmap *idmap, struct inode *dir,
+-			 struct dentry *dentry, umode_t mode, bool excl)
++			 struct dentry *dentry, umode_t mode)
+ {
+ 	return mqueue_create_attr(dentry, mode, NULL);
+ }
+diff --git a/mm/shmem.c b/mm/shmem.c
+index 899303d8c9aa39463b96ba1168d3dd125d9e8a7b..e714ee1daf4474b7fc9827b93197edbf9db5554b 100644
+--- a/mm/shmem.c
++++ b/mm/shmem.c
+@@ -3914,7 +3914,7 @@ static struct dentry *shmem_mkdir(struct mnt_idmap *idmap, struct inode *dir,
+ }
+ 
+ static int shmem_create(struct mnt_idmap *idmap, struct inode *dir,
+-			struct dentry *dentry, umode_t mode, bool excl)
++			struct dentry *dentry, umode_t mode)
+ {
+ 	return shmem_mknod(idmap, dir, dentry, mode | S_IFREG, 0);
+ }
+
+---
+base-commit: d6ea5537c1a66a54d34f50d51ad201b1a2319ccf
+change-id: 20251105-create-excl-2b366d9bf3bb
+
+Best regards,
+-- 
+Jeff Layton <jlayton@kernel.org>
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
