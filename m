@@ -2,102 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1996BC99136
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 01 Dec 2025 21:46:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BD3CC991F1
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 01 Dec 2025 22:02:11 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=0weefrKvnkHH3mE+02E5/U2cKIaSPwSaH53ne2onCN8=; b=lpF0/ZhY/JfqDC2qLqpmlDrIo6
-	E6X4/6dTBgYZAtXAnxGSwdtdkY9RodVFVdugr+Y4fVrE3P5I5Lctd42pez6CoNTqtZ7oNn32DlgSA
-	6I/UKF2060s+J5ZZgFbo0rrdpCbJ6k5b7PWWiAuxokRMUsT2q+sicpebKLyCyB2ngThU=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=GzksmJdswL5tch064e5or/lnjbSNsetDkPtE3Pz4+GU=; b=NEn3YpBTHk1wXcBiff9VeL7IfU
+	p4BnYtajjc0kG6WPJwc/k/c7PuvAYN702yp3UM3vSAB6E+tRXU/VbnbdFY0Yw8teBCJ9zoqeYwJ5s
+	HpZrvCNKn3RYbtp1WSfWXJ7Xho5ZtUrVx1mohR8N/Itz3MUJV67vyXRvcYKMvhFF5YwE=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vQAn5-0003Xg-Q2;
-	Mon, 01 Dec 2025 20:46:35 +0000
+	id 1vQB23-0002Ve-7T;
+	Mon, 01 Dec 2025 21:02:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1vQAn4-0003XZ-7U
+ (envelope-from <jaegeuk@kernel.org>) id 1vQB21-0002VQ-TI
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Dec 2025 20:46:34 +0000
+ Mon, 01 Dec 2025 21:02:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/iQjueMN9qESTLcgOlGj1U+11kH+NiFUDveToGx3euY=; b=SuvYpZDuhxkTga4xXMo6GL955Z
- 8Xo1MqjhtMMA5Ab8Rk3ljg+Y5/g5r8Y3xJsEIBKslaBgi9vTd92ohhvB1l2S5tQeoCS8kDWf5Z2Z1
- UbAMrHcKbtw3EfVw9X1suTNM920nXLqZMszJscxVX+4O35xfqLNPu9oFC4ys2RK0ioXw=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=/iQjueMN9qESTLcgOlGj1U+11kH+NiFUDveToGx3euY=; b=VGkIIyLzigS3ZoV3Rarv+3fQvl
- FzcnH3BZ6Drl6rayznkAOjAPSNXlwV8ie9WeWQr0F7UIgEVQFwEsGxLvQmNOKr9s17Oz8xhUY5uEb
- gVIVpklhkDdWhP9KfuaW2s1oC7vkfY46WXDCtyPqq1ntePiVMqScPLS37JP2Alo5V29Q=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=dpXRiJBKjKItXddkwA9Bd5l2LFW+rFBJnSXqMQbB6qA=; b=bYnukg934jK3BxhyLUutSrUgXc
+ YfWQRbg4/P0+A56ENYXLk8CkeWl8hf7n64t9vcTWZBHxwwfXP5ad2osg6V7pSTR6ViOo+Ok5BBKg5
+ bsLGEw1fnKvbcKvrQYt7etEt9zh3zmdNtIDMCUQAVp5U3r3Wqcu1H78J7NRugoy9IOOM=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=dpXRiJBKjKItXddkwA9Bd5l2LFW+rFBJnSXqMQbB6qA=; b=O
+ e5WYbjBnU/QgxrJgOYEQMcpNQzOm0427HOUZRY8n4T7ZwEg/cI4V+/LyFOH7JXQCWkZ//xOIKfzTB
+ Qf61WWr1sDRmjG7GO2PwS4MNAwEFYo4u8DLuy1z3qV89T4BsyhQ3leAHYt83gy3brhNOuix9p/mpr
+ fNd37ewuJtFu4oEc=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vQAn3-0000ts-LS for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Dec 2025 20:46:34 +0000
+ id 1vQB22-0001i9-8Z for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 01 Dec 2025 21:02:02 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 61FA543882
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  1 Dec 2025 20:46:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31305C4CEF1;
- Mon,  1 Dec 2025 20:46:28 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A0DD16014A;
+ Mon,  1 Dec 2025 21:01:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 442F3C4CEF1;
+ Mon,  1 Dec 2025 21:01:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1764621988;
- bh=NtPvCoJwQGI5U950i9CbyjzSBw9fbuw2y+IdCXXNcAA=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=MHdg12EWPC+aUrRy4H/8sRqxQPBSvd3+HCuIqEmjxzOtrqGmOiGzIfR1VLjCYH7Wz
- h2OwqRlmIeMkPKgRN62dLCk/fwgtRRL6wfF+2d78t9oz+9Matjm9fpkT8MCCLSilFS
- g9BqFXGcuUEN9xPhQCW3OV6m5O6aFmNrx9/QFB5CtqPWY2QO/Reyhuc8sWt8SEYDxN
- GY3EA7yJFgnzT9dKKV8AJQVzOE9IcIkUXPKLNJqjbQRli0vlLlIOnmOD2TQsM8dZLM
- vgs38RDyg4aRiUPTYo3+s9JYmrnzT14xSZ4OoIePVfAoxFBzluKcdVUqUCckDpGgcn
- BKRyMj4e6y6BA==
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon,  1 Dec 2025 20:46:20 +0000
-Message-ID: <20251201204620.905318-3-jaegeuk@kernel.org>
+ s=k20201202; t=1764622916;
+ bh=kDg4UlKqtx2kxAbBrTrmlrpB3BG8XZudH7azKRu6UuM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=k8H1Knt2YGtIAfZejDTzedxkXfpLumivEUzblkUViaRS8Zr9XR83xn08hJBwuJciC
+ CJljm6uG7ICFM9yue1j5ek4AHEaQhO8/sMgZI772ARV4Y7abtB0o+HRQBAJ0ZLT08R
+ 8BesBi2Y9w/L7tlPzUSSP2l++fHSq5zgB4v5DnSBpllLrG3MjbbAJCLsyCEGtssDjs
+ ZlRIizMsoBwfqNdulGXSzh+/S5oJmi/GmMscqFM8IDQopW5N6nd61VATl/KY6WrMuD
+ xm8UuHDjKQPG5Wyhqh+kAIBzfXjDSdab6QMtoPmQyCZaIvxYVKhmfzDVcfJq9B+qpg
+ LHe/XjYOOtSLw==
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-mm@kvack.org, Matthew Wilcox <willy@infradead.org>
+Date: Mon,  1 Dec 2025 21:01:23 +0000
+Message-ID: <20251201210152.909339-1-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.52.0.107.ga0afd4fd5b-goog
-In-Reply-To: <20251201204620.905318-1-jaegeuk@kernel.org>
-References: <20251201204620.905318-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: fadvise is better to describe the read method. Signed-off-by:
- Jaegeuk Kim <jaegeuk@kernel.org> --- tools/f2fs_io/f2fs_io.c | 12 ++++++------
- 1 file changed, 6 insertions(+),
- 6 deletions(-) diff --git a/tools/f2fs_io/f2fs_io.c
- b/tools/f2fs_io/f2fs_io.c index d5e103f7b833..35c367bd67e7 100644 ---
- a/tools/f2fs_io/f2fs_io.c
- +++ b/tools/f2fs_io/f2fs_io.c @@ -939,7 +939,7 @@ static void do_wr [...]
+ Content preview: This patch series aims to improve
+ fadvise(POSIX_FADV_WILLNEED).
+ The first patch fixes the broken logic which was not reading the entire range
+ ahead, and two patches were converting the logic to adopt [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vQAn3-0000ts-LS
-Subject: [f2fs-dev] [PATCH 3/3] f2fs_io: rename mlock to fadvise
+X-Headers-End: 1vQB22-0001i9-8Z
+Subject: [f2fs-dev] [PATCH RESEND 0/4] improve fadvise(POSIX_FADV_WILLNEED)
+ with large folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,64 +112,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-fadvise is better to describe the read method.
+This patch series aims to improve fadvise(POSIX_FADV_WILLNEED). The first patch
+fixes the broken logic which was not reading the entire range ahead, and two
+patches were converting the logic to adopt large folio supported by filesystem.
+The last one is one example of how filesystem can set a desired folio order to
+boost the readahead speed.
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- tools/f2fs_io/f2fs_io.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+Jaegeuk Kim (4):
+  mm/readahead: fix the broken readahead for POSIX_FADV_WILLNEED
+  mm/readahead: use page_cache_sync_ra for FADVISE_FAV_WILLNEED
+  mm/readahead: add a_ops->ra_folio_order to get a desired folio order
+  f2fs: attach a_ops->ra_folio_order to allocate large folios for
+    readahead
 
-diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index d5e103f7b833..35c367bd67e7 100644
---- a/tools/f2fs_io/f2fs_io.c
-+++ b/tools/f2fs_io/f2fs_io.c
-@@ -939,7 +939,7 @@ static void do_write_advice(int argc, char **argv, const struct cmd_desc *cmd)
- "  dio      : direct IO\n"				\
- "  mmap     : mmap IO\n"				\
- "  madvise  : mmap + mlock2 + madvise\n"		\
--"  mlock    : mmap + mlock\n"				\
-+"  fadvise  : mmap + fadvise + mlock\n"			\
- "advice can be\n"					\
- " 1 : set sequential|willneed\n"			\
- " 0 : none\n"						\
-@@ -956,7 +956,7 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
- 	u64 mlock_time_start = 0, mlock_time_end = 0;
- 	int flags = 0;
- 	int do_mmap = 0;
--	int do_mlock = 0;
-+	int do_fadvise = 0;
- 	int do_madvise = 0;
- 	int do_dontcache = 0;
- 	int fd, advice;
-@@ -983,8 +983,8 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
- 		do_mmap = 1;
- 	else if (!strcmp(argv[4], "madvise"))
- 		do_madvise = 1;
--	else if (!strcmp(argv[4], "mlock"))
--		do_mlock = 1;
-+	else if (!strcmp(argv[4], "fadvise"))
-+		do_fadvise = 1;
- 	else if (!strcmp(argv[4], "dontcache"))
- #ifdef HAVE_PREADV2
- 		do_dontcache = 1;
-@@ -1045,7 +1045,7 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
- 
- 		read_cnt = count * buf_size;
- 		memcpy(print_buf, data, print_bytes);
--	} else if (do_mlock) {
-+	} else if (do_fadvise) {
- 		data = mmap(NULL, count * buf_size, PROT_READ,
- 				MAP_SHARED, fd, offset);
- 		if (data == MAP_FAILED)
-@@ -1107,7 +1107,7 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
- 	}
- 	if (do_mmap) {
- 		munmap(data, count * buf_size);
--	} else if (do_mlock || do_madvise) {
-+	} else if (do_fadvise || do_madvise) {
- 		munlock(data, count * buf_size);
- 		munmap(data, count * buf_size);
- 	}
+ fs/f2fs/data.c          |  9 +++++++++
+ fs/f2fs/f2fs.h          |  3 +++
+ fs/f2fs/super.c         |  1 +
+ fs/f2fs/sysfs.c         |  9 +++++++++
+ include/linux/fs.h      |  4 ++++
+ include/linux/pagemap.h | 12 +++++++++++
+ mm/readahead.c          | 44 ++++++++++++++++++++++++-----------------
+ 7 files changed, 64 insertions(+), 18 deletions(-)
+
 -- 
 2.52.0.107.ga0afd4fd5b-goog
 
