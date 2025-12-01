@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9B6AC992B4
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 01 Dec 2025 22:25:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F066C992C0
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 01 Dec 2025 22:29:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=WPJ4B4WJ+q3X5mCWd7U5RsbrWRxLqLNXGwwv6yxV/mg=; b=WXoxa6jC3w2ZETZOow5Eifw6rz
-	kko2+82Oy6V01Bp6JSTKWtK3QFpepoPvRP8a2zScIxrbRjI2A9EyJdDkMCxbfFH7b1iCTHmYut47I
-	QjH7sgM+XxGX5Bj2Z7TXjFj2rs0GidE/d7nAu+QbOO8OEYWAHHJCuQcQmFG5lHBBZa1Y=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=IrAc0TufaRiDn1bPLK5wt/QRNlQJGa7XCkBYM0mYA9A=; b=ZGz372AnWL/45fHMVwSvC1Ouur
+	jf5sz+0X+h49quYpj1Ez3wDVexhn5q0s4soxrLmKVA62i3S72Ezc9ZltvHc9WQbNj2eo42ogKjbSi
+	wXiHo+o0/Qt6Kcl+fWvCoyzYUI/dCOyp4AI2Cx/qzGF6FH1XqRrwc51ycnI/L8M/FqxM=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vQBOz-000479-Hp;
-	Mon, 01 Dec 2025 21:25:45 +0000
+	id 1vQBSL-0008Gt-1J;
+	Mon, 01 Dec 2025 21:29:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vQBOy-000473-Hw
+ (envelope-from <chao@kernel.org>) id 1vQBSJ-0008Gm-LK
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Dec 2025 21:25:44 +0000
+ Mon, 01 Dec 2025 21:29:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3eodx9W6/rzaSPZCE9QPRN018WgCLvm4tBhujQ3Nuv0=; b=fiURhaBhkpqxw1XIFQqZbXWu75
- RqnsnzMdje15gkidwkKtl7DxX0jl4lIn+mYBf3iolX67aP8wGcgLZH9DH8L2ShZUcQ1NWJASl8/Lz
- pmed11EguVxd4t4fKd6VGtMihU5UjsBKMG+WQZOVLW3PS2b6A7POgSFemS9PjghJ1bjg=;
+ bh=g+EjuvmcxspAZcpVDYREIf71qEPC3POtRYqxz0uqBx8=; b=XistYROXS7dAUhPSAOj0FCSeEG
+ B28YqrccIL0etcNY7+BxJ/112jMygJvIFzd5w1pia+h8Nla1BGiXMAAGwtu7YZYxoCRHVS1Zsay4M
+ VjNJmzdjBZvImxxcW7Wr7F8eIp8WdUHyK16TNFreJpmIOsvGz4DTRxOvcNTkO867IQXA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,38 +40,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3eodx9W6/rzaSPZCE9QPRN018WgCLvm4tBhujQ3Nuv0=; b=JXTEWTceD4/rpecH/u4ox6p8+F
- XaEYjrb6A/ME2s/boG3epTSeiWN+xBhqQ/dw9U20QGBrEqKhYTpqgjElQSosdayRq0tQ1At1j69kj
- v8GKfvlQTRhrA/O+pLuBsZPwwYBZIxtKJlo3/uLd3xzDFr3w31GXYJJzrdI7Y3jsuTPo=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=g+EjuvmcxspAZcpVDYREIf71qEPC3POtRYqxz0uqBx8=; b=QPnFpI97Ct1m670X51q97gm+hB
+ bhAvlkuk4TzTthkfvQz4HzcHqNCbDsLtSPjGDjxZHZcFhMZdATb0RmWvGuMqvin8k/hc1ku2MzTPF
+ NzEc8A9unvXTWM6J61VvCQxem1JO9FFEj57B8gmwvp/n3d3yrQI+OU1+HP1PhXjHTvv4=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vQBOy-0003B2-67 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Dec 2025 21:25:44 +0000
+ id 1vQBSJ-0003MW-7R for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 01 Dec 2025 21:29:11 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D89A844159
+ by tor.source.kernel.org (Postfix) with ESMTP id 982D160152
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  1 Dec 2025 21:25:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F936C4CEF1;
- Mon,  1 Dec 2025 21:25:33 +0000 (UTC)
+ Mon,  1 Dec 2025 21:29:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C8172C4CEF1;
+ Mon,  1 Dec 2025 21:29:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1764624333;
- bh=zPMKmj67/zJipAvSmYUm0/ysW5zk+HtqunFLBVDymXo=;
+ s=k20201202; t=1764624545;
+ bh=9iqnBkCWkupWZXMjvzXI7HYMJruKmtDXUhR/FxrPkFU=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=bKcmKgyaHFxP3uc/kFbG8kgJiCBCD6T4FyEHpWNXQ0SwLShv8n71SbWBYKQLC0VWy
- Fw+I/iz8w4vBNOgSh43kUqpelZ/i2Da9HOjwyppnAEwqF0f+PYqcTHwvbvx0X6ffXp
- oUAFWEu7ZniHKCLdSg+7BJm9w3x8upCpKDkgfHQqjq0OP/S+oQD9bhBqjPEggmUF5C
- f0fyp0lytJxub5Wxtl9IcbU2zLOaSIpsIB1AyskoShiP7GZfRE5nhI4zg80GVDe/Me
- kgxJavMW8+USs9Rf2k6xDV5jG4mlm9+MnKB6GQiBcZQoiRhZCjc0Fs4d1PDUy9gg0g
- DhnNXkj6gJWKg==
-Message-ID: <8c971afa-1a69-48c2-89a2-643c1fc0ce54@kernel.org>
-Date: Mon, 1 Dec 2025 13:25:32 -0800
+ b=MZNHwATwadPb2wCclNCXcZhiHPIdIX82dAuzjtviJ9TmksFS8FYtNcvoHiSQQVHKe
+ j3Ka6FNAHGjtYqc/hmyJ6nFOzu0KzzFuaLFtQTM1YIDlv2KipM9FhHMhwL41inB/jO
+ xF03fFubtz4rQlnx4v51qLdE4fe4+BvbfPzSVyt7DCcnRHv+8mi3LnEsC97xEg/SLf
+ CFkbcGTpNxRNQea8G3yHTIsMoTzNLWY5ZprQw2AkLTSTMjipWQS2RUL+NdJHGrcgMa
+ 26ywgql33s/1m1uQ9n1uelptMGQB7ruhulDRWw7fNyVe2mKDB7dAGMs7DjXL3lGHGd
+ u3xKsdvOYXd8Q==
+Message-ID: <f54507de-293c-4a86-bcb0-96a7c6012dea@kernel.org>
+Date: Mon, 1 Dec 2025 13:29:03 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 References: <20251201204620.905318-1-jaegeuk@kernel.org>
+ <20251201204620.905318-2-jaegeuk@kernel.org>
 Content-Language: en-US
-In-Reply-To: <20251201204620.905318-1-jaegeuk@kernel.org>
+In-Reply-To: <20251201204620.905318-2-jaegeuk@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -80,8 +81,8 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On 2025/12/2 04:46, Jaegeuk Kim via Linux-f2fs-devel wrote:
- > Let's measure the start time more precisely. > > Signed-off-by: Jaegeuk
- Kim <jaegeuk@kernel.org> Reviewed-by: Chao Yu <chao@kernel.org> Thanks, 
+ > Add a method to read out pages into unevictable mapping by mmap(), mlock2(), 
+ > and madvise() > > Signed-off-by: Jaegeuk Kim <jaegeuk@kerne [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +94,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vQBOy-0003B2-67
-Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs_io: measure the start time
- explicitly
+X-Headers-End: 1vQBSJ-0003MW-7R
+Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs_io: add read test with mlock2 and
+ madvise
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,7 +115,8 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2025/12/2 04:46, Jaegeuk Kim via Linux-f2fs-devel wrote:
-> Let's measure the start time more precisely.
+> Add a method to read out pages into unevictable mapping by mmap(), mlock2(),
+> and madvise()
 > 
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
