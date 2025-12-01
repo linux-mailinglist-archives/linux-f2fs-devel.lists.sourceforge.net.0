@@ -2,78 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAB71C990FC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 01 Dec 2025 21:40:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A294C99132
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 01 Dec 2025 21:46:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=du3oo7R6hk2eyayVJAe4b9WjLszOZRnnryY8UqiEpgI=; b=WcYgozNrf4t1jeq0VcLr/kOd97
-	cpVm1e5RHOzgPQkb/2Are0/CxYXp5MfSwOs/LONx7y9ZpKXvnipBoT8yy7xKdF7mxjJa/A9C50SiD
-	BFKUmCjxBlNAvyBMcF61D1UoFksYqWp0fNPtSgP99aHwC9/z4se7XY5ocIzl2U9oYu3E=;
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=PT6PcAKsOcJ5+9VDDjFslu7yCPrlZiHO9BBlgbbcpys=; b=dN0XKLvTB2ulJqTtzgzmHaWo7U
+	qHwmErgxIZ7iwR5FkFHJ8PJjZXvKBzqT75iy1wMw3mVgiYz97l7aIEwowwsBvRTuhDcYhytVZYlz1
+	cmAc+XJdzuCh+mTUc7RIvSkd095G2PZbbnGOypioKp/WSjON7/y8D1wsrf6/lNC682A8=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vQAh7-00074J-3W;
-	Mon, 01 Dec 2025 20:40:25 +0000
+	id 1vQAn3-0007FI-Mc;
+	Mon, 01 Dec 2025 20:46:33 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vQAh4-00074B-4g
+ (envelope-from <jaegeuk@kernel.org>) id 1vQAn2-0007FC-DW
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Dec 2025 20:40:22 +0000
+ Mon, 01 Dec 2025 20:46:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5ORj1j5D4VUiYDzfLJ/Bss2dvDE3yh8/ZaBlGfaKtK8=; b=jGjgpRtyXVjEaHF8juVdEeL6Y5
- AyQL2/JeSKFSd2aofnm3c+Co/pSo2sHQGD/meBwYfVo9BkCRt1nJUHNxxvfeaVLju5tiCQlfp9Y5i
- yNWhd3Dd1zwGPVjhQLUZ37y3hvANrQQL28wP6bvpIBwJ0w64PdK7Tsg745LhzFrUIBn8=;
+ bh=kGjFXLFF7qsjj+/o4IRgk9MdGuHeBhaCcJx3DuowKvg=; b=PqOcT+/bqsoNr0YgkFXeAlxb4n
+ c51jxpQ9ye9+w5jfqMFQZHXEiyB6aRa8UPZJSbES8LVW9aFDhTGk9MtdkAGo0GdinZLlXIEpGsIaq
+ Ya+TGxSOvx9l3XH0RZPD2IM7QRQeqbsVu9kJutnRL5/uJQFGaAJCXUEACpBl+9kl8j/4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=5ORj1j5D4VUiYDzfLJ/Bss2dvDE3yh8/ZaBlGfaKtK8=; b=JFn1jqP7kePuLTdKKi95vb3XtG
- 8WcCF1c2RffhyxOe5m6rxG88FGoCn6d4xKPl6yKBcyk+mRoWKojVfJBaYT905y37MNBfvtK0YHp6G
- aJF+PFS3DLF1UGWqsaqDaC/n6eeQbGDqjZFCqCfTYQSSy+wZppa2csmqb6HT+gl9/Q4M=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=kGjFXLFF7qsjj+/o4IRgk9MdGuHeBhaCcJx3DuowKvg=; b=B
+ SUi5pvdFg6yj8WwlTuo1PhX9iMQ/CJl6sJZbssJ1lSJMStaSSnCdrRnS57uLQiQqdvSet0+oxuol7
+ 9zpvnotC8rU6L8+xXq6T7lCiJ4XMVsqXN9ZX8c0e3C8NNcjamhReHNNunxiqxBSD96hOB96DxhzI4
+ jla3DdBRM1PpObXU=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vQAh3-0000fV-Hq for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 Dec 2025 20:40:22 +0000
+ id 1vQAn2-0000to-0o for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 01 Dec 2025 20:46:32 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id E4A206014A
+ by sea.source.kernel.org (Postfix) with ESMTP id 978FD4198C
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  1 Dec 2025 20:40:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2CDC3C4CEF1;
- Mon,  1 Dec 2025 20:40:10 +0000 (UTC)
+ Mon,  1 Dec 2025 20:46:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6830AC4CEF1;
+ Mon,  1 Dec 2025 20:46:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1764621610;
- bh=Kddjz4kbthsv6mSJiFXwMHZqAU+w31YB1r6G3D/SACA=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=qjh4DeAGEERO+4NH+RpPAwZ+rCsPvazPOZFPiosg0wpdQXPZy43ue1AurxGWByHWE
- tvN9jEPGJj89VBes+iOcdRdpUSrKF8f/ikT/BRmwm8+lAodVe6rY7svYCauDkwSr9i
- KsJuZwW6eviLEmJUtxcHxTpcBIE7fqUCxI9JgGioyJT16Fu3VtBQZX1904lMGfA1uX
- gf5T1ssA4fHd32Hk33JYPGltUS7QtqvVsvmN/jrEC5U5NJPllZh4YrVuUlHuZWRHqY
- cB7EEiDeYsT8h4pqMPpny64QUqmLy44qKqQmwYn+jfU8zy41Poglu4ua/BXa2Lj6e+
- +TNLVvad6MoCQ==
-Message-ID: <3420618e-a108-4d29-b941-e94d3e9bb55e@kernel.org>
-Date: Mon, 1 Dec 2025 12:40:08 -0800
+ s=k20201202; t=1764621986;
+ bh=8SuTCQaVYU7lsbJLteS0RbKYrf+Dg3AwACzqWj88Xks=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Z1EaEIP+0/IoQdQYe38xd/fhZuCz3ElmfZYQ5AhwfFzDVxPK/JkOfhizI9RSfpWsU
+ f3iMCenCx1NcDv2JHdbuNtS0m8aaq+BPgA5SdRRtPKF5S/Ztv1vR2OJTETMwnJPhmo
+ 41+/oqTrir+XbUNFyZAIYyYyOxcyZSA9T+DentYvhV2uktAel4BJvwHSE4DXOxhLpM
+ AoGBBvDmXODysL5+Jn/OixXcrRGTl4s4EioqUMvV/jTMqv4fvb+mWh1LU5qg+lFqsq
+ qTCV5NX0OnSVdPt8Yv26P1/9Va3x5B+wJBkZUnQRGhCVMaoPij61C3r98KCvf3Qt3T
+ FhfOMuuDTMHsA==
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Mon,  1 Dec 2025 20:46:18 +0000
+Message-ID: <20251201204620.905318-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.52.0.107.ga0afd4fd5b-goog
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20251201191940.883657-1-jaegeuk@kernel.org>
- <20251201191940.883657-2-jaegeuk@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20251201191940.883657-2-jaegeuk@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -81,9 +76,13 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2025/12/2 03:16, Jaegeuk Kim via Linux-f2fs-devel wrote:
- > This patch fixes the broken readahead flow for POSIX_FADV_WILLNEED, where
- > the problem is, in force_page_cache_ra(nr_to_read), nr_to_read [...] 
+ Content preview: Let's measure the start time more precisely. Signed-off-by:
+ Jaegeuk Kim <jaegeuk@kernel.org> --- tools/f2fs_io/f2fs_io.c | 5 ++++- 1
+ file changed, 4 insertions(+),
+ 1 deletion(-) diff --git a/tools/f2fs_io/f2fs_io.c
+ b/tools/f2fs_io/f2fs_io.c index 326b3bd033af..bc2e014d3911 100644 ---
+ a/tools/f2fs_io/f2fs_io.c
+ +++ b/tools/f2fs_io/f2fs_io.c @@ -1009,8 +1009,8 @@ static void do_ [...]
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,9 +94,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vQAh3-0000fV-Hq
-Subject: Re: [f2fs-dev] [PATCH 1/4] mm/readahead: fix the broken readahead
- for POSIX_FADV_WILLNEED
+X-Headers-End: 1vQAn2-0000to-0o
+Subject: [f2fs-dev] [PATCH 1/3] f2fs_io: measure the start time explicitly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,56 +107,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2025/12/2 03:16, Jaegeuk Kim via Linux-f2fs-devel wrote:
-> This patch fixes the broken readahead flow for POSIX_FADV_WILLNEED, where
-> the problem is, in force_page_cache_ra(nr_to_read), nr_to_read is cut by
-> the below code.
-> 
->       max_pages = max_t(unsigned long, bdi->io_pages, ra->ra_pages);
->       nr_to_read = min_t(unsigned long, nr_to_read, max_pages);
-> 
-> IOWs, we are not able to read ahead larger than the above max_pages which
-> is most likely the range of 2MB and 16MB. Note, it doesn't make sense
-> to set ra->ra_pages to the entire file size. Instead, let's fix this logic.
-> 
-> Before:
-> f2fs_fadvise: dev = (252,16), ino = 14, i_size = 4294967296 offset:0, len:4294967296, advise:3
-> page_cache_ra_unbounded: dev=252:16 ino=e index=0 nr_to_read=512 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=512 nr_to_read=512 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=1024 nr_to_read=512 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=1536 nr_to_read=512 lookahead_size=0
-> 
-> After:
-> f2fs_fadvise: dev = (252,16), ino = 14, i_size = 4294967296 offset:0, len:4294967296, advise:3
-> page_cache_ra_unbounded: dev=252:16 ino=e index=0 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=2048 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=4096 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=6144 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=8192 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=10240 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=12288 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=14336 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=16384 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=18432 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=20480 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=22528 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=24576 nr_to_read=2048 lookahead_size=0
-> ...
-> page_cache_ra_unbounded: dev=252:16 ino=e index=1042432 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=1044480 nr_to_read=2048 lookahead_size=0
-> page_cache_ra_unbounded: dev=252:16 ino=e index=1046528 nr_to_read=2048 lookahead_size=0
-> 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Let's measure the start time more precisely.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ tools/f2fs_io/f2fs_io.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Thanks,
+diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+index 326b3bd033af..bc2e014d3911 100644
+--- a/tools/f2fs_io/f2fs_io.c
++++ b/tools/f2fs_io/f2fs_io.c
+@@ -1009,8 +1009,8 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
+ 		printf("fadvise SEQUENTIAL|WILLNEED to a file: %s\n", argv[7]);
+ 	}
+ 
+-	io_time_start = get_current_us();
+ 	if (do_mmap) {
++		io_time_start = get_current_us();
+ 		data = mmap(NULL, count * buf_size, PROT_READ,
+ 				MAP_SHARED | MAP_POPULATE, fd, offset);
+ 		if (data == MAP_FAILED)
+@@ -1028,6 +1028,8 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
+ 				MAP_SHARED, fd, offset);
+ 		if (data == MAP_FAILED)
+ 			die("Mmap failed");
++
++		io_time_start = get_current_us();
+ 		if (posix_fadvise(fd, offset, count * buf_size,
+ 					POSIX_FADV_WILLNEED) != 0)
+ 			die_errno("fadvise failed");
+@@ -1040,6 +1042,7 @@ static void do_read(int argc, char **argv, const struct cmd_desc *cmd)
+ 		read_cnt = count * buf_size;
+ 		memcpy(print_buf, data, print_bytes);
+ 	} else {
++		io_time_start = get_current_us();
+ 		for (i = 0; i < count; i++) {
+ 			if (!do_dontcache) {
+ 				ret = pread(fd, buf, buf_size, offset + buf_size * i);
+-- 
+2.52.0.107.ga0afd4fd5b-goog
+
 
 
 _______________________________________________
