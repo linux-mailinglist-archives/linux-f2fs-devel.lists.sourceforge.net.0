@@ -2,78 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50441C9D902
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Dec 2025 03:18:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D36BC9E6F3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Dec 2025 10:17:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=47/UWx0Sh603e5AueYRFfRGEnbFYNyb8ILhwrXYkhRA=; b=caRxFIt9uYKY1PcyTUGDkrRNnf
-	cWRobGXtMiD+Lhym0gHUbIZOxOcTLlQdnNRDovtNv3M0wMCrjIHA4nEGbad/EUr3VQPrSaPc2jGkc
-	hBp36u226jzF2lXPxih67fimslNOU2F8Tc/jQjt2YI+Dn6NoZG4MCM2jRm4pf4GYXxLs=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=KU4p97xXow0Y36Zk8mTCKxmcsIiozaRJQX9RP6kqPWw=; b=b0ak7NgrZ+QmIlRyI5evoZuGh5
+	x7ekyoTjZWkM87l+K9gccCMSgJ0+E5TBtC4gbqH/rRl5jQnOnh2PmCGVnEP00AlOAkoz90C706KMN
+	mhf/ZP1QL4vENhGybBVO+DzdiV3dVUOqlm/A006y67mvzlTPVjZ004x7fs1TDNek8Tx4=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vQcRr-0003ZC-FM;
-	Wed, 03 Dec 2025 02:18:31 +0000
+	id 1vQizU-0005wl-3G;
+	Wed, 03 Dec 2025 09:17:40 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tytso@mit.edu>) id 1vQcRp-0003Z3-6V
+ (envelope-from <Zhiguo.Niu@unisoc.com>) id 1vQizS-0005wc-05
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Dec 2025 02:18:29 +0000
+ Wed, 03 Dec 2025 09:17:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OA5BPPFPWdY1GGA+qoGP4dlLrTO9cnCg3u+3vMgwFRc=; b=dL/bJQuD2lhRgRMHXFztd1u9LN
- w8YfBiEFtdMmfNTs7dg588ViA3dfdS4UDdQ1xxNOlAeF+LW5iv7XnIguPN5+2/Mq1npZGdH7ypOfe
- bar6qNX+9Vjzf8AZzxQr+euj/yoRZJX5IaZvuV9ddT0UPfnL1KZG+PY5urUwvkEbl6bk=;
+ bh=ajoBRUTBt71ZYOJqir81AKyXdIAqrTQbJpFRp3cR2EY=; b=ZfK2kOnJbHO6BuM/PCGzkO1mlH
+ XKkk13YMQSQKNyKR5Knf0R3GD4N7EzOteO/GJslcnReB9QWfBRQlIkiZpvMdP3CfV3yRCzRrK1HX1
+ M/uJlzTJYFDSwmUdrwPJgHsVoDHaDznbDTT0AemgR6AezR6MFoCFxIxNHc2+9L2Cf4gE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=OA5BPPFPWdY1GGA+qoGP4dlLrTO9cnCg3u+3vMgwFRc=; b=SdNKpg9OuphoYCFsdM1SyXoqto
- Tuc/evgj4FUKAlY99MySLAWIXgFn28I7RIzA4gMV2JU/TLHpHRSITGv/w3X5EejDyp1gSQ76Qgg7W
- IgfPavn1iA4dmExWiOGR8SSbEOxabKR2WoZGRtUi6Lt8J1BxkKgGUI9hI1YL9z2OqWW0=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ajoBRUTBt71ZYOJqir81AKyXdIAqrTQbJpFRp3cR2EY=; b=K
+ mbBZDk9BmIrc/74HQgHNLIptqXCSpNcoC/mIKi8gT4nNitHnMQZDNBaXJNi3d3wmeQyQ7J/OvbHQL
+ 6MPdJk/rsJYq6u3uYt9S1hM/v1cH8jzjejClNRU9piG/86dLpq42sc3b+tTl3pcMzF6Yc1pyTkGsZ
+ I38RhW6VrHUEkfWc=;
+Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vQcRo-000874-G0 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Dec 2025 02:18:29 +0000
-Received: from macsyma.thunk.org (pool-173-48-102-12.bstnma.fios.verizon.net
- [173.48.102.12]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 5B32I9N4002251
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 2 Dec 2025 21:18:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
- t=1764728291; bh=OA5BPPFPWdY1GGA+qoGP4dlLrTO9cnCg3u+3vMgwFRc=;
- h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
- b=Eti7T6Qk1jdPBi8XpZLNi7KBPC8jLhcgPL7SUMH4826Pgw2qlj17gyb1HelDJHUvm
- Spx347nVL2ud3eCKU6QXGsnvkVnkFhj5YZbKIAxSJdJ9lX12gjgrY85+xJcMxZiA/G
- SSw33AISQZ0xn4QoM5F+k6aAqaQOwVWSbI2LErknV1iZHPnkrgecAHnEpUZdfqAcnB
- 9rX8trbgEBMaVPiKmGEqLKwpXiA+HcW7oaXOWZ3YNgnMXWcbKRaGKkrxUEoCE4DSxm
- Ni2+VFdZnuG6Hu5sQa/XZRRyp9EEJCUigTeJ2JlcsieHWX+/w07DB2DEQzeAeVHauo
- bvsJtvon/TFHQ==
-Received: by macsyma.thunk.org (Postfix, from userid 15806)
- id 75E604DF2C06; Tue,  2 Dec 2025 21:17:09 -0500 (EST)
-Date: Tue, 2 Dec 2025 21:17:09 -0500
-From: "Theodore Tso" <tytso@mit.edu>
-To: Jaegeuk Kim <jaegeuk.kim@gmail.com>
-Message-ID: <20251203021709.GA71988@macsyma.lan>
-References: <20251202043952.GA70808@macsyma.lan>
- <CAOtxgyeik6kgF6SktvFj=anntmJZ_aWneqq1XzLpqpHK1XMb+Q@mail.gmail.com>
+ id 1vQizQ-00040S-Fc for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 03 Dec 2025 09:17:37 +0000
+Received: from SHSQR01.spreadtrum.com (localhost [127.0.0.2] (may be forged))
+ by SHSQR01.spreadtrum.com with ESMTP id 5B38wUfC091391
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 3 Dec 2025 16:58:30 +0800 (+08)
+ (envelope-from Zhiguo.Niu@unisoc.com)
+Received: from dlp.unisoc.com ([10.29.3.86])
+ by SHSQR01.spreadtrum.com with ESMTP id 5B38vh44085996;
+ Wed, 3 Dec 2025 16:57:43 +0800 (+08)
+ (envelope-from Zhiguo.Niu@unisoc.com)
+Received: from SHDLP.spreadtrum.com (BJMBX02.spreadtrum.com [10.0.64.8])
+ by dlp.unisoc.com (SkyGuard) with ESMTPS id 4dLryr0SR1z2KcbFD;
+ Wed,  3 Dec 2025 16:53:40 +0800 (CST)
+Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
+ BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.48; Wed, 3 Dec 2025 16:57:41 +0800
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Wed, 3 Dec 2025 16:56:19 +0800
+Message-ID: <1764752179-1936-1-git-send-email-zhiguo.niu@unisoc.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAOtxgyeik6kgF6SktvFj=anntmJZ_aWneqq1XzLpqpHK1XMb+Q@mail.gmail.com>
+X-Originating-IP: [10.0.73.87]
+X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
+ BJMBX02.spreadtrum.com (10.0.64.8)
+X-MAIL: SHSQR01.spreadtrum.com 5B38vh44085996
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=unisoc.com;
+ s=default; t=1764752274;
+ bh=ajoBRUTBt71ZYOJqir81AKyXdIAqrTQbJpFRp3cR2EY=;
+ h=From:To:CC:Subject:Date;
+ b=OWZyw+3yelMcNSxdwCldYu1MDnBKLXszhsGySqaCxkF0pY5tXJGB1X48ZEzKil/ay
+ Ioxbt/Cws49lgWIj1aIrk3oq4rNwyEV4eY+hM6gqHhvgPT3GpD0VhlBp9DtQzr2KQm
+ Pmqi1Q5A0u6odzEoiI5OaVi/kWMoRecmVhE+4HRNyZ7o5VY8ZDgGYEMw5EmnUmPeH4
+ ilIrabJ5Y0bp7bMIDU1DGrdRgrFegavoxq5qjxTXekfigc6OHpN9h6sEb90GcX2yAX
+ RtKG8/FspFQa5aYyx/GuAAdKwoDSBPSYQlRJYRBYu2W9LcBOFYMOGleA68HOUhMa1P
+ ZmX2FQEpLNmDQ==
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -81,27 +89,22 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Dec 02, 2025 at 09:30:44AM -0800, Jaegeuk Kim wrote:
- > > For now, I'll exclude generic/204 from the f2fs configs in my test >
- > appliance; if you have a chance to take a look at this and let m [...] 
+ Content preview: I'm currently encountering the same issue as shown in commit
+ bbf9f7d90f21e ("f2fs: Fix indefinite loop in f2fs_gc()"), but this commit
+ only works when CONFIG_F2FS_CHECK_FS is enabled and blkaddr check [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [18.9.28.11 listed in wl.mailspike.net]
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [18.9.28.11 listed in list.dnswl.org]
-X-Headers-End: 1vQcRo-000874-G0
-Subject: Re: [f2fs-dev] generic/204 is crashing on linux-next when testing
- f2fs
+ domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1vQizQ-00040S-Fc
+Subject: [f2fs-dev] [PATCH RFC] f2fs: fix infinite foreground gc loop in
+ f2fs_gc
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,59 +116,221 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Zhiguo Niu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Zhiguo Niu <zhiguo.niu@unisoc.com>
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, zhiguo.niu@unisoc.com,
+ Hao_hao.Wang@unisoc.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Dec 02, 2025 at 09:30:44AM -0800, Jaegeuk Kim wrote:
-> > For now, I'll exclude generic/204 from the f2fs configs in my test
-> > appliance; if you have a chance to take a look at this and let me know
-> > when it might be safe to re-neable generic/204 for f2fs, that would be
-> > great.  Thanks!
-> 
-> Thank you for sharing the report. I didn't hit this in my setup tho, let
-> us try to reproduce it first.
+I'm currently encountering the same issue as shown in
+commit bbf9f7d90f21e ("f2fs: Fix indefinite loop in f2fs_gc()"),
+but this commit only works when CONFIG_F2FS_CHECK_FS is enabled
+and blkaddr check fails. This doesn't seem to cover all
+!is_alive cases, and CONFIG_F2FS_CHECK_FS is currently disabled
+on Android devices.
 
-I'm not able to reproduce it by running generic/204 by itself; only
-when running the full auto group.  (See below).  The generic/204 test
-reformats the scratch partition at the beginning of the test, and
-doesn't depend on the test partition.  Presumably, a previous test
-when running the auto group is somehow setting up generic/204 to fail.
+Here's the problem flow:
+1. Some high-pressure read/write/random power-down tests corrupted
+the content of the nid=4 entry in the NAT block. ino/bock_addr are
+both corrupted to 0, and the mount log also indicates this.
+crash_arm64> f2fs_nat_block ffffff8097bfe000 -x
+      version = 0x0,
+      ino = 0x3,
+      block_addr = 0x86da9
+    }, {
+      version = 0x0,
+      ino = 0x0,
+      block_addr = 0x0
+[    6.495406] F2FS-fs (dm-56): quota file may be corrupted, skip loading it
+2. Insufficient free space triggers foreground garbage collection (GC) during boot.
+crash_arm64> bt 1
+PID: 1        TASK: ffffff80801cec00  CPU: 6    COMMAND: "init"
+[ffffffc00806b870] rwsem_read_trylock at ffffffc00826d5c8
+[ffffffc00806b980] gc_data_segment at ffffffc0088a2720
+[ffffffc00806ba40] do_garbage_collect at ffffffc0088a21d8
+[ffffffc00806bb60] f2fs_gc at ffffffc0088a17ac
+[ffffffc00806bbf0] f2fs_balance_fs at ffffffc0088cbf44
+[ffffffc00806bc20] f2fs_setattr at ffffffc00885e67c
+[ffffffc00806bc70] notify_change at ffffffc008610ae0
+[ffffffc00806bd30] chown_common at ffffffc0085c8a3c
+[ffffffc00806bdb0] do_fchownat at ffffffc0085c9154
+[ffffffc00806be00] __arm64_sys_fchownat at ffffffc0085c908c
+[ffffffc00806be20] invoke_syscall at ffffffc0081221b4
+[ffffffc00806be40] el0_svc_common at ffffffc008122114
 
-I'll try doing a run with KASAN enabled, in case that gives us some
-insight.
+Infinite GC loop causes critical processes to be blocked, preventing
+the device from booting up properly.
+3. The GC process enters an infinite loop because the victim segment
+contains a data block belongs to nid=4, but the is_alive check fails
+as the following calling flow:
+is_alive->f2fs_get_node_page->__get_node_page->read_node_page return -ENOENT
+This will prevent the data in this segment from being completely migraged out.
+4. This segment has low cost, which is chosen for GC again in next time.
 
-						- Ted
-							
-TESTRUNID: ltm-20251202161646
-KERNEL:    kernel	6.18.0-rc4-xfstests-kasan-00072-g6fb67ac89690 #314 SMP PREEMPT_DYNAMIC Tue Dec  2 16:05:26 EST 2025 x86_64
-CMDLINE:   --kernel gs://gce-xfstests/kernel.deb -c f2fs/all -a -C 30 generic/204
-CPUS:      2
-MEM:       7680
+Although the problem should be addressed by finding the cause of
+NAT block corruption, but this will prevent the device from booting up.
+This patch records each `!is_alive` case as an invalid
+segment to avoid selecting the same one in next time.
+BTW, some debug information output has been enhanced in is_alive.
 
-f2fs/default: 30 tests, 6043 seconds
-f2fs/encrypt: 30 tests, 6209 seconds
-f2fs/compress: 30 tests, 6140 seconds
-Totals: 90 tests, 0 skipped, 0 failures, 0 errors, 18392s
+Cc: Sahitya Tummala <stummala@codeaurora.org>
+Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+---
+ fs/f2fs/gc.c      | 32 +++++++++++++++-----------------
+ fs/f2fs/segment.c |  6 ++----
+ fs/f2fs/segment.h |  3 +--
+ 3 files changed, 18 insertions(+), 23 deletions(-)
 
-FSTESTIMG: gce-xfstests/xfstests-amd64-202512020012
-FSTESTPRJ: gce-xfstests
-FSTESTVER: blktests	4badb27 (Fri, 31 Oct 2025 19:53:27 +0900)
-FSTESTVER: fio		fio-3.41 (Fri, 5 Sep 2025 14:21:17 -0600)
-FSTESTVER: fsverity	v1.7 (Tue, 4 Nov 2025 17:28:17 -0800)
-FSTESTVER: ima-evm-utils	v1.5 (Mon, 6 Mar 2023 07:40:07 -0500)
-FSTESTVER: libaio  	libaio-0.3.108-82-gb8eadc9 (Thu, 2 Jun 2022 13:33:11 +0200)
-FSTESTVER: ltp		20250930 (Tue, 30 Sep 2025 13:53:45 +0200)
-FSTESTVER: quota		v4.05-77-g22ff3d9 (Tue, 2 Sep 2025 08:12:02 -0400)
-FSTESTVER: util-linux	v2.41.2 (Mon, 22 Sep 2025 12:56:34 +0200)
-FSTESTVER: xfsprogs	v6.17.0 (Mon, 20 Oct 2025 16:49:00 +0200)
-FSTESTVER: xfstests-bld	gce-xfstests-202504292206-34-g84a091b7 (Tue, 2 Dec 2025 00:09:25 -0500)
-FSTESTVER: xfstests	v2025.11.04-12-g64e3dbda7 (Thu, 13 Nov 2025 19:58:03 -0500)
-FSTESTVER: zz_build-distro	trixie
-FSTESTSET: generic/204
-FSTESTOPT: count 30 fail_loop_count 0
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 384fa7e..a95ade9 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -872,7 +872,6 @@ int f2fs_get_victim(struct f2fs_sb_info *sbi, unsigned int *result,
+ 		p.offset = segno + p.ofs_unit;
+ 		nsearched++;
+ 
+-#ifdef CONFIG_F2FS_CHECK_FS
+ 		/*
+ 		 * skip selecting the invalid segno (that is failed due to block
+ 		 * validity check failure during GC) to avoid endless GC loop in
+@@ -880,7 +879,6 @@ int f2fs_get_victim(struct f2fs_sb_info *sbi, unsigned int *result,
+ 		 */
+ 		if (test_bit(segno, sm->invalid_segmap))
+ 			goto next;
+-#endif
+ 
+ 		secno = GET_SEC_FROM_SEG(sbi, segno);
+ 
+@@ -1145,16 +1143,19 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 	unsigned int ofs_in_node, max_addrs, base;
+ 	block_t source_blkaddr;
+ 
++	unsigned int segno = GET_SEGNO(sbi, blkaddr);
+ 	nid = le32_to_cpu(sum->nid);
+ 	ofs_in_node = le16_to_cpu(sum->ofs_in_node);
+ 
+ 	node_folio = f2fs_get_node_folio(sbi, nid, NODE_TYPE_REGULAR);
+-	if (IS_ERR(node_folio))
+-		return false;
++	if (IS_ERR(node_folio)) {
++		f2fs_err(sbi, "get_node_folio err(%ld) for nid(%u)", PTR_ERR(node_folio), nid);
++		goto check_invalid;
++	}
+ 
+ 	if (f2fs_get_node_info(sbi, nid, dni, false)) {
+ 		f2fs_folio_put(node_folio, true);
+-		return false;
++		goto check_invalid;
+ 	}
+ 
+ 	if (sum->version != dni->version) {
+@@ -1165,7 +1166,7 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 
+ 	if (f2fs_check_nid_range(sbi, dni->ino)) {
+ 		f2fs_folio_put(node_folio, true);
+-		return false;
++		goto check_invalid;
+ 	}
+ 
+ 	if (IS_INODE(node_folio)) {
+@@ -1180,7 +1181,7 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 		f2fs_err(sbi, "Inconsistent blkaddr offset: base:%u, ofs_in_node:%u, max:%u, ino:%u, nid:%u",
+ 			base, ofs_in_node, max_addrs, dni->ino, dni->nid);
+ 		f2fs_folio_put(node_folio, true);
+-		return false;
++		goto check_invalid;
+ 	}
+ 
+ 	*nofs = ofs_of_node(node_folio);
+@@ -1188,21 +1189,18 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 	f2fs_folio_put(node_folio, true);
+ 
+ 	if (source_blkaddr != blkaddr) {
+-#ifdef CONFIG_F2FS_CHECK_FS
+-		unsigned int segno = GET_SEGNO(sbi, blkaddr);
+ 		unsigned long offset = GET_BLKOFF_FROM_SEG0(sbi, blkaddr);
+-
+ 		if (unlikely(check_valid_map(sbi, segno, offset))) {
+-			if (!test_and_set_bit(segno, SIT_I(sbi)->invalid_segmap)) {
+-				f2fs_err(sbi, "mismatched blkaddr %u (source_blkaddr %u) in seg %u",
+-					 blkaddr, source_blkaddr, segno);
+-				set_sbi_flag(sbi, SBI_NEED_FSCK);
+-			}
++			f2fs_err(sbi, "mismatched blkaddr %u (source_blkaddr %u) in seg %u",
++				blkaddr, source_blkaddr, segno);
++			set_sbi_flag(sbi, SBI_NEED_FSCK);
++			goto check_invalid;
+ 		}
+-#endif
+-		return false;
+ 	}
+ 	return true;
++check_invalid:
++	set_bit(segno, SIT_I(sbi)->invalid_segmap);
++	return false;
+ }
+ 
+ static int ra_data_block(struct inode *inode, pgoff_t index)
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 8375dca..6a55e20 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -826,9 +826,7 @@ static void __remove_dirty_segment(struct f2fs_sb_info *sbi, unsigned int segno,
+ 		if (valid_blocks == 0) {
+ 			clear_bit(GET_SEC_FROM_SEG(sbi, segno),
+ 						dirty_i->victim_secmap);
+-#ifdef CONFIG_F2FS_CHECK_FS
+ 			clear_bit(segno, SIT_I(sbi)->invalid_segmap);
+-#endif
+ 		}
+ 		if (__is_large_section(sbi)) {
+ 			unsigned int secno = GET_SEC_FROM_SEG(sbi, segno);
+@@ -4899,12 +4897,12 @@ static int build_sit_info(struct f2fs_sb_info *sbi)
+ 					sit_bitmap_size, GFP_KERNEL);
+ 	if (!sit_i->sit_bitmap_mir)
+ 		return -ENOMEM;
++#endif
+ 
+ 	sit_i->invalid_segmap = f2fs_kvzalloc(sbi,
+ 					main_bitmap_size, GFP_KERNEL);
+ 	if (!sit_i->invalid_segmap)
+ 		return -ENOMEM;
+-#endif
+ 
+ 	sit_i->sit_base_addr = le32_to_cpu(raw_super->sit_blkaddr);
+ 	sit_i->sit_blocks = SEGS_TO_BLKS(sbi, sit_segs);
+@@ -5862,8 +5860,8 @@ static void destroy_sit_info(struct f2fs_sb_info *sbi)
+ 	kfree(sit_i->sit_bitmap);
+ #ifdef CONFIG_F2FS_CHECK_FS
+ 	kfree(sit_i->sit_bitmap_mir);
+-	kvfree(sit_i->invalid_segmap);
+ #endif
++	kvfree(sit_i->invalid_segmap);
+ 	kfree(sit_i);
+ }
+ 
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index 07dcbcb..2437a7e2 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -211,10 +211,9 @@ struct sit_info {
+ 	char *sit_bitmap;		/* SIT bitmap pointer */
+ #ifdef CONFIG_F2FS_CHECK_FS
+ 	char *sit_bitmap_mir;		/* SIT bitmap mirror */
+-
++#endif
+ 	/* bitmap of segments to be ignored by GC in case of errors */
+ 	unsigned long *invalid_segmap;
+-#endif
+ 	unsigned int bitmap_size;	/* SIT bitmap size */
+ 
+ 	unsigned long *tmp_map;			/* bitmap for temporal use */
+-- 
+1.9.1
+
 
 
 _______________________________________________
