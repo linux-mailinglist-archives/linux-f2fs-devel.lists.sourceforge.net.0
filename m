@@ -2,74 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10740CA1678
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Dec 2025 20:32:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78392CA1BAC
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Dec 2025 22:53:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	List-Unsubscribe:List-Id:Subject:To:Date:Message-Id:MIME-Version:Sender:Cc:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=QZ6t0B0Uip0Fj5nZr8aShJJsn/PP0UUNbj2ZVhD4GgY=; b=XAi1ARD0OQYGKvWKbwHvHJVzu0
-	WeDLAyy3hCPLN16r0/5wdv7RMABnjoMBlXFJhDMJlJtKN2a0vMsVFoPG1ducPP+aIoKZ7BZEBHkti
-	GO0sx4RupiHkC5boHjE2WWAYZ4XhT4INn+oCcc/QCur3xRURyKeCSiTcHMMTlK+0jahM=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=+e5xVSv0/39nani4EGcQVTfXav5LdEB9E9EWsfXxgFE=; b=GXO/08LGsuxBnD1bHJ6ASqeGx6
+	rtILqazDDaqAKqqvx1n2n3p3lr7tUfYmMKCkVIKCtAPHaAtGvLi74GOW1MgJtF4JkNuISkY+bNwEZ
+	wNRfJVArChsujbtOjINgpvC2j0XiRYSZ5aCbjmKul+ce4KdDbSPFRv56rSgcZ01G38oU=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vQsaC-0003Hv-DF;
-	Wed, 03 Dec 2025 19:32:13 +0000
+	id 1vQuml-0005FV-58;
+	Wed, 03 Dec 2025 21:53:19 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vQsaA-0003Hg-HT
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vQumj-0005FO-CC
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Dec 2025 19:32:11 +0000
+ Wed, 03 Dec 2025 21:53:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DyL9YbTwTqiiIdnOFaHjHPKtqffEXvFfrCY/vGxNxcE=; b=XkGS8WugAcfT4rkpA3UwKOYl9i
- 3Vt6OieYIF+w0LIJIoiUYdVB1rRfTaKMeRDtkrs9ZFx7FZ6hGnL5Jtc80qDuQvHZThAw8gRP7zzq1
- zM6FUH7UmYaom3eYuC0CYUMOAI4VXFdrG+wThYivoaX24w6vLPEDmTi7nI68sTgeV93M=;
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=E7Zn5Fi7TClDJyBu7MbKdtVWy1keJn0mouwwg91K+DY=; b=UhQXX1nOC60qAtzR01KZl0BNm+
+ 31IGxFTuy/+PDYlmv6pc2DwpvMH30s6JnkXnhd6bJHf3wftbn4IlMqJzlJweQhxv5YJrS7+RfR3Bv
+ 1uSOHXq0Ct+iGrqRqKeM0VqTpeXR8v3p/T+NnWrGfQvXy+Wka1aNOljQbU9Hkb3B92Ik=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DyL9YbTwTqiiIdnOFaHjHPKtqffEXvFfrCY/vGxNxcE=; b=E
- pN8Pnrj9U8I0mC72HXMbLJd5WYLGRTAWv0ku2+4jqk+/Fm4RmccBxyPtebMi/qP8stza/U/cf/nKo
- 3Qvsj1vIu4PxTlArRNYIRKx87kUgu3iur/shsm4L55s+aJtkPddAmq5DljadlC9/qp2ZSRnd03iIr
- 6TDiIHWyLQOJada8=;
+ List-Owner:List-Archive; bh=E7Zn5Fi7TClDJyBu7MbKdtVWy1keJn0mouwwg91K+DY=; b=N
+ QeviLkKqa2gKcyr61EIRuvegspEZnU7KL41t3E36xEXq90PqQ86BlhNJghgePabEMoq86Kly0sjII
+ lmJ3ZAX2RUMysryW0J/s9Y210/JtMNeUgENT1b1iK8cOKoE/kPh38ImLFluDQsodfVT4XmpcmmjKq
+ rcNQDTErEhMmkAgE=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vQsaA-0002t3-SK for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Dec 2025 19:32:11 +0000
+ id 1vQumi-0007Rc-J2 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 03 Dec 2025 21:53:17 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 3F1B860125
+ by tor.source.kernel.org (Postfix) with ESMTP id EF29F60126
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  3 Dec 2025 19:32:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B29AC4CEF5;
- Wed,  3 Dec 2025 19:31:58 +0000 (UTC)
+ Wed,  3 Dec 2025 21:53:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A4A45C4CEFB
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  3 Dec 2025 21:53:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1764790319;
- bh=JQ73DsR3vSrwlgoERKzmcSkW9Qw/PCxxhEFOlNAOaEM=;
- h=From:To:Cc:Subject:Date:From;
- b=mZySEC99H7CU+jjMAeqEnydP7UxQHV96VkVIt8mur31YCqfGemquRT76yDTGmdJim
- n0WEDSQAzy9n1QpHLEgb26MUWcoorPi+vFDAoeXh2LURtMrGMykHmFuwBSCMG8CXwG
- 5itnzPoPQow6dfw+qHsRzsIEE36UsNkt9I7xfuLORvzUZYdA0LjVc2bqp63jr4fH5l
- JtTPGH+dC0IQ+x3eoeQewOiae+nDmdNNDv7ZGZ4rq17BA8h5gH55XKvbuuvxjDH7YB
- rE6Sn1p4ORI8mvvVMHLrETatp427Mzmh2TVEvS4MbhcwMSLOFRMxglGyTYaotVm6cU
- vyEdJ2iRR3zvQ==
-To: Zorro Lang <zlang@kernel.org>,
-	fstests@vger.kernel.org
-Date: Thu,  4 Dec 2025 03:31:47 +0800
-Message-ID: <20251203193147.3320893-1-chao@kernel.org>
-X-Mailer: git-send-email 2.52.0.223.gf5cc29aaa4-goog
+ s=k20201202; t=1764798785;
+ bh=lmyelhwr3+QPG1cXlnLPZC5I5MOMXPp1+N4SYMeynHI=;
+ h=Subject:From:Date:To:From;
+ b=Y6Jw8OTXm+FuaGzp5PHnurIuNECVUlDZV7ROseksXePIkYrF9pGKRC+Nid7uLDJTF
+ q0PW7H+gKyYvACoj62mIF8uF4bk9YAY6lA3QnW+YZmojaQxN7K5veZ12RGYobGLnpj
+ phd++KF+Au6OX+QmJZP0rf+GFB5kQp0gStUdDl3ia3C/n1taHTPaY/qs2OdC1UvQP0
+ 8fI/gf/vMmVNa7FhIf90dPJAFgl3AMy6MDgSrkirZTxulDwZQfgNVaHZ5Yr4oMHSuG
+ EwyNMl0M5B9yKh00nqHsvhmiQAq/6VzkQG43bf/SNl0rHPNZBeBX80Nov4t6NNt0jC
+ w3hDlq1Ujlocw==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+ by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
+ A0FE63AA9A81 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  3 Dec 2025 21:50:05 +0000 (UTC)
 MIME-Version: 1.0
+Message-Id: <176479860433.93351.964230492376811217.git-patchwork-summary@kernel.org>
+Date: Wed, 03 Dec 2025 21:50:04 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -77,11 +80,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: generic/233 3s ... - output mismatch (see
- /share/git/fstests/results//generic/233.out.bad)
- --- tests/generic/233.out 2025-01-12 21:57:40.259440359 +0800 +++
- /share/git/fstests/results//generic/233.out [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Series: block: ignore
+ __blkdev_issue_discard()
+ ret value Submitter: Chaitanya Kulkarni <ckulkarnilinux@gmail.com> Patchwork:
+ https://patchwork.kernel.org/project/f2fs/list/?series=1027128 Lore link:
+ h [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
@@ -92,9 +96,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vQsaA-0002t3-SK
-Subject: [f2fs-dev] [PATCH] common/quota: fix to wait for all inodes been
- evicted in _check_quota_usage()
+X-Headers-End: 1vQumi-0007Rc-J2
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,68 +109,32 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+From: patchwork-bot+f2fs--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: patchwork-bot+f2fs@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-generic/233  3s ... - output mismatch (see /share/git/fstests/results//generic/233.out.bad)
-    --- tests/generic/233.out   2025-01-12 21:57:40.259440359 +0800
-    +++ /share/git/fstests/results//generic/233.out.bad 2025-12-04 03:02:26.000000000 +0800
-    @@ -4,4 +4,12 @@
+Hello:
 
-     seed = S
-     Comparing user usage
-    +4c4
-    +< #1000     --   31476   32000   32000            994  1000  1000
-    +---
-    +> #1000     --   31476   32000   32000            944  1000  1000
-    ...
-    (Run 'diff -u /share/git/fstests/tests/generic/233.out /share/git/fstests/results//generic/233.out.bad'  to see the entire diff)
-Ran: generic/233
-Failures: generic/233
-Failed 1 of 1 tests
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-Sometimes, generic/233 will fail due to it founds inode count is mismatched
-in between in-memory one and on-disk one.
+Series: block: ignore __blkdev_issue_discard() ret value
+  Submitter: Chaitanya Kulkarni <ckulkarnilinux@gmail.com>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1027128
+  Lore link: https://lore.kernel.org/r/20251124234806.75216-1-ckulkarnilinux@gmail.com
+    Patches: [f2fs-dev,V3,1/6] block: ignore discard return value
+             [f2fs-dev,V3,5/6] f2fs: ignore discard return value
 
-The reason is cgroup v2 implementation requires to increase inode reference,
-and then attach it to thread related cgroup writeback structure, once it
-needs to switch once write owner changes of target inode, a kernel thread
-will process it and then release inode reference via evict_inode().
 
-So, sync & drop_cache may not guarantee all inodes being evicted, as cgroup
-has one more refernece on inodes during the time.
+Total patches: 2
 
-If inode has not been evicted, dquot inode reference will not be release, it
-will lead to inode quota mismatch.
-
-Let's add a delay to wait for cgroup switching completion before quota check.
-
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- common/quota | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/common/quota b/common/quota
-index a51386b1..de7e84e8 100644
---- a/common/quota
-+++ b/common/quota
-@@ -333,6 +333,9 @@ _check_quota_usage()
- 	# XXX: really need an ioctl instead of this big hammer
- 	echo 3 > /proc/sys/vm/drop_caches
- 
-+	# wait for inode_switch_wbs_wor_fn() to release inodes
-+	sleep 3
-+
- 	VFS_QUOTA=0
- 	case $FSTYP in
- 	ext2|ext3|ext4|f2fs|gfs2|bcachefs)
 -- 
-2.49.0
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
 
 
 
