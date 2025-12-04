@@ -2,102 +2,126 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93438CA1EF5
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 04 Dec 2025 00:25:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0F0DCA297A
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 04 Dec 2025 08:05:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Cc:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=4O0KQqZFwWeD/DkeRLsdaee1ywB3X4gIwwOAH+24IPc=; b=ljU7DG8DE9nnVBq8/svYW5gusV
-	EYkuAZH/U55yAcwDA1l6ajVzm7MU9sVRhAJJzrETdM+2jcWQFOaa2vmRYf+EGtzkdtGJZbqEG8LPF
-	qVu+DgCLkFoaU/hybVDEtlV/nm44NMFp1R/qR0qRwFutNCees2tdL9BOT6Q+OT1V0IcQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:To:Message-ID:Date:From:MIME-Version:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=9CVtn1YGseCQ0Er1Cuv+tFLCTgnQz1w9D55V+UaPy78=; b=iKS+nqfrHYEYHvx6+5up5wi7cB
+	qUG1ncmFCq0uZzEmXlC63Fyww+037fraN+mENa217+b+/0zoFxijf3eQKncr2i2Kv0nfq3xaFBb2H
+	bcE0haqHIBRFWHxiRjCWZ/5X6rBM/nYaKuV7i46p1WPtxhP+PhbX8GYMKjCiFHDXy914=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vQwE3-0000rj-FX;
-	Wed, 03 Dec 2025 23:25:35 +0000
+	id 1vR3PF-0004ue-AG;
+	Thu, 04 Dec 2025 07:05:38 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1vQwE2-0000rd-AH
+ (envelope-from <xiangyaof4free@gmail.com>) id 1vR3PE-0004uU-JE
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Dec 2025 23:25:34 +0000
+ Thu, 04 Dec 2025 07:05:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:MIME-Version:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=z498MzxAZteo/xwTRoG99m7sj4E0YFpbb9L3gGPbL58=; b=HRawgMgJq5jX4sfSHzwykmpcac
- pMbN8BttQ0/njipaJYXXJafsgGxk10/V+anOfIfl99BEJsY+eXuT7li87iaDAIKYSTCSmLJtMLHTC
- SH2E7fxeaNfZrc7cLIBuNCkH+KEO6S8lrIPkwHw384n316QpwWXd7J1Wz1htzBryg6fo=;
+ bh=fu9LIGU3B08cLYG+ac6xYeo0sy7rDicNFrIH0Yn7Rkw=; b=dywnyU/GNEigLJ6X3PTmWxYy8a
+ 7i5iJI4ykz3oUBNGUnTLuZ/rISFMZh6fAYJ/cJ1NQ4XnEPWJ86g3eJWAaW1zFCo6WfIcbdlqFlQoB
+ b6oqhGWHDTQ9YvZMNGfI0gOb5+1CEEPCxog6fxrj3H1pKzHAIuZgqosiLCmmNmt0g5+Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=z498MzxAZteo/xwTRoG99m7sj4E0YFpbb9L3gGPbL58=; b=CArsH+HMaBPFItToVRsFEXNdpG
- LeBSvIpZqgIXEwIOE90qOlqGJdbc7Tg8BllYb3kRG5f7vHGNuK0FX3/jdULg+g2lH4tiUwdwG9Qh/
- mRZ19XlaNBGGdYTWkW0GJEWq4vU6HntnHNYbY9hkRBD+eirUVmJ1185U2l19tPuDEG88=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :MIME-Version:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=fu9LIGU3B08cLYG+ac6xYeo0sy7rDicNFrIH0Yn7Rkw=; b=I
+ H7SHBnePvhiOTnP2eUfNU3S0kMiKeeKbSoojYuL71pGKC8AN0h7Wiy4ytUp7PihTAtb9z/P9COxmE
+ 1PPih9Dq09TsDeXLZR/IUlbgQYOvyQN3QVhf2XDWnQLoK4I25r+e491tfPgG+xRsKjSQ8UjuVHjtj
+ CKwQdNIzpriG++bg=;
+Received: from mail-qk1-f170.google.com ([209.85.222.170])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vQwE1-00077b-HN for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Dec 2025 23:25:34 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id B9A7A60176;
- Wed,  3 Dec 2025 23:25:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 430AEC19424;
- Wed,  3 Dec 2025 23:25:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1764804327;
- bh=sAJej4HZTiYDfV7VEYcwaKg9Xwk914WW6wlk1yPGQEk=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=pQzPjEFPD8N74U1fP1gOFDJDMKcIZviYG5+wt0HlBqPGc0RIFUQQW6xd4cnrlyWMq
- P+Mddndf3V5rcRbC1NkvnFKPsD5HVrspRuDuRkMuJ9YYxbmFpBdRpD5cOfet1H0e+F
- vD4Ikj+8E/yma5BlgCY/ipAKL46xBGTnuFDdnTI0H1jem5Y1DOlRFu4MWybtgZbb8G
- +mxx1ZViFrEiDfRwRcCTUIjWRvSOEfqBF9wlB+fLW9LQyTJBphmKyGONFOc72r6nQq
- kaOwqWlPK8LxWDOTkff6xuvGUAO0mEnPQAibAZRi8BipuaVQ5TAHTH1A9qX7jqJVJ9
- 424U5byWd05LQ==
-Date: Wed, 3 Dec 2025 23:25:25 +0000
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-mm@kvack.org, Matthew Wilcox <willy@infradead.org>
-Message-ID: <aTDG5RVirKFisCGT@google.com>
-References: <20251202013212.964298-1-jaegeuk@kernel.org>
- <20251202013212.964298-4-jaegeuk@kernel.org>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1vR3PF-0001Kz-19 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 04 Dec 2025 07:05:37 +0000
+Received: by mail-qk1-f170.google.com with SMTP id
+ af79cd13be357-8b2d6df99c5so190875085a.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 03 Dec 2025 23:05:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1764831926; x=1765436726; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fu9LIGU3B08cLYG+ac6xYeo0sy7rDicNFrIH0Yn7Rkw=;
+ b=fIkz+jg4CJJJIoN2vwb/iuHCII/0cuAh5k2oW9bZwPt2t6nvqNoC77HokY1mVmSQoY
+ FCAA8GTAewzlwWj6gigcERrNBVGVEA5VV+bfpzOyuSw+fOMWUdYVQQTQxu4g7poSEuQ6
+ POEJPjFqUKw7wcJ6+5CuePJzsZpmFuy5VzmPZTRi0gHAXVEWxL35wWx5jW1xUsLNrczn
+ eWHP1ZSyVibrDYz0GuCe9guwLcxE1ysCLVOn2pOD9c7gyXVuYfRftz0kIk5cuyGeoqO/
+ a5FR0bUSO25K8L5GcgmAK5qay285JEHGK00yLjMm2QbBuQDhuuIrLTj8IpYsz0VtiUqG
+ 3ATw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764831926; x=1765436726;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fu9LIGU3B08cLYG+ac6xYeo0sy7rDicNFrIH0Yn7Rkw=;
+ b=cq2rgdi9bEdATdlAcVtaAN7u/EJ8FeJsQpY5anGmu2GQSKO1DBSKodeYK5J8glqjgT
+ E+QfEPSuMx6Jx8poOG1WCBQ47lR/Oj4jVEJWmh+xiZpANPI3oRrVpWhdsothYF2T0Gb4
+ sKPaPpC5GMVr+LwuZ1i6c1r5ZRUqvgw3JDK5RgE2K6eGM3n/xn3Sl+ZZoY5nStD9/Pzx
+ dWb5GEeF5wiz4BHk0ba6z0rLmVqLTFpHwVnUsIHzuyQ9OlcETlGRXH7mLZA244TuTPfM
+ d6JVEbW96IzWtoovGrsGnUk24r9J9o4Opcm23VUhhR5+F0TkcKHlaBdUwj/p28FqCxek
+ mexg==
+X-Gm-Message-State: AOJu0Ywk6+E1Tkiux/ibt+Y61XomlaulgbFYKqxV53SJgbEwf7wbEwHr
+ qE2aNBpunDWfAKieg993avqjJlyYgqNOnJj1hFBIj9/HNtkzk9M28yGzDz7ndvNM5I5qwqz5BBB
+ MfEV/rcYfQqCXi5IWk0kD0wU6L3aOQMI=
+X-Gm-Gg: ASbGnctvtdwldWgTIadocdA34uqhpCZc46Zi9wgMNRTsf+7YwKnTRPODtkpHJU/kRyf
+ PzivyRZ8+buojs6vzS1Iilijsp3TngwbpIGHsHya1s8WyvaT67wQp8XcNOfHOuZaqmGJjrPD1LD
+ Dr5N4wVn+sIsYoFIXs8JSkVe6HirEg7yaaubGl/HeO6fB0M/jzMhHNiuX28Y28Pug3mCEVTOF0W
+ lttLDocnvnNCAn2GLRIBY/oOp0ghNn02VoIRppotnvAuWYm/76AxA6WpqdDTcEsUwx/scYifA==
+X-Google-Smtp-Source: AGHT+IFN9yCbbBcT2o5lccVyUHEr56YUyzEAVycYDoBY/C9fBgTzjKqlFTt5KCPmqkIZBRqB0rl9FsfG1JsNBjsMyeA=
+X-Received: by 2002:a05:620a:2942:b0:8a2:bff5:40e3 with SMTP id
+ af79cd13be357-8b6158c0350mr302674285a.38.1764831926001; Wed, 03 Dec 2025
+ 23:05:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20251202013212.964298-4-jaegeuk@kernel.org>
+From: yao xiao <xiangyaof4free@gmail.com>
+Date: Thu, 4 Dec 2025 15:05:14 +0800
+X-Gm-Features: AWmQ_blMhwpT3N7Az2ej8zsPRR15quptQ1bKSDmbDWbz3LNHDAVeIlQgS7p5Wrc
+Message-ID: <CACpam_YTgPkbgh_hHohOmRebJP-J+c8_GKFv6shChddTNk_iDQ@mail.gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+X-Spam-Report: Spam detection software, running on the system "sfi-spamd-1.hosts.colo.sdot.me",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch assigns the max folio order for readahead. After
- applying this patch, it starts with high-order page allocation successfully
- as shown in the below traces. Before: f2fs_fadvise: dev = (252,16), ino =
- 14, i_size = 4294967296 offset:0, len:536870912, advise:3 page_cache_sync_ra:
- dev=252:16 ino=e index=0 req_count=2048 order=0 size=0 async_size=0 ra_pages=2
- [...] Content analysis details:   (-0.2 points, 5.0 required)
- pts rule name              description
+ 
+ Content preview:  Hi, After re-examining the update_sit_entry() logic and its
+    callers, I realized that my assumption in the v2 patch was incorrect. The
+    value of del is strictly bounded in all valid call paths (either ±1 or -blocks_per_seg),
+    and valid_blocks is already limited by f2fs_usable_blks_in_seg(). Therefore
+    the arithmetic cannot overflow [...] 
+ 
+ Content analysis details:   (-0.2 points, 5.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
+                             domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vQwE1-00077b-HN
-Subject: Re: [f2fs-dev] [PATCH 3/3 v2] mm/readahead: try to allocate high
- order pages for FADVISE_FAV_WILLNEED
+                             envelope-from domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail provider
+                             [xiangyaof4free(at)gmail.com]
+  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.222.170 listed in wl.mailspike.net]
+X-Headers-End: 1vR3PF-0001Kz-19
+Subject: [f2fs-dev] =?utf-8?q?=5BPATCH_v2=5D_f2fs=3A_add_overflow/underflo?=
+	=?utf-8?q?w_checks_to_update=5Fsit=5Fentry=E2=80=94_please_ignore?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,118 +133,23 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch assigns the max folio order for readahead. After applying this patch,
-it starts with high-order page allocation successfully as shown in the below
-traces.
-
-Before:
- f2fs_fadvise: dev = (252,16), ino = 14, i_size = 4294967296 offset:0, len:536870912, advise:3
- page_cache_sync_ra: dev=252:16 ino=e index=0 req_count=2048 order=0 size=0 async_size=0 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=0 order=0 size=2048 async_size=1024 ra_pages=2048
- page_cache_sync_ra: dev=252:16 ino=e index=2048 req_count=2048 order=0 size=2048 async_size=1024 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_unbounded: dev=252:16 ino=e index=2048 nr_to_read=2048 lookahead_size=0
- page_cache_sync_ra: dev=252:16 ino=e index=4096 req_count=2048 order=0 size=2048 async_size=1024 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_unbounded: dev=252:16 ino=e index=4096 nr_to_read=2048 lookahead_size=0
- page_cache_sync_ra: dev=252:16 ino=e index=6144 req_count=2048 order=0 size=2048 async_size=1024 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_unbounded: dev=252:16 ino=e index=6144 nr_to_read=2048 lookahead_size=0
-...
- page_cache_sync_ra: dev=252:16 ino=e index=129024 req_count=2048 order=0 size=2048 async_size=1024 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_unbounded: dev=252:16 ino=e index=129024 nr_to_read=2048 lookahead_size=0
-
-After:
- f2fs_fadvise: dev = (252,16), ino = 14, i_size = 4294967296 offset:0, len:536870912, advise:3
- page_cache_sync_ra: dev=252:16 ino=e index=0 req_count=2048 order=0 size=0 async_size=0 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=0 order=2 size=2048 async_size=1024 ra_pages=2048
- page_cache_sync_ra: dev=252:16 ino=e index=2048 req_count=2048 order=2 size=2048 async_size=1024 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=2048 order=4 size=2048 async_size=1024 ra_pages=2048
- page_cache_sync_ra: dev=252:16 ino=e index=4096 req_count=2048 order=4 size=2048 async_size=1024 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=4096 order=6 size=2048 async_size=1024 ra_pages=2048
- page_cache_sync_ra: dev=252:16 ino=e index=6144 req_count=2048 order=6 size=2048 async_size=1024 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=6144 order=8 size=2048 async_size=1024 ra_pages=2048
- page_cache_sync_ra: dev=252:16 ino=e index=8192 req_count=2048 order=8 size=2048 async_size=1024 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=8192 order=10 size=2048 async_size=1024 ra_pages=2048
- page_cache_sync_ra: dev=252:16 ino=e index=10240 req_count=2048 order=9 size=2048 async_size=1024 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=10240 order=11 size=2048 async_size=1024 ra_pages=2048
-...
- page_cache_ra_order: dev=252:16 ino=e index=126976 order=11 size=2048 async_size=1024 ra_pages=2048
- page_cache_sync_ra: dev=252:16 ino=e index=129024 req_count=2048 order=9 size=2048 async_size=1024 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=129024 order=11 size=2048 async_size=1024 ra_pages=2048
- page_cache_async_ra: dev=252:16 ino=e index=1024 req_count=2048 order=9 size=2048 async_size=1024 ra_pages=2048 mmap_miss=0 prev_pos=-1
-
-For comparion, this is the trace of madvise(MADV_POPULATE_READ) which bumps up the order by 2.
- page_cache_ra_order: dev=252:16 ino=e index=0 order=0 size=2048 async_size=512 ra_pages=2048
- f2fs_filemap_fault: dev = (252,16), ino = 14, index = 0, flags: WRITE|KILLABLE|USER|REMOTE|0x8082000, ret: MAJOR|RETRY
- page_cache_async_ra: dev=252:16 ino=e index=1536 req_count=2048 order=0 size=2048 async_size=512 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=2048 order=2 size=2048 async_size=2048 ra_pages=2048
- f2fs_filemap_fault: dev = (252,16), ino = 14, index = 1536, flags: WRITE|KILLABLE|USER|REMOTE|0x8082000, ret: RETRY
- page_cache_async_ra: dev=252:16 ino=e index=2048 req_count=2048 order=2 size=2048 async_size=2048 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=4096 order=4 size=2048 async_size=2048 ra_pages=2048
- f2fs_filemap_fault: dev = (252,16), ino = 14, index = 2048, flags: WRITE|KILLABLE|USER|REMOTE|0x8082000, ret: RETRY
- page_cache_async_ra: dev=252:16 ino=e index=4096 req_count=2048 order=4 size=2048 async_size=2048 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=6144 order=6 size=2048 async_size=2048 ra_pages=2048
- f2fs_filemap_fault: dev = (252,16), ino = 14, index = 4096, flags: WRITE|KILLABLE|USER|REMOTE|0x8082000, ret: RETRY
- page_cache_async_ra: dev=252:16 ino=e index=6144 req_count=2048 order=6 size=2048 async_size=2048 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=8192 order=8 size=2048 async_size=2048 ra_pages=2048
- f2fs_filemap_fault: dev = (252,16), ino = 14, index = 6144, flags: WRITE|KILLABLE|USER|REMOTE|0x8082000, ret: RETRY
- page_cache_async_ra: dev=252:16 ino=e index=8192 req_count=2048 order=8 size=2048 async_size=2048 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=10240 order=10 size=2048 async_size=2048 ra_pages=2048
- f2fs_filemap_fault: dev = (252,16), ino = 14, index = 8192, flags: WRITE|KILLABLE|USER|REMOTE|0x8082000, ret: RETRY
- page_cache_async_ra: dev=252:16 ino=e index=10240 req_count=2048 order=9 size=2048 async_size=2048 ra_pages=2048 mmap_miss=0 prev_pos=-1
-...
- f2fs_filemap_fault: dev = (252,16), ino = 14, index = 518144, flags: WRITE|KILLABLE|USER|REMOTE|0x8082000, ret: RETRY
- page_cache_async_ra: dev=252:16 ino=e index=520192 req_count=2048 order=9 size=2048 async_size=2048 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=522240 order=11 size=2048 async_size=2048 ra_pages=2048
- f2fs_filemap_fault: dev = (252,16), ino = 14, index = 520192, flags: WRITE|KILLABLE|USER|REMOTE|0x8082000, ret: RETRY
- page_cache_async_ra: dev=252:16 ino=e index=522240 req_count=2048 order=9 size=2048 async_size=2048 ra_pages=2048 mmap_miss=0 prev_pos=-1
- page_cache_ra_order: dev=252:16 ino=e index=524288 order=11 size=2048 async_size=2048 ra_pages=2048
- f2fs_filemap_fault: dev = (252,16), ino = 14, index = 522240, flags: WRITE|KILLABLE|USER|REMOTE|0x8082000, ret: RETRY
-
-Cc: linux-mm@kvack.org
-Cc: Matthew Wilcox (Oracle) <willy@infradead.org>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
-
- Change log from v1:
-  - take the same madvise() behavior which bumps up ra->order by 2.
-
- mm/readahead.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/mm/readahead.c b/mm/readahead.c
-index 54c78f8276fe..61a469117209 100644
---- a/mm/readahead.c
-+++ b/mm/readahead.c
-@@ -593,7 +593,8 @@ void page_cache_sync_ra(struct readahead_control *ractl,
- 	 * trivial case: (index - prev_index) == 1
- 	 * unaligned reads: (index - prev_index) == 0
- 	 */
--	if (!index || req_count > max_pages || index - prev_index <= 1UL) {
-+	if (!index || req_count > max_pages || index - prev_index <= 1UL ||
-+	    mapping_large_folio_support(ractl->mapping)) {
- 		ra->start = index;
- 		ra->size = get_init_ra_size(req_count, max_pages);
- 		ra->async_size = ra->size > req_count ? ra->size - req_count :
-@@ -627,7 +628,7 @@ void page_cache_sync_ra(struct readahead_control *ractl,
- 	ra->size = min(contig_count + req_count, max_pages);
- 	ra->async_size = 1;
- readit:
--	ra->order = 0;
-+	ra->order += 2;
- 	ractl->_index = ra->start;
- 	page_cache_ra_order(ractl, ra);
- }
--- 
-2.52.0.223.gf5cc29aaa4-goog
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+SGksCgpBZnRlciByZS1leGFtaW5pbmcgdGhlIHVwZGF0ZV9zaXRfZW50cnkoKSBsb2dpYyBhbmQg
+aXRzIGNhbGxlcnMsCkkgcmVhbGl6ZWQgdGhhdCBteSBhc3N1bXB0aW9uIGluIHRoZSB2MiBwYXRj
+aCB3YXMgaW5jb3JyZWN0LgoKVGhlIHZhbHVlIG9mIGRlbCBpcyBzdHJpY3RseSBib3VuZGVkIGlu
+IGFsbCB2YWxpZCBjYWxsIHBhdGhzCihlaXRoZXIgwrExIG9yIC1ibG9ja3NfcGVyX3NlZyksIGFu
+ZCB2YWxpZF9ibG9ja3MgaXMgYWxyZWFkeSBsaW1pdGVkCmJ5IGYyZnNfdXNhYmxlX2Jsa3NfaW5f
+c2VnKCkuClRoZXJlZm9yZSB0aGUgYXJpdGhtZXRpYyBjYW5ub3Qgb3ZlcmZsb3cgYmVmb3JlIHRo
+ZSBleGlzdGluZwpmMmZzX2J1Z19vbigpIHJhbmdlIGNoZWNrIGlzIGV4ZWN1dGVkLgoKQXMgYSBy
+ZXN1bHQsIHRoZSBvdmVyZmxvdy91bmRlcmZsb3cgY2hlY2tzIGludHJvZHVjZWQgaW4gbXkgcGF0
+Y2ggYXJlCnVubmVjZXNzYXJ5LgpQbGVhc2UgaWdub3JlIHRoaXMgcGF0Y2guCgpTb3JyeSBmb3Ig
+dGhlIG5vaXNlLCBhbmQgdGhhbmsgeW91IGZvciB5b3VyIHRpbWUuCgpCZXN0IHJlZ2FyZHMsCllh
+byBYaWFvCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+TGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3Vy
+Y2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8v
+bGludXgtZjJmcy1kZXZlbAo=
