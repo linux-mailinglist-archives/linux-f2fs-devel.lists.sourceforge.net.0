@@ -2,7 +2,7 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95012CB0B58
+	by mail.lfdr.de (Postfix) with ESMTPS id 8528BCB0B54
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 09 Dec 2025 18:22:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -10,93 +10,97 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=cVgNCE8nTBpTG44Fa7arTnCzJUzXvBI7VfZSO8J9uzw=; b=lnmzHuP+asDikMtbAyIhdmCn1/
-	8mEs8BXNK7HqPPOkob4+zEL64FUy5RJGVkiazW3hwmH9Ish8F4pYa9RKgLmgsAkTYSlQBkbbYg9O7
-	8mg7A2KwQiWPKX+B0kKYLoE1tf90PXjj2Uil9HXxoLwjdJwaSYzNP4liVLlp24eHo+Lw=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=A630GwVYtnkcpDZBuhzunIo8B+/vxV3mttNh9uHlWBo=; b=GfdR0L/Ya5hEDeGCktvqA3DSC3
+	SMGI5PVvmlAPqMVoCSuC57i/zFWa37fVTqpzP4qMtauZXJpKJECFeCV8gmPafCLEGOwjVD0uN8vQm
+	3zgTvkSbJlAelGhIHC8X56ze0qgbnmgWDqazditAskyOxmvGdQhQXD5HM1NfuPbzNi1Y=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vT1Pj-0004dN-DX;
-	Tue, 09 Dec 2025 17:22:16 +0000
+	id 1vT1Pm-0003Z4-29;
+	Tue, 09 Dec 2025 17:22:18 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vT1PX-0004bv-2x
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vT1PY-0003YX-FR
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 09 Dec 2025 17:22:03 +0000
+ Tue, 09 Dec 2025 17:22:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jpc1/790a/fIVeMUOKaoWtoTbCzKwQ4S6SVyK6PxGUc=; b=IQ13cezO+oRKrRLXFPFvT/Lot9
- 81Egq+Jfpf2uA8CwC711tjAucmRUIKSjJQhuwUlHeRZE2/J+nfXn1Mv9wkIE9SKuA75ty/JlTXENv
- asASTNxO6wHEFBewVjSLKl/gqbFWa0FR+tN8DjgU/wZU/xppyZFFSzhsk5Bb4kOPij9A=;
+ bh=3z9G3lTRcxZ+IB1QoPmw4T1KLdARSXgqL4TaBex+T4w=; b=JCWo8inTvBFeMWGRq/1UI5kUM0
+ SLy54+NSU9uIQxvDezUJ9sb2TmtzobTJia9kb9Rm7MYVha2rESOdVHfmcTwvpjYAphYzuLE8WMs60
+ E4qTW7cbhKUvVSwPGBsa9xx33FuMNVbs4hXfizIss1KqUpM9UHzrscZ/E9j7cc4+gOko=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jpc1/790a/fIVeMUOKaoWtoTbCzKwQ4S6SVyK6PxGUc=; b=dGuOoWG+gihQTsEIYCUzqIPLCg
- taTUQTf6L78BD/WvDGZJyDmzmbW2znX8Kz25uI0c8vSoIJ2YOCuAHiTSWX/avXszulr7WV8dKJRWu
- 8Msq3e2bRjAswQH8m2sl74mru+7BJP5+Gvw6H3z23ya7KwDV6R/fm94Pom60E/uaDgdw=;
+ bh=3z9G3lTRcxZ+IB1QoPmw4T1KLdARSXgqL4TaBex+T4w=; b=LVIXbnTGEzxIuE2h3+XdyJCA13
+ jpxOaRxI/EB6lxDuwdY35upop2CMqLjaYcnrKVrSarVUUT6wOT77doAXMPE5H8KSIfZFdzmcqQBfQ
+ yqN7Q5xHJz3MGnUI5g268SbWDvsh8EMQ+bNpQOE4pvHVUcapmfkzBtTHgPCEb8QsS/7E=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vT1PX-00010O-50 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 09 Dec 2025 17:22:03 +0000
+ id 1vT1PT-0000zv-Ij for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 09 Dec 2025 17:21:59 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C73FF444D1;
- Tue,  9 Dec 2025 17:21:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A2988C4CEF5;
- Tue,  9 Dec 2025 17:21:52 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 4E41D444C7;
+ Tue,  9 Dec 2025 17:21:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31953C4CEF5;
+ Tue,  9 Dec 2025 17:21:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1765300912;
- bh=4D7MGFxeRJTDY1I7TVqNGOxjKxHrYX8Xu/NQUp33yQY=;
+ s=k20201202; t=1765300914;
+ bh=myGVRalgrsbtvRWYKHHOrkm0sXCxbKG58e5Al9NBxgY=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=ZuUNgvto237oQlEXMdNAwfCle3hrlKfTdWltwxprsJTDwDSOdfrCe6Lc0w70aYteg
- USDyX2OxNMDGgtWaUvicOUoeIciT2t7tAOw3WDlhOMzTKJeRy4m0i+RWtaUBFa7E/C
- Fh64065DCj12G8NmPeComkTbsyqVXopIMgdcUxuhBpB7h2CHxjNtePOG2zHBH1ffFn
- jYf9fNs4YEVS13NGMzinskDsNMCoWsCgmTtfmDYOQcD1Rw43ZeZ7C07/EiBlJbd9QX
- ILeieRrStbLL0RC69ydyLES/kPMYSQcagtEyRshqmJjUXuvmVrcEofuvPcdhc/bh6r
- wr318dPlMkLHw==
+ b=OrEbx/X4K6wBSSKwU0WbMdK8zz6f2QVZ2bc/SDpB7azF59Mv1wmjhDUxlHoxviwFf
+ YPffS438MwrcZBTso9ikk/QUa2hLyE/W4cZ9W2IHTsEwpujcI4Z4n4r6XlLDMCZDAS
+ QqnTpY1QLIbdF+snSu2TCFpDGpXzyqXQu/PYIODcU2BR7O8j3PXIglGcnSZNTbsVWR
+ FXpPxX4L4ceGKssMw4ZJ0gk4MNgLAqclRe8zQE5yRjjfnC5n/VA6icIIU4lMLmeotH
+ aZfpkEXFS1W8J8mnQxAeOmNc5h6BQ73MzjFUg5UYUeTXyxStazYK9+m7r+oliu9VnC
+ vHfAnSPG5yxjA==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- F2AFB3808200; Tue,  9 Dec 2025 17:18:48 +0000 (UTC)
+ 788153808200; Tue,  9 Dec 2025 17:18:50 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <176530072781.4018985.3920629164173659180.git-patchwork-notify@kernel.org>
-Date: Tue, 09 Dec 2025 17:18:47 +0000
-References: <20251124234806.75216-1-ckulkarnilinux@gmail.com>
-In-Reply-To: <20251124234806.75216-1-ckulkarnilinux@gmail.com>
-To: Chaitanya Kulkarni <ckulkarnilinux@gmail.com>
+Message-Id: <176530072903.4018985.4925454806084370297.git-patchwork-notify@kernel.org>
+Date: Tue, 09 Dec 2025 17:18:49 +0000
+References: <20251024170822.1427218-6-willy@infradead.org>
+In-Reply-To: <20251024170822.1427218-6-willy@infradead.org>
+To: Matthew Wilcox <willy@infradead.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jens Axboe <axboe@kernel.dk>: On Mon, 24 Nov 2025 15:48:00 -0800 you wrote:
- > Hi, > > __blkdev_issue_discard() only returns value 0, that makes post
- call > error checking code dead. This patch series revmoes this dead code
- at > al [...] 
+ Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
+ Christian Brauner <brauner@kernel.org>: On Fri, 24 Oct 2025 18:08:13 +0100
+ you wrote: > This is one instruction more efficient than open-coding
+ folio_pos()
+ + > folio_size(). It's the equivalent of (x + y) << z rather than > x <<
+ z + y << z. [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [172.234.252.31 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vT1PX-00010O-50
-Subject: Re: [f2fs-dev] [PATCH V3 0/6] block: ignore
- __blkdev_issue_discard() ret value
+X-Headers-End: 1vT1PT-0000zv-Ij
+Subject: Re: [f2fs-dev] [PATCH 05/10] f2fs: Use folio_next_pos()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,48 +115,32 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: axboe@kernel.dk, dm-devel@lists.linux.dev, kch@nvidia.com, sagi@grimberg.me,
- linux-xfs@vger.kernel.org, linux-block@vger.kernel.org, cem@kernel.org,
- snitzer@kernel.org, linux-kernel@vger.kernel.org,
- linux-nvme@lists.infradead.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-raid@vger.kernel.org, song@kernel.org, mpatocka@redhat.com,
- jaegeuk@kernel.org, bpf@vger.kernel.org, yukuai@fnnas.com, hch@lst.de,
- agk@redhat.com
+Cc: linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, brauner@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This series was applied to jaegeuk/f2fs.git (dev)
-by Jens Axboe <axboe@kernel.dk>:
+This patch was applied to jaegeuk/f2fs.git (dev)
+by Christian Brauner <brauner@kernel.org>:
 
-On Mon, 24 Nov 2025 15:48:00 -0800 you wrote:
-> Hi,
+On Fri, 24 Oct 2025 18:08:13 +0100 you wrote:
+> This is one instruction more efficient than open-coding folio_pos() +
+> folio_size().  It's the equivalent of (x + y) << z rather than
+> x << z + y << z.
 > 
-> __blkdev_issue_discard() only returns value 0, that makes post call
-> error checking code dead. This patch series revmoes this dead code at
-> all the call sites and adjust the callers.
-> 
-> Please note that it doesn't change the return type of the function from
-> int to void in this series, it will be done once this series gets merged
-> smoothly.
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> Cc: Chao Yu <chao@kernel.org>
+> Cc: linux-f2fs-devel@lists.sourceforge.net
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,V3,1/6] block: ignore discard return value
-    https://git.kernel.org/jaegeuk/f2fs/c/7d09a8e25121
-  - [f2fs-dev,V3,2/6] md: ignore discard return value
-    (no matching commit)
-  - [f2fs-dev,V3,3/6] dm: ignore discard return value
-    (no matching commit)
-  - [f2fs-dev,V3,4/6] nvmet: ignore discard return value
-    (no matching commit)
-  - [f2fs-dev,V3,5/6] f2fs: ignore discard return value
-    (no matching commit)
-  - [f2fs-dev,V3,6/6] xfs: ignore discard return value
-    (no matching commit)
+  - [f2fs-dev,05/10] f2fs: Use folio_next_pos()
+    https://git.kernel.org/jaegeuk/f2fs/c/4fcafa30b70a
 
 You are awesome, thank you!
 -- 
