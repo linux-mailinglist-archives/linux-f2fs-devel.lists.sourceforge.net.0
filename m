@@ -2,109 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DFA4CD4ADC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Dec 2025 05:09:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7A09CD5526
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Dec 2025 10:28:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:From:Message-ID:Date:MIME-Version:Sender:Reply-To:Cc:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=XbDnmiAFYfZ1xk04re4avBX40U+CgjdZtO4DrzdFvoY=; b=MawRlR3hTgMkeBDtqRpPMHkFYs
-	C/JV2MHj1lyJkdxlfymOtCmPebXFltV4zFzOPUT7vzbz2lMxaDTF3Gn25TEknk7v9QJ0O6Va1vfyY
-	3ghM1EOmm8twYpEYtc2g8xB4pkfEG4wbgfrYo9yfQRU9yuD0UK9T6ZeSGzj2PfYUV7PE=;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=WRwCgzisBexkXa7Y2Ilr0V1ztl+fLnTLbhnUsnpf6qk=; b=ezgHeLYoRhHYXYc7+vv2r0uKvh
+	gvOUVO9IlTg3uNgmOxsC+2pJNuYsVR0Q6PzJwex5GTZFfsAOLxBOU6T03wuvncJJ4KNa+EoysGTuQ
+	jVJixpeUopalq0Jkn6jvvX/elhUovl0qMfK/n2TxEFqkEq/oc1b4EgUfQiMUEZVbq2co=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vXXEl-00077r-0O;
-	Mon, 22 Dec 2025 04:09:35 +0000
+	id 1vXcD6-0004l2-HG;
+	Mon, 22 Dec 2025 09:28:12 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3QcRIaQkbAD4x34pfqqjwfuuni.lttlqjzxjwhtsyjsy.htr@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1vXXDx-00076z-1g for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 Dec 2025 04:08:45 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <chao@kernel.org>) id 1vXcD5-0004kw-Hl
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 22 Dec 2025 09:28:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FqONxUBmgF3KppMbe3CjW7FtwP62edFUBdK7onsC2Q4=; b=NPejG3XYEz104vNA/Oo8k6EhoQ
- 6N9ijoyXTmqPH5YQel/I9ayHNR95MhmWvbO2w3NZNELJhTe1x99b/nHstuTicgEa1SJ597LfphdkT
- g9nNevrPtp7oS+dgJpZwXbIVxeGgoA1ZecuvNuqldIsODCt/muP1qA+bjquZ4GRchPSA=;
+ bh=S+md5InQ3hu3bHugt3EOsltvG2ZN6GracIeAtGVW9Rk=; b=Qv4x3aWjbYgAGTvnkR2fSqwNLl
+ 8udRqywk5NzyxizF1d6jUu7WaT4yM99xKOKl2QsiWBv6v61wS/Ywcq+39zgjKJRdyozw8OmRcmt1U
+ Fpe7nfsHGdaZP6obd8ieb4TctNfhK/fhlMfmGxg6ePeWsCdzqsehddRg2dMUbhJQc72Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=FqONxUBmgF3KppMbe3CjW7FtwP62edFUBdK7onsC2Q4=; b=T
- mia6xm/zAw1HYFy+VJIWlaUL5DoXUiZs3BkzDOsEUKQDSrVxKsNvhSnXhG0Cbd0/2jLTsKORDq7yg
- GwHd7gUsHBrt556Ydxs7n3Xkj1gzQejiBh0CQjgg5VH5RvV9DREw8L5bjquc6oVkujFUQdfG/Q6v7
- gGHZyHiTl1E5mWUU=;
-Received: from mail-oo1-f78.google.com ([209.85.161.78])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=S+md5InQ3hu3bHugt3EOsltvG2ZN6GracIeAtGVW9Rk=; b=I2Y44wGjrrSQj4nyZxM3Gkq+ug
+ dYlrmisCZJvgqwHyqRdXFvCmKIpkNvsEkQnHZE1Utz8dx8nT+ke+I1eOK+K+n+AWl1yIxPvvc9EHi
+ s6VAgcxmHYMIgYVjV0ewKQeGBHV6TrxmurvAnZfmS/utUf1JkgImc32C9g3FL42A66e8=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vXXDw-0002En-4i for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 Dec 2025 04:08:44 +0000
-Received: by mail-oo1-f78.google.com with SMTP id
- 006d021491bc7-65b73eb22d2so3569284eaf.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 21 Dec 2025 20:08:44 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766376513; x=1766981313;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=FqONxUBmgF3KppMbe3CjW7FtwP62edFUBdK7onsC2Q4=;
- b=E+boK7mRlXAW8NsZkql+iolcA1otjQ+PbO1XAiRQ2LA9cgAw/OVZOJ5Cw/aB6t9UH/
- gRijH+En+TztdOOjG0Aiwhr63LUpDBZUA+77sUveJOloJbv8+i0xMrZiCbhp19HcKhEA
- Oxo+FfSydQUFK2WzMfCYelvvnlrIn2phabhWJZbEiG6RQxPtAWLFdCc4kqwFK6+3rIuf
- fKk23E3RF9T2gl1jy74poXbsv8CBNyRMv7zxWzpFLt1Nxu1eL5BuAjQbLLuIvC01BgbV
- ugqnG5OtCv0KgZX1j9HmbVv+Z4h0LRm3XN1gEXDYySfuJILjFlGvgglykGN7Hj/SCST/
- LzPQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXN7i2Ivf3r+fBdAuwxhsV9tXYkfZp4We1OJIv1nbyp+bKGt1YYZZAztwo9FlDLA+F7CW1mZ32dKhRYZ9Rc3Wnv@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Ywvf/nuj97fVD5+dWasrnOJwIrN4MCrkEoqAwpw9HIaWm3SvRUU
- oE+NKpty9gWNF0edzsYwFB/Y7XkfmMPbrytJ4+T7amYFSij50v40Zxq/GTu3MxtKVvDVvYFw3yW
- kJaW9sLHYUccTeS+lsZlTf1ERNrmrbDGMgNvyW9Gnw5zRcDUxEULelT7k9pk=
-X-Google-Smtp-Source: AGHT+IFxxqXEk6GweRphhi0JYj/9AiV/0x9q8FOaYG9LTAbVtjQnF5jSGUST9berfIMRnMFEv7H/C3TdC8NyCeBVsgF0C0h+99rg
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1vXcD4-00052J-52 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 22 Dec 2025 09:28:11 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id C379A4031F;
+ Mon, 22 Dec 2025 09:27:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4766BC4CEF1;
+ Mon, 22 Dec 2025 09:27:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1766395679;
+ bh=a+IsRXjZdg4fTpwan2mQYgSVE/7I90VN4ebz2rMsryE=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=rIIgX3xyJLKLgN1nqeQP0aeog5LGUPCfcC4DPK3JJefDl2S3DyeK5rGTv06Ir9Ake
+ ei2v+t2ZpUhd/pDGZPV4nkRx6T3PWisgrTWLGBRy2MgsAVNDOEytH+dq/lggpWUUE2
+ 3EmEq/yuAokAgTGXo/cUTUMlyQdOFznNvNLLFw+C0jImF+KPRPXQ6Yln7Ini4Q4PLP
+ wsZ1s4mjKQ5EzhIYhxb3UHSoLWmHZByRWfaa4lDbdgojutTmjJ9nbb3alrd8Ri9SdV
+ ftDqOMP5+j1vMUtsayyu1CX2ep88784zJD8Bq3/v+HgfoKh5Mgo4y/sVBbL5zRoLT8
+ LK8Gl9rd59IWw==
+Message-ID: <c7f171bd-eebe-424e-92f7-439bee25458d@kernel.org>
+Date: Mon, 22 Dec 2025 17:27:56 +0800
 MIME-Version: 1.0
-X-Received: by 2002:a05:6820:1c9f:b0:65d:1636:5442 with SMTP id
- 006d021491bc7-65d16365c4bmr4076010eaf.56.1766376513507; Sun, 21 Dec 2025
- 20:08:33 -0800 (PST)
-Date: Sun, 21 Dec 2025 20:08:33 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <6948c441.a70a0220.25eec0.007f.GAE@google.com>
-From: syzbot <syzbot+b4444e3c972a7a124187@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.3 (/)
+User-Agent: Mozilla Thunderbird
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20251221032336.3374290-1-daeho43@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20251221032336.3374290-1-daeho43@gmail.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 765b233a9b94
- Merge tag 'i2c-for-6.19-rc2' of git://git.ker.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=17a56b1a580000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.3 points, 5.0 required)
+ Content preview:  On 12/21/25 11:23, Daeho Jeong wrote: > From: Daeho Jeong
+ <daehojeong@google.com> > > The recent increase in the number of Segment
+ Summary
+ Area (SSA) entries > from 512 to 2048 was an unintentional ch [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.161.78 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vXXDw-0002En-4i
-Subject: [f2fs-dev] [syzbot] [f2fs?] KASAN: use-after-free Read in
- f2fs_write_end_io (2)
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1vXcD4-00052J-52
+Subject: Re: [f2fs-dev] [PATCH v5] f2fs-tools: revert summary entry count
+ from 2048 to 512 in 16kb block support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,264 +108,640 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+On 12/21/25 11:23, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> The recent increase in the number of Segment Summary Area (SSA) entries
+> from 512 to 2048 was an unintentional change in logic of 16kb block
+> support. This commit corrects the issue.
+> 
+> To better utilize the space available from the erroneous 2048-entry
+> calculation, we are implementing a solution to share the currently
+> unused SSA space with neighboring segments. This enhances overall
+> SSA utilization without impacting the established 8MB segment size.
+> 
+> Fixes: 50fd00b168d7 ("f2fs-tools: Support different block sizes")
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> ---
+> v5: support both old and new format with packed_ssa feature option
+> v4: move enabling the feature position.
+> v3: add a feature to prevent from mounting deprecated format
+> v2: detect legacy layout and prevent mount.
+>     fix ssa block calculation bug in resize tool.
+> ---
+>  fsck/f2fs.h             | 27 ++++++++++-
+>  fsck/fsck.c             | 16 +++----
+>  fsck/inject.c           |  4 +-
+>  fsck/mount.c            | 51 ++++++++++-----------
+>  fsck/resize.c           | 99 ++++++++++++++++++++++++++---------------
+>  include/f2fs_fs.h       | 17 ++++---
+>  lib/libf2fs_io.c        | 12 +++++
+>  mkfs/f2fs_format.c      | 10 ++++-
+>  mkfs/f2fs_format_main.c |  6 +++
+>  9 files changed, 158 insertions(+), 84 deletions(-)
+> 
+> diff --git a/fsck/f2fs.h b/fsck/f2fs.h
+> index 60e3a2e..5e7eb63 100644
+> --- a/fsck/f2fs.h
+> +++ b/fsck/f2fs.h
+> @@ -447,12 +447,37 @@ static inline block_t __end_block_addr(struct f2fs_sb_info *sbi)
+>  	(SM_I(sbi) ? SM_I(sbi)->seg0_blkaddr :				\
+>  		le32_to_cpu(F2FS_RAW_SUPER(sbi)->segment0_blkaddr))
+>  
+> +#define SUMS_PER_BLOCK (F2FS_BLKSIZE / F2FS_SUM_BLKSIZE)
+>  #define GET_SUM_BLKADDR(sbi, segno)					\
+> -	((sbi->sm_info->ssa_blkaddr) + segno)
+> +	(c.feature & F2FS_FEATURE_PACKED_SSA ? \
+> +	((SM_I(sbi)->ssa_blkaddr) + (segno) / SUMS_PER_BLOCK) : \
+> +	((SM_I(sbi)->ssa_blkaddr) + (segno)))
+> +#define GET_SUM_BLKOFF(segno)					\
+> +	(c.feature & F2FS_FEATURE_PACKED_SSA ? \
+> +	((segno) % SUMS_PER_BLOCK) : 0)
+>  
+>  #define GET_SEGOFF_FROM_SEG0(sbi, blk_addr)				\
+>  	((blk_addr) - SM_I(sbi)->seg0_blkaddr)
+>  
+> +static inline int write_sum_block(struct f2fs_sb_info *sbi,
+> +		void *buf, unsigned int segno, enum rw_hint whint)
 
-syzbot found the following issue on:
+What do you think of changing parameters as below?
 
-HEAD commit:    765b233a9b94 Merge tag 'i2c-for-6.19-rc2' of git://git.ker..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=17a56b1a580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=513255d80ab78f2b
-dashboard link: https://syzkaller.appspot.com/bug?extid=b4444e3c972a7a124187
-compiler:       Debian clang version 20.1.8 (++20250708063551+0c9f909b7976-1~exp1~20250708183702.136), Debian LLD 20.1.8
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=174b0b58580000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=162f8b1a580000
+static inline int write_sum_block(struct f2fs_sb_info *sbi,
+		void *buf, block_t block, unsigned blkoff, enum rw_hint whint)
 
-Downloadable assets:
-disk image (non-bootable): https://storage.googleapis.com/syzbot-assets/d900f083ada3/non_bootable_disk-765b233a.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/f8288fd6c7cc/vmlinux-765b233a.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/2a2ef1044b19/bzImage-765b233a.xz
-mounted in repro: https://storage.googleapis.com/syzbot-assets/333719a5e15d/mount_1.gz
-  fsck result: failed (log: https://syzkaller.appspot.com/x/fsck.log?x=17faddb4580000)
+So we can use this function to clean up codes in other places.
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+b4444e3c972a7a124187@syzkaller.appspotmail.com
+> +{
+> +	if (c.feature & F2FS_FEATURE_PACKED_SSA)
+> +		return dev_write_4k_block(buf, GET_SUM_BLKADDR(sbi, segno),
+> +				GET_SUM_BLKOFF(segno), whint);
+> +	return dev_write_block(buf, GET_SUM_BLKADDR(sbi, segno), whint);
+> +}
+> +
+> +static inline int read_sum_block(struct f2fs_sb_info *sbi,
+> +		void *buf, unsigned int segno)
 
-==================================================================
-BUG: KASAN: slab-use-after-free in instrument_atomic_read include/linux/instrumented.h:68 [inline]
-BUG: KASAN: slab-use-after-free in atomic_read include/linux/atomic/atomic-instrumented.h:32 [inline]
-BUG: KASAN: slab-use-after-free in get_pages fs/f2fs/f2fs.h:2718 [inline]
-BUG: KASAN: slab-use-after-free in f2fs_write_end_io+0x9b9/0xb60 fs/f2fs/data.c:364
-Read of size 4 at addr ffff88804357d170 by task kworker/u4:4/45
+Ditto,
 
-CPU: 0 UID: 0 PID: 45 Comm: kworker/u4:4 Not tainted syzkaller #0 PREEMPT(full) 
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2~bpo12+1 04/01/2014
-Workqueue: loop0 loop_workfn
-Call Trace:
- <TASK>
- dump_stack_lvl+0xe8/0x150 lib/dump_stack.c:120
- print_address_description mm/kasan/report.c:378 [inline]
- print_report+0xca/0x240 mm/kasan/report.c:482
- kasan_report+0x118/0x150 mm/kasan/report.c:595
- check_region_inline mm/kasan/generic.c:-1 [inline]
- kasan_check_range+0x2b0/0x2c0 mm/kasan/generic.c:200
- instrument_atomic_read include/linux/instrumented.h:68 [inline]
- atomic_read include/linux/atomic/atomic-instrumented.h:32 [inline]
- get_pages fs/f2fs/f2fs.h:2718 [inline]
- f2fs_write_end_io+0x9b9/0xb60 fs/f2fs/data.c:364
- blk_update_request+0x57e/0xe60 block/blk-mq.c:1007
- blk_mq_end_request+0x3e/0x70 block/blk-mq.c:1169
- lo_rw_aio_complete drivers/block/loop.c:337 [inline]
- lo_rw_aio+0xcd1/0xef0 drivers/block/loop.c:410
- do_req_filebacked drivers/block/loop.c:-1 [inline]
- loop_handle_cmd drivers/block/loop.c:1926 [inline]
- loop_process_work+0x8fe/0x10b0 drivers/block/loop.c:1961
- process_one_work kernel/workqueue.c:3257 [inline]
- process_scheduled_works+0xad1/0x1770 kernel/workqueue.c:3340
- worker_thread+0x8a0/0xda0 kernel/workqueue.c:3421
- kthread+0x711/0x8a0 kernel/kthread.c:463
- ret_from_fork+0x510/0xa50 arch/x86/kernel/process.c:158
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:246
- </TASK>
+> +{
+> +	if (c.feature & F2FS_FEATURE_PACKED_SSA)
+> +		return dev_read_4k_block(buf, GET_SUM_BLKADDR(sbi, segno),
+> +				GET_SUM_BLKOFF(segno));
+> +	return dev_read_block(buf, GET_SUM_BLKADDR(sbi, segno));
+> +}
+> +
+> +
+>  #define GET_SEGNO_FROM_SEG0(sbi, blk_addr)				\
+>  	(GET_SEGOFF_FROM_SEG0(sbi, blk_addr) >> sbi->log_blocks_per_seg)
+>  
+> diff --git a/fsck/fsck.c b/fsck/fsck.c
+> index 0b53c67..db44f9d 100644
+> --- a/fsck/fsck.c
+> +++ b/fsck/fsck.c
+> @@ -228,11 +228,9 @@ static int is_valid_ssa_node_blk(struct f2fs_sb_info *sbi, u32 nid,
+>  		}
+>  	}
+>  	if (need_fix && f2fs_dev_is_writable()) {
+> -		u64 ssa_blk;
+>  		int ret2;
+>  
+> -		ssa_blk = GET_SUM_BLKADDR(sbi, segno);
+> -		ret2 = dev_write_block(sum_blk, ssa_blk, WRITE_LIFE_NONE);
+> +		ret2 = write_sum_block(sbi, sum_blk, segno, WRITE_LIFE_NONE);
+>  		ASSERT(ret2 >= 0);
+>  	}
+>  out:
+> @@ -367,11 +365,9 @@ static int is_valid_ssa_data_blk(struct f2fs_sb_info *sbi, u32 blk_addr,
+>  		}
+>  	}
+>  	if (need_fix && f2fs_dev_is_writable()) {
+> -		u64 ssa_blk;
+>  		int ret2;
+>  
+> -		ssa_blk = GET_SUM_BLKADDR(sbi, segno);
+> -		ret2 = dev_write_block(sum_blk, ssa_blk, WRITE_LIFE_NONE);
+> +		ret2 = write_sum_block(sbi, sum_blk, segno, WRITE_LIFE_NONE);
+>  		ASSERT(ret2 >= 0);
+>  	}
+>  out:
+> @@ -3879,14 +3875,12 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+>  			rewrite_sit_area_bitmap(sbi);
+>  			if (c.zoned_model == F2FS_ZONED_HM) {
+>  				struct curseg_info *curseg;
+> -				u64 ssa_blk;
+>  
+>  				for (i = 0; i < NO_CHECK_TYPE; i++) {
+>  					curseg = CURSEG_I(sbi, i);
+> -					ssa_blk = GET_SUM_BLKADDR(sbi,
+> -							curseg->segno);
+> -					ret = dev_write_block(curseg->sum_blk,
+> -							ssa_blk,
+> +					ret = write_sum_block(sbi,
+> +							curseg->sum_blk,
+> +							curseg->segno,
+>  							WRITE_LIFE_NONE);
+>  					ASSERT(ret >= 0);
+>  				}
+> diff --git a/fsck/inject.c b/fsck/inject.c
+> index 0e46b1b..b00e356 100644
+> --- a/fsck/inject.c
+> +++ b/fsck/inject.c
+> @@ -935,7 +935,6 @@ static int inject_ssa(struct f2fs_sb_info *sbi, struct inject_option *opt)
+>  	struct summary_footer *footer;
+>  	struct f2fs_summary *sum;
+>  	u32 segno, offset;
+> -	block_t ssa_blkaddr;
+>  	int type;
+>  	int ret;
+>  
+> @@ -1000,8 +999,7 @@ static int inject_ssa(struct f2fs_sb_info *sbi, struct inject_option *opt)
+>  
+>  	print_sum_footer_info(footer);
+>  
+> -	ssa_blkaddr = GET_SUM_BLKADDR(sbi, segno);
+> -	ret = dev_write_block(sum_blk, ssa_blkaddr, WRITE_LIFE_NONE);
+> +	ret = write_sum_block(sbi, sum_blk, segno, WRITE_LIFE_NONE);
+>  	ASSERT(ret >= 0);
+>  
+>  out:
+> diff --git a/fsck/mount.c b/fsck/mount.c
+> index f03fa2d..43b1246 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -2150,6 +2150,7 @@ static void read_normal_summaries(struct f2fs_sb_info *sbi, int type)
+>  	struct curseg_info *curseg;
+>  	unsigned int segno = 0;
+>  	block_t blk_addr = 0;
+> +	__u32 blk_offset = 0;
+>  	int ret;
+>  
+>  	if (IS_DATASEG(type)) {
+> @@ -2160,24 +2161,29 @@ static void read_normal_summaries(struct f2fs_sb_info *sbi, int type)
+>  			blk_addr = sum_blk_addr(sbi, NR_CURSEG_DATA_TYPE, type);
+>  	} else {
+>  		segno = get_cp(cur_node_segno[type - CURSEG_HOT_NODE]);
+> -		if (is_set_ckpt_flags(cp, CP_UMOUNT_FLAG))
+> +		if (is_set_ckpt_flags(cp, CP_UMOUNT_FLAG)) {
+>  			blk_addr = sum_blk_addr(sbi, NR_CURSEG_NODE_TYPE,
+>  							type - CURSEG_HOT_NODE);
+> -		else
+> +		} else {
+>  			blk_addr = GET_SUM_BLKADDR(sbi, segno);
+> +			blk_offset = GET_SUM_BLKOFF(segno);
+> +		}
+>  	}
+>  
+> -	sum_blk = malloc(F2FS_BLKSIZE);
+> +	sum_blk = malloc(F2FS_SUM_BLKSIZE);
+>  	ASSERT(sum_blk);
+>  
+> -	ret = dev_read_block(sum_blk, blk_addr);
+> +	if (c.feature & F2FS_FEATURE_PACKED_SSA)
+> +		ret = dev_read_4k_block(sum_blk, blk_addr, blk_offset);
+> +	else
+> +		ret = dev_read_block(sum_blk, blk_addr);
+>  	ASSERT(ret >= 0);
+>  
+>  	if (IS_NODESEG(type) && !is_set_ckpt_flags(cp, CP_UMOUNT_FLAG))
+>  		restore_node_summary(sbi, segno, sum_blk);
+>  
+>  	curseg = CURSEG_I(sbi, type);
+> -	memcpy(curseg->sum_blk, sum_blk, F2FS_BLKSIZE);
+> +	memcpy(curseg->sum_blk, sum_blk, F2FS_SUM_BLKSIZE);
+>  	reset_curseg(sbi, type);
+>  	free(sum_blk);
+>  }
+> @@ -2205,8 +2211,7 @@ void update_sum_entry(struct f2fs_sb_info *sbi, block_t blk_addr,
+>  							SUM_TYPE_DATA;
+>  
+>  	/* write SSA all the time */
+> -	ret = dev_write_block(sum_blk, GET_SUM_BLKADDR(sbi, segno),
+> -			      WRITE_LIFE_NONE);
+> +	ret = write_sum_block(sbi, sum_blk, segno, WRITE_LIFE_NONE);
+>  	ASSERT(ret >= 0);
+>  
+>  	if (type == SEG_TYPE_NODE || type == SEG_TYPE_DATA ||
+> @@ -2244,7 +2249,7 @@ static int build_curseg(struct f2fs_sb_info *sbi)
+>  	SM_I(sbi)->curseg_array = array;
+>  
+>  	for (i = 0; i < NR_CURSEG_TYPE; i++) {
+> -		array[i].sum_blk = calloc(F2FS_BLKSIZE, 1);
+> +		array[i].sum_blk = calloc(F2FS_SUM_BLKSIZE, 1);
+>  		if (!array[i].sum_blk) {
+>  			MSG(1, "\tError: Calloc failed for build_curseg!!\n");
+>  			goto seg_cleanup;
+> @@ -2405,11 +2410,9 @@ struct f2fs_summary_block *get_sum_block(struct f2fs_sb_info *sbi,
+>  	struct f2fs_summary_block *sum_blk;
+>  	struct curseg_info *curseg;
+>  	int type, ret;
+> -	u64 ssa_blk;
+>  
+>  	*ret_type= SEG_TYPE_MAX;
+>  
+> -	ssa_blk = GET_SUM_BLKADDR(sbi, segno);
+>  	for (type = 0; type < NR_CURSEG_NODE_TYPE; type++) {
+>  		curseg = CURSEG_I(sbi, CURSEG_HOT_NODE + type);
+>  		if (segno == curseg->segno) {
+> @@ -2440,10 +2443,10 @@ struct f2fs_summary_block *get_sum_block(struct f2fs_sb_info *sbi,
+>  		}
+>  	}
+>  
+> -	sum_blk = calloc(F2FS_BLKSIZE, 1);
+> +	sum_blk = calloc(F2FS_SUM_BLKSIZE, 1);
+>  	ASSERT(sum_blk);
+>  
+> -	ret = dev_read_block(sum_blk, ssa_blk);
+> +	ret = read_sum_block(sbi, sum_blk, segno);
+>  	ASSERT(ret >= 0);
+>  
+>  	if (IS_SUM_NODE_SEG(sum_blk))
+> @@ -3060,7 +3063,6 @@ int find_next_free_block(struct f2fs_sb_info *sbi, u64 *to, int left,
+>  		struct curseg_info *curseg = CURSEG_I(sbi, want_type);
+>  		unsigned int segs_per_zone = sbi->segs_per_sec * sbi->secs_per_zone;
+>  		char buf[F2FS_BLKSIZE];
 
-Allocated by task 5484:
- kasan_save_stack mm/kasan/common.c:56 [inline]
- kasan_save_track+0x3e/0x80 mm/kasan/common.c:77
- poison_kmalloc_redzone mm/kasan/common.c:397 [inline]
- __kasan_kmalloc+0x93/0xb0 mm/kasan/common.c:414
- kasan_kmalloc include/linux/kasan.h:262 [inline]
- __kmalloc_cache_noprof+0x3e2/0x700 mm/slub.c:5776
- kmalloc_noprof include/linux/slab.h:957 [inline]
- kzalloc_noprof include/linux/slab.h:1094 [inline]
- f2fs_fill_super+0x8c/0x6ec0 fs/f2fs/super.c:4895
- get_tree_bdev_flags+0x40e/0x4d0 fs/super.c:1691
- vfs_get_tree+0x92/0x2a0 fs/super.c:1751
- fc_mount fs/namespace.c:1199 [inline]
- do_new_mount_fc fs/namespace.c:3636 [inline]
- do_new_mount+0x302/0xa10 fs/namespace.c:3712
- do_mount fs/namespace.c:4035 [inline]
- __do_sys_mount fs/namespace.c:4224 [inline]
- __se_sys_mount+0x313/0x410 fs/namespace.c:4201
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0xec/0xf80 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
+char buf[F2FS_SUM_BLKSIZE];
 
-Freed by task 5484:
- kasan_save_stack mm/kasan/common.c:56 [inline]
- kasan_save_track+0x3e/0x80 mm/kasan/common.c:77
- kasan_save_free_info+0x46/0x50 mm/kasan/generic.c:584
- poison_slab_object mm/kasan/common.c:252 [inline]
- __kasan_slab_free+0x5c/0x80 mm/kasan/common.c:284
- kasan_slab_free include/linux/kasan.h:234 [inline]
- slab_free_hook mm/slub.c:2540 [inline]
- slab_free mm/slub.c:6670 [inline]
- kfree+0x1c0/0x660 mm/slub.c:6878
- kill_f2fs_super+0x5b6/0x6c0 fs/f2fs/super.c:5458
- deactivate_locked_super+0xbc/0x130 fs/super.c:474
- cleanup_mnt+0x425/0x4c0 fs/namespace.c:1318
- task_work_run+0x1d4/0x260 kernel/task_work.c:233
- exit_task_work include/linux/task_work.h:40 [inline]
- do_exit+0x694/0x22f0 kernel/exit.c:971
- do_group_exit+0x21c/0x2d0 kernel/exit.c:1112
- __do_sys_exit_group kernel/exit.c:1123 [inline]
- __se_sys_exit_group kernel/exit.c:1121 [inline]
- __x64_sys_exit_group+0x3f/0x40 kernel/exit.c:1121
- __pfx_syscall_get_nr+0x0/0x10 arch/x86/include/generated/asm/syscalls_64.h:232
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0xec/0xf80 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
+> -		u64 ssa_blk;
+>  		int ret;
+>  
+>  		*to = NEXT_FREE_BLKADDR(sbi, curseg);
+> @@ -3078,17 +3080,15 @@ int find_next_free_block(struct f2fs_sb_info *sbi, u64 *to, int left,
+>  				segno = GET_SEGNO(sbi, new_blkaddr);
+>  			}
+>  
+> -			ssa_blk = GET_SUM_BLKADDR(sbi, curseg->segno);
+> -			ret = dev_write_block(curseg->sum_blk, ssa_blk,
+> -					      WRITE_LIFE_NONE);
+> +			ret = write_sum_block(sbi, curseg->sum_blk,
+> +					curseg->segno, WRITE_LIFE_NONE);
+>  			ASSERT(ret >= 0);
+>  
+>  			curseg->segno = segno;
+>  			curseg->next_blkoff = 0;
+>  			curseg->alloc_type = LFS;
+>  
+> -			ssa_blk = GET_SUM_BLKADDR(sbi, curseg->segno);
+> -			ret = dev_read_block(&buf, ssa_blk);
+> +			ret = read_sum_block(sbi, &buf, curseg->segno);
+>  			ASSERT(ret >= 0);
+>  
+>  			memcpy(curseg->sum_blk, &buf, SUM_ENTRIES_SIZE);
+> @@ -3166,7 +3166,7 @@ void move_one_curseg_info(struct f2fs_sb_info *sbi, u64 from, int left,
+>  	struct curseg_info *curseg = CURSEG_I(sbi, i);
+>  	char buf[F2FS_BLKSIZE];
 
-Last potentially related work creation:
- kasan_save_stack+0x3e/0x60 mm/kasan/common.c:56
- kasan_record_aux_stack+0xbd/0xd0 mm/kasan/generic.c:556
- insert_work+0x3d/0x330 kernel/workqueue.c:2180
- __queue_work+0xcd0/0xf90 kernel/workqueue.c:2335
- queue_work_on+0x106/0x1c0 kernel/workqueue.c:2386
- queue_work include/linux/workqueue.h:669 [inline]
- schedule_work include/linux/workqueue.h:730 [inline]
- f2fs_handle_critical_error+0x255/0x540 fs/f2fs/super.c:4624
- f2fs_write_end_io+0x886/0xb60 fs/f2fs/data.c:351
- __submit_merged_bio+0x256/0x660 fs/f2fs/data.c:540
- __f2fs_submit_merged_write fs/f2fs/data.c:635 [inline]
- __submit_merged_write_cond+0x471/0x530 fs/f2fs/data.c:657
- f2fs_sync_node_pages+0x1479/0x15e0 fs/f2fs/node.c:2166
- block_operations fs/f2fs/checkpoint.c:1276 [inline]
- f2fs_write_checkpoint+0xdd5/0x2430 fs/f2fs/checkpoint.c:1678
- kill_f2fs_super+0x2d2/0x6c0 fs/f2fs/super.c:5448
- deactivate_locked_super+0xbc/0x130 fs/super.c:474
- cleanup_mnt+0x425/0x4c0 fs/namespace.c:1318
- task_work_run+0x1d4/0x260 kernel/task_work.c:233
- exit_task_work include/linux/task_work.h:40 [inline]
- do_exit+0x694/0x22f0 kernel/exit.c:971
- do_group_exit+0x21c/0x2d0 kernel/exit.c:1112
- __do_sys_exit_group kernel/exit.c:1123 [inline]
- __se_sys_exit_group kernel/exit.c:1121 [inline]
- __x64_sys_exit_group+0x3f/0x40 kernel/exit.c:1121
- __pfx_syscall_get_nr+0x0/0x10 arch/x86/include/generated/asm/syscalls_64.h:232
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0xec/0xf80 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
+char buf[F2FS_SUM_BLKSIZE];
 
-Second to last potentially related work creation:
- kasan_save_stack+0x3e/0x60 mm/kasan/common.c:56
- kasan_record_aux_stack+0xbd/0xd0 mm/kasan/generic.c:556
- insert_work+0x3d/0x330 kernel/workqueue.c:2180
- __queue_work+0xcd0/0xf90 kernel/workqueue.c:2335
- queue_work_on+0x106/0x1c0 kernel/workqueue.c:2386
- sanity_check_node_footer fs/f2fs/node.c:1536 [inline]
- __get_node_folio+0xcaf/0x14f0 fs/f2fs/node.c:1581
- do_read_inode fs/f2fs/inode.c:425 [inline]
- f2fs_iget+0x77c/0x5640 fs/f2fs/inode.c:596
- f2fs_nfs_get_inode+0x76/0x110 fs/f2fs/super.c:3723
- generic_fh_to_dentry+0x9f/0xf0 fs/libfs.c:1498
- exportfs_decode_fh_raw+0x178/0x6e0 fs/exportfs/expfs.c:456
- do_handle_to_path+0xa4/0x1a0 fs/fhandle.c:276
- handle_to_path fs/fhandle.c:400 [inline]
- do_handle_open+0x6a1/0x930 fs/fhandle.c:424
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0xec/0xf80 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
+>  	u32 old_segno;
+> -	u64 ssa_blk, to;
+> +	u64 to;
+>  	int ret;
+>  
+>  	if ((get_sb(feature) & F2FS_FEATURE_RO)) {
+> @@ -3184,8 +3184,8 @@ void move_one_curseg_info(struct f2fs_sb_info *sbi, u64 from, int left,
+>  	}
+>  
+>  	/* update original SSA too */
+> -	ssa_blk = GET_SUM_BLKADDR(sbi, curseg->segno);
+> -	ret = dev_write_block(curseg->sum_blk, ssa_blk, WRITE_LIFE_NONE);
+> +	ret = write_sum_block(sbi, curseg->sum_blk, curseg->segno,
+> +			WRITE_LIFE_NONE);
+>  	ASSERT(ret >= 0);
+>  bypass_ssa:
+>  	to = from;
+> @@ -3199,8 +3199,7 @@ bypass_ssa:
+>  	curseg->alloc_type = c.zoned_model == F2FS_ZONED_HM ? LFS : SSR;
+>  
+>  	/* update new segno */
+> -	ssa_blk = GET_SUM_BLKADDR(sbi, curseg->segno);
+> -	ret = dev_read_block(buf, ssa_blk);
+> +	ret = read_sum_block(sbi, buf, curseg->segno);
+>  	ASSERT(ret >= 0);
+>  
+>  	memcpy(curseg->sum_blk, buf, SUM_ENTRIES_SIZE);
+> @@ -3464,7 +3463,6 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
+>  	/* update summary blocks having nullified journal entries */
+>  	for (i = 0; i < NO_CHECK_TYPE; i++) {
+>  		struct curseg_info *curseg = CURSEG_I(sbi, i);
+> -		u64 ssa_blk;
+>  
+>  		if (!(flags & CP_UMOUNT_FLAG) && IS_NODESEG(i))
+>  			continue;
+> @@ -3475,9 +3473,8 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
+>  
+>  		if (!(get_sb(feature) & F2FS_FEATURE_RO)) {
+>  			/* update original SSA too */
+> -			ssa_blk = GET_SUM_BLKADDR(sbi, curseg->segno);
+> -			ret = dev_write_block(curseg->sum_blk, ssa_blk,
+> -					      WRITE_LIFE_NONE);
+> +			ret = write_sum_block(sbi, curseg->sum_blk,
+> +					curseg->segno, WRITE_LIFE_NONE);
+>  			ASSERT(ret >= 0);
+>  		}
+>  	}
+> diff --git a/fsck/resize.c b/fsck/resize.c
+> index bef05d6..e650283 100644
+> --- a/fsck/resize.c
+> +++ b/fsck/resize.c
+> @@ -115,7 +115,11 @@ static int get_new_sb(struct f2fs_super_block *sb)
+>  			get_sb(segment_count_sit) +
+>  			get_sb(segment_count_nat))) * blks_per_seg;
+>  
+> -	blocks_for_ssa = total_valid_blks_available / blks_per_seg + 1;
+> +	if (c.feature & F2FS_FEATURE_PACKED_SSA)
+> +		blocks_for_ssa = round_up(total_valid_blks_available / blks_per_seg,
+> +				SUMS_PER_BLOCK);
+> +	else
+> +		blocks_for_ssa = total_valid_blks_available / blks_per_seg + 1;
+>  
+>  	set_sb(segment_count_ssa, SEG_ALIGN(blocks_for_ssa));
+>  
+> @@ -209,23 +213,36 @@ static void migrate_main(struct f2fs_sb_info *sbi, unsigned int offset)
+>  				START_BLOCK(sbi, 0) + offset);
+>  }
+>  
+> -static void move_ssa(struct f2fs_sb_info *sbi, unsigned int segno,
+> -					block_t new_sum_blk_addr)
+> +#define GET_SUM_NEW_BLKADDR(new_sb, segno)	\
+> +	(c.feature & F2FS_FEATURE_PACKED_SSA ?	\
+> +	(get_newsb(ssa_blkaddr) +		\
+> +	 (segno >> (get_newsb(log_blocksize) - DEFAULT_BLKSIZE_BITS))) :	\
+> +	(get_newsb(ssa_blkaddr) + segno))
+> +#define GET_SUM_NEW_BLKOFF(new_sb, segno)	\
+> +	(c.feature & F2FS_FEATURE_PACKED_SSA ?	\
+> +	(segno % (1 << (get_newsb(log_blocksize) - DEFAULT_BLKSIZE_BITS))) : 0)
+> +
+> +static void move_ssa(struct f2fs_sb_info *sbi, struct f2fs_super_block *new_sb,
+> +		unsigned int old_segno, unsigned int new_segno)
+>  {
+>  	struct f2fs_summary_block *sum_blk;
+>  	int type;
+>  
+> -	sum_blk = get_sum_block(sbi, segno, &type);
+> +	sum_blk = get_sum_block(sbi, old_segno, &type);
+>  	if (type < SEG_TYPE_MAX) {
+>  		int ret;
+> -
+> -		ret = dev_write_block(sum_blk, new_sum_blk_addr,
+> -				      WRITE_LIFE_NONE);
+> +		u64 new_blkaddr = GET_SUM_NEW_BLKADDR(new_sb, new_segno);
+> +		if (c.feature & F2FS_FEATURE_PACKED_SSA)
+> +			ret = dev_write_4k_block(sum_blk, new_blkaddr,
+> +					GET_SUM_NEW_BLKOFF(new_sb, new_segno),
+> +					WRITE_LIFE_NONE);
+> +		else
+> +			ret = dev_write_block(sum_blk, new_blkaddr,
+> +					WRITE_LIFE_NONE);
+>  		ASSERT(ret >= 0);
+>  		DBG(1, "Write summary block: (%d) segno=%x/%x --> (%d) %x\n",
+> -				type, segno, GET_SUM_BLKADDR(sbi, segno),
+> -				IS_SUM_NODE_SEG(sum_blk),
+> -				new_sum_blk_addr);
+> +			type, old_segno, GET_SUM_BLKADDR(sbi, old_segno),
+> +			IS_SUM_NODE_SEG(sum_blk), (unsigned int)new_blkaddr);
+>  	}
+>  	if (type == SEG_TYPE_NODE || type == SEG_TYPE_DATA ||
+>  			type == SEG_TYPE_MAX) {
+> @@ -240,36 +257,48 @@ static void migrate_ssa(struct f2fs_sb_info *sbi,
+>  	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
+>  	block_t old_sum_blkaddr = get_sb(ssa_blkaddr);
+>  	block_t new_sum_blkaddr = get_newsb(ssa_blkaddr);
+> -	block_t end_sum_blkaddr = get_newsb(main_blkaddr);
+> -	block_t expand_sum_blkaddr = new_sum_blkaddr +
+> -					MAIN_SEGS(sbi) - offset;
+> -	block_t blkaddr;
+> -	int ret;
+> -	void *zero_block = calloc(F2FS_BLKSIZE, 1);
+> +	unsigned int expand_segno = MAIN_SEGS(sbi) - offset;
+> +	unsigned int new_seg_total = get_newsb(segment_count);
+> +	int new_segno;
+> +	int ret = 0;
+> +	void *zero_block = calloc(F2FS_SUM_BLKSIZE, 1);
+>  	ASSERT(zero_block);
+>  
+> -	if (offset && new_sum_blkaddr < old_sum_blkaddr + offset) {
+> -		blkaddr = new_sum_blkaddr;
+> -		while (blkaddr < end_sum_blkaddr) {
+> -			if (blkaddr < expand_sum_blkaddr) {
+> -				move_ssa(sbi, offset++, blkaddr++);
+> -			} else {
+> -				ret = dev_write_block(zero_block, blkaddr++,
+> -						      WRITE_LIFE_NONE);
+> -				ASSERT(ret >=0);
+> -			}
+> +	if (offset && new_sum_blkaddr <= (old_sum_blkaddr +
+> +				offset / SUMS_PER_BLOCK)) {
+> +		new_segno = 0;
+> +		while (new_segno < new_seg_total) {
+> +			if (new_segno < expand_segno)
+> +				move_ssa(sbi, new_sb, offset++, new_segno);
+> +			else if (c.feature & F2FS_FEATURE_PACKED_SSA)
+> +				ret = dev_write_4k_block(zero_block,
+> +					GET_SUM_NEW_BLKADDR(new_sb, new_segno),
+> +					GET_SUM_NEW_BLKOFF(new_sb, new_segno),
+> +					WRITE_LIFE_NONE);
+> +			else
+> +				ret = dev_write_block(zero_block,
+> +					GET_SUM_NEW_BLKADDR(new_sb, new_segno),
+> +					WRITE_LIFE_NONE);
+> +			ASSERT(ret >= 0);
+> +			new_segno++;
+>  		}
+>  	} else {
+> -		blkaddr = end_sum_blkaddr - 1;
+> +		new_segno = new_seg_total - 1;
+>  		offset = MAIN_SEGS(sbi) - 1;
+> -		while (blkaddr >= new_sum_blkaddr) {
+> -			if (blkaddr >= expand_sum_blkaddr) {
+> -				ret = dev_write_block(zero_block, blkaddr--,
+> -						      WRITE_LIFE_NONE);
+> -				ASSERT(ret >=0);
+> -			} else {
+> -				move_ssa(sbi, offset--, blkaddr--);
+> -			}
+> +		while (new_segno >= 0) {
+> +			if (new_segno < expand_segno)
+> +				move_ssa(sbi, new_sb, offset--, new_segno);
+> +			else if (c.feature & F2FS_FEATURE_PACKED_SSA)
+> +				ret = dev_write_4k_block(zero_block,
+> +					GET_SUM_NEW_BLKADDR(new_sb, new_segno),
+> +					GET_SUM_NEW_BLKOFF(new_sb, new_segno),
+> +					WRITE_LIFE_NONE);
+> +			else
+> +				ret = dev_write_block(zero_block,
+> +					GET_SUM_NEW_BLKADDR(new_sb, new_segno),
+> +					WRITE_LIFE_NONE);
+> +			ASSERT(ret >= 0);
+> +			new_segno--;
+>  		}
+>  	}
+>  
+> diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+> index b85ded2..83e1484 100644
+> --- a/include/f2fs_fs.h
+> +++ b/include/f2fs_fs.h
+> @@ -655,6 +655,7 @@ enum {
+>  #define F2FS_MIN_BLKSIZE		4096
+>  #define F2FS_MAX_BLKSIZE		16384
+>  #define F2FS_BLKSIZE			c.blksize	/* support configurable block size */
+> +#define F2FS_SUM_BLKSIZE	((c.feature & F2FS_FEATURE_PACKED_SSA) ? 4096 : F2FS_BLKSIZE)
 
-The buggy address belongs to the object at ffff88804357c000
- which belongs to the cache kmalloc-8k of size 8192
-The buggy address is located 4464 bytes inside of
- freed 8192-byte region [ffff88804357c000, ffff88804357e000)
+How about using F2FS_MIN_BLKSIZE instead of all magic number 4096?
 
-The buggy address belongs to the physical page:
-page: refcount:0 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x43578
-head: order:3 mapcount:0 entire_mapcount:0 nr_pages_mapped:0 pincount:0
-flags: 0x4fff00000000040(head|node=1|zone=1|lastcpupid=0x7ff)
-page_type: f5(slab)
-raw: 04fff00000000040 ffff88801a442280 ffffea000046b000 0000000000000002
-raw: 0000000000000000 0000000000020002 00000000f5000000 0000000000000000
-head: 04fff00000000040 ffff88801a442280 ffffea000046b000 0000000000000002
-head: 0000000000000000 0000000000020002 00000000f5000000 0000000000000000
-head: 04fff00000000003 ffffea00010d5e01 00000000ffffffff 00000000ffffffff
-head: ffffffffffffffff 0000000000000000 00000000ffffffff 0000000000000008
-page dumped because: kasan: bad access detected
-page_owner tracks the page as allocated
-page last allocated via order 3, migratetype Unmovable, gfp_mask 0x528c0(GFP_NOWAIT|__GFP_IO|__GFP_FS|__GFP_NORETRY|__GFP_COMP), pid 5411, tgid 5411 (syz-executor), ts 97414573985, free_ts 95403368329
- set_page_owner include/linux/page_owner.h:32 [inline]
- post_alloc_hook+0x234/0x290 mm/page_alloc.c:1846
- prep_new_page mm/page_alloc.c:1854 [inline]
- get_page_from_freelist+0x24e0/0x2580 mm/page_alloc.c:3915
- __alloc_frozen_pages_noprof+0x181/0x370 mm/page_alloc.c:5210
- alloc_pages_mpol+0x232/0x4a0 mm/mempolicy.c:2486
- alloc_slab_page mm/slub.c:3075 [inline]
- allocate_slab+0x86/0x3b0 mm/slub.c:3248
- new_slab mm/slub.c:3302 [inline]
- ___slab_alloc+0xe53/0x1820 mm/slub.c:4656
- __slab_alloc+0x65/0x100 mm/slub.c:4779
- __slab_alloc_node mm/slub.c:4855 [inline]
- slab_alloc_node mm/slub.c:5251 [inline]
- __do_kmalloc_node mm/slub.c:5656 [inline]
- __kvmalloc_node_noprof+0x6b6/0x920 mm/slub.c:7136
- kvmalloc_array_node_noprof include/linux/slab.h:1122 [inline]
- __ptr_ring_init_queue_alloc_noprof include/linux/ptr_ring.h:481 [inline]
- ptr_ring_init_noprof include/linux/ptr_ring.h:499 [inline]
- wg_packet_queue_init+0xbc/0x320 drivers/net/wireguard/queueing.c:32
- wg_newlink+0x2f6/0x670 drivers/net/wireguard/device.c:352
- rtnl_newlink_create+0x310/0xb00 net/core/rtnetlink.c:3840
- __rtnl_newlink net/core/rtnetlink.c:3957 [inline]
- rtnl_newlink+0x16e7/0x1c90 net/core/rtnetlink.c:4072
- rtnetlink_rcv_msg+0x7cf/0xb70 net/core/rtnetlink.c:6958
- netlink_rcv_skb+0x208/0x470 net/netlink/af_netlink.c:2550
- netlink_unicast_kernel net/netlink/af_netlink.c:1318 [inline]
- netlink_unicast+0x82f/0x9e0 net/netlink/af_netlink.c:1344
- netlink_sendmsg+0x805/0xb30 net/netlink/af_netlink.c:1894
-page last free pid 4363 tgid 4363 stack trace:
- reset_page_owner include/linux/page_owner.h:25 [inline]
- free_pages_prepare mm/page_alloc.c:1395 [inline]
- __free_frozen_pages+0xbc8/0xd30 mm/page_alloc.c:2943
- unix_net_exit+0x6b/0xb0 net/unix/af_unix.c:3837
- ops_exit_list net/core/net_namespace.c:199 [inline]
- ops_undo_list+0x49a/0x990 net/core/net_namespace.c:252
- cleanup_net+0x4d8/0x7a0 net/core/net_namespace.c:696
- process_one_work kernel/workqueue.c:3257 [inline]
- process_scheduled_works+0xad1/0x1770 kernel/workqueue.c:3340
- worker_thread+0x8a0/0xda0 kernel/workqueue.c:3421
- kthread+0x711/0x8a0 kernel/kthread.c:463
- ret_from_fork+0x510/0xa50 arch/x86/kernel/process.c:158
- ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:246
+>  #define F2FS_MAX_EXTENSION		64	/* # of extension entries */
+>  #define F2FS_EXTENSION_LEN		8	/* max size of extension */
+>  #define F2FS_BLK_ALIGN(x)	(((x) + F2FS_BLKSIZE - 1) / F2FS_BLKSIZE)
+> @@ -715,6 +716,7 @@ enum {
+>  #define F2FS_FEATURE_COMPRESSION	0x2000
+>  #define F2FS_FEATURE_RO			0x4000
+>  #define F2FS_FEATURE_DEVICE_ALIAS	0x8000
+> +#define F2FS_FEATURE_PACKED_SSA		0x10000
+>  
+>  #define MAX_NR_FEATURE			32
+>  
+> @@ -1219,7 +1221,7 @@ struct f2fs_sit_block {
+>   * from node's page's beginning to get a data block address.
+>   * ex) data_blkaddr = (block_t)(nodepage_start_address + ofs_in_node)
+>   */
+> -#define ENTRIES_IN_SUM		(F2FS_BLKSIZE / 8)
+> +#define ENTRIES_IN_SUM		(F2FS_SUM_BLKSIZE / 8)
+>  #define	SUMMARY_SIZE		(7)	/* sizeof(struct summary) */
+>  #define	SUM_FOOTER_SIZE		(5)	/* sizeof(struct summary_footer) */
+>  #define SUM_ENTRIES_SIZE	(SUMMARY_SIZE * ENTRIES_IN_SUM)
+> @@ -1249,7 +1251,7 @@ struct summary_footer {
+>  
+>  static_assert(sizeof(struct summary_footer) == 5, "");
+>  
+> -#define SUM_JOURNAL_SIZE	(F2FS_BLKSIZE - SUM_FOOTER_SIZE -\
+> +#define SUM_JOURNAL_SIZE	(F2FS_SUM_BLKSIZE - SUM_FOOTER_SIZE -\
+>  				SUM_ENTRIES_SIZE)
+>  #define NAT_JOURNAL_ENTRIES	((SUM_JOURNAL_SIZE - 2) /\
+>  				sizeof(struct nat_journal_entry))
+> @@ -1348,7 +1350,7 @@ struct f2fs_summary_block {
+>  };
+>  #define F2FS_SUMMARY_BLOCK_JOURNAL(blk) ((struct f2fs_journal *)(&(blk)->entries[ENTRIES_IN_SUM]))
+>  #define F2FS_SUMMARY_BLOCK_FOOTER(blk) ((struct summary_footer *)&((char *)\
+> -					(&(blk)->entries[0]))[F2FS_BLKSIZE - SUM_FOOTER_SIZE])
+> +		(&(blk)->entries[0]))[F2FS_SUM_BLKSIZE - SUM_FOOTER_SIZE])
+>  
+>  /*
+>   * For directory operations
+> @@ -1711,6 +1713,8 @@ extern int dev_fill_block(void *, __u64, enum rw_hint);
+>  
+>  extern int dev_read_block(void *, __u64);
+>  extern int dev_reada_block(__u64);
+> +extern int dev_write_4k_block(void *, __u64, __u32, enum rw_hint);
+> +extern int dev_read_4k_block(void *, __u64, __u32);
+>  
+>  extern int dev_read_version(void *, __u64, size_t);
+>  extern void get_kernel_version(__u8 *);
+> @@ -2022,6 +2026,7 @@ struct feature feature_table[] = {					\
+>  	{ "compression",		F2FS_FEATURE_COMPRESSION,	1}, \
+>  	{ "ro",				F2FS_FEATURE_RO,		1}, \
+>  	{ "device_alias",		F2FS_FEATURE_DEVICE_ALIAS,	0}, \
+> +	{ "packed_ssa",			F2FS_FEATURE_PACKED_SSA,	1}, \
 
-Memory state around the buggy address:
- ffff88804357d000: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
- ffff88804357d080: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
->ffff88804357d100: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
-                                                             ^
- ffff88804357d180: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
- ffff88804357d200: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
-==================================================================
+                                                                        ^
+IIUC, this feature can not be tunned by fsck? since it will change the disk layout?
 
+Thanks,
 
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+>  	{ NULL,				0x0,				0}, \
+>  };
+>  
+> @@ -2161,18 +2166,18 @@ static inline void check_block_struct_sizes(void)
+>  	assert(sizeof(struct f2fs_summary) * ENTRIES_IN_SUM
+>  			+ offsetof(struct f2fs_journal, nat_j)
+>  			+ NAT_JOURNAL_ENTRIES * sizeof(struct nat_journal_entry)
+> -			+ NAT_JOURNAL_RESERVED + sizeof(struct summary_footer) == F2FS_BLKSIZE);
+> +			+ NAT_JOURNAL_RESERVED + sizeof(struct summary_footer) == F2FS_SUM_BLKSIZE);
+>  
+>  	/* Check SIT Journal Block Size */
+>  	assert(sizeof(struct f2fs_summary) * ENTRIES_IN_SUM
+>  			+ offsetof(struct f2fs_journal, sit_j)
+>  			+ SIT_JOURNAL_ENTRIES * sizeof(struct sit_journal_entry)
+> -			+ SIT_JOURNAL_RESERVED + sizeof(struct summary_footer) == F2FS_BLKSIZE);
+> +			+ SIT_JOURNAL_RESERVED + sizeof(struct summary_footer) == F2FS_SUM_BLKSIZE);
+>  
+>  	/* Check Info Journal Block Size */
+>  	assert(sizeof(struct f2fs_summary) * ENTRIES_IN_SUM + sizeof(__le64)
+>  			+ offsetof(struct f2fs_journal, info)
+> -			+ EXTRA_INFO_RESERVED + sizeof(struct summary_footer) == F2FS_BLKSIZE);
+> +			+ EXTRA_INFO_RESERVED + sizeof(struct summary_footer) == F2FS_SUM_BLKSIZE);
+>  
+>  	/* Check Dentry Block Size */
+>  	assert(sizeof(__u8) * (SIZE_OF_DENTRY_BITMAP + SIZE_OF_RESERVED)
+> diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c
+> index c31f3b8..deafc4f 100644
+> --- a/lib/libf2fs_io.c
+> +++ b/lib/libf2fs_io.c
+> @@ -734,6 +734,18 @@ int dev_reada_block(__u64 blk_addr)
+>  	return dev_readahead(blk_addr << F2FS_BLKSIZE_BITS, F2FS_BLKSIZE);
+>  }
+>  
+> +int dev_write_4k_block(void *buf, __u64 blk_addr, __u32 offset, enum rw_hint whint)
+> +{
+> +	return dev_write(buf, (blk_addr << F2FS_BLKSIZE_BITS) + offset * 4096,
+> +			4096, whint);
+> +}
+> +
+> +int dev_read_4k_block(void *buf, __u64 blk_addr, __u32 offset)
+> +{
+> +	return dev_read(buf, (blk_addr << F2FS_BLKSIZE_BITS) + offset * 4096,
+> +			4096);
+> +}
+> +
+>  int f2fs_fsync_device(void)
+>  {
+>  #ifdef HAVE_FSYNC
+> diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+> index d05e897..b3dccd0 100644
+> --- a/mkfs/f2fs_format.c
+> +++ b/mkfs/f2fs_format.c
+> @@ -500,8 +500,16 @@ static int f2fs_prepare_super_block(void)
+>  	if (c.feature & F2FS_FEATURE_RO) {
+>  		blocks_for_ssa = 0;
+>  	} else {
+> +		unsigned int ssa_per_block;
+> +
+>  		ASSERT((total_valid_blks_available % c.blks_per_seg) == 0);
+> -		blocks_for_ssa = total_valid_blks_available / c.blks_per_seg;
+> +		if (c.feature & F2FS_FEATURE_PACKED_SSA) {
+> +			ssa_per_block = c.blksize / F2FS_SUM_BLKSIZE;
+> +			blocks_for_ssa = round_up(total_valid_blks_available /
+> +					c.blks_per_seg, ssa_per_block);
+> +		} else {
+> +			blocks_for_ssa = total_valid_blks_available / c.blks_per_seg;
+> +		}
+>  	}
+>  
+>  	set_sb(segment_count_ssa, SEG_ALIGN(blocks_for_ssa));
+> diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+> index 8f8e975..8d44a9b 100644
+> --- a/mkfs/f2fs_format_main.c
+> +++ b/mkfs/f2fs_format_main.c
+> @@ -380,6 +380,12 @@ static void f2fs_parse_options(int argc, char *argv[])
+>  		}
+>  	}
+>  
+> +	if ((c.feature & F2FS_FEATURE_PACKED_SSA) &&
+> +			(c.blksize == F2FS_MIN_BLKSIZE)) {
+> +		c.feature &= ~F2FS_FEATURE_PACKED_SSA;
+> +		MSG(0, "\tInfo: packed_ssa feature is disabled for 4k block.\n");
+> +	}
+> +
+>  	if (optind >= argc) {
+>  		MSG(0, "\tError: Device not specified\n");
+>  		mkfs_usage();
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
 
 
 _______________________________________________
