@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00BF4CDE426
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Dec 2025 04:01:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13DF5CDE42C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Dec 2025 04:02:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=b0i+r6rYHVNQPgEPfkghpac+Ma8uRFFOLSqcj9S+Q80=; b=cs4N6lg3dmVQGO9vmmdwJp/P3c
-	PQ54sfiUhw/qc4z+ihpQ3n+rKbrXig8TmdRsEVM5GyVTW5doaytkNcohCvJwzGvcJioyVFVimWtEZ
-	HDAaEXvNLB5hW6CBu3X/JqLj6Jx+8AFhZFdzPmsox2xviJiRHMpq09frhA/7vaVaiwFM=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=bjZxWpm1f71Wg/NyC62gMCPa8Y8p6aULIa19DA14rDk=; b=ImjPxGoqgM3mHw60qrc8sMxfGt
+	KsP5ESJmM8FKYqXy7SLECLqod/v5j+vLRatIodgknBPZOX175fwiI7y8aohLGeEWO0DcydtIA27sX
+	aP7OK/W4kYzURJir+NGJGNEN88ggqF//e/SDUjTuUXm5nWFhYVkcIugZx54ffh/FV7qY=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vYy53-0006RB-QE;
-	Fri, 26 Dec 2025 03:01:29 +0000
+	id 1vYy5J-0007Oz-1t;
+	Fri, 26 Dec 2025 03:01:45 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vYy51-0006R4-IG
+ (envelope-from <chao@kernel.org>) id 1vYy5H-0007Os-JK
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Dec 2025 03:01:27 +0000
+ Fri, 26 Dec 2025 03:01:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i/evLnrz/P1GC6nx+makVIBO+xU9VAEQ0U8TFuktr4U=; b=dvnsP4ZgxUST9Re1z3kDYWeevR
- Y/FQqA+FQrvYTtRQ9/W4fELvvigmM7p5mc1kpyf4r1lps4k4BUw6YE92ZRsFSyWnF09SsJeTkif6L
- +G9pAvTVDQCczB6jofYkRIxP+qpVY0kZcxqwAmMbblTrRayZos7GfclODnBjw05bhRnU=;
+ bh=eEqtkfNwGjIVjGZuo/m0jiX6702pvu8ipk7I+YheuAs=; b=aJnRiYsiQ6VlDvgQbkmgOUNAwR
+ wYkTcavdUVC/52MDRIT7Po84yiLU6H8B2avlruGmPsK7noJgv4afrYBL91panZaghCrVYEjk6teDn
+ Id+736C91mpAyq8ThaRxCDfokBQ2tSqZAczek3TQT3RcZpHoAYrMNAeq875YJiEMCcDw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,38 +40,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=i/evLnrz/P1GC6nx+makVIBO+xU9VAEQ0U8TFuktr4U=; b=g8jVCc3HWv+UCXDHGzEkj5tq4B
- r+PIA4qd6P4KEfIoZ9JVJXmyqIySKneIfPAOWLMUlfJoAPJpE99RFEpHH+F1qpP15rgGNiRA8DZGQ
- 1g05wb0bzgURbOCEybfyyGsD+Vik3Og+gzh8NZfsBcx/Os3IvA8qRZq9ICD3ObU1QfLI=;
+ bh=eEqtkfNwGjIVjGZuo/m0jiX6702pvu8ipk7I+YheuAs=; b=icJzAvBPSoqdYb+IiR3b+YNOp2
+ jGdz8j8VOfXxK4ciknr9CBs3NLOLDyuklibvpnWYHw7A4DqToOC7VEcqyWlZ7s/I3hazoQZig3qMo
+ lxbZK7DquGSRdctIhAYKnpYXgZhaPRPZ3uvanw8cAXPzF3wdIOnzYJ+etFJkVb3t26/8=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vYy51-000120-4O for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Dec 2025 03:01:27 +0000
+ id 1vYy5H-00015e-6s for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Dec 2025 03:01:43 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 82E346000A;
- Fri, 26 Dec 2025 03:01:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 658E0C4CEF1;
- Fri, 26 Dec 2025 03:01:15 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A99A76000A;
+ Fri, 26 Dec 2025 03:01:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AB99CC4CEF1;
+ Fri, 26 Dec 2025 03:01:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1766718076;
- bh=kw7i8d330dYGw8f17T6hf3D3jonDzqxMLICt59ZeO4c=;
+ s=k20201202; t=1766718097;
+ bh=fuYj4KdP2PNrLis9AZFKfu9P/pJJ0u7VVte8eTlFxhE=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=fb5MK+B1drA1Cfg9tfBrJZHF5Eldo93RZ9OdtgO5eeV3cJvM95Damh+xsQtjrv7rH
- WOm9/I4VqMFUEXJzp1oGyCxXdKbsZ2nXY+ITcGcZqMHqP84jqDxn3qGovc5JXzlQiI
- xsvdp33gpK09czBjw39q0w6zhBjDTlusJ5l0RE6AU8HFnPsV/z6pj0G5gw/5PvXf7T
- peqqQmoquAq9ukYRO897+zTj4ZbrFQ3DgNo3CmdAZBWzV1bojGjr08G8/RAAW4qZHz
- KDJJKdHyPO1rWZxkyIKC36viUduasysxMBRvvbWngA0XZkHq0ykqymy571sKiiiYzq
- FVBPiS24Jc9QQ==
-Message-ID: <2bc6224e-a4df-429e-9c86-acdbf460ce86@kernel.org>
-Date: Fri, 26 Dec 2025 11:01:20 +0800
+ b=qxwY+L1ZF/lm15IMYqRL77r0kkSJanE8hshiDDw2XHOp1Z/7fJ6EjeWMy/MW1grCn
+ Q+JFwYqICxln19/UKaktILBUuO9NUrOr4nXeKZIx3rwTZKJITW8iHSeG45J377ZyVG
+ XEXIXHOGeHe3l+qCROO9COPg/k+mj0TujvDy5UaN8DugcF9N8QlrdQ+/I9ukJTTkMK
+ GGHG49YHcVAJPuGTn+p4y6zvgGFk6SnGBL/BgKjlrjGDS1FiJywzEByatvJmcu/B7P
+ aaPm0Q+HyCoJC/r0s3UqCnGaQFUf1QfvF43pllXq4DwyPKIysoBg+Du5qk6M0D7FXs
+ hEa+eZItEQzTw==
+Message-ID: <b60ffa9a-3482-461e-a36a-a2dcd39b4d7f@kernel.org>
+Date: Fri, 26 Dec 2025 11:01:40 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Sergey Shtylyov <s.shtylyov@auroraos.dev>,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
-References: <938c75a4-b825-4341-b208-44de1dc5a7fd@auroraos.dev>
+To: Zhiguo Niu <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org
+References: <1766717764-19956-1-git-send-email-zhiguo.niu@unisoc.com>
 Content-Language: en-US
-In-Reply-To: <938c75a4-b825-4341-b208-44de1dc5a7fd@auroraos.dev>
+In-Reply-To: <1766717764-19956-1-git-send-email-zhiguo.niu@unisoc.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -79,11 +78,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/25/2025 4:44 AM,
- Sergey Shtylyov wrote: > In __is_valid_data_blkaddr(), 
- an *if* statement is used where a *switch* > statement clearly fits better...
- I think previous version is clear to understand, unless we add more *_ADDR.
- :) Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On 12/26/2025 10:56 AM, Zhiguo Niu wrote: > It missed the
+ stat count in f2fs_gc_range. > > Cc: stable@kernel.org > Fixes: 9bf1dcbdfdc8
+ ("f2fs: fix to account gc stats correctly") > Signed-off-by: Zhig [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -94,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vYy51-000120-4O
-Subject: Re: [f2fs-dev] [PATCH] f2fs: use *switch* statement in
- __is_valid_data_blkaddr()
+X-Headers-End: 1vYy5H-00015e-6s
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix to add gc count stat in
+ f2fs_gc_range
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,49 +108,22 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Hao_hao.Wang@unisoc.com
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 12/25/2025 4:44 AM, Sergey Shtylyov wrote:
-> In __is_valid_data_blkaddr(), an *if* statement is used where a *switch*
-> statement clearly fits better...
+On 12/26/2025 10:56 AM, Zhiguo Niu wrote:
+> It missed the stat count in f2fs_gc_range.
+> 
+> Cc: stable@kernel.org
+> Fixes: 9bf1dcbdfdc8 ("f2fs: fix to account gc stats correctly")
+> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
 
-I think previous version is clear to understand, unless we add more *_ADDR. :)
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-
-> 
-> Signed-off-by: Sergey Shtylyov <s.shtylyov@auroraos.dev>
-> ---
-> This patch is against the dev branch of Jaegeuk Kim's f2fs.git repo.
-> 
->   fs/f2fs/f2fs.h | 10 +++++++---
->   1 file changed, 7 insertions(+), 3 deletions(-)
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 53cbce96f126..ea2b224150ce 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -3680,10 +3680,14 @@ static inline void verify_blkaddr(struct f2fs_sb_info *sbi,
->   
->   static inline bool __is_valid_data_blkaddr(block_t blkaddr)
->   {
-> -	if (blkaddr == NEW_ADDR || blkaddr == NULL_ADDR ||
-> -			blkaddr == COMPRESS_ADDR)
-> +	switch (blkaddr) {
-> +	case NEW_ADDR:
-> +	case NULL_ADDR:
-> +	case COMPRESS_ADDR:
->   		return false;
-> -	return true;
-> +	default:
-> +		return true;
-> +	}
->   }
->   
->   /*
-
 
 
 _______________________________________________
