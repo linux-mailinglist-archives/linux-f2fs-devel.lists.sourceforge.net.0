@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22940CDE422
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Dec 2025 03:58:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 00BF4CDE426
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Dec 2025 04:01:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=yuhDtJisa9AMClJUA1T4kIrbt17lwjNvYMyUwTWbgZ0=; b=WIYay812IgqiltRfrpg9x7WJhQ
-	rSGxPRpaDLBgAuAkxI8fyQl3RgEMkSOO0sgMdG223BU9nT6KwIBsJBgOzKPvAFAf5sKuPOhkBvkH2
-	TJfblwGnv3LzIh7234LW+ytsy7PKJJxuEMECbd/rFlnesMQ4GSAQGO4FbZLoN/3PlD50=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=b0i+r6rYHVNQPgEPfkghpac+Ma8uRFFOLSqcj9S+Q80=; b=cs4N6lg3dmVQGO9vmmdwJp/P3c
+	PQ54sfiUhw/qc4z+ihpQ3n+rKbrXig8TmdRsEVM5GyVTW5doaytkNcohCvJwzGvcJioyVFVimWtEZ
+	HDAaEXvNLB5hW6CBu3X/JqLj6Jx+8AFhZFdzPmsox2xviJiRHMpq09frhA/7vaVaiwFM=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vYy2C-0007C6-Tk;
-	Fri, 26 Dec 2025 02:58:32 +0000
+	id 1vYy53-0006RB-QE;
+	Fri, 26 Dec 2025 03:01:29 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vYy2B-0007C0-SX
+ (envelope-from <chao@kernel.org>) id 1vYy51-0006R4-IG
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Dec 2025 02:58:31 +0000
+ Fri, 26 Dec 2025 03:01:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IOaTbklygqR/jxjkDSPIcWebKvwHRGtGJBgi54AVO3A=; b=FI/TpRbsHyJ1B2fjDmLmyaWlLe
- vPb90UMc/7Tf1GT5xyMswNI2A0Fk0LTDuzsORaWuvrOFGcfKR59+g3xoXhTZGjMKl667scmEWhoro
- 4fLIS2Ugbd8ciJDDN5kbbRQVSUGKWcENcxAdPUsRuqhkqIspxVLC6yGAqwzeUU4iMN9k=;
+ bh=i/evLnrz/P1GC6nx+makVIBO+xU9VAEQ0U8TFuktr4U=; b=dvnsP4ZgxUST9Re1z3kDYWeevR
+ Y/FQqA+FQrvYTtRQ9/W4fELvvigmM7p5mc1kpyf4r1lps4k4BUw6YE92ZRsFSyWnF09SsJeTkif6L
+ +G9pAvTVDQCczB6jofYkRIxP+qpVY0kZcxqwAmMbblTrRayZos7GfclODnBjw05bhRnU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,61 +40,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=IOaTbklygqR/jxjkDSPIcWebKvwHRGtGJBgi54AVO3A=; b=hstIZyN7XIgiv7JqMrFh1ErvY2
- raHHO94I3vlo7nYlF5zTLrOF0FX0mrsuGEgAz8wkACsErLEtM6Rm59MmwGH0XXPrRGGxmxUwxQLTL
- 39gsYLX6uux3H058FEcZCEvfn/BdwOUm6Ajy3n7zlISNcuoBie5C8yCT61FU+vJm4be0=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=i/evLnrz/P1GC6nx+makVIBO+xU9VAEQ0U8TFuktr4U=; b=g8jVCc3HWv+UCXDHGzEkj5tq4B
+ r+PIA4qd6P4KEfIoZ9JVJXmyqIySKneIfPAOWLMUlfJoAPJpE99RFEpHH+F1qpP15rgGNiRA8DZGQ
+ 1g05wb0bzgURbOCEybfyyGsD+Vik3Og+gzh8NZfsBcx/Os3IvA8qRZq9ICD3ObU1QfLI=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vYy2A-0000iF-KA for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Dec 2025 02:58:31 +0000
+ id 1vYy51-000120-4O for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Dec 2025 03:01:27 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D181143F66;
- Fri, 26 Dec 2025 02:58:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B40FC4CEF1;
- Fri, 26 Dec 2025 02:58:18 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 82E346000A;
+ Fri, 26 Dec 2025 03:01:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 658E0C4CEF1;
+ Fri, 26 Dec 2025 03:01:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1766717899;
- bh=YoOPTP2+VJOFRi12WUyWoBQXyY8PiWl4NSEHhwN4mvE=;
+ s=k20201202; t=1766718076;
+ bh=kw7i8d330dYGw8f17T6hf3D3jonDzqxMLICt59ZeO4c=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=j3KD55IRa/5O6qwzJX41kklpZhthFso7nSwhoM8Va2P5c6vz/hGp1IAidrGSoW6lI
- PdoBNZ56Ypb5SPybuc5lgviluFcZe3ufWk2Y40v+WUqy/2UENSsHuadJP+2la6gUUp
- gBJVqj1vOGTdj4j3YEGpCEcqRoSowQeaojYwsXy8h1hht7NhvX35wRw8ahHf7Q7/cQ
- qvqO7+CA0xVj4jdgw1XL69MvKXd58XyE3QODAHgFmbo3nUwqdZrE6nIZTsiQX8VqVV
- ks7DSg3aItWslW9U2z1fGgSoFgrjC+CD55NPHTr+s8uKZwA318BQfuZBgPezy4Mgn+
- fgKO6dyYS6eww==
-Message-ID: <83a7a539-e7b5-4ff5-b3d9-c1e9320bf090@kernel.org>
-Date: Fri, 26 Dec 2025 10:58:23 +0800
+ b=fb5MK+B1drA1Cfg9tfBrJZHF5Eldo93RZ9OdtgO5eeV3cJvM95Damh+xsQtjrv7rH
+ WOm9/I4VqMFUEXJzp1oGyCxXdKbsZ2nXY+ITcGcZqMHqP84jqDxn3qGovc5JXzlQiI
+ xsvdp33gpK09czBjw39q0w6zhBjDTlusJ5l0RE6AU8HFnPsV/z6pj0G5gw/5PvXf7T
+ peqqQmoquAq9ukYRO897+zTj4ZbrFQ3DgNo3CmdAZBWzV1bojGjr08G8/RAAW4qZHz
+ KDJJKdHyPO1rWZxkyIKC36viUduasysxMBRvvbWngA0XZkHq0ykqymy571sKiiiYzq
+ FVBPiS24Jc9QQ==
+Message-ID: <2bc6224e-a4df-429e-9c86-acdbf460ce86@kernel.org>
+Date: Fri, 26 Dec 2025 11:01:20 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Szymon Wilczek <swilczek.lx@gmail.com>, jaegeuk@kernel.org
-References: <20251223162823.23606-1-swilczek.lx@gmail.com>
+To: Sergey Shtylyov <s.shtylyov@auroraos.dev>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+References: <938c75a4-b825-4341-b208-44de1dc5a7fd@auroraos.dev>
 Content-Language: en-US
-In-Reply-To: <20251223162823.23606-1-swilczek.lx@gmail.com>
+In-Reply-To: <938c75a4-b825-4341-b208-44de1dc5a7fd@auroraos.dev>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/24/2025 12:28 AM,
- Szymon Wilczek wrote: > Syzbot reported
- a slab-use-after-free issue in f2fs_write_end_io(): > [ 86.643336] BUG: KASAN:
- slab-use-after-free in f2fs_write_end_io+0x9b9/0xb60 > [ [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On 12/25/2025 4:44 AM,
+ Sergey Shtylyov wrote: > In __is_valid_data_blkaddr(), 
+ an *if* statement is used where a *switch* > statement clearly fits better...
+ I think previous version is clear to understand, unless we add more *_ADDR.
+ :) Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vYy2A-0000iF-KA
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix use-after-free in f2fs_write_end_io
+X-Headers-End: 1vYy51-000120-4O
+Subject: Re: [f2fs-dev] [PATCH] f2fs: use *switch* statement in
+ __is_valid_data_blkaddr()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,120 +110,48 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: syzbot+b4444e3c972a7a124187@syzkaller.appspotmail.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 12/24/2025 12:28 AM, Szymon Wilczek wrote:
-> Syzbot reported a slab-use-after-free issue in f2fs_write_end_io():
-> [   86.643336] BUG: KASAN: slab-use-after-free in f2fs_write_end_io+0x9b9/0xb60
-> [   86.644120] Read of size 4 at addr ffff88804357d170 by task kworker/u4:4/45
-> ...
-> [   86.656543] Call Trace:
-> ...
-> [   86.660351]  f2fs_write_end_io+0x9b9/0xb60
-> ...
-> [   86.685123] Allocated by task 5484:
-> ...
-> [   86.688325]  f2fs_fill_super+0x8c/0x6ec0
-> ...
-> [   86.697685] Freed by task 5484:
-> ...
-> [   86.702700]  kfree+0x1c0/0x660
-> [   86.703273]  kill_f2fs_super+0x5b6/0x6c0
-> 
-> The problem is a race condition between the shutdown of the filesystem
-> (kill_f2fs_super) and the asynchronous I/O completion handler
-> (f2fs_write_end_io).
-> 
-> When unmounting, kill_f2fs_super() frees the sbi structure. However,
-> if there are pending checkpoint data (CP_DATA) writes, the
-> f2fs_write_end_io() callback might still be running.
-> 
-> In the original code, f2fs_write_end_io() accesses sbi->cp_wait after
-> decrementing the page count. If the page count drops to zero,
-> f2fs_wait_on_all_pages() in the unmount path returns, allowing
-> kill_f2fs_super() to free sbi. If the callback then tries to wake up
-> waiters on sbi->cp_wait, a UAF occurs.
-> 
-> To fix this, I applied a two-step solution:
-> 
-> 1. In kill_f2fs_super(), explicitly wait for all CP_DATA pages
->     to obtain a count of zero using f2fs_wait_on_all_pages(). This
->     ensures specific synchronization for these metadata writes.
-> 
-> 2. In f2fs_write_end_io(), move the wake_up() call INSIDE the
->     bio_for_each_folio_all() loop. This ensures that the wakeup
->     (which signals completion to the waiter) happens before
->     processing of the bio is effectively 'done' from the perspective
->     of the waiter. More importantly, it removes any access to 'sbi'
->     after the loop, eliminating the UAF window.
-> 
-> Reported-by: syzbot+b4444e3c972a7a124187@syzkaller.appspotmail.com
-> Closes: https://syzkaller.appspot.com/bug?extid=b4444e3c972a7a124187
-> Signed-off-by: Szymon Wilczek <swilczek.lx@gmail.com>
-> ---
->   fs/f2fs/data.c  | 11 ++++++++---
->   fs/f2fs/super.c |  1 +
->   2 files changed, 9 insertions(+), 3 deletions(-)
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index c30e69392a62..5808d73c2598 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -318,10 +318,13 @@ static void f2fs_write_end_io(struct bio *bio)
->   {
->   	struct f2fs_sb_info *sbi;
->   	struct folio_iter fi;
-> +	bool is_close;
->   
->   	iostat_update_and_unbind_ctx(bio);
->   	sbi = bio->bi_private;
->   
-> +	is_close = is_sbi_flag_set(sbi, SBI_IS_CLOSE);
+On 12/25/2025 4:44 AM, Sergey Shtylyov wrote:
+> In __is_valid_data_blkaddr(), an *if* statement is used where a *switch*
+> statement clearly fits better...
 
-Seems this check may race w/ set_sbi_flag(sbi, SBI_IS_CLOSE).
-
-> +
->   	if (time_to_inject(sbi, FAULT_WRITE_IO))
->   		bio->bi_status = BLK_STS_IOERR;
->   
-> @@ -360,10 +363,12 @@ static void f2fs_write_end_io(struct bio *bio)
->   			f2fs_del_fsync_node_entry(sbi, folio);
->   		folio_clear_f2fs_gcing(folio);
->   		folio_end_writeback(folio);
-> -	}
-> -	if (!get_pages(sbi, F2FS_WB_CP_DATA) &&
-> +
-> +		if (!is_close && type == F2FS_WB_CP_DATA &&
-> +				!get_pages(sbi, F2FS_WB_CP_DATA) &&
-
-If F2FS_WB_CP_DATA count is zero, then sbi may be released in kill_f2fs_super(),
-we should not allow to access sbi->cp_wait below, right?
+I think previous version is clear to understand, unless we add more *_ADDR. :)
 
 Thanks,
 
->   				wq_has_sleeper(&sbi->cp_wait))
-> -		wake_up(&sbi->cp_wait);
-> +			wake_up(&sbi->cp_wait);
-> +	}
+> 
+> Signed-off-by: Sergey Shtylyov <s.shtylyov@auroraos.dev>
+> ---
+> This patch is against the dev branch of Jaegeuk Kim's f2fs.git repo.
+> 
+>   fs/f2fs/f2fs.h | 10 +++++++---
+>   1 file changed, 7 insertions(+), 3 deletions(-)
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 53cbce96f126..ea2b224150ce 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -3680,10 +3680,14 @@ static inline void verify_blkaddr(struct f2fs_sb_info *sbi,
 >   
->   	bio_put(bio);
+>   static inline bool __is_valid_data_blkaddr(block_t blkaddr)
+>   {
+> -	if (blkaddr == NEW_ADDR || blkaddr == NULL_ADDR ||
+> -			blkaddr == COMPRESS_ADDR)
+> +	switch (blkaddr) {
+> +	case NEW_ADDR:
+> +	case NULL_ADDR:
+> +	case COMPRESS_ADDR:
+>   		return false;
+> -	return true;
+> +	default:
+> +		return true;
+> +	}
 >   }
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index c4c225e09dc4..c9ee3fae1958 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -5454,6 +5454,7 @@ static void kill_f2fs_super(struct super_block *sb)
->   	kill_block_super(sb);
->   	/* Release block devices last, after fscrypt_destroy_keyring(). */
->   	if (sbi) {
-> +		f2fs_wait_on_all_pages(sbi, F2FS_WB_CP_DATA);
->   		destroy_device_list(sbi);
->   		kfree(sbi);
->   		sb->s_fs_info = NULL;
+>   
+>   /*
 
 
 
