@@ -2,103 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B075CDF5BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 Dec 2025 10:20:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EC23CDF682
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 Dec 2025 10:48:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=6lIODTHQmqtj2pIZJLFU2MHkomRrgk5MduJnlRGpdX0=; b=btCkSxX3K+2bl2AqntMlJlhiiu
-	6eGO5jkStH9oXwCUlmVoFhWYKD9tsF6l5AcmQ0uUhPRnSKSE1qP3CaZcPuSt6fccnQ0bhVj66uIaj
-	/DH276S3DrbGbj/+yzOTlFW32iPbvztN84sfFGwTLTAHjd4I5WLUbUAK9vaHz0p/Ojxc=;
+	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=3u2JhjnBX6cz8aUmPQO3UskW540zqWQJGy0TgdXt0dc=; b=DbDM6r793m0vWh6mfAbvt0mcjC
+	tvgLfWi40lzbQ8qLCxLjn1I8mXwGxcqkJO8AP2mwMdFoLr5IgJQNRrFI5ZTXRYf9H6OK1uGHQL1jG
+	1dVqiRtZ7L+r9DEhmhwZpZTD8Moc2EsP9siyk9krx2zpfwL59Wn8hD9o4C9cjvJicIiU=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vZQSk-00074J-1a;
-	Sat, 27 Dec 2025 09:19:50 +0000
+	id 1vZQts-0001Eb-4X;
+	Sat, 27 Dec 2025 09:47:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yangyongpeng.storage@gmail.com>) id 1vZQSj-000747-0r
+ (envelope-from <yangyongpeng.storage@gmail.com>) id 1vZQtq-0001EO-Vg
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 27 Dec 2025 09:19:50 +0000
+ Sat, 27 Dec 2025 09:47:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cGRzQTMrGJ/TF/qWSORrRmjikBJIiHC7TT8tbvyUhSw=; b=QzyN+N+DATG33gQFIvMttLmXRF
- 84P02cFkIUOhlATN4jiH3YMs/vIHTTWxQHrO/30b+MP6KFh3ymF9DmcqkgxVpkA8rpVFIz5K8DvQp
- y4KEUqP+D0LMM3TxmlOvy79zdCkGEnsmdCjOhlEAk5Uh/FImvesgHSfOyvBlNxq+k17A=;
+ bh=e8WgQvlU/WB3n5BS9u7WnVZTrz6S0f6Apuv6obbEjK8=; b=XIA28W8/WNAktWY8bYKCjxl/Bq
+ /Ntr5WUxQL8GFm+irsgFtLO0bE5TfFAU+/6esyaJn/KCRCQQU/+xYNZUD5RN0u9PtKoHhVZbIALhZ
+ YluYjg5xmXN1QaSxuc9rGi4BzLSW8QvOpAFn4k+/71n9wrjjkDfBbsSriK/wWRmJGdDk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=cGRzQTMrGJ/TF/qWSORrRmjikBJIiHC7TT8tbvyUhSw=; b=c
- jTtOMscL62ewM9RbMzjPvGwqxSu4qGNV4og4JcA4AXlyhllq1gVW0IW+qLLjT1Y1M9SNHOmYxjl24
- ROVV8GjhaCJmPWumxBHg1p5ON9NMWMfLHU0qF8rC1ICwIjY/BkgtG/VEWCvINMeTHsMPeckcowONS
- 5o6cBljnFX+KXjIk=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=e8WgQvlU/WB3n5BS9u7WnVZTrz6S0f6Apuv6obbEjK8=; b=RFLVbdmz31XqTqKTa/ECaFJkVP
+ mV9ENkhWkJBdr1izz9EBuv9vToXEViHmFyiCsQ4DG7FxaVmUgyYIpWmP5/zszh0egmI3UTdHM2Y6q
+ 4yc9JmajhKlWINXZ2Gd8B3grqRl1SYcDTJfUGVx/BtTB0R/L89n+3fgUf90Mn9NzQsiI=;
 Received: from mail-pf1-f169.google.com ([209.85.210.169])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vZQSj-0004MJ-9a for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 27 Dec 2025 09:19:49 +0000
+ id 1vZQtr-0005Ot-5g for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 27 Dec 2025 09:47:51 +0000
 Received: by mail-pf1-f169.google.com with SMTP id
- d2e1a72fcca58-7b22ffa2a88so7307279b3a.1
+ d2e1a72fcca58-7b8bbf16b71so7693548b3a.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 27 Dec 2025 01:19:49 -0800 (PST)
+ Sat, 27 Dec 2025 01:47:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766827178; x=1767431978; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cGRzQTMrGJ/TF/qWSORrRmjikBJIiHC7TT8tbvyUhSw=;
- b=mvTG5o2K6BmTdyQL1iOpNR/jxyz7USWMr2w+4hXcn/w9VWEzMpbGp6f0wwApTFxcz3
- TxkGs6dIpLqX04+1qXZTX4A3FSGdmLuPTUBYnsBUYvFnAYarjFqxFsHKUoi4rsGis2V2
- pxH7qXCEmN3GVgbAt6abNI+3JHXHuNgEcLhdu4MY1pAZ19dN7iTueftar4YoODS0C/va
- oTdBxZeB53sCXODwnkv0mddBncdBz2Gz8+upSViCepGbAS6c47DrqqYFgImVLY7q/T+2
- VgZIAgG/TkUlUH+0ARhAvnztjKDyEPojRIi+E6IHVuimE45PNNAY7L3cA16Piqol4RrG
- YYyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766827178; x=1767431978;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1766828865; x=1767433665; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cGRzQTMrGJ/TF/qWSORrRmjikBJIiHC7TT8tbvyUhSw=;
- b=cdgoBE8d4k1fSW2F5P3n+gcsuhJPBJQMOeTtaHNqVITU0pAPErPQM1l2zMMsz9brRQ
- tsnpVzmsydizaIYMYlvKS33TPfA/F/zc3HvcX52VD8MLSn65RH0Dc/SWy7ChmnJat/3z
- Twm7sSiZ2qMe8wsFrIaF9t3MWMSvMOEcmWHIyXW8ZuX7CnyKn3znwDGBjyWrFfateqq7
- l4Piu/4YWAupwxldt25puwyVNkgN74Vu/Sq08iDCaXPTdzmmEKQOBVs7LkoBb1PgkGYw
- 1Op3A7eJuqvPbQ/pSWtBtW7fq8ShUZ82WzxzjDOMSdYgl7s5Ku/YmdeMZ0Z1+QdX0vno
- Xe8g==
-X-Gm-Message-State: AOJu0YywfFsV/aFmMeNyg3FBKvRZNhzd5IUVpBhfgBWDEh8ZfJn0sS48
- UH6VwuzZOGQaTeVA2j5UoShTkm9Z/pPNPVUWxpF+Wm9LuUsowq5XBM2E
-X-Gm-Gg: AY/fxX7OoTIT/5UNmAUtvDIlMKSma0xpup/SxT6z8niB8rKhqcoABHdnzdwYjN+MwYJ
- 5Icy+vKan8/PFOKKQOCRRp8wEHwrLYyXsmm6lIiGcUF/v9fOgsbs01DgQnCtW9KYcSRfDjYjd3Y
- Pi+/4XNgZPKf/p8OYI+dGukAFP2l6+goEWSEipfiTDCMmagST7DRgc13h/CM3Cm0GvCQoYDb6JI
- F13gOKLFjA1UULdo0Wyhs5Q3GkEllJAE6lnaJb0carWWWunOVow1X7ms8YT5irrtsHZR7INliAl
- yFCLfTv0z+/TRIbGWiRw1dJHkaTXZy7LHAy0wBRiPNclC1dpId+/grCVvxUXZCcq8noYPuG7kTO
- RcXItm0C+BkfoTeJCbQlP1BwHVkdee+52yyYG76dNG6p4qqanCBn9S9hVFoQNInCcHRW/pb0pHG
- 0S4+IEOg+lDiWVW5mzpw+TzaXLpUs=
-X-Google-Smtp-Source: AGHT+IGCbvXZAxPa7qBkl7EdGRMgTlJoNWGHdemDvx/xVcdj3Nm8GTmi2lnKFMMQo6FSl0gy2G4X2w==
-X-Received: by 2002:a05:6a00:420b:b0:7e8:4471:ae55 with SMTP id
- d2e1a72fcca58-7ff6745678amr22051368b3a.33.1766827178456; 
- Sat, 27 Dec 2025 01:19:38 -0800 (PST)
+ bh=e8WgQvlU/WB3n5BS9u7WnVZTrz6S0f6Apuv6obbEjK8=;
+ b=UiLcpzGB4fD5IcO/HCI3oWl8ZBl+2o5Y1PNs98fwOPucFDTzsJqCOtO//usopOj6uE
+ MDraNFGA2k3c7qDn1/HFWRE5JxQF5sHV3yVRdc0DrQXoCSdCaZ7yjg1XScS9ySJOLkVx
+ 8jRjncPosnFsZZvlsGAiS1OvB0JxMwmpTT0M4J5u11NbCBwgovd275Rwf58zUWJmimWF
+ BbB5wnQV92IlLqcQnXtVGdR9y9rIoqT4XVJABpOqCkvhvnw6topC7PKStwUVi+UwXS4d
+ XbTtUiGXTOtfzp6Lw1r/tosben0ATlJ13bwJQpmJRrDC4f+tvz04ab3Fn163+cH1P0/B
+ QT9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1766828865; x=1767433665;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=e8WgQvlU/WB3n5BS9u7WnVZTrz6S0f6Apuv6obbEjK8=;
+ b=wLjfmAzllElLHCcK+riZA7/oo9XZIuNq4b87QO84SjBwMZNB7ojy5izYdwVdYK1MiM
+ n3yphltNx6A8ItuB0j5fAo/08oTLlvjYJEsEMOa05Dm56LXg/DEbn1UUMJvtjhABtoId
+ OJ5zFWogJA/48F3Ugv7/Iq7FACGBk1KucqDqZz+yJHQXVrQfXtn3Qec2O9DgH+7aVePP
+ 4Udc3JAA5s7szGtUt4583xbHTYoCGOn4xuhiuV4ITFpBM2vOJG6hu6XQiv/+EnbHctkf
+ EZPlETYhfrRIeL7w1OBnZGiBd8PJEr3fxi1QWUXbUwzVpVLh5UoTHbf557xWoscqsJhF
+ o2lQ==
+X-Gm-Message-State: AOJu0Yx5QqycGxLjatxvdAbdL6E9/FtXdY2tN2LMJFoX98EdIAH4UlOp
+ GltHVCiVVRWW/yEdEiYX3kytJrEF1LU3rsnwjq4LOkBTChTeIjdN0TGpxyOwwtW5
+X-Gm-Gg: AY/fxX44lIcg0mQaiENjKajY7XoYPASUvUyF8q36Fz7DpnUXSEV9g5it66DH7K/fh8P
+ 1PqVg1ZBkl9E08i1+OEEUvBcE2Qvo3D5VCf4UJWUGzbzb47HIZMSaF2iuQhHduqFdIjt0Q12iNU
+ danDn1Rk/2hABOH4oObKuLEkaSGoyQJfFbJoV2VIb8N3hvLZVqkJK1qFDB8vO+L5f9724L1tTtd
+ CZXrD1QQl/Wp+HhuEYmZT9wnzIlAreD6OApIDUr5umgqKAtInE1+zzHm4aUEnnDv2/A9s4pjgAD
+ EX2Np0G/BGciJA1fVNdVU+wZfn+bSIwny7ZgKuhj+/t35cabQx95crEYjtzPHkAKe/hQBMWaQq9
+ Jv6K5b+1wHHHeM/xzu/rY1gXwoWzEbPcdwxEr00d/REPj/TSLpYM/CqMyaMQsYh0hwKsr6Dq4pf
+ H33mRD3Hxr0nuGJ9rAfQyrva1uoUU=
+X-Google-Smtp-Source: AGHT+IHc+L3IFe1AxfwloPyJNXIpcmY2ThXb4KSNtkzkidToHMeqx6hD8zmCcZg5cqMfg4BA0b14PQ==
+X-Received: by 2002:a05:6a00:1d9f:b0:7c2:60c6:8ca0 with SMTP id
+ d2e1a72fcca58-7ff6430ccbemr23784299b3a.5.1766828865328; 
+ Sat, 27 Dec 2025 01:47:45 -0800 (PST)
 Received: from monty-pavel.. ([120.245.115.65])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7ff7e892926sm24122590b3a.66.2025.12.27.01.19.35
+ d2e1a72fcca58-7ff7a843ee4sm24601737b3a.10.2025.12.27.01.47.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 27 Dec 2025 01:19:37 -0800 (PST)
+ Sat, 27 Dec 2025 01:47:45 -0800 (PST)
 From: Yongpeng Yang <yangyongpeng.storage@gmail.com>
 To: Chao Yu <chao@kernel.org>,
 	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Sat, 27 Dec 2025 17:19:06 +0800
-Message-ID: <20251227091906.216322-2-yangyongpeng.storage@gmail.com>
+Date: Sat, 27 Dec 2025 17:46:10 +0800
+Message-ID: <20251227091906.216322-4-yangyongpeng.storage@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251227091906.216322-2-yangyongpeng.storage@gmail.com>
+References: <20251227091906.216322-2-yangyongpeng.storage@gmail.com>
 MIME-Version: 1.0
 X-Spam-Score: 0.8 (/)
 X-Spam-Report: Spam detection software,
@@ -107,11 +110,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Yongpeng Yang The force parameter in
- __submit_merged_write_cond
- is redundant, where `force == true` implies `inode == NULL && folio == NULL
- && ino == 0` is true, and `force == false` implies `inode != NULL || folio
- [...] Content analysis details:   (0.8 points, 5.0 required)
+ Content preview:  From: Yongpeng Yang f2fs_folio_wait_writeback ensures the
+ folio write is submitted to the block layer via __submit_merged_write_cond,
+ then waits for the folio to complete. Other I/O submissions are irrelevant
+ to f2fs_fol [...] 
+ Content analysis details:   (0.8 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
@@ -128,9 +131,9 @@ X-Spam-Report: Spam detection software,
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
  [209.85.210.169 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vZQSj-0004MJ-9a
-Subject: [f2fs-dev] [PATCH v2 1/2] f2fs: clean up the force parameter in
- __submit_merged_write_cond()
+X-Headers-End: 1vZQtr-0005Ot-5g
+Subject: [f2fs-dev] [PATCH v2 2/2] f2fs: return immediately after submitting
+ the specified folio in __submit_merged_write_cond
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -151,57 +154,103 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 
-The force parameter in __submit_merged_write_cond is redundant, where
-`force == true` implies `inode == NULL && folio == NULL && ino == 0` is
-true, and `force == false` implies `inode != NULL || folio != NULL ||
-ino != 0` is true. Thus, this patch replaces the force parameter with
-a stack variable force.
+
+f2fs_folio_wait_writeback ensures the folio write is submitted to the
+block layer via __submit_merged_write_cond, then waits for the folio to
+complete. Other I/O submissions are irrelevant to
+f2fs_folio_wait_writeback. Thus, if the folio write bio is already
+submitted, the function can return immediately. This patch adds a
+writeback parameter to __submit_merged_write_cond(), which signals an
+immediate return after submitting the target folio, and waitting
+writeback can use this parameter.
 
 Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
 ---
-v2:
-- Clean up force parameter in __submit_merged_write_cond() as separated
-patch.
-- Add writeback parameter to __submit_merged_write_cond() for waitting
-writeback case.
----
- fs/f2fs/data.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ fs/f2fs/data.c    | 22 ++++++++++++++++++----
+ fs/f2fs/f2fs.h    |  2 ++
+ fs/f2fs/segment.c |  2 +-
+ 3 files changed, 21 insertions(+), 5 deletions(-)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 12bf4b6e0075..d4ef26beadbc 100644
+index d4ef26beadbc..471e52c6c1e0 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -664,10 +664,11 @@ static void __f2fs_submit_merged_write(struct f2fs_sb_info *sbi,
+@@ -664,7 +664,7 @@ static void __f2fs_submit_merged_write(struct f2fs_sb_info *sbi,
  
  static void __submit_merged_write_cond(struct f2fs_sb_info *sbi,
  				struct inode *inode, struct folio *folio,
--				nid_t ino, enum page_type type, bool force)
-+				nid_t ino, enum page_type type)
+-				nid_t ino, enum page_type type)
++				nid_t ino, enum page_type type, bool writeback)
  {
  	enum temp_type temp;
  	bool ret = true;
-+	bool force = !inode && !folio && !ino;
+@@ -679,8 +679,16 @@ static void __submit_merged_write_cond(struct f2fs_sb_info *sbi,
+ 			ret = __has_merged_page(io->bio, inode, folio, ino);
+ 			f2fs_up_read(&io->io_rwsem);
+ 		}
+-		if (ret)
++		if (ret) {
+ 			__f2fs_submit_merged_write(sbi, type, temp);
++			/*
++			 * For waitting writebck case, if the bio owned by the
++			 * folio is already submitted, we do not need to submit
++			 * other types of bios.
++			 */
++			if (writeback)
++				break;
++		}
  
- 	for (temp = HOT; temp < NR_TEMP_TYPE; temp++) {
- 		if (!force)	{
-@@ -689,14 +690,14 @@ static void __submit_merged_write_cond(struct f2fs_sb_info *sbi,
+ 		/* TODO: use HOT temp only for meta pages now. */
+ 		if (type >= META)
+@@ -690,14 +698,20 @@ static void __submit_merged_write_cond(struct f2fs_sb_info *sbi,
  
  void f2fs_submit_merged_write(struct f2fs_sb_info *sbi, enum page_type type)
  {
--	__submit_merged_write_cond(sbi, NULL, NULL, 0, type, true);
-+	__submit_merged_write_cond(sbi, NULL, NULL, 0, type);
+-	__submit_merged_write_cond(sbi, NULL, NULL, 0, type);
++	__submit_merged_write_cond(sbi, NULL, NULL, 0, type, false);
  }
  
  void f2fs_submit_merged_write_cond(struct f2fs_sb_info *sbi,
  				struct inode *inode, struct folio *folio,
  				nid_t ino, enum page_type type)
  {
--	__submit_merged_write_cond(sbi, inode, folio, ino, type, false);
-+	__submit_merged_write_cond(sbi, inode, folio, ino, type);
+-	__submit_merged_write_cond(sbi, inode, folio, ino, type);
++	__submit_merged_write_cond(sbi, inode, folio, ino, type, false);
++}
++
++void f2fs_submit_merged_write_folio(struct f2fs_sb_info *sbi,
++				struct folio *folio, enum page_type type)
++{
++	__submit_merged_write_cond(sbi, NULL, folio, 0, type, true);
  }
  
  void f2fs_flush_merged_writes(struct f2fs_sb_info *sbi)
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 53cbce96f126..6c5b901a5d27 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -4052,6 +4052,8 @@ void f2fs_submit_merged_write(struct f2fs_sb_info *sbi, enum page_type type);
+ void f2fs_submit_merged_write_cond(struct f2fs_sb_info *sbi,
+ 				struct inode *inode, struct folio *folio,
+ 				nid_t ino, enum page_type type);
++void f2fs_submit_merged_write_folio(struct f2fs_sb_info *sbi,
++				struct folio *folio, enum page_type type);
+ void f2fs_submit_merged_ipu_write(struct f2fs_sb_info *sbi,
+ 					struct bio **bio, struct folio *folio);
+ void f2fs_flush_merged_writes(struct f2fs_sb_info *sbi);
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index c26424f47686..c0c5b7075b04 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -4240,7 +4240,7 @@ void f2fs_folio_wait_writeback(struct folio *folio, enum page_type type,
+ 		struct f2fs_sb_info *sbi = F2FS_F_SB(folio);
+ 
+ 		/* submit cached LFS IO */
+-		f2fs_submit_merged_write_cond(sbi, NULL, folio, 0, type);
++		f2fs_submit_merged_write_folio(sbi, folio, type);
+ 		/* submit cached IPU IO */
+ 		f2fs_submit_merged_ipu_write(sbi, NULL, folio);
+ 		if (ordered) {
 -- 
 2.43.0
 
