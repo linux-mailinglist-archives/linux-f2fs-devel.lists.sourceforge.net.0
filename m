@@ -2,100 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C405CF114B
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 04 Jan 2026 15:43:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43EA4CF25D0
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 05 Jan 2026 09:20:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=MxWPUasDQIYrQ6qlVu9W14iOfDulWf19vySPP9miysk=; b=ARXEL4Rwz0bho9i4vY7yhNBjsP
-	TR4Mp2FrrELAk7f67ynCZ5xbsHB+yLOb/5U7Db4zc5crd0VpeCz6vr+HXdbls39yql5blEC/1BzS0
-	nK64T93J2kjo/lLiarnoQmDqGmgFHAaJxuITpJzxcMubdrgcoYVvr9IY76FWeMlNEkVk=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:To:From:Message-ID:Date:MIME-Version:Sender:Reply-To:Cc:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=QqbQJyoROgXVYI6TYv1t2LT5cBOMum2J8fF9kk9m3VY=; b=bITMnJNHe4ZJZsF6tgZRpR7xOK
+	IvQ3mHPBiWgnIgpnwB+ZS6nrMMYrao1r+HiYNma04zA8BPm7rTxhxi4/G3zh+hnGAWWxyoQofb58x
+	sfuXczoC/NZILaHBmO4r2DABVU4C3SyjOvyk0xPcxD4gYg4liaDZzIHG4kibT8FDy/Hs=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vcPJu-0007rM-0i;
-	Sun, 04 Jan 2026 14:43:02 +0000
+	id 1vcfpI-0006ei-GA;
+	Mon, 05 Jan 2026 08:20:32 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vcPJs-0007r8-SK
- for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 04 Jan 2026 14:43:01 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3QnRbaQkbAOkdjkVLWWPcLaaTO.RZZRWPfdPcNZYePYe.NZX@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1vcfpG-0006dj-Ja for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 05 Jan 2026 08:20:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uVIKbVYzFKg2S8GrojwNYloOIfjJ0MHKT+XSYrosZc4=; b=bZZcIbMkfNla30TwnQzP5tFKCk
- H++9HnMbJOSOnZhTvT5Hv7KKBwFpcCaT4xK00uJTEFb/EKB+0aJGHKqfIP+4IZyQ9jHxDYQhDvk9C
- SSw6VbNX8SLsfVdBBG6c31ccrX8uD04Umwhi9Kz5DgSrJopGyD+oVLrdon13wO6FPcEY=;
+ bh=bMExAptZ5CPCI27TfXQAsUvqUKJcdxrvNY1j8w2j91E=; b=kjTqxyB6l5nNK8w3p0vZz6gjCl
+ eWHkqYK2zA75PVdLRabVBHmoO6+ZevMXjUOQFWI5OXP7Rmvm+oINWFi+rcYQDQ31vYB3WlYOXgR42
+ Ot20WhMM4hw6CCphflnndkqsHRb2p1S/2y2cIsYWc5J/rbzCEGq9usVbO4kW2L/VS+7o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=uVIKbVYzFKg2S8GrojwNYloOIfjJ0MHKT+XSYrosZc4=; b=LokznM8TXF/uW8Wiriofq4lRsh
- MmaGaGAKsMe3U9zEl1VJh3sJQozgYSpPptHLWqKc/DHIDe1UOUTn2EDfa0RS0/wqk18O9S5GQcy/c
- XUUzwvfuBNF9J74tGSu+uRw7RAFXkdsn5lekyTk58aml4rDj7bJLrqXnG7tdjedDAbSw=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=bMExAptZ5CPCI27TfXQAsUvqUKJcdxrvNY1j8w2j91E=; b=a
+ ACqxanIwp9yFL+cqhK/3MseMwZJRL9a8Kyh62EWlqbeijICu9eIn8+oHjjW9yfafjRMrLRxAMkdTU
+ qO5KjbHBpLToTfBsx11Z+0I5qg3QgDrp63GHiyDdW16cbdFJQ8PS11UiB+WxsZ2jmhATAYxd69nBc
+ 0xb/qQV95RZOvyzo=;
+Received: from mail-oo1-f72.google.com ([209.85.161.72])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vcPJt-0001tt-6D for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 04 Jan 2026 14:43:01 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C751543AA7;
- Sun,  4 Jan 2026 14:42:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F4BAC4CEF7;
- Sun,  4 Jan 2026 14:42:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767537770;
- bh=qLh7a2fNEbatp51SHeXp1DxBMO4onwIeinZHCMPacSY=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=KqzerijvOqYgGRe9eC4ccQ/LSA5ayJm0QlP+gcpnScS0uf4rWnqsOcGbIzWVG65BM
- xIa59gy2aFExXvSwaOfVO1u5gaamgOgmym6qWn8pQM3HMVoIK6T86d8zAOHl2ro6YC
- 7mW6WPxPKAQYVsdPd8u4RgCnWoFX6bE5OKsoQPYuZtw7cyz1ssfFxus5VLY0RfkUPi
- 2Kc1XJyRchgnBuZPv/2n3J0uvaQOSIrZJR8FqXWIOTFxwtTNNl9gI3YU7BuxR67wGR
- CigyXPmH5U6jAzEupdvy/3vIvS8O5cMhGfTh7RzSe7uy/8BqcnNGFIBzgrD85/XlBw
- d1Y60CvpVlD/w==
-Message-ID: <5b348fba-6b32-420b-a0ff-65c5d368d1a1@kernel.org>
-Date: Sun, 4 Jan 2026 22:42:29 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1vcfpE-0007w4-VC for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 05 Jan 2026 08:20:29 +0000
+Received: by mail-oo1-f72.google.com with SMTP id
+ 006d021491bc7-65b2cd67cceso27778530eaf.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 05 Jan 2026 00:20:28 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767601218; x=1768206018;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=bMExAptZ5CPCI27TfXQAsUvqUKJcdxrvNY1j8w2j91E=;
+ b=u8wO7RBwajediRwrsGbYNCem2FsOXYKt9Bc3JcN842LqjF2KhPLpzL+hrVHdEgucJb
+ 6thjzP+VviTNPz7YDXtVDuynZWGiS1w9Q2XPc4PUpbFj9gqBXx1wOA6A2V6quC/WwI5I
+ sCCc6xprSovAGKKwxqaaV/vqTsYsequCX1oaIIFZP25oq7QeuDXJIq9zTqi0KKlGw92h
+ x21VwWwh/OHeMLsWO2O8D6yjEOLjKUZUZ2sIalH9oEU/xq4A/rttA7PJChD3PxS2BKe9
+ J8JQMKRc3mAB+K9uwuu294yXB8T01YEy1vLUpxEMpH2aDB+pbgWTBlrxKXeWpfUoOM3j
+ DlSg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUN8tRvk7JWy79BjIIEq63/BBKhHlFMP97Dph97Z4j6bkJ3xF4ptGnt8jEsObKmXkr9PPcTW1LCcJKPirUYGWQ9@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yx3Bd+I7sVoQrUQQzbZ4QF0/Nw1xYwMorRBvU6UsAoBQTmcIrQt
+ 5ho/mVeP77FoAnq4/faX0kqdoPEJBnx7vPpDLXm5xR2moiuNMyvQdaGVU5UkXfbagjteqHU2Clu
+ Br9Wsupqe40JzrExTk7gMd5nIzoN7zYqkCBw6btherzXfxgwhhYHuaCFn/6c=
+X-Google-Smtp-Source: AGHT+IFXaST1uC3WD96NTyoYvkWSADcTTSKAzNGwIaNsz3qkUTwLUbENlJ54E2Jl7DSkONip4euxKdPS/aPZFlwhY94c0Pn2VKqB
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Joanne Chang <joannechien@google.com>, Zorro Lang <zlang@kernel.org>,
- fstests@vger.kernel.org
-References: <20251229023145.1806877-1-joannechien@google.com>
-Content-Language: en-US
-In-Reply-To: <20251229023145.1806877-1-joannechien@google.com>
-X-Spam-Score: -0.2 (/)
+X-Received: by 2002:a4a:ea91:0:b0:65e:f5db:f478 with SMTP id
+ 006d021491bc7-65ef5dc0810mr6433357eaf.22.1767601218371; Mon, 05 Jan 2026
+ 00:20:18 -0800 (PST)
+Date: Mon, 05 Jan 2026 00:20:18 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <695b7442.050a0220.1c9965.0025.GAE@google.com>
+From: syzbot <syzbot+list884476540f5c2dd44b51@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/29/2025 10:31 AM, Joanne Chang wrote: > generic/735
- attempts to create a file with nearly 2^32 blocks. However, > some filesystems
- have a maximum file block limit below this threshold. > For ins [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Hello f2fs maintainers/developers, This is a 31-day syzbot
+ report for the f2fs subsystem. All related reports/information can be found
+ at: https://syzkaller.appspot.com/upstream/s/f2fs During the period, 2 new
+ issues were detected and 0 were fixed. In total, 9 issues are still open
+ and 72 have already been fixed. 
+ Content analysis details:   (0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vcPJt-0001tt-6D
-Subject: Re: [f2fs-dev] [PATCH v2] common/rc: add _require_blocks_in_file
- helper
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
+ domains are different
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.161.72 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1vcfpE-0007w4-VC
+Subject: [f2fs-dev] [syzbot] Monthly f2fs report (Jan 2026)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,26 +115,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Christoph Hellwig <hch@infradead.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 12/29/2025 10:31 AM, Joanne Chang wrote:
-> generic/735 attempts to create a file with nearly 2^32 blocks. However,
-> some filesystems have a maximum file block limit below this threshold.
-> For instance, F2FS is limited to approximately 2^30 blocks due to the
-> capacity of the inode. So add _require_blocks_in_file helper to skip the
-> test in such cases.
-> 
-> Signed-off-by: Joanne Chang <joannechien@google.com>
+Hello f2fs maintainers/developers,
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+This is a 31-day syzbot report for the f2fs subsystem.
+All related reports/information can be found at:
+https://syzkaller.appspot.com/upstream/s/f2fs
 
-Thanks,
+During the period, 2 new issues were detected and 0 were fixed.
+In total, 9 issues are still open and 72 have already been fixed.
+
+Some of the still happening issues:
+
+Ref Crashes Repro Title
+<1> 1435    Yes   kernel BUG in f2fs_evict_inode (4)
+                  https://syzkaller.appspot.com/bug?extid=5c81eb8c0a380fa578b5
+<2> 1345    Yes   INFO: task hung in f2fs_balance_fs
+                  https://syzkaller.appspot.com/bug?extid=8b85865808c8908a0d8c
+<3> 205     Yes   INFO: task hung in f2fs_issue_checkpoint (2)
+                  https://syzkaller.appspot.com/bug?extid=8a7eea50810efde15b0a
+<4> 1       No    kernel BUG in f2fs_put_super (4)
+                  https://syzkaller.appspot.com/bug?extid=c0a575209250b34549be
+
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+To disable reminders for individual bugs, reply with the following command:
+#syz set <Ref> no-reminders
+
+To change bug's subsystems, reply with:
+#syz set <Ref> subsystems: new-subsystem
+
+You may send multiple commands in a single email message.
 
 
 _______________________________________________
