@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C79A3CF78AB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 06 Jan 2026 10:31:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EABBACF78C9
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 06 Jan 2026 10:35:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=DrECZ0/5eZXRSUp3Viuwcp4hs0bwtesad9Jtx9SWXu0=; b=cH8+N2QWht3T9HnUWpK/ZAxOsJ
-	dpVzoqjk91i82CE3E4WwGK9UmEC2ZSNv/SjMK+yAakb2ZJuOAVE/ledlgtJfbxIyT7oHXAbx0tc4Y
-	1AKc3ovX9DeNBD2leU/uAypy2kDJNoSo4CJcuXiWK+UzNGrCFiXuiToVrLC4/NKUPiPc=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=LPUEbor167ASdAWmVMED10rID3bG5779Y1KoLvVKFmc=; b=XLNwh7q5KwIN2lGv2OTxXiMaVT
+	lbbT5khfZ7BT5DkFYtb2Od51hAzJnPhDQLGtax6Rqia1uNG/jbF6rqZyer2qXBwK8bFjJyP2j464M
+	u5Ss0Y9209R0aDcBZdJ/i3cv5ECs0YHEm03fzOMnxnc7F6MbAJTsz4uBV5MUnWuWtNbw=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vd3PU-0005eF-Bi;
-	Tue, 06 Jan 2026 09:31:28 +0000
+	id 1vd3TH-0005if-3V;
+	Tue, 06 Jan 2026 09:35:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vd3PS-0005e5-MJ
+ (envelope-from <chao@kernel.org>) id 1vd3TE-0005iN-RB
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jan 2026 09:31:26 +0000
+ Tue, 06 Jan 2026 09:35:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QsLt0JdXNIWgMKpHfOm51GpJMimTaJtOEmZYRx9X/Tc=; b=JmIDCDllmn9vgEAX3uKzdBb/Ga
- VzmQ0gYRag4m+Rz90V4i0ko1nidFDN3OZtEiQCsPUh2JGPRu70CXR6DqX3htRvqgbp6Fx0xp2PpX5
- kRBN0Zq2U8018EitgNAe74LjDpvKw+f8IT82Bcw1f0v20t/MpTkG+D4kIEZR+KzPWsv0=;
+ bh=Bht4jmxmUfU9z4NJyvjPF5vKhxpKlMketIC/vbJcoIU=; b=XOS42TphaEdtcqo7nlM615XTO/
+ iavPsUg7hRYwgQQHJY7e/bn2XAr/ghQXhVebdPnoTbi2ThxCmes34S6+rZD3rrzAT1jly2iaEAmCA
+ CU8DQ9y4YqspK+V7l6YFTTuKN5juACw5AFcMz4wtPZ7/ZpG3vFfhvmMjWdF5xJCubMRs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,38 +40,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=QsLt0JdXNIWgMKpHfOm51GpJMimTaJtOEmZYRx9X/Tc=; b=g6khl3W7n82v1weXRK368Ymkfj
- POjVUTkqA7aGPfgx4MpRCl5+7Czk4wwgo7PEOcdo750LzgrleczlL9g9Jcp4DB6Z0uhE+w/e3SQ73
- 6X0kBXA0qikxmgDj6wxMQaTxq/cvtX4ENSVVB0F8lQ5B6piosa71sDlhQHGnCRDkrSoY=;
+ bh=Bht4jmxmUfU9z4NJyvjPF5vKhxpKlMketIC/vbJcoIU=; b=iOfyh0imiYwf3qLawOBj5Vfym/
+ PpgRXagwHeb3pLXgWDCJZb3pIYeUHAGEm8qwgWuyUV3i0x+XX6EOpZ8wx5tdq44HoMXpWmOazyKwh
+ xaZOCdSA2F+splIoARqyCi1QrZUJy+FWStHXB6y8UDJB6/EBugVxT+qpMu2O7R/D6jdE=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vd3PS-00028q-7s for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jan 2026 09:31:26 +0000
+ id 1vd3TF-0002NV-7t for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jan 2026 09:35:21 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D33064078D;
- Tue,  6 Jan 2026 09:31:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B0A1C116C6;
- Tue,  6 Jan 2026 09:31:14 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id D8B9D43DC7;
+ Tue,  6 Jan 2026 09:35:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5C86C116C6;
+ Tue,  6 Jan 2026 09:35:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767691875;
- bh=7AISoZfUTtJ8qU2F5kq1TdtJ/wFsXo1uQ3IwmK9NNGo=;
+ s=k20201202; t=1767692110;
+ bh=XIq6M4UbEmrOWTHwxdcXNVwcnnNutZI50868xEC0uYk=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=dwmTDmpW0BAt9PRsXQKdexoK2XecVcgoH6T7YEkfyZRK619FypwFgHg55/9Er5n89
- zzvQIxZAdEQELq4ZJnQkIqZxJuhXSZtuRu2igDFQNC6uazIxzWrGNrZUCobek2Dmt3
- Lr4kUCE9eqLYdWXGQt6EP6tbWQk6eFOWOZgnrJzBuY2nWlTo6nWN9Z2G+1jZOf3NLC
- Dky3A1R8TAyXOgo+b9YC4TttPjW/tRXKjQNU7F442EvHSGPHK7eLww9fhokV2wQrC9
- A9mM/qXheQChW/iB0EuPbcRIma6oGh73aigeV9deEWfw4oHBhiUVmP58V84SjdA/6Z
- U1mpN39Q4C8tQ==
-Message-ID: <5ca2ef6a-ce46-4d80-b2e0-ff35c628e0ba@kernel.org>
-Date: Tue, 6 Jan 2026 17:31:20 +0800
+ b=cUySUx98FYbcUlvaRZbyOCiF4ajM47DWtdBmrtS5xj68olE+Y/2sA7tZjmpRBpqGP
+ Z3yDRj6ZURpVtruGvJCQuN8EqF1qreZMcVas7IDnNa1cM0NlocDoeodj0F2D7StN1B
+ R5YKXhJxIC1/lxuBREEecwgWEVb7T0UaR1njchD84gDia0Ypcu2SWKt55IhaN/85Y9
+ 2htXyXh3JKVc4fdRueO3ZA9ih8zb2mB9incN0mUTiMctNPeSbacxPYeeZ9pLIPqpKu
+ 4PP+lNv9I/CSCgpBDoH59HqvvJYBi5b73HzjQJ21atjOQewp9wFpBj9YttIVusgLXE
+ U4i1otCUrbpJg==
+Message-ID: <5af27303-8347-4518-acc3-8d36cf14280d@kernel.org>
+Date: Tue, 6 Jan 2026 17:35:16 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Nanzhe Zhao <nzzhao@126.com>, Kim Jaegeuk <jaegeuk@kernel.org>
 References: <20260105153101.152892-1-nzzhao@126.com>
- <20260105153101.152892-5-nzzhao@126.com>
+ <20260105153101.152892-6-nzzhao@126.com>
 Content-Language: en-US
-In-Reply-To: <20260105153101.152892-5-nzzhao@126.com>
+In-Reply-To: <20260105153101.152892-6-nzzhao@126.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -80,9 +80,9 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On 1/5/2026 11:31 PM,
- Nanzhe Zhao wrote: > f2fs_read_data_large_folio()
- can build a single read BIO across multiple > folios during readahead. If
- a folio ends up having none of its subpages > added to [...] 
+ Nanzhe Zhao wrote: > In f2fs_read_data_large_folio(), 
+ the block zeroing path calls > folio_zero_range() and then continues the
+ loop. However, it fails to > advance index and offs [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vd3PS-00028q-7s
-Subject: Re: [f2fs-dev] [PATCH v1 4/5] f2fs: add 'folio_in_bio' to handle
- readahead folios with no BIO submission
+X-Headers-End: 1vd3TF-0002NV-7t
+Subject: Re: [f2fs-dev] [PATCH v1 5/5] f2fs: advance index and offset after
+ zeroing in large folio read
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,84 +116,53 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 1/5/2026 11:31 PM, Nanzhe Zhao wrote:
-> f2fs_read_data_large_folio() can build a single read BIO across multiple
-> folios during readahead. If a folio ends up having none of its subpages
-> added to the BIO (e.g. all subpages are zeroed / treated as holes), it
-> will never be seen by f2fs_finish_read_bio(), so folio_end_read() is
-> never called. This leaves the folio locked and not marked uptodate.
+> In f2fs_read_data_large_folio(), the block zeroing path calls
+> folio_zero_range() and then continues the loop. However, it fails to
+> advance index and offset before continuing.
 > 
-> Track whether the current folio has been added to a BIO via a local
-> 'folio_in_bio' bool flag, and when iterating readahead folios, explicitly
-> mark the folio uptodate (on success) and unlock it when nothing was added.
+> This can cause the loop to repeatedly process the same subpage of the
+> folio, leading to stalls/hangs and incorrect progress when reading large
+> folios with holes/zeroed blocks.
+> 
+> Fix it by incrementing index and offset in the zeroing path before
+> continuing.
 > 
 > Signed-off-by: Nanzhe Zhao <nzzhao@126.com>
 > ---
->   fs/f2fs/data.c | 8 ++++++++
->   1 file changed, 8 insertions(+)
+>   fs/f2fs/data.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
 > 
 > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 66ab7a43a56f..ac569a396914 100644
+> index ac569a396914..07c222bcc5e0 100644
 > --- a/fs/f2fs/data.c
 > +++ b/fs/f2fs/data.c
-> @@ -2430,6 +2430,7 @@ static int f2fs_read_data_large_folio(struct inode *inode,
->   	unsigned nrpages;
->   	struct f2fs_folio_state *ffs;
->   	int ret = 0;
-> +	bool folio_in_bio = false;
-
-No need to initialize folio_in_bio?
-
-> 
->   	if (!IS_IMMUTABLE(inode))
->   		return -EOPNOTSUPP;
-> @@ -2445,6 +2446,7 @@ static int f2fs_read_data_large_folio(struct inode *inode,
+> @@ -2446,7 +2446,7 @@ static int f2fs_read_data_large_folio(struct inode *inode,
 >   	if (!folio)
 >   		goto out;
 > 
-> +	folio_in_bio = false
+> -	folio_in_bio = false
+> +	folio_in_bio = false;
 
-folio_in_bio = false;
+Should be fixed in 4/5.
 
 >   	index = folio->index;
 >   	offset = 0;
 >   	ffs = NULL;
-> @@ -2530,6 +2532,7 @@ static int f2fs_read_data_large_folio(struct inode *inode,
->   					offset << PAGE_SHIFT))
->   			goto submit_and_realloc;
-> 
-> +		folio_in_bio = true;
->   		inc_page_count(F2FS_I_SB(inode), F2FS_RD_DATA);
->   		f2fs_update_iostat(F2FS_I_SB(inode), NULL, FS_DATA_READ_IO,
->   				F2FS_BLKSIZE);
-> @@ -2539,6 +2542,11 @@ static int f2fs_read_data_large_folio(struct inode *inode,
->   	}
->   	trace_f2fs_read_folio(folio, DATA);
->   	if (rac) {
-> +		if (!folio_in_bio) {
-> +			if (!ret)
-> +				folio_mark_uptodate(folio);
-> +			folio_unlock(folio);
-> +	}
+> @@ -2483,6 +2483,8 @@ static int f2fs_read_data_large_folio(struct inode *inode,
+>   				ret = -EIO;
+>   				goto err_out;
+>   			}
+> +			index++;
+> +			offset++;
 
-err_out:
-	/* Nothing was submitted. */
-	if (!bio) {
-		if (!ret)
-			folio_mark_uptodate(folio);
-		folio_unlock(folio);
-
-                 ^^^^^^^^^^^^
-
-If all folios in rac have not been mapped (hole case), will we unlock the folio twice?
+What about increasing index & offset in for () statement, in case we missed
+to update them anywhere.
 
 Thanks,
 
-		return ret;
-	}
-
->   		folio = readahead_folio(rac);
->   		goto next_folio;
->   	}
+>   			continue;
+>   		} else if((map.m_flags & F2FS_MAP_MAPPED)) {
+>   			block_nr = map.m_pblk + index - map.m_lblk;
 > --
 > 2.34.1
 > 
