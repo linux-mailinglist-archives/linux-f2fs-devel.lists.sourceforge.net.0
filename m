@@ -2,75 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E004BCFBDA1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 04:33:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4617CCFBDA7
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 04:33:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=nohIBUqT/tVCiXsyFHDPVIBcQYhBGB9+nsJe/XU+4qc=; b=fBud3revQQy7onejkmfuW3v5o8
-	quKFy3Ka9zO/RJAjFQAsc69jGsBtEZnSox0TBW+QtVt/kUrrtkOrBzRc6BRuO8mSvUBtWJMpnxRUy
-	AGD5w+QQjlQ7Me5fldPGglKt5GM7RcX8m5m+KP2kHIORpIOkFAlsnqRc7IOTw153UFLs=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=gR7lbjaLGcXU1P8Dygh2crWcDd6kajnOzZH8RrUqax4=; b=ir/hUj8puzTl1mTgIaeys5Borv
+	vxxSgdy8hbyHk+d5FKX5NjrQI38XT+YbihaG9LP7WQ+GQqOCV6sZloKdNVQUy14NN5GmdGF50CcCR
+	gG3twMr8aGtrq0mnDFtiibHL995txSjW/x0TOZdfsvfoqX7s18w8+5Y5EVtXTC7s4COA=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdKJ0-0006pm-Qc;
-	Wed, 07 Jan 2026 03:33:55 +0000
+	id 1vdKJ4-0002QC-05;
+	Wed, 07 Jan 2026 03:33:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vdKIz-0006pY-Tz
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vdKJ2-0002Pu-LK
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 03:33:54 +0000
+ Wed, 07 Jan 2026 03:33:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yUKPXsCBu57VWXvy6WCbthLGMRHzxxsZ9GcVDHJtvJI=; b=Svia4meAta5o/y050gF3SKbxmV
- Q5FxZZ9OVZeg7TX/HqufxurVJC9hAGE2kbCu5plTCdYntkd6CIxTMQLLCKD9sizRZIw0zBgNmxEVl
- 7J14Evyn/m4Vata5/vdtavTOpZHIHz/+4NY0lOPUc3/9PS//0MNxrC0GPs2c0PBzUR8E=;
+ bh=H5v2m8hDRVrsktUlTuRHjspB0vGr7d8wN/vWE9BDYmE=; b=M445OM4MgWs9hxv1Mn7rMYJRTH
+ krYGejrCmm30Lz9QG1UtST4SENyedEuBGN2S+iOoLmPxr37HWZmAQa/gIJ2XgUE+3hjoNNY/dWYgf
+ Oag+ixW+PNzircktqmUqB+lxjU7nXWZE5PvEVPJXvY5LvDOFNIYctXqFv0+REqzRDGak=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yUKPXsCBu57VWXvy6WCbthLGMRHzxxsZ9GcVDHJtvJI=; b=lvLHrJMM/NWppi817ajg7+GFz/
- CGbELQ/4yoVIS4kvZpScmi5FQL08Qe+2ytZxVElQ67qUCVzz1eeTPf/Q7FR6U5ePa3fyI0TvcQuON
- RgcuHIKborZ910WN3r9EZKwqHnYFc/0Mv6C469RRt5IoXXv8dzRp/H6Fy6NHiu0W2mHk=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=H5v2m8hDRVrsktUlTuRHjspB0vGr7d8wN/vWE9BDYmE=; b=RF6b2VmDRYWnyRNM5tutmWnKrc
+ pTOuMIFCyx5KC/DRiwibEuGGHhZxebxc/huSm5lYykXtmyxFsa4Le4gekmzoGzRPldCZIIFlTSkWY
+ 3xm2cbsWojHOodzV1OWdMdSB2Fk2dOyM/29EQl4LMZX467tMR3hedM+nvkWoE5OKXDok=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdKJ0-0004YY-6K for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 03:33:54 +0000
+ id 1vdKJ2-0004Ye-5x for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jan 2026 03:33:56 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id E293643BC8;
- Wed,  7 Jan 2026 03:33:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C2A21C4CEF7;
- Wed,  7 Jan 2026 03:33:43 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A29DD60007;
+ Wed,  7 Jan 2026 03:33:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 59CF3C4CEF7;
+ Wed,  7 Jan 2026 03:33:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767756823;
- bh=vq5/5rssmuy5MLgIjKV5Q4smjXPTJKXr/y9bD/cPk5o=;
+ s=k20201202; t=1767756825;
+ bh=PJ4PmrR24RMG0Bcr4OQEO7J5U5CQzdkOk6dHsF6LXnI=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=WFnayqSyUG8/WobARZaidE+cVYOzA3jM8R6miRnkI2FlCGOzWj1aQIULp/AnvjLvw
- D80/AfmiEmtTbVm3VksqhKN9h/vW8113m53d1Z0eW5m25H8/VwcXjz31fhFSpwfJup
- CLTgMEpXBj9mfM3keMfLymP9JhFhyZOfaLWtEkmmv/RNB9pYgGWajYLxv4eBbUY8xw
- 5sQSs1HuySb/nD56GBcLo0gtDi4GLgDM7Ne2ccp0DwIwnfbI2Dl8GfXsLfT/NUNwBc
- yfduQ7lGbR137Q0Frw1P8VwyRJ08Iqt47c+0B5cCr1g9fmnGRukYGDy0wZ2zRxS/rY
- GkdrCvW2RefDA==
+ b=F5SnN1xH7cT5/KVU0ouaeKoQp956g/n9rzaTsVIb1rTECUUtVVeQpgCrW5MlbuuQ0
+ 3CmyoHRD8KykzP0fyr+EhBmX+eOuWJLP8tzqbfTwgI1MGvBgHnlNzBSH5/M834XnpH
+ aj2sYAKqE2LBwiVD9JrNZlQqWnrnlnbedqwmL1ogyqni1RaPkI62Vya5MIFZIYT3tv
+ HIee3BOpBTcQiJp9Jrhk81qo55i11LTEj5U2ydkS4zov6xui9gORCftzH2u21Lngiu
+ 32ZQJMCfTJpFCHkBm6Hn7TtDPEe3OSW3uddqi76goiW9SOu8eVOEJ8kEJMlmsCdY9E
+ cIL+oe44DJ9+g==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 78898380CEF5; Wed,  7 Jan 2026 03:30:22 +0000 (UTC)
+ F2AFC380CEF5; Wed,  7 Jan 2026 03:30:23 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <176775662102.2218650.13503531226058930322.git-patchwork-notify@kernel.org>
-Date: Wed, 07 Jan 2026 03:30:21 +0000
-References: <20251231130514.1061051-2-yangyongpeng.storage@gmail.com>
-In-Reply-To: <20251231130514.1061051-2-yangyongpeng.storage@gmail.com>
-To: Yongpeng Yang <yangyongpeng.storage@gmail.com>
+Message-Id: <176775662252.2218650.15325210865015918584.git-patchwork-notify@kernel.org>
+Date: Wed, 07 Jan 2026 03:30:22 +0000
+References: <20251231135433.1069590-2-monty.pavel.devel@gmail.com>
+In-Reply-To: <20251231135433.1069590-2-monty.pavel.devel@gmail.com>
+To: Yongpeng Yang <monty.pavel.devel@gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -79,7 +79,7 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 31 Dec 2025 21:05:14 +0800 you
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 31 Dec 2025 21:54:33 +0800 you
  wrote: > From: Yongpeng Yang <yangyongpeng@xiaomi.com> > > Some f2fs sysfs
  attributes suffer from out-of-bounds memory access and > incorrect handling
  of integer [...] 
@@ -94,9 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vdKJ0-0004YY-6K
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: fix out-of-bounds access in sysfs
- attribute read/write
+X-Headers-End: 1vdKJ2-0004Ye-5x
+Subject: Re: [f2fs-dev] [PATCH RESEND 1/2] f2fs: fix out-of-bounds access in
+ sysfs attribute read/write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,7 +123,7 @@ Hello:
 This series was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Wed, 31 Dec 2025 21:05:14 +0800 you wrote:
+On Wed, 31 Dec 2025 21:54:33 +0800 you wrote:
 > From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 > 
 > Some f2fs sysfs attributes suffer from out-of-bounds memory access and
@@ -140,10 +140,10 @@ On Wed, 31 Dec 2025 21:05:14 +0800 you wrote:
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,1/2] f2fs: fix out-of-bounds access in sysfs attribute read/write
+  - [f2fs-dev,RESEND,1/2] f2fs: fix out-of-bounds access in sysfs attribute read/write
     https://git.kernel.org/jaegeuk/f2fs/c/98ea0039dbfd
-  - [f2fs-dev,2/2] f2fs: change seq_file_ra_mul and max_io_bytes to unsigned int
-    (no matching commit)
+  - [f2fs-dev,RESEND,2/2] f2fs: change seq_file_ra_mul and max_io_bytes to unsigned int
+    https://git.kernel.org/jaegeuk/f2fs/c/071e50d61cf2
 
 You are awesome, thank you!
 -- 
