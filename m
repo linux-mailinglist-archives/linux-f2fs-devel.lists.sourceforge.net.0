@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B11D1CFB83C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 01:57:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97595CFB908
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 02:17:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Rm4Z6Q95pZRgTxG9BgWvq8PjyciV9J4/xKZ7Tame82g=; b=VbM/LA1UkG3j7MTi2C+VieECo7
-	OYnN0Q88PpNBfwgz4gLFN1Z0tUcc0J3DS6uDwOJNxZ90QGdWx8/rojHdUKkZCFzHxzuFWaMk+JBdk
-	QosuFbenDbT2r9pIl9J7/ln7TV2I9eViEAVdsmDVueBHhAXxdJR0NRY8KfcrjTl6RSWo=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=GGhH0TsiZ4ClLwGaxxuiyqG63xVWa9dihGEEyllucGg=; b=S1DIL8OGlv4tEq54hF/LKjC+FZ
+	E+iFZQl8LTbJA8x+9T4wFoVxhjQ3Ommv7OOXpNPvgwkTOgMcHVmN+mKuZ53tkJpiR8MKwbJENRObH
+	ozwmzWZY20Ua7ORZ36gwFfGD2VTgWbVP2qab3Tgnc7C4S0jKR6pMXrcLjMlb+wvhu2g4=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdHry-0003iK-ES;
-	Wed, 07 Jan 2026 00:57:50 +0000
+	id 1vdIAV-000821-FS;
+	Wed, 07 Jan 2026 01:16:59 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vdHrw-0003iD-G4
+ (envelope-from <chao@kernel.org>) id 1vdIAT-00081u-DS
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 00:57:48 +0000
+ Wed, 07 Jan 2026 01:16:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LeAqr3Ik8UYUH0+Cq50KNb4BpHQTzoN18xxyybrzF+o=; b=FStYr7T405TJwcjTDTbpTwzxz3
- VSk65TZBENju+pNFNAvsK9R82M7wXRv1UV3RV+VsAghSZucipX2kKesHDBr3qwJY59GQEC5E2UboD
- r5DtYbAxyqWTmYmD7zuoup8zB3tceq3j8GzYh4Af1qS2TEAk02vp7ElPtVDl0msnEQ40=;
+ bh=Vy7RReOo7tluBCkaeHoFlJIRwNfwx1RZfNiP2+g42WU=; b=mhjrHvaCQ/vR76+PUMK+Rhx143
+ y+CGlv43wwCHPSTzWt3rSTpkvINEV7UPDGNVzM7eXDgQn2ba11NS4QMZMCuVlN+6yLPrjOXg4245a
+ Pp93TkUgs4n8HMfLh3QuGTsKqrTg7pyf3PnHQqtxL4XeXHKEoKUDluVDrWEd/hPaXh8Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -40,62 +40,65 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LeAqr3Ik8UYUH0+Cq50KNb4BpHQTzoN18xxyybrzF+o=; b=WynG7Q7WfHAJTJlR9zWG/CU4sj
- axGwyq7nlgiCzqdHRFqinqmyHY8NC4wDiLb/8rbz8E6T/GnKOpMWmp2XQDniIBkf3Oi2K8U7iuM5T
- nixuEV0QQr9ck4y/joJEjXVCFr5WVxmBssnlrmii3aMLyLexQfSWmxpUU3k5ABw5PYeY=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=Vy7RReOo7tluBCkaeHoFlJIRwNfwx1RZfNiP2+g42WU=; b=ghymfetUGHgwFE7STXO/76o5H3
+ EPKDK7GUWzI7GC0HwxBN+UForDgmkdcT4IIfzriUYghKsQ69HoqWsr8HEbZINJOoaoRq4ctsnjdKC
+ Y7lvK/HPyPxNtAGETYF5smYBua0iT1epQnnzBQhyBCmg1xoSxp12REKNqQd2M280ABho=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdHrw-0008G9-0v for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 00:57:48 +0000
+ id 1vdIAS-0000HP-SZ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jan 2026 01:16:57 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id BA44043666;
- Wed,  7 Jan 2026 00:57:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9766DC116C6;
- Wed,  7 Jan 2026 00:57:40 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 4D9AF6013B;
+ Wed,  7 Jan 2026 01:16:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 10DC5C116C6;
+ Wed,  7 Jan 2026 01:16:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767747462;
- bh=oKS2J0t5TUoFhrmDLyRSZukiVHlFDaeiU+iuPW8JtC0=;
+ s=k20201202; t=1767748606;
+ bh=xKtV6AOaYVPWBBxqvPFR38c99Xn4erhfv9E/aQPjHoA=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=Cxf3+/TjXyYTplwhUxJMPDwlWkzUpp86vnP9/OTpDJ3r6PgmMhEiN8SpF/lVizs6a
- SPpELwM4JNOU7j+vUrHUvcvoG0i1eIsysA3WztmDhxHbZCx3rx6zDBVohANEUGlpu2
- ADxLkpLzOttkCAEPukWiVyJHA9J8+SowHuMUu4eZtm/gq6eqfy4weMYaDSAZQclqwP
- 766V09zj6u2sEo+QQ043LzZZLS7zOhQ5BHOmQEuBVjhWJFf4XTggoSMGtr96fYgtEX
- KeX+/ZyZJZwxfL/iIUZGRjrN9kVtrMLFS95wuOfqpM4sti2iXBFi1QkfeyCryI17wU
- TBIT55cpOA8kg==
-Message-ID: <d5210fe7-f7bf-457d-b03e-0183bbc0ebc1@kernel.org>
-Date: Wed, 7 Jan 2026 08:57:47 +0800
+ b=Ff3gEjVqn2FeA+tVN0uBp1kAY0JBEo55Jc3TiRFvKGoweIGk0EDuP8Pe7XIcDJjyI
+ LhLPpASYqlifTUcDFetU1d8ccUiKaXZphx4QrhcFZrQ+YpD0knbHCkkpl0cWN8dZxH
+ 64xcVB++tJyExZAJQlMSCb1QU+TV4tx6b1I10wPHT/KEMdBN0NW1gcA5lCMWkof65M
+ wGgrg1tmlrj+ob4ImdoEu/RWfqULiOt5Fz7Jie8uxENVIeo78HThvkBac/uPMUaISj
+ sRluATBjt2GlGe46JJhS92jn6SvX0lyUX68Y8Dl3hzKWUmeTcKMpDbTgPyp7fLh5nU
+ 15iDEvl2/51UQ==
+Message-ID: <c83f9368-e962-440c-9107-ba76ca71602a@kernel.org>
+Date: Wed, 7 Jan 2026 09:16:50 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Yongpeng Yang <monty_pavel@sina.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20260106121210.2374783-2-monty_pavel@sina.com>
+To: Nanzhe Zhao <nzzhao@126.com>
+References: <20260105153101.152892-1-nzzhao@126.com>
+ <20260105153101.152892-5-nzzhao@126.com>
+ <5ca2ef6a-ce46-4d80-b2e0-ff35c628e0ba@kernel.org>
+ <6a3d4e52.402.19b95df7350.Coremail.nzzhao@126.com>
 Content-Language: en-US
-In-Reply-To: <20260106121210.2374783-2-monty_pavel@sina.com>
+In-Reply-To: <6a3d4e52.402.19b95df7350.Coremail.nzzhao@126.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 1/6/2026 8:12 PM, Yongpeng Yang wrote: > From: Yongpeng
- Yang <yangyongpeng@xiaomi.com> > > During SPO tests, when mounting F2FS,
- an -EINVAL error was returned from > f2fs_recover_inode_page. The is [...]
+ Content preview:  On 1/7/2026 8:33 AM, Nanzhe Zhao wrote: > Hi Chao yu: > At
+ 2026-01-06 17:31:20,
+ "Chao Yu" <chao@kernel.org> wrote: >>>> diff --git a/fs/f2fs/data.c
+ b/fs/f2fs/data.c >>>> index 66ab7a43a56f..ac569a3969 [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vdHrw-0008G9-0v
-Subject: Re: [f2fs-dev] [PATCH v5 1/1] f2fs: fix IS_CHECKPOINTED flag
- inconsistency issue caused by concurrent atomic commit and checkpoint
- writes
+X-Headers-End: 1vdIAS-0000HP-SZ
+Subject: Re: [f2fs-dev] [PATCH v1 4/5] f2fs: add 'folio_in_bio' to handle
+ readahead folios with no BIO submission
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,73 +112,88 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: Jinbao Liu <jinbaoliu365@gmail.com>,
- Yongpeng Yang <yangyongpeng@xiaomi.com>, Jinbao Liu <liujinbao1@xiaomi.com>,
- Sheng Yong <shengyong1@xiaomi.com>, linux-f2fs-devel@lists.sourceforge.net,
- stable@kernel.org
+Cc: Kim Jaegeuk <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 1/6/2026 8:12 PM, Yongpeng Yang wrote:
-> From: Yongpeng Yang <yangyongpeng@xiaomi.com>
+On 1/7/2026 8:33 AM, Nanzhe Zhao wrote:
+> Hi Chao yu:
+> At 2026-01-06 17:31:20, "Chao Yu" <chao@kernel.org> wrote:
+>>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+>>>> index 66ab7a43a56f..ac569a396914 100644
+>>>> --- a/fs/f2fs/data.c
+>>>> +++ b/fs/f2fs/data.c
+>>>> @@ -2430,6 +2430,7 @@ static int f2fs_read_data_large_folio(struct inode *inode,
+>>>>    	unsigned nrpages;
+>>>>    	struct f2fs_folio_state *ffs;
+>>>>    	int ret = 0;
+>>>> +	bool folio_in_bio = false;
+>>>
+>>> No need to initialize folio_in_bio?
 > 
-> During SPO tests, when mounting F2FS, an -EINVAL error was returned from
-> f2fs_recover_inode_page. The issue occurred under the following scenario
+> Agreed. It's redundant since we reset it to false for each new folio before processing.
 > 
-> Thread A                                     Thread B
-> f2fs_ioc_commit_atomic_write
->   - f2fs_do_sync_file // atomic = true
->    - f2fs_fsync_node_pages
->      : last_folio = inode folio
->      : schedule before folio_lock(last_folio) f2fs_write_checkpoint
->                                                - block_operations// writeback last_folio
->                                                - schedule before f2fs_flush_nat_entries
->      : set_fsync_mark(last_folio, 1)
->      : set_dentry_mark(last_folio, 1)
->      : folio_mark_dirty(last_folio)
->      - __write_node_folio(last_folio)
->        : f2fs_down_read(&sbi->node_write)//block
->                                                - f2fs_flush_nat_entries
->                                                  : {struct nat_entry}->flag |= BIT(IS_CHECKPOINTED)
->                                                - unblock_operations
->                                                  : f2fs_up_write(&sbi->node_write)
->                                               f2fs_write_checkpoint//return
->        : f2fs_do_write_node_page()
-> f2fs_ioc_commit_atomic_write//return
->                                               SPO
+>>>> @@ -2539,6 +2542,11 @@ static int f2fs_read_data_large_folio(struct inode *inode,
+>>>>    	}
+>>>>    	trace_f2fs_read_folio(folio, DATA);
+>>>>    	if (rac) {
+>>>> +		if (!folio_in_bio) {
+>>>> +			if (!ret)
+>>>> +				folio_mark_uptodate(folio);
+>>>> +			folio_unlock(folio);
+>>>> +	}
+>>>
+>>> err_out:
+>>> 	/* Nothing was submitted. */
+>>> 	if (!bio) {
+>>> 		if (!ret)
+>>> 			folio_mark_uptodate(folio);
+>>> 		folio_unlock(folio);
+>>>
+>>>                  ^^^^^^^^^^^^
+>>>
+>>> If all folios in rac have not been mapped (hole case), will we unlock the folio twice?
 > 
-> Thread A calls f2fs_need_dentry_mark(sbi, ino), and the last_folio has
-> already been written once. However, the {struct nat_entry}->flag did not
-> have the IS_CHECKPOINTED set, causing set_dentry_mark(last_folio, 1) and
-> write last_folio again after Thread B finishes f2fs_write_checkpoint.
+> Are you worried the folio could be unlocked once in the if (rac) { ... } block and then
+> unlocked again at err_out:? If so, I think that won't happen.
 > 
-> After SPO and reboot, it was detected that {struct node_info}->blk_addr
-> was not NULL_ADDR because Thread B successfully write the checkpoint.
+> In such a case, every non-NULL folio will be unlocked exactly once by:
 > 
-> This issue only occurs in atomic write scenarios. For regular file
-> fsync operations, the folio must be dirty. If
-> block_operations->f2fs_sync_node_pages successfully submit the folio
-> write, this path will not be executed. Otherwise, the
-> f2fs_write_checkpoint will need to wait for the folio write submission
-> to complete, as sbi->nr_pages[F2FS_DIRTY_NODES] > 0. Therefore, the
-> situation where f2fs_need_dentry_mark checks that the {struct
-> nat_entry}->flag /wo the IS_CHECKPOINTED flag, but the folio write has
-> already been submitted, will not occur.
+> if (!folio_in_bio) {
+>         if (!ret)
+>                 folio_mark_uptodate(folio);
+>         folio_unlock(folio);
+> }
+> Specifically, after the last folio runs through the block above, the next call:
 > 
-> Therefore, for atomic file fsync, sbi->node_write should be acquired
-> through __write_node_folio to ensure that the IS_CHECKPOINTED flag
-> correctly indicates that the checkpoint write has been completed.
+> folio = readahead_folio(rac);
+> will return NULL. Then we go to next_folio:, and will directly hit:
 > 
-> Fixes: 608514deba38 ("f2fs: set fsync mark only for the last dnode")
-> Cc: stable@kernel.org
-> Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
-> Signed-off-by: Jinbao Liu <liujinbao1@xiaomi.com>
-> Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
+> if (!folio)
+>         goto out;
+> This jumps straight to the out: label, skipping err_out: entirely.
+> Therefore, when ret is not an error code, the err_out: label will never be reached.
+> 
+> If ret becomes an error code, then the current folio will immediately goto err_out;
+> and be unlocked there once.
+> 
+> If rac is NULL (meaning we only read the single large folio passed in as the function argument),
+> we won't enter the if (rac) { ... goto next_folio; } path at all, so we also won't go to next_folio
+> and then potentially goto out;. In that case, it will naturally be unlocked once at err_out:.
+> Or am I missing some edge case here?
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Nanzhe,
+
+Oh, yes, I think so, thanks for the explanation.
 
 Thanks,
+
+> 
+> Thanks,
+> Nanzhe
+
 
 
 _______________________________________________
