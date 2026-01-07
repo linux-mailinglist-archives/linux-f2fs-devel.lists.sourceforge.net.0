@@ -2,76 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BE2ECFBDAD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 04:34:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24E5DCFBDA4
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 04:33:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=fj7Usa87n3ppuMj0fBznCGVUfTudhcAFy3pQGpPTwNc=; b=YD5sc31hxYXmddDnCjB78v6nA3
-	mXWHpv+a3OyMEaXRobO7uSOTGhQYzeJ2R05zNAwRCpSkKZbLmw3Vy8m23en5sHayX5Mgz42WCbJ/W
-	HSudPuo6ZtkxhWsj3FgnfU2bjFKoAPd1ugLWOwRRbCHcLXkmU1myJqAxkBFToCY11yfQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=d+YIa0VQgK+LAcj0s3Zlko1kIygxzyJYvUcNzF/ndYQ=; b=fInfVVUBceVNMNOfknBPt6p73o
+	o/4wpt2PriVFYPTjuJ7ANt35EIVzwjKGhC4581EFw+R2W5XtU5VzsWsjaKfh45n3Vv4wAWUno2SPM
+	ia00IMwm26AsNXw5LbfkHM7o1b0RI1mBSZjgtbrwKu5/9AGXp+5TJTDVJqqDzKiRYpBI=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdKJ6-0006rQ-57;
-	Wed, 07 Jan 2026 03:34:00 +0000
+	id 1vdKJ2-0006qs-S0;
+	Wed, 07 Jan 2026 03:33:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vdKJ4-0006r3-KR
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vdKJ1-0006qb-UH
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 03:33:59 +0000
+ Wed, 07 Jan 2026 03:33:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ckPAeNTpYWUncJSKK2WVpKk2OHkav5fBifKui6eku+w=; b=JXUAtXy7O1h/Fd/toC9ZIUfR11
- xIeViWyGb5rtJP5TTbElpYrrAM5SEXZpsfA66OLmDkbMzNqFQqhdLVVQuohfoBJRxqOgPPh87rKTo
- cWBxNcL8TxjYIzwZkcmnfioIKjzTtHqO5R8ZXyDE/R11woSbedJ5eIQtHkl+D8N5mMoM=;
+ bh=wXlE0ZhXIugB6OZiy5Z64ePE+FI3/Do8aavmiTEaPqE=; b=HiQ1bp/VOiNSv6XMhlJw2yS0bU
+ 62Q0sxkDO+6Uvefuk9Zw1pEIXf229ZIKWRSoBYlSLM7/dCr74x2g4/EfNiopgZSqjZeJDrhMLxNIx
+ 4QGZy/SxevBEX4IA1YKU8MEs5hEX1Oy0cQqT0pCBtfoQwi6DPTNJC6TZUzPFgcbEmENE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ckPAeNTpYWUncJSKK2WVpKk2OHkav5fBifKui6eku+w=; b=i0ZhbTBYpi2t0c8ux+db1hX63P
- idKM2Y+1BFcGsQy+zN273GVxGhc12CQekrxSB2BtucAzO/i0j6BZLsmV39I2NWZWCZjVSC8DAV5+H
- m7/07tXdE4f+GZ6kFvChGTKnhwmYkZoaGJ8qPdZNJCDRPzmDBKsbFQ4qF0Zx4H0AMyPE=;
+ bh=wXlE0ZhXIugB6OZiy5Z64ePE+FI3/Do8aavmiTEaPqE=; b=jVlDPnLmlqbO5LTG2YpkZdrxXU
+ vqj5/9qMXvfVXPTdJdxXaNzZeTOXbLQxhTH2VAwUnFVdagh39VRUKoRYQaIbFXvLYG200EY9a3S3O
+ AZh8cQG076X3NQA818kWJt8dW6tVAtJXcaXsB2giw/AKIvJaLwbNEzaGT+lrhXuDVCQg=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdKJ4-0004Yv-Sq for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 03:33:59 +0000
+ id 1vdKJ1-0004Ya-Dg for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jan 2026 03:33:55 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 5B6A060143
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  7 Jan 2026 03:33:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 133E2C19422;
- Wed,  7 Jan 2026 03:33:48 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id D28EF60147;
+ Wed,  7 Jan 2026 03:33:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88E37C4CEF7;
+ Wed,  7 Jan 2026 03:33:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767756828;
- bh=Z8YzZTUBiepLj+U/Fkl1l4bQThUI8aKSS65n8kdUvEQ=;
+ s=k20201202; t=1767756829;
+ bh=2L/CBeINURPxehm4YsRgkPYcvaK7wHRBVIr61llWTHU=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=YvQvh2gYZYHwAscYVCGeq8iUDR1rygrAlCY7jabTDx2f49OWxFItKajLf53kRlDd1
- 8cX7knW62u4/jFZdWsJ0eWpLLYFBUv8mPP3fVw9t0lTi3OQVlxEoWckT8+y2AFmYWq
- R2GXk+4igeN0NWM3X8DQEcZbjlmKzomccaSZGIqKmjx6Mjji5dSPc5oEpJkk70nfZ5
- R5CX4LlPxmdvo8oFJg6GuASPmLZDITp24g5X+1mhGhrotQJNF/LURx7qHfU6mn18ZO
- Qt+75DYUqG6qDl8+fOuY82bs2ofk9DtMusQcPykaDJvRZ9FEqF+YBk1eqPlAVIP4hj
- SiH+PcX/dbpLg==
+ b=dAIDMaQU+i5mDTHveGU3RNisuLQ2lpseAKYmCGmlhtS25Azuq+VfZj4KeeVZXHYuY
+ 7HIndsb1YjG4K3xP3dUMsyPURlsVW77qZJ10G8UNzIjroUR8PrDsrrKYeXXEnFshnN
+ YIQUFLuZopFV3beDDGrxQOmkTVZQ8V9o7jx4AjkF4uWMyrdER9/4SGFGARhQ7fO2e+
+ 858JrC0E6P0lLKyLZelTuW6TG8M+Xf9Hkr+7yCeFA1U8EtXpX6HKtiFUgALom07WNT
+ dI/50YKZVdsElYyBRhm37108mKlWnsIBA1Cyi7Uml2yKfRPqEnJeYjiT8RJeRV70qX
+ Q4JCXWd+xESww==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- B5819380CEF5; Wed,  7 Jan 2026 03:30:26 +0000 (UTC)
+ 3B5B1380CEF5; Wed,  7 Jan 2026 03:30:28 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <176775662527.2218650.14445074864041510077.git-patchwork-notify@kernel.org>
-Date: Wed, 07 Jan 2026 03:30:25 +0000
-References: <20260104103412.46331-1-chao@kernel.org>
-In-Reply-To: <20260104103412.46331-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+Message-Id: <176775662677.2218650.11507731650705298246.git-patchwork-notify@kernel.org>
+Date: Wed, 07 Jan 2026 03:30:26 +0000
+References: <1766717764-19956-1-git-send-email-zhiguo.niu@unisoc.com>
+In-Reply-To: <1766717764-19956-1-git-send-email-zhiguo.niu@unisoc.com>
+To: Zhiguo Niu <zhiguo.niu@unisoc.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -80,10 +79,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Sun, 4 Jan 2026 18:34:12 +0800 you wrote:
- > Use f2fs_{down,up}_write_trace for gc_lock to trace lock elapsed time.
- > > Signed-off-by: Chao Yu <chao@kernel.org> > --- > v2: > - fix unlock
- gc_lock in [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 26 Dec 2025 10:56:04 +0800 you
+ wrote: > It missed the stat count in f2fs_gc_range. > > Cc: stable@kernel.org
+ > Fixes: 9bf1dcbdfdc8 ("f2fs: fix to account gc stats correctly") >
+ Signed-off-by: [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,9 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vdKJ4-0004Yv-Sq
-Subject: Re: [f2fs-dev] [PATCH v2 06/14] f2fs: trace elapsed time for
- gc_lock lock
+X-Headers-End: 1vdKJ1-0004Ya-Dg
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix to add gc count stat in
+ f2fs_gc_range
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,8 +111,9 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org,
+ Hao_hao.Wang@unisoc.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -123,25 +123,20 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Sun,  4 Jan 2026 18:34:12 +0800 you wrote:
-> Use f2fs_{down,up}_write_trace for gc_lock to trace lock elapsed time.
+On Fri, 26 Dec 2025 10:56:04 +0800 you wrote:
+> It missed the stat count in f2fs_gc_range.
 > 
-> Signed-off-by: Chao Yu <chao@kernel.org>
+> Cc: stable@kernel.org
+> Fixes: 9bf1dcbdfdc8 ("f2fs: fix to account gc stats correctly")
+> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
 > ---
-> v2:
-> - fix unlock gc_lock incorrectly
->  fs/f2fs/checkpoint.c        | 10 ++++++----
->  fs/f2fs/f2fs.h              | 22 ++++++++++++----------
->  fs/f2fs/file.c              | 13 +++++++------
->  fs/f2fs/gc.c                | 23 +++++++++++++----------
->  fs/f2fs/segment.c           | 11 ++++++-----
->  fs/f2fs/super.c             | 14 ++++++++------
->  include/trace/events/f2fs.h |  3 ++-
->  7 files changed, 54 insertions(+), 42 deletions(-)
+> V3: correct Fixes tags
+> 
+> [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v2,06/14] f2fs: trace elapsed time for gc_lock lock
-    https://git.kernel.org/jaegeuk/f2fs/c/e605302c14ff
+  - [f2fs-dev,v3] f2fs: fix to add gc count stat in f2fs_gc_range
+    https://git.kernel.org/jaegeuk/f2fs/c/761dac9073cd
 
 You are awesome, thank you!
 -- 
