@@ -2,75 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80690CFBDB1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 04:34:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE42ACFBDB7
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 04:34:06 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=+cQuU++zuiWi5cRtlbVo/Ht/ioOez6WB0N5wENbrwb0=; b=OKPujdJP10SD1ldOxiXZtJaz5A
-	gRC4bj/OFwp+g1HQziFTyVRuejmA2g6MPrKhMYoEVvgU4LsgIsZEKUcNmP3DhAwbE6cfO1sBSZAxd
-	Otv8Kvod5W+5LRH7tVUzm1/Bw+yn3VGR77sINEwlXX+e0IiYZkseyNYw+VbcIkLGQEvQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=UiANLPgoZk+NXV62NWZbiY45d12LBCooN+dhBXj1LgM=; b=PhInKc8/nUfe5ZQZKgYEz3aNcg
+	AmmyK+YrCY9tOOwdEqQkMdrNhXh9YZ8p/AqVkLoBWOogmcTzPweK+oF+Th7BBotd6TF0rClBh97by
+	leoV+zsUgxoRMkL8JTw8YtNgoSnz/Gb1soLtv895+CNXmQVd99dBLFuQUtcvKzUhN6zE=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdKJA-0006sJ-8Y;
-	Wed, 07 Jan 2026 03:34:04 +0000
+	id 1vdKJB-0002RX-D8;
+	Wed, 07 Jan 2026 03:34:05 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vdKJ8-0006s5-DG
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vdKJ9-0002RM-Qc
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 03:34:02 +0000
+ Wed, 07 Jan 2026 03:34:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=s4FLrqLD36gGVO5I7Gd58lTB32mSmr7GfA3BfOotIt4=; b=Npm1aVx0FlpB9kDqv3m7RZX5yJ
- By8r/cK+yrsezgKSEYjBvAFTmPpkBLqvMIZ+qsNjwqt0hT6aDRZfB+lLzRgsmHmJCCehc8zQl2rwM
- jDYDmsT4v8EzbbI7tn4ofjf6FoBR0a/YdGzlu6eiippKVGy30uGmSFoqWQrJB0+D1abE=;
+ bh=N6C8fw5+EC1zuf0ljrxCE+P0GblJ0dFOdT+PU6wlK7g=; b=FuODf/dhzBKJWh6MgQi7gsjZOz
+ 5ztxDXQ8E0YmsHST7vQ45RbuODeCFMSg2XYWAkiQBYZGgJq5d6zlEwTEopcZMN7G1e43x8pY77nGW
+ L60ch/SPtqXIue31iJOMtQodTkjrRfx3Gm5TzGtouKXJrRi6pXNXta/6pq5fx2ZA8wmc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=s4FLrqLD36gGVO5I7Gd58lTB32mSmr7GfA3BfOotIt4=; b=JFVRT2uM6dn/WOx5kgVecPM0El
- 6xSH4BP4NdQm0rEeGY89I3PkaotIB6UpfCtrTP9FNkLmumflLbtsPCmLUfs/nZpjxomQJs6C/ljeF
- Dk0rrXvXnHaYe7Rirdz6Gbp6GZ08HzOwWBM2qXD40GuCJY4SdiYBE41whoF56LrxG0pQ=;
+ bh=N6C8fw5+EC1zuf0ljrxCE+P0GblJ0dFOdT+PU6wlK7g=; b=PzLXxrHNbIxjTKn7guK8EfKTSM
+ ne2gSQxwICoQxdsYJtDMWAWiBBhPDLDY+6plz1QB9tSw8Tk82IRpQ+nv1x///yWRlKGBjNLYsdjAs
+ 4gcg91tjf9YtJIWMjmcCt62MR8aK3a6nxpegK0SuhUWgco5jkHPy6IxNrmHSOfR5puvQ=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdKJ7-0004Z8-S0 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 03:34:02 +0000
+ id 1vdKJ9-0004ZG-C7 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jan 2026 03:34:03 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 489AC6014E;
- Wed,  7 Jan 2026 03:33:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B1A7C19424;
- Wed,  7 Jan 2026 03:33:51 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id D0F7A60152
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  7 Jan 2026 03:33:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86D62C4CEF7;
+ Wed,  7 Jan 2026 03:33:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767756831;
- bh=8qoYRR2Dl+JFcj5SLDRnMcHenZl1M4IermettvMHiS4=;
+ s=k20201202; t=1767756832;
+ bh=3kb8o5IIZUaNokXWUna0ZswyrU0OjetgvYs+xcbE5WA=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=Rz3YOUZnXPltzHVzmcfQgND1ImpehmskJCnnn6ta1SDWvQ0BiuyIgpzDgec5SeRzA
- edX5LezK1xh9G+mpXeDPHpfQT4j8tjEs5RAY8U/mEcjB9f680Hw/3m4rdZSSpNIiwF
- Co3f8WNPQdP5GGRumCw1S9VZinZOSDnYqtG1kzeK0upkPYuE2ntCcSYsopKRiljBll
- /zQ51WJsy9SFrqlmtbK0gbdGzrKY+CdIJzFWDsli6P0oLvpKyPJW4MOr41tG/XcnjH
- RRYz1wYdhv6DImO8FyGYLAqxl4fd3c/oD5Z422NvuYruDe2e84OHU8yijuO5X4bf2g
- r/i1l8MjiXWxw==
+ b=C/331u9b0c1rR6jIKPT24r+3ygR4BZfpQ3FVf+ygNCvniuPBtBlZtUaZa5B6OW3gR
+ cfG2REygLZ4GKzbNy+ydSJLmLsZOnHhr4+2zDTDxguV3CmTtkZZTl30EYKT2x6Ltxj
+ bv2ShWc2DoK6YCYoFWtihcBwkW7WgekwSFCGwp2aBjgRUOxZM5HjwcFTVuBGxVZknW
+ kj0NIJv2nZ4ar+NIUFTN8fUcfktVO4NtUrKE6+f29yasOBcy9AEMyCIVxB+aGqG9zK
+ 8aOBIpb0RDcBWMvHDur8pgoZo1mkAb1PZZWUYgqUW4oi5iWEUhEHsFt6kFjrMmahcY
+ 7NbvHUfJ3wE3A==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- B578D380CEF5; Wed,  7 Jan 2026 03:30:29 +0000 (UTC)
+ 3B8D4380CEF5; Wed,  7 Jan 2026 03:30:31 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <176775662827.2218650.4842974959758200918.git-patchwork-notify@kernel.org>
-Date: Wed, 07 Jan 2026 03:30:28 +0000
-References: <1765957529-4285-1-git-send-email-zhiguo.niu@unisoc.com>
-In-Reply-To: <1765957529-4285-1-git-send-email-zhiguo.niu@unisoc.com>
-To: Zhiguo Niu <zhiguo.niu@unisoc.com>
+Message-Id: <176775662980.2218650.15637976105031314723.git-patchwork-notify@kernel.org>
+Date: Wed, 07 Jan 2026 03:30:29 +0000
+References: <20260106063117.29975-1-chao@kernel.org>
+In-Reply-To: <20260106063117.29975-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -79,10 +80,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 17 Dec 2025 15:45:29 +0800 you
- wrote: > 1. qf_inum has been got and checked in its caller f2fs_enable_quotas
- > 2. f2fs_sb_has_quota_ino has bee checked in its all callers > 3. use sbi
- cleanup [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 6 Jan 2026 14:31:17 +0800 you wrote:
+ > Sysfs entry name is gc_pin_file_thresh instead of gc_pin_file_threshold,
+ > fix it. > > Cc: stable@kernel.org > Fixes: c521a6ab4ad7 ("f2fs: fix to
+ limit g [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +95,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vdKJ7-0004Z8-S0
-Subject: Re: [f2fs-dev] [PATCH] f2fs: remove some redundant codes in
- f2fs_quota_enable
+X-Headers-End: 1vdKJ9-0004ZG-C7
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to check sysfs filename w/
+ gc_pin_file_thresh correctly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,9 +112,8 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org,
- Hao_hao.Wang@unisoc.com
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ stable@kernel.org, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -123,19 +123,19 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Wed, 17 Dec 2025 15:45:29 +0800 you wrote:
-> 1. qf_inum has been got and checked in its caller f2fs_enable_quotas
-> 2. f2fs_sb_has_quota_ino has bee checked in its all callers
-> 3. use sbi cleanup F2FS_SB(sb)
+On Tue,  6 Jan 2026 14:31:17 +0800 you wrote:
+> Sysfs entry name is gc_pin_file_thresh instead of gc_pin_file_threshold,
+> fix it.
 > 
-> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
-> ---
->  fs/f2fs/super.c | 16 ++++------------
->  1 file changed, 4 insertions(+), 12 deletions(-)
+> Cc: stable@kernel.org
+> Fixes: c521a6ab4ad7 ("f2fs: fix to limit gc_pin_file_threshold")
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> 
+> [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: remove some redundant codes in f2fs_quota_enable
-    https://git.kernel.org/jaegeuk/f2fs/c/3250bd41d95c
+  - [f2fs-dev] f2fs: fix to check sysfs filename w/ gc_pin_file_thresh correctly
+    https://git.kernel.org/jaegeuk/f2fs/c/0eda086de85e
 
 You are awesome, thank you!
 -- 
