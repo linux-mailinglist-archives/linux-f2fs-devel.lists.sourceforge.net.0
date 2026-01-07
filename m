@@ -2,104 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D2D3CFBACB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 03:13:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19304CFBB1D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 03:19:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:From:References:To:MIME-Version:Date:Message-ID:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=VIF0TtG1ZVwmofyXjAa2EQuoI/37pyGATDgY7ZalBpQ=; b=kT13FzXpfYwU6LiuTT/uGwl045
-	x9GWOsZoSusovLDJLDnmdwaF5eVext5kbJ0nJJRtomkN14iCASesyXlsLsAOJBXEhtkCe3IsRu4/E
-	XP5giqTjzvnGzY/MABLeYgWk6WFfS+jouG1GP+Xpb1VOBmWkfQXUofF7fQK3DQk5Rkpc=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:To:From:Message-ID:In-Reply-To:Date:MIME-Version:Sender:Reply-To:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:References:List-Owner;
+	bh=4/fmWYW2+nPvIQxGugTcUo87uUcq2WCLXwg4QDglVOM=; b=Rox18mLdnkTYTlBl5qpVNoO0rs
+	xhf7cGnsz9XCcw6DMJsi61WfT+VZSBvknXi6YnYBWQA7VKvF0b7VgZOM6P+3Qc0QyiwRXPl3B1zGz
+	9PHoZQR4z6ccKo3mp+rBi6phgm6iMQORWw+FlFmzhtNO1knlpj6Gp9XnJU+vROQU13JI=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdJ2w-00058Q-6e;
-	Wed, 07 Jan 2026 02:13:14 +0000
+	id 1vdJ8m-0000oG-Nu;
+	Wed, 07 Jan 2026 02:19:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <monty_pavel@sina.com>) id 1vdJ2r-00058J-T0
- for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 02:13:10 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3lsJdaQkbAOMXdePFQQJWFUUNI.LTTLQJZXJWHTSYJSY.HTR@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1vdJ8l-0000oA-6J for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jan 2026 02:19:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:To:From:
+ Subject:Message-ID:In-Reply-To:Date:MIME-Version:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WZHHh5V5Qp+YJvhH0ZkdPdfEEkDBvvJcDjL1kTv9Q3g=; b=QaCOiXIHbUqpNxSZ2HbSOm7Pi1
- qenaB708IGvOGGUxRiqcGP1EYqMXEr8nk1TIhPkYf7CgxXKfGyf2NWBmAHzZ2RCw59LO6zwy+BhWa
- n46LPwS0iyam8iEBVWWmZ6QAfhlPRP5loxls75CTf2hcEyTpCheUwu1xA+7atAKrx3bw=;
+ Resent-To:Resent-Cc:Resent-Message-ID:References:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=BAbsJU1DWgK3LHp5XAQeHdFwhsW4fYHu+oiMAyzAIvo=; b=YeRztMCpROy4dqzTULm+c6Nn+G
+ nwdNzklQT6VJZDfAwWAndkGW3HTVI36vWkmB6Jwt2wMk4Qvn3biC6uWuNfY5PxrmsiLdoG4EYtqy8
+ 9VchIX5iKI611BpfAWeYSRtFq2aEzUK2Uzpd0G2rJ69XNRI2Jimo+b3PzXYS/m+dcVrI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:To:From:Subject:Message-ID:
+ In-Reply-To:Date:MIME-Version:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=WZHHh5V5Qp+YJvhH0ZkdPdfEEkDBvvJcDjL1kTv9Q3g=; b=lxM+XDY7eUHa6WGMVI70VmHvrC
- yQwVZ4CeDMaIlCF6i4//Rh3OUjaoRkQtHidVxzIcm5WnEaPZyrA3UA8GnVdaHizC2TpZGrjPsAlqp
- kdTa4f4KLv6MEn5ClfQ4KV2mYxBFXRxyTBXzv7WUCq5HMg5gDv8+JeBPEl+GMNt6K4nI=;
-Received: from smtp153-141.sina.com.cn ([61.135.153.141])
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=BAbsJU1DWgK3LHp5XAQeHdFwhsW4fYHu+oiMAyzAIvo=; b=ZfZf2NSBgfPRjvIPipJLFUf3iA
+ ijxnlhKIarCJTS2WZ7TkU8vLbc+cNu+hFAJ2WLa5EVgBGc6HtcGV8STlC1xrdsbWsLS4R83GK4Qzo
+ LkLMXKbPRxhuwsUUFQ85ptCnomrDZXDZbUwHrviBKnW4LN6z9KQZHp/dtuNh7J9e6Oow=;
+Received: from mail-oo1-f70.google.com ([209.85.161.70])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdJ2q-0001v4-AG for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 02:13:09 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
- t=1767751988; bh=WZHHh5V5Qp+YJvhH0ZkdPdfEEkDBvvJcDjL1kTv9Q3g=;
- h=Message-ID:Date:Subject:From;
- b=P8QffGc1mpyvs/1QuHVO7LE+6R0zylSipkKtKk25LMEl7duBFzL36B8ullhnZ29df
- MIgITi//ynBLPeUqTSUFX0bx2lPHVp4723VrzX93btLLK8tZqbcSA4SfllhrkzZHCT
- pXW8ZvSevmPdkqUnQJyJ4VfXYyP7KpGwd9O6jtyc=
-X-SMAIL-HELO: [10.189.138.37]
-Received: from unknown (HELO [10.189.138.37])([114.247.175.249])
- by sina.com (10.54.253.31) with ESMTP
- id 695DC129000031EC; Wed, 7 Jan 2026 10:12:59 +0800 (CST)
-X-Sender: monty_pavel@sina.com
-X-Auth-ID: monty_pavel@sina.com
-Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
- dkim=none header.i=none;
- dmarc=none action=none header.from=monty_pavel@sina.com
-X-SMAIL-MID: 6627056816478
-X-SMAIL-UIID: B6F009BC39B0463D8021474544295701-20260107-101259-1
-Message-ID: <c5cac459-afa4-47a9-8e4d-636c52329b5a@sina.com>
-Date: Wed, 7 Jan 2026 10:12:57 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1vdJ8j-000250-44 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jan 2026 02:19:15 +0000
+Received: by mail-oo1-f70.google.com with SMTP id
+ 006d021491bc7-65f540eb569so1853124eaf.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 06 Jan 2026 18:19:13 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1767752342; x=1768357142;
+ h=content-transfer-encoding:to:from:subject:message-id:in-reply-to
+ :date:mime-version:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BAbsJU1DWgK3LHp5XAQeHdFwhsW4fYHu+oiMAyzAIvo=;
+ b=PXtWkmHI3ThWiEn+tvImXbTEe8y56cw3QEpaVIf0CL/B1ZsIJADU297atjpYWWvaEI
+ Bj3pET2XtDZ6NtP9zFyLLahYxvbxfKtaQV1VUpO2Q4qnfQaxHCV2rR1hy33qYy2aL9li
+ mSVcKRJPJhe9WzAYEFa5VELlIMo0rlRCq/nsBmxqFzOsBH6auwnt+eOWhrmSDAwNVGgd
+ 4zLXEYx69n+blcreYjvcoy/X0ZLcWIEWSOPl/NSxnF89AjW0yAqjfow+aIDINK8roCU9
+ PuMwXzukGJUGg+22zYjlSBARTkll7Bpw0u/NHqswJ+dSW2H3mAwagrv6eVWnwzKBgs4g
+ fdwQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVIgqtFkQozNLIiMtEsWsYAHLNk1FsurI6urr1li1ga2UxRudP+c8U/IXaciDiIM+NVpGX2dyopRusGf0tvMD8y@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzTWjfdQyyMaN2wk1dEN8YyD+HOB0IW90l5wPEt1J1uFxQ7M7rl
+ 3rmFvwy5J7iSRiwFYqN+Qr9ZTSJC8iNofU9i62FtXH9l3ssXvbejSUX5s+AP1qDEUMTlExUy48U
+ oJASxe70jSXU+WPrw011J32gM7oLc2I9fs32rT/0u+EcZYpPu0ngp64Bezi0=
+X-Google-Smtp-Source: AGHT+IFmxG6tnHt0OuX0x5hJDh50etwFWEyUmEGDILcapkyiUo07T+MNRRvQO2oA9OfM1jvA7VlNF2y/GL9ZsU9ZFTxwE9oUgZZa
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Chao Yu <chao@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20260106115644.2368389-3-monty_pavel@sina.com>
- <aabdfeec-a794-440b-a212-81ea02868506@kernel.org>
-Content-Language: en-US
-From: Yongpeng Yang <monty_pavel@sina.com>
-In-Reply-To: <aabdfeec-a794-440b-a212-81ea02868506@kernel.org>
-X-Spam-Score: -0.2 (/)
+X-Received: by 2002:a05:6820:770b:b0:659:9a49:8ff9 with SMTP id
+ 006d021491bc7-65f54f68da2mr294441eaf.38.1767752342420; Tue, 06 Jan 2026
+ 18:19:02 -0800 (PST)
+Date: Tue, 06 Jan 2026 18:19:02 -0800
+In-Reply-To: <4cbb379c-99e7-4f87-a435-43b3cecdf888@kernel.org>
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <695dc296.050a0220.1c677c.0352.GAE@google.com>
+From: syzbot <syzbot+b4444e3c972a7a124187@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 1/7/26 08:57, Chao Yu via Linux-f2fs-devel wrote: > On
- 1/6/2026 7:56 PM, Yongpeng Yang wrote: >> From: Yongpeng Yang >> >> Some f2fs
- sysfs attributes suffer from out-of-bounds memory access and > [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Hello,
+ syzbot tried to test the proposed patch but the build/boot
+ failed: c 0x1003 length: 249 > 9 [ 99.252780][ T4680] Bluetooth: hci0:
+ unexpected
+ cc 0x1001 length: 249 > 9 [ 99.258304][ T4680] Bluetooth: hci0: unexpected
+ cc 0x0c23 length: 249 > 4 [ 99.262003][ T4680] Blue [...] 
+ Content analysis details:   (0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [monty_pavel(at)sina.com]
-X-Headers-End: 1vdJ2q-0001v4-AG
-Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: fix out-of-bounds access in
- sysfs attribute read/write
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.161.70 listed in wl.mailspike.net]
+ 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
+ domains are different
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1vdJ8j-000250-44
+Subject: Re: [f2fs-dev] [syzbot] [f2fs?] KASAN: use-after-free Read in
+ f2fs_write_end_io (2)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,143 +119,265 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jinbao Liu <jinbaoliu365@gmail.com>, stable@kernel.org,
- Yongpeng Yang <yangyongpeng@xiaomi.com>, Jinbao Liu <liujinbao1@xiaomi.com>,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMS83LzI2IDA4OjU3LCBDaGFvIFl1IHZpYSBMaW51eC1mMmZzLWRldmVsIHdyb3RlOgo+IE9u
-IDEvNi8yMDI2IDc6NTYgUE0sIFlvbmdwZW5nIFlhbmcgd3JvdGU6Cj4+IEZyb206IFlvbmdwZW5n
-IFlhbmcgPHlhbmd5b25ncGVuZ0B4aWFvbWkuY29tPgo+Pgo+PiBTb21lIGYyZnMgc3lzZnMgYXR0
-cmlidXRlcyBzdWZmZXIgZnJvbSBvdXQtb2YtYm91bmRzIG1lbW9yeSBhY2Nlc3MgYW5kCj4+IGlu
-Y29ycmVjdCBoYW5kbGluZyBvZiBpbnRlZ2VyIHZhbHVlcyB3aG9zZSBzaXplIGlzIG5vdCA0IGJ5
-dGVzLgo+Pgo+PiBGb3IgZXhhbXBsZToKPj4gdm06fiMgZWNobyA2NTUzNyA+IC9zeXMvZnMvZjJm
-cy92ZGUvY2FydmVfb3V0Cj4+IHZtOn4jIGNhdCAvc3lzL2ZzL2YyZnMvdmRlL2NhcnZlX291dAo+
-PiA2NTUzNwo+PiB2bTp+IyBlY2hvIDQyOTQ5NjcyOTcgPiAvc3lzL2ZzL2YyZnMvdmRlL2F0Z2Nf
-YWdlX3RocmVzaG9sZAo+PiB2bTp+IyBjYXQgL3N5cy9mcy9mMmZzL3ZkZS9hdGdjX2FnZV90aHJl
-c2hvbGQKPj4gMQo+Pgo+PiBjYXJ2ZV9vdXQgbWFwcyB0byB7c3RydWN0IGYyZnNfc2JfaW5mb30t
-PmNhcnZlX291dCwgd2hpY2ggaXMgYSA4LWJpdAo+PiBpbnRlZ2VyLiBIb3dldmVyLCB0aGUgc3lz
-ZnMgaW50ZXJmYWNlIGFsbG93cyBzZXR0aW5nIGl0IHRvIGEgdmFsdWUKPj4gbGFyZ2VyIHRoYW4g
-MjU1LCByZXN1bHRpbmcgaW4gYW4gb3V0LW9mLXJhbmdlIHVwZGF0ZS4KPj4KPj4gYXRnY19hZ2Vf
-dGhyZXNob2xkIG1hcHMgdG8ge3N0cnVjdCBhdGdjX21hbmFnZW1lbnR9LT5hZ2VfdGhyZXNob2xk
-LAo+PiB3aGljaCBpcyBhIDY0LWJpdCBpbnRlZ2VyLCBidXQgaXRzIHN5c2ZzIGludGVyZmFjZSBj
-YW5ub3QgY29ycmVjdGx5IHNldAo+PiB2YWx1ZXMgbGFyZ2VyIHRoYW4gVUlOVF9NQVguCj4+Cj4+
-IFRoZSByb290IGNhdXNlcyBhcmU6Cj4+IDEuIF9fc2JpX3N0b3JlKCkgdHJlYXRzIGFsbCBkZWZh
-dWx0IHZhbHVlcyBhcyB1bnNpZ25lZCBpbnQsIHdoaWNoCj4+IHByZXZlbnRzIHVwZGF0aW5nIGlu
-dGVnZXJzIGxhcmdlciB0aGFuIDQgYnl0ZXMgYW5kIGNhdXNlcyBvdXQtb2YtYm91bmRzCj4+IHdy
-aXRlcyBmb3IgaW50ZWdlcnMgc21hbGxlciB0aGFuIDQgYnl0ZXMuCj4+Cj4+IDIuIGYyZnNfc2Jp
-X3Nob3coKSBhbHNvIGFzc3VtZXMgYWxsIGRlZmF1bHQgdmFsdWVzIGFyZSB1bnNpZ25lZCBpbnQs
-Cj4+IGxlYWRpbmcgdG8gb3V0LW9mLWJvdW5kcyByZWFkcyBhbmQgaW5jb3JyZWN0IGFjY2VzcyB0
-byBpbnRlZ2VycyBsYXJnZXIKPj4gdGhhbiA0IGJ5dGVzLgo+Pgo+PiBUaGlzIHBhdGNoIGludHJv
-ZHVjZXMge3N0cnVjdCBmMmZzX2F0dHJ9LT5zaXplIHRvIHJlY29yZCB0aGUgYWN0dWFsIHNpemUK
-Pj4gb2YgdGhlIGludGVnZXIgYXNzb2NpYXRlZCB3aXRoIGVhY2ggc3lzZnMgYXR0cmlidXRlLiBX
-aXRoIHRoaXMKPj4gaW5mb3JtYXRpb24sIHN5c2ZzIHJlYWQgYW5kIHdyaXRlIG9wZXJhdGlvbnMg
-Y2FuIGNvcnJlY3RseSBhY2Nlc3MgYW5kCj4+IHVwZGF0ZSB2YWx1ZXMgYWNjb3JkaW5nIHRvIHRo
-ZWlyIHJlYWwgZGF0YSBzaXplLCBhdm9pZGluZyBtZW1vcnkKPj4gY29ycnVwdGlvbiBhbmQgdHJ1
-bmNhdGlvbi4KPj4KPj4gRml4ZXM6IGI1OWQwYmFlNmNhMygiZjJmczogYWRkIHN5c2ZzIHN1cHBv
-cnQgZm9yIGNvbnRyb2xsaW5nIHRoZQo+PiBnY190aHJlYWQiKQo+IAo+IC4vc2NyaXB0cy9jaGVj
-a3BhdGNoLnBsIHRyaWdnZXJzIHdhcm5pbmcgYXMgYmVsb3c6Cj4gCj4gV0FSTklORzogUGxlYXNl
-IHVzZSBjb3JyZWN0IEZpeGVzOiBzdHlsZSAnRml4ZXM6IDwxMisgY2hhcnMgb2Ygc2hhMT4KPiAo
-Ijx0aXRsZSBsaW5lPiIpJyAtIGllOiAnRml4ZXM6IGI1OWQwYmFlNmNhMyAoImYyZnM6IGFkZCBz
-eXNmcyBzdXBwb3J0Cj4gZm9yIGNvbnRyb2xsaW5nIHRoZSBnY190aHJlYWQiKScKPiAjNDA6Cj4g
-Rml4ZXM6IGI1OWQwYmFlNmNhMygiZjJmczogYWRkIHN5c2ZzIHN1cHBvcnQgZm9yIGNvbnRyb2xs
-aW5nIHRoZQo+IGdjX3RocmVhZCIpCgpTb3JyeSwgbXkgbWlzdGFrZS4gSSdsbCBmaXggdGhpcyBp
-biB2MyBwYXRjaC4KClRoYW5rcwpZb25ncGVuZywKCj4gCj4gT3RoZXJ3aXNlLCB0aGUgcGF0Y2gg
-bG9va3MgZ29vZCB0byBtZS4KPiAKPiBUaGFua3MsCj4gCj4+IENjOiBzdGFibGVAa2VybmVsLm9y
-Zwo+PiBTaWduZWQtb2ZmLWJ5OiBKaW5iYW8gTGl1IDxsaXVqaW5iYW8xQHhpYW9taS5jb20+Cj4+
-IFNpZ25lZC1vZmYtYnk6IFlvbmdwZW5nIFlhbmcgPHlhbmd5b25ncGVuZ0B4aWFvbWkuY29tPgo+
-PiAtLS0KPj4gdjI6Cj4+IC0gUmVwbGFjZSBnY19waW5fZmlsZV90aHJlc2ggZXhhbXBsZSB3aXRo
-IGNhcnZlX291dCBpbiB0aGUgY29tbWl0Cj4+IG1lc3NhZ2UuCj4+IC0tLQo+PiDCoCBmcy9mMmZz
-L3N5c2ZzLmMgfCA2MCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKyst
-LS0tLS0tCj4+IMKgIDEgZmlsZSBjaGFuZ2VkLCA1MiBpbnNlcnRpb25zKCspLCA4IGRlbGV0aW9u
-cygtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9zeXNmcy5jIGIvZnMvZjJmcy9zeXNmcy5j
-Cj4+IGluZGV4IGM0MmY0Zjk3OWQxMy4uZTZhOThkZGQ3M2IzIDEwMDY0NAo+PiAtLS0gYS9mcy9m
-MmZzL3N5c2ZzLmMKPj4gKysrIGIvZnMvZjJmcy9zeXNmcy5jCj4+IEBAIC01OCw2ICs1OCw3IEBA
-IHN0cnVjdCBmMmZzX2F0dHIgewo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbnN0
-IGNoYXIgKmJ1Ziwgc2l6ZV90IGxlbik7Cj4+IMKgwqDCoMKgwqAgaW50IHN0cnVjdF90eXBlOwo+
-PiDCoMKgwqDCoMKgIGludCBvZmZzZXQ7Cj4+ICvCoMKgwqAgaW50IHNpemU7Cj4+IMKgwqDCoMKg
-wqAgaW50IGlkOwo+PiDCoCB9Owo+PiDCoCBAQCAtMzQ0LDExICszNDUsMzAgQEAgc3RhdGljIHNz
-aXplX3QgbWFpbl9ibGthZGRyX3Nob3coc3RydWN0Cj4+IGYyZnNfYXR0ciAqYSwKPj4gwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgKHVuc2lnbmVkIGxvbmcgbG9uZylNQUlOX0JMS0FERFIoc2Jp
-KSk7Cj4+IMKgIH0KPj4gwqAgK3N0YXRpYyBzc2l6ZV90IF9fc2JpX3Nob3dfdmFsdWUoc3RydWN0
-IGYyZnNfYXR0ciAqYSwKPj4gK8KgwqDCoMKgwqDCoMKgIHN0cnVjdCBmMmZzX3NiX2luZm8gKnNi
-aSwgY2hhciAqYnVmLAo+PiArwqDCoMKgwqDCoMKgwqAgdW5zaWduZWQgY2hhciAqdmFsdWUpCj4+
-ICt7Cj4+ICvCoMKgwqAgc3dpdGNoIChhLT5zaXplKSB7Cj4+ICvCoMKgwqAgY2FzZSAxOgo+PiAr
-wqDCoMKgwqDCoMKgwqAgcmV0dXJuIHN5c2ZzX2VtaXQoYnVmLCAiJXVcbiIsICoodTggKil2YWx1
-ZSk7Cj4+ICvCoMKgwqAgY2FzZSAyOgo+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuIHN5c2ZzX2Vt
-aXQoYnVmLCAiJXVcbiIsICoodTE2ICopdmFsdWUpOwo+PiArwqDCoMKgIGNhc2UgNDoKPj4gK8Kg
-wqDCoMKgwqDCoMKgIHJldHVybiBzeXNmc19lbWl0KGJ1ZiwgIiV1XG4iLCAqKHUzMiAqKXZhbHVl
-KTsKPj4gK8KgwqDCoCBjYXNlIDg6Cj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gc3lzZnNfZW1p
-dChidWYsICIlbGx1XG4iLCAqKHU2NCAqKXZhbHVlKTsKPj4gK8KgwqDCoCBkZWZhdWx0Ogo+PiAr
-wqDCoMKgwqDCoMKgwqAgZjJmc19idWdfb24oc2JpLCAxKTsKPj4gK8KgwqDCoMKgwqDCoMKgIHJl
-dHVybiBzeXNmc19lbWl0KGJ1ZiwKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAi
-c2hvdyBzeXNmcyBub2RlIHZhbHVlIHdpdGggd3JvbmcgdHlwZVxuIik7Cj4+ICvCoMKgwqAgfQo+
-PiArfQo+PiArCj4+IMKgIHN0YXRpYyBzc2l6ZV90IGYyZnNfc2JpX3Nob3coc3RydWN0IGYyZnNf
-YXR0ciAqYSwKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGYyZnNfc2JfaW5m
-byAqc2JpLCBjaGFyICpidWYpCj4+IMKgIHsKPj4gwqDCoMKgwqDCoCB1bnNpZ25lZCBjaGFyICpw
-dHIgPSBOVUxMOwo+PiAtwqDCoMKgIHVuc2lnbmVkIGludCAqdWk7Cj4+IMKgIMKgwqDCoMKgwqAg
-cHRyID0gX19zdHJ1Y3RfcHRyKHNiaSwgYS0+c3RydWN0X3R5cGUpOwo+PiDCoMKgwqDCoMKgIGlm
-ICghcHRyKQo+PiBAQCAtNDI4LDkgKzQ0OCwzMCBAQCBzdGF0aWMgc3NpemVfdCBmMmZzX3NiaV9z
-aG93KHN0cnVjdCBmMmZzX2F0dHIgKmEsCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgYXRvbWljX3JlYWQoJnNiaS0+Y3BfY2FsbF9jb3VudFtCQUNLR1JPVU5EXSkpOwo+PiDC
-oCAjZW5kaWYKPj4gwqAgLcKgwqDCoCB1aSA9ICh1bnNpZ25lZCBpbnQgKikocHRyICsgYS0+b2Zm
-c2V0KTsKPj4gK8KgwqDCoCByZXR1cm4gX19zYmlfc2hvd192YWx1ZShhLCBzYmksIGJ1ZiwgcHRy
-ICsgYS0+b2Zmc2V0KTsKPj4gK30KPj4gwqAgLcKgwqDCoCByZXR1cm4gc3lzZnNfZW1pdChidWYs
-ICIldVxuIiwgKnVpKTsKPj4gK3N0YXRpYyB2b2lkIF9fc2JpX3N0b3JlX3ZhbHVlKHN0cnVjdCBm
-MmZzX2F0dHIgKmEsCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBmMmZzX3NiX2lu
-Zm8gKnNiaSwKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdW5zaWduZWQgY2hhciAqdWksIHVu
-c2lnbmVkIGxvbmcgdmFsdWUpCj4+ICt7Cj4+ICvCoMKgwqAgc3dpdGNoIChhLT5zaXplKSB7Cj4+
-ICvCoMKgwqAgY2FzZSAxOgo+PiArwqDCoMKgwqDCoMKgwqAgKih1OCAqKXVpID0gdmFsdWU7Cj4+
-ICvCoMKgwqDCoMKgwqDCoCBicmVhazsKPj4gK8KgwqDCoCBjYXNlIDI6Cj4+ICvCoMKgwqDCoMKg
-wqDCoCAqKHUxNiAqKXVpID0gdmFsdWU7Cj4+ICvCoMKgwqDCoMKgwqDCoCBicmVhazsKPj4gK8Kg
-wqDCoCBjYXNlIDQ6Cj4+ICvCoMKgwqDCoMKgwqDCoCAqKHUzMiAqKXVpID0gdmFsdWU7Cj4+ICvC
-oMKgwqDCoMKgwqDCoCBicmVhazsKPj4gK8KgwqDCoCBjYXNlIDg6Cj4+ICvCoMKgwqDCoMKgwqDC
-oCAqKHU2NCAqKXVpID0gdmFsdWU7Cj4+ICvCoMKgwqDCoMKgwqDCoCBicmVhazsKPj4gK8KgwqDC
-oCBkZWZhdWx0Ogo+PiArwqDCoMKgwqDCoMKgwqAgZjJmc19idWdfb24oc2JpLCAxKTsKPj4gK8Kg
-wqDCoMKgwqDCoMKgIGYyZnNfZXJyKHNiaSwgInN0b3JlIHN5c2ZzIG5vZGUgdmFsdWUgd2l0aCB3
-cm9uZyB0eXBlIik7Cj4+ICvCoMKgwqAgfQo+PiDCoCB9Cj4+IMKgIMKgIHN0YXRpYyBzc2l6ZV90
-IF9fc2JpX3N0b3JlKHN0cnVjdCBmMmZzX2F0dHIgKmEsCj4+IEBAIC05MDYsNyArOTQ3LDcgQEAg
-c3RhdGljIHNzaXplX3QgX19zYmlfc3RvcmUoc3RydWN0IGYyZnNfYXR0ciAqYSwKPj4gwqDCoMKg
-wqDCoMKgwqDCoMKgIHJldHVybiBjb3VudDsKPj4gwqDCoMKgwqDCoCB9Cj4+IMKgIC3CoMKgwqAg
-KnVpID0gKHVuc2lnbmVkIGludCl0Owo+PiArwqDCoMKgIF9fc2JpX3N0b3JlX3ZhbHVlKGEsIHNi
-aSwgcHRyICsgYS0+b2Zmc2V0LCB0KTsKPj4gwqAgwqDCoMKgwqDCoCByZXR1cm4gY291bnQ7Cj4+
-IMKgIH0KPj4gQEAgLTEwNTMsMjQgKzEwOTQsMjcgQEAgc3RhdGljIHN0cnVjdCBmMmZzX2F0dHIg
-ZjJmc19hdHRyX3NiXyMjX25hbWUgPQo+PiB7wqDCoMKgwqDCoMKgwqAgXAo+PiDCoMKgwqDCoMKg
-IC5pZMKgwqDCoCA9IEYyRlNfRkVBVFVSRV8jI19mZWF0LMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoCBcCj4+IMKgIH0KPj4gwqAgLSNkZWZpbmUgRjJGU19BVFRSX09GRlNFVChfc3RydWN0
-X3R5cGUsIF9uYW1lLCBfbW9kZSwgX3Nob3csIF9zdG9yZSwKPj4gX29mZnNldCkgXAo+PiArI2Rl
-ZmluZSBGMkZTX0FUVFJfT0ZGU0VUKF9zdHJ1Y3RfdHlwZSwgX25hbWUsIF9tb2RlLCBfc2hvdywg
-X3N0b3JlLAo+PiBfb2Zmc2V0LCBfc2l6ZSkgXAo+PiDCoCBzdGF0aWMgc3RydWN0IGYyZnNfYXR0
-ciBmMmZzX2F0dHJfIyNfbmFtZSA9IHvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gwqDCoMKg
-wqDCoCAuYXR0ciA9IHsubmFtZSA9IF9fc3RyaW5naWZ5KF9uYW1lKSwgLm1vZGUgPSBfbW9kZSB9
-LMKgwqDCoCBcCj4+IMKgwqDCoMKgwqAgLnNob3fCoMKgwqAgPSBfc2hvdyzCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBcCj4+IMKgwqDCoMKgwqAgLnN0b3JlwqDCoMKgID0g
-X3N0b3JlLMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gwqDCoMKg
-wqDCoCAuc3RydWN0X3R5cGUgPSBfc3RydWN0X3R5cGUswqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIFwKPj4gLcKgwqDCoCAub2Zmc2V0ID0gX29mZnNldMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gK8KgwqDCoCAub2Zmc2V0ID0gX29mZnNldCzCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBcCj4+ICvCoMKgwqAgLnNpemUgPSBfc2l6
-ZcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgXAo+PiDCoCB9
-Cj4+IMKgIMKgICNkZWZpbmUgRjJGU19ST19BVFRSKHN0cnVjdF90eXBlLCBzdHJ1Y3RfbmFtZSwg
-bmFtZSwgZWxuYW1lKcKgwqDCoCBcCj4+IMKgwqDCoMKgwqAgRjJGU19BVFRSX09GRlNFVChzdHJ1
-Y3RfdHlwZSwgbmFtZSwgMDQ0NCzCoMKgwqDCoMKgwqDCoCBcCj4+IMKgwqDCoMKgwqDCoMKgwqDC
-oCBmMmZzX3NiaV9zaG93LCBOVUxMLMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBcCj4+
-IC3CoMKgwqDCoMKgwqDCoCBvZmZzZXRvZihzdHJ1Y3Qgc3RydWN0X25hbWUsIGVsbmFtZSkpCj4+
-ICvCoMKgwqDCoMKgwqDCoCBvZmZzZXRvZihzdHJ1Y3Qgc3RydWN0X25hbWUsIGVsbmFtZSkswqDC
-oMKgwqDCoMKgwqAgXAo+PiArwqDCoMKgwqDCoMKgwqAgc2l6ZW9mX2ZpZWxkKHN0cnVjdCBzdHJ1
-Y3RfbmFtZSwgZWxuYW1lKSkKPj4gwqAgwqAgI2RlZmluZSBGMkZTX1JXX0FUVFIoc3RydWN0X3R5
-cGUsIHN0cnVjdF9uYW1lLCBuYW1lLCBlbG5hbWUpwqDCoMKgIFwKPj4gwqDCoMKgwqDCoCBGMkZT
-X0FUVFJfT0ZGU0VUKHN0cnVjdF90eXBlLCBuYW1lLCAwNjQ0LMKgwqDCoMKgwqDCoMKgIFwKPj4g
-wqDCoMKgwqDCoMKgwqDCoMKgIGYyZnNfc2JpX3Nob3csIGYyZnNfc2JpX3N0b3JlLMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgXAo+PiAtwqDCoMKgwqDCoMKgwqAgb2Zmc2V0b2Yoc3RydWN0IHN0cnVj
-dF9uYW1lLCBlbG5hbWUpKQo+PiArwqDCoMKgwqDCoMKgwqAgb2Zmc2V0b2Yoc3RydWN0IHN0cnVj
-dF9uYW1lLCBlbG5hbWUpLMKgwqDCoMKgwqDCoMKgIFwKPj4gK8KgwqDCoMKgwqDCoMKgIHNpemVv
-Zl9maWVsZChzdHJ1Y3Qgc3RydWN0X25hbWUsIGVsbmFtZSkpCj4+IMKgIMKgICNkZWZpbmUgRjJG
-U19HRU5FUkFMX1JPX0FUVFIobmFtZSkgXAo+PiDCoCBzdGF0aWMgc3RydWN0IGYyZnNfYXR0ciBm
-MmZzX2F0dHJfIyNuYW1lID0gX19BVFRSKG5hbWUsIDA0NDQsCj4+IG5hbWUjI19zaG93LCBOVUxM
-KQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4
-LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9y
-Z2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4
-LWYyZnMtZGV2ZWwK
+Hello,
+
+syzbot tried to test the proposed patch but the build/boot failed:
+
+c 0x1003 length: 249 > 9
+[   99.252780][ T4680] Bluetooth: hci0: unexpected cc 0x1001 length: 249 > 9
+[   99.258304][ T4680] Bluetooth: hci0: unexpected cc 0x0c23 length: 249 > 4
+[   99.262003][ T4680] Bluetooth: hci0: unexpected cc 0x0c38 length: 249 > 2
+[   99.904250][  T947] wlan0: Created IBSS using preconfigured BSSID 50:50:50:50:50:50
+[   99.908039][  T947] wlan0: Creating new IBSS network, BSSID 50:50:50:50:50:50
+[   99.960090][ T1131] wlan1: Created IBSS using preconfigured BSSID 50:50:50:50:50:50
+[   99.963625][ T1131] wlan1: Creating new IBSS network, BSSID 50:50:50:50:50:50
+[  101.111055][ T5380] chnl_net:caif_netlink_parms(): no params data found
+[  101.277872][ T5380] bridge0: port 1(bridge_slave_0) entered blocking state
+[  101.286086][ T5380] bridge0: port 1(bridge_slave_0) entered disabled state
+[  101.289331][ T5380] bridge_slave_0: entered allmulticast mode
+[  101.304573][ T5380] bridge_slave_0: entered promiscuous mode
+[  101.311175][ T5380] bridge0: port 2(bridge_slave_1) entered blocking state
+[  101.314400][ T5380] bridge0: port 2(bridge_slave_1) entered disabled state
+[  101.318351][ T5380] bridge_slave_1: entered allmulticast mode
+[  101.322134][ T5380] bridge_slave_1: entered promiscuous mode
+[  101.348427][ T5380] bond0: (slave bond_slave_0): Enslaving as an active interface with an up link
+[  101.357433][ T5380] bond0: (slave bond_slave_1): Enslaving as an active interface with an up link
+[  101.383478][ T5380] team0: Port device team_slave_0 added
+[  101.388135][ T5380] team0: Port device team_slave_1 added
+[  101.411977][ T5380] batman_adv: batadv0: Adding interface: batadv_slave_0
+[  101.415073][ T5380] batman_adv: batadv0: The MTU of interface batadv_slave_0 is too small (1500) to handle the transport of batman-adv packets. Packets going over this interface will be fragmented on layer2 which could impact the performance. Setting the MTU to 1532 would solve the problem.
+[  101.427067][ T5380] batman_adv: batadv0: Not using interface batadv_slave_0 (retrying later): interface not active
+[  101.433759][ T5380] batman_adv: batadv0: Adding interface: batadv_slave_1
+[  101.437187][ T5380] batman_adv: batadv0: The MTU of interface batadv_slave_1 is too small (1500) to handle the transport of batman-adv packets. Packets going over this interface will be fragmented on layer2 which could impact the performance. Setting the MTU to 1532 would solve the problem.
+[  101.448054][ T5380] batman_adv: batadv0: Not using interface batadv_slave_1 (retrying later): interface not active
+[  101.483243][ T5380] hsr_slave_0: entered promiscuous mode
+[  101.486999][ T5380] hsr_slave_1: entered promiscuous mode
+[  101.640469][ T5380] netdevsim netdevsim0 netdevsim0: renamed from eth0
+[  101.650511][ T5380] netdevsim netdevsim0 netdevsim1: renamed from eth1
+[  101.657246][ T5380] netdevsim netdevsim0 netdevsim2: renamed from eth2
+[  101.663682][ T5380] netdevsim netdevsim0 netdevsim3: renamed from eth3
+[  101.742774][ T5380] 8021q: adding VLAN 0 to HW filter on device bond0
+[  101.761501][ T5380] 8021q: adding VLAN 0 to HW filter on device team0
+[  101.770624][  T947] bridge0: port 1(bridge_slave_0) entered blocking state
+[  101.773903][  T947] bridge0: port 1(bridge_slave_0) entered forwarding state
+[  101.786737][ T1131] bridge0: port 2(bridge_slave_1) entered blocking state
+[  101.789882][ T1131] bridge0: port 2(bridge_slave_1) entered forwarding state
+[  102.002757][ T5380] 8021q: adding VLAN 0 to HW filter on device batadv0
+[  102.041139][ T5380] veth0_vlan: entered promiscuous mode
+[  102.050273][ T5380] veth1_vlan: entered promiscuous mode
+[  102.080200][ T5380] veth0_macvtap: entered promiscuous mode
+[  102.087176][ T5380] veth1_macvtap: entered promiscuous mode
+[  102.108084][ T5380] batman_adv: batadv0: Interface activated: batadv_slave_0
+[  102.119233][ T5380] batman_adv: batadv0: Interface activated: batadv_slave_1
+[  102.129583][  T947] netdevsim netdevsim0 netdevsim0: set [1, 0] type 2 family 0 port 6081 - 0
+[  102.141577][  T947] netdevsim netdevsim0 netdevsim1: set [1, 0] type 2 family 0 port 6081 - 0
+[  102.145405][  T947] netdevsim netdevsim0 netdevsim2: set [1, 0] type 2 family 0 port 6081 - 0
+[  102.160213][ T4047] netdevsim netdevsim0 netdevsim3: set [1, 0] type 2 family 0 port 6081 - 0
+[  102.423332][ T3019] netdevsim netdevsim0 netdevsim3 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+[  102.589933][ T3019] netdevsim netdevsim0 netdevsim2 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+[  102.698091][ T3019] netdevsim netdevsim0 netdevsim1 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+[  102.788477][ T3019] netdevsim netdevsim0 netdevsim0 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+[  105.309210][ T3019] bridge_slave_1: left allmulticast mode
+[  105.311909][ T3019] bridge_slave_1: left promiscuous mode
+[  105.331282][ T3019] bridge0: port 2(bridge_slave_1) entered disabled state
+[  105.387138][ T3019] bridge_slave_0: left allmulticast mode
+[  105.389688][ T3019] bridge_slave_0: left promiscuous mode
+[  105.392386][ T3019] bridge0: port 1(bridge_slave_0) entered disabled state
+[  106.096537][ T3019] bond0 (unregistering): (slave bond_slave_0): Releasing backup interface
+[  106.103033][ T3019] bond0 (unregistering): (slave bond_slave_1): Releasing backup interface
+[  106.117388][ T3019] bond0 (unregistering): Released all slaves
+[  106.229126][ T3019] hsr_slave_0: left promiscuous mode
+[  106.246123][ T3019] hsr_slave_1: left promiscuous mode
+[  106.258491][ T3019] batman_adv: batadv0: Interface deactivated: batadv_slave_0
+[  106.261745][ T3019] batman_adv: batadv0: Removing interface: batadv_slave_0
+[  106.286794][ T3019] batman_adv: batadv0: Interface deactivated: batadv_slave_1
+[  106.290111][ T3019] batman_adv: batadv0: Removing interface: batadv_slave_1
+[  106.325813][ T3019] veth1_macvtap: left promiscuous mode
+[  106.329044][ T3019] veth0_macvtap: left promiscuous mode
+[  106.331694][ T3019] veth1_vlan: left promiscuous mode
+[  106.334122][ T3019] veth0_vlan: left promiscuous mode
+[  106.797480][ T3019] team0 (unregistering): Port device team_slave_1 removed
+[  106.821140][ T3019] team0 (unregistering): Port device team_slave_0 removed
+2026/01/07 02:18:07 executed programs: 0
+[  108.259947][   T46] Bluetooth: hci0: unexpected cc 0x0c03 length: 249 > 1
+[  108.264618][   T46] Bluetooth: hci0: unexpected cc 0x1003 length: 249 > 9
+[  108.270695][   T46] Bluetooth: hci0: unexpected cc 0x1001 length: 249 > 9
+[  108.274422][   T46] Bluetooth: hci0: unexpected cc 0x0c23 length: 249 > 4
+[  108.278195][   T46] Bluetooth: hci0: unexpected cc 0x0c38 length: 249 > 2
+[  108.730010][ T5451] chnl_net:caif_netlink_parms(): no params data found
+[  108.907477][ T5451] bridge0: port 1(bridge_slave_0) entered blocking state
+[  108.910655][ T5451] bridge0: port 1(bridge_slave_0) entered disabled state
+[  108.913831][ T5451] bridge_slave_0: entered allmulticast mode
+[  108.929157][ T5451] bridge_slave_0: entered promiscuous mode
+[  108.939210][ T5451] bridge0: port 2(bridge_slave_1) entered blocking state
+[  108.942482][ T5451] bridge0: port 2(bridge_slave_1) entered disabled state
+[  108.950846][ T5451] bridge_slave_1: entered allmulticast mode
+[  108.965783][ T5451] bridge_slave_1: entered promiscuous mode
+[  109.018144][ T5451] bond0: (slave bond_slave_0): Enslaving as an active interface with an up link
+[  109.026049][ T5451] bond0: (slave bond_slave_1): Enslaving as an active interface with an up link
+[  109.073929][ T5451] team0: Port device team_slave_0 added
+[  109.085217][ T5451] team0: Port device team_slave_1 added
+[  109.128253][ T5451] batman_adv: batadv0: Adding interface: batadv_slave_0
+[  109.131303][ T5451] batman_adv: batadv0: The MTU of interface batadv_slave_0 is too small (1500) to handle the transport of batman-adv packets. Packets going over this interface will be fragmented on layer2 which could impact the performance. Setting the MTU to 1532 would solve the problem.
+[  109.156217][ T5451] batman_adv: batadv0: Not using interface batadv_slave_0 (retrying later): interface not active
+[  109.177176][ T5451] batman_adv: batadv0: Adding interface: batadv_slave_1
+[  109.180214][ T5451] batman_adv: batadv0: The MTU of interface batadv_slave_1 is too small (1500) to handle the transport of batman-adv packets. Packets going over this interface will be fragmented on layer2 which could impact the performance. Setting the MTU to 1532 would solve the problem.
+[  109.208335][ T5451] batman_adv: batadv0: Not using interface batadv_slave_1 (retrying later): interface not active
+[  109.278165][ T5451] hsr_slave_0: entered promiscuous mode
+[  109.286205][ T5451] hsr_slave_1: entered promiscuous mode
+[  109.779620][ T5451] netdevsim netdevsim0 netdevsim0: renamed from eth0
+[  109.800234][ T5451] netdevsim netdevsim0 netdevsim1: renamed from eth1
+[  109.807679][ T5451] netdevsim netdevsim0 netdevsim2: renamed from eth2
+[  109.829275][ T5451] netdevsim netdevsim0 netdevsim3: renamed from eth3
+[  109.967755][ T5451] 8021q: adding VLAN 0 to HW filter on device bond0
+[  109.993637][ T5451] 8021q: adding VLAN 0 to HW filter on device team0
+[  110.013449][  T947] bridge0: port 1(bridge_slave_0) entered blocking state
+[  110.016837][  T947] bridge0: port 1(bridge_slave_0) entered forwarding state
+[  110.041939][  T947] bridge0: port 2(bridge_slave_1) entered blocking state
+[  110.045001][  T947] bridge0: port 2(bridge_slave_1) entered forwarding state
+[  110.113140][ T5451] hsr0: Slave A (hsr_slave_0) is not up; please bring it up to get a fully working HSR network
+[  110.126403][ T5451] hsr0: Slave B (hsr_slave_1) is not up; please bring it up to get a fully working HSR network
+[  110.306727][   T46] Bluetooth: hci0: command tx timeout
+[  110.407891][ T5451] 8021q: adding VLAN 0 to HW filter on device batadv0
+[  110.474914][ T5451] veth0_vlan: entered promiscuous mode
+[  110.501129][ T5451] veth1_vlan: entered promiscuous mode
+[  110.548766][ T5451] veth0_macvtap: entered promiscuous mode
+[  110.566415][ T5451] veth1_macvtap: entered promiscuous mode
+[  110.594368][ T5451] batman_adv: batadv0: Interface activated: batadv_slave_0
+[  110.627391][ T5451] batman_adv: batadv0: Interface activated: batadv_slave_1
+[  110.639617][  T947] netdevsim netdevsim0 netdevsim0: set [1, 0] type 2 family 0 port 6081 - 0
+[  110.643516][  T947] netdevsim netdevsim0 netdevsim1: set [1, 0] type 2 family 0 port 6081 - 0
+[  110.667089][  T947] netdevsim netdevsim0 netdevsim2: set [1, 0] type 2 family 0 port 6081 - 0
+[  110.702519][  T947] netdevsim netdevsim0 netdevsim3: set [1, 0] type 2 family 0 port 6081 - 0
+[  110.791338][  T947] wlan0: Created IBSS using preconfigured BSSID 50:50:50:50:50:50
+[  110.795044][  T947] wlan0: Creating new IBSS network, BSSID 50:50:50:50:50:50
+[  110.848266][  T947] wlan1: Created IBSS using preconfigured BSSID 50:50:50:50:50:50
+[  110.851713][  T947] wlan1: Creating new IBSS network, BSSID 50:50:50:50:50:50
+SYZFAIL: failed to recv rpc
+fd=3 want=4 recv=0 n=0 (errno 9: Bad file descriptor)
+[  112.188996][ T1131] netdevsim netdevsim0 netdevsim3 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+[  113.352275][ T1131] netdevsim netdevsim0 netdevsim2 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+[  113.627013][ T1131] netdevsim netdevsim0 netdevsim1 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+[  113.684954][ T1131] netdevsim netdevsim0 netdevsim0 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+[  113.807220][ T1131] bridge_slave_1: left allmulticast mode
+[  113.809850][ T1131] bridge_slave_1: left promiscuous mode
+[  113.812539][ T1131] bridge0: port 2(bridge_slave_1) entered disabled state
+[  113.832063][ T1131] bridge_slave_0: left allmulticast mode
+[  113.834590][ T1131] bridge_slave_0: left promiscuous mode
+[  113.837572][ T1131] bridge0: port 1(bridge_slave_0) entered disabled state
+[  114.221189][ T1131] bond0 (unregistering): (slave bond_slave_0): Releasing backup interface
+[  114.227289][ T1131] bond0 (unregistering): (slave bond_slave_1): Releasing backup interface
+[  114.232468][ T1131] bond0 (unregistering): Released all slaves
+[  114.487951][ T1131] hsr_slave_0: left promiscuous mode
+[  114.490767][ T1131] hsr_slave_1: left promiscuous mode
+[  114.498999][ T1131] batman_adv: batadv0: Interface deactivated: batadv_slave_0
+[  114.502267][ T1131] batman_adv: batadv0: Removing interface: batadv_slave_0
+[  114.517714][ T1131] batman_adv: batadv0: Interface deactivated: batadv_slave_1
+[  114.521062][ T1131] batman_adv: batadv0: Removing interface: batadv_slave_1
+[  114.549206][ T1131] veth1_macvtap: left promiscuous mode
+[  114.551802][ T1131] veth0_macvtap: left promiscuous mode
+[  114.554336][ T1131] veth1_vlan: left promiscuous mode
+[  114.567501][ T1131] veth0_vlan: left promiscuous mode
+[  114.940636][ T1131] team0 (unregistering): Port device team_slave_1 removed
+[  114.967019][ T1131] team0 (unregistering): Port device team_slave_0 removed
+
+
+syzkaller build log:
+go env (err=<nil>)
+AR='ar'
+CC='gcc'
+CGO_CFLAGS='-O2 -g'
+CGO_CPPFLAGS=''
+CGO_CXXFLAGS='-O2 -g'
+CGO_ENABLED='1'
+CGO_FFLAGS='-O2 -g'
+CGO_LDFLAGS='-O2 -g'
+CXX='g++'
+GCCGO='gccgo'
+GO111MODULE='auto'
+GOAMD64='v1'
+GOARCH='amd64'
+GOAUTH='netrc'
+GOBIN=''
+GOCACHE='/syzkaller/.cache/go-build'
+GOCACHEPROG=''
+GODEBUG=''
+GOENV='/syzkaller/.config/go/env'
+GOEXE=''
+GOEXPERIMENT=''
+GOFIPS140='off'
+GOFLAGS=''
+GOGCCFLAGS='-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build1445029477=/tmp/go-build -gno-record-gcc-switches'
+GOHOSTARCH='amd64'
+GOHOSTOS='linux'
+GOINSECURE=''
+GOMOD='/syzkaller/jobs/linux/gopath/src/github.com/google/syzkaller/go.mod'
+GOMODCACHE='/syzkaller/jobs/linux/gopath/pkg/mod'
+GONOPROXY=''
+GONOSUMDB=''
+GOOS='linux'
+GOPATH='/syzkaller/jobs/linux/gopath'
+GOPRIVATE=''
+GOPROXY='https://proxy.golang.org,direct'
+GOROOT='/usr/local/go'
+GOSUMDB='sum.golang.org'
+GOTELEMETRY='local'
+GOTELEMETRYDIR='/syzkaller/.config/go/telemetry'
+GOTMPDIR=''
+GOTOOLCHAIN='auto'
+GOTOOLDIR='/usr/local/go/pkg/tool/linux_amd64'
+GOVCS=''
+GOVERSION='go1.24.4'
+GOWORK=''
+PKG_CONFIG='pkg-config'
+
+git status (err=<nil>)
+HEAD detached at d1b870e1003b
+nothing to commit, working tree clean
+
+
+tput: No value for $TERM and no -T specified
+tput: No value for $TERM and no -T specified
+Makefile:31: run command via tools/syz-env for best compatibility, see:
+Makefile:32: https://github.com/google/syzkaller/blob/master/docs/contributing.md#using-syz-env
+go list -f '{{.Stale}}' -ldflags="-s -w -X github.com/google/syzkaller/prog.GitRevision=d1b870e1003b52891d2196c1e2ee42fe905010ba -X github.com/google/syzkaller/prog.gitRevisionDate=20251128-125159"  ./sys/syz-sysgen | grep -q false || go install -ldflags="-s -w -X github.com/google/syzkaller/prog.GitRevision=d1b870e1003b52891d2196c1e2ee42fe905010ba -X github.com/google/syzkaller/prog.gitRevisionDate=20251128-125159"  ./sys/syz-sysgen
+make .descriptions
+tput: No value for $TERM and no -T specified
+tput: No value for $TERM and no -T specified
+Makefile:31: run command via tools/syz-env for best compatibility, see:
+Makefile:32: https://github.com/google/syzkaller/blob/master/docs/contributing.md#using-syz-env
+bin/syz-sysgen
+touch .descriptions
+GOOS=linux GOARCH=amd64 go build -ldflags="-s -w -X github.com/google/syzkaller/prog.GitRevision=d1b870e1003b52891d2196c1e2ee42fe905010ba -X github.com/google/syzkaller/prog.gitRevisionDate=20251128-125159"  -o ./bin/linux_amd64/syz-execprog github.com/google/syzkaller/tools/syz-execprog
+mkdir -p ./bin/linux_amd64
+g++ -o ./bin/linux_amd64/syz-executor executor/executor.cc \
+	-m64 -O2 -pthread -Wall -Werror -Wparentheses -Wunused-const-variable -Wframe-larger-than=16384 -Wno-stringop-overflow -Wno-array-bounds -Wno-format-overflow -Wno-unused-but-set-variable -Wno-unused-command-line-argument -static-pie -std=c++17 -I. -Iexecutor/_include   -DGOOS_linux=1 -DGOARCH_amd64=1 \
+	-DHOSTGOOS_linux=1 -DGIT_REVISION=\"d1b870e1003b52891d2196c1e2ee42fe905010ba\"
+/usr/bin/ld: /tmp/cc4kC0pD.o: in function `Connection::Connect(char const*, char const*)':
+executor.cc:(.text._ZN10Connection7ConnectEPKcS1_[_ZN10Connection7ConnectEPKcS1_]+0x104): warning: Using 'gethostbyname' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+./tools/check-syzos.sh 2>/dev/null
+
+
+Error text is too large and was truncated, full error text is at:
+https://syzkaller.appspot.com/x/error.txt?x=12df7e9a580000
+
+
+Tested on:
+
+commit:         af98ee9d f2fs: fix use-after-free in f2fs_write_end_io
+git tree:       https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git bugfix/syzbot
+kernel config:  https://syzkaller.appspot.com/x/.config?x=513255d80ab78f2b
+dashboard link: https://syzkaller.appspot.com/bug?extid=b4444e3c972a7a124187
+compiler:       Debian clang version 20.1.8 (++20250708063551+0c9f909b7976-1~exp1~20250708183702.136), Debian LLD 20.1.8
+
+Note: no patches were applied.
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
