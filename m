@@ -2,76 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9825ECFBBDD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 03:34:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA527CFBBE3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 07 Jan 2026 03:34:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=wK07WlgpJ0LIpOS192K/5aIWit29Da9Q2wPfHq4yuBA=; b=PSgcMcs5xQOa7IheucgzSzIr3l
-	N8ssdviotq6IJmxd6stXm4aQIjXiKQQfW0lJm/xJ1w7h2560RHiKQ1SyinOujjuf3oRMgZRtb4PPU
-	tNM48F3opjV40EoPInPyrbxhGAgfKt32Gz/8XP/NaA1s38Nq+iAq6fLLO4+ML9ysYTUY=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=TPU8cmdHXM06NWAs+zuT2ezuFEib+g+Hxq3jS2q9HLE=; b=f/p99ynFvR1gplWN4LSoYDBDVv
+	8wnrMW9YBEHdz7ne94T7V4MUd4zwBRiBO7TrRXQKtS0iIl/PmS+/ixvLtSs/PKGtQ6sziJMcBAaB8
+	/f3UYQZrXyo66EfJ8ExXJc744kcdM1HWtge0TuDEXUlaQAt9P2LZZvwX6NGnXuXOaBxM=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdJND-0007C9-BY;
-	Wed, 07 Jan 2026 02:34:11 +0000
+	id 1vdJNO-0000jQ-8Q;
+	Wed, 07 Jan 2026 02:34:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <monty_pavel@sina.com>) id 1vdJNB-0007C1-87
+ (envelope-from <monty_pavel@sina.com>) id 1vdJNN-0000jF-Ek
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 02:34:09 +0000
+ Wed, 07 Jan 2026 02:34:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6EP1pidaaxrZGaUBEM1haurSH+PpjDLd0kNCsUeL6lc=; b=jratFKo7WCHxfJ7+Sf8N/uwhG5
- rBojkh+0bDH9BGKlWDZQW3hhoyvpM7POttm5Op2BE50umrpcmRtk+FmD5k2I5yQDT/b442IR5lC9P
- OjYAZ03T/35wirBSuDPT+IHpWX9gyMObaV044W3x3SwWUozfyPR+8YdpHQMpGv//bcqc=;
+ bh=+rn302ZVpDa3RgRMoJjNfjKeT76r6zFqXZuHYk4VSCE=; b=BsuN7SZbLyaLBgMwMLFcNtS4/g
+ upIGuuiJwPFn3QIrYiqv/c9n60YOFz260GcQC09DQyvkmotqJx0/jbF7eeSvsaIPNxF9IxDqJKdvc
+ hof9SzYl+n0vBEBkgrrxVHEuBU+X5x6Et5PsrCOfoZl3SYCiMMkBJUu6FYBlZDme19aA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=6EP1pidaaxrZGaUBEM1haurSH+PpjDLd0kNCsUeL6lc=; b=P
- ABOtjdSf5IFE+k87Q4vGv3FE+nBjRGZv/NPgZdhCDxNxRkDcHyxHOeFuiCMn0cmwfEcV3KGLa2KW9
- N0mfPegJLYs5r7Wr2h76V4WaMhoa4SZGsTTkciarPXWLbOcrg0cnJ5czE3RW3TnWb+NpzOPG1ZzjZ
- 6pRsxplg1G2u85Yc=;
-Received: from smtp153-166.sina.com.cn ([61.135.153.166])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+rn302ZVpDa3RgRMoJjNfjKeT76r6zFqXZuHYk4VSCE=; b=ZTiiS+RpkMyz3u5YEuPHbZoCbN
+ 4jnimy/UgPwK8TU/pYJ5RQ7/B/mYszdFu2Cqa3wQs02Fx8Ak8IkpjWt5jcWmnf/uFYd9PG9RA+D1i
+ hFiSI+/eTz5ckVFjGucxZwjnI5fvHqr2jyo3eyUZlqioVYdHnqMgAQc45zWiGZpaf3eU=;
+Received: from mail3-167.sinamail.sina.com.cn ([202.108.3.167])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdJN9-0002Yr-3X for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jan 2026 02:34:09 +0000
+ id 1vdJNN-0002ZH-Kt for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jan 2026 02:34:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
- t=1767753247; bh=6EP1pidaaxrZGaUBEM1haurSH+PpjDLd0kNCsUeL6lc=;
+ t=1767753261; bh=+rn302ZVpDa3RgRMoJjNfjKeT76r6zFqXZuHYk4VSCE=;
  h=From:Subject:Date:Message-ID;
- b=0W8LkTXow+hm+AenBy1D8vKWlWoFd7wij3qBrScy9rsLlEGbuEoI0X/vqXy44zT9d
- mS+D/CYEnzPRlykmyrPBlYBr4//6oFnRwFGpiP93TRUvTu1R1xX/+J6/3SPWujGfhG
- 23y2NuCYE2uzb0djpOcroNPp5rufFyIvRqndwkUY=
+ b=DV/0l8UygCBhL9wNEOX6rP5f491ywKwu/ifxTp1y9QCZu5KWjUD4vRgScdmShmUJY
+ 1DZjvZxktRlpn0Z5JmLbwMGUAQAMNPLaAcPs9jthHbv3oUqU5IhdNPszbhvoEAW1JN
+ rcwAbCWsilZUrcUXYyd/0FrwfCEp7Wq/GZgor6R8=
 X-SMAIL-HELO: xiaomi-ThinkCentre-M760t.mioffice.cn
 Received: from unknown (HELO
  xiaomi-ThinkCentre-M760t.mioffice.cn)([114.247.175.249])
  by sina.com (10.54.253.33) with ESMTP
- id 695DC61500004F1E; Wed, 7 Jan 2026 10:33:59 +0800 (CST)
+ id 695DC61500004F1E; Wed, 7 Jan 2026 10:34:09 +0800 (CST)
 X-Sender: monty_pavel@sina.com
 X-Auth-ID: monty_pavel@sina.com
 Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
  dkim=none header.i=none;
  dmarc=none action=none header.from=monty_pavel@sina.com
-X-SMAIL-MID: 1102056685446
-X-SMAIL-UIID: 439F22E18A344CE99AC0B61F40B4E1D6-20260107-103359-1
+X-SMAIL-MID: 4855886684985
+X-SMAIL-UIID: CA09391ED1F34E418701518718F051D1-20260107-103409-1
 From: Yongpeng Yang <monty_pavel@sina.com>
 To: Chao Yu <chao@kernel.org>,
 	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Wed,  7 Jan 2026 10:33:46 +0800
-Message-ID: <20260107023346.2507670-2-monty_pavel@sina.com>
+Date: Wed,  7 Jan 2026 10:33:47 +0800
+Message-ID: <20260107023346.2507670-3-monty_pavel@sina.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260107023346.2507670-2-monty_pavel@sina.com>
+References: <20260107023346.2507670-2-monty_pavel@sina.com>
 MIME-Version: 1.0
 X-Spam-Score: 0.8 (/)
 X-Spam-Report: Spam detection software,
@@ -80,13 +82,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Yongpeng Yang Some f2fs sysfs attributes suffer from
- out-of-bounds memory access and incorrect handling of integer values whose
- size is not 4 bytes. For example: vm:~# echo 65537 >
- /sys/fs/f2fs/vde/carve_out
- vm:~# cat /sys/fs/f2fs/vde/carve_out 65537 vm:~# echo 4294967297 >
- /sys/fs/f2fs/vde/atgc_age_threshold
- vm:~# cat /sys/fs/f2fs/vde/atgc_age_th [...] 
+ Content preview: From: Yongpeng Yang {struct file_ra_state}->ra_pages and
+ {struct
+ bio}->bi_iter.bi_size is defined as unsigned int, so values of seq_file_ra_mul
+ and max_io_bytes exceeding UINT_MAX are meaningless. Signed-off-by: Yongpeng
+ Yang Reviewed-by: Chao Yu --- fs/f2fs/f2fs.h | 4 ++-- 1 file changed,
+ 2 insertions(+), 2 deletions(-) 
  Content analysis details:   (0.8 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -101,9 +102,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [monty_pavel(at)sina.com]
-X-Headers-End: 1vdJN9-0002Yr-3X
-Subject: [f2fs-dev] [PATCH v3 1/2] f2fs: fix out-of-bounds access in sysfs
- attribute read/write
+X-Headers-End: 1vdJNN-0002ZH-Kt
+Subject: [f2fs-dev] [PATCH v3 2/2] f2fs: change seq_file_ra_mul and
+ max_io_bytes to unsigned int
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,182 +116,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jinbao Liu <jinbaoliu365@gmail.com>, Jinbao Liu <liujinbao1@xiaomi.com>,
- Yongpeng Yang <yangyongpeng@xiaomi.com>,
- linux-f2fs-devel@lists.sourceforge.net, Yongpeng Yang <monty_pavel@sina.com>,
- stable@kernel.org
+Cc: Jinbao Liu <jinbaoliu365@gmail.com>,
+ Yongpeng Yang <yangyongpeng@xiaomi.com>, Jinbao Liu <liujinbao1@xiaomi.com>,
+ Yongpeng Yang <monty_pavel@sina.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 
-Some f2fs sysfs attributes suffer from out-of-bounds memory access and
-incorrect handling of integer values whose size is not 4 bytes.
+{struct file_ra_state}->ra_pages and {struct bio}->bi_iter.bi_size is
+defined as unsigned int, so values of seq_file_ra_mul and max_io_bytes
+exceeding UINT_MAX are meaningless.
 
-For example:
-vm:~# echo 65537 > /sys/fs/f2fs/vde/carve_out
-vm:~# cat /sys/fs/f2fs/vde/carve_out
-65537
-vm:~# echo 4294967297 > /sys/fs/f2fs/vde/atgc_age_threshold
-vm:~# cat /sys/fs/f2fs/vde/atgc_age_threshold
-1
-
-carve_out maps to {struct f2fs_sb_info}->carve_out, which is a 8-bit
-integer. However, the sysfs interface allows setting it to a value
-larger than 255, resulting in an out-of-range update.
-
-atgc_age_threshold maps to {struct atgc_management}->age_threshold,
-which is a 64-bit integer, but its sysfs interface cannot correctly set
-values larger than UINT_MAX.
-
-The root causes are:
-1. __sbi_store() treats all default values as unsigned int, which
-prevents updating integers larger than 4 bytes and causes out-of-bounds
-writes for integers smaller than 4 bytes.
-
-2. f2fs_sbi_show() also assumes all default values are unsigned int,
-leading to out-of-bounds reads and incorrect access to integers larger
-than 4 bytes.
-
-This patch introduces {struct f2fs_attr}->size to record the actual size
-of the integer associated with each sysfs attribute. With this
-information, sysfs read and write operations can correctly access and
-update values according to their real data size, avoiding memory
-corruption and truncation.
-
-Fixes: b59d0bae6ca3 ("f2fs: add sysfs support for controlling the gc_thread")
-Cc: stable@kernel.org
-Signed-off-by: Jinbao Liu <liujinbao1@xiaomi.com>
 Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
+Reviewed-by: Chao Yu <chao@kernel.org>
 ---
-v3:
-- Fix the format of the Fixes tag.
-v2:
-- Replace gc_pin_file_thresh example with carve_out in the commit
-message.
----
- fs/f2fs/sysfs.c | 60 ++++++++++++++++++++++++++++++++++++++++++-------
- 1 file changed, 52 insertions(+), 8 deletions(-)
+ fs/f2fs/f2fs.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index c42f4f979d13..e6a98ddd73b3 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -58,6 +58,7 @@ struct f2fs_attr {
- 			 const char *buf, size_t len);
- 	int struct_type;
- 	int offset;
-+	int size;
- 	int id;
- };
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 53cbce96f126..027ff3080941 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1762,7 +1762,7 @@ struct f2fs_sb_info {
+ 	unsigned int total_valid_node_count;	/* valid node block count */
+ 	int dir_level;				/* directory level */
+ 	bool readdir_ra;			/* readahead inode in readdir */
+-	u64 max_io_bytes;			/* max io bytes to merge IOs */
++	unsigned int max_io_bytes;		/* max io bytes to merge IOs */
  
-@@ -344,11 +345,30 @@ static ssize_t main_blkaddr_show(struct f2fs_attr *a,
- 			(unsigned long long)MAIN_BLKADDR(sbi));
- }
+ 	block_t user_block_count;		/* # of user blocks */
+ 	block_t total_valid_block_count;	/* # of valid blocks */
+@@ -1910,7 +1910,7 @@ struct f2fs_sb_info {
+ 	unsigned int gc_segment_mode;		/* GC state for reclaimed segments */
+ 	unsigned int gc_reclaimed_segs[MAX_GC_MODE];	/* Reclaimed segs for each mode */
  
-+static ssize_t __sbi_show_value(struct f2fs_attr *a,
-+		struct f2fs_sb_info *sbi, char *buf,
-+		unsigned char *value)
-+{
-+	switch (a->size) {
-+	case 1:
-+		return sysfs_emit(buf, "%u\n", *(u8 *)value);
-+	case 2:
-+		return sysfs_emit(buf, "%u\n", *(u16 *)value);
-+	case 4:
-+		return sysfs_emit(buf, "%u\n", *(u32 *)value);
-+	case 8:
-+		return sysfs_emit(buf, "%llu\n", *(u64 *)value);
-+	default:
-+		f2fs_bug_on(sbi, 1);
-+		return sysfs_emit(buf,
-+				"show sysfs node value with wrong type\n");
-+	}
-+}
-+
- static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
- 			struct f2fs_sb_info *sbi, char *buf)
- {
- 	unsigned char *ptr = NULL;
--	unsigned int *ui;
+-	unsigned long seq_file_ra_mul;		/* multiplier for ra_pages of seq. files in fadvise */
++	unsigned int seq_file_ra_mul;		/* multiplier for ra_pages of seq. files in fadvise */
  
- 	ptr = __struct_ptr(sbi, a->struct_type);
- 	if (!ptr)
-@@ -428,9 +448,30 @@ static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
- 				atomic_read(&sbi->cp_call_count[BACKGROUND]));
- #endif
- 
--	ui = (unsigned int *)(ptr + a->offset);
-+	return __sbi_show_value(a, sbi, buf, ptr + a->offset);
-+}
- 
--	return sysfs_emit(buf, "%u\n", *ui);
-+static void __sbi_store_value(struct f2fs_attr *a,
-+			struct f2fs_sb_info *sbi,
-+			unsigned char *ui, unsigned long value)
-+{
-+	switch (a->size) {
-+	case 1:
-+		*(u8 *)ui = value;
-+		break;
-+	case 2:
-+		*(u16 *)ui = value;
-+		break;
-+	case 4:
-+		*(u32 *)ui = value;
-+		break;
-+	case 8:
-+		*(u64 *)ui = value;
-+		break;
-+	default:
-+		f2fs_bug_on(sbi, 1);
-+		f2fs_err(sbi, "store sysfs node value with wrong type");
-+	}
- }
- 
- static ssize_t __sbi_store(struct f2fs_attr *a,
-@@ -906,7 +947,7 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 		return count;
- 	}
- 
--	*ui = (unsigned int)t;
-+	__sbi_store_value(a, sbi, ptr + a->offset, t);
- 
- 	return count;
- }
-@@ -1053,24 +1094,27 @@ static struct f2fs_attr f2fs_attr_sb_##_name = {		\
- 	.id	= F2FS_FEATURE_##_feat,				\
- }
- 
--#define F2FS_ATTR_OFFSET(_struct_type, _name, _mode, _show, _store, _offset) \
-+#define F2FS_ATTR_OFFSET(_struct_type, _name, _mode, _show, _store, _offset, _size) \
- static struct f2fs_attr f2fs_attr_##_name = {			\
- 	.attr = {.name = __stringify(_name), .mode = _mode },	\
- 	.show	= _show,					\
- 	.store	= _store,					\
- 	.struct_type = _struct_type,				\
--	.offset = _offset					\
-+	.offset = _offset,					\
-+	.size = _size						\
- }
- 
- #define F2FS_RO_ATTR(struct_type, struct_name, name, elname)	\
- 	F2FS_ATTR_OFFSET(struct_type, name, 0444,		\
- 		f2fs_sbi_show, NULL,				\
--		offsetof(struct struct_name, elname))
-+		offsetof(struct struct_name, elname),		\
-+		sizeof_field(struct struct_name, elname))
- 
- #define F2FS_RW_ATTR(struct_type, struct_name, name, elname)	\
- 	F2FS_ATTR_OFFSET(struct_type, name, 0644,		\
- 		f2fs_sbi_show, f2fs_sbi_store,			\
--		offsetof(struct struct_name, elname))
-+		offsetof(struct struct_name, elname),		\
-+		sizeof_field(struct struct_name, elname))
- 
- #define F2FS_GENERAL_RO_ATTR(name) \
- static struct f2fs_attr f2fs_attr_##name = __ATTR(name, 0444, name##_show, NULL)
+ 	int max_fragment_chunk;			/* max chunk size for block fragmentation mode */
+ 	int max_fragment_hole;			/* max hole size for block fragmentation mode */
 -- 
 2.43.0
 
