@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07F7ED04D31
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 18:16:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22E08D04D3B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 18:16:06 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=2npCEDaylTFY8FD2RJMb+oNDmGeBYOq2bik2KWA3FCo=; b=Dgdd9qqjOKRsv8VXlebnZEcL5H
-	eOxP/i3B0aU1Oqgry7jo+0gLc13bbBhs5rwAF9VMBJrpdYG4izoEBUqJqGy2jlZOvNNaj0AWUsIdO
-	EnudXq15meu17NDdf6ZfEnYeZ7QRrHsMADIEMkU1i9KZEzV7GElxSDLZ7Mzn+B8qV8Mw=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=24pyZW+0EkJt/vmDXkYRaL2ZLnqUIvswuSNxcnI1KUo=; b=PmpzdIQHjKPpDM4kYgKIrT2NuF
+	aBbxUbnMcdJ/DKZn8Sl+RF7YFEWUEdvhvF6KMpsO7tsBatMpDmVsVbiqrg6TTdxSiBHhf5Pl18nl6
+	Rm1gsSdwYMDzCalPfX6a4u4lAusLb1QmLogVYDgVJD6pE/8jI9V1Nw8U69Hjbas5CMIM=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdtc7-0003Th-U3;
-	Thu, 08 Jan 2026 17:16:00 +0000
+	id 1vdtcB-0006lM-9r;
+	Thu, 08 Jan 2026 17:16:03 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vdtbz-0003S4-Mu;
- Thu, 08 Jan 2026 17:15:52 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vdtc8-0006kX-C3;
+ Thu, 08 Jan 2026 17:16:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XcFh/czpyXOajdzHyALx2Xni8o9OGe6EhHADm2EuoZg=; b=lTkMx9HTcL/XNwX29ZXbisOKLt
- Oq/bLAwcLr2mIUXQ3ycaCX23HWkHlFcRsWgdUcFxJa1bd9JRarE3WMX9VNg2pE+Cv5qoOJtzGwxWc
- uLTed9mp3pDsCxaqnpreRQH26ZIkppZeWP65N9zhlFZxC6/6aHXDwx9tzAJg9RtOGf6A=;
+ bh=GacgX3gma1Dc93Uid85Rw+Mr1nuhJfogW8HRstIGR0Q=; b=DYiBt4gHdvWqFOrYLKcBtu3uwV
+ dR4HES6oOl1Ib9ocHwkUnAMIAFzVB9+IlaMKm5Z/wUGcU+ZrDgpDa1DdDUHZrNiCpoPoH5jkYc8MC
+ UgZijLRFwLlAXA93abaGsNobSg2WXJCByTcD5ZE67l39L+GstTF0LP9rNLVeiKPwazEU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -39,31 +39,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=XcFh/czpyXOajdzHyALx2Xni8o9OGe6EhHADm2EuoZg=; b=ZGWvy8JaKvIixK6Mn2mXvnXn0X
- ZBz4Qsl6sPmV/L8vRQJerItE921zn4L47Kc8KFfceT1Zusy9lknF1O0l12N6pz4RNAjtFkjtU8BHa
- CKoM6hr1dCVemsPdj6+HkXuIDwhorELTOXk8da7Ywgh7hWk5ewefRh5JiphhLk0o3LN8=;
+ bh=GacgX3gma1Dc93Uid85Rw+Mr1nuhJfogW8HRstIGR0Q=; b=Ese/J6Cim4wKXYxONtU8KLGBkw
+ GNK32cSfCjFzfWqPppRVC7tJFGiFyqR+wbjKXoffswOH4BT9gQQDHu+5YlOfb+lJ8LI163Z820NGP
+ 6/LGbET0vM54n+hwd3U2U59q0CP6C7yLgJyq9LVJiKOZW+p8zmt84lE/wYnymPCBeULA=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdtby-00060z-3F; Thu, 08 Jan 2026 17:15:51 +0000
+ id 1vdtc5-00062J-NA; Thu, 08 Jan 2026 17:15:58 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 81A2F6014E;
+ by tor.source.kernel.org (Postfix) with ESMTP id 120E06014D;
+ Thu,  8 Jan 2026 17:15:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74598C19424;
  Thu,  8 Jan 2026 17:15:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BAEF5C116D0;
- Thu,  8 Jan 2026 17:15:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767892544;
- bh=yVN7kiv7Ur9Q7AnxVgFewkb0L/ZX8mnNajC6Hfb4ItY=;
+ s=k20201202; t=1767892551;
+ bh=/QjFws5fePN18OBYa8bISKhX2yIiYoWbwKUyTsCKvi8=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=SJag7iH3Ulhau+TT2S0OSUAXBwy5iFmcU6Lcje37qhWyUrVVIS0QTH2e5wxI2OWuV
- uM0Dam7qLl6fl4teot25YDB/0LrIoV6VDVLM3R3t7DnQHbujCZPv6ddb9BKAedtSKV
- t7+lntHNYOrLgAPao6XUgZGgqu8HjC4jex629eXoSfP4riBGPiL79zD76/2NIF5M+N
- uX1qwg88WzADWZnJTDvKeIPDL1RrhDcY9+1Tyo7ILZF8wYpjcPUZbG8Kk/7gsRnW7M
- UsjdAKxfEW+GG6kp5DFxc22CxtnZQjt0Ua7js1IxpNyLl6YAFmV6M9UkWWvJcPJkR3
- TovnFOD6YpvAA==
-Date: Thu, 08 Jan 2026 12:13:11 -0500
+ b=PEjw0/vgT6GLsQDvxChTEJJWrZnAQSwT/oOYtarnEr1mnlXneb12dRn/+E7ODlH3e
+ lEscuNaICbpX+q+/6dO9siSu+ISv3W0K9wwdJ/mDEw92/56eNocyUzJjpaC6QdgIyG
+ TXJksMFDlSytDs24skqoMve70gF6oZNa7uvLK/sesVf1BfG3jX47nbuodaLg5SaXh5
+ LmcwS/E2mZY6CTlzB8FWEcmq3mPVRu19tuFt5HFUJmWTID9UfJc3ZPIB70pwGbpr4f
+ vHcBl/oxvixj+KEoGwXKpq84pv0rNzyvfBOZbbD9Nf9EOol0+LhwcwkX8AyEiOq27a
+ b5nd9nZ8BtLsg==
+Date: Thu, 08 Jan 2026 12:13:12 -0500
 MIME-Version: 1.0
-Message-Id: <20260108-setlease-6-20-v1-16-ea4dec9b67fa@kernel.org>
+Message-Id: <20260108-setlease-6-20-v1-17-ea4dec9b67fa@kernel.org>
 References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
 In-Reply-To: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
 To: Luis de Bethencourt <luisbg@kernel.org>, 
@@ -109,45 +109,45 @@ To: Luis de Bethencourt <luisbg@kernel.org>,
  Shyam Prasad N <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>, 
  Bharath SM <bharathsm@microsoft.com>, Hans de Goede <hansg@kernel.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1607; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=yVN7kiv7Ur9Q7AnxVgFewkb0L/ZX8mnNajC6Hfb4ItY=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpX+W8gf6yTM9PqdgCO6Yh8PQSc1Poy4aktqHXE
- EqXCbQwiOyJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaV/lvAAKCRAADmhBGVaC
- FRuXD/4oWPnRKMqdVVRPF71peTc836Dva171JxklgwmgsfBGNY9Coh6fglKyMqQ9V24XwbsVH7q
- SRxFfC/rZ6jRd8MVmFU4q1T864Bnzpra/VJ4veI4DPnrg77egeKX2Jx4mb0mba4rht+TFrkFCDK
- mhcPTMUj9KmWha9AOJ4147BC7Qf3qLGG9uxvqeIxHVjUN1BTNY7/BNqyZDjaygnRUIqJCWtjTOv
- YUN4eNnfRQLRKyfHAlMfbB/dlZgDLx7Q/W7Vou66JjuFzzyB17eRnChjoMC93Q44naBsb3lFX3K
- yvzZpsHh5/dCXj0hGaJ1QYi0Jg9b96rKOyntmvJpG9LPz7ciN3od6SzIH9dIvxov45RkSSGaEpy
- IuODOTTn6S41W6SKtB8fubBQCalo87arg2F+fCtLTgaMB0MsteZMBW4HgQnOFNQ9et5q4MSGTZ4
- gD/Xf6MItMTAI4y+k66u7nf3hJ5aYHRsVtsVqjfA2nWqduNGthfEsAjx0U/R/sxbYQXikUfsiOK
- 2Q/74eTQIZa2aisqeUf91C+8I05nZsfE96suNoVb/cEL/V57lNG3stvWfm+owGEN3dovr8YFNqD
- lwM/fCzJuwDoCBqjnWCQ4bOIop1NH95s7W++pbtI3bHQhWhN7B3NYsK7YTHsRJOGC1ngl5pluTK
- +CL061T+fPDjdpw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1800; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=/QjFws5fePN18OBYa8bISKhX2yIiYoWbwKUyTsCKvi8=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpX+W87k4FcETAMephFZz/qe7wC4C41gmjqLLfA
+ Q/kBv6HQmOJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaV/lvAAKCRAADmhBGVaC
+ FYTHD/9CJrqt0jlrMR3MPzOXX6TESjSMY5U+1+dwGCcCtiGwGSBiK1ZY1GBC73psRJ+mYjVfSic
+ MNCosL0YefLDvCp7QfNs9/ejLx7RUtyNCes+plJwrTahfnVJZ1uNYdK5DEZ44L2DqTFmrzcD4wQ
+ oy1zj93AjNBYypMHV/k+qL1usyMtFr3jPnged5fSSsBkJ0C5Si0L3ZpP6TqWEWeOleYjDy2urwR
+ fGkQUW+9Y6Xar5xRYHpGJwt5PKYAatcXU+SveMXOFbp35GKe+fnfNWZiABMI8W02Qp4Mf9CV2ZS
+ 45JLWGX1Hhj/0H/KewEpFamsXAQz298u+NwRFRypHdABGYAFB1wzK1r/D5p2LnmLKqrTaQe5bmi
+ 9Jgmywfj0M6wILCz2dDyEET+5PE0sipM9aPV9cHp/v/kpE/99FxGIVlFijqG1YuygTZ3CnEMEJu
+ y6HITTLBUusNTrhTU0Khne6zJzbhrbr4Ank1yRCl3u3cBFZxLvFFUf7YuQpp9L+6yqXasB7W63h
+ VKAGaSoSzMKxT87yMNEdOlgZcotY/MTm6wihQM7wiAsC80uzL7LVT26vWynyqiZeva+dO6UcZet
+ rUCqoy4q+/P7Ir1xCA0rQQCgb99iKp2pznNbBKq1+cYFA4N3yihYKFOnTD8jO/9X9fRvFIvZWGS
+ bhGnYs9Awrd5yCw==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add the setlease file_operation to orangefs_file_operations
- and orangefs_dir_operations, pointing to generic_setlease. A future patch
- will change the default behavior to reject lease attempts with -EI [...] 
+ Content preview:  Add the setlease file_operation to ovl_file_operations and
+ ovl_dir_operations, pointing to generic_setlease. A future patch will change
+ the default behavior to reject lease attempts with -EINVAL when [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vdtby-00060z-3F
-Subject: [f2fs-dev] [PATCH 16/24] orangefs: add setlease file operation
+X-Headers-End: 1vdtc5-00062J-NA
+Subject: [f2fs-dev] [PATCH 17/24] overlayfs: add setlease file operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -176,48 +176,56 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add the setlease file_operation to orangefs_file_operations and
-orangefs_dir_operations, pointing to generic_setlease.	A future patch
-will change the default behavior to reject lease attempts with -EINVAL
-when there is no setlease file operation defined. Add generic_setlease
-to retain the ability to set leases on this filesystem.
+Add the setlease file_operation to ovl_file_operations and
+ovl_dir_operations, pointing to generic_setlease.  A future patch will
+change the default behavior to reject lease attempts with -EINVAL when
+there is no setlease file operation defined. Add generic_setlease to
+retain the ability to set leases on this filesystem.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/orangefs/dir.c  | 4 +++-
- fs/orangefs/file.c | 1 +
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ fs/overlayfs/file.c    | 2 ++
+ fs/overlayfs/readdir.c | 2 ++
+ 2 files changed, 4 insertions(+)
 
-diff --git a/fs/orangefs/dir.c b/fs/orangefs/dir.c
-index 6d1fbeca9d8172a2155f5b524cd19bc896748d64..3c32bf9f1296e5eb62a7a603faaf4a5493c57166 100644
---- a/fs/orangefs/dir.c
-+++ b/fs/orangefs/dir.c
-@@ -3,6 +3,7 @@
-  * Copyright 2017 Omnibond Systems, L.L.C.
-  */
+diff --git a/fs/overlayfs/file.c b/fs/overlayfs/file.c
+index cbae894572348acb3ba6c2b6e7f84558379110c2..8269431ba3c66d49d2eea24c4ca63a3d2879580a 100644
+--- a/fs/overlayfs/file.c
++++ b/fs/overlayfs/file.c
+@@ -5,6 +5,7 @@
  
+ #include <linux/cred.h>
+ #include <linux/file.h>
 +#include <linux/filelock.h>
- #include "protocol.h"
- #include "orangefs-kernel.h"
- #include "orangefs-bufmap.h"
-@@ -392,5 +393,6 @@ const struct file_operations orangefs_dir_operations = {
- 	.read = generic_read_dir,
- 	.iterate_shared = orangefs_dir_iterate,
- 	.open = orangefs_dir_open,
--	.release = orangefs_dir_release
-+	.release = orangefs_dir_release,
-+	.setlease = generic_setlease,
+ #include <linux/mount.h>
+ #include <linux/xattr.h>
+ #include <linux/uio.h>
+@@ -647,4 +648,5 @@ const struct file_operations ovl_file_operations = {
+ 
+ 	.copy_file_range	= ovl_copy_file_range,
+ 	.remap_file_range	= ovl_remap_file_range,
++	.setlease		= generic_setlease,
  };
-diff --git a/fs/orangefs/file.c b/fs/orangefs/file.c
-index 919f99b16834160dd8cc87faf9b8802aa02796cf..afd610a3fc68855eba1c892d91a5c0686876cfc3 100644
---- a/fs/orangefs/file.c
-+++ b/fs/orangefs/file.c
-@@ -583,4 +583,5 @@ const struct file_operations orangefs_file_operations = {
- 	.flush		= orangefs_flush,
- 	.release	= orangefs_file_release,
- 	.fsync		= orangefs_fsync,
+diff --git a/fs/overlayfs/readdir.c b/fs/overlayfs/readdir.c
+index 160960bb0ad0b0cd219cb2d8e82d8bda08885af0..7fd415d7471ed58849710da9f8a414b2b7aca1b4 100644
+--- a/fs/overlayfs/readdir.c
++++ b/fs/overlayfs/readdir.c
+@@ -8,6 +8,7 @@
+ #include <linux/slab.h>
+ #include <linux/namei.h>
+ #include <linux/file.h>
++#include <linux/filelock.h>
+ #include <linux/xattr.h>
+ #include <linux/rbtree.h>
+ #include <linux/security.h>
+@@ -1070,6 +1071,7 @@ const struct file_operations ovl_dir_operations = {
+ 	.llseek		= ovl_dir_llseek,
+ 	.fsync		= ovl_dir_fsync,
+ 	.release	= ovl_dir_release,
 +	.setlease	= generic_setlease,
  };
+ 
+ int ovl_check_empty_dir(struct dentry *dentry, struct list_head *list)
 
 -- 
 2.52.0
