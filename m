@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2173AD04CA2
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 18:14:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06C6CD04CA5
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 18:14:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=IOc99n5SMCNAouDDwL/dUn1Wg9TvnhsxWab+OB1RQsc=; b=BibybkLnNCrPd2/bDytuI9TZKR
-	fa36fhpcY8rBa4vgIsyepDQhJVoX78Q5WB1NeDk/TvaMiE2vX24HvezdUx+DRLrADEW5VZt2GGul/
-	aWqkOafUjHNTOKExufFrWAE4ybQgOJ6QMQkI6YShVU5rkBENcl4KkSt4RJAV0QGCPGdE=;
+	bh=YbYlBM2RjyNGmWzjXZH3orgQe+/nlZXbFPrIu9NDm3A=; b=QFHJR/1Xw7grmQwRZQ02s51F73
+	0R65lSTx+rPczVlFuvyVP6tW+Q7ZOi0zQ0x9BCTUct0xDYW18dEyQ4CPnXz8XuNBdV9xZ5KzHi6MD
+	8fJteULLJf7a4zalDyJlP0VWSuygMjgVpomkJS0+5CFw6ih9PtaVPsb+Ig8G0pMX2ntY=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdtaq-0008Es-Qq;
-	Thu, 08 Jan 2026 17:14:40 +0000
+	id 1vdtat-0008G8-N3;
+	Thu, 08 Jan 2026 17:14:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vdtap-0008ET-19;
- Thu, 08 Jan 2026 17:14:39 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vdtas-0008FZ-EK;
+ Thu, 08 Jan 2026 17:14:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4Ans1oOdE3NYLSz974mpEX/DcKF2I12Io514v9DbvaY=; b=OHhvH/oKHOb17C9SNvvQfFxM2i
- ZSfxjS2xEEAYoJUTwFyhae437+Y4KK4366pC3udjwUXwaXhS+e5QpG6ZO9ftcXO87zL80G9nLKxiX
- mDrr7ltiPJY1/bn/V2oqtaW07ePGripkVo5IT9EB1qVmCySWAImN93KDjJ90hfYZbx60=;
+ bh=3OlUsuC3/tNLYn+8rD9Zi3/RFls3AiER79V4RwQ4nc0=; b=KY7tXshhM4jcKEfhxWazR7rIgc
+ tznCYSL6gNkJMijtr2MvEcmozNsKCMyVlSkLHSyxJywgc/YZFMEkxKd7zIsdwEbgzdmEAXNq1I2+C
+ IFSNiKi8v9y557G0OQrCBy9tnYNLOVNiQ0eQZetZr/IffoYp+pZOQIgbuWjWnkL1HiNY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -39,31 +39,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4Ans1oOdE3NYLSz974mpEX/DcKF2I12Io514v9DbvaY=; b=GKT3JrC/FkY74MTXw2887NLk93
- AKRgPN3iDLDVkeBYngrLlILuPAmlY3gvkt5r8NvHXZ2u8qDDXMsxYJx0ghfiSOahVdWLCNsSGuUVF
- PsNT2FwFZ2er62keFov7xzN9plzCcxIrpCmCcjHTUYyr6j/7jVtBvBdIf0OjXZqGa26A=;
+ bh=3OlUsuC3/tNLYn+8rD9Zi3/RFls3AiER79V4RwQ4nc0=; b=Lj7yVBkeUQccUaM924XunW+t4t
+ E3Gu2VRJVnCyVXqgeDZdjXOWHhIvQC/Sy0hFifzeiwW0txoHvDsWfvnPiGRva1BhVz0o/h2t0MRWr
+ Edu+KXIICUG2qegd1y6CakRZGhXRptE49paPmIdB03Km+6hf6TLS4U+Hw7XTZ9Eo6uaE=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdtao-0005qh-AP; Thu, 08 Jan 2026 17:14:38 +0000
+ id 1vdtaq-0005r0-T1; Thu, 08 Jan 2026 17:14:42 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id EEBB444451;
- Thu,  8 Jan 2026 17:14:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7486EC19422;
- Thu,  8 Jan 2026 17:14:20 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 8B6A54098D;
+ Thu,  8 Jan 2026 17:14:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15B1DC116C6;
+ Thu,  8 Jan 2026 17:14:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767892467;
- bh=hlxGHkYb3xkFH9tUolL/syLb6jWJ/uBVgo3tjpiBxyY=;
+ s=k20201202; t=1767892475;
+ bh=U7S0etaEv8XbcYfILfSSuzi+P7a+aG4oaPVvVEC0yKw=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=d9MmB1m04Yq51+yvLj5Igg5jvjt2pHNxTK/fBefOXh8TeU4uLphzQaxU6IN9Pl04A
- tBoV9hqBlk7GrHjFDyAHkh6LbqS7sqpCYUy/uoeiRJFegNbaFGoIR6bSSAPvq95x5b
- 3b0SAShJkVnakBG128c5vI/jQfrSS/P2TDGfDgGUgi59ILalooVkG0diDEYBmCbaSk
- iqhZQYGDY3tXw2lXE6dkvpWeMQR+GcH0PTKSfpBqJDNYo/o+MTaFT+NUjuvjcrOq3e
- msPZWt4sPG8TodhD1Ox97c2Oy73trggOtjHggajWT0gizYqDghDAFLpOjOEnQ7tPwQ
- GG2zYe58TRBpw==
-Date: Thu, 08 Jan 2026 12:13:01 -0500
+ b=oU0MEVnsPzUmFg1DgiNPR9jxtVRsEn7l/25FyE5LGlckCNBp+ENrt67kCjhVH5n/E
+ zUaOzKc9aREGF9AKTJrNr0Rftiq++U8TGZnZjznWIv+syt5eODEn4APKEj9dNLXima
+ 7JJb6r/6wJUoQd73NcJWDUf+NlabMWRg1s7OqO5z5oMjUirzXGHOCnCcD1RQGcZ95S
+ vRocEgo2x33kwDf5L4xrumMgBdS+trBbwKddwqrRjYW6GkjFg8dy1NsDv8/ijKxawe
+ fOByUQkqqB9sk2qDeQ/9eAZ5pVn10R/SRrQJmjhnIo9XuAXHFwfyfUzybWFtyBWa8o
+ 0MPK2Xd8XRorQ==
+Date: Thu, 08 Jan 2026 12:13:02 -0500
 MIME-Version: 1.0
-Message-Id: <20260108-setlease-6-20-v1-6-ea4dec9b67fa@kernel.org>
+Message-Id: <20260108-setlease-6-20-v1-7-ea4dec9b67fa@kernel.org>
 References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
 In-Reply-To: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
 To: Luis de Bethencourt <luisbg@kernel.org>, 
@@ -109,45 +109,45 @@ To: Luis de Bethencourt <luisbg@kernel.org>,
  Shyam Prasad N <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>, 
  Bharath SM <bharathsm@microsoft.com>, Hans de Goede <hansg@kernel.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1728; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=hlxGHkYb3xkFH9tUolL/syLb6jWJ/uBVgo3tjpiBxyY=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpX+W6t0mhuGkERJYbFwmyCbgn+H1ouSbEbBOhS
- BmnbuhF9HOJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaV/lugAKCRAADmhBGVaC
- FUEED/9lGYU2hYsgRrdekmYbHARu7YG2VzVJ9YJTF7i9daxcdOeAV+CM9pvICZhlQXj7ksl2zyk
- +MlC/fF9o43MeuUs82UhWCwUlrjoQWEHCxkZi/kEGCtyrXZStdPHmGPs/jBMBERxfYcccrVRote
- Af82hjhi7S8o/SeYi72kfMiuEbK+TrD5GIbE/l8Pg07AYvM82MejivNSUusmV3nW9TgqpebQOU8
- igqsQPEsODeiWZHFiXaR5yJjNhDdogUGW+iBWXFcfC9EZTc3nSGO83mSmVqTcFNnMJ3ojOQaOa4
- JuNqiG7LDyYmfHkVs8jgVxjYG/PUKziFr6CYquQnsGZi5E39ZVl8HX4iSqKoPh6FjDpc1PDG8yr
- QYPwrdKSZBX5fr5wwy7yrWcwlZeMlCXzoid+Fop70v07YQPWJ5OmwUD7N9Bg0dxArH+srCGIgTR
- p3f2C5FWpQ05m0xTZ7E7oc6KD34XFgwXIJLCPTEwp3nfRY3+IYLQcH4qfJuCCQSB0waZJ/jDV88
- 30C0Sp5Ujwb281ckPPKOaDzTtEThYd9Z6U5y6u/ov+PhxJrsPh9JtyAW4Mq+D1+Ds+b5ysfCvDu
- fGntd6Oj1rEilxy6v1snzESsLykyBBKAn/sMaXn4sW1rixrdAHhQ+hW+SLj+O2Z3iVmdb1IRscZ
- CKvOoSCXs9sf55Q==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1804; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=U7S0etaEv8XbcYfILfSSuzi+P7a+aG4oaPVvVEC0yKw=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpX+W6RfUKKljQL5Cerh3GnT9/0uP0/MXv1o7St
+ HVKnAUnvHCJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaV/lugAKCRAADmhBGVaC
+ FZDVD/oDif45OVfg9r6Fnp2duoc1ElrjVnT9zhMMN8e/dccZgQ+m2endixk1Sa0MscAhPTCtGcu
+ x2/DO4X2z41Lo58GZ1NyL5KfL9P/+EOjWPIovpdUVxwwJy7jnZeNnvUz9tSI1aDM7h8A05j4M9p
+ fnODqkW02HUKmsM4OggWTlkZ/eQz/FdjIBOKtaFRMIhjK+B/cGbDRxYGCgr/xh9XEMuBXjqUhAo
+ mrY76LpHrL5qFr3AqkA8ZeffDzbIoojosSfBAMyJsmiFRP047IjUUogVtqBiZafCWpcXwUVqvEZ
+ VZwu0yqPzEolFeWhrCVXFMddwXwwx4yzt+4FcC14VloO5z+nisM9tHC20UHl1I3+MixDfeTRm1d
+ hvRgAsLtnlBX7+R+3wEYS+aaR1XzsZkp9UnKpYzDHbnDbTEwn5x7lHENLDa4AIkZUAsxPxjsuC6
+ oYzrCHQE9DU840ojM1nH/xuau6QN8GKVRP2gmEJvN29+aOm6SK0Awz6OlXcY07tAsaa5bbgjINN
+ kEqi0Ihm/y6NAkhwuv4500UIgyZCvqWAKA195H1vaFW5iPkzwEGsClkorDQP0y+1pk4EzakLSh2
+ gKuFpo0wSckYsBecgX4VD990C+dTmOYHY11wmjH5dsqaYfgHtUIq/gKbzngZY+T2nQmxrVNd58f
+ ENhaby327F711/g==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add the setlease file_operation to ext4_file_operations and
- ext4_dir_operations, pointing to generic_setlease. A future patch will change
- the default behavior to reject lease attempts with -EINVAL whe [...] 
+ Content preview: Add the setlease file_operation to exfat_file_operations and
+ exfat_dir_operations, pointing to generic_setlease. A future patch will change
+ the default behavior to reject lease attempts with -EINVAL w [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vdtao-0005qh-AP
-Subject: [f2fs-dev] [PATCH 06/24] ext4: add setlease file operation
+X-Headers-End: 1vdtaq-0005r0-T1
+Subject: [f2fs-dev] [PATCH 07/24] exfat: add setlease file operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -176,56 +176,58 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add the setlease file_operation to ext4_file_operations and
-ext4_dir_operations, pointing to generic_setlease.  A future patch will
-change the default behavior to reject lease attempts with -EINVAL when
-there is no setlease file operation defined. Add generic_setlease to
-retain the ability to set leases on this filesystem.
+Add the setlease file_operation to exfat_file_operations and
+exfat_dir_operations, pointing to generic_setlease.  A future patch
+will change the default behavior to reject lease attempts with -EINVAL
+when there is no setlease file operation defined. Add generic_setlease
+to retain the ability to set leases on this filesystem.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/ext4/dir.c  | 2 ++
- fs/ext4/file.c | 2 ++
+ fs/exfat/dir.c  | 2 ++
+ fs/exfat/file.c | 2 ++
  2 files changed, 4 insertions(+)
 
-diff --git a/fs/ext4/dir.c b/fs/ext4/dir.c
-index 256fe2c1d4c1619eb2cd915d8b6b05bce72656e7..00c4b3c82b6534790962dc3964c0c557162b6dff 100644
---- a/fs/ext4/dir.c
-+++ b/fs/ext4/dir.c
-@@ -24,6 +24,7 @@
- 
- #include <linux/fs.h>
+diff --git a/fs/exfat/dir.c b/fs/exfat/dir.c
+index 3045a58e124ae0f193af2caeef7261b20fe42e00..2dbf335eafefc5f51a5c70598786c35b85e2118d 100644
+--- a/fs/exfat/dir.c
++++ b/fs/exfat/dir.c
+@@ -7,6 +7,7 @@
+ #include <linux/compat.h>
+ #include <linux/bio.h>
  #include <linux/buffer_head.h>
 +#include <linux/filelock.h>
- #include <linux/slab.h>
- #include <linux/iversion.h>
- #include <linux/unicode.h>
-@@ -690,4 +691,5 @@ const struct file_operations ext4_dir_operations = {
+ 
+ #include "exfat_raw.h"
+ #include "exfat_fs.h"
+@@ -298,6 +299,7 @@ const struct file_operations exfat_dir_operations = {
+ 	.compat_ioctl = exfat_compat_ioctl,
  #endif
- 	.fsync		= ext4_sync_file,
- 	.release	= ext4_release_dir,
-+	.setlease	= generic_setlease,
- };
-diff --git a/fs/ext4/file.c b/fs/ext4/file.c
-index 7a8b3093218921f26a7f8962f94739ba49431230..534cf864101f8d1e5f4106b61c0580c858bc0e27 100644
---- a/fs/ext4/file.c
-+++ b/fs/ext4/file.c
-@@ -25,6 +25,7 @@
- #include <linux/mount.h>
- #include <linux/path.h>
- #include <linux/dax.h>
-+#include <linux/filelock.h>
- #include <linux/quotaops.h>
- #include <linux/pagevec.h>
- #include <linux/uio.h>
-@@ -980,6 +981,7 @@ const struct file_operations ext4_file_operations = {
- 	.fop_flags	= FOP_MMAP_SYNC | FOP_BUFFER_RASYNC |
- 			  FOP_DIO_PARALLEL_WRITE |
- 			  FOP_DONTCACHE,
+ 	.fsync		= exfat_file_fsync,
 +	.setlease	= generic_setlease,
  };
  
- const struct inode_operations ext4_file_inode_operations = {
+ int exfat_alloc_new_dir(struct inode *inode, struct exfat_chain *clu)
+diff --git a/fs/exfat/file.c b/fs/exfat/file.c
+index 536c8078f0c192688eed5f5ee86dd1bc738be84f..b60ee0e1bec9344145a6328cdd727e35b317c08a 100644
+--- a/fs/exfat/file.c
++++ b/fs/exfat/file.c
+@@ -12,6 +12,7 @@
+ #include <linux/security.h>
+ #include <linux/msdos_fs.h>
+ #include <linux/writeback.h>
++#include <linux/filelock.h>
+ 
+ #include "exfat_raw.h"
+ #include "exfat_fs.h"
+@@ -772,6 +773,7 @@ const struct file_operations exfat_file_operations = {
+ 	.fsync		= exfat_file_fsync,
+ 	.splice_read	= exfat_splice_read,
+ 	.splice_write	= iter_file_splice_write,
++	.setlease	= generic_setlease,
+ };
+ 
+ const struct inode_operations exfat_file_inode_operations = {
 
 -- 
 2.52.0
