@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80FBDD04CE0
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 18:15:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30ABDD04CF6
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 18:15:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=XBvg9KiYYzBHvHuIVCmltWijOjFPHQTiBPi5I5Uh0pE=; b=Ym8kxDfLzKwmEFxIOXr6Te+RU/
-	8LQG+f0pANBVrX8i8rOi96haiVVqa66pqRv0okWJSdoBaA2sWb6CCvmDtO4YlQ319t2Gh8RkbqSew
-	68UpF3bT8RBs2GrVXu0rQuYDJylvTn49mItG9GGvHs3oBEGHWhVywcTdvtkAn3uV5RPs=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=SrT4Eau9GxJvv+VmBuinNfyrgrH6XoYHi7e3+i9rqQA=; b=I75rffsm78E7t0wm0ya+nGSrm8
+	EqioZ2YNRlSLRj9Q2TcB0zCnQTgS0FMjfxqvaj9Jd2wpPfJkM4fw/fpMKU9vvYfYJrt6GniVSgSVZ
+	r5CeOWpJtDVIg27uup9MYtmsiYXN5ZQ1ZKhhAyrUoO2TcYOrPJ6NLv4/UlMdO359EOIA=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdtbP-0006fw-8E;
-	Thu, 08 Jan 2026 17:15:15 +0000
+	id 1vdtbc-0003Mk-UZ;
+	Thu, 08 Jan 2026 17:15:29 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vdtbM-0006fb-DS;
- Thu, 08 Jan 2026 17:15:12 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vdtba-0003MA-Te;
+ Thu, 08 Jan 2026 17:15:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+8EkRoG1L9zjgQ1DOKG9mWDwPpbdMkoAIHjT4aDgnzY=; b=XZfIT632GigluAxSCvD8rS5nUx
- 7nmcaR4u2dRbjUTPUJaUJDMVcXrraiZQnZKdl0QBWvYdRr1auZ3ClBQG4sSUdwOstawwPtOMR2PTC
- H36mdqnWod+G7+QJo4+B+NEELCaNhneOp/nrsFOKZk7uluvhhKZ8lCpIUccdCOqTYUSU=;
+ bh=ikPkvxZEFqEFOk9dERq4FeObG5IFIQK9n7omq8yijjk=; b=GmjvsSpbOBrxysEfie8pUCBM8p
+ in78AcM4vSx4HXWziIkEO3MCMfoAXmpDnXBFQXwct7KEqLJOf0F2pq5NvcK3urIYVmDy7DShKKPcd
+ 1nuQRWvO833y0m3YQBUVSK/1qQRNcsfh4Wvg3V87IwKwbETzX7xYcMatybt4aYsxHLM4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -39,31 +39,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+8EkRoG1L9zjgQ1DOKG9mWDwPpbdMkoAIHjT4aDgnzY=; b=b8WyKTmvJNDFDxAgDsTHDYESAo
- s+THeyEWhPgdFb+HZb1LXsO1GFa//oIHNTkZ2UxsjMIhlliCDa9UKlguLOwsGs0j0a03wNPFsi1By
- /lIm532aCjYcsIF34mzcxVO3wHeHpjDmCYpk3KLdCJ3DtZ1QrpXO9n8XneqqoJKC8GTs=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=ikPkvxZEFqEFOk9dERq4FeObG5IFIQK9n7omq8yijjk=; b=QTWyyuCOHn7SiVst2017KVNXS4
+ SYg+9xapM2xAL05nlPXL/ku031ZRs6UOnEBZhCEWPtOHHOjAAZR+iDIGZvvsBUQNp3FVJmXbEfprd
+ t5kcl2/+1YrIsnW0IGDsaZJCNoAE5bafJlKciMm54NdlItDTZRk6e/c7hhmL9Gu1pmrI=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdtbL-0005vl-QW; Thu, 08 Jan 2026 17:15:12 +0000
+ id 1vdtbY-0005x3-Q5; Thu, 08 Jan 2026 17:15:27 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 4BBCF417B5;
+ by tor.source.kernel.org (Postfix) with ESMTP id 15BD860145;
+ Thu,  8 Jan 2026 17:15:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 686B9C16AAE;
  Thu,  8 Jan 2026 17:15:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6360EC2BC86;
- Thu,  8 Jan 2026 17:14:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767892506;
- bh=f+f4o4ynYy+1SY/DeVfHq3onGDbY5zceG5AUdIXzRFo=;
+ s=k20201202; t=1767892513;
+ bh=LxI/ylJoAyN2L8j0GVIMwgPEgj096EiMNnZ2VE5RMBI=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=TDNJcMd6q902mahde+BO9wSWmbW9wjddkU26c1KViTrFBxwUdgE7cFhjS0dNF3jtf
- 6Kk0r/OwVHpHX55siH6IZecEdrCSr2DCgPJoaSgr4zwLDXirwvkRHwnst7SJcRNLcL
- WwkGp1R5Oplpg8ID0G3hFXMyazl85w3U9ThrzJUR7nvfo0YAzzC84krpqTWECQ9+lI
- RRrPBQx4aAyUO/5pyOG0rGiL0sMaMgJkiuOt7MJqeLW4Ry9+VXvGVxqNaTjIopbLYy
- hGMNCDe+LUdCUZ/AYoAp6mt3lNoGuFLlkAljMn08t1i7ZscD156Xj/ScCXO0oBfPnT
- /HctkjSSFO3jA==
-Date: Thu, 08 Jan 2026 12:13:06 -0500
+ b=QUf0x1S5Bumga21rP/0u5v6W2RQ4BluTcyv+ihE6zxjqOH4cSdhGIv2a2hWmNwkEY
+ GP82TOP3utzcm7AFsouq9nW5sKotUofmqhH2HblXeYHjAkY53RIkASaReGdUxITEHR
+ CpbVb4v5pnNOvg0fePHXAZs9jF/BSPNoZCdA4BgkfotHBZhgCxh+Eqx7ucO5aAd99s
+ nC4VLK1Eokk+dFaCZRvPgX8Q/2tq7B4zKAB8fli4S/NyxIc0ZjCWnK2HbP00IJ5no3
+ +f+bc+sVTDmD/e9V2p0pp0WJUubi6eMBZruCs3UzQVL6YfG5bgieNR569AeoUsBbXV
+ zyAWDIpezVFJA==
+Date: Thu, 08 Jan 2026 12:13:07 -0500
 MIME-Version: 1.0
-Message-Id: <20260108-setlease-6-20-v1-11-ea4dec9b67fa@kernel.org>
+Message-Id: <20260108-setlease-6-20-v1-12-ea4dec9b67fa@kernel.org>
 References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
 In-Reply-To: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
 To: Luis de Bethencourt <luisbg@kernel.org>, 
@@ -109,20 +109,20 @@ To: Luis de Bethencourt <luisbg@kernel.org>,
  Shyam Prasad N <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>, 
  Bharath SM <bharathsm@microsoft.com>, Hans de Goede <hansg@kernel.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1725; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=f+f4o4ynYy+1SY/DeVfHq3onGDbY5zceG5AUdIXzRFo=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpX+W7lCQZfgywIvw59WIEginzoekcq167e9p3d
- FIoynspkAuJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaV/luwAKCRAADmhBGVaC
- FdDKD/4znaNh5ZW6PAHUf642a8kepq5X6OHMfltH9Cc7L/Be4t+uhH2C2l8lp1cvjF3p8Rpi3oA
- fZ+dR9bUW5GRyCJ3+vRKjVS5PRDra8bHdHtEx7mCNQeTzUhsLWKmjFoTVQ+2z6Dv47T6ZmLUrOW
- vt2kqZpnLjWLWWiPlf0sOMJIeswKuv5uKd88OxRHUWG2kQSOKbcKfwQcQ4bjSnR08ZPqmkmOos0
- TrsoXeTh7E52Ttx+5nLskrvumsAUMiLfNpAYGRnh5zS9deqJ/icejX/Tnm8rp/HfMYW9lZY1JLS
- uAR1InznJLqI5Ra1WMIM+/c+6E9oW407IRy23SocSVro/Mua/BIjEJ7gOfORQmHMPu3+9VYfcyt
- Dlxsr/Vz8PDZc+xqqrW5abevesTWIHsXWA6cp0lDEJG3JmUdmpVGPJ8g8DK8clPYo/rFC+9xN2e
- w+Ol9y3A0g4mbiyDNQShnxdoWa8G24T+TC06gfvWatd7epKfvf+QiHukAAjTB1zsTXPxn1Y3LzI
- +PZQPSYmATnn8m8nyY2wkZ8htVVohDBRW85B3Mp8M3jnGgMP0L7Ea5mp1wDVPTgyjwmRTpNCdV4
- 18aUPXvyTh8KR3P0CgCnGA73VzPVfWcUEJ10+JBd6hS248f5/wSH14zMU2VeB2iNpgDdkeSQKbE
- um2oXzdHyzfwuLA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1701; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=LxI/ylJoAyN2L8j0GVIMwgPEgj096EiMNnZ2VE5RMBI=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpX+W7d87lASYok48UUP86L0PxRicnWCxcwIa2g
+ mrjhHHdS8eJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaV/luwAKCRAADmhBGVaC
+ FRqVD/4mxKu66YoVwGnK/KbDPL6sP7u3c6Fqe/CzabSY/cYfYzAoIK0qove2EW8DsMJoXrFfCt3
+ AmH3fJ2NzhyuumNIiCwfp/98d7mGtejKDtNXVvNybC6Jhq5FGUc9JGmOfhnBUuxvv8b35sFNHIq
+ PcEMa7D8RqJH5xGJod2txTPQ4bl53O0YlGgolAHJ0gPLgzW2lsGIRrACSKbH1shyiIUw5MQSGbB
+ +GUepZAWHQSzMuKtbeyL8am4GHJUfVIt6bdbVhAaNU6e2RqOk0PlRircBoM05Xwr9WHwl2Gu2ub
+ 4c1jexsIsI5V4AFxKZvMcP7/qBD32Ui9VZOzp7RZX8ts5DZkaKFkP9Hp2aTR6z0lenvWHeaWJJu
+ jhsCqHB86EpC+byLIiybWPjlh1UFMOpYDEXuVEWiFeQf9xA/om1XNjgyXxKQNPJ9PtFsi+LL0mJ
+ uxFuMtlhX78r62nBwdRMHsaTg92bFaT8MkoCRusNV76fOjKvtVtLxi7dOeAfyBIfC7jt4RhjsEj
+ B7rWLAEte6L3EGQ3BCHr2d5EQ1zZNiDlgkhMw08fKmQAgqI1+rcy1K73Ng2NHs9sG7cOSzQg2vu
+ BZmdy/67YXC2viG4pAV2raZi5ApCfRPQwFxyhoOw81iQyoQ384mrcmM0Bsl4zpgVZcBA5sw8kuD
+ j1Atxo2tHiM6kQw==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
@@ -132,9 +132,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add the setlease file_operation to jffs2_file_operations and
- jffs2_dir_operations, pointing to generic_setlease. A future patch will change
- the default behavior to reject lease attempts with -EINVAL w [...] 
+ Content preview:  Add the setlease file_operation to jfs_file_operations and
+ jfs_dir_operations, pointing to generic_setlease. A future patch will change
+ the default behavior to reject lease attempts with -EINVAL when [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -146,8 +146,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vdtbL-0005vl-QW
-Subject: [f2fs-dev] [PATCH 11/24] jffs2: add setlease file operation
+X-Headers-End: 1vdtbY-0005x3-Q5
+Subject: [f2fs-dev] [PATCH 12/24] jfs: add setlease file operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -176,58 +176,56 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add the setlease file_operation to jffs2_file_operations and
-jffs2_dir_operations, pointing to generic_setlease.  A future patch
-will change the default behavior to reject lease attempts with -EINVAL
-when there is no setlease file operation defined. Add generic_setlease
-to retain the ability to set leases on this filesystem.
+Add the setlease file_operation to jfs_file_operations and
+jfs_dir_operations, pointing to generic_setlease.  A future patch will
+change the default behavior to reject lease attempts with -EINVAL when
+there is no setlease file operation defined. Add generic_setlease to
+retain the ability to set leases on this filesystem.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/jffs2/dir.c  | 2 ++
- fs/jffs2/file.c | 2 ++
+ fs/jfs/file.c  | 2 ++
+ fs/jfs/namei.c | 2 ++
  2 files changed, 4 insertions(+)
 
-diff --git a/fs/jffs2/dir.c b/fs/jffs2/dir.c
-index dd91f725ded69ccb3a240aafd72a4b552f21bcd9..2b38ce1fd8e8d8d59e80f6ffb9ea2935f8cb27e4 100644
---- a/fs/jffs2/dir.c
-+++ b/fs/jffs2/dir.c
-@@ -15,6 +15,7 @@
- #include <linux/kernel.h>
- #include <linux/slab.h>
+diff --git a/fs/jfs/file.c b/fs/jfs/file.c
+index 87ad042221e78959200cce12a59a3ffd6d06c0d7..246568cb9a6ec144831eb3592712cce323d8cf1d 100644
+--- a/fs/jfs/file.c
++++ b/fs/jfs/file.c
+@@ -6,6 +6,7 @@
+ 
+ #include <linux/mm.h>
  #include <linux/fs.h>
 +#include <linux/filelock.h>
- #include <linux/crc32.h>
- #include <linux/jffs2.h>
- #include "jffs2_fs_i.h"
-@@ -48,6 +49,7 @@ const struct file_operations jffs2_dir_operations =
- 	.unlocked_ioctl=jffs2_ioctl,
- 	.fsync =	jffs2_fsync,
- 	.llseek =	generic_file_llseek,
-+	.setlease =	generic_setlease,
+ #include <linux/posix_acl.h>
+ #include <linux/quotaops.h>
+ #include "jfs_incore.h"
+@@ -153,4 +154,5 @@ const struct file_operations jfs_file_operations = {
+ 	.release	= jfs_release,
+ 	.unlocked_ioctl = jfs_ioctl,
+ 	.compat_ioctl	= compat_ptr_ioctl,
++	.setlease	= generic_setlease,
  };
+diff --git a/fs/jfs/namei.c b/fs/jfs/namei.c
+index 65a218eba8faf9508f5727515b812f6de2661618..f7e2ae7a4c37ed87675f0ccb3276b37e6ce08cb4 100644
+--- a/fs/jfs/namei.c
++++ b/fs/jfs/namei.c
+@@ -5,6 +5,7 @@
+  */
  
- 
-diff --git a/fs/jffs2/file.c b/fs/jffs2/file.c
-index b697f3c259ef25171ce30785d4584d5a53751a0d..5e1ef4bc009b6e5b4818a7467639fc328c137c12 100644
---- a/fs/jffs2/file.c
-+++ b/fs/jffs2/file.c
-@@ -14,6 +14,7 @@
- 
- #include <linux/kernel.h>
  #include <linux/fs.h>
 +#include <linux/filelock.h>
- #include <linux/time.h>
- #include <linux/pagemap.h>
- #include <linux/highmem.h>
-@@ -60,6 +61,7 @@ const struct file_operations jffs2_file_operations =
- 	.fsync =	jffs2_fsync,
- 	.splice_read =	filemap_splice_read,
- 	.splice_write = iter_file_splice_write,
-+	.setlease =	generic_setlease,
+ #include <linux/namei.h>
+ #include <linux/ctype.h>
+ #include <linux/quotaops.h>
+@@ -1545,6 +1546,7 @@ const struct file_operations jfs_dir_operations = {
+ 	.unlocked_ioctl = jfs_ioctl,
+ 	.compat_ioctl	= compat_ptr_ioctl,
+ 	.llseek		= generic_file_llseek,
++	.setlease	= generic_setlease,
  };
  
- /* jffs2_file_inode_operations */
+ static int jfs_ci_hash(const struct dentry *dir, struct qstr *this)
 
 -- 
 2.52.0
