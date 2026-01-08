@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B184D04CF7
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 18:15:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B314AD04D18
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 18:15:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=31pvbV2+jKpyJQ7q7Da08+aCLJmaKRZFjlwgWNpDTNk=; b=QtCnutXbUdPH9/SBffhgJLHBDb
-	3fbQs+6pB29k+8v7F7E/aLNaAk9ih0N8utBYTUOJ6LpO7D07oJGWkhW2847Kn/iP9eqopS5VqZ/Ll
-	WbLjRaGEfUxUOP/vSYDTc8Sluk9rjMGLCeK6eyYYDWZgfyHB3Ghewbzi+tFpzAGVurZA=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=BKKZ0NQeDUhPiLbApdAHHSIDDjEpfiwQC9K0FeWORxo=; b=X50L3uexXxOT4JIYV9PQkf1BkL
+	z7SqKzLPske1mo61GVQWXFz/fWq6R5dZpSj8HDGOo442nGaBOpXeOnnDdIDTrj4HLpe3/8tUZwl/B
+	AQu9qG8bkEj24QSoxrs5wPMeAXw1obEgnCGLBuptt+ffEuYidOV3fafcBVOqxcj80v7s=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdtbd-00048z-Ux;
-	Thu, 08 Jan 2026 17:15:29 +0000
+	id 1vdtbr-0006ib-7o;
+	Thu, 08 Jan 2026 17:15:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vdtbc-00048a-5C;
- Thu, 08 Jan 2026 17:15:28 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vdtbo-0006i8-J7;
+ Thu, 08 Jan 2026 17:15:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dKbojeUF9wszpmnpENiT3itMPf4f4MBXLvnrvVy3l24=; b=T+RzkBhWAxaJ5DKr+f6aT+pwhn
- ZPtP1VeaOtGC0iKeAeT+ex/4nXBIAhIxHvDf7E0YMX67wetkz8+n8udQ05x/0jPA2xd/o4pAm+bBV
- P2pMnPZa/tB/IFXpr5tKCuAHxiLMtIbILAQ2VSy0K3TsOVTCj+NOwn5EbiHDEuNsTepc=;
+ bh=PIkGxSckJddzOm5mr5N7BySxqdSOcwEmn39dA60iKok=; b=YSo0Ubbb8DzuHcLmIPfyd5cxXW
+ i/hY8rCVU49loo1g8QV93F7Xo2nwudXrMOTukrtVudzd7uFlkLr7mLa3YqJD6HMUQsEIqQ0oUhumO
+ JUXoM6/By+9mlAIM69QZfY0cXjqqNmVrNfOOxdsrrvV0TN5CT5mdLhqqAUn2iwmFwkgA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -39,31 +39,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dKbojeUF9wszpmnpENiT3itMPf4f4MBXLvnrvVy3l24=; b=ksEPYXlI9H9IZfjUBe+/06yaeL
- tbmOXogmeY48xhuvMWyeE3dQvug5wkoeHa2qoRtqpa3TbQC+qfAm+EF5xUFsMHZXnK0P3lcBl/ncU
- paeihpo2iIeKaSHajVHoTTsX/wUARNzKiVjSACA6obXQTIZrby4LpY7aciZaiVVTQKvA=;
+ bh=PIkGxSckJddzOm5mr5N7BySxqdSOcwEmn39dA60iKok=; b=l/HK8CBVGy4zNZgexObjkZWtCf
+ IrrG4uT6EKodFCyS6oEHKJWDtFq6tSko+LS0awhQa2D2tVRQ5u0+RZdiKLkafVPE+P16YB9vf0CJD
+ 4fK9urSahSjFfXwuW27Nb5fx8TEcZylnKNq9ZN3b4RxuviVXOeCMsw4rqMvgZ7yJ+Eqk=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdtbb-0005xQ-C9; Thu, 08 Jan 2026 17:15:28 +0000
+ id 1vdtbn-0005zm-Pz; Thu, 08 Jan 2026 17:15:40 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id AD24160132;
+ by tor.source.kernel.org (Postfix) with ESMTP id 3F4BE60149;
+ Thu,  8 Jan 2026 17:15:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A1798C116C6;
  Thu,  8 Jan 2026 17:15:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0906DC2BCAF;
- Thu,  8 Jan 2026 17:15:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767892521;
- bh=7K9p85kQBsPIELLrgo6Fwt98n+8PhfeVVaYWOCIPo7A=;
+ s=k20201202; t=1767892528;
+ bh=lPmy5m2b6fstUP4HTh/TkAWFgE8sM8Qul7SD/NBtEMM=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=U63CS+2SID+lavsOrSSCUalQh3m7FJHBSbAoGL/RmPqzsfFEPGFZGbdZsU6eJQ5v9
- uneS5gyrpM9Fep8UdIeYQSvBAiMRqLI1WFUiyh3FHuYXqE5c1vvwxIG3liIMSCIPf8
- k/ZHusqr8jROTU2Z1TsxDbsUhK1LNDoWdcbKukPO67MY+LMNXUGLVwQU5GnQewNeHm
- X8r3wm4rHE1ZGLA11pFy8vFE4Y2MopFN4iwY1VLCL2ProgfDnPQLN6cYI4h9KECtyI
- 4AKCxyPsXPB5f/spy5jS1w48yjld5OSFSYK8tN0A9KP19ZVyrDG+PNFqwz6ggoTPcC
- MV+xGBiu4K4UQ==
-Date: Thu, 08 Jan 2026 12:13:08 -0500
+ b=o6pSqLEjn8qK7qYNebbAPkZ/JyIkQW++u82AhUwHi9H+QW2iAyt2/YV8OGsxZd1A9
+ ENrWknJg3NuxCTQ3tUkQ1nzJNdFeu2kkZmIWZslXtUy6vu4vYwlwaK2LDvMonkrRhF
+ 3DHPRixwdk37Z3HJCNoiFPBNw4693o6PHwWpI06acd0vWqBNZaKtDxOBBL5GKH39ZA
+ mbERBl79ANFf6jGKxR6nRABJR3U3eh0aPlvqDAYupbvpmt5OfNovh+dgAcWgFcY9LU
+ VS2ZwmFVEW/NiRBVP3QjkmbYkj70bOwxmxx8gLNaqaMxaDmsgaKB3rvo5lQYD+x3aZ
+ OaVj5eawcoMtg==
+Date: Thu, 08 Jan 2026 12:13:09 -0500
 MIME-Version: 1.0
-Message-Id: <20260108-setlease-6-20-v1-13-ea4dec9b67fa@kernel.org>
+Message-Id: <20260108-setlease-6-20-v1-14-ea4dec9b67fa@kernel.org>
 References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
 In-Reply-To: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
 To: Luis de Bethencourt <luisbg@kernel.org>, 
@@ -109,20 +109,20 @@ To: Luis de Bethencourt <luisbg@kernel.org>,
  Shyam Prasad N <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>, 
  Bharath SM <bharathsm@microsoft.com>, Hans de Goede <hansg@kernel.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1690; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=7K9p85kQBsPIELLrgo6Fwt98n+8PhfeVVaYWOCIPo7A=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpX+W76g8a5Sef4VJHMu/SBiKGJBzYZIYBEvZM7
- sa7pofG9vGJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaV/luwAKCRAADmhBGVaC
- FRefEADUL6yifXH4F2LGUNkPDbna2fKnDcbKePeGEDTBWN1hhn9ngEJTm7fpEqb1YRrtPcDp5vE
- +1R/Iwq0TMu23DexViJFHvvST4O2zdxNMDAkI59v1YOXOc2iiFCpeYa3fgo4CrBcHdGbeHnQ1TW
- yLKsPs4Hiey4j+/QdTEm0FCCPpA6W2TAZ2tca3zdwPBZ0B86QYT7n0rZI6G4MQ312DG9n9OmrLW
- wzsMlQIz3mgqAXM/1h9TI3qFLLveP+r9b0eOfIDhTQdfWAqfMCWV7gtBSkEsucAHzGQpD/UmBcu
- 1lZrlIEoJTfx2Ds54BP34C/fwPGQ5QBiZAGis4Lo0luqIolY2PA2Ea+BN1LWsf/ygZKWQ50jdcE
- TTddRZkGUgNqpIjWoVl4CetGS/X21/t+55U4WcKz2YOxhxlLBxbvpU+x2jQDf/tFtiPYYA1G2OX
- ctASop1n8K3jd/MYBIGR7Yl7pitBvV0VNOK8wWSbW4xa/EfjZQq7aU7LBwwyNDRzuSl0+AO5WqR
- oAIyaiX4gXhi7PAAbr12kT0TRMF1RVN6pPjpz+ibo4iAsep4JsVSnnpWIuTVRS+iIUwB+gCgQjm
- RZr/YvulgvvUovmoLq8+3kMR2IrDBkO81sWpr19hA92feWIURvJq5Qylyfi8CB5rW1ebshMTKz7
- XusXaUQHgsa1/Tw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2198; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=lPmy5m2b6fstUP4HTh/TkAWFgE8sM8Qul7SD/NBtEMM=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpX+W8LwtRNR2sBvsfy/GEh9ZefE4EjXAmzXj3h
+ zdKm8qXc5GJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaV/lvAAKCRAADmhBGVaC
+ FbfXEADAKoRXZYBYCpltQSV7jdjNKk/JyP9tf3Coi/d7GV8fbo+eZK1ue3cTjR/mnT8hTfpD1xc
+ 5iB3iihAi3kCkIJSXzhpU5KSj5hFQCw343IkafmT3BIx5qzB72aiZMDoAsWRpM3GIreEyEh1sl3
+ 5Ox+8W9SmDsCzuHZ6gkAXHoarhyBNbRNlsYF+9XHx12xDx2EPVsr7cNp2IEOTtznxjB4k+JBIHG
+ UlXRMlUV2UsOWJuS5EheCi2MMjIz+jrNb10YTMZO/ViLSG5b4xfU4a0BjaxfLJmzlNuVxFt5u47
+ jJE74krY8s7YAOgW6N5+RB4czfrDPInVhccAdJcQYtAooHkgCDp+mTfMqlqZR7yyjeJf76atjl+
+ +u8kOrnz9IXqT0pc8a1QsuAMA7SsW0nBEHcoGbobIpfstwgPDADr+lEqBOAu/SO2hbsAvBVN5n8
+ Cx3bipjsINEhrXXbawsgNTUG/Ju8P6zGspNVcDL9yp9ry86Vnp/+WihRVDWnd7/O3XrcpKNtQ9e
+ 0xmTkabjcapHBXNsYeAA+dnMdTzCt3N16zrQsDrFEw2RublZKzJfg5f2O6eRXDt8/yXbFJ86oxp
+ QBcIiI+HCS2lppFLxe4GtpIu69t48Rv29J2fKJ3q5RTb3WDfYDxGbNkeift5ZptZ9QJ7hvm8Lam
+ SG2twaW+WuHsXSQ==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
@@ -132,9 +132,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add the setlease file_operation to nilfs_file_operations and
- nilfs_dir_operations, pointing to generic_setlease. A future patch will change
- the default behavior to reject lease attempts with -EINVAL w [...] 
+ Content preview:  Add the setlease file_operation to ntfs_file_operations,
+ ntfs_legacy_file_operations, 
+ ntfs_dir_operations, and ntfs_legacy_dir_operations,
+ pointing to generic_setlease.
+ A future patch will change the [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -146,8 +148,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vdtbb-0005xQ-C9
-Subject: [f2fs-dev] [PATCH 13/24] nilfs2: add setlease file operation
+X-Headers-End: 1vdtbn-0005zm-Pz
+Subject: [f2fs-dev] [PATCH 14/24] ntfs3: add setlease file operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -176,57 +178,76 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add the setlease file_operation to nilfs_file_operations and
-nilfs_dir_operations, pointing to generic_setlease.  A future patch
-will change the default behavior to reject lease attempts with -EINVAL
-when there is no setlease file operation defined. Add generic_setlease
-to retain the ability to set leases on this filesystem.
+Add the setlease file_operation to ntfs_file_operations,
+ntfs_legacy_file_operations, ntfs_dir_operations, and
+ntfs_legacy_dir_operations, pointing to generic_setlease.  A future
+patch will change the default behavior to reject lease attempts with
+-EINVAL when there is no setlease file operation defined. Add
+generic_setlease to retain the ability to set leases on this
+filesystem.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/nilfs2/dir.c  | 3 ++-
- fs/nilfs2/file.c | 2 ++
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ fs/ntfs3/dir.c  | 3 +++
+ fs/ntfs3/file.c | 3 +++
+ 2 files changed, 6 insertions(+)
 
-diff --git a/fs/nilfs2/dir.c b/fs/nilfs2/dir.c
-index 6ca3d74be1e16d5bc577e2520f1e841287a2511f..b243199036dfa1ab2299efaaa5bdf5da2d159ff2 100644
---- a/fs/nilfs2/dir.c
-+++ b/fs/nilfs2/dir.c
-@@ -30,6 +30,7 @@
-  */
- 
- #include <linux/pagemap.h>
-+#include <linux/filelock.h>
- #include "nilfs.h"
- #include "page.h"
- 
-@@ -661,5 +662,5 @@ const struct file_operations nilfs_dir_operations = {
- 	.compat_ioctl	= nilfs_compat_ioctl,
- #endif	/* CONFIG_COMPAT */
- 	.fsync		= nilfs_sync_file,
--
-+	.setlease	= generic_setlease,
- };
-diff --git a/fs/nilfs2/file.c b/fs/nilfs2/file.c
-index 1b8d754db44d44d25dcd13f008d266ec83c74d3f..f93b68c4877c5ed369e90b723517e117142335de 100644
---- a/fs/nilfs2/file.c
-+++ b/fs/nilfs2/file.c
+diff --git a/fs/ntfs3/dir.c b/fs/ntfs3/dir.c
+index b98e95d6b4d993db114283a0f38cf10b1a7520a9..b66438e34bbb84483c5e6a5dde437251339d4335 100644
+--- a/fs/ntfs3/dir.c
++++ b/fs/ntfs3/dir.c
 @@ -8,6 +8,7 @@
   */
  
  #include <linux/fs.h>
 +#include <linux/filelock.h>
- #include <linux/mm.h>
- #include <linux/writeback.h>
- #include "nilfs.h"
-@@ -150,6 +151,7 @@ const struct file_operations nilfs_file_operations = {
- 	.fsync		= nilfs_sync_file,
- 	.splice_read	= filemap_splice_read,
- 	.splice_write   = iter_file_splice_write,
+ #include <linux/nls.h>
+ 
+ #include "debug.h"
+@@ -630,6 +631,7 @@ const struct file_operations ntfs_dir_operations = {
+ #ifdef CONFIG_COMPAT
+ 	.compat_ioctl   = ntfs_compat_ioctl,
+ #endif
 +	.setlease	= generic_setlease,
  };
  
- const struct inode_operations nilfs_file_inode_operations = {
+ #if IS_ENABLED(CONFIG_NTFS_FS)
+@@ -638,6 +640,7 @@ const struct file_operations ntfs_legacy_dir_operations = {
+ 	.read		= generic_read_dir,
+ 	.iterate_shared	= ntfs_readdir,
+ 	.open		= ntfs_file_open,
++	.setlease	= generic_setlease,
+ };
+ #endif
+ // clang-format on
+diff --git a/fs/ntfs3/file.c b/fs/ntfs3/file.c
+index 2e7b2e566ebe18c173319c7cfd4304c22ddd2f28..6cb4479072a66dc9c3429be1c4bcebce176e5913 100644
+--- a/fs/ntfs3/file.c
++++ b/fs/ntfs3/file.c
+@@ -14,6 +14,7 @@
+ #include <linux/falloc.h>
+ #include <linux/fiemap.h>
+ #include <linux/fileattr.h>
++#include <linux/filelock.h>
+ 
+ #include "debug.h"
+ #include "ntfs.h"
+@@ -1477,6 +1478,7 @@ const struct file_operations ntfs_file_operations = {
+ 	.fsync		= ntfs_file_fsync,
+ 	.fallocate	= ntfs_fallocate,
+ 	.release	= ntfs_file_release,
++	.setlease	= generic_setlease,
+ };
+ 
+ #if IS_ENABLED(CONFIG_NTFS_FS)
+@@ -1486,6 +1488,7 @@ const struct file_operations ntfs_legacy_file_operations = {
+ 	.splice_read	= ntfs_file_splice_read,
+ 	.open		= ntfs_file_open,
+ 	.release	= ntfs_file_release,
++	.setlease	= generic_setlease,
+ };
+ #endif
+ // clang-format on
 
 -- 
 2.52.0
