@@ -2,147 +2,280 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 542FDD05B18
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 19:57:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6ECD8D060E8
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 21:29:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:Date:To:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:In-Reply-To:References:To:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=PCZCaYB0vWfqKuhcY4le4Vb6yxQ5FkjN0l+vA+1iAsM=; b=RP5jGiAFicCU0exWQkUSlDiXiz
-	kvDS8gQHPyxRn3zMYjmu9QdThZbrf58hAL9qqZZh548SKm/Qro9c7WzPRpSbzgLS4ps8eGJahYvBM
-	U2s/5kjvISFoLMyhneNBzm5rjulPgjkFnQTRuaTRjdtdyzLYdkI4Dt52riuxajZfy0dc=;
+	bh=zyYgR+9vAcGcpJ+RKmIwXJi3le79dcTATZb+cgX0C1Q=; b=mlCzyzDlnIr0+mXMMyIf/6Juja
+	9MWpwakWtuNX0S1L+6Z+QiM4OY4DKLfqSzbVeTSEpnWBj4iFa5ZjuLqQFKz1Mw2f9YyqHCyGhtM1z
+	czfbrPbMycuzQRameKrov2aAIIrDwR8VlxbwFysZh+JyA9V+TduE3DvI9aczMmDDSqAw=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdvC6-0003Ku-4r;
-	Thu, 08 Jan 2026 18:57:14 +0000
+	id 1vdwd1-0003vW-6u;
+	Thu, 08 Jan 2026 20:29:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vdvC4-0003KR-23;
- Thu, 08 Jan 2026 18:57:12 +0000
+ (envelope-from <dave.kleikamp@oracle.com>) id 1vdwcz-0003v7-Ly;
+ Thu, 08 Jan 2026 20:29:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+ :In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8/bR8FM9XTHL/XwyGzXa2MHTkGtxYMi6l6CAN8/TcwY=; b=CYRDnQ0g6DHDO4jhXcoTa7ghHg
- lanHkJG/epZI8SpXHN5zuQsjp9MAdPJGkCPd3zDaShqZqCGYIxMdATva+hKUkRTGNe/UcwrSouVHg
- zFmLiCi7HX5iCrBbEOnPHzwCtlVrX1++zOSQIY8zzYRpjHe1QySZCsg3/OvuX6ZidU20=;
+ bh=6kSzGqjjmpKoi9SJc3YbyyjK6se1+IkIbRsVWbwwR+Q=; b=cJmgkXUmT2o+q3XLxd23TMoNqt
+ vZfA+SXpNP43KXoSSh/lU4gqU2l2RMu23GD0Z4b0e+KtcRNI6fWENVxSoT8+BWsxfm/qUz7qBkK6W
+ L28tEbE1fawDjT0Ix+WTySpbbP/QvVzxhF+daBa/iWmvZSgdg0UNQXPRQ2wqFk9Yljo4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8/bR8FM9XTHL/XwyGzXa2MHTkGtxYMi6l6CAN8/TcwY=; b=EVv0kgJZE1uwCdL+FeYXHVC+RE
- 4rSSNa8Kj2aq2ylw7khYqt0lraXkx15enMiXTa3ZudNRbluyjHrN4x/h00phj1CoDAWXovuMy65bA
- Cw7A4SVe0tsn6EpiVtYuUMTfY+zZIzVdjJ/QMQpdGhEMtQVgQTtdFDK5JbbAaSKxQVqI=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=6kSzGqjjmpKoi9SJc3YbyyjK6se1+IkIbRsVWbwwR+Q=; b=GPC6zxz7sIMcG4nNX0pPQzxk7r
+ 7k8pMNiQXxhOvpKWWxqfsBRP9AE6BANY4nw1mpau/DZjTMNXTYX451cZsz0cBJFpDqbRovnG1xbFK
+ aKKbiSSN1Z122rQAdm4IPTX9p9/3buAAgh3DwXwV7BKGNN1FfLH/kYYBwmcWUoe9dGtk=;
+Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdvC4-0006ot-4v; Thu, 08 Jan 2026 18:57:12 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 2E663432EB;
- Thu,  8 Jan 2026 18:57:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60A8BC116C6;
- Thu,  8 Jan 2026 18:56:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767898626;
- bh=5he/mWk942UgyMcVrvD6SAu+dsdYI4IY/ZKYEV0nd4I=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=IVcj/Up5pUIL/21UD3vdFo7LG1nsqJG0y8MII2rX7fuh3iO8eqoctQChr69A/z58g
- 5KgbF1X8xV00o46rmPIbcqIZEIF8erkf826KYZ1ZoGs2hcwFRvz9oiVBU92gbAhzyA
- 0r+l6Mt1vxiLBuRQjFSLEctLEhTBADuTECQiBZ+9gqw+8u7gUFlUKFPJqHkbOoasko
- I2D7VrQn9/cdA7UghgaIjR2YaPHOE3ivbWn4hGdWJmaH9cka4Cx7gfyO6gbb1+SzsA
- TSEp5Wq9R6HWJ/Dy8pXZUMSYMMQX7UKyEKZOf6GGsWFZtBY90ZvwFFESq3Sx7W68cd
- 7b0wtGXIJLNHQ==
-Message-ID: <8af369636c32b868f83669c49aea708ca3b894ac.camel@kernel.org>
-To: Jan Kara <jack@suse.cz>
-Date: Thu, 08 Jan 2026 13:56:57 -0500
-In-Reply-To: <m3mywef74xhcakianlrovrnaadnhzhfqjfusulkcnyioforfml@j2xnk7dzkmv4>
+ id 1vdwcz-0004vu-RH; Thu, 08 Jan 2026 20:29:06 +0000
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 608HMGBN610876; Thu, 8 Jan 2026 19:46:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ corp-2025-04-25; bh=6kSzGqjjmpKoi9SJc3YbyyjK6se1+IkIbRsVWbwwR+Q=; b=
+ XjIahBvSQ+EDMbU40BZfIlvd3vX2tUzOSS6yJYke8zTxgB9bEh/A1a5iCTVF9RfM
+ n/ARdUY7Sr0Ciu8SKmT/Gm6xlphAMFlHhSNBZC97ZIQwn+H5Mq/DpEOIlNrKjEX/
+ NVaWYUKSghLSVl+suwnXiENTe6Xid7ONnlqAFNKL1cc+8uNZpMOuJVkneP7KcOQt
+ SbkjZNxAa7wXMZ++c0CcciZsdL4dyjiblEKH1zKoBvW7PsxE2BTqLCXhWq5b9vlQ
+ 0SeVp8yipJ1BVE0vb+mQkSu+10/522KaNpejJcB+YwNfq5D4d2G6xhbCgxG/YZAp
+ X8Ao9MZfRG7Fe87wvWAS8A==
+Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com
+ (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4bjgwx07th-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 08 Jan 2026 19:46:39 +0000 (GMT)
+Received: from pps.filterd
+ (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+ by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
+ with ESMTP id 608IFm7e020371; Thu, 8 Jan 2026 19:46:39 GMT
+Received: from co1pr03cu002.outbound.protection.outlook.com
+ (mail-westus2azon11010010.outbound.protection.outlook.com [52.101.46.10])
+ by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
+ 4besjngrnp-2
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 08 Jan 2026 19:46:39 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ISDs3KpT/qnxkgko4tBsb827Yt6HnBMPsS/mD+JGRfNhsNy9dYyiSjZIYuJbM1Y0OUlyOw3LSshcka2KzX6/Y1tJAd3puAuAdbLlE+YxfT4mifv+jeifKG0TFTYhnZ6/02aqj1ph3tTLas9EUZGMQQs4iOkRva/KWAHd+oW/WidsSovhBU/AKPzXjeEAdapxrXrEjt/hrLXYbxLXqFRfO6LoelCzFp/B0jldyfFMAGWJYiLkFY5dO4QEh0VN2nfjft1bskEl5hqctctVNZRIUvf/jMM8mMBXp+1IyCH2U1CFM4+7GgBCPenoje1GgF1DHeFjtQSiq+5UsfYV4n2iwQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6kSzGqjjmpKoi9SJc3YbyyjK6se1+IkIbRsVWbwwR+Q=;
+ b=zPwrVfK2oY7bEmLawBhxI2kSKpx47oThf4m12EhxUCJXIsKbxzy5eRLz7onP+grFUZyRxVJqXpwjUtJhTX4bnXp/MGP1PxeqXf1Ouh8y7bqOKl27BXu2YCCTwTw8qLB26+Y0gtlde0SLatEl+CId5UZ53Z0MVzNIgHrFLVlSHqvfJTHnb6avynz5vbjqClH8FjXxjqGDrQ/2KZ6wf+ieAET9l/Ks2vLpTHjUUzURsT4U9HaTsPZ2QSk+Hzx5j1RGn6cttw2zki+26imTsFX6UuxBRHLA0cD/W7E/uzCMGu2Vc+OLf5R4TgpPto1Yy2Lw26GEa8yepZCuRjWy7sE6Sw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6kSzGqjjmpKoi9SJc3YbyyjK6se1+IkIbRsVWbwwR+Q=;
+ b=M45wtpnCi1yCAFnheC4hmTzyAXiucAy09TG1/GMnhUBgl3vvxBWJn7m7cK3iwYd738+m3QVysBUjrBQRXpLRKVDX3hYAnm+T1vxH80GzfpNM1hvcFjc/JJgNRto4Jbv9FvRxWzt1NQo7X4NS1OQ9XxjroZ5wlKxv2DU+EFnQDRo=
+Received: from IA1PR10MB8212.namprd10.prod.outlook.com (2603:10b6:208:463::20)
+ by DS7PR10MB7277.namprd10.prod.outlook.com (2603:10b6:8:d8::6) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9499.3; Thu, 8 Jan 2026 19:46:33 +0000
+Received: from IA1PR10MB8212.namprd10.prod.outlook.com
+ ([fe80::ee8a:bd21:f1cb:c79a]) by IA1PR10MB8212.namprd10.prod.outlook.com
+ ([fe80::ee8a:bd21:f1cb:c79a%3]) with mapi id 15.20.9499.003; Thu, 8 Jan 2026
+ 19:46:33 +0000
+Message-ID: <e16a8bff-9192-45fa-a349-79b16fdd3ba5@oracle.com>
+Date: Thu, 8 Jan 2026 13:46:27 -0600
+User-Agent: Mozilla Thunderbird
+To: Jeff Layton <jlayton@kernel.org>, Luis de Bethencourt <luisbg@kernel.org>,
+ Salah Triki <salah.triki@gmail.com>, Nicolas Pitre <nico@fluxnic.net>,
+ Christoph Hellwig <hch@infradead.org>, Jan Kara <jack@suse.cz>,
+ Anders Larsen <al@alarsen.net>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>,
+ David Sterba <dsterba@suse.com>, Chris Mason <clm@fb.com>,
+ Gao Xiang <xiang@kernel.org>, Chao Yu <chao@kernel.org>,
+ Yue Hu <zbestahu@gmail.com>, Jeffle Xu <jefflexu@linux.alibaba.com>,
+ Sandeep Dhavale <dhavale@google.com>,
+ Hongbo Li <lihongbo22@huawei.com>, Chunhai Guo <guochunhai@vivo.com>,
+ Jan Kara <jack@suse.com>, Theodore Ts'o <tytso@mit.edu>,
+ Andreas Dilger <adilger.kernel@dilger.ca>,
+ Jaegeuk Kim <jaegeuk@kernel.org>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+ David Woodhouse <dwmw2@infradead.org>,
+ Richard Weinberger <richard@nod.at>, Dave Kleikamp <shaggy@kernel.org>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ Viacheslav Dubeyko <slava@dubeyko.com>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, Mike Marshall
+ <hubcap@omnibond.com>, Martin Brandenburg <martin@omnibond.com>,
+ Miklos Szeredi <miklos@szeredi.hu>, Amir Goldstein <amir73il@gmail.com>,
+ Phillip Lougher <phillip@squashfs.org.uk>,
+ Carlos Maiolino <cem@kernel.org>, Hugh Dickins <hughd@google.com>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Namjae Jeon <linkinjeon@kernel.org>, Sungjong Seo <sj1557.seo@samsung.com>,
+ Yuezhang Mo <yuezhang.mo@sony.com>, Chuck Lever <chuck.lever@oracle.com>,
+ Alexander Aring <alex.aring@gmail.com>,
+ Andreas Gruenbacher <agruenba@redhat.com>,
+ Jonathan Corbet <corbet@lwn.net>,
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+ Eric Van Hensbergen <ericvh@kernel.org>, Latchesar Ionkov
+ <lucho@ionkov.net>, Dominique Martinet <asmadeus@codewreck.org>,
+ Christian Schoenebeck <linux_oss@crudebyte.com>, Xiubo Li
+ <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>,
+ Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>,
+ Steve French <sfrench@samba.org>, Paulo Alcantara <pc@manguebit.org>,
+ Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>,
+ Bharath SM <bharathsm@microsoft.com>, Hans de Goede <hansg@kernel.org>
 References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
- <m3mywef74xhcakianlrovrnaadnhzhfqjfusulkcnyioforfml@j2xnk7dzkmv4>
-Autocrypt: addr=jlayton@kernel.org; prefer-encrypt=mutual;
- keydata=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
- QZIQXVeAA+smfTT0tDrisj1U5x6ZB9b3nBg65kc=
-User-Agent: Evolution 3.58.2 (3.58.2-1.fc43) 
+ <20260108-setlease-6-20-v1-12-ea4dec9b67fa@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20260108-setlease-6-20-v1-12-ea4dec9b67fa@kernel.org>
+X-ClientProxiedBy: CH0PR03CA0371.namprd03.prod.outlook.com
+ (2603:10b6:610:119::19) To IA1PR10MB8212.namprd10.prod.outlook.com
+ (2603:10b6:208:463::20)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA1PR10MB8212:EE_|DS7PR10MB7277:EE_
+X-MS-Office365-Filtering-Correlation-Id: b37609bc-adbd-47b4-bb70-08de4eeea04a
+X-LD-Processed: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|7416014|376014|1800799024|7053199007|921020; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ekZ4cE9TZGdUVzNmVThIVzl3TldEOHQrN056S3BNbHFQZm9hODEyMzZobG56?=
+ =?utf-8?B?S09ZOEN6UTlBM2pWaVV5Vnh2SCtGVFhQTHlMdUpmRFdLWVpzamdFdVk0Ym5t?=
+ =?utf-8?B?MXlFKzNoL0RFQThkY3NZdTJ0RXdOQldFbUFzemtGRHphQWRmZTBpYUtrd25L?=
+ =?utf-8?B?YWxNdEY0UEhpRFRXRUlURW9tZFFRQ3Y4ZHRWeGQ5eDlMdGQwZllUUWRoTFBF?=
+ =?utf-8?B?T2pTelVpNFpualp1NGtXdjFOTDl3UnVwNHJjNmcvTlExenpza0dDZ1RUc1Qy?=
+ =?utf-8?B?SWlpVDROQ09hZjFHY1ZoekIzQ0I3MlVqRTBLcmRSeDdTOE93c0IrUmdZNjhq?=
+ =?utf-8?B?Q1RDeG5iaGMxQTRVSWEwenpQNkRlUDJ1YTRSSUJyVnRGQmxOOEJoN2IxaVJY?=
+ =?utf-8?B?VnJBM2pHZVFOWGJsUlIrWmtlQUIrSnVpU3FiL0VMN040aDFNejhKejBUYWF3?=
+ =?utf-8?B?UGUzWHppc2RkQ3BBNlhkSG4veFdEUXhxNDkvY1NUVnpFTFVCdi8rUFF6aEtl?=
+ =?utf-8?B?RHNOaS9JN0pxVWUzdFVVR1ZOSTBnY0dmdk9Nc1NqYjEvQWhoWmlNR3VScWUr?=
+ =?utf-8?B?Z2h3SS95VXdIV2tpQXRXWCtBNzZnN3pSSHRFdVVVQWxDOHllU1NBdTdxVXlm?=
+ =?utf-8?B?ZkNDZFFXaU9jODh6SnVFeDZGd2l4RGk2WjV6NHhnd1VmQmZiOURPVEw1RGlL?=
+ =?utf-8?B?YWhMdlpCUkZYeWViZys5L0lCaU5Sb09wNVZ5ZzhVamJWbCtWZzhiRXdyUEg2?=
+ =?utf-8?B?ellaaUZpWk5neHZSRFlXVXlJM1RwSmNuMXdtS3Y3UEpXaGNzeEc4N0N6TVE3?=
+ =?utf-8?B?bjZTZVlWcS9XUCtlTHFyQ29DZXRQM3pmY0dNVHNDaCtzQnpET2U4K2VxOFZh?=
+ =?utf-8?B?MTBpRDJ0aHVBWDFaaWxIRnNjNW92M0kwYW44WTByQzVldVVUUlRTdTVvYm45?=
+ =?utf-8?B?RnZZN3hpcUFNZnpJZ3ZadFl2dWI3cWQ3MHl4alpMbFNtanUvTUw4U2kxcVpY?=
+ =?utf-8?B?aVoxZzFFS05lcWtwM1pWOTJsNjhVT2hmU09Tc0Y0ODJpYUx3SFhxVXBMZ29W?=
+ =?utf-8?B?a1cxU2xTWk5oc1VHQ1VwemRFYVZMbGJVVzdRaFdOMjFUcGp6ODJKbnlOVk9P?=
+ =?utf-8?B?NXBkZkJaNTBOcytNWUE0M2Y3ZTRLdjZRSG5wbTB1TkZCMTN2b0RHMkVJeXV3?=
+ =?utf-8?B?WlUrcTQ1cmFrTkkxMHZ4VEdkV1dOMjVjUnRKVVJHZFlGTzJ5QmdETmhqSVBJ?=
+ =?utf-8?B?OFBkQWhiNFp0WitsTTFxT3NrL3hPTXNBbUY0Vnp1VlU4dVZ4SEJWS3FQbmVZ?=
+ =?utf-8?B?b2xUR2U1S0FvNzByK0pvNHkwMVJmQnN3NzZrUnV0R1VzaS9tTjNPNGF4S0d6?=
+ =?utf-8?B?cVUrNFVUVWM4ZTlLc3dqV1o2UmxGTUZmYVk1eWRFWDI1L1hjcE9KOGhMNEt4?=
+ =?utf-8?B?anFLY3c1ajdnRVdUalplYWp2VUZ1NytUTWRoV0p6YVNsRElDV044TS9rcVpY?=
+ =?utf-8?B?V1NOeHpxZndBQWFtZVJTa0hhR2taQzFLQTN6b2xWL3pGcHA4U0xCVU9iQnJL?=
+ =?utf-8?B?VHk5UFB5U0dVQlZ6dW91ems2RzZGUmQ5U1FvcG5SRkRaMVF6d3JTZ0NKVkx3?=
+ =?utf-8?B?bWxZRE1DOG1QZzBYOXJNazlDMVRmZTQwOVEvR1pLWGx6M3Zuemo5NUZLKzJT?=
+ =?utf-8?B?SDdZWnAyeXhYQkMzaE9pZEJRdHgyOWdDVzd1Um9hZStQZ1plYkR5YUdvdCtE?=
+ =?utf-8?B?dWFvM3liMnEyaWNZbnZ1VCtqS2grZGcvUTJ6TUVoWkRrZEFvdWNqbXZQZDh5?=
+ =?utf-8?B?ZGd4eVVLQ2NNTXBpVnptQWl2Vm8yUFd3WFhiS1dDN28vWmVNZHQxZlRPc0RH?=
+ =?utf-8?B?RHFKSU5EK2JmVWhBWThEajJqZ0hPSTQzQVhWMGtBUU53bjNLVmZONlpvWXN0?=
+ =?utf-8?B?MlFxbVN0YkJMTDQvM3pCYVFna01lSk12dlRJcm1YRWVjYzgrUWtidjd6ZEti?=
+ =?utf-8?Q?+HiAcK5KQqqQqfJEeCMbOXKGk0ZYO4=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:IA1PR10MB8212.namprd10.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(7416014)(376014)(1800799024)(7053199007)(921020);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y3pBbzJFTVgxMUtUc2RTeWluMFdWa0tTUTk3M1RVQkJOU3FQcHBzNHdVaDhM?=
+ =?utf-8?B?MmVqT2xNNzdOdWE3SHRpbHd5aU5PNkZ0dXVDOUNDYlpQTEE1eFRxcUpqa3J3?=
+ =?utf-8?B?bDVTWTh3Tkd5UGVXU1JQcE00QmdXaEZGd0NFVFRoR2dlYVJmbFkwV0FETG9C?=
+ =?utf-8?B?WUpEdjFjcWw3S1BJWmhyWk9lUzJtc3hoV0Y0a2hlcnBGTzBoTEh4MWNibStY?=
+ =?utf-8?B?TjRkeTE4ckpvSkM0WXRnTm42S0VtQitSMDh1QTRTY21EbmYwZGNid2JaemJ4?=
+ =?utf-8?B?R0NqcUpCVm9uOU5vYlc0U3o4RHNtNUpQci9XZy82Y25HcFl4eTY5V0x5eWhL?=
+ =?utf-8?B?VUhoK3V2WlNiNjRrMndiRUhhSit1MGdZQVIxQnpNdDFpSk5PL3gzekZqSHlR?=
+ =?utf-8?B?ZDBWWnpSemxvd3RKK1dmYStiZjhBS2ZDeFNkL21IWjRTNzlIbnZNWWQvVmVx?=
+ =?utf-8?B?RW44alo5Q1dWODVNUGtJZkt6cWgxSUxWME5nWjBvWE1iVXNWT1E5NzV3MGph?=
+ =?utf-8?B?emkycWhtSE9IeGN0NFNuemU1aTdPZ2l6N0twQmdSbXhKWGdJRjNBOFhqMGdn?=
+ =?utf-8?B?b0I4T2hiVnFYQXIyMUpIRk9vWFJhUjU0WFNVMTJpTEJaeVU2Q0I2RlZqWmx3?=
+ =?utf-8?B?amNMWC9ZT3FKT3ZsaFVRSFZUb0l0TlgyZkFocnoyRXpidGtGK1VRbit1MDBM?=
+ =?utf-8?B?WjJZaUJvb1FZZWxuajRFS3F5dS9CYnRFOTI5K0hoRUkzMXRqdUt4MmFuUDBj?=
+ =?utf-8?B?VmFmQTd0aENCTWd0eUdvL0cxVGVIUGozT2VPVFpyRG5rakZqRmVHU3pnY2p5?=
+ =?utf-8?B?a0pXNUJZUGJPeHdFVXdZcm5BVktDV0tOemNNMDlVeFo0SStwZTd1eCsvblgr?=
+ =?utf-8?B?WUZoWFFnb3l0ek5KVDFXd0xhek1xR21TaklzcnFCRTRlVlpQK3lLNFVtbi9U?=
+ =?utf-8?B?dERZdGdWZCt2MlYxTTZqZFV4L0JLMkZSdmY3Tll0L1ZQRGwvamdyajJ2ZDBv?=
+ =?utf-8?B?aXhpMVU4YktKcVVaWW96ZmF3UE1lNGFHL3Z3L2JJWnVzbXJHeUo0dXk1dFVJ?=
+ =?utf-8?B?UnlGNUM0RzZjaTBwZUFoNzd3eTNoSUszelhUWENBSjRWV2NPS3pxK0ZEeHVH?=
+ =?utf-8?B?N2Y1TWNSVUNaWHRzNFRvM0gvNWVYVnlSc1NZQkpxY2U4T1JlQjIxNHlJdkFm?=
+ =?utf-8?B?RVhjQUU1T0Y2RitXYnRSVHVtaUtaazZNc3JNbDBOYU5GZVVqejQwUDAxUHRJ?=
+ =?utf-8?B?KzkxcVFpTzYya1dBTXJPVEJnV3Y4QnBzM292aGhZdXEzVnArNnh1cms0Y2Yr?=
+ =?utf-8?B?ZWVtcTZwYTNWU1RuWmdEVVl4bWZvM2dHblc4a0ltZDBTUHF2N2VFcEV0a01q?=
+ =?utf-8?B?YkxHOElVeE5oRWU4SE5LbUJuUXczc0FSeEdhclYyY0hVUFdCNGpUeDJla0Rx?=
+ =?utf-8?B?VE9ZM0JtYzFuNVdyRFZ4WXVjSUhteWJtL0FoRFhyY29vOHN4WjRNSEptNXBH?=
+ =?utf-8?B?STZuY2IwRmFqN3Z0NWltT3hFOUtpckJaK2FrQXF3RjByQStKbzdadENZblE4?=
+ =?utf-8?B?cWx4N0ZvTTUrZFE3NVJIMUNOZzlFZ25OczhpYlUzRk45T1RDQjJDWk9UcTY0?=
+ =?utf-8?B?SUZkNXk3eVo4bWp0QkpaS0dZZlViNHFtRmh5U2xldWJIUXB0bGZIdTdvamNy?=
+ =?utf-8?B?WG93L0NZK3dmNVpNRjN5cEE3ajNLcG5teWpUMFVBbGxyTUIzTFFGVFNkcjBy?=
+ =?utf-8?B?ZUNPMlhvaThNTmR1WDNhQk5aUTFaajErMVdJTkREamprbWMwQkJUaVNsL2pw?=
+ =?utf-8?B?MHFUcWdQY3ozMUhVdjNsZ2pLMDB4N2NCZ0M2YWdUVWhCeE54L2NDdHgvSW9m?=
+ =?utf-8?B?K3dyWm5FNXpKYnBGaGF0UklNd2FPV2xtZHhYOE5WRXNHYkplYzBUbkpPelJL?=
+ =?utf-8?B?SS9panJVSit5bFY2QVRwZzZQbnJpamxHRlNLWlA1S3lSRm1SWmdzS2JtVDRh?=
+ =?utf-8?B?NHlGWEpLRU9BQTQ2SUMzSjc3VXIrdDREdXNNTjNzUUUzWjFkelNpdW5ITEZV?=
+ =?utf-8?B?RTR2aEp4b2orZlVJdkRKZXN1ZlE4bHAyNHZxd1RHV2pyZjRSWlRUZmF5M3Vi?=
+ =?utf-8?B?d29CcGVmbEJqcjJwK0xwb0tGbXpiSzV0T2ZkM21sdW1kOSsvU2F4dDFJMUls?=
+ =?utf-8?B?OGZHamtFeVVjd0xkTmdKaTduZVRnbWVHRXh4d2VCR3ZodFBvM0ozS0hLT1lj?=
+ =?utf-8?B?N3BDanhZNFVYencxOGxTRXJ4SEhkblVEZ1R6ZjA2UDRwK0Zab3ViTTVYY2dn?=
+ =?utf-8?B?bFBFSWUwczJDMjBncFl5QXM4aXV0dE9KWjZ6QzNpT3NjYzZQUHVQeEFBcENQ?=
+ =?utf-8?Q?E8hHTZQbxBDaCz6w=3D?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: NfuEG8YxZWhHy0COKGz9aqo6/UO+QsJ8CW8cIsp3Sa4uOHTXWVC3nFgP7CdTBMbJgOuCQ9+XG6XZRHOQdKF/Dtond6ysLgaqDjgr9a+doAXN++mau+i43StBRD6+FxJ46SksqK3/8E0Dxxvz84n/WQGbTu6ETvcliF84RbzqLxEjVgCqAmvLIMThryhI7MajIQLNZ1RFE0g7cJwjctK0iHy948wA93w2fbOatJWkM8C8/BAbbtqrLg80UlmtU2OMlhSdyo+Ln37EvN5XnivGDHhOaMhNxpgvnmhfPewFH0d9DRgE99hKGkmZcA5pmZPkh7zv5V8liIL9YsL9Oy4zBJGmQNoe/UAt5Yy/Znuu1LYiEbOzHBIoI5rT6W4LyIBG2xc1HJPNgVqm0UVREpzXZBbqHMvYYKyIn3W/rfgX3BRcEvoVeSiHdT31pQyo5xW39pQiXVLGbEnmYZbtwvn+T9K5hXv6lsS+9SdHPlz5oKc7TD2kYG1yj4vzCdb4jCm2yJVQU02Zz5PVWKLBelkWk6zccSCnZR4gPBXDB/naQwJ+F4R3c5Ir7Q2BrzXE+DA26gIbxfJ7+aFujSxXwKCgtPMA32YeOfO5Vtle+4FhpVY=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b37609bc-adbd-47b4-bb70-08de4eeea04a
+X-MS-Exchange-CrossTenant-AuthSource: IA1PR10MB8212.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2026 19:46:33.3024 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: cTWEHrHUhSFIVZyxSAt7JiuZXHOcW+XAh2h9Zu9PqKxKzta+nZ0nbkngnrxNPgzXdA0TCi0F7Jy8CxKOvcqL2uiMm/5EbicGbHkv1ZyXIiI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB7277
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-08_03,2026-01-08_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
+ bulkscore=0
+ suspectscore=0 malwarescore=0 adultscore=0 mlxscore=0 phishscore=0
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2512120000 definitions=main-2601080147
+X-Proofpoint-GUID: sf2jjOwZv1Ke0FSQAq0leWYEjSMDHTcy
+X-Authority-Analysis: v=2.4 cv=JYSxbEKV c=1 sm=1 tr=0 ts=6960099f b=1 cx=c_pps
+ a=zPCbziy225d3KhSqZt3L1A==:117
+ a=zPCbziy225d3KhSqZt3L1A==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=vUbySO9Y5rIA:10 a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=yPCof4ZbAAAA:8 a=VwQbUJbxAAAA:8 a=5M8K4nvISJ18i9EF2vkA:9 a=QEXdDO2ut3YA:10
+ cc=ntf awl=host:12109
+X-Proofpoint-ORIG-GUID: sf2jjOwZv1Ke0FSQAq0leWYEjSMDHTcy
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA4MDE0NyBTYWx0ZWRfX45GzYFa2HhIF
+ rbm9MGga4dJF5QsGJeGD+In6BQ9ncOe52zHx4EycFSktIxLGIr48TnBoHe+sQZd8UWtCbmUiuc+
+ iIlOtyscHNt/PpSsqAx1q3+EbMCxfFGEo0Wx8w32bBrJn6nv2pmrepRzcrXor1IYJosVA22PchK
+ KM6BXXIj7fP/8GVSgOlg/AFCMJYU5YoBaPyU7oFvxSwkbC4Hsz0iWKTnWEbwro53BexWsZ03VrZ
+ y7+GPS8ZZUMg2/7IrqNn212Yhpn7IgTozq1VOf8BTapoDeWXtG9wuR0cBY6D1M4zKA7nVBlXlzr
+ YCe2mg0t0feM+HvgxUVuGayVGvyBiZRQ9yD0FDYjOvJgu5/qAauTzMZQXtEHXvaqCAUP6Q0kRDZ
+ AdgnkPS6yR2F31EKX43QZ3lO73FuUU4t6XJnjOvcYAzgujEoWkWXjxtNEauv1fDlmCrTMDCBOuy
+ YZ6f13xqhTb3qHn6Ez+mivCf8dAhaSyT1hX79lzo=
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -150,23 +283,27 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, 2026-01-08 at 18:40 +0100, Jan Kara wrote: > On Thu
- 08-01-26 12:12:55, Jeff Layton wrote: > > Yesterday, I sent patches to fix
- how directory delegation support is > > handled on filesystems wh [...] 
+ Content preview: Reviewed-by: Dave Kleikamp <dave.kleikamp@oracle.com> On
+ 1/8/26 11:13AM,
+ Jeff Layton wrote: > Add the setlease file_operation to jfs_file_operations
+ and > jfs_dir_operations, pointing to generic_setlease. A future patch will
+ > change the default behavior [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.0 ARC_SIGNED             Message has a ARC signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ 0.0 ARC_VALID              Message has a valid ARC signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vdvC4-0006ot-4v
-Subject: Re: [f2fs-dev] [PATCH 00/24] vfs: require filesystems to explicitly
- opt-in to lease support
+ domain 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [205.220.177.32 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1vdwcz-0004vu-RH
+Subject: Re: [f2fs-dev] [PATCH 12/24] jfs: add setlease file operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -178,217 +315,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jeff Layton via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jeff Layton <jlayton@kernel.org>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
- Alexander Aring <alex.aring@gmail.com>, Paulo Alcantara <pc@manguebit.org>,
- Sandeep Dhavale <dhavale@google.com>, Martin Brandenburg <martin@omnibond.com>,
- Yuezhang Mo <yuezhang.mo@sony.com>, Anders Larsen <al@alarsen.net>,
- Amir Goldstein <amir73il@gmail.com>, jfs-discussion@lists.sourceforge.net,
- linux-unionfs@vger.kernel.org,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
- Chunhai Guo <guochunhai@vivo.com>, Ilya Dryomov <idryomov@gmail.com>,
- Ronnie Sahlberg <ronniesahlberg@gmail.com>, linux-mtd@lists.infradead.org,
- Mike Marshall <hubcap@omnibond.com>, linux-xfs@vger.kernel.org,
- Xiubo Li <xiubli@redhat.com>, Yue Hu <zbestahu@gmail.com>,
- Miklos Szeredi <miklos@szeredi.hu>, samba-technical@lists.samba.org,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- devel@lists.orangefs.org, Hugh Dickins <hughd@google.com>,
- "Matthew Wilcox \(Oracle\)" <willy@infradead.org>, ntfs3@lists.linux.dev,
- Christoph Hellwig <hch@infradead.org>, Joseph Qi <joseph.qi@linux.alibaba.com>,
- linux-mm@kvack.org, Viacheslav Dubeyko <slava@dubeyko.com>,
- linux-btrfs@vger.kernel.org, Gao Xiang <xiang@kernel.org>,
- linux-ext4@vger.kernel.org, Salah Triki <salah.triki@gmail.com>,
- Carlos Maiolino <cem@kernel.org>, Dominique Martinet <asmadeus@codewreck.org>,
- Shyam Prasad N <sprasad@microsoft.com>,
- Christian Schoenebeck <linux_oss@crudebyte.com>, linux-cifs@vger.kernel.org,
- linux-nfs@vger.kernel.org, Tom Talpey <tom@talpey.com>,
- ocfs2-devel@lists.linux.dev, Bharath SM <bharathsm@microsoft.com>,
- linux-nilfs@vger.kernel.org, David Sterba <dsterba@suse.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Baolin Wang <baolin.wang@linux.alibaba.com>,
- Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Eric Van Hensbergen <ericvh@kernel.org>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>,
- OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
- Andreas Gruenbacher <agruenba@redhat.com>, Hans de Goede <hansg@kernel.org>,
- gfs2@lists.linux.dev, Christian Brauner <brauner@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, Theodore Ts'o <tytso@mit.edu>,
- Luis de Bethencourt <luisbg@kernel.org>, Nicolas Pitre <nico@fluxnic.net>,
- linux-erofs@lists.ozlabs.org, v9fs@lists.linux.dev,
- Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, Namjae Jeon <linkinjeon@kernel.org>,
- Steve French <sfrench@samba.org>, Chuck Lever <chuck.lever@oracle.com>,
- Hongbo Li <lihongbo22@huawei.com>, Anna Schumaker <anna@kernel.org>,
- Jan Kara <jack@suse.com>, linux-fsdevel@vger.kernel.org,
- Phillip Lougher <phillip@squashfs.org.uk>,
- Andrew Morton <akpm@linux-foundation.org>,
- Sungjong Seo <sj1557.seo@samsung.com>, David Woodhouse <dwmw2@infradead.org>,
- Trond Myklebust <trondmy@kernel.org>, Joel Becker <jlbec@evilplan.org>
-Content-Type: text/plain; charset="us-ascii"
+From: Dave Kleikamp via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Dave Kleikamp <dave.kleikamp@oracle.com>
+Cc: jfs-discussion@lists.sourceforge.net, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, gfs2@lists.linux.dev, linux-mm@kvack.org,
+ linux-mtd@lists.infradead.org, linux-cifs@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+ devel@lists.orangefs.org, ocfs2-devel@lists.linux.dev,
+ ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org, v9fs@lists.linux.dev,
+ samba-technical@lists.samba.org, linux-unionfs@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, ntfs3@lists.linux.dev,
+ linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, 2026-01-08 at 18:40 +0100, Jan Kara wrote:
-> On Thu 08-01-26 12:12:55, Jeff Layton wrote:
-> > Yesterday, I sent patches to fix how directory delegation support is
-> > handled on filesystems where the should be disabled [1]. That set is
-> > appropriate for v6.19. For v7.0, I want to make lease support be more
-> > opt-in, rather than opt-out:
-> > 
-> > For historical reasons, when ->setlease() file_operation is set to NULL,
-> > the default is to use the kernel-internal lease implementation. This
-> > means that if you want to disable them, you need to explicitly set the
-> > ->setlease() file_operation to simple_nosetlease() or the equivalent.
-> > 
-> > This has caused a number of problems over the years as some filesystems
-> > have inadvertantly allowed leases to be acquired simply by having left
-> > it set to NULL. It would be better if filesystems had to opt-in to lease
-> > support, particularly with the advent of directory delegations.
-> > 
-> > This series has sets the ->setlease() operation in a pile of existing
-> > local filesystems to generic_setlease() and then changes
-> > kernel_setlease() to return -EINVAL when the setlease() operation is not
-> > set.
-> > 
-> > With this change, new filesystems will need to explicitly set the
-> > ->setlease() operations in order to provide lease and delegation
-> > support.
-> > 
-> > I mainly focused on filesystems that are NFS exportable, since NFS and
-> > SMB are the main users of file leases, and they tend to end up exporting
-> > the same filesystem types. Let me know if I've missed any.
+Reviewed-by: Dave Kleikamp <dave.kleikamp@oracle.com>
+
+
+On 1/8/26 11:13AM, Jeff Layton wrote:
+> Add the setlease file_operation to jfs_file_operations and
+> jfs_dir_operations, pointing to generic_setlease.  A future patch will
+> change the default behavior to reject lease attempts with -EINVAL when
+> there is no setlease file operation defined. Add generic_setlease to
+> retain the ability to set leases on this filesystem.
 > 
-> So, what about kernfs and fuse? They seem to be exportable and don't have
-> .setlease set...
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+> ---
+>   fs/jfs/file.c  | 2 ++
+>   fs/jfs/namei.c | 2 ++
+>   2 files changed, 4 insertions(+)
+> 
+> diff --git a/fs/jfs/file.c b/fs/jfs/file.c
+> index 87ad042221e78959200cce12a59a3ffd6d06c0d7..246568cb9a6ec144831eb3592712cce323d8cf1d 100644
+> --- a/fs/jfs/file.c
+> +++ b/fs/jfs/file.c
+> @@ -6,6 +6,7 @@
+>   
+>   #include <linux/mm.h>
+>   #include <linux/fs.h>
+> +#include <linux/filelock.h>
+>   #include <linux/posix_acl.h>
+>   #include <linux/quotaops.h>
+>   #include "jfs_incore.h"
+> @@ -153,4 +154,5 @@ const struct file_operations jfs_file_operations = {
+>   	.release	= jfs_release,
+>   	.unlocked_ioctl = jfs_ioctl,
+>   	.compat_ioctl	= compat_ptr_ioctl,
+> +	.setlease	= generic_setlease,
+>   };
+> diff --git a/fs/jfs/namei.c b/fs/jfs/namei.c
+> index 65a218eba8faf9508f5727515b812f6de2661618..f7e2ae7a4c37ed87675f0ccb3276b37e6ce08cb4 100644
+> --- a/fs/jfs/namei.c
+> +++ b/fs/jfs/namei.c
+> @@ -5,6 +5,7 @@
+>    */
+>   
+>   #include <linux/fs.h>
+> +#include <linux/filelock.h>
+>   #include <linux/namei.h>
+>   #include <linux/ctype.h>
+>   #include <linux/quotaops.h>
+> @@ -1545,6 +1546,7 @@ const struct file_operations jfs_dir_operations = {
+>   	.unlocked_ioctl = jfs_ioctl,
+>   	.compat_ioctl	= compat_ptr_ioctl,
+>   	.llseek		= generic_file_llseek,
+> +	.setlease	= generic_setlease,
+>   };
+>   
+>   static int jfs_ci_hash(const struct dentry *dir, struct qstr *this)
 > 
 
-Yes, FUSE needs this too. I'll add a patch for that.
-
-As far as kernfs goes: AIUI, that's basically what sysfs and resctrl
-are built on. Do we really expect people to set leases there?
-
-I guess it's technically a regression since you could set them on those
-sorts of files earlier, but people don't usually export kernfs based
-filesystems via NFS or SMB, and that seems like something that could be
-used to make mischief.
-
-AFAICT, kernfs_export_ops is mostly to support open_by_handle_at(). See
-commit aa8188253474 ("kernfs: add exportfs operations").
-
-One idea: we could add a wrapper around generic_setlease() for
-filesystems like this that will do a WARN_ONCE() and then call
-generic_setlease(). That would keep leases working on them but we might
-get some reports that would tell us who's setting leases on these files
-and why.
-
-Thanks for the review!
-
-> > 
-> > [1]: https://lore.kernel.org/linux-fsdevel/20260107-setlease-6-19-v1-0-85f034abcc57@kernel.org/
-> > 
-> > Signed-off-by: Jeff Layton <jlayton@kernel.org>
-> > ---
-> > Jeff Layton (24):
-> >       fs: add setlease to generic_ro_fops and read-only filesystem directory operations
-> >       affs: add setlease file operation
-> >       btrfs: add setlease file operation
-> >       erofs: add setlease file operation
-> >       ext2: add setlease file operation
-> >       ext4: add setlease file operation
-> >       exfat: add setlease file operation
-> >       f2fs: add setlease file operation
-> >       fat: add setlease file operation
-> >       gfs2: add a setlease file operation
-> >       jffs2: add setlease file operation
-> >       jfs: add setlease file operation
-> >       nilfs2: add setlease file operation
-> >       ntfs3: add setlease file operation
-> >       ocfs2: add setlease file operation
-> >       orangefs: add setlease file operation
-> >       overlayfs: add setlease file operation
-> >       squashfs: add setlease file operation
-> >       tmpfs: add setlease file operation
-> >       udf: add setlease file operation
-> >       ufs: add setlease file operation
-> >       xfs: add setlease file operation
-> >       filelock: default to returning -EINVAL when ->setlease operation is NULL
-> >       fs: remove simple_nosetlease()
-> > 
-> >  Documentation/filesystems/porting.rst |  9 +++++++++
-> >  Documentation/filesystems/vfs.rst     |  9 ++++++---
-> >  fs/9p/vfs_dir.c                       |  2 --
-> >  fs/9p/vfs_file.c                      |  2 --
-> >  fs/affs/dir.c                         |  2 ++
-> >  fs/affs/file.c                        |  2 ++
-> >  fs/befs/linuxvfs.c                    |  2 ++
-> >  fs/btrfs/file.c                       |  2 ++
-> >  fs/btrfs/inode.c                      |  2 ++
-> >  fs/ceph/dir.c                         |  2 --
-> >  fs/ceph/file.c                        |  1 -
-> >  fs/cramfs/inode.c                     |  2 ++
-> >  fs/efs/dir.c                          |  2 ++
-> >  fs/erofs/data.c                       |  2 ++
-> >  fs/erofs/dir.c                        |  2 ++
-> >  fs/exfat/dir.c                        |  2 ++
-> >  fs/exfat/file.c                       |  2 ++
-> >  fs/ext2/dir.c                         |  2 ++
-> >  fs/ext2/file.c                        |  2 ++
-> >  fs/ext4/dir.c                         |  2 ++
-> >  fs/ext4/file.c                        |  2 ++
-> >  fs/f2fs/dir.c                         |  2 ++
-> >  fs/f2fs/file.c                        |  2 ++
-> >  fs/fat/dir.c                          |  2 ++
-> >  fs/fat/file.c                         |  2 ++
-> >  fs/freevxfs/vxfs_lookup.c             |  2 ++
-> >  fs/fuse/dir.c                         |  1 -
-> >  fs/gfs2/file.c                        |  3 +--
-> >  fs/isofs/dir.c                        |  2 ++
-> >  fs/jffs2/dir.c                        |  2 ++
-> >  fs/jffs2/file.c                       |  2 ++
-> >  fs/jfs/file.c                         |  2 ++
-> >  fs/jfs/namei.c                        |  2 ++
-> >  fs/libfs.c                            | 20 ++------------------
-> >  fs/locks.c                            |  3 +--
-> >  fs/nfs/dir.c                          |  1 -
-> >  fs/nfs/file.c                         |  1 -
-> >  fs/nilfs2/dir.c                       |  3 ++-
-> >  fs/nilfs2/file.c                      |  2 ++
-> >  fs/ntfs3/dir.c                        |  3 +++
-> >  fs/ntfs3/file.c                       |  3 +++
-> >  fs/ocfs2/file.c                       |  5 +++++
-> >  fs/orangefs/dir.c                     |  4 +++-
-> >  fs/orangefs/file.c                    |  1 +
-> >  fs/overlayfs/file.c                   |  2 ++
-> >  fs/overlayfs/readdir.c                |  2 ++
-> >  fs/qnx4/dir.c                         |  2 ++
-> >  fs/qnx6/dir.c                         |  2 ++
-> >  fs/read_write.c                       |  2 ++
-> >  fs/smb/client/cifsfs.c                |  1 -
-> >  fs/squashfs/dir.c                     |  2 ++
-> >  fs/squashfs/file.c                    |  4 +++-
-> >  fs/udf/dir.c                          |  2 ++
-> >  fs/udf/file.c                         |  2 ++
-> >  fs/ufs/dir.c                          |  2 ++
-> >  fs/ufs/file.c                         |  2 ++
-> >  fs/vboxsf/dir.c                       |  1 -
-> >  fs/vboxsf/file.c                      |  1 -
-> >  fs/xfs/xfs_file.c                     |  3 +++
-> >  include/linux/fs.h                    |  1 -
-> >  mm/shmem.c                            |  2 ++
-> >  61 files changed, 116 insertions(+), 42 deletions(-)
-> > ---
-> > base-commit: 731ce71a6c8adb8b8f873643beacaeedc1564500
-> > change-id: 20260107-setlease-6-20-299eb5695c5a
-> > 
-> > Best regards,
-> > -- 
-> > Jeff Layton <jlayton@kernel.org>
-> > 
-
--- 
-Jeff Layton <jlayton@kernel.org>
 
 
 _______________________________________________
