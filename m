@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AB00D04CCA
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 18:15:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E910ED04CDA
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 08 Jan 2026 18:15:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=MKRsEUAZxTWzBLWbD4aPztZUjLqfLvDRfhaHDXJUH20=; b=GzBGGiEZzH5prDshVWRLsmWfz0
-	jW6EwSE2DTNLtmpB+FC9qiB8clZyj7HxcrScqZitIK1cBegsDsml/vgcp6siz0GUkzEQ10dvgSE+n
-	fmdGL0/9XE1VZEqEhgGJWltXot6C0BcTlKw/Wn07k+Gl0JiF4eGVy2Jx2dzrFzM49eu4=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=dUaryvslkQ8fSevTmtVQzgYjkFXW0tvQwAQRuV6bG2k=; b=bFx7GypQJGjRwCHSdJaqouluYv
+	7Xz316FTiCj4rubCiuHwIleCOlN3s8snw//B5paqcnLAaRe5zE6CRsdJ3UqyU0PxMTbuSIlU3pM0f
+	hWcwugFbKuEdz+vieU5cOGFMsHqkHonvVo80GugvLn96fCHEf9RHRIrIQRkfufjx1uMY=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vdtbE-0008KE-CH;
-	Thu, 08 Jan 2026 17:15:04 +0000
+	id 1vdtbL-00046t-8p;
+	Thu, 08 Jan 2026 17:15:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vdtbC-0008Je-5O;
- Thu, 08 Jan 2026 17:15:02 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vdtbJ-00046L-1H;
+ Thu, 08 Jan 2026 17:15:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HFHk+jGYiYNdAMGXV5WQR542mqPeU3BzqR3Gc2vQLoY=; b=Po8pHgT4wcSFKGC3ENphjsssCj
- whGUJ4Wv4p8PbnXc2VMSQWzR9KHTnyNC24p58haRRi2HrX0Al5aPe/lUtnGPH46Ro2ZMW3QqlrFCD
- bUqxTEPJvDDjQW5VZI3gm/IYxS3ciHtmGJsGcTw6GZUXnH2eCxkgzXBnpC2I+x0oPXVs=;
+ bh=8YtI+DzwDF0tnFdtfx//elv6GXPDJiavSmjVlMaJ3h4=; b=U9YJPpCVOmWqDwHSgX7QK1cnxJ
+ 6kfoQXL1WgfF/K1AzJdf4TmK/44nutEN0ayQb5ldHfFmgaHYy+CAG8+YVweyRqi+7DJlc4OQSJQ3Z
+ Fh6ShXyNymYU2ETi1gzynitw9CTPtXpDHzZnN6/7aDqLCJNLMpOQjBW9fyX2/FUpg4Ek=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -39,31 +39,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=HFHk+jGYiYNdAMGXV5WQR542mqPeU3BzqR3Gc2vQLoY=; b=CFRyuqoHzEEYj4x/vZ81fTGxKi
- u2LCAodgigQLmjqDCvwXOfKyEVEFHnkTBD9JaejVJ2XfDALhELkllZcKm1iilXGmhUkmUVB4JF8Mv
- Z07QT3jMTms3INU3aszETke5x1iT0YvKuUQXqfoq9GIzph2gLbBmDUK5hr67bc15oNI0=;
+ bh=8YtI+DzwDF0tnFdtfx//elv6GXPDJiavSmjVlMaJ3h4=; b=WA6crTVq1FLIHdFiJbVUeGRw2O
+ MNbeuY6AGA77NNzCiDGl4WkYR4sXw2XOOyxGVzi1eIO8MTXU50jyk7GwUaxpWWIsIJVBOcMtp3kyu
+ fSKlAWicmGtGq0SsHIIkYUEOwVkuwr8GNci1DRpU1urBCM2lOZJam4z85bmoTchikDE4=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vdtbB-0005uL-8t; Thu, 08 Jan 2026 17:15:01 +0000
+ id 1vdtbI-0005vH-Ie; Thu, 08 Jan 2026 17:15:08 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id A6A1540847;
+ by sea.source.kernel.org (Postfix) with ESMTP id 4335B44454;
+ Thu,  8 Jan 2026 17:14:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3B8EC116C6;
  Thu,  8 Jan 2026 17:14:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C48BC2BCB3;
- Thu,  8 Jan 2026 17:14:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767892490;
- bh=dYgR/946dJwV9AewaF5e0d1y1o9rSJR9ABQBhS2Sc1E=;
+ s=k20201202; t=1767892498;
+ bh=WgBctrBD8RLFVYdXDqzWSCdo8NzR8JtstjicYPh/U9Y=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=EE2gZbpwilK+p65zJF+DVJq4MFRPaZe1eMYvJUmFsGZDgMyF9n/0nbfU8VldhCR1Z
- ig2YvmBFJpERXaOR1YuP8VA85WDlJx1s5XTX9JaCi+k8TeGUUxrgEFvZcgCNcmK4jM
- zUWajICcygLLxU/fnv7Bl0PM/k0sAGhrvfexl8QZcHgN41M0I+dTkt3cpSxxsgsmlm
- 8VMU/MUbvQcy4wKiuCyibQqAQFhRM8TAJqiPwzb0h9MYwLHKGZXNeFJJU/dHSWsMCt
- hthHXEtbuWS1TAGQjZX+0TQBu0a5iqkHqTAFklVluh7jPWvQ1npZjrBYPStgmQMhhH
- tLNIRSDSTwisA==
-Date: Thu, 08 Jan 2026 12:13:04 -0500
+ b=Yc4/t5loZyezYaHDNXK9dd9JvafuBssh+sDSZ3exryKjh9p7XKLxOnlh0HZwejipA
+ tmTIA9/0xJ8xrgH6Y0t7D/mGDf0AqOx/WxR5blHGNJ28gGiZsD17coCliZNvV/vsQQ
+ 6XXHPDcyYcOAYUAUaCsSzNRMecSySzNpEAlW8DnTJpjxE+2aVYhL1ZUMVLMRfcMxTd
+ xcBwALhaSlls70OLDrhfnMlALrjEGcjhs7rFzNgirkNOyZkEjSq0YeHhTjU+YgFGXK
+ 0ZdpaO1Q0mxXKVnWoQw6OmB+h27qt7MwfOpTqYoFF0/0bFAfq9Vui9DQor/pHuo71X
+ 3yAVhPaaUcVtQ==
+Date: Thu, 08 Jan 2026 12:13:05 -0500
 MIME-Version: 1.0
-Message-Id: <20260108-setlease-6-20-v1-9-ea4dec9b67fa@kernel.org>
+Message-Id: <20260108-setlease-6-20-v1-10-ea4dec9b67fa@kernel.org>
 References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
 In-Reply-To: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
 To: Luis de Bethencourt <luisbg@kernel.org>, 
@@ -109,20 +109,20 @@ To: Luis de Bethencourt <luisbg@kernel.org>,
  Shyam Prasad N <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>, 
  Bharath SM <bharathsm@microsoft.com>, Hans de Goede <hansg@kernel.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1802; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=dYgR/946dJwV9AewaF5e0d1y1o9rSJR9ABQBhS2Sc1E=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpX+W6tow5eWlg3d9LlE4JzeKYs4qhQrQSZqLyH
- 28Sqlg8Yd2JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaV/lugAKCRAADmhBGVaC
- FXExD/4+xtepcLHtJswdWEgDrfCU1l+JV7R1ZY6za66bEWKzixlzEz5aEKjLNSkfDp6latYm0WV
- nQmECaiV0baGSZOSWYMEDHJxt8XCYei2h8uIIVVGTLuh19g8JU4y6ZwbvI6IbIWBZSML25ObG/k
- BGNBwe/I+4nGuNM4MAI6DzSKz0cnW+TQv9wtK27EfsFB9aE8xFNHtQBXrfbRKkMsFHlt8nRnWgL
- 0CZlHx3wVern/FfuVElMRYXy0j8AVkjyUJxjWPvou9n1slugfh22VXcVn485XauIBxfx5F0+oJF
- Rg7mIbM5ZKrWl8BlLK4Nz24ikHNS+GO6Pl5zNOULmo5Avxq7WPmb6fIIotCODNKWbgrZ+WInbFr
- J2Mx450orrxaXQQ+ZxHv/FzG/RCq/jhW5on4+b/h3zDTBMbA9x+9eFRX3r4gmgQazMA3tL5LKmc
- dam7IMlqI1d0VjMQVGvcVYcanw4zoarKDKQoBd2lwX6SpSc4nSezLKBdMQirlmjJUQIF6U2l04P
- nbP0DomAF2vMA9H5kiyvMnMt0ojouLw/0ANYcWfJ3QIB1anSGvKDmmIiR9GgacsdwFbwJOTNCjQ
- xaaBKflgwoM3KB7kjLzZpogI65tiWTabuagt5tmxM4laxXId94a5+ZfJ8v0Vr9W8dJFWBx+K7G4
- +olNbY50fwTUfZg==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=777; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=WgBctrBD8RLFVYdXDqzWSCdo8NzR8JtstjicYPh/U9Y=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpX+W7rGRw7xJ9j9CSSmtKVJzAnrZ9HKw5x4g6Q
+ fvlmyGGcu2JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaV/luwAKCRAADmhBGVaC
+ FehDD/9tUv+oBi/X1dqLnHkQjWAAqllp1O9XIJiC0Dmcj8NdKQjiIEJoahbDF1BoadzLSTlRIhG
+ A4Ia4k0zHK75I3zk36XIzkn0YkeesqfVpCvK5vIKdcZPe4GPp3NEtPgWRDmyc9smykSu9lcxyGt
+ o3l+UDqQoHxbqKwJZH9ShVgldb3vOGhWSCMI2sXQdc3CYDZ7ZxCc3YsKa5ZRB5LOjockkEKYWK8
+ p6/cCQQ6VrgkzOzR6kcmCg4RDj2xDwpeWdoJT9ycfMG0UjbmiVkiDGAa4sRYDAVvfy03xNezHyU
+ 5fyokGDABc5UKt/0cGAZdgST7O+ieCGQbEmmqZpU1+cx+UOOG/2pDPs7oDoXS4jukcCWY/H5GGR
+ FUVOQ4/6u1giyiF91KGM6VNNqNpV8VEcv8MEgDz/SAyMMSpT4EVfVtQ4CfbKhLzJPALVtAZeUBG
+ iSE5FEWPy5iiIR+EC/zcPL87/uOHshC0KlklvrdJMW94IKhSSDNyw3dkrUU9qEuYOxDTa2qfxvG
+ /Hejpi55FfCCR0Ha8ZwN9NZvBz7U51fU3QOgjIbntwAC6kia2Na5SdIB9voB+3l3b9eoMRxPGxT
+ biskjjTc1jw8WRjwPA9wlhGjmNGP4Vl8Db8cK9ZzgRfrZxP+iZ8N+sFHZS0E5jwImgp2j1lEnZX
+ PrqPNklrdm/ygrQ==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
@@ -132,9 +132,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Add the setlease file_operation to fat_file_operations and
- fat_dir_operations, pointing to generic_setlease. A future patch will change
- the default behavior to reject lease attempts with -EINVAL when [...] 
+ Content preview:  gfs2_file_fops_nolock() already has this explicitly set, so
+ it's only necessary to set this in gfs2_dir_fops_nolock(). A future patch
+ will change the default behavior to reject lease attempts with -EI [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -146,8 +146,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vdtbB-0005uL-8t
-Subject: [f2fs-dev] [PATCH 09/24] fat: add setlease file operation
+X-Headers-End: 1vdtbI-0005vH-Ie
+Subject: [f2fs-dev] [PATCH 10/24] gfs2: add a setlease file operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -176,58 +176,27 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add the setlease file_operation to fat_file_operations and
-fat_dir_operations, pointing to generic_setlease.  A future patch will
-change the default behavior to reject lease attempts with -EINVAL when
-there is no setlease file operation defined. Add generic_setlease to
-retain the ability to set leases on this filesystem.
+gfs2_file_fops_nolock() already has this explicitly set, so it's only
+necessary to set this in gfs2_dir_fops_nolock().  A future patch
+will change the default behavior to reject lease attempts with -EINVAL
+when there is no setlease file operation defined.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/fat/dir.c  | 2 ++
- fs/fat/file.c | 2 ++
- 2 files changed, 4 insertions(+)
+ fs/gfs2/file.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/fs/fat/dir.c b/fs/fat/dir.c
-index 92b091783966af6a9e6f5ead1a382a98dd92bba0..807bc8b1bc145a9f15765920670c6233f7e87e55 100644
---- a/fs/fat/dir.c
-+++ b/fs/fat/dir.c
-@@ -16,6 +16,7 @@
- 
- #include <linux/slab.h>
- #include <linux/compat.h>
-+#include <linux/filelock.h>
- #include <linux/uaccess.h>
- #include <linux/iversion.h>
- #include "fat.h"
-@@ -876,6 +877,7 @@ const struct file_operations fat_dir_operations = {
- 	.compat_ioctl	= fat_compat_dir_ioctl,
- #endif
- 	.fsync		= fat_file_fsync,
+diff --git a/fs/gfs2/file.c b/fs/gfs2/file.c
+index 86376f0dbf3a553375b0064c9a1eff3bfa9651f5..6daa96d815e1e30f099938543a0ed19aa90c720c 100644
+--- a/fs/gfs2/file.c
++++ b/fs/gfs2/file.c
+@@ -1639,5 +1639,6 @@ const struct file_operations gfs2_dir_fops_nolock = {
+ 	.release	= gfs2_release,
+ 	.fsync		= gfs2_fsync,
+ 	.llseek		= default_llseek,
 +	.setlease	= generic_setlease,
  };
  
- static int fat_get_short_entry(struct inode *dir, loff_t *pos,
-diff --git a/fs/fat/file.c b/fs/fat/file.c
-index 4fc49a614fb8fd64e219db60c6d9e7dd100aea1c..d50a6d8bfaae0c75b2dbe838d108135206d0f123 100644
---- a/fs/fat/file.c
-+++ b/fs/fat/file.c
-@@ -13,6 +13,7 @@
- #include <linux/mount.h>
- #include <linux/blkdev.h>
- #include <linux/backing-dev.h>
-+#include <linux/filelock.h>
- #include <linux/fsnotify.h>
- #include <linux/security.h>
- #include <linux/falloc.h>
-@@ -212,6 +213,7 @@ const struct file_operations fat_file_operations = {
- 	.splice_read	= filemap_splice_read,
- 	.splice_write	= iter_file_splice_write,
- 	.fallocate	= fat_fallocate,
-+	.setlease	= generic_setlease,
- };
- 
- static int fat_cont_expand(struct inode *inode, loff_t size)
 
 -- 
 2.52.0
