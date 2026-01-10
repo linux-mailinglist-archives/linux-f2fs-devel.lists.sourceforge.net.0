@@ -2,74 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF9E1D0CBA3
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 10 Jan 2026 02:38:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4322D0CC33
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 10 Jan 2026 02:47:50 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=sPx+YDAk775kddBzxMZ03JK5pDN/Ef2BF61LYhirCoM=; b=UfHYfsxlhQWWrZ3/Jw7Amav9QD
-	mngdAAWkOLbEKPL/rzql8zej0Pzd9sze02P5AQ6ZCiFJpAyGivEyP7VJIuoXsnLcbK/W07se4U97H
-	1FsI5YnZwW+N6pNNLKQxd0WahRDOcq397k6O2QBTsj+JadTnZVB88i+Xc4lNxXXuzElY=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=LnptvwVqeUf8W5oH7OPSqH/dw2XG2Pv0p2/YVnMQvNQ=; b=XyVFzjAixDISVz/2tRaNwDlnwO
+	ca4DukPONbaXI4kmKiGYad6tMtAEUA+cnuynPU/nB/U0YyAvJpIJJVKNzE0INL29hPRT3nJaziqUu
+	aSVN5iuTHdNlwKgtVwzLDWMe8D+z+3wDC4Gac/z4ewCofyGRGZnOefCYrQzUaEW0szZk=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1veNvi-0007ai-N4;
-	Sat, 10 Jan 2026 01:38:15 +0000
+	id 1veO4r-0004OT-Iw;
+	Sat, 10 Jan 2026 01:47:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <djwong@kernel.org>) id 1veNvg-0007ab-Pa
- for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 10 Jan 2026 01:38:13 +0000
+ (envelope-from <chao@kernel.org>) id 1veO4p-0004OB-HY;
+ Sat, 10 Jan 2026 01:47:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vOwesAW0AJASOZFAIF1+kfgwwEixSeh9W22TJpOe3QQ=; b=Wh0hGAQd8y6/B796vlf/J81EeQ
- AdS9w9XiAeX/k6M0L50dJYJhbN0oVFXnQOStM6s68lroYtwr560Jwe1vMWmRlA6d3mW9b2SXvdz8+
- HBmWjawTkzsDx9ciP2R4GXSA8m4SBAbO7aQskwCS5JwSftKP7jYh5vl2Ql7aiLIo9Hng=;
+ bh=vZWEW1mD3/NQHrMS1jEqwJg9xM6fxd6FqkwiyYjKSIw=; b=MVY7zhATWWxQ1rOsLZaPoa/isD
+ DWnGsiNUy7fIJz18nOydKdHuDfmYKwAWPJ8LGGOrwhRWVgESIIXrf9QAYxGJu725NeTpCOI2vT4V3
+ UQJtTjXVtSkIlWm85aVtks5OIhOWexzHkvMEV+1zKeu5ZB3LUCEoIBkWetDp2QfORsnM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vOwesAW0AJASOZFAIF1+kfgwwEixSeh9W22TJpOe3QQ=; b=PlraOLdplEPbr9hYIzuOR2HOi+
- LzdBIQzbEvYb9pAp1lVrdBykhPIdORepdVjnNduiu1mKBsGO7FyJn2DzISLr3YucLdW08gyNfbsfL
- Sq6gNhPGuCnUz+77mzxWA5LYur0MteVp0vpdg96oiDe09MvtumtPbL9ovIU8VA/9uLpw=;
+ bh=vZWEW1mD3/NQHrMS1jEqwJg9xM6fxd6FqkwiyYjKSIw=; b=hoz5fIOHwGMwUIruAp4YCIaVXq
+ zrza2m2JMlyY9qBWMce2KGopzPlofB/MzyUSvY2NyQob3dCxzQQYKZuCN49IJt3g+yjdl4ddaoE4v
+ MA1alwhT6iPJsdjvCW35mc/lNhIVS5l3E9XYAosy3ka0j7w15TSq4xZYtxc2NpSXosWw=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1veNvh-0000eF-6G for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 10 Jan 2026 01:38:13 +0000
+ id 1veO4p-0000vV-1S; Sat, 10 Jan 2026 01:47:39 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D3AFC40853;
- Sat, 10 Jan 2026 01:38:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ACBECC4CEF1;
- Sat, 10 Jan 2026 01:38:02 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 35A03409EE;
+ Sat, 10 Jan 2026 01:47:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD9FBC4CEF1;
+ Sat, 10 Jan 2026 01:47:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768009082;
- bh=1SLFpiBB9qlYA2B0NL1BDi/rggkL1u617yITITr0y8U=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Oi1Verq7l28rgBZS0fdU8RQi8LroRuewJ7vxMwnvhk2UZTZIe+fjDgG4P030svuE1
- +ps94EWb+TaZadLPigaYcvWLoOwMmHWhUbaDIrF+TVp7mjhGGgRCl96CANiWe8J+pn
- V63rpkMTjPE8RFXGAEexcPft44JIWW0UEkoo8jG6QMXtJ9U4sxsHsQqZSY2mDlhM15
- CweqTULTjSOyIf++GSCM0JRQRcV1C1/LgmFa4soUSr1wWwyNeVX8mlq59YfcM9CcOF
- YroYxBdYyLJsnM3Feetuomr/L8+a2+qLvw8UqVKi2YscCm0gRxzECZnVUQAvz8RhRg
- GAbsR4KIlJU+g==
-Date: Fri, 9 Jan 2026 17:38:02 -0800
-To: Joanne Chang <joannechien@google.com>
-Message-ID: <20260110013802.GB15541@frogsfrogsfrogs>
-References: <20260108022501.754320-1-joannechien@google.com>
+ s=k20201202; t=1768009653;
+ bh=OKPFCC1ojmEDlLwUQA1PrvgWaqI/QFfkYIRaHHjgLI8=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=aS1PPg/Dg2j3WlAEK5nHwD5i8kCTebxLR+i8vwa1Umz+Wef0tfIentBS0klMYZA/0
+ jcNMCTW2byAj+2+1CuaM8xxEVkIBoJHlppRtjIGo5fLkKKWAuHZa5JPyHvx4sw6t+e
+ +SwwuwOcEtWTrjgtkf/FhomVQK8mNq+RpWJtAVY8ZEyUrj+ucRRxGYTYp7Xp/qex4E
+ afNMjdvfkLqjaXQpbL974EbmrZMtjQ5HekIFhOGbzOSFgVlWcBwV3eO4AhalhUZOEB
+ rsyBo6s8Gp7OWORYRudl7fUPvCO3D2sc+9CFLGsHY1Zv/TiLZVK9d43+cGel2wVRPX
+ PWiI+/c4aq5zQ==
+Message-ID: <35b959e6-a91a-409b-ac3e-f78aaf60148a@kernel.org>
+Date: Sat, 10 Jan 2026 09:47:29 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260108022501.754320-1-joannechien@google.com>
+User-Agent: Mozilla Thunderbird
+To: Jeff Layton <jlayton@kernel.org>, Luis de Bethencourt
+ <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>,
+ Nicolas Pitre <nico@fluxnic.net>, Christoph Hellwig <hch@infradead.org>,
+ Jan Kara <jack@suse.cz>, Anders Larsen <al@alarsen.net>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>, David Sterba <dsterba@suse.com>,
+ Chris Mason <clm@fb.com>, Gao Xiang <xiang@kernel.org>,
+ Yue Hu <zbestahu@gmail.com>, Jeffle Xu <jefflexu@linux.alibaba.com>,
+ Sandeep Dhavale <dhavale@google.com>, Hongbo Li <lihongbo22@huawei.com>,
+ Chunhai Guo <guochunhai@vivo.com>, Jan Kara <jack@suse.com>,
+ Theodore Ts'o <tytso@mit.edu>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Jaegeuk Kim <jaegeuk@kernel.org>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+ David Woodhouse <dwmw2@infradead.org>, Richard Weinberger <richard@nod.at>,
+ Dave Kleikamp <shaggy@kernel.org>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ Viacheslav Dubeyko <slava@dubeyko.com>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, Mike Marshall
+ <hubcap@omnibond.com>, Martin Brandenburg <martin@omnibond.com>,
+ Miklos Szeredi <miklos@szeredi.hu>, Amir Goldstein <amir73il@gmail.com>,
+ Phillip Lougher <phillip@squashfs.org.uk>, Carlos Maiolino <cem@kernel.org>,
+ Hugh Dickins <hughd@google.com>, Baolin Wang
+ <baolin.wang@linux.alibaba.com>, Andrew Morton <akpm@linux-foundation.org>,
+ Namjae Jeon <linkinjeon@kernel.org>, Sungjong Seo <sj1557.seo@samsung.com>,
+ Yuezhang Mo <yuezhang.mo@sony.com>, Chuck Lever <chuck.lever@oracle.com>,
+ Alexander Aring <alex.aring@gmail.com>,
+ Andreas Gruenbacher <agruenba@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+ Eric Van Hensbergen <ericvh@kernel.org>, Latchesar Ionkov
+ <lucho@ionkov.net>, Dominique Martinet <asmadeus@codewreck.org>,
+ Christian Schoenebeck <linux_oss@crudebyte.com>, Xiubo Li
+ <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>,
+ Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>,
+ Steve French <sfrench@samba.org>, Paulo Alcantara <pc@manguebit.org>,
+ Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>,
+ Bharath SM <bharathsm@microsoft.com>, Hans de Goede <hansg@kernel.org>
+References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
+ <20260108-setlease-6-20-v1-4-ea4dec9b67fa@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20260108-setlease-6-20-v1-4-ea4dec9b67fa@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -77,9 +115,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jan 08, 2026 at 02:25:01AM +0000, Joanne Chang wrote:
- > generic/735 attempts to create a file with nearly 2^32 blocks. However,
- > some filesystems have a maximum file block limit below this th [...] 
+ Content preview:  On 1/9/2026 1:12 AM, Jeff Layton wrote: > Add the setlease
+ file_operation to erofs_file_fops and erofs_dir_fops,
+ > pointing to generic_setlease.
+ A future patch will change the default > behavior to re [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,9 +130,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1veNvh-0000eF-6G
-Subject: Re: [f2fs-dev] [PATCH v3] common/rc: add _require_blocks_in_file
- helper
+X-Headers-End: 1veO4p-0000vV-1S
+Subject: Re: [f2fs-dev] [PATCH 04/24] erofs: add setlease file operation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,94 +143,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: "Darrick J. Wong via Linux-f2fs-devel"
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: "Darrick J. Wong" <djwong@kernel.org>
-Cc: Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- Jaegeuk Kim <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: jfs-discussion@lists.sourceforge.net, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, gfs2@lists.linux.dev, linux-mm@kvack.org,
+ linux-mtd@lists.infradead.org, linux-cifs@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+ devel@lists.orangefs.org, ocfs2-devel@lists.linux.dev,
+ ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org, v9fs@lists.linux.dev,
+ samba-technical@lists.samba.org, linux-unionfs@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, ntfs3@lists.linux.dev,
+ linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jan 08, 2026 at 02:25:01AM +0000, Joanne Chang wrote:
-> generic/735 attempts to create a file with nearly 2^32 blocks. However,
-> some filesystems have a maximum file block limit below this threshold.
-> For instance, F2FS is limited to approximately 2^30 blocks due to the
-> capacity of the inode. So add _require_blocks_in_file helper to skip the
-> test in such cases.
+On 1/9/2026 1:12 AM, Jeff Layton wrote:
+> Add the setlease file_operation to erofs_file_fops and erofs_dir_fops,
+> pointing to generic_setlease.  A future patch will change the default
+> behavior to reject lease attempts with -EINVAL when there is no
+> setlease file operation defined. Add generic_setlease to retain the
+> ability to set leases on this filesystem.
 > 
-> The helper uses a hardcoded constant instead of a programmatic method,
-> so that bugs which affect the maximum file size are not masked.
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
 
-Not to mention trying to create a file with 1,057,053,439 blocks
-allocated to it would probably take forever.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-Hang on, we're talking about iblocks (aka the number of blocks allocated
-to this inode), not the maximum file size in blocks, right?
-
-If so, then maybe this function and its comments should
-s/blocks/iblocks/?  Or am I confused? ;)
-
---D
-
-> Signed-off-by: Joanne Chang <joannechien@google.com>
-> ---
-> v2 -> v3: 
-> - added explanation for using constants to commit message
-> 
-> v1 -> v2:
-> - changed title from "generic/735: disable for f2fs"
-> - used a new helper function instead of _exclude_fs as Christoph Hellwig
->   suggested
-> 
->  common/rc         | 16 ++++++++++++++++
->  tests/generic/735 |  1 +
->  2 files changed, 17 insertions(+)
-> 
-> diff --git a/common/rc b/common/rc
-> index c3cdc220..e92f4854 100644
-> --- a/common/rc
-> +++ b/common/rc
-> @@ -6120,6 +6120,22 @@ _require_file_attr_special()
->  	fi
->  }
->  
-> +# Require filesystem to accomodate enough blocks in a file
-> +_require_blocks_in_file()
-> +{
-> +	local blocks=$1
-> +
-> +	case $FSTYP in
-> +	f2fs)
-> +		if [ $blocks -gt 1057053439 ]; then
-> +			_notrun "$blocks blocks per file not supported on $FSTYP"
-> +		fi
-> +		;;
-> +	*)
-> +		;;
-> +	esac
-> +}
-> +
->  ################################################################################
->  # make sure this script returns success
->  /bin/true
-> diff --git a/tests/generic/735 b/tests/generic/735
-> index 9bbdf3a1..2fbf125c 100755
-> --- a/tests/generic/735
-> +++ b/tests/generic/735
-> @@ -22,6 +22,7 @@ fi
->  _require_odirect
->  _require_xfs_io_command "falloc"
->  _require_xfs_io_command "finsert"
-> +_require_blocks_in_file $(( (1 << 32) - 1 ))
->  
->  dev_size=$((80 * 1024 * 1024))
->  _scratch_mkfs_sized $dev_size >>$seqres.full 2>&1
-> -- 
-> 2.52.0.351.gbe84eed79e-goog
-> 
-> 
+Thanks,
 
 
 _______________________________________________
