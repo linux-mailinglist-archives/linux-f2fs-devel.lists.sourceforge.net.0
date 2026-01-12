@@ -2,73 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EF31D10440
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Jan 2026 02:33:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 902E6D10458
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Jan 2026 02:37:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=N2m0ODWpmplyK0P6nTTJOkzcpF1VWCPkj4KVOB8wwNw=; b=YAjDCdoEPaD5tYhwPiqi4yNOrf
-	T8U+4YAw3lr2GLo2UUK8PyTBk3guX633cyUrGvkFerFs6t23E33rkZFp5h36SMqyodIcdsVOnJqLT
-	3ifI1ni3mOPSPvawTieSPnp3ufpZVJl2sJ9qIBFhQngi1R2hR/I741WZ/T++zaz1ilWM=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=y6MSxXTInkjcjf2CzD9R0mOn36/FzcK1dnJy5zNWF70=; b=HyFQ2hWSo3ri7pEDFzf2fCfVNJ
+	IVYziM+kZwOqTfQcoTcd52Hvba3z+mMZgDnKL96/PHEdlEWaDR0O+z/hrKmJpqIsK4tT5GzrD9xvg
+	vHeyi9sZ99CtgXbKEZ797DQL79hsjv/ugWeLaDVZuhFUHb6rWzC92+sl+oAr+a9EJs+4=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vf6oO-0006en-0p;
-	Mon, 12 Jan 2026 01:33:40 +0000
+	id 1vf6sF-0005Ny-0n;
+	Mon, 12 Jan 2026 01:37:39 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vf6oM-0006ee-6F
+ (envelope-from <chao@kernel.org>) id 1vf6sD-0005Nr-UV
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Jan 2026 01:33:38 +0000
+ Mon, 12 Jan 2026 01:37:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=InUwuKUw3f7ZFgAEZHOztyWmtAT26GBgG7bPotgHSkQ=; b=USpc+pWjKn64NumRWkJF1UoHsR
- XNUxQ+Rv/EpRAQxuEJ7Ac3jBdIEyk3aPeWnsyQFyY88muyDNSkHiNSRSCyTukW5DhDBmdObjx533B
- l9v6XOcAfwD5ZXrMbqhwHVF6P1rxX8MF5qogP4S9fSRsMKXVJXOx8LPMwUrdDSUktr7c=;
+ bh=NIJJM9wC+tRNNE4rLCT370SpkTVot775NbvyfUmsrNY=; b=Rcnf5EaUOO/VetIvTLPs0X0khn
+ Eekde0YhRYLvz/CCQyOP37xqm9QKh/vILoOnluzrsAfRPjZkvW4fSpX6+fU6fzmFyRGTTCXpw1FQy
+ 4rrfMWQisX1KF7SCbFQ5rpYB3K/E0bUhWIRLf+dLFt/ftHJFsPepBfBWaTGQdDcmErnc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=InUwuKUw3f7ZFgAEZHOztyWmtAT26GBgG7bPotgHSkQ=; b=A
- lEWGXs5I14XATLSxgxohMetijmyWJwOgWZGx18iBzH6U9QJHnYtdL92S1ESzKuW+VThk77/P5I96/
- UFBqKLCuCxECKMIJuwhOsNUlYq9vCrZxkx1mDJlanVOV37KRy1WGop5AsAiGYLbvKcAMG0CblDMJF
- x/n8YHjwchhEJCz0=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=NIJJM9wC+tRNNE4rLCT370SpkTVot775NbvyfUmsrNY=; b=a1NcxZSMXMafM3Ej1MGdcaKWw+
+ otJX9Fg+Yg4A4Bp7OLLjqHN+hQEO2OwX/Oea91LEmA62i/asv9RgGumtKI+vvVYqz+08Vt9uVgCvW
+ HNpT+jrCrQFzsN5gMIcNN+OEeag5fMvjxFKCkVCApRiWzYEbBG0bJwK+NT2u/tvDC3Y4=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vf6oM-00010q-E4 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Jan 2026 01:33:38 +0000
+ id 1vf6sD-0001BQ-Ef for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 12 Jan 2026 01:37:37 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C4BE360159
+ by sea.source.kernel.org (Postfix) with ESMTP id 17BCD443EE
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 12 Jan 2026 01:33:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66444C4CEF7;
- Mon, 12 Jan 2026 01:33:26 +0000 (UTC)
+ Mon, 12 Jan 2026 01:37:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19823C4CEF7;
+ Mon, 12 Jan 2026 01:37:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768181607;
- bh=mhuJOGzZrMJ/ECVDq/vAmVEkdec5v0izbjLsdSSnEI4=;
- h=From:To:Cc:Subject:Date:From;
- b=U25qqbWAoV5SLKoMJTVcYUMnXf2XNs+cpmaLIdrhehWjeXWpUn0+oqARjQDbl1qXO
- 0kkS5q5apAG/s48HKs/UhKaCnz7aiDDk/mqCgJd2Hxxh/RD1HQz10mzHSCP/4BhI5A
- PNxTd6IDNtVZEWJ1aGC7kAE0nEZrC+gyRr6q3d92oF4eQvtBubLoBFURBuA+UYLD3d
- b+cQYgROftMmtIq0+f4aV8Qbys3faMH+6XKwCodJQA+OcwGrh8inezekfeUwRsXAmI
- hnzjAlj5Ax1gq2b8a3QEEH7OM83iJtafSS+ZIQL2BTzPhJUfz81KQjsyHOsKVZUCBz
- fxuhcP9+HvVOg==
-To: jaegeuk@kernel.org
-Date: Mon, 12 Jan 2026 09:33:20 +0800
-Message-Id: <20260112013320.8028-1-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
+ s=k20201202; t=1768181847;
+ bh=V35cuMwy1WrbHsiAT+F615WPdkq4vfT531EUjGWfZwI=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=dPeoTNB4BbkqcJkfkrgEocoQ/dkpIq5D+u4ANuPGPQYf5fNuZv/5uejaASupDK1QR
+ ZhC+Jb3rZMHL+27duIZ3RHxasO0yCwoo+QgWqd7rQrb7p+K0M8xJOFlISVIbR9tgVs
+ oyG3qTg84jg3pFlG4/+uI6/E11Z7i9YJJ2epSAW7QMMchFg7ios4DwfeKdwo4wkd2m
+ HGcv4IWDzO2o+Sk6dk5+VnLuhk5QUIzPRZlb4spwt3vQGXB45Z3qE+IYsw7ZB2x6BL
+ /gFs+etu9exXDZ3TI7i7dMDOm7cKlQPR+cdtrat5j96YCD0pEkUKls3eZC+V+v0aA6
+ 67VWGpxt49KFw==
+Message-ID: <de8d30d7-7b5d-4e7c-9119-a6c4cca3d0aa@kernel.org>
+Date: Mon, 12 Jan 2026 09:37:26 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: jaegeuk@kernel.org
+References: <20251215122803.3495320-1-chao@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20251215122803.3495320-1-chao@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -76,9 +79,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  For consecutive large hole mapping across {d,id,did}nodes
- , we don't need to call f2fs_map_blocks() to check one hole block per one
- time, instead, we can use map.m_next_pgofs as a hint of next potenti [...]
+ Content preview:  Ping, On 12/15/2025 8:28 PM,
+ Chao Yu wrote: > __blkdev_issue_discard()
+ in __submit_discard_cmd() will never fail, so > let's make FAULT_DISCARD
+ fault injection obsolete. > > Signed-off-by: Chao Yu <chao@ker [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,9 +94,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vf6oM-00010q-E4
-Subject: [f2fs-dev] [PATCH] f2fs: avoid f2fs_map_blocks() for consecutive
- holes in readpages
+X-Headers-End: 1vf6sD-0001BQ-Ef
+Subject: Re: [f2fs-dev] [PATCH] f2fs: make FAULT_DISCARD obsolete
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,128 +110,116 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-For consecutive large hole mapping across {d,id,did}nodes , we don't
-need to call f2fs_map_blocks() to check one hole block per one time,
-instead, we can use map.m_next_pgofs as a hint of next potential valid
-block, so that we can skip calling f2fs_map_blocks the range of
-[cur_pgofs + 1, .m_next_pgofs).
+Ping,
 
-1) regular case
-
-touch /mnt/f2fs/file
-truncate -s $((1024*1024*1024)) /mnt/f2fs/file
-time dd if=/mnt/f2fs/file of=/dev/null bs=1M count=1024
-
-Before:
-real    0m0.706s
-user    0m0.000s
-sys     0m0.706s
-
-After:
-real    0m0.620s
-user    0m0.008s
-sys     0m0.611s
-
-2) large folio case
-
-touch /mnt/f2fs/file
-truncate -s $((1024*1024*1024)) /mnt/f2fs/file
-f2fs_io setflags immutable /mnt/f2fs/file
-sync
-echo 3 > /proc/sys/vm/drop_caches
-time dd if=/mnt/f2fs/file of=/dev/null bs=1M count=1024
-
-Before:
-real    0m0.438s
-user    0m0.004s
-sys     0m0.433s
-
-After:
-real    0m0.368s
-user    0m0.004s
-sys     0m0.364s
-
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/data.c | 21 +++++++++++++++------
- 1 file changed, 15 insertions(+), 6 deletions(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index a2c4769d0ae1..5b0642cd27ff 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2176,10 +2176,13 @@ static int f2fs_read_single_page(struct inode *inode, struct folio *folio,
- 	/*
- 	 * Map blocks using the previous result first.
- 	 */
--	if ((map->m_flags & F2FS_MAP_MAPPED) &&
--			block_in_file > map->m_lblk &&
-+	if (map->m_flags & F2FS_MAP_MAPPED) {
-+		if (block_in_file > map->m_lblk &&
- 			block_in_file < (map->m_lblk + map->m_len))
-+			goto got_it;
-+	} else if (block_in_file < *map->m_next_pgofs) {
- 		goto got_it;
-+	}
- 
- 	/*
- 	 * Then do more f2fs_map_blocks() calls until we are
-@@ -2454,7 +2457,7 @@ static int f2fs_read_data_large_folio(struct inode *inode,
- 	struct bio *bio = NULL;
- 	sector_t last_block_in_bio = 0;
- 	struct f2fs_map_blocks map = {0, };
--	pgoff_t index, offset;
-+	pgoff_t index, offset, next_pgofs = 0;
- 	unsigned max_nr_pages = rac ? readahead_count(rac) :
- 				folio_nr_pages(folio);
- 	unsigned nrpages;
-@@ -2487,16 +2490,21 @@ static int f2fs_read_data_large_folio(struct inode *inode,
- 		/*
- 		 * Map blocks using the previous result first.
- 		 */
--		if ((map.m_flags & F2FS_MAP_MAPPED) &&
--				index > map.m_lblk &&
-+		if (map.m_flags & F2FS_MAP_MAPPED) {
-+			if (index > map.m_lblk &&
- 				index < (map.m_lblk + map.m_len))
-+				goto got_it;
-+		} else if (index < next_pgofs) {
-+			/* hole case */
- 			goto got_it;
-+		}
- 
- 		/*
- 		 * Then do more f2fs_map_blocks() calls until we are
- 		 * done with this page.
- 		 */
- 		memset(&map, 0, sizeof(map));
-+		map.m_next_pgofs = &next_pgofs;
- 		map.m_seg_type = NO_CHECK_TYPE;
- 		map.m_lblk = index;
- 		map.m_len = max_nr_pages;
-@@ -2617,6 +2625,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
- 	pgoff_t nc_cluster_idx = NULL_CLUSTER;
- 	pgoff_t index;
- #endif
-+	pgoff_t next_pgofs = 0;
- 	unsigned nr_pages = rac ? readahead_count(rac) : 1;
- 	struct address_space *mapping = rac ? rac->mapping : folio->mapping;
- 	unsigned max_nr_pages = nr_pages;
-@@ -2637,7 +2646,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
- 	map.m_lblk = 0;
- 	map.m_len = 0;
- 	map.m_flags = 0;
--	map.m_next_pgofs = NULL;
-+	map.m_next_pgofs = &next_pgofs;
- 	map.m_next_extent = NULL;
- 	map.m_seg_type = NO_CHECK_TYPE;
- 	map.m_may_create = false;
--- 
-2.40.1
+On 12/15/2025 8:28 PM, Chao Yu wrote:
+> __blkdev_issue_discard() in __submit_discard_cmd() will never fail, so
+> let's make FAULT_DISCARD fault injection obsolete.
+> 
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>   Documentation/ABI/testing/sysfs-fs-f2fs |  2 +-
+>   Documentation/filesystems/f2fs.rst      |  2 +-
+>   fs/f2fs/f2fs.h                          |  2 +-
+>   fs/f2fs/segment.c                       | 18 +++---------------
+>   4 files changed, 6 insertions(+), 18 deletions(-)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+> index 770470e0598b..7920c233d8ec 100644
+> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+> @@ -732,7 +732,7 @@ Description:	Support configuring fault injection type, should be
+>   		FAULT_TRUNCATE                   0x00000400
+>   		FAULT_READ_IO                    0x00000800
+>   		FAULT_CHECKPOINT                 0x00001000
+> -		FAULT_DISCARD                    0x00002000
+> +		FAULT_DISCARD                    0x00002000 (obsolete)
+>   		FAULT_WRITE_IO                   0x00004000
+>   		FAULT_SLAB_ALLOC                 0x00008000
+>   		FAULT_DQUOT_INIT                 0x00010000
+> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> index 9b3b835a174e..27aa4032c7cd 100644
+> --- a/Documentation/filesystems/f2fs.rst
+> +++ b/Documentation/filesystems/f2fs.rst
+> @@ -206,7 +206,7 @@ fault_type=%d		 Support configuring fault injection type, should be
+>   			     FAULT_TRUNCATE                   0x00000400
+>   			     FAULT_READ_IO                    0x00000800
+>   			     FAULT_CHECKPOINT                 0x00001000
+> -			     FAULT_DISCARD                    0x00002000
+> +			     FAULT_DISCARD                    0x00002000 (obsolete)
+>   			     FAULT_WRITE_IO                   0x00004000
+>   			     FAULT_SLAB_ALLOC                 0x00008000
+>   			     FAULT_DQUOT_INIT                 0x00010000
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index d7600979218e..65ca1a5eaa88 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -54,7 +54,7 @@ enum {
+>   	FAULT_TRUNCATE,
+>   	FAULT_READ_IO,
+>   	FAULT_CHECKPOINT,
+> -	FAULT_DISCARD,
+> +	FAULT_DISCARD,		/* it's obsolete due to __blkdev_issue_discard() will never fail */
+>   	FAULT_WRITE_IO,
+>   	FAULT_SLAB_ALLOC,
+>   	FAULT_DQUOT_INIT,
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index c26424f47686..5168026b2960 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -1286,7 +1286,6 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+>   					&(dcc->fstrim_list) : &(dcc->wait_list);
+>   	blk_opf_t flag = dpolicy->sync ? REQ_SYNC : 0;
+>   	block_t lstart, start, len, total_len;
+> -	int err = 0;
+>   
+>   	if (dc->state != D_PREP)
+>   		return 0;
+> @@ -1327,7 +1326,7 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+>   
+>   	dc->di.len = 0;
+>   
+> -	while (total_len && *issued < dpolicy->max_requests && !err) {
+> +	while (total_len && *issued < dpolicy->max_requests) {
+>   		struct bio *bio = NULL;
+>   		unsigned long flags;
+>   		bool last = true;
+> @@ -1343,17 +1342,6 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+>   
+>   		dc->di.len += len;
+>   
+> -		err = 0;
+> -		if (time_to_inject(sbi, FAULT_DISCARD)) {
+> -			err = -EIO;
+> -			spin_lock_irqsave(&dc->lock, flags);
+> -			if (dc->state == D_PARTIAL)
+> -				dc->state = D_SUBMIT;
+> -			spin_unlock_irqrestore(&dc->lock, flags);
+> -
+> -			break;
+> -		}
+> -
+>   		__blkdev_issue_discard(bdev, SECTOR_FROM_BLOCK(start),
+>   				SECTOR_FROM_BLOCK(len), GFP_NOFS, &bio);
+>   		f2fs_bug_on(sbi, !bio);
+> @@ -1392,11 +1380,11 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+>   		len = total_len;
+>   	}
+>   
+> -	if (!err && len) {
+> +	if (len) {
+>   		dcc->undiscard_blks -= len;
+>   		__update_discard_tree_range(sbi, bdev, lstart, start, len);
+>   	}
+> -	return err;
+> +	return 0;
+>   }
+>   
+>   static void __insert_discard_cmd(struct f2fs_sb_info *sbi,
 
 
 
