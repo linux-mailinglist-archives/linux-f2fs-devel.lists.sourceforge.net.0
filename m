@@ -2,109 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26551D19D68
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Jan 2026 16:22:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4533BD19D5D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Jan 2026 16:22:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=2ZPCzVhXJ2GTmLZ1gcMx9kQv0PfxLIyhQZzVCDw0ARA=; b=DqIfRPfNWxoyPpNnveO6SzohOj
-	1No2gnzuwAkdbQs5+mA/7NImTEZaVu5QtTa5jow1T+cSagCLn+0+4+S4btCLVpTAbFnQLwuP9KKr+
-	4Y9C9cQzmAqkjvsvMfQ1G1QcmiOCZUoC3xLb6y/wXqqr+ouls7sUEeOEr3DWZc57/oDE=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=DQb+f43x8qo/qZ7300fcQXE9taOvIJM84t+dXlzGDVQ=; b=N69NNjCS6+vAl9EzdU8PpumHh3
+	KC8c5Yv8+STJZI2OQnzEAOSr/7FghKSdPyMwUidJ+dy0Ecx7o5OwBco9x25Y4PFzipcWqPQNdAJk9
+	q3X5txWYsDaJwUo6LReUIj9POAd9KvZCRbzQYHoxj/iJW7TrD/YsAw9bV+xVeV8tGiig=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vfgDi-00025W-Tw;
-	Tue, 13 Jan 2026 15:22:11 +0000
+	id 1vfgDS-0006r8-Kk;
+	Tue, 13 Jan 2026 15:21:54 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <monty_pavel@sina.com>) id 1vfgDg-00025E-Gz
- for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jan 2026 15:22:09 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <BATV+b9745b0d722f245fd565+8178+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1vfgDR-0006r1-4G for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Jan 2026 15:21:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ltaDQUlD2zD04LXkotxt83pAuGnUOA60O6Z1EE6pmLM=; b=CXlQcmb1zKQXI6X0bko7W1puyb
- gtGmUk1M4bf2Qv8GavLzLwGatsy+0YjbaTcJcazsuiDCXs/fNROYd2pIKfJElDg95iD/FfBLrrSjF
- v7pxckE5j9+fiSRf56HPaisWtdji/xaX0Yn3yyn7FhTnlwufeiUlWg/xoqtHrgOANR+c=;
+ bh=PkHPcgL/r2/sQCYYk7Tbgs3xv2a7+rqN3EI5OmY8q6A=; b=SRwHm4ooj8FVMCZQrywjYa8hqD
+ mRqEETQLgr4U3sI/imrbpn3Y3DUiXZ8Bd2aHGiCXOuwWUjdXjea9cJSokpz4n7IDoktTMBqyIw08b
+ mafGzMxp6SC2rlQKxzTukatV44J3lf0CCu2DtGGi6J6TUyn0HTty8WKkzNwD3wa8xWoU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ltaDQUlD2zD04LXkotxt83pAuGnUOA60O6Z1EE6pmLM=; b=SgVg2iG8GL86GMt34ZgS8okyx6
- umxfd02BZkMABgFqqs0arj9e0dUFT8YdPNsOeVQianjf/Tmu0CJdAzNF3pjU3DY9QUkBbBVD3BK/L
- fryCSiE94hs5ZTi4ImftyGykbeYefiDTHANQN2+XvfNBRrPNK+2j33RIPkK1D2jJoZA8=;
-Received: from mail3-165.sinamail.sina.com.cn ([202.108.3.165])
+ bh=PkHPcgL/r2/sQCYYk7Tbgs3xv2a7+rqN3EI5OmY8q6A=; b=Z3Zg/suz06T4TCmS/IJUmMek9X
+ DYkJqUu5HoPVGe9DkPgK9okftNuNDNeseoSbCkXizanuQei1avEQ6pboeQWXKWZo3rO6LB+GwHdqD
+ NlTy5RMIcP0SqAmeylIe2/sjwVyDL4F4DOP8sNqRhhmGr+oJvHBL3Ph+t5b1BO0viR9E=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vfgDg-00014s-6b for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jan 2026 15:22:09 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
- t=1768317728; bh=ltaDQUlD2zD04LXkotxt83pAuGnUOA60O6Z1EE6pmLM=;
- h=From:Subject:Date:Message-ID;
- b=D1+YWL0P6SWPQWRPDyFmsdcqdeYYA/iDgX4GRp4RyZS2rrPzh61Faoaf1pIsst2bK
- MT0mwsolVX03vHotcdp3DNK9sE9nFFTvYSwdak/Nxt2SY0Bkfb/xuwLIqvXM/k8NxU
- aYWKLKh3IM6vx16poDJNGd5qNCK7xytQnaM8tDLk=
-X-SMAIL-HELO: monty-pavel..
-Received: from unknown (HELO monty-pavel..)([120.245.114.32])
- by sina.com (10.54.253.33) with ESMTP
- id 6966631000006BDA; Tue, 13 Jan 2026 23:22:00 +0800 (CST)
-X-Sender: monty_pavel@sina.com
-X-Auth-ID: monty_pavel@sina.com
-Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
- dkim=none header.i=none;
- dmarc=none action=none header.from=monty_pavel@sina.com
-X-SMAIL-MID: 8490536685213
-X-SMAIL-UIID: 874C3D8043BE4D3A810F8624CD66F5CB-20260113-232200-1
-From: Yongpeng Yang <monty_pavel@sina.com>
-To: Chao Yu <chao@kernel.org>,
-	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Tue, 13 Jan 2026 23:21:37 +0800
-Message-ID: <20260113152138.15979-3-monty_pavel@sina.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260113152138.15979-2-monty_pavel@sina.com>
-References: <20260113152138.15979-2-monty_pavel@sina.com>
+ id 1vfgDQ-000149-Q1 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Jan 2026 15:21:53 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=PkHPcgL/r2/sQCYYk7Tbgs3xv2a7+rqN3EI5OmY8q6A=; b=xomA14eVXNDIQFtdd0HHQoTB7E
+ zdCyAopaRYT/ZMC1HRDd52yie0ZY9djWOaiJeSSd3JNvbC1NEWAZcsjGHwHmvcGycvYjYLSUAcSze
+ tXHmc9c0Fki49NonLagV8PsJ/iPuhUOgcmQb0ASFXPOgGlBUjJ+8kRLLmG301tJmrH/G0bLxaLert
+ UC9c6sXNj9n/Ja0qaa3jrPPzv2+Ea5ytTE61XOYk1fawrjxrVkCJb801hU6hRAH+/pVS7dYZkqkLL
+ fw96oO4yE2lV/mG64uT0zCNM0k7/uphOCi77birTY2ROcuPQDd7ghnbA71Zf8M5tzKCQHyNI9+r4X
+ C8S7fIvw==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
+ Hat Linux)) id 1vfgDC-00000007M9V-0lHF;
+ Tue, 13 Jan 2026 15:21:38 +0000
+Date: Tue, 13 Jan 2026 07:21:38 -0800
+From: Christoph Hellwig <hch@infradead.org>
+To: Chuck Lever <cel@kernel.org>
+Message-ID: <aWZjAi5rCJk6iVKw@infradead.org>
+References: <20260112174629.3729358-1-cel@kernel.org>
+ <20260112174629.3729358-2-cel@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: 0.8 (/)
+Content-Disposition: inline
+In-Reply-To: <20260112174629.3729358-2-cel@kernel.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Yongpeng Yang This patch adds separate write latency
- accounting for NAT and SIT blocks in f2fs_write_checkpoint(). Signed-off-by:
- Yongpeng Yang --- fs/f2fs/checkpoint.c | 4 +++- fs/f2fs/f2fs.h | 4 +++- 2
- files changed, 6 insertions(+), 2 deletions(-) 
- Content analysis details:   (0.8 points, 5.0 required)
+ Content preview: > + /* case sensitivity behavior: */ > + bool
+ case_insensitive:1; 
+ > + bool case_preserving:1; Given that not case preserving is by far the
+ exception, maybe have a flag for that instead? 
+ Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
- [120.245.114.32 listed in dnsbl-2.uceprotect.net]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [202.108.3.165 listed in wl.mailspike.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [monty_pavel(at)sina.com]
-X-Headers-End: 1vfgDg-00014s-6b
-Subject: [f2fs-dev] [PATCH v2 1/3] f2fs: add write latency stats for NAT and
- SIT blocks in f2fs_write_checkpoint
+X-Headers-End: 1vfgDQ-000149-Q1
+Subject: Re: [f2fs-dev] [PATCH v3 01/16] fs: Add case sensitivity info to
+ file_kattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,65 +105,28 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
- Yongpeng Yang <monty_pavel@sina.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jan Kara <jack@suse.cz>, pc@manguebit.org, yuezhang.mo@sony.com,
+ cem@kernel.org, almaz.alexandrovich@paragon-software.com,
+ adilger.kernel@dilger.ca, linux-cifs@vger.kernel.org, vira@web.codeaurora.org,
+ sfrench@samba.org, slava@dubeyko.com, linux-ext4@vger.kernel.org,
+ linkinjeon@kernel.org, sprasad@microsoft.com, frank.li@vivo.com,
+ linux-nfs@vger.kernel.org, ronniesahlberg@gmail.com,
+ glaubitz@physik.fu-berlin.de, jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp,
+ Christian Brauner <brauner@kernel.org>, tytso@mit.edu,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
+ hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
+ sj1557.seo@samsung.com, trondmy@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Yongpeng Yang <yangyongpeng@xiaomi.com>
+> +	/* case sensitivity behavior: */
+> +	bool	case_insensitive:1;
+> +	bool	case_preserving:1;
 
-This patch adds separate write latency accounting for NAT and SIT blocks
-in f2fs_write_checkpoint().
-
-Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
----
- fs/f2fs/checkpoint.c | 4 +++-
- fs/f2fs/f2fs.h       | 4 +++-
- 2 files changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 3dfc83a0813e..7a67e23d0e33 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1840,6 +1840,7 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 			goto out;
- 		}
- 	}
-+	stat_cp_time(cpc, CP_TIME_MERGE_WRITE);
- 
- 	/*
- 	 * update checkpoint pack index
-@@ -1856,10 +1857,11 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 		f2fs_bug_on(sbi, !f2fs_cp_error(sbi));
- 		goto stop;
- 	}
-+	stat_cp_time(cpc, CP_TIME_FLUSH_NAT);
- 
- 	f2fs_flush_sit_entries(sbi, cpc);
- 
--	stat_cp_time(cpc, CP_TIME_FLUSH_META);
-+	stat_cp_time(cpc, CP_TIME_FLUSH_SIT);
- 
- 	/* save inmem log status */
- 	f2fs_save_inmem_curseg(sbi);
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index ded41b416ed7..bc666cfa83d4 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -319,7 +319,9 @@ enum cp_time {
- 	CP_TIME_START,		/* begin */
- 	CP_TIME_LOCK,		/* after cp_global_sem */
- 	CP_TIME_OP_LOCK,	/* after block_operation */
--	CP_TIME_FLUSH_META,	/* after flush sit/nat */
-+	CP_TIME_MERGE_WRITE,	/* after flush DATA/NODE/META */
-+	CP_TIME_FLUSH_NAT,	/* after flush nat */
-+	CP_TIME_FLUSH_SIT,	/* after flush sit */
- 	CP_TIME_SYNC_META,	/* after sync_meta_pages */
- 	CP_TIME_SYNC_CP_META,	/* after sync cp meta pages */
- 	CP_TIME_WAIT_DIRTY_META,/* after wait on dirty meta */
--- 
-2.43.0
+Given that not case preserving is by far the exception, maybe have
+a flag for that instead?
 
 
 
