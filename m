@@ -2,109 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 770C4D19D7A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Jan 2026 16:22:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C62BD19D98
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Jan 2026 16:23:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=nmfs9lv5qFJKCoEr+saYuHWM5NoRLPWZnPhcycqWAIY=; b=dl91rKNWlPgxZRu0SbDFK2oJ6/
-	qleMsxKv7YzRTcRSUa2v3b3w0C2bxTiRV7eqIT0phqj9HIzdiLvfOb1DIs/u86sLn0+3nxOLn9AvY
-	yDiKemJ+G+5UzvoXA0dcHsCfbwAA1V8R750MfeyBwULHCp6olQPxYOGMnN6M2aTID1yY=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=fqYzbGB6+zy0uD/wM+uVVyr30ycbIdQ0NPkSLqJuAiU=; b=e0uEw01e00E4dxCs9iT3WJ2PHz
+	M+Sg4SkILU7tc+uW2Ig+5g1nmDoC3j3VtexaHJXyid7e0Wu9S7uXmjZ3vKAr6wWxQHeA6seytbSxL
+	n8gHdrcDPs1W5ue59gzy34h+b1+hClYnbtIWBrmTdHUM6VrGbBJpStFEcFm3Q+Pm8Yek=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vfgDp-0004sk-P6;
-	Tue, 13 Jan 2026 15:22:17 +0000
+	id 1vfgEl-0006uE-2B;
+	Tue, 13 Jan 2026 15:23:15 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <monty_pavel@sina.com>) id 1vfgDn-0004sc-Qt
- for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jan 2026 15:22:16 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <BATV+b9745b0d722f245fd565+8178+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1vfgEj-0006u5-Lw for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Jan 2026 15:23:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LarHGKlNZcKKDY8RNJuV1QZgdBQz3zAwb0YtrS88uEs=; b=i0cbnMNauPvT8PqbekSKQfWXFF
- TQ5pBIlLwoWFL4v+OHRx5TFSQDhFtjA2bIEnNd4uZPOKS7FbZTEh+406FeygaIrdsAg1iQhaXEydF
- naInky4qHMs7CnPVyP+17PjlMBVZemIoN8HTt69BK0kpFGxC/FDp9aPMVhkzoY8UjdSc=;
+ bh=r4deXc7HegwnHrb+EBuAAMgs1ckJi6PkLXe6iw1M+NE=; b=lRV1awblAzYlbZRcIPk8nystaC
+ y4r99DA/w6ZBf2p1vvykL2PrHBSbuF2vJSJSFvhgp3fpn4zlOq1pS/y8kHcM3hwF3eaMxbBRIJMKt
+ ItBHGhzjk8P6OZf96ANsVnUF5sSxJgQx8tOdH+qpO43cUPAWap0ZxIT7neVMMzGOFNqA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LarHGKlNZcKKDY8RNJuV1QZgdBQz3zAwb0YtrS88uEs=; b=OVZ1qZDz+mE0BJWkq5Hus8nLeT
- wQfqc5p7Yjfg/PLVoameENI73FO6szurcpgAFde86JZguCM/MVX0aF4oDPGXOcUZZhID4dkueW46/
- NFWZjqT7H7i68j9+7g+yGOQCqkz2s+iCcLe2ISCXFwb8on4OpnXh3dTtGmizq6M+BG84=;
-Received: from mail3-165.sinamail.sina.com.cn ([202.108.3.165])
+ bh=r4deXc7HegwnHrb+EBuAAMgs1ckJi6PkLXe6iw1M+NE=; b=C8t8NERzc4Zl3umvMtu2e74sjB
+ UJWn1HqFWqCDF+fwNBND5jqc9W6eptnZ28mlzsfmCPRKRdP7Dedj6s3w5Drd5zFP8T2iwLyBcfeLu
+ IkfvQxbOeBPtuVXFFwksXUjKrBZ7nkYlRYXnMVSSIguoef6ua0FtfZxLlhuB9jqHpNc4=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vfgDn-00015K-9A for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jan 2026 15:22:15 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
- t=1768317735; bh=LarHGKlNZcKKDY8RNJuV1QZgdBQz3zAwb0YtrS88uEs=;
- h=From:Subject:Date:Message-ID;
- b=vECWfqdOjWR6tYwnP3Exo7NF9Y9vK6Z/JS7RBZ6wyXInlU/R3DAYbB0nRO6NxDYKw
- xBCM9wzCCzzXfN9emQJnQtUMTQeVVt64CISRZfK4sSkL/b2SWv4b5Gj5om2bneV8Et
- 3tgR+PQO+G5nZG3JKCGm1U+Dq8Z2xdx9usjBKe08=
-X-SMAIL-HELO: monty-pavel..
-Received: from unknown (HELO monty-pavel..)([120.245.114.32])
- by sina.com (10.54.253.33) with ESMTP
- id 6966631000006BDA; Tue, 13 Jan 2026 23:22:03 +0800 (CST)
-X-Sender: monty_pavel@sina.com
-X-Auth-ID: monty_pavel@sina.com
-Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
- dkim=none header.i=none;
- dmarc=none action=none header.from=monty_pavel@sina.com
-X-SMAIL-MID: 4225336685240
-X-SMAIL-UIID: 479FE1EDA91D416F89D1E9E84DCF15B4-20260113-232203-1
-From: Yongpeng Yang <monty_pavel@sina.com>
-To: Chao Yu <chao@kernel.org>,
-	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Tue, 13 Jan 2026 23:21:38 +0800
-Message-ID: <20260113152138.15979-4-monty_pavel@sina.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260113152138.15979-2-monty_pavel@sina.com>
-References: <20260113152138.15979-2-monty_pavel@sina.com>
+ id 1vfgEj-00018L-0U for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Jan 2026 15:23:13 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=r4deXc7HegwnHrb+EBuAAMgs1ckJi6PkLXe6iw1M+NE=; b=CqNE+MCH7ZhGgwgkTP/P8umWVk
+ dwtCfU4NnvIfozpQzLJxGDR54pOU3XX05XBY/XUIm2vNb9Eu+o7iuwfLbbpyXsX7u08mVtgnQoJu3
+ JwFsxJl+AmjdWlIUOx1bEeWHnjOhlufPlaWAUcriAl6wWaS2IGI5XLbS28tKg6OpviX5HgX+0HRR2
+ jT2g/OAwClSSrc+DfmSxXiuJg027czYo2I1XCZhqLZFLIg9qzt+shiIPExPx0vAEo0D8wmgmS2zpB
+ nrz+EgCi4E3/ATHoCD8MApUxW8GUVC6dJEOsHLTU8jGKIrOJlgzRLpBK0paMpmriVTg+w3hBgEJ+6
+ 085uTIWg==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
+ Hat Linux)) id 1vfgEY-00000007MId-0i74;
+ Tue, 13 Jan 2026 15:23:02 +0000
+Date: Tue, 13 Jan 2026 07:23:02 -0800
+From: Christoph Hellwig <hch@infradead.org>
+To: Chuck Lever <cel@kernel.org>
+Message-ID: <aWZjVkb9fSigpW2L@infradead.org>
+References: <20260112174629.3729358-1-cel@kernel.org>
+ <20260112174629.3729358-3-cel@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: 0.8 (/)
+Content-Disposition: inline
+In-Reply-To: <20260112174629.3729358-3-cel@kernel.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Yongpeng Yang All callers of __has_cursum_space() pass
- an unsigned int value as the size parameter. Change the parameter type to
- unsigned int accordingly. Signed-off-by: Yongpeng Yang --- fs/f2fs/f2fs.h
- | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) 
- Content analysis details:   (0.8 points, 5.0 required)
+ Content preview:  > +extern int fat_fileattr_get(struct dentry *dentry, struct
+ file_kattr *fa);
+ No need for "extern" for function prototypes. > +int fat_fileattr_get(struct
+ dentry *dentry, struct file_kattr *fa) > +{ > + struct msdos_sb_info *sbi
+ = MSDOS_SB(dentry->d_sb); > + > + /* > + * FAT filesystems do not preserve
+ case: stored names a [...] 
+ Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
- [120.245.114.32 listed in dnsbl-2.uceprotect.net]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [202.108.3.165 listed in wl.mailspike.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [monty_pavel(at)sina.com]
-X-Headers-End: 1vfgDn-00015K-9A
-Subject: [f2fs-dev] [PATCH v2 2/3] f2fs: change size parameter of
- __has_cursum_space() to unsigned int
+X-Headers-End: 1vfgEj-00018L-0U
+Subject: Re: [f2fs-dev] [PATCH v3 02/16] fat: Implement fileattr_get for
+ case sensitivity
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,37 +107,35 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
- Yongpeng Yang <monty_pavel@sina.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jan Kara <jack@suse.cz>, pc@manguebit.org, yuezhang.mo@sony.com,
+ cem@kernel.org, almaz.alexandrovich@paragon-software.com,
+ adilger.kernel@dilger.ca, linux-cifs@vger.kernel.org, vira@web.codeaurora.org,
+ sfrench@samba.org, slava@dubeyko.com, linux-ext4@vger.kernel.org,
+ linkinjeon@kernel.org, sprasad@microsoft.com, frank.li@vivo.com,
+ linux-nfs@vger.kernel.org, ronniesahlberg@gmail.com,
+ glaubitz@physik.fu-berlin.de, jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp,
+ Christian Brauner <brauner@kernel.org>, tytso@mit.edu,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
+ hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
+ sj1557.seo@samsung.com, trondmy@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Yongpeng Yang <yangyongpeng@xiaomi.com>
+> +extern int fat_fileattr_get(struct dentry *dentry, struct file_kattr *fa);
 
-All callers of __has_cursum_space() pass an unsigned int value as the
-size parameter. Change the parameter type to unsigned int accordingly.
+No need for "extern" for function prototypes.
 
-Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
----
- fs/f2fs/f2fs.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> +int fat_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
+> +{
+> +	struct msdos_sb_info *sbi = MSDOS_SB(dentry->d_sb);
+> +
+> +	/*
+> +	 * FAT filesystems do not preserve case: stored names are
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index bc666cfa83d4..1f4698a7b72f 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -572,7 +572,7 @@ static inline int update_sits_in_cursum(struct f2fs_journal *journal, int i)
- }
- 
- static inline bool __has_cursum_space(struct f2fs_journal *journal,
--							int size, int type)
-+						unsigned int size, int type)
- {
- 	if (type == NAT_JOURNAL)
- 		return size <= MAX_NAT_JENTRIES(journal);
--- 
-2.43.0
+Is that actually true?  It's been a while since I deal with them,
+but IIRC at least vfat is case preserving.
 
 
 
