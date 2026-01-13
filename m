@@ -2,75 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50622D147EB
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Jan 2026 18:47:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FE38D16C2B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Jan 2026 07:04:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Message-ID:Date:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=uDLQvnkl1JLKb5/+SrYCtcL0rNwYhJYwhujwwCktnZM=; b=WT4KOoLXskyGzFAKNUa1V+MRMm
-	+F1pL0n4NeblMO1g351gTd5+rfvTmdMHynEkGQ8zkZl0GVhi03hBI7keerHlr3ikcgwk9X2qFWWng
-	1jlp8TxH+2uVqlje3NyYUm/0bvFAi+5OnpY/7vGH5MZwi3sf5EYGU88Zeautd/Ong3J4=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=nahIxhf76VUO9ju+swntrdkZWivM5R6ED5SN1kI1Iio=; b=klGUuWEmSIFe8CTn4+IV3ylnA1
+	qMlTf9EPXXKMm9NnhNCDYddXWYKc7I9dxYG4pkJ/9QWQBBP0EOTAfD0rcYLA+n8FfdO9kR7HiZ28O
+	n2JFnMimqzr8vI9C6GeawoD78FDR9d625ZcXPn4y/WgLRtgjYfAP87u/g5pVARY3CWfA=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vfM0n-00017L-1c;
-	Mon, 12 Jan 2026 17:47:29 +0000
+	id 1vfXVS-00026n-QV;
+	Tue, 13 Jan 2026 06:03:54 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <cel@kernel.org>) id 1vfM0m-00017C-CS
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1vfXVQ-00026e-SR
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Jan 2026 17:47:28 +0000
+ Tue, 13 Jan 2026 06:03:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xLGRo4+0mtQK4bNSe/J7Z8EFqVyNGgGjbBo7sJ2WQa8=; b=hamDxRukXBqS3vyC7enTNuD5Wi
- tmy2HRs2P30S36og9AHDRYba6q6Snm6XSJt/JiHlaxKWbxqXI6S1RFeOJPHJuffk8hGmd7n+XTXDs
- wLUNEjStP46jEufIl2dAd0JMI2m2gVL7WBkj2SuIpOpa6uHITvuPJ+hm2KgXyplQ2OYM=;
+ bh=2aLQeYtu+K5EzjSQ6r9+FB2ZQPvK6slHt1xFf5fjUFg=; b=lVuwGI9icIdnAXPtrSHMn7ARoa
+ pGeRwmgIuw15FYKeabX1qNc1JmjvEK2012BKP4GKnIWSNc9O2ugYACiYt75YIY8nPPpgmjVPlUAw6
+ mT7uQeMUBpGQhvkkH+Q2PMb3e8l62fPzYOcDzWWICcyELesFx/VtO3UmPr3old+PpUGA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xLGRo4+0mtQK4bNSe/J7Z8EFqVyNGgGjbBo7sJ2WQa8=; b=dh0F/UeH/GffD+MfIuh/j9uLbT
- HmBXbZOw9fqBEPzTBTNMMQYxZoQzHlYG5AkjPG8fCXF9tOyD6oSg61fWlr2lCDRm8rgyw2sqjeIN8
- CIj17Ip9Ka3HmIQrun8yiegi4aaQUQtJ+fI2264GBJLP2Eav5gcbJuwqhoirv65l61+w=;
+ bh=2aLQeYtu+K5EzjSQ6r9+FB2ZQPvK6slHt1xFf5fjUFg=; b=MNjd4Q9pBs/G/h4pu0mxWAbgNe
+ 6oSzchZX9dYeG9/Iv4AWbPcW4+gkKCl1XovJb19ZNQ4y9wonpa6ABD+/4f3PjXlLk99Fa29J4x+GC
+ EHtbDgWaMrV9wgunXiOrz2X8gWd++9fGeHjHJqjkk9uoJ/9s9Je/T2tdE2GpSJdX2l2Q=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vfM0l-0008V4-Ur for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Jan 2026 17:47:28 +0000
+ id 1vfXVQ-0004Bc-B8 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Jan 2026 06:03:52 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 8AC344415D;
- Mon, 12 Jan 2026 17:47:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C6FAC19425;
- Mon, 12 Jan 2026 17:47:14 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id C207E43C37
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 13 Jan 2026 06:03:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A076DC116C6
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 13 Jan 2026 06:03:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768240037;
- bh=7CV8d5ZLjZnsixivTyttzKYK+F3Fykxp76GMWvkN/D4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=aTgRgnsLIoHdfPZ7yUZk1X/iiP+32IhZKLwoqdUUFGafNUBLN24n7VykD2UAKgLzh
- g3/B9h94Nlm3hReKMPuS5PD7kZDuX+DkPJmVzmE+MQKg7jUelRju6q9Gu42VJ/8VOL
- FvFsTK5nM3QnM/vQjaPk4ASdRJ/7OiFgvhmDZpFJr5byy1sHFJvZ/pZx0ygv9qlc/9
- G4hld9ftSDKcjfhAHEI3soKcPqgCuXJRFNYIaLfQqsF3/POXznYw7tmuxgvOpWcota
- znYTlLgv/VmymYtK3G55pJO88ys77Fs+imwAg7lmSsVTpyRaP/zW60ZNipesBXBP1y
- RcDXNiV38SE3A==
-To: vira,
-	Christian Brauner <brauner@kernel.org>,
-	Jan Kara <jack@suse.cz>
-Date: Mon, 12 Jan 2026 12:46:29 -0500
-Message-ID: <20260112174629.3729358-17-cel@kernel.org>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260112174629.3729358-1-cel@kernel.org>
-References: <20260112174629.3729358-1-cel@kernel.org>
+ s=k20201202; t=1768284221;
+ bh=HmD44rt22X5BawYRkAzvjvdzCTHh8anJkym2ljUW6rg=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=Q4b9f+WifqLCUDeIp2oFW4b0o6HL+uqkfA/MkzHUaYYEglDw20XMowy+UaHZH9zZR
+ XKrV8VVSnSqIE4SB+MdnGGDpsXyZGkgkRe0kbhXYH2LzFQ9qUNPb5EuXIHqVB4WNeK
+ F12CCnqLIfUrrvvkjN7Q99iKYHwx1hn5BjHjKuUOss4r/+1vdc+7x4j5acZ9hIYohn
+ ipvWG91hBO2tyK4fHlL+artPoBx8UKz8HmfEv13INjLGvZeQWPu049H8VRnM4InfFd
+ qhiNM77mtZPt8L5NBZIZWmiMoTiNAY2Ya2kyxLExSXMNqHrQrhD29WbJwzH2QIwnyM
+ 17dsw52yCR8tg==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 8D516C3279F; Tue, 13 Jan 2026 06:03:41 +0000 (UTC)
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 13 Jan 2026 06:03:41 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: high
+X-Bugzilla-Who: guoxiaolong2008@gmail.com
+X-Bugzilla-Status: ASSIGNED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P3
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-220951-202145-3smS9mBnss@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-220951-202145@https.bugzilla.kernel.org/>
+References: <bug-220951-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -79,11 +97,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chuck Lever <chuck.lever@oracle.com> ksmbd hard-codes
- FILE_CASE_SENSITIVE_SEARCH and FILE_CASE_PRESERVED_NAMES in
- FS_ATTRIBUTE_INFORMATION
- responses, incorrectly indicating all exports are case-sensitive. This breaks
- clients accessing ca [...] 
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=220951 ---
+ Comment
+ #2 from guoxiaolong2008@gmail.com --- Hi Chao Yu: Thanks for your fix, I
+ verified the solution and it does work. stress-ng-swap-7946 [007] .....
+ 346.972372:
+ f2fs_map_blocks: dev = (254,47), ino = 16800, file offset = 0, start blkaddr
+ = 0x77d0d, len = 0x1, flags = 2, seg_type = 8, may_create = 0, multidevice
+ = 0, [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,10 +115,14 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [172.234.252.31 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vfM0l-0008V4-Ur
-Subject: [f2fs-dev] [PATCH v3 16/16] ksmbd: Report filesystem case
- sensitivity via FS_ATTRIBUTE_INFORMATION
+X-Headers-End: 1vfXVQ-0004Bc-B8
+Subject: [f2fs-dev] [Bug 220951] swapfile activation bug causes data
+ corruption when swapfile < 2MB with fragmented extents
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,99 +134,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chuck Lever via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chuck Lever <cel@kernel.org>
-Cc: pc@manguebit.org, yuezhang.mo@sony.com, cem@kernel.org,
- almaz.alexandrovich@paragon-software.com, adilger.kernel@dilger.ca,
- linux-cifs@vger.kernel.org, sfrench@samba.org, slava@dubeyko.com,
- linux-ext4@vger.kernel.org, linkinjeon@kernel.org, sprasad@microsoft.com,
- frank.li@vivo.com, ronniesahlberg@gmail.com, glaubitz@physik.fu-berlin.de,
- jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp, linux-nfs@vger.kernel.org,
- tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, senozhatsky@chromium.org,
- Chuck Lever <chuck.lever@oracle.com>, hansg@kernel.org, anna@kernel.org,
- linux-fsdevel@vger.kernel.org, sj1557.seo@samsung.com, trondmy@kernel.org
+From: bugzilla-daemon--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: bugzilla-daemon@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chuck Lever <chuck.lever@oracle.com>
+https://bugzilla.kernel.org/show_bug.cgi?id=220951
 
-ksmbd hard-codes FILE_CASE_SENSITIVE_SEARCH and
-FILE_CASE_PRESERVED_NAMES in FS_ATTRIBUTE_INFORMATION responses,
-incorrectly indicating all exports are case-sensitive. This breaks
-clients accessing case-insensitive filesystems like exFAT or
-ext4/f2fs directories with casefold enabled.
+--- Comment #2 from guoxiaolong2008@gmail.com ---
+Hi Chao Yu:
+Thanks for your fix, I verified the solution and it does work.
 
-Query actual case behavior via vfs_fileattr_get() and report accurate
-attributes to SMB clients. Filesystems without ->fileattr_get continue
-reporting default POSIX behavior (case-sensitive, case-preserving).
+stress-ng-swap-7946    [007] .....   346.972372: f2fs_map_blocks: dev =
+(254,47), ino = 16800, file offset = 0, start blkaddr = 0x77d0d, len = 0x1,
+flags = 2, seg_type = 8, may_create = 0, multidevice = 0, flag = 6, err = 0
+  stress-ng-swap-7946    [007] .....   346.972376: f2fs_map_blocks: dev =
+(254,47), ino = 16800, file offset = 1, start blkaddr = 0x1f6801, len = 0xff,
+flags = 2, seg_type = 8, may_create = 0, multidevice = 0, flag = 6, err = 0
 
-SMB's FS_ATTRIBUTE_INFORMATION reports per-share attributes from the
-share root, not per-file. Shares mixing casefold and non-casefold
-directories report the root directory's behavior.
+  stress-ng-swap-7946    [007] .....   346.972378: f2fs_map_blocks: dev =
+(254,47), ino = 16800, file offset = 0, start blkaddr = 0x77d0d, len = 0x1,
+flags = 2, seg_type = 8, may_create = 0, multidevice = 0, flag = 1, err = 0
+  stress-ng-swap-7946    [007] .....   346.974392: f2fs_map_blocks: dev =
+(254,47), ino = 16800, file offset = 0, start blkaddr = 0x1f6a00, len = 0x100,
+flags = 2, seg_type = 8, may_create = 0, multidevice = 0, flag = 1, err = 0
 
-Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
----
- fs/smb/server/smb2pdu.c | 30 ++++++++++++++++++++++++------
- 1 file changed, 24 insertions(+), 6 deletions(-)
+The swapfile can be mapped correctly. 
 
-diff --git a/fs/smb/server/smb2pdu.c b/fs/smb/server/smb2pdu.c
-index 2fcd0d4d1fb0..2db189fef4da 100644
---- a/fs/smb/server/smb2pdu.c
-+++ b/fs/smb/server/smb2pdu.c
-@@ -13,6 +13,7 @@
- #include <linux/falloc.h>
- #include <linux/mount.h>
- #include <linux/filelock.h>
-+#include <linux/fileattr.h>
- 
- #include "glob.h"
- #include "smbfsctl.h"
-@@ -5486,16 +5487,33 @@ static int smb2_get_info_filesystem(struct ksmbd_work *work,
- 	case FS_ATTRIBUTE_INFORMATION:
- 	{
- 		FILE_SYSTEM_ATTRIBUTE_INFO *info;
-+		struct file_kattr fa = {};
- 		size_t sz;
-+		u32 attrs;
-+		int err;
- 
- 		info = (FILE_SYSTEM_ATTRIBUTE_INFO *)rsp->Buffer;
--		info->Attributes = cpu_to_le32(FILE_SUPPORTS_OBJECT_IDS |
--					       FILE_PERSISTENT_ACLS |
--					       FILE_UNICODE_ON_DISK |
--					       FILE_CASE_PRESERVED_NAMES |
--					       FILE_CASE_SENSITIVE_SEARCH |
--					       FILE_SUPPORTS_BLOCK_REFCOUNTING);
-+		attrs = FILE_SUPPORTS_OBJECT_IDS |
-+			FILE_PERSISTENT_ACLS |
-+			FILE_UNICODE_ON_DISK |
-+			FILE_SUPPORTS_BLOCK_REFCOUNTING;
- 
-+		err = vfs_fileattr_get(path.dentry, &fa);
-+		if (err && err != -ENOIOCTLCMD) {
-+			path_put(&path);
-+			return err;
-+		}
-+		if (err == -ENOIOCTLCMD) {
-+			/* Default POSIX: case-sensitive and case-preserving */
-+			fa.case_insensitive = false;
-+			fa.case_preserving = true;
-+		}
-+		if (!fa.case_insensitive)
-+			attrs |= FILE_CASE_SENSITIVE_SEARCH;
-+		if (fa.case_preserving)
-+			attrs |= FILE_CASE_PRESERVED_NAMES;
-+
-+		info->Attributes = cpu_to_le32(attrs);
- 		info->Attributes |= cpu_to_le32(server_conf.share_fake_fscaps);
- 
- 		if (test_share_config_flag(work->tcon->share_conf,
+Thanks.
+
 -- 
-2.52.0
+You may reply to this email to add a comment.
 
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
