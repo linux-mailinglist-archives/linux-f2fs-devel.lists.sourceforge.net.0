@@ -2,94 +2,130 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E57ABD1FEDF
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jan 2026 16:49:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3E8ED20BBF
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jan 2026 19:12:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=jqOAOPL5AiVUrLEhPRv4WEu9ZduXwjyOivd5IJZ+7b0=; b=bkxuRTKa3tMyTRdegLNx4PWpFi
-	TmDenz9rIGEAy6IwVdfX8oTQus8/dokL1NujH3zpJx9NTJOFdbmpXwLEzOypN+HCaSJWwJEfjusr6
-	BjmEN4/e0/cPalduSw6y0MnF/JVWekzgCdCf4B07l+lGsB8C59jf85pBXPiDn5HgeNK8=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=mFI+NV6jQvNr15KSjmveRJlFcI112iAIy8WZmc2kQ7A=; b=L/fkegtXcsUR/UAluCywlGvPAH
+	3OnWOXjsCYTbEgcK7htvPVauQ0EopOWBQGgNLL82zWr8UlS/pXkouUp/ufR+waXG+g9zgKJyQjDcR
+	7Ijz12fuxAtV5V9HV8JuIsjvDYi4TB+goNwIqnFFN1g31WyxAeWppXj4NL8zlAQMwWkM=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vg37N-000492-FO;
-	Wed, 14 Jan 2026 15:49:09 +0000
+	id 1vg5Lj-0004OW-E4;
+	Wed, 14 Jan 2026 18:12:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1vg37M-00048t-Cu
+ (envelope-from <jack@suse.cz>) id 1vg5Ld-0004OM-Ay
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Jan 2026 15:49:08 +0000
+ Wed, 14 Jan 2026 18:12:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jmYJEArZbk3rYWA6U5r8lF3FjjgErpj5QN7oIrIm6XE=; b=RJQs3q/VrTIBF/JfTWPxMwgmC9
- K5l6ZbFp+Eq2LW26aShNaGVRi7LkxrzvuZlK42ZP5D0W7kly678XTvO4H18zPMYrmxzfb2h5PWxEj
- Wiff9In8dXrvWjvLCb+07d+EnNp+zqlklHA6ENcljx5xp0onHA+rzPiRrSX5oxM7thwo=;
+ bh=Xo9ryw1mNS44QarmajvRPRZ+yW3faNEvj358UoC9dhs=; b=FRtQL9xv7rWNPaugg1zUPwpkF4
+ ZlO2GNGFG9YNhst1Y5YVBAF3QDW0A2SQMZBgyaQfSEvpg60iumTTXSR9nA0fYppkQd9ztALm0YrS/
+ uCJ80W2NNCIBEJSsIJuFbPiQ5eLe2AvOSRnCAI+6aEPOLWbnMN/MUqsRYn8+idMXnLZo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jmYJEArZbk3rYWA6U5r8lF3FjjgErpj5QN7oIrIm6XE=; b=DYWnXspLoAuDIqJA6C6dgqUvT1
- mITvmgJEuulSfFumywQCdS0KEQAidJv9EGl8NOG7Kc2rX7K7XHrBwSR+Zqy1KGrSO2Ne4gCoxtrIB
- m4ZFGuxNzI+UNTtPP4oOksBaShAFIiAOFJS91jgf6EsUGLpJAlOBEYvSTzvb7toIcK/4=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=Xo9ryw1mNS44QarmajvRPRZ+yW3faNEvj358UoC9dhs=; b=iciQ0+p3W+RrD73T74swfp5ynL
+ xFqiBgJqymn0dOYaaQBlERN5v4S9N/M3fC73DCMHG2ExIwd527TulkodjB+RtQjLEhVNHGB7IW6Rv
+ s5f9mu7bd1vNR8Q6qFhhmbXoWZDbc2Lpg2wW97K6tRtuf6r2JV7XFL/faThTY+R15VtM=;
+Received: from smtp-out1.suse.de ([195.135.223.130])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vg37L-0004n7-Rs for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Jan 2026 15:49:08 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 33FD160052
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 14 Jan 2026 15:49:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E1162C19425
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 14 Jan 2026 15:49:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768405741;
- bh=jmYJEArZbk3rYWA6U5r8lF3FjjgErpj5QN7oIrIm6XE=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=BsIbjV8Lq6aT2tsC0PuCCGSH2xr71ONDMLqdEc9aGcVZgI1NzXR8Fvn9iJ5lZ/dk8
- Iji2/diC6YLu4x1/o42bvZIncG/nly8347VU07PQLoKYsPwtD+AurNxACihIXOym86
- 8ib5Ed+HZYpDMFkG8Fj6hLLgKuNUBGsqKS+Cn/1fI6l8aEJO1wjAw6zhZNG/lo6ZX7
- eVjdxpq39cdIygGa4MnfZ8gVldd9luAs1vg0EeB0RUHpoV0JXi9I1gTfeX+j5qFofJ
- XM/u1uw9VGm5zO87+ZJDIu8QeG086k2lbAM9xkkXo95Y9m2VaDRFURZHxOjnvMSrLO
- yYlzVH/YAdiQA==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id D2762C41612; Wed, 14 Jan 2026 15:49:01 +0000 (UTC)
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 14 Jan 2026 15:49:01 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: guoxiaolong2008@gmail.com
-X-Bugzilla-Status: ASSIGNED
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P3
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-220951-202145-cYA88o5Iex@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-220951-202145@https.bugzilla.kernel.org/>
-References: <bug-220951-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1vg5Lc-0002z8-I4 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 14 Jan 2026 18:12:01 +0000
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id EEBCD34A19;
+ Wed, 14 Jan 2026 18:11:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1768414314; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Xo9ryw1mNS44QarmajvRPRZ+yW3faNEvj358UoC9dhs=;
+ b=iS7tUH/YOVxSh4z+OZrakGrtN6XHw3nBLnAxQyGHRRcDkM9IJTXs0s5ERNzTD6pyF+L0bH
+ uSwLh8J0cyq2Y3TKi3vc81qxNL+XqtOL8oOo9PESeiRBI5D2uoB2rm2OYnKgIMquzPTPku
+ viZbKCQe/6B8VMRSLiKTNd7yHPf761I=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1768414314;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Xo9ryw1mNS44QarmajvRPRZ+yW3faNEvj358UoC9dhs=;
+ b=MR0/rtm67S7zK5Gaw2gaKMuuUuFkv6QZraFcDAoZA5Iyg3WJ+BCDish25xa0np61mTVPhT
+ gt/CmQlc/UXyiXCA==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1768414313; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Xo9ryw1mNS44QarmajvRPRZ+yW3faNEvj358UoC9dhs=;
+ b=OZSxcWIVOJ/2w7sK+y/z5zIQ4PTncZsxIyA7Z1YcAx5jHdw5b0w73Z9rstYZxjhVWtpkZx
+ VXES6xbnfRccGtJbARuNNvoDgBEVKRgwZfHU/f3cndhwktoKlpInCRciG6TCeECY1YavoG
+ 2QPdcHpY+IXIAb7NOF4NqZYhpJWFkbk=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1768414313;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Xo9ryw1mNS44QarmajvRPRZ+yW3faNEvj358UoC9dhs=;
+ b=Y7oOVPk11qf+qOKc4Tcuncg8zBkZeMC3EpyXNrm5aqSn07P/vM7bNZOq0IlEYcRShrW60k
+ GHs2RrDmzRIu7tCA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id DBFCA3EA63;
+ Wed, 14 Jan 2026 18:11:53 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id LB0CNWncZ2nsLwAAD6G6ig
+ (envelope-from <jack@suse.cz>); Wed, 14 Jan 2026 18:11:53 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id 982DAA0BFB; Wed, 14 Jan 2026 19:11:49 +0100 (CET)
+Date: Wed, 14 Jan 2026 19:11:49 +0100
+From: Jan Kara <jack@suse.cz>
+To: Chuck Lever <cel@kernel.org>
+Message-ID: <3kq2tbdcoxxw3y2gseg7vtnhnze5ee536fu4rnsn22yjrpsmb4@fpfueqqiji5q>
+References: <20260114142900.3945054-1-cel@kernel.org>
+ <20260114142900.3945054-2-cel@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20260114142900.3945054-2-cel@kernel.org>
+X-Spamd-Result: default: False [-3.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ NEURAL_HAM_LONG(-1.00)[-1.000]; MID_RHS_NOT_FQDN(0.50)[];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
+ MIME_TRACE(0.00)[0:+]; TO_DN_SOME(0.00)[];
+ MISSING_XM_UA(0.00)[]; RCPT_COUNT_TWELVE(0.00)[32];
+ FUZZY_RATELIMITED(0.00)[rspamd.com];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ R_RATELIMIT(0.00)[to_ip_from(RLmzfjx67n53eyz9asjm8u3pcw)];
+ FROM_HAS_DN(0.00)[];
+ FREEMAIL_CC(0.00)[imap.suse.de,kernel.org,suse.cz,vger.kernel.org,lists.sourceforge.net,mail.parknet.co.jp,samsung.com,sony.com,paragon-software.com,dubeyko.com,physik.fu-berlin.de,vivo.com,mit.edu,dilger.ca,samba.org,manguebit.org,gmail.com,microsoft.com,chromium.org,oracle.com];
+ RCVD_COUNT_THREE(0.00)[3]; FROM_EQ_ENVFROM(0.00)[];
+ RCVD_TLS_LAST(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email]
+X-Spam-Flag: NO
+X-Spam-Score: -3.80
+X-Spam-Level: 
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -97,10 +133,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=220951 ---
- Comment
- #5 from guoxiaolong2008@gmail.com --- Hi Chao Yu: I have no concerns for
- it Thanks for your support. -- You may reply to this email to add a comment.
+ Content preview:  On Wed 14-01-26 09:28:44, Chuck Lever wrote: > From: Chuck
+ Lever <chuck.lever@oracle.com> > > Enable upper layers such as NFSD to
+ retrieve
+ case sensitivity > information from file systems by adding ca [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -111,10 +147,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vg37L-0004n7-Rs
-Subject: [f2fs-dev] [Bug 220951] swapfile activation bug causes data
- corruption when swapfile < 2MB with fragmented extents
+X-Headers-End: 1vg5Lc-0002z8-I4
+Subject: Re: [f2fs-dev] [PATCH v4 01/16] fs: Add case sensitivity info to
+ file_kattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,25 +161,71 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: bugzilla-daemon--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: bugzilla-daemon@kernel.org
+Cc: Jan Kara <jack@suse.cz>, pc@manguebit.org, yuezhang.mo@sony.com,
+ cem@kernel.org, almaz.alexandrovich@paragon-software.com,
+ adilger.kernel@dilger.ca, vira@imap.suse.de, linux-cifs@vger.kernel.org,
+ sfrench@samba.org, slava@dubeyko.com, linux-ext4@vger.kernel.org,
+ linkinjeon@kernel.org, sprasad@microsoft.com, frank.li@vivo.com,
+ linux-nfs@vger.kernel.org, ronniesahlberg@gmail.com,
+ glaubitz@physik.fu-berlin.de, jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp,
+ Christian Brauner <brauner@kernel.org>, tytso@mit.edu,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
+ hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
+ sj1557.seo@samsung.com, trondmy@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=220951
+On Wed 14-01-26 09:28:44, Chuck Lever wrote:
+> From: Chuck Lever <chuck.lever@oracle.com>
+> 
+> Enable upper layers such as NFSD to retrieve case sensitivity
+> information from file systems by adding case_insensitive and
+> case_nonpreserving boolean fields to struct file_kattr.
+> 
+> These fields default to false (POSIX semantics: case-sensitive and
+> case-preserving), allowing filesystems to set them only when
+> behavior differs from the default.
+> 
+> Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
+...
+> diff --git a/include/uapi/linux/fs.h b/include/uapi/linux/fs.h
+> index 66ca526cf786..07286d34b48b 100644
+> --- a/include/uapi/linux/fs.h
+> +++ b/include/uapi/linux/fs.h
+> @@ -229,10 +229,20 @@ struct file_attr {
+>  	__u32 fa_nextents;	/* nextents field value (get)   */
+>  	__u32 fa_projid;	/* project identifier (get/set) */
+>  	__u32 fa_cowextsize;	/* CoW extsize field value (get/set) */
+> +	/* VER1 additions: */
+> +	__u32 fa_case_behavior;	/* case sensitivity (get) */
+> +	__u32 fa_reserved;
+>  };
+>  
+>  #define FILE_ATTR_SIZE_VER0 24
+> -#define FILE_ATTR_SIZE_LATEST FILE_ATTR_SIZE_VER0
+> +#define FILE_ATTR_SIZE_VER1 32
+> +#define FILE_ATTR_SIZE_LATEST FILE_ATTR_SIZE_VER1
+> +
+> +/*
+> + * Case sensitivity flags for fa_case_behavior
+> + */
+> +#define FS_CASE_INSENSITIVE	0x00000001	/* case-insensitive lookups */
+> +#define FS_CASE_NONPRESERVING	0x00000002	/* case not preserved */
 
---- Comment #5 from guoxiaolong2008@gmail.com ---
-Hi Chao Yu:
-I have no concerns for it
-Thanks for your support.
+This is a matter of taste so not sure what others think about it but
+file_attr already have fa_xflags field and there is already one flag which
+doesn't directly correspond to on-disk representation (FS_XFLAG_HASATTR) so
+we could also put the two new flags in there... I have hard time imagining
+fa_case_behavior would grow past the two flags you've introduced so u32
+seems a bit wasteful.
 
+								Honza
 -- 
-You may reply to this email to add a comment.
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
