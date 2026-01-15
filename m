@@ -2,118 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65908D2350F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Jan 2026 09:59:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA61DD249B1
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Jan 2026 13:49:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:References:In-Reply-To:To:From:Sender:
+	Subject:In-Reply-To:From:References:To:MIME-Version:Date:Message-ID:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=CLu/s7UPUSDKC1maT4mM7yRslOVAhrb9pqJtKdW/k8o=; b=jM9RaWb9D6qgVLIV5RT/xX1w6C
-	p6Ext6fK4DaVSvjcSmXU3v9mB7cyEYFsdUejAlw9fE9gurJu1A2BV8YAoAMMjGNiFFyCiA+JAPzp0
-	4szRV13ow+d7TGbYQUEC2Z6bp86b36Wu78bfrWohiUTWMK1LC4OvBbDFLW51C0uXAvrg=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=Dvo5zz0JIVvYaHlEngANgwBTjm/9t4BAEJ6isAB33/0=; b=XOa5rcozOIRNDTOKKlNXRUHITk
+	jqy33qvGf5k/fc665bbUojUYx3841wkL5CBJ1dnooyRMSsxTgaQMJWR2tbbPv+ePI7AxQSy+BfWhS
+	xVDZ6R6Cuy/S00+/pu8pHjpjFGLSRrKWxr/vFrPRpzteX2wFEhZaR1ouc5yWDiOllY10=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vgJC9-00060x-Eb;
-	Thu, 15 Jan 2026 08:59:09 +0000
+	id 1vgMn2-0003FI-My;
+	Thu, 15 Jan 2026 12:49:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hirofumi@parknet.co.jp>) id 1vgJC7-00060o-4Y
+ (envelope-from <nzzhao@126.com>) id 1vgMn1-0003FB-Aa
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 15 Jan 2026 08:59:07 +0000
+ Thu, 15 Jan 2026 12:49:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=239oZ275b6smCS74K1tWdjRS0BNLiePy77vuyzqmFog=; b=R/vXRJaG208miDAinrqnXXux3Z
- n8+oG0FxpfGUN/SRwU1+LIrLZWybIxCJtPgfzylX4+cKz1sLF8GXnGlINypRYgArkl9RHoCASK1Zj
- MFb/LaJU7NUTbfjF9SYavp8YGWJAKWCXjf16oejwqQUyfzMP8k36nVDubezQlZKqyvGs=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=5eCVinJm+L7ouQItCXmIzH+u40QbG89UJd41OTXBx9A=; b=E2lHl+4sEfaFPuKMIkLUA3njR6
+ 1Fv2geOyyYC428WXSQRVLKogXd3KCdZLKjW6HsNRjkC8XKX3An998revG9Ehvll5FQwWUlsXApbW9
+ g0XFz1nz1+w+SCI7FwMSQBEKaw6cw0y0NhE88vSXTBZdgWFFnM1GYOSa55TtCpvehenM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=239oZ275b6smCS74K1tWdjRS0BNLiePy77vuyzqmFog=; b=IfsN16Cz/V6m/Kxh9cAEFTTb1D
- w/EJ7u94voXI3egiuwkQRqym/srxJDIcfh/rW0cRt7BBEIHMh1oZh8AdSyYzchk9Si4HaM4UlP3ln
- IyQrCjDLiPHfCDzaxXit2F696MtdAyJsvzkb88y8dt1ZYLD5XtiuiVNxw1vhRUjHzi9Q=;
-Received: from mail.parknet.co.jp ([210.171.160.6])
+ bh=5eCVinJm+L7ouQItCXmIzH+u40QbG89UJd41OTXBx9A=; b=FEb8DN7HPNgJFy4F8cLx9V/ca0
+ 0TJtj1Smlo+Ql77KJYckDSQ2XvXq8OId3qFJlr+Z44SfRqIrts9Ynfi7xZCin2YyR+62RLe/aVB2M
+ Co8tPGXa7AabYNTP+DKbmnNOWPmhyW5gTOfmASZJO1pMqKelqbxOVIEFztsOx1X73SsA=;
+Received: from m16.mail.126.com ([117.135.210.9])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vgJC5-0001Fd-MF for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 15 Jan 2026 08:59:06 +0000
-Received: from ibmpc.myhome.or.jp (server.parknet.ne.jp [210.171.168.39])
- by mail.parknet.co.jp (Postfix) with ESMTPSA id 59948209655C;
- Thu, 15 Jan 2026 17:58:53 +0900 (JST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=parknet.co.jp;
- s=20250114; t=1768467533;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=239oZ275b6smCS74K1tWdjRS0BNLiePy77vuyzqmFog=;
- b=OYfw2Sur1UuFe52+b+QneplE8FQ8rN3ZPZNmHUjXZ8I3EUbVeENQa9S7UE9y2K/+XwV3SQ
- I/ZZv2vblo2O4gCBhhbii9EMgTIhTnJ/l+EBkDsJz7Ar+ySVu32QBZ6Gv6ZPTUT/orvUyF
- 1QfiBPAonvwEk/e0naEnhF3vz9jWm+xYwR6FdzXz0RU8n3PI0yjEuiVMmzDnXYu3FOUwsO
- ju7euX7+j6w8JoZ6Ylar2ikJfzTuIaPaPoZvjemwpemy6GSLCFLAZkIp5MRiF8qr7GeUC3
- Po5ictZNHCSisTuUNKKDZ7KlEQmc0+zpktZuVHakaOIbuZMCSLmk2ou/QrzuiQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=parknet.co.jp;
- s=20250114-ed25519; t=1768467533;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=239oZ275b6smCS74K1tWdjRS0BNLiePy77vuyzqmFog=;
- b=ArK7qpn4FSYfiTqDwLBIMwdc8g0BdjAmYQzNjX9MTC6w813MFWfk5weBlFC8Egh9ZmVWC0
- pvksDNyaiFFxs1Dg==
-Received: from devron.myhome.or.jp (foobar@devron.myhome.or.jp [192.168.0.3])
- by ibmpc.myhome.or.jp (8.18.1/8.18.1/Debian-7) with ESMTPS id
- 60F8wqQB134411
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 15 Jan 2026 17:58:53 +0900
-Received: from devron.myhome.or.jp (foobar@localhost [127.0.0.1])
- by devron.myhome.or.jp (8.18.1/8.18.1/Debian-7) with ESMTPS id 60F8wpYn351446
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 15 Jan 2026 17:58:51 +0900
-Received: (from hirofumi@localhost)
- by devron.myhome.or.jp (8.18.1/8.18.1/Submit) id 60F8wnRr351445;
- Thu, 15 Jan 2026 17:58:49 +0900
-From: OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>
-To: Chuck Lever <cel@kernel.org>
-In-Reply-To: <20260114142900.3945054-3-cel@kernel.org>
-References: <20260114142900.3945054-1-cel@kernel.org>
- <20260114142900.3945054-3-cel@kernel.org>
-Date: Thu, 15 Jan 2026 17:58:49 +0900
-Message-ID: <874ionw8ty.fsf@mail.parknet.co.jp>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ id 1vgMn0-0005rL-Ec for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 15 Jan 2026 12:49:27 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
+ s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
+ Content-Type; bh=5eCVinJm+L7ouQItCXmIzH+u40QbG89UJd41OTXBx9A=;
+ b=VALYQ5KZHkUTQ8R6Wf7LC7HCBFPT6Ah3QlChd36Tf2xnkRxMGajS6iUmpjVyJX
+ 75gXbrt1wgpMoBeV3HcEGOx3nK5LWAOlqYOBtlOdfW3749Igqa8Tgl9Ta5Gy5Ne3
+ xFqn1tq2ukqQsKVeGWlafiNX0qigPY4jvyBBjdf0uIuBc=
+Received: from [IPV6:2409:8a20:4df2:4050:39de:fd86:6396:5263] (unknown [])
+ by gzga-smtp-mtada-g0-3 (Coremail) with SMTP id
+ _____wDnb0c34mhpoW_QBg--.14999S2; 
+ Thu, 15 Jan 2026 20:48:56 +0800 (CST)
+Message-ID: <5e888451-228e-41e5-ada7-a22a61cb84dd@126.com>
+Date: Thu, 15 Jan 2026 20:48:54 +0800
 MIME-Version: 1.0
-X-Spam-Score: -0.1 (/)
+User-Agent: Mozilla Thunderbird
+To: Chao Yu <chao@kernel.org>
+References: <20260112013320.8028-1-chao@kernel.org>
+Content-Language: en-US
+From: Nanzhe Zhao <nzzhao@126.com>
+In-Reply-To: <20260112013320.8028-1-chao@kernel.org>
+X-CM-TRANSID: _____wDnb0c34mhpoW_QBg--.14999S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxAF15Wr1fZw17AryxtFW3Awb_yoWrJFy3pF
+ yUtFy3uF45GryIvFsag3WDZF1S934Utayj9wsag343Jwn8tr1SvF92ga43u3W5KF48Zr1U
+ XF45Ja48Wa1YyFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UG9aPUUUUU=
+X-Originating-IP: [2409:8a20:4df2:4050:39de:fd86:6396:5263]
+X-CM-SenderInfo: xq22xtbr6rjloofrz/xtbBsBk7C2lo4jnULwAA34
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Chuck Lever <cel@kernel.org> writes: > +int
- fat_fileattr_get(struct
- dentry *dentry, struct file_kattr *fa) > +{ > + struct msdos_sb_info *sbi
- = MSDOS_SB(dentry->d_sb); > + > + /* > + * FAT filesystems are case-insensitive
- by default. MSD [...] 
- Content analysis details:   (-0.1 points, 5.0 required)
+ Content preview:  Hi Chao: On 2026/1/12 09:33, Chao Yu via Linux-f2fs-devel
+ wrote: > For consecutive large hole mapping across {d, id, did}nodes , we don't
+ > need to call f2fs_map_blocks() to check one hole block per one time, >
+ [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1vgJC5-0001Fd-MF
-Subject: Re: [f2fs-dev] [PATCH v4 02/16] fat: Implement fileattr_get for
- case sensitivity
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [nzzhao(at)126.com]
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [117.135.210.9 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1vgMn0-0005rL-Ec
+Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid f2fs_map_blocks() for
+ consecutive holes in readpages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,52 +113,139 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jan Kara <jack@suse.cz>, pc@manguebit.org, yuezhang.mo@sony.com,
- cem@kernel.org, almaz.alexandrovich@paragon-software.com,
- adilger.kernel@dilger.ca, linux-cifs@vger.kernel.org, sfrench@samba.org,
- slava@dubeyko.com, linux-ext4@vger.kernel.org, linkinjeon@kernel.org,
- sprasad@microsoft.com, frank.li@vivo.com, linux-nfs@vger.kernel.org,
- ronniesahlberg@gmail.com, glaubitz@physik.fu-berlin.de, jaegeuk@kernel.org,
- Christian Brauner <brauner@kernel.org>, tytso@mit.edu,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
- hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
- sj1557.seo@samsung.com, trondmy@kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Chuck Lever <cel@kernel.org> writes:
+Hi Chao:
 
-> +int fat_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
-> +{
-> +	struct msdos_sb_info *sbi = MSDOS_SB(dentry->d_sb);
-> +
-> +	/*
-> +	 * FAT filesystems are case-insensitive by default. MSDOS
-> +	 * supports a 'nocase' mount option for case-sensitive behavior.
-> +	 *
-> +	 * VFAT long filename entries preserve case. Without VFAT, only
-> +	 * uppercased 8.3 short names are stored.
-> +	 */
-> +	fa->case_insensitive = !sbi->options.nocase;
-> +	fa->case_nonpreserving = !sbi->options.isvfat;
-> +	return 0;
-> +}
-> +EXPORT_SYMBOL_GPL(fat_fileattr_get);
+On 2026/1/12 09:33, Chao Yu via Linux-f2fs-devel wrote:
+> For consecutive large hole mapping across {d,id,did}nodes , we don't
+> need to call f2fs_map_blocks() to check one hole block per one time,
+> instead, we can use map.m_next_pgofs as a hint of next potential valid
+> block, so that we can skip calling f2fs_map_blocks the range of
+> [cur_pgofs + 1, .m_next_pgofs).
+> 
+> 1) regular case
+> 
+> touch /mnt/f2fs/file
+> truncate -s $((1024*1024*1024)) /mnt/f2fs/file
+> time dd if=/mnt/f2fs/file of=/dev/null bs=1M count=1024
+> 
+> Before:
+> real    0m0.706s
+> user    0m0.000s
+> sys     0m0.706s
+> 
+> After:
+> real    0m0.620s
+> user    0m0.008s
+> sys     0m0.611s
+> 
+> 2) large folio case
+> 
+> touch /mnt/f2fs/file
+> truncate -s $((1024*1024*1024)) /mnt/f2fs/file
+> f2fs_io setflags immutable /mnt/f2fs/file
+> sync
+> echo 3 > /proc/sys/vm/drop_caches
+> time dd if=/mnt/f2fs/file of=/dev/null bs=1M count=1024
+> 
+> Before:
+> real    0m0.438s
+> user    0m0.004s
+> sys     0m0.433s
+> 
+> After:
+> real    0m0.368s
+> user    0m0.004s
+> sys     0m0.364s
+> 
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>   fs/f2fs/data.c | 21 +++++++++++++++------
+>   1 file changed, 15 insertions(+), 6 deletions(-)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index a2c4769d0ae1..5b0642cd27ff 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -2176,10 +2176,13 @@ static int f2fs_read_single_page(struct inode *inode, struct folio *folio,
+>   	/*
+>   	 * Map blocks using the previous result first.
+>   	 */
+> -	if ((map->m_flags & F2FS_MAP_MAPPED) &&
+> -			block_in_file > map->m_lblk &&
+> +	if (map->m_flags & F2FS_MAP_MAPPED) {
+> +		if (block_in_file > map->m_lblk &&
+>   			block_in_file < (map->m_lblk + map->m_len))
+> +			goto got_it;
+> +	} else if (block_in_file < *map->m_next_pgofs) {
+>   		goto got_it;
+> +	}
+>   
+>   	/*
+>   	 * Then do more f2fs_map_blocks() calls until we are
+> @@ -2454,7 +2457,7 @@ static int f2fs_read_data_large_folio(struct inode *inode,
+>   	struct bio *bio = NULL;
+>   	sector_t last_block_in_bio = 0;
+>   	struct f2fs_map_blocks map = {0, };
+> -	pgoff_t index, offset;
+> +	pgoff_t index, offset, next_pgofs = 0;
+>   	unsigned max_nr_pages = rac ? readahead_count(rac) :
+>   				folio_nr_pages(folio);
+>   	unsigned nrpages;
+> @@ -2487,16 +2490,21 @@ static int f2fs_read_data_large_folio(struct inode *inode,
+>   		/*
+>   		 * Map blocks using the previous result first.
+>   		 */
+> -		if ((map.m_flags & F2FS_MAP_MAPPED) &&
+> -				index > map.m_lblk &&
+> +		if (map.m_flags & F2FS_MAP_MAPPED) {
+> +			if (index > map.m_lblk &&
+>   				index < (map.m_lblk + map.m_len))
+> +				goto got_it;
+> +		} else if (index < next_pgofs) {
+> +			/* hole case */
+>   			goto got_it;
+> +		}
+>   
+>   		/*
+>   		 * Then do more f2fs_map_blocks() calls until we are
+>   		 * done with this page.
+>   		 */
+>   		memset(&map, 0, sizeof(map));
+> +		map.m_next_pgofs = &next_pgofs;
+>   		map.m_seg_type = NO_CHECK_TYPE;
+>   		map.m_lblk = index;
+>   		map.m_len = max_nr_pages;
+> @@ -2617,6 +2625,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
+>   	pgoff_t nc_cluster_idx = NULL_CLUSTER;
+>   	pgoff_t index;
+>   #endif
+> +	pgoff_t next_pgofs = 0;
+>   	unsigned nr_pages = rac ? readahead_count(rac) : 1;
+>   	struct address_space *mapping = rac ? rac->mapping : folio->mapping;
+>   	unsigned max_nr_pages = nr_pages;
+> @@ -2637,7 +2646,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
+>   	map.m_lblk = 0;
+>   	map.m_len = 0;
+>   	map.m_flags = 0;
+> -	map.m_next_pgofs = NULL;
+> +	map.m_next_pgofs = &next_pgofs;
+>   	map.m_next_extent = NULL;
+>   	map.m_seg_type = NO_CHECK_TYPE;
+>   	map.m_may_create = false;
 
-Hm, if "nocase" option is specified for msdos, it would be the case
-preserving (ignores/breaks the spec though).
+Do we have plans to also support reducing f2fs_map_blocks() calls for 
+consectives holes in logical file postion with dnode have already been
+allocated in buffered large folio read?
+Such as consective NULL_ADDR or NEW_ADDR?
 
-I.e. on msdos mount with "nocase" works like the following
+Thanks,
 
-    $ touch aAa.txT
-    $ ls
-    aAa.txT
-
-Thanks.
--- 
-OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>
 
 
 _______________________________________________
