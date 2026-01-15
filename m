@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B2FAD230AA
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Jan 2026 09:14:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AF19D230ED
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Jan 2026 09:19:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=9NHXLzGbs1TjVkFUyB1px/ce4iO5+pt0a9DgQPoOfCY=; b=CD7zkTLm+s3lII6zFdKkbUrUsa
-	Lj41ohET8P5Uz/7wp7REXi2ZDFSq9PWHXiw4n+k/7sjxLaNO2H/dETUCOCFWdHlHL7qGKcDMLk/7I
-	IGgPpvHP6KEf31jfhwWHbO6Uf8+CmzPBOypdZWD/6Yxsy5YDZKQvdyWTIJ8dSVFm98cU=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=p0DmlszFq625S4COwiVGgUvJiD408KgisTnDlUQwyd4=; b=XwXjTskJ1oYr910ww9aG/TRb1u
+	9OAgEOOUxL4QNowSRVUhPtIUno01BzszfbdwSs4BhAEy/mhqNgQnGenE5z9DK9vmEJRj1DNgRStLT
+	1FkwOK548rIGxbqt6EBNUly7lZNG9VM2kP9glCsffotDXv9PLZMdZcJYAg7NaNLDesR8=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vgIV4-0005ZM-NG;
-	Thu, 15 Jan 2026 08:14:38 +0000
+	id 1vgIZl-0006Te-To;
+	Thu, 15 Jan 2026 08:19:29 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1vgIV3-0005Z7-7t;
- Thu, 15 Jan 2026 08:14:37 +0000
+ (envelope-from <brauner@kernel.org>) id 1vgIZW-0006OW-9b;
+ Thu, 15 Jan 2026 08:19:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FXFHeU8QpH/lQamvGnH1b8chwcMeSz98NW19o+yr6yo=; b=bweIxZzGFQzCx8iS3DjkeKGZcZ
- 1ITHPBngtX2xI5/XKNj3AzWE++6lGOXSwm9688Vp2Lcbz6sbpvu29hGjXWdcYP3jogaFRMjfxYyKi
- 3WDW+52lj2vSyZEN9FzbVGKJ9VuzZPnGnfshiQxsxAACLzVbsko458V6vdVPHUmrEt3o=;
+ bh=ATQ15qLQkFTNybHKUwOcg7v7b4dVAW6yFiPKJqq/Tnc=; b=WqB8tGtmlqrPjW65Z/ykWD4RRZ
+ PZr5Fl3wjmEa+3fWTr3/57OXN2k2qRerkkgBchRRisc7twDRh0sbNKk7yqRfbjax37LrvWby9ZckX
+ JTyrM6fV3YnC6g5XluB2wpk9u5j2bxiF3oNSHAks7r8f/lr0Zr9ZVct0YEsyQ2oTfp9w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -39,44 +39,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FXFHeU8QpH/lQamvGnH1b8chwcMeSz98NW19o+yr6yo=; b=c8HjDiAgrJYpFY2F32IQgXFdQa
- Key3yAT18c7IHs1JG4zwXLT4YmZyKvSA0+lutbg/6cx4YPqecnGEFNXIBlO7U64j79XSdW+/Keh1v
- LrYtvbQ/d1X+tfA8IpFky8NLZXRZYJE5Sz2wr2WA8EHqlwRFfcL0H7EqSTKw4G0Er2dI=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=ATQ15qLQkFTNybHKUwOcg7v7b4dVAW6yFiPKJqq/Tnc=; b=JNp2GMDWr4JZj2F98l4i92ECP5
+ wa9TK7yPj6quv8NcEz3psGLgQ2CA+tENWBFFftb16Q+vAFIAOEFuPEzAl5vtE4/iLoLmZn8dOUvjd
+ 7wWcI8fgqydAqHe0/4hLQWPj/iaXkOjRW+GzM21zf3Urb7ey/dUL8GsLXzxoAXhuZ114=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vgIV2-0006EW-6B; Thu, 15 Jan 2026 08:14:36 +0000
+ id 1vgIZV-0006Vy-Jy; Thu, 15 Jan 2026 08:19:14 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 3DB4B406A8;
- Thu, 15 Jan 2026 08:14:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64986C116D0;
- Thu, 15 Jan 2026 08:14:09 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 75FBB601AF;
+ Thu, 15 Jan 2026 08:19:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 541B5C116D0;
+ Thu, 15 Jan 2026 08:18:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768464870;
- bh=WiSNn2zvCUvnX3icYjakRozNqyZdq45DKgsu3cHWUEo=;
+ s=k20201202; t=1768465142;
+ bh=g8fgxkdEmT3gKXWufE7oV9na7UkVXcbj4Z3BE9lnGFI=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=XnbS2cfpntTwX4GFJAoawDW2AeA5ZSsT+/PONrd75H6dIfGkNvM5vgeSHaOAPv8dM
- FrUnVk8caQ2ZgKDdkW59pGpZdLQn5pXMBsCnewkG8ZRPBAs5NmgswKQgR2jlXOGTLH
- 1XC97DnUwAHpyZvcxc/R/9ANrCDd89hPll0MVVz035TWRgfHi07Ohy3FXm8Oi6cHMd
- K1B5BtZtQ3crjd06l/WXb42A7DNOvPmKTEyhkbAB9zRLk0VcQ62qYkO65llb6ehby+
- 4dGtOQAqLPZ8prbPHH4nyrrHNN5EkPlne7JgZK52gq0fyn0vzFLiAfA69H2k4JHDn4
- iObH+Pt4IvcIg==
-Date: Thu, 15 Jan 2026 09:14:06 +0100
+ b=VjAZtcoyRkWMO1uB5ytW9qEsvR5V7Cs30p4xBsOxbZrUvEisSAE2EAo076KOotF78
+ qEIKjz9ZTs3Sah+mDEl6HKj/6ZFsJhhpdu706ffgp7GsppnNy/6v1rRUieEi0S94hY
+ gC8UiOPABxtZ5SIRdk6TnqsJ46pJFV01GedBAmQ72u+truEug3h3KyekccB7qCl4DP
+ 95uk0iMVEM0+GLeuGt9ROv/NmuQGtvdz+rOC5qiuMik08aNMJAx9GrhYTNr3cCos8t
+ Qo4BNTMVBC3PWI/mIp/yopDVejft/5N8xaatqcyNxvAtf/4oY+yxbkUxuUcKT52lNf
+ EkFY9LJmLUerg==
+Date: Thu, 15 Jan 2026 09:18:41 +0100
 To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <20260115-inspektion-kochbuch-505d8f94829e@brauner>
-References: <cb5d2da6-2090-4639-ad96-138342bba56d@oracle.com>
- <ce700ee20834631eceededc8cd15fc5d00fee28e.camel@kernel.org>
+Message-ID: <20260115-rundgang-leihgabe-12018e93c00c@brauner>
+References: <ce700ee20834631eceededc8cd15fc5d00fee28e.camel@kernel.org>
  <20260113-mondlicht-raven-82fc4eb70e9d@brauner>
  <aWZcoyQLvbJKUxDU@infradead.org>
  <ce418800f06aa61a7f47f0d19394988f87a3da07.camel@kernel.org>
  <aWc3mwBNs8LNFN4W@infradead.org>
  <CAOQ4uxhMjitW_DC9WK9eku51gE1Ft+ENhD=qq3uehwrHO=RByA@mail.gmail.com>
  <aWeUv2UUJ_NdgozS@infradead.org>
- <20260114-klarstellen-blamieren-0b7d40182800@brauner>
- <aWiMaMwI6nYGX9Bq@infradead.org>
+ <c40862cd65a059ad45fa88f5473722ea5c5f70a5.camel@kernel.org>
+ <CAOQ4uxhDwR7dteLaqURX+9CooGM1hA7PL6KnVmSwX11ZdKxZTA@mail.gmail.com>
+ <aWewryHrESHgXGoL@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <aWiMaMwI6nYGX9Bq@infradead.org>
+In-Reply-To: <aWewryHrESHgXGoL@infradead.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -84,9 +84,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jan 14, 2026 at 10:42:48PM -0800, Christoph Hellwig
- wrote: > On Wed, Jan 14, 2026 at 04:20:13PM +0100, Christian Brauner wrote:
- > > > You're still think of it the wrong way. If we do have file [...] 
+ Content preview:  On Wed, Jan 14, 2026 at 07:05:19AM -0800, Christoph Hellwig
+ wrote: > On Wed, Jan 14, 2026 at 03:14:13PM +0100, Amir Goldstein wrote:
+ > > Very well then. > > How about EXPORT_OP_PERSISTENT_HANDLES? > > [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -98,7 +98,7 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vgIV2-0006EW-6B
+X-Headers-End: 1vgIZV-0006Vy-Jy
 Subject: Re: [f2fs-dev] [PATCH 00/24] vfs: require filesystems to explicitly
  opt-in to lease support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -165,47 +165,14 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jan 14, 2026 at 10:42:48PM -0800, Christoph Hellwig wrote:
-> On Wed, Jan 14, 2026 at 04:20:13PM +0100, Christian Brauner wrote:
-> > > You're still think of it the wrong way.  If we do have file systems
-> > > that break the original exportfs semantics we need to fix that, and
-> > > something like a "stable handles" flag will work well for that.  But
-> > > a totally arbitrary "is exportable" flag is total nonsense.
-> > 
-> > File handles can legitimately be conceptualized independently of
-> > exporting a filesystem. If we wanted to tear those concepts apart
-> > implementation wise we could.
-> > 
-> > It is complete nonsense to expect the kernel to support exporting any
-> > arbitrary internal filesystem or to not support file handles at all.
+On Wed, Jan 14, 2026 at 07:05:19AM -0800, Christoph Hellwig wrote:
+> On Wed, Jan 14, 2026 at 03:14:13PM +0100, Amir Goldstein wrote:
+> > Very well then.
+> > How about EXPORT_OP_PERSISTENT_HANDLES?
 > 
-> You are going even further down the path of entirely missing the point
-> (or the two points by now).
+> Sure.
 
-You're arguing for the sake of arguing imho. You're getting exactly what
-we're all saying as evidenced by the last paragraph in your mail: it is
-entirely what this whole thing is about.
-
-> If a file systems meets all technical requirements of being nfsd
-> exportable and the users asks for it, it is not our job to make an
-> arbitrary policy decision to say no.
-
-This is an entirely irrelevant point because we're talking about
-cgroupfs, nsfs, and pidfs. And they don't meet this criteria. cgroupfs
-is a _local resource management filesystem_ why would we ever want to
-support exporting it over the network. It allows to break the local
-delegation model as I've explained. cgroupfs shows _local processes_. So
-a server will see completely nonsensical PID identifiers listed in
-cgroup files and it can fsck around with processes in a remote system.
-Hard NAK. Entirely irrelevant if that filesystem meets the theoretical
-standards.
-
-> If it does not meet the technical requirements it obviously should
-> not be exportable.  And it seems like the spread of file handles
-> beyond nfs exporting created some ambiguity here, which we need to
-> fix.
-
-We are all in agreement here.
+That sounds good to me too.
 
 
 _______________________________________________
