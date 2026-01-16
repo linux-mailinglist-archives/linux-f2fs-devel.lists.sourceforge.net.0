@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AF11D32D3E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Jan 2026 15:46:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51E8ED32D44
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Jan 2026 15:46:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=S6rVAuiaWbmk50MeXZbbJ9uYpmQdbUTA2uamxUlMMwg=; b=bg10Kdl4FyzsSE71f6ET7r2PK5
-	ArJ2v3iDsSIBgFgUJGIlyjosHZoEGKE9oe60tFgdyaJpav/FonPDAQptKnzUSBqzspk7FY51zJ8E8
-	g5mVS6wKxolmnEgv2Pllkta3OhYEbIYtyXrzE7oS4Zu9dvpeowFMac4yKihs5muWlY4c=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=ACrdtfXHeyxN/NPp962dkZ3C/tEomzb9OLtBWem+GTg=; b=ZAIjsRmaTiJvPn5pOXNF9icLmd
+	xSHckV+u2Ck6lWizjMhh8RVtTlDGZsjISfCvnlNb5N/EKwxAaWSkhPk8h/f2lqWacDyhu6bigoNkW
+	HGjJAL/k03w/fR6Nu6z5IpOIaunswVKT8XnxHMJSVF80vgA71cEH7EiSTQEqo6yfuThM=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vgl6A-0001mo-Cm;
-	Fri, 16 Jan 2026 14:46:50 +0000
+	id 1vgl6D-0002oc-20;
+	Fri, 16 Jan 2026 14:46:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <cel@kernel.org>) id 1vgl68-0001mb-MG
+ (envelope-from <cel@kernel.org>) id 1vgl6B-0002oP-JK
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 16 Jan 2026 14:46:48 +0000
+ Fri, 16 Jan 2026 14:46:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M1TRgeT3N7pSGEAsUtdUGeUnZkhJn7qC1MylgtG4RGU=; b=GJxlFTdbmeit39CAh/Kq/cGYnM
- Cwc5K7uxqEmJgjbd7lWfxiIlX4zaVB0Oy8vxpURyZRUToNEDFevEj01onPrwboL6xtUQml/ULJ2CZ
- ZG+2Nj9xyMSdIj9YmtEJsZHtl74R5/AglgPbQBfAttSoB+TI1OEUBMzayTLdg1qMO5AA=;
+ bh=HgUQxCULLuau8zgZ0LV7LZci3A4koTa2uImpMst833Q=; b=J65Z1kh1qvUIZTdYvzwnn9ZTN4
+ 5q6La81CxmX+AhM2ruMfuNvMI/LhFvtiUksAuuI2qPjb6i2t9MP3fRL9WaAlu8+H7ovH3aMmu15U2
+ fU/smLKlnLhxZsaz84hwCSqeT3xbW34c62zv9+4qeEvipkLRXaFfq3OqBpp2TRBZ3LEE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,33 +40,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M1TRgeT3N7pSGEAsUtdUGeUnZkhJn7qC1MylgtG4RGU=; b=Isz26v80xjYGB9LBC0ShXndHgZ
- RuDJtbBNLHPCg4Jrv9K4+ZNJcvJ0Zq31+YrlwW2hKgZSxVtUOKfEtJ/EK5nWCNQ/Fu9JrqET5q+QC
- 4zWdWGz6Jp9EdvjERppTwicpi3SJNaKIEQi2gTkN94V5gV/WTXvvWoXA/peN2eQM/Yr4=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=HgUQxCULLuau8zgZ0LV7LZci3A4koTa2uImpMst833Q=; b=G/PrI15VDaZkrx31CkbC4oXUO4
+ 16HKF9m4RWKk0DLDCFm7+F+C15mu5goYKX9a+MaLKNAB2v/s3QxPn13R5MJjM5vgwkF6uPSnWH5HQ
+ vix89vLES0mHYWBGj2EYcJlXABpgxFcTfDezNIholvPE7RhftQxUvWLa5Tk1DikDLo1A=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vgl68-0002ER-13 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 16 Jan 2026 14:46:48 +0000
+ id 1vgl6A-0002Ef-Tk for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 16 Jan 2026 14:46:51 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id AF05743C08;
+ by tor.source.kernel.org (Postfix) with ESMTP id 5D350601BB;
+ Fri, 16 Jan 2026 14:46:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE203C16AAE;
  Fri, 16 Jan 2026 14:46:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 658B2C19421;
- Fri, 16 Jan 2026 14:46:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768574797;
- bh=tyhvqqIS+ku3U7Hk/wztpIFyA6yZTojJ9ILKjB/tyUU=;
+ s=k20201202; t=1768574800;
+ bh=a4XIY9jP7DHeDPNkP9IdkH0ovCnkdRclS4Bjo7NcH8g=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=g+BrI+6nlKHQZfkg5DDc/BbSQzbF8SNUNZIO/2QyelkLAE8q1wWo8MR88Fk5Hv1HM
- VBlnSa/OG03+z2mLQk7nfajOgsXCkpUNRxCIU9l24DyMDsc9Y/XwgVj7v4Pyj7zaVo
- 4iBrq4wEKDPY3N6ZKzQ1HfdxOnoEoUtjjbfKm+0Uc7KOL70yAYcVaZUtjRzDqy4o6r
- YEVijPjcCHCnMnvH5cPN9jduQWINKJO41WCcbEIhBUy0n+Dg9xLmcnImv462YAcWO1
- 5JeuW5sSA1GYYx6L2XlgTxi0kY6wAFLEVNNDRyfOAy50Pfvvo/CAWgLHZznkm6Uiif
- Vd8HEuVEnFrYQ==
+ b=eT+fSCfj1ONJ1dIX3U7fmwABY2CJrjeydjvyUxh/+krcxfK3DP3hLu7v4lruSEWve
+ tXmbsOxrEMAn7k25tvFhwYAX+ocpVH2Gs6+Vl+uTakkhtGdhm7nAl0Fc5pAdkQVars
+ 4HmgVErySSYlDtf/ih07CUMI4++aEfA/FpAWuJ3B+IyuWq+DyOK5/ENvCEG8BnwgY/
+ GjLPNvNQTJQsbjbb4IPvrLM/KeOXIYaUhq6otMhdrLKmK07KAqlE7/MXneAEpYRofD
+ ZZVlKuq2aJXeSSNxZ0ZndOErH7EULcGRDSu4ex0LnzoIqsuUHX9rt12Z9VPjLfX97H
+ UDyo1lXtRDWVA==
 To: Al Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>,
  Jan Kara <jack@suse.cz>
-Date: Fri, 16 Jan 2026 09:46:06 -0500
-Message-ID: <20260116144616.2098618-8-cel@kernel.org>
+Date: Fri, 16 Jan 2026 09:46:07 -0500
+Message-ID: <20260116144616.2098618-9-cel@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260116144616.2098618-1-cel@kernel.org>
 References: <20260116144616.2098618-1-cel@kernel.org>
@@ -78,11 +78,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chuck Lever <chuck.lever@oracle.com> Report ext4's case
- sensitivity behavior via file_kattr boolean fields. ext4 always preserves
- case at rest. Case sensitivity is a per-directory setting in ext4. If the
- queried inode is a casefolded directory, report case-insensitive; otherwise
- report case-sensitive (standard POSIX behavior). 
+ Content preview: From: Chuck Lever <chuck.lever@oracle.com> Upper layers such
+ as NFSD need to query whether a filesystem is case-sensitive. Populate the
+ case_insensitive and case_preserving fields in xfs_fileattr_get(). XFS always
+ preserves case. XFS is case-s [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,8 +93,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vgl68-0002ER-13
-Subject: [f2fs-dev] [PATCH v5 07/16] ext4: Report case sensitivity in
+X-Headers-End: 1vgl6A-0002Ef-Tk
+Subject: [f2fs-dev] [PATCH v5 08/16] xfs: Report case sensitivity in
  fileattr_get
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -113,46 +112,46 @@ Reply-To: Chuck Lever <cel@kernel.org>
 Cc: pc@manguebit.org, yuezhang.mo@sony.com, cem@kernel.org,
  almaz.alexandrovich@paragon-software.com, adilger.kernel@dilger.ca,
  linux-cifs@vger.kernel.org, sfrench@samba.org, slava@dubeyko.com,
- linux-ext4@vger.kernel.org, linkinjeon@kernel.org, sprasad@microsoft.com,
- frank.li@vivo.com, ronniesahlberg@gmail.com, glaubitz@physik.fu-berlin.de,
- jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp, linux-nfs@vger.kernel.org,
- tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, senozhatsky@chromium.org,
- Chuck Lever <chuck.lever@oracle.com>, hansg@kernel.org, anna@kernel.org,
- linux-fsdevel@vger.kernel.org, sj1557.seo@samsung.com, trondmy@kernel.org
+ "Darrick J. Wong" <djwong@kernel.org>, linux-ext4@vger.kernel.org,
+ linkinjeon@kernel.org, sprasad@microsoft.com, frank.li@vivo.com,
+ ronniesahlberg@gmail.com, glaubitz@physik.fu-berlin.de, jaegeuk@kernel.org,
+ hirofumi@mail.parknet.co.jp, linux-nfs@vger.kernel.org, tytso@mit.edu,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
+ hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
+ sj1557.seo@samsung.com, trondmy@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chuck Lever <chuck.lever@oracle.com>
 
-Report ext4's case sensitivity behavior via file_kattr boolean
-fields. ext4 always preserves case at rest.
+Upper layers such as NFSD need to query whether a filesystem is
+case-sensitive. Populate the case_insensitive and case_preserving
+fields in xfs_fileattr_get(). XFS always preserves case. XFS is
+case-sensitive by default, but supports ASCII case-insensitive
+lookups when formatted with the ASCIICI feature flag.
 
-Case sensitivity is a per-directory setting in ext4. If the queried
-inode is a casefolded directory, report case-insensitive; otherwise
-report case-sensitive (standard POSIX behavior).
-
-Reviewed-by: Jan Kara <jack@suse.cz>
+Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
 Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
 ---
- fs/ext4/ioctl.c | 6 ++++++
+ fs/xfs/xfs_ioctl.c | 6 ++++++
  1 file changed, 6 insertions(+)
 
-diff --git a/fs/ext4/ioctl.c b/fs/ext4/ioctl.c
-index 7ce0fc40aec2..213769d217c3 100644
---- a/fs/ext4/ioctl.c
-+++ b/fs/ext4/ioctl.c
-@@ -996,6 +996,12 @@ int ext4_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
- 	if (ext4_has_feature_project(inode->i_sb))
- 		fa->fsx_projid = from_kprojid(&init_user_ns, ei->i_projid);
+diff --git a/fs/xfs/xfs_ioctl.c b/fs/xfs/xfs_ioctl.c
+index 59eaad774371..e8061fe109e9 100644
+--- a/fs/xfs/xfs_ioctl.c
++++ b/fs/xfs/xfs_ioctl.c
+@@ -516,6 +516,12 @@ xfs_fileattr_get(
+ 	xfs_fill_fsxattr(ip, XFS_DATA_FORK, fa);
+ 	xfs_iunlock(ip, XFS_ILOCK_SHARED);
  
 +	/*
-+	 * ext4 preserves case (the default). If this inode is a
-+	 * casefolded directory, report case-insensitive; otherwise
-+	 * report case-sensitive (standard POSIX behavior).
++	 * XFS preserves case (the default). It is case-sensitive by
++	 * default, but can be formatted with ASCII case-insensitive
++	 * mode enabled.
 +	 */
-+	fa->case_insensitive = IS_CASEFOLDED(inode);
++	fa->case_insensitive = xfs_has_asciici(ip->i_mount);
  	return 0;
  }
  
