@@ -2,102 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5B0AD3AACC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 14:54:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96509D3AACD
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 14:54:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=EIvRX7IQJ1iLeMfEaWEpNn74D1Hbx5zdAIUxyqMmNnA=; b=bH4wOzbxFvqSvucnXeP8hFPFBa
-	k0T5A1trT5ZmQa8g/zdQKsPWEacYUuiMcrIMXLA7TzMca1vFFlnape6/YzZL2V2oTDo6zdb29Qomu
-	W+6K7D26MFtEzKwvL2rineHJEZFFQ2+s9s5X3A7gm5mtvoLNi+B3UlzWJzHBy+Zw6vjI=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=GHIXS/TvW/hHN+WbDIss20glHIPDlmZCxK5qtsrFQTs=; b=MfffZZBzlQxObqBVXHYbjC0D4a
+	E/AVep5ht1wKY4xKh/qZT0e+u52JS21M07Qn2TVPtfRYadNqHtyuc1kAgh5h5OBaHvChvSFOytA8z
+	RWhZmYtuDN92XtCjvSs+A5yLy4sHQB3ZtIeYavZKOpSeczlpqzz6Ay8YleWVLXHg/alo=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vhpiC-0004cB-CW;
-	Mon, 19 Jan 2026 13:54:32 +0000
+	id 1vhpiD-0001ZJ-8U;
+	Mon, 19 Jan 2026 13:54:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vhpiB-0004bs-GE
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vhpiB-0001Yy-Nd
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 13:54:31 +0000
+ Mon, 19 Jan 2026 13:54:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tt6dcvloWEjwPsvdVN7w1qbDxgEt+M9s98nrZsV4U5I=; b=hp+qmfXWIAb9/dS6x5bHBFZ32g
- bZMd1I3YSfWiYUNw163A35hB4EMJ11Pf/qywpU883F89NrQVt8n8QLxAlKY50arZizqds1SHSkKoc
- ebtq2zSzMlDLlvUJYPO+mdxMWIyQJRh8EK/au0+HEP5JeQj8UoRFRDT22NDtkzgIzWp4=;
+ bh=z45lru4bLkLyn/z2yQCayeYuf/I6u5k0IVUVR8DrRvk=; b=jCvVafN+wav0STedQCl1VOakIE
+ 8zHQTUhOzava+NcYTQr8a7IyZAYd6XYC04Fr7nnAd2OjqA+eVCY6c+g3SWfzmFPa6nEjSmhEId8MD
+ 7yf1MEGpYrIn0r0WYuXedDWLauNzR+L1/aegMmG/PJIu9kxfHb9b5z8u0cLWukovy8Bw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tt6dcvloWEjwPsvdVN7w1qbDxgEt+M9s98nrZsV4U5I=; b=ibV9VQU402AKZ/buOeFZFd2X+j
- MoAvUMWYKpMW1b9jzEHCRQglFZ8ewd1KzQwb8wROo17HFuLenhBFJV8KmAYZqHz/1UuqmiycII7So
- e2Q2bMtnUatBmhfZJbLPsjqGxFU44PHedIoSur7VPT7DcWamoQNhxmRF1FCZOMcC0Tus=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=z45lru4bLkLyn/z2yQCayeYuf/I6u5k0IVUVR8DrRvk=; b=S/aJqU2wAPrgHb8qB6YTh2Wb5V
+ 99NRL+WF4anmjCId+Zh/8Diz62oJeS/AjynHljNpX8UUt4mtb4kNI3bZCEzYu3ki2YuW+2C4moyu4
+ X3Mi09A6aFcdvFfn1piKnDdtosduZsFV++7eO+/qwMJbYox4aV3+nOgGnati/syzYIRU=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vhpiA-0005rG-NY for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 13:54:31 +0000
+ id 1vhpiC-0005rT-1Z for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jan 2026 13:54:32 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 0369D60140
- for <linux-f2fs-devel@lists.sourceforge.net>;
+ by sea.source.kernel.org (Postfix) with ESMTP id 19135444FA;
+ Mon, 19 Jan 2026 13:54:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBA4DC116C6;
  Mon, 19 Jan 2026 13:54:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD551C116C6;
- Mon, 19 Jan 2026 13:54:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768830859;
- bh=kIiV1cpOSAVYFXN98zr3kJCPzJ94ghSMEoN307bP05s=;
+ s=k20201202; t=1768830861;
+ bh=pgmLHFyZNQlKmAjQhScPRJvri3LPzgKN4WS9zj4fs1g=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=rvSzXPCPcYmCF8tm+y+ffFj+fojra7yqw+SpL1IjOcCtQdgZ0MqKIczvib6rPDJbs
- QHFkiZFNL6sBKm2RWvDtR3tCWJvNZ1LHjsEd8Rx0xJlcQwaqyxDRUkI/eFWwojYnVX
- PdBdNiscO9arhl8tMmYEgJ1d/qoneEtXNgciZnzak6jD84dW9i+scteV7AHbwC8hJ6
- DAjdrqB1UneqLPPKjeRoxks2N+ZCFEev3A2xECsUiiwvOewoiINWqZ7Z7uoU6YgT1V
- SLSXLXEUf9H1aryxrdFdjtFod+mzqNfoL4YVJHb8urArAJ99ZVOF4mokdsUatAn+S2
- tbWnMN47ZRjIA==
+ b=nUDaEtc2kFVPAHXZNY5tOHzSbZVNuTevoqPghmmWzFTyc511MPYtj/bFrDyn3Te3e
+ 8pUkJan4WPzX8l4O2+Ms81Qj4aVUhDh8spSe0PAlLGTU5UDYBiDGiQUcnZ6Yuj6ieh
+ OIeJaoSL7OvZglX+2TGrQKk16rNkWJSIbcep5wf7wdmc5EKaVYCIRrMrZRdaFSMS0s
+ QNkmjlxDvHHyoLGgZuu2dvujeyDa9p+hHLGr6ylMhypE5iOeRNJEV8gJiVtiZ9wV81
+ dr5i18769kfCEd0jm88tibgi6gcvrvYZuWcACg94MNG+bSgmKIU1G+uxjLEeUIX5Fb
+ BG1Er0Cs6S+2Q==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- B5EE53A54A38; Mon, 19 Jan 2026 13:50:50 +0000 (UTC)
+ F306B3A54A38; Mon, 19 Jan 2026 13:50:51 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <176883064952.1419958.10222160142034612724.git-patchwork-notify@kernel.org>
-Date: Mon, 19 Jan 2026 13:50:49 +0000
-References: <20260112074917.40107-1-chao@kernel.org>
-In-Reply-To: <20260112074917.40107-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+Message-Id: <176883065077.1419958.17121432983363983595.git-patchwork-notify@kernel.org>
+Date: Mon, 19 Jan 2026 13:50:50 +0000
+References: <20260109144617.3282553-2-monty_pavel@sina.com>
+In-Reply-To: <20260109144617.3282553-2-monty_pavel@sina.com>
+To: Yongpeng Yang <monty_pavel@sina.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 12 Jan 2026 15:49:15 +0800 you
- wrote: > Add node footer sanity check during node folio's writeback, if sanity
- > check fails, let's shutdown filesystem to avoid looping to redirty > and
- writeba [...] 
+ Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 9 Jan 2026 22:46:18 +0800 you wrote:
+ > From: Yongpeng Yang <yangyongpeng@xiaomi.com> > > In the second call to
+ f2fs_map_blocks within f2fs_read_data_large_folio, > map.m_len exceeds the
+ logica [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vhpiA-0005rG-NY
-Subject: Re: [f2fs-dev] [PATCH v5 1/3] f2fs: fix to do sanity check on node
- footer in __write_node_folio()
+X-Headers-End: 1vhpiC-0005rT-1Z
+Subject: Re: [f2fs-dev] [PATCH 1/1] f2fs: avoid unnecessary block mapping
+ lookups in f2fs_read_data_large_folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,7 +111,7 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+Cc: jaegeuk@kernel.org, yangyongpeng@xiaomi.com,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -120,29 +119,23 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This series was applied to jaegeuk/f2fs.git (dev)
+This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon, 12 Jan 2026 15:49:15 +0800 you wrote:
-> Add node footer sanity check during node folio's writeback, if sanity
-> check fails, let's shutdown filesystem to avoid looping to redirty
-> and writeback in .writepages.
+On Fri,  9 Jan 2026 22:46:18 +0800 you wrote:
+> From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 > 
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
-> v5:
-> - split original [patch 1/2] to two, in this patch, just use
-> sanity_check_node_footer() to do sanity check during writeback.
->  fs/f2fs/node.c | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
+> In the second call to f2fs_map_blocks within f2fs_read_data_large_folio,
+> map.m_len exceeds the logical address space to be read. This patch
+> ensures map.m_len does not exceed the required address space.
+> 
+> Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
+> 
+> [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v5,1/3] f2fs: fix to do sanity check on node footer in __write_node_folio()
-    https://git.kernel.org/jaegeuk/f2fs/c/0a736109c9d2
-  - [f2fs-dev,v5,2/3] f2fs: fix to do sanity check on node footer in {read, write}_end_io
-    (no matching commit)
-  - [f2fs-dev,v5,3/3] f2fs: detect more inconsistent cases in sanity_check_node_footer()
-    https://git.kernel.org/jaegeuk/f2fs/c/93ffb6c28ff1
+  - [f2fs-dev,1/1] f2fs: avoid unnecessary block mapping lookups in f2fs_read_data_large_folio
+    https://git.kernel.org/jaegeuk/f2fs/c/540d34c18272
 
 You are awesome, thank you!
 -- 
