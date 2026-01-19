@@ -2,150 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99B32D3A8C7
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 13:30:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FE3BD3ACAF
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 15:47:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:Date:To:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=kZthAIordvbc497cKyr7oQdbmiXWV/1x46yRMqM7SVo=; b=ODxfVPW6bPQ8JkeLyfN2sfwBk4
-	rGs6gDJ0FSPEpF06cBuQqJRf6LiBl8TivWyUek8NPM7LskEw9aXStbUty+kB6KYcTIxpHnlaEaDCN
-	hep5AWRlj8gnrIWZMFU29ealGcUr3Agsk1WDq4AqBOuHcix14bxZja7ya/TS7yUqI6hA=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=T7NDOoUcepHwrhspvUBN8lehBZ79D3Hmky+v7TKAkIs=; b=BSYOSZ7xJxz6P28VafjuyXa+1A
+	16j16fRAYciEyHHEY9UzJtPyahmfXIx8njMDN+DJjxHkn7TL++jNYY6iMg6YEKtPiNziz4bmiagSr
+	09EjHg1sqaHnJUvZgF0kJAIBTXTWo1Qd6B5Z9NPsFUWayk/g44PR9YdR37PjWrpTmayk=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vhoOm-0007ua-KY;
-	Mon, 19 Jan 2026 12:30:24 +0000
+	id 1vhqWw-00045y-GT;
+	Mon, 19 Jan 2026 14:46:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vhoOk-0007uL-Ty;
- Mon, 19 Jan 2026 12:30:22 +0000
+ (envelope-from <chao@kernel.org>) id 1vhqWv-00045p-3A
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jan 2026 14:46:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iM8/6KD/scVJfAznQBX3eGHN5G3zWCS+JYv3WK02pDQ=; b=XXhofdbc9u3F8xqUo4Xa+6qC+n
- vLT6Fakg+ccmWZveFZ7ZGAeeHctvLFjg2s6IiJAdRYd8kcARzH493BKtlCrTEKyJtKAha0kxiUEaJ
- gLjeGAHzrHhBsWFwoVo/aT+1mU/E77BED9FmxZNV4inz2f1+Ql07UTIpXgaPTyUz9TDY=;
+ bh=iD+hcZdggzL25y3HrNPg7R0i0js2N6/jL4sywdHPXGE=; b=b/KYKrWzen2oG31pN9JP/SDyXA
+ z1KnmnHtrTBW3tOxpQgNXiu0yXxgxP2//0TS+tJa/ncvvjCL3eDfLrxtBrRPRm2privDtzsiA/HRE
+ vY+mEY4zA7avWHWeUjBlwIbgQObxwLdKe+67KEYvizZZRX8j2xVI86e2vv3od+gKie7M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=iM8/6KD/scVJfAznQBX3eGHN5G3zWCS+JYv3WK02pDQ=; b=KjkTel5yVWA5n4EbqkVF6aWLNt
- mDOCM3o11lw7+72mWiK1x+K2ErWNGdii24oEW2RjrywLq7KI7O2OjNsWWZ1pokRQBVmuFZOPILhLy
- uYtpyeSfYJllNQaRICm9bsu0cB8tvHh3i7H9nOxq/NVZqhCHRqPG5PcCY3cCAKZ2CRcA=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=iD+hcZdggzL25y3HrNPg7R0i0js2N6/jL4sywdHPXGE=; b=e
+ FFjU+nVXGDhbvky0UYXroc7rjZBB4Va9TrBVXEk1V70O0CLOdkuA9ZjIsL5kewaTf5v4Ww1MunwyL
+ Jp1cjH5FR9NdYy2/jy5KmxWiEDxZAe6wpHOiF67h7jYF0CIJ0JJrmX0JSPckbejcCgBV7gmYBLKuN
+ qqB+ZN+O9fijFq/0=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vhoOk-0002A0-9M; Mon, 19 Jan 2026 12:30:22 +0000
+ id 1vhqWu-0000EM-Fz for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jan 2026 14:46:57 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 4EE4E60166;
- Mon, 19 Jan 2026 12:30:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CDFBBC116C6;
- Mon, 19 Jan 2026 12:30:04 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id BEA3860127
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 19 Jan 2026 14:46:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82ECAC116C6;
+ Mon, 19 Jan 2026 14:46:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768825811;
- bh=RtY/9HsvsbQ43gxyokWK1eA4XLPwg28gpyJ6yeklrHA=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=pp+0oHTy4cEhiZOObpsf2aYf1ExFvc8XLitDob6luVYaxmtTLIkENwaClVxplN4qA
- yh8iZqlkWyxe5krLs80mgdeLygmdXRb4e4p0sdPzzthaPgVukqNHkIIumJhMsZ0JNU
- VrluA2lM6pwVcquf6xKUFaaTp9RiTax+p82P9xJXDSychteaqHvvoSIfbIhkE+FCHG
- oj70jwgAubWNpL0YmUijpecHU0kuqRhBxYP87tWrTzg9hJ83T4B+Wblk0Usht1yD8T
- ZJXtsK8R3lHJSXlrbZQlUzIth36pN+jQcyTm/koQCbCCC53raFMHDKC/EoJNBCHIh5
- SNIGKhT/ql1Kw==
-Message-ID: <9fdf7a8c04861306b453a78233f4bd6004c465f4.camel@kernel.org>
-To: NeilBrown <neil@brown.name>, Christoph Hellwig <hch@infradead.org>
-Date: Mon, 19 Jan 2026 07:30:03 -0500
-In-Reply-To: <176880736225.16766.4203157325432990313@noble.neil.brown.name>
-References: <20260115-exportfs-nfsd-v1-0-8e80160e3c0c@kernel.org>
- , <CAOQ4uxjOJMwv_hRVTn3tJHDLMQHbeaCGsdLupiZYcwm7M2rm3g@mail.gmail.com>
- , <9c99197dde2eafa55a1b55dce2f0d4d02c77340a.camel@kernel.org>
- , <176877859306.16766.15009835437490907207@noble.neil.brown.name>
- , <aW3SAKIr_QsnEE5Q@infradead.org>
- <176880736225.16766.4203157325432990313@noble.neil.brown.name>
-Autocrypt: addr=jlayton@kernel.org; prefer-encrypt=mutual;
- keydata=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
- QZIQXVeAA+smfTT0tDrisj1U5x6ZB9b3nBg65kc=
-User-Agent: Evolution 3.58.2 (3.58.2-1.fc43) 
+ s=k20201202; t=1768834010;
+ bh=ukHCNUzs9mUD12QXntDw9IBqfK1oJXVfvPn00ZnNKhs=;
+ h=From:To:Cc:Subject:Date:From;
+ b=pBhOLHsn1mw28omOgidlAevjbgs7mOmlvFsPOgJ622DsWY9UYruUaVMeF7iymbyME
+ Dxd2iOfPajMfkzV92D5OlO01biVrnGaOXLyZJ03uMYwZ9fqmoybTI4F1azlouxgdoM
+ Io8k66ZzzvHMaqDWdmHAE/pHBRy4ojLBKJ35y06Asla7MG0fyHvIpWRWXPGPnWPXbd
+ 9mquN2KLRilH5Rq61UhdaUt63GTBM8lJC8IlCRz1pXAS/V8shRgy1v4LRlyURbs2T1
+ iksL1/W78RMgq+k0mr6xhGL8qiRGeH+wS0FX38sRM+I/MrhLg9fzfEnLdLo5LSRgYx
+ B7hvKw6PkmBfw==
+To: jaegeuk@kernel.org
+Date: Mon, 19 Jan 2026 21:32:29 +0800
+Message-Id: <20260119133230.16481-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -154,9 +76,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, 2026-01-19 at 18:22 +1100, NeilBrown wrote: > On Mon,
- 19 Jan 2026, Christoph Hellwig wrote: > > On Mon, Jan 19, 2026 at 10:23:13AM
- +1100, NeilBrown wrote: > > > > This was Chuck's suggested na [...] 
+ Content preview:  This patch introduces sbi->nr_pages[F2FS_SKIPPED_WRITE] to
+ record any skipped write during data flush in f2fs_enable_checkpoint(). So
+ in the loop of data flush, if there is any skipped write in previous flush,
+ let's retry sync_inode_sb(), otherwise,
+ all dirty data written before f2fs_enable_checkpoint()
+ should have been persisted [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -168,9 +93,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vhoOk-0002A0-9M
-Subject: Re: [f2fs-dev] [PATCH 00/29] fs: require filesystems to explicitly
- opt-in to nfsd export support
+X-Headers-End: 1vhqWu-0000EM-Fz
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: check skipped write in
+ f2fs_enable_checkpoint()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -182,139 +107,149 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jeff Layton via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jeff Layton <jlayton@kernel.org>
-Cc: Martin Brandenburg <martin@omnibond.com>,
- jfs-discussion@lists.sourceforge.net, Jan Kara <jack@suse.cz>,
- Paulo Alcantara <pc@manguebit.org>, Alex Markuze <amarkuze@redhat.com>,
- Sandeep Dhavale <dhavale@google.com>, linux-btrfs@vger.kernel.org,
- Carlos Maiolino <cem@kernel.org>, Amir Goldstein <amir73il@gmail.com>,
- linux-unionfs@vger.kernel.org,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
- Chunhai Guo <guochunhai@vivo.com>, Ronnie Sahlberg <ronniesahlberg@gmail.com>,
- linux-mtd@lists.infradead.org, Mike Marshall <hubcap@omnibond.com>,
- linux-xfs@vger.kernel.org, linux-nilfs@vger.kernel.org,
- Yue Hu <zbestahu@gmail.com>, Miklos Szeredi <miklos@szeredi.hu>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- Hugh Dickins <hughd@google.com>, Dai Ngo <Dai.Ngo@oracle.com>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>,
- Viacheslav Dubeyko <slava@dubeyko.com>, Ilya Dryomov <idryomov@gmail.com>,
- linux-ext4@vger.kernel.org, Salah Triki <salah.triki@gmail.com>,
- linux-mm@kvack.org, devel@lists.orangefs.org,
- Shyam Prasad N <sprasad@microsoft.com>,
- Olga Kornievskaia <okorniev@redhat.com>, linux-cifs@vger.kernel.org,
- Dave Kleikamp <shaggy@kernel.org>, linux-nfs@vger.kernel.org,
- Tom Talpey <tom@talpey.com>, ocfs2-devel@lists.linux.dev,
- Bharath SM <bharathsm@microsoft.com>, David Sterba <dsterba@suse.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Baolin Wang <baolin.wang@linux.alibaba.com>,
- Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Gao Xiang <xiang@kernel.org>,
- OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
- Andreas Gruenbacher <agruenba@redhat.com>, gfs2@lists.linux.dev,
- Christian Brauner <brauner@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
- Luis de Bethencourt <luisbg@kernel.org>,
- Joseph Qi <joseph.qi@linux.alibaba.com>, linux-erofs@lists.ozlabs.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Steve French <sfrench@samba.org>, Chuck Lever <chuck.lever@oracle.com>,
- Hongbo Li <lihongbo22@huawei.com>, Anna Schumaker <anna@kernel.org>,
- Jan Kara <jack@suse.com>, linux-fsdevel@vger.kernel.org,
- Phillip Lougher <phillip@squashfs.org.uk>,
- Andrew Morton <akpm@linux-foundation.org>, ntfs3@lists.linux.dev,
- David Woodhouse <dwmw2@infradead.org>, Trond Myklebust <trondmy@kernel.org>,
- Joel Becker <jlbec@evilplan.org>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, 2026-01-19 at 18:22 +1100, NeilBrown wrote:
-> On Mon, 19 Jan 2026, Christoph Hellwig wrote:
-> > On Mon, Jan 19, 2026 at 10:23:13AM +1100, NeilBrown wrote:
-> > > > This was Chuck's suggested name. His point was that STABLE means that
-> > > > the FH's don't change during the lifetime of the file.
-> > > > 
-> > > > I don't much care about the flag name, so if everyone likes PERSISTENT
-> > > > better I'll roll with that.
-> > > 
-> > > I don't like PERSISTENT.
-> > > I'd rather call a spade a spade.
-> > > 
-> > >   EXPORT_OP_SUPPORTS_NFS_EXPORT
-> > > or
-> > >   EXPORT_OP_NOT_NFS_COMPATIBLE
-> > > 
-> > > The issue here is NFS export and indirection doesn't bring any benefits.
-> > 
-> > No, it absolutely is not.  And the whole concept of calling something
-> > after the initial or main use is a recipe for a mess.
-> 
-> We are calling it for it's only use.  If there was ever another use, we
-> could change the name if that made sense.  It is not a public name, it
-> is easy to change.
-> 
-> > 
-> > Pick a name that conveys what the flag is about, and document those
-> > semantics well.  This flag is about the fact that for a given file,
-> > as long as that file exists in the file system the handle is stable.
-> > Both stable and persistent are suitable for that, nfs is everything
-> > but.
-> 
-> My understanding is that kernfs would not get the flag.
-> kernfs filehandles do not change as long as the file exist.
-> But this is not sufficient for the files to be usefully exported.
-> 
-> I suspect kernfs does re-use filehandles relatively soon after the
-> file/object has been destroyed.  Maybe that is the real problem here:
-> filehandle reuse, not filehandle stability.
-> 
-> Jeff: could you please give details (and preserve them in future cover
-> letters) of which filesystems are known to have problems and what
-> exactly those problems are?
-> 
+This patch introduces sbi->nr_pages[F2FS_SKIPPED_WRITE] to record any
+skipped write during data flush in f2fs_enable_checkpoint().
 
-The only one I'm aware of at the moment is cgroupfs. sb->s_export_op
-gets populated on that fs, so it's exportable via nfsd.
+So in the loop of data flush, if there is any skipped write in previous
+flush, let's retry sync_inode_sb(), otherwise, all dirty data written
+before f2fs_enable_checkpoint() should have been persisted, then break
+the retry loop.
 
-Its fs does not show up under the v4 pseudoroot, but you can mount
-/sys/fs/cgroup with v3 if it's specifically exported. Directories seem
-to work properly (I can ls and cd around in there), but the files all
-come back empty when read. I didn't play around with trying to write to
-any of them.
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+Changelog:
+- code is based on 'Revert "f2fs: add timeout in f2fs_enable_checkpoint()"'
+ fs/f2fs/data.c  | 12 ++++++++++++
+ fs/f2fs/f2fs.h  |  2 ++
+ fs/f2fs/super.c | 37 +++++++++++++++++++++++++++++++++----
+ 3 files changed, 47 insertions(+), 4 deletions(-)
 
-I didn't do a lot of investigation here, since I didn't actually expect
-it to work properly.
-
-> > 
-> > Remember nfs also support volatile file handles, and other applications
-> > might rely on this (I know of quite a few user space applications that
-> > do, but they are kinda hardwired to xfs anyway).
-> 
-> The NFS protocol supports volatile file handles.  knfsd does not.
-> So maybe
->   EXPORT_OP_NOT_NFSD_COMPATIBLE
-> might be better.  or EXPORT_OP_NOT_LINUX_NFSD_COMPATIBLE.
-> (I prefer opt-out rather than opt-in because nfsd export was the
-> original purpose of export_operations, but it isn't something
-> I would fight for)
-> 
-
-The whole point of this is to make nfsd export an opt-in in. Exporting
-via NFS is something that filesystem developers need to consider
-carefully.
-
-cgroupfs is not that big a worry. My bigger concern is new filesystems
-being added that do add this for local access and become exportable
-without vetting that they will actually work correctly (well, that and
-FUSE exportability, which is a bigger can of worms).
-
-There is another approach we could consider: We could move the
-export_operations that are needed for local filehandle access into a
-new struct filehandle_operations or something. It does mean adding an
-extra pointer to the super_block for the new operations vector, but it
-might be more intuitive.
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 5b4832956196..00108d5881aa 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -3500,6 +3500,15 @@ static inline void account_writeback(struct inode *inode, bool inc)
+ 	f2fs_up_read(&F2FS_I(inode)->i_sem);
+ }
+ 
++static inline void update_skipped_write(struct f2fs_sb_info *sbi,
++						struct writeback_control *wbc)
++{
++	long skipped = wbc->pages_skipped;
++
++	if (skipped && is_sbi_flag_set(sbi, SBI_ENABLE_CHECKPOINT))
++		atomic_add(skipped, &sbi->nr_pages[F2FS_SKIPPED_WRITE]);
++}
++
+ static int __f2fs_write_data_pages(struct address_space *mapping,
+ 						struct writeback_control *wbc,
+ 						enum iostat_type io_type)
+@@ -3564,10 +3573,13 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
+ 	 */
+ 
+ 	f2fs_remove_dirty_inode(inode);
++
++	update_skipped_write(sbi, wbc);
+ 	return ret;
+ 
+ skip_write:
+ 	wbc->pages_skipped += get_dirty_pages(inode);
++	update_skipped_write(sbi, wbc);
+ 	trace_f2fs_writepages(mapping->host, wbc, DATA);
+ 	return 0;
+ }
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 035239758e33..52cec6b3ecf0 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1238,6 +1238,7 @@ enum count_type {
+ 	F2FS_RD_META,
+ 	F2FS_DIO_WRITE,
+ 	F2FS_DIO_READ,
++	F2FS_SKIPPED_WRITE,	/* skip or fail during f2fs_enable_checkpoint() */
+ 	NR_COUNT_TYPE,
+ };
+ 
+@@ -1476,6 +1477,7 @@ enum {
+ 	SBI_IS_RESIZEFS,			/* resizefs is in process */
+ 	SBI_IS_FREEZING,			/* freezefs is in process */
+ 	SBI_IS_WRITABLE,			/* remove ro mountoption transiently */
++	SBI_ENABLE_CHECKPOINT,			/* indicate it's during f2fs_enable_checkpoint() */
+ 	MAX_SBI_FLAG,
+ };
+ 
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 97c2264ec7fe..0afe9f829058 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2690,6 +2690,7 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
+ 	long long start, writeback, end;
+ 	int ret;
+ 	struct f2fs_lock_context lc;
++	long long skipped_write, dirty_data;
+ 
+ 	f2fs_info(sbi, "f2fs_enable_checkpoint() starts, meta: %lld, node: %lld, data: %lld",
+ 					get_pages(sbi, F2FS_DIRTY_META),
+@@ -2698,17 +2699,45 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
+ 
+ 	start = ktime_get();
+ 
++	set_sbi_flag(sbi, SBI_ENABLE_CHECKPOINT);
++
+ 	/* we should flush all the data to keep data consistency */
+ 	do {
++		skipped_write = get_pages(sbi, F2FS_SKIPPED_WRITE);
++		dirty_data = get_pages(sbi, F2FS_DIRTY_DATA);
++
+ 		sync_inodes_sb(sbi->sb);
+ 		f2fs_io_schedule_timeout(DEFAULT_SCHEDULE_TIMEOUT);
+-	} while (get_pages(sbi, F2FS_DIRTY_DATA) && retry--);
++
++		f2fs_info(sbi, "sync_inode_sb done, dirty_data: %lld, %lld, "
++				"skipped write: %lld, %lld, retry: %d",
++				get_pages(sbi, F2FS_DIRTY_DATA),
++				dirty_data,
++				get_pages(sbi, F2FS_SKIPPED_WRITE),
++				skipped_write, retry);
++
++		/*
++		 * sync_inodes_sb() has retry logic, so let's check dirty_data
++		 * in prior to skipped_write in case there is no dirty data.
++		 */
++		if (!get_pages(sbi, F2FS_DIRTY_DATA))
++			break;
++		if (get_pages(sbi, F2FS_SKIPPED_WRITE) == skipped_write)
++			break;
++	} while (retry--);
++
++	clear_sbi_flag(sbi, SBI_ENABLE_CHECKPOINT);
+ 
+ 	writeback = ktime_get();
+ 
+-	if (unlikely(get_pages(sbi, F2FS_DIRTY_DATA)))
+-		f2fs_warn(sbi, "checkpoint=enable has some unwritten data: %lld",
+-					get_pages(sbi, F2FS_DIRTY_DATA));
++	if (unlikely(get_pages(sbi, F2FS_DIRTY_DATA) ||
++			get_pages(sbi, F2FS_SKIPPED_WRITE)))
++		f2fs_warn(sbi, "checkpoint=enable unwritten data: %lld, skipped data: %lld, retry: %d",
++				get_pages(sbi, F2FS_DIRTY_DATA),
++				get_pages(sbi, F2FS_SKIPPED_WRITE), retry);
++
++	if (get_pages(sbi, F2FS_SKIPPED_WRITE))
++		atomic_set(&sbi->nr_pages[F2FS_SKIPPED_WRITE], 0);
+ 
+ 	f2fs_down_write_trace(&sbi->gc_lock, &lc);
+ 	f2fs_dirty_to_prefree(sbi);
 -- 
-Jeff Layton <jlayton@kernel.org>
+2.40.1
+
 
 
 _______________________________________________
