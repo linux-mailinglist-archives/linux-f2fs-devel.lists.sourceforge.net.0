@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AA87D3B0D2
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 17:28:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89596D3B0D4
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 17:29:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=th1CF3QCEZAJUtjb6watS5yWoiXjCvBZRnVd6ic7zvA=; b=e2VJz9LSw+Usqs9s6hSbCJobVC
-	eRxQGZ9fKPFR/zhg7q+uZG5XecJDd2sfBXBgRyJteMdBq6p8B6b9Eu7TvigA0137h5py1OEVKnFL3
-	ofarmeFE6qxXuGlnc+spHbnntMn5UObg/RlByLTfDhUDNYDS+Yi7VZ29tjmjxLrp1kfw=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=UqhgxB4RWsAeySRBhYTYIkk/kYPLiEISvpCAIG4nENI=; b=FlMDhPfa8pJ3Bs5egC8SlvnOiO
+	LdMrvDF2y6grwgHCV83G3KNbCyAMHk6cW4sKGKAQDbU8yVjHTOYK0pKjG/N7b0+p/tyRWyvNHuNWC
+	KZGA/TKcq/BCX7ySDi9k7zWT2vgSzqFVUdL0ctELuMB6MhzqH/xq6fz6v8D1/8hQVXWI=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vhs7Y-0006Uo-HR;
-	Mon, 19 Jan 2026 16:28:52 +0000
+	id 1vhs7e-000520-FQ;
+	Mon, 19 Jan 2026 16:28:59 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vhs7W-0006UJ-Ac;
- Mon, 19 Jan 2026 16:28:50 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vhs7d-00051c-4R;
+ Mon, 19 Jan 2026 16:28:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=obBvXeIihwcnYNwIfK7fO8NOfGknt4GVIgzKgx3OkiQ=; b=Q1F8aRxRyvWhwl7pUSpypEkB4Z
- hA0bH3yBVLOxshQ54SKo6IqfgZEcZtijPXBPKwEMFMHYWyOwL9WBgq1SBngbqyc62YKiymcRzKuXc
- XswRnI6T3NY92ngX6x4aT+OxFNK+8RUV2ll3wjD1ABhTpYHD2g1iIRBr8Wxw71U+SOTQ=;
+ bh=hIUiCiYvj4+PQCXeGc2dRPv9jWC04oKwYnr+8nkAWKs=; b=eDdf44Qk/gF1eFHlZqf+Ai27wC
+ 8F4zlPypyxGLc3R2oV4xrZAwdzMNWpp7CU4ETtg9mFebqQQ7YVLgKxhbRQTKl8ay5HJq0XixW4o9q
+ 0qBF8s9KY9gSentDYaxk3YhZwOAaTSPusWXrbe2axX25E3lgmojw7VS+csMbgEI4v1ZU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -39,31 +39,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=obBvXeIihwcnYNwIfK7fO8NOfGknt4GVIgzKgx3OkiQ=; b=I+TTCJpOabUmRMxMtHEp70pTUo
- pKooSLRw7jx6YvweJEMqkQnDc5AYTCSNnQz5bIZ0DlpSilX/q05XgpKPvh2Z2U27+08gyp9abVXf7
- XozXY1IWUNK0VmRggiHl8SjTj+9Ysj+WWWZMRsEjXQSxW523HCOaB3VuitqIndmUM+aE=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=hIUiCiYvj4+PQCXeGc2dRPv9jWC04oKwYnr+8nkAWKs=; b=OBlsKUxCY2M6uSLLK5xwLAMWUI
+ C8/vIpal9wnNO81TyRSfR3BKkqZWuOxa+oCSBFHQ3VmeQ8ZkACQF8n3HVapgTrhRcvzXVPYQ0uZD0
+ +yLgKMpQKRdQHhk5rqhofWuEZ5jHXvn8JiVZPPHlFFGqj+htZaATKcRJ8UARSnPeDbxk=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vhs7V-0007qN-Pv; Mon, 19 Jan 2026 16:28:50 +0000
+ id 1vhs7c-0007rE-Ew; Mon, 19 Jan 2026 16:28:57 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 1700B6014E;
- Mon, 19 Jan 2026 16:28:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7F5DC116C6;
- Mon, 19 Jan 2026 16:28:31 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 0A398444E6;
+ Mon, 19 Jan 2026 16:28:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0D33BC19424;
+ Mon, 19 Jan 2026 16:28:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768840118;
- bh=FgvaakP+KkZTiWPmd/GcmMQL5i/gToOI+UK+TD05398=;
+ s=k20201202; t=1768840125;
+ bh=ttUZbbEr4qNvBmzcmWXht/0+Ro1g2UQElLV80PGUEuE=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=Wgi+FWvLw0MQ+2HORgz5R2DzsE3xTDpIeJv3h1S0cFNs6i9UQbBFBYRNiA8j8Fg9+
- KHV2BRMV8sc5hIpryCF11pPiQxFsp5jsFeGRgjvKpjnr50AHMK8gIN85Nf3HliIyJN
- fVEnoXFDYtI2qYy/Ygj8CYKdqJi8j61eA8sNsahGBpQ1xk2jp5P4+4TfuS7JqNHmrB
- NIwutz+PXPre13vg54KrR7HlTKnjxB4xKcJY/PQYeRmbOh3hCGCON9Juobo7p2e8vA
- llAP9XHmK5riLuTYR5uf34R6+LIIkqWX0A7ghO8ELhidE6qt+BMPFR9uiYqbZgi+m3
- 4gFfkEvNqWt6w==
-Date: Mon, 19 Jan 2026 11:26:28 -0500
+ b=ule0GqUZw08XdIdQXdwy8YF/nQZodPwE+3Ap+rnwUArUvUqLP17fDeYXRDi2IiJSJ
+ HElLEOqGF8Xtj5odBgm9/xe2Fz8Lpg4CQVge093nGn4xj01wGTq2ovDCqHyWi3whi6
+ GiA7vqdnJNtVL1EejI20NzzJ8W3JehC438yl3lV9CColr9gUKT7C8Gess01Bet1SrQ
+ PrQr6QQdWmaEfrtIG3pvYB570DREtCmV8GhL9h0FkDCPMA6q1tkaEv2Ke3A6GDO2bF
+ U5S0zkEUQzmWWKRbsGGvLtUiO3iuk83JuTbFoFx1FOKcFkMCOPVXsSh7hBRH5E9yC4
+ +L7N+wmfPdx7Q==
+Date: Mon, 19 Jan 2026 11:26:29 -0500
 MIME-Version: 1.0
-Message-Id: <20260119-exportfs-nfsd-v2-11-d93368f903bd@kernel.org>
+Message-Id: <20260119-exportfs-nfsd-v2-12-d93368f903bd@kernel.org>
 References: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
 In-Reply-To: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
 To: Christian Brauner <brauner@kernel.org>, 
@@ -100,20 +100,20 @@ To: Christian Brauner <brauner@kernel.org>,
  OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, 
  Jaegeuk Kim <jaegeuk@kernel.org>, Jonathan Corbet <corbet@lwn.net>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=706; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=FgvaakP+KkZTiWPmd/GcmMQL5i/gToOI+UK+TD05398=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpbltbCPwpzNwYdBr0vFnmbNYzyzE/ZPMcrbCYA
- XY3FvJ2K7mJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaW5bWwAKCRAADmhBGVaC
- FXLLEAC5N5AzFG4uvYDzXr4HYnhMSx1oslQeDc2aNn/1b0a0OMrmi86P7CYesaBsl2EI1ujp33F
- OtWIgVKwOCZ0pSCYP3crtFEbaq0Aw+i2Iyap1/h/6lHHzapF70M0725+Adlu3M9tGmo7Bjn9ZY1
- o3g1+ZCSHq7lVtNiYMCk90mQ1RLDIva6G7gisSZ0fNGeM5YvlxzF/PsylbBWHu0MnsIQSKTN08x
- 8lcD3ifSkZh+XuXVyuqGPPojdmvdQH2+KTj3ye6IdrjX67X6HUS0cJHLPZZGYv7qZ3zhHIZ4ocP
- S/4ZMNiZoheepK1QszjjTUh6OgEpzWX6wDrw4HIBp5sFA/qKKcltgPiGeItaZGnb1zHxgxKhEta
- 6rCEV1Z4hVXYA8qhEdd4mlpJrN8I8crXV7Byc5x1gTg2LAwlNXNqDY/AMBY65Lo1Tz9AEHmByTu
- PIcDAm+N9dxEnC1iKlTmlUoJ1KSXFME0B0IxTb4/5lkGTrgiT3NRCOY53lJ/4kY9QRJuuJUjLhb
- r/b3XrJj5q2R9ASU1G78XzaNpdcTx7XqsTf/VCB6XsMbLtDtkBv5HFeP4Ggahuw4xSJoK3HHhbz
- KtCZVqPbkuk5PQxouzkrY9RyqOAz4a3KbwGRNzNuGfTCJBDAUCM6LBh2uoT33ckjofS0O6ihZ3r
- s+733coP9qobvCw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=697; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=ttUZbbEr4qNvBmzcmWXht/0+Ro1g2UQElLV80PGUEuE=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpbltcC/d9PP4aKa1xZTIbsY8CXA+EgyYZnzp6u
+ eqLCl6YoqCJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaW5bXAAKCRAADmhBGVaC
+ FcT3D/90eYAzQC5Ne5cbyw12ND7qM7cfJyie2ZHptiKyfxnrDewCraAH2ILNT0v39bZUSzit5Gs
+ Dp5q4Xuq8NV8sm7oeyHsAsvfrB0u5QB3QM4VXZcrkXJ0ErzuiUa2Tr+cq3pQ5pq2gCIQW5z/Sv+
+ LcW01jSHo4HndfR9FeCIg0wJ6nykbVpLEItP7xqwBtoda8oVtuolVChc9C+1uSm4O7O8mkccJMI
+ UufpLPQb0K/tczA2KhXXQ+lJsW6GWXxIlKymNU57VfW0P7dsWrjj6cw9SZ1JSlLRZGHjpShbfaO
+ cPXNsIxonKRlx+AgvCq0scgb7hsdna6caMEyA35No4+7Gk7rLbjOo7vF0Q38piD8irZS+7nDBmv
+ HzGjOL+7GtCUUOLuVIxhNq+iP/45+G8zEyg9nAA4e3C3amjEnCFWG/KPszGPgRO2CV0ckSNxCxk
+ dSMgIVWYwARpWcBPwyMJh9tzAIuLNmQl4WkxQ6H2j7KE+ormAsK7xTHyxJBEFVc6nPSyDnSEX9W
+ LY6mTb62j1OHP8s3CsAjsMyeBpffAO7JIwboIgy4g6m3Z6fb1a6hXz7o3R5y9yEZmZzey9GSbo/
+ G0ji6Q00W5ZxB3zg7itpWnOVS1npMB/HvC0SwP+JLcb2i6uiA0+Zw42RyX/lbDLVzkG5PMY8jGV
+ CxntFIUPzGwJI4g==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
@@ -123,10 +123,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add the EXPORT_OP_STABLE_HANDLES flag to befs export
+ Content preview: Add the EXPORT_OP_STABLE_HANDLES flag to ufs export
  operations
  to indicate that this filesystem can be exported via NFS. Signed-off-by:
- Jeff Layton <jlayton@kernel.org> --- fs/befs/linuxvfs.c | 1 + 1 file changed, 
+ Jeff Layton <jlayton@kernel.org> --- fs/ufs/super.c | 1 + 1 file changed,
  1 insertion(+) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
@@ -139,8 +139,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vhs7V-0007qN-Pv
-Subject: [f2fs-dev] [PATCH v2 11/31] befs: add EXPORT_OP_STABLE_HANDLES flag
+X-Headers-End: 1vhs7c-0007rE-Ew
+Subject: [f2fs-dev] [PATCH v2 12/31] ufs: add EXPORT_OP_STABLE_HANDLES flag
  to export operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -171,26 +171,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add the EXPORT_OP_STABLE_HANDLES flag to befs export operations to indicate
+Add the EXPORT_OP_STABLE_HANDLES flag to ufs export operations to indicate
 that this filesystem can be exported via NFS.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/befs/linuxvfs.c | 1 +
+ fs/ufs/super.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/fs/befs/linuxvfs.c b/fs/befs/linuxvfs.c
-index 9fcfdd6b8189aaf5cc3b68aa8dff4798af5bdcbc..1f358d58af8b4de9bc840b9926970340395bc9e4 100644
---- a/fs/befs/linuxvfs.c
-+++ b/fs/befs/linuxvfs.c
-@@ -99,6 +99,7 @@ static const struct export_operations befs_export_operations = {
- 	.fh_to_dentry	= befs_fh_to_dentry,
- 	.fh_to_parent	= befs_fh_to_parent,
- 	.get_parent	= befs_get_parent,
+diff --git a/fs/ufs/super.c b/fs/ufs/super.c
+index 6e4585169f94bb9652aac29a14b0a64a7bb710d8..9cd9b6691849d52701058973f6b684f101df2634 100644
+--- a/fs/ufs/super.c
++++ b/fs/ufs/super.c
+@@ -141,6 +141,7 @@ static const struct export_operations ufs_export_ops = {
+ 	.fh_to_dentry	= ufs_fh_to_dentry,
+ 	.fh_to_parent	= ufs_fh_to_parent,
+ 	.get_parent	= ufs_get_parent,
 +	.flags		= EXPORT_OP_STABLE_HANDLES,
  };
  
- /*
+ #ifdef CONFIG_UFS_DEBUG
 
 -- 
 2.52.0
