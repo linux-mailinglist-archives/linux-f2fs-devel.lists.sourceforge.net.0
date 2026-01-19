@@ -2,77 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEC06D39E62
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 07:23:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36B58D39F0F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 07:52:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=lu0T9XPwDWhj7kkBBLJxp2weXy7xpUfH1I3Rpz+uen8=; b=eBZvpdcCaGeEavKgRUJViKmLWA
-	y70VGRodvaVOcxoIOgeGqpcBJTu2plWw2PufNvua1ihE80J+MwVmBpuJxda0bE7v+FCx9gk3XZ09+
-	jwCgRHVpu4ocxLkZAEu9LyE7NDYkmpJ09O0YjpOBxqlPyQ0Zt4Uuw/2InXECT8E4iygc=;
+	bh=bweT0mFmRXKBP38RZQyiTYyfAce8uiezgqZ6PXkpxuw=; b=OK78mGoHn0hKhK1x9n4hcZvt8k
+	f3Usu9A4Dp3Vrf0zjvUBQsiuvdmezYJAsnIb1TLly9tova5JdtWm1w85qbL7iYrc+CkCcbMcElE8y
+	y1ln8UauAoeLMDQz9QM83T1rcmdaTq6BMiNDGEwZPm7MselA70QVobgPOlHjNzJw4q9c=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vhifv-0004zX-OU;
-	Mon, 19 Jan 2026 06:23:44 +0000
+	id 1vhj7g-00081I-J1;
+	Mon, 19 Jan 2026 06:52:25 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <BATV+f4f5ba1b7319529cbc9c+8184+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vhifu-0004zH-5N for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 06:23:42 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <hch@lst.de>) id 1vhj7f-000813-5p
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jan 2026 06:52:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=u3E6xwvibxSvZ4EuYAJN4E1io6j4fxFKnMP4NXWmVc4=; b=TvZWIgI+nisD8Dp/M/9eSYsRl/
- lyXEpwmZRjR+YsJBFoonOZ9sAo8x5z0q3pKYk1/rQ0HuNkLL2o0CSj6QgtYIpbxmj9ML6ZeSFtjXq
- vix0HlRvGDwBFrPTWmxfe0l8d1typEvZFQ0WIGricHAP6YyGAYOSIO4i57YrIMl/+gQE=;
+ bh=tSlfgFGPfCbX6JZ0iz1hunpLIGPypEAYkYHGA8eZeXc=; b=Ug7QrfcLv93Di/QzwTehDDKb2B
+ 0m2nx/HZ5bFzvLCBlZcI2sb3xyqJtQR1kjCC7JMpMLE0MrxvTQ0IjKl3uJcyBqYEif8Kta9u182kZ
+ CJNZYVbiIynEoM78AKBhIMLd8pi2uwGQj8CAv+iuMwsdYxmuO6+Q8l3IFC3vI6pvlslw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=u3E6xwvibxSvZ4EuYAJN4E1io6j4fxFKnMP4NXWmVc4=; b=m93c1y7oCVMnDR8W01Us8TmpD9
- KfdlkqEtQDU12S929kWsOdx/WzawPmYg8xvHEGkw1umb+e7un/1lwVkfUxx8jT08Ms3v0HOY1fuHU
- 850UcQzOnBzpGFoSW3qHfFjM7QuATKWwMYJnSJ1JJs4V01ga79NqCN0omdSu3tryJYjA=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ bh=tSlfgFGPfCbX6JZ0iz1hunpLIGPypEAYkYHGA8eZeXc=; b=QUE70+toI+Bx4oycR23wsUo+FR
+ 7z39mFCdMGnTqJilRtZuTeLY04sbijlWeT4xIj4yMGh2yy5dJwiQsS9on70izh/zKSgndw5nVshsp
+ 7qkci8pMPc5FQbcw03Si6sPGChQWZwd4lbEcDtZPUB7+Df5jMYHzxghRzFVoM44SM290=;
+Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vhift-0006gz-Tp for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 06:23:42 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=u3E6xwvibxSvZ4EuYAJN4E1io6j4fxFKnMP4NXWmVc4=; b=JaPm8BH+xZlGBsYFlapxHmEwqJ
- r/VhPgJSO7qIs6chXbUq2dXq2ERdpDpQyqAAhgK2epdwsV86yEmC5oJrAwuDeNmBu+FZr3Xw3SR4V
- OONGM1Cb7Ru2fQuPWkYCLm56+ov3w0B6JNyKX9xgee9UfXEt36QaDsh8tlPjClj3pF0qyzifW5aUW
- zNE9r0jXVE/cQLmryHDAv+Im/fk0JcXgQxeLUv3JEnEGA4v51VqorKPPnv4GaiTzqYkJEanve6vhm
- +CQV2Se2SYMNLuEO3ie3Y65jGJXSPckGYRdoRFmzY7Kk7FngZ9yYrt3dVlJX8ka+TjVG8lc/4Yq/n
- V+9kVSNg==;
-Received: from
- 2a02-8389-2341-5b80-d601-7564-c2e0-491c.cable.dynamic.v6.surfer.at
- ([2a02:8389:2341:5b80:d601:7564:c2e0:491c] helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vhifg-00000001Op7-2wSF; Mon, 19 Jan 2026 06:23:29 +0000
+ id 1vhj7f-0007qo-6O for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jan 2026 06:52:23 +0000
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id B8DD9227A88; Mon, 19 Jan 2026 07:33:49 +0100 (CET)
+Date: Mon, 19 Jan 2026 07:33:49 +0100
 From: Christoph Hellwig <hch@lst.de>
-To: Eric Biggers <ebiggers@kernel.org>
-Date: Mon, 19 Jan 2026 07:22:47 +0100
-Message-ID: <20260119062250.3998674-7-hch@lst.de>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260119062250.3998674-1-hch@lst.de>
-References: <20260119062250.3998674-1-hch@lst.de>
+To: Andrey Albershteyn <aalbersh@redhat.com>
+Message-ID: <20260119063349.GA643@lst.de>
+References: <cover.1768229271.patch-series@thinky>
+ <aWZ0nJNVTnyuFTmM@casper.infradead.org>
+ <op5poqkjoachiv2qfwizunoeg7h6w5x2rxdvbs4vhryr3aywbt@cul2yevayijl>
+ <aWci_1Uu5XndYNkG@casper.infradead.org>
+ <20260114061536.GG15551@frogsfrogsfrogs>
+ <5z5r6jizgxqz5axvzwbdmtkadehgdf7semqy2oxsfytmzzu6ik@zfvhexcp3fz2>
+ <6r24wj3o3gctl3vz4n3tdrfjx5ftkybdjmmye2hejdcdl6qseh@c2yvpd5d4ocf>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Content-Disposition: inline
+In-Reply-To: <6r24wj3o3gctl3vz4n3tdrfjx5ftkybdjmmye2hejdcdl6qseh@c2yvpd5d4ocf>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -80,20 +72,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Currently all reads of the fsverity hashes is kicked off from
- the data I/O completion handler, leading to needlessly dependent I/O. This
- is worked around a bit by performing readahead on the level 0 n [...] 
+ Content preview: While looking at fsverity I'd like to understand the choise
+ of offset in ext4 and f2fs, and wonder about an issue. Both ext4 and f2fs
+ round up the inode size to the next 64k boundary and place the metadata there.
+ Both use the 65536 magic number for that instead of a well documented constant
+ unfortunately. 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
-X-Headers-End: 1vhift-0006gz-Tp
-Subject: [f2fs-dev] [PATCH 6/6] fsverity: kick off hash readahead at data
- I/O submission time
+X-Headers-End: 1vhj7f-0007qo-6O
+Subject: [f2fs-dev] fsverity metadata offset,
+ was: Re: [PATCH v2 0/23] fs-verity support for XFS with post EOF
+ merkle tree
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,466 +95,93 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: fsverity@lists.linux.dev, Christian Brauner <brauner@kernel.org>,
- Theodore Ts'o <tytso@mit.edu>, Andrey Albershteyn <aalbersh@redhat.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- Al Viro <viro@zeniv.linux.org.uk>, Jaegeuk Kim <jaegeuk@kernel.org>,
- David Sterba <dsterba@suse.com>, Jan Kara <jack@suse.cz>,
- linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org
+Cc: fsverity@lists.linux.dev, ebiggers@kernel.org, aalbersh@kernel.org,
+ "Darrick J. Wong" <djwong@kernel.org>, david@fromorbit.com,
+ Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, jaegeuk@kernel.org, linux-fsdevel@vger.kernel.org,
+ tytso@mit.edu, linux-ext4@vger.kernel.org, hch@lst.de
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Currently all reads of the fsverity hashes is kicked off from the data
-I/O completion handler, leading to needlessly dependent I/O.  This is
-worked around a bit by performing readahead on the level 0 nodes, but
-still fairly ineffective.
+While looking at fsverity I'd like to understand the choise of offset
+in ext4 and f2fs, and wonder about an issue.
 
-Switch to a model where the ->read_folio and ->readahead methods instead
-kick off explicit readahead of the fsverity hashed so they are usually
-available at I/O completion time.
+Both ext4 and f2fs round up the inode size to the next 64k boundary
+and place the metadata there.  Both use the 65536 magic number for that
+instead of a well documented constant unfortunately.
 
-For 64k sequential reads on my test VM this improves read performance
-from 2.4GB/s - 2.6GB/s to 3.5GB/s - 3.9GB/s.  The improvements for
-random reads are likely to be even bigger.
+I assume this was picked to align up to the largest reasonable page
+size?  Unfortunately for that:
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- fs/btrfs/verity.c         |  4 +-
- fs/ext4/readpage.c        |  4 ++
- fs/ext4/verity.c          | 26 +++++------
- fs/f2fs/data.c            |  4 ++
- fs/f2fs/verity.c          | 26 +++++------
- fs/verity/read_metadata.c | 10 ++---
- fs/verity/verify.c        | 92 ++++++++++++++++++++++++++++-----------
- include/linux/fsverity.h  | 34 ++++++++++++---
- 8 files changed, 132 insertions(+), 68 deletions(-)
+ a) not all architectures are reasonable.  As Darrick pointed out
+    hexagon seems to support page size up to 1MiB.  While I don't know
+    if they exist in real life, powerpc supports up to 256kiB pages,
+    and I know they are used for real in various embedded settings
+ b) with large folio support in the page cache, the folios used to
+    map files can be much larger than the base page size, with all
+    the same issues as a larger page size
 
-diff --git a/fs/btrfs/verity.c b/fs/btrfs/verity.c
-index 8a4426f8b5fb..cd96fac4739f 100644
---- a/fs/btrfs/verity.c
-+++ b/fs/btrfs/verity.c
-@@ -697,7 +697,6 @@ int btrfs_get_verity_descriptor(struct inode *inode, void *buf, size_t buf_size)
-  *
-  * @inode:         inode to read a merkle tree page for
-  * @index:         page index relative to the start of the merkle tree
-- * @num_ra_pages:  number of pages to readahead. Optional, we ignore it
-  *
-  * The Merkle tree is stored in the filesystem btree, but its pages are cached
-  * with a logical position past EOF in the inode's mapping.
-@@ -705,8 +704,7 @@ int btrfs_get_verity_descriptor(struct inode *inode, void *buf, size_t buf_size)
-  * Returns the page we read, or an ERR_PTR on error.
-  */
- static struct page *btrfs_read_merkle_tree_page(struct inode *inode,
--						pgoff_t index,
--						unsigned long num_ra_pages)
-+						pgoff_t index)
- {
- 	struct folio *folio;
- 	u64 off = (u64)index << PAGE_SHIFT;
-diff --git a/fs/ext4/readpage.c b/fs/ext4/readpage.c
-index e7f2350c725b..56b3bea657ef 100644
---- a/fs/ext4/readpage.c
-+++ b/fs/ext4/readpage.c
-@@ -226,6 +226,7 @@ int ext4_mpage_readpages(struct inode *inode,
- 	unsigned relative_block = 0;
- 	struct ext4_map_blocks map;
- 	unsigned int nr_pages, folio_pages;
-+	unsigned int did_fsverity_readahead = 0;
- 
- 	map.m_pblk = 0;
- 	map.m_lblk = 0;
-@@ -241,6 +242,9 @@ int ext4_mpage_readpages(struct inode *inode,
- 		if (rac)
- 			folio = readahead_folio(rac);
- 
-+		if (!did_fsverity_readahead++)
-+			fsverity_readahead(inode, folio->index, nr_pages);
-+
- 		folio_pages = folio_nr_pages(folio);
- 		prefetchw(&folio->flags);
- 
-diff --git a/fs/ext4/verity.c b/fs/ext4/verity.c
-index 2cd6fe2fbf64..baa7277dcf1f 100644
---- a/fs/ext4/verity.c
-+++ b/fs/ext4/verity.c
-@@ -358,28 +358,25 @@ static int ext4_get_verity_descriptor(struct inode *inode, void *buf,
- }
- 
- static struct page *ext4_read_merkle_tree_page(struct inode *inode,
--					       pgoff_t index,
--					       unsigned long num_ra_pages)
-+					       pgoff_t index)
- {
- 	struct folio *folio;
- 
- 	index += ext4_verity_metadata_pos(inode) >> PAGE_SHIFT;
- 
--	folio = __filemap_get_folio(inode->i_mapping, index, FGP_ACCESSED, 0);
--	if (IS_ERR(folio) || !folio_test_uptodate(folio)) {
--		DEFINE_READAHEAD(ractl, NULL, NULL, inode->i_mapping, index);
--
--		if (!IS_ERR(folio))
--			folio_put(folio);
--		else if (num_ra_pages > 1)
--			page_cache_ra_unbounded(&ractl, num_ra_pages, 0);
--		folio = read_mapping_folio(inode->i_mapping, index, NULL);
--		if (IS_ERR(folio))
--			return ERR_CAST(folio);
--	}
-+	folio = read_mapping_folio(inode->i_mapping, index, NULL);
-+	if (IS_ERR(folio))
-+		return ERR_CAST(folio);
- 	return folio_file_page(folio, index);
- }
- 
-+static void ext4_readahead_merkle_tree(struct inode *inode, pgoff_t index,
-+		unsigned long nr_pages)
-+{
-+	index += ext4_verity_metadata_pos(inode) >> PAGE_SHIFT;
-+	generic_readahead_merkle_tree(inode, index, nr_pages);
-+}
-+
- static int ext4_write_merkle_tree_block(struct file *file, const void *buf,
- 					u64 pos, unsigned int size)
- {
-@@ -393,5 +390,6 @@ const struct fsverity_operations ext4_verityops = {
- 	.end_enable_verity	= ext4_end_enable_verity,
- 	.get_verity_descriptor	= ext4_get_verity_descriptor,
- 	.read_merkle_tree_page	= ext4_read_merkle_tree_page,
-+	.readahead_merkle_tree	= ext4_readahead_merkle_tree,
- 	.write_merkle_tree_block = ext4_write_merkle_tree_block,
- };
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index c30e69392a62..c01d5b309751 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2359,6 +2359,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
- 	unsigned nr_pages = rac ? readahead_count(rac) : 1;
- 	unsigned max_nr_pages = nr_pages;
- 	int ret = 0;
-+	unsigned int did_fsverity_readahead = 0;
- 
- #ifdef CONFIG_F2FS_FS_COMPRESSION
- 	if (f2fs_compressed_file(inode)) {
-@@ -2383,6 +2384,9 @@ static int f2fs_mpage_readpages(struct inode *inode,
- 			prefetchw(&folio->flags);
- 		}
- 
-+		if (!did_fsverity_readahead++)
-+			fsverity_readahead(inode, folio->index, nr_pages);
-+
- #ifdef CONFIG_F2FS_FS_COMPRESSION
- 		index = folio->index;
- 
-diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
-index 4326fd72cc72..1ce977937c72 100644
---- a/fs/f2fs/verity.c
-+++ b/fs/f2fs/verity.c
-@@ -256,28 +256,25 @@ static int f2fs_get_verity_descriptor(struct inode *inode, void *buf,
- }
- 
- static struct page *f2fs_read_merkle_tree_page(struct inode *inode,
--					       pgoff_t index,
--					       unsigned long num_ra_pages)
-+					       pgoff_t index)
- {
- 	struct folio *folio;
- 
- 	index += f2fs_verity_metadata_pos(inode) >> PAGE_SHIFT;
- 
--	folio = f2fs_filemap_get_folio(inode->i_mapping, index, FGP_ACCESSED, 0);
--	if (IS_ERR(folio) || !folio_test_uptodate(folio)) {
--		DEFINE_READAHEAD(ractl, NULL, NULL, inode->i_mapping, index);
--
--		if (!IS_ERR(folio))
--			folio_put(folio);
--		else if (num_ra_pages > 1)
--			page_cache_ra_unbounded(&ractl, num_ra_pages, 0);
--		folio = read_mapping_folio(inode->i_mapping, index, NULL);
--		if (IS_ERR(folio))
--			return ERR_CAST(folio);
--	}
-+	folio = read_mapping_folio(inode->i_mapping, index, NULL);
-+	if (IS_ERR(folio))
-+		return ERR_CAST(folio);
- 	return folio_file_page(folio, index);
- }
- 
-+static void f2fs_readahead_merkle_tree(struct inode *inode, pgoff_t index,
-+		unsigned long nr_pages)
-+{
-+	index += f2fs_verity_metadata_pos(inode) >> PAGE_SHIFT;
-+	generic_readahead_merkle_tree(inode, index, nr_pages);
-+}
-+
- static int f2fs_write_merkle_tree_block(struct file *file, const void *buf,
- 					u64 pos, unsigned int size)
- {
-@@ -291,5 +288,6 @@ const struct fsverity_operations f2fs_verityops = {
- 	.end_enable_verity	= f2fs_end_enable_verity,
- 	.get_verity_descriptor	= f2fs_get_verity_descriptor,
- 	.read_merkle_tree_page	= f2fs_read_merkle_tree_page,
-+	.readahead_merkle_tree	= f2fs_readahead_merkle_tree,
- 	.write_merkle_tree_block = f2fs_write_merkle_tree_block,
- };
-diff --git a/fs/verity/read_metadata.c b/fs/verity/read_metadata.c
-index cba5d6af4e04..3abaa0a4c40e 100644
---- a/fs/verity/read_metadata.c
-+++ b/fs/verity/read_metadata.c
-@@ -28,24 +28,24 @@ static int fsverity_read_merkle_tree(struct inode *inode,
- 	if (offset >= end_offset)
- 		return 0;
- 	offs_in_page = offset_in_page(offset);
-+	index = offset >> PAGE_SHIFT;
- 	last_index = (end_offset - 1) >> PAGE_SHIFT;
- 
-+	__fsverity_readahead(inode, vi, index, last_index - index + 1);
-+
- 	/*
- 	 * Iterate through each Merkle tree page in the requested range and copy
- 	 * the requested portion to userspace.  Note that the Merkle tree block
- 	 * size isn't important here, as we are returning a byte stream; i.e.,
- 	 * we can just work with pages even if the tree block size != PAGE_SIZE.
- 	 */
--	for (index = offset >> PAGE_SHIFT; index <= last_index; index++) {
--		unsigned long num_ra_pages =
--			min_t(unsigned long, last_index - index + 1,
--			      inode->i_sb->s_bdi->io_pages);
-+	for (; index <= last_index; index++) {
- 		unsigned int bytes_to_copy = min_t(u64, end_offset - offset,
- 						   PAGE_SIZE - offs_in_page);
- 		struct page *page;
- 		const void *virt;
- 
--		page = vops->read_merkle_tree_page(inode, index, num_ra_pages);
-+		page = vops->read_merkle_tree_page(inode, index);
- 		if (IS_ERR(page)) {
- 			err = PTR_ERR(page);
- 			fsverity_err(inode,
-diff --git a/fs/verity/verify.c b/fs/verity/verify.c
-index 3cc81658e4f3..9a96bad82938 100644
---- a/fs/verity/verify.c
-+++ b/fs/verity/verify.c
-@@ -9,6 +9,7 @@
- 
- #include <linux/bio.h>
- #include <linux/export.h>
-+#include <linux/pagemap.h>
- 
- #define FS_VERITY_MAX_PENDING_BLOCKS 2
- 
-@@ -21,7 +22,6 @@ struct fsverity_pending_block {
- struct fsverity_verification_context {
- 	struct inode *inode;
- 	struct fsverity_info *vi;
--	unsigned long max_ra_pages;
- 
- 	/*
- 	 * This is the queue of data blocks that are pending verification.  When
-@@ -37,6 +37,65 @@ struct fsverity_verification_context {
- 
- static struct workqueue_struct *fsverity_read_workqueue;
- 
-+/**
-+ * generic_readahead_merkle_tree() - read ahead from merkle tree
-+ * @inode:		inode containing fsverity hashes
-+ * @index:		first data page offset to read ahead for
-+ * @nr_pages:		number of data pages to read ahead for
-+ *
-+ * Generic fsverity hashes read implementations for file systems storing
-+ * the hashes in the page cache of the data inode.  The caller needs to
-+ * adjust @index for the fsverity hash offset.
-+ */
-+void generic_readahead_merkle_tree(struct inode *inode, pgoff_t index,
-+		unsigned long nr_pages)
-+{
-+	struct folio *folio;
-+
-+	folio = __filemap_get_folio(inode->i_mapping, index, FGP_ACCESSED, 0);
-+	if (PTR_ERR(folio) == -ENOENT || !folio_test_uptodate(folio)) {
-+		DEFINE_READAHEAD(ractl, NULL, NULL, inode->i_mapping, index);
-+
-+		page_cache_ra_unbounded(&ractl, nr_pages, 0);
-+	}
-+	if (!IS_ERR(folio))
-+		folio_put(folio);
-+}
-+EXPORT_SYMBOL_GPL(generic_readahead_merkle_tree);
-+
-+void __fsverity_readahead(struct inode *inode, const struct fsverity_info *vi,
-+		pgoff_t index, unsigned long nr_pages)
-+{
-+	const struct merkle_tree_params *params = &vi->tree_params;
-+	loff_t data_start_pos = (loff_t)index << PAGE_SHIFT;
-+	u64 start_hidx = data_start_pos >> params->log_blocksize;
-+	u64 end_hidx = (data_start_pos + ((nr_pages - 1) << PAGE_SHIFT)) >>
-+			params->log_blocksize;
-+	int level;
-+
-+	if (!inode->i_sb->s_vop->readahead_merkle_tree)
-+		return;
-+	if (unlikely(data_start_pos >= inode->i_size))
-+		return;
-+
-+	for (level = 0; level < params->num_levels; level++) {
-+		unsigned long level_start = params->level_start[level];
-+		unsigned long next_start_hidx = start_hidx >> params->log_arity;
-+		unsigned long next_end_hidx = end_hidx >> params->log_arity;
-+		unsigned long start_idx = (level_start + next_start_hidx) >>
-+				params->log_blocks_per_page;
-+		unsigned long end_idx = (level_start + next_end_hidx) >>
-+				params->log_blocks_per_page;
-+
-+		inode->i_sb->s_vop->readahead_merkle_tree(inode, start_idx,
-+				end_idx - start_idx + 1);
-+
-+		start_hidx = next_start_hidx;
-+		end_hidx = next_end_hidx;
-+	}
-+}
-+EXPORT_SYMBOL_GPL(__fsverity_readahead);
-+
- /*
-  * Returns true if the hash block with index @hblock_idx in the tree, located in
-  * @hpage, has already been verified.
-@@ -114,8 +173,7 @@ static bool is_hash_block_verified(struct fsverity_info *vi, struct page *hpage,
-  * Return: %true if the data block is valid, else %false.
-  */
- static bool verify_data_block(struct inode *inode, struct fsverity_info *vi,
--			      const struct fsverity_pending_block *dblock,
--			      unsigned long max_ra_pages)
-+			      const struct fsverity_pending_block *dblock)
- {
- 	const u64 data_pos = dblock->pos;
- 	const struct merkle_tree_params *params = &vi->tree_params;
-@@ -200,8 +258,7 @@ static bool verify_data_block(struct inode *inode, struct fsverity_info *vi,
- 			  (params->block_size - 1);
- 
- 		hpage = inode->i_sb->s_vop->read_merkle_tree_page(inode,
--				hpage_idx, level == 0 ? min(max_ra_pages,
--					params->tree_pages - hpage_idx) : 0);
-+				hpage_idx);
- 		if (IS_ERR(hpage)) {
- 			fsverity_err(inode,
- 				     "Error %ld reading Merkle tree page %lu",
-@@ -272,12 +329,10 @@ static bool verify_data_block(struct inode *inode, struct fsverity_info *vi,
- 
- static void
- fsverity_init_verification_context(struct fsverity_verification_context *ctx,
--				   struct inode *inode,
--				   unsigned long max_ra_pages)
-+				   struct inode *inode)
- {
- 	ctx->inode = inode;
- 	ctx->vi = fsverity_get_info(inode);
--	ctx->max_ra_pages = max_ra_pages;
- 	ctx->num_pending = 0;
- 	if (ctx->vi->tree_params.hash_alg->algo_id == HASH_ALGO_SHA256 &&
- 	    sha256_finup_2x_is_optimized())
-@@ -320,8 +375,7 @@ fsverity_verify_pending_blocks(struct fsverity_verification_context *ctx)
- 	}
- 
- 	for (i = 0; i < ctx->num_pending; i++) {
--		if (!verify_data_block(ctx->inode, vi, &ctx->pending_blocks[i],
--				       ctx->max_ra_pages))
-+		if (!verify_data_block(ctx->inode, vi, &ctx->pending_blocks[i]))
- 			return false;
- 	}
- 	fsverity_clear_pending_blocks(ctx);
-@@ -371,7 +425,7 @@ bool fsverity_verify_blocks(struct folio *folio, size_t len, size_t offset)
- {
- 	struct fsverity_verification_context ctx;
- 
--	fsverity_init_verification_context(&ctx, folio->mapping->host, 0);
-+	fsverity_init_verification_context(&ctx, folio->mapping->host);
- 
- 	if (fsverity_add_data_blocks(&ctx, folio, len, offset) &&
- 	    fsverity_verify_pending_blocks(&ctx))
-@@ -401,22 +455,8 @@ void fsverity_verify_bio(struct bio *bio)
- 	struct inode *inode = bio_first_folio_all(bio)->mapping->host;
- 	struct fsverity_verification_context ctx;
- 	struct folio_iter fi;
--	unsigned long max_ra_pages = 0;
--
--	if (bio->bi_opf & REQ_RAHEAD) {
--		/*
--		 * If this bio is for data readahead, then we also do readahead
--		 * of the first (largest) level of the Merkle tree.  Namely,
--		 * when a Merkle tree page is read, we also try to piggy-back on
--		 * some additional pages -- up to 1/4 the number of data pages.
--		 *
--		 * This improves sequential read performance, as it greatly
--		 * reduces the number of I/O requests made to the Merkle tree.
--		 */
--		max_ra_pages = bio->bi_iter.bi_size >> (PAGE_SHIFT + 2);
--	}
- 
--	fsverity_init_verification_context(&ctx, inode, max_ra_pages);
-+	fsverity_init_verification_context(&ctx, inode);
- 
- 	bio_for_each_folio_all(fi, bio) {
- 		if (!fsverity_add_data_blocks(&ctx, fi.folio, fi.length,
-diff --git a/include/linux/fsverity.h b/include/linux/fsverity.h
-index deb6b2303d64..84aaa09e07e2 100644
---- a/include/linux/fsverity.h
-+++ b/include/linux/fsverity.h
-@@ -90,10 +90,6 @@ struct fsverity_operations {
- 	 *
- 	 * @inode: the inode
- 	 * @index: 0-based index of the page within the Merkle tree
--	 * @num_ra_pages: The number of Merkle tree pages that should be
--	 *		  prefetched starting at @index if the page at @index
--	 *		  isn't already cached.  Implementations may ignore this
--	 *		  argument; it's only a performance optimization.
- 	 *
- 	 * This can be called at any time on an open verity file.  It may be
- 	 * called by multiple processes concurrently, even with the same page.
-@@ -103,8 +99,10 @@ struct fsverity_operations {
- 	 * Return: the page on success, ERR_PTR() on failure
- 	 */
- 	struct page *(*read_merkle_tree_page)(struct inode *inode,
--					      pgoff_t index,
--					      unsigned long num_ra_pages);
-+					      pgoff_t index);
-+
-+	void (*readahead_merkle_tree)(struct inode *inode, pgoff_t index,
-+			unsigned long nr_pages);
- 
- 	/**
- 	 * Write a Merkle tree block to the given inode.
-@@ -246,4 +244,28 @@ static inline bool fsverity_active(const struct inode *inode)
- 	return fsverity_get_info(inode) != NULL;
- }
- 
-+/**
-+ * fsverity_readahead() - kick off readahead on fsverity hashes
-+ * @inode:		inode containing fsverity hashes
-+ * @index:		first data page offset to read ahead for
-+ * @nr_pages:		number of data pages to read ahead for
-+ *
-+ * Start readahead on fsverity hashes.  To be called from the file systems
-+ * ->read_folio and ->readahead methods to ensure that the hashes are
-+ * already cached on completion of the file data read if possible.
-+ */
-+void __fsverity_readahead(struct inode *inode, const struct fsverity_info *vi,
-+		pgoff_t index, unsigned long nr_pages);
-+static inline void fsverity_readahead(struct inode *inode,
-+		pgoff_t index, unsigned long nr_pages)
-+{
-+	const struct fsverity_info *vi = fsverity_get_info(inode);
-+
-+	if (vi)
-+		__fsverity_readahead(inode, vi, index, nr_pages);
-+}
-+
-+void generic_readahead_merkle_tree(struct inode *inode, pgoff_t index,
-+		unsigned long nr_pages);
-+
- #endif	/* _LINUX_FSVERITY_H */
--- 
-2.47.3
+So assuming that fsverity is trying to avoid the issue of a page/folio
+that covers both data and fsverity metadata, how does it copy with that?
+Do we need to disable fsverity on > 64k page size and disable large
+folios on fsverity files?  The latter would mean writing back all cached
+data first as well.
 
+And going forward, should we have a v2 format that fixes this?  For that
+we'd still need a maximum folio size of course.   And of course I'd like
+to get all these things right from the start in XFS, while still being as
+similar as possible to ext4/f2fs.
+
+On Wed, Jan 14, 2026 at 10:53:00AM +0100, Andrey Albershteyn wrote:
+> On 2026-01-14 09:20:34, Andrey Albershteyn wrote:
+> > On 2026-01-13 22:15:36, Darrick J. Wong wrote:
+> > > On Wed, Jan 14, 2026 at 05:00:47AM +0000, Matthew Wilcox wrote:
+> > > > On Tue, Jan 13, 2026 at 07:45:47PM +0100, Andrey Albershteyn wrote:
+> > > > > On 2026-01-13 16:36:44, Matthew Wilcox wrote:
+> > > > > > On Mon, Jan 12, 2026 at 03:49:44PM +0100, Andrey Albershteyn wrote:
+> > > > > > > The tree is read by iomap into page cache at offset 1 << 53. This is far
+> > > > > > > enough to handle any supported file size.
+> > > > > > 
+> > > > > > What happens on 32-bit systems?  (I presume you mean "offset" as
+> > > > > > "index", so this is 1 << 65 bytes on machines with a 4KiB page size)
+> > > > > > 
+> > > > > it's in bytes, yeah I missed 32-bit systems, I think I will try to
+> > > > > convert this offset to something lower on 32-bit in iomap, as
+> > > > > Darrick suggested.
+> > > > 
+> > > > Hm, we use all 32 bits of folio->index on 32-bit plaftorms.  That's
+> > > > MAX_LFS_FILESIZE.  Are you proposing reducing that?
+> > > > 
+> > > > There are some other (performance) penalties to using 1<<53 as the lowest
+> > > > index for metadata on 64-bit.  The radix tree is going to go quite high;
+> > > > we use 6 bits at each level, so if you have a folio at 0 and a folio at
+> > > > 1<<53, you'll have a tree of height 9 and use 17 nodes.
+> > > > 
+> > > > That's going to be a lot of extra cache misses when walking the XArray
+> > > > to find any given folio.  Allowing the filesystem to decide where the
+> > > > metadata starts for any given file really is an important optimisation.
+> > > > Even if it starts at index 1<<29, you'll almost halve the number of
+> > > > nodes needed.
+> > 
+> > Thanks for this overview!
+> > 
+> > > 
+> > > 1<<53 is only the location of the fsverity metadata in the ondisk
+> > > mapping.  For the incore mapping, in theory we could load the fsverity
+> > > anywhere in the post-EOF part of the pagecache to save some bits.
+> > > 
+> > > roundup(i_size_read(), 1<<folio_max_order)) would work, right?
+> > 
+> > Then, there's probably no benefits to have ondisk mapping differ,
+> > no?
+> 
+> oh, the fixed ondisk offset will help to not break if filesystem
+> would be mounted by machine with different page size.
+> 
+> -- 
+> - Andrey
+---end quoted text---
 
 
 _______________________________________________
