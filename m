@@ -2,74 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 428EBD3AAC8
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 14:54:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56EACD3AAC9
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 14:54:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
 	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=tUWNcuxjKVJz6UCidk9TDlomFzljOBOusEK/YAmJMU0=; b=Gxu8NlZTkaMgYt+UpEe3iCXr0D
-	6WwP23D3wyna10uP227PWrmcFA72jM1nIinnEl5DVKSICJBuy2zSIN0qd2sIw0k3PeGZG480D+f2q
-	UGoIetG9RGdx9qMSZ1HiX9jLrMWB4NEJcr0r6EInBVKui92f0OxUOeQNyoPybM0kbcrw=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=Jqz2/O2J5Je4JCWPmSpSp9v2y9xxjjqRNCjctLg+B1s=; b=BaMEen0i41sJoNOntlN9IPBJ2M
+	CW4KprP/Y08rOGcE56/KuIeMRv+T6OMzN8vn8IB76Tkh5Rfpxs+8y65hwj9G/NS/w7RfDTMzT0HxK
+	+d+vAQOSiYC5iMJhxHXOEqW67leuTkuGGHwCFkFfuacdcLvt5D+rlmBV8Dg/xEj7TEYY=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vhpi2-0001X5-G2;
-	Mon, 19 Jan 2026 13:54:23 +0000
+	id 1vhpiA-0004ba-1k;
+	Mon, 19 Jan 2026 13:54:30 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vhpi0-0001Ww-Qg
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vhpi7-0004bT-QD
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 13:54:21 +0000
+ Mon, 19 Jan 2026 13:54:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8zZuK0Ck3plBogbuYkXkCU3YAwMoSjfpdBL98ixgAp0=; b=iyQlVH8RlEu5wG6SuVyYxQdUAM
- 6mrkX6UYROK55c/iLh8+HpZWfQArYIgpJJ/z+fgnLLLbCwLYLdF1No489vehpCimZCE3YIwfDRq46
- KqczeK5xaajXsGesK+Acu9+1aa52aQYOJZkaedax6DiqpBfY9XhcYEfvdzWDVEfI2lbI=;
+ bh=RZzlHTdVJGVZAxiPgcPhPfn0qFObfiKfqGXc8yuD85s=; b=Af5SABPI8rorUT3Yk9m4fyHucA
+ fRiQZ5wF3paRjq8VA6gxHU1UW75i+hE24btUxarbBZyM6UidHJcekNB4K5nrqPol+9ScxhthNGZxq
+ PRwfe9xowgIdXq4IyFRP751YOhKCg4T1yw4JMkXAZruyP7sSaSVcwHAC/91mh8KrJ72U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8zZuK0Ck3plBogbuYkXkCU3YAwMoSjfpdBL98ixgAp0=; b=dzunYS3tciBUFgbfhcCHSN4haC
- pF6+lc01+aekN3UnoKWJXtlnECbvXaWspcyi7CnynzLmef4urDlWk7q1i+eZNcaUk7er0Hm8w7lHi
- n8lzV7Qtc+cfkSLlQ0dn1IOwAST7rFVzPwrEUb4dpGUqvd6RDDyunozzAH8yfqkRkt2M=;
+ bh=RZzlHTdVJGVZAxiPgcPhPfn0qFObfiKfqGXc8yuD85s=; b=kKa8xyn753hcbr+8+osT2eu7pi
+ asF2f0fsu1AZR1tdgX+dqJRDAkP1hQKGIoKVOSIOFW3fQfu6Cb70CZ7zh+hf0iBlI0qrrxTI0QZmT
+ 6wklvEG5MtVTWIEC66kFJezV0q9VAl7Pa1f1sqniY5IenQP91IyUPaZOLdOokVSjOng4=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vhpi1-0005qt-4f for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 13:54:21 +0000
+ id 1vhpi7-0005r6-B1 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jan 2026 13:54:27 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D43FF43C7A;
- Mon, 19 Jan 2026 13:54:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD1B7C116C6;
- Mon, 19 Jan 2026 13:54:15 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 1250F43E36;
+ Mon, 19 Jan 2026 13:54:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E5F8CC116C6;
+ Mon, 19 Jan 2026 13:54:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768830855;
- bh=K15sz4wyCclDkJnhASr6DGuh8D11wAa1YBNtFs/ZFF4=;
+ s=k20201202; t=1768830856;
+ bh=UCcrN4g6ZzXkM+5m+tcl3ItNF1NqqQRbwaKWqRbYiTU=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=ovGMdkWfDd9mNeJUjwzjqaIhkRtyw02y1OCCz0DXfYBeKcruAtaYoDWGX6gtlTVzO
- m9ZUw6MldAugM9Mbhs1E+9fdXRh4aKKOuSwgqLmPbNXqyjCSWz3DJ3hrK3cAGLkaqb
- TvUQP6REqhGkFLb6bhjAO18jDyj3yPO2bWjQh8CHjGvBU3D1xo1UPR1C53Kf7L0FQf
- 7SMDMi/yAZm7Qc9G/0sHh2UWu2/EvzFO2vzHs2vadpP3kASJeQHiZ9x4geZ1WPaAmr
- 84XFYGOjSmmhZTvr3Du9rFZ1yfv83GzWoheYo6AhB0nbYpDIkfrzSi0jlm1rfZBxiA
- IKGBlouCcPcuA==
+ b=HOiIoxtPlW2BzrowwYkgGoD8a5bqRa3Ypp+vPcZHy3xAtBBZVjlR+bIEsRjGe9Gur
+ ZE2UFjYD8jGRC/PLeczC67h7+u+pkHzNpOPK2N5YobLAc4yscWEN2NyjBcQgyULcUo
+ EKRKaGMoHThjwzlHojVS6xGSsBrUG8+rt0P4iMcBu4yuHb/FoOaO0DsHqkLfWd+9B2
+ Ic6rZFoUfi1JUYXRyNsnkOauuJimxS4LQe71DpB0HhBHIfPU7OhB7UYTeeXAd0zsE1
+ vy9VL1dmH+vauUsXvER836BRrkEQkXicLUKeEcGPCRmP+vF9zQVNa3IwM4VQpsuGyy
+ d2wvRTGR84XDA==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
  by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- B58053A54A38; Mon, 19 Jan 2026 13:50:46 +0000 (UTC)
+ F28B93A54A38; Mon, 19 Jan 2026 13:50:47 +0000 (UTC)
 MIME-Version: 1.0
-Message-Id: <176883064552.1419958.12451126631540238696.git-patchwork-notify@kernel.org>
-Date: Mon, 19 Jan 2026 13:50:45 +0000
-References: <20260113062229.4062-1-chao@kernel.org>
-In-Reply-To: <20260113062229.4062-1-chao@kernel.org>
+Message-Id: <176883064677.1419958.15115865034651314152.git-patchwork-notify@kernel.org>
+Date: Mon, 19 Jan 2026 13:50:46 +0000
+References: <20260107112218.1789-1-chao@kernel.org>
+In-Reply-To: <20260107112218.1789-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -79,10 +79,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 13 Jan 2026 14:22:29 +0800 you
- wrote: > Xiaolong Guo reported a f2fs bug in bugzilla [1] > > [1]
- https://bugzilla.kernel.org/show_bug.cgi?id=220951
- > > Quoted: > > "When using stress-ng's swap [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 7 Jan 2026 19:22:18 +0800 you wrote:
+ > As syzbot reported an use-after-free issue in f2fs_write_end_io(). > >
+ It is caused by below race condition: > > loop device umount > - worker_thread
+ > - [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +94,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vhpi1-0005qt-4f
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid mapping wrong physical
- block for swapfile
+X-Headers-End: 1vhpi7-0005r6-B1
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid UAF in f2fs_write_end_io()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,9 +110,9 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: patchwork-bot+f2fs--- via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: daehojeong@google.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, guoxiaolong2008@gmail.com,
- jaegeuk@kernel.org, stable@kernel.org
+Cc: syzbot+b4444e3c972a7a124187@syzkaller.appspotmail.com, jaegeuk@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, stable@kernel.org,
+ linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -123,23 +122,34 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Tue, 13 Jan 2026 14:22:29 +0800 you wrote:
-> Xiaolong Guo reported a f2fs bug in bugzilla [1]
+On Wed,  7 Jan 2026 19:22:18 +0800 you wrote:
+> As syzbot reported an use-after-free issue in f2fs_write_end_io().
 > 
-> [1] https://bugzilla.kernel.org/show_bug.cgi?id=220951
+> It is caused by below race condition:
 > 
-> Quoted:
-> 
-> "When using stress-ng's swap stress test on F2FS filesystem with kernel 6.6+,
-> the system experiences data corruption leading to either:
-> 1 dm-verity corruption errors and device reboot
-> 2 F2FS node corruption errors and boot hangs
+> loop device				umount
+> - worker_thread
+>  - loop_process_work
+>   - do_req_filebacked
+>    - lo_rw_aio
+>     - lo_rw_aio_complete
+>      - blk_mq_end_request
+>       - blk_update_request
+>        - f2fs_write_end_io
+>         - dec_page_count
+>         - folio_end_writeback
+> 					- kill_f2fs_super
+> 					 - kill_block_super
+> 					  - f2fs_put_super
+> 					 : free(sbi)
+>        : get_pages(, F2FS_WB_CP_DATA)
+>          accessed sbi which is freed
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to avoid mapping wrong physical block for swapfile
-    https://git.kernel.org/jaegeuk/f2fs/c/5c145c03188b
+  - [f2fs-dev] f2fs: fix to avoid UAF in f2fs_write_end_io()
+    https://git.kernel.org/jaegeuk/f2fs/c/ce2739e482bc
 
 You are awesome, thank you!
 -- 
