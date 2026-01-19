@@ -2,72 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FE3BD3ACAF
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 15:47:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 139A1D3ACB0
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 15:47:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=T7NDOoUcepHwrhspvUBN8lehBZ79D3Hmky+v7TKAkIs=; b=BSYOSZ7xJxz6P28VafjuyXa+1A
-	16j16fRAYciEyHHEY9UzJtPyahmfXIx8njMDN+DJjxHkn7TL++jNYY6iMg6YEKtPiNziz4bmiagSr
-	09EjHg1sqaHnJUvZgF0kJAIBTXTWo1Qd6B5Z9NPsFUWayk/g44PR9YdR37PjWrpTmayk=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=9fUACsM89ZoXkN8UcuoqIA3WO272qIYU+MR07oERZM0=; b=k/qMmuApUdae2x9mzAuw6a/lp/
+	IGtaOYL9N3s/7uGL4RND9H2zdSoq5vAXBFILXoC0/ZvSntiBjOLWYdqvI1N0gNWX070NCFDd+/WaU
+	ujXVfb5Ix/w5OPEVpRwQ6kuh+lOW7esxGcul8vC18N4y7y6qAHE9HWKbsEEc1Rdbd91I=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vhqWw-00045y-GT;
-	Mon, 19 Jan 2026 14:46:58 +0000
+	id 1vhqX2-0003C5-Q9;
+	Mon, 19 Jan 2026 14:47:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vhqWv-00045p-3A
+ (envelope-from <chao@kernel.org>) id 1vhqX1-0003Bz-Hh
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 14:46:57 +0000
+ Mon, 19 Jan 2026 14:47:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iD+hcZdggzL25y3HrNPg7R0i0js2N6/jL4sywdHPXGE=; b=b/KYKrWzen2oG31pN9JP/SDyXA
- z1KnmnHtrTBW3tOxpQgNXiu0yXxgxP2//0TS+tJa/ncvvjCL3eDfLrxtBrRPRm2privDtzsiA/HRE
- vY+mEY4zA7avWHWeUjBlwIbgQObxwLdKe+67KEYvizZZRX8j2xVI86e2vv3od+gKie7M=;
+ bh=teNaU+J26crTj/WEsr4FSZ98zxDh1+1gWmmDAmI2KiE=; b=is0SZm48ys1lW2I6xCjC5Egj/M
+ IvN3/nWwQfcq4EUll6wMKfDkVggZT/IrFuVhColyifxrER3A7U/v6RifBtMxkMZOYdAooG5YIq/6j
+ qehsAZBPoBh+jcICuAlC7Mzb85UPr+Xh2XO9ac40QnyYrGvquc4NMdrXCYfp0CSV2sKY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=iD+hcZdggzL25y3HrNPg7R0i0js2N6/jL4sywdHPXGE=; b=e
- FFjU+nVXGDhbvky0UYXroc7rjZBB4Va9TrBVXEk1V70O0CLOdkuA9ZjIsL5kewaTf5v4Ww1MunwyL
- Jp1cjH5FR9NdYy2/jy5KmxWiEDxZAe6wpHOiF67h7jYF0CIJ0JJrmX0JSPckbejcCgBV7gmYBLKuN
- qqB+ZN+O9fijFq/0=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=teNaU+J26crTj/WEsr4FSZ98zxDh1+1gWmmDAmI2KiE=; b=CYqTSfkF182FAvvmlr7UgrGX5v
+ SVJVvXXofcL6Ug9tialX+UKL53ZR4uzDxvb1NaJCV4sWa5niUZNOtvclBbJMBZA/q8ueoGFm6o8fp
+ JV9qcaqlGkdssNuSdGgVLE3vwAVNsB+hNkjJ0T+gm5cegcxtMdipA3DpNE6D21jlhhU8=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vhqWu-0000EM-Fz for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 14:46:57 +0000
+ id 1vhqX1-0000Eh-1h for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jan 2026 14:47:03 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id BEA3860127
+ by tor.source.kernel.org (Postfix) with ESMTP id 7B09460135
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 19 Jan 2026 14:46:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC267C2BC87;
  Mon, 19 Jan 2026 14:46:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82ECAC116C6;
- Mon, 19 Jan 2026 14:46:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768834010;
- bh=ukHCNUzs9mUD12QXntDw9IBqfK1oJXVfvPn00ZnNKhs=;
- h=From:To:Cc:Subject:Date:From;
- b=pBhOLHsn1mw28omOgidlAevjbgs7mOmlvFsPOgJ622DsWY9UYruUaVMeF7iymbyME
- Dxd2iOfPajMfkzV92D5OlO01biVrnGaOXLyZJ03uMYwZ9fqmoybTI4F1azlouxgdoM
- Io8k66ZzzvHMaqDWdmHAE/pHBRy4ojLBKJ35y06Asla7MG0fyHvIpWRWXPGPnWPXbd
- 9mquN2KLRilH5Rq61UhdaUt63GTBM8lJC8IlCRz1pXAS/V8shRgy1v4LRlyURbs2T1
- iksL1/W78RMgq+k0mr6xhGL8qiRGeH+wS0FX38sRM+I/MrhLg9fzfEnLdLo5LSRgYx
- B7hvKw6PkmBfw==
+ s=k20201202; t=1768834012;
+ bh=cpepyOoJYyqrPZNpjm50qjy8to4U+hnkpMNW8x4AblY=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=uK5hUso0baL+dnPeqSOGm75+ZcRGbhrcp4pSAAR73EGl6uCAGEn2PKA7UTpjZaMnu
+ YdcAEfBGbiaqrEOni6hoFjI+MC+vuFz6Aj21ENTFboUtATS6M1DMVlVbPquFLBwRdX
+ W8/BjPbW4LQdkHlej4WCTSr2hsMWd7ti5vxekt7Buq9IjFYzgCz9w3E0KJ7jXex9XP
+ RpH21Vn3IOgbLw/fp+SU8whSUg5F5hmFtcwCCRiedHavMTqXfdTTQ91+VPr1Hd+nC0
+ iB+xgFNL9vcb6X0d9kcqCDV3ruXuy/n8zPrOqg0kTS36JsGS5fgO4n7nPIq3WIwyeK
+ G1hlyMk/QoUnQ==
 To: jaegeuk@kernel.org
-Date: Mon, 19 Jan 2026 21:32:29 +0800
-Message-Id: <20260119133230.16481-1-chao@kernel.org>
+Date: Mon, 19 Jan 2026 21:32:30 +0800
+Message-Id: <20260119133230.16481-2-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20260119133230.16481-1-chao@kernel.org>
+References: <20260119133230.16481-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -76,12 +78,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This patch introduces sbi->nr_pages[F2FS_SKIPPED_WRITE] to
- record any skipped write during data flush in f2fs_enable_checkpoint(). So
- in the loop of data flush, if there is any skipped write in previous flush,
- let's retry sync_inode_sb(), otherwise,
- all dirty data written before f2fs_enable_checkpoint()
- should have been persisted [...] 
+ Content preview: In order to simulate skipped write during
+ enable_checkpoint().
+ Signed-off-by: Chao Yu <chao@kernel.org> ---
+ Documentation/ABI/testing/sysfs-fs-f2fs
+ | 1 + Documentation/filesystems/f2fs.rst | 1 + fs/f2fs/data.c | 4 ++++
+ fs/f2fs/f2fs.h | 1 + fs/f2fs/super.c | 1 + 5 [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +95,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vhqWu-0000EM-Fz
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: check skipped write in
- f2fs_enable_checkpoint()
+X-Headers-End: 1vhqX1-0000Eh-1h
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: introduce FAULT_SKIP_WRITE
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,139 +115,80 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch introduces sbi->nr_pages[F2FS_SKIPPED_WRITE] to record any
-skipped write during data flush in f2fs_enable_checkpoint().
-
-So in the loop of data flush, if there is any skipped write in previous
-flush, let's retry sync_inode_sb(), otherwise, all dirty data written
-before f2fs_enable_checkpoint() should have been persisted, then break
-the retry loop.
+In order to simulate skipped write during enable_checkpoint().
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
-Changelog:
-- code is based on 'Revert "f2fs: add timeout in f2fs_enable_checkpoint()"'
- fs/f2fs/data.c  | 12 ++++++++++++
- fs/f2fs/f2fs.h  |  2 ++
- fs/f2fs/super.c | 37 +++++++++++++++++++++++++++++++++----
- 3 files changed, 47 insertions(+), 4 deletions(-)
+ Documentation/ABI/testing/sysfs-fs-f2fs | 1 +
+ Documentation/filesystems/f2fs.rst      | 1 +
+ fs/f2fs/data.c                          | 4 ++++
+ fs/f2fs/f2fs.h                          | 1 +
+ fs/f2fs/super.c                         | 1 +
+ 5 files changed, 8 insertions(+)
 
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 7398b369784c..9a8ec2290f68 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -744,6 +744,7 @@ Description:	Support configuring fault injection type, should be
+ 		FAULT_ATOMIC_TIMEOUT             0x00400000 (1000ms)
+ 		FAULT_VMALLOC                    0x00800000
+ 		FAULT_LOCK_TIMEOUT               0x01000000 (1000ms)
++		FAULT_SKIP_WRITE                 0x02000000
+ 		===========================      ==========
+ 
+ What:		/sys/fs/f2fs/<disk>/discard_io_aware_gran
+diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+index fc005f2eaf86..7e4031631286 100644
+--- a/Documentation/filesystems/f2fs.rst
++++ b/Documentation/filesystems/f2fs.rst
+@@ -218,6 +218,7 @@ fault_type=%d		 Support configuring fault injection type, should be
+ 			     FAULT_ATOMIC_TIMEOUT             0x00400000 (1000ms)
+ 			     FAULT_VMALLOC                    0x00800000
+ 			     FAULT_LOCK_TIMEOUT               0x01000000 (1000ms)
++			     FAULT_SKIP_WRITE                 0x02000000
+ 			     ===========================      ==========
+ mode=%s			 Control block allocation mode which supports "adaptive"
+ 			 and "lfs". In "lfs" mode, there should be no random
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 5b4832956196..00108d5881aa 100644
+index 00108d5881aa..830c8090767e 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -3500,6 +3500,15 @@ static inline void account_writeback(struct inode *inode, bool inc)
- 	f2fs_up_read(&F2FS_I(inode)->i_sem);
- }
+@@ -2926,6 +2926,10 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
+ 		goto got_it;
+ 	}
  
-+static inline void update_skipped_write(struct f2fs_sb_info *sbi,
-+						struct writeback_control *wbc)
-+{
-+	long skipped = wbc->pages_skipped;
++	if (is_sbi_flag_set(fio->sbi, SBI_ENABLE_CHECKPOINT) &&
++		time_to_inject(fio->sbi, FAULT_SKIP_WRITE))
++		return -EINVAL;
 +
-+	if (skipped && is_sbi_flag_set(sbi, SBI_ENABLE_CHECKPOINT))
-+		atomic_add(skipped, &sbi->nr_pages[F2FS_SKIPPED_WRITE]);
-+}
-+
- static int __f2fs_write_data_pages(struct address_space *mapping,
- 						struct writeback_control *wbc,
- 						enum iostat_type io_type)
-@@ -3564,10 +3573,13 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
- 	 */
- 
- 	f2fs_remove_dirty_inode(inode);
-+
-+	update_skipped_write(sbi, wbc);
- 	return ret;
- 
- skip_write:
- 	wbc->pages_skipped += get_dirty_pages(inode);
-+	update_skipped_write(sbi, wbc);
- 	trace_f2fs_writepages(mapping->host, wbc, DATA);
- 	return 0;
- }
+ 	/* Deadlock due to between page->lock and f2fs_lock_op */
+ 	if (fio->need_lock == LOCK_REQ && !f2fs_trylock_op(fio->sbi, &lc))
+ 		return -EAGAIN;
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 035239758e33..52cec6b3ecf0 100644
+index 52cec6b3ecf0..3a8e1dcdcd69 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -1238,6 +1238,7 @@ enum count_type {
- 	F2FS_RD_META,
- 	F2FS_DIO_WRITE,
- 	F2FS_DIO_READ,
-+	F2FS_SKIPPED_WRITE,	/* skip or fail during f2fs_enable_checkpoint() */
- 	NR_COUNT_TYPE,
- };
- 
-@@ -1476,6 +1477,7 @@ enum {
- 	SBI_IS_RESIZEFS,			/* resizefs is in process */
- 	SBI_IS_FREEZING,			/* freezefs is in process */
- 	SBI_IS_WRITABLE,			/* remove ro mountoption transiently */
-+	SBI_ENABLE_CHECKPOINT,			/* indicate it's during f2fs_enable_checkpoint() */
- 	MAX_SBI_FLAG,
+@@ -66,6 +66,7 @@ enum {
+ 	FAULT_ATOMIC_TIMEOUT,
+ 	FAULT_VMALLOC,
+ 	FAULT_LOCK_TIMEOUT,
++	FAULT_SKIP_WRITE,
+ 	FAULT_MAX,
  };
  
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 97c2264ec7fe..0afe9f829058 100644
+index 0afe9f829058..5d8b2e812340 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -2690,6 +2690,7 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
- 	long long start, writeback, end;
- 	int ret;
- 	struct f2fs_lock_context lc;
-+	long long skipped_write, dirty_data;
+@@ -70,6 +70,7 @@ const char *f2fs_fault_name[FAULT_MAX] = {
+ 	[FAULT_ATOMIC_TIMEOUT]		= "atomic timeout",
+ 	[FAULT_VMALLOC]			= "vmalloc",
+ 	[FAULT_LOCK_TIMEOUT]		= "lock timeout",
++	[FAULT_SKIP_WRITE]		= "skip write",
+ };
  
- 	f2fs_info(sbi, "f2fs_enable_checkpoint() starts, meta: %lld, node: %lld, data: %lld",
- 					get_pages(sbi, F2FS_DIRTY_META),
-@@ -2698,17 +2699,45 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
- 
- 	start = ktime_get();
- 
-+	set_sbi_flag(sbi, SBI_ENABLE_CHECKPOINT);
-+
- 	/* we should flush all the data to keep data consistency */
- 	do {
-+		skipped_write = get_pages(sbi, F2FS_SKIPPED_WRITE);
-+		dirty_data = get_pages(sbi, F2FS_DIRTY_DATA);
-+
- 		sync_inodes_sb(sbi->sb);
- 		f2fs_io_schedule_timeout(DEFAULT_SCHEDULE_TIMEOUT);
--	} while (get_pages(sbi, F2FS_DIRTY_DATA) && retry--);
-+
-+		f2fs_info(sbi, "sync_inode_sb done, dirty_data: %lld, %lld, "
-+				"skipped write: %lld, %lld, retry: %d",
-+				get_pages(sbi, F2FS_DIRTY_DATA),
-+				dirty_data,
-+				get_pages(sbi, F2FS_SKIPPED_WRITE),
-+				skipped_write, retry);
-+
-+		/*
-+		 * sync_inodes_sb() has retry logic, so let's check dirty_data
-+		 * in prior to skipped_write in case there is no dirty data.
-+		 */
-+		if (!get_pages(sbi, F2FS_DIRTY_DATA))
-+			break;
-+		if (get_pages(sbi, F2FS_SKIPPED_WRITE) == skipped_write)
-+			break;
-+	} while (retry--);
-+
-+	clear_sbi_flag(sbi, SBI_ENABLE_CHECKPOINT);
- 
- 	writeback = ktime_get();
- 
--	if (unlikely(get_pages(sbi, F2FS_DIRTY_DATA)))
--		f2fs_warn(sbi, "checkpoint=enable has some unwritten data: %lld",
--					get_pages(sbi, F2FS_DIRTY_DATA));
-+	if (unlikely(get_pages(sbi, F2FS_DIRTY_DATA) ||
-+			get_pages(sbi, F2FS_SKIPPED_WRITE)))
-+		f2fs_warn(sbi, "checkpoint=enable unwritten data: %lld, skipped data: %lld, retry: %d",
-+				get_pages(sbi, F2FS_DIRTY_DATA),
-+				get_pages(sbi, F2FS_SKIPPED_WRITE), retry);
-+
-+	if (get_pages(sbi, F2FS_SKIPPED_WRITE))
-+		atomic_set(&sbi->nr_pages[F2FS_SKIPPED_WRITE], 0);
- 
- 	f2fs_down_write_trace(&sbi->gc_lock, &lc);
- 	f2fs_dirty_to_prefree(sbi);
+ int f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned long rate,
 -- 
 2.40.1
 
