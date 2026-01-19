@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15654D3B1C1
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 17:43:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39CE4D3B1C6
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 17:43:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:To:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=5oVokkeGketWtQ88zzZoY6HxMKVERL+OfJubR8q2ahk=; b=E+cmEJInbPlKsnLhe+L7Y/RD9U
-	dnzG4BJnO6sbfjnqiSxGmiCtEWn1Y5pOjTvvYvZ+oNrmcxNy62r4+9L0jTkRplmS77mlXhNTSdweY
-	CUKJH02IOpZa0m73iwQ/Lf4AQfuZcAD6RU4IuknOLPAJyrpg1GUl0tr1CucM4LsWdTzA=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=PjkTtBUDdVAfF0q1IN7Fwd8Rctp413lHgAevrk3suV0=; b=Qk/o0JkN17/BX3FXVc2dC3q0ch
+	B/cV02SlVmMYh7cf/XwANV6AOyoxTRxamUWLWJardTJDusEDyZ2OcOcXt4F1zoJVeGLfjVM0LD9v4
+	53XOgmHDGpywI8WxI/h5XenjYitxUxAZGPDHwie5bbnAhqFlOF0oJRtwDHMi57UH982w=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vhsLX-0006iZ-IV;
-	Mon, 19 Jan 2026 16:43:20 +0000
+	id 1vhsLq-00064Q-Th;
+	Mon, 19 Jan 2026 16:43:38 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <amir73il@gmail.com>) id 1vhsLW-0006iP-KL
+ (envelope-from <amir73il@gmail.com>) id 1vhsLq-00064K-Gu
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 16:43:19 +0000
+ Mon, 19 Jan 2026 16:43:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
  Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OP488vxzDs37SDvqB3SvtrET0fHZKVUQCP8+UqFkiUw=; b=h3gpCPTu3V6XphszlZXqndMdGy
- 8W/UUtHxEMGzHmUc0d0nOZn9f/DiXfesjZ+pcSPM23WLBdkN81BSD6DUQYuNPW8heW+LSw/FBwdNw
- p5URLSMOz0r+1K3b1HGytnJaRHjIl4biMB3W5Ju0s6caOkaPqEgqPKtXfKsxC6OOGzD4=;
+ bh=t7xapJC59KqqTTsHRvPEloTsuOjJhUfycEcUpCAL4U8=; b=kL467upNh1k9xcORPA4ekjtaht
+ VmtTj9QLS43BmrLqIiXgUtoKFwEkBwbcLhNt2cMjoY/92pXEJYomdO7JEgBs2oK5Qxkuo7NiaIhjY
+ YjRMALGnpqx8gQkPjbMFGBc3bBE5BZh4GNmkE6AglehersclB6Qol3rIUA/ZqXk7Y4mU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
@@ -40,63 +40,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OP488vxzDs37SDvqB3SvtrET0fHZKVUQCP8+UqFkiUw=; b=UeBuySLJ5L/GG4lWTMKP7oB3DS
- aGWCL51D5//CxR/JljgSMvPZ8mmmBg8Cg37Am81SnkDUm2fR6Bsd58dN6eiuLfWMSNPM6Idont0Z1
- 7gfmIbLBwIzP5/le5c0vgFKjue8dLkbUKElL+Df6D2GWyM2ADqw5l9mJ26PwaiD/ZCuY=;
-Received: from mail-ed1-f43.google.com ([209.85.208.43])
+ bh=t7xapJC59KqqTTsHRvPEloTsuOjJhUfycEcUpCAL4U8=; b=J1SOzcsBg5m39WplY3TgwMhg2O
+ kB2abLISEKO5wobb3ccf1DBSmYjBFVbgScleTjll/NDhYYxNZyq5WW8iKcqW+xkFC0tpK+tRv6Ifk
+ ogJvfeI6L0HTBvd+C4/mmVJ1ZsCEnAJax6K7TcGs10WIfYA07Wfqq3jO336Cq1qjvoRw=;
+Received: from mail-ed1-f50.google.com ([209.85.208.50])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vhsLX-0000bC-1W for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 16:43:19 +0000
-Received: by mail-ed1-f43.google.com with SMTP id
- 4fb4d7f45d1cf-6505d3b84bcso6787825a12.3
+ id 1vhsLq-0000c1-78 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jan 2026 16:43:38 +0000
+Received: by mail-ed1-f50.google.com with SMTP id
+ 4fb4d7f45d1cf-64b9b0b4d5dso9321443a12.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 19 Jan 2026 08:43:18 -0800 (PST)
+ Mon, 19 Jan 2026 08:43:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768840987; x=1769445787; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1768841012; x=1769445812; darn=lists.sourceforge.net;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OP488vxzDs37SDvqB3SvtrET0fHZKVUQCP8+UqFkiUw=;
- b=O0HsjN+mfvqVwW2nVA4StFMt1EYVAxpYsvMDn2hkkc088JtDj4Gcyqm249L8/7ydM7
- UTElnBJ/3XQPiC3QvzgxLqqyn1JCvHaIQtnArXubt5xxSsJ2gGSU5I71FXyarDwjhV4a
- ZjDvZfElTQCjxCinEXypwpqDdxJblex3dsc8G/zjNiVoQmz2bowC/Mr/jLDYKrwenggI
- v41StodO4SwLsDTGvU9jcVTg/q/BOpURtfJWXOzR/fMmTKjpd+JLizwarGH0KQf245Tj
- xLv+wZGBJ/+mrWO2M4jy0/fUueHqQdK2MsmPsot+onUb9WGC93CFtKAm7TIseZurteIC
- S5wA==
+ bh=t7xapJC59KqqTTsHRvPEloTsuOjJhUfycEcUpCAL4U8=;
+ b=OrBQYMF/uDVY10cih2L4qzZOrlhh1yPLldXAV7zCwv3xv1+69qS5qkra/HOPI6UzPt
+ reEV2SgZbivoinE6huW2564ehriNjwlH8bacg64/48WJT4tVW+VDu5qGWAc5/qAHnnKV
+ 4D43tDc+Yg4GH6WOroMjs8yA9XxNuHeVv8BV2IJxxNsDRp8sMftagS81Z4L77UaWkv11
+ QDO7zlyPP8nYsXDyQUT7t23QNIO2KFpkAcivvXmqCnKkcNdZqwC3y2UGx4URVW41Y49U
+ 4Gk3Tcyp2wmyX6ak+LBNAyihXGSstlxeqKQf0LpM9Ip4EV0sRTkuwqSMfrlj3c/QDwZX
+ VqLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768840987; x=1769445787;
+ d=1e100.net; s=20230601; t=1768841012; x=1769445812;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=OP488vxzDs37SDvqB3SvtrET0fHZKVUQCP8+UqFkiUw=;
- b=vnkwmTB71yr9yWF7t/BLB1t9K4py6cy3YOZ43kWRIg3K8DATprH4Q+eFwMHw1kATo5
- zVlip1iktq/WABSdlkSQWqiBz7xg7bOtMlYVriNUJ14vn9G2GNwFgQC67NuBApWbBJws
- AIKgOq14ZHUdDSlb17/nmCtzy1k8sk8LZHY1+0V6w3Gx47hyyg7pHsiFkz7zr4qKTtLE
- AdpCNwNPtkSfqB1jqxqc8uSeU1THQCIDjP2F1u2wr+p3ru1DPbSmHrd88xNITAzCcySX
- nBsfwz0iuysgrivOLfgRQU+eC81ykzNkuqPNEbrdMwL9FdFt6RTuWAIQxA/xlgiuCVx3
- gLgw==
+ bh=t7xapJC59KqqTTsHRvPEloTsuOjJhUfycEcUpCAL4U8=;
+ b=vur5LoG2zOEHTV2BbQM35rNDw3VBsVV+vWn44gIA3HRz+HYb5qSQ6WGAO3I1NTRDmR
+ 9rds7nZy9q4jsVN+DWeIqlAmK2rgLeGdcrIvzx8jT5fh/QqqeoAC9oot6jqu/xv0MOKi
+ AA1/UTSJ8JNhhK8nX3TaoPLmjH28Ut1OFSZ8NvAVviNmvz6l5lmm+fHsce8BwuHyl/rX
+ HFjkR+Eluijux0PSqeIcLMqMmYytqW90TRSJfaI9BuG2aiQIcWA4p7f/xTP7sRjEcOHA
+ 6UFpFoYcyiI/jV9ys1cyLP4XE7ZQ8B8nZMjoWiwBBtUXvzsI7MsX3uMX27hEbuew11J8
+ l4pQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrWTRQyjef0TfSNwm4vPRNilumSsD+o1ttDNNzLIeLkyt0nT5kr3AtG9fFGU77wzpeIavQ/pqp+X75JvlnM/0s@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yxuf0DFNq93n2gHWO8zqHKQhnarapyXEaLK8UuvVfmTbFbKILND
- rlzVqTfz9Ya4Iu46k/KfUHZBcSubcs0gkijknY1ooKuMGPpuod8WsAiQ/ovHjSYjDzeOl1rhiSd
- XoHuLQL4zxJHHQCWr83rKPJYHokipMcQ=
-X-Gm-Gg: AZuq6aLZ1uiEcAJg7t4Quy4TpNL8K2yK0JvpV99PJhBeUShDU5zz8mWkjz074ZVzLJn
- 4jBg031qRUkYXBbTdfOnDE+8M2HVHn+RpWG6xuNV2oC2UCt6ZHBIEaPGkwd7gZltKS8vP74y9FB
- sESAzrplBpHHKQNJ78rVrh7cBG4e1hCPMZMwBLc6siqnIuFfSX1APiGLBYmLBa6sc1+LrGEfAPy
- 9zCeh0NmJrAiiGhe3Yd5I/0Ep8opRE1IEBqX+obQdVaR+n8A1lnKHtNk6o6RUjannNFRVrHaKlE
- iGQy/AjlVJJAlHc1uFCknK6/ChtLzQ==
-X-Received: by 2002:a05:6402:4304:b0:649:b200:afe9 with SMTP id
- 4fb4d7f45d1cf-65452cca909mr8384256a12.27.1768840987066; Mon, 19 Jan 2026
- 08:43:07 -0800 (PST)
+ AJvYcCUUaOyHtqXJ9duFm09+umA/2z4CpEr8u7w6WnyTzHn16NBheghReBocfMjdImE9vABnBVF2tZaWjHUgSY7o2nTV@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzJe/VFNJxn94Kebje1yrKh3D70VlHIgawntkXRH5yb13FH7ojC
+ 6dC91dbJwqhE/oEW0bsDYnlJE0dFER9u+s9bu0X20+9GPb11AAeHSi7A6lsWNIdcx9P57sniQUU
+ GzCgfLlF+ErCUGaF8cj53K2ZUEVn3XZc=
+X-Gm-Gg: AZuq6aKeR+Agv+ViED/EkjJWSgZXDxJg6h7ZLXYHZSrks6JVAyKQhDoxxTAdeQm1UZB
+ KkxPD6z5tTnKOAS1IMzxa3ZbVFf7c/ya0zfskc1K80slnYCNagvM4Xd4z+W240ErEyaFLWeMqPb
+ kuHUXGsNhspvecz2PEdeCZGMLybQL//mGCBvdQuFPKuQlz3QUWRGD899rSxgmjVSooFuCtPedhf
+ Q93CSDmHE3vFks+XtH4mkiCooY/v02Wg6NpSzYCyWOWjg30FBdG3nzMW6vSJZFEoZK927lP8Y3V
+ 2p+6QrDwHcUAJ4gTnVaARcGodv5YTm3EYPFZ+KVX
+X-Received: by 2002:a05:6402:5106:b0:64c:584c:556c with SMTP id
+ 4fb4d7f45d1cf-654bb6192admr8530585a12.30.1768841011353; Mon, 19 Jan 2026
+ 08:43:31 -0800 (PST)
 MIME-Version: 1.0
 References: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
- <20260119-exportfs-nfsd-v2-17-d93368f903bd@kernel.org>
-In-Reply-To: <20260119-exportfs-nfsd-v2-17-d93368f903bd@kernel.org>
+ <20260119-exportfs-nfsd-v2-27-d93368f903bd@kernel.org>
+In-Reply-To: <20260119-exportfs-nfsd-v2-27-d93368f903bd@kernel.org>
 From: Amir Goldstein <amir73il@gmail.com>
-Date: Mon, 19 Jan 2026 17:42:54 +0100
-X-Gm-Features: AZwV_QiQ9eetgKyRnXUMiKJDXK2vIOYhTLzpDlKP7IN3cG_hSRVA59Z6sNZRsnw
-Message-ID: <CAOQ4uxgXovX-rPuAE55D8x4jbNOQdAKJH3O5gpHJDMsT7kNGgw@mail.gmail.com>
+Date: Mon, 19 Jan 2026 17:43:19 +0100
+X-Gm-Features: AZwV_QgQ6YFmczFqASwqjyOa509PoCTPsOB-sET1G173IBHOd4X5kFjH9N6z5MI
+Message-ID: <CAOQ4uxjyTdf21G1Y=_5Eox58drVPA0gAMeSQZxh=T36_yzssNw@mail.gmail.com>
 To: Jeff Layton <jlayton@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -105,9 +105,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Jan 19, 2026 at 5:29 PM Jeff Layton wrote: > > Add
- the EXPORT_OP_STABLE_HANDLES flag to overlayfs export operations to > indicate
- that this filesystem can be exported via NFS. > > Signed-off [...] 
+ Content preview:  On Mon, Jan 19, 2026 at 5:30 PM Jeff Layton wrote: > > Add
+ the EXPORT_OP_STABLE_HANDLES flag to fuse export operations to indicate >
+ that this filesystem can be exported via NFS. > > Signed-off-by: [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -121,9 +121,9 @@ X-Spam-Report: Spam detection software,
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [amir73il(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.43 listed in wl.mailspike.net]
-X-Headers-End: 1vhsLX-0000bC-1W
-Subject: Re: [f2fs-dev] [PATCH v2 17/31] ovl: add EXPORT_OP_STABLE_HANDLES
+ [209.85.208.50 listed in wl.mailspike.net]
+X-Headers-End: 1vhsLq-0000c1-78
+Subject: Re: [f2fs-dev] [PATCH v2 27/31] fuse: add EXPORT_OP_STABLE_HANDLES
  flag to export operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -183,24 +183,23 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gTW9uLCBKYW4gMTksIDIwMjYgYXQgNToyOeKAr1BNIEplZmYgTGF5dG9uIDxqbGF5dG9uQGtl
+T24gTW9uLCBKYW4gMTksIDIwMjYgYXQgNTozMOKAr1BNIEplZmYgTGF5dG9uIDxqbGF5dG9uQGtl
 cm5lbC5vcmc+IHdyb3RlOgo+Cj4gQWRkIHRoZSBFWFBPUlRfT1BfU1RBQkxFX0hBTkRMRVMgZmxh
-ZyB0byBvdmVybGF5ZnMgZXhwb3J0IG9wZXJhdGlvbnMgdG8KPiBpbmRpY2F0ZSB0aGF0IHRoaXMg
-ZmlsZXN5c3RlbSBjYW4gYmUgZXhwb3J0ZWQgdmlhIE5GUy4KPgo+IFNpZ25lZC1vZmYtYnk6IEpl
-ZmYgTGF5dG9uIDxqbGF5dG9uQGtlcm5lbC5vcmc+ClJldmlld2VkLWJ5OiBBbWlyIEdvbGRzdGVp
-biA8YW1pcjczaWxAZ21haWwuY29tPgoKPiAtLS0KPiAgZnMvb3ZlcmxheWZzL2V4cG9ydC5jIHwg
-MSArCj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKQo+Cj4gZGlmZiAtLWdpdCBhL2Zz
-L292ZXJsYXlmcy9leHBvcnQuYyBiL2ZzL292ZXJsYXlmcy9leHBvcnQuYwo+IGluZGV4IDgzZjgw
-ZmRiMTU2NzQ5ZTY1YTRlYTBhYjcwOGNiZmYzMzhkYWNkYWQuLjE4YzZhZWU5ZGQyM2JiNDUwZGFk
-YmU4ZWVmOTM2MGVhMjY4MjQxZmYgMTAwNjQ0Cj4gLS0tIGEvZnMvb3ZlcmxheWZzL2V4cG9ydC5j
-Cj4gKysrIGIvZnMvb3ZlcmxheWZzL2V4cG9ydC5jCj4gQEAgLTg2NSw2ICs4NjUsNyBAQCBjb25z
-dCBzdHJ1Y3QgZXhwb3J0X29wZXJhdGlvbnMgb3ZsX2V4cG9ydF9vcGVyYXRpb25zID0gewo+ICAg
-ICAgICAgLmZoX3RvX3BhcmVudCAgID0gb3ZsX2ZoX3RvX3BhcmVudCwKPiAgICAgICAgIC5nZXRf
-bmFtZSAgICAgICA9IG92bF9nZXRfbmFtZSwKPiAgICAgICAgIC5nZXRfcGFyZW50ICAgICA9IG92
-bF9nZXRfcGFyZW50LAo+ICsgICAgICAgLmZsYWdzICAgICAgICAgID0gRVhQT1JUX09QX1NUQUJM
-RV9IQU5ETEVTLAo+ICB9Owo+Cj4gIC8qIGVuY29kZV9maCgpIGVuY29kZXMgbm9uLWRlY29kYWJs
-ZSBmaWxlIGhhbmRsZXMgd2l0aCBuZnNfZXhwb3J0PW9mZiAqLwo+Cj4gLS0KPiAyLjUyLjAKPgoK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYy
-ZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2Uu
-bmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYy
-ZnMtZGV2ZWwK
+ZyB0byBmdXNlIGV4cG9ydCBvcGVyYXRpb25zIHRvIGluZGljYXRlCj4gdGhhdCB0aGlzIGZpbGVz
+eXN0ZW0gY2FuIGJlIGV4cG9ydGVkIHZpYSBORlMuCj4KPiBTaWduZWQtb2ZmLWJ5OiBKZWZmIExh
+eXRvbiA8amxheXRvbkBrZXJuZWwub3JnPgpSZXZpZXdlZC1ieTogQW1pciBHb2xkc3RlaW4gPGFt
+aXI3M2lsQGdtYWlsLmNvbT4KCj4gLS0tCj4gIGZzL2Z1c2UvaW5vZGUuYyB8IDEgKwo+ICAxIGZp
+bGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykKPgo+IGRpZmYgLS1naXQgYS9mcy9mdXNlL2lub2Rl
+LmMgYi9mcy9mdXNlL2lub2RlLmMKPiBpbmRleCA4MTllNTBkNjY2MjI0YTYyMDFjZmM3ZjQ1MGUw
+YmQzN2JmZTMyODEwLi5kZjkyNDE0ZTkwM2IyMDBmZWRiOWRjNzc3YjkxM2RhZTFlMmQwNzQxIDEw
+MDY0NAo+IC0tLSBhL2ZzL2Z1c2UvaW5vZGUuYwo+ICsrKyBiL2ZzL2Z1c2UvaW5vZGUuYwo+IEBA
+IC0xMjE1LDYgKzEyMTUsNyBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGV4cG9ydF9vcGVyYXRpb25z
+IGZ1c2VfZXhwb3J0X29wZXJhdGlvbnMgPSB7Cj4gICAgICAgICAuZmhfdG9fcGFyZW50ICAgPSBm
+dXNlX2ZoX3RvX3BhcmVudCwKPiAgICAgICAgIC5lbmNvZGVfZmggICAgICA9IGZ1c2VfZW5jb2Rl
+X2ZoLAo+ICAgICAgICAgLmdldF9wYXJlbnQgICAgID0gZnVzZV9nZXRfcGFyZW50LAo+ICsgICAg
+ICAgLmZsYWdzICAgICAgICAgID0gRVhQT1JUX09QX1NUQUJMRV9IQU5ETEVTLAo+ICB9Owo+Cj4g
+IHN0YXRpYyBjb25zdCBzdHJ1Y3Qgc3VwZXJfb3BlcmF0aW9ucyBmdXNlX3N1cGVyX29wZXJhdGlv
+bnMgPSB7Cj4KPiAtLQo+IDIuNTIuMAo+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJm
+cy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5u
+ZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
