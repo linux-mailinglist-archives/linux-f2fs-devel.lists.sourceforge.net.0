@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E953AD3B110
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 17:31:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C8C3D3B116
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 17:31:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=YFDMF69xHT2bsPJahIZRf7CdDOrcX6WENuyKHAIy/MI=; b=If1pKOnPkv5Maxk51Nl5Y6M7dD
-	xXBeK7NgdaMVlrx8AIMLIoCu9YVTs93FRIpeIdhzZlAqvRpsytKWU3B46xZhdY1UxmWapnfEvqmFU
-	vJx21KHPKk9xcxi7fcg5i56l/RM5CCIe1YbItLxu2HjFaSVXE28gRkGsYGCCtiuDVjco=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=/Y9Js7QWjDw0V8A1MDz9pkwi+y9x87PzHa6HsCOw44c=; b=aXQ24F24LNGeV1NmL23+TlDu6D
+	uHUPY820c4pWO7YHV5XTOkEoPL72QZcptC+R58aHhqrAkmxme9AbiB7FtXhZjQmxocEmMGAlZldD5
+	IK52eHbXf8n7PhKc7eW0BfodM9KU8fdLIu+885wi8ACfbEpNCUFNKqFPTby2/LXZA7BM=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vhs9l-0006hE-6E;
-	Mon, 19 Jan 2026 16:31:09 +0000
+	id 1vhsAG-0005dB-5y;
+	Mon, 19 Jan 2026 16:31:40 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vhs9i-0006go-Up;
- Mon, 19 Jan 2026 16:31:06 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vhsAD-0005cT-J4;
+ Mon, 19 Jan 2026 16:31:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BVMoZ6aYYtL9nmNsreNI0oxHDB7/XuvSnZNUNgsLjo8=; b=JfafZBFD8KSZI/51L1pbKjKhlC
- iaJ5QmHcl049GuIe/ISgu64M/9Qy/jC384d64WS1/jMPMoJ1GR7KzMKYWypp5NjM4DlGF06iF+iyE
- fLpU+KSWWsAOW+mOFAkiPCxdro59nmS3YlDw1fwRQbUJI30CLyeTFZgRHIefPUct2SVI=;
+ bh=kclJY//hW7ol5koz4lkl7nBJxPLz3h3YqWVGRtkiRrE=; b=cdCTcN/QlD9VTsNo9XEzMHS/f+
+ O6e+pyfYCzDNAnNb6FgyMS+vBavk5Gq6khR8whf9Km6CnJtgFUZMHEvdLkfL2Efei9SJI+HcM4EJe
+ 7PttrkbCWCCoiZgXkrYZ54twc6gOaZN4i+eeYOB9aT10Wljl8eH5CUNvrenEK4+qU9Mg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -39,31 +39,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BVMoZ6aYYtL9nmNsreNI0oxHDB7/XuvSnZNUNgsLjo8=; b=iIXXlphF/Qps/TR7OqquXDZwhc
- zcez0Vv6/j/rGtMI4lbZQXyoMCRdPoXEIHMclREuZL4PafvT5Nnj5et9KiPrlicErco0yjEpDbHhk
- BiqO1mVXHYvuvI05uiq9l7QWDWl8J+2jidoEFr2C0sj3Eig8zviVBo0fRmGPgANMaCCI=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=kclJY//hW7ol5koz4lkl7nBJxPLz3h3YqWVGRtkiRrE=; b=lTYTFaivaxNnP7YUkwMZgH04xq
+ EvZ1RpOy8pj6N9tDQP9Qs5UJPGx/gLlqfYi8jzwx1UD3I5Qm1SHRz2fd4bsQX/8yAOqYx6w7ez/yp
+ hZ9VRYbrqFlQAtIzO3wVlqsIxowXxssOBRh4ZJe4+uN6XcJHoMykxr2rckLTzPNY/3FE=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vhs9i-0008Dy-1s; Mon, 19 Jan 2026 16:31:06 +0000
+ id 1vhs9l-0008EW-5a; Mon, 19 Jan 2026 16:31:38 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id A92AD44507;
+ by tor.source.kernel.org (Postfix) with ESMTP id 85F8F60158;
+ Mon, 19 Jan 2026 16:31:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C4CBEC2BC86;
  Mon, 19 Jan 2026 16:30:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71889C116C6;
- Mon, 19 Jan 2026 16:30:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768840255;
- bh=XGt/aZzfGK9zJQOZBzNGqpMmieKmh9kJIK51xGoE3lw=;
+ s=k20201202; t=1768840263;
+ bh=YvhqTu858V2nHA/DvphvNPgy0WWoXV1XH8O4vHs3r6s=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=aRe9D5Sa7gMB/Ryp1GcMwBIJ0XwKuZ6UClP6Ug45QHAha8tYj9mJ1V510E+A9msBF
- uIhFQ4ERVA2/a/89lazW/TqRbLmJXCbnATean6EIJEuIz/669usXdDh3OAv3cCVNyN
- 153NxFJ5bXU00TkkzzXLWoUrW/pQLk9vKivAvy3EIK99PwQxTlxQfnsqWQCzOs4xkV
- djsQKErslPGQtEcNguvZIqh3BSoWwOetopyqoeBHApuQa2uwYZV8JERw+NxlC0nR0n
- fOEHc48tTPF5j3kPLorwmV32bUWcgE0EFzjrgIlJjLHAtcT1r/8PEQ677OthtO1AHK
- xGnYGFr1AXgiA==
-Date: Mon, 19 Jan 2026 11:26:47 -0500
+ b=h2eWuvDHO+FHNVWC0HtfYiwQLGD+wYaxR9D3B3Ed9tIu0JUYT/Du8NCPJr2Kni+6j
+ FzBHjGuc/OLKKlytLlDDSMvG6K/lZ+1yYDEkp/N9zqPCokk75ZABfwL6avEwi42vps
+ 0f/64rbZnR08cTk3Jklqr4LP4IF+Xj2tBebaD1y0phkAa+Asd/Q4cqS9Zfs0k0IMkF
+ Wcd+HNSs1kfJ+gcQ5lC7WEcMywntkKV3L2fJFu0mtjX/DfTm1UQD/RZLxzC0HuvTay
+ SahYNV1qOWaAxchZUrdKt84Zn3hO16NvxYRmiTOmxr3zcnvDdJtPkIgDlJWEZ0vCK2
+ XLTl9TlK3VJ0g==
+Date: Mon, 19 Jan 2026 11:26:48 -0500
 MIME-Version: 1.0
-Message-Id: <20260119-exportfs-nfsd-v2-30-d93368f903bd@kernel.org>
+Message-Id: <20260119-exportfs-nfsd-v2-31-d93368f903bd@kernel.org>
 References: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
 In-Reply-To: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
 To: Christian Brauner <brauner@kernel.org>, 
@@ -100,46 +100,49 @@ To: Christian Brauner <brauner@kernel.org>,
  OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, 
  Jaegeuk Kim <jaegeuk@kernel.org>, Jonathan Corbet <corbet@lwn.net>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2174; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=XGt/aZzfGK9zJQOZBzNGqpMmieKmh9kJIK51xGoE3lw=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpbltg313cW2t8STVH2Q3f6eFFX8webaAfx8DOM
- GA1WXTggo+JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaW5bYAAKCRAADmhBGVaC
- Fd/6D/9j/oMVrJxeP2Mfuffs6X+mbihS90psuLoEJKbrjqZA7FdFGxRNUgHxspeg1JxUtDbEv7a
- uU4kSCajVCH2iOyDZQHDvyYwkkXW1+PdbM5uKZ/7DFLmaIxhriGPZjNE6IzpuJN48O73ngtU1bb
- P2CJLYNkWnxIJsMzVQaL4bwkbCVO8za/peoBtCgsO+8VOphfgjUEt0WDcgBxDOZdExrFOuNZlkA
- yVOd7lxKLAhNKynWzgdAd5sKikhudMp/54M1K2PccQWIGPdcv4xFGVS3GiU/csV9NzJSKjvCtjJ
- /K1MhVCHGVNaobSkaid3Tly/fXK4uha201p7DIspoVEewSSSXnhx5x0x3aBwwrld/gCO/BQlsYK
- 5rZ2YOFFh/4TRhu7Gv3uRLHaXPpBIvj1iq70FX22A77FNzSrDm4qhCKISIaOPMyLDSI+t5ru9TZ
- j58AKvcl13B3sxdRak3OQWP4MHJncRuHJGlvXrEQaBf/aD6jxo0U6J/EdF0tJYPIILxRvkYndIB
- QsuTvSgf109v+B3Im9IKplrYJZ1er53jnSi8MzCOscRy3zHvch/igrvKIj0Mqnwjj/FRsnpuadV
- MVNdABzxnuvzbDIRfClDT3ehoVXweeSMvlteptmwg0EHO/sEA5XJWFSZvKdtodlu7Pj5Cn4Pepu
- OBCy4/+aVtv9EqQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4169; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=YvhqTu858V2nHA/DvphvNPgy0WWoXV1XH8O4vHs3r6s=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpbltg7KaYG+cOnqGQwFogykRFEv2vvWPelc3rm
+ NkydLb2mGCJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaW5bYAAKCRAADmhBGVaC
+ FWqbEACWyEMei5YgEgZwLPtZYTWHb8tmOW7eGn745dbexN721w1XJin+y0uFuiiEqpYtbB01+nV
+ 8eGJXblAwZWOM56qXzH8kIp9IF0Do5UMXMJTyUb79WR1Vxz5+svm6rH4ORCbDMoohslm0Ey+odn
+ Zx62FtcwzZ/STJY531c69lQu2bhr3cC/ykvj+MnpDF1L6iyuPTl056aSkCGs+2TRjxpwsRGp0tV
+ 7FV1mQVZyW+b344OwsU12+VtzNEUh3CAPnxW20OYd9f0s9HFEpZK4Y9Ep/WsEqP0165/LeBaVXZ
+ Tihw250Wgn1dTNDwYC3840yoGmtFEjRpYdrQxlR1fxUi+1e02u+G+A2z8VPXC2UMtR7HTpWR3kq
+ 0gpbEU4+t6RXYZ2KSP1Qp1R60LWabc62qCpOU1l2LsxieR9zzMNQzgrLEkvEzam75nzR1SYp0M1
+ MAZjAICvnrvk2txw2ibnrnHJErb9vl+kLuB3btLLAaMmNVQQO9QZiA3QpDitFCH5aU6ZVYP8fdD
+ r/l2xb9t2bkCY+uL5zGtY5a9B+sKZHy6JRgOd3o/SiUBbmV6dnxq4JqqdXpdxKAPH7RgwPtK224
+ H9hNJK7Mkv5H+8Si6seHr0qbAPwccoRdGVCztXQ1fdG5MLjNTJb3M6cVTt5Wicf6NlgjQa664oA
+ Z9sNNAkM0OHYjQA==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Some filesystems have grown export operations in order to
- provide filehandles for local usage. Some of these filesystems are unsuitable
- for use with nfsd, since their filehandles are not stable across [...] 
+ Content preview:  Get rid of the dprintk messages in check_export(). Instead
+ add new tracepoints that show the terminal inode and the flags. Signed-off-by:
+ Jeff Layton <jlayton@kernel.org> --- fs/nfsd/export.c | 11 ++++++-----
+ fs/nfsd/trace.h
+ | 52 ++++++++++++++++++++++++++++++++++++++++++++++++++++ 2 files changed,
+ 58 insertions(+), 5 del [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vhs9i-0008Dy-1s
-Subject: [f2fs-dev] [PATCH v2 30/31] nfsd: only allow filesystems that set
- EXPORT_OP_STABLE_HANDLES
+X-Headers-End: 1vhs9l-0008EW-5a
+Subject: [f2fs-dev] [PATCH v2 31/31] nfsd: convert dprintks in
+ check_export() to tracepoints
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -169,55 +172,120 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Some filesystems have grown export operations in order to provide
-filehandles for local usage. Some of these filesystems are unsuitable
-for use with nfsd, since their filehandles are not stable across
-reboots.
-
-In check_export(), check whether EXPORT_OP_STABLE_HANDLES is set
-and return -EINVAL if it isn't.
+Get rid of the dprintk messages in check_export(). Instead add new
+tracepoints that show the terminal inode and the flags.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/nfsd/export.c | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
+ fs/nfsd/export.c | 11 ++++++-----
+ fs/nfsd/trace.h  | 52 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+), 5 deletions(-)
 
 diff --git a/fs/nfsd/export.c b/fs/nfsd/export.c
-index 2a1499f2ad196a6033787260881e451146283bdc..bc703cf58bfa210c7c57d49f22f15bc10d7cfc91 100644
+index bc703cf58bfa210c7c57d49f22f15bc10d7cfc91..3cc336b953b38573966c43000f31cd341380837b 100644
 --- a/fs/nfsd/export.c
 +++ b/fs/nfsd/export.c
-@@ -422,13 +422,15 @@ static int check_export(const struct path *path, int *flags, unsigned char *uuid
- 	if (*flags & NFSEXP_V4ROOT)
- 		*flags |= NFSEXP_READONLY;
- 
--	/* There are two requirements on a filesystem to be exportable.
--	 * 1:  We must be able to identify the filesystem from a number.
-+	/* There are four requirements on a filesystem to be exportable:
-+	 * 1: We must be able to identify the filesystem from a number.
- 	 *       either a device number (so FS_REQUIRES_DEV needed)
- 	 *       or an FSID number (so NFSEXP_FSID or ->uuid is needed).
--	 * 2:  We must be able to find an inode from a filehandle.
-+	 * 2: We must be able to find an inode from a filehandle.
- 	 *       This means that s_export_op must be set.
--	 * 3: We must not currently be on an idmapped mount.
-+	 * 3: It must provide stable filehandles.
-+	 *       This means that EXPORT_OP_STABLE_HANDLES is set
-+	 * 4: We must not currently be on an idmapped mount.
- 	 */
+@@ -435,31 +435,32 @@ static int check_export(const struct path *path, int *flags, unsigned char *uuid
  	if (!(inode->i_sb->s_type->fs_flags & FS_REQUIRES_DEV) &&
  	    !(*flags & NFSEXP_FSID) &&
-@@ -442,6 +444,11 @@ static int check_export(const struct path *path, int *flags, unsigned char *uuid
+ 	    uuid == NULL) {
+-		dprintk("exp_export: export of non-dev fs without fsid\n");
++		trace_nfsd_check_export_need_fsid(inode, *flags);
  		return -EINVAL;
  	}
  
-+	if (!(inode->i_sb->s_export_op->flags & EXPORT_OP_STABLE_HANDLES)) {
-+		dprintk("%s: fs does not provide stable filehandles!\n", __func__);
-+		return -EINVAL;
-+	}
-+
+ 	if (!exportfs_can_decode_fh(inode->i_sb->s_export_op)) {
+-		dprintk("exp_export: export of invalid fs type.\n");
++		trace_nfsd_check_export_invalid_fstype(inode, *flags);
+ 		return -EINVAL;
+ 	}
+ 
+ 	if (!(inode->i_sb->s_export_op->flags & EXPORT_OP_STABLE_HANDLES)) {
+-		dprintk("%s: fs does not provide stable filehandles!\n", __func__);
++		trace_nfsd_check_export_no_stable_fh(inode, *flags);
+ 		return -EINVAL;
+ 	}
+ 
  	if (is_idmapped_mnt(path->mnt)) {
  		dprintk("exp_export: export of idmapped mounts not yet supported.\n");
++		trace_nfsd_check_export_idmapped(inode, *flags);
  		return -EINVAL;
+ 	}
+ 
+ 	if (inode->i_sb->s_export_op->flags & EXPORT_OP_NOSUBTREECHK &&
+ 	    !(*flags & NFSEXP_NOSUBTREECHECK)) {
+-		dprintk("%s: %s does not support subtree checking!\n",
+-			__func__, inode->i_sb->s_type->name);
++		trace_nfsd_check_export_subtree(inode, *flags);
+ 		return -EINVAL;
+ 	}
++	trace_nfsd_check_export_success(inode, *flags);
+ 	return 0;
+ }
+ 
+diff --git a/fs/nfsd/trace.h b/fs/nfsd/trace.h
+index 5ae2a611e57f4b4e51a4d9eb6e0fccb66ad8d288..e3f5fe1181b605b34cb70d53f32739c3ef9b82f6 100644
+--- a/fs/nfsd/trace.h
++++ b/fs/nfsd/trace.h
+@@ -339,6 +339,58 @@ DEFINE_EVENT_CONDITION(nfsd_fh_err_class, nfsd_##name,	\
+ DEFINE_NFSD_FH_ERR_EVENT(set_fh_dentry_badexport);
+ DEFINE_NFSD_FH_ERR_EVENT(set_fh_dentry_badhandle);
+ 
++#define show_export_flags(val)						\
++	__print_flags(val, "|",						\
++		{ NFSEXP_READONLY,		"READONLY" },		\
++		{ NFSEXP_INSECURE_PORT,		"INSECURE" },		\
++		{ NFSEXP_ROOTSQUASH,		"ROOTSQUASH" },		\
++		{ NFSEXP_ALLSQUASH,		"ALLSQUASH" },		\
++		{ NFSEXP_ASYNC,			"ASYNC" },		\
++		{ NFSEXP_GATHERED_WRITES,	"GATHERED_WRITES" },	\
++		{ NFSEXP_NOREADDIRPLUS,		"NOREADDIRPLUS" },	\
++		{ NFSEXP_SECURITY_LABEL,	"SECURITY_LABEL" },	\
++		{ NFSEXP_NOHIDE,		"NOHIDE" },		\
++		{ NFSEXP_NOSUBTREECHECK,	"NOSUBTREECHECK" },	\
++		{ NFSEXP_NOAUTHNLM,		"NOAUTHNLM" },		\
++		{ NFSEXP_MSNFS,			"MSNFS" },		\
++		{ NFSEXP_FSID,			"FSID" },		\
++		{ NFSEXP_CROSSMOUNT,		"CROSSMOUNT" },		\
++		{ NFSEXP_NOACL,			"NOACL" },		\
++		{ NFSEXP_V4ROOT,		"V4ROOT" },		\
++		{ NFSEXP_PNFS,			"PNFS" })
++
++DECLARE_EVENT_CLASS(nfsd_check_export_class,
++	TP_PROTO(const struct inode *inode,
++		 int flags),
++	TP_ARGS(inode, flags),
++	TP_STRUCT__entry(
++		__field(dev_t, dev)
++		__field(ino_t, ino)
++		__field(int, flags)
++	),
++	TP_fast_assign(
++		__entry->dev = inode->i_sb->s_dev;
++		__entry->ino = inode->i_ino;
++		__entry->flags = flags;
++	),
++	TP_printk("dev=%u:%u:%lu flags=%s",
++		  MAJOR(__entry->dev), MINOR(__entry->dev),
++		  __entry->ino, show_export_flags(__entry->flags))
++)
++
++#define DEFINE_NFSD_CHECK_EXPORT_EVENT(name)			\
++DEFINE_EVENT(nfsd_check_export_class, nfsd_check_export_##name,	\
++	TP_PROTO(const struct inode *inode,			\
++		 int flags),					\
++	TP_ARGS(inode, flags))
++
++DEFINE_NFSD_CHECK_EXPORT_EVENT(need_fsid);
++DEFINE_NFSD_CHECK_EXPORT_EVENT(invalid_fstype);
++DEFINE_NFSD_CHECK_EXPORT_EVENT(no_stable_fh);
++DEFINE_NFSD_CHECK_EXPORT_EVENT(idmapped);
++DEFINE_NFSD_CHECK_EXPORT_EVENT(subtree);
++DEFINE_NFSD_CHECK_EXPORT_EVENT(success);
++
+ TRACE_EVENT(nfsd_exp_find_key,
+ 	TP_PROTO(const struct svc_expkey *key,
+ 		 int status),
 
 -- 
 2.52.0
