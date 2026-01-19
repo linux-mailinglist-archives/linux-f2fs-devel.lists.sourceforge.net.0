@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 412DCD3B0AF
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 17:27:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B929BD3B0B1
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 17:27:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=ljxskaFB4A6YBRTqz2HrrYguwfEKVi26qu/1iQ9uEkA=; b=Ixqkaq5dXdP7Mam0lNViZjvVR2
-	lWlG9nWIbaSyp5ZnOM7KNkJKqbPA2ACRe5UQ2r3VDAVs+VvTReufmnii36CaYgAYydyyDQ5/qrPcZ
-	cK8v++W5TeZZ8hcn7uAf2eZUswY8QaZDTkjjA6SAvwMzlFn/34kPNEcZnLMERQzk/e2E=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=TGStO+PDJXl3thiC8vlVrXuSxApnggBORq/Afh8DKiQ=; b=XAwdZhZeoI1krO+8f22fD0MClN
+	w7swjcmxozNZG0qZu9VVvh7yYuO9BfNtjXWHdzNN34hDfy0dGGbR2lxTtLVmBtZM6MHNDerfLXJcO
+	afKx61qxXLSyCsyHpdbpCgtWFJAHcMClgatg5zShVkh7ddrwo0BsMuAe6Jo4hpw5QzaA=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vhs6W-0002ys-Ua;
-	Mon, 19 Jan 2026 16:27:48 +0000
+	id 1vhs6Y-0004rM-Mb;
+	Mon, 19 Jan 2026 16:27:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vhs6O-0002y8-LX;
- Mon, 19 Jan 2026 16:27:40 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vhs6V-0004qc-OA;
+ Mon, 19 Jan 2026 16:27:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5LBMqF0fnkOKDDiKj1UARiPJl+jkJNUF0Z0wVc1Tm3U=; b=ebigWyRFo7Orh6NIDzp3JFq+me
- zz/fkm+/wZ6CBXw/MA5NKIGiHExJzGOQkaq+AQnqHiWoIW0Rj3yDGc8ui7vinLYQ3waz4uCQgu+Y2
- XEMUK8zLFQT/ha2PH3AhS0q8eVeItSsltYvbFabEpM6McSqoXNnoubLXJhgiXL6+F3cU=;
+ bh=2uKyHe9bvtS4rRqV9g+HwXpIhfVuwz+cxuTdSbT39m0=; b=f3Ml+ykNght+YBmK9FLkA0cKHm
+ k02jRt4guEChnBfU7eaU7qyxpsVe+TxwyRzNygTNPAFKj+W14BJgVtMB9k6hMmdMUP1pE8QBYeqW3
+ VJeTFxcdcD/u9e6lieTIvurz3scHLn2RjI8ph0qQXT8r+CGkEe9ffo7I/vZQOWfIDwcU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -39,31 +39,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5LBMqF0fnkOKDDiKj1UARiPJl+jkJNUF0Z0wVc1Tm3U=; b=I0sawQmWx0GjMCvod2cVdc1Ojq
- pQkZRJjNRahKQgljE4gRSXuSWSMjenc1OgiKoCCWaHc8vbvpqGcBSFQEPmWZqIQXRCH0f0oYJdP8I
- ariGJW1WZmIqqlCFhfQeQ22UQBoeo2MdBnoQnloRcKpxGiRpjv1TA2ZfxR91KDHJGwmM=;
+ bh=2uKyHe9bvtS4rRqV9g+HwXpIhfVuwz+cxuTdSbT39m0=; b=ctFXjuYoYswhiKisyohOzP2W5b
+ bAZqjHW5QUEpP5ous1GKiHbTEj0Xn+Uqe9BQZ+Qb8f66eBChq0k67Od7RyYyKxWNN8Cms/tOv6uQu
+ sRwk4Mb37PHtzkyM9MRJAqrwCuZNqFgAZxkU7vQKiGEZesV394IMtJKfk3+PwbuNxeGA=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vhs6O-0007ly-3k; Mon, 19 Jan 2026 16:27:40 +0000
+ id 1vhs6V-0007mV-6m; Mon, 19 Jan 2026 16:27:47 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id BA21544515;
+ by sea.source.kernel.org (Postfix) with ESMTP id D3F3D444E6;
+ Mon, 19 Jan 2026 16:27:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6DEDC116C6;
  Mon, 19 Jan 2026 16:27:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6F16C2BC86;
- Mon, 19 Jan 2026 16:27:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768840054;
- bh=WOmtIr1IsB2xi2+MQpnozeMDf4MRJ512rkEzgmzicq0=;
+ s=k20201202; t=1768840061;
+ bh=0HPdHuxiDqTtA0YywSuVWS43ZS3BgDMq+Pvu7w00t7Y=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=fFGw0NlbN5TsRC2ZjlZjZn9IX/42PhPSQnnYH/4v7sgwhqTBMY/MxwIMIlKkHQgff
- IsnuLQGgFH8eWVaaGOR+eMsdGER+dvGyTUfbMzLqADvcxjbHTL48XRw/G/ojzS6ubF
- gxWUU+M9COq59S0/XzQ0Rg2QVwbbyQSi2S57Ixy4HGcUaYn0kCzvwW32x4YptCcCne
- TC5kQgRykkBR+Q/5D8riOm2605W/IKWQgExzxr/JW0sdu9dkxBbhSvoXfvEW1caiEP
- Jtfr/b52H65goyMqJXxHvpQS5ggVa0+AKp5u4wRq/MKYBMwp0R6Slbqb969DTxzRNV
- Kdv1LlGm6aQKg==
-Date: Mon, 19 Jan 2026 11:26:19 -0500
+ b=fhdBn2dBdU8qsd9fov0W3cRwBs6xrhJwrMmju42vZTu0LzeOcag5Mdd3r7MGvyvhc
+ YG1QDMIXTVtBeBMOaWEDZkVVxwZu+EAfat7NXseb7Li2I0zzhNkCQy7u7LTQqy4eQ0
+ yFx3dacO6OxpJ+t20CfGLKs+fb+h+fjlnywsgqy1yVtebczKM3mdOFE/4kZavk2Q+r
+ UnXmGW0DAKOqCQ10ZePYNiGtJT1Pxx1s5rOAc4Z7h8dPo4CkiHrhax+111awiCI+n2
+ vSLb86fZMTxXENHYCelmDQ1/Gd/cB5QhTtutKl6phJthJ67CysXayb7i1Qe9n7+pWC
+ oI/oX14JZ9AWg==
+Date: Mon, 19 Jan 2026 11:26:20 -0500
 MIME-Version: 1.0
-Message-Id: <20260119-exportfs-nfsd-v2-2-d93368f903bd@kernel.org>
+Message-Id: <20260119-exportfs-nfsd-v2-3-d93368f903bd@kernel.org>
 References: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
 In-Reply-To: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
 To: Christian Brauner <brauner@kernel.org>, 
@@ -100,47 +100,48 @@ To: Christian Brauner <brauner@kernel.org>,
  OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, 
  Jaegeuk Kim <jaegeuk@kernel.org>, Jonathan Corbet <corbet@lwn.net>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3825; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=WOmtIr1IsB2xi2+MQpnozeMDf4MRJ512rkEzgmzicq0=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpbltZJJ4Erxc99mz4JD4fpPhibGNL6s9qiEaxZ
- +ast/XYA8KJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaW5bWQAKCRAADmhBGVaC
- FRr2EACvlm3De5JtqwIRiAJ+yR+TrnRM6zVnaaBcPqW7NWtaotgXHbjPmhHalzQ2ehLlMs4pBwW
- CJdzL/0SuDHd+1ninl8HscU8YeUjTL2yuS1baFgceqGQ56wAeo1gFcMtbsngMt0UiC5VhNd5lzQ
- hisUbwG+ATmkxRNQlt1jg5Knn2k28x7ZuUBDbB9vNczmKJ2P3gR4vHlU6toocVh4tp1XLS8YnS4
- /Th6ZoeqlrAyCsLW2EjmEjXRmVT3n9bN3rhj5BRL01f5sWIKM6YimBAXNaGgfT6UVTHVYycMqid
- z8zjumO5an17putv+hHHquqigVwMPoFkl/R//xJ/wD3NuR6WXPWj/YfRuSTQ6HrgP3/xw6XGitp
- THrn0RYY6owKt+oRWUEoL3eIf6yNlcLh6Z+A7iaacop4/RyPQcauGbboHVG+zQrFpRA0TYU2QWr
- OJuePE5rbnQL9s8mlCeoPUUbX0I0E2jges1C26w/uthmL5Jmlg1eyzXFafUNmt45LVS97O17yyA
- A2BOWaDmYRmleIMtYuRGy98LCY2KV91GcRPRO/n424NqA6H2dC2jvKwMZAfZLHNYZBLKEgJ+x1O
- GEgCl6Q0UBJ87Io0WzdKw7SlTPxZyLbVNRNcBAm3/kG8WoQXajMQfr4a1wQ/fclJWtptjFdnzZD
- anI/Pt3rN8rtBBA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=725; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=0HPdHuxiDqTtA0YywSuVWS43ZS3BgDMq+Pvu7w00t7Y=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpbltZJI9z4X2wT98SLfDh2LLMCfOso9BJWBaSl
+ 4V78G5vaYuJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaW5bWQAKCRAADmhBGVaC
+ FacVEACaj9MFO0nJvhnrbzJlVoaITK++8XVR/P/SlqYInzb6OApdrLCDaYj4o7clJSxoyY2+YXy
+ nufOx/AFKfqW2S6FzC3wk0Amea2TLDHxNelOCx/2SIff9t15wvQiA4ZLxpYQVPPFLVxQK2GRK1Y
+ GYWpk4R5NQjW8pI6fmnlB1C0Up+pudUOErMNmSgrXnGknVVaCMzqt2Wmc0wQ/KnpYYRDjqWzc9Z
+ 4aPzlAGV0DjDnRr7i1ILM6O7+x9H1+oqvDf5uPli/I699nETR/nnfhRR9ydxu2O/Y0BcZIQi4L8
+ DWiDejEGM1IDAXwNfYeM2L24B9rzknRun4ykATk1QAYlBA8sjY2hW5RA1rtsopmXraY0wgLM+v/
+ GF/ZzduMVkxw2L7+3SfIwl9IF4v8+vk8svrrLK2aDrvbA35RDe0QC55Z5Tp+7RGh0S9AL5Tpgz5
+ RFL3t9hL/j+ejpsxX+/cYTzdyMe+uIzqVubH4KhniotJHOe3U+wPHnwZXvvfOu0QOutCllL4o4C
+ pl735gbPZcgpGxib1cuKMRukAgWC60c2w+jfYn3Vb+VyhwXLbEh8Vg9K7yMsSHYubjYw3a+MP8B
+ 2PdQ1JkgTqMvc6gHLGaQrzIftI9HQBd8a3otzqg3wULPebh48F1QRniiGaGou9fA4+pe0fcaGK7
+ 9dnB8OyYRbW/VrA==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  At one time,
- nfsd could take the presence of struct export_operations
- to be an indicator that a filesystem was exportable via NFS. Since then,
- a lot of filesystems have grown export operations in orde [...] 
+ Content preview: Add the EXPORT_OP_STABLE_HANDLES flag to tmpfs export
+ operations
+ to indicate that this filesystem can be exported via NFS. Reviewed-by: Jan
+ Kara <jack@suse.cz> Signed-off-by: Jeff Layton <jlayton@kernel.org> ---
+ mm/shmem.c | 1 + 1 file changed, 1 insertion(+) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vhs6O-0007ly-3k
-Subject: [f2fs-dev] [PATCH v2 02/31] exportfs: add new
- EXPORT_OP_STABLE_HANDLES flag
+X-Headers-End: 1vhs6V-0007mV-6m
+Subject: [f2fs-dev] [PATCH v2 03/31] tmpfs: add EXPORT_OP_STABLE_HANDLES
+ flag to export operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -170,80 +171,27 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-At one time, nfsd could take the presence of struct export_operations to
-be an indicator that a filesystem was exportable via NFS. Since then, a
-lot of filesystems have grown export operations in order to provide
-filehandle support. Some of those (e.g. kernfs, pidfs, and nsfs) are not
-suitable for export via NFS since they lack filehandles that are
-stable across reboot.
-
-Add a new EXPORT_OP_STABLE_HANDLES flag that indicates that the
-filesystem supports perisistent filehandles, a requirement for nfs
-export. While in there, switch to the BIT() macro for defining these
-flags.
-
-For now, the flag is not checked anywhere. That will come later after
-we've added it to the existing filesystems that need to remain
-exportable.
+Add the EXPORT_OP_STABLE_HANDLES flag to tmpfs export operations to
+indicate that this filesystem can be exported via NFS.
 
 Reviewed-by: Jan Kara <jack@suse.cz>
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- Documentation/filesystems/nfs/exporting.rst |  7 +++++++
- include/linux/exportfs.h                    | 16 +++++++++-------
- 2 files changed, 16 insertions(+), 7 deletions(-)
+ mm/shmem.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/Documentation/filesystems/nfs/exporting.rst b/Documentation/filesystems/nfs/exporting.rst
-index 0583a0516b1e3a3e6a10af95ff88506cf02f7df4..0c29ee44e3484cef84d2d3d47819acf172d275a3 100644
---- a/Documentation/filesystems/nfs/exporting.rst
-+++ b/Documentation/filesystems/nfs/exporting.rst
-@@ -244,3 +244,10 @@ following flags are defined:
-     nfsd. A case in point is reexport of NFS itself, which can't be done
-     safely without coordinating the grace period handling. Other clustered
-     and networked filesystems can be problematic here as well.
-+
-+  EXPORT_OP_STABLE_HANDLES - This filesystem provides filehandles that are
-+    stable across the lifetime of a file. This is a hard requirement for export
-+    via nfsd. Any filesystem that is eligible to be exported via nfsd must
-+    indicate this guarantee by setting this flag. Most disk-based filesystems
-+    can do this naturally. Pseudofilesystems that are for local reporting and
-+    control (e.g. kernfs, pidfs, nsfs) usually can't support this.
-diff --git a/include/linux/exportfs.h b/include/linux/exportfs.h
-index f0cf2714ec52dd942b8f1c455a25702bd7e412b3..c4e0f083290e7e341342cf0b45b58fddda3af65e 100644
---- a/include/linux/exportfs.h
-+++ b/include/linux/exportfs.h
-@@ -3,6 +3,7 @@
- #define LINUX_EXPORTFS_H 1
- 
- #include <linux/types.h>
-+#include <linux/bits.h>
- #include <linux/path.h>
- 
- struct dentry;
-@@ -277,15 +278,16 @@ struct export_operations {
- 			     int nr_iomaps, struct iattr *iattr);
- 	int (*permission)(struct handle_to_path_ctx *ctx, unsigned int oflags);
- 	struct file * (*open)(const struct path *path, unsigned int oflags);
--#define	EXPORT_OP_NOWCC			(0x1) /* don't collect v3 wcc data */
--#define	EXPORT_OP_NOSUBTREECHK		(0x2) /* no subtree checking */
--#define	EXPORT_OP_CLOSE_BEFORE_UNLINK	(0x4) /* close files before unlink */
--#define EXPORT_OP_REMOTE_FS		(0x8) /* Filesystem is remote */
--#define EXPORT_OP_NOATOMIC_ATTR		(0x10) /* Filesystem cannot supply
-+#define EXPORT_OP_NOWCC			BIT(0) /* don't collect v3 wcc data */
-+#define EXPORT_OP_NOSUBTREECHK		BIT(1) /* no subtree checking */
-+#define EXPORT_OP_CLOSE_BEFORE_UNLINK	BIT(2) /* close files before unlink */
-+#define EXPORT_OP_REMOTE_FS		BIT(3) /* Filesystem is remote */
-+#define EXPORT_OP_NOATOMIC_ATTR		BIT(4) /* Filesystem cannot supply
- 						  atomic attribute updates
- 						*/
--#define EXPORT_OP_FLUSH_ON_CLOSE	(0x20) /* fs flushes file data on close */
--#define EXPORT_OP_NOLOCKS		(0x40) /* no file locking support */
-+#define EXPORT_OP_FLUSH_ON_CLOSE	BIT(5) /* fs flushes file data on close */
-+#define EXPORT_OP_NOLOCKS		BIT(6) /* no file locking support */
-+#define EXPORT_OP_STABLE_HANDLES	BIT(7) /* fhs are stable across reboot */
- 	unsigned long	flags;
+diff --git a/mm/shmem.c b/mm/shmem.c
+index ec6c01378e9d2bd47db9d7506e4d6a565e092185..c64c4410b4fd9961599a5ea768b469d8184e713e 100644
+--- a/mm/shmem.c
++++ b/mm/shmem.c
+@@ -4477,6 +4477,7 @@ static const struct export_operations shmem_export_ops = {
+ 	.get_parent     = shmem_get_parent,
+ 	.encode_fh      = shmem_encode_fh,
+ 	.fh_to_dentry	= shmem_fh_to_dentry,
++	.flags		= EXPORT_OP_STABLE_HANDLES,
  };
  
+ enum shmem_param {
 
 -- 
 2.52.0
