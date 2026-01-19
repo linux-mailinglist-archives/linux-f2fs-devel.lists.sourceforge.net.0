@@ -2,37 +2,37 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFF9FD39E59
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 07:23:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7961FD39E5C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jan 2026 07:23:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=9M8PeFN5mF6NK0NLZkjj2vpo0QSxce0YV/89QRkI7pA=; b=IomYSWfMndSJ/iCbgYEz9T4URX
-	hK3Pldcz5ubv5BgFyyipZxGo4wjRxNlBnCOMi5JQ8KAVcPbpxwfHs1G5cX4ve2BmmerYAiDbhcLZz
-	cKZ+z8TkL5IhUJsYdfc6lpNPG11v7RtC/mOWYW/R730RXquQlgqwGYP15jsBPOvpJTns=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=b27ww1zaBl3s6sHtKcefgsEunt60hCqtpTY0L4X8fck=; b=a3AvZzRRpMBJgnJs+H0dXcAQc1
+	A0ZVywZloFRf9j2vFh7vSlCNpxPF/GuPTMLMkLMABTrG/b46c+j+ooE3XKZmhzAILHx85jJioJueH
+	k7N9Me0peurPGrRFHULN98b2Sxbl5/6G3DmTaZ3WN12IUWrULFvrflwkQVFId8aZwBOs=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vhifQ-0005TX-TB;
-	Mon, 19 Jan 2026 06:23:12 +0000
+	id 1vhifc-0004wa-Ct;
+	Mon, 19 Jan 2026 06:23:25 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+f4f5ba1b7319529cbc9c+8184+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vhifP-0005TQ-DJ for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 06:23:11 +0000
+ id 1vhifb-0004wM-76 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jan 2026 06:23:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vut/YYXck3WJlmyHaRSLg/ugJ45VslGshC0ymCdDlJ4=; b=k2xbhoJlSN5/jkRfUZr1LYBC2T
- WHY4n6n03wPJuF6Oltk04NIXuVB9TiQ9CpttqVmDEojRLXyNpsoleDH0Y8s30mysW8yB4MMmUa4/N
- yke1yw5krHAqGI/RUnPPLn3v37x7qg6hxPgUqazfVwVSgXEdreQ4kRQI1N01S5SvywRA=;
+ bh=+NhUhc/6MSrksg3M3flw3qmdXbKem6ep9lIeuPBs1Q0=; b=KVdOo3qXKJVIvH7JRSO6XFNh/M
+ lHsHH8reo3sms3qFy1Q7LCoNCfLFxelMOJ7k3qR3NmVY9nrqFHUi19YOPlqCBGwPF/fm21iu/k5pl
+ 0QwiHmnwzniwLUGvAYRPcNAaP4uPlwN3yVekPVhkpuf4nggr8LjzJ6lHKgTtqBkwbxe0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -40,33 +40,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vut/YYXck3WJlmyHaRSLg/ugJ45VslGshC0ymCdDlJ4=; b=c2dHthsnbFQl+TGnwvSw5ZT/Dj
- uitkR+z6VcN9fpEiVS9caoEFWuHARCd/HbDbGiF2TmdpZJqII9liaEtV1CnSZZq6CoIUomNyEkaqD
- GFMtQ8lRIgg1u0PW9eTOdjErVy+2hSiPofb/mMt2WBjYAgkdYHbSpDd5I+pHTV5I9/rI=;
+ bh=+NhUhc/6MSrksg3M3flw3qmdXbKem6ep9lIeuPBs1Q0=; b=UbxU5+ujaLR2ohb9et/tuva+51
+ VrzfhCNC5BmnfrMvcwUmuTsNPIIShnpMTb4ziBEh0sMj+U5ZaybQkstKzrc03SLS9ZhhHgHsgmaY9
+ W0rG77EA+UAzwAe4TyyA2S8qeH9zVg91t9pnwnKxzEwo8/OjaVZM3i+9ykGN/z+kqcBw=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vhifO-0006fW-TH for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jan 2026 06:23:11 +0000
+ id 1vhifb-0006g7-Er for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jan 2026 06:23:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=vut/YYXck3WJlmyHaRSLg/ugJ45VslGshC0ymCdDlJ4=; b=Z+X8sIzft4XR9VpnqPoH3B4HVo
- RIESfOBjA773ABGo0BvvwWMVrMVqKJ65SyNeZwKcaOZovHNkAOUoQ8WRndDWyUwq38W9APc5JwXlo
- PVqSMiGJBxvcnUTjL5FP/QmAsa08AwOcJMVfA7anDsukSmjlWgfa+dbV8Amb/5Wrau1TTzZ9Coy1l
- gQpz5qKUhz3QMzqMjaJ8zXOG8+vNSqcHtNP6WxZa0Xb8PUFc2tAJOJtV6MCzki/BSj3Yi5MGvqQfp
- BE66COHKylp75PehwUhavFNlBGflUeRdBXtENhhTEbHHAyEqCR1ZQNq2h9KlCZpETCzptpv27mt5G
- kRadJ4FA==;
+ bh=+NhUhc/6MSrksg3M3flw3qmdXbKem6ep9lIeuPBs1Q0=; b=0qQ8U6bpyFtQqkSdz+AVZ4MBVQ
+ prcZrFGv3QdgAMb9T+YXVO0CDSNo16avEPbA67Zg0vDp5VejCryylfwMG/oGYpST+3q4qduy3XtaE
+ YibohIfhbTq8fMPLqY55Zuc75id9I2zrEQoEgVbpa9jn8nTBtKlnNtaJwQzqJaV0seIubyii58xdq
+ 67NDYf1nXFsx61Jv2OUIFOsKebt48s/lruOW2i9mYhn7ufTbkdkTkRFtHF5Euq9i7GtHzLFSG+VVE
+ OJYOzondEqPCfAO6HTyoYpElcrEfg3NPM7uLJjeN4RyE3HNe4gUHFQYaAHyG8G5jHD7BV2GJ+GXq6
+ I2gbkj8A==;
 Received: from
  2a02-8389-2341-5b80-d601-7564-c2e0-491c.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:d601:7564:c2e0:491c] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vhifG-00000001Ond-3hhz; Mon, 19 Jan 2026 06:23:03 +0000
+ id 1vhifN-00000001Ony-0nFO; Mon, 19 Jan 2026 06:23:10 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Date: Mon, 19 Jan 2026 07:22:42 +0100
-Message-ID: <20260119062250.3998674-2-hch@lst.de>
+Date: Mon, 19 Jan 2026 07:22:43 +0100
+Message-ID: <20260119062250.3998674-3-hch@lst.de>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260119062250.3998674-1-hch@lst.de>
 References: <20260119062250.3998674-1-hch@lst.de>
@@ -75,25 +75,29 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add the check to reject truncates of fsverity files directly
- to setattr_prepare instead of requiring the file system to handle it. Besides
- removing boilerplate code, this also fixes the complete lack [...] 
+ Content preview: Directly remove the fsverity_info from the hash and free it
+ from clear_inode instead of requiring file systems to handle it.
+ Signed-off-by:
+ Christoph Hellwig <hch@lst.de> --- fs/btrfs/inode.c | 10 +++-------
+ fs/ext4/super.c
+ | 1 - fs/f2fs/inode.c | 1 - fs/inode.c | 9 +++++++++ fs/verity/open.c | 3
+ +-- include/linux/fsverity. [...] 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1vhifO-0006fW-TH
-Subject: [f2fs-dev] [PATCH 1/6] fs,
- fsverity: reject size changes on fsverity files in setattr_prepare
+X-Headers-End: 1vhifb-0006g7-Er
+Subject: [f2fs-dev] [PATCH 2/6] fs,
+ fsverity: clear out fsverity_info from common code
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,141 +119,176 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add the check to reject truncates of fsverity files directly to
-setattr_prepare instead of requiring the file system to handle it.
-Besides removing boilerplate code, this also fixes the complete lack of
-such check in btrfs.
+Directly remove the fsverity_info from the hash and free it from
+clear_inode instead of requiring file systems to handle it.
 
-Fixes: 146054090b08 ("btrfs: initial fsverity support")
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/attr.c                | 12 +++++++++++-
- fs/ext4/inode.c          |  4 ----
- fs/f2fs/file.c           |  4 ----
- fs/verity/open.c         |  8 --------
- include/linux/fsverity.h | 25 -------------------------
- 5 files changed, 11 insertions(+), 42 deletions(-)
+ fs/btrfs/inode.c         | 10 +++-------
+ fs/ext4/super.c          |  1 -
+ fs/f2fs/inode.c          |  1 -
+ fs/inode.c               |  9 +++++++++
+ fs/verity/open.c         |  3 +--
+ include/linux/fsverity.h | 26 ++------------------------
+ 6 files changed, 15 insertions(+), 35 deletions(-)
 
-diff --git a/fs/attr.c b/fs/attr.c
-index b9ec6b47bab2..e7d7c6d19fe9 100644
---- a/fs/attr.c
-+++ b/fs/attr.c
-@@ -169,7 +169,17 @@ int setattr_prepare(struct mnt_idmap *idmap, struct dentry *dentry,
- 	 * ATTR_FORCE.
+diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+index a2b5b440637e..67c64efc5099 100644
+--- a/fs/btrfs/inode.c
++++ b/fs/btrfs/inode.c
+@@ -34,7 +34,6 @@
+ #include <linux/sched/mm.h>
+ #include <linux/iomap.h>
+ #include <linux/unaligned.h>
+-#include <linux/fsverity.h>
+ #include "misc.h"
+ #include "ctree.h"
+ #include "disk-io.h"
+@@ -5571,11 +5570,8 @@ void btrfs_evict_inode(struct inode *inode)
+ 
+ 	trace_btrfs_inode_evict(inode);
+ 
+-	if (!root) {
+-		fsverity_cleanup_inode(inode);
+-		clear_inode(inode);
+-		return;
+-	}
++	if (!root)
++		goto clear_inode;
+ 
+ 	fs_info = inode_to_fs_info(inode);
+ 	evict_inode_truncate_pages(inode);
+@@ -5675,7 +5671,7 @@ void btrfs_evict_inode(struct inode *inode)
+ 	 * to retry these periodically in the future.
  	 */
- 	if (ia_valid & ATTR_SIZE) {
--		int error = inode_newsize_ok(inode, attr->ia_size);
-+		int error;
-+
-+		/*
-+		 * Verity files are immutable, so deny truncates.  This isn't
-+		 * covered by the open-time check because sys_truncate() takes a
-+		 * path, not an open file.
-+		 */
-+		if (IS_ENABLED(CONFIG_FS_VERITY) && IS_VERITY(inode))
-+			return -EPERM;
-+
-+		error = inode_newsize_ok(inode, attr->ia_size);
- 		if (error)
- 			return error;
+ 	btrfs_remove_delayed_node(BTRFS_I(inode));
+-	fsverity_cleanup_inode(inode);
++clear_inode:
+ 	clear_inode(inode);
+ }
+ 
+diff --git a/fs/ext4/super.c b/fs/ext4/super.c
+index 87205660c5d0..86131f4d8718 100644
+--- a/fs/ext4/super.c
++++ b/fs/ext4/super.c
+@@ -1527,7 +1527,6 @@ void ext4_clear_inode(struct inode *inode)
+ 		EXT4_I(inode)->jinode = NULL;
  	}
-diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-index 0c466ccbed69..8c2ef98fa530 100644
---- a/fs/ext4/inode.c
-+++ b/fs/ext4/inode.c
-@@ -5835,10 +5835,6 @@ int ext4_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- 	if (error)
- 		return error;
+ 	fscrypt_put_encryption_info(inode);
+-	fsverity_cleanup_inode(inode);
+ }
  
--	error = fsverity_prepare_setattr(dentry, attr);
--	if (error)
--		return error;
--
- 	if (is_quota_modification(idmap, inode, attr)) {
- 		error = dquot_initialize(inode);
- 		if (error)
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index d7047ca6b98d..da029fed4e5a 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -1074,10 +1074,6 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- 	if (err)
- 		return err;
+ static struct inode *ext4_nfs_get_inode(struct super_block *sb,
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index 38b8994bc1b2..ee332b994348 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -1000,7 +1000,6 @@ void f2fs_evict_inode(struct inode *inode)
+ 	}
+ out_clear:
+ 	fscrypt_put_encryption_info(inode);
+-	fsverity_cleanup_inode(inode);
+ 	clear_inode(inode);
+ }
  
--	err = fsverity_prepare_setattr(dentry, attr);
--	if (err)
--		return err;
--
- 	if (unlikely(IS_IMMUTABLE(inode)))
- 		return -EPERM;
+diff --git a/fs/inode.c b/fs/inode.c
+index 379f4c19845c..38dbdfbb09ba 100644
+--- a/fs/inode.c
++++ b/fs/inode.c
+@@ -14,6 +14,7 @@
+ #include <linux/cdev.h>
+ #include <linux/memblock.h>
+ #include <linux/fsnotify.h>
++#include <linux/fsverity.h>
+ #include <linux/mount.h>
+ #include <linux/posix_acl.h>
+ #include <linux/buffer_head.h> /* for inode_has_buffers */
+@@ -773,6 +774,14 @@ void dump_mapping(const struct address_space *mapping)
  
+ void clear_inode(struct inode *inode)
+ {
++	/*
++	 * Only IS_VERITY() inodes can have verity info, so start by checking
++	 * for IS_VERITY() (which is faster than retrieving the pointer to the
++	 * verity info).  This minimizes overhead for non-verity inodes.
++	 */
++	if (IS_ENABLED(CONFIG_FS_VERITY) && IS_VERITY(inode))
++		fsverity_cleanup_inode(inode);
++
+ 	/*
+ 	 * We have to cycle the i_pages lock here because reclaim can be in the
+ 	 * process of removing the last page (in __filemap_remove_folio())
 diff --git a/fs/verity/open.c b/fs/verity/open.c
-index 77b1c977af02..2aa5eae5a540 100644
+index 2aa5eae5a540..090cb77326ee 100644
 --- a/fs/verity/open.c
 +++ b/fs/verity/open.c
-@@ -384,14 +384,6 @@ int __fsverity_file_open(struct inode *inode, struct file *filp)
+@@ -384,14 +384,13 @@ int __fsverity_file_open(struct inode *inode, struct file *filp)
  }
  EXPORT_SYMBOL_GPL(__fsverity_file_open);
  
--int __fsverity_prepare_setattr(struct dentry *dentry, struct iattr *attr)
--{
--	if (attr->ia_valid & ATTR_SIZE)
--		return -EPERM;
--	return 0;
--}
--EXPORT_SYMBOL_GPL(__fsverity_prepare_setattr);
--
- void __fsverity_cleanup_inode(struct inode *inode)
+-void __fsverity_cleanup_inode(struct inode *inode)
++void fsverity_cleanup_inode(struct inode *inode)
  {
  	struct fsverity_info **vi_addr = fsverity_info_addr(inode);
+ 
+ 	fsverity_free_info(*vi_addr);
+ 	*vi_addr = NULL;
+ }
+-EXPORT_SYMBOL_GPL(__fsverity_cleanup_inode);
+ 
+ void __init fsverity_init_info_cache(void)
+ {
 diff --git a/include/linux/fsverity.h b/include/linux/fsverity.h
-index 5bc7280425a7..86fb1708676b 100644
+index 86fb1708676b..b7bf2401c574 100644
 --- a/include/linux/fsverity.h
 +++ b/include/linux/fsverity.h
-@@ -179,7 +179,6 @@ int fsverity_get_digest(struct inode *inode,
+@@ -130,6 +130,8 @@ struct fsverity_operations {
+ 				       u64 pos, unsigned int size);
+ };
+ 
++void fsverity_cleanup_inode(struct inode *inode);
++
+ #ifdef CONFIG_FS_VERITY
+ 
+ /*
+@@ -179,26 +181,6 @@ int fsverity_get_digest(struct inode *inode,
  /* open.c */
  
  int __fsverity_file_open(struct inode *inode, struct file *filp);
--int __fsverity_prepare_setattr(struct dentry *dentry, struct iattr *attr);
- void __fsverity_cleanup_inode(struct inode *inode);
+-void __fsverity_cleanup_inode(struct inode *inode);
+-
+-/**
+- * fsverity_cleanup_inode() - free the inode's verity info, if present
+- * @inode: an inode being evicted
+- *
+- * Filesystems must call this on inode eviction to free the inode's verity info.
+- */
+-static inline void fsverity_cleanup_inode(struct inode *inode)
+-{
+-	/*
+-	 * Only IS_VERITY() inodes can have verity info, so start by checking
+-	 * for IS_VERITY() (which is faster than retrieving the pointer to the
+-	 * verity info).  This minimizes overhead for non-verity inodes.
+-	 */
+-	if (IS_VERITY(inode))
+-		__fsverity_cleanup_inode(inode);
+-	else
+-		VFS_WARN_ON_ONCE(*fsverity_info_addr(inode) != NULL);
+-}
  
- /**
-@@ -251,12 +250,6 @@ static inline int __fsverity_file_open(struct inode *inode, struct file *filp)
+ /* read_metadata.c */
+ 
+@@ -250,10 +232,6 @@ static inline int __fsverity_file_open(struct inode *inode, struct file *filp)
  	return -EOPNOTSUPP;
  }
  
--static inline int __fsverity_prepare_setattr(struct dentry *dentry,
--					     struct iattr *attr)
+-static inline void fsverity_cleanup_inode(struct inode *inode)
 -{
--	return -EOPNOTSUPP;
 -}
 -
- static inline void fsverity_cleanup_inode(struct inode *inode)
- {
- }
-@@ -338,22 +331,4 @@ static inline int fsverity_file_open(struct inode *inode, struct file *filp)
- 	return 0;
- }
+ /* read_metadata.c */
  
--/**
-- * fsverity_prepare_setattr() - prepare to change a verity inode's attributes
-- * @dentry: dentry through which the inode is being changed
-- * @attr: attributes to change
-- *
-- * Verity files are immutable, so deny truncates.  This isn't covered by the
-- * open-time check because sys_truncate() takes a path, not a file descriptor.
-- *
-- * Return: 0 on success, -errno on failure
-- */
--static inline int fsverity_prepare_setattr(struct dentry *dentry,
--					   struct iattr *attr)
--{
--	if (IS_VERITY(d_inode(dentry)))
--		return __fsverity_prepare_setattr(dentry, attr);
--	return 0;
--}
--
- #endif	/* _LINUX_FSVERITY_H */
+ static inline int fsverity_ioctl_read_metadata(struct file *filp,
 -- 
 2.47.3
 
