@@ -2,105 +2,134 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D6A1D3C348
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 10:20:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8C4BD3C36E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 10:28:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=9IpaZw/8FGwjoLp+pY9STvg0quIK5t9DfteDbOC+8Ms=; b=LTJ30LXkyGn0s+BdL7Q9XnEr8c
-	Ye2n8A6+KcBQ3Kl85lrWVB/XzE+X2vGs7dru7JqEmblYP7yB1QsY6ADIhyIYCxBKolKd3yl1GpyIK
-	zlzKG7jifYtAQvllpcPoKixPnxW9bQbCna/azwFqz3lfeX/RsBlXLChIFGSbNLw+WI/E=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:
+	List-Id:Subject:Message-id:Date:References:In-reply-to:To:From:MIME-Version:
+	Sender:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=TTOISJ3UkCXv6q4BlDcFYlr6uepoXVdEeHG829UB+ig=; b=DrfFKV+09uEeb8SW8CIUNwxxs8
+	WaVaiX53QsLJYrAROPAbFp/Hkv2MKCxlU68bOSHygd9wOI37nsjJH+/KLn4O+VXwOrMg+7rijfAnX
+	boK2U83fhonC2aCsH9eioREkh2w91cqZZJX1MgOVIQ2QIvrAd6fDSenrXwfR6CJthDw4=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vi7uc-00063X-EJ;
-	Tue, 20 Jan 2026 09:20:34 +0000
+	id 1vi82A-0005o5-Td;
+	Tue, 20 Jan 2026 09:28:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1vi7ua-00063N-SA
- for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Jan 2026 09:20:32 +0000
+ (envelope-from <neilb@ownmail.net>) id 1vi828-0005nb-OS;
+ Tue, 20 Jan 2026 09:28:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Reply-To:Message-id:Date:References:In-reply-to:
+ Subject:Cc:To:From:MIME-Version:Content-Transfer-Encoding:Content-Type:Sender
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=X3QIRnbkG+een8ywAYG10mkSik728ER9RG7n3MzqxTc=; b=SNHakcc04LBjsyaveBjnKJtX2X
- IZ4WVWLxNv6n2DffiXP8X9PIKd9/xD0rCPB1nBvqv9D0n5Er13FV/FGom3uyQv1P4umcHTsZbVnqH
- k8YzZEEdr4al6H85JQTn8ZY32s1Bbfu+bkrkMH16rajC/84BBMcBPAsFmhVyKZg/tnTc=;
+ bh=7QgCrbLkIptlQB8MVpfuQ5CmfZ1YH3bd02HxJZ3+58E=; b=hGv4ZySRihuNAnEB3s9xxOlH3l
+ jiGc3C2IK2QpTZATSIFjMvybwj9J+zNjK6tQMGShfPmIGR7PbieRt/oyNzoy0t7TLReKR5Ugg1gaH
+ 5Sxkc7GXgTyaT/yxCjw6ayzksihVX7eDgcJ8A8ESGetBGxhwn31fif/48h2C5jkYjAig=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Reply-To:Message-id:Date:References:In-reply-to:Subject:Cc:To:From:
+ MIME-Version:Content-Transfer-Encoding:Content-Type:Sender:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=X3QIRnbkG+een8ywAYG10mkSik728ER9RG7n3MzqxTc=; b=QdvSjBYCUsN3aymyc4K4tFthGQ
- q3SkFxUw2Nk21+XvZyi9HNMCRF3RX8WKXGzEryK7yG6x5aj745wWyYHmJAziDLN6J2GfuQdZWFH84
- zINy8pGgfhzwvIQriQjsreUZsVvSsF8X9bB2ScWNO/ygbdo4juw6lBuawaMEem6SxZF4=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=7QgCrbLkIptlQB8MVpfuQ5CmfZ1YH3bd02HxJZ3+58E=; b=gqSL42JKqiBIcTI72mr6CSuPkF
+ /rwtK70kdHIQbwg3M64uAl0bQp4+5meZyhxKK277NF/r1c6zxQMMVrmaZ9a8x7ABfDAwZ/hBg6QIV
+ z5JASwslt4lD21nUtT1z/jdl+gy/En2HXZBHqUKR9RQBWsMcXo06f7UIqEhBbXdxLCcA=;
+Received: from flow-b6-smtp.messagingengine.com ([202.12.124.141])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vi7ua-00077H-BN for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Jan 2026 09:20:32 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id EDCAF42B24
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 20 Jan 2026 09:20:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id CF1A0C16AAE
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 20 Jan 2026 09:20:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768900821;
- bh=9sbObY5MQtksv8GLYrO7B/lcexuO9rq6If6dyV+nsRs=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=t+uQJGYsmmLKOHtHHIUTnEGuZ2E8YcYL4m2mMZEDpfwOHPgKdxf6VNPlXfgusccgB
- MlDt4k7ipreR8HvOJKuZxvzStl5LjxT0PKB403QRieoPTcvnUootDwaiKkzHOidsDa
- rVN6HkFc68RtIa6Uv/EiMPgUD6KdgLEXZV6DlYIzWId9aVqax18+56G3erBRamYSsu
- RoTf8CEWCMKIE4K/FWxUcno6XPvTE7jmaedhaaOLv9Hp2Qh7uuqFGUY/G9N0SUxGcw
- /LSYlsb1kImFB4vsiCrXPbq3Rni64iHvT3fvGMvE72mTHC+//VaSB8n2K5naNwqUyg
- 8jMZiK7lfD86Q==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id C8B22C433E1; Tue, 20 Jan 2026 09:20:21 +0000 (UTC)
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 20 Jan 2026 09:20:21 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: aros@gmx.com
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: CODE_FIX
-X-Bugzilla-Priority: P3
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-220951-202145-wc6ywgILz0@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-220951-202145@https.bugzilla.kernel.org/>
-References: <bug-220951-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1vi828-0007ij-Ig; Tue, 20 Jan 2026 09:28:21 +0000
+Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
+ by mailflow.stl.internal (Postfix) with ESMTP id CE9921300F39;
+ Tue, 20 Jan 2026 04:28:12 -0500 (EST)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-03.internal (MEProxy); Tue, 20 Jan 2026 04:28:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ownmail.net; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:reply-to:subject:subject:to:to; s=fm2; t=
+ 1768901292; x=1768908492; bh=7QgCrbLkIptlQB8MVpfuQ5CmfZ1YH3bd02H
+ xJZ3+58E=; b=j33OTuP0cjno3z5TCSPfTCf69nIJq4J2TB5KtE0o/LhmJQgOMMH
+ kw9U4yfo+H4rbb4XXms15vEyKh5x5b9B49ixFXgMxO4Fm/hlFNGiQ+bGN45gDtRw
+ OmBoeYoqajuPHnyR9SoIEo6hAUWx0AGYwxm0DKRLHzi1XCnz83A+Hu2GZPA6aOKy
+ RYLYKmY0UNhDwR1vtSOzYxhEesYwmuTg/Wi6L8FGSkj9+ZIBdbcCFjmPCZksIcHe
+ kKd1xQhaGqcg0mozQ4CX54TPCVBCAS2wCwpvglGH91fDXLL6Bvjn2GFbB+NC5Mzg
+ 8aJ9uAz6SFiYHNlOnXGI9e3y5wQd6hGFAJQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1768901292; x=
+ 1768908492; bh=7QgCrbLkIptlQB8MVpfuQ5CmfZ1YH3bd02HxJZ3+58E=; b=v
+ RfEPB9lwITUP46pQlb43ZbdMvxQAVBGMGvib8VTBG9JSo9K4qJAJLjbu5y7j73ym
+ Qq3Bc0GK6JEw8nge/9U3NMkxvbjnEI/Ql3zoReMMAU2ycFjN5VLIXyTGDlZ9tldG
+ YgURkKvG64q2sB1nBTb/8GE6Lw99gQK+2TICCynSDho7Mvxl3hSSag9eGoZb+MaV
+ oo8v63rBhvVlkO8Ct3o6GUqwRPu+Ijq5yt0cKqsqAdpEZGpx+AkEVlFEQ3yPkt8x
+ uJ/IqXAfO3Pl34Ql8sGavblmOZ2r9+wh8PIDOYvjhIPgR5sCl1S563/bzjtKHtCZ
+ P4olLR+6UbfSBxEoSdPgg==
+X-ME-Sender: <xms:qEpvaZRu_TffLaKZaE2CMY56BJZs69KBOLtnttktrwuGzZ9ody-WNQ>
+ <xme:qEpvaQKNRSt0Wi7GeDYGOldsinZiQ_yhrx7t0k8T2G3tKf8FjH9OLeJ94c9A7G_ww
+ X6RDyQAeSOcxaWQTYme-4_uSzp1k5iDvZmDz68VmQKXregkq1o>
+X-ME-Received: <xmr:qEpvaUCQIq-1KHB6_RIe1LGDrNvPT7-Pf2pS69NApMKw_XyWcd3Xjgm1K74OT05ZV5sAHW67jfmb2iTtKkO835nraIAcdJpfENZOC6QYa41Q>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddugedttdehucetufdoteggodetrf
+ dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+ rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+ gurheptgfgggfhvfevufgjfhffkfhrsehtjeertddttdejnecuhfhrohhmpefpvghilheu
+ rhhofihnuceonhgvihhlsgesohifnhhmrghilhdrnhgvtheqnecuggftrfgrthhtvghrnh
+ epudetfefhudevhedvfeeufedvffekveekgfdtfefggfekheejgefhteeihffggfelnecu
+ vehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepnhgvihhlsg
+ esohifnhhmrghilhdrnhgvthdpnhgspghrtghpthhtohepjedvpdhmohguvgepshhmthhp
+ ohhuthdprhgtphhtthhopehvihhrohesiigvnhhivhdrlhhinhhugidrohhrghdruhhkpd
+ hrtghpthhtohepghhuohgthhhunhhhrghisehvihhvohdrtghomhdprhgtphhtthhopehl
+ ihhnuhigqdigfhhssehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinh
+ hugidquhhnihhonhhfshesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopehl
+ ihhnuhigqdhnihhlfhhssehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplh
+ hinhhugidqnhhfshesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopehlihhn
+ uhigqdhkvghrnhgvlhesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopehlih
+ hnuhigqdhfshguvghvvghlsehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtohep
+ lhhinhhugidqvgigthegsehvghgvrhdrkhgvrhhnvghlrdhorhhg
+X-ME-Proxy: <xmx:qEpvaeYFJm2gr5_L8NWl6mKqz3iuWcYL5GhOz7qN1Jbytm-BYS6-XA>
+ <xmx:qEpvaWaRmlMl_FAkLOWmvpEFBndgYt5ijvyvEjxWGEaN27mPHvAi-g>
+ <xmx:qEpvaQ3aTzLxTMX0gQJAiP7LkrKQZuiwBkg6xW_bdcSF80TWtR8qMw>
+ <xmx:qEpvaefZ5gApKS4TFvhYKouLIp05WV67rLedqicozK4OIkyQ2Rx9Zg>
+ <xmx:rEpvaZbrohR6KsMgi07NQMg42JbqLkXHlbfm5plWcXavjDNCqQ_UV7PJ>
+Feedback-ID: iab3e480c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 20 Jan 2026 04:27:50 -0500 (EST)
 MIME-Version: 1.0
-X-Spam-Score: -0.3 (/)
+From: NeilBrown <neilb@ownmail.net>
+To: "Christoph Hellwig" <hch@infradead.org>
+In-reply-to: <aW8w2SRyFnmA2uqk@infradead.org>
+References: <20260115-exportfs-nfsd-v1-0-8e80160e3c0c@kernel.org>,
+ <CAOQ4uxjOJMwv_hRVTn3tJHDLMQHbeaCGsdLupiZYcwm7M2rm3g@mail.gmail.com>,
+ <9c99197dde2eafa55a1b55dce2f0d4d02c77340a.camel@kernel.org>,
+ <176877859306.16766.15009835437490907207@noble.neil.brown.name>,
+ <aW3SAKIr_QsnEE5Q@infradead.org>,
+ <176880736225.16766.4203157325432990313@noble.neil.brown.name>,
+ <20260119-kanufahren-meerjungfrau-775048806544@brauner>,
+ <176885553525.16766.291581709413217562@noble.neil.brown.name>,
+ <aW8w2SRyFnmA2uqk@infradead.org>
+Date: Tue, 20 Jan 2026 20:27:46 +1100
+Message-id: <176890126683.16766.5241619788613840985@noble.neil.brown.name>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=220951 Artem S.
- Tashkinov (aros@gmx.com) changed: What |Removed |Added Status|ASSIGNED
- |RESOLVED Resolution|--- |CODE_FIX 
- Content analysis details:   (-0.3 points, 5.0 required)
+ Content preview:  On Tue, 20 Jan 2026, Christoph Hellwig wrote: > On Tue, Jan
+ 20, 2026 at 07:45:35AM +1100, NeilBrown wrote: > > This sounds like you are
+ recommending that we give in to bullying. > > I find your sugges [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -110,10 +139,11 @@ X-Spam-Report: Spam detection software,
  domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vi7ua-00077H-BN
-Subject: [f2fs-dev] [Bug 220951] swapfile activation bug causes data
- corruption when swapfile < 2MB with fragmented extents
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [neilb(at)ownmail.net]
+X-Headers-End: 1vi828-0007ij-Ig
+Subject: Re: [f2fs-dev] [PATCH 00/29] fs: require filesystems to explicitly
+ opt-in to nfsd export support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,27 +155,116 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: bugzilla-daemon--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: bugzilla-daemon@kernel.org
+Reply-To: NeilBrown <neil@brown.name>
+Cc: Martin Brandenburg <martin@omnibond.com>,
+ jfs-discussion@lists.sourceforge.net, Jan Kara <jack@suse.cz>,
+ Paulo Alcantara <pc@manguebit.org>, Alex Markuze <amarkuze@redhat.com>,
+ Sandeep Dhavale <dhavale@google.com>, linux-btrfs@vger.kernel.org,
+ Carlos Maiolino <cem@kernel.org>, Amir Goldstein <amir73il@gmail.com>,
+ linux-unionfs@vger.kernel.org,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Chunhai Guo <guochunhai@vivo.com>, Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+ linux-mtd@lists.infradead.org, Mike Marshall <hubcap@omnibond.com>,
+ linux-xfs@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ Yue Hu <zbestahu@gmail.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
+ Hugh Dickins <hughd@google.com>, Dai Ngo <Dai.Ngo@oracle.com>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ Christoph Hellwig <hch@infradead.org>, Viacheslav Dubeyko <slava@dubeyko.com>,
+ Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
+ Salah Triki <salah.triki@gmail.com>, linux-mm@kvack.org,
+ devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
+ Olga Kornievskaia <okorniev@redhat.com>, linux-cifs@vger.kernel.org,
+ Dave Kleikamp <shaggy@kernel.org>, linux-nfs@vger.kernel.org,
+ Tom Talpey <tom@talpey.com>, ocfs2-devel@lists.linux.dev,
+ Bharath SM <bharathsm@microsoft.com>, David Sterba <dsterba@suse.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+ Andreas Gruenbacher <agruenba@redhat.com>, gfs2@lists.linux.dev,
+ Christian Brauner <brauner@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
+ Luis de Bethencourt <luisbg@kernel.org>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, linux-erofs@lists.ozlabs.org,
+ Jeff Layton <jlayton@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Steve French <sfrench@samba.org>,
+ Chuck Lever <chuck.lever@oracle.com>, Hongbo Li <lihongbo22@huawei.com>,
+ Anna Schumaker <anna@kernel.org>, Jan Kara <jack@suse.com>,
+ linux-fsdevel@vger.kernel.org, Phillip Lougher <phillip@squashfs.org.uk>,
+ Andrew Morton <akpm@linux-foundation.org>, ntfs3@lists.linux.dev,
+ David Woodhouse <dwmw2@infradead.org>, Trond Myklebust <trondmy@kernel.org>,
+ Joel Becker <jlbec@evilplan.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=220951
+On Tue, 20 Jan 2026, Christoph Hellwig wrote:
+> On Tue, Jan 20, 2026 at 07:45:35AM +1100, NeilBrown wrote:
+> > This sounds like you are recommending that we give in to bullying.
+> 
+> I find your suggestion that anything you disagree with is bullying
+> extremely offensive.  If you have valid reasons for naming something
+> after the user instead of explaining the semantics, please explain that.
 
-Artem S. Tashkinov (aros@gmx.com) changed:
+I was referring not to your behaviour but to this statement by Christian:
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|ASSIGNED                    |RESOLVED
-         Resolution|---                         |CODE_FIX
+  So if Christoph insists on the other name then I say let's just go with it.
 
--- 
-You may reply to this email to add a comment.
+I think that someone "insisting" on something rather than "arguing
+rationally" for something "sounds like" bullying.  Had Christian said
+something like "Christoph has convinced me of the wisdom of his choice"
+that would have been very different.
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+I am quite happy to have reasoned discussions with people who disagree
+with me.  I hope to always provide new relevant information, and hope
+they will too.
+
+> 
+> If you think NFS actually explains the semantics pretty well, please
+> explain that too, especially in forms that can be put into
+> documentation, including for the user ABI.
+
+There are multiple issues here:
+
+ - filehandle stability.  As far as I know all filesystems provide
+   stable filehandles when the "subtree_check" export option is not used.
+   Certainly cgroupfs does.  So having an EXPORT_OP_STABLE_HANDLES
+   flag would mean it was set for every filesystem - unless there is
+   something else I'm not aware of.  That is certainly possible and I
+   hope someone will let me know if I'm missing something.
+
+ - filehandle uniqueness.  This is somewhat important and if a
+   filesystem doesn't provide it, that should be considered a bug.  In a
+   different thread Christian has observed that there would be benefit
+   if pidfs and nsfs provided uniqueness across reboots.  It is quite
+   easy for a virtual filesystem to generate a 64 bit random number when
+   the fs is initialised, and include that in file handles.  Having a
+   EXPORT_OP_REUSES_HANDLES flag could mark filesystems that are still
+   buggy if that is thought to be useful.
+
+ - GETATTR always reporting file size of 0.  This is the only concrete
+   symptom that Jeff has reported (that I have seen).  This  makes it
+   impossible to read files over NFS even if they have content.
+   Would EXPORT_OP_INACCURATE_SIZE be useful?
+
+ - maintainer feature choice.  A maintainer may choose not to support
+   export over NFS because they feel that there is no value and the
+   possible support burden would not be worth it.  There may be locking
+   / lease / etc issues that further complicate things.  So it might be
+   reasonable for a maintainer to choose to forbid NFS export while
+   allowing local fhandle access. EXPORT_OP_NO_NFS_EXPORT.
+
+It took me a while to sift through the code/patches/comments and come to
+this understanding and I apologise if I wasn't as clear earlier.  But
+my intuition was always that file handle stability was never the real
+issue, and maintainer choice was.  Hence my rejection of the
+"STABLE_HANDLES" name.
+
+Thanks,
+NeilBrown
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
