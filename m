@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iBMcJcigb2kLCAAAu9opvQ
+	id WLz+KOSqb2lUEwAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 16:35:36 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 17:18:44 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3632D462F5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 16:35:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3D0747487
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 17:18:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:Date:To:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=LfMukvu0cD/RBm9SvZa3Ce5SFRJLKQ51hRdPOWPLEDs=; b=PxgC2cA95f8wnfkuakbc0WMvFP
-	hQxScRCkX5gAbXobvr6WntvelX9NmXsRfDiAjPSMWWdhCt3Vusp6tAZ54G00ER4TWAe7dbzHd5JQ+
-	1mFdJhKLvqltBeqy2bBqmMfcaJ5B3UielURYq3BZzSGSc6tLPU0Ts2cVRQNrt/0iztGE=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=JV6HMSmbO1oxqnSjAcEG5HqGL5BsZq3fIY+B7Sncrqg=; b=jERQGUwqhJVdTnj+4i8ijFDg1d
+	GtttkJ/igE7e9LlAT1ydfJLx5uG8GVgrYTLBsmQM4qfkQFnnKIIj3EjwSIPZY/8RLzQWiIsWYnxBL
+	iodNI91LFg3KppxzU6hdrOrl8Edfax22TJFqVdxr3wvar0KHdtj3YgDN3QW2C59nSBAI=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1viBgL-0005Pa-Ud;
-	Tue, 20 Jan 2026 13:22:05 +0000
+	id 1viC06-0000ME-Ub;
+	Tue, 20 Jan 2026 13:42:31 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1viBgK-0005PG-Gt;
- Tue, 20 Jan 2026 13:22:04 +0000
+ (envelope-from <jlayton@kernel.org>) id 1viC04-0000Lm-Rs;
+ Tue, 20 Jan 2026 13:42:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ibUPede0USBPjxkDuhY4QOK6BHW2ig1Fvu6koEcKyLk=; b=WRz7B9XYTRrtYBwNMs4ERg4Yir
- 9LCD+ixsb3KlazuSWInZsMJCp8PvdeleHaCOcfMXGgoNib1jsw1msi+C8ArvrqErw2EoccnKGmG8Z
- u5COFpr3X2kN8DQDO/t219pLkxOHoNrIVh7ocCWBT4/UvfObPfermXJKy7E61BjmhoS4=;
+ bh=ZPh1bIEeClZlMd7bH2zfFr1HL2hgNaprhlSBrD/6mSY=; b=jfVLXdDTdBm5b84mPkNOC7Hznf
+ Ch/QCosRTCHVkAt18rjbpQa+f4fO4L0OicrzHYOnPo7SyOERvhSB5m+7SJUrvMhzhSgUVlBxPjbXM
+ lBO/x6GgEnj3YMJ/wVY3mKH3cy70KgCPedY6yWd+Rq8oFPqoJSyMTEvXzz4LF84jhsvU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -44,35 +44,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ibUPede0USBPjxkDuhY4QOK6BHW2ig1Fvu6koEcKyLk=; b=PB+1/XCYITEFZgMEGmdGZJDols
- 6qXIwc9hMgjyPnxJ5/foPxMyzZuQs4VzNN9QBjSy5qYmgcw+qeO28YbnqU5GkGKtlI6H2YpxUK8Nr
- cEyoPcNYaGBAps/pbE6icOROeRRvqjdEh1CZ8TEm9a4eBt1q0j1kLGy1ZYLm7OUK5U/E=;
+ bh=ZPh1bIEeClZlMd7bH2zfFr1HL2hgNaprhlSBrD/6mSY=; b=DJA1/OyjPf0tCPA1a0D8UP3gQ6
+ UsVmLbkHd7Y65hMaQee3H8LVMHXwMJeylEVxoOr946OVPWVwInd/4nx7RfZx2CUGnpROZRDqq3Dlq
+ 8BVMPVaJ3qF6HnsnDHyXpAwrBcXxikA05PyyZlRlxFKD9yivdVNVyunYh8YyAB+fViXc=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1viBgJ-0004sK-Ul; Tue, 20 Jan 2026 13:22:04 +0000
+ id 1viC05-0005tV-0V; Tue, 20 Jan 2026 13:42:29 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 393B060131;
- Tue, 20 Jan 2026 13:21:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1CB2EC16AAE;
- Tue, 20 Jan 2026 13:21:46 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 1D83860010;
+ Tue, 20 Jan 2026 13:42:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20C70C19423;
+ Tue, 20 Jan 2026 13:42:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768915312;
- bh=f2qFmDHnAGeH2DQsfDbKX6ov0cXKUQc3FlYWkzQ0G+o=;
+ s=k20201202; t=1768916537;
+ bh=70xOEysdn9UJBfJ6hZvmemjOLtpi4tu/aOHR5XtOJmA=;
  h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=HArzV8jGiJF9EjuBcuhlJs4TShV4NxERmXFPUT+J8+gfAJ4DE490qIALJ076bILOb
- e408+yivjAyOomjEdqgF7pCaN/qMG9T58VsCZ+YqBNrLJMz+X7GC3/EKUmI1086fJz
- MjiZ9qewu5a5y2wbA741RboftmNGOHR283JnbrHlWH2I1F6Ud3GfwTl2MLTVOi85M3
- vu6PPer10vwGTgfXrjWnVB6g2DP0q2XLjum5hcNA35pe4SEs/CtQqpZE1o1MPwISke
- 0OB6jpokJJJ+B9F86zTx8EgeG2ymAYs0Cvj1uS+q0lVb6LwtO5ZRJTXF9J9DnnB/xd
- V7CI25VZpkgCg==
-Message-ID: <a4c6b9cb5617fdea92739e85ff1a29da1ac14f30.camel@kernel.org>
-To: Christoph Hellwig <hch@infradead.org>
-Date: Tue, 20 Jan 2026 08:21:45 -0500
-In-Reply-To: <aW8ztQ-RbhxwzMk7@infradead.org>
+ b=E3IfCvhFSjcgHbt8sW4iAN9Q+Fhoo2DaD/SdAlRpv5OIPZC2KO18v2JPtkn+685tY
+ EBsUPVQuLfdcLN8M507Lkfwl8ntIF0Bxo5A8li5m903Umi34vm1DpY9uf/HNucGVJk
+ F42IDUQfsCdgr/65dLR+KmnfcUTo2tbwQSuLHJeNzLBOvxJ1phqg7/EtJLJ2nk3Msj
+ qqRAXA3jTIzPkUx4cdGr6x4p8vu4y8RPPuuf65DOzOMlgsNdx+yjN5G7O9ww9z7EyI
+ blrbxcoszpmxC+JpNJCS2rZImSbbScoXp5uZ/dSFvVnxzxRU9sK+DrZte9HsbyjIjH
+ xlDkN+7kByVlw==
+Message-ID: <cd6d3f59b22d3febfe7e58fc740df2715e2b9ee3.camel@kernel.org>
+To: Chuck Lever <chuck.lever@oracle.com>, Christian Brauner
+ <brauner@kernel.org>,  Alexander Viro <viro@zeniv.linux.org.uk>, NeilBrown
+ <neil@brown.name>, Olga Kornievskaia <okorniev@redhat.com>,  Dai Ngo
+ <Dai.Ngo@oracle.com>, Tom Talpey <tom@talpey.com>, Amir Goldstein
+ <amir73il@gmail.com>,  Hugh Dickins <hughd@google.com>, Baolin Wang
+ <baolin.wang@linux.alibaba.com>, Andrew Morton	
+ <akpm@linux-foundation.org>, Theodore Ts'o <tytso@mit.edu>, Andreas Dilger	
+ <adilger.kernel@dilger.ca>, Jan Kara <jack@suse.com>, Gao Xiang
+ <xiang@kernel.org>,  Chao Yu <chao@kernel.org>, Yue Hu
+ <zbestahu@gmail.com>, Jeffle Xu <jefflexu@linux.alibaba.com>,  Sandeep
+ Dhavale <dhavale@google.com>, Hongbo Li <lihongbo22@huawei.com>, Chunhai
+ Guo <guochunhai@vivo.com>,  Carlos Maiolino	 <cem@kernel.org>, Ilya Dryomov
+ <idryomov@gmail.com>, Alex Markuze	 <amarkuze@redhat.com>, Viacheslav
+ Dubeyko <slava@dubeyko.com>, Chris Mason	 <clm@fb.com>, David Sterba
+ <dsterba@suse.com>, Luis de Bethencourt	 <luisbg@kernel.org>, Salah Triki
+ <salah.triki@gmail.com>, Phillip Lougher	 <phillip@squashfs.org.uk>, Steve
+ French <sfrench@samba.org>, Paulo Alcantara	 <pc@manguebit.org>, Ronnie
+ Sahlberg <ronniesahlberg@gmail.com>, Shyam Prasad N	
+ <sprasad@microsoft.com>, Bharath SM <bharathsm@microsoft.com>, Miklos
+ Szeredi	 <miklos@szeredi.hu>, Mike Marshall <hubcap@omnibond.com>, Martin
+ Brandenburg	 <martin@omnibond.com>, Mark Fasheh <mark@fasheh.com>, Joel
+ Becker	 <jlbec@evilplan.org>, Joseph Qi <joseph.qi@linux.alibaba.com>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, Ryusuke
+ Konishi <konishi.ryusuke@gmail.com>,  Trond Myklebust <trondmy@kernel.org>,
+ Anna Schumaker <anna@kernel.org>, Dave Kleikamp <shaggy@kernel.org>, David
+ Woodhouse <dwmw2@infradead.org>, Richard Weinberger <richard@nod.at>, Jan
+ Kara <jack@suse.cz>,  Andreas Gruenbacher	 <agruenba@redhat.com>, OGAWA
+ Hirofumi <hirofumi@mail.parknet.co.jp>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>
+Date: Tue, 20 Jan 2026 08:42:09 -0500
+In-Reply-To: <8808c9f0-a998-448c-a4b6-b88fabb2ca23@oracle.com>
 References: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
- <20260119-exportfs-nfsd-v2-2-d93368f903bd@kernel.org>
- <aW8ztQ-RbhxwzMk7@infradead.org>
+ <20260119-exportfs-nfsd-v2-31-d93368f903bd@kernel.org>
+ <8808c9f0-a998-448c-a4b6-b88fabb2ca23@oracle.com>
 Autocrypt: addr=jlayton@kernel.org; prefer-encrypt=mutual;
  keydata=mQINBE6V0TwBEADXhJg7s8wFDwBMEvn0qyhAnzFLTOCHooMZyx7XO7dAiIhDSi7G1NPxw
  n8jdFUQMCR/GlpozMFlSFiZXiObE7sef9rTtM68ukUyZM4pJ9l0KjQNgDJ6Fr342Htkjxu/kFV1Wv
@@ -156,10 +184,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, 2026-01-19 at 23:50 -0800, Christoph Hellwig wrote:
- > On Mon, Jan 19, 2026 at 11:26:19AM -0500,
- Jeff Layton wrote: > > + EXPORT_OP_STABLE_HANDLES
- - This filesystem provides filehandles that ar [...] 
+ Content preview:  On Mon, 2026-01-19 at 11:47 -0500, Chuck Lever wrote: > On
+ 1/19/26 11:26 AM, Jeff Layton wrote: > > Get rid of the dprintk messages
+ in check_export(). Instead add new > > tracepoints that show the ter [...]
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -171,9 +198,9 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1viBgJ-0004sK-Ul
-Subject: Re: [f2fs-dev] [PATCH v2 02/31] exportfs: add new
- EXPORT_OP_STABLE_HANDLES flag
+X-Headers-End: 1viC05-0005tV-0V
+Subject: Re: [f2fs-dev] [PATCH v2 31/31] nfsd: convert dprintks in
+ check_export() to tracepoints
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -187,48 +214,18 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Jeff Layton via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Jeff Layton <jlayton@kernel.org>
-Cc: Martin Brandenburg <martin@omnibond.com>,
- jfs-discussion@lists.sourceforge.net, Jan Kara <jack@suse.cz>,
- Paulo Alcantara <pc@manguebit.org>, Alex Markuze <amarkuze@redhat.com>,
- Sandeep Dhavale <dhavale@google.com>, linux-btrfs@vger.kernel.org,
- Carlos Maiolino <cem@kernel.org>, Amir Goldstein <amir73il@gmail.com>,
+Cc: jfs-discussion@lists.sourceforge.net, linux-doc@vger.kernel.org,
  Dave Chinner <david@fromorbit.com>, linux-unionfs@vger.kernel.org,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
- Chunhai Guo <guochunhai@vivo.com>, Ronnie Sahlberg <ronniesahlberg@gmail.com>,
- linux-mtd@lists.infradead.org, Mike Marshall <hubcap@omnibond.com>,
- linux-xfs@vger.kernel.org, linux-nilfs@vger.kernel.org,
- Yue Hu <zbestahu@gmail.com>, Miklos Szeredi <miklos@szeredi.hu>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- linux-doc@vger.kernel.org, Hugh Dickins <hughd@google.com>,
- Dai Ngo <Dai.Ngo@oracle.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
- Viacheslav Dubeyko <slava@dubeyko.com>, NeilBrown <neil@brown.name>,
- Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
- Salah Triki <salah.triki@gmail.com>, linux-mm@kvack.org,
- devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
- Olga Kornievskaia <okorniev@redhat.com>, linux-cifs@vger.kernel.org,
- Dave Kleikamp <shaggy@kernel.org>, linux-nfs@vger.kernel.org,
- Tom Talpey <tom@talpey.com>, ocfs2-devel@lists.linux.dev,
- Bharath SM <bharathsm@microsoft.com>, David Sterba <dsterba@suse.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Baolin Wang <baolin.wang@linux.alibaba.com>,
- Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
- OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
- Andreas Gruenbacher <agruenba@redhat.com>, gfs2@lists.linux.dev,
- Christian Brauner <brauner@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
- Luis de Bethencourt <luisbg@kernel.org>,
- Joseph Qi <joseph.qi@linux.alibaba.com>, linux-erofs@lists.ozlabs.org,
- Jonathan Corbet <corbet@lwn.net>, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Steve French <sfrench@samba.org>, Chuck Lever <chuck.lever@oracle.com>,
- Hongbo Li <lihongbo22@huawei.com>, Anna Schumaker <anna@kernel.org>,
- Jan Kara <jack@suse.com>, linux-fsdevel@vger.kernel.org,
- Phillip Lougher <phillip@squashfs.org.uk>,
- Andrew Morton <akpm@linux-foundation.org>, ntfs3@lists.linux.dev,
- David Woodhouse <dwmw2@infradead.org>,
+ gfs2@lists.linux.dev, linux-mm@kvack.org, linux-mtd@lists.infradead.org,
+ linux-cifs@vger.kernel.org, linux-nilfs@vger.kernel.org,
  David Laight <david.laight.linux@gmail.com>,
- Trond Myklebust <trondmy@kernel.org>, Joel Becker <jlbec@evilplan.org>
+ Christoph Hellwig <hch@infradead.org>, linux-ext4@vger.kernel.org,
+ devel@lists.orangefs.org, ocfs2-devel@lists.linux.dev,
+ ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, ntfs3@lists.linux.dev,
+ linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -237,64 +234,180 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MAILLIST(-0.20)[mailman];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[omnibond.com,lists.sourceforge.net,suse.cz,manguebit.org,redhat.com,google.com,vger.kernel.org,kernel.org,gmail.com,fromorbit.com,paragon-software.com,fb.com,dilger.ca,vivo.com,lists.infradead.org,szeredi.hu,nod.at,fasheh.com,oracle.com,dubeyko.com,brown.name,kvack.org,lists.orangefs.org,microsoft.com,talpey.com,lists.linux.dev,suse.com,zeniv.linux.org.uk,linux.alibaba.com,mail.parknet.co.jp,mit.edu,lists.ozlabs.org,lwn.net,lists.samba.org,samba.org,huawei.com,squashfs.org.uk,linux-foundation.org,infradead.org,evilplan.org];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	DKIM_MIXED(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[oracle.com,kernel.org,zeniv.linux.org.uk,brown.name,redhat.com,talpey.com,gmail.com,google.com,linux.alibaba.com,linux-foundation.org,mit.edu,dilger.ca,suse.com,huawei.com,vivo.com,dubeyko.com,fb.com,squashfs.org.uk,samba.org,manguebit.org,microsoft.com,szeredi.hu,omnibond.com,fasheh.com,evilplan.org,paragon-software.com,infradead.org,nod.at,suse.cz,mail.parknet.co.jp,lwn.net];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[lists.sourceforge.net,vger.kernel.org,fromorbit.com,lists.linux.dev,kvack.org,lists.infradead.org,gmail.com,infradead.org,lists.orangefs.org,lists.samba.org,lists.ozlabs.org];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	RCPT_COUNT_GT_50(0.00)[76];
+	RCPT_COUNT_GT_50(0.00)[77];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[100.75.92.58:received,172.105.4.254:received];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[jlayton@kernel.org]
-X-Rspamd-Queue-Id: 3632D462F5
+	HAS_REPLYTO(0.00)[jlayton@kernel.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[oracle.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
+X-Rspamd-Queue-Id: F3D0747487
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, 2026-01-19 at 23:50 -0800, Christoph Hellwig wrote:
-> On Mon, Jan 19, 2026 at 11:26:19AM -0500, Jeff Layton wrote:
-> > +  EXPORT_OP_STABLE_HANDLES - This filesystem provides filehandles that are
-> > +    stable across the lifetime of a file. This is a hard requirement for export
-> > +    via nfsd. Any filesystem that is eligible to be exported via nfsd must
-> > +    indicate this guarantee by setting this flag. Most disk-based filesystems
-> > +    can do this naturally. Pseudofilesystems that are for local reporting and
-> > +    control (e.g. kernfs, pidfs, nsfs) usually can't support this.
-> 
-> Suggested rewording, taking some of the ideas from Dave Chinners earlier
-> comments into account:
-> 
->   EXPORT_OP_STABLE_HANDLES - This filesystem provides filehandles that are
->     stable across the lifetime of a file.  A file in this context is an
->     instantiated inode reachable by one or more file names, or still open after
->     the last name has been unlinked.  Reuses of the same on-disk inode structure
->     are considered new files and must provide different file handles from the
->     previous incarnation.  Most file systems designed to store user data
->     naturally provide this capability.  Pseudofilesystems that are for local
->     reporting and control (e.g. kernfs, pidfs, nsfs) usually can't support this.
-> 
->     This flags is a hard requirement for export via nfsd. Any filesystem that
->     is eligible to be exported via nfsd must indicate this guarantee by
->     setting this flag.
+On Mon, 2026-01-19 at 11:47 -0500, Chuck Lever wrote:
+> On 1/19/26 11:26 AM, Jeff Layton wrote:
+> > Get rid of the dprintk messages in check_export(). Instead add new
+> > tracepoints that show the terminal inode and the flags.
+> > 
+> > Signed-off-by: Jeff Layton <jlayton@kernel.org>
+> > ---
+> >  fs/nfsd/export.c | 11 ++++++-----
+> >  fs/nfsd/trace.h  | 52 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+> >  2 files changed, 58 insertions(+), 5 deletions(-)
+> > 
+> > diff --git a/fs/nfsd/export.c b/fs/nfsd/export.c
+> > index bc703cf58bfa210c7c57d49f22f15bc10d7cfc91..3cc336b953b38573966c43000f31cd341380837b 100644
+> > --- a/fs/nfsd/export.c
+> > +++ b/fs/nfsd/export.c
+> > @@ -435,31 +435,32 @@ static int check_export(const struct path *path, int *flags, unsigned char *uuid
+> >  	if (!(inode->i_sb->s_type->fs_flags & FS_REQUIRES_DEV) &&
+> >  	    !(*flags & NFSEXP_FSID) &&
+> >  	    uuid == NULL) {
+> > -		dprintk("exp_export: export of non-dev fs without fsid\n");
+> > +		trace_nfsd_check_export_need_fsid(inode, *flags);
+> >  		return -EINVAL;
+> >  	}
+> >  
+> >  	if (!exportfs_can_decode_fh(inode->i_sb->s_export_op)) {
+> > -		dprintk("exp_export: export of invalid fs type.\n");
+> > +		trace_nfsd_check_export_invalid_fstype(inode, *flags);
+> >  		return -EINVAL;
+> >  	}
+> >  
+> >  	if (!(inode->i_sb->s_export_op->flags & EXPORT_OP_STABLE_HANDLES)) {
+> > -		dprintk("%s: fs does not provide stable filehandles!\n", __func__);
+> > +		trace_nfsd_check_export_no_stable_fh(inode, *flags);
+> >  		return -EINVAL;
+> >  	}
+> >  
+> >  	if (is_idmapped_mnt(path->mnt)) {
+> >  		dprintk("exp_export: export of idmapped mounts not yet supported.\n");
 
-Thanks Christoph! I'll plan to adopt this for v3.
+Doh! I left the above dprintk() in -- fixed in tree.
+
+> > +		trace_nfsd_check_export_idmapped(inode, *flags);
+> >  		return -EINVAL;
+> >  	}
+> >  
+> >  	if (inode->i_sb->s_export_op->flags & EXPORT_OP_NOSUBTREECHK &&
+> >  	    !(*flags & NFSEXP_NOSUBTREECHECK)) {
+> > -		dprintk("%s: %s does not support subtree checking!\n",
+> > -			__func__, inode->i_sb->s_type->name);
+> > +		trace_nfsd_check_export_subtree(inode, *flags);
+> >  		return -EINVAL;
+> >  	}
+> > +	trace_nfsd_check_export_success(inode, *flags);
+> >  	return 0;
+> >  }
+> >  
+> > diff --git a/fs/nfsd/trace.h b/fs/nfsd/trace.h
+> > index 5ae2a611e57f4b4e51a4d9eb6e0fccb66ad8d288..e3f5fe1181b605b34cb70d53f32739c3ef9b82f6 100644
+> > --- a/fs/nfsd/trace.h
+> > +++ b/fs/nfsd/trace.h
+> > @@ -339,6 +339,58 @@ DEFINE_EVENT_CONDITION(nfsd_fh_err_class, nfsd_##name,	\
+> >  DEFINE_NFSD_FH_ERR_EVENT(set_fh_dentry_badexport);
+> >  DEFINE_NFSD_FH_ERR_EVENT(set_fh_dentry_badhandle);
+> >  
+> > +#define show_export_flags(val)						\
+> 
+> Whacky. I thought we had one of these already, but I can't find one.
+> 
+> 
+> > +	__print_flags(val, "|",						\
+> > +		{ NFSEXP_READONLY,		"READONLY" },		\
+> > +		{ NFSEXP_INSECURE_PORT,		"INSECURE" },		\
+> > +		{ NFSEXP_ROOTSQUASH,		"ROOTSQUASH" },		\
+> > +		{ NFSEXP_ALLSQUASH,		"ALLSQUASH" },		\
+> > +		{ NFSEXP_ASYNC,			"ASYNC" },		\
+> > +		{ NFSEXP_GATHERED_WRITES,	"GATHERED_WRITES" },	\
+> > +		{ NFSEXP_NOREADDIRPLUS,		"NOREADDIRPLUS" },	\
+> > +		{ NFSEXP_SECURITY_LABEL,	"SECURITY_LABEL" },	\
+> > +		{ NFSEXP_NOHIDE,		"NOHIDE" },		\
+> > +		{ NFSEXP_NOSUBTREECHECK,	"NOSUBTREECHECK" },	\
+> > +		{ NFSEXP_NOAUTHNLM,		"NOAUTHNLM" },		\
+> > +		{ NFSEXP_MSNFS,			"MSNFS" },		\
+> > +		{ NFSEXP_FSID,			"FSID" },		\
+> > +		{ NFSEXP_CROSSMOUNT,		"CROSSMOUNT" },		\
+> > +		{ NFSEXP_NOACL,			"NOACL" },		\
+> > +		{ NFSEXP_V4ROOT,		"V4ROOT" },		\
+> > +		{ NFSEXP_PNFS,			"PNFS" })
+> > +
+> > +DECLARE_EVENT_CLASS(nfsd_check_export_class,
+> > +	TP_PROTO(const struct inode *inode,
+> > +		 int flags),
+> > +	TP_ARGS(inode, flags),
+> > +	TP_STRUCT__entry(
+> > +		__field(dev_t, dev)
+> > +		__field(ino_t, ino)
+> > +		__field(int, flags)
+> > +	),
+> > +	TP_fast_assign(
+> > +		__entry->dev = inode->i_sb->s_dev;
+> > +		__entry->ino = inode->i_ino;
+> > +		__entry->flags = flags;
+> > +	),
+> > +	TP_printk("dev=%u:%u:%lu flags=%s",
+> > +		  MAJOR(__entry->dev), MINOR(__entry->dev),
+> > +		  __entry->ino, show_export_flags(__entry->flags))
+> > +)
+> > +
+> > +#define DEFINE_NFSD_CHECK_EXPORT_EVENT(name)			\
+> > +DEFINE_EVENT(nfsd_check_export_class, nfsd_check_export_##name,	\
+> > +	TP_PROTO(const struct inode *inode,			\
+> > +		 int flags),					\
+> > +	TP_ARGS(inode, flags))
+> > +
+> > +DEFINE_NFSD_CHECK_EXPORT_EVENT(need_fsid);
+> > +DEFINE_NFSD_CHECK_EXPORT_EVENT(invalid_fstype);
+> > +DEFINE_NFSD_CHECK_EXPORT_EVENT(no_stable_fh);
+> > +DEFINE_NFSD_CHECK_EXPORT_EVENT(idmapped);
+> > +DEFINE_NFSD_CHECK_EXPORT_EVENT(subtree);
+> > +DEFINE_NFSD_CHECK_EXPORT_EVENT(success);
+> > +
+> >  TRACE_EVENT(nfsd_exp_find_key,
+> >  	TP_PROTO(const struct svc_expkey *key,
+> >  		 int status),
+> > 
+> 
+> 'Twould be nice to report the namespace or client address that
+> was making the failing request, but maybe that information is
+> not available in check_export.
+>
+> Reviewed-by: Chuck Lever <chuck.lever@oracle.com>
+> 
+
+That might be possible, but it means refactoring check_export().
+
+Given that we're still haggling over the flag name and semantics, lets
+drop this patch from the series for now.
+
+Once the other bits are settled, I'll respin the tracepoint patches on
+top. That part can be better sorted out on the linux-nfs ml anyway.
+
+Thanks!
 -- 
 Jeff Layton <jlayton@kernel.org>
 
