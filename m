@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cmnoL4yqb2lmEwAAu9opvQ
+	id IO87Cq6jb2n0DgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 17:17:16 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 16:47:58 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18DF147426
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 17:17:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FB1C46AB9
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 16:47:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=qvmF0vrfX2SexiCBCvneuBq7HEx3aoczufn3PqHpgFk=; b=eKLjjiXq8A4NOTIvKxPJ/JhDSb
-	reta1dLyxXG0HSi5BZVyEv0IJnaGRa+lYavLdhjGr/xiSff4YyPBpDpHbYdhz8yeDsNek0LF/nVhx
-	4IDbtrAC3rpxY2DnYP38Y8T7Zb0a1o5nbQUna1FAsvjmRRtACii+MI4Sr20VSBOB6NuQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=GMNlqnJNuYDnvyr1IDU+hfS/1pJ8cHwV9e4tSOFQ5aY=; b=EyOsgQUSiPzqdpquXRg4KJkhoY
+	e5UHflJtDMN3G/ZdD0Vp3D826Kvu7xTtJH7FuJ5loJH+m8zFnDcNa9n0YLhxF60/9Ab+b+c5PYZHl
+	ePxr7iJMohk9eOYi1ABSMlALs9G2I5NhMurzk9jX32MVZpmvy2Q9t2W5B2bFt3QnwyqA=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1viCfI-0004A8-Mh;
-	Tue, 20 Jan 2026 14:25:05 +0000
+	id 1viCfH-0001nk-2q;
+	Tue, 20 Jan 2026 14:25:03 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <cel@kernel.org>) id 1viCfH-0004A2-IY
+ (envelope-from <cel@kernel.org>) id 1viCfF-0001mj-5k
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Jan 2026 14:25:04 +0000
+ Tue, 20 Jan 2026 14:25:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ilobEN/sX8cRVYfO22gQlEbVItqSaOWPfnceXHFlaD8=; b=EZTR95Me8+mL/qpGN/SMRYHgyf
- M1cfrLbS8cZDd8XALvbwFFibf5t4pC4Qa1JPgTtP5eIP9G7zNvO8TZO8n+98ZtV26eOWCMWNrjkzD
- iWm+l45VPAvfhb3jOyioreyD8P6/0I6n6/MAUSewI4bQn7agh+RmgtKSCUeoy9R5QNpk=;
+ bh=BqBoVP05eb7Pyi4XJme3EiEnfwOwy5f9f2uVS/XbmBs=; b=g2f+2sSXSi+8B6OOoyo+NwNzb+
+ WuFxmfPsY6/9OABNJpfHJ7OfXjKZmBAP868kiFOt2+B+sk7SBk6lGwuAp4D9NdKDbAyudrkpvXt7z
+ hoSPTwxLijlWE6tygmLnjvWDRw4h5rWhm3/blVa9dvmCjqujcPXoeyZimnit/abARDio=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,33 +45,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ilobEN/sX8cRVYfO22gQlEbVItqSaOWPfnceXHFlaD8=; b=dHqrVLgayQHDqAIJ3V6EYdQ9BB
- Kbt4TopOHP9iU5TMn0D0nQMeCw4iArNG5xKjvVmB3kHx97iFpcRhGKC1qs6sLg7df7sUJPnnTxH+Q
- p/ab/cfPXReDGJ5RgezQWfnoKs/kZ4MP0z+zStQetW69I1QFgTCWatWtz9vmlZzk50Mo=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=BqBoVP05eb7Pyi4XJme3EiEnfwOwy5f9f2uVS/XbmBs=; b=DnjZfo0ZqLoEjcVZqW2sHQ/zQO
+ AHc2UjbJrfIKE0JMzXRfXYcJu0rL9SHeSsZS12Pj75dUMAifhrKlHUnTWEn6chfluaPIRBmwyCxNv
+ isN/f3epVP9HYxMufVqnaX4yFqbb7JmJ+Nz6u0OXalqNERG5RqbtYpKv5BXqexuvlIp4=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1viCfH-00085d-NM for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Jan 2026 14:25:04 +0000
+ id 1viCfE-00085J-M5 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Jan 2026 14:25:01 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 1115960008;
- Tue, 20 Jan 2026 14:24:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 90DAEC19423;
- Tue, 20 Jan 2026 14:24:50 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 6488643D11;
+ Tue, 20 Jan 2026 14:24:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F27DBC19422;
+ Tue, 20 Jan 2026 14:24:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768919092;
- bh=cdGgjhkthDimE+ptoeLNf3meapvWMt+C25jv3VF6XKw=;
+ s=k20201202; t=1768919095;
+ bh=w+01RcBephbRBLBgu636K7j0MNJCHtYjll5ZCP+j9SA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jIPeIBgOeFf6O7e6qIIS/fpl54U7X9mFsC+kIOit92HJ316cCi+QXKZOczXO06N5P
- XcNjfZPag6DBR+Tq9dzqfLEkiL3C0x8gYIdwd6+pF+chLy7hseLVFrhpNj2eOiWC+e
- vd15II+hclnkQjn+Smb+UDDZ+YhS2qeI+A2hHOMP7L0HfVbqZTctHr5TS0eRYAahtO
- P2wfZn0k9L6FFZpiOcA8XpRkFBbOo4z01Galt0ml7koUxxGaGryReeeLhqFfDTFP26
- /DwKBPAgtrwOZ2207ArhBxJBzsNJGNjXKmARlATjWPQZCVgcm+iWa6ajtchJr5/Vpu
- R0Wj1gS7lA8Pw==
+ b=iiobzWcVhtHpzTJwzO5rOjm9RdxR9jR/2rUtQipptl/c0np+8SCXAaHWJM5Y625UV
+ kWsnok8PKUMuHn3Eq3Ed9MOaANHaY09P+0hUzg0qC3OH1EsjZ4PElcqhYQp1065TgS
+ AHdkS00ZEZXHbZvfiREItFeF0kEnNecXr8KUPOu75xL8EfrYtGD+QOmDLQ6RUecr44
+ 9160l1hSK3c6Av8ZYAIMasMsLsdZaSqBcEYMLDHFBaVSAkEfSQ/6U3E1FswvT7uWw+
+ 5pg4yipuZCZZmarQ+t4b9QuypDilXT56WAYN+r45p9Vk8FMdVJX0mjxdyMEmtIt9+n
+ 6j8pi72HZ+Djg==
 To: Al Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>,
  Jan Kara <jack@suse.cz>
-Date: Tue, 20 Jan 2026 09:24:27 -0500
-Message-ID: <20260120142439.1821554-5-cel@kernel.org>
+Date: Tue, 20 Jan 2026 09:24:28 -0500
+Message-ID: <20260120142439.1821554-6-cel@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260120142439.1821554-1-cel@kernel.org>
 References: <20260120142439.1821554-1-cel@kernel.org>
@@ -83,10 +83,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chuck Lever <chuck.lever@oracle.com> Report NTFS case
- sensitivity behavior via the FS_XFLAG_CASEFOLD flag. NTFS always preserves
- case at rest. Case sensitivity depends on mount options: with "nocase", NTFS
- is case-insensitive; otherwise it is case-sensitive. 
+ Content preview:  From: Chuck Lever <chuck.lever@oracle.com> Report HFS case
+ sensitivity behavior via the FS_XFLAG_CASEFOLD flag. HFS is always
+ case-insensitive
+ (using Mac OS Roman case folding) and always preserves case at rest. 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -98,8 +98,8 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1viCfH-00085d-NM
-Subject: [f2fs-dev] [PATCH v6 04/16] ntfs3: Implement fileattr_get for case
+X-Headers-End: 1viCfE-00085J-M5
+Subject: [f2fs-dev] [PATCH v6 05/16] hfs: Implement fileattr_get for case
  sensitivity
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -164,112 +164,84 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[oracle.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
-X-Rspamd-Queue-Id: 18DF147426
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,oracle.com:email,dubeyko.com:email]
+X-Rspamd-Queue-Id: 9FB1C46AB9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Chuck Lever <chuck.lever@oracle.com>
 
-Report NTFS case sensitivity behavior via the FS_XFLAG_CASEFOLD
-flag. NTFS always preserves case at rest.
+Report HFS case sensitivity behavior via the FS_XFLAG_CASEFOLD
+flag. HFS is always case-insensitive (using Mac OS Roman case
+folding) and always preserves case at rest.
 
-Case sensitivity depends on mount options: with "nocase", NTFS
-is case-insensitive; otherwise it is case-sensitive.
-
+Reviewed-by: Viacheslav Dubeyko <slava@dubeyko.com>
 Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
 ---
- fs/ntfs3/file.c    | 23 +++++++++++++++++++++++
- fs/ntfs3/inode.c   |  1 +
- fs/ntfs3/namei.c   |  2 ++
- fs/ntfs3/ntfs_fs.h |  1 +
- 4 files changed, 27 insertions(+)
+ fs/hfs/dir.c    |  1 +
+ fs/hfs/hfs_fs.h |  2 ++
+ fs/hfs/inode.c  | 13 +++++++++++++
+ 3 files changed, 16 insertions(+)
 
-diff --git a/fs/ntfs3/file.c b/fs/ntfs3/file.c
-index 2e7b2e566ebe..6562768f4574 100644
---- a/fs/ntfs3/file.c
-+++ b/fs/ntfs3/file.c
-@@ -146,6 +146,28 @@ long ntfs_compat_ioctl(struct file *filp, u32 cmd, unsigned long arg)
- }
- #endif
+diff --git a/fs/hfs/dir.c b/fs/hfs/dir.c
+index 86a6b317b474..552156896105 100644
+--- a/fs/hfs/dir.c
++++ b/fs/hfs/dir.c
+@@ -321,4 +321,5 @@ const struct inode_operations hfs_dir_inode_operations = {
+ 	.rmdir		= hfs_remove,
+ 	.rename		= hfs_rename,
+ 	.setattr	= hfs_inode_setattr,
++	.fileattr_get	= hfs_fileattr_get,
+ };
+diff --git a/fs/hfs/hfs_fs.h b/fs/hfs/hfs_fs.h
+index e94dbc04a1e4..a25cdda8ab34 100644
+--- a/fs/hfs/hfs_fs.h
++++ b/fs/hfs/hfs_fs.h
+@@ -177,6 +177,8 @@ extern int hfs_get_block(struct inode *inode, sector_t block,
+ extern const struct address_space_operations hfs_aops;
+ extern const struct address_space_operations hfs_btree_aops;
  
-+/*
-+ * ntfs_fileattr_get - inode_operations::fileattr_get
-+ */
-+int ntfs_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
++struct file_kattr;
++int hfs_fileattr_get(struct dentry *dentry, struct file_kattr *fa);
+ int hfs_write_begin(const struct kiocb *iocb, struct address_space *mapping,
+ 		    loff_t pos, unsigned int len, struct folio **foliop,
+ 		    void **fsdata);
+diff --git a/fs/hfs/inode.c b/fs/hfs/inode.c
+index 524db1389737..8d7ef19af538 100644
+--- a/fs/hfs/inode.c
++++ b/fs/hfs/inode.c
+@@ -18,6 +18,7 @@
+ #include <linux/uio.h>
+ #include <linux/xattr.h>
+ #include <linux/blkdev.h>
++#include <linux/fileattr.h>
+ 
+ #include "hfs_fs.h"
+ #include "btree.h"
+@@ -698,6 +699,17 @@ static int hfs_file_fsync(struct file *filp, loff_t start, loff_t end,
+ 	return ret;
+ }
+ 
++int hfs_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
 +{
-+	struct inode *inode = d_inode(dentry);
-+	struct ntfs_sb_info *sbi = inode->i_sb->s_fs_info;
-+
-+	/* Avoid any operation if inode is bad. */
-+	if (unlikely(is_bad_ni(ntfs_i(inode))))
-+		return -EINVAL;
-+
 +	/*
-+	 * NTFS preserves case (the default). Case sensitivity depends on
-+	 * mount options: with "nocase", NTFS is case-insensitive;
-+	 * otherwise it is case-sensitive.
++	 * Report case-insensitive behavior: all name comparisons use
++	 * Mac OS Roman case folding. FS_XFLAG_CASENONPRESERVING remains
++	 * unset because original case is preserved on disk.
 +	 */
-+	if (sbi->options && sbi->options->nocase)
-+		fa->fsx_xflags |= FS_XFLAG_CASEFOLD;
++	fa->fsx_xflags |= FS_XFLAG_CASEFOLD;
 +	return 0;
 +}
 +
- /*
-  * ntfs_getattr - inode_operations::getattr
-  */
-@@ -1460,6 +1482,7 @@ const struct inode_operations ntfs_file_inode_operations = {
- 	.get_acl	= ntfs_get_acl,
- 	.set_acl	= ntfs_set_acl,
- 	.fiemap		= ntfs_fiemap,
-+	.fileattr_get	= ntfs_fileattr_get,
+ static const struct file_operations hfs_file_operations = {
+ 	.llseek		= generic_file_llseek,
+ 	.read_iter	= generic_file_read_iter,
+@@ -714,4 +726,5 @@ static const struct inode_operations hfs_file_inode_operations = {
+ 	.lookup		= hfs_file_lookup,
+ 	.setattr	= hfs_inode_setattr,
+ 	.listxattr	= generic_listxattr,
++	.fileattr_get	= hfs_fileattr_get,
  };
- 
- const struct file_operations ntfs_file_operations = {
-diff --git a/fs/ntfs3/inode.c b/fs/ntfs3/inode.c
-index 0a9ac5efeb67..205083e8a6e0 100644
---- a/fs/ntfs3/inode.c
-+++ b/fs/ntfs3/inode.c
-@@ -2089,6 +2089,7 @@ const struct inode_operations ntfs_link_inode_operations = {
- 	.get_link	= ntfs_get_link,
- 	.setattr	= ntfs_setattr,
- 	.listxattr	= ntfs_listxattr,
-+	.fileattr_get	= ntfs_fileattr_get,
- };
- 
- const struct address_space_operations ntfs_aops = {
-diff --git a/fs/ntfs3/namei.c b/fs/ntfs3/namei.c
-index 3b24ca02de61..d09414711016 100644
---- a/fs/ntfs3/namei.c
-+++ b/fs/ntfs3/namei.c
-@@ -519,6 +519,7 @@ const struct inode_operations ntfs_dir_inode_operations = {
- 	.getattr	= ntfs_getattr,
- 	.listxattr	= ntfs_listxattr,
- 	.fiemap		= ntfs_fiemap,
-+	.fileattr_get	= ntfs_fileattr_get,
- };
- 
- const struct inode_operations ntfs_special_inode_operations = {
-@@ -527,6 +528,7 @@ const struct inode_operations ntfs_special_inode_operations = {
- 	.listxattr	= ntfs_listxattr,
- 	.get_acl	= ntfs_get_acl,
- 	.set_acl	= ntfs_set_acl,
-+	.fileattr_get	= ntfs_fileattr_get,
- };
- 
- const struct dentry_operations ntfs_dentry_ops = {
-diff --git a/fs/ntfs3/ntfs_fs.h b/fs/ntfs3/ntfs_fs.h
-index a4559c9f64e6..a578b75f31fc 100644
---- a/fs/ntfs3/ntfs_fs.h
-+++ b/fs/ntfs3/ntfs_fs.h
-@@ -504,6 +504,7 @@ extern const struct file_operations ntfs_dir_operations;
- extern const struct file_operations ntfs_legacy_dir_operations;
- 
- /* Globals from file.c */
-+int ntfs_fileattr_get(struct dentry *dentry, struct file_kattr *fa);
- int ntfs_getattr(struct mnt_idmap *idmap, const struct path *path,
- 		 struct kstat *stat, u32 request_mask, u32 flags);
- int ntfs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
 -- 
 2.52.0
 
