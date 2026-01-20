@@ -2,36 +2,36 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8293D3C0C3
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 08:45:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88C86D3C0E2
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 08:50:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=6Dq+MF6cSwaL8GqXuLHuY94lwPLyn8aBxiL0E8HdW60=; b=TGrku3GBRHX5lclTU15lBu8Oqw
-	CFojeQbaj6/AKJi7oO0guTFuuxhllOTFCiZMdJa5b9XTbLxAQbH62Rzk8RW/R/iK+lh0HerneMzUG
-	pkwE5GPDzeddNqECQ4S4Cq1ITeY1X8nN5vA7U1EOxpsmewbEaYGYn6LI/lfr0uPDSZ3s=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=jqvcJrCjs/Edw0P/Ah+unt5nqBmbiNhQh4S7z9rXyVs=; b=IcPuNYhWKGyiUO6Sst9GvNupcK
+	9tBGMKi4cu1WlWlkn9T9ZlVHk/FnMwGm+k4eF0jMB4fAKFRg3ncrhTTfpMXWFI8xwtnH3DUeT5Pbi
+	FcDPybiTd5/VeyxD5q4ZgzYqE4Go3V1P3L/GlX8tjv3FYOcsVK8GPb9EYReurtT56jtM=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vi6Q8-0008Ji-2J;
-	Tue, 20 Jan 2026 07:45:00 +0000
+	id 1vi6Vk-0004mX-04;
+	Tue, 20 Jan 2026 07:50:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+6f87a82fb8d0462b7f15+8185+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vi6Q6-0008JR-3T; Tue, 20 Jan 2026 07:44:58 +0000
+ id 1vi6Vi-0004m8-Cp; Tue, 20 Jan 2026 07:50:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Kid6MiU7s5f8T4gEwmOyT2zu04YSeGDYh8750Mga8iQ=; b=JRqQ0LSSPxiDB5j4gU3GOl5RzK
- eoJ3FszvR2m/H0cx3AiAXspEpJatAgY4Z5aGW7XpbbehUDaqX8OZp6nuKMLJ5p29XKx6a+zdgrbVm
- ai7MeTY6NqZVmWzxby5gWnOVLpDom7Jvx4ptkjB+uXV3P0zTmIZjsNXL5d7mHx8V1C+g=;
+ bh=haSfZvoEvPhBBZDnUW3y3BhJEQ36mgFSvpNiOqhvJvI=; b=ObgatRlM7g4dVSrX98nCzoJ14y
+ Xf8FT+WgLFg+pLAagIFB5MjcOptcr+Kv5AaDuHD21vtWYbe7tT00nMpLW+SUojRG6NKyWb+lLoRi9
+ yThnN6rvN3rIzAfbnuIuzvnlJxqrkUG3iZl5wLITURy2NnpbvQgzU2PrfcZJ0P5Xz1Rw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -39,58 +39,58 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Kid6MiU7s5f8T4gEwmOyT2zu04YSeGDYh8750Mga8iQ=; b=gvMhcmsdB7hPSL83JgvXF8DzLX
- UIJLCyl20ZFfSMWk6TAzYvwaQLDUz2x5WQtT70YRTM9/mU2UntlL0/QqVuQ1Qnj+puybXXQig+wwz
- dm+W36TAD0kKoEb5n0A3pLaVZdbvkMriETcJXwXKWdn9XXJq6NwTQ7XjUM7OWe84XUd0=;
+ bh=haSfZvoEvPhBBZDnUW3y3BhJEQ36mgFSvpNiOqhvJvI=; b=PVkifm+jEKp7mPKmdJMjBzW5TW
+ 9+tA5iD+ZG8sbD5jVnOxfFByFJZTMgVWg6sBxiUFTADObYqVYbMGrD5O4hdlAOuNlI2GN3KnHEkm4
+ ISBX9uh7RULsG3OrfekP4bTePETUfjKU+vXj5Pz3+cp7B9i4jppwKByOS9JuwgA6VbHo=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vi6Q5-0008VU-NT; Tue, 20 Jan 2026 07:44:58 +0000
+ id 1vi6Vi-0000Qb-Q9; Tue, 20 Jan 2026 07:50:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=Kid6MiU7s5f8T4gEwmOyT2zu04YSeGDYh8750Mga8iQ=; b=ilacl4zOxBgb/lmdsCZTsr3EBk
- zFj2GyVX/vUj1UlJHTeGnpcPnHJ9j1woWxvFz3xRKDyTqK+wAajiLLU925mQ8gXwhKmyxMR4v1epI
- AOBbpi2btLiLaBkLAx55KwETuAMOToZG4XHJYEOLtQSWNewFbBS0oIkgoS8wa3txVmTRVKzYeS0A3
- V9gH/Lab14QzzebmbPcXNWPVgrikm/JOCo+2HYwEDmDIwtOHHDne6sJtxRZS613O1tl53Srsju7g8
- UT5LyUVPxepeDRdKwUet4llrhStqaMvjEAL5ucvkWWrFbYBz71lqsJk2Pg/Tigf0o/FCqWWyZna9G
- sV+Bbw9g==;
+ bh=haSfZvoEvPhBBZDnUW3y3BhJEQ36mgFSvpNiOqhvJvI=; b=N18Lfx2l0cTzfa3HEHbSStwRPv
+ iyXHar7+IL8UusFL6sjIudxhuirPKAhJMeBNA+7JTaSgRPwHzsN72C9/ED13gd4R3bzZoK6cN15el
+ 2OOL3ox9rvwKCy+jqAl20MM1KOQeI06m0Nqc7qZlyinWokSDH6OADy7uwk70GRUXw1dKPRbjqr1Mx
+ G0x+S1U8gEmAS0uHHMxQqMK+KDGwlJXyI4/nRqaD3y/MPBEQbIe1RJKnMGnpCsJCrYQkezP6l13YD
+ Bk/y5So46wc2umpZT0PCIQ7tT9Ms4VQ/Y3zVPPZ8bLDLhE9SURfv9f85/RpFqttM9TA+n04nUeD09
+ UJSC4XRw==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1vi6PX-00000003MrT-17WL;
- Tue, 20 Jan 2026 07:44:23 +0000
-Date: Mon, 19 Jan 2026 23:44:23 -0800
+ Hat Linux)) id 1vi6VB-00000003NIK-3jXc;
+ Tue, 20 Jan 2026 07:50:15 +0000
+Date: Mon, 19 Jan 2026 23:50:13 -0800
 From: Christoph Hellwig <hch@infradead.org>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <aW8yV6v8ZDiynOUm@infradead.org>
+Message-ID: <aW8ztQ-RbhxwzMk7@infradead.org>
 References: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
- <20260119-exportfs-nfsd-v2-1-d93368f903bd@kernel.org>
+ <20260119-exportfs-nfsd-v2-2-d93368f903bd@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260119-exportfs-nfsd-v2-1-d93368f903bd@kernel.org>
+In-Reply-To: <20260119-exportfs-nfsd-v2-2-d93368f903bd@kernel.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Jan 19, 2026 at 11:26:18AM -0500, Jeff Layton wrote:
- > + EXPORT_OP_NOLOCKS - Disable file locking on this filesystem. Some > +
- filesystems cannot properly support file locking as implemented b [...] 
+ Content preview:  On Mon, Jan 19, 2026 at 11:26:19AM -0500, Jeff Layton wrote:
+ > + EXPORT_OP_STABLE_HANDLES - This filesystem provides filehandles that
+ are > + stable across the lifetime of a file. This is a hard requi [...] 
  Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1vi6Q5-0008VU-NT
-Subject: Re: [f2fs-dev] [PATCH v2 01/31] Documentation: document
- EXPORT_OP_NOLOCKS
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1vi6Vi-0000Qb-Q9
+Subject: Re: [f2fs-dev] [PATCH v2 02/31] exportfs: add new
+ EXPORT_OP_STABLE_HANDLES flag
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -149,16 +149,29 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jan 19, 2026 at 11:26:18AM -0500, Jeff Layton wrote:
-> +  EXPORT_OP_NOLOCKS - Disable file locking on this filesystem. Some
-> +    filesystems cannot properly support file locking as implemented by
-> +    nfsd. A case in point is reexport of NFS itself, which can't be done
-> +    safely without coordinating the grace period handling. Other clustered
-> +    and networked filesystems can be problematic here as well.
+On Mon, Jan 19, 2026 at 11:26:19AM -0500, Jeff Layton wrote:
+> +  EXPORT_OP_STABLE_HANDLES - This filesystem provides filehandles that are
+> +    stable across the lifetime of a file. This is a hard requirement for export
+> +    via nfsd. Any filesystem that is eligible to be exported via nfsd must
+> +    indicate this guarantee by setting this flag. Most disk-based filesystems
+> +    can do this naturally. Pseudofilesystems that are for local reporting and
+> +    control (e.g. kernfs, pidfs, nsfs) usually can't support this.
 
-I'm not sure this is very useful.  It really needs to document what
-locking semantics nfs expects, because otherwise no reader will know
-if they set this or not.
+Suggested rewording, taking some of the ideas from Dave Chinners earlier
+comments into account:
+
+  EXPORT_OP_STABLE_HANDLES - This filesystem provides filehandles that are
+    stable across the lifetime of a file.  A file in this context is an
+    instantiated inode reachable by one or more file names, or still open after
+    the last name has been unlinked.  Reuses of the same on-disk inode structure
+    are considered new files and must provide different file handles from the
+    previous incarnation.  Most file systems designed to store user data
+    naturally provide this capability.  Pseudofilesystems that are for local
+    reporting and control (e.g. kernfs, pidfs, nsfs) usually can't support this.
+
+    This flags is a hard requirement for export via nfsd. Any filesystem that
+    is eligible to be exported via nfsd must indicate this guarantee by
+    setting this flag.
 
 
 
