@@ -2,79 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OMtLJEmob2ndEgAAu9opvQ
+	id oPQ1F4uob2kaEwAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 17:07:37 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 17:08:43 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6E2147189
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 17:07:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0452F471CE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jan 2026 17:08:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=7MsHql6z7KHCPxSIPTcAr1DMjnIr7jp0BmGTZ6EtPtM=; b=QIwe0CTaTVfp6ulbv9AgtGecUy
-	VP8abyn0ZtjO6vUtzpOf3I5qfLVxoUuoV5K0HBe/JjkD3VWLoZ3J6x37w9v12S4GMuOw135IdvUmS
-	N5yyIFZ2LkxCADqi7V+X00ruxDtdDVUD00zwCh11iQsyGQ1oic045COgzzmkn53TLZqM=;
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=Cmbflqn1u/Q5/GXOl5WpU4Mj8uCs47cUWYJLnB1EOns=; b=gbmY/Gyg0KrIS92f6O2qqp5BBA
+	W0RbldTWbJKN8HArgCcyr+/UpQwLxAhUTzWiJNmFHfg3SK2SQPp+cKAyYsuWh6I7PXvLeHKO80aaQ
+	uxWr6eJD4MP9vXaTMFYZMGC053ECryb/VAr4ThfUzBv2V6U0k0sI7UjQHvJ3zr68ze8s=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1viCQs-0002tG-DY;
-	Tue, 20 Jan 2026 14:10:11 +0000
+	id 1viCWK-0003OD-BO;
+	Tue, 20 Jan 2026 14:15:49 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1viCQn-0002sp-Bf
+ (envelope-from <chao@kernel.org>) id 1viCWJ-0003O3-CS
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Jan 2026 14:10:06 +0000
+ Tue, 20 Jan 2026 14:15:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Iw9Y2qLW27penDLl/0r+7Jdv1z631e0dvOH3TcClcCc=; b=dCk6BHLZchR44F2BLbCtQk3gtp
- FYr+azzevaONGxyJTAjkiWMChFVtHsoySNVQYC+3GfAi9w4WFOmLgQwx/JuS4IuC3rVOAeZ+myVON
- XYQttHjsyv8mQZjQvF7QDrnFbWd6bObXK1cn/lx1ScY3fbda7Sk9MoV5QbamhMADrCwA=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Iw9Y2qLW27penDLl/0r+7Jdv1z631e0dvOH3TcClcCc=; b=EwHJBV/UpC4sjQ+No5uRKmyRJ/
- Vc8XT96Xw1qEKYPgDpnCiFaa0W6yW/ZBEv4YtdQxBD9dxg9e5uGfMamLMHWe7/bSs9vX0y0kW7m+7
- PclDbO/n0C9L1QFt5zaumoKoP+xyr9RcB0YRnZBjbtG0dVgyHeyhPAfJ22BXoe3Pko60=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=XG535JtpsDf40xxtkqcZq+qof0BsJvnVS2Begzso9Uc=; b=JwVCVb3UK2Aqy8a2qKBsQWm00r
+ Cw0r2DOt7bAxtuXFV5kLbG32eJmrFJ8cgUs6PsPtQR4RY+iKTrnmhBhqAMTwFa8bqmb3E7eY72HY3
+ sR35f7lNInolNWFgHkkZl2oXpsNwPoWTximL9FjcN2FHMkz3lY/pzthpMrvNeWIYc6T4=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=XG535JtpsDf40xxtkqcZq+qof0BsJvnVS2Begzso9Uc=; b=h
+ fuUv8nFCd/Yhho0W9BnwYckcbYIT5mAf5Mj+v/APpHzr4psbgz7WADgzZhOKNYHbExkECI3xQmTHA
+ 0lga+GRpF0g1QkFB+ML6HoshtvIAzG0fi2GLrbQfyrovii+PTICfsiYVPHIy6L6qiksQz4ebflMLE
+ J1zuslwL5gg9ewC4=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1viCQn-0007Mf-Jj for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Jan 2026 14:10:06 +0000
+ id 1viCWJ-0007eO-Pr for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Jan 2026 14:15:48 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id EDAFF6011F
+ by tor.source.kernel.org (Postfix) with ESMTP id 1D62460008
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 20 Jan 2026 14:09:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D8A2C16AAE;
- Tue, 20 Jan 2026 14:09:58 +0000 (UTC)
+ Tue, 20 Jan 2026 14:15:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C7D56C16AAE;
+ Tue, 20 Jan 2026 14:15:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768918199;
- bh=V11yCnrXXgu8zsEksEHezAvtxS8/qxKhGJjPfRTOFM4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=s73ezEPhJAdyh/rKAQDJgMD/2EhY+0Z3gMap2+l96wROJ8v34nAfDt4OzvdqW+nz1
- SWor/cjT7kow5kkZJmZJBjumQBDyY14AqxenCP5mc5F3Bx8ktDIG2EN6Bitt8XC3Z+
- 72Xcro7XBCL8erfnvZgCdqtzH5e1pw8SCNXXaYmQfZgU3TbGj+rvl6ona056TRRYMz
- ew+U14JWHmssoPcFhxj+1h7OlWnG07jQ1btjShAdJKxFIKSF0rwuQQz1eqNIbU3Uyo
- 8YaPrLmFrmSEC2dft0Te/0IvfKR+2y+GjN1Xah5FmSb1ywbbkByq8Pct5C1WE/hSdC
- ddLhuCR0olhAw==
+ s=k20201202; t=1768918536;
+ bh=Mrrul669ImWUIvS85Up3V0pG4AlooNOKuhvIUuoV+8E=;
+ h=From:To:Cc:Subject:Date:From;
+ b=FNcbxe1P+mt+JFT/fRJgWlf5Gt8o+yO9W7UM5ildMuRs0Wff7Vyyk/HXz2eoZLErc
+ 1uc9UfWuMr4vIhFYgv2qnMlCND2RX0fa6C1FVRWpldtj3cWdk4dprWdc0kJdxLhIJQ
+ o3SyfsVJ0qsi7K77raAeoaPKmryRUs57mHK7T4wN2H7QktTX6MOnh8dqpqjVRNzMI4
+ W8bfDNVgYxQ8PlcWWKVdkpaY5SJIcAN3eH8VryOnkC87hkpokGSXoajk27zvCEJnaa
+ tw/7hcLkl8qlbLiPs/h/xA8nfBRA7rVKijvVzIZ2jYScChTHAFTI8XhMLWyZxRJQzl
+ nnuz2RZJgkSxQ==
 To: jaegeuk@kernel.org
-Date: Tue, 20 Jan 2026 17:12:15 +0800
-Message-Id: <20260120091215.62608-2-chao@kernel.org>
+Date: Tue, 20 Jan 2026 17:18:26 +0800
+Message-Id: <20260120091826.63308-1-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20260120091215.62608-1-chao@kernel.org>
-References: <20260120091215.62608-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: 0.8 (/)
 X-Spam-Report: Spam detection software,
@@ -83,19 +81,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: In order to simulate skipped write during
- enable_checkpoint().
- Signed-off-by: Chao Yu <chao@kernel.org> --- v2: - no changes
- Documentation/ABI/testing/sysfs-fs-f2fs
- | 1 + Documentation/filesystems/f2fs.rst | 1 + fs/f2fs/data.c | 4 ++++
- fs/f2fs/f2fs.h | 1 + fs/f2f [...] 
+ Content preview: Commit d36de29f4bb5 ("f2fs: sysfs: introduce
+ inject_lock_timeout")
+ introduces a bug as below, fix it. cat /sys/fs/f2fs/vdx/inject_lock_timeout
+ s/fs/f2fs/vdx/inject_lock_timeout: Invalid argument Signed-off-by: Chao Yu
+ <chao@kernel.org> --- fs/f2fs/sysfs.c | 3 ++- 1 file changed, 2 insertions(+), 
+ 1 deletion(-) 
  Content analysis details:   (0.8 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [172.105.4.254 listed in list.dnswl.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -105,8 +99,8 @@ X-Spam-Report: Spam detection software,
  domain
  1.1 DATE_IN_PAST_03_06     Date: is 3 to 6 hours before Received: date
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1viCQn-0007Mf-Jj
-Subject: [f2fs-dev] [PATCH v2 2/2] f2fs: introduce FAULT_SKIP_WRITE
+X-Headers-End: 1viCWJ-0007eO-Pr
+Subject: [f2fs-dev] [PATCH] f2fs: fix to show simulate_lock_timeout correctly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -162,86 +156,35 @@ X-Spamd-Result: default: False [-7.61 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
-X-Rspamd-Queue-Id: E6E2147189
+X-Rspamd-Queue-Id: 0452F471CE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-In order to simulate skipped write during enable_checkpoint().
+Commit d36de29f4bb5 ("f2fs: sysfs: introduce inject_lock_timeout")
+introduces a bug as below, fix it.
+
+cat /sys/fs/f2fs/vdx/inject_lock_timeout
+s/fs/f2fs/vdx/inject_lock_timeout: Invalid argument
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
-v2:
-- no changes
- Documentation/ABI/testing/sysfs-fs-f2fs | 1 +
- Documentation/filesystems/f2fs.rst      | 1 +
- fs/f2fs/data.c                          | 4 ++++
- fs/f2fs/f2fs.h                          | 1 +
- fs/f2fs/super.c                         | 1 +
- 5 files changed, 8 insertions(+)
+ fs/f2fs/sysfs.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 7398b369784c..9a8ec2290f68 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -744,6 +744,7 @@ Description:	Support configuring fault injection type, should be
- 		FAULT_ATOMIC_TIMEOUT             0x00400000 (1000ms)
- 		FAULT_VMALLOC                    0x00800000
- 		FAULT_LOCK_TIMEOUT               0x01000000 (1000ms)
-+		FAULT_SKIP_WRITE                 0x02000000
- 		===========================      ==========
- 
- What:		/sys/fs/f2fs/<disk>/discard_io_aware_gran
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index fc005f2eaf86..7e4031631286 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -218,6 +218,7 @@ fault_type=%d		 Support configuring fault injection type, should be
- 			     FAULT_ATOMIC_TIMEOUT             0x00400000 (1000ms)
- 			     FAULT_VMALLOC                    0x00800000
- 			     FAULT_LOCK_TIMEOUT               0x01000000 (1000ms)
-+			     FAULT_SKIP_WRITE                 0x02000000
- 			     ===========================      ==========
- mode=%s			 Control block allocation mode which supports "adaptive"
- 			 and "lfs". In "lfs" mode, there should be no random
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 25b4d3f21fa7..9ef875e7b34c 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2921,6 +2921,10 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
- 		goto got_it;
- 	}
- 
-+	if (is_sbi_flag_set(fio->sbi, SBI_ENABLE_CHECKPOINT) &&
-+		time_to_inject(fio->sbi, FAULT_SKIP_WRITE))
-+		return -EINVAL;
-+
- 	/* Deadlock due to between page->lock and f2fs_lock_op */
- 	if (fio->need_lock == LOCK_REQ && !f2fs_trylock_op(fio->sbi, &lc))
- 		return -EAGAIN;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 52cec6b3ecf0..3a8e1dcdcd69 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -66,6 +66,7 @@ enum {
- 	FAULT_ATOMIC_TIMEOUT,
- 	FAULT_VMALLOC,
- 	FAULT_LOCK_TIMEOUT,
-+	FAULT_SKIP_WRITE,
- 	FAULT_MAX,
- };
- 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 0afe9f829058..5d8b2e812340 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -70,6 +70,7 @@ const char *f2fs_fault_name[FAULT_MAX] = {
- 	[FAULT_ATOMIC_TIMEOUT]		= "atomic timeout",
- 	[FAULT_VMALLOC]			= "vmalloc",
- 	[FAULT_LOCK_TIMEOUT]		= "lock timeout",
-+	[FAULT_SKIP_WRITE]		= "skip write",
- };
- 
- int f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned long rate,
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index cd22bfe75c45..d01a2664a250 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -86,7 +86,8 @@ static unsigned char *__struct_ptr(struct f2fs_sb_info *sbi, int struct_type)
+ 		return (unsigned char *)sbi;
+ #ifdef CONFIG_F2FS_FAULT_INJECTION
+ 	else if (struct_type == FAULT_INFO_RATE ||
+-					struct_type == FAULT_INFO_TYPE)
++		struct_type == FAULT_INFO_TYPE ||
++		struct_type == FAULT_INFO_TIMEOUT)
+ 		return (unsigned char *)&F2FS_OPTION(sbi).fault_info;
+ #endif
+ #ifdef CONFIG_F2FS_STAT_FS
 -- 
 2.40.1
 
