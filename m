@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eLd1FIGjcGlyYgAAu9opvQ
+	id +GCuINijcGlyYgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 10:59:29 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 11:00:56 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B105154CDA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 10:59:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0D0354D2E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 11:00:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=U42griNaeuE1rBSoLG2QsCf9u1fYZF2hERFhFaSdnmE=; b=Bk5FyrP9wuYi8xF5VceLFMLN/P
-	auD34Qtv3uN1mnL8zMTxxyMZJ5vffxv+/3tv5jZiaZ0HZFsPpmCfvggoUfIMTPkr8zrCOAVGpmIXf
-	ulwDn0f8Wvm3sv1pk3ar7KFBXyzZSVqyKg5ZoTKdS/t7Z4KMGQtpwiAVcoFp0fDWJt5I=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=sM/T7iPXaOPbdX95o7AedKfWXe63Y3opMMQQ5Jrdom4=; b=A9kLYz5fnvkBqyXBtF1AsTRlvJ
+	Ov/Haqpt0EvCIRRs4apzjBEy6qkB8NfxTuY2ARJ0HrkwtOpfZzzav6kRqCiIbBh3eM0eEpuR0GH5B
+	qop9vnmvWTkvaHhsAdIu9FH22/FsEJgHAXk3aLNRt7HsTtaZaJCimL1Vib0yfUwhXK6k=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1viUzl-0001Eb-81;
-	Wed, 21 Jan 2026 09:59:25 +0000
+	id 1viV17-0007U7-9a;
+	Wed, 21 Jan 2026 10:00:49 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+bcc91a9d4ebb8e7eb2a7+8186+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1viUzk-0001Do-28; Wed, 21 Jan 2026 09:59:24 +0000
+ id 1viV14-0007Ts-5G; Wed, 21 Jan 2026 10:00:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BIxfnTqIxfG/JDCpqz8ddR3KhEWm3MiBJqi238v5YU4=; b=N+km/7Rkpd572k1pq4lg8CPbj9
- gxcLV6iJUegX2lVlW/TDr+wEXwAByivQGNeYH6TLMz2sw46/sMwECwi+kgduNLAmlnQGs6xcWZOCL
- /5g+4Xs5CdK3QYx7iixPqCFSSicCc8NMxKeq/cDQ+CzVg+Eo+WeBMK8VH/6Pb+5CiuO0=;
+ bh=wMbWURXBKlERnmrf5QHs0kPUbIXlx/juA5w6FY/x4Mo=; b=hTyEL16fuIb/U3dnmzBg96BB1J
+ WgqEA1si+mMpsdFGIEf+pdkiMqVicsG/8gFZJH2UY8V0GY7g0X2j2nS+SUPts1DIOu28WNNy1uBqa
+ Ug4XnhVZaFML2MwpYQISBt+4reU/F3UEXwAACx2E/2rKGR/pZ+2wELys4FiG/Rm7euMQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -44,32 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BIxfnTqIxfG/JDCpqz8ddR3KhEWm3MiBJqi238v5YU4=; b=W98S9gl6Ce7EkfiY/ViaMQ8IPh
- z+lJctYPDeyIIkflJclZv4dY+KPipiAh7iGlag8O5Fkz8sMs2iNX7tqXcgVuvApfrhCqJtvvYt2iK
- flHYWLPkWmLrC18+74btRNnV1vVIL8uRIjU6ys02Ds3uAQFMLX5zLELcwtKBrbxqiTxE=;
+ bh=wMbWURXBKlERnmrf5QHs0kPUbIXlx/juA5w6FY/x4Mo=; b=ainU5bpDbAlUcckdEas2ZcwnhE
+ ILIF5n8F3xaWQB07Fxxv3PnoTGQJ0/J2hAmA9oO3IASGpu1oISEOBx/VbF3FXe2Mu9KxW6m1S/RVd
+ sGAqLi5DHN4F0iuJf/AVBGAh73pIdyzgiVd1v/k6YI2ChHM+pStcK8Cp+IgKSYjx1lhg=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1viUzi-0001fU-3O; Wed, 21 Jan 2026 09:59:22 +0000
+ id 1viV13-0001mr-Q9; Wed, 21 Jan 2026 10:00:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=BIxfnTqIxfG/JDCpqz8ddR3KhEWm3MiBJqi238v5YU4=; b=GlzCRsx84vMm8sXEe178jEsMHi
- yEfsLuaiVDfKdvvIzvHHomVN4gwjGG/E7g6hvTZrX9Jl+jMggt9g7DJYZ9KBfIFzYhA3kss7211EY
- GEs0h/iYU1akVr821mpLBTcpxPKmjbRmaNEdphN9zpqkHbi/dWkZXm28+Sqj5tXo4XslET+sDAg7q
- 8tiAmX+5fSaGZCHmy/XD/afOXoGw6dcJ4dJHsPsM0/1AOYGnrcB/NtcMCkFeZvjwrcVtFQsDFGHap
- YeLREzyq2Ckz1YZlspGFTUyxh+vgvNaPEZGDQVL2D5WGr5K6wxV8nnmvIwla6TuNJ/6ZKDWgoUayq
- u8VgPgRQ==;
+ bh=wMbWURXBKlERnmrf5QHs0kPUbIXlx/juA5w6FY/x4Mo=; b=pQX0zA99VzZEIlAcpAlPuQefUS
+ jy9CjjLBfeNNN1FNJitVD8JqerILO8jjC2fZiCCKiOnZ+AFbjn1TYpqjbQaKf+C8/KRnnpzD3SGrm
+ 1PWJ9D0VnaLF05hqis2S5I41XDL1jyEKDnD+EFR38vRrwM8QPEg3EqDl695fgD/6Ar8xKBHcmKyax
+ 7put0Wn3gyLR7YcoxmrK+vm9eU0JdOvfRB2prGJ/Am84hKoGOlEzX9X79ne8Tfk9prDNrEldtzRiA
+ ijbo3W0+o5oEyQQ0Ds62PvFNcq+zxEq6evP7CKwgfSi+8rKZW1NE7FntT3VSj7fEic6gmCvCHtw/f
+ BXWot+KA==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1viUzJ-00000005EDM-2rax;
- Wed, 21 Jan 2026 09:58:57 +0000
-Date: Wed, 21 Jan 2026 01:58:57 -0800
+ Hat Linux)) id 1viV0b-00000005EMZ-1e4Z;
+ Wed, 21 Jan 2026 10:00:17 +0000
+Date: Wed, 21 Jan 2026 02:00:17 -0800
 From: Christoph Hellwig <hch@infradead.org>
-To: Christian Brauner <brauner@kernel.org>
-Message-ID: <aXCjYY9tVKWv29fN@infradead.org>
-References: <CAOQ4uxjOJMwv_hRVTn3tJHDLMQHbeaCGsdLupiZYcwm7M2rm3g@mail.gmail.com>
- <9c99197dde2eafa55a1b55dce2f0d4d02c77340a.camel@kernel.org>
+To: Jeff Layton <jlayton@kernel.org>
+Message-ID: <aXCjsTBnHGuqTJdb@infradead.org>
+References: <9c99197dde2eafa55a1b55dce2f0d4d02c77340a.camel@kernel.org>
  <176877859306.16766.15009835437490907207@noble.neil.brown.name>
  <aW3SAKIr_QsnEE5Q@infradead.org>
  <176880736225.16766.4203157325432990313@noble.neil.brown.name>
@@ -78,9 +77,10 @@ References: <CAOQ4uxjOJMwv_hRVTn3tJHDLMQHbeaCGsdLupiZYcwm7M2rm3g@mail.gmail.com>
  <20260120-entmilitarisieren-wanken-afd04b910897@brauner>
  <176890211061.16766.16354247063052030403@noble.neil.brown.name>
  <20260120-hacken-revision-88209121ac2c@brauner>
+ <a35ac736d9ebc6c92a6e7d61aeb5198234102442.camel@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260120-hacken-revision-88209121ac2c@brauner>
+In-Reply-To: <a35ac736d9ebc6c92a6e7d61aeb5198234102442.camel@kernel.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -0.1 (/)
@@ -90,10 +90,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Jan 20, 2026 at 11:31:54AM +0100, Christian Brauner
- wrote: > It is very much fine for a filesystems to support file handles
- without
- > wanting to support exporting via NFS. That is especially t [...] 
+ Content preview:  On Tue, Jan 20, 2026 at 07:50:32AM -0500, Jeff Layton wrote:
+ > > > and it DOES provide stable filehandles. > > > > Across reboot? Not
+ really. > > It's quite possible that we may end up with the same " [...] 
  Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -102,7 +101,7 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1viUzi-0001fU-3O
+X-Headers-End: 1viV13-0001mr-Q9
 Subject: Re: [f2fs-dev] [PATCH 00/29] fs: require filesystems to explicitly
  opt-in to nfsd export support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -137,22 +136,23 @@ Cc: Martin Brandenburg <martin@omnibond.com>,
  linux-mm@kvack.org, devel@lists.orangefs.org,
  Shyam Prasad N <sprasad@microsoft.com>,
  Olga Kornievskaia <okorniev@redhat.com>, linux-cifs@vger.kernel.org,
- Dave Kleikamp <shaggy@kernel.org>, Tom Talpey <tom@talpey.com>,
- ocfs2-devel@lists.linux.dev, Bharath SM <bharathsm@microsoft.com>,
- David Sterba <dsterba@suse.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Dave Kleikamp <shaggy@kernel.org>, linux-nfs@vger.kernel.org,
+ Tom Talpey <tom@talpey.com>, ocfs2-devel@lists.linux.dev,
+ Bharath SM <bharathsm@microsoft.com>, David Sterba <dsterba@suse.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
  Baolin Wang <baolin.wang@linux.alibaba.com>,
  Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
  ceph-devel@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
  OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
  Andreas Gruenbacher <agruenba@redhat.com>, gfs2@lists.linux.dev,
- linux-nfs@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
+ Christian Brauner <brauner@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
  Luis de Bethencourt <luisbg@kernel.org>,
  Joseph Qi <joseph.qi@linux.alibaba.com>, linux-erofs@lists.ozlabs.org,
- Jeff Layton <jlayton@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Steve French <sfrench@samba.org>,
- Chuck Lever <chuck.lever@oracle.com>, Hongbo Li <lihongbo22@huawei.com>,
- Anna Schumaker <anna@kernel.org>, Jan Kara <jack@suse.com>,
- linux-fsdevel@vger.kernel.org, Phillip Lougher <phillip@squashfs.org.uk>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Steve French <sfrench@samba.org>, Chuck Lever <chuck.lever@oracle.com>,
+ Hongbo Li <lihongbo22@huawei.com>, Anna Schumaker <anna@kernel.org>,
+ Jan Kara <jack@suse.com>, linux-fsdevel@vger.kernel.org,
+ Phillip Lougher <phillip@squashfs.org.uk>,
  Andrew Morton <akpm@linux-foundation.org>, ntfs3@lists.linux.dev,
  David Woodhouse <dwmw2@infradead.org>, Trond Myklebust <trondmy@kernel.org>,
  Joel Becker <jlbec@evilplan.org>
@@ -188,22 +188,30 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,infradead.org:mid]
-X-Rspamd-Queue-Id: B105154CDA
+X-Rspamd-Queue-Id: D0D0354D2E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Jan 20, 2026 at 11:31:54AM +0100, Christian Brauner wrote:
-> It is very much fine for a filesystems to support file handles without
-> wanting to support exporting via NFS. That is especially true for
-> in-kernel pseudo filesystems.
+On Tue, Jan 20, 2026 at 07:50:32AM -0500, Jeff Layton wrote:
+> > > and it DOES provide stable filehandles.
+> > 
+> 
+> Across reboot? Not really.
+> 
+> It's quite possible that we may end up with the same "id" numbers in
+> cgroupfs on a new incarnation of the filesystem after a reboot. The
+> files in there are not the same ones as the ones before, but their
+> filehandles may match because kernfs doesn't factor in an i_generation
+> number.
+> 
+> Could we fix it by adding a random i_generation value or something?
+> Possibly, but there really isn't a good use-case that I can see for
+> allowing cgroupfs to be exported via nfsd. Best to disallow it until
+> someone comes up with one.
 
-I'm still amazed at this statement.  "Wanting to export" is not
-something for the file system to decide on in any kind of sane
-layering.  The file systems exports features, and layers higher
-in the stack make use of it.  We just need to be precise in describing
+Yeah.  And I'm pretty sure everyone here will push back hard on any
+such use case.
 
-In-kernel code will then we so nice to respect it.  But for userspace
-even then all bets are off.
 
 
 _______________________________________________
