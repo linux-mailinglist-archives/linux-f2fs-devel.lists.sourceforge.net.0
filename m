@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YPgaHrfIcGkNZwAAu9opvQ
+	id yCzDM3vicGkhawAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 13:38:15 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 15:28:11 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89E1F56E7C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 13:38:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEC72586AF
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 15:28:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:Date:To:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=YMg8kbvnG0q1SKLht6mPVCoGrVtEg1ryaFZqRobHS9U=; b=fHYPKjN0DhAs/SmLL35uap74gW
-	npAadf+2sBQrDl+L5e4fa2z05uKRgfdGsLTYXcXuhvGbdkcTmWu5iD9h8dCWL2q/WAEEWV7Loq0MM
-	+60/szIXw/qr7063h7+hB5CWNU77mLfK6vgjqtSVRx3uchJ5Xkhcryx+X8D0oVaJR/3Q=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=ZyybX9AQKm5VuQ3Xtv8J/urUsRRq/AybuS3xgk5H/DU=; b=kAzxI87vwP5MdG3jNp7690ZrhV
+	3uD3GLyhiK35wAamNUHU2rzN+k1yWssPMTttJKMv9K0xixJEebLXcncx58na5W7wYf15XuRD6QR/y
+	g7hcUZyVMvgilHel+ZnFBgq0DQAVLAgu+wBoC+5N8uYadm1B5NybN8WmDkL/lla2kfU8=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1viXTI-0005Gm-Gg;
-	Wed, 21 Jan 2026 12:38:04 +0000
+	id 1viZBf-0002dY-9t;
+	Wed, 21 Jan 2026 14:27:59 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1viXTG-0005GK-4K;
- Wed, 21 Jan 2026 12:38:02 +0000
+ (envelope-from <jlayton@kernel.org>) id 1viZBd-0002dJ-QJ;
+ Wed, 21 Jan 2026 14:27:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9KvmY9INaPTcFR625BIY1dIAms7AhTPFkZbS17iPHrg=; b=BsS/1rByb5te4p4Ygda3ZYHVyL
- txqrl+iXLu5ZgfnP5HUC9qqbHTsXpoFkCMGa/uwXqHGo1/hwXXoC/JQn+ib6LDTSJJHtw7TXOVJbi
- 4ugOx7hykk+TiASv7E00mR+pZhy1uHF/ER5yb/E1l1Nqr4ao0jzwAXY+BcxzTP0K0gxM=;
+ bh=GU7hITiOIdqyFPzTz378ykeYeKN2mEYNqxAJ4fHs2D8=; b=FwDuPGKyKwofQujtFwDLnvlpAp
+ C7xhJSJ10POcwQ985HB7zDONROKfYRQ2wLVhe6xOPd0u5J5m4q51Mu8d+jP0RwUmy0ZtomOeZUfOS
+ D+TKYL4lzFVf2KVQUc6/v4fnfCf74R1sME34KlC2dIQVpj3eJK+vXHlLiEtHuefPMZrI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -44,32 +44,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9KvmY9INaPTcFR625BIY1dIAms7AhTPFkZbS17iPHrg=; b=SrBEdtJn++MiGC4HdUWlEuDGei
- 5FEmifMj5QwPdPlyQMMLtvcCGADXWOtMrcPCV7x7j0VJYj08MtzVmxl/YWUWgKyg8N7b/uJod9l1z
- CxymGbNzkbsH4EmNgvqYAYx1ZiYRgDRBPpl2s8DvW2qXu7JJ+zurxxcv7Vqp+hFtTwSU=;
+ bh=GU7hITiOIdqyFPzTz378ykeYeKN2mEYNqxAJ4fHs2D8=; b=RAWW6qJNmd/0KZPgTrhpuyaoBL
+ t22aRohA7piQTOxdcRcZXZkOdJR7sRCIBfbrODsLnxwm3HbJ3jpsFEU1LmTYQAKrsYWkNFFrBD7sE
+ AsjLRGQ+ZQkMxdJvxWsmQhMTQ2Fw86S5iD6SYzrQWyrtOPdraz0pAOZHYogeDLR7RnYw=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1viXTF-0002vw-5T; Wed, 21 Jan 2026 12:38:01 +0000
+ id 1viZBd-0001Vx-2R; Wed, 21 Jan 2026 14:27:57 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 152FA600AA;
- Wed, 21 Jan 2026 12:37:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55C4AC116D0;
- Wed, 21 Jan 2026 12:37:43 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 5BF4160097;
+ Wed, 21 Jan 2026 14:27:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 960D7C4CEF1;
+ Wed, 21 Jan 2026 14:27:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768999069;
- bh=3E/l2B+QwJoNtWCjB4O6/fmtXkuxSkBjXqNVTUqKOkI=;
+ s=k20201202; t=1769005666;
+ bh=i5hbrzdp22zDHgYLz86OMwY0w48EYyLnIazFien27/4=;
  h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=NAj+1KXUaXkIehgLHhUGW4srkcrpm4oPqtNH8cEfkt5W99fu7C7yCscSOGt9JwUW6
- /jUv2gEjUVxpGIW01IOxsp13Ybi/uH90o6NkGPvfFh7cCvhgkaNv3K2nV/TQFgdC6I
- R4qNbiQJVmIkXNsTRkdVFwWbOWZxBfnMAZSnadSJpwUnMNtYII+dqKp7P3Qc9OKgN8
- oTfdzLK56awsBGvivuTUHR8YNgnx5X+2tgObgk+maiaBWp9zIlNariwsCvAr2mBBdY
- edg1eeihU4ObjS7vs4+1UdY9XLeoKsZg6No/7lM/bU1IcHnaEdR1ZHhyUHC/UxvznB
- oAORZHQ/PWRRw==
-Message-ID: <f4c9cd498571f5bf976579ad33239408b1324258.camel@kernel.org>
+ b=l4/7iE8/tj2pXG5zknCg4ReuYwfqpqrOXJ1Ek1+CBBwcjIrFrFAsh3OUZD6NyX2gC
+ 8GnPn+a+/lDm9Ub0sXmq1vMq1ziRtpUm/KvJCrFC8MQkE3yUjTa1A8c1lWa2UhuAMw
+ F1KXosNj6EfSZv5WIUnMAH6O/8u/xSTUQnlG9vk9fua1DK0oFe4v2KVPe+DXALpHfR
+ Ytlvn34xTSytWwINfuBvK84VHh0v10umjqXj/Do8jSFk122fZzWzi1yH+bO2QmJc/N
+ i9HI4rmiVVvnnQqTe7kRXccV5wCNLETc1O+xGwbL9wWGE1cYEuej+YUuqPZWutMoy8
+ irgZTK8S3Cf6A==
+Message-ID: <364d2fd98af52a2e2c32ca286decbdc1fe1c80d3.camel@kernel.org>
 To: NeilBrown <neil@brown.name>, Christoph Hellwig <hch@infradead.org>
-Date: Wed, 21 Jan 2026 07:37:42 -0500
-In-Reply-To: <176890126683.16766.5241619788613840985@noble.neil.brown.name>
+Date: Wed, 21 Jan 2026 09:27:38 -0500
+In-Reply-To: <176899164457.16766.16099772451425825775@noble.neil.brown.name>
 References: <20260115-exportfs-nfsd-v1-0-8e80160e3c0c@kernel.org>
  , <CAOQ4uxjOJMwv_hRVTn3tJHDLMQHbeaCGsdLupiZYcwm7M2rm3g@mail.gmail.com>
  , <9c99197dde2eafa55a1b55dce2f0d4d02c77340a.camel@kernel.org>
@@ -79,7 +79,9 @@ References: <20260115-exportfs-nfsd-v1-0-8e80160e3c0c@kernel.org>
  , <20260119-kanufahren-meerjungfrau-775048806544@brauner>
  , <176885553525.16766.291581709413217562@noble.neil.brown.name>
  , <aW8w2SRyFnmA2uqk@infradead.org>
- <176890126683.16766.5241619788613840985@noble.neil.brown.name>
+ , <176890126683.16766.5241619788613840985@noble.neil.brown.name>
+ , <aXCg-MqXH0E6IuwS@infradead.org>
+ <176899164457.16766.16099772451425825775@noble.neil.brown.name>
 Autocrypt: addr=jlayton@kernel.org; prefer-encrypt=mutual;
  keydata=mQINBE6V0TwBEADXhJg7s8wFDwBMEvn0qyhAnzFLTOCHooMZyx7XO7dAiIhDSi7G1NPxw
  n8jdFUQMCR/GlpozMFlSFiZXiObE7sef9rTtM68ukUyZM4pJ9l0KjQNgDJ6Fr342Htkjxu/kFV1Wv
@@ -163,9 +165,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, 2026-01-20 at 20:27 +1100, NeilBrown wrote: > On Tue,
- 20 Jan 2026, Christoph Hellwig wrote: > > On Tue, Jan 20, 2026 at 07:45:35AM
- +1100, NeilBrown wrote: > > > This sounds like you are recomm [...] 
+ Content preview:  On Wed, 2026-01-21 at 21:34 +1100, NeilBrown wrote: > On Wed,
+ 21 Jan 2026, Christoph Hellwig wrote: > > > > > > > > > It took me a while
+ to sift through the code/patches/comments and come to > > > thi [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -177,7 +179,7 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1viXTF-0002vw-5T
+X-Headers-End: 1viZBd-0001Vx-2R
 Subject: Re: [f2fs-dev] [PATCH 00/29] fs: require filesystems to explicitly
  opt-in to nfsd export support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -241,20 +243,19 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	DKIM_MIXED(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[omnibond.com,lists.sourceforge.net,suse.cz,manguebit.org,redhat.com,google.com,vger.kernel.org,kernel.org,gmail.com,paragon-software.com,fb.com,dilger.ca,vivo.com,lists.infradead.org,szeredi.hu,nod.at,fasheh.com,oracle.com,dubeyko.com,kvack.org,lists.orangefs.org,microsoft.com,talpey.com,lists.linux.dev,suse.com,zeniv.linux.org.uk,linux.alibaba.com,mail.parknet.co.jp,mit.edu,lists.ozlabs.org,samba.org,huawei.com,squashfs.org.uk,linux-foundation.org,infradead.org,evilplan.org];
-	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[omnibond.com,lists.sourceforge.net,suse.cz,manguebit.org,redhat.com,google.com,vger.kernel.org,kernel.org,gmail.com,paragon-software.com,fb.com,dilger.ca,vivo.com,lists.infradead.org,szeredi.hu,nod.at,fasheh.com,oracle.com,dubeyko.com,kvack.org,lists.orangefs.org,microsoft.com,talpey.com,lists.linux.dev,suse.com,zeniv.linux.org.uk,linux.alibaba.com,mail.parknet.co.jp,mit.edu,lists.ozlabs.org,samba.org,huawei.com,squashfs.org.uk,linux-foundation.org,infradead.org,evilplan.org];
+	DKIM_MIXED(0.00)[];
 	ARC_NA(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
@@ -266,96 +267,73 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_REPLYTO(0.00)[jlayton@kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
-X-Rspamd-Queue-Id: 89E1F56E7C
+	HAS_REPLYTO(0.00)[jlayton@kernel.org]
+X-Rspamd-Queue-Id: CEC72586AF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, 2026-01-20 at 20:27 +1100, NeilBrown wrote:
-> On Tue, 20 Jan 2026, Christoph Hellwig wrote:
-> > On Tue, Jan 20, 2026 at 07:45:35AM +1100, NeilBrown wrote:
-> > > This sounds like you are recommending that we give in to bullying.
-> > 
-> > I find your suggestion that anything you disagree with is bullying
-> > extremely offensive.  If you have valid reasons for naming something
-> > after the user instead of explaining the semantics, please explain that.
-> 
-> I was referring not to your behaviour but to this statement by Christian:
-> 
->   So if Christoph insists on the other name then I say let's just go with it.
-> 
-> I think that someone "insisting" on something rather than "arguing
-> rationally" for something "sounds like" bullying.  Had Christian said
-> something like "Christoph has convinced me of the wisdom of his choice"
-> that would have been very different.
-> 
-> I am quite happy to have reasoned discussions with people who disagree
-> with me.  I hope to always provide new relevant information, and hope
-> they will too.
+On Wed, 2026-01-21 at 21:34 +1100, NeilBrown wrote:
+> On Wed, 21 Jan 2026, Christoph Hellwig wrote:
 > 
 > > 
-> > If you think NFS actually explains the semantics pretty well, please
-> > explain that too, especially in forms that can be put into
-> > documentation, including for the user ABI.
+> > > 
+> > > It took me a while to sift through the code/patches/comments and come to
+> > > this understanding and I apologise if I wasn't as clear earlier.  But
+> > > my intuition was always that file handle stability was never the real
+> > > issue, and maintainer choice was.  Hence my rejection of the
+> > > "STABLE_HANDLES" name.
+> > 
+> > Why do you keep ignoring the fat that the stable handles are really
+> > important for anyone wanting to actually use them for their original
+> > storage purpose, be that for knfsd, a userland nfs damon, or other
+> > storage applications in userspace despite explaining this countless
+> > times?
+> > 
 > 
-> There are multiple issues here:
-> 
->  - filehandle stability.  As far as I know all filesystems provide
->    stable filehandles when the "subtree_check" export option is not used.
->    Certainly cgroupfs does.  So having an EXPORT_OP_STABLE_HANDLES
->    flag would mean it was set for every filesystem - unless there is
->    something else I'm not aware of.  That is certainly possible and I
->    hope someone will let me know if I'm missing something.
-> 
->  - filehandle uniqueness.  This is somewhat important and if a
->    filesystem doesn't provide it, that should be considered a bug.  In a
->    different thread Christian has observed that there would be benefit
->    if pidfs and nsfs provided uniqueness across reboots.  It is quite
->    easy for a virtual filesystem to generate a 64 bit random number when
->    the fs is initialised, and include that in file handles.  Having a
->    EXPORT_OP_REUSES_HANDLES flag could mark filesystems that are still
->    buggy if that is thought to be useful.
+> It isn't that I don't think they are important.  It is that I think they
+> are universally provided (when not connectable).
+> If we add an EXPORT_OP_STABLE_FILEHANDLES flag, I believe we would need to
+> set it on every export_operations structure.  So what would be the
+> point?
 > 
 
-I was conflating "uniqueness" with "stability" wrt cgroupfs. cgroupfs
-does have _stable_ handles, by your definition above. What it does not
-provide is proper uniqueness since it can end up reusing a filehandle
-after a reboot. Maybe that is the better thing to flag here.
+I see your point.
 
+Using your definitions, stability is not a problem for Linux
+filesystems. The filehandles generally don't change after they have
+been established.
 
->  - GETATTR always reporting file size of 0.  This is the only concrete
->    symptom that Jeff has reported (that I have seen).  This  makes it
->    impossible to read files over NFS even if they have content.
->    Would EXPORT_OP_INACCURATE_SIZE be useful?
+Uniqueness however _is_ a problem as we can end up with valid handles
+for files that have been recreated across a reboot with some
+filesystems (esp. "synthetic" ones like cgroupfs, pidfs, etc.). Naming
+the flag STABLE conflates the two.
+
+In an earlier email, HCH said:
+
+> We'll still need a stable handles flag, and expose it to userspace
+> to avoid applications being tricked into using broken non-stable
+> file handles.  We should have caught that when they were added, but
+> didn't unfortunately.
 > 
 
-Ahh yes, that is probably why I was getting 0 length files when
-reading. Likely fixable if anyone cares I suppose.
+If we assume he meant "unique handles" flag, then I think we're all
+mostly in agreement here.  As far as this patchset goes: what if we
+were to just rename EXPORT_OP_STABLE_HANDLES to
+EXPORT_OP_UNIQUE_HANDLES (and clean up the documentation), since that's
+the main issue for existing filesystems. It would be fairly simple to
+advertise handle uniqueness using statx or something.
 
->  - maintainer feature choice.  A maintainer may choose not to support
->    export over NFS because they feel that there is no value and the
->    possible support burden would not be worth it.  There may be locking
->    / lease / etc issues that further complicate things.  So it might be
->    reasonable for a maintainer to choose to forbid NFS export while
->    allowing local fhandle access. EXPORT_OP_NO_NFS_EXPORT.
-> 
+Alternately, instead of denying access to these filesystems, we could
+just fix these filesystems to create unique handles (a'la random
+i_generation value or something similar). That should mostly prevent
+filehandles from being reusable across a reboot on these filesystems.
 
+That would leave cgroupfs and the like exportable via nfsd, but as you
+point out, we can't deny export by userland servers. If people want to
+do this kind of crazy stuff, maybe we shouldn't deny them after all.
 
-> It took me a while to sift through the code/patches/comments and come to
-> this understanding and I apologise if I wasn't as clear earlier.  But
-> my intuition was always that file handle stability was never the real
-> issue, and maintainer choice was.  Hence my rejection of the
-> "STABLE_HANDLES" name.
-> 
-
-Thanks for laying all that out. You're quite right that this covers
-more than handle stability.
-
-At this point, I'm not sure what to do with this set since there are a
-lot of competing proposals. In the near term, I'm fine with Amir's
-patch.
 -- 
 Jeff Layton <jlayton@kernel.org>
 
