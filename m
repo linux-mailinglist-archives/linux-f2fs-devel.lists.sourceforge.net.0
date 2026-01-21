@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +GCuINijcGlyYgAAu9opvQ
+	id iPfBGBWkcGlyYgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 11:00:56 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 11:01:57 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0D0354D2E
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 11:00:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC7D254D5C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 11:01:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=sM/T7iPXaOPbdX95o7AedKfWXe63Y3opMMQQ5Jrdom4=; b=A9kLYz5fnvkBqyXBtF1AsTRlvJ
-	Ov/Haqpt0EvCIRRs4apzjBEy6qkB8NfxTuY2ARJ0HrkwtOpfZzzav6kRqCiIbBh3eM0eEpuR0GH5B
-	qop9vnmvWTkvaHhsAdIu9FH22/FsEJgHAXk3aLNRt7HsTtaZaJCimL1Vib0yfUwhXK6k=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=C6pQ5Uz8EMIWD+v5H3J6ievOmfGobB1AcJx6GgbN2A8=; b=U90+jTNc7uYgr2bapelehXzCek
+	5OdPMEyenhx5cgLH0XCmNRcr3841sh3Xm7QE1cb3Nrp+bq9inDaj1n14Jac3pbgc5sHpsvwhDlocW
+	tBK6k6nagayin07el9o+SmednRQYR/Twhzo+6eHdoi5M2rBXpKx0ER+/7j1BcBjxzQ+s=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1viV17-0007U7-9a;
-	Wed, 21 Jan 2026 10:00:49 +0000
+	id 1viV29-0001Nn-LD;
+	Wed, 21 Jan 2026 10:01:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+bcc91a9d4ebb8e7eb2a7+8186+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1viV14-0007Ts-5G; Wed, 21 Jan 2026 10:00:46 +0000
+ id 1viV23-0001N6-IC; Wed, 21 Jan 2026 10:01:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wMbWURXBKlERnmrf5QHs0kPUbIXlx/juA5w6FY/x4Mo=; b=hTyEL16fuIb/U3dnmzBg96BB1J
- WgqEA1si+mMpsdFGIEf+pdkiMqVicsG/8gFZJH2UY8V0GY7g0X2j2nS+SUPts1DIOu28WNNy1uBqa
- Ug4XnhVZaFML2MwpYQISBt+4reU/F3UEXwAACx2E/2rKGR/pZ+2wELys4FiG/Rm7euMQ=;
+ bh=GioNW15OomQxHDkrEn0KiwooaQGMLNQRkXTreUFMIec=; b=DYHRgNBx+Kxla4FMAjD1XYnRVV
+ AbgXOteLldzq7zMjtSH2ifMeNN0MJEZIq0MGVvh7AKqiQcvhyVAtr3f3YFtTtZjNCJwEre6eH46VX
+ IQWQoYikb2a+RLpOHM3GgeDXUVkE5RNvgvC1d+AC5fyLMVe8hkzqXs9POOFZz04B91wg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -44,30 +44,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wMbWURXBKlERnmrf5QHs0kPUbIXlx/juA5w6FY/x4Mo=; b=ainU5bpDbAlUcckdEas2ZcwnhE
- ILIF5n8F3xaWQB07Fxxv3PnoTGQJ0/J2hAmA9oO3IASGpu1oISEOBx/VbF3FXe2Mu9KxW6m1S/RVd
- sGAqLi5DHN4F0iuJf/AVBGAh73pIdyzgiVd1v/k6YI2ChHM+pStcK8Cp+IgKSYjx1lhg=;
+ bh=GioNW15OomQxHDkrEn0KiwooaQGMLNQRkXTreUFMIec=; b=mYJNrvvDVV9mXCUv48r3KoGjFq
+ Ne1+mjZk3GUSwc4ov3bQ99NZ5EE3Y85M7MdWfdHs4xYazd2GiYC6YsYkJ9ErGM2wkpTtUhxJgwcRv
+ 2OdnKwwHvH821YPXa7njI56RbPr8xapfd7F9PkXSXu+fY1bp2B9/UPKYjiO6teINoSJY=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1viV13-0001mr-Q9; Wed, 21 Jan 2026 10:00:46 +0000
+ id 1viV23-0001ws-6N; Wed, 21 Jan 2026 10:01:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=wMbWURXBKlERnmrf5QHs0kPUbIXlx/juA5w6FY/x4Mo=; b=pQX0zA99VzZEIlAcpAlPuQefUS
- jy9CjjLBfeNNN1FNJitVD8JqerILO8jjC2fZiCCKiOnZ+AFbjn1TYpqjbQaKf+C8/KRnnpzD3SGrm
- 1PWJ9D0VnaLF05hqis2S5I41XDL1jyEKDnD+EFR38vRrwM8QPEg3EqDl695fgD/6Ar8xKBHcmKyax
- 7put0Wn3gyLR7YcoxmrK+vm9eU0JdOvfRB2prGJ/Am84hKoGOlEzX9X79ne8Tfk9prDNrEldtzRiA
- ijbo3W0+o5oEyQQ0Ds62PvFNcq+zxEq6evP7CKwgfSi+8rKZW1NE7FntT3VSj7fEic6gmCvCHtw/f
- BXWot+KA==;
+ bh=GioNW15OomQxHDkrEn0KiwooaQGMLNQRkXTreUFMIec=; b=EaSvsuv1TZU2mN64SuI/yRVvS1
+ 3Rh/o5w7ffYW9KHMX3qJFZZJY4Zzl1PqNJPpWxGM180BKBkt1SVZFGf8QKJcPb0NWjtvv122nEg1H
+ OzFKwZ0gcBbQvObpgoOE/2S+Akn4EjCCUUrNtIIKyHvXpH4dzmYWnUtYA/DxyVwWVYhx9ZlF2yvok
+ Jrg9DRyKF5qf1NZ8Tm6yVvdUHQyxI2EoJTmHc6/BHt1VYfHI5t8QgU5fVVRxuVw0cApsiz1v6k8h0
+ KfPlNLRNbSqHEjiliAGF0iIZ/4UIT4AbAx2DF6R6e2q5SykjxB6n79Ri9aRji9M3oB2bi2qkRcfmf
+ m1yhErTQ==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1viV0b-00000005EMZ-1e4Z;
- Wed, 21 Jan 2026 10:00:17 +0000
-Date: Wed, 21 Jan 2026 02:00:17 -0800
+ Hat Linux)) id 1viV1i-00000005ETt-0UQN;
+ Wed, 21 Jan 2026 10:01:26 +0000
+Date: Wed, 21 Jan 2026 02:01:26 -0800
 From: Christoph Hellwig <hch@infradead.org>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <aXCjsTBnHGuqTJdb@infradead.org>
+Message-ID: <aXCj9ooYaqsL9oyP@infradead.org>
 References: <9c99197dde2eafa55a1b55dce2f0d4d02c77340a.camel@kernel.org>
  <176877859306.16766.15009835437490907207@noble.neil.brown.name>
  <aW3SAKIr_QsnEE5Q@infradead.org>
@@ -85,23 +85,24 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On Tue, Jan 20, 2026 at 07:50:32AM -0500, Jeff Layton wrote:
- > > > and it DOES provide stable filehandles. > > > > Across reboot? Not
- really. > > It's quite possible that we may end up with the same " [...] 
+ > At this point,
+ maybe we should just go with Neil's > EXPORT_OP_SUPPORTS_NFS_EXPORT
+ or something. It's much more arbitrary, > than trying [...] 
  Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1viV13-0001mr-Q9
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1viV23-0001ws-6N
 Subject: Re: [f2fs-dev] [PATCH 00/29] fs: require filesystems to explicitly
  opt-in to nfsd export support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -187,30 +188,21 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,infradead.org:mid]
-X-Rspamd-Queue-Id: D0D0354D2E
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
+X-Rspamd-Queue-Id: AC7D254D5C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 On Tue, Jan 20, 2026 at 07:50:32AM -0500, Jeff Layton wrote:
-> > > and it DOES provide stable filehandles.
-> > 
-> 
-> Across reboot? Not really.
-> 
-> It's quite possible that we may end up with the same "id" numbers in
-> cgroupfs on a new incarnation of the filesystem after a reboot. The
-> files in there are not the same ones as the ones before, but their
-> filehandles may match because kernfs doesn't factor in an i_generation
-> number.
-> 
-> Could we fix it by adding a random i_generation value or something?
-> Possibly, but there really isn't a good use-case that I can see for
-> allowing cgroupfs to be exported via nfsd. Best to disallow it until
-> someone comes up with one.
+> At this point, maybe we should just go with Neil's 
+> EXPORT_OP_SUPPORTS_NFS_EXPORT or something. It's much more arbitrary,
+> than trying to base this on criteria about filehandle stability, but it
+> would give us the effect we want.
 
-Yeah.  And I'm pretty sure everyone here will push back hard on any
-such use case.
+We'll still need a stable handles flag, and expose it to userspace
+to avoid applications being tricked into using broken non-stable
+file handles.  We should have caught that when they were added, but
+didn't unfortunately.
 
 
 
