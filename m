@@ -2,146 +2,155 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4Hp0MFancGlyYgAAu9opvQ
+	id gComFsircGkgZAAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 11:15:50 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 11:34:48 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA2C0550E0
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 11:15:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CECA5546F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 11:34:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=cv8wsAPLqznGcGqEYmBwMVUwtEkqreNIuLlkJlQ3oGA=; b=i2yKWvYowJyPfuijV6thPhrD0q
-	56u5XHSrFg5JeeMfdEZR2YQOn09BMI0CQmXCrhaq8VaZPtH0P00UMRfhJJpIb/FSSOSuvle1j/UBi
-	fa9e+SkgM/gKBPiOgTI5IQpFapqf5UnZPX08HrGc6vIjtk+nxSBAf8jCbpYVQHtrmm+A=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:
+	List-Id:Subject:Message-id:Date:References:In-reply-to:To:From:MIME-Version:
+	Sender:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=yEPwwSmfPiCDnSet+nLug7dKzqSyvcXofQ2OuxvEQLc=; b=aCUfe0mk6QKFHjv3TND5tlJLMe
+	Z88d75AJbXXTx0Og+AxDlusGk7YkaimwJ8eAxLvjL1d+LBg8w/jKrRRdGRwjslgal9ypZa2aufi5G
+	LqJ7onN0CC82ekcxCbUoczKmBwwpgBDOY/DKO2vwwl+7MtqFwPKkOqcKz90ByA9MB0uQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1viVFX-0005ma-UV;
-	Wed, 21 Jan 2026 10:15:43 +0000
+	id 1viVXs-0008AZ-Nz;
+	Wed, 21 Jan 2026 10:34:40 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jack@suse.cz>) id 1viVFT-0005mK-ME
- for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 21 Jan 2026 10:15:39 +0000
+ (envelope-from <neilb@ownmail.net>) id 1viVXq-0008AI-HJ;
+ Wed, 21 Jan 2026 10:34:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Reply-To:Message-id:Date:References:In-reply-to:
+ Subject:Cc:To:From:MIME-Version:Content-Transfer-Encoding:Content-Type:Sender
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aF2V3WhsKglhokc+vDCdyrArCDZRi7BaNs5JOgZNrVU=; b=RD5sM++plHgVhFmNW4W7RDBMac
- xfMG7oqFCSAjTkpwrqJkwG3gMnOg5tBRLgCaKbYsaVlGn3hyVkD67toXy8bOlzcqd4untGExgJwmg
- SqObIPxRxMFwNGlpmCIhxiRlb6q8zzIkpr5wOYPNAsgpxvQya4B8wSFdt5Bw33qdfbg4=;
+ bh=K9j3jhKpFIpiUQJzHWR2x3eEHOIQSB6ye1vrprKdmzg=; b=mnNTcIF5c5Y5um0IwEiGaOqe7u
+ J42Ujl3Ez6jZ6Y2H+2TeRZcAp7x+0uj1bChG9NiKbeHIDH0bdknPWgSJhh48l6tLRj69ujNqdcsfT
+ prG6k8nLe2+jnXvwVTsMbL7WSod4gaRqAiElfLZ+E7ogoXCWdOvalrhAAfOC7/AQrJ7c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Reply-To:Message-id:Date:References:In-reply-to:Subject:Cc:To:From:
+ MIME-Version:Content-Transfer-Encoding:Content-Type:Sender:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=aF2V3WhsKglhokc+vDCdyrArCDZRi7BaNs5JOgZNrVU=; b=L3wbyPsbtC9SDLTCgrq0VCtsEw
- N6Lta25Pq2oOv3/x0LaRtRKXYNzZb+TBMui+UtCukllnkOKGbUXtNv+T09FNY071ojtDlxVgR+BQJ
- PYal8Jb2cH/BOaX3ikZX6CnIjwfth78qVM54YeOW7poZOwDZQDS7HWd3PaG03cJpJmCM=;
-Received: from smtp-out1.suse.de ([195.135.223.130])
+ bh=K9j3jhKpFIpiUQJzHWR2x3eEHOIQSB6ye1vrprKdmzg=; b=SiIvbOjOmF/c+WZgzL+MtIV/ol
+ hkg3CwsVc/tMEOnDjU4ZfmBlgr6FE6ZMdEN67Jvl69ISW88o2194V8qWmJx91cGS1j3sP+KEt/MyX
+ 1WCrvrR92OIPqd7g+d2EFW8OJGKkhDCKFBN6F+hXAhURp1STQFAflCNegd5SpB0o4XdM=;
+Received: from flow-b6-smtp.messagingengine.com ([202.12.124.141])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1viVFS-00034p-S4 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 21 Jan 2026 10:15:39 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 411673368B;
- Wed, 21 Jan 2026 10:15:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1768990531; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=aF2V3WhsKglhokc+vDCdyrArCDZRi7BaNs5JOgZNrVU=;
- b=oyZr4bIa8xa6khQR+3eM1H61wEuW3Q0Mnyvw0c7ai3xakzeGQVGU/k5BpLu7zyxFGI53uU
- /Md2kFXYwOpTYCKaVuK9vdlm7AYjoWJosUfSR6+QZ/KVddN/7n+GkQpROamRQAgf+irhFa
- 1efAhFd3urlGVtpZhRDELhC8i3q+sWw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1768990531;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=aF2V3WhsKglhokc+vDCdyrArCDZRi7BaNs5JOgZNrVU=;
- b=hKGDT3RVd5aKhQJyzWkmDrePqUureFmqRjTuFORoR2dLuF3B2vhHl4w5CN1/YYvRUf4RLG
- hO1E2Tf9swmlZDCQ==
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=oyZr4bIa;
- dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=hKGDT3RV
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1768990531; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=aF2V3WhsKglhokc+vDCdyrArCDZRi7BaNs5JOgZNrVU=;
- b=oyZr4bIa8xa6khQR+3eM1H61wEuW3Q0Mnyvw0c7ai3xakzeGQVGU/k5BpLu7zyxFGI53uU
- /Md2kFXYwOpTYCKaVuK9vdlm7AYjoWJosUfSR6+QZ/KVddN/7n+GkQpROamRQAgf+irhFa
- 1efAhFd3urlGVtpZhRDELhC8i3q+sWw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1768990531;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=aF2V3WhsKglhokc+vDCdyrArCDZRi7BaNs5JOgZNrVU=;
- b=hKGDT3RVd5aKhQJyzWkmDrePqUureFmqRjTuFORoR2dLuF3B2vhHl4w5CN1/YYvRUf4RLG
- hO1E2Tf9swmlZDCQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 34BC63EA63;
- Wed, 21 Jan 2026 10:15:31 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id sl/WDEOncGnVbAAAD6G6ig
- (envelope-from <jack@suse.cz>); Wed, 21 Jan 2026 10:15:31 +0000
-Received: by quack3.suse.cz (Postfix, from userid 1000)
- id E2DBFA09E9; Wed, 21 Jan 2026 11:15:26 +0100 (CET)
-Date: Wed, 21 Jan 2026 11:15:26 +0100
-From: Jan Kara <jack@suse.cz>
-To: Chuck Lever <cel@kernel.org>
-Message-ID: <avtj6ud7hb7qyya4ekj24lu2jwmirlqspxa4ptmhjrvuhrgfx6@ghzl2aqdokkg>
-References: <20260120142439.1821554-1-cel@kernel.org>
- <20260120142439.1821554-2-cel@kernel.org>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1viVXp-0004P2-Lk; Wed, 21 Jan 2026 10:34:38 +0000
+Received: from phl-compute-09.internal (phl-compute-09.internal [10.202.2.49])
+ by mailflow.stl.internal (Postfix) with ESMTP id 14B671300419;
+ Wed, 21 Jan 2026 05:34:30 -0500 (EST)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-09.internal (MEProxy); Wed, 21 Jan 2026 05:34:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ownmail.net; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:reply-to:subject:subject:to:to; s=fm2; t=
+ 1768991669; x=1768998869; bh=K9j3jhKpFIpiUQJzHWR2x3eEHOIQSB6ye1v
+ rprKdmzg=; b=kv5lmdgwptpNtolMex40wHyYDtu1zR3kROgUgHa9dV4DF424TII
+ xz8dxcyqZv5vn+C5E7je63p/kUX6FA6DJv49ZG4TEvmE9CmQROcNdltD80UCq70F
+ 67OKAnNM8oyAk8/zKVARKWIUXc/0rwj0A3HsU66MhxNwBVK6BifqALpBS3KNgyjp
+ P0XbAYs6phH+mnFqRoXC1mh9pnuNQ+fFEwhXXc1sSnndee26t3rwwjTbJtTESJ9H
+ fxgBNTVTQMWx/Tnp/sidQDM5zxfwLw4V6i5O5idHrafun9SF76YRjqhEkQ+5kNcK
+ HcmbYYUHLFntzBcrv0lywLVtTimlIcl+nQw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1768991669; x=
+ 1768998869; bh=K9j3jhKpFIpiUQJzHWR2x3eEHOIQSB6ye1vrprKdmzg=; b=o
+ 4LwLi0FQ1jEf8fskqm7+L10I5i+E4UcJvDl06S22E2N6MVzowyCMRqm/bH1M2J1a
+ JDwioi/R98Kd4aywyn9uZLSOM7z8MArbO4E7czObG95qdFlOtvQuQeCk3G1ZaKic
+ Tehtuqj1UGP3Eb7Ucl15f9362hASG+CEClGzitcQtKQLQ9R6sDLQi76cFZsvhiXR
+ ga+keMqdKP1sZXq4AW8N7RVWcf1Wq1jiHpO0YXPueFkCr92lRvi0sx0LsAgnwX8p
+ AKZCnY9vD6dcgSVBcblBk6RRY3JRRT1CNgtvJrCkNeFsfbLaIXO8m2mpKZ7xfZXV
+ VHjPUcyIoRUMrrAPKWG+w==
+X-ME-Sender: <xms:sqtwaejzMMYRFV89Y0xjhbUY2Ux7NPR7lm9XvAv8w1i7kASo3nK0Zw>
+ <xme:sqtwacbJbsKb0ZWVMi2Ld61rpE_gwOTUmZUOuIFkObP6qtSchisKdfJNZxw0XqFd2
+ dpJMMfqKKl9ncf8qF50uKZThAPLp5_pMzEv9z25paWGdt3g-rQ>
+X-ME-Received: <xmr:sqtwabSH-RRobwNx5gak-6jfqjdFsk_YBqmqf4AohoRb2sCX2uoyp4QOYu7NMlajZX_Q1etTmNQaSqmVM8w660ms4W7YiwL8iGuB03vkYszh>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddugeeftdehucetufdoteggodetrf
+ dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+ rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+ gurheptgfgggfhvfevufgjfhffkfhrsehtjeertddttdejnecuhfhrohhmpefpvghilheu
+ rhhofihnuceonhgvihhlsgesohifnhhmrghilhdrnhgvtheqnecuggftrfgrthhtvghrnh
+ epudetfefhudevhedvfeeufedvffekveekgfdtfefggfekheejgefhteeihffggfelnecu
+ vehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepnhgvihhlsg
+ esohifnhhmrghilhdrnhgvthdpnhgspghrtghpthhtohepjedvpdhmohguvgepshhmthhp
+ ohhuthdprhgtphhtthhopehvihhrohesiigvnhhivhdrlhhinhhugidrohhrghdruhhkpd
+ hrtghpthhtohepghhuohgthhhunhhhrghisehvihhvohdrtghomhdprhgtphhtthhopehl
+ ihhnuhigqdigfhhssehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinh
+ hugidquhhnihhonhhfshesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopehl
+ ihhnuhigqdhnihhlfhhssehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplh
+ hinhhugidqnhhfshesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopehlihhn
+ uhigqdhkvghrnhgvlhesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopehlih
+ hnuhigqdhfshguvghvvghlsehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtohep
+ lhhinhhugidqvgigthegsehvghgvrhdrkhgvrhhnvghlrdhorhhg
+X-ME-Proxy: <xmx:sqtwaUqa76K57jmkll9tnYEPNFtkwAFRAIOxkmOCTcJg3wPstOKebw>
+ <xmx:sqtwafqX8Nkd7EHiHXFk0lbznDX828ETkTyNFowHaBS8I4Kgjb_iRQ>
+ <xmx:sqtwaRGfSRcbTn7ju_6NXus6mwh9CX54E07yQqtkZf6nvJqjRrtQ3A>
+ <xmx:sqtwaZtU8f1xqg3JxB6L05BW89l7H_7-dfzynjFDw6dcCKuLsBgwHQ>
+ <xmx:tatwaYpYIXr04Y4VvYfBrbHTBHEkDGuPdYscX8VKwQ1WEKpEcFWHhm0u>
+Feedback-ID: iab3e480c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 21 Jan 2026 05:34:08 -0500 (EST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260120142439.1821554-2-cel@kernel.org>
-X-Spam-Score: -4.01
-X-Spam-Level: 
-X-Spam-Flag: NO
+From: NeilBrown <neilb@ownmail.net>
+To: "Christoph Hellwig" <hch@infradead.org>
+In-reply-to: <aXCg-MqXH0E6IuwS@infradead.org>
+References: <20260115-exportfs-nfsd-v1-0-8e80160e3c0c@kernel.org>,
+ <CAOQ4uxjOJMwv_hRVTn3tJHDLMQHbeaCGsdLupiZYcwm7M2rm3g@mail.gmail.com>,
+ <9c99197dde2eafa55a1b55dce2f0d4d02c77340a.camel@kernel.org>,
+ <176877859306.16766.15009835437490907207@noble.neil.brown.name>,
+ <aW3SAKIr_QsnEE5Q@infradead.org>,
+ <176880736225.16766.4203157325432990313@noble.neil.brown.name>,
+ <20260119-kanufahren-meerjungfrau-775048806544@brauner>,
+ <176885553525.16766.291581709413217562@noble.neil.brown.name>,
+ <aW8w2SRyFnmA2uqk@infradead.org>,
+ <176890126683.16766.5241619788613840985@noble.neil.brown.name>,
+ <aXCg-MqXH0E6IuwS@infradead.org>
+Date: Wed, 21 Jan 2026 21:34:04 +1100
+Message-id: <176899164457.16766.16099772451425825775@noble.neil.brown.name>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue 20-01-26 09:24:24, Chuck Lever wrote: > From: Chuck
- Lever <chuck.lever@oracle.com> > > Enable upper layers such as NFSD to
- retrieve
- case sensitivity > information from file systems by adding FS [...] 
+ Content preview:  On Wed, 21 Jan 2026, Christoph Hellwig wrote: > On Tue, Jan
+ 20, 2026 at 08:27:46PM +1100, NeilBrown wrote: > > > If you think NFS actually
+ explains the semantics pretty well, please > > > explain that [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
-X-Headers-End: 1viVFS-00034p-S4
-Subject: Re: [f2fs-dev] [PATCH v6 01/16] fs: Add case sensitivity flags to
- file_kattr
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [neilb(at)ownmail.net]
+X-Headers-End: 1viVXp-0004P2-Lk
+Subject: Re: [f2fs-dev] [PATCH 00/29] fs: require filesystems to explicitly
+ opt-in to nfsd export support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -153,138 +162,224 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jan Kara <jack@suse.cz>, pc@manguebit.org, yuezhang.mo@sony.com,
- cem@kernel.org, almaz.alexandrovich@paragon-software.com,
- adilger.kernel@dilger.ca, linux-cifs@vger.kernel.org, sfrench@samba.org,
- slava@dubeyko.com, linux-ext4@vger.kernel.org, linkinjeon@kernel.org,
- sprasad@microsoft.com, frank.li@vivo.com, linux-nfs@vger.kernel.org,
- Al Viro <viro@zeniv.linux.org.uk>, ronniesahlberg@gmail.com,
- glaubitz@physik.fu-berlin.de, jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp,
- Christian Brauner <brauner@kernel.org>, tytso@mit.edu,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
- hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
- sj1557.seo@samsung.com, trondmy@kernel.org
+Reply-To: NeilBrown <neil@brown.name>
+Cc: Martin Brandenburg <martin@omnibond.com>,
+ jfs-discussion@lists.sourceforge.net, Jan Kara <jack@suse.cz>,
+ Paulo Alcantara <pc@manguebit.org>, Alex Markuze <amarkuze@redhat.com>,
+ Sandeep Dhavale <dhavale@google.com>, linux-btrfs@vger.kernel.org,
+ Carlos Maiolino <cem@kernel.org>, Amir Goldstein <amir73il@gmail.com>,
+ linux-unionfs@vger.kernel.org,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Chunhai Guo <guochunhai@vivo.com>, Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+ linux-mtd@lists.infradead.org, Mike Marshall <hubcap@omnibond.com>,
+ linux-xfs@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ Yue Hu <zbestahu@gmail.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
+ Hugh Dickins <hughd@google.com>, Dai Ngo <Dai.Ngo@oracle.com>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ Christoph Hellwig <hch@infradead.org>, Viacheslav Dubeyko <slava@dubeyko.com>,
+ Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
+ Salah Triki <salah.triki@gmail.com>, linux-mm@kvack.org,
+ devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
+ Olga Kornievskaia <okorniev@redhat.com>, linux-cifs@vger.kernel.org,
+ Dave Kleikamp <shaggy@kernel.org>, linux-nfs@vger.kernel.org,
+ Tom Talpey <tom@talpey.com>, ocfs2-devel@lists.linux.dev,
+ Bharath SM <bharathsm@microsoft.com>, David Sterba <dsterba@suse.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+ Andreas Gruenbacher <agruenba@redhat.com>, gfs2@lists.linux.dev,
+ Christian Brauner <brauner@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
+ Luis de Bethencourt <luisbg@kernel.org>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, linux-erofs@lists.ozlabs.org,
+ Jeff Layton <jlayton@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Steve French <sfrench@samba.org>,
+ Chuck Lever <chuck.lever@oracle.com>, Hongbo Li <lihongbo22@huawei.com>,
+ Anna Schumaker <anna@kernel.org>, Jan Kara <jack@suse.com>,
+ linux-fsdevel@vger.kernel.org, Phillip Lougher <phillip@squashfs.org.uk>,
+ Andrew Morton <akpm@linux-foundation.org>, ntfs3@lists.linux.dev,
+ David Woodhouse <dwmw2@infradead.org>, Trond Myklebust <trondmy@kernel.org>,
+ Joel Becker <jlbec@evilplan.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [0.89 / 15.00];
+X-Spamd-Result: default: False [0.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	DMARC_POLICY_SOFTFAIL(0.10)[ownmail.net : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	REPLYTO_DN_EQ_FROM_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:cel@kernel.org,m:jack@suse.cz,m:pc@manguebit.org,m:yuezhang.mo@sony.com,m:cem@kernel.org,m:almaz.alexandrovich@paragon-software.com,m:adilger.kernel@dilger.ca,m:linux-cifs@vger.kernel.org,m:sfrench@samba.org,m:slava@dubeyko.com,m:linux-ext4@vger.kernel.org,m:linkinjeon@kernel.org,m:sprasad@microsoft.com,m:frank.li@vivo.com,m:linux-nfs@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:ronniesahlberg@gmail.com,m:glaubitz@physik.fu-berlin.de,m:jaegeuk@kernel.org,m:hirofumi@mail.parknet.co.jp,m:brauner@kernel.org,m:tytso@mit.edu,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:senozhatsky@chromium.org,m:chuck.lever@oracle.com,m:hansg@kernel.org,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:sj1557.seo@samsung.com,m:trondmy@kernel.org,s:lists@lfdr.de];
 	DKIM_MIXED(0.00)[];
-	FORGED_SENDER(0.00)[jack@suse.cz,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	RCPT_COUNT_TWELVE(0.00)[31];
-	DMARC_NA(0.00)[suse.cz];
-	MIME_TRACE(0.00)[0:+];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	ARC_NA(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,suse.cz:-];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,suse.com:email];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jack@suse.cz,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FREEMAIL_CC(0.00)[suse.cz,manguebit.org,sony.com,kernel.org,paragon-software.com,dilger.ca,vger.kernel.org,samba.org,dubeyko.com,microsoft.com,vivo.com,zeniv.linux.org.uk,gmail.com,physik.fu-berlin.de,mail.parknet.co.jp,mit.edu,lists.sourceforge.net,chromium.org,oracle.com,samsung.com];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[ownmail.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,ownmail.net:s=fm2,messagingengine.com:s=fm2];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	HAS_REPLYTO(0.00)[neil@brown.name];
+	RCPT_COUNT_GT_50(0.00)[72];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[neilb@ownmail.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FREEMAIL_CC(0.00)[omnibond.com,lists.sourceforge.net,suse.cz,manguebit.org,redhat.com,google.com,vger.kernel.org,kernel.org,gmail.com,paragon-software.com,fb.com,dilger.ca,vivo.com,lists.infradead.org,szeredi.hu,nod.at,fasheh.com,oracle.com,infradead.org,dubeyko.com,kvack.org,lists.orangefs.org,microsoft.com,talpey.com,lists.linux.dev,suse.com,zeniv.linux.org.uk,linux.alibaba.com,mail.parknet.co.jp,mit.edu,lists.ozlabs.org,samba.org,huawei.com,squashfs.org.uk,linux-foundation.org,evilplan.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: EA2C0550E0
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,ownmail.net:-,messagingengine.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[brown.name:replyto,noble.neil.brown.name:mid,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
+X-Rspamd-Queue-Id: 7CECA5546F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue 20-01-26 09:24:24, Chuck Lever wrote:
-> From: Chuck Lever <chuck.lever@oracle.com>
+On Wed, 21 Jan 2026, Christoph Hellwig wrote:
+> On Tue, Jan 20, 2026 at 08:27:46PM +1100, NeilBrown wrote:
+> > > If you think NFS actually explains the semantics pretty well, please
+> > > explain that too, especially in forms that can be put into
+> > > documentation, including for the user ABI.
+> > 
+> > There are multiple issues here:
+> > 
+> >  - filehandle stability.  As far as I know all filesystems provide
+> >    stable filehandles when the "subtree_check" export option is not used.
 > 
-> Enable upper layers such as NFSD to retrieve case sensitivity
-> information from file systems by adding FS_XFLAG_CASEFOLD and
-> FS_XFLAG_CASENONPRESERVING flags.
-> 
-> Filesystems report case-insensitive or case-nonpreserving behavior
-> by setting these flags directly in fa->fsx_xflags. The default
-> (flags unset) indicates POSIX semantics: case-sensitive and
-> case-preserving. These flags are read-only; userspace cannot set
-> them via ioctl.
-> 
-> Relocate struct file_kattr initialization from fileattr_fill_xflags()
-> and fileattr_fill_flags() to vfs_fileattr_get() and the ioctl/syscall
-> call sites. This allows filesystem ->fileattr_get() callbacks to set
-> flags directly in fa->fsx_xflags before invoking the fill functions,
-> which previously would have zeroed those values. Callers that bypass
-> vfs_fileattr_get() must now zero-initialize the struct themselves.
-> 
-> Case sensitivity information is exported to userspace via the
-> fa_xflags field in the FS_IOC_FSGETXATTR ioctl and file_getattr()
-> system call.
-> 
-> Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
-> ---
->  fs/file_attr.c           | 14 ++++++--------
->  fs/xfs/xfs_ioctl.c       |  2 +-
->  include/linux/fileattr.h |  3 ++-
->  include/uapi/linux/fs.h  |  2 ++
->  4 files changed, 11 insertions(+), 10 deletions(-)
-> 
-> diff --git a/fs/file_attr.c b/fs/file_attr.c
-> index 13cdb31a3e94..2700200c5b9c 100644
-> --- a/fs/file_attr.c
-> +++ b/fs/file_attr.c
-> @@ -15,12 +15,10 @@
->   * @fa:		fileattr pointer
->   * @xflags:	FS_XFLAG_* flags
->   *
-> - * Set ->fsx_xflags, ->fsx_valid and ->flags (translated xflags).  All
-> - * other fields are zeroed.
-> + * Set ->fsx_xflags, ->fsx_valid and ->flags (translated xflags).
->   */
->  void fileattr_fill_xflags(struct file_kattr *fa, u32 xflags)
->  {
-> -	memset(fa, 0, sizeof(*fa));
->  	fa->fsx_valid = true;
->  	fa->fsx_xflags = xflags;
->  	if (fa->fsx_xflags & FS_XFLAG_IMMUTABLE)
-> @@ -46,11 +44,9 @@ EXPORT_SYMBOL(fileattr_fill_xflags);
->   * @flags:	FS_*_FL flags
->   *
->   * Set ->flags, ->flags_valid and ->fsx_xflags (translated flags).
-> - * All other fields are zeroed.
->   */
->  void fileattr_fill_flags(struct file_kattr *fa, u32 flags)
->  {
-> -	memset(fa, 0, sizeof(*fa));
->  	fa->flags_valid = true;
->  	fa->flags = flags;
->  	if (fa->flags & FS_SYNC_FL)
-> @@ -84,6 +80,8 @@ int vfs_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
->  	struct inode *inode = d_inode(dentry);
->  	int error;
->  
-> +	memset(fa, 0, sizeof(*fa));
-> +
+> That is news to me, but certainly interesting.  Does this include not
+> reusing the file handle for a new incarnation of the same thing?
 
-Umm, but ioctl_getflags() sets fa->flags_valid as a hint for
-->fileattr_get() handler and this will now zero-out that hint. So I agree
-that zeroing fa in fileattr_fill_{,x}flags() is a bit unexpected and moving
-it is desirable but it needs a bit more careful surgery.
+"stable" and "reuse" are quite distinct concepts in my mind.
+"a new incarnation of the same thing" is in my experience a new thing.
+  rmdir foo: mkdir foo
+on an empty directory will create a new incarnation of the same thing.
+But it will appear to be different in various ways.
 
-								Honza
--- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+Names, not file handles, are generally used for new incarnations of the
+same thing (again - in my experience).
+
+I cannot 100% guarantee that all fs's provide filehandle stability, but
+I am not aware of any, and none have been presented in this discussion.
+
+It is true that the NFSv4 spec claims to allow them but I find the
+details provided insufficient.
+They might be able to work reliably if the server provided a delegation, but
+without it I don't think they can be used reliably.  I'm certainly not
+aware of any attempt to support them in Linux client or server.
+(I know Trond doesn't like "connectable" file handles).
+
+> 
+> >    Certainly cgroupfs does.  So having an EXPORT_OP_STABLE_HANDLES
+> >    flag would mean it was set for every filesystem - unless there is
+> >    something else I'm not aware of.  That is certainly possible and I
+> >    hope someone will let me know if I'm missing something.
+> 
+> Well, if does not provide stable file handles with the subtree_check
+> export option, or more importantly with the CONNECTABLE flag passed
+> to encode_fh, which is the level we're operating on, it can't set the
+> flag.
+> 
+
+Hmmm...  I didn't know that open_by_handle_at() supported CONNECTABLE
+requests. That seems relatively recent.
+
+If CONNECTABLE is requested, then only directories get stable
+filehandles.
+If CONNECTABLE is not requested, then all filehandles should be stable.
+
+
+
+> >  - filehandle uniqueness.  This is somewhat important and if a
+> >    filesystem doesn't provide it, that should be considered a bug.  In a
+> >    different thread Christian has observed that there would be benefit
+> >    if pidfs and nsfs provided uniqueness across reboots.  It is quite
+> >    easy for a virtual filesystem to generate a 64 bit random number when
+> >    the fs is initialised, and include that in file handles.  Having a
+> >    EXPORT_OP_REUSES_HANDLES flag could mark filesystems that are still
+> >    buggy if that is thought to be useful.
+> 
+> Yes.
+> 
+> >  - GETATTR always reporting file size of 0.  This is the only concrete
+> >    symptom that Jeff has reported (that I have seen).  This  makes it
+> >    impossible to read files over NFS even if they have content.
+> >    Would EXPORT_OP_INACCURATE_SIZE be useful?
+> 
+> i_size = 0 for a regular file sounds like a genuine bug to me.  I'm
+> actually surprised anything works with that.
+
+Files in /proc are all size zero.
+Files in /sys seem to be all 4096 (or maybe PAGE_SIZE).
+Files in /sys/kernel/security are all size zero
+Files in /sys/fs/cgroup are all zero
+
+I agree it is weird, but it seems to work ...  though I do have a vague
+memory of something not working because it used a library function to
+read a file, and it needed to be fixed.  No details come to mind except
+that it was probably md related.
+
+As some of these virtual files can be different every time they are
+read, there is TOCTOU issue with trying to make the i_size accurately
+reflect the result of a subsequent read.  I think the cost of setting an
+accurate i_size even when it is possible is not seen as worth while.
+
+> 
+> >  - maintainer feature choice.  A maintainer may choose not to support
+> >    export over NFS because they feel that there is no value and the
+> >    possible support burden would not be worth it.
+> 
+> The maintainer has no way to disallow exporting through nfs.  They can
+> at best disallow exporting using the kernel nfs daemon if we provide
+> that facility.  But as I've argued multiple times, making arbitrary,
+> selective and very narrow choices about use cases without technical
+> backing for them (which then would be expressable as a flag like those
+> listed by you above) is really bad software development practice, and
+> not something that we usually do in the Linux kernel.
+
+True: once you make files available to people you cannot control what
+people will do with them.
+So maybe you are saying "what is so special about knfsd that it gets
+information that no-one else can get".  I cannot argue against that.
+
+> 
+> >    There may be locking
+> >    / lease / etc issues that further complicate things.  So it might be
+> >    reasonable for a maintainer to choose to forbid NFS export while
+> >    allowing local fhandle access. EXPORT_OP_NO_NFS_EXPORT.
+> 
+> We already have a EXPORT_OP_NOLOCKS flag to deal with this.
+> 
+> > 
+> > It took me a while to sift through the code/patches/comments and come to
+> > this understanding and I apologise if I wasn't as clear earlier.  But
+> > my intuition was always that file handle stability was never the real
+> > issue, and maintainer choice was.  Hence my rejection of the
+> > "STABLE_HANDLES" name.
+> 
+> Why do you keep ignoring the fat that the stable handles are really
+> important for anyone wanting to actually use them for their original
+> storage purpose, be that for knfsd, a userland nfs damon, or other
+> storage applications in userspace despite explaining this countless
+> times?
+> 
+
+It isn't that I don't think they are important.  It is that I think they
+are universally provided (when not connectable).
+If we add an EXPORT_OP_STABLE_FILEHANDLES flag, I believe we would need to
+set it on every export_operations structure.  So what would be the
+point?
+
+Thanks,
+NeilBrown
 
 
 _______________________________________________
