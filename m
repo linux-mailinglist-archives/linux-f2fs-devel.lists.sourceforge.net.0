@@ -2,103 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aLp+O8dgcGkVXwAAu9opvQ
+	id YFuvDdqZcGlyYgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 06:14:47 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 10:18:18 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 843F651666
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 06:14:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 811B4543A2
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jan 2026 10:18:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=zQXyy2ClDB/2nhlWQfTSXDOBQzBbWew/NVc2lB8ibGo=; b=HKYL2Y8Q+LiUKOObkaelz47WXM
-	6NhNWzLGTiUCn7ldmfXzvcm+OlT09MuiSPKPwih38HEv9um3dl/uKaUnRVPlMHrEr7i+apte3DaHM
-	O+pS8z6z64UzqIaIw+RIGhduerTuNSHwsGLkCmdXL+9ydaVc3SqqU4LuC6funrxMgens=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=FVpmUgeh/YUkTcLUIK3D9exPAYt596E/okR67bZclic=; b=FIxSCfH7n6A1jSM5fCeVGoym9o
+	rvJ68Lzrx8p7xLkPq4YD+sHlM63YvRidjnGkagB9PumB5qEKkL1a8pwDxjHmL8x8f1AEs1Bfho85x
+	1k7rdDeSRDMk0ogM2JPB7FBCNdKDSsvSTuD/va8xdIGv35D/CFtLuGk+FYQikSElJTIs=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1viQYA-0001i0-1Z;
-	Wed, 21 Jan 2026 05:14:38 +0000
+	id 1viULn-0004WB-R8;
+	Wed, 21 Jan 2026 09:18:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1viQY8-0001ht-Nw
- for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 21 Jan 2026 05:14:36 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <BATV+bcc91a9d4ebb8e7eb2a7+8186+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1viULl-0004Vs-6u; Wed, 21 Jan 2026 09:18:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oGvdBfz9AZfgRX/dmDlYSEjKQXJvqhJd9uSxzlmsWD4=; b=dpiT3KhPKPy1sVLsABoXECjG5g
- MtkNadjRZ8GGTb1VT+06ykuKhzUvUtdclu2sasQQ1kpo7gIlMTNzY7rJHvv9v1J642AiXDX+5SYB+
- 0TzRa5+uJF+5nXRJ2NvyiUc9Ekg/cFivwVqJAwZaAuBP72yLy9yJKAO1J8AaDgnXd17o=;
+ bh=QMRVjotEayLOv8XTxaxuE0M55enKBYtQeaeNcrACLfc=; b=RU5+x7Eq+qonfcNI8KKf6nbQqZ
+ M2WpminueeAke/Hv26tGbhd09I14E6wi9cw77mS5znWUhS525dMxWufJ9Dfxq2DJKrpVSTv627iFB
+ KEd4BooX44o/enkH8NL0bvMBjtJH0JvGnmXMsXIoGweZICTaxxpnEB6++dQVYdqez16U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=oGvdBfz9AZfgRX/dmDlYSEjKQXJvqhJd9uSxzlmsWD4=; b=c
- u0YFGUmCjg8+HIe+vJvj0KfH489OI5PZZXQwq0hI0vY48VxW4S+I0nm4f08KwZJT1U1iF59ZBXucy
- uDC9QSsrC/SXSUXP+KNmWD34B11RLWeYu0niIEDMSBLyXYZle2FOeGiierv8440yLj7Pe5p853ovj
- +R8thR5Nwwk+SOZA=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=QMRVjotEayLOv8XTxaxuE0M55enKBYtQeaeNcrACLfc=; b=Y0t3Kz3K9LiYodlhXegfXw/+Pe
+ fTXToTeBDoWl5JfujRet7qs+LX5A2Fx617gP4l2aYbHH7Fsq0oqjZZs0Te29P39h0MdOK9GNhIeYd
+ 5R6jFEhrb+ab5UPJVzHU4d3CU1FcTN8lM6Tl6NpMrC3M+Rpg2k3GN2hoCKnj2Cn4C46c=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1viQY8-0001Ak-Ba for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 21 Jan 2026 05:14:36 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id AEBFD60051
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 21 Jan 2026 05:14:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 776FBC116D0;
- Wed, 21 Jan 2026 05:14:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1768972465;
- bh=sl5DVMs0WCr/xFb31h+upvBmHNlbZJIPpUwSz/u7U1E=;
- h=From:To:Cc:Subject:Date:From;
- b=MHgcpEhF9npZ08XBLGAtuAdJRWG3FzPmr1tmdaHInaUPMDUIHYdr9vYAclKuxJyxb
- FRcieF0A5XJ3BvQ4NJz2Mn6WE/LghActvbNYEHqyWJaBq4+oCsKSeWyWX9Kkv4m7MM
- a9bmQfmGA0z8rpQUGEWOzUDb6HCC6UO9zSbvKHqCX1rVIqopcrImMapC2T1AVTjD0K
- 8u9R5lT0oUHUnf/T4TnbAPnOf2SIRH4rvL1Df4Jts42Q/lRU13yiTbYo/E6TBoKrem
- r/HTrVZzI1Y6zdn8S0FeF8qvrlSlCXMd3Zn+3EnGOQM9MAzyVuf0gQz2NbMx2ytsqP
- 9rWKHXD5jeKKg==
-To: jaegeuk@kernel.org
-Date: Wed, 21 Jan 2026 05:14:04 +0000
-Message-ID: <20260121051404.2056730-1-chao@kernel.org>
-X-Mailer: git-send-email 2.52.0.457.g6b5491de43-goog
+ id 1viULk-0006pi-EN; Wed, 21 Jan 2026 09:18:05 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=QMRVjotEayLOv8XTxaxuE0M55enKBYtQeaeNcrACLfc=; b=dL4371OFHyaeDBmxzj7GOgrMx3
+ 3K3xbidZALqODJsAS8whqERF7Cf9V7Fo7hOwrsqaJ52l4+3LZ3NOo6ToaJTvHKZRqcoXdeIkI5i2Y
+ /IGCwCDyqZvkKB3vxuq/jXLgMBASekbT7z2m5uG7UV6Z1vT7LxO5FNkuYsqXQ65ggC8pblORDhMxn
+ g88h/3uSdhW32hsFMLKV41gZ2EzUh0QwXmfBFzhtXFBCIM8iZiBvymXdqRapwUqUsREyNCfkJfKnN
+ emlY1xCH7+a+KdQVe/KemipvA79Ca3KD2ZAnJ6dAOXDUOz1nqP1FfvsKk+szaZfJ4qnOmyQQriS0o
+ bmhS62CA==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
+ Hat Linux)) id 1viUKw-00000005AiH-18Yv;
+ Wed, 21 Jan 2026 09:17:14 +0000
+Date: Wed, 21 Jan 2026 01:17:14 -0800
+From: Christoph Hellwig <hch@infradead.org>
+To: Jan Kara <jack@suse.cz>
+Message-ID: <aXCZmmBRSJR3ftHn@infradead.org>
+References: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
+ <20260119-exportfs-nfsd-v2-2-d93368f903bd@kernel.org>
+ <aW8ztQ-RbhxwzMk7@infradead.org>
+ <56fr33ju43h6zzp6jrzrkyfag6r3jz6wpnk45oe5byy6fqyvti@d43hgikfuk7t>
 MIME-Version: 1.0
-X-Spam-Score: -0.3 (/)
+Content-Disposition: inline
+In-Reply-To: <56fr33ju43h6zzp6jrzrkyfag6r3jz6wpnk45oe5byy6fqyvti@d43hgikfuk7t>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  It's rare case that sync_inodes_sb() always skips to flush
- some drity datas, so it's enough to give extra three more chances to flush
- data. Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/f2fs.h | 2 ++
- fs/f2fs/super.c | 2 +- 2 files changed, 3 insertions(+), 1 deletion(-) 
- Content analysis details:   (-0.3 points, 5.0 required)
+ Content preview:  On Tue, Jan 20, 2026 at 09:40:07AM +0100, Jan Kara wrote:
+ > (with explanations before I couldn't quite see the difference between shmem
+ > and kernfs). I'd note that fat or shmem (which are both export [...] 
+ Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1viQY8-0001Ak-Ba
-Subject: [f2fs-dev] [PATCH] f2fs: decrease maximum flush retry count in
- f2fs_enable_checkpoint()
+X-Headers-End: 1viULk-0006pi-EN
+Subject: Re: [f2fs-dev] [PATCH v2 02/31] exportfs: add new
+ EXPORT_OP_STABLE_HANDLES flag
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,90 +109,100 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Martin Brandenburg <martin@omnibond.com>,
+ jfs-discussion@lists.sourceforge.net, Paulo Alcantara <pc@manguebit.org>,
+ Alex Markuze <amarkuze@redhat.com>, Sandeep Dhavale <dhavale@google.com>,
+ linux-btrfs@vger.kernel.org, Carlos Maiolino <cem@kernel.org>,
+ Amir Goldstein <amir73il@gmail.com>, Dave Chinner <david@fromorbit.com>,
+ linux-unionfs@vger.kernel.org,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Chunhai Guo <guochunhai@vivo.com>, Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+ linux-mtd@lists.infradead.org, Mike Marshall <hubcap@omnibond.com>,
+ linux-xfs@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ Yue Hu <zbestahu@gmail.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ samba-technical@lists.samba.org, Richard Weinberger <richard@nod.at>,
+ Mark Fasheh <mark@fasheh.com>, linux-doc@vger.kernel.org,
+ Hugh Dickins <hughd@google.com>, Dai Ngo <Dai.Ngo@oracle.com>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ Christoph Hellwig <hch@infradead.org>, Viacheslav Dubeyko <slava@dubeyko.com>,
+ steve@digidescorp.com, NeilBrown <neil@brown.name>,
+ Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
+ Salah Triki <salah.triki@gmail.com>, linux-mm@kvack.org,
+ devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
+ Olga Kornievskaia <okorniev@redhat.com>, linux-cifs@vger.kernel.org,
+ Dave Kleikamp <shaggy@kernel.org>, linux-nfs@vger.kernel.org,
+ Tom Talpey <tom@talpey.com>, ocfs2-devel@lists.linux.dev,
+ Bharath SM <bharathsm@microsoft.com>, David Sterba <dsterba@suse.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+ Andreas Gruenbacher <agruenba@redhat.com>, gfs2@lists.linux.dev,
+ Christian Brauner <brauner@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
+ Luis de Bethencourt <luisbg@kernel.org>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, linux-erofs@lists.ozlabs.org,
+ Jonathan Corbet <corbet@lwn.net>, Jeff Layton <jlayton@kernel.org>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Steve French <sfrench@samba.org>, Chuck Lever <chuck.lever@oracle.com>,
+ Hongbo Li <lihongbo22@huawei.com>, Anna Schumaker <anna@kernel.org>,
+ Jan Kara <jack@suse.com>, linux-fsdevel@vger.kernel.org,
+ Phillip Lougher <phillip@squashfs.org.uk>,
+ Andrew Morton <akpm@linux-foundation.org>, ntfs3@lists.linux.dev,
+ David Woodhouse <dwmw2@infradead.org>,
+ David Laight <david.laight.linux@gmail.com>,
+ Trond Myklebust <trondmy@kernel.org>, Joel Becker <jlbec@evilplan.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-7.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	MID_RHS_MATCH_TO(1.00)[];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [0.49 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[infradead.org : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
 	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	MIME_TRACE(0.00)[0:+];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	ARC_NA(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	TO_DN_NONE(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCPT_COUNT_THREE(0.00)[3];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,infradead.org:s=bombadil.20210309];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,infradead.org:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[78];
+	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
-	HAS_REPLYTO(0.00)[chao@kernel.org]
-X-Rspamd-Queue-Id: 843F651666
+	FREEMAIL_CC(0.00)[omnibond.com,lists.sourceforge.net,manguebit.org,redhat.com,google.com,vger.kernel.org,kernel.org,gmail.com,fromorbit.com,paragon-software.com,fb.com,dilger.ca,vivo.com,lists.infradead.org,szeredi.hu,lists.samba.org,nod.at,fasheh.com,oracle.com,infradead.org,dubeyko.com,digidescorp.com,brown.name,kvack.org,lists.orangefs.org,microsoft.com,talpey.com,lists.linux.dev,suse.com,zeniv.linux.org.uk,linux.alibaba.com,mail.parknet.co.jp,mit.edu,lists.ozlabs.org,lwn.net,samba.org,huawei.com,squashfs.org.uk,linux-foundation.org,evilplan.org];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
+X-Rspamd-Queue-Id: 811B4543A2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-It's rare case that sync_inodes_sb() always skips to flush some drity
-datas, so it's enough to give extra three more chances to flush data.
+On Tue, Jan 20, 2026 at 09:40:07AM +0100, Jan Kara wrote:
+> (with explanations before I couldn't quite see the difference between shmem
+> and kernfs). I'd note that fat or shmem (which are both exportable)
+> satisfy this only with reasonably high probability as they use
+> get_random_u32() for initializing their i_generation but I guess it's as
+> good as it gets for them.
 
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/f2fs.h  | 2 ++
- fs/f2fs/super.c | 2 +-
- 2 files changed, 3 insertions(+), 1 deletion(-)
+For tmpfs random generations are as good as it gets, in fact that's what
+XFS starts with when allocating new inode clusters (which could have
+previous been used for for inodes as well).
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 3a8e1dcdcd69..cac4c730bf61 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -697,6 +697,8 @@ enum {
- 
- #define DEFAULT_RETRY_IO_COUNT	8	/* maximum retry read IO or flush count */
- 
-+#define MAX_FLUSH_RETRY_COUNT	3	/* maximum flush retry count in f2fs_enable_checkpoint() */
-+
- /* IO/non-IO congestion wait timeout value, default: 1 jiffies */
- #define	DEFAULT_SCHEDULE_TIMEOUT	1
- 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 5d8b2e812340..9d421a07d2d5 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -2687,7 +2687,7 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
- 
- static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
- {
--	int retry = DEFAULT_RETRY_IO_COUNT;
-+	int retry = MAX_FLUSH_RETRY_COUNT;
- 	long long start, writeback, end;
- 	int ret;
- 	struct f2fs_lock_context lc;
--- 
-2.49.0
+fat on the other hand looks broken, as it also set a new generation when
+reading inodes from disk.  So I don't think fat should be nfs exportable,
+even if the export ops predate other uses.
 
 
 
