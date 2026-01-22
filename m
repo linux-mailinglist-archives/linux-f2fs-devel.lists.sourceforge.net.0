@@ -2,83 +2,145 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IDC9CwUqcmmadwAAu9opvQ
+	id AArSN3FFcmlCgQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jan 2026 14:45:41 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jan 2026 16:42:41 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E2386779B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jan 2026 14:45:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 643C469160
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jan 2026 16:42:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=SRy/8UDoIPYll2gZlaXEWI+MLtDOsCLGCr5PLAPfWZM=; b=R7M+TtW2oflBZDgU/qxEnHJXoB
-	gToNVTOPFwz9au/oSdsmlVfsGY1d58YXP0DnH0v2px9A+Fzo3xe6zZSLi384OnOjGfd4+I89e56V9
-	Tev9MGvGnXuFF+CVWJ7IboUQLG4I1Uy0Eie2/4Mqcm80Z663y6OmW3k7U1UU57prxdaY=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:
+	List-Id:Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:
+	Sender:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=zlxw1ZfZog3I6CBOZCMVS+RtwYAKVMARMmSR4pTOQvA=; b=QoR/q0gqfvLfKw3fKy7C1jr8H0
+	j3gTxD3itdi+rCfgf/ig9cmzQBSQv5y7NSQoyA//WlkMe0l55x3JCS4fbQmtN8ffs+ZkakdHuhsK/
+	uC1WXpoj5iXxPZ1VIaqND71WGV081lf13lzAk4MYeOtlOd5wstAMIU4Luov5hnEVYNbs=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1viv04-0001aD-0V;
-	Thu, 22 Jan 2026 13:45:28 +0000
+	id 1viwpK-0007F9-8F;
+	Thu, 22 Jan 2026 15:42:30 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sajiv@icompucare.my>) id 1viv02-0001a7-7I
+ (envelope-from <dsterba@suse.cz>) id 1viwpI-0007F3-Do
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 Jan 2026 13:45:27 +0000
+ Thu, 22 Jan 2026 15:42:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Date:Subject:To:From:Reply-To:Sender:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YcC18MwU7reQdlDJEAzOSvGKZE6b154t0b5VERSvP7Q=; b=T/msfjBYBXjb5w1WjpHHFnZMx2
- VZeKFpMY33nCNLIWNSJSfAftkN66XL0snaXhDUvx8fUL1qO6idwrinTVLIWjK/X1mN3xWud/29/oi
- nVtBD8lP+FEiPUhERaU2ukfFB6VFL+bJFY3WEUzpkbWpussyefLWWkFNsoAyMN/7mpqA=;
+ bh=eXgjnBxZ8BrNqn4Sk6A4xpE60v2fmF+nX+2I0eOLLCg=; b=VMj/6HFdu1NkdpEfU9kBTeLP5Q
+ HtJXG2yb4CP1pDaHpcApQkqzIWrsnV3rVcsMYKv/NtKsd28HYMtXsV/Z3R5M9Mx2xl/+FCttM84MD
+ ArfmM/6/frdukAPR4/R2lXOSw8fVkN+noJOJE3gqflbURLRoACjAg+y3g82cDTcCMGjQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- Subject:To:From:Reply-To:Sender:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=YcC18MwU7reQdlDJEAzOSvGKZE6b154t0b5VERSvP7Q=; b=Q
- a/Vc5I4D0ep3WUV22SQoqZ43zTgMucRtAn7IX7ItnkdRg9mVYJlX7l1ZMHnhS9RVPuVhwB0xIrMF7
- oqKAX7Wb9mCYZM2ocJEfZGe3UZ0D4aY47rkIZfUvhXKPnQRrVlK3xsujTFBqMpHDFxXk+G1oW3ZOB
- kXGvOEDQOC7CFJRY=;
-Received: from [122.163.123.165] (helo=icompucare.my)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1viv02-0001Ii-3X for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 Jan 2026 13:45:26 +0000
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: 22 Jan 2026 18:54:15 +0530
-Message-ID: <20260122185414.65835A5A00472F56@icompucare.my>
+ h=In-Reply-To:Content-Type:MIME-Version:References:Reply-To:Message-ID:
+ Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=eXgjnBxZ8BrNqn4Sk6A4xpE60v2fmF+nX+2I0eOLLCg=; b=OURCHeS3E73cScOsTyNnRpuFSV
+ 7JhIg8oJ2REQNVGmNz6zJsvGvpU1HLnwf7JcjmaCsKSmhQDT5wJRmuqo0ST6eiFOK1OORebgzYrOX
+ hZKxmA+AE7CBAWMYgS0X+P1LUl/vgOtlMUGIdPw6FvEBd6b50+IGhWOkACKea+lOQ0iw=;
+Received: from smtp-out2.suse.de ([195.135.223.131])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1viwpH-0007mv-Rm for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 22 Jan 2026 15:42:28 +0000
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 6FE955BCD7;
+ Thu, 22 Jan 2026 15:42:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1769096536;
+ h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+ cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=eXgjnBxZ8BrNqn4Sk6A4xpE60v2fmF+nX+2I0eOLLCg=;
+ b=j6JxqPzePV1v3VMwls0tzTsZjgdG9emkov+yXkAfgU/rTXQf8T3zUIk9y6kwTpmIwFH+jg
+ +tGTZOAzNSt5DmyeGJlQYLKpb2hgbWczQo2u8RmaFCK8Kyk9Ad8W0Ksxyx6AoNHndiNUd3
+ pgQ09os0+EUkMbgwfaOlHtEStLw+2xM=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1769096536;
+ h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+ cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=eXgjnBxZ8BrNqn4Sk6A4xpE60v2fmF+nX+2I0eOLLCg=;
+ b=0iqPGW1agNVaVnQmF+2mMFaHz5jf38AXI7KkERuGiInWYYKzTGrVODUWzChReQtemzPfna
+ a8MSgMwRXxKctUBQ==
+Authentication-Results: smtp-out2.suse.de;
+ dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=j6JxqPze;
+ dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=0iqPGW1a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1769096536;
+ h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+ cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=eXgjnBxZ8BrNqn4Sk6A4xpE60v2fmF+nX+2I0eOLLCg=;
+ b=j6JxqPzePV1v3VMwls0tzTsZjgdG9emkov+yXkAfgU/rTXQf8T3zUIk9y6kwTpmIwFH+jg
+ +tGTZOAzNSt5DmyeGJlQYLKpb2hgbWczQo2u8RmaFCK8Kyk9Ad8W0Ksxyx6AoNHndiNUd3
+ pgQ09os0+EUkMbgwfaOlHtEStLw+2xM=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1769096536;
+ h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+ cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=eXgjnBxZ8BrNqn4Sk6A4xpE60v2fmF+nX+2I0eOLLCg=;
+ b=0iqPGW1agNVaVnQmF+2mMFaHz5jf38AXI7KkERuGiInWYYKzTGrVODUWzChReQtemzPfna
+ a8MSgMwRXxKctUBQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3DF1F13533;
+ Thu, 22 Jan 2026 15:42:16 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 0Tn4DlhFcmlzbQAAD6G6ig
+ (envelope-from <dsterba@suse.cz>); Thu, 22 Jan 2026 15:42:16 +0000
+Date: Thu, 22 Jan 2026 16:42:15 +0100
+From: David Sterba <dsterba@suse.cz>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20260122154215.GV26902@suse.cz>
+References: <20260122082214.452153-1-hch@lst.de>
 MIME-Version: 1.0
-X-Spam-Score: 5.0 (+++++)
+Content-Disposition: inline
+In-Reply-To: <20260122082214.452153-1-hch@lst.de>
+User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+X-Spam-Score: -4.21
+X-Spam-Level: 
+X-Spam-Flag: NO
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
- has identified this incoming email as possible spam.  The original
+ has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Warm Greetings support. I have been trying to reach you on
- your telephone contact but no answer. We offer Corporate and Personal Loans
- at a competitive 2% APR,
- with flexible terms and no early repayment penalties.Loan
- terms r [...] 
- Content analysis details:   (5.0 points, 5.0 required)
+ Content preview:  On Thu, Jan 22, 2026 at 09:21:56AM +0100, Christoph Hellwig
+ wrote: > Hi all, > > this series has a hodge podge of fsverity enhances that
+ I looked into as > part of the review of the xfs fsverity suppo [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in digit
- [cc4921290(at)gmail.com]
- 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
- 0.0 LOTS_OF_MONEY          Huge... sums of money
- 1.0 MONEY_FREEMAIL_REPTO   Lots of money from someone using free email?
- 2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
-X-Headers-End: 1viv02-0001Ii-3X
-Subject: Re: [f2fs-dev] Business Loan Offer @2%
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+X-Headers-End: 1viwpH-0007mv-Rm
+Subject: Re: [f2fs-dev] fsverity cleanups,
+ speedup and memory usage optimization v2
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,67 +152,102 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Maria Torres via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: cc4921290@gmail.com
-Cc: Maria Torres <sajiv@icompucare.my>
+Reply-To: dsterba@suse.cz
+Cc: fsverity@lists.linux.dev, Christian Brauner <brauner@kernel.org>,
+ Jan Kara <jack@suse.cz>, Andrey Albershteyn <aalbersh@redhat.com>,
+ "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Al Viro <viro@zeniv.linux.org.uk>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, David Sterba <dsterba@suse.com>,
+ Theodore Ts'o <tytso@mit.edu>, linux-ext4@vger.kernel.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.69 / 15.00];
-	MSBL_EBL(7.50)[cc4921290@gmail.com:replyto];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	FREEMAIL_REPLYTO_NEQ_FROM(2.00)[];
-	FAKE_REPLY(1.00)[];
+X-Spamd-Result: default: False [-1.11 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
-	BAD_REP_POLICIES(0.10)[];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	ARC_NA(0.00)[];
-	DKIM_MIXED(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	URIBL_MULTI_FAIL(0.00)[suse.cz:server fail,lists.sourceforge.net:server fail,suse.com:server fail];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWO(0.00)[2];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:hch@lst.de,m:fsverity@lists.linux.dev,m:brauner@kernel.org,m:jack@suse.cz,m:aalbersh@redhat.com,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:ebiggers@kernel.org,m:linux-fsdevel@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:jaegeuk@kernel.org,m:dsterba@suse.com,m:tytso@mit.edu,m:linux-ext4@vger.kernel.org,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
+	DMARC_NA(0.00)[suse.cz];
+	FORGED_SENDER(0.00)[dsterba@suse.cz,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	R_SPF_ALLOW(0.00)[+ip4:216.105.38.7];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_MIXED(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,suse.cz:-];
+	HAS_REPLYTO(0.00)[dsterba@suse.cz];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	REPLYTO_ADDR_EQ_FROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(0.00)[];
-	FREEMAIL_REPLYTO(0.00)[gmail.com];
-	MISSING_XM_UA(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
+	FROM_NEQ_ENVFROM(0.00)[dsterba@suse.cz,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	HAS_REPLYTO(0.00)[cc4921290@gmail.com]
-X-Rspamd-Queue-Id: 9E2386779B
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.cz:mid,suse.cz:replyto,suse.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
+X-Rspamd-Queue-Id: 643C469160
 X-Rspamd-Action: no action
 
+On Thu, Jan 22, 2026 at 09:21:56AM +0100, Christoph Hellwig wrote:
+> Hi all,
+> 
+> this series has a hodge podge of fsverity enhances that I looked into as
+> part of the review of the xfs fsverity support series.
+> 
+> The first part calls fsverity code from VFS code instead of requiring
+> boilerplate in the file systems.  The first patch fixes a bug in btrfs
+> as part of that, as btrfs was missing a check.  An xfstests
+> test case for this was submitted already.
+> 
+> The middle part optimizes the fsverity read path by kicking off readahead
+> for the fsverity hashes from the data read submission context, which in my
+> simply testing showed huge benefits for sequential reads using dd.
+> I haven't been able to get fio to run on a preallocated fio file, but
+> I expect random read benefits would be significantly better than that
+> still.
+> 
+> The last part avoids the need for a pointer in every inode for fsverity
+> and instead uses a rhashtable lookup, which is once per read_folio or
+> ->readahead invocation and for for btrfs another time for each bio
+> completion.  Right now this does not increse the number of inodes in
+> each slab, but for ext4 we are getting very close to that (within
+> 16 bytes by my count).
+> 
+> Changes since v1:
+>  - reorder to keep the most controversial part last
+>  - drop moving the open handling to common code (for now)
+>  - factor the page cache read code into common code
+>  - reduce the number of hash lookups
+>  - add a barrier in the fsverity_active that pairs with the cmpxchg
+>    that sets the inode flag.
+> 
+> Diffstat:
+>  fs/attr.c                    |   12 ++
 
-Warm Greetings support.
+For the btrfs changes
 
-I have been trying to reach you on your telephone contact but no 
-answer. We offer Corporate and Personal Loans at a competitive 2% 
- APR,with flexible terms and no early repayment penalties.Loan 
-terms range from 2 to 10 years, and we reward brokers or 
-referrers with a 1% commission. The Minimum amount you can borrow 
-is $20,000.00 US Dollars to a Maximum of $10B USD. We are 
-interested in investing in business opportunities globally 
-including equity investment.
+>  fs/btrfs/btrfs_inode.h       |    4 
+>  fs/btrfs/extent_io.c         |   37 +++++---
+>  fs/btrfs/inode.c             |   13 ---
+>  fs/btrfs/verity.c            |   11 --
 
-Kind Regards.
-
-Maria Torres
+Acked-by: David Sterba <dsterba@suse.com>
 
 
 _______________________________________________
