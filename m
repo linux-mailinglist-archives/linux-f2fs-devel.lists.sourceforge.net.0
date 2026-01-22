@@ -2,80 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MNG/KnpKcmnpfAAAu9opvQ
+	id uFkVJLRYcmkpiwAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jan 2026 17:04:10 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jan 2026 18:04:52 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 494AE69755
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jan 2026 17:04:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA5626AB58
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jan 2026 18:04:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=ZZvPGztjH1nm2Lq2I93ByPnBI3X/F7vME8ib3u7rbcQ=; b=HRKihXZCnVitfJIHMOVYhOE5nG
-	J/jQxV6bWarf4oU9aPfVRLJn8XeOhHXhlekCVhIbZbM+qZ+oAsdgG3nJp4EywFPtZK6rd33amnEj0
-	cCpIWQui2a2cwdym5Sbm3hiECdpfG1Hge7p2Us1ccj6v5JIPtSnjnIVF6bl8k6tOi5S8=;
+	bh=ydekLp5YFEdJwrmLfOh/e4f3jgVZ57WMSK4m8EaXxU4=; b=DZ3iWsOkzTd1odOqDwL2xZsibP
+	frMHTN8y3YieJm/hjb2G9/cRBEk5fuUXkxZdKxI+YHTaGXILqzseCywCaXXH6tnt3Y1vYeC0hUBmu
+	56x/UevwST0yxqeKiwtNyusfdZ7iyspmwaivlkpU1xecWekkG/caE64FhlzML/xPWzCo=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vixAG-000333-WA;
-	Thu, 22 Jan 2026 16:04:09 +0000
+	id 1viy6n-0004RI-IT;
+	Thu, 22 Jan 2026 17:04:37 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <cel@kernel.org>) id 1vixAF-00032t-Tp
- for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 Jan 2026 16:04:07 +0000
+ (envelope-from <djwong@kernel.org>) id 1viy6l-0004R2-LE;
+ Thu, 22 Jan 2026 17:04:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/sYfse2O7Z6KZXgJ1jKyn7oaEzvmj/SL/3tg2YQ47s0=; b=LJ/dRz22fPgvGR4f4eNTxskuvr
- uX62eCTeA2DyRO5gQaQf7MfoOmWDGjADYQMPHUU1OlCkEIhv/GhWBdEbw06K8UqZ8XxamdqCAo6Gl
- 7WyDcuPBoAXY76/w4Q1TaBenX7UroddOMXifi8d3n987qs1LWqKZw8kLxQC7dx4RBmLg=;
+ bh=qs+XaS+FGKy5XGjHxsh2yZR3UAuTtojhMQnjtTVwQfA=; b=DQJpdVxcLrPN39oG3XjU67yA+G
+ QiPmlJLZtYrmvsabCRcomxkgyxXhoWmzR5T9KckaCMfidihlh1xwFnrFusLwXUxD0QGhYd0IvJRDi
+ +SDD+6ijzm9hAxr/HdHZwNOo0p8KnVbRc5Hn+cgYrmgguOK6MVwzZP5mfCGC425gTd6w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/sYfse2O7Z6KZXgJ1jKyn7oaEzvmj/SL/3tg2YQ47s0=; b=ftWEZfwJWcif/KOwpahWyvbhGW
- 2nEDBn3Ri3xEdlgH0IMwnEJes30R8CIVgNz4Q7j0ahHPNuJX29Zs6fRfs0RbIbnfajtH04lMWwv2r
- P38b4XtoAlcWoz+lLBxBq/494ZFJ6eDBt6k5z6u3BvZiooRMNoy46vapJtF8B/J7QkMc=;
+ bh=qs+XaS+FGKy5XGjHxsh2yZR3UAuTtojhMQnjtTVwQfA=; b=h1q9CMJ2tihlWsCDfQAryEZXlW
+ stGrFrnIi7ciusukVFBG8Gf9AtL3dhh2iCfcRmrrVYkchafxBzjZ/Sej/xFAjgPkOtP4pXL6WZfRv
+ pZj7Yd/Mr37NhOoZ5/yRgYooRlWPs15hvlbVjoetZx718N9BhvWhq5nGZ2xe3q69Mn7k=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vixAF-0000Xo-AV for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 Jan 2026 16:04:07 +0000
+ id 1viy6l-0003zh-3q; Thu, 22 Jan 2026 17:04:35 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 538EA44367;
- Thu, 22 Jan 2026 16:03:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDF7CC116C6;
- Thu, 22 Jan 2026 16:03:53 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 528AE4099B;
+ Thu, 22 Jan 2026 17:04:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 156DAC116C6;
+ Thu, 22 Jan 2026 17:04:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1769097836;
- bh=cWXqjiYSCBw218vhYxZFFr2kBXjHfrbsfjhWPCfq4hM=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ZFNLdGg7ciBEurPcs38KSzknEosTF/FRnmCr6OUb9XfBlqdbLB99hJoc4JF6LTm6O
- Rs2Ho5aO1U+hEv27+8P3mAPUpNBaSLm8RXe6L/8jfuIEAQ0X9K638KS42dVheWEPen
- ElDWmvO6ArVTdRava+NbWyyyUlySp5tQBfuuBuiOgwtxcOgma0sf9GJkU5IvuyY0YN
- 5xFx4sgHmDUmg4YDL6SfGeoFimxHMYccRIax6CW3yai1b9D/iFzV/LCtUKfYNSx/Qo
- PsQK/EMMf8g/JzV07W/CuOWQBR0F+p9Rb18xHLs8iQJTRIGVD2BiM6l3//ZSMBYtdw
- CC4t69jsq5EDA==
-To: Al Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>,
- Jan Kara <jack@suse.cz>
-Date: Thu, 22 Jan 2026 11:03:11 -0500
-Message-ID: <20260122160311.1117669-17-cel@kernel.org>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260122160311.1117669-1-cel@kernel.org>
-References: <20260122160311.1117669-1-cel@kernel.org>
+ s=k20201202; t=1769101464;
+ bh=xwFz5Oidq8APQpCp7THEtDpXn9O+NGssd7GC7NPkIXE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ueyMX6ohlT+V7E4FTnwyr+bckr2XgM0otlsgh+U8+RB7dufNou2jXtRF8/4HiLX1h
+ aiyHG+xAbRXlOpSKYNl+YW1B6es8lJGWyDpCT3G89X8Bn++QSMPHsovt5BRyWj7Z84
+ MiFPflUjkr2UeHtVIt004pQ2LHYESJ6jR9ib6bF3tKB5BvchCfBJcHtl2H7eGV6Hj+
+ XeQh59i2mPbJ0Z07CURTocG8MzgcrhLB0YpqMQ2BX+Q2rUwcSwiRIRCTHIiyBghAen
+ fRki137MnL3p5j+2P7Cc4giyKdLsB0k8xoBASjwbPFk1rE23p0Kg5qRxi8CJQxSLFn
+ VC/vMBqCcUNNQ==
+Date: Thu, 22 Jan 2026 09:04:23 -0800
+To: Jeff Layton <jlayton@kernel.org>
+Message-ID: <20260122170423.GU5945@frogsfrogsfrogs>
+References: <176885553525.16766.291581709413217562@noble.neil.brown.name>
+ <aW8w2SRyFnmA2uqk@infradead.org>
+ <176890126683.16766.5241619788613840985@noble.neil.brown.name>
+ <aXCg-MqXH0E6IuwS@infradead.org>
+ <176899164457.16766.16099772451425825775@noble.neil.brown.name>
+ <364d2fd98af52a2e2c32ca286decbdc1fe1c80d3.camel@kernel.org>
+ <aXDm8FPPOHs04w9m@infradead.org>
+ <3210d04fa2c0b1f4312d10506cac30586cb49a3c.camel@kernel.org>
+ <aXHFlF1tef68i2HU@infradead.org>
+ <b491335d12e976e1ea1c07b9c14164ac69d22aea.camel@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <b491335d12e976e1ea1c07b9c14164ac69d22aea.camel@kernel.org>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -83,11 +89,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chuck Lever <chuck.lever@oracle.com> ksmbd hard-codes
- FILE_CASE_SENSITIVE_SEARCH and FILE_CASE_PRESERVED_NAMES in
- FS_ATTRIBUTE_INFORMATION
- responses, incorrectly indicating all exports are case-sensitive. This breaks
- clients accessing ca [...] 
+ Content preview:  On Thu, Jan 22, 2026 at 07:12:36AM -0500, Jeff Layton wrote:
+ > On Wed, 2026-01-21 at 22:37 -0800, Christoph Hellwig wrote: > > On Wed,
+ Jan 21, 2026 at 10:18:00AM -0500, Jeff Layton wrote: > > > > fat [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -99,9 +103,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vixAF-0000Xo-AV
-Subject: [f2fs-dev] [PATCH v7 16/16] ksmbd: Report filesystem case
- sensitivity via FS_ATTRIBUTE_INFORMATION
+X-Headers-End: 1viy6l-0003zh-3q
+Subject: Re: [f2fs-dev] [PATCH 00/29] fs: require filesystems to explicitly
+ opt-in to nfsd export support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,136 +117,155 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chuck Lever via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chuck Lever <cel@kernel.org>
-Cc: pc@manguebit.org, yuezhang.mo@sony.com, cem@kernel.org,
- almaz.alexandrovich@paragon-software.com, adilger.kernel@dilger.ca,
- linux-cifs@vger.kernel.org, sfrench@samba.org, slava@dubeyko.com,
- linux-ext4@vger.kernel.org, linkinjeon@kernel.org, sprasad@microsoft.com,
- frank.li@vivo.com, ronniesahlberg@gmail.com, glaubitz@physik.fu-berlin.de,
- jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp, linux-nfs@vger.kernel.org,
- tytso@mit.edu, linux-api@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
- hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
- sj1557.seo@samsung.com, trondmy@kernel.org
+From: "Darrick J. Wong via Linux-f2fs-devel"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: "Darrick J. Wong" <djwong@kernel.org>
+Cc: Martin Brandenburg <martin@omnibond.com>,
+ jfs-discussion@lists.sourceforge.net, Jan Kara <jack@suse.cz>,
+ Paulo Alcantara <pc@manguebit.org>, Alex Markuze <amarkuze@redhat.com>,
+ Sandeep Dhavale <dhavale@google.com>, linux-btrfs@vger.kernel.org,
+ Carlos Maiolino <cem@kernel.org>, Amir Goldstein <amir73il@gmail.com>,
+ linux-unionfs@vger.kernel.org,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Chunhai Guo <guochunhai@vivo.com>, Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+ linux-mtd@lists.infradead.org, Mike Marshall <hubcap@omnibond.com>,
+ linux-xfs@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ Yue Hu <zbestahu@gmail.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
+ Hugh Dickins <hughd@google.com>, Dai Ngo <Dai.Ngo@oracle.com>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ Christoph Hellwig <hch@infradead.org>, Viacheslav Dubeyko <slava@dubeyko.com>,
+ NeilBrown <neil@brown.name>, Gao Xiang <xiang@kernel.org>,
+ linux-ext4@vger.kernel.org, Salah Triki <salah.triki@gmail.com>,
+ linux-mm@kvack.org, devel@lists.orangefs.org,
+ Shyam Prasad N <sprasad@microsoft.com>,
+ Olga Kornievskaia <okorniev@redhat.com>, linux-cifs@vger.kernel.org,
+ Dave Kleikamp <shaggy@kernel.org>, linux-nfs@vger.kernel.org,
+ Tom Talpey <tom@talpey.com>, ocfs2-devel@lists.linux.dev,
+ Bharath SM <bharathsm@microsoft.com>, David Sterba <dsterba@suse.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+ Andreas Gruenbacher <agruenba@redhat.com>, gfs2@lists.linux.dev,
+ Christian Brauner <brauner@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
+ Luis de Bethencourt <luisbg@kernel.org>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, linux-erofs@lists.ozlabs.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Steve French <sfrench@samba.org>, Chuck Lever <chuck.lever@oracle.com>,
+ Hongbo Li <lihongbo22@huawei.com>, Anna Schumaker <anna@kernel.org>,
+ Jan Kara <jack@suse.com>, linux-fsdevel@vger.kernel.org,
+ Phillip Lougher <phillip@squashfs.org.uk>,
+ Andrew Morton <akpm@linux-foundation.org>, ntfs3@lists.linux.dev,
+ David Woodhouse <dwmw2@infradead.org>, Trond Myklebust <trondmy@kernel.org>,
+ Joel Becker <jlbec@evilplan.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-7.11 / 15.00];
+X-Spamd-Result: default: False [-6.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	DKIM_MIXED(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_CC(0.00)[manguebit.org,sony.com,kernel.org,paragon-software.com,dilger.ca,vger.kernel.org,samba.org,dubeyko.com,microsoft.com,vivo.com,gmail.com,physik.fu-berlin.de,mail.parknet.co.jp,mit.edu,lists.sourceforge.net,chromium.org,oracle.com,samsung.com];
+	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS(0.00)[m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,m:pc@manguebit.org,m:yuezhang.mo@sony.com,m:cem@kernel.org,m:almaz.alexandrovich@paragon-software.com,m:adilger.kernel@dilger.ca,m:linux-cifs@vger.kernel.org,m:sfrench@samba.org,m:slava@dubeyko.com,m:linux-ext4@vger.kernel.org,m:linkinjeon@kernel.org,m:sprasad@microsoft.com,m:frank.li@vivo.com,m:ronniesahlberg@gmail.com,m:glaubitz@physik.fu-berlin.de,m:jaegeuk@kernel.org,m:hirofumi@mail.parknet.co.jp,m:linux-nfs@vger.kernel.org,m:tytso@mit.edu,m:linux-api@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:senozhatsky@chromium.org,m:chuck.lever@oracle.com,m:hansg@kernel.org,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:sj1557.seo@samsung.com,m:trondmy@kernel.org,s:lists@lfdr.de];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[31];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	FREEMAIL_CC(0.00)[omnibond.com,lists.sourceforge.net,suse.cz,manguebit.org,redhat.com,google.com,vger.kernel.org,kernel.org,gmail.com,paragon-software.com,fb.com,dilger.ca,vivo.com,lists.infradead.org,szeredi.hu,nod.at,fasheh.com,oracle.com,infradead.org,dubeyko.com,brown.name,kvack.org,lists.orangefs.org,microsoft.com,talpey.com,lists.linux.dev,suse.com,zeniv.linux.org.uk,linux.alibaba.com,mail.parknet.co.jp,mit.edu,lists.ozlabs.org,samba.org,huawei.com,squashfs.org.uk,linux-foundation.org,evilplan.org];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_GT_50(0.00)[72];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FROM_HAS_DN(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[cel@kernel.org];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,oracle.com:email]
-X-Rspamd-Queue-Id: 494AE69755
+	MISSING_XM_UA(0.00)[];
+	HAS_REPLYTO(0.00)[djwong@kernel.org]
+X-Rspamd-Queue-Id: CA5626AB58
 X-Rspamd-Action: no action
 
-From: Chuck Lever <chuck.lever@oracle.com>
+On Thu, Jan 22, 2026 at 07:12:36AM -0500, Jeff Layton wrote:
+> On Wed, 2026-01-21 at 22:37 -0800, Christoph Hellwig wrote:
+> > On Wed, Jan 21, 2026 at 10:18:00AM -0500, Jeff Layton wrote:
+> > > > fat seems to be an exception as far as the 'real' file systems go.
+> > > > And it did sound to me like some of the synthetic ones had similar
+> > > > issues.
+> > > > 
+> > > 
+> > > Not sure what we can do about FAT without changing the filehandle
+> > > format in some fashion. The export ops just use
+> > > generic_encode_ino32_fh, and FAT doesn't have stable inode numbers.
+> > > The "nostale" ops seem sane enough but it looks like they only work
+> > > with the fs in r/o mode.
+> > 
+> > Yeah.  I guess we need to ignore this because of <history>
+> > 
+> 
+> Yep. This is a case where the handles are not PERSISTENT but I don't
+> think we can get away with making FAT unexportable. We're probably
+> stuck with it.
+> 
+> > > > I think Amirs patch would take care of that.  Although userland nfs
+> > > > servers or other storage applications using the handle syscalls would
+> > > > still see them.  Then again fixing the problem that some handles
+> > > > did not fulfill the long standing (but not documented well enough)
+> > > > semantics probably is a good fix on it's own.
+> > > 
+> > > Agreed. We should try to ensure uniqueness and persistence in all
+> > > filehandles both for nfsd and userland applications.
+> > 
+> > Sounds good to me.
+> 
+> 
+> Unfortunately, there are already exceptions. Apparently pidfs and
+> cgroupfs handles (at least) can't be extended because of userspace
+> expectations:
+> 
+> https://lore.kernel.org/linux-nfs/20260120-irrelevant-zeilen-b3c40a8e6c30@brauner/
 
-ksmbd hard-codes FILE_CASE_SENSITIVE_SEARCH and
-FILE_CASE_PRESERVED_NAMES in FS_ATTRIBUTE_INFORMATION responses,
-incorrectly indicating all exports are case-sensitive. This breaks
-clients accessing case-insensitive filesystems like exFAT or
-ext4/f2fs directories with casefold enabled.
+systemd cracking file handles??  Yeesh, I thought userspace was supposed
+to treat a file handle as an opaque N-byte blob and nothing more, and
+only certain "special" tools (e.g. xfsprogs on XFS) could do more than
+that.
 
-Query actual case behavior via vfs_fileattr_get() and report accurate
-attributes to SMB clients. Filesystems without ->fileattr_get continue
-reporting default POSIX behavior (case-sensitive, case-preserving).
+--D
 
-SMB's FS_ATTRIBUTE_INFORMATION reports per-share attributes from the
-share root, not per-file. Shares mixing casefold and non-casefold
-directories report the root directory's behavior.
-
-Acked-by: Namjae Jeon <linkinjeon@kernel.org>
-Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
----
- fs/smb/server/smb2pdu.c | 25 +++++++++++++++++++------
- 1 file changed, 19 insertions(+), 6 deletions(-)
-
-diff --git a/fs/smb/server/smb2pdu.c b/fs/smb/server/smb2pdu.c
-index 2fcd0d4d1fb0..257da9282bcf 100644
---- a/fs/smb/server/smb2pdu.c
-+++ b/fs/smb/server/smb2pdu.c
-@@ -13,6 +13,7 @@
- #include <linux/falloc.h>
- #include <linux/mount.h>
- #include <linux/filelock.h>
-+#include <linux/fileattr.h>
- 
- #include "glob.h"
- #include "smbfsctl.h"
-@@ -5486,16 +5487,28 @@ static int smb2_get_info_filesystem(struct ksmbd_work *work,
- 	case FS_ATTRIBUTE_INFORMATION:
- 	{
- 		FILE_SYSTEM_ATTRIBUTE_INFO *info;
-+		struct file_kattr fa = {};
- 		size_t sz;
-+		u32 attrs;
-+		int err;
- 
- 		info = (FILE_SYSTEM_ATTRIBUTE_INFO *)rsp->Buffer;
--		info->Attributes = cpu_to_le32(FILE_SUPPORTS_OBJECT_IDS |
--					       FILE_PERSISTENT_ACLS |
--					       FILE_UNICODE_ON_DISK |
--					       FILE_CASE_PRESERVED_NAMES |
--					       FILE_CASE_SENSITIVE_SEARCH |
--					       FILE_SUPPORTS_BLOCK_REFCOUNTING);
-+		attrs = FILE_SUPPORTS_OBJECT_IDS |
-+			FILE_PERSISTENT_ACLS |
-+			FILE_UNICODE_ON_DISK |
-+			FILE_SUPPORTS_BLOCK_REFCOUNTING;
- 
-+		err = vfs_fileattr_get(path.dentry, &fa);
-+		if (err && err != -ENOIOCTLCMD) {
-+			path_put(&path);
-+			return err;
-+		}
-+		if (!(fa.fsx_xflags & FS_XFLAG_CASEFOLD))
-+			attrs |= FILE_CASE_SENSITIVE_SEARCH;
-+		if (!(fa.fsx_xflags & FS_XFLAG_CASENONPRESERVING))
-+			attrs |= FILE_CASE_PRESERVED_NAMES;
-+
-+		info->Attributes = cpu_to_le32(attrs);
- 		info->Attributes |= cpu_to_le32(server_conf.share_fake_fscaps);
- 
- 		if (test_share_config_flag(work->tcon->share_conf,
--- 
-2.52.0
-
+> My personal take is that we should try to make handle uniqueness a goal
+> for most existing filesystems, but we're going to have some that can't
+> achieve that. For them we probably want to be able to flag them so they
+> can be id'ed by userland.
+> 
+> So, we will need an export_operations flag of some sort
+> (EXPORT_OP_UNIQUE_HANDLES?). At that point, we'll have to decide
+> whether to deny nfsd export based on that flag:
+> 
+> We could deny export of any fs that doesn't set the flag, but NFSv4
+> actually allows the server to advertise that it can't guarantee handle
+> uniqueness. There isn't much guidance for the client on how to handle
+> that though and the attribute seems to have the scope of the entire NFS
+> server.
+> 
+> -- 
+> Jeff Layton <jlayton@kernel.org>
+> 
 
 
 _______________________________________________
