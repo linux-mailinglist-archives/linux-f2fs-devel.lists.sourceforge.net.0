@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mE4MNTf0cmmhrQAAu9opvQ
+	id 2N2UN1z0cmmhrQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Jan 2026 05:08:23 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Jan 2026 05:09:00 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E274703FF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Jan 2026 05:08:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3C7070406
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Jan 2026 05:09:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=5q3H3bGAVZncjw+OJg9JzhVz+RR1u5pyNyMHED/l7oU=; b=Tcy6CxnATlE1pdFlA3aBUFf9HG
-	W2dKqkIBw0IRLWRxoBnN/gfNiPiafnI/zBD+4/mKAsqQ2tHnPeKcMiJ0g/r3LfESQuHjRSBu/BdaJ
-	ZNJafDUlyzjbMv6qMtAI7NLS6v9nreK9z308SD4DBxq9SDmKBWbxWkLUCehE9E4US2eI=;
+	bh=mzOiUgkbHepYMGTy7uKsCemiXvZYnfaZZU+fNLNeu0A=; b=O/dxmlM1ubAH2ZTsXmctmdffZR
+	fpQhZdJO6dqWbJVG9XxfpqVngDpS8FDsfcwGlzVNoA+12MvpY56myFGIGam3GeSZwuDPU0/JgQylx
+	auW+sZxa95YZ0UeYw9GAYvPsXngQF7i/ojUJ8oXMxx4uZKFmabBm1BZ3lMBEW5rTpcR0=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vj8T6-0001OP-KW;
-	Fri, 23 Jan 2026 04:08:20 +0000
+	id 1vj8Ti-0001QQ-F4;
+	Fri, 23 Jan 2026 04:08:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vj8T6-0001OJ-2j
+ (envelope-from <chao@kernel.org>) id 1vj8Th-0001QJ-5P
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Jan 2026 04:08:20 +0000
+ Fri, 23 Jan 2026 04:08:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zMXttB3o1px7UtPahuumjb2f7+4KxLCMcPpnXnR0ss8=; b=lPVlR1tqegUTOofhdI3Zrgjxy4
- CuDuTSaFBrnNSKWhKiT0BWwXFVsF+9UssRaSUixNPJWLzrD8zV+FQXnxYKI3nnH+LzD2o62ysiU7E
- uSa0uVX5v1+YL1J284DXu/dkBSAl0Au886pykp83cfMKB0V6CYw2Ve7eSPSHPZ8uGxDQ=;
+ bh=HnuopyeK/zzogh7LZV86eWGCaPMH9Zb6v86gfhQXrbI=; b=N4vmg+Y6/R+GqeMlwRAUIQbdgl
+ j9Y0yHmxuDYorgi+I5LjI/1sSI1ztYVEsLViRm/EEKgI1djOpgEEqeAm3rdfX+yA+66H+8Esmv87F
+ 6F1uQWuSQzX4EC3n/aQa0aF0sMGf2s4WXxiTdeP6IdDOLzTkT3ZXmZFkQpGrf0C0ktQ0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -45,38 +45,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zMXttB3o1px7UtPahuumjb2f7+4KxLCMcPpnXnR0ss8=; b=mpPBkOjFszbtqvHoF+Y5KVxqs6
- ZJkla7NvGGEnSyW92ZI71CWHJ3/DKySWpHjUdKdL5KBx3qUfndkKGE+eRlmRkDKWeRgCZKniuRzpO
- PlM11njEU3JuHWQTV+To/Q0s3eT/GCesnTenzm2KJ0Wbgs2Pg1vZHwm3nvHGXGW9se+E=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=HnuopyeK/zzogh7LZV86eWGCaPMH9Zb6v86gfhQXrbI=; b=mcdOSJgVcSG6uIF1Rk/OBb57FN
+ SuLhg4ro1LyPPuUdIp6ZhFX9rldiyeUQrmTF2ARmXLUQsxGSpwCI7mN+3+ysAmN8xSlxkLtFiTcb3
+ MpIWh2deIoFTY+dDKE4fCMjztSZI9TZTNzlqTmxGkTeWmUkSf3DLqHvnodkyFRQ009wI=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vj8T5-0003zb-M0 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Jan 2026 04:08:20 +0000
+ id 1vj8Tg-000420-Q2 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 23 Jan 2026 04:08:57 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 02E15601ED;
- Fri, 23 Jan 2026 04:08:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 525D7C4CEF1;
- Fri, 23 Jan 2026 04:08:12 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 6CC2E44215;
+ Fri, 23 Jan 2026 04:08:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0BA73C4CEF1;
+ Fri, 23 Jan 2026 04:08:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1769141293;
- bh=T/HYvcY7VYFetxiMmPBkWe1rxWLD89ZdhJPfSk242Ik=;
+ s=k20201202; t=1769141326;
+ bh=wlGCSZXy6T9m5mbui6m5dviyE7AZ/Vj5vC2XwFQTI2Y=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=c15z6QdumavZYAnmXinL3OE/e6AbtEKRUaSuxjNH9u1G3E3WiofXkTDs4z7js+ow1
- 3DCiEE/zgh6lH4y9B84ZQ6d4GN551CdiIjzP45AUTpBaq6HK55RyTlm8FwisKGf6ZQ
- LOaRByZclSk6tcvZq8f/eMiLpA73nK720axo2BJF6ltBOEjwSk5dSjyd3X29KruIu8
- EGdCfFQDcEMTzTOXGV3mObH3csgkSwiTczrvKjXHKn6EeAY2pb4/U2L42YDTnqNNBp
- vtGszcKPBszVfxwCYL+HO3pTwSiEG2v2mlsGDUNjFKdC9OO1WKRbck3VLsvlaIgimh
- m8oRQ3aA4YDcQ==
-Message-ID: <88894e46-f2e9-4d14-90c9-d6cda51abfcb@kernel.org>
-Date: Fri, 23 Jan 2026 12:08:11 +0800
+ b=DETJvzmBRUeGOuScx3ZkzOt2aBqFDDWHrHU5MZpdrP3HqFXAlBT/O1SP9Z5Xmug+q
+ oniJ+S3fFVn6o5nhSqKcUFaZf7MeTIqvwefIKEBTFPwg7fQE82tukmUQR++DSaxBga
+ nGcUxn91+fas6Tog3dqt/g4wZaNmObsR44C6+weJ7RGUc+5Dmp23V7ukViI3sRmgPt
+ WU5ovZrPJ+xEkskmIUCD6aR901iv57WIPP0kIJszBfdzRUs7FzDlJV+4tdvm0V2SDK
+ N+IAKZGpBvQDSoudHn9jIShmg9Au1hhPIgkuCUQ6cbdrn4T0MIfYTNi5KpMK2OmXaH
+ MqTY9n+F036BQ==
+Message-ID: <4964e3f1-019e-43d4-bbd9-a6ba3ba48cda@kernel.org>
+Date: Fri, 23 Jan 2026 12:08:45 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Joanne Chang <joannechien@google.com>, Zorro Lang <zlang@kernel.org>,
  fstests@vger.kernel.org
-References: <20260108022501.754320-1-joannechien@google.com>
+References: <20260123032744.1018230-1-joannechien@google.com>
 Content-Language: en-US
-In-Reply-To: <20260108022501.754320-1-joannechien@google.com>
+In-Reply-To: <20260123032744.1018230-1-joannechien@google.com>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -84,10 +84,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 1/8/2026 10:25 AM,
- Joanne Chang wrote: > generic/735 attempts
- to create a file with nearly 2^32 blocks. However, > some filesystems have
- a maximum file block limit below this threshold. > For insta [...] 
+ Content preview:  On 1/23/2026 11:27 AM, Joanne Chang wrote: > From: Jaegeuk
+ Kim <jaegeuk@kernel.org> > > Let's add the required mkfs options for quota
+ mount option cases with > wrong results. > > Signed-off-by: Jaegeu [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -99,9 +98,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vj8T5-0003zb-M0
-Subject: Re: [f2fs-dev] [PATCH v3] common/rc: add _require_blocks_in_file
- helper
+X-Headers-End: 1vj8Tg-000420-Q2
+Subject: Re: [f2fs-dev] [PATCH v1] f2fs/015: Test correct mkfs options for
+ error cases
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,8 +114,7 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: Christoph Hellwig <hch@infradead.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -137,7 +135,7 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:joannechien@google.com,m:zlang@kernel.org,m:fstests@vger.kernel.org,m:hch@infradead.org,m:jaegeuk@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:joannechien@google.com,m:zlang@kernel.org,m:fstests@vger.kernel.org,m:jaegeuk@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
@@ -145,31 +143,29 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-0.979];
+	NEURAL_HAM(-0.00)[-0.965];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
+	RCPT_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	HAS_REPLYTO(0.00)[chao@kernel.org]
-X-Rspamd-Queue-Id: 7E274703FF
+X-Rspamd-Queue-Id: A3C7070406
 X-Rspamd-Action: no action
 
-On 1/8/2026 10:25 AM, Joanne Chang wrote:
-> generic/735 attempts to create a file with nearly 2^32 blocks. However,
-> some filesystems have a maximum file block limit below this threshold.
-> For instance, F2FS is limited to approximately 2^30 blocks due to the
-> capacity of the inode. So add _require_blocks_in_file helper to skip the
-> test in such cases.
+On 1/23/2026 11:27 AM, Joanne Chang wrote:
+> From: Jaegeuk Kim <jaegeuk@kernel.org>
 > 
-> The helper uses a hardcoded constant instead of a programmatic method,
-> so that bugs which affect the maximum file size are not masked.
+> Let's add the required mkfs options for quota mount option cases with
+> wrong results.
 > 
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> Co-developed-by: Joanne Chang <joannechien@google.com>
 > Signed-off-by: Joanne Chang <joannechien@google.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
