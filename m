@@ -2,106 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aF+RKYchc2mUsgAAu9opvQ
+	id 4I0WEsAhc2mUsgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Jan 2026 08:21:43 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Jan 2026 08:22:40 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF45971A2C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Jan 2026 08:21:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A060C71A5F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Jan 2026 08:22:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=8s0SfpFP9nlYYo3zLD0zrINhykFTmDT0+M8al5vbHkg=; b=GB1oaqk/xyxiWzXAxVZcAayq4B
-	nr1LHuErsCJHwAbqz6+clI2seovBIRAil/00WQnbTR9xslgMiM/r4RzUkWQ8GfBQ9aSNGLUCHM/Td
-	VvEenAsDg8VQhemwHsr+9FibXeEdRLkyoOWsBghgj1/Mjzl1Im7CMbHUU+brtgCdzvB8=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=BtBgvxZUrHi9WRSE1oh3cf5mOrcoWK87Mhq0GwqtOTU=; b=iG91gpqz/9UQKTB93wvaUao6Zb
+	KXskOr1s0jxecOJ8Y0fixXgzbkpFoy7sPxZ7N3BKTWoftpsfMI+0mQDatjZDEkmIGqIv5mlCUgCi4
+	+SU65YxlFV67DYOOPQyv/njZPvxvC40iPFKFnaixSCrAnfwT5aeFZwO9JcejQ1AB5gUQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vjBU5-0001H8-5q;
-	Fri, 23 Jan 2026 07:21:33 +0000
+	id 1vjBV6-0003D3-O9;
+	Fri, 23 Jan 2026 07:22:36 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <djwong@kernel.org>) id 1vjBU4-0001Gw-2A
+ (envelope-from <djwong@kernel.org>) id 1vjBV5-0003Cs-H9
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Jan 2026 07:21:32 +0000
+ Fri, 23 Jan 2026 07:22:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JQd4k/RP+ZwxkjU60X0UaAa8dzylHGp7c0+a/n27/AE=; b=a8sCGjAe4AKeOeys6gQA7TlXrn
- HWoIPOqwW1IDbq0bfIOIcpC0dX5ziqTnRUjiTPeafw9O8JeUgrUHuqdoS2MToSkUKsu7DyXQwgntI
- fPcYJYckIaAeXCOr1N8boul+qKyL+9+RfcA+gnBRevNyYrE/FfHSX/zZxQXcCZc4awD4=;
+ bh=hYORL+ulDQU1A0yZS6mdoF/USDIkZvUZDTcV50rz5/8=; b=h719z2Nov5cEShuw1v/KA3XFPW
+ zzsiF/hRPgb0U7SeRuCWiyLjSuaI7MxKyK37HKojErAqU9scLE+HxXyd1Z8Mxwz2AR3lODlKVK4AA
+ t6uRvNdtCCH9wOxCQXMOdjCzOEMSyMz/R/cuCpsCS3Crx8ERU8LlNVkfFMG/Lz4/qWoQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JQd4k/RP+ZwxkjU60X0UaAa8dzylHGp7c0+a/n27/AE=; b=eA4swA4le24xm3crn8Ncf3mDHJ
- gPZXCLzCTKmFTr2YkhpvX/8n17HdHLCtbB44jC1u7xPRCXp1/fNnDh8cDmUhB+uvyqdm5f0du85qT
- sKoX7cuVnjS3naylwltRFS/512X73k7p4LooDyS5rN64SQ0e1IgT/a/4XWR6q7Shi91s=;
+ bh=hYORL+ulDQU1A0yZS6mdoF/USDIkZvUZDTcV50rz5/8=; b=ho4u7WlgxKLDW60qQE8DJI37PU
+ UXeZDAaKQ7XXzPcztgey+XVEXaBje+rXyct3Ti4+jxf1B9sN/7RAgFSosPdd7cx5CvV17LDA7n2X7
+ yKwyZgiU/mItKhu5npYKk5/m49UAUFShvgMG8M8EmeXs5w+LNJCHPt1N4QsbmHfqoDh4=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vjBU4-00030i-Dl for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Jan 2026 07:21:32 +0000
+ id 1vjBUy-00032v-Si for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 23 Jan 2026 07:22:29 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 00CC644303;
- Fri, 23 Jan 2026 07:21:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C4732C4CEF1;
- Fri, 23 Jan 2026 07:21:26 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 8B790419AA;
+ Fri, 23 Jan 2026 07:22:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 631EBC4CEF1;
+ Fri, 23 Jan 2026 07:22:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1769152886;
- bh=DDl7zLtPOeFQjxt7Ggqx1S5g+R14kCM8cAEsVyBajUg=;
+ s=k20201202; t=1769152938;
+ bh=xv7Ciia1o4TzkfhiJeMNZ7afzQQkd0wZmCmSkOnW3D8=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=gjf32HfLTAL5btPTzgGS8ktQroaXji6bHYgaSmpcssFw3bYEFppa2b7196Vj+gtgS
- JB0yV8ItjC1KgxNyb/JKDbBP8cXLE/pw2Kuy+OtsxXLqA1XK+chfrwJBkykTwrhFK+
- 1Ka6FntfNJTrfxu4YP1rgQa3TZOMvQFSumTxGU4FoYgY9Mp639my/tPFeo7oPAa1hc
- OonltoZHFkObImhv59hVSuAb0qvhJWNUuBxfUyQ78eEiiDKAxomx7RpXtP8ADa7Goz
- oGkN27oAQ2xkdbEeSQ4tDvOB1P3S8wE4ASZXhMsZTsSzg3OnbiUHWNs9mDSIhrOi41
- 4u3ZPsn2LC7Xw==
-Date: Thu, 22 Jan 2026 23:21:26 -0800
+ b=ag+3xAAMAiEobo8tr0xQ+pzcrO/vVQSUK1Ag76ICSV8GT7q49niWT+pofKmzKsG8d
+ Jw39Di1WR6hLI1vHcojDjdN67CQ0NZ4hT6qBh6VKNpuT+NwwIGeFCoVzI/Cw7PFD8H
+ iDuF0Gf2+DPUBr/9WjkqNurr6hBOvGEbVBDUSzw/q/xGgutFraBC7WtwpfTz4uSSV3
+ 05dE5Th7Oj5wPPLqdrF+TxQtBTjE8Jpq8Hgi5LkNg9Eac+189i5VZfNF/Sxr89VkxQ
+ HkR9HEZf+DjnbaULQQHgzisWBIN1hfRryZZ7oPJMvM5Tg+TZjXUU7ROBmPVPkNk1aQ
+ DE5y1rbi3NWNg==
+Date: Thu, 22 Jan 2026 23:22:17 -0800
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20260123072126.GJ5910@frogsfrogsfrogs>
+Message-ID: <20260123072217.GK5910@frogsfrogsfrogs>
 References: <20260122082214.452153-1-hch@lst.de>
- <20260122082214.452153-5-hch@lst.de>
- <20260122212700.GD5910@frogsfrogsfrogs>
- <20260123051216.GA24123@lst.de>
+ <20260122082214.452153-6-hch@lst.de>
+ <20260122214227.GE5910@frogsfrogsfrogs>
+ <20260123051429.GB24123@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260123051216.GA24123@lst.de>
+In-Reply-To: <20260123051429.GB24123@lst.de>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jan 23, 2026 at 06:12:16AM +0100, Christoph Hellwig
- wrote: > On Thu, Jan 22, 2026 at 01:27:00PM -0800, Darrick J. Wong wrote:
- > > Nice hoist, though I wonder -- as an exported fs function, sho [...] 
+ Content preview:  On Fri, Jan 23, 2026 at 06:14:29AM +0100, Christoph Hellwig
+ wrote: > On Thu, Jan 22, 2026 at 01:42:27PM -0800, Darrick J. Wong wrote:
+ > > > + if (first_folio) { > > > + if (ext4_need_verity(inode, fol [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vjBU4-00030i-Dl
-Subject: Re: [f2fs-dev] [PATCH 04/11] fsverity: start consolidating
- pagecache code
+X-Headers-End: 1vjBUy-00032v-Si
+Subject: Re: [f2fs-dev] [PATCH 05/11] fsverity: kick off hash readahead at
+ data I/O submission time
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,47 +118,46 @@ From: "Darrick J. Wong via Linux-f2fs-devel"
 Reply-To: "Darrick J. Wong" <djwong@kernel.org>
 Cc: fsverity@lists.linux.dev, Christian Brauner <brauner@kernel.org>,
  Jan Kara <jack@suse.cz>, Andrey Albershteyn <aalbersh@redhat.com>,
- t@magnolia.djwong.org, "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
+ "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
  linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
  linux-fsdevel@vger.kernel.org, Al Viro <viro@zeniv.linux.org.uk>,
  Jaegeuk Kim <jaegeuk@kernel.org>, David Sterba <dsterba@suse.com>,
  Theodore Ts'o <tytso@mit.edu>, linux-ext4@vger.kernel.org,
  linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.01 / 15.00];
+X-Spamd-Result: default: False [-8.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
-	MIME_BASE64_TEXT(0.10)[];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
 	DKIM_MIXED(0.00)[];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_RECIPIENTS(0.00)[m:hch@lst.de,m:fsverity@lists.linux.dev,m:brauner@kernel.org,m:jack@suse.cz,m:aalbersh@redhat.com,m:t@magnolia.djwong.org,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:ebiggers@kernel.org,m:linux-fsdevel@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:jaegeuk@kernel.org,m:dsterba@suse.com,m:tytso@mit.edu,m:linux-ext4@vger.kernel.org,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:hch@lst.de,m:fsverity@lists.linux.dev,m:brauner@kernel.org,m:jack@suse.cz,m:aalbersh@redhat.com,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:ebiggers@kernel.org,m:linux-fsdevel@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:jaegeuk@kernel.org,m:dsterba@suse.com,m:tytso@mit.edu,m:linux-ext4@vger.kernel.org,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-0.999];
+	NEURAL_HAM(-0.00)[-0.950];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
@@ -167,26 +166,59 @@ X-Spamd-Result: default: False [-8.01 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	MISSING_XM_UA(0.00)[];
 	HAS_REPLYTO(0.00)[djwong@kernel.org]
-X-Rspamd-Queue-Id: CF45971A2C
+X-Rspamd-Queue-Id: A060C71A5F
 X-Rspamd-Action: no action
 
-T24gRnJpLCBKYW4gMjMsIDIwMjYgYXQgMDY6MTI6MTZBTSArMDEwMCwgQ2hyaXN0b3BoIEhlbGx3
-aWcgd3JvdGU6Cj4gT24gVGh1LCBKYW4gMjIsIDIwMjYgYXQgMDE6Mjc6MDBQTSAtMDgwMCwgRGFy
-cmljayBKLiBXb25nIHdyb3RlOgo+ID4gTmljZSBob2lzdCwgdGhvdWdoIEkgd29uZGVyIC0tIGFz
-IGFuIGV4cG9ydGVkIGZzIGZ1bmN0aW9uLCBzaG91bGQgd2UgYmUKPiA+IGNoZWNraW5nIHRoYXQg
-dGhlIHJldHVybmVkIGZvbGlvIGRvZXNuJ3QgY292ZXIgRU9GPyAgTm90IHRoYXQgYW55IG9mIHRo
-ZQo+ID4gdXNlcnMgYWN0dWFsbHkgY2hlY2sgdGhhdCByZXR1cm5lZCBtZXJrbGUgdHJlZSBmb2xp
-b3MgZml0IHRoYXQKPiA+IGNyaXRlcmlvbi4KPiAKPiBBcyBpbiBwYXN0IGlfc2l6ZSBiZWNhdXNl
-IHRoaXMgaXMgdmVyaXR5IG1ldGFkYXRhPyAgSSB0aGluayBwZXIgdGhlCj4gbGFzdCBkaXNjdXNz
-aW9uIHRoYXQncyBvbmx5IGd1cmFudGVlZCB0byBiZSB0cnVlLCBub3QgdGhlIGZvbGlvLiAgSXQK
-PiBtaWdodCBiZSB1c2VmdWwgdG8gYXNzZXJ0IHRoaXMsIGJ1dCBpdCBtaWdodCBiZSBiZXR0ZXIg
-Zm9yIGNvbWJpbmUKPiB0aGlzIHdpdGggdGhlIHdvcmsgdG8gdXNlIGRpZmZlcmVudCBvbi1kaXNr
-IHZzIGluLW1lbW9yeSBvZmZzZXQKPiBhbmQgdG8gY29uc29saWRhdGUgYWxsIHRoZSBvZmZzZXQg
-bWFnaWMuICBXaGljaCBpcyB3b3J0aHdoaWxlLAo+IGJ1dCDQhiBkb24ndCByZWFsbHkgd2FudCB0
-byBhZGQgdGhhdCBpbiB0aGlzIHNlcmllcy4KCjxub2Q+IFlvdSdyZSBwcm9iYWJseSByaWdodCB0
-aGF0IGFkZGluZyBzdWNoIGEgY2hlY2sgd291bGQgYmUgYmV0dGVyIG9mZgppbiB3aGF0ZXZlciBz
-ZXJpZXMgZm9ybWFsbHkgZGVmaW5lcyB0aGUgcG9zdC1lb2YgcGFnZWNhY2hlIG9mZnNldCBhbmQK
-d2hhdG5vdC4KCi0tRAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlz
-dHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xp
-c3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On Fri, Jan 23, 2026 at 06:14:29AM +0100, Christoph Hellwig wrote:
+> On Thu, Jan 22, 2026 at 01:42:27PM -0800, Darrick J. Wong wrote:
+> > > +		if (first_folio) {
+> > > +			if (ext4_need_verity(inode, folio->index))
+> > > +				fsverity_readahead(folio, nr_pages);
+> > 
+> > Ok, so here ext4 is trying to read a data page into memory, so we
+> > initiate readahead on the merkle tree block(s) for that data page.
+> 
+> Yes.
+> 
+> > > +	__fsverity_readahead(inode, vi, offset, last_index - index + 1);
+> > 
+> > I went "Huh??" here until I realized that this is the function that
+> > reads merkle tree content on behalf of some ioctl, so this is merely
+> > starting readahead for that.  Not sure anyone cares about throughput of
+> > FS_VERITY_METADATA_TYPE_MERKLE_TREE but sure why not. 
+> 
+> It is trivial to provide and will make the ioctl read much faster.
+> 
+> > > +	const struct merkle_tree_params *params = &vi->tree_params;
+> > > +	u64 start_hidx = data_start_pos >> params->log_blocksize;
+> > > +	u64 end_hidx = (data_start_pos + ((nr_pages - 1) << PAGE_SHIFT)) >>
+> > > +			params->log_blocksize;
+> > 
+> > I really wish these unit conversions had proper types and helpers
+> > instead of this multiline to read shifting stuff.  Oh well, you didn't
+> > write it this way, you're just slicing and dicing.
+> 
+> Agreed.  Just not feeling like turning everything totally upside down
+> right now :)
+> 
+> > So if I read this correctly, we're initiating readahead of merkle tree
+> > (leaf) data for the file data range starting at data_start_pos and
+> > running for (nr_pages<<SHIFT) bytes?  Then going another level up in the
+> > merkle tree and initiating readahead for the corresponding interior
+> > nodes until we get to the root?
+> 
+> Yes.  That's a difference to the old code that just did readahead
+> for the leaf nodes.
+
+Cool!  In that case I think I understand what's going on here well
+enough to say:
+Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
+
+--D
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
