@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sDKsG2XzdmkzZgEAu9opvQ
+	id COyRKWnzdmkzZgEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:53:57 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:54:01 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C387F8403C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:53:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27CCB84053
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:54:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=EarhBkr8k1HErSi1ksnVqEO6gSIamCBzDa9ojaKofhw=; b=VDTpyq3LxjFuOkRMuPB0hBjctU
-	Al0bKClyL9FZ/h0pF27QAutzqlRaNrgIpRqXUsuLgX6uRkOktHXJ5ZlTsuVnl5v6Wi95bWfc5z9d1
-	iDK3ekjfBQXn4ax+90Si1y1bLZita/Ci4PUmykkAEhRp6Wr9407CNLqboxLyCKOd/swg=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=4Hez8yI5ISG5VDZeta0gsbpFqGxCKicAigEcHFtHDUo=; b=gOBdGHsEIodbYtru/JaJqu9I+5
+	Yqm4SVaw/EIznbxdeykLWtpqDTPk3dWqppo7QUPkH948kVeC3S81yam5jJrsrvZz1FuUDjbUM+wqk
+	+u61fcbGesUrwcW9VntoHy6W/11nVWF95ixh6AmOd7gkQkJvs6zVqC5jjk1ERY7MyEzU=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vkEbr-0001wY-G5;
-	Mon, 26 Jan 2026 04:53:55 +0000
+	id 1vkEbv-00020t-Rl;
+	Mon, 26 Jan 2026 04:53:59 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+12afb9bb7a5ef89fcdd0+8191+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vkEbn-0001w2-Fr for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 26 Jan 2026 04:53:51 +0000
+ id 1vkEbu-00020i-7G for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 26 Jan 2026 04:53:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ia1DSibMMzTX8Z8UTE2UL98d2+dpQUyDFV8nOvr0lWQ=; b=Aao7ZwWlP3Ia0vXuqtfXfwBcAs
- irdKMWoZhmaHyMJ+pRAo94tkBBTOL/zlwNRVTiH0ayOJHOlHfartLeLzoh0Zka3BLqTRgOm2PKkn+
- PyIfv0rDEcfmetNN9sd2KTf0DWzO9h4TXCSgWASO5RbrIZFm5g7i49DfbpoElK3tjmXA=;
+ bh=x48TEdQsxZZuA/CWxR+pNtRwH5mvhXrSqa0LhyQ85U0=; b=cFW3L2YuA/BU6tmbOFzd3v3c+X
+ LVntt7pZ+i0W2szk7zUkF1Yh8IGwGP5StXtSOxwIBSxgBjTihP89EPPH3tdaGHdagYgbqpUD14xV1
+ AnM2THAzg31zL/fsJhktnns9c5A12a61ZwyFBOcKdZGsEEy9hrOeZC3pMvEf1uuiqZo4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,33 +45,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ia1DSibMMzTX8Z8UTE2UL98d2+dpQUyDFV8nOvr0lWQ=; b=Y+pWk+XM6lop5Y3Db+IJdkumqX
- p7rTxhoO/Kh7bJ4NmASGSXdYtP2UHYdM1R8y8fKnNJ+2DkPbTHeIK6n9h4K/uNu95KHZx843YhxLu
- EXoN+c4KrPpUl2ogeRrL2wrfEdQCw7zgX1spfFJKmyPayIez1UWK/xsoBstZgfDyFKqc=;
+ bh=x48TEdQsxZZuA/CWxR+pNtRwH5mvhXrSqa0LhyQ85U0=; b=PE13zbwocXfst9KMkAidxOt8tM
+ csNOM6upgmQ9G545sk1tpdhSp63/yBTGqYznYiaczUJsEZ6yb++7S4X7B5NLVixLzqfjweAGtm0bg
+ aT0LOK/GWCkcJL8Y72LEVK7nA+goFA3AXtkBRZp3GxV/j5itYY/nu0fucCSIhZJP2+rw=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vkEbm-0001sv-2A for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 26 Jan 2026 04:53:51 +0000
+ id 1vkEbr-0001tk-Jz for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 26 Jan 2026 04:53:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=ia1DSibMMzTX8Z8UTE2UL98d2+dpQUyDFV8nOvr0lWQ=; b=MHyGJlGjEkIWve9zbFApc1wP6l
- 9qJNUnybOlclM3AwY/2O4e46c7WnKicIiQdfCBeBReIhQ9yaBX36k09JwVSR7pznVFKpL23BWhN8c
- 3NtxTJ6MM6ranKbuXUQvnZg/1nxdTgDZoAFA2O4suj9kE5101T7y0/TexfYzLr2vSNwlzh1DgDzAz
- px8yfelrK83P1CzqU35IZtR/bq0frz8K2AcE69G0BXKRxVVQoPtVS2Jia/S28HpXMFoqPsyVl7G+h
- Hhy+DCHS/V9Q5RNx+Tmi29EXiSoQwQ7Zr/xIjr/GL7ZhT/XUnqz+OeyG7AZXCTt6bFf2uPOqM3H3c
- C1WZIwAg==;
+ bh=x48TEdQsxZZuA/CWxR+pNtRwH5mvhXrSqa0LhyQ85U0=; b=IQHUTQmK80xVXXy9XktFtubls/
+ liSbVXTmAnoB2EUEE9wHEI36zemahmSgcVrfYpkwDkTZAK28bzj5xQcJnAgtvxPubD9r8WrOJPO0W
+ cyfvHWXOiJT6+2Y6QZf0tAvKp9X7T3KSehpRntJzTrUcbZu0IYxjLjPziKuHdXTZ7bijM8BWdXknS
+ bYkI6hIYoD924aeEx8YLpIq6Kq1EZ0/lhUEMtBHOGtgaZfDIepAlQ3+pYI139GxMjClwbFFbhzWHt
+ dAZneBetkNCinEGbszfNsuwMu6I+83qGF0OMKtLHIwABclog0pnOUA/KXDAy3ZOXbufASYZ0Z9f8D
+ MoMGtpfg==;
 Received: from
  2a02-8389-2341-5b80-d601-7564-c2e0-491c.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:d601:7564:c2e0:491c] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vkEbe-0000000BuVB-03Kp; Mon, 26 Jan 2026 04:53:42 +0000
+ id 1vkEbj-0000000BuVk-1lGT; Mon, 26 Jan 2026 04:53:48 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Date: Mon, 26 Jan 2026 05:51:00 +0100
-Message-ID: <20260126045212.1381843-15-hch@lst.de>
+Date: Mon, 26 Jan 2026 05:51:01 +0100
+Message-ID: <20260126045212.1381843-16-hch@lst.de>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260126045212.1381843-1-hch@lst.de>
 References: <20260126045212.1381843-1-hch@lst.de>
@@ -85,9 +85,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Look up the fsverity_info once in f2fs_mpage_readpages, and
- then use it for the readahead, local verification of holes and pass it along
- to the I/O completion workqueue in struct bio_post_read_ctx. Do [...] 
+ Content preview:  Look up the fsverity_info once in btrfs_do_readpage, and then
+ use it for all operations performed there, and do the same in end_folio_read
+ for all folios processed there. The latter is also changed to [...] 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -96,8 +96,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1vkEbm-0001sv-2A
-Subject: [f2fs-dev] [PATCH 14/16] f2fs: consolidate fsverity_info lookup
+X-Headers-End: 1vkEbr-0001tk-Jz
+Subject: [f2fs-dev] [PATCH 15/16] btrfs: consolidate fsverity_info lookup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -151,322 +151,145 @@ X-Spamd-Result: default: False [0.39 / 15.00];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:mid,lst.de:email]
-X-Rspamd-Queue-Id: C387F8403C
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,lst.de:mid,lst.de:email]
+X-Rspamd-Queue-Id: 27CCB84053
 X-Rspamd-Action: no action
 
-Look up the fsverity_info once in f2fs_mpage_readpages, and then use it
-for the readahead, local verification of holes and pass it along to the
-I/O completion workqueue in struct bio_post_read_ctx.  Do the same
-thing in f2fs_get_read_data_folio for reads that come from garbage
-collection and other background activities.
+Look up the fsverity_info once in btrfs_do_readpage, and then use it
+for all operations performed there, and do the same in end_folio_read
+for all folios processed there.  The latter is also changed to derive
+the inode from the btrfs_bio - while bbio->inode is optional, it is
+always set for buffered reads.
 
 This amortizes the lookup better once it becomes less efficient.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Acked-by: David Sterba <dsterba@suse.com>
 ---
- fs/f2fs/compress.c |  9 +++---
- fs/f2fs/data.c     | 74 +++++++++++++++++++++++++---------------------
- fs/f2fs/f2fs.h     |  9 ++----
- 3 files changed, 46 insertions(+), 46 deletions(-)
+ fs/btrfs/extent_io.c | 38 +++++++++++++++++++++++---------------
+ 1 file changed, 23 insertions(+), 15 deletions(-)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 3de4a7e66959..ef1225af2acf 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -1181,6 +1181,7 @@ int f2fs_prepare_compress_overwrite(struct inode *inode,
- 		.cluster_idx = index >> F2FS_I(inode)->i_log_cluster_size,
- 		.rpages = NULL,
- 		.nr_rpages = 0,
-+		.vi = NULL, /* can't write to fsverity files */
- 	};
- 
- 	return prepare_compress_overwrite(&cc, pagep, index, fsdata);
-@@ -1716,7 +1717,7 @@ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
- 	dic->nr_cpages = cc->nr_cpages;
- 	refcount_set(&dic->refcnt, 1);
- 	dic->failed = false;
--	dic->need_verity = f2fs_need_verity(cc->inode, start_idx);
-+	dic->vi = cc->vi;
- 
- 	for (i = 0; i < dic->cluster_size; i++)
- 		dic->rpages[i] = cc->rpages[i];
-@@ -1814,9 +1815,7 @@ static void f2fs_verify_cluster(struct work_struct *work)
- 		if (!rpage)
- 			continue;
- 
--		if (fsverity_verify_page(
--				*fsverity_info_addr(rpage->mapping->host),
--				rpage))
-+		if (fsverity_verify_page(dic->vi, rpage))
- 			SetPageUptodate(rpage);
- 		else
- 			ClearPageUptodate(rpage);
-@@ -1835,7 +1834,7 @@ void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed,
- {
- 	int i;
- 
--	if (IS_ENABLED(CONFIG_FS_VERITY) && !failed && dic->need_verity) {
-+	if (IS_ENABLED(CONFIG_FS_VERITY) && !failed && dic->vi) {
- 		/*
- 		 * Note that to avoid deadlocks, the verity work can't be done
- 		 * on the decompression workqueue.  This is because verifying
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index bca1e34d327a..d9a8d633d83c 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -109,6 +109,7 @@ enum bio_post_read_step {
- struct bio_post_read_ctx {
- 	struct bio *bio;
- 	struct f2fs_sb_info *sbi;
-+	struct fsverity_info *vi;
- 	struct work_struct work;
- 	unsigned int enabled_steps;
- 	/*
-@@ -165,6 +166,7 @@ static void f2fs_verify_bio(struct work_struct *work)
- 		container_of(work, struct bio_post_read_ctx, work);
- 	struct bio *bio = ctx->bio;
- 	bool may_have_compressed_pages = (ctx->enabled_steps & STEP_DECOMPRESS);
-+	struct fsverity_info *vi = ctx->vi;
- 
- 	/*
- 	 * fsverity_verify_bio() may call readahead() again, and while verity
-@@ -185,8 +187,6 @@ static void f2fs_verify_bio(struct work_struct *work)
- 
- 		bio_for_each_folio_all(fi, bio) {
- 			struct folio *folio = fi.folio;
--			struct fsverity_info *vi =
--				*fsverity_info_addr(folio->mapping->host);
- 
- 			if (!f2fs_is_compressed_page(folio) &&
- 			    !fsverity_verify_page(vi, &folio->page)) {
-@@ -195,9 +195,7 @@ static void f2fs_verify_bio(struct work_struct *work)
- 			}
- 		}
- 	} else {
--		struct inode *inode = bio_first_folio_all(bio)->mapping->host;
--
--		fsverity_verify_bio(*fsverity_info_addr(inode), bio);
-+		fsverity_verify_bio(vi, bio);
- 	}
- 
- 	f2fs_finish_read_bio(bio, true);
-@@ -1040,9 +1038,9 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 	f2fs_up_write(&io->io_rwsem);
+diff --git a/fs/btrfs/extent_io.c b/fs/btrfs/extent_io.c
+index 21430b7d8f27..fe96f060725a 100644
+--- a/fs/btrfs/extent_io.c
++++ b/fs/btrfs/extent_io.c
+@@ -476,26 +476,25 @@ void extent_clear_unlock_delalloc(struct btrfs_inode *inode, u64 start, u64 end,
+ 				end, page_ops);
  }
  
--static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
--				      unsigned nr_pages, blk_opf_t op_flag,
--				      pgoff_t first_idx, bool for_write)
-+static struct bio *f2fs_grab_read_bio(struct inode *inode,
-+		struct fsverity_info *vi, block_t blkaddr, unsigned nr_pages,
-+		blk_opf_t op_flag, pgoff_t first_idx, bool for_write)
+-static bool btrfs_verify_folio(struct folio *folio, u64 start, u32 len)
++static bool btrfs_verify_folio(struct fsverity_info *vi, struct folio *folio,
++			       u64 start, u32 len)
  {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	struct bio *bio;
-@@ -1061,7 +1059,7 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
- 	if (fscrypt_inode_uses_fs_layer_crypto(inode))
- 		post_read_steps |= STEP_DECRYPT;
+ 	struct btrfs_fs_info *fs_info = folio_to_fs_info(folio);
  
--	if (f2fs_need_verity(inode, first_idx))
-+	if (vi)
- 		post_read_steps |= STEP_VERITY;
- 
- 	/*
-@@ -1076,6 +1074,7 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
- 		ctx = mempool_alloc(bio_post_read_ctx_pool, GFP_NOFS);
- 		ctx->bio = bio;
- 		ctx->sbi = sbi;
-+		ctx->vi = vi;
- 		ctx->enabled_steps = post_read_steps;
- 		ctx->fs_blkaddr = blkaddr;
- 		ctx->decompression_attempted = false;
-@@ -1087,15 +1086,15 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
+-	if (!fsverity_active(folio->mapping->host) ||
+-	    btrfs_folio_test_uptodate(fs_info, folio, start, len) ||
+-	    start >= i_size_read(folio->mapping->host))
++	if (!vi || btrfs_folio_test_uptodate(fs_info, folio, start, len))
+ 		return true;
+-	return fsverity_verify_folio(*fsverity_info_addr(folio->mapping->host),
+-			folio);
++	return fsverity_verify_folio(vi, folio);
  }
  
- /* This can handle encryption stuffs */
--static void f2fs_submit_page_read(struct inode *inode, struct folio *folio,
--				 block_t blkaddr, blk_opf_t op_flags,
--				 bool for_write)
-+static void f2fs_submit_page_read(struct inode *inode, struct fsverity_info *vi,
-+		struct folio *folio, block_t blkaddr, blk_opf_t op_flags,
-+		bool for_write)
+-static void end_folio_read(struct folio *folio, bool uptodate, u64 start, u32 len)
++static void end_folio_read(struct fsverity_info *vi, struct folio *folio,
++			   bool uptodate, u64 start, u32 len)
  {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	struct bio *bio;
+ 	struct btrfs_fs_info *fs_info = folio_to_fs_info(folio);
  
--	bio = f2fs_grab_read_bio(inode, blkaddr, 1, op_flags,
--					folio->index, for_write);
-+	bio = f2fs_grab_read_bio(inode, vi, blkaddr, 1, op_flags, folio->index,
-+			for_write);
+ 	ASSERT(folio_pos(folio) <= start &&
+ 	       start + len <= folio_next_pos(folio));
  
- 	/* wait for GCed page writeback via META_MAPPING */
- 	f2fs_wait_on_block_writeback(inode, blkaddr);
-@@ -1197,6 +1196,14 @@ int f2fs_reserve_block(struct dnode_of_data *dn, pgoff_t index)
- 	return err;
- }
- 
-+static inline struct fsverity_info *f2fs_need_verity(const struct inode *inode,
-+		pgoff_t idx)
-+{
-+	if (idx < DIV_ROUND_UP(inode->i_size, PAGE_SIZE))
-+		return fsverity_get_info(inode);
-+	return NULL;
-+}
-+
- struct folio *f2fs_get_read_data_folio(struct inode *inode, pgoff_t index,
- 		blk_opf_t op_flags, bool for_write, pgoff_t *next_pgofs)
+-	if (uptodate && btrfs_verify_folio(folio, start, len))
++	if (uptodate && btrfs_verify_folio(vi, folio, start, len))
+ 		btrfs_folio_set_uptodate(fs_info, folio, start, len);
+ 	else
+ 		btrfs_folio_clear_uptodate(fs_info, folio, start, len);
+@@ -575,14 +574,19 @@ static void begin_folio_read(struct btrfs_fs_info *fs_info, struct folio *folio)
+ static void end_bbio_data_read(struct btrfs_bio *bbio)
  {
-@@ -1262,8 +1269,8 @@ struct folio *f2fs_get_read_data_folio(struct inode *inode, pgoff_t index,
- 		return folio;
- 	}
- 
--	f2fs_submit_page_read(inode, folio, dn.data_blkaddr,
--						op_flags, for_write);
-+	f2fs_submit_page_read(inode, f2fs_need_verity(inode, folio->index),
-+			folio, dn.data_blkaddr, op_flags, for_write);
- 	return folio;
- 
- put_err:
-@@ -2067,12 +2074,10 @@ static inline blk_opf_t f2fs_ra_op_flags(struct readahead_control *rac)
- 	return rac ? REQ_RAHEAD : 0;
- }
- 
--static int f2fs_read_single_page(struct inode *inode, struct folio *folio,
--					unsigned nr_pages,
--					struct f2fs_map_blocks *map,
--					struct bio **bio_ret,
--					sector_t *last_block_in_bio,
--					struct readahead_control *rac)
-+static int f2fs_read_single_page(struct inode *inode, struct fsverity_info *vi,
-+		struct folio *folio, unsigned nr_pages,
-+		struct f2fs_map_blocks *map, struct bio **bio_ret,
-+		sector_t *last_block_in_bio, struct readahead_control *rac)
- {
- 	struct bio *bio = *bio_ret;
- 	const unsigned int blocksize = F2FS_BLKSIZE;
-@@ -2124,10 +2129,7 @@ static int f2fs_read_single_page(struct inode *inode, struct folio *folio,
- 	} else {
- zero_out:
- 		folio_zero_segment(folio, 0, folio_size(folio));
--		if (f2fs_need_verity(inode, index) &&
--		    !fsverity_verify_folio(
--				*fsverity_info_addr(folio->mapping->host),
--				folio)) {
-+		if (vi && !fsverity_verify_folio(vi, folio)) {
- 			ret = -EIO;
- 			goto out;
- 		}
-@@ -2149,7 +2151,7 @@ static int f2fs_read_single_page(struct inode *inode, struct folio *folio,
- 		bio = NULL;
- 	}
- 	if (bio == NULL)
--		bio = f2fs_grab_read_bio(inode, block_nr, nr_pages,
-+		bio = f2fs_grab_read_bio(inode, vi, block_nr, nr_pages,
- 				f2fs_ra_op_flags(rac), index,
- 				false);
- 
-@@ -2301,8 +2303,8 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 		}
- 
- 		if (!bio)
--			bio = f2fs_grab_read_bio(inode, blkaddr, nr_pages - i,
--					f2fs_ra_op_flags(rac),
-+			bio = f2fs_grab_read_bio(inode, cc->vi, blkaddr,
-+					nr_pages - i, f2fs_ra_op_flags(rac),
- 					folio->index, for_write);
- 
- 		if (!bio_add_folio(bio, folio, blocksize, 0))
-@@ -2364,6 +2366,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
- #endif
- 	unsigned nr_pages = rac ? readahead_count(rac) : 1;
- 	unsigned max_nr_pages = nr_pages;
+ 	struct btrfs_fs_info *fs_info = bbio->inode->root->fs_info;
++	struct inode *inode = &bbio->inode->vfs_inode;
+ 	struct bio *bio = &bbio->bio;
 +	struct fsverity_info *vi = NULL;
- 	int ret = 0;
- 	bool first_folio = true;
+ 	struct folio_iter fi;
  
-@@ -2391,9 +2394,9 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ 	ASSERT(!bio_flagged(bio, BIO_CLONED));
++
++	if (bbio->file_offset < i_size_read(inode))
++		vi = fsverity_get_info(inode);
++
+ 	bio_for_each_folio_all(fi, &bbio->bio) {
+ 		bool uptodate = !bio->bi_status;
+ 		struct folio *folio = fi.folio;
+-		struct inode *inode = folio->mapping->host;
+ 		u64 start = folio_pos(folio) + fi.offset;
+ 
+ 		btrfs_debug(fs_info,
+@@ -617,7 +621,7 @@ static void end_bbio_data_read(struct btrfs_bio *bbio)
  		}
  
- 		if (first_folio) {
--			if (f2fs_need_verity(inode, folio->index))
--				fsverity_readahead(*fsverity_info_addr(inode),
--						folio, nr_pages);
-+			vi = f2fs_need_verity(inode, folio->index);
-+			if (vi)
-+				fsverity_readahead(vi, folio, nr_pages);
- 			first_folio = false;
- 		}
- 
-@@ -2405,6 +2408,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
- 
- 		/* there are remained compressed pages, submit them */
- 		if (!f2fs_cluster_can_merge_page(&cc, index)) {
-+			cc.vi = vi;
- 			ret = f2fs_read_multi_pages(&cc, &bio,
- 						max_nr_pages,
- 						&last_block_in_bio,
-@@ -2438,8 +2442,8 @@ static int f2fs_mpage_readpages(struct inode *inode,
- read_single_page:
- #endif
- 
--		ret = f2fs_read_single_page(inode, folio, max_nr_pages, &map,
--					&bio, &last_block_in_bio, rac);
-+		ret = f2fs_read_single_page(inode, vi, folio, max_nr_pages,
-+					&map, &bio, &last_block_in_bio, rac);
- 		if (ret) {
- #ifdef CONFIG_F2FS_FS_COMPRESSION
- set_error_page:
-@@ -2455,6 +2459,7 @@ static int f2fs_mpage_readpages(struct inode *inode,
- 		if (f2fs_compressed_file(inode)) {
- 			/* last page */
- 			if (nr_pages == 1 && !f2fs_cluster_is_empty(&cc)) {
-+				cc.vi = vi;
- 				ret = f2fs_read_multi_pages(&cc, &bio,
- 							max_nr_pages,
- 							&last_block_in_bio,
-@@ -3653,6 +3658,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
- 		}
- 		f2fs_submit_page_read(use_cow ?
- 				F2FS_I(inode)->cow_inode : inode,
-+				NULL, /* can't write to fsverity files */
- 				folio, blkaddr, 0, true);
- 
- 		folio_lock(folio);
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 20edbb99b814..f2fcadc7a6fe 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1603,6 +1603,7 @@ struct compress_ctx {
- 	size_t clen;			/* valid data length in cbuf */
- 	void *private;			/* payload buffer for specified compression algorithm */
- 	void *private2;			/* extra payload buffer */
-+	struct fsverity_info *vi;	/* verity info if needed */
- };
- 
- /* compress context for write IO path */
-@@ -1658,7 +1659,7 @@ struct decompress_io_ctx {
- 	refcount_t refcnt;
- 
- 	bool failed;			/* IO error occurred before decompression? */
--	bool need_verity;		/* need fs-verity verification after decompression? */
-+	struct fsverity_info *vi;	/* fs-verity context if needed */
- 	unsigned char compress_algorithm;	/* backup algorithm type */
- 	void *private;			/* payload buffer for specified decompression algorithm */
- 	void *private2;			/* extra payload buffer */
-@@ -4886,12 +4887,6 @@ static inline bool f2fs_allow_multi_device_dio(struct f2fs_sb_info *sbi,
- 	return sbi->aligned_blksize;
+ 		/* Update page status and unlock. */
+-		end_folio_read(folio, uptodate, start, fi.length);
++		end_folio_read(vi, folio, uptodate, start, fi.length);
+ 	}
+ 	bio_put(bio);
  }
+@@ -1003,6 +1007,7 @@ static int btrfs_do_readpage(struct folio *folio, struct extent_map **em_cached,
+ 	struct extent_map *em;
+ 	int ret = 0;
+ 	const size_t blocksize = fs_info->sectorsize;
++	struct fsverity_info *vi = NULL;
  
--static inline bool f2fs_need_verity(const struct inode *inode, pgoff_t idx)
--{
--	return fsverity_active(inode) &&
--	       idx < DIV_ROUND_UP(inode->i_size, PAGE_SIZE);
--}
--
- #ifdef CONFIG_F2FS_FAULT_INJECTION
- extern int f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned long rate,
- 					unsigned long type, enum fault_option fo);
+ 	ret = set_folio_extent_mapped(folio);
+ 	if (ret < 0) {
+@@ -1010,6 +1015,9 @@ static int btrfs_do_readpage(struct folio *folio, struct extent_map **em_cached,
+ 		return ret;
+ 	}
+ 
++	if (start < last_byte)
++		vi = fsverity_get_info(inode);
++
+ 	if (folio_contains(folio, last_byte >> PAGE_SHIFT)) {
+ 		size_t zero_offset = offset_in_folio(folio, last_byte);
+ 
+@@ -1030,16 +1038,16 @@ static int btrfs_do_readpage(struct folio *folio, struct extent_map **em_cached,
+ 		ASSERT(IS_ALIGNED(cur, fs_info->sectorsize));
+ 		if (cur >= last_byte) {
+ 			folio_zero_range(folio, pg_offset, end - cur + 1);
+-			end_folio_read(folio, true, cur, end - cur + 1);
++			end_folio_read(vi, folio, true, cur, end - cur + 1);
+ 			break;
+ 		}
+ 		if (btrfs_folio_test_uptodate(fs_info, folio, cur, blocksize)) {
+-			end_folio_read(folio, true, cur, blocksize);
++			end_folio_read(vi, folio, true, cur, blocksize);
+ 			continue;
+ 		}
+ 		em = get_extent_map(BTRFS_I(inode), folio, cur, end - cur + 1, em_cached);
+ 		if (IS_ERR(em)) {
+-			end_folio_read(folio, false, cur, end + 1 - cur);
++			end_folio_read(vi, folio, false, cur, end + 1 - cur);
+ 			return PTR_ERR(em);
+ 		}
+ 		extent_offset = cur - em->start;
+@@ -1116,12 +1124,12 @@ static int btrfs_do_readpage(struct folio *folio, struct extent_map **em_cached,
+ 		/* we've found a hole, just zero and go on */
+ 		if (block_start == EXTENT_MAP_HOLE) {
+ 			folio_zero_range(folio, pg_offset, blocksize);
+-			end_folio_read(folio, true, cur, blocksize);
++			end_folio_read(vi, folio, true, cur, blocksize);
+ 			continue;
+ 		}
+ 		/* the get_extent function already copied into the folio */
+ 		if (block_start == EXTENT_MAP_INLINE) {
+-			end_folio_read(folio, true, cur, blocksize);
++			end_folio_read(vi, folio, true, cur, blocksize);
+ 			continue;
+ 		}
+ 
 -- 
 2.47.3
 
