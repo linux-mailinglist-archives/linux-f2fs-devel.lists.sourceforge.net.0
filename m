@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cMNBIZrudmkHZAEAu9opvQ
+	id aKbbMwnxdmmcZQEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:33:30 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:43:53 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3469883E8D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:33:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A04B83EFF
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:43:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=gYe1y4eQjad6OnwzprH4M4psoRREUswMu5QoK65ka9w=; b=KwmUJEeY0JhOEFiieEqMsYEbHJ
-	XybiSdI9muFjzRoqSGVhICUl1DU2u0nJygWrZFlVB62WORvrqD8wRa4YkT6HnVwFN2M6dXmWsEUNA
-	gOzZIjP2O6e4rq9Rmqr/D0oj85BgFS3ubM53aPvgkhHvZ1swsxfJTksTRRX+JtFmKvhM=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=yk/Q9+np7TS4US9g8qFKu7ZPHizPQrM9y/6BZtiOJs8=; b=BGxDlQ/H925c5Qn0pWqS8TCmyo
+	xe8Ot0iVo8I2hJ1rmamuedw4LVnE0xLry/yqJ91z6TlKKbwSzemnEdeFQ7W5a+0pxY9vhbEwiO4mU
+	rXXuhmV9i4sUEKiCCwkfzcGqt37bYkdqwNTe/GGPvYjuX5mnFKQ6YOsW+wW+k99Mw96w=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vkEI1-0003Ch-Ou;
-	Mon, 26 Jan 2026 04:33:26 +0000
+	id 1vkES3-0001c2-OB;
+	Mon, 26 Jan 2026 04:43:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1vkEI0-0003Cb-4d
+ (envelope-from <hch@lst.de>) id 1vkES2-0001bv-Lm
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 26 Jan 2026 04:33:25 +0000
+ Mon, 26 Jan 2026 04:43:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KAScXC0xia46gtLJzlrSkqzXTVu6cXYPrxzb2fg1qZI=; b=ihMwMjWk985T9oaV0KqeAbtJ3v
- Z8b8hvVCAmCCr4Vamft3qKHWjd8wOIiEWHsQohtILbyj1LC/Mou4x3keOfwvCPWL3ko5NAbSRC7NV
- /EP8LZScbkfi2yeFJu+mLpQRHQQzDtYWeJsSgi8H3lSXFIvgf4lZZjzHsxpzwzZMWA9k=;
+ bh=YZVqsb2Gp776bzJOjjC5rEG5Ale6hdukmyaDkJMapzc=; b=SPcDMgiTPG2Spzer8lmeUIzuGt
+ 6GgjPOl1jXiNShiXc8upGwwmoo0uTl/KM+MctzO2k8GfIkygtsH79MXiKREdhlnx6MDRIJReVw922
+ rXoqhAW/180fwMBlRNF6zC6e+h9uQJ3fz5RCpLlw6NcXKU1YQ3aHe1LCDscQnHHCzMPI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,42 +45,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KAScXC0xia46gtLJzlrSkqzXTVu6cXYPrxzb2fg1qZI=; b=O3U/NOOnMRXVT8E2G1HdBr3W9S
- AfXDEzZoejfRJnCu2mqkvYSJIjtSbuv4lxwMA+K1INcT1dcRLIobeFG8GYLjyPToguO1ql2FdpSKd
- vzk0Jkt9+XEMZ5gSlorBvzSiCl7drM4WeSawM3HW8pnrn0ez51Yi7rZMvbv+XZtZ4sM4=;
+ bh=YZVqsb2Gp776bzJOjjC5rEG5Ale6hdukmyaDkJMapzc=; b=f9NarVs5wOmtJGAhrmxCrJuQKO
+ R10gVX/6dx88z9795MnFQI6GVJtgMWXhCC/8hijfNdmCnu5pkP8GbOw01932mMt25O/uf30Q/TKoD
+ khrzwyAXATJq/YqYKgdyrkdrcH5VnLMgwajiB57SOH/xYyS5JgWmq089sjGNBiunwa0w=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vkEI0-00012r-Cq for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 26 Jan 2026 04:33:24 +0000
+ id 1vkES2-0001U0-6c for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 26 Jan 2026 04:43:46 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id D3E6F227A88; Mon, 26 Jan 2026 05:33:11 +0100 (CET)
-Date: Mon, 26 Jan 2026 05:33:11 +0100
+ id 938F3227A88; Mon, 26 Jan 2026 05:43:33 +0100 (CET)
+Date: Mon, 26 Jan 2026 05:43:33 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20260126043311.GC30803@lst.de>
+Message-ID: <20260126044333.GD30803@lst.de>
 References: <20260122082214.452153-1-hch@lst.de>
- <20260122082214.452153-7-hch@lst.de> <20260124211956.GF2762@quark>
+ <20260122082214.452153-12-hch@lst.de> <20260125013104.GA2255@sol>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260124211956.GF2762@quark>
+In-Reply-To: <20260125013104.GA2255@sol>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sat, Jan 24, 2026 at 01:19:56PM -0800, Eric Biggers wrote:
- > This patch introduces another bisection hazard by adding calls to >
- fsverity_info_addr()
- when CONFIG_FS_VERITY=n. fsverity_info_addr() h [...] 
+ Content preview:  On Sat, Jan 24, 2026 at 05:31:04PM -0800, Eric Biggers wrote:
+ > > + found = rhashtable_lookup_get_insert_fast(&fsverity_info_hash, > >
+ + &vi->rhash_head, fsverity_info_hash_params); > > + if (found) { [...] 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1vkEI0-00012r-Cq
-Subject: Re: [f2fs-dev] [PATCH 06/11] fsverity: push out fsverity_info lookup
+X-Headers-End: 1vkES2-0001U0-6c
+Subject: Re: [f2fs-dev] [PATCH 11/11] fsverity: use a hashtable to find the
+ fsverity_info
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,72 +105,74 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.61 / 15.00];
+	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:fsverity@lists.linux.dev,m:brauner@kernel.org,m:tytso@mit.edu,m:aalbersh@redhat.com,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fsdevel@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:jaegeuk@kernel.org,m:dsterba@suse.com,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	DKIM_MIXED(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	NEURAL_HAM(-0.00)[-1.000];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lst.de:mid]
-X-Rspamd-Queue-Id: 3469883E8D
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 6A04B83EFF
 X-Rspamd-Action: no action
 
-On Sat, Jan 24, 2026 at 01:19:56PM -0800, Eric Biggers wrote:
-> This patch introduces another bisection hazard by adding calls to
-> fsverity_info_addr() when CONFIG_FS_VERITY=n.  fsverity_info_addr() has
-> a definition only when CONFIG_FS_VERITY=y.
+On Sat, Jan 24, 2026 at 05:31:04PM -0800, Eric Biggers wrote:
+> > +	found = rhashtable_lookup_get_insert_fast(&fsverity_info_hash,
+> > +			&vi->rhash_head, fsverity_info_hash_params);
+> > +	if (found) {
+> > +		fsverity_free_info(vi);
+> > +		if (IS_ERR(found))
+> > +			err = PTR_ERR(found);
+> > +	}
 > 
-> Maybe temporarily add a CONFIG_FS_VERITY=n stub for fsverity_info_addr()
-> that returns NULL, and also ensure that it's dereferenced only when it's
-> known that fsverity verification is needed.  Most of the call sites look
-> okay, but the second one in ext4_mpage_readpages() needs to be fixed.
+> Is there any explanation for why it's safe to use the *_fast variants of
+> these functions?
 
-I've added an external declaration for fsverity_info_addr in the
-CONFIG_FS_VERITY=n so that the linker catches unguarded references.  It 
-caught two, which I fixed by adding IS_ENABLED checks that also reduce
-the code size for non-fsverity builds.
+_fast is the default mode of operation of rhashtable, I have no idea
+why the authors came up with the naming.  The _fast postfixed versions
+just add the required RCU critical sections over ther otherwise fully
+internally locked rhashtable operations.  I've expanded the commit
+message a bit to make this hopefully more clear.
 
-> > -	fsverity_init_verification_context(&ctx, inode);
-> > +	fsverity_init_verification_context(&ctx, inode, vi);
+> This looks incorrect.  The memory barrier is needed after reading the
+> flag, not before.  (See how smp_load_acquire() works.)
 > 
-> Note that fsverity_info has a back-pointer to the inode.  So,
-> fsverity_init_verification_context() could just take the vi and set
-> ctx->inode to vi->inode.
+> Also, it's needed only for verity inodes.
 > 
-> Then it wouldn't be necessary to get the inode from
-> bio_first_folio_all(bio)->mapping->host (in fsverity_verify_bio()) or
-> folio->mapping->host (in fsverity_verify_blocks()).
-> Similarly in fsverity_readahead() too.
+> Maybe do:
 > 
-> (It might make sense to handle this part as a separate patch.)
+> 	if (IS_ENABLED(CONFIG_FS_VERITY) && IS_VERITY(inode)) {
+> 		/*
+>                  * This pairs with the try_cmpxchg in set_mask_bits()
+>                  * used to set the S_VERITY bit in i_flags.
+> 		 */
+> 		smp_mb();
+> 		return true;
+> 	}
+> 	return false;
 
-To be able to nicely used this vi->inode needs to lose the const
-qualifier.  I've done that, and also added a const qualifiers
-to ctx->vi while at it in prep patches.  With that just using
-vi->inode in this patch is easy enough.
+Thanks, I've fixed this up.
 
 
 
