@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KDx0J0vzdmkzZgEAu9opvQ
+	id yB4VBFvzdmkzZgEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:53:31 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:53:47 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15DE084000
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:53:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5ED7A84026
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 26 Jan 2026 05:53:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=wXTRRh5MdHvaWQpLr1EgNjAM3V3KBeqYsgT8QONkmao=; b=PQMm2zZuuDdSvr9D416TuM1JMH
-	z5oPMg2cp4C4M1tnE1MCGhO94zdUTz+KSoYBLfuvUtra06s6x4dIvG1DHb+fzbwlWQyWVvfn4y4Af
-	JYx2/sC1WbCgpIesWh176pYgnfHCNsI1V3Po1uqpxkTOGG8b7taa7mw59lapWnG+sL6c=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=tFxtfe/lm/vWGDOkFxoq+U8mQmQ2wvx17ks6E8hx2iA=; b=Mb6oqX2yicv3cqDXsjnL8KMIP1
+	c47YjBi3fe6vVX+o9T3wootGtDf1xQlIolsMfHWmyXYfmBjavap2ITm/c1t3ZQuzWpyPYozfHW+xO
+	JXuooaM69UxBHvmciOFLsYU/vrhnolRJIqokHu8yCFC0i57rs8H9ao74VpuL7E9vg5Sg=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vkEbR-0004DP-PL;
-	Mon, 26 Jan 2026 04:53:29 +0000
+	id 1vkEbf-0001uh-T8;
+	Mon, 26 Jan 2026 04:53:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+12afb9bb7a5ef89fcdd0+8191+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vkEbQ-0004DD-EP for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 26 Jan 2026 04:53:28 +0000
+ id 1vkEbd-0001uC-Pe for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 26 Jan 2026 04:53:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Baqfeh51OjRK6HV70ZlkvyjNBgHNFVZMHUq9K/EvHmE=; b=AtVBmaCrm+Izs9fGRGU/sKjcoF
- I4ba7a983+5MQQXRWm6VQ4IkRfO8r6W7vpzrNnHXC5fMd8wf+N4/yIDwA4oBFIqKgeILY4zr6V53V
- Lj9k7oH6shXV1NHzg1nwBahg5f6vzw1SpyF/zxAjjIFGAxH1WY/1SwvuXxqm788KWEcs=;
+ bh=kIAaZpZSlzMCC5Jcx0MQtMp7QgYjStI/1PvVB/7GYUs=; b=RNSFegjnXVTyg30PWDTkRXytyb
+ I7nUblKO4N4YjMr+D9ZTE3YJXlPyDd1txRm9s6EhuWL5lVE7/UntTMFLv0VrPbsqNjTeRXC+BQP8v
+ 5FFBxWr2vxooBwkeeqy+1QQoo8XAYoSAfqScpGmGMATKAzMAmrCKgEggYy27NLWfAoxk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,33 +45,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Baqfeh51OjRK6HV70ZlkvyjNBgHNFVZMHUq9K/EvHmE=; b=hp2GeqrGfw3nIPBr3JpHWbcTKK
- OoesRR2JERQd+J7q9ncfUzplNzK6BjYsGcYdsbXNhSmWoGIttgFvX47ym4FpnCLOdCjmwdjE9jUnF
- TDP29jm1WKPpMZAWOFpXAXgynBJO1m+kSIaUgYwuz4GwQitLB/sHV2afnN/BEutvYLkM=;
+ bh=kIAaZpZSlzMCC5Jcx0MQtMp7QgYjStI/1PvVB/7GYUs=; b=ZYe2A1TKcFsX10r4j9+Sxegdbz
+ 7KufJL4zfiURS3yTO8WOUmj+8lAKOlB2zMTjffvF3Y9hGXZcpMfDh836XNsGRsgmsy1MHs2/cNhv8
+ AwuDXIh3rj33gF2lGmuYm5zBhUFr8R8RhvJ5gxJYXrLKBkZxonsCDSsA9WH0tl1IDark=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vkEbP-0001qs-Q6 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 26 Jan 2026 04:53:28 +0000
+ id 1vkEbc-0001rg-8q for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 26 Jan 2026 04:53:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=Baqfeh51OjRK6HV70ZlkvyjNBgHNFVZMHUq9K/EvHmE=; b=36i8DIzCQLF8pmg3reAtEbJ9sG
- wcJTE1jDQYLnsLttdxp10J2byuHQUOP9gMi9jTq5zjQMBiG4KSxECj54nsmbtK9aE/+0Q9U01o+N5
- D5kxWT9EYPA5Vmw50BOPmkcPJX3OhwSefv2ntcAZrc/bCSrWqCQ4+YkjmuyPUdWIDkRD1L1I69nB1
- 2E2Di2YB0DnVI5CTpC9cgYtn5WeGmJKSmY29k3CBUeykc+T+3Q/JvRAe4BTYAqqoi7PvHHEq+6Zcv
- PiQbjjJpKZbTb1p5kmfNOWeck1HbO9wqdqsBU61SJC2LfOUJhrJRLBwY9ULYZ0Ae1cMnm/qW9qcaG
- 68OVsN7A==;
+ bh=kIAaZpZSlzMCC5Jcx0MQtMp7QgYjStI/1PvVB/7GYUs=; b=CYZu4GflHYC0/k/eL9VlAiPsBw
+ /pOGdtSPtOtb1ezBTMkMiE/nmZLHG0BNRkXPXXvDgv7HwXEv7PYiQ3GGHgHF/XlJ2hRhdoukIPJJc
+ PbsUyJem1pdLseF37Wfy97e4NWisI62PIZn7uWMzXoKChtpJKVueqKKIXbq/kioAL3ZDLc53zVN38
+ vcAzbhPzoG1uHvFmhrAiNnFuRJdPW+kJCLJWEAWlIfpIc3sU7N2GdZUqNlafMEQoG/XibV7U0cb0E
+ l+hNFLtc9rzmg062TS+2qqXVv67x0DC8yNArhN6hOhRGLmfI/lrk9efPdT5Toz8hGKQPojpO3Pzv9
+ tbjhzEfw==;
 Received: from
  2a02-8389-2341-5b80-d601-7564-c2e0-491c.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:d601:7564:c2e0:491c] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vkEbH-0000000BuT6-3zvi; Mon, 26 Jan 2026 04:53:20 +0000
+ id 1vkEbP-0000000BuTR-19xP; Mon, 26 Jan 2026 04:53:27 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Date: Mon, 26 Jan 2026 05:50:56 +0100
-Message-ID: <20260126045212.1381843-11-hch@lst.de>
+Date: Mon, 26 Jan 2026 05:50:57 +0100
+Message-ID: <20260126045212.1381843-12-hch@lst.de>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260126045212.1381843-1-hch@lst.de>
 References: <20260126045212.1381843-1-hch@lst.de>
@@ -80,29 +80,24 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: A lot of file system code expects a non-const inode pointer.
- Dropping the const qualifier here allows using the inode pointer in
- verify_data_block
- and prepares for further argument reductions. Signed-off-by: Christoph Hellwig
- <hch@lst.de> --- fs/verity/fsverity_private.h | 4 ++-- fs/verity/open.c |
- 2 +- fs/verity/verify.c | 6 +++--- 3 files changed, 6 insertions(+),
- 6 deletions(-)
+ Content preview: Pass a struct fsverity_info to the verification and readahead
+ helpers, and push the lookup into the callers. Right now this is a very dumb
+ almost mechanic move that open codes a lot of fsverity_info_a [...] 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1vkEbP-0001qs-Q6
-Subject: [f2fs-dev] [PATCH 10/16] fsverity: deconstify the inode pointer in
- struct fsverity_info
+X-Headers-End: 1vkEbc-0001rg-8q
+Subject: [f2fs-dev] [PATCH 11/16] fsverity: push out fsverity_info lookup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,12 +110,12 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: fsverity@lists.linux.dev, Christian Brauner <brauner@kernel.org>,
- Theodore Ts'o <tytso@mit.edu>, Andrey Albershteyn <aalbersh@redhat.com>,
- Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
- linux-fsdevel@vger.kernel.org, Al Viro <viro@zeniv.linux.org.uk>,
- Jaegeuk Kim <jaegeuk@kernel.org>, David Sterba <dsterba@suse.com>,
- Jan Kara <jack@suse.cz>, linux-ext4@vger.kernel.org,
- linux-btrfs@vger.kernel.org
+ Theodore Ts'o <tytso@mit.edu>, "Darrick J. Wong" <djwong@kernel.org>,
+ Andrey Albershteyn <aalbersh@redhat.com>, Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ Al Viro <viro@zeniv.linux.org.uk>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ David Sterba <dsterba@suse.com>, Jan Kara <jack@suse.cz>,
+ linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -135,10 +130,10 @@ X-Spamd-Result: default: False [0.39 / 15.00];
 	HAS_LIST_UNSUB(-0.01)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:fsverity@lists.linux.dev,m:brauner@kernel.org,m:tytso@mit.edu,m:aalbersh@redhat.com,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fsdevel@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:jaegeuk@kernel.org,m:dsterba@suse.com,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:fsverity@lists.linux.dev,m:brauner@kernel.org,m:tytso@mit.edu,m:djwong@kernel.org,m:aalbersh@redhat.com,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fsdevel@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:jaegeuk@kernel.org,m:dsterba@suse.com,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
@@ -156,82 +151,330 @@ X-Spamd-Result: default: False [0.39 / 15.00];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:mid,lst.de:email]
-X-Rspamd-Queue-Id: 15DE084000
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,lst.de:mid,lst.de:email]
+X-Rspamd-Queue-Id: 5ED7A84026
 X-Rspamd-Action: no action
 
-A lot of file system code expects a non-const inode pointer.  Dropping
-the const qualifier here allows using the inode pointer in
-verify_data_block and prepares for further argument reductions.
+Pass a struct fsverity_info to the verification and readahead helpers,
+and push the lookup into the callers.  Right now this is a very
+dumb almost mechanic move that open codes a lot of fsverity_info_addr()
+calls int the file systems.  The subsequent patches will clean this up.
+
+This prepares for reducing the number of fsverity_info lookups, which
+will allow to amortize them better when using a more expensive lookup
+method.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
+Acked-by: David Sterba <dsterba@suse.com> [btrfs]
 ---
- fs/verity/fsverity_private.h | 4 ++--
- fs/verity/open.c             | 2 +-
- fs/verity/verify.c           | 6 +++---
- 3 files changed, 6 insertions(+), 6 deletions(-)
+ fs/btrfs/extent_io.c     |  3 ++-
+ fs/buffer.c              |  4 +++-
+ fs/ext4/readpage.c       | 10 +++++++---
+ fs/f2fs/compress.c       |  4 +++-
+ fs/f2fs/data.c           | 15 +++++++++++----
+ fs/verity/verify.c       | 23 ++++++++++++-----------
+ include/linux/fsverity.h | 31 ++++++++++++++++++++++---------
+ 7 files changed, 60 insertions(+), 30 deletions(-)
 
-diff --git a/fs/verity/fsverity_private.h b/fs/verity/fsverity_private.h
-index dd20b138d452..f9f3936b0a89 100644
---- a/fs/verity/fsverity_private.h
-+++ b/fs/verity/fsverity_private.h
-@@ -73,7 +73,7 @@ struct fsverity_info {
- 	struct merkle_tree_params tree_params;
- 	u8 root_hash[FS_VERITY_MAX_DIGEST_SIZE];
- 	u8 file_digest[FS_VERITY_MAX_DIGEST_SIZE];
--	const struct inode *inode;
-+	struct inode *inode;
- 	unsigned long *hash_block_verified;
- };
+diff --git a/fs/btrfs/extent_io.c b/fs/btrfs/extent_io.c
+index a4b74023618d..21430b7d8f27 100644
+--- a/fs/btrfs/extent_io.c
++++ b/fs/btrfs/extent_io.c
+@@ -484,7 +484,8 @@ static bool btrfs_verify_folio(struct folio *folio, u64 start, u32 len)
+ 	    btrfs_folio_test_uptodate(fs_info, folio, start, len) ||
+ 	    start >= i_size_read(folio->mapping->host))
+ 		return true;
+-	return fsverity_verify_folio(folio);
++	return fsverity_verify_folio(*fsverity_info_addr(folio->mapping->host),
++			folio);
+ }
  
-@@ -124,7 +124,7 @@ int fsverity_init_merkle_tree_params(struct merkle_tree_params *params,
- 				     unsigned int log_blocksize,
- 				     const u8 *salt, size_t salt_size);
+ static void end_folio_read(struct folio *folio, bool uptodate, u64 start, u32 len)
+diff --git a/fs/buffer.c b/fs/buffer.c
+index 838c0c571022..3982253b6805 100644
+--- a/fs/buffer.c
++++ b/fs/buffer.c
+@@ -309,9 +309,11 @@ static void verify_bh(struct work_struct *work)
+ 	struct postprocess_bh_ctx *ctx =
+ 		container_of(work, struct postprocess_bh_ctx, work);
+ 	struct buffer_head *bh = ctx->bh;
++	struct inode *inode = bh->b_folio->mapping->host;
+ 	bool valid;
  
--struct fsverity_info *fsverity_create_info(const struct inode *inode,
-+struct fsverity_info *fsverity_create_info(struct inode *inode,
- 					   struct fsverity_descriptor *desc);
+-	valid = fsverity_verify_blocks(bh->b_folio, bh->b_size, bh_offset(bh));
++	valid = fsverity_verify_blocks(*fsverity_info_addr(inode), bh->b_folio,
++				       bh->b_size, bh_offset(bh));
+ 	end_buffer_async_read(bh, valid);
+ 	kfree(ctx);
+ }
+diff --git a/fs/ext4/readpage.c b/fs/ext4/readpage.c
+index e99072c8a619..bf65562da9c2 100644
+--- a/fs/ext4/readpage.c
++++ b/fs/ext4/readpage.c
+@@ -96,6 +96,7 @@ static void verity_work(struct work_struct *work)
+ 	struct bio_post_read_ctx *ctx =
+ 		container_of(work, struct bio_post_read_ctx, work);
+ 	struct bio *bio = ctx->bio;
++	struct inode *inode = bio_first_folio_all(bio)->mapping->host;
  
- void fsverity_set_info(struct inode *inode, struct fsverity_info *vi);
-diff --git a/fs/verity/open.c b/fs/verity/open.c
-index 090cb77326ee..128502cf0a23 100644
---- a/fs/verity/open.c
-+++ b/fs/verity/open.c
-@@ -175,7 +175,7 @@ static void compute_file_digest(const struct fsverity_hash_alg *hash_alg,
-  * appended builtin signature), and check the signature if present.  The
-  * fsverity_descriptor must have already undergone basic validation.
-  */
--struct fsverity_info *fsverity_create_info(const struct inode *inode,
-+struct fsverity_info *fsverity_create_info(struct inode *inode,
- 					   struct fsverity_descriptor *desc)
- {
- 	struct fsverity_info *vi;
+ 	/*
+ 	 * fsverity_verify_bio() may call readahead() again, and although verity
+@@ -108,7 +109,7 @@ static void verity_work(struct work_struct *work)
+ 	mempool_free(ctx, bio_post_read_ctx_pool);
+ 	bio->bi_private = NULL;
+ 
+-	fsverity_verify_bio(bio);
++	fsverity_verify_bio(*fsverity_info_addr(inode), bio);
+ 
+ 	__read_end_io(bio);
+ }
+@@ -245,7 +246,8 @@ int ext4_mpage_readpages(struct inode *inode,
+ 
+ 		if (first_folio) {
+ 			if (ext4_need_verity(inode, folio->index))
+-				fsverity_readahead(folio, nr_pages);
++				fsverity_readahead(*fsverity_info_addr(inode),
++						folio, nr_pages);
+ 			first_folio = false;
+ 		}
+ 
+@@ -337,7 +339,9 @@ int ext4_mpage_readpages(struct inode *inode,
+ 					  folio_size(folio));
+ 			if (first_hole == 0) {
+ 				if (ext4_need_verity(inode, folio->index) &&
+-				    !fsverity_verify_folio(folio))
++				    !fsverity_verify_folio(
++						*fsverity_info_addr(inode),
++						folio))
+ 					goto set_error_page;
+ 				folio_end_read(folio, true);
+ 				continue;
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 40a62f1dee4d..3de4a7e66959 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1814,7 +1814,9 @@ static void f2fs_verify_cluster(struct work_struct *work)
+ 		if (!rpage)
+ 			continue;
+ 
+-		if (fsverity_verify_page(rpage))
++		if (fsverity_verify_page(
++				*fsverity_info_addr(rpage->mapping->host),
++				rpage))
+ 			SetPageUptodate(rpage);
+ 		else
+ 			ClearPageUptodate(rpage);
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 49bdc7e771f2..bca1e34d327a 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -185,15 +185,19 @@ static void f2fs_verify_bio(struct work_struct *work)
+ 
+ 		bio_for_each_folio_all(fi, bio) {
+ 			struct folio *folio = fi.folio;
++			struct fsverity_info *vi =
++				*fsverity_info_addr(folio->mapping->host);
+ 
+ 			if (!f2fs_is_compressed_page(folio) &&
+-			    !fsverity_verify_page(&folio->page)) {
++			    !fsverity_verify_page(vi, &folio->page)) {
+ 				bio->bi_status = BLK_STS_IOERR;
+ 				break;
+ 			}
+ 		}
+ 	} else {
+-		fsverity_verify_bio(bio);
++		struct inode *inode = bio_first_folio_all(bio)->mapping->host;
++
++		fsverity_verify_bio(*fsverity_info_addr(inode), bio);
+ 	}
+ 
+ 	f2fs_finish_read_bio(bio, true);
+@@ -2121,7 +2125,9 @@ static int f2fs_read_single_page(struct inode *inode, struct folio *folio,
+ zero_out:
+ 		folio_zero_segment(folio, 0, folio_size(folio));
+ 		if (f2fs_need_verity(inode, index) &&
+-		    !fsverity_verify_folio(folio)) {
++		    !fsverity_verify_folio(
++				*fsverity_info_addr(folio->mapping->host),
++				folio)) {
+ 			ret = -EIO;
+ 			goto out;
+ 		}
+@@ -2386,7 +2392,8 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ 
+ 		if (first_folio) {
+ 			if (f2fs_need_verity(inode, folio->index))
+-				fsverity_readahead(folio, nr_pages);
++				fsverity_readahead(*fsverity_info_addr(inode),
++						folio, nr_pages);
+ 			first_folio = false;
+ 		}
+ 
 diff --git a/fs/verity/verify.c b/fs/verity/verify.c
-index 881af159e705..55f1078c645a 100644
+index 55f1078c645a..57aea5a2a0ee 100644
 --- a/fs/verity/verify.c
 +++ b/fs/verity/verify.c
-@@ -156,10 +156,10 @@ static bool is_hash_block_verified(const struct fsverity_info *vi,
-  *
-  * Return: %true if the data block is valid, else %false.
-  */
--static bool verify_data_block(struct inode *inode,
--			      const struct fsverity_info *vi,
-+static bool verify_data_block(const struct fsverity_info *vi,
- 			      const struct fsverity_pending_block *dblock)
- {
-+	struct inode *inode = vi->inode;
- 	const u64 data_pos = dblock->pos;
- 	const struct merkle_tree_params *params = &vi->tree_params;
- 	const unsigned int hsize = params->digest_size;
-@@ -362,7 +362,7 @@ fsverity_verify_pending_blocks(struct fsverity_verification_context *ctx)
- 	}
+@@ -39,6 +39,7 @@ static struct workqueue_struct *fsverity_read_workqueue;
  
- 	for (i = 0; i < ctx->num_pending; i++) {
--		if (!verify_data_block(ctx->inode, vi, &ctx->pending_blocks[i]))
-+		if (!verify_data_block(vi, &ctx->pending_blocks[i]))
- 			return false;
- 	}
- 	fsverity_clear_pending_blocks(ctx);
+ /**
+  * fsverity_readahead() - kick off readahead on fsverity hashes
++ * @vi:			fsverity_info for the inode to be read
+  * @folio:		first file data folio that is being read
+  * @nr_pages:		number of file data pages to be read
+  *
+@@ -49,10 +50,10 @@ static struct workqueue_struct *fsverity_read_workqueue;
+  * ensure that the hashes are already cached on completion of the file data
+  * read if possible.
+  */
+-void fsverity_readahead(struct folio *folio, unsigned long nr_pages)
++void fsverity_readahead(struct fsverity_info *vi, struct folio *folio,
++			unsigned long nr_pages)
+ {
+ 	struct inode *inode = folio->mapping->host;
+-	const struct fsverity_info *vi = *fsverity_info_addr(inode);
+ 	const struct merkle_tree_params *params = &vi->tree_params;
+ 	u64 start_hidx = (u64)folio->index << params->log_blocks_per_page;
+ 	u64 end_hidx = (((u64)folio->index + nr_pages) <<
+@@ -314,11 +315,9 @@ static bool verify_data_block(const struct fsverity_info *vi,
+ 
+ static void
+ fsverity_init_verification_context(struct fsverity_verification_context *ctx,
+-				   struct inode *inode)
++				   const struct fsverity_info *vi)
+ {
+-	const struct fsverity_info *vi = *fsverity_info_addr(inode);
+-
+-	ctx->inode = inode;
++	ctx->inode = vi->inode;
+ 	ctx->vi = vi;
+ 	ctx->num_pending = 0;
+ 	if (vi->tree_params.hash_alg->algo_id == HASH_ALGO_SHA256 &&
+@@ -398,6 +397,7 @@ static bool fsverity_add_data_blocks(struct fsverity_verification_context *ctx,
+ 
+ /**
+  * fsverity_verify_blocks() - verify data in a folio
++ * @vi: fsverity_info for the inode to be read
+  * @folio: the folio containing the data to verify
+  * @len: the length of the data to verify in the folio
+  * @offset: the offset of the data to verify in the folio
+@@ -408,11 +408,12 @@ static bool fsverity_add_data_blocks(struct fsverity_verification_context *ctx,
+  *
+  * Return: %true if the data is valid, else %false.
+  */
+-bool fsverity_verify_blocks(struct folio *folio, size_t len, size_t offset)
++bool fsverity_verify_blocks(struct fsverity_info *vi, struct folio *folio,
++			    size_t len, size_t offset)
+ {
+ 	struct fsverity_verification_context ctx;
+ 
+-	fsverity_init_verification_context(&ctx, folio->mapping->host);
++	fsverity_init_verification_context(&ctx, vi);
+ 
+ 	if (fsverity_add_data_blocks(&ctx, folio, len, offset) &&
+ 	    fsverity_verify_pending_blocks(&ctx))
+@@ -425,6 +426,7 @@ EXPORT_SYMBOL_GPL(fsverity_verify_blocks);
+ #ifdef CONFIG_BLOCK
+ /**
+  * fsverity_verify_bio() - verify a 'read' bio that has just completed
++ * @vi: fsverity_info for the inode to be read
+  * @bio: the bio to verify
+  *
+  * Verify the bio's data against the file's Merkle tree.  All bio data segments
+@@ -437,13 +439,12 @@ EXPORT_SYMBOL_GPL(fsverity_verify_blocks);
+  * filesystems) must instead call fsverity_verify_page() directly on each page.
+  * All filesystems must also call fsverity_verify_page() on holes.
+  */
+-void fsverity_verify_bio(struct bio *bio)
++void fsverity_verify_bio(struct fsverity_info *vi, struct bio *bio)
+ {
+-	struct inode *inode = bio_first_folio_all(bio)->mapping->host;
+ 	struct fsverity_verification_context ctx;
+ 	struct folio_iter fi;
+ 
+-	fsverity_init_verification_context(&ctx, inode);
++	fsverity_init_verification_context(&ctx, vi);
+ 
+ 	bio_for_each_folio_all(fi, bio) {
+ 		if (!fsverity_add_data_blocks(&ctx, fi.folio, fi.length,
+diff --git a/include/linux/fsverity.h b/include/linux/fsverity.h
+index bade511cf3aa..1d70b270e90a 100644
+--- a/include/linux/fsverity.h
++++ b/include/linux/fsverity.h
+@@ -197,12 +197,20 @@ int fsverity_ioctl_read_metadata(struct file *filp, const void __user *uarg);
+ 
+ /* verify.c */
+ 
+-bool fsverity_verify_blocks(struct folio *folio, size_t len, size_t offset);
+-void fsverity_verify_bio(struct bio *bio);
++bool fsverity_verify_blocks(struct fsverity_info *vi, struct folio *folio,
++			    size_t len, size_t offset);
++void fsverity_verify_bio(struct fsverity_info *vi, struct bio *bio);
+ void fsverity_enqueue_verify_work(struct work_struct *work);
+ 
+ #else /* !CONFIG_FS_VERITY */
+ 
++/*
++ * Provide a stub to allow code using this to compile.  All callsites should be
++ * guarded by compiler dead code elimination, and this forces a link error if
++ * not.
++ */
++struct fsverity_info **fsverity_info_addr(const struct inode *inode);
++
+ static inline struct fsverity_info *fsverity_get_info(const struct inode *inode)
+ {
+ 	return NULL;
+@@ -251,14 +259,16 @@ static inline int fsverity_ioctl_read_metadata(struct file *filp,
+ 
+ /* verify.c */
+ 
+-static inline bool fsverity_verify_blocks(struct folio *folio, size_t len,
++static inline bool fsverity_verify_blocks(struct fsverity_info *vi,
++					  struct folio *folio, size_t len,
+ 					  size_t offset)
+ {
+ 	WARN_ON_ONCE(1);
+ 	return false;
+ }
+ 
+-static inline void fsverity_verify_bio(struct bio *bio)
++static inline void fsverity_verify_bio(struct fsverity_info *vi,
++				       struct bio *bio)
+ {
+ 	WARN_ON_ONCE(1);
+ }
+@@ -270,14 +280,16 @@ static inline void fsverity_enqueue_verify_work(struct work_struct *work)
+ 
+ #endif	/* !CONFIG_FS_VERITY */
+ 
+-static inline bool fsverity_verify_folio(struct folio *folio)
++static inline bool fsverity_verify_folio(struct fsverity_info *vi,
++					 struct folio *folio)
+ {
+-	return fsverity_verify_blocks(folio, folio_size(folio), 0);
++	return fsverity_verify_blocks(vi, folio, folio_size(folio), 0);
+ }
+ 
+-static inline bool fsverity_verify_page(struct page *page)
++static inline bool fsverity_verify_page(struct fsverity_info *vi,
++					struct page *page)
+ {
+-	return fsverity_verify_blocks(page_folio(page), PAGE_SIZE, 0);
++	return fsverity_verify_blocks(vi, page_folio(page), PAGE_SIZE, 0);
+ }
+ 
+ /**
+@@ -319,7 +331,8 @@ static inline int fsverity_file_open(struct inode *inode, struct file *filp)
+ }
+ 
+ void fsverity_cleanup_inode(struct inode *inode);
+-void fsverity_readahead(struct folio *folio, unsigned long nr_pages);
++void fsverity_readahead(struct fsverity_info *vi, struct folio *folio,
++		unsigned long nr_pages);
+ 
+ struct page *generic_read_merkle_tree_page(struct inode *inode, pgoff_t index);
+ void generic_readahead_merkle_tree(struct inode *inode, pgoff_t index,
 -- 
 2.47.3
 
