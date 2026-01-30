@@ -2,88 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6Mh1KfZHfGkSLwIAu9opvQ
+	id GKZeOGxofWk4SAIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 30 Jan 2026 06:56:06 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 31 Jan 2026 03:26:52 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E51D0B783B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 30 Jan 2026 06:56:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18A66C04A6
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 31 Jan 2026 03:26:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=injBlWUsZFjUM0//RYJ+uaBWM6Ibg17xrkWi1tYDJ0Y=; b=gVOSKl3QKBkD9qyxAhxpfxZ2vD
-	b9+in26Seb1jPRDUhm/OTZ+/zjHVfT51ohAxZdWwcdsmnnzf58RV7xl14Ar+JBjXXpzX+MzSf9pOJ
-	Fv1qm+s0o/fN+c+rvXF2hsy0wc1DonauuuQD/+yQdn6Dj9fGeh466dQaHNTQE5GEIyGU=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=4D7OqcExzFQ29j9k/rIHZal7aOaYN0tafiTIddRQYmY=; b=C9NDNru3C8ArJCFDIO3ZrjCFVu
+	6gZ8CGs/lqamzoeejSfTPysGcSz54fh/wCuTfUXVZB1xcJ1EMMlHGd3BZba6vxPi2NZdqBNbqhjTe
+	f/AtnQrnILayUaxcRJsgV/a20BazagNPaxxyVhy3IOW4EKoSOaYoJ2jvfRo5UivWPdGU=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vlhTx-0002mH-Oy;
-	Fri, 30 Jan 2026 05:55:50 +0000
+	id 1vm0h9-0000tB-OY;
+	Sat, 31 Jan 2026 02:26:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1vlhTw-0002m6-Tl
+ (envelope-from <chao@kernel.org>) id 1vm0h8-0000t5-Pm
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 30 Jan 2026 05:55:49 +0000
+ Sat, 31 Jan 2026 02:26:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xknPMXANQugp2pyenTKzz5Q4Vhpi6GMGorWnu0Wyrv4=; b=ZvVvlQ78l+Ur1rDOX+2tMTw8Yc
- 3oMG4XSeczTX7wW99yJBkz9fLMHrnGPqJ2sseKzbi2yuC1X+LH4RrbIfgpld4ENoPiHWITtY2ogqx
- bn6wQOEAS7j/GN8YJ0nEJfu6EDfnBNTbKuxDVX+WHt6/754Ao4rmi3t4XPz4Shu4nDJk=;
+ bh=9ldYNHHj6TlZlKG56cHBP3A2eXrXwFLfV69uuzQBp/4=; b=etKZ/p/KDBZiphWC/wfHHQCES+
+ slJLVbZsbOqx7AO80vbA/oLbAejMfv3hYl89gVRbuYV5maJQF2yHiKR/GKJ973mRdVqCPLvDFMNuF
+ yF2L19wo67gjappMx66qHhgCh0dye1X3XyNxJkgoEi+l7izaaS1Eusu8tYGdHRAv6aNY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=xknPMXANQugp2pyenTKzz5Q4Vhpi6GMGorWnu0Wyrv4=; b=lMSxb0Bo6eeLVr9NI9iNFGCjqk
- 7JsTExIY5+LEzMiAFXiQlKJhvf/Aigwf9vZJfRH41BpAR2iZdhzbAEDFg0/uz3conTwwRsVN+9BOf
- DE63sWsLPqiQa9qrCYwcf1TBs8+BfeLqcMAbAqq5FXKJgnaUUDOCYQY9b3EDDmdfCPq4=;
-Received: from verein.lst.de ([213.95.11.211])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=9ldYNHHj6TlZlKG56cHBP3A2eXrXwFLfV69uuzQBp/4=; b=K
+ XBhcD30ILjuSCGPYuFL1QbFEdBBorgF5oAKlnz7wxURsvSf9vglWBs+VdL1eXgDAJXVke+rakUFqv
+ UWqjWY401vYO/U4MGp9f1ty7qrDYdjFVuytAciljk5PkhrclrVlUC7GgtuwrOu9pQLc/i3zcVPIu2
+ wulLrCS5Sr3FRMI8=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vlhTx-00022h-2L for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 30 Jan 2026 05:55:49 +0000
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 6D5F568AFE; Fri, 30 Jan 2026 06:55:41 +0100 (CET)
-Date: Fri, 30 Jan 2026 06:55:41 +0100
-From: Christoph Hellwig <hch@lst.de>
-To: "Darrick J. Wong" <djwong@kernel.org>
-Message-ID: <20260130055541.GC622@lst.de>
-References: <20260128152630.627409-1-hch@lst.de>
- <20260128152630.627409-9-hch@lst.de> <20260128225602.GB2024@quark>
- <20260128232213.GJ5900@frogsfrogsfrogs>
+ id 1vm0h7-0001tc-RO for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 31 Jan 2026 02:26:42 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 5C84140BD5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sat, 31 Jan 2026 02:26:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D5A6C4CEF7;
+ Sat, 31 Jan 2026 02:26:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1769826391;
+ bh=Uv+a6I66lHaFbYAf2WUikV5LwVvUapVVftUM9J/T8J0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=m/X3dpokhcd3zlhJRqANdCcGalyAlT0LLyoASUKcAaeG2sZmWVDZLQ3ec5bCp8LKk
+ JpahTpdLGzNzzHTGpWCIA6cXT0LLrq5yn+rDX0rHWdCR+jSquLc/yJHcKk1uWYcmKo
+ 9kqUjX+aFrplXOKd1Km9TN6KIHgfKOyMIZycMDgBBNl88sWsi617eNJuSTFBNx4dBF
+ kOfPapHTBUyOoslKkiQPhTVgihK0RmxHjRsupkBfc6FqLhdYABAJ+f/WXwzr2k4Te9
+ 2vgNI+nsSxRg/E/6g7oo7vHsFwcanye27aFuoGhTqYXLGeA8tr8Agy5eh4E9xRUQN8
+ 8s73/MoMh6bWA==
+To: jaegeuk@kernel.org
+Date: Fri, 30 Jan 2026 21:28:08 +0800
+Message-Id: <20260130132809.59707-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260128232213.GJ5900@frogsfrogsfrogs>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: 0.6 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jan 28, 2026 at 03:22:13PM -0800, Darrick J. Wong
- wrote: > > Unfortunately,
- this patch causes recursive down_read() of > > address_space::invalidate_lock.
- How was this meant to work? > > Usual [...] 
- Content analysis details:   (0.0 points, 5.0 required)
+ Content preview:  If userspace thread has held f2fs rw semaphore, due to its
+ low priority, it could be runnable or preempted state for long time, during
+ the time, it will block high priority thread which is trying to g [...] 
+ Content analysis details:   (0.6 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 T_FUZZY_SPRM           BODY: No description available.
-X-Headers-End: 1vlhTx-00022h-2L
-Subject: Re: [f2fs-dev] [PATCH 08/15] fsverity: kick off hash readahead at
- data I/O submission time
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.8 DATE_IN_PAST_12_24     Date: is 12 to 24 hours before Received: date
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1vm0h7-0001tc-RO
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: fix lock priority inversion issue
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,75 +109,337 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: fsverity@lists.linux.dev, Christian Brauner <brauner@kernel.org>,
- Jan Kara <jack@suse.cz>, Andrey Albershteyn <aalbersh@redhat.com>,
- Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
- Eric Biggers <ebiggers@kernel.org>, linux-fsdevel@vger.kernel.org,
- Al Viro <viro@zeniv.linux.org.uk>, Jaegeuk Kim <jaegeuk@kernel.org>,
- David Sterba <dsterba@suse.com>, Theodore Ts'o <tytso@mit.edu>,
- linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>,
- linux-btrfs@vger.kernel.org
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.61 / 15.00];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+X-Spamd-Result: default: False [-7.21 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	MID_RHS_MATCH_TO(1.00)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:djwong@kernel.org,m:fsverity@lists.linux.dev,m:brauner@kernel.org,m:jack@suse.cz,m:aalbersh@redhat.com,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:ebiggers@kernel.org,m:linux-fsdevel@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:jaegeuk@kernel.org,m:dsterba@suse.com,m:tytso@mit.edu,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
-	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	RCPT_COUNT_TWELVE(0.00)[16];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FROM_HAS_DN(0.00)[];
 	DKIM_MIXED(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	TO_DN_NONE(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	HAS_REPLYTO(0.00)[chao@kernel.org];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:mid,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
-X-Rspamd-Queue-Id: E51D0B783B
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
+X-Rspamd-Queue-Id: 18A66C04A6
 X-Rspamd-Action: no action
 
-On Wed, Jan 28, 2026 at 03:22:13PM -0800, Darrick J. Wong wrote:
-> > Unfortunately, this patch causes recursive down_read() of
-> > address_space::invalidate_lock.  How was this meant to work?
-> 
-> Usually the filesystem calls filemap_invalidate_lock{,_shared} if it
-> needs to coordinate truncate vs. page removal (i.e. fallocate hole
-> punch).  That said, there are a few places where the pagecache itself
-> will take that lock too...
+If userspace thread has held f2fs rw semaphore, due to its low priority,
+it could be runnable or preempted state for long time, during the time,
+it will block high priority thread which is trying to grab the same rw
+semaphore, e.g. cp_rwsem, io_rwsem...
 
-> [...]
+To fix such issue, let's detect thread's priority when it tries to grab
+f2fs_rwsem lock, if the priority is lower than a priority threshold, let's
+uplift the priority before it enters into critical region of lock, and
+restore the priority after it leaves from critical region.
 
-> ...except that pagecache_ra_unbounded is being called recursively from
-> an actual file data read.  My guess is that we'd need a flag or
-> something to ask for "unlocked" readahead if we still want readahead to
-> spur more readahead.
+Meanwhile, introducing two new sysfs nodes:
+- /sys/fs/f2fs/<disk>/adjust_lock_priority, it is used to control whether
+the functionality is enable or not.
+==========     ==================
+Flag_Value     Flag_Description
+==========     ==================
+0x00000000     Disabled (default)
+0x00000001     cp_rwsem
+0x00000002     node_change
+0x00000004     node_write
+0x00000008     gc_lock
+0x00000010     cp_global
+0x00000020     io_rwsem
+==========     ==================
+- /sys/fs/f2fs/<disk>/lock_duration_priority, it is used to control
+priority threshold.
 
-Basically just move it out of page_cache_ra_unbounded.  With the
-consolidation in the earlier patches there are just two callers
-of page_cache_ra_unbounded left, this and the redirty_blocks() in f2fs.
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 24 +++++++++
+ fs/f2fs/checkpoint.c                    | 66 ++++++++++++++++++++++++-
+ fs/f2fs/f2fs.h                          | 12 +++++
+ fs/f2fs/super.c                         |  2 +
+ fs/f2fs/sysfs.c                         | 18 +++++++
+ 5 files changed, 120 insertions(+), 2 deletions(-)
 
-I'd kinda wish to kill the latter, as the past-EOF reading is something
-that should be restricted to core code, but I can't really think of
-an easy way to do that.
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 9a8ec2290f68..ea6474db8a31 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -963,3 +963,27 @@ Description:	This sysfs entry can be used to change type of injected timeout:
+ 		0x00000003     Simulate Non-IO type sleep time
+ 		0x00000004     Simulate runnable time
+ 		==========     ===============================
++
++What:		/sys/fs/f2fs/<disk>/adjust_lock_priority
++Date:		January 2026
++Contact:	"Chao Yu" <chao@kernel.org>
++Description:	This sysfs entry can be used to enable/disable to adjust priority for task
++		which is in critical region covered by lock.
++		==========     ==================
++		Flag_Value     Flag_Description
++		==========     ==================
++		0x00000000     Disabled (default)
++		0x00000001     cp_rwsem
++		0x00000002     node_change
++		0x00000004     node_write
++		0x00000008     gc_lock
++		0x00000010     cp_global
++		0x00000020     io_rwsem
++		==========     ==================
++
++What:		/sys/fs/f2fs/<disk>/lock_duration_priority
++Date:		January 2026
++Contact:	"Chao Yu" <chao@kernel.org>
++Description:	f2fs can tune priority of thread which has entered into critical region covered by
++		f2fs rwsemphore lock. This sysfs entry can be used to control priority value, the
++		range is [100,139], by default the value is 120.
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 5172396c0b01..2f5a03e29d0b 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -90,16 +90,72 @@ static inline void trace_lock_elapsed_time_end(struct f2fs_rwsem *sem,
+ 			runnable_time, io_sleep_time, other_time);
+ }
+ 
++static bool need_uplift_priority(struct f2fs_rwsem *sem, bool is_write)
++{
++	if (!(sem->sbi->adjust_lock_priority & BIT(sem->name - 1)))
++		return false;
++
++	switch (sem->name) {
++	/*
++	 * writer is checkpoint which has high priority, let's just uplift
++	 * priority for reader
++	 */
++	case LOCK_NAME_CP_RWSEM:
++	case LOCK_NAME_NODE_CHANGE:
++	case LOCK_NAME_NODE_WRITE:
++		return !is_write;
++	case LOCK_NAME_GC_LOCK:
++	case LOCK_NAME_CP_GLOBAL:
++	case LOCK_NAME_IO_RWSEM:
++		return true;
++	default:
++		f2fs_bug_on(sem->sbi, 1);
++	}
++	return false;
++}
++
++static void uplift_priority(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc,
++						bool is_write)
++{
++	lc->need_restore = false;
++	if (!sem->sbi->adjust_lock_priority)
++		return;
++	if (rt_task(current))
++		return;
++	if (!need_uplift_priority(sem, is_write))
++		return;
++	lc->orig_nice = task_nice(current);
++	lc->new_nice = PRIO_TO_NICE(sem->sbi->lock_duration_priority);
++	if (lc->orig_nice <= lc->new_nice)
++		return;
++	set_user_nice(current, lc->new_nice);
++	lc->need_restore = true;
++}
++
++static void restore_priority(struct f2fs_lock_context *lc)
++{
++	if (!lc->need_restore)
++		return;
++	/* someone has updated the priority */
++	if (task_nice(current) != lc->new_nice)
++		return;
++	set_user_nice(current, lc->orig_nice);
++}
++
+ void f2fs_down_read_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc)
+ {
++	uplift_priority(sem, lc, false);
+ 	f2fs_down_read(sem);
+ 	trace_lock_elapsed_time_start(sem, lc);
+ }
+ 
+ int f2fs_down_read_trylock_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc)
+ {
+-	if (!f2fs_down_read_trylock(sem))
++	uplift_priority(sem, lc, false);
++	if (!f2fs_down_read_trylock(sem)) {
++		restore_priority(lc);
+ 		return 0;
++	}
+ 	trace_lock_elapsed_time_start(sem, lc);
+ 	return 1;
+ }
+@@ -107,19 +163,24 @@ int f2fs_down_read_trylock_trace(struct f2fs_rwsem *sem, struct f2fs_lock_contex
+ void f2fs_up_read_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc)
+ {
+ 	f2fs_up_read(sem);
++	restore_priority(lc);
+ 	trace_lock_elapsed_time_end(sem, lc, false);
+ }
+ 
+ void f2fs_down_write_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc)
+ {
++	uplift_priority(sem, lc, true);
+ 	f2fs_down_write(sem);
+ 	trace_lock_elapsed_time_start(sem, lc);
+ }
+ 
+ int f2fs_down_write_trylock_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc)
+ {
+-	if (!f2fs_down_write_trylock(sem))
++	uplift_priority(sem, lc, true);
++	if (!f2fs_down_write_trylock(sem)) {
++		restore_priority(lc);
+ 		return 0;
++	}
+ 	trace_lock_elapsed_time_start(sem, lc);
+ 	return 1;
+ }
+@@ -127,6 +188,7 @@ int f2fs_down_write_trylock_trace(struct f2fs_rwsem *sem, struct f2fs_lock_conte
+ void f2fs_up_write_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc)
+ {
+ 	f2fs_up_write(sem);
++	restore_priority(lc);
+ 	trace_lock_elapsed_time_end(sem, lc, true);
+ }
+ 
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 29f81a496b72..a6e7368fc40a 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -185,6 +185,7 @@ enum f2fs_lock_name {
+ 	LOCK_NAME_GC_LOCK,
+ 	LOCK_NAME_CP_GLOBAL,
+ 	LOCK_NAME_IO_RWSEM,
++	LOCK_NAME_MAX,
+ };
+ 
+ enum f2fs_timeout_type {
+@@ -1447,7 +1448,10 @@ struct f2fs_time_stat {
+ 
+ struct f2fs_lock_context {
+ 	struct f2fs_time_stat ts;
++	int orig_nice;
++	int new_nice;
+ 	bool lock_trace;
++	bool need_restore;
+ };
+ 
+ struct f2fs_gc_control {
+@@ -1588,6 +1592,8 @@ enum node_type {
+ /* a threshold of maximum elapsed time in critical region to print tracepoint */
+ #define MAX_LOCK_ELAPSED_TIME		500
+ 
++#define F2FS_DEFAULT_TASK_PRIORITY		(DEFAULT_PRIO)
++
+ static inline int f2fs_test_bit(unsigned int nr, char *addr);
+ static inline void f2fs_set_bit(unsigned int nr, char *addr);
+ static inline void f2fs_clear_bit(unsigned int nr, char *addr);
+@@ -1998,6 +2004,12 @@ struct f2fs_sb_info {
+ 	/* max elapsed time threshold in critical region that lock covered */
+ 	unsigned long long max_lock_elapsed_time;
+ 
++	/* enable/disable to adjust task priority in critical region covered by lock */
++	unsigned int adjust_lock_priority;
++
++	/* adjust priority for task which is in critical region covered by lock */
++	unsigned int lock_duration_priority;
++
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ 	struct kmem_cache *page_array_slab;	/* page array entry */
+ 	unsigned int page_array_slab_size;	/* default page array slab size */
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 9d421a07d2d5..d5cf7265e5d3 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4338,6 +4338,8 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
+ 	spin_lock_init(&sbi->gc_remaining_trials_lock);
+ 	atomic64_set(&sbi->current_atomic_write, 0);
+ 	sbi->max_lock_elapsed_time = MAX_LOCK_ELAPSED_TIME;
++	sbi->adjust_lock_priority = 0;
++	sbi->lock_duration_priority = F2FS_DEFAULT_TASK_PRIORITY;
+ 
+ 	sbi->sum_blocksize = f2fs_sb_has_packed_ssa(sbi) ?
+ 		4096 : sbi->blocksize;
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index d01a2664a250..3a272e7edf23 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -955,6 +955,20 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 		return count;
+ 	}
+ 
++	if (!strcmp(a->attr.name, "adjust_lock_priority")) {
++		if (t >= BIT(LOCK_NAME_MAX - 1))
++			return -EINVAL;
++		sbi->adjust_lock_priority = t;
++		return count;
++	}
++
++	if (!strcmp(a->attr.name, "lock_duration_priority")) {
++		if (t < NICE_TO_PRIO(MIN_NICE) || t > NICE_TO_PRIO(MAX_NICE))
++			return -EINVAL;
++		sbi->lock_duration_priority = t;
++		return count;
++	}
++
+ 	__sbi_store_value(a, sbi, ptr + a->offset, t);
+ 
+ 	return count;
+@@ -1272,6 +1286,8 @@ F2FS_SBI_GENERAL_RW_ATTR(carve_out);
+ F2FS_SBI_GENERAL_RW_ATTR(reserved_pin_section);
+ F2FS_SBI_GENERAL_RW_ATTR(bggc_io_aware);
+ F2FS_SBI_GENERAL_RW_ATTR(max_lock_elapsed_time);
++F2FS_SBI_GENERAL_RW_ATTR(lock_duration_priority);
++F2FS_SBI_GENERAL_RW_ATTR(adjust_lock_priority);
+ 
+ /* STAT_INFO ATTR */
+ #ifdef CONFIG_F2FS_STAT_FS
+@@ -1478,6 +1494,8 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(allocate_section_hint),
+ 	ATTR_LIST(allocate_section_policy),
+ 	ATTR_LIST(max_lock_elapsed_time),
++	ATTR_LIST(lock_duration_priority),
++	ATTR_LIST(adjust_lock_priority),
+ 	NULL,
+ };
+ ATTRIBUTE_GROUPS(f2fs);
+-- 
+2.40.1
 
 
 
