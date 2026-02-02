@@ -2,12 +2,12 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qFiFFF0/gGlJ5QIAu9opvQ
+	id XE12E10/gGlH5QIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Feb 2026 07:08:29 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DC4EC87BA
+	by mail.lfdr.de (Postfix) with ESMTPS id 87492C87B9
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Feb 2026 07:08:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -15,29 +15,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=ItpbQ53rLKVtq9C3wsRbsqVbg85WFP2u6otlMo7GxF0=; b=K/Ie2DcZjshfYuvdNLMYYOPGmB
-	YowoiVFuRRIidWNQCEfEEIixjDxj62oYzIS1ekJQGrhVwrZjViCxVvbxpsNHHpZJ6OY2yI9uc+cBW
-	7dgw80CdF50NU49vhMpfuiF67YJuijU7+B39yBM+ZcxFywcIHJ9SiqP3pBho4/8nKSSY=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=cD7Mpb4M8sI22GlSDk5ChwhD0F74ihzBAuS3R2pNMx4=; b=Eb29jWtinLzPgYaygWuq3MPuBM
+	dT/T1fQG3N22wJDGS03V/y/r/fQOEUadu/yGjshx9OC5x6AjVyh6HP7HT3gBTUkLoT2LuFj4WbvuN
+	ErPUmM9Hkkgc11K3e5X9BqAtaswHfBJOFjqq5Txc6pSbrSCBQkn5/1UlytQlCQ+9RQTc=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vmn6o-0002qu-Kb;
-	Mon, 02 Feb 2026 06:08:26 +0000
+	id 1vmn6l-0007op-VQ;
+	Mon, 02 Feb 2026 06:08:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+1250474bd6e1e3d30609+8198+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vmn6m-0002qo-PH for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Feb 2026 06:08:24 +0000
+ id 1vmn6k-0007oj-Un for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 02 Feb 2026 06:08:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=c3k3Gwc9ZRSVczER0BPphb8Viyntpzl9iwL7l9oD3eA=; b=MYAMc8mizqg/aetomzdKrYIQEz
- h4xQOIrQEW/UI6FyEFPsNRboUEHfVdsXQ6suzQQQMr2LBUhqS66/Xqcv/SF9jJtAT21RC/pG7RqRe
- 6YN1dEaLWQsw2GstsVokBa4iixB0er23Sg9WcJxCVhJpVVJw7yiKw/5TCZrTU/BMVnb8=;
+ bh=4zvXifu7/G3LbK7p292UW2gwOyz2+BN+bEMUfIr4RF8=; b=Ix2CTFx4ZXZYOwTA4fHcAkCL/+
+ 5Z4En8OebiY9nsKfXM+jExJ+XhDZ9OF3/mYMlfv4OfiPXwyL70GDVggA5Jb/XG67LsQD4NFqYSTN3
+ yIieoNtc7W52O0wsNPHMs6fSUilozKQdx0klNIIb60kDA2MBk4hSy5SwIjYTHnWEreBA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,33 +45,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=c3k3Gwc9ZRSVczER0BPphb8Viyntpzl9iwL7l9oD3eA=; b=nE/PXAKy2wx6KVXOitxrrOkxWX
- SW1J2cqXU+4CY0Es+J7mT4mQ32A/sI4guBpbSfIXeAh8XBYLscuy25YWO5JKVwNJzZMfupOnn4Y4x
- dD+kdOfZnTdk6VmGeiaBzzTfF0tjNejZyGBw1AaDLwOYFa+q7B0F461rmGqZe0pzauRE=;
+ bh=4zvXifu7/G3LbK7p292UW2gwOyz2+BN+bEMUfIr4RF8=; b=XNeIN/42hK6cIC3qdupUBgnnpq
+ 8A+sLEqy9WHybPIjvtx1HFdDm8WUxub03KOA8mi7lxTD+ehsuSxfN0ouOuHC1WLwLV2+Z9+PE+x0F
+ 7CyAvnIC3F7Db+oS1nmVuhu1RQF3Kbl9mOi8QjNRQv7Q979bBcMtNwW4rpkMBY/ejIgQ=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vmn6m-0007oz-Ag for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Feb 2026 06:08:24 +0000
+ id 1vmn6k-0007ov-FW for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 02 Feb 2026 06:08:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=c3k3Gwc9ZRSVczER0BPphb8Viyntpzl9iwL7l9oD3eA=; b=xNYEGZzMos/EePCVcAUn10byLj
- Cyxg2rz279L3rnpqpL/xOqmt8y8kpTV1GdbD9NVa1PdS6q3Vg4pZUZMaWbQ/zN/9po6BcSygreMJ6
- svvJMiyi/fMjzaihxLWQBYgPo+cusTsxvtO5CKKAqEjeL1eENye6vbEh/AI7qWLNZHhFg3bAnMIre
- ubcsar7OMYj0/+OXgy8LrgM+NSC4RySN6H0zldaYKzD2tksLXehS3Fi2I0s9OATJZrZXfexu0HKYQ
- JjnlppFCI22UsvoMI5ZHwnjzcVpyJvYOp2IzkCt9tfPN6fWHNrtHBCEZfsCdoINrHZ+P8sm4v5WSC
- gjbaaabA==;
+ bh=4zvXifu7/G3LbK7p292UW2gwOyz2+BN+bEMUfIr4RF8=; b=sr8htu/IWaOxZ/cXXcqQYxneEE
+ BtsMmQ8K4VXfJ+ircRa+/xP64GiWucfOwnEOHRPDykYJTscyVqSfCf7bNYsySu0pgbIdRRmgwHhph
+ uXMJlv4D9VGYhgVK7n2PhEKO4v6SIe9cuHPIapw3bekMLuoJc1/nB6KuC5uofAQ9EggN2KQ2HLk3H
+ yWsifBWgyxF+SaNIyoxIybcpi9M3lhGDhhsIdBBdp2rZZNCosQgAzBDitDb2BzmoicVSJvJr3iUl1
+ 0HzhaUzm4MHnS8cN0dr5l3gPLcOtxnMsjUrhmypEWW5XVm8DzISB33m5OrLlHCBfzjDz2IXqj1Xf9
+ z2BR8hZg==;
 Received: from
  2a02-8389-2341-5b80-d601-7564-c2e0-491c.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:d601:7564:c2e0:491c] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vmn6X-00000004Ujb-2kox; Mon, 02 Feb 2026 06:08:10 +0000
+ id 1vmn6c-00000004Ujr-2N4Q; Mon, 02 Feb 2026 06:08:14 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Date: Mon,  2 Feb 2026 07:06:31 +0100
-Message-ID: <20260202060754.270269-3-hch@lst.de>
+Date: Mon,  2 Feb 2026 07:06:32 +0100
+Message-ID: <20260202060754.270269-4-hch@lst.de>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260202060754.270269-1-hch@lst.de>
 References: <20260202060754.270269-1-hch@lst.de>
@@ -85,11 +85,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Require the invalidate_lock to be held over calls to
- page_cache_ra_unbounded
- instead of acquiring it in this function. This prepares for calling
- page_cache_ra_unbounded
- from ->readahead for fsverity read-ahead. 
+ Content preview: Keep all the read into pagecache code in a single file.
+ Signed-off-by:
+ Christoph Hellwig <hch@lst.de> --- fs/ext4/ext4.h | 4 ++-- fs/ext4/inode.c
+ | 27 fs/ext4/readpage.c | 31 ++++++++++++++++++++++++++++++- 3 files changed, 
+ 32 i [...] 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -98,9 +98,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1vmn6m-0007oz-Ag
-Subject: [f2fs-dev] [PATCH 02/11] readahead: push invalidate_lock out of
- page_cache_ra_unbounded
+X-Headers-End: 1vmn6k-0007ov-FW
+Subject: [f2fs-dev] [PATCH 03/11] ext4: move ->read_folio and ->readahead to
+ readahead.c
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,9 +125,9 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.39 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
-	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MAILLIST(-0.20)[mailman];
 	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -136,8 +136,8 @@ X-Spamd-Result: default: False [0.39 / 15.00];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:fsverity@lists.linux.dev,m:brauner@kernel.org,m:tytso@mit.edu,m:aalbersh@redhat.com,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fsdevel@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:jaegeuk@kernel.org,m:dsterba@suse.com,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
-	ARC_NA(0.00)[];
 	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	DKIM_MIXED(0.00)[];
@@ -154,112 +154,127 @@ X-Spamd-Result: default: False [0.39 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 9DC4EC87BA
+X-Rspamd-Queue-Id: 87492C87B9
 X-Rspamd-Action: no action
 
-Require the invalidate_lock to be held over calls to
-page_cache_ra_unbounded instead of acquiring it in this function.
-
-This prepares for calling page_cache_ra_unbounded from ->readahead for
-fsverity read-ahead.
+Keep all the read into pagecache code in a single file.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/f2fs/file.c        |  2 ++
- fs/verity/pagecache.c |  7 +++++--
- mm/readahead.c        | 13 ++++++++-----
- 3 files changed, 15 insertions(+), 7 deletions(-)
+ fs/ext4/ext4.h     |  4 ++--
+ fs/ext4/inode.c    | 27 ---------------------------
+ fs/ext4/readpage.c | 31 ++++++++++++++++++++++++++++++-
+ 3 files changed, 32 insertions(+), 30 deletions(-)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index da029fed4e5a..c9b9fcdd0cae 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4418,7 +4418,9 @@ static int redirty_blocks(struct inode *inode, pgoff_t page_idx, int len)
- 	pgoff_t redirty_idx = page_idx;
- 	int page_len = 0, ret = 0;
- 
-+	filemap_invalidate_lock_shared(mapping);
- 	page_cache_ra_unbounded(&ractl, len, 0);
-+	filemap_invalidate_unlock_shared(mapping);
- 
- 	do {
- 		folio = read_cache_folio(mapping, page_idx, NULL, NULL);
-diff --git a/fs/verity/pagecache.c b/fs/verity/pagecache.c
-index 1a88decace53..8e0d6fde802f 100644
---- a/fs/verity/pagecache.c
-+++ b/fs/verity/pagecache.c
-@@ -26,10 +26,13 @@ struct page *generic_read_merkle_tree_page(struct inode *inode, pgoff_t index,
- 	    (!IS_ERR(folio) && !folio_test_uptodate(folio))) {
- 		DEFINE_READAHEAD(ractl, NULL, NULL, inode->i_mapping, index);
- 
--		if (!IS_ERR(folio))
-+		if (!IS_ERR(folio)) {
- 			folio_put(folio);
--		else if (num_ra_pages > 1)
-+		} else if (num_ra_pages > 1) {
-+			filemap_invalidate_lock_shared(inode->i_mapping);
- 			page_cache_ra_unbounded(&ractl, num_ra_pages, 0);
-+			filemap_invalidate_unlock_shared(inode->i_mapping);
-+		}
- 		folio = read_mapping_folio(inode->i_mapping, index, NULL);
- 	}
- 	if (IS_ERR(folio))
-diff --git a/mm/readahead.c b/mm/readahead.c
-index b415c9969176..25f81124beb6 100644
---- a/mm/readahead.c
-+++ b/mm/readahead.c
-@@ -204,7 +204,8 @@ static struct folio *ractl_alloc_folio(struct readahead_control *ractl,
-  * not the function you want to call.  Use page_cache_async_readahead()
-  * or page_cache_sync_readahead() instead.
-  *
-- * Context: File is referenced by caller.  Mutexes may be held by caller.
-+ * Context: File is referenced by caller, and ractl->mapping->invalidate_lock
-+ * must be held by the caller in shared mode.  Mutexes may be held by caller.
-  * May sleep, but will not reenter filesystem to reclaim memory.
-  */
- void page_cache_ra_unbounded(struct readahead_control *ractl,
-@@ -228,9 +229,10 @@ void page_cache_ra_unbounded(struct readahead_control *ractl,
- 	 */
- 	unsigned int nofs = memalloc_nofs_save();
- 
-+	lockdep_assert_held_read(&mapping->invalidate_lock);
-+
- 	trace_page_cache_ra_unbounded(mapping->host, index, nr_to_read,
- 				      lookahead_size);
--	filemap_invalidate_lock_shared(mapping);
- 	index = mapping_align_index(mapping, index);
- 
- 	/*
-@@ -300,7 +302,6 @@ void page_cache_ra_unbounded(struct readahead_control *ractl,
- 	 * will then handle the error.
- 	 */
- 	read_pages(ractl);
--	filemap_invalidate_unlock_shared(mapping);
- 	memalloc_nofs_restore(nofs);
+diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
+index 56112f201cac..a8a448e20ef8 100644
+--- a/fs/ext4/ext4.h
++++ b/fs/ext4/ext4.h
+@@ -3735,8 +3735,8 @@ static inline void ext4_set_de_type(struct super_block *sb,
  }
- EXPORT_SYMBOL_GPL(page_cache_ra_unbounded);
-@@ -314,9 +315,9 @@ EXPORT_SYMBOL_GPL(page_cache_ra_unbounded);
- static void do_page_cache_ra(struct readahead_control *ractl,
- 		unsigned long nr_to_read, unsigned long lookahead_size)
+ 
+ /* readpages.c */
+-extern int ext4_mpage_readpages(struct inode *inode,
+-		struct readahead_control *rac, struct folio *folio);
++int ext4_read_folio(struct file *file, struct folio *folio);
++void ext4_readahead(struct readahead_control *rac);
+ extern int __init ext4_init_post_read_processing(void);
+ extern void ext4_exit_post_read_processing(void);
+ 
+diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+index 8c2ef98fa530..e98954e7d0b3 100644
+--- a/fs/ext4/inode.c
++++ b/fs/ext4/inode.c
+@@ -3380,33 +3380,6 @@ static sector_t ext4_bmap(struct address_space *mapping, sector_t block)
+ 	return ret;
+ }
+ 
+-static int ext4_read_folio(struct file *file, struct folio *folio)
+-{
+-	int ret = -EAGAIN;
+-	struct inode *inode = folio->mapping->host;
+-
+-	trace_ext4_read_folio(inode, folio);
+-
+-	if (ext4_has_inline_data(inode))
+-		ret = ext4_readpage_inline(inode, folio);
+-
+-	if (ret == -EAGAIN)
+-		return ext4_mpage_readpages(inode, NULL, folio);
+-
+-	return ret;
+-}
+-
+-static void ext4_readahead(struct readahead_control *rac)
+-{
+-	struct inode *inode = rac->mapping->host;
+-
+-	/* If the file has inline data, no need to do readahead. */
+-	if (ext4_has_inline_data(inode))
+-		return;
+-
+-	ext4_mpage_readpages(inode, rac, NULL);
+-}
+-
+ static void ext4_invalidate_folio(struct folio *folio, size_t offset,
+ 				size_t length)
  {
--	struct inode *inode = ractl->mapping->host;
-+	struct address_space *mapping = ractl->mapping;
- 	unsigned long index = readahead_index(ractl);
--	loff_t isize = i_size_read(inode);
-+	loff_t isize = i_size_read(mapping->host);
- 	pgoff_t end_index;	/* The last page we want to read */
+diff --git a/fs/ext4/readpage.c b/fs/ext4/readpage.c
+index 267594ef0b2c..bf84952ebf94 100644
+--- a/fs/ext4/readpage.c
++++ b/fs/ext4/readpage.c
+@@ -45,6 +45,7 @@
+ #include <linux/pagevec.h>
  
- 	if (isize == 0)
-@@ -329,7 +330,9 @@ static void do_page_cache_ra(struct readahead_control *ractl,
- 	if (nr_to_read > end_index - index)
- 		nr_to_read = end_index - index + 1;
+ #include "ext4.h"
++#include <trace/events/ext4.h>
  
-+	filemap_invalidate_lock_shared(mapping);
- 	page_cache_ra_unbounded(ractl, nr_to_read, lookahead_size);
-+	filemap_invalidate_unlock_shared(mapping);
+ #define NUM_PREALLOC_POST_READ_CTXS	128
+ 
+@@ -209,7 +210,7 @@ static inline loff_t ext4_readpage_limit(struct inode *inode)
+ 	return i_size_read(inode);
  }
  
- /*
+-int ext4_mpage_readpages(struct inode *inode,
++static int ext4_mpage_readpages(struct inode *inode,
+ 		struct readahead_control *rac, struct folio *folio)
+ {
+ 	struct bio *bio = NULL;
+@@ -394,6 +395,34 @@ int ext4_mpage_readpages(struct inode *inode,
+ 	return 0;
+ }
+ 
++int ext4_read_folio(struct file *file, struct folio *folio)
++{
++	int ret = -EAGAIN;
++	struct inode *inode = folio->mapping->host;
++
++	trace_ext4_read_folio(inode, folio);
++
++	if (ext4_has_inline_data(inode))
++		ret = ext4_readpage_inline(inode, folio);
++
++	if (ret == -EAGAIN)
++		return ext4_mpage_readpages(inode, NULL, folio);
++
++	return ret;
++}
++
++void ext4_readahead(struct readahead_control *rac)
++{
++	struct inode *inode = rac->mapping->host;
++
++	/* If the file has inline data, no need to do readahead. */
++	if (ext4_has_inline_data(inode))
++		return;
++
++	ext4_mpage_readpages(inode, rac, NULL);
++}
++
++
+ int __init ext4_init_post_read_processing(void)
+ {
+ 	bio_post_read_ctx_cache = KMEM_CACHE(bio_post_read_ctx, SLAB_RECLAIM_ACCOUNT);
 -- 
 2.47.3
 
