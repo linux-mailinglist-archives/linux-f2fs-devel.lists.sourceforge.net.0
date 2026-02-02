@@ -2,108 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qOl2LnX7f2n+0wIAu9opvQ
+	id 2Oa7EV0/gGk65QIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Feb 2026 02:18:45 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Feb 2026 07:08:29 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6B96C7BF9
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Feb 2026 02:18:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72CABC87B8
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Feb 2026 07:08:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=drBegYCphGiAK91o9AXZ0G7X6UbGtOKBkTcguiKN5Ao=; b=X9U0VBrzbY8TthwjA102Vj2QMC
-	DACrTApIdFHX1kKJcXeiXpfAtaMEotWWYKWmqcBdyYrYuHlrktGTSbsnWbnJ+2zgNYnd3TIorAQ1k
-	xed7/AdLVLmeyi+6Yuu4afhE5VClJXhnQBx1ZH0jUF6AFyLC122bqCjX3uJTiu/z5GTk=;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=FPmUa3VypimJ7/nTKVKi7mDMAAvhSCa4qPt7ILFPNvI=; b=VMQLa7sTVLjZXqmaV4NJ8YvJvf
+	xie5htcKj3yiMobc1i9wSls5Y55e6NulbxobFEYhfcwwKkdsxulD8HioL2TvaNP0K19OdsP5p2bGa
+	Oo/NrV9Yq0NWMa9MjDzinFbdLJ9ses8/7c2uddKvFOJYF9q/RmKp9sp6BlNE9b58KULI=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vmiaC-00068p-UQ;
-	Mon, 02 Feb 2026 01:18:29 +0000
+	id 1vmn6i-0004qc-UL;
+	Mon, 02 Feb 2026 06:08:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dlemoal@kernel.org>) id 1vmia6-000688-UX
- for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Feb 2026 01:18:23 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <BATV+1250474bd6e1e3d30609+8198+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1vmn6g-0004qH-VQ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 02 Feb 2026 06:08:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tHde/tB+FLUVGqOuVmcCnb4mA8AVoiT93NRVkW3HDJ8=; b=JCr5W1SySu4i8B8tGC5b3oNVhI
- gOOxvErVZFKRsTYnK5wRDSe/rvUQhKlz0rCizX33glQUvAwLuZol5UncXgGEk2w91K9cyNA3j2/C7
- seHA4FEqwppyxW6lXudQmsCtGfYxoJZQY+fhUOwrHMX2JOYYuSLpcytMa0Z1eayXBQcI=;
+ bh=oTPY6jfHkqoUdgBhijgDg7Uy+7YMZ6k6go+QoIjkenI=; b=NZjjlfKdJzplHlq5d3rvlCeiU8
+ EeMCV36JRuZRD+Ps7VS52567Cbs3tEMKxfgUqSNBIW8BQpIukGRS7Dy16s6Rn1DIILXSxAw5wz0pv
+ ig05uMYxieIy+HHBGKV9X4g1wfC4FPb31MzBBKEMdA6qbPLaUZdTwP6MYKziv3fgmA+s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=tHde/tB+FLUVGqOuVmcCnb4mA8AVoiT93NRVkW3HDJ8=; b=L1PDtudpgRzAhZ+2NNfCozAFqz
- xLr7O/R5sV8LekQ28GMpekQN7FPiTTKKjQ9hXsx90YU5Jqt1XOPSwCxCmQ0bSVQ15oFdnaIOOlkpN
- nAyma/5/JtUt3VBtX0T0VagS/cuGC0txnIibinXk22YL51zaekonDTKcnyXZZrszU8PI=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=oTPY6jfHkqoUdgBhijgDg7Uy+7YMZ6k6go+QoIjkenI=; b=G
+ Qts6gR2BEEm6WIHJZsVnTQDz4vpa9i6pwAndsEGmRutn/NLRNXoSx5nqEki8xVxbMMst7CZn1tFXa
+ nqm/Uccd/7DdVN4HQRvpsYh6PtTsq27/TCD0twfaL1e0weMBx6IB89zeQOJvvdTe5ni+zeLdVF43A
+ 6nixMmAEuGWK3NwA=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vmia7-0004gp-87 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Feb 2026 01:18:23 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 8588A60008;
- Mon,  2 Feb 2026 01:18:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A4B29C4CEF7;
- Mon,  2 Feb 2026 01:18:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1769995097;
- bh=NQ1xMB7c3Es2ExT0TQYQoiw7U8dAchJ6SlSC4MTUEjA=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=Z5Sx+jI0EnMIp0jwzMFhx/96M9Jut2Mycb0OWPynFngNOQOkzTlPNtuHCyLl8Li0/
- yZrp2mGb5P59k+RmmJ8ApPo1d833H1XdcwO8wG3TrUZeTDm6gpl+zXsMcHimSzPki+
- +14Q8vzUsJ3zy82Ohv9TBnsi5b4xgX/rxTOMsNRQ+F5mv+MQKIDtesbeKteOnAGsSb
- tl1dQhY+2mQisz4ZQilNrnfyESmKe/Jwm2yHnx0r+XNzMdC1TPrbtkO1wuwyjcWfew
- xJ3f/TMeezYd3yeonuviljOUgbF5MLuB0+PiJcdh0O+ukPCpOO+dfgaFGl+eW6azqF
- tKUmHOUur8DxA==
-Message-ID: <24bf6e88-1917-4f13-92bf-449b106158a2@kernel.org>
-Date: Mon, 2 Feb 2026 10:18:15 +0900
+ id 1vmn6h-0007oi-7M for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 02 Feb 2026 06:08:19 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=oTPY6jfHkqoUdgBhijgDg7Uy+7YMZ6k6go+QoIjkenI=; b=Jra1hwO/RMjiIcL+dw8Uk4as9f
+ Tskg/31TTNJRxn6dlkqX7TocDdZMNpfkqeMfKIbiJ6IGWI/5D7HxToyBXx2Wq5GvHn6PMPU7gcBWV
+ LkevtmUSLkPC4n4Sq7hV7XciuurRs/q4NXx88JaJzpcnE1A5OlQ2c7tUN78V4HHFlx2PcOuD0tWeg
+ ncMmgaw4F18ytwj4huPjyf5YBhDMkT+TKDIlRRhX5sfNWBiczZVNZ9oQzbcuqNNjsRBXFGuGRlmux
+ VuTka/qlk9387FpcLAmWMWf9ze8mIimrs9YXsWNp7aSrI/clH6QduExNY7iQvaKC/CUVHKXH4McO+
+ eMJJysBA==;
+Received: from
+ 2a02-8389-2341-5b80-d601-7564-c2e0-491c.cable.dynamic.v6.surfer.at
+ ([2a02:8389:2341:5b80:d601:7564:c2e0:491c] helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+ id 1vmn6N-00000004UjI-3VFw; Mon, 02 Feb 2026 06:08:00 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Eric Biggers <ebiggers@kernel.org>
+Date: Mon,  2 Feb 2026 07:06:29 +0100
+Message-ID: <20260202060754.270269-1-hch@lst.de>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>,
- linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>,
- Chao Yu <chao@kernel.org>
-References: <20260201122258.3168119-1-shinichiro.kawasaki@wdc.com>
- <20260201122258.3168119-2-shinichiro.kawasaki@wdc.com>
-Content-Language: en-US
-Organization: Western Digital Research
-In-Reply-To: <20260201122258.3168119-2-shinichiro.kawasaki@wdc.com>
-X-Spam-Score: -0.2 (/)
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2/1/26 21:22, Shin'ichiro Kawasaki wrote: > A lockdep WARN
- is observed recently under the following steps: > > 1) Create a zoned TCMU
- device > 2) Create a f2fs filesystem on the zoned TCMU device a [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Hi all, this series has a hodge podge of fsverity enhances
+ that I looked into as part of the review of the xfs fsverity support series.
+ The first part optimizes the fsverity read path by kicking off readahead
+ for the fsverity hashes from the data read submission context, which in my
+ simply testing showed huge benefits for sequential r [...] 
+ Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vmia7-0004gp-87
-Subject: Re: [f2fs-dev] [PATCH for-next 1/1] f2fs: fix lockdep WARN of
- sbi->cp_global_sem and q->q_usage_counter
+ 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
+ domains are different
+X-Headers-End: 1vmn6h-0007oi-7M
+Subject: [f2fs-dev] fsverity speedup and memory usage optimization v5
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,99 +109,147 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Damien Le Moal via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Damien Le Moal <dlemoal@kernel.org>
+Cc: fsverity@lists.linux.dev, Christian Brauner <brauner@kernel.org>,
+ Theodore Ts'o <tytso@mit.edu>, Andrey Albershteyn <aalbersh@redhat.com>,
+ Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fsdevel@vger.kernel.org, Al Viro <viro@zeniv.linux.org.uk>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, David Sterba <dsterba@suse.com>,
+ Jan Kara <jack@suse.cz>, linux-ext4@vger.kernel.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.21 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [0.39 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:shinichiro.kawasaki@wdc.com,m:linux-f2fs-devel@lists.sourceforge.net,m:jaegeuk@kernel.org,m:chao@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:fsverity@lists.linux.dev,m:brauner@kernel.org,m:tytso@mit.edu,m:aalbersh@redhat.com,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fsdevel@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:jaegeuk@kernel.org,m:dsterba@suse.com,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	ARC_NA(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_MIXED(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,infradead.org:-];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,infradead.org:s=bombadil.20210309];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_REPLYTO(0.00)[dlemoal@kernel.org];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
-X-Rspamd-Queue-Id: E6B96C7BF9
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 72CABC87B8
 X-Rspamd-Action: no action
 
-On 2/1/26 21:22, Shin'ichiro Kawasaki wrote:
-> A lockdep WARN is observed recently under the following steps:
-> 
-> 1) Create a zoned TCMU device
-> 2) Create a f2fs filesystem on the zoned TCMU device and mount it
-> 3) Fill the filesystem with files and trigger GC
-> 4) Unmout the filesystem
-> 5) Remove the zoned TCMU device
-> 
-> The lockdep WARN indicates that a circular lock depedency formed by four
-> contexts, as described below.
-> 
-> a) TCMU device removal context:
->  - call del_gendisk() to get q->q_usage_counter
->  - call start_flush_work() to get work_completion of wb->dwork
-> b) f2fs writeback context:
->  - in wb_workfn(), which holds work_completion of wb->dwork
->  - call f2fs_balance_fs() to get sbi->gc_lock
-> c) f2fs vfs_write context:
->  - call f2fs_gc() to get sbi->gc_lock
->  - call f2fs_write_checkpoint() to get sbi->cp_global_sem
-> d) f2fs mount context:
->  - call recover_fsync_data() to get sbi->cp_global_sem
->  - call f2fs_check_and_fix_write_pointer() to call blkdev_report_zones()
->    that goes down to blk_mq_alloc_request and get q->q_usage_counter
-> 
-> To suppress the WARN, cut the dependency d) between sbi->cp_global_sem
-> and q->q_usage_counter. For that purpose, move the
-> f2fs_check_and_fix_write_pointer() call outside of the critical section
-> of sbi->cp_global_sem in f2fs_recovery_fsync_data(). This change is fine
-> because the write pointer fix operation only affects the main segments
-> and does not interact with the check point metadata. Furthermore,
-> conflicts between the write pointer fix operation and data/node flush
-> operations remain protected by SBI_POR_DOING.
-> 
-> Fixes: c426d99127b1 ("f2fs: Check write pointer consistency of open zones")
-> Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+Hi all,
 
-Looks OK to me.
+this series has a hodge podge of fsverity enhances that I looked into as
+part of the review of the xfs fsverity support series.
 
-Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
+The first part optimizes the fsverity read path by kicking off readahead
+for the fsverity hashes from the data read submission context, which in my
+simply testing showed huge benefits for sequential reads using dd.
+I haven't been able to get fio to run on a preallocated fio file, but
+I expect random read benefits would be significantly better than that
+still.
 
+The second part avoids the need for a pointer in every inode for fsverity
+and instead uses a rhashtable lookup, which is done once per read_folio
+or ->readahead invocation plus for btrfs only for each bio completion.
+Right now this does not increse the number of inodes in
+each slab, but for ext4 we are getting very close to that (within
+16 bytes by my count).
 
--- 
-Damien Le Moal
-Western Digital Research
+Changes since v5:
+ - drop already merged patches
+ - fix a bisection hazard for non-ENOENT error returns from
+   generic_read_merkle_tree_page
+ - don't recurse on invalidate_lock
+ - refactor page_cache_ra_unbounded locking to support the above
+ - refactor ext4 and f2fs fsverity readahead to remove the need for the
+   first_folio branch in the main readpages loop
+
+Changes since v4:
+ - drop the constification of ctx->vi again
+ - fix __filemap_get_folio error handling again
+ - don't use "pgoff_t long"
+ - improve documentation of the new pagecache helpers
+ - reduce the number of fsverity_info lookups in btrfs
+ - improve the documentation for fsverity_active
+
+Changes since v2:
+ - use sizeof_field for .key_len
+ - fix a rebase error that caused an extra fsverity_get_info in
+   fsverity_init_verification_context
+ - add verify.o to the build in the correct patch
+ - fix handling of non-ENOENT ERR_PTR folios in
+   generic_readahead_merkle_tree
+ - split fixing the __filemap_get_folio error handling into a
+   separate patch
+ - fix the readahead range in fsverity_read_merkle_tree
+ - remove __fsverity_readahead as a result of the above
+ - simplify the start/end_hidx calculation in fsverity_readahead
+ - drop the > i_size check in fsverity_readahead
+ - use pgoff_t where applicable
+ - constify fsverity_info pointers in the verification path
+ - use IS_ENABLED to disable code not used for non-fsverity builds in
+   ext4 and f2fs
+ - allow bisection for non-fsverity builds by provinding a stub
+   fsverity_info_addr prototype
+ - drop the now superflous inode argument to
+   fsverity_init_verification_context
+ - improve the kerneldoc for fsverity_readahead
+ - improve various commit messages
+ - fix the barrier placement in fsverity_active
+ - mark fsverity_active to work around stupid compilers
+
+Changes since v1:
+ - reorder to keep the most controversial part last
+ - drop moving the open handling to common code (for now)
+ - factor the page cache read code into common code
+ - reduce the number of hash lookups
+ - add a barrier in the fsverity_active that pairs with the cmpxchg
+   that sets the inode flag.
+
+Diffstat:
+ fs/btrfs/btrfs_inode.h       |    4 -
+ fs/btrfs/extent_io.c         |   53 ++++++++++------
+ fs/btrfs/inode.c             |    3 
+ fs/btrfs/verity.c            |    6 -
+ fs/buffer.c                  |   25 +++----
+ fs/ext4/ext4.h               |    8 --
+ fs/ext4/inode.c              |   27 --------
+ fs/ext4/readpage.c           |   62 +++++++++++++++----
+ fs/ext4/super.c              |    3 
+ fs/ext4/verity.c             |   15 +++-
+ fs/f2fs/compress.c           |    7 +-
+ fs/f2fs/data.c               |   88 +++++++++++++++++----------
+ fs/f2fs/f2fs.h               |   12 ---
+ fs/f2fs/file.c               |    2 
+ fs/f2fs/super.c              |    3 
+ fs/f2fs/verity.c             |   15 +++-
+ fs/verity/enable.c           |   30 +++++----
+ fs/verity/fsverity_private.h |   21 +++---
+ fs/verity/open.c             |   77 +++++++++++++++---------
+ fs/verity/pagecache.c        |   44 ++++++++++---
+ fs/verity/read_metadata.c    |   19 ++++--
+ fs/verity/verify.c           |   94 ++++++++++++++++++-----------
+ include/linux/fsverity.h     |  136 ++++++++++++++++++++++---------------------
+ mm/readahead.c               |   13 ++--
+ 24 files changed, 440 insertions(+), 327 deletions(-)
 
 
 _______________________________________________
