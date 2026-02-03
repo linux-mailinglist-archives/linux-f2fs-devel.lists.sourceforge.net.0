@@ -2,12 +2,12 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qGUVLRv6gWk7NQMAu9opvQ
+	id uYhVMBv6gWmhNQMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Feb 2026 14:37:31 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9593D9F6E
+	by mail.lfdr.de (Postfix) with ESMTPS id 07E59D9F70
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Feb 2026 14:37:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -15,67 +15,67 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=TeIAZlajqnRemTqevv/dfAEf5IkJT6KFG3na3mZXpas=; b=TJeK//yBKcg3/cdOWZK/svVWOv
-	6bY1uDwRtAEOLttwuumuuL4vLjxv3pC8QDmdYuU0Cxg9TyvyQcXGNK/teS88dakMSOivSmDlAePpg
-	NIINwCf+BKXL4gr20maVPyb3ubdFU7YUwpKI+43MItlmQfb/CDbbpSK7yPtUi6BTUkNk=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=8o8O+iY27AsBdxxZ5DTh7H3tnqIbg5Nsapqec5vR/Pk=; b=cOV3/sXLDUXy1j171xaQbimU6q
+	hPxMvohQGqZXJbhkm5ZWwNh7gwrEFXRHXbANXADTMkznQfxnscRnFqmgsNOj2gaUJRW5sTxDzpMxp
+	HFTROx53brxV3zmu/uD261Y5zjhyYbb878eyRyRx7pwSaRcmvUpQtIW7k/Ou0M03roq0=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vnGab-0007e8-Q8;
-	Tue, 03 Feb 2026 13:37:09 +0000
+	id 1vnGah-0004Wm-Jj;
+	Tue, 03 Feb 2026 13:37:15 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <monty_pavel@sina.com>) id 1vnGaY-0007e2-VF
+ (envelope-from <monty_pavel@sina.com>) id 1vnGag-0004Wf-Bp
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Feb 2026 13:37:07 +0000
+ Tue, 03 Feb 2026 13:37:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=btrQFusilZ8dUPR7IyYgms9YNuIGopeAiURKJojpI5U=; b=Ojqcl+AGSLCrBv1pyyH9TU5d9M
- rzRNjqUpkASYxzc1CJd7C3Ykixr2/81CTjlk6jR85esZgpcDh39Up5ZFg8OUBa7ylanyPv2x2zqA6
- zGUEGaQk87UTFkNdhkqexD4RBX1NFe5MpEXRqpLfzra/1a5MSMPk+kGh/2CiflgB3298=;
+ bh=hRChTHjNWAMGnxldrFHj5N8ou5K/e2edMm/6ExVDQK0=; b=d8y5m6kp4qWJMZlrpxKxqBgG2T
+ lhP3fbvMBB8EkMuZemsU299n1je3TfC+Iq81J43VBnmj8G4wHW3BoHdEFKncqjjItEfBF+lhmVw9l
+ QOnFABfCp10poVWdB4XLg8ApA9KEshGVAL/Qye76M84e77CG76Fa3XPAopVP21cvnBjE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=btrQFusilZ8dUPR7IyYgms9YNuIGopeAiURKJojpI5U=; b=lRtSxOqoL45mrtDsFETAZuBlb+
- tVJE84/emO35uYZtqBFG50ES3Hqw7cOkEbvRYpJA1QgICYUeFW+yoBH8ixtX0u5Sa/6Y5fc4AjJqX
- L4sn1dYg56ZaChaOZmQwejF7tEQtyK+5rrDiNrq8xqbOPfkt20bxxoG9Xsq1Ar6gzkdA=;
-Received: from smtp153-168.sina.com.cn ([61.135.153.168])
+ bh=hRChTHjNWAMGnxldrFHj5N8ou5K/e2edMm/6ExVDQK0=; b=bmydd8qjtTrpZrfBNGBuLXiW98
+ 94a6+cXW+Lq2zlEXaN3WH+2xXyMo8lNvTgy7w0a/ZqScowfN6+wo1y0LHLrezgtBhA5hoz+gxQyox
+ cYPqlMtCWR+8Qu8+oilMBqDxXCN2z3gBdJGuF2NrVFmlclAVJg8ckPZX26mNrY/lRH+c=;
+Received: from r3-21.sinamail.sina.com.cn ([202.108.3.21])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vnGaW-0004ka-HN for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Feb 2026 13:37:06 +0000
+ id 1vnGaf-0004l6-Kw for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Feb 2026 13:37:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
- t=1770125824; bh=btrQFusilZ8dUPR7IyYgms9YNuIGopeAiURKJojpI5U=;
+ t=1770125833; bh=hRChTHjNWAMGnxldrFHj5N8ou5K/e2edMm/6ExVDQK0=;
  h=From:Subject:Date:Message-ID;
- b=qaBGDgnRWHcb3wsK7kLgmK7Qyh9nHHe+TPrdUrdU8NzGpee+tHz/xu1IXFyozhtiK
- JmPWGEFG8t+K4iiGEWHZXntaRXWryzATF0uJvIIsPMzNGLdtbqCJFjoDciypP+eNwv
- AQ1txqKSYiir5n4xK+SeMTcN1R4vaJ6HOoeoi+mc=
+ b=ER0q0+HQDTkmAlBvOXz3bM4hUVMvZ/3gK3fJE6906mgJVEdqvRFwZSNTMDFnpOQ/f
+ KH9FzCUFamHaenu5JIBMHtVn48oHrC05mcMZZzEGjXm9T55btwSa/Vq/qQIXhuQBAN
+ qp9Bj4TrgP+1g7jbTKnsIYE5bvpScI5p9iudh+f0=
 X-SMAIL-HELO: xiaomi-ThinkCentre-M760t.mioffice.cn
 Received: from unknown (HELO
  xiaomi-ThinkCentre-M760t.mioffice.cn)([114.247.175.249])
  by sina.com (10.54.253.33) with ESMTP
- id 6981F9EC00006DDB; Tue, 3 Feb 2026 21:36:55 +0800 (CST)
+ id 6981F9EC00006DDB; Tue, 3 Feb 2026 21:36:57 +0800 (CST)
 X-Sender: monty_pavel@sina.com
 X-Auth-ID: monty_pavel@sina.com
 Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
  dkim=none header.i=none;
  dmarc=none action=none header.from=monty_pavel@sina.com
-X-SMAIL-MID: 3474846685172
-X-SMAIL-UIID: 587E1FE78C2E45D2A3C8D328015C4EC2-20260203-213655-1
+X-SMAIL-MID: 1424366685158
+X-SMAIL-UIID: CC5521F1755E4660A44675DB990B5ADC-20260203-213657-1
 From: Yongpeng Yang <monty_pavel@sina.com>
 To: Chao Yu <chao@kernel.org>,
 	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Tue,  3 Feb 2026 21:36:35 +0800
-Message-ID: <20260203133635.3942502-4-monty_pavel@sina.com>
+Date: Tue,  3 Feb 2026 21:36:36 +0800
+Message-ID: <20260203133635.3942502-5-monty_pavel@sina.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260203133635.3942502-2-monty_pavel@sina.com>
 References: <20260203133635.3942502-2-monty_pavel@sina.com>
@@ -87,17 +87,13 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Yongpeng Yang When `fileinfo->fi_flags` does not have
- the `FIEMAP_FLAG_SYNC` bit set and inline data has not been persisted yet,
- the physical address of the extent is calculated incorrectly for unwritten
- inline ino [...] 
+ Content preview:  From: Yongpeng Yang f2fs_fiemap() calls f2fs_map_blocks()
+ to obtain the block mapping a file, and then merges contiguous mappings into
+ extents. If the mapping is found in the read extent cache, node blocks do
+ not need to [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [61.135.153.168 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
@@ -107,9 +103,12 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [monty_pavel(at)sina.com]
-X-Headers-End: 1vnGaW-0004ka-HN
-Subject: [f2fs-dev] [PATCH 2/4] f2fs: fix incorrect file address mapping
- when inline inode is unwritten
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [202.108.3.21 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1vnGaf-0004l6-Kw
+Subject: [f2fs-dev] [PATCH 3/4] f2fs: fix fiemap boundary handling when read
+ extent cache is incomplete
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,31 +122,32 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
  Yongpeng Yang <monty_pavel@sina.com>, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.39 / 15.00];
+X-Spamd-Result: default: False [0.49 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	DMARC_POLICY_SOFTFAIL(0.10)[sina.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:yangyongpeng@xiaomi.com,m:monty_pavel@sina.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_FROM(0.00)[sina.com];
 	FORGED_SENDER(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	TO_DN_SOME(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_FROM(0.00)[sina.com];
-	TO_DN_SOME(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_CC(0.00)[xiaomi.com,sina.com,lists.sourceforge.net];
+	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -155,74 +155,61 @@ X-Spamd-Result: default: False [0.39 / 15.00];
 	DKIM_MIXED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
+	FREEMAIL_CC(0.00)[xiaomi.com,sina.com,lists.sourceforge.net];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,sina.com:s=201208];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,sina.com:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
-X-Rspamd-Queue-Id: C9593D9F6E
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,xiaomi.com:email]
+X-Rspamd-Queue-Id: 07E59D9F70
 X-Rspamd-Action: no action
 
-From: Yongpeng Yang <yangyongpeng@xiaomi.com>
-
-When `fileinfo->fi_flags` does not have the `FIEMAP_FLAG_SYNC` bit set
-and inline data has not been persisted yet, the physical address of the
-extent is calculated incorrectly for unwritten inline inodes.
-
-root@vm:/mnt/f2fs# dd if=/dev/zero of=data.3k bs=3k count=1
-root@vm:/mnt/f2fs# f2fs_io fiemap 0 100 data.3k
-Fiemap: offset = 0 len = 100
-	logical addr.    physical addr.   length           flags
-0	0000000000000000 00000ffffffff16c 0000000000000c00 00000301
-
-This patch fixes the issue by checking if the inode's address is valid.
-If the inline inode is unwritten, set the physical address to 0 and
-mark the extent with `FIEMAP_EXTENT_UNKNOWN | FIEMAP_EXTENT_DELALLOC`
-flags.
-
-Fixes: 67f8cf3cee6f ("f2fs: support fiemap for inline_data")
-Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
----
- fs/f2fs/inline.c | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
-
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index 0a1052d5ee62..86d2abbb40ff 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -792,7 +792,7 @@ int f2fs_read_inline_dir(struct file *file, struct dir_context *ctx,
- int f2fs_inline_data_fiemap(struct inode *inode,
- 		struct fiemap_extent_info *fieinfo, __u64 start, __u64 len)
- {
--	__u64 byteaddr, ilen;
-+	__u64 byteaddr = 0, ilen;
- 	__u32 flags = FIEMAP_EXTENT_DATA_INLINE | FIEMAP_EXTENT_NOT_ALIGNED |
- 		FIEMAP_EXTENT_LAST;
- 	struct node_info ni;
-@@ -825,9 +825,14 @@ int f2fs_inline_data_fiemap(struct inode *inode,
- 	if (err)
- 		goto out;
- 
--	byteaddr = (__u64)ni.blk_addr << inode->i_sb->s_blocksize_bits;
--	byteaddr += (char *)inline_data_addr(inode, ifolio) -
--					(char *)F2FS_INODE(ifolio);
-+	if (__is_valid_data_blkaddr(ni.blk_addr)) {
-+		byteaddr = (__u64)ni.blk_addr << inode->i_sb->s_blocksize_bits;
-+		byteaddr += (char *)inline_data_addr(inode, ifolio) -
-+						(char *)F2FS_INODE(ifolio);
-+	} else {
-+		f2fs_bug_on(F2FS_I_SB(inode), ni.blk_addr != NEW_ADDR);
-+		flags |= FIEMAP_EXTENT_DELALLOC | FIEMAP_EXTENT_UNKNOWN;
-+	}
- 	err = fiemap_fill_next_extent(fieinfo, start, byteaddr, ilen, flags);
- 	trace_f2fs_fiemap(inode, start, byteaddr, ilen, flags, err);
- out:
--- 
-2.43.0
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+RnJvbTogWW9uZ3BlbmcgWWFuZyA8eWFuZ3lvbmdwZW5nQHhpYW9taS5jb20+CgpmMmZzX2ZpZW1h
+cCgpIGNhbGxzIGYyZnNfbWFwX2Jsb2NrcygpIHRvIG9idGFpbiB0aGUgYmxvY2sgbWFwcGluZyBh
+CmZpbGUsIGFuZCB0aGVuIG1lcmdlcyBjb250aWd1b3VzIG1hcHBpbmdzIGludG8gZXh0ZW50cy4g
+SWYgdGhlIG1hcHBpbmcKaXMgZm91bmQgaW4gdGhlIHJlYWQgZXh0ZW50IGNhY2hlLCBub2RlIGJs
+b2NrcyBkbyBub3QgbmVlZCB0byBiZSByZWFkLgpIb3dldmVyLCBpbiB0aGUgZm9sbG93aW5nIHNj
+ZW5hcmlvLCBhIGNvbnRpZ3VvdXMgZXh0ZW50IGNhbiBiZSBzcGxpdAppbnRvIHR3byBleHRlbnRz
+OgoKcm9vdEB2bTovbW50L2YyZnMjIGRkIGlmPS9kZXYvemVybyBvZj1kYXRhLjRNIGJzPTFNIGNv
+dW50PTQgJiYgc3luYwpyb290QHZtOi9tbnQvZjJmcyMgZGQgaWY9L2Rldi96ZXJvIG9mPWRhdGEu
+NE0gYnM9MU0gY291bnQ9MiBzZWVrPTIgY29udj1ub3RydW5jICYmIHN5bmMKcm9vdEB2bTovbW50
+L2YyZnMjIGVjaG8gMyA+IC9wcm9jL3N5cy92bS9kcm9wX2NhY2hlcyAjIGRyb3AgMk1+NE0gZXh0
+ZW50IGNhY2hlCnJvb3RAdm06L21udC9mMmZzIyBkZCBpZj0vZGV2L3plcm8gb2Y9ZGF0YS40TSBi
+cz0xTSBjb3VudD0yIHNlZWs9MCBjb252PW5vdHJ1bmMgJiYgc3luYwpyb290QHZtOi9tbnQvZjJm
+cyMgZjJmc19pbyBmaWVtYXAgMCAxMDI0IGRhdGEuNE0KRmllbWFwOiBvZmZzZXQgPSAwIGxlbiA9
+IDEwMjQKbG9naWNhbCBhZGRyLiAgICBwaHlzaWNhbCBhZGRyLiAgIGxlbmd0aCAgICAgICAgICAg
+ZmxhZ3MKMAkwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDY0MDAwMDAgMDAwMDAwMDAwMDIwMDAw
+MCAwMDAwMTAwMAoxCTAwMDAwMDAwMDAyMDAwMDAgMDAwMDAwMDAwNjYwMDAwMCAwMDAwMDAwMDAw
+MjAwMDAwIDAwMDAxMDAxCgpBbHRob3VnaCB0aGUgcGh5c2ljYWwgYWRkcmVzc2VzIG9mIHRoZSBy
+YW5nZXMgMO+9njJNQiBhbmQgMk3vvZ40TUIgYXJlCmNvbnRpZ3VvdXMsIHRoZSBtYXBwaW5nIGZv
+ciB0aGUgMk3vvZ40TUIgcmFuZ2UgaXMgbm90IHByZXNlbnQgaW4gbWVtb3J5LgpXaGVuIHRoZSBw
+aHlzaWNhbCBhZGRyZXNzZXMgZm9yIHRoZSAw772eMk1CIHJhbmdlIGFyZSB1cGRhdGVkLCBubyBt
+ZXJnZQpoYXBwZW5zIGJlY2F1c2UgdGhlIGFkamFjZW50IG1hcHBpbmcgaXMgbWlzc2luZyBmcm9t
+IHRoZSBpbi1tZW1vcnkKY2FjaGUuIEFzIGEgcmVzdWx0LCBmaWVtYXAgcmVwb3J0cyB0d28gc2Vw
+YXJhdGUgZXh0ZW50cyBpbnN0ZWFkIG9mIGEKc2luZ2xlIGNvbnRpZ3VvdXMgb25lLgoKVGhlIHJv
+b3QgY2F1c2UgaXMgdGhhdCB0aGUgcmVhZCBleHRlbnQgY2FjaGUgZG9lcyBub3QgZ3VhcmFudGVl
+IHRoYXQgYWxsCmJsb2NrcyBvZiBhbiBleHRlbnQgYXJlIHByZXNlbnQgaW4gbWVtb3J5LiBUaGVy
+ZWZvcmUsIHdoZW4gdGhlIGV4dGVudApsZW5ndGggcmV0dXJuZWQgYnkgZjJmc19tYXBfYmxvY2tz
+X2NhY2hlZCgpIGlzIHNtYWxsZXIgdGhhbiBtYXhibG9ja3MsCnRoZSByZW1haW5pbmcgbWFwcGlu
+Z3MgYXJlIHJldHJpZXZlZCB2aWEgZjJmc19nZXRfZG5vZGVfb2ZfZGF0YSgpIHRvCmVuc3VyZSBj
+b3JyZWN0IGZpZW1hcCBleHRlbnQgYm91bmRhcnkgaGFuZGxpbmcuCgpGaXhlczogY2Q4ZmM1MjI2
+YmVmICgiZjJmczogcmVtb3ZlIHRoZSBjcmVhdGUgYXJndW1lbnQgdG8gZjJmc19tYXBfYmxvY2tz
+IikKU2lnbmVkLW9mZi1ieTogWW9uZ3BlbmcgWWFuZyA8eWFuZ3lvbmdwZW5nQHhpYW9taS5jb20+
+Ci0tLQogZnMvZjJmcy9kYXRhLmMgfCAxNCArKysrKysrKysrKystLQogMSBmaWxlIGNoYW5nZWQs
+IDEyIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZnMvZjJmcy9k
+YXRhLmMgYi9mcy9mMmZzL2RhdGEuYwppbmRleCA0MmYxNWZkOWM2OGUuLmVlZGFkY2NmODZiYiAx
+MDA2NDQKLS0tIGEvZnMvZjJmcy9kYXRhLmMKKysrIGIvZnMvZjJmcy9kYXRhLmMKQEAgLTE2MjMs
+OCArMTYyMywxOCBAQCBpbnQgZjJmc19tYXBfYmxvY2tzKHN0cnVjdCBpbm9kZSAqaW5vZGUsIHN0
+cnVjdCBmMmZzX21hcF9ibG9ja3MgKm1hcCwgaW50IGZsYWcpCiAJbGZzX2Rpb193cml0ZSA9IChm
+bGFnID09IEYyRlNfR0VUX0JMT0NLX0RJTyAmJiBmMmZzX2xmc19tb2RlKHNiaSkgJiYKIAkJCQlt
+YXAtPm1fbWF5X2NyZWF0ZSk7CiAKLQlpZiAoIW1hcC0+bV9tYXlfY3JlYXRlICYmIGYyZnNfbWFw
+X2Jsb2Nrc19jYWNoZWQoaW5vZGUsIG1hcCwgZmxhZykpCi0JCWdvdG8gb3V0OworCWlmICghbWFw
+LT5tX21heV9jcmVhdGUpIHsKKwkJaWYgKGYyZnNfbWFwX2Jsb2Nrc19jYWNoZWQoaW5vZGUsIG1h
+cCwgZmxhZykpIHsKKwkJCWlmIChtYXAtPm1fbGVuID09IG1heGJsb2NrcykKKwkJCQlnb3RvIG91
+dDsKKwkJCWVsc2UgeworCQkJCXBnb2ZzID0JKHBnb2ZmX3QpbWFwLT5tX2xibGsgKyBtYXAtPm1f
+bGVuOworCQkJCWVuZCA9IG1hcC0+bV9sYmxrICsgbWF4YmxvY2tzOworCQkJCW9mcyA9IG1hcC0+
+bV9sZW47CisJCQkJZ290byBuZXh0X2Rub2RlOworCQkJfQorCQl9CisJfQogCiAJbWFwLT5tX2Jk
+ZXYgPSBpbm9kZS0+aV9zYi0+c19iZGV2OwogCW1hcC0+bV9tdWx0aWRldl9kaW8gPQotLSAKMi40
+My4wCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxp
+bnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNl
+Zm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xp
+bnV4LWYyZnMtZGV2ZWwK
