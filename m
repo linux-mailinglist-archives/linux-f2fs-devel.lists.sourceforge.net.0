@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iMluNVK8gWm7JAMAu9opvQ
+	id eM4+IMbBgWm7JAMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Feb 2026 10:13:54 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Feb 2026 10:37:10 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78C30D6A60
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Feb 2026 10:13:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F7A0D6DEE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Feb 2026 10:37:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-Id:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=wo9aMh69l2wwVdj4931Z61Hw7ifXkw0dQsViI03Td3M=; b=l8K310JXM0XiLjyKeWm0IbgwjA
-	0H6hxn4JYay9FZR1sgmPXyAm/tHFwtD1v9nmW1VpOzLJy9POmMUNO+A/uwiPrPN3aR8ECSvGNq/Jz
-	cUp0hBV3v6leXWqOtnENy2Fl3FRNhQ5rDJQSqhs4vKxyMNgyBrhU1upMW9cS+JshPSLs=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=wxjTjTFUCXwJxud4VOE8S21IftNqe70TgoQBcPshJZk=; b=ED/gLe+HjPP2fIpM3NiuLT67kP
+	ym5PiO18mBECb9uCH4XuPUzDdq6d7XylAP4OmWStKzjLgXIOGao+WB6HI0cfw2l8XieUtCzikAA0w
+	DtSw+W5FxW6UJyCNS2/bQIMC4mKd9oR9MnrEpSmLF6KjO8nwQQVwdr/XZaDNvAX1xbmg=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vnCTW-0002QO-TR;
-	Tue, 03 Feb 2026 09:13:34 +0000
+	id 1vnCqB-0008DH-5N;
+	Tue, 03 Feb 2026 09:36:59 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <nzzhao@126.com>) id 1vnCTU-0002QH-Kj
+ (envelope-from <nzzhao@126.com>) id 1vnCqA-0008DA-Dd
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Feb 2026 09:13:32 +0000
+ Tue, 03 Feb 2026 09:36:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=U5IAZOiZv36aqaRxt4HG5BNNYkjGILnO18MppaP6+40=; b=eS3S7tY/HOECvKu8GJBdIgSHu2
- 5VLgP3vFpkyGvZIqrE4g29EEJAUXQv4Cav+uoaB8lI/bIOj2/BX48XiDa01EY8/MAi4fx8eayb5D9
- gSKM85gRRu9N/W3vwHEl/bEb+kwXwMZxCVq65gGRv+gDv+F5Yg36AyUzA5U1O6VqwYMk=;
+ bh=ZaOWG5B+PSwIJ8DzEujwyITzMsylr1MZ9cnblL/mATw=; b=h6jpwPyfMqxEmc2+zSexbfVYjM
+ PpD8k1VnB982a0dlCzRiaNY44aLxPBtyIDvK7tA1CCE8fDhrobxHruRpFS9YrgnB+S6Mr9K6mOsui
+ Kf2pCJgyVfmpiGySZPTpB74JPKIVzvTT8Z/AICukCZSVJI1WZwkk382Nc6E0NuFV8gTQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -45,72 +45,74 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=U5IAZOiZv36aqaRxt4HG5BNNYkjGILnO18MppaP6+40=; b=MzjyT5hu++9SpK94b83DrA0Vkw
- pXqxJU19XJ6Vt5o+fGkFC7KO8C48Mto/uEDAQHniuFfwgh/41Bjgb+sqQaF22nLhKH5vscqnp2kLG
- lWjHYHSxKgBUgtqK6XrOYI4H7uE68XJcdqTVXO12jXDNJsmJF/6NPwXvAx5HKF4Zi6xY=;
-Received: from m16.mail.126.com ([220.197.31.9])
+ bh=ZaOWG5B+PSwIJ8DzEujwyITzMsylr1MZ9cnblL/mATw=; b=Qy+I+/QLTq0m2KlpKYPASccd36
+ X80x5D828qdJc4w8PG6cl6Ns1qVVzOv/zMaJKPSuyThEXoaNu8KGgpbKPzVNXuXTPIRxsRyAMZBSO
+ SpF9nJxBV+ygqtJ7zg7uldsoVNWKJrfVi1vxTdNGEHYknZcyIJnrwTSeuZ9DeT4363hQ=;
+Received: from m16.mail.126.com ([117.135.210.8])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vnCTT-0004W2-Qk for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Feb 2026 09:13:32 +0000
+ id 1vnCq9-00067o-KP for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Feb 2026 09:36:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
- s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=U5
- IAZOiZv36aqaRxt4HG5BNNYkjGILnO18MppaP6+40=; b=TlFvv7PrUPeiy0w+e4
- 5/ADLDDCL6swhMKZ364FLs4rlekHtzky8WFLT/HpXw09v4sHUyVmW8qYpDpXlGoM
- lXVOi0d1gj2PiUzOQo0IiFZB24vc1s3zz9VDZvaB1fZDLS27DVw4gERw32EsDEBj
- G9b2Qtuc69p4hgOsdCXuhN5Hs=
+ s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=Za
+ OWG5B+PSwIJ8DzEujwyITzMsylr1MZ9cnblL/mATw=; b=dHdOPx5JFmfMB9gte1
+ rhWTk1StJgNQCEsnmrVfWKkTgw5/+jijJd4Jgx6WLajdO13gKUabHmYM2zW2vUI9
+ 4W+IjNJmHtaincyV8Swf+HFrxLzpAvD9HNneWGX/68imTfj6X8FUvRQTG5mjXuOs
+ 8rsH2jQQNg94//fmZftFLI3+E=
 Received: from YLLaptop.. (unknown [])
- by gzga-smtp-mtada-g0-0 (Coremail) with SMTP id
- _____wD3l2kivIFpOegGAA--.25117S4; 
- Tue, 03 Feb 2026 17:13:14 +0800 (CST)
+ by gzga-smtp-mtada-g0-2 (Coremail) with SMTP id
+ _____wD3z5OjwYFpjYYQAA--.45631S2; 
+ Tue, 03 Feb 2026 17:36:35 +0800 (CST)
 From: Nanzhe Zhao <nzzhao@126.com>
 To: Jaegeuk Kim <jaegeuk@kernel.org>,
 	linux-f2fs-devel@lists.sourceforge.net
-Date: Tue,  3 Feb 2026 17:12:49 +0800
-Message-Id: <20260203091256.854842-3-nzzhao@126.com>
+Date: Tue,  3 Feb 2026 17:36:12 +0800
+Message-Id: <20260203093614.857390-4-nzzhao@126.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260203091256.854842-1-nzzhao@126.com>
 References: <20260203091256.854842-1-nzzhao@126.com>
 MIME-Version: 1.0
-X-CM-TRANSID: _____wD3l2kivIFpOegGAA--.25117S4
-X-Coremail-Antispam: 1Uf129KBjvJXoW7tryfZF13ury7AF1rtFWrXwb_yoW8Ar1rpF
- ZrG3WrGr4DuFy8Wrn7tF15Zr1Y9a4xKw4UZFZ7Xw4kJ3WDX34Syr1rK347ZF18trWrJryI
- qF4IkFyxur15JFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0zRy7KsUUUUU=
+X-CM-TRANSID: _____wD3z5OjwYFpjYYQAA--.45631S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7KFW3Cw1UZF1DJryftr18Zrb_yoW8Ww1rpF
+ y5KF45Gr45u3s29w4DW3Wj9r1rt3srKa4UZa93Z3srAFn8J3WfKa1vya4j9a15XF97Wr10
+ qa4jyFyUWF1YyaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0ziJ3ktUUUUU=
 X-Originating-IP: [58.240.165.118]
-X-CM-SenderInfo: xq22xtbr6rjloofrz/xtbBsQrzw2mBvCqXRQAA3n
+X-CM-SenderInfo: xq22xtbr6rjloofrz/xtbBogRUJGmBwaQucQAA3E
 X-Spam-Score: 0.8 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Introudce a helper function to check whether an inode may
- use large folio for scalability. Signed-off-by: Nanzhe Zhao --- fs/f2fs/f2fs.h
- | 16 ++++++++++++++++ fs/f2fs/inode.c | 3 +-- 2 files changed, 17 insertions(+),
- 2 deletions(-) 
+ Content preview:  In the case of large folio buffered write, if we pre-allocate
+ partial blocks after acquiring the folio lock, it may call f2fs_balance_fs
+ and need to unlock the folio during write. Re-locking after unlocking can
+ be troublesome because a large folio carries additional f2fs_folio_state
+ metadata, and partial truncate can cause the large folio to be split. At this
+ point, the large f [...] 
  Content analysis details:   (0.8 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
  [58.240.165.118 listed in dnsbl-2.uceprotect.net]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [nzzhao(at)126.com]
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [220.197.31.9 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [117.135.210.8 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  0.0 UNPARSEABLE_RELAY Informational: message has unparseable relay lines
-X-Headers-End: 1vnCTT-0004W2-Qk
-Subject: [f2fs-dev] [RFC PATCH v1 2/5] f2fs: Introduce
- f2fs_inode_may_use_large_folio
+X-Headers-End: 1vnCq9-00067o-KP
+Subject: [f2fs-dev] [RFC PATCH v1 3/5] f2fs: Preallocate partial-write
+ blocks for large-folio write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -162,59 +164,52 @@ X-Spamd-Result: default: False [0.39 / 15.00];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,126.com:s=s110527];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,126.com:-];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
-X-Rspamd-Queue-Id: 78C30D6A60
+X-Rspamd-Queue-Id: 1F7A0D6DEE
 X-Rspamd-Action: no action
 
-Introudce a helper function to check whether an inode may use
-large folio for scalability.
+In the case of large folio buffered write, if we pre-allocate partial
+blocks after acquiring the folio lock, it may call f2fs_balance_fs and
+need to unlock the folio during write.
 
+Re-locking after unlocking can be troublesome because a large folio
+carries additional f2fs_folio_state metadata, and partial truncate can
+cause the large folio to be split.
+At this point, the large folio is still in the inode->mapping.
+
+Prellocate partial blocks in advance to avoid handling this.
 Signed-off-by: Nanzhe Zhao <nzzhao@126.com>
 ---
- fs/f2fs/f2fs.h  | 16 ++++++++++++++++
- fs/f2fs/inode.c |  3 +--
- 2 files changed, 17 insertions(+), 2 deletions(-)
+ fs/f2fs/file.c | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index bdcd446f6b18..e5b8f5374666 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -5035,6 +5035,22 @@ static inline bool f2fs_quota_file(struct f2fs_sb_info *sbi, nid_t ino)
- 	return false;
- }
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index abcf6f486dd7..18a9feccb1f9 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -4995,9 +4995,20 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
+ 			return ret;
+ 	}
  
-+static inline bool f2fs_inode_may_use_large_folio(struct inode *inode)
-+{
-+	if (f2fs_has_inline_data(inode))
-+		return false;
+-	/* Do not preallocate blocks that will be written partially in 4KB. */
+-	map.m_lblk = F2FS_BLK_ALIGN(pos);
+-	map.m_len = F2FS_BYTES_TO_BLK(pos + count);
++	if (mapping_large_folio_support(inode->i_mapping)) {
++		/* preallocate all blocks for large folio inode before write to avoid
++		 * unlocking large folios by balance_fs during write. Rechecking the
++		 * large-folio state is unreliable since partial truncation may split
++		 * the folio.
++		 */
++		map.m_lblk = F2FS_BYTES_TO_BLK(pos);
++		map.m_len = F2FS_BLK_ALIGN(pos + count);
++	} else {
++		/* Do not preallocate blocks that will be written partially in 4KB. */
++		map.m_lblk = F2FS_BLK_ALIGN(pos);
++		map.m_len = F2FS_BYTES_TO_BLK(pos + count);
++	}
 +
-+	if (f2fs_compressed_file(inode))
-+		return false;
-+
-+	if (f2fs_is_atomic_file(inode))
-+		return false;
-+
-+	if (f2fs_quota_file(F2FS_I_SB(inode), inode->i_ino))
-+		return false;
-+	return true;
-+}
-+
- static inline bool f2fs_block_unit_discard(struct f2fs_sb_info *sbi)
- {
- 	return F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_BLOCK;
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index b8cf1fab6391..e2e85ac9c44e 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -620,8 +620,7 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
- 		inode->i_op = &f2fs_file_inode_operations;
- 		inode->i_fop = &f2fs_file_operations;
- 		inode->i_mapping->a_ops = &f2fs_dblock_aops;
--		if (IS_IMMUTABLE(inode) && !f2fs_compressed_file(inode) &&
--		    !f2fs_quota_file(sbi, inode->i_ino))
-+		if (f2fs_inode_may_use_large_folio(inode))
- 			mapping_set_folio_min_order(inode->i_mapping, 0);
- 	} else if (S_ISDIR(inode->i_mode)) {
- 		inode->i_op = &f2fs_dir_inode_operations;
+ 	if (map.m_len > map.m_lblk)
+ 		map.m_len -= map.m_lblk;
+ 	else
 -- 
 2.34.1
 
