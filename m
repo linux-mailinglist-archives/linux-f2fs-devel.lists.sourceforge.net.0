@@ -2,107 +2,130 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id m5qpBRKji2kuXgAAu9opvQ
+	id EBf8DlkqjGmFigAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Feb 2026 22:28:50 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Feb 2026 08:06:01 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A73B11F682
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Feb 2026 22:28:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A863A121C5B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Feb 2026 08:06:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
-	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=7leFItwFXM5Thk5XXuocHkwQ948/wfVlcOA+xr/1Lbc=; b=HTBJPKeW0ncnPURsAnr04Vh55S
-	lJGsIpQwR3ISZz126+D2NMY9XiUODtRwwFVK9K/QlXZF/2ARlWhktYEMQyHNIogXEiSaqR4jOopZ8
-	rs8x2tRlw69hJFwV6jnT9ov6/liH3fkGuwjCdoikhSt68dRufb/OYtKyGwLQOVIgrpXc=;
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:References:MIME-Version:Message-Id:Date:To:From:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:List-Owner;
+	bh=CueO9kXB2Zlh5prjP24ZSuXuDFBmGmoGaMVbmj4gkWE=; b=UqwoeQynDEMNoGBXlUSvp6iBAv
+	Uwp+F5E3r/QxRhTu0vvcDHF2EdlWAwC3K0JCZe8dcwZ4SeR+GCksHE/XG6LhfusN3IPoumShU+xh9
+	gk1e235wIWWI/iwNwzKC4+Me5zlMmzi/YS4eNdWRLe8J6JsdXQFyuv1AFz2hXSO3vIqU=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vpvHq-0001ee-K3;
-	Tue, 10 Feb 2026 21:28:46 +0000
+	id 1vq4IJ-0005S2-W4;
+	Wed, 11 Feb 2026 07:05:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1vpvHp-0001eX-9A
+ (envelope-from <kundan.kumar@samsung.com>) id 1vq4IH-0005Rt-FT
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Feb 2026 21:28:45 +0000
+ Wed, 11 Feb 2026 07:05:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ObzWN8dpkPPmZM2wwyXo0Xp+ZYUiTl+iFhpffwMDDeY=; b=EU7njUd+nf5Xe7S6CAy37RHpnx
- QInSRhlJ+b02pP6YJqlcONi9WaczqPd+HBSTnP4xMSoV3TKH5wr6dEzkyJ3yXjGYBesJ9JP0g52TV
- L0vpcuqTvlFuRgcD+Uw4XnG1MK29l+JhLcqu3bXtKZCtUdeTQe/yubpn1zwnIMAO6vW8=;
+ bh=Sww2nmNF0f2l1AROtDDtiK9pmxid95q9qnlr0mGjEL8=; b=b0qHLVnxnJ1Rm/YctFnPyWREZ3
+ 21DK3/7pgU4uu+ldxS6b/xvh7LBU0y0xATRxH0QSYCoIEnGaq3XAiB6/Mv2ist2kIr4Zoc0XeQGIs
+ P2o4kEInnmDbEhmLvDmpF8RjH9h4/v3OuPXhE14HDGpV39GejNppOTvnRcq+ZS8eHSrk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ObzWN8dpkPPmZM2wwyXo0Xp+ZYUiTl+iFhpffwMDDeY=; b=UhyMsI5Et0RAGa4ppdcRQjtDLE
- FvwTmwPxAu85NQkZfyHDFZbvTxKUAMFGXnXiNoVOqHGk1uvy1ZEFaTMVIH9eu8EeuW4LU5XJpXy8C
- UQVHmLPofzIsg+TAi91Ym17U7TiGNhAtaLk/U60g0czHhT8/mcyAjvgw5rzipqWantZw=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ ;
+ h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id
+ :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Sww2nmNF0f2l1AROtDDtiK9pmxid95q9qnlr0mGjEL8=; b=E
+ ukX79WJR+PE5ctTvqUZzZECvgu7mVB9/b9OQDVgnq5josIOD4EC5OCedgZBLa0HxunoV6+EarFYOV
+ K21d3ofbaUg06i42lr3PYED8K2/70ce34Vm/zqv9jq9VzN2H/fjAD4CslRJWE8sBA+Qy/+7klT6vh
+ x3kjmGrcgaOz5pto=;
+Received: from mailout1.samsung.com ([203.254.224.24])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vpvHo-00051j-HI for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Feb 2026 21:28:45 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 3EA1444504
+ id 1vq4IG-0003Rs-Eb for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 11 Feb 2026 07:05:49 +0000
+Received: from epcas5p2.samsung.com (unknown [182.195.41.40])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20260211070536epoutp012397f3f7742b82a056884011c489036e~TH1bS6GMI2070720707epoutp01q
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 10 Feb 2026 21:28:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 18C52C19424;
- Tue, 10 Feb 2026 21:28:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1770758914;
- bh=wQHMv6Mf1rtk6NqvUFMPZ0OXiJzQwDvHAWYVzvrJtEQ=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=sPe1XVZm/jmZHjxj3u9FpnNrr48+ssMLMxS8n0ZKCVrdTXFT+gpMoEkonqjWLe3xy
- Vb9S8xM0j/boJx6eMCY/XLoZigZgnMJ50cerkXp2rOvH5NQf0jGvdXaFz0hhqhSltq
- 1Jw+eW6kiDy0IlHWjOGp6LmGN652SXnqw+Sro7PtAQG+eS28kONQsmlXDFjQgo/Cfn
- I20bVTnE3/XA4w9yfdnlABBwdA9Ondr3iQHPjEnu351/tqz6tnDmUWsuV2ZL5UkSs6
- W1a3duWkhLtAALJQSxH2Q3R4DMmtLEwW/oZ5sVpHm/viwshZSO/7vot5ohHdLgLfE0
- eUembh+vNO5UQ==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
- by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 84F9739E3B79; Tue, 10 Feb 2026 21:28:30 +0000 (UTC)
+ Wed, 11 Feb 2026 07:05:36 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20260211070536epoutp012397f3f7742b82a056884011c489036e~TH1bS6GMI2070720707epoutp01q
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1770793536;
+ bh=Sww2nmNF0f2l1AROtDDtiK9pmxid95q9qnlr0mGjEL8=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=Z8MWF8cFBdc+Lk5PdQvEI9KQUH4su6ltWppZLVMVlHWVpzEcNtF525FrcOkq2KLAV
+ ZnauzpyDNdgVbybNLl/eZQSsbQFOkLpOW3I+XZEdRwwVxLisQmLWX/2XhOrsIvxzBa
+ Ov3yoz01Qr5qYA9/nY4gYe+1MRS1uOT4Z9wSEiDU=
+Received: from epsnrtp02.localdomain (unknown [182.195.42.154]) by
+ epcas5p2.samsung.com (KnoxPortal) with ESMTPS id
+ 20260211070535epcas5p284044f7b5912b7b17a0c0c72cdd9cbc9~TH1ai1tUF2597925979epcas5p2I;
+ Wed, 11 Feb 2026 07:05:35 +0000 (GMT)
+Received: from epcas5p2.samsung.com (unknown [182.195.38.86]) by
+ epsnrtp02.localdomain (Postfix) with ESMTP id 4f9qFp4J6Jz2SSKY; Wed, 11 Feb
+ 2026 07:05:34 +0000 (GMT)
+Received: from epsmtip2.samsung.com (unknown [182.195.34.31]) by
+ epcas5p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20260211070533epcas5p32f50f317b20250bb61b1b5a0b3a2a5d9~TH1ZECz8e3259532595epcas5p3y;
+ Wed, 11 Feb 2026 07:05:33 +0000 (GMT)
+Received: from localhost.localdomain (unknown [107.99.41.245]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20260211070531epsmtip27bd9061c934eb98c7caa294df028332b~TH1Wa7Jqk0204902049epsmtip2F;
+ Wed, 11 Feb 2026 07:05:30 +0000 (GMT)
+From: Kundan Kumar <kundan.kumar@samsung.com>
+To: jaegeuk@kernel.org, chao@kernel.org, agruenba@redhat.com,
+ trondmy@kernel.org, anna@kernel.org, hch@lst.de, brauner@kernel.org,
+ jack@suse.cz, viro@zeniv.linux.org.uk, djwong@kernel.org,
+ pankaj.raghav@linux.dev
+Date: Wed, 11 Feb 2026 12:30:53 +0530
+Message-Id: <20260211070057.22001-1-kundan.kumar@samsung.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Message-Id: <177075890907.3671709.18125640893352806832.git-patchwork-notify@kernel.org>
-Date: Tue, 10 Feb 2026 21:28:29 +0000
-References: <20260130132809.59707-1-chao@kernel.org>
-In-Reply-To: <20260130132809.59707-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+X-CMS-MailID: 20260211070533epcas5p32f50f317b20250bb61b1b5a0b3a2a5d9
+X-Msg-Generator: CA
+CMS-TYPE: 105P
+cpgsPolicy: CPGSC10-542,Y
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20260211070533epcas5p32f50f317b20250bb61b1b5a0b3a2a5d9
+References: <CGME20260211070533epcas5p32f50f317b20250bb61b1b5a0b3a2a5d9@epcas5p3.samsung.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 30 Jan 2026 21:28:08 +0800 you
- wrote: > If userspace thread has held f2fs rw semaphore,
- due to its low priority, 
- > it could be runnable or preempted state for long time, during the time,
- > it [...] 
+ Content preview: The series introduces writeback helper APIs and converts f2fs,
+ gfs2 and nfs to stop accessing writeback internals directly. As suggested
+ by Christoph [1], filesystem code that directly accesses writeback internals
+ is split out: [1] https://lore.kernel.org/all/20251015072912.GA11294@lst.de/
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.24 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vpvHo-00051j-HI
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: fix lock priority inversion issue
+X-Headers-End: 1vq4IG-0003Rs-Eb
+Subject: [f2fs-dev] [PATCH 0/4] Avoid filesystem references to writeback
+ internals
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,85 +137,76 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: patchwork-bot+f2fs--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-nfs@vger.kernel.org, gost.dev@samsung.com, anuj20.g@samsung.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ gfs2@lists.linux.dev, mcgrof@kernel.org, vishak.g@samsung.com,
+ Kundan Kumar <kundan.kumar@samsung.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-7.21 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	MID_RHS_MATCH_TO(1.00)[];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+X-Spamd-Result: default: False [0.39 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[samsung.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
-	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	DKIM_MIXED(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:agruenba@redhat.com,m:trondmy@kernel.org,m:anna@kernel.org,m:hch@lst.de,m:brauner@kernel.org,m:jack@suse.cz,m:viro@zeniv.linux.org.uk,m:djwong@kernel.org,m:pankaj.raghav@linux.dev,m:linux-nfs@vger.kernel.org,m:gost.dev@samsung.com,m:anuj20.g@samsung.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:gfs2@lists.linux.dev,m:mcgrof@kernel.org,m:vishak.g@samsung.com,m:kundan.kumar@samsung.com,s:lists@lfdr.de];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[samsung.com:mid,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim];
 	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	FORGED_SENDER(0.00)[kundan.kumar@samsung.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,samsung.com:s=mail20170921];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,samsung.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kundan.kumar@samsung.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[patchwork-bot+f2fs@kernel.org];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 7A73B11F682
+	RCVD_COUNT_SEVEN(0.00)[8]
+X-Rspamd-Queue-Id: A863A121C5B
 X-Rspamd-Action: no action
 
-Hello:
+The series introduces writeback helper APIs and converts f2fs, gfs2
+and nfs to stop accessing writeback internals directly.
 
-This series was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
+As suggested by Christoph [1], filesystem code that directly accesses
+writeback internals is split out:
+[1] https://lore.kernel.org/all/20251015072912.GA11294@lst.de/
 
-On Fri, 30 Jan 2026 21:28:08 +0800 you wrote:
-> If userspace thread has held f2fs rw semaphore, due to its low priority,
-> it could be runnable or preempted state for long time, during the time,
-> it will block high priority thread which is trying to grab the same rw
-> semaphore, e.g. cp_rwsem, io_rwsem...
-> 
-> To fix such issue, let's detect thread's priority when it tries to grab
-> f2fs_rwsem lock, if the priority is lower than a priority threshold, let's
-> uplift the priority before it enters into critical region of lock, and
-> restore the priority after it leaves from critical region.
-> 
-> [...]
+No functional changes intended
 
-Here is the summary with links:
-  - [f2fs-dev,1/2] f2fs: fix lock priority inversion issue
-    https://git.kernel.org/jaegeuk/f2fs/c/07de55cbf576
-  - [f2fs-dev,2/2] f2fs: introduce trace_f2fs_priority_update
-    https://git.kernel.org/jaegeuk/f2fs/c/bc367775f602
+Kundan Kumar (4):
+  writeback: prep helpers for dirty-limit and writeback accounting
+  f2fs: stop using writeback internals for dirty_exceeded checks
+  gfs2: stop using writeback internals for dirty_exceeded check
+  nfs: stop using writeback internals for WB_WRITEBACK accounting
 
-You are awesome, thank you!
+ fs/f2fs/node.c              |  4 ++--
+ fs/f2fs/segment.h           |  2 +-
+ fs/gfs2/super.c             |  2 +-
+ fs/nfs/internal.h           |  2 +-
+ fs/nfs/write.c              |  4 ++--
+ include/linux/backing-dev.h | 11 +++++++++++
+ 6 files changed, 18 insertions(+), 7 deletions(-)
+
+
+base-commit: 05f7e89ab9731565d8a62e3b5d1ec206485eeb0b
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+2.25.1
 
 
 
