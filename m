@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8C0qCPW7jmkWEQEAu9opvQ
+	id OCthCfq7jmknEQEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Feb 2026 06:51:49 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Feb 2026 06:51:54 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36A3513313F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Feb 2026 06:51:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB681133153
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Feb 2026 06:51:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:References:MIME-Version:In-Reply-To:Message-Id:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=0ceIMosPGkmUWcvmSVkY0zeuQpDJaxsdTaqJYIlaDtI=; b=KGM3NV3MmLmFBjHEHMFFfo9gSO
-	GTcII1V25ANMaYI6EiHE+6WrnhFZe/g4yhMop1XZkb8Cz2p+zfnMLZplb4Uaf2UNd+zDOdznzRKEM
-	le2m1e9gnfv/6dmKMsOjr97gRTWYhqymBNwBofS5KAFhqHxHvtRf0kVN5slUfRD7ffHY=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=hECRm//Spi4l4LuUch6ZQVNgyQtpUioHDt3kcWZ1i4k=; b=PDcaAU1KxJSo3CConGn2Zfwwp3
+	LUbZ5fAkgSLdXTKhIqP6GnhVNRELmV0fzFtvFj2LtWj+5FZmCDdv5HIWoAQGUar4wCn2WId3cxzQZ
+	XYD8jTzEvipNMCjnQZ/hiIr9EzcrucwH673CyUEPxuWxwTIXlBAH9IzSyGxUzo0hKktw=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vqm5f-0000bw-2l;
-	Fri, 13 Feb 2026 05:51:43 +0000
+	id 1vqm5o-0006H4-Ck;
+	Fri, 13 Feb 2026 05:51:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kundan.kumar@samsung.com>) id 1vqm5d-0000bo-KA
+ (envelope-from <kundan.kumar@samsung.com>) id 1vqm5m-0006Gu-Qu
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Feb 2026 05:51:41 +0000
+ Fri, 13 Feb 2026 05:51:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
  MIME-Version:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+fi7XhvBJA/4rcnBtM8yogDXj5mpCvXE4Mbm87A1wDE=; b=K8PlhyQNNcu4CfiMfgiztCsKNo
- LSr7DVFoW2Q2TXpVfrclBTu2XbGLNaNYd9U/zU4Z4KIDjPawK7bO8CayNw9KK+tL29DHpLlEozOrN
- e8zZnOrwHaZ+cv5d0ASPU9DSrs6SZUy4KDnkcBFICsnSbg4OhP/aETXGR6FP45TdnxBw=;
+ bh=GDVcAGbX+6+fS68q52mUWNCiGdwubcd88imzb/VPBgA=; b=DafARhRINZd+DKh2QGR7KQjGE8
+ oqJO/ymbe2LLT442MKneQ3dIx534rKpWavJR9QSv4KLo4av5GXVKKlFLehJrmVDXVaIRqET7zG9ge
+ JJzgyJd6/uvG+nLT1UUfP4D+EM3Ut01rH8Z7huDheXpSZjlEfrD/37FSc2zM0/Z/URwo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:
@@ -45,60 +45,60 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+fi7XhvBJA/4rcnBtM8yogDXj5mpCvXE4Mbm87A1wDE=; b=Hv2EbytrviH5JTU99svHqR8dp4
- wJqGmdoR8K2pKjNIIY+XIJen/qpKEjsj9FlGYxn5DWd/1z4GCdwHVAXqxRS/ujiRvSQ4AL5+zy6qw
- 8sx9liWUSk1I2B7QPIuDF5n+KUJkwsu4JRimLxIq0JvMIgnXQd7+fCZrsb0bP2772yqY=;
+ bh=GDVcAGbX+6+fS68q52mUWNCiGdwubcd88imzb/VPBgA=; b=TTCLz0F9aZC9HzEcFIbT6yeGYx
+ wydVkMviivFcc0UHOxWzrMsMPr88p+7E/lqH+mc/3/YiiARByqHd2k9alTkK09T1SkX0X5Gdn2utQ
+ dk7i2GJnKHS6nha3OWyLoY5UTrd9M0mJRtYDdPfiNdw/63NxUCVM7HPwuYCr24ng7d+c=;
 Received: from mailout4.samsung.com ([203.254.224.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vqm5c-0007LX-JA for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Feb 2026 05:51:41 +0000
-Received: from epcas5p2.samsung.com (unknown [182.195.41.40])
+ id 1vqm5m-0007Lr-3T for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 13 Feb 2026 05:51:50 +0000
+Received: from epcas5p3.samsung.com (unknown [182.195.41.41])
  by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20260213055134epoutp0436162d52a29e12e3a4c0e12d6421a40d~TuHWt5_VJ1225712257epoutp04V
+ 20260213055138epoutp04a92e3f4d8f84f69ba09ca9c09f6250fb~TuHa56rXJ1162511625epoutp04z
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 13 Feb 2026 05:51:34 +0000 (GMT)
+ Fri, 13 Feb 2026 05:51:38 +0000 (GMT)
 DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20260213055134epoutp0436162d52a29e12e3a4c0e12d6421a40d~TuHWt5_VJ1225712257epoutp04V
+ 20260213055138epoutp04a92e3f4d8f84f69ba09ca9c09f6250fb~TuHa56rXJ1162511625epoutp04z
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1770961894;
- bh=+fi7XhvBJA/4rcnBtM8yogDXj5mpCvXE4Mbm87A1wDE=;
+ s=mail20170921; t=1770961898;
+ bh=GDVcAGbX+6+fS68q52mUWNCiGdwubcd88imzb/VPBgA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ItMoBkkq5IrA8Ex59WnNNdjgMr1vhmXjJ0IHxPwpReoGvK3Hdqko9ISywXs9RAO+0
- 0vAwr/weEvNt+Eka+5v8rFFjs0HgPTAOvsk2lupNIASKeDJ9sEE4tVWTOuzr42e8PW
- 1rc6F22RsvwcCXGDohpWKqM/WqUEPUJyiecY7bAg=
+ b=U02feq5OZn+prBrZ000m3xY3Q7QnAOuiFmLpupV/9E5QYUsvmsjVgQidPaarY+R91
+ dcpYqLoGcAJMNaaYzHFpml2wIcn/kJK94lcNyANF+RzNcX8VXwykYFbOZkOJ3wO1t8
+ ty1HtwnJCiXyi8r8xjIgPP+WJpQvfv5o44yV+yto=
 Received: from epsnrtp03.localdomain (unknown [182.195.42.155]) by
  epcas5p2.samsung.com (KnoxPortal) with ESMTPS id
- 20260213055133epcas5p2bc20a1e513af52dc8ccc5c79fd94f8ea~TuHV5j2sM2327923279epcas5p2E;
- Fri, 13 Feb 2026 05:51:33 +0000 (GMT)
-Received: from epcas5p3.samsung.com (unknown [182.195.38.90]) by
- epsnrtp03.localdomain (Postfix) with ESMTP id 4fC1WS1V73z3hhT7; Fri, 13 Feb
- 2026 05:51:32 +0000 (GMT)
+ 20260213055138epcas5p2cff9e249420c9e1e49533df5ec6b97a5~TuHaeL41X0260502605epcas5p2D;
+ Fri, 13 Feb 2026 05:51:38 +0000 (GMT)
+Received: from epcas5p4.samsung.com (unknown [182.195.38.87]) by
+ epsnrtp03.localdomain (Postfix) with ESMTP id 4fC1WY09tSz3hhTJ; Fri, 13 Feb
+ 2026 05:51:37 +0000 (GMT)
 Received: from epsmtip2.samsung.com (unknown [182.195.34.31]) by
- epcas5p1.samsung.com (KnoxPortal) with ESMTPA id
- 20260213055131epcas5p1fdfcb9e38e3301e0f9f718a751a362f9~TuHUiimdv0793307933epcas5p1J;
- Fri, 13 Feb 2026 05:51:31 +0000 (GMT)
+ epcas5p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20260213055136epcas5p2f13881eb387cff40137199086e06f965~TuHY1bZy32327923279epcas5p2L;
+ Fri, 13 Feb 2026 05:51:36 +0000 (GMT)
 Received: from localhost.localdomain (unknown [107.99.41.245]) by
  epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20260213055128epsmtip2f14b508cf8119d23c4449c8e45185d26~TuHRwQL8u2471724717epsmtip2Q;
- Fri, 13 Feb 2026 05:51:28 +0000 (GMT)
+ 20260213055131epsmtip21d249fe955d6286e5d3a1f88d5825e9f~TuHUyS2XA2622126221epsmtip2D;
+ Fri, 13 Feb 2026 05:51:31 +0000 (GMT)
 From: Kundan Kumar <kundan.kumar@samsung.com>
 To: jaegeuk@kernel.org, chao@kernel.org, agruenba@redhat.com,
  trondmy@kernel.org, anna@kernel.org, hch@lst.de, brauner@kernel.org,
  jack@suse.cz, viro@zeniv.linux.org.uk, djwong@kernel.org, jlayton@kernel.org
-Date: Fri, 13 Feb 2026 11:16:32 +0530
-Message-Id: <20260213054634.79785-3-kundan.kumar@samsung.com>
+Date: Fri, 13 Feb 2026 11:16:33 +0530
+Message-Id: <20260213054634.79785-4-kundan.kumar@samsung.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260213054634.79785-1-kundan.kumar@samsung.com>
 MIME-Version: 1.0
-X-CMS-MailID: 20260213055131epcas5p1fdfcb9e38e3301e0f9f718a751a362f9
+X-CMS-MailID: 20260213055136epcas5p2f13881eb387cff40137199086e06f965
 X-Msg-Generator: CA
 CMS-TYPE: 105P
 cpgsPolicy: CPGSC10-542,Y
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20260213055131epcas5p1fdfcb9e38e3301e0f9f718a751a362f9
+X-CMS-RootMailID: 20260213055136epcas5p2f13881eb387cff40137199086e06f965
 References: <20260213054634.79785-1-kundan.kumar@samsung.com>
- <CGME20260213055131epcas5p1fdfcb9e38e3301e0f9f718a751a362f9@epcas5p1.samsung.com>
+ <CGME20260213055136epcas5p2f13881eb387cff40137199086e06f965@epcas5p2.samsung.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -106,12 +106,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Replace direct dereferences of dirty_exceeded with the core
- helper bdi_wb_dirty_exceeded(),
- removing f2fs dependencies on writeback internals.
- Reviewed-by: Jeff Layton <jlayton@kernel.org> Reviewed-by: Andreas Gruenbacher
- <agruenba@redhat.com> Suggested-by: Christoph Hellwig <hch@lst.de>
- Signed-off-by: Kundan Kumar <kundan.kumar@samsung.com> [...] 
+ Content preview:  Convert gfs2 dirty_exceeded handling to use the writeback
+ core helper instead of accessing writeback directly. Reviewed-by: Jeff Layton
+ <jlayton@kernel.org> Reviewed-by: Andreas Gruenbacher <agruenba@redhat.com>
+ Suggested-by: Christoph Hellwig <hch@lst.de> Signed-off-by: Kundan Kumar
+ <kundan.kumar@samsung.com> [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -126,9 +125,9 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vqm5c-0007LX-JA
-Subject: [f2fs-dev] [PATCH v2 2/4] f2fs: stop using writeback internals for
- dirty_exceeded checks
+X-Headers-End: 1vqm5m-0007Lr-3T
+Subject: [f2fs-dev] [PATCH v2 3/4] gfs2: stop using writeback internals for
+ dirty_exceeded check
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -150,9 +149,9 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.39 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[samsung.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -160,10 +159,10 @@ X-Spamd-Result: default: False [0.39 / 15.00];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	DKIM_MIXED(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:agruenba@redhat.com,m:trondmy@kernel.org,m:anna@kernel.org,m:hch@lst.de,m:brauner@kernel.org,m:jack@suse.cz,m:viro@zeniv.linux.org.uk,m:djwong@kernel.org,m:jlayton@kernel.org,m:linux-nfs@vger.kernel.org,m:gost.dev@samsung.com,m:anuj20.g@samsung.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:gfs2@lists.linux.dev,m:vishak.g@samsung.com,m:kundan.kumar@samsung.com,s:lists@lfdr.de];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[samsung.com:mid,samsung.com:email,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim];
-	FORGED_SENDER(0.00)[kundan.kumar@samsung.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,samsung.com:mid,samsung.com:email];
 	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	FORGED_SENDER(0.00)[kundan.kumar@samsung.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,samsung.com:s=mail20170921];
@@ -180,12 +179,11 @@ X-Spamd-Result: default: False [0.39 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCVD_COUNT_SEVEN(0.00)[8]
-X-Rspamd-Queue-Id: 36A3513313F
+X-Rspamd-Queue-Id: AB681133153
 X-Rspamd-Action: no action
 
-Replace direct dereferences of dirty_exceeded with the core helper
-bdi_wb_dirty_exceeded(), removing f2fs dependencies on writeback
-internals.
+Convert gfs2 dirty_exceeded handling to use the writeback core helper
+instead of accessing writeback directly.
 
 Reviewed-by: Jeff Layton <jlayton@kernel.org>
 Reviewed-by: Andreas Gruenbacher <agruenba@redhat.com>
@@ -193,45 +191,22 @@ Suggested-by: Christoph Hellwig <hch@lst.de>
 Signed-off-by: Kundan Kumar <kundan.kumar@samsung.com>
 Signed-off-by: Anuj Gupta <anuj20.g@samsung.com>
 ---
- fs/f2fs/node.c    | 4 ++--
- fs/f2fs/segment.h | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ fs/gfs2/super.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 482a362f2625..d450b282cc55 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -78,7 +78,7 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
- 		if (excess_cached_nats(sbi))
- 			res = false;
- 	} else if (type == DIRTY_DENTS) {
--		if (sbi->sb->s_bdi->wb.dirty_exceeded)
-+		if (bdi_wb_dirty_exceeded(sbi->sb->s_bdi))
- 			return false;
- 		mem_size = get_pages(sbi, F2FS_DIRTY_DENTS);
- 		res = mem_size < ((avail_ram * nm_i->ram_thresh / 100) >> 1);
-@@ -119,7 +119,7 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
- 		res = false;
- #endif
- 	} else {
--		if (!sbi->sb->s_bdi->wb.dirty_exceeded)
-+		if (!bdi_wb_dirty_exceeded(sbi->sb->s_bdi))
- 			return true;
- 	}
- 	return res;
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 07dcbcbeb7c6..d7166f1f000a 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -1000,7 +1000,7 @@ static inline bool sec_usage_check(struct f2fs_sb_info *sbi, unsigned int secno)
-  */
- static inline int nr_pages_to_skip(struct f2fs_sb_info *sbi, int type)
- {
--	if (sbi->sb->s_bdi->wb.dirty_exceeded)
-+	if (bdi_wb_dirty_exceeded(sbi->sb->s_bdi))
- 		return 0;
- 
- 	if (type == DATA)
+diff --git a/fs/gfs2/super.c b/fs/gfs2/super.c
+index f6cd907b3ec6..7ddeee19dec4 100644
+--- a/fs/gfs2/super.c
++++ b/fs/gfs2/super.c
+@@ -447,7 +447,7 @@ static int gfs2_write_inode(struct inode *inode, struct writeback_control *wbc)
+ 		gfs2_log_flush(GFS2_SB(inode), ip->i_gl,
+ 			       GFS2_LOG_HEAD_FLUSH_NORMAL |
+ 			       GFS2_LFC_WRITE_INODE);
+-	if (bdi->wb.dirty_exceeded)
++	if (bdi_wb_dirty_exceeded(bdi))
+ 		gfs2_ail1_flush(sdp, wbc);
+ 	else
+ 		filemap_fdatawrite(metamapping);
 -- 
 2.25.1
 
