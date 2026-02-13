@@ -2,138 +2,140 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AINLHer4jmnbGAEAu9opvQ
+	id 6G0XFZgYj2mJIgEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Feb 2026 11:11:54 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Feb 2026 13:27:04 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3CA6134ED8
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Feb 2026 11:11:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87B7E1360BB
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Feb 2026 13:27:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:Message-Id:Date:To:From:Sender:Reply-To:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=Xu/st5bHCv13Zu0tNu4FV3ciVqECXKxdQPayIbQ0U34=; b=mh/9PF8K43wfg+cpZ2CBRINDOB
-	0kRwY90XuVNpJRwLbqK+9VIhQCQEA0Cbwx0/Zmkd5WnHZidBxWqnR/aS+DqIT6JIZWXpEfR8pRpoh
-	itakS2AsVakU3MuQbpTNC3orQtHjuFbSWhDTg2GCoV7YTkixSH1rNl7YxXEueEr1zfQM=;
+	bh=E8emAlRYkGnvnAtiS+tDF3pRQ7BfRX351ZWM/3zabYM=; b=J0HuMoYK3p8KKvZ30vxrDYhlsz
+	epDatOhSvPSr46q2MwC36imWznDOUNfXBhtzh3PY5hklleC0aazcT48yn0GGOCpp9C6t0ZSCJ+OPm
+	xWu+5fdws8RaGKr1FjcUlYZBYhY+KUJteV/BbkVRvjMo+q7zILc1VI/xrZvI02XFq/U4=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vqq9F-0003Qh-KK;
-	Fri, 13 Feb 2026 10:11:41 +0000
+	id 1vqsG8-0006K0-73;
+	Fri, 13 Feb 2026 12:26:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jinbaoliu365@gmail.com>) id 1vqq8z-0003QP-Iv
+ (envelope-from <jinbaoliu365@gmail.com>) id 1vqsG6-0006Ju-Ft
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Feb 2026 10:11:25 +0000
+ Fri, 13 Feb 2026 12:26:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gKNTFe8H265of62YNJDNS9isKGx9ghFWnCa5ZUmkIvk=; b=C8xdMyzTVz9iLccYzOGRPJkjEA
- FAfkxWckcDTFZKYzQeJ8GJ3mdhgxiTmCiwbVExpu0oYpB51LsWPfvSKYMKUcIXGBZF49VJN9OSemi
- byl1aK+y3IqBmsBLt1mxCXeKabxfiXO+izWPSSdKIeOGeM2NWsDMKoEk3YO/57HAnpCo=;
+ bh=ihQelNxxxE86Yu975NKKOV5Xmyw2LwiMN4HOx9a3cbs=; b=P61MSyTihsiWgDfn/JlVtAgUPb
+ okxyY3vTDCDLhUViyinCdN2XyO41cZ4b01dpreilEw+1fCLNTWhwVJX/DROK8AhQBS10fwXRdKF7P
+ UE5KvEKQQPNNAo5Fu7I6QrSY7G9S3/v2qAQ9no8O+0Wdl+OZDK4p/FN2pno/nC3IJ9qo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=gKNTFe8H265of62YNJDNS9isKGx9ghFWnCa5ZUmkIvk=; b=a
- 1XJDR2vPB0bItTwToZXyG/lnP/hk0C4LXQqFFxqcf46JD/egkGx8nPuVG8C9TwHohO2kdXff/RJGd
- ZlOWutZxUcj+SJN+gQgohw9HZZsJzdnqJkhysbYyCWOmLUXaWbxBDlMMCAD3mNMrbvpz4F+LNqMgt
- KI9Y+OSnQP4yUaZI=;
-Received: from mail-pf1-f172.google.com ([209.85.210.172])
+ List-Owner:List-Archive; bh=ihQelNxxxE86Yu975NKKOV5Xmyw2LwiMN4HOx9a3cbs=; b=U
+ wCaN6WWdKv2Dj3LipxmAI4XZuNDZZmpNTz+IWa5fimj5OdqMa6PuKilVavj8sf/eQlBh2cvSHEJS6
+ ZIB0jAC+C+aifQ2y8jzarEjZf+u8XtL4xy0U5lr0/KVabU82ihDAxVg6KMWESVaSKtL4nnvRSdG9a
+ dohUBskHnCROJikY=;
+Received: from mail-pg1-f179.google.com ([209.85.215.179])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vqq8y-0003co-UM for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Feb 2026 10:11:25 +0000
-Received: by mail-pf1-f172.google.com with SMTP id
- d2e1a72fcca58-824a3509a12so486509b3a.2
+ id 1vqsG6-0002Ez-4P for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 13 Feb 2026 12:26:54 +0000
+Received: by mail-pg1-f179.google.com with SMTP id
+ 41be03b00d2f7-c6e3e4e7388so295142a12.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 13 Feb 2026 02:11:24 -0800 (PST)
+ Fri, 13 Feb 2026 04:26:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770977473; x=1771582273; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1770985603; x=1771590403; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gKNTFe8H265of62YNJDNS9isKGx9ghFWnCa5ZUmkIvk=;
- b=nK9KDyByqbTYWbcgEiuej8DwuuRZWSAO/fMpayx2gpY/kUch/nMb93SO+8mB8LE4Xn
- A2V6W2iFPitJ4KLw0zJ/9C4/PGOS4jPlw5X301kDf850/LiFAp6RkpO4E8XtYxmTDr3z
- sXpxkssjB9Sc2xq9jyjr5k3uaZD9Xymt/QFOyipFluawl9wSINRLzQuW3jxGKjpiUpiP
- w+3OPIFL0qyjhFQazPNnZoKBzEcidnViTYkhuwksQtCk7hTPp12H9wOyDe+wIHVCOhpX
- OODZ+iL5yk8/MUJiHgtlqrHEoysMN8ev8FU2vd3feIM5nv2e2CU7u1bUw+T9wTXSscn+
- XYlg==
+ bh=ihQelNxxxE86Yu975NKKOV5Xmyw2LwiMN4HOx9a3cbs=;
+ b=D0x5ZcYhlw0byxa940FVGHxMh4iXi5nS3trTICHSmCaON7BMc1DubwtFZIcAV7HUsf
+ GjnY0IDFr62DIYn9X0YqDRSF5VXS09pLQzLoyOakB+bYguHeTy+RUuM+r/v5asCqdQ7g
+ 7ZJnjDfIr3IvpaRVkIqogqDwcN+Kwq7fWQtzoNSNZIL3V02Q49kw9KDhMB84P/GXGWLo
+ zKfFI598glk9FYKFbWmH1+Y3FID5zVdNr6a6+g4SKY4O7AlLJo/PjJnTQtCpSIDmUNCg
+ oeLgRiAg0iq+PnmJyHXNsR8TwlLPuBRHrGnCAsvsbWO6iTQB4P6Kj4advVxr1qN2P5qB
+ tc6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770977473; x=1771582273;
+ d=1e100.net; s=20230601; t=1770985603; x=1771590403;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gKNTFe8H265of62YNJDNS9isKGx9ghFWnCa5ZUmkIvk=;
- b=fLWataitutWrVh2yTMC65b7fOCetw511af6/6PedEBtPdnrCBxmJosm5Pd/aqzC3ER
- qJHWrTUQFiLErjY1NOH17zu6QTnAkDWCdetU9YylRrkxtNkwKFl4YtszFCPwX5H3XlNs
- gHAkXWS+DdDOfD4tPLRcu6EpfnV7SbJFyN5r3OCoStQK3vSwSlHJ6eMBn/JpdEHT3iwY
- 4LhyhcinXP+NqHZaAEFBBgqfLLDI2n0ne7HZDMoeoPiZxXa5mSK4ch+6L/vNnRMXGsGM
- yWqO3SaoSF2NyAoIsEDcEk175qHZLwYda9iqZnxsY0dI0mVF1aKit6vexiLerVDv+Idj
- Pzsw==
+ bh=ihQelNxxxE86Yu975NKKOV5Xmyw2LwiMN4HOx9a3cbs=;
+ b=FhYj+pGDJZSF0fKdhzeO5D5HUC+QGRDkGZFgBOP56SxeAORy75Fk9lR05ZmUx3x8Pl
+ YtrRS7726s9XBxOJKglTsHMOYqCio+ZMLwMXj57qvYeGxmJOK5rIZEeoxAFNvE8IIFmm
+ yF02lBNsw3iDKBpe8CjczfJZxcDRvwWZORV1hpcwivQJzZJCdf5e9Cd7SfRCYp6NFXuV
+ 1nuy5IBZYeGlbdrc0dPGCEXYoBeyrRojJ/BE1+AXPwZOSTaRIBeknpTJHkkaAX3yZWPG
+ FQqGiM7Pexe5549Ab75PwGqk/3iKU/FpNymmWvH1gO8Hy353WirLNFvrMclKcvHkyi9c
+ MH4w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWEM8RNP08VRL321xeiHlBDmZ/n+O3GyTgpM3g1r4RoGxevU5OLJSpUD98w3xBK0wZbph7W691d9huAx3Dcym/N@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YycT1hYXIUX+kMA0ml3hKQRXh/LxONR8Zhggda28RY5m7p5Lopx
- EN/JcBvw6dghpkckqyud4Ef82S/o3ThXvkAv9RD6Oj0X9adqw9ZX6w52
-X-Gm-Gg: AZuq6aIf/FgKv/dSynmdsi9/TfCD6E0m9Mo2KKTsbfzH6lj2MJu5O6jk44cIve+zsfg
- EcN5a2L/TkyvtaPI00nT6BK4zwG0p7Pw1JEPpEHY4K2WV/+L0fqVlUFIlpY1umHmZlorLUqXouM
- xt7GPZg4ACggosV1eCyzH5+4xqpWzaqGZLGO4RtL+ak8ey2GrI6vTWxxzDl4UJZg5cqa2qZ5Mxi
- HwCYR65z81coZXKqJ6ZNSt9NOEa4B8Da98pierJNErfvNLki+XBsK9BEkb0T+x7X6TarZPJOQdi
- uL/IO9N/SyG77r2/yg0DkYIBqxDEwuIVgYuath6/AN5ROfYVthZ3dVL9MuOvwgw9sB77o3Fllp5
- 9MHrtzPiC3oEWgQZBrCLUJ+noBgCVpsVeSI7eGH10QU0XIlAHFVi22nzVk9vWBHUfIxVUjdbk3N
- Lu8kX+NIWWer6iwxe1Sn6UM0r0hmnC+SD4C+NdHiA=
-X-Received: by 2002:a05:6a21:7706:b0:38e:90ca:5a4a with SMTP id
- adf61e73a8af0-3946c6c41dfmr1328940637.1.1770977473304; 
- Fri, 13 Feb 2026 02:11:13 -0800 (PST)
+ AJvYcCUyZ1AQSprt0JyFYyW4u5Nbua6iBh26Pw4u/bPElU+V8SMXJzCCfOgLsMMx9Z5u0rhePnm1SQrpBQZiNoZDBC9t@lists.sourceforge.net
+X-Gm-Message-State: AOJu0Yynf+xzEmTcaq+ziR9qwwi+3xd4DLJgnnL9xkqo7APEgjNFfWfn
+ Q5vp8DveyLFkMIVmHU2unIeQUZbETNhMrC/twp0qJMVpLkSxMbrx1mh1
+X-Gm-Gg: AZuq6aJUmfgeNGoJWQVWWVZ4JXVQycUOcxmjEzdrn2HOfE3DJYKz8stNGgQRWUQ4Yof
+ u90F28u1eum+mvbB+2zBbtQUtEMu/uw8BrYtKqH61sOFj81uFwshGz9MJREKjVODzw2SoFGXhXP
+ mUGL5OGbOMp7UxDeKKNyXFbLrNQJGXk1BWjA7V3pz4pTk84ymK4yOPvjS+ebjlrl4oTyZqjOxXH
+ EdvtX1+jpskhuDnRkq9R3I+4BGE3tv8BDYFc3K09nI2cn+F9KPHcWNZIK0wizleTLgEp/L8u3lG
+ ITg96T6cKGLLIRxjqB+czWRdoxS4U3xON7wsybt0VmXz/sH2+sZEeho9H5uz3Kf2iUUZCzMKk+w
+ 2KFEEoP4ZH+Og9b4HkVTjUaMtzYEzM1Ig8qHn/5y2t+Vu47PsEPr55ds1tSnbSbSagPSItFpXzQ
+ VL6LGNqLWtqRKNxX3bYb8Q+e5D529/
+X-Received: by 2002:a17:90a:d60c:b0:343:d70e:bef0 with SMTP id
+ 98e67ed59e1d1-356aad6cf5dmr1721312a91.21.1770985603379; 
+ Fri, 13 Feb 2026 04:26:43 -0800 (PST)
 Received: from mi.mioffice.cn ([2408:8607:1b00:8:8eec:4bff:fe94:a95d])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c6e19815b19sm6832515a12.32.2026.02.13.02.11.09
+ 98e67ed59e1d1-35662e6cc17sm12079244a91.5.2026.02.13.04.26.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Feb 2026 02:11:12 -0800 (PST)
+ Fri, 13 Feb 2026 04:26:42 -0800 (PST)
 From: liujinbao1 <jinbaoliu365@gmail.com>
 To: jaegeuk@kernel.org
-Date: Fri, 13 Feb 2026 18:11:00 +0800
-Message-Id: <20260213101100.276118-1-jinbaoliu365@gmail.com>
+Date: Fri, 13 Feb 2026 20:26:30 +0800
+Message-Id: <20260213122630.287516-1-jinbaoliu365@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: liujinbao1 Add the undiscard_blks_bysize node to
- classify
- undiscard_blks into three categories: [0,15], [15,511], and 512+, and count
- the number of blocks in each category as undiscard_small_blks, undiscard_midd
- [...] Content analysis details:   (0.1 points, 5.0 required)
+ Content preview:  From: liujinbao1 During the f2fs_get_victim process, when
+ the f2fs_need_rand_seg is enabled in select_policy, p->offset is a random
+ value, and the search range is from p->offset to MAIN_SECS. When segno >=
+ last_segmen [...] 
+ Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [jinbaoliu365(at)gmail.com]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
  digit [jinbaoliu365(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.210.172 listed in wl.mailspike.net]
-X-Headers-End: 1vqq8y-0003co-UM
-Subject: [f2fs-dev] [PATCH] f2fs: Add undiscard_blks_bysize sysnode
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [jinbaoliu365(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.215.179 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1vqsG6-0002Ez-4P
+Subject: [f2fs-dev] [PATCH v2] f2fs:Fix incomplete search range in
+ f2fs_get_victim when f2fs_need_rand_seg is enabled
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -145,7 +147,7 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sheng Yong <shengyong1@xiaomi.com>, liujinbao1 <liujinbao1@xiaomi.com>,
+Cc: jinbaoliu365@gmail.com, liujinbao1 <liujinbao1@xiaomi.com>,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -153,241 +155,72 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.39 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:shengyong1@xiaomi.com,m:liujinbao1@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	DKIM_MIXED(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:jinbaoliu365@gmail.com,m:liujinbao1@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DKIM_MIXED(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER(0.00)[jinbaoliu365@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20230601];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[jinbaoliu365@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20230601];
+	FREEMAIL_CC(0.00)[gmail.com,xiaomi.com,lists.sourceforge.net];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	RCPT_COUNT_THREE(0.00)[4];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	FORGED_SENDER_MAILLIST(0.00)[]
-X-Rspamd-Queue-Id: A3CA6134ED8
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
+X-Rspamd-Queue-Id: 87B7E1360BB
 X-Rspamd-Action: no action
 
 From: liujinbao1 <liujinbao1@xiaomi.com>
 
-Add the undiscard_blks_bysize node to classify undiscard_blks
-into three categories: [0,15], [15,511], and 512+, and count
-the number of blocks in each category as undiscard_small_blks,
-undiscard_middle_blks, and undiscard_large_blks, respectively,
-in order to better understand the size distribution of undiscard_blks.
-e.g. when the undiscard_blks value is 794,
-the undiscard_blks_bysize node shows the number of undiscard_blks
-in each range as: small: 424, middle: 370, large: 0.
+During the f2fs_get_victim process, when the f2fs_need_rand_seg is enabled in select_policy,
+p->offset is a random value, and the search range is from p->offset to MAIN_SECS.
+When segno >= last_segment, the loop breaks and exits directly without searching
+the range from 0 to p->offset.This results in an incomplete search when the random
+offset is not zero.
 
-Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
 Signed-off-by: liujinbao1 <liujinbao1@xiaomi.com>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs |  8 ++++++
- fs/f2fs/f2fs.h                          |  3 +++
- fs/f2fs/segment.c                       | 34 +++++++++++++++++++++++++
- fs/f2fs/sysfs.c                         | 13 ++++++++++
- 4 files changed, 58 insertions(+)
+ fs/f2fs/gc.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 770470e0598b..23247030e27c 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -516,6 +516,14 @@ Date:		December 2023
- Contact:	"Zhiguo Niu" <zhiguo.niu@unisoc.com>
- Description:	Shows the total number of undiscard blocks.
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 384fa7e2085b..a5b333bbb201 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -312,10 +312,11 @@ static void select_policy(struct f2fs_sb_info *sbi, int gc_type,
+ 		p->max_search = sbi->max_victim_search;
  
-+What:		/sys/fs/f2fs/<disk>/stat/undiscard_blks_bysize
-+Date:		Feb 2026
-+Contact:	"Jinbao Liu" <liujinbao1@xiaomi.com>
-+Description:	Show undiscard block counts by size category.
-+		Three block count ranges: small (0-15 blocks),
-+		middle (16-511 blocks), large (512+ blocks).
-+		Format: "small: %u, middle: %u, large: %u\n"
-+
- What:		/sys/fs/f2fs/<disk>/ckpt_thread_ioprio
- Date:		January 2021
- Contact:	"Daeho Jeong" <daehojeong@google.com>
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index a90a62cfe617..033666f2f368 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -501,6 +501,9 @@ struct discard_cmd_control {
- 	unsigned int max_ordered_discard;	/* maximum discard granularity issued by lba order */
- 	unsigned int discard_io_aware;		/* io_aware policy */
- 	unsigned int undiscard_blks;		/* # of undiscard blocks */
-+	unsigned int undiscard_small_blks;	/* # of undiscard blocks range in [0, 15] */
-+	unsigned int undiscard_middle_blks;	/* # of undiscard blocks range in [16, 511]*/
-+	unsigned int undiscard_large_blks;	/* # of undiscard blocks range > 511*/
- 	unsigned int next_pos;			/* next discard position */
- 	atomic_t issued_discard;		/* # of issued discard */
- 	atomic_t queued_discard;		/* # of queued discard */
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index c26424f47686..c354a0f49802 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -962,6 +962,26 @@ static unsigned int get_free_segment(struct f2fs_sb_info *sbi)
- 	return NULL_SEGNO;
- }
- 
-+static void __stat_undiscard_blks(struct discard_cmd_control *dcc,
-+				block_t len, bool inc)
-+{
-+	if (inc) {
-+		if (len < DEFAULT_DISCARD_GRANULARITY)
-+			dcc->undiscard_small_blks += len;
-+		else if (len < MAX_PLIST_NUM)
-+			dcc->undiscard_middle_blks += len;
-+		else
-+			dcc->undiscard_large_blks += len;
-+	} else {
-+		if (len < DEFAULT_DISCARD_GRANULARITY)
-+			dcc->undiscard_small_blks -= len;
-+		else if (len < MAX_PLIST_NUM)
-+			dcc->undiscard_middle_blks -= len;
-+		else
-+			dcc->undiscard_large_blks -= len;
-+	}
-+}
-+
- static struct discard_cmd *__create_discard_cmd(struct f2fs_sb_info *sbi,
- 		struct block_device *bdev, block_t lstart,
- 		block_t start, block_t len)
-@@ -990,6 +1010,7 @@ static struct discard_cmd *__create_discard_cmd(struct f2fs_sb_info *sbi,
- 	dc->bio_ref = 0;
- 	atomic_inc(&dcc->discard_cmd_cnt);
- 	dcc->undiscard_blks += len;
-+	__stat_undiscard_blks(dcc, len, true);
- 
- 	return dc;
- }
-@@ -1108,6 +1129,7 @@ static void __detach_discard_cmd(struct discard_cmd_control *dcc,
- 	list_del(&dc->list);
- 	rb_erase_cached(&dc->rb_node, &dcc->root);
- 	dcc->undiscard_blks -= dc->di.len;
-+	__stat_undiscard_blks(dcc, dc->di.len, false);
- 
- 	kmem_cache_free(discard_cmd_slab, dc);
- 
-@@ -1393,6 +1415,8 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
- 	}
- 
- 	if (!err && len) {
-+		__stat_undiscard_blks(dcc, (dc->di.len + len), false);
-+		__stat_undiscard_blks(dcc, dc->di.len, true);
- 		dcc->undiscard_blks -= len;
- 		__update_discard_tree_range(sbi, bdev, lstart, start, len);
- 	}
-@@ -1450,10 +1474,12 @@ static void __punch_discard_cmd(struct f2fs_sb_info *sbi,
- 	}
- 
- 	dcc->undiscard_blks -= di.len;
-+	__stat_undiscard_blks(dcc, di.len, false);
- 
- 	if (blkaddr > di.lstart) {
- 		dc->di.len = blkaddr - dc->di.lstart;
- 		dcc->undiscard_blks += dc->di.len;
-+		__stat_undiscard_blks(dcc, dc->di.len, true);
- 		__relocate_discard_cmd(dcc, dc);
- 		modified = true;
- 	}
-@@ -1468,6 +1494,7 @@ static void __punch_discard_cmd(struct f2fs_sb_info *sbi,
- 			dc->di.len--;
- 			dc->di.start++;
- 			dcc->undiscard_blks += dc->di.len;
-+			__stat_undiscard_blks(dcc, dc->di.len, true);
- 			__relocate_discard_cmd(dcc, dc);
- 		}
- 	}
-@@ -1524,8 +1551,10 @@ static void __update_discard_tree_range(struct f2fs_sb_info *sbi,
- 			prev_dc->bdev == bdev &&
- 			__is_discard_back_mergeable(&di, &prev_dc->di,
- 							max_discard_blocks)) {
-+			__stat_undiscard_blks(dcc, prev_dc->di.len, false);
- 			prev_dc->di.len += di.len;
- 			dcc->undiscard_blks += di.len;
-+			__stat_undiscard_blks(dcc, prev_dc->di.len, true);
- 			__relocate_discard_cmd(dcc, prev_dc);
- 			di = prev_dc->di;
- 			tdc = prev_dc;
-@@ -1536,10 +1565,12 @@ static void __update_discard_tree_range(struct f2fs_sb_info *sbi,
- 			next_dc->bdev == bdev &&
- 			__is_discard_front_mergeable(&di, &next_dc->di,
- 							max_discard_blocks)) {
-+			__stat_undiscard_blks(dcc, next_dc->di.len, false);
- 			next_dc->di.lstart = di.lstart;
- 			next_dc->di.len += di.len;
- 			next_dc->di.start = di.start;
- 			dcc->undiscard_blks += di.len;
-+			__stat_undiscard_blks(dcc, next_dc->di.len, true);
- 			__relocate_discard_cmd(dcc, next_dc);
- 			if (tdc)
- 				__remove_discard_cmd(sbi, tdc);
-@@ -2349,6 +2380,9 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
- 	dcc->max_discard_issue_time = DEF_MAX_DISCARD_ISSUE_TIME;
- 	dcc->discard_urgent_util = DEF_DISCARD_URGENT_UTIL;
- 	dcc->undiscard_blks = 0;
-+	dcc->undiscard_small_blks = 0;
-+	dcc->undiscard_middle_blks = 0;
-+	dcc->undiscard_large_blks = 0;
- 	dcc->next_pos = 0;
- 	dcc->root = RB_ROOT_CACHED;
- 	dcc->rbtree_check = false;
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index c42f4f979d13..9b11a490c8d0 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -176,6 +176,17 @@ static ssize_t undiscard_blks_show(struct f2fs_attr *a,
- 				SM_I(sbi)->dcc_info->undiscard_blks);
- }
- 
-+static ssize_t undiscard_blks_bysize_show(struct f2fs_attr *a,
-+		struct f2fs_sb_info *sbi, char *buf)
-+{
-+	if (!SM_I(sbi)->dcc_info)
-+		return -EINVAL;
-+	return sysfs_emit(buf, "small: %u, middle: %u, large: %u\n",
-+				SM_I(sbi)->dcc_info->undiscard_small_blks,
-+				SM_I(sbi)->dcc_info->undiscard_middle_blks,
-+				SM_I(sbi)->dcc_info->undiscard_large_blks);
-+}
-+
- static ssize_t atgc_enabled_show(struct f2fs_attr *a,
- 		struct f2fs_sb_info *sbi, char *buf)
- {
-@@ -1471,6 +1482,7 @@ F2FS_GENERAL_RO_ATTR(cp_status);
- F2FS_GENERAL_RO_ATTR(issued_discard);
- F2FS_GENERAL_RO_ATTR(queued_discard);
- F2FS_GENERAL_RO_ATTR(undiscard_blks);
-+F2FS_GENERAL_RO_ATTR(undiscard_blks_bysize);
- 
- static struct attribute *f2fs_stat_attrs[] = {
- 	ATTR_LIST(sb_status),
-@@ -1478,6 +1490,7 @@ static struct attribute *f2fs_stat_attrs[] = {
- 	ATTR_LIST(issued_discard),
- 	ATTR_LIST(queued_discard),
- 	ATTR_LIST(undiscard_blks),
-+	ATTR_LIST(undiscard_blks_bysize),
- 	NULL,
- };
- ATTRIBUTE_GROUPS(f2fs_stat);
+ 	/* let's select beginning hot/small space first. */
+-	if (f2fs_need_rand_seg(sbi))
++	if (f2fs_need_rand_seg(sbi)) {
+ 		p->offset = get_random_u32_below(MAIN_SECS(sbi) *
+ 						SEGS_PER_SEC(sbi));
+-	else if (type == CURSEG_HOT_DATA || IS_NODESEG(type))
++		SIT_I(sbi)->last_victim[p->gc_mode] = p->offset;
++	} else if (type == CURSEG_HOT_DATA || IS_NODESEG(type))
+ 		p->offset = 0;
+ 	else
+ 		p->offset = SIT_I(sbi)->last_victim[p->gc_mode];
 -- 
 2.25.1
 
