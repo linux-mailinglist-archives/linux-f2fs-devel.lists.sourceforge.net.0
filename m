@@ -2,98 +2,149 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kKz3AvThj2npUAEAu9opvQ
+	id 0Lr8Ex+2kGn5cQEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Feb 2026 03:46:12 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Feb 2026 18:51:27 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CFFC13ACFF
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Feb 2026 03:46:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 662A013CA49
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Feb 2026 18:51:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:To:Date:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=IXtSSnSc7cWdrGYkV1bPopcXr1r5TyVTGyLzBTGDQA8=; b=jwd1PEm35YFZ2vZ1xPpCTmbuq5
-	jgwawaxdwvKSUeuecC68PmUb2zmJROIvfsJ3ef5nlZpukXg1KvURySmkfAsB87eV4UtmO3reb2YXa
-	MVg4Q+d4fXc871E7Q8FvnsFgkdng6RijwTWl/EUhVAGVoyZOmrdtZLvmcr9cSWra7rFk=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:To:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=RppvksSM5fw7/ghvyki3tVvjV3xVt6UNwBAQ0Yi3VqQ=; b=TOrXgwHQZ11I1d5odGWNlaP1X1
+	4VYTszVvg4oua2E0/Q17mNNPdH1FlTiCn7bkRUkULq1uH7Be2qnnCUE0uR2nSMgbEpbdZoAp2HpVF
+	AzJ8pPq4JGqB0ciwQIOzlTe8tQ9/9IqsF09vZPo/3yk/rfqhzmmiXbE8+N80erRmauKE=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vr5fP-0004j8-NA;
-	Sat, 14 Feb 2026 02:45:56 +0000
+	id 1vrJnX-0007nB-Nm;
+	Sat, 14 Feb 2026 17:51:15 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1vr5fO-0004iu-5O
+ (envelope-from <torvalds@linuxfoundation.org>) id 1vrJnW-0007n3-Gz
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 14 Feb 2026 02:45:55 +0000
+ Sat, 14 Feb 2026 17:51:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fmxGzBCl9SjY8gs8kQMNbmmQWJi/aFJLOUp7yTRMmYw=; b=EoE8pcdb4Z/LsbwT3Zrx9UP1sr
- 1qS85cZEd2tdjP8HTHbn/ihxFneeqY2JDdS3LRFr077qU8iZ94yKcXa0WGKuI/EZobNOka3NoV+po
- Fjeg9z+uNvKD7YQcXbNNODmzbn4okdOkufO4zheNmdR+GySLnXWYSiIBLAW6lkY9Xbv4=;
+ bh=ZRgdqie2PVm7bx+tOts32ndvLuT/OLdwwKV1cHxPHyg=; b=H+VD/KTK790kA0tUbxKvfHzw1k
+ hNYuT0PLYNdZU8m4++H7GaZjJ9Iz1ceSia8OkLL9ip2s1tuwtWyK8TW6vhXzpZ4c2PQ6zG36gwBEA
+ /CjOcYBhVEeRsMPxiltekMZqyEsMsOy16OkN5ind0aetB39iBzIkhtS/RYaNxiZmovNc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=fmxGzBCl9SjY8gs8kQMNbmmQWJi/aFJLOUp7yTRMmYw=; b=C
- YtCku1fiNU4su9/lT93BUWnvLYKmdMGBroWgjf6kwosuPCR0spFWxqtz2ExJKOysB/HKgMRsm2acl
- /S4jz4JghUTx6+AhmolOV5zdTo2WTn+hpgdS6eM0di4k1xAwgAeChthFNgMDVLTt3ggFQr92oH+a/
- ZAUb5Cz3p56M8VzM=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=ZRgdqie2PVm7bx+tOts32ndvLuT/OLdwwKV1cHxPHyg=; b=BwmaCXsfAa6zQ71i9lAOg+OjgE
+ xy+0B2JCUKdFC+84DYyV4nyqkJXw1jnPwBhetAs28d0GBSjssQNYtXGGWkE9zhI22eyPmAL9NJ4/z
+ 9qBor4QX3uiX/1bxg35Aw2tGRf0fsynJFXezriuv/NYxoFxJD8rRZLJraDIhE7AYtOYk=;
+Received: from mail-ej1-f66.google.com ([209.85.218.66])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vr5fO-0003cq-9w for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 14 Feb 2026 02:45:54 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id CE8BA406EB;
- Sat, 14 Feb 2026 02:45:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88EDAC116C6;
- Sat, 14 Feb 2026 02:45:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771037143;
- bh=Cprpcf3MQJLqJyu2NM+Wgkl2K+e7s0rsC9kggQ8QHE4=;
- h=Date:From:To:Cc:Subject:From;
- b=tCBcekDdXj4PYOyicQ0R3KL6NyZ0rRTOZu/uLuvcc9Ls8BJEcmNAoS+NGfaZSV6Gg
- aAmwiYwSnkszb2U+Qde3ciOPYMIr2YP+2qSlznU3X/3LqDTlEMV4vz1Q0XNQZ/JYUB
- cIeHJgnCUxyWzGQkwQ35vSw+m2waoFB5cOc/Hq5+pcG+RlIfhODHZw7SpyOBJpPk5j
- J2MAjNe15Pkyd9vFVdGteIRU01Y0VYnE0tZ33bSFevE1q7gGhN162XP6fk1itK88Jn
- 7DTjeHTDMofSZSMgd4tYlAwi/6ROZ4VO96XpogbslJR8TGzGML0CwEBzEwm4Z3gcdQ
- FPMaNI1wsz25Q==
-Date: Sat, 14 Feb 2026 02:45:41 +0000
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <aY_h1URe0wsXKl84@google.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1vrJnV-0005Km-Qt for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 14 Feb 2026 17:51:14 +0000
+Received: by mail-ej1-f66.google.com with SMTP id
+ a640c23a62f3a-b8849dc12f6so243131766b.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sat, 14 Feb 2026 09:51:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux-foundation.org; s=google; t=1771091462; x=1771696262;
+ darn=lists.sourceforge.net; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZRgdqie2PVm7bx+tOts32ndvLuT/OLdwwKV1cHxPHyg=;
+ b=RAtiwgu7W2PAv6jxe/RIFwegsDzVGJo5Yk1pbeKrsFZLY7XvgTQ2c7n9ic+NiCYV6X
+ Uir8XzQIHkuP6AW82JCsv13QX0Lty1wbatAUSqOxlYg3+5T3/WxerE+kfdlospZgX4R5
+ W98Z6EOOgScGS3UUppOyMV/jo/mZsdh8QGQVs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771091462; x=1771696262;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZRgdqie2PVm7bx+tOts32ndvLuT/OLdwwKV1cHxPHyg=;
+ b=QzgiwnOLdSERwJyouPi5LsIIoW+jtnEdwYfwTsKHD5lIacbVBFo/3JkBo8fomnDxn5
+ hI80gRImfdA3RY/ys4W69um2QTuTRV0OIlmqD8nfj0eQa1X3+QD3mO8FAvFspN9SURlr
+ JyuvLGMpr/C2+RZLzkmbgtCda9pLx0vdvwJYy6IjI9XScyP6dUuZW81eGDKrtpzAXFBH
+ M9I2ztftkmDOULb8VnksfRNFkzNnBD5xL6N2MbsBZsaItBXX5u6YwJdivpTQl0GgXuqp
+ /9JNvEnRXp6dOg5C8naZgeJIy63vyWoRF7LxR8d8iNI1IRGfPd9Ul92wfwmp3RGw43/u
+ 9QtQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUd5n8nCBB485swL8zLKGQmIWXiZ4/HNK0MtBA6TMFPd4QuDd/oLO14rJDw8xLgkK6F1+SBiJk2Ce6dAN5D8YZ6@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YyLumu6Nea1fuLh3AkZzehA0ak/is3cDeP+qinPg9+rXwbTNtxu
+ 5653kMMyjxqLGi62VFI8q1nUuzC83wmMUPvJF5Fs8LfJu4CJtgwvpXcfPuywm/a27MLDx76ytJV
+ jSfuUSeA=
+X-Gm-Gg: AZuq6aIM3/7IrNlL8+tkJ8FhSU7PmwqdhpF1ktwY8Y83mIeUbqpTJjtvHLG1kne3sBL
+ v1cfsejYNggj2mntmvrDPKiCpxe1w+lvppncGWjuvi5+rWO2u6blKxVwG0ub271dO5KIYyYEGdQ
+ K3EkyHpY9CApa3+ef5dl4JLBkz2RaAc97P7F7cEDB2+pN1yafit9nLbINRMZEgjDF7LOQAhHEMa
+ bNL4ma6eahHJ23WimKSvdj1HP+2E8S1rJZuoxDqzcwYzhUN6ldGwA7M/0J7ok5ftJBo9lpBFQja
+ XvvPpK+K2chVt0lCxrmPBWpi7h/rugp3tNs1muDus8CtJyIZ7pW1mDFX1q2TQ0WQ4s015HTBof5
+ uIIWFFaXUDyWdXnGI1jvpv7vdo+O+xAgYw1lG+zMSOMLZolSdJuJrJJd1gqtTa+np9UEsTQaBCY
+ mgdwrOJr1AA6eLwk8V6PDJqQKitcsY0VYGh9LnuYYG75LAB+fQvbrxRIj2aY2pJWgw8WY625jE
+X-Received: by 2002:a17:906:6a1e:b0:b87:63a8:8849 with SMTP id
+ a640c23a62f3a-b8fb4501385mr340388666b.46.1771091461823; 
+ Sat, 14 Feb 2026 09:51:01 -0800 (PST)
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com.
+ [209.85.218.43]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b8fc735d95bsm86709966b.7.2026.02.14.09.51.00
+ for <linux-f2fs-devel@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 14 Feb 2026 09:51:00 -0800 (PST)
+Received: by mail-ej1-f43.google.com with SMTP id
+ a640c23a62f3a-b8849dc12f6so243129266b.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sat, 14 Feb 2026 09:51:00 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWR74VFAFUP/Ap/cB/1mG/JIk4USHbU/l8XL6X35/6tgz4x7OCxeHMEOewwDG5Fxp0DgFoWEF+Axxx85p12T0/f@lists.sourceforge.net
+X-Received: by 2002:a17:906:f58b:b0:b76:f57f:a2c3 with SMTP id
+ a640c23a62f3a-b8fb41797e5mr289195266b.12.1771091460239; Sat, 14 Feb 2026
+ 09:51:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Spam-Score: -0.2 (/)
+References: <aY_h1URe0wsXKl84@google.com>
+In-Reply-To: <aY_h1URe0wsXKl84@google.com>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Sat, 14 Feb 2026 09:50:42 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wiWPQdT+Gs=mHNaCfuVahCxU6eubBQ4cVwXkW9s5nMRuA@mail.gmail.com>
+X-Gm-Features: AaiRm53pQrad9EyJNVy-D9itBuuvXMunPY7e9wqU9InyvOl1272fKacaWoX_s2Q
+Message-ID: <CAHk-=wiWPQdT+Gs=mHNaCfuVahCxU6eubBQ4cVwXkW9s5nMRuA@mail.gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Eric Biggers <ebiggers@kernel.org>, 
+ "Theodore Ts'o" <tytso@mit.edu>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Linus, Could you please consider this pull request? Thanks,
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  [ Note: added fsverity people ] On Fri, 13 Feb 2026 at 18:45,
+ Jaegeuk Kim <jaegeuk@kernel.org> wrote: > >
+ git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ tags/f2fs-for-7.0-rc1 So I have pulled this, but as part of going over my
+ conflict resolution with the fsverity changes, I'm a bit unhappy. 
+ Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vr5fO-0003cq-9w
-Subject: [f2fs-dev] [GIT PULL] f2fs update for 7.0-rc1
+ 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
+ domains are different
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.66 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1vrJnV-0005Km-Qt
+Subject: Re: [f2fs-dev] [GIT PULL] f2fs update for 7.0-rc1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,207 +156,140 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
 Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.21 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [-0.71 / 15.00];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:ebiggers@kernel.org,m:tytso@mit.edu,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	TO_DN_ALL(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:torvalds@linux-foundation.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DKIM_MIXED(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DMARC_NA(0.00)[linux-foundation.org];
+	FORGED_SENDER(0.00)[torvalds@linux-foundation.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	ARC_NA(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_ALL(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,linux-foundation.org:s=google];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,linux-foundation.org:-];
+	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[torvalds@linux-foundation.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DKIM_MIXED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	MISSING_XM_UA(0.00)[];
-	HAS_REPLYTO(0.00)[jaegeuk@kernel.org]
-X-Rspamd-Queue-Id: 3CFFC13ACFF
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid]
+X-Rspamd-Queue-Id: 662A013CA49
 X-Rspamd-Action: no action
 
-Hi Linus,
+[ Note: added fsverity people ]
 
-Could you please consider this pull request?
+On Fri, 13 Feb 2026 at 18:45, Jaegeuk Kim <jaegeuk@kernel.org> wrote:
+>
+>   git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-7.0-rc1
 
-Thanks,
+So I have pulled this, but as part of going over my conflict
+resolution with the fsverity changes, I'm a bit unhappy.
 
-The following changes since commit 8f0b4cce4481fb22653697cced8d0d04027cb1e8:
+I'm not unhappy about the f2fs thing in particular - I'm unhappy about
+the fsverity integration side.
 
-  Linux 6.19-rc1 (2025-12-14 16:05:07 +1200)
+In particular, f2fs uses fsverity_verify_page() by doing
 
-are available in the Git repository at:
+    fsverity_verify_page(folio_file_page(folio,index))
 
-  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-7.0-rc1
+which looks fine, and now wants that
 
-for you to fetch changes up to 52190933c37a96164b271f3f30c16099d9eb8c09:
+    struct fsverity_info *vi
 
-  f2fs: sysfs: introduce critical_task_priority (2026-02-10 20:53:21 +0000)
+and that was part of my conflict resolution.
 
-----------------------------------------------------------------
-f2fs-for-7.0-rc1
+But then I looked at what fsverity_verify_page() does, and that is just broken.
 
-In this development cycle, we focused on several key performance optimizations:
-1) introducing large folio support to enhance read speeds for immutable files,
-2) reducing checkpoint=enable latency by flushing only committed dirty pages,
-and 3) implementing tracepoints to diagnose and resolve lock priority inversion.
-Additionally, we introduced the packed_ssa feature to optimize the SSA footprint
-when utilizing large block sizes.
+Because fsverity_verify_page() looks like this:
 
-Enhancement:
- - support large folio for immutable non-compressed case
- - support non-4KB block size without packed_ssa feature
- - optimize f2fs_enable_checkpoint() to avoid long delay
- - optimize f2fs_overwrite_io() for f2fs_iomap_begin
- - optimize NAT block loading during checkpoint write
- - add write latency stats for NAT and SIT blocks in f2fs_write_checkpoint
- - pin files do not require sbi->writepages lock for ordering
- - avoid f2fs_map_blocks() for consecutive holes in readpages
- - flush plug periodically during GC to maximize readahead effect
- - add tracepoints to catch lock overheads
- - add several sysfs entries to tune internal lock priorities
+        return fsverity_verify_blocks(vi, page_folio(page), PAGE_SIZE, 0);
 
-Bug fix:
- - fix lock priority inversion issue
- - fix incomplete block usage in compact SSA summaries
- - fix to show simulate_lock_timeout correctly
- - fix to avoid mapping wrong physical block for swapfile
- - fix IS_CHECKPOINTED flag inconsistency issue caused by concurrent atomic
-   commit and checkpoint writes
- - fix to avoid UAF in f2fs_write_end_io()
+and that's garbage.
 
-----------------------------------------------------------------
-Chao Yu (33):
-      f2fs: fix to do sanity check on nat entry of quota inode
-      f2fs: add lock elapsed time trace facility for f2fs rwsemphore
-      f2fs: sysfs: introduce max_lock_elapsed_time
-      f2fs: trace elapsed time for cp_rwsem lock
-      f2fs: trace elapsed time for node_change lock
-      f2fs: trace elapsed time for node_write lock
-      f2fs: trace elapsed time for gc_lock lock
-      f2fs: trace elapsed time for cp_global_sem lock
-      f2fs: trace elapsed time for io_rwsem lock
-      f2fs: clean up w/ __f2fs_schedule_timeout()
-      f2fs: fix to use jiffies based precision for DEFAULT_SCHEDULE_TIMEOUT
-      f2fs: fix timeout precision of f2fs_io_schedule_timeout_killable()
-      f2fs: rename FAULT_TIMEOUT to FAULT_ATOMIC_TIMEOUT
-      f2fs: introduce FAULT_LOCK_TIMEOUT
-      f2fs: sysfs: introduce inject_lock_timeout
-      f2fs: fix to check sysfs filename w/ gc_pin_file_thresh correctly
-      Revert "f2fs: block cache/dio write during f2fs_enable_checkpoint()"
-      f2fs: fix to avoid UAF in f2fs_write_end_io()
-      f2fs: make FAULT_DISCARD obsolete
-      f2fs: fix to do sanity check on node footer in __write_node_folio()
-      f2fs: fix to do sanity check on node footer in {read,write}_end_io
-      f2fs: detect more inconsistent cases in sanity_check_node_footer()
-      f2fs: avoid f2fs_map_blocks() for consecutive holes in readpages
-      f2fs: fix to avoid mapping wrong physical block for swapfile
-      f2fs: fix error path handling in f2fs_read_data_large_folio()
-      f2fs: fix to unlock folio in f2fs_read_data_large_folio()
-      f2fs: check skipped write in f2fs_enable_checkpoint()
-      f2fs: introduce FAULT_SKIP_WRITE
-      f2fs: fix to show simulate_lock_timeout correctly
-      f2fs: decrease maximum flush retry count in f2fs_enable_checkpoint()
-      f2fs: fix lock priority inversion issue
-      f2fs: introduce trace_f2fs_priority_update
-      f2fs: sysfs: introduce critical_task_priority
+We just turned the folio into a page, and now it turns it back into a
+folio - but importantly it *loses* the index of the page inside the
+folio while doing so!
 
-Daeho Jeong (3):
-      f2fs: flush plug periodically during GC to maximize readahead effect
-      f2fs: support non-4KB block size without packed_ssa feature
-      f2fs: fix incomplete block usage in compact SSA summaries
+In other words, fsverity_verify_page() does *not* work on large
+folios. It only works when a folio is a page.
 
-Jaegeuk Kim (4):
-      f2fs: support large folio for immutable non-compressed case
-      f2fs: add a tracepoint to see large folio read submission
-      f2fs: use folio_end_read
-      Revert "f2fs: add timeout in f2fs_enable_checkpoint()"
+And I can't just use "fsverity_verify_folio()", because that verifies
+the *whole* folio, not just the sub-page.
 
-Joanne Chang (1):
-      f2fs: improve check for enough free sections
+So my resolution was to just fix this thing and make it use
+!fsverity_verify_blocks() directly, using the page offset within a
+folio explicitly.
 
-Nanzhe Zhao (4):
-      f2fs: Zero f2fs_folio_state on allocation
-      f2fs: Accounting large folio subpages before bio submission
-      f2fs: add 'folio_in_bio' to handle readahead folios with no BIO submission
-      f2fs: advance index and offset after zeroing in large folio read
+But I don't actually *really* know this code at all, and I can't
+verify my resolution, and I'm unhappy with how subtle that
+fsverity_verify_page() thing is.
 
-Yangyang Zang (1):
-      f2fs: clean up the type parameter in f2fs_sync_meta_pages()
+I was initially going to just fix fsverity_verify_page() to actually
+take the page offset into account properly, but it turns out that
+there aren't very many other users.
 
-Yeongjin Gil (1):
-      f2fs: optimize f2fs_overwrite_io() for f2fs_iomap_begin
+Anyway, I *think* fsverity_verify_page() should be either fixed or
+removed. The fix would be something like this:
 
-Yongpeng Yang (11):
-      f2fs: clean up the force parameter in __submit_merged_write_cond()
-      f2fs: return immediately after submitting the specified folio in __submit_merged_write_cond
-      f2fs: remove non-uptodate folio from the page cache in move_data_block
-      f2fs: fix out-of-bounds access in sysfs attribute read/write
-      f2fs: change seq_file_ra_mul and max_io_bytes to unsigned int
-      f2fs: fix IS_CHECKPOINTED flag inconsistency issue caused by concurrent atomic commit and checkpoint writes
-      f2fs: avoid unnecessary block mapping lookups in f2fs_read_data_large_folio
-      f2fs: pin files do not require sbi->writepages lock for ordering
-      f2fs: add write latency stats for NAT and SIT blocks in f2fs_write_checkpoint
-      f2fs: change size parameter of __has_cursum_space() to unsigned int
-      f2fs: optimize NAT block loading during checkpoint write
+-       return fsverity_verify_blocks(vi, page_folio(page), PAGE_SIZE, 0);
++       struct folio *folio = page_folio(page);
++       unsigned int offset = folio_page_idx(folio, page) * PAGE_SIZE;
++       return fsverity_verify_blocks(vi, folio, PAGE_SIZE, offset);
 
-ZhaoYueNan (1):
-      f2fs: Update the default value of the documentation ckpt_thread_ioprio
+but I didn't do that. Instead I did a hack-job in fs/f2fs/data.c,
+which also involved changing a
 
-Zhiguo Niu (2):
-      f2fs: remove some redundant codes in f2fs_quota_enable
-      f2fs: fix to add gc count stat in f2fs_gc_range
+    fsverity_verify_page(vi, &folio->page)
 
- Documentation/ABI/testing/sysfs-fs-f2fs |  62 ++++-
- Documentation/filesystems/f2fs.rst      |  49 +++-
- fs/f2fs/checkpoint.c                    | 247 ++++++++++++++++--
- fs/f2fs/compress.c                      |  18 +-
- fs/f2fs/data.c                          | 436 +++++++++++++++++++++++++++-----
- fs/f2fs/debug.c                         |   1 +
- fs/f2fs/f2fs.h                          | 251 +++++++++++++-----
- fs/f2fs/file.c                          |  84 +++---
- fs/f2fs/gc.c                            |  86 ++++---
- fs/f2fs/inline.c                        |  10 +-
- fs/f2fs/inode.c                         |  16 +-
- fs/f2fs/namei.c                         |  65 +++--
- fs/f2fs/node.c                          |  99 ++++++--
- fs/f2fs/node.h                          |   8 -
- fs/f2fs/recovery.c                      |  11 +-
- fs/f2fs/segment.c                       | 133 +++++-----
- fs/f2fs/segment.h                       | 108 ++++----
- fs/f2fs/super.c                         | 202 +++++++++------
- fs/f2fs/sysfs.c                         | 111 +++++++-
- fs/f2fs/xattr.c                         |   5 +-
- include/linux/f2fs_fs.h                 |  73 ++++--
- include/trace/events/f2fs.h             | 142 ++++++++++-
- 22 files changed, 1671 insertions(+), 546 deletions(-)
+into a
+
+    fsverity_verify_folio(vi, folio)
+
+instead, because it really looked to me like it should be the whole
+folio regardless of whether it was a large folio (broken before) or
+not (working if so).
+
+It's entirely possible that this code only deals with small page-sized
+folios, in which case it doesn't matter. But that
+f2fs_read_data_large_folio() code is definitely about multi-page
+folios.
+
+There's another fsverity_verify_page() use in fs/f2fs/compress.c. and
+I didn't touch that one. The code doesn't use folios at all, so maybe
+it only triggers for page == folio. I don't know, and that's when I
+just started going "Somebody who knows this code needs to fix this".
+
+Anyway, I think that fsverity_verify_page() case should be removed
+too, and then the subtly broken function can just be deleted entirely
+instead of being fixed.
+
+Comments? Did I mess something up? Am I just being confused?
+
+Regardless, please verify my merge resolution, and please do
+*something* about that fsverity_verify_page() situation.
+
+            Linus
 
 
 _______________________________________________
