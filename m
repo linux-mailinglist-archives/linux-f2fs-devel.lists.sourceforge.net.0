@@ -2,103 +2,150 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id c7O0FyTckGnDdQEAu9opvQ
+	id yCVRIKDdkGnodQEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Feb 2026 21:33:40 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Feb 2026 21:40:00 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C902513D21B
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Feb 2026 21:33:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB01D13D281
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Feb 2026 21:39:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=UbfU09QFWh3gACBhZS5PWmSHSrSBrXj4K0t5IvKVtq8=; b=QoRLGE975lUjttPVR1YRj5PhNE
-	dClRi2D0oG2XCjtQOeQ7drlDQzbR02vgBiOgub3z0J4F9+jxiHC/6o7aJk6XuH7H/tiCzpuC98OQD
-	voZDC9l4xyMa1VSPKrbzwPb2Gg6jAPSrFSG0qfP6/n6O1iNZ+mtQlbV2d15o9itnfeiM=;
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:To:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=XHldTDUKm6ay1/runGAVTuxl7D2KcroB4JmCVRPqM5g=; b=DtnnAAcuL9vykTxi24De42OTpn
+	vyPcZ/5hoBLXOZx1CuFWg79bcNamnTVOXXFf9/7pGSaiFA9YkZwBUN5+Sot9hXqKKp1b8HVwAXWVx
+	0NuQRFBMoSQZEhNnMgcO+3bVth/wCjAYiJuQABKSvpDgrDI4NBQ+GYeOj69lkinxALp8=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vrMKb-00074B-69;
-	Sat, 14 Feb 2026 20:33:33 +0000
+	id 1vrMQd-0007ej-EI;
+	Sat, 14 Feb 2026 20:39:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1vrMKZ-00073w-OK
+ (envelope-from <torvalds@linuxfoundation.org>) id 1vrMQb-0007eW-FC
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 14 Feb 2026 20:33:32 +0000
+ Sat, 14 Feb 2026 20:39:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tkUA8ktbkYiWa/x6JFodpj4cUsQEuxbGLvrVpCV4lm0=; b=GXJhsG7ih6Ys/PgGGIy28JvT/y
- ebebOSXHynm3wglGicobynL0RSbrlYJa7Fv66e8iFX1Zji7SIHH0sKmlI+mPSVAKIC9FsS+LhXS75
- as4fbBIyJWkVhWwqcjnJ57+qHSL/JTo8FFHYGHnvuOm86jh2TbQo9qqHdJwdT6E5dG/I=;
+ bh=xobni0Kui4RUZeyiNPg7YdinYh9j2rSDgpyUC3GHngQ=; b=RmDpM6cv98L61zEsxnQ8kzGNjV
+ Y8eHicMmJqmHlyNAwrxezi5OS38x21Mih9cr8Xr7jN7lb8b1Q2fh6Dg0DlFgBjE+dxUluMdA9oCE1
+ DMtDnNmB0CXMRW+MGcjFKXmHsRtn/+WqDgiOQipe2T2HQwQS3GWtG9MasM3rCWr331Vw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tkUA8ktbkYiWa/x6JFodpj4cUsQEuxbGLvrVpCV4lm0=; b=IF7jbaGMcjMdV44QQZVEVIv1t5
- ApekHk60zLgs6BobwQoXgI2ixuUSm17Vb4r6kH9EQATnvD8LbaAJI3ES3gLOYVyLhl3knL/3xfqai
- M1yaexOmldIxYYhXCaVRg0YY20zsBx/bAV/s5eeKAUOSD3Zhw3FYhn8+gYWc4WEVB3og=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=xobni0Kui4RUZeyiNPg7YdinYh9j2rSDgpyUC3GHngQ=; b=PqIYhygTmWvT78er0G8DY3wK9W
+ z1TaJPrHthqSVHzOmnps9UCkDNrJ6B4oZJ2lfBRifS95kB5CL8N3qc5K+AyUrmoM3yOXx5XR6AxEK
+ o+s6hAh0kp2AawgbMxKEtO1U2qjvHXvsxByFmW+PMmKczyto7DfAb0T36Vh4Fi6qtIrU=;
+Received: from mail-ej1-f44.google.com ([209.85.218.44])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vrMKa-0002z1-3M for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 14 Feb 2026 20:33:32 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 128236012B;
- Sat, 14 Feb 2026 20:33:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DF3BC19422;
- Sat, 14 Feb 2026 20:33:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771101205;
- bh=SqjZE7OWr1LYIbtS0mF/zGZQM1kfgP5bCqVDUaHH/3k=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GlSgUq2i0I1AM1xAu9ior2ocPVR26OI1VJE5y8JZ/f27QwP88DEaJjau1r/kJVlgs
- VU/1zlwJ5GaFA+ga7V3Jf99TlRecUZ+5ePixRy14X4Qjt57e5TqRK0E2va7VdMc/+Q
- 92EMEDuGMj5W/GhDcneaugwXRhD+sEtmLQNouSEZKgQhkGu6nm+kP6zNETQESddgs/
- 4FwJn29/kd5Pv2QoK/siNWG/Gk9zelriYO1XpyuAG88WACX+xbecMEzeMHVY529SvQ
- F/6RAnD/tj5sDbPvjr5GQ1/wgRSfETIxbCwElOf6S1+XMK//0WjzJCabt5Yt1roHxF
- 8sEzpoRk/JkHw==
-To: fsverity@lists.linux.dev
-Date: Sat, 14 Feb 2026 12:33:11 -0800
-Message-ID: <20260214203311.9759-3-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260214203311.9759-1-ebiggers@kernel.org>
-References: <20260214203311.9759-1-ebiggers@kernel.org>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1vrMQb-0003Bp-LF for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 14 Feb 2026 20:39:46 +0000
+Received: by mail-ej1-f44.google.com with SMTP id
+ a640c23a62f3a-b8845cb5862so263110166b.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sat, 14 Feb 2026 12:39:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux-foundation.org; s=google; t=1771101579; x=1771706379;
+ darn=lists.sourceforge.net; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xobni0Kui4RUZeyiNPg7YdinYh9j2rSDgpyUC3GHngQ=;
+ b=ei/7tovLyuey9wPnpj0GU6pxn4P2aKl71PotkajAmvCgGgNU1QMtfaIW7XH5iuwfky
+ Q+hn44eX5H0OVIzUUrLnQy+iMEH5/0QcDFnVXerPfjgWI8e9DuSKqqUbJ9tWEz71ccAY
+ KIcRvJ52hTheeQpezsgBK4KKhfbYpl/vSDT/w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771101579; x=1771706379;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xobni0Kui4RUZeyiNPg7YdinYh9j2rSDgpyUC3GHngQ=;
+ b=aTNemrAUEmF1gjR4rALjgpOFBtzK9a8mMXG/NwaA/jOaBYP2F2NdB+7VQtyaeitCdT
+ AFYNDglLyuRjwwm3f5I0IMNm2OyYVHxO7gYq6YC7QRkWt0eZp9RbGFO0ydbPuc5+lUoJ
+ nQHC8hBzOYALLxaoQNrJjujY/CHBTe6KO01rCgp59UHHRXfjWxz/oMCiQJd0y1GOgEP7
+ kNA+plYbOpCV/v/MvsJxcgereHpb6aE99jwCNy+CPuikHHrAdpBcdQGWc9+XA/dbKEOw
+ 8lE/t5uSz8PGcO62GI9jrnLqPtn1deh5N0y5CsqseDPJE1/XKz3qDBqnV/CLWibqN9Yr
+ 91fQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWjyusQ5i3P54yOse6Kl1q9EV9fGyVdncITTJzkIThfvIVEuVaeT9x+41dRKaYbgdniWE/i9Z514g5pLre+aW9j@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YxreW2OMWG3+t7hf0lBQYUeNG967mrtQHyTLXTlUs7K120m2rjj
+ KRZKBOjAJbQsKbVppH2JKTrEs2VjE/JkoEppUahRqjUXMw+pAkKVjgFM7/eAqipcHBJe9+x4gBu
+ OqwnFbAE=
+X-Gm-Gg: AZuq6aKdSgBdFgaWIzaXRjBIE7ZUSDUr7ZeJqJoTYPsi5k/arIy/2/M3XepPJhZjfCQ
+ 606PwRkIwT5JE1YW2NEsHlrb8rrTvSzAYmE2vjf/iTLih9vMZFDXY05pOs6TFJkdbBS/St+40Yu
+ mPUJoxUO107ybQf8IOSNxg/UL/NvIrQmccNyeZ0tJsGZvH8afm+INr7GWEGyz+0ed0ntQz9woQm
+ iu7Iglj3wGcYjJZQTXv0wsG/XI+zqsNqgcEIasC0v66H2rVRK30JH1ud+GxCbz8XIdebpuNkwaR
+ ri5bDQp+hFWQaFEh5c9jryTamdhRQgbfpYbZxgwBbs1CJLh5SnGvkoQm4P8XNsMAwU8Dpd1RsQi
+ kyXleC20od2AAF1ARvUiuwUZe0hZpifk20Jcf/YDbkyoVnqPR2TersOZI0Z/q41v/gAHx8OthGa
+ CzfI65acmSqtbnz5vKIgA5RmoQTBL6NTZni3BdRTtJCx//nUdLle4AioGL53HqPhoQ5ujlIn+8
+X-Received: by 2002:a17:907:1c9f:b0:b88:9760:2df9 with SMTP id
+ a640c23a62f3a-b8fb4147096mr305185166b.11.1771101578962; 
+ Sat, 14 Feb 2026 12:39:38 -0800 (PST)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com.
+ [209.85.208.48]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b8fc76c7015sm95471566b.66.2026.02.14.12.39.38
+ for <linux-f2fs-devel@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 14 Feb 2026 12:39:38 -0800 (PST)
+Received: by mail-ed1-f48.google.com with SMTP id
+ 4fb4d7f45d1cf-65a26c220b6so2765678a12.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sat, 14 Feb 2026 12:39:38 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW8X5FN5WrVlvREBpwi1mgpGJoZf+QjfYZal5zC3Xbks53OSQw+1eSNIAjgFg435a9tKnLOwqUwCT8WyshQI9zp@lists.sourceforge.net
+X-Received: by 2002:a17:907:3d52:b0:b88:16dd:d835 with SMTP id
+ a640c23a62f3a-b8fb4149eaamr307827166b.1.1771101578249; Sat, 14 Feb 2026
+ 12:39:38 -0800 (PST)
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+References: <20260214203311.9759-1-ebiggers@kernel.org>
+ <20260214203311.9759-2-ebiggers@kernel.org>
+In-Reply-To: <20260214203311.9759-2-ebiggers@kernel.org>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Sat, 14 Feb 2026 12:39:22 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wi60UWZ=kVayGKfrGURiX4aN6P4J_bNMOw_pSvUrxw1jw@mail.gmail.com>
+X-Gm-Features: AaiRm52N7qTCMNkbWXl0IrwYY7YFxDkuplThSymslcU1mI1J-WYgkUTlm-Kk_bI
+Message-ID: <CAHk-=wi60UWZ=kVayGKfrGURiX4aN6P4J_bNMOw_pSvUrxw1jw@mail.gmail.com>
+To: Eric Biggers <ebiggers@kernel.org>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Now that fsverity_verify_page() has no callers, remove it.
- Suggested-by: Linus Torvalds <torvalds@linux-foundation.org> Signed-off-by:
- Eric Biggers <ebiggers@kernel.org> --- fs/verity/verify.c | 4 ++--
- include/linux/fsverity.h | 6 ------ 2 files changed, 2 in [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On Sat, 14 Feb 2026 at 12:33,
+ Eric Biggers <ebiggers@kernel.org>
+ wrote: > > - if (fsverity_verify_page(dic->vi,
+ rpage)) > + if (fsverity_verify_blocks(dic->vi, 
+ page_folio(rpage), > + PAGE_SIZE, 0)) This really is very wrong. It may be
+ equivalent to the old code, but the old code was *also* wrong. 
+ Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vrMKa-0002z1-3M
-Subject: [f2fs-dev] [PATCH 2/2] fsverity: remove fsverity_verify_page()
+ 0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
+ domains are different
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.218.44 listed in wl.mailspike.net]
+X-Headers-End: 1vrMQb-0003Bp-LF
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: use fsverity_verify_blocks()
+ instead of fsverity_verify_page()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,107 +157,74 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Eric Biggers via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Eric Biggers <ebiggers@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- Linus Torvalds <torvalds@linux-foundation.org>
+Cc: fsverity@lists.linux.dev, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [-1.11 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	ARC_NA(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:fsverity@lists.linux.dev,m:linux-f2fs-devel@lists.sourceforge.net,m:ebiggers@kernel.org,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:torvalds@linux-foundation.org,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	RCVD_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,linux-foundation.org:email];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:fsverity@lists.linux.dev,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	TO_DN_SOME(0.00)[];
+	DMARC_NA(0.00)[linux-foundation.org];
+	FORGED_SENDER(0.00)[torvalds@linux-foundation.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,linux-foundation.org:s=google];
+	DKIM_MIXED(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[torvalds@linux-foundation.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,linux-foundation.org:-];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[ebiggers@kernel.org]
-X-Rspamd-Queue-Id: C902513D21B
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
+X-Rspamd-Queue-Id: BB01D13D281
 X-Rspamd-Action: no action
 
-Now that fsverity_verify_page() has no callers, remove it.
+On Sat, 14 Feb 2026 at 12:33, Eric Biggers <ebiggers@kernel.org> wrote:
+>
+> -               if (fsverity_verify_page(dic->vi, rpage))
+> +               if (fsverity_verify_blocks(dic->vi, page_folio(rpage),
+> +                                          PAGE_SIZE, 0))
 
-Suggested-by: Linus Torvalds <torvalds@linux-foundation.org>
-Signed-off-by: Eric Biggers <ebiggers@kernel.org>
----
- fs/verity/verify.c       | 4 ++--
- include/linux/fsverity.h | 6 ------
- 2 files changed, 2 insertions(+), 8 deletions(-)
+This really is very wrong. It may be equivalent to the old code, but
+the old code was *also* wrong.
 
-diff --git a/fs/verity/verify.c b/fs/verity/verify.c
-index 31797f9b24d0..3e38749fbc82 100644
---- a/fs/verity/verify.c
-+++ b/fs/verity/verify.c
-@@ -431,12 +431,12 @@ EXPORT_SYMBOL_GPL(fsverity_verify_blocks);
-  * verification, then bio->bi_status is set to an error status.
-  *
-  * This is a helper function for use by the ->readahead() method of filesystems
-  * that issue bios to read data directly into the page cache.  Filesystems that
-  * populate the page cache without issuing bios (e.g. non block-based
-- * filesystems) must instead call fsverity_verify_page() directly on each page.
-- * All filesystems must also call fsverity_verify_page() on holes.
-+ * filesystems) must instead call fsverity_verify_blocks() directly.  All
-+ * filesystems must also call fsverity_verify_blocks() on holes.
-  */
- void fsverity_verify_bio(struct fsverity_info *vi, struct bio *bio)
- {
- 	struct fsverity_verification_context ctx;
- 	struct folio_iter fi;
-diff --git a/include/linux/fsverity.h b/include/linux/fsverity.h
-index fed91023bea9..6de3ddf0b148 100644
---- a/include/linux/fsverity.h
-+++ b/include/linux/fsverity.h
-@@ -280,16 +280,10 @@ static inline bool fsverity_verify_folio(struct fsverity_info *vi,
- 					 struct folio *folio)
- {
- 	return fsverity_verify_blocks(vi, folio, folio_size(folio), 0);
- }
- 
--static inline bool fsverity_verify_page(struct fsverity_info *vi,
--					struct page *page)
--{
--	return fsverity_verify_blocks(vi, page_folio(page), PAGE_SIZE, 0);
--}
--
- /**
-  * fsverity_file_open() - prepare to open a verity file
-  * @inode: the inode being opened
-  * @filp: the struct file being set up
-  *
--- 
-2.53.0
+If you use "page_folio()", you need to do the proper offsetting of the
+page inside the folio, unless the filesystem is purely using the old
+legacy "folio is the same as page", which is simply not true in f2fs.
 
+It might be true in this particular case, but considering that it was
+*NOT* true in another case I fixed up, I really don't want to see this
+same mistake done over and over again.
+
+So either it's the whole folio, in which case PAGE_SIZE is wrong.
+
+Or it really is PAGE_SIZE, in which case you need to use the proper
+offset within the folio.
+
+Don't take the old buggy garbage that was fsverity_verify_page() and
+repeat the bug when you remove it.
+
+                Linus
 
 
 _______________________________________________
