@@ -2,76 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +A6HDSTckGm7dQEAu9opvQ
+	id SLHdCiTckGm7dQEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Feb 2026 21:33:40 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5FC713D21C
+	by mail.lfdr.de (Postfix) with ESMTPS id BEBF413D21A
 	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 Feb 2026 21:33:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=aS05l7D30LImbv6GBzyZmn5FLJlJYBrEmRidno8LB3g=; b=iXSfew/tSPbkcYrYKdyvNwe7PK
-	PAl+95RMCmRBP3ZgAQartRJ9OVttfNUwoYzFrF5W2GufGyCD2mDLyf4Fbt+rO1QEwSdkCBUcBLc4i
-	SETMs4FPGspGJfoIKPqav3eBfqxhhb5CLjXYY182pCgJZ6+UoUvgfKFD6eUilpykyn0E=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=72C2rtOtqKIrzyOwNypJNWSGDbZq/uRFc2ubt7pgvV4=; b=AwWnmY70eQ2j7gyiijevRjuFRG
+	5dCQL+BMX3wJAirF/JKOJd5VY0nfv4UwsHcG9LC9BIn9nbECSq0KclUdjZhZ7uyTg9Lrld8+caVSI
+	8422mlKETy6MSdMgFfwaWo7hrCN7gfZMLt5HRrmhdjpTy5Ev3hdQ4mEXfDR6qV6Bv38g=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vrMKd-0002kr-Q3;
-	Sat, 14 Feb 2026 20:33:35 +0000
+	id 1vrMKe-0004ro-QL;
+	Sat, 14 Feb 2026 20:33:36 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1vrMKc-0002kj-KV
+ (envelope-from <ebiggers@kernel.org>) id 1vrMKd-0004rg-96
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 14 Feb 2026 20:33:34 +0000
+ Sat, 14 Feb 2026 20:33:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hXwdVdBeZ+DXNsbEc0m95U0fjVMo6/kx9hqz+HLc+Hs=; b=TNX7r3Y6wf5aVDzYZB30nlNvDc
- 36U8ox/dGaKipLkUvqwyGVjIqSKkFBHU3dWjjIw0eV5DKZteA5UHdAGO8eFx3Lguq19rYBsDnkVO2
- 1FX6N59x1LXOvM0sZeXaYlFie6kdPAAw9YYwUjv3P8Aflo8FU/z9pdlUl9tSG5qsDTh8=;
+ bh=yqZEau5YwKCKMouYGMZh3aQRNT4Fre+DKK0GMC4Hq9M=; b=Y6lLmniUG8fnjFPFtsLe4Bb3v8
+ 86PUqMzTlQtdriaG6Z8EPSUkaMiv8JYpV2IGvZpxwAlGTPhaZSVFGjGE6//a5s06/l4Hdbe/fikQN
+ cnU0zkSUC3MsdbzsPUPJvuiNQfkSWNTcnLNlrRzopdSGm9Ieh6waQKJSS+2gOSUAmVTs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=hXwdVdBeZ+DXNsbEc0m95U0fjVMo6/kx9hqz+HLc+Hs=; b=T
- C5Yty14CsZ5J6ZGkE0kiDiHtMdwOskR9hTcGEVHsIuUb7dvh4mhjVplbCK2Jcv8w9yg/THwsgBisx
- GECledD1068DGIoLO1yh10cU3qGhTdIx64gBqvcPqzeiRfbnG+eQhIcj/yWJOjra8KVpQbm0ShvEJ
- UbbHcGp9xszEjAzA=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=yqZEau5YwKCKMouYGMZh3aQRNT4Fre+DKK0GMC4Hq9M=; b=UqH8hM8c+5axejDIys21qnMm7H
+ Cok8BBdf7K9cfQ9oB7Fe9Av6OkukhmKa/h4tnGK7f0C5nMEIE8LYIfxQ6Rwi7vcM8FaSrUBvOas90
+ InXmtP3RRDfZcqAEF1KmTCvAOF5dP2nbuvip5JAqeTVHafsUqShSI74mXlFb1YGtXnc4=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vrMKc-0002z5-9m for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 14 Feb 2026 20:33:34 +0000
+ id 1vrMKc-0002z6-Uh for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 14 Feb 2026 20:33:35 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id E829C40B8F;
- Sat, 14 Feb 2026 20:33:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BE1CC16AAE;
+ by sea.source.kernel.org (Postfix) with ESMTP id A292B4437A;
+ Sat, 14 Feb 2026 20:33:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD94BC4AF09;
  Sat, 14 Feb 2026 20:33:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771101203;
- bh=kRPpSvRaO+9nsvBsobRozgVCjKXJBokYXSaSEJg70SQ=;
- h=From:To:Cc:Subject:Date:From;
- b=tEN2nk+/b059Wf20VW+ot/GZyrA1zVrUfxsKIeaIa/mgAmY9dCWzquGtg2Ksepxi8
- JyDn+eJs5eZnKtG6E+68xiSpSPeCzZzard5d/g33/IpwvJc6+tEidPaaKTIUYwXGx9
- 0UgXNK0/wyPIlraEAoUcTSUAVm2fZI7UPRWSi1WOfBlqHtK8E/JopXavJoOQ4enOiA
- QUn4GFoFf4GtttaVJIEQ2I39V+q5gkMAZTTmTOVeGoxQC/VEou1/9fqA8cPd73jUxz
- htk51nB7rCU6ly1XLBPi29x11IQAm7UhYDZul70SDrsIcv2z1OQr1vLWY48qAIWiPu
- fvmXGT0Oxat5Q==
+ s=k20201202; t=1771101204;
+ bh=0PXEdYAt/sVuxM6vBLkl5PSVhtNsF+qniTEX01KwCCU=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=dlREuZd6iwFT/KKhXENR0eEBVhJ7tKBSqpwsfcNfOsYbXnCQXVUMNj59nm8uKwkyH
+ O+6dzBuWc1jIfxrYvC6s05up+FDsiCA0+exggAOs2pNdrVYCg5N184zYdAtezgaTYi
+ XKiGDzg4C4nRrfKIzi8YklvO8jIB9uw1xB3znKia0q74rmZwBA7WaO2vZ1UwzWlVJT
+ KC26l3EWHa6Wp2h90QBM51E+uV7HabceuGfHUZ2MvCGPuTWOywcrOoUoxwOBaiqsP2
+ iAfT5L24BEQiB+FaD3XdYMMrgBFq6erW7oKiNA3euc1NaQtMOj1JZz6jr4PIT0j19f
+ NUjzxzsXI7HGA==
 To: fsverity@lists.linux.dev
-Date: Sat, 14 Feb 2026 12:33:09 -0800
-Message-ID: <20260214203311.9759-1-ebiggers@kernel.org>
+Date: Sat, 14 Feb 2026 12:33:10 -0800
+Message-ID: <20260214203311.9759-2-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260214203311.9759-1-ebiggers@kernel.org>
+References: <20260214203311.9759-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -80,11 +82,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This series removes the non-large-folio-aware function
- fsverity_verify_page(), 
- which is no longer needed. Eric Biggers (2): f2fs: use
- fsverity_verify_blocks()
- instead of fsverity_verify_page() fsverity: remove fsverity_verify_page()
+ Content preview: Replace the only remaining caller of fsverity_verify_page()
+ with the equivalent direct call to fsverity_verify_blocks(). No functional
+ change. This will allow fsverity_verify_page() to be removed. Signed-off-by:
+ Eric Biggers <ebiggers@kernel.org> --- fs/f2fs/compress.c | 3 ++- 1 file
+ changed, 2 insertions(+), 1 deletion(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -96,8 +98,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vrMKc-0002z5-9m
-Subject: [f2fs-dev] [PATCH 0/2] fsverity: remove fsverity_verify_page()
+X-Headers-End: 1vrMKc-0002z6-Uh
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: use fsverity_verify_blocks() instead
+ of fsverity_verify_page()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -155,23 +158,36 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: D5FC713D21C
+X-Rspamd-Queue-Id: BEBF413D21A
 X-Rspamd-Action: no action
 
-This series removes the non-large-folio-aware function
-fsverity_verify_page(), which is no longer needed.
+Replace the only remaining caller of fsverity_verify_page() with the
+equivalent direct call to fsverity_verify_blocks().  No functional
+change.  This will allow fsverity_verify_page() to be removed.
 
-Eric Biggers (2):
-  f2fs: use fsverity_verify_blocks() instead of fsverity_verify_page()
-  fsverity: remove fsverity_verify_page()
+Signed-off-by: Eric Biggers <ebiggers@kernel.org>
+---
+ fs/f2fs/compress.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
- fs/f2fs/compress.c       | 3 ++-
- fs/verity/verify.c       | 4 ++--
- include/linux/fsverity.h | 6 ------
- 3 files changed, 4 insertions(+), 9 deletions(-)
-
-
-base-commit: 3e48a11675c50698374d4ac596fb506736eb1c53
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 006a80acd1de..6d688835387d 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1815,11 +1815,12 @@ static void f2fs_verify_cluster(struct work_struct *work)
+ 		struct page *rpage = dic->rpages[i];
+ 
+ 		if (!rpage)
+ 			continue;
+ 
+-		if (fsverity_verify_page(dic->vi, rpage))
++		if (fsverity_verify_blocks(dic->vi, page_folio(rpage),
++					   PAGE_SIZE, 0))
+ 			SetPageUptodate(rpage);
+ 		else
+ 			ClearPageUptodate(rpage);
+ 		unlock_page(rpage);
+ 	}
 -- 
 2.53.0
 
