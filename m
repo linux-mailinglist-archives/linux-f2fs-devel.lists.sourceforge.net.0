@@ -2,76 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eMsrBJtLkWnThAEAu9opvQ
+	id kETjJJ1LkWnThAEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 Feb 2026 05:29:15 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 Feb 2026 05:29:17 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7DDF13DFFD
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 Feb 2026 05:29:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BCB713E00D
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 Feb 2026 05:29:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=9UO1Dkrvdt3YtUNE3EAk9+VeMlJtTMgoOIBh6yX5VLI=; b=jcbrm9Q6Mo5/fs5skLHT2NZJGe
-	iyf9ZdyES1MM8HDRtxGq+tI6htDnfpGqw7qzB+oQQPF166YWErYmbjpiPQqUro7VWnVm0UuDu64td
-	ep6gVhp4wawceUY/v3ZadFuHifbogWLRY74to4bHnxlBtqS2161DcdxtwDlH+uFeO90Y=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=jKv7JqMPFAwghcdN6FnofRv4wngXxqihkctMcc20tkY=; b=bOeseVO+9m7jc2fI9VbWBXLkeJ
+	MI9Esjh42GwmhJnufUnZ0b09aRX5HakqEWdAqrUgD0EfltEpE25DbW5hC6me3PwiqoIAwF3gyxah6
+	JCg1z/SF8OJy/GgJxouGjkbK6uh+fvVTbHLzZedxezxh3ijtqhsTcNEylc2+xRjC4zmo=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vrTks-00014x-DV;
-	Sun, 15 Feb 2026 04:29:10 +0000
+	id 1vrTky-0003Wl-7A;
+	Sun, 15 Feb 2026 04:29:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1vrTkq-00014r-OL
+ (envelope-from <ebiggers@kernel.org>) id 1vrTkw-0003We-KY
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 15 Feb 2026 04:29:08 +0000
+ Sun, 15 Feb 2026 04:29:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FNcPxGjvLK6eIEfYGvhEJpUCmS16IwklrRFeQQtVlMQ=; b=LTJxwi7bGH6jJg+u00jzZQOxxc
- 8zSiTRJxBMIjUAeForbSejkhSjiBhj/EUb1K/qdp2PLVdVkzh6clVIBXpduEHYMT1c03emb322C6x
- JrCu+7uFEx2BM+TpTDpnBPjJ8ozbDX8gxbrGCOwezE4qTKrxduzJDve8iXI6znymKRhk=;
+ bh=MEBmEJj4Lx77blnAPrNHY8Opz7mlS3KWYXj25KRphmM=; b=Y4m9GlibmMzrX5xJNsdFRVS+DG
+ +/ZULAXLlUDwg14nkM2d+k0mJFcilH7KB9/0+W/stDaQ5TqHoFy1ql43Yut2hpkNtmMDMrmRwyejB
+ jfz/gBoS5kbSi0YGgWPaSPIDYgi6atqbmFX+VuMMECz+hO7Xt2d/ff2QnyJ1XSkRM1OU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=FNcPxGjvLK6eIEfYGvhEJpUCmS16IwklrRFeQQtVlMQ=; b=S
- Y8dtg0HBX8ngSrR/CUu6UV41zd7Lyru8vCoZ7SmVgkSMa/DOkRtElX3wp6gEuqI5k/wcYyEIQloX0
- vD8OQ4DF7l1TAeJ+H4zRSbotejuPKm5YEk2Ts5HX/5elPrXOjlnrwY7Q6LQ+AaslCIod4XyidFEeI
- KpcEVc0FpdeKtPfQ=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=MEBmEJj4Lx77blnAPrNHY8Opz7mlS3KWYXj25KRphmM=; b=QsrJ7jBZa//+4ySWnCCwZ7h8tm
+ 8DA3uWpU4zkJxUl0F+VkW8tCIFc2L7BmnwWgONElhMUJGFkAYTd0lOS9dG2EZ+Wy3C3AsD4PHWWec
+ 1Wn7/bzAeMxAwq2yGa1O+gLtbAWEdlvWrivjcDaVS3zig0FDCRH2sRWXQ8i5Tos3FTUM=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vrTkq-0008Ex-DT for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 15 Feb 2026 04:29:08 +0000
+ id 1vrTkw-0008F7-8L for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 15 Feb 2026 04:29:14 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id ED23B4372E;
- Sun, 15 Feb 2026 04:29:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81575C4CEF7;
+ by tor.source.kernel.org (Postfix) with ESMTP id 8184D6011F;
+ Sun, 15 Feb 2026 04:29:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECC98C2BC9E;
  Sun, 15 Feb 2026 04:29:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771129742;
- bh=JbWq7wgnL2qN9z7FEVzvPfVqM+jeBcalhVpTviJeWYo=;
- h=From:To:Cc:Subject:Date:From;
- b=b/E8BNT+nlIBwPTgmspja+zoq74WJ8XpFw1QR0S7AGNQNHztTIVz3CesCzlUAJQBA
- GrThV5g5QELcvzt9dmWa4EpxzDFNKu4cLljjL7W+hfqbomJ7pLRjkY1ah0Hs6eiGb8
- vY1UHBtX/ZhhfaH/AdroHEFa834dGk6hzvwo+nugOm02RH8szSU4CVsDZ5s16RtyXL
- Q/rEYSO3TrbFn5g7Z+ChAw31OYXMG3fetxpXEsq8cxzgSeF7GlM/FOHrvvQo7ODXdY
- oxwYOX5TPvX9VWh6JfxSwtE9GvVqZ9XRD9sgNr75loFfbyb+mFQ7op+sK7pOvYQqEe
- gh6lu5Oz/B9Bg==
+ s=k20201202; t=1771129743;
+ bh=qAgmjiPqLWz4roYqGvLmCTQrLya8NjoSHRNC3UUpZH8=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=rTDwXEVXUzBUOyZJHtDYURGQUM9fHkROmzcEODN5XiBiJEdclruAKOsUJ61trfUMM
+ 9Jq/FMh6nSFUGlvJoeOdOiknvaAkLkuh2tX0RmSNllVA7LBpKMdnoSJfTZuZDN9b8s
+ dZZEp/1LfHV+MgiS9/eL5pN7stbKDvxWJIMlPhH5MO93/kMNnScThbxppyribjYz3Y
+ bEJjrNlSIViG5qlUG/MzBw8WcrhTw5AP8U0b7jNQ2cRkid6bq+2ASxsPyaMRkVJy4c
+ GnVDj5VlNU8CbYKrpWslGJfWvxC8z7sK6PJ8tLDK5hs60aT2d63I1gsOroUCeINJvI
+ wl2I43Yrnj9rA==
 To: fsverity@lists.linux.dev
-Date: Sat, 14 Feb 2026 20:28:04 -0800
-Message-ID: <20260215042806.13348-1-ebiggers@kernel.org>
+Date: Sat, 14 Feb 2026 20:28:05 -0800
+Message-ID: <20260215042806.13348-2-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260215042806.13348-1-ebiggers@kernel.org>
+References: <20260215042806.13348-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -80,11 +82,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This series removes the non-large-folio-aware function
- fsverity_verify_page(), 
- which is no longer needed. Changed in v3: - Additional scope creep: verify
- the entire folio, switched to several more folio functions, and stop clearing
- PG_uptodate 
+ Content preview:  f2fs_verify_cluster() is the only remaining caller of the
+ non-large-folio-aware function fsverity_verify_page(). To unblock the removal
+ of that function, change f2fs_verify_cluster() to verify the ent [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -96,12 +96,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [172.234.252.31 listed in list.dnswl.org]
-X-Headers-End: 1vrTkq-0008Ex-DT
-Subject: [f2fs-dev] [PATCH v3 0/2] fsverity: remove fsverity_verify_page()
+X-Headers-End: 1vrTkw-0008F7-8L
+Subject: [f2fs-dev] [PATCH v3 1/2] f2fs: make f2fs_verify_cluster()
+ partially large-folio-aware
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -129,20 +126,20 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_MIXED(0.00)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:fsverity@lists.linux.dev,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:ebiggers@kernel.org,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:torvalds@linux-foundation.org,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
@@ -160,30 +157,54 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: B7DDF13DFFD
+X-Rspamd-Queue-Id: 8BCB713E00D
 X-Rspamd-Action: no action
 
-This series removes the non-large-folio-aware function
-fsverity_verify_page(), which is no longer needed.
+f2fs_verify_cluster() is the only remaining caller of the
+non-large-folio-aware function fsverity_verify_page().   To unblock the
+removal of that function, change f2fs_verify_cluster() to verify the
+entire folio of each page and mark it up-to-date.
 
-Changed in v3:
-    - Additional scope creep: verify the entire folio, switched to
-      several more folio functions, and stop clearing PG_uptodate
+Note that this doesn't actually make f2fs_verify_cluster()
+large-folio-aware, as it is still passed an array of pages.
 
-Changed in v2:
-    - Made one specific part of f2fs_verify_cluster() large-folio-aware
+In addition, remove the unnecessary clearing of the up-to-date flag.
+It's guaranteed to already be clear.
 
-Eric Biggers (2):
-  f2fs: make f2fs_verify_cluster() partially large-folio-aware
-  fsverity: remove fsverity_verify_page()
+Signed-off-by: Eric Biggers <ebiggers@kernel.org>
+---
+ fs/f2fs/compress.c | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
- fs/f2fs/compress.c       | 11 +++++------
- fs/verity/verify.c       |  4 ++--
- include/linux/fsverity.h |  6 ------
- 3 files changed, 7 insertions(+), 14 deletions(-)
-
-
-base-commit: 64275e9fda3702bfb5ab3b95f7c2b9b414667164
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 006a80acd1de..8c76400ba631 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1811,19 +1811,18 @@ static void f2fs_verify_cluster(struct work_struct *work)
+ 	int i;
+ 
+ 	/* Verify, update, and unlock the decompressed pages. */
+ 	for (i = 0; i < dic->cluster_size; i++) {
+ 		struct page *rpage = dic->rpages[i];
++		struct folio *rfolio;
+ 
+ 		if (!rpage)
+ 			continue;
+-
+-		if (fsverity_verify_page(dic->vi, rpage))
+-			SetPageUptodate(rpage);
+-		else
+-			ClearPageUptodate(rpage);
+-		unlock_page(rpage);
++		rfolio = page_folio(rpage);
++		if (fsverity_verify_folio(dic->vi, rfolio))
++			folio_mark_uptodate(rfolio);
++		folio_unlock(rfolio);
+ 	}
+ 
+ 	f2fs_put_dic(dic, true);
+ }
+ 
 -- 
 2.53.0
 
