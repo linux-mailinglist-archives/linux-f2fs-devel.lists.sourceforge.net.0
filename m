@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QNH+KxrilGmWIgIAu9opvQ
+	id kCX8OR3ilGmWIgIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Feb 2026 22:48:10 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Feb 2026 22:48:13 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 031A4150E82
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Feb 2026 22:48:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 882D2150E90
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Feb 2026 22:48:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=dd/sVIQW3XXd/n2wPh7/1MaR+AyKs1XGzcTcz23Wz94=; b=CRtJUcg1LnsyvUJ9q0eidQ3BVr
-	G8sXrNNixClWv/n2HsRcdiLQYsU79MxpfQjTx2k+GVUGhUev0mBw46z0007p4Tbp1fO/iH+vjbo6J
-	5LDABbu51gEGWBuOLvm+dQK+RqHSYJKXfMRGxOR1FFq4dLeqlV+phW67V69o3SwBrVaA=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=VVvEGcNxyprJXXzDvMbAEQphsRkhRmAOBn1cyrICijU=; b=bCHz++Qn/RZ5DRI4jtQCmfcE4C
+	OUmaudExMTSmVNwz61Xv9v48z//yBgr7e7xsZMPQo502X+MWav90Y1iV2zbTIt9sT0vbLpjMNclhu
+	x1QWB77xNhpLOunkLuK/D+yypLKhX2sI82k3azp03/7ptmi+IwcsgvTvJTZz1BE2JK7Y=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vsSvQ-0000WG-MA;
-	Tue, 17 Feb 2026 21:48:08 +0000
+	id 1vsSvU-0005dn-7J;
+	Tue, 17 Feb 2026 21:48:12 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <cel@kernel.org>) id 1vsSvP-0000W6-Ca
+ (envelope-from <cel@kernel.org>) id 1vsSvS-0005de-LO
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 17 Feb 2026 21:48:07 +0000
+ Tue, 17 Feb 2026 21:48:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aWv53BKGWMwFhdwFRTAWtGU2+0Vfwu4V8/7cXoeB5HE=; b=EAq0NAsothgff3+tcghay8UvDc
- qNqA1cG/JLKdRiaGcbvW4rgeF/1TtZ11fSV386ld0SNuHf3j2UgaQ5nAVUshmraoSXyyyn+9xVG4u
- 63wENyYOb3Yk/QNb6no1gEkWwIVCwjyOtIOGctFE7OU5EMVu3OtzJNNuyTFXAmpefU+0=;
+ bh=ONLUbLbq7tqTz657v/P3PNTkZfFJaceBKBX4dTazlbw=; b=ZyRgPTdHfaWe04HI7TqaIcsBm0
+ DqvL3SwphBzkXhKEfkEmmu88vRSJxIaKR/41riafEMqzfq7iETCegjE17bYG7C2PbovvPGuyPdyss
+ m1FyXsQoqWQ5LRP+uDtc10lhE+fNsOlmYmCEpSSDOVh1Xz6EUNv2P1nAhuU93CpVQxPc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,33 +45,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=aWv53BKGWMwFhdwFRTAWtGU2+0Vfwu4V8/7cXoeB5HE=; b=BkUMbGjmluZJwL9E6H6Tvsw8Hd
- CjQ1Tos5HLJfeLUulUHJUfs7hW2kCRXKH2g64lw1OWjhN9lJb891AeM92p/WKnXYOOIOPL9KyhvFQ
- I2jLSYjTddBznTSv3zBpnjYNBwxIPeFj7l1qYt3pKJ621EUIQBUOVNfNy5BLP2igAnMg=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=ONLUbLbq7tqTz657v/P3PNTkZfFJaceBKBX4dTazlbw=; b=Oo+XPN/czOoedC/S7ubgdYMWd3
+ NJ2BvzaPgyHhMAtb4j2Ziq2+L2i63ezL2W9Inxip9GlSoj76anb5jqrgMPPvypooa3yvci/MQ65MH
+ WXBbxWiyHSL54Yob05/eRVUaohmKTNv5NYM2CzK73ZrUFz4Dx6jtv15znzohrsdKrQ/s=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vsSvO-0002sT-OT for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 17 Feb 2026 21:48:07 +0000
+ id 1vsSvR-0002sb-Vg for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 17 Feb 2026 21:48:10 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 73DF44322B;
+ by tor.source.kernel.org (Postfix) with ESMTP id 1C1576185C;
+ Tue, 17 Feb 2026 21:47:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C819C19421;
  Tue, 17 Feb 2026 21:47:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1752BC4CEF7;
- Tue, 17 Feb 2026 21:47:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771364876;
- bh=jqBG6MkL4KZPFA3a1GqxBqdJRUrkvA5i1/WFsqQI3ek=;
+ s=k20201202; t=1771364878;
+ bh=g2zNP06HIJDReqIgTUOs61C5Q25PHpY0V1DfgCIwllc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=HkQWUGwNMSyYjRDCN2P6QXiho+aAJFeccbLO30JKCT1m10rCY5iuTj7fjshNfwLj2
- pvCgCBc9jzTr4s8cAS+yvkKwS1aCArc/fEYVSfR0fooTq5s+fj2CKgWX2vXKsXkOMF
- sWd77ftG+yDh/sf5dxpXusxsuChTzybBmxDtTDgjQIpF0wFZrg9Syd1zu+EO8M7heZ
- wtyUHp7o905rf/fWjtHHy2svpllm4ee6bBTrycVGkYKrBoLec4/PkvtHESZzLeMGdk
- t2KOuzpbk+k4OGOdxcjwoTonZCWUYX+aFxxhdLWilABp8JnPZsIMNhX50BpKgzlTxW
- KCIAVCkg/pi6Q==
+ b=blOMhAApRvDDlGT+5A7RSfOn/DctNA3L0RJud43KFpIxkiW0E+F75Ar9RHjwCcxZz
+ HJnugTL2TGASJDybkbXDX55n5BPH4U+V6PWfAJ+nvZBob5xapaxUlKBn8UrgYPyfi+
+ NjQUrT/oFYt7aT31QB+fAoAHSEf1NFag2SlVfq8uC6TmJNKwPH/bSrKiIaEogGcg8n
+ fTsxqC7Fiu8kB1pRi+GKj81bRaem2W28JkmmS88MPONZk+xDB0fus2dbg9ZNdsu8VX
+ OhZGYBBF5ajsxSfRYSlnTyKobR7z6vl+oFrUz+0sFfUN0ZJrskJqlOYfjUwztpxl7f
+ YX5Cn6JTpAzsQ==
 To: Al Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>,
  Jan Kara <jack@suse.cz>
-Date: Tue, 17 Feb 2026 16:47:28 -0500
-Message-ID: <20260217214741.1928576-5-cel@kernel.org>
+Date: Tue, 17 Feb 2026 16:47:29 -0500
+Message-ID: <20260217214741.1928576-6-cel@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260217214741.1928576-1-cel@kernel.org>
 References: <20260217214741.1928576-1-cel@kernel.org>
@@ -83,10 +83,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Chuck Lever <chuck.lever@oracle.com> Report exFAT's
- case sensitivity behavior via the FS_XFLAG_CASEFOLD flag. exFAT is always
- case-insensitive (using an upcase table for comparison) and always preserves
- case at rest. 
+ Content preview: From: Chuck Lever <chuck.lever@oracle.com> Report NTFS case
+ sensitivity behavior via the FS_XFLAG_CASEFOLD flag. NTFS always preserves
+ case at rest. Case sensitivity depends on mount options: with "nocase", NTFS
+ is case-insensitive; otherwise it is case-sensitive. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -98,8 +98,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vsSvO-0002sT-OT
-Subject: [f2fs-dev] [PATCH v8 04/17] exfat: Implement fileattr_get for case
+X-Headers-End: 1vsSvR-0002sb-Vg
+Subject: [f2fs-dev] [PATCH v8 05/17] ntfs3: Implement fileattr_get for case
  sensitivity
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -151,7 +151,7 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	ARC_NA(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[31];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
@@ -163,89 +163,114 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	HAS_REPLYTO(0.00)[cel@kernel.org];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,oracle.com:email]
-X-Rspamd-Queue-Id: 031A4150E82
+X-Rspamd-Queue-Id: 882D2150E90
 X-Rspamd-Action: no action
 
 From: Chuck Lever <chuck.lever@oracle.com>
 
-Report exFAT's case sensitivity behavior via the FS_XFLAG_CASEFOLD
-flag. exFAT is always case-insensitive (using an upcase table for
-comparison) and always preserves case at rest.
+Report NTFS case sensitivity behavior via the FS_XFLAG_CASEFOLD
+flag. NTFS always preserves case at rest.
 
-Acked-by: Namjae Jeon <linkinjeon@kernel.org>
+Case sensitivity depends on mount options: with "nocase", NTFS
+is case-insensitive; otherwise it is case-sensitive.
+
 Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
 ---
- fs/exfat/exfat_fs.h |  2 ++
- fs/exfat/file.c     | 16 ++++++++++++++--
- fs/exfat/namei.c    |  1 +
- 3 files changed, 17 insertions(+), 2 deletions(-)
+ fs/ntfs3/file.c    | 23 +++++++++++++++++++++++
+ fs/ntfs3/inode.c   |  1 +
+ fs/ntfs3/namei.c   |  2 ++
+ fs/ntfs3/ntfs_fs.h |  1 +
+ 4 files changed, 27 insertions(+)
 
-diff --git a/fs/exfat/exfat_fs.h b/fs/exfat/exfat_fs.h
-index 2dbed5f8ec26..686d4cd49546 100644
---- a/fs/exfat/exfat_fs.h
-+++ b/fs/exfat/exfat_fs.h
-@@ -468,6 +468,8 @@ int exfat_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- int exfat_getattr(struct mnt_idmap *idmap, const struct path *path,
- 		  struct kstat *stat, unsigned int request_mask,
- 		  unsigned int query_flags);
-+struct file_kattr;
-+int exfat_fileattr_get(struct dentry *dentry, struct file_kattr *fa);
- int exfat_file_fsync(struct file *file, loff_t start, loff_t end, int datasync);
- long exfat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg);
- long exfat_compat_ioctl(struct file *filp, unsigned int cmd,
-diff --git a/fs/exfat/file.c b/fs/exfat/file.c
-index 90cd540afeaa..15629b0a6f6d 100644
---- a/fs/exfat/file.c
-+++ b/fs/exfat/file.c
-@@ -13,6 +13,7 @@
- #include <linux/msdos_fs.h>
- #include <linux/writeback.h>
- #include <linux/filelock.h>
-+#include <linux/fileattr.h>
- 
- #include "exfat_raw.h"
- #include "exfat_fs.h"
-@@ -282,6 +283,16 @@ int exfat_getattr(struct mnt_idmap *idmap, const struct path *path,
- 	return 0;
+diff --git a/fs/ntfs3/file.c b/fs/ntfs3/file.c
+index 6cb4479072a6..bf7e950ccdb8 100644
+--- a/fs/ntfs3/file.c
++++ b/fs/ntfs3/file.c
+@@ -147,6 +147,28 @@ long ntfs_compat_ioctl(struct file *filp, u32 cmd, unsigned long arg)
  }
+ #endif
  
-+int exfat_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
++/*
++ * ntfs_fileattr_get - inode_operations::fileattr_get
++ */
++int ntfs_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
 +{
++	struct inode *inode = d_inode(dentry);
++	struct ntfs_sb_info *sbi = inode->i_sb->s_fs_info;
++
++	/* Avoid any operation if inode is bad. */
++	if (unlikely(is_bad_ni(ntfs_i(inode))))
++		return -EINVAL;
++
 +	/*
-+	 * exFAT is always case-insensitive (using upcase table).
-+	 * Case is preserved at rest (the default).
++	 * NTFS preserves case (the default). Case sensitivity depends on
++	 * mount options: with "nocase", NTFS is case-insensitive;
++	 * otherwise it is case-sensitive.
 +	 */
-+	fa->fsx_xflags |= FS_XFLAG_CASEFOLD;
++	if (sbi->options && sbi->options->nocase)
++		fa->fsx_xflags |= FS_XFLAG_CASEFOLD;
 +	return 0;
 +}
 +
- int exfat_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
- 		  struct iattr *attr)
- {
-@@ -775,6 +786,7 @@ const struct file_operations exfat_file_operations = {
+ /*
+  * ntfs_getattr - inode_operations::getattr
+  */
+@@ -1461,6 +1483,7 @@ const struct inode_operations ntfs_file_inode_operations = {
+ 	.get_acl	= ntfs_get_acl,
+ 	.set_acl	= ntfs_set_acl,
+ 	.fiemap		= ntfs_fiemap,
++	.fileattr_get	= ntfs_fileattr_get,
  };
  
- const struct inode_operations exfat_file_inode_operations = {
--	.setattr     = exfat_setattr,
--	.getattr     = exfat_getattr,
-+	.setattr	= exfat_setattr,
-+	.getattr	= exfat_getattr,
-+	.fileattr_get	= exfat_fileattr_get,
+ const struct file_operations ntfs_file_operations = {
+diff --git a/fs/ntfs3/inode.c b/fs/ntfs3/inode.c
+index edfb973e4e82..a6d1489cc362 100644
+--- a/fs/ntfs3/inode.c
++++ b/fs/ntfs3/inode.c
+@@ -2088,6 +2088,7 @@ const struct inode_operations ntfs_link_inode_operations = {
+ 	.get_link	= ntfs_get_link,
+ 	.setattr	= ntfs_setattr,
+ 	.listxattr	= ntfs_listxattr,
++	.fileattr_get	= ntfs_fileattr_get,
  };
-diff --git a/fs/exfat/namei.c b/fs/exfat/namei.c
-index 670116ae9ec8..7895dda5cdb4 100644
---- a/fs/exfat/namei.c
-+++ b/fs/exfat/namei.c
-@@ -1323,4 +1323,5 @@ const struct inode_operations exfat_dir_inode_operations = {
- 	.rename		= exfat_rename,
- 	.setattr	= exfat_setattr,
- 	.getattr	= exfat_getattr,
-+	.fileattr_get	= exfat_fileattr_get,
+ 
+ const struct address_space_operations ntfs_aops = {
+diff --git a/fs/ntfs3/namei.c b/fs/ntfs3/namei.c
+index b2af8f695e60..eb241d7796ba 100644
+--- a/fs/ntfs3/namei.c
++++ b/fs/ntfs3/namei.c
+@@ -518,6 +518,7 @@ const struct inode_operations ntfs_dir_inode_operations = {
+ 	.getattr	= ntfs_getattr,
+ 	.listxattr	= ntfs_listxattr,
+ 	.fiemap		= ntfs_fiemap,
++	.fileattr_get	= ntfs_fileattr_get,
  };
+ 
+ const struct inode_operations ntfs_special_inode_operations = {
+@@ -526,6 +527,7 @@ const struct inode_operations ntfs_special_inode_operations = {
+ 	.listxattr	= ntfs_listxattr,
+ 	.get_acl	= ntfs_get_acl,
+ 	.set_acl	= ntfs_set_acl,
++	.fileattr_get	= ntfs_fileattr_get,
+ };
+ 
+ const struct dentry_operations ntfs_dentry_ops = {
+diff --git a/fs/ntfs3/ntfs_fs.h b/fs/ntfs3/ntfs_fs.h
+index f18349689458..94a23464c51f 100644
+--- a/fs/ntfs3/ntfs_fs.h
++++ b/fs/ntfs3/ntfs_fs.h
+@@ -505,6 +505,7 @@ extern const struct file_operations ntfs_dir_operations;
+ extern const struct file_operations ntfs_legacy_dir_operations;
+ 
+ /* Globals from file.c */
++int ntfs_fileattr_get(struct dentry *dentry, struct file_kattr *fa);
+ int ntfs_getattr(struct mnt_idmap *idmap, const struct path *path,
+ 		 struct kstat *stat, u32 request_mask, u32 flags);
+ int ntfs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
 -- 
 2.53.0
 
