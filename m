@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QOT4KOBQlWnBOQIAu9opvQ
+	id 0NeDFe9QlWnBOQIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 06:40:48 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 06:41:03 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85139153265
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 06:40:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3653F153273
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 06:41:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=e8qfyoSPyPfjE0jCCqLhRQvm/sqiAGHIjfAWqfboNlU=; b=RkWhXHvppUywsCzc2Xd21kxPHy
-	GRCGk4AKId7N+LufCrpLI6BBJjbLOuIGnXvD9TM47KX8VUXbamoNMX6WSdhxBBAMPOkrCmC2z4e8p
-	JBeJqCqKTNpFapMc7owBMPZPpyzd5mJ9Oja2tut45/jqmBrMQ7KnxFHA3QsBRKJKmBoI=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=u4A5fROc1KlPw+JMN0SzRc1PwbSLQ4A8bgDMiT+QV5k=; b=TBs5ZXvJGq5FJQKxBAuB4nPN6h
+	yqAWsCHozaqzEv5p07nrdXn1SSGYccuyv+HT2OAFhsk1Ba617XkFj3I4oYQ51/MWQUgIsUsktki9e
+	IgciE/KZ0DE/BGr4D2rdcNXbxqchXYcB5dBFzqNvdrj5DFAmBH4CDmtUgNYkFdVX8u94=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vsaIh-0008Oj-Vg;
-	Wed, 18 Feb 2026 05:40:39 +0000
+	id 1vsaJ3-0001gW-Ry;
+	Wed, 18 Feb 2026 05:41:01 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+b7a6f314dcfbee4e7dbb+8214+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vsaIg-0008Od-8r for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Feb 2026 05:40:38 +0000
+ id 1vsaJ1-0001gP-Kg for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 18 Feb 2026 05:40:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=i/rZBo7FJmNNRgNcdC8PpZCpuw
- y7tCvM18BVxvDHGgIDwnRxW81qtqWXs3ZeZSuL91GyKI7Qh2G32Q+AkxaoW1MaPmeXBkEZzh7z49j
- 9z/9cYOtmcls8WEEX5ZRTaH3dfTf5MdMF6qmNpVcHG9y5mJMxho6zY1CnfUPN4dr3tuA=;
+ bh=vZcLGGT7RIcWBjO5WUNd9ucsW2phzcUHaruHOPVxXoU=; b=Zdl1bsDO7F61cn17CRzNoxtUcg
+ cTByCpTAc2tXk43K0476aWOuBxh1i9NB1uVImgxy38VJZda8aT4eVcX74cL2G4BxHavEgef7bcdXg
+ HvjTLuU5tlL01brkJTVCezlDdSpSNgvJEukwlhMjmuLX2f/dTwiDUKXcCQLlozO1oTY8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,57 +45,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=icDO56uBrQiyRCXWtgJrclvI0o
- uvPYT6YGM3Qucgj0EZKA3qjEotP8ZqwgANmCIOY9qC7rla+GXxDUJR4Orw0hs8wDY9o7zPN05Ohxi
- JY3ZfiRrotls3xNn/1te/FN8df8utuWCulDyOyWsSLuedlNPI6oJazKSl0gLCBIes8kg=;
+ bh=vZcLGGT7RIcWBjO5WUNd9ucsW2phzcUHaruHOPVxXoU=; b=lFW9RngAO/MblgQtTV6871PqpV
+ MBlncMJjC2PWADCBC5kxXmwii9Dd2Uthw9ZdgHMvcXdQqfEOCz1KMF+ENps8OrMslNE9RkdMo5FEs
+ PGKB15w08Z36tHESizzvqzVPCAOgFfnb1Rbrp2SqboYNpsi8JX9bHGUvkqs+/AzxsX4Y=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vsaIf-0005LZ-Jc for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Feb 2026 05:40:38 +0000
+ id 1vsaJ1-0005Ly-AN for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 18 Feb 2026 05:40:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=tt0nwSjMtedYdzGCQ5zHFVm9um
- IByaGHFymBAHbIPrb/hD+iMF5LrAWveAhyLZJrGwqhP9Cl2YmDypLqY0PPK8zwO/Nxwk/wkYze7gA
- bbnWPrdRUD4vm/WzbcGScN8L5fCYplqEHzTIbhCHhKqZvvuHumsNGfwBH2jE/yA+5lGwL9LciZ/T7
- GdrFLA/IZZSwE4M25uWxoNCiAbL5kBaQZxm7iwwxJyXSiO48RsQs03cuXXyS+NwdYkgumjWJEhPdl
- u84Vl2HMXn9oha7rEqKnp7ekSa/YEbyR2ficy2rzwSST4xclt/R8IfU6q90dGiEvELDmzILHDlSr3
- YrlMXJ6A==;
+ bh=vZcLGGT7RIcWBjO5WUNd9ucsW2phzcUHaruHOPVxXoU=; b=TRzAA7MBV+J0XNOGesIyH5mwvl
+ hSxqJ5Pge4JV+EZqomd1VkNA/RC0GVlaqhfOyhnwms1zrEShZSIZdbaz34cUn7qNLGy2ACMk6MA/5
+ 5eMANS284Ecab5q0cFvubc/ZP371qRy5oYDL0lhXOirwD6uhGCDOj4wgoo5p8u+j/3kOKW55a0FEv
+ Qlvj9c6VL2Bzj1GEcUuho36xozFOQirwFXSv9pqxz8jYireSMrQO5NP0icfOQTX5hRix0HHBX6fV2
+ E58j6t6/r2rI+H8pG0LTNtGsquh3XupgjaD+uogQFce0EcMKfmcGAeaPJAOuqfufpj6O9EF6J7T7F
+ RkTTm1KQ==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1vsaIV-00000009KRJ-0gbl;
- Wed, 18 Feb 2026 05:40:27 +0000
-Date: Tue, 17 Feb 2026 21:40:27 -0800
+ Hat Linux)) id 1vsaIr-00000009KTB-0PLd;
+ Wed, 18 Feb 2026 05:40:49 +0000
+Date: Tue, 17 Feb 2026 21:40:49 -0800
 From: Christoph Hellwig <hch@infradead.org>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <aZVQyzy0R1AM8O-z@infradead.org>
+Message-ID: <aZVQ4TtxuVWZ3cAK@infradead.org>
 References: <20260218010630.7407-1-ebiggers@kernel.org>
- <20260218010630.7407-2-ebiggers@kernel.org>
+ <20260218010630.7407-3-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260218010630.7407-2-ebiggers@kernel.org>
+In-Reply-To: <20260218010630.7407-3-ebiggers@kernel.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Looks good: Reviewed-by: Christoph Hellwig <hch@lst.de> 
+ Content preview:  On Tue, Feb 17, 2026 at 05:06:29PM -0800, Eric Biggers wrote:
+ > f2fs_verify_cluster() is the only remaining caller of the >
+ non-large-folio-aware
+ function fsverity_verify_page(). To unblock the > remo [...] 
  Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [198.137.202.133 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1vsaIf-0005LZ-Jc
-Subject: Re: [f2fs-dev] [PATCH v4 1/3] f2fs: remove unnecessary
- ClearPageUptodate in f2fs_verify_cluster()
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1vsaJ1-0005Ly-AN
+Subject: Re: [f2fs-dev] [PATCH v4 2/3] f2fs: make f2fs_verify_cluster()
+ partially large-folio-aware
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -147,8 +154,18 @@ X-Spamd-Result: default: False [-1.01 / 15.00];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,infradead.org:mid,lst.de:email]
-X-Rspamd-Queue-Id: 85139153265
+X-Rspamd-Queue-Id: 3653F153273
 X-Rspamd-Action: no action
+
+On Tue, Feb 17, 2026 at 05:06:29PM -0800, Eric Biggers wrote:
+> f2fs_verify_cluster() is the only remaining caller of the
+> non-large-folio-aware function fsverity_verify_page().   To unblock the
+> removal of that function, change f2fs_verify_cluster() to verify the
+> entire folio of each page and mark it up-to-date.
+> 
+> Note that this doesn't actually make f2fs_verify_cluster()
+> large-folio-aware, as it is still passed an array of pages.  Currently,
+> it's never called with large folios.
 
 Looks good:
 
