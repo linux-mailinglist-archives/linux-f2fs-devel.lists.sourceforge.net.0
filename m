@@ -2,101 +2,113 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sMWhOEVZlWnQPAIAu9opvQ
+	id uH/+CmKUlWk1SgIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 07:16:37 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 11:28:50 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E6CC1535E3
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 07:16:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 581CB15572A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 11:28:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=XJdAMew2UjAxJutk/Xac2w+bsjiyiTeIyRc6tbdzQ4g=; b=dy3KuD7Ntpa4qW6KF7jkkAqfgH
-	ldSMz0wpnp+TCfcD+aAe/z6tdP0Tj4sVnnuyjUjS/tAr4UnN2YLgPuVxm6+8rxG9+DlOMP58Zt0U+
-	pm4LOpZV6yGFf0tXpklGixTQlkIeX6VFaMVpkFAITQ0Di/YpcIHSmmsGAtUfTN3HbI1U=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:To:From:Message-ID:Date:MIME-Version:Sender:Reply-To:Cc:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=+SpWDpgVa7X0Tb6pO7S2/EHrLi+TjY6YbceabFbDod8=; b=XFaEvaowPL9TibpRhqAqcgbll2
+	cvUHnTTHiEh/g67wS3KOy2XX+/jD4yoAyLN6eeXGpqIczetkFLmPfzuIZl2sMHwEHFyn+Ek+FxzP1
+	nn8BXS7SB3COdd+JS6rlBhNzs7kB0OyUErqj5yAsAK1ovdqecOCqJnprVuu/1/8E65hc=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vsarT-0006hf-9A;
-	Wed, 18 Feb 2026 06:16:36 +0000
+	id 1vsenQ-0000ob-V0;
+	Wed, 18 Feb 2026 10:28:40 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <BATV+b7a6f314dcfbee4e7dbb+8214+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vsarS-0006hQ-3C for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Feb 2026 06:16:34 +0000
+ <3RpSVaQkbABkHNO9zAA3GzEE72.5DD5A3JH3G1DCI3CI.1DB@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1vsenE-0000oJ-T4 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 18 Feb 2026 10:28:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VcvKWVedtLFNeUePzxyg9ziacX2X2/mCVUWs+sJncbQ=; b=ZE7ETWIlxdl33QmPvmHcfylkdU
- 72CXsRm4uWPAkEXB9FEQLOwjuTS6mWnygrlpQdQ7vfq+l6ilEEcXUQWZZfBEi+5vHofSRFKzTrG9t
- IVhWMQ1P6QHpTFOrHXwMmcP75EgHGrzvhysK+gkxxRr7gVQbFb+p31uXNOPcRWhjB/0s=;
+ bh=GmlLSjL++px+yEOSTzN4sl7YVs0l9bOU5hAcaYav1xc=; b=eYFKUP3XbLydT0x5dDqmF1OQbU
+ HPXW74lnhbVhhAaaCCa7IPkynbn0ZsHITKPVod4MPjq/JyZXcEw0Un6Me4dBK/PqnpCHWbuleYa1D
+ 5coJUWolFGAUJm8+qRg/9B/slkUs4hI3GNn9C3y1HXSIEhbEhHazEbBAZ8xzJe4ccMKE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=VcvKWVedtLFNeUePzxyg9ziacX2X2/mCVUWs+sJncbQ=; b=dGWOUSLLqifBIqHu9zyYeysTfR
- DMccK+vUffP4SP9s7QSekULOyPPlg07ISi3lAu2ANJEKV3NMIQDL63SlzWJWkgG38Nk+rG9ynEMd5
- 8Nzjv8S9htVapdncW9DIYNF+792ErVFYBMNvmSSCKMMKgOcxn26lMGP0+vldWb872hZU=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=GmlLSjL++px+yEOSTzN4sl7YVs0l9bOU5hAcaYav1xc=; b=j
+ rMXNnye1BWG3W14F2LYNB8mHyTnx13ZV4Q3KxK2/QbF/7eGq2RAzIQuVr2UoMbi1kZWY6Ei9H/46o
+ SL7V6yyC2n5vzTjU+YFmVWsozxu3NIiEbkcCQDmA+52AHxpcZDfEpRYB6kKx/S2cQC9h2rHBnkNZV
+ 3U9RPep9YEvQIKoY=;
+Received: from mail-oo1-f69.google.com ([209.85.161.69])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vsarS-0006LU-1G for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Feb 2026 06:16:34 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=VcvKWVedtLFNeUePzxyg9ziacX2X2/mCVUWs+sJncbQ=; b=ST4LAGdabcaNmy0VRLTitYXFkw
- mWwVBPp/gsZnpmmZpcS3jTLT0J0zb/LeFcDvjjb2vaPjTgm8hVa1eN15hdxJLqTrBkHw5q2jx+kX9
- DcbGDFq5rlqmfFmzARyHN+VH5F4fGRdL6XeWWLKpcylokcrUSKP3qcpV2mlaBvrG7QnSy5WEgwnK9
- dCY538bIGaf0x6wTTQ5a2nzG9Our6GukIF6hgN+xeSovhmIXee0IWOVxSQWRNz7CdWGrio77F9f4L
- COMGec3wOCeL6+BXgjacgK0r5dd0Rg88sRJBbq0LtewcMBycNbsNsW/xTs9pAdd8tnoB+ly9AWNO2
- ZIefMhQg==;
-Received: from [2001:4bb8:2dc:9863:1842:9381:9c0f:de32] (helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vsarG-00000009Lim-3CYJ; Wed, 18 Feb 2026 06:16:23 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Eric Biggers <ebiggers@kernel.org>
-Date: Wed, 18 Feb 2026 07:14:47 +0100
-Message-ID: <20260218061531.3318130-10-hch@lst.de>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260218061531.3318130-1-hch@lst.de>
-References: <20260218061531.3318130-1-hch@lst.de>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1vsenE-000102-9J for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 18 Feb 2026 10:28:28 +0000
+Received: by mail-oo1-f69.google.com with SMTP id
+ 006d021491bc7-6798747187eso5892547eaf.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 18 Feb 2026 02:28:28 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771410502; x=1772015302;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GmlLSjL++px+yEOSTzN4sl7YVs0l9bOU5hAcaYav1xc=;
+ b=Fz8Yj9KipejD4Js6M1YTTjcrvNuPuHpFM0fZgXTbCAoQe1mhyfaSEgNGrI0kIv6Fve
+ fe19BSovG5/J8S9+Jc94a/HYPDQ72cl8H2OpIRGxcCARIj9PTo/YCTKXq3ZnpSjUbEOw
+ e78SRGkV0i6BsFhW54iTGwQ3bc5vgpi5xa3JGLMqZ5ROHGwnb1dMCLll85DNBMtV/BM3
+ o7FT5Z9w6cCk+NHaJm5d/q0VGg9wXk2WhrmLK5jVmqenZV39CEDzgFZOUiizbW/g1cT4
+ OFKVg2DhNmHv74bkfay4Ewn9pD9aKQhmgIK2OhJxFVmZBcEbTTMvxiPTAELHCfKW9AC4
+ xL8w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUm/BXTSdwRsz7UGdSOEa6qkdhO3SnLOfkk6kaUN0PQ0azsWF4OLSf1mGtLh8tVXWZbRsCHhzwAoFD8Mc4Lh88G@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzOXwIMP94AmZ7h9DuF8BE2luSFvnsOOHbo+8Gq8hjLTjaT/S/X
+ /n4EGASj2hliTd2YOuUI8uLl3CbsPr4rGrdlJr5Dgk8plNDXtVQy0xZAG9VmRUIJIIArSrmWXXd
+ DENDItriGAWhwu49QHjYhc+wGlwLMe2mHkmKj1RyWDaDUtLmVahvr75PPRoQ=
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: 0.0 (/)
+X-Received: by 2002:a4a:ee1a:0:b0:676:e8d1:bb57 with SMTP id
+ 006d021491bc7-679a74418e0mr641820eaf.58.1771410502648; Wed, 18 Feb 2026
+ 02:28:22 -0800 (PST)
+Date: Wed, 18 Feb 2026 02:28:22 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <69959446.050a0220.2eeac1.014d.GAE@google.com>
+From: syzbot <syzbot+6e4cb1cac5efc96ea0ca@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: While the pblk argument to fscrypt_zeroout_range is declared
- as a sector_t, it actually is interpreted as a logical block size unit, which
- is highly unusual. Switch to passing the 512 byte units that [...] 
- Content analysis details:   (0.0 points, 5.0 required)
+ Content preview:  Hello,
+ syzbot found the following issue on: HEAD commit: 2961f841b025
+ Merge tag 'turbostat-2026.02.14' of git://git.. git tree: upstream console
+ output: https://syzkaller.appspot.com/x/log.txt?x=12c5db3a580000 kernel
+ config: https://syzkaller.a [...] 
+ Content analysis details:   (0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1vsarS-0006LU-1G
-Subject: [f2fs-dev] [PATCH 9/9] fscrypt: pass a real sector_t to
- fscrypt_zeroout_range
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.161.69 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1vsenE-000102-9J
+Subject: [f2fs-dev] [syzbot] [f2fs?] general protection fault in
+ f2fs_in_warm_node_list
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,146 +120,169 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christian Brauner <brauner@kernel.org>, "Theodore Y. Ts'o" <tytso@mit.edu>,
- "Darrick J. Wong" <djwong@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, Andreas Dilger <adilger.kernel@dilger.ca>,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.01 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=65722f41f7edc17e];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:brauner@kernel.org,m:tytso@mit.edu,m:djwong@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fscrypt@vger.kernel.org,m:adilger.kernel@dilger.ca,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:linux-ext4@vger.kernel.org,s:lists@lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,infradead.org:s=bombadil.20210309];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	DKIM_MIXED(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,infradead.org:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,lst.de:mid,lst.de:email]
-X-Rspamd-Queue-Id: 5E6CC1535E3
+	TAGGED_FROM(0.00)[6e4cb1cac5efc96ea0ca];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-kernel@vger.kernel.org,m:syzkaller-bugs@googlegroups.com,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
+	RCPT_COUNT_FIVE(0.00)[5];
+	TO_DN_NONE(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DKIM_MIXED(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[goo.gl:url,appspotmail.com:email,storage.googleapis.com:url,googlegroups.com:email];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	REDIRECTOR_URL(0.00)[goo.gl];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	SUBJECT_HAS_QUESTION(0.00)[]
+X-Rspamd-Queue-Id: 581CB15572A
 X-Rspamd-Action: no action
 
-While the pblk argument to fscrypt_zeroout_range is declared as a
-sector_t, it actually is interpreted as a logical block size unit, which
-is highly unusual.  Switch to passing the 512 byte units that sector_t is
-defined for.
+Hello,
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
+syzbot found the following issue on:
+
+HEAD commit:    2961f841b025 Merge tag 'turbostat-2026.02.14' of git://git..
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=12c5db3a580000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=65722f41f7edc17e
+dashboard link: https://syzkaller.appspot.com/bug?extid=6e4cb1cac5efc96ea0ca
+compiler:       Debian clang version 21.1.8 (++20251221033036+2078da43e25a-1~exp1~20251221153213.50), Debian LLD 21.1.8
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=17ac695a580000
+
+Downloadable assets:
+disk image (non-bootable): https://storage.googleapis.com/syzbot-assets/d900f083ada3/non_bootable_disk-2961f841.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/19ffd1a88c42/vmlinux-2961f841.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/621dc0fadd96/bzImage-2961f841.xz
+mounted in repro: https://storage.googleapis.com/syzbot-assets/7ce23d543372/mount_5.gz
+  fsck result: failed (log: https://syzkaller.appspot.com/x/fsck.log?x=110fbeef980000)
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+6e4cb1cac5efc96ea0ca@syzkaller.appspotmail.com
+
+Oops: general protection fault, probably for non-canonical address 0xdffffc0000000006: 0000 [#1] SMP KASAN NOPTI
+KASAN: null-ptr-deref in range [0x0000000000000030-0x0000000000000037]
+CPU: 0 UID: 0 PID: 1041 Comm: kworker/u4:7 Not tainted syzkaller #0 PREEMPT(full) 
+Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+Workqueue: loop0 loop_workfn
+RIP: 0010:NODE_MAPPING fs/f2fs/f2fs.h:2260 [inline]
+RIP: 0010:is_node_folio fs/f2fs/f2fs.h:2270 [inline]
+RIP: 0010:f2fs_in_warm_node_list+0xbd/0x290 fs/f2fs/node.c:330
+Code: 00 00 4d 03 3c 24 4c 89 f8 48 c1 e8 03 42 80 3c 28 00 74 08 4c 89 ff e8 61 3b f9 fd 4d 8b 3f 49 83 c7 30 4c 89 f8 48 c1 e8 03 <42> 80 3c 28 00 74 08 4c 89 ff e8 44 3b f9 fd 4d 3b 37 74 19 e8 7a
+RSP: 0018:ffffc90005347488 EFLAGS: 00010206
+RAX: 0000000000000006 RBX: ffffea0001521080 RCX: ffff88803683c900
+RDX: 0000000000000000 RSI: ffffea0001521080 RDI: ffff8880546fc000
+RBP: ffffea0001521098 R08: ffffffff901194b7 R09: 1ffffffff2023296
+R10: dffffc0000000000 R11: fffffbfff2023297 R12: ffff888023ebe638
+R13: dffffc0000000000 R14: ffff8880474d9490 R15: 0000000000000030
+FS:  0000000000000000(0000) GS:ffff88808ca5b000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fbdbfabe000 CR3: 0000000056bbf000 CR4: 0000000000352ef0
+Call Trace:
+ <TASK>
+ f2fs_write_end_io+0x7ab/0xff0 fs/f2fs/data.c:400
+ blk_update_request+0x57e/0xe60 block/blk-mq.c:1016
+ blk_mq_end_request+0x3e/0x70 block/blk-mq.c:1178
+ lo_rw_aio_complete drivers/block/loop.c:337 [inline]
+ lo_rw_aio+0xcde/0xf00 drivers/block/loop.c:410
+ do_req_filebacked drivers/block/loop.c:434 [inline]
+ loop_handle_cmd drivers/block/loop.c:1926 [inline]
+ loop_process_work+0x61d/0x11a0 drivers/block/loop.c:1961
+ process_one_work kernel/workqueue.c:3275 [inline]
+ process_scheduled_works+0xb02/0x1830 kernel/workqueue.c:3358
+ worker_thread+0xa50/0xfc0 kernel/workqueue.c:3439
+ kthread+0x388/0x470 kernel/kthread.c:467
+ ret_from_fork+0x51e/0xb90 arch/x86/kernel/process.c:158
+ ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:NODE_MAPPING fs/f2fs/f2fs.h:2260 [inline]
+RIP: 0010:is_node_folio fs/f2fs/f2fs.h:2270 [inline]
+RIP: 0010:f2fs_in_warm_node_list+0xbd/0x290 fs/f2fs/node.c:330
+Code: 00 00 4d 03 3c 24 4c 89 f8 48 c1 e8 03 42 80 3c 28 00 74 08 4c 89 ff e8 61 3b f9 fd 4d 8b 3f 49 83 c7 30 4c 89 f8 48 c1 e8 03 <42> 80 3c 28 00 74 08 4c 89 ff e8 44 3b f9 fd 4d 3b 37 74 19 e8 7a
+RSP: 0018:ffffc90005347488 EFLAGS: 00010206
+RAX: 0000000000000006 RBX: ffffea0001521080 RCX: ffff88803683c900
+RDX: 0000000000000000 RSI: ffffea0001521080 RDI: ffff8880546fc000
+RBP: ffffea0001521098 R08: ffffffff901194b7 R09: 1ffffffff2023296
+R10: dffffc0000000000 R11: fffffbfff2023297 R12: ffff888023ebe638
+R13: dffffc0000000000 R14: ffff8880474d9490 R15: 0000000000000030
+FS:  0000000000000000(0000) GS:ffff88808ca5b000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fbdbf9d3000 CR3: 0000000050969000 CR4: 0000000000352ef0
+----------------
+Code disassembly (best guess):
+   0:	00 00                	add    %al,(%rax)
+   2:	4d 03 3c 24          	add    (%r12),%r15
+   6:	4c 89 f8             	mov    %r15,%rax
+   9:	48 c1 e8 03          	shr    $0x3,%rax
+   d:	42 80 3c 28 00       	cmpb   $0x0,(%rax,%r13,1)
+  12:	74 08                	je     0x1c
+  14:	4c 89 ff             	mov    %r15,%rdi
+  17:	e8 61 3b f9 fd       	call   0xfdf93b7d
+  1c:	4d 8b 3f             	mov    (%r15),%r15
+  1f:	49 83 c7 30          	add    $0x30,%r15
+  23:	4c 89 f8             	mov    %r15,%rax
+  26:	48 c1 e8 03          	shr    $0x3,%rax
+* 2a:	42 80 3c 28 00       	cmpb   $0x0,(%rax,%r13,1) <-- trapping instruction
+  2f:	74 08                	je     0x39
+  31:	4c 89 ff             	mov    %r15,%rdi
+  34:	e8 44 3b f9 fd       	call   0xfdf93b7d
+  39:	4d 3b 37             	cmp    (%r15),%r14
+  3c:	74 19                	je     0x57
+  3e:	e8                   	.byte 0xe8
+  3f:	7a                   	.byte 0x7a
+
+
 ---
- fs/crypto/bio.c         | 6 ++----
- fs/ext4/inode.c         | 3 ++-
- fs/f2fs/file.c          | 2 +-
- include/linux/fscrypt.h | 4 ++--
- 4 files changed, 7 insertions(+), 8 deletions(-)
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-diff --git a/fs/crypto/bio.c b/fs/crypto/bio.c
-index cea931620c04..45fe74aa8366 100644
---- a/fs/crypto/bio.c
-+++ b/fs/crypto/bio.c
-@@ -114,7 +114,7 @@ static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
-  * fscrypt_zeroout_range() - zero out a range of blocks in an encrypted file
-  * @inode: the file's inode
-  * @pos: the first file logical offset (in bytes) to zero out
-- * @pblk: the first filesystem physical block to zero out
-+ * @sector: the first sector to zero out
-  * @len: bytes to zero out
-  *
-  * Zero out filesystem blocks in an encrypted regular file on-disk, i.e. write
-@@ -128,7 +128,7 @@ static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
-  * Return: 0 on success; -errno on failure.
-  */
- int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
--			  sector_t pblk, unsigned int len)
-+			  sector_t sector, unsigned int len)
- {
- 	const struct fscrypt_inode_info *ci = fscrypt_get_inode_info_raw(inode);
- 	const unsigned int du_bits = ci->ci_data_unit_bits;
-@@ -137,8 +137,6 @@ int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
- 	const unsigned int du_per_page = 1U << du_per_page_bits;
- 	u64 du_index = pos >> du_bits;
- 	u64 du_remaining = len >> du_bits;
--	loff_t pos = (loff_t)lblk << inode->i_blkbits;
--	sector_t sector = pblk << (inode->i_blkbits - SECTOR_SHIFT);
- 	struct page *pages[16]; /* write up to 16 pages at a time */
- 	unsigned int nr_pages;
- 	unsigned int i;
-diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-index 675ef741cb30..d0028d6d3de1 100644
---- a/fs/ext4/inode.c
-+++ b/fs/ext4/inode.c
-@@ -406,7 +406,8 @@ int ext4_issue_zeroout(struct inode *inode, ext4_lblk_t lblk, ext4_fsblk_t pblk,
- 
- 	if (IS_ENCRYPTED(inode) && S_ISREG(inode->i_mode))
- 		return fscrypt_zeroout_range(inode,
--				(loff_t)lblk << inode->i_blkbits, pblk,
-+				(loff_t)lblk << inode->i_blkbits,
-+				pblk << (inode->i_blkbits - SECTOR_SHIFT),
- 				len << inode->i_blkbits);
- 
- 	ret = sb_issue_zeroout(inode->i_sb, pblk, len, GFP_NOFS);
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 5b7013f7f6a1..ad435dea656a 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4163,7 +4163,7 @@ static int f2fs_secure_erase(struct block_device *bdev, struct inode *inode,
- 	if (!ret && (flags & F2FS_TRIM_FILE_ZEROOUT)) {
- 		if (IS_ENCRYPTED(inode))
- 			ret = fscrypt_zeroout_range(inode,
--					(loff_t)off << inode->i_blkbits, block,
-+					(loff_t)off << inode->i_blkbits, sector,
- 					len << inode->i_blkbits);
- 		else
- 			ret = blkdev_issue_zeroout(bdev, sector, nr_sects,
-diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index 065f909ebda2..11464bf0a241 100644
---- a/include/linux/fscrypt.h
-+++ b/include/linux/fscrypt.h
-@@ -451,7 +451,7 @@ u64 fscrypt_fname_siphash(const struct inode *dir, const struct qstr *name);
- /* bio.c */
- bool fscrypt_decrypt_bio(struct bio *bio);
- int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
--			  sector_t pblk, unsigned int len);
-+			  sector_t sector, unsigned int len);
- 
- /* hooks.c */
- int fscrypt_file_open(struct inode *inode, struct file *filp);
-@@ -756,7 +756,7 @@ static inline bool fscrypt_decrypt_bio(struct bio *bio)
- }
- 
- static inline int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
--					sector_t pblk, unsigned int len)
-+					sector_t sector, unsigned int len)
- {
- 	return -EOPNOTSUPP;
- }
--- 
-2.47.3
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
 
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
+
+If you want syzbot to run the reproducer, reply with:
+#syz test: git://repo/address.git branch-or-commit-hash
+If you attach or paste a git patch, syzbot will apply it before testing.
+
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
+
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
+
+If you want to undo deduplication, reply with:
+#syz undup
 
 
 _______________________________________________
