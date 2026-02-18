@@ -2,106 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KNw2HzXilGmWIgIAu9opvQ
+	id WM1RIN4QlWnCKgIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Feb 2026 22:48:37 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 02:07:42 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D32A150F01
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 Feb 2026 22:48:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BD1A152768
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 02:07:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=6RS/F+xQbCY5sNkJmdkzKqFzOTJEzxqBhsZZ/A2Al/A=; b=Ql4B9x6kdwdSLpAx0mz7SdI4nJ
-	XwUpNzc+qLgM6aJNYnAv5mFI1049OR0Ba6Be9Jzp3Dky8keDeqgGp9FIIaFWvETtbcdzflAWIdqtH
-	KGL8K1dQHzSCsHKx9t+GIWdxKcqhzAfqVfHkudx+J3D+MqNVQTeA+ap2wTKOvKILRdL4=;
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=wFr+VP2Xwj8gEvsfWJeJAkN0jhYe2K7DxiMRe38UHMA=; b=lBYP0p6zg1t/5nRHgGIzS/20ir
+	KJ8K6zMqEwN0MmvaerlCmLQ1JkCQOss04dg/6AOpi5OsO77zMYUMrmnqCkXKJLuS20MK16eLf1CRc
+	WmzAfvM/ylwApUdJDHGlswKB17uFs5uAQSkm7551K4vCZcNqwNw1Et2Sne6gDVZlsU2M=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vsSvr-0000aK-Q3;
-	Tue, 17 Feb 2026 21:48:35 +0000
+	id 1vsW2U-0004nd-HG;
+	Wed, 18 Feb 2026 01:07:38 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <cel@kernel.org>) id 1vsSvq-0000a6-HP
+ (envelope-from <ebiggers@kernel.org>) id 1vsW2T-0004nX-4s
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 17 Feb 2026 21:48:34 +0000
+ Wed, 18 Feb 2026 01:07:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=D4Z+9BUDOzbPXRDChQLVpSklsS1NKwsEnjAqjqNMe0c=; b=esBVe0MmaTHEzD8EhQI0zj+6QJ
- sMEkmJ6Gitk0wYFS0nk+klS+hzThuSrnPZJ/vKmzPGASyLTa6GzdrykXu9dxIZkp/4qjVZTtjkR4w
- CA16Pj20XJGeuSmhrAE+7xdUjl/p6RU7ttFaKw6T+z/72vFHsTqLvrE2Bdzme4H5dke4=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=D4Z+9BUDOzbPXRDChQLVpSklsS1NKwsEnjAqjqNMe0c=; b=khf08hZUFs7GLgiNTrzcF4PAFr
- Wpt+T1y+i7StUUOAtBfjWR09Vdh3VGAaP0fL1hXPVRka5aXnKeCs5SU8xw9vPSlGVRMFQyInwcn5i
- DhJb/5flW4TSJejBvpsmojWXalv3QT+qfF9PZGH0qitCfLzDyUKeEXha+jyNy1IXJeoE=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=tWrbmgpRiLzXZ9ITjMHKS1nYex7FN8+4+W3itHTUlpU=; b=EI0jl8VWJSKj6YIXJrYuR1Y79/
+ PXZlg3mxwLTUtyMyP/D4aGthNCd8YCQmioeYWuFM8cwLJ+8xg9pds2YjY0dMmVYz4n9g3S/bEEtBo
+ nsZLEwvkxSKFZZU+n3DO1lOwvdQOOU6LVsULIEGUEyHl0xRzjuL9M5w77UmihlR/86ps=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=tWrbmgpRiLzXZ9ITjMHKS1nYex7FN8+4+W3itHTUlpU=; b=N
+ 1CZzEZDVQHcII7Gf2QGzxTxBwDYVuVnnYUtpPghZyn1tmuyy36CgNOr+whlLMHQUS4HF4ukiOn9Wa
+ IVrPKrSXDIYs54QU0spbuqEOlOxZu+yv3lIvBjx44ExF/TZ5oIcpnHQP/qN2O7lG1T6ny3A4A+V8G
+ /uFGBlnrQb5wOrks=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vsSvq-0002u6-3h for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 17 Feb 2026 21:48:34 +0000
+ id 1vsW2S-0003li-IE for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 18 Feb 2026 01:07:37 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id CE705405FD;
- Tue, 17 Feb 2026 21:48:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5CC81C19421;
- Tue, 17 Feb 2026 21:48:26 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 36C29443F2;
+ Wed, 18 Feb 2026 01:07:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C4D40C4CEF7;
+ Wed, 18 Feb 2026 01:07:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771364908;
- bh=/ikJUIG0jvt2cNahwy/tuVk+f4fXHtX9vTuCLPZ9sHc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=G4yebb6lDUKgImX3qbUhm1n02dmHbi6NZQ/mJeduFaOczLJjuFZqVlksQ1UGqu+9X
- N4syxRhBuswQKeeDi1S08Ol25XYfnUo4T5sDnl5y+P1w7afiLXXFUrRBsBGPJT7I96
- xqBZjXPigKKB8apX0Vf6wiSIqMYje4ZguCbdwoicw8+LyQ9YPwI5ebdypQFNMLzXOZ
- agCJgWAiI7QxdgQYeFa/LbYJkQG7uXftxfvdOSy7mbQKF3KLm4GgW7anY7iQzII/0n
- ceMSo2jb5oaHpmGtU6vVEc+QhGZQnK2bAeq57lqSzd4zx4GcxeZObzEKABlVcEfiHu
- TndurdBcWP8JQ==
-To: Al Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>,
- Jan Kara <jack@suse.cz>
-Date: Tue, 17 Feb 2026 16:47:41 -0500
-Message-ID: <20260217214741.1928576-18-cel@kernel.org>
+ s=k20201202; t=1771376846;
+ bh=X/yfr8WHeaSkcZAFT81kIwzbFHKp17KQujASvuEnUZw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=WbzbNl92alzjhUHtJoa1oJTeRoBkDtW804+fnYL+QtQH492kJT1uu2dvIY2jOncEB
+ BUUqa/zR24ZYz5WaKq7dpvNFbOWNJ415LhpCs73TpTpm1wshlA03OLH/CNqSNvurPi
+ Op5tdXe06unR/mY+AJzNjcLN9BjDdsuxR+yeGoHuVtSHIxM2MA2SJGFFx6y2nt+dJl
+ Mmlc8q965nmfB6S7lha++CAw+15GCsPO3PVs92le649KXt9E9oV7ZAPv47irTVP+Yy
+ K6wL4Y3TLZFvOIqSXGjzhpN7yKNG1geDNl4LRhVD+iU9+KcBvccN0zvQRcTtReFit+
+ 5yxLYp0Vb1zGA==
+To: fsverity@lists.linux.dev
+Date: Tue, 17 Feb 2026 17:06:27 -0800
+Message-ID: <20260218010630.7407-1-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260217214741.1928576-1-cel@kernel.org>
-References: <20260217214741.1928576-1-cel@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chuck Lever <chuck.lever@oracle.com> ksmbd hard-codes
- FILE_CASE_SENSITIVE_SEARCH and FILE_CASE_PRESERVED_NAMES in
- FS_ATTRIBUTE_INFORMATION
- responses, incorrectly indicating all exports are case-sensitive. This breaks
- clients accessing ca [...] 
+ Content preview: This series removes the non-large-folio-aware function
+ fsverity_verify_page(), 
+ which is no longer needed. Changed in v4: - Split ClearPageUptodate removal
+ into a separate patch Changed in v3: - Additional scope creep: verify the
+ entire folio, switch to several more folio functions,
+ and stop clearing PG_uptodate
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vsSvq-0002u6-3h
-Subject: [f2fs-dev] [PATCH v8 17/17] ksmbd: Report filesystem case
- sensitivity via FS_ATTRIBUTE_INFORMATION
+X-Headers-End: 1vsW2S-0003li-IE
+Subject: [f2fs-dev] [PATCH v4 0/3] fsverity: remove fsverity_verify_page()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,133 +110,80 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chuck Lever via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chuck Lever <cel@kernel.org>
-Cc: pc@manguebit.org, yuezhang.mo@sony.com, cem@kernel.org,
- almaz.alexandrovich@paragon-software.com, adilger.kernel@dilger.ca,
- linux-cifs@vger.kernel.org, sfrench@samba.org, slava@dubeyko.com,
- linux-ext4@vger.kernel.org, linkinjeon@kernel.org, sprasad@microsoft.com,
- frank.li@vivo.com, ronniesahlberg@gmail.com, glaubitz@physik.fu-berlin.de,
- jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp, linux-nfs@vger.kernel.org,
- tytso@mit.edu, linux-api@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
- hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
- sj1557.seo@samsung.com, trondmy@kernel.org
+From: Eric Biggers via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Eric Biggers <ebiggers@kernel.org>
+Cc: Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Linus Torvalds <torvalds@linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-7.11 / 15.00];
+X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	DKIM_MIXED(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_CC(0.00)[manguebit.org,sony.com,kernel.org,paragon-software.com,dilger.ca,vger.kernel.org,samba.org,dubeyko.com,microsoft.com,vivo.com,gmail.com,physik.fu-berlin.de,mail.parknet.co.jp,mit.edu,lists.sourceforge.net,chromium.org,oracle.com,samsung.com];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS(0.00)[m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,m:pc@manguebit.org,m:yuezhang.mo@sony.com,m:cem@kernel.org,m:almaz.alexandrovich@paragon-software.com,m:adilger.kernel@dilger.ca,m:linux-cifs@vger.kernel.org,m:sfrench@samba.org,m:slava@dubeyko.com,m:linux-ext4@vger.kernel.org,m:linkinjeon@kernel.org,m:sprasad@microsoft.com,m:frank.li@vivo.com,m:ronniesahlberg@gmail.com,m:glaubitz@physik.fu-berlin.de,m:jaegeuk@kernel.org,m:hirofumi@mail.parknet.co.jp,m:linux-nfs@vger.kernel.org,m:tytso@mit.edu,m:linux-api@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:senozhatsky@chromium.org,m:chuck.lever@oracle.com,m:hansg@kernel.org,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:sj1557.seo@samsung.com,m:trondmy@kernel.org,s:lists@lfdr.de];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[31];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_RECIPIENTS(0.00)[m:fsverity@lists.linux.dev,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:ebiggers@kernel.org,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:torvalds@linux-foundation.org,s:lists@lfdr.de];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[cel@kernel.org];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,oracle.com:email]
-X-Rspamd-Queue-Id: 1D32A150F01
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[ebiggers@kernel.org]
+X-Rspamd-Queue-Id: 2BD1A152768
 X-Rspamd-Action: no action
 
-From: Chuck Lever <chuck.lever@oracle.com>
+This series removes the non-large-folio-aware function
+fsverity_verify_page(), which is no longer needed.
 
-ksmbd hard-codes FILE_CASE_SENSITIVE_SEARCH and
-FILE_CASE_PRESERVED_NAMES in FS_ATTRIBUTE_INFORMATION responses,
-incorrectly indicating all exports are case-sensitive. This breaks
-clients accessing case-insensitive filesystems like exFAT or
-ext4/f2fs directories with casefold enabled.
+Changed in v4:
+    - Split ClearPageUptodate removal into a separate patch
 
-Query actual case behavior via vfs_fileattr_get() and report accurate
-attributes to SMB clients. Filesystems without ->fileattr_get continue
-reporting default POSIX behavior (case-sensitive, case-preserving).
+Changed in v3:
+    - Additional scope creep: verify the entire folio, switch to
+      several more folio functions, and stop clearing PG_uptodate
 
-SMB's FS_ATTRIBUTE_INFORMATION reports per-share attributes from the
-share root, not per-file. Shares mixing casefold and non-casefold
-directories report the root directory's behavior.
+Changed in v2:
+    - Made one specific part of f2fs_verify_cluster() large-folio-aware
 
-Acked-by: Namjae Jeon <linkinjeon@kernel.org>
-Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
----
- fs/smb/server/smb2pdu.c | 25 +++++++++++++++++++------
- 1 file changed, 19 insertions(+), 6 deletions(-)
+Eric Biggers (3):
+  f2fs: remove unnecessary ClearPageUptodate in f2fs_verify_cluster()
+  f2fs: make f2fs_verify_cluster() partially large-folio-aware
+  fsverity: remove fsverity_verify_page()
 
-diff --git a/fs/smb/server/smb2pdu.c b/fs/smb/server/smb2pdu.c
-index cbb31efdbaa2..d2a64afdd950 100644
---- a/fs/smb/server/smb2pdu.c
-+++ b/fs/smb/server/smb2pdu.c
-@@ -13,6 +13,7 @@
- #include <linux/falloc.h>
- #include <linux/mount.h>
- #include <linux/filelock.h>
-+#include <linux/fileattr.h>
- 
- #include "glob.h"
- #include "smbfsctl.h"
-@@ -5497,16 +5498,28 @@ static int smb2_get_info_filesystem(struct ksmbd_work *work,
- 	case FS_ATTRIBUTE_INFORMATION:
- 	{
- 		FILE_SYSTEM_ATTRIBUTE_INFO *info;
-+		struct file_kattr fa = {};
- 		size_t sz;
-+		u32 attrs;
-+		int err;
- 
- 		info = (FILE_SYSTEM_ATTRIBUTE_INFO *)rsp->Buffer;
--		info->Attributes = cpu_to_le32(FILE_SUPPORTS_OBJECT_IDS |
--					       FILE_PERSISTENT_ACLS |
--					       FILE_UNICODE_ON_DISK |
--					       FILE_CASE_PRESERVED_NAMES |
--					       FILE_CASE_SENSITIVE_SEARCH |
--					       FILE_SUPPORTS_BLOCK_REFCOUNTING);
-+		attrs = FILE_SUPPORTS_OBJECT_IDS |
-+			FILE_PERSISTENT_ACLS |
-+			FILE_UNICODE_ON_DISK |
-+			FILE_SUPPORTS_BLOCK_REFCOUNTING;
- 
-+		err = vfs_fileattr_get(path.dentry, &fa);
-+		if (err && err != -ENOIOCTLCMD) {
-+			path_put(&path);
-+			return err;
-+		}
-+		if (!(fa.fsx_xflags & FS_XFLAG_CASEFOLD))
-+			attrs |= FILE_CASE_SENSITIVE_SEARCH;
-+		if (!(fa.fsx_xflags & FS_XFLAG_CASENONPRESERVING))
-+			attrs |= FILE_CASE_PRESERVED_NAMES;
-+
-+		info->Attributes = cpu_to_le32(attrs);
- 		info->Attributes |= cpu_to_le32(server_conf.share_fake_fscaps);
- 
- 		if (test_share_config_flag(work->tcon->share_conf,
+ fs/f2fs/compress.c       | 11 +++++------
+ fs/verity/verify.c       |  4 ++--
+ include/linux/fsverity.h |  6 ------
+ 3 files changed, 7 insertions(+), 14 deletions(-)
+
+
+base-commit: 64275e9fda3702bfb5ab3b95f7c2b9b414667164
 -- 
 2.53.0
 
